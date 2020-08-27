@@ -1,0 +1,34 @@
+= Problem 2
+:docinfo: private
+:icons: font
+:linkcss:
+:source-highlighter: coderay
+:coderay-linenums-mode: table
+
+.Solution
+[source,nextflow,linenums]
+----
+/*
+ * Process 1A: Create a FASTA genome index with samtools
+ */
+
+process '1A_prepare_genome_samtools' { 
+
+  input:
+    path genome from params.genome <1>
+
+  output:
+    path "${genome}.fai" into genome_index_ch 
+
+  script:
+  """
+  samtools faidx ${genome}
+  """
+}
+----
+
+
+
+<1> The solution is to use the
+**`params.genome`** parameter defined at the beginning of the script.
+

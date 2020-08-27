@@ -1,0 +1,466 @@
+= Simple Rna-Seq pipeline
+
+During this tutorial you will implement a proof of concept of a RNA-Seq pipeline which:
+
+1. Indexes a trascriptome file.
+2. Performs quality controls
+3. Performs quantification.
+4. Create a MultiqQC report.
+
+== Define the pipeline parameters
+
+The script `script1.nf` defines the pipeline input parameters.
+
+[source,nextflow,linenums]
+----
+params.reads = "$baseDir/data/ggal/*_{1,2}.fq"
+params.transcriptome = "$baseDir/data/ggal/transcriptome.fa"
+params.multiqc = "$baseDir/multiqc"
+
+println "reads: $params.reads"
+----
+
+Run it by using the
+following command:
+
+  nextflow run script1.nf
+
+Try to specify a different input parameter, for example:
+
+  nextflow run script1.nf --reads this/and/that
+
+=== Exercise
+
+Modify the `script1.nf` adding a fourth parameter named `outdir` and set it to a default path
+that will be used as the pipeline output directory.
+
+=== Exercise
+
+Modify the `script1.nf` to print all the pipeline parameters by using a single `log.info` command and a https://www.nextflow.io/docs/latest/script.html#multi-line-strings[multiline string] statement.
+
+TIP: See an example https://github.com/nextflow-io/rnaseq-nf/blob/3b5b49f/main.nf#L41-L48[here,window="_blank"].
+
+=== Recap
+
+In this step you have learned:
+
+1. How to define parameters in your pipeline script
+2. How to pass parameters by using the command line
+3. The use of `$var` and `${var}` variable placeholders
+4. How to use multiline strings
+5. How to use `log.info` to print information and save it in the log execution file
+
+
+== Create transcriptome index file
+
+Nextflow allows the execution of any command or user script by using a `process` definition.
+
+A process is defined by providing three main declarations:
+the process https://www.nextflow.io/docs/latest/process.html#inputs[inputs],
+the process https://www.nextflow.io/docs/latest/process.html#outputs[outputs]
+and finally the command https://www.nextflow.io/docs/latest/process.html#script[script].
+
+The second example adds the `index` process.
+
+[source,nextflow,linenums]
+----
+/*
+ * pipeline input parameters
+ */
+params.reads = "$baseDir/data/ggal/*_{1,2}.fq"
+params.transcriptome = "$baseDir/data/ggal/transcriptome.fa"
+params.multiqc = "$baseDir/multiqc"
+params.outdir = "results"
+
+println """\
+         R N A S E Q - N F   P I P E L I N E
+         ===================================
+         transcriptome: ${params.transcriptome}
+         reads        : ${params.reads}
+         outdir       : ${params.outdir}
+         """
+         .stripIndent()
+
+
+/*
+ * define the `index` process that create a binary index
+ * given the transcriptome file
+ */
+process index {
+
+    input:
+    path transcriptome from params.transcriptome
+
+    output:
+    path 'index' into index_ch
+
+    script:
+    """
+    salmon index --threads $task.cpus -t $transcriptome -i index
+    """
+}
+----
+
+It takes the transcriptome params file as input and creates the transcriptome index by using the `salmon` tool.
+
+Note how the input declaration defines a `transcriptome` variable in the process context
+that it is used in the command script to reference that file in the Salmon command line.
+
+Try to run it by using the command:
+
+  nextflow run script2.nf
+
+The execution will fail because Salmon is not installed in your environment.
+
+Add the command line option `-with-docker` to launch the execution through a Docker container
+as shown below:
+
+  nextflow run script2.nf -with-docker
+
+This time it works because it uses the Docker container `nextflow/rnaseq-nf` defined in the
+`nextflow.config` file.
+
+In order to avoid to add the option `-with-docker` add the following line in the `nextflow.config` file:
+
+  docker.enabled = true
+
+=== Exercise
+
+Enable the Docker execution by default adding the above setting in the `nextflow.config` file.
+
+=== Exercise
+
+Print the output of the `index_ch` channel by using the https://www.nextflow.io/docs/latest/operator.html#view[view].
+
+=== Exercise
+
+Use the command `tree work` to see how Nextflow organizes the process work directory.
+
+=== Recap
+
+In this step you have learned:
+
+1. How to define a process executing a custom command
+2. How process inputs are declared
+3. How process outputs are declared
+4. How to access the number of available CPUs
+5. How to print the content of a channel
+
+
+== Collect read files by pairs
+
+This step shows how to match *read* files into pairs, so they can be mapped by *Salmon*.
+
+Edit the script `script3.nf` and add the following statement as the last line:
+
+  read_pairs_ch.view()
+
+Save it and execute it with the following command:
+
+  nextflow run script3.nf
+
+It will print an output similar to the one shown below:
+
+  [ggal_gut, [/.../data/ggal/gut_1.fq, /.../data/ggal/gut_2.fq]]
+
+The above example shows how the `read_pairs_ch` channel emits tuples composed by
+two elements, where the first is the read pair prefix and the second is a list
+representing the actual files.
+
+Try it again specifying different read files by using a glob pattern:
+
+  nextflow run script3.nf --reads 'data/ggal/*_{1,2}.fq'
+
+IMPORTANT: File paths including one or more wildcards ie. `*`, `?`, etc. MUST be
+wrapped in single-quoted characters to avoid Bash expands the glob.
+
+=== Exercise
+
+Use the https://www.nextflow.io/docs/latest/operator.html#set[set] operator in place
+of `=` assignment to define the `read_pairs_ch` channel.
+
+=== Exercise
+
+Use the `checkIfExists` option for the https://www.nextflow.io/docs/latest/channel.html#fromfilepairs[fromFilePairs] method to check if the specified path contains at least file pairs.
+
+=== Recap
+
+In this step you have learned:
+
+1. How to use `fromFilePairs` to handle read pair files
+2. How to use the `checkIfExists` option to check input file existence
+3. How to use the `set` operator to define a new channel variable
+
+
+== Perform expression quantification
+
+The script `script4.nf` adds the `quantification` process.
+
+In this script note as the `index_ch` channel, declared as output in the `index` process,
+is now used as a channel in the input section.
+
+Also note as the second input is declared as a `tuple` composed by two elements:
+the `pair_id` and the `reads` in order to match the structure of the items emitted
+by the `read_pairs_ch` channel.
+
+
+Execute it by using the following command:
+
+  nextflow run script4.nf -resume
+
+You will see the execution of the `quantification` process.
+
+The `-resume` option cause the execution of any step that has been already processed to be skipped.
+
+Try to execute it with more read files as shown below:
+
+  nextflow run script4.nf -resume --reads 'data/ggal/*_{1,2}.fq'
+
+You will notice that the `quantification` process is executed more than
+one time.
+
+Nextflow parallelizes the execution of your pipeline simply by providing multiple input data
+to your script.
+
+
+=== Exercise
+
+Add a https://www.nextflow.io/docs/latest/process.html#tag[tag] directive to the
+`quantification` process to provide a more readable execution log.
+
+
+=== Exercise
+
+Add a https://www.nextflow.io/docs/latest/process.html#publishdir[publishDir] directive
+to the `quantification` process to store the process results into a directory of your choice.
+
+=== Recap
+
+In this step you have learned:
+
+1. How to connect two processes by using the channel declarations
+2. How to resume the script execution skipping already already computed steps
+3. How to use the `tag` directive to provide a more readable execution output
+4. How to use the `publishDir` to store a process results in a path of your choice
+
+
+== Quality control
+
+This step implements a quality control of your input reads. The inputs are the same
+read pairs which are provided to the `quantification` steps
+
+You can run it by using the following command:
+
+  nextflow run script5.nf -resume
+
+The script will report the following error message:
+
+```
+Channel `read_pairs_ch` has been used twice as an input by process `fastqc` and process `quantification`
+```
+
+=== Exercise
+
+Modify the creation of the `read_pairs_ch` channel by using a https://www.nextflow.io/docs/latest/operator.html#into[into]
+operator in place of a `set`.
+
+TIP: see an example https://github.com/nextflow-io/rnaseq-nf/blob/3b5b49f/main.nf#L58[here].
+
+
+=== Recap
+
+In this step you have learned:
+
+1. How to use the `into` operator to create multiple copies of the same channel
+
+
+== MultiQC report
+
+This step collect the outputs from the `quantification` and `fastqc` steps to create
+a final report by using the http://multiqc.info/[MultiQC] tool.
+
+
+Execute the script with the following command:
+
+  nextflow run script6.nf -resume --reads 'data/ggal/*_{1,2}.fq'
+
+It creates the final report in the `results` folder in the current work directory.
+
+In this script note the use of the https://www.nextflow.io/docs/latest/operator.html#mix[mix,window="_blank"]
+and https://www.nextflow.io/docs/latest/operator.html#collect[collect,window="_blank"] operators chained
+together to get all the outputs of the `quantification` and `fastqc` process as a single
+input.
+
+
+=== Recap
+
+In this step you have learned:
+
+1. How to collect many outputs to a single input with the `collect` operator
+2. How to `mix` two channels in a single channel
+3. How to chain two or more operators togethers
+
+
+== Handle completion event
+
+This step shows how to execute an action when the pipeline completes the execution.
+
+Note that Nextflow processes define the execution of *asynchronous* tasks i.e. they are not
+executed one after another as they are written in the pipeline script as it would happen in a
+common *imperative* programming language.
+
+The script uses the `workflow.onComplete` event handler to print a confirmation message
+when the script completes.
+
+Try to run it by using the following command:
+
+  nextflow run script7.nf -resume --reads 'data/ggal/*_{1,2}.fq'
+
+== Bonus!
+
+Send a notification email when the workflow execution complete using the `-N <email address>`
+command line option. Note: this requires the configuration of a SMTP server in nextflow config
+file. For the sake of this tutorial add the following setting in your `nextflow.config` file:
+
+[source,config,linenums]
+----
+mail {
+  from = 'info@nextflow.io'
+  smtp.host = 'email-smtp.eu-west-1.amazonaws.com'
+  smtp.port = 587
+  smtp.user = "xxxxx"
+  smtp.password = "yyyyy"
+  smtp.auth = true
+  smtp.starttls.enable = true
+  smtp.starttls.required = true
+}
+----
+
+Then execute again the previous example specifying your email address:
+
+    nextflow run script7.nf -resume --reads 'data/ggal/*_{1,2}.fq' -c mail.config -N <your email>
+
+
+See https://www.nextflow.io/docs/latest/mail.html#mail-configuration[mail documentation,window="_blank"]
+for details.
+
+== Custom scripts
+
+Real world pipelines use a lot of custom user scripts (BASH, R, Python, etc). Nextflow
+allows you to use and manage all these scripts in consistent manner. Simply put them
+in a directory named `bin` in the pipeline project root. They will be automatically added
+to the pipeline execution `PATH`.
+
+For example, create a file named `fastqc.sh` with the following content:
+
+[source,bash,linenums]
+----
+#!/bin/bash
+set -e
+set -u
+
+sample_id=${1}
+reads=${2}
+
+mkdir fastqc_${sample_id}_logs
+fastqc -o fastqc_${sample_id}_logs -f fastq -q ${reads}
+----
+
+Save it, give execute permission and move it in the `bin` directory as shown below:
+
+[source,bash,linenums]
+----
+chmod +x fastqc.sh
+mkdir -p bin
+mv fastqc.sh bin
+----
+
+Then, open the `script7.nf` file and replace the `fastqc` process' script with
+the following code:
+
+[source,nextflow,linenums]
+----
+  script:
+  """
+  fastqc.sh "$sample_id" "$reads"
+  """
+----
+
+Run it as before:
+
+  nextflow run script7.nf -resume --reads 'data/ggal/*_{1,2}.fq'
+
+=== Recap
+
+In this step you have learned:
+
+1. How to write or use existing custom script in your Nextflow pipeline.
+2. How to avoid the use of absolute paths having your scripts in the `bin/` project folder.
+
+
+== Metrics and reports
+
+Nextflow is able to produce multiple reports and charts providing several runtime metrics
+and execution information.
+
+Run the https://github.com/nextflow-io/rnaseq-nf[rnaseq-nf,window="_blank"] pipeline
+previously introduced as shown below:
+
+  nextflow run rnaseq-nf -with-docker -with-report -with-trace -with-timeline -with-dag dag.png
+
+The `-with-report` option enables the creation of the workflow execution report. Open
+the file `report.html` with a browser to see the report created with the above command.
+
+The `-with-trace` option enables the create of a tab separated file containing runtime
+information for each executed task. Check the content of the file `trace.txt` for an example.
+
+The `-with-timeline` option enables the creation of the workflow timeline report showing
+how processes where executed along time. This may be useful to identify most time consuming
+tasks and bottlenecks. See an example at https://www.nextflow.io/docs/latest/tracing.html#timeline-report[this link,window="_blank"].
+
+Finally the `-with-dag` option enables to rendering of the workflow execution direct acyclic graph
+representation. Note: this feature requires the installation of http://www.graphviz.org/[Graphviz,window="_blank"] in your computer.
+See https://www.nextflow.io/docs/latest/tracing.html#dag-visualisation[here,window="_blank"] for details.
+
+Note: runtime metrics may be incomplete for run short running tasks as in the case of this tutorial.
+
+NOTE: You view the HTML files right-clicking on the file name in the left side-bar and choosing the
+*Preview* menu item.  
+
+== Run a project from GitHub
+
+Nextflow allows the execution of a pipeline project directly from a GitHub repository (or similar services eg. BitBucket and GitLab).
+
+This simplifies the sharing and the deployment of complex projects and tracking changes in a consistent manner.
+
+The following GitHub repository hosts a complete version of the workflow introduced in this tutorial:
+
+https://github.com/nextflow-io/rnaseq-nf
+
+You can run it by specifying the project name as shown below:
+
+    nextflow run nextflow-io/rnaseq-nf -with-docker
+
+It automatically downloads it and store in the `$HOME/.nextflow` folder.
+
+
+Use the command info to show the project information, e.g.:
+
+    nextflow info nextflow-io/rnaseq-nf
+
+Nextflow allows the execution of a specific revision of your project by using the `-r` command line option. For Example:
+
+    nextflow run nextflow-io/rnaseq-nf -r dev
+
+Revision are defined by using Git tags or branches defined in the project repository.
+
+This allows a precise control of the changes in your project files and dependencies over time.
+
+
+== More resources
+
+* http://docs.nextflow.io[Nextflow documentation,window="_blank"] - The Nextflow docs home.
+* https://github.com/nextflow-io/patterns[Nextflow patterns,window="_blank"] - A collection of Nextflow implementation patterns.
+* https://github.com/CRG-CNAG/CalliNGS-NF[CalliNGS-NF,window="_blank"] - An Variant calling pipeline implementing GATK best practices.
+* http://nf-co.re/[nf-core,window="_blank"] - A community collection of production ready genomic pipelines.
+

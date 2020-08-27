@@ -1,0 +1,70 @@
+= Data Description
+
+The input data used to test the pipeline implementation is described below. For the purpose of this project, only a subset of the original data is used for most of the data types.
+
+Genome assembly::
+
+`genome.fa`
++
+The human genome assembly [crg]#hg19 (GRCh37)# from https://www.ncbi.nlm.nih.gov/assembly/GCA_000001405.1[GenBank], chromosome 22 only.
+
+RNA-seq reads::
+
+`ENCSR000COQ[12]_[12].fastq.gz`
++
+The RNA-seq data comes from the human [crg]#GM12878# cell line from whole cell, cytosol and nucleous extraction (see table below).
++
+The libraries are [crg]#stranded PE76 Illumina GAIIx# RNA-Seq from [crg]#rRNA-depleted Poly-A+# long RNA (`> 200` nucleotides in size).
++
+Only reads mapped to the http://genome-euro.ucsc.edu/cgi-bin/hgTracks?db=hg19&lastVirtModeType=default&lastVirtModeExtraState=&virtModeType=default&virtMode=0&nonVirtPosition=&position=chr22%3A14700001-25900000&hgsid=221945779_QucOFSFGagd1cn9uVki0TFjrxSBU[22q11^] locus of the human genome (`chr22:16000000-18000000`) are used.
++
+[cols="4"]
+|===
+| ENCODE ID | Cellular fraction | replicate ID | file names
+
+.2+|https://www.encodeproject.org/experiments/ENCSR000COQ/[ENCSR000COQ]
+.2+|Whole Cell
+|1
+l|ENCSR000COQ1_1.fastq.gz
+ENCSR000COQ1_2.fastq.gz
+
+|2
+l|ENCSR000COQ2_1.fastq.gz
+ENCSR000COQ2_2.fastq.gz
+
+.2+|https://www.encodeproject.org/experiments/ENCSR000CPO/[ENCSR000CPO]
+.2+|Nuclear
+|1
+l|ENCSR000CPO1_1.fastq.gz
+ENCSR000CPO1_2.fastq.gz
+
+|2
+l|ENCSR000CPO2_1.fastq.gz
+ENCSR000CPO2_2.fastq.gz
+
+.2+|https://www.encodeproject.org/experiments/ENCSR000COR/[ENCSR000COR]
+.2+|Cytosolic
+|1
+l|ENCSR000COR1_1.fastq.gz
+ENCSR000COR1_1.fastq.gz
+
+|2
+l|ENCSR000COR2_1.fastq.gz
+ENCSR000COR2_1.fastq.gz
+|===
+
+"Known" variants::
+
+`known_variants.vcf.gz`
++
+Known variants come from high confident variant calls for [crg]#GM12878# from the https://www.illumina.com/platinumgenomes.html[Illumina Platinum Genomes] project.
+These variant calls were obtained by taking into account pedigree information and the concordance of calls across different methods.
++
+We're using the subset from chromosome 22 only.
+
+Blacklisted regions::
+
+`blacklist.bed`
++
+Blacklisted regions are regions of the genomes with anomalous coverage. We use regions for the [crg]#hg19# assembly, taken from the https://www.encodeproject.org/annotations/ENCSR636HFF/[ENCODE project portal].
+These regions were identified with DNAse and ChiP-seq samples over ~60 human tissues/cell types, and had a very high ratio of multi-mapping to unique-mapping reads and high variance in mappability.

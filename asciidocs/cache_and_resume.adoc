@@ -1,0 +1,327 @@
+= Execution cache and resume 
+
+Nextflow caching mechanism works assigning a unique ID to each task 
+which is used to create a separate execution directory where the tasks
+are executed and the results stored. 
+
+The task unique ID is generated as a 128-bit hash number obtained 
+composing the task inputs values and files and the command string. 
+
+The pipeline work directory is organized as shown below: 
+
+```
+work/
+├── 12
+│   └── 1adacb582d2198cd32db0e6f808bce
+│       ├── genome.fa -> /data/../genome.fa
+│       └── index
+│           ├── hash.bin
+│           ├── header.json
+│           ├── indexing.log
+│           ├── quasi_index.log
+│           ├── refInfo.json
+│           ├── rsd.bin
+│           ├── sa.bin
+│           ├── txpInfo.bin
+│           └── versionInfo.json
+├── 19
+│   └── 663679d1d87bfeafacf30c1deaf81b
+│       ├── ggal_gut
+│       │   ├── aux_info
+│       │   │   ├── ambig_info.tsv
+│       │   │   ├── expected_bias.gz
+│       │   │   ├── fld.gz
+│       │   │   ├── meta_info.json
+│       │   │   ├── observed_bias.gz
+│       │   │   └── observed_bias_3p.gz
+│       │   ├── cmd_info.json
+│       │   ├── libParams
+│       │   │   └── flenDist.txt
+│       │   ├── lib_format_counts.json
+│       │   ├── logs
+│       │   │   └── salmon_quant.log
+│       │   └── quant.sf
+│       ├── ggal_gut_1.fq -> /data/../ggal_gut_1.fq
+│       ├── ggal_gut_2.fq -> /data/../ggal_gut_2.fq
+│       └── index -> /data/../asciidocs/day2/work/12/1adacb582d2198cd32db0e6f808bce/index
+```
+
+
+== How resume works
+
+The `-resume` command line option allow the continuation of a pipeline 
+execution since the last step that was successfully completed: 
+
+```
+nextflow run <script> -resume
+```
+
+In practical terms the pipeline is executed from the beginning 
+however before launching the execution of a process. Nextflow 
+uses the task unique ID to check if the work directory already 
+exists and it contains a valid command exit status and the 
+expected output files. 
+
+If this condition is satisfied the task execution is skipped and previously computed results are used as the process results.  
+
+The first task, for which a new output is computed, invalidates all 
+downstream executions in the remaining DAG. 
+
+
+== Work directory
+
+The task work directories are created in the folder `work` in 
+the launching path by default. This is supposed to be a *scratch*
+storage area that can be cleaned up once the computation is completed. 
+
+NOTE: Workflow final output are supposed to the stored in a different 
+location specified using one or more https://www.nextflow.io/docs/latest/process.html#publishdir[publishDir] directive.
+
+A different location for the execution work directory can be specified 
+using the command line option `-w` e.g. 
+
+```
+nextflow run <script> -w /some/scratch/dir 
+```
+
+WARNING: If you delete or more the pipeline work directory will 
+prevent to use the resume feature in following runs. 
+
+The hash code for input files is computed using: 
+
+* The complete file path 
+* The file size 
+* The last modified timestamp 
+
+Therefore just *touching* a file will invalidated the related 
+task execution. 
+
+
+== How organize in silico experiments 
+
+It's a good practice to organize each each *experiment* 
+in its own folder. The experiment main input parameters should be specified using a Nextflow config file. This makes simply to track 
+and replicate the experiment over time. 
+
+Note that in the same experiment the same pipeline can be executed multiple times, 
+however it should be avoided to launch two (or more) Nextflow instances in the same 
+directory concurrently. 
+
+The `nextflow log` command lists the executions run in the current folder: 
+
+[source,bash,linenums]
+----
+$ nextflow log 
+
+TIMESTAMP            DURATION  RUN NAME          STATUS  REVISION ID  SESSION ID                            COMMAND                                    
+2019-05-06 12:07:32  1.2s      focused_carson    ERR     a9012339ce   7363b3f0-09ac-495b-a947-28cf430d0b85  nextflow run hello                         
+2019-05-06 12:08:33  21.1s     mighty_boyd       OK      a9012339ce   7363b3f0-09ac-495b-a947-28cf430d0b85  nextflow run rnaseq-nf -with-docker        
+2019-05-06 12:31:15  1.2s      insane_celsius    ERR     b9aefc67b4   4dc656d2-c410-44c8-bc32-7dd0ea87bebf  nextflow run rnaseq-nf                     
+2019-05-06 12:31:24  17s       stupefied_euclid  OK      b9aefc67b4   4dc656d2-c410-44c8-bc32-7dd0ea87bebf  nextflow run rnaseq-nf -resume -with-docker
+----
+
+You can use either the *session ID* or the *run name* to recover a specific execution. For example:
+
+```
+nextflow run rnaseq-nf -resume mighty_boyd
+```
+
+
+== Execution provenance 
+
+The `log` command when provided with a *run name* or *session ID* can return many useful information about a pipeline execution that can be used to create a provenance report. 
+
+By default, it lists the work directories used to compute each task. 
+For example: 
+
+[source]
+----
+$ nextflow log tiny_fermat
+
+/data/.../work/7b/3753ff13b1fa5348d2d9b6f512153a
+/data/.../work/c1/56a36d8f498c99ac6cba31e85b3e0c
+/data/.../work/f7/659c65ef60582d9713252bcfbcc310
+/data/.../work/82/ba67e3175bd9e6479d4310e5a92f99
+/data/.../work/e5/2816b9d4e7b402bfdd6597c2c2403d
+/data/.../work/3b/3485d00b0115f89e4c202eacf82eba
+----
+
+Using the option `-f` (fields) it's possible to specify which metadata
+should be printed by the `log` command. For example:
+
+```
+$ nextflow log tiny_fermat -f 'process,exit,hash,duration'
+
+index    0   7b/3753ff  2.0s
+fastqc   0   c1/56a36d  9.3s
+fastqc   0   f7/659c65  9.1s
+quant    0   82/ba67e3  2.7s
+quant    0   e5/2816b9  3.2s
+multiqc  0   3b/3485d0  6.3s
+```
+
+The complete list of available fields can be retrieved with the command: 
+
+```
+nextflow log -l
+```
+
+The option `-F` allows the specification of a filtering criteria to
+print only a subset of tasks. For example:
+
+```
+$ nextflow log tiny_fermat -F 'process =~ /fastqc/'
+
+/data/.../work/c1/56a36d8f498c99ac6cba31e85b3e0c
+/data/.../work/f7/659c65ef60582d9713252bcfbcc310
+```
+
+This can be useful to locate specific tasks work directories. 
+
+Finally, the `-t` option allow the creation of a basic custom provenance report proving a template file, in any format of your choice. For example: 
+
+[source,html]
+----
+<div>
+<h2>${name}</h2>
+<div>
+Script:
+<pre>${script}</pre>
+</div>
+
+<ul>
+    <li>Exit: ${exit}</li>
+    <li>Status: ${status}</li>
+    <li>Work dir: ${workdir}</li>
+    <li>Container: ${container}</li>
+</ul>
+</div>
+----
+
+Save the above snippet in a file named `template.html`. Then 
+run this command: 
+
+```
+nextflow log tiny_fermat -t template.html > prov.html
+```
+
+Finally open the file `prov.html` file with a browser.
+
+
+== Resume troubleshooting 
+
+If your workflow execution is not resumed as expected and 
+one or more task are re-executed all the times, these may 
+be the most likely causes: 
+
+* *Input file changed*: Make sure that there's no change 
+in your input files. Don't forget task unique hash is computed 
+taking into account the complete file path, the last modified 
+timestamp and the file size. If any of these information changes, 
+the workflow will be re-executed even if the input content is the same. 
+
+* *A process modifies an input*: A process should never alter input 
+files otherwise the resume, for future executions, will be invalidated
+for the same reason explained in the previous point. 
+
+* *Inconsistent file attributes*: Some shared file system, 
+such as https://en.wikipedia.org/wiki/Network_File_System[NFS], may report 
+inconsistent file timestamp i.e. a different timestamp for the same 
+file even if it has not be modified. To prevent this problem use 
+the https://www.nextflow.io/docs/latest/process.html#cache[lenient cache strategy].
+
+* *Race condition in global variable*: Nextflow is designed to simplify parallel programming without taking care about race conditions and the access to shared resources. One of the few cases in which a race condition can arise is when using a global variable 
+with two (or more) operators. For example: 
++
+[source,nextflow,linenums]
+----
+Channel
+    .from(1,2,3)
+    .map { it -> X=it; X+=2 }
+    .view { "ch1 = $it" }
+
+Channel
+    .from(1,2,3)
+    .map { it -> X=it; X*=2 }
+    .view { "ch2 = $it" }
+----
++
+The problem in this snippet is that the `X` variable in the closure 
+definition is defined in the global scope. Therefore, since operators are 
+executed in parallel, the `X` value can be overwritten
+by the other `map` invocation. 
++
+The correct implementation requires the use of the `def` keyword to declare
+the variable *local*. 
++
+[source,nextflow,linenums]
+----
+Channel
+    .from(1,2,3)
+    .map { it -> def X=it; X+=2 }
+    .println { "ch1 = $it" }
+
+Channel
+    .from(1,2,3)
+    .map { it -> def X=it; X*=2 }
+    .println { "ch2 = $it" }
+----
+
+* *Not deterministic input channels*: While dataflow channel ordering is 
+guaranteed i.e. data is read in the same order in which it's written in 
+the channel, when a process declares as input two or more 
+channel each of which is the output of a *different* process the 
+overall input ordering is not consistent over different executions. 
++
+In practical term, consider the following snippet:
++
+[source,nextflow,linenums]
+----
+process foo {
+  input: set val(pair), file(reads) from ...
+  output: set val(pair), file('*.bam') into bam_ch
+  """
+  your_command --here
+  """
+}
+
+process bar {
+  input: set val(pair), file(reads) from ...
+  output: set val(pair), file('*.bai') into bai_ch
+  """
+  other_command --here
+  """
+}
+
+process gather {
+  input:
+  set val(pair), file(bam) from bam_ch 
+  set val(pair), file(bai) from bai_ch
+  """
+  merge_command $bam $bai
+  """
+}
+----
++
+The inputs declared at line 19,20 can be delivered in any 
+order because the execution order of the process `foo` and 
+`bar` is not deterministic due to the parallel executions of them. 
++
+Therefore the input of the third process needs to be synchronized 
+using the https://www.nextflow.io/docs/latest/operator.html#join[join]
+operator or a similar approach. The third process should be written as: 
++
+[source,nextflow,linenums]
+----
+... 
+
+process gather {
+  input:
+  set val(pair), file(bam), file(bai) from bam_ch.join(bai_ch) 
+  """
+  merge_command $bam $bai
+  """
+}
+----
+
+

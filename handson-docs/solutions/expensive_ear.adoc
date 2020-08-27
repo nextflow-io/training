@@ -1,0 +1,42 @@
+= Problem 5
+:docinfo: private
+:icons: font
+:linkcss:
+:source-highlighter: coderay
+:coderay-linenums-mode: table
+
+.Solution
+[source,nextflow,linenums]
+----
+/*
+ * Process 1D: Create a file containing the filtered and recoded set of variants
+ */
+
+process '1D_prepare_vcf_file' {
+
+  input: 
+    path variantsFile from params.variants <1>
+    path blacklisted from params.blacklist <2>
+
+  output:
+    tuple path("${variantsFile.baseName}.filtered.recode.vcf.gz"), \
+          path("${variantsFile.baseName}.filtered.recode.vcf.gz.tbi") into prepared_vcf_ch <3>
+  
+  script:  
+  """
+  vcftools --gzvcf $variantsFile -c \
+           --exclude-bed ${blacklisted} \
+           --recode | bgzip -c \
+           > ${variantsFile.baseName}.filtered.recode.vcf.gz <4>
+
+  tabix ${variantsFile.baseName}.filtered.recode.vcf.gz <5>
+  """
+}
+----
+
+<1> Take as input the variants file, assigning the name `${variantsFile}`. 
+<2> Take as input the blacklisted file, assigning the name `${blacklisted}`.
+<3> Out a tuple (or set) of two files into the `prepared_vcf_ch` channel.
+<4> Defines the name of the first output file.
+<5> Generates the secound output file (with `.tbi` suffix).
+

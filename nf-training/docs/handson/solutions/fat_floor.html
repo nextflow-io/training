@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.10">
+<title>Problem 6</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
+<link rel="stylesheet" href="./asciidoctor.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<!-- fixes nowrap line numbers https://github.com/asciidoctor/asciidoctor/issues/1706#issuecomment-314601209 -->
+<style>
+    table.CodeRay { display: block; overflow-x: auto; }
+    td.code > pre { white-space: pre; }
+</style>
+</head>
+<body class="article">
+<div id="header">
+<h1>Problem 6</h1>
+</div>
+<div id="content">
+<div class="listingblock">
+<div class="title">Solution</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="nextflow"><table class="CodeRay"><tr>
+  <td class="line-numbers"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+</pre></td>
+  <td class="code"><pre>process '2_rnaseq_mapping_star' {
+
+  input:
+    path genome from params.genome <i class="conum" data-value="1"></i><b>(1)</b>
+    path genomeDir from genome_dir_ch <i class="conum" data-value="2"></i><b>(2)</b>
+    tuple val(replicateId), path(reads) from reads_ch <i class="conum" data-value="3"></i><b>(3)</b>
+
+  output:
+    tuple val(replicateId), path('Aligned.sortedByCoord.out.bam'), path('Aligned.sortedByCoord.out.bam.bai') into aligned_bam_ch <i class="conum" data-value="4"></i><b>(4)</b>
+
+  script:
+  &quot;&quot;&quot;
+  # ngs-nf-dev Align reads to genome
+  STAR --genomeDir $genomeDir \
+       --readFilesIn $reads \
+       --runThreadN ${task.cpus} \
+       --readFilesCommand zcat \
+       --outFilterType BySJout \
+       --alignSJoverhangMin 8 \
+       --alignSJDBoverhangMin 1 \
+       --outFilterMismatchNmax 999
+
+  # 2nd pass (improve alignmets using table of splice junctions and create a new index)
+  mkdir genomeDir
+  STAR --runMode genomeGenerate \
+       --genomeDir genomeDir \
+       --genomeFastaFiles $genome \
+       --sjdbFileChrStartEnd SJ.out.tab \
+       --sjdbOverhang 75 \
+       --runThreadN ${task.cpus}
+
+  # Final read alignments
+  STAR --genomeDir genomeDir \
+       --readFilesIn $reads \
+       --runThreadN ${task.cpus} \
+       --readFilesCommand zcat \
+       --outFilterType BySJout \
+       --alignSJoverhangMin 8 \
+       --alignSJDBoverhangMin 1 \
+       --outFilterMismatchNmax 999 \
+       --outSAMtype BAM SortedByCoordinate \
+       --outSAMattrRGline ID:$replicateId LB:library PL:illumina PU:machine SM:GM12878
+
+  # Index the BAM file
+  samtools index Aligned.sortedByCoord.out.bam <i class="conum" data-value="5"></i><b>(5)</b>
+  &quot;&quot;&quot;
+}
+</pre></td>
+</tr></table></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>the genome fasta file.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>the STAR genome index directory from the <code>genome_dir_ch</code> channel created in the process <code>1C_prepare_star_genome_index</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>set containing replicate ID and pairs of reads.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>set containing the replicate ID, resulting bam file and bam index.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>line specifying the name of the resulting bam file which is indexed with samtools to create a bam index file (<code>.bai</code>).</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2020-03-01 09:54:01 +0100
+</div>
+</div>
+<link rel="stylesheet" href="./coderay-asciidoctor.css">
+<script type="text/javascript">
+    var tocitems = $('#toc li a'),
+    scrollItems = tocitems.map(function(){
+      var item = $($(this).attr("href"));
+      if (item.length) { return item; }
+    });
+    $(document).ready(function() {
+        var lastId
+        $(window).scroll(function() {
+              // Get container scroll position
+            var fromTop = $(this).scrollTop();
+
+            // Get id of current scroll item
+            var cur = scrollItems.map(function(){
+                var offset = this.offset().top - parseFloat(this.css('margin-top'))
+                if (offset < fromTop) {
+                    return this;
+                }
+            });
+            // Get the id of the current element
+            cur = cur[cur.length-1];
+            var id = cur && cur.length ? cur[0].id : "";
+
+            if (lastId !== id) {
+               lastId = id;
+               // Set/remove active class
+               scrollItems
+                 .end().parent()
+                 .removeClass("active")
+                 .end().filter("[href='#"+id+"']")
+                 .parent().addClass("active");
+            }
+        } );
+    } );
+</script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+= Environment setup
+
+== Requirements
+
+Nextflow can be used on any POSIX compatible system (Linux, OS X, etc).
+It requires Bash and
+http://www.oracle.com/technetwork/java/javase/downloads/index.html[Java
+8 (or later, up to 12)] to be installed.
+
+Optional requirement for this workshop:
+
+* https://www.docker.com/[Docker] engine 1.10.x (or later)
+* https://github.com/sylabs/singularity[Singularity] 2.5.x (or later, optional)
+* https://conda.io/[Conda] 4.5 (or later, optional)
+* http://www.graphviz.org/[Graphviz] (optional)
+* AWS Batch computing environment properly configured (optional)
+
+
+== Nextflow installation 
+
+Install the latest version of Nextflow copy & pasting the following 
+snippet in a terminal window: 
+
+[source,bash,linenums]
+----
+curl get.nextflow.io | bash
+mv nextflow ~/bin
+----
+
+Check the correct installation running the following command: 
+
+[source,bash,linenums]
+----
+nextflow info
+----
+
+

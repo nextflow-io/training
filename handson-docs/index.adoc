@@ -1,0 +1,30 @@
+= Nextflow course - Hands-on image:seqera-logo-black.png[Logo,300,100,float="right", role="Seqera Labs Logo"]
+:docinfo: private
+:year: 2019
+:hide-uri-scheme:
+:nofooter:
+:icons: font
+:toclevels: 3
+:imagesdir: img
+:linkcss:
+:source-highlighter: coderay
+:coderay-linenums-mode: table
+:toc: left
+:linkattrs:
+
+
+The tutorial in this hands-on session shows how to implement a Variant Calling analysis pipeline for RNA-seq data based on GATK best practices and using Nextflow as the pipeline framework.
+
+
+:sectnums:
+
+:leveloffset: +1
+// hands-on
+include::01_datasets.adoc[]
+
+include::02_workflow.adoc[]
+
+include::03_setup.adoc[]
+
+include::04_implementation.adoc[]
+:leveloffset: -1

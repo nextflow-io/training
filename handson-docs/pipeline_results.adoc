@@ -1,0 +1,66 @@
+= Results overview
+
+For each processed sample the pipeline stores results into a folder named after the sample identifier. These folders are created in the directory specified as a parameter in `params.results`.
+
+Result files for this workshop can be found in the folder `results` within the current folder. There you should see a directory called `ENCSR000COQ/` containing the following files:
+
+Variant calls::
+
+`final.vcf`
++
+This file contains all somatic variants (SNVs) called from RNAseq data. You will see variants that pass all filters, with the `PASS` keyword in the [red]#7th# field of the vcf file (`filter status`), and also those that did not pass one or more filters.
++
+`commonSNPs.diff.sites_in_files`
++
+Tab-separated file with comparison between variants obtained from RNAseq and "known" variants from DNA.
++
+The file is sorted by genomic position and contains 8 fields:
++
+[cols="1,^l,1",options="autowidth"]
+|===
+| [red]#{counter:diff-sites}# | CHROM   | chromosome name;
+| [red]#{counter:diff-sites}# | POS1    | position of the SNV in file #1 (RNAseq data);
+| [red]#{counter:diff-sites}# | POS2    | position of SNV in file #2 (DNA "known" variants);
+| [red]#{counter:diff-sites}# | IN_FILE | flag whether SNV is present in the file #1 '1', in the file #2 '2', or in both files 'B';
+| [red]#{counter:diff-sites}# | REF1    | reference sequence in the file 1;
+| [red]#{counter:diff-sites}# | REF2    | reference sequence in the file 2;
+| [red]#{counter:diff-sites}# | ALT1    | alternative sequence in the file 1;
+| [red]#{counter:diff-sites}# | ALT2    | alternative sequence in the file 2
+|===
+
+`known_snps.vcf`
+
+Variants that are common to RNAseq and "known" variants from DNA.
+
+Allele specific expression quantification::
+
+`ASE.tsv`
++
+Tab-separated file with allele counts at common SNVs positions (only SNVs from the file `known_snps.vcf`)
++
+The file is sorted by coordinates and contains 13 fields:
++
+[cols="1,^l,1",options="autowidth"]
+|===
+| [red]#{counter:ase}#  | contig        | contig, scaffold or chromosome name of the variant
+| [red]#{counter:ase}#  | position      | position of the variant
+| [red]#{counter:ase}#  | variant ID    | variant ID in the dbSNP
+| [red]#{counter:ase}#  | refAllele     | reference allele sequence
+| [red]#{counter:ase}#  | altAllele     | alternate allele sequence
+| [red]#{counter:ase}#  | refCount      | number of reads that support the reference allele
+| [red]#{counter:ase}#  | altCount      | number of reads that support the alternate allele
+| [red]#{counter:ase}#  | totalCount    | total number of reads at the site that support both reference and alternate allele and any other alleles present at the site
+| [red]#{counter:ase}#  | lowMAPQDepth  | number of reads that have low mapping quality
+| [red]#{counter:ase}#  | lowBaseQDepth | number of reads that have low base quality
+| [red]#{counter:ase}#  | rawDepth      | total number of reads at the site that support both reference and alternate allele and any other alleles present at the site
+| [red]#{counter:ase}#  | otherBases    | number of reads that support bases other than reference and alternate bases
+| [red]#{counter:ase}#  | improperPairs | number of reads that have malformed pairs
+|===
+
+Allele frequency histogram::
+
+`AF.histogram.pdf`
++
+This file contains a histogram plot of allele frequency for SNVs common to RNA-seq and "known" variants from DNA.
+
+

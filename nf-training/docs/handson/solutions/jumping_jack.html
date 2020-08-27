@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.10">
+<title>Problem 10</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
+<link rel="stylesheet" href="./asciidoctor.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<!-- fixes nowrap line numbers https://github.com/asciidoctor/asciidoctor/issues/1706#issuecomment-314601209 -->
+<style>
+    table.CodeRay { display: block; overflow-x: auto; }
+    td.code > pre { white-space: pre; }
+</style>
+</head>
+<body class="article">
+<div id="header">
+<h1>Problem 10</h1>
+</div>
+<div id="content">
+<div class="listingblock">
+<div class="title">Solution</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="nextflow"><table class="CodeRay"><tr>
+  <td class="line-numbers"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+</pre></td>
+  <td class="code"><pre>process '6A_post_process_vcf' {
+  tag &quot;$sampleId&quot;
+  publishDir &quot;$params.results/$sampleId&quot;
+
+  input:
+    tuple val(sampleId), path('final.vcf') from vcf_files
+    tuple path('filtered.recode.vcf.gz'), path('filtered.recode.vcf.gz.tbi') from prepared_vcf_ch
+  output:
+    tuple val(sampleId), path('final.vcf'), path('commonSNPs.diff.sites_in_files') into vcf_and_snps_ch
+
+  script:
+  '''
+  grep -v '#' final.vcf | awk '$7~/PASS/' |perl -ne 'chomp($_); ($dp)=$_=~/DP\\=(\\d+)\\;/; if($dp&gt;=8){print $_.&quot;\\n&quot;};' &gt; result.DP8.vcf
+
+  vcftools --vcf result.DP8.vcf --gzdiff filtered.recode.vcf.gz  --diff-site --out commonSNPs
+  '''
+}
+
+process '6B_prepare_vcf_for_ase' {
+  tag &quot;$sampleId&quot;
+  publishDir &quot;$params.results/$sampleId&quot;
+
+  input:
+    tuple val(sampleId), path('final.vcf'), path('commonSNPs.diff.sites_in_files') from vcf_and_snps_ch
+  output:
+    tuple val(sampleId), path('known_snps.vcf') into vcf_for_ASE
+    path 'AF.histogram.pdf' into gghist_pdfs
+
+  script:
+  '''
+  awk 'BEGIN{OFS=&quot;\t&quot;} $4~/B/{print $1,$2,$3}' commonSNPs.diff.sites_in_files  &gt; test.bed
+
+  vcftools --vcf final.vcf --bed test.bed --recode --keep-INFO-all --stdout &gt; known_snps.vcf
+
+  grep -v '#'  known_snps.vcf | awk -F '\\t' '{print $10}' \
+               |awk -F ':' '{print $2}'|perl -ne 'chomp($_); \
+               @v=split(/\\,/,$_); if($v[0]!=0 ||$v[1] !=0)\
+               {print  $v[1]/($v[1]+$v[0]).&quot;\\n&quot;; }' |awk '$1!=1' \
+               &gt;AF.4R
+
+  gghist.R -i AF.4R -o AF.histogram.pdf
+  '''
+}</pre></td>
+</tr></table></code></pre>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2020-03-01 10:50:23 +0100
+</div>
+</div>
+<link rel="stylesheet" href="./coderay-asciidoctor.css">
+<script type="text/javascript">
+    var tocitems = $('#toc li a'),
+    scrollItems = tocitems.map(function(){
+      var item = $($(this).attr("href"));
+      if (item.length) { return item; }
+    });
+    $(document).ready(function() {
+        var lastId
+        $(window).scroll(function() {
+              // Get container scroll position
+            var fromTop = $(this).scrollTop();
+
+            // Get id of current scroll item
+            var cur = scrollItems.map(function(){
+                var offset = this.offset().top - parseFloat(this.css('margin-top'))
+                if (offset < fromTop) {
+                    return this;
+                }
+            });
+            // Get the id of the current element
+            cur = cur[cur.length-1];
+            var id = cur && cur.length ? cur[0].id : "";
+
+            if (lastId !== id) {
+               lastId = id;
+               // Set/remove active class
+               scrollItems
+                 .end().parent()
+                 .removeClass("active")
+                 .end().filter("[href='#"+id+"']")
+                 .parent().addClass("active");
+            }
+        } );
+    } );
+</script>
+</body>
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.10">
+<title>Problem 8</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
+<link rel="stylesheet" href="./asciidoctor.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<!-- fixes nowrap line numbers https://github.com/asciidoctor/asciidoctor/issues/1706#issuecomment-314601209 -->
+<style>
+    table.CodeRay { display: block; overflow-x: auto; }
+    td.code > pre { white-space: pre; }
+</style>
+</head>
+<body class="article">
+<div id="header">
+<h1>Problem 8</h1>
+</div>
+<div id="content">
+<div class="listingblock">
+<div class="title">Solution</div>
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="nextflow"><table class="CodeRay"><tr>
+  <td class="line-numbers"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+</pre></td>
+  <td class="code"><pre>process '4_rnaseq_gatk_recalibrate' {
+  tag &quot;$replicateId&quot;
+
+  input:
+    path genome from params.genome <i class="conum" data-value="1"></i><b>(1)</b>
+    path index from genome_index_ch <i class="conum" data-value="2"></i><b>(2)</b>
+    path dict from genome_dict_ch <i class="conum" data-value="3"></i><b>(3)</b>
+    tuple val(replicateId), path(bam), path(bai) from splitted_bam_ch <i class="conum" data-value="4"></i><b>(4)</b>
+    tuple path(prepared_variants_file), path(prepared_variants_file_index) from prepared_vcf_ch <i class="conum" data-value="5"></i><b>(5)</b>
+
+  output:
+    tuple val(sampleId), path(&quot;${replicateId}.final.uniq.bam&quot;), path(&quot;${replicateId}.final.uniq.bam.bai&quot;) into (final_output_ch, bam_for_ASE_ch) <i class="conum" data-value="6"></i><b>(6)</b>
+
+  script:
+  sampleId = replicateId.replaceAll(/[12]$/,'')
+  &quot;&quot;&quot;
+  # Indel Realignment and Base Recalibration
+  java -jar $GATK -T BaseRecalibrator \
+                  --default_platform illumina \
+                  -cov ReadGroupCovariate \
+                  -cov QualityScoreCovariate \
+                  -cov CycleCovariate \
+                  -knownSites ${prepared_variants_file} \
+                  -cov ContextCovariate \
+                  -R ${genome} -I ${bam} \
+                  --downsampling_type NONE \
+                  -nct ${task.cpus} \
+                  -o final.rnaseq.grp
+
+  java -jar $GATK -T PrintReads \
+                  -R ${genome} -I ${bam} \
+                  -BQSR final.rnaseq.grp \
+                  -nct ${task.cpus} \
+                  -o final.bam
+
+  # Select only unique alignments, no multimaps
+  (samtools view -H final.bam; samtools view final.bam| grep -w 'NH:i:1') \
+  |samtools view -Sb -  &gt; ${replicateId}.final.uniq.bam <i class="conum" data-value="7"></i><b>(7)</b>
+
+  # Index BAM files
+  samtools index ${replicateId}.final.uniq.bam
+  &quot;&quot;&quot;
+}</pre></td>
+</tr></table></code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>the genome fasta file.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>the genome index from the <code>genome_index_ch</code> channel created in the process <code>1A_prepare_genome_samtools</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>the genome dictionary from the <code>genome_dict_ch</code> channel created in the process <code>1B_prepare_genome_picard</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>the set containing the split reads from the <code>splitted_bam_ch</code> channel created in the process <code>3_rnaseq_gatk_splitNcigar</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>the set containing the filtered/recoded VCF file and the tab index (TBI) file from the <code>prepared_vcf_ch</code> channel created in the process <code>1D_prepare_vcf_file</code>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>the set containing the replicate id, the unique bam file and the unique bam index file which goes into two channels.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td>line specifying the filename of the output bam file</td>
+</tr>
+</table>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2020-03-01 10:48:38 +0100
+</div>
+</div>
+<link rel="stylesheet" href="./coderay-asciidoctor.css">
+<script type="text/javascript">
+    var tocitems = $('#toc li a'),
+    scrollItems = tocitems.map(function(){
+      var item = $($(this).attr("href"));
+      if (item.length) { return item; }
+    });
+    $(document).ready(function() {
+        var lastId
+        $(window).scroll(function() {
+              // Get container scroll position
+            var fromTop = $(this).scrollTop();
+
+            // Get id of current scroll item
+            var cur = scrollItems.map(function(){
+                var offset = this.offset().top - parseFloat(this.css('margin-top'))
+                if (offset < fromTop) {
+                    return this;
+                }
+            });
+            // Get the id of the current element
+            cur = cur[cur.length-1];
+            var id = cur && cur.length ? cur[0].id : "";
+
+            if (lastId !== id) {
+               lastId = id;
+               // Set/remove active class
+               scrollItems
+                 .end().parent()
+                 .removeClass("active")
+                 .end().filter("[href='#"+id+"']")
+                 .parent().addClass("active");
+            }
+        } );
+    } );
+</script>
+</body>
+</html>

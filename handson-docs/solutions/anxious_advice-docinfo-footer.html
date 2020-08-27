@@ -1,0 +1,35 @@
+<script type="text/javascript">
+    var tocitems = $('#toc li a'),
+    scrollItems = tocitems.map(function(){
+      var item = $($(this).attr("href"));
+      if (item.length) { return item; }
+    });
+    $(document).ready(function() {
+        var lastId
+        $(window).scroll(function() {
+              // Get container scroll position
+            var fromTop = $(this).scrollTop();
+
+            // Get id of current scroll item
+            var cur = scrollItems.map(function(){
+                var offset = this.offset().top - parseFloat(this.css('margin-top'))
+                if (offset < fromTop) {
+                    return this;
+                }
+            });
+            // Get the id of the current element
+            cur = cur[cur.length-1];
+            var id = cur && cur.length ? cur[0].id : "";
+            
+            if (lastId !== id) {
+               lastId = id;
+               // Set/remove active class
+               scrollItems
+                 .end().parent()
+                 .removeClass("active")
+                 .end().filter("[href='#"+id+"']")
+                 .parent().addClass("active");
+            }    
+        } );
+    } );
+</script>

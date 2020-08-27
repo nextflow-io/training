@@ -1,0 +1,436 @@
+= Manage dependencies & containers
+
+Computational workflows rarely are composed by as single script or tool. 
+Most of the times they require the usage of dozens of different software
+components or libraries.
+
+Installing and maintaining such dependencies is a challenging task and
+the most common source of irreproducibility in scientific applications.
+
+Containers are exceptionally useful in scientific workflows. They allow the encapsulation of software dependencies, i.e. tools and libraries required by a data analysis application in  one or more self-contained, ready-to-run, immutable container images that can be easily deployed in any platform supporting the container runtime.
+
+== Docker hands-on
+
+Get practice with basic Docker commands to pull, run and build your own containers.
+
+A container is a ready-to-run Linux environment which can be executed in an isolated
+manner from the hosting system. It has own copy of the file system, processes space,
+memory management, etc.
+
+Containers are a Linux feature known as _Control Groups_ or https://en.wikipedia.org/wiki/Cgroups[Cgroups]
+introduced with kernel 2.6.
+
+Docker adds to this concept an handy management tool to build, run and share container images.
+
+These images can be uploaded and published in a centralised repository know as
+https://hub.docker.com[Docker Hub], or hosted by other parties like for example https://quay.io[Quay].
+
+
+=== Run a container
+
+Run a container is easy as using the following command:
+
+```bash
+docker run <container-name>
+```
+
+For example:
+
+```bash
+docker run hello-world
+```
+
+=== Pull a container
+
+The pull command allows you to download a Docker image without running it. For example:
+
+```bash
+docker pull debian:stretch-slim
+```
+
+The above command download a Debian Linux image.
+
+
+=== Run a container in interactive mode
+
+Launching a BASH shell in the container allows you to operate in an interactive mode
+in the containerised operating system. For example:
+
+```bash
+docker run -it debian:stretch-slim bash
+```
+
+Once launched the container you wil noticed that's running as root (!).
+Use the usual commands to navigate in the file system.
+
+To exit from the container, stop the BASH session with the exit command.
+
+=== Your first Dockerfile
+
+Docker images are created by using a so called `Dockerfile` i.e. a simple text file
+containing a list of commands to be executed to assemble and configure the image
+with the software packages required.
+
+In this step you will create a Docker image containing the Salmon tool.
+
+
+Warning: the Docker build process automatically copies all files that are located in the
+current directory to the Docker daemon in order to create the image. This can take
+a lot of time when big/many files exist. For this reason it's important to _always_ work in
+a directory containing only the files you really need to include in your Docker image.
+Alternatively you can use the `.dockerignore` file to select the path to exclude from the build.
+
+Then use your favourite editor eg. `vim` to create a file named `Dockerfile` and copy the
+following content:
+
+[source,docker,linenums]
+----
+FROM debian:stretch-slim
+
+MAINTAINER <your name>
+
+RUN apt-get update && apt-get install -y curl cowsay
+
+ENV PATH=$PATH:/usr/games/
+----
+
+When done save the file.
+
+
+=== Build the image
+
+Build the Docker image by using the following command:
+
+```bash
+docker build -t my-image .
+```
+
+Note: don't miss the dot in the above command. When it completes, verify that the image
+has been created listing all available images:
+
+```bash
+docker images
+```
+
+You can try your new container by running this command:
+
+```bash
+docker run my-image cowsay Hello Docker!
+```
+
+=== Add a software package to the image
+
+Add the Salmon package to the Docker image by adding to the `Dockerfile` the following snippet:
+
+[source,docker,linenums,options="nowrap"]
+----
+RUN curl -sSL https://github.com/COMBINE-lab/salmon/releases/download/v1.0.0/salmon-1.0.0_linux_x86_64.tar.gz | tar xz \
+ && mv /salmon-*/bin/* /usr/bin/ \
+ && mv /salmon-*/lib/* /usr/lib/
+----
+
+Save the file and build again the image with the same command as before:
+
+```bash
+docker build -t my-image .
+```
+
+You will notice that it creates a new Docker image with the same name *but* with a
+different image ID.
+
+=== Run Salmon in the container
+
+Check that everything is fine running Salmon in the container as shown below:
+
+```bash
+docker run my-image salmon --version
+```
+
+You can even launch a container in an interactive mode by using the following command:
+
+```bash
+docker run -it my-image bash
+```
+
+Use the `exit` command to terminate the interactive session.
+
+
+=== File system mounts
+
+Create an genome index file by running Salmon in the container.
+
+Try to run Salmon in the container with the following command:
+
+```bash
+docker run my-image \
+  salmon index -t $PWD/data/ggal/transcriptome.fa -i transcript-index
+```
+
+The above command fails because Salmon cannot access the input file.
+
+This happens because the container runs in a complete separate file system and
+it cannot access the hosting file system by default.
+
+You will need to use the `--volume` command line option to mount the input file(s) eg.
+
+```bash
+docker run --volume $PWD/data/ggal/transcriptome.fa:/transcriptome.fa my-image \
+  salmon index -t /transcriptome.fa -i transcript-index
+```
+
+IMPORTANT: the generated `transcript-index` directory is still not accessible in the host
+file system (and actually it went lost).
+
+TIP: An easier way is to mount a parent directory to an identical one in the container,
+this allows you to use the same path when running it in the container eg.
+
+```bash
+docker run --volume $HOME:$HOME --workdir $PWD my-image \
+  salmon index -t $PWD/data/ggal/transcriptome.fa -i transcript-index
+```
+
+Check the content of the `transcript-index` folder entering the command:
+
+```bash
+ls -la transcript-index
+```
+
+IMPORTANT: Note that the permissions for files created by the Docker
+execution is `root`.
+
+==== Exercise
+
+Use the option `-u $(id -u):$(id -g)` to allow Docker to create files with the right permission.
+
+=== Upload the container in the Docker Hub (bonus)
+
+Publish your container in the Docker Hub to share it with other people.
+
+Create an account in the https://hub.docker.com web site. Then from your shell terminal run
+the following command, entering the user name and password you specified registering in the Hub:
+
+```bash
+docker login
+```
+
+Tag the image with your Docker user name account:
+
+```bash
+docker tag my-image <user-name>/my-image
+```
+
+Finally push it to the Docker Hub:
+
+```bash
+docker push <user-name>/my-image
+```
+
+After that anyone will be able to download it by using the command:
+
+```bash
+docker pull <user-name>/my-image
+```
+
+Note how after a pull and push operation, Docker prints the container digest number e.g.
+
+```bash
+Digest: sha256:aeacbd7ea1154f263cda972a96920fb228b2033544c2641476350b9317dab266
+Status: Downloaded newer image for nextflow/rnaseq-nf:latest
+```
+
+This is a unique and immutable identifier that can be used to reference container image
+in a univocally manner. For example:
+
+```bash
+docker pull nextflow/rnaseq-nf@sha256:aeacbd7ea1154f263cda972a96920fb228b2033544c2641476350b9317dab266
+```
+
+=== Run a Nextflow script using a Docker container
+
+The simplest way to run a Nextflow script with a Docker image is using the
+`-with-docker` command line option:
+
+```
+nextflow run script2.nf -with-docker my-image
+```
+
+We'll see later how to configure in the Nextflow config file which container 
+to use instead of having to specify every time as a command line argument.
+
+
+== Singularity
+
+http://singularity.lbl.gov[Singularity] is container runtime designed to work in HPC data center,
+where the usage of Docker is generally not allowed due to security constraints.
+
+Singularity implements a container execution model similarly to Docker however it uses
+a complete different implementation design.
+
+A Singularity container image is archived as a plain file that can be stored in a shared
+file system and accessed by many computing nodes managed by a batch scheduler.
+
+=== Create a Singularity images
+
+Singularity images are created using a `Singularity` file in  similar manner to Docker,
+though using a different syntax.
+
+[source,singularity,linenums,options="nowrap"]
+----
+Bootstrap: docker
+From: debian:stretch-slim
+
+%environment
+export PATH=$PATH:/usr/games/
+
+%labels
+AUTHOR <your name>
+
+%post
+
+apt-get update && apt-get install -y locales-all curl cowsay
+curl -sSL https://github.com/COMBINE-lab/salmon/releases/download/v1.0.0/salmon-1.0.0_linux_x86_64.tar.gz | tar xz \
+ && mv /salmon-*/bin/* /usr/bin/ \
+ && mv /salmon-*/lib/* /usr/lib/
+----
+
+Once you have save the `Singularity` file. Create the image with these commands:
+
+```bash
+sudo singularity build my-image.sif Singularity
+```
+
+Note: the `build` command requires sudo permissions. A common workaround
+consists to build the image on a local workstation and then deploy in the
+cluster just copying the image file.
+
+=== Running a container
+
+Once done, you can run your container with the following command
+
+
+```bash
+singularity exec my-image.sif cowsay 'Hello Singularity'
+```
+
+By using the `shell` command you can enter in the container in interactive mode.
+For example:
+
+```bash
+singularity shell my-image.sif
+```
+
+Once in the container instance run the following commands:
+
+```bash
+touch hello.txt
+ls -la
+```
+
+TIP: Note how the files on the host environment are shown. Singularity automatically
+mounts the host `$HOME` directory and uses the current work directory.
+
+=== Import a Docker image
+
+An easier way to create Singularity container without requiring sudo permission and
+boosting the containers interoperability is to import a Docker container image
+pulling it directly from a Docker registry. For example:
+
+```bash
+singularity pull docker://debian:stretch-slim
+```
+
+The above command automatically download the Debian Docker image and converts it to
+a Singularity image store in the current directory with the name `debian-jessie.simg`.
+
+
+=== Run a Nextflow script using a Singularity container
+
+Nextflow allows the transparent usage of Singularity containers as easy as with
+Docker ones.
+
+It only requires to enable the use of Singularity engine in place of Docker in the
+Nextflow configuration file using the `-with-singularity` command line option:
+
+```bash
+nextflow run script7.nf -with-singularity nextflow/rnaseq-nf
+```
+
+As before the Singularity container can also be provided in the Nextflow config file. 
+We'll see later how to do it. 
+
+
+=== The Singularity Container Library
+
+The authors of Singularity, https://www.sylabs.io/[SyLabs] have their own repository of Singularity
+containers.
+
+In the same way that we can push docker images to Docker Hub, we can upload Singularity images
+to the Singularity Library.
+
+
+== Conda/Bioconda packages
+
+Conda is popular package and environment manager. The built-in support for Conda
+allows Nextflow pipelines to automatically creates and activates the Conda
+environment(s) given the dependencies specified by each process.
+
+A Conda environment is defined using a YAML file which lists the required software packages.
+For example:
+
+```yaml
+name: nf-tutorial
+channels:
+  - defaults
+  - bioconda
+  - conda-forge
+dependencies:
+  - salmon=1.0.0
+  - fastqc=0.11.5
+  - multiqc=1.5
+```
+
+Given the recipe file, the environment is created using the command shown below:
+
+```bash
+conda env create --file env.yml
+```
+
+You can check the environment was created successfully with the command shown below:
+
+```bash
+conda env list
+```
+
+To enable the environment you can use the `activate` command:
+
+```bash
+conda activate nf-tutorial
+```
+
+Nextflow is able to manage the activation of a Conda environment when the its directory
+is specified using the `-with-conda` option. For example:
+
+```bash
+nextflow run script7.nf -with-conda /home/ubuntu/miniconda2/envs/nf-tutorial
+```
+
+TIP: When specifying as Conda environment a YAML recipe file, Nextflow automatically downloads the required dependencies, build the environment and automatically activate it.
+
+This makes easier to manage different environments for the processes in the workflow script.
+
+See the https://www.nextflow.io/docs/latest/conda.html[Nextflow]
+in the Nextflow documentation for details.
+
+
+=== Bonus Exercise
+Take a look at the Dockerfile of the https://github.com/nextflow-io/rnaseq-nf[rnaseq-nf] pipeline to determine how it is built.
+
+== BioContainers
+
+Another useful resource linking together Bioconda and containers is the https://biocontainers.pro[BioContainers] project.
+BioContainers is a community initiative that provides a registry of container images for every Bioconda recipe.
+
+== More resources
+
+https://github.com/brouberol/marcel[Marcel] the french Docker .. (humor)
+
