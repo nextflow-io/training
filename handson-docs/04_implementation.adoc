@@ -80,7 +80,7 @@ nextflow run main.nf
 You should see the script execute, print Nextflow version and pipeline revision and then exit.
 
 ----
-N E X T F L O W  ~  version 20.01.0
+N E X T F L O W  ~  version 20.10.0
 Launching `main.nf` [lethal_faggin] - revision: 4c9a5c830c
 ----
 
@@ -192,7 +192,7 @@ nextflow run main.nf -resume
 ----
 
 ----
-N E X T F L O W  ~  version 20.01.0
+N E X T F L O W  ~  version 20.10.0
 Launching `main.nf` [cranky_bose] - revision: d1df5b7267
 executor >  local (1)
 [cd/47f882] process > 1A_prepare_genome_samtools [100%] 1 of 1 ✔
@@ -960,7 +960,7 @@ nextflow run main.nf -resume --reads 'data/reads/ENCSR000C*_{1,2}.fastq.gz'
 It will print an output similar to the one below:
 
 ----
-N E X T F L O W  ~  version 20.01.0
+N E X T F L O W  ~  version 20.10.0
 Launching `main.nf` [hungry_wing] - revision: a6359031a1
 executor >  local (27)
 [cd/47f882] process > 1A_prepare_genome_samtools               [100%] 1 of 1, cached: 1 ✔

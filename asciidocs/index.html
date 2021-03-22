@@ -451,7 +451,9 @@ td.code > pre { white-space: pre; }
 <li><a href="#_environment_setup">1. Environment setup</a>
 <ul class="sectlevel2">
 <li><a href="#_requirements">1.1. Requirements</a></li>
-<li><a href="#_nextflow_installation">1.2. Nextflow installation</a></li>
+<li><a href="#_training_material">1.2. Training material</a></li>
+<li><a href="#_setup_aws_cloud9_environment">1.3. Setup AWS Cloud9 environment</a></li>
+<li><a href="#_nextflow_installation">1.4. Nextflow installation</a></li>
 </ul>
 </li>
 <li><a href="#_get_started_with_nextflow">2. Get started with Nextflow</a>
@@ -721,10 +723,10 @@ td.code > pre { white-space: pre; }
 <p>Nextflow can be used on any POSIX compatible system (Linux, OS X, etc).
 It requires Bash and
 <a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">Java
-8 (or later, up to 12)</a> to be installed.</p>
+8 (or later, up to 15)</a> to be installed.</p>
 </div>
 <div class="paragraph">
-<p>Optional requirement for this workshop:</p>
+<p>Optional requirements for this workshop:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -741,13 +743,60 @@ It requires Bash and
 <p><a href="http://www.graphviz.org/">Graphviz</a> (optional)</p>
 </li>
 <li>
+<p><a href="https://aws.amazon.com/cli/">AWS CLI</a> (optional)</p>
+</li>
+<li>
 <p>AWS Batch computing environment properly configured (optional)</p>
 </li>
 </ul>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_nextflow_installation">1.2. Nextflow installation</h3>
+<h3 id="_training_material">1.2. Training material</h3>
+<div class="paragraph">
+<p>Download the training material copy &amp; pasting the following command
+in the terminal:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="bash"><table class="CodeRay"><tr>
+  <td class="line-numbers"><pre>1
+</pre></td>
+  <td class="code"><pre>curl https://s3-eu-west-1.amazonaws.com/seqeralabs.com/public/nf-training.tar.gz | tar xvz</pre></td>
+</tr></table></code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Or in alternative if you have <code>wget</code> instead of curl:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="bash"><table class="CodeRay"><tr>
+  <td class="line-numbers"><pre>1
+</pre></td>
+  <td class="code"><pre>wget -q -O- https://s3-eu-west-1.amazonaws.com/seqeralabs.com/public/nf-training.tar.gz | tar xvz</pre></td>
+</tr></table></code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_setup_aws_cloud9_environment">1.3. Setup AWS Cloud9 environment</h3>
+<div class="paragraph">
+<p>Only if you are running this toturial in the AWS Cloud9 environment,
+run the following one-liners to properly setup the required dependencies:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="bash"><table class="CodeRay"><tr>
+  <td class="line-numbers"><pre>1
+</pre></td>
+  <td class="code"><pre>source setup/all.sh</pre></td>
+</tr></table></code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_nextflow_installation">1.4. Nextflow installation</h3>
 <div class="paragraph">
 <p>Install the latest version of Nextflow copy &amp; pasting the following
 snippet in a terminal window:</p>
@@ -855,7 +904,7 @@ the target execution platform in the configuration file.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>Grid engine (Open/Sun/Univa)</p>
+<p>Grid engine (Open/Sun/Univa/Altair)</p>
 </li>
 <li>
 <p>IBM Platform LSF</p>
@@ -873,10 +922,10 @@ the target execution platform in the configuration file.</p>
 <p>Moab</p>
 </li>
 <li>
-<p>HTCondor</p>
+<p>Amazon Batch</p>
 </li>
 <li>
-<p>Amazon Batch</p>
+<p>Azure Batch</p>
 </li>
 <li>
 <p>Google Life Sciences</p>
@@ -1004,7 +1053,7 @@ the <code>view</code> operator.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="cmd">N E X T F L O W  ~  version 20.01.0
+<pre class="CodeRay highlight"><code data-lang="cmd">N E X T F L O W  ~  version 20.10.0
 Launching `hello.nf` [marvelous_plateau] - revision: 63f8ad7155
 [warm up] executor &gt; local
 executor &gt;  local (3)
@@ -1113,7 +1162,7 @@ the previous example, replacing the process script with the string
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>N E X T F L O W  ~  version 20.01.0
+<pre>N E X T F L O W  ~  version 20.10.0
 Launching `hello.nf` [naughty_tuckerman] - revision: 22eaa07be4
 [warm up] executor &gt; local
 executor &gt;  local (2)
@@ -1167,7 +1216,7 @@ of the parameter. The output will look like this:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>N E X T F L O W  ~  version 20.01.0
+<pre>N E X T F L O W  ~  version 20.10.0
 Launching `hello.nf` [wise_stallman] - revision: 22eaa07be4
 [warm up] executor &gt; local
 executor &gt;  local (4)

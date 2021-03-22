@@ -48,14 +48,14 @@ the target execution platform in the configuration file.
 
 It provides out-of-the-box support for major batch schedulers and cloud platforms:
 
-* Grid engine (Open/Sun/Univa)
+* Grid engine (Open/Sun/Univa/Altair)
 * IBM Platform LSF
 * Linux SLURM
 * PBS Works
 * Torque
 * Moab
-* HTCondor
 * Amazon Batch
+* Azure Batch
 * Google Life Sciences
 * Kubernetes
 
@@ -134,7 +134,7 @@ It will output something similar to the text shown below:
 
 [source,cmd]
 ----
-N E X T F L O W  ~  version 20.01.0
+N E X T F L O W  ~  version 20.10.0
 Launching `hello.nf` [marvelous_plateau] - revision: 63f8ad7155
 [warm up] executor > local
 executor >  local (3)
@@ -206,7 +206,7 @@ nextflow run hello.nf -resume
 It will print output similar to this:
 
 ----
-N E X T F L O W  ~  version 20.01.0
+N E X T F L O W  ~  version 20.10.0
 Launching `hello.nf` [naughty_tuckerman] - revision: 22eaa07be4
 [warm up] executor > local
 executor >  local (2)
@@ -244,7 +244,7 @@ The string specified on the command line will override the default value
 of the parameter. The output will look like this:
 
 ----
-N E X T F L O W  ~  version 20.01.0
+N E X T F L O W  ~  version 20.10.0
 Launching `hello.nf` [wise_stallman] - revision: 22eaa07be4
 [warm up] executor > local
 executor >  local (4)

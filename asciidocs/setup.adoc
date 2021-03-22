@@ -5,7 +5,7 @@
 Nextflow can be used on any POSIX compatible system (Linux, OS X, etc).
 It requires Bash and
 http://www.oracle.com/technetwork/java/javase/downloads/index.html[Java
-8 (or later, up to 12)] to be installed.
+8 (or later, up to 15)] to be installed.
 
 Optional requirements for this workshop:
 
@@ -16,6 +16,35 @@ Optional requirements for this workshop:
 * https://aws.amazon.com/cli/[AWS CLI] (optional)
 * AWS Batch computing environment properly configured (optional)
 
+
+
+== Training material 
+
+Download the training material copy & pasting the following command 
+in the terminal:
+
+[source,bash,linenums]
+----
+curl https://s3-eu-west-1.amazonaws.com/seqeralabs.com/public/nf-training.tar.gz | tar xvz
+----
+
+Or in alternative if you have `wget` instead of curl:
+
+[source,bash,linenums]
+----
+wget -q -O- https://s3-eu-west-1.amazonaws.com/seqeralabs.com/public/nf-training.tar.gz | tar xvz
+----
+
+
+== Setup AWS Cloud9 environment 
+
+Only if you are running this toturial in the AWS Cloud9 environment, 
+run the following one-liners to properly setup the required dependencies: 
+
+[source,bash,linenums]
+----
+source setup/all.sh
+----
 
 == Nextflow installation 
 
@@ -34,17 +63,3 @@ Check the correct installation running the following command:
 ----
 nextflow info
 ----
-
-
-== Training material 
-
-Download the training material copy & pasting the following command 
-in the terminal:
-
-[source,bash,linenums]
-----
-aws s3 sync s3://seqeralabs.com/public/nf-training .
-----
-
-IMPORTANT: Don't miss the ending dot in the above command.
-
