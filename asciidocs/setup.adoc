@@ -53,6 +53,7 @@ snippet in a terminal window:
 
 [source,bash,linenums]
 ----
+export NXF_VER=20.10.0
 curl get.nextflow.io | bash
 mv nextflow ~/bin
 ----
