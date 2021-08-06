@@ -1,0 +1,6 @@
+ cat all-people.txt |\
+  cut -d '<' -f 1 |\
+   awk '{$1=$1;print}' |\
+    sed "s/ /-/g" |\
+       tr [:upper:] [:lower:] | sort
+

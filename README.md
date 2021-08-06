@@ -1,11 +1,20 @@
 # nf-training-public
 
-Nextflow Training material publically availible. 
+Nextflow Training material. 
 
 ## Get started page 
 
 https://www.seqera.io/training/
 
+## Cloud9 User Access
+
+* Access https://eu-central-1.console.aws.amazon.com/cloud9/home/ in a browser.
+* Select IAM user
+* Enter Account # 195996028523 
+* Enter IAM user (see user-names.txt)
+* Enter password (`Secret123!`)
+
+## Bucket Upload 
 
 * Add read permision for the training bucket ie. `s3://seqeralabs.com/public` by modifying 
 the IAM policy `nf-training-ro`. E.g.

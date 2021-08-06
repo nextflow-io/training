@@ -1,3 +1,5 @@
+nextflow.enable.dsl=2
+
 /* 
  * pipeline input parameters 
  */

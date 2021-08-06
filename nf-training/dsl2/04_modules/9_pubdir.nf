@@ -1,4 +1,4 @@
-nextflow.preview.dsl=2
+nextflow.enable.dsl=2
 
 /*
  * the usual `publishDir` works well, the plan is to

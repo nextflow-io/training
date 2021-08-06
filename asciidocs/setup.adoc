@@ -2,7 +2,7 @@
 
 == Requirements
 
-Nextflow can be used on any POSIX compatible system (Linux, OS X, etc).
+Nextflow can be used on any POSIX compatible system (Linux, OS X, etc.).
 It requires Bash and
 http://www.oracle.com/technetwork/java/javase/downloads/index.html[Java
 8 (or later, up to 15)] to be installed.
@@ -36,9 +36,9 @@ wget -q -O- https://s3-eu-west-1.amazonaws.com/seqeralabs.com/public/nf-training
 ----
 
 
-== Setup AWS Cloud9 environment 
+== Setup AWS Cloud9 environment (Optional) 
 
-Only if you are running this toturial in the AWS Cloud9 environment, 
+Only if you are running this tutorial in the AWS Cloud9 environment, 
 run the following one-liners to properly setup the required dependencies: 
 
 [source,bash,linenums]

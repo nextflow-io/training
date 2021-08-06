@@ -6,7 +6,7 @@
  * enable DLS2 using the command line option `-dsl2`.
  */
  
-nextflow.preview.dsl=2
+nextflow.enable.dsl=2
 
 
 process foo {

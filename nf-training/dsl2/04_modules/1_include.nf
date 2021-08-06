@@ -1,4 +1,4 @@
-nextflow.preview.dsl=2
+nextflow.enable.dsl=2
 
 /*
  * INCLUDE
@@ -8,7 +8,7 @@ nextflow.preview.dsl=2
  * note: module path must start with `./` or `../` or `/` 
  */
 
-include foo from './some/module.nf'
+include { foo } from './some/module.nf'
 
 workflow {
     data = file('data/prot/BB11002.fa')

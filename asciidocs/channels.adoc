@@ -19,7 +19,7 @@ A _queue_ channel is a _asynchronous_ unidirectional _FIFO_ queue which connects
 
 * What _unidirectional_ means? That data flow from a producer to a consumer.
 
-* What _FIFO_ means? That the data is guaranteed to be delivered in the same order as it is produced.
+* What _FIFO_ means? That the data is guaranteed to be delivered in the same order as it is produced. First In, First Out.
 
 A queue channel is implicitly created by process output definitions or using channel factories methods
 such as https://www.nextflow.io/docs/latest/channel.html#from[Channel.from] or https://www.nextflow.io/docs/latest/channel.html#frompath[Channel.fromPath].
@@ -251,7 +251,7 @@ Then use the `flat:true` option and compare the output with the previous executi
 
 === fromSRA 
 
-The `Channel.fromSRA` method that makes it possible to query of https://www.ncbi.nlm.nih.gov/sra[NCBI SRA] archive and returns a channel emitting the FASTQ files matching the specified selection criteria. 
+The `Channel.fromSRA` method that makes it possible to query of https://www.ncbi.nlm.nih.gov/sra[NCBI SRA] archive and returns a channel emitting the FASTQ files matching the specified selection criteria.
 
 The query can be project ID or accession number(s) supported by the 
 https://www.ncbi.nlm.nih.gov/books/NBK25499/#chapter4.ESearch[NCBI ESearch API].

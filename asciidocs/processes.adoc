@@ -3,7 +3,7 @@
 A _process_ is the basic Nextflow computing primitive to execute foreign function i.e. custom
 scripts or tools.
 
-The process definition starts with keyword the ``process``, followed by process name and finally the process `body` delimited by curly brackets. The process body must contain a string which represents the command or, more generally, a script that is executed by it.
+The process definition starts with the keyword ``process``, followed by process name and finally the process `body` delimited by curly brackets. The process body must contain a string which represents the command or, more generally, a script that is executed by it.
 
 A basic process looks like the following example:
 
@@ -47,16 +47,15 @@ The `script` block is a string statement that defines the command that is execut
 A process contains one and only one script block, and it must be the last statement when the process contains input and output declarations.
 
 The script block can be a simple string or multi-line string. The latter simplifies the writing of non trivial scripts
-composed by multiple commands spanning over multiple lines. For example::
+composed by multiple commands spanning over multiple lines. For example:
 
 [source,nextflow,linenums]
 ----
 process example {
     script:
     """
-    blastp -db /data/blast -query query.fa -outfmt 6 > blast_result
-    cat blast_result | head -n 10 | cut -f 2 > top_hits
-    blastdbcmd -db /data/blast -entry_batch top_hits > sequences
+    grep '^@S' data/ggal/gut_1.fq > Fastq_headers
+    cat Fastq_headers | cut -d '.' -f2 > Uniq_Fastq_Names
     """
 }
 ----
@@ -236,7 +235,7 @@ process foo {
     file 'sample.fastq' from reads
     script:
     """
-    your_command --reads sample.fastq
+    echo your_command --reads sample.fastq
     """
 }
 ----
@@ -252,7 +251,7 @@ process foo {
     file sample from reads
     script:
     """
-    your_command --reads $sample
+    echo your_command --reads $sample
     """
 }
 ----
@@ -269,7 +268,7 @@ process foo {
     file sample from reads.collect()
     script:
     """
-    your_command --reads $sample
+    echo your_command --reads $sample
     """
 }
 ----
@@ -289,7 +288,7 @@ process foo {
     file genome from params.genome
     script:
     """
-    your_command --reads $genome
+    echo your_command --reads $genome
     """
 }
 ----
@@ -312,7 +311,7 @@ process foo {
     path genome from params.genome
     script:
     """
-    your_command --reads $genome
+    echo your_command --reads $genome
     """
 }
 ----
@@ -580,7 +579,7 @@ process foo {
     tuple val(sample_id), file('sample.bam') into bam_ch
   script:
   """
-    your_command_here --reads $sample_id > sample.bam
+    echo your_command_here --reads $sample_id > sample.bam
   """
 }
 
@@ -640,7 +639,7 @@ process foo {
 
   script:
   """
-  your_command --this --that
+  echo your_command --this --that
   """
 }
 ----
@@ -710,7 +709,7 @@ process foo {
   publishDir "$params.outdir/$sampleId/outlooks", pattern: '*_outlook.txt'
 
   input:
-    set sampleId, file('sample1.fq.gz'), file('sample2.fq.gz') from samples_ch
+    tuple val(sampleId), file('sample1.fq.gz'), file('sample2.fq.gz') from samples_ch
   output:
     file "*"
   script:

@@ -350,7 +350,7 @@ assert fact(5) == 120
 
 == Closures
 
-Closures are the swiss army knife of Nextflow/Groovy programming. In a nutshell a closure is
+Closures are the swiss army knife of Nextflow/Groovy programming. In a nutshell a closure 
 is a block of code that can be passed as an argument to a function, it could also be defined
 an anonymous function.
 
