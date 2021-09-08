@@ -189,10 +189,10 @@ the previous example, replacing the process script with the string
 process convertToUpper {
 
     input:
-    file y
+    file y from letters.flatten()
 
     output:
-    stdout 
+    stdout into result
 
     """
     rev $y
