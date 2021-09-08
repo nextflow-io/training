@@ -13,9 +13,9 @@ Nextflow extends this approach, adding the ability to define complex program int
 high-level parallel computational environment based on the dataflow programming model. Nextflow
 core features are:
 
-* enable workflows portability & reproducibility
-* simplify parallelization and large scale deployment
-* easily integrate existing tools, systems & industry standards
+* workflow portability & reproducibility
+* scalability of parellelization and deployment
+* integratation of existing tools, systems & industry standards
 
 === Processes and channels
 
@@ -30,7 +30,7 @@ _channels_ in Nextflow.
 Any process can define one or more channels as input and output. The interaction between these processes,
 and ultimately the pipeline execution flow itself, is implicitly defined by these input and output declarations.
 
-image::channel-process.png[]
+image::channel-process.v2.png[]
 
 === Execution abstraction
 
@@ -48,16 +48,12 @@ the target execution platform in the configuration file.
 
 It provides out-of-the-box support for major batch schedulers and cloud platforms:
 
-* Grid engine (Open/Sun/Univa/Altair)
-* IBM Platform LSF
-* Linux SLURM
-* PBS Works
+image::batch_schedulers.png[]
+plus:
 * Torque
 * Moab
-* Amazon Batch
-* Azure Batch
 * Google Life Sciences
-* Kubernetes
+
 
 === Scripting language
 
@@ -85,15 +81,16 @@ to a file named `hello.nf` :
 ----
 #!/usr/bin/env nextflow
 
-nextflow.enable.dsl=2
+params.greeting  = 'Hello world!'
+greeting_ch = Channel.from(params.greeting)
 
 process splitLetters {
 
     input:
-    val x 
+    val x from greeting_ch
 
     output:
-    file 'chunk_*' 
+    file 'chunk_*' into letters
 
     """
     printf '$x' | split -b 6 - chunk_
@@ -103,38 +100,31 @@ process splitLetters {
 process convertToUpper {
 
     input:
-    file y
+    file y from letters.flatten()
 
     output:
-    stdout 
+    stdout into result
 
     """
-    cat $y | tr '[a-z]' '[A-Z]'
+    cat $y | tr '[a-z]' '[A-Z]' 
     """
 }
 
-params.greeting  = 'Hello world!'
-greeting_ch = Channel.from(params.greeting)
 
-workflow {
-
-    letters_ch = splitLetters(greeting_ch)
-    uppercase_ch = convertToUpper( letters_ch.flatten() )
-    uppercase_ch.view{ it.trim() }
+result.view{ it }
 
 }
 ----
 
-This script first defines two processes. The first splits a string into files
-containing chunks of 6 characters. The second accepts the files and transforms their 
-contents to uppercase letters. Next we specify a parameter called "greeting", 
+This script defines first specifys a parameter called "greeting", 
 which we put into a channel "greeting_ch" to be used with the executed workflow. 
 
-In the workflow execution section, first the greeting_ch is split by the 
-splitLetters process putting the output in the letters_ch (letters channel). Next, 
-the letter_ch is processed with the convertToUpper process. The resulting strings 
-are emitted to the standard output in the uppercase_ch which is printed by the 
-`view` operator. 
+Next, two processes are called. The first splits a string into files
+containing chunks of 6 characters ("Hello " and "World!"). The second receives these two files and
+transforms their contents to uppercase letters. The resulting strings
+are emitted on the `result` channel and the final output is printed by
+the `view` operator.
+
 
 
 Execute the script by entering the following command in your terminal:

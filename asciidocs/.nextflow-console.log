@@ -1,0 +1,546 @@
+Sep-08 12:02:20.312 [AWT-EventQueue-0] DEBUG nextflow.Session - Session uuid: 95936db3-95b7-48e6-a266-85bdcff80717
+Sep-08 12:02:20.323 [AWT-EventQueue-0] DEBUG nextflow.Session - Run name: hopeful_montalcini
+Sep-08 12:02:20.324 [AWT-EventQueue-0] DEBUG nextflow.Session - Executor pool size: 4
+Sep-08 12:02:20.464 [AWT-EventQueue-0] DEBUG nextflow.Session - Work-dir: /Users/cwyatt/Desktop/Nextflow_practise/Update_docs_2/dsl2_review/asciidocs/work [Mac OS X]
+Sep-08 12:02:20.492 [AWT-EventQueue-0] DEBUG nextflow.executor.ExecutorFactory - Extension executors providers=[]
+Sep-08 12:02:20.528 [AWT-EventQueue-0] DEBUG nextflow.Session - Observer factory: DefaultObserverFactory
+Sep-08 12:02:20.708 [AWT-EventQueue-0] DEBUG nextflow.util.CustomThreadPool - Creating default thread pool > poolSize: 5; maxThreads: 1000
+Sep-08 12:02:21.146 [Thread-4] DEBUG nextflow.Session - Session start invoked
+Sep-08 12:02:22.928 [Thread-4] DEBUG nextflow.Session - Workflow process names [dsl1]: convertToUpper, splitLetters
+Sep-08 12:02:23.385 [Thread-4] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Sep-08 12:02:23.385 [Thread-4] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Sep-08 12:02:23.396 [Thread-4] DEBUG nextflow.executor.Executor - [warm up] executor > local
+Sep-08 12:02:23.508 [Thread-4] DEBUG n.processor.LocalPollingMonitor - Creating local task monitor for executor 'local' > cpus=4; memory=4 GB; capacity=4; pollInterval=100ms; dumpInterval=5m
+Sep-08 12:02:23.549 [Thread-4] DEBUG nextflow.util.CustomThreadPool - Creating default thread pool > poolSize: 5; maxThreads: 1000
+Sep-08 12:02:23.953 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-08 12:02:23.963 [Task submitter] INFO  nextflow.Session - [69/45d8da] Submitted process > splitLetters (1)
+Sep-08 12:02:24.230 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 1; name: splitLetters (1); status: COMPLETED; exit: 0; error: -; workDir: /Users/cwyatt/Desktop/Nextflow_practise/Update_docs_2/dsl2_review/asciidocs/work/69/45d8daab5be40897b0a941be278779]
+Sep-08 12:05:12.174 [AWT-EventQueue-0] DEBUG nextflow.Session - Session uuid: 85a559e2-ecd1-4b27-aa9d-f7d3208dd944
+Sep-08 12:05:12.185 [AWT-EventQueue-0] DEBUG nextflow.Session - Run name: happy_crick
+Sep-08 12:05:12.186 [AWT-EventQueue-0] DEBUG nextflow.Session - Executor pool size: 4
+Sep-08 12:05:12.190 [AWT-EventQueue-0] DEBUG nextflow.Session - Work-dir: /Users/cwyatt/Desktop/Nextflow_practise/Update_docs_2/dsl2_review/asciidocs/work [Mac OS X]
+Sep-08 12:05:12.194 [AWT-EventQueue-0] DEBUG nextflow.executor.ExecutorFactory - Extension executors providers=[]
+Sep-08 12:05:12.196 [AWT-EventQueue-0] DEBUG nextflow.Session - Observer factory: DefaultObserverFactory
+Sep-08 12:05:12.245 [Thread-6] DEBUG nextflow.Session - Session start invoked
+Sep-08 12:05:12.379 [Thread-6] DEBUG nextflow.Session - Workflow process names [dsl1]: convertToUpper, splitLetters
+Sep-08 12:05:12.379 [Thread-6] WARN  nextflow.script.ScriptBinding - `params.greeting` is defined multiple times -- Assignments following the first are ignored
+Sep-08 12:05:12.394 [Thread-6] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Sep-08 12:05:12.395 [Thread-6] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Sep-08 12:05:12.395 [Thread-6] DEBUG nextflow.executor.Executor - [warm up] executor > local
+Sep-08 12:05:12.397 [Thread-6] DEBUG n.processor.LocalPollingMonitor - Creating local task monitor for executor 'local' > cpus=4; memory=4 GB; capacity=4; pollInterval=100ms; dumpInterval=5m
+Sep-08 12:05:12.421 [Thread-6] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Sep-08 12:05:12.421 [Thread-6] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Sep-08 12:05:12.436 [Thread-6] DEBUG nextflow.Session - Session await
+Sep-08 12:05:12.447 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-08 12:05:12.448 [Task submitter] INFO  nextflow.Session - [1a/b291f7] Submitted process > splitLetters (1)
+Sep-08 12:05:12.510 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-08 12:05:12.511 [Task submitter] INFO  nextflow.Session - [cc/206679] Submitted process > convertToUpper (1)
+Sep-08 12:05:12.609 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 2; name: splitLetters (1); status: COMPLETED; exit: 0; error: -; workDir: /Users/cwyatt/Desktop/Nextflow_practise/Update_docs_2/dsl2_review/asciidocs/work/1a/b291f7a1fd88063f78fb914ad9e2ea]
+Sep-08 12:05:12.624 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 3; name: convertToUpper (1); status: COMPLETED; exit: 0; error: -; workDir: /Users/cwyatt/Desktop/Nextflow_practise/Update_docs_2/dsl2_review/asciidocs/work/cc/206679e5badcb0c37569ba41e00640]
+Sep-08 12:05:12.625 [Task monitor] DEBUG nextflow.processor.TaskProcessor - Process `convertToUpper (1)` is unable to find [UnixPath]: `/Users/cwyatt/Desktop/Nextflow_practise/Update_docs_2/dsl2_review/asciidocs/work/cc/206679e5badcb0c37569ba41e00640/stdout` (pattern: `stdout`)
+Sep-08 12:05:13.082 [Task monitor] ERROR nextflow.processor.TaskProcessor - Error executing process > 'convertToUpper (1)'
+
+Caused by:
+  Missing output file(s) `stdout` expected by process `convertToUpper (1)`
+
+Command executed:
+
+  cat chunk_aa chunk_ab | tr '[a-z]' '[A-Z]'
+
+Command exit status:
+  0
+
+Command output:
+  HELLO WORLD!
+
+Work dir:
+  /Users/cwyatt/Desktop/Nextflow_practise/Update_docs_2/dsl2_review/asciidocs/work/cc/206679e5badcb0c37569ba41e00640
+
+Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
+Sep-08 12:05:13.089 [Thread-6] DEBUG nextflow.Session - Session await > all process finished
+Sep-08 12:05:13.093 [Task monitor] DEBUG nextflow.Session - Session aborted -- Cause: Missing output file(s) `stdout` expected by process `convertToUpper (1)`
+Sep-08 12:05:13.145 [Thread-6] DEBUG nextflow.Session - Session await > all barriers passed
+Sep-08 12:05:13.167 [Thread-6] DEBUG nextflow.trace.WorkflowStatsObserver - Workflow completed > WorkflowStats[succeededCount=1; failedCount=1; ignoredCount=0; cachedCount=0; pendingCount=0; submittedCount=0; runningCount=0; retriesCount=0; abortedCount=0; succeedDuration=8ms; failedDuration=21ms; cachedDuration=0ms;loadCpus=0; loadMemory=0; peakRunning=2; peakCpus=2; peakMemory=0; ]
+Sep-08 12:05:13.188 [Thread-6] DEBUG nextflow.CacheDB - Closing CacheDB done
+Sep-08 12:05:13.189 [Thread-6] INFO  org.pf4j.AbstractPluginManager - Stop plugin 'nf-console@1.0.3'
+Sep-08 12:05:13.192 [Thread-6] DEBUG nextflow.plugin.BasePlugin - Plugin stopped nf-console
+Sep-08 12:06:04.691 [AWT-EventQueue-0] DEBUG nextflow.Session - Session uuid: 569233e8-66e7-44b6-a70d-8939227ad696
+Sep-08 12:06:04.702 [AWT-EventQueue-0] DEBUG nextflow.Session - Run name: voluminous_sanger
+Sep-08 12:06:04.702 [AWT-EventQueue-0] DEBUG nextflow.Session - Executor pool size: 4
+Sep-08 12:06:04.703 [AWT-EventQueue-0] DEBUG nextflow.Session - Work-dir: /Users/cwyatt/Desktop/Nextflow_practise/Update_docs_2/dsl2_review/asciidocs/work [Mac OS X]
+Sep-08 12:06:04.710 [AWT-EventQueue-0] WARN  nextflow.executor.ExecutorFactory - Plugin manager not initialised -- Using built-in executors
+Sep-08 12:06:04.727 [AWT-EventQueue-0] INFO  org.pf4j.DefaultPluginStatusProvider - Enabled plugins: []
+Sep-08 12:06:04.728 [AWT-EventQueue-0] INFO  org.pf4j.DefaultPluginStatusProvider - Disabled plugins: []
+Sep-08 12:06:04.731 [AWT-EventQueue-0] INFO  org.pf4j.DefaultPluginManager - PF4J version 3.4.1 in 'deployment' mode
+Sep-08 12:06:04.734 [AWT-EventQueue-0] DEBUG nextflow.Session - Observer factory: DefaultObserverFactory
+Sep-08 12:06:04.763 [Thread-8] DEBUG nextflow.Session - Session start invoked
+Sep-08 12:06:04.844 [Thread-8] DEBUG nextflow.Session - Workflow process names [dsl1]: convertToUpper, splitLetters
+Sep-08 12:06:04.844 [Thread-8] WARN  nextflow.script.ScriptBinding - `params.greeting` is defined multiple times -- Assignments following the first are ignored
+Sep-08 12:06:04.850 [Thread-8] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Sep-08 12:06:04.850 [Thread-8] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Sep-08 12:06:04.851 [Thread-8] DEBUG nextflow.executor.Executor - [warm up] executor > local
+Sep-08 12:06:04.852 [Thread-8] DEBUG n.processor.LocalPollingMonitor - Creating local task monitor for executor 'local' > cpus=4; memory=4 GB; capacity=4; pollInterval=100ms; dumpInterval=5m
+Sep-08 12:06:04.861 [Thread-8] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Sep-08 12:06:04.861 [Thread-8] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Sep-08 12:06:04.865 [Thread-8] DEBUG nextflow.Session - Session await
+Sep-08 12:06:04.871 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-08 12:06:04.871 [Task submitter] INFO  nextflow.Session - [da/9968cd] Submitted process > splitLetters (1)
+Sep-08 12:06:04.882 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-08 12:06:04.882 [Task submitter] INFO  nextflow.Session - [f0/9e94aa] Submitted process > convertToUpper (1)
+Sep-08 12:06:04.976 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 4; name: splitLetters (1); status: COMPLETED; exit: 0; error: -; workDir: /Users/cwyatt/Desktop/Nextflow_practise/Update_docs_2/dsl2_review/asciidocs/work/da/9968cd5d28ad5f7a197516ce3b84ef]
+Sep-08 12:06:04.992 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 5; name: convertToUpper (1); status: COMPLETED; exit: 0; error: -; workDir: /Users/cwyatt/Desktop/Nextflow_practise/Update_docs_2/dsl2_review/asciidocs/work/f0/9e94aa2877f3790c077a827e1271cb]
+Sep-08 12:06:04.992 [Task monitor] DEBUG nextflow.processor.TaskProcessor - Process `convertToUpper (1)` is unable to find [UnixPath]: `/Users/cwyatt/Desktop/Nextflow_practise/Update_docs_2/dsl2_review/asciidocs/work/f0/9e94aa2877f3790c077a827e1271cb/stdout` (pattern: `stdout`)
+Sep-08 12:06:04.993 [Thread-8] DEBUG nextflow.Session - Session await > all process finished
+Sep-08 12:06:04.994 [Thread-8] DEBUG nextflow.Session - Session await > all barriers passed
+Sep-08 12:06:04.995 [Thread-8] DEBUG nextflow.trace.WorkflowStatsObserver - Workflow completed > WorkflowStats[succeededCount=1; failedCount=1; ignoredCount=0; cachedCount=0; pendingCount=0; submittedCount=0; runningCount=0; retriesCount=0; abortedCount=0; succeedDuration=21ms; failedDuration=35ms; cachedDuration=0ms;loadCpus=0; loadMemory=0; peakRunning=2; peakCpus=2; peakMemory=0; ]
+Sep-08 12:06:04.999 [Thread-8] DEBUG nextflow.CacheDB - Closing CacheDB done
+Sep-08 12:06:57.297 [AWT-EventQueue-0] DEBUG nextflow.Session - Session uuid: 47c2a0ed-6a23-44d3-948c-6a02654f5f59
+Sep-08 12:06:57.306 [AWT-EventQueue-0] DEBUG nextflow.Session - Run name: suspicious_legentil
+Sep-08 12:06:57.307 [AWT-EventQueue-0] DEBUG nextflow.Session - Executor pool size: 4
+Sep-08 12:06:57.310 [AWT-EventQueue-0] DEBUG nextflow.Session - Work-dir: /Users/cwyatt/Desktop/Nextflow_practise/Update_docs_2/dsl2_review/asciidocs/work [Mac OS X]
+Sep-08 12:06:57.313 [AWT-EventQueue-0] WARN  nextflow.executor.ExecutorFactory - Plugin manager not initialised -- Using built-in executors
+Sep-08 12:06:57.321 [AWT-EventQueue-0] DEBUG nextflow.Session - Observer factory: DefaultObserverFactory
+Sep-08 12:06:57.367 [Thread-10] DEBUG nextflow.Session - Session start invoked
+Sep-08 12:06:57.523 [Thread-10] DEBUG nextflow.Session - Workflow process names [dsl1]: convertToUpper, splitLetters
+Sep-08 12:06:57.524 [Thread-10] WARN  nextflow.script.ScriptBinding - `params.greeting` is defined multiple times -- Assignments following the first are ignored
+Sep-08 12:06:57.544 [Thread-10] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Sep-08 12:06:57.544 [Thread-10] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Sep-08 12:06:57.545 [Thread-10] DEBUG nextflow.executor.Executor - [warm up] executor > local
+Sep-08 12:06:57.547 [Thread-10] DEBUG n.processor.LocalPollingMonitor - Creating local task monitor for executor 'local' > cpus=4; memory=4 GB; capacity=4; pollInterval=100ms; dumpInterval=5m
+Sep-08 12:06:57.565 [Thread-10] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Sep-08 12:06:57.566 [Thread-10] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Sep-08 12:06:57.569 [Thread-10] DEBUG nextflow.Session - Session await
+Sep-08 12:06:57.596 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-08 12:06:57.959 [Task submitter] INFO  nextflow.Session - [4f/ebd7e1] Submitted process > convertToUpper (1)
+Sep-08 12:06:57.971 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-08 12:06:57.971 [Task submitter] INFO  nextflow.Session - [0a/578854] Submitted process > splitLetters (1)
+Sep-08 12:06:58.098 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 6; name: splitLetters (1); status: COMPLETED; exit: 0; error: -; workDir: /Users/cwyatt/Desktop/Nextflow_practise/Update_docs_2/dsl2_review/asciidocs/work/0a/5788542112276a21718b3b4a42267f]
+Sep-08 12:06:58.121 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 7; name: convertToUpper (1); status: COMPLETED; exit: 0; error: -; workDir: /Users/cwyatt/Desktop/Nextflow_practise/Update_docs_2/dsl2_review/asciidocs/work/4f/ebd7e1aa39a769054578cce2c0d5f7]
+Sep-08 12:06:58.122 [Task monitor] DEBUG nextflow.processor.TaskProcessor - Process `convertToUpper (1)` is unable to find [UnixPath]: `/Users/cwyatt/Desktop/Nextflow_practise/Update_docs_2/dsl2_review/asciidocs/work/4f/ebd7e1aa39a769054578cce2c0d5f7/stdout` (pattern: `stdout`)
+Sep-08 12:06:58.122 [Thread-10] DEBUG nextflow.Session - Session await > all process finished
+Sep-08 12:06:58.123 [Thread-10] DEBUG nextflow.Session - Session await > all barriers passed
+Sep-08 12:06:58.125 [Thread-10] DEBUG nextflow.trace.WorkflowStatsObserver - Workflow completed > WorkflowStats[succeededCount=1; failedCount=1; ignoredCount=0; cachedCount=0; pendingCount=0; submittedCount=0; runningCount=0; retriesCount=0; abortedCount=0; succeedDuration=38ms; failedDuration=61ms; cachedDuration=0ms;loadCpus=0; loadMemory=0; peakRunning=2; peakCpus=2; peakMemory=0; ]
+Sep-08 12:06:58.130 [Thread-10] DEBUG nextflow.CacheDB - Closing CacheDB done
+Sep-08 12:07:23.685 [Task monitor] DEBUG n.processor.TaskPollingMonitor - No more task to compute -- Execution may be stalled
+Sep-08 12:07:35.545 [AWT-EventQueue-0] DEBUG nextflow.Session - Session uuid: 7d720f5a-fccd-406e-b098-4131ff72e80b
+Sep-08 12:07:35.553 [AWT-EventQueue-0] DEBUG nextflow.Session - Run name: mad_lavoisier
+Sep-08 12:07:35.554 [AWT-EventQueue-0] DEBUG nextflow.Session - Executor pool size: 4
+Sep-08 12:07:35.555 [AWT-EventQueue-0] DEBUG nextflow.Session - Work-dir: /Users/cwyatt/Desktop/Nextflow_practise/Update_docs_2/dsl2_review/asciidocs/work [Mac OS X]
+Sep-08 12:07:35.555 [AWT-EventQueue-0] WARN  nextflow.executor.ExecutorFactory - Plugin manager not initialised -- Using built-in executors
+Sep-08 12:07:35.560 [AWT-EventQueue-0] DEBUG nextflow.Session - Observer factory: DefaultObserverFactory
+Sep-08 12:07:35.590 [Thread-12] DEBUG nextflow.Session - Session start invoked
+Sep-08 12:07:35.686 [Thread-12] DEBUG nextflow.Session - Workflow process names [dsl1]: convertToUpper, splitLetters
+Sep-08 12:07:35.686 [Thread-12] WARN  nextflow.script.ScriptBinding - `params.greeting` is defined multiple times -- Assignments following the first are ignored
+Sep-08 12:07:35.693 [Thread-12] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Sep-08 12:07:35.693 [Thread-12] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Sep-08 12:07:35.694 [Thread-12] DEBUG nextflow.executor.Executor - [warm up] executor > local
+Sep-08 12:07:35.695 [Thread-12] DEBUG n.processor.LocalPollingMonitor - Creating local task monitor for executor 'local' > cpus=4; memory=4 GB; capacity=4; pollInterval=100ms; dumpInterval=5m
+Sep-08 12:07:35.710 [Thread-12] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Sep-08 12:07:35.710 [Thread-12] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Sep-08 12:07:35.735 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-08 12:07:35.735 [Task submitter] INFO  nextflow.Session - [c8/7c1e40] Submitted process > splitLetters (1)
+Sep-08 12:07:35.745 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-08 12:07:35.749 [Task submitter] INFO  nextflow.Session - [f9/ca3d9d] Submitted process > convertToUpper (1)
+Sep-08 12:07:35.782 [Thread-12] DEBUG nextflow.Session - Session await
+Sep-08 12:07:35.845 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 8; name: splitLetters (1); status: COMPLETED; exit: 0; error: -; workDir: /Users/cwyatt/Desktop/Nextflow_practise/Update_docs_2/dsl2_review/asciidocs/work/c8/7c1e4025012e465346c5b6977c2a65]
+Sep-08 12:07:35.868 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 9; name: convertToUpper (1); status: COMPLETED; exit: 0; error: -; workDir: /Users/cwyatt/Desktop/Nextflow_practise/Update_docs_2/dsl2_review/asciidocs/work/f9/ca3d9d0147532e80f663bbf475b60a]
+Sep-08 12:07:35.869 [Task monitor] DEBUG nextflow.processor.TaskProcessor - Process `convertToUpper (1)` is unable to find [UnixPath]: `/Users/cwyatt/Desktop/Nextflow_practise/Update_docs_2/dsl2_review/asciidocs/work/f9/ca3d9d0147532e80f663bbf475b60a/stdout` (pattern: `stdout`)
+Sep-08 12:07:35.870 [Thread-12] DEBUG nextflow.Session - Session await > all process finished
+Sep-08 12:07:35.871 [Thread-12] DEBUG nextflow.Session - Session await > all barriers passed
+Sep-08 12:07:35.872 [Thread-12] DEBUG nextflow.trace.WorkflowStatsObserver - Workflow completed > WorkflowStats[succeededCount=1; failedCount=1; ignoredCount=0; cachedCount=0; pendingCount=0; submittedCount=0; runningCount=0; retriesCount=0; abortedCount=0; succeedDuration=49ms; failedDuration=71ms; cachedDuration=0ms;loadCpus=0; loadMemory=0; peakRunning=2; peakCpus=2; peakMemory=0; ]
+Sep-08 12:07:35.878 [Thread-12] DEBUG nextflow.CacheDB - Closing CacheDB done
+Sep-08 12:07:49.876 [AWT-EventQueue-0] DEBUG nextflow.Session - Session uuid: 0760c6df-d6a9-425c-9180-8fca5aac0bef
+Sep-08 12:07:49.884 [AWT-EventQueue-0] DEBUG nextflow.Session - Run name: mad_watson
+Sep-08 12:07:49.884 [AWT-EventQueue-0] DEBUG nextflow.Session - Executor pool size: 4
+Sep-08 12:07:49.885 [AWT-EventQueue-0] DEBUG nextflow.Session - Work-dir: /Users/cwyatt/Desktop/Nextflow_practise/Update_docs_2/dsl2_review/asciidocs/work [Mac OS X]
+Sep-08 12:07:49.885 [AWT-EventQueue-0] WARN  nextflow.executor.ExecutorFactory - Plugin manager not initialised -- Using built-in executors
+Sep-08 12:07:49.888 [AWT-EventQueue-0] DEBUG nextflow.Session - Observer factory: DefaultObserverFactory
+Sep-08 12:07:49.915 [Thread-14] DEBUG nextflow.Session - Session start invoked
+Sep-08 12:07:49.996 [Thread-14] DEBUG nextflow.Session - Workflow process names [dsl1]: convertToUpper, splitLetters
+Sep-08 12:07:49.996 [Thread-14] WARN  nextflow.script.ScriptBinding - `params.greeting` is defined multiple times -- Assignments following the first are ignored
+Sep-08 12:07:50.002 [Thread-14] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Sep-08 12:07:50.002 [Thread-14] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Sep-08 12:07:50.002 [Thread-14] DEBUG nextflow.executor.Executor - [warm up] executor > local
+Sep-08 12:07:50.004 [Thread-14] DEBUG n.processor.LocalPollingMonitor - Creating local task monitor for executor 'local' > cpus=4; memory=4 GB; capacity=4; pollInterval=100ms; dumpInterval=5m
+Sep-08 12:07:50.010 [Thread-14] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Sep-08 12:07:50.010 [Thread-14] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Sep-08 12:07:50.015 [Thread-14] DEBUG nextflow.Session - Session await
+Sep-08 12:07:50.018 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-08 12:07:50.018 [Task submitter] INFO  nextflow.Session - [df/2ab059] Submitted process > splitLetters (1)
+Sep-08 12:07:50.027 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-08 12:07:50.028 [Task submitter] INFO  nextflow.Session - [58/71449b] Submitted process > convertToUpper (1)
+Sep-08 12:07:50.123 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 10; name: splitLetters (1); status: COMPLETED; exit: 0; error: -; workDir: /Users/cwyatt/Desktop/Nextflow_practise/Update_docs_2/dsl2_review/asciidocs/work/df/2ab0591175661aea5035313e4ac9b8]
+Sep-08 12:07:50.143 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 11; name: convertToUpper (1); status: COMPLETED; exit: 0; error: -; workDir: /Users/cwyatt/Desktop/Nextflow_practise/Update_docs_2/dsl2_review/asciidocs/work/58/71449b6176e6d7d5c482e48acdb37f]
+Sep-08 12:07:50.145 [Task monitor] DEBUG nextflow.processor.TaskProcessor - Process `convertToUpper (1)` is unable to find [UnixPath]: `/Users/cwyatt/Desktop/Nextflow_practise/Update_docs_2/dsl2_review/asciidocs/work/58/71449b6176e6d7d5c482e48acdb37f/stdout` (pattern: `stdout`)
+Sep-08 12:07:50.145 [Thread-14] DEBUG nextflow.Session - Session await > all process finished
+Sep-08 12:07:50.146 [Thread-14] DEBUG nextflow.Session - Session await > all barriers passed
+Sep-08 12:07:50.147 [Thread-14] DEBUG nextflow.trace.WorkflowStatsObserver - Workflow completed > WorkflowStats[succeededCount=1; failedCount=1; ignoredCount=0; cachedCount=0; pendingCount=0; submittedCount=0; runningCount=0; retriesCount=0; abortedCount=0; succeedDuration=12ms; failedDuration=32ms; cachedDuration=0ms;loadCpus=0; loadMemory=0; peakRunning=2; peakCpus=2; peakMemory=0; ]
+Sep-08 12:07:50.151 [Thread-14] DEBUG nextflow.CacheDB - Closing CacheDB done
+Sep-08 12:08:11.105 [AWT-EventQueue-0] DEBUG nextflow.Session - Session uuid: a87814c5-cf8a-429d-8cf6-f51457b2f94a
+Sep-08 12:08:11.113 [AWT-EventQueue-0] DEBUG nextflow.Session - Run name: stoic_hopper
+Sep-08 12:08:11.114 [AWT-EventQueue-0] DEBUG nextflow.Session - Executor pool size: 4
+Sep-08 12:08:11.115 [AWT-EventQueue-0] DEBUG nextflow.Session - Work-dir: /Users/cwyatt/Desktop/Nextflow_practise/Update_docs_2/dsl2_review/asciidocs/work [Mac OS X]
+Sep-08 12:08:11.115 [AWT-EventQueue-0] WARN  nextflow.executor.ExecutorFactory - Plugin manager not initialised -- Using built-in executors
+Sep-08 12:08:11.117 [AWT-EventQueue-0] DEBUG nextflow.Session - Observer factory: DefaultObserverFactory
+Sep-08 12:08:11.144 [Thread-16] DEBUG nextflow.Session - Session start invoked
+Sep-08 12:08:11.225 [Thread-16] DEBUG nextflow.Session - Workflow process names [dsl1]: convertToUpper, splitLetters
+Sep-08 12:08:11.225 [Thread-16] WARN  nextflow.script.ScriptBinding - `params.greeting` is defined multiple times -- Assignments following the first are ignored
+Sep-08 12:08:11.230 [Thread-16] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Sep-08 12:08:11.230 [Thread-16] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Sep-08 12:08:11.230 [Thread-16] DEBUG nextflow.executor.Executor - [warm up] executor > local
+Sep-08 12:08:11.231 [Thread-16] DEBUG n.processor.LocalPollingMonitor - Creating local task monitor for executor 'local' > cpus=4; memory=4 GB; capacity=4; pollInterval=100ms; dumpInterval=5m
+Sep-08 12:08:11.239 [Thread-16] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Sep-08 12:08:11.239 [Thread-16] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Sep-08 12:08:11.241 [Thread-16] DEBUG nextflow.Session - Session await
+Sep-08 12:08:11.247 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-08 12:08:11.248 [Task submitter] INFO  nextflow.Session - [17/0e5c8f] Submitted process > splitLetters (1)
+Sep-08 12:08:11.258 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-08 12:08:11.259 [Task submitter] INFO  nextflow.Session - [57/1bcea2] Submitted process > convertToUpper (1)
+Sep-08 12:08:11.342 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 12; name: splitLetters (1); status: COMPLETED; exit: 0; error: -; workDir: /Users/cwyatt/Desktop/Nextflow_practise/Update_docs_2/dsl2_review/asciidocs/work/17/0e5c8f3b901d75267adecddaa68a45]
+Sep-08 12:08:11.362 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 13; name: convertToUpper (1); status: COMPLETED; exit: 0; error: -; workDir: /Users/cwyatt/Desktop/Nextflow_practise/Update_docs_2/dsl2_review/asciidocs/work/57/1bcea25cbe04322192b6a53f0bfa7b]
+Sep-08 12:08:11.364 [Thread-16] DEBUG nextflow.Session - Session await > all process finished
+Sep-08 12:08:11.364 [Thread-16] DEBUG nextflow.Session - Session await > all barriers passed
+Sep-08 12:08:11.365 [Thread-16] DEBUG nextflow.trace.WorkflowStatsObserver - Workflow completed > WorkflowStats[succeededCount=2; failedCount=0; ignoredCount=0; cachedCount=0; pendingCount=0; submittedCount=0; runningCount=0; retriesCount=0; abortedCount=0; succeedDuration=29ms; failedDuration=0ms; cachedDuration=0ms;loadCpus=0; loadMemory=0; peakRunning=2; peakCpus=2; peakMemory=0; ]
+Sep-08 12:08:11.370 [Thread-16] DEBUG nextflow.CacheDB - Closing CacheDB done
+Sep-08 12:08:29.014 [AWT-EventQueue-0] DEBUG nextflow.Session - Session uuid: 56bd9f65-a092-4c3f-8604-84e35c9c2939
+Sep-08 12:08:29.022 [AWT-EventQueue-0] DEBUG nextflow.Session - Run name: magical_leakey
+Sep-08 12:08:29.023 [AWT-EventQueue-0] DEBUG nextflow.Session - Executor pool size: 4
+Sep-08 12:08:29.023 [AWT-EventQueue-0] DEBUG nextflow.Session - Work-dir: /Users/cwyatt/Desktop/Nextflow_practise/Update_docs_2/dsl2_review/asciidocs/work [Mac OS X]
+Sep-08 12:08:29.024 [AWT-EventQueue-0] WARN  nextflow.executor.ExecutorFactory - Plugin manager not initialised -- Using built-in executors
+Sep-08 12:08:29.027 [AWT-EventQueue-0] DEBUG nextflow.Session - Observer factory: DefaultObserverFactory
+Sep-08 12:08:29.051 [Thread-18] DEBUG nextflow.Session - Session start invoked
+Sep-08 12:08:29.129 [Thread-18] DEBUG nextflow.Session - Workflow process names [dsl1]: convertToUpper, splitLetters
+Sep-08 12:08:29.129 [Thread-18] WARN  nextflow.script.ScriptBinding - `params.greeting` is defined multiple times -- Assignments following the first are ignored
+Sep-08 12:08:29.135 [Thread-18] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Sep-08 12:08:29.135 [Thread-18] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Sep-08 12:08:29.136 [Thread-18] DEBUG nextflow.executor.Executor - [warm up] executor > local
+Sep-08 12:08:29.137 [Thread-18] DEBUG n.processor.LocalPollingMonitor - Creating local task monitor for executor 'local' > cpus=4; memory=4 GB; capacity=4; pollInterval=100ms; dumpInterval=5m
+Sep-08 12:08:29.151 [Thread-18] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Sep-08 12:08:29.151 [Thread-18] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Sep-08 12:08:29.154 [Thread-18] DEBUG nextflow.Session - Session await
+Sep-08 12:08:29.157 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-08 12:08:29.157 [Task submitter] INFO  nextflow.Session - [2b/4ccbd0] Submitted process > splitLetters (1)
+Sep-08 12:08:29.167 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-08 12:08:29.168 [Task submitter] INFO  nextflow.Session - [b8/fbde9d] Submitted process > convertToUpper (1)
+Sep-08 12:08:29.255 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 14; name: splitLetters (1); status: COMPLETED; exit: 0; error: -; workDir: /Users/cwyatt/Desktop/Nextflow_practise/Update_docs_2/dsl2_review/asciidocs/work/2b/4ccbd0d872eb98b9dcda54bdd21f4d]
+Sep-08 12:08:29.273 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 15; name: convertToUpper (1); status: COMPLETED; exit: 0; error: -; workDir: /Users/cwyatt/Desktop/Nextflow_practise/Update_docs_2/dsl2_review/asciidocs/work/b8/fbde9d7a96aaa278bd10f08d3e840e]
+Sep-08 12:08:29.274 [Thread-18] DEBUG nextflow.Session - Session await > all process finished
+Sep-08 12:08:29.275 [Thread-18] DEBUG nextflow.Session - Session await > all barriers passed
+Sep-08 12:08:29.276 [Thread-18] DEBUG nextflow.trace.WorkflowStatsObserver - Workflow completed > WorkflowStats[succeededCount=2; failedCount=0; ignoredCount=0; cachedCount=0; pendingCount=0; submittedCount=0; runningCount=0; retriesCount=0; abortedCount=0; succeedDuration=46ms; failedDuration=0ms; cachedDuration=0ms;loadCpus=0; loadMemory=0; peakRunning=2; peakCpus=2; peakMemory=0; ]
+Sep-08 12:08:29.282 [Thread-18] DEBUG nextflow.CacheDB - Closing CacheDB done
+Sep-08 12:08:48.469 [AWT-EventQueue-0] DEBUG nextflow.Session - Session uuid: ccd5fc0a-7f9c-4233-b226-f0a6ac65029d
+Sep-08 12:08:48.469 [AWT-EventQueue-0] DEBUG nextflow.Session - Run name: thirsty_northcutt
+Sep-08 12:08:48.470 [AWT-EventQueue-0] DEBUG nextflow.Session - Executor pool size: 4
+Sep-08 12:08:48.471 [AWT-EventQueue-0] DEBUG nextflow.Session - Work-dir: /Users/cwyatt/Desktop/Nextflow_practise/Update_docs_2/dsl2_review/asciidocs/work [Mac OS X]
+Sep-08 12:08:48.471 [AWT-EventQueue-0] WARN  nextflow.executor.ExecutorFactory - Plugin manager not initialised -- Using built-in executors
+Sep-08 12:08:48.473 [AWT-EventQueue-0] DEBUG nextflow.Session - Observer factory: DefaultObserverFactory
+Sep-08 12:08:48.502 [Thread-20] DEBUG nextflow.Session - Session start invoked
+Sep-08 12:08:48.580 [Thread-20] DEBUG nextflow.Session - Workflow process names [dsl1]: convertToUpper, splitLetters
+Sep-08 12:08:48.580 [Thread-20] WARN  nextflow.script.ScriptBinding - `params.greeting` is defined multiple times -- Assignments following the first are ignored
+Sep-08 12:08:48.590 [Thread-20] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Sep-08 12:08:48.590 [Thread-20] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Sep-08 12:08:48.591 [Thread-20] DEBUG nextflow.executor.Executor - [warm up] executor > local
+Sep-08 12:08:48.591 [Thread-20] DEBUG n.processor.LocalPollingMonitor - Creating local task monitor for executor 'local' > cpus=4; memory=4 GB; capacity=4; pollInterval=100ms; dumpInterval=5m
+Sep-08 12:08:48.606 [Thread-20] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Sep-08 12:08:48.606 [Thread-20] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Sep-08 12:08:48.617 [Thread-20] DEBUG nextflow.Session - Session await
+Sep-08 12:08:48.633 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-08 12:08:48.635 [Task submitter] INFO  nextflow.Session - [62/ecb938] Submitted process > convertToUpper (1)
+Sep-08 12:08:48.645 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-08 12:08:48.646 [Task submitter] INFO  nextflow.Session - [ff/d6032b] Submitted process > splitLetters (1)
+Sep-08 12:08:48.657 [Actor Thread 3] ERROR nextflow.extension.DataflowHelper - @unknown
+groovy.lang.MissingMethodException: No signature of method: sun.nio.fs.UnixPath.trim() is applicable for argument types: () values: []
+Possible solutions: tail(), tail(int), tail(int, java.lang.Object), tail(int, java.lang.Object, int), wait(), toUri()
+	at org.codehaus.groovy.runtime.ScriptBytecodeAdapter.unwrap(ScriptBytecodeAdapter.java:70)
+	at org.codehaus.groovy.runtime.callsite.PojoMetaClassSite.call(PojoMetaClassSite.java:46)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(CallSiteArray.java:47)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:125)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:130)
+	at ConsoleScript8$_runScript_closure3.doCall(ConsoleScript8:30)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:107)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:323)
+	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(ClosureMetaClass.java:263)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1035)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaClassSite.call(PogoMetaClassSite.java:38)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(CallSiteArray.java:47)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:125)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:139)
+	at nextflow.extension.OperatorEx$_view_closure41.doCall(OperatorEx.groovy:1418)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:107)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:323)
+	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(ClosureMetaClass.java:263)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1035)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaClassSite.call(PogoMetaClassSite.java:38)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(CallSiteArray.java:47)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:125)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:139)
+	at nextflow.extension.DataflowHelper$_subscribeImpl_closure2.doCall(DataflowHelper.groovy:289)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:107)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:323)
+	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(ClosureMetaClass.java:263)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1035)
+	at groovy.lang.Closure.call(Closure.java:412)
+	at groovyx.gpars.dataflow.operator.DataflowOperatorActor.startTask(DataflowOperatorActor.java:120)
+	at groovyx.gpars.dataflow.operator.DataflowOperatorActor.onMessage(DataflowOperatorActor.java:108)
+	at groovyx.gpars.actor.impl.SDAClosure$1.call(SDAClosure.java:43)
+	at groovyx.gpars.actor.AbstractLoopingActor.runEnhancedWithoutRepliesOnMessages(AbstractLoopingActor.java:293)
+	at groovyx.gpars.actor.AbstractLoopingActor.access$400(AbstractLoopingActor.java:30)
+	at groovyx.gpars.actor.AbstractLoopingActor$1.handleMessage(AbstractLoopingActor.java:93)
+	at groovyx.gpars.util.AsyncMessagingCore.run(AsyncMessagingCore.java:132)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+Sep-08 12:08:48.715 [Actor Thread 3] DEBUG nextflow.Session - Session aborted -- Cause: No signature of method: sun.nio.fs.UnixPath.trim() is applicable for argument types: () values: []
+Possible solutions: tail(), tail(int), tail(int, java.lang.Object), tail(int, java.lang.Object, int), wait(), toUri()
+Sep-08 12:08:48.722 [Actor Thread 3] DEBUG nextflow.Session - The following nodes are still active:
+  [operator] view
+
+Sep-08 12:08:48.725 [Thread-20] DEBUG nextflow.Session - Session await > all process finished
+Sep-08 12:08:48.726 [Thread-20] DEBUG nextflow.Session - Session await > all barriers passed
+Sep-08 12:08:48.732 [Thread-20] WARN  n.processor.TaskPollingMonitor - Killing pending tasks (2)
+Sep-08 12:08:48.803 [Thread-20] DEBUG nextflow.executor.LocalTaskHandler - Unable to kill splitLetters (1) -- command: kill -TERM 22131; exit: 1 
+ bash: line 0: kill: (22131) - No such process
+
+Sep-08 12:08:48.809 [Thread-20] DEBUG nextflow.trace.WorkflowStatsObserver - Workflow completed > WorkflowStats[succeededCount=0; failedCount=0; ignoredCount=0; cachedCount=0; pendingCount=0; submittedCount=0; runningCount=0; retriesCount=0; abortedCount=2; succeedDuration=0ms; failedDuration=0ms; cachedDuration=0ms;loadCpus=0; loadMemory=0; peakRunning=2; peakCpus=2; peakMemory=0; ]
+Sep-08 12:08:48.817 [Thread-20] DEBUG nextflow.CacheDB - Closing CacheDB done
+Sep-08 12:09:41.664 [AWT-EventQueue-0] DEBUG nextflow.Session - Session uuid: 3b94b795-76aa-4c8f-a193-b748cbf1d66a
+Sep-08 12:09:41.672 [AWT-EventQueue-0] DEBUG nextflow.Session - Run name: sleepy_miescher
+Sep-08 12:09:41.672 [AWT-EventQueue-0] DEBUG nextflow.Session - Executor pool size: 4
+Sep-08 12:09:41.673 [AWT-EventQueue-0] DEBUG nextflow.Session - Work-dir: /Users/cwyatt/Desktop/Nextflow_practise/Update_docs_2/dsl2_review/asciidocs/work [Mac OS X]
+Sep-08 12:09:41.675 [AWT-EventQueue-0] WARN  nextflow.executor.ExecutorFactory - Plugin manager not initialised -- Using built-in executors
+Sep-08 12:09:41.679 [AWT-EventQueue-0] DEBUG nextflow.Session - Observer factory: DefaultObserverFactory
+Sep-08 12:09:41.710 [Thread-22] DEBUG nextflow.Session - Session start invoked
+Sep-08 12:09:41.821 [Thread-22] DEBUG nextflow.Session - Workflow process names [dsl1]: convertToUpper, splitLetters
+Sep-08 12:09:41.821 [Thread-22] WARN  nextflow.script.ScriptBinding - `params.greeting` is defined multiple times -- Assignments following the first are ignored
+Sep-08 12:09:41.826 [Thread-22] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Sep-08 12:09:41.826 [Thread-22] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Sep-08 12:09:41.826 [Thread-22] DEBUG nextflow.executor.Executor - [warm up] executor > local
+Sep-08 12:09:41.828 [Thread-22] DEBUG n.processor.LocalPollingMonitor - Creating local task monitor for executor 'local' > cpus=4; memory=4 GB; capacity=4; pollInterval=100ms; dumpInterval=5m
+Sep-08 12:09:41.837 [Thread-22] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Sep-08 12:09:41.837 [Thread-22] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Sep-08 12:09:41.860 [Thread-22] DEBUG nextflow.Session - Session await
+Sep-08 12:09:41.862 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-08 12:09:41.862 [Task submitter] INFO  nextflow.Session - [94/d45c41] Submitted process > splitLetters (1)
+Sep-08 12:09:41.952 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 18; name: splitLetters (1); status: COMPLETED; exit: 0; error: -; workDir: /Users/cwyatt/Desktop/Nextflow_practise/Update_docs_2/dsl2_review/asciidocs/work/94/d45c415d04161b07c3c6cf7fd83f45]
+Sep-08 12:09:41.968 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-08 12:09:41.968 [Task submitter] INFO  nextflow.Session - [d5/c867b3] Submitted process > convertToUpper (1)
+Sep-08 12:09:42.078 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 19; name: convertToUpper (1); status: COMPLETED; exit: 0; error: -; workDir: /Users/cwyatt/Desktop/Nextflow_practise/Update_docs_2/dsl2_review/asciidocs/work/d5/c867b3bed5700a5993d670efeab9c2]
+Sep-08 12:09:42.079 [Thread-22] DEBUG nextflow.Session - Session await > all process finished
+Sep-08 12:09:42.080 [Thread-22] DEBUG nextflow.Session - Session await > all barriers passed
+Sep-08 12:09:42.081 [Thread-22] DEBUG nextflow.trace.WorkflowStatsObserver - Workflow completed > WorkflowStats[succeededCount=2; failedCount=0; ignoredCount=0; cachedCount=0; pendingCount=0; submittedCount=0; runningCount=0; retriesCount=0; abortedCount=0; succeedDuration=48ms; failedDuration=0ms; cachedDuration=0ms;loadCpus=0; loadMemory=0; peakRunning=1; peakCpus=1; peakMemory=0; ]
+Sep-08 12:09:42.087 [Thread-22] DEBUG nextflow.CacheDB - Closing CacheDB done
+Sep-08 12:12:23.784 [Task monitor] DEBUG n.processor.TaskPollingMonitor - No more task to compute -- Execution may be stalled
+Sep-08 12:12:27.850 [AWT-EventQueue-0] DEBUG nextflow.Session - Session uuid: b6e78b01-de25-485c-92c6-3f82948de646
+Sep-08 12:12:27.850 [AWT-EventQueue-0] DEBUG nextflow.Session - Run name: fervent_poisson
+Sep-08 12:12:27.851 [AWT-EventQueue-0] DEBUG nextflow.Session - Executor pool size: 4
+Sep-08 12:12:27.853 [AWT-EventQueue-0] DEBUG nextflow.Session - Work-dir: /Users/cwyatt/Desktop/Nextflow_practise/Update_docs_2/dsl2_review/asciidocs/work [Mac OS X]
+Sep-08 12:12:27.857 [AWT-EventQueue-0] WARN  nextflow.executor.ExecutorFactory - Plugin manager not initialised -- Using built-in executors
+Sep-08 12:12:27.865 [AWT-EventQueue-0] DEBUG nextflow.Session - Observer factory: DefaultObserverFactory
+Sep-08 12:12:27.914 [Thread-24] DEBUG nextflow.Session - Session start invoked
+Sep-08 12:12:28.052 [Thread-24] DEBUG nextflow.Session - Workflow process names [dsl1]: convertToUpper, splitLetters
+Sep-08 12:12:28.053 [Thread-24] WARN  nextflow.script.ScriptBinding - `params.greeting` is defined multiple times -- Assignments following the first are ignored
+Sep-08 12:12:28.066 [Thread-24] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Sep-08 12:12:28.066 [Thread-24] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Sep-08 12:12:28.066 [Thread-24] DEBUG nextflow.executor.Executor - [warm up] executor > local
+Sep-08 12:12:28.068 [Thread-24] DEBUG n.processor.LocalPollingMonitor - Creating local task monitor for executor 'local' > cpus=4; memory=4 GB; capacity=4; pollInterval=100ms; dumpInterval=5m
+Sep-08 12:12:28.088 [Thread-24] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Sep-08 12:12:28.088 [Thread-24] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Sep-08 12:12:28.099 [Thread-24] DEBUG nextflow.Session - Session await
+Sep-08 12:12:28.102 [Actor Thread 10] ERROR nextflow.extension.DataflowHelper - @unknown
+groovy.lang.MissingMethodException: No signature of method: sun.nio.fs.UnixPath.trim() is applicable for argument types: () values: []
+Possible solutions: tail(), tail(int), tail(int, java.lang.Object), tail(int, java.lang.Object, int), wait(), toUri()
+	at org.codehaus.groovy.runtime.ScriptBytecodeAdapter.unwrap(ScriptBytecodeAdapter.java:70)
+	at org.codehaus.groovy.runtime.callsite.PojoMetaClassSite.call(PojoMetaClassSite.java:46)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(CallSiteArray.java:47)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:125)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:130)
+	at ConsoleScript10$_runScript_closure3.doCall(ConsoleScript10:31)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:107)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:323)
+	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(ClosureMetaClass.java:263)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1035)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaClassSite.call(PogoMetaClassSite.java:38)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(CallSiteArray.java:47)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaClassSite.call(PogoMetaClassSite.java:53)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:139)
+	at nextflow.extension.OperatorEx$_view_closure41.doCall(OperatorEx.groovy:1418)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:107)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:323)
+	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(ClosureMetaClass.java:263)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1035)
+	at org.codehaus.groovy.runtime.callsite.PogoMetaClassSite.call(PogoMetaClassSite.java:38)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:139)
+	at nextflow.extension.DataflowHelper$_subscribeImpl_closure2.doCall(DataflowHelper.groovy:289)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:497)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:107)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:323)
+	at org.codehaus.groovy.runtime.metaclass.ClosureMetaClass.invokeMethod(ClosureMetaClass.java:263)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1035)
+	at groovy.lang.Closure.call(Closure.java:412)
+	at groovyx.gpars.dataflow.operator.DataflowOperatorActor.startTask(DataflowOperatorActor.java:120)
+	at groovyx.gpars.dataflow.operator.DataflowOperatorActor.onMessage(DataflowOperatorActor.java:108)
+	at groovyx.gpars.actor.impl.SDAClosure$1.call(SDAClosure.java:43)
+	at groovyx.gpars.actor.AbstractLoopingActor.runEnhancedWithoutRepliesOnMessages(AbstractLoopingActor.java:293)
+	at groovyx.gpars.actor.AbstractLoopingActor.access$400(AbstractLoopingActor.java:30)
+	at groovyx.gpars.actor.AbstractLoopingActor$1.handleMessage(AbstractLoopingActor.java:93)
+	at groovyx.gpars.util.AsyncMessagingCore.run(AsyncMessagingCore.java:132)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+Sep-08 12:12:28.117 [Actor Thread 10] DEBUG nextflow.Session - Session aborted -- Cause: No signature of method: sun.nio.fs.UnixPath.trim() is applicable for argument types: () values: []
+Possible solutions: tail(), tail(int), tail(int, java.lang.Object), tail(int, java.lang.Object, int), wait(), toUri()
+Sep-08 12:12:28.120 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-08 12:12:28.121 [Task submitter] INFO  nextflow.Session - [af/65c745] Submitted process > splitLetters (1)
+Sep-08 12:12:28.131 [Actor Thread 10] DEBUG nextflow.Session - The following nodes are still active:
+[process] convertToUpper
+  status=ACTIVE
+  port 0: (queue) OPEN  ; channel: y
+  port 1: (cntrl) -     ; channel: $
+
+Sep-08 12:12:28.137 [Thread-24] DEBUG nextflow.Session - Session await > all process finished
+Sep-08 12:12:28.138 [Thread-24] DEBUG nextflow.Session - Session await > all barriers passed
+Sep-08 12:12:28.142 [Thread-24] WARN  n.processor.TaskPollingMonitor - Killing pending tasks (1)
+Sep-08 12:12:28.163 [Thread-24] DEBUG nextflow.trace.WorkflowStatsObserver - Workflow completed > WorkflowStats[succeededCount=0; failedCount=0; ignoredCount=0; cachedCount=0; pendingCount=0; submittedCount=1; runningCount=-1; retriesCount=0; abortedCount=0; succeedDuration=0ms; failedDuration=0ms; cachedDuration=0ms;loadCpus=-1; loadMemory=0; peakRunning=0; peakCpus=0; peakMemory=0; ]
+Sep-08 12:12:28.173 [Thread-24] DEBUG nextflow.CacheDB - Closing CacheDB done
+Sep-08 12:15:34.410 [AWT-EventQueue-0] DEBUG nextflow.Session - Session uuid: 22504166-5148-40db-9ed4-0a7b7d32a570
+Sep-08 12:15:34.419 [AWT-EventQueue-0] DEBUG nextflow.Session - Run name: backstabbing_yalow
+Sep-08 12:15:34.419 [AWT-EventQueue-0] DEBUG nextflow.Session - Executor pool size: 4
+Sep-08 12:15:34.420 [AWT-EventQueue-0] DEBUG nextflow.Session - Work-dir: /Users/cwyatt/Desktop/Nextflow_practise/Update_docs_2/dsl2_review/asciidocs/work [Mac OS X]
+Sep-08 12:15:34.422 [AWT-EventQueue-0] WARN  nextflow.executor.ExecutorFactory - Plugin manager not initialised -- Using built-in executors
+Sep-08 12:15:34.426 [AWT-EventQueue-0] DEBUG nextflow.Session - Observer factory: DefaultObserverFactory
+Sep-08 12:15:34.463 [Thread-26] DEBUG nextflow.Session - Session start invoked
+Sep-08 12:15:34.567 [Thread-26] DEBUG nextflow.Session - Workflow process names [dsl1]: convertToUpper, splitLetters
+Sep-08 12:15:34.568 [Thread-26] WARN  nextflow.script.ScriptBinding - `params.greeting` is defined multiple times -- Assignments following the first are ignored
+Sep-08 12:15:34.575 [Thread-26] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Sep-08 12:15:34.575 [Thread-26] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Sep-08 12:15:34.575 [Thread-26] DEBUG nextflow.executor.Executor - [warm up] executor > local
+Sep-08 12:15:34.577 [Thread-26] DEBUG n.processor.LocalPollingMonitor - Creating local task monitor for executor 'local' > cpus=4; memory=4 GB; capacity=4; pollInterval=100ms; dumpInterval=5m
+Sep-08 12:15:34.585 [Thread-26] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Sep-08 12:15:34.585 [Thread-26] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Sep-08 12:15:34.589 [Thread-26] DEBUG nextflow.Session - Session await
+Sep-08 12:15:34.592 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-08 12:15:34.592 [Task submitter] INFO  nextflow.Session - [8d/88762c] Submitted process > splitLetters (1)
+Sep-08 12:15:34.693 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 21; name: splitLetters (1); status: COMPLETED; exit: 0; error: -; workDir: /Users/cwyatt/Desktop/Nextflow_practise/Update_docs_2/dsl2_review/asciidocs/work/8d/88762cad593ab6044b930ee19ec790]
+Sep-08 12:15:34.712 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-08 12:15:34.713 [Task submitter] INFO  nextflow.Session - [ad/880e78] Submitted process > convertToUpper (1)
+Sep-08 12:15:34.719 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-08 12:15:34.720 [Task submitter] INFO  nextflow.Session - [40/4e5988] Submitted process > convertToUpper (2)
+Sep-08 12:15:34.829 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 22; name: convertToUpper (1); status: COMPLETED; exit: 0; error: -; workDir: /Users/cwyatt/Desktop/Nextflow_practise/Update_docs_2/dsl2_review/asciidocs/work/ad/880e783f63891a435fbbb08206a323]
+Sep-08 12:15:34.834 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 23; name: convertToUpper (2); status: COMPLETED; exit: 0; error: -; workDir: /Users/cwyatt/Desktop/Nextflow_practise/Update_docs_2/dsl2_review/asciidocs/work/40/4e59883c883f82d8d26397a02b6115]
+Sep-08 12:15:34.837 [Thread-26] DEBUG nextflow.Session - Session await > all process finished
+Sep-08 12:15:34.838 [Thread-26] DEBUG nextflow.Session - Session await > all barriers passed
+Sep-08 12:15:34.839 [Thread-26] DEBUG nextflow.trace.WorkflowStatsObserver - Workflow completed > WorkflowStats[succeededCount=3; failedCount=0; ignoredCount=0; cachedCount=0; pendingCount=0; submittedCount=0; runningCount=0; retriesCount=0; abortedCount=0; succeedDuration=85ms; failedDuration=0ms; cachedDuration=0ms;loadCpus=0; loadMemory=0; peakRunning=2; peakCpus=2; peakMemory=0; ]
+Sep-08 12:15:34.846 [Thread-26] DEBUG nextflow.CacheDB - Closing CacheDB done
+Sep-08 12:17:23.866 [Task monitor] DEBUG n.processor.TaskPollingMonitor - No more task to compute -- Execution may be stalled
+Sep-08 12:22:23.858 [Task monitor] DEBUG n.processor.TaskPollingMonitor - No more task to compute -- Execution may be stalled
+Sep-08 12:23:29.366 [AWT-EventQueue-0] DEBUG nextflow.Session - Session uuid: 9acfc113-5a68-4352-aba7-084017ced2d4
+Sep-08 12:23:29.377 [AWT-EventQueue-0] DEBUG nextflow.Session - Run name: sharp_pike
+Sep-08 12:23:29.377 [AWT-EventQueue-0] DEBUG nextflow.Session - Executor pool size: 4
+Sep-08 12:23:29.382 [AWT-EventQueue-0] DEBUG nextflow.Session - Work-dir: /Users/cwyatt/Desktop/Nextflow_practise/Update_docs_2/dsl2_review/asciidocs/work [Mac OS X]
+Sep-08 12:23:29.383 [AWT-EventQueue-0] WARN  nextflow.executor.ExecutorFactory - Plugin manager not initialised -- Using built-in executors
+Sep-08 12:23:29.391 [AWT-EventQueue-0] DEBUG nextflow.Session - Observer factory: DefaultObserverFactory
+Sep-08 12:23:29.437 [Thread-28] DEBUG nextflow.Session - Session start invoked
+Sep-08 12:23:29.570 [Thread-28] DEBUG nextflow.Session - Workflow process names [dsl1]: convertToUpper, splitLetters
+Sep-08 12:23:29.570 [Thread-28] WARN  nextflow.script.ScriptBinding - `params.greeting` is defined multiple times -- Assignments following the first are ignored
+Sep-08 12:23:29.587 [Thread-28] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Sep-08 12:23:29.587 [Thread-28] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Sep-08 12:23:29.588 [Thread-28] DEBUG nextflow.executor.Executor - [warm up] executor > local
+Sep-08 12:23:29.590 [Thread-28] DEBUG n.processor.LocalPollingMonitor - Creating local task monitor for executor 'local' > cpus=4; memory=4 GB; capacity=4; pollInterval=100ms; dumpInterval=5m
+Sep-08 12:23:29.617 [Thread-28] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Sep-08 12:23:29.618 [Thread-28] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Sep-08 12:23:29.627 [Thread-28] DEBUG nextflow.Session - Session await
+Sep-08 12:23:29.653 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-08 12:23:29.654 [Task submitter] INFO  nextflow.Session - [bd/3e48ef] Submitted process > splitLetters (1)
+Sep-08 12:23:29.774 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 24; name: splitLetters (1); status: COMPLETED; exit: 0; error: -; workDir: /Users/cwyatt/Desktop/Nextflow_practise/Update_docs_2/dsl2_review/asciidocs/work/bd/3e48efff3209e24462948bdc136498]
+Sep-08 12:23:29.794 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-08 12:23:29.794 [Task submitter] INFO  nextflow.Session - [82/eb2f45] Submitted process > convertToUpper (1)
+Sep-08 12:23:29.895 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 25; name: convertToUpper (1); status: COMPLETED; exit: 0; error: -; workDir: /Users/cwyatt/Desktop/Nextflow_practise/Update_docs_2/dsl2_review/asciidocs/work/82/eb2f45d47fd28a8a3a521cb68f8bd6]
+Sep-08 12:23:29.912 [Thread-28] DEBUG nextflow.Session - Session await > all process finished
+Sep-08 12:23:29.913 [Thread-28] DEBUG nextflow.Session - Session await > all barriers passed
+Sep-08 12:23:29.915 [Thread-28] DEBUG nextflow.trace.WorkflowStatsObserver - Workflow completed > WorkflowStats[succeededCount=2; failedCount=0; ignoredCount=0; cachedCount=0; pendingCount=0; submittedCount=0; runningCount=0; retriesCount=0; abortedCount=0; succeedDuration=99ms; failedDuration=0ms; cachedDuration=0ms;loadCpus=0; loadMemory=0; peakRunning=1; peakCpus=1; peakMemory=0; ]
+Sep-08 12:23:29.920 [Thread-28] DEBUG nextflow.CacheDB - Closing CacheDB done
+Sep-08 12:27:23.896 [Task monitor] DEBUG n.processor.TaskPollingMonitor - No more task to compute -- Execution may be stalled
+Sep-08 12:32:23.918 [Task monitor] DEBUG n.processor.TaskPollingMonitor - No more task to compute -- Execution may be stalled
+Sep-08 12:37:14.391 [AWT-EventQueue-0] DEBUG nextflow.Session - Session uuid: 530795f2-e28e-4cef-bd4e-d2d03c974296
+Sep-08 12:37:14.394 [AWT-EventQueue-0] DEBUG nextflow.Session - Run name: golden_meitner
+Sep-08 12:37:14.395 [AWT-EventQueue-0] DEBUG nextflow.Session - Executor pool size: 4
+Sep-08 12:37:14.398 [AWT-EventQueue-0] DEBUG nextflow.Session - Work-dir: /Users/cwyatt/Desktop/Nextflow_practise/Update_docs_2/dsl2_review/asciidocs/work [Mac OS X]
+Sep-08 12:37:14.400 [AWT-EventQueue-0] WARN  nextflow.executor.ExecutorFactory - Plugin manager not initialised -- Using built-in executors
+Sep-08 12:37:14.406 [AWT-EventQueue-0] DEBUG nextflow.Session - Observer factory: DefaultObserverFactory
+Sep-08 12:37:14.453 [Thread-30] DEBUG nextflow.Session - Session start invoked
+Sep-08 12:37:14.622 [Thread-30] DEBUG nextflow.Session - Workflow process names [dsl1]: convertToUpper, splitLetters
+Sep-08 12:37:14.623 [Thread-30] WARN  nextflow.script.ScriptBinding - `params.greeting` is defined multiple times -- Assignments following the first are ignored
+Sep-08 12:37:14.635 [Thread-30] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Sep-08 12:37:14.635 [Thread-30] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Sep-08 12:37:14.635 [Thread-30] DEBUG nextflow.executor.Executor - [warm up] executor > local
+Sep-08 12:37:14.637 [Thread-30] DEBUG n.processor.LocalPollingMonitor - Creating local task monitor for executor 'local' > cpus=4; memory=4 GB; capacity=4; pollInterval=100ms; dumpInterval=5m
+Sep-08 12:37:14.656 [Thread-30] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Sep-08 12:37:14.656 [Thread-30] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Sep-08 12:37:14.669 [Thread-30] DEBUG nextflow.Session - Session await
+Sep-08 12:37:14.678 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-08 12:37:14.679 [Task submitter] INFO  nextflow.Session - [04/309dc8] Submitted process > splitLetters (1)
+Sep-08 12:37:14.787 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 26; name: splitLetters (1); status: COMPLETED; exit: 0; error: -; workDir: /Users/cwyatt/Desktop/Nextflow_practise/Update_docs_2/dsl2_review/asciidocs/work/04/309dc8ab12ad07829f400e16e94a09]
+Sep-08 12:37:14.804 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-08 12:37:14.804 [Task submitter] INFO  nextflow.Session - [9c/ee2d4a] Submitted process > convertToUpper (2)
+Sep-08 12:37:14.810 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-08 12:37:14.811 [Task submitter] INFO  nextflow.Session - [8e/c3b0dc] Submitted process > convertToUpper (1)
+Sep-08 12:37:14.944 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 28; name: convertToUpper (2); status: COMPLETED; exit: 0; error: -; workDir: /Users/cwyatt/Desktop/Nextflow_practise/Update_docs_2/dsl2_review/asciidocs/work/9c/ee2d4ab8ea11bec8d54de5ed1985fb]
+Sep-08 12:37:14.951 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 27; name: convertToUpper (1); status: COMPLETED; exit: 0; error: -; workDir: /Users/cwyatt/Desktop/Nextflow_practise/Update_docs_2/dsl2_review/asciidocs/work/8e/c3b0dc9f5b75a70f28d9bb5a40408d]
+Sep-08 12:37:14.960 [Thread-30] DEBUG nextflow.Session - Session await > all process finished
+Sep-08 12:37:14.960 [Thread-30] DEBUG nextflow.Session - Session await > all barriers passed
+Sep-08 12:37:14.963 [Thread-30] DEBUG nextflow.trace.WorkflowStatsObserver - Workflow completed > WorkflowStats[succeededCount=3; failedCount=0; ignoredCount=0; cachedCount=0; pendingCount=0; submittedCount=0; runningCount=0; retriesCount=0; abortedCount=0; succeedDuration=168ms; failedDuration=0ms; cachedDuration=0ms;loadCpus=0; loadMemory=0; peakRunning=2; peakCpus=2; peakMemory=0; ]
+Sep-08 12:37:14.972 [Thread-30] DEBUG nextflow.CacheDB - Closing CacheDB done
+Sep-08 12:37:23.912 [Task monitor] DEBUG n.processor.TaskPollingMonitor - No more task to compute -- Execution may be stalled
+Sep-08 12:37:48.005 [AWT-EventQueue-0] DEBUG nextflow.Session - Session uuid: 6cd8bee7-253e-448e-91ca-dea4942031e5
+Sep-08 12:37:48.013 [AWT-EventQueue-0] DEBUG nextflow.Session - Run name: infallible_boyd
+Sep-08 12:37:48.013 [AWT-EventQueue-0] DEBUG nextflow.Session - Executor pool size: 4
+Sep-08 12:37:48.014 [AWT-EventQueue-0] DEBUG nextflow.Session - Work-dir: /Users/cwyatt/Desktop/Nextflow_practise/Update_docs_2/dsl2_review/asciidocs/work [Mac OS X]
+Sep-08 12:37:48.014 [AWT-EventQueue-0] WARN  nextflow.executor.ExecutorFactory - Plugin manager not initialised -- Using built-in executors
+Sep-08 12:37:48.016 [AWT-EventQueue-0] DEBUG nextflow.Session - Observer factory: DefaultObserverFactory
+Sep-08 12:37:48.035 [Thread-32] DEBUG nextflow.Session - Session start invoked
+Sep-08 12:37:48.112 [Thread-32] DEBUG nextflow.Session - Workflow process names [dsl1]: convertToUpper, splitLetters
+Sep-08 12:37:48.112 [Thread-32] WARN  nextflow.script.ScriptBinding - `params.greeting` is defined multiple times -- Assignments following the first are ignored
+Sep-08 12:37:48.116 [Thread-32] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Sep-08 12:37:48.116 [Thread-32] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Sep-08 12:37:48.117 [Thread-32] DEBUG nextflow.executor.Executor - [warm up] executor > local
+Sep-08 12:37:48.118 [Thread-32] DEBUG n.processor.LocalPollingMonitor - Creating local task monitor for executor 'local' > cpus=4; memory=4 GB; capacity=4; pollInterval=100ms; dumpInterval=5m
+Sep-08 12:37:48.125 [Thread-32] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Sep-08 12:37:48.125 [Thread-32] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Sep-08 12:37:48.131 [Thread-32] DEBUG nextflow.Session - Session await
+Sep-08 12:37:48.140 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-08 12:37:48.141 [Task submitter] INFO  nextflow.Session - [ec/a0d2b8] Submitted process > splitLetters (1)
+Sep-08 12:37:48.217 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 29; name: splitLetters (1); status: COMPLETED; exit: 0; error: -; workDir: /Users/cwyatt/Desktop/Nextflow_practise/Update_docs_2/dsl2_review/asciidocs/work/ec/a0d2b84c4b665a3ba828bab22bfc08]
+Sep-08 12:37:48.226 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-08 12:37:48.226 [Task submitter] INFO  nextflow.Session - [f3/67598d] Submitted process > convertToUpper (2)
+Sep-08 12:37:48.232 [Task submitter] DEBUG nextflow.executor.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Sep-08 12:37:48.233 [Task submitter] INFO  nextflow.Session - [68/937090] Submitted process > convertToUpper (1)
+Sep-08 12:37:48.326 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 31; name: convertToUpper (2); status: COMPLETED; exit: 0; error: -; workDir: /Users/cwyatt/Desktop/Nextflow_practise/Update_docs_2/dsl2_review/asciidocs/work/f3/67598d0f173f7df66563394ae2cb85]
+Sep-08 12:37:48.330 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 30; name: convertToUpper (1); status: COMPLETED; exit: 0; error: -; workDir: /Users/cwyatt/Desktop/Nextflow_practise/Update_docs_2/dsl2_review/asciidocs/work/68/9370902a41d3aa3da1e99ec8d77338]
+Sep-08 12:37:48.337 [Thread-32] DEBUG nextflow.Session - Session await > all process finished
+Sep-08 12:37:48.338 [Thread-32] DEBUG nextflow.Session - Session await > all barriers passed
+Sep-08 12:37:48.340 [Thread-32] DEBUG nextflow.trace.WorkflowStatsObserver - Workflow completed > WorkflowStats[succeededCount=3; failedCount=0; ignoredCount=0; cachedCount=0; pendingCount=0; submittedCount=0; runningCount=0; retriesCount=0; abortedCount=0; succeedDuration=22ms; failedDuration=0ms; cachedDuration=0ms;loadCpus=0; loadMemory=0; peakRunning=2; peakCpus=2; peakMemory=0; ]
+Sep-08 12:37:48.348 [Thread-32] DEBUG nextflow.CacheDB - Closing CacheDB done
+Sep-08 12:42:23.982 [Task monitor] DEBUG n.processor.TaskPollingMonitor - No more task to compute -- Execution may be stalled

@@ -3,24 +3,23 @@
 == Requirements
 
 Nextflow can be used on any POSIX compatible system (Linux, OS X, etc.).
-It requires Bash and
-http://www.oracle.com/technetwork/java/javase/downloads/index.html[Java
-8 (or later, up to 15)] to be installed.
+
+It requires Bash and http://www.oracle.com/technetwork/java/javase/downloads/index.html[Java 8 (or later, up to 15)] to be installed.
 
 Optional requirements for this workshop:
 
 * https://www.docker.com/[Docker] engine 1.10.x (or later)
-* https://github.com/sylabs/singularity[Singularity] 2.5.x (or later, optional)
-* https://conda.io/[Conda] 4.5 (or later, optional)
-* http://www.graphviz.org/[Graphviz] (optional)
-* https://aws.amazon.com/cli/[AWS CLI] (optional)
-* AWS Batch computing environment properly configured (optional)
+* https://github.com/sylabs/singularity[Singularity] 2.5.x (or later)
+* https://conda.io/[Conda] 4.5 (or later)
+* http://www.graphviz.org/[Graphviz] 
+* https://aws.amazon.com/cli/[AWS CLI] 
+* AWS Batch computing environment properly configured 
 
 
 
 == Training material 
 
-Download the training material copy & pasting the following command 
+Download the training material by copy & pasting the following command 
 in the terminal:
 
 [source,bash,linenums]
@@ -28,7 +27,7 @@ in the terminal:
 curl https://s3-eu-west-1.amazonaws.com/seqeralabs.com/public/nf-training.tar.gz | tar xvz
 ----
 
-Or in alternative if you have `wget` instead of curl:
+Or alternatively if you have `wget` instead of curl:
 
 [source,bash,linenums]
 ----
@@ -48,7 +47,7 @@ source setup/all.sh
 
 == Nextflow installation 
 
-Install the latest version of Nextflow copy & pasting the following 
+Install the latest version of Nextflow by copy & pasting the following 
 snippet in a terminal window: 
 
 [source,bash,linenums]

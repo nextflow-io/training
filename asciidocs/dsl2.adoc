@@ -1,0 +1,14 @@
+= DSL2 is our new syntax to improve readability and functionality into modules.
+
+== Basic concepts
+
+DSL2 is  
+
+
+DSL2 core features are:
+
+* 
+* 
+* 
+
+=== Processes and channels
