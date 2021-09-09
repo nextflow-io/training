@@ -77,7 +77,6 @@ is simplifies the writing of code and is more approachable.
 Copy the following example into your favourite text editor and save it
 to a file named `hello.nf` :
 
-[source,nextflow,linenums]
 ----
 #!/usr/bin/env nextflow
 
@@ -129,14 +128,12 @@ the `view` operator.
 
 Execute the script by entering the following command in your terminal:
 
-[source,cmd]
 ----
 nextflow run hello.nf
 ----
 
 It will output something similar to the text shown below:
 
-[source,cmd]
 ----
 N E X T F L O W  ~  version 20.10.0
 Launching `hello.nf` [marvelous_plateau] - revision: 63f8ad7155
@@ -184,7 +181,6 @@ For the sake of this tutorial, modify the `convertToUpper` process in
 the previous example, replacing the process script with the string
 `rev $y`, so that the process looks like this:
 
-[source,nextflow,linenums]
 ----
 process convertToUpper {
 
