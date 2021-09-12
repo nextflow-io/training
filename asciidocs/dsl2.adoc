@@ -392,3 +392,110 @@ Process outputs of type set have to be replaced with tuple.
 Process output option mode flatten is not available anymore. Replace it using the flatten operator on the corresponding output channel.
 
 Anonymous and unwrapped includes are not supported anymore. Replace it with a explicit module inclusion. For example:
+
+----
+include './some/library'
+include bar from './other/library'
+
+workflow {
+  foo()
+  bar()
+}
+----
+
+Should be replaced with:
+
+----
+include { foo } from './some/library'
+include { bar } from './other/library'
+
+workflow {
+  foo()
+  bar()
+}
+----
+
+The use of unqualified value and file elements into input tuples is not allowed anymore. Replace them with a corresponding val or path qualifier:
+
+----
+process foo {
+input:
+  tuple X, 'some-file.bam'
+ script:
+   '''
+   your_command
+   '''
+}
+----
+
+Use:
+
+----
+process foo {
+input:
+  tuple val(X), path('some-file.bam')
+ script:
+   '''
+   your_command --in $X some-file.bam
+   '''
+}
+----
+
+The use of unqualified value and file elements into output tuples is not allowed anymore. Replace them with a corresponding val or path qualifier:
+
+----
+process foo {
+output:
+  tuple X, 'some-file.bam'
+
+script:
+   X = 'some value'
+   '''
+   your_command > some-file.bam
+   '''
+}
+----
+Use:
+
+----
+process foo {
+output:
+  tuple val(X), path('some-file.bam')
+
+script:
+   X = 'some value'
+   '''
+   your_command > some-file.bam
+   '''
+}
+----
+
+Operator bind has been deprecated by DSL2 syntax
+
+Operator operator << has been deprecated by DSL2 syntax.
+
+Operator choice has been deprecated by DSL2 syntax. Use branch instead.
+
+Operator close has been deprecated by DSL2 syntax.
+
+Operator create has been deprecated by DSL2 syntax.
+
+Operator countBy has been deprecated by DSL2 syntax.
+
+Operator into has been deprecated by DSL2 syntax since it’s not needed anymore.
+
+Operator fork has been renamed to multiMap.
+
+Operator groupBy has been deprecated by DSL2 syntax. Replace it with groupTuple
+
+Operator print and println have been deprecated by DSL2 syntax. Use view instead.
+
+Operator merge has been deprecated by DSL2 syntax. Use join instead.
+
+Operator separate has been deprecated by DSL2 syntax.
+
+Operator spread has been deprecated with DSL2 syntax. Replace it with combine.
+
+Operator route has been deprecated by DSL2 syntax.
+
+
