@@ -16,9 +16,9 @@ DSL2 core features include:
 * Splitting of processes into modules that are portable between pipelines/workflows
 
 
-=== Process
+== Process
 
-== Process definition
+=== Process definition
 
 The new DSL separates the definition of a process from its invocation. The process definition follows the usual syntax as described in the process documentation. The only difference is that the `from` and `into` channel declaration has to be omitted.
 
@@ -82,7 +82,7 @@ workflow {
 In this example, we have added the second process 'bar', which again is called within the latter workflow directive, where its input comes from a specified Path. 
 
 
-== Process composition
+=== Process composition
 Processes having matching input-output declaration can be composed so that the output of the first process is passed as input to the following process. Taking in consideration the previous process definition, it’s possible to write the following:
 
 
@@ -92,7 +92,7 @@ workflow {
 }
 ----
 
-== Process outputs
+=== Process outputs
 A process output can also be accessed using the `out` attribute for the respective process object. For example:
 
 
@@ -106,7 +106,7 @@ workflow {
 
 When a process defines two or more output channels, each of them can be accessed using the array element operator e.g. `out[0]`, `out[1]`, etc. or using named outputs (see below).
 
-== Process named output
+=== Process named output
 The process output definition allows the use of the `emit` option to define a name identifier that can be used to reference the channel in the external scope. For example:
 
 
@@ -126,7 +126,7 @@ workflow {
 }
 ----
 
-== Process named stdout
+=== Process named stdout
 The process can name stdout using the `emit` option:
 
 
@@ -149,9 +149,9 @@ workflow {
 }
 ----
 
-=== Workflow
+== Workflow
 
-== Workflow definition
+=== Workflow definition
 The `workflow` keyword allows the definition of sub-workflow components that enclose the invocation of one or more processes and operators:
 
 
@@ -164,7 +164,7 @@ workflow my_pipeline {
 
 For example, the above snippet defines a workflow component, named `my_pipeline`, that can be invoked from another workflow component definition as any other function or process i.e. `my_pipeline()`.
 
-== Workflow parameters
+=== Workflow parameters
 A workflow component can access any variable and parameter defined in the outer scope:
 
 ----
@@ -178,7 +178,7 @@ workflow my_pipeline {
 }
 ----
 
-== Workflow inputs
+=== Workflow inputs
 A workflow component can declare one or more input channels using the take keyword. For example:
 
 ----
@@ -200,7 +200,7 @@ workflow {
 ----
 NOTE: Workflow inputs are by definition channel data structures. If a basic data type is provided instead, ie. number, string, list, etc. it’s implicitly converted to a channel value (ie. non-consumable).
 
-== Workflow outputs
+=== Workflow outputs
 A workflow component can declare one or more out channels using the emit keyword. For example:
 
 ----
@@ -228,14 +228,14 @@ workflow my_pipeline {
 ----
 Then, the result of the above snippet can accessed using my_pipeline.out.my_data.
 
-== Implicit workflow
+=== Implicit workflow
 A workflow definition which does not declare any name is assumed to be the main workflow and it’s implicitly executed. Therefore it’s the entry point of the workflow application.
 
 NOTE: Implicit workflow definition is ignored when a script is included as module. This allows the writing of a workflow script that can be used either as a library module and as application script.
 
 TIP: An alternative workflow entry can be specified using the -entry command line option.
 
-== Workflow composition
+=== Workflow composition
 Workflows defined in your script or imported by a module inclusion can be invoked and composed as any other process in your application.
 
 ----
@@ -269,12 +269,12 @@ NOTE: Nested workflow execution determines an implicit scope. Therefore the same
 
 TIP : The process fully qualified name can be used as a valid process selector in the nextflow.config file and it has priority over the process simple name.
 
-=== Modules
+== Modules
 The new DSL allows the definition module scripts that can be included and shared across workflow applications.
 
 A module can contain the definition of a function, process and workflow definitions as described in the above sections.
 
-== Modules include
+=== Modules include
 A component defined in a module script can be imported into another Nextflow script using the include keyword.
 
 For example:
@@ -294,7 +294,7 @@ Nextflow implicitly looks for the script file ./some/module.nf resolving the pat
 
 NOTE: Relative paths must begin with the ./ prefix.
 
-== Multiple inclusions
+=== Multiple inclusions
 A Nextflow script allows the inclusion of any number of modules. When multiple components need to be included from the some module script, the component names can be specified in the same inclusion using the curly brackets notation as shown below:
 
 ----
@@ -307,7 +307,7 @@ workflow {
 }
 ----
 
-== Module aliases
+=== Module aliases
 When including a module component it’s possible to specify a name alias. This allows the inclusion and the invocation of the same component multiple times in your script using different names. For example:
 
 ----
@@ -330,7 +330,7 @@ workflow {
 }
 ----
 
-== Module parameters
+=== Module parameters
 A module script can define one or more parameters using the same syntax of a Nextflow workflow script:
 
 ----
@@ -381,7 +381,7 @@ Ciao world!
 
 Finally the include option params allows the specification of one or more parameters without inheriting any value from the external environment.
 
-=== DSL2 migration notes
+== DSL2 migration notes
 
 DSL2 final version is activated using the declaration nextflow.enable.dsl=2 in place of nextflow.preview.dsl=2.
 
