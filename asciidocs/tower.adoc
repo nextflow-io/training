@@ -20,7 +20,7 @@ TIP: https://tower.nf/[Sign] up to try Tower for free or request a https://meeti
 
 You can use Tower via either the **online GUI**, using the `-with-tower` option with the **Nextflow run command**, or through the **API**.
 
-## Via online GUI
+=== Via online GUI
 
 **1.** Create an account and login into Tower, available free of charge, at https://tower.nf[tower.nf].
 
@@ -28,7 +28,7 @@ You can use Tower via either the **online GUI**, using the `-with-tower` option 
 
 **3.** Start https://help.tower.nf/launch/launchpad/[launching pipelines].
 
-## Via Nextflow run command
+=== Via Nextflow run command
 
 Create an account and login into Tower.
 
@@ -36,26 +36,22 @@ Create an account and login into Tower.
 
   You can access your tokens from the The *Settings* drop-down menu :
 
-![](_images/usage_create_token.png)
-
+image::usage_create_token.png[]
 
 **2. Name your token**
 
-![](_images/usage_name_token.png)
-
+image::usage_name_token.png[]
 
 **3. Save your token safely**
 
-  Copy and keep your new token in a safe place.
+NOTE: Copy and keep your new token in a safe place.
 
-![](_images/usage_token.png)
-
+image::usage_token.png[]
 
 **4. Export your token**
 
 Once your token has been created, open a terminal and type:
 
-[source,nextflow,linenums]
 ----
 export TOWER_ACCESS_TOKEN=eyxxxxxxxxxxxxxxxQ1ZTE=
 export NXF_VER=20.10.0
@@ -67,7 +63,6 @@ NOTE: "check your Nextflow version". Bearer token requires Nextflow version 20.1
 
 To submit a pipeline to a https://help.tower.nf/getting-started/workspace/[Workspace] using the Nextflow command line tool, add the workspace ID to your environment. For example
 
-[source,nextflow,linenums]
 ----
 export TOWER_WORKSPACE_ID=000000000000000
 ----
@@ -78,7 +73,7 @@ The workspace ID can be found on the organisation's Workspaces overview page.
 
 Run your Nextflow workflows as usual with the addition of the `-with-tower` command:
 
-[source,nextflow,linenums]
+
 ----
 nextflow run hello.nf -with-tower
 ----
@@ -87,6 +82,7 @@ You will see and be able to monitor your **Nextflow jobs** in Tower.
 
 To configure and execute Nextflow jobs in **Cloud environments**, visit the https://help.tower.nf/compute-envs/overview/[Compute environments section].
 
-## API
+=== API
 
 To learn more about using the Tower API, visit to the https://help.tower.nf/api/overview/[API section] in this documentation.
+
