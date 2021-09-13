@@ -13,13 +13,13 @@ Nextflow extends this approach, adding the ability to define complex program int
 high-level parallel computational environment based on the dataflow programming model. Nextflow
 core features are:
 
-* enable workflows portability & reproducibility
-* simplify parallelization and large scale deployment
-* easily integrate existing tools, systems & industry standards
+* workflow portability & reproducibility
+* scalability of parallelization and deployment
+* integration of existing tools, systems & industry standards
 
 === Processes and channels
 
-In practice a Nextflow pipeline script is made by joining together different processes.
+In practice a Nextflow pipeline is made by joining together different processes.
 Each process can be written in any scripting language that can be executed by the Linux platform
 (Bash, Perl, Ruby, Python, etc.).
 
@@ -30,7 +30,7 @@ _channels_ in Nextflow.
 Any process can define one or more channels as input and output. The interaction between these processes,
 and ultimately the pipeline execution flow itself, is implicitly defined by these input and output declarations.
 
-image::channel-process.png[]
+image::channel-process.v2.png[]
 
 === Execution abstraction
 
@@ -48,16 +48,9 @@ the target execution platform in the configuration file.
 
 It provides out-of-the-box support for major batch schedulers and cloud platforms:
 
-* Grid engine (Open/Sun/Univa/Altair)
-* IBM Platform LSF
-* Linux SLURM
-* PBS Works
-* Torque
-* Moab
-* Amazon Batch
-* Azure Batch
-* Google Life Sciences
-* Kubernetes
+image::batch_schedulers.small.png[]
+plus: Torque, Moab and Google Life Sciences
+
 
 === Scripting language
 
@@ -72,7 +65,7 @@ a declarative approach.
 
 In practical terms Nextflow scripting is an extension of the https://groovy-lang.org/[Groovy programming language],
 which in turn is a super-set of the Java programming language. Groovy can be considered as Python for Java in that
-is simplifies the writing of code and is more approachable.
+it simplifies the writing of code and is more approachable.
 
 
 
@@ -85,15 +78,16 @@ to a file named `hello.nf` :
 ----
 #!/usr/bin/env nextflow
 
-nextflow.enable.dsl=2
+params.greeting  = 'Hello world!'
+greeting_ch = Channel.from(params.greeting)
 
 process splitLetters {
 
     input:
-    val x 
+    val x from greeting_ch
 
     output:
-    file 'chunk_*' 
+    file 'chunk_*' into letters
 
     """
     printf '$x' | split -b 6 - chunk_
@@ -103,38 +97,28 @@ process splitLetters {
 process convertToUpper {
 
     input:
-    file y
+    file y from letters.flatten()
 
     output:
-    stdout 
+    stdout into result
 
     """
-    cat $y | tr '[a-z]' '[A-Z]'
+    cat $y | tr '[a-z]' '[A-Z]' 
     """
 }
 
-params.greeting  = 'Hello world!'
-greeting_ch = Channel.from(params.greeting)
-
-workflow {
-
-    letters_ch = splitLetters(greeting_ch)
-    uppercase_ch = convertToUpper( letters_ch.flatten() )
-    uppercase_ch.view{ it.trim() }
-
-}
+result.view{ it }
 ----
 
-This script first defines two processes. The first splits a string into files
-containing chunks of 6 characters. The second accepts the files and transforms their 
-contents to uppercase letters. Next we specify a parameter called "greeting", 
+This script defines first specifies a parameter called "greeting", 
 which we put into a channel "greeting_ch" to be used with the executed workflow. 
 
-In the workflow execution section, first the greeting_ch is split by the 
-splitLetters process putting the output in the letters_ch (letters channel). Next, 
-the letter_ch is processed with the convertToUpper process. The resulting strings 
-are emitted to the standard output in the uppercase_ch which is printed by the 
-`view` operator. 
+Next, two processes are called. The first splits a string into files
+containing chunks of 6 characters ("Hello " and "World!"). The second receives these two files and
+transforms their contents to uppercase letters. The resulting strings
+are emitted on the `result` channel and the final output is printed by
+the `view` operator.
+
 
 
 Execute the script by entering the following command in your terminal:
@@ -169,6 +153,7 @@ processing the second split (the chunk world!).
 Thus, it is perfectly possible that you will get the final result
 printed out in a different order:
 
+[source,cmd]
 ....
 WORLD!
 HELLO
@@ -199,10 +184,10 @@ the previous example, replacing the process script with the string
 process convertToUpper {
 
     input:
-    file y
+    file y from letters.flatten()
 
     output:
-    stdout 
+    stdout into result
 
     """
     rev $y
@@ -213,12 +198,14 @@ process convertToUpper {
 Then save the file with the same name, and execute it by adding the
 `-resume` option to the command line:
 
+[source,cmd]
 ----
 nextflow run hello.nf -resume
 ----
 
 It will print output similar to this:
 
+[source,cmd]
 ----
 N E X T F L O W  ~  version 20.10.0
 Launching `hello.nf` [naughty_tuckerman] - revision: 22eaa07be4
@@ -237,7 +224,7 @@ printing the reversed strings.
 
 TIP: The pipeline results are cached by default in the directory `$PWD/work`.
 Depending on your script, this folder can take of lot of disk space.
-If your are sure you won't resume your pipeline execution, clean this folder periodically.
+If you are sure you won't resume your pipeline execution, clean this folder periodically.
 
 
 == Pipeline parameters
@@ -250,6 +237,7 @@ double dash character, i.e. `--paramName`
 For the sake of this tutorial, you can try to execute the previous
 example specifying a different input string parameter, as shown below:
 
+[source,cmd]
 ----
 nextflow run hello.nf --greeting 'Bonjour le monde!'
 ----
@@ -257,6 +245,7 @@ nextflow run hello.nf --greeting 'Bonjour le monde!'
 The string specified on the command line will override the default value
 of the parameter. The output will look like this:
 
+[source,cmd]
 ----
 N E X T F L O W  ~  version 20.10.0
 Launching `hello.nf` [wise_stallman] - revision: 22eaa07be4
