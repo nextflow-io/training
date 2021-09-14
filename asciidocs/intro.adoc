@@ -114,12 +114,12 @@ This script defines first specifies a parameter called "greeting",
 which we put into a channel "greeting_ch" to be used with the executed workflow. 
 
 Next, two processes are called. The first splits a string into files
-containing chunks of 6 characters ("Hello " and "World!"). The second receives these two files and
+containing chunks of 6 characters ("Hello " and "world!"). The second receives these two files and
 transforms their contents to uppercase letters. The resulting strings
 are emitted on the `result` channel and the final output is printed by
 the `view` operator.
 
-
+image::helloworlddiagram.png[]
 
 Execute the script by entering the following command in your terminal:
 
