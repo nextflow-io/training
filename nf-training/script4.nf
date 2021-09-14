@@ -1,5 +1,3 @@
-nextflow.enable.dsl=2
-
 /* 
  * pipeline input parameters 
  */
@@ -23,44 +21,36 @@ log.info """\
  * given the transcriptome file
  */
 process index {
-
+    
     input:
-    path transcriptome
-
+    path transcriptome from params.transcriptome
+     
     output:
-    path 'index'
+    path 'index' into index_ch
 
-    script:
+    script:       
     """
     salmon index --threads $task.cpus -t $transcriptome -i index
     """
 }
 
-process quantification {
-     
-    input:
-    path index 
-    tuple val(sample_id), path(reads)
- 
-    output:
-    path "$sample_id"
- 
-    script:
-    """
-    salmon quant --threads $task.cpus --libType=U -i $index -1 ${reads[0]} -2 ${reads[1]} -o $sample_id
-    """
-}
 
-
-
-workflow {
-
-    index_ch = index(Channel.from(params.transcriptome))
-
-    Channel
+Channel 
     .fromFilePairs( params.reads, checkIfExists: true )
     .set { read_pairs_ch } 
 
-    quant_ch = quantification(index_ch, read_pairs_ch)
-
+process quantification {
+     
+    input:
+    path index from index_ch
+    tuple pair_id, path(reads) from read_pairs_ch
+ 
+    output:
+    path pair_id into quant_ch
+ 
+    script:
+    """
+    salmon quant --threads $task.cpus --libType=U -i $index -1 ${reads[0]} -2 ${reads[1]} -o $pair_id
+    """
 }
+

@@ -40,23 +40,22 @@ process quantification {
      
     input:
     path index 
-    tuple val(pair_id), path(reads)
+    tuple val(sample_id), path(reads)
  
     output:
     path "$sample_id"
  
     script:
     """
-    salmon quant --threads $task.cpus --libType=U -i $index -1 ${reads[0]} -2 ${reads[1]} -o $pair_id
+    salmon quant --threads $task.cpus --libType=U -i $index -1 ${reads[0]} -2 ${reads[1]} -o $sample_id
     """
 }
-
 
 process fastqc {
     tag "FASTQC on $sample_id"
 
     input:
-    tuple sample_id, path(reads) 
+    tuple val(sample_id), path(reads)
 
     output:
     path "fastqc_${sample_id}_logs"
@@ -65,9 +64,23 @@ process fastqc {
     """
     mkdir fastqc_${sample_id}_logs
     fastqc -o fastqc_${sample_id}_logs -f fastq -q ${reads}
-    """  
+    """
 }  
 
+process multiqc {
+    publishDir params.outdir, mode:'copy'
+       
+    input:
+    path '*'
+    
+    output:
+    path 'multiqc_report.html'
+     
+    script:
+    """
+    multiqc . 
+    """
+} 
 
 workflow {
 
@@ -77,8 +90,14 @@ workflow {
     .fromFilePairs( params.reads, checkIfExists: true )
     .set { read_pairs_ch } 
 
-    quant_ch = quantification(index_ch,read_pairs_ch)
-    
-    fastqc_ch = fastqc(read_pairs_ch)
+    quant_ch = quantification(index_ch, read_pairs_ch)
+
+    fastqc_ch = fastqc(read_pairs_ch)	
+
+    multiqc(quant_ch.mix(fastqc_ch).collect())
+
 }
 
+workflow.onComplete {
+   log.info ( workflow.success ? "\nDone! Open the following report in your browser --> $params.outdir/multiqc_report.html\n" : "Oops .. something went wrong" )
+}

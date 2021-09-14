@@ -1,7 +1,9 @@
+nextflow.enable.dsl=2
+
 /* 
  * pipeline input parameters 
  */
-params.reads = "$baseDir/data/ggal/*_{1,2}.fq"
+params.reads = "$baseDir/data/ggal/gut_{1,2}.fq"
 params.transcriptome = "$baseDir/data/ggal/transcriptome.fa"
 params.multiqc = "$baseDir/multiqc"
 params.outdir = "results"
@@ -15,22 +17,5 @@ log.info """\
          """
          .stripIndent()
 
- 
-/* 
- * define the `index` process that create a binary index 
- * given the transcriptome file
- */
-process index {
-    
-    input:
-    path transcriptome from params.transcriptome
-     
-    output:
-    path 'index' into index_ch
 
-    script:       
-    """
-    salmon index --threads $task.cpus -t $transcriptome -i index
-    """
-}
- 
+read_pairs_ch = Channel .fromFilePairs(params.reads)

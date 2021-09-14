@@ -1,3 +1,5 @@
+nextflow.enable.dsl=2
+
 /* 
  * pipeline input parameters 
  */
@@ -15,43 +17,37 @@ log.info """\
          """
          .stripIndent()
 
-
+ 
 /* 
  * define the `index` process that create a binary index 
  * given the transcriptome file
  */
 process index {
-    
-    input:
-    path transcriptome from params.transcriptome
-     
-    output:
-    path 'index' into index_ch
 
-    script:       
+    input:
+    path transcriptome
+
+    output:
+    path 'index'
+
+    script:
     """
     salmon index --threads $task.cpus -t $transcriptome -i index
     """
 }
 
-
-Channel 
-    .fromFilePairs( params.reads, checkIfExists: true )
-    .into { read_pairs_ch; read_pairs2_ch } 
-
 process quantification {
-    tag "$pair_id"
-         
+     
     input:
-    path index from index_ch
-    tuple pair_id, path(reads) from read_pairs_ch
+    path index 
+    tuple val(sample_id), path(reads)
  
     output:
-    path pair_id into quant_ch
+    path "$sample_id"
  
     script:
     """
-    salmon quant --threads $task.cpus --libType=U -i $index -1 ${reads[0]} -2 ${reads[1]} -o $pair_id
+    salmon quant --threads $task.cpus --libType=U -i $index -1 ${reads[0]} -2 ${reads[1]} -o $sample_id
     """
 }
 
@@ -59,24 +55,23 @@ process fastqc {
     tag "FASTQC on $sample_id"
 
     input:
-    tuple sample_id, path(reads) from read_pairs2_ch
+    tuple val(sample_id), path(reads)
 
     output:
-    path "fastqc_${sample_id}_logs" into fastqc_ch
+    path "fastqc_${sample_id}_logs"
 
     script:
     """
     mkdir fastqc_${sample_id}_logs
     fastqc -o fastqc_${sample_id}_logs -f fastq -q ${reads}
-    """  
+    """
 }  
- 
 
 process multiqc {
     publishDir params.outdir, mode:'copy'
        
     input:
-    path '*' from quant_ch.mix(fastqc_ch).collect()
+    path '*'
     
     output:
     path 'multiqc_report.html'
@@ -87,3 +82,17 @@ process multiqc {
     """
 } 
 
+workflow {
+
+    index_ch = index(Channel.from(params.transcriptome))
+
+    Channel
+    .fromFilePairs( params.reads, checkIfExists: true )
+    .set { read_pairs_ch } 
+
+    quant_ch = quantification(index_ch, read_pairs_ch)
+
+    fastqc_ch = fastqc(read_pairs_ch)	
+
+    multiqc(quant_ch.mix(fastqc_ch).collect())
+}
