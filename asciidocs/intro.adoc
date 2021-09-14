@@ -14,12 +14,12 @@ high-level parallel computational environment based on the dataflow programming 
 core features are:
 
 * workflow portability & reproducibility
-* scalability of parellelization and deployment
-* integratation of existing tools, systems & industry standards
+* scalability of parallelization and deployment
+* integration of existing tools, systems & industry standards
 
 === Processes and channels
 
-In practice a Nextflow pipeline script is made by joining together different processes.
+In practice a Nextflow pipeline is made by joining together different processes.
 Each process can be written in any scripting language that can be executed by the Linux platform
 (Bash, Perl, Ruby, Python, etc.).
 
@@ -48,11 +48,8 @@ the target execution platform in the configuration file.
 
 It provides out-of-the-box support for major batch schedulers and cloud platforms:
 
-image::batch_schedulers.png[]
-plus:
-* Torque
-* Moab
-* Google Life Sciences
+image::batch_schedulers.small.png[]
+plus: Torque, Moab and Google Life Sciences
 
 
 === Scripting language
@@ -68,7 +65,7 @@ a declarative approach.
 
 In practical terms Nextflow scripting is an extension of the https://groovy-lang.org/[Groovy programming language],
 which in turn is a super-set of the Java programming language. Groovy can be considered as Python for Java in that
-is simplifies the writing of code and is more approachable.
+it simplifies the writing of code and is more approachable.
 
 
 
@@ -77,6 +74,7 @@ is simplifies the writing of code and is more approachable.
 Copy the following example into your favourite text editor and save it
 to a file named `hello.nf` :
 
+[source,nextflow,linenums]
 ----
 #!/usr/bin/env nextflow
 
@@ -109,13 +107,10 @@ process convertToUpper {
     """
 }
 
-
 result.view{ it }
-
-}
 ----
 
-This script defines first specifys a parameter called "greeting", 
+This script defines first specifies a parameter called "greeting", 
 which we put into a channel "greeting_ch" to be used with the executed workflow. 
 
 Next, two processes are called. The first splits a string into files
@@ -128,12 +123,14 @@ the `view` operator.
 
 Execute the script by entering the following command in your terminal:
 
+[source,cmd]
 ----
 nextflow run hello.nf
 ----
 
 It will output something similar to the text shown below:
 
+[source,cmd]
 ----
 N E X T F L O W  ~  version 20.10.0
 Launching `hello.nf` [marvelous_plateau] - revision: 63f8ad7155
@@ -150,12 +147,13 @@ twice. Finally the result string is printed.
 
 It's worth noting that the process `convertToUpper` is executed in
 parallel, so there's no guarantee that the instance processing the first
-split (the chunk Hello) will be executed before before the one
+split (the chunk Hello) will be executed before the one
 processing the second split (the chunk world!).
 
 Thus, it is perfectly possible that you will get the final result
 printed out in a different order:
 
+[source,cmd]
 ....
 WORLD!
 HELLO
@@ -181,6 +179,7 @@ For the sake of this tutorial, modify the `convertToUpper` process in
 the previous example, replacing the process script with the string
 `rev $y`, so that the process looks like this:
 
+[source,nextflow,linenums]
 ----
 process convertToUpper {
 
@@ -199,12 +198,14 @@ process convertToUpper {
 Then save the file with the same name, and execute it by adding the
 `-resume` option to the command line:
 
+[source,cmd]
 ----
 nextflow run hello.nf -resume
 ----
 
 It will print output similar to this:
 
+[source,cmd]
 ----
 N E X T F L O W  ~  version 20.10.0
 Launching `hello.nf` [naughty_tuckerman] - revision: 22eaa07be4
@@ -223,7 +224,7 @@ printing the reversed strings.
 
 TIP: The pipeline results are cached by default in the directory `$PWD/work`.
 Depending on your script, this folder can take of lot of disk space.
-If your are sure you won't resume your pipeline execution, clean this folder periodically.
+If you are sure you won't resume your pipeline execution, clean this folder periodically.
 
 
 == Pipeline parameters
@@ -236,6 +237,7 @@ double dash character, i.e. `--paramName`
 For the sake of this tutorial, you can try to execute the previous
 example specifying a different input string parameter, as shown below:
 
+[source,cmd]
 ----
 nextflow run hello.nf --greeting 'Bonjour le monde!'
 ----
@@ -243,6 +245,7 @@ nextflow run hello.nf --greeting 'Bonjour le monde!'
 The string specified on the command line will override the default value
 of the parameter. The output will look like this:
 
+[source,cmd]
 ----
 N E X T F L O W  ~  version 20.10.0
 Launching `hello.nf` [wise_stallman] - revision: 22eaa07be4

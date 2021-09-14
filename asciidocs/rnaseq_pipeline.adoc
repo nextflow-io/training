@@ -340,7 +340,7 @@ mail {
 
 Then execute again the previous example specifying your email address:
 
-    nextflow run script7.nf -resume --reads 'data/ggal/*_{1,2}.fq' -c mail.config -N <your email>
+  nextflow run script7.nf -resume --reads 'data/ggal/*_{1,2}.fq' -c mail.config -N <your email>
 
 
 See https://www.nextflow.io/docs/latest/mail.html#mail-configuration[mail documentation,window="_blank"]
@@ -390,7 +390,9 @@ the following code:
 
 Run it as before:
 
-  nextflow run script7.nf -resume --reads 'data/ggal/*_{1,2}.fq'
+----
+nextflow run script7.nf -resume --reads 'data/ggal/*_{1,2}.fq'
+----
 
 === Recap
 
