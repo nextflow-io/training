@@ -20,6 +20,7 @@ process sayHello {
 A process may contain five definition blocks, respectively: directives,
 inputs, outputs, when clause and finally the process script. The syntax is defined as follows:
 
+[source,nextflow,linenums]
 ----
 process < name > {
   [ directives ]        // <1>

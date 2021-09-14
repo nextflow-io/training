@@ -1,0 +1,90 @@
+= Get started with Nextflow Tower
+
+== Basic concepts
+
+Nextflow Tower is the centralized command-post for the management of Nextflow data pipelines. 
+It brings monitoring, logging & observability, to distributed workflows and simplifies the deployment of pipelines on any cloud, cluster or laptop. 
+
+
+Nextflow tower core features include:
+
+* the launching of pre-configured pipelines with ease
+* programmatic integration to meet the needs of organizations
+* publishing pipelines to shared workspaces 
+* management of infrastructure required to run data analysis at scale
+
+
+TIP: https://tower.nf/[Sign] up to try Tower for free or request a https://meetings.hubspot.com/evan141[demo] for deployments in your own on-premise or cloud environment.
+
+== Usage
+
+You can use Tower via either the **online GUI**, using the `-with-tower` option with the **Nextflow run command**, or through the **API**.
+
+=== Via online GUI
+
+**1.** Create an account and login into Tower, available free of charge, at https://tower.nf[tower.nf].
+
+**2.** Create and configure a new https://help.tower.nf/compute-envs/overview/[compute environment].
+
+**3.** Start https://help.tower.nf/launch/launchpad/[launching pipelines].
+
+=== Via Nextflow run command
+
+Create an account and login into Tower.
+
+**1. Create a new token**
+
+  You can access your tokens from the The *Settings* drop-down menu :
+
+image::usage_create_token.png[]
+
+**2. Name your token**
+
+image::usage_name_token.png[]
+
+**3. Save your token safely**
+
+NOTE: Copy and keep your new token in a safe place.
+
+image::usage_token.png[]
+
+**4. Export your token**
+
+Once your token has been created, open a terminal and type:
+
+[source,bash,linenums]
+----
+export TOWER_ACCESS_TOKEN=eyxxxxxxxxxxxxxxxQ1ZTE=
+export NXF_VER=20.10.0
+----
+
+Where `eyxxxxxxxxxxxxxxxQ1ZTE=` is the token you have just created.
+
+NOTE: "check your Nextflow version". Bearer token requires Nextflow version 20.10.0 or later, set with the second command above.
+
+To submit a pipeline to a https://help.tower.nf/getting-started/workspace/[Workspace] using the Nextflow command line tool, add the workspace ID to your environment. For example
+
+[source,bash,linenums]
+----
+export TOWER_WORKSPACE_ID=000000000000000
+----
+
+The workspace ID can be found on the organisation's Workspaces overview page.
+
+**5. Run Nextflow with tower**
+
+Run your Nextflow workflows as usual with the addition of the `-with-tower` command:
+
+[source,bash,linenums]
+----
+nextflow run hello.nf -with-tower
+----
+
+You will see and be able to monitor your **Nextflow jobs** in Tower.
+
+To configure and execute Nextflow jobs in **Cloud environments**, visit the https://help.tower.nf/compute-envs/overview/[Compute environments section].
+
+=== API
+
+To learn more about using the Tower API, visit to the https://help.tower.nf/api/overview/[API section] in this documentation.
+
