@@ -120,9 +120,9 @@ as shown below:
 This time it works because it uses the Docker container `nextflow/rnaseq-nf` defined in the
 `nextflow.config` file. If you are running this script locally then you need to download docker
 to your machine then login to activate docker and allow the script to download the container 
-containing the run scripts (learn more about docker later: https://www.https://www.nextflow.io/docs/latest/docker.html[here] ).
+containing the run scripts - learn more about docker later: https://www.nextflow.io/docs/latest/docker.html[here].
 
-In order to avoid to add the option `-with-docker` add the following line in the `nextflow.config` file:
+In order to avoid adding `-with-docker` each time, add the following line in the `nextflow.config` file:
 
   docker.enabled = true
 
@@ -198,10 +198,10 @@ In this step you have learned:
 
 The script `script4.nf` adds the `quantification` process.
 
-In this script note as the `index_ch` channel, declared as output in the `index` process,
+In this script note how the `index_ch` channel, declared as output in the `index` process,
 is now used as a channel in the input section.
 
-Also note as the second input is declared as a `tuple` composed by two elements:
+Also note how the second input is declared as a `tuple` composed by two elements:
 the `pair_id` and the `reads` in order to match the structure of the items emitted
 by the `read_pairs_ch` channel.
 
@@ -212,9 +212,9 @@ Execute it by using the following command:
 
 You will see the execution of the `quantification` process.
 
-The `-resume` option cause the execution of any step that has been already processed to be skipped.
+When using the `-resume` option, any step that has already been processed is skipped.
 
-Try to execute it with more read files as shown below:
+Try to execute the same script with more read files as shown below:
 
   nextflow run script4.nf -resume --reads 'data/ggal/*_{1,2}.fq'
 
@@ -249,7 +249,7 @@ In this step you have learned:
 == Quality control
 
 This step implements a quality control of your input reads. The inputs are the same
-read pairs which are provided to the `quantification` steps
+read pairs which are provided to the `quantification` steps.
 
 You can run it by using the following command:
 
@@ -263,7 +263,7 @@ Channel `read_pairs_ch` has been used twice as an input by process `fastqc` and 
 
 === Exercise
 
-Modify the creation of the `read_pairs_ch` channel by using a https://www.nextflow.io/docs/latest/operator.html#into[into]
+Modify the creation of the `read_pairs_ch` channel by using an https://www.nextflow.io/docs/latest/operator.html#into[into]
 operator in place of a `set`.
 
 TIP: see an example https://github.com/nextflow-io/rnaseq-nf/blob/3b5b49f/main.nf#L58[here].
@@ -273,13 +273,14 @@ TIP: see an example https://github.com/nextflow-io/rnaseq-nf/blob/3b5b49f/main.n
 
 In this step you have learned:
 
-1. How to use the `into` operator to create multiple copies of the same channel
+1. How to use the `into` operator to create multiple copies of the same channel. 
 
+NOTE: In Nextflow DSL2, it is no longer a requirement to duplicate channels.
 
 == MultiQC report
 
-This step collect the outputs from the `quantification` and `fastqc` steps to create
-a final report by using the http://multiqc.info/[MultiQC] tool.
+This step collects the outputs from the `quantification` and `fastqc` steps to create
+a final report using the http://multiqc.info/[MultiQC] tool.
 
 
 Execute the script with the following command:
@@ -292,6 +293,8 @@ In this script note the use of the https://www.nextflow.io/docs/latest/operator.
 and https://www.nextflow.io/docs/latest/operator.html#collect[collect,window="_blank"] operators chained
 together to get all the outputs of the `quantification` and `fastqc` process as a single
 input.
+
+We only want one task of MultiQC being executed which produces one report. Therefore, we use the channel operators to combine all the channels into a single item. 
 
 
 === Recap
@@ -452,7 +455,7 @@ Use the command info to show the project information, e.g.:
 
     nextflow info nextflow-io/rnaseq-nf
 
-Nextflow allows the execution of a specific revision of your project by using the `-r` command line option. For Example:
+Nextflow allows the execution of a specific revision of your project by using the `-r` command line option. For example:
 
     nextflow run nextflow-io/rnaseq-nf -r dev
 
