@@ -465,7 +465,7 @@ receiver.view { "Received: $it" }
 
 === Output files
 
-The `file` qualifier allows to output one or more files, produced by the process, over the specified channel.
+The `file` qualifier specifies one or more files as output, produced by the process, over the specified channel.
 
 [source,nextflow,linenums]
 ----
