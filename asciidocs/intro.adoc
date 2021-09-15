@@ -115,7 +115,7 @@ which we put into a channel "greeting_ch" to be used with the executed workflow.
 
 Next, two processes are called. The first splits a string into files
 containing chunks of 6 characters ("Hello " and "world!"). 
-The second receives the output of the first process and splits the two words into spearate items (using .flatten). These two words are then converted to uppercase letters. 
+The second receives the output of the first process (chunk_*) and splits the two files into separate items (using .flatten). These two words are then converted to uppercase letters in the second process. 
 The resulting two strings are emitted on the `result` channel and the final output is printed using the `view` operator (appended onto the channel name).
 
 image::helloworlddiagram.png[]
@@ -135,7 +135,7 @@ N E X T F L O W  ~  version 20.10.0
 Launching `hello.nf` [marvelous_plateau] - revision: 63f8ad7155
 [warm up] executor > local
 executor >  local (3)
-[19/c2f873] process > splitLetters   [100%] 1 of 1 ✔
+[19/c2f873] process > splitWords   [100%] 1 of 1 ✔
 [05/5ff9f6] process > convertToUpper [100%] 2 of 2 ✔
 HELLO
 WORLD!
@@ -210,13 +210,13 @@ N E X T F L O W  ~  version 20.10.0
 Launching `hello.nf` [naughty_tuckerman] - revision: 22eaa07be4
 [warm up] executor > local
 executor >  local (2)
-[19/c2f873] process > splitLetters   [100%] 1 of 1, cached: 1 ✔
+[19/c2f873] process > splitWords     [100%] 1 of 1, cached: 1 ✔
 [a7/a410d3] process > convertToUpper [100%] 2 of 2 ✔
 olleH
 !dlrow
 ----
 
-You will see that the execution of the process `splitLetters` is
+You will see that the execution of the process `splitWords` is
 actually skipped (the process ID is the same), and its results are
 retrieved from the cache. The second process is executed as expected,
 printing the reversed strings.
@@ -238,7 +238,7 @@ example specifying a different input string parameter, as shown below:
 
 [source,cmd]
 ----
-nextflow run hello.nf --greeting 'Bonjour le monde!'
+nextflow run hello.nf --greeting 'Hola! mundo!'
 ----
 
 The string specified on the command line will override the default value
@@ -250,9 +250,8 @@ N E X T F L O W  ~  version 20.10.0
 Launching `hello.nf` [wise_stallman] - revision: 22eaa07be4
 [warm up] executor > local
 executor >  local (4)
-[48/e8315b] process > splitLetters   [100%] 1 of 1 ✔
+[48/e8315b] process > splitWords   [100%] 1 of 1 ✔
 [01/840ca7] process > convertToUpper [100%] 3 of 3 ✔
-uojnoB
-m el r
-!edno
+ !aloh
+!odnum
 ----
