@@ -7,7 +7,7 @@ components or libraries.
 Installing and maintaining such dependencies is a challenging task and
 the most common source of irreproducibility in scientific applications.
 
-Containers are exceptionally useful in scientific workflows. They allow the encapsulation of software dependencies, i.e. tools and libraries required by a data analysis application in  one or more self-contained, ready-to-run, immutable container images that can be easily deployed in any platform supporting the container runtime.
+Containers are exceptionally useful in scientific workflows. They allow the encapsulation of software dependencies, i.e. tools and libraries required by a data analysis application in one or more self-contained, ready-to-run, immutable container images that can be easily deployed in any platform supporting the container runtime.
 
 == Docker hands-on
 
@@ -20,7 +20,7 @@ memory management, etc.
 Containers are a Linux feature known as _Control Groups_ or https://en.wikipedia.org/wiki/Cgroups[Cgroups]
 introduced with kernel 2.6.
 
-Docker adds to this concept an handy management tool to build, run and share container images.
+Docker adds to this concept a handy management tool to build, run and share container images.
 
 These images can be uploaded and published in a centralised repository know as
 https://hub.docker.com[Docker Hub], or hosted by other parties like for example https://quay.io[Quay].
@@ -60,14 +60,14 @@ in the containerised operating system. For example:
 docker run -it debian:stretch-slim bash
 ```
 
-Once launched the container you wil noticed that's running as root (!).
+Once launched, you will notice that it is running as root (!).
 Use the usual commands to navigate in the file system.
 
 To exit from the container, stop the BASH session with the exit command.
 
 === Your first Dockerfile
 
-Docker images are created by using a so called `Dockerfile` i.e. a simple text file
+Docker images are created by using a so-called `Dockerfile` i.e. a simple text file
 containing a list of commands to be executed to assemble and configure the image
 with the software packages required.
 
@@ -76,11 +76,11 @@ In this step you will create a Docker image containing the Salmon tool.
 
 Warning: the Docker build process automatically copies all files that are located in the
 current directory to the Docker daemon in order to create the image. This can take
-a lot of time when big/many files exist. For this reason it's important to _always_ work in
+a lot of time when big/many files exists. For this reason it's important to _always_ work in
 a directory containing only the files you really need to include in your Docker image.
 Alternatively you can use the `.dockerignore` file to select the path to exclude from the build.
 
-Then use your favourite editor eg. `vim` to create a file named `Dockerfile` and copy the
+Then use your favourite editor e.g. `vim` to create a file named `Dockerfile` and copy the
 following content:
 
 [source,docker,linenums]
@@ -129,7 +129,7 @@ RUN curl -sSL https://github.com/COMBINE-lab/salmon/releases/download/v1.0.0/sal
  && mv /salmon-*/lib/* /usr/lib/
 ----
 
-Save the file and build again the image with the same command as before:
+Save the file and build the image again with the same command as before:
 
 ```bash
 docker build -t my-image .
@@ -140,7 +140,7 @@ different image ID.
 
 === Run Salmon in the container
 
-Check that everything is fine running Salmon in the container as shown below:
+Check that Salmon is running correctly in the container as shown below:
 
 ```bash
 docker run my-image salmon --version
@@ -157,7 +157,7 @@ Use the `exit` command to terminate the interactive session.
 
 === File system mounts
 
-Create an genome index file by running Salmon in the container.
+Create a genome index file by running Salmon in the container.
 
 Try to run Salmon in the container with the following command:
 
@@ -168,7 +168,7 @@ docker run my-image \
 
 The above command fails because Salmon cannot access the input file.
 
-This happens because the container runs in a complete separate file system and
+This happens because the container runs in a completely separate file system and
 it cannot access the hosting file system by default.
 
 You will need to use the `--volume` command line option to mount the input file(s) eg.
@@ -179,7 +179,7 @@ docker run --volume $PWD/data/ggal/transcriptome.fa:/transcriptome.fa my-image \
 ```
 
 IMPORTANT: the generated `transcript-index` directory is still not accessible in the host
-file system (and actually it went lost).
+file system.
 
 TIP: An easier way is to mount a parent directory to an identical one in the container,
 this allows you to use the same path when running it in the container eg.
