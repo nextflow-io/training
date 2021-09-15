@@ -182,7 +182,7 @@ IMPORTANT: the generated `transcript-index` directory is still not accessible in
 file system.
 
 TIP: An easier way is to mount a parent directory to an identical one in the container,
-this allows you to use the same path when running it in the container eg.
+this allows you to use the same path when running it in the container e.g.
 
 ```bash
 docker run --volume $HOME:$HOME --workdir $PWD my-image \
@@ -238,7 +238,7 @@ Digest: sha256:aeacbd7ea1154f263cda972a96920fb228b2033544c2641476350b9317dab266
 Status: Downloaded newer image for nextflow/rnaseq-nf:latest
 ```
 
-This is a unique and immutable identifier that can be used to reference container image
+This is a unique and immutable identifier that can be used to reference a container image
 in a univocally manner. For example:
 
 ```bash
@@ -263,7 +263,7 @@ to use instead of having to specify every time as a command line argument.
 http://singularity.lbl.gov[Singularity] is container runtime designed to work in HPC data center,
 where the usage of Docker is generally not allowed due to security constraints.
 
-Singularity implements a container execution model similarly to Docker however it uses
+Singularity implements a container execution model similar to Docker, however it uses
 a complete different implementation design.
 
 A Singularity container image is archived as a plain file that can be stored in a shared
@@ -299,7 +299,7 @@ Once you have save the `Singularity` file. Create the image with these commands:
 sudo singularity build my-image.sif Singularity
 ```
 
-Note: the `build` command requires sudo permissions. A common workaround
+Note: the `build` command requires `sudo` permissions. A common workaround
 consists to build the image on a local workstation and then deploy in the
 cluster just copying the image file.
 
@@ -339,7 +339,7 @@ pulling it directly from a Docker registry. For example:
 singularity pull docker://debian:stretch-slim
 ```
 
-The above command automatically download the Debian Docker image and converts it to
+The above command automatically downloads the Debian Docker image and converts it to
 a Singularity image store in the current directory with the name `debian-jessie.simg`.
 
 
@@ -374,7 +374,7 @@ Conda is popular package and environment manager. The built-in support for Conda
 allows Nextflow pipelines to automatically creates and activates the Conda
 environment(s) given the dependencies specified by each process.
 
-A Conda environment is defined using a YAML file which lists the required software packages.
+A Conda environment is defined using a YAML file, which lists the required software packages.
 For example:
 
 ```yaml
