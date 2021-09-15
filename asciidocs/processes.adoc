@@ -1,7 +1,6 @@
 = Processes
 
-A _process_ is the basic Nextflow computing primitive to execute foreign function i.e. custom
-scripts or tools.
+A _process_ is the basic Nextflow computing primitive to execute foreign function i.e. custom scripts or tools.
 
 The process definition starts with the keyword ``process``, followed by process name and finally the process `body` delimited by curly brackets. The process body must contain a string which represents the command or, more generally, a script that is executed by it.
 
@@ -77,7 +76,7 @@ process pyStuff {
 }
 ----
 
-TIP: This allows the compositing in the same workflow script of tasks using different programming languages which may better fit a particular job. However for large chunks of code is suggested to save them
+TIP: This allows the compositing in the same workflow script of tasks using different programming languages, which may better fit a particular job. However for large chunks of code is suggested to save them
 into separate files and invoke them from the process script.
 
 === Script parameters
@@ -347,7 +346,7 @@ process foo {
 }
 ----
 
-Both channels emit three value, therefore the process is executed three times, each time with a different pair:
+Both channels emit three values, therefore the process is executed three times, each time with a different pair:
 
 * (1, a)
 * (2, b)
@@ -381,7 +380,7 @@ In the above example the process is executed only two time, because when a chann
 
 IMPORTANT: Note however that _value_ channel do not affect the process termination.
 
-To better understand this behavior compare the previous example with the following one:
+To better understand this behavior, compare the previous example with the following one:
 
 [source,nextflow,linenums]
 ----
@@ -431,7 +430,7 @@ Extend the previous example so a task is executed for each read file matching th
 
 == Outputs
 
-The _output_ declaration block allows to define the channels used by the process to send out the results produced.
+The _output_ declaration block defines the channels used by the process to send out the results produced.
 
 There can be defined at most one output block and it can contain one or more outputs declarations. The output block follows the syntax shown below:
 
@@ -442,7 +441,7 @@ output:
 
 === Output values
 
-The `val` qualifier allows to output a _value_ defined in the script context. In a common usage scenario,
+The `val` qualifier specifies a defined _value_ output in the script context. In a common usage scenario,
 this is a value which has been defined in the _input_ declaration block, as shown in the following example::
 
 [source,nextflow,linenums]
