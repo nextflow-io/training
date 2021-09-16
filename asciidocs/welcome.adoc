@@ -9,6 +9,8 @@ To get you into Nextflow as quickly as possible, we will first set up an environ
 = Summary
 
 1. Environment Setup
+<<<Environment Setup>,<Environment Setup>>>
+xref:<Environment Setup>[<Environment Setup>]
 2. Get started with Nextflow
 3. Simple RNA-Seq pipeline
 4. Manage dependencies and containers
