@@ -71,9 +71,7 @@ it simplifies the writing of code and is more approachable.
 
 == Your first script
 
-Here you will execute your first Nextflow script (hello.nf). Copy the 
-following example into your favourite text editor and save it
-to a file named `hello.nf` :
+Here you will execute your first Nextflow script (hello.nf), but first we will go through what is being done within this script. 
 
 === Nextflow code (hello.nf)
 
@@ -113,28 +111,27 @@ process convertToUpper {
 result_ch.view{ it }
 ----
 
-=== Line by line
+=== In detail
 
-line 1: The script starts with the Nextflow Hashbang.
+line 1: The script starts with a shebang declaration. This allows you to launch your pipeline, as any other BASH script.
 
-line 3: We define a parameter called "greeting".
+line 3: Declares a pipeline parameter named params.greeting that is initialized with the value .This value can be overridden when launching the pipeline, by simply adding the option --greeting <value> to the script command line.
 
-line 4: We put this parameter into a channel `greeting_ch` to be used with the executed workflow. 
+line 4: We put this string parameter into a channel called `greeting_ch` to be used in the executed workflow. 
 
-line 6-17: Our first process. We first split the input string into chunks 
-of 6 characters ("Hello " and "world!") and save these words into two files 
-(chunk_aa and chunk_ab) in the `letters_ch` channel. 
+line 6-17: Our first process is "splitLetters". In this code block, we specify an input, expected output and the script to execute (shown between pair of the three double quote marks). The input is set as a value (`val`) and assigned to the variable 'x' from the channel 'greeting_ch'. The ouput we are expecting will be files (`file`) containing 'chunk_*'; this will find any files beginning 'chunk_' as output from the script. Finally, we show the code to be executed in this process, which splits the input string which is called using the $ operator, where $x will be replaced with the input `x`, into chunks of 6 characters ("Hello " and "world!") and saves these words into two files (chunk_aa and chunk_ab) which will be passed into the `letters_ch` channel. 
 
-line 19-30: Our second process. This receives the output files of the first process (chunk_* from letters_ch) and splits the two files into separate items (using .flatten), then the two 
-words are separately converted to uppercase letters. The resulting two strings are emitted from the standard output (stdout) into the `result_ch` channel.
+line 19-30: Our second process "convertToUpper", receives the output files (files chunk_aa and chunk_ab from letters_ch.flatten() ) of the first process to use as the input of this process and assigns the input to the variable 'y'. The use of the operator `flatten` here is to split the two files into two separate items to be put through the next process (else Nextflow would treat them as a single element). In the script section, the files are printed to reveal the two words, which are then separately converted to uppercase letters (in parellel). The resulting two strings are emitted from the standard output (stdout) into the `result_ch` channel.
 
-line 32: The final output is printed to screen using the `view` operator (appended onto the channel name).
-
-NOTE: This script starts with a parameterized string (using a value channel), however most scientific pipelines would start with a file, we get to this later. 
+line 32: The final output (stored in the `result_ch`) is printed to screen using the `view` operator (appended onto the channel name). We will cover all operators in section 7.
 
 === In DAG-like format
 
 image::helloworlddiagram.png[]
+
+Please now copy the 
+following example into your favourite text editor and save it
+to a file named `hello.nf` :
 
 Execute the script by entering the following command in your terminal:
 
