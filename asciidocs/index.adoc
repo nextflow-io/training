@@ -13,9 +13,8 @@
 :sectnums:
 
 
-
-:leveloffset: +1
 include::welcome.adoc[]
+:leveloffset: +1
 include::setup.adoc[]
 include::intro.adoc[]
 include::rnaseq_pipeline.adoc[]
