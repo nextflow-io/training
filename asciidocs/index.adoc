@@ -15,6 +15,7 @@
 
 
 :leveloffset: +1
+include::welcome.adoc[]
 include::setup.adoc[]
 include::intro.adoc[]
 include::rnaseq_pipeline.adoc[]
