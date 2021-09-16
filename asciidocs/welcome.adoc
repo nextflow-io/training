@@ -2,7 +2,7 @@
 
 = Introduction
 
-We at _Seqera_ are excited to share the path to writing reproducible and scalable sceintific workflows using _Nextflow_. We are a small start_up that pride ourselves with being _open source_ and part of a large _community_ of dedicated coding collaborators which are leading the way in this niche of data processing. To that end, we spend alot of our time teaching classes around the world, sharing how best to implement Nextflow to solve a myriad of complex computational problems.
+We at *Seqeralabs* are excited to share the path to writing reproducible and scalable sceintific workflows using *Nextflow*. We are a small start-up that pride ourselves with being *open source* and part of a large *community* of dedicated coding collaborators, which are leading the way in this niche of data processing. To that end, we spend alot of our time teaching classes around the world, sharing how best to implement Nextflow to solve a myriad of complex computational problems.
 
 = The Plan
 
@@ -12,7 +12,7 @@ To get you into Nextflow as quickly as possible, we will first set up an environ
 
 1. Environment Setup
 2. Get started with Nextflow
-3. Simple RNA_Seq pipeline
+3. Simple RNA-Seq pipeline
 4. Manage dependencies and containers
 5. Channels 
 6. Processes
