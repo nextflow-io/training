@@ -110,14 +110,19 @@ process convertToUpper {
 result_ch.view{ it }
 ----
 
-line 1: The script starts with the Nextflow Hashbang
-line 3: We define a parameter called "greeting". 
+line 1: The script starts with the Nextflow Hashbang.
+
+line 3: We define a parameter called "greeting".
+
 line 4: We put this parameter into a channel `greeting_ch` to be used with the executed workflow. 
+
 line 6-17: Our first process. We first split the input string into chunks 
 of 6 characters ("Hello " and "world!") and saves these words to two files 
 (chunk_aa and chunk_ab) into the `letters_ch`. 
+
 line 19-30: Our second process. This receives the output files of the first process (chunk_* from letters_ch) and splits the two files into separate items (using .flatten), then the two 
 words are separately converted to uppercase letters. The resulting two strings are emitted from the standant output (stdout) into the `result_ch` channel.
+
 line 32: The final output is printed to screen using the `view` operator (appended onto the channel name).
 
 image::helloworlddiagram.png[]

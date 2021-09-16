@@ -1,7 +1,5 @@
 = Welcome to the Nextflow Training Camp !
 
-= Introduction
-
 We at *Seqeralabs* are excited to share the path to writing reproducible and scalable sceintific workflows using *Nextflow*. We are a small start-up that pride ourselves with being *open source* and part of a large *community* of dedicated coding collaborators, which are leading the way in this niche of data processing. To that end, we spend alot of our time teaching classes around the world, sharing how best to implement Nextflow to solve a myriad of complex computational problems.
 
 = The Plan
