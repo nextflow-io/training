@@ -48,7 +48,7 @@ the target execution platform in the configuration file.
 
 It provides out-of-the-box support for major batch schedulers and cloud platforms:
 
-image::batch_schedulers.small.png[]
+image::execution_abstraction.png[]
 plus: Torque, Moab and Google Life Sciences
 
 
