@@ -9,7 +9,7 @@ process splitLetters {
     val x from greeting_ch
 
     output:
-    file 'chunk_*' into letters
+    file 'chunk_*' into letters_ch
 
     """
     printf '$x' | split -b 6 - chunk_
@@ -19,15 +19,14 @@ process splitLetters {
 process convertToUpper {
 
     input:
-    file y from letters.flatten()
+    file y from letters_ch.flatten()
 
     output:
-    stdout into result
+    stdout into result_ch
 
     """
     cat $y | tr '[a-z]' '[A-Z]' 
     """
 }
 
-
-result.view{ it }
+result_ch.view{ it }

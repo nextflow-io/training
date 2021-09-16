@@ -1,13 +1,17 @@
 = Simple Rna-Seq pipeline
 
-During this tutorial you will implement a proof of concept of a RNA-Seq pipeline which:
+During this tutorial you will implement a proof of concept RNA-Seq pipeline which:
 
-1. Indexes a trascriptome file.
-2. Performs quality controls
+1. Indexes a transcriptome file.
+2. Performs quality controls.
 3. Performs quantification.
-4. Create a MultiqQC report.
+4. Creates a MultiQC report.
+
+This will be done using a series of 7 scripts, each of which builds on the previous script in order to have a complete worflow. You can find these in the tutorial folder you downloaded.
 
 == Define the pipeline parameters
+
+Parameters are inputs and options that can be changed when the pipeline is run.
 
 The script `script1.nf` defines the pipeline input parameters.
 
@@ -60,7 +64,7 @@ the process https://www.nextflow.io/docs/latest/process.html#inputs[inputs],
 the process https://www.nextflow.io/docs/latest/process.html#outputs[outputs]
 and finally the command https://www.nextflow.io/docs/latest/process.html#script[script].
 
-The second example adds the `index` process.
+The second script adds the `index` process.
 
 [source,nextflow,linenums]
 ----
@@ -68,14 +72,14 @@ The second example adds the `index` process.
  * pipeline input parameters
  */
 params.reads = "$baseDir/data/ggal/*_{1,2}.fq"
-params.transcriptome = "$baseDir/data/ggal/transcriptome.fa"
+params.transcriptome_file = "$baseDir/data/ggal/transcriptome.fa"
 params.multiqc = "$baseDir/multiqc"
 params.outdir = "results"
 
 println """\
          R N A S E Q - N F   P I P E L I N E
          ===================================
-         transcriptome: ${params.transcriptome}
+         transcriptome: ${params.transcriptome_file}
          reads        : ${params.reads}
          outdir       : ${params.outdir}
          """
@@ -89,7 +93,7 @@ println """\
 process index {
 
     input:
-    path transcriptome from params.transcriptome
+    path transcriptome from params.transcriptome_file
 
     output:
     path 'index' into index_ch
@@ -103,7 +107,7 @@ process index {
 
 It takes the transcriptome params file as input and creates the transcriptome index by using the `salmon` tool.
 
-Note how the input declaration defines a `transcriptome` variable in the process context
+Note how the input declaration defines a `$transcriptome` variable in the process context
 that it is used in the command script to reference that file in the Salmon command line.
 
 Try to run it by using the command:
