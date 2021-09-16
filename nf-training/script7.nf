@@ -56,19 +56,19 @@ process quantification {
 }
 
 process fastqc {
-    tag "FASTQC on $sample_id"
+    tag "FASTQC on $pair_id"
 
     input:
-    tuple sample_id, path(reads) from read_pairs2_ch
+    tuple pair_id, path(reads) from read_pairs2_ch
 
     output:
-    path "fastqc_${sample_id}_logs" into fastqc_ch
+    path "fastqc_${pair_id}_logs" into fastqc_ch
 
 
     script:
     """
-    mkdir fastqc_${sample_id}_logs
-    fastqc -o fastqc_${sample_id}_logs -f fastq -q ${reads}
+    mkdir fastqc_${pair_id}_logs
+    fastqc -o fastqc_${pair_id}_logs -f fastq -q ${reads}
     """  
 }  
  
