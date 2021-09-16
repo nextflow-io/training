@@ -87,7 +87,7 @@ println """\
 
 
 /*
- * define the `index` process that create a binary index
+ * define the `index` process that creates a binary index
  * given the transcriptome file
  */
 process index {
@@ -419,6 +419,8 @@ previously introduced as shown below:
 
   nextflow run rnaseq-nf -with-docker -with-report -with-trace -with-timeline -with-dag dag.png
 
+The `-with-docker` option launches each task of the execution as a Docker container run command.
+
 The `-with-report` option enables the creation of the workflow execution report. Open
 the file `report.html` with a browser to see the report created with the above command.
 
@@ -448,7 +450,7 @@ The following GitHub repository hosts a complete version of the workflow introdu
 
 https://github.com/nextflow-io/rnaseq-nf
 
-You can run it by specifying the project name as shown below:
+You can run it by specifying the project name as shown below, launching each task of the execution as a Docker container run command:
 
     nextflow run nextflow-io/rnaseq-nf -with-docker
 

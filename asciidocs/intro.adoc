@@ -30,7 +30,7 @@ _channels_ in Nextflow.
 Any process can define one or more channels as input and output. The interaction between these processes,
 and ultimately the pipeline execution flow itself, is implicitly defined by these input and output declarations.
 
-image::channel-process.v3.png[]
+image::channel-process.png[]
 
 === Execution abstraction
 
@@ -115,9 +115,21 @@ line 3: Declares a pipeline parameter named params.greeting that is initialized 
 
 line 4: We put this string parameter into a channel called `greeting_ch` to be used in the executed workflow. 
 
-line 6-17: Our first process is "splitLetters". In this code block, we specify an input, expected output and the script to execute (shown between pair of the three double quote marks). The input is set as a value (`val`) and assigned to the variable 'x' from the channel 'greeting_ch'. The ouput we are expecting will be files (`file`) containing 'chunk_*'; this will find any files beginning 'chunk_' as output from the script. Finally, we show the code to be executed in this process, which splits the input string which is called using the $ operator, where $x will be replaced with the input `x`, into chunks of 6 characters ("Hello " and "world!") and saves these words into two files (chunk_aa and chunk_ab) which will be passed into the `letters_ch` channel. 
+line 6-17: Our first process is "splitLetters". In this code block, we specify an input, expected output and the script to execute (shown between pair of the three double quote marks).
 
-line 19-30: Our second process "convertToUpper", receives the output files (files chunk_aa and chunk_ab from letters_ch.flatten() ) of the first process to use as the input of this process and assigns the input to the variable 'y'. The use of the operator `flatten` here is to split the two files into two separate items to be put through the next process (else Nextflow would treat them as a single element). In the script section, the files are printed to reveal the two words, which are then separately converted to uppercase letters (in parellel). The resulting two strings are emitted from the standard output (stdout) into the `result_ch` channel.
+line 8-9:  The input is set as a value (`val`) and assigned to the variable 'x' from the channel 'greeting_ch'. 
+
+line 11-12: The ouput we are expecting will be files (`file`) containing 'chunk_*'; this will find any files beginning 'chunk_' as output from the script. 
+
+line 15-17: We show the code to be executed in this process, which splits the input string which is called using the $ operator, where $x will be replaced with the input `x`, into chunks of 6 characters ("Hello " and "world!") and saves these words into two files (chunk_aa and chunk_ab) which will be passed into the `letters_ch` channel. 
+
+line 19-30: Our second process is "convertToUpper".
+
+line 21-22: Our input receives the files (files chunk_aa and chunk_ab) from `letters_ch.flatten()` and assigns the input to the variable 'y'. The use of the operator `.flatten()` here is to split the two files into two separate items to be put through the next process (else they would treat them as a single element).
+
+line 24-25: Here, we state that the output we expect will be anything emitted to standard out (stdout) and save this `into` the `result_ch` channel.
+
+line 27-29: In the script section, the files are printed to reveal the two words, which are then separately converted to uppercase letters (in parellel). The resulting two strings are emitted from the standard output (stdout) `into` the `result_ch` channel.
 
 line 32: The final output (stored in the `result_ch`) is printed to screen using the `view` operator (appended onto the channel name). We will cover all operators in section 7.
 
