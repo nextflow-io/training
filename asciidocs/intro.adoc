@@ -71,8 +71,11 @@ it simplifies the writing of code and is more approachable.
 
 == Your first script
 
-Copy the following example into your favourite text editor and save it
+Here you will execute your first Nextflow script (hello.nf). Copy the 
+following example into your favourite text editor and save it
 to a file named `hello.nf` :
+
+=== Nextflow code (hello.nf)
 
 [source,nextflow,linenums]
 ----
@@ -110,6 +113,8 @@ process convertToUpper {
 result_ch.view{ it }
 ----
 
+=== Line by line
+
 line 1: The script starts with the Nextflow Hashbang.
 
 line 3: We define a parameter called "greeting".
@@ -117,13 +122,17 @@ line 3: We define a parameter called "greeting".
 line 4: We put this parameter into a channel `greeting_ch` to be used with the executed workflow. 
 
 line 6-17: Our first process. We first split the input string into chunks 
-of 6 characters ("Hello " and "world!") and saves these words to two files 
-(chunk_aa and chunk_ab) into the `letters_ch`. 
+of 6 characters ("Hello " and "world!") and save these words into two files 
+(chunk_aa and chunk_ab) in the `letters_ch` channel. 
 
 line 19-30: Our second process. This receives the output files of the first process (chunk_* from letters_ch) and splits the two files into separate items (using .flatten), then the two 
-words are separately converted to uppercase letters. The resulting two strings are emitted from the standant output (stdout) into the `result_ch` channel.
+words are separately converted to uppercase letters. The resulting two strings are emitted from the standard output (stdout) into the `result_ch` channel.
 
 line 32: The final output is printed to screen using the `view` operator (appended onto the channel name).
+
+NOTE: This script starts with a parameterized string (using a value channel), however most scientific pipelines would start with a file, we get to this later. 
+
+=== In DAG-like format
 
 image::helloworlddiagram.png[]
 
