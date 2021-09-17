@@ -28,7 +28,7 @@ This should give you a great basis to start writing your own pipelines and to un
 
 = Summary
 
-1. <<Environment Setup>>
+1. <<Environment setup>>
 2. <<Get started with Nextflow>>
 3. <<Simple Rna-Seq pipeline>>
 4. <<Manage dependencies & containers>>
