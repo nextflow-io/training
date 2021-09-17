@@ -1,4 +1,4 @@
-= Deployments scenarios 
+= Deployment scenarios 
 
 Real world genomic application can spawn the execution of thousands of jobs. In this 
 scenario a batch scheduler is commonly used to deploy a pipeline in a computing cluster, 
