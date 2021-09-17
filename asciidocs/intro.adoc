@@ -135,7 +135,7 @@ line 32: The final output (stored in the `result_ch`) is printed to screen using
 
 === In DAG-like format
 
-image::helloworlddiagram.png[]
+image::helloworlddiagram.pdf[]
 
 Please now copy the 
 following example into your favourite text editor and save it
