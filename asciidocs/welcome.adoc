@@ -36,7 +36,7 @@ This should give you a great basis to start writing your own pipelines and to un
 6. <<Processes>>
 7. <<Operators>>
 8. <<Groovy basic structures and idioms>>
-9. <<DSL2: simpler syntax, modules and beyond>>
+9. <<DSL2 and modules>>
 10. <<Get started with Nextflow Tower>>
 11. <<Nextflow configuration>>
 12. <<Deployment scenarios>>

@@ -1,4 +1,4 @@
-= DSL2: simpler syntax, modules and beyond
+= DSL2 and modules
 
 == Basic concepts
 
