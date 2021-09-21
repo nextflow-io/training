@@ -1,0 +1,8 @@
+image: nextflow/nf-training-public-tutorial:stable
+
+tasks:
+  - command: |
+      rm Dockerfile
+      echo -e "# You have initialized your gitpod workspace for the Nextflow.\n Please go back to the [tutorial](https://snakemake.readthedocs.io/en/stable/tutorial/basics.html) webpage and start the course.\n" 
+      curl -s https://get.nextflow.io | bash
+      clear
