@@ -1,6 +1,17 @@
 = Environment setup
 
-== Requirements
+== Using Gitpod (the simplest way)
+
+Here we setup Nexflow, dependencies and the training documents on a web based compute environment using Gitpod. 
+
+**First**: if you haven't got a **Github** account, please sign up https://github.com/[here].
+
+**Second**: Simply enter the following URL in your web browser (ideally: Firefox, Google Chrome):
+https://gitpod.io/#https://github.com/chriswyatt1/Gitpod_test
+
+Now you should have all the training documents, Nextflow and other dependencies installed into a Gitpod environment. You have 50 hours of Gitpod usage per month, where all the computation is happening in the cloud, once you close the terminal it will delete your session.
+
+== Using your terminal 
 
 Nextflow can be used on any POSIX compatible system (Linux, OS X, etc.).
 
@@ -16,8 +27,17 @@ Optional requirements for this workshop:
 * AWS Batch computing environment properly configured 
 
 
+=== Setup AWS Cloud9 environment (Optional) 
 
-== Training material 
+Only if you are running this tutorial in the AWS Cloud9 environment, 
+run the following one-liners to properly setup the required dependencies: 
+
+[source,bash,linenums]
+----
+source setup/all.sh
+----
+
+=== Training material 
 
 Download the training material by copy & pasting the following command 
 in the terminal:
@@ -34,18 +54,7 @@ Or alternatively if you have `wget` instead of curl:
 wget -q -O- https://s3-eu-west-1.amazonaws.com/seqeralabs.com/public/nf-training.tar.gz | tar xvz
 ----
 
-
-== Setup AWS Cloud9 environment (Optional) 
-
-Only if you are running this tutorial in the AWS Cloud9 environment, 
-run the following one-liners to properly setup the required dependencies: 
-
-[source,bash,linenums]
-----
-source setup/all.sh
-----
-
-== Nextflow installation 
+=== Nextflow installation 
 
 Install the latest version of Nextflow by copy & pasting the following 
 snippet in a terminal window: 
