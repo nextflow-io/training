@@ -5,11 +5,13 @@
 Use a preconfigured Nexflow development environment using Gitpod. 
 
 Requirements:
+
  * GitHub, GitLab or BitBucket account
  * Web browser (Google Chrome, Firefox)
 
 Steps:
-* Sign up here
+
+* Sign up here[link to Seqera Training landing page]
 * Open the link recieved in your email
 
 == Using a terminal
