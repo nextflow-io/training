@@ -4,12 +4,12 @@
 
 Use a preconfigured Nexflow development environment using Gitpod. 
 
-Requirements:
+*Requirements*:
 
  * GitHub, GitLab or BitBucket account
  * Web browser (Google Chrome, Firefox)
 
-Steps:
+*Steps*:
 
 * Sign up here[link to Seqera Training landing page]
 * Open the link recieved in your email
@@ -18,9 +18,12 @@ Steps:
 
 Nextflow can be used on any POSIX compatible system (Linux, OS X, Windows Subsystem for Linux etc.).
 
-It requires Bash and http://www.oracle.com/technetwork/java/javase/downloads/index.html[Java 8 (or later, up to 15)] to be installed.
+*Requirements*:
 
-Optional requirements for this workshop:
+* Bash
+* http://www.oracle.com/technetwork/java/javase/downloads/index.html[Java 8 (or later, up to 15)].
+
+*Optional requirements*:
 
 * https://www.docker.com/[Docker] engine 1.10.x (or later)
 * https://github.com/sylabs/singularity[Singularity] 2.5.x (or later)
