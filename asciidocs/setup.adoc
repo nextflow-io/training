@@ -1,19 +1,20 @@
 = Environment setup
 
-== Using Gitpod (the simplest way)
+== Using Gitpod (Recommended)
 
-Here we setup Nexflow, dependencies and the training documents on a web based compute environment using Gitpod. 
+Use a preconfigured Nexflow development environment using Gitpod. 
 
-**First**: if you haven't got a **Github** account, please sign up https://github.com/[here].
+Requirements:
+ * GitHub, GitLab or BitBucket account
+ * Web browser (Google Chrome, Firefox)
 
-**Second**: Simply enter the following URL in your web browser (ideally: Firefox, Google Chrome):
-https://gitpod.io/#https://github.com/chriswyatt1/Gitpod_test
+Steps:
+* Sign up here
+* Open the link recieved in your email
 
-Now you should have all the training documents, Nextflow and other dependencies installed into a Gitpod environment. You have 50 hours of Gitpod usage per month, where all the computation is happening in the cloud, once you close the terminal it will delete your session.
+== Using a terminal
 
-== Using your terminal 
-
-Nextflow can be used on any POSIX compatible system (Linux, OS X, etc.).
+Nextflow can be used on any POSIX compatible system (Linux, OS X, Windows Subsystem for Linux etc.).
 
 It requires Bash and http://www.oracle.com/technetwork/java/javase/downloads/index.html[Java 8 (or later, up to 15)] to be installed.
 
@@ -23,14 +24,13 @@ Optional requirements for this workshop:
 * https://github.com/sylabs/singularity[Singularity] 2.5.x (or later)
 * https://conda.io/[Conda] 4.5 (or later)
 * http://www.graphviz.org/[Graphviz] 
-* https://aws.amazon.com/cli/[AWS CLI] 
-* AWS Batch computing environment properly configured 
-
+* https://aws.amazon.com/cli/[AWS CLI]
+* AWS Batch computing environment configured 
 
 === Setup AWS Cloud9 environment (Optional) 
 
-Only if you are running this tutorial in the AWS Cloud9 environment, 
-run the following one-liners to properly setup the required dependencies: 
+If you are running this tutorial in the AWS Cloud9 environment, 
+run the following one-liner to setup the virtual environment: 
 
 [source,bash,linenums]
 ----
