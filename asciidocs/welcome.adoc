@@ -1,43 +1,43 @@
-= Welcome to the Nextflow Training Camp !
+= Welcome to the Nextflow Training Workshop
 
-We at *Seqeralabs* are excited to share the path to writing reproducible and scalable sceintific workflows using *Nextflow*. This guide has been written to complement the extensive documentation found on our https://www.nextflow.io/docs/latest[webpage].
+We are excited to have you on the path to writing reproducible and scalable scientific workflows using Nextflow. This guide complements the full Nextflow documentation - if you ever have any doubts, head over to the docs located https://www.nextflow.io/docs/latest[here].
 
-At the end of this course, you should be:
+By the end of this course you should:
 
-1. Proficient in writing and implementing Nextflow pipelines.
-2. Have an understanding of containerised workflows.
-3. Know the basics of Nextflow channels, processes and operators.
-4. Can debug basic issues that can arise.
-5. Be connected of the huge community of Nextflow content contributers.
+1. Be proficient in writing Nextflow pipelines
+2. Know the basic Nextflow concepts of Channels, Processes and Operators
+3. Have an understanding of containerised workflows
+4. Understand the different execution platforms supported by Nextflow 
+5. Be introducted to the Nextflow community and ecosystem
 
-= The Plan
+= Overview
 
-To get you into Nextflow as quickly as possible, we will be going through the following steps:
+To get you started with Nextflow as quickly as possible, we will walk through the following steps:
 
-1. Set up an environment to run Nextflow on an AWS cloud instance. 
+1. Set up a development environment to run Nextflow. 
 
-2. Explore basic Nexflow concepts, and start running simple Nextflow pipelines with step by step instruction (including a simple RNAseq analysis workflow). 
+2. Explore Nexflow concepts using some basic workflows including a multistep RNA-Seq analysis. 
 
-3. Use Docker containers to run jobs within a controlled environment. 
+3. Built and use Docker containers to encaspusulate all workflow dependencies. 
 
-4. Go over the finer details of the main Nextflow code writing blocks: channels, processes and operators. 
+4. Dive deeper into the core Nextflow syntax including Channels, Processes and Operators. 
 
-5. Cover more complex functions (including groovy basics: the underlying code of Nextflow, DSL2: our newest syntax extension, Nextflow Tower and detail Nextflow deployment, configuration and debugging guides). 
+5. Cover cluster and cloud deployment scenarios and explore Nextflow Tower capabilities. 
 
-This should give you a great basis to start writing your own pipelines and to understand the possibilities that Nextflow can give to you. We hope you enjoy the course, and please feel free to ask questions !
+This should give you a great basis to start writing your own pipelines and to understand the possibilities that Nextflow provides. We hope you enjoy the course! This is ever-evolving document and feedback is always welcome.
 
 = Summary
 
 1. <<Environment setup>>
-2. <<Get started with Nextflow>>
-3. <<Simple Rna-Seq pipeline>>
+2. <<Getting started with Nextflow>>
+3. <<Developing a Basic RNA-Seq pipeline>>
 4. <<Manage dependencies & containers>>
 5. <<Channels>>
 6. <<Processes>>
 7. <<Operators>>
-8. <<Groovy basic structures and idioms>>
+8. <<Groovy structures and idioms>>
 9. <<DSL2 and modules>>
-10. <<Get started with Nextflow Tower>>
+10. <<Getting started with Nextflow Tower>>
 11. <<Nextflow configuration>>
 12. <<Deployment scenarios>>
 13. <<Execution cache and resume>>
