@@ -87,7 +87,8 @@ process splitLetters {
     file 'chunk_*' into letters_ch
 
     """
-    printf '$x' | split -b 6 - chunk_
+    printf '$x' | head -c 6 > chunk_aa
+    printf '$x' | tail -c 6 > chunk_ab
     """
 }
 
@@ -111,29 +112,49 @@ result_ch.view{ it }
 
 * *1*: The script begins with a shebang which declares Nextflow as the interepreter.
 
-* *3*: Declares a pipeline parameter `greeting` that is initialized with the value 'Hello world!'.
+* *3*: Declares a Pipeline parameter `greeting` that is initialized with the value 'Hello world!'.
 
-* *4*: Intitalise a Channel `greeting_ch` which contains the value of `params.greeting`.
+* *4*: Initalise a Channel `greeting_ch` which contains the value from `params.greeting`.
 
-* *6*: Befin the process definition for the `splitLetters` process.
+* *6*: Begin first Process defined as `splitLetters`.
 
-Our first process is "splitLetters". In this code block, we specify an input, expected output and the script to execute (shown between pair of the three double quote marks).
+* *8*: *Input* declaration for the splitLetters Process.
 
-line 8-9:  The input is set as a value (`val`) and assigned to the variable 'x' from the channel 'greeting_ch'. 
+* *9*: Tell Process to expect an input value (`val`) *from* the channel 'greeting_ch', that we assign to the variable 'x'. 
 
-line 11-12: The ouput we are expecting will be files (`file`) containing 'chunk_*'; this will find any files beginning 'chunk_' as output from the script. 
+* *11*: *Output* decalration for the splitLetters Process.
 
-line 15-17: We show the code to be executed in this process, which splits the input string which is called using the $ operator, where $x will be replaced with the input `x`, into chunks of 6 characters ("Hello " and "world!") and saves these words into two files (chunk_aa and chunk_ab) which will be passed into the `letters_ch` channel. 
+* *12*: Tell Process to expect output file/s (`file`) containing 'chunk_*' as output from the script and send the files to the channel 'letters_ch'. 
 
-line 19-30: Our second process is "convertToUpper".
+* *14*: Triple quote marks intiate the code block to execute in this Process.
 
-line 21-22: Our input receives the files (files chunk_aa and chunk_ab) from `letters_ch.flatten()` and assigns the input to the variable 'y'. The use of the operator `.flatten()` here is to split the two files into two separate items to be put through the next process (else they would treat them as a single element).
+* *15-16*: Code to execute, printing the input value x (called using the dollar operator [$]), and splitting the string into 2 chunks of 6 characters each ("Hello " and "world!") and saving to files: chunk_aa and chunk_ab.
 
-line 24-25: Here, we state that the output we expect will be anything emitted to standard out (stdout) and save this `into` the `result_ch` channel.
+* *17*: Triple quote marks the end of the code block.
 
-line 27-29: In the script section, the files are printed to reveal the two words, which are then separately converted to uppercase letters (in parellel). The resulting two strings are emitted from the standard output (stdout) `into` the `result_ch` channel.
+* *18*: End of first Process block.
 
-line 32: The final output (stored in the `result_ch`) is printed to screen using the `view` operator (appended onto the channel name). We will cover all operators in section 7.
+* *20*: Begin second Process defined as `convertToUpper`.
+
+* *22*: *Input* declaration for the convertToUpper Process.
+
+* *23*: Tell Process to expect input file/s (`file`; e.g. chunk_aa and chunk_ab) from the letter_ch, that we assign to the variable 'y'. 
+
+TIP: The use of the operator `.flatten()` here is to split the two files into two separate items to be put through the next process (else they would treat them as a single element).
+
+* *25*: *Output* declaration for the convertToUpper Process.
+
+* *26*: Tell Process to expect output as standard output (stdout) and direct this `into` the `result_ch` channel.
+
+* *28*: Triple quote marks intiate the code block to execute in this Process.
+
+* *29*: Script to read files (cat) using the '$y' input variable, then pipe to uppercase conversion, outputting to standard output 
+
+* *30*: Triple quote marks the end of the code block.
+
+* *31*: End of first Process block.
+
+* *33*: The final output (in the `result_ch`) is printed to screen using the `view` operator (appended onto the channel name). 
 
 === In DAG-like format
 
