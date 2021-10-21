@@ -67,7 +67,7 @@ it simplifies the writing of code and is more approachable.
 
 == Your first script
 
-Here you will execute your first Nextflow script (hello.nf), but first we will go through the steps. 
+Here you will execute your first Nextflow script (hello.nf), which we will go through line by line. 
 
 === Nextflow code (hello.nf)
 
@@ -87,8 +87,8 @@ process splitLetters {
     file 'chunk_*' into letters_ch
 
     """
-    printf '$x' | head -c 6 > chunk_aa
-    printf '$x' | tail -c 6 > chunk_ab
+    printf '$x' | head -c 6 > chunk_1.txt
+    printf '$x' | tail -c 6 > chunk_2.txt
     """
 }
 
@@ -118,17 +118,17 @@ result_ch.view{ it }
 
 * *6*: Begin first Process defined as `splitLetters`.
 
-* *8*: *Input* declaration for the splitLetters Process.
+* *8*: Input declaration for the splitLetters Process.
 
-* *9*: Tell Process to expect an input value (`val`) *from* the channel 'greeting_ch', that we assign to the variable 'x'. 
+* *9*: Tells the Process to expect an input value (`val`) *from* the channel 'greeting_ch', that we assign to the variable 'x'. 
 
-* *11*: *Output* decalration for the splitLetters Process.
+* *11*: Output decalration for the splitLetters Process.
 
-* *12*: Tell Process to expect output file/s (`file`) containing 'chunk_*' as output from the script and send the files to the channel 'letters_ch'. 
+* *12*: Tells the Process to expect output file/s (`file`) containing 'chunk_*' as output from the script and send the files to the channel 'letters_ch'. 
 
 * *14*: Triple quote marks intiate the code block to execute in this Process.
 
-* *15-16*: Code to execute, printing the input value x (called using the dollar operator [$]), and splitting the string into 2 chunks of 6 characters each ("Hello " and "world!") and saving to files: chunk_aa and chunk_ab.
+* *15-16*: Code to execute, printing the input value x (called using the dollar [$] symbol prefix), and splitting the string into 2 chunks of 6 characters each ("Hello " and "world!") and saving to files: chunk_aa and chunk_ab.
 
 * *17*: Triple quote marks the end of the code block.
 
@@ -136,15 +136,15 @@ result_ch.view{ it }
 
 * *20*: Begin second Process defined as `convertToUpper`.
 
-* *22*: *Input* declaration for the convertToUpper Process.
+* *22*: Input declaration for the convertToUpper Process.
 
-* *23*: Tell Process to expect input file/s (`file`; e.g. chunk_aa and chunk_ab) from the letter_ch, that we assign to the variable 'y'. 
+* *23*: Tells the Process to expect input file/s (`file`; e.g. chunk_aa and chunk_ab) from the letter_ch, that we assign to the variable 'y'. 
 
 TIP: The use of the operator `.flatten()` here is to split the two files into two separate items to be put through the next process (else they would treat them as a single element).
 
-* *25*: *Output* declaration for the convertToUpper Process.
+* *25*: Output declaration for the convertToUpper Process.
 
-* *26*: Tell Process to expect output as standard output (stdout) and direct this `into` the `result_ch` channel.
+* *26*: Tells the Process to expect output as standard output (stdout) and direct this `into` the `result_ch` channel.
 
 * *28*: Triple quote marks intiate the code block to execute in this Process.
 
@@ -156,13 +156,10 @@ TIP: The use of the operator `.flatten()` here is to split the two files into tw
 
 * *33*: The final output (in the `result_ch`) is printed to screen using the `view` operator (appended onto the channel name). 
 
-=== In DAG-like format
+=== In practise
 
-image::helloworlddiagram.png[]
-
-Please now copy the 
-following example into your favourite text editor and save it
-to a file named `hello.nf` :
+Please now copy the following example into your favourite text editor 
+and save it to a file named `hello.nf`.
 
 Execute the script by entering the following command in your terminal:
 
@@ -171,27 +168,34 @@ Execute the script by entering the following command in your terminal:
 nextflow run hello.nf
 ----
 
-It will output something similar to the text shown below:
+The output will look similar to the text shown below:
 
 [source,cmd]
 ----
-N E X T F L O W  ~  version 20.10.0
-Launching `hello.nf` [marvelous_plateau] - revision: 63f8ad7155
-[warm up] executor > local
+N E X T F L O W  ~  version 21.04.3
+Launching `hello.nf` [confident_kowalevski] - revision: a3f5a9e46a
 executor >  local (3)
-[19/c2f873] process > splitWords   [100%] 1 of 1 ✔
-[05/5ff9f6] process > convertToUpper [100%] 2 of 2 ✔
-HELLO
+[0d/59d203] process > splitLetters (1)   [100%] 1 of 1 ✔
+[9f/1dd42a] process > convertToUpper (2) [100%] 2 of 2 ✔
+HELLO 
 WORLD!
 ----
 
-You can see that the first process is executed once, and the second
-twice. Finally the result string is printed.
+Where the standard output shows the Nextflow version executed, the script name and the version names, 
+followed by the executor used (in our case local).
+Then, you can see that the first process is executed once (1), and the second
+twice (2). Followed by the printed result string.
+
+TIP: The hexadecimal numbers, like `0d/59d203`, identify the unique process
+execution. These numbers are also the prefix of the directories where each
+process is executed. You can inspect the files produced by changing to the directory
+`$PWD/work` and using these numbers to find the process-specific
+execution path.
 
 It's worth noting that the process `convertToUpper` is executed in
 parallel, so there's no guarantee that the instance processing the first
-split (the chunk Hello) will be executed before the one
-processing the second split (the chunk world!).
+split (the chunk 'Hello ') will be executed before the one
+processing the second split (the chunk 'world!').
 
 Thus, it is perfectly possible that you will get the final result
 printed out in a different order:
@@ -202,12 +206,6 @@ WORLD!
 HELLO
 ....
 
-TIP: The hexadecimal numbers, like `22/7548fa`, identify the unique process
-execution. These numbers are also the prefix of the directories where each
-process is executed. You can inspect the files produced by them changing to the directory
-`$PWD/work` and using these numbers to find the process-specific
-execution path.
-
 == Modify and resume
 
 Nextflow keeps track of all the processes executed in your pipeline. If
@@ -215,7 +213,7 @@ you modify some parts of your script, only the processes that are
 actually changed will be re-executed. The execution of the processes
 that are not changed will be skipped and the cached result used instead.
 
-This helps a lot when testing or modifying part of your pipeline without
+This helps when testing or modifying part of your pipeline without
 having to re-execute it from scratch.
 
 For the sake of this tutorial, modify the `convertToUpper` process in
@@ -250,14 +248,13 @@ It will print output similar to this:
 
 [source,cmd]
 ----
-N E X T F L O W  ~  version 20.10.0
-Launching `hello.nf` [naughty_tuckerman] - revision: 22eaa07be4
-[warm up] executor > local
+N E X T F L O W  ~  version 21.04.3
+Launching `hello.nf` [admiring_venter] - revision: aed50861e0
 executor >  local (2)
-[19/c2f873] process > splitLetters     [100%] 1 of 1, cached: 1 ✔
-[a7/a410d3] process > convertToUpper [100%] 2 of 2 ✔
-olleH
+[74/d48321] process > splitLetters (1)   [100%] 1 of 1, cached: 1 ✔
+[59/136e00] process > convertToUpper (1) [100%] 2 of 2 ✔
 !dlrow
+ olleH
 ----
 
 You will see that the execution of the process `splitLetters` is
@@ -273,16 +270,15 @@ If you are sure you won't resume your pipeline execution, clean this folder peri
 == Pipeline parameters
 
 Pipeline parameters are simply declared by prepending to a variable name
-the prefix `params`, separated by dot character. Their value can be
+the prefix `params`, separated by a dot character. Their value can be
 specified on the command line by prefixing the parameter name with a
 double dash character, i.e. `--paramName`
 
-For the sake of this tutorial, you can try to execute the previous
-example specifying a different input string parameter, as shown below:
+Now, let's try to execute the previous example specifying a different input string parameter, as shown below:
 
 [source,cmd]
 ----
-nextflow run hello.nf --greeting 'Hola! mundo!'
+nextflow run hello.nf --greeting '!odnum !aloH'
 ----
 
 The string specified on the command line will override the default value
@@ -290,12 +286,15 @@ of the parameter. The output will look like this:
 
 [source,cmd]
 ----
-N E X T F L O W  ~  version 20.10.0
-Launching `hello.nf` [wise_stallman] - revision: 22eaa07be4
-[warm up] executor > local
-executor >  local (4)
-[48/e8315b] process > splitLetters   [100%] 1 of 1 ✔
-[01/840ca7] process > convertToUpper [100%] 3 of 3 ✔
- !aloh
-!odnum
+N E X T F L O W  ~  version 21.04.3
+Launching `hello.nf` [serene_carlsson] - revision: aed50861e0
+executor >  local (3)
+[71/974e5d] process > splitLetters (1)   [100%] 1 of 1 ✔
+[06/206ffa] process > convertToUpper (1) [100%] 2 of 2 ✔
+Hola! 
+mundo!
 ----
+
+=== In DAG-like format
+
+
