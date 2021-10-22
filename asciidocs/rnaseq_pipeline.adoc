@@ -1,13 +1,15 @@
 = Simple Rna-Seq pipeline
 
-During this tutorial you will implement a proof of concept RNA-Seq pipeline which:
+To demonstrate a real-world biomedical scenario, we will implement a proof of concept RNA-Seq pipeline which:
 
 1. Indexes a transcriptome file.
 2. Performs quality controls.
 3. Performs quantification.
 4. Creates a MultiQC report.
 
-This will be done using a series of 7 scripts, each of which builds on the previous script in order to have a complete worflow. You can find these in the tutorial folder you downloaded.
+This will be done using a series of 7 scripts, 
+each of which builds on the previous script, in order to have a complete worflow. 
+You can find these in the tutorial folder (Script1.nf to Script7.nf).
 
 == Define the pipeline parameters
 
@@ -24,14 +26,18 @@ params.multiqc = "$baseDir/multiqc"
 println "reads: $params.reads"
 ----
 
-Run it by using the
-following command:
+[%Dealing with paired data]
+====
+In the above example we use a wildcard (*) followed by the file match (_{1,2}.fq), in order to read in paired data together. In this way, the liver sample is using Liver_1.fq + Liver_2.fq, then heart using Heart_1.fq + Heart_2.fq.
+====
+
+Run it by using the following command:
 
   nextflow run script1.nf
 
 Try to specify a different input parameter, for example:
 
-  nextflow run script1.nf --reads this/and/that
+  nextflow run script1.nf --reads data/ggal/*_{1,2}.fq
 
 === Exercise
 
