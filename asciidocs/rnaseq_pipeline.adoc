@@ -26,7 +26,8 @@ params.multiqc = "$baseDir/multiqc"
 println "reads: $params.reads"
 ----
 
-[%Dealing with paired data]
+.Dealing with paired data
+[%collapsible]
 ====
 In the above example we use a wildcard (*) followed by the file match (_{1,2}.fq), in order to read in paired data together. In this way, the liver sample is using Liver_1.fq + Liver_2.fq, then heart using Heart_1.fq + Heart_2.fq.
 ====
@@ -60,6 +61,29 @@ In this step you have learned:
 4. How to use multiline strings
 5. How to use `log.info` to print information and save it in the log execution file
 
+.This is what your script should look like so far!
+[%collapsible]
+====
+[source,nextflow,linenums]
+----
+/* 
+ * pipeline input parameters 
+ */
+params.reads = "$baseDir/data/ggal/*_{1,2}.fq"
+params.transcriptome_file = "$baseDir/data/ggal/transcriptome.fa"
+params.multiqc = "$baseDir/multiqc"
+params.outdir = "results"
+
+log.info """\
+         R N A S E Q - N F   P I P E L I N E    
+         ===================================
+         transcriptome: ${params.transcriptome_file}
+         reads        : ${params.reads}
+         outdir       : ${params.outdir}
+         """
+         .stripIndent()
+----
+====
 
 == Create transcriptome index file
 
