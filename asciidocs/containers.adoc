@@ -387,6 +387,7 @@ dependencies:
   - salmon=1.0.0
   - fastqc=0.11.5
   - multiqc=1.5
+  - tbb=2020.2
 ```
 
 Given the recipe file, the environment is created using the command shown below:
@@ -401,6 +402,14 @@ You can check the environment was created successfully with the command shown be
 conda env list
 ```
 
+This should look something like this:
+```bash
+# conda environments:
+#
+base                     /opt/conda
+nf-tutorial           *  /opt/conda/envs/nf-tutorial
+```
+
 To enable the environment you can use the `activate` command:
 
 ```bash
@@ -408,10 +417,10 @@ conda activate nf-tutorial
 ```
 
 Nextflow is able to manage the activation of a Conda environment when the its directory
-is specified using the `-with-conda` option. For example:
+is specified using the `-with-conda` option (using the same path shown in the `list` function. For example:
 
 ```bash
-nextflow run script7.nf -with-conda /home/ubuntu/miniconda2/envs/nf-tutorial
+nextflow run script7.nf -with-conda /opt/conda/envs/nf-tutorial
 ```
 
 TIP: When specifying as Conda environment a YAML recipe file, Nextflow automatically downloads the required dependencies, build the environment and automatically activate it.
