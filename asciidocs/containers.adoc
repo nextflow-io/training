@@ -14,7 +14,7 @@ Containers are exceptionally useful in scientific workflows. They allow the enca
 Get practice with basic Docker commands to pull, run and build your own containers.
 
 A container is a ready-to-run Linux environment which can be executed in an isolated
-manner from the hosting system. It has own copy of the file system, processes space,
+manner from the hosting system. It has own copy of the file system, processing space,
 memory management, etc.
 
 Containers are a Linux feature known as _Control Groups_ or https://en.wikipedia.org/wiki/Cgroups[Cgroups]
@@ -23,18 +23,18 @@ introduced with kernel 2.6.
 Docker adds to this concept a handy management tool to build, run and share container images.
 
 These images can be uploaded and published in a centralised repository know as
-https://hub.docker.com[Docker Hub], or hosted by other parties like for example https://quay.io[Quay].
+https://hub.docker.com[Docker Hub], or hosted by other parties like https://quay.io[Quay].
 
 
 === Run a container
 
-Run a container is easy as using the following command:
+A container can be run using the following command:
 
 ```bash
 docker run <container-name>
 ```
 
-For example:
+Try for example the following publically available container (if you have docker installed):
 
 ```bash
 docker run hello-world
@@ -48,8 +48,11 @@ The pull command allows you to download a Docker image without running it. For e
 docker pull debian:stretch-slim
 ```
 
-The above command download a Debian Linux image.
+The above command download a Debian Linux image. You can check it exists by using:
 
+```bash
+docker images
+```
 
 === Run a container in interactive mode
 
@@ -61,9 +64,10 @@ docker run -it debian:stretch-slim bash
 ```
 
 Once launched, you will notice that it is running as root (!).
-Use the usual commands to navigate in the file system.
+Use the usual commands to navigate in the file system. 
+This is useful to check if the expected programs are present within a container.
 
-To exit from the container, stop the BASH session with the exit command.
+To exit from the container, stop the BASH session with the `exit` command.
 
 === Your first Dockerfile
 
@@ -80,7 +84,7 @@ a lot of time when big/many files exists. For this reason it's important to _alw
 a directory containing only the files you really need to include in your Docker image.
 Alternatively you can use the `.dockerignore` file to select the path to exclude from the build.
 
-Then use your favourite editor e.g. `vim` to create a file named `Dockerfile` and copy the
+Then use your favourite editor e.g. `vim` or `nano` to create a file named `Dockerfile` and copy the
 following content:
 
 [source,docker,linenums]
@@ -94,16 +98,15 @@ RUN apt-get update && apt-get install -y curl cowsay
 ENV PATH=$PATH:/usr/games/
 ----
 
-When done save the file.
-
-
 === Build the image
 
-Build the Docker image by using the following command:
+Build the Dockerfile image by using the following command:
 
 ```bash
 docker build -t my-image .
 ```
+
+Where "my-image" is the user specified name tag for the Dockerfile, present in the current directory.
 
 Note: don't miss the dot in the above command. When it completes, verify that the image
 has been created listing all available images:
@@ -124,7 +127,7 @@ Add the Salmon package to the Docker image by adding to the `Dockerfile` the fol
 
 [source,docker,linenums,options="nowrap"]
 ----
-RUN curl -sSL https://github.com/COMBINE-lab/salmon/releases/download/v1.0.0/salmon-1.0.0_linux_x86_64.tar.gz | tar xz \
+RUN curl -sSL https://github.com/COMBINE-lab/salmon/releases/download/v1.5.2/salmon-1.5.2_linux_x86_64.tar.gz | tar xz \
  && mv /salmon-*/bin/* /usr/bin/ \
  && mv /salmon-*/lib/* /usr/lib/
 ----
@@ -187,6 +190,12 @@ this allows you to use the same path when running it in the container e.g.
 ```bash
 docker run --volume $HOME:$HOME --workdir $PWD my-image \
   salmon index -t $PWD/data/ggal/transcriptome.fa -i transcript-index
+```
+
+or if you are using gitpod (instead of a local environment):
+```bash
+docker run --volume /workspace/Gitpod_test:/workspace/Gitpod_test my-image \ 
+  salmon index -t /workspace/Gitpod_test/data/ggal/transcriptome.fa -i transcript-index
 ```
 
 Check the content of the `transcript-index` folder entering the command:
@@ -438,8 +447,4 @@ Take a look at the Dockerfile of the https://github.com/nextflow-io/rnaseq-nf[rn
 
 Another useful resource linking together Bioconda and containers is the https://biocontainers.pro[BioContainers] project.
 BioContainers is a community initiative that provides a registry of container images for every Bioconda recipe.
-
-== More resources
-
-https://github.com/brouberol/marcel[Marcel] the french Docker .. (humor)
 
