@@ -192,12 +192,6 @@ docker run --volume $HOME:$HOME --workdir $PWD my-image \
   salmon index -t $PWD/data/ggal/transcriptome.fa -i transcript-index
 ```
 
-or if you are using gitpod (instead of a local environment):
-```bash
-docker run --volume /workspace/Gitpod_test:/workspace/Gitpod_test my-image \ 
-  salmon index -t /workspace/Gitpod_test/data/ggal/transcriptome.fa -i transcript-index
-```
-
 Check the content of the `transcript-index` folder entering the command:
 
 ```bash
