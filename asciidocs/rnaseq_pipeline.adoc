@@ -7,9 +7,9 @@ To demonstrate a real-world biomedical scenario, we will implement a proof of co
 3. Performs quantification.
 4. Creates a MultiQC report.
 
-This will be done using a series of 7 scripts, 
-each of which builds on the previous script, in order to have a complete worflow. 
-You can find these in the tutorial folder (Script1.nf to Script7.nf).
+This will be done using a series of seven scripts, 
+each of which builds on the previous, in order to have a complete worflow. 
+You can find these in the tutorial folder (script1.nf to script7.nf).
 
 == Define the pipeline parameters
 
@@ -26,19 +26,13 @@ params.multiqc = "$baseDir/multiqc"
 println "reads: $params.reads"
 ----
 
-.Dealing with paired data
-[%collapsible]
-====
-In the above example we use a wildcard (*) followed by the file match (_{1,2}.fq), in order to read in paired data together. In this way, the liver sample is using Liver_1.fq + Liver_2.fq, then heart using Heart_1.fq + Heart_2.fq.
-====
-
 Run it by using the following command:
 
   nextflow run script1.nf
 
 Try to specify a different input parameter, for example:
 
-  nextflow run script1.nf --reads data/ggal/*_{1,2}.fq
+  nextflow run script1.nf --reads this/or/that
 
 === Exercise
 
@@ -85,16 +79,15 @@ log.info """\
 ----
 ====
 
-== Create transcriptome index file
+== Create a transcriptome index file
 
-Nextflow allows the execution of any command or user script by using a `process` definition.
+Nextflow allows the execution of any command or script by using a `process` definition.
 
-A process is defined by providing three main declarations:
-the process https://www.nextflow.io/docs/latest/process.html#inputs[inputs],
-the process https://www.nextflow.io/docs/latest/process.html#outputs[outputs]
-and finally the command https://www.nextflow.io/docs/latest/process.html#script[script].
+A `process` is defined by providing three main declarations:
+the process https://www.nextflow.io/docs/latest/process.html#inputs[inputs], https://www.nextflow.io/docs/latest/process.html#outputs[outputs]
+and command https://www.nextflow.io/docs/latest/process.html#script[script].
 
-The second script adds the `index` process.
+To add a transcriptome `index` process, try adding the following code block to your script (or continue from script2.nf).
 
 [source,nextflow,linenums]
 ----
@@ -117,10 +110,9 @@ process index {
 }
 ----
 
-It takes the transcriptome params file as input and creates the transcriptome index by using the `salmon` tool.
+This process takes the transcriptome params file as input and creates the transcriptome index by using the `salmon` tool. The `output` is specified as a path to a output file called 'index', and this is passed to the 'index_ch' channel.
 
-NOTE: the input declaration defines a `$transcriptome` variable in the process context
-that it is used in the command script to reference that file in the Salmon command line.
+NOTE: the `input` declaration defines a `transcriptome` path variable which is used in the `script` as a reference (using the dollar sign) in the Salmon command line.
 
 Run it by using the command:
 
@@ -134,7 +126,7 @@ as shown below:
   nextflow run script2.nf -with-docker
 
 This time it works because it uses the Docker container `nextflow/rnaseq-nf` defined in the
-`nextflow.config` file. If you are running this script locally then you need to download docker
+`nextflow.config` file in your current directory. If you are running this script locally then you need to download docker
 to your machine then login to activate docker and allow the script to download the container 
 containing the run scripts - learn more about docker later: https://www.nextflow.io/docs/latest/docker.html[here].
 
@@ -152,7 +144,11 @@ Print the output of the `index_ch` channel by using the https://www.nextflow.io/
 
 === Exercise
 
-Use the command `tree work` to see how Nextflow organizes the process work directory.
+If you have more cpu available, try changing your script to request more resources for this process. For an example, see the https://www.nextflow.io/docs/latest/process.html#cpus[directive docs]. `$task.cpus` is already specified in this script, so setting the cpu as the top as a directive will tell Nextflow to run this job with the specified number of cpus.
+
+=== Bonus Exercise
+
+Use the command `tree work` to see how Nextflow organizes the process work directory. Check https://www.tecmint.com/linux-tree-command-examples/[here], if you need to download tree.
 
 === Recap
 
@@ -177,7 +173,7 @@ Save it and execute it with the following command:
 
   nextflow run script3.nf
 
-It will print an output similar to the one shown below:
+It will print something similar to this:
 
   [ggal_gut, [/.../data/ggal/gut_1.fq, /.../data/ggal/gut_2.fq]]
 
@@ -190,7 +186,7 @@ Try it again specifying different read files by using a glob pattern:
   nextflow run script3.nf --reads 'data/ggal/*_{1,2}.fq'
 
 IMPORTANT: File paths including one or more wildcards ie. `*`, `?`, etc. MUST be
-wrapped in single-quoted characters to avoid Bash expands the glob.
+wrapped in single-quoted characters to avoid Bash expanding the glob.
 
 === Exercise
 
@@ -212,9 +208,9 @@ In this step you have learned:
 
 == Perform expression quantification
 
-The script `script4.nf` adds the `quantification` process.
+`script4.nf` adds the `quantification` process.
 
-In this script note how the `index_ch` channel, declared as output in the `index` process,
+In this script, note how the `index_ch` channel, declared as output in the `index` process,
 is now used as a channel in the input section.
 
 Also note how the second input is declared as a `tuple` composed by two elements:
@@ -257,9 +253,9 @@ to the `quantification` process to store the process results into a directory of
 In this step you have learned:
 
 1. How to connect two processes by using the channel declarations
-2. How to resume the script execution skipping already already computed steps
+2. How to resume the script execution skipping cached steps
 3. How to use the `tag` directive to provide a more readable execution output
-4. How to use the `publishDir` to store a process results in a path of your choice
+4. How to use the `publishDir` directive to store a process results in a path of your choice
 
 
 == Quality control
@@ -299,13 +295,13 @@ This step collects the outputs from the `quantification` and `fastqc` steps to c
 a final report using the http://multiqc.info/[MultiQC] tool.
 
 
-Execute the script with the following command:
+Execute the next script with the following command:
 
   nextflow run script6.nf -resume --reads 'data/ggal/*_{1,2}.fq'
 
 It creates the final report in the `results` folder in the current work directory.
 
-In this script note the use of the https://www.nextflow.io/docs/latest/operator.html#mix[mix,window="_blank"]
+In this script, note the use of the https://www.nextflow.io/docs/latest/operator.html#mix[mix,window="_blank"]
 and https://www.nextflow.io/docs/latest/operator.html#collect[collect,window="_blank"] operators chained
 together to get all the outputs of the `quantification` and `fastqc` process as a single
 input.
@@ -418,7 +414,7 @@ nextflow run script7.nf -resume --reads 'data/ggal/*_{1,2}.fq'
 In this step you have learned:
 
 1. How to write or use existing custom scripts in your Nextflow pipeline.
-2. How to avoid the use of absolute paths having your scripts in the `bin/` folder.
+2. How to avoid the use of absolute paths by having your scripts in the `bin/` folder.
 
 
 == Metrics and reports
@@ -446,6 +442,13 @@ tasks and bottlenecks. See an example at https://www.nextflow.io/docs/latest/tra
 Finally the `-with-dag` option enables to rendering of the workflow execution direct acyclic graph
 representation. Note: this feature requires the installation of http://www.graphviz.org/[Graphviz,window="_blank"] in your computer.
 See https://www.nextflow.io/docs/latest/tracing.html#dag-visualisation[here,window="_blank"] for details.
+Then try running :
+
+[source]
+----
+dot -Tpng dag.dot > graph.png
+open graph.png
+----
 
 Note: runtime metrics may be incomplete for run short running tasks as in the case of this tutorial.
 
