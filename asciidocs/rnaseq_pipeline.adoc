@@ -99,24 +99,6 @@ The second script adds the `index` process.
 [source,nextflow,linenums]
 ----
 /*
- * pipeline input parameters
- */
-params.reads = "$baseDir/data/ggal/*_{1,2}.fq"
-params.transcriptome_file = "$baseDir/data/ggal/transcriptome.fa"
-params.multiqc = "$baseDir/multiqc"
-params.outdir = "results"
-
-println """\
-         R N A S E Q - N F   P I P E L I N E
-         ===================================
-         transcriptome: ${params.transcriptome_file}
-         reads        : ${params.reads}
-         outdir       : ${params.outdir}
-         """
-         .stripIndent()
-
-
-/*
  * define the `index` process that creates a binary index
  * given the transcriptome file
  */
@@ -137,10 +119,10 @@ process index {
 
 It takes the transcriptome params file as input and creates the transcriptome index by using the `salmon` tool.
 
-Note how the input declaration defines a `$transcriptome` variable in the process context
+NOTE: the input declaration defines a `$transcriptome` variable in the process context
 that it is used in the command script to reference that file in the Salmon command line.
 
-Try to run it by using the command:
+Run it by using the command:
 
   nextflow run script2.nf
 
@@ -386,7 +368,7 @@ for details.
 == Custom scripts
 
 Real world pipelines use a lot of custom user scripts (BASH, R, Python, etc). Nextflow
-allows you to use and manage all these scripts in consistent manner. Simply put them
+allows you to use and manage all these scripts in a consistent manner. Simply put them
 in a directory named `bin` in the pipeline project root. They will be automatically added
 to the pipeline execution `PATH`.
 
@@ -435,8 +417,8 @@ nextflow run script7.nf -resume --reads 'data/ggal/*_{1,2}.fq'
 
 In this step you have learned:
 
-1. How to write or use existing custom script in your Nextflow pipeline.
-2. How to avoid the use of absolute paths having your scripts in the `bin/` project folder.
+1. How to write or use existing custom scripts in your Nextflow pipeline.
+2. How to avoid the use of absolute paths having your scripts in the `bin/` folder.
 
 
 == Metrics and reports
@@ -474,7 +456,7 @@ NOTE: You view the HTML files right-clicking on the file name in the left side-b
 
 Nextflow allows the execution of a pipeline project directly from a GitHub repository (or similar services eg. BitBucket and GitLab).
 
-This simplifies the sharing and the deployment of complex projects and tracking changes in a consistent manner.
+This simplifies the sharing and deployment of complex projects and tracking changes in a consistent manner.
 
 The following GitHub repository hosts a complete version of the workflow introduced in this tutorial:
 
@@ -484,10 +466,10 @@ You can run it by specifying the project name as shown below, launching each tas
 
     nextflow run nextflow-io/rnaseq-nf -with-docker
 
-It automatically downloads it and store in the `$HOME/.nextflow` folder.
+It automatically downloads the container and stores it in the `$HOME/.nextflow` folder.
 
 
-Use the command info to show the project information, e.g.:
+Use the command `info` to show the project information, e.g.:
 
     nextflow info nextflow-io/rnaseq-nf
 
@@ -504,6 +486,6 @@ This allows a precise control of the changes in your project files and dependenc
 
 * http://docs.nextflow.io[Nextflow documentation,window="_blank"] - The Nextflow docs home.
 * https://github.com/nextflow-io/patterns[Nextflow patterns,window="_blank"] - A collection of Nextflow implementation patterns.
-* https://github.com/CRG-CNAG/CalliNGS-NF[CalliNGS-NF,window="_blank"] - An Variant calling pipeline implementing GATK best practices.
+* https://github.com/CRG-CNAG/CalliNGS-NF[CalliNGS-NF,window="_blank"] - A Variant calling pipeline implementing GATK best practices.
 * http://nf-co.re/[nf-core,window="_blank"] - A community collection of production ready genomic pipelines.
 
