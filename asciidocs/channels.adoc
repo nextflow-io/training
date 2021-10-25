@@ -34,7 +34,7 @@ ch.view()       // <2>
 ----
 
 
-<1> Use the built-in `println` function to print the `ch` variable.
+<1> Use the built-in print line function `println` to print the `ch` channel.
 <2> Apply the `view` method to the `ch` channel, therefore prints each item emitted by the channels.
 
 
@@ -53,7 +53,7 @@ IMPORTANT: A queue channel can have one and exactly one producer and one and exa
 
 === Value channels
 
-A *value* channel a.k.a. singleton channel by definition is bound to a single value and it can be read unlimited times without consuming its content.
+A *value* channel (a.k.a. singleton channel) by definition is bound to a single value and it can be read unlimited times without consuming its contents.
 
 [source,nextflow,linenums]
 ----
@@ -71,8 +71,11 @@ Hello
 Hello
 ```
 
+A `value` channel is created using the https://www.nextflow.io/docs/latest/channel.html#value[value] factory method or by operators returning a single value, such us https://www.nextflow.io/docs/latest/operator.html#first[first], https://www.nextflow.io/docs/latest/operator.html#last[last], https://www.nextflow.io/docs/latest/operator.html#operator-collect[collect], https://www.nextflow.io/docs/latest/operator.html#operator-count[count], https://www.nextflow.io/docs/latest/operator.html#operator-min[min], https://www.nextflow.io/docs/latest/operator.html#operator-max[max], https://www.nextflow.io/docs/latest/operator.html#operator-reduce[reduce], https://www.nextflow.io/docs/latest/operator.html#operator-sum[sum].
+
 == Channel factories
 
+These are Nextflow commands for creating channels that have implicit expected inputs and functions.
 
 === value
 
