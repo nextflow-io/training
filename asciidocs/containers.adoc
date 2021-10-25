@@ -1,30 +1,26 @@
 = Manage dependencies & containers
 
-Computational workflows rarely are composed by as single script or tool. 
+Computational workflows are rarely composed of a single script or tool. 
 Most of the times they require the usage of dozens of different software
 components or libraries.
 
 Installing and maintaining such dependencies is a challenging task and
 the most common source of irreproducibility in scientific applications.
 
-Containers are exceptionally useful in scientific workflows. They allow the encapsulation of software dependencies, i.e. tools and libraries required by a data analysis application in one or more self-contained, ready-to-run, immutable container images that can be easily deployed in any platform supporting the container runtime.
+To overcome these issues, we use containers, which allow the encapsulation of software dependencies, i.e. tools and libraries required by a data analysis application in one or more self-contained, ready-to-run, immutable Linux container images, that can be easily deployed in any platform supporting the container runtime.
 
-== Docker hands-on
+Containers can be executed in an isolated manner from the hosting system. 
+Having its own copy of the file system, processing space, memory management, etc.
 
-Get practice with basic Docker commands to pull, run and build your own containers.
+NOTE: Containers were first introduced with kernel 2.6 as a Linux feature known as _Control Groups_ or https://en.wikipedia.org/wiki/Cgroups[Cgroups].
 
-A container is a ready-to-run Linux environment which can be executed in an isolated
-manner from the hosting system. It has own copy of the file system, processing space,
-memory management, etc.
 
-Containers are a Linux feature known as _Control Groups_ or https://en.wikipedia.org/wiki/Cgroups[Cgroups]
-introduced with kernel 2.6.
+== Docker
 
-Docker adds to this concept a handy management tool to build, run and share container images.
+Docker is a handy management tool to build, run and share container images.
 
 These images can be uploaded and published in a centralised repository know as
 https://hub.docker.com[Docker Hub], or hosted by other parties like https://quay.io[Quay].
-
 
 === Run a container
 
@@ -71,20 +67,19 @@ To exit from the container, stop the BASH session with the `exit` command.
 
 === Your first Dockerfile
 
-Docker images are created by using a so-called `Dockerfile` i.e. a simple text file
-containing a list of commands to be executed to assemble and configure the image
+Docker images are created by using a so-called `Dockerfile`, which is a simple text file
+containing a list of commands to assemble and configure the image
 with the software packages required.
 
 In this step you will create a Docker image containing the Salmon tool.
 
-
-Warning: the Docker build process automatically copies all files that are located in the
+IMPORTANT: the Docker build process automatically copies all files that are located in the
 current directory to the Docker daemon in order to create the image. This can take
 a lot of time when big/many files exists. For this reason it's important to _always_ work in
 a directory containing only the files you really need to include in your Docker image.
 Alternatively you can use the `.dockerignore` file to select the path to exclude from the build.
 
-Then use your favourite editor e.g. `vim` or `nano` to create a file named `Dockerfile` and copy the
+Then use your favourite editor (e.g. `vim` or `nano`) to create a file named `Dockerfile` and copy the
 following content:
 
 [source,docker,linenums]
@@ -108,7 +103,7 @@ docker build -t my-image .
 
 Where "my-image" is the user specified name tag for the Dockerfile, present in the current directory.
 
-Note: don't miss the dot in the above command. When it completes, verify that the image
+IMPORTANT: Don't miss the dot in the above command. When it completes, verify that the image
 has been created listing all available images:
 
 ```bash
@@ -174,7 +169,7 @@ The above command fails because Salmon cannot access the input file.
 This happens because the container runs in a completely separate file system and
 it cannot access the hosting file system by default.
 
-You will need to use the `--volume` command line option to mount the input file(s) eg.
+You will need to use the `--volume` command line option to mount the input file(s) e.g.
 
 ```bash
 docker run --volume $PWD/data/ggal/transcriptome.fa:/transcriptome.fa my-image \
@@ -432,7 +427,6 @@ This makes easier to manage different environments for the processes in the work
 
 See the https://www.nextflow.io/docs/latest/conda.html[Nextflow]
 in the Nextflow documentation for details.
-
 
 === Bonus Exercise
 Take a look at the Dockerfile of the https://github.com/nextflow-io/rnaseq-nf[rnaseq-nf] pipeline to determine how it is built.
