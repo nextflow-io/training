@@ -181,16 +181,30 @@ HELLO
 WORLD!
 ----
 
-Where the standard output shows the Nextflow version executed, the script name and the version names, 
-followed by the executor used (in our case local).
-Then, you can see that the first process is executed once (1), and the second
-twice (2). Followed by the printed result string.
+Where the standard output shows: 
+
+* *1*: The Nextflow version executed.
+
+* *2*: The script name and the version names.
+
+* *3*: The executor used (in our case local).
+
+* *4*: The first process executed once (1). Starting with a unique hexadecimal (see TIP below) and ending with percent and job complete information. 
+
+* *5*: The second process executed twice (2). 
+
+* *6-7*: Followed by the printed result string from stdout.
 
 TIP: The hexadecimal numbers, like `0d/59d203`, identify the unique process
 execution. These numbers are also the prefix of the directories where each
 process is executed. You can inspect the files produced by changing to the directory
 `$PWD/work` and using these numbers to find the process-specific
 execution path.
+
+IMPORTANT: The second process runs twice, executing in two different work directories 
+for each input file. Therefore, in the previous example the work directory [9f/1dd42a] 
+represents just one of the two directories that were processed. To print all the 
+relevent paths to screen, use the `-ansi-log` flag (e.g. `nextflow run hello.nf -ansi-log`).
 
 It's worth noting that the process `convertToUpper` is executed in
 parallel, so there's no guarantee that the instance processing the first
