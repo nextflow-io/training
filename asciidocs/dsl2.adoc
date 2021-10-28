@@ -113,7 +113,9 @@ This can be determined by adding `bar.out.view()` to the workflow section, then 
 
 
 === Process outputs
-A process output can also be accessed using the `out` attribute for the respective process object. For example:
+A process output can also be accessed using the `out` attribute for the respective process object. 
+
+For example:
 
 [source,nextflow,linenums]
 ----
@@ -129,6 +131,7 @@ When a process defines two or more output channels, each of them can be accessed
 .For example:
 [%collapsible]
 ====
+[source,nextflow,linenums]
 ----
 nextflow.enable.dsl=2
 
@@ -164,7 +167,7 @@ workflow {
 }
 ----
 
-would result in :
+In `bar.txt` you would now find the following :
 
 ----
 fourth_command
@@ -172,19 +175,22 @@ third_command
 ----
 ====
 
-Or using named outputs (see below).
+Another option is using named outputs (see below).
 
 === Process named output
+
 The process output definition allows the use of the `emit` option to define a name identifier that can be used to reference the channel in the external scope. For example:
 
 [source,nextflow,linenums]
 ----
+nextflow.enable.dsl=2
+
 process foo {
   output:
     path '*.bam', emit: samples_bam
 
   '''
-  your_command --here
+  echo result > output.bam
   '''
 }
 
@@ -199,6 +205,8 @@ The process can name stdout using the `emit` option:
 
 [source,nextflow,linenums]
 ----
+nextflow.enable.dsl=2
+
 process sayHello {
     input:
         val cheers
@@ -248,7 +256,7 @@ workflow my_pipeline {
 ----
 
 === Workflow inputs
-A workflow component can declare one or more input channels using the take keyword. For example:
+A workflow component can declare one or more input channels using the `take` keyword. For example:
 
 [source,nextflow,linenums]
 ----
@@ -269,7 +277,7 @@ workflow {
     my_pipeline( channel.from('/some/data') )
 }
 ----
-NOTE: Workflow inputs are by definition channel data structures. If a basic data type is provided instead, ie. number, string, list, etc. it’s implicitly converted to a channel value (ie. non-consumable).
+NOTE: Workflow inputs are by definition: channel data structures. If a basic data type is provided instead, ie. number, string, list, etc. it’s implicitly converted to a channel value (ie. non-consumable).
 
 === Workflow outputs
 A workflow component can declare one or more out channels using the emit keyword. For example:
@@ -285,9 +293,9 @@ workflow my_pipeline {
 }
 ----
 
-Then, the result of the my_pipeline execution can be accessed using the out property ie. my_pipeline.out. When there are multiple output channels declared, use the array bracket notation to access each output component as described for the Process outputs definition.
+Then, the result of the my_pipeline execution can be accessed using the out property i.e. my_pipeline.out. When there are multiple output channels declared, use the array bracket notation to access each output component as described for the Process outputs definition.
 
-Alternatively, the output channel can be accessed using the identifier name which it’s assigned to in the emit declaration:
+Alternatively, the output channel can be accessed using the identifier name it’s assigned to in the emit declaration:
 
 [source,nextflow,linenums]
 ----
@@ -339,12 +347,12 @@ workflow {
 }
 ----
 
-NOTE: Nested workflow execution determines an implicit scope. Therefore the same process can be invoked in two different workflow scopes, like for example foo in the above snippet that is used either in flow1 and flow2. The workflow execution path along with the process names defines the process fully qualified name that is used to distinguish the two different process invocations i.e. flow1:foo and flow2:foo in the above example.
+NOTE: Nested workflow execution determines an implicit scope. Therefore the same process can be invoked in two different workflow scopes, like for example foo in the above snippet that is used in both flow1 and flow2. The workflow execution path along with the process names, defines the process (fully qualified) name that is used to distinguish the two different process invocations (i.e. flow1:foo and flow2:foo in the above example).
 
 TIP : The process fully qualified name can be used as a valid process selector in the nextflow.config file and it has priority over the process simple name.
 
 == Modules
-The new DSL allows the definition module scripts that can be included and shared across workflow applications.
+The new DSL allows the definition of module scripts that can be included and shared across workflow applications.
 
 A module can contain the definition of a function, process and workflow definitions as described in the above sections.
 
@@ -355,7 +363,7 @@ For example:
 
 [source,nextflow,linenums]
 ----
-include { foo } from './some/module'
+include { foo } from './path/to/modules.nf'
 
 workflow {
     data = channel.fromPath('/some/data/*.txt')
@@ -363,14 +371,14 @@ workflow {
 }
 ----
 
-The above snippets includes a process with name foo defined in the module script in the main execution context, as such it can be invoked in the workflow scope.
+The above snippets include a process with name "foo" defined in the module script in the main execution context, as such it can be invoked in the workflow scope. "modules.nf" is a file that would contain multiple process code blocks (including "foo").
 
-Nextflow implicitly looks for the script file ./some/module.nf resolving the path against the including script location.
+Nextflow implicitly looks for the script file "./path/to/modules.nf", resolving the path within the included script location.
 
 NOTE: Relative paths must begin with the ./ prefix.
 
 === Multiple inclusions
-A Nextflow script allows the inclusion of any number of modules. When multiple components need to be included from the some module script, the component names can be specified in the same inclusion using the curly brackets notation as shown below:
+A Nextflow script allows the inclusion of any number of modules. When multiple components need to be included from the same module script, the component names can be specified in the same inclusion using the curly brackets notation as shown below:
 
 [source,nextflow,linenums]
 ----
@@ -409,7 +417,8 @@ workflow {
 ----
 
 === Module parameters
-A module script can define one or more parameters using the same syntax of a Nextflow workflow script:
+
+A module script can define one or more parameters using the same syntax as Nextflow workflow scripts (as well as defining workflow or defined functions):
 
 [source,nextflow,linenums]
 ----
@@ -421,7 +430,7 @@ def sayHello() {
 }
 ----
 
-Then, parameters are inherited from the including context. For example:
+Parameters are inherited from the including context. For example:
 
 [source,nextflow,linenums]
 ----
@@ -434,18 +443,18 @@ workflow {
     sayHello()
 }
 ----
-The above snippet prints:
+The above snippet should print:
 
 [source,bash,linenums]
 ----
 Hola Mundo
 ----
 
-NOTE: The module inherits the parameters define before the include statement, therefore any further parameter set later are ignored.
+NOTE: The module inherits the parameters defined before the include statement, therefore any further parameters set later are ignored.
 
 TIP: Define all pipeline parameters at the beginning of the script before any include declaration.
 
-The option addParams can be used to extend the module parameters without affecting the external scope. For example:
+The option `addParams` can be used to extend the module parameters without affecting the external scope. For example:
 
 [source,nextflow,linenums]
 ----
@@ -456,22 +465,28 @@ workflow {
 }
 ----
 
-The above snippet prints:
+The above snippet should prints:
 
 [source,bash,linenums]
 ----
 Ciao world!
 ----
 
-Finally the include option params allows the specification of one or more parameters without inheriting any value from the external environment.
+Finally the include option `params` allows the specification of one or more parameters without inheriting any value from the external environment.\
+
+==== Exercise
+
+Try to repeat the above code for the module parameters section. Replacing ./some/module with the file name you have given it. Remember to use ./ for current directory.
 
 == DSL2 migration notes
 
-DSL2 final version is activated using the declaration nextflow.enable.dsl=2 in place of nextflow.preview.dsl=2.
+Some of the syntax has changed between DSL1 and 2. These are a few of the key changes:
 
-Process inputs and outputs of type set have to be replaced with tuple.
+The declaration: `nextflow.enable.dsl=2` is used in place of `nextflow.preview.dsl=2`.
 
-Process output option mode flatten is not available anymore. Replace it using the flatten operator on the corresponding output channel.
+Process inputs and outputs of type `set` have to be replaced with `tuple`.
+
+Process output option mode `flatten` is not available anymore. Replace it using the `flatten` operator on the corresponding output channel.
 
 Anonymous and unwrapped includes are not supported anymore. Replace it with a explicit module inclusion. For example:
 
@@ -499,7 +514,7 @@ workflow {
 }
 ----
 
-The use of unqualified value and file elements into input tuples is not allowed anymore. Replace them with a corresponding val or path qualifier:
+The use of unqualified value (`val`) and `file` elements into input tuples is not allowed anymore. Replace them with a corresponding `val` or `path` qualifiers:
 
 [source,nextflow,linenums]
 ----
@@ -527,7 +542,7 @@ input:
 }
 ----
 
-The use of unqualified value and file elements into output tuples is not allowed anymore. Replace them with a corresponding val or path qualifier:
+The use of unqualified value (`val`) and `file` elements into output tuples is not allowed anymore. Replace them with a corresponding `val` or `path` qualifiers:
 
 [source,nextflow,linenums]
 ----
