@@ -148,7 +148,7 @@ TIP: The use of the operator `.flatten()` here is to split the two files into tw
 
 * *28*: Triple quote marks intiate the code block to execute in this Process.
 
-* *29*: Script to read files (cat) using the '$y' input variable, then pipe to uppercase conversion, outputting to standard output 
+* *29*: Script to read files (cat) using the '$y' input variable, then pipe to uppercase conversion, outputting to standard output.
 
 * *30*: Triple quote marks the end of the code block.
 
@@ -181,17 +181,17 @@ HELLO
 WORLD!
 ----
 
-Where the standard output shows: 
+Where the standard output shows (line by line): 
 
 * *1*: The Nextflow version executed.
 
-* *2*: The script name and the version names.
+* *2*: The script and version names.
 
-* *3*: The executor used (in our case local).
+* *3*: The executor used (in the above case: local).
 
 * *4*: The first process executed once (1). Starting with a unique hexadecimal (see TIP below) and ending with percent and job complete information. 
 
-* *5*: The second process executed twice (2). 
+* *5*: The second process executed twice (2).
 
 * *6-7*: Followed by the printed result string from stdout.
 
