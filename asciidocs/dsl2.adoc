@@ -2,9 +2,9 @@
 
 == Basic concepts
 
-DSL2 is our new syntax to improve readability and allow the use of modules, as well as a few additional improvements. 
+DSL2 is our new syntax extension, developed primarily to improve readability and allow the use of modules. 
 
-Despite this and to allow backward compatibility to exisiting pipelines, DSL1 is still a valid way of writing pipelines (and indeed many online pipelines are written this way) and therefore the dsl2 update has to be defined with the following directive at the beginning of your workflow script: 
+However, DSL1 is still a valid way of writing pipelines (and indeed many public pipelines are written this way), so to ensure backward compatibility, the DSL2 update has to be defined with the following directive at the beginning of each workflow script: 
 
 ----
 nextflow.enable.dsl=2
@@ -12,8 +12,10 @@ nextflow.enable.dsl=2
 
 DSL2 core features include:
 
-* Improved readability of pipelines 
-* Splitting of processes into modules that are portable between pipelines/workflows
+* Separation of processes from their invocation.
+* Use of a `workflow` directive to execute specific processes.
+* Archiving of processes into modules.
+* Introduction of new syntax (pipe operator, & operator and channel forking)
 
 
 == Process
@@ -30,7 +32,7 @@ nextflow.enable.dsl=2
 
 process foo {
     output:
-      path 'foo.txt' [line-through]#into out_ch#
+      path 'foo.txt'
     script:
       """
       echo first_command > foo.txt
@@ -42,7 +44,7 @@ workflow {
 }
 ----
 
-At the first line we enable dsl2, then we define a process called 'foo', which puts into the output channel (path: foo.txt) the output of the script (without using "into"). This is then executed in the workflow directive where the individual process is called.
+At the first line we enable dsl2, then we define a process called 'foo', which puts into the output channel (path: foo.txt), without using "into out_ch". This is then executed in the workflow directive where the individual process is called. 
 
 IMPORTANT: A process component can be invoked only once in the same workflow context.
 
@@ -68,14 +70,14 @@ process bar {
       path 'bar.txt'
     script:
       """
-      echo second command > bar.txt
-      head -n 1 $x >> bar.txt
+      head -n 1 $x > bar.txt
+      echo third_command >> bar.txt
       """
 }
 
 workflow {
   foo()
-  data = channel.fromPath('data/ggal/gut_1.fq')
+  data = channel.fromPath('data/test/baz.txt')
   bar(data)
 }
 ----
@@ -84,6 +86,7 @@ In this example, we have added the second process 'bar', which again is called w
 
 
 === Process composition
+
 Processes having matching input-output declaration can be composed so that the output of the first process is passed as input to the following process. Taking in consideration the previous process definition, it’s possible to write the following:
 
 [source,nextflow,linenums]
@@ -92,6 +95,22 @@ workflow {
     bar(foo())
 }
 ----
+
+==== Exercise
+
+Try to work out what will be in the output `path` "bar" in the previous example. Given `data/test/baz.txt` contains "third_command".
+
+.Answer:
+[%collapsible]
+====
+----
+first_command
+third_command
+----
+
+This can be determined by adding `bar.out.view()` to the workflow section, then opening the output file with `cat`
+====
+
 
 === Process outputs
 A process output can also be accessed using the `out` attribute for the respective process object. For example:
@@ -105,7 +124,55 @@ workflow {
 }
 ----
 
-When a process defines two or more output channels, each of them can be accessed using the array element operator e.g. `out[0]`, `out[1]`, etc. or using named outputs (see below).
+When a process defines two or more output channels, each of them can be accessed using the array element operator e.g. `out[0]`, `out[1]`, etc. 
+
+.For example:
+[%collapsible]
+====
+----
+nextflow.enable.dsl=2
+
+process foo {
+    output:
+      path 'foo.txt'
+      path 'extra.txt'
+    script:
+      """
+      echo first_command > foo.txt
+      echo fourth_command > extra.txt
+      """
+}
+
+process bar {
+    input:
+      path x
+    output:
+      path 'bar.txt'
+    script:
+      """
+      head -n 1 $x > bar.txt
+      echo third_command >> bar.txt
+      """
+}
+
+data = channel.fromPath('./baz.txt')
+workflow {
+   foo()
+    bar(foo.out[1])
+    bar.out.view()
+
+}
+----
+
+would result in :
+
+----
+fourth_command
+third_command
+----
+====
+
+Or using named outputs (see below).
 
 === Process named output
 The process output definition allows the use of the `emit` option to define a name identifier that can be used to reference the channel in the external scope. For example:
@@ -491,32 +558,32 @@ script:
 }
 ----
 
-Operator bind has been deprecated by DSL2 syntax
+Operator `bind` has been deprecated by DSL2 syntax
 
-Operator operator << has been deprecated by DSL2 syntax.
+Operator `operator` << has been deprecated by DSL2 syntax.
 
-Operator choice has been deprecated by DSL2 syntax. Use branch instead.
+Operator `choice` has been deprecated by DSL2 syntax. Use `branch` instead.
 
-Operator close has been deprecated by DSL2 syntax.
+Operator `close` has been deprecated by DSL2 syntax.
 
-Operator create has been deprecated by DSL2 syntax.
+Operator `create` has been deprecated by DSL2 syntax.
 
-Operator countBy has been deprecated by DSL2 syntax.
+Operator `countBy` has been deprecated by DSL2 syntax.
 
-Operator into has been deprecated by DSL2 syntax since it’s not needed anymore.
+Operator `into` has been deprecated by DSL2 syntax since it’s not needed anymore.
 
-Operator fork has been renamed to multiMap.
+Operator `fork` has been renamed to `multiMap`.
 
-Operator groupBy has been deprecated by DSL2 syntax. Replace it with groupTuple
+Operator `groupBy` has been deprecated by DSL2 syntax. Replace it with `groupTuple`
 
-Operator print and println have been deprecated by DSL2 syntax. Use view instead.
+Operator `print` and `println` have been deprecated by DSL2 syntax. Use `view` instead.
 
-Operator merge has been deprecated by DSL2 syntax. Use join instead.
+Operator `merge` has been deprecated by DSL2 syntax. Use `join` instead.
 
-Operator separate has been deprecated by DSL2 syntax.
+Operator `separate` has been deprecated by DSL2 syntax.
 
-Operator spread has been deprecated with DSL2 syntax. Replace it with combine.
+Operator `spread` has been deprecated with DSL2 syntax. Replace it with `combine`.
 
-Operator route has been deprecated by DSL2 syntax.
+Operator `route` has been deprecated by DSL2 syntax.
 
 
