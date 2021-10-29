@@ -66,11 +66,12 @@ composed by multiple commands spanning over multiple lines. For example:
 [source,nextflow,linenums]
 ----
 process example {
-    script:
-    """
-    grep '^@S' data/ggal/gut_1.fq > Fastq_headers
-    cat Fastq_headers | cut -d '.' -f2 > Uniq_Fastq_Names
-    """
+  script:
+  """
+  echo 'Hello world!\nHola mundo!\nCiao mondo!\nHallo Welt!' > file
+  cat file | head -n 1 | head -c 5 > chunk_1.txt
+  gzip -c chunk_1.txt  > chunk_archive.gz
+  """
 }
 ----
 
@@ -85,7 +86,7 @@ process pyStuff {
 
   x = 'Hello'
   y = 'world!'
-  print "%s - %s" % (x,y)
+  print ("%s - %s" % (x,y))
   """
 }
 ----
@@ -165,26 +166,31 @@ The process script can also be defined in a completely dynamic manner using an `
 
 [source,nextflow,linenums]
 ----
-params.aligner = 'kallisto'
+params.compress = 'gzip'
+params.file2compress = "$baseDir/data/ggal/transcriptome.fa"
 
 process foo {
+
+  input:
+  path file from params.file2compress
+
   script:
-  if( params.aligner == 'kallisto' )
+  if( params.compress == 'gzip' )
     """
-    kallisto --reads /some/data.fastq
+    gzip -c $file > ${file}.fa.gz
     """
-  else if( params.aligner == 'salmon' )
+  else if( params.compress == 'bzip2' )
     """
-    salmon --reads /some/data.fastq
+    bzip2 -c $file > ${file}.fa.bz2
     """
   else
-    throw new IllegalArgumentException("Unknown aligner $params.aligner")
-}
+    throw new IllegalArgumentException("Unknown aligner $params.compress")
+}   
 ----
 
 ==== Exercise
 
-Write a custom function that given the aligner name as a parameter, returns the command
+CAUTION: Write a custom function that given the compressor name as a parameter, returns the command
 string to be executed. Then use this function as the process script body.
 
 == Inputs
