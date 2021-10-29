@@ -29,15 +29,15 @@ This should give you a great basis to start writing your own pipelines and to un
 = Summary
 
 1. <<Environment setup>>
-2. <<Getting started with Nextflow>>
-3. <<Developing a Basic RNA-Seq pipeline>>
+2. <<Introduction>>
+3. <<Simple RNA-Seq pipeline>>
 4. <<Manage dependencies & containers>>
 5. <<Channels>>
 6. <<Processes>>
 7. <<Operators>>
-8. <<Groovy structures and idioms>>
+8. <<Groovy basic structures and idioms>>
 9. <<DSL2 and modules>>
-10. <<Getting started with Nextflow Tower>>
+10. <<Get started with Nextflow Tower>>
 11. <<Nextflow configuration>>
 12. <<Deployment scenarios>>
 13. <<Execution cache and resume>>
