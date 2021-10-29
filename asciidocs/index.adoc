@@ -29,4 +29,5 @@ include::config.adoc[]
 include::executors.adoc[]
 include::cache_and_resume.adoc[]
 include::debugging.adoc[]
+include::parsing.adoc[]
 :leveloffset: -1
