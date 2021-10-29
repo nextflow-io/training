@@ -75,7 +75,7 @@ process example {
 }
 ----
 
-By default the process command is interpreted as a *Bash* script. However any other scripting language can be used just simply starting the script with the corresponding https://en.wikipedia.org/wiki/Shebang_(Unix)[Shebang] declaration. For example:
+By default the process command is interpreted as a *Bash* script. However any other scripting language can be used by simply starting the script with the corresponding https://en.wikipedia.org/wiki/Shebang_(Unix)[Shebang] declaration. For example:
 
 [source,nextflow,linenums]
 ----
@@ -91,7 +91,7 @@ process pyStuff {
 }
 ----
 
-TIP: This allows the combining of tasks using different programming languages within the same workflow script, which may better fit a particular job. However for large chunks of code is suggested to save them into separate files and invoke them from the process script.
+NOTE: Multiple programming languages can be used within the same workflow script. However, for large chunks of code is suggested to save them into separate files and invoke them from the process script. One can store the specific scripts in the ./bin folder.
 
 === Script parameters
 
@@ -190,7 +190,7 @@ process foo {
 
 ==== Exercise
 
-CAUTION: Write a custom function that given the compressor name as a parameter, returns the command
+Write a custom function that given the compressor name as a parameter, returns the command
 string to be executed. Then use this function as the process script body.
 
 == Inputs
@@ -676,7 +676,7 @@ process foo {
 
 The complete list of directives is available https://www.nextflow.io/docs/latest/process.html#directives[at this link].
 
-=== Exercise
+==== Exercise
 
 Modify the script of the previous exercise adding a https://www.nextflow.io/docs/latest/process.html#tag[tag] directive logging the `sample_id` in the execution output.
 
