@@ -23,7 +23,7 @@ There are seven main groups that are detailed in the documentation that cover:
 
 [source,nextflow,linenums]
 ----
-nums = Channel.from(1,2,3,4)         
+nums = Channel.from(1,2,3,4)         // <1>    
 square = nums.map { it -> it * it }  // <2>
 square.view()                        // <3>
 ----
