@@ -96,7 +96,8 @@ workflow {
 }
 ----
 
-==== Exercise
+[discrete]
+=== Exercise
 
 Try to work out what will be in the output `path` "bar" in the previous example. Given `data/test/baz.txt` contains "third_command".
 
@@ -474,7 +475,8 @@ Ciao world!
 
 Finally the include option `params` allows the specification of one or more parameters without inheriting any value from the external environment.\
 
-==== Exercise
+[discrete]
+=== Exercise
 
 Try to repeat the above code for the module parameters section. Replacing ./some/module with the file name you have given it. Remember to use ./ for current directory.
 

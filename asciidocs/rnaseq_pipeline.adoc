@@ -34,11 +34,13 @@ Try to specify a different input parameter, for example:
 
   nextflow run script1.nf --reads this/or/that
 
+[discrete]
 === Exercise
 
 Modify the `script1.nf` adding a fourth parameter named `outdir` and set it to a default path
 that will be used as the pipeline output directory.
 
+[discrete]
 === Exercise
 
 Modify the `script1.nf` to print all the pipeline parameters by using a single `log.info` command and a https://www.nextflow.io/docs/latest/script.html#multi-line-strings[multiline string] statement.
@@ -134,18 +136,22 @@ In order to avoid adding `-with-docker` each time, add the following line in the
 
   docker.enabled = true
 
+[discrete]
 === Exercise
 
 Enable the Docker execution by default adding the above setting in the `nextflow.config` file.
 
+[discrete]
 === Exercise
 
 Print the output of the `index_ch` channel by using the https://www.nextflow.io/docs/latest/operator.html#view[view].
 
+[discrete]
 === Exercise
 
 If you have more cpu available, try changing your script to request more resources for this process. For an example, see the https://www.nextflow.io/docs/latest/process.html#cpus[directive docs]. `$task.cpus` is already specified in this script, so setting the cpu as the top as a directive will tell Nextflow to run this job with the specified number of cpus.
 
+[discrete]
 === Bonus Exercise
 
 Use the command `tree work` to see how Nextflow organizes the process work directory. Check https://www.tecmint.com/linux-tree-command-examples/[here], if you need to download tree.
@@ -188,11 +194,13 @@ Try it again specifying different read files by using a glob pattern:
 IMPORTANT: File paths including one or more wildcards ie. `*`, `?`, etc. MUST be
 wrapped in single-quoted characters to avoid Bash expanding the glob.
 
+[discrete]
 === Exercise
 
 Use the https://www.nextflow.io/docs/latest/operator.html#set[set] operator in place
 of `=` assignment to define the `read_pairs_ch` channel.
 
+[discrete]
 === Exercise
 
 Use the `checkIfExists` option for the https://www.nextflow.io/docs/latest/channel.html#fromfilepairs[fromFilePairs] method to check if the specified path contains at least file pairs.
@@ -237,12 +245,14 @@ Nextflow parallelizes the execution of your pipeline simply by providing multipl
 to your script.
 
 
+[discrete]
 === Exercise
 
 Add a https://www.nextflow.io/docs/latest/process.html#tag[tag] directive to the
 `quantification` process to provide a more readable execution log.
 
 
+[discrete]
 === Exercise
 
 Add a https://www.nextflow.io/docs/latest/process.html#publishdir[publishDir] directive
@@ -273,6 +283,7 @@ The script will report the following error message:
 Channel `read_pairs_ch` has been used twice as an input by process `fastqc` and process `quantification`
 ```
 
+[discrete]
 === Exercise
 
 Modify the creation of the `read_pairs_ch` channel by using an https://www.nextflow.io/docs/latest/operator.html#into[into]

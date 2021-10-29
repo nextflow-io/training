@@ -196,7 +196,8 @@ ls -la transcript-index
 IMPORTANT: Note that the permissions for files created by the Docker
 execution is `root`.
 
-==== Exercise
+[discrete]
+=== Exercise
 
 Use the option `-u $(id -u):$(id -g)` to allow Docker to create files with the right permission.
 
@@ -428,7 +429,9 @@ This makes easier to manage different environments for the processes in the work
 See the https://www.nextflow.io/docs/latest/conda.html[Nextflow]
 in the Nextflow documentation for details.
 
+[discrete]
 === Bonus Exercise
+
 Take a look at the Dockerfile of the https://github.com/nextflow-io/rnaseq-nf[rnaseq-nf] pipeline to determine how it is built.
 
 == BioContainers

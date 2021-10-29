@@ -23,7 +23,7 @@ There are seven main groups that are detailed in the documentation that cover:
 
 [source,nextflow,linenums]
 ----
-nums = Channel.from(1,2,3,4)         // <1>
+nums = Channel.from(1,2,3,4)         
 square = nums.map { it -> it * it }  // <2>
 square.view()                        // <3>
 ----
@@ -106,7 +106,8 @@ Channel
     .view { word, len -> "$word contains $len letters" }
 ----
 
-==== Exercise
+[discrete]
+=== Exercise
 
 Use `fromPath` to create a channel emitting the _fastq_ files matching the pattern `data/ggal/*.fq`,
 then chain with a map to return a pair containing the file name and the path itself.
@@ -238,7 +239,8 @@ It shows:
 This operator is useful to process together all elements for which there is a common
 property or a grouping key.
 
-==== Exercise
+[discrete]
+=== Exercise
 
 Use `fromPath` to create a channel emitting the _fastq_ files matching the pattern `data/ggal/*.fq`,
 then use a `map` to associate to each file the name prefix. Finally group together all
