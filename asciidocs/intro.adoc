@@ -1,4 +1,4 @@
-= Getting started with Nextflow
+= Introduction
 
 == Basic concepts
 
@@ -311,4 +311,11 @@ mundo!
 
 === In DAG-like format
 
+.Check out the DAG like format by clicking here:
+[%collapsible]
+====
+
+image::helloworlddiagram.png[]
+
+====
 

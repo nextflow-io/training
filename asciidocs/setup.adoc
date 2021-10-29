@@ -18,7 +18,7 @@ Nextflow can be used on any POSIX compatible system (Linux, OS X, Windows Subsys
 * https://aws.amazon.com/cli/[AWS CLI]
 * AWS Batch computing environment configured 
 
-=== Setup AWS Cloud9 environment (Optional) 
+=== Setup AWS Cloud9 environment
 
 If you are running this tutorial in the AWS Cloud9 environment, 
 run the following one-liner to setup the virtual environment: 
