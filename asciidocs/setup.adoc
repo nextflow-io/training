@@ -1,19 +1,5 @@
 = Environment setup
 
-== Using Gitpod (Recommended)
-
-Use a preconfigured Nexflow development environment using Gitpod. 
-
-*Requirements*:
-
- * GitHub, GitLab or BitBucket account
- * Web browser (Google Chrome, Firefox)
-
-*Steps*:
-
-* Sign up here[link to Seqera Training landing page]
-* Open the link recieved in your email
-
 == Using a terminal
 
 Nextflow can be used on any POSIX compatible system (Linux, OS X, Windows Subsystem for Linux etc.).
@@ -76,3 +62,18 @@ Check the correct installation running the following command:
 ----
 nextflow info
 ----
+
+== Using Gitpod (Coming soon- in development)
+
+Use a preconfigured Nexflow development environment using Gitpod. 
+
+*Requirements*:
+
+ * GitHub, GitLab or BitBucket account
+ * Web browser (Google Chrome, Firefox)
+
+*Future Steps*:
+
+* Link to Seqera Training landing page.
+* Open the link recieved in your email.
+* Proceed with Nextflow tutorial.
