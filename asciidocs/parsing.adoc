@@ -134,7 +134,7 @@ Parsing tsvs works in a similar way, just adding the `sep:'\t'` option in the sp
       .view()
 ----
 
-==== Exercise
+=== Exercise
 
 Try using the tab separation technique, but print just the first column, and remove the header.
 
