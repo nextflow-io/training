@@ -116,6 +116,8 @@ This process takes the transcriptome params file as input and creates the transc
 
 NOTE: the `input` declaration defines a `transcriptome` path variable which is used in the `script` as a reference (using the dollar sign) in the Salmon command line.
 
+IMPORTANT: Resource requirements such as CPU and memory can change with different workflow executions and platforms. Nextflow can use $task.cpus as a variable for the number of CPUs. We will learn more about this later.
+
 Run it by using the command:
 
   nextflow run script2.nf
@@ -163,8 +165,7 @@ In this step you have learned:
 1. How to define a process executing a custom command
 2. How process inputs are declared
 3. How process outputs are declared
-4. How to access the number of available CPUs
-5. How to print the content of a channel
+4. How to print the content of a channel
 
 
 == Collect read files by pairs

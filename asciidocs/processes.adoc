@@ -19,9 +19,13 @@ process sayHello {
 The process body can contain up to *five* definition blocks:
 
 1. Directives
+
 2. Inputs
+
 3. Outputs
+
 4. When clause
+
 5. Script
 
 The full process syntax is defined as follows:
@@ -48,11 +52,11 @@ process < name > {
 }
 ----
 
-<1> Zero, one or more process directives
-<2> Zero, one or more process inputs
-<3> Zero, one or more process outputs
-<4> An optional boolean conditional to trigger the process execution
-<5> The command to be executed
+<1> Zero, one or more process directives.
+<2> Zero, one or more process inputs.
+<3> Zero, one or more process outputs.
+<4> An optional boolean conditional to trigger the process execution.
+<5> The command to be executed.
 
 == Script
 
