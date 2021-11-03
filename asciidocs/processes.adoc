@@ -1,10 +1,10 @@
 = Processes 
 
-In Nextflow, a _process_ is the basic computing primitive to execute foreign functions (i.e. custom scripts or tools).
+In Nextflow, a `process` is the basic computing primitive to execute foreign functions (i.e. custom scripts or tools).
 
-The process definition starts with the keyword `process`, followed by the process name and finally the process `body` delimited by curly brackets. 
+The process definition starts with the keyword `process`, followed by the process name and finally the process body delimited by curly brackets. 
 
-A basic `process`, only using the script definition block, looks like the following:
+A basic `process`, only using the `script` definition block, looks like the following:
 
 [source,nextflow,linenums]
 ----
@@ -16,17 +16,17 @@ process sayHello {
 }
 ----
 
-The process body can contain up to *five* definition blocks:
+In more complex examples, the process body can contain up to *five* definition blocks:
 
-1. Directives
+1. *Directives* are initial declarations that define optional settings.
 
-2. Inputs
+2. *Input* defines the expected input file/s and the channel from where to find them.
 
-3. Outputs
+3. *Output* defines the expected output file/s and the channel to send the data to.
 
-4. When clause
+4. *When* is a optional clause statement to allow conditional processes.
 
-5. Script
+5. *Script* is a string statement that defines the command to be executed by the process
 
 The full process syntax is defined as follows:
 
@@ -62,9 +62,9 @@ process < name > {
 
 The `script` block is a string statement that defines the command to be executed by the process.
 
-A process contains one and only one script block, and it must be the last statement when the process contains input and output declarations.
+A process contains one and only one `script` block, and it must be the last statement when the process contains input and output declarations.
 
-The script block can be a single or multi-line string. The latter simplifies the writing of non-trivial scripts
+The `script` block can be a single or multi-line string. The latter simplifies the writing of non-trivial scripts
 composed by multiple commands spanning over multiple lines. For example:
 
 [source,nextflow,linenums]
@@ -79,7 +79,7 @@ process example {
 }
 ----
 
-By default the process command is interpreted as a *Bash* script. However any other scripting language can be used by simply starting the script with the corresponding https://en.wikipedia.org/wiki/Shebang_(Unix)[Shebang] declaration. For example:
+By default the `process` command is interpreted as a *Bash* script. However any other scripting language can be used by simply starting the script with the corresponding https://en.wikipedia.org/wiki/Shebang_(Unix)[Shebang] declaration. For example:
 
 [source,nextflow,linenums]
 ----
@@ -99,7 +99,7 @@ NOTE: Multiple programming languages can be used within the same workflow script
 
 === Script parameters
 
-Script parameters can be defined dynamically using variable values, like this:
+Script parameters (`params`) can be defined dynamically using variable values, like this:
 
 [source,nextflow,linenums]
 ----
@@ -144,11 +144,10 @@ process bar {
 }
 ----
 
-However, this block the usage of Nextflow variables in the command script.
+However, this blocks the usage of Nextflow variables in the command script.
 
 Another alternative is to use a `shell` statement instead of `script` which uses a different
-syntax for Nextflow variables: `!{..}`. This allow the use of both Nextflow and Bash variables in
-the same script.
+syntax for Nextflow variables: `!{..}`. This allows the use of both Nextflow and Bash variables in the same script.
 
 [source,nextflow,linenums]
 ----
@@ -162,7 +161,6 @@ process baz {
   '''
 }
 ----
-
 
 === Conditional script
 
@@ -207,9 +205,9 @@ The process execution is fired each time _new_ data is ready to be consumed from
 
 image::channel-process.png[]
 
-The input block defines which channels the process is expecting to receive input data from. You can only define one input block at a time, and it must contain one or more inputs declarations.
+The `input` block defines which channels the `process` is expecting to receive data from. You can only define one `input` block at a time, and it must contain one or more input declarations.
 
-The input block follows the syntax shown below:
+The `input` block follows the syntax shown below:
 
 ```nextflow
 input:

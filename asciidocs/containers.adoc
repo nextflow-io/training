@@ -462,7 +462,6 @@ RUN \                               // <5>
 <6> Tell conda to update the environment using the conda.yml file.
 <7> Removes unused conda packages and caches.
 
-
 Also, you will need to make sure you have the conda.yml file in the current directory too:
 
 .see conda.yml:
@@ -487,9 +486,9 @@ dependencies:
 
 Try to run the RNA-Seq run you did in the third section of this document, but start by building your own conda dockerfile. 
 
-IMPORTANT: Building a Docker container can take up to ten minutes, ao
+IMPORTANT: Building a Docker container can take up to ten minutes, so please head to the next section while this runs.
 
-.For the answer, click here:
+.For the brief overview of step to take, click here:
 [%collapsible]
 ====
 1. Make a Dockerfile in the current directory (with above code).
