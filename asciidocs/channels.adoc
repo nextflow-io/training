@@ -38,7 +38,7 @@ ch.view()       // <2>
 <2> Apply the `view` method to the `ch` channel, therefore prints each item emitted by the channels.
 
 
-=[discrete]
+[discrete]
 === Exercise
 
 Try to execute this snippet, it will produce an error message.
@@ -188,7 +188,7 @@ TIP: Two asterisks, i.e. `\**`, works like `*` but crosses directory boundaries.
 
 Learn more about the glob patterns syntax at https://docs.oracle.com/javase/tutorial/essential/io/fileOps.html#glob[this link].
 
-=[discrete]
+[discrete]
 === Exercise
 
 Use the `Channel.fromPath` method to create a channel emitting all files with the suffix `.fq` in the `data/ggal/` and any subdirectory, then print the file name.
@@ -243,7 +243,7 @@ IMPORTANT: The glob pattern must contain at least a star wildcard character.
 | When ``true``, it throws an exception of the specified path that does not exist in the file system (default: ``false``)
 |===
 
-=[discrete]
+[discrete]
 === Exercise
 
 Use the `fromFilePairs` method to create a channel emitting all pairs of fastq read in the `data/ggal/`
@@ -301,7 +301,7 @@ Channel
 TIP: Read pairs are implicitly managed and are returned as a list of files.
 
 It's straightforward to use this channel as an input using the usual Nextflow 
-syntax. For example: 
+syntax. The code below creates a channel containing 24 samples from a chromatin dynamics study (from SRA) and runs FASTQC on the resulting files. See: 
 
 [source,nextflow,linenums]
 ----
@@ -323,9 +323,3 @@ process fastqc {
 }
 ----
 
-The code snippet above creates a channel containing 24 samples from a chromatin dynamics study and runs FASTQC on the resulting files.
-
-=[discrete]
-=== Exercise
-
-Try getting the above snippet to work. Remember, we need `factqc` from Docker!

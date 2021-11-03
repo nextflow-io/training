@@ -1,4 +1,5 @@
-= Welcome to the Nextflow Training Workshop
+[discrete]
+=== Welcome to the Nextflow Training Workshop
 
 We are excited to have you on the path to writing reproducible and scalable scientific workflows using Nextflow. This guide complements the full Nextflow documentation - if you ever have any doubts, head over to the docs located https://www.nextflow.io/docs/latest[here].
 
@@ -10,7 +11,8 @@ By the end of this course you should:
 4. Understand the different execution platforms supported by Nextflow 
 5. Be introducted to the Nextflow community and ecosystem
 
-= Overview
+[discrete]
+=== Overview
 
 To get you started with Nextflow as quickly as possible, we will walk through the following steps:
 
@@ -26,7 +28,8 @@ To get you started with Nextflow as quickly as possible, we will walk through th
 
 This will give you a broad understanding of Nextflow, so that you can start writing your own pipelines. We hope you enjoy the course! This is ever-evolving document and feedback is always welcome.
 
-= Summary
+[discrete]
+=== Summary
 
 1. <<Environment setup>>
 2. <<Introduction>>
@@ -42,4 +45,5 @@ This will give you a broad understanding of Nextflow, so that you can start writ
 12. <<Deployment scenarios>>
 13. <<Execution cache and resume>>
 14. <<Error handling & troubleshooting>>
+15. <<Parsing datasets into Nextflow>>
 

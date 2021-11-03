@@ -4,7 +4,7 @@
 :hide-uri-scheme:
 :nofooter:
 :icons: font
-:toclevels: 3
+:toclevels: 4
 :imagesdir: img
 :toc: left
 :source-highlighter: coderay
@@ -13,8 +13,9 @@
 :sectnums:
 
 
-include::welcome.adoc[]
+
 :leveloffset: +1
+include::welcome.adoc[]
 include::setup.adoc[]
 include::intro.adoc[]
 include::rnaseq_pipeline.adoc[]
