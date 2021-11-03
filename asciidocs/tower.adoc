@@ -60,7 +60,7 @@ export NXF_VER=20.10.0
 
 Where `eyxxxxxxxxxxxxxxxQ1ZTE=` is the token you have just created.
 
-NOTE: "check your Nextflow version". Bearer token requires Nextflow version 20.10.0 or later, set with the second command above.
+NOTE: "check your Nextflow version". Bearer tokens require Nextflow version 20.10.0 or later, set with the second command above.
 
 To submit a pipeline to a https://help.tower.nf/getting-started/workspace/[Workspace] using the Nextflow command line tool, add the workspace ID to your environment. For example
 

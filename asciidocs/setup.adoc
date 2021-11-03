@@ -63,7 +63,7 @@ Check the correct installation running the following command:
 nextflow info
 ----
 
-== Using Gitpod (Coming soon- in development)
+== Using Gitpod (Coming soon)
 
 Use a preconfigured Nexflow development environment using Gitpod. 
 
@@ -74,6 +74,6 @@ Use a preconfigured Nexflow development environment using Gitpod.
 
 *Future Steps*:
 
-* Link to Seqera Training landing page.
-* Open the link recieved in your email.
-* Proceed with Nextflow tutorial.
+- Link to Seqera Training landing page.
+- Open the link recieved in your email.
+- Proceed with Nextflow tutorial.

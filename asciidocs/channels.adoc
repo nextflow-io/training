@@ -150,10 +150,10 @@ matching the specified glob pattern.
 
 [source,nextflow,linenums]
 ----
-Channel.fromPath( '/data/big/*.txt' )
+Channel.fromPath( './data/meta/*.csv' )
 ----
 
-This example creates a channel and emits as many items as there are files with `txt` extension in the `/data/big` folder. Each element is a file object implementing the https://docs.oracle.com/javase/8/docs/api/java/nio/file/Paths.html[Path] interface.
+This example creates a channel and emits as many items as there are files with `csv` extension in the `/data/meta` folder. Each element is a file object implementing the https://docs.oracle.com/javase/8/docs/api/java/nio/file/Paths.html[Path] interface.
 
 TIP: Two asterisks, i.e. `\**`, works like `*` but crosses directory boundaries. This syntax is generally used for matching complete paths. Curly brackets specify a collection of sub-patterns.
 
@@ -201,19 +201,16 @@ The `fromFilePairs` method creates a channel emitting the file pairs matching a 
 [source,nextflow,linenums]
 ----
 Channel
-    .fromFilePairs('/my/data/SRR*_{1,2}.fastq')
+    .fromFilePairs('./data/ggal/*_{1,2}.fq')
     .view()
 ----
 
 It will produce an output similar to the following:
 
 ```
-[SRR493366, [/my/data/SRR493366_1.fastq, /my/data/SRR493366_2.fastq]]
-[SRR493367, [/my/data/SRR493367_1.fastq, /my/data/SRR493367_2.fastq]]
-[SRR493368, [/my/data/SRR493368_1.fastq, /my/data/SRR493368_2.fastq]]
-[SRR493369, [/my/data/SRR493369_1.fastq, /my/data/SRR493369_2.fastq]]
-[SRR493370, [/my/data/SRR493370_1.fastq, /my/data/SRR493370_2.fastq]]
-[SRR493371, [/my/data/SRR493371_1.fastq, /my/data/SRR493371_2.fastq]]
+[liver, [/user/nf-training/data/ggal/liver_1.fq, /user/nf-training/data/ggal/liver_2.fq]]
+[gut, [/user/nf-training/data/ggal/gut_1.fq, /user/nf-training/data/ggal/gut_2.fq]]
+[lung, [/user/nf-training/data/ggal/lung_1.fq, /user/nf-training/data/ggal/lung_2.fq]]
 ```
 
 IMPORTANT: The glob pattern must contain at least a star wildcard character.
@@ -243,20 +240,18 @@ IMPORTANT: The glob pattern must contain at least a star wildcard character.
 |When ``true`` the matching files are produced as sole elements in the emitted tuples (default: ``false``).
 
 |checkIfExists
-| When ``true`` throws an exception of the specified path do not exist in the file system (default: ``false``)
+| When ``true``, it throws an exception of the specified path that does not exist in the file system (default: ``false``)
 |===
 
 =[discrete]
 === Exercise
 
 Use the `fromFilePairs` method to create a channel emitting all pairs of fastq read in the `data/ggal/`
-directory and print them.
-
-Then use the `flat:true` option and compare the output with the previous execution.
+directory and print them. Then use the `flat:true` option and compare the output with the previous execution.
 
 === fromSRA 
 
-The `Channel.fromSRA` method that makes it possible to query of https://www.ncbi.nlm.nih.gov/sra[NCBI SRA] archive and returns a channel emitting the FASTQ files matching the specified selection criteria.
+The `Channel.fromSRA` method makes it possible to query the https://www.ncbi.nlm.nih.gov/sra[NCBI SRA] archive and returns a channel emitting the FASTQ files matching the specified selection criteria.
 
 The query can be project ID or accession number(s) supported by the 
 https://www.ncbi.nlm.nih.gov/books/NBK25499/#chapter4.ESearch[NCBI ESearch API]. 
@@ -303,7 +298,7 @@ Channel
 [ERR908505, [ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR908/ERR908505/ERR908505_1.fastq.gz, ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR908/ERR908505/ERR908505_2.fastq.gz]]
 ----
 
-TIP: Read pairs are implicitly managed are returned as a list of files.
+TIP: Read pairs are implicitly managed and are returned as a list of files.
 
 It's straightforward to use this channel as an input using the usual Nextflow 
 syntax. For example: 
@@ -330,3 +325,7 @@ process fastqc {
 
 The code snippet above creates a channel containing 24 samples from a chromatin dynamics study and runs FASTQC on the resulting files.
 
+=[discrete]
+=== Exercise
+
+Try getting the above snippet to work. Remember, we need `factqc` from Docker!

@@ -369,9 +369,11 @@ to the Singularity Library.
 
 == Conda/Bioconda packages
 
-Conda is popular package and environment manager. The built-in support for Conda
-allows Nextflow pipelines to automatically creates and activates the Conda
-environment(s) given the dependencies specified by each process.
+Conda is a popular package and environment manager. The built-in support for Conda
+allows Nextflow pipelines to automatically create and activate the Conda
+environment(s), given the dependencies specified by each process.
+
+=== Using conda
 
 A Conda environment is defined using a YAML file, which lists the required software packages.
 For example:
@@ -429,10 +431,88 @@ This makes easier to manage different environments for the processes in the work
 See the https://www.nextflow.io/docs/latest/conda.html[Nextflow]
 in the Nextflow documentation for details.
 
-[discrete]
-=== Bonus Exercise
 
-Take a look at the Dockerfile of the https://github.com/nextflow-io/rnaseq-nf[rnaseq-nf] pipeline to determine how it is built.
+=== Using Docker to pull a conda environment
+
+Another way to operate with conda is by specifying it with a Dockerfile. This saves having to do build the conda environment within your terminal each time you want to use it (see the steps in previous section).
+
+
+To do this you can simply add the following lines to your Dockerfile.
+
+See the following example from https://github.com/nextflow-io/rnaseq-nf[rnaseq-nf]:
+
+```
+FROM continuumio/miniconda:4.7.12  // <1>
+MAINTAINER Your Name <You email address>  // <2>
+
+RUN apt-get -y install ttf-dejavu   // <3>
+
+COPY conda.yml .                    // <4>
+RUN \                               // <5>
+  conda env update -n root -f conda.yml \   // <6>
+  && conda clean -a                  // <7>
+
+```
+
+<1> Choice of parent image from which you build the Docker container.
+<2> Write your information here.
+<3> This installs a dependecy "ttf-dejavu".
+<4> This instructs the container to find the conda.yml required in cwd.
+<5> RUN the following code block.
+<6> Tell conda to update the environment using the conda.yml file.
+<7> Removes unused conda packages and caches.
+
+
+Also, you will need to make sure you have the conda.yml file in the current directory too:
+
+.see conda.yml:
+[%collapsible]
+====
+```
+name: rnaseq-nf
+channels:
+  - defaults
+  - bioconda
+  - conda-forge
+dependencies:
+  # Default bismark
+  - salmon=1.0.0
+  - fastqc=0.11.5
+  - multiqc=1.5
+```
+====
+
+[discrete]
+=== Exercise
+
+Try to run the RNA-Seq run you did in the third section of this document, but start by building your own conda dockerfile. 
+
+IMPORTANT: Building a Docker container can take up to ten minutes, ao
+
+.For the answer, click here:
+[%collapsible]
+====
+1. Make a Dockerfile in the current directory (with above code).
+
+2. Build the image `docker build -t my-image .` (don't forget the '.')
+
+3. Publish the docker image to your online docker account.
+
+4. Add the image file name to the nextflow.config file. 
+
+e.g. remove the following from the nextflow.config
+```
+process.container = 'nextflow/rnaseq-nf'
+```
+
+and replace with:
+
+```
+process.container = 'yourid/image_name_chosen'
+```
+
+replacing the above the correct docker hub link.
+====
 
 == BioContainers
 
