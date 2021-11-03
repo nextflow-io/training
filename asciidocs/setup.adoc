@@ -78,6 +78,10 @@ Use a preconfigured Nexflow development environment using Gitpod.
 - Open the link recieved in your email.
 - Proceed with Nextflow tutorial.
 
-=== Future operations
+=== Future platforms
 
 If there are other platforms you want us to set up for your business/institution, please let us know: info@nextflow.io
+
+==== Help
+
+
