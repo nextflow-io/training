@@ -77,3 +77,7 @@ Use a preconfigured Nexflow development environment using Gitpod.
 - Link to Seqera Training landing page.
 - Open the link recieved in your email.
 - Proceed with Nextflow tutorial.
+
+=== Future operations
+
+If there are other platforms you want us to set up for your business/institution, please let us know: info@nextflow.io
