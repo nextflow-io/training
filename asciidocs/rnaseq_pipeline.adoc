@@ -9,7 +9,7 @@ To demonstrate a real-world biomedical scenario, we will implement a proof of co
 
 This will be done using a series of seven scripts, 
 each of which builds on the previous, in order to have a complete worflow. 
-You can find these in the tutorial folder (script1.nf to script7.nf).
+You can find these in the tutorial folder (`script1.nf` to `script7.nf`).
 
 == Define the pipeline parameters
 
@@ -40,6 +40,18 @@ Try to specify a different input parameter, for example:
 Modify the `script1.nf` adding a fourth parameter named `outdir` and set it to a default path
 that will be used as the pipeline output directory.
 
+.Click here for the answer:
+[%collapsible]
+====
+[source,nextflow,linenums]
+----
+params.reads = "$baseDir/data/ggal/*_{1,2}.fq"
+params.transcriptome = "$baseDir/data/ggal/transcriptome.fa"
+params.multiqc = "$baseDir/multiqc"
+params.outdir = "$baseDir/myresults"
+----
+====
+
 [discrete]
 === Exercise
 
@@ -47,29 +59,13 @@ Modify the `script1.nf` to print all the pipeline parameters by using a single `
 
 TIP: See an example https://github.com/nextflow-io/rnaseq-nf/blob/3b5b49f/main.nf#L41-L48[here,window="_blank"].
 
-=== Recap
-
-In this step you have learned:
-
-1. How to define parameters in your pipeline script
-2. How to pass parameters by using the command line
-3. The use of `$var` and `${var}` variable placeholders
-4. How to use multiline strings
-5. How to use `log.info` to print information and save it in the log execution file
-
-.This is what your script should look like so far!
+.Click here for the answer:
 [%collapsible]
 ====
+Add the following to your script file:
+
 [source,nextflow,linenums]
 ----
-/* 
- * pipeline input parameters 
- */
-params.reads = "$baseDir/data/ggal/*_{1,2}.fq"
-params.transcriptome_file = "$baseDir/data/ggal/transcriptome.fa"
-params.multiqc = "$baseDir/multiqc"
-params.outdir = "results"
-
 log.info """\
          R N A S E Q - N F   P I P E L I N E    
          ===================================
@@ -81,13 +77,23 @@ log.info """\
 ----
 ====
 
+=== Recap
+
+In this step you have learned:
+
+1. How to define parameters in your pipeline script
+2. How to pass parameters by using the command line
+3. The use of `$var` and `${var}` variable placeholders
+4. How to use multiline strings
+5. How to use `log.info` to print information and save it in the log execution file
+
 == Create a transcriptome index file
 
 Nextflow allows the execution of any command or script by using a `process` definition.
 
 A `process` is defined by providing three main declarations:
-the process https://www.nextflow.io/docs/latest/process.html#inputs[inputs], https://www.nextflow.io/docs/latest/process.html#outputs[outputs]
-and command https://www.nextflow.io/docs/latest/process.html#script[script].
+the process https://www.nextflow.io/docs/latest/process.html#inputs[`inputs`], https://www.nextflow.io/docs/latest/process.html#outputs[`outputs`]
+and command https://www.nextflow.io/docs/latest/process.html#script[`script`].
 
 To add a transcriptome `index` process, try adding the following code block to your script (or continue from script2.nf).
 
@@ -112,7 +118,7 @@ process index {
 }
 ----
 
-This process takes the transcriptome params file as input and creates the transcriptome index by using the `salmon` tool. The `output` is specified as a path to a output file called 'index', and this is passed to the 'index_ch' channel.
+This process takes the transcriptome params file as `input` and creates the transcriptome index by using the `salmon` tool. The `output` is specified as a path to a output file called `index`, and this is passed to the `index_ch` `channel`.
 
 NOTE: the `input` declaration defines a `transcriptome` path variable which is used in the `script` as a reference (using the dollar sign) in the Salmon command line.
 
@@ -122,7 +128,7 @@ Run it by using the command:
 
   nextflow run script2.nf
 
-The execution will fail because Salmon is not installed in your environment.
+The execution will fail because `salmon` is not installed in your environment.
 
 Add the command line option `-with-docker` to launch the execution through a Docker container
 as shown below:
@@ -148,15 +154,87 @@ Enable the Docker execution by default adding the above setting in the `nextflow
 
 Print the output of the `index_ch` channel by using the https://www.nextflow.io/docs/latest/operator.html#view[view].
 
+.Click here for the answer:
+[%collapsible]
+====
+Add the following to your script file, at the end:
+
+[source,nextflow,linenums]
+----
+index_ch.view()
+----
+====
+
 [discrete]
 === Exercise
 
 If you have more cpu available, try changing your script to request more resources for this process. For an example, see the https://www.nextflow.io/docs/latest/process.html#cpus[directive docs]. `$task.cpus` is already specified in this script, so setting the cpu as the top as a directive will tell Nextflow to run this job with the specified number of cpus.
 
+.Click here for the answer:
+[%collapsible]
+====
+Add `cpus 2` to the top of the index process:
+
+[source,nextflow,linenums]
+----
+process index {
+    cpus 2
+    input:
+    path transcriptome from params.transcriptome_file
+     
+    output:
+    path 'index' into index_ch
+
+    script:       
+    """
+    salmon index --threads $task.cpus -t $transcriptome -i index
+    """
+}
+
+Then check it worked, by looking at the script executed in the work directory. Look for the hexidecimal (e.g. work/7f/f285b80022d9f61e82cd7f90436aa4/), Then `cat` the .command.sh. 
+
+
+For extra practice, you can also try asking for more cpu than you have to see what happens and the error it kicks out.
+----
+====
+
 [discrete]
 === Bonus Exercise
 
 Use the command `tree work` to see how Nextflow organizes the process work directory. Check https://www.tecmint.com/linux-tree-command-examples/[here], if you need to download tree.
+
+
+.Click here for the answer:
+[%collapsible]
+====
+It should look something like this:
+
+[unix]
+----
+work
+├── 17
+│   └── 263d3517b457de4525513ae5e34ea8
+│       ├── index
+│       │   ├── complete_ref_lens.bin
+│       │   ├── ctable.bin
+│       │   ├── ctg_offsets.bin
+│       │   ├── duplicate_clusters.tsv
+│       │   ├── eqtable.bin
+│       │   ├── info.json
+│       │   ├── mphf.bin
+│       │   ├── pos.bin
+│       │   ├── pre_indexing.log
+│       │   ├── rank.bin
+│       │   ├── refAccumLengths.bin
+│       │   ├── ref_indexing.log
+│       │   ├── reflengths.bin
+│       │   ├── refseq.bin
+│       │   ├── seq.bin
+│       │   └── versionInfo.json
+│       └── transcriptome.fa -> /workspace/Gitpod_test/data/ggal/transcriptome.fa
+├── 7f
+----
+====
 
 === Recap
 
