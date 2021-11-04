@@ -432,71 +432,51 @@ See the https://www.nextflow.io/docs/latest/conda.html[Nextflow]
 in the Nextflow documentation for details.
 
 
-=== Using Docker to pull a conda environment
+=== Create a conda environment with Docker
 
-Another way to operate with conda is by specifying it with a Dockerfile. This saves having to do build the conda environment within your terminal each time you want to use it (see the steps in previous section).
+Another way to build conda environments is through a Dockerfile. 
 
+This saves having to build an environment each time you want to use one (as outlined in previous sections).
 
-To do this you can simply add the following lines to your Dockerfile.
-
-See the following example from https://github.com/nextflow-io/rnaseq-nf[rnaseq-nf]:
-
-```
-FROM continuumio/miniconda:4.7.12  // <1>
-MAINTAINER Your Name <You email address>  // <2>
-
-RUN apt-get -y install ttf-dejavu   // <3>
-
-COPY conda.yml .                    // <4>
-RUN \                               // <5>
-  conda env update -n root -f conda.yml \   // <6>
-  && conda clean -a                  // <7>
+To do this you require a Dockerfile, such as the one in this public repo: https://github.com/nextflow-io/rnaseq-nf/blob/master/docker/Dockerfile-mamba[rnaseq-nf]:
 
 ```
+FROM mambaorg/micromamba                                                                                    
+MAINTAINER Your name <your_email>
 
-<1> Choice of parent image from which you build the Docker container.
-<2> Write your information here.
-<3> This installs a dependecy "ttf-dejavu".
-<4> This instructs the container to find the conda.yml required in cwd.
-<5> RUN the following code block.
-<6> Tell conda to update the environment using the conda.yml file.
-<7> Removes unused conda packages and caches.
-
-Also, you will need to make sure you have the conda.yml file in the current directory too:
-
-.see conda.yml:
-[%collapsible]
-====
+RUN \
+   micromamba install -y -n base -c defaults -c bioconda -c conda-forge \
+      salmon=1.5.1 \
+      fastqc=0.11.9 \
+      multiqc=1.10.1 \
+   && micromamba clean -a -y
 ```
-name: rnaseq-nf
-channels:
-  - defaults
-  - bioconda
-  - conda-forge
-dependencies:
-  # Default bismark
-  - salmon=1.0.0
-  - fastqc=0.11.5
-  - multiqc=1.5
-```
-====
+
+The above Dockerfile takes the parent image 'mambaorg/micromamba', then installs a conda environment using `micromamba`, and installs salmon, fastqc and multiqc.  
 
 [discrete]
 === Exercise
 
-Try to run the RNA-Seq run you did in the third section of this document, but start by building your own conda dockerfile. 
+Try to run the RNA-Seq experiment from earlier (script2.nf), but start by building your own conda `Dockerfile`. 
 
-IMPORTANT: Building a Docker container can take up to ten minutes, so please head to the next section while this runs.
+IMPORTANT: Building a Docker container and pushing to your personal repo can take >10 minutes.
 
 .For the brief overview of step to take, click here:
 [%collapsible]
 ====
 1. Make a Dockerfile in the current directory (with above code).
 
-2. Build the image `docker build -t my-image .` (don't forget the '.')
+2. Build the image `docker build -t my-image .` (don't forget the '.').
 
-3. Publish the docker image to your online docker account.
+3. Publish the docker image to your online docker account. Something similar to the following, with <myrepo> replaced with your own Docker ID, without '<' and '>' characters!. 
 
+TIP: "my-image" could be any name you choose. Just choose something memorable!
+
+```
+docker login
+docker tag my-image <myrepo>/my-image
+docker push <myrepo>/my-image
+```
 4. Add the image file name to the nextflow.config file. 
 
 e.g. remove the following from the nextflow.config
@@ -507,10 +487,18 @@ process.container = 'nextflow/rnaseq-nf'
 and replace with:
 
 ```
-process.container = 'yourid/image_name_chosen'
+process.container = '<myrepo>/my-image'
 ```
 
 replacing the above the correct docker hub link.
+
+5. Trying running Nextflow, e.g.:
+
+```
+nextflow run script2.nf -with-docker
+```
+
+It should now work, and find `salmon` to run the process. 
 ====
 
 == BioContainers
