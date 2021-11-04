@@ -190,12 +190,11 @@ process index {
     salmon index --threads $task.cpus -t $transcriptome -i index
     """
 }
-
+----
 Then check it worked, by looking at the script executed in the work directory. Look for the hexidecimal (e.g. work/7f/f285b80022d9f61e82cd7f90436aa4/), Then `cat` the .command.sh. 
 
 
 For extra practice, you can also try asking for more cpu than you have to see what happens and the error it kicks out.
-----
 ====
 
 [discrete]
