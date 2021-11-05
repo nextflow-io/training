@@ -322,6 +322,7 @@ one time.
 Nextflow parallelizes the execution of your pipeline simply by providing multiple input data
 to your script.
 
+TIP: It may be useful to apply optional settings to a specific process using https://www.nextflow.io/docs/latest/process.html#directives[directives] which are provided in the process body.
 
 [discrete]
 === Exercise
