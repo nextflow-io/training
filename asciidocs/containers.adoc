@@ -436,7 +436,7 @@ in the Nextflow documentation for details.
 
 Another way to build conda environments is through a Dockerfile. 
 
-This saves having to build an environment each time you want to use one (as outlined in previous sections).
+This saves having to build a conda environment each time you want to use it (as outlined in previous sections).
 
 To do this you require a Dockerfile, such as the one in this public repo: https://github.com/nextflow-io/rnaseq-nf/blob/master/docker/Dockerfile-mamba[rnaseq-nf]:
 
@@ -457,29 +457,31 @@ The above Dockerfile takes the parent image 'mambaorg/micromamba', then installs
 [discrete]
 === Exercise
 
-Try to run the RNA-Seq experiment from earlier (script2.nf), but start by building your own conda `Dockerfile`. 
+Try to run the RNA-Seq experiment from earlier (script6.nf), but start by building your own conda `Dockerfile` (from above), save to your docker hub repo and then point Nextflow to run from this container. 
 
 IMPORTANT: Building a Docker container and pushing to your personal repo can take >10 minutes.
 
 .For the brief overview of step to take, click here:
 [%collapsible]
 ====
-1. Make a Dockerfile in the current directory (with above code).
+1. Make a file called "Dockerfile" in the current directory (with above code).
 
 2. Build the image `docker build -t my-image .` (don't forget the '.').
 
 3. Publish the docker image to your online docker account. Something similar to the following, with <myrepo> replaced with your own Docker ID, without '<' and '>' characters!. 
 
-TIP: "my-image" could be any name you choose. Just choose something memorable!
+TIP: "my-image" could be any name you choose. Just choose something memorable and ensure the name matches the name you used in the previous command.
 
 ```
 docker login
 docker tag my-image <myrepo>/my-image
 docker push <myrepo>/my-image
 ```
+
 4. Add the image file name to the nextflow.config file. 
 
-e.g. remove the following from the nextflow.config
+e.g. remove the following from the nextflow.config:
+
 ```
 process.container = 'nextflow/rnaseq-nf'
 ```
