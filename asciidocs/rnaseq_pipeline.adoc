@@ -384,10 +384,9 @@ It creates the final report in the `results` folder in the current work director
 
 In this script, note the use of the https://www.nextflow.io/docs/latest/operator.html#mix[mix,window="_blank"]
 and https://www.nextflow.io/docs/latest/operator.html#collect[collect,window="_blank"] operators chained
-together to get all the outputs of the `quantification` and `fastqc` process as a single
-input.
+together to get all the outputs of the `quantification` and `fastqc` processes as a single input. https://www.nextflow.io/docs/latest/operator.html[Operators] can be used to combine and transform channels.
 
-We only want one task of MultiQC being executed which produces one report. Therefore, we use the channel operators to combine all the channels into a single item. 
+We only want one task of MultiQC being executed which produces one report. Therefore, we use the `mix` channel operator to combine the two channels followed by the `collect` operator, to return the complete channel contents as a single element.
 
 
 === Recap
