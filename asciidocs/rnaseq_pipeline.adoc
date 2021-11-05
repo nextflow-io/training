@@ -234,7 +234,7 @@ In this step you have learned:
 2. How process inputs are declared
 3. How process outputs are declared
 4. How to print the content of a channel
-
+5. How to access the number of available CPUs
 
 == Collect read files by pairs
 
