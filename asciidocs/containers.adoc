@@ -434,13 +434,13 @@ in the Nextflow documentation for details.
 
 === Create and use conda-like environments using micromamba
 
-Another way to build conda-like environments is through a Dockerfile and https://mamba.readthedocs.io/en/latest/user_guide/micromamba.html[Micromamba]. 
+Another way to build conda-like environments is through a `Dockerfile` and https://mamba.readthedocs.io/en/latest/user_guide/micromamba.html[`micromamba`]. 
 
-Micromamba is fast and robust package for building small conda-based environments.
+`micromamba` is fast and robust package for building small conda-based environments.
 
 This saves having to build a conda environment each time you want to use it (as outlined in previous sections).
 
-To do this, you simply require a Dockerfile, such as the one in this public https://github.com/nextflow-io/rnaseq-nf/blob/master/docker/Dockerfile-mamba[repo]:
+To do this, you simply require a `Dockerfile`, such as the one in this public https://github.com/nextflow-io/rnaseq-nf/blob/master/docker/Dockerfile-mamba[repo]:
 
 ```
 FROM mambaorg/micromamba                                                                                    
@@ -454,19 +454,19 @@ RUN \
    && micromamba clean -a -y
 ```
 
-The above Dockerfile takes the parent image 'mambaorg/micromamba', then installs a conda environment using `micromamba`, and installs salmon, fastqc and multiqc. 
+The above `Dockerfile` takes the parent image 'mambaorg/micromamba', then installs a `conda` environment using `micromamba`, and installs `salmon`, `fastqc` and `multiqc`. 
 
 [discrete]
 === Exercise
 
-Try to run the RNA-Seq experiment from earlier (script6.nf), but start by building your own micromamba `Dockerfile` (from above), save to your docker hub repo and then point Nextflow to run from this container. 
+Try executing the RNA-Seq pipeline from earlier (script6.nf), but start by building your own micromamba `Dockerfile` (from above), save to your docker hub repo and direct Nextflow to run from this container (changing your `nexflow.config`). 
 
 IMPORTANT: Building a Docker container and pushing to your personal repo can take >10 minutes.
 
 .For the brief overview of step to take, click here:
 [%collapsible]
 ====
-1. Make a file called "Dockerfile" in the current directory (with above code).
+1. Make a file called `Dockerfile` in the current directory (with above code).
 
 2. Build the image `docker build -t my-image .` (don't forget the '.').
 
