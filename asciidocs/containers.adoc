@@ -463,12 +463,12 @@ Try executing the RNA-Seq pipeline from earlier (script6.nf), but start by build
 
 IMPORTANT: Building a Docker container and pushing to your personal repo can take >10 minutes.
 
-.For the brief overview of step to take, click here:
+.For an overview of steps to take, click here:
 [%collapsible]
 ====
 1. Make a file called `Dockerfile` in the current directory (with above code).
 
-2. Build the image `docker build -t my-image .` (don't forget the '.').
+2. Build the image: `docker build -t my-image .` (don't forget the '.').
 
 3. Publish the docker image to your online docker account. Something similar to the following, with <myrepo> replaced with your own Docker ID, without '<' and '>' characters!. 
 
@@ -480,6 +480,7 @@ docker tag my-image <myrepo>/my-image
 docker push <myrepo>/my-image
 ```
 
+[start=4]
 4. Add the image file name to the nextflow.config file. 
 
 e.g. remove the following from the nextflow.config:
@@ -496,6 +497,7 @@ process.container = '<myrepo>/my-image'
 
 replacing the above the correct docker hub link.
 
+[start=5]
 5. Trying running Nextflow, e.g.:
 
 ```
