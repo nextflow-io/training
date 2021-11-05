@@ -122,7 +122,7 @@ This process takes the transcriptome params file as `input` and creates the tran
 
 NOTE: the `input` declaration defines a `transcriptome` path variable which is used in the `script` as a reference (using the dollar sign) in the Salmon command line.
 
-IMPORTANT: Resource requirements such as CPU and memory can change with different workflow executions and platforms. Nextflow can use $task.cpus as a variable for the number of CPUs. We will learn more about this later.
+IMPORTANT: Resource requirements such as CPU and memory can change with different workflow executions and platforms. Nextflow can use $task.cpus as a variable for the number of CPUs. See process directives documentation for more https://www.nextflow.io/docs/latest/process.html#directives[details].
 
 Run it by using the command:
 
