@@ -180,16 +180,7 @@ Add `cpus 2` to the top of the index process:
 process index {
     cpus 2
     input:
-    path transcriptome from params.transcriptome_file
-     
-    output:
-    path 'index' into index_ch
-
-    script:       
-    """
-    salmon index --threads $task.cpus -t $transcriptome -i index
-    """
-}
+    ...
 ----
 Then check it worked, by looking at the script executed in the work directory. Look for the hexidecimal (e.g. work/7f/f285b80022d9f61e82cd7f90436aa4/), Then `cat` the .command.sh. 
 
@@ -322,7 +313,7 @@ one time.
 Nextflow parallelizes the execution of your pipeline simply by providing multiple input data
 to your script.
 
-TIP: It may be useful to apply optional settings to a specific process using https://www.nextflow.io/docs/latest/process.html#directives[directives] which are provided in the process body.
+NOTE: It may be useful to apply optional settings to a specific process using https://www.nextflow.io/docs/latest/process.html#directives[directives] which are provided in the process body.
 
 [discrete]
 === Exercise
