@@ -77,6 +77,7 @@ log.info """\
 ----
 ====
 
+[discrete]
 === Recap
 
 In this step you have learned:
@@ -226,6 +227,7 @@ work
 ----
 ====
 
+[discrete]
 === Recap
 
 In this step you have learned:
@@ -290,6 +292,7 @@ Channel
     .set { read_pairs_ch } 
 ====
 
+[discrete]
 === Recap
 
 In this step you have learned:
@@ -361,6 +364,7 @@ Add the following before the `input` declaration in the `quantification` process
 ```
 ====
 
+[discrete]
 === Recap
 
 In this step you have learned:
@@ -406,6 +410,7 @@ Add the following before the `input` declaration in the `quantification` process
 Then ensure that the second process uses the 2_ch. See, script6.nf.
 ====
 
+[discrete]
 === Recap
 
 In this step you have learned:
@@ -432,7 +437,7 @@ together to get all the outputs of the `quantification` and `fastqc` processes a
 
 We only want one task of MultiQC being executed which produces one report. Therefore, we use the `mix` channel operator to combine the two channels followed by the `collect` operator, to return the complete channel contents as a single element.
 
-
+[discrete]
 === Recap
 
 In this step you have learned:
@@ -533,6 +538,7 @@ Run it as before:
 nextflow run script7.nf -resume --reads 'data/ggal/*_{1,2}.fq'
 ----
 
+[discrete]
 === Recap
 
 In this step you have learned:
