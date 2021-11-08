@@ -532,6 +532,40 @@ In the above example every time a file of sequences is received as input by the 
 
 Extend the previous example so a task is executed for each read file matching the pattern `data/ggal/*_1.fq` and repeat the same task both with `salmon` and `kallisto`.
 
+.Click here for the answer:
+[%collapsible]
+====
+[source,nextflow,linenums]
+----
+params.reads = "$baseDir/data/ggal/*_1.fq"
+params.transcriptome_file = "$baseDir/data/ggal/transcriptome.fa"
+methods= ['salmon', 'kallisto']
+
+Channel 
+    .fromPath( params.reads )
+    .set { read_ch } 
+
+process command {
+  tag "Run_command"
+
+  input:
+  path reads from read_ch
+  path transcriptome from params.transcriptome_file
+  each mode from methods
+
+  output:
+  path result into concat_ch
+ 
+  script:
+  """
+  echo $mode $reads $transcriptome > result
+  """
+  }
+
+concat_ch
+    .view { "To run : ${it.text}" }
+----
+====
 
 == Outputs
 
@@ -639,6 +673,15 @@ Some caveats on glob pattern behavior:
 Remove the `flatMap` operator and see out the output change. The documentation
 for the `flatMap` operator is available at https://www.nextflow.io/docs/latest/operator.html#flatmap[this link].
 
+.Click here for the answer:
+[%collapsible]
+====
+[source,nextflow,linenums]
+----
+File: [chunk_aa, chunk_ab, chunk_ac, chunk_ad] => [H, o, l, a]
+----
+====
+
 === Dynamic output file names
 
 When an output file name needs to be expressed dynamically, it is possible to define it using a dynamic evaluated
@@ -700,6 +743,26 @@ TIP: In previous versions of Nextflow `tuple` was called `set` but it was used e
 
 Modify the script of the previous exercise so that the _bam_ file is named as the given `sample_id`.
 
+.Click here for the answer:
+[%collapsible]
+====
+[source,nextflow,linenums]
+----
+reads_ch = Channel.fromFilePairs('data/ggal/*_{1,2}.fq')
+
+process foo {
+  input:
+    tuple val(sample_id), file(sample_files) from reads_ch
+  output:
+    tuple val(sample_id), file("${sample_id}.bam") into bam_ch
+  script:
+  """
+    echo your_command_here --reads $sample_id > ${sample_id}.bam
+  """
+}
+----
+====
+
 == When
 
 The `when` declaration allows you to define a condition that must be verified in order to execute the process. This can be any expression that evaluates a boolean value.
@@ -751,13 +814,22 @@ process foo {
 }
 ----
 
-
 The complete list of directives is available https://www.nextflow.io/docs/latest/process.html#directives[at this link].
 
 [discrete]
 === Exercise
 
 Modify the script of the previous exercise adding a https://www.nextflow.io/docs/latest/process.html#tag[tag] directive logging the `sample_id` in the execution output.
+
+.Click here for the answer:
+[%collapsible]
+====
+Add the following at start of process:
+[source,nextflow,linenums]
+----
+tag "$sample_id"
+----
+====
 
 == Organise outputs
 
@@ -798,7 +870,6 @@ could be stored to a https://aws.amazon.com/s3/[AWS S3 bucket] just using the `s
 === Manage semantic sub-directories
 
 You can use more then one `publishDir` to keep different outputs in separate directory. For example:
-
 
 [source,nextflow,linenums,options="nowrap"]
 ----
