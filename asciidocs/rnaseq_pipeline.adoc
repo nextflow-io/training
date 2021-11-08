@@ -269,10 +269,26 @@ wrapped in single-quoted characters to avoid Bash expanding the glob.
 Use the https://www.nextflow.io/docs/latest/operator.html#set[set] operator in place
 of `=` assignment to define the `read_pairs_ch` channel.
 
+.Click here for the answer:
+[%collapsible]
+====
+Channel 
+    .fromFilePairs( params.reads )
+    .set { read_pairs_ch } 
+====
+
 [discrete]
 === Exercise
 
 Use the `checkIfExists` option for the https://www.nextflow.io/docs/latest/channel.html#fromfilepairs[fromFilePairs] method to check if the specified path contains at least file pairs.
+
+.Click here for the answer:
+[%collapsible]
+====
+Channel 
+    .fromFilePairs( params.reads, checkIfExists: true )
+    .set { read_pairs_ch } 
+====
 
 === Recap
 
@@ -290,7 +306,7 @@ In this step you have learned:
 In this script, note how the `index_ch` channel, declared as output in the `index` process,
 is now used as a channel in the input section.
 
-Also note how the second input is declared as a `tuple` composed by two elements:
+Also, note how the second input is declared as a `tuple` composed by two elements:
 the `pair_id` and the `reads` in order to match the structure of the items emitted
 by the `read_pairs_ch` channel.
 
@@ -321,12 +337,29 @@ NOTE: It may be useful to apply optional settings to a specific process using ht
 Add a https://www.nextflow.io/docs/latest/process.html#tag[tag] directive to the
 `quantification` process to provide a more readable execution log.
 
+.Click here for the answer:
+[%collapsible]
+====
+Add the following before the input declaration:
+```
+  tag "Salmon on $pair_id"
+```
+====
 
 [discrete]
 === Exercise
 
 Add a https://www.nextflow.io/docs/latest/process.html#publishdir[publishDir] directive
 to the `quantification` process to store the process results into a directory of your choice.
+
+.Click here for the answer:
+[%collapsible]
+====
+Add the following before the `input` declaration in the `quantification` process:
+```
+  publishDir params.outdir, mode:'copy'
+```
+====
 
 === Recap
 
@@ -361,6 +394,17 @@ operator in place of a `set`.
 
 TIP: see an example https://github.com/nextflow-io/rnaseq-nf/blob/3b5b49f/main.nf#L58[here].
 
+.Click here for the answer:
+[%collapsible]
+====
+Add the following before the `input` declaration in the `quantification` process:
+```
+  Channel 
+    .fromFilePairs( params.reads, checkIfExists: true )
+    .into { read_pairs_ch; read_pairs2_ch } 
+```
+Then ensure that the second process uses the 2_ch. See, script6.nf.
+====
 
 === Recap
 
