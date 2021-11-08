@@ -428,8 +428,7 @@ TIP: When specifying as Conda environment a YAML recipe file, Nextflow automatic
 
 This makes easier to manage different environments for the processes in the workflow script.
 
-See the https://www.nextflow.io/docs/latest/conda.html[Nextflow]
-in the Nextflow documentation for details.
+See the https://www.nextflow.io/docs/latest/conda.html[docs] for details.
 
 
 === Create and use conda-like environments using micromamba
