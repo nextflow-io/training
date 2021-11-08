@@ -2,7 +2,7 @@
 
 In Nextflow, a `process` is the basic computing primitive to execute foreign functions (i.e. custom scripts or tools).
 
-The process definition starts with the keyword `process`, followed by the process name and finally the process body delimited by curly brackets. 
+The `process` definition starts with the keyword `process`, followed by the process name and finally the process body delimited by curly brackets. 
 
 A basic `process`, only using the `script` definition block, looks like the following:
 
@@ -344,8 +344,42 @@ NOTE: The path qualifier should be preferred over file to handle process input f
 [discrete]
 === Exercise
 
-Write a script that creates a channel containing  all read files matching the pattern `data/ggal/*_1.fq`
+Write a script that creates a channel containing all read files matching the pattern `data/ggal/*_1.fq`
 followed by a process that concatenates them into a single file and prints the first 20 lines.
+
+.Click here for the answer:
+[%collapsible]
+====
+[source,nextflow,linenums]
+----
+params.reads = "$baseDir/data/ggal/*_1.fq"
+
+Channel 
+    .fromPath( params.reads )
+    .set { read_ch } 
+
+process concat {
+  tag "Concat all files"
+
+  input:
+  path '*' from read_ch.collect()
+
+  output:
+  path 'top_10_lines' into concat_ch
+ 
+  script:
+  """
+  cat * > concatenated.txt
+  head -n 20 concatenated.txt > top_10_lines
+  """
+  }
+
+concat_ch.view()
+}
+
+concat_ch.view{ it }
+----
+====
 
 === Combine input channels
 
@@ -422,9 +456,12 @@ process bar {
 .The output should look something like:
 [%collapsible]
 ====
+[source,nextflow,linenums]
+----
 1 and b
 1 and a
 1 and c
+----
 ====
 
 This is because _value_ channels can be consumed multiple times, so it doesn't affect process termination.
@@ -434,6 +471,39 @@ This is because _value_ channels can be consumed multiple times, so it doesn't a
 
 Write a process that is executed for each read file matching the pattern `data/ggal/*_1.fq` and
 use the same `data/ggal/transcriptome.fa` in each execution.
+
+
+.Click here for the answer:
+[%collapsible]
+====
+[source,nextflow,linenums]
+----
+params.reads = "$baseDir/data/ggal/*_1.fq"
+params.transcriptome_file = "$baseDir/data/ggal/transcriptome.fa"
+
+Channel 
+    .fromPath( params.reads )
+    .set { read_ch } 
+
+process command {
+  tag "Run_command"
+
+  input:
+  path reads from read_ch
+  path transcriptome from params.transcriptome_file
+
+  output:
+  path result into concat_ch
+ 
+  script:
+  """
+  echo your_command $reads $transcriptome > result
+  """
+  }
+
+concat_ch.view()
+----
+====
 
 === Input repeaters
 
