@@ -9,7 +9,7 @@ image::channel-files.png[]
 
 == Channel types
 
-Nextflow distinguish two different kinds of channels: *queue* channels and *value* channels.
+Nextflow distinguishes two different kinds of channels: *queue* channels and *value* channels.
 
 === Queue channel
 
@@ -191,7 +191,17 @@ Learn more about the glob patterns syntax at https://docs.oracle.com/javase/tuto
 [discrete]
 === Exercise
 
-Use the `Channel.fromPath` method to create a channel emitting all files with the suffix `.fq` in the `data/ggal/` and any subdirectory, then print the file name.
+Use the `Channel.fromPath` method to create a channel emitting all files with the suffix `.fq` in the `data/ggal/` directory and any subdirectory, in addition to hidden files. Then print the file names.
+
+.Click here for the answer:
+[%collapsible]
+====
+[source,nextflow]
+----
+Channel.fromPath( './data/ggal/**.fq' , hidden:true)
+       .view()
+----
+====
 
 
 === fromFilePairs
@@ -248,6 +258,20 @@ IMPORTANT: The glob pattern must contain at least a star wildcard character.
 
 Use the `fromFilePairs` method to create a channel emitting all pairs of fastq read in the `data/ggal/`
 directory and print them. Then use the `flat:true` option and compare the output with the previous execution.
+
+.Click here for the answer:
+[%collapsible]
+====
+Use the following, with or without 'flat:true':
+
+[source,nextflow]
+----
+Channel.fromFilePairs( './data/ggal/*_{1,2}.fq', flat:true)
+       .view()
+----
+
+Then check the square brackets around the file names, to see the difference with `flat`. 
+====
 
 === fromSRA 
 

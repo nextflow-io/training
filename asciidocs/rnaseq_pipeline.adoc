@@ -274,9 +274,12 @@ of `=` assignment to define the `read_pairs_ch` channel.
 .Click here for the answer:
 [%collapsible]
 ====
+[source,nextflow,linenums]
+----
 Channel 
     .fromFilePairs( params.reads )
     .set { read_pairs_ch } 
+----
 ====
 
 [discrete]
@@ -287,9 +290,12 @@ Use the `checkIfExists` option for the https://www.nextflow.io/docs/latest/chann
 .Click here for the answer:
 [%collapsible]
 ====
+[source,nextflow,linenums]
+----
 Channel 
     .fromFilePairs( params.reads, checkIfExists: true )
     .set { read_pairs_ch } 
+----
 ====
 
 [discrete]
@@ -407,7 +413,7 @@ Add the following before the `input` declaration in the `quantification` process
     .fromFilePairs( params.reads, checkIfExists: true )
     .into { read_pairs_ch; read_pairs2_ch } 
 ```
-Then ensure that the second process uses the 2_ch. See, script6.nf.
+Then ensure that the second process uses the "read_pairs2_ch". See, script6.nf.
 ====
 
 [discrete]

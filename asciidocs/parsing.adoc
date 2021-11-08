@@ -9,8 +9,8 @@ The `splitText` operator allows you to split multi-line strings or text file ite
 ----
 Channel
      .fromPath('data/meta/random.txt') // <1>
-     .splitText() // <2>
-     .view() // <3>
+     .splitText() //                      <2>
+     .view() //                           <3>
 ----
 
 <1> Splits the content of the files with suffix .txt, and prints it line by line.
@@ -186,11 +186,11 @@ for( def entry : records ) {
 }
 ----
 
-++++
-
 ===Storage of parsers into modules
 
-The best way to store parser scripts is to keep them in a nextflow module file. This follows the DSL2 way of working.
+The best way to store parser scripts is to keep them in a nextflow module file. 
+
+This follows the DSL2 way of working.
 
 See the following nextflow script:
 
@@ -218,6 +218,5 @@ workflow {
 
 To get this script to work, first we need to create a file called `parsers.nf`, and store it in the modules folder in the current directory.
 
-This file should have the `parseJsonFile` function present
+This file should have the `parseJsonFile` function present, then Nextflow will use this as a custom function within the workflow scope.
 
-++++
