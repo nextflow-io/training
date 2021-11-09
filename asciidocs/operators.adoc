@@ -34,7 +34,7 @@ image::channel-map.png[]
 <2> Create a new channel, transforming each number to its square.
 <3> Print the channel content.
 
-Operators can be chained to implement custom behaviors:
+Operators can also be chained to implement custom behaviors, so the previous snippet can be written as:
 
 [source,nextflow,linenums]
 ----
@@ -45,12 +45,12 @@ Channel.from(1,2,3,4)
 
 == Basic operators
 
-Here we go over some of the most commonly used operators.
+Here we explore some of the most commonly used operators.
 
 === view
 
 The `view` operator prints the items emitted by a channel to the console standard output, appending a
-_new line_ character to each of them. For example:
+_new line_ character to each item. For example:
 
 [source,nextflow,linenums]
 ----
@@ -86,7 +86,7 @@ It prints:
 
 === map
 
-The `map` operator applies a function of your choosing to every item emitted by a channel, and returns the items so obtained as a new channel. The function applied is called the _mapping_ function and is expressed with a _closure_ as shown in the example below:
+The `map` operator applies a function of your choosing to every item emitted by a channel, and returns the items obtained as a new channel. The function applied is called the _mapping_ function and is expressed with a _closure_ as shown in the example below:
 
 [source,nextflow,linenums]
 ----
@@ -113,14 +113,14 @@ Use `fromPath` to create a channel emitting the _fastq_ files matching the patte
 then chain with a map to return a pair containing the file name and the path itself.
 Finally print the resulting channel.
 
-.Answer:
+.Click here for the answer:
 [%collapsible]
 ====
 [source,nextflow,linenums]
 ----
 Channel.fromPath('data/ggal/*.fq')
         .map { file -> [ file.name, file ] }
-        .view { name, file -> "> file: $name" }
+        .view { name, file -> "> $name : $file" }
 ----
 ====
 
@@ -164,12 +164,12 @@ z
 ```
 
 IMPORTANT: The items in the resulting channel have the same order as in respective original channel,
-however there's no guarantee that the element of the second channel are append after the elements
+however there's no guarantee that the element of the second channel are appended after the elements
 of the first. Indeed in the above example the element `a` has been printed before `3`.
 
 === flatten
 
-The `flatten` operator transforms a channel in such a way that every _tuple_ is flattened so that each single entry is emitted as a sole element by the resulting channel.
+The `flatten` operator transforms a channel in such a way that every _tuple_ is flattened so that each entry is emitted as a sole element by the resulting channel.
 
 [source,nextflow,linenums]
 ----
@@ -213,7 +213,6 @@ It prints a single value:
 
 TIP: The result of the `collect` operator is a *value* channel.
 
-
 === groupTuple
 
 The `groupTuple` operator collects tuples (or lists) of values emitted by the source channel, grouping together the elements that share the same key. Finally it emits a new tuple object for each distinct key collected.
@@ -237,19 +236,30 @@ It shows:
 ```
 
 This operator is useful to process together all elements for which there is a common
-property or a grouping key.
+property or grouping key.
 
 [discrete]
 === Exercise
 
-Use `fromPath` to create a channel emitting the _fastq_ files matching the pattern `data/ggal/*.fq`,
-then use a `map` to associate to each file the name prefix. Finally group together all
+Use `fromPath` to create a channel emitting all the files in the folder `data/meta/`,
+then use a `map` to associate to each file the `baseName` prefix. Finally group together all
 files having the same common prefix.
 
+.Click here for the answer:
+[%collapsible]
+====
+[source,nextflow,linenums]
+----
+Channel.fromPath('data/meta/*')
+        .map { file -> tuple(file.baseName, file) }
+        .groupTuple()
+        .view { baseName, file -> "> $baseName : $file" }
+----
+====
 
 === join
 
-The `join` operator creates a channel that joins together the items emitted by two channels for which exists a matching key. The key is defined, by default, as the first element in each item emitted.
+The `join` operator creates a channel that joins together the items emitted by two channels for which there exists a matching key. The key is defined, by default, as the first element in each item emitted.
 
 [source,nextflow,linenums]
 ----
