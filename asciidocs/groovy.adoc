@@ -1,6 +1,6 @@
 = Groovy basic structures and idioms
 
-Nextflow is a domain specific language (DSL) implemented on top of the Groovy programming language, which in turn is a super-set of the Java programming language. This means that Nextflow can run any Groovy and Java code. 
+Nextflow is a domain specific language (DSL) implemented on top of the Groovy programming language, which in turn is a super-set of the Java programming language. This means that Nextflow can run any Groovy or Java code. 
 
 Here are some important Groovy syntax to learn, that are commonly used in Nextflow.
 
@@ -15,8 +15,8 @@ println("Hello, World!")
 
 The only difference between the two is that the `println` method implicitly appends a new line character to the printed string.
 
-TIP: parenthesis for function invocations are optional. Therefore also the following is a valid
-syntax.
+TIP: parenthesis for function invocations are optional. Therefore, the following is also valid
+syntax:
 
 [source,groovy,linenums]
 ----
@@ -25,7 +25,7 @@ println "Hello, World!"
 
 == Comments
 
-Comments use the same syntax as in the C-family programming languages:
+Comments use the same syntax as C-family programming languages:
 
 [source,groovy,linenums]
 ----
@@ -166,14 +166,14 @@ assert map == [a:'x', b:'y', c:'z']
 
 <1> Use of the square brackets.
 <2> Use a dot notation.
-<3> Use of get method.
+<3> Use of put method.
 
 Map objects implement all methods provided by the https://docs.oracle.com/javase/8/docs/api/java/util/Map.html[java.util.Map] interface,
 plus the extension methods provided by http://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/Map.html[Groovy API].
 
 == String interpolation
 
-String literals can be defined enclosing them either with _single-_ or _double-_ quaotation marks.
+String literals can be defined enclosing them either with _single-_ or _double-_ quotation marks.
 
 Double-quoted strings can contain the value of an arbitrary variable by prefixing its name with the $ character, or the value of any expression by using the ${expression} syntax, similar to Bash/shell scripts:
 
@@ -230,7 +230,7 @@ text = """
     """
 ----
 
-Finally multi-line strings can also be defined with slashy string. For example:
+Finally multi-line strings can also be defined with slashy strings. For example:
 
 [source,groovy,linenums]
 ----
@@ -346,7 +346,7 @@ assert fib(10)==89
 
 A function can take multiple arguments separating them with a comma. The `return`
 keyword can be omitted and the function implicitly returns the value
-of the last evaluated expression. Also, explicit types can be omitted, thought not recommended:
+of the last evaluated expression. Also, explicit types can be omitted, though not recommended:
 
 [source,groovy,linenums]
 ----
@@ -372,7 +372,7 @@ square = { it * it }
 
 The curly brackets around the expression `it * it` tells the script interpreter to treat this expression as code. The `it` identifier is an implicit variable that represents the value that is passed to the function when it is invoked.
 
-Once compiled the function object is assigned to the variable ``square`` as any other variable assignments shown previously. To invoke the closure execution use the special method `call` or just use the round
+Once compiled, the function object is assigned to the variable `square` as any other variable assignments shown previously. To invoke the closure execution use the special method `call` or just use the round
 parentheses to specify the closure parameter(s). For example:
 
 [source,groovy,linenums]
@@ -406,8 +406,8 @@ square = { num -> num * num }
 
 It's also possible to define closures with multiple, custom-named parameters.
 
-For example, the method ``each()`` when applied to a map can take a closure with two arguments,
-to which it passes the _key-value_ pair for each entry in the map object. For example:
+For example, the method `each()` when applied to a map can take a closure with two arguments,
+to which it passes the _key-value_ pair for each entry in the `map` object. For example:
 
 [source,groovy,linenums]
 ----
@@ -424,8 +424,9 @@ Mark with value Williams
 Sudha with value Kumari
 ```
 
-A closure has two other important features. First, it can access and _modify_ variables in the scope
-where it is defined.
+A closure has two other important features. 
+
+First, it can access and _modify_ variables in the scope where it is defined.
 
 Second, a closure can be defined in an _anonymous_ manner, meaning that it is not given a name,
 and is defined in the place where it needs to be used.
@@ -434,7 +435,7 @@ As an example showing both these features, see the following code fragment:
 
 [source,groovy,linenums]
 ----
-result = 0  // <1>
+result = 0                                       // <1>
 values = ["China": 1 , "India" : 2, "USA" : 3]   // <2>
 values.keySet().each { result += values[it] }    // <3>
 println result
@@ -450,5 +451,5 @@ Learn more about closures in the http://groovy-lang.org/closures.html[Groovy doc
 
 The complete Groovy language documentation is available at http://groovy-lang.org/documentation.html#languagespecification[this link].
 
-A great resource to master Apache Groovy syntax is https://www.manning.com/books/groovy-in-action-second-edition[Groovy in Action].
+A great resource to master Apache Groovy syntax is the book: https://www.manning.com/books/groovy-in-action-second-edition[Groovy in Action].
 
