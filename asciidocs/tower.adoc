@@ -8,10 +8,10 @@ It brings monitoring, logging & observability, to distributed workflows and simp
 
 Nextflow tower core features include:
 
-* the launching of pre-configured pipelines with ease
-* programmatic integration to meet the needs of organizations
-* publishing pipelines to shared workspaces 
-* management of infrastructure required to run data analysis at scale
+* the launching of pre-configured pipelines with ease.
+* programmatic integration to meet the needs of organizations.
+* publishing pipelines to shared workspaces.
+* management of infrastructure required to run data analysis at scale.
 
 
 TIP: https://tower.nf/[Sign] up to try Tower for free or request a https://meetings.hubspot.com/evan141[demo] for deployments in your own on-premise or cloud environment.
@@ -28,7 +28,7 @@ You can use Tower via either the **online GUI**, using the `-with-tower` option 
 
 **3.** Start https://help.tower.nf/launch/launchpad/[launching pipelines].
 
-=== Via Nextflow run command
+=== Via Nextflow `run` command
 
 Create an account and login into Tower.
 
