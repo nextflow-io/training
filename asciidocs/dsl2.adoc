@@ -15,7 +15,7 @@ DSL2 core features include:
 * Separation of processes from their invocation.
 * Use of a `workflow` directive to execute specific processes.
 * Archiving of processes into modules.
-* Introduction of new syntax (pipe operator, & operator and channel forking)
+* Update of syntax (pipe operator, & operator and channel forking)
 
 
 == Process
@@ -44,11 +44,11 @@ workflow {
 }
 ----
 
-At the first line we enable dsl2, then we define a process called 'foo', which puts into the output channel (path: foo.txt), without using "into out_ch". This is then executed in the workflow directive where the individual process is called. 
+At the first line we enable dsl2, then we define a process called 'foo', which puts into the output channel (path: foo.txt), without using "into out_ch". This is then executed in the `workflow` directive where the individual process is called. 
 
 IMPORTANT: A process component can be invoked only once in the same workflow context.
 
-Next, we can add additional processes to this script and add another call from the workflow directive, thereby separating the processes into 'submodules'. This separation makes complex pipelines easier to follow and reuse.
+Next, we can add additional processes to this script and add another call from the workflow directive, thereby separating the processes into 'submodules'. 
 
 [source,nextflow,linenums]
 ----
@@ -82,12 +82,30 @@ workflow {
 }
 ----
 
-In this example, we have added the second process 'bar', which again is called within the latter workflow directive, where its input comes from a specified Path. 
+In this example, we have added the second process 'bar', which again is called within the latter workflow directive, where its input comes from a specified `channel.fromPath`. 
 
+[discrete]
+=== Exercise
+
+Guess what will be in the output files `foo.txt` and `bar.txt`? Given `data/test/baz.txt` contains the string `second_command`. Then run the script to find out.
+
+.Answer:
+[%collapsible]
+====
+foo.txt will have the following content:
+----
+first_command
+----
+bar.txt will have the following content:
+----
+second_command
+third_command
+----
+====
 
 === Process composition
 
-Processes having matching input-output declaration can be composed so that the output of the first process is passed as input to the following process. Taking in consideration the previous process definition, it’s possible to write the following:
+Processes having matching input-output declaration can be composed so that the output of the first process is passed as input to the following process. Taking in consideration the previous process definition, it’s possible to write the following workflow directive:
 
 [source,nextflow,linenums]
 ----
@@ -99,17 +117,16 @@ workflow {
 [discrete]
 === Exercise
 
-Try to work out what will be in the output `path` "bar" in the previous example. Given `data/test/baz.txt` contains "third_command".
+Try to work out what will be in the output `path` `bar.txt` using the updated workflow ?
 
 .Answer:
 [%collapsible]
 ====
+`bar.txt` should contain the following:
 ----
 first_command
 third_command
 ----
-
-This can be determined by adding `bar.out.view()` to the workflow section, then opening the output file with `cat`
 ====
 
 
@@ -129,9 +146,8 @@ workflow {
 
 When a process defines two or more output channels, each of them can be accessed using the array element operator e.g. `out[0]`, `out[1]`, etc. 
 
-.For example:
-[%collapsible]
-====
+For example:
+
 [source,nextflow,linenums]
 ----
 nextflow.enable.dsl=2
@@ -160,16 +176,25 @@ process bar {
 }
 
 data = channel.fromPath('./baz.txt')
-workflow {
-   foo()
-    bar(foo.out[1])
-    bar.out.view()
 
+workflow {
+  foo()
+  bar(foo.out[1])
+  bar.out.view()
 }
 ----
 
-In `bar.txt` you would now find the following :
 
+[discrete]
+=== Exercise
+
+What would you expect to find in `bar.txt`?:
+
+
+.Answer:
+[%collapsible]
+====
+`bar.txt` should contain the following:
 ----
 fourth_command
 third_command
@@ -178,7 +203,7 @@ third_command
 
 Another option is using named outputs (see below).
 
-=== Process named output
+=== Process named `output`
 
 The process output definition allows the use of the `emit` option to define a name identifier that can be used to reference the channel in the external scope. For example:
 
@@ -201,8 +226,9 @@ workflow {
 }
 ----
 
-=== Process named stdout
-The process can name stdout using the `emit` option:
+=== Process named `stdout`
+
+The process can name `stdout` using the `emit` option:
 
 [source,nextflow,linenums]
 ----
@@ -229,6 +255,7 @@ workflow {
 == Workflow
 
 === Workflow definition
+
 The `workflow` keyword allows the definition of sub-workflow components that enclose the invocation of one or more processes and operators:
 
 [source,nextflow,linenums]
@@ -242,6 +269,7 @@ workflow my_pipeline {
 For example, the above snippet defines a workflow component, named `my_pipeline`, that can be invoked from another workflow component definition as any other function or process i.e. `my_pipeline()`.
 
 === Workflow parameters
+
 A workflow component can access any variable and parameter defined in the outer scope:
 
 [source,nextflow,linenums]
@@ -257,6 +285,7 @@ workflow my_pipeline {
 ----
 
 === Workflow inputs
+
 A workflow component can declare one or more input channels using the `take` keyword. For example:
 
 [source,nextflow,linenums]
@@ -268,7 +297,8 @@ workflow my_pipeline {
     bar(foo.out)
 }
 ----
-IMPORTANT: When the take keyword is used, the beginning of the workflow body needs to be identified with the main keyword.
+
+IMPORTANT: When the `take` keyword is used, the beginning of the workflow body needs to be identified with the `main` keyword.
 
 Then, the input can be specified as an argument in the workflow invocation statement:
 
@@ -278,9 +308,11 @@ workflow {
     my_pipeline( channel.from('/some/data') )
 }
 ----
-NOTE: Workflow inputs are by definition: channel data structures. If a basic data type is provided instead, ie. number, string, list, etc. it’s implicitly converted to a channel value (ie. non-consumable).
+
+NOTE: Workflow inputs are by definition: channel data structures. If a basic data type is provided instead, i.e. number, string, list, etc., it’s implicitly converted to a channel value (ie. non-consumable).
 
 === Workflow outputs
+
 A workflow component can declare one or more out channels using the emit keyword. For example:
 
 [source,nextflow,linenums]
@@ -294,7 +326,7 @@ workflow my_pipeline {
 }
 ----
 
-Then, the result of the my_pipeline execution can be accessed using the out property i.e. my_pipeline.out. When there are multiple output channels declared, use the array bracket notation to access each output component as described for the Process outputs definition.
+Then, the result of the `my_pipeline` execution can be accessed using the out property i.e. `my_pipeline.out`. When there are multiple output channels declared, use the array bracket notation to access each output component as described for the Process outputs definition.
 
 Alternatively, the output channel can be accessed using the identifier name it’s assigned to in the emit declaration:
 
@@ -308,16 +340,19 @@ workflow my_pipeline {
      my_data = bar.out
 }
 ----
-Then, the result of the above snippet can accessed using my_pipeline.out.my_data.
+
+Then, the result of the above snippet can accessed using `my_pipeline.out.my_data`.
 
 === Implicit workflow
+
 A workflow definition which does not declare any name is assumed to be the main workflow and it’s implicitly executed. Therefore it’s the entry point of the workflow application.
 
 NOTE: Implicit workflow definition is ignored when a script is included as module. This allows the writing of a workflow script that can be used either as a library module and as application script.
 
-TIP: An alternative workflow entry can be specified using the -entry command line option.
+TIP: An alternative workflow entry can be specified using the `-entry` command line option.
 
 === Workflow composition
+
 Workflows defined in your script or imported by a module inclusion can be invoked and composed as any other process in your application.
 
 [source,nextflow,linenums]
@@ -350,15 +385,17 @@ workflow {
 
 NOTE: Nested workflow execution determines an implicit scope. Therefore the same process can be invoked in two different workflow scopes, like for example foo in the above snippet that is used in both flow1 and flow2. The workflow execution path along with the process names, defines the process (fully qualified) name that is used to distinguish the two different process invocations (i.e. flow1:foo and flow2:foo in the above example).
 
-TIP : The process fully qualified name can be used as a valid process selector in the nextflow.config file and it has priority over the process simple name.
+TIP : The process fully qualified name can be used as a valid process selector in the `nextflow.config` file and it has priority over the process simple name.
 
 == Modules
+
 The new DSL allows the definition of module scripts that can be included and shared across workflow applications.
 
-A module can contain the definition of a function, process and workflow definitions as described in the above sections.
+A module can contain the definition of a function, `process` and `workflow` definitions as described in the above sections.
 
 === Modules include
-A component defined in a module script can be imported into another Nextflow script using the include keyword.
+
+A component defined in a module script can be imported into another Nextflow script using the `include` keyword.
 
 For example:
 
@@ -372,13 +409,14 @@ workflow {
 }
 ----
 
-The above snippets include a process with name "foo" defined in the module script in the main execution context, as such it can be invoked in the workflow scope. "modules.nf" is a file that would contain multiple process code blocks (including "foo").
+The above snippets include a process with name `foo` defined in the module script in the main execution context, as such it can be invoked in the `workflow` scope. "modules.nf" is a file that would contain multiple process code blocks (including `foo`).
 
 Nextflow implicitly looks for the script file "./path/to/modules.nf", resolving the path within the included script location.
 
-NOTE: Relative paths must begin with the ./ prefix.
+NOTE: Relative paths must begin with the `./` prefix.
 
 === Multiple inclusions
+
 A Nextflow script allows the inclusion of any number of modules. When multiple components need to be included from the same module script, the component names can be specified in the same inclusion using the curly brackets notation as shown below:
 
 [source,nextflow,linenums]
@@ -393,6 +431,7 @@ workflow {
 ----
 
 === Module aliases
+
 When including a module component it’s possible to specify a name alias. This allows the inclusion and the invocation of the same component multiple times in your script using different names. For example:
 
 [source,nextflow,linenums]
@@ -405,6 +444,7 @@ workflow {
     bar(other_data)
 }
 ----
+
 The same is possible when including multiple components from the same module script as shown below:
 
 [source,nextflow,linenums]
@@ -444,6 +484,7 @@ workflow {
     sayHello()
 }
 ----
+
 The above snippet should print:
 
 [source,bash,linenums]
@@ -473,24 +514,56 @@ The above snippet should prints:
 Ciao world!
 ----
 
-Finally the include option `params` allows the specification of one or more parameters without inheriting any value from the external environment.\
+Finally the include option `params` allows the specification of one or more parameters without inheriting any value from the external environment.
 
 [discrete]
 === Exercise
 
-Try to repeat the above code for the module parameters section. Replacing ./some/module with the file name you have given it. Remember to use ./ for current directory.
+Try to run the above code. Replacing `./some/module` with the file name to a process called `sayHello()`, which expects `foo` and `bar` parameters. Remember to use ./ for current directory.
+
+.Answer:
+[%collapsible]
+====
+1. First save the following to `./modules/my_modules.nf`:
+----
+params.foo = 'Hello'
+params.bar = 'world!'
+
+def sayHello() {
+    println "$params.foo $params.bar"
+}
+----
+
+2. Then run `nextflow run myscript.nf`:
+
+Where `myscript.nf` is the following:
+----
+nextflow.enable.dsl=2
+
+params.foo = 'Hola'
+params.bar = 'Mundo'
+
+include {sayHello} from './modules/my_modules.nf'
+
+workflow {
+    sayHello()
+}
+----
+====
 
 == DSL2 migration notes
 
-Some of the syntax has changed between DSL1 and 2. These are a few of the key changes:
+Some of the syntax has changed between DSL1 and DSL2. 
 
-The declaration: `nextflow.enable.dsl=2` is used in place of `nextflow.preview.dsl=2`.
+These are a few of the key changes:
 
-Process inputs and outputs of type `set` have to be replaced with `tuple`.
+- The declaration: `nextflow.enable.dsl=2` is used in place of `nextflow.preview.dsl=2`.
 
-Process output option mode `flatten` is not available anymore. Replace it using the `flatten` operator on the corresponding output channel.
+- Process inputs and outputs of type `set` have to be replaced with `tuple`.
 
-Anonymous and unwrapped includes are not supported anymore. Replace it with a explicit module inclusion. For example:
+- Process output option mode `flatten` is not available anymore. Replace it using the `flatten` operator on the corresponding output channel.
+
+- Anonymous and unwrapped includes are not supported anymore. Replace it with a explicit module inclusion. For example:
 
 [source,nextflow,linenums]
 ----
@@ -516,7 +589,7 @@ workflow {
 }
 ----
 
-The use of unqualified value (`val`) and `file` elements into input tuples is not allowed anymore. Replace them with a corresponding `val` or `path` qualifiers:
+- The use of unqualified value (`val`) and `file` elements into input tuples is not allowed anymore. Replace them with a corresponding `val` or `path` qualifiers:
 
 [source,nextflow,linenums]
 ----
@@ -544,7 +617,7 @@ input:
 }
 ----
 
-The use of unqualified value (`val`) and `file` elements into output tuples is not allowed anymore. Replace them with a corresponding `val` or `path` qualifiers:
+- The use of unqualified value (`val`) and `file` elements into output tuples is not allowed anymore. Replace them with a corresponding `val` or `path` qualifiers:
 
 [source,nextflow,linenums]
 ----
@@ -575,32 +648,31 @@ script:
 }
 ----
 
-Operator `bind` has been deprecated by DSL2 syntax
+- Operator `bind` has been deprecated by DSL2 syntax
 
-Operator `operator` << has been deprecated by DSL2 syntax.
+- Operator `operator` << has been deprecated by DSL2 syntax.
 
-Operator `choice` has been deprecated by DSL2 syntax. Use `branch` instead.
+- Operator `choice` has been deprecated by DSL2 syntax. Use `branch` instead.
 
-Operator `close` has been deprecated by DSL2 syntax.
+- Operator `close` has been deprecated by DSL2 syntax.
 
-Operator `create` has been deprecated by DSL2 syntax.
+- Operator `create` has been deprecated by DSL2 syntax.
 
-Operator `countBy` has been deprecated by DSL2 syntax.
+- Operator `countBy` has been deprecated by DSL2 syntax.
 
-Operator `into` has been deprecated by DSL2 syntax since it’s not needed anymore.
+- Operator `into` has been deprecated by DSL2 syntax since it’s not needed anymore.
 
-Operator `fork` has been renamed to `multiMap`.
+- Operator `fork` has been renamed to `multiMap`.
 
-Operator `groupBy` has been deprecated by DSL2 syntax. Replace it with `groupTuple`
+- Operator `groupBy` has been deprecated by DSL2 syntax. Replace it with `groupTuple`
 
-Operator `print` and `println` have been deprecated by DSL2 syntax. Use `view` instead.
+- Operator `print` and `println` have been deprecated by DSL2 syntax. Use `view` instead.
 
-Operator `merge` has been deprecated by DSL2 syntax. Use `join` instead.
+- Operator `merge` has been deprecated by DSL2 syntax. Use `join` instead.
 
-Operator `separate` has been deprecated by DSL2 syntax.
+- Operator `separate` has been deprecated by DSL2 syntax.
 
-Operator `spread` has been deprecated with DSL2 syntax. Replace it with `combine`.
+- Operator `spread` has been deprecated with DSL2 syntax. Replace it with `combine`.
 
-Operator `route` has been deprecated by DSL2 syntax.
-
+- Operator `route` has been deprecated by DSL2 syntax.
 
