@@ -174,14 +174,13 @@ The location associated with the compute environment will be selected by default
 See the Nextflow https://www.nextflow.io/docs/latest/config.html#config-profiles[Config profiles] documentation for more details.
 
 7. Enter any Pipeline parameters in YAML or JSON format. YAML example:
-
++
 [source, yaml, linenums]
 ----
     reads: 's3://nf-bucket/exome-data/ERR013140_{1,2}.fastq.bz2'  
     paired_end: true
 ----
-
-[start=8]
++
 8. Select Launchpad to begin the pipeline execution.
 
 TIP: Nextflow pipelines are simply Git repositories and the location can be any public or private Git-hosting platform. See Git Integration in the Tower docs and Pipeline Sharing in the Nextflow docs for more details.
@@ -231,16 +230,16 @@ To create a new Organization:
 1. Click on the dropdown next to your name and select New organization to open the creation dialog.
 
 2. On the dialog, fill in the fields as per your organization. The Name and Full name fields are compulsory.
-
++
 WARNING: A valid name for the organization must follow specific pattern. Please refer the UI for further instructions.
++
 
 3. The rest of the fields such as Description, Location, Website URL and Logo Url are optional.
 
 4. Once the details are filled-in, you can access the newly created organization using the organizations page, which lists all of your organizations.
-
++
 TIP: It is possible to change the values of the optional fields either using the Edit option on the organizations page or using the Settings tab within the organization page, provided that you are the Owner of the organization .
 
 NOTE: A list of all the included Members, Teams and Collaborators can be found at the organization page.
-
-
++
 

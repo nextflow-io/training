@@ -525,6 +525,7 @@ Try to run the above code. Replacing `./some/module` with the file name to a pro
 [%collapsible]
 ====
 1. First save the following to `./modules/my_modules.nf`:
++
 ----
 params.foo = 'Hello'
 params.bar = 'world!'
@@ -533,9 +534,10 @@ def sayHello() {
     println "$params.foo $params.bar"
 }
 ----
++
 
 2. Then run `nextflow run myscript.nf`:
-
++
 Where `myscript.nf` is the following:
 ----
 nextflow.enable.dsl=2
@@ -548,6 +550,7 @@ include {sayHello} from './modules/my_modules.nf'
 workflow {
     sayHello()
 }
++
 ----
 ====
 
