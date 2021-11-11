@@ -122,7 +122,7 @@ https://help.tower.nf/compute-envs/eks/[Amazon Kubernetes (EKS)]
 https://help.tower.nf/compute-envs/gke/[Google Kubernetes (GKE)]
 https://help.tower.nf/compute-envs/k8s/[Hosted Kubernetes]
 
-===== Selecting a default compute environment
+==== Selecting a default compute environment
 
 If you have more than one *Compute Environment*, you can select which one will be used by default when launching a pipeline.
 
@@ -142,7 +142,7 @@ image::overview_launch.png[]
 
 A pipeline is a repository containing a Nextflow workflow, a compute environment and pipeline parameters.
 
-===== Pipeline Parameters Form
+==== Pipeline Parameters Form
 
 Launchpad automatically detects the presence of a `nextflow_schema.json` in the root of the repository and dynamically creates a form where users can easily update the parameters.
 
@@ -181,6 +181,7 @@ See the Nextflow https://www.nextflow.io/docs/latest/config.html#config-profiles
     paired_end: true
 ----
 
+[start=8]
 8. Select Launchpad to begin the pipeline execution.
 
 TIP: Nextflow pipelines are simply Git repositories and the location can be any public or private Git-hosting platform. See Git Integration in the Tower docs and Pipeline Sharing in the Nextflow docs for more details.
@@ -199,7 +200,6 @@ There is also community support available if you get into trouble, see https://g
 
 To learn more about using the Tower API, visit to the https://help.tower.nf/api/overview/[API section] in this documentation.
 
-
 == Workspaces and Organisations
 
 Nextflow Tower simplifies the development and execution of workflows by providing a centralized interface for users and organisations.
@@ -214,12 +214,33 @@ You can create your own organisation and participant workspace by following the 
 
 Tower allows creation of multiple organizations, each of which can contain multiple workspaces with shared users and resources. This allows any organization to customize and organize the usage of resources while maintaining an access control layer for users associated with a workspace.
 
-
 === Organization users
-
 
 Any user can be added or removed from a particular organization or a workspace and can be allocated a specific access role within that workspace.
 
 The Teams feature provides a way for the organizations to group various users and participants together into teams, for example `workflow-developers` or `analysts`, and apply access control to all the users within this team as a whole.
 
 For further information, please refer the https://help.tower.nf/orgs-and-teams/organizations/[User Management] section.
+
+==== Setting up a new organisation
+
+Organizations are the top-level structure and contain Workspaces, Members, Teams and Collaborators.
+
+To create a new Organization:
+
+1. Click on the dropdown next to your name and select New organization to open the creation dialog.
+
+2. On the dialog, fill in the fields as per your organization. The Name and Full name fields are compulsory.
+
+WARNING: A valid name for the organization must follow specific pattern. Please refer the UI for further instructions.
+
+3. The rest of the fields such as Description, Location, Website URL and Logo Url are optional.
+
+4. Once the details are filled-in, you can access the newly created organization using the organizations page, which lists all of your organizations.
+
+TIP: It is possible to change the values of the optional fields either using the Edit option on the organizations page or using the Settings tab within the organization page, provided that you are the Owner of the organization .
+
+NOTE: A list of all the included Members, Teams and Collaborators can be found at the organization page.
+
+
+
