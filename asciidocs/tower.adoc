@@ -238,8 +238,9 @@ WARNING: A valid name for the organization must follow specific pattern. Please 
 
 4. Once the details are filled-in, you can access the newly created organization using the organizations page, which lists all of your organizations.
 +
+--
 TIP: It is possible to change the values of the optional fields either using the Edit option on the organizations page or using the Settings tab within the organization page, provided that you are the Owner of the organization .
 
 NOTE: A list of all the included Members, Teams and Collaborators can be found at the organization page.
-+
+--
 
