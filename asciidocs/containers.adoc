@@ -469,7 +469,10 @@ IMPORTANT: Building a Docker container and pushing to your personal repo can tak
 
 2. Build the image: `docker build -t my-image .` (don't forget the '.').
 
-3. Publish the docker image to your online docker account. Something similar to the following, with <myrepo> replaced with your own Docker ID, without '<' and '>' characters!. 
+3. Publish the docker image to your online docker account. 
++
+--
+Something similar to the following, with <myrepo> replaced with your own Docker ID, without '<' and '>' characters!. 
 
 TIP: "my-image" could be any name you choose. Just choose something memorable and ensure the name matches the name you used in the previous command.
 
@@ -478,9 +481,11 @@ docker login
 docker tag my-image <myrepo>/my-image
 docker push <myrepo>/my-image
 ```
+--
 
 4. Add the image file name to the nextflow.config file. 
 +
+--
 e.g. remove the following from the nextflow.config:
 
 ```
@@ -494,14 +499,16 @@ process.container = '<myrepo>/my-image'
 ```
 
 replacing the above the correct docker hub link.
-+
+--
 
 5. Trying running Nextflow, e.g.:
 +
+--
 ```
 nextflow run script2.nf -with-docker
 ```
-+
+--
+
 It should now work, and find `salmon` to run the process. 
 ====
 
