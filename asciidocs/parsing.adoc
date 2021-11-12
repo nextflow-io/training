@@ -9,16 +9,16 @@ The `splitText` operator allows you to split multi-line strings or text file ite
 ----
 Channel
      .fromPath('data/meta/random.txt') // <1>
-     .splitText() //                      <2>
-     .view() //                           <3>
+     .splitText()                      // <2>
+     .view()                           // <3>
 ----
 
-<1> Splits the content of the files with suffix .txt, and prints it line by line.
-<2> By default the splitText operator splits each item into chunks of one line.
+<1> Instructs Nextflow to make a channel from the path "data/meta/random.txt".
+<2> The `splitText` operator splits each item into chunks of one line by default.
 <3> View contents of the channel.
 
 
-You can define the number of lines in each chunk by using the parameter `by`, as shown in the following example
+You can define the number of lines in each chunk by using the parameter `by`, as shown in the following example:
 
 ----
 Channel
@@ -32,7 +32,7 @@ Channel
 
 TIP: The `subscribe` operator permits to execute a user defined function each time a new value is emitted by the source channel.
 
-An optional closure can be specified in order to transform the text chunks produced by the operator. The following example shows how to split text files into chunks of 10 lines and transform them to capital letters:
+An optional closure can be specified in order to transform the text chunks produced by the operator. The following example shows how to split text files into chunks of 10 lines and transform them into capital letters:
 
 ----
 Channel
@@ -53,7 +53,7 @@ Channel
 
 ----
 
-Finally, you can also use this operator on plain files (outside of channel context), as so:
+Finally, you can also use the operator on plain files (outside of the channel context), as so:
 
 ----
   def f = file('data/meta/random.txt')
@@ -66,11 +66,11 @@ Finally, you can also use this operator on plain files (outside of channel conte
 
 == Comma separate values (.csv)
 
-The splitCsv operator allows you to parse text items emitted by a channel, that are formatted using the CSV format. 
+The `splitCsv` operator allows you to parse text items emitted by a channel, that are formatted using the CSV format. 
 
-It then splits them into records or group them into list of records with a specified length.
+It then splits them into records or groups them into a list of records with a specified length.
 
-In the simplest case, just apply the splitCsv operator to a channel emitting a CSV formatted text files or text entries, to view only the first and fourth columns. For example:
+In the simplest case, just apply the `splitCsv` operator to a channel emitting a CSV formatted text files or text entries, to view only the first and fourth columns. For example:
 
 ----
   Channel
@@ -100,7 +100,7 @@ Alternatively you can provide custom header names by specifying a the list of st
     .view { row -> "${row.col1},${row.col4}" }
 ----
 
-Finally, you can also process multiple csv files at the same time:
+You can also process multiple csv files at the same time:
 
 ----
     Channel
@@ -121,9 +121,9 @@ def f = file('data/meta/patients_1.csv')
   }
 ----
 
-== Tab separate values (.csv)
+== Tab separated values (.tsv)
 
-Parsing tsvs works in a similar way, just adding the `sep:'\t'` option in the splitCsv context:
+Parsing tsv files works in a similar way, just adding the `sep:'\t'` option in the `splitCsv` context:
 
 ----
  Channel
@@ -137,7 +137,7 @@ Parsing tsvs works in a similar way, just adding the `sep:'\t'` option in the sp
 [discrete]
 === Exercise
 
-Try using the tab separation technique, but print just the first column, and remove the header.
+Try using the tab separation technique on the file "data/meta/regions.tsv", but print just the first column, and remove the header.
 
 .Answer:
 [%collapsible]
@@ -168,7 +168,7 @@ for( def entry : records ) {
 }
 ----
 
-IMPORTANT: When using older version, you may need to replace `parse(f)` with `parseText(f.text)`
+IMPORTANT: When using an older JSON version, you may need to replace `parse(f)` with `parseText(f.text)`
 
 === YAML
 
