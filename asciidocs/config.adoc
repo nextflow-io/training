@@ -3,15 +3,15 @@
 A key Nextflow feature is the ability to decouple the workflow implementation
 by the configuration setting required by the underlying execution platform. 
 
-This enable portable deployment without the need to modify the application code. 
+This enables portable deployment without the need to modify the application code. 
 
 == Configuration file 
 
-When a pipeline script is launched Nextflow looks for a file named `nextflow.config` in the current directory and in the script base directory (if it is not the same as the current directory). Finally it checks for the file `$HOME/.nextflow/config`.
+When a pipeline script is launched Nextflow looks for a file named `nextflow.config` in the current directory and in the script base directory (if it is not the same as the current directory). Finally it checks for the file: `$HOME/.nextflow/config`.
 
 When more than one on the above files exist they are merged, so that the settings in the first override the same ones that may appear in the second one, and so on.
 
-The default config file search mechanism can be extended proving an extra configuration file by using the command line option `-c <config file>`.
+The default config file search mechanism can be extended proving an extra configuration file by using the command line option: `-c <config file>`.
 
 === Config syntax 
 
@@ -21,7 +21,7 @@ A Nextflow configuration file is a simple text file containing a set of properti
 name = value
 ```
 
-TIP: Please note, string values need to be wrapped in quotation characters while numbers and boolean values (`true`, `false`) do not. Also note that values are typed, meaning for example that, `1` is different from `'1'`, since the first is interpreted as the number one, while the latter is interpreted as a string value.
+TIP: Please note, string values need to be wrapped in quotation characters while numbers and boolean values (`true`, `false`) do not. Also, note that values are typed, meaning for example that, `1` is different from `'1'`, since the first is interpreted as the number one, while the latter is interpreted as a string value.
 
 === Config variables 
 
@@ -43,7 +43,7 @@ Configuration files use the same conventions for comments used in the Nextflow s
 
 [source,nextflow,linenums]
 ----
-// comment a single config file
+// comment a single line
 
 /* 
    a comment spanning 
@@ -87,11 +87,12 @@ params.bar = 'le monde!'
 params.foo = 'Hello'
 params.bar = 'world!'
 
-// print the both params
+// print both params
 println "$params.foo $params.bar"
 ----
 
-==== Exercise 
+[discrete]
+=== Exercise
 
 Save the first snippet as `nextflow.config` and the second one as `params.nf`. Then run: 
 
@@ -99,18 +100,35 @@ Save the first snippet as `nextflow.config` and the second one as `params.nf`. T
 nextflow run params.nf
 ```
 
+.For the result, click here:
+[%collapsible]
+====
+[source,nextflow]
+----
+Bonjour le monde!
+----
+====
+
 Execute is again specifying the `foo` parameter on the command line: 
 
 ```cmd
 nextflow run params.nf --foo Hola
 ```
 
-Compare the result of the two executions. 
+.For the result, click here:
+[%collapsible]
+====
+[source,nextflow]
+----
+Hola le monde!
+----
+====
 
+Compare the result of the two executions. 
 
 === Config env 
 
-The `env` scope allows the definition one or more variable that will be exported in the environment where the workflow tasks will be executed.
+The `env` scope allows the definition of one or more variables that will be exported into the environment where the workflow tasks will be executed.
 
 [source,config,linenums]
 ----
@@ -118,7 +136,8 @@ env.ALPHA = 'some value'
 env.BETA = "$HOME/some/path"
 ----
 
-==== Exercise 
+[discrete]
+=== Exercise
 
 Save the above snippet a file named `my-env.config`. The save the snippet below in a file named 
 `foo.nf`:
@@ -139,10 +158,19 @@ Finally executed the following command:
 nextflow run foo.nf -c my-env.config
 ```
 
+.Your result should look something like the following, click here:
+[%collapsible]
+====
+[source,nextflow]
+----
+BETA=/home/some/path
+ALPHA=some value
+----
+====
 
-=== Config process 
+=== Config process
 
-The process https://www.nextflow.io/docs/latest/process.html#directives[directives] allow the specification of specific settings for the task execution such as `cpus`, `memory`, `container` and other resources in the pipeline script. 
+`process` https://www.nextflow.io/docs/latest/process.html#directives[directives] allow the specification of specific settings for the task execution such as `cpus`, `memory`, `container` and other resources in the pipeline script. 
 
 This is useful specially when prototyping a small workflow script. 
 
@@ -151,7 +179,7 @@ logic from the process configuration settings, i.e. it's strongly
 suggested to define the process settings in the workflow configuration 
 file instead of the workflow script. 
 
-The `process` configuration scope allows the setting of any process https://www.nextflow.io/docs/latest/process.html#directives[directives] in the Nextflow configuration file. For example:
+The `process` configuration scope allows the setting of any `process` https://www.nextflow.io/docs/latest/process.html#directives[directives] in the Nextflow configuration file. For example:
 
 [source,config,linenums]
 ----
@@ -168,11 +196,11 @@ directives for all processes in your workflow script.
 The https://www.nextflow.io/docs/latest/config.html#process-selectors[process selector] can be used to apply the configuration to a specific
 process or group of processes (discussed later). 
 
-TIP: Memory and time duration unit can be specified either 
+TIP: Memory and time duration units can be specified either 
 using a string based notation in which the digit(s) and the unit 
 *can* be separated by a blank or by using the numeric notation in 
 which the digit(s) and the unit are separated by a dot character and 
-it's not enclosed by quote characters. 
+are not enclosed by quote characters. 
 
 [%header,cols=3*] 
 |===
@@ -198,16 +226,33 @@ it's not enclosed by quote characters.
 |===
 
 
-NOTE: The syntax for setting process directives in the 
-configuration file requires `=` ie. assignment operator, instead 
-it should not be used when setting process directives in the 
+The syntax for setting `process` directives in the 
+configuration file requires `=` (i.e. assignment operator), whereas
+it should not be used when setting the process directives within the 
 workflow script. 
 
-This important especially when you want to define a config setting
+
+.For an example, click here:
+[%collapsible]
+====
+process foo {
+  cpus 4
+  memory 2.GB 
+  time 1.hour
+  maxRetries 3   
+
+  script:
+  """
+    your_command --cpus $task.cpus --mem $task.memory
+  """
+}
+====
+
+This is important, especially when you want to define a config setting
 using a dynamic expression using a closure. For example: 
 
 ```
-process {
+process foo {
     memory = { 4.GB * task.cpus }
 }
 ```
@@ -232,7 +277,6 @@ process {
 }
 ```
 
-
 === Config Docker execution
 
 The container image to be used for the process execution can be specified in the `nextflow.config` 
@@ -244,8 +288,8 @@ process.container = 'nextflow/rnaseq-nf'
 docker.enabled = true
 ----
 
-TIP: The use of the unique SHA256 image ID guarantees that the image content do not change
-over time
+The use of unique "SHA256" docker image IDs guarantees that the image content does not change
+over time, for example:
 
 [source,config,linenums,options="nowrap"]
 ----
@@ -255,8 +299,8 @@ docker.enabled = true
 
 === Config Singularity execution 
 
-The run the workflow execution with a Singularity container provide the container 
-image file path in the Nextflow config file using the container directive: 
+To run a workflow execution with Singularity, a container 
+image file path is required in the Nextflow config file using the container directive: 
 
 [source,config,linenums,options="nowrap"]
 ----
@@ -274,8 +318,9 @@ The following protocols are supported:
 the Singularity format.
 * `docker-daemon://` pull the container image from a local Docker installation and convert it to a Singularity image file.
 
+WARNING: * Singularity hub `shub://` is now no longer available as a builder service. Though existing images before 19th April 2021 are still working.
 
-TIP: Specifying a plain Docker container image name, Nextflow implicitly download and converts it to 
+TIP: By specifying a plain Docker container image name, Nextflow implicitly downloads and converts it to 
 a Singularity image when the Singularity execution is enabled. For example:
 
 [source,config,linenums,options="nowrap"]
@@ -284,25 +329,27 @@ process.container = 'nextflow/rnaseq-nf'
 singularity.enabled = true
 ----
 
-The above configuration instructs Nextflow to use Singularity engine to run
+The above configuration instructs Nextflow to use the Singularity engine to run
 your script processes. The container is pulled from the Docker registry and cached
 in the current directory to be used for further runs.
 
-Alternatively if you have a Singularity image file, its location absolute path
+Alternatively if you have a Singularity image file, its absolute path location 
 can be specified as the container name either using the `-with-singularity` option
 or the `process.container` setting in the config file.
 
-Try to run the script as shown below:
+[discrete]
+=== Exercise 
+
+Try to run the script as shown below, changing the `nextflow.config` file to the one above using `singularity`:
 
 ```bash
 nextflow run script7.nf
 ```
 
-Note: Nextflow will pull the container image automatically, it will require a few seconds
+TIP: Nextflow will pull the container image automatically, it will require a few seconds
 depending the network connection speed.
 
-=== Config Conda execution 
-
+=== Config Conda execution
 
 The use of a Conda environment can also be provided in the configuration file
 adding the following setting in the `nextflow.config` file:
