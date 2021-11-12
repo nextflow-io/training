@@ -1,6 +1,6 @@
 = Execution cache and resume 
 
-Nextflow caching mechanism works assigning a unique ID to each task 
+The Nextflow caching mechanism works by assigning a unique ID to each task 
 which is used to create a separate execution directory where the tasks
 are executed and the results stored. 
 
@@ -46,27 +46,24 @@ work/
 │       └── index -> /data/../asciidocs/day2/work/12/1adacb582d2198cd32db0e6f808bce/index
 ```
 
+TIP: You can create these plots using the `tree` function if you have it installed. On unix, simply `sudo apt install  -y tree` or with Homebrew: `brew install tree`
 
 == How resume works
 
 The `-resume` command line option allow the continuation of a pipeline 
-execution since the last step that was successfully completed: 
+execution, since the last step that was successfully completed: 
 
 ```
 nextflow run <script> -resume
 ```
 
-In practical terms the pipeline is executed from the beginning 
-however before launching the execution of a process. Nextflow 
-uses the task unique ID to check if the work directory already 
-exists and it contains a valid command exit status and the 
+In practical terms the pipeline is executed from the beginning. However, before launching the execution of a `process` Nextflow 
+uses the task unique ID to check if the work directory already exists and that it contains a valid command exit state with the 
 expected output files. 
 
-If this condition is satisfied the task execution is skipped and previously computed results are used as the process results.  
+If this condition is satisfied the task execution is skipped and previously computed results are used as the `process` results.  
 
-The first task, for which a new output is computed, invalidates all 
-downstream executions in the remaining DAG. 
-
+The first task for which a new output is computed, invalidates all downstream executions in the remaining DAG. 
 
 == Work directory
 
@@ -74,8 +71,10 @@ The task work directories are created in the folder `work` in
 the launching path by default. This is supposed to be a *scratch*
 storage area that can be cleaned up once the computation is completed. 
 
-NOTE: Workflow final output are supposed to the stored in a different 
+NOTE: Workflow final output(s) are supposed to be stored in a different 
 location specified using one or more https://www.nextflow.io/docs/latest/process.html#publishdir[publishDir] directive.
+
+IMPORTANT: Make sure to delete you work directory occasionly, else your machine/environment may be filled with unused files. 
 
 A different location for the execution work directory can be specified 
 using the command line option `-w` e.g. 
@@ -84,8 +83,7 @@ using the command line option `-w` e.g.
 nextflow run <script> -w /some/scratch/dir 
 ```
 
-WARNING: If you delete or more the pipeline work directory will 
-prevent to use the resume feature in following runs. 
+WARNING: If you delete or move the pipeline work directory, it will prevent the use of the resume feature in following runs. 
 
 The hash code for input files is computed using: 
 
@@ -93,17 +91,13 @@ The hash code for input files is computed using:
 * The file size 
 * The last modified timestamp 
 
-Therefore just *touching* a file will invalidated the related 
-task execution. 
-
+Therefore just *touching* a file will invalidated the related task execution. 
 
 == How organize in silico experiments 
 
-It's a good practice to organize each each *experiment* 
-in its own folder. The experiment main input parameters should be specified using a Nextflow config file. This makes simply to track 
-and replicate the experiment over time. 
+It's good practice to organize each *experiment* in its own folder. The main experiment input parameters should be specified using a Nextflow config file. This makes it simple to track and replicate the experiment over time. 
 
-Note that in the same experiment the same pipeline can be executed multiple times, 
+NOTE: In the same experiment, the same pipeline can be executed multiple times, 
 however it should be avoided to launch two (or more) Nextflow instances in the same 
 directory concurrently. 
 
@@ -126,10 +120,9 @@ You can use either the *session ID* or the *run name* to recover a specific exec
 nextflow run rnaseq-nf -resume mighty_boyd
 ```
 
-
 == Execution provenance 
 
-The `log` command when provided with a *run name* or *session ID* can return many useful information about a pipeline execution that can be used to create a provenance report. 
+The `log` command when provided with a *run name* or *session ID* can return many useful bits of information about a pipeline execution that can be used to create a provenance report. 
 
 By default, it lists the work directories used to compute each task. 
 For example: 
@@ -176,9 +169,9 @@ $ nextflow log tiny_fermat -F 'process =~ /fastqc/'
 /data/.../work/f7/659c65ef60582d9713252bcfbcc310
 ```
 
-This can be useful to locate specific tasks work directories. 
+This can be useful to locate specific task work directories. 
 
-Finally, the `-t` option allow the creation of a basic custom provenance report proving a template file, in any format of your choice. For example: 
+Finally, the `-t` flag option allows the creation of a basic custom provenance report, showing a template file in any format of your choice. For example: 
 
 [source,html]
 ----
@@ -199,35 +192,35 @@ Script:
 ----
 
 Save the above snippet in a file named `template.html`. Then 
-run this command: 
+run this command (using the correct id for your run, e.g. not tiny_fermat): 
 
 ```
 nextflow log tiny_fermat -t template.html > prov.html
 ```
 
-Finally open the file `prov.html` file with a browser.
+Finally open the `prov.html` file with a browser.
 
 
 == Resume troubleshooting 
 
-If your workflow execution is not resumed as expected and 
-one or more task are re-executed all the times, these may 
+If your workflow execution is not resumed as expected with
+one or more tasks re-executed each time, these may 
 be the most likely causes: 
 
 * *Input file changed*: Make sure that there's no change 
-in your input files. Don't forget task unique hash is computed 
+in your input file(s). Don't forget the task unique hash is computed 
 taking into account the complete file path, the last modified 
 timestamp and the file size. If any of these information changes, 
 the workflow will be re-executed even if the input content is the same. 
 
 * *A process modifies an input*: A process should never alter input 
-files otherwise the resume, for future executions, will be invalidated
+files, otherwise the `resume` for future executions will be invalidated
 for the same reason explained in the previous point. 
 
-* *Inconsistent file attributes*: Some shared file system, 
-such as https://en.wikipedia.org/wiki/Network_File_System[NFS], may report 
-inconsistent file timestamp i.e. a different timestamp for the same 
-file even if it has not be modified. To prevent this problem use 
+* *Inconsistent file attributes*: Some shared file systems, 
+such as https://en.wikipedia.org/wiki/Network_File_System[NFS], may report an
+inconsistent file timestamp (i.e. a different timestamp for the same 
+file) even if it has not been modified. To prevent this problem use 
 the https://www.nextflow.io/docs/latest/process.html#cache[lenient cache strategy].
 
 * *Race condition in global variable*: Nextflow is designed to simplify parallel programming without taking care about race conditions and the access to shared resources. One of the few cases in which a race condition can arise is when using a global variable 
@@ -268,9 +261,9 @@ Channel
 ----
 
 * *Not deterministic input channels*: While dataflow channel ordering is 
-guaranteed i.e. data is read in the same order in which it's written in 
-the channel, when a process declares as input two or more 
-channel each of which is the output of a *different* process the 
+guaranteed (i.e. data is read in the same order in which it's written in 
+the channel), a process can declare as input two or more 
+channels each of which is the output of a *different* process, the 
 overall input ordering is not consistent over different executions. 
 +
 In practical term, consider the following snippet:
