@@ -2,22 +2,21 @@
 
 Real world genomic application can spawn the execution of thousands of jobs. In this 
 scenario a batch scheduler is commonly used to deploy a pipeline in a computing cluster, 
-allowing the execution of many jobs in parallel across many computing nodes. 
+allowing the execution of many jobs in parallel across many compute nodes. 
 
-Nextflow has built-in support for most common used batch schedulers such as Univa Grid Engine 
-and https://slurm.schedmd.com/[SLURM] and IBM LSF between the other. Check the Nextflow documentation for 
+Nextflow has built-in support for most commonly used batch schedulers, such as Univa Grid Engine, https://slurm.schedmd.com/[SLURM] and IBM LSF. Check the Nextflow documentation for 
 the complete list of supported https://www.nextflow.io/docs/latest/executor.html[execution platforms].
 
 == Cluster deployment 
 
 A key Nextflow feature is the ability to decouple the workflow implementation from the 
-actual execution platform implementing an abstraction layer that allows the deployment 
-of the resulting workflow on any executing platform support by the framework. 
+actual execution platform. The implementing of an abstraction layer allows the deployment 
+of the resulting workflow on any executing platform supported by the framework. 
 
 image:nf-executors.png[]
 
-To run your pipeline with a batch scheduler modify the `nextflow.config` file specifying 
-the target executor and the required computing resources if needed. For example: 
+To run your pipeline with a batch scheduler, modify the `nextflow.config` file specifying 
+the target executor and the required computing resources, if needed. For example: 
 
 [source,config,linenums,options="nowrap"]
 ----
@@ -26,8 +25,8 @@ process.executor = 'slurm'
 
 == Managing cluster resources 
 
-When using a batch scheduler is generally needed to specify the amount of resources 
-i.e. cpus, memory, execution time, etc. required by each task. 
+When using a batch scheduler, it is often needed to specify the amount of resources 
+(i.e. cpus, memory, execution time, etc.) required by each task. 
 
 This can be done using the following process directives:
 
@@ -81,26 +80,44 @@ process {
     cpus = 4 
 
     withName: foo {
-        cpus = 4 
+        cpus = 2 
         memory = '20 GB' 
         queue = 'short'
     }
 
     withName: bar {
-        cpus = 8 
+        cpus = 4 
         memory = '32 GB'
         queue = 'long' 
     }
 }
 ----
 
+[discrete]
+=== Exercise
+
+Run the RNA-Seq script (script7.nf) from earlier, but specify that the `quantification` `process` cpu reuirements to 2 cpu and with 5 GB of memory, withon the `nextflow.config` file.
+
+.Click here for the answer:
+[%collapsible]
+====
+[source,nextflow,linenums]
+----
+process {
+    withName: quantification {
+        cpus = 2 
+        memory = '5 GB'
+    }
+}
+----
+====
+
 === Configure process by labels
 
-When a workflow application is composed by many processes can be overkill listing all process names 
-in the configuration file to specifies the resources for each of them.
+When a workflow application is composed by many processes listing all process names 
+in the configuration file can be difficult to choose resources for each of them.
 
-A better strategy consist to annotate the processes with a https://www.nextflow.io/docs/latest/process.html#label[label] directive. Then specify 
-the resources in the configuration file using for all processes having the same label. 
+A better strategy consists of annotating the processes with a https://www.nextflow.io/docs/latest/process.html#label[label] directive. Then specify the resources in the configuration file used for all processes having the same label. 
 
 The workflow script:
 
@@ -147,8 +164,7 @@ process {
 
 === Configure multiple containers
 
-It is possible to use a different container for each process in your workflow. For having
-a workflow script defining two process, it's possible to define a config file as shown
+It is possible to use a different container for each process in your workflow. You can define their continers in a config file as shown
 below:
 
 [source,config,linenums,options="nowrap"]
@@ -165,7 +181,7 @@ process {
 docker.enabled = true
 ----
 
-TIP: A single _fat_ container or many _slim_ containers? Both approaches have pros & cons.
+TIP: Should I use a single _fat_ container or many _slim_ containers? Both approaches have pros & cons.
 A single container is simpler to build and to maintain, however when using many tools
 the image can become very big and tools can conflict each other. Using a container for each
 process can result in many different images to build and to maintain, especially when
@@ -226,29 +242,29 @@ nextflow run <your script> -profile standard,cloud
 
 https://aws.amazon.com/batch/[AWS Batch] is a managed computing service that allows the execution of containerised workloads in the Amazon cloud infrastructure.
 
-Nextflow provides a built-in support for AWS Batch which allows the seamless deployment of a Nextflow pipeline in the cloud offloading the process executions as Batch jobs.
+Nextflow provides a built-in support for AWS Batch which allows the seamless deployment of a Nextflow pipeline in the cloud, offloading the process executions as Batch jobs.
 
-Once the Batch environment is configured specifying the instance types to be used and the max number 
-of cpus to be allocated, you need to created a Nextflow configuration file like the one showed below:
+Once the Batch environment is configured, specifying the instance types to be used and the max number 
+of cpus to be allocated, you need to create a Nextflow configuration file like the one showed below:
 
 [source,config,linenums]
 ----
-process.executor = 'awsbatch'       // <1>
-process.queue = 'nextflow-ci'       // <2>
-process.container = 'nextflow/rnaseq-nf:latest'      // <3>
-workDir = 's3://nextflow-ci/work/'  // <4>
-aws.region = 'eu-west-1'            // <5>
+process.executor = 'awsbatch'                          // <1>
+process.queue = 'nextflow-ci'                          // <2>
+process.container = 'nextflow/rnaseq-nf:latest'        // <3>
+workDir = 's3://nextflow-ci/work/'                     // <4>
+aws.region = 'eu-west-1'                               // <5>
 aws.batch.cliPath = '/home/ec2-user/miniconda/bin/aws' // <6>
 ----
 
-<1> Set the AWS Batch as the executor to run the processes in the workflow
+<1> Set AWS Batch as the executor to run the processes in the workflow
 <2> The name of the computing queue defined in the Batch environment
 <3> The Docker container image to be used to run each job
 <4> The workflow work directory must be a AWS S3 bucket
 <5> The AWS region to be used
 <6> The path of the AWS cli tool required to download/upload files to/from the container 
 
-TIP: The best practices is to keep this setting as a separate profile in your 
+TIP: The best practice is to keep this setting as a separate profile in your 
 workflow config file. This allows the execution with a simple command. 
 
 ```
@@ -269,7 +285,7 @@ aws {
 }
 ```
 
-Multiple volumes can be specified using comma-separated paths. The usual Docker volume mount syntax can be used to define complex volumes for which the container paths is different from the host paths or to specify a read-only option: 
+Multiple volumes can be specified using comma-separated paths. The usual Docker volume mount syntax can be used to define complex volumes for which the container path is different from the host path or to specify a read-only option: 
 
 ```
 aws {
@@ -280,18 +296,17 @@ aws {
 }
 ```
 
-IMPORTANT: 
+IMPORTANT: This is a global configuration that has to be specified in a Nextflow config file, as such it's applied to *all* process executions.
 
-* This a global configuration that has to be specified in a Nextflow config file, as such it's applied to *all* process executions.
-* Nextflow expects those paths to be available. It does not handle the provision of EBS volumes or 
+IMPORTANT: Nextflow expects those paths to be available. It does not handle the provision of EBS volumes or 
 other kind of storage. 
 
 
 == Custom job definition
 
-Nextflow automatically creates the Batch https://docs.aws.amazon.com/batch/latest/userguide/job_definitions.html[Job definitions] needed to execute your pipeline processes. Therefore it's not required to define them before run your workflow.
+Nextflow automatically creates the Batch https://docs.aws.amazon.com/batch/latest/userguide/job_definitions.html[Job definitions] needed to execute your pipeline processes. Therefore it's not required to define them before you run your workflow.
 
-However, you may still need to specify a custom Job Definition to provide fine-grained control of the configuration settings of a specific job e.g. to define custom mount paths or other special settings of a Batch Job.
+However, you may still need to specify a custom Job Definition to provide fine-grained control of the configuration settings of a specific job (e.g. to define custom mount paths or other special settings of a Batch Job).
 
 To use your own job definition in a Nextflow workflow, use it in place of the container image name,
 prefixing it with the `job-definition://` string. For example: 
@@ -304,9 +319,7 @@ process {
 
 == Custom image 
 
-Since Nextflow requires the AWS CLI tool to be accessible in the computing environment 
-a common solution consists of creating a custom AMI and install it in a self-contained manner 
-e.g. using Conda package manager.
+Since Nextflow requires the AWS CLI tool to be accessible in the computing environment, a common solution consists of creating a custom AMI and installing it in a self-contained manner (e.g. using Conda package manager).
 
 IMPORTANT: When creating your custom AMI for AWS Batch, make sure to use the _Amazon ECS-Optimized Amazon Linux AMI_ as the base image.
 
@@ -320,7 +333,7 @@ $HOME/miniconda/bin/conda install -c conda-forge -y awscli
 rm Miniconda3-latest-Linux-x86_64.sh
 ```
 
-NOTE: The `aws` tool will be placed in a directory named `bin` in the main installation folder. Modifying this directory structure, after the installation, this will cause the tool not to work properly.
+NOTE: The `aws` tool will be placed in a directory named `bin` in the main installation folder. Modifying this directory structure after the installation will cause the tool to not work properly.
 
 Finally specify the `aws` full path in the Nextflow config file as show below: 
 
@@ -332,9 +345,9 @@ aws.batch.cliPath = '/home/ec2-user/miniconda/bin/aws'
 
 An alternative to is to create a custom AMI using a
 https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html[Launch template] that 
-installs the AWS CLI tool during the instance boot via a custom user-data. 
+installs the AWS CLI tool during the instance boot via custom user-data. 
 
-In the EC2 dashboard create a Launch template specifying in the user data field:
+In the EC2 dashboard, create a Launch template specifying the user data field:
 
 ```
 MIME-Version: 1.0
@@ -366,9 +379,11 @@ launch template in the corresponding field.
 
 == Hybrid deployments 
 
-Nextflow allows the use of multiple executors in the same workflow application. This feature enables the deployment of hybrid workloads in which some jobs are execute in the local computer or local computing cluster and some jobs are offloaded to AWS Batch service.
+Nextflow allows the use of multiple executors in the same workflow application. This feature enables the deployment of hybrid workloads in which some jobs are executed on the local computer or local computing cluster and some jobs are offloaded to the AWS Batch service.
 
-To enable this feature use one or more https://www.nextflow.io/docs/latest/config.html#config-process-selectors[process selectors] in your Nextflow configuration file to apply the https://www.nextflow.io/docs/latest/awscloud.html#awscloud-batch-config[AWS Batch configuration] only to a subset of processes in your workflow. For example:
+To enable this feature use one or more https://www.nextflow.io/docs/latest/config.html#config-process-selectors[process selectors] in your Nextflow configuration file.  
+
+For example, to apply the https://www.nextflow.io/docs/latest/awscloud.html#awscloud-batch-config[AWS Batch configuration] only to a subset of processes in your workflow. You can try the following:
 
 [source,config,linenums]
 ----
@@ -390,9 +405,9 @@ aws {
 
 <1> Set `slurm` as the default executor 
 <2> Set the queue for the SLURM cluster 
-<3> Setting of for the process named `bigTask` 
-<4> Set `awsbatch` as executor for the `bigTask` process
-<5> Set the queue for the for the `bigTask` process
-<6> set the container image to deploy the `bigTask` process
-<7> Defines the region for Batch execution
+<3> Setting of a process named `bigTask` 
+<4> Set `awsbatch` as the executor for the `bigTask` process
+<5> Set the queue for the `bigTask` process
+<6> Set the container image to deploy for the `bigTask` process
+<7> Define the region for Batch execution
 
