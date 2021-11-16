@@ -237,10 +237,10 @@ the previous example, replacing the process script with the string
 process convertToUpper {
 
     input:
-    file y from letters.flatten()
+    file y from letters_ch.flatten()
 
     output:
-    stdout into result
+    stdout into result_ch
 
     """
     rev $y
