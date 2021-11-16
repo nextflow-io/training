@@ -1,20 +1,9 @@
-nextflow.enable.dsl=2
+FROM mambaorg/micromamba
+MAINTAINER Your name <your_email>
 
-process randomNum {
-
-    output:
-    file 'result.txt'
-
-    '''
-    echo $RANDOM > result.txt
-    '''
-}
-
-
-workflow{
-
-  receiver_ch = randomNum()
-  receiver_ch.view { "Received: " + it.text }
-
-}
-
+RUN \
+   micromamba install -y -n base -c defaults -c bioconda -c conda-forge \
+      salmon=1.5.1 \
+      fastqc=0.11.9 \
+      multiqc=1.10.1 \
+   && micromamba clean -a -y
