@@ -18,17 +18,6 @@ Nextflow can be used on any POSIX compatible system (Linux, OS X, Windows Subsys
 * https://aws.amazon.com/cli/[AWS CLI]
 * AWS Batch computing environment configured 
 
-=== Setup AWS Cloud9 environment
-
-If you are running this tutorial in the AWS Cloud9 environment, 
-run the following one-liner to setup the virtual environment: 
-
-
-[source,bash,linenums]
-----
-source setup/all.sh
-----
-
 === Training material 
 
 Download the training material by copy & pasting the following command 
@@ -44,6 +33,16 @@ Or alternatively if you have `wget` instead of curl:
 [source,bash,linenums]
 ----
 wget -q -O- https://s3-eu-west-1.amazonaws.com/seqeralabs.com/public/nf-training.tar.gz | tar xvz
+----
+
+=== Setup AWS Cloud9 environment
+
+If you are running this tutorial in an AWS Cloud9 environment, 
+run the following one-liner to setup the virtual environment: 
+
+[source,bash,linenums]
+----
+source setup/all.sh
 ----
 
 === Nextflow installation 
