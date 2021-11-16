@@ -64,7 +64,6 @@ In practical terms, Nextflow scripting is an extension of the https://groovy-lan
 which in turn is a super-set of the Java programming language. Groovy can be considered as Python for Java in that
 it simplifies the writing of code and is more approachable.
 
-
 == Your first script
 
 Here you will execute your first Nextflow script (hello.nf), which we will go through line by line. 
@@ -87,8 +86,7 @@ process splitLetters {
     file 'chunk_*' into letters_ch
 
     """
-    printf '$x' | head -c 6 > chunk_1.txt
-    printf '$x' | tail -c 6 > chunk_2.txt
+    printf '$x' | split -b 6 - chunk_
     """
 }
 
@@ -128,33 +126,33 @@ result_ch.view{ it }
 
 * *14*: Triple quote marks intiate the code block to execute in this `process`.
 
-* *15-16*: Code to execute, printing the `input` value x (called using the dollar [$] symbol prefix), and splitting the string into 2 chunks of 6 characters each ("Hello " and "world!") and saving to files: chunk_aa and chunk_ab.
+* *15*: Code to execute, printing the `input` value x (called using the dollar [$] symbol prefix), and splitting the string into chunks of 6 characters long ("Hello " and "world!") and saving to files: chunk_aa and chunk_ab.
 
-* *17*: Triple quote marks the end of the code block.
+* *16*: Triple quote marks the end of the code block.
 
-* *18*: End of first process block.
+* *17*: End of first process block.
 
-* *20*: Begin second process defined as `convertToUpper`.
+* *19*: Begin second process defined as `convertToUpper`.
 
-* *22*: Input declaration for the `convertToUpper` `process`.
+* *21*: Input declaration for the `convertToUpper` `process`.
 
-* *23*: Tells the `process` to expect `input` file/s (`file`; e.g. chunk_aa and chunk_ab) from the `letter_ch`, that we assign to the variable 'y'. 
+* *22*: Tells the `process` to expect `input` file/s (`file`; e.g. chunk_aa and chunk_ab) from the `letter_ch`, that we assign to the variable 'y'. 
 
 TIP: The use of the operator `.flatten()` here is to split the two files into two separate items to be put through the next process (else they would treat them as a single element).
 
-* *25*: Output declaration for the `convertToUpper` process.
+* *24*: Output declaration for the `convertToUpper` process.
 
-* *26*: Tells the process to expect output as standard output (stdout) and direct this `into` the `result_ch` channel.
+* *25*: Tells the process to expect output as standard output (stdout) and direct this `into` the `result_ch` channel.
 
-* *28*: Triple quote marks intiate the code block to execute in this `process`.
+* *27*: Triple quote marks intiate the code block to execute in this `process`.
 
-* *29*: Script to read files (cat) using the '$y' input variable, then pipe to uppercase conversion, outputting to standard output.
+* *28*: Script to read files (cat) using the '$y' input variable, then pipe to uppercase conversion, outputting to standard output.
 
-* *30*: Triple quote marks the end of the code block.
+* *29*: Triple quote marks the end of the code block.
 
-* *31*: End of first `process` block.
+* *30*: End of first `process` block.
 
-* *33*: The final output (in the `result_ch`) is printed to screen using the `view` operator (appended onto the channel name). 
+* *32*: The final output (in the `result_ch`) is printed to screen using the `view` operator (appended onto the channel name). 
 
 === In practise
 
