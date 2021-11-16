@@ -1,23 +1,10 @@
-nextflow.enable.dsl=2
-
-methods = ['prot','dna', 'rna']
-
-process foo {
-  input:
-  val x
-
-  output:
-  val x
-
-  """
-  echo $x > file
-  """
-}
-
-workflow{
-
-  receiver_ch = foo(Channel.from(methods))
-  receiver_ch.view { "Received: $it" }
-
-}
-
+name: nf-tutorial
+channels:
+  - defaults
+  - bioconda
+  - conda-forge
+dependencies:
+  - salmon=1.0.0
+  - fastqc=0.11.5
+  - multiqc=1.5
+  - tbb=2020.2

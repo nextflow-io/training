@@ -1,67 +1,85 @@
-= Processes
+= Processes 
 
-A _process_ is the basic Nextflow computing primitive to execute foreign function i.e. custom
-scripts or tools.
+In Nextflow, a `process` is the basic computing primitive to execute foreign functions (i.e. custom scripts or tools).
 
-The process definition starts with the keyword ``process``, followed by process name and finally the process `body` delimited by curly brackets. The process body must contain a string which represents the command or, more generally, a script that is executed by it.
+The `process` definition starts with the keyword `process`, followed by the process name and finally the process body delimited by curly brackets. 
 
-A basic process looks like the following example:
-
+A basic `process`, only using the `script` definition block, looks like the following:
 
 [source,nextflow,linenums]
 ----
 process sayHello {
+  script:
   """
   echo 'Hello world!'
   """
 }
 ----
 
-A process may contain five definition blocks, respectively: directives,
-inputs, outputs, when clause and finally the process script. The syntax is defined as follows:
+In more complex examples, the process body can contain up to *five* definition blocks:
+
+1. *Directives* are initial declarations that define optional settings.
+
+2. *Input* defines the expected input file/s and the channel from where to find them.
+
+3. *Output* defines the expected output file/s and the channel to send the data to.
+
+4. *When* is a optional clause statement to allow conditional processes.
+
+5. *Script* is a string statement that defines the command to be executed by the process
+
+The full process syntax is defined as follows:
 
 [source,nextflow,linenums]
 ----
 process < name > {
+
   [ directives ]        // <1>
+
   input:                // <2>
   < process inputs >
+  
   output:               // <3>
   < process outputs >
+  
   when:                 // <4>
   < condition >
+  
   [script|shell|exec]:  // <5>
+  """
   < user script to be executed >
+  """
 }
 ----
 
-<1> Zero, one or more process directives
-<2> Zero, one or more process inputs
-<3> Zero, one or more process outputs
-<4> An optional boolean conditional to trigger the process execution
-<5> The command to be executed
+<1> Zero, one or more process directives.
+<2> Zero, one or more process inputs.
+<3> Zero, one or more process outputs.
+<4> An optional boolean conditional to trigger the process execution.
+<5> The command to be executed.
 
 == Script
 
-The `script` block is a string statement that defines the command that is executed by the process to carry out its task.
+The `script` block is a string statement that defines the command to be executed by the process.
 
-A process contains one and only one script block, and it must be the last statement when the process contains input and output declarations.
+A process contains one and only one `script` block, and it must be the last statement when the process contains input and output declarations.
 
-The script block can be a simple string or multi-line string. The latter simplifies the writing of non trivial scripts
+The `script` block can be a single or multi-line string. The latter simplifies the writing of non-trivial scripts
 composed by multiple commands spanning over multiple lines. For example:
 
 [source,nextflow,linenums]
 ----
 process example {
-    script:
-    """
-    grep '^@S' data/ggal/gut_1.fq > Fastq_headers
-    cat Fastq_headers | cut -d '.' -f2 > Uniq_Fastq_Names
-    """
+  script:
+  """
+  echo 'Hello world!\nHola mundo!\nCiao mondo!\nHallo Welt!' > file
+  cat file | head -n 1 | head -c 5 > chunk_1.txt
+  gzip -c chunk_1.txt  > chunk_archive.gz
+  """
 }
 ----
 
-By default the process command is interpreted as a *Bash* script. However any other scripting language can be used just simply starting the script with the corresponding https://en.wikipedia.org/wiki/Shebang_(Unix)[Shebang] declaration. For example:
+By default the `process` command is interpreted as a *Bash* script. However any other scripting language can be used by simply starting the script with the corresponding https://en.wikipedia.org/wiki/Shebang_(Unix)[Shebang] declaration. For example:
 
 [source,nextflow,linenums]
 ----
@@ -72,17 +90,16 @@ process pyStuff {
 
   x = 'Hello'
   y = 'world!'
-  print "%s - %s" % (x,y)
+  print ("%s - %s" % (x,y))
   """
 }
 ----
 
-TIP: This allows the compositing in the same workflow script of tasks using different programming languages which may better fit a particular job. However for large chunks of code is suggested to save them
-into separate files and invoke them from the process script.
+NOTE: Multiple programming languages can be used within the same workflow script. However, for large chunks of code is suggested to save them into separate files and invoke them from the process script. One can store the specific scripts in the ./bin folder.
 
 === Script parameters
 
-Process script can be defined dynamically using variable values like in other string.
+Script parameters (`params`) can be defined dynamically using variable values, like this:
 
 [source,nextflow,linenums]
 ----
@@ -97,7 +114,7 @@ process foo {
 ----
 
 NOTE: A process script can contain any string format supported by the Groovy programming language.
-This allows us to use string interpolation or multiline string as in the script above. 
+This allows us to use string interpolation as in the script above or multiline strings. 
 Refer to <<groovy.adoc#_string_interpolation,String interpolation>> for more information.
 
 IMPORTANT: Since Nextflow uses the same Bash syntax for variable substitutions in strings, Bash environment variables need to be escaped using `\` character.
@@ -127,11 +144,10 @@ process bar {
 }
 ----
 
-However this won't allow any more the usage of Nextflow variables in the command script.
+However, this blocks the usage of Nextflow variables in the command script.
 
 Another alternative is to use a `shell` statement instead of `script` which uses a different
-syntax for Nextflow variable: `!{..}`. This allow to use both Nextflow and Bash variables in
-the same script.
+syntax for Nextflow variables: `!{..}`. This allows the use of both Nextflow and Bash variables in the same script.
 
 [source,nextflow,linenums]
 ----
@@ -146,33 +162,38 @@ process baz {
 }
 ----
 
-
 === Conditional script
 
-The process script can also be defined in a complete dynamic manner using a `if` statement or any other expression evaluating to string value. For example:
+The process script can also be defined in a completely dynamic manner using an `if` statement or any other expression evaluating to a string value. For example:
 
 [source,nextflow,linenums]
 ----
-params.aligner = 'kallisto'
+params.compress = 'gzip'
+params.file2compress = "$baseDir/data/ggal/transcriptome.fa"
 
 process foo {
+
+  input:
+  path file from params.file2compress
+
   script:
-  if( params.aligner == 'kallisto' )
+  if( params.compress == 'gzip' )
     """
-    kallisto --reads /some/data.fastq
+    gzip -c $file > ${file}.fa.gz
     """
-  else if( params.aligner == 'salmon' )
+  else if( params.compress == 'bzip2' )
     """
-    salmon --reads /some/data.fastq
+    bzip2 -c $file > ${file}.fa.bz2
     """
   else
-    throw new IllegalArgumentException("Unknown aligner $params.aligner")
-}
+    throw new IllegalArgumentException("Unknown aligner $params.compress")
+}   
 ----
 
-==== Exercise
+[discrete]
+=== Exercise
 
-Write a custom function that given the aligner name as parameter returns the command
+Write a custom function that given the compressor name as a parameter, returns the command
 string to be executed. Then use this function as the process script body.
 
 == Inputs
@@ -180,13 +201,13 @@ string to be executed. Then use this function as the process script body.
 Nextflow processes are isolated from each other but can communicate between themselves sending values through channels.
 
 Inputs implicitly determine the dependency and the parallel execution of the process. 
-The process execution is fired each time a _new_ data is ready to be consumed from the input channel: 
+The process execution is fired each time _new_ data is ready to be consumed from the input channel: 
 
 image::channel-process.png[]
 
-The input block defines which channels the process is expecting to receive inputs data from. You can only define one input block at a time and it must contain one or more inputs declarations.
+The `input` block defines which channels the `process` is expecting to receive data from. You can only define one `input` block at a time, and it must contain one or more input declarations.
 
-The input block follows the syntax shown below:
+The `input` block follows the syntax shown below:
 
 ```nextflow
 input:
@@ -258,7 +279,7 @@ process foo {
 ----
 
 The same syntax it's also able to handle more than one input file in the same execution.
-Only change the channel composition.
+Only requiring a change in the channel composition.
 
 [source,nextflow,linenums]
 ----
@@ -274,8 +295,8 @@ process foo {
 }
 ----
 
-WARNING: When a process declares an input `file` the corresponding channel elements 
-must be *file* objects i.e. created with the `file` helper function from the file specific 
+WARNING: When a process declares an input `file`, the corresponding channel elements 
+must be *file* objects, i.e. created with the `file` helper function from the file specific 
 channel factories e.g. `Channel.fromPath` or `Channel.fromFilePairs`. 
 
 Consider the following snippet: 
@@ -300,7 +321,7 @@ The above code creates a temporary file named `input.1` with the string `data/gg
 === Input path
 
 As of version 19.10.0, Nextflow introduced a new `path` input qualifier that simplifies 
-the handling of cases such as the one shown above. In a nutshell the input `path` automatically 
+the handling of cases such as the one shown above. In a nutshell, the input `path` automatically 
 handles string values as file objects. The following example works as expected:
 
 [source,nextflow,linenums]
@@ -320,15 +341,50 @@ process foo {
 NOTE: The path qualifier should be preferred over file to handle process input files when using Nextflow 19.10.0 or later.
 
 
-==== Exercise
+[discrete]
+=== Exercise
 
-Write a script that creates a channel containing  all read files matching the pattern `data/ggal/*_1.fq`
+Write a script that creates a channel containing all read files matching the pattern `data/ggal/*_1.fq`
 followed by a process that concatenates them into a single file and prints the first 20 lines.
+
+.Click here for the answer:
+[%collapsible]
+====
+[source,nextflow,linenums]
+----
+params.reads = "$baseDir/data/ggal/*_1.fq"
+
+Channel 
+    .fromPath( params.reads )
+    .set { read_ch } 
+
+process concat {
+  tag "Concat all files"
+
+  input:
+  path '*' from read_ch.collect()
+
+  output:
+  path 'top_10_lines' into concat_ch
+ 
+  script:
+  """
+  cat * > concatenated.txt
+  head -n 20 concatenated.txt > top_10_lines
+  """
+  }
+
+concat_ch.view()
+}
+
+concat_ch.view{ it }
+----
+====
 
 === Combine input channels
 
 A key feature of processes is the ability to handle inputs from multiple channels. However it's
-important to understands how the content of channel and their semantic affect the execution
+important to understands how channel content and their semantics affect the execution
 of a process.
 
 Consider the following example:
@@ -347,7 +403,7 @@ process foo {
 }
 ----
 
-Both channels emit three value, therefore the process is executed three times, each time with a different pair:
+Both channels emit three values, therefore the process is executed three times, each time with a different pair:
 
 * (1, a)
 * (2, b)
@@ -359,7 +415,7 @@ When this condition is verified, it consumes the input values coming from the re
 
 This means channel values are consumed serially one after another and the first empty channel cause the process execution to stop even if there are other values in other channels.
 
-*What does it happen when not all channels have the same cardinality (i.e. they emit a different number of elements)?*
+*So what happens when channels do not have the same cardinality (i.e. they emit a different number of elements)?*
 
 For example:
 
@@ -369,7 +425,7 @@ process foo {
   echo true
   input:
   val x from Channel.from(1,2)
-  val y from Channel.from('a','b','c','d')
+  val y from Channel.from('a','b','c')
   script:
    """
    echo $x and $y
@@ -377,11 +433,11 @@ process foo {
 }
 ----
 
-In the above example the process is executed only two time, because when a channel has no more data to be processed it stops the process execution.
+In the above example the process is executed only two times, because when a channel has no more data to be processed it stops the process execution.
 
-IMPORTANT: Note however that _value_ channel do not affect the process termination.
+However, what happens if you replace value x with a `value` channel?
 
-To better understand this behavior compare the previous example with the following one:
+Compare the previous example with the following one :
 
 [source,nextflow,linenums]
 ----
@@ -397,14 +453,61 @@ process bar {
 }
 ----
 
-==== Exercise
+.The output should look something like:
+[%collapsible]
+====
+[source,nextflow,linenums]
+----
+1 and b
+1 and a
+1 and c
+----
+====
+
+This is because _value_ channels can be consumed multiple times, so it doesn't affect process termination.
+
+[discrete]
+=== Exercise
 
 Write a process that is executed for each read file matching the pattern `data/ggal/*_1.fq` and
 use the same `data/ggal/transcriptome.fa` in each execution.
 
+
+.Click here for the answer:
+[%collapsible]
+====
+[source,nextflow,linenums]
+----
+params.reads = "$baseDir/data/ggal/*_1.fq"
+params.transcriptome_file = "$baseDir/data/ggal/transcriptome.fa"
+
+Channel 
+    .fromPath( params.reads )
+    .set { read_ch } 
+
+process command {
+  tag "Run_command"
+
+  input:
+  path reads from read_ch
+  path transcriptome from params.transcriptome_file
+
+  output:
+  path result into concat_ch
+ 
+  script:
+  """
+  echo your_command $reads $transcriptome > result
+  """
+  }
+
+concat_ch.view()
+----
+====
+
 === Input repeaters
 
-The `each` qualifier allows you to repeat the execution of a process for each item in a collection, every time a new data is received. For example:
+The `each` qualifier allows you to repeat the execution of a process for each item in a collection, every time new data is received. For example:
 
 [source,nextflow,linenums]
 ----
@@ -422,18 +525,53 @@ process alignSequences {
 }
 ----
 
-In the above example every time a file of sequences is received as input by the process, it executes three tasks running an alignment with a different value for the `mode` option. This is useful when you need to repeat the same task for a given set of parameters.
+In the above example every time a file of sequences is received as input by the process, it executes three tasks, each running a different alignment method, set as a `mode` variable. This is useful when you need to repeat the same task for a given set of parameters.
 
-==== Exercise
+[discrete]
+=== Exercise
 
 Extend the previous example so a task is executed for each read file matching the pattern `data/ggal/*_1.fq` and repeat the same task both with `salmon` and `kallisto`.
 
+.Click here for the answer:
+[%collapsible]
+====
+[source,nextflow,linenums]
+----
+params.reads = "$baseDir/data/ggal/*_1.fq"
+params.transcriptome_file = "$baseDir/data/ggal/transcriptome.fa"
+methods= ['salmon', 'kallisto']
+
+Channel 
+    .fromPath( params.reads )
+    .set { read_ch } 
+
+process command {
+  tag "Run_command"
+
+  input:
+  path reads from read_ch
+  path transcriptome from params.transcriptome_file
+  each mode from methods
+
+  output:
+  path result into concat_ch
+ 
+  script:
+  """
+  echo $mode $reads $transcriptome > result
+  """
+  }
+
+concat_ch
+    .view { "To run : ${it.text}" }
+----
+====
 
 == Outputs
 
-The _output_ declaration block allows to define the channels used by the process to send out the results produced.
+The _output_ declaration block defines the channels used by the process to send out the results produced.
 
-There can be defined at most one output block and it can contain one or more outputs declarations. The output block follows the syntax shown below:
+Only one output block can be defined containing one or more output declarations. The output block follows the syntax shown below:
 
 ----
 output:
@@ -442,8 +580,8 @@ output:
 
 === Output values
 
-The `val` qualifier allows to output a _value_ defined in the script context. In a common usage scenario,
-this is a value which has been defined in the _input_ declaration block, as shown in the following example::
+The `val` qualifier specifies a defined _value_ output in the script context. In a common usage scenario,
+this is a value, which has been defined in the _input_ declaration block, as shown in the following example:
 
 [source,nextflow,linenums]
 ----
@@ -466,7 +604,7 @@ receiver.view { "Received: $it" }
 
 === Output files
 
-The `file` qualifier allows to output one or more files, produced by the process, over the specified channel.
+The `file` qualifier specifies one or more files as output, produced by the process, into the specified channel.
 
 [source,nextflow,linenums]
 ----
@@ -494,7 +632,7 @@ be able to receive it.
 
 When an output file name contains a `*` or `?` wildcard character it is interpreted as a
 http://docs.oracle.com/javase/tutorial/essential/io/fileOps.html#glob[glob] path matcher.
-This allows to _capture_ multiple files into a list object and output them as a sole emission. For example:
+This allows us to _capture_ multiple files into a list object and output them as a sole emission. For example:
 
 [source,nextflow,linenums]
 ----
@@ -525,20 +663,30 @@ File: chunk_ad => a
 Some caveats on glob pattern behavior:
 
 * Input files are not included in the list of possible matches.
-* Glob pattern matches against both files and directories path.
+* Glob pattern matches against both files and directory paths.
 * When a two stars pattern ``**`` is used to recourse across directories, only file paths are matched
   i.e. directories are not included in the result list.
 
-==== Exercise
+[discrete]
+=== Exercise
 
 Remove the `flatMap` operator and see out the output change. The documentation
 for the `flatMap` operator is available at https://www.nextflow.io/docs/latest/operator.html#flatmap[this link].
 
+.Click here for the answer:
+[%collapsible]
+====
+[source,nextflow,linenums]
+----
+File: [chunk_aa, chunk_ab, chunk_ac, chunk_ad] => [H, o, l, a]
+----
+====
+
 === Dynamic output file names
 
 When an output file name needs to be expressed dynamically, it is possible to define it using a dynamic evaluated
-string which references values defined in the input declaration block or in the script global context.
-For example::
+string, which references values defined in the input declaration block or in the script global context.
+For example:
 
 [source,nextflow,linenums]
 ----
@@ -562,12 +710,12 @@ on the actual value of the `x` input.
 === Composite inputs and outputs
 
 So far we have seen how to declare multiple input and output channels, but each channel was handling
-only one value at time. However Nextflow can handle tuple of values.
+only one value at time. However Nextflow can handle a _tuple_ of values.
 
-When using channel emitting tuple of values the corresponding input declaration must be declared with a `tuple` qualifier followed by definition of each single element in the tuple.
+When using a channel emitting a _tuple_ of values, the corresponding input declaration must be declared with a `tuple` qualifier followed by definition of each element in the tuple.
 
-In the same manner output channel emitting tuple of values can be declared using the `tuple` qualifier
-following by the definition of each tuple element in the tuple.
+In the same manner, output channels emitting a tuple of values can be declared using the `tuple` qualifier
+following by the definition of each tuple element.
 
 [source,nextflow,linenums]
 ----
@@ -590,15 +738,36 @@ bam_ch.view()
 TIP: In previous versions of Nextflow `tuple` was called `set` but it was used exactly with the 
   same semantic. It can still be used for backward compatibility. 
 
-==== Exercise
+[discrete]
+=== Exercise
 
 Modify the script of the previous exercise so that the _bam_ file is named as the given `sample_id`.
+
+.Click here for the answer:
+[%collapsible]
+====
+[source,nextflow,linenums]
+----
+reads_ch = Channel.fromFilePairs('data/ggal/*_{1,2}.fq')
+
+process foo {
+  input:
+    tuple val(sample_id), file(sample_files) from reads_ch
+  output:
+    tuple val(sample_id), file("${sample_id}.bam") into bam_ch
+  script:
+  """
+    echo your_command_here --reads $sample_id > ${sample_id}.bam
+  """
+}
+----
+====
 
 == When
 
 The `when` declaration allows you to define a condition that must be verified in order to execute the process. This can be any expression that evaluates a boolean value.
 
-It is useful to enable/disable the process execution depending the state of various inputs and parameters. For example:
+It is useful to enable/disable the process execution depending on the state of various inputs and parameters. For example:
 
 [source,nextflow,linenums]
 ----
@@ -625,10 +794,10 @@ process find {
 
 Directive declarations allow the definition of optional settings that affect the execution of the current process without affecting the _semantic_ of the task itself.
 
-They must be entered at the top of the process body, before any other declaration blocks (i.e. `input`, `output`, etc).
+They must be entered at the top of the process body, before any other declaration blocks (i.e. `input`, `output`, etc.).
 
 Directives are commonly used to define the amount of computing resources to be used or
-other meta directives like that allows the definition of extra information for configuration or
+other meta directives that allow the definition of extra information for configuration or
 logging purpose. For example:
 
 [source,nextflow,linenums]
@@ -645,25 +814,34 @@ process foo {
 }
 ----
 
-
 The complete list of directives is available https://www.nextflow.io/docs/latest/process.html#directives[at this link].
 
+[discrete]
 === Exercise
 
 Modify the script of the previous exercise adding a https://www.nextflow.io/docs/latest/process.html#tag[tag] directive logging the `sample_id` in the execution output.
+
+.Click here for the answer:
+[%collapsible]
+====
+Add the following at start of process:
+[source,nextflow,linenums]
+----
+tag "$sample_id"
+----
+====
 
 == Organise outputs
 
 === PublishDir directive
 
-Nextflow manages independently workflow execution intermediate results
-from the pipeline expected outputs. Task output files are created in the
-task specific execution directory which is considered as a temporary directory
-that can be deleted upon completion.
+Given each process is being executed in separate temporary work/ folders (e.g. work/f1/850698...; work/g3/239712...; etc.), we may want to save important, non-intermediary, final files into a results folder. 
 
-The pipeline result files need to be marked explicitly using the directive
+TIP: Remember to delete the work folder from time to time, else all your intermediate files will fill up your computer!
+
+To store our workflow result files, we need to be explicitly mark them using the directive
 https://www.nextflow.io/docs/latest/process.html#publishdir[publishDir] in
-the process that's creating such file. For example:
+the process that's creating these file. For example:
 
 [source,nextflow,linenums,options="nowrap"]
 ----
@@ -689,11 +867,9 @@ directory path `/some/directory/bam_files`.
 TIP: The publish directory can be local or remote. For example output files
 could be stored to a https://aws.amazon.com/s3/[AWS S3 bucket] just using the `s3://` prefix in the target path.
 
-
 === Manage semantic sub-directories
 
 You can use more then one `publishDir` to keep different outputs in separate directory. For example:
-
 
 [source,nextflow,linenums,options="nowrap"]
 ----
@@ -730,5 +906,4 @@ process foo {
 The above example will create an output structure in the directory `my-results`,
 which contains a separate sub-directory for each given sample ID each of which
 contain the folders `counts` and `outlooks`.
-
 

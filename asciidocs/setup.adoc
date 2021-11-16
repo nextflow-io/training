@@ -1,23 +1,35 @@
 = Environment setup
 
-== Requirements
+== Using a terminal
 
-Nextflow can be used on any POSIX compatible system (Linux, OS X, etc.).
+Nextflow can be used on any POSIX compatible system (Linux, OS X, Windows Subsystem for Linux etc.).
 
-It requires Bash and http://www.oracle.com/technetwork/java/javase/downloads/index.html[Java 8 (or later, up to 15)] to be installed.
+*Requirements*:
 
-Optional requirements for this workshop:
+* Bash
+* http://www.oracle.com/technetwork/java/javase/downloads/index.html[Java 8 (or later, up to 15)]
+
+*Optional requirements*:
 
 * https://www.docker.com/[Docker] engine 1.10.x (or later)
 * https://github.com/sylabs/singularity[Singularity] 2.5.x (or later)
 * https://conda.io/[Conda] 4.5 (or later)
 * http://www.graphviz.org/[Graphviz] 
-* https://aws.amazon.com/cli/[AWS CLI] 
-* AWS Batch computing environment properly configured 
+* https://aws.amazon.com/cli/[AWS CLI]
+* AWS Batch computing environment configured 
+
+=== Setup AWS Cloud9 environment
+
+If you are running this tutorial in the AWS Cloud9 environment, 
+run the following one-liner to setup the virtual environment: 
 
 
+[source,bash,linenums]
+----
+source setup/all.sh
+----
 
-== Training material 
+=== Training material 
 
 Download the training material by copy & pasting the following command 
 in the terminal:
@@ -34,18 +46,7 @@ Or alternatively if you have `wget` instead of curl:
 wget -q -O- https://s3-eu-west-1.amazonaws.com/seqeralabs.com/public/nf-training.tar.gz | tar xvz
 ----
 
-
-== Setup AWS Cloud9 environment (Optional) 
-
-Only if you are running this tutorial in the AWS Cloud9 environment, 
-run the following one-liners to properly setup the required dependencies: 
-
-[source,bash,linenums]
-----
-source setup/all.sh
-----
-
-== Nextflow installation 
+=== Nextflow installation 
 
 Install the latest version of Nextflow by copy & pasting the following 
 snippet in a terminal window: 

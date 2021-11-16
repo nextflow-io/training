@@ -1,6 +1,8 @@
 = Groovy basic structures and idioms
 
-Nextflow is a DSL implemented on top of the Groovy programming lang, which in turns is a super-set of the Java programming language. This means that Nextflow can run any Groovy and Java code.
+Nextflow is a domain specific language (DSL) implemented on top of the Groovy programming language, which in turn is a super-set of the Java programming language. This means that Nextflow can run any Groovy or Java code. 
+
+Here are some important Groovy syntax to learn, that are commonly used in Nextflow.
 
 == Printing values
 
@@ -13,8 +15,8 @@ println("Hello, World!")
 
 The only difference between the two is that the `println` method implicitly appends a new line character to the printed string.
 
-TIP: parenthesis for function invocations are optional. Therefore also the following is a valid
-syntax.
+TIP: parenthesis for function invocations are optional. Therefore, the following is also valid
+syntax:
 
 [source,groovy,linenums]
 ----
@@ -23,7 +25,7 @@ println "Hello, World!"
 
 == Comments
 
-Comments use the same syntax as in the C-family programming languages:
+Comments use the same syntax as C-family programming languages:
 
 [source,groovy,linenums]
 ----
@@ -75,21 +77,29 @@ A List object can be defined by placing the list items in square brackets:
 list = [10,20,30,40]
 ----
 
-You can access a given item in the list with square-bracket notation (indexes start at `0`)
-or using the `get` method:
+You can access a given item in the list with square-bracket notation (indexes start at `0`) or using the get method:
 
 [source,groovy,linenums]
 ----
-assert list[0] == 10
-assert list[0] == list.get(0)
+println list[0]
+println list.get(0)
 ----
 
 In order to get the length of the list use the size method:
 
 [source,groovy,linenums]
 ----
-assert list.size() == 4
+println list.size()
 ----
+
+We use the `assert` keyword to test if a condition is true (similar to an `if` function). Here, Groovy will print nothing if it is corrrect, else it will raise an AssertionError message.
+
+[source,groovy,linenums]
+----
+assert list[0] == 10
+----
+
+TIP: This assertion should be correct, but try changing the value to an incorrect one.
 
 Lists can also be indexed with negative indexes and reversed ranges.
 
@@ -100,7 +110,7 @@ assert list[-1] == 2
 assert list[-1..0] == list.reverse()
 ----
 
-List objects implements all methods provided by the Java https://docs.oracle.com/javase/8/docs/api/java/util/List.html[java.util.List] interface
+List objects implement all methods provided by the https://docs.oracle.com/javase/8/docs/api/java/util/List.html[java.util.List] interface,
 plus the extension methods provided by http://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/List.html[Groovy API].
 
 [source,groovy,linenums]
@@ -156,14 +166,14 @@ assert map == [a:'x', b:'y', c:'z']
 
 <1> Use of the square brackets.
 <2> Use a dot notation.
-<3> Use of get method.
+<3> Use of put method.
 
-Map objects implements all methods provided by the Java https://docs.oracle.com/javase/8/docs/api/java/util/Map.html[java.util.Map] interface
+Map objects implement all methods provided by the https://docs.oracle.com/javase/8/docs/api/java/util/Map.html[java.util.Map] interface,
 plus the extension methods provided by http://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/Map.html[Groovy API].
 
 == String interpolation
 
-String literals can be defined enclosing them either with single-quoted or double-quotes characters.
+String literals can be defined enclosing them either with _single-_ or _double-_ quotation marks.
 
 Double-quoted strings can contain the value of an arbitrary variable by prefixing its name with the $ character, or the value of any expression by using the ${expression} syntax, similar to Bash/shell scripts:
 
@@ -188,8 +198,7 @@ $x + $y
 TIP: Note the different use of `$` and `${..}` syntax to interpolate value expressions in a string literal.
 
 Finally string literals can also be defined using the `/` character as delimiter. They are known as
-*slashy* strings and are useful for defining regular expressions and patterns, as there is no need to escape backslashes. As with double quote strings they allow to interpolate variables prefixed with a `$`
-character.
+*slashy* strings and are useful for defining regular expressions and patterns, as there is no need to escape backslashes. As with double quote strings they allow to interpolate variables prefixed with a `$` character.
 
 Try the following to see the difference:
 
@@ -211,17 +220,17 @@ tic    ac    oe
 
 == Multi-line strings
 
-A block of text that span multiple lines can be defined by delimiting it with triple single or double quotes:
+A block of text that spans multiple lines can be defined by delimiting it with triple single or double quotes:
 
 [source,groovy,linenums]
 ----
 text = """
-    Hello there James
-    how are you today?
+    Hello there James.
+    How are you today?
     """
 ----
 
-Finally multi-line strings can also be defined with slashy string. For example:
+Finally multi-line strings can also be defined with slashy strings. For example:
 
 [source,groovy,linenums]
 ----
@@ -236,7 +245,7 @@ TIP: Like before, multi-line strings inside double quotes and slash characters s
 
 == If statement
 
-The `if` statement uses the same syntax common other programming lang such Java, C, JavaScript, etc.
+The `if` statement uses the same syntax common in other programming languages, such Java, C, JavaScript, etc.
 
 [source,groovy,linenums]
 ----
@@ -248,7 +257,7 @@ else {
 }
 ----
 
-The `else` branch is optional. Also curly brackets are optional when the branch define just a single
+The `else` branch is optional. Also curly brackets are optional when the branch defines just a single
 statement.
 
 [source,groovy,linenums]
@@ -285,8 +294,8 @@ else
 
 See the http://groovy-lang.org/semantics.html#Groovy-Truth[Groovy-Truth] for details.
 
-TIP: In some cases can be useful to replace `if` statement with a ternary expression aka
-conditional expression. For example:
+TIP: In some cases it can be useful to replace the `if` statement with a ternary expression (aka
+conditional expression). For example:
 
 [source,groovy,linenums]
 ----
@@ -337,7 +346,7 @@ assert fib(10)==89
 
 A function can take multiple arguments separating them with a comma. The `return`
 keyword can be omitted and the function implicitly returns the value
-of the last evaluated expression. Also explicit types can be omitted (thought not recommended):
+of the last evaluated expression. Also, explicit types can be omitted, though not recommended:
 
 [source,groovy,linenums]
 ----
@@ -350,7 +359,7 @@ assert fact(5) == 120
 
 == Closures
 
-Closures are the swiss army knife of Nextflow/Groovy programming. In a nutshell a closure 
+Closures are the swiss army knife of Nextflow/Groovy programming. In a nutshell, a closure 
 is a block of code that can be passed as an argument to a function, it could also be defined
 an anonymous function.
 
@@ -363,7 +372,7 @@ square = { it * it }
 
 The curly brackets around the expression `it * it` tells the script interpreter to treat this expression as code. The `it` identifier is an implicit variable that represents the value that is passed to the function when it is invoked.
 
-Once compiled the function object is assigned to the variable ``square`` as any other variable assignments shown previously. To invoke the closure execution use the special method `call` or just use the round
+Once compiled, the function object is assigned to the variable `square` as any other variable assignments shown previously. To invoke the closure execution use the special method `call` or just use the round
 parentheses to specify the closure parameter(s). For example:
 
 [source,groovy,linenums]
@@ -397,8 +406,8 @@ square = { num -> num * num }
 
 It's also possible to define closures with multiple, custom-named parameters.
 
-For example, the method ``each()`` when applied to a map can take a closure with two arguments,
-to which it passes the _key-value_ pair for each entry in the map object. For example:
+For example, the method `each()` when applied to a map can take a closure with two arguments,
+to which it passes the _key-value_ pair for each entry in the `map` object. For example:
 
 [source,groovy,linenums]
 ----
@@ -415,8 +424,9 @@ Mark with value Williams
 Sudha with value Kumari
 ```
 
-A closure has two other important features. First, it can access and _modify_ variables in the scope
-where it is defined.
+A closure has two other important features. 
+
+First, it can access and _modify_ variables in the scope where it is defined.
 
 Second, a closure can be defined in an _anonymous_ manner, meaning that it is not given a name,
 and is defined in the place where it needs to be used.
@@ -425,7 +435,7 @@ As an example showing both these features, see the following code fragment:
 
 [source,groovy,linenums]
 ----
-result = 0  // <1>
+result = 0                                       // <1>
 values = ["China": 1 , "India" : 2, "USA" : 3]   // <2>
 values.keySet().each { result += values[it] }    // <3>
 println result
@@ -433,7 +443,7 @@ println result
 
 <1> Define a global variable.
 <2> Define a map object.
-<3> Invoke the `each` method passing closure object which modifies the `result` variable.
+<3> Invoke the `each` method passing the closure object which modifies the `result` variable.
 
 Learn more about closures in the http://groovy-lang.org/closures.html[Groovy documentation].
 
@@ -441,5 +451,5 @@ Learn more about closures in the http://groovy-lang.org/closures.html[Groovy doc
 
 The complete Groovy language documentation is available at http://groovy-lang.org/documentation.html#languagespecification[this link].
 
-A great resource to master Apache Groovy syntax is https://www.manning.com/books/groovy-in-action-second-edition[Groovy in Action].
+A great resource to master Apache Groovy syntax is the book: https://www.manning.com/books/groovy-in-action-second-edition[Groovy in Action].
 

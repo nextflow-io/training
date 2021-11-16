@@ -1,14 +1,15 @@
 #!/usr/bin/env nextflow
 
-nextflow.enable.dsl=2
+params.greeting  = 'Hello world!'
+greeting_ch = Channel.from(params.greeting)
 
 process splitLetters {
 
     input:
-    val x
+    val x from greeting_ch
 
     output:
-    file 'chunk_*'
+    file 'chunk_*' into letters_ch
 
     """
     printf '$x' | split -b 6 - chunk_
@@ -18,23 +19,14 @@ process splitLetters {
 process convertToUpper {
 
     input:
-    file y
+    file y from letters_ch.flatten()
 
     output:
-    stdout
+    stdout into result_ch
 
     """
-    cat $y | tr '[a-z]' '[A-Z]'
+    cat $y | tr '[a-z]' '[A-Z]' 
     """
 }
 
-params.greeting  = 'Hello world!'
-greeting_ch = Channel.from(params.greeting)
-
-workflow {
-
-    letters_ch = splitLetters(greeting_ch)
-    uppercase_ch = convertToUpper( letters_ch.flatten() )
-    uppercase_ch.view{ it.trim() }
-
-}
+result_ch.view{ it }

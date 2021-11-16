@@ -8,33 +8,27 @@ It brings monitoring, logging & observability, to distributed workflows and simp
 
 Nextflow tower core features include:
 
-* the launching of pre-configured pipelines with ease
-* programmatic integration to meet the needs of organizations
-* publishing pipelines to shared workspaces 
-* management of infrastructure required to run data analysis at scale
+* the launching of pre-configured pipelines with ease.
+* programmatic integration to meet the needs of organizations.
+* publishing pipelines to shared workspaces.
+* management of infrastructure required to run data analysis at scale.
 
 
 TIP: https://tower.nf/[Sign] up to try Tower for free or request a https://meetings.hubspot.com/evan141[demo] for deployments in your own on-premise or cloud environment.
 
 == Usage
 
-You can use Tower via either the **online GUI**, using the `-with-tower` option with the **Nextflow run command**, or through the **API**.
+You can use Tower via either the `-with-tower` option while using the Nextflow **run** command, through the **online GUI** or through the **API**.
 
-=== Via online GUI
 
-**1.** Create an account and login into Tower, available free of charge, at https://tower.nf[tower.nf].
+=== Via the Nextflow `run` command
 
-**2.** Create and configure a new https://help.tower.nf/compute-envs/overview/[compute environment].
-
-**3.** Start https://help.tower.nf/launch/launchpad/[launching pipelines].
-
-=== Via Nextflow run command
 
 Create an account and login into Tower.
 
 **1. Create a new token**
 
-  You can access your tokens from the The *Settings* drop-down menu :
+You can access your tokens from the The *Settings* drop-down menu :
 
 image::usage_create_token.png[]
 
@@ -60,7 +54,7 @@ export NXF_VER=20.10.0
 
 Where `eyxxxxxxxxxxxxxxxQ1ZTE=` is the token you have just created.
 
-NOTE: "check your Nextflow version". Bearer token requires Nextflow version 20.10.0 or later, set with the second command above.
+NOTE: Check your `nextflow -version`. Bearer tokens require Nextflow version 20.10.0 or later, set with the second command above. Change as necessary.
 
 To submit a pipeline to a https://help.tower.nf/getting-started/workspace/[Workspace] using the Nextflow command line tool, add the workspace ID to your environment. For example
 
@@ -84,7 +78,172 @@ You will see and be able to monitor your **Nextflow jobs** in Tower.
 
 To configure and execute Nextflow jobs in **Cloud environments**, visit the https://help.tower.nf/compute-envs/overview/[Compute environments section].
 
+[discrete]
+=== Exercise
+
+Run the RNA-Seq `script7.nf` using the `-with-tower` flag, after correctly completing the token settings outlined above.
+
+.If you get stuck, click here:
+[%collapsible]
+====
+Go to https://tower.nf/, login, then click the run tab, and select the run that you just submitted. 
+If you can't find it, double check your token was entered correctly.
+====
+
+=== Via online GUI
+
+To run using the GUI, there are three main steps:
+
+**1.** Create an account and login into Tower, available free of charge, at https://tower.nf[tower.nf].
+
+**2.** Create and configure a new https://help.tower.nf/compute-envs/overview/[compute environment].
+
+**3.** Start https://help.tower.nf/launch/launchpad/[launching pipelines].
+
+==== Configuring your compute environment
+
+Tower uses the concept of *Compute Environments* to define the execution platform where a pipeline will run.
+
+It supports the launching of pipelines into a growing number of *cloud* and *on-premise* infrastructures.
+
+image::compute_env_platforms.png[]
+
+Each compute environment must be pre-configured to enable Tower to submit tasks. You can read more on how to set up each environment using the links below.
+
+The following set up guides describe how to configure eahc of these compute environments.
+
+https://help.tower.nf/compute-envs/aws-batch/[AWS Batch]
+https://help.tower.nf/compute-envs/azure-batch/[Azure Batch]
+https://help.tower.nf/compute-envs/google-cloud/[Google Cloud]
+https://help.tower.nf/compute-envs/lsf/[IBM LSF]
+https://help.tower.nf/compute-envs/slurm/[Slurm]
+https://help.tower.nf/compute-envs/grid-engine/[Grid Engine]
+https://help.tower.nf/compute-envs/altair-pbs-pro/[Altair PBS Pro]
+https://help.tower.nf/compute-envs/eks/[Amazon Kubernetes (EKS)]
+https://help.tower.nf/compute-envs/gke/[Google Kubernetes (GKE)]
+https://help.tower.nf/compute-envs/k8s/[Hosted Kubernetes]
+
+==== Selecting a default compute environment
+
+If you have more than one *Compute Environment*, you can select which one will be used by default when launching a pipeline.
+
+1. Navigate to your https://help.tower.nf/compute-envs/overview/[compute environments].
+
+2. Choose your default environment by selecting the *Make primary* button.
+
+*Congratulations!*
+
+You are now ready to launch pipelines with your primary compute environment.
+
+==== Launchpad
+
+Launchpad makes it is easy for any workspace user to launch a pre-configured pipeline.
+
+image::overview_launch.png[]
+
+A pipeline is a repository containing a Nextflow workflow, a compute environment and pipeline parameters.
+
+==== Pipeline Parameters Form
+
+Launchpad automatically detects the presence of a `nextflow_schema.json` in the root of the repository and dynamically creates a form where users can easily update the parameters.
+
+TIP: The parameter forms view will appear, if the workflow has a Nextflow schema file for the parameters. Please refer the https://help.tower.nf/pipeline-schema/overview[Nextflow Schema guide] to learn more about the use-cases and how to create them.
+
+This makes it trivial for users without any expertise in Nextflow to enter their pipeline parameters and launch.
+
+image::launch_rnaseq_nextflow_schema.png[]
+
+==== Adding a new pipeline
+
+Adding a pipeline to the pre-saved workspace launchpad is detailed in full on the https://help.tower.nf/launch/launch/[tower webpage docs]. 
+
+In brief, these are the steps you need to follow to set up a pipeline.
+
+1. Select the Launchpad button in the navigation bar. This will open the *Launch Form*.
+
+2. Select a https://help.tower.nf/compute-envs/overview[compute environment].
+
+3. Enter the repository of the pipeline you want to launch.  e.g. https://github.com/nf-core/rnaseq.git
+
+4. A *Revision number* can be used select different versions of pipeline.
+The Git default branch (main/master) or `manifest.defaultBranch` in the Nextflow configuration will be used by default.
+
+5. The *Work directory* specifies the location of the Nextflow work directory.
+The location associated with the compute environment will be selected by default.
+
+6. Enter the name(s) of each of the Nextflow *Config profiles* followed by the `Enter` key.
+See the Nextflow https://www.nextflow.io/docs/latest/config.html#config-profiles[Config profiles] documentation for more details.
+
+7. Enter any Pipeline parameters in YAML or JSON format. YAML example:
++
+[source, yaml, linenums]
+----
+    reads: 's3://nf-bucket/exome-data/ERR013140_{1,2}.fastq.bz2'  
+    paired_end: true
+----
++
+8. Select Launchpad to begin the pipeline execution.
+
+TIP: Nextflow pipelines are simply Git repositories and the location can be any public or private Git-hosting platform. See Git Integration in the Tower docs and Pipeline Sharing in the Nextflow docs for more details.
+
+WARNING: The credentials associated with the compute environment must be able to access the work directory.
+
+TIP: In the configuration, the full path to a bucket must be specified with single-quotes around strings no quotes around booleans or numbers.
+
+TIP: To create your own customized Nextflow Schema for your pipleine, see the examples of from increasing number of `nf-core` workflows that have adopted this for example https://github.com/nf-core/eager/blob/2.3.3/nextflow_schema.json[eager] and https://github.com/nf-core/rnaseq/blob/3.0/nextflow_schema.json[rnaseq].
+
+For advanced setting options check out this https://help.tower.nf/launch/advanced/[page].
+
+There is also community support available if you get into trouble, see https://gitter.im/nf-tower/community[here].
+
+=======
+
 === API
 
 To learn more about using the Tower API, visit to the https://help.tower.nf/api/overview/[API section] in this documentation.
+
+== Workspaces and Organisations
+
+Nextflow Tower simplifies the development and execution of workflows by providing a centralized interface for users and organisations.
+
+Each user has a unique *workspace* where they can interact and manage all resources such as workflows, compute environments and credentials. details of this can be found https://help.tower.nf/getting-started/workspace/[here].
+
+By default, each user has their own private workspace, while organisations have the ability to run and manage users through role-based access as *members* and *collaborators*. 
+
+=== Organization resources
+
+You can create your own organisation and participant workspace by following the docs at https://help.tower.nf/orgs-and-teams/workspace-management/[tower].
+
+Tower allows creation of multiple organizations, each of which can contain multiple workspaces with shared users and resources. This allows any organization to customize and organize the usage of resources while maintaining an access control layer for users associated with a workspace.
+
+=== Organization users
+
+Any user can be added or removed from a particular organization or a workspace and can be allocated a specific access role within that workspace.
+
+The Teams feature provides a way for the organizations to group various users and participants together into teams, for example `workflow-developers` or `analysts`, and apply access control to all the users within this team as a whole.
+
+For further information, please refer the https://help.tower.nf/orgs-and-teams/organizations/[User Management] section.
+
+==== Setting up a new organisation
+
+Organizations are the top-level structure and contain Workspaces, Members, Teams and Collaborators.
+
+To create a new Organization:
+
+1. Click on the dropdown next to your name and select New organization to open the creation dialog.
+
+2. On the dialog, fill in the fields as per your organization. The Name and Full name fields are compulsory.
++
+WARNING: A valid name for the organization must follow specific pattern. Please refer the UI for further instructions.
++
+
+3. The rest of the fields such as Description, Location, Website URL and Logo Url are optional.
+
+4. Once the details are filled-in, you can access the newly created organization using the organizations page, which lists all of your organizations.
++
+--
+TIP: It is possible to change the values of the optional fields either using the Edit option on the organizations page or using the Settings tab within the organization page, provided that you are the Owner of the organization .
+
+NOTE: A list of all the included Members, Teams and Collaborators can be found at the organization page.
+--
 

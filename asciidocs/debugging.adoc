@@ -1,8 +1,8 @@
-= Errors handling & troubleshooting  
+= Error handling & troubleshooting  
 
-== Execution errors debugging  
+== Execution error debugging  
 
-When a process execution exit with a non-zero exit status, Nextflow stops the workflow execution and report the failing task: 
+When a process execution exits with a non-zero exit status, Nextflow stops the workflow execution and reports the failing task: 
 
 [source,cmd,options="nowrap"]
 ----
@@ -37,7 +37,7 @@ Work dir:            <6>
 
 Review carefully all these data, they can provide valuable information on the cause of the error. 
 
-If this is not enough, change in the task work directory. It contains all the files to replicate the issue in a isolated manner. 
+If this is not enough, `cd` into the task work directory. It contains all the files to replicate the issue in a isolated manner. 
 
 The task execution directory contains these files: 
 
@@ -53,7 +53,7 @@ The task execution directory contains these files:
 
 Verify that the `.command.sh` file contains the expected command to be executed and all variables are correctly resolved. 
 
-Also verify the existence of the file `.exitcode` file. If missing and also the file `.command.begin` does not exist, the task was never executed by the subsystem (eg. the batch scheduler). If the `.command.begin` file exist, the job was launched but the it likely was abruptly killed.
+Also verify the existence of the `.exitcode` and `.command.begin` files, which if absent, suggest the task was never executed by the subsystem (e.g. the batch scheduler). If the `.command.begin` file exist, the job was launched but was likely killed abruptly.
 
 You can replicate the failing execution using the command `bash .command.run` and verify the cause of the error. 
 
@@ -61,7 +61,7 @@ You can replicate the failing execution using the command `bash .command.run` an
 
 There are cases in which a process error may be expected and it should not stop the overall workflow execution.
 
-To handle this use case set the process `errorStrategy` to `ignore`: 
+To handle this use case, set the process `errorStrategy` to `ignore`: 
 
 [source,nextflow,linenums]
 ----
@@ -74,7 +74,7 @@ process foo {
 }
 ----
 
-If you want to ignore any error set the same directive in the config file as default setting: 
+If you want to ignore any error set the same directive in the config file as a default setting: 
 
 [source,config,linenums]
 ----
@@ -83,8 +83,7 @@ process.errorStrategy = 'ignore'
 
 == Automatic error fail-over 
 
-In (rare) cases errors may be caused by transient conditions. In this situation an effective strategy 
-consistent in trying to re-execute the failing task. 
+In rare cases, errors may be caused by transient conditions. In this situation, an effective strategy is re-executing the failing task. 
 
 [source,nextflow,linenums]
 ----
@@ -106,7 +105,7 @@ set number of attempts the task can be re-execute before declaring it failed wit
 == Retry with backoff
  
 There are cases in which the required execution resources may be 
-temporary unavailable e.g. network congestion. In these cases simply 
+temporary unavailable (e.g. network congestion). In these cases simply 
 re-executing the same task will likely result in the identical error. 
 A retry with an exponential backoff delay can better recover 
 these error conditions. 
@@ -126,9 +125,9 @@ process foo {
 
 == Dynamic resources allocation 
 
-It's a very common scenario that different instances of the same process may have very different needs in terms of computing resources. In such situations requesting, for example, an amount of memory too low will cause some tasks to fail. Instead, using a higher limit that fits all the tasks in your execution could significantly decrease the execution priority of your jobs.
+It's a very common scenario that different instances of the same process may have very different needs in terms of computing resources. In such situations requesting for example, an amount of memory too low will cause some tasks to fail. Instead, using a higher limit that fits all the tasks in your execution could significantly decrease the execution priority of your jobs.
 
-To handle this use case you can use a `retry` error strategy and increasing the computing resources allocated by the job at each successive _attempt_.
+To handle this use case, you can use a `retry` error strategy and increasing the computing resources allocated by the job at each successive _attempt_.
 
 [source,nextflow,linenums]
 ----
@@ -148,7 +147,7 @@ process foo {
 
 <1> The memory is defined in a dynamic manner, the first attempt is 2 GB, the second 4 GB, and so on. 
 <2> The wall execution time is set dynamically as well, the first execution attempt is set to 1 hour, the second 2 hours, and so on. 
-<3> If the task return an exit status equals to `140` sets the error strategy to `retry` otherwise terminates the execution. 
-<4> It can retry the process execution up to three times. 
+<3> If the task returns an exit status equal to `140` it will set the error strategy to `retry` otherwise it will terminate the execution. 
+<4> It will retry the process execution up to three times. 
 
 

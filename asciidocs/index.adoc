@@ -4,7 +4,7 @@
 :hide-uri-scheme:
 :nofooter:
 :icons: font
-:toclevels: 3
+:toclevels: 4
 :imagesdir: img
 :toc: left
 :source-highlighter: coderay
@@ -15,6 +15,7 @@
 
 
 :leveloffset: +1
+include::welcome.adoc[]
 include::setup.adoc[]
 include::intro.adoc[]
 include::rnaseq_pipeline.adoc[]
@@ -29,4 +30,5 @@ include::config.adoc[]
 include::executors.adoc[]
 include::cache_and_resume.adoc[]
 include::debugging.adoc[]
+include::parsing.adoc[]
 :leveloffset: -1

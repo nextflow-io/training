@@ -3,25 +3,25 @@
 Channels are a key data structure of Nextflow that allows the implementation
 of reactive-functional oriented computational workflows based on the https://en.wikipedia.org/wiki/Dataflow_programming[Dataflow] programming paradigm.
 
-They are used to logically connect tasks each other or to implement functional style data transformations.
+They are used to logically connect tasks to each other or to implement functional style data transformations.
 
 image::channel-files.png[]
 
 == Channel types
 
-Nextflow distinguish two different kinds of channels: *queue* channels and *value* channels.
+Nextflow distinguishes two different kinds of channels: *queue* channels and *value* channels.
 
 === Queue channel
 
 A _queue_ channel is a _asynchronous_ unidirectional _FIFO_ queue which connects two processes or operators.
 
-* What _asynchronous_ means? That operations are non-blocking.
+* _asynchronous_ means that operations are non-blocking.
 
-* What _unidirectional_ means? That data flow from a producer to a consumer.
+* _unidirectional_ means that data flow from a producer to a consumer.
 
-* What _FIFO_ means? That the data is guaranteed to be delivered in the same order as it is produced. First In, First Out.
+* _FIFO_ means that the data is guaranteed to be delivered in the same order as it is produced. First In, First Out.
 
-A queue channel is implicitly created by process output definitions or using channel factories methods
+A queue channel is implicitly created by process output definitions or using channel factories 
 such as https://www.nextflow.io/docs/latest/channel.html#from[Channel.from] or https://www.nextflow.io/docs/latest/channel.html#frompath[Channel.fromPath].
 
 Try the following snippets:
@@ -34,11 +34,12 @@ ch.view()       // <2>
 ----
 
 
-<1> Use the built-in `println` function to print the `ch` variable.
+<1> Use the built-in print line function `println` to print the `ch` channel.
 <2> Apply the `view` method to the `ch` channel, therefore prints each item emitted by the channels.
 
 
-==== Exercise
+[discrete]
+=== Exercise
 
 Try to execute this snippet, it will produce an error message.
 
@@ -53,7 +54,7 @@ IMPORTANT: A queue channel can have one and exactly one producer and one and exa
 
 === Value channels
 
-A *value* channel a.k.a. singleton channel by definition is bound to a single value and it can be read unlimited times without consuming its content.
+A *value* channel (a.k.a. singleton channel) by definition is bound to a single value and it can be read unlimited times without consuming its contents.
 
 [source,nextflow,linenums]
 ----
@@ -71,8 +72,11 @@ Hello
 Hello
 ```
 
+A `value` channel is created using the https://www.nextflow.io/docs/latest/channel.html#value[value] factory method or by operators returning a single value, such us https://www.nextflow.io/docs/latest/operator.html#first[first], https://www.nextflow.io/docs/latest/operator.html#last[last], https://www.nextflow.io/docs/latest/operator.html#operator-collect[collect], https://www.nextflow.io/docs/latest/operator.html#operator-count[count], https://www.nextflow.io/docs/latest/operator.html#operator-min[min], https://www.nextflow.io/docs/latest/operator.html#operator-max[max], https://www.nextflow.io/docs/latest/operator.html#operator-reduce[reduce], https://www.nextflow.io/docs/latest/operator.html#operator-sum[sum].
+
 == Channel factories
 
+These are Nextflow commands for creating channels that have implicit expected inputs and functions.
 
 === value
 
@@ -110,8 +114,7 @@ value: 7
 ----
 
 
-IMPORTANT: Method `Channel.from` will be deprecated and replaced by `Channel.of` (see 
-  below). 
+IMPORTANT: Method `Channel.from` will be deprecated and replaced by `Channel.of` (see below). 
 
 === of 
 
@@ -147,10 +150,10 @@ matching the specified glob pattern.
 
 [source,nextflow,linenums]
 ----
-Channel.fromPath( '/data/big/*.txt' )
+Channel.fromPath( './data/meta/*.csv' )
 ----
 
-This example creates a channel and emits as many items as there are files with `txt` extension in the `/data/big` folder. Each element is a file object implementing the https://docs.oracle.com/javase/8/docs/api/java/nio/file/Paths.html[Path] interface.
+This example creates a channel and emits as many items as there are files with `csv` extension in the `/data/meta` folder. Each element is a file object implementing the https://docs.oracle.com/javase/8/docs/api/java/nio/file/Paths.html[Path] interface.
 
 TIP: Two asterisks, i.e. `\**`, works like `*` but crosses directory boundaries. This syntax is generally used for matching complete paths. Curly brackets specify a collection of sub-patterns.
 
@@ -185,9 +188,20 @@ TIP: Two asterisks, i.e. `\**`, works like `*` but crosses directory boundaries.
 
 Learn more about the glob patterns syntax at https://docs.oracle.com/javase/tutorial/essential/io/fileOps.html#glob[this link].
 
-==== Exercise
+[discrete]
+=== Exercise
 
-Use the `Channel.fromPath` method to create a channel emitting all files with the suffix `.fq` in the `data/ggal/` and any subdirectory, then print the file name.
+Use the `Channel.fromPath` method to create a channel emitting all files with the suffix `.fq` in the `data/ggal/` directory and any subdirectory, in addition to hidden files. Then print the file names.
+
+.Click here for the answer:
+[%collapsible]
+====
+[source,nextflow]
+----
+Channel.fromPath( './data/ggal/**.fq' , hidden:true)
+       .view()
+----
+====
 
 
 === fromFilePairs
@@ -197,19 +211,16 @@ The `fromFilePairs` method creates a channel emitting the file pairs matching a 
 [source,nextflow,linenums]
 ----
 Channel
-    .fromFilePairs('/my/data/SRR*_{1,2}.fastq')
+    .fromFilePairs('./data/ggal/*_{1,2}.fq')
     .view()
 ----
 
 It will produce an output similar to the following:
 
 ```
-[SRR493366, [/my/data/SRR493366_1.fastq, /my/data/SRR493366_2.fastq]]
-[SRR493367, [/my/data/SRR493367_1.fastq, /my/data/SRR493367_2.fastq]]
-[SRR493368, [/my/data/SRR493368_1.fastq, /my/data/SRR493368_2.fastq]]
-[SRR493369, [/my/data/SRR493369_1.fastq, /my/data/SRR493369_2.fastq]]
-[SRR493370, [/my/data/SRR493370_1.fastq, /my/data/SRR493370_2.fastq]]
-[SRR493371, [/my/data/SRR493371_1.fastq, /my/data/SRR493371_2.fastq]]
+[liver, [/user/nf-training/data/ggal/liver_1.fq, /user/nf-training/data/ggal/liver_2.fq]]
+[gut, [/user/nf-training/data/ggal/gut_1.fq, /user/nf-training/data/ggal/gut_2.fq]]
+[lung, [/user/nf-training/data/ggal/lung_1.fq, /user/nf-training/data/ggal/lung_2.fq]]
 ```
 
 IMPORTANT: The glob pattern must contain at least a star wildcard character.
@@ -239,44 +250,72 @@ IMPORTANT: The glob pattern must contain at least a star wildcard character.
 |When ``true`` the matching files are produced as sole elements in the emitted tuples (default: ``false``).
 
 |checkIfExists
-| When ``true`` throws an exception of the specified path do not exist in the file system (default: ``false``)
+| When ``true``, it throws an exception of the specified path that does not exist in the file system (default: ``false``)
 |===
 
-==== Exercise
+[discrete]
+=== Exercise
 
 Use the `fromFilePairs` method to create a channel emitting all pairs of fastq read in the `data/ggal/`
-directory and print them.
+directory and print them. Then use the `flat:true` option and compare the output with the previous execution.
 
-Then use the `flat:true` option and compare the output with the previous execution.
+.Click here for the answer:
+[%collapsible]
+====
+Use the following, with or without 'flat:true':
+
+[source,nextflow]
+----
+Channel.fromFilePairs( './data/ggal/*_{1,2}.fq', flat:true)
+       .view()
+----
+
+Then check the square brackets around the file names, to see the difference with `flat`. 
+====
 
 === fromSRA 
 
-The `Channel.fromSRA` method that makes it possible to query of https://www.ncbi.nlm.nih.gov/sra[NCBI SRA] archive and returns a channel emitting the FASTQ files matching the specified selection criteria.
+The `Channel.fromSRA` method makes it possible to query the https://www.ncbi.nlm.nih.gov/sra[NCBI SRA] archive and returns a channel emitting the FASTQ files matching the specified selection criteria.
 
 The query can be project ID or accession number(s) supported by the 
-https://www.ncbi.nlm.nih.gov/books/NBK25499/#chapter4.ESearch[NCBI ESearch API].
-For example the following snippet:
+https://www.ncbi.nlm.nih.gov/books/NBK25499/#chapter4.ESearch[NCBI ESearch API]. 
+
+IMPORTANT: This function now requires an API key you can only get by logging into your NCBI account. 
+
+.For help with NCBI login and key acquisition, click here:
+[%collapsible]
+====
+1. Go to : https://www.ncbi.nlm.nih.gov/
+2. Click top right button to "Sign into NCBI". Follow their instructions.
+3. Once into your account, click the button at top right, left of `My NCBI`, usually your ID.
+4. Scroll down to API key section. Copy your key.
+====
+
+IMPORTANT: You also need to use the latest edge version of Nextflow. Check your `nextflow -version`, it should say `-edge`, if not: download the newest Nextflow version, following the instructions https://www.nextflow.io/docs/edge/getstarted.html#stable-edge-releases[linked here].
+
+For example the following snippet will print the contents of an NCBI project ID:
 
 [source,nextflow,linenums]
 ----
+params.ncbi_api_key = '<Your API key here>'
+
 Channel
-    .fromSRA('SRP043510')
-    .view()
+  .fromSRA(['SRP073307'], apiKey: params.ncbi_api_key)
+  .view()
 ----
 
-prints: 
+IMPORTANT: Replace `<Your API key here>` with your API key.
+
+This should print: 
 
 [source,text,linenums]
 ----
-[SRR1448794, ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR144/004/SRR1448794/SRR1448794.fastq.gz]
-[SRR1448795, ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR144/005/SRR1448795/SRR1448795.fastq.gz]
-[SRR1448792, ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR144/002/SRR1448792/SRR1448792.fastq.gz]
-[SRR1448793, ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR144/003/SRR1448793/SRR1448793.fastq.gz]
-[SRR1910483, ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR191/003/SRR1910483/SRR1910483.fastq.gz]
-[SRR1910482, ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR191/002/SRR1910482/SRR1910482.fastq.gz]
+[SRR3383346, [/vol1/fastq/SRR338/006/SRR3383346/SRR3383346_1.fastq.gz, /vol1/fastq/SRR338/006/SRR3383346/SRR3383346_2.fastq.gz]]
+[SRR3383347, [/vol1/fastq/SRR338/007/SRR3383347/SRR3383347_1.fastq.gz, /vol1/fastq/SRR338/007/SRR3383347/SRR3383347_2.fastq.gz]]
+[SRR3383344, [/vol1/fastq/SRR338/004/SRR3383344/SRR3383344_1.fastq.gz, /vol1/fastq/SRR338/004/SRR3383344/SRR3383344_2.fastq.gz]]
+[SRR3383345, [/vol1/fastq/SRR338/005/SRR3383345/SRR3383345_1.fastq.gz, /vol1/fastq/SRR338/005/SRR3383345/SRR3383345_2.fastq.gz]]
 (remaining omitted)
 ----
-
 
 Multiple accession IDs can be specified using a list object:
 
@@ -284,26 +323,27 @@ Multiple accession IDs can be specified using a list object:
 ----
 ids = ['ERR908507', 'ERR908506', 'ERR908505']
 Channel
-    .fromSRA(ids)
+    .fromSRA(ids, apiKey: params.ncbi_api_key)
     .view()
 ----
 
 [source,text,linenums]
 ----
-[ERR908507, [ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR908/ERR908507/ERR908507_1.fastq.gz, ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR908/ERR908507/ERR908507_2.fastq.gz]]
-[ERR908506, [ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR908/ERR908506/ERR908506_1.fastq.gz, ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR908/ERR908506/ERR908506_2.fastq.gz]]
-[ERR908505, [ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR908/ERR908505/ERR908505_1.fastq.gz, ftp://ftp.sra.ebi.ac.uk/vol1/fastq/ERR908/ERR908505/ERR908505_2.fastq.gz]]
+[ERR908507, [/vol1/fastq/ERR908/ERR908507/ERR908507_1.fastq.gz, /vol1/fastq/ERR908/ERR908507/ERR908507_2.fastq.gz]]
+[ERR908506, [/vol1/fastq/ERR908/ERR908506/ERR908506_1.fastq.gz, /vol1/fastq/ERR908/ERR908506/ERR908506_2.fastq.gz]]
+[ERR908505, [/vol1/fastq/ERR908/ERR908505/ERR908505_1.fastq.gz, /vol1/fastq/ERR908/ERR908505/ERR908505_2.fastq.gz]]
 ----
 
-TIP: Read pairs are implicitly managed are returned as a list of files.
+TIP: Read pairs are implicitly managed and are returned as a list of files.
 
-It's straightforward to use this channel as an input using the usual Nextflow 
-syntax. For example: 
+It's straightforward to use this channel as an input using the usual Nextflow syntax. The code below creates a channel containing 2 samples from a public SRA study and runs FASTQC on the resulting files. See: 
 
 [source,nextflow,linenums]
 ----
-params.accession = 'SRP043510'
-reads = Channel.fromSRA(params.accession)
+params.ncbi_api_key = '<Your API key here>'
+
+params.accession = ['ERR908507', 'ERR908506']
+reads = Channel.fromSRA(params.accession, apiKey: params.ncbi_api_key)
 
 process fastqc {
     input:
@@ -319,6 +359,4 @@ process fastqc {
     """
 }
 ----
-
-The code snippet above creates a channel containing 24 samples from a chromatin dynamics study and runs FASTQC on the resulting files.
 
