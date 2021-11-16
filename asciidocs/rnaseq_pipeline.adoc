@@ -46,7 +46,7 @@ that will be used as the pipeline output directory.
 [source,nextflow,linenums]
 ----
 params.reads = "$baseDir/data/ggal/*_{1,2}.fq"
-params.transcriptome = "$baseDir/data/ggal/transcriptome.fa"
+params.transcriptome_file = "$baseDir/data/ggal/transcriptome.fa"
 params.multiqc = "$baseDir/multiqc"
 params.outdir = "$baseDir/myresults"
 ----
@@ -153,7 +153,7 @@ Enable the Docker execution by default adding the above setting in the `nextflow
 [discrete]
 === Exercise
 
-Print the output of the `index_ch` channel by using the https://www.nextflow.io/docs/latest/operator.html#view[view].
+Print the output of the `index_ch` channel by using the https://www.nextflow.io/docs/latest/operator.html#view[view] operator.
 
 .Click here for the answer:
 [%collapsible]
@@ -183,10 +183,7 @@ process index {
     input:
     ...
 ----
-Then check it worked, by looking at the script executed in the work directory. Look for the hexidecimal (e.g. work/7f/f285b80022d9f61e82cd7f90436aa4/), Then `cat` the .command.sh. 
-
-
-For extra practice, you can also try asking for more cpu than you have to see what happens and the error it kicks out.
+Then check it worked, by looking at the script executed in the work directory. Look for the hexidecimal (e.g. work/7f/f285b80022d9f61e82cd7f90436aa4/), Then `cat` the .command.sh.
 ====
 
 [discrete]
