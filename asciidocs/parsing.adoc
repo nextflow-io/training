@@ -186,7 +186,7 @@ for( def entry : records ) {
 }
 ----
 
-===Storage of parsers into modules
+=== Storage of parsers into modules
 
 The best way to store parser scripts is to keep them in a nextflow module file. 
 
