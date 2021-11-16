@@ -13,9 +13,9 @@ Nextflow extends this approach, adding the ability to define complex program int
 high-level parallel computational environment based on the dataflow programming model. Nextflow's
 core features are:
 
-* workflow portability & reproducibility
-* scalability of parallelization and deployment
-* integration of existing tools, systems & industry standards
+* Workflow portability & reproducibility
+* Scalability of parallelization and deployment
+* Integration of existing tools, systems & industry standards
 
 === Processes and Channels
 
@@ -203,7 +203,7 @@ execution path.
 IMPORTANT: The second process runs twice, executing in two different work directories 
 for each input file. Therefore, in the previous example the work directory [9f/1dd42a] 
 represents just one of the two directories that were processed. To print all the 
-relevent paths to screen, use the `-ansi-log` flag (e.g. `nextflow run hello.nf -ansi-log`).
+relevent paths to screen, use the `-ansi-log` flag (e.g. `nextflow run hello.nf -ansi-log false`).
 
 It's worth noting that the process `convertToUpper` is executed in
 parallel, so there's no guarantee that the instance processing the first
