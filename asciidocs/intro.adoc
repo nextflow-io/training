@@ -20,9 +20,7 @@ core features are:
 === Processes and Channels
 
 In practice, a Nextflow pipeline is made by joining together different processes.
-Each `process` can be written in any scripting language that can be executed by the Linux platform
-
-(Bash, Perl, Ruby, Python, etc.).
+Each `process` can be written in any scripting language that can be executed by the Linux platform (Bash, Perl, Ruby, Python, etc.).
 
 Processes are executed independently and are isolated from each other, i.e. they do not share a common
 (writable) state. The only way they can communicate is via asynchronous first-in, first-out (FIFO) queues, called
