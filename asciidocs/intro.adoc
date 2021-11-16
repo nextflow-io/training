@@ -168,7 +168,7 @@ nextflow run hello.nf
 
 The output will look similar to the text shown below:
 
-[source,cmd]
+[source,cmd,linenums]
 ----
 N E X T F L O W  ~  version 21.04.3
 Launching `hello.nf` [confident_kowalevski] - revision: a3f5a9e46a
