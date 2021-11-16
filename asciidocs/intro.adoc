@@ -290,7 +290,7 @@ Now, let's try to execute the previous example specifying a different input stri
 
 [source,cmd]
 ----
-nextflow run hello.nf --greeting '!odnum !aloH'
+nextflow run hello.nf --greeting 'Bonjour le monde!'
 ----
 
 The string specified on the command line will override the default value
@@ -298,13 +298,16 @@ of the parameter. The output will look like this:
 
 [source,cmd]
 ----
-N E X T F L O W  ~  version 21.04.3
-Launching `hello.nf` [serene_carlsson] - revision: aed50861e0
-executor >  local (3)
-[71/974e5d] process > splitLetters (1)   [100%] 1 of 1 ✔
-[06/206ffa] process > convertToUpper (1) [100%] 2 of 2 ✔
-Hola! 
-mundo!
+N E X T F L O W  ~  version 21.10.0
+Launching `hello.nf` [angry_mcclintock] - revision: 073d8111fc
+executor >  local (4)
+[6c/e6edf5] process > splitLetters (1)   [100%] 1 of 1 ✔
+[bc/6845ce] process > convertToUpper (2) [100%] 3 of 3 ✔
+uojnoB
+
+!edno
+
+m el r
 ----
 
 === In DAG-like format
