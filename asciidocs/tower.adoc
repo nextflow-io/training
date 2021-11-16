@@ -23,6 +23,7 @@ You can use Tower via either the `-with-tower` option while using the Nextflow *
 
 === Via the Nextflow `run` command
 
+
 Create an account and login into Tower.
 
 **1. Create a new token**
@@ -194,6 +195,8 @@ TIP: To create your own customized Nextflow Schema for your pipleine, see the ex
 For advanced setting options check out this https://help.tower.nf/launch/advanced/[page].
 
 There is also community support available if you get into trouble, see https://gitter.im/nf-tower/community[here].
+
+=======
 
 === API
 

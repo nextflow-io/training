@@ -17,16 +17,16 @@ github:
 
 # List the start up tasks. Learn more https://www.gitpod.io/docs/config-start-tasks/
 tasks:
-  - name: Download Nextflow
+  - name: Download Nextflow Tutorial
     init: |
       echo 'init script' # runs during prebuild
       echo 'start script'
+      curl https://s3-eu-west-1.amazonaws.com/seqeralabs.com/public/nf-training.tar.gz | tar xvz 
       curl -s https://get.nextflow.io | bash
       mkdir /workspace/bin
     command: |
       cp ./nextflow /workspace/bin/nextflow  
       export PATH=/workspace/bin:$PATH
-
 # List the ports to expose. Learn more https://www.gitpod.io/docs/config-ports/
 ports:
   - port: 3000

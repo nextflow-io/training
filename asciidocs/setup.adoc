@@ -23,6 +23,7 @@ Nextflow can be used on any POSIX compatible system (Linux, OS X, Windows Subsys
 If you are running this tutorial in the AWS Cloud9 environment, 
 run the following one-liner to setup the virtual environment: 
 
+
 [source,bash,linenums]
 ----
 source setup/all.sh

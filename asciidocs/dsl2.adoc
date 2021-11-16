@@ -1,6 +1,5 @@
-= DSL2 and modules
 
-== Basic concepts
+= DSL2 and modules
 
 DSL2 is our new syntax extension, developed primarily to improve readability and allow the use of modules. 
 
@@ -33,6 +32,7 @@ nextflow.enable.dsl=2
 process foo {
     output:
       path 'foo.txt'
+
     script:
       """
       echo first_command > foo.txt
@@ -106,6 +106,7 @@ third_command
 === Process composition
 
 Processes having matching input-output declaration can be composed so that the output of the first process is passed as input to the following process. Taking in consideration the previous process definition, it’s possible to write the following workflow directive:
+
 
 [source,nextflow,linenums]
 ----
@@ -211,12 +212,14 @@ The process output definition allows the use of the `emit` option to define a na
 ----
 nextflow.enable.dsl=2
 
+
 process foo {
   output:
     path '*.bam', emit: samples_bam
 
   '''
   echo result > output.bam
+
   '''
 }
 
@@ -288,6 +291,7 @@ workflow my_pipeline {
 
 A workflow component can declare one or more input channels using the `take` keyword. For example:
 
+
 [source,nextflow,linenums]
 ----
 workflow my_pipeline {
@@ -299,6 +303,7 @@ workflow my_pipeline {
 ----
 
 IMPORTANT: When the `take` keyword is used, the beginning of the workflow body needs to be identified with the `main` keyword.
+
 
 Then, the input can be specified as an argument in the workflow invocation statement:
 
@@ -312,6 +317,7 @@ workflow {
 NOTE: Workflow inputs are by definition: channel data structures. If a basic data type is provided instead, i.e. number, string, list, etc., it’s implicitly converted to a channel value (ie. non-consumable).
 
 === Workflow outputs
+
 
 A workflow component can declare one or more out channels using the emit keyword. For example:
 
@@ -344,6 +350,7 @@ workflow my_pipeline {
 Then, the result of the above snippet can accessed using `my_pipeline.out.my_data`.
 
 === Implicit workflow
+
 
 A workflow definition which does not declare any name is assumed to be the main workflow and it’s implicitly executed. Therefore it’s the entry point of the workflow application.
 
@@ -486,6 +493,7 @@ workflow {
 ----
 
 The above snippet should print:
+
 
 [source,bash,linenums]
 ----
@@ -678,4 +686,3 @@ script:
 - Operator `spread` has been deprecated with DSL2 syntax. Replace it with `combine`.
 
 - Operator `route` has been deprecated by DSL2 syntax.
-

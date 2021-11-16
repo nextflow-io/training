@@ -21,6 +21,7 @@ core features are:
 
 In practice, a Nextflow pipeline is made by joining together different processes.
 Each `process` can be written in any scripting language that can be executed by the Linux platform
+
 (Bash, Perl, Ruby, Python, etc.).
 
 Processes are executed independently and are isolated from each other, i.e. they do not share a common
@@ -30,7 +31,7 @@ Processes are executed independently and are isolated from each other, i.e. they
 Any `process` can define one or more `channels` as `input` and `output`. The interaction between these processes,
 and ultimately the pipeline execution flow itself, is implicitly defined by these `input` and `output` declarations.
 
-image::channel-process.png[]
+image::channel-process.v2.png[]
 
 === Execution abstraction
 
