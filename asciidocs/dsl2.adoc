@@ -4,7 +4,7 @@
 
 DSL2 is our new syntax extension, developed primarily to improve readability and allow the use of modules. 
 
-However, DSL1 is still a valid way of writing pipelines (and indeed many public pipelines are written this way), so to ensure backward compatibility, the DSL2 update has to be defined with the following directive at the beginning of each workflow script: 
+However, DSL1 is still a valid way of writing pipelines, and indeed many public pipelines are written this way. To ensure backward compatibility, you can use DSL2 by adding the following line at the beginning of each workflow script: 
 
 ----
 nextflow.enable.dsl=2
