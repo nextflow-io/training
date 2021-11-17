@@ -458,7 +458,7 @@ The above `Dockerfile` takes the parent image 'mambaorg/micromamba', then instal
 [discrete]
 === Exercise
 
-Try executing the RNA-Seq pipeline from earlier (script6.nf), but start by building your own micromamba `Dockerfile` (from above), save to your docker hub repo and direct Nextflow to run from this container (changing your `nexflow.config`). 
+Try executing the RNA-Seq pipeline from earlier (script7.nf), but start by building your own micromamba `Dockerfile` (from above), save to your docker hub repo and direct Nextflow to run from this container (changing your `nexflow.config`). 
 
 IMPORTANT: Building a Docker container and pushing to your personal repo can take >10 minutes.
 
@@ -505,7 +505,7 @@ replacing the above the correct docker hub link.
 +
 --
 ```
-nextflow run script2.nf -with-docker
+nextflow run script7.nf -with-docker
 ```
 --
 
