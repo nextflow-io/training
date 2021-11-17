@@ -21,6 +21,3 @@ process concat {
   }
 
 concat_ch.view()
-}
-
-concat_ch.view{ it }

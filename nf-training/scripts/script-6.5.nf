@@ -1,6 +1,6 @@
 process foo {
   cpus 2
-  memory 8.GB
+  memory 1.GB
   container 'image/name'
 
   script:
