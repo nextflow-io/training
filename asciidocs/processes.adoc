@@ -179,11 +179,11 @@ process foo {
   script:
   if( params.compress == 'gzip' )
     """
-    gzip -c $file > ${file}.fa.gz
+    gzip -c $file > ${file}.gz
     """
   else if( params.compress == 'bzip2' )
     """
-    bzip2 -c $file > ${file}.fa.bz2
+    bzip2 -c $file > ${file}.bz2
     """
   else
     throw new IllegalArgumentException("Unknown aligner $params.compress")
@@ -375,9 +375,6 @@ process concat {
   }
 
 concat_ch.view()
-}
-
-concat_ch.view{ it }
 ----
 ====
 
@@ -520,7 +517,7 @@ process alignSequences {
   each mode from methods
 
   """
-  t_coffee -in $seq -mode $mode
+  echo t_coffee -in $seq -mode $mode
   """
 }
 ----
@@ -690,18 +687,23 @@ For example:
 
 [source,nextflow,linenums]
 ----
+species = ['cat','dog', 'sloth']
+sequences = ['AGATAG','ATGCTCT', 'ATCCCAA']
+
 process align {
   input:
   val x from species
-  file seq from sequences
+  val seq from sequences
 
   output:
   file "${x}.aln" into genomes
 
   """
-  t_coffee -in $seq > ${x}.aln
+  echo align -in $seq > ${x}.aln
   """
 }
+
+genomes.view()
 ----
 
 In the above example, each time the process is executed an alignment file is produced whose name depends
@@ -760,6 +762,8 @@ process foo {
     echo your_command_here --reads $sample_id > ${sample_id}.bam
   """
 }
+
+bam_ch.view()
 ----
 ====
 
@@ -785,7 +789,7 @@ process find {
 
   script:
   """
-  blastp -query $fasta -db nr
+  echo blastp -query $fasta -db nr
   """
 }
 ----
@@ -804,7 +808,7 @@ logging purpose. For example:
 ----
 process foo {
   cpus 2
-  memory 8.GB
+  memory 1.GB
   container 'image/name'
 
   script:
@@ -815,21 +819,6 @@ process foo {
 ----
 
 The complete list of directives is available https://www.nextflow.io/docs/latest/process.html#directives[at this link].
-
-[discrete]
-=== Exercise
-
-Modify the script of the previous exercise adding a https://www.nextflow.io/docs/latest/process.html#tag[tag] directive logging the `sample_id` in the execution output.
-
-.Click here for the answer:
-[%collapsible]
-====
-Add the following at start of process:
-[source,nextflow,linenums]
-----
-tag "$sample_id"
-----
-====
 
 == Organise outputs
 
@@ -845,24 +834,30 @@ the process that's creating these file. For example:
 
 [source,nextflow,linenums,options="nowrap"]
 ----
-process makeBams {
-    publishDir "/some/directory/bam_files", mode: 'copy'
+params.outdir = 'my-results'
+params.prot = 'data/prots/*.tfa'
+proteins = Channel.fromPath(params.prot)
+
+
+process blastSeq {
+    publishDir "$params.outdir/bam_files", mode: 'copy'
 
     input:
-    file index from index_ch
-    tuple val(name), file(reads) from reads_ch
+    file fasta from proteins
 
     output:
-    tuple val(name), file ('*.bam') into star_aligned
+    file ('*.txt') into blast_ch
 
     """
-    STAR --genomeDir $index --readFilesIn $reads
+    echo blastp $fasta > ${fasta}_result.txt
     """
 }
+
+blast_ch.view()
 ----
 
-The above example will copy all bam files created by the `star` task in the
-directory path `/some/directory/bam_files`.
+The above example will copy all blast script files created by the `blastSeq` task in the
+directory path `my-results`. 
 
 TIP: The publish directory can be local or remote. For example output files
 could be stored to a https://aws.amazon.com/s3/[AWS S3 bucket] just using the `s3://` prefix in the target path.
