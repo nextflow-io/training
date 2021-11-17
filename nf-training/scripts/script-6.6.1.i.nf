@@ -1,14 +1,20 @@
-process makeBams {
-    publishDir "/some/directory/bam_files", mode: 'copy'
+params.outdir = 'my-results'
+params.prot = 'data/prots/*.tfa'
+proteins = Channel.fromPath(params.prot)
+
+
+process blastSeq {
+    publishDir "$params.outdir/bam_files", mode: 'copy'
 
     input:
-    file index from index_ch
-    tuple val(name), file(reads) from reads_ch
+    file fasta from proteins
 
     output:
-    tuple val(name), file ('*.bam') into star_aligned
+    file ('*.txt') into blast_ch
 
     """
-    echo STAR --genomeDir $index --readFilesIn $reads
+    echo blastp $fasta > ${fasta}_result.txt
     """
 }
+
+blast_ch.view()

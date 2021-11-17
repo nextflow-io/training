@@ -13,3 +13,5 @@ process align {
   echo align -in $seq > ${x}.aln
   """
 }
+
+genomes.view()

@@ -526,6 +526,7 @@ Try to run the above code. Replacing `./some/module` with the file name to a pro
 ====
 1. First save the following to `./modules/my_modules.nf`:
 +
+[source,nextflow,linenums]
 ----
 params.foo = 'Hello'
 params.bar = 'world!'
@@ -535,10 +536,10 @@ def sayHello() {
 }
 ----
 +
-
 2. Then run `nextflow run myscript.nf`:
 +
 Where `myscript.nf` is the following:
+[source,nextflow,linenums]
 ----
 nextflow.enable.dsl=2
 
@@ -550,7 +551,6 @@ include {sayHello} from './modules/my_modules.nf'
 workflow {
     sayHello()
 }
-+
 ----
 ====
 

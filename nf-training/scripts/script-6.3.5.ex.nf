@@ -10,3 +10,5 @@ process foo {
     echo your_command_here --reads $sample_id > ${sample_id}.bam
   """
 }
+
+bam_ch.view()
