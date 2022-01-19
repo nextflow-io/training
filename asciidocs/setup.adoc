@@ -1,6 +1,6 @@
 = Environment setup
 
-== Using a terminal
+== Local installation
 
 Nextflow can be used on any POSIX compatible system (Linux, OS X, Windows Subsystem for Linux etc.).
 
@@ -17,6 +17,24 @@ Nextflow can be used on any POSIX compatible system (Linux, OS X, Windows Subsys
 * http://www.graphviz.org/[Graphviz] 
 * https://aws.amazon.com/cli/[AWS CLI]
 * AWS Batch computing environment configured 
+
+----
+wget -qO- https://get.nextflow.io | bash
+----
+
+Or, if you prefer curl: 
+----
+curl -s https://get.nextflow.io | bash
+----
+
+Then ensure that the binary is executable:
+
+----
+chmod +x nextflow
+----
+
+or put the nextflow executable into your $PATH (e.g. /usr/bin)
+
 
 === Training material 
 
@@ -35,7 +53,7 @@ Or alternatively if you have `wget` instead of curl:
 wget -q -O- https://s3-eu-west-1.amazonaws.com/seqeralabs.com/public/nf-training.tar.gz | tar xvz
 ----
 
-=== Setup AWS Cloud9 environment
+== Setup with AWS Cloud9
 
 If you are running this tutorial in an AWS Cloud9 environment, 
 run the following one-liner to setup the virtual environment: 
@@ -62,3 +80,22 @@ Check the correct installation running the following command:
 ----
 nextflow info
 ----
+
+== Setup with Gitpod (Coming soon)
+
+Use a preconfigured Nextflow development environment using Gitpod.
+
+*Requirements*:
+
+*GitHub, GitLab or BitBucket account
+*Web browser (Google Chrome, Firefox)
+
+To run Gitpod, paste the following URL into your browser:
+	https://gitpod.io/#https://github.com/chriswyatt1/Gitpod_test/
+
+This should then ask you to sign into your GitHub/GitLab/BitBucket account, which will then give you 50 hours free access (per month), to a virtual environment with all the required dependencies, including Nextflow.
+
+Then you can follow the training material, using the terminal which should appear in the bottom left of the screen.
+
+IMPORTANT: Singularity exercises cannot be run with Gitpod, due to restrictions on mounting.
+
