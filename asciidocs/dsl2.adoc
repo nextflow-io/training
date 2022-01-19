@@ -15,8 +15,7 @@ DSL2 core features include:
 * Separation of processes from their invocation.
 * Use of a `workflow` directive to execute specific processes.
 * Archiving of processes into modules.
-* Update of syntax (pipe operator, & operator and channel forking)
-
+* Update of specific syntax and definitions
 
 To demonstrate the differences to DSL1, we will convert out first script `hello.nf` from earlier into DSL2.
 
@@ -24,7 +23,7 @@ To demonstrate the differences to DSL1, we will convert out first script `hello.
 
 === Process definition
 
-The new DSL separates the definition of a process from its invocation. The process definition follows the usual syntax as described in the process https://www.seqera.io/training/#_processes[documentation]. The only difference is that the `from` and `into` channel declaration has to be omitted.
+The new DSL separates the definition of a process from its invocation. The process definition follows the usual syntax as described in the process https://www.seqera.io/training/#_processes[documentation]. The only difference is that the `from` and `into` channel declarations have to be omitted.
 
 [source,nextflow,linenums]
 ----
@@ -157,7 +156,7 @@ workflow {
 }
 ----
 
-TIP: This works for output as a `value`, `path` or `stdout`
+TIP: `emit` also works in the same way for `value`, `path` or other defined output types.
 
 
 == Workflow
@@ -255,17 +254,17 @@ Then, the result of the above snippet can accessed using `my_pipeline.out.my_dat
 
 The new DSL allows the definition of module scripts that can be included and shared across workflow applications.
 
-A module can contain the definition of a function, `process` and `workflow` definitions as described in the above sections.
+A module can contain the definition of a `process` or `workflow` definition as described in the above sections.
 
-=== Modules include
+=== Including modules
 
 A component defined in a module script can be imported into another Nextflow script using the `include` keyword. This way, you can store all your processes in separate files that could be used by a variety of scripts.
 
 Lets try to complete this for our example `hello.nf`.
 
-For example, first create a file called `modules.nf` which contains the two processes `splitLetters` and `convertToUpper` in your current directory, or in a folder called `modules` (this is the standard location for nextflow modules)
+First, create a file called `modules.nf` which contains the two processes `splitLetters` and `convertToUpper` in your current directory, or in a folder called `modules` (this is the typical folder location for nextflow modules)
 
-Next, in your `hello.nf` script, remove the process defintions, and include the following lines above your workflow scope: 
+Next, in your `hello.nf` script, remove the process definitions, and include the following lines above your workflow scope: 
 
 [source,nextflow,linenums]
 ----
@@ -273,7 +272,9 @@ include { splitLetters } from './path/to/modules.nf'
 include { convertToUpper } from './path/to/modules.nf'
 ----
 
-The above snippets include a process with name `splitLetters` and `convertToUpper` defined in the module script in the main execution context, as such it can be invoked in the `workflow` scope. "modules.nf" can contain multiple process code blocks, or you can separate each process into a single module file. 
+IMPORTANT: Change './path/to/modules.nf' to the actual path to your new module file.
+
+The above snippets include a process with name `splitLetters` and `convertToUpper` defined in the module script in the main execution context, as such it can be invoked in the `workflow` scope. "modules.nf" can contain multiple process code blocks, or you can separate each process into multiple single module files. 
 
 Nextflow implicitly looks for the script file "./path/to/modules.nf", resolving the path within the included script location.
 
