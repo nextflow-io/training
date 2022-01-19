@@ -4,7 +4,7 @@
 
 DSL2 is a syntax extension to DSL1, developed primarily to allow the definition of module libraries and simplifies the writing of complex data analysis pipelines.
 
-To ensure backward compatibility, you can use DSL2 by adding the following line at the beginning of each workflow script: 
+To ensure backward compatibility with DSL1 (which is still preferred by some users), you must use DSL2 by adding the following line at the beginning of each workflow script: 
 
 ----
 nextflow.enable.dsl=2
