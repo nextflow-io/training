@@ -18,16 +18,23 @@ Nextflow can be used on any POSIX compatible system (Linux, OS X, Windows Subsys
 * https://aws.amazon.com/cli/[AWS CLI]
 * AWS Batch computing environment configured 
 
+To check you java version : `java -version`
+
+=== Download Nextflow:
+
+Enter this command in your terminal:
+
 ----
 wget -qO- https://get.nextflow.io | bash
 ----
 
 Or, if you prefer curl: 
+
 ----
 curl -s https://get.nextflow.io | bash
 ----
 
-Then ensure that the binary is executable:
+Then ensure that the downloaded binary is executable:
 
 ----
 chmod +x nextflow
@@ -51,21 +58,6 @@ Or alternatively if you have `wget` instead of curl:
 ----
 wget -q -O- https://s3-eu-west-1.amazonaws.com/seqeralabs.com/public/nf-training.tar.gz | tar xvz
 ----
-
-=== Nextflow version
-
-By default Nextflow will pull the latest stable version into your environment.
-
-However, Nextflow is constantly evolving as we make improvements and fix bugs.
-
-It is worth checking out the latest releases on github: https://github.com/nextflow-io/nextflow[(click here)].
-
-If you want or need to use a specific version of Nextflow, you can set the NXF_VER variable as so:
-
-[source,bash,linenums]
-export NXF_VER=21.10.0
-Then run nextflow -version to make sure that the change has taken effect.
-
 
 == Setup with AWS Cloud9
 
@@ -95,20 +87,20 @@ Check the correct installation running the following command:
 nextflow info
 ----
 
-== Setup with Gitpod (Coming soon)
+== Selecting Nextflow version
 
-Use a preconfigured Nextflow development environment using Gitpod.
+By default Nextflow will pull the latest stable version into your environment.
 
-*Requirements*:
+However, Nextflow is constantly evolving as we make improvements and fix bugs.
 
-*GitHub, GitLab or BitBucket account
-*Web browser (Google Chrome, Firefox)
+It is worth checking out the latest releases on github: https://github.com/nextflow-io/nextflow[(click here)].
 
-To run Gitpod, paste the following URL into your browser:
-	https://gitpod.io/#https://github.com/chriswyatt1/Gitpod_test/
+If you want or need to use a specific version of Nextflow, you can set the NXF_VER variable as so:
 
-This should then ask you to sign into your GitHub/GitLab/BitBucket account, which will then give you 50 hours free access (per month), to a virtual environment with all the required dependencies, including Nextflow.
+[source,bash,linenums]
+----
+export NXF_VER=21.10.0
+----
 
-Then you can follow the training material, using the terminal which should appear in the bottom left of the screen.
+Then run `nextflow -version` to make sure that the change has taken effect.
 
-IMPORTANT: Singularity exercises cannot be run with Gitpod, due to restrictions on mounting.
