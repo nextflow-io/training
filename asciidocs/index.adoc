@@ -4,7 +4,7 @@
 :hide-uri-scheme:
 :nofooter:
 :icons: font
-:toclevels: 4
+:toclevels: 2
 :imagesdir: img
 :toc: left
 :source-highlighter: coderay

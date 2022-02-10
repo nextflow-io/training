@@ -1,6 +1,6 @@
 = Environment setup
 
-== Using a terminal
+== Local installation
 
 Nextflow can be used on any POSIX compatible system (Linux, OS X, Windows Subsystem for Linux etc.).
 
@@ -17,6 +17,30 @@ Nextflow can be used on any POSIX compatible system (Linux, OS X, Windows Subsys
 * http://www.graphviz.org/[Graphviz] 
 * https://aws.amazon.com/cli/[AWS CLI]
 * AWS Batch computing environment configured 
+
+To check you java version : `java -version`
+
+=== Download Nextflow:
+
+Enter this command in your terminal:
+
+----
+wget -qO- https://get.nextflow.io | bash
+----
+
+Or, if you prefer curl: 
+
+----
+curl -s https://get.nextflow.io | bash
+----
+
+Then ensure that the downloaded binary is executable:
+
+----
+chmod +x nextflow
+----
+
+or put the nextflow executable into your $PATH (e.g. /usr/bin)
 
 === Training material 
 
@@ -35,7 +59,7 @@ Or alternatively if you have `wget` instead of curl:
 wget -q -O- https://s3-eu-west-1.amazonaws.com/seqeralabs.com/public/nf-training.tar.gz | tar xvz
 ----
 
-=== Setup AWS Cloud9 environment
+== Setup with AWS Cloud9
 
 If you are running this tutorial in an AWS Cloud9 environment, 
 run the following one-liner to setup the virtual environment: 
@@ -62,3 +86,21 @@ Check the correct installation running the following command:
 ----
 nextflow info
 ----
+
+== Selecting Nextflow version
+
+By default Nextflow will pull the latest stable version into your environment.
+
+However, Nextflow is constantly evolving as we make improvements and fix bugs.
+
+It is worth checking out the latest releases on github: https://github.com/nextflow-io/nextflow[(click here)].
+
+If you want or need to use a specific version of Nextflow, you can set the NXF_VER variable as so:
+
+[source,bash,linenums]
+----
+export NXF_VER=21.10.0
+----
+
+Then run `nextflow -version` to make sure that the change has taken effect.
+

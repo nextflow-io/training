@@ -64,7 +64,9 @@ it simplifies the writing of code and is more approachable.
 
 == Your first script
 
-Here you will execute your first Nextflow script (hello.nf), which we will go through line by line. 
+Here you will execute your first Nextflow script (`hello.nf`), which we will go through line by line. 
+
+In this toy example, the script takes an input string (a parameter called `params.greeting`), then splits the input into chucks of six characters in the first process, then converts the characters to upper case in the second process, before viewing the output to screen.  
 
 === Nextflow code (hello.nf)
 
@@ -110,11 +112,11 @@ result_ch.view{ it }
 
 * *3*: Declares a parameter `greeting` that is initialized with the value 'Hello world!'.
 
-* *4*: Initalises a `channel` labelled `greeting_ch`, which contains the value from `params.greeting`.
+* *4*: Initalises a `channel` labelled `greeting_ch`, which contains the value from `params.greeting`. Channels are the necessary input type for processes in Nextflow.
 
 * *6*: Begins the first process defined as `splitLetters`.
 
-* *8*: Input declaration for the `splitLetters` process.
+* *8*: Input declaration for the `splitLetters` process. Inputs can be values: `val`, files: `file`, paths `path` or other qualifiers (https://www.nextflow.io/docs/latest/process.html#inputs[See here])
 
 * *9*: Tells the `process` to expect an input value (`val`) `from` the channel `greeting_ch`, that we assign to the variable 'x'. 
 
@@ -310,7 +312,7 @@ m el r
 
 === In DAG-like format
 
-To better how Nextflow is dealing with the data in this pipeline, we share below a DAG-like figure to visual all the `inputs`, `outputs`, `channels` and `processes`.
+To better understand how Nextflow is dealing with the data in this pipeline, we share below a DAG-like figure to visualise all the `inputs`, `outputs`, `channels` and `processes`.
 
 .Check this out, by clicking here:
 [%collapsible]
