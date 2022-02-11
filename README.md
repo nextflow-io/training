@@ -89,3 +89,18 @@ Resize the instance volume:
 bash misc/resize.sh
 ```
 
+## Make ascii docs
+
+To render the pages on your local machine
+
+First install ascii doctor tools: https://asciidoctor.org/
+
+Then git clone the repo : `git clone --single-branch --branch master https://github.com/seqeralabs/nf-training-public`
+
+Make your changes to the docs in `asciidocs/`.
+
+Then run `make clean`
+
+Then make the docs: `make docs`
+
+Then to open the html: `open asciidocs/index.html`
