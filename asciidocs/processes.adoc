@@ -171,6 +171,11 @@ The process script can also be defined in a completely dynamic manner using an `
 params.compress = 'gzip'
 params.file2compress = "$baseDir/data/ggal/transcriptome.fa"
 
+def get_compression_command () {
+    
+}
+
+
 process foo {
 
   input:
@@ -189,12 +194,6 @@ process foo {
     throw new IllegalArgumentException("Unknown aligner $params.compress")
 }   
 ----
-
-[discrete]
-=== Exercise
-
-Write a custom function that given the compressor name as a parameter, returns the command
-string to be executed. Then use this function as the process script body.
 
 == Inputs
 
