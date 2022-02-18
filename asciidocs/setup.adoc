@@ -97,13 +97,13 @@ Use a preconfigured Nexflow development environment using Gitpod.
  * Web browser (Google Chrome, Firefox)
 
 
-Then just copy this link to your browser, which will open up an environment.
+Then copy the following link to your browser, which will open up a new environment:
 
 	https://gitpod.io/#https://github.com/chriswyatt1/Gitpod_test
 
-Then, you need to enter your GitHub, GitLab or Bitbucket credentials.
+Next, enter your GitHub, GitLab or Bitbucket credentials.
 
-This should open up (after a few minutes) an environment that looks like the following. 
+This should open up (after a few minutes) an environment that looks like this: 
 
 image::gitpod.png[]
 
@@ -111,11 +111,13 @@ In the terminal section, you can type the following:
 
 	nextflow info
 
-This should come up with the the Nextflow information from this environment. 
+This should come up with the Nextflow information from this environment. This tells us that the environment is working. All the training material and scripts are in this environment.
 
 If you want the training material in the top right window of the environment. Please double click the "Example.html" file in the explorer panel on the left hand side. Then click the preview button at the top right of the window to open the training material. Look for this icon:
 
-image::icon_gitpod.png[] 
+image::icon_gitpod.png[]
+
+WARNING: Be aware that if you leave the window or are not active, your session may end. You can always reactivate by clicking the gitpod link again. It will show if you previous envionment is still active, or if you will need to open a new environment.
 
 == Selecting Nextflow version
 
