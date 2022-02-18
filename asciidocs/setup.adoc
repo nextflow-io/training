@@ -87,6 +87,36 @@ Check the correct installation running the following command:
 nextflow info
 ----
 
+== Gitpod
+
+Use a preconfigured Nexflow development environment using Gitpod. 
+
+*Requirements*:
+
+ * A GitHub, GitLab or BitBucket account (gives you 50 hours usage per month)
+ * Web browser (Google Chrome, Firefox)
+
+
+Then just copy this link to your browser, which will open up an environment.
+
+	https://gitpod.io/#https://github.com/chriswyatt1/Gitpod_test
+
+Then, you need to enter your GitHub, GitLab or Bitbucket credentials.
+
+This should open up (after a few minutes) an environment that looks like the following. 
+
+image::gitpod.png[]
+
+In the terminal section, you can type the following:
+
+	nextflow info
+
+This should come up with the the Nextflow information from this environment. 
+
+If you want the training material in the top right window of the environment. Please double click the "Example.html" file in the explorer panel on the left hand side. Then click the preview button at the top right of the window to open the training material. Look for this icon:
+
+image::icon_gitpod.png[] 
+
 == Selecting Nextflow version
 
 By default Nextflow will pull the latest stable version into your environment.
