@@ -93,7 +93,7 @@ The hash code for input files is computed using:
 
 Therefore just *touching* a file will invalidated the related task execution. 
 
-== How organize in silico experiments 
+== How to organize in silico experiments 
 
 It's good practice to organize each *experiment* in its own folder. The main experiment input parameters should be specified using a Nextflow config file. This makes it simple to track and replicate the experiment over time. 
 
