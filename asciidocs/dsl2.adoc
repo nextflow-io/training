@@ -455,3 +455,4 @@ Ciao world!
 == DSL2 migration notes
 
 To view a summary of the changes introduced when migrating from DSL1 to DSL2 please refer to the https://www.nextflow.io/docs/latest/dsl2.html#dsl2-migration-notes[DSL2 migration notes] in the official Nextflow documentation.
+
