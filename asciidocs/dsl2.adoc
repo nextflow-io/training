@@ -4,7 +4,7 @@
 
 DSL2 is a syntax extension to DSL1, developed primarily to allow the definition of module libraries and simplifies the writing of complex data analysis pipelines.
 
-To ensure backward compatibility with DSL1 (which is still preferred by some users), you must use DSL2 by adding the following line at the beginning of each workflow script: 
+To ensure backward compatibility with DSL1 you have to explicitly enable DSL2 by adding the following line at the beginning of each workflow script: 
 
 ----
 nextflow.enable.dsl=2
@@ -14,16 +14,43 @@ DSL2 core features include:
 
 * Separation of processes from their invocation.
 * Use of a `workflow` directive to execute specific processes.
-* Archiving of processes into modules.
+* Storage and re-use of processes from module files.
 * Update of specific syntax and definitions
 
-To demonstrate the differences to DSL1, we will convert out first script `hello.nf` from earlier into DSL2.
+To demonstrate the differences to DSL1, we will convert the first script we created earlier (`hello.nf`) into DSL2.
 
 == Process
 
 === Process definition
 
-The new DSL separates the definition of a process from its invocation. The process definition follows the usual syntax as described in the process https://www.seqera.io/training/#_processes[documentation]. The only difference is that the `from` and `into` channel declarations have to be omitted.
+DSL2 separates the definition of a process from its invocation. The process definition follows the usual syntax as described in the process https://www.seqera.io/training/#_processes[documentation]. The only difference is that the `from` and `into` channel declarations now have to be omitted. By removing the preset channels `from` and `into`, we allow the process to accept any value channel without needing to specify its channel name.
+
+[discrete]
+=== DSL1 syntax
+
+[source,nextflow,linenums]
+----
+#!/usr/bin/env nextflow
+
+params.greeting = 'Hello world!'
+greeting_ch = Channel.from(params.greeting)
+
+process splitLetters {
+
+    input:
+    val x from greeting_ch
+
+    output:
+    file 'chunk_*' into letters_ch
+
+    """
+    printf '$x' | split -b 6 - chunk_
+    """
+}
+----
+
+[discrete]
+=== DSL2 syntax
 
 [source,nextflow,linenums]
 ----
@@ -31,7 +58,7 @@ The new DSL separates the definition of a process from its invocation. The proce
 
 nextflow.enable.dsl=2
 
-params.greeting  = 'Hello world!'
+params.greeting = 'Hello world!'
 greeting_ch = Channel.from(params.greeting)
 
 process splitLetters {
@@ -48,24 +75,20 @@ process splitLetters {
 }
 ----
 
-IMPORTANT: Notice we have added `nextflow.enable.dsl=2`. Try without this line, to see the error this would cause. 
-
-By removing the preset channels `from` and `into`, we allow the process to accept any value channel without needing to specify its channel name.
-
 === Workflow scope
 
-To run this process in DSL2, we must be invoke it as a function in a `workflow` scope, passing the expected input channels as parameters as it if were a custom function. For example :
+To run this process in DSL2, we have to invoke it in the `workflow` scope, passing the expected input channels as parameters as it if were a custom function. For example:
 
 [source,nextflow,linenums]
 ----
 workflow {
-  splitLetters(greeting_ch)
+    splitLetters(greeting_ch)
 }
 ----
 
-IMPORTANT: A process component can be invoked only once in the same workflow context.
+IMPORTANT: A `process` can only be invoked once in the same `workflow` definition.
 
-Next, we can add additional processes to this script and add another call from the workflow directive, thereby separating the processes into 'submodules'. 
+Next, we can define additional processes within the script and add another call to the `workflow`` directive, thereby separating the processes into 'submodules'. 
 
 [source,nextflow,linenums]
 ----
@@ -73,7 +96,7 @@ Next, we can add additional processes to this script and add another call from t
 
 nextflow.enable.dsl=2
 
-params.greeting  = 'Hello world!'
+params.greeting = 'Hello world!'
 greeting_ch = Channel.from(params.greeting)
 
 process splitLetters {
@@ -103,38 +126,41 @@ process convertToUpper {
 }
 
 workflow {
-  splitLetters(greeting_ch)
-  convertToUpper(splitLetters.out.flatten())
-  convertToUpper.out.view{ it }
+    splitLetters(greeting_ch)
+    convertToUpper(splitLetters.out.flatten())
+    convertToUpper.out.view{ it }
 }
 ----
 
-In this workflow example, when we use the output of one process we use the appendage `.out`. In this way, we now have a simpler workflow scope to follow, that creates custom functions from processes defined earlier in the script.
+In the example above, we can propagate the output of one process to another using the `.out` attribute. In this way, we now have a simpler workflow scope to follow, that creates custom functions from processes defined earlier in the script.
 
+=== Process outputs
 
-If a process defines two or more output channels, each of them can be accessed using the array element operator e.g. `out[0]`, `out[1]`, etc. 
+If a process defines two or more output channels, each of them can be accessed by indexing the `.out` attribute e.g. `.out[0]`, `.out[1]`, etc.
 
-=== Process composition
-
-Processes having matching input-output declaration can be composed so that the output of the first process is passed as input to the following process. Taking in consideration the previous process definition, it’s possible to write the following workflow directive:
-
-[source,nextflow,linenums]
-----
-workflow {
-  convertToUpper(splitLetters(greeting_ch).flatten())
-  convertToUpper.out.view{ it }
-}
-----
-
-Another option is using named outputs (see below).
-
-=== Process named output
-
-The process output definition allows the use of the `emit` option to define a name identifier that can be used to reference the channel in the external scope. For example:
+The process `output` definition also allows the use of the `emit` statment to define a named identifier that can be used to reference the channel in the external scope. For example:
 
 [source,nextflow,linenums]
 ----
+#!/usr/bin/env nextflow
+
 nextflow.enable.dsl=2
+
+params.greeting = 'Hello world!'
+greeting_ch = Channel.from(params.greeting)
+
+process splitLetters {
+
+    input:
+    val x
+
+    output:
+    file 'chunk_*'
+
+    """
+    printf '$x' | split -b 6 - chunk_
+    """
+}
 
 process convertToUpper {
 
@@ -145,159 +171,167 @@ process convertToUpper {
     stdout emit: verbiage
 
     """
-    cat $y | tr '[a-z]' '[A-Z]' 
+    cat $y | tr '[a-z]' '[A-Z]'
     """
 }
 
 workflow {
-  splitLetters(greeting_ch)
-  convertToUpper(splitLetters.out.flatten())
-  convertToUpper.out.verbiage.view{ it }
+    splitLetters(greeting_ch)
+    convertToUpper(splitLetters.out.flatten())
+    convertToUpper.out.verbiage.view{ it }
 }
 ----
-
-TIP: `emit` also works in the same way for `value`, `path` or other defined output types.
-
 
 == Workflow
 
 === Workflow definition
 
-The `workflow` keyword allows the definition of sub-workflow components that enclose the invocation of one or more processes and operators:
+The `workflow` scope allows the definition of components that define the invocation of one or more processes and operators:
 
 [source,nextflow,linenums]
 ----
 workflow my_pipeline {
-    foo()
-    bar( foo.out.collect() )
+    splitLetters(greeting_ch)
+    convertToUpper(splitLetters.out.flatten())
+    convertToUpper.out.verbiage.view{ it }
+}
+
+workflow {
+    my_pipeline()
 }
 ----
 
-For example, the above snippet defines a workflow component, named `my_pipeline`, that can be invoked from another workflow component definition as any other function or process i.e. `my_pipeline()`.
+For example, the snippet above defines a `workflow` named `my_pipeline`, that can be invoked via another `workflow` definition.
 
 === Workflow parameters
 
-A workflow component can access any variable and parameter defined in the outer scope:
+A workflow component can access any variable and parameter defined in the outer scope. In the running example, we can also access `params.greeting` directly within the `workflow` definition.
 
 [source,nextflow,linenums]
 ----
-params.data = '/some/data/file'
-
 workflow my_pipeline {
-    if( params.data )
-        bar(params.data)
-    else
-        bar(foo())
+    splitLetters(Channel.from(params.greeting))
+    convertToUpper(splitLetters.out.flatten())
+    convertToUpper.out.verbiage.view{ it }
+}
+
+workflow {
+    my_pipeline()
 }
 ----
 
 === Workflow inputs
 
-A workflow component can declare one or more input channels using the `take` keyword. For example:
+A `workflow` component can declare one or more input channels using the `take` statement. For example:
 
 [source,nextflow,linenums]
 ----
 workflow my_pipeline {
-    take: data
+    take:
+    greeting
+
     main:
-    foo(data)
-    bar(foo.out)
+    splitLetters(greeting)
+    convertToUpper(splitLetters.out.flatten())
+    convertToUpper.out.verbiage.view{ it }
 }
 ----
 
-IMPORTANT: When the `take` keyword is used, the beginning of the workflow body needs to be identified with the `main` keyword.
+IMPORTANT: When the `take` statement is used, the `workflow` definition needs to be declared within the `main` block.
 
-Then, the input can be specified as an argument in the workflow invocation statement:
+The input for the `workflow` can then be specified as an argument as shown below:
 
 [source,nextflow,linenums]
 ----
 workflow {
-    my_pipeline( channel.from('/some/data') )
+    my_pipeline(Channel.from(params.greeting))
 }
 ----
-
-NOTE: Workflow inputs are by definition: channel data structures. If a basic data type is provided instead, i.e. number, string, list, etc., it’s implicitly converted to a channel value (ie. non-consumable).
 
 === Workflow outputs
 
-A workflow component can declare one or more out channels using the emit keyword. For example:
+A `workflow` can declare one or more output channels using the `emit` statement. For example:
 
 [source,nextflow,linenums]
 ----
 workflow my_pipeline {
+    take:
+    greeting
+
     main:
-      foo(data)
-      bar(foo.out)
+    splitLetters(greeting)
+    convertToUpper(splitLetters.out.flatten())
+
     emit:
-      bar.out
+    convertToUpper.out.verbiage
+}
+
+workflow {
+    my_pipeline(Channel.from(params.greeting))
+    my_pipeline.out.view()
 }
 ----
 
-Then, the result of the `my_pipeline` execution can be accessed using the out property i.e. `my_pipeline.out`. When there are multiple output channels declared, use the array bracket notation to access each output component as described for the Process outputs definition.
+As a result, we can use the `my_pipeline.out` notation to access the outputs of `my_pipeline` in the invoking `workflow`.
 
-Alternatively, the output channel can be accessed using the identifier name it’s assigned to in the emit declaration:
+We can also declare named outputs within the `emit` block.
 
 [source,nextflow,linenums]
 ----
 workflow my_pipeline {
-   main:
-     foo(data)
-     bar(foo.out)
-   emit:
-     my_data = bar.out
+    take:
+    greeting
+
+    main:
+    splitLetters(greeting)
+    convertToUpper(splitLetters.out.flatten())
+
+    emit:
+    my_data = convertToUpper.out.verbiage
+}
+
+workflow {
+    my_pipeline(Channel.from(params.greeting))
+    my_pipeline.out.my_data.view()
 }
 ----
 
-Then, the result of the above snippet can accessed using `my_pipeline.out.my_data`.
+The result of the above snippet can then be accessed using `my_pipeline.out.my_data`.
 
 == Modules
 
-The new DSL allows the definition of module scripts that can be included and shared across workflow applications.
+Nextflow DSL2 allows for the definition of stand-alone module scripts that can be included and shared across multiple workflows. Each module can contain it's own `process` or `workflow` definition.
 
-A module can contain the definition of a `process` or `workflow` definition as described in the above sections.
+=== Importing modules
 
-=== Including modules
+Components defined in the module script can be imported into other Nextflow scripts using the `include` statement. This allows you to store these components in separate file(s) so that they can be re-used in multiple workflows.
 
-A component defined in a module script can be imported into another Nextflow script using the `include` keyword. This way, you can store all your processes in separate files that could be used by a variety of scripts.
+Using the `hello.nf` example, we can acheive this by:
 
-Lets try to complete this for our example `hello.nf`.
-
-First, create a file called `modules.nf` which contains the two processes `splitLetters` and `convertToUpper` in your current directory, or in a folder called `modules` (this is the typical folder location for nextflow modules)
-
-Next, in your `hello.nf` script, remove the process definitions, and include the following lines above your workflow scope: 
+- Creating a file called `modules.nf` in the top-level folder containing the main Nextflow script.
+- Cut and paste the two process definitions for `splitLetters` and `convertToUpper` into `modules.nf`.
+- Import the processes from `modules.nf` within the main script anywhere above the `workflow` definition:
 
 [source,nextflow,linenums]
 ----
-include { splitLetters } from './path/to/modules.nf'
-include { convertToUpper } from './path/to/modules.nf'
+include { splitLetters   } from './modules.nf'
+include { convertToUpper } from './modules.nf'
 ----
 
-IMPORTANT: Change './path/to/modules.nf' to the actual path to your new module file.
+NOTE: In general, you would use relative paths to define the location of the module scripts using the `./` prefix.
 
-The above snippets include a process with name `splitLetters` and `convertToUpper` defined in the module script in the main execution context, as such it can be invoked in the `workflow` scope. "modules.nf" can contain multiple process code blocks, or you can separate each process into multiple single module files. 
+=== Multiple imports
 
-Nextflow implicitly looks for the script file "./path/to/modules.nf", resolving the path within the included script location.
-
-NOTE: Relative paths must begin with the `./` prefix.
-
-=== Multiple inclusions
-
-A Nextflow script allows the inclusion of any number of modules. When multiple components need to be included from the same module script, the component names can be specified in the same inclusion using the curly brackets notation as shown below:
+If a Nextflow module script contains multiple `process` definitions these can also be imported using a single `include` statement as shown in the example below:
 
 [source,nextflow,linenums]
 ----
-include { splitLetters; convertToUpper } from './path/to/modules.nf'
-
-workflow {
-  splitLetters(greeting_ch)
-  convertToUpper(splitLetters.out.flatten())
-  convertToUpper.out.verbiage.view{ it }
-}
+include { splitLetters; convertToUpper } from './modules.nf'
 ----
 
 === Module aliases
 
-When including a module component it’s possible to specify a name alias. This allows the inclusion and the invocation of the same component multiple times in your script using different names. For example:
+When including a module component it is possible to specify a name alias using the `as` declaration. This allows the inclusion and the invocation of the same component multiple times in your script using different names. For example:
 
 [source,nextflow,linenums]
 ----
@@ -305,39 +339,53 @@ When including a module component it’s possible to specify a name alias. This 
 
 nextflow.enable.dsl=2
 
-params.greeting  = 'Hello world!'
-greeting_ch = Channel.from(params.greeting)
+params.greeting = 'Hello world!'
 
-params.greeting2  = 'Hola! Mundo!'
-greeting_ch2 = Channel.from(params.greeting2)
+include { splitLetters as splitLetters_one } from './modules.nf'
+include { splitLetters as splitLetters_two } from './modules.nf'
 
-include { splitLetters } from './path/to/modules.nf'
-include { splitLetters_repeat as splitLetters } from './other/module'
+include { convertToUpper as convertToUpper_one } from './modules.nf'
+include { convertToUpper as convertToUpper_two } from './modules.nf'
 
-include { convertToUpper } from './path/to/modules.nf'
-include { convertToUpper_repeat as convertToUpper } from './other/module'
+workflow my_pipeline_one {
+    take:
+    greeting
+
+    main:
+    splitLetters_one(greeting)
+    convertToUpper_one(splitLetters_one.out.flatten())
+
+    emit:
+    my_data = convertToUpper_one.out.verbiage
+}
+
+workflow my_pipeline_two {
+    take:
+    greeting
+
+    main:
+    splitLetters_two(greeting)
+    convertToUpper_two(splitLetters_two.out.flatten())
+
+    emit:
+    my_data = convertToUpper_two.out.verbiage
+}
 
 workflow {
-  splitLetters(greeting_ch)
-  convertToUpper(splitLetters.out.flatten())
-  convertToUpper.out.verbiage.view{ it }
+    my_pipeline_one(Channel.from(params.greeting))
+    my_pipeline_one.out.my_data.view()
 
-  splitLetters_repeat(greeting_ch2)
-  convertToUpper(splitLetters.out.flatten())
-  convertToUpper.out.verbiage.view{ it }
+    my_pipeline_two(Channel.from(params.greeting))
+    my_pipeline_two.out.my_data.view()
 }
 ----
 
-The same is possible when including multiple components from the same module script as shown below:
+=== Parameter scopes
 
-[source,nextflow,linenums]
-----
-include { splitLetters; splitLetters as splitLetters_repeat } from './path/to/modules.nf'
-----
+A module script can define one or more parameters or custom functions using the same syntax as with any other Nextflow script. Using the minimal examples below: 
 
-=== Module parameters
-
-A module script can define one or more parameters using the same syntax as Nextflow workflow scripts (as well as defining workflow or defined functions):
+[discrete]
+==== Module script (`./modules.nf`)
 
 [source,nextflow,linenums]
 ----
@@ -349,153 +397,61 @@ def sayHello() {
 }
 ----
 
-Parameters are inherited from the including context. For example:
+[discrete]
+==== Main script (`./main.nf`)
 
 [source,nextflow,linenums]
 ----
-params.foo = 'Hola'
-params.bar = 'Mundo'
+#!/usr/bin/env nextflow
 
-include {sayHello} from './some/module'
+nextflow.enable.dsl=2
+
+params.foo = 'Hola'
+params.bar = 'mundo!'
+
+include { sayHello } from './modules.nf'
 
 workflow {
     sayHello()
 }
 ----
 
-The above snippet should print:
+Running `main.nf` should print:
 
 [source,bash,linenums]
 ----
-Hola Mundo
+Hola mundo!
 ----
 
-NOTE: The module inherits the parameters defined before the include statement, therefore any further parameters set later are ignored.
+As highlighted above, the script will print `Hola mundo!` instead of `Hello world!` because parameters are inherited from the including context.
 
-TIP: Define all pipeline parameters at the beginning of the script before any include declaration.
+TIP: To avoid being ignored, pipeline parameters should be defined at the beginning of the script before any `include` declarations.
 
-The option `addParams` can be used to extend the module parameters without affecting the external scope. For example:
+The `addParams` option can be used to extend the module parameters without affecting the external scope. For example:
 
 [source,nextflow,linenums]
 ----
-include {sayHello} from './some/module' addParams(foo: 'Ciao')
+#!/usr/bin/env nextflow
+
+nextflow.enable.dsl=2
+
+params.foo = 'Hola'
+params.bar = 'mundo!'
+
+include { sayHello } from './modules.nf' addParams(foo: 'Ciao')
 
 workflow {
     sayHello()
 }
 ----
 
-The above snippet should prints:
+Executing the main script above should print:
 
 [source,bash,linenums]
 ----
 Ciao world!
 ----
 
-Finally the include option `params` allows the specification of one or more parameters without inheriting any value from the external environment.
+== DSL2 migration notes
 
-[discrete]
-=== Exercise
-
-Try to run the above code. Replacing `./some/module` with the file name to a process called `sayHello()`, which expects `foo` and `bar` parameters. Remember to use ./ for current directory.
-
-.Answer:
-[%collapsible]
-====
-1. First save the following to `./modules/my_modules.nf`:
-+
-[source,nextflow,linenums]
-----
-params.foo = 'Hello'
-params.bar = 'world!'
-
-def sayHello() {
-    println "$params.foo $params.bar"
-}
-----
-+
-2. Then run `nextflow run myscript.nf`:
-+
-Where `myscript.nf` is the following:
-[source,nextflow,linenums]
-----
-nextflow.enable.dsl=2
-
-params.foo = 'Hola'
-params.bar = 'Mundo'
-
-include {sayHello} from './modules/my_modules.nf'
-
-workflow {
-    sayHello()
-}
-----
-====
-
-== Other useful DSL2 changes
-
-Some of the syntax has changed between DSL1 and DSL2. 
-
-These are a few of the key changes:
-
-- Process inputs and outputs of type `set` have to be replaced with `tuple`.
-
-- Process output option mode `flatten` is not available anymore. Replace it using the `flatten` operator on the corresponding output channel.
-
-- Anonymous and unwrapped includes are not supported anymore. Replace it with a explicit module inclusion. For example:
-
-[source,nextflow,linenums]
-----
-include './some/library'
-include bar from './other/library'
-
-workflow {
-  foo()
-  bar()
-}
-----
-
-Should be replaced with:
-
-[source,nextflow,linenums]
-----
-include { foo } from './some/library'
-include { bar } from './other/library'
-
-workflow {
-  foo()
-  bar()
-}
-----
-
-- The use of unqualified value (`val`) and `file` elements into input tuples is not allowed anymore. Replace them with a corresponding `val` or `path` qualifiers:
-
-[source,nextflow,linenums]
-----
-process foo {
-input:
-  tuple X, 'some-file.bam'
- script:
-   '''
-   your_command
-   '''
-}
-----
-
-Use:
-
-[source,nextflow,linenums]
-----
-process foo {
-input:
-  tuple val(X), path('some-file.bam')
- script:
-   '''
-   your_command --in $X some-file.bam
-   '''
-}
-----
-
-For more information, check out the full details of DSL2 changes at this https://www.nextflow.io/docs/latest/dsl2.html[link]
-
-
+To view a summary of the changes introduced when migrating from DSL1 to DSL2 please refer to the https://www.nextflow.io/docs/latest/dsl2.html#dsl2-migration-notes[DSL2 migration notes] in the official Nextflow documentation.
