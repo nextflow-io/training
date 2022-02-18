@@ -1,3 +1,5 @@
+PWD := $(shell pwd)
+
 clean:
 	rm -rf asciidocs/index.html
 	rm -rf handson-docs/index.html
@@ -18,3 +20,8 @@ handson-docs/index.html: handson-docs/*.adoc
 	cp handson-docs/*.{html,css} ../seqera-website-ver2/static/training/handson
 	cp handson-docs/solutions/*.{html,css} ../seqera-website-ver2/static/training/handson/solutions
 
+docker-clean:
+	docker run --rm -it -v ${PWD}/asciidocs/:/documents/ asciidoctor/docker-asciidoctor rm -rf ./build
+docker:
+	docker run --rm -it -v ${PWD}/asciidocs/:/documents/ asciidoctor/docker-asciidoctor asciidoctor -D build index.adoc
+	docker run --rm -it -v ${PWD}/asciidocs/:/documents/ asciidoctor/docker-asciidoctor cp -r ./img ./build
