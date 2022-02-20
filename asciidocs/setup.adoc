@@ -1,13 +1,13 @@
 = Environment setup
 
-== Local installation
-
 Nextflow can be used on any POSIX compatible system (Linux, OS X, Windows Subsystem for Linux etc.).
 
 *Requirements*:
 
 * Bash
 * http://www.oracle.com/technetwork/java/javase/downloads/index.html[Java 8 (or later, up to 15)]
+
+To check your java version : `java -version`
 
 *Optional requirements*:
 
@@ -18,7 +18,9 @@ Nextflow can be used on any POSIX compatible system (Linux, OS X, Windows Subsys
 * https://aws.amazon.com/cli/[AWS CLI]
 * AWS Batch computing environment configured 
 
-To check you java version : `java -version`
+== Local installation
+
+We recommend using the AWS cloud9 environment for this tutorial (see later), yet if you wish to run locally, follow these instructions:
 
 === Download Nextflow:
 
@@ -62,7 +64,30 @@ wget -q -O- https://s3-eu-west-1.amazonaws.com/seqeralabs.com/public/nf-training
 == Setup with AWS Cloud9
 
 If you are running this tutorial in an AWS Cloud9 environment, 
-run the following one-liner to setup the virtual environment: 
+first login to AWS following the details in the spreadsheet (with the given IAM user account ID, name and password)
+
+WARNING: Make sure you logout of any previously open cloud9 sessions first.
+
+Then click openIDE, to enter the AWS environment.
+
+=== Training material 
+
+Download the training material by copy & pasting the following command 
+in the terminal:
+
+[source,bash,linenums]
+----
+curl https://s3-eu-west-1.amazonaws.com/seqeralabs.com/public/nf-training.tar.gz | tar xvz
+----
+
+Or alternatively if you have `wget` instead of curl:
+
+[source,bash,linenums]
+----
+wget -q -O- https://s3-eu-west-1.amazonaws.com/seqeralabs.com/public/nf-training.tar.gz | tar xvz
+----
+
+then run the following one-liner to setup the virtual environment (this takes ~3 minutes): 
 
 [source,bash,linenums]
 ----
