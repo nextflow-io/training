@@ -123,7 +123,7 @@ You should see the following (or similar):
   Encoding: UTF-8 (UTF-8)
 ----
 
-== Selecting Nextflow version
+== Selecting a Nextflow version
 
 By default Nextflow will pull the latest stable version into your environment.
 
