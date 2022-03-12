@@ -17,6 +17,9 @@ github:
 
 # List the start up tasks. Learn more https://www.gitpod.io/docs/config-start-tasks/
 tasks:
+  - name: Start web server
+    init: python -m https://training.seqera.io 8000     
+      
   - name: Download Nextflow Tutorial
     init: |
       echo 'init script' # runs during prebuild
@@ -27,9 +30,7 @@ tasks:
     command: |
       cp ./nextflow /workspace/bin/nextflow  
       export PATH=/workspace/bin:$PATH
-  - name: Start web server
-    init: python -m http.server 8000     
-      
+
       
 
 # List the ports to expose. Learn more https://www.gitpod.io/docs/config-ports/
