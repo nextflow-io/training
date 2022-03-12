@@ -18,7 +18,7 @@ github:
 # List the start up tasks. Learn more https://www.gitpod.io/docs/config-start-tasks/
 tasks:
   - name: Start web server
-    init: python -m https://training.seqera.io 8000     
+    init: python -m http.server 8000     
       
   - name: Download Nextflow Tutorial
     init: |
