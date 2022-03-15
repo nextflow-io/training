@@ -814,6 +814,28 @@ process foo {
 
 The complete list of directives is available https://www.nextflow.io/docs/latest/process.html#directives[at this link].
 
+.Commonly used directives
+[%header,cols="15%,85%"]
+|===
+|Name
+|Description
+
+|https://www.nextflow.io/docs/latest/process.html#cpus[cpus] 
+|Allows you to define the number of (logical) CPU required by the process’ task. 
+
+|https://www.nextflow.io/docs/latest/process.html#time[time] 
+|Allows you to define how long a process is allowed to run. e.g. time '1h': 1 hour, '1s' 1 second, '1m' 1 minute, '1d' 1 day.
+
+|https://www.nextflow.io/docs/latest/process.html#memory[memory]
+|Allows you to define how much memory the process is allowed to use. e.g. '2 GB' is 2 GB. Can use B, KB,MB,GB and TB.
+
+|https://www.nextflow.io/docs/latest/process.html#disk[disk] 
+|Allows you to define how much local disk storage the process is allowed to use.
+
+|https://www.nextflow.io/docs/latest/process.html#tag[tag]
+|Allows you to associate each process execution with a custom label, so that it will be easier to identify them in the log file or in the trace execution report.
+|===
+
 == Organise outputs
 
 === PublishDir directive
