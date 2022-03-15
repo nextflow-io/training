@@ -101,7 +101,7 @@ To add a transcriptome `index` process, try adding the following code block to y
 [source,nextflow,linenums]
 ----
 /*
- * define the `index` process that creates a binary index
+ * define the `salmon_index` process that creates a binary index
  * given the transcriptome file
  */
 process index {
@@ -110,16 +110,16 @@ process index {
     path transcriptome from params.transcriptome_file
 
     output:
-    path 'index' into index_ch
+    path 'salmon_index' into index_ch
 
     script:
     """
-    salmon index --threads $task.cpus -t $transcriptome -i index
+    salmon index --threads $task.cpus -t $transcriptome -i salmon_index
     """
 }
 ----
 
-This process takes the transcriptome params file as `input` and creates the transcriptome index by using the `salmon` tool. The `output` is specified as a path to a output file called `index`, and this is passed to the `index_ch` `channel`.
+This process takes the transcriptome params file as `input` and creates the transcriptome index by using the `salmon` tool. The `output` is specified as a path to a output file called `salmon_index`, and this is passed to the `index_ch` `channel`.
 
 NOTE: the `input` declaration defines a `transcriptome` path variable which is used in the `script` as a reference (using the dollar sign) in the Salmon command line.
 
