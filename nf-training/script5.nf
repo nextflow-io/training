@@ -26,11 +26,11 @@ process index {
     path transcriptome from params.transcriptome_file
      
     output:
-    path 'index' into index_ch
+    path 'salmon_index' into index_ch
 
     script: 
     """
-    salmon index --threads $task.cpus -t $transcriptome -i index
+    salmon index --threads $task.cpus -t $transcriptome -i salmon_index
     """
 }
 
@@ -42,7 +42,7 @@ Channel
 process quantification {
      
     input:
-    path index from index_ch
+    path salmon_index from index_ch
     tuple pair_id, path(reads) from read_pairs_ch
  
     output:
@@ -50,7 +50,7 @@ process quantification {
  
     script:
     """
-    salmon quant --threads $task.cpus --libType=U -i $index -1 ${reads[0]} -2 ${reads[1]} -o $pair_id
+    salmon quant --threads $task.cpus --libType=U -i $salmon_index -1 ${reads[0]} -2 ${reads[1]} -o $pair_id
     """
 }
 
