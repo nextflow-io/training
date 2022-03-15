@@ -26,11 +26,11 @@ process index {
     path transcriptome from params.transcriptome_file
      
     output:
-    path 'index' into index_ch
+    path 'salmon_index' into index_ch
 
     script:       
     """
-    salmon index --threads $task.cpus -t $transcriptome -i index
+    salmon index --threads $task.cpus -t $transcriptome -i salmon_index
     """
 }
  
