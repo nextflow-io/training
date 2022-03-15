@@ -87,7 +87,7 @@ can be specified to bind the channel to a specific value. For example:
 ----
 ch1 = Channel.value()                 // <1>
 ch2 = Channel.value( 'Hello there' )  // <2>
-ch2 = Channel.value( [1,2,3,4,5] )    // <3>
+ch3 = Channel.value( [1,2,3,4,5] )    // <3>
 ----
 
 <1> Creates an _empty_ value channel.
