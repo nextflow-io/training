@@ -531,7 +531,7 @@ the following code:
 ----
   script:
   """
-  fastqc.sh "$sample_id" "$reads"
+  fastqc.sh "$pair_id" "$reads" 
   """
 ----
 
