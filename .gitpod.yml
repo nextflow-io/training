@@ -18,7 +18,16 @@ github:
 # List the start up tasks. Learn more https://www.gitpod.io/docs/config-start-tasks/
 tasks:
   - name: Start web server
-    init: python -m http.server 8000     
+    init: |
+        curl -s "https://get.sdkman.io" | bash
+        source "/opt/buildhome/.sdkman/bin/sdkman-init.sh"
+        sdk install asciidoctorj
+        mkdir -p serve
+        cd asciidocs
+        asciidoctorj -D ../serve index.adoc
+        cp -r img ../serve
+        cd ../serve
+        python -m http.server 8000     
       
   - name: Download Nextflow Tutorial
     init: |
