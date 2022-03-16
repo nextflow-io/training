@@ -21,6 +21,8 @@ tasks:
     init: |
         curl -s "https://get.sdkman.io" | bash
         source "/opt/buildhome/.sdkman/bin/sdkman-init.sh"
+        mkdir -p ~/.sdkman/etc
+        echo "sdkman_auto_answer=true" > ~/.sdkman/etc/config
         sdk install asciidoctorj
         mkdir -p serve
         cd asciidocs
