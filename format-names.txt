@@ -1,7 +1,0 @@
- cat all-people.txt |\
-  cut -d '<' -f 1 |\
-   awk '{$1=$1;print}' |\
-    sed "s/\./-/g" |\
-      sed "s/ /-/g" |\
-        awk -F'@' '{print $1"-workshop"}' |\
-        tr [:upper:] [:lower:] | sort

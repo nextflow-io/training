@@ -1,7 +1,5 @@
 = Environment setup
 
-== Local installation
-
 Nextflow can be used on any POSIX compatible system (Linux, OS X, Windows Subsystem for Linux etc.).
 
 *Requirements*:
@@ -18,7 +16,9 @@ Nextflow can be used on any POSIX compatible system (Linux, OS X, Windows Subsys
 * https://aws.amazon.com/cli/[AWS CLI]
 * AWS Batch computing environment configured 
 
-To check you java version : `java -version`
+== Local installation
+
+We recommend using the AWS cloud9 environment for this tutorial (see later), yet if you wish to run locally, follow these instructions:
 
 === Download Nextflow:
 
@@ -83,7 +83,7 @@ Next, enter your GitHub, GitLab or Bitbucket credentials.
 
 This should open up (after a few minutes) an environment that looks like this: 
 
-image::gitpod.png[]
+image::gitpod.welcome.png[]
 
 In the terminal section, you can type the following:
 
@@ -93,7 +93,18 @@ This should come up with the Nextflow information from this environment. This te
 
 WARNING: Be aware that if you leave the window or are not active, your session may end after 30 minutes. You can always reactivate by clicking the gitpod link again. It will show if you previous environment is still active, or if you will need to open a new environment.
 
-== Selecting Nextflow version
+You should see the following (or similar):
+
+[source,bash]
+----
+  Version: 21.10.6 build 5660
+  Created: 21-12-2021 16:55 UTC 
+  System: Linux 4.14.262-135.489.amzn1.x86_64
+  Runtime: Groovy 3.0.9 on OpenJDK 64-Bit Server VM 1.8.0_312-b07
+  Encoding: UTF-8 (UTF-8)
+----
+
+== Selecting a Nextflow version
 
 By default Nextflow will pull the latest stable version into your environment.
 
