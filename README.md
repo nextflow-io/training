@@ -24,26 +24,8 @@ Then the IDE should open up and look similar to:
 
 ![PNG](/asciidocs/img/gitpod.welcome.png)
 
-**The sidebar** allows you to customise your environment and perform basic tasks (Copy/Paste, Open files, search, git, etc.) Click the Explorer button to see which files are in this repository:
+**The sidebar** allows you to customise your Gitpod environment and perform basic tasks (Copy/Paste, Open files, search, git, etc.) Click the Explorer button to see which files are in this repository.
 
-**The terminal** allows you to run all the programs in the repository, for example `nextflow`, `nf-core` and `docker` are installed in the nf-core rnaseq repository. The terminal may not appear automatically, in which case navigate to the top icon of the sidebar, and choose Terminal/New Terminal.
+**The terminal** allows you to run all the programs in the repository, for example `nextflow` and `docker` are installed. 
 
-**The main window** allows you to view and edit files. Clicking on a file in the explorer will open it within the main window. Once a file is open, Markdown or HTML can be rendered using the preview option.
-
-
-
-## Rendering ascii docs for training locally
-
-To render the pages on your local machine
-
-First install ascii doctor tools: https://asciidoctor.org/
-
-Then git clone the repo : `git clone --single-branch --branch master https://github.com/seqeralabs/nf-training-public`
-
-Make your changes to the docs in `asciidocs/`.
-
-Then run `make clean`
-
-Then make the docs: `make docs`
-
-Then to open the html: `open asciidocs/index.html`
+**The main window** allows you to view and edit files. Clicking on a file in the explorer will open it within the main window. Once a file is open, Markdown or HTML can be rendered using the preview option. We can also see the nf-trainin material in this window, or you can open in separately in another browser winder (https://training.seqera.io/)
