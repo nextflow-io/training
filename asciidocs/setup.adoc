@@ -9,7 +9,7 @@ Nextflow can be used on any POSIX compatible system (Linux, OS X, Windows Subsys
 * Bash
 * http://www.oracle.com/technetwork/java/javase/downloads/index.html[Java 8 (or later, up to 15)]
 
-*Optional requirements*:
+*Optional requirements for this tutorial*:
 
 * https://www.docker.com/[Docker] engine 1.10.x (or later)
 * https://github.com/sylabs/singularity[Singularity] 2.5.x (or later)
@@ -59,28 +59,7 @@ Or alternatively if you have `wget` instead of curl:
 wget -q -O- https://s3-eu-west-1.amazonaws.com/seqeralabs.com/public/nf-training.tar.gz | tar xvz
 ----
 
-== Setup with AWS Cloud9
-
-If you are running this tutorial in an AWS Cloud9 environment, 
-run the following one-liner to setup the virtual environment: 
-
-[source,bash,linenums]
-----
-source setup/all.sh
-----
-
-=== Nextflow installation 
-
-Install the latest version of Nextflow by copy & pasting the following 
-snippet in a terminal window: 
-
-[source,bash,linenums]
-----
-curl get.nextflow.io | bash
-mv nextflow ~/bin
-----
-
-Check the correct installation running the following command: 
+Check the correct installation of `nextflow` by running the following command: 
 
 [source,bash,linenums]
 ----
@@ -96,10 +75,9 @@ Use a preconfigured Nexflow development environment using Gitpod.
  * A GitHub, GitLab or BitBucket account (gives you 50 hours usage per month)
  * Web browser (Google Chrome, Firefox)
 
-
 Then copy the following link to your browser, which will open up a new environment:
 
-	https://gitpod.io/#https://github.com/chriswyatt1/Gitpod_test
+`https://gitpod.io/#https://github.com/seqeralabs/nf-training-public/tree/master`
 
 Next, enter your GitHub, GitLab or Bitbucket credentials.
 
@@ -113,11 +91,7 @@ In the terminal section, you can type the following:
 
 This should come up with the Nextflow information from this environment. This tells us that the environment is working. All the training material and scripts are in this environment.
 
-If you want the training material in the top right window of the environment. Please double click the "Example.html" file in the explorer panel on the left hand side. Then click the preview button at the top right of the window to open the training material. Look for this icon:
-
-image::icon_gitpod.png[]
-
-WARNING: Be aware that if you leave the window or are not active, your session may end. You can always reactivate by clicking the gitpod link again. It will show if you previous envionment is still active, or if you will need to open a new environment.
+WARNING: Be aware that if you leave the window or are not active, your session may end after 30 minutes. You can always reactivate by clicking the gitpod link again. It will show if you previous environment is still active, or if you will need to open a new environment.
 
 == Selecting Nextflow version
 
