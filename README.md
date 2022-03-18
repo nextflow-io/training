@@ -18,11 +18,11 @@ Then you will need to login to either Github, GitLab or Bitbucket. This will giv
 
 Once you have signed in, gitpod should load:
 
-image::gitpod.png[]
+![PNG](/asciidocs/img/gitpod.png)
 
 Then the IDE should open up and look similar to:
 
-image::gitpod.welcome.png[]
+![PNG](/asciidocs/img/gitpod.welcome.png)
 
 **The sidebar** allows you to customise your environment and perform basic tasks (Copy/Paste, Open files, search, git, etc.) Click the Explorer button to see which files are in this repository:
 
