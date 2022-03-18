@@ -2,94 +2,37 @@
 
 Nextflow Training material. 
 
-## Get started page 
+## Opening the training material in a browser
 
-https://www.seqera.io/training/
+To open the training, follow the following URL:
 
-## Cloud9 User Access
+https://training.seqera.io/
 
-* Access https://eu-central-1.console.aws.amazon.com/cloud9/home/ in a browser.
-* Select IAM user
-* Enter Account # 195996028523 
-* Enter IAM user (see user-names.txt)
-* Enter password (`Secret123!`)
+## Gitpod tutorial
 
-## Bucket Upload 
+To open the training with a IDE terminal with all programs installed and training material, click the following URL:
 
-* Add read permision for the training bucket ie. `s3://seqeralabs.com/public` by modifying 
-the IAM policy `nf-training-ro`. E.g.
+https://gitpod.io/#https://github.com/seqeralabs/nf-training-public/tree/master
 
-```
-{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Sid": "VisualEditor0",
-            "Effect": "Allow",
-            "Action": "s3:ListBucket",
-            "Resource": "arn:aws:s3:::seqeralabs.com"
-        },
-        {
-            "Sid": "VisualEditor1",
-            "Effect": "Allow",
-            "Action": [
-                "s3:GetObjectAcl",
-                "s3:GetObject",
-                "s3:GetObjectTagging"
-            ],
-            "Resource": "arn:aws:s3:::seqeralabs.com/public/*"
-        }
-    ]
-}
-```
+Then you will need to login to either Github, GitLab or Bitbucket. This will give you 50 hours per month to run Gitpod, with up to 4 parellel workspaces at a time.
+
+Once you have signed in, gitpod should load:
+
+image::gitpod.png[]
+
+Then the IDE should open up and look similar to:
+
+image::gitpod.welcome.png[]
+
+**The sidebar** allows you to customise your environment and perform basic tasks (Copy/Paste, Open files, search, git, etc.) Click the Explorer button to see which files are in this repository:
+
+**The terminal** allows you to run all the programs in the repository, for example `nextflow`, `nf-core` and `docker` are installed in the nf-core rnaseq repository. The terminal may not appear automatically, in which case navigate to the top icon of the sidebar, and choose Terminal/New Terminal.
+
+**The main window** allows you to view and edit files. Clicking on a file in the explorer will open it within the main window. Once a file is open, Markdown or HTML can be rendered using the preview option.
 
 
-## Course scripts & data 
 
-All data and scripts should be hosted at this bucket: `s3://seqeralabs.com/public/nf-training`. 
-
-1. Sync the local data and scripts with the bucket:
-
-```
-aws s3 sync --acl public-read --delete --include "nf-training/{data,0?_*}" nf-training s3://seqeralabs.com/public/nf-training
-```
-
-2. Sync training material: 
-
-```
-aws s3 sync s3://seqeralabs.com/public/nf-training .
-```
-
-## Publish to seqera.io
-
-1. Ensure the latest version of the Seqera website is located at: `../seqera-website`.
-
-2. Go into `../seqera-website`.
-
-3. Run:
-
-```
-make publish invalidate
-```
-
-Note the aws command may contain a profile. 
-
-
-## Misc
-
-Remove unnecessary containers:
-
-```
-docker rmi $(docker images -q)
-```
-
-Resize the instance volume:
-
-```
-bash misc/resize.sh
-```
-
-## Make ascii docs
+## Rendering ascii docs for training locally
 
 To render the pages on your local machine
 
