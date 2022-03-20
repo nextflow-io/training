@@ -12,7 +12,7 @@ https://training.seqera.io/
 
 To open a Gitpod Integrated Development Environment (IDE) with all programs installed and training material, click the following URL:
 
-https://gitpod.io/#https://github.com/seqeralabs/nf-training-public/tree/master
+https://gitpod.io/#https://github.com/seqeralabs/nf-training-public
 
 Then you will need to login to either Github, GitLab or Bitbucket. This will give you 50 hours per month to run Gitpod, with up to 4 parellel workspaces at a time.
 
