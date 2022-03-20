@@ -18,7 +18,7 @@ Its is recommended to use an up to chromium-based browsers (Chrome, Edge, Brave)
 
 Then you will need to login to either Github, GitLab or Bitbucket (and allow authorisation). 
 
-Once you have signed in, gitpod will load:
+Once you have signed in, gitpod will load (skip prebuild, if asked):
 
 ![PNG](/asciidocs/img/gitpod.png)
 
