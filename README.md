@@ -10,7 +10,7 @@ https://training.seqera.io/
 
 ## Gitpod tutorial
 
-To a Gitpod Integrated development environment (IDE) with all programs installed and training material, click the following URL:
+To open a Gitpod Integrated Development Environment (IDE) with all programs installed and training material, click the following URL:
 
 https://gitpod.io/#https://github.com/seqeralabs/nf-training-public/tree/master
 
