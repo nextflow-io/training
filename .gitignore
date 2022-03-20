@@ -1,2 +1,5 @@
 asciidocs/build
 .idea
+serve
+nextflow
+work
