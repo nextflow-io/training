@@ -33,7 +33,6 @@ tasks:
     init: |
       echo 'init script' # runs during prebuild
       echo 'start script'
-      curl https://s3-eu-west-1.amazonaws.com/seqeralabs.com/public/nf-training.tar.gz | tar xvz 
       curl -s https://get.nextflow.io | bash
       mkdir /workspace/bin
     command: |
