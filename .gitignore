@@ -3,3 +3,6 @@ asciidocs/build
 serve
 nextflow
 work
+.nextflow.log
+.nextflow*
+nf-training/results
