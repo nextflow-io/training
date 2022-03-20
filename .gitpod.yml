@@ -44,7 +44,7 @@ tasks:
       sudo apt install  -y tree
       sudo apt install  -y graphviz
       unset JAVA_TOOL_OPTIONS
-      alias conda_activate=". /opt/conda/etc/profile.d/conda.sh; conda activate bash"
+      alias conda_activate=". /opt/conda/etc/profile.d/conda.sh; conda activate base"
 
       
 
