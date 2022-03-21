@@ -6,3 +6,5 @@ work
 .nextflow.log
 .nextflow*
 nf-training/results
+transcript-index
+Dockerfile
