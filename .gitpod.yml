@@ -19,18 +19,7 @@ image:
 # List the start up tasks. Learn more https://www.gitpod.io/docs/config-start-tasks/
 tasks:
   - name: Start web server
-    init: |
-        curl -s "https://get.sdkman.io" | bash
-        source "/opt/buildhome/.sdkman/bin/sdkman-init.sh"
-        mkdir -p ~/.sdkman/etc
-        echo "sdkman_auto_answer=true" > ~/.sdkman/etc/config
-        sdk install asciidoctorj
-        mkdir -p serve
-        cd asciidocs
-        asciidoctorj -D ../serve index.adoc
-        cp -r img ../serve
-        cd ../serve
-        python -m http.server 8000     
+    command: gp await-port 23000 && gp preview https://training.seqera.io    
       
   - name: Download Nextflow Tutorial
     init: |
