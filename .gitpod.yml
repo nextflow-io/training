@@ -18,7 +18,7 @@ github:
 # List the start up tasks. Learn more https://www.gitpod.io/docs/config-start-tasks/
 tasks:
   - name: Start web server
-    command: gp preview https://training.seqera.io  
+    command: gp await-port 23000 && gp preview https://training.seqera.io  
   - name: Download Nextflow Tutorial
     init: |
       echo 'init script' # runs during prebuild
