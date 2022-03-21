@@ -56,7 +56,7 @@ You should see something similar to the following:
 
 **The terminal** allows you to run all the programs in the repository, for example `nextflow` and `docker` are installed. 
 
-**The main window** allows you to view and edit files. Clicking on a file in the explorer will open it within the main window. Once a file is open, Markdown or HTML can be rendered using the preview option. We can also see the nf-trainin material in this window, or you can open in separately in another browser winder (https://training.seqera.io/)
+**The main window** allows you to view and edit files. Clicking on a file in the explorer will open it within the main window. We can also see the nf-training material in this window, but if you find the space too small you can open it separately in another browser window (https://training.seqera.io/). Finally, if you accidently close the Gitpod training window, you can reopen it by entering `gp preview https://training.seqera.io`.
 
 ### Reopening a Gitpod session
 
