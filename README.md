@@ -10,13 +10,21 @@ https://training.seqera.io/
 
 ## Gitpod tutorial
 
+Prerequisites:
+
+A chromium-based browser (e.g. Chrome, Firefox).
+
+To run Gitpod:
+
 To open a Gitpod Integrated Development Environment (IDE) with all programs installed and training material, click the following URL:
 
 https://gitpod.io/#https://github.com/seqeralabs/nf-training-public
 
-Its is recommended to use an up to chromium-based browsers (Chrome, Edge, Brave).
+**OR**
 
-Then you will need to login to either Github, GitLab or Bitbucket (and allow authorisation). 
+Install the Gitpod browser extension, follow the instructions [here](https://www.gitpod.io/docs/browser-extension). This will add a green Gitpod button to each Git repository for easy access to the environment. Then go to the git repository for the training (https://github.com/seqeralabs/nf-training-public), and click the green button.
+
+Next, you will need to login to either Github, GitLab or Bitbucket (and allow authorisation). 
 
 Once you have signed in, gitpod will load (skip prebuild, if asked):
 
@@ -34,6 +42,11 @@ Then the IDE should open up and look similar to the following:
 
 Gitpod gives you 50 hours per month to run the environment, with up to 4 parellel workspaces at a time.
 
-WARNING: Any running workspace will be automatically stopped after 30 minutes. You can open the environment again with the same method as before and either start a new workspace or continue from the previous one (if it is still active; Make sure you `cd` to nf-training in this case). 
+Any running workspace will be automatically stopped after 30 minutes. You can open the environment again by going to https://gitpod.io/workspaces and finding your previous environment, then selection the three dot button, and selection Open.
 
-This tutorial provides all the scripts, so don't worry if you have lost your environment. In the nf-training directory and in nf-training/scripts for individual snippets you can find all the code from the tutorial.
+Alternatively, you can start a new workspace by clicking the green gitpod button, or following this URL: 
+https://gitpod.io/#https://github.com/seqeralabs/nf-training-public
+
+This tutorial provides all the scripts, so don't worry if you have lost your environment. In the `nf-training` and `nf-training/scripts` directories, you can find the main scripts and individual snippets from the tutorial.
+
+If you want to change git provider (between GitHub, GitLab and BitBucket), go to https://gitpod.io/integrations. Then you will need to login and deactive the current provider.
