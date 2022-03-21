@@ -1,20 +1,24 @@
-# nf-training-public
+# Nextflow Training Guide. 
 
-Nextflow Training material. 
+Welcome to the Nextflow training repo. We are excited to have you on the path to writing reproducible and scalable scientific workflows using Nextflow. This guide complements the full Nextflow documentation - if you ever have any doubts, head over to the docs located [here](https://www.nextflow.io/docs/latest/).
+
+## Prerequisites:
+
+A chromium-based browser (e.g. Chrome, Firefox).
 
 ## Opening the training material in a browser
 
-To open the training, follow the following URL:
+Follow the following URL, which will lead you to the material we will go over:
 
 https://training.seqera.io/
 
-## Gitpod tutorial
+## Gitpod tutorial environment
 
-Gitpod is a Integrated Development Environment (IDE) with all programs installed and training material, to allow you to start the training with ease. 
+In addition to the training material, we also have a free cloud environment for you to conduct the training course.
 
-### Prerequisites:
+We use Gitpod, which is a Integrated Development Environment (IDE) with all programs installed and example datasets, which allows you to start the training with ease. 
 
-A chromium-based browser (e.g. Chrome, Firefox).
+If you wish to run the tutorial locally, then there are instructions on how to download all the programs with the training guide: https://training.seqera.io/
 
 ### Running Gitpod for the first time
 
@@ -24,9 +28,11 @@ To run Gitpod:
 
 https://gitpod.io/#https://github.com/seqeralabs/nf-training-public
 
+(which is our Github repository URL, prefixed with https://gitpod.io/#).
+
 **OR**
 
-Install the Gitpod browser extension, follow the instructions [here](https://www.gitpod.io/docs/browser-extension). This will add a green Gitpod button to each Git repository for easy access to the environment. Then go to the git repository for the training (https://github.com/seqeralabs/nf-training-public), and click the green button.
+Install the Gitpod browser extension, following the instructions [here](https://www.gitpod.io/docs/browser-extension). This will add a green Gitpod button to each Git repository for easy access to the environment. Then go to the git repository for the training (https://github.com/seqeralabs/nf-training-public), and click the green button.
 
 ![PNG](/asciidocs/img/gitpodbutton.png)
 
