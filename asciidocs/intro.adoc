@@ -136,6 +136,8 @@ TIP: The use of the operator `.flatten()` here is to split the two files into tw
 Please now copy the following example into your favourite text editor 
 and save it to a file named `hello.nf`.
 
+WARNING: For the Gitpod tutorial, make sure you are in the folder called `nf-training`
+
 Execute the script by entering the following command in your terminal:
 
 [source,cmd]

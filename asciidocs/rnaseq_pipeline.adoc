@@ -32,7 +32,7 @@ Run it by using the following command:
 
 Try to specify a different input parameter, for example:
 
-  nextflow run script1.nf --reads this/or/that
+  nextflow run script1.nf --reads "/workspace/nf-training-public/nf-training/data/ggal/gut_{1,2}.fq"
 
 [discrete]
 === Exercise

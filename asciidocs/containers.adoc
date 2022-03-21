@@ -183,11 +183,19 @@ TIP: An easier way is to mount a parent directory to an identical one in the con
 this allows you to use the same path when running it in the container e.g.
 
 ```bash
-docker run --volume $HOME:$HOME --workdir $PWD my-image \
+docker run --volume $PWD:$PWD --workdir $PWD my-image \
   salmon index -t $PWD/data/ggal/transcriptome.fa -i transcript-index
 ```
 
-Check the content of the `transcript-index` folder entering the command:
+or set a folder you want to mount as an environmental variable, called `DATA`:
+
+```
+DATA=/workspace/nf-training-public/nf-training/data
+docker run --volume $DATA:$DATA --workdir $PWD my-image \
+  salmon index -t $PWD/data/ggal/transcriptome.fa -i transcript-index
+```
+
+Now check the content of the `transcript-index` folder entering the command:
 
 ```bash
 ls -la transcript-index
@@ -372,6 +380,15 @@ to the Singularity Library.
 Conda is a popular package and environment manager. The built-in support for Conda
 allows Nextflow pipelines to automatically create and activate the Conda
 environment(s), given the dependencies specified by each process.
+
+For this Gitpod tutorial you need to activate conda by typing:
+
+
+```bash
+conda_activate 
+```
+
+You should now see that the beginning of your command prompt has `(base)` written. If you wish to deactivate conda at any point, simply enter `conda deactivate`.
 
 === Using conda
 
