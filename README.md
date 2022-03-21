@@ -36,6 +36,8 @@ Once you have signed in, gitpod will load (skip prebuild, if asked):
 
 Gitpod gives you 50 hours per month to run the environment, with up to 4 parellel workspaces at a time. So feel free to come back at any time and try the course at your own pace.
 
+It is useful to save the URL that is now your Gitpod environment. Later we can use this to return to the same closed environment later (so please take note now).
+
 3. Explore your Gitpod IDE
 
 You should see something similar to the following:
@@ -50,7 +52,9 @@ You should see something similar to the following:
 
 ### Reopening a Gitpod session
 
-Any running workspace will be automatically stopped after 30 minutes. You can open the environment again by going to https://gitpod.io/workspaces and finding your previous environment, then clicking the three dot button to the right, and selecting Open.
+Any running workspace will be automatically stopped after 30 minutes. You can open the environment again by going to https://gitpod.io/workspaces and finding your previous environment, then clicking the three dot button to the right, and selecting Open. 
+
+If you save the URL from your previous Gitpod environment, you can just paste this into your browser to open the previous environment. Environments are saved for up to two weeks, but don't rely on their existance, download any important files you want for posterity.
 
 Alternatively, you can start a new workspace by clicking the green gitpod button, or following the Gitpod URL: 
 https://gitpod.io/#https://github.com/seqeralabs/nf-training-public
