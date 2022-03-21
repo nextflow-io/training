@@ -33,3 +33,7 @@ Then the IDE should open up and look similar to the following:
 **The main window** allows you to view and edit files. Clicking on a file in the explorer will open it within the main window. Once a file is open, Markdown or HTML can be rendered using the preview option. We can also see the nf-trainin material in this window, or you can open in separately in another browser winder (https://training.seqera.io/)
 
 Gitpod gives you 50 hours per month to run the environment, with up to 4 parellel workspaces at a time.
+
+WARNING: Any running workspace will be automatically stopped after 30 minutes. You can open the environment again with the same method as before and either start a new workspace or continue from the previous one (if it is still active; Make sure you `cd` to nf-training in this case). 
+
+This tutorial provides all the scripts, so don't worry if you have lost your environment. In the nf-training directory and in nf-training/scripts for individual snippets you can find all the code from the tutorial.
