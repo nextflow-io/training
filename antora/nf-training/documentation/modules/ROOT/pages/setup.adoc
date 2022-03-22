@@ -10,7 +10,6 @@ Nextflow can be used on any POSIX compatible system (Linux, OS X, Windows Subsys
 
 * Bash
 * http://www.oracle.com/technetwork/java/javase/downloads/index.html[Java 8 (or later, up to 15)]
-* Git
 
 *Optional requirements for this tutorial*:
 
@@ -41,7 +40,7 @@ Then ensure that the downloaded binary is executable:
 chmod +x nextflow
 ----
 
-AND put the nextflow executable into your $PATH (e.g. /usr/local/bin)
+or put the nextflow executable into your $PATH (e.g. /usr/bin)
 
 === Training material 
 
@@ -50,7 +49,14 @@ in the terminal:
 
 [source,bash,linenums]
 ----
-git clone https://github.com/seqeralabs/nf-training-public.git
+curl https://s3-eu-west-1.amazonaws.com/seqeralabs.com/public/nf-training.tar.gz | tar xvz
+----
+
+Or alternatively if you have `wget` instead of curl:
+
+[source,bash,linenums]
+----
+wget -q -O- https://s3-eu-west-1.amazonaws.com/seqeralabs.com/public/nf-training.tar.gz | tar xvz
 ----
 
 Check the correct installation of `nextflow` by running the following command: 
@@ -116,10 +122,6 @@ image::gitpod.welcome.png[]
 **The terminal** allows you to run all the programs in the repository, for example `nextflow` and `docker` are installed. 
 
 **The main window** allows you to view and edit files. Clicking on a file in the explorer will open it within the main window. We can also see the nf-training material in this window, but if you find the space too small you can open it separately in another browser window (https://training.seqera.io/). Finally, if you accidently close the Gitpod training window, you can reopen it by entering `gp preview https://training.seqera.io`.
-
-4. Saving your files in Gitpod to local machine.
-
-To save your files, choose your file of interest, then either use the left/top hand side bar (File/Save As...) or use you're keyboard shortcut to save as (On Mac: CMD, shift, s), then choose `Show local`. This will open up a explorer to choose where to save your file on your local machine.
 
 ### Reopening a Gitpod session
 
