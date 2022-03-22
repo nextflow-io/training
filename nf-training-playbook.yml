@@ -1,0 +1,36 @@
+site:
+  title: Nextflow training 
+  # the 404 page and sitemap files only get generated when the url property is set
+  url: https://training.seqera.io
+  start_page: nf-training:ROOT:index.adoc
+
+content:
+  sources:
+  - url: .
+    start_path: ./antora/nf-training/documentation
+    edit_url: false
+    branches: HEAD
+
+ui:
+  bundle:
+    url: ./antora/nf-training/ui-bundle.zip
+    snapshot: true
+  supplemental_files: ./antora/nf-training/supplemental_ui
+
+urls:
+  redirect_facility: static
+
+output:
+  dir: ./build/nf-training
+  clean: true
+
+antora:
+  extensions:
+  - require: '@antora/lunr-extension'
+    languages: [en]
+
+asciidoc:
+  extensions:
+  - asciidoctor-kroki
+  attributes:
+     kroki-fetch-diagram: true

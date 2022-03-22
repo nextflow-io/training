@@ -5,7 +5,7 @@
 # directory if one has been set, or the root directory if
 # a base has not been set.
 
-publish = "build/"
+publish = "build/nf-training"
 
 # Default build command.
 command = """
@@ -14,11 +14,7 @@ command = """
     sdk install asciidoctorj
 
     # training
-    mkdir -p build
-    pushd asciidocs
-    asciidoctorj -D ../build index.adoc
-    cp -r img ../build/img
-    popd
+    make netlify    
 
     # hands-on
     mkdir -p build/hands-on

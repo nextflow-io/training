@@ -1,0 +1,7 @@
+name: nf-training
+version: final
+title: Nextflow training  
+nav:
+- modules/ROOT/nav.adoc
+
+

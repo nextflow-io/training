@@ -1,0 +1,310 @@
+= Operators 
+
+Operators are methods that allow you to connect channels to each other or to transform values emitted by a channel applying some user provided rules.
+
+There are seven main groups that are detailed in the documentation that cover:
+
+1. https://www.nextflow.io/docs/latest/operator.html#filtering-operators[Filtering operators]
+
+2. https://www.nextflow.io/docs/latest/operator.html#transforming-operators[Transforming operators]
+
+3. https://www.nextflow.io/docs/latest/operator.html#splitting-operators[Splitting operators]
+
+4. https://www.nextflow.io/docs/latest/operator.html#combining-operators[Combining operators]
+
+5. https://www.nextflow.io/docs/latest/operator.html#forking-operators[Forking operators]
+
+6. https://www.nextflow.io/docs/latest/operator.html#maths-operators[Maths operators]
+
+7. https://www.nextflow.io/docs/latest/operator.html#other-operators[Other operators]
+
+
+== Basic example
+
+[source,nextflow,linenums]
+----
+nums = Channel.from(1,2,3,4)         // <1>    
+square = nums.map { it -> it * it }  // <2>
+square.view()                        // <3>
+----
+
+image::channel-map.png[]
+
+<1> Create a queue channel emitting four values.
+<2> Create a new channel, transforming each number to its square.
+<3> Print the channel content.
+
+Operators can also be chained to implement custom behaviors, so the previous snippet can be written as:
+
+[source,nextflow,linenums]
+----
+Channel.from(1,2,3,4)
+        .map { it -> it * it }
+        .view()
+----
+
+== Basic operators
+
+Here we explore some of the most commonly used operators.
+
+=== view
+
+The `view` operator prints the items emitted by a channel to the console standard output, appending a
+_new line_ character to each item. For example:
+
+[source,nextflow,linenums]
+----
+Channel
+      .from('foo', 'bar', 'baz')
+      .view()
+----
+
+It prints:
+
+```
+foo
+bar
+baz
+```
+
+An optional _closure_ parameter can be specified to customize how items are printed. For example:
+
+[source,nextflow,linenums]
+----
+Channel
+      .from('foo', 'bar', 'baz')
+      .view { "- $it" }
+----
+
+It prints:
+
+----
+- foo
+- bar
+- baz
+----
+
+=== map
+
+The `map` operator applies a function of your choosing to every item emitted by a channel, and returns the items obtained as a new channel. The function applied is called the _mapping_ function and is expressed with a _closure_ as shown in the example below:
+
+[source,nextflow,linenums]
+----
+Channel
+    .from( 'hello', 'world' )
+    .map { it -> it.reverse() }
+    .view()
+----
+
+A `map` can associate to each element a generic _tuple_ containing any data as needed.
+
+[source,nextflow,linenums]
+----
+Channel
+    .from( 'hello', 'world' )
+    .map { word -> [word, word.size()] }
+    .view { word, len -> "$word contains $len letters" }
+----
+
+[discrete]
+=== Exercise
+
+Use `fromPath` to create a channel emitting the _fastq_ files matching the pattern `data/ggal/*.fq`,
+then chain with a map to return a pair containing the file name and the path itself.
+Finally print the resulting channel.
+
+.Click here for the answer:
+[%collapsible]
+====
+[source,nextflow,linenums]
+----
+Channel.fromPath('data/ggal/*.fq')
+        .map { file -> [ file.name, file ] }
+        .view { name, file -> "> $name : $file" }
+----
+====
+
+=== into
+
+The `into` operator connects a source channel to two or more target channels in such a way the values emitted by the source channel are copied to the target channels. For example:
+
+[source,nextflow,linenums]
+----
+Channel
+     .from( 'a', 'b', 'c' )
+     .into{ foo; bar }
+
+foo.view{ "Foo emits: " + it }
+bar.view{ "Bar emits: " + it }
+----
+
+TIP: Note the use in this example of curly brackets and the `;` as channel names separator. This is needed because the actual parameter of into is a _closure_ which defines the target channels to which the source one is connected.
+
+
+=== mix
+
+The `mix` operator combines the items emitted by two (or more) channels into a single channel.
+
+[source,nextflow,linenums]
+----
+c1 = Channel.from( 1,2,3 )
+c2 = Channel.from( 'a','b' )
+c3 = Channel.from( 'z' )
+
+c1 .mix(c2,c3).view()
+----
+
+```
+1
+2
+a
+3
+b
+z
+```
+
+IMPORTANT: The items in the resulting channel have the same order as in respective original channel,
+however there's no guarantee that the element of the second channel are appended after the elements
+of the first. Indeed in the above example the element `a` has been printed before `3`.
+
+=== flatten
+
+The `flatten` operator transforms a channel in such a way that every _tuple_ is flattened so that each entry is emitted as a sole element by the resulting channel.
+
+[source,nextflow,linenums]
+----
+foo = [1,2,3]
+bar = [4,5,6]
+
+Channel
+    .from(foo, bar)
+    .flatten()
+    .view()
+----
+
+The above snippet prints:
+
+```
+1
+2
+3
+4
+5
+6
+```
+
+=== collect
+
+The `collect` operator collects all the items emitted by a channel to a list and returns the resulting object as a sole emission.
+
+[source,nextflow,linenums]
+----
+Channel
+    .from( 1, 2, 3, 4 )
+    .collect()
+    .view()
+----
+
+It prints a single value:
+
+```
+[1,2,3,4]
+```
+
+TIP: The result of the `collect` operator is a *value* channel.
+
+=== groupTuple
+
+The `groupTuple` operator collects tuples (or lists) of values emitted by the source channel, grouping together the elements that share the same key. Finally it emits a new tuple object for each distinct key collected.
+
+Try the following example:
+
+[source,nextflow,linenums]
+----
+Channel
+     .from( [1,'A'], [1,'B'], [2,'C'], [3, 'B'], [1,'C'], [2, 'A'], [3, 'D'] )
+     .groupTuple()
+     .view()
+----
+
+It shows:
+
+```
+[1, [A, B, C]]
+[2, [C, A]]
+[3, [B, D]]
+```
+
+This operator is useful to process together all elements for which there is a common
+property or grouping key.
+
+[discrete]
+=== Exercise
+
+Use `fromPath` to create a channel emitting all the files in the folder `data/meta/`,
+then use a `map` to associate to each file the `baseName` prefix. Finally group together all
+files having the same common prefix.
+
+.Click here for the answer:
+[%collapsible]
+====
+[source,nextflow,linenums]
+----
+Channel.fromPath('data/meta/*')
+        .map { file -> tuple(file.baseName, file) }
+        .groupTuple()
+        .view { baseName, file -> "> $baseName : $file" }
+----
+====
+
+=== join
+
+The `join` operator creates a channel that joins together the items emitted by two channels for which there exists a matching key. The key is defined, by default, as the first element in each item emitted.
+
+[source,nextflow,linenums]
+----
+left = Channel.from(['X', 1], ['Y', 2], ['Z', 3], ['P', 7])
+right= Channel.from(['Z', 6], ['Y', 5], ['X', 4])
+left.join(right).view()
+----
+
+The resulting channel emits:
+
+```
+[Z, 3, 6]
+[Y, 2, 5]
+[X, 1, 4]
+```
+
+TIP: Notice 'P' is missing in the final result
+
+=== branch
+
+The `branch` operator allows you to forward the items emitted by a source channel to one or more output channels, choosing one of them at a time.
+
+The selection criteria is defined by specifying a closure that provides one or more boolean expressions, each of which is identified by a unique label. On the first expression that evaluates to a true value, the current item is bound to a named channel as the label identifier.
+For example:
+
+[source,nextflow,linenums]
+----
+Channel
+    .from(1,2,3,40,50)
+    .branch {
+        small: it < 10
+        large: it > 10
+    }
+    .set { result }
+
+ result.small.view { "$it is small" }
+ result.large.view { "$it is large" }
+----
+
+NOTE: The `branch` operator returns a multi-channel object i.e. a variable that holds 
+more than one channel object.
+
+
+== More resources
+
+Check the https://www.nextflow.io/docs/latest/operator.html[operators documentation] on Nextflow web site.
+
+

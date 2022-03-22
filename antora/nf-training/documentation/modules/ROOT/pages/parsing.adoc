@@ -1,0 +1,222 @@
+= Parsing datasets into Nextflow
+
+An important skill in Nextflow is to know how to properly parse files into your processes.
+
+== Text files
+
+The `splitText` operator allows you to split multi-line strings or text file items, emitted by a source channel into chunks containing n lines, which will be emitted by the resulting channel. See:
+
+----
+Channel
+     .fromPath('data/meta/random.txt') // <1>
+     .splitText()                      // <2>
+     .view()                           // <3>
+----
+
+<1> Instructs Nextflow to make a channel from the path "data/meta/random.txt".
+<2> The `splitText` operator splits each item into chunks of one line by default.
+<3> View contents of the channel.
+
+
+You can define the number of lines in each chunk by using the parameter `by`, as shown in the following example:
+
+----
+Channel
+     .fromPath('data/meta/random.txt')
+     .splitText( by: 2 )
+     .subscribe {
+         print it;
+         print "--- end of the chunk ---\n"
+     }
+----
+
+TIP: The `subscribe` operator permits to execute a user defined function each time a new value is emitted by the source channel.
+
+An optional closure can be specified in order to transform the text chunks produced by the operator. The following example shows how to split text files into chunks of 10 lines and transform them into capital letters:
+
+----
+Channel
+   .fromPath('data/meta/random.txt')
+   .splitText( by: 10 ) { it.toUpperCase() }
+   .view()
+----
+
+You can also make counts for each line:
+
+----
+count=0
+
+Channel
+   .fromPath('data/meta/random.txt')
+   .splitText()
+   .view { "${count++}: ${it.toUpperCase().trim()}" }
+
+----
+
+Finally, you can also use the operator on plain files (outside of the channel context), as so:
+
+----
+  def f = file('data/meta/random.txt')
+  def lines = f.splitText()
+  def count=0
+  for( String row : lines ) {
+    log.info "${count++} ${row.toUpperCase()}"
+  }
+----
+
+== Comma separate values (.csv)
+
+The `splitCsv` operator allows you to parse text items emitted by a channel, that are formatted using the CSV format. 
+
+It then splits them into records or groups them into a list of records with a specified length.
+
+In the simplest case, just apply the `splitCsv` operator to a channel emitting a CSV formatted text files or text entries, to view only the first and fourth columns. For example:
+
+----
+  Channel
+    .fromPath("data/meta/patients_1.csv")
+    .splitCsv()
+    // row is a list object 
+    .view { row -> "${row[0]},${row[3]}" }
+----
+
+When the CSV begins with a header line defining the column names, you can specify the parameter `header: true` which allows you to reference each value by its name, as shown in the following example:
+
+----
+  Channel
+    .fromPath("data/meta/patients_1.csv")
+    .splitCsv(header: true)
+    // row is a list object 
+    .view { row -> "${row.patient_id},${row.num_samples}" }
+----
+
+Alternatively you can provide custom header names by specifying a the list of strings in the header parameter as shown below:
+
+----
+  Channel
+    .fromPath("data/meta/patients_1.csv")
+    .splitCsv(header: ['col1', 'col2', 'col3', 'col4', 'col5'] )
+    // row is a list object 
+    .view { row -> "${row.col1},${row.col4}" }
+----
+
+You can also process multiple csv files at the same time:
+
+----
+    Channel
+      .fromPath("data/meta/patients_*.csv") // <-- just use a pattern
+      .splitCsv(header:true)
+      .view { row -> "${row.patient_id}\t${row.num_samples}" }
+----
+
+TIP: Notice that you can change the output format simply by adding a different delimiter.
+
+Finally, you can also operate on csv files outside the channel context, as so:
+
+----
+def f = file('data/meta/patients_1.csv')
+  def lines = f.splitCsv()
+  for( List row : lines ) {
+    log.info "${row[0]} -- ${row[2]}"
+  }
+----
+
+== Tab separated values (.tsv)
+
+Parsing tsv files works in a similar way, just adding the `sep:'\t'` option in the `splitCsv` context:
+
+----
+ Channel
+      .fromPath("data/meta/regions.tsv", checkIfExists:true)
+      // use `sep` option to parse TAB separated files
+      .splitCsv(sep:'\t')
+      // row is a list object 
+      .view()
+----
+
+[discrete]
+=== Exercise
+
+Try using the tab separation technique on the file "data/meta/regions.tsv", but print just the first column, and remove the header.
+
+.Answer:
+[%collapsible]
+====
+ Channel
+      .fromPath("data/meta/regions.tsv", checkIfExists:true)
+      // use `sep` option to parse TAB separated files
+      .splitCsv(sep:'\t', header:true )
+      // row is a list object 
+      .view { row -> "${row.patient_id}" }
+====
+
+== More complex file formats
+
+=== JSON
+
+We can also easily parse the JSON file format using the following groovy schema:
+
+----
+import groovy.json.JsonSlurper
+
+def f = file('data/meta/regions.json')
+def records = new JsonSlurper().parse(f)
+
+
+for( def entry : records ) {
+  log.info "$entry.patient_id -- $entry.feature"
+}
+----
+
+IMPORTANT: When using an older JSON version, you may need to replace `parse(f)` with `parseText(f.text)`
+
+=== YAML
+
+In a similar way, this is a way to parse YAML files: 
+
+----
+import org.yaml.snakeyaml.Yaml
+
+def f = file('data/meta/regions.json')
+def records = new Yaml().load(f)
+
+
+for( def entry : records ) {
+  log.info "$entry.patient_id -- $entry.feature"
+}
+----
+
+=== Storage of parsers into modules
+
+The best way to store parser scripts is to keep them in a nextflow module file. 
+
+This follows the DSL2 way of working.
+
+See the following nextflow script:
+
+----
+nextflow.preview.dsl=2
+
+include{ parseJsonFile } from './modules/parsers.nf'
+
+process foo {
+  input:
+  tuple val(meta), path(data_file)
+
+  """
+  echo your_command $meta.region_id $data_file
+  """
+}
+
+workflow {
+    Channel.fromPath('data/meta/regions*.json') \
+      | flatMap { parseJsonFile(it) } \
+      | map { entry -> tuple(entry,"/some/data/${entry.patient_id}.txt") } \
+      | foo
+}
+----
+
+To get this script to work, first we need to create a file called `parsers.nf`, and store it in the modules folder in the current directory.
+
+This file should have the `parseJsonFile` function present, then Nextflow will use this as a custom function within the workflow scope.
+
