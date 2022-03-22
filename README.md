@@ -36,7 +36,11 @@ Install the Gitpod browser extension, following the instructions [here](https://
 
 ![PNG](/asciidocs/img/gitpodbutton.png)
 
-2. Login to either Github, GitLab or Bitbucket (and allow authorisation). 
+2. Login to your Github account (and allow authorisation). 
+
+You may need to close the window at each stage and click the gitpod link again. 
+
+For BitBucket or GitLab, you may have to sign into Gitpod and change your integration on the following page: https://gitpod.io/integrations. 
 
 Once you have signed in, gitpod will load (skip prebuild, if asked):
 
@@ -44,7 +48,7 @@ Once you have signed in, gitpod will load (skip prebuild, if asked):
 
 Gitpod gives you 50 hours per month to run the environment, with up to 4 parellel workspaces at a time. So feel free to come back at any time and try the course at your own pace.
 
-It is useful to save the URL that is now your Gitpod environment. Later we can use this to return to the same closed environment later (so please take note now).
+It is useful to save the URL that is now your Gitpod environment. Later, we can use this to return to the same closed environment (so please take note of it now).
 
 3. Explore your Gitpod IDE
 
