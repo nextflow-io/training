@@ -85,7 +85,7 @@ https://training.seqera.io/
 
 To run Gitpod:
 
-1. Either: click the following URL:
+- Either: click the following URL:
 
 https://gitpod.io/#https://github.com/seqeralabs/nf-training-public
 
@@ -97,7 +97,7 @@ Install the Gitpod browser extension, following the instructions https://www.git
 
 image::gitpodbutton.png[]
 
-2. Login to your Github account (and allow authorisation). 
+- Login to your Github account (and allow authorisation). 
 
 You may need to close the window at each stage and click the gitpod link again. 
 
@@ -111,7 +111,7 @@ Gitpod gives you 50 hours per month to run the environment, with up to 4 parelle
 
 It is useful to save the URL that is now your Gitpod environment. Later, we can use this to return to the same closed environment (so please take note of it now).
 
-3. Explore your Gitpod IDE
+- Explore your Gitpod IDE
 
 You should see something similar to the following:
 
