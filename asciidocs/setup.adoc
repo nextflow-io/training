@@ -95,7 +95,7 @@ https://gitpod.io/#https://github.com/seqeralabs/nf-training-public
 
 Install the Gitpod browser extension, following the instructions https://www.gitpod.io/docs/browser-extension[here]. This will add a green Gitpod button to each Git repository for easy access to the environment. Then go to the git repository for the training (https://github.com/seqeralabs/nf-training-public), and click the green button.
 
-![PNG](/asciidocs/img/gitpodbutton.png)
+image::gitpodbutton.png[]
 
 2. Login to your Github account (and allow authorisation). 
 
