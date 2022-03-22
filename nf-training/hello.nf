@@ -25,7 +25,7 @@ process convertToUpper {
     stdout into result_ch
 
     """
-    rev $y
+    cat $y | tr '[a-z]' '[A-Z]' 
     """
 }
 
