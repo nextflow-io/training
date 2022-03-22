@@ -26,12 +26,11 @@ tasks:
       echo 'init script' # runs during prebuild
       echo 'start script'
       curl -s https://get.nextflow.io | bash
-      mkdir /workspace/bin
+      chmod +x nextflow
+      sudo mv nextflow /usr/local/bin/
       docker pull nextflow/rnaseq-nf
-
+      
     command: |
-      mv ./nextflow /workspace/bin/nextflow  
-      export PATH=/workspace/bin:$PATH
       sudo apt install  -y tree
       sudo apt install  -y graphviz
       unset JAVA_TOOL_OPTIONS
