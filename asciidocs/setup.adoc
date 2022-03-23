@@ -10,6 +10,7 @@ Nextflow can be used on any POSIX compatible system (Linux, OS X, Windows Subsys
 
 * Bash
 * http://www.oracle.com/technetwork/java/javase/downloads/index.html[Java 8 (or later, up to 15)]
+* Git
 
 *Optional requirements for this tutorial*:
 
@@ -40,7 +41,7 @@ Then ensure that the downloaded binary is executable:
 chmod +x nextflow
 ----
 
-or put the nextflow executable into your $PATH (e.g. /usr/bin)
+AND put the nextflow executable into your $PATH (e.g. /usr/local/bin)
 
 === Training material 
 
@@ -49,14 +50,7 @@ in the terminal:
 
 [source,bash,linenums]
 ----
-curl https://s3-eu-west-1.amazonaws.com/seqeralabs.com/public/nf-training.tar.gz | tar xvz
-----
-
-Or alternatively if you have `wget` instead of curl:
-
-[source,bash,linenums]
-----
-wget -q -O- https://s3-eu-west-1.amazonaws.com/seqeralabs.com/public/nf-training.tar.gz | tar xvz
+git clone https://github.com/seqeralabs/nf-training-public.git
 ----
 
 Check the correct installation of `nextflow` by running the following command: 
