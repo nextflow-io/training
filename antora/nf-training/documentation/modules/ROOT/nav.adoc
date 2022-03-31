@@ -1,4 +1,4 @@
-* xref:welcome.adoc[Welcome]
+* xref:index.adoc[Welcome]
 * xref:setup.adoc[Environment setup]
 * xref:intro.adoc[Introduction]
 * xref:rnaseq_pipeline.adoc[Simple RNA-Seq pipeline]
