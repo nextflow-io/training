@@ -74,3 +74,8 @@ https://gitpod.io/#https://github.com/seqeralabs/nf-training-public
 This tutorial provides all the scripts, so don't worry if you have lost your environment. In the `nf-training` and `nf-training/scripts` directories, you can find the main scripts and individual snippets used in the tutorial.
 
 If you want to change git provider (between GitHub, GitLab and BitBucket), go to https://gitpod.io/integrations. Then you will need to login and deactive the current provider.
+
+### Copyright
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a>
+
+Copyright 2022, Seqera Labs. All examples and descriptions are licensed under the <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.
