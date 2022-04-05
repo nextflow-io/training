@@ -1,9 +1,9 @@
 /* 
  * pipeline input parameters 
  */
-params.reads = "$baseDir/data/ggal/gut_{1,2}.fq"
-params.transcriptome_file = "$baseDir/data/ggal/transcriptome.fa"
-params.multiqc = "$baseDir/multiqc"
+params.reads = "$projectDir/data/ggal/gut_{1,2}.fq"
+params.transcriptome_file = "$projectDir/data/ggal/transcriptome.fa"
+params.multiqc = "$projectDir/multiqc"
 params.outdir = "results"
 
 log.info """\
@@ -43,29 +43,29 @@ process quantification {
      
     input:
     path salmon_index from index_ch
-    tuple pair_id, path(reads) from read_pairs_ch
+    tuple val(sample_id), path(reads) from read_pairs_ch
  
     output:
-    path pair_id into quant_ch
+    path sample_id into quant_ch
  
     script:
     """
-    salmon quant --threads $task.cpus --libType=U -i $salmon_index -1 ${reads[0]} -2 ${reads[1]} -o $pair_id
+    salmon quant --threads $task.cpus --libType=U -i $salmon_index -1 ${reads[0]} -2 ${reads[1]} -o $sample_id
     """
 }
 
 process fastqc {
-    tag "FASTQC on $pair_id"
+    tag "FASTQC on $sample_id"
 
     input:
-    tuple pair_id, path(reads) from read_pairs_ch
+    tuple sample_id, path(reads) from read_pairs_ch
 
     output:
-    path "fastqc_${pair_id}_logs" into fastqc_ch
+    path "fastqc_${sample_id}_logs" into fastqc_ch
 
     script:
     """
-    mkdir fastqc_${pair_id}_logs
-    fastqc -o fastqc_${pair_id}_logs -f fastq -q ${reads}
+    mkdir fastqc_${sample_id}_logs
+    fastqc -o fastqc_${sample_id}_logs -f fastq -q ${reads}
     """  
 }

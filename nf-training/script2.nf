@@ -1,9 +1,9 @@
 /* 
  * pipeline input parameters 
  */
-params.reads = "$baseDir/data/ggal/*_{1,2}.fq"
-params.transcriptome_file = "$baseDir/data/ggal/transcriptome.fa"
-params.multiqc = "$baseDir/multiqc"
+params.reads = "$projectDir/data/ggal/*_{1,2}.fq"
+params.transcriptome_file = "$projectDir/data/ggal/transcriptome.fa"
+params.multiqc = "$projectDir/multiqc"
 params.outdir = "results"
 
 log.info """\
