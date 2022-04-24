@@ -24,7 +24,7 @@ tasks:
     init: |
       echo 'init script' # runs during prebuild
       echo 'start script'
-
+      conda init bash
       
     command: |
       docker pull nextflow/rnaseq-nf
