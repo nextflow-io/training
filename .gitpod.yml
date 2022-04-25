@@ -26,3 +26,4 @@ tasks:
     command: |
       docker pull nextflow/rnaseq-nf
       cd nf-training
+      conda init bash
