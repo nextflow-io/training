@@ -381,12 +381,7 @@ Conda is a popular package and environment manager. The built-in support for Con
 allows Nextflow pipelines to automatically create and activate the Conda
 environment(s), given the dependencies specified by each process.
 
-For this Gitpod tutorial you need to activate conda by typing:
-
-
-```bash
-conda_activate 
-```
+For this Gitpod tutorial you need to open a new terminal to ensure that conda is activated (see the + button on the terminal).
 
 You should now see that the beginning of your command prompt has `(base)` written. If you wish to deactivate conda at any point, simply enter `conda deactivate`.
 
