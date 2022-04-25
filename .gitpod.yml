@@ -14,7 +14,7 @@ github:
     addBadge: false
 
 # Old container: nfcore/gitpod:latest 
-image: chriswyatt/seqera_training
+image: nfcore/gitpod:latest 
 
 # List the start up tasks. Learn more https://www.gitpod.io/docs/config-start-tasks/
 tasks:
