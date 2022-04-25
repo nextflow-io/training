@@ -22,13 +22,7 @@ tasks:
     command: gp await-port 23000 && gp preview https://training.seqera.io    
 
   - name: Download Nextflow Tutorial
-    init: |
-      echo 'init script' # runs during prebuild
-      echo 'start script'
-      conda init bash
       
     command: |
       docker pull nextflow/rnaseq-nf
-      sudo apt install  -y tree
-      sudo apt install  -y graphviz
       cd nf-training
