@@ -23,8 +23,8 @@ tasks:
 
   - name: Download Nextflow Tutorial
       
-    init: |
-      docker pull nextflow/rnaseq-nf
+    command: |
       cd nf-training
       conda init bash
       unset JAVA_TOOL_OPTIONS
+      docker pull nextflow/rnaseq-nf
