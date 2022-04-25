@@ -479,6 +479,86 @@ def f = file('data/meta/patients_1.csv')
   }
 ----
 
+[discrete]
+=== Exercise
+
+Try inputting fastq reads to the RNA-Seq workflow from earlier using `.splitCSV`.
+
+.Click here for the answer:
+[%collapsible]
+====
+Add a csv text file containing the following, as example input with the name "fastq.csv":
+
+[source,nextflow,linenums]
+----
+gut,/workspace/nf-training-public/nf-training/data/ggal/gut_1.fq,/workspace/nf-training-public/nf-training/data/ggal/gut_2.fq
+----
+
+Then replace the input channel for the reads in `script7.nf`. Changing the following lines:
+
+[source,nextflow,linenums]
+----
+Channel 
+    .fromFilePairs( params.reads, checkIfExists: true )
+    .into { read_pairs_ch; read_pairs2_ch } 
+----
+
+To a splitCsv channel factory input:
+
+[source,nextflow,linenums]
+----
+Channel 
+    .fromPath("fastq.csv")
+    .splitCsv()
+    .view () { row -> "${row[0]},${row[1]},${row[2]}" }
+    .into { read_pairs_ch; read_pairs2_ch } 
+----
+
+Finally, change the cardinality of the processes that use the input data. For example, for the quantification process I change it from:
+
+[source,nextflow,linenums]
+----
+process quantification {
+    tag "$sample_id"
+         
+    input:
+    path salmon_index from index_ch
+    tuple val(sample_id), path(reads) from read_pairs_ch
+ 
+    output:
+    path sample_id into quant_ch
+ 
+    script:
+    """
+    salmon quant --threads $task.cpus --libType=U -i $salmon_index -1 ${reads[0]} -2 ${reads[1]} -o $sample_id
+    """
+}
+----
+
+To:
+
+[source,nextflow,linenums]
+----
+process quantification {
+    tag "$sample_id"
+         
+    input:
+    path salmon_index from index_ch
+    tuple val(sample_id), path(reads1), path(reads2) from read_pairs_ch
+ 
+    output:
+    path sample_id into quant_ch
+ 
+    script:
+    """
+    salmon quant --threads $task.cpus --libType=U -i $salmon_index -1 ${reads1} -2 ${reads2} -o $sample_id
+    """
+}
+----
+
+Repeat for the fastqc step. Now the workflow should run from a CSV file.
+====
+
 === Tab separated values (.tsv)
 
 Parsing tsv files works in a similar way, just adding the `sep:'\t'` option in the `splitCsv` context:
