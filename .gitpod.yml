@@ -27,3 +27,4 @@ tasks:
       docker pull nextflow/rnaseq-nf
       cd nf-training
       conda init bash
+      unset JAVA_TOOL_OPTIONS
