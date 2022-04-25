@@ -23,7 +23,7 @@ tasks:
 
   - name: Download Nextflow Tutorial
       
-    command: |
+    init: |
       docker pull nextflow/rnaseq-nf
       cd nf-training
       conda init bash
