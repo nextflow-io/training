@@ -13,8 +13,8 @@ github:
     # add a "Review in Gitpod" button to pull requests (defaults to false)
     addBadge: false
 
-image:
-  file: .gitpod.Dockerfile
+# Old container: nfcore/gitpod:latest 
+image: nfcore/gitpod:latest 
 
 # List the start up tasks. Learn more https://www.gitpod.io/docs/config-start-tasks/
 tasks:
@@ -22,18 +22,9 @@ tasks:
     command: gp await-port 23000 && gp preview https://training.seqera.io    
 
   - name: Download Nextflow Tutorial
-    init: |
-      echo 'init script' # runs during prebuild
-      echo 'start script'
-
       
     command: |
-      curl -s https://get.nextflow.io | bash
-      chmod +x nextflow
-      sudo mv nextflow /usr/local/bin/
-      docker pull nextflow/rnaseq-nf
-      sudo apt install  -y tree
-      sudo apt install  -y graphviz
-      unset JAVA_TOOL_OPTIONS
-      alias conda_activate=". /opt/conda/etc/profile.d/conda.sh; conda activate base"
       cd nf-training
+      conda init bash
+      unset JAVA_TOOL_OPTIONS
+      docker pull nextflow/rnaseq-nf
