@@ -382,11 +382,14 @@ Consider the following example:
 
 [source,nextflow,linenums]
 ----
+ch1 = Channel.from(1,2,3)
+ch2 = Channel.from('a','b','c')
+
 process foo {
   echo true
   input:
-  val x from Channel.from(1,2,3)
-  val y from Channel.from('a','b','c')
+  val x from ch1
+  val y from ch2
   script:
    """
    echo $x and $y
