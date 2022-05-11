@@ -29,7 +29,6 @@ tasks:
       curl -s https://get.nextflow.io | bash
       chmod +x nextflow
       sudo mv nextflow /usr/local/bin/
-      export NXF_VER=21.10.0
       docker pull nextflow/rnaseq-nf
       sudo apt install  -y tree
       sudo apt install  -y graphviz
