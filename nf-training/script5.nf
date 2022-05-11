@@ -23,10 +23,10 @@ log.info """\
 process index {
     
     input:
-    path transcriptome from params.transcriptome_file
+    path transcriptome
      
     output:
-    path 'salmon_index' into index_ch
+    path 'salmon_index'
 
     script: 
     """
@@ -42,11 +42,11 @@ Channel
 process quantification {
      
     input:
-    path salmon_index from index_ch
-    tuple val(sample_id), path(reads) from read_pairs_ch
+    path salmon_index
+    tuple val(sample_id), path(reads)
  
     output:
-    path sample_id into quant_ch
+    path "$sample_id"
  
     script:
     """
@@ -58,14 +58,28 @@ process fastqc {
     tag "FASTQC on $sample_id"
 
     input:
-    tuple sample_id, path(reads) from read_pairs_ch
+    tuple sample_id, path(reads)
 
     output:
-    path "fastqc_${sample_id}_logs" into fastqc_ch
+    path "fastqc_${sample_id}_logs"
 
     script:
     """
     mkdir fastqc_${sample_id}_logs
     fastqc -o fastqc_${sample_id}_logs -f fastq -q ${reads}
     """  
+}
+
+workflow {
+
+    index_ch = index(Channel.from(params.transcriptome))
+
+    Channel
+    .fromFilePairs( params.reads, checkIfExists: true )
+    .set { read_pairs_ch } 
+
+    quant_ch = quantification(index_ch, read_pairs_ch)
+
+    fastqc_ch = fastqc(read_pairs_ch)   
+
 }

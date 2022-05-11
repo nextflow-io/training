@@ -23,12 +23,12 @@ log.info """\
 process index {
     
     input:
-    path transcriptome from params.transcriptome_file
+    path transcriptome
      
     output:
-    path 'salmon_index' into index_ch
+    path 'salmon_index'
 
-    script:       
+    script: 
     """
     salmon index --threads $task.cpus -t $transcriptome -i salmon_index
     """
@@ -37,17 +37,16 @@ process index {
 
 Channel 
     .fromFilePairs( params.reads, checkIfExists: true )
-    .into { read_pairs_ch; read_pairs2_ch } 
+    .set { read_pairs_ch } 
 
 process quantification {
-    tag "$sample_id"
-         
+     
     input:
-    path salmon_index from index_ch
-    tuple val(sample_id), path(reads) from read_pairs_ch
+    path salmon_index
+    tuple val(sample_id), path(reads)
  
     output:
-    path sample_id into quant_ch
+    path "$sample_id"
  
     script:
     """
@@ -59,25 +58,24 @@ process fastqc {
     tag "FASTQC on $sample_id"
 
     input:
-    tuple val(sample_id), path(reads) from read_pairs2_ch
+    tuple sample_id, path(reads)
 
     output:
-    path "fastqc_${sample_id}_logs" into fastqc_ch
-
+    path "fastqc_${sample_id}_logs"
 
     script:
     """
     mkdir fastqc_${sample_id}_logs
     fastqc -o fastqc_${sample_id}_logs -f fastq -q ${reads}
     """  
-}  
+}
  
 
 process multiqc {
     publishDir params.outdir, mode:'copy'
        
     input:
-    path '*' from quant_ch.mix(fastqc_ch).collect()
+    path '*''
     
     output:
     path 'multiqc_report.html'
@@ -88,7 +86,21 @@ process multiqc {
     """
 } 
 
+workflow {
 
-workflow.onComplete { 
-	log.info ( workflow.success ? "\nDone! Open the following report in your browser --> $params.outdir/multiqc_report.html\n" : "Oops .. something went wrong" )
+    index_ch = index(Channel.from(params.transcriptome))
+
+    Channel
+    .fromFilePairs( params.reads, checkIfExists: true )
+    .set { read_pairs_ch } 
+
+    quant_ch = quantification(index_ch, read_pairs_ch)
+
+    fastqc_ch = fastqc(read_pairs_ch)   
+
+    multiqc(quant_ch.mix(fastqc_ch).collect())
+}
+
+workflow.onComplete {
+   log.info ( workflow.success ? "\nDone! Open the following report in your browser --> $params.outdir/multiqc_report.html\n" : "Oops .. something went wrong" )
 }

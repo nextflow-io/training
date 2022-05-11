@@ -23,14 +23,19 @@ log.info """\
 process index {
     
     input:
-    path transcriptome from params.transcriptome_file
+    path transcriptome
      
     output:
-    path 'salmon_index' into index_ch
+    path 'salmon_index'
 
     script:       
     """
     salmon index --threads $task.cpus -t $transcriptome -i salmon_index
     """
 }
- 
+
+workflow {
+
+    index_ch = index(Channel.from(params.transcriptome))
+
+}
