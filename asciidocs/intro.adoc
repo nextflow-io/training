@@ -80,10 +80,10 @@ greeting_ch = Channel.from(params.greeting) <3>
 process splitLetters { <4>
 
     input: <5>
-    val x from greeting_ch <6>
+    val x <6>
 
     output: <7>
-    file 'chunk_*' into letters_ch <8>
+    file 'chunk_*' <8>
 
     """ <9>
     printf '$x' | split -b 6 - chunk_  <10>
@@ -93,41 +93,48 @@ process splitLetters { <4>
 process convertToUpper { <13>
 
     input:  <14>
-    file y from letters_ch.flatten() <15>
+    file y <15>
 
     output: <16>
-    stdout into result_ch <17>
+    stdout <17>
 
     """ <18>
     cat $y | tr '[a-z]' '[A-Z]'  <19>
-    """ //<20>
-} //<21>
+    """ <20>
+} <21>
 
-result_ch.view{ it }  //<22>
+workflow{ <22>
+    letters_ch = splitLetters(greeting_ch) <23>
+    results_ch = convertToUpper(letters_ch.flatten()) <24>
+    results_ch.view{ it } <25>
+} <26>
 ----
 <1> The code begins with a shebang which declares Nextflow as the interepreter.
 <2> Declares a parameter `greeting` that is initialized with the value 'Hello world!'.
 <3> Initalises a `channel` labelled `greeting_ch`, which contains the value from `params.greeting`. Channels are the necessary input type for processes in Nextflow.
 <4> Begins the first process defined as `splitLetters`.
 <5> Input declaration for the `splitLetters` process. Inputs can be values: `val`, files: `file`, paths `path` or other qualifiers (https://www.nextflow.io/docs/latest/process.html#inputs[See here])
-<6> Tells the `process` to expect an input value (`val`) `from` the channel `greeting_ch`, that we assign to the variable 'x'. 
+<6> Tells the `process` to expect an input value (`val`), that we assign to the variable 'x'. 
 <7> Output declaration for the `splitLetters` process.
-<8> Tells the process to expect output file/s (`file`) containing 'chunk_*' as output from the script and send the files to the `channel` `letters_ch`. 
+<8> Tells the process to expect output file/s (`file`) containing 'chunk_*' as output from the script and send the output as a channel. 
 <9> Triple quote marks intiate the code block to execute in this `process`.
 <10> Code to execute, printing the `input` value x (called using the dollar [$] symbol prefix), and splitting the string into chunks of 6 characters long ("Hello " and "world!") and saving to files: chunk_aa and chunk_ab.
 <11> Triple quote marks the end of the code block.
 <12> End of first process block.
 <13> Begin second process defined as `convertToUpper`.
 <14> Input declaration for the `convertToUpper` `process`.
-<15> Tells the `process` to expect `input` file/s (`file`; e.g. chunk_aa and chunk_ab) from the `letter_ch`, that we assign to the variable 'y'. 
+<15> Tells the `process` to expect `input` file/s (`file`; e.g. chunk_aa and chunk_ab), that we assign to the variable 'y'. 
 <16> Output declaration for the `convertToUpper` process.
-<17> Tells the process to expect output as standard output (stdout) and direct this `into` the `result_ch` channel.
+<17> Tells the process to expect output as standard output (stdout) and direct this output as a channel.
 <18> Triple quote marks intiate the code block to execute in this `process`.
 <19> Script to read files (cat) using the '$y' input variable, then pipe to uppercase conversion, outputting to standard output.
 <20> Triple quote marks the end of the code block.
 <21> End of first `process` block.
-<22> The final output (in the `result_ch`) is printed to screen using the `view` operator (appended onto the channel name). 
-
+<22> Start of the workflow scope, where each process can be called. 
+<23> Execute the `process` splitLetters on the `greeting_ch` (aka greeting channel), and store the output in the channel `letters_ch`.
+<24> Execute the `process` `convertToUpper`` on the letters channel `letters_ch`, which is flattened using the operator `.flatten()`, which transforms the input channel in such a way that every item is a separate element. We store the output in the channel `results_ch`.
+<25> The final output (in the `results_ch`) is printed to screen using the `view` operator (appended onto the channel name). 
+<26> End of the workflow scope.
 
 TIP: The use of the operator `.flatten()` here is to split the two files into two separate items to be put through the next process (else they would treat them as a single element).
 
@@ -149,11 +156,11 @@ The output will look similar to the text shown below:
 
 [source,cmd,linenums]
 ----
-N E X T F L O W  ~  version 21.04.3
-Launching `hello.nf` [confident_kowalevski] - revision: a3f5a9e46a
+N E X T F L O W  ~  version 22.04.2
+Launching `hello.nf` [tiny_venter] DSL2 - revision: 6879fb9372
 executor >  local (3)
-[0d/59d203] process > splitLetters (1)   [100%] 1 of 1 ✔
-[9f/1dd42a] process > convertToUpper (2) [100%] 2 of 2 ✔
+[26/004297] process > splitLetters (1)   [100%] 1 of 1 ✔
+[8a/537930] process > convertToUpper (1) [100%] 2 of 2 ✔
 HELLO 
 WORLD!
 ----
@@ -172,7 +179,7 @@ Where the standard output shows (line by line):
 
 * *6-7*: Followed by the printed result string from stdout.
 
-TIP: The hexadecimal numbers, like `0d/59d203`, identify the unique process
+TIP: The hexadecimal numbers, like `8a/537930`, identify the unique process
 execution. These numbers are also the prefix of the directories where each
 process is executed. You can inspect the files produced by changing to the directory
 `$PWD/work` and using these numbers to find the process-specific
@@ -183,10 +190,7 @@ for each input file. Therefore, in the previous example the work directory [9f/1
 represents just one of the two directories that were processed. To print all the 
 relevent paths to screen, use the `-ansi-log` flag (e.g. `nextflow run hello.nf -ansi-log false`).
 
-It's worth noting that the process `convertToUpper` is executed in
-parallel, so there's no guarantee that the instance processing the first
-split (the chunk 'Hello ') will be executed before the one
-processing the second split (the chunk 'world!').
+It's worth noting that the process `convertToUpper` is executed in parallel, so there's no guarantee that the instance processing the first split (the chunk 'Hello ') will be executed before the one processing the second split (the chunk 'world!').
 
 Thus, it is perfectly possible that you will get the final result
 printed out in a different order:
@@ -216,10 +220,10 @@ the previous example, replacing the process script with the string
 process convertToUpper {
 
     input:
-    file y from letters_ch.flatten()
+    file y
 
     output:
-    stdout into result_ch
+    stdout
 
     """
     rev $y
@@ -239,11 +243,11 @@ It will print output similar to this:
 
 [source,cmd]
 ----
-N E X T F L O W  ~  version 21.04.3
-Launching `hello.nf` [admiring_venter] - revision: aed50861e0
+N E X T F L O W  ~  version 22.04.2
+Launching `hello.nf` [nostalgic_franklin] DSL2 - revision: 0b20bd3365
 executor >  local (2)
-[74/d48321] process > splitLetters (1)   [100%] 1 of 1, cached: 1 ✔
-[59/136e00] process > convertToUpper (1) [100%] 2 of 2 ✔
+[bd/6aa32b] process > splitLetters (1)   [100%] 1 of 1, cached: 1 ✔
+[a0/67846c] process > convertToUpper (1) [100%] 2 of 2 ✔
 !dlrow
  olleH
 ----
@@ -277,16 +281,14 @@ of the parameter. The output will look like this:
 
 [source,cmd]
 ----
-N E X T F L O W  ~  version 21.10.0
-Launching `hello.nf` [angry_mcclintock] - revision: 073d8111fc
+N E X T F L O W  ~  version 22.04.2
+Launching `hello.nf` [adoring_heyrovsky] DSL2 - revision: 0b20bd3365
 executor >  local (4)
-[6c/e6edf5] process > splitLetters (1)   [100%] 1 of 1 ✔
-[bc/6845ce] process > convertToUpper (2) [100%] 3 of 3 ✔
+[e9/8ebd19] process > splitLetters (1)   [100%] 1 of 1 ✔
+[18/bc88cb] process > convertToUpper (3) [100%] 3 of 3 ✔
 uojnoB
-
-!edno
-
 m el r
+!edno
 ----
 
 === In DAG-like format
