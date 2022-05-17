@@ -1,24 +1,37 @@
-params.compress = 'gzip'
-params.file2compress = "$baseDir/data/ggal/transcriptome.fa"
+#!/usr/bin/env nextflow
 
-process foo {
+params.greeting  = 'Hello world!'
+greeting_ch = Channel.from(params.greeting)
 
-  input:
-  path file
+process splitLetters {
 
-  script:
-  if( params.compress == 'gzip' )
+    input:
+    val x
+
+    output:
+    file 'chunk_*'
+
     """
-    gzip -c $file > ${file}.gz
+    printf '$x' | split -b 6 - chunk_
     """
-  else if( params.compress == 'bzip2' )
+}
+
+process convertToUpper {
+
+    input:
+    file y
+
+    output:
+    stdout
+
     """
-    bzip2 -c $file > ${file}.bz2
+    cat $y | tr '[a-z]' '[A-Z]' 
     """
-  else
-    throw new IllegalArgumentException("Unknown aligner $params.compress")
-}   
+}
 
 workflow{
-  foo(params.file2compress)
+    letters_ch = splitLetters(greeting_ch)
+    results_ch = convertToUpper(letters_ch.flatten())
+    results_ch.view{ it }
 }
+
