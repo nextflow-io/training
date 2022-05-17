@@ -1,6 +1,6 @@
 = Environment setup
 
-There are many ways to get started with the Nextflow training course. We recommend using Gitpod (see section 1.2), as this is a closed environment with all the programs and data installed.
+There are two main ways to get started with Seqera's Nextflow training course. You can either install locally (section 1.1): best if you are familiar with Git/Docker or working offline. OR use Gitpod (see section 1.2), great for first timers, as this platform containes all the programs and data required (one click, login via a GitHub account, and start the tutorial!).
 
 == Local installation
 
@@ -66,12 +66,12 @@ Use a preconfigured Nextflow development environment using Gitpod.
 
 *Requirements*:
 
- * A GitHub, GitLab or BitBucket account (gives you 50 hours usage per month)
+ * A GitHub account (gives you 50 hours usage per month)
  * Web browser (Google Chrome, Firefox)
 
 === Training material 
 
-Click the following URL, which opens the course:
+Click the following URL, which opens the course in your browser:
 
 https://training.seqera.io/
 
@@ -95,9 +95,7 @@ image::gitpodbutton.png[]
 
 You may need to close the window at each stage and click the gitpod link again. 
 
-For BitBucket or GitLab, you may have to sign into Gitpod and change your integration on the following page: https://gitpod.io/integrations. 
-
-Once you have signed in, gitpod will load (skip prebuild, if asked):
+Once you have signed in, Gitpod should load (skip prebuild, if asked):
 
 image::gitpod.png[]
 
@@ -148,10 +146,10 @@ You should see the following (or similar):
 
 [source,bash]
 ----
-  Version: 21.10.6 build 5660
-  Created: 21-12-2021 16:55 UTC 
-  System: Linux 4.14.262-135.489.amzn1.x86_64
-  Runtime: Groovy 3.0.9 on OpenJDK 64-Bit Server VM 1.8.0_312-b07
+  Version: 22.04.2 build 5701
+  Created: 16-05-2022 17:52 UTC 
+  System: Linux 5.16.20-051620-generic
+  Runtime: Groovy 3.0.10 on OpenJDK 64-Bit Server VM 11.0.13+8-LTS
   Encoding: UTF-8 (UTF-8)
 ----
 
@@ -169,6 +167,8 @@ If you want or need to use a specific version of Nextflow, you can set the NXF_V
 ----
 export NXF_VER=21.10.0
 ----
+
+WARNING: If you have changed the version to `21.10.0`, as above, most of this tutorial workshop will not work, as we need NXL_VER=22 (using DSL2 as default).
 
 Then run `nextflow -version` to make sure that the change has taken effect.
 
