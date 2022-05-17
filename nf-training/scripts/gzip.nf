@@ -1,5 +1,5 @@
 params.compress = 'gzip'
-params.file2compress = "$baseDir/data/ggal/transcriptome.fa"
+params.file2compress = "$projectDir/data/ggal/transcriptome.fa"
 
 process foo {
 
