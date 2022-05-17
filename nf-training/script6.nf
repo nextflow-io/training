@@ -75,7 +75,7 @@ process multiqc {
     publishDir params.outdir, mode:'copy'
        
     input:
-    path '*''
+    path '*'
     
     output:
     path 'multiqc_report.html'
