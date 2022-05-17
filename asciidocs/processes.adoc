@@ -20,9 +20,9 @@ In more complex examples, the process body can contain up to *five* definition b
 
 1. *Directives* are initial declarations that define optional settings.
 
-2. *Input* defines the expected input file/s and the channel from where to find them.
+2. *Input* defines the expected input file/s, path/s, value/s.
 
-3. *Output* defines the expected output file/s and the channel to send the data to.
+3. *Output* defines the expected output file/s, path/s, value/s.
 
 4. *When* is a optional clause statement to allow conditional processes.
 
@@ -174,7 +174,7 @@ params.file2compress = "$baseDir/data/ggal/transcriptome.fa"
 process foo {
 
   input:
-  path file from params.file2compress
+  path file
 
   script:
   if( params.compress == 'gzip' )
@@ -188,6 +188,10 @@ process foo {
   else
     throw new IllegalArgumentException("Unknown aligner $params.compress")
 }   
+
+workflow{
+  foo(params.file2compress)
+}
 ----
 
 == Inputs
