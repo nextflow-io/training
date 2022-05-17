@@ -107,11 +107,11 @@ To add a transcriptome `index` process, try adding the following code block to y
 process index {
 
     input:
-    path transcriptome
+    path transcriptome from params.transcriptome_file
 
     output:
-    path 'salmon_index'
-    
+    path 'salmon_index' into index_ch
+
     script:
     """
     salmon index --threads $task.cpus -t $transcriptome -i salmon_index
@@ -119,7 +119,7 @@ process index {
 }
 ----
 
-This process takes a path as `input` that we label `transcriptome`, then we create the transcriptome index by using the `salmon` tool (in the later `script` section). The `output` is specified as a path to a output file called `salmon_index`.
+This process takes the transcriptome params file as `input` and creates the transcriptome index by using the `salmon` tool. The `output` is specified as a path to a output file called `salmon_index`, and this is passed to the `index_ch` `channel`.
 
 NOTE: the `input` declaration defines a `transcriptome` path variable which is used in the `script` as a reference (using the dollar sign) in the Salmon command line.
 
@@ -128,13 +128,6 @@ IMPORTANT: Resource requirements such as CPU and memory can change with differen
 Run it by using the command:
 
   nextflow run script2.nf
-
-The execution will fail because we have not included a workflow. So far we have only paramaterised the inputs and defined a single process defintion, yet have not called the process in a workflow.
-
-Add the following to the end of your script2.nf, or open scrip2b.nf:
-
-``
-
 
 The execution will fail because `salmon` is not installed in your environment.
 
@@ -314,15 +307,11 @@ In this step you have learned:
 
 == Perform expression quantification
 
-`script4.nf` adds the `quantification` process.
+`script4.nf` adds the `quantification` process and new workflow scope line.
 
-In this script, note how the `index_ch` channel, declared as output in the `index` process,
-is now used as a channel in the input section.
+In this workflow scope, note how the `index_ch` channel, declared as output in the `index` process, is now used as an input channel for the `quantification` process.
 
-Also, note how the second input is declared as a `tuple` composed by two elements:
-the `sample_id` and the `reads` in order to match the structure of the items emitted
-by the `read_pairs_ch` channel.
-
+Also, note how the input is declared in the `quantification` process, the first being a `path` from the `index_ch` and the second being a `tuple` composed by two elements: the `sample_id` and the `reads` in order to match the structure of the items emitted by the `read_pairs_ch` channel.
 
 Execute it by using the following command:
 
@@ -339,8 +328,7 @@ Try to execute the same script with more read files as shown below:
 You will notice that the `quantification` process is executed more than
 one time.
 
-Nextflow parallelizes the execution of your pipeline simply by providing multiple input data
-to your script.
+Nextflow parallelizes the execution of your pipeline simply by providing multiple input data to your script.
 
 NOTE: It may be useful to apply optional settings to a specific process using https://www.nextflow.io/docs/latest/process.html#directives[directives] which are provided in the process body.
 
@@ -387,47 +375,13 @@ In this step you have learned:
 
 == Quality control
 
-This step implements a quality control of your input reads. The inputs are the same
-read pairs which are provided to the `quantification` steps.
+Next, we implement a FASTQC quality control step for your input reads (using the label `fastqc`). The inputs are the same as the read pairs used in the `quantification` step.
 
 You can run it by using the following command:
 
   nextflow run script5.nf -resume
 
-The script will report the following error message:
-
-```
-Channel `read_pairs_ch` has been used twice as an input by process `fastqc` and process `quantification`
-```
-
-[discrete]
-=== Exercise
-
-Modify the creation of the `read_pairs_ch` channel by using an https://www.nextflow.io/docs/latest/operator.html#into[into]
-operator in place of a `set`.
-
-TIP: see an example https://github.com/nextflow-io/rnaseq-nf/blob/3b5b49f/main.nf#L58[here].
-
-.Click here for the answer:
-[%collapsible]
-====
-Add the following before the `input` declaration in the `quantification` process:
-```
-  Channel 
-    .fromFilePairs( params.reads, checkIfExists: true )
-    .into { read_pairs_ch; read_pairs2_ch } 
-```
-Then ensure that the second process uses the "read_pairs2_ch". See, script6.nf.
-====
-
-[discrete]
-=== Recap
-
-In this step you have learned:
-
-1. How to use the `into` operator to create multiple copies of the same channel. 
-
-NOTE: In Nextflow DSL2, it is no longer a requirement to duplicate channels.
+Nextflow DSL2 knows to split the `reads_pair_ch` into two identical channels as they are required twice as an input for the quality control process `fastqc` and the `quantification` process.
 
 == MultiQC report
 
@@ -439,11 +393,13 @@ Execute the next script with the following command:
 
   nextflow run script6.nf -resume --reads 'data/ggal/*_{1,2}.fq'
 
-It creates the final report in the `results` folder in the current work directory.
+It creates the final report in the `results` folder in the current `work` directory.
 
 In this script, note the use of the https://www.nextflow.io/docs/latest/operator.html#mix[mix,window="_blank"]
 and https://www.nextflow.io/docs/latest/operator.html#collect[collect,window="_blank"] operators chained
 together to get all the outputs of the `quantification` and `fastqc` processes as a single input. https://www.nextflow.io/docs/latest/operator.html[Operators] can be used to combine and transform channels.
+
+  multiqc(quant_ch.mix(fastqc_ch).collect())
 
 We only want one task of MultiQC being executed which produces one report. Therefore, we use the `mix` channel operator to combine the two channels followed by the `collect` operator, to return the complete channel contents as a single element.
 
@@ -559,8 +515,7 @@ In this step you have learned:
 
 == Metrics and reports
 
-Nextflow is able to produce multiple reports and charts providing several runtime metrics
-and execution information.
+Nextflow is able to produce multiple reports and charts providing several runtime metrics and execution information.
 
 Run the https://github.com/nextflow-io/rnaseq-nf[rnaseq-nf,window="_blank"] pipeline
 previously introduced as shown below:
