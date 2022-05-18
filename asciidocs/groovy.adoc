@@ -34,7 +34,7 @@ Comments use the same syntax as C-family programming languages:
 /*
    a comment spanning
    multiple lines
- */
+*/
 ----
 
 == Variables
@@ -228,6 +228,7 @@ text = """
     Hello there James.
     How are you today?
     """
+println text
 ----
 
 Finally multi-line strings can also be defined with slashy strings. For example:
@@ -239,6 +240,7 @@ text = /
     slashy string!
     It's cool, isn't it?!
     /
+println text
 ----
 
 TIP: Like before, multi-line strings inside double quotes and slash characters support variable interpolation, while single-quoted multi-line strings do not.
