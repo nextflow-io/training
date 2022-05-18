@@ -428,11 +428,13 @@ Try to run it by using the following command:
 
   nextflow run script7.nf -resume --reads 'data/ggal/*_{1,2}.fq'
 
-== Bonus!
+== Email notifications
 
 Send a notification email when the workflow execution complete using the `-N <email address>`
-command line option. Note: this requires the configuration of a SMTP server in nextflow config
-file. For the sake of this tutorial add the following setting in your `nextflow.config` file:
+command line option. 
+
+Note: this requires the configuration of a SMTP server in nextflow config
+file. Below is an example in the `nextflow.config` file, or the settings you would have to configure:
 
 [source,config,linenums]
 ----
@@ -447,11 +449,6 @@ mail {
   smtp.starttls.required = true
 }
 ----
-
-Then execute again the previous example specifying your email address:
-
-  nextflow run script7.nf -resume --reads 'data/ggal/*_{1,2}.fq' -c mail.config -N <your email>
-
 
 See https://www.nextflow.io/docs/latest/mail.html#mail-configuration[mail documentation,window="_blank"]
 for details.
