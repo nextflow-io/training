@@ -20,9 +20,9 @@ In more complex examples, the process body can contain up to *five* definition b
 
 1. *Directives* are initial declarations that define optional settings.
 
-2. *Input* defines the expected input file/s, path/s, value/s.
+2. *Input* defines the expected input file/s and the channel from where to find them.
 
-3. *Output* defines the expected output file/s, path/s, value/s.
+3. *Output* defines the expected output file/s and the channel to send the data to.
 
 4. *When* is a optional clause statement to allow conditional processes.
 
@@ -169,12 +169,12 @@ The process script can also be defined in a completely dynamic manner using an `
 [source,nextflow,linenums]
 ----
 params.compress = 'gzip'
-params.file2compress = "$projectDir/data/ggal/transcriptome.fa"
+params.file2compress = "$baseDir/data/ggal/transcriptome.fa"
 
 process foo {
 
   input:
-  path file
+  path file from params.file2compress
 
   script:
   if( params.compress == 'gzip' )
@@ -188,19 +188,7 @@ process foo {
   else
     throw new IllegalArgumentException("Unknown aligner $params.compress")
 }   
-
-workflow{
-  foo(params.file2compress)
-}
 ----
-
-To run the above script, you need to point to a valid input file, e.g.:
-
-  nextflow run scripts/gzip.nf --file2compress /workspace/nf-training-public/nf-training/dsl2/data/prot/BB11001.fa
-
-To try the other compressor, change the second flag:
-
-  nextflow run scripts/gzip.nf --file2compress /workspace/nf-training-public/nf-training/dsl2/data/prot/BB11001.fa --compress bzip2
 
 == Inputs
 
@@ -217,7 +205,7 @@ The `input` block follows the syntax shown below:
 
 ```nextflow
 input:
-  <input qualifier> <input name>
+  <input qualifier> <input name> from <source channel>
 ```
 
 === Input values
@@ -229,12 +217,17 @@ The `val` qualifier allows you to receive data of any type as input. It can be a
 num = Channel.from( 1, 2, 3 )
 
 process basicExample {
+  debug=true
   input:
-  val x
+  val x 
 
   """
   echo process job $x
   """
+}
+
+workflow { 
+  myrun = basicExample(num)
 }
 ----
 
@@ -259,16 +252,17 @@ Nextflow will stage it in the process execution directory, and it can be access 
 reads = Channel.fromPath( 'data/ggal/*.fq' )
 
 process foo {
-    input:
-    file 'sample.fastq'
-    script:
-    """
-    echo your_command --reads sample.fastq
-    """
+  debug=true
+  input:
+  file 'sample.fastq'
+  script:
+  """
+  ls sample.fastq
+  """
 }
 
 workflow{
-  foo(reads)
+  result= foo(reads)
 }
 ----
 
@@ -279,16 +273,17 @@ The input file name can also be defined using a variable reference as shown belo
 reads = Channel.fromPath( 'data/ggal/*.fq' )
 
 process foo {
-    input:
-    file sample
-    script:
-    """
-    echo your_command --reads $sample
-    """
+  debug=true
+  input:
+  file sample
+  script:
+  """
+  ls  $sample
+  """
 }
 
 workflow{
-  foo(reads)
+  result= foo(reads)
 }
 ----
 
@@ -300,16 +295,17 @@ Only requiring a change in the channel composition.
 reads = Channel.fromPath( 'data/ggal/*.fq' )
 
 process foo {
-    input:
-    file sample
-    script:
-    """
-    echo your_command --reads $sample
-    """
+  debug=true
+  input:
+  file sample
+  script:
+  """
+  ls -lh $sample
+  """
 }
 
 workflow{
-  foo( reads.collect() )
+  foo(reads.collect())
 }
 ----
 
@@ -317,33 +313,10 @@ WARNING: When a process declares an input `file`, the corresponding channel elem
 must be *file* objects, i.e. created with the `file` helper function from the file specific 
 channel factories e.g. `Channel.fromPath` or `Channel.fromFilePairs`. 
 
-Consider the following snippet: 
-
-[source,nextflow,linenums]
-----
-params.genome = 'data/ggal/transcriptome.fa'
-
-process foo {
-    input:
-    file genome
-    script:
-    """
-    echo your_command --reads $genome
-    """
-}
-
-workflow{
-  foo(params.genome)
-}
-----
-
-The above code creates a temporary file named `input.1` with the string `data/ggal/transcriptome.fa` as content. That likely is not what you wanted to do. 
-
 
 === Input path
 
-As of version 19.10.0, Nextflow introduced a new `path` input qualifier that simplifies 
-the handling of cases such as the one shown above. In a nutshell, the input `path` automatically 
+As of version 19.10.0, Nextflow introduced a new `path` input qualifier that  automatically 
 handles string values as file objects. The following example works as expected:
 
 [source,nextflow,linenums]
@@ -351,12 +324,12 @@ handles string values as file objects. The following example works as expected:
 params.genome = "$baseDir/data/ggal/transcriptome.fa"
 
 process foo {
-    input:
-    path genome
-    script:
-    """
-    echo your_command --reads $genome
-    """
+  input:
+  path genome
+  script:
+  """
+  ls -lh $genome
+  """
 }
 
 workflow{
@@ -365,6 +338,7 @@ workflow{
 ----
 
 NOTE: The path qualifier should be preferred over file to handle process input files when using Nextflow 19.10.0 or later.
+
 
 [discrete]
 === Exercise
@@ -380,8 +354,8 @@ followed by a process that concatenates them into a single file and prints the f
 params.reads = "$baseDir/data/ggal/*_1.fq"
 
 Channel 
-    .fromPath( params.reads )
-    .set { read_ch } 
+  .fromPath( params.reads )
+  .set { read_ch } 
 
 process concat {
   tag "Concat all files"
@@ -397,10 +371,10 @@ process concat {
   cat * > concatenated.txt
   head -n 20 concatenated.txt > top_10_lines
   """
-  }
+}
 
 workflow{
-  concat_ch = read_ch.collect()
+  concat_ch=concat(read_ch.collect())
   concat_ch.view()
 }
 ----
@@ -424,11 +398,10 @@ process foo {
   input:
   val x
   val y
-
   script:
-  """
-  echo $x and $y
-  """
+   """
+   echo $x and $y
+   """
 }
 
 workflow{
@@ -454,8 +427,8 @@ For example:
 
 [source,nextflow,linenums]
 ----
-ch1 = Channel.from(1,2)
-ch2 = Channel.from('a','b','c')
+input1 = Channel.from(1,2)
+input2 = Channel.from('a','b','c','d')
 
 process foo {
   debug true
@@ -469,7 +442,7 @@ process foo {
 }
 
 workflow{
-  foo(ch1,ch2)
+  foo (input1,input2)
 }
 ----
 
@@ -481,8 +454,8 @@ Compare the previous example with the following one :
 
 [source,nextflow,linenums]
 ----
-ch1 = Channel.value(1)
-ch2 = Channel.from('a','b','c')
+input1 = Channel.value(1)
+input2 = Channel.from('a','b','c')
 
 process bar {
   debug true
@@ -496,7 +469,7 @@ process bar {
 }
 
 workflow{
-  bar(ch1,ch2)
+  bar (input1, input2)
 }
 ----
 
@@ -549,7 +522,7 @@ process command {
   }
 
 workflow{
-  concat_ch = command(read_ch , params.transcriptome_file)
+  concat_ch=command( read_ch , params.transcriptome_file)
   concat_ch.view()
 }
 ----
@@ -565,13 +538,18 @@ sequences = Channel.fromPath('data/prots/*.tfa')
 methods = ['regular', 'expresso', 'psicoffee']
 
 process alignSequences {
+  debug=true
   input:
-  path seq from sequences
-  each mode from methods
+  path seq
+  each mode
 
   """
   echo t_coffee -in $seq -mode $mode
   """
+}
+
+workflow{
+  alignSequences(sequences,methods)
 }
 ----
 
@@ -599,12 +577,12 @@ process command {
   tag "Run_command"
 
   input:
-  path reads from read_ch
-  path transcriptome from params.transcriptome_file
-  each mode from methods
+  path reads
+  path transcriptome
+  each mode
 
   output:
-  path result into concat_ch
+  path result
  
   script:
   """
@@ -612,8 +590,12 @@ process command {
   """
   }
 
-concat_ch
+
+workflow{
+  concat_ch=command( read_ch , params.transcriptome_file , methods)
+  concat_ch
     .view { "To run : ${it.text}" }
+}
 ----
 ====
 
@@ -639,17 +621,22 @@ methods = ['prot','dna', 'rna']
 
 process foo {
   input:
-  val x from methods
+  val x
 
   output:
-  val x into receiver
+  val x
 
   """
   echo $x > file
   """
 }
 
-receiver.view { "Received: $it" }
+workflow{
+
+  receiver_ch = foo(Channel.from(methods))
+  receiver_ch.view { "Received: $it" }
+
+}
 ----
 
 === Output files
@@ -661,20 +648,24 @@ The `file` qualifier specifies one or more files as output, produced by the proc
 process randomNum {
 
     output:
-    file 'result.txt' into numbers
+    file 'result.txt'
 
     '''
     echo $RANDOM > result.txt
     '''
 }
 
-numbers.view { "Received: " + it.text }
+
+workflow{
+  receiver_ch = randomNum()
+  receiver_ch.view { "Received: " + it.text }
+}
 ----
 
 In the above example the process `randomNum` creates a file named `result.txt` containing a random number.
 
 Since a file parameter using the same name is declared in the output block, when the task is completed that
-file is sent over the `numbers` channel. A downstream `process` declaring the same channel as _input_ will
+file is sent over the `receiver_ch` channel. A downstream `process` declaring the same channel as _input_ will
 be able to receive it.
 
 
@@ -689,16 +680,19 @@ This allows us to _capture_ multiple files into a list object and output them as
 process splitLetters {
 
     output:
-    file 'chunk_*' into letters
+    file 'chunk_*'
 
     '''
     printf 'Hola' | split -b 1 - chunk_
     '''
 }
 
-letters
-    .flatMap()
-    .view { "File: ${it.name} => ${it.text}" }
+workflow{
+    letters = splitLetters()  
+    letters
+        .flatMap()
+        .view { "File: ${it.name} => ${it.text}" }
+}
 ----
 
 it prints:
@@ -743,20 +737,30 @@ For example:
 species = ['cat','dog', 'sloth']
 sequences = ['AGATAG','ATGCTCT', 'ATCCCAA']
 
+Channel.from(species)
+       .set { species_ch }
+
 process align {
   input:
-  val x from species
-  val seq from sequences
+  val x
+  val seq
 
   output:
-  file "${x}.aln" into genomes
+  file "${x}.aln"
 
   """
   echo align -in $seq > ${x}.aln
   """
 }
 
-genomes.view()
+
+
+workflow{
+
+  genomes=align( species_ch , sequences )
+  genomes.view()
+
+}
 ----
 
 In the above example, each time the process is executed an alignment file is produced whose name depends
@@ -778,16 +782,20 @@ reads_ch = Channel.fromFilePairs('data/ggal/*_{1,2}.fq')
 
 process foo {
   input:
-    tuple val(sample_id), file(sample_files) from reads_ch
+    tuple val(sample_id), file(sample_id)
   output:
-    tuple val(sample_id), file('sample.bam') into bam_ch
+    tuple val(sample_id), file('sample.bam')
   script:
   """
     echo your_command_here --reads $sample_id > sample.bam
   """
 }
 
-bam_ch.view()
+
+workflow{
+  bam_ch = foo(reads_ch)
+  bam_ch.view()
+}
 ----
 
 TIP: In previous versions of Nextflow `tuple` was called `set` but it was used exactly with the 
@@ -807,16 +815,19 @@ reads_ch = Channel.fromFilePairs('data/ggal/*_{1,2}.fq')
 
 process foo {
   input:
-    tuple val(sample_id), file(sample_files) from reads_ch
+    tuple val(sample_id), file(sample_files)
   output:
-    tuple val(sample_id), file("${sample_id}.bam") into bam_ch
+    tuple val(sample_id), file("${sample_id}.bam")
   script:
   """
     echo your_command_here --reads $sample_id > ${sample_id}.bam
   """
 }
 
-bam_ch.view()
+workflow{
+  bam_ch = foo(reads_ch)
+  bam_ch.view()
+}
 ----
 ====
 
@@ -833,9 +844,10 @@ params.prot = 'data/prots/*.tfa'
 proteins = Channel.fromPath(params.prot)
 
 process find {
+  debug=true
   input:
-  file fasta from proteins
-  val type from params.dbtype
+  file fasta
+  val type
 
   when:
   fasta.name =~ /^BB11.*/ && type == 'nr'
@@ -844,6 +856,10 @@ process find {
   """
   echo blastp -query $fasta -db nr
   """
+}
+
+workflow{
+  result = find(proteins, params.dbtype)
 }
 ----
 
@@ -918,17 +934,20 @@ process blastSeq {
     publishDir "$params.outdir/bam_files", mode: 'copy'
 
     input:
-    file fasta from proteins
+    file fasta
 
     output:
-    file ('*.txt') into blast_ch
+    file ('*.txt')
 
     """
     echo blastp $fasta > ${fasta}_result.txt
     """
 }
 
-blast_ch.view()
+workflow{
+  blast_ch = blastSeq( proteins )
+  blast_ch.view()
+}
 ----
 
 The above example will copy all blast script files created by the `blastSeq` task in the
@@ -946,9 +965,7 @@ You can use more then one `publishDir` to keep different outputs in separate dir
 params.reads = 'data/reads/*_{1,2}.fq.gz'
 params.outdir = 'my-results'
 
-Channel
-    .fromFilePairs(params.reads, flat: true)
-    .set{ samples_ch }
+samples_ch = Channel.fromFilePairs(params.reads, flat: true)
 
 process foo {
   publishDir "$params.outdir/$sampleId/", pattern: '*.fq'
@@ -956,7 +973,7 @@ process foo {
   publishDir "$params.outdir/$sampleId/outlooks", pattern: '*_outlook.txt'
 
   input:
-    tuple val(sampleId), file('sample1.fq.gz'), file('sample2.fq.gz') from samples_ch
+    tuple val(sampleId), file('sample1.fq.gz'), file('sample2.fq.gz')
   output:
     file "*"
   script:
@@ -970,6 +987,12 @@ process foo {
     head -n 50 sample1.fq > sample1_outlook.txt
     head -n 50 sample2.fq > sample2_outlook.txt
   """
+}
+
+workflow{
+
+  out_channel = foo(samples_ch)
+
 }
 ----
 
