@@ -107,10 +107,10 @@ To add a transcriptome `index` process, try adding the following code block to y
 process index {
 
     input:
-    path transcriptome from params.transcriptome_file
+    path transcriptome
 
     output:
-    path 'salmon_index' into index_ch
+    path 'salmon_index'
 
     script:
     """
@@ -119,7 +119,20 @@ process index {
 }
 ----
 
-This process takes the transcriptome params file as `input` and creates the transcriptome index by using the `salmon` tool. The `output` is specified as a path to a output file called `salmon_index`, and this is passed to the `index_ch` `channel`.
+Plus, add the input channel definition and the workflow scope:
+
+[source,nextflow,linenums]
+----
+in_channel=Channel.from(params.transcriptome)
+
+workflow {
+
+    index_ch = index( in_channel )
+
+}
+----
+
+This process takes the transcriptome params file as `input` and activates this in the input channel (in_channel), then calls the index process (using the `salmon` tool) on this input channel, to create the salmon indexed transcriptome `salmon_index`. This is passed to the `index_ch` `channel`.
 
 NOTE: the `input` declaration defines a `transcriptome` path variable which is used in the `script` as a reference (using the dollar sign) in the Salmon command line.
 
@@ -239,7 +252,7 @@ In this step you have learned:
 
 This step shows how to match *read* files into pairs, so they can be mapped by *Salmon*.
 
-Edit the script `script3.nf` and add the following statement as the last line:
+Edit the script `script3.nf` and add the following statement as the last line in the workflow scope:
 
   read_pairs_ch.view()
 
