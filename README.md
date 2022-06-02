@@ -38,11 +38,9 @@ Install the Gitpod browser extension, following the instructions [here](https://
 
 2. Login to your Github account (and allow authorisation). 
 
-You may need to close the window at each stage and click the gitpod link again. 
+You may need to close the window at this stage and click the gitpod link again. 
 
-For BitBucket or GitLab, you may have to sign into Gitpod and change your integration on the following page: https://gitpod.io/integrations. 
-
-Once you have signed in, gitpod will load (skip prebuild, if asked):
+Once you have signed in, Gitpod will load (skip prebuild, if asked):
 
 ![PNG](/asciidocs/img/gitpod.png)
 
