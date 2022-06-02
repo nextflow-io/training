@@ -83,6 +83,68 @@ process convertToUpper {
 ----
 ====
 
+== Output definition
+
+In the example above, we define the channel names to specify the input to the next process. We can also explicitely define the output of one process to another using the `.out` attribute. In this way, we can manipute the output of a process, as we will see later in this section.
+
+e.g. 
+
+[source,nextflow,linenums]
+----
+    letters_ch = splitLetters(greeting_ch)
+    results_ch = convertToUpper(letters_ch.out.flatten())
+----
+
+=== Specifying outputs
+
+If a process defines two or more output channels, each of them can be accessed by indexing the `.out` attribute e.g. `.out[0]`, `.out[1]`, etc.
+
+Further, the process `output` definition also allows the use of the `emit` statement to define a named identifier that can be used to reference the channel in the external scope. 
+
+For example, check the `emit` statement on the `convertToUpper` process in the following snippet:
+
+[source,nextflow,linenums]
+----
+#!/usr/bin/env nextflow
+
+params.greeting = 'Hello world!'
+greeting_ch = Channel.from(params.greeting)
+
+process splitLetters {
+
+    input:
+    val x
+
+    output:
+    file 'chunk_*'
+
+    """
+    printf '$x' | split -b 6 - chunk_
+    """
+}
+
+process convertToUpper {
+
+    input:
+    file y
+
+    output:
+    stdout emit: upper
+
+    """
+    cat $y | tr '[a-z]' '[A-Z]'
+    """
+}
+
+workflow {
+    letters_ch = splitLetters(greeting_ch)
+    results_ch = convertToUpper(letters_ch.out.flatten())
+    convertToUpper.out.upper.view{ it }
+}
+----
+
+WARNING: In the above example, we have reverted to keeping the `process` definitions within the `hello.nf` script. This would work the same if the emit defintion was in a `modules.nf` file.
+
 === Multiple imports
 
 If a Nextflow module script contains multiple `process` definitions these can also be imported using a single `include` statement as shown in the example below:
@@ -99,8 +161,6 @@ When including a module component it is possible to specify a name alias using t
 [source,nextflow,linenums]
 ----
 #!/usr/bin/env nextflow
-
-nextflow.enable.dsl=2
 
 params.greeting = 'Hello world!'
 
@@ -167,8 +227,6 @@ def sayHello() {
 ----
 #!/usr/bin/env nextflow
 
-nextflow.enable.dsl=2
-
 params.foo = 'Hola'
 params.bar = 'mundo!'
 
@@ -195,8 +253,6 @@ The `addParams` option can be used to extend the module parameters without affec
 [source,nextflow,linenums]
 ----
 #!/usr/bin/env nextflow
-
-nextflow.enable.dsl=2
 
 params.foo = 'Hola'
 params.bar = 'mundo!'
