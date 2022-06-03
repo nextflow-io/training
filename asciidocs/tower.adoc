@@ -2,7 +2,7 @@
 
 == Basic concepts
 
-Nextflow Tower is the centralized command-post for the management of Nextflow data pipelines. 
+Nextflow Tower is the centralized command-post for data management and pipelines. 
 It brings monitoring, logging & observability, to distributed workflows and simplifies the deployment of pipelines on any cloud, cluster or laptop. 
 
 
@@ -14,7 +14,7 @@ Nextflow tower core features include:
 * management of infrastructure required to run data analysis at scale.
 
 
-TIP: https://tower.nf/[Sign] up to try Tower for free or request a https://meetings.hubspot.com/evan141[demo] for deployments in your own on-premise or cloud environment.
+TIP: https://cloud.tower.nf/[Sign] up to try Tower for free or request a https://seqera.io/demo/[demo] for deployments in your own on-premise or cloud environment.
 
 == Usage
 
