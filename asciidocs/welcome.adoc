@@ -18,7 +18,7 @@ To get you started with Nextflow as quickly as possible, we will walk through th
 
 1. Set up a development environment to run Nextflow. 
 
-2. Explore Nexflow concepts using some basic workflows including a multistep RNA-Seq analysis. 
+2. Explore Nexflow concepts using some basic workflows, including a multi-step RNA-Seq analysis. 
 
 3. Build and use Docker containers to encaspusulate all workflow dependencies. 
 
@@ -26,7 +26,7 @@ To get you started with Nextflow as quickly as possible, we will walk through th
 
 5. Cover cluster and cloud deployment scenarios and explore Nextflow Tower capabilities. 
 
-This will give you a broad understanding of Nextflow, so that you can start writing your own pipelines. We hope you enjoy the course! This is ever-evolving document and feedback is always welcome.
+This will give you a broad understanding of Nextflow, so that you can start writing your own pipelines. We hope you enjoy the course! This is an ever-evolving document and feedback is always welcome.
 
 [discrete]
 === Summary
