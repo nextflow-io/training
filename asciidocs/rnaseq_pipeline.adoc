@@ -19,9 +19,9 @@ The script `script1.nf` defines the pipeline input parameters.
 
 [source,nextflow,linenums]
 ----
-params.reads = "$baseDir/data/ggal/*_{1,2}.fq"
-params.transcriptome_file = "$baseDir/data/ggal/transcriptome.fa"
-params.multiqc = "$baseDir/multiqc"
+params.reads = "$projectDir/data/ggal/*_{1,2}.fq"
+params.transcriptome_file = "$projectDir/data/ggal/transcriptome.fa"
+params.multiqc = "$projectDir/multiqc"
 
 println "reads: $params.reads"
 ----
@@ -32,7 +32,7 @@ Run it by using the following command:
 
 Try to specify a different input parameter, for example:
 
-  nextflow run script1.nf --reads this/or/that
+  nextflow run script1.nf --reads "/workspace/nf-training-public/nf-training/data/ggal/gut_{1,2}.fq"
 
 [discrete]
 === Exercise
@@ -45,10 +45,10 @@ that will be used as the pipeline output directory.
 ====
 [source,nextflow,linenums]
 ----
-params.reads = "$baseDir/data/ggal/*_{1,2}.fq"
-params.transcriptome_file = "$baseDir/data/ggal/transcriptome.fa"
-params.multiqc = "$baseDir/multiqc"
-params.outdir = "$baseDir/myresults"
+params.reads = "$projectDir/data/ggal/*_{1,2}.fq"
+params.transcriptome_file = "$projectDir/data/ggal/transcriptome.fa"
+params.multiqc = "$projectDir/multiqc"
+params.outdir = "results"
 ----
 ====
 
@@ -101,7 +101,7 @@ To add a transcriptome `index` process, try adding the following code block to y
 [source,nextflow,linenums]
 ----
 /*
- * define the `index` process that creates a binary index
+ * define the `salmon_index` process that creates a binary index
  * given the transcriptome file
  */
 process index {
@@ -110,16 +110,16 @@ process index {
     path transcriptome from params.transcriptome_file
 
     output:
-    path 'index' into index_ch
+    path 'salmon_index' into index_ch
 
     script:
     """
-    salmon index --threads $task.cpus -t $transcriptome -i index
+    salmon index --threads $task.cpus -t $transcriptome -i salmon_index
     """
 }
 ----
 
-This process takes the transcriptome params file as `input` and creates the transcriptome index by using the `salmon` tool. The `output` is specified as a path to a output file called `index`, and this is passed to the `index_ch` `channel`.
+This process takes the transcriptome params file as `input` and creates the transcriptome index by using the `salmon` tool. The `output` is specified as a path to a output file called `salmon_index`, and this is passed to the `index_ch` `channel`.
 
 NOTE: the `input` declaration defines a `transcriptome` path variable which is used in the `script` as a reference (using the dollar sign) in the Salmon command line.
 
@@ -183,7 +183,7 @@ process index {
     input:
     ...
 ----
-Then check it worked, by looking at the script executed in the work directory. Look for the hexidecimal (e.g. work/7f/f285b80022d9f61e82cd7f90436aa4/), Then `cat` the .command.sh.
+Then check it worked, by looking at the script executed in the work directory. Look for the hexidecimal (e.g. work/7f/f285b80022d9f61e82cd7f90436aa4/), Then `cat` the `.command.sh` file.
 ====
 
 [discrete]
@@ -313,7 +313,7 @@ In this script, note how the `index_ch` channel, declared as output in the `inde
 is now used as a channel in the input section.
 
 Also, note how the second input is declared as a `tuple` composed by two elements:
-the `pair_id` and the `reads` in order to match the structure of the items emitted
+the `sample_id` and the `reads` in order to match the structure of the items emitted
 by the `read_pairs_ch` channel.
 
 
@@ -348,7 +348,7 @@ Add a https://www.nextflow.io/docs/latest/process.html#tag[tag] directive to the
 ====
 Add the following before the input declaration:
 ```
-  tag "Salmon on $pair_id"
+  tag "Salmon on $sample_id"
 ```
 ====
 
@@ -531,7 +531,7 @@ the following code:
 ----
   script:
   """
-  fastqc.sh "$sample_id" "$reads"
+  fastqc.sh "$sample_id" "$reads" 
   """
 ----
 

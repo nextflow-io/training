@@ -1,5 +1,7 @@
 = Environment setup
 
+There are many ways to get started with the Nextflow training course. We recommend using Gitpod (see section 1.2), as this is a closed environment with all the programs and data installed.
+
 == Local installation
 
 Nextflow can be used on any POSIX compatible system (Linux, OS X, Windows Subsystem for Linux etc.).
@@ -8,8 +10,9 @@ Nextflow can be used on any POSIX compatible system (Linux, OS X, Windows Subsys
 
 * Bash
 * http://www.oracle.com/technetwork/java/javase/downloads/index.html[Java 8 (or later, up to 15)]
+* Git
 
-*Optional requirements*:
+*Optional requirements for this tutorial*:
 
 * https://www.docker.com/[Docker] engine 1.10.x (or later)
 * https://github.com/sylabs/singularity[Singularity] 2.5.x (or later)
@@ -17,8 +20,6 @@ Nextflow can be used on any POSIX compatible system (Linux, OS X, Windows Subsys
 * http://www.graphviz.org/[Graphviz] 
 * https://aws.amazon.com/cli/[AWS CLI]
 * AWS Batch computing environment configured 
-
-To check you java version : `java -version`
 
 === Download Nextflow:
 
@@ -40,7 +41,7 @@ Then ensure that the downloaded binary is executable:
 chmod +x nextflow
 ----
 
-or put the nextflow executable into your $PATH (e.g. /usr/bin)
+AND put the nextflow executable into your $PATH (e.g. /usr/local/bin)
 
 === Training material 
 
@@ -49,45 +50,112 @@ in the terminal:
 
 [source,bash,linenums]
 ----
-curl https://s3-eu-west-1.amazonaws.com/seqeralabs.com/public/nf-training.tar.gz | tar xvz
+git clone https://github.com/seqeralabs/nf-training-public.git
 ----
 
-Or alternatively if you have `wget` instead of curl:
-
-[source,bash,linenums]
-----
-wget -q -O- https://s3-eu-west-1.amazonaws.com/seqeralabs.com/public/nf-training.tar.gz | tar xvz
-----
-
-== Setup with AWS Cloud9
-
-If you are running this tutorial in an AWS Cloud9 environment, 
-run the following one-liner to setup the virtual environment: 
-
-[source,bash,linenums]
-----
-source setup/all.sh
-----
-
-=== Nextflow installation 
-
-Install the latest version of Nextflow by copy & pasting the following 
-snippet in a terminal window: 
-
-[source,bash,linenums]
-----
-curl get.nextflow.io | bash
-mv nextflow ~/bin
-----
-
-Check the correct installation running the following command: 
+Check the correct installation of `nextflow` by running the following command: 
 
 [source,bash,linenums]
 ----
 nextflow info
 ----
 
-== Selecting Nextflow version
+== Gitpod
+
+Use a preconfigured Nextflow development environment using Gitpod. 
+
+*Requirements*:
+
+ * A GitHub, GitLab or BitBucket account (gives you 50 hours usage per month)
+ * Web browser (Google Chrome, Firefox)
+
+=== Training material 
+
+Click the following URL, which opens the course:
+
+https://training.seqera.io/
+
+=== Gitpod environment
+
+To run Gitpod:
+
+- Either: click the following URL:
+
+https://gitpod.io/#https://github.com/seqeralabs/nf-training-public
+
+(which is our Github repository URL, prefixed with https://gitpod.io/#).
+
+**OR**
+
+Install the Gitpod browser extension, following the instructions https://www.gitpod.io/docs/browser-extension[here]. This will add a green Gitpod button to each Git repository for easy access to the environment. Then go to the git repository for the training (https://github.com/seqeralabs/nf-training-public), and click the green button.
+
+image::gitpodbutton.png[]
+
+- Login to your Github account (and allow authorisation). 
+
+You may need to close the window at each stage and click the gitpod link again. 
+
+For BitBucket or GitLab, you may have to sign into Gitpod and change your integration on the following page: https://gitpod.io/integrations. 
+
+Once you have signed in, gitpod will load (skip prebuild, if asked):
+
+image::gitpod.png[]
+
+Gitpod gives you 50 hours per month to run the environment, with up to 4 parellel workspaces at a time. So feel free to come back at any time and try the course at your own pace.
+
+It is useful to save the URL that is now your Gitpod environment. Later, we can use this to return to the same closed environment (so please take note of it now).
+
+- Explore your Gitpod IDE
+
+You should see something similar to the following:
+
+image::gitpod.welcome.png[]
+
+**The sidebar** allows you to customise your Gitpod environment and perform basic tasks (Copy/Paste, Open files, search, git, etc.) Click the Explorer button to see which files are in this repository.
+
+**The terminal** allows you to run all the programs in the repository, for example `nextflow` and `docker` are installed. 
+
+**The main window** allows you to view and edit files. Clicking on a file in the explorer will open it within the main window. We can also see the nf-training material in this window, but if you find the space too small you can open it separately in another browser window (https://training.seqera.io/). Finally, if you accidently close the Gitpod training window, you can reopen it by entering `gp preview https://training.seqera.io`.
+
+4. Saving your files in Gitpod to local machine.
+
+To save your files, choose your file of interest, then either use the left/top hand side bar (File/Save As...) or use you're keyboard shortcut to save as (On Mac: CMD, shift, s), then choose `Show local`. This will open up a explorer to choose where to save your file on your local machine.
+
+### Reopening a Gitpod session
+
+Any running workspace will be automatically stopped after 30 minutes. You can open the environment again by going to https://gitpod.io/workspaces and finding your previous environment, then clicking the three dot button to the right, and selecting Open. 
+
+If you save the URL from your previous Gitpod environment, you can just paste this into your browser to open the previous environment. Environments are saved for up to two weeks, but don't rely on their existance, download any important files you want for posterity.
+
+Alternatively, you can start a new workspace by clicking the green gitpod button, or following the Gitpod URL: 
+https://gitpod.io/#https://github.com/seqeralabs/nf-training-public
+
+This tutorial provides all the scripts, so don't worry if you have lost your environment. In the `nf-training` and `nf-training/scripts` directories, you can find the main scripts and individual snippets used in the tutorial.
+
+If you want to change git provider (between GitHub, GitLab and BitBucket), go to https://gitpod.io/integrations. Then you will need to login and deactive the current provider.
+
+### Getting started
+
+In the terminal section, you can type the following:
+
+	nextflow info
+
+This should come up with the Nextflow information from this environment. This tells us that the environment is working. All the training material and scripts are in this environment.
+
+WARNING: Be aware that if you leave the window or are not active, your session may end after 30 minutes. You can always reactivate by clicking the gitpod link again. It will show if you previous environment is still active, or if you will need to open a new environment.
+
+You should see the following (or similar):
+
+[source,bash]
+----
+  Version: 21.10.6 build 5660
+  Created: 21-12-2021 16:55 UTC 
+  System: Linux 4.14.262-135.489.amzn1.x86_64
+  Runtime: Groovy 3.0.9 on OpenJDK 64-Bit Server VM 1.8.0_312-b07
+  Encoding: UTF-8 (UTF-8)
+----
+
+== Selecting a Nextflow version
 
 By default Nextflow will pull the latest stable version into your environment.
 

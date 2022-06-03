@@ -72,92 +72,71 @@ In this toy example, the script takes an input string (a parameter called `param
 
 [source,nextflow,linenums]
 ----
-#!/usr/bin/env nextflow
+#!/usr/bin/env nextflow     <1>
 
-params.greeting  = 'Hello world!'
-greeting_ch = Channel.from(params.greeting)
+params.greeting  = 'Hello world!' <2>
+greeting_ch = Channel.from(params.greeting) <3>
 
-process splitLetters {
+process splitLetters { <4>
 
-    input:
-    val x from greeting_ch
+    input: <5>
+    val x from greeting_ch <6>
 
-    output:
-    file 'chunk_*' into letters_ch
+    output: <7>
+    file 'chunk_*' into letters_ch <8>
 
-    """
-    printf '$x' | split -b 6 - chunk_
-    """
-}
+    """ <9>
+    printf '$x' | split -b 6 - chunk_  <10>
+    """ <11>
+} <12>
 
-process convertToUpper {
+process convertToUpper { <13>
 
-    input:
-    file y from letters_ch.flatten()
+    input:  <14>
+    file y from letters_ch.flatten() <15>
 
-    output:
-    stdout into result_ch
+    output: <16>
+    stdout into result_ch <17>
 
-    """
-    cat $y | tr '[a-z]' '[A-Z]' 
-    """
-}
+    """ <18>
+    cat $y | tr '[a-z]' '[A-Z]'  <19>
+    """ //<20>
+} //<21>
 
-result_ch.view{ it }
+result_ch.view{ it }  //<22>
 ----
+<1> The code begins with a shebang which declares Nextflow as the interepreter.
+<2> Declares a parameter `greeting` that is initialized with the value 'Hello world!'.
+<3> Initalises a `channel` labelled `greeting_ch`, which contains the value from `params.greeting`. Channels are the necessary input type for processes in Nextflow.
+<4> Begins the first process defined as `splitLetters`.
+<5> Input declaration for the `splitLetters` process. Inputs can be values: `val`, files: `file`, paths `path` or other qualifiers (https://www.nextflow.io/docs/latest/process.html#inputs[See here])
+<6> Tells the `process` to expect an input value (`val`) `from` the channel `greeting_ch`, that we assign to the variable 'x'. 
+<7> Output declaration for the `splitLetters` process.
+<8> Tells the process to expect output file/s (`file`) containing 'chunk_*' as output from the script and send the files to the `channel` `letters_ch`. 
+<9> Triple quote marks intiate the code block to execute in this `process`.
+<10> Code to execute, printing the `input` value x (called using the dollar [$] symbol prefix), and splitting the string into chunks of 6 characters long ("Hello " and "world!") and saving to files: chunk_aa and chunk_ab.
+<11> Triple quote marks the end of the code block.
+<12> End of first process block.
+<13> Begin second process defined as `convertToUpper`.
+<14> Input declaration for the `convertToUpper` `process`.
+<15> Tells the `process` to expect `input` file/s (`file`; e.g. chunk_aa and chunk_ab) from the `letter_ch`, that we assign to the variable 'y'. 
+<16> Output declaration for the `convertToUpper` process.
+<17> Tells the process to expect output as standard output (stdout) and direct this `into` the `result_ch` channel.
+<18> Triple quote marks intiate the code block to execute in this `process`.
+<19> Script to read files (cat) using the '$y' input variable, then pipe to uppercase conversion, outputting to standard output.
+<20> Triple quote marks the end of the code block.
+<21> End of first `process` block.
+<22> The final output (in the `result_ch`) is printed to screen using the `view` operator (appended onto the channel name). 
 
-=== Line-by-line description
-
-* *1*: The code begins with a shebang which declares Nextflow as the interepreter.
-
-* *3*: Declares a parameter `greeting` that is initialized with the value 'Hello world!'.
-
-* *4*: Initalises a `channel` labelled `greeting_ch`, which contains the value from `params.greeting`. Channels are the necessary input type for processes in Nextflow.
-
-* *6*: Begins the first process defined as `splitLetters`.
-
-* *8*: Input declaration for the `splitLetters` process. Inputs can be values: `val`, files: `file`, paths `path` or other qualifiers (https://www.nextflow.io/docs/latest/process.html#inputs[See here])
-
-* *9*: Tells the `process` to expect an input value (`val`) `from` the channel `greeting_ch`, that we assign to the variable 'x'. 
-
-* *11*: Output declaration for the `splitLetters` process.
-
-* *12*: Tells the process to expect output file/s (`file`) containing 'chunk_*' as output from the script and send the files to the `channel` `letters_ch`. 
-
-* *14*: Triple quote marks intiate the code block to execute in this `process`.
-
-* *15*: Code to execute, printing the `input` value x (called using the dollar [$] symbol prefix), and splitting the string into chunks of 6 characters long ("Hello " and "world!") and saving to files: chunk_aa and chunk_ab.
-
-* *16*: Triple quote marks the end of the code block.
-
-* *17*: End of first process block.
-
-* *19*: Begin second process defined as `convertToUpper`.
-
-* *21*: Input declaration for the `convertToUpper` `process`.
-
-* *22*: Tells the `process` to expect `input` file/s (`file`; e.g. chunk_aa and chunk_ab) from the `letter_ch`, that we assign to the variable 'y'. 
 
 TIP: The use of the operator `.flatten()` here is to split the two files into two separate items to be put through the next process (else they would treat them as a single element).
-
-* *24*: Output declaration for the `convertToUpper` process.
-
-* *25*: Tells the process to expect output as standard output (stdout) and direct this `into` the `result_ch` channel.
-
-* *27*: Triple quote marks intiate the code block to execute in this `process`.
-
-* *28*: Script to read files (cat) using the '$y' input variable, then pipe to uppercase conversion, outputting to standard output.
-
-* *29*: Triple quote marks the end of the code block.
-
-* *30*: End of first `process` block.
-
-* *32*: The final output (in the `result_ch`) is printed to screen using the `view` operator (appended onto the channel name). 
 
 === In practise
 
 Please now copy the following example into your favourite text editor 
 and save it to a file named `hello.nf`.
+
+WARNING: For the Gitpod tutorial, make sure you are in the folder called `nf-training`
 
 Execute the script by entering the following command in your terminal:
 

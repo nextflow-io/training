@@ -1,106 +1,81 @@
-# nf-training-public
+# Nextflow Training Guide. 
 
-Nextflow Training material. 
+Welcome to the Nextflow training repo. We are excited to have you on the path to writing reproducible and scalable scientific workflows using Nextflow. This guide complements the full Nextflow documentation - if you ever have any doubts, head over to the docs located [here](https://www.nextflow.io/docs/latest/).
 
-## Get started page 
+## Prerequisites:
 
-https://www.seqera.io/training/
+A chromium-based browser (e.g. Chrome, Firefox).
 
-## Cloud9 User Access
+## Opening the training material in a browser
 
-* Access https://eu-central-1.console.aws.amazon.com/cloud9/home/ in a browser.
-* Select IAM user
-* Enter Account # 195996028523 
-* Enter IAM user (see user-names.txt)
-* Enter password (`Secret123!`)
+Follow the following URL, which will lead you to the material we will go over:
 
-## Bucket Upload 
+https://training.seqera.io/
 
-* Add read permision for the training bucket ie. `s3://seqeralabs.com/public` by modifying 
-the IAM policy `nf-training-ro`. E.g.
+## Gitpod tutorial environment
 
-```
-{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Sid": "VisualEditor0",
-            "Effect": "Allow",
-            "Action": "s3:ListBucket",
-            "Resource": "arn:aws:s3:::seqeralabs.com"
-        },
-        {
-            "Sid": "VisualEditor1",
-            "Effect": "Allow",
-            "Action": [
-                "s3:GetObjectAcl",
-                "s3:GetObject",
-                "s3:GetObjectTagging"
-            ],
-            "Resource": "arn:aws:s3:::seqeralabs.com/public/*"
-        }
-    ]
-}
-```
+In addition to the training material, we also have a free cloud environment for you to conduct the training course.
 
+We use Gitpod, which is a Integrated Development Environment (IDE) with all programs installed and example datasets, which allows you to start the training with ease. 
 
-## Course scripts & data 
+If you wish to run the tutorial locally, then there are instructions on how to download all the programs with the training guide: https://training.seqera.io/
 
-All data and scripts should be hosted at this bucket: `s3://seqeralabs.com/public/nf-training`. 
+### Running Gitpod for the first time
 
-1. Sync the local data and scripts with the bucket:
+To run Gitpod:
 
-```
-aws s3 sync --acl public-read --delete --include "nf-training/{data,0?_*}" nf-training s3://seqeralabs.com/public/nf-training
-```
+1. Either: click the following URL:
 
-2. Sync training material: 
+https://gitpod.io/#https://github.com/seqeralabs/nf-training-public
 
-```
-aws s3 sync s3://seqeralabs.com/public/nf-training .
-```
+(which is our Github repository URL, prefixed with https://gitpod.io/#).
 
-## Publish to seqera.io
+**OR**
 
-1. Ensure the latest version of the Seqera website is located at: `../seqera-website`.
+Install the Gitpod browser extension, following the instructions [here](https://www.gitpod.io/docs/browser-extension). This will add a green Gitpod button to each Git repository for easy access to the environment. Then go to the git repository for the training (https://github.com/seqeralabs/nf-training-public), and click the green button.
 
-2. Go into `../seqera-website`.
+![PNG](/asciidocs/img/gitpodbutton.png)
 
-3. Run:
+2. Login to your Github account (and allow authorisation). 
 
-```
-make publish invalidate
-```
+You may need to close the window at each stage and click the gitpod link again. 
 
-Note the aws command may contain a profile. 
+For BitBucket or GitLab, you may have to sign into Gitpod and change your integration on the following page: https://gitpod.io/integrations. 
 
+Once you have signed in, gitpod will load (skip prebuild, if asked):
 
-## Misc
+![PNG](/asciidocs/img/gitpod.png)
 
-Remove unnecessary containers:
+Gitpod gives you 50 hours per month to run the environment, with up to 4 parellel workspaces at a time. So feel free to come back at any time and try the course at your own pace.
 
-```
-docker rmi $(docker images -q)
-```
+It is useful to save the URL that is now your Gitpod environment. Later, we can use this to return to the same closed environment (so please take note of it now).
 
-Resize the instance volume:
+3. Explore your Gitpod IDE
 
-```
-bash misc/resize.sh
-```
+You should see something similar to the following:
 
-## Make ascii docs
+![PNG](/asciidocs/img/gitpod.welcome.png)
 
-To render the pages on your local machine
+**The sidebar** allows you to customise your Gitpod environment and perform basic tasks (Copy/Paste, Open files, search, git, etc.) Click the Explorer button to see which files are in this repository.
 
-First install ascii doctor tools: https://asciidoctor.org/
+**The terminal** allows you to run all the programs in the repository, for example `nextflow` and `docker` are installed. 
 
-Then git clone the repo : `git clone --single-branch --branch master https://github.com/seqeralabs/nf-training-public`
+**The main window** allows you to view and edit files. Clicking on a file in the explorer will open it within the main window. We can also see the nf-training material in this window, but if you find the space too small you can open it separately in another browser window (https://training.seqera.io/). Finally, if you accidently close the Gitpod training window, you can reopen it by entering `gp preview https://training.seqera.io`.
 
-Make your changes to the docs in `asciidocs/`.
+### Reopening a Gitpod session
 
-Then run `make clean`
+Any running workspace will be automatically stopped after 30 minutes. You can open the environment again by going to https://gitpod.io/workspaces and finding your previous environment, then clicking the three dot button to the right, and selecting Open. 
 
-Then make the docs: `make docs`
+If you save the URL from your previous Gitpod environment, you can just paste this into your browser to open the previous environment. Environments are saved for up to two weeks, but don't rely on their existance, download any important files you want for posterity.
 
-Then to open the html: `open asciidocs/index.html`
+Alternatively, you can start a new workspace by clicking the green gitpod button, or following the Gitpod URL: 
+https://gitpod.io/#https://github.com/seqeralabs/nf-training-public
+
+This tutorial provides all the scripts, so don't worry if you have lost your environment. In the `nf-training` and `nf-training/scripts` directories, you can find the main scripts and individual snippets used in the tutorial.
+
+If you want to change git provider (between GitHub, GitLab and BitBucket), go to https://gitpod.io/integrations. Then you will need to login and deactive the current provider.
+
+### Copyright
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a>
+
+Copyright 2020-2022, Seqera Labs. All examples and descriptions are licensed under the <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.

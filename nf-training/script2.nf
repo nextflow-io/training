@@ -1,9 +1,9 @@
 /* 
  * pipeline input parameters 
  */
-params.reads = "$baseDir/data/ggal/*_{1,2}.fq"
-params.transcriptome_file = "$baseDir/data/ggal/transcriptome.fa"
-params.multiqc = "$baseDir/multiqc"
+params.reads = "$projectDir/data/ggal/*_{1,2}.fq"
+params.transcriptome_file = "$projectDir/data/ggal/transcriptome.fa"
+params.multiqc = "$projectDir/multiqc"
 params.outdir = "results"
 
 log.info """\
@@ -26,11 +26,11 @@ process index {
     path transcriptome from params.transcriptome_file
      
     output:
-    path 'index' into index_ch
+    path 'salmon_index' into index_ch
 
     script:       
     """
-    salmon index --threads $task.cpus -t $transcriptome -i index
+    salmon index --threads $task.cpus -t $transcriptome -i salmon_index
     """
 }
  

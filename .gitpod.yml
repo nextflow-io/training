@@ -3,7 +3,7 @@ github:
     # enable for the master/default branch (defaults to true)
     master: true
     # enable for all branches in this repo (defaults to false)
-    branches: true
+    branches: false
     # enable for pull requests coming from this repo (defaults to true)
     pullRequests: true
     # enable for pull requests coming from forks (defaults to false)
@@ -12,22 +12,19 @@ github:
     addComment: true
     # add a "Review in Gitpod" button to pull requests (defaults to false)
     addBadge: false
-    # add a label once the prebuild is ready to pull requests (defaults to false)
-    addLabel: prebuilt-in-gitpod
+
+# Old container: nfcore/gitpod:latest 
+image: nfcore/gitpod:latest 
 
 # List the start up tasks. Learn more https://www.gitpod.io/docs/config-start-tasks/
 tasks:
+  - name: Start web server
+    command: gp await-port 23000 && gp preview https://training.seqera.io    
+
   - name: Download Nextflow Tutorial
-    init: |
-      echo 'init script' # runs during prebuild
-      echo 'start script'
-      curl https://s3-eu-west-1.amazonaws.com/seqeralabs.com/public/nf-training.tar.gz | tar xvz 
-      curl -s https://get.nextflow.io | bash
-      mkdir /workspace/bin
+      
     command: |
-      cp ./nextflow /workspace/bin/nextflow  
-      export PATH=/workspace/bin:$PATH
-# List the ports to expose. Learn more https://www.gitpod.io/docs/config-ports/
-ports:
-  - port: 3000
-    onOpen: open-preview
+      cd nf-training
+      conda init bash
+      unset JAVA_TOOL_OPTIONS
+      docker pull nextflow/rnaseq-nf
