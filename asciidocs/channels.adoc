@@ -13,11 +13,11 @@ Nextflow distinguishes two different kinds of channels: *queue* channels and *va
 
 === Queue channel
 
-A _queue_ channel is a _asynchronous_ unidirectional _FIFO_ queue which connects two processes or operators.
+A _queue_ channel is an _asynchronous_ unidirectional _FIFO_ queue which connects two processes or operators.
 
 * _asynchronous_ means that operations are non-blocking.
 
-* _unidirectional_ means that data flow from a producer to a consumer.
+* _unidirectional_ means that data flows from a producer to a consumer.
 
 * _FIFO_ means that the data is guaranteed to be delivered in the same order as it is produced. First In, First Out.
 
@@ -50,7 +50,7 @@ ch.view()
 ch.view()
 ----
 
-IMPORTANT: A queue channel can have one and exactly one producer and one and exactly one consumer.
+IMPORTANT: A queue channel can only have one and exactly one producer and one and exactly one consumer.
 
 === Value channels
 
@@ -72,7 +72,7 @@ Hello
 Hello
 ```
 
-A `value` channel is created using the https://www.nextflow.io/docs/latest/channel.html#value[value] factory method or by operators returning a single value, such us https://www.nextflow.io/docs/latest/operator.html#first[first], https://www.nextflow.io/docs/latest/operator.html#last[last], https://www.nextflow.io/docs/latest/operator.html#operator-collect[collect], https://www.nextflow.io/docs/latest/operator.html#operator-count[count], https://www.nextflow.io/docs/latest/operator.html#operator-min[min], https://www.nextflow.io/docs/latest/operator.html#operator-max[max], https://www.nextflow.io/docs/latest/operator.html#operator-reduce[reduce], https://www.nextflow.io/docs/latest/operator.html#operator-sum[sum].
+A `value` channel is created using the https://www.nextflow.io/docs/latest/channel.html#value[value] factory method or by operators returning a single value, such as https://www.nextflow.io/docs/latest/operator.html#first[first], https://www.nextflow.io/docs/latest/operator.html#last[last], https://www.nextflow.io/docs/latest/operator.html#operator-collect[collect], https://www.nextflow.io/docs/latest/operator.html#operator-count[count], https://www.nextflow.io/docs/latest/operator.html#operator-min[min], https://www.nextflow.io/docs/latest/operator.html#operator-max[max], https://www.nextflow.io/docs/latest/operator.html#operator-reduce[reduce], and https://www.nextflow.io/docs/latest/operator.html#operator-sum[sum].
 
 == Channel factories
 
@@ -119,7 +119,7 @@ IMPORTANT: Method `Channel.from` will be deprecated and replaced by `Channel.of`
 === of 
 
 The method `Channel.of` works in a similar manner to `Channel.from`, though it fixes
-some inconsistent behavior of the latter and provides a better handling for range of values. 
+some inconsistent behavior of the latter and provides a better handling when specifying a range of values. 
 For example:
 
 [source,nextflow,linenums]
@@ -132,7 +132,7 @@ Channel
 === fromList
 
 The method `Channel.fromList` creates a channel emitting the elements provided 
-by a list objects specified as argument:
+by a list object specified as an argument:
 
 [source,nextflow,linenums]
 ----
@@ -145,7 +145,7 @@ Channel
 
 === fromPath
 
-The `fromPath` factory method create a queue channel emitting one or more files
+The `fromPath` factory method creates a queue channel emitting one or more files
 matching the specified glob pattern.
 
 [source,nextflow,linenums]
@@ -153,7 +153,7 @@ matching the specified glob pattern.
 Channel.fromPath( './data/meta/*.csv' )
 ----
 
-This example creates a channel and emits as many items as there are files with `csv` extension in the `/data/meta` folder. Each element is a file object implementing the https://docs.oracle.com/javase/8/docs/api/java/nio/file/Paths.html[Path] interface.
+This example creates a channel and emits as many items as there are files with a `csv` extension in the `/data/meta` folder. Each element is a file object implementing the https://docs.oracle.com/javase/8/docs/api/java/nio/file/Paths.html[Path] interface.
 
 TIP: Two asterisks, i.e. `\**`, works like `*` but crosses directory boundaries. This syntax is generally used for matching complete paths. Curly brackets specify a collection of sub-patterns.
 
@@ -168,7 +168,7 @@ TIP: Two asterisks, i.e. `\**`, works like `*` but crosses directory boundaries.
 |When ``true`` interprets characters ``*``, ``?``, ``[]`` and ``{}`` as glob wildcards, otherwise handles them as normal characters (default: ``true``)
 
 |type
-| Type of paths returned, either ``file``, ``dir`` or ``any`` (default: ``file``)
+| Type of path returned, either ``file``, ``dir`` or ``any`` (default: ``file``)
 
 |hidden
 | When ``true`` includes hidden files in the resulting paths (default: ``false``)
@@ -177,13 +177,13 @@ TIP: Two asterisks, i.e. `\**`, works like `*` but crosses directory boundaries.
 | Maximum number of directory levels to visit (default: `no limit`)
 
 |followLinks
-| When ``true`` it follows symbolic links during directories tree traversal, otherwise they are managed as files (default: ``true``)
+| When ``true`` symbolic links are followed during directory tree traversal, otherwise they are managed as files (default: ``true``)
 
 |relative
-| When ``true`` returned paths are relative to the top-most common directory (default: ``false``)
+| When ``true`` return paths are relative to the top-most common directory (default: ``false``)
 
 |checkIfExists
-| When ``true`` throws an exception of the specified path do not exist in the file system (default: ``false``)
+| When ``true`` throws an exception when the specified path does not exist in the file system (default: ``false``)
 |===
 
 Learn more about the glob patterns syntax at https://docs.oracle.com/javase/tutorial/essential/io/fileOps.html#glob[this link].
@@ -206,7 +206,7 @@ Channel.fromPath( './data/ggal/**.fq' , hidden:true)
 
 === fromFilePairs
 
-The `fromFilePairs` method creates a channel emitting the file pairs matching a glob pattern provided by the user. The matching files are emitted as tuples in which the first element is the grouping key of the matching pair and the second element is the list of files (sorted in lexicographical order).
+The `fromFilePairs` method creates a channel emitting the file pairs matching a glob pattern provided by the user. The matching files are emitted as tuples, in which the first element is the grouping key of the matching pair and the second element is the list of files (sorted in lexicographical order).
 
 [source,nextflow,linenums]
 ----
@@ -241,7 +241,7 @@ IMPORTANT: The glob pattern must contain at least a star wildcard character.
 |Maximum number of directory levels to visit (default: `no limit`)
 
 |followLinks
-| When ``true`` it follows symbolic links during directories tree traversal, otherwise they are managed as files (default: ``true``)
+| When ``true`` symbolic links are followed during directory tree traversal, otherwise they are managed as files (default: ``true``)
 
 |size
 | Defines the number of files each emitted item is expected to hold (default: 2). Set to ``-1`` for any.
@@ -277,7 +277,7 @@ Then check the square brackets around the file names, to see the difference with
 
 The `Channel.fromSRA` method makes it possible to query the https://www.ncbi.nlm.nih.gov/sra[NCBI SRA] archive and returns a channel emitting the FASTQ files matching the specified selection criteria.
 
-The query can be project ID or accession number(s) supported by the 
+The query can be project ID(s) or accession number(s) supported by the 
 https://www.ncbi.nlm.nih.gov/books/NBK25499/#chapter4.ESearch[NCBI ESearch API]. 
 
 IMPORTANT: This function now requires an API key you can only get by logging into your NCBI account. 
@@ -336,7 +336,7 @@ Channel
 
 TIP: Read pairs are implicitly managed and are returned as a list of files.
 
-It's straightforward to use this channel as an input using the usual Nextflow syntax. The code below creates a channel containing 2 samples from a public SRA study and runs FASTQC on the resulting files. See: 
+It's straightforward to use this channel as an input using the usual Nextflow syntax. The code below creates a channel containing two samples from a public SRA study and runs FASTQC on the resulting files. See: 
 
 [source,nextflow,linenums]
 ----
@@ -411,7 +411,7 @@ Channel
 
 ----
 
-Finally, you can also use the operator on plain files (outside of the channel context), as so:
+Finally, you can also use the operator on plain files (outside of the channel context):
 
 ----
   def f = file('data/meta/random.txt')
@@ -424,11 +424,11 @@ Finally, you can also use the operator on plain files (outside of the channel co
 
 === Comma separate values (.csv)
 
-The `splitCsv` operator allows you to parse text items emitted by a channel, that are formatted using the CSV format. 
+The `splitCsv` operator allows you to parse text items emitted by a channel, that are CSV file formatted. 
 
-It then splits them into records or groups them into a list of records with a specified length.
+It then splits them into records or groups them as a list of records with a specified length.
 
-In the simplest case, just apply the `splitCsv` operator to a channel emitting a CSV formatted text files or text entries, to view only the first and fourth columns. For example:
+In the simplest case, just apply the `splitCsv` operator to a channel emitting a CSV formatted text files or text entries. For example, to view only the first and fourth columns:
 
 ----
   Channel
@@ -438,7 +438,7 @@ In the simplest case, just apply the `splitCsv` operator to a channel emitting a
     .view { row -> "${row[0]},${row[3]}" }
 ----
 
-When the CSV begins with a header line defining the column names, you can specify the parameter `header: true` which allows you to reference each value by its name, as shown in the following example:
+When the CSV begins with a header line defining the column names, you can specify the parameter `header: true` which allows you to reference each value by its column name, as shown in the following example:
 
 ----
   Channel
@@ -448,7 +448,7 @@ When the CSV begins with a header line defining the column names, you can specif
     .view { row -> "${row.patient_id},${row.num_samples}" }
 ----
 
-Alternatively you can provide custom header names by specifying a the list of strings in the header parameter as shown below:
+Alternatively you can provide custom header names by specifying a list of strings in the header parameter as shown below:
 
 ----
   Channel
@@ -469,7 +469,7 @@ You can also process multiple csv files at the same time:
 
 TIP: Notice that you can change the output format simply by adding a different delimiter.
 
-Finally, you can also operate on csv files outside the channel context, as so:
+Finally, you can also operate on csv files outside the channel context:
 
 ----
 def f = file('data/meta/patients_1.csv')
@@ -482,7 +482,7 @@ def f = file('data/meta/patients_1.csv')
 [discrete]
 === Exercise
 
-Try inputting fastq reads to the RNA-Seq workflow from earlier using `.splitCSV`.
+Try inputting fastq reads into the RNA-Seq workflow from earlier using `.splitCSV`.
 
 .Click here for the answer:
 [%collapsible]
@@ -514,7 +514,7 @@ Channel
     .into { read_pairs_ch; read_pairs2_ch } 
 ----
 
-Finally, change the cardinality of the processes that use the input data. For example, for the quantification process I change it from:
+Finally, change the cardinality of the processes that use the input data. For example, for the quantification process, change it from:
 
 [source,nextflow,linenums]
 ----
@@ -556,12 +556,12 @@ process quantification {
 }
 ----
 
-Repeat for the fastqc step. Now the workflow should run from a CSV file.
+Repeat the above for the fastqc step. Now the workflow should run from a CSV file.
 ====
 
 === Tab separated values (.tsv)
 
-Parsing tsv files works in a similar way, just adding the `sep:'\t'` option in the `splitCsv` context:
+Parsing tsv files works in a similar way, simply add the `sep:'\t'` option in the `splitCsv` context:
 
 ----
  Channel
@@ -610,7 +610,7 @@ IMPORTANT: When using an older JSON version, you may need to replace `parse(f)` 
 
 === YAML
 
-In a similar way, this is a way to parse YAML files: 
+This can also be used as a way to parse YAML files: 
 
 ----
 import org.yaml.snakeyaml.Yaml
@@ -628,13 +628,9 @@ for( def entry : records ) {
 
 The best way to store parser scripts is to keep them in a nextflow module file. 
 
-This follows the DSL2 way of working.
-
 See the following nextflow script:
 
 ----
-nextflow.preview.dsl=2
-
 include{ parseJsonFile } from './modules/parsers.nf'
 
 process foo {
@@ -654,7 +650,9 @@ workflow {
 }
 ----
 
-To get this script to work, first we need to create a file called `parsers.nf`, and store it in the modules folder in the current directory.
+For this script to work, a file called `parsers.nf` needs to be created and stored in the modules folder in the current directory.
 
-This file should have the `parseJsonFile` function present, then Nextflow will use this as a custom function within the workflow scope.
+This file should contain the `parseJsonFile` function.
+
+Nextflow will use this as a custom function within the workflow scope.
 
