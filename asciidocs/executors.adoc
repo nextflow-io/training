@@ -4,7 +4,7 @@ Real world genomic application can spawn the execution of thousands of jobs. In 
 scenario a batch scheduler is commonly used to deploy a pipeline in a computing cluster, 
 allowing the execution of many jobs in parallel across many compute nodes. 
 
-Nextflow has built-in support for most commonly used batch schedulers, such as Univa Grid Engine, https://slurm.schedmd.com/[SLURM] and IBM LSF. Check the Nextflow documentation for 
+Nextflow has built-in support for the most commonly used batch schedulers, such as Univa Grid Engine, https://slurm.schedmd.com/[SLURM] and IBM LSF. Check the Nextflow documentation for 
 the complete list of supported https://www.nextflow.io/docs/latest/executor.html[execution platforms].
 
 == Cluster deployment 
@@ -66,7 +66,7 @@ process {
 
 === Configure process by name 
 
-In real world application different tasks need different amount of 
+In real world application different tasks need different amounts of 
 computing resources. It is possible to define the resources for a specific task 
 using the select `withName:` followed by the process name: 
 
@@ -96,7 +96,7 @@ process {
 [discrete]
 === Exercise
 
-Run the RNA-Seq script (script7.nf) from earlier, but specify that the `quantification` `process` cpu reuirements to 2 cpu and with 5 GB of memory, withon the `nextflow.config` file.
+Run the RNA-Seq script (script7.nf) from earlier, but specify that the `quantification` `process` cpu reuires 2 cpu and 5 GB of memory, within the `nextflow.config` file.
 
 .Click here for the answer:
 [%collapsible]
@@ -114,8 +114,8 @@ process {
 
 === Configure process by labels
 
-When a workflow application is composed by many processes listing all process names 
-in the configuration file can be difficult to choose resources for each of them.
+When a workflow application is composed by many processes, listing all of the process names and choosing resources for
+each of them in the configuration file can be difficult.
 
 A better strategy consists of annotating the processes with a https://www.nextflow.io/docs/latest/process.html#label[label] directive. Then specify the resources in the configuration file used for all processes having the same label. 
 
@@ -164,7 +164,7 @@ process {
 
 === Configure multiple containers
 
-It is possible to use a different container for each process in your workflow. You can define their continers in a config file as shown
+Containers can be set for each process in your workflow. You can define their continers in a config file as shown
 below:
 
 [source,config,linenums,options="nowrap"]
@@ -275,7 +275,7 @@ The complete details about AWS Batch deployment are available at https://www.nex
 
 == Volume mounts 
 
-EBS volumes (or other supported storage) can be mounted in the job container using the following configuration snippet: 
+Elastic Block Storage (EBS) volumes (or other supported storage) can be mounted in the job container using the following configuration snippet: 
 
 ```
 aws {
@@ -296,9 +296,9 @@ aws {
 }
 ```
 
-IMPORTANT: This is a global configuration that has to be specified in a Nextflow config file, as such it's applied to *all* process executions.
+IMPORTANT: This is a global configuration that has to be specified in a Nextflow config file and will be applied to *all* process executions.
 
-IMPORTANT: Nextflow expects those paths to be available. It does not handle the provision of EBS volumes or 
+IMPORTANT: Nextflow expects paths to be available. It does not handle the provision of EBS volumes or 
 other kind of storage. 
 
 
@@ -319,7 +319,7 @@ process {
 
 == Custom image 
 
-Since Nextflow requires the AWS CLI tool to be accessible in the computing environment, a common solution consists of creating a custom AMI and installing it in a self-contained manner (e.g. using Conda package manager).
+Since Nextflow requires the AWS CLI tool to be accessible in the computing environment, a common solution consists of creating a custom Amazon Machine Image (AMI) and installing it in a self-contained manner (e.g. using Conda package manager).
 
 IMPORTANT: When creating your custom AMI for AWS Batch, make sure to use the _Amazon ECS-Optimized Amazon Linux AMI_ as the base image.
 
@@ -333,7 +333,7 @@ $HOME/miniconda/bin/conda install -c conda-forge -y awscli
 rm Miniconda3-latest-Linux-x86_64.sh
 ```
 
-NOTE: The `aws` tool will be placed in a directory named `bin` in the main installation folder. Modifying this directory structure after the installation will cause the tool to not work properly.
+NOTE: The `aws` tool will be placed in a directory named `bin` in the main installation folder. The tools will not work properly if you modify this directory structure after the installation.
 
 Finally specify the `aws` full path in the Nextflow config file as show below: 
 
@@ -343,7 +343,7 @@ aws.batch.cliPath = '/home/ec2-user/miniconda/bin/aws'
 
 == Launch template 
 
-An alternative to is to create a custom AMI using a
+An alternative approach to is to create a custom AMI using a
 https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html[Launch template] that 
 installs the AWS CLI tool during the instance boot via custom user-data. 
 
@@ -374,12 +374,12 @@ chown -R ec2-user:ec2-user $USER/miniconda
 --//--
 ```
 
-Then in the Batch dashboard create a new compute environment and specify the newly created
+Then create a new compute environment in the Batch dashboard nand specify the newly created
 launch template in the corresponding field.
 
 == Hybrid deployments 
 
-Nextflow allows the use of multiple executors in the same workflow application. This feature enables the deployment of hybrid workloads in which some jobs are executed on the local computer or local computing cluster and some jobs are offloaded to the AWS Batch service.
+Nextflow allows the use of multiple executors in the same workflow application. This feature enables the deployment of hybrid workloads in which some jobs are executed on the local computer or local computing cluster, and some jobs are offloaded to the AWS Batch service.
 
 To enable this feature use one or more https://www.nextflow.io/docs/latest/config.html#config-process-selectors[process selectors] in your Nextflow configuration file.  
 
