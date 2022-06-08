@@ -7,11 +7,11 @@ This enables portable deployment without the need to modify the application code
 
 == Configuration file 
 
-When a pipeline script is launched Nextflow looks for a file named `nextflow.config` in the current directory and in the script base directory (if it is not the same as the current directory). Finally it checks for the file: `$HOME/.nextflow/config`.
+When a pipeline script is launched, Nextflow looks for a file named `nextflow.config` in the current directory and in the script base directory (if it is not the same as the current directory). Finally it checks for the file: `$HOME/.nextflow/config`.
 
-When more than one on the above files exist they are merged, so that the settings in the first override the same ones that may appear in the second one, and so on.
+When more than one on the above files exist they are merged, so that the settings in the first override the same settings that may appear in the second, and so on.
 
-The default config file search mechanism can be extended proving an extra configuration file by using the command line option: `-c <config file>`.
+The default config file search mechanism can be extended by providing an extra configuration file by using the command line option: `-c <config file>`.
 
 === Config syntax 
 
@@ -69,7 +69,7 @@ beta {
 
 === Config params 
 
-The scope `params` allows the definition of workflow parameters that overrides the values defined 
+The scope `params` allows the definition of workflow parameters that override the values defined 
 in the main workflow script. 
 
 This is useful to consolidate one or more execution parameters in a separate file. 
@@ -170,9 +170,9 @@ ALPHA=some value
 
 === Config process
 
-`process` https://www.nextflow.io/docs/latest/process.html#directives[directives] allow the specification of specific settings for the task execution such as `cpus`, `memory`, `container` and other resources in the pipeline script. 
+`process` https://www.nextflow.io/docs/latest/process.html#directives[directives] allow the specification of settings for the task execution such as `cpus`, `memory`, `container` and other resources in the pipeline script. 
 
-This is useful specially when prototyping a small workflow script. 
+This is useful when prototyping a small workflow script. 
 
 However it's always a good practice to decouple the workflow execution 
 logic from the process configuration settings, i.e. it's strongly 
@@ -248,7 +248,7 @@ process foo {
 }
 ====
 
-This is important, especially when you want to define a config setting
+This is especially important when you want to define a config setting
 using a dynamic expression using a closure. For example: 
 
 ```
@@ -318,7 +318,7 @@ The following protocols are supported:
 the Singularity format.
 * `docker-daemon://` pull the container image from a local Docker installation and convert it to a Singularity image file.
 
-WARNING: * Singularity hub `shub://` is now no longer available as a builder service. Though existing images before 19th April 2021 are still working.
+WARNING: * Singularity hub `shub://` is no longer available as a builder service. Though existing images from before 19th April 2021 will still work.
 
 TIP: By specifying a plain Docker container image name, Nextflow implicitly downloads and converts it to 
 a Singularity image when the Singularity execution is enabled. For example:
@@ -359,6 +359,6 @@ adding the following setting in the `nextflow.config` file:
 process.conda = "/home/ubuntu/miniconda2/envs/nf-tutorial"
 ----
 
-You can either specify the path of an existing Conda environment *directory* or the 
+You can specify the path of an existing Conda environment as either *directory* or the 
 path of Conda environment YAML file. 
 
