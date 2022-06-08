@@ -1,7 +1,7 @@
 = Manage dependencies & containers
 
 Computational workflows are rarely composed of a single script or tool. 
-Most of the times they require the usage of dozens of different software
+Most of the time they require the usage of dozens of different software
 components or libraries.
 
 Installing and maintaining such dependencies is a challenging task and
@@ -71,7 +71,7 @@ Docker images are created by using a so-called `Dockerfile`, which is a simple t
 containing a list of commands to assemble and configure the image
 with the software packages required.
 
-In this step you will create a Docker image containing the Salmon tool.
+Here, you will create a Docker image containing cowsay and the Salmon tool.
 
 IMPORTANT: the Docker build process automatically copies all files that are located in the
 current directory to the Docker daemon in order to create the image. This can take
@@ -104,7 +104,7 @@ docker build -t my-image .
 Where "my-image" is the user specified name tag for the Dockerfile, present in the current directory.
 
 IMPORTANT: Don't miss the dot in the above command. When it completes, verify that the image
-has been created listing all available images:
+has been created by listing all available images:
 
 ```bash
 docker images
@@ -118,7 +118,7 @@ docker run my-image cowsay Hello Docker!
 
 === Add a software package to the image
 
-Add the Salmon package to the Docker image by adding to the `Dockerfile` the following snippet:
+Add the Salmon package to the Docker image by adding the following snippet to the `Dockerfile`:
 
 [source,docker,linenums,options="nowrap"]
 ----
@@ -187,7 +187,7 @@ docker run --volume $PWD:$PWD --workdir $PWD my-image \
   salmon index -t $PWD/data/ggal/transcriptome.fa -i transcript-index
 ```
 
-or set a folder you want to mount as an environmental variable, called `DATA`:
+Or set a folder you want to mount as an environmental variable, called `DATA`:
 
 ```
 DATA=/workspace/nf-training-public/nf-training/data
@@ -214,7 +214,7 @@ Use the option `-u $(id -u):$(id -g)` to allow Docker to create files with the r
 Publish your container in the Docker Hub to share it with other people.
 
 Create an account in the https://hub.docker.com web site. Then from your shell terminal run
-the following command, entering the user name and password you specified registering in the Hub:
+the following command, entering the user name and password you specified when registering in the Hub:
 
 ```bash
 docker login
@@ -261,25 +261,25 @@ The simplest way to run a Nextflow script with a Docker image is using the
 nextflow run script2.nf -with-docker my-image
 ```
 
-We'll see later how to configure in the Nextflow config file which container 
-to use instead of having to specify every time as a command line argument.
+We'll see later how to configure the Nextflow config file to select which container 
+to use instead of having to specify it as a command line argumentevery time.
 
 
 == Singularity
 
-http://singularity.lbl.gov[Singularity] is container runtime designed to work in HPC data center,
+http://singularity.lbl.gov[Singularity] is container runtime designed to work in high-performance computing data centers,
 where the usage of Docker is generally not allowed due to security constraints.
 
 Singularity implements a container execution model similar to Docker, however it uses
-a complete different implementation design.
+a completely different implementation design.
 
 A Singularity container image is archived as a plain file that can be stored in a shared
-file system and accessed by many computing nodes managed by a batch scheduler.
+file system and accessed by many computing nodes managed using a batch scheduler.
 
 === Create a Singularity images
 
-Singularity images are created using a `Singularity` file in  similar manner to Docker,
-though using a different syntax.
+Singularity images are created using a `Singularity` file in similar manner to Docker but
+using a different syntax.
 
 [source,singularity,linenums,options="nowrap"]
 ----
@@ -300,15 +300,15 @@ curl -sSL https://github.com/COMBINE-lab/salmon/releases/download/v1.0.0/salmon-
  && mv /salmon-*/lib/* /usr/lib/
 ----
 
-Once you have save the `Singularity` file. Create the image with these commands:
+Once you have save the `Singularity` file. You can create the image with these commands:
 
 ```bash
 sudo singularity build my-image.sif Singularity
 ```
 
 Note: the `build` command requires `sudo` permissions. A common workaround
-consists to build the image on a local workstation and then deploy in the
-cluster just copying the image file.
+consists of building the image on a local workstation and then deploying it in the
+cluster by copying the image file.
 
 === Running a container
 
@@ -339,7 +339,7 @@ mounts the host `$HOME` directory and uses the current work directory.
 === Import a Docker image
 
 An easier way to create Singularity container without requiring sudo permission and
-boosting the containers interoperability is to import a Docker container image
+boosting the containers interoperability is to import a Docker container image by
 pulling it directly from a Docker registry. For example:
 
 ```bash
@@ -347,23 +347,23 @@ singularity pull docker://debian:stretch-slim
 ```
 
 The above command automatically downloads the Debian Docker image and converts it to
-a Singularity image store in the current directory with the name `debian-jessie.simg`.
+a Singularity image in the current directory with the name `debian-jessie.simg`.
 
 
 === Run a Nextflow script using a Singularity container
 
 Nextflow allows the transparent usage of Singularity containers as easy as with
-Docker ones.
+Docker.
 
-It only requires to enable the use of Singularity engine in place of Docker in the
-Nextflow configuration file using the `-with-singularity` command line option:
+Simply enable the use of the Singularity engine in place of Docker in the
+Nextflow configuration file by using the `-with-singularity` command line option:
 
 ```bash
 nextflow run script7.nf -with-singularity nextflow/rnaseq-nf
 ```
 
-As before the Singularity container can also be provided in the Nextflow config file. 
-We'll see later how to do it. 
+As before, the Singularity container can also be provided in the Nextflow config file. 
+We'll see how to do this later. 
 
 
 === The Singularity Container Library
@@ -429,14 +429,14 @@ To enable the environment you can use the `activate` command:
 conda activate nf-tutorial
 ```
 
-Nextflow is able to manage the activation of a Conda environment when the its directory
+Nextflow is able to manage the activation of a Conda environment when its directory
 is specified using the `-with-conda` option (using the same path shown in the `list` function. For example:
 
 ```bash
 nextflow run script7.nf -with-conda /opt/conda/envs/nf-tutorial
 ```
 
-TIP: When specifying as Conda environment a YAML recipe file, Nextflow automatically downloads the required dependencies, build the environment and automatically activate it.
+TIP: When creating a Conda environment with a YAML recipe file, Nextflow automatically downloads the required dependencies, builds the environment and nactivates it.
 
 This makes easier to manage different environments for the processes in the workflow script.
 
@@ -470,7 +470,7 @@ The above `Dockerfile` takes the parent image 'mambaorg/micromamba', then instal
 [discrete]
 === Exercise
 
-Try executing the RNA-Seq pipeline from earlier (script7.nf), but start by building your own micromamba `Dockerfile` (from above), save to your docker hub repo and direct Nextflow to run from this container (changing your `nexflow.config`). 
+Try executing the RNA-Seq pipeline from earlier (script7.nf). Start by building your own micromamba `Dockerfile` (from above), save to your docker hub repo and direct Nextflow to run from this container (changing your `nexflow.config`). 
 
 IMPORTANT: Building a Docker container and pushing to your personal repo can take >10 minutes.
 
@@ -484,9 +484,9 @@ IMPORTANT: Building a Docker container and pushing to your personal repo can tak
 3. Publish the docker image to your online docker account. 
 +
 --
-Something similar to the following, with <myrepo> replaced with your own Docker ID, without '<' and '>' characters!. 
+Something similar to the following, with <myrepo> replaced with your own Docker ID, without '<' and '>' characters! 
 
-TIP: "my-image" could be any name you choose. Just choose something memorable and ensure the name matches the name you used in the previous command.
+TIP: "my-image" could be replaced with any name you choose. As good practice, choose something memorable and ensure the name matches the name you used in the previous command.
 
 ```
 docker login
@@ -510,7 +510,6 @@ and replace with:
 process.container = '<myrepo>/my-image'
 ```
 
-replacing the above the correct docker hub link.
 --
 
 5. Trying running Nextflow, e.g.:
@@ -521,7 +520,7 @@ nextflow run script7.nf -with-docker
 ```
 --
 
-It should now work, and find `salmon` to run the process. 
+Nextflow should now be able to find `salmon` to run the process. 
 ====
 
 == BioContainers
