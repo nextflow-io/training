@@ -35,9 +35,9 @@ Work dir:            <6>
 <5> The command standard error 
 <6> The command work directory 
 
-Review carefully all these data, they can provide valuable information on the cause of the error. 
+Carefully review all error data as it can provide information valuable for dubugging. 
 
-If this is not enough, `cd` into the task work directory. It contains all the files to replicate the issue in a isolated manner. 
+If this is not enough, `cd` into the task work directory. It contains all the files to replicate the issue in an isolated manner. 
 
 The task execution directory contains these files: 
 
@@ -51,11 +51,11 @@ The task execution directory contains these files:
 * Task input files (symlinks) 
 * Task output files 
 
-Verify that the `.command.sh` file contains the expected command to be executed and all variables are correctly resolved. 
+Verify that the `.command.sh` file contains the expected command and all variables are correctly resolved. 
 
 Also verify the existence of the `.exitcode` and `.command.begin` files, which if absent, suggest the task was never executed by the subsystem (e.g. the batch scheduler). If the `.command.begin` file exist, the job was launched but was likely killed abruptly.
 
-You can replicate the failing execution using the command `bash .command.run` and verify the cause of the error. 
+You can replicate the failing execution using the command `bash .command.run` to verify the cause of the error. 
 
 == Ignore errors 
 
@@ -74,7 +74,7 @@ process foo {
 }
 ----
 
-If you want to ignore any error set the same directive in the config file as a default setting: 
+If you want to ignore any error you can set the same directive in the config file as a default setting: 
 
 [source,config,linenums]
 ----
@@ -100,7 +100,7 @@ Using the `retry` error strategy the task is re-executed a second time if it ret
 before stopping the complete workflow execution. 
 
 The directive https://www.nextflow.io/docs/latest/process.html#maxretries[maxRetries] can be used to 
-set number of attempts the task can be re-execute before declaring it failed with an error condition. 
+set the number of attempts the task can be re-execute before declaring it failed with an error condition. 
 
 == Retry with backoff
  
@@ -125,7 +125,7 @@ process foo {
 
 == Dynamic resources allocation 
 
-It's a very common scenario that different instances of the same process may have very different needs in terms of computing resources. In such situations requesting for example, an amount of memory too low will cause some tasks to fail. Instead, using a higher limit that fits all the tasks in your execution could significantly decrease the execution priority of your jobs.
+It's a very common scenario that different instances of the same process may have very different needs in terms of computing resources. In such situations requesting, for example, an amount of memory too low will cause some tasks to fail. Instead, using a higher limit that fits all the tasks in your execution could significantly decrease the execution priority of your jobs.
 
 To handle this use case, you can use a `retry` error strategy and increasing the computing resources allocated by the job at each successive _attempt_.
 
