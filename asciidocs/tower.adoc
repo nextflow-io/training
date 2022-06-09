@@ -2,16 +2,16 @@
 
 == Basic concepts
 
-Nextflow Tower is the centralized command-post for data management and pipelines. 
-It brings monitoring, logging & observability, to distributed workflows and simplifies the deployment of pipelines on any cloud, cluster or laptop. 
+Nextflow Tower is the centralized command post for data management and pipelines. 
+It brings monitoring, logging and observability to distributed workflows and simplifies the deployment of pipelines on any cloud, cluster or laptop. 
 
 
 Nextflow tower core features include:
 
-* the launching of pre-configured pipelines with ease.
-* programmatic integration to meet the needs of organizations.
-* publishing pipelines to shared workspaces.
-* management of infrastructure required to run data analysis at scale.
+* The launching of pre-configured pipelines with ease.
+* Programmatic integration to meet the needs of an organization.
+* Publishing pipelines to shared workspaces.
+* Management of the infrastructure required to run data analysis at scale.
 
 
 TIP: https://cloud.tower.nf/[Sign] up to try Tower for free or request a https://seqera.io/demo/[demo] for deployments in your own on-premise or cloud environment.
@@ -53,9 +53,9 @@ export NXF_VER=20.10.0
 
 Where `eyxxxxxxxxxxxxxxxQ1ZTE=` is the token you have just created.
 
-NOTE: Check your `nextflow -version`. Bearer tokens require Nextflow version 20.10.0 or later, set with the second command above. Change as necessary.
+NOTE: Check your `nextflow -version`. Bearer tokens require Nextflow version 20.10.0 or later and can be set with the second command shown above. You can change the version if necessary.
 
-To submit a pipeline to a https://help.tower.nf/getting-started/workspace/[Workspace] using the Nextflow command line tool, add the workspace ID to your environment. For example
+To submit a pipeline to a https://help.tower.nf/getting-started/workspace/[Workspace] using the Nextflow command line tool, add the workspace ID to your environment. For example:
 
 [source,bash,linenums]
 ----
@@ -109,7 +109,7 @@ image::compute_env_platforms.png[]
 
 Each compute environment must be pre-configured to enable Tower to submit tasks. You can read more on how to set up each environment using the links below.
 
-The following set up guides describe how to configure eahc of these compute environments.
+The following guides describe how to configure each of these compute environments.
 
 https://help.tower.nf/compute-envs/aws-batch/[AWS Batch]
 https://help.tower.nf/compute-envs/azure-batch/[Azure Batch]
@@ -146,7 +146,7 @@ A pipeline is a repository containing a Nextflow workflow, a compute environment
 
 Launchpad automatically detects the presence of a `nextflow_schema.json` in the root of the repository and dynamically creates a form where users can easily update the parameters.
 
-TIP: The parameter forms view will appear, if the workflow has a Nextflow schema file for the parameters. Please refer the https://help.tower.nf/pipeline-schema/overview[Nextflow Schema guide] to learn more about the use-cases and how to create them.
+TIP: The parameter forms view will appear if the workflow has a Nextflow schema file for the parameters. Please refer to the https://help.tower.nf/pipeline-schema/overview[Nextflow Schema guide] to learn more about the schema file use-cases and how to create them.
 
 This makes it trivial for users without any expertise in Nextflow to enter their pipeline parameters and launch.
 
@@ -164,10 +164,10 @@ In brief, these are the steps you need to follow to set up a pipeline.
 
 3. Enter the repository of the pipeline you want to launch.  e.g. https://github.com/nf-core/rnaseq.git
 
-4. A *Revision number* can be used select different versions of pipeline.
+4. Select a pipeline *Revision number*.
 The Git default branch (main/master) or `manifest.defaultBranch` in the Nextflow configuration will be used by default.
 
-5. The *Work directory* specifies the location of the Nextflow work directory.
+5. Set the *Work directory* location of the Nextflow work directory.
 The location associated with the compute environment will be selected by default.
 
 6. Enter the name(s) of each of the Nextflow *Config profiles* followed by the `Enter` key.
@@ -183,17 +183,18 @@ See the Nextflow https://www.nextflow.io/docs/latest/config.html#config-profiles
 +
 8. Select Launchpad to begin the pipeline execution.
 
-TIP: Nextflow pipelines are simply Git repositories and the location can be any public or private Git-hosting platform. See Git Integration in the Tower docs and Pipeline Sharing in the Nextflow docs for more details.
+TIP: Nextflow pipelines are simply Git repositories and can be changed to any public or private Git-hosting platform. See Git Integration in the Tower docs and Pipeline Sharing in the Nextflow docs for more details.
 
 WARNING: The credentials associated with the compute environment must be able to access the work directory.
 
 TIP: In the configuration, the full path to a bucket must be specified with single-quotes around strings no quotes around booleans or numbers.
 
-TIP: To create your own customized Nextflow Schema for your pipleine, see the examples of from increasing number of `nf-core` workflows that have adopted this for example https://github.com/nf-core/eager/blob/2.3.3/nextflow_schema.json[eager] and https://github.com/nf-core/rnaseq/blob/3.0/nextflow_schema.json[rnaseq].
+TIP: To create your own customized Nextflow Schema for your pipleine, see the examples from the `nf-core` workflows that have adopted this approach, for example https://github.com/nf-core/eager/blob/2.3.3/nextflow_schema.json[eager] and https://github.com/nf-core/rnaseq/blob/3.0/nextflow_schema.json[rnaseq].
 
 For advanced setting options check out this https://help.tower.nf/launch/advanced/[page].
 
-There is also community support available if you get into trouble, see https://gitter.im/nf-tower/community[here].
+There is also community support available if you get into trouble, join the Nextflow slack by following this
+https://www.nextflow.io/slack-invite.html[link].
 
 === API
 
@@ -217,7 +218,7 @@ Tower allows creation of multiple organizations, each of which can contain multi
 
 Any user can be added or removed from a particular organization or a workspace and can be allocated a specific access role within that workspace.
 
-The Teams feature provides a way for the organizations to group various users and participants together into teams, for example `workflow-developers` or `analysts`, and apply access control to all the users within this team as a whole.
+The Teams feature provides a way for organizations to group various users and participants together into teams, for example `workflow-developers` or `analysts`, and apply access control to all the users within this team collectively.
 
 For further information, please refer the https://help.tower.nf/orgs-and-teams/organizations/[User Management] section.
 
@@ -239,7 +240,7 @@ WARNING: A valid name for the organization must follow specific pattern. Please 
 4. Once the details are filled-in, you can access the newly created organization using the organizations page, which lists all of your organizations.
 +
 --
-TIP: It is possible to change the values of the optional fields either using the Edit option on the organizations page or using the Settings tab within the organization page, provided that you are the Owner of the organization .
+TIP: It is possible to change the values of the optional fields either using the Edit option on the organizations page or by using the Settings tab within the organization page, provided that you are the Owner of the organization .
 
 NOTE: A list of all the included Members, Teams and Collaborators can be found at the organization page.
 --
