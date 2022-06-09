@@ -13,9 +13,9 @@ Nextflow extends this approach, adding the ability to define complex program int
 high-level parallel computational environment based on the dataflow programming model. Nextflow's
 core features are:
 
-* Workflow portability & reproducibility
+* Workflow portability and reproducibility
 * Scalability of parallelization and deployment
-* Integration of existing tools, systems & industry standards
+* Integration of existing tools, systems and industry standards
 
 === Processes and Channels
 
@@ -26,7 +26,7 @@ Processes are executed independently and are isolated from each other, i.e. they
 (writable) state. The only way they can communicate is via asynchronous first-in, first-out (FIFO) queues, called
 `channels` in Nextflow.
 
-Any `process` can define one or more `channels` as `input` and `output`. The interaction between these processes,
+Any `process` can define one or more `channels` as an `input` and `output`. The interaction between these processes,
 and ultimately the pipeline execution flow itself, is implicitly defined by these `input` and `output` declarations.
 
 image::channel-process.png[]
@@ -38,10 +38,10 @@ how that `script` is actually run in the target platform.
 
 If not otherwise specified, processes are executed on the local computer. The local executor
 is very useful for pipeline development and testing purposes, but for real world computational
-pipelines, an HPC or cloud platform is often required.
+pipelines, an High Performance Computing (HPC) or cloud platform is often required.
 
 In other words, Nextflow provides an abstraction between the pipeline's functional logic and
-the underlying execution system (or runtime). Thus it is possible to write a pipeline once and to seamlessly
+the underlying execution system (or runtime). Thus, it is possible to write a pipeline once and to seamlessly
 run it on your computer, a cluster, or the cloud, without modifying it, by simply defining
 the target execution platform in the configuration file.
 
@@ -49,17 +49,17 @@ image::execution_abstraction.png[]
 
 === Scripting language
 
-Nextflow implements a declarative domain specific language (DSL) that simplifies the writing 
+Nextflow implements a declarative DSL that simplifies the writing 
 of complex data analysis workflows as an extension of a general purpose programming language.
 
 This approach makes Nextflow very flexible, because it allows in the same
-computing environment the benefits of a concise DSL allowing the handling of
+computing environment the benefits of a concise DSL allowing for the handling of
 recurrent use cases with ease *and* the flexibility and power of a general purpose
 programming language to handle corner cases, which may be difficult to implement using
 a purely declarative approach.
 
-In practical terms, Nextflow scripting is an extension of the https://groovy-lang.org/[Groovy programming language],
-which in turn is a super-set of the Java programming language. Groovy can be considered as Python for Java in that
+In practical terms, Nextflow scripting is an extension of the https://groovy-lang.org/[Groovy programming language]
+that, in turn, is a super-set of the Java programming language. Groovy can be considered as Python for Java in that
 it simplifies the writing of code and is more approachable.
 
 == Your first script
@@ -182,7 +182,7 @@ Where the standard output shows (line by line):
 TIP: The hexadecimal numbers, like `8a/537930`, identify the unique process
 execution. These numbers are also the prefix of the directories where each
 process is executed. You can inspect the files produced by changing to the directory
-`$PWD/work` and using these numbers to find the process-specific
+`$PWD/work` and use these numbers to find the process-specific
 execution path.
 
 IMPORTANT: The second process runs twice, executing in two different work directories 
@@ -192,7 +192,7 @@ relevent paths to screen, use the `-ansi-log` flag (e.g. `nextflow run hello.nf 
 
 It's worth noting that the process `convertToUpper` is executed in parallel, so there's no guarantee that the instance processing the first split (the chunk 'Hello ') will be executed before the one processing the second split (the chunk 'world!').
 
-Thus, it is perfectly possible that you will get the final result
+Thus, it is perfectly possible that your final result will be
 printed out in a different order:
 
 [source,cmd]
@@ -264,8 +264,8 @@ If you are sure you won't resume your pipeline execution, clean this folder peri
 
 == Pipeline parameters
 
-Pipeline parameters are simply declared by prepending to a variable name
-the prefix `params`, separated by a dot character. Their value can be
+Pipeline parameters are simply declared by prepending the prefix `params`to a
+variable name, separated by a dot character. Their value can be
 specified on the command line by prefixing the parameter name with a
 double dash character, i.e. `--paramName`
 
@@ -293,7 +293,7 @@ m el r
 
 === In DAG-like format
 
-To better understand how Nextflow is dealing with the data in this pipeline, we share below a DAG-like figure to visualise all the `inputs`, `outputs`, `channels` and `processes`.
+To better understand how Nextflow is dealing with the data in this pipeline, below is a DAG-like figure to visualise all the `inputs`, `outputs`, `channels` and `processes`.
 
 .Check this out, by clicking here:
 [%collapsible]
