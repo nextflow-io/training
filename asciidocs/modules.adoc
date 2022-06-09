@@ -97,9 +97,9 @@ e.g.
 
 === Specifying outputs
 
-If a process defines two or more output channels, each of them can be accessed by indexing the `.out` attribute e.g. `.out[0]`, `.out[1]`, etc.
+If a process defines two or more output channels, each channel can be accessed by indexing the `.out` attribute e.g. `.out[0]`, `.out[1]`, etc.
 
-Further, the process `output` definition also allows the use of the `emit` statement to define a named identifier that can be used to reference the channel in the external scope. 
+Additionally, the process `output` definition allows the use of the `emit` statement to define a named identifier that can be used to reference the channel in the external scope. 
 
 For example, check the `emit` statement on the `convertToUpper` process in the following snippet:
 
@@ -143,7 +143,7 @@ workflow {
 }
 ----
 
-WARNING: In the above example, we have reverted to keeping the `process` definitions within the `hello.nf` script. This would work the same if the emit defintion was in a `modules.nf` file.
+WARNING: In the above example, we have reverted to keeping the `process` definitions within the `hello.nf` script. This would work the same way if the emit defintion was in a `modules.nf` file.
 
 === Multiple imports
 
@@ -326,7 +326,7 @@ workflow my_pipeline {
 
 IMPORTANT: When the `take` statement is used, the `workflow` definition needs to be declared within the `main` block.
 
-The input for the `workflow` can then be specified as an argument as shown below:
+The input for the `workflow` can then be specified as an argument:
 
 [source,nextflow,linenums]
 ----
@@ -387,5 +387,5 @@ The result of the above snippet can then be accessed using `my_pipeline.out.my_d
 
 == DSL2 migration notes
 
-To view a summary of the changes introduced when migrating from DSL1 to DSL2 please refer to the https://www.nextflow.io/docs/latest/dsl2.html#dsl2-migration-notes[DSL2 migration notes] in the official Nextflow documentation.
+To view a summary of the changes introduced when Nextflow migrated from DSL1 to DSL2 please refer to the https://www.nextflow.io/docs/latest/dsl2.html#dsl2-migration-notes[DSL2 migration notes] in the official Nextflow documentation.
 
