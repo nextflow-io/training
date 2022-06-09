@@ -193,7 +193,7 @@ TIP: To create your own customized Nextflow Schema for your pipleine, see the ex
 
 For advanced setting options check out this https://help.tower.nf/launch/advanced/[page].
 
-There is also community support available if you get into trouble, join the Nextflow slack by following this
+There is also community support available if you get into trouble, join the Nextflow Slack by following this
 https://www.nextflow.io/slack-invite.html[link].
 
 === API
