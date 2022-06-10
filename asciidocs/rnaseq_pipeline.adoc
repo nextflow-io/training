@@ -8,7 +8,7 @@ To demonstrate a real-world biomedical scenario, we will implement a proof of co
 4. Creates a MultiQC report
 
 This will be done using a series of seven scripts, 
-each of which builds on the previous, in order to create a complete worflow. 
+each of which builds on the previous, in order to create a complete workflow. 
 You can find these in the tutorial folder (`script1.nf` to `script7.nf`).
 
 == Define the pipeline parameters
