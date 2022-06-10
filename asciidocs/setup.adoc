@@ -114,7 +114,7 @@ You should see something similar to the following:
 
 image::gitpod.welcome.png[]
 
-**The sidebar** allows you to customise your Gitpod environment and perform basic tasks (copy/paste, open files, search, git, etc.) Click the Explorer button to see which files are in this repository.
+**The sidebar** allows you to customise your Gitpod environment and perform basic tasks (copy, paste, open files, search, git, etc.). Click the Explorer button to see which files are in this repository.
 
 **The terminal** allows you to run all the programs in the repository, for example `nextflow` and `docker` are installed. 
 
