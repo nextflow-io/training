@@ -122,7 +122,7 @@ image::gitpod.welcome.png[]
 
 4. Saving your files in Gitpod to your local machine.
 
-To save your files, choose your file of interest, then either use the left/top hand side bar (File/Save As...) or use your keyboard shortcut to save as (On Mac: CMD, shift, s), then choose `Show local`. This will open up a explorer to choose where to save your file on your local machine.
+To save your files, choose your file of interest, then either use the left/top hand sidebar (File/Save As...) or use your keyboard shortcut to save as (On Mac: CMD, shift, s), then choose `Show local`. This will open up an explorer to choose where to save your file on your local machine.
 
 ### Reopening a Gitpod session
 
