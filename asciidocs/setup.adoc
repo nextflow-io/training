@@ -4,7 +4,8 @@ There are two main ways to get started with Seqera's Nextflow training course.
 
 The first is to install the requirements locally (section 1.1), which is best if you are already familiar with Git and Docker, or working offline.
 
-The second is to use Gitpod (see section 1.2), which is best for first timers, as this platform containes all the programs and data required (click the link, login via your GitHub account, and start the tutorial!).
+The second is to use Gitpod (see section 1.2), which is best for first timers, as this platform containes all the programs and data required. 
+Simply click the link, login via your GitHub account, and start the tutorial!
 
 == Local installation
 
