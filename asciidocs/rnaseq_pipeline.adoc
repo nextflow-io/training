@@ -264,7 +264,7 @@ It will print something similar to this:
 
   [gut, [/.../data/ggal/gut_1.fq, /.../data/ggal/gut_2.fq]]
 
-The above example shows how the `read_pairs_ch` channel emits tuples composed by
+The above example shows how the `read_pairs_ch` channel emits tuples composed of
 two elements, where the first is the read pair prefix and the second is a list
 representing the actual files.
 
@@ -324,7 +324,7 @@ In this step you have learned:
 
 In this workflow scope, note how the `index_ch` channel, declared as output in the `index` process, is now used as an input channel for the `quantification` process.
 
-Also, note how the input is declared in the `quantification` process, the first being a `path` from the `index_ch` and the second being a `tuple` composed by two elements: the `sample_id` and the `reads` in order to match the structure of the items emitted by the `read_pairs_ch` channel.
+Also, note how the input is declared in the `quantification` process, the first being a `path` from the `index_ch` and the second being a `tuple` composed of two elements: the `sample_id` and the `reads` in order to match the structure of the items emitted by the `read_pairs_ch` channel.
 
 Execute it by using the following command:
 
