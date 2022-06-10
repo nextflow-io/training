@@ -15,9 +15,9 @@ log.info """\
          """
          .stripIndent()
 
- 
+
 /* 
- * define the `index` process that create a binary index 
+ * define the `index` process that creates a binary index 
  * given the transcriptome file
  */
 process index {
@@ -34,8 +34,10 @@ process index {
     """
 }
 
+in_channel = Channel.from(params.transcriptome_file)
+
 workflow {
 
-    index_ch = index(Channel.from(params.transcriptome_file))
+    index_ch = index( in_channel )
 
 }
