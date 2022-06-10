@@ -36,6 +36,6 @@ process index {
 
 workflow {
 
-    index_ch = index(Channel.from(params.transcriptome))
+    index_ch = index(Channel.from(params.transcriptome_file))
 
 }
