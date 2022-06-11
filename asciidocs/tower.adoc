@@ -27,7 +27,7 @@ Create an account and login into Tower.
 
 **1. Create a new token**
 
-You can access your tokens from the The *Settings* drop-down menu :
+You can access your tokens from the *Settings* drop-down menu :
 
 image::usage_create_token.png[]
 
@@ -55,14 +55,14 @@ Where `eyxxxxxxxxxxxxxxxQ1ZTE=` is the token you have just created.
 
 NOTE: Check your `nextflow -version`. Bearer tokens require Nextflow version 20.10.0 or later and can be set with the second command shown above. You can change the version if necessary.
 
-To submit a pipeline to a https://help.tower.nf/getting-started/workspace/[Workspace] using the Nextflow command line tool, add the workspace ID to your environment. For example:
+To submit a pipeline to a https://help.tower.nf/getting-started/workspace/[Workspace] using the Nextflow command-line tool, add the workspace ID to your environment. For example:
 
 [source,bash,linenums]
 ----
 export TOWER_WORKSPACE_ID=000000000000000
 ----
 
-The workspace ID can be found on the organisation's Workspaces overview page.
+The workspace ID can be found on the organization's Workspaces overview page.
 
 **5. Run Nextflow with tower**
 
@@ -136,7 +136,7 @@ You are now ready to launch pipelines with your primary compute environment.
 
 ==== Launchpad
 
-Launchpad makes it is easy for any workspace user to launch a pre-configured pipeline.
+Launchpad makes it easy for any workspace user to launch a pre-configured pipeline.
 
 image::overview_launch.png[]
 
@@ -187,40 +187,40 @@ TIP: Nextflow pipelines are simply Git repositories and can be changed to any pu
 
 WARNING: The credentials associated with the compute environment must be able to access the work directory.
 
-TIP: In the configuration, the full path to a bucket must be specified with single-quotes around strings no quotes around booleans or numbers.
+TIP: In the configuration, the full path to a bucket must be specified with single quotes around strings and no quotes around booleans or numbers.
 
-TIP: To create your own customized Nextflow Schema for your pipleine, see the examples from the `nf-core` workflows that have adopted this approach, for example https://github.com/nf-core/eager/blob/2.3.3/nextflow_schema.json[eager] and https://github.com/nf-core/rnaseq/blob/3.0/nextflow_schema.json[rnaseq].
+TIP: To create your own customized Nextflow Schema for your pipleine, see the examples from the `nf-core` workflows that have adopted this approach. For example, https://github.com/nf-core/eager/blob/2.3.3/nextflow_schema.json[eager] and https://github.com/nf-core/rnaseq/blob/3.0/nextflow_schema.json[rnaseq].
 
-For advanced setting options check out this https://help.tower.nf/launch/advanced/[page].
+For advanced settings options check out this https://help.tower.nf/launch/advanced/[page].
 
 There is also community support available if you get into trouble, join the Nextflow Slack by following this
 https://www.nextflow.io/slack-invite.html[link].
 
 === API
 
-To learn more about using the Tower API, visit to the https://help.tower.nf/api/overview/[API section] in this documentation.
+To learn more about using the Tower API, visit the https://help.tower.nf/api/overview/[API section] in this documentation.
 
-== Workspaces and Organisations
+== Workspaces and Organizations
 
-Nextflow Tower simplifies the development and execution of workflows by providing a centralized interface for users and organisations.
+Nextflow Tower simplifies the development and execution of workflows by providing a centralized interface for users and organizations.
 
 Each user has a unique *workspace* where they can interact and manage all resources such as workflows, compute environments and credentials. details of this can be found https://help.tower.nf/getting-started/workspace/[here].
 
-By default, each user has their own private workspace, while organisations have the ability to run and manage users through role-based access as *members* and *collaborators*. 
+By default, each user has their own private workspace, while organizations have the ability to run and manage users through role-based access as *members* and *collaborators*. 
 
 === Organization resources
 
-You can create your own organisation and participant workspace by following the docs at https://help.tower.nf/orgs-and-teams/workspace-management/[tower].
+You can create your own organization and participant workspace by following the docs at https://help.tower.nf/orgs-and-teams/workspace-management/[tower].
 
-Tower allows creation of multiple organizations, each of which can contain multiple workspaces with shared users and resources. This allows any organization to customize and organize the usage of resources while maintaining an access control layer for users associated with a workspace.
+Tower allows the creation of multiple organizations, each of which can contain multiple workspaces with shared users and resources. This allows any organization to customize and organize the usage of resources while maintaining an access control layer for users associated with a workspace.
 
 === Organization users
 
 Any user can be added or removed from a particular organization or a workspace and can be allocated a specific access role within that workspace.
 
-The Teams feature provides a way for organizations to group various users and participants together into teams, for example `workflow-developers` or `analysts`, and apply access control to all the users within this team collectively.
+The Teams feature provides a way for organizations to group various users and participants together into teams. For example, `workflow-developers` or `analysts`, and apply access control to all the users within this team collectively.
 
-For further information, please refer the https://help.tower.nf/orgs-and-teams/organizations/[User Management] section.
+For further information, please refer to the https://help.tower.nf/orgs-and-teams/organizations/[User Management] section.
 
 ==== Setting up a new organisation
 
@@ -232,16 +232,16 @@ To create a new Organization:
 
 2. On the dialog, fill in the fields as per your organization. The Name and Full name fields are compulsory.
 +
-WARNING: A valid name for the organization must follow specific pattern. Please refer the UI for further instructions.
+WARNING: A valid name for the organization must follow a specific pattern. Please refer to the UI for further instructions.
 +
 
 3. The rest of the fields such as Description, Location, Website URL and Logo Url are optional.
 
-4. Once the details are filled-in, you can access the newly created organization using the organizations page, which lists all of your organizations.
+4. Once the details are filled in, you can access the newly created organization using the organization's page, which lists all of your organizations.
 +
 --
-TIP: It is possible to change the values of the optional fields either using the Edit option on the organizations page or by using the Settings tab within the organization page, provided that you are the Owner of the organization .
+TIP: It is possible to change the values of the optional fields either using the Edit option on the organization's page or by using the Settings tab within the organization page, provided that you are the Owner of the organization.
 
-NOTE: A list of all the included Members, Teams and Collaborators can be found at the organization page.
+NOTE: A list of all the included Members, Teams and Collaborators can be found on the organization page.
 --
 
