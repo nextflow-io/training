@@ -19,7 +19,7 @@ NOTE: Containers were first introduced with kernel 2.6 as a Linux feature known 
 
 Docker is a handy management tool to build, run and share container images.
 
-These images can be uploaded and published in a centralised repository know as
+These images can be uploaded and published in a centralized repository known as
 https://hub.docker.com[Docker Hub], or hosted by other parties like https://quay.io[Quay].
 
 === Run a container
@@ -44,7 +44,7 @@ The pull command allows you to download a Docker image without running it. For e
 docker pull debian:stretch-slim
 ```
 
-The above command download a Debian Linux image. You can check it exists by using:
+The above command downloads a Debian Linux image. You can check it exists by using:
 
 ```bash
 docker images
@@ -53,14 +53,14 @@ docker images
 === Run a container in interactive mode
 
 Launching a BASH shell in the container allows you to operate in an interactive mode
-in the containerised operating system. For example:
+in the containerized operating system. For example:
 
 ```bash
 docker run -it debian:stretch-slim bash
 ```
 
 Once launched, you will notice that it is running as root (!).
-Use the usual commands to navigate in the file system. 
+Use the usual commands to navigate the file system. 
 This is useful to check if the expected programs are present within a container.
 
 To exit from the container, stop the BASH session with the `exit` command.
@@ -75,11 +75,11 @@ Here, you will create a Docker image containing cowsay and the Salmon tool.
 
 IMPORTANT: the Docker build process automatically copies all files that are located in the
 current directory to the Docker daemon in order to create the image. This can take
-a lot of time when big/many files exists. For this reason it's important to _always_ work in
+a lot of time when big/many files exist. For this reason, it's important to _always_ work in
 a directory containing only the files you really need to include in your Docker image.
-Alternatively you can use the `.dockerignore` file to select the path to exclude from the build.
+Alternatively, you can use the `.dockerignore` file to select the path to exclude from the build.
 
-Then use your favourite editor (e.g. `vim` or `nano`) to create a file named `Dockerfile` and copy the
+Then use your favorite editor (e.g. `vim` or `nano`) to create a file named `Dockerfile` and copy the
 following content:
 
 [source,docker,linenums]
@@ -101,7 +101,7 @@ Build the Dockerfile image by using the following command:
 docker build -t my-image .
 ```
 
-Where "my-image" is the user specified name tag for the Dockerfile, present in the current directory.
+Where "my-image" is the user-specified name tag for the Dockerfile, present in the current directory.
 
 IMPORTANT: Don't miss the dot in the above command. When it completes, verify that the image
 has been created by listing all available images:
@@ -169,7 +169,7 @@ The above command fails because Salmon cannot access the input file.
 This happens because the container runs in a completely separate file system and
 it cannot access the hosting file system by default.
 
-You will need to use the `--volume` command line option to mount the input file(s) e.g.
+You will need to use the `--volume` command-line option to mount the input file(s) e.g.
 
 ```bash
 docker run --volume $PWD/data/ggal/transcriptome.fa:/transcriptome.fa my-image \
@@ -195,7 +195,7 @@ docker run --volume $DATA:$DATA --workdir $PWD my-image \
   salmon index -t $PWD/data/ggal/transcriptome.fa -i transcript-index
 ```
 
-Now check the content of the `transcript-index` folder entering the command:
+Now check the content of the `transcript-index` folder by entering the command:
 
 ```bash
 ls -la transcript-index
@@ -213,7 +213,7 @@ Use the option `-u $(id -u):$(id -g)` to allow Docker to create files with the r
 
 Publish your container in the Docker Hub to share it with other people.
 
-Create an account in the https://hub.docker.com web site. Then from your shell terminal run
+Create an account on the https://hub.docker.com website. Then from your shell terminal run
 the following command, entering the user name and password you specified when registering in the Hub:
 
 ```bash
@@ -255,22 +255,22 @@ docker pull nextflow/rnaseq-nf@sha256:aeacbd7ea1154f263cda972a96920fb228b2033544
 === Run a Nextflow script using a Docker container
 
 The simplest way to run a Nextflow script with a Docker image is using the
-`-with-docker` command line option:
+`-with-docker` command-line option:
 
 ```
 nextflow run script2.nf -with-docker my-image
 ```
 
 We'll see later how to configure the Nextflow config file to select which container 
-to use instead of having to specify it as a command line argumentevery time.
+to use instead of having to specify it as a command-line argument every time.
 
 
 == Singularity
 
-http://singularity.lbl.gov[Singularity] is container runtime designed to work in high-performance computing data centers,
+http://singularity.lbl.gov[Singularity] is a container runtime designed to work in high-performance computing data centers,
 where the usage of Docker is generally not allowed due to security constraints.
 
-Singularity implements a container execution model similar to Docker, however it uses
+Singularity implements a container execution model similar to Docker. However, it uses
 a completely different implementation design.
 
 A Singularity container image is archived as a plain file that can be stored in a shared
@@ -278,7 +278,7 @@ file system and accessed by many computing nodes managed using a batch scheduler
 
 === Create a Singularity images
 
-Singularity images are created using a `Singularity` file in similar manner to Docker but
+Singularity images are created using a `Singularity` file in a similar manner to Docker but
 using a different syntax.
 
 [source,singularity,linenums,options="nowrap"]
@@ -300,7 +300,7 @@ curl -sSL https://github.com/COMBINE-lab/salmon/releases/download/v1.0.0/salmon-
  && mv /salmon-*/lib/* /usr/lib/
 ----
 
-Once you have save the `Singularity` file. You can create the image with these commands:
+Once you have saved the `Singularity` file. You can create the image with these commands:
 
 ```bash
 sudo singularity build my-image.sif Singularity
@@ -338,7 +338,7 @@ mounts the host `$HOME` directory and uses the current work directory.
 
 === Import a Docker image
 
-An easier way to create Singularity container without requiring sudo permission and
+An easier way to create a Singularity container without requiring sudo permission and
 boosting the containers interoperability is to import a Docker container image by
 pulling it directly from a Docker registry. For example:
 
@@ -356,7 +356,7 @@ Nextflow allows the transparent usage of Singularity containers as easy as with
 Docker.
 
 Simply enable the use of the Singularity engine in place of Docker in the
-Nextflow configuration file by using the `-with-singularity` command line option:
+Nextflow configuration file by using the `-with-singularity` command-line option:
 
 ```bash
 nextflow run script7.nf -with-singularity nextflow/rnaseq-nf
@@ -371,7 +371,7 @@ We'll see how to do this later.
 The authors of Singularity, https://www.sylabs.io/[SyLabs] have their own repository of Singularity
 containers.
 
-In the same way that we can push docker images to Docker Hub, we can upload Singularity images
+In the same way that we can push Docker images to Docker Hub, we can upload Singularity images
 to the Singularity Library.
 
 
@@ -381,7 +381,7 @@ Conda is a popular package and environment manager. The built-in support for Con
 allows Nextflow pipelines to automatically create and activate the Conda
 environment(s), given the dependencies specified by each process.
 
-For this Gitpod tutorial you need to open a new terminal to ensure that conda is activated (see the + button on the terminal).
+For this Gitpod tutorial, you need to open a new terminal to ensure that conda is activated (see the + button on the terminal).
 
 You should now see that the beginning of your command prompt has `(base)` written. If you wish to deactivate conda at any point, simply enter `conda deactivate`.
 
@@ -470,14 +470,14 @@ The above `Dockerfile` takes the parent image 'mambaorg/micromamba', then instal
 [discrete]
 === Exercise
 
-Try executing the RNA-Seq pipeline from earlier (script7.nf). Start by building your own micromamba `Dockerfile` (from above), save to your docker hub repo and direct Nextflow to run from this container (changing your `nexflow.config`). 
+Try executing the RNA-Seq pipeline from earlier (script7.nf). Start by building your own micromamba `Dockerfile` (from above), save it to your docker hub repo, and direct Nextflow to run from this container (changing your `nexflow.config`). 
 
 IMPORTANT: Building a Docker container and pushing to your personal repo can take >10 minutes.
 
 .For an overview of steps to take, click here:
 [%collapsible]
 ====
-1. Make a file called `Dockerfile` in the current directory (with above code).
+1. Make a file called `Dockerfile` in the current directory (with the code above).
 
 2. Build the image: `docker build -t my-image .` (don't forget the '.').
 
