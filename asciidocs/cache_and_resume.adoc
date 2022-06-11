@@ -296,7 +296,7 @@ process gather {
 }
 ----
 +
-The inputs declared at line 19,20 can be delivered in any 
+The inputs declared at line 19 and 20 can be delivered in any
 order because the execution order of the process `foo` and 
 `bar` are not deterministic due to their parallel execution. 
 +

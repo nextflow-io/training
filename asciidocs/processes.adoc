@@ -24,7 +24,7 @@ In more complex examples, the process body can contain up to *five* definition b
 
 3. *Output* defines the expected output file/s and the channel to send the data to.
 
-4. *When* is a optional clause statement to allow conditional processes.
+4. *When* is an optional clause statement to allow conditional processes.
 
 5. *Script* is a string statement that defines the command to be executed by the process
 
@@ -65,7 +65,7 @@ The `script` block is a string statement that defines the command to be executed
 A process contains one and only one `script` block, and it must be the last statement when the process contains input and output declarations.
 
 The `script` block can be a single or multi-line string. The latter simplifies the writing of non-trivial scripts
-composed by multiple commands spanning over multiple lines. For example:
+composed of multiple commands spanning over multiple lines. For example:
 
 [source,nextflow,linenums]
 ----
@@ -383,7 +383,7 @@ workflow{
 === Combine input channels
 
 A key feature of processes is the ability to handle inputs from multiple channels. However it's
-important to understands how channel content and their semantics affect the execution
+important to understand how channel content and their semantics affect the execution
 of a process.
 
 Consider the following example:
@@ -769,12 +769,12 @@ on the actual value of the `x` input.
 === Composite inputs and outputs
 
 So far we have seen how to declare multiple input and output channels, but each channel was handling
-only one value at time. However Nextflow can handle a _tuple_ of values.
+only one value at a time. However Nextflow can handle a _tuple_ of values.
 
-When using a channel emitting a _tuple_ of values, the corresponding input declaration must be declared with a `tuple` qualifier followed by definition of each element in the tuple.
+When using a channel emitting a _tuple_ of values, the corresponding input declaration must be declared with a `tuple` qualifier followed by the definition of each element in the tuple.
 
 In the same manner, output channels emitting a tuple of values can be declared using the `tuple` qualifier
-following by the definition of each tuple element.
+followed by the definition of each tuple element.
 
 [source,nextflow,linenums]
 ----
@@ -871,7 +871,7 @@ They must be entered at the top of the process body, before any other declaratio
 
 Directives are commonly used to define the amount of computing resources to be used or
 other meta directives that allow the definition of extra information for configuration or
-logging purpose. For example:
+logging purposes. For example:
 
 [source,nextflow,linenums]
 ----
@@ -919,9 +919,9 @@ Given each process is being executed in separate temporary work/ folders (e.g. w
 
 TIP: Remember to delete the work folder from time to time, else all your intermediate files will fill up your computer!
 
-To store our workflow result files, we need to be explicitly mark them using the directive
+To store our workflow result files, we need to explicitly mark them using the directive
 https://www.nextflow.io/docs/latest/process.html#publishdir[publishDir] in
-the process that's creating these file. For example:
+the process that's creating these files. For example:
 
 [source,nextflow,linenums,options="nowrap"]
 ----
@@ -958,7 +958,7 @@ could be stored to a https://aws.amazon.com/s3/[AWS S3 bucket] just using the `s
 
 === Manage semantic sub-directories
 
-You can use more then one `publishDir` to keep different outputs in separate directory. For example:
+You can use more than one `publishDir` to keep different outputs in separate directories. For example:
 
 [source,nextflow,linenums,options="nowrap"]
 ----
