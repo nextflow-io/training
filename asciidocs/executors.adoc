@@ -114,7 +114,7 @@ process {
 
 === Configure process by labels
 
-When a workflow application is composed by many processes, listing all of the process names and choosing resources for
+When a workflow application is composed of many processes, listing all of the process names and choosing resources for
 each of them in the configuration file can be difficult.
 
 A better strategy consists of annotating the processes with a https://www.nextflow.io/docs/latest/process.html#label[label] directive. Then specify the resources in the configuration file used for all processes having the same label. 
