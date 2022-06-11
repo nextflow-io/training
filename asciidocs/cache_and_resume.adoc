@@ -50,20 +50,20 @@ TIP: You can create these plots using the `tree` function if you have it install
 
 == How resume works
 
-The `-resume` command line option allow the continuation of a pipeline 
+The `-resume` command-line option allows the continuation of a pipeline 
 execution from the last step that was completed successfully: 
 
 ```
 nextflow run <script> -resume
 ```
 
-In practical terms the pipeline is executed from the beginning. However, before launching the execution of a `process`, Nextflow 
+In practical terms, the pipeline is executed from the beginning. However, before launching the execution of a `process`, Nextflow 
 uses the task unique ID to check if the work directory already exists and that it contains a valid command exit state with the 
 expected output files. 
 
 If this condition is satisfied the task execution is skipped and previously computed results are used as the `process` results.  
 
-The first task for which a new output is computed, invalidates all downstream executions in the remaining DAG. 
+The first task for which a new output is computed invalidates all downstream executions in the remaining DAG. 
 
 == Work directory
 
@@ -74,7 +74,7 @@ storage area that can be cleaned up once the computation is completed.
 NOTE: Workflow final output(s) are supposed to be stored in a different 
 location specified using one or more https://www.nextflow.io/docs/latest/process.html#publishdir[publishDir] directive.
 
-IMPORTANT: Make sure to delete you work directory occasionly, else your machine/environment may be filled with unused files. 
+IMPORTANT: Make sure to delete your work directory occasionally, else your machine/environment may be filled with unused files. 
 
 A different location for the execution work directory can be specified 
 using the command line option `-w`. For example:
@@ -91,7 +91,7 @@ The hash code for input files is computed using:
 * The file size 
 * The last modified timestamp 
 
-Therefore, just *touching* a file will invalidated the related task execution. 
+Therefore, just *touching* a file will invalidate the related task execution. 
 
 == How to organize in silico experiments 
 
@@ -159,7 +159,7 @@ The complete list of available fields can be retrieved with the command:
 nextflow log -l
 ```
 
-The `-F` option allows the specification of a filtering criteria to
+The `-F` option allows the specification of filtering criteria to
 print only a subset of tasks. For example:
 
 ```
@@ -209,7 +209,7 @@ be the most likely causes:
 
 * *Input file changed*: Make sure that there's no change 
 in your input file(s). Don't forget the task unique hash is computed 
-taking into account the complete file path, the last modified 
+by taking into account the complete file path, the last modified 
 timestamp and the file size. If any of this information has changed, 
 the workflow will be re-executed even if the input content is the same. 
 
@@ -266,7 +266,7 @@ the channel), a process can declare as input two or more
 channels each of which is the output of a *different* process, the 
 overall input ordering is not consistent over different executions. 
 +
-In practical term, consider the following snippet:
+In practical terms, consider the following snippet:
 +
 [source,nextflow,linenums]
 ----
