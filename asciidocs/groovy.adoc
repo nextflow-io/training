@@ -93,14 +93,14 @@ println list.size()
 ----
 
 We use the `assert` keyword to test if a condition is true (similar to an `if` function).
-Here, Groovy will print nothing if it is corrrect, else it will raise an AssertionError message.
+Here, Groovy will print nothing if it is correct, else it will raise an AssertionError message.
 
 [source,groovy,linenums]
 ----
 assert list[0] == 10
 ----
 
-TIP: This assertion should be correct, but try changing it to an incorrect.
+TIP: This assertion should be correct, but try changing it to an incorrect one.
 
 Lists can also be indexed with negative indexes and reversed ranges.
 
@@ -155,7 +155,7 @@ assert map.get('c') == 2    <3>
 <2> Use of a dot notation.
 <3> Use of the get method.
 
-To add data or to modify a map, the syntax is similar to adding values to list:
+To add data or to modify a map, the syntax is similar to adding values to a list:
 
 [source,groovy,linenums]
 ----
@@ -198,8 +198,8 @@ $x + $y
 
 TIP: Note the different use of `$` and `${..}` syntax to interpolate value expressions in a string literal.
 
-Finally string literals can also be defined using the `/` character as delimiter. They are known as
-*slashy* strings and are useful for defining regular expressions and patterns, as there is no need to escape backslashes. As with double quote strings they allow to interpolate variables prefixed with a `$` character.
+Finally, string literals can also be defined using the `/` character as a delimiter. They are known as
+*slashy* strings and are useful for defining regular expressions and patterns, as there is no need to escape backslashes. As with double-quote strings they allow to interpolate variables prefixed with a `$` character.
 
 Try the following to see the difference:
 
@@ -260,7 +260,7 @@ else {
 }
 ----
 
-The `else` branch is optional. Also the curly brackets are optional when the branch defines just a single
+The `else` branch is optional. Also, the curly brackets are optional when the branch defines just a single
 statement.
 
 [source,groovy,linenums]
@@ -270,7 +270,7 @@ if( x > 10 )
     println 'Hello'
 ----
 
-TIP: `null`, empty strings and empty collections are evaluated to `false`.
+TIP: `null`, empty strings, and empty collections are evaluated to `false`.
 
 Therefore a statement like:
 
@@ -366,7 +366,7 @@ Closures are the swiss army knife of Nextflow/Groovy programming. In a nutshell,
 is a block of code that can be passed as an argument to a function. A closure can also be used to define
 an anonymous function.
 
-More formally, a closure allows the definition of functions as first class objects.
+More formally, a closure allows the definition of functions as first-class objects.
 
 [source,groovy,linenums]
 ----
@@ -375,7 +375,7 @@ square = { it * it }
 
 The curly brackets around the expression `it * it` tells the script interpreter to treat this expression as code. The `it` identifier is an implicit variable that represents the value that is passed to the function when it is invoked.
 
-Once compiled, the function object is assigned to the variable `square` as any other variable assignments shown previously. To invoke the closure execution use the special method `call` or just use the round
+Once compiled, the function object is assigned to the variable `square` as any other variable assignment shown previously. To invoke the closure execution use the special method `call` or just use the round
 parentheses to specify the closure parameter(s). For example:
 
 [source,groovy,linenums]
