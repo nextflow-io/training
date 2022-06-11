@@ -1,6 +1,6 @@
 = Deployment scenarios 
 
-Real world genomic application can spawn the execution of thousands of jobs. In this 
+Real-world genomic applications can spawn the execution of thousands of jobs. In this 
 scenario a batch scheduler is commonly used to deploy a pipeline in a computing cluster, 
 allowing the execution of many jobs in parallel across many compute nodes. 
 
@@ -10,13 +10,13 @@ the complete list of supported https://www.nextflow.io/docs/latest/executor.html
 == Cluster deployment 
 
 A key Nextflow feature is the ability to decouple the workflow implementation from the 
-actual execution platform. The implementing of an abstraction layer allows the deployment 
+actual execution platform. The implementation of an abstraction layer allows the deployment 
 of the resulting workflow on any executing platform supported by the framework. 
 
 image:nf-executors.png[]
 
 To run your pipeline with a batch scheduler, modify the `nextflow.config` file specifying 
-the target executor and the required computing resources, if needed. For example: 
+the target executor and the required computing resources if needed. For example: 
 
 [source,config,linenums,options="nowrap"]
 ----
@@ -25,7 +25,7 @@ process.executor = 'slurm'
 
 == Managing cluster resources 
 
-When using a batch scheduler, it is often needed to specify the amount of resources 
+When using a batch scheduler, it is often needed to specify the number of resources 
 (i.e. cpus, memory, execution time, etc.) required by each task. 
 
 This can be done using the following process directives:
@@ -39,13 +39,13 @@ This can be done using the following process directives:
 |the number of _cpus_ to be allocated a task execution
 
 |https://www.nextflow.io/docs/latest/process.html#memory[memory]
-|the amount of _memory_ to be allocated a task execution
+|the amount of _memory_ to be allocated for a task execution
 
 |https://www.nextflow.io/docs/latest/process.html#time[time]
-| the max amount of _time_ to be allocated a task execution
+| the max amount of _time_ to be allocated for a task execution
 
 |https://www.nextflow.io/docs/latest/process.html#disk[disk]
-|the amount of disk storage required a task execution
+|the amount of disk storage required for a task execution
 |===
 
 === Workflow wide resources 
@@ -96,7 +96,7 @@ process {
 [discrete]
 === Exercise
 
-Run the RNA-Seq script (script7.nf) from earlier, but specify that the `quantification` `process` cpu reuires 2 cpu and 5 GB of memory, within the `nextflow.config` file.
+Run the RNA-Seq script (script7.nf) from earlier, but specify that the `quantification` `process` reuires 2 CPUs and 5 GB of memory, within the `nextflow.config` file.
 
 .Click here for the answer:
 [%collapsible]
@@ -164,7 +164,7 @@ process {
 
 === Configure multiple containers
 
-Containers can be set for each process in your workflow. You can define their continers in a config file as shown
+Containers can be set for each process in your workflow. You can define their containers in a config file as shown
 below:
 
 [source,config,linenums,options="nowrap"]
@@ -182,17 +182,17 @@ docker.enabled = true
 ----
 
 TIP: Should I use a single _fat_ container or many _slim_ containers? Both approaches have pros & cons.
-A single container is simpler to build and to maintain, however when using many tools
-the image can become very big and tools can conflict each other. Using a container for each
-process can result in many different images to build and to maintain, especially when
-processes in your workflow uses different tools in each task.
+A single container is simpler to build and maintain, however when using many tools
+the image can become very big and tools can create conflicts with each other. Using a container for each
+process can result in many different images to build and maintain, especially when
+processes in your workflow use different tools for each task.
 
 
-Read more about config process selector at https://www.nextflow.io/docs/latest/config.html#process-selectors[this link].
+Read more about config process selectors at https://www.nextflow.io/docs/latest/config.html#process-selectors[this link].
 
 == Configuration profiles 
 
-Configuration files can contain the definition of one or more _profiles_. A profile is a set of configuration attributes that can be activated/chosen when launching a pipeline execution by using the `-profile` command line option.
+Configuration files can contain the definition of one or more _profiles_. A profile is a set of configuration attributes that can be activated/chosen when launching a pipeline execution by using the `-profile` command- line option.
 
 Configuration profiles are defined by using the special scope `profiles` which group the attributes that belong to the same profile using a common prefix. For example:
 
@@ -223,7 +223,7 @@ profiles {
 }
 ----
 
-This configuration defines three different profiles: `standard`, `cluster` and `cloud` that set different process configuration strategies depending on the target runtime platform. By convention the `standard` profile is implicitly used when no other profile is specified by the user.
+This configuration defines three different profiles: `standard`, `cluster` and `cloud` that set different process configuration strategies depending on the target runtime platform. By convention, the `standard` profile is implicitly used when no other profile is specified by the user.
 
 To enable a specific profile use `-profile` option followed by the profile name: 
 
@@ -240,12 +240,12 @@ nextflow run <your script> -profile standard,cloud
 
 == Cloud deployment 
 
-https://aws.amazon.com/batch/[AWS Batch] is a managed computing service that allows the execution of containerised workloads in the Amazon cloud infrastructure.
+https://aws.amazon.com/batch/[AWS Batch] is a managed computing service that allows the execution of containerized workloads in the Amazon cloud infrastructure.
 
-Nextflow provides a built-in support for AWS Batch which allows the seamless deployment of a Nextflow pipeline in the cloud, offloading the process executions as Batch jobs.
+Nextflow provides built-in support for AWS Batch which allows the seamless deployment of a Nextflow pipeline in the cloud, offloading the process executions as Batch jobs.
 
-Once the Batch environment is configured, specifying the instance types to be used and the max number 
-of cpus to be allocated, you need to create a Nextflow configuration file like the one showed below:
+Once the Batch environment is configured, specify the instance types to be used and the max number 
+of CPUs to be allocated, you need to create a Nextflow configuration file like the one shown below:
 
 [source,config,linenums]
 ----
@@ -299,7 +299,7 @@ aws {
 IMPORTANT: This is a global configuration that has to be specified in a Nextflow config file and will be applied to *all* process executions.
 
 IMPORTANT: Nextflow expects paths to be available. It does not handle the provision of EBS volumes or 
-other kind of storage. 
+another kind of storage. 
 
 
 == Custom job definition
@@ -335,7 +335,7 @@ rm Miniconda3-latest-Linux-x86_64.sh
 
 NOTE: The `aws` tool will be placed in a directory named `bin` in the main installation folder. The tools will not work properly if you modify this directory structure after the installation.
 
-Finally specify the `aws` full path in the Nextflow config file as show below: 
+Finally, specify the `aws` full path in the Nextflow config file as shown below: 
 
 ```
 aws.batch.cliPath = '/home/ec2-user/miniconda/bin/aws'
@@ -345,7 +345,7 @@ aws.batch.cliPath = '/home/ec2-user/miniconda/bin/aws'
 
 An alternative approach to is to create a custom AMI using a
 https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html[Launch template] that 
-installs the AWS CLI tool during the instance boot via custom user-data. 
+installs the AWS CLI tool during the instance boot via custom user data. 
 
 In the EC2 dashboard, create a Launch template specifying the user data field:
 
@@ -374,7 +374,7 @@ chown -R ec2-user:ec2-user $USER/miniconda
 --//--
 ```
 
-Then create a new compute environment in the Batch dashboard nand specify the newly created
+Then create a new compute environment in the Batch dashboard and specify the newly created
 launch template in the corresponding field.
 
 == Hybrid deployments 
@@ -383,7 +383,7 @@ Nextflow allows the use of multiple executors in the same workflow application. 
 
 To enable this feature use one or more https://www.nextflow.io/docs/latest/config.html#config-process-selectors[process selectors] in your Nextflow configuration file.  
 
-For example, to apply the https://www.nextflow.io/docs/latest/awscloud.html#awscloud-batch-config[AWS Batch configuration] only to a subset of processes in your workflow. You can try the following:
+For example, apply the https://www.nextflow.io/docs/latest/awscloud.html#awscloud-batch-config[AWS Batch configuration] only to a subset of processes in your workflow. You can try the following:
 
 [source,config,linenums]
 ----
