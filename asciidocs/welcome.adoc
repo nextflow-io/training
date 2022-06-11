@@ -7,9 +7,9 @@ By the end of this course you should:
 
 1. Be proficient in writing Nextflow pipelines
 2. Know the basic Nextflow concepts of Channels, Processes and Operators
-3. Have an understanding of containerised workflows
+3. Have an understanding of containerized workflows
 4. Understand the different execution platforms supported by Nextflow 
-5. Be introducted to the Nextflow community and ecosystem
+5. Be introduced to the Nextflow community and ecosystem
 
 [discrete]
 === Overview
@@ -26,7 +26,7 @@ To get you started with Nextflow as quickly as possible, we will walk through th
 
 5. Cover cluster and cloud deployment scenarios and explore Nextflow Tower capabilities. 
 
-This will give you a broad understanding of Nextflow, so that you can start writing your own pipelines. We hope you enjoy the course! This is an ever-evolving document and feedback is always welcome.
+This will give you a broad understanding of Nextflow so that you can start writing your own pipelines. We hope you enjoy the course! This is an ever-evolving document and feedback is always welcome.
 
 [discrete]
 === Summary
