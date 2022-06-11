@@ -7,7 +7,7 @@ This enables portable deployment without the need to modify the application code
 
 == Configuration file 
 
-When a pipeline script is launched, Nextflow looks for a file named `nextflow.config` in the current directory and in the script base directory (if it is not the same as the current directory). Finally it checks for the file: `$HOME/.nextflow/config`.
+When a pipeline script is launched, Nextflow looks for a file named `nextflow.config` in the current directory and in the script base directory (if it is not the same as the current directory). Finally, it checks for the file: `$HOME/.nextflow/config`.
 
 When more than one of the above files exists, they are merged, so that the settings in the first override the same settings that may appear in the second, and so on.
 
@@ -21,7 +21,7 @@ A Nextflow configuration file is a simple text file containing a set of properti
 name = value
 ```
 
-TIP: Please note, string values need to be wrapped in quotation characters while numbers and boolean values (`true`, `false`) do not. Also, note that values are typed, meaning for example that, `1` is different from `'1'`, since the first is interpreted as the number one, while the latter is interpreted as a string value.
+TIP: Please note that string values need to be wrapped in quotation characters while numbers and boolean values (`true`, `false`) do not. Also, note that values are typed, meaning for example that, `1` is different from `'1'`, since the first is interpreted as the number one, while the latter is interpreted as a string value.
 
 === Config variables 
 
@@ -139,7 +139,7 @@ env.BETA = "$HOME/some/path"
 [discrete]
 === Exercise
 
-Save the above snippet a file named `my-env.config`. The save the snippet below in a file named 
+Save the above snippet as a file named `my-env.config`. Then save the snippet below in a file named 
 `foo.nf`:
 
 [source,nextflow,linenums]
@@ -152,7 +152,7 @@ process foo {
 }
 ----
 
-Finally executed the following command: 
+Finally, execute the following command: 
 
 ```
 nextflow run foo.nf -c my-env.config
@@ -170,11 +170,11 @@ ALPHA=some value
 
 === Config process
 
-`process` https://www.nextflow.io/docs/latest/process.html#directives[directives] allow the specification of settings for the task execution such as `cpus`, `memory`, `container` and other resources in the pipeline script. 
+`process` https://www.nextflow.io/docs/latest/process.html#directives[directives] allow the specification of settings for the task execution such as `cpus`, `memory`, `container`, and other resources in the pipeline script. 
 
 This is useful when prototyping a small workflow script. 
 
-However it's always a good practice to decouple the workflow execution 
+However, it's always a good practice to decouple the workflow execution 
 logic from the process configuration settings, i.e. it's strongly 
 suggested to define the process settings in the workflow configuration 
 file instead of the workflow script. 
@@ -197,7 +197,7 @@ The https://www.nextflow.io/docs/latest/config.html#process-selectors[process se
 process or group of processes (discussed later). 
 
 TIP: Memory and time duration units can be specified either 
-using a string based notation in which the digit(s) and the unit 
+using a string-based notation in which the digit(s) and the unit 
 *can* be separated by a blank or by using the numeric notation in 
 which the digit(s) and the unit are separated by a dot character and 
 are not enclosed by quote characters. 
@@ -257,7 +257,7 @@ process foo {
 }
 ```
 
-Directives that requires more than one value, e.g. https://www.nextflow.io/docs/latest/process.html#pod[pod], in the 
+Directives that require more than one value, e.g. https://www.nextflow.io/docs/latest/process.html#pod[pod], in the 
 configuration file need to be expressed as a map object. 
 
 ```
@@ -266,7 +266,7 @@ process {
 }
 ```
 
-Finally directives that allows to be repeated in the process 
+Finally, directives that are to be repeated in the process 
 definition, in the configuration files need to be defined 
 as a list object. For example:
 
@@ -333,7 +333,7 @@ The above configuration instructs Nextflow to use the Singularity engine to run
 your script processes. The container is pulled from the Docker registry and cached
 in the current directory to be used for further runs.
 
-Alternatively if you have a Singularity image file, its absolute path location 
+Alternatively, if you have a Singularity image file, its absolute path location 
 can be specified as the container name either using the `-with-singularity` option
 or the `process.container` setting in the config file.
 
@@ -347,12 +347,12 @@ nextflow run script7.nf
 ```
 
 TIP: Nextflow will pull the container image automatically, it will require a few seconds
-depending the network connection speed.
+depending on the network connection speed.
 
 === Config Conda execution
 
 The use of a Conda environment can also be provided in the configuration file
-adding the following setting in the `nextflow.config` file:
+by adding the following setting in the `nextflow.config` file:
 
 [source,config,linenums,options="nowrap"]
 ----
