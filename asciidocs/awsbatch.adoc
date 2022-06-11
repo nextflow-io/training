@@ -12,7 +12,7 @@ be defined either in the pipeline script or the workflow config file.
 
 * Container images need to be published in a Docker registry such as Docker Hub, Quay or ECS Container Registry that can be reached by ECS Batch.
 
-* An S3 bucket used as shared memory to transfer input-output data across tasks. 
+* An S3 bucket use as shared memory to transfer input-output data across tasks. 
 
 * AWS CLI tool installed either in the job container or the compute node AMI,
 to transfer the input data from the S3 bucket to the container, and back from the 
@@ -24,7 +24,7 @@ container to the shared bucket.
 == Minimal configuration 
 
 Once the Batch environment is configured specifying the instance types to be used and the max number 
-of CPUs to be allocated, you need to created a Nextflow configuration file like the one showed below:
+of CPUs to be allocated, you need to create a Nextflow configuration file like the one shown below:
 
 [source,config,linenums]
 ----
@@ -43,7 +43,7 @@ aws.batch.cliPath = '/home/ec2-user/miniconda/bin/aws' // <6>
 <5> The AWS region to be used
 <6> The path of the AWS CLI tool required to download/upload files to/from the container 
 
-TIP: The best practices is to keep this setting as a separate 
+TIP: The best practice is to keep this setting as a separate 
 https://www.nextflow.io/docs/latest/config.html#config-profiles[profile] in your 
 workflow config file. This allows the execution with a simple command. 
 
@@ -55,7 +55,7 @@ The complete details describing AWS Batch deployment are available at https://ww
 
 == Task directives 
 
-The following tasks directives are applied and converted to the corresponding Batch API 
+The following task directives are applied and converted to the corresponding Batch API 
 when using the AWS Batch executor: 
 
 [%header,cols="15%,85%"]
@@ -63,10 +63,10 @@ when using the AWS Batch executor:
 |Name           |Description 
 |https://www.nextflow.io/docs/latest/process.html#accelerator[accelerator]  | The hardware accelerator i.e. GPU to be used.
 |https://www.nextflow.io/docs/latest/process.html#container[container]      | The Docker container to be used for the job execution.
-|https://www.nextflow.io/docs/latest/process.html#cpus[cpus]                | Number of CPUs (make sure the chosen instance types are able to fullfil the request).
+|https://www.nextflow.io/docs/latest/process.html#cpus[cpus]                | Number of CPUs (make sure the chosen instance types are able to fullfill the request).
 |https://www.nextflow.io/docs/latest/process.html#errorstrategy[errorStrategy]  | Errors handling policy.
 |https://www.nextflow.io/docs/latest/process.html#queue[queue]              | The (AWS) queue to be used to run the task.
-|https://www.nextflow.io/docs/latest/process.html#memory[memory]            | Amount of memory to be reserved to run the job (make sure the chosen instance types are able to fullfil the request). 
+|https://www.nextflow.io/docs/latest/process.html#memory[memory]            | Amount of memory to be reserved to run the job (make sure the chosen instance types are able to fullfill the request). 
 |https://www.nextflow.io/docs/latest/process.html#maxretries[maxRetries]    | Max number of times a failing job can be retried.
 |https://www.nextflow.io/docs/latest/process.html#time[time]                | Max job execution time i.e. job timeout.
 |=======================
@@ -84,14 +84,14 @@ The error stragegy can can be selected when deploying Nextflow:
 |=======================
 | Mechanism                       | Behavior
 |Nextflow native error handling   | When directive `errorStrategy` is set to `'retry'` *and* `maxRetries` is greater than `0` (default: `1`) then Nextflow built-in error handling policy is applied. If a job returns
-a non-zero or some expected output file is missing, the job is retried according the specified limits.
+a non-zero or some expected output file is missing, the job is retried according to the specified limits.
 Each time a new job execution is retried, a new task work directory is created using the usual Nextflow 
 strategy.
 |AWS Batch native error handling  | When directive `errorStrategy` is not specified or set to any strategy 
 different from `retry` *and* `maxRetries` greater than zero, then AWS built-in 
-https://docs.aws.amazon.com/batch/latest/userguide/job_retries.html[job retries] mechanism is used. The value of `maxRetries` +1 is used is used for the max number of expected job attempts. This approach is completely transparent to Nextflow i.e. Nextflow will not be aware if a job is re-executed. Additionally, for 
+https://docs.aws.amazon.com/batch/latest/userguide/job_retries.html[job retries] mechanism is used. The value of `maxRetries` +1 is used for the max number of expected job attempts. This approach is completely transparent to Nextflow i.e. Nextflow will not be aware if a job is re-executed. Additionally, for 
 this reason, the same task work directory will be used for all retries (this is still safe as the computation 
-happens in the container scratch storage). Nextflow will still report an error if a expected output is missing.
+happens in the container scratch storage). Nextflow will still report an error if an expected output is missing.
 |=======================
 
 
@@ -120,9 +120,9 @@ aws {
 
 IMPORTANT: 
 
-* This a global configuration that has to be specified in a Nextflow config file, as such it's applied to *all* process executions.
+* This is a global configuration that has to be specified in a Nextflow config file, as such it's applied to *all* process executions.
 * Nextflow expects those paths to be available. It does not handle the provision of EBS volumes or 
-other kind of storage. 
+another kind of storage. 
 
 
 == Custom job definition
@@ -160,7 +160,7 @@ rm Miniconda3-latest-Linux-x86_64.sh
 
 NOTE: The `aws` tool will be placed in a directory named `bin` in the main installation folder. Modifying this directory structure, after the installation, will cause the tool to not work properly.
 
-Finally specify the `aws` full path in the Nextflow config file as shown below: 
+Finally, specify the `aws` full path in the Nextflow config file as shown below: 
 
 ```
 aws.batch.cliPath = '/home/ec2-user/miniconda/bin/aws'
@@ -171,7 +171,7 @@ aws.batch.cliPath = '/home/ec2-user/miniconda/bin/aws'
 
 An alternative approach is to create a custom AMI using a
 https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html[Launch template] that 
-installs the AWS CLI tool during the instance boot using custom user-data. 
+installs the AWS CLI tool during the instance boot using custom user data. 
 
 In the EC2 dashboard, create a Launch template specifying the following in the user data field:
 
@@ -263,7 +263,7 @@ cp ~/boot.log ~ec2-user/boot.log
 --//--
 ```
 
-Once created, the template can be specifed when creating the AWS Batch 
+Once created, the template can be specified when creating the AWS Batch 
 compute environment.
 
 IMPORTANT: Make sure to use _Amazon ECS-Optimized Amazon Linux AMI_ (not Amazon Linux 2) when 
@@ -358,7 +358,7 @@ sudo mount -t lustre -o noatime,flock $FSXNAME@tcp:/fsx $SCRATCH
 sudo chown ec2-user:ec2-user $SCRATCH
 ```
 
-NOTE: Make also sure the storage and the computing nodes uses the same VPC and security groups.
+NOTE: Make also sure the storage and the computing nodes use the same VPC and security groups.
 For further details check https://docs.aws.amazon.com/fsx/latest/LustreGuide/limit-access-security-groups.html[here].
 
 === Nextflow configuration 
@@ -397,7 +397,7 @@ A good tutorial with additional information about this deployment can be found h
 
 == Advanced tuning
 
-When deploying data intensive workloads using S3 as shared storage the large number 
+When deploying data-intensive workloads using S3 as shared storage the large number 
 of parallel file uploads/downloads can create network congestion and stall the ECS
 agent running in the compute node, making it irresponsive. 
 
