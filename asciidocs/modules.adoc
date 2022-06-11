@@ -6,7 +6,7 @@ Using the `hello.nf` example from earlier, we will convert the pipeline's proces
 
 == Modules
 
-Nextflow DSL2 allows for the definition of stand-alone module scripts that can be included and shared across multiple workflows. Each module can contain it's own `process` or `workflow` definition.
+Nextflow DSL2 allows for the definition of stand-alone module scripts that can be included and shared across multiple workflows. Each module can contain its own `process` or `workflow` definition.
 
 === Importing modules
 

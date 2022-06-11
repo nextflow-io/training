@@ -282,7 +282,7 @@ TIP: Notice 'P' is missing in the final result
 
 The `branch` operator allows you to forward the items emitted by a source channel to one or more output channels, choosing one of them at a time.
 
-The selection criteria is defined by specifying a closure that provides one or more boolean expressions, each of which is identified by a unique label. On the first expression that evaluates to a true value, the current item is bound to a named channel as the label identifier.
+The selection criterion is defined by specifying a closure that provides one or more boolean expressions, each of which is identified by a unique label. On the first expression that evaluates to a true value, the current item is bound to a named channel as the label identifier.
 For example:
 
 [source,nextflow,linenums]

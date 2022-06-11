@@ -188,7 +188,7 @@ execution path.
 IMPORTANT: The second process runs twice, executing in two different work directories 
 for each input file. Therefore, in the previous example the work directory [9f/1dd42a] 
 represents just one of the two directories that were processed. To print all the 
-relevant paths to screen, use the `-ansi-log` flag (e.g. `nextflow run hello.nf -ansi-log false`).
+relevant paths to the screen, use the `-ansi-log` flag (e.g. `nextflow run hello.nf -ansi-log false`).
 
 It's worth noting that the process `convertToUpper` is executed in parallel, so there's no guarantee that the instance processing the first split (the chunk 'Hello ') will be executed before the one processing the second split (the chunk 'world!').
 
@@ -258,7 +258,7 @@ retrieved from the cache. The second process is executed as expected,
 printing the reversed strings.
 
 TIP: The pipeline results are cached by default in the directory `$PWD/work`.
-Depending on your script, this folder can take of lot of disk space.
+Depending on your script, this folder can take a lot of disk space.
 If you are sure you won't resume your pipeline execution, clean this folder periodically.
 
 
