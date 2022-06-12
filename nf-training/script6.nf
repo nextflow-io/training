@@ -58,7 +58,7 @@ process fastqc {
     tag "FASTQC on $sample_id"
 
     input:
-    tuple sample_id, path(reads)
+    tuple val(sample_id), path(reads)
 
     output:
     path "fastqc_${sample_id}_logs"
@@ -88,7 +88,7 @@ process multiqc {
 
 workflow {
 
-    index_ch = index(Channel.from(params.transcriptome))
+    index_ch = index(Channel.from(params.transcriptome_file))
 
     Channel
     .fromFilePairs( params.reads, checkIfExists: true )
