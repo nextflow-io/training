@@ -52,7 +52,7 @@ process quantification {
 
 workflow {
 
-    index_ch = index(Channel.from(params.transcriptome_file))
+    index_ch = index(Channel.from(params.transcriptome_file)).collect()
 
     Channel
     .fromFilePairs( params.reads, checkIfExists: true )
