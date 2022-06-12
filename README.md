@@ -4,13 +4,11 @@ Welcome to the Nextflow training repo. We are excited to have you on the path to
 
 ## Prerequisites:
 
-A chromium-based browser (e.g. Chrome, Firefox).
+A chromium-based browser (e.g. Chrome or Firefox).
 
 ## Opening the training material in a browser
 
-Follow the following URL, which will lead you to the material we will go over:
-
-https://training.seqera.io/
+Follow [this](https://training.seqera.io/) URL, which will lead you to the material we will go over.
 
 ## Gitpod tutorial environment
 
@@ -18,17 +16,15 @@ In addition to the training material, we also have a free cloud environment for 
 
 We use Gitpod, which is an Integrated Development Environment (IDE) with all programs installed and example datasets, which allows you to start the training with ease. 
 
-If you wish to run the tutorial locally, then there are instructions on how to download all the programs with the training guide: https://training.seqera.io/
+If you wish to run the tutorial locally, then follow are instructions on how to download all the programs using the [training guide](https://training.seqera.io/).
 
 ### Running Gitpod for the first time
 
 To run Gitpod:
 
-1. Either: click the following URL:
+1. Either, click the following URL:
 
-https://gitpod.io/#https://github.com/seqeralabs/nf-training-public
-
-(which is our Github repository URL, prefixed with https://gitpod.io/#).
+https://gitpod.io/#https://github.com/seqeralabs/nf-training-public (which is our Github repository URL, prefixed with https://gitpod.io/#).
 
 **OR**
 
@@ -40,11 +36,11 @@ Install the Gitpod browser extension, following the instructions [here](https://
 
 You may need to close the window at this stage and click the gitpod link again. 
 
-Once you have signed in, Gitpod will load (skip prebuild, if asked):
+Once you have signed in, Gitpod will load (skip the prebuild if asked):
 
 ![PNG](/asciidocs/img/gitpod.png)
 
-Gitpod gives you 50 hours per month to run the environment, with up to 4 parallel workspaces at a time. So feel free to come back at any time and try the course at your own pace.
+Gitpod gives you 50 hours per month to run the environment, with up to four parallel workspaces at a time. So feel free to come back at any time and try the course at your own pace.
 
 It is useful to save the URL that is now your Gitpod environment. Later, we can use this to return to the same closed environment (so please take note of it now).
 
@@ -64,14 +60,14 @@ You should see something similar to the following:
 
 Any running workspace will be automatically stopped after 30 minutes. You can open the environment again by going to https://gitpod.io/workspaces and finding your previous environment, then clicking the three-dot button to the right, and selecting Open. 
 
-If you save the URL from your previous Gitpod environment, you can just paste this into your browser to open the previous environment. Environments are saved for up to two weeks but don't rely on their existence download any important files you want for posterity.
+If you save the URL from your previous Gitpod environment, you can just paste this into your browser to open the previous environment. Environments are saved for up to two weeks but don't rely on their existence. Download any important files you want for posterity.
 
 Alternatively, you can start a new workspace by clicking the green gitpod button, or following the Gitpod URL: 
 https://gitpod.io/#https://github.com/seqeralabs/nf-training-public
 
 This tutorial provides all the scripts, so don't worry if you have lost your environment. In the `nf-training` and `nf-training/scripts` directories, you can find the main scripts and individual snippets used in the tutorial.
 
-If you want to change git provider (between GitHub, GitLab and BitBucket), go to https://gitpod.io/integrations. Then you will need to log in and deactivate the current provider.
+If you want to change git provider (between GitHub, GitLab and BitBucket), go to https://gitpod.io/integrations. You will need to log in and deactivate your current provider.
 
 ### Copyright
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a>
