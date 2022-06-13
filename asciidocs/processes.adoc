@@ -308,13 +308,13 @@ workflow{
 ----
 
 WARNING: When a process declares an input `file`, the corresponding channel elements 
-must be *file* objects, i.e. created with the `file` helper function from the file specific 
-channel factories e.g. `Channel.fromPath` or `Channel.fromFilePairs`. 
+must be *file* objects mcreated with the `file` helper function from the file specific 
+channel factories (e.g., `Channel.fromPath` or `Channel.fromFilePairs`). 
 
 
 === Input path
 
-As of version 19.10.0, Nextflow introduced a new `path` input qualifier that  automatically 
+As of version 19.10.0, Nextflow introduced a new `path` input qualifier that automatically 
 handles string values as file objects. The following example works as expected:
 
 [source,nextflow,linenums]
@@ -355,7 +355,7 @@ Channel
   .fromPath( params.reads )
   .set { read_ch } 
 
-process concat {
+process concatenate {
   tag "Concat all files"
 
   input:
@@ -372,7 +372,7 @@ process concat {
 }
 
 workflow{
-  concat_ch=concat(read_ch.collect())
+  concat_ch=concatenate(read_ch.collect())
   concat_ch.view()
 }
 ----
@@ -413,11 +413,11 @@ Both channels emit three values, therefore the process is executed three times, 
 * (2, b)
 * (3, c)
 
-What is happening is that the process waits until there's a complete input configuration i.e. it receives an input value from all the channels declared as input.
+What is happening is that the process waits until there's a complete input configuration i.e., it receives an input value from all the channels declared as input.
 
 When this condition is verified, it consumes the input values coming from the respective channels, spawns a task execution, then repeats the same logic until one or more channels have no more content.
 
-This means channel values are consumed serially one after another and the first empty channel causes the process execution to stop even if there are other values in other channels.
+This means channel values are consumed serially one after another and the first empty channel causes the process execution to stop, even if there are other values in other channels.
 
 *So what happens when channels do not have the same cardinality (i.e. they emit a different number of elements)?*
 
@@ -444,7 +444,7 @@ workflow{
 }
 ----
 
-In the above example, the process is only executed twice because when a channel has no more data to be processed it stops the process execution.
+In the above example, the process is only executed twice because the process stops when a channel has no more data to be processed.
 
 However, what happens if you replace value x with a `value` channel?
 
@@ -482,7 +482,7 @@ workflow{
 ----
 ====
 
-This is because _value_ channels can be consumed multiple times, so it doesn't affect process termination.
+This is because _value_ channels can be consumed multiple times and do not affect process termination.
 
 [discrete]
 === Exercise
@@ -528,7 +528,7 @@ workflow{
 
 === Input repeaters
 
-The `each` qualifier allows you to repeat the execution of a process for each item in a collection, every time new data is received. For example:
+The `each` qualifier allows you to repeat the execution of a process for each item in a collection every time new data is received. For example:
 
 [source,nextflow,linenums]
 ----
@@ -551,12 +551,12 @@ workflow{
 }
 ----
 
-In the above example, every time a file of sequences is received as input by the process, it executes three tasks, each running a different alignment method, set as a `mode` variable. This is useful when you need to repeat the same task for a given set of parameters.
+In the above example, every time a file of sequences is received as an input by the process, it executes three tasks, each running a different alignment method set as a `mode` variable. This is useful when you need to repeat the same task for a given set of parameters.
 
 [discrete]
 === Exercise
 
-Extend the previous example so a task is executed for each read file matching the pattern `data/ggal/*_1.fq` and repeat the same task both with `salmon` and `kallisto`.
+Extend the previous example so a task is executed for each read file matching the pattern `data/ggal/*_1.fq` and repeat the same task with both `salmon` and `kallisto`.
 
 .Click here for the answer:
 [%collapsible]
@@ -601,17 +601,17 @@ workflow{
 
 The _output_ declaration block defines the channels used by the process to send out the results produced.
 
-Only one output block can be defined containing one or more output declarations. The output block follows the syntax shown below:
+Only one output block, that can contain one or more output declaration, can be defined. The output block follows the syntax shown below:
 
 ----
 output:
-  <output qualifier> <output name> into <target channel>[,channel,..]
+  <output qualifier> <output name> , emit: <output channel>
 ----
 
 === Output values
 
-The `val` qualifier specifies a defined _value_ output in the script context. In a common usage scenario,
-this is a value, which has been defined in the _input_ declaration block, as shown in the following example:
+The `val` qualifier specifies a defined _value_ in the script context.
+Values are frequently defined in the _input_ and/or _output_ declaration blocks, as shown in the following example:
 
 [source,nextflow,linenums]
 ----
@@ -639,7 +639,7 @@ workflow{
 
 === Output files
 
-The `file` qualifier specifies one or more files as output, produced by the process, into the specified channel.
+The `file` qualifier specifies one or more files produced by the process into the specified channel as an output.
 
 [source,nextflow,linenums]
 ----
@@ -662,14 +662,14 @@ workflow{
 
 In the above example the process `randomNum` creates a file named `result.txt` containing a random number.
 
-Since a file parameter using the same name is declared in the output block, when the task is completed that
-file is sent over the `receiver_ch` channel. A downstream `process` declaring the same channel as _input_ will
+Since a file parameter using the same name is declared in the output block, the
+file is sent over the `receiver_ch` channel when the task is complete. A downstream `process` declaring the same channel as _input_ will
 be able to receive it.
 
 
 === Multiple output files
 
-When an output file name contains a `*` or `?` wildcard character it is interpreted as a
+When an output file name contains a wildcard character (`*` or `?`) it is interpreted as a
 http://docs.oracle.com/javase/tutorial/essential/io/fileOps.html#glob[glob] path matcher.
 This allows us to _capture_ multiple files into a list object and output them as a sole emission. For example:
 
@@ -693,7 +693,7 @@ workflow{
 }
 ----
 
-it prints:
+Prints the following:
 
 ----
 File: chunk_aa => H
@@ -704,10 +704,10 @@ File: chunk_ad => a
 
 Some caveats on glob pattern behavior:
 
-* Input files are not included in the list of possible matches.
-* Glob pattern matches against both files and directory paths.
+* Input files are not included in the list of possible matches
+* Glob pattern matches both files and directory paths
 * When a two stars pattern ``**`` is used to recourse across directories, only file paths are matched
-  i.e. directories are not included in the result list.
+  i.e., directories are not included in the result list.
 
 [discrete]
 === Exercise
@@ -726,8 +726,8 @@ File: [chunk_aa, chunk_ab, chunk_ac, chunk_ad] => [H, o, l, a]
 
 === Dynamic output file names
 
-When an output file name needs to be expressed dynamically, it is possible to define it using a dynamic evaluated
-string, which references values defined in the input declaration block or in the script global context.
+When an output file name needs to be expressed dynamically, it is possible to define it using a dynamic
+string that references values defined in the input declaration block or in the script global context.
 For example:
 
 [source,nextflow,linenums]
@@ -752,7 +752,6 @@ process align {
 }
 
 
-
 workflow{
 
   genomes=align( species_ch , sequences )
@@ -766,13 +765,10 @@ on the actual value of the `x` input.
 
 === Composite inputs and outputs
 
-So far we have seen how to declare multiple input and output channels, but each channel was handling
-only one value at a time. However, Nextflow can handle a _tuple_ of values.
+So far we have seen how to declare multiple input and output channels that can handel 
+one value at a time. However, Nextflow can also handle a _tuple_ of values.
 
-When using a channel emitting a _tuple_ of values, the corresponding input declaration must be declared with a `tuple` qualifier followed by the definition of each element in the tuple.
-
-In the same manner, output channels emitting a tuple of values can be declared using the `tuple` qualifier
-followed by the definition of each tuple element.
+The input and output declarations for tuples must be declared with a `tuple` qualifier followed by the definition of each element in the tuple.
 
 [source,nextflow,linenums]
 ----
@@ -796,8 +792,7 @@ workflow{
 }
 ----
 
-TIP: In previous versions of Nextflow `tuple` was called `set` but it was used exactly with the 
-  same semantic. It can still be used for backward compatibility. 
+TIP: In previous versions of Nextflow `tuple` was called `set` but it was used the same way with the same semantic.
 
 [discrete]
 === Exercise
@@ -865,11 +860,10 @@ workflow{
 
 Directive declarations allow the definition of optional settings that affect the execution of the current process without affecting the _semantic_ of the task itself.
 
-They must be entered at the top of the process body, before any other declaration blocks (i.e. `input`, `output`, etc.).
+They must be entered at the top of the process body, before any other declaration blocks (i.e., `input`, `output`, etc.).
 
 Directives are commonly used to define the amount of computing resources to be used or
-other meta directives that allow the definition of extra information for configuration or
-logging purposes. For example:
+other meta directives that allow the definition of extra configuration of logging information. For example:
 
 [source,nextflow,linenums]
 ----
@@ -894,32 +888,32 @@ The complete list of directives is available https://www.nextflow.io/docs/latest
 |Description
 
 |https://www.nextflow.io/docs/latest/process.html#cpus[cpus] 
-|Allows you to define the number of (logical) CPU required by the process’ task. 
+|Allows you to define the number of (logical) CPUs required by the process’ task. 
 
 |https://www.nextflow.io/docs/latest/process.html#time[time] 
-|Allows you to define how long a process is allowed to run. e.g. time '1h': 1 hour, '1s' 1 second, '1m' 1 minute, '1d' 1 day.
+|Allows you to define how long a process is allowed to run (e.g., time '1h': 1 hour, '1s' 1 second, '1m' 1 minute, '1d' 1 day).
 
 |https://www.nextflow.io/docs/latest/process.html#memory[memory]
-|Allows you to define how much memory the process is allowed to use. e.g. '2 GB' is 2 GB. Can use B, KB,MB,GB and TB.
+|Allows you to define how much memory the process is allowed to use (e.g., '2 GB' is 2 GB). Can also use B, KB,MB,GB and TB.
 
 |https://www.nextflow.io/docs/latest/process.html#disk[disk] 
 |Allows you to define how much local disk storage the process is allowed to use.
 
 |https://www.nextflow.io/docs/latest/process.html#tag[tag]
-|Allows you to associate each process execution with a custom label, so that it will be easier to identify them in the log file or the trace execution report.
+|Allows you to associate each process execution with a custom label to make it easier to identify them in the log file or the trace execution report.
 |===
 
 == Organise outputs
 
 === PublishDir directive
 
-Given each process is being executed in separate temporary work/ folders (e.g. work/f1/850698...; work/g3/239712...; etc.), we may want to save important, non-intermediary, final files into a results folder. 
+Given each process is being executed in separate temporary `work/` folder (e.g., work/f1/850698...; work/g3/239712...; etc.), we may want to save important, non-intermediary, and/or final files in a results folder. 
 
-TIP: Remember to delete the work folder from time to time, else all your intermediate files will fill up your computer!
+TIP: Remember to delete the work folder from time to time to clear your intermediate files and stop them from filling your computer!
 
 To store our workflow result files, we need to explicitly mark them using the directive
 https://www.nextflow.io/docs/latest/process.html#publishdir[publishDir] in
-the process that's creating these files. For example:
+the process that's creating the files. For example:
 
 [source,nextflow,linenums,options="nowrap"]
 ----
@@ -948,11 +942,11 @@ workflow{
 }
 ----
 
-The above example will copy all blast script files created by the `blastSeq` task in the
+The above example will copy all blast script files created by the `blastSeq` task into the
 directory path `my-results`. 
 
-TIP: The publish directory can be local or remote. For example output files
-could be stored to a https://aws.amazon.com/s3/[AWS S3 bucket] just using the `s3://` prefix in the target path.
+TIP: The publish directory can be local or remote. For example, output files
+could be stored using an https://aws.amazon.com/s3/[AWS S3 bucket] by using the `s3://` prefix in the target path.
 
 === Manage semantic sub-directories
 
@@ -995,6 +989,5 @@ workflow{
 ----
 
 The above example will create an output structure in the directory `my-results`,
-which contains a separate sub-directory for each given sample ID each of which
-contain the folders `counts` and `outlooks`.
+that contains a separate sub-directory for each given sample ID, each containing the folders `counts` and `outlooks`.
 
