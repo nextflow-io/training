@@ -128,7 +128,7 @@ workflow{ <22>
 <17> Tells the process to expect output as standard output (stdout) and direct this output as a channel.
 <18> Three double quote marks initiate the code block to execute in this `process`.
 <19> Script to read files (cat) using the '$y' input variable, then pipe to uppercase conversion, outputting to standard output.
-<20> Triple quote marks the end of the code block.
+<20> Three double quote marks end the code block.
 <21> End of first `process` block.
 <22> Start of the workflow scope, where each process can be called. 
 <23> Execute the `process` splitLetters on the `greeting_ch` (aka greeting channel), and store the output in the channel `letters_ch`.
