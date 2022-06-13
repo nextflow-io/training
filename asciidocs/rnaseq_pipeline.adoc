@@ -37,7 +37,7 @@ Try to specify a different input parameter in your execution command, for exampl
 [discrete]
 === Exercise
 
-Modify the `script1.nf` adding a fourth parameter named `outdir` and set it to a default path
+Modify the `script1.nf` by adding a fourth parameter named `outdir` and set it to a default path
 that will be used as the pipeline output directory.
 
 .Click here for the answer:
@@ -55,7 +55,7 @@ params.outdir = "results"
 [discrete]
 === Exercise
 
-Modify the `script1.nf` to print all the pipeline parameters by using a single `log.info` command as a https://www.nextflow.io/docs/latest/script.html#multi-line-strings[multiline string] statement.
+Modify `script1.nf` to print all of the pipeline parameters by using a single `log.info` command as a https://www.nextflow.io/docs/latest/script.html#multi-line-strings[multiline string] statement.
 
 TIP: See an example https://github.com/nextflow-io/rnaseq-nf/blob/3b5b49f/main.nf#L41-L48[here,window="_blank"].
 
@@ -96,7 +96,7 @@ A `process` is defined by providing three main declarations:
 the process https://www.nextflow.io/docs/latest/process.html#inputs[`inputs`], https://www.nextflow.io/docs/latest/process.html#outputs[`outputs`]
 and command https://www.nextflow.io/docs/latest/process.html#script[`script`].
 
-To add a transcriptome `index` processing step, try adding the following code blocks to your script1.nf, or continue from script2.nf.
+To add a transcriptome `index` processing step, try adding the following code blocks to your `script1.nf`. Alternatively, continue from `script2.nf`.
 
 [source,nextflow,linenums]
 ----
@@ -125,14 +125,14 @@ Additionally, add a workflow scope containing an input channel definition and th
 ----
 workflow {
 
-    in_channel = Channel.from(params.transcriptome_file)
+    in_channel = Channel.from(params.transcriptome_file).collect()
 
     index_ch = index( in_channel )
 
 }
 ----
 
-Here, the `transcriptome_file` paramater is defined as `in_channel` and used as the input for the `index` process. The `index` process (using the `salmon` tool) creates `salmon_index`, an indexed transcriptome which is passed as an output to the `index_ch` channel.
+Here, the `transcriptome_file` parameter is defined as `in_channel` and used as the input for the `index` process. The `index` process (using the `salmon` tool) creates `salmon_index`, an indexed transcriptome that is passed as an output to the `index_ch` channel.
 
 NOTE: the `input` declaration defines a `transcriptome` path variable which is used in the `script` as a reference (using the dollar sign) in the Salmon command line.
 
@@ -149,12 +149,12 @@ as shown below:
 
   nextflow run script2.nf -with-docker
 
-This time the execution works because it uses the Docker container `nextflow/rnaseq-nf` that is defined in the
+This time the execution will work because it uses the Docker container `nextflow/rnaseq-nf` that is defined in the
 `nextflow.config` file in your current directory. If you are running this script locally then you will need to download docker
-to your machine, login to activate docker, and allow the script to download the container 
+to your machine, log in and activate docker, and allow the script to download the container 
 containing the run scripts. You can learn more about docker https://www.nextflow.io/docs/latest/docker.html[here].
 
-In order to avoid adding `-with-docker` each time you execute the script, add the following line to the `nextflow.config` file:
+To avoid adding `-with-docker` each time you execute the script, add the following line to the `nextflow.config` file:
 
   docker.enabled = true
 
@@ -182,7 +182,7 @@ index_ch.view()
 [discrete]
 === Exercise
 
-If you have more cpu available, try changing your script to request more resources for this process. For example, see the https://www.nextflow.io/docs/latest/process.html#cpus[directive docs]. `$task.cpus` is already specified in this script, so setting the number of CPUs as a directive will tell Nextflow to run this job with the specified number of cpus.
+If you have more CPUs available, try changing your script to request more resources for this process. For example, see the https://www.nextflow.io/docs/latest/process.html#cpus[directive docs]. `$task.cpus` is already specified in this script, so setting the number of CPUs as a directive will tell Nextflow to run this job.
 
 .Click here for the answer:
 [%collapsible]
@@ -196,13 +196,13 @@ process index {
     input:
     ...
 ----
-Then check it worked, by looking at the script executed in the work directory. Look for the hexidecimal (e.g. work/7f/f285b80022d9f61e82cd7f90436aa4/), Then `cat` the `.command.sh` file.
+Then check it worked by looking at the script executed in the work directory. Look for the hexidecimal (e.g. work/7f/f285b80022d9f61e82cd7f90436aa4/), Then `cat` the `.command.sh` file.
 ====
 
 [discrete]
 === Bonus Exercise
 
-Use the command `tree work` to see how Nextflow organizes the process work directory. Check https://www.tecmint.com/linux-tree-command-examples/[here] if you need to download tree.
+Use the command `tree work` to see how Nextflow organizes the process work directory. Check https://www.tecmint.com/linux-tree-command-examples/[here] if you need to download `tree`.
 
 
 .Click here for the answer:
@@ -252,7 +252,7 @@ In this step you have learned:
 
 This step shows how to match *read* files into pairs, so they can be mapped by *Salmon*.
 
-Edit the script `script3.nf` and add the following statement as the last line in the workflow scope:
+Edit the script `script3.nf` by adding the following statement as the last line in the workflow scope:
 
   read_pairs_ch.view()
 
@@ -272,7 +272,7 @@ Try it again specifying different read files by using a glob pattern:
 
   nextflow run script3.nf --reads 'data/ggal/*_{1,2}.fq'
 
-IMPORTANT: File paths that include one or more wildcards ie. `*`, `?`, etc. MUST be
+IMPORTANT: File paths that include one or more wildcards ie. `*`, `?`, etc., MUST be
 wrapped in single-quoted characters to avoid Bash expanding the glob.
 
 [discrete]
@@ -295,7 +295,7 @@ Channel
 [discrete]
 === Exercise
 
-Use the `checkIfExists` option for the https://www.nextflow.io/docs/latest/channel.html#fromfilepairs[fromFilePairs] method to check if the specified path contains at least file pairs.
+Use the `checkIfExists` option for the https://www.nextflow.io/docs/latest/channel.html#fromfilepairs[fromFilePairs] method to check if the specified path contains file pairs.
 
 .Click here for the answer:
 [%collapsible]
@@ -314,7 +314,7 @@ Channel
 In this step you have learned:
 
 1. How to use `fromFilePairs` to handle read pair files
-2. How to use the `checkIfExists` option to check input file existence
+2. How to use the `checkIfExists` option to check for the existence of input files
 3. How to use the `set` operator to define a new channel variable
 
 
@@ -324,7 +324,7 @@ In this step you have learned:
 
 In this workflow scope, note how the `index_ch` channel, declared as output in the `index` process, is now used as an input channel for the `quantification` process.
 
-Also, note how the input is declared in the `quantification` process, the first being a `path` from the `index_ch` and the second being a `tuple` composed of two elements: the `sample_id` and the `reads` in order to match the structure of the items emitted by the `read_pairs_ch` channel.
+Also, note how the input is declared in the `quantification` process, the first being a `path` from the `index_ch` and the second being a `tuple` composed of two elements (the `sample_id` and the `reads`) in order to match the structure of the items emitted by the `read_pairs_ch` channel.
 
 Execute it by using the following command:
 
@@ -340,9 +340,9 @@ Try to execute the same script again with more read files, as shown below:
 
 You will notice that the `quantification` process is executed multiple times.
 
-Nextflow parallelizes the execution of your pipeline simply by providing multiple input data to your script.
+Nextflow parallelizes the execution of your pipeline simply by providing multiple sets of input data to your script.
 
-NOTE: It may be useful to apply optional settings to a specific process using https://www.nextflow.io/docs/latest/process.html#directives[directives] provided in the process body.
+NOTE: It may be useful to apply optional settings to a specific process using https://www.nextflow.io/docs/latest/process.html#directives[directives] by specifying them in the process body.
 
 [discrete]
 === Exercise
@@ -363,7 +363,7 @@ Add the following before the input declaration:
 === Exercise
 
 Add a https://www.nextflow.io/docs/latest/process.html#publishdir[publishDir] directive
-to the `quantification` process to store the process results into a directory of your choice.
+to the `quantification` process to store the process results in a directory of your choice.
 
 .Click here for the answer:
 [%collapsible]
@@ -379,8 +379,8 @@ Add the following before the `input` declaration in the `quantification` process
 
 In this step you have learned:
 
-1. How to connect two processes by using the channel declarations
-2. How to resume the script execution skipping cached steps
+1. How to connect two processes together by using the channel declarations
+2. How to resume the script execution and skip cached steps
 3. How to use the `tag` directive to provide a more readable execution output
 4. How to use the `publishDir` directive to store a process results in a path of your choice
 
@@ -393,11 +393,11 @@ You can run it by using the following command:
 
   nextflow run script5.nf -resume
 
-Nextflow DSL2 knows to split the `reads_pair_ch` into two identical channels as they are required twice as an input for the quality control process `fastqc` and the `quantification` process.
+Nextflow DSL2 knows to split the `reads_pair_ch` into two identical channels as they are required twice as an input for both of the `fastqc` and the `quantification` process.
 
 == MultiQC report
 
-This step collects the outputs from the `quantification` and `fastqc` steps to create
+This step collects the outputs from the `quantification` and `fastqc` processes to create
 a final report using the http://multiqc.info/[MultiQC] tool.
 
 
@@ -409,11 +409,11 @@ It creates the final report in the `results` folder in the current `work` direct
 
 In this script, note the use of the https://www.nextflow.io/docs/latest/operator.html#mix[mix,window="_blank"]
 and https://www.nextflow.io/docs/latest/operator.html#collect[collect,window="_blank"] operators chained
-together to get all the outputs of the `quantification` and `fastqc` processes as a single input. https://www.nextflow.io/docs/latest/operator.html[Operators] can be used to combine and transform channels.
+together to gather the outputs of the `quantification` and `fastqc` processes as a single input. https://www.nextflow.io/docs/latest/operator.html[Operators] can be used to combine and transform channels.
 
   multiqc(quant_ch.mix(fastqc_ch).collect())
 
-We only want one task of MultiQC being executed which produces one report. Therefore, we use the `mix` channel operator to combine the two channels followed by the `collect` operator, to return the complete channel contents as a single element.
+We only want one task of MultiQC to be executed to produces one report. Therefore, we use the `mix` channel operator to combine the two channels followed by the `collect` operator, to return the complete channel contents as a single element.
 
 [discrete]
 === Recap
@@ -421,16 +421,16 @@ We only want one task of MultiQC being executed which produces one report. There
 In this step you have learned:
 
 1. How to collect many outputs to a single input with the `collect` operator
-2. How to `mix` two channels in a single channel
-3. How to chain two or more operators togethers
+2. How to `mix` two channels into a single channel
+3. How to chain two or more operators together
 
 
 == Handle completion event
 
 This step shows how to execute an action when the pipeline completes the execution.
 
-Note that Nextflow processes define the execution of *asynchronous* tasks i.e. they are not
-executed one after another as they are written in the pipeline script as it would happen in a
+Note that Nextflow processes define the execution of *asynchronous* tasks i.e., they are not
+executed one after another as if they were written in the pipeline script in a
 common *imperative* programming language.
 
 The script uses the `workflow.onComplete` event handler to print a confirmation message
@@ -442,11 +442,11 @@ Try to run it by using the following command:
 
 == Email notifications
 
-Send a notification email when the workflow execution complete using the `-N <email address>`
-command line option. 
+Send a notification email when the workflow execution completes using the `-N <email address>`
+command-line option. 
 
-Note: this requires the configuration of a SMTP server in nextflow config
-file. Below is an example in the `nextflow.config` file, or the settings you would have to configure:
+Note: this requires the configuration of a SMTP server in the nextflow config
+file. Below is an example`nextflow.config` file showing the settings you would have to configure:
 
 [source,config,linenums]
 ----
@@ -467,8 +467,8 @@ for details.
 
 == Custom scripts
 
-Real world pipelines use a lot of custom user scripts (BASH, R, Python, etc). Nextflow
-allows you to use and manage all these scripts in a consistent manner. Simply put them
+Real-world pipelines use a lot of custom user scripts (BASH, R, Python, etc.) Nextflow
+allows you to consistently use and manage these scripts. Simply put them
 in a directory named `bin` in the pipeline project root. They will be automatically added
 to the pipeline execution `PATH`.
 
@@ -487,7 +487,7 @@ mkdir fastqc_${sample_id}_logs
 fastqc -o fastqc_${sample_id}_logs -f fastq -q ${reads}
 ----
 
-Save it, give execute permission and move it in the `bin` directory as shown below:
+Save it, give execute permission, and move it into the `bin` directory as shown below:
 
 [source,bash,linenums]
 ----
@@ -524,7 +524,7 @@ In this step you have learned:
 
 == Metrics and reports
 
-Nextflow is able to produce multiple reports and charts providing several runtime metrics and execution information.
+Nextflow can produce multiple reports and charts providing several runtime metrics and execution information.
 
 Run the https://github.com/nextflow-io/rnaseq-nf[rnaseq-nf,window="_blank"] pipeline
 previously introduced as shown below:
@@ -536,16 +536,16 @@ The `-with-docker` option launches each task of the execution as a Docker contai
 The `-with-report` option enables the creation of the workflow execution report. Open
 the file `report.html` with a browser to see the report created with the above command.
 
-The `-with-trace` option enables the create of a tab separated file containing runtime
-information for each executed task. Check the content of the file `trace.txt` for an example.
+The `-with-trace` option enables the creation of a tab separated file containing runtime
+information for each executed task. Check the `trace.txt` for an example.
 
 The `-with-timeline` option enables the creation of the workflow timeline report showing
-how processes where executed along time. This may be useful to identify most time consuming
+how processes were executed over time. This may be useful to identify the most time consuming
 tasks and bottlenecks. See an example at https://www.nextflow.io/docs/latest/tracing.html#timeline-report[this link,window="_blank"].
 
-Finally the `-with-dag` option enables to rendering of the workflow execution direct acyclic graph
-representation. Note: this feature requires the installation of http://www.graphviz.org/[Graphviz,window="_blank"] in your computer.
-See https://www.nextflow.io/docs/latest/tracing.html#dag-visualisation[here,window="_blank"] for details.
+Finally, the `-with-dag` option enables the rendering of the workflow execution direct acyclic graph
+representation. Note: This feature requires the installation of http://www.graphviz.org/[Graphviz,window="_blank"] on your computer.
+See https://www.nextflow.io/docs/latest/tracing.html#dag-visualisation[here,window="_blank"] for further details.
 Then try running :
 
 [source]
@@ -556,12 +556,12 @@ open graph.png
 
 Note: runtime metrics may be incomplete for run short running tasks as in the case of this tutorial.
 
-NOTE: You view the HTML files right-clicking on the file name in the left side-bar and choosing the
+NOTE: You view the HTML files by right-clicking on the file name in the left side-bar and choosing the
 *Preview* menu item.  
 
 == Run a project from GitHub
 
-Nextflow allows the execution of a pipeline project directly from a GitHub repository (or similar services eg. BitBucket and GitLab).
+Nextflow allows the execution of a pipeline project directly from a GitHub repository (or similar services e.g., BitBucket and GitLab).
 
 This simplifies the sharing and deployment of complex projects and tracking changes in a consistent manner.
 
@@ -569,14 +569,14 @@ The following GitHub repository hosts a complete version of the workflow introdu
 
 https://github.com/nextflow-io/rnaseq-nf
 
-You can run it by specifying the project name as shown below, launching each task of the execution as a Docker container run command:
+You can run it by specifying the project name and launching each task of the execution as a Docker container run command:
 
     nextflow run nextflow-io/rnaseq-nf -with-docker
 
 It automatically downloads the container and stores it in the `$HOME/.nextflow` folder.
 
 
-Use the command `info` to show the project information, e.g.:
+Use the command `info` to show the project information, e.g.,:
 
     nextflow info nextflow-io/rnaseq-nf
 
@@ -586,7 +586,7 @@ Nextflow allows the execution of a specific revision of your project by using th
 
 Revision are defined by using Git tags or branches defined in the project repository.
 
-This allows a precise control of the changes in your project files and dependencies over time.
+Tags enable precise control of the changes in your project files and dependencies over time.
 
 
 == More resources
