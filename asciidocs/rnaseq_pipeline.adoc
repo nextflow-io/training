@@ -446,7 +446,7 @@ Send a notification email when the workflow execution completes using the `-N <e
 command-line option. 
 
 Note: this requires the configuration of a SMTP server in the nextflow config
-file. Below is an example`nextflow.config` file showing the settings you would have to configure:
+file. Below is an example `nextflow.config` file showing the settings you would have to configure:
 
 [source,config,linenums]
 ----
