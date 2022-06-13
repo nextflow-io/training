@@ -117,16 +117,16 @@ workflow{ <22>
 <6> Tells the `process` to expect an input value (`val`), that we assign to the variable 'x'. 
 <7> Output declaration for the `splitLetters` process.
 <8> Tells the process to expect an output file/s (`file`) containing 'chunk_*' as output from the script and send the output as a channel. 
-<9> Triple quote marks intiate the code block to execute in this `process`.
+<9> Three double quote marks initiate the code block to execute in this `process`.
 <10> Code to execute, printing the `input` value x (called using the dollar [$] symbol prefix), and splitting the string into chunks of 6 characters long ("Hello " and "world!") and saving to files: chunk_aa and chunk_ab.
-<11> Triple quote marks the end of the code block.
+<11> Three double quote marks end the code block.
 <12> End of first process block.
 <13> Begin second process defined as `convertToUpper`.
 <14> Input declaration for the `convertToUpper` `process`.
 <15> Tells the `process` to expect an `input` file/s (`file`; e.g. chunk_aa and chunk_ab), that we assign to the variable 'y'. 
 <16> Output declaration for the `convertToUpper` process.
 <17> Tells the process to expect output as standard output (stdout) and direct this output as a channel.
-<18> Triple quote marks initiate the code block to execute in this `process`.
+<18> Three double quote marks initiate the code block to execute in this `process`.
 <19> Script to read files (cat) using the '$y' input variable, then pipe to uppercase conversion, outputting to standard output.
 <20> Triple quote marks the end of the code block.
 <21> End of first `process` block.
