@@ -1,8 +1,8 @@
 = Processes 
 
-In Nextflow, a `process` is the basic computing primitive to execute foreign functions (i.e. custom scripts or tools).
+In Nextflow, a `process` is the basic computing primitive to execute foreign functions (i.e., custom scripts or tools).
 
-The `process` definition starts with the keyword `process`, followed by the process name and finally the process body delimited by curly brackets. 
+The `process` definition starts with the keyword `process`, followed by the process name and finally the process body is delimited by curly brackets. 
 
 A basic `process`, only using the `script` definition block, looks like the following:
 
@@ -18,13 +18,13 @@ process sayHello {
 
 In more complex examples, the process body can contain up to *five* definition blocks:
 
-1. *Directives* are initial declarations that define optional settings.
+1. *Directives* are initial declarations that define optional settings
 
-2. *Input* defines the expected input file/s and the channel from where to find them.
+2. *Input* defines the expected input file(s) and the channel from where to find them
 
-3. *Output* defines the expected output file/s and the channel to send the data to.
+3. *Output* defines the expected output file(s) and the channel to send the data to
 
-4. *When* is an optional clause statement to allow conditional processes.
+4. *When* is an optional clause statement to allow conditional processes
 
 5. *Script* is a string statement that defines the command to be executed by the process
 
@@ -52,19 +52,19 @@ process < name > {
 }
 ----
 
-<1> Zero, one or more process directives.
-<2> Zero, one or more process inputs.
-<3> Zero, one or more process outputs.
-<4> An optional boolean conditional to trigger the process execution.
-<5> The command to be executed.
+<1> Zero, one or more process directives
+<2> Zero, one or more process inputs
+<3> Zero, one or more process outputs
+<4> An optional boolean conditional to trigger the process execution
+<5> The command to be executed
 
 == Script
 
 The `script` block is a string statement that defines the command to be executed by the process.
 
-A process contains one and only one `script` block, and it must be the last statement when the process contains input and output declarations.
+A process contains one and only one `script` block. It must be the last statement when the process contains input and output declarations.
 
-The `script` block can be a single or multi-line string. The latter simplifies the writing of non-trivial scripts
+The `script` block can be a single or a multi-line string. The latter simplifies the writing of non-trivial scripts
 composed of multiple commands spanning over multiple lines. For example:
 
 [source,nextflow,linenums]
@@ -79,7 +79,7 @@ process example {
 }
 ----
 
-By default the `process` command is interpreted as a *Bash* script. However any other scripting language can be used by simply starting the script with the corresponding https://en.wikipedia.org/wiki/Shebang_(Unix)[Shebang] declaration. For example:
+By default, the `process` command is interpreted as a *Bash* script. However, any other scripting language can be used by simply starting the script with the corresponding https://en.wikipedia.org/wiki/Shebang_(Unix)[Shebang] declaration. For example:
 
 [source,nextflow,linenums]
 ----
@@ -95,11 +95,11 @@ process pyStuff {
 }
 ----
 
-NOTE: Multiple programming languages can be used within the same workflow script. However, for large chunks of code is suggested to save them into separate files and invoke them from the process script. One can store the specific scripts in the ./bin folder.
+NOTE: Multiple programming languages can be used within the same workflow script. However, for large chunks of code it is better to save them into separate files and invoke them from the process script. One can store the specific scripts in the `./bin/` folder.
 
 === Script parameters
 
-Script parameters (`params`) can be defined dynamically using variable values, like this:
+Script parameters (`params`) can be defined dynamically using variable values. For example:
 
 [source,nextflow,linenums]
 ----
@@ -117,7 +117,7 @@ NOTE: A process script can contain any string format supported by the Groovy pro
 This allows us to use string interpolation as in the script above or multiline strings. 
 Refer to <<groovy.adoc#_string_interpolation,String interpolation>> for more information.
 
-IMPORTANT: Since Nextflow uses the same Bash syntax for variable substitutions in strings, Bash environment variables need to be escaped using `\` character.
+IMPORTANT: Since Nextflow uses the same Bash syntax for variable substitutions in strings, Bash environment variables need to be escaped using the `\` character.
 
 [source,nextflow,linenums]
 ----
@@ -129,9 +129,7 @@ process foo {
 }
 ----
 
-TIP: Try to modify the above script using `$PWD` instead of `\$PWD` and  check the difference.
-
-This can be tricky when the script uses many Bash variables. A possible alternative
+It can be tricky to write a script uses many Bash variables. One possible alternative
 is to use a script string delimited by single-quote characters
 
 [source,nextflow,linenums]
@@ -146,7 +144,7 @@ process bar {
 
 However, this blocks the usage of Nextflow variables in the command script.
 
-Another alternative is to use a `shell` statement instead of `script` which uses a different
+Another alternative is to use a `shell` statement instead of `script` and use a different
 syntax for Nextflow variables: `!{..}`. This allows the use of both Nextflow and Bash variables in the same script.
 
 [source,nextflow,linenums]
@@ -164,7 +162,7 @@ process baz {
 
 === Conditional script
 
-The process script can also be defined in a completely dynamic manner using an `if` statement or any other expression evaluating to a string value. For example:
+The process script can also be defined in a completely dynamic manner using an `if` statement or any other expression for evaluating a string value. For example:
 
 [source,nextflow,linenums]
 ----
@@ -192,9 +190,9 @@ process foo {
 
 == Inputs
 
-Nextflow processes are isolated from each other but can communicate between themselves sending values through channels.
+Nextflow processes are isolated from each other but can communicate between themselves by sending values through channels.
 
-Inputs implicitly determine the dependency and the parallel execution of the process. 
+Inputs implicitly determine the dependencies and the parallel execution of the process. 
 The process execution is fired each time _new_ data is ready to be consumed from the input channel: 
 
 image::channel-process.png[]
@@ -205,7 +203,7 @@ The `input` block follows the syntax shown below:
 
 ```nextflow
 input:
-  <input qualifier> <input name> from <source channel>
+  <input qualifier> <input name>
 ```
 
 === Input values
@@ -231,7 +229,7 @@ workflow {
 }
 ----
 
-In the above example the process is executed three times, each time a value is received from the channel num and used to process the script. Thus, it results in an output similar to the one shown below:
+In the above example the process is executed three times, each time a value is received from the channel `num` and used to process the script. Thus, it results in an output similar to the one shown below:
 
 ```
 process job 3
@@ -244,7 +242,7 @@ IMPORTANT: The channel guarantees that items are delivered in the same order as 
 === Input files
 
 The `file` qualifier allows the handling of file values in the process execution context. This means that
-Nextflow will stage it in the process execution directory, and it can be access in the script by using the name specified in the input declaration.
+Nextflow will stage it in the process execution directory, and it can be accessed in the script by using the name specified in the input declaration.
 
 
 [source,nextflow,linenums]
@@ -287,8 +285,8 @@ workflow{
 }
 ----
 
-The same syntax it's also able to handle more than one input file in the same execution.
-Only requiring a change in the channel composition.
+The same syntax is also able to handle more than one input file in the same execution and
+only requires changing the channel composition.
 
 [source,nextflow,linenums]
 ----
@@ -337,7 +335,7 @@ workflow{
 }
 ----
 
-NOTE: The path qualifier should be preferred over file to handle process input files when using Nextflow 19.10.0 or later.
+NOTE: The path qualifier should be preferred over files to handle process input files when using Nextflow 19.10.0 or later.
 
 
 [discrete]
@@ -382,8 +380,8 @@ workflow{
 
 === Combine input channels
 
-A key feature of processes is the ability to handle inputs from multiple channels. However it's
-important to understand how channel content and their semantics affect the execution
+A key feature of processes is the ability to handle inputs from multiple channels. However, it's
+important to understand how channel contents and their semantics affect the execution
 of a process.
 
 Consider the following example:
@@ -417,9 +415,9 @@ Both channels emit three values, therefore the process is executed three times, 
 
 What is happening is that the process waits until there's a complete input configuration i.e. it receives an input value from all the channels declared as input.
 
-When this condition is verified, it consumes the input values coming from the respective channels, and spawns a task execution, then repeat the same logic until one or more channels have no more content.
+When this condition is verified, it consumes the input values coming from the respective channels, spawns a task execution, then repeats the same logic until one or more channels have no more content.
 
-This means channel values are consumed serially one after another and the first empty channel cause the process execution to stop even if there are other values in other channels.
+This means channel values are consumed serially one after another and the first empty channel causes the process execution to stop even if there are other values in other channels.
 
 *So what happens when channels do not have the same cardinality (i.e. they emit a different number of elements)?*
 
@@ -446,7 +444,7 @@ workflow{
 }
 ----
 
-In the above example the process is executed only two times, because when a channel has no more data to be processed it stops the process execution.
+In the above example, the process is only executed twice because when a channel has no more data to be processed it stops the process execution.
 
 However, what happens if you replace value x with a `value` channel?
 
@@ -553,7 +551,7 @@ workflow{
 }
 ----
 
-In the above example every time a file of sequences is received as input by the process, it executes three tasks, each running a different alignment method, set as a `mode` variable. This is useful when you need to repeat the same task for a given set of parameters.
+In the above example, every time a file of sequences is received as input by the process, it executes three tasks, each running a different alignment method, set as a `mode` variable. This is useful when you need to repeat the same task for a given set of parameters.
 
 [discrete]
 === Exercise
@@ -769,7 +767,7 @@ on the actual value of the `x` input.
 === Composite inputs and outputs
 
 So far we have seen how to declare multiple input and output channels, but each channel was handling
-only one value at a time. However Nextflow can handle a _tuple_ of values.
+only one value at a time. However, Nextflow can handle a _tuple_ of values.
 
 When using a channel emitting a _tuple_ of values, the corresponding input declaration must be declared with a `tuple` qualifier followed by the definition of each element in the tuple.
 
@@ -908,7 +906,7 @@ The complete list of directives is available https://www.nextflow.io/docs/latest
 |Allows you to define how much local disk storage the process is allowed to use.
 
 |https://www.nextflow.io/docs/latest/process.html#tag[tag]
-|Allows you to associate each process execution with a custom label, so that it will be easier to identify them in the log file or in the trace execution report.
+|Allows you to associate each process execution with a custom label, so that it will be easier to identify them in the log file or the trace execution report.
 |===
 
 == Organise outputs
