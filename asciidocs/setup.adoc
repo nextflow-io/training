@@ -4,12 +4,12 @@ There are two main ways to get started with Seqera's Nextflow training course.
 
 The first is to install the requirements locally (section 1.1), which is best if you are already familiar with Git and Docker, or working offline.
 
-The second is to use Gitpod (see section 1.2), which is best for first timers, as this platform containes all the programs and data required. 
+The second is to use Gitpod (see section 1.2), which is best for first-timers, as this platform contains all the programs and data required. 
 Simply click the link and login via your GitHub account to start the tutorial.
 
 == Local installation
 
-Nextflow can be used on any POSIX compatible system (Linux, OS X, Windows Subsystem for Linux, etc.).
+Nextflow can be used on any POSIX-compatible system (Linux, OS X, Windows Subsystem for Linux, etc.).
 
 *Requirements*:
 
@@ -50,7 +50,7 @@ AND put the nextflow executable into your $PATH (e.g. ~/usr/local/bin or ~/bin/)
 
 === Training material 
 
-Download the training material by copy and pasting the following command 
+Download the training material by copying and pasting the following command 
 in the terminal:
 
 [source,bash,linenums]
@@ -71,7 +71,7 @@ Use a preconfigured Nextflow development environment using Gitpod.
 
 *Requirements*:
 
- * A GitHub account (gives you 50 hours usage per month)
+ * A GitHub account (gives you 50 hours of free usage per month)
  * Web browser (Google Chrome, Firefox)
 
 === Training material 
@@ -92,11 +92,11 @@ https://gitpod.io/#https://github.com/seqeralabs/nf-training-public
 
 **OR**
 
-Install the Gitpod browser extension, following the instructions https://www.gitpod.io/docs/browser-extension[here]. This will add a green Gitpod button to each Git repository for easy access to the environment. Then, go to the git repository for the training (https://github.com/seqeralabs/nf-training-public), and click the green button.
+Install the Gitpod browser extension, following the instructions https://www.gitpod.io/docs/browser-extension[here]. This will add a green Gitpod button to each Git repository for easy access to the environment. Then, go to the git repository for the training material (https://github.com/seqeralabs/nf-training-public), and click the green button.
 
 image::gitpodbutton.png[]
 
-- Login to your Github account (and allow authorisation). 
+- Log in to your Github account (and allow authorization). 
 
 You may need to close the window at each stage and click the gitpod link again. 
 
@@ -114,23 +114,23 @@ You should see something similar to the following:
 
 image::gitpod.welcome.png[]
 
-**The sidebar** allows you to customise your Gitpod environment and perform basic tasks (copy, paste, open files, search, git, etc.). Click the Explorer button to see which files are in this repository.
+**The sidebar** allows you to customize your Gitpod environment and perform basic tasks (copy, paste, open files, search, git, etc.). Click the Explorer button to see which files are in this repository.
 
-**The terminal** allows you to run all the programs in the repository, for example `nextflow` and `docker` are installed. 
+**The terminal** allows you to run all the programs in the repository. For example, both `nextflow` and `docker` are installed and can be executed immediately. 
 
 **The main window** allows you to view and edit files. Clicking on a file in the explorer will open it within the main window. We can also see the nf-training material in this window, but if you find the space too small you can open it separately in another browser window (https://training.seqera.io/). Finally, if you accidentally close the Gitpod training window, you can reopen it by entering `gp preview https://training.seqera.io`.
 
 4. Saving your files in Gitpod to your local machine.
 
-To save your files, choose your file of interest, then either use the left/top hand sidebar (File/Save As...) or use your keyboard shortcut to save as (On Mac: CMD, shift, s), then choose `Show local`. This will open up an explorer to choose where to save your file on your local machine.
+To save your files, choose your file of interest, then either use the left/top hand sidebar or use your keyboard shortcut to save as (On Mac: CMD, shift, s), then choose `Show local`. This will open up an explorer to choose where to save your file on your local machine.
 
 ### Reopening a Gitpod session
 
-Any running workspace will be automatically stopped after 30 minutes. You can open the environment again by going to https://gitpod.io/workspaces and finding your previous environment, then clicking the three dot button to the right, and selecting Open. 
+Any running workspace will be automatically stopped after 30 minutes. You can open the environment again by going to https://gitpod.io/workspaces and finding your previous environment, then clicking the button with three dots, and selecting Open. 
 
-If you save the URL from your previous Gitpod environment, you can just paste this into your browser to open the previous environment. Environments are saved for up to two weeks, but don't rely on their existence, download any important files you want for posterity.
+If you save the URL from your previous Gitpod environment, you can just paste this into your browser to open the previous environment. Environments are saved for up to two weeks. However, you shouldn't rely on their existence and make sure you download any important files you want for posterity.
 
-Alternatively, you can start a new workspace by clicking the green gitpod button, or following the Gitpod URL: 
+Alternatively, you can start a new workspace by clicking the green Gitpod button, or following the Gitpod URL: 
 https://gitpod.io/#https://github.com/seqeralabs/nf-training-public
 
 This tutorial provides all the scripts, so don't worry if you have lost your environment. In the `nf-training` and `nf-training/scripts` directories, you can find the main scripts and individual snippets used in the tutorial.
@@ -145,7 +145,7 @@ In the terminal section, you can type the following:
 
 This should come up with the Nextflow information from this environment. This tells us that the environment is working. All the training material and scripts are in this environment.
 
-WARNING: Be aware that if you leave the window or are not active, your session may end after 30 minutes. You can always reactivate by clicking the gitpod link again. It will show you if your previous environment is still active, or if you need to open a new environment.
+WARNING: Be aware that if you leave the window or are not active, your session may end after 30 minutes. You can always reactivate your session by clicking the Gitpod link again. Your previous environment will appear if it is still active.
 
 You should see the following (or similar):
 
@@ -160,20 +160,20 @@ You should see the following (or similar):
 
 == Selecting a Nextflow version
 
-By default Nextflow will pull the latest stable version into your environment.
+By default, Nextflow will pull the latest stable version into your environment.
 
 However, Nextflow is constantly evolving as we make improvements and fix bugs.
 
-It is worth checking out the latest releases on github: https://github.com/nextflow-io/nextflow[(click here)].
+It is worth checking out the latest releases on github https://github.com/nextflow-io/nextflow[here].
 
-If you want or need to use a specific version of Nextflow, you can set the NXF_VER variable as shown here:
+If you want or need to use a specific version of Nextflow, you can set the NXF_VER variable as shown below:
 
 [source,bash,linenums]
 ----
 export NXF_VER=21.10.0
 ----
 
-WARNING: If you have changed the version to `21.10.0`, as above, most of this tutorial workshop will not work, as we need NXL_VER=22 (using DSL2 as default).
+WARNING: If you have changed the version to `21.10.0`, as above, most of this tutorial workshop will not work, as we need NXL_VER=22 or later to use DSL2 as default.
 
 Run `nextflow -version` again to make sure that the change has taken effect.
 
