@@ -29,9 +29,6 @@ RUN chown -R gitpod:gitpod /opt/conda \
 
 RUN unset JAVA_TOOL_OPTIONS
 
-RUN  curl -s https://get.nextflow.io | bash \
-     && chmod +x nextflow
-
 # Give back control
 USER root
 
