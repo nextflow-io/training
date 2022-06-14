@@ -27,13 +27,13 @@ RUN chown -R gitpod:gitpod /opt/conda \
     && chown -R gitpod:gitpod /home/gitpod/.conda \
     && chmod -R 777 /home/gitpod/.conda
 
-CMD unset JAVA_TOOL_OPTIONS
-CMD cd nf-training
-CMD curl -s https://get.nextflow.io | bash
-CMD chmod +x nextflow
-CMD sudo mv nextflow /usr/local/bin/
-CMD docker pull nextflow/rnaseq-nf
-CMD alias conda_activate=". /opt/conda/etc/profile.d/conda.sh; conda activate base"
+# unset JAVA_TOOL_OPTIONS
+# cd nf-training
+# curl -s https://get.nextflow.io | bash
+# chmod +x nextflow
+# sudo mv nextflow /usr/local/bin/
+# docker pull nextflow/rnaseq-nf
+# alias conda_activate=". /opt/conda/etc/profile.d/conda.sh; conda activate base"
 
 # Give back control
 USER root
