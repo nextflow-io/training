@@ -30,3 +30,9 @@ USER root
 
 # Cleaning
 RUN apt-get clean
+
+# Set env
+RUN cd nf-training \
+    && conda init bash \
+    && unset JAVA_TOOL_OPTIONS \
+    && docker pull nextflow/rnaseq-nf
