@@ -1,8 +1,8 @@
 = Operators 
 
-Operators are methods that allow you to connect channels to each other or to transform values emitted by a channel applying some user provided rules.
+Operators are methods that allow you to connect channels, transform values emitted by a channel, or apply some user-provided rules.
 
-There are seven main groups that are detailed in the documentation that cover:
+There are seven main groups of operators are described in greater detail below:
 
 1. https://www.nextflow.io/docs/latest/operator.html#filtering-operators[Filtering operators]
 
@@ -30,9 +30,9 @@ square.view()                        // <3>
 
 image::channel-map.png[]
 
-<1> Create a queue channel emitting four values.
-<2> Create a new channel, transforming each number to its square.
-<3> Print the channel content.
+<1> Create a queue channel emitting four values
+<2> Create a new channel, transforming each number into its square
+<3> Print the channel content
 
 Operators can also be chained to implement custom behaviors, so the previous snippet can be written as:
 
@@ -86,7 +86,7 @@ It prints:
 
 === map
 
-The `map` operator applies a function of your choosing to every item emitted by a channel, and returns the items obtained as a new channel. The function applied is called the _mapping_ function and is expressed with a _closure_ as shown in the example below:
+The `map` operator applies a function of your choosing to every item emitted by a channel and returns the items obtained as a new channel. The function applied is called the _mapping_ function and is expressed with a _closure_ as shown in the example below:
 
 [source,nextflow,linenums]
 ----
@@ -96,7 +96,7 @@ Channel
     .view()
 ----
 
-A `map` can associate to each element a generic _tuple_ containing any data as needed.
+A `map` can associate a generic _tuple_ to each element and can contain any data.
 
 [source,nextflow,linenums]
 ----
@@ -110,8 +110,7 @@ Channel
 === Exercise
 
 Use `fromPath` to create a channel emitting the _fastq_ files matching the pattern `data/ggal/*.fq`,
-then chain with a map to return a pair containing the file name and the path itself.
-Finally print the resulting channel.
+then use `map` to return a pair containing the file name and the path itself, and finally, use `view` to print the resulting channel.
 
 .Click here for the answer:
 [%collapsible]
@@ -123,23 +122,6 @@ Channel.fromPath('data/ggal/*.fq')
         .view { name, file -> "> $name : $file" }
 ----
 ====
-
-=== into
-
-The `into` operator connects a source channel to two or more target channels in such a way the values emitted by the source channel are copied to the target channels. For example:
-
-[source,nextflow,linenums]
-----
-Channel
-     .from( 'a', 'b', 'c' )
-     .into{ foo; bar }
-
-foo.view{ "Foo emits: " + it }
-bar.view{ "Bar emits: " + it }
-----
-
-TIP: Note the use in this example of curly brackets and the `;` as channel names separator. This is needed because the actual parameter of into is a _closure_ which defines the target channels to which the source one is connected.
-
 
 === mix
 
@@ -163,9 +145,9 @@ b
 z
 ```
 
-IMPORTANT: The items in the resulting channel have the same order as in respective original channel,
-however there's no guarantee that the element of the second channel are appended after the elements
-of the first. Indeed in the above example the element `a` has been printed before `3`.
+IMPORTANT: The items in the resulting channel have the same order as in the respective original channels.
+However, there is no guarantee that the element of the second channel are appended after the elements
+of the first. Indeed, in the example above, the element `a` has been printed before `3`.
 
 === flatten
 
@@ -195,7 +177,7 @@ The above snippet prints:
 
 === collect
 
-The `collect` operator collects all the items emitted by a channel to a list and returns the resulting object as a sole emission.
+The `collect` operator collects all of the items emitted by a channel in a list and returns the object as a sole emission.
 
 [source,nextflow,linenums]
 ----
@@ -215,7 +197,7 @@ TIP: The result of the `collect` operator is a *value* channel.
 
 === groupTuple
 
-The `groupTuple` operator collects tuples (or lists) of values emitted by the source channel, grouping together the elements that share the same key. Finally it emits a new tuple object for each distinct key collected.
+The `groupTuple` operator collects tuples (or lists) of values emitted by the source channel, grouping the elements that share the same key. Finally, it emits a new tuple object for each distinct key collected.
 
 Try the following example:
 
@@ -235,15 +217,15 @@ It shows:
 [3, [B, D]]
 ```
 
-This operator is useful to process together all elements for which there is a common
+This operator is useful to process to group together all elements that share a common
 property or grouping key.
 
 [discrete]
 === Exercise
 
-Use `fromPath` to create a channel emitting all the files in the folder `data/meta/`,
-then use a `map` to associate to each file the `baseName` prefix. Finally group together all
-files having the same common prefix.
+Use `fromPath` to create a channel emitting all of the files in the folder `data/meta/`,
+then use a `map` to associate the `baseName` prefix to each file. Finally, group all
+files that have the same common prefix.
 
 .Click here for the answer:
 [%collapsible]
@@ -259,7 +241,7 @@ Channel.fromPath('data/meta/*')
 
 === join
 
-The `join` operator creates a channel that joins together the items emitted by two channels for which there exists a matching key. The key is defined, by default, as the first element in each item emitted.
+The `join` operator creates a channel that joins together the items emitted by two channels with a matching key. The key is defined, by default, as the first element in each item emitted.
 
 [source,nextflow,linenums]
 ----
@@ -276,13 +258,13 @@ The resulting channel emits:
 [X, 1, 4]
 ```
 
-TIP: Notice 'P' is missing in the final result
+TIP: Notice 'P' is missing in the final result.
 
 === branch
 
-The `branch` operator allows you to forward the items emitted by a source channel to one or more output channels, choosing one of them at a time.
+The `branch` operator allows you to forward the items emitted by a source channel to one or more output channels.
 
-The selection criterion is defined by specifying a closure that provides one or more boolean expressions, each of which is identified by a unique label. On the first expression that evaluates to a true value, the current item is bound to a named channel as the label identifier.
+The selection criterion is defined by specifying a closure that provides one or more boolean expressions, each of which is identified by a unique label. For the first expression that evaluates to a true value, the item is bound to a named channel as the label identifier.
 For example:
 
 [source,nextflow,linenums]
@@ -299,8 +281,8 @@ Channel
  result.large.view { "$it is large" }
 ----
 
-NOTE: The `branch` operator returns a multi-channel object i.e. a variable that holds 
-more than one channel object.
+NOTE: The `branch` operator returns a multi-channel object (i.e., a variable that holds 
+more than one channel object).
 
 
 == More resources
