@@ -34,16 +34,15 @@ This will give you a broad understanding of Nextflow so that you can start writi
 1. <<Environment setup>>
 2. <<Introduction>>
 3. <<Simple RNA-Seq pipeline>>
-4. <<Manage dependencies & containers>>
+4. <<Manage dependencies and containers>>
 5. <<Channels>>
 6. <<Processes>>
 7. <<Operators>>
 8. <<Groovy basic structures and idioms>>
-9. <<DSL2 and modules>>
+9. <<Modulization>>
 10. <<Get started with Nextflow Tower>>
 11. <<Nextflow configuration>>
 12. <<Deployment scenarios>>
 13. <<Execution cache and resume>>
-14. <<Error handling & troubleshooting>>
-15. <<Parsing datasets into Nextflow>>
+14. <<Error handling and troubleshooting>>
 
