@@ -21,17 +21,17 @@ tasks:
   - name: Start web server
     command: gp await-port 23000 && gp preview https://training.seqera.io    
 
-  - name: Download Nextflow Tutorial
-    init: |
-      echo 'init script' # runs during prebuild
-      
-    command: |
-      curl -s https://get.nextflow.io | bash
-      chmod +x nextflow
-      sudo mv nextflow /usr/local/bin/
-      docker pull nextflow/rnaseq-nf
-      sudo apt install  -y tree
-      sudo apt install  -y graphviz
-      unset JAVA_TOOL_OPTIONS
-      alias conda_activate=". /opt/conda/etc/profile.d/conda.sh; conda activate base"
-      cd nf-training
+#  - name: Download Nextflow Tutorial
+#    init: |
+#      echo 'init script' # runs during prebuild
+#      
+#    command: |
+#      curl -s https://get.nextflow.io | bash
+#      chmod +x nextflow
+#      sudo mv nextflow /usr/local/bin/
+#      docker pull nextflow/rnaseq-nf
+#      sudo apt install  -y tree
+#      sudo apt install  -y graphviz
+#      unset JAVA_TOOL_OPTIONS
+#      alias conda_activate=". /opt/conda/etc/profile.d/conda.sh; conda activate base"
+#      cd nf-training
