@@ -2,7 +2,7 @@
 
 The definition of module libraries simplifies the writing of complex data analysis pipelines and makes re-use of processes much easier.
 
-Using the `hello.nf` example from earlier, we will convert the pipeline's processes into modules, then call them within the workflow scope in a variety of ways to explore the ways we can modularise our Nextflow workflows. 
+Using the `hello.nf` example from earlier, we will convert the pipeline's processes into modules, then call them within the workflow scope in a variety of ways and explore the ways we can modularise Nextflow workflows. 
 
 == Modules
 
@@ -10,13 +10,13 @@ Nextflow DSL2 allows for the definition of stand-alone module scripts that can b
 
 === Importing modules
 
-Components defined in the module script can be imported into other Nextflow scripts using the `include` statement. This allows you to store these components in separate file(s) so that they can be re-used in multiple workflows.
+Components defined in the module script can be imported into other Nextflow scripts using the `include` statement. This allows you to store these components in a separate file(s) so that they can be re-used in multiple workflows.
 
-Using the `hello.nf` example, we can acheive this by:
+Using the `hello.nf` example, we can achieve this by:
 
 - Creating a file called `modules.nf` in the top-level folder containing the main Nextflow script.
-- Cut and paste the two process definitions for `splitLetters` and `convertToUpper` into `modules.nf`.
-- Import the processes from `modules.nf` within the main script anywhere above the `workflow` definition:
+- Cutting and pasting the two process definitions for `splitLetters` and `convertToUpper` into `modules.nf`.
+- Importing the processes from `modules.nf` within the main script anywhere above the `workflow` definition:
 
 [source,nextflow,linenums]
 ----
@@ -29,7 +29,7 @@ NOTE: In general, you would use relative paths to define the location of the mod
 [discrete]
 === Exercise
 
-Add a `modules.nf` file with the previously defined processes from `hello.nf`. Then edit the `hello.nf`, removing the processes, and adding the `include` definitions shown above.
+Create a `modules.nf` file with the previously defined processes from `hello.nf`. Then remove these processes from `hello.nf` and add the `include` definitions shown above.
 
 .Click here for the answer:
 [%collapsible]
@@ -52,7 +52,7 @@ workflow{
 }
 ----
 
-Then you should have this in the file `.modules.nf`:
+You should have the follwoing in the file `.modules.nf`:
 [source,nextflow,linenums]
 ----
 process splitLetters {
@@ -85,9 +85,7 @@ process convertToUpper {
 
 == Output definition
 
-In the example above, we define the channel names to specify the input to the next process. We can also explicitely define the output of one process to another using the `.out` attribute. In this way, we can manipute the output of a process, as we will see later in this section.
-
-e.g. 
+In the example above, we define the channel names to specify the input to the next process. We can also explicitly define the output of one process to another using the `.out` attribute. In this way, we can manipulate the output of a process, as shown below:
 
 [source,nextflow,linenums]
 ----
@@ -97,7 +95,7 @@ e.g.
 
 === Specifying outputs
 
-If a process defines two or more output channels, each channel can be accessed by indexing the `.out` attribute e.g. `.out[0]`, `.out[1]`, etc.
+If a process defines two or more output channels, each channel can be accessed by indexing the `.out` attribute, e.g., `.out[0]`, `.out[1]`, etc.
 
 Additionally, the process `output` definition allows the use of the `emit` statement to define a named identifier that can be used to reference the channel in the external scope. 
 
@@ -138,16 +136,16 @@ process convertToUpper {
 
 workflow {
     letters_ch = splitLetters(greeting_ch)
-    results_ch = convertToUpper(letters_ch.out.flatten())
+    results_ch = convertToUpper(letters_ch.flatten())
     convertToUpper.out.upper.view{ it }
 }
 ----
 
-WARNING: In the above example, we have reverted to keeping the `process` definitions within the `hello.nf` script. This would work the same way if the emit defintion was in a `modules.nf` file.
+WARNING: In the above example, we have reverted to keeping the `process` definitions within the `hello.nf` script. However, this would work the same way if the emit defintion was in a `modules.nf` file.
 
 === Multiple imports
 
-If a Nextflow module script contains multiple `process` definitions these can also be imported using a single `include` statement as shown in the example below:
+If a Nextflow module script contains multiple `process` definitions they can also be imported using a single `include` statement as shown in the example below:
 
 [source,nextflow,linenums]
 ----
@@ -156,7 +154,7 @@ include { splitLetters; convertToUpper } from './modules.nf'
 
 === Module aliases
 
-When including a module component it is possible to specify a name alias using the `as` declaration. This allows the inclusion and the invocation of the same component multiple times in your script using different names. For example:
+When including a module component it is possible to specify a name alias using the `as` declaration. This allows the inclusion and the invocation of the same component multiple times using different names. For example:
 
 [source,nextflow,linenums]
 ----
@@ -179,7 +177,7 @@ workflow my_pipeline_one {
     convertToUpper_one(splitLetters_one.out.flatten())
 
     emit:
-    my_data = convertToUpper_one.out.verbiage
+    my_data = convertToUpper_one.out.upper
 }
 
 workflow my_pipeline_two {
@@ -191,7 +189,7 @@ workflow my_pipeline_two {
     convertToUpper_two(splitLetters_two.out.flatten())
 
     emit:
-    my_data = convertToUpper_two.out.verbiage
+    my_data = convertToUpper_two.out.upper
 }
 
 workflow {
@@ -230,7 +228,7 @@ def sayHello() {
 params.foo = 'Hola'
 params.bar = 'mundo!'
 
-include { sayHello } from './modules.nf'
+include { sayHello } from './modules.hello.nf'
 
 workflow {
     sayHello()
@@ -268,19 +266,19 @@ Executing the main script above should print:
 
 [source,bash,linenums]
 ----
-Ciao world!
+Ciao mundo!
 ----
 
 === Workflow definition
 
-The `workflow` scope allows the definition of components that define the invocation of one or more processes and operators:
+The `workflow` scope allows the definition of components that define the invocation of one or more processes or operators:
 
 [source,nextflow,linenums]
 ----
 workflow my_pipeline {
     splitLetters(greeting_ch)
     convertToUpper(splitLetters.out.flatten())
-    convertToUpper.out.verbiage.view{ it }
+    convertToUpper.out.upper.view{ it }
 }
 
 workflow {
@@ -292,14 +290,14 @@ For example, the snippet above defines a `workflow` named `my_pipeline`, that ca
 
 === Workflow parameters
 
-A workflow component can access any variable and parameter defined in the outer scope. In the running example, we can also access `params.greeting` directly within the `workflow` definition.
+A workflow component can access any variable or parameter defined in the outer scope. In the running example, we can also access `params.greeting` directly within the `workflow` definition.
 
 [source,nextflow,linenums]
 ----
 workflow my_pipeline {
     splitLetters(Channel.from(params.greeting))
     convertToUpper(splitLetters.out.flatten())
-    convertToUpper.out.verbiage.view{ it }
+    convertToUpper.out.upper.view{ it }
 }
 
 workflow {
@@ -320,7 +318,7 @@ workflow my_pipeline {
     main:
     splitLetters(greeting)
     convertToUpper(splitLetters.out.flatten())
-    convertToUpper.out.verbiage.view{ it }
+    convertToUpper.out.upper.view{ it }
 }
 ----
 
@@ -350,7 +348,7 @@ workflow my_pipeline {
     convertToUpper(splitLetters.out.flatten())
 
     emit:
-    convertToUpper.out.verbiage
+    convertToUpper.out.upper
 }
 
 workflow {
@@ -374,7 +372,7 @@ workflow my_pipeline {
     convertToUpper(splitLetters.out.flatten())
 
     emit:
-    my_data = convertToUpper.out.verbiage
+    my_data = convertToUpper.out.upper
 }
 
 workflow {
