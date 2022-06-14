@@ -38,5 +38,5 @@ RUN curl -s https://get.nextflow.io | bash \
     && docker pull nextflow/rnaseq-nf \
     && sudo apt install  -y tree \
     && sudo apt install  -y graphviz \
-    && unset JAVA_TOOL_OPTIONS
+    && unset JAVA_TOOL_OPTIONS \
     && alias conda_activate=". /opt/conda/etc/profile.d/conda.sh; conda activate base"
