@@ -32,6 +32,11 @@ USER root
 RUN apt-get clean
 
 # Set env
-RUN conda init bash \
-    && unset JAVA_TOOL_OPTIONS \
-    && docker pull nextflow/rnaseq-nf
+RUN curl -s https://get.nextflow.io | bash \
+    && chmod +x nextflow \
+    && sudo mv nextflow /usr/local/bin/ \
+    && docker pull nextflow/rnaseq-nf \
+    && sudo apt install  -y tree \
+    && sudo apt install  -y graphviz \
+    && unset JAVA_TOOL_OPTIONS
+    && alias conda_activate=". /opt/conda/etc/profile.d/conda.sh; conda activate base"
