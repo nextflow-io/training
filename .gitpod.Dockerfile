@@ -8,7 +8,9 @@ RUN apt-get update \
   sudo \
   git \
   less \
-  wget
+  wget \
+  tree \
+  graphviz
 
 RUN mkdir -p /workspace/data \
     && chown -R gitpod:gitpod /workspace/data
@@ -25,21 +27,19 @@ RUN chown -R gitpod:gitpod /opt/conda \
     && chown -R gitpod:gitpod /home/gitpod/.conda \
     && chmod -R 777 /home/gitpod/.conda
 
-# Give back control
-USER root
-
-# Cleaning
-RUN apt-get clean
-
 # Set env
 RUN curl -s https://get.nextflow.io | bash \
     && chmod +x nextflow \
     && sudo mv nextflow /usr/local/bin/
 
-RUN docker pull nextflow/rnaseq-nf \
-    && sudo apt install  -y tree \
-    && sudo apt install  -y graphviz
+RUN docker pull nextflow/rnaseq-nf
 
 RUN unset JAVA_TOOL_OPTIONS
 
 RUN alias conda_activate=". /opt/conda/etc/profile.d/conda.sh; conda activate base"
+
+# Give back control
+USER root
+
+# Cleaning
+RUN apt-get clean
