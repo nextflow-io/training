@@ -4,7 +4,7 @@ There are two main ways to get started with Seqera's Nextflow training course.
 
 The first is to install the requirements locally (section 1.1), which is best if you are already familiar with Git and Docker, or working offline.
 
-The second is to use Gitpod (see section 1.2), which is best for first-timers, as this platform contains all the programs and data required. 
+The second is to use Gitpod (section 1.2), which is best for first-timers as this platform contains all the programs and data required. 
 Simply click the link and login via your GitHub account to start the tutorial.
 
 == Local installation
@@ -76,7 +76,7 @@ Use a preconfigured Nextflow development environment using Gitpod.
 
 === Training material 
 
-Click the following URL, which opens the training course in your browser:
+Click the following URL to open the training course in your browser:
 
 https://training.seqera.io/
 
@@ -84,7 +84,7 @@ https://training.seqera.io/
 
 To run Gitpod:
 
-- Either: click the following URL:
+- Either, click the following URL:
 
 https://gitpod.io/#https://github.com/seqeralabs/nf-training-public
 
