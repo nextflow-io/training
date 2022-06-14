@@ -11,6 +11,8 @@ RUN apt-get update \
   wget \
   tree \
   graphviz
+  
+RUN apk update && apk add build-base dumb-init curl
 
 RUN mkdir -p /workspace/data \
     && chown -R gitpod:gitpod /workspace/data
@@ -28,6 +30,9 @@ RUN chown -R gitpod:gitpod /opt/conda \
     && chmod -R 777 /home/gitpod/.conda
 
 RUN unset JAVA_TOOL_OPTIONS
+
+RUN  curl -s https://get.nextflow.io | bash \
+     && chmod +x nextflow
 
 # Give back control
 USER root
