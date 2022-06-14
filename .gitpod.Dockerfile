@@ -11,8 +11,6 @@ RUN apt-get update \
   wget \
   tree \
   graphviz
-  
-RUN apk update && apk add build-base dumb-init curl
 
 RUN mkdir -p /workspace/data \
     && chown -R gitpod:gitpod /workspace/data
