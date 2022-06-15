@@ -19,9 +19,9 @@ image: chriswyatt/seqeratraining
 tasks:
   - name: Start web server
     command: gp await-port 23000 && gp preview https://training.seqera.io |
-    && docker pull -q nextflow/rnaseq-nf \
-    && cd nf-training \
-    && unset JAVA_TOOL_OPTIONS
+    docker pull -q nextflow/rnaseq-nf \
+    cd nf-training \
+    unset JAVA_TOOL_OPTIONS
 
 #  - name: Download Nextflow Tutorial
 #    init: |
