@@ -20,8 +20,10 @@ tasks:
   - name: Start web server
     command: gp await-port 23000 && gp preview https://training.seqera.io    
 
+  - name: Load Nextflow Tutorial
+    command: |
+      docker pull -q nextflow/rnaseq-nf
+
   - name: Start Nextflow Tutorial
     command: |
       cd nf-training
-      echo Loading ..................................... Please wait (<1min)
-      docker pull -q nextflow/rnaseq-nf
