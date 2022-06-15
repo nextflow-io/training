@@ -23,5 +23,4 @@ tasks:
   - name: Start Nextflow Tutorial
     command: |
       cd nf-training
-      echo Loading
-      docker pull nextflow/rnaseq-nf | cat
+      docker pull nextflow/rnaseq-nf
