@@ -19,8 +19,7 @@ image: chriswyatt/seqeratraining
 tasks:
   - name: Start web server
     command: |
-      gp await-port 23000
-      gp preview https://training.seqera.io 
+      gp await-port 23000 && gp preview https://training.seqera.io 
       docker pull -q nextflow/rnaseq-nf
 
   - name: Start Nextflow Tutorial
