@@ -14,22 +14,14 @@ github:
     addBadge: false
 
 image:
-  file: .gitpod.Dockerfile
+  file: chriswyatt/seqeratraining
 
 # List the start up tasks. Learn more https://www.gitpod.io/docs/config-start-tasks/
 tasks:
   - name: Start web server
     command: gp await-port 23000 && gp preview https://training.seqera.io    
 
-  - name: Download Nextflow Tutorial
-    init: |
-      echo 'init script' # runs during prebuild
-      
+  - name: Start Nextflow Tutorial
     command: |
       cd nf-training
-      curl -s https://get.nextflow.io | bash
-      chmod +x nextflow
-      sudo mv nextflow /usr/local/bin/
       docker pull nextflow/rnaseq-nf
-      alias conda_activate=". /opt/conda/etc/profile.d/conda.sh; conda activate base"
-      unset JAVA_TOOL_OPTIONS
