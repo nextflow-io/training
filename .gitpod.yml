@@ -18,15 +18,11 @@ image: chriswyatt/seqeratraining
 # List the start up tasks. Learn more https://www.gitpod.io/docs/config-start-tasks/
 tasks:
   - name: Start web server
-    command: gp await-port 23000 && gp preview https://training.seqera.io
-
-
-  - name: Load Nextflow Tutorial
-    command: docker pull -q nextflow/rnaseq-nf
+    command: gp await-port 23000 && gp preview https://training.seqera.io && docker pull -q nextflow/rnaseq-nf
       
   - name: Start Nextflow Tutorial
     command: |
-      cd nf-training
+      cd nf-training && clear
 
 #  - name: Download Nextflow Tutorial
 #    init: |
