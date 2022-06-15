@@ -23,8 +23,8 @@ tasks:
     gp preview https://training.seqera.io
     docker pull -q nextflow/rnaseq-nf
     unset JAVA_TOOL_OPTIONS
-    cd nf-training && clear
-
+    cd nf-training  
+    
 #  - name: Download Nextflow Tutorial
 #    init: |
 #      echo 'init script' # runs during prebuild
