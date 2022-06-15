@@ -13,8 +13,7 @@ github:
     # add a "Review in Gitpod" button to pull requests (defaults to false)
     addBadge: false
 
-image:
-  file: nfcore/gitpod:latest
+image: nfcore/gitpod:latest
 
 # List the start up tasks. Learn more https://www.gitpod.io/docs/config-start-tasks/
 tasks:
