@@ -2,7 +2,7 @@
 
 In Nextflow, a `process` is the basic computing primitive to execute foreign functions (i.e., custom scripts or tools).
 
-The `process` definition starts with the keyword `process`, followed by the process name and finally the process body is delimited by curly brackets. 
+The `process` definition starts with the keyword `process`, followed by the process name and finally the process body delimited by curly brackets. 
 
 A basic `process`, only using the `script` definition block, looks like the following:
 
@@ -145,7 +145,7 @@ process bar {
 However, this blocks the usage of Nextflow variables in the command script.
 
 Another alternative is to use a `shell` statement instead of `script` and use a different
-syntax for Nextflow variables: `!{..}`. This allows the use of both Nextflow and Bash variables in the same script.
+syntax for Nextflow variables, e.g., `!{..}`. This allows the use of both Nextflow and Bash variables in the same script.
 
 [source,nextflow,linenums]
 ----
@@ -413,13 +413,13 @@ Both channels emit three values, therefore the process is executed three times, 
 * (2, b)
 * (3, c)
 
-What is happening is that the process waits until there's a complete input configuration i.e., it receives an input value from all the channels declared as input.
+What is happening is that the process waits until there's a complete input configuration, i.e., it receives an input value from all the channels declared as input.
 
 When this condition is verified, it consumes the input values coming from the respective channels, spawns a task execution, then repeats the same logic until one or more channels have no more content.
 
 This means channel values are consumed serially one after another and the first empty channel causes the process execution to stop, even if there are other values in other channels.
 
-*So what happens when channels do not have the same cardinality (i.e. they emit a different number of elements)?*
+*So what happens when channels do not have the same cardinality (i.e., they emit a different number of elements)?*
 
 For example:
 
