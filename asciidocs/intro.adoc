@@ -175,9 +175,9 @@ Where the standard output shows (line by line):
 
 * *4*: The first `process` is executed once (1) and starts with a unique hexadecimal (see TIP below) and ending with the percentage and job completion information 
 
-* *5*: The second process` executed twice (2)
+* *5*: The second process is executed twice (2)
 
-* *6-7*: Followed by the printed result string from stdout
+* *6-7*: The result string from stdout is printed
 
 TIP: The hexadecimal numbers, like `8a/537930`, identify the unique process
 execution. These numbers are also the prefix of the directories where each
