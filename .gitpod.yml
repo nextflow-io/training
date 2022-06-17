@@ -28,3 +28,4 @@ tasks:
   - name: Start Nextflow Tutorial
     command: |
       cd nf-training
+      source $HOME/.bashrc
