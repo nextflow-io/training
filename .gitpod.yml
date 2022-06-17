@@ -15,12 +15,12 @@ github:
 
 image: chriswyatt/seqeratraining
 
-# List the start up tasks. Learn more https://www.gitpod.io/docs/config-start-tasks/
 tasks:
-  - name: Prepare nf-training
-    init:
-      gp port awaits 23000 && gp preview https://training.seqera.io
+  - name: Prepare Nextflow Tutorial
+    init: |
+      gp ports await 23000 && gp preview https://training.seqera.io
+      unset JAVA_TOOL_OPTIONS
+      clear
     command: |
       docker pull nextflow/rnaseq-nf
-      unset JAVA_TOOL_OPTIONS
       cd nf-training
