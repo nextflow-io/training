@@ -52,7 +52,7 @@ workflow{
 }
 ----
 
-You should have the follwoing in the file `.modules.nf`:
+You should have the following in the file `.modules.nf`:
 [source,nextflow,linenums]
 ----
 process splitLetters {
