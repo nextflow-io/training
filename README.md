@@ -5,6 +5,8 @@ Welcome to the Nextflow training repo. We are excited to have you on the path to
 ## Prerequisites:
 
 A chromium-based browser (e.g. Chrome or Firefox).
+A GitHub account
+Internet connection
 
 ## Opening the training material in a browser
 
