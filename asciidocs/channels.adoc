@@ -47,10 +47,7 @@ Try to execute this snippet, it will produce an error message.
 ----
 ch = Channel.from(1,2,3)
 ch.view()
-ch.view()
 ----
-
-IMPORTANT: A queue channel can only have one and exactly one producer and one and exactly one consumer.
 
 === Value channels
 
