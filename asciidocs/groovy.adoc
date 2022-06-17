@@ -15,8 +15,7 @@ println("Hello, World!")
 
 The only difference between the two is that the `println` method implicitly appends a new line character to the printed string.
 
-TIP: parenthesis for function invocations are optional. Therefore, the following is also valid
-syntax:
+TIP: parentheses for function invocations are optional. Therefore, the following syntax is also valid :
 
 [source,groovy,linenums]
 ----
@@ -111,8 +110,10 @@ assert list[-1] == 2
 assert list[-1..0] == list.reverse()
 ----
 
+TIP: In the last assert line we are referencing the initial list and converting this with a "shorthand" range (..), to run from the -1th element (2) to the 0th element (0). 
+
 List objects implement all methods provided by the https://docs.oracle.com/javase/8/docs/api/java/util/List.html[java.util.List] interface,
-plus the extension methods provided by http://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/List.html[Groovy API].
+plus the extension methods provided by http://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/List.html[Groovy].
 
 [source,groovy,linenums]
 ----
@@ -151,9 +152,9 @@ assert map.b == 1           <2>
 assert map.get('c') == 2    <3>
 ----
 
-<1> Use of the square brackets.
-<2> Use of a dot notation.
-<3> Use of the get method.
+<1> Using square brackets.
+<2> Using dot notation.
+<3> Using the get method.
 
 To add data or to modify a map, the syntax is similar to adding values to a list:
 
@@ -165,16 +166,16 @@ map.put('c', 'z')        <3>
 assert map == [a:'x', b:'y', c:'z']
 ----
 
-<1> Use of the square brackets.
-<2> Use a dot notation.
-<3> Use of the put method.
+<1> Using square brackets.
+<2> Using dot notation.
+<3> Using the put method.
 
 Map objects implement all methods provided by the https://docs.oracle.com/javase/8/docs/api/java/util/Map.html[java.util.Map] interface,
-plus the extension methods provided by http://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/Map.html[Groovy API].
+plus the extension methods provided by http://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/Map.html[Groovy].
 
 == String interpolation
 
-String literals can be defined by enclosing them with either _single-_ or _double-_ quotation marks.
+String literals can be defined by enclosing them with either _single-_ ('') or _double-_ ("") quotation marks.
 
 Double-quoted strings can contain the value of an arbitrary variable by prefixing its name with the $ character, or the value of any expression by using the ${expression} syntax, similar to Bash/shell scripts:
 
@@ -289,6 +290,7 @@ Can be written as:
 
 [source,groovy,linenums]
 ----
+list = [1,2,3]
 if( list )
     println list
 else
@@ -347,9 +349,7 @@ int fib(int n) {
 assert fib(10)==89
 ----
 
-A function can take multiple arguments separating them with a comma. The `return`
-keyword can be omitted and the function implicitly returns the value
-of the last evaluated expression. Also, explicit types can be omitted, though not recommended:
+A function can take multiple arguments separating them with a comma. The `return` keyword can be omitted and the function implicitly returns the value of the last evaluated expression. Also, explicit types can be omitted, though not recommended:
 
 [source,groovy,linenums]
 ----
@@ -362,9 +362,7 @@ assert fact(5) == 120
 
 == Closures
 
-Closures are the swiss army knife of Nextflow/Groovy programming. In a nutshell, a closure 
-is a block of code that can be passed as an argument to a function. A closure can also be used to define
-an anonymous function.
+Closures are the swiss army knife of Nextflow/Groovy programming. In a nutshell, a closure is a block of code that can be passed as an argument to a function. A closure can also be used to define an anonymous function.
 
 More formally, a closure allows the definition of functions as first-class objects.
 
@@ -375,8 +373,7 @@ square = { it * it }
 
 The curly brackets around the expression `it * it` tells the script interpreter to treat this expression as code. The `it` identifier is an implicit variable that represents the value that is passed to the function when it is invoked.
 
-Once compiled, the function object is assigned to the variable `square` as any other variable assignment shown previously. To invoke the closure execution use the special method `call` or just use the round
-parentheses to specify the closure parameter(s). For example:
+Once compiled, the function object is assigned to the variable `square` as any other variable assignment shown previously. To invoke the closure execution use the special method `call` or just use the round parentheses to specify the closure parameter(s). For example:
 
 [source,groovy,linenums]
 ----
@@ -384,7 +381,7 @@ assert square.call(5) == 25
 assert square(9) == 81
 ----
 
-This is not very interesting until we pass the `square` function as an argument to other functions or methods.
+As is, this may not seem interesting, but we can now pass the `square` function as an argument to other functions or methods.
 Some built-in functions take a function like this as an argument. One example is the `collect` method on lists:
 
 [source,groovy,linenums]
@@ -431,8 +428,7 @@ A closure has two other important features.
 
 First, it can access and _modify_ variables in the scope where it is defined.
 
-Second, a closure can be defined in an _anonymous_ manner, meaning that it is not given a name,
-and is defined in the place where it needs to be used.
+Second, a closure can be defined in an _anonymous_ manner, meaning that it is not given a name, and is defined in the place where it needs to be used.
 
 As an example showing both these features, see the following code fragment:
 
@@ -444,9 +440,9 @@ values.keySet().each { result += values[it] }    // <3>
 println result
 ----
 
-<1> Define a global variable.
-<2> Define a map object.
-<3> Invoke the `each` method passing the closure object which modifies the `result` variable.
+<1> Defines a global variable.
+<2> Defines a map object.
+<3> Invokes the `each` method passing the closure object which modifies the `result` variable.
 
 Learn more about closures in the http://groovy-lang.org/closures.html[Groovy documentation].
 
