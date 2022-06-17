@@ -41,7 +41,7 @@ ch.view()       // <2>
 [discrete]
 === Exercise
 
-Try to execute this snippet, it will produce an error message.
+Try to execute this snippet.
 
 [source,nextflow,linenums]
 ----
