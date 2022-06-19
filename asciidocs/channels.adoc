@@ -41,7 +41,7 @@ ch.view()       // <2>
 [discrete]
 === Exercise
 
-Try to execute this snippet.
+Try to execute this snippet. You can do that by creating a new .nf file or by editing an already existing .nf file.
 
 [source,nextflow,linenums]
 ----
