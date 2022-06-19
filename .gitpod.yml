@@ -16,11 +16,16 @@ github:
 image: chriswyatt/seqeratraining
 
 tasks:
-  - name: Prepare Nextflow Tutorial
-    init: |
-      gp ports await 23000 && gp preview https://training.seqera.io
-      unset JAVA_TOOL_OPTIONS
-      clear
+  - before: printf 'unset JAVA_TOOL_OPTIONS\n' >> $HOME/.bashrc && exit
+
+  - name: Start web server
+    command: gp ports await 23000 && gp preview https://training.seqera.io    
+
+  - name: Load Nextflow Tutorial
+    command: docker pull -q nextflow/rnaseq-nf
+      
+  - name: Start Nextflow Tutorial
     command: |
-      docker pull nextflow/rnaseq-nf
       cd nf-training
+      source $HOME/.bashrc
+      clear
