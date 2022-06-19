@@ -34,23 +34,20 @@ ch.view()       // <2>
 ----
 
 
-<1> Use the built-in print line function `println` to print the `ch` channel.
-<2> Apply the `view` method to the `ch` channel prints each item emitted by the channels.
+<1> Use the built-in print line function `println` to print the `ch` channel
+<2> Apply the `view` method to the `ch` channel prints each item emitted by the channels
 
 
 [discrete]
 === Exercise
 
-Try to execute this snippet, it will produce an error message.
+Try to execute this snippet.
 
 [source,nextflow,linenums]
 ----
 ch = Channel.from(1,2,3)
 ch.view()
-ch.view()
 ----
-
-IMPORTANT: A queue channel can only have one and exactly one producer and one and exactly one consumer.
 
 === Value channels
 
@@ -90,9 +87,9 @@ ch2 = Channel.value( 'Hello there' )  // <2>
 ch3 = Channel.value( [1,2,3,4,5] )    // <3>
 ----
 
-<1> Creates an _empty_ value channel.
-<2> Creates a value channel and binds a string to it.
-<3> Creates a value channel and binds a list object to it that will be emitted as a sole emission.
+<1> Creates an _empty_ value channel
+<2> Creates a value channel and binds a string to it
+<3> Creates a value channel and binds a list object to it that will be emitted as a sole emission
 
 === from
 
@@ -347,10 +344,10 @@ reads = Channel.fromSRA(params.accession, apiKey: params.ncbi_api_key)
 
 process fastqc {
     input:
-    tuple sample_id, file(reads_file) from reads
+    tuple val(sample_id), file(reads_file)
 
     output:
-    file("fastqc_${sample_id}_logs") into fastqc_ch
+    file("fastqc_${sample_id}_logs")
 
     script:
     """
@@ -522,11 +519,11 @@ process quantification {
     tag "$sample_id"
          
     input:
-    path salmon_index from index_ch
-    tuple val(sample_id), path(reads) from read_pairs_ch
+    path salmon_index
+    tuple val(sample_id), path(reads)
  
     output:
-    path sample_id into quant_ch
+    path sample_id, emit: quant_ch
  
     script:
     """
@@ -543,11 +540,11 @@ process quantification {
     tag "$sample_id"
          
     input:
-    path salmon_index from index_ch
-    tuple val(sample_id), path(reads1), path(reads2) from read_pairs_ch
+    path salmon_index
+    tuple val(sample_id), path(reads1), path(reads2)
  
     output:
-    path sample_id into quant_ch
+    path sample_id, emit: quant_ch
  
     script:
     """
@@ -655,4 +652,6 @@ For this script to work, a file called `parsers.nf` needs to be created and stor
 This file should contain the `parseJsonFile` function.
 
 Nextflow will use this as a custom function within the workflow scope.
+
+IMPORTANT: You will learn more about module files later (section 8.1). 
 

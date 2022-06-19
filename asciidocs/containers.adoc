@@ -7,7 +7,7 @@ components or libraries.
 Installing and maintaining such dependencies is a challenging task and
 the most common source of irreproducibility in scientific applications.
 
-To overcome these issues, we use containers, which allow the encapsulation of software dependencies, i.e. tools and libraries required by a data analysis application in one or more self-contained, ready-to-run, immutable Linux container images, that can be easily deployed in any platform supporting the container runtime.
+To overcome these issues we use containers that allow the encapsulation of software dependencies, i.e. tools and libraries required by a data analysis application in one or more self-contained, ready-to-run, immutable Linux container images, that can be easily deployed in any platform supporting the container runtime.
 
 Containers can be executed in an isolated manner from the hosting system. 
 Having its own copy of the file system, processing space, memory management, etc.
@@ -73,13 +73,13 @@ with the software packages required.
 
 Here, you will create a Docker image containing cowsay and the Salmon tool.
 
-IMPORTANT: the Docker build process automatically copies all files that are located in the
+IMPORTANT: The Docker build process automatically copies all files that are located in the
 current directory to the Docker daemon in order to create the image. This can take
 a lot of time when big/many files exist. For this reason, it's important to _always_ work in
 a directory containing only the files you really need to include in your Docker image.
-Alternatively, you can use the `.dockerignore` file to select the path to exclude from the build.
+Alternatively, you can use the `.dockerignore` file to select paths to exclude from the build.
 
-Then use your favorite editor (e.g. `vim` or `nano`) to create a file named `Dockerfile` and copy the
+Use your favorite editor (e.g., `vim` or `nano`) to create a file named `Dockerfile` and copy the
 following content:
 
 [source,docker,linenums]
@@ -176,7 +176,7 @@ docker run --volume $PWD/data/ggal/transcriptome.fa:/transcriptome.fa my-image \
   salmon index -t /transcriptome.fa -i transcript-index
 ```
 
-IMPORTANT: the generated `transcript-index` directory is still not accessible in the host
+IMPORTANT: The generated `transcript-index` directory is still not accessible in the host
 file system.
 
 TIP: An easier way is to mount a parent directory to an identical one in the container,
@@ -203,11 +203,6 @@ ls -la transcript-index
 
 IMPORTANT: Note that the permissions for files created by the Docker
 execution is `root`.
-
-[discrete]
-=== Exercise
-
-Use the option `-u $(id -u):$(id -g)` to allow Docker to create files with the right permission.
 
 === Upload the container in the Docker Hub (bonus)
 
@@ -261,7 +256,7 @@ The simplest way to run a Nextflow script with a Docker image is using the
 nextflow run script2.nf -with-docker my-image
 ```
 
-We'll see later how to configure the Nextflow config file to select which container 
+As seen in the last section, you can also configure the Nextflow config file to select which container 
 to use instead of having to specify it as a command-line argument every time.
 
 
@@ -436,7 +431,7 @@ is specified using the `-with-conda` option (using the same path shown in the `l
 nextflow run script7.nf -with-conda /opt/conda/envs/nf-tutorial
 ```
 
-TIP: When creating a Conda environment with a YAML recipe file, Nextflow automatically downloads the required dependencies, builds the environment and nactivates it.
+TIP: When creating a Conda environment with a YAML recipe file, Nextflow automatically downloads the required dependencies, builds the environment and activates it.
 
 This makes easier to manage different environments for the processes in the workflow script.
 
