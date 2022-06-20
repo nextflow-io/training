@@ -14,7 +14,6 @@ Having its own copy of the file system, processing space, memory management, etc
 
 NOTE: Containers were first introduced with kernel 2.6 as a Linux feature known as _Control Groups_ or https://en.wikipedia.org/wiki/Cgroups[Cgroups].
 
-
 == Docker
 
 Docker is a handy management tool to build, run and share container images.
@@ -103,7 +102,9 @@ docker build -t my-image .
 
 Where "my-image" is the user-specified name tag for the Dockerfile, present in the current directory.
 
-IMPORTANT: Don't miss the dot in the above command. When it completes, verify that the image
+IMPORTANT: Don't miss the dot in the above command. 
+
+When it completes, verify that the image
 has been created by listing all available images:
 
 ```bash
@@ -133,8 +134,7 @@ Save the file and build the image again with the same command as before:
 docker build -t my-image .
 ```
 
-You will notice that it creates a new Docker image with the same name *but* with a
-different image ID.
+You will notice that it creates a new Docker image with the same name *but* with a different image ID.
 
 === Run Salmon in the container
 
@@ -151,7 +151,6 @@ docker run -it my-image bash
 ```
 
 Use the `exit` command to terminate the interactive session.
-
 
 === File system mounts
 
@@ -176,8 +175,7 @@ docker run --volume $PWD/data/ggal/transcriptome.fa:/transcriptome.fa my-image \
   salmon index -t /transcriptome.fa -i transcript-index
 ```
 
-IMPORTANT: The generated `transcript-index` directory is still not accessible in the host
-file system.
+IMPORTANT: The generated `transcript-index` directory is still not accessible in the host file system.
 
 TIP: An easier way is to mount a parent directory to an identical one in the container,
 this allows you to use the same path when running it in the container e.g.
@@ -201,8 +199,7 @@ Now check the content of the `transcript-index` folder by entering the command:
 ls -la transcript-index
 ```
 
-IMPORTANT: Note that the permissions for files created by the Docker
-execution is `root`.
+IMPORTANT: Note that the permissions for files created by the Docker execution is `root`.
 
 === Upload the container in the Docker Hub (bonus)
 
@@ -256,9 +253,7 @@ The simplest way to run a Nextflow script with a Docker image is using the
 nextflow run script2.nf -with-docker my-image
 ```
 
-As seen in the last section, you can also configure the Nextflow config file to select which container 
-to use instead of having to specify it as a command-line argument every time.
-
+As seen in the last section, you can also configure the Nextflow config file (`nextflow.config`) to select which container to use instead of having to specify it as a command-line argument every time.
 
 == Singularity
 
@@ -270,6 +265,8 @@ a completely different implementation design.
 
 A Singularity container image is archived as a plain file that can be stored in a shared
 file system and accessed by many computing nodes managed using a batch scheduler.
+
+WARNING: Singularity will not work with Gitpod. If you wish to try this section, please do it locally, or on an HPC.
 
 === Create a Singularity images
 
@@ -309,7 +306,6 @@ cluster by copying the image file.
 
 Once done, you can run your container with the following command
 
-
 ```bash
 singularity exec my-image.sif cowsay 'Hello Singularity'
 ```
@@ -333,9 +329,7 @@ mounts the host `$HOME` directory and uses the current work directory.
 
 === Import a Docker image
 
-An easier way to create a Singularity container without requiring sudo permission and
-boosting the containers interoperability is to import a Docker container image by
-pulling it directly from a Docker registry. For example:
+An easier way to create a Singularity container without requiring sudo permission and boosting the containers interoperability is to import a Docker container image by pulling it directly from a Docker registry. For example:
 
 ```bash
 singularity pull docker://debian:stretch-slim
@@ -344,22 +338,17 @@ singularity pull docker://debian:stretch-slim
 The above command automatically downloads the Debian Docker image and converts it to
 a Singularity image in the current directory with the name `debian-jessie.simg`.
 
-
 === Run a Nextflow script using a Singularity container
 
-Nextflow allows the transparent usage of Singularity containers as easy as with
-Docker.
+Nextflow allows the transparent usage of Singularity containers as easy as with Docker.
 
-Simply enable the use of the Singularity engine in place of Docker in the
-Nextflow configuration file by using the `-with-singularity` command-line option:
+Simply enable the use of the Singularity engine in place of Docker in the Nextflow configuration file by using the `-with-singularity` command-line option:
 
 ```bash
 nextflow run script7.nf -with-singularity nextflow/rnaseq-nf
 ```
 
-As before, the Singularity container can also be provided in the Nextflow config file. 
-We'll see how to do this later. 
-
+As before, the Singularity container can also be provided in the Nextflow config file. We'll see how to do this later. 
 
 === The Singularity Container Library
 
@@ -369,12 +358,9 @@ containers.
 In the same way that we can push Docker images to Docker Hub, we can upload Singularity images
 to the Singularity Library.
 
-
 == Conda/Bioconda packages
 
-Conda is a popular package and environment manager. The built-in support for Conda
-allows Nextflow pipelines to automatically create and activate the Conda
-environment(s), given the dependencies specified by each process.
+Conda is a popular package and environment manager. The built-in support for Conda allows Nextflow pipelines to automatically create and activate the Conda environment(s), given the dependencies specified by each process.
 
 In this Gitpod environment, conda is already installed. 
 
