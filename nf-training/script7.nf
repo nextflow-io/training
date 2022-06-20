@@ -1,26 +1,24 @@
-/* 
- * pipeline input parameters 
+/*
+ * pipeline input parameters
  */
 params.reads = "$projectDir/data/ggal/gut_{1,2}.fq"
 params.transcriptome_file = "$projectDir/data/ggal/transcriptome.fa"
 params.multiqc = "$projectDir/multiqc"
 params.outdir = "results"
-
 log.info """\
-         R N A S E Q - N F   P I P E L I N E    
-         ===================================
-         transcriptome: ${params.transcriptome_file}
-         reads        : ${params.reads}
-         outdir       : ${params.outdir}
-         """
-         .stripIndent()
+          R N A S E Q - N F   P I P E L I N E   
+          ===================================
+          transcriptome: ${params.transcriptome_file}
+          reads        : ${params.reads}
+          outdir       : ${params.outdir}
+          """
+          .stripIndent()
 
- 
 /* 
  * define the `index` process that creates a binary index 
  * given the transcriptome file
  */
-process index {
+process INDEX {
     
     input:
     path transcriptome
@@ -34,13 +32,13 @@ process index {
     """
 }
 
-
 Channel 
     .fromFilePairs( params.reads, checkIfExists: true )
     .set { read_pairs_ch } 
 
-process quantification {
-     
+process QUANTIFICATION {
+    tag "Salmon on $sample_id"
+
     input:
     path salmon_index
     tuple val(sample_id), path(reads)
@@ -54,7 +52,7 @@ process quantification {
     """
 }
 
-process fastqc {
+process FASTQC {
     tag "FASTQC on $sample_id"
 
     input:
@@ -69,9 +67,8 @@ process fastqc {
     fastqc -o fastqc_${sample_id}_logs -f fastq -q ${reads}
     """  
 }
- 
 
-process multiqc {
+process MULTIQC {
     publishDir params.outdir, mode:'copy'
        
     input:
@@ -88,17 +85,14 @@ process multiqc {
 
 workflow {
 
-    index_ch = index(Channel.from(params.transcriptome_file)).collect()
-
     Channel
-    .fromFilePairs( params.reads, checkIfExists: true )
-    .set { read_pairs_ch } 
-
-    quant_ch = quantification(index_ch, read_pairs_ch)
-
-    fastqc_ch = fastqc(read_pairs_ch)   
-
-    multiqc(quant_ch.mix(fastqc_ch).collect())
+       .fromFilePairs(params.reads, checkIfExists: true)
+       .set { read_pairs_ch }
+       
+    index_ch = INDEX(params.transcriptome_file)
+    quant_ch = QUANTIFICATION(index_ch, read_pairs_ch)
+    fastqc_ch = FASTQC(read_pairs_ch) 
+    MULTIQC(quant_ch.mix(fastqc_ch).collect())
 }
 
 workflow.onComplete {

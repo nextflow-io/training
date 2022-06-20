@@ -19,7 +19,7 @@ The script `script1.nf` defines the pipeline input parameters.
 
 [source,nextflow,linenums]
 ----
-params.reads = "$projectDir/data/ggal/*_{1,2}.fq"
+params.reads = "$projectDir/data/ggal/gut_{1,2}.fq"
 params.transcriptome_file = "$projectDir/data/ggal/transcriptome.fa"
 params.multiqc = "$projectDir/multiqc"
 
@@ -32,7 +32,7 @@ Run it by using the following command:
 
 Try to specify a different input parameter in your execution command, for example:
 
-  nextflow run script1.nf --reads "/workspace/nf-training-public/nf-training/data/ggal/gut_{1,2}.fq"
+  nextflow run script1.nf --reads '/workspace/nf-training-public/nf-training/data/ggal/gut_{1,2}.fq'
 
 [discrete]
 === Exercise
@@ -45,7 +45,7 @@ that will be used as the pipeline output directory.
 ====
 [source,nextflow,linenums]
 ----
-params.reads = "$projectDir/data/ggal/*_{1,2}.fq"
+params.reads = "$projectDir/data/ggal/gut_{1,2}.fq"
 params.transcriptome_file = "$projectDir/data/ggal/transcriptome.fa"
 params.multiqc = "$projectDir/multiqc"
 params.outdir = "results"
@@ -93,10 +93,10 @@ In this step you have learned:
 Nextflow allows the execution of any command or script by using a `process` definition.
 
 A `process` is defined by providing three main declarations:
-the process https://www.nextflow.io/docs/latest/process.html#inputs[`inputs`], https://www.nextflow.io/docs/latest/process.html#outputs[`outputs`]
+the process https://www.nextflow.io/docs/latest/process.html#inputs[`input`], https://www.nextflow.io/docs/latest/process.html#outputs[`output`]
 and command https://www.nextflow.io/docs/latest/process.html#script[`script`].
 
-To add a transcriptome `index` processing step, try adding the following code blocks to your `script1.nf`. Alternatively, these code blocks have already been added to `script2.nf`.
+To add a transcriptome `INDEX` processing step, try adding the following code blocks to your `script1.nf`. Alternatively, these code blocks have already been added to `script2.nf`.
 
 [source,nextflow,linenums]
 ----
@@ -104,15 +104,15 @@ To add a transcriptome `index` processing step, try adding the following code bl
  * define the `index` process that creates a binary index
  * given the transcriptome file
  */
-process index {
-
+process INDEX {
+    
     input:
     path transcriptome
-
+     
     output:
     path 'salmon_index'
 
-    script:
+    script: 
     """
     salmon index --threads $task.cpus -t $transcriptome -i salmon_index
     """
@@ -125,14 +125,12 @@ Additionally, add a workflow scope containing an input channel definition and th
 ----
 workflow {
 
-    in_channel = Channel.from(params.transcriptome_file).collect()
-
-    index_ch = index( in_channel )
+    index_ch = INDEX(params.transcriptome_file)
 
 }
 ----
 
-Here, the `transcriptome_file` parameter is defined as `in_channel` and used as the input for the `index` process. The `index` process (using the `salmon` tool) creates `salmon_index`, an indexed transcriptome that is passed as an output to the `index_ch` channel.
+Here, the `params.transcriptome_file` parameter is used as the input for the `INDEX` process. The `INDEX` process (using the `salmon` tool) creates `salmon_index`, an indexed transcriptome that is passed as an output to the `index_ch` channel.
 
 NOTE: The `input` declaration defines a `transcriptome` path variable which is used in the `script` as a reference (using the dollar symbol) in the Salmon command line.
 
@@ -320,17 +318,17 @@ In this step you have learned:
 
 == Perform expression quantification
 
-`script4.nf` adds the `quantification` process as a new workflow scope line.
+`script4.nf` adds the `QUANTIFICATION` process as a new workflow scope line.
 
-In this workflow scope, note how the `index_ch` channel, declared as output in the `index` process, is now used as an input channel for the `quantification` process.
+In this workflow scope, note how the `index_ch` channel, declared as output in the `INDEX` process, is now used as an input channel for the `quantification` process.
 
-Also, note how the input is declared in the `quantification` process, the first being a `path` from the `index_ch` and the second being a `tuple` composed of two elements (the `sample_id` and the `reads`) in order to match the structure of the items emitted by the `read_pairs_ch` channel.
+Also, note how the input is declared in the `QUANTIFICATION` process, the first being a `path` from the `index_ch` and the second being a `tuple` composed of two elements (the `sample_id` and the `reads`) in order to match the structure of the items emitted by the `read_pairs_ch` channel.
 
 Execute it by using the following command:
 
   nextflow run script4.nf -resume
 
-You will see the execution of the `quantification` process.
+You will see the execution of the `QUANTIFICATION` process.
 
 When using the `-resume` option, any step that has already been processed is skipped.
 
@@ -338,7 +336,7 @@ Try to execute the same script again with more read files, as shown below:
 
   nextflow run script4.nf -resume --reads 'data/ggal/*_{1,2}.fq'
 
-You will notice that the `quantification` process is executed multiple times.
+You will notice that the `QUANTIFICATION` process is executed multiple times.
 
 Nextflow parallelizes the execution of your pipeline simply by providing multiple sets of input data to your script.
 
@@ -348,7 +346,7 @@ NOTE: It may be useful to apply optional settings to a specific process using ht
 === Exercise
 
 Add a https://www.nextflow.io/docs/latest/process.html#tag[tag] directive to the
-`quantification` process to provide a more readable execution log.
+`QUANTIFICATION` process to provide a more readable execution log.
 
 .Click here for the answer:
 [%collapsible]
@@ -363,12 +361,12 @@ Add the following before the input declaration:
 === Exercise
 
 Add a https://www.nextflow.io/docs/latest/process.html#publishdir[publishDir] directive
-to the `quantification` process to store the process results in a directory of your choice.
+to the `QUANTIFICATION` process to store the process results in a directory of your choice.
 
 .Click here for the answer:
 [%collapsible]
 ====
-Add the following before the `input` declaration in the `quantification` process:
+Add the following before the `input` declaration in the `QUANTIFICATION` process:
 ```
   publishDir params.outdir, mode:'copy'
 ```
@@ -387,17 +385,17 @@ In this step you have learned:
 
 == Quality control
 
-Next, we implement a FASTQC quality control step for your input reads (using the label `fastqc`). The inputs are the same as the read pairs used in the `quantification` step.
+Next, we implement a `FASTQC` quality control step for your input reads (using the label `fastqc`). The inputs are the same as the read pairs used in the `QUANTIFICATION` step.
 
 You can run it by using the following command:
 
   nextflow run script5.nf -resume
 
-Nextflow DSL2 knows to split the `reads_pair_ch` into two identical channels as they are required twice as an input for both of the `fastqc` and the `quantification` process.
+Nextflow DSL2 knows to split the `reads_pair_ch` into two identical channels as they are required twice as an input for both of the `FASTQC` and the `QUANTIFICATION` process.
 
 == MultiQC report
 
-This step collects the outputs from the `quantification` and `fastqc` processes to create
+This step collects the outputs from the `QUANTIFICATION` and `FASTQC` processes to create
 a final report using the http://multiqc.info/[MultiQC] tool.
 
 
@@ -409,9 +407,9 @@ It creates the final report in the `results` folder in the current `work` direct
 
 In this script, note the use of the https://www.nextflow.io/docs/latest/operator.html#mix[mix,window="_blank"]
 and https://www.nextflow.io/docs/latest/operator.html#collect[collect,window="_blank"] operators chained
-together to gather the outputs of the `quantification` and `fastqc` processes as a single input. https://www.nextflow.io/docs/latest/operator.html[Operators] can be used to combine and transform channels.
+together to gather the outputs of the `QUANTIFICATION` and `FASTQC` processes as a single input. https://www.nextflow.io/docs/latest/operator.html[Operators] can be used to combine and transform channels.
 
-  multiqc(quant_ch.mix(fastqc_ch).collect())
+  MULTIQC(quant_ch.mix(fastqc_ch).collect())
 
 We only want one task of MultiQC to be executed to produces one report. Therefore, we use the `mix` channel operator to combine the two channels followed by the `collect` operator, to return the complete channel contents as a single element.
 
@@ -496,7 +494,7 @@ mkdir -p bin
 mv fastqc.sh bin
 ----
 
-Then, open the `script7.nf` file and replace the `fastqc` process' script with
+Then, open the `script7.nf` file and replace the `FASTQC` process' script with
 the following code:
 
 [source,nextflow,linenums]
