@@ -271,16 +271,26 @@ In practical terms, consider the following snippet:
 [source,nextflow,linenums]
 ----
 process foo {
-  input: set val(pair), file(reads) from ...
-  output: set val(pair), file('*.bam') into bam_ch
+  input:
+  tuple val(pair), file(reads)
+  
+  output:
+  tuple val(pair), file('*.bam'), emit: bam_ch
+  
+  script:
   """
   your_command --here
   """
 }
 
 process bar {
-  input: set val(pair), file(reads) from ...
-  output: set val(pair), file('*.bai') into bai_ch
+  input:
+  tuple val(pair), file(reads)
+  
+  output:
+  tuple val(pair), file('*.bai'), emit: bai_ch
+  
+  script:
   """
   other_command --here
   """
@@ -288,8 +298,10 @@ process bar {
 
 process gather {
   input:
-  set val(pair), file(bam) from bam_ch 
-  set val(pair), file(bai) from bai_ch
+  tuple val(pair), file(bam)
+  tuple val(pair), file(bai)
+  
+  script:
   """
   merge_command $bam $bai
   """
@@ -310,7 +322,9 @@ operator, or a similar approach. The third process should be written as:
 
 process gather {
   input:
-  set val(pair), file(bam), file(bai) from bam_ch.join(bai_ch) 
+  tuple val(pair), file(bam), file(bai)
+  
+  script:
   """
   merge_command $bam $bai
   """
