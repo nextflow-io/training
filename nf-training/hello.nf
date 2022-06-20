@@ -3,7 +3,7 @@
 params.greeting = 'Hello world!'
 greeting_ch = Channel.from(params.greeting)
 
-process splitLetters {
+process SPLITLETTERS {
 
     input:
     val x
@@ -16,7 +16,7 @@ process splitLetters {
     """
 }
 
-process convertToUpper {
+process CONVERTTOUPPER {
 
     input:
     file y
@@ -30,8 +30,8 @@ process convertToUpper {
 }
 
 workflow {
-    letters_ch = splitLetters(greeting_ch)
-    results_ch = convertToUpper(letters_ch.flatten())
+    letters_ch = SPLITLETTERS(greeting_ch)
+    results_ch = CONVERTTOUPPER(letters_ch.flatten())
     results_ch.view{ it }
 }
 
