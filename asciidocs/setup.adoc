@@ -69,7 +69,7 @@ Use a preconfigured Nextflow development environment using Gitpod.
 
 *Requirements*:
 
- * A GitHub account (gives you 50 hours of free usage per month)
+ * A GitHub account
  * Web browser (Google Chrome, Firefox)
  * Internet connection
 
@@ -85,21 +85,21 @@ https://gitpod.io/#https://github.com/seqeralabs/nf-training-public
 
 - Log in to your Github account (and allow authorization). 
 
-Once you have signed in, Gitpod should load (skip the prebuild if asked).
+Once you have signed in, Gitpod should load (skip prebuild if asked).
 
 === Explore your Gitpod IDE
 
-You should see something similar to the following:
+You should now see something similar to the following:
 
 image::gitpod.welcome.png[]
 
 **The sidebar** allows you to customize your Gitpod environment and perform basic tasks (copy, paste, open files, search, git, etc.). Click the Explorer button to see which files are in this repository.
 
-**The terminal** allows you to run all the programs in the repository. For example, both `nextflow` and `docker` are installed and can be executed immediately. 
+**The terminal** allows you to run all the programs in the repository. For example, both `nextflow` and `docker` are installed and can be executed. 
 
-**The main window** allows you to view and edit files. Clicking on a file in the explorer will open it within the main window. We can also see the nf-training material in this window, but if you find the space too small you can open it separately in another browser window (https://training.seqera.io/). Finally, if you accidentally close the Gitpod training window, you can reopen it by entering `gp preview https://training.seqera.io`.
+**The main window** allows you to view and edit files. Clicking on a file in the explorer will open it within the main window. You should also see the nf-training material browser (https://training.seqera.io/).
 
-To test that the environment is worker correctly, type the following into the terminal:
+To test that the environment is working correctly, type the following into the terminal:
 
 	nextflow info
 
@@ -116,10 +116,9 @@ This should come up with the Nextflow version and runtime information:
 
 ### Gitpod resources
 
-Gitpod gives you 50 hours per month to run the environment for free.
-It includes up to 16 cpus. 
-Will timeout after 30 minutes. However any changes are saved for up to two week (see next section for reopening a timed out session). 
-Each environment can use up to 30GB of data.
+- Gitpod gives you up to 50 hours per month to run the environment for free.
+- It includes upto 16 cpus and 30GB of workspace. 
+- Gitpod will timeout after 30 minutes. However any changes are saved for up to two week (see next section for reopening a timed out session). 
 
 See www.gitpod.io for more details.
 
@@ -127,13 +126,12 @@ See www.gitpod.io for more details.
 
 You can reopen an environment by going to https://gitpod.io/workspaces and finding your previous environment, then clicking the button with three dots and selecting Open. 
 
-If you save the URL from your previous Gitpod environment, you can just paste this into your browser to open the previous environment. Environments are saved for up to two weeks. However, you shouldn't rely on their existence and make sure you download any important files you want for posterity.
+If you save the URL from your previous Gitpod environment, you can just paste this into your browser to open the previous environment. 
 
 Alternatively, you can start a new workspace by following the Gitpod URL: 
 https://gitpod.io/#https://github.com/seqeralabs/nf-training-public
 
 This tutorial provides all the scripts, so don't worry if you have lost your environment. In the `nf-training` directory, you can find the main scripts used in the tutorial.
-
 
 ### Saving files from Gitpod to your local machine.
 
