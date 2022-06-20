@@ -14,7 +14,6 @@
           """
           .stripIndent()
 
- 
 /* 
  * define the `index` process that creates a binary index 
  * given the transcriptome file
@@ -32,7 +31,6 @@ process INDEX {
     salmon index --threads $task.cpus -t $transcriptome -i salmon_index
     """
 }
-
 
 Channel 
     .fromFilePairs( params.reads, checkIfExists: true )
@@ -68,7 +66,6 @@ process FASTQC {
     fastqc -o fastqc_${sample_id}_logs -f fastq -q ${reads}
     """  
 }
- 
 
 process MULTIQC {
     publishDir params.outdir, mode:'copy'
