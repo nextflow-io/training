@@ -32,7 +32,7 @@ Run it by using the following command:
 
 Try to specify a different input parameter in your execution command, for example:
 
-  nextflow run script1.nf --reads '/workspace/nf-training-public/nf-training/data/ggal/gut_{1,2}.fq'
+  nextflow run script1.nf --reads '/workspace/nf-training-public/nf-training/data/ggal/lung_{1,2}.fq'
 
 [discrete]
 === Exercise
@@ -315,14 +315,17 @@ In this step you have learned:
 2. How to use the `checkIfExists` option to check for the existence of input files
 3. How to use the `set` operator to define a new channel variable
 
+NOTE: The declaration of a channel can be before the workflow scope of within it. As long as it is upstream of the process that requires the specific channel.
 
 == Perform expression quantification
 
-`script4.nf` adds the `QUANTIFICATION` process as a new workflow scope line.
+`script4.nf` adds a gene expression `QUANTIFICATION` process and call within the workflow scope. Quantification requires the index transcriptome and RNA-Seq read pair fastq files.
 
-In this workflow scope, note how the `index_ch` channel, declared as output in the `INDEX` process, is now used as an input channel for the `quantification` process.
+In the workflow scope, note how the `index_ch` channel is assigned as output in the `INDEX` process.
 
-Also, note how the input is declared in the `QUANTIFICATION` process, the first being a `path` from the `index_ch` and the second being a `tuple` composed of two elements (the `sample_id` and the `reads`) in order to match the structure of the items emitted by the `read_pairs_ch` channel.
+Next, note that the first input channel for the `QUANTIFICATION` process is the previously declared `index_ch`, which contains the `path` to the `salmon_index``.
+
+Also, note that the second input channel for the `QUANTIFICATION` process, is the `read_pair_ch` we just created. This being a `tuple` composed of two elements (a value: `sample_id` and a path: `reads`) in order to match the structure of the items emitted by the `read_pairs_ch` channel.
 
 Execute it by using the following command:
 
@@ -411,7 +414,7 @@ together to gather the outputs of the `QUANTIFICATION` and `FASTQC` processes as
 
   MULTIQC(quant_ch.mix(fastqc_ch).collect())
 
-We only want one task of MultiQC to be executed to produces one report. Therefore, we use the `mix` channel operator to combine the two channels followed by the `collect` operator, to return the complete channel contents as a single element.
+We only want one task of MultiQC to be executed to produce one report. Therefore, we use the `mix` channel operator to combine the two channels followed by the `collect` operator, to return the complete channel contents as a single element.
 
 [discrete]
 === Recap
@@ -427,7 +430,7 @@ In this step you have learned:
 
 This step shows how to execute an action when the pipeline completes the execution.
 
-Note that Nextflow processes define the execution of *asynchronous* tasks i.e., they are not
+Note that Nextflow processes define the execution of *asynchronous* tasks i.e. they are not
 executed one after another as if they were written in the pipeline script in a
 common *imperative* programming language.
 
