@@ -37,6 +37,7 @@ Channel
     .set { read_pairs_ch } 
 
 process QUANTIFICATION {
+    tag "Salmon on $sample_id"
 
     input:
     path salmon_index
