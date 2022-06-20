@@ -28,7 +28,7 @@ tasks:
     command: |
       cd nf-training
       source $HOME/.bashrc
-      export PS1='\D{%I:%M} -> '
+      export PS1='\[\e[3;36m\]${PWD/*\//} ->\[\e[0m\] '
       clear
 
     
