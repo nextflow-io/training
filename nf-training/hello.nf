@@ -1,6 +1,6 @@
 #!/usr/bin/env nextflow
 
-params.greeting  = 'Hello world!'
+params.greeting = 'Hello world!'
 greeting_ch = Channel.from(params.greeting)
 
 process splitLetters {
@@ -29,7 +29,7 @@ process convertToUpper {
     """
 }
 
-workflow{
+workflow {
     letters_ch = splitLetters(greeting_ch)
     results_ch = convertToUpper(letters_ch.flatten())
     results_ch.view{ it }
