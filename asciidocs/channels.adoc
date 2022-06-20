@@ -647,11 +647,11 @@ workflow {
 }
 ----
 
-For this script to work, a file called `parsers.nf` needs to be created and stored in the modules folder in the current directory.
+For this script to work, a module file called `parsers.nf` needs to be created and stored in a modules folder in the current directory.
 
-This file should contain the `parseJsonFile` function.
+The `parsers.nf` file should contain the `parseJsonFile` function.
 
 Nextflow will use this as a custom function within the workflow scope.
 
-IMPORTANT: You will learn more about module files later (section 8.1). 
+IMPORTANT: You will learn more about module files later in section 8.1 of this tutorial. 
 
