@@ -385,7 +385,7 @@ Channel
      }
 ----
 
-TIP: The `subscribe` operator permits executionf of user defined functions each time a new value is emitted by the source channel.
+TIP: The `subscribe` operator permits execution of user defined functions each time a new value is emitted by the source channel.
 
 An optional closure can be specified in order to transform the text chunks produced by the operator. The following example shows how to split text files into chunks of 10 lines and transform them into capital letters:
 
@@ -421,7 +421,7 @@ Finally, you can also use the operator on plain files (outside of the channel co
 
 === Comma separate values (.csv)
 
-The `splitCsv` operator allows you to parse text items emitted by a channel, that are CSV file formatted. 
+The `splitCsv` operator allows you to parse text items emitted by a channel, that are CSV formatted. 
 
 It then splits them into records or groups them as a list of records with a specified length.
 
@@ -497,7 +497,7 @@ Then replace the input channel for the reads in `script7.nf`. Changing the follo
 ----
 Channel 
     .fromFilePairs( params.reads, checkIfExists: true )
-    .into { read_pairs_ch; read_pairs2_ch } 
+    .set { read_pairs_ch } 
 ----
 
 To a splitCsv channel factory input:
@@ -508,14 +508,14 @@ Channel
     .fromPath("fastq.csv")
     .splitCsv()
     .view () { row -> "${row[0]},${row[1]},${row[2]}" }
-    .into { read_pairs_ch; read_pairs2_ch } 
+    .set { read_pairs_ch } 
 ----
 
 Finally, change the cardinality of the processes that use the input data. For example, for the quantification process, change it from:
 
 [source,nextflow,linenums]
 ----
-process quantification {
+process QUANTIFICATION {
     tag "$sample_id"
          
     input:
@@ -536,7 +536,7 @@ To:
 
 [source,nextflow,linenums]
 ----
-process quantification {
+process QUANTIFICATION {
     tag "$sample_id"
          
     input:
@@ -553,7 +553,27 @@ process quantification {
 }
 ----
 
-Repeat the above for the fastqc step. Now the workflow should run from a CSV file.
+Repeat the above for the fastqc step. 
+
+[source,nextflow,linenums]
+----
+process FASTQC {
+    tag "FASTQC on $sample_id"
+
+    input:
+    tuple val(sample_id), path(reads1), path(reads2)
+
+    output:
+    path "fastqc_${sample_id}_logs"
+
+    script:
+    """
+    mkdir fastqc_${sample_id}_logs
+    fastqc -o fastqc_${sample_id}_logs -f fastq -q ${reads1} ${reads2}
+    """  
+}
+----
+Now the workflow should run from a CSV file.
 ====
 
 === Tab separated values (.tsv)
