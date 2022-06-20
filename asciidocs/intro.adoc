@@ -113,7 +113,7 @@ workflow{ <22>
 <2> Declares a parameter `greeting` that is initialized with the value 'Hello world!'
 <3> Initializes a `channel` labelled `greeting_ch`, which contains the value from `params.greeting`. Channels are the necessary input type for processes in Nextflow
 <4> Begins the first process defined as `SPLITLETTERS`
-<5> Input declaration for the `SPLITLETTERS` process. Inputs can be values: `val`, files: `file`, paths `path` or other qualifiers (https://www.nextflow.io/docs/latest/process.html#inputs[See here])
+<5> Input declaration for the `SPLITLETTERS` process. Inputs can be values: `val`, files: `file`, paths `path` or other qualifiers (https://www.nextflow.io/docs/latest/process.html#inputs[see here])
 <6> Tells the `process` to expect an input value (`val`), that we assign to the variable 'x' 
 <7> Output declaration for the `SPLITLETTERS` process
 <8> Tells the process to expect an output file/s (`file`) containing 'chunk_*' as output from the script and send the output as a channel 
