@@ -116,7 +116,7 @@ workflow{ <22>
 <5> Input declaration for the `SPLITLETTERS` process. Inputs can be values: `val`, files: `file`, paths `path` or other qualifiers (https://www.nextflow.io/docs/latest/process.html#inputs[see here])
 <6> Tells the `process` to expect an input value (`val`), that we assign to the variable 'x' 
 <7> Output declaration for the `SPLITLETTERS` process
-<8> Tells the process to expect an output file/s (`file`) containing 'chunk_*' as output from the script and send the output as a channel 
+<8> Tells the process to expect an output file(s) (`file`) containing 'chunk_*' as output from the script and send the output as a channel 
 <9> Three double quote marks initiate the code block to execute in this `process`
 <10> Code to execute, printing the `input` value x (called using the dollar [$] symbol prefix), and splitting the string into chunks of 6 characters long ("Hello " and "world!") and saving to files: chunk_aa and chunk_ab
 <11> Three double quote marks end the code block
