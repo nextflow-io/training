@@ -287,3 +287,4 @@ NOTE: In the above example, what would happen to a value of 10? To deal with thi
 == More resources
 
 Check the https://www.nextflow.io/docs/latest/operator.html[operators documentation] on Nextflow web site.
+
