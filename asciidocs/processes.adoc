@@ -296,7 +296,7 @@ process FOO {
 
 workflow {
 
-  result= FOO(reads)
+  result = FOO(reads)
   
 }
 ----
@@ -323,7 +323,7 @@ process FOO {
 
 workflow {
 
-  result= FOO(reads)
+  result = FOO(reads)
   
 }
 ----
