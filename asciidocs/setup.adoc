@@ -19,7 +19,6 @@ Nextflow can be used on any POSIX-compatible system (Linux, OS X, Windows Subsys
 
 *Optional requirements for this tutorial*:
 
-* https://www.docker.com/[Docker] engine 1.10.x (or later)
 * https://github.com/sylabs/singularity[Singularity] 2.5.x (or later)
 * https://conda.io/[Conda] 4.5 (or later)
 * http://www.graphviz.org/[Graphviz] 
@@ -48,9 +47,17 @@ chmod +x nextflow
 
 AND put the nextflow executable into your $PATH (e.g. ~/usr/local/bin or ~/bin/)
 
+=== Docker
+
+Ensure you have Docker Desktop running on your machine. Download Docker https://docs.docker.com/get-docker/[here].
+
 === Training material 
 
 You can view the training material here: https://training.seqera.io/
+
+To download the material use `git clone https://github.com/seqeralabs/nf-training-public.git`. 
+
+Then `cd` into the `nf-training` directory
 
 === Checking your installation
 
