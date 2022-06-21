@@ -78,7 +78,6 @@ params.greeting  = 'Hello world!' <2>
 greeting_ch = Channel.from(params.greeting) <3>
 
 process SPLITLETTERS { <4>
-
     input: <5>
     val x <6>
 
@@ -91,7 +90,6 @@ process SPLITLETTERS { <4>
 } <12>
 
 process CONVERTTOUPPER { <13>
-
     input:  <14>
     file y <15>
 
@@ -218,7 +216,6 @@ the previous example, replacing the process script with the string
 [source,nextflow,linenums]
 ----
 process CONVERTTOUPPER {
-
     input:
     file y
 
