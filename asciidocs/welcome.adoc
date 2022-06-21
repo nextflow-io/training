@@ -40,9 +40,9 @@ This will give you a broad understanding of Nextflow so that you can start writi
 7. <<Operators>>
 8. <<Groovy basic structures and idioms>>
 9. <<Modularization>>
-10. <<Get started with Nextflow Tower>>
-11. <<Nextflow configuration>>
-12. <<Deployment scenarios>>
+10. <<Nextflow configuration>>
+11. <<Deployment scenarios>>
+12. <<Get started with Nextflow Tower>>
 13. <<Execution cache and resume>>
 14. <<Error handling and troubleshooting>>
 
