@@ -244,7 +244,7 @@ process BASICEXAMPLE {
   debug=true
   
   input:
-  val x from num
+  val x
   
   script:
   """
