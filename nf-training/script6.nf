@@ -34,7 +34,6 @@ process INDEX {
 }
 
 process QUANTIFICATION {
-
     tag "Salmon on $sample_id"
 
     input:
@@ -51,7 +50,6 @@ process QUANTIFICATION {
 }
 
 process FASTQC {
-
     tag "FASTQC on $sample_id"
 
     input:
@@ -68,7 +66,6 @@ process FASTQC {
 }
 
 process MULTIQC {
-
     publishDir params.outdir, mode:'copy'
     
     input:
