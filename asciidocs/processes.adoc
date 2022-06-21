@@ -189,7 +189,7 @@ params.file2compress = "$baseDir/data/ggal/transcriptome.fa"
 process FOO {
 
   input:
-  path file from params.file2compress
+  path file
 
   script:
   if( params.compress == 'gzip' )
@@ -203,7 +203,14 @@ process FOO {
   else
     throw new IllegalArgumentException("Unknown aligner $params.compress")
     
-}   
+}
+
+workflow {
+
+  FOO(params.file2compress)
+
+}
+
 ----
 
 == Inputs
