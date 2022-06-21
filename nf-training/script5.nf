@@ -49,7 +49,6 @@ process QUANTIFICATION {
 }
 
 process FASTQC {
-
     tag "FASTQC on $sample_id"
 
     input:
