@@ -105,17 +105,16 @@ To add a transcriptome `INDEX` processing step, try adding the following code bl
  * given the transcriptome file
  */
 process INDEX {
+  input:
+  path transcriptome
     
-    input:
-    path transcriptome
-     
-    output:
-    path 'salmon_index'
+  output:
+  path 'salmon_index'
 
-    script: 
-    """
-    salmon index --threads $task.cpus -t $transcriptome -i salmon_index
-    """
+  script: 
+  """
+  salmon index --threads $task.cpus -t $transcriptome -i salmon_index
+  """
 }
 ----
 
@@ -124,9 +123,7 @@ Additionally, add a workflow scope containing an input channel definition and th
 [source,nextflow,linenums]
 ----
 workflow {
-
     index_ch = INDEX(params.transcriptome_file)
-
 }
 ----
 
@@ -190,9 +187,9 @@ Add `cpus 2` to the top of the index process:
 [source,nextflow,linenums]
 ----
 process index {
-    cpus 2
-    input:
-    ...
+  cpus 2
+  input:
+  ...
 ----
 Then check it worked by looking at the script executed in the work directory. Look for the hexidecimal (e.g. work/7f/f285b80022d9f61e82cd7f90436aa4/), Then `cat` the `.command.sh` file.
 ====
@@ -285,8 +282,8 @@ of `=` assignment to define the `read_pairs_ch` channel.
 [source,nextflow,linenums]
 ----
 Channel 
-    .fromFilePairs( params.reads )
-    .set { read_pairs_ch } 
+  .fromFilePairs( params.reads )
+  .set { read_pairs_ch } 
 ----
 ====
 
@@ -301,8 +298,8 @@ Use the `checkIfExists` option for the https://www.nextflow.io/docs/latest/chann
 [source,nextflow,linenums]
 ----
 Channel 
-    .fromFilePairs( params.reads, checkIfExists: true )
-    .set { read_pairs_ch } 
+  .fromFilePairs( params.reads, checkIfExists: true )
+  .set { read_pairs_ch } 
 ----
 ====
 
@@ -572,18 +569,18 @@ https://github.com/nextflow-io/rnaseq-nf
 
 You can run it by specifying the project name and launching each task of the execution as a Docker container run command:
 
-    nextflow run nextflow-io/rnaseq-nf -with-docker
+  nextflow run nextflow-io/rnaseq-nf -with-docker
 
 It automatically downloads the container and stores it in the `$HOME/.nextflow` folder.
 
 
 Use the command `info` to show the project information:
 
-    nextflow info nextflow-io/rnaseq-nf
+  nextflow info nextflow-io/rnaseq-nf
 
 Nextflow allows the execution of a specific revision of your project by using the `-r` command line option. For example:
 
-    nextflow run nextflow-io/rnaseq-nf -r dev
+  nextflow run nextflow-io/rnaseq-nf -r dev
 
 Revision are defined by using Git tags or branches defined in the project repository.
 
@@ -596,4 +593,5 @@ Tags enable precise control of the changes in your project files and dependencie
 * https://github.com/nextflow-io/patterns[Nextflow patterns,window="_blank"] - A collection of Nextflow implementation patterns.
 * https://github.com/CRG-CNAG/CalliNGS-NF[CalliNGS-NF,window="_blank"] - A Variant calling pipeline implementing GATK best practices.
 * http://nf-co.re/[nf-core,window="_blank"] - A community collection of production ready genomic pipelines.
+
 
