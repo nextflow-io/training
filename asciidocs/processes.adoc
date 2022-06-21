@@ -199,10 +199,10 @@ params.data = 'le monde'
 process BAZ {
 
   shell:
-  """
+  '''
   X='Bonjour'
   echo $X !{params.data}
-  """
+  '''
   
 }
 
