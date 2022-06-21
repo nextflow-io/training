@@ -30,7 +30,6 @@ process INDEX {
     """
     salmon index --threads $task.cpus -t $transcriptome -i salmon_index
     """
-
 }
 
 process QUANTIFICATION {
@@ -48,7 +47,6 @@ process QUANTIFICATION {
     """
     salmon quant --threads $task.cpus --libType=U -i $salmon_index -1 ${reads[0]} -2 ${reads[1]} -o $sample_id
     """
-
 }
 
 process FASTQC {
@@ -66,7 +64,6 @@ process FASTQC {
     mkdir fastqc_${sample_id}_logs
     fastqc -o fastqc_${sample_id}_logs -f fastq -q ${reads}
     """
-
 }
 
 process MULTIQC {
@@ -82,12 +79,10 @@ process MULTIQC {
     script:
     """
     multiqc . 
-    """
-    
+    """  
 } 
 
 workflow {
-
     Channel
         .fromFilePairs(params.reads, checkIfExists: true)
         .set { read_pairs_ch }
@@ -96,7 +91,6 @@ workflow {
     quant_ch = QUANTIFICATION(index_ch, read_pairs_ch)
     fastqc_ch = FASTQC(read_pairs_ch) 
     MULTIQC(quant_ch.mix(fastqc_ch).collect())
-    
 }
 
 workflow.onComplete {
