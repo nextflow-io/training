@@ -16,6 +16,7 @@ Nextflow can be used on any POSIX-compatible system (Linux, OS X, Windows Subsys
 * Bash
 * http://www.oracle.com/technetwork/java/javase/downloads/index.html[Java 8 (or later, up to 15)]
 * Git
+* https://docs.docker.com/get-docker/[Docker]
 
 *Optional requirements for this tutorial*:
 

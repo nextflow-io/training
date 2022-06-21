@@ -34,6 +34,7 @@ process INDEX {
 
 process QUANTIFICATION {
     tag "Salmon on $sample_id"
+    publishDir params.outdir, mode:'copy'
 
     input:
     path salmon_index
