@@ -4,8 +4,8 @@ The Nextflow caching mechanism works by assigning a unique ID to each task
 which is used to create a separate execution directory where the tasks
 are executed and the results stored. 
 
-The task unique ID is generated as a 128-bit hash number obtained 
-composing the task inputs values and files and the command string. 
+The task unique ID is generated as a 128-bit hash number 
+composing the task input values, files and command string. 
 
 The pipeline work directory is organized as shown below: 
 
@@ -50,20 +50,20 @@ TIP: You can create these plots using the `tree` function if you have it install
 
 == How resume works
 
-The `-resume` command line option allow the continuation of a pipeline 
-execution, since the last step that was successfully completed: 
+The `-resume` command-line option allows the continuation of a pipeline 
+execution from the last step that was completed successfully: 
 
 ```
 nextflow run <script> -resume
 ```
 
-In practical terms the pipeline is executed from the beginning. However, before launching the execution of a `process` Nextflow 
+In practical terms, the pipeline is executed from the beginning. However, before launching the execution of a `process`, Nextflow 
 uses the task unique ID to check if the work directory already exists and that it contains a valid command exit state with the 
 expected output files. 
 
 If this condition is satisfied the task execution is skipped and previously computed results are used as the `process` results.  
 
-The first task for which a new output is computed, invalidates all downstream executions in the remaining DAG. 
+The first task for which a new output is computed invalidates all downstream executions in the remaining DAG. 
 
 == Work directory
 
@@ -74,16 +74,16 @@ storage area that can be cleaned up once the computation is completed.
 NOTE: Workflow final output(s) are supposed to be stored in a different 
 location specified using one or more https://www.nextflow.io/docs/latest/process.html#publishdir[publishDir] directive.
 
-IMPORTANT: Make sure to delete you work directory occasionly, else your machine/environment may be filled with unused files. 
+IMPORTANT: Make sure to delete your work directory occasionally, else your machine/environment may be filled with unused files. 
 
 A different location for the execution work directory can be specified 
-using the command line option `-w` e.g. 
+using the command line option `-w`. For example:
 
 ```
 nextflow run <script> -w /some/scratch/dir 
 ```
 
-WARNING: If you delete or move the pipeline work directory, it will prevent the use of the resume feature in following runs. 
+WARNING: If you delete or move the pipeline work directory, it will prevent the use of the resume feature in subsequent runs. 
 
 The hash code for input files is computed using: 
 
@@ -91,15 +91,15 @@ The hash code for input files is computed using:
 * The file size 
 * The last modified timestamp 
 
-Therefore just *touching* a file will invalidated the related task execution. 
+Therefore, just *touching* a file will invalidate the related task execution. 
 
 == How to organize in silico experiments 
 
-It's good practice to organize each *experiment* in its own folder. The main experiment input parameters should be specified using a Nextflow config file. This makes it simple to track and replicate the experiment over time. 
+It's good practice to organize each *experiment* in its own folder. The main experiment input parameters should be specified using a Nextflow config file. This makes it simple to track and replicate an experiment over time. 
 
 NOTE: In the same experiment, the same pipeline can be executed multiple times, 
-however it should be avoided to launch two (or more) Nextflow instances in the same 
-directory concurrently. 
+however, launching two (or more) Nextflow instances in the same 
+directory concurrently should be avoided. 
 
 The `nextflow log` command lists the executions run in the current folder: 
 
@@ -122,9 +122,9 @@ nextflow run rnaseq-nf -resume mighty_boyd
 
 == Execution provenance 
 
-The `log` command when provided with a *run name* or *session ID* can return many useful bits of information about a pipeline execution that can be used to create a provenance report. 
+The `log` command, when provided with a *run name* or *session ID*, can return many useful bits of information about a pipeline execution that can be used to create a provenance report. 
 
-By default, it lists the work directories used to compute each task. 
+By default, it will list the work directories used to compute each task. 
 For example: 
 
 [source]
@@ -139,7 +139,7 @@ $ nextflow log tiny_fermat
 /data/.../work/3b/3485d00b0115f89e4c202eacf82eba
 ----
 
-Using the option `-f` (fields) it's possible to specify which metadata
+The `-f` (fields) option can be used to specify which metadata
 should be printed by the `log` command. For example:
 
 ```
@@ -159,7 +159,7 @@ The complete list of available fields can be retrieved with the command:
 nextflow log -l
 ```
 
-The option `-F` allows the specification of a filtering criteria to
+The `-F` option allows the specification of filtering criteria to
 print only a subset of tasks. For example:
 
 ```
@@ -171,7 +171,7 @@ $ nextflow log tiny_fermat -F 'process =~ /fastqc/'
 
 This can be useful to locate specific task work directories. 
 
-Finally, the `-t` flag option allows the creation of a basic custom provenance report, showing a template file in any format of your choice. For example: 
+Finally, the `-t` option enables the creation of a basic custom provenance report, showing a template file in any format of your choice. For example: 
 
 [source,html]
 ----
@@ -198,19 +198,19 @@ run this command (using the correct id for your run, e.g. not tiny_fermat):
 nextflow log tiny_fermat -t template.html > prov.html
 ```
 
-Finally open the `prov.html` file with a browser.
+Finally, open the `prov.html` file with a browser.
 
 
 == Resume troubleshooting 
 
 If your workflow execution is not resumed as expected with
-one or more tasks re-executed each time, these may 
+one or more tasks being unexpectedly re-executed each time, these may 
 be the most likely causes: 
 
 * *Input file changed*: Make sure that there's no change 
 in your input file(s). Don't forget the task unique hash is computed 
-taking into account the complete file path, the last modified 
-timestamp and the file size. If any of these information changes, 
+by taking into account the complete file path, the last modified 
+timestamp and the file size. If any of this information has changed, 
 the workflow will be re-executed even if the input content is the same. 
 
 * *A process modifies an input*: A process should never alter input 
@@ -266,21 +266,31 @@ the channel), a process can declare as input two or more
 channels each of which is the output of a *different* process, the 
 overall input ordering is not consistent over different executions. 
 +
-In practical term, consider the following snippet:
+In practical terms, consider the following snippet:
 +
 [source,nextflow,linenums]
 ----
 process foo {
-  input: set val(pair), file(reads) from ...
-  output: set val(pair), file('*.bam') into bam_ch
+  input:
+  tuple val(pair), file(reads)
+  
+  output:
+  tuple val(pair), file('*.bam'), emit: bam_ch
+  
+  script:
   """
   your_command --here
   """
 }
 
 process bar {
-  input: set val(pair), file(reads) from ...
-  output: set val(pair), file('*.bai') into bai_ch
+  input:
+  tuple val(pair), file(reads)
+  
+  output:
+  tuple val(pair), file('*.bai'), emit: bai_ch
+  
+  script:
   """
   other_command --here
   """
@@ -288,21 +298,23 @@ process bar {
 
 process gather {
   input:
-  set val(pair), file(bam) from bam_ch 
-  set val(pair), file(bai) from bai_ch
+  tuple val(pair), file(bam)
+  tuple val(pair), file(bai)
+  
+  script:
   """
   merge_command $bam $bai
   """
 }
 ----
 +
-The inputs declared at line 19,20 can be delivered in any 
+The inputs declared at line 19 and 20 can be delivered in any
 order because the execution order of the process `foo` and 
-`bar` is not deterministic due to the parallel executions of them. 
+`bar` are not deterministic due to their parallel execution. 
 +
 Therefore the input of the third process needs to be synchronized 
 using the https://www.nextflow.io/docs/latest/operator.html#join[join]
-operator or a similar approach. The third process should be written as: 
+operator, or a similar approach. The third process should be written as: 
 +
 [source,nextflow,linenums]
 ----
@@ -310,7 +322,9 @@ operator or a similar approach. The third process should be written as:
 
 process gather {
   input:
-  set val(pair), file(bam), file(bai) from bam_ch.join(bai_ch) 
+  tuple val(pair), file(bam), file(bai)
+  
+  script:
   """
   merge_command $bam $bai
   """
