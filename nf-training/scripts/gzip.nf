@@ -1,20 +1,24 @@
 params.compress = 'gzip'
-params.file2compress = "$baseDir/data/ggal/transcriptome.fa"
+params.file2compress = "$projectDir/data/ggal/transcriptome.fa"
 
 process foo {
 
   input:
-  path file from params.file2compress
+  path file
 
   script:
   if( params.compress == 'gzip' )
     """
-    gzip -c $file > ${file}.fa.gz
+    gzip -c $file > ${file}.gz
     """
   else if( params.compress == 'bzip2' )
     """
-    bzip2 -c $file > ${file}.fa.bz2
+    bzip2 -c $file > ${file}.bz2
     """
   else
     throw new IllegalArgumentException("Unknown aligner $params.compress")
+}   
+
+workflow{
+  foo(params.file2compress)
 }

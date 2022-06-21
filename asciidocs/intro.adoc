@@ -13,9 +13,9 @@ Nextflow extends this approach, adding the ability to define complex program int
 high-level parallel computational environment based on the dataflow programming model. Nextflow's
 core features are:
 
-* Workflow portability & reproducibility
+* Workflow portability and reproducibility
 * Scalability of parallelization and deployment
-* Integration of existing tools, systems & industry standards
+* Integration of existing tools, systems and industry standards
 
 === Processes and Channels
 
@@ -26,7 +26,7 @@ Processes are executed independently and are isolated from each other, i.e. they
 (writable) state. The only way they can communicate is via asynchronous first-in, first-out (FIFO) queues, called
 `channels` in Nextflow.
 
-Any `process` can define one or more `channels` as `input` and `output`. The interaction between these processes,
+Any `process` can define one or more `channels` as an `input` and `output`. The interaction between these processes,
 and ultimately the pipeline execution flow itself, is implicitly defined by these `input` and `output` declarations.
 
 image::channel-process.png[]
@@ -38,10 +38,10 @@ how that `script` is actually run in the target platform.
 
 If not otherwise specified, processes are executed on the local computer. The local executor
 is very useful for pipeline development and testing purposes, but for real world computational
-pipelines, an HPC or cloud platform is often required.
+pipelines, an High Performance Computing (HPC) or cloud platform is often required.
 
 In other words, Nextflow provides an abstraction between the pipeline's functional logic and
-the underlying execution system (or runtime). Thus it is possible to write a pipeline once and to seamlessly
+the underlying execution system (or runtime). Thus, it is possible to write a pipeline once and to seamlessly
 run it on your computer, a cluster, or the cloud, without modifying it, by simply defining
 the target execution platform in the configuration file.
 
@@ -49,17 +49,17 @@ image::execution_abstraction.png[]
 
 === Scripting language
 
-Nextflow implements a declarative domain specific language (DSL) that simplifies the writing 
+Nextflow implements a declarative DSL that simplifies the writing 
 of complex data analysis workflows as an extension of a general purpose programming language.
 
 This approach makes Nextflow very flexible, because it allows in the same
-computing environment the benefits of a concise DSL allowing the handling of
+computing environment the benefits of a concise DSL allowing for the handling of
 recurrent use cases with ease *and* the flexibility and power of a general purpose
 programming language to handle corner cases, which may be difficult to implement using
 a purely declarative approach.
 
-In practical terms, Nextflow scripting is an extension of the https://groovy-lang.org/[Groovy programming language],
-which in turn is a super-set of the Java programming language. Groovy can be considered as Python for Java in that
+In practical terms, Nextflow scripting is an extension of the https://groovy-lang.org/[Groovy programming language]
+that, in turn, is a super-set of the Java programming language. Groovy can be considered as Python for Java in that
 it simplifies the writing of code and is more approachable.
 
 == Your first script
@@ -77,57 +77,62 @@ In this toy example, the script takes an input string (a parameter called `param
 params.greeting  = 'Hello world!' <2>
 greeting_ch = Channel.from(params.greeting) <3>
 
-process splitLetters { <4>
-
+process SPLITLETTERS { <4>
     input: <5>
-    val x from greeting_ch <6>
+    val x <6>
 
     output: <7>
-    file 'chunk_*' into letters_ch <8>
+    file 'chunk_*' <8>
 
     """ <9>
     printf '$x' | split -b 6 - chunk_  <10>
     """ <11>
 } <12>
 
-process convertToUpper { <13>
-
+process CONVERTTOUPPER { <13>
     input:  <14>
-    file y from letters_ch.flatten() <15>
+    file y <15>
 
     output: <16>
-    stdout into result_ch <17>
+    stdout <17>
 
     """ <18>
     cat $y | tr '[a-z]' '[A-Z]'  <19>
-    """ //<20>
-} //<21>
+    """ <20>
+} <21>
 
-result_ch.view{ it }  //<22>
+workflow{ <22>
+    letters_ch = SPLITLETTERS(greeting_ch) <23>
+    results_ch = CONVERTTOUPPER(letters_ch.flatten()) <24>
+    results_ch.view{ it } <25>
+} <26>
 ----
-<1> The code begins with a shebang which declares Nextflow as the interepreter.
-<2> Declares a parameter `greeting` that is initialized with the value 'Hello world!'.
-<3> Initalises a `channel` labelled `greeting_ch`, which contains the value from `params.greeting`. Channels are the necessary input type for processes in Nextflow.
-<4> Begins the first process defined as `splitLetters`.
-<5> Input declaration for the `splitLetters` process. Inputs can be values: `val`, files: `file`, paths `path` or other qualifiers (https://www.nextflow.io/docs/latest/process.html#inputs[See here])
-<6> Tells the `process` to expect an input value (`val`) `from` the channel `greeting_ch`, that we assign to the variable 'x'. 
-<7> Output declaration for the `splitLetters` process.
-<8> Tells the process to expect output file/s (`file`) containing 'chunk_*' as output from the script and send the files to the `channel` `letters_ch`. 
-<9> Triple quote marks intiate the code block to execute in this `process`.
-<10> Code to execute, printing the `input` value x (called using the dollar [$] symbol prefix), and splitting the string into chunks of 6 characters long ("Hello " and "world!") and saving to files: chunk_aa and chunk_ab.
-<11> Triple quote marks the end of the code block.
-<12> End of first process block.
-<13> Begin second process defined as `convertToUpper`.
-<14> Input declaration for the `convertToUpper` `process`.
-<15> Tells the `process` to expect `input` file/s (`file`; e.g. chunk_aa and chunk_ab) from the `letter_ch`, that we assign to the variable 'y'. 
-<16> Output declaration for the `convertToUpper` process.
-<17> Tells the process to expect output as standard output (stdout) and direct this `into` the `result_ch` channel.
-<18> Triple quote marks intiate the code block to execute in this `process`.
-<19> Script to read files (cat) using the '$y' input variable, then pipe to uppercase conversion, outputting to standard output.
-<20> Triple quote marks the end of the code block.
-<21> End of first `process` block.
-<22> The final output (in the `result_ch`) is printed to screen using the `view` operator (appended onto the channel name). 
-
+<1> The code begins with a shebang which declares Nextflow as the interepreter
+<2> Declares a parameter `greeting` that is initialized with the value 'Hello world!'
+<3> Initializes a `channel` labelled `greeting_ch`, which contains the value from `params.greeting`. Channels are the necessary input type for processes in Nextflow
+<4> Begins the first process defined as `SPLITLETTERS`
+<5> Input declaration for the `SPLITLETTERS` process. Inputs can be values: `val`, files: `file`, paths `path` or other qualifiers (https://www.nextflow.io/docs/latest/process.html#inputs[see here])
+<6> Tells the `process` to expect an input value (`val`), that we assign to the variable 'x' 
+<7> Output declaration for the `SPLITLETTERS` process
+<8> Tells the process to expect an output file(s) (`file`) containing 'chunk_*' as output from the script and send the output as a channel 
+<9> Three double quote marks initiate the code block to execute in this `process`
+<10> Code to execute, printing the `input` value x (called using the dollar [$] symbol prefix), and splitting the string into chunks of 6 characters long ("Hello " and "world!") and saving to files: chunk_aa and chunk_ab
+<11> Three double quote marks end the code block
+<12> End of first process block
+<13> Begin second process defined as `CONVERTTOUPPER`
+<14> Input declaration for the `CONVERTTOUPPER` `process`
+<15> Tells the `process` to expect an `input` file(s) (`file`; e.g. chunk_aa and chunk_ab), that we assign to the variable 'y'
+<16> Output declaration for the `CONVERTTOUPPER` process
+<17> Tells the process to expect output as standard output (stdout) and direct this output as a channel
+<18> Three double quote marks initiate the code block to execute in this `process`
+<19> Script to read files (cat) using the '$y' input variable, then pipe to uppercase conversion, outputting to standard output
+<20> Three double quote marks end the code block
+<21> End of first `process` block
+<22> Start of the workflow scope, where each process can be called. 
+<23> Execute the `process` `SPLITLETTERS` on the `greeting_ch` (aka greeting channel), and store the output in the channel `letters_ch`
+<24> Execute the `process` `CONVERTTOUPPER` on the letters channel `letters_ch`, which is flattened using the operator `.flatten()`, which transforms the input channel in such a way that every item is a separate element. We store the output in the channel `results_ch`
+<25> The final output (in the `results_ch`) is printed to screen using the `view` operator (appended onto the channel name).
+<26> End of the workflow scope
 
 TIP: The use of the operator `.flatten()` here is to split the two files into two separate items to be put through the next process (else they would treat them as a single element).
 
@@ -149,46 +154,43 @@ The output will look similar to the text shown below:
 
 [source,cmd,linenums]
 ----
-N E X T F L O W  ~  version 21.04.3
-Launching `hello.nf` [confident_kowalevski] - revision: a3f5a9e46a
+N E X T F L O W  ~  version 22.04.2
+Launching `hello.nf` [tiny_venter] DSL2 - revision: 6879fb9372
 executor >  local (3)
-[0d/59d203] process > splitLetters (1)   [100%] 1 of 1 ✔
-[9f/1dd42a] process > convertToUpper (2) [100%] 2 of 2 ✔
+[26/004297] process > SPLITLETTERS (1)   [100%] 1 of 1 ✔
+[8a/537930] process > CONVERTTOUPPER (1) [100%] 2 of 2 ✔
 HELLO 
 WORLD!
 ----
 
 Where the standard output shows (line by line): 
 
-* *1*: The Nextflow version executed.
+* *1*: The Nextflow version executed
 
-* *2*: The script and version names.
+* *2*: The script and version names
 
-* *3*: The executor used (in the above case: local).
+* *3*: The executor used (in the above case: local)
 
-* *4*: The first `process` executed once (1). Starting with a unique hexadecimal (see TIP below) and ending with percent and job complete information. 
+* *4*: The first `process` is executed once (1) and starts with a unique hexadecimal (see TIP below) and ending with the percentage and job completion information 
 
-* *5*: The second process` executed twice (2).
+* *5*: The second process is executed twice (2)
 
-* *6-7*: Followed by the printed result string from stdout.
+* *6-7*: The result string from stdout is printed
 
-TIP: The hexadecimal numbers, like `0d/59d203`, identify the unique process
+TIP: The hexadecimal numbers, like `8a/537930`, identify the unique process
 execution. These numbers are also the prefix of the directories where each
 process is executed. You can inspect the files produced by changing to the directory
-`$PWD/work` and using these numbers to find the process-specific
+`$PWD/work` and use these numbers to find the process-specific
 execution path.
 
 IMPORTANT: The second process runs twice, executing in two different work directories 
 for each input file. Therefore, in the previous example the work directory [9f/1dd42a] 
 represents just one of the two directories that were processed. To print all the 
-relevent paths to screen, use the `-ansi-log` flag (e.g. `nextflow run hello.nf -ansi-log false`).
+relevant paths to the screen, use the `-ansi-log` flag (e.g. `nextflow run hello.nf -ansi-log false`).
 
-It's worth noting that the process `convertToUpper` is executed in
-parallel, so there's no guarantee that the instance processing the first
-split (the chunk 'Hello ') will be executed before the one
-processing the second split (the chunk 'world!').
+It's worth noting that the process `CONVERTTOUPPER` is executed in parallel, so there's no guarantee that the instance processing the first split (the chunk 'Hello ') will be executed before the one processing the second split (the chunk 'world!').
 
-Thus, it is perfectly possible that you will get the final result
+Thus, it is perfectly possible that your final result will be
 printed out in a different order:
 
 [source,cmd]
@@ -202,24 +204,23 @@ HELLO
 Nextflow keeps track of all the processes executed in your pipeline. If
 you modify some parts of your script, only the processes that are
 actually changed will be re-executed. The execution of the processes
-that are not changed will be skipped and the cached result used instead.
+that are not changed will be skipped and the cached result will be used instead.
 
 This helps when testing or modifying part of your pipeline without
 having to re-execute it from scratch.
 
-For the sake of this tutorial, modify the `convertToUpper` process in
+For the sake of this tutorial, modify the `CONVERTTOUPPER` process in
 the previous example, replacing the process script with the string
 `rev $y`, so that the process looks like this:
 
 [source,nextflow,linenums]
 ----
-process convertToUpper {
-
+process CONVERTTOUPPER {
     input:
-    file y from letters_ch.flatten()
+    file y
 
     output:
-    stdout into result_ch
+    stdout
 
     """
     rev $y
@@ -239,31 +240,31 @@ It will print output similar to this:
 
 [source,cmd]
 ----
-N E X T F L O W  ~  version 21.04.3
-Launching `hello.nf` [admiring_venter] - revision: aed50861e0
+N E X T F L O W  ~  version 22.04.2
+Launching `hello.nf` [nostalgic_franklin] DSL2 - revision: 0b20bd3365
 executor >  local (2)
-[74/d48321] process > splitLetters (1)   [100%] 1 of 1, cached: 1 ✔
-[59/136e00] process > convertToUpper (1) [100%] 2 of 2 ✔
+[bd/6aa32b] process > SPLITLETTERS (1)   [100%] 1 of 1, cached: 1 ✔
+[a0/67846c] process > CONVERTTOUPPER (1) [100%] 2 of 2 ✔
 !dlrow
  olleH
 ----
 
-You will see that the execution of the process `splitLetters` is
+You will see that the execution of the process `SPLITLETTERS` is
 actually skipped (the process ID is the same), and its results are
 retrieved from the cache. The second process is executed as expected,
 printing the reversed strings.
 
 TIP: The pipeline results are cached by default in the directory `$PWD/work`.
-Depending on your script, this folder can take of lot of disk space.
+Depending on your script, this folder can take a lot of disk space.
 If you are sure you won't resume your pipeline execution, clean this folder periodically.
 
 
 == Pipeline parameters
 
-Pipeline parameters are simply declared by prepending to a variable name
-the prefix `params`, separated by a dot character. Their value can be
+Pipeline parameters are simply declared by prepending the prefix `params` to a
+variable name, separated by a dot character. Their value can be
 specified on the command line by prefixing the parameter name with a
-double dash character, i.e. `--paramName`
+double dash character, i.e., `--paramName`.
 
 Now, let's try to execute the previous example specifying a different input string parameter, as shown below:
 
@@ -277,21 +278,19 @@ of the parameter. The output will look like this:
 
 [source,cmd]
 ----
-N E X T F L O W  ~  version 21.10.0
-Launching `hello.nf` [angry_mcclintock] - revision: 073d8111fc
+N E X T F L O W  ~  version 22.04.2
+Launching `hello.nf` [adoring_heyrovsky] DSL2 - revision: 0b20bd3365
 executor >  local (4)
-[6c/e6edf5] process > splitLetters (1)   [100%] 1 of 1 ✔
-[bc/6845ce] process > convertToUpper (2) [100%] 3 of 3 ✔
+[e9/8ebd19] process > SPLITLETTERS (1)   [100%] 1 of 1 ✔
+[18/bc88cb] process > CONVERTTOUPPER (3) [100%] 3 of 3 ✔
 uojnoB
-
-!edno
-
 m el r
+!edno
 ----
 
 === In DAG-like format
 
-To better understand how Nextflow is dealing with the data in this pipeline, we share below a DAG-like figure to visualise all the `inputs`, `outputs`, `channels` and `processes`.
+To better understand how Nextflow is dealing with the data in this pipeline, below is a DAG-like figure to visualise all the `inputs`, `outputs`, `channels` and `processes`.
 
 .Check this out, by clicking here:
 [%collapsible]
