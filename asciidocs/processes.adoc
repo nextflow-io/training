@@ -700,6 +700,7 @@ Values are frequently defined in the _input_ and/or _output_ declaration blocks,
 methods = ['prot','dna', 'rna']
 
 process FOO {
+
   input:
   val x
 
