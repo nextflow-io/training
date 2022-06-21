@@ -84,6 +84,12 @@ process EXAMPLE {
   """
   
 }
+
+workflow {
+
+  EXAMPLE()
+
+}
 ----
 
 By default, the `process` command is interpreted as a *Bash* script. However, any other scripting language can be used by simply starting the script with the corresponding https://en.wikipedia.org/wiki/Shebang_(Unix)[Shebang] declaration. For example:
@@ -101,6 +107,12 @@ process PYSTUFF {
   print ("%s - %s" % (x,y))
   """
   
+}
+
+workflow {
+
+  PYSTUFF()
+
 }
 ----
 
@@ -122,6 +134,12 @@ process FOO {
   """
   
 }
+
+workflow {
+
+  FOO()
+
+}
 ----
 
 NOTE: A process script can contain any string format supported by the Groovy programming language.
@@ -140,6 +158,12 @@ process FOO {
   """
   
 }
+
+workflow {
+
+  FOO()
+
+}
 ----
 
 It can be tricky to write a script uses many Bash variables. One possible alternative
@@ -154,6 +178,12 @@ process BAR {
   echo $PATH | tr : '\\n'
   """
   
+}
+
+workflow {
+
+  BAR()
+
 }
 ----
 
@@ -174,6 +204,12 @@ process BAZ {
   echo $X !{params.data}
   """
   
+}
+
+workflow {
+
+  BAZ()
+
 }
 ----
 
@@ -598,6 +634,7 @@ process COMMAND {
 }
 
 workflow {
+
   concat_ch = COMMAND(read_ch, params.transcriptome_file)
   concat_ch.view()
   
@@ -674,7 +711,6 @@ process COMMAND {
   """
   
 }
-
 
 workflow {
 
@@ -761,7 +797,6 @@ In the above example the process `RANDOMNUM` creates a file named `result.txt` c
 Since a file parameter using the same name is declared in the output block, the
 file is sent over the `receiver_ch` channel when the task is complete. A downstream `process` declaring the same channel as _input_ will
 be able to receive it.
-
 
 === Multiple output files
 
@@ -853,7 +888,6 @@ process ALIGN {
   
 }
 
-
 workflow {
 
   genomes = ALIGN(species_ch, sequences )
@@ -890,7 +924,6 @@ process FOO {
   """
   
 }
-
 
 workflow {
 
@@ -1023,7 +1056,7 @@ The complete list of directives is available https://www.nextflow.io/docs/latest
 |Allows you to associate each process execution with a custom label to make it easier to identify them in the log file or the trace execution report.
 |===
 
-== Organise outputs
+== Organize outputs
 
 === PublishDir directive
 
