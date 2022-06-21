@@ -777,7 +777,7 @@ process SPLITLETTERS {
 
 workflow {
 
-    letters = splitLetters()  
+    letters = SPLITLETTERS()  
     letters
         .flatMap()
         .view { "File: ${it.name} => ${it.text}" }
