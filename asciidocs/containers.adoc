@@ -124,8 +124,8 @@ Add the Salmon package to the Docker image by adding the following snippet to th
 [source,docker,linenums,options="nowrap"]
 ----
 RUN curl -sSL https://github.com/COMBINE-lab/salmon/releases/download/v1.5.2/salmon-1.5.2_linux_x86_64.tar.gz | tar xz \
- && mv /salmon-*/bin/* /usr/bin/ \
- && mv /salmon-*/lib/* /usr/lib/
+&& mv /salmon-*/bin/* /usr/bin/ \
+&& mv /salmon-*/lib/* /usr/lib/
 ----
 
 Save the file and build the image again with the same command as before:
@@ -187,7 +187,7 @@ docker run --volume $PWD:$PWD --workdir $PWD my-image \
 
 Or set a folder you want to mount as an environmental variable, called `DATA`:
 
-```
+```bash
 DATA=/workspace/nf-training-public/nf-training/data
 docker run --volume $DATA:$DATA --workdir $PWD my-image \
   salmon index -t $PWD/data/ggal/transcriptome.fa -i transcript-index
@@ -288,8 +288,8 @@ AUTHOR <your name>
 
 apt-get update && apt-get install -y locales-all curl cowsay
 curl -sSL https://github.com/COMBINE-lab/salmon/releases/download/v1.0.0/salmon-1.0.0_linux_x86_64.tar.gz | tar xz \
- && mv /salmon-*/bin/* /usr/bin/ \
- && mv /salmon-*/lib/* /usr/lib/
+&& mv /salmon-*/bin/* /usr/bin/ \
+&& mv /salmon-*/lib/* /usr/lib/
 ----
 
 Once you have saved the `Singularity` file. You can create the image with these commands:
@@ -437,11 +437,11 @@ FROM mambaorg/micromamba
 MAINTAINER Your name <your_email>
 
 RUN \
-   micromamba install -y -n base -c defaults -c bioconda -c conda-forge \
-      salmon=1.5.1 \
-      fastqc=0.11.9 \
-      multiqc=1.10.1 \
-   && micromamba clean -a -y
+  micromamba install -y -n base -c defaults -c bioconda -c conda-forge \
+    salmon=1.5.1 \
+    fastqc=0.11.9 \
+    multiqc=1.10.1 \
+  && micromamba clean -a -y
 ```
 
 The above `Dockerfile` takes the parent image 'mambaorg/micromamba', then installs a `conda` environment using `micromamba`, and installs `salmon`, `fastqc` and `multiqc`. 
