@@ -15,7 +15,7 @@ Components defined in the module script can be imported into other Nextflow scri
 Using the `hello.nf` example, we can achieve this by:
 
 - Creating a file called `modules.nf` in the top-level folder containing the main Nextflow script.
-- Cutting and pasting the two process definitions for `splitLetters` and `convertToUpper` into `modules.nf`.
+- Cutting and pasting the two process definitions for `SPLITLETTERS` and `CONVERTTOUPPER` into `modules.nf`.
 - Importing the processes from `modules.nf` within the main script anywhere above the `workflow` definition:
 
 [source,nextflow,linenums]
