@@ -139,6 +139,22 @@ workflow {
 
 WARNING: In the above example, we have reverted to keeping the `process` definitions within the `hello.nf` script. However, this would work the same way if the emit defintion was in a `modules.nf` file.
 
+=== Using piped outputs
+
+Another way to deal with outputs in the workflow scope is to use pipes `|`. 
+
+[discrete]
+=== Exercise
+
+Try changing the workflow script to the snippet below:
+
+[source,nextflow,linenums]
+----
+workflow {
+    Channel.from(params.greeting) | SPLITLETTERS | flatten() | CONVERTTOUPPER | view
+}
+----
+
 === Multiple imports
 
 If a Nextflow module script contains multiple `process` definitions they can also be imported using a single `include` statement as shown in the example below:
