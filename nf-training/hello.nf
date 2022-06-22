@@ -4,7 +4,6 @@ params.greeting = 'Hello world!'
 greeting_ch = Channel.from(params.greeting)
 
 process SPLITLETTERS {
-
     input:
     val x
 
@@ -17,7 +16,6 @@ process SPLITLETTERS {
 }
 
 process CONVERTTOUPPER {
-
     input:
     file y
 

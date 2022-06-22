@@ -20,8 +20,8 @@ Using the `hello.nf` example, we can achieve this by:
 
 [source,nextflow,linenums]
 ----
-include { splitLetters   } from './modules.nf'
-include { convertToUpper } from './modules.nf'
+include { SPLITLETTERS   } from './modules.nf'
+include { CONVERTTOUPPER } from './modules.nf'
 ----
 
 NOTE: In general, you would use relative paths to define the location of the module scripts using the `./` prefix.
@@ -42,12 +42,12 @@ The `hello.nf` script should look like this:
 params.greeting  = 'Hello world!'
 greeting_ch = Channel.from(params.greeting)
 
-include { splitLetters   } from './modules.nf'
-include { convertToUpper } from './modules.nf'
+include { SPLITLETTERS   } from './modules.nf'
+include { CONVERTTOUPPER } from './modules.nf'
 
-workflow{
-    letters_ch = splitLetters(greeting_ch)
-    results_ch = convertToUpper(letters_ch.flatten())
+workflow {
+    letters_ch = SPLITLETTERS(greeting_ch)
+    results_ch = CONVERTTOUPPER(letters_ch.flatten())
     results_ch.view{ it }
 }
 ----
@@ -55,8 +55,7 @@ workflow{
 You should have the following in the file `.modules.nf`:
 [source,nextflow,linenums]
 ----
-process splitLetters {
-
+process SPLITLETTERS {
     input:
     val x
 
@@ -68,8 +67,7 @@ process splitLetters {
     """
 }
 
-process convertToUpper {
-
+process CONVERTTOUPPER {
     input:
     file y
 
@@ -89,8 +87,8 @@ In the example above, we define the channel names to specify the input to the ne
 
 [source,nextflow,linenums]
 ----
-    letters_ch = splitLetters(greeting_ch)
-    results_ch = convertToUpper(letters_ch.out.flatten())
+    letters_ch = SPLITLETTERS(greeting_ch)
+    results_ch = CONVERTTOUPPER(letters_ch.out.flatten())
 ----
 
 === Specifying outputs
@@ -108,8 +106,7 @@ For example, check the `emit` statement on the `convertToUpper` process in the f
 params.greeting = 'Hello world!'
 greeting_ch = Channel.from(params.greeting)
 
-process splitLetters {
-
+process SPLITLETTERS {
     input:
     val x
 
@@ -121,8 +118,7 @@ process splitLetters {
     """
 }
 
-process convertToUpper {
-
+process CONVERTTOUPPER {
     input:
     file y
 
@@ -135,9 +131,9 @@ process convertToUpper {
 }
 
 workflow {
-    letters_ch = splitLetters(greeting_ch)
-    results_ch = convertToUpper(letters_ch.flatten())
-    convertToUpper.out.upper.view{ it }
+    letters_ch = SPLITLETTERS(greeting_ch)
+    results_ch = CONVERTTOUPPER(letters_ch.flatten())
+    CONVERTTOUPPER.out.upper.view{ it }
 }
 ----
 
@@ -162,22 +158,22 @@ When including a module component it is possible to specify a name alias using t
 
 params.greeting = 'Hello world!'
 
-include { splitLetters as splitLetters_one } from './modules.nf'
-include { splitLetters as splitLetters_two } from './modules.nf'
+include { SPLITLETTERS as SPLITLETTERS_one } from './modules.nf'
+include { SPLITLETTERS as SPLITLETTERS_two } from './modules.nf'
 
-include { convertToUpper as convertToUpper_one } from './modules.nf'
-include { convertToUpper as convertToUpper_two } from './modules.nf'
+include { CONVERTTOUPPER as CONVERTTOUPPER_one } from './modules.nf'
+include { CONVERTTOUPPER as CONVERTTOUPPER_two } from './modules.nf'
 
 workflow my_pipeline_one {
     take:
     greeting
 
     main:
-    splitLetters_one(greeting)
-    convertToUpper_one(splitLetters_one.out.flatten())
+    SPLITLETTERS_one(greeting)
+    CONVERTTOUPPER_one(SPLITLETTERS_one.out.flatten())
 
     emit:
-    my_data = convertToUpper_one.out.upper
+    my_data = CONVERTTOUPPER_one.out.upper
 }
 
 workflow my_pipeline_two {
@@ -185,11 +181,11 @@ workflow my_pipeline_two {
     greeting
 
     main:
-    splitLetters_two(greeting)
-    convertToUpper_two(splitLetters_two.out.flatten())
+    SPLITLETTERS_two(greeting)
+    CONVERTTOUPPER_two(SPLITLETTERS_two.out.flatten())
 
     emit:
-    my_data = convertToUpper_two.out.upper
+    my_data = CONVERTTOUPPER_two.out.upper
 }
 
 workflow {
@@ -275,10 +271,18 @@ The `workflow` scope allows the definition of components that define the invocat
 
 [source,nextflow,linenums]
 ----
+#!/usr/bin/env nextflow
+
+params.greeting = 'Hello world!'
+
+include { SPLITLETTERS } from './modules.nf'
+include { CONVERTTOUPPER } from './modules.nf'
+
+
 workflow my_pipeline {
-    splitLetters(greeting_ch)
-    convertToUpper(splitLetters.out.flatten())
-    convertToUpper.out.upper.view{ it }
+    SPLITLETTERS(params.greeting)
+    CONVERTTOUPPER(SPLITLETTERS.out.flatten())
+    CONVERTTOUPPER.out.upper.view{ it }
 }
 
 workflow {
@@ -295,9 +299,9 @@ A workflow component can access any variable or parameter defined in the outer s
 [source,nextflow,linenums]
 ----
 workflow my_pipeline {
-    splitLetters(Channel.from(params.greeting))
-    convertToUpper(splitLetters.out.flatten())
-    convertToUpper.out.upper.view{ it }
+    SPLITLETTERS(Channel.from(params.greeting))
+    CONVERTTOUPPER(SPLITLETTERS.out.flatten())
+    CONVERTTOUPPER.out.upper.view{ it }
 }
 
 workflow {
@@ -316,9 +320,9 @@ workflow my_pipeline {
     greeting
 
     main:
-    splitLetters(greeting)
-    convertToUpper(splitLetters.out.flatten())
-    convertToUpper.out.upper.view{ it }
+    SPLITLETTERS(greeting)
+    CONVERTTOUPPER(SPLITLETTERS.out.flatten())
+    CONVERTTOUPPER.out.upper.view{ it }
 }
 ----
 
@@ -344,11 +348,11 @@ workflow my_pipeline {
     greeting
 
     main:
-    splitLetters(greeting)
-    convertToUpper(splitLetters.out.flatten())
+    SPLITLETTERS(greeting)
+    CONVERTTOUPPER(SPLITLETTERS.out.flatten())
 
     emit:
-    convertToUpper.out.upper
+    CONVERTTOUPPER.out.upper
 }
 
 workflow {
@@ -368,11 +372,11 @@ workflow my_pipeline {
     greeting
 
     main:
-    splitLetters(greeting)
-    convertToUpper(splitLetters.out.flatten())
+    SPLITLETTERS(greeting)
+    CONVERTTOUPPER(SPLITLETTERS.out.flatten())
 
     emit:
-    my_data = convertToUpper.out.upper
+    my_data = CONVERTTOUPPER.out.upper
 }
 
 workflow {
