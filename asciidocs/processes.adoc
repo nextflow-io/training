@@ -862,7 +862,7 @@ Modify the script of the previous exercise so that the _bam_ file is named as th
 ----
 reads_ch = Channel.fromFilePairs('data/ggal/*_{1,2}.fq')
 
-process foo {
+process FOO {
 
   input:
     tuple val(sample_id), file(sample_files)

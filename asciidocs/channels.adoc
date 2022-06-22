@@ -380,8 +380,8 @@ Channel
   .fromPath('data/meta/random.txt')
   .splitText( by: 2 )
   .subscribe {
-      print it;
-      print "--- end of the chunk ---\n"
+    print it;
+    print "--- end of the chunk ---\n"
   }
 ----
 
