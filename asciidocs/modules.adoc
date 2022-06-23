@@ -247,6 +247,8 @@ A workflow component can access any variable or parameter defined in the outer s
 
 [source,nextflow,linenums]
 ----
+#!/usr/bin/env nextflow
+
 params.greeting = 'Hello world!'
 
 include { SPLITLETTERS } from './modules.nf'
@@ -269,6 +271,8 @@ A `workflow` component can declare one or more input channels using the `take` s
 
 [source,nextflow,linenums]
 ----
+#!/usr/bin/env nextflow
+
 params.greeting = 'Hello world!'
 
 include { SPLITLETTERS } from './modules.nf'
