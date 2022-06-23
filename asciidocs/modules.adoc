@@ -101,7 +101,7 @@ include { SPLITLETTERS; CONVERTTOUPPER } from './modules.nf'
 === Module aliases
 
 When including a module component it is possible to specify a name alias using the `as` declaration. 
-This allows the inclusion and the invocation of the same component multiple times using different names. For example:
+This allows the inclusion and the invocation of the same component multiple times using different names:
 
 [source,nextflow,linenums]
 ----
@@ -127,27 +127,90 @@ workflow {
 }
 ----
 
+[discrete]
+=== Exercise
+
+Save the previous snippet as hello.2.nf, and predict the output to screen.
+
+.Click here for the answer:
+[%collapsible]
+====
+The `hello.2.nf` output should look something like this:
+[source,nextflow,linenums]
+----
+N E X T F L O W  ~  version 22.04.3
+Launching `hello.2.nf` [goofy_goldstine] DSL2 - revision: 449cf82eaf
+executor >  local (6)
+[e1/5e6523] process > SPLITLETTERS_one (1)   [100%] 1 of 1 ✔
+[14/b77deb] process > CONVERTTOUPPER_one (1) [100%] 2 of 2 ✔
+[c0/115bd6] process > SPLITLETTERS_two (1)   [100%] 1 of 1 ✔
+[09/f9072d] process > CONVERTTOUPPER_two (2) [100%] 2 of 2 ✔
+WORLD!
+HELLO 
+WORLD!
+HELLO 
+----
+====
+
 NOTE: You can store each process in separate files within separate sub-folders or combined in one big file (both are valid). For your own projects, it can be helpful to see examples on public repos. e.g. Seqera RNA-Seq tutorial 
 https://github.com/seqeralabs/rnaseq-nf/tree/master/modules[here] or within nf-cores projects  https://github.com/nf-core/rnaseq/tree/master/modules/nf-core/modules[here].
 
 
 == Output definition
 
-In the previous example, we define the channel names to specify the input to the next process. 
-We can also explicitly define the output of one process to another using the `.out` attribute. 
-In this way, we can manipulate the output of a process, as shown below:
+Nextflow allows the use of alternative output definitions within workflows to simplify your code.
+
+In the previous basic example (`hello.nf`), we defined the channel names to specify the input to the next process. 
+
+e.g.
+[source,nextflow,linenums]
+----
+workflow  {
+    greeting_ch = Channel.from(params.greeting)
+    letters_ch = SPLITLETTERS(greeting_ch)
+    results_ch = CONVERTTOUPPER(letters_ch.flatten())
+    results_ch.view{ it }
+}
+----
+
+We can also explicitly define the output of one channel to another using the `.out` attribute. 
 
 [source,nextflow,linenums]
 ----
+workflow  {
+    greeting_ch = Channel.from(params.greeting)
     letters_ch = SPLITLETTERS(greeting_ch)
     results_ch = CONVERTTOUPPER(letters_ch.out.flatten())
+}
 ----
 
-This can then be used to define specific outputs. FOr example, if a process defines two or more output channels, each channel can be accessed by indexing the `.out` attribute, e.g., `.out[0]`, `.out[1]`, etc.
+Or remove the channel definitions completely from each line (as at each call a channel is implied):
 
-Additionally, the process `output` definition allows the use of the `emit` statement to define a named identifier that can be used to reference the channel in the external scope. 
+[source,nextflow,linenums]
+----
+workflow  {
+    greeting_ch = Channel.from(params.greeting)
+    SPLITLETTERS(greeting_ch)
+    CONVERTTOUPPER(SPLITLETTERS.out.flatten())
+    CONVERTTOUPPER.out.view()
+}
+----
 
-For example, check the `emit` statement on the `CONVERTTOUPPER` process in the following `./modules.nf` snippet:
+If a process defines two or more output channels, each channel can be accessed by indexing the `.out` attribute, e.g., `.out[0]`, `.out[1]`, etc. In our example we only have the `[0]`'th output:
+
+[source,nextflow,linenums]
+----
+workflow  {
+    greeting_ch = Channel.from(params.greeting)
+    SPLITLETTERS(greeting_ch)
+    CONVERTTOUPPER(SPLITLETTERS.out.flatten())
+    CONVERTTOUPPER.out[0].view()
+}
+----
+
+Alternatively, the process `output` definition allows the use of the `emit` statement to define a named identifier that can be used to reference the channel in the external scope. 
+
+For example, try adding the `emit` statement on the `convertToUpper` process in your `modules.nf` file:
 
 [source,nextflow,linenums]
 ----
@@ -176,21 +239,14 @@ process CONVERTTOUPPER {
 }
 ----
 
-And how it is used in the `hello.nf` script:
+Then change the workflow scope in `hello.nf` to call this specific named output (notice the added `.upper`):
 
 [source,nextflow,linenums]
 ----
-#!/usr/bin/env nextflow
-
-params.greeting = 'Hello world!'
-greeting_ch = Channel.from(params.greeting)
-
-include { SPLITLETTERS   } from './modules.nf'
-include { CONVERTTOUPPER } from './modules.nf'
-
 workflow {
-    letters_ch = SPLITLETTERS(greeting_ch)
-    results_ch = CONVERTTOUPPER(letters_ch.flatten())
+    greeting_ch = Channel.from(params.greeting)
+    SPLITLETTERS(greeting_ch)
+    CONVERTTOUPPER(SPLITLETTERS.out.flatten())
     CONVERTTOUPPER.out.upper.view{ it }
 }
 ----
@@ -214,7 +270,7 @@ workflow {
 Here we use a https://www.nextflow.io/docs/latest/dsl2.html#pipes[pipe] which passed the output as a channel to the next process.
 
 
-=== Workflow definition
+== Workflow definition
 
 The `workflow` scope allows the definition of components that define the invocation of one or more processes or operators:
 
@@ -229,7 +285,8 @@ include { CONVERTTOUPPER } from './modules.nf'
 
 
 workflow my_pipeline {
-    SPLITLETTERS(params.greeting)
+    greeting_ch = Channel.from(params.greeting)
+    SPLITLETTERS(greeting_ch)
     CONVERTTOUPPER(SPLITLETTERS.out.flatten())
     CONVERTTOUPPER.out.upper.view{ it }
 }
@@ -240,6 +297,8 @@ workflow {
 ----
 
 For example, the snippet above defines a `workflow` named `my_pipeline`, that can be invoked via another `workflow` definition.
+
+NOTE: Make sure that your modules.nf file is the one containing the `emit` on the `CONVETTOUPPER` process. Alternatively, you could remove the definition in `CONVERTTOUPPER.out.view{ it }`.
 
 === Workflow parameters
 
@@ -351,7 +410,7 @@ workflow {
 The result of the above snippet can then be accessed using `my_pipeline.out.my_data`.
 
 
-=== Named workflow calling
+=== Calling named workflows
 
 In a `main.nf` script we can have multiple workflows. In which case we may want to call a specific workflow when running the code.
 For this we use the entrypoint call `-entry <workflow_name>`.
