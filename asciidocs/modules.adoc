@@ -249,6 +249,9 @@ A workflow component can access any variable or parameter defined in the outer s
 ----
 params.greeting = 'Hello world!'
 
+include { SPLITLETTERS } from './modules.nf'
+include { CONVERTTOUPPER } from './modules.nf'
+
 workflow my_pipeline {
     SPLITLETTERS(Channel.from(params.greeting))
     CONVERTTOUPPER(SPLITLETTERS.out.flatten())
@@ -267,6 +270,9 @@ A `workflow` component can declare one or more input channels using the `take` s
 [source,nextflow,linenums]
 ----
 params.greeting = 'Hello world!'
+
+include { SPLITLETTERS } from './modules.nf'
+include { CONVERTTOUPPER } from './modules.nf'
 
 workflow my_pipeline {
     take:
