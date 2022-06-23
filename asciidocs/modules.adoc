@@ -56,10 +56,11 @@ workflow {
 }
 ----
 
-You should have the following in the file `.modules.nf`:
+You should have the following in the file `./modules.nf`:
 [source,nextflow,linenums]
 ----
 process SPLITLETTERS {
+    
     input:
     val x
 
@@ -72,6 +73,7 @@ process SPLITLETTERS {
 }
 
 process CONVERTTOUPPER {
+    
     input:
     file y
 
@@ -145,15 +147,10 @@ This can then be used to define specific outputs. FOr example, if a process defi
 
 Additionally, the process `output` definition allows the use of the `emit` statement to define a named identifier that can be used to reference the channel in the external scope. 
 
-For example, check the `emit` statement on the `convertToUpper` process in the following snippet:
+For example, check the `emit` statement on the `CONVERTTOUPPER` process in the following `./modules.nf` snippet:
 
 [source,nextflow,linenums]
 ----
-#!/usr/bin/env nextflow
-
-params.greeting = 'Hello world!'
-greeting_ch = Channel.from(params.greeting)
-
 process SPLITLETTERS {
     input:
     val x
@@ -177,6 +174,19 @@ process CONVERTTOUPPER {
     cat $y | tr '[a-z]' '[A-Z]'
     """
 }
+----
+
+And how it is used in the `hello.nf` script:
+
+[source,nextflow,linenums]
+----
+#!/usr/bin/env nextflow
+
+params.greeting = 'Hello world!'
+greeting_ch = Channel.from(params.greeting)
+
+include { SPLITLETTERS   } from './modules.nf'
+include { CONVERTTOUPPER } from './modules.nf'
 
 workflow {
     letters_ch = SPLITLETTERS(greeting_ch)
@@ -184,8 +194,6 @@ workflow {
     CONVERTTOUPPER.out.upper.view{ it }
 }
 ----
-
-WARNING: In the above example, we have reverted to keeping the `process` definitions within the `hello.nf` script. However, this would work the same way if the emit defintion was in a `modules.nf` file.
 
 === Using piped outputs
 
@@ -239,7 +247,12 @@ A workflow component can access any variable or parameter defined in the outer s
 
 [source,nextflow,linenums]
 ----
+#!/usr/bin/env nextflow
+
 params.greeting = 'Hello world!'
+
+include { SPLITLETTERS } from './modules.nf'
+include { CONVERTTOUPPER } from './modules.nf'
 
 workflow my_pipeline {
     SPLITLETTERS(Channel.from(params.greeting))
@@ -258,7 +271,12 @@ A `workflow` component can declare one or more input channels using the `take` s
 
 [source,nextflow,linenums]
 ----
+#!/usr/bin/env nextflow
+
 params.greeting = 'Hello world!'
+
+include { SPLITLETTERS } from './modules.nf'
+include { CONVERTTOUPPER } from './modules.nf'
 
 workflow my_pipeline {
     take:
@@ -386,7 +404,7 @@ A module script can define one or more parameters or custom functions using the 
 params.foo = 'Hello'
 params.bar = 'world!'
 
-def sayHello() {
+def SAYHELLO() {
     println "$params.foo $params.bar"
 }
 ----
@@ -401,10 +419,10 @@ def sayHello() {
 params.foo = 'Hola'
 params.bar = 'mundo!'
 
-include { sayHello } from './modules.hello.nf'
+include { SAYHELLO } from './modules.nf'
 
 workflow {
-    sayHello()
+    SAYHELLO()
 }
 ----
 
@@ -428,10 +446,10 @@ The `addParams` option can be used to extend the module parameters without affec
 params.foo = 'Hola'
 params.bar = 'mundo!'
 
-include { sayHello } from './modules.nf' addParams(foo: 'Ciao')
+include { SAYHELLO } from './modules.nf' addParams(foo: 'Ciao')
 
 workflow {
-    sayHello()
+    SAYHELLO()
 }
 ----
 
