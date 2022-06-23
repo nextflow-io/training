@@ -60,6 +60,7 @@ You should have the following in the file `.modules.nf`:
 [source,nextflow,linenums]
 ----
 process SPLITLETTERS {
+    
     input:
     val x
 
@@ -72,6 +73,7 @@ process SPLITLETTERS {
 }
 
 process CONVERTTOUPPER {
+    
     input:
     file y
 
@@ -386,7 +388,7 @@ A module script can define one or more parameters or custom functions using the 
 params.foo = 'Hello'
 params.bar = 'world!'
 
-def sayHello() {
+def SAYHELLO() {
     println "$params.foo $params.bar"
 }
 ----
@@ -401,10 +403,10 @@ def sayHello() {
 params.foo = 'Hola'
 params.bar = 'mundo!'
 
-include { sayHello } from './modules.hello.nf'
+include { SAYHELLO } from './modules.hello.nf'
 
 workflow {
-    sayHello()
+    SAYHELLO()
 }
 ----
 
@@ -428,10 +430,10 @@ The `addParams` option can be used to extend the module parameters without affec
 params.foo = 'Hola'
 params.bar = 'mundo!'
 
-include { sayHello } from './modules.nf' addParams(foo: 'Ciao')
+include { SAYHELLO } from './modules.nf' addParams(foo: 'Ciao')
 
 workflow {
-    sayHello()
+    SAYHELLO()
 }
 ----
 
