@@ -147,7 +147,7 @@ This can then be used to define specific outputs. FOr example, if a process defi
 
 Additionally, the process `output` definition allows the use of the `emit` statement to define a named identifier that can be used to reference the channel in the external scope. 
 
-For example, check the `emit` statement on the `convertToUpper` process in the following snippet:
+For example, check the `emit` statement on the `CONVERTTOUPPER` process in the following snippet:
 
 [source,nextflow,linenums]
 ----
