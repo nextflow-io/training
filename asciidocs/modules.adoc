@@ -397,7 +397,7 @@ workflow {
 A module script can define one or more parameters or custom functions using the same syntax as with any other Nextflow script. Using the minimal examples below: 
 
 [discrete]
-==== Module script (`./modules.hello.nf`)
+==== Module script (`./modules.nf`)
 
 [source,nextflow,linenums]
 ----
@@ -419,7 +419,7 @@ def SAYHELLO() {
 params.foo = 'Hola'
 params.bar = 'mundo!'
 
-include { SAYHELLO } from './modules.hello.nf'
+include { SAYHELLO } from './modules.nf'
 
 workflow {
     SAYHELLO()
