@@ -93,7 +93,7 @@ If a Nextflow module script contains multiple `process` definitions they can als
 
 [source,nextflow,linenums]
 ----
-include { splitLetters; convertToUpper } from './modules.nf'
+include { SPLITLETTERS; CONVERTTOUPPER } from './modules.nf'
 ----
 
 === Module aliases
