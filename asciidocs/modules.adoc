@@ -124,7 +124,7 @@ workflow {
 }
 ----
 
-NOTE: Storing processes in separate files or in one big file, is completely up to you. It can be helpful to see examples on public repos. e.g. seqera RNA-Seq tutorial [here](https://github.com/seqeralabs/rnaseq-nf/tree/master/modules) or within nf-cores projects e.g.: [here](https://github.com/nf-core/rnaseq/tree/master/modules/nf-core/modules)
+NOTE: Storing processes in separate files or in one big file, is completely up to you. It can be helpful to see examples on public repos. e.g. seqera RNA-Seq tutorial here[https://github.com/seqeralabs/rnaseq-nf/tree/master/modules] or within nf-cores projects e.g.: here[https://github.com/nf-core/rnaseq/tree/master/modules/nf-core/modules]
 
 
 == Output definition
@@ -201,7 +201,7 @@ workflow {
 }
 ----
 
-Here we use a (pipe)[https://www.nextflow.io/docs/latest/dsl2.html#pipes] which passed the output as a channel to the next process.
+Here we use a pipe[https://www.nextflow.io/docs/latest/dsl2.html#pipes] which passed the output as a channel to the next process.
 
 
 === Workflow definition
