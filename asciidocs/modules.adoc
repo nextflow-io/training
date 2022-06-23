@@ -187,7 +187,7 @@ workflow  {
 }
 ----
 
-Or remove the channel definitions completely from each line (as at each call, a channel is implied):
+We can also remove the channel definitions completely from each line if we prefer (as at each call, a channel is implied):
 
 [source,nextflow,linenums]
 ----
@@ -303,29 +303,7 @@ For example, the snippet above defines a `workflow` named `my_pipeline`, that ca
 
 NOTE: Make sure that your modules.nf file is the one containing the `emit` on the `CONVERTTOUPPER` process.
 
-=== Workflow parameters
-
-A workflow component can access any variable or parameter defined in the outer scope. In the running example, we can also access `params.greeting` directly within the `workflow` definition.
-
-[source,nextflow,linenums]
-----
-#!/usr/bin/env nextflow
-
-params.greeting = 'Hello world!'
-
-include { SPLITLETTERS } from './modules.nf'
-include { CONVERTTOUPPER } from './modules.nf'
-
-workflow my_pipeline {
-    SPLITLETTERS(Channel.from(params.greeting))
-    CONVERTTOUPPER(SPLITLETTERS.out.flatten())
-    CONVERTTOUPPER.out.upper.view{ it }
-}
-
-workflow {
-    my_pipeline()
-}
-----
+IMPORTANT: A workflow component can access any variable or parameter defined in the outer scope. In the running example, we can also access `params.greeting` directly within the `workflow` definition.
 
 === Workflow inputs
 
