@@ -147,15 +147,10 @@ This can then be used to define specific outputs. FOr example, if a process defi
 
 Additionally, the process `output` definition allows the use of the `emit` statement to define a named identifier that can be used to reference the channel in the external scope. 
 
-For example, check the `emit` statement on the `CONVERTTOUPPER` process in the following snippet:
+For example, check the `emit` statement on the `CONVERTTOUPPER` process in the following `./modules.nf` snippet:
 
 [source,nextflow,linenums]
 ----
-#!/usr/bin/env nextflow
-
-params.greeting = 'Hello world!'
-greeting_ch = Channel.from(params.greeting)
-
 process SPLITLETTERS {
     input:
     val x
@@ -179,6 +174,19 @@ process CONVERTTOUPPER {
     cat $y | tr '[a-z]' '[A-Z]'
     """
 }
+----
+
+And how it is used in the `hello.nf` script:
+
+[source,nextflow,linenums]
+----
+#!/usr/bin/env nextflow
+
+params.greeting = 'Hello world!'
+greeting_ch = Channel.from(params.greeting)
+
+include { SPLITLETTERS   } from './modules.nf'
+include { CONVERTTOUPPER } from './modules.nf'
 
 workflow {
     letters_ch = SPLITLETTERS(greeting_ch)
@@ -186,8 +194,6 @@ workflow {
     CONVERTTOUPPER.out.upper.view{ it }
 }
 ----
-
-WARNING: In the above example, we have reverted to keeping the `process` definitions within the `hello.nf` script. However, this would work the same way if the emit defintion was in a `modules.nf` file.
 
 === Using piped outputs
 
