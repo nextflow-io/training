@@ -38,7 +38,7 @@ Create a `modules.nf` file with the previously defined processes from `hello.nf`
 .Click here for the answer:
 [%collapsible]
 ====
-The `hello.nf` script should look like this:
+The `hello.nf` script should look similar like this:
 [source,nextflow,linenums]
 ----
 #!/usr/bin/env nextflow
@@ -173,6 +173,8 @@ workflow  {
 }
 ----
 
+NOTE: We have moved the `greeting_ch` into the workflow scope for this exercise.
+
 We can also explicitly define the output of one channel to another using the `.out` attribute. 
 
 [source,nextflow,linenums]
@@ -181,10 +183,11 @@ workflow  {
     greeting_ch = Channel.from(params.greeting)
     letters_ch = SPLITLETTERS(greeting_ch)
     results_ch = CONVERTTOUPPER(letters_ch.out.flatten())
+    results_ch.view{ it }
 }
 ----
 
-Or remove the channel definitions completely from each line (as at each call a channel is implied):
+Or remove the channel definitions completely from each line (as at each call, a channel is implied):
 
 [source,nextflow,linenums]
 ----
@@ -298,7 +301,7 @@ workflow {
 
 For example, the snippet above defines a `workflow` named `my_pipeline`, that can be invoked via another `workflow` definition.
 
-NOTE: Make sure that your modules.nf file is the one containing the `emit` on the `CONVETTOUPPER` process. Alternatively, you could remove the definition in `CONVERTTOUPPER.out.view{ it }`.
+NOTE: Make sure that your modules.nf file is the one containing the `emit` on the `CONVERTTOUPPER` process.
 
 === Workflow parameters
 
