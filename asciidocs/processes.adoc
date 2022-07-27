@@ -250,7 +250,7 @@ The `val` qualifier allows you to receive data of any type as input. It can be a
 
 [source,nextflow,linenums]
 ----
-num = Channel.from( 1, 2, 3 )
+num = Channel.of( 1, 2, 3 )
 
 process BASICEXAMPLE {
   debug=true
@@ -293,7 +293,7 @@ process FOO {
   debug=true
   
   input:
-  file 'sample.fastq'
+  path 'sample.fastq'
   
   script:
   """
@@ -316,7 +316,7 @@ process FOO {
   debug=true
   
   input:
-  file sample
+  path sample
   
   script:
   """
@@ -340,7 +340,7 @@ process FOO {
   debug=true
   
   input:
-  file sample
+  path sample
   
   script:
   """
@@ -436,8 +436,8 @@ Consider the following example:
 
 [source,nextflow,linenums]
 ----
-ch1 = Channel.from(1,2,3)
-ch2 = Channel.from('a','b','c')
+ch1 = Channel.of(1,2,3)
+ch2 = Channel.of('a','b','c')
 
 process FOO {
   debug true
@@ -475,8 +475,8 @@ For example:
 
 [source,nextflow,linenums]
 ----
-input1 = Channel.from(1,2)
-input2 = Channel.from('a','b','c','d')
+input1 = Channel.of(1,2)
+input2 = Channel.of('a','b','c','d')
 
 process FOO {
   debug true
@@ -505,7 +505,7 @@ Compare the previous example with the following one :
 [source,nextflow,linenums]
 ----
 input1 = Channel.value(1)
-input2 = Channel.from('a','b','c')
+input2 = Channel.of('a','b','c')
 
 process BAR {
   debug true
@@ -687,7 +687,7 @@ process FOO {
 }
 
 workflow {
-  receiver_ch = FOO(Channel.from(methods))
+  receiver_ch = FOO(Channel.of(methods))
   receiver_ch.view { "Received: $it" }
 }
 ----
@@ -701,7 +701,7 @@ The `file` qualifier specifies one or more files produced by the process into th
 process RANDOMNUM {
 
     output:
-    file 'result.txt'
+    path 'result.txt'
 
     script:
     """
@@ -733,7 +733,7 @@ This allows us to _capture_ multiple files into a list object and output them as
 process SPLITLETTERS {
 
     output:
-    file 'chunk_*'
+    path 'chunk_*'
 
     """
     printf 'Hola' | split -b 1 - chunk_
@@ -790,7 +790,7 @@ For example:
 species = ['cat','dog', 'sloth']
 sequences = ['AGATAG','ATGCTCT', 'ATCCCAA']
 
-Channel.from(species)
+Channel.of(species)
        .set { species_ch }
 
 process ALIGN {
@@ -800,7 +800,7 @@ process ALIGN {
   val seq
 
   output:
-  file "${x}.aln"
+  path "${x}.aln"
 
   script:
   """
@@ -899,7 +899,7 @@ process FIND {
   debug=true
   
   input:
-  file fasta
+  path fasta
   val type
 
   when:
@@ -986,10 +986,10 @@ process BLASTSEQ {
     publishDir "$params.outdir/bam_files", mode: 'copy'
 
     input:
-    file fasta
+    path fasta
 
     output:
-    file ('*.txt')
+    path ('*.txt')
 
     script:
     """
@@ -1029,7 +1029,7 @@ process FOO {
     tuple val(sampleId), file('sample1.fq.gz'), file('sample2.fq.gz')
     
   output:
-    file "*"
+    path "*"
     
   script:
   """

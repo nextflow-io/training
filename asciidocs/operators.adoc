@@ -23,7 +23,7 @@ There are seven main groups of operators are described in greater detail within 
 
 [source,nextflow,linenums]
 ----
-nums = Channel.from(1,2,3,4)         // <1>    
+nums = Channel.of(1,2,3,4)         // <1>
 square = nums.map { it -> it * it }  // <2>
 square.view()                        // <3>
 ----
@@ -131,9 +131,9 @@ The `mix` operator combines the items emitted by two (or more) channels into a s
 
 [source,nextflow,linenums]
 ----
-c1 = Channel.from( 1,2,3 )
-c2 = Channel.from( 'a','b' )
-c3 = Channel.from( 'z' )
+c1 = Channel.of( 1,2,3 )
+c2 = Channel.of( 'a','b' )
+c3 = Channel.of( 'z' )
 
 c1 .mix(c2,c3).view()
 ----
@@ -246,8 +246,8 @@ The `join` operator creates a channel that joins together the items emitted by t
 
 [source,nextflow,linenums]
 ----
-left = Channel.from(['X', 1], ['Y', 2], ['Z', 3], ['P', 7])
-right= Channel.from(['Z', 6], ['Y', 5], ['X', 4])
+left = Channel.of(['X', 1], ['Y', 2], ['Z', 3], ['P', 7])
+right= Channel.of(['Z', 6], ['Y', 5], ['X', 4])
 left.join(right).view()
 ----
 

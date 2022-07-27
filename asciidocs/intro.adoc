@@ -75,14 +75,14 @@ In this toy example, the script takes an input string (a parameter called `param
 #!/usr/bin/env nextflow     <1>
 
 params.greeting  = 'Hello world!' <2>
-greeting_ch = Channel.from(params.greeting) <3>
+greeting_ch = Channel.of(params.greeting) <3>
 
 process SPLITLETTERS { <4>
     input: <5>
     val x <6>
 
     output: <7>
-    file 'chunk_*' <8>
+    path 'chunk_*' <8>
 
     """ <9>
     printf '$x' | split -b 6 - chunk_  <10>
@@ -91,7 +91,7 @@ process SPLITLETTERS { <4>
 
 process CONVERTTOUPPER { <13>
     input:  <14>
-    file y <15>
+    path y <15>
 
     output: <16>
     stdout <17>
@@ -217,7 +217,7 @@ the previous example, replacing the process script with the string
 ----
 process CONVERTTOUPPER {
     input:
-    file y
+    path y
 
     output:
     stdout

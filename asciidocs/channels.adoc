@@ -22,13 +22,13 @@ A _queue_ channel is an _asynchronous_ unidirectional _FIFO_ queue that connects
 * _FIFO_ means that the data is guaranteed to be delivered in the same order as it is produced. First In, First Out.
 
 A queue channel is implicitly created by process output definitions or using channel factories 
-such as https://www.nextflow.io/docs/latest/channel.html#from[Channel.from] or https://www.nextflow.io/docs/latest/channel.html#frompath[Channel.fromPath].
+such as https://www.nextflow.io/docs/latest/channel.html#of[Channel.of] or https://www.nextflow.io/docs/latest/channel.html#frompath[Channel.fromPath].
 
 Try the following snippets:
 
 [source,nextflow,linenums]
 ----
-ch = Channel.from(1,2,3)
+ch = Channel.of(1,2,3)
 println(ch)     // <1>
 ch.view()       // <2>
 ----
@@ -45,7 +45,7 @@ Try to execute this snippet. You can do that by creating a new .nf file or by ed
 
 [source,nextflow,linenums]
 ----
-ch = Channel.from(1,2,3)
+ch = Channel.of(1,2,3)
 ch.view()
 ----
 
@@ -91,31 +91,9 @@ ch3 = Channel.value( [1,2,3,4,5] )    // <3>
 <2> Creates a value channel and binds a string to it
 <3> Creates a value channel and binds a list object to it that will be emitted as a sole emission
 
-=== from
-
-The factory `Channel.from` allows the creation of a queue channel with the values specified as arguments.
-
-[source,nextflow,linenums]
-----
-ch = Channel.from( 1, 3, 5, 7 )
-ch.view{ "value: $it" }
-----
-
-The first line in this example creates a variable `ch` which holds a channel object. This channel emits the values specified as a parameter in the `from` method. Thus the second line will print the following:
-
-----
-value: 1
-value: 3
-value: 5
-value: 7
-----
-
-
-IMPORTANT: Method `Channel.from` will be deprecated and replaced by `Channel.of` (see below). 
-
 === of 
 
-The method `Channel.of` works in a similar manner to `Channel.from`, though it fixes
+The method `Channel.of` works in a similar manner to `Channel.from` (which is now https://www.nextflow.io/docs/latest/channel.html#of[deprecated]), though it fixes
 some inconsistent behavior of the latter and provides better handling when specifying a range of values. 
 For example:
 
