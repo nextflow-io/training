@@ -229,12 +229,12 @@ with two (or more) operators. For example:
 [source,nextflow,linenums]
 ----
 Channel
-    .from(1,2,3)
+    .of(1,2,3)
     .map { it -> X=it; X+=2 }
     .view { "ch1 = $it" }
 
 Channel
-    .from(1,2,3)
+    .of(1,2,3)
     .map { it -> X=it; X*=2 }
     .view { "ch2 = $it" }
 ----
@@ -250,12 +250,12 @@ the variable *local*.
 [source,nextflow,linenums]
 ----
 Channel
-    .from(1,2,3)
+    .of(1,2,3)
     .map { it -> def X=it; X+=2 }
     .println { "ch1 = $it" }
 
 Channel
-    .from(1,2,3)
+    .of(1,2,3)
     .map { it -> def X=it; X*=2 }
     .println { "ch2 = $it" }
 ----
