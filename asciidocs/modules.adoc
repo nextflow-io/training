@@ -44,7 +44,7 @@ The `hello.nf` script should look similar like this:
 #!/usr/bin/env nextflow
 
 params.greeting  = 'Hello world!'
-greeting_ch = Channel.from(params.greeting)
+greeting_ch = Channel.of(params.greeting)
 
 include { SPLITLETTERS   } from './modules.nf'
 include { CONVERTTOUPPER } from './modules.nf'
@@ -65,7 +65,7 @@ process SPLITLETTERS {
     val x
 
     output:
-    file 'chunk_*'
+    path 'chunk_*'
 
     """
     printf '$x' | split -b 6 - chunk_
@@ -75,7 +75,7 @@ process SPLITLETTERS {
 process CONVERTTOUPPER {
     
     input:
-    file y
+    path y
 
     output:
     stdout
@@ -108,7 +108,7 @@ This allows the inclusion and the invocation of the same component multiple time
 #!/usr/bin/env nextflow
 
 params.greeting = 'Hello world!'
-greeting_ch = Channel.from(params.greeting)
+greeting_ch = Channel.of(params.greeting)
 
 include { SPLITLETTERS as SPLITLETTERS_one } from './modules.nf'
 include { SPLITLETTERS as SPLITLETTERS_two } from './modules.nf'
@@ -166,7 +166,7 @@ e.g.
 [source,nextflow,linenums]
 ----
 workflow  {
-    greeting_ch = Channel.from(params.greeting)
+    greeting_ch = Channel.of(params.greeting)
     letters_ch = SPLITLETTERS(greeting_ch)
     results_ch = CONVERTTOUPPER(letters_ch.flatten())
     results_ch.view{ it }
@@ -180,7 +180,7 @@ We can also explicitly define the output of one channel to another using the `.o
 [source,nextflow,linenums]
 ----
 workflow  {
-    greeting_ch = Channel.from(params.greeting)
+    greeting_ch = Channel.of(params.greeting)
     letters_ch = SPLITLETTERS(greeting_ch)
     results_ch = CONVERTTOUPPER(letters_ch.out.flatten())
     results_ch.view{ it }
@@ -192,7 +192,7 @@ We can also remove the channel definitions completely from each line if we prefe
 [source,nextflow,linenums]
 ----
 workflow  {
-    greeting_ch = Channel.from(params.greeting)
+    greeting_ch = Channel.of(params.greeting)
     SPLITLETTERS(greeting_ch)
     CONVERTTOUPPER(SPLITLETTERS.out.flatten())
     CONVERTTOUPPER.out.view()
@@ -204,7 +204,7 @@ If a process defines two or more output channels, each channel can be accessed b
 [source,nextflow,linenums]
 ----
 workflow  {
-    greeting_ch = Channel.from(params.greeting)
+    greeting_ch = Channel.of(params.greeting)
     SPLITLETTERS(greeting_ch)
     CONVERTTOUPPER(SPLITLETTERS.out.flatten())
     CONVERTTOUPPER.out[0].view()
@@ -222,7 +222,7 @@ process SPLITLETTERS {
     val x
 
     output:
-    file 'chunk_*'
+    path 'chunk_*'
 
     """
     printf '$x' | split -b 6 - chunk_
@@ -231,7 +231,7 @@ process SPLITLETTERS {
 
 process CONVERTTOUPPER {
     input:
-    file y
+    path y
 
     output:
     stdout emit: upper
@@ -247,7 +247,7 @@ Then change the workflow scope in `hello.nf` to call this specific named output 
 [source,nextflow,linenums]
 ----
 workflow {
-    greeting_ch = Channel.from(params.greeting)
+    greeting_ch = Channel.of(params.greeting)
     SPLITLETTERS(greeting_ch)
     CONVERTTOUPPER(SPLITLETTERS.out.flatten())
     CONVERTTOUPPER.out.upper.view{ it }
@@ -266,7 +266,7 @@ Try changing the workflow script to the snippet below:
 [source,nextflow,linenums]
 ----
 workflow {
-    Channel.from(params.greeting) | SPLITLETTERS | flatten() | CONVERTTOUPPER | view
+    Channel.of(params.greeting) | SPLITLETTERS | flatten() | CONVERTTOUPPER | view
 }
 ----
 
@@ -288,7 +288,7 @@ include { CONVERTTOUPPER } from './modules.nf'
 
 
 workflow my_pipeline {
-    greeting_ch = Channel.from(params.greeting)
+    greeting_ch = Channel.of(params.greeting)
     SPLITLETTERS(greeting_ch)
     CONVERTTOUPPER(SPLITLETTERS.out.flatten())
     CONVERTTOUPPER.out.upper.view{ it }
@@ -336,7 +336,7 @@ The input for the `workflow` can then be specified as an argument:
 [source,nextflow,linenums]
 ----
 workflow {
-    my_pipeline(Channel.from(params.greeting))
+    my_pipeline(Channel.of(params.greeting))
 }
 ----
 
@@ -359,7 +359,7 @@ workflow my_pipeline {
 }
 
 workflow {
-    my_pipeline(Channel.from(params.greeting))
+    my_pipeline(Channel.of(params.greeting))
     my_pipeline.out.view()
 }
 ----
@@ -383,7 +383,7 @@ workflow my_pipeline {
 }
 
 workflow {
-    my_pipeline(Channel.from(params.greeting))
+    my_pipeline(Channel.of(params.greeting))
     my_pipeline.out.my_data.view()
 }
 ----
@@ -424,8 +424,8 @@ workflow my_pipeline_two {
 }
 
 workflow {
-    my_pipeline_one(Channel.from(params.greeting))
-    my_pipeline_two(Channel.from(params.greeting))
+    my_pipeline_one(Channel.of(params.greeting))
+    my_pipeline_two(Channel.of(params.greeting))
 }
 ----
 

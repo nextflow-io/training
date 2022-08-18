@@ -1,14 +1,14 @@
 #!/usr/bin/env nextflow
 
 params.greeting = 'Hello world!'
-greeting_ch = Channel.from(params.greeting)
+greeting_ch = Channel.of(params.greeting)
 
 process SPLITLETTERS {
     input:
     val x
 
     output:
-    file 'chunk_*'
+    path 'chunk_*'
 
     """
     printf '$x' | split -b 6 - chunk_
@@ -17,7 +17,7 @@ process SPLITLETTERS {
 
 process CONVERTTOUPPER {
     input:
-    file y
+    path y
 
     output:
     stdout
