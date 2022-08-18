@@ -97,7 +97,7 @@ The factory `Channel.of` allows the creation of a queue channel with the values 
 
 [source,nextflow,linenums]
 ----
-ch = Channel.from( 1, 3, 5, 7 )
+ch = Channel.of( 1, 3, 5, 7 )
 ch.view{ "value: $it" }
 ----
 
