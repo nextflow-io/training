@@ -1,0 +1,48 @@
+= Quizz
+
+In this section you can validate your knowledge about this training
+
+== Nextflow 
+
+
+_Nextflow is a workflow orchestration engine and a domain specific language (DSL)
+ that makes it easy to write data-intensive computational pipelines._
+
+
+quizquestion:nextflow[1,true] True
+
+quizquestion:nextflow[0,false] False
+
+
+_Nextflow is implemented in Python_
+
+quizquestion:language[0,true] True
+
+quizquestion:language[1,false] False
+
+
+_A pipeline is made by joining..._
+
+quizquestion:pipeline[1,processes] Processes
+
+quizquestion:pipeline[0,steps] Steps
+
+
+
+=== Results
+
+After review your answers, please click on "Validate" button to know your score
+
+
+[cols="2s,1a"]
+|===
+|Question | Score
+
+|Nextflow | quizzpoints:nextflow[]
+|Language | quizzpoints:language[]
+|Pipeline | quizzpoints:pipeline[]
+
+
+|===
+
+quizztoolbar::[value="Validate"]

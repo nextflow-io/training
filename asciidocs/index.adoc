@@ -30,4 +30,5 @@ include::executors.adoc[]
 include::tower.adoc[]
 include::cache_and_resume.adoc[]
 include::debugging.adoc[]
+include::quizz.adoc[]
 :leveloffset: -1
