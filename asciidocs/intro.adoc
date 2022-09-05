@@ -66,7 +66,7 @@ it simplifies the writing of code and is more approachable.
 
 Here you will execute your first Nextflow script (`hello.nf`), which we will go through line by line. 
 
-In this toy example, the script takes an input string (a parameter called `params.greeting`), then splits the input into chucks of six characters in the first process, then converts the characters to upper case in the second process, before viewing the output to screen.  
+In this toy example, the script takes an input string (a parameter called `params.greeting`), then splits the input into chunks of six characters in the first process, then converts the characters to upper case in the second process, before viewing the output to screen.
 
 === Nextflow code (hello.nf)
 
@@ -107,7 +107,7 @@ workflow{ <22>
     results_ch.view{ it } <25>
 } <26>
 ----
-<1> The code begins with a shebang which declares Nextflow as the interepreter
+<1> The code begins with a shebang which declares Nextflow as the interpreter
 <2> Declares a parameter `greeting` that is initialized with the value 'Hello world!'
 <3> Initializes a `channel` labelled `greeting_ch`, which contains the value from `params.greeting`. Channels are the necessary input type for processes in Nextflow
 <4> Begins the first process defined as `SPLITLETTERS`
@@ -136,7 +136,7 @@ workflow{ <22>
 
 TIP: The use of the operator `.flatten()` here is to split the two files into two separate items to be put through the next process (else they would treat them as a single element).
 
-=== In practise
+=== In practice
 
 Please now copy the following example into your favourite text editor 
 and save it to a file named `hello.nf`.
