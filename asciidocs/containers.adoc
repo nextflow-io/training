@@ -439,7 +439,6 @@ This saves having to build a conda environment each time you want to use it (as 
 To do this, you simply require a `Dockerfile` and you use micromamba to install the packages. However, a good practice is to have a YAML recipe file like in the previous section, so we'll do it here too.
 
 ```
-name: base
 channels:
   - conda-forge
   - defaults
