@@ -439,6 +439,7 @@ This saves having to build a conda environment each time you want to use it (as 
 To do this, you simply require a `Dockerfile` and you use micromamba to install the packages. However, a good practice is to have a YAML recipe file like in the previous section, so we'll do it here too.
 
 ```
+name: nf-tutorial
 channels:
   - conda-forge
   - defaults
@@ -459,10 +460,12 @@ MAINTAINER  Your name <your_email>
 
 COPY --chown=$MAMBA_USER:$MAMBA_USER micromamba.yml /tmp/env.yml
 
-RUN micromamba install -y -n base -f /tmp/env.yml && \
+RUN micromamba create -n nf-tutorial
+
+RUN micromamba install -y -n nf-tutorial -f /tmp/env.yml && \
     micromamba clean --all --yes
 
-ENV PATH=/opt/conda/bin:/opt/conda/condabin:$PATH
+ENV PATH /opt/conda/envs/nf-tutorial/bin:$PATH
 ```
 
 The above `Dockerfile` takes the parent image 'mambaorg/micromamba', then installs a `conda` environment using `micromamba`, and installs `salmon`, `fastqc` and `multiqc`. 
