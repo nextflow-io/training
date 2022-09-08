@@ -366,20 +366,26 @@ In this Gitpod environment, conda is already installed.
 
 === Using conda
 
-A Conda environment is defined using a YAML file, which lists the required software packages.
-For example:
+A Conda environment is defined using a YAML file, which lists the required software packages. The first thing you need to do is to initiate conda for shell interaction, and then open a new terminal by running bash.
+
+```
+conda init
+bash
+```
+
+Then write your YAML file. For example:
 
 ```yaml
 name: nf-tutorial
 channels:
+  - conda-forge
   - defaults
   - bioconda
-  - conda-forge
 dependencies:
-  - salmon=1.0.0
-  - fastqc=0.11.5
-  - multiqc=1.5
-  - tbb=2020.2
+  - bioconda::salmon=1.5.1
+  - bioconda::fastqc=0.11.9
+  - bioconda::multiqc=1.12
+  - conda-forge::tbb=2020.2
 ```
 
 Given the recipe file, the environment is created using the command shown below:
@@ -398,8 +404,8 @@ This should look something like this:
 ```bash
 # conda environments:
 #
-base                     /opt/conda
-nf-tutorial           *  /opt/conda/envs/nf-tutorial
+base                  *  /opt/conda
+nf-tutorial              /opt/conda/envs/nf-tutorial
 ```
 
 To enable the environment you can use the `activate` command:
