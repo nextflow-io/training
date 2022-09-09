@@ -366,20 +366,26 @@ In this Gitpod environment, conda is already installed.
 
 === Using conda
 
-A Conda environment is defined using a YAML file, which lists the required software packages.
-For example:
+A Conda environment is defined using a YAML file, which lists the required software packages. The first thing you need to do is to initiate conda for shell interaction, and then open a new terminal by running bash.
+
+```
+conda init
+bash
+```
+
+Then write your YAML file. For example:
 
 ```yaml
 name: nf-tutorial
 channels:
+  - conda-forge
   - defaults
   - bioconda
-  - conda-forge
 dependencies:
-  - salmon=1.0.0
-  - fastqc=0.11.5
-  - multiqc=1.5
-  - tbb=2020.2
+  - bioconda::salmon=1.5.1
+  - bioconda::fastqc=0.11.9
+  - bioconda::multiqc=1.12
+  - conda-forge::tbb=2020.2
 ```
 
 Given the recipe file, the environment is created using the command shown below:
@@ -398,8 +404,8 @@ This should look something like this:
 ```bash
 # conda environments:
 #
-base                     /opt/conda
-nf-tutorial           *  /opt/conda/envs/nf-tutorial
+base                  *  /opt/conda
+nf-tutorial              /opt/conda/envs/nf-tutorial
 ```
 
 To enable the environment you can use the `activate` command:
@@ -426,22 +432,40 @@ See the https://www.nextflow.io/docs/latest/conda.html[docs] for details.
 
 Another way to build conda-like environments is through a `Dockerfile` and https://mamba.readthedocs.io/en/latest/user_guide/micromamba.html[`micromamba`]. 
 
-`micromamba` is fast and robust package for building small conda-based environments.
+`micromamba` is a fast and robust package for building small conda-based environments.
 
 This saves having to build a conda environment each time you want to use it (as outlined in previous sections).
 
-To do this, you simply require a `Dockerfile`, such as the one in this public https://github.com/nextflow-io/rnaseq-nf/blob/master/docker/Dockerfile-mamba[repo]:
+To do this, you simply require a `Dockerfile` and you use micromamba to install the packages. However, a good practice is to have a YAML recipe file like in the previous section, so we'll do it here too.
 
+```yaml
+name: nf-tutorial
+channels:
+  - conda-forge
+  - defaults
+  - bioconda
+dependencies:
+  - bioconda::salmon=1.5.1
+  - bioconda::fastqc=0.11.9
+  - bioconda::multiqc=1.12
+  - conda-forge::tbb=2020.2
 ```
-FROM mambaorg/micromamba                                                                                    
-MAINTAINER Your name <your_email>
 
-RUN \
-  micromamba install -y -n base -c defaults -c bioconda -c conda-forge \
-    salmon=1.5.1 \
-    fastqc=0.11.9 \
-    multiqc=1.10.1 \
-  && micromamba clean -a -y
+Then, we can write our Dockerfile with micromamba installing the packages from this recipe file.
+
+```Dockerfile
+FROM mambaorg/micromamba:0.25.1
+
+MAINTAINER  Your name <your_email>
+
+COPY --chown=$MAMBA_USER:$MAMBA_USER micromamba.yml /tmp/env.yml
+
+RUN micromamba create -n nf-tutorial
+
+RUN micromamba install -y -n nf-tutorial -f /tmp/env.yml && \
+    micromamba clean --all --yes
+
+ENV PATH /opt/conda/envs/nf-tutorial/bin:$PATH
 ```
 
 The above `Dockerfile` takes the parent image 'mambaorg/micromamba', then installs a `conda` environment using `micromamba`, and installs `salmon`, `fastqc` and `multiqc`. 
@@ -499,7 +523,7 @@ nextflow run script7.nf -with-docker
 ```
 --
 
-Nextflow should now be able to find `salmon` to run the process. 
+Nextflow should now be able to find `salmon` to run the process.
 ====
 
 == BioContainers
