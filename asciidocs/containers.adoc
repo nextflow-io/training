@@ -438,7 +438,7 @@ This saves having to build a conda environment each time you want to use it (as 
 
 To do this, you simply require a `Dockerfile` and you use micromamba to install the packages. However, a good practice is to have a YAML recipe file like in the previous section, so we'll do it here too.
 
-```
+```yaml
 name: nf-tutorial
 channels:
   - conda-forge
@@ -453,7 +453,7 @@ dependencies:
 
 Then, we can write our Dockerfile with micromamba installing the packages from this recipe file.
 
-```
+```Dockerfile
 FROM mambaorg/micromamba:0.25.1
 
 MAINTAINER  Your name <your_email>
