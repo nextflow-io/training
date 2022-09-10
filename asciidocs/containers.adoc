@@ -549,7 +549,7 @@ You can check the registry for the packages you want in https://biocontainers.pr
 [discrete]
 === Exercise
 
-If you remember well, script2.nf contains a single process to create an index with the salmon tool. Because we do not have salmon installed locally in this machine, we had to either run it with -with-conda or -with-docker. Your task now is to run it again with Docker, but without having to create your own Docker container image. Instead, use the BioContainers image for salmon 1.7.0.
+If you remember well, script2.nf contains a single process to create an index with the salmon tool. Because we do not have salmon installed locally in this machine, we had to either run it with `-with-conda` or `-with-docker`. Your task now is to run it again with Docker, but without having to create your own Docker container image. Instead, use the BioContainers image for salmon 1.7.0.
 
 .For the result, click here:
 [%collapsible]
@@ -563,8 +563,16 @@ nextflow run script2.nf -with-docker quay.io/biocontainers/salmon:1.7.0--h84f40a
 [discrete]
 === Bonus Exercise
 
-Change the process blocks in script5.nf to make them automatically use BioContainers for salmon when it's the case, or fastqc otherwise. A suggestion is to temporarily comment the line `docker.enabled = true` in your `nextflow.config` file to make sure the processes are using the BioContainers that you set, and not the container image we have been using in this training. When the process blocks are changed, you should be able to run them with:
+Change the process blocks in `script5.nf` or the `nextflow.config` file to make the pipeline automatically use BioContainers for salmon when it's the case, or fastqc otherwise. A suggestion is to temporarily comment the line `process.container = 'nextflow/rnaseq-nf'` in the `nextflow.config` file to make sure the processes are using the BioContainers that you set, and not the container image we have been using in this training. With these changes, you should be able to run the pipeline with BioContainers by running the following in the command line:
 
 ```
-nextflow run script5.nf -with-docker
+nextflow run script5.nf
 ```
+
+[discrete]
+=== Bonus content
+
+[%collapsible]
+====
+You can have more complex definitions within your process block by letting the appropriate container image or conda package be used depending on if the user selected singularity, Docker or conda to be used. You can click https://nf-co.re/docs/contributing/modules#software-requirements[here] for more information and https://github.com/nf-core/modules/blob/61f68913fefc20241ceccb671b104230b2d775d7/modules/bowtie2/align/main.nf#L6-L9[here] for an example.
+====
