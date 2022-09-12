@@ -531,14 +531,7 @@ Nextflow should now be able to find `salmon` to run the process.
 Another useful resource linking together Bioconda and containers is the https://biocontainers.pro[BioContainers] project.
 BioContainers is a community initiative that provides a registry of container images for every Bioconda recipe.
 
-So far, we've seen how to install packages with the conda and micromamba tools, both locally and within containers. With BioContainers, you don't need to create your own container image for the tools you want, and you don't need either to use conda or micromamba to install the packages. It already provides you with a Docker image containing what you want installed. Let's say you want a Docker image with fastqc installed. You'd have to create a Dockerfile installing the fastqc package with conda, for example, like below:
-
-```
-conda install -c conda-forge -c bioconda fastqc==0.11.5
-```
-
-Then build your container image, and push it to Docker Hub so that others can use. Or.. you could just get the image from BioContainers :)
-You can do that with:
+So far, we've seen how to install packages with the conda and micromamba tools, both locally and within containers. With BioContainers, you don't need to create your own container image for the tools you want, and you don't need either to use conda or micromamba to install the packages. It already provides you with a Docker image containing what you want installed. You can get the container image of fastqc using BioContainers with:
 
 ```
 docker pull biocontainers/fastqc:v0.11.5
@@ -549,7 +542,7 @@ You can check the registry for the packages you want in https://biocontainers.pr
 [discrete]
 === Exercise
 
-If you remember well, script2.nf contains a single process to create an index with the salmon tool. Because we do not have salmon installed locally in this machine, we had to either run it with `-with-conda` or `-with-docker`. Your task now is to run it again with Docker, but without having to create your own Docker container image. Instead, use the BioContainers image for salmon 1.7.0.
+If you remember well, script2.nf contains a single process to create an index with the salmon tool. Because we do not have salmon installed locally in the machine provided by Gitpod, we had to either run it with `-with-conda` or `-with-docker`. Your task now is to run it again with Docker, but without having to create your own Docker container image. Instead, use the BioContainers image for salmon 1.7.0.
 
 .For the result, click here:
 [%collapsible]
