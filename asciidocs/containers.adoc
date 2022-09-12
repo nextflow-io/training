@@ -563,26 +563,31 @@ HINT: Temporarily comment out the line `process.container = 'nextflow/rnaseq-nf'
 
 .For the result, click here:
 [%collapsible]
+====
+[source,nextflow]
 ```
 nextflow run script5.nf
-
+```
 #with the following container directives for each process:
-
+```
 process FASTQC {
     container = 'biocontainers/fastqc:v0.11.5'
     tag "FASTQC on $sample_id"
 ...
+```
 
 and 
 
+```
 process QUANTIFICATION {
     tag "Salmon on $sample_id"
     container = 'quay.io/biocontainers/salmon:1.7.0--h84f40af_0'
     publishDir params.outdir, mode:'copy'
 ...
+```
 
 # Check the .command.run file in the work directory and ensure that the run line contains the correct Biocontainers.
-```
+====
 
 [discrete]
 === Bonus content
