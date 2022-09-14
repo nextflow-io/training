@@ -1,6 +1,6 @@
 = Groovy basic structures and idioms
 
-Nextflow is a domain specific language (DSL) implemented on top of the Groovy programming language, which in turn is a super-set of the Java programming language. This means that Nextflow can run any Groovy or Java code. 
+Nextflow is a domain specific language (DSL) implemented on top of the Groovy programming language, which in turn is a super-set of the Java programming language. This means that Nextflow can run any Groovy or Java code.
 
 Here are some important Groovy syntax that are commonly used in Nextflow.
 
@@ -110,7 +110,7 @@ assert list[-1] == 2
 assert list[-1..0] == list.reverse()
 ----
 
-TIP: In the last assert line we are referencing the initial list and converting this with a "shorthand" range (..), to run from the -1th element (2) to the 0th element (0). 
+TIP: In the last assert line we are referencing the initial list and converting this with a "shorthand" range (..), to run from the -1th element (2) to the 0th element (0).
 
 List objects implement all methods provided by the https://docs.oracle.com/javase/8/docs/api/java/util/List.html[java.util.List] interface,
 plus the extension methods provided by http://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/List.html[Groovy].
@@ -424,7 +424,7 @@ Mark with value Williams
 Sudha with value Kumari
 ```
 
-A closure has two other important features. 
+A closure has two other important features.
 
 First, it can access and _modify_ variables in the scope where it is defined.
 

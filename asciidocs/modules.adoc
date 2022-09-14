@@ -2,7 +2,7 @@
 
 The definition of module libraries simplifies the writing of complex data analysis pipelines and makes re-use of processes much easier.
 
-Using the `hello.nf` example from earlier, we will convert the pipeline's processes into modules, then call them within the workflow scope in a variety of ways. 
+Using the `hello.nf` example from earlier, we will convert the pipeline's processes into modules, then call them within the workflow scope in a variety of ways.
 
 == Modules
 
@@ -60,7 +60,7 @@ You should have the following in the file `./modules.nf`:
 [source,nextflow,linenums]
 ----
 process SPLITLETTERS {
-    
+
     input:
     val x
 
@@ -73,7 +73,7 @@ process SPLITLETTERS {
 }
 
 process CONVERTTOUPPER {
-    
+
     input:
     path y
 
@@ -81,7 +81,7 @@ process CONVERTTOUPPER {
     stdout
 
     """
-    cat $y | tr '[a-z]' '[A-Z]' 
+    cat $y | tr '[a-z]' '[A-Z]'
     """
 }
 ----
@@ -100,7 +100,7 @@ include { SPLITLETTERS; CONVERTTOUPPER } from './modules.nf'
 
 === Module aliases
 
-When including a module component it is possible to specify a name alias using the `as` declaration. 
+When including a module component it is possible to specify a name alias using the `as` declaration.
 This allows the inclusion and the invocation of the same component multiple times using different names:
 
 [source,nextflow,linenums]
@@ -146,21 +146,21 @@ executor >  local (6)
 [c0/115bd6] process > SPLITLETTERS_two (1)   [100%] 1 of 1 ✔
 [09/f9072d] process > CONVERTTOUPPER_two (2) [100%] 2 of 2 ✔
 WORLD!
-HELLO 
+HELLO
 WORLD!
-HELLO 
+HELLO
 ----
 ====
 
-NOTE: You can store each process in separate files within separate sub-folders or combined in one big file (both are valid). For your own projects, it can be helpful to see examples on public repos. e.g. Seqera RNA-Seq tutorial 
-https://github.com/seqeralabs/rnaseq-nf/tree/master/modules[here] or within nf-cores projects  https://github.com/nf-core/rnaseq/tree/master/modules/nf-core/modules[here].
+NOTE: You can store each process in separate files within separate sub-folders or combined in one big file (both are valid). For your own projects, it can be helpful to see examples on public repos. e.g. Seqera RNA-Seq tutorial
+https://github.com/seqeralabs/rnaseq-nf/tree/master/modules[here] or within nf-core pipelines, such as https://github.com/nf-core/rnaseq/tree/master/modules/nf-core/modules[nf-core/rnaseq].
 
 
 == Output definition
 
 Nextflow allows the use of alternative output definitions within workflows to simplify your code.
 
-In the previous basic example (`hello.nf`), we defined the channel names to specify the input to the next process. 
+In the previous basic example (`hello.nf`), we defined the channel names to specify the input to the next process.
 
 e.g.
 [source,nextflow,linenums]
@@ -175,7 +175,7 @@ workflow  {
 
 NOTE: We have moved the `greeting_ch` into the workflow scope for this exercise.
 
-We can also explicitly define the output of one channel to another using the `.out` attribute. 
+We can also explicitly define the output of one channel to another using the `.out` attribute.
 
 [source,nextflow,linenums]
 ----
@@ -211,7 +211,7 @@ workflow  {
 }
 ----
 
-Alternatively, the process `output` definition allows the use of the `emit` statement to define a named identifier that can be used to reference the channel in the external scope. 
+Alternatively, the process `output` definition allows the use of the `emit` statement to define a named identifier that can be used to reference the channel in the external scope.
 
 For example, try adding the `emit` statement on the `convertToUpper` process in your `modules.nf` file:
 
@@ -256,7 +256,7 @@ workflow {
 
 === Using piped outputs
 
-Another way to deal with outputs in the workflow scope is to use pipes `|`. 
+Another way to deal with outputs in the workflow scope is to use pipes `|`.
 
 [discrete]
 === Exercise
@@ -393,7 +393,7 @@ The result of the above snippet can then be accessed using `my_pipeline.out.my_d
 
 === Calling named workflows
 
-Within a `main.nf` script we also can have multiple workflows. 
+Within a `main.nf` script we also can have multiple workflows.
 In which case we may want to call a specific workflow when running the code.
 For this we use the entrypoint call `-entry <workflow_name>`.
 
@@ -435,7 +435,7 @@ You can choose which pipeline runs by using the `entry` flag:
 
 === Parameter scopes
 
-A module script can define one or more parameters or custom functions using the same syntax as with any other Nextflow script. Using the minimal examples below: 
+A module script can define one or more parameters or custom functions using the same syntax as with any other Nextflow script. Using the minimal examples below:
 
 [discrete]
 ==== Module script (`./modules.nf`)
