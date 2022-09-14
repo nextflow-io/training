@@ -126,7 +126,7 @@ This should come up with the Nextflow version and runtime information:
 
 - Gitpod gives you up to 50 hours per month to run the environment for free.
 - It includes upto 16 cpus and 30GB of workspace.
-- Gitpod will timeout after 30 minutes. However any changes are saved for up to two week (see next section for reopening a timed out session).
+- Gitpod will timeout after 30 minutes. However any changes are saved for up to two weeks (see next section for reopening a timed out session).
 
 See www.gitpod.io for more details.
 

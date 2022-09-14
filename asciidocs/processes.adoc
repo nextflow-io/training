@@ -831,10 +831,10 @@ reads_ch = Channel.fromFilePairs('data/ggal/*_{1,2}.fq')
 process FOO {
 
   input:
-    tuple val(sample_id), file(sample_id)
+    tuple val(sample_id), path(sample_id)
 
   output:
-    tuple val(sample_id), file('sample.bam')
+    tuple val(sample_id), path('sample.bam')
 
   script:
   """
@@ -865,10 +865,10 @@ reads_ch = Channel.fromFilePairs('data/ggal/*_{1,2}.fq')
 process FOO {
 
   input:
-    tuple val(sample_id), file(sample_files)
+    tuple val(sample_id), path(sample_files)
 
   output:
-    tuple val(sample_id), file("${sample_id}.bam")
+    tuple val(sample_id), path("${sample_id}.bam")
 
   script:
   """
@@ -1026,7 +1026,7 @@ process FOO {
   publishDir "$params.outdir/$sampleId/outlooks", pattern: '*_outlook.txt'
 
   input:
-    tuple val(sampleId), file('sample1.fq.gz'), file('sample2.fq.gz')
+    tuple val(sampleId), path('sample1.fq.gz'), path('sample2.fq.gz')
 
   output:
     path "*"

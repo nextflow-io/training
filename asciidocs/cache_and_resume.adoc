@@ -272,10 +272,10 @@ In practical terms, consider the following snippet:
 ----
 process foo {
   input:
-  tuple val(pair), file(reads)
+  tuple val(pair), path(reads)
 
   output:
-  tuple val(pair), file('*.bam'), emit: bam_ch
+  tuple val(pair), path('*.bam'), emit: bam_ch
 
   script:
   """
@@ -285,10 +285,10 @@ process foo {
 
 process bar {
   input:
-  tuple val(pair), file(reads)
+  tuple val(pair), path(reads)
 
   output:
-  tuple val(pair), file('*.bai'), emit: bai_ch
+  tuple val(pair), path('*.bai'), emit: bai_ch
 
   script:
   """
@@ -298,8 +298,8 @@ process bar {
 
 process gather {
   input:
-  tuple val(pair), file(bam)
-  tuple val(pair), file(bai)
+  tuple val(pair), path(bam)
+  tuple val(pair), path(bai)
 
   script:
   """
@@ -322,7 +322,7 @@ operator, or a similar approach. The third process should be written as:
 
 process gather {
   input:
-  tuple val(pair), file(bam), file(bai)
+  tuple val(pair), path(bam), path(bai)
 
   script:
   """
