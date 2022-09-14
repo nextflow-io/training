@@ -538,7 +538,7 @@ docker pull biocontainers/fastqc:v0.11.5
 
 You can check the registry for the packages you want in https://biocontainers.pro/registry[BioContainers official website].
 
-Contrary to other registries that will pull the latest image when no tag (version) is provided, you must specify a tag when pulling BioContainers (after the semi colon `:` in the image name). Check the tags within the registry and pick the one that better suits your needs.
+Contrary to other registries that will pull the latest image when no tag (version) is provided, you must specify a tag when pulling BioContainers (after a colon `:`, e.g fastqc:v0.11.5). Check the tags within the registry and pick the one that better suits your needs.
 
 [discrete]
 === Exercise
