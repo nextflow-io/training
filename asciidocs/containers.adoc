@@ -9,7 +9,7 @@ the most common source of irreproducibility in scientific applications.
 
 To overcome these issues we use containers that allow the encapsulation of software dependencies, i.e. tools and libraries required by a data analysis application in one or more self-contained, ready-to-run, immutable Linux container images, that can be easily deployed in any platform supporting the container runtime.
 
-Containers can be executed in an isolated manner from the hosting system. 
+Containers can be executed in an isolated manner from the hosting system.
 Having its own copy of the file system, processing space, memory management, etc.
 
 NOTE: Containers were first introduced with kernel 2.6 as a Linux feature known as _Control Groups_ or https://en.wikipedia.org/wiki/Cgroups[Cgroups].
@@ -59,7 +59,7 @@ docker run -it debian:stretch-slim bash
 ```
 
 Once launched, you will notice that it is running as root (!).
-Use the usual commands to navigate the file system. 
+Use the usual commands to navigate the file system.
 This is useful to check if the expected programs are present within a container.
 
 To exit from the container, stop the BASH session with the `exit` command.
@@ -102,7 +102,7 @@ docker build -t my-image .
 
 Where "my-image" is the user-specified name tag for the Dockerfile, present in the current directory.
 
-IMPORTANT: Don't miss the dot in the above command. 
+IMPORTANT: Don't miss the dot in the above command.
 
 When it completes, verify that the image
 has been created by listing all available images:
@@ -348,7 +348,7 @@ Simply enable the use of the Singularity engine in place of Docker in the Nextfl
 nextflow run script7.nf -with-singularity nextflow/rnaseq-nf
 ```
 
-As before, the Singularity container can also be provided in the Nextflow config file. We'll see how to do this later. 
+As before, the Singularity container can also be provided in the Nextflow config file. We'll see how to do this later.
 
 === The Singularity Container Library
 
@@ -362,7 +362,7 @@ to the Singularity Library.
 
 Conda is a popular package and environment manager. The built-in support for Conda allows Nextflow pipelines to automatically create and activate the Conda environment(s), given the dependencies specified by each process.
 
-In this Gitpod environment, conda is already installed. 
+In this Gitpod environment, conda is already installed.
 
 === Using conda
 
@@ -430,7 +430,7 @@ See the https://www.nextflow.io/docs/latest/conda.html[docs] for details.
 
 === Create and use conda-like environments using micromamba
 
-Another way to build conda-like environments is through a `Dockerfile` and https://mamba.readthedocs.io/en/latest/user_guide/micromamba.html[`micromamba`]. 
+Another way to build conda-like environments is through a `Dockerfile` and https://mamba.readthedocs.io/en/latest/user_guide/micromamba.html[`micromamba`].
 
 `micromamba` is a fast and robust package for building small conda-based environments.
 
@@ -468,12 +468,12 @@ RUN micromamba install -y -n nf-tutorial -f /tmp/env.yml && \
 ENV PATH /opt/conda/envs/nf-tutorial/bin:$PATH
 ```
 
-The above `Dockerfile` takes the parent image 'mambaorg/micromamba', then installs a `conda` environment using `micromamba`, and installs `salmon`, `fastqc` and `multiqc`. 
+The above `Dockerfile` takes the parent image 'mambaorg/micromamba', then installs a `conda` environment using `micromamba`, and installs `salmon`, `fastqc` and `multiqc`.
 
 [discrete]
 === Exercise
 
-Try executing the RNA-Seq pipeline from earlier (script7.nf). Start by building your own micromamba `Dockerfile` (from above), save it to your docker hub repo, and direct Nextflow to run from this container (changing your `nexflow.config`). 
+Try executing the RNA-Seq pipeline from earlier (script7.nf). Start by building your own micromamba `Dockerfile` (from above), save it to your docker hub repo, and direct Nextflow to run from this container (changing your `nexflow.config`).
 
 IMPORTANT: Building a Docker container and pushing to your personal repo can take >10 minutes.
 
@@ -484,10 +484,10 @@ IMPORTANT: Building a Docker container and pushing to your personal repo can tak
 
 2. Build the image: `docker build -t my-image .` (don't forget the '.').
 
-3. Publish the docker image to your online docker account. 
+3. Publish the docker image to your online docker account.
 +
 --
-Something similar to the following, with <myrepo> replaced with your own Docker ID, without '<' and '>' characters! 
+Something similar to the following, with <myrepo> replaced with your own Docker ID, without '<' and '>' characters!
 
 TIP: "my-image" could be replaced with any name you choose. As good practice, choose something memorable and ensure the name matches the name you used in the previous command.
 
@@ -498,7 +498,7 @@ docker push <myrepo>/my-image
 ```
 --
 
-4. Add the image file name to the nextflow.config file. 
+4. Add the image file name to the nextflow.config file.
 +
 --
 e.g. remove the following from the nextflow.config:
@@ -536,7 +536,7 @@ So far, we've seen how to install packages with conda and micromamba, both local
 docker pull biocontainers/fastqc:v0.11.5
 ```
 
-You can check the registry for the packages you want in https://biocontainers.pro/registry[BioContainers official website]. 
+You can check the registry for the packages you want in https://biocontainers.pro/registry[BioContainers official website].
 
 Contrary to other registries that will pull the latest image when no tag (version) is provided, you must specify a tag when pulling BioContainers (after the semi colon `:` in the image name). Check the tags within the registry and pick the one that better suits your needs.
 
@@ -557,7 +557,7 @@ nextflow run script2.nf -with-docker quay.io/biocontainers/salmon:1.7.0--h84f40a
 [discrete]
 === Bonus Exercise
 
-Change the process directives in `script5.nf` or the `nextflow.config` file to make the pipeline automatically use BioContainers when using salmon, or fastqc. 
+Change the process directives in `script5.nf` or the `nextflow.config` file to make the pipeline automatically use BioContainers when using salmon, or fastqc.
 
 HINT: Temporarily comment out the line `process.container = 'nextflow/rnaseq-nf'` in the `nextflow.config` file to make sure the processes are using the BioContainers that you set, and not the container image we have been using in this training. With these changes, you should be able to run the pipeline with BioContainers by running the following in the command line:
 
@@ -576,7 +576,7 @@ process FASTQC {
 ...
 ```
 
-and 
+and
 
 ```
 process QUANTIFICATION {

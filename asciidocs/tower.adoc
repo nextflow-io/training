@@ -2,8 +2,8 @@
 
 == Basic concepts
 
-Nextflow Tower is the centralized command post for data management and pipelines. 
-It brings monitoring, logging and observability to distributed workflows and simplifies the deployment of pipelines on any cloud, cluster or laptop. 
+Nextflow Tower is the centralized command post for data management and pipelines.
+It brings monitoring, logging and observability to distributed workflows and simplifies the deployment of pipelines on any cloud, cluster or laptop.
 
 
 Nextflow tower core features include:
@@ -85,7 +85,7 @@ Run the RNA-Seq `script7.nf` using the `-with-tower` flag, after correctly compl
 .If you get stuck, click here:
 [%collapsible]
 ====
-Go to https://tower.nf/, login, then click the run tab, and select the run that you just submitted. 
+Go to https://tower.nf/, login, then click the run tab, and select the run that you just submitted.
 If you can't find it, double check your token was entered correctly.
 ====
 
@@ -154,7 +154,7 @@ image::launch_rnaseq_nextflow_schema.png[]
 
 ==== Adding a new pipeline
 
-Adding a pipeline to the pre-saved workspace launchpad is detailed in full on the https://help.tower.nf/launch/launch/[tower webpage docs]. 
+Adding a pipeline to the pre-saved workspace launchpad is detailed in full on the https://help.tower.nf/launch/launch/[tower webpage docs].
 
 In brief, these are the steps you need to follow to set up a pipeline.
 
@@ -177,7 +177,7 @@ See the Nextflow https://www.nextflow.io/docs/latest/config.html#config-profiles
 +
 [source, yaml, linenums]
 ----
-    reads: 's3://nf-bucket/exome-data/ERR013140_{1,2}.fastq.bz2'  
+    reads: 's3://nf-bucket/exome-data/ERR013140_{1,2}.fastq.bz2'
     paired_end: true
 ----
 +
@@ -206,7 +206,7 @@ Nextflow Tower simplifies the development and execution of workflows by providin
 
 Each user has a unique *workspace* where they can interact and manage all resources such as workflows, compute environments and credentials. details of this can be found https://help.tower.nf/getting-started/workspace/[here].
 
-By default, each user has their own private workspace, while organizations have the ability to run and manage users through role-based access as *members* and *collaborators*. 
+By default, each user has their own private workspace, while organizations have the ability to run and manage users through role-based access as *members* and *collaborators*.
 
 === Organization resources
 

@@ -7,8 +7,8 @@ To demonstrate a real-world biomedical scenario, we will implement a proof of co
 3. Performs quantification
 4. Creates a MultiQC report
 
-This will be done using a series of seven scripts, 
-each of which builds on the previous to create a complete workflow. 
+This will be done using a series of seven scripts,
+each of which builds on the previous to create a complete workflow.
 You can find these in the tutorial folder (`script1.nf` - `script7.nf`).
 
 == Define the pipeline parameters
@@ -67,7 +67,7 @@ Add the following to your script file:
 [source,nextflow,linenums]
 ----
 log.info """\
-         R N A S E Q - N F   P I P E L I N E    
+         R N A S E Q - N F   P I P E L I N E
          ===================================
          transcriptome: ${params.transcriptome_file}
          reads        : ${params.reads}
@@ -107,11 +107,11 @@ To add a transcriptome `INDEX` processing step, try adding the following code bl
 process INDEX {
   input:
   path transcriptome
-    
+
   output:
   path 'salmon_index'
 
-  script: 
+  script:
   """
   salmon index --threads $task.cpus -t $transcriptome -i salmon_index
   """
@@ -146,7 +146,7 @@ as shown below:
 
 This time the execution will work because it uses the Docker container `nextflow/rnaseq-nf` that is defined in the
 `nextflow.config` file in your current directory. If you are running this script locally then you will need to download docker
-to your machine, log in and activate docker, and allow the script to download the container 
+to your machine, log in and activate docker, and allow the script to download the container
 containing the run scripts. You can learn more about docker https://www.nextflow.io/docs/latest/docker.html[here].
 
 To avoid adding `-with-docker` each time you execute the script, add the following line to the `nextflow.config` file:
@@ -281,9 +281,9 @@ of `=` assignment to define the `read_pairs_ch` channel.
 ====
 [source,nextflow,linenums]
 ----
-Channel 
+Channel
   .fromFilePairs( params.reads )
-  .set { read_pairs_ch } 
+  .set { read_pairs_ch }
 ----
 ====
 
@@ -297,9 +297,9 @@ Use the `checkIfExists` option for the https://www.nextflow.io/docs/latest/chann
 ====
 [source,nextflow,linenums]
 ----
-Channel 
+Channel
   .fromFilePairs( params.reads, checkIfExists: true )
-  .set { read_pairs_ch } 
+  .set { read_pairs_ch }
 ----
 ====
 
@@ -441,7 +441,7 @@ Try to run it by using the following command:
 == Email notifications
 
 Send a notification email when the workflow execution completes using the `-N <email address>`
-command-line option. 
+command-line option.
 
 Note: this requires the configuration of a SMTP server in the nextflow config
 file. Below is an example `nextflow.config` file showing the settings you would have to configure:
@@ -501,7 +501,7 @@ the following code:
 ----
   script:
   """
-  fastqc.sh "$sample_id" "$reads" 
+  fastqc.sh "$sample_id" "$reads"
   """
 ----
 
@@ -555,7 +555,7 @@ open graph.png
 Note: runtime metrics may be incomplete for run short running tasks as in the case of this tutorial.
 
 NOTE: You view the HTML files by right-clicking on the file name in the left side-bar and choosing the
-*Preview* menu item.  
+*Preview* menu item.
 
 == Run a project from GitHub
 

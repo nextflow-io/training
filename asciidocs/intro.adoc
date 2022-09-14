@@ -49,7 +49,7 @@ image::execution_abstraction.png[]
 
 === Scripting language
 
-Nextflow implements a declarative DSL that simplifies the writing 
+Nextflow implements a declarative DSL that simplifies the writing
 of complex data analysis workflows as an extension of a general purpose programming language.
 
 This approach makes Nextflow very flexible, because it allows in the same
@@ -64,7 +64,7 @@ it simplifies the writing of code and is more approachable.
 
 == Your first script
 
-Here you will execute your first Nextflow script (`hello.nf`), which we will go through line by line. 
+Here you will execute your first Nextflow script (`hello.nf`), which we will go through line by line.
 
 In this toy example, the script takes an input string (a parameter called `params.greeting`), then splits the input into chunks of six characters in the first process, then converts the characters to upper case in the second process, before viewing the output to screen.
 
@@ -112,9 +112,9 @@ workflow{ <22>
 <3> Initializes a `channel` labelled `greeting_ch`, which contains the value from `params.greeting`. Channels are the necessary input type for processes in Nextflow
 <4> Begins the first process defined as `SPLITLETTERS`
 <5> Input declaration for the `SPLITLETTERS` process. Inputs can be values: `val`, files and paths: `path`, or other qualifiers (https://www.nextflow.io/docs/latest/process.html#inputs[see here])
-<6> Tells the `process` to expect an input value (`val`), that we assign to the variable 'x' 
+<6> Tells the `process` to expect an input value (`val`), that we assign to the variable 'x'
 <7> Output declaration for the `SPLITLETTERS` process
-<8> Tells the process to expect an output file(s) (`path`) containing 'chunk_*' as output from the script and send the output as a channel 
+<8> Tells the process to expect an output file(s) (`path`) containing 'chunk_*' as output from the script and send the output as a channel
 <9> Three double quote marks initiate the code block to execute in this `process`
 <10> Code to execute, printing the `input` value x (called using the dollar [$] symbol prefix), and splitting the string into chunks of 6 characters long ("Hello " and "world!") and saving to files: chunk_aa and chunk_ab
 <11> Three double quote marks end the code block
@@ -128,7 +128,7 @@ workflow{ <22>
 <19> Script to read files (cat) using the '$y' input variable, then pipe to uppercase conversion, outputting to standard output
 <20> Three double quote marks end the code block
 <21> End of first `process` block
-<22> Start of the workflow scope, where each process can be called. 
+<22> Start of the workflow scope, where each process can be called.
 <23> Execute the `process` `SPLITLETTERS` on the `greeting_ch` (aka greeting channel), and store the output in the channel `letters_ch`
 <24> Execute the `process` `CONVERTTOUPPER` on the letters channel `letters_ch`, which is flattened using the operator `.flatten()`, which transforms the input channel in such a way that every item is a separate element. We store the output in the channel `results_ch`
 <25> The final output (in the `results_ch`) is printed to screen using the `view` operator (appended onto the channel name).
@@ -138,7 +138,7 @@ TIP: The use of the operator `.flatten()` here is to split the two files into tw
 
 === In practice
 
-Please now copy the following example into your favourite text editor 
+Please now copy the following example into your favourite text editor
 and save it to a file named `hello.nf`.
 
 WARNING: For the Gitpod tutorial, make sure you are in the folder called `nf-training`
@@ -159,11 +159,11 @@ Launching `hello.nf` [tiny_venter] DSL2 - revision: 6879fb9372
 executor >  local (3)
 [26/004297] process > SPLITLETTERS (1)   [100%] 1 of 1 ✔
 [8a/537930] process > CONVERTTOUPPER (1) [100%] 2 of 2 ✔
-HELLO 
+HELLO
 WORLD!
 ----
 
-Where the standard output shows (line by line): 
+Where the standard output shows (line by line):
 
 * *1*: The Nextflow version executed
 
@@ -171,7 +171,7 @@ Where the standard output shows (line by line):
 
 * *3*: The executor used (in the above case: local)
 
-* *4*: The first `process` is executed once (1) and starts with a unique hexadecimal (see TIP below) and ending with the percentage and job completion information 
+* *4*: The first `process` is executed once (1) and starts with a unique hexadecimal (see TIP below) and ending with the percentage and job completion information
 
 * *5*: The second process is executed twice (2)
 
@@ -183,9 +183,9 @@ process is executed. You can inspect the files produced by changing to the direc
 `$PWD/work` and use these numbers to find the process-specific
 execution path.
 
-IMPORTANT: The second process runs twice, executing in two different work directories 
-for each input file. Therefore, in the previous example the work directory [9f/1dd42a] 
-represents just one of the two directories that were processed. To print all the 
+IMPORTANT: The second process runs twice, executing in two different work directories
+for each input file. Therefore, in the previous example the work directory [9f/1dd42a]
+represents just one of the two directories that were processed. To print all the
 relevant paths to the screen, use the `-ansi-log` flag (e.g. `nextflow run hello.nf -ansi-log false`).
 
 It's worth noting that the process `CONVERTTOUPPER` is executed in parallel, so there's no guarantee that the instance processing the first split (the chunk 'Hello ') will be executed before the one processing the second split (the chunk 'world!').
