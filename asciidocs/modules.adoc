@@ -153,7 +153,7 @@ HELLO
 ====
 
 NOTE: You can store each process in separate files within separate sub-folders or combined in one big file (both are valid). For your own projects, it can be helpful to see examples on public repos. e.g. Seqera RNA-Seq tutorial
-https://github.com/seqeralabs/rnaseq-nf/tree/master/modules[here] or within nf-core projects  https://github.com/nf-core/rnaseq/tree/master/modules/nf-core/modules[here].
+https://github.com/seqeralabs/rnaseq-nf/tree/master/modules[here] or within nf-core pipelines, such as https://github.com/nf-core/rnaseq/tree/master/modules/nf-core/modules[nf-core/rnaseq].
 
 
 == Output definition
