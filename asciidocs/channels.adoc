@@ -278,9 +278,12 @@ IMPORTANT: This function now requires an API key you can only get by logging int
 [%collapsible]
 ====
 1. Go to: https://www.ncbi.nlm.nih.gov/
-2. Click the top right button to "Sign into NCBI". Follow their instructions.
-3. Once into your account, click the button at the top right, left of `My NCBI`, usually your ID.
-4. Scroll down to API key section. Copy your key.
+2. Click the top right "Log in" button to sign into NCBI. Follow their instructions.
+3. Once into your account, click the button at the top right, usually your ID.
+4. Go to Account settings
+5. Scroll down to the API Key Management section.
+6. Click on "Create an API Key".
+7. The page will refresh and the key will be displayed where the button was. Copy your key.
 ====
 
 IMPORTANT: You also need to use the latest edge version of Nextflow. Check your `nextflow -version`, it should say `-edge`, if not: download the newest Nextflow version, following the instructions https://www.nextflow.io/docs/edge/getstarted.html#stable-edge-releases[linked here].
@@ -335,14 +338,13 @@ It's straightforward to use this channel as an input using the usual Nextflow sy
 params.ncbi_api_key = '<Your API key here>'
 
 params.accession = ['ERR908507', 'ERR908506']
-reads = Channel.fromSRA(params.accession, apiKey: params.ncbi_api_key)
 
 process fastqc {
   input:
-  tuple val(sample_id), file(reads_file)
+  tuple val(sample_id), path(reads_file)
 
   output:
-  file("fastqc_${sample_id}_logs")
+  path("fastqc_${sample_id}_logs")
 
   script:
   """
@@ -350,7 +352,14 @@ process fastqc {
   fastqc -o fastqc_${sample_id}_logs -f fastq -q ${reads_file}
   """
 }
+
+workflow {
+  reads = Channel.fromSRA(params.accession, apiKey: params.ncbi_api_key)
+  fastqc(reads)
+}
 ----
+
+If you want to run the pipeline above and do not have fastqc installed in your machine, don't forget what you learned in the previous section. Run this pipeline with `-with-docker biocontainers/fastqc:v0.11.5`, for example.
 
 === Text files
 
