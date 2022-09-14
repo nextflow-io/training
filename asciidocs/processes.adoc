@@ -1,8 +1,8 @@
-= Processes 
+= Processes
 
 In Nextflow, a `process` is the basic computing primitive to execute foreign functions (i.e., custom scripts or tools).
 
-The `process` definition starts with the keyword `process`, followed by the process name and finally the process body delimited by curly brackets. 
+The `process` definition starts with the keyword `process`, followed by the process name and finally the process body delimited by curly brackets.
 
 The `process` name is commonly written in upper case by convention.
 
@@ -15,7 +15,7 @@ process SAYHELLO {
   script:
   """
   echo 'Hello world!'
-  """ 
+  """
 }
 ----
 
@@ -41,13 +41,13 @@ process < name > {
 
   input:                // <2>
   < process inputs >
-  
+
   output:               // <3>
   < process outputs >
-  
+
   when:                 // <4>
   < condition >
-  
+
   [script|shell|exec]:  // <5>
   """
   < user script to be executed >
@@ -132,7 +132,7 @@ workflow {
 ----
 
 NOTE: A process script can contain any string format supported by the Groovy programming language.
-This allows us to use string interpolation as in the script above or multiline strings. 
+This allows us to use string interpolation as in the script above or multiline strings.
 Refer to <<groovy.adoc#_string_interpolation,String interpolation>> for more information.
 
 IMPORTANT: Since Nextflow uses the same Bash syntax for variable substitutions in strings, Bash environment variables need to be escaped using the `\` character.
@@ -217,7 +217,7 @@ process FOO {
     bzip2 -c $file > ${file}.bz2
     """
   else
-    throw new IllegalArgumentException("Unknown aligner $params.compress") 
+    throw new IllegalArgumentException("Unknown aligner $params.compress")
 }
 
 workflow {
@@ -230,8 +230,8 @@ workflow {
 
 Nextflow processes are isolated from each other but can communicate between themselves by sending values through channels.
 
-Inputs implicitly determine the dependencies and the parallel execution of the process. 
-The process execution is fired each time _new_ data is ready to be consumed from the input channel: 
+Inputs implicitly determine the dependencies and the parallel execution of the process.
+The process execution is fired each time _new_ data is ready to be consumed from the input channel:
 
 image::channel-process.png[]
 
@@ -254,10 +254,10 @@ num = Channel.of( 1, 2, 3 )
 
 process BASICEXAMPLE {
   debug=true
-  
+
   input:
   val x
-  
+
   script:
   """
   echo process job $x
@@ -281,7 +281,7 @@ IMPORTANT: The channel guarantees that items are delivered in the same order as 
 
 === Input files
 
-The `file` qualifier allows the handling of file values in the process execution context. This means that
+The `path` qualifier allows the handling of file values in the process execution context. This means that
 Nextflow will stage it in the process execution directory, and it can be accessed in the script by using the name specified in the input declaration.
 
 
@@ -291,10 +291,10 @@ reads = Channel.fromPath( 'data/ggal/*.fq' )
 
 process FOO {
   debug=true
-  
+
   input:
   path 'sample.fastq'
-  
+
   script:
   """
   ls sample.fastq
@@ -314,10 +314,10 @@ reads = Channel.fromPath( 'data/ggal/*.fq' )
 
 process FOO {
   debug=true
-  
+
   input:
   path sample
-  
+
   script:
   """
   ls  $sample
@@ -338,10 +338,10 @@ reads = Channel.fromPath( 'data/ggal/*.fq' )
 
 process FOO {
   debug=true
-  
+
   input:
   path sample
-  
+
   script:
   """
   ls -lh $sample
@@ -353,14 +353,14 @@ workflow {
 }
 ----
 
-WARNING: When a process declares an input `file`, the corresponding channel elements 
-must be *file* objects mcreated with the `file` helper function from the file specific 
-channel factories (e.g., `Channel.fromPath` or `Channel.fromFilePairs`). 
+WARNING: When a process declares an input file, the corresponding channel elements
+must be *file* objects created with the file helper function from the file specific
+channel factories (e.g., `Channel.fromPath` or `Channel.fromFilePairs`).
 
 
 === Input path
 
-As of version 19.10.0, Nextflow introduced a new `path` input qualifier that automatically 
+As of version 19.10.0, Nextflow introduced a new `path` input qualifier that automatically
 handles string values as file objects. The following example works as expected:
 
 [source,nextflow,linenums]
@@ -371,7 +371,7 @@ process FOO {
 
   input:
   path genome
-  
+
   script:
   """
   ls -lh $genome
@@ -383,7 +383,7 @@ workflow {
 }
 ----
 
-NOTE: The path qualifier should be preferred over files to handle process input files when using Nextflow 19.10.0 or later.
+NOTE: In the past, the file qualifier was used for files, but the path qualifier should be preferred over file to handle process input files when using Nextflow 19.10.0 or later.
 
 
 [discrete]
@@ -399,9 +399,9 @@ followed by a process that concatenates them into a single file and prints the f
 ----
 params.reads = "$baseDir/data/ggal/*_1.fq"
 
-Channel 
+Channel
   .fromPath( params.reads )
-  .set { read_ch } 
+  .set { read_ch }
 
 process CONCATENATE {
   tag "Concat all files"
@@ -411,7 +411,7 @@ process CONCATENATE {
 
   output:
   path 'top_10_lines'
- 
+
   script:
   """
   cat * > concatenated.txt
@@ -441,11 +441,11 @@ ch2 = Channel.of('a','b','c')
 
 process FOO {
   debug true
-  
+
   input:
   val x
   val y
-  
+
   script:
    """
    echo $x and $y
@@ -480,15 +480,15 @@ input2 = Channel.of('a','b','c','d')
 
 process FOO {
   debug true
-  
+
   input:
   val x
   val y
-  
+
   script:
    """
    echo $x and $y
-   """ 
+   """
 }
 
 workflow {
@@ -509,11 +509,11 @@ input2 = Channel.of('a','b','c')
 
 process BAR {
   debug true
-  
+
   input:
   val x
   val y
-  
+
   script:
    """
    echo $x and $y
@@ -553,9 +553,9 @@ use the same `data/ggal/transcriptome.fa` in each execution.
 params.reads = "$baseDir/data/ggal/*_1.fq"
 params.transcriptome_file = "$baseDir/data/ggal/transcriptome.fa"
 
-Channel 
+Channel
     .fromPath( params.reads )
-    .set { read_ch } 
+    .set { read_ch }
 
 process COMMAND {
   tag "Run_command"
@@ -566,7 +566,7 @@ process COMMAND {
 
   output:
   path result
- 
+
   script:
   """
   echo your_command $reads $transcriptome > result
@@ -591,7 +591,7 @@ methods = ['regular', 'expresso', 'psicoffee']
 
 process ALIGNSEQUENCES {
   debug=true
-  
+
   input:
   path seq
   each mode
@@ -623,9 +623,9 @@ params.reads = "$baseDir/data/ggal/*_1.fq"
 params.transcriptome_file = "$baseDir/data/ggal/transcriptome.fa"
 methods= ['salmon', 'kallisto']
 
-Channel 
+Channel
     .fromPath( params.reads )
-    .set { read_ch } 
+    .set { read_ch }
 
 process COMMAND {
   tag "Run_command"
@@ -637,7 +637,7 @@ process COMMAND {
 
   output:
   path result
- 
+
   script:
   """
   echo $mode $reads $transcriptome > result
@@ -679,7 +679,7 @@ process FOO {
 
   output:
   val x
-  
+
   script:
   """
   echo $x > file
@@ -694,7 +694,7 @@ workflow {
 
 === Output files
 
-The `file` qualifier specifies one or more files produced by the process into the specified channel as an output.
+The `path` qualifier specifies one or more files produced by the process into the specified channel as an output.
 
 [source,nextflow,linenums]
 ----
@@ -741,7 +741,7 @@ process SPLITLETTERS {
 }
 
 workflow {
-    letters = SPLITLETTERS()  
+    letters = SPLITLETTERS()
     letters
         .flatMap()
         .view { "File: ${it.name} => ${it.text}" }
@@ -819,7 +819,7 @@ on the actual value of the `x` input.
 
 === Composite inputs and outputs
 
-So far we have seen how to declare multiple input and output channels that can handel 
+So far we have seen how to declare multiple input and output channels that can handle
 one value at a time. However, Nextflow can also handle a _tuple_ of values.
 
 The input and output declarations for tuples must be declared with a `tuple` qualifier followed by the definition of each element in the tuple.
@@ -832,10 +832,10 @@ process FOO {
 
   input:
     tuple val(sample_id), file(sample_id)
-    
+
   output:
     tuple val(sample_id), file('sample.bam')
-    
+
   script:
   """
     echo your_command_here --reads $sample_id > sample.bam
@@ -866,10 +866,10 @@ process FOO {
 
   input:
     tuple val(sample_id), file(sample_files)
-    
+
   output:
     tuple val(sample_id), file("${sample_id}.bam")
-    
+
   script:
   """
     echo your_command_here --reads $sample_id > ${sample_id}.bam
@@ -897,7 +897,7 @@ proteins = Channel.fromPath(params.prot)
 
 process FIND {
   debug=true
-  
+
   input:
   path fasta
   val type
@@ -947,16 +947,16 @@ The complete list of directives is available https://www.nextflow.io/docs/latest
 |Name
 |Description
 
-|https://www.nextflow.io/docs/latest/process.html#cpus[cpus] 
-|Allows you to define the number of (logical) CPUs required by the process’ task. 
+|https://www.nextflow.io/docs/latest/process.html#cpus[cpus]
+|Allows you to define the number of (logical) CPUs required by the process’ task.
 
-|https://www.nextflow.io/docs/latest/process.html#time[time] 
+|https://www.nextflow.io/docs/latest/process.html#time[time]
 |Allows you to define how long a process is allowed to run (e.g., time '1h': 1 hour, '1s' 1 second, '1m' 1 minute, '1d' 1 day).
 
 |https://www.nextflow.io/docs/latest/process.html#memory[memory]
 |Allows you to define how much memory the process is allowed to use (e.g., '2 GB' is 2 GB). Can also use B, KB,MB,GB and TB.
 
-|https://www.nextflow.io/docs/latest/process.html#disk[disk] 
+|https://www.nextflow.io/docs/latest/process.html#disk[disk]
 |Allows you to define how much local disk storage the process is allowed to use.
 
 |https://www.nextflow.io/docs/latest/process.html#tag[tag]
@@ -967,7 +967,7 @@ The complete list of directives is available https://www.nextflow.io/docs/latest
 
 === PublishDir directive
 
-Given each process is being executed in separate temporary `work/` folder (e.g., work/f1/850698...; work/g3/239712...; etc.), we may want to save important, non-intermediary, and/or final files in a results folder. 
+Given each process is being executed in separate temporary `work/` folder (e.g., work/f1/850698...; work/g3/239712...; etc.), we may want to save important, non-intermediary, and/or final files in a results folder.
 
 TIP: Remember to delete the work folder from time to time to clear your intermediate files and stop them from filling your computer!
 
@@ -1004,7 +1004,7 @@ workflow {
 ----
 
 The above example will copy all blast script files created by the `BLASTSEQ` task into the
-directory path `my-results`. 
+directory path `my-results`.
 
 TIP: The publish directory can be local or remote. For example, output files
 could be stored using an https://aws.amazon.com/s3/[AWS S3 bucket] by using the `s3://` prefix in the target path.
@@ -1027,10 +1027,10 @@ process FOO {
 
   input:
     tuple val(sampleId), file('sample1.fq.gz'), file('sample2.fq.gz')
-    
+
   output:
     path "*"
-    
+
   script:
   """
     < sample1.fq.gz zcat > sample1.fq
