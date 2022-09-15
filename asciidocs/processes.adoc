@@ -253,7 +253,7 @@ The `val` qualifier allows you to receive data of any type as input. It can be a
 num = Channel.of( 1, 2, 3 )
 
 process BASICEXAMPLE {
-  debug=true
+  debug true
 
   input:
   val x
@@ -290,7 +290,7 @@ Nextflow will stage it in the process execution directory, and it can be accesse
 reads = Channel.fromPath( 'data/ggal/*.fq' )
 
 process FOO {
-  debug=true
+  debug true
 
   input:
   path 'sample.fastq'
@@ -313,7 +313,7 @@ The input file name can also be defined using a variable reference as shown belo
 reads = Channel.fromPath( 'data/ggal/*.fq' )
 
 process FOO {
-  debug=true
+  debug true
 
   input:
   path sample
@@ -337,7 +337,7 @@ only requires changing the channel composition.
 reads = Channel.fromPath( 'data/ggal/*.fq' )
 
 process FOO {
-  debug=true
+  debug true
 
   input:
   path sample
@@ -590,7 +590,7 @@ sequences = Channel.fromPath('data/prots/*.tfa')
 methods = ['regular', 'expresso', 'psicoffee']
 
 process ALIGNSEQUENCES {
-  debug=true
+  debug true
 
   input:
   path seq
@@ -896,7 +896,7 @@ params.prot = 'data/prots/*.tfa'
 proteins = Channel.fromPath(params.prot)
 
 process FIND {
-  debug=true
+  debug true
 
   input:
   path fasta
