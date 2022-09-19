@@ -89,9 +89,9 @@ To run Gitpod:
 
 https://gitpod.io/#https://github.com/seqeralabs/nf-training-public
 
-(which is our Github repository URL, prefixed with https://gitpod.io/#).
+(which is our GitHub repository URL, prefixed with https://gitpod.io/#).
 
-- Log in to your Github account (and allow authorization).
+- Log in to your GitHub account (and allow authorization).
 
 Once you have signed in, Gitpod should load (skip prebuild if asked).
 
@@ -125,7 +125,7 @@ This should come up with the Nextflow version and runtime information:
 === Gitpod resources
 
 - Gitpod gives you up to 50 hours per month to run the environment for free.
-- It includes upto 16 cpus and 30GB of workspace.
+- It includes up to 16 cpus and 30GB of workspace.
 - Gitpod will timeout after 30 minutes. However any changes are saved for up to two weeks (see next section for reopening a timed out session).
 
 See www.gitpod.io for more details.
@@ -157,7 +157,7 @@ By default, Nextflow will pull the latest stable version into your environment.
 
 However, Nextflow is constantly evolving as we make improvements and fix bugs.
 
-It is worth checking out the latest releases on github https://github.com/nextflow-io/nextflow[here].
+It is worth checking out the latest releases on GitHub https://github.com/nextflow-io/nextflow[here].
 
 If you want or need to use a specific version of Nextflow, you can set the NXF_VER variable as shown below:
 

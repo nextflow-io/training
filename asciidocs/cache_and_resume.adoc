@@ -192,7 +192,7 @@ Script:
 ----
 
 Save the above snippet in a file named `template.html`. Then
-run this command (using the correct id for your run, e.g. not tiny_fermat):
+run this command (using the correct id for your run, e.g. not `tiny_fermat`):
 
 ```
 nextflow log tiny_fermat -t template.html > prov.html
