@@ -1,4 +1,4 @@
-# Nextflow Training Guide. 
+# Nextflow Training Guide.
 
 Welcome to the Nextflow training repo. We are excited to have you on the path to writing reproducible and scalable scientific workflows using Nextflow. This guide complements the full Nextflow documentation - if you ever have any doubts, head over to the docs located [here](https://www.nextflow.io/docs/latest/).
 
@@ -24,7 +24,7 @@ https://gitpod.io/#https://github.com/seqeralabs/nf-training-public
 
 (which is our Github repository URL, prefixed with https://gitpod.io/#).
 
-- Log in to your Github account (and allow authorization). 
+- Log in to your Github account (and allow authorization).
 
 Once you have signed in, Gitpod should load (skip prebuild if asked).
 
@@ -36,7 +36,7 @@ You should now see something similar to the following:
 
 **The sidebar** allows you to customize your Gitpod environment and perform basic tasks (copy, paste, open files, search, git, etc.). Click the Explorer button to see which files are in this repository.
 
-**The terminal** allows you to run all the programs in the repository. For example, both `nextflow` and `docker` are installed and can be executed. 
+**The terminal** allows you to run all the programs in the repository. For example, both `nextflow` and `docker` are installed and can be executed.
 
 **The main window** allows you to view and edit files. Clicking on a file in the explorer will open it within the main window. You should also see the nf-training material browser (https://training.seqera.io/).
 
@@ -47,7 +47,7 @@ To test that the environment is working correctly, type the following into the t
 This should come up with the Nextflow version and runtime information:
 
     Version: 22.04.2 build 5701
-    Created: 16-05-2022 17:52 UTC 
+    Created: 16-05-2022 17:52 UTC
     System: Linux 5.16.20-051620-generic
     Runtime: Groovy 3.0.10 on OpenJDK 64-Bit Server VM 11.0.13+8-LTS
     Encoding: UTF-8 (UTF-8)
@@ -55,25 +55,25 @@ This should come up with the Nextflow version and runtime information:
 ### Gitpod resources
 
 - Gitpod gives you up to 50 hours per month to run the environment for free.
-- It includes upto 16 cpus and 30GB of workspace. 
-- Gitpod will timeout after 30 minutes. However any changes are saved for up to two week (see next section for reopening a timed out session). 
+- It includes up to 16 cpus and 30GB of workspace.
+- Gitpod will timeout after 30 minutes. However any changes are saved for up to two week (see next section for reopening a timed out session).
 
 See www.gitpod.io for more details.
 
 ### Reopening a Gitpod session
 
-You can reopen an environment by going to https://gitpod.io/workspaces and finding your previous environment, then clicking the button with three dots and selecting Open. 
+You can reopen an environment by going to https://gitpod.io/workspaces and finding your previous environment, then clicking the button with three dots and selecting Open.
 
-If you save the URL from your previous Gitpod environment, you can just paste this into your browser to open the previous environment. 
+If you save the URL from your previous Gitpod environment, you can just paste this into your browser to open the previous environment.
 
-Alternatively, you can start a new workspace by following the Gitpod URL: 
+Alternatively, you can start a new workspace by following the Gitpod URL:
 https://gitpod.io/#https://github.com/seqeralabs/nf-training-public
 
 This tutorial provides all the scripts, so don't worry if you have lost your environment. In the `nf-training` directory, you can find the main scripts used in the tutorial.
 
 ### Saving files from Gitpod to your local machine.
 
-To save your files, select your file of interest from the explorer panel, then right click the file to click `Download` 
+To save your files, select your file of interest from the explorer panel, then right click the file to click `Download`
 
 
 ### Copyright

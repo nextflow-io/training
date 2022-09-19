@@ -362,7 +362,7 @@ assert fact(5) == 120
 
 == Closures
 
-Closures are the swiss army knife of Nextflow/Groovy programming. In a nutshell, a closure is a block of code that can be passed as an argument to a function. A closure can also be used to define an anonymous function.
+Closures are the Swiss army knife of Nextflow/Groovy programming. In a nutshell, a closure is a block of code that can be passed as an argument to a function. A closure can also be used to define an anonymous function.
 
 More formally, a closure allows the definition of functions as first-class objects.
 

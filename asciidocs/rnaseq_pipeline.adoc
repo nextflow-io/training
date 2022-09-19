@@ -131,7 +131,7 @@ Here, the `params.transcriptome_file` parameter is used as the input for the `IN
 
 NOTE: The `input` declaration defines a `transcriptome` path variable which is used in the `script` as a reference (using the dollar symbol) in the Salmon command line.
 
-IMPORTANT: Resource requirements such as CPUs and memory limits can change with different workflow executions and platforms. Nextflow can use $task.cpus as a variable for the number of CPUs. See process directives documentation for more https://www.nextflow.io/docs/latest/process.html#directives[details].
+IMPORTANT: Resource requirements such as CPUs and memory limits can change with different workflow executions and platforms. Nextflow can use $task.cpus as a variable for the number of CPUs. See https://www.nextflow.io/docs/latest/process.html#directives[process directives documentation] for more details.
 
 Run it by using the command:
 
