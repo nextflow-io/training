@@ -204,7 +204,7 @@ To learn more about using the Tower API, visit the https://help.tower.nf/api/ove
 
 Nextflow Tower simplifies the development and execution of workflows by providing a centralized interface for users and organizations.
 
-Each user has a unique *workspace* where they can interact and manage all resources such as workflows, compute environments and credentials. details of this can be found https://help.tower.nf/getting-started/workspace/[here].
+Each user has a unique *workspace* where they can interact and manage all resources such as workflows, compute environments and credentials. Details of this can be found https://help.tower.nf/getting-started/workspace/[here].
 
 By default, each user has their own private workspace, while organizations have the ability to run and manage users through role-based access as *members* and *collaborators*.
 

@@ -18,7 +18,7 @@ To get you started with Nextflow as quickly as possible, we will walk through th
 
 1. Set up a development environment to run Nextflow
 
-2. Explore Nexflow concepts using some basic workflows, including a multi-step RNA-Seq analysis
+2. Explore Nextflow concepts using some basic workflows, including a multi-step RNA-Seq analysis
 
 3. Build and use Docker containers to encapsulate all workflow dependencies
 
