@@ -4,7 +4,7 @@ There are two main ways to get started with Seqera's Nextflow training course.
 
 The first is to install the requirements locally (<<Local installation>>), which is best if you are already familiar with Git and Docker, or working offline.
 
-The second is to use Gitpod (<<Gitpod>>), which is best for first-timers as this platform contains all the programs and data required.
+The second is to use <<Gitpod>>, which is best for first-timers as this platform contains all the programs and data required.
 Simply click the link and log in using your GitHub account to start the tutorial.
 
 == Local installation
@@ -14,7 +14,7 @@ Nextflow can be used on any POSIX-compatible system (Linux, macOS, Windows Subsy
 *Requirements*:
 
 * Bash
-* https://www.oracle.com/technetwork/java/javase/downloads/index.html[Java 8 (or later, up to 15)]
+* https://www.oracle.com/technetwork/java/javase/downloads/index.html[Java 11 (or later, up to 18)]
 * Git
 * https://docs.docker.com/get-docker/[Docker]
 
@@ -161,10 +161,10 @@ If you want to use a specific version of Nextflow, you can set the NXF_VER varia
 
 [source,bash,linenums]
 ----
-export NXF_VER=21.10.0
+export NXF_VER=22.04.5
 ----
 
-WARNING: Most of this tutorial workshop requires NXF_VER=22 or later, to use DSL2 as default.
+WARNING: Most of this tutorial workshop requires NXF_VER=22.04.0 or later, to use DSL2 as default.
 
 Run `nextflow -version` again to confirm that the change has taken effect.
 
