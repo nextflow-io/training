@@ -2,7 +2,7 @@
 
 == Basic concepts
 
-Nextflow is a workflow orchestration engine and a domain specific language (DSL)
+Nextflow is a workflow orchestration engine and domain specific language (DSL)
 that makes it easy to write data-intensive computational pipelines.
 
 It is designed around the idea that the Linux platform is the _lingua franca_ of data science.
@@ -10,12 +10,12 @@ Linux provides many simple but powerful command-line and scripting tools that, w
 facilitate complex data manipulations.
 
 Nextflow extends this approach, adding the ability to define complex program interactions and a
-high-level parallel computational environment based on the dataflow programming model. Nextflow's
+high-level parallel computational environment, based on the dataflow programming model. Nextflow's
 core features are:
 
 * Workflow portability and reproducibility
 * Scalability of parallelization and deployment
-* Integration of existing tools, systems and industry standards
+* Integration of existing tools, systems, and industry standards
 
 === Processes and Channels
 
@@ -34,16 +34,14 @@ image::channel-process.png[]
 === Execution abstraction
 
 While a `process` defines _what_ command or `script` has to be executed, the executor determines
-how that `script` is actually run in the target platform.
+_how_ that `script` is actually run in the target platform.
 
 If not otherwise specified, processes are executed on the local computer. The local executor
 is very useful for pipeline development and testing purposes, but for real world computational
-pipelines, an High Performance Computing (HPC) or cloud platform is often required.
+pipelines, a High Performance Computing (HPC) or cloud platform is often required.
 
 In other words, Nextflow provides an abstraction between the pipeline's functional logic and
-the underlying execution system (or runtime). Thus, it is possible to write a pipeline once and to seamlessly
-run it on your computer, a cluster, or the cloud, without modifying it, by simply defining
-the target execution platform in the configuration file.
+the underlying execution system (or runtime). Thus, it is possible to write a pipeline which runs seamlessly on your computer, a cluster, or the cloud, without being modified. You simply define the target execution platform in the configuration file.
 
 image::execution_abstraction.png[]
 
@@ -52,19 +50,16 @@ image::execution_abstraction.png[]
 Nextflow implements a declarative DSL that simplifies the writing
 of complex data analysis workflows as an extension of a general purpose programming language.
 
-This approach makes Nextflow very flexible, because it allows in the same
-computing environment the benefits of a concise DSL allowing for the handling of
-recurrent use cases with ease *and* the flexibility and power of a general purpose
-programming language to handle corner cases, which may be difficult to implement using
-a purely declarative approach.
+This approach makes Nextflow flexible — it provides the benefits of a concise DSL for the handling of recurrent use cases with ease, *and* the flexibility and power of a general purpose
+programming language to handle corner cases, in the same
+computing environment. This would be difficult to implement using a purely declarative approach.
 
 In practical terms, Nextflow scripting is an extension of the https://groovy-lang.org/[Groovy programming language]
-that, in turn, is a super-set of the Java programming language. Groovy can be considered as Python for Java in that
-it simplifies the writing of code and is more approachable.
+that, in turn, is a super-set of the Java programming language. Groovy can be thought of as Python for Java, in that it simplifies the writing of code and is more approachable.
 
 == Your first script
 
-Here you will execute your first Nextflow script (`hello.nf`), which we will go through line by line.
+Here you will execute your first Nextflow script (`hello.nf`), which we will go through line-by-line.
 
 In this toy example, the script takes an input string (a parameter called `params.greeting`), then splits the input into chunks of six characters in the first process, then converts the characters to upper case in the second process, before viewing the output to screen.
 
@@ -138,8 +133,7 @@ TIP: The use of the operator `.flatten()` here is to split the two files into tw
 
 === In practice
 
-Please now copy the following example into your favourite text editor
-and save it to a file named `hello.nf`.
+Now copy the following example into your favourite text editor and save it to a file named `hello.nf`.
 
 WARNING: For the Gitpod tutorial, make sure you are in the folder called `nf-training`
 
