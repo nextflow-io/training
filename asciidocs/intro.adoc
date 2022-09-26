@@ -101,32 +101,32 @@ workflow{ <22>
     results_ch.view{ it } <25>
 } <26>
 ----
-<1> The code begins with a shebang, which declares Nextflow as the interpreter
-<2> Declares a parameter `greeting` that is initialized with the value 'Hello world!'
+<1> The code begins with a shebang, which declares Nextflow as the interpreter.
+<2> Declares a parameter `greeting` that is initialized with the value 'Hello world!'.
 <3> Initializes a `channel` labelled `greeting_ch`, which contains the value from `params.greeting`. Channels are the input type for processes in Nextflow.
-<4> Begins the first process, defined as `SPLITLETTERS`
+<4> Begins the first process, defined as `SPLITLETTERS`.
 <5> Input declaration for the `SPLITLETTERS` process. Inputs can be values (`val`), files or paths (`path`), or other qualifiers (https://www.nextflow.io/docs/latest/process.html#inputs[see here]).
-<6> Tells the `process` to expect an input value (`val`), that we assign to the variable 'x'
-<7> Output declaration for the `SPLITLETTERS` process
+<6> Tells the `process` to expect an input value (`val`), that we assign to the variable 'x'.
+<7> Output declaration for the `SPLITLETTERS` process.
 <8> Tells the process to expect an output file(s) (`path`), with a filename starting with 'chunk_*', as output from the script. The process sends the output as a channel.
-<9> Three double quotes initiate the code block to execute in this `process`
+<9> Three double quotes initiate the code block to execute in this `process`.
 <10> Code to execute — printing the `input` value x (called using the dollar symbol [$] prefix), splitting the string into chunks with a length of 6 characters ("Hello " and "world!"), and saving each to a file (chunk_aa and chunk_ab).
-<11> Three double quotes end the code block
-<12> End of the first process block
-<13> Begins the second process, defined as `CONVERTTOUPPER`
-<14> Input declaration for the `CONVERTTOUPPER` `process`
-<15> Tells the `process` to expect an `input` file(s) (`path`; i.e. chunk_aa and chunk_ab), that we assign to the variable 'y'
-<16> Output declaration for the `CONVERTTOUPPER` process
-<17> Tells the process to expect output as standard output (stdout) and send this output as a channel
-<18> Three double quotes initiate the code block to execute in this `process`
-<19> Script to read files (cat) using the '$y' input variable, then pipe to uppercase conversion, outputting to standard output
-<20> Three double quotes end the code block
-<21> End of first `process` block
-<22> Start of the workflow scope, where each process can be called
-<23> Execute the `process` `SPLITLETTERS` on the `greeting_ch` (aka greeting channel), and store the output in the channel `letters_ch`
+<11> Three double quotes end the code block.
+<12> End of the first process block.
+<13> Begins the second process, defined as `CONVERTTOUPPER`.
+<14> Input declaration for the `CONVERTTOUPPER` `process`.
+<15> Tells the `process` to expect an `input` file(s) (`path`; i.e. chunk_aa and chunk_ab), that we assign to the variable 'y'.
+<16> Output declaration for the `CONVERTTOUPPER` process.
+<17> Tells the process to expect output as standard output (stdout) and send this output as a channel.
+<18> Three double quotes initiate the code block to execute in this `process`.
+<19> Script to read files (cat) using the '$y' input variable, then pipe to uppercase conversion, outputting to standard output.
+<20> Three double quotes end the code block.
+<21> End of first `process` block.
+<22> Start of the workflow scope, where each process can be called.
+<23> Execute the `process` `SPLITLETTERS` on the `greeting_ch` (aka greeting channel), and store the output in the channel `letters_ch`.
 <24> Execute the `process` `CONVERTTOUPPER` on the letters channel `letters_ch`, which is flattened using the operator `.flatten()`. This transforms the input channel in such a way that every item is a separate element. We store the output in the channel `results_ch`.
 <25> The final output (in the `results_ch` channel) is printed to screen using the `view` operator (appended onto the channel name).
-<26> End of the workflow scope
+<26> End of the workflow scope.
 
 TIP: The use of the operator `.flatten()` here is to split the two files into two separate items to be put through the next process (else they would be treated as a single element).
 
@@ -158,17 +158,17 @@ WORLD!
 
 The standard output shows (line by line):
 
-* *1*: The Nextflow version executed
+* *1*: The Nextflow version executed.
 
-* *2*: The script and version names
+* *2*: The script and version names.
 
-* *3*: The executor used (in the above case: local)
+* *3*: The executor used (in the above case: local).
 
 * *4*: The first `process` is executed once (1). The line starts with a unique hexadecimal value (see TIP below), and ends with the percentage and job completion information.
 
-* *5*: The second process is executed twice (2) (once for chunk_aa, once for chunk_ab)
+* *5*: The second process is executed twice (2) (once for chunk_aa, once for chunk_ab).
 
-* *6-7*: The result string from stdout is printed
+* *6-7*: The result string from stdout is printed.
 
 TIP: The hexadecimal numbers, like `8a/537930`, identify the unique process
 execution. These numbers are also the prefix of the directories where each
