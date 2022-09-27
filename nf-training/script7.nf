@@ -6,7 +6,7 @@ params.transcriptome_file = "$projectDir/data/ggal/transcriptome.fa"
 params.multiqc = "$projectDir/multiqc"
 params.outdir = "results"
 log.info """\
-    R N A S E Q - N F   P I P E L I N E   
+    R N A S E Q - N F   P I P E L I N E
     ===================================
     transcriptome: ${params.transcriptome_file}
     reads        : ${params.reads}
@@ -14,8 +14,8 @@ log.info """\
     """
     .stripIndent()
 
-/* 
- * define the `index` process that creates a binary index 
+/*
+ * define the `index` process that creates a binary index
  * given the transcriptome file
  */
 process INDEX {
@@ -25,7 +25,7 @@ process INDEX {
     output:
     path 'salmon_index'
 
-    script: 
+    script:
     """
     salmon index --threads $task.cpus -t $transcriptome -i salmon_index
     """
@@ -69,24 +69,24 @@ process MULTIQC {
 
     input:
     path '*'
-    
+
     output:
     path 'multiqc_report.html'
 
     script:
     """
-    multiqc . 
-    """  
-} 
+    multiqc .
+    """
+}
 
 workflow {
     Channel
         .fromFilePairs(params.reads, checkIfExists: true)
         .set { read_pairs_ch }
-        
+
     index_ch = INDEX(params.transcriptome_file)
     quant_ch = QUANTIFICATION(index_ch, read_pairs_ch)
-    fastqc_ch = FASTQC(read_pairs_ch) 
+    fastqc_ch = FASTQC(read_pairs_ch)
     MULTIQC(quant_ch.mix(fastqc_ch).collect())
 }
 

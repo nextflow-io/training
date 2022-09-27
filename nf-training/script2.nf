@@ -7,29 +7,29 @@ params.multiqc = "$projectDir/multiqc"
 params.outdir = "results"
 
 log.info """\
-    R N A S E Q - N F   P I P E L I N E   
+    R N A S E Q - N F   P I P E L I N E
     ===================================
     transcriptome: ${params.transcriptome_file}
     reads        : ${params.reads}
     outdir       : ${params.outdir}
     """
     .stripIndent()
-        
-/* 
- * define the `index` process that creates a binary index 
+
+/*
+ * define the `index` process that creates a binary index
  * given the transcriptome file
  */
 process INDEX {
     input:
     path transcriptome
-    
+
     output:
     path 'salmon_index'
 
-    script: 
+    script:
     """
     salmon index --threads $task.cpus -t $transcriptome -i salmon_index
-    """  
+    """
 }
 
 workflow {
