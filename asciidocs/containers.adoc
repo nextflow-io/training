@@ -537,10 +537,10 @@ docker push <myrepo>/my-image
 ----
 --
 
-4. Add the image file name to the nextflow.config file.
+4. Add the image file name to the `nextflow.config` file.
 +
 --
-e.g. remove the following from the nextflow.config:
+e.g. remove the following from the `nextflow.config`:
 
 [source,config]
 ----
@@ -611,8 +611,8 @@ HINT: Temporarily comment out the line `process.container = 'nextflow/rnaseq-nf'
 ----
 nextflow run script5.nf
 ----
-#with the following container directives for each process:
-[source,nextflow]
+with the following container directives for each process:
+[source,nextflow,linenums]
 ----
 process FASTQC {
     container = 'biocontainers/fastqc:v0.11.5'
@@ -622,7 +622,7 @@ process FASTQC {
 
 and
 
-[source,nextflow]
+[source,nextflow,linenums]
 ----
 process QUANTIFICATION {
     tag "Salmon on $sample_id"
@@ -631,7 +631,7 @@ process QUANTIFICATION {
 ...
 ----
 
-# Check the .command.run file in the work directory and ensure that the run line contains the correct Biocontainers.
+Check the `.command.run` file in the work directory and ensure that the run line contains the correct Biocontainers.
 ====
 
 [discrete]
