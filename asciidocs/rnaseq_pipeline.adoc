@@ -28,11 +28,17 @@ println "reads: $params.reads"
 
 Run it by using the following command:
 
-  nextflow run script1.nf
+[cmd]
+----
+nextflow run script1.nf
+----
 
 Try to specify a different input parameter in your execution command, for example:
 
-  nextflow run script1.nf --reads '/workspace/nf-training-public/nf-training/data/ggal/lung_{1,2}.fq'
+[cmd]
+----
+nextflow run script1.nf --reads '/workspace/nf-training-public/nf-training/data/ggal/lung_{1,2}.fq'
+----
 
 [discrete]
 === Exercise
@@ -135,14 +141,20 @@ IMPORTANT: Resource requirements such as CPUs and memory limits can change with 
 
 Run it by using the command:
 
-  nextflow run script2.nf
+[cmd]
+----
+nextflow run script2.nf
+----
 
 The execution will fail because `salmon` is not installed in your environment.
 
 Add the command line option `-with-docker` to launch the execution through a Docker container,
 as shown below:
 
-  nextflow run script2.nf -with-docker
+[cmd]
+----
+nextflow run script2.nf -with-docker
+----
 
 This time the execution will work because it uses the Docker container `nextflow/rnaseq-nf` that is defined in the
 `nextflow.config` file in your current directory. If you are running this script locally then you will need to download docker
@@ -151,7 +163,10 @@ containing the run scripts. You can learn more about docker https://www.nextflow
 
 To avoid adding `-with-docker` each time you execute the script, add the following line to the `nextflow.config` file:
 
-  docker.enabled = true
+[source,config]
+----
+docker.enabled = true
+----
 
 [discrete]
 === Exercise
@@ -253,7 +268,10 @@ Edit the script `script3.nf` by adding the following statement as the last line 
 
 Save it and execute it with the following command:
 
-  nextflow run script3.nf
+[cmd]
+----
+nextflow run script3.nf
+----
 
 It will print something similar to this:
 
@@ -265,7 +283,10 @@ representing the actual files.
 
 Try it again specifying different read files by using a glob pattern:
 
-  nextflow run script3.nf --reads 'data/ggal/*_{1,2}.fq'
+[cmd]
+----
+nextflow run script3.nf --reads 'data/ggal/*_{1,2}.fq'
+----
 
 IMPORTANT: File paths that include one or more wildcards ie. `*`, `?`, etc., MUST be
 wrapped in single-quoted characters to avoid Bash expanding the glob.
@@ -326,7 +347,10 @@ Also, note that the second input channel for the `QUANTIFICATION` process, is th
 
 Execute it by using the following command:
 
-  nextflow run script4.nf -resume
+[cmd]
+----
+nextflow run script4.nf -resume
+----
 
 You will see the execution of the `QUANTIFICATION` process.
 
@@ -334,7 +358,10 @@ When using the `-resume` option, any step that has already been processed is ski
 
 Try to execute the same script again with more read files, as shown below:
 
-  nextflow run script4.nf -resume --reads 'data/ggal/*_{1,2}.fq'
+[cmd]
+----
+nextflow run script4.nf -resume --reads 'data/ggal/*_{1,2}.fq'
+----
 
 You will notice that the `QUANTIFICATION` process is executed multiple times.
 
@@ -391,7 +418,10 @@ Next, we implement a `FASTQC` quality control step for your input reads (using t
 
 You can run it by using the following command:
 
-  nextflow run script5.nf -resume
+[cmd]
+----
+nextflow run script5.nf -resume
+----
 
 Nextflow DSL2 knows to split the `reads_pair_ch` into two identical channels as they are required twice as an input for both of the `FASTQC` and the `QUANTIFICATION` process.
 
@@ -403,7 +433,10 @@ a final report using the http://multiqc.info/[MultiQC] tool.
 
 Execute the next script with the following command:
 
-  nextflow run script6.nf -resume --reads 'data/ggal/*_{1,2}.fq'
+[cmd]
+----
+nextflow run script6.nf -resume --reads 'data/ggal/*_{1,2}.fq'
+----
 
 It creates the final report in the `results` folder in the current `work` directory.
 
@@ -438,7 +471,10 @@ when the script completes.
 
 Try to run it by using the following command:
 
-  nextflow run script7.nf -resume --reads 'data/ggal/*_{1,2}.fq'
+[cmd]
+----
+nextflow run script7.nf -resume --reads 'data/ggal/*_{1,2}.fq'
+----
 
 == Email notifications
 
@@ -530,7 +566,10 @@ Nextflow can produce multiple reports and charts providing several runtime metri
 Run the https://github.com/nextflow-io/rnaseq-nf[rnaseq-nf,window="_blank"] pipeline
 previously introduced as shown below:
 
-  nextflow run rnaseq-nf -with-docker -with-report -with-trace -with-timeline -with-dag dag.png
+[cmd]
+----
+nextflow run rnaseq-nf -with-docker -with-report -with-trace -with-timeline -with-dag dag.png
+----
 
 The `-with-docker` option launches each task of the execution as a Docker container run command.
 
@@ -572,18 +611,27 @@ https://github.com/nextflow-io/rnaseq-nf
 
 You can run it by specifying the project name and launching each task of the execution as a Docker container run command:
 
-  nextflow run nextflow-io/rnaseq-nf -with-docker
+[cmd]
+----
+nextflow run nextflow-io/rnaseq-nf -with-docker
+----
 
 It automatically downloads the container and stores it in the `$HOME/.nextflow` folder.
 
 
 Use the command `info` to show the project information:
 
-  nextflow info nextflow-io/rnaseq-nf
+[cmd]
+----
+nextflow info nextflow-io/rnaseq-nf
+----
 
 Nextflow allows the execution of a specific revision of your project by using the `-r` command line option. For example:
 
-  nextflow run nextflow-io/rnaseq-nf -r dev
+[cmd]
+----
+nextflow run nextflow-io/rnaseq-nf -r dev
+----
 
 Revision are defined by using Git tags or branches defined in the project repository.
 
