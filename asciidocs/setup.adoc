@@ -30,18 +30,21 @@ Nextflow can be used on any POSIX-compatible system (Linux, OS X, Windows Subsys
 
 Enter this command in your terminal:
 
+[cmd]
 ----
 wget -qO- https://get.nextflow.io | bash
 ----
 
 Or, if you prefer curl:
 
+[cmd]
 ----
 curl -s https://get.nextflow.io | bash
 ----
 
 Then ensure that the downloaded binary is executable:
 
+[cmd]
 ----
 chmod +x nextflow
 ----
@@ -64,7 +67,7 @@ Then `cd` into the `nf-training` directory
 
 Check the correct installation of `nextflow` by running the following command:
 
-[source,bash,linenums]
+[cmd]
 ----
 nextflow info
 ----
@@ -113,7 +116,7 @@ To test that the environment is working correctly, type the following into the t
 
 This should come up with the Nextflow version and runtime information:
 
-[source,bash]
+[cmd,linenums]
 ----
   Version: 22.04.2 build 5701
   Created: 16-05-2022 17:52 UTC
@@ -161,7 +164,7 @@ It is worth checking out the latest releases on github https://github.com/nextfl
 
 If you want or need to use a specific version of Nextflow, you can set the NXF_VER variable as shown below:
 
-[source,bash,linenums]
+[cmd]
 ----
 export NXF_VER=21.10.0
 ----

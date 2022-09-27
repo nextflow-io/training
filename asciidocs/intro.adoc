@@ -145,14 +145,14 @@ WARNING: For the Gitpod tutorial, make sure you are in the folder called `nf-tra
 
 Execute the script by entering the following command in your terminal:
 
-[source,cmd]
+[cmd]
 ----
 nextflow run hello.nf
 ----
 
 The output will look similar to the text shown below:
 
-[source,cmd,linenums]
+[cmd,linenums]
 ----
 N E X T F L O W  ~  version 22.04.2
 Launching `hello.nf` [tiny_venter] DSL2 - revision: 6879fb9372
@@ -193,11 +193,11 @@ It's worth noting that the process `CONVERTTOUPPER` is executed in parallel, so 
 Thus, it is perfectly possible that your final result will be
 printed out in a different order:
 
-[source,cmd]
-....
+[cmd,linenums]
+----
 WORLD!
 HELLO
-....
+----
 
 == Modify and resume
 
@@ -231,14 +231,14 @@ process CONVERTTOUPPER {
 Then save the file with the same name, and execute it by adding the
 `-resume` option to the command line:
 
-[source,cmd]
+[cmd]
 ----
 nextflow run hello.nf -resume
 ----
 
 It will print output similar to this:
 
-[source,cmd]
+[cmd,linenums]
 ----
 N E X T F L O W  ~  version 22.04.2
 Launching `hello.nf` [nostalgic_franklin] DSL2 - revision: 0b20bd3365
@@ -268,7 +268,7 @@ double dash character, i.e., `--paramName`.
 
 Now, let's try to execute the previous example specifying a different input string parameter, as shown below:
 
-[source,cmd]
+[cmd]
 ----
 nextflow run hello.nf --greeting 'Bonjour le monde!'
 ----
@@ -276,7 +276,7 @@ nextflow run hello.nf --greeting 'Bonjour le monde!'
 The string specified on the command line will override the default value
 of the parameter. The output will look like this:
 
-[source,cmd]
+[cmd,linenums]
 ----
 N E X T F L O W  ~  version 22.04.2
 Launching `hello.nf` [adoring_heyrovsky] DSL2 - revision: 0b20bd3365

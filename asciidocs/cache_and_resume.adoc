@@ -9,7 +9,8 @@ composing the task input values, files and command string.
 
 The pipeline work directory is organized as shown below:
 
-```
+[cmd,linenums]
+----
 work/
 ├── 12
 │   └── 1adacb582d2198cd32db0e6f808bce
@@ -44,7 +45,7 @@ work/
 │       ├── ggal_gut_1.fq -> /data/../ggal_gut_1.fq
 │       ├── ggal_gut_2.fq -> /data/../ggal_gut_2.fq
 │       └── index -> /data/../asciidocs/day2/work/12/1adacb582d2198cd32db0e6f808bce/index
-```
+----
 
 TIP: You can create these plots using the `tree` function if you have it installed. On unix, simply `sudo apt install  -y tree` or with Homebrew: `brew install tree`
 
@@ -53,9 +54,10 @@ TIP: You can create these plots using the `tree` function if you have it install
 The `-resume` command-line option allows the continuation of a pipeline
 execution from the last step that was completed successfully:
 
-```
+[cmd]
+----
 nextflow run <script> -resume
-```
+----
 
 In practical terms, the pipeline is executed from the beginning. However, before launching the execution of a `process`, Nextflow
 uses the task unique ID to check if the work directory already exists and that it contains a valid command exit state with the
@@ -79,9 +81,10 @@ IMPORTANT: Make sure to delete your work directory occasionally, else your machi
 A different location for the execution work directory can be specified
 using the command line option `-w`. For example:
 
-```
+[cmd]
+----
 nextflow run <script> -w /some/scratch/dir
-```
+----
 
 WARNING: If you delete or move the pipeline work directory, it will prevent the use of the resume feature in subsequent runs.
 
@@ -116,9 +119,10 @@ TIMESTAMP            DURATION  RUN NAME          STATUS  REVISION ID  SESSION ID
 
 You can use either the *session ID* or the *run name* to recover a specific execution. For example:
 
-```
+[cmd]
+----
 nextflow run rnaseq-nf -resume mighty_boyd
-```
+----
 
 == Execution provenance
 
@@ -142,7 +146,8 @@ $ nextflow log tiny_fermat
 The `-f` (fields) option can be used to specify which metadata
 should be printed by the `log` command. For example:
 
-```
+[cmd,linenums]
+----
 $ nextflow log tiny_fermat -f 'process,exit,hash,duration'
 
 index    0   7b/3753ff  2.0s
@@ -151,23 +156,25 @@ fastqc   0   f7/659c65  9.1s
 quant    0   82/ba67e3  2.7s
 quant    0   e5/2816b9  3.2s
 multiqc  0   3b/3485d0  6.3s
-```
+----
 
 The complete list of available fields can be retrieved with the command:
 
-```
+[cmd]
+----
 nextflow log -l
-```
+----
 
 The `-F` option allows the specification of filtering criteria to
 print only a subset of tasks. For example:
 
-```
+[cmd,linenums]
+----
 $ nextflow log tiny_fermat -F 'process =~ /fastqc/'
 
 /data/.../work/c1/56a36d8f498c99ac6cba31e85b3e0c
 /data/.../work/f7/659c65ef60582d9713252bcfbcc310
-```
+----
 
 This can be useful to locate specific task work directories.
 
@@ -194,9 +201,10 @@ Script:
 Save the above snippet in a file named `template.html`. Then
 run this command (using the correct id for your run, e.g. not tiny_fermat):
 
-```
+[cmd]
+----
 nextflow log tiny_fermat -t template.html > prov.html
-```
+----
 
 Finally, open the `prov.html` file with a browser.
 

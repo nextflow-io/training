@@ -47,9 +47,10 @@ TIP: The best practice is to keep this setting as a separate
 https://www.nextflow.io/docs/latest/config.html#config-profiles[profile] in your
 workflow config file. This allows the execution with a simple command.
 
-```
+[cmd]
+----
 nextflow run <my pipeline> -profile my-batch-profile
-```
+----
 
 The complete details describing AWS Batch deployment are available at https://www.nextflow.io/docs/latest/awscloud.html#aws-batch[this link].
 
@@ -99,24 +100,26 @@ happens in the container scratch storage). Nextflow will still report an error i
 
 EBS volumes (or other supported storage) can be mounted in the job container using the following configuration snippet:
 
-```
+[source,config,linenums]
+----
 aws {
   batch {
       volumes = '/some/path'
   }
 }
-```
+----
 
 Multiple volumes can be specified using comma-separated paths. The usual Docker volume mount syntax can be used to define complex volumes for which the container paths are different from the host paths or to specify a read-only option:
 
-```
+[source,config,linenums]
+----
 aws {
   region = 'eu-west-1'
   batch {
       volumes = ['/tmp', '/host/path:/mnt/path:ro']
   }
 }
-```
+----
 
 IMPORTANT:
 
@@ -134,11 +137,12 @@ However, you may still need to specify a custom Job Definition to provide fine-g
 To use your own job definition in a Nextflow workflow, use it in place of the container image name by
 adding the `job-definition://` string as a prefix. For example:
 
-```
+[source,nextflow,linenums]
+----
 process {
     container = 'job-definition://your-job-definition-name'
 }
-```
+----
 
 == Custom image
 
@@ -150,21 +154,23 @@ IMPORTANT: When creating your custom AMI for AWS Batch, make sure to use the _Am
 
 The following snippet shows how to install AWS CLI with Miniconda:
 
-```
+[cmd,linenums]
+----
 sudo yum install -y bzip2 wget
 wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
 bash Miniconda3-latest-Linux-x86_64.sh -b -f -p $HOME/miniconda
 $HOME/miniconda/bin/conda install -c conda-forge -y awscli
 rm Miniconda3-latest-Linux-x86_64.sh
-```
+----
 
 NOTE: The `aws` tool will be placed in a directory named `bin` in the main installation folder. Modifying this directory structure, after the installation, will cause the tool to not work properly.
 
 Finally, specify the `aws` full path in the Nextflow config file as shown below:
 
-```
+[source,config]
+----
 aws.batch.cliPath = '/home/ec2-user/miniconda/bin/aws'
-```
+----
 
 
 == Launch template
@@ -175,7 +181,8 @@ installs the AWS CLI tool during the instance boot using custom user data.
 
 In the EC2 dashboard, create a Launch template specifying the following in the user data field:
 
-```
+[source,config,linenums]
+----
 MIME-Version: 1.0
 Content-Type: multipart/mixed; boundary="//"
 
@@ -198,7 +205,7 @@ rm Miniconda3-latest-Linux-x86_64.sh
 chown -R ec2-user:ec2-user $USER/miniconda
 
 --//--
-```
+----
 
 Then in the Batch dashboard create a new compute environment and specify the newly created
 launch template in the corresponding field.
@@ -216,7 +223,8 @@ To take advantage of this mechanism with AWS Batch, we also need to make sure th
 
 The aforementioned pattern can be implemented using the following launch template:
 
-```
+[source,config,linenums]
+----
 MIME-Version: 1.0
 Content-Type: multipart/mixed; boundary="//"
 
@@ -261,7 +269,7 @@ EOF
 cp ~/boot.log ~ec2-user/boot.log
 
 --//--
-```
+----
 
 Once created, the template can be specified when creating the AWS Batch
 compute environment.
@@ -285,7 +293,8 @@ The Nextflow extended executor for Batch takes care of the mounting of the share
 
 The following launch template can be used to mount the Lustre shared file system:
 
-```
+[source,config,linenums]
+----
 MIME-Version: 1.0
 Content-Type: multipart/mixed; boundary="//"
 
@@ -338,7 +347,7 @@ EOF
 cp ~/boot.log ~ec2-user/boot.log
 
 --//--
-```
+----
 
 In the above snippet, replace the variables `FSXNAME` and `SCRATCH` with the appropriate values
 corresponding to your environment.
@@ -349,14 +358,15 @@ NOTE: Nextflow has to be launched from an instance having access to the same FSx
 
 Use the following snippet to install the Lustre client:
 
-```
+[cmd,linenums]
+----
 SCRATCH=/scratch
 FSXNAME=fs-0269031ec160509c9.fsx.eu-west-1.amazonaws.com
 sudo yum  install -y lustre-client
 sudo mkdir -p $SCRATCH
 sudo mount -t lustre -o noatime,flock $FSXNAME@tcp:/fsx $SCRATCH
 sudo chown ec2-user:ec2-user $SCRATCH
-```
+----
 
 NOTE: Make also sure the storage and the computing nodes use the same VPC and security groups.
 For further details check https://docs.aws.amazon.com/fsx/latest/LustreGuide/limit-access-security-groups.html[here].
@@ -365,25 +375,28 @@ For further details check https://docs.aws.amazon.com/fsx/latest/LustreGuide/lim
 
 Define the following env variable:
 
-```
+[cmd]
+----
 export NXF_GRAB=io.seqera:nf-xpack:0.2.0
-```
+----
 
 Define basic Nextflow configuration parameters:
 
-```
+[source,config,linenums]
+----
 process.container = 'nextflow/rnaseq-nf:latest'
 process.executor = 'awsbatch'
 process.queue = 'nf-queue-with-fsx'
 aws.region = 'eu-west-1'
 workDir = '/scratch/work'
-```
+----
 
 Then run Nextflow as usual:
 
-```
+[cmd]
+----
 nextflow run rnaseq-nf
-```
+----
 
 NOTE: This requires an extra endpoint configuration to access the Nf-xpack distribution.
 
@@ -406,7 +419,8 @@ avoid too many parallel jobs in the compute instance).
 
 Also, the following parameters can be used to help to mitigate this issue:
 
-```
+[source,config,linenums]
+----
 aws {
     batch {
         maxTransferAttempts = 20
@@ -423,7 +437,7 @@ aws {
         maxErrorRetry = 20
     }
 }
-```
+----
 
 Advanced configuration settings are described at https://www.nextflow.io/docs/latest/config.html#scope-aws[this link].
 

@@ -4,7 +4,7 @@
 
 When a process execution exits with a non-zero exit status, Nextflow stops the workflow execution and reports the failing task:
 
-[source,cmd,options="nowrap"]
+[cmd,options="nowrap"]
 ----
 ERROR ~ Error executing process > 'index'
 

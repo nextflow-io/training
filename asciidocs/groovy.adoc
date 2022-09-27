@@ -215,10 +215,11 @@ println y
 
 it prints:
 
-```
+[cmd]
+----
 tic\tac\toe
 tic    ac    oe
-```
+----
 
 == Multi-line strings
 
@@ -392,9 +393,10 @@ println x
 
 It prints:
 
-```
+[cmd]
+----
 [ 1, 4, 9, 16 ]
-```
+----
 
 By default, closures take a single parameter called `it`, to give it a different name use the
 `\->` syntax. For example:
@@ -418,11 +420,12 @@ values.each(printMap)
 
 It prints:
 
-```
+[cmd]
+----
 Yue with value Wu
 Mark with value Williams
 Sudha with value Kumari
-```
+----
 
 A closure has two other important features.
 

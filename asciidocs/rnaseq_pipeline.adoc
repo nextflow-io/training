@@ -168,7 +168,7 @@ Print the output of the `index_ch` channel by using the https://www.nextflow.io/
 ====
 Add the following to the end of your script file:
 
-[source,nextflow,linenums]
+[source,nextflow]
 ----
 index_ch.view()
 ----
@@ -205,7 +205,7 @@ Use the command `tree work` to see how Nextflow organizes the process work direc
 ====
 It should look something like this:
 
-[unix]
+[cmd]
 ----
 work
 ├── 17
@@ -352,9 +352,10 @@ Add a https://www.nextflow.io/docs/latest/process.html#tag[tag] directive to the
 [%collapsible]
 ====
 Add the following before the input declaration:
-```
+[source,nextflow]
+----
   tag "Salmon on $sample_id"
-```
+----
 ====
 
 [discrete]
@@ -367,9 +368,10 @@ to the `QUANTIFICATION` process to store the process results in a directory of y
 [%collapsible]
 ====
 Add the following before the `input` declaration in the `QUANTIFICATION` process:
-```
+[source,nextflow]
+----
   publishDir params.outdir, mode:'copy'
-```
+----
 ====
 
 [discrete]
@@ -487,7 +489,7 @@ fastqc -o fastqc_${sample_id}_logs -f fastq -q ${reads}
 
 Save it, give execute permission, and move it into the `bin` directory as shown below:
 
-[source,bash,linenums]
+[cmd,linenums]
 ----
 chmod +x fastqc.sh
 mkdir -p bin
@@ -507,6 +509,7 @@ the following code:
 
 Run it as before:
 
+[cmd]
 ----
 nextflow run script7.nf -resume --reads 'data/ggal/*_{1,2}.fq'
 ----
@@ -546,7 +549,7 @@ representation. Note: This feature requires the installation of http://www.graph
 See https://www.nextflow.io/docs/latest/tracing.html#dag-visualisation[here,window="_blank"] for further details.
 Then try running :
 
-[source]
+[cmd]
 ----
 dot -Tpng dag.dot > graph.png
 open graph.png

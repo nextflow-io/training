@@ -227,15 +227,17 @@ This configuration defines three different profiles: `standard`, `cluster` and `
 
 To enable a specific profile use `-profile` option followed by the profile name:
 
-```cmd
+[cmd]
+----
 nextflow run <your script> -profile cluster
-```
+----
 
 TIP: Two or more configuration profiles can be specified by separating the profile names with a comma character:
 
-```cmd
+[cmd]
+----
 nextflow run <your script> -profile standard,cloud
-```
+----
 
 
 == Cloud deployment
@@ -267,9 +269,10 @@ aws.batch.cliPath = '/home/ec2-user/miniconda/bin/aws' // <6>
 TIP: The best practice is to keep this setting as a separate profile in your
 workflow config file. This allows the execution with a simple command.
 
-```
+[cmd]
+----
 nextflow run script7.nf
-```
+----
 
 The complete details about AWS Batch deployment are available at https://www.nextflow.io/docs/latest/awscloud.html#aws-batch[this link].
 
@@ -277,24 +280,26 @@ The complete details about AWS Batch deployment are available at https://www.nex
 
 Elastic Block Storage (EBS) volumes (or other supported storage) can be mounted in the job container using the following configuration snippet:
 
-```
+[source,config,linenums]
+----
 aws {
   batch {
       volumes = '/some/path'
   }
 }
-```
+----
 
 Multiple volumes can be specified using comma-separated paths. The usual Docker volume mount syntax can be used to define complex volumes for which the container path is different from the host path or to specify a read-only option:
 
-```
+[source,config,linenums]
+----
 aws {
   region = 'eu-west-1'
   batch {
       volumes = ['/tmp', '/host/path:/mnt/path:ro']
   }
 }
-```
+----
 
 IMPORTANT: This is a global configuration that has to be specified in a Nextflow config file and will be applied to *all* process executions.
 
@@ -311,11 +316,12 @@ However, you may still need to specify a custom Job Definition to provide fine-g
 To use your own job definition in a Nextflow workflow, use it in place of the container image name,
 prefixing it with the `job-definition://` string. For example:
 
-```
+[source,config,linenums]
+----
 process {
     container = 'job-definition://your-job-definition-name'
 }
-```
+----
 
 == Custom image
 
@@ -325,21 +331,23 @@ IMPORTANT: When creating your custom AMI for AWS Batch, make sure to use the _Am
 
 The following snippet shows how to install AWS CLI with Miniconda:
 
-```
+[cmd,linenums]
+----
 sudo yum install -y bzip2 wget
 wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
 bash Miniconda3-latest-Linux-x86_64.sh -b -f -p $HOME/miniconda
 $HOME/miniconda/bin/conda install -c conda-forge -y awscli
 rm Miniconda3-latest-Linux-x86_64.sh
-```
+----
 
 NOTE: The `aws` tool will be placed in a directory named `bin` in the main installation folder. The tools will not work properly if you modify this directory structure after the installation.
 
 Finally, specify the `aws` full path in the Nextflow config file as shown below:
 
-```
+[source,config]
+----
 aws.batch.cliPath = '/home/ec2-user/miniconda/bin/aws'
-```
+----
 
 == Launch template
 
@@ -349,7 +357,8 @@ installs the AWS CLI tool during the instance boot via custom user data.
 
 In the EC2 dashboard, create a Launch template specifying the user data field:
 
-```
+[source,bash,linenums]
+----
 MIME-Version: 1.0
 Content-Type: multipart/mixed; boundary="//"
 
@@ -372,7 +381,7 @@ rm Miniconda3-latest-Linux-x86_64.sh
 chown -R ec2-user:ec2-user $USER/miniconda
 
 --//--
-```
+----
 
 Then create a new compute environment in the Batch dashboard and specify the newly created
 launch template in the corresponding field.

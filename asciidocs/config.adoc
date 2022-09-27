@@ -17,9 +17,10 @@ The default config file search mechanism can be extended by providing an extra c
 
 A Nextflow configuration file is a simple text file containing a set of properties defined using the syntax:
 
-```
+[source,config]
+----
 name = value
-```
+----
 
 TIP: Please note that string values need to be wrapped in quotation characters while numbers and boolean values (`true`, `false`) do not. Also, note that values are typed, meaning for example that, `1` is different from `'1'`, since the first is interpreted as the number one, while the latter is interpreted as a string value.
 
@@ -41,7 +42,7 @@ such as `$PATH`, `$HOME`, `$PWD`, etc.
 
 Configuration files use the same conventions for comments used in the Nextflow script:
 
-[source,nextflow,linenums]
+[source,config,linenums]
 ----
 // comment a single line
 
@@ -96,9 +97,10 @@ println "$params.foo $params.bar"
 
 Save the first snippet as `nextflow.config` and the second one as `params.nf`. Then run:
 
-```cmd
+[cmd]
+----
 nextflow run params.nf
-```
+----
 
 .For the result, click here:
 [%collapsible]
@@ -111,9 +113,10 @@ Bonjour le monde!
 
 Execute is again specifying the `foo` parameter on the command line:
 
-```cmd
+[cmd]
+----
 nextflow run params.nf --foo Hola
-```
+----
 
 .For the result, click here:
 [%collapsible]
@@ -154,14 +157,15 @@ process foo {
 
 Finally, execute the following command:
 
-```
+[cmd]
+----
 nextflow run foo.nf -c my-env.config
-```
+----
 
 .Your result should look something like the following, click here:
 [%collapsible]
 ====
-[source,nextflow]
+[cmd,linenums]
 ----
 BETA=/home/some/path
 ALPHA=some value
@@ -251,31 +255,34 @@ process foo {
 This is especially important when you want to define a config setting
 using a dynamic expression using a closure. For example:
 
-```
+[source,config,linenums]
+----
 process foo {
     memory = { 4.GB * task.cpus }
 }
-```
+----
 
 Directives that require more than one value, e.g. https://www.nextflow.io/docs/latest/process.html#pod[pod], in the
 configuration file need to be expressed as a map object.
 
-```
+[source,config,linenums]
+----
 process {
     pod = [env: 'FOO', value: '123']
 }
-```
+----
 
 Finally, directives that are to be repeated in the process
 definition, in the configuration files need to be defined
 as a list object. For example:
 
-```
+[source,config,linenums]
+----
 process {
     pod = [ [env: 'FOO', value: '123'],
             [env: 'BAR', value: '456'] ]
 }
-```
+----
 
 === Config Docker execution
 
@@ -342,9 +349,10 @@ or the `process.container` setting in the config file.
 
 Try to run the script as shown below, changing the `nextflow.config` file to the one above using `singularity`:
 
-```bash
+[cmd]
+----
 nextflow run script7.nf
-```
+----
 
 TIP: Nextflow will pull the container image automatically, it will require a few seconds
 depending on the network connection speed.
