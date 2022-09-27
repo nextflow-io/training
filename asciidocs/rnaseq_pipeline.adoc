@@ -264,7 +264,10 @@ This step shows how to match *read* files into pairs, so they can be mapped by *
 
 Edit the script `script3.nf` by adding the following statement as the last line in the workflow scope:
 
-  read_pairs_ch.view()
+[source,nextflow]
+----
+read_pairs_ch.view()
+----
 
 Save it and execute it with the following command:
 
@@ -275,7 +278,10 @@ nextflow run script3.nf
 
 It will print something similar to this:
 
-  [gut, [/.../data/ggal/gut_1.fq, /.../data/ggal/gut_2.fq]]
+[cmd]
+----
+[gut, [/.../data/ggal/gut_1.fq, /.../data/ggal/gut_2.fq]]
+----
 
 The above example shows how the `read_pairs_ch` channel emits tuples composed of
 two elements, where the first is the read pair prefix and the second is a list
@@ -381,7 +387,7 @@ Add a https://www.nextflow.io/docs/latest/process.html#tag[tag] directive to the
 Add the following before the input declaration:
 [source,nextflow]
 ----
-  tag "Salmon on $sample_id"
+tag "Salmon on $sample_id"
 ----
 ====
 
@@ -397,7 +403,7 @@ to the `QUANTIFICATION` process to store the process results in a directory of y
 Add the following before the `input` declaration in the `QUANTIFICATION` process:
 [source,nextflow]
 ----
-  publishDir params.outdir, mode:'copy'
+publishDir params.outdir, mode:'copy'
 ----
 ====
 
@@ -444,7 +450,10 @@ In this script, note the use of the https://www.nextflow.io/docs/latest/operator
 and https://www.nextflow.io/docs/latest/operator.html#collect[collect,window="_blank"] operators chained
 together to gather the outputs of the `QUANTIFICATION` and `FASTQC` processes as a single input. https://www.nextflow.io/docs/latest/operator.html[Operators] can be used to combine and transform channels.
 
-  MULTIQC(quant_ch.mix(fastqc_ch).collect())
+[source,nextflow]
+----
+MULTIQC(quant_ch.mix(fastqc_ch).collect())
+----
 
 We only want one task of MultiQC to be executed to produce one report. Therefore, we use the `mix` channel operator to combine the two channels followed by the `collect` operator, to return the complete channel contents as a single element.
 
@@ -537,10 +546,10 @@ the following code:
 
 [source,nextflow,linenums]
 ----
-  script:
-  """
-  fastqc.sh "$sample_id" "$reads"
-  """
+script:
+"""
+fastqc.sh "$sample_id" "$reads"
+"""
 ----
 
 Run it as before:
