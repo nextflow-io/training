@@ -93,7 +93,7 @@ We now have modularized processes which makes the code more reusable and cleaner
 
 If a Nextflow module script contains multiple `process` definitions they can also be imported using a single `include` statement as shown in the example below:
 
-[source,nextflow,linenums]
+[source,nextflow]
 ----
 include { SPLITLETTERS; CONVERTTOUPPER } from './modules.nf'
 ----
@@ -136,7 +136,7 @@ Save the previous snippet as `hello.2.nf`, and predict the output to screen.
 [%collapsible]
 ====
 The `hello.2.nf` output should look something like this:
-[source,nextflow,linenums]
+[cmd]
 ----
 N E X T F L O W  ~  version 22.04.3
 Launching `hello.2.nf` [goofy_goldstine] DSL2 - revision: 449cf82eaf
@@ -469,7 +469,7 @@ workflow {
 
 Running `main.nf` should print:
 
-[source,bash,linenums]
+[cmd]
 ----
 Hola mundo!
 ----
@@ -496,7 +496,7 @@ workflow {
 
 Executing the main script above should print:
 
-[source,bash,linenums]
+[cmd]
 ----
 Olá mundo!
 ----
