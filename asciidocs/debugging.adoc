@@ -76,7 +76,7 @@ process foo {
 
 If you want to ignore any error you can set the same directive in the config file as a default setting:
 
-[source,config,linenums]
+[source,config]
 ----
 process.errorStrategy = 'ignore'
 ----
