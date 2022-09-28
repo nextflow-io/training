@@ -9,7 +9,7 @@ composing the task input values, files and command string.
 
 The pipeline work directory is organized as shown below:
 
-[cmd,linenums]
+[cmd]
 ----
 work/
 ├── 12
@@ -106,7 +106,7 @@ directory concurrently should be avoided.
 
 The `nextflow log` command lists the executions run in the current folder:
 
-[source,bash,linenums]
+[cmd]
 ----
 $ nextflow log
 
@@ -131,7 +131,7 @@ The `log` command, when provided with a *run name* or *session ID*, can return m
 By default, it will list the work directories used to compute each task.
 For example:
 
-[source]
+[cmd]
 ----
 $ nextflow log tiny_fermat
 
@@ -146,7 +146,7 @@ $ nextflow log tiny_fermat
 The `-f` (fields) option can be used to specify which metadata
 should be printed by the `log` command. For example:
 
-[cmd,linenums]
+[cmd]
 ----
 $ nextflow log tiny_fermat -f 'process,exit,hash,duration'
 
