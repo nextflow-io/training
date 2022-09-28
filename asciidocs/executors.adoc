@@ -18,7 +18,7 @@ image:nf-executors.png[]
 To run your pipeline with a batch scheduler, modify the `nextflow.config` file specifying
 the target executor and the required computing resources if needed. For example:
 
-[source,config,linenums,options="nowrap"]
+[source,config,options="nowrap"]
 ----
 process.executor = 'slurm'
 ----
@@ -101,7 +101,7 @@ Run the RNA-Seq script (script7.nf) from earlier, but specify that the `quantifi
 .Click here for the answer:
 [%collapsible]
 ====
-[source,nextflow,linenums]
+[source,config,linenums]
 ----
 process {
     withName: quantification {
