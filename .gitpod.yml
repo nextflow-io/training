@@ -13,7 +13,7 @@ github:
     # add a "Review in Gitpod" button to pull requests (defaults to false)
     addBadge: false
 
-image: chriswyatt/seqeratraining
+image: chriswyatt/seqeratraining_22.09.7
 
 tasks:
   - before: printf 'unset JAVA_TOOL_OPTIONS\n' >> $HOME/.bashrc && exit
