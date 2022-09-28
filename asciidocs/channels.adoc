@@ -63,11 +63,12 @@ ch.view()
 
 It prints:
 
-```
+[cmd,linenums]
+----
 Hello
 Hello
 Hello
-```
+----
 
 A `value` channel is created using the https://www.nextflow.io/docs/latest/channel.html#value[value] factory method or by operators returning a single value, such as https://www.nextflow.io/docs/latest/operator.html#first[first], https://www.nextflow.io/docs/latest/operator.html#last[last], https://www.nextflow.io/docs/latest/operator.html#operator-collect[collect], https://www.nextflow.io/docs/latest/operator.html#operator-count[count], https://www.nextflow.io/docs/latest/operator.html#operator-min[min], https://www.nextflow.io/docs/latest/operator.html#operator-max[max], https://www.nextflow.io/docs/latest/operator.html#operator-reduce[reduce], and https://www.nextflow.io/docs/latest/operator.html#operator-sum[sum].
 
@@ -103,6 +104,7 @@ ch.view{ "value: $it" }
 
 The first line in this example creates a variable `ch` which holds a channel object. This channel emits the values specified as a parameter in the `of` method. Thus the second line will print the following:
 
+[cmd,linenums]
 ----
 value: 1
 value: 3
@@ -140,7 +142,7 @@ Channel
 The `fromPath` factory method creates a queue channel emitting one or more files
 matching the specified glob pattern.
 
-[source,nextflow,linenums]
+[source,nextflow]
 ----
 Channel.fromPath( './data/meta/*.csv' )
 ----
@@ -188,7 +190,7 @@ Use the `Channel.fromPath` method to create a channel emitting all files with th
 .Click here for the answer:
 [%collapsible]
 ====
-[source,nextflow]
+[source,nextflow,linenums]
 ----
 Channel.fromPath( './data/ggal/**.fq' , hidden:true)
   .view()
@@ -209,11 +211,12 @@ Channel
 
 It will produce an output similar to the following:
 
-```
+[cmd,linenums]
+----
 [liver, [/user/nf-training/data/ggal/liver_1.fq, /user/nf-training/data/ggal/liver_2.fq]]
 [gut, [/user/nf-training/data/ggal/gut_1.fq, /user/nf-training/data/ggal/gut_2.fq]]
 [lung, [/user/nf-training/data/ggal/lung_1.fq, /user/nf-training/data/ggal/lung_2.fq]]
-```
+----
 
 IMPORTANT: The glob pattern must contain at least a star wildcard character.
 
@@ -256,7 +259,7 @@ directory and print them. Then use the `flat:true` option and compare the output
 ====
 Use the following, with or without 'flat:true':
 
-[source,nextflow]
+[source,nextflow,linenums]
 ----
 Channel.fromFilePairs( './data/ggal/*_{1,2}.fq', flat:true)
   .view()
@@ -303,7 +306,7 @@ IMPORTANT: Replace `<Your API key here>` with your API key.
 
 This should print:
 
-[source,text,linenums]
+[cmd,linenums]
 ----
 [SRR3383346, [/vol1/fastq/SRR338/006/SRR3383346/SRR3383346_1.fastq.gz, /vol1/fastq/SRR338/006/SRR3383346/SRR3383346_2.fastq.gz]]
 [SRR3383347, [/vol1/fastq/SRR338/007/SRR3383347/SRR3383347_1.fastq.gz, /vol1/fastq/SRR338/007/SRR3383347/SRR3383347_2.fastq.gz]]
@@ -322,7 +325,7 @@ Channel
   .view()
 ----
 
-[source,text,linenums]
+[cmd,linenums]
 ----
 [ERR908507, [/vol1/fastq/ERR908/ERR908507/ERR908507_1.fastq.gz, /vol1/fastq/ERR908/ERR908507/ERR908507_2.fastq.gz]]
 [ERR908506, [/vol1/fastq/ERR908/ERR908506/ERR908506_1.fastq.gz, /vol1/fastq/ERR908/ERR908506/ERR908506_2.fastq.gz]]
@@ -365,6 +368,7 @@ If you want to run the pipeline above and do not have fastqc installed in your m
 
 The `splitText` operator allows you to split multi-line strings or text file items, emitted by a source channel into chunks containing n lines, which will be emitted by the resulting channel. See:
 
+[source,nextflow,linenums]
 ----
 Channel
   .fromPath('data/meta/random.txt') // <1>
@@ -379,6 +383,7 @@ Channel
 
 You can define the number of lines in each chunk by using the parameter `by`, as shown in the following example:
 
+[source,nextflow,linenums]
 ----
 Channel
   .fromPath('data/meta/random.txt')
@@ -393,6 +398,7 @@ TIP: The `subscribe` operator permits execution of user defined functions each t
 
 An optional closure can be specified in order to transform the text chunks produced by the operator. The following example shows how to split text files into chunks of 10 lines and transform them into capital letters:
 
+[source,nextflow,linenums]
 ----
 Channel
   .fromPath('data/meta/random.txt')
@@ -402,6 +408,7 @@ Channel
 
 You can also make counts for each line:
 
+[source,nextflow,linenums]
 ----
 count=0
 
@@ -413,6 +420,7 @@ Channel
 
 Finally, you can also use the operator on plain files (outside of the channel context):
 
+[source,nextflow,linenums]
 ----
   def f = file('data/meta/random.txt')
   def lines = f.splitText()
@@ -430,6 +438,7 @@ It then splits them into records or groups them as a list of records with a spec
 
 In the simplest case, just apply the `splitCsv` operator to a channel emitting a CSV formatted text files or text entries. For example, to view only the first and fourth columns:
 
+[source,nextflow,linenums]
 ----
 Channel
   .fromPath("data/meta/patients_1.csv")
@@ -440,6 +449,7 @@ Channel
 
 When the CSV begins with a header line defining the column names, you can specify the parameter `header: true` which allows you to reference each value by its column name, as shown in the following example:
 
+[source,nextflow,linenums]
 ----
 Channel
   .fromPath("data/meta/patients_1.csv")
@@ -450,6 +460,7 @@ Channel
 
 Alternatively, you can provide custom header names by specifying a list of strings in the header parameter as shown below:
 
+[source,nextflow,linenums]
 ----
 Channel
   .fromPath("data/meta/patients_1.csv")
@@ -460,6 +471,7 @@ Channel
 
 You can also process multiple csv files at the same time:
 
+[source,nextflow,linenums]
 ----
 Channel
   .fromPath("data/meta/patients_*.csv") // <-- just use a pattern
@@ -471,6 +483,7 @@ TIP: Notice that you can change the output format simply by adding a different d
 
 Finally, you can also operate on csv files outside the channel context:
 
+[source,nextflow,linenums]
 ----
 def f = file('data/meta/patients_1.csv')
   def lines = f.splitCsv()
@@ -489,7 +502,7 @@ Try inputting fastq reads into the RNA-Seq workflow from earlier using `.splitCS
 ====
 Add a csv text file containing the following, as an example input with the name "fastq.csv":
 
-[source,nextflow,linenums]
+[cmd]
 ----
 gut,/workspace/nf-training-public/nf-training/data/ggal/gut_1.fq,/workspace/nf-training-public/nf-training/data/ggal/gut_2.fq
 ----
@@ -583,6 +596,7 @@ Now the workflow should run from a CSV file.
 
 Parsing tsv files works in a similar way, simply add the `sep:'\t'` option in the `splitCsv` context:
 
+[source,nextflow,linenums]
 ----
 Channel
   .fromPath("data/meta/regions.tsv", checkIfExists:true)
@@ -600,12 +614,15 @@ Try using the tab separation technique on the file "data/meta/regions.tsv", but 
 .Answer:
 [%collapsible]
 ====
+[source,nextflow,linenums]
+----
 Channel
   .fromPath("data/meta/regions.tsv", checkIfExists:true)
   // use `sep` option to parse TAB separated files
   .splitCsv(sep:'\t', header:true )
   // row is a list object
   .view { row -> "${row.patient_id}" }
+----
 ====
 
 == More complex file formats
@@ -614,6 +631,7 @@ Channel
 
 We can also easily parse the JSON file format using the following groovy schema:
 
+[source,nextflow,linenums]
 ----
 import groovy.json.JsonSlurper
 
@@ -632,6 +650,7 @@ IMPORTANT: When using an older JSON version, you may need to replace `parse(f)` 
 
 This can also be used as a way to parse YAML files:
 
+[source,nextflow,linenums]
 ----
 import org.yaml.snakeyaml.Yaml
 
@@ -650,6 +669,7 @@ The best way to store parser scripts is to keep them in a Nextflow module file.
 
 See the following Nextflow script:
 
+[source,nextflow,linenums]
 ----
 include{ parseJsonFile } from './modules/parsers.nf'
 

@@ -8,7 +8,7 @@ Here are some important Groovy syntax that are commonly used in Nextflow.
 
 To print something is as easy as using one of the `print` or `println` methods.
 
-[source,groovy,linenums]
+[source,groovy]
 ----
 println("Hello, World!")
 ----
@@ -17,7 +17,7 @@ The only difference between the two is that the `println` method implicitly appe
 
 TIP: parentheses for function invocations are optional. Therefore, the following syntax is also valid :
 
-[source,groovy,linenums]
+[source,groovy]
 ----
 println "Hello, World!"
 ----
@@ -60,7 +60,7 @@ println x
 
 Local variables are defined using the `def` keyword:
 
-[source,groovy,linenums]
+[source,groovy]
 ----
 def x = 'foo'
 ----
@@ -71,7 +71,7 @@ The `def` should be always used when defining variables local to a function or a
 
 A List object can be defined by placing the list items in square brackets:
 
-[source,groovy,linenums]
+[source,groovy]
 ----
 list = [10,20,30,40]
 ----
@@ -86,7 +86,7 @@ println list.get(0)
 
 In order to get the length of a list you can use the size method:
 
-[source,groovy,linenums]
+[source,groovy]
 ----
 println list.size()
 ----
@@ -94,7 +94,7 @@ println list.size()
 We use the `assert` keyword to test if a condition is true (similar to an `if` function).
 Here, Groovy will print nothing if it is correct, else it will raise an AssertionError message.
 
-[source,groovy,linenums]
+[source,groovy]
 ----
 assert list[0] == 10
 ----
@@ -138,7 +138,7 @@ assert [4,2,1,3].findAll{it%2 == 0} == [4,2]
 
 Maps are like lists that have an arbitrary key instead of an integer. Therefore, the syntax is very much aligned.
 
-[source,groovy,linenums]
+[source,groovy]
 ----
 map = [a:0, b:1, c:2]
 ----
@@ -215,10 +215,11 @@ println y
 
 it prints:
 
-```
+[cmd]
+----
 tic\tac\toe
 tic    ac    oe
-```
+----
 
 == Multi-line strings
 
@@ -302,14 +303,14 @@ See the http://groovy-lang.org/semantics.html#Groovy-Truth[Groovy-Truth] for fur
 TIP: In some cases it can be useful to replace the `if` statement with a ternary expression (aka
 conditional expression). For example:
 
-[source,groovy,linenums]
+[source,groovy]
 ----
 println list ? list : 'The list is empty'
 ----
 
 The previous statement can be further simplified using the http://groovy-lang.org/operators.html#_elvis_operator[Elvis operator], as shown below:
 
-[source,groovy,linenums]
+[source,groovy]
 ----
 println list ?: 'The list is empty'
 ----
@@ -366,7 +367,7 @@ Closures are the Swiss army knife of Nextflow/Groovy programming. In a nutshell,
 
 More formally, a closure allows the definition of functions as first-class objects.
 
-[source,groovy,linenums]
+[source,groovy]
 ----
 square = { it * it }
 ----
@@ -392,14 +393,15 @@ println x
 
 It prints:
 
-```
+[cmd]
+----
 [ 1, 4, 9, 16 ]
-```
+----
 
 By default, closures take a single parameter called `it`, to give it a different name use the
 `\->` syntax. For example:
 
-[source,groovy,linenums]
+[source,groovy]
 ----
 square = { num -> num * num }
 ----
@@ -418,11 +420,12 @@ values.each(printMap)
 
 It prints:
 
-```
+[cmd]
+----
 Yue with value Wu
 Mark with value Williams
 Sudha with value Kumari
-```
+----
 
 A closure has two other important features.
 

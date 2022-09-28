@@ -45,7 +45,7 @@ image::usage_token.png[]
 
 Once your token has been created, open a terminal and type:
 
-[source,bash,linenums]
+[cmd]
 ----
 export TOWER_ACCESS_TOKEN=eyxxxxxxxxxxxxxxxQ1ZTE=
 export NXF_VER=20.10.0
@@ -57,7 +57,7 @@ NOTE: Check your `nextflow -version`. Bearer tokens require Nextflow version 20.
 
 To submit a pipeline to a https://help.tower.nf/getting-started/workspace/[Workspace] using the Nextflow command-line tool, add the workspace ID to your environment. For example:
 
-[source,bash,linenums]
+[cmd]
 ----
 export TOWER_WORKSPACE_ID=000000000000000
 ----
@@ -177,8 +177,8 @@ See the Nextflow https://www.nextflow.io/docs/latest/config.html#config-profiles
 +
 [source, yaml, linenums]
 ----
-    reads: 's3://nf-bucket/exome-data/ERR013140_{1,2}.fastq.bz2'
-    paired_end: true
+reads: 's3://nf-bucket/exome-data/ERR013140_{1,2}.fastq.bz2'
+paired_end: true
 ----
 +
 8. Select Launchpad to begin the pipeline execution.

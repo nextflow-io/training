@@ -239,10 +239,11 @@ The `input` block defines which channels the `process` is expecting to receive d
 
 The `input` block follows the syntax shown below:
 
-```nextflow
+[source,nextflow,linenums]
+----
 input:
   <input qualifier> <input name>
-```
+----
 
 === Input values
 
@@ -271,11 +272,12 @@ workflow {
 
 In the above example the process is executed three times, each time a value is received from the channel `num` and used to process the script. Thus, it results in an output similar to the one shown below:
 
-```
+[cmd]
+----
 process job 3
 process job 1
 process job 2
-```
+----
 
 IMPORTANT: The channel guarantees that items are delivered in the same order as they have been sent - but - since the process is executed in a parallel manner, there is no guarantee that they are processed in the same order as they are received.
 
@@ -528,7 +530,7 @@ workflow {
 .The output should look something like:
 [%collapsible]
 ====
-[source,nextflow,linenums]
+[cmd]
 ----
 1 and b
 1 and a
@@ -658,6 +660,7 @@ The _output_ declaration block defines the channels used by the process to send 
 
 Only one output block, that can contain one or more output declaration, can be defined. The output block follows the syntax shown below:
 
+[source,nextflow,linenums]
 ----
 output:
   <output qualifier> <output name> , emit: <output channel>
@@ -750,6 +753,7 @@ workflow {
 
 Prints the following:
 
+[cmd]
 ----
 File: chunk_aa => H
 File: chunk_ab => o
@@ -773,7 +777,7 @@ for the `flatMap` operator is available at https://www.nextflow.io/docs/latest/o
 .Click here for the answer:
 [%collapsible]
 ====
-[source,nextflow,linenums]
+[cmd]
 ----
 File: [chunk_aa, chunk_ab, chunk_ac, chunk_ad] => [H, o, l, a]
 ----

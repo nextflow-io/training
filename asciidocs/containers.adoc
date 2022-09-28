@@ -25,38 +25,43 @@ https://hub.docker.com[Docker Hub], or hosted by other parties like https://quay
 
 A container can be run using the following command:
 
-```bash
+[cmd]
+----
 docker run <container-name>
-```
+----
 
 Try for example the following publically available container (if you have docker installed):
 
-```bash
+[cmd]
+----
 docker run hello-world
-```
+----
 
 === Pull a container
 
 The pull command allows you to download a Docker image without running it. For example:
 
-```bash
+[cmd]
+----
 docker pull debian:stretch-slim
-```
+----
 
 The above command downloads a Debian Linux image. You can check it exists by using:
 
-```bash
+[cmd]
+----
 docker images
-```
+----
 
 === Run a container in interactive mode
 
 Launching a BASH shell in the container allows you to operate in an interactive mode
 in the containerized operating system. For example:
 
-```bash
+[cmd]
+----
 docker run -it debian:stretch-slim bash
-```
+----
 
 Once launched, you will notice that it is running as root (!).
 Use the usual commands to navigate the file system.
@@ -96,9 +101,10 @@ ENV PATH=$PATH:/usr/games/
 
 Build the Dockerfile image by using the following command:
 
-```bash
+[cmd]
+----
 docker build -t my-image .
-```
+----
 
 Where "my-image" is the user-specified name tag for the Dockerfile, present in the current directory.
 
@@ -107,15 +113,17 @@ IMPORTANT: Don't miss the dot in the above command.
 When it completes, verify that the image
 has been created by listing all available images:
 
-```bash
+[cmd]
+----
 docker images
-```
+----
 
 You can try your new container by running this command:
 
-```bash
+[cmd]
+----
 docker run my-image cowsay Hello Docker!
-```
+----
 
 === Add a software package to the image
 
@@ -130,9 +138,10 @@ RUN curl -sSL https://github.com/COMBINE-lab/salmon/releases/download/v1.5.2/sal
 
 Save the file and build the image again with the same command as before:
 
-```bash
+[cmd]
+----
 docker build -t my-image .
-```
+----
 
 You will notice that it creates a new Docker image with the same name *but* with a different image ID.
 
@@ -140,15 +149,17 @@ You will notice that it creates a new Docker image with the same name *but* with
 
 Check that Salmon is running correctly in the container as shown below:
 
-```bash
+[cmd]
+----
 docker run my-image salmon --version
-```
+----
 
 You can even launch a container in an interactive mode by using the following command:
 
-```bash
+[cmd]
+----
 docker run -it my-image bash
-```
+----
 
 Use the `exit` command to terminate the interactive session.
 
@@ -158,10 +169,11 @@ Create a genome index file by running Salmon in the container.
 
 Try to run Salmon in the container with the following command:
 
-```bash
+[cmd]
+----
 docker run my-image \
   salmon index -t $PWD/data/ggal/transcriptome.fa -i transcript-index
-```
+----
 
 The above command fails because Salmon cannot access the input file.
 
@@ -170,34 +182,38 @@ it cannot access the hosting file system by default.
 
 You will need to use the `--volume` command-line option to mount the input file(s) e.g.
 
-```bash
+[cmd]
+----
 docker run --volume $PWD/data/ggal/transcriptome.fa:/transcriptome.fa my-image \
   salmon index -t /transcriptome.fa -i transcript-index
-```
+----
 
 IMPORTANT: The generated `transcript-index` directory is still not accessible in the host file system.
 
 TIP: An easier way is to mount a parent directory to an identical one in the container,
 this allows you to use the same path when running it in the container e.g.
 
-```bash
+[cmd]
+----
 docker run --volume $PWD:$PWD --workdir $PWD my-image \
   salmon index -t $PWD/data/ggal/transcriptome.fa -i transcript-index
-```
+----
 
 Or set a folder you want to mount as an environmental variable, called `DATA`:
 
-```bash
+[cmd]
+----
 DATA=/workspace/nf-training-public/nf-training/data
 docker run --volume $DATA:$DATA --workdir $PWD my-image \
   salmon index -t $PWD/data/ggal/transcriptome.fa -i transcript-index
-```
+----
 
 Now check the content of the `transcript-index` folder by entering the command:
 
-```bash
+[cmd]
+----
 ls -la transcript-index
-```
+----
 
 IMPORTANT: Note that the permissions for files created by the Docker execution is `root`.
 
@@ -208,50 +224,57 @@ Publish your container in the Docker Hub to share it with other people.
 Create an account on the https://hub.docker.com website. Then from your shell terminal run
 the following command, entering the user name and password you specified when registering in the Hub:
 
-```bash
+[cmd]
+----
 docker login
-```
+----
 
 Tag the image with your Docker user name account:
 
-```bash
+[cmd]
+----
 docker tag my-image <user-name>/my-image
-```
+----
 
 Finally push it to the Docker Hub:
 
-```bash
+[cmd]
+----
 docker push <user-name>/my-image
-```
+----
 
 After that anyone will be able to download it by using the command:
 
-```bash
+[cmd]
+----
 docker pull <user-name>/my-image
-```
+----
 
 Note how after a pull and push operation, Docker prints the container digest number e.g.
 
-```bash
+[cmd]
+----
 Digest: sha256:aeacbd7ea1154f263cda972a96920fb228b2033544c2641476350b9317dab266
 Status: Downloaded newer image for nextflow/rnaseq-nf:latest
-```
+----
 
 This is a unique and immutable identifier that can be used to reference a container image
 in a univocally manner. For example:
 
-```bash
+[cmd]
+----
 docker pull nextflow/rnaseq-nf@sha256:aeacbd7ea1154f263cda972a96920fb228b2033544c2641476350b9317dab266
-```
+----
 
 === Run a Nextflow script using a Docker container
 
 The simplest way to run a Nextflow script with a Docker image is using the
 `-with-docker` command-line option:
 
-```
+[cmd]
+----
 nextflow run script2.nf -with-docker my-image
-```
+----
 
 As seen in the last section, you can also configure the Nextflow config file (`nextflow.config`) to select which container to use instead of having to specify it as a command-line argument every time.
 
@@ -294,9 +317,10 @@ curl -sSL https://github.com/COMBINE-lab/salmon/releases/download/v1.0.0/salmon-
 
 Once you have saved the `Singularity` file. You can create the image with these commands:
 
-```bash
+[cmd]
+----
 sudo singularity build my-image.sif Singularity
-```
+----
 
 Note: the `build` command requires `sudo` permissions. A common workaround
 consists of building the image on a local workstation and then deploying it in the
@@ -306,23 +330,26 @@ cluster by copying the image file.
 
 Once done, you can run your container with the following command
 
-```bash
+[cmd]
+----
 singularity exec my-image.sif cowsay 'Hello Singularity'
-```
+----
 
 By using the `shell` command you can enter in the container in interactive mode.
 For example:
 
-```bash
+[cmd]
+----
 singularity shell my-image.sif
-```
+----
 
 Once in the container instance run the following commands:
 
-```bash
+[cmd]
+----
 touch hello.txt
 ls -la
-```
+----
 
 TIP: Note how the files on the host environment are shown. Singularity automatically
 mounts the host `$HOME` directory and uses the current work directory.
@@ -331,9 +358,10 @@ mounts the host `$HOME` directory and uses the current work directory.
 
 An easier way to create a Singularity container without requiring sudo permission and boosting the containers interoperability is to import a Docker container image by pulling it directly from a Docker registry. For example:
 
-```bash
+[cmd]
+----
 singularity pull docker://debian:stretch-slim
-```
+----
 
 The above command automatically downloads the Debian Docker image and converts it to
 a Singularity image in the current directory with the name `debian-jessie.simg`.
@@ -344,9 +372,10 @@ Nextflow allows the transparent usage of Singularity containers as easy as with 
 
 Simply enable the use of the Singularity engine in place of Docker in the Nextflow configuration file by using the `-with-singularity` command-line option:
 
-```bash
+[cmd]
+----
 nextflow run script7.nf -with-singularity nextflow/rnaseq-nf
-```
+----
 
 As before, the Singularity container can also be provided in the Nextflow config file. We'll see how to do this later.
 
@@ -368,14 +397,16 @@ In this Gitpod environment, conda is already installed.
 
 A Conda environment is defined using a YAML file, which lists the required software packages. The first thing you need to do is to initiate conda for shell interaction, and then open a new terminal by running bash.
 
-```
+[cmd,linenums]
+----
 conda init
 bash
-```
+----
 
 Then write your YAML file. For example:
 
-```yaml
+[source,yaml,linenums]
+----
 name: nf-tutorial
 channels:
   - conda-forge
@@ -386,40 +417,45 @@ dependencies:
   - bioconda::fastqc=0.11.9
   - bioconda::multiqc=1.12
   - conda-forge::tbb=2020.2
-```
+----
 
 Given the recipe file, the environment is created using the command shown below:
 
-```bash
+[cmd]
+----
 conda env create --file env.yml
-```
+----
 
 You can check the environment was created successfully with the command shown below:
 
-```bash
+[cmd]
+----
 conda env list
-```
+----
 
 This should look something like this:
-```bash
+[cmd,linenums]
+----
 # conda environments:
 #
 base                  *  /opt/conda
 nf-tutorial              /opt/conda/envs/nf-tutorial
-```
+----
 
 To enable the environment you can use the `activate` command:
 
-```bash
+[cmd]
+----
 conda activate nf-tutorial
-```
+----
 
 Nextflow is able to manage the activation of a Conda environment when its directory
 is specified using the `-with-conda` option (using the same path shown in the `list` function. For example:
 
-```bash
+[cmd]
+----
 nextflow run script7.nf -with-conda /opt/conda/envs/nf-tutorial
-```
+----
 
 TIP: When creating a Conda environment with a YAML recipe file, Nextflow automatically downloads the required dependencies, builds the environment and activates it.
 
@@ -438,7 +474,8 @@ This saves having to build a conda environment each time you want to use it (as 
 
 To do this, you simply require a `Dockerfile` and you use micromamba to install the packages. However, a good practice is to have a YAML recipe file like in the previous section, so we'll do it here too.
 
-```yaml
+[source,yaml,linenums]
+----
 name: nf-tutorial
 channels:
   - conda-forge
@@ -449,11 +486,12 @@ dependencies:
   - bioconda::fastqc=0.11.9
   - bioconda::multiqc=1.12
   - conda-forge::tbb=2020.2
-```
+----
 
 Then, we can write our Dockerfile with micromamba installing the packages from this recipe file.
 
-```Dockerfile
+[source,docker,linenums,options="nowrap"]
+----
 FROM mambaorg/micromamba:0.25.1
 
 MAINTAINER  Your name <your_email>
@@ -466,7 +504,7 @@ RUN micromamba install -y -n nf-tutorial -f /tmp/env.yml && \
     micromamba clean --all --yes
 
 ENV PATH /opt/conda/envs/nf-tutorial/bin:$PATH
-```
+----
 
 The above `Dockerfile` takes the parent image 'mambaorg/micromamba', then installs a `conda` environment using `micromamba`, and installs `salmon`, `fastqc` and `multiqc`.
 
@@ -491,36 +529,40 @@ Something similar to the following, with <myrepo> replaced with your own Docker 
 
 TIP: "my-image" could be replaced with any name you choose. As good practice, choose something memorable and ensure the name matches the name you used in the previous command.
 
-```
+[cmd]
+----
 docker login
 docker tag my-image <myrepo>/my-image
 docker push <myrepo>/my-image
-```
+----
 --
 
-4. Add the image file name to the nextflow.config file.
+4. Add the image file name to the `nextflow.config` file.
 +
 --
-e.g. remove the following from the nextflow.config:
+e.g. remove the following from the `nextflow.config`:
 
-```
+[source,config]
+----
 process.container = 'nextflow/rnaseq-nf'
-```
+----
 
 and replace with:
 
-```
+[source,config]
+----
 process.container = '<myrepo>/my-image'
-```
+----
 
 --
 
 5. Trying running Nextflow, e.g.:
 +
 --
-```
+[cmd]
+----
 nextflow run script7.nf -with-docker
-```
+----
 --
 
 Nextflow should now be able to find `salmon` to run the process.
@@ -532,9 +574,10 @@ Another useful resource linking together Bioconda and containers is the https://
 
 So far, we've seen how to install packages with conda and micromamba, both locally and within containers. With BioContainers, you don't need to create your own container image for the tools you want, and you don't need to use conda or micromamba to install the packages. It already provides you with a Docker image containing the programs you want installed. For example, you can get the container image of fastqc using BioContainers with:
 
-```
+[cmd]
+----
 docker pull biocontainers/fastqc:v0.11.5
-```
+----
 
 You can check the registry for the packages you want in https://biocontainers.pro/registry[BioContainers official website].
 
@@ -548,7 +591,7 @@ During the earlier RNA-Seq tutorial (script2.nf), we created an index with the s
 .For the result, click here:
 [%collapsible]
 ====
-[source,nextflow]
+[cmd]
 ----
 nextflow run script2.nf -with-docker quay.io/biocontainers/salmon:1.7.0--h84f40af_0
 ----
@@ -564,29 +607,31 @@ HINT: Temporarily comment out the line `process.container = 'nextflow/rnaseq-nf'
 .For the result, click here:
 [%collapsible]
 ====
-[source,nextflow]
-```
+[cmd]
+----
 nextflow run script5.nf
-```
-#with the following container directives for each process:
-```
+----
+with the following container directives for each process:
+[source,nextflow,linenums]
+----
 process FASTQC {
     container = 'biocontainers/fastqc:v0.11.5'
     tag "FASTQC on $sample_id"
 ...
-```
+----
 
 and
 
-```
+[source,nextflow,linenums]
+----
 process QUANTIFICATION {
     tag "Salmon on $sample_id"
     container = 'quay.io/biocontainers/salmon:1.7.0--h84f40af_0'
     publishDir params.outdir, mode:'copy'
 ...
-```
+----
 
-# Check the .command.run file in the work directory and ensure that the run line contains the correct Biocontainers.
+Check the `.command.run` file in the work directory and ensure that the run line contains the correct Biocontainers.
 ====
 
 [discrete]
