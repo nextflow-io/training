@@ -181,7 +181,7 @@ Print the output of the `index_ch` channel by using the https://www.nextflow.io/
 .Click here for the answer:
 [%collapsible]
 ====
-Add the following to the end of your script file:
+Add the following to the end of your workflow block in your script file
 
 [source,nextflow]
 ----
