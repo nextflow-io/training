@@ -639,7 +639,7 @@ Nextflow allows the execution of a specific revision of your project by using th
 
 [cmd]
 ----
-nextflow run nextflow-io/rnaseq-nf -r dev
+nextflow run nextflow-io/rnaseq-nf -r v2.1 -with-docker
 ----
 
 Revision are defined by using Git tags or branches defined in the project repository.
