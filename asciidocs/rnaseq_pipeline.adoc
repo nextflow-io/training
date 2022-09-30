@@ -262,7 +262,7 @@ In this step you have learned:
 
 This step shows how to match *read* files into pairs, so they can be mapped by *Salmon*.
 
-Edit the script `script3.nf` by adding the following statement as the last line in the workflow scope:
+Edit the script `script3.nf` by adding the following statement as the last line of the file:
 
 [source,nextflow]
 ----
