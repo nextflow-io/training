@@ -47,3 +47,4 @@ vscode:
     - ms-vscode.live-server
     
 checkoutLocation: "./nf-training"
+workspaceLocation: "./nf-training"
