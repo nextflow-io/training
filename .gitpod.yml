@@ -31,7 +31,6 @@ tasks:
       export PS1='\[\e[3;36m\]${PWD/*\//} ->\[\e[0m\] '
       unset JAVA_TOOL_OPTIONS
       clear
-      open .
 
     
 vscode:
