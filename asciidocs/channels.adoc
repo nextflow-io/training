@@ -79,7 +79,7 @@ workflow {
 }
 ----
 
-When you run it, it prints only 2, as you can see below:.
+When you run the script, it prints only 2, as you can see below:.
 
 [cmd]
 ----
