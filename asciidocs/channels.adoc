@@ -161,9 +161,7 @@ workflow {
 2
 ----
 
-Besides, in many situations Nextflow will implicitly convert variablers to value channels. When you run a
-process with a parameter (`params.example`), the content is just a string, for example, but when the process
-will receive it as a value channel.
+Besides, in many situations, Nextflow will implicitly convert variables to value channels when they are used in a process invocation. For example, when you invoke a process with a pipeline parameter (`params.example`) which has a string value, it is automatically cast into a value channel.
 
 == Channel factories
 
