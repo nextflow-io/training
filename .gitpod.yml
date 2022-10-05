@@ -15,6 +15,8 @@ github:
 
 image: chriswyatt/seqeratraining_22.09.7
 
+workspaceLocation: "./nf-training"
+
 tasks:
   - before: printf 'unset JAVA_TOOL_OPTIONS\n' >> $HOME/.bashrc && exit
 
