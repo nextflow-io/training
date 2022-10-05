@@ -794,7 +794,7 @@ For example:
 species = ['cat','dog', 'sloth']
 sequences = ['AGATAG','ATGCTCT', 'ATCCCAA']
 
-Channel.of(species)
+Channel.fromList(species)
        .set { species_ch }
 
 process ALIGN {
@@ -813,7 +813,7 @@ process ALIGN {
 }
 
 workflow {
-  genomes = ALIGN(species_ch, sequences )
+  genomes = ALIGN( species_ch, sequences )
   genomes.view()
 }
 ----
