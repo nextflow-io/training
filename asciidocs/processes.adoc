@@ -65,7 +65,7 @@ process < name > {
 
 The `script` block is a string statement that defines the command to be executed by the process.
 
-A process contains one and only one `script` block. It must be the last statement when the process contains input and output declarations.
+A process can execute one and only one `script` block. It must be the last statement when the process contains input and output declarations.
 
 The `script` block can be a single or a multi-line string. The latter simplifies the writing of non-trivial scripts
 composed of multiple commands spanning over multiple lines. For example:
