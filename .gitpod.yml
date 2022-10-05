@@ -46,4 +46,4 @@ vscode:
     - streetsidesoftware.code-spell-checker # Spelling checker for source code
     - ms-vscode.live-server
     
-workspaceLocation: "nf-training"
+checkoutLocation: "/workspace/nf-training"
