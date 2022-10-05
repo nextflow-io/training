@@ -31,6 +31,7 @@ tasks:
       export PS1='\[\e[3;36m\]${PWD/*\//} ->\[\e[0m\] '
       unset JAVA_TOOL_OPTIONS
       clear
+      open .
 
     
 vscode:
@@ -45,6 +46,3 @@ vscode:
     # - oderwat.indent-rainbow # Highlight indentation level
     - streetsidesoftware.code-spell-checker # Spelling checker for source code
     - ms-vscode.live-server
-    
-checkoutLocation: "./nf-training"
-workspaceLocation: "./nf-training"
