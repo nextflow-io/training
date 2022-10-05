@@ -64,8 +64,10 @@ process SUM {
     input:
     val x
     val y
+    
     output:
     stdout
+    
     script:
     """
     echo \$(($x+$y))
