@@ -1,3 +1,7 @@
+workspaceLocation: gitpod/gitpod-ws.code-workspace
+checkoutLocation: gitpod
+
+
 github:
   prebuilds:
     # enable for the master/default branch (defaults to true)
@@ -15,7 +19,7 @@ github:
 
 image: chriswyatt/seqeratraining
 
-workspaceLocation: gitpod/gitpod-ws.code-workspace 
+
 
 tasks:
   - before: printf 'unset JAVA_TOOL_OPTIONS\n' >> $HOME/.bashrc && exit
