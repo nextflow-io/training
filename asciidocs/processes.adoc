@@ -65,7 +65,7 @@ process < name > {
 
 The `script` block is a string statement that defines the command to be executed by the process.
 
-A process contains one and only one `script` block. It must be the last statement when the process contains input and output declarations.
+A process can execute only one `script` block. It must be the last statement when the process contains input and output declarations.
 
 The `script` block can be a single or a multi-line string. The latter simplifies the writing of non-trivial scripts
 composed of multiple commands spanning over multiple lines. For example:
@@ -355,38 +355,11 @@ workflow {
 }
 ----
 
-WARNING: When a process declares an input file, the corresponding channel elements
+WARNING: In the past, the `file` qualifier was used for files, but the `path` qualifier
+should be preferred over file to handle process input files when using Nextflow 19.10.0
+or later. When a process declares an input file, the corresponding channel elements
 must be *file* objects created with the file helper function from the file specific
 channel factories (e.g., `Channel.fromPath` or `Channel.fromFilePairs`).
-
-
-=== Input path
-
-As of version 19.10.0, Nextflow introduced a new `path` input qualifier that automatically
-handles string values as file objects. The following example works as expected:
-
-[source,nextflow,linenums]
-----
-params.genome = "$baseDir/data/ggal/transcriptome.fa"
-
-process FOO {
-
-  input:
-  path genome
-
-  script:
-  """
-  ls -lh $genome
-  """
-}
-
-workflow {
-  FOO(params.genome)
-}
-----
-
-NOTE: In the past, the file qualifier was used for files, but the path qualifier should be preferred over file to handle process input files when using Nextflow 19.10.0 or later.
-
 
 [discrete]
 === Exercise
@@ -794,7 +767,7 @@ For example:
 species = ['cat','dog', 'sloth']
 sequences = ['AGATAG','ATGCTCT', 'ATCCCAA']
 
-Channel.of(species)
+Channel.fromList(species)
        .set { species_ch }
 
 process ALIGN {
@@ -813,7 +786,7 @@ process ALIGN {
 }
 
 workflow {
-  genomes = ALIGN(species_ch, sequences )
+  genomes = ALIGN( species_ch, sequences )
   genomes.view()
 }
 ----
