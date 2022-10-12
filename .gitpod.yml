@@ -15,6 +15,8 @@ github:
 
 image: chriswyatt/seqeratraining
 
+workspaceLocation: gitpod/gitpod-ws.code-workspace 
+
 tasks:
   - before: printf 'unset JAVA_TOOL_OPTIONS\n' >> $HOME/.bashrc && exit
 
