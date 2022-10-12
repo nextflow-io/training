@@ -13,7 +13,9 @@ github:
     # add a "Review in Gitpod" button to pull requests (defaults to false)
     addBadge: false
 
-image: chriswyatt/seqeratraining
+image: chriswyatt/seqeratraining_22.09.7
+
+workspaceLocation: "./nf-training"
 
 tasks:
   - before: printf 'unset JAVA_TOOL_OPTIONS\n' >> $HOME/.bashrc && exit
@@ -45,4 +47,3 @@ vscode:
     # - oderwat.indent-rainbow # Highlight indentation level
     - streetsidesoftware.code-spell-checker # Spelling checker for source code
     - ms-vscode.live-server
-    

@@ -118,10 +118,10 @@ This should come up with the Nextflow version and runtime information:
 
 [cmd,linenums]
 ----
-  Version: 22.04.2 build 5701
-  Created: 16-05-2022 17:52 UTC
-  System: Linux 5.16.20-051620-generic
-  Runtime: Groovy 3.0.10 on OpenJDK 64-Bit Server VM 11.0.13+8-LTS
+  Version: 22.09.7-edge build 5806
+  Created: 28-09-2022 09:36 UTC
+  System: Linux 5.15.0-47-generic
+  Runtime: Groovy 3.0.13 on OpenJDK 64-Bit Server VM 11.0.1+13-LTS
   Encoding: UTF-8 (UTF-8)
 ----
 

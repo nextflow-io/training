@@ -181,7 +181,7 @@ Print the output of the `index_ch` channel by using the https://www.nextflow.io/
 .Click here for the answer:
 [%collapsible]
 ====
-Add the following to the end of your script file:
+Add the following to the end of your workflow block in your script file
 
 [source,nextflow]
 ----
@@ -201,7 +201,7 @@ Add `cpus 2` to the top of the index process:
 
 [source,nextflow,linenums]
 ----
-process index {
+process INDEX {
   cpus 2
   input:
   ...
@@ -262,7 +262,7 @@ In this step you have learned:
 
 This step shows how to match *read* files into pairs, so they can be mapped by *Salmon*.
 
-Edit the script `script3.nf` by adding the following statement as the last line in the workflow scope:
+Edit the script `script3.nf` by adding the following statement as the last line of the file:
 
 [source,nextflow]
 ----
@@ -639,7 +639,7 @@ Nextflow allows the execution of a specific revision of your project by using th
 
 [cmd]
 ----
-nextflow run nextflow-io/rnaseq-nf -r dev
+nextflow run nextflow-io/rnaseq-nf -r v2.1 -with-docker
 ----
 
 Revision are defined by using Git tags or branches defined in the project repository.

@@ -147,13 +147,13 @@ The output will look similar to the text shown below:
 
 [cmd,linenums]
 ----
-N E X T F L O W  ~  version 22.04.2
-Launching `hello.nf` [tiny_venter] DSL2 - revision: 6879fb9372
+N E X T F L O W  ~  version 22.09.7-edge
+Launching `hello.nf` [gigantic_poitras] DSL2 - revision: 197a0e289a
 executor >  local (3)
-[26/004297] process > SPLITLETTERS (1)   [100%] 1 of 1 ✔
-[8a/537930] process > CONVERTTOUPPER (1) [100%] 2 of 2 ✔
-HELLO
+[0b/8b49d0] process > SPLITLETTERS (1)   [100%] 1 of 1 ✔
+[69/870428] process > CONVERTTOUPPER (1) [100%] 2 of 2 ✔
 WORLD!
+HELLO
 ----
 
 The standard output shows (line by line):
@@ -170,7 +170,7 @@ The standard output shows (line by line):
 
 * *6-7*: The result string from stdout is printed.
 
-TIP: The hexadecimal numbers, like `8a/537930`, identify the unique process
+TIP: The hexadecimal numbers, like `69/870428`, identify the unique process
 execution. These numbers are also the prefix of the directories where each
 process is executed. You can inspect the files produced by changing to the directory
 `$PWD/work` and using these numbers to find the process-specific execution path.
@@ -231,11 +231,11 @@ It will print output similar to this:
 
 [cmd,linenums]
 ----
-N E X T F L O W  ~  version 22.04.2
-Launching `hello.nf` [nostalgic_franklin] DSL2 - revision: 0b20bd3365
-executor >  local (2)
-[bd/6aa32b] process > SPLITLETTERS (1)   [100%] 1 of 1, cached: 1 ✔
-[a0/67846c] process > CONVERTTOUPPER (1) [100%] 2 of 2 ✔
+N E X T F L O W  ~  version 22.09.7-edge
+Launching `hello.nf` [amazing_becquerel] DSL2 - revision: 525206806b
+executor >  local (3)
+[4d/535c86] process > SPLITLETTERS (1)   [100%] 1 of 1 ✔
+[3c/67914f] process > CONVERTTOUPPER (1) [100%] 2 of 2 ✔
 !dlrow
  olleH
 ----
@@ -269,14 +269,14 @@ of the parameter. The output will look like this:
 
 [cmd,linenums]
 ----
-N E X T F L O W  ~  version 22.04.2
-Launching `hello.nf` [adoring_heyrovsky] DSL2 - revision: 0b20bd3365
+N E X T F L O W  ~  version 22.09.7-edge
+Launching `hello.nf` [fervent_galileo] DSL2 - revision: 525206806b
 executor >  local (4)
-[e9/8ebd19] process > SPLITLETTERS (1)   [100%] 1 of 1 ✔
-[18/bc88cb] process > CONVERTTOUPPER (3) [100%] 3 of 3 ✔
-uojnoB
+[e9/139d7d] process > SPLITLETTERS (1)   [100%] 1 of 1 ✔
+[bb/fc8548] process > CONVERTTOUPPER (1) [100%] 3 of 3 ✔
 m el r
 !edno
+uojnoB
 ----
 
 === In DAG-like format
