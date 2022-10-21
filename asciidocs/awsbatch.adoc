@@ -79,7 +79,7 @@ in particular, when https://aws.amazon.com/ec2/spot/[spot-instances] are used.
 
 Both Nextflow and AWS Batch provides their own error handling strategies to record faulty conditions.
 
-The error stragegy can can be selected when deploying Nextflow:
+The error stragegy can be selected when deploying Nextflow:
 
 [%header,cols="20%,80%"]
 |=======================
@@ -469,7 +469,7 @@ aws {
 <2> Set the queue for the SLURM cluster
 <3> Setting of for the process named `bigTask`
 <4> Set `awsbatch` as executor for the `bigTask` process
-<5> Set the queue for the for the `bigTask` process
+<5> Set the queue for the `bigTask` process
 <6> set the container image to deploy the `bigTask` process
 <7> Defines the region for Batch execution
 
