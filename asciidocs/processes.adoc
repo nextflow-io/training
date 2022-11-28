@@ -562,7 +562,7 @@ The `each` qualifier allows you to repeat the execution of a process for each it
 [source,nextflow,linenums]
 ----
 sequences = Channel.fromPath('data/prots/*.tfa')
-methods = ['regular', 'expresso', 'psicoffee']
+methods = ['regular', 'espresso', 'psicoffee']
 
 process ALIGNSEQUENCES {
   debug true

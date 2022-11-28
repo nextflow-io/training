@@ -30,7 +30,7 @@ A container can be run using the following command:
 docker run <container-name>
 ----
 
-Try for example the following publically available container (if you have docker installed):
+Try for example the following publicly available container (if you have docker installed):
 
 [cmd]
 ----
