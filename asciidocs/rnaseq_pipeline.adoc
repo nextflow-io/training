@@ -206,7 +206,7 @@ process INDEX {
   input:
   ...
 ----
-Then check it worked by looking at the script executed in the work directory. Look for the hexidecimal (e.g. work/7f/f285b80022d9f61e82cd7f90436aa4/), Then `cat` the `.command.sh` file.
+Then check it worked by looking at the script executed in the work directory. Look for the hexadecimal (e.g. work/7f/f285b80022d9f61e82cd7f90436aa4/), Then `cat` the `.command.sh` file.
 ====
 
 [discrete]

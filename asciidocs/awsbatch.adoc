@@ -79,7 +79,7 @@ in particular, when https://aws.amazon.com/ec2/spot/[spot-instances] are used.
 
 Both Nextflow and AWS Batch provides their own error handling strategies to record faulty conditions.
 
-The error stragegy can be selected when deploying Nextflow:
+The error strategy can be selected when deploying Nextflow:
 
 [%header,cols="20%,80%"]
 |=======================

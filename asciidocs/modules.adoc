@@ -18,7 +18,7 @@ Using the `hello.nf` example, we can achieve this by:
 
 - Cutting and pasting the two process definitions for `SPLITLETTERS` and `CONVERTTOUPPER` into `modules.nf`.
 
-- Removing the `process` defintions in the `main.nf` script.
+- Removing the `process` definitions in the `main.nf` script.
 
 - Importing the processes from `modules.nf` within the `main.nf` script anywhere above the `workflow` definition:
 
