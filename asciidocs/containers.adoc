@@ -356,7 +356,7 @@ mounts the host `$HOME` directory and uses the current work directory.
 
 === Import a Docker image
 
-An easier way to create a Singularity container without requiring sudo permission and boosting the containers interoperability is to import a Docker container image by pulling it directly from a Docker registry. For example:
+An easier way to create a Singularity container without requiring `sudo` permission and boosting the containers interoperability is to import a Docker container image by pulling it directly from a Docker registry. For example:
 
 [cmd]
 ----
@@ -403,7 +403,7 @@ conda init
 bash
 ----
 
-Then write your YAML file. For example:
+Then write your YAML file (to env.yml). For example:
 
 [source,yaml,linenums]
 ----
@@ -442,7 +442,7 @@ base                  *  /opt/conda
 nf-tutorial              /opt/conda/envs/nf-tutorial
 ----
 
-To enable the environment you can use the `activate` command:
+To enable the environment, you can use the `activate` command:
 
 [cmd]
 ----
@@ -581,7 +581,7 @@ docker pull biocontainers/fastqc:v0.11.5
 
 You can check the registry for the packages you want in https://biocontainers.pro/registry[BioContainers official website].
 
-Contrary to other registries that will pull the latest image when no tag (version) is provided, you must specify a tag when pulling BioContainers (after a colon `:`, e.g fastqc:v0.11.5). Check the tags within the registry and pick the one that better suits your needs.
+Contrary to other registries that will pull the latest image when no tag (version) is provided, you must specify a tag when pulling BioContainers (after a colon `:`, e.g. fastqc:v0.11.5). Check the tags within the registry and pick the one that better suits your needs.
 
 [discrete]
 === Exercise
