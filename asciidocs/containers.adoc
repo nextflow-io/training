@@ -90,7 +90,8 @@ following content:
 ----
 FROM debian:stretch-slim
 
-MAINTAINER <your name>
+LABEL image.author.name "Your Name Here"
+LABEL image.author.email "your@email.here"
 
 RUN apt-get update && apt-get install -y curl cowsay
 
@@ -494,7 +495,8 @@ Then, we can write our Dockerfile with micromamba installing the packages from t
 ----
 FROM mambaorg/micromamba:0.25.1
 
-MAINTAINER  Your name <your_email>
+LABEL image.author.name "Your Name Here"
+LABEL image.author.email "your@email.here"
 
 COPY --chown=$MAMBA_USER:$MAMBA_USER micromamba.yml /tmp/env.yml
 
