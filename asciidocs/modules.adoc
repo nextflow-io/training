@@ -18,9 +18,9 @@ Using the `hello.nf` example, we can achieve this by:
 
 - Cutting and pasting the two process definitions for `SPLITLETTERS` and `CONVERTTOUPPER` into `modules.nf`.
 
-- Removing the `process` definitions in the `main.nf` script.
+- Removing the `process` definitions in the `hello.nf` script.
 
-- Importing the processes from `modules.nf` within the `main.nf` script anywhere above the `workflow` definition:
+- Importing the processes from `modules.nf` within the `hello.nf` script anywhere above the `workflow` definition:
 
 [source,nextflow,linenums]
 ----
@@ -393,7 +393,7 @@ The result of the above snippet can then be accessed using `my_pipeline.out.my_d
 
 === Calling named workflows
 
-Within a `main.nf` script we also can have multiple workflows.
+Within a `main.nf` script (called `hello.nf` in our example) we also can have multiple workflows.
 In which case we may want to call a specific workflow when running the code.
 For this we use the entrypoint call `-entry <workflow_name>`.
 
@@ -451,7 +451,7 @@ def SAYHELLO() {
 ----
 
 [discrete]
-==== Main script (`./main.nf`)
+==== Main script (`./hello.nf`)
 
 [source,nextflow,linenums]
 ----
@@ -467,7 +467,7 @@ workflow {
 }
 ----
 
-Running `main.nf` should print:
+Running `hello.nf` should print:
 
 [cmd]
 ----
