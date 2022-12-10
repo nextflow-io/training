@@ -87,7 +87,7 @@ process CONVERTTOUPPER {
 ----
 ====
 
-We now have modularized processes which makes the code more reusable and cleaner to read.
+We now have modularized processes which makes the code reusable.
 
 === Multiple imports
 
