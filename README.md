@@ -1,6 +1,10 @@
 # Nextflow Training Guide.
 
-Welcome to the Nextflow training repo. We are excited to have you on the path to writing reproducible and scalable scientific workflows using Nextflow. This guide complements the full Nextflow documentation - if you ever have any doubts, head over to the docs located [here](https://www.nextflow.io/docs/latest/).
+Welcome to the Nextflow training repo. 
+
+We are excited to have you on the path to writing reproducible and scalable scientific workflows using Nextflow. To access the material for training, click [here](https://training.seqera.io).
+
+Our training course complements the full Nextflow documentation - if you ever have any doubts, head over to the docs located [here](https://www.nextflow.io/docs/latest/).
 
 There are two main ways to get started with Seqera's Nextflow training course.
 
