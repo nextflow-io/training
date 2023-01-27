@@ -15,7 +15,7 @@ nav:
     - groovy.md
     - modules.md
     - config.md
-    - executors.md # ! Conversion didn't work
+    - executors.md
     - tower.md
     - cache_and_resume.md
     - debugging.md
