@@ -1,0 +1,439 @@
+[AWS Batch](https://aws.amazon.com/batch/) is a managed computing service that allows the execution of containerized workloads in the Amazon cloud infrastructure.
+
+Nextflow provides built-in support for AWS Batch and enables the seamless deployment of a Nextflow pipeline in the cloud by offloading the process executions as Batch jobs.
+
+# Basic requirements
+
+-   All workflow process executions must be containerized, therefore one or more containers must be defined either in the pipeline script or the workflow config file.
+
+-   Container images need to be published in a Docker registry such as Docker Hub, Quay or ECS Container Registry that can be reached by ECS Batch.
+
+-   An S3 bucket use as shared memory to transfer input-output data across tasks.
+
+-   AWS CLI tool installed either in the job container or the compute node AMI, to transfer the input data from the S3 bucket to the container, and back from the container to the shared bucket.
+
+-   Configure at least a Batch queue and associated Compute Environment.
+
+# Minimal configuration
+
+Once the Batch environment is configured specifying the instance types to be used and the max number of CPUs to be allocated, you need to create a Nextflow configuration file like the one shown below:
+
+    process.executor = 'awsbatch'       // 
+    process.queue = 'nextflow-ci'       // 
+    process.container = 'nextflow/rnaseq-nf:latest'      // 
+    workDir = 's3://nf-course/work/'    // 
+    aws.region = 'eu-west-1'            // 
+    aws.batch.cliPath = '/home/ec2-user/miniconda/bin/aws' // 
+
+-   Set AWS Batch as the executor to run the processes in the workflow
+
+-   The name of the computing queue defined in the Batch environment
+
+-   The Docker container image to be used to run each job
+
+-   The workflow work directory must be an AWS S3 bucket
+
+-   The AWS region to be used
+
+-   The path of the AWS CLI tool required to download/upload files to/from the container
+
+The best practice is to keep this setting as a separate [profile](https://www.nextflow.io/docs/latest/config.html#config-profiles) in your workflow config file. This allows the execution with a simple command.
+
+    nextflow run <my pipeline> -profile my-batch-profile
+
+The complete details describing AWS Batch deployment are available at [this link](https://www.nextflow.io/docs/latest/awscloud.html#aws-batch).
+
+# Task directives
+
+The following task directives are applied and converted to the corresponding Batch API when using the AWS Batch executor:
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><p>Name</p></td>
+<td style="text-align: left;"><p>Description</p></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><p><a href="https://www.nextflow.io/docs/latest/process.html#accelerator">accelerator</a></p></td>
+<td style="text-align: left;"><p>The hardware accelerator i.e. GPU to be used.</p></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><p><a href="https://www.nextflow.io/docs/latest/process.html#container">container</a></p></td>
+<td style="text-align: left;"><p>The Docker container to be used for the job execution.</p></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><p><a href="https://www.nextflow.io/docs/latest/process.html#cpus">cpus</a></p></td>
+<td style="text-align: left;"><p>Number of CPUs (make sure the chosen instance types are able to fullfill the request).</p></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><p><a href="https://www.nextflow.io/docs/latest/process.html#errorstrategy">errorStrategy</a></p></td>
+<td style="text-align: left;"><p>Errors handling policy.</p></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><p><a href="https://www.nextflow.io/docs/latest/process.html#queue">queue</a></p></td>
+<td style="text-align: left;"><p>The (AWS) queue to be used to run the task.</p></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><p><a href="https://www.nextflow.io/docs/latest/process.html#memory">memory</a></p></td>
+<td style="text-align: left;"><p>Amount of memory to be reserved to run the job (make sure the chosen instance types are able to fullfill the request).</p></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><p><a href="https://www.nextflow.io/docs/latest/process.html#maxretries">maxRetries</a></p></td>
+<td style="text-align: left;"><p>Max number of times a failing job can be retried.</p></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><p><a href="https://www.nextflow.io/docs/latest/process.html#time">time</a></p></td>
+<td style="text-align: left;"><p>Max job execution time i.e. job timeout.</p></td>
+</tr>
+</tbody>
+</table>
+
+# Note on retry
+
+Automatic error fail-over is an essential feature when deploying cloud workloads, in particular, when [spot-instances](https://aws.amazon.com/ec2/spot/) are used.
+
+Both Nextflow and AWS Batch provides their own error handling strategies to record faulty conditions.
+
+The error strategy can be selected when deploying Nextflow:
+
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><p>Mechanism</p></td>
+<td style="text-align: left;"><p>Behavior</p></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><p>Nextflow native error handling</p></td>
+<td style="text-align: left;"><p>When directive <code>errorStrategy</code> is set to <code>'retry'</code> <strong>and</strong> <code>maxRetries</code> is greater than <code>0</code> (default: <code>1</code>) then Nextflow built-in error handling policy is applied. If a job returns a non-zero or some expected output file is missing, the job is retried according to the specified limits. Each time a new job execution is retried, a new task work directory is created using the usual Nextflow strategy.</p></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><p>AWS Batch native error handling</p></td>
+<td style="text-align: left;"><p>When directive <code>errorStrategy</code> is not specified or set to any strategy different from <code>retry</code> <strong>and</strong> <code>maxRetries</code> greater than zero, then AWS built-in <a href="https://docs.aws.amazon.com/batch/latest/userguide/job_retries.html">job retries</a> mechanism is used. The value of <code>maxRetries</code> +1 is used for the max number of expected job attempts. This approach is completely transparent to Nextflow i.e. Nextflow will not be aware if a job is re-executed. Additionally, for this reason, the same task work directory will be used for all retries (this is still safe as the computation happens in the container scratch storage). Nextflow will still report an error if an expected output is missing.</p></td>
+</tr>
+</tbody>
+</table>
+
+# Volume mounts
+
+EBS volumes (or other supported storage) can be mounted in the job container using the following configuration snippet:
+
+    aws {
+      batch {
+          volumes = '/some/path'
+      }
+    }
+
+Multiple volumes can be specified using comma-separated paths. The usual Docker volume mount syntax can be used to define complex volumes for which the container paths are different from the host paths or to specify a read-only option:
+
+    aws {
+      region = 'eu-west-1'
+      batch {
+          volumes = ['/tmp', '/host/path:/mnt/path:ro']
+      }
+    }
+
+IMPORTANT:
+
+-   This is a global configuration that has to be specified in a Nextflow config file, as such it’s applied to **all** process executions.
+
+-   Nextflow expects those paths to be available. It does not handle the provision of EBS volumes or another kind of storage.
+
+# Custom job definition
+
+Nextflow automatically creates the Batch [Job definitions](https://docs.aws.amazon.com/batch/latest/userguide/job_definitions.html) needed to execute your pipeline processes. Therefore, it’s not required to define them before running your workflow.
+
+However, you may still need to specify a custom Job Definition to provide fine-grained control of the configuration settings of a specific job e.g. to define custom mount paths or other special settings of a Batch Job.
+
+To use your own job definition in a Nextflow workflow, use it in place of the container image name by adding the `job-definition://` string as a prefix. For example:
+
+    process {
+        container = 'job-definition://your-job-definition-name'
+    }
+
+# Custom image
+
+Since Nextflow requires the AWS CLI tool to be accessible in the computing environment a common solution consists of creating a custom AMI and install it in a self-contained manner e.g. using Conda package manager.
+
+When creating your custom AMI for AWS Batch, make sure to use the *Amazon ECS-Optimized Amazon Linux AMI* as the base image.
+
+The following snippet shows how to install AWS CLI with Miniconda:
+
+    sudo yum install -y bzip2 wget
+    wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
+    bash Miniconda3-latest-Linux-x86_64.sh -b -f -p $HOME/miniconda
+    $HOME/miniconda/bin/conda install -c conda-forge -y awscli
+    rm Miniconda3-latest-Linux-x86_64.sh
+
+The `aws` tool will be placed in a directory named `bin` in the main installation folder. Modifying this directory structure, after the installation, will cause the tool to not work properly.
+
+Finally, specify the `aws` full path in the Nextflow config file as shown below:
+
+    aws.batch.cliPath = '/home/ec2-user/miniconda/bin/aws'
+
+# Launch template
+
+An alternative approach is to create a custom AMI using a [Launch template](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html) that installs the AWS CLI tool during the instance boot using custom user data.
+
+In the EC2 dashboard, create a Launch template specifying the following in the user data field:
+
+    MIME-Version: 1.0
+    Content-Type: multipart/mixed; boundary="//"
+
+    --//
+    Content-Type: text/x-shellscript; charset="us-ascii"
+
+    #!/bin/sh
+    ## install required deps
+    set -x
+    export PATH=/usr/local/bin:$PATH
+    yum install -y jq python27-pip sed wget bzip2
+    pip install -U boto3
+
+    ## install awscli
+    USER=/home/ec2-user
+    wget -q https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
+    bash Miniconda3-latest-Linux-x86_64.sh -b -f -p $USER/miniconda
+    $USER/miniconda/bin/conda install -c conda-forge -y awscli
+    rm Miniconda3-latest-Linux-x86_64.sh
+    chown -R ec2-user:ec2-user $USER/miniconda
+
+    --//--
+
+Then in the Batch dashboard create a new compute environment and specify the newly created launch template in the corresponding field.
+
+# Expandable EBS volume
+
+A common issue when deploying genomics workload is related to estimating the amount of storage that is allocated in the compute nodes.
+
+One possible solution consists of using a background process running in the compute nodes that periodically checks the amount of free space and automatically expands the avail storage mounting new EBS volume(s).
+
+To take advantage of this mechanism with AWS Batch, we also need to make sure the Docker storage driver is mounted over this expandable volume instead of the boot disk.
+
+The aforementioned pattern can be implemented using the following launch template:
+
+    MIME-Version: 1.0
+    Content-Type: multipart/mixed; boundary="//"
+
+    --//
+    Content-Type: text/cloud-boothook; charset="us-ascii"
+
+    su - root << 'EOF'
+    (
+    set -x
+    uname -r
+    env | sort
+    export PATH=/usr/local/bin:$PATH
+    yum install -y jq btrfs-progs python27-pip sed wget bzip2
+    pip install -U boto3
+    cp -au /var/lib/docker /var/lib/docker.bk
+    rm -rf /var/lib/docker/*
+    cd /opt && curl -s https://nf-xpack.s3.amazonaws.com/v1/aws-ebs-autoscale.tgz | tar xz
+    sh /opt/ebs-autoscale/bin/init-ebs-autoscale.sh /var/lib/docker /dev/sdc  2>&1 > /var/log/init-ebs-autoscale.log
+    sed -i 's+^DOCKER_STORAGE_OPTIONS=.*+DOCKER_STORAGE_OPTIONS="--storage-driver btrfs"+g' /etc/sysconfig/docker-storage
+    cp -au /var/lib/docker.bk/* /var/lib/docker
+
+    ) 2>&1 | grep -v LESS_TERMCAP >  ~/boot.log
+    EOF
+
+    --//
+    Content-Type: text/x-shellscript; charset="us-ascii"
+
+    #!/bin/sh
+    su - root << 'EOF'
+    (
+    set -x
+    ## install awscli
+    USER=/home/ec2-user
+    wget -q https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
+    bash Miniconda3-latest-Linux-x86_64.sh -b -f -p $USER/miniconda
+    $USER/miniconda/bin/conda install -c conda-forge -y awscli
+    rm Miniconda3-latest-Linux-x86_64.sh
+    chown -R ec2-user:ec2-user $USER/miniconda
+
+    ) &>> ~/boot.log
+    EOF
+    cp ~/boot.log ~ec2-user/boot.log
+
+    --//--
+
+Once created, the template can be specified when creating the AWS Batch compute environment.
+
+Make sure to use *Amazon ECS-Optimized Amazon Linux AMI* (not Amazon Linux 2) when using the launch template.
+
+# FSx for Lustre with Nf-xpack
+
+AWS S3 is a fast and cheap storage solution in the cloud; however, it’s not a file storage solution designed for use in HPC shared file systems.
+
+The optional Enterprise Extension Pack for Nextflow provides an extended executor for AWS Batch that allows the usage of [Amazon FSx for Lustre](https://aws.amazon.com/fsx/lustre/) (or any other POSIX compliant file system) as shared storage in place of an S3 bucket.
+
+The Nextflow extended executor for Batch takes care of the mounting of the shared file system in the corresponding job containers. However, it also needs to be mounted in the computing nodes.
+
+## Launch template
+
+The following launch template can be used to mount the Lustre shared file system:
+
+    MIME-Version: 1.0
+    Content-Type: multipart/mixed; boundary="//"
+
+    --//
+    Content-Type: text/cloud-boothook; charset="us-ascii"
+
+    su - root << 'EOF'
+    (
+    set -x
+    uname -r
+    env | sort
+    export PATH=/usr/local/bin:$PATH
+    yum install -y jq btrfs-progs python27-pip sed wget bzip2
+    pip install -U boto3
+    cp -au /var/lib/docker /var/lib/docker.bk
+    rm -rf /var/lib/docker/*
+    cd /opt && curl -s https://nf-xpack.s3.amazonaws.com/v1/aws-ebs-autoscale.tgz | tar xz
+    sh /opt/ebs-autoscale/bin/init-ebs-autoscale.sh /var/lib/docker /dev/sdc  2>&1 > /var/log/init-ebs-autoscale.log
+    sed -i 's+^DOCKER_STORAGE_OPTIONS=.*+DOCKER_STORAGE_OPTIONS="--storage-driver btrfs"+g' /etc/sysconfig/docker-storage
+    cp -au /var/lib/docker.bk/* /var/lib/docker
+    ## install fsx
+    SCRATCH=/scratch
+    FSXNAME=fs-0269031ec160509c9.fsx.eu-west-1.amazonaws.com
+    yum -q install -y lustre-client
+    mkdir -p $SCRATCH
+    mount -t lustre -o noatime,flock $FSXNAME@tcp:/fsx $SCRATCH
+
+    ) 2>&1 | grep -v LESS_TERMCAP >  ~/boot.log
+    EOF
+
+    --//
+    Content-Type: text/x-shellscript; charset="us-ascii"
+
+    #!/bin/sh
+    su - root << 'EOF'
+    (
+    set -x
+    ## install awscli
+    USER=/home/ec2-user
+    wget -q https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
+    bash Miniconda3-latest-Linux-x86_64.sh -b -f -p $USER/miniconda
+    $USER/miniconda/bin/conda install -c conda-forge -y awscli
+    rm Miniconda3-latest-Linux-x86_64.sh
+    chown -R ec2-user:ec2-user $USER/miniconda
+    ## fix fsx ownership
+    SCRATCH=/scratch
+    chown ec2-user:ec2-user $SCRATCH
+    ) &>> ~/boot.log
+    EOF
+    cp ~/boot.log ~ec2-user/boot.log
+
+    --//--
+
+In the above snippet, replace the variables `FSXNAME` and `SCRATCH` with the appropriate values corresponding to your environment.
+
+Nextflow has to be launched from an instance having access to the same FSx Lustre storage.
+
+## Launching instance configuration
+
+Use the following snippet to install the Lustre client:
+
+    SCRATCH=/scratch
+    FSXNAME=fs-0269031ec160509c9.fsx.eu-west-1.amazonaws.com
+    sudo yum  install -y lustre-client
+    sudo mkdir -p $SCRATCH
+    sudo mount -t lustre -o noatime,flock $FSXNAME@tcp:/fsx $SCRATCH
+    sudo chown ec2-user:ec2-user $SCRATCH
+
+Make also sure the storage and the computing nodes use the same VPC and security groups. For further details check [here](https://docs.aws.amazon.com/fsx/latest/LustreGuide/limit-access-security-groups.html).
+
+## Nextflow configuration
+
+Define the following env variable:
+
+    export NXF_GRAB=io.seqera:nf-xpack:0.2.0
+
+Define basic Nextflow configuration parameters:
+
+    process.container = 'nextflow/rnaseq-nf:latest'
+    process.executor = 'awsbatch'
+    process.queue = 'nf-queue-with-fsx'
+    aws.region = 'eu-west-1'
+    workDir = '/scratch/work'
+
+Then run Nextflow as usual:
+
+    nextflow run rnaseq-nf
+
+This requires an extra endpoint configuration to access the Nf-xpack distribution.
+
+# Batch squared
+
+Batch squared consists in submitting a Nextflow launcher application as a Batch job itself.
+
+A good tutorial with additional information about this deployment can be found [here](https://docs.opendata.aws/genomics-workflows/orchestration/nextflow/nextflow-overview.html).
+
+# Advanced tuning
+
+When deploying data-intensive workloads using S3 as shared storage the large number of parallel file uploads/downloads can create network congestion and stall the ECS agent running in the compute node, making it irresponsive.
+
+A simple solution is to try to avoid to big instances for jobs requiring few CPUs (in order to avoid too many parallel jobs in the compute instance).
+
+Also, the following parameters can be used to help to mitigate this issue:
+
+    aws {
+        batch {
+            maxTransferAttempts = 20
+            delayBetweenAttempts = 1000
+            maxParallelTransfers = 8
+        }
+
+        client {
+            maxConnections = 8          // This may depends on num of avail CPUs
+            uploadMaxThreads = 8        // This may depends on num of avail CPUs
+            uploadChunkSize = '100MB'   // Larger chunk sizes may be more stable
+            uploadMaxAttempts = 10
+            uploadRetrySleep = '10 sec'
+            maxErrorRetry = 20
+        }
+    }
+
+Advanced configuration settings are described at [this link](https://www.nextflow.io/docs/latest/config.html#scope-aws).
+
+# Hybrid deployments
+
+Nextflow allows the use of multiple executors in the same workflow application. This feature enables the deployment of hybrid workloads in which some jobs are executed in the local computer or local computing cluster, and some jobs are offloaded to AWS Batch service.
+
+To enable this feature, use one or more [process selectors](https://www.nextflow.io/docs/latest/config.html#config-process-selectors) in your Nextflow configuration file to apply the [AWS Batch configuration](https://www.nextflow.io/docs/latest/awscloud.html#awscloud-batch-config) for subsets of processes in your workflow. For example:
+
+    process {
+        executor = 'slurm'  // 
+        queue = 'short'     // 
+
+        withLabel: bigTask {          // 
+          executor = 'awsbatch'       // 
+          queue = 'my-batch-queue'    // 
+          container = 'my/image:tag'  // 
+      }
+    }
+
+    aws {
+        region = 'eu-west-1'    // 
+    }
+
+-   Set `slurm` as the default executor
+
+-   Set the queue for the SLURM cluster
+
+-   Setting of for the process named `bigTask`
+
+-   Set `awsbatch` as executor for the `bigTask` process
+
+-   Set the queue for the `bigTask` process
+
+-   set the container image to deploy the `bigTask` process
+
+-   Defines the region for Batch execution
