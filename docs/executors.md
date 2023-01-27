@@ -32,7 +32,7 @@ This can be done using the following process directives:
 
 Use the scope `process` to define the resource requirements for all processes in your workflow applications. For example:
 
-```config
+```groovy
 process {
     executor = 'slurm'
     queue = 'short'
@@ -46,7 +46,7 @@ process {
 
 In real-world applications, different tasks need different amounts of computing resources. It is possible to define the resources for a specific task using the select `withName:` followed by the process name:
 
-```config
+```groovy
 process {
     executor = 'slurm'
     queue = 'short'
@@ -70,7 +70,7 @@ process {
 
 Run the RNA-Seq script (script7.nf) from earlier, but specify that the `quantification` `process` requires 2 CPUs and 5 GB of memory, within the `nextflow.config` file.
 
-```config
+```groovy
 process {
     withName: quantification {
         cpus = 2
@@ -107,7 +107,7 @@ process task2 {
 
 The configuration file:
 
-```config
+```groovy
 process {
     executor = 'slurm'
 
@@ -129,7 +129,7 @@ process {
 
 Containers can be set for each process in your workflow. You can define their containers in a config file as shown below:
 
-```config
+```groovy
 process {
   withName: foo {
     container = 'some/image:x'
@@ -142,11 +142,9 @@ process {
 docker.enabled = true
 ```
 
-<div class="tip">
+!!! tip
 
-Should I use a single _fat_ container or many _slim_ containers? Both approaches have pros & cons. A single container is simpler to build and maintain, however when using many tools the image can become very big and tools can create conflicts with each other. Using a container for each process can result in many different images to build and maintain, especially when processes in your workflow use different tools for each task.
-
-</div>
+    Should I use a single _fat_ container or many _slim_ containers? Both approaches have pros & cons. A single container is simpler to build and maintain, however when using many tools the image can become very big and tools can create conflicts with each other. Using a container for each process can result in many different images to build and maintain, especially when processes in your workflow use different tools for each task.
 
 Read more about config process selectors at [this link](https://www.nextflow.io/docs/latest/config.html#process-selectors).
 
@@ -156,7 +154,7 @@ Configuration files can contain the definition of one or more _profiles_. A prof
 
 Configuration profiles are defined by using the special scope `profiles` which group the attributes that belong to the same profile using a common prefix. For example:
 
-```config
+```groovy
 profiles {
 
     standard {
@@ -188,13 +186,13 @@ To enable a specific profile use `-profile` option followed by the profile name:
 
     nextflow run <your script> -profile cluster
 
-<div class="tip">
+!!! tip
 
-Two or more configuration profiles can be specified by separating the profile names with a comma character:
+    Two or more configuration profiles can be specified by separating the profile names with a comma character:
 
-</div>
-
+    ```bash
     nextflow run <your script> -profile standard,cloud
+    ```
 
 ## Cloud deployment
 
@@ -204,7 +202,7 @@ Nextflow provides built-in support for AWS Batch which allows the seamless deplo
 
 Once the Batch environment is configured, specify the instance types to be used and the max number of CPUs to be allocated, you need to create a Nextflow configuration file like the one shown below:
 
-```config
+```groovy
 process.executor = 'awsbatch'                          //
 process.queue = 'nextflow-ci'                          //
 process.container = 'nextflow/rnaseq-nf:latest'        //
@@ -214,24 +212,19 @@ aws.batch.cliPath = '/home/ec2-user/miniconda/bin/aws' //
 ```
 
 -   Set AWS Batch as the executor to run the processes in the workflow
-
 -   The name of the computing queue defined in the Batch environment
-
 -   The Docker container image to be used to run each job
-
 -   The workflow work directory must be a AWS S3 bucket
-
 -   The AWS region to be used
-
 -   The path of the AWS cli tool required to download/upload files to/from the container
 
-<div class="tip">
+!!! tip
 
-The best practice is to keep this setting as a separate profile in your workflow config file. This allows the execution with a simple command.
+    The best practice is to keep this setting as a separate profile in your workflow config file. This allows the execution with a simple command.
 
-</div>
-
+    ```bash
     nextflow run script7.nf
+    ```
 
 The complete details about AWS Batch deployment are available at [this link](https://www.nextflow.io/docs/latest/awscloud.html#aws-batch).
 
@@ -239,7 +232,7 @@ The complete details about AWS Batch deployment are available at [this link](htt
 
 Elastic Block Storage (EBS) volumes (or other supported storage) can be mounted in the job container using the following configuration snippet:
 
-```config
+```groovy
 aws {
   batch {
       volumes = '/some/path'
@@ -249,7 +242,7 @@ aws {
 
 Multiple volumes can be specified using comma-separated paths. The usual Docker volume mount syntax can be used to define complex volumes for which the container path is different from the host path or to specify a read-only option:
 
-```config
+```groovy
 aws {
   region = 'eu-west-1'
   batch {
@@ -258,17 +251,13 @@ aws {
 }
 ```
 
-<div class="important">
+!!! tip
 
-This is a global configuration that has to be specified in a Nextflow config file and will be applied to **all** process executions.
+    This is a global configuration that has to be specified in a Nextflow config file and will be applied to **all** process executions.
 
-</div>
+!!! warning
 
-<div class="important">
-
-Nextflow expects paths to be available. It does not handle the provision of EBS volumes or another kind of storage.
-
-</div>
+    Nextflow expects paths to be available. It does not handle the provision of EBS volumes or another kind of storage.
 
 ## Custom job definition
 
@@ -278,7 +267,7 @@ However, you may still need to specify a custom Job Definition to provide fine-g
 
 To use your own job definition in a Nextflow workflow, use it in place of the container image name, prefixing it with the `job-definition://` string. For example:
 
-```config
+```groovy
 process {
     container = 'job-definition://your-job-definition-name'
 }
@@ -288,11 +277,9 @@ process {
 
 Since Nextflow requires the AWS CLI tool to be accessible in the computing environment, a common solution consists of creating a custom Amazon Machine Image (AMI) and installing it in a self-contained manner (e.g. using Conda package manager).
 
-<div class="important">
+!!! warning
 
-When creating your custom AMI for AWS Batch, make sure to use the _Amazon ECS-Optimized Amazon Linux AMI_ as the base image.
-
-</div>
+    When creating your custom AMI for AWS Batch, make sure to use the _Amazon ECS-Optimized Amazon Linux AMI_ as the base image.
 
 The following snippet shows how to install AWS CLI with Miniconda:
 
@@ -302,15 +289,13 @@ The following snippet shows how to install AWS CLI with Miniconda:
     $HOME/miniconda/bin/conda install -c conda-forge -y awscli
     rm Miniconda3-latest-Linux-x86_64.sh
 
-<div class="note">
+!!! note
 
-The `aws` tool will be placed in a directory named `bin` in the main installation folder. The tools will not work properly if you modify this directory structure after the installation.
-
-</div>
+    The `aws` tool will be placed in a directory named `bin` in the main installation folder. The tools will not work properly if you modify this directory     structure after the installation.
 
 Finally, specify the `aws` full path in the Nextflow config file as shown below:
 
-```config
+```groovy
 aws.batch.cliPath = '/home/ec2-user/miniconda/bin/aws'
 ```
 
@@ -355,7 +340,7 @@ To enable this feature use one or more [process selectors](https://www.nextflow.
 
 For example, apply the [AWS Batch configuration](https://www.nextflow.io/docs/latest/awscloud.html#awscloud-batch-config) only to a subset of processes in your workflow. You can try the following:
 
-```config
+```groovy
 process {
     executor = 'slurm'  //
     queue = 'short'     //

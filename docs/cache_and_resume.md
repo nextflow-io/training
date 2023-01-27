@@ -10,40 +10,42 @@ The task unique ID is generated as a 128-bit hash number composing the task inpu
 
 The pipeline work directory is organized as shown below:
 
-    work/
-    ├── 12
-    │   └── 1adacb582d2198cd32db0e6f808bce
-    │       ├── genome.fa -> /data/../genome.fa
-    │       └── index
-    │           ├── hash.bin
-    │           ├── header.json
-    │           ├── indexing.log
-    │           ├── quasi_index.log
-    │           ├── refInfo.json
-    │           ├── rsd.bin
-    │           ├── sa.bin
-    │           ├── txpInfo.bin
-    │           └── versionInfo.json
-    ├── 19
-    │   └── 663679d1d87bfeafacf30c1deaf81b
-    │       ├── ggal_gut
-    │       │   ├── aux_info
-    │       │   │   ├── ambig_info.tsv
-    │       │   │   ├── expected_bias.gz
-    │       │   │   ├── fld.gz
-    │       │   │   ├── meta_info.json
-    │       │   │   ├── observed_bias.gz
-    │       │   │   └── observed_bias_3p.gz
-    │       │   ├── cmd_info.json
-    │       │   ├── libParams
-    │       │   │   └── flenDist.txt
-    │       │   ├── lib_format_counts.json
-    │       │   ├── logs
-    │       │   │   └── salmon_quant.log
-    │       │   └── quant.sf
-    │       ├── ggal_gut_1.fq -> /data/../ggal_gut_1.fq
-    │       ├── ggal_gut_2.fq -> /data/../ggal_gut_2.fq
-    │       └── index -> /data/../asciidocs/day2/work/12/1adacb582d2198cd32db0e6f808bce/index
+```
+work/
+├── 12
+│   └── 1adacb582d2198cd32db0e6f808bce
+│       ├── genome.fa -> /data/../genome.fa
+│       └── index
+│           ├── hash.bin
+│           ├── header.json
+│           ├── indexing.log
+│           ├── quasi_index.log
+│           ├── refInfo.json
+│           ├── rsd.bin
+│           ├── sa.bin
+│           ├── txpInfo.bin
+│           └── versionInfo.json
+├── 19
+│   └── 663679d1d87bfeafacf30c1deaf81b
+│       ├── ggal_gut
+│       │   ├── aux_info
+│       │   │   ├── ambig_info.tsv
+│       │   │   ├── expected_bias.gz
+│       │   │   ├── fld.gz
+│       │   │   ├── meta_info.json
+│       │   │   ├── observed_bias.gz
+│       │   │   └── observed_bias_3p.gz
+│       │   ├── cmd_info.json
+│       │   ├── libParams
+│       │   │   └── flenDist.txt
+│       │   ├── lib_format_counts.json
+│       │   ├── logs
+│       │   │   └── salmon_quant.log
+│       │   └── quant.sf
+│       ├── ggal_gut_1.fq -> /data/../ggal_gut_1.fq
+│       ├── ggal_gut_2.fq -> /data/../ggal_gut_2.fq
+│       └── index -> /data/../asciidocs/day2/work/12/1adacb582d2198cd32db0e6f808bce/index
+```
 
 You can create these plots using the `tree` function if you have it installed. On unix, simply `sudo apt install -y tree` or with Homebrew: `brew install tree`
 
@@ -76,9 +78,7 @@ If you delete or move the pipeline work directory, it will prevent the use of th
 The hash code for input files is computed using:
 
 -   The complete file path
-
 -   The file size
-
 -   The last modified timestamp
 
 Therefore, just **touching** a file will invalidate the related task execution.
@@ -91,13 +91,15 @@ In the same experiment, the same pipeline can be executed multiple times, howeve
 
 The `nextflow log` command lists the executions run in the current folder:
 
-    $ nextflow log
+```console
+$ nextflow log
 
-    TIMESTAMP            DURATION  RUN NAME          STATUS  REVISION ID  SESSION ID                            COMMAND
-    2019-05-06 12:07:32  1.2s      focused_carson    ERR     a9012339ce   7363b3f0-09ac-495b-a947-28cf430d0b85  nextflow run hello
-    2019-05-06 12:08:33  21.1s     mighty_boyd       OK      a9012339ce   7363b3f0-09ac-495b-a947-28cf430d0b85  nextflow run rnaseq-nf -with-docker
-    2019-05-06 12:31:15  1.2s      insane_celsius    ERR     b9aefc67b4   4dc656d2-c410-44c8-bc32-7dd0ea87bebf  nextflow run rnaseq-nf
-    2019-05-06 12:31:24  17s       stupefied_euclid  OK      b9aefc67b4   4dc656d2-c410-44c8-bc32-7dd0ea87bebf  nextflow run rnaseq-nf -resume -with-docker
+TIMESTAMP            DURATION  RUN NAME          STATUS  REVISION ID  SESSION ID                            COMMAND
+2019-05-06 12:07:32  1.2s      focused_carson    ERR     a9012339ce   7363b3f0-09ac-495b-a947-28cf430d0b85  nextflow run hello
+2019-05-06 12:08:33  21.1s     mighty_boyd       OK      a9012339ce   7363b3f0-09ac-495b-a947-28cf430d0b85  nextflow run rnaseq-nf -with-docker
+2019-05-06 12:31:15  1.2s      insane_celsius    ERR     b9aefc67b4   4dc656d2-c410-44c8-bc32-7dd0ea87bebf  nextflow run rnaseq-nf
+2019-05-06 12:31:24  17s       stupefied_euclid  OK      b9aefc67b4   4dc656d2-c410-44c8-bc32-7dd0ea87bebf  nextflow run rnaseq-nf -resume -with-docker
+```
 
 You can use either the **session ID** or the **run name** to recover a specific execution. For example:
 
@@ -109,46 +111,55 @@ The `log` command, when provided with a **run name** or **session ID**, can retu
 
 By default, it will list the work directories used to compute each task. For example:
 
-    $ nextflow log tiny_fermat
+```console
+$ nextflow log tiny_fermat
 
-    /data/.../work/7b/3753ff13b1fa5348d2d9b6f512153a
-    /data/.../work/c1/56a36d8f498c99ac6cba31e85b3e0c
-    /data/.../work/f7/659c65ef60582d9713252bcfbcc310
-    /data/.../work/82/ba67e3175bd9e6479d4310e5a92f99
-    /data/.../work/e5/2816b9d4e7b402bfdd6597c2c2403d
-    /data/.../work/3b/3485d00b0115f89e4c202eacf82eba
+/data/.../work/7b/3753ff13b1fa5348d2d9b6f512153a
+/data/.../work/c1/56a36d8f498c99ac6cba31e85b3e0c
+/data/.../work/f7/659c65ef60582d9713252bcfbcc310
+/data/.../work/82/ba67e3175bd9e6479d4310e5a92f99
+/data/.../work/e5/2816b9d4e7b402bfdd6597c2c2403d
+/data/.../work/3b/3485d00b0115f89e4c202eacf82eba
+```
 
 The `-f` (fields) option can be used to specify which metadata should be printed by the `log` command. For example:
 
-    $ nextflow log tiny_fermat -f 'process,exit,hash,duration'
+```console
+$ nextflow log tiny_fermat -f 'process,exit,hash,duration'
 
-    index    0   7b/3753ff  2.0s
-    fastqc   0   c1/56a36d  9.3s
-    fastqc   0   f7/659c65  9.1s
-    quant    0   82/ba67e3  2.7s
-    quant    0   e5/2816b9  3.2s
-    multiqc  0   3b/3485d0  6.3s
+index    0   7b/3753ff  2.0s
+fastqc   0   c1/56a36d  9.3s
+fastqc   0   f7/659c65  9.1s
+quant    0   82/ba67e3  2.7s
+quant    0   e5/2816b9  3.2s
+multiqc  0   3b/3485d0  6.3s
+```
 
 The complete list of available fields can be retrieved with the command:
 
-    nextflow log -l
+```bash
+nextflow log -l
+```
 
 The `-F` option allows the specification of filtering criteria to print only a subset of tasks. For example:
 
-    $ nextflow log tiny_fermat -F 'process =~ /fastqc/'
+```console
+$ nextflow log tiny_fermat -F 'process =~ /fastqc/'
 
-    /data/.../work/c1/56a36d8f498c99ac6cba31e85b3e0c
-    /data/.../work/f7/659c65ef60582d9713252bcfbcc310
+/data/.../work/c1/56a36d8f498c99ac6cba31e85b3e0c
+/data/.../work/f7/659c65ef60582d9713252bcfbcc310
+```
 
 This can be useful to locate specific task work directories.
 
 Finally, the `-t` option enables the creation of a basic custom provenance report, showing a template file in any format of your choice. For example:
 
-    <div>
+```html
+<div>
     <h2>${name}</h2>
     <div>
-    Script:
-    <pre>${script}</pre>
+        Script:
+        <pre>${script}</pre>
     </div>
 
     <ul>
@@ -157,7 +168,8 @@ Finally, the `-t` option enables the creation of a basic custom provenance repor
         <li>Work dir: ${workdir}</li>
         <li>Container: ${container}</li>
     </ul>
-    </div>
+</div>
+```
 
 Save the above snippet in a file named `template.html`. Then run this command (using the correct id for your run, e.g. not `tiny_fermat`):
 
@@ -169,91 +181,110 @@ Finally, open the `prov.html` file with a browser.
 
 If your workflow execution is not resumed as expected with one or more tasks being unexpectedly re-executed each time, these may be the most likely causes:
 
--   **Input file changed**: Make sure that there’s no change in your input file(s). Don’t forget the task unique hash is computed by taking into account the complete file path, the last modified timestamp and the file size. If any of this information has changed, the workflow will be re-executed even if the input content is the same.
+### Input file changed
 
--   **A process modifies an input**: A process should never alter input files, otherwise the `resume` for future executions will be invalidated for the same reason explained in the previous point.
+Make sure that there’s no change in your input file(s). Don’t forget the task unique hash is computed by taking into account the complete file path, the last modified timestamp and the file size. If any of this information has changed, the workflow will be re-executed even if the input content is the same.
 
--   **Inconsistent file attributes**: Some shared file systems, such as [NFS](https://en.wikipedia.org/wiki/Network_File_System), may report an inconsistent file timestamp (i.e. a different timestamp for the same file) even if it has not been modified. To prevent this problem use the [lenient cache strategy](https://www.nextflow.io/docs/latest/process.html#cache).
+### A process modifies an input
 
--   **Race condition in global variable**: Nextflow is designed to simplify parallel programming without taking care about race conditions and the access to shared resources. One of the few cases in which a race condition can arise is when using a global variable with two (or more) operators. For example:
+A process should never alter input files, otherwise the `resume` for future executions will be invalidated for the same reason explained in the previous point.
 
-          Channel
-              .of(1,2,3)
-              .map { it -> X=it; X+=2 }
-              .view { "ch1 = $it" }
+### Inconsistent file attributes
 
-          Channel
-              .of(1,2,3)
-              .map { it -> X=it; X*=2 }
-              .view { "ch2 = $it" }
+Some shared file systems, such as [NFS](https://en.wikipedia.org/wiki/Network_File_System), may report an inconsistent file timestamp (i.e. a different timestamp for the same file) even if it has not been modified. To prevent this problem use the [lenient cache strategy](https://www.nextflow.io/docs/latest/process.html#cache).
 
-    The problem in this snippet is that the `X` variable in the closure definition is defined in the global scope. Therefore, since operators are executed in parallel, the `X` value can be overwritten by the other `map` invocation.
+### Race condition in global variable
 
-    The correct implementation requires the use of the `def` keyword to declare the variable **local**.
+Nextflow is designed to simplify parallel programming without taking care about race conditions and the access to shared resources. One of the few cases in which a race condition can arise is when using a global variable with two (or more) operators.
+For example:
 
-          Channel
-              .of(1,2,3)
-              .map { it -> def X=it; X+=2 }
-              .println { "ch1 = $it" }
+```groovy
+Channel
+    .of(1,2,3)
+    .map { it -> X=it; X+=2 }
+    .view { "ch1 = $it" }
 
-          Channel
-              .of(1,2,3)
-              .map { it -> def X=it; X*=2 }
-              .println { "ch2 = $it" }
+Channel
+    .of(1,2,3)
+    .map { it -> X=it; X*=2 }
+    .view { "ch2 = $it" }
+```
 
--   **Not deterministic input channels**: While dataflow channel ordering is guaranteed (i.e. data is read in the same order in which it’s written in the channel), a process can declare as input two or more channels each of which is the output of a **different** process, the overall input ordering is not consistent over different executions.
+The problem in this snippet is that the `X` variable in the closure definition is defined in the global scope. Therefore, since operators are executed in parallel, the `X` value can be overwritten by the other `map` invocation.
 
-    In practical terms, consider the following snippet:
+The correct implementation requires the use of the `def` keyword to declare the variable **local**.
 
-          process foo {
-            input:
-            tuple val(pair), path(reads)
+```groovy
+Channel
+    .of(1,2,3)
+    .map { it -> def X=it; X+=2 }
+    .println { "ch1 = $it" }
 
-            output:
-            tuple val(pair), path('*.bam'), emit: bam_ch
+Channel
+    .of(1,2,3)
+    .map { it -> def X=it; X*=2 }
+    .println { "ch2 = $it" }
+```
 
-            script:
-            """
-            your_command --here
-            """
-          }
+### Not deterministic input channels
 
-          process bar {
-            input:
-            tuple val(pair), path(reads)
+While dataflow channel ordering is guaranteed (i.e. data is read in the same order in which it’s written in the channel), a process can declare as input two or more channels each of which is the output of a **different** process, the overall input ordering is not consistent over different executions.
 
-            output:
-            tuple val(pair), path('*.bai'), emit: bai_ch
+In practical terms, consider the following snippet:
 
-            script:
-            """
-            other_command --here
-            """
-          }
+```groovy
+process foo {
+    input:
+    tuple val(pair), path(reads)
 
-          process gather {
-            input:
-            tuple val(pair), path(bam)
-            tuple val(pair), path(bai)
+    output:
+    tuple val(pair), path('*.bam'), emit: bam_ch
 
-            script:
-            """
-            merge_command $bam $bai
-            """
-          }
+    script:
+    """
+    your_command --here
+    """
+}
 
-    The inputs declared at line 29 and 30 can be delivered in any order because the execution order of the process `foo` and `bar` are not deterministic due to their parallel execution.
+process bar {
+    input:
+    tuple val(pair), path(reads)
 
-    Therefore the input of the third process needs to be synchronized using the [join](https://www.nextflow.io/docs/latest/operator.html#join) operator, or a similar approach. The third process should be written as:
+    output:
+    tuple val(pair), path('*.bai'), emit: bai_ch
 
-          ...
+    script:
+    """
+    other_command --here
+    """
+}
 
-          process gather {
-            input:
-            tuple val(pair), path(bam), path(bai)
+process gather {
+    input:
+    tuple val(pair), path(bam)
+    tuple val(pair), path(bai)
 
-            script:
-            """
-            merge_command $bam $bai
-            """
-          }
+    script:
+    """
+    merge_command $bam $bai
+    """
+}
+```
+
+The inputs declared at line 29 and 30 can be delivered in any order because the execution order of the process `foo` and `bar` are not deterministic due to their parallel execution.
+
+Therefore the input of the third process needs to be synchronized using the [join](https://www.nextflow.io/docs/latest/operator.html#join) operator, or a similar approach. The third process should be written as:
+
+```groovy
+...
+
+process gather {
+    input:
+    tuple val(pair), path(bam), path(bai)
+
+    script:
+    """
+    merge_command $bam $bai
+    """
+}
+```

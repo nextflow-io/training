@@ -20,7 +20,7 @@ The default config file search mechanism can be extended by providing an extra c
 
 A Nextflow configuration file is a simple text file containing a set of properties defined using the syntax:
 
-```config
+```groovy
 name = value
 ```
 
@@ -28,33 +28,29 @@ name = value
 process.conda = "/home/ubuntu/miniconda2/envs/nf-tutorial"
 ```
 
-<div class="tip">
+!!! info
 
-Please note that string values need to be wrapped in quotation characters while numbers and boolean values (`true`, `false`) do not. Also, note that values are typed, meaning for example that, `1` is different from `'1'`, since the first is interpreted as the number one, while the latter is interpreted as a string value.
-
-</div>
+    Please note that string values need to be wrapped in quotation characters while numbers and boolean values (`true`, `false`) do not. Also, note that values are typed, meaning for example that, `1` is different from `'1'`, since the first is interpreted as the number one, while the latter is interpreted as a string value.
 
 ### Config variables
 
 Configuration properties can be used as variables in the configuration file itself, by using the usual `$propertyName` or `${expression}` syntax.
 
-```config
+```groovy
 propertyOne = 'world'
 anotherProp = "Hello $propertyOne"
 customPath = "$PATH:/my/app/folder"
 ```
 
-<div class="tip">
+!!! tip
 
-In the configuration file it’s possible to access any variable defined in the host environment such as `$PATH`, `$HOME`, `$PWD`, etc.
-
-</div>
+    In the configuration file it’s possible to access any variable defined in the host environment such as `$PATH`, `$HOME`, `$PWD`, etc.
 
 ### Config comments
 
 Configuration files use the same conventions for comments used in the Nextflow script:
 
-```config
+```groovy
 // comment a single line
 
 /*
@@ -67,7 +63,7 @@ Configuration files use the same conventions for comments used in the Nextflow s
 
 Configuration settings can be organized in different scopes by dot prefixing the property names with a scope identifier or grouping the properties in the same scope using the curly brackets notation. This is shown in the following example:
 
-```config
+```groovy
 alpha.x  = 1
 alpha.y  = 'string value..'
 
@@ -83,7 +79,7 @@ The scope `params` allows the definition of workflow parameters that override th
 
 This is useful to consolidate one or more execution parameters in a separate file.
 
-```config
+```groovy
 // config file
 params.foo = 'Bonjour'
 params.bar = 'le monde!'
@@ -116,7 +112,7 @@ Compare the result of the two executions.
 
 The `env` scope allows the definition of one or more variables that will be exported into the environment where the workflow tasks will be executed.
 
-```config
+```groovy
 env.ALPHA = 'some value'
 env.BETA = "$HOME/some/path"
 ```
@@ -149,7 +145,7 @@ However, it’s always a good practice to decouple the workflow execution logic 
 
 The `process` configuration scope allows the setting of any `process` [directives](https://www.nextflow.io/docs/latest/process.html#directives) in the Nextflow configuration file. For example:
 
-```config
+```groovy
 process {
     cpus = 10
     memory = 8.GB
@@ -161,29 +157,16 @@ The above config snippet defines the `cpus`, `memory` and `container` directives
 
 The [process selector](https://www.nextflow.io/docs/latest/config.html#process-selectors) can be used to apply the configuration to a specific process or group of processes (discussed later).
 
-<div class="tip">
+!!! info
 
-Memory and time duration units can be specified either using a string-based notation in which the digit(s) and the unit **can** be separated by a blank or by using the numeric notation in which the digit(s) and the unit are separated by a dot character and are not enclosed by quote characters.
+    Memory and time duration units can be specified either using a string-based notation in which the digit(s) and the unit **can** be separated by a blank or by using the numeric notation in which the digit(s) and the unit are separated by a dot character and are not enclosed by quote characters.
 
-</div>
-
-|                       |
-| --------------------- |
-| String syntax         |
-| Numeric syntax        |
-| Value                 |
-| `'10 KB'`             |
-| `10.KB`               |
-| 10240 bytes           |
-| `'500 MB'`            |
-| `500.MB`              |
-| 524288000 bytes       |
-| `'1 min'`             |
-| 1.min                 |
-| 60 seconds            |
-| `'1 hour 25 sec'`     |
-| \-                    |
-| 1 hour and 25 seconds |
+| String syntax     | Numeric syntax | Value                 |
+| ----------------- | -------------- | --------------------- |
+| `'10 KB'`         | `10.KB`        | 10240 bytes           |
+| `'500 MB'`        | `500.MB`       | 524288000 bytes       |
+| `'1 min'`         | 1.min          | 60 seconds            |
+| `'1 hour 25 sec'` | \-             | 1 hour and 25 seconds |
 
 The syntax for setting `process` directives in the configuration file requires `=` (i.e. assignment operator), whereas it should not be used when setting the process directives within the workflow script.
 
@@ -211,7 +194,7 @@ process foo {
 
 Directives that require more than one value, e.g. [pod](https://www.nextflow.io/docs/latest/process.html#pod), in the configuration file need to be expressed as a map object.
 
-```config
+```groovy
 process {
     pod = [env: 'FOO', value: '123']
 }
@@ -219,7 +202,7 @@ process {
 
 Finally, directives that are to be repeated in the process definition, in the configuration files need to be defined as a list object. For example:
 
-```config
+```groovy
 process {
     pod = [ [env: 'FOO', value: '123'],
             [env: 'BAR', value: '456'] ]
@@ -230,14 +213,14 @@ process {
 
 The container image to be used for the process execution can be specified in the `nextflow.config` file:
 
-```config
+```groovy
 process.container = 'nextflow/rnaseq-nf'
 docker.enabled = true
 ```
 
 The use of unique "SHA256" docker image IDs guarantees that the image content does not change over time, for example:
 
-```config
+```groovy
 process.container = 'nextflow/rnaseq-nf@sha256:aeacbd7ea1154f263cda972a96920fb228b2033544c2641476350b9317dab266'
 docker.enabled = true
 ```
@@ -246,40 +229,31 @@ docker.enabled = true
 
 To run a workflow execution with Singularity, a container image file path is required in the Nextflow config file using the container directive:
 
-```config
+```groovy
 process.container = '/some/singularity/image.sif'
 singularity.enabled = true
 ```
 
-<div class="warning">
+!!! info
 
-The container image file must be an absolute path i.e. it must start with a `/`.
-
-</div>
+    The container image file must be an absolute path: it must start with a `/`.
 
 The following protocols are supported:
 
 -   `library://` download the container image from the [Singularity Library service](https://cloud.sylabs.io/library).
-
 -   `shub://` download the container image from the [Singularity Hub](https://singularity-hub.org/).
-
 -   `docker://` download the container image from the [Docker Hub](https://hub.docker.com/) and convert it to the Singularity format.
-
 -   `docker-daemon://` pull the container image from a local Docker installation and convert it to a Singularity image file.
 
-<div class="warning">
+!!! warning
 
-\* Singularity hub `shub://` is no longer available as a builder service. Though existing images from before 19th April 2021 will still work.
+    \* Singularity hub `shub://` is no longer available as a builder service. Though existing images from before 19th April 2021 will still work.
 
-</div>
+!!! tip
 
-<div class="tip">
+    By specifying a plain Docker container image name, Nextflow implicitly downloads and converts it to a Singularity image when the Singularity execution is enabled.
 
-By specifying a plain Docker container image name, Nextflow implicitly downloads and converts it to a Singularity image when the Singularity execution is enabled. For example:
-
-</div>
-
-```config
+```groovy
 process.container = 'nextflow/rnaseq-nf'
 singularity.enabled = true
 ```
@@ -290,13 +264,13 @@ Alternatively, if you have a Singularity image file, its absolute path location 
 
 Try to run the script as shown below, changing the `nextflow.config` file to the one above using `singularity`:
 
-    nextflow run script7.nf
+```bash
+nextflow run script7.nf
+```
 
-<div class="tip">
+!!! tip
 
-Nextflow will pull the container image automatically, it will require a few seconds depending on the network connection speed.
-
-</div>
+    Nextflow will pull the container image automatically, it will require a few seconds depending on the network connection speed.
 
 ### Config Conda execution
 
