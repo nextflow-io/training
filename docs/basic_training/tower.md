@@ -33,17 +33,17 @@ Create an account and login into Tower.
 
 You can access your tokens from the **Settings** drop-down menu :
 
-![](usage_create_token.png)
+![](img/usage_create_token.png)
 
 **2. Name your token**
 
-![](usage_name_token.png)
+![](img/usage_name_token.png)
 
 **3. Save your token safely**
 
 Copy and keep your new token in a safe place.
 
-![](usage_token.png)
+![](img/usage_token.png)
 
 **4. Export your token**
 
@@ -92,7 +92,7 @@ Tower uses the concept of **Compute Environments** to define the execution platf
 
 It supports the launching of pipelines into a growing number of **cloud** and **on-premise** infrastructures.
 
-![](compute_env_platforms.png)
+![](img/compute_env_platforms.png)
 
 Each compute environment must be pre-configured to enable Tower to submit tasks. You can read more on how to set up each environment using the links below.
 
@@ -116,7 +116,7 @@ You are now ready to launch pipelines with your primary compute environment.
 
 Launchpad makes it easy for any workspace user to launch a pre-configured pipeline.
 
-![](overview_launch.png)
+![](img/overview_launch.png)
 
 A pipeline is a repository containing a Nextflow workflow, a compute environment and pipeline parameters.
 
@@ -128,7 +128,7 @@ The parameter forms view will appear if the workflow has a Nextflow schema file 
 
 This makes it trivial for users without any expertise in Nextflow to enter their pipeline parameters and launch.
 
-![](launch_rnaseq_nextflow_schema.png)
+![](img/launch_rnaseq_nextflow_schema.png)
 
 #### Adding a new pipeline
 

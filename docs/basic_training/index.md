@@ -1,7 +1,8 @@
 ---
-title: Introduction
 description: Overview of the Nextflow Training material
 ---
+
+# Introduction
 
 ## Welcome to the Nextflow Training Workshop
 

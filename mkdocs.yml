@@ -55,6 +55,8 @@ theme:
         - toc.follow
         - search.share
         - content.action.edit
+        - content.code.copy
+        - content.code.annotate
     icon:
         repo: fontawesome/brands/github
 extra_css:
@@ -72,12 +74,18 @@ extra:
             make our documentation better.
 markdown_extensions:
     - admonition
+    - attr_list
+    - md_in_html
     - pymdownx.highlight:
           anchor_linenums: true
     - pymdownx.inlinehilite
-    - pymdownx.snippets
+    - pymdownx.snippets:
+          base_path: ["."]
     - pymdownx.superfences
     - pymdownx.details
+    - pymdownx.emoji:
+          emoji_index: !!python/name:materialx.emoji.twemoji
+          emoji_generator: !!python/name:materialx.emoji.to_svg
     - tables
 plugins:
     - search

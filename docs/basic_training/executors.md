@@ -8,7 +8,7 @@ Nextflow has built-in support for the most commonly used batch schedulers, such 
 
 A key Nextflow feature is the ability to decouple the workflow implementation from the actual execution platform. The implementation of an abstraction layer allows the deployment of the resulting workflow on any executing platform supported by the framework.
 
-![](nf-executors.png)
+![](img/nf-executors.png)
 
 To run your pipeline with a batch scheduler, modify the `nextflow.config` file specifying the target executor and the required computing resources if needed. For example:
 

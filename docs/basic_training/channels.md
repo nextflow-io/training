@@ -4,7 +4,7 @@ Channels are a key data structure of Nextflow that allows the implementation of 
 
 They are used to logically connect tasks to each other or to implement functional style data transformations.
 
-![](channel-files.png)
+![](img/channel-files.png)
 
 ## Channel types
 

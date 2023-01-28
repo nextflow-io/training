@@ -24,7 +24,7 @@ There are seven main groups of operators are described in greater detail within 
     square = nums.map { it -> it * it }  //
     square.view()                        //
 
-![](channel-map.png)
+![](img/channel-map.png)
 
 -   Creates a queue channel emitting four values
 

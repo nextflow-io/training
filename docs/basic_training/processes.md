@@ -203,7 +203,7 @@ Nextflow processes are isolated from each other but can communicate between them
 
 Inputs implicitly determine the dependencies and the parallel execution of the process. The process execution is fired each time _new_ data is ready to be consumed from the input channel:
 
-![](channel-process.png)
+![](img/channel-process.png)
 
 The `input` block defines which channels the `process` is expecting to receive data from. You can only define one `input` block at a time, and it must contain one or more input declarations.
 
