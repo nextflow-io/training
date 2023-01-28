@@ -54,6 +54,22 @@ In this toy example, the script takes an input string (a parameter called `param
 
 ### Nextflow code
 
+<!-- NOTE: (Phil, Jan 2023)
+We can dynamically include external files using mkdocs, as follows:
+
+```groovy title="nf-training/hello.nf" linenums="1"
+--8<-- "nf-training/hello.nf"
+```
+
+This inserts a code snippet identical to the one below, and we don't have to worry about keeping the two in sync.
+
+HOWEVER - currently the line annotations cannot be added for external files. So for now, we still need to copy the scripts.
+
+TODO: Maybe either:
+    - Rewrite docs to not use loads of annotations
+    - Wait for future versions to allow annotations with external files
+-->
+
 !!! info
 
     Click the :material-plus-circle: icons in the code for explanations.
