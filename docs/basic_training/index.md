@@ -2,7 +2,7 @@
 description: Overview of the Nextflow Training material
 ---
 
-# Introduction
+# Welcome
 
 ## Welcome to the Nextflow Training Workshop
 

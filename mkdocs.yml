@@ -4,6 +4,7 @@ repo_url: https://github.com/seqeralabs/nf-training-public
 repo_name: seqeralabs/nf-training-public
 
 nav:
+    - Home: index.md
     - Basic Training:
           - basic_training/index.md
           - basic_training/setup.md
@@ -27,6 +28,20 @@ nav:
           - hands_on/03_setup.md
           - hands_on/04_implementation.md
           - hands_on/pipeline_results.md
+          - Solutions:
+                - hands_on/solutions/anxious_advice.md
+                - hands_on/solutions/busy_building.md
+                - hands_on/solutions/cooing_clock.md
+                - hands_on/solutions/discreet_direction.md
+                - hands_on/solutions/expensive_ear.md
+                - hands_on/solutions/fat_floor.md
+                - hands_on/solutions/gentle_garden.md
+                - hands_on/solutions/hulking_hospital.md
+                - hands_on/solutions/imported_iron.md
+                - hands_on/solutions/jumping_jack.md
+                - hands_on/solutions/kind_koala.md
+                - hands_on/solutions/laughing_lynx.md
+    - Join Slack: https://www.nextflow.io/slack-invite.html
 
 theme:
     name: material
@@ -49,18 +64,22 @@ theme:
     font:
         text: Inter
     features:
-        - navigation.tabs
-        - navigation.instant
-        - navigation.tracking
-        - toc.follow
-        - search.share
         - content.action.edit
-        - content.code.copy
         - content.code.annotate
+        - content.code.copy
+        - navigation.footer
+        - navigation.instant
+        - navigation.tabs
+        - navigation.top
+        - navigation.tracking
+        - search.share
+        - toc.follow
     icon:
         repo: fontawesome/brands/github
 extra_css:
     - assets/stylesheets/extra.css
+copyright: Copyright &copy; 2020-2022, Seqera Labs. CC BY-NC-ND 4.0.
+
 extra:
     analytics:
         provider: google
@@ -72,6 +91,16 @@ extra:
             as to measure the effectiveness of our documentation and whether users
             find what they're searching for. With your consent, you're helping us to
             make our documentation better.
+    social:
+        - icon: fontawesome/brands/slack
+          link: https://www.nextflow.io/slack-invite.html
+          name: Nextflow commonity on Slack
+        - icon: fontawesome/brands/twitter
+          link: https://twitter.com/nextflowio
+          name: Nextflow on twitter
+        - icon: fontawesome/brands/creative-commons
+          link: https://creativecommons.org/licenses/by-nc-nd/4.0/
+          name: Creative Commons CC BY-NC-ND 4.0
 markdown_extensions:
     - admonition
     - attr_list
