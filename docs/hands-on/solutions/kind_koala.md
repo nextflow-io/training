@@ -1,0 +1,19 @@
+<div class="formalpara-title">
+
+**Solution**
+
+</div>
+
+``` nextflow
+bam_for_ASE_ch
+  .groupTuple()
+  .phase(vcf_for_ASE)
+  .map{ left, right ->
+    def sampleId = left[0]
+    def bam = left[1]
+    def bai = left[2]
+    def vcf = right[1]
+    tuple(sampleId, vcf, bam, bai)
+  }
+  .set { grouped_vcf_bam_bai_ch }
+```
