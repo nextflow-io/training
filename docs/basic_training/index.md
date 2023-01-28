@@ -1,5 +1,7 @@
 ---
 description: Overview of the Nextflow Training material
+hide:
+    - toc
 ---
 
 # Welcome
