@@ -101,7 +101,7 @@ Once you have signed in, Gitpod should load (skip prebuild if asked).
 
 You should now see something similar to the following:
 
-![Gitpod welcome](assets/img/gitpod.welcome.png)
+![Gitpod welcome](img/gitpod.welcome.png)
 
 -   **The sidebar** allows you to customize your Gitpod environment and perform basic tasks (copy, paste, open files, search, git, etc.). Click the Explorer button to see which files are in this repository.
 -   **The terminal** allows you to run all the programs in the repository. For example, both `nextflow` and `docker` are installed and can be executed.

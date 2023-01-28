@@ -1,8 +1,10 @@
-# Pipeline data
+# Environment Setup
+
+## Pipeline data
 
 All the files needed for the hands-on activity are stored in the directory shown below:
 
-``` cmd
+```cmd
 tree $HOME/environment/hands-on
 ```
 
@@ -31,11 +33,11 @@ tree $HOME/environment/hands-on
 
     3 directories, 19 files
 
-# Pulling the Docker image
+## Pulling the Docker image
 
 Nextflow can pull Docker images at runtime, but let’s just download it manually to see how Docker works:
 
-``` cmd
+```cmd
 docker pull cbcrg/callings-with-gatk:latest
 ```
 
@@ -56,10 +58,10 @@ and the following message when the pull is completed:
     Digest: sha256:93910bf77bc197cb790eca776e42950bc8eff117bdc6e67157295e09c98fc381
     Status: Downloaded newer image for cbcrg/callings-with-gatk:latest
 
-# Script permission
+## Script permission
 
 Make sure the following R script has execute permissions:
 
-``` cmd
+```cmd
 chmod +x $HOME/environment/hands-on/bin/gghist.R
 ```

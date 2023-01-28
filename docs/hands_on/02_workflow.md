@@ -1,40 +1,42 @@
+# Workflow Description
+
 The aim of the pipeline is to process raw RNA-seq data (in FASTQ format) and obtain the list of small variants, SNVs (SNPs and INDELs) for the downstream analysis. The pipeline is based on the [GATK best practices for variant calling with RNAseq data](https://software.broadinstitute.org/gatk/guide/article?id=3891) and includes all major steps. In addition the pipeline includes SNVs postprocessing and quantification for allele specific expression.
 
 Samples processing is done **independently** for **each replicate**. This includes mapping of the reads, splitting at the CIGAR, reassigning mapping qualities and recalibrating base qualities.
 
 Variant calling is done **simultaneously** on bam files from **all replicates**. This allows to improve coverage of genomic regions and obtain more reliable results.
 
-# Software manuals
+## Software manuals
 
 Documentation for all software used in the workflow can be found at the following links:
 
-- [samtools](http://www.htslib.org/doc/samtools.html)
+-   [samtools](http://www.htslib.org/doc/samtools.html)
 
-- [picard `CreateSequenceDictionary`](https://broadinstitute.github.io/picard/command-line-overview.html#CreateSequenceDictionary)
+-   [picard `CreateSequenceDictionary`](https://broadinstitute.github.io/picard/command-line-overview.html#CreateSequenceDictionary)
 
-- [STAR](http://labshare.cshl.edu/shares/gingeraslab/www-data/dobin/STAR/STAR.posix/doc/STARmanual.pdf)
+-   [STAR](http://labshare.cshl.edu/shares/gingeraslab/www-data/dobin/STAR/STAR.posix/doc/STARmanual.pdf)
 
-- [vcftools](https://vcftools.github.io/man_latest.html)
+-   [vcftools](https://vcftools.github.io/man_latest.html)
 
-- [GATK tools](https://software.broadinstitute.org/gatk/gatkdocs/3.6-0/index)
+-   [GATK tools](https://software.broadinstitute.org/gatk/gatkdocs/3.6-0/index)
 
-  - [`SplitNCigarReads`](https://software.broadinstitute.org/gatk/gatkdocs/3.6-0/org_broadinstitute_gatk_tools_walkers_rnaseq_SplitNCigarReads.php)
+    -   [`SplitNCigarReads`](https://software.broadinstitute.org/gatk/gatkdocs/3.6-0/org_broadinstitute_gatk_tools_walkers_rnaseq_SplitNCigarReads.php)
 
-  - [`BaseRecalibrator`](https://software.broadinstitute.org/gatk/gatkdocs/3.6-0/org_broadinstitute_gatk_tools_walkers_bqsr_BaseRecalibrator.php)
+    -   [`BaseRecalibrator`](https://software.broadinstitute.org/gatk/gatkdocs/3.6-0/org_broadinstitute_gatk_tools_walkers_bqsr_BaseRecalibrator.php)
 
-  - [`PrintReads`](https://software.broadinstitute.org/gatk/gatkdocs/3.6-0/org_broadinstitute_gatk_tools_walkers_readutils_PrintReads.php)
+    -   [`PrintReads`](https://software.broadinstitute.org/gatk/gatkdocs/3.6-0/org_broadinstitute_gatk_tools_walkers_readutils_PrintReads.php)
 
-  - [`HaplotypeCaller`](https://software.broadinstitute.org/gatk/gatkdocs/3.6-0/org_broadinstitute_gatk_tools_walkers_haplotypecaller_HaplotypeCaller.php)
+    -   [`HaplotypeCaller`](https://software.broadinstitute.org/gatk/gatkdocs/3.6-0/org_broadinstitute_gatk_tools_walkers_haplotypecaller_HaplotypeCaller.php)
 
-  - [`VariantFiltration`](https://software.broadinstitute.org/gatk/gatkdocs/3.6-0/org_broadinstitute_gatk_tools_walkers_filters_VariantFiltration.php)
+    -   [`VariantFiltration`](https://software.broadinstitute.org/gatk/gatkdocs/3.6-0/org_broadinstitute_gatk_tools_walkers_filters_VariantFiltration.php)
 
-  - [`ASEReadCounter`](https://software.broadinstitute.org/gatk/gatkdocs/3.6-0/org_broadinstitute_gatk_tools_walkers_rnaseq_ASEReadCounter.php)
+    -   [`ASEReadCounter`](https://software.broadinstitute.org/gatk/gatkdocs/3.6-0/org_broadinstitute_gatk_tools_walkers_rnaseq_ASEReadCounter.php)
 
-# Pipeline steps
+## Pipeline steps
 
 In order to get a general idea of the workflow, all the composing steps, together with the corresponding commands, are explained in the next sections.
 
-## Preparing data
+### Preparing data
 
 This step prepares input files for the analysis. Genome indexes are created and variants overlapping blacklisted regions are filtered out.
 
@@ -57,7 +59,7 @@ Variants overlapping blacklisted regions are then filtered in order to reduce fa
              --recode | bgzip -c \
              > known_variants.filtered.recode.vcf.gz
 
-## Mapping RNA-seq reads to the reference
+### Mapping RNA-seq reads to the reference
 
 To align RNA-seq reads to the genome we’re using STAR 2-pass approach. The first alignment creates a table with splice-junctions that is used to guide final alignments. The alignments at both steps are done with default parameters.
 
@@ -100,7 +102,7 @@ Index the resulting bam file:
 
     samtools index final_alignments.bam
 
-## Split’N'Trim and reassign mapping qualities
+### Split’N'Trim and reassign mapping qualities
 
 The RNA-seq reads overlapping exon-intron junctions can produce false positive variants due to inaccurate splicing. To solve this problem the GATK team recommend to hard-clip any sequence that overlap intronic regions and developed a speciall tool for this purpose: `SplitNCigarReads`. The tool identifies Ns in the CIGAR string of the alignment and split reads at this position so that few new reads are created.
 
@@ -116,7 +118,7 @@ This step is done with recommended parameters from the GATK best practices.
                       -U ALLOW_N_CIGAR_READS \
                       --fix_misencoded_quality_scores
 
-## Base Recalibration
+### Base Recalibration
 
 The proposed worflow does not include an indel re-alignment step, which is an optional step in the GATK best practices. We excluded that since it is quite time-intensive and does not really improve variant calling.
 
@@ -140,7 +142,7 @@ We instead include a base re-calibration step. This step allows to remove possib
                       -nct 4 \
                       -o final.bam
 
-## Variant Calling and Variant filtering
+### Variant Calling and Variant filtering
 
 The variant calling is done on the uniquely aligned reads only in order to reduce the number of false positive variants called:
 
@@ -160,11 +162,11 @@ For variant calling we’re using the GATK tool `HaplotypeCaller` with default p
 
 Variant filtering is done as recommended in the GATK best practices:
 
-- keep clusters of at least 3 SNPs that are within a window of 35 bases between them
+-   keep clusters of at least 3 SNPs that are within a window of 35 bases between them
 
-- estimate strand bias using Fisher’s Exact Test with values \> 30.0 (Phred-scaled p-value)
+-   estimate strand bias using Fisher’s Exact Test with values \> 30.0 (Phred-scaled p-value)
 
-- use variant call confidence score `QualByDepth` (QD) with values \< 2.0. The QD is the QUAL score normalized by allele depth (AD) for a variant.
+-   use variant call confidence score `QualByDepth` (QD) with values \< 2.0. The QD is the QUAL score normalized by allele depth (AD) for a variant.
 
 <!-- -->
 
@@ -175,7 +177,7 @@ Variant filtering is done as recommended in the GATK best practices:
                       -filterName QD -filter "QD < 2.0" \
                       -o final.vcf
 
-## Variant Post-processing
+### Variant Post-processing
 
 For downstream analysis we’re considering only sites that pass all filters and are covered with at least 8 reads:
 

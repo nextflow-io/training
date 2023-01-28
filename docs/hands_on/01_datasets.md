@@ -1,11 +1,13 @@
+# Data Description
+
 The input data used to test the pipeline implementation is described below. For the purpose of this project, only a subset of the original data is used for most of the data types.
 
-Genome assembly  
+Genome assembly
 `genome.fa`
 
 The human genome assembly <span class="crg">hg19 (GRCh37)</span> from [GenBank](https://www.ncbi.nlm.nih.gov/assembly/GCA_000001405.1), chromosome 22 only.
 
-RNA-seq reads  
+RNA-seq reads
 `ENCSR000COQ[12]_[12].fastq.gz`
 
 The RNA-seq data comes from the human <span class="crg">GM12878</span> cell line from whole cell, cytosol and nucleous extraction (see table below).
@@ -73,14 +75,14 @@ ENCSR000COR2_1.fastq.gz</code></pre></td>
 </tbody>
 </table>
 
-"Known" variants  
+"Known" variants
 `known_variants.vcf.gz`
 
 Known variants come from high confident variant calls for <span class="crg">GM12878</span> from the [Illumina Platinum Genomes](https://www.illumina.com/platinumgenomes.html) project. These variant calls were obtained by taking into account pedigree information and the concordance of calls across different methods.
 
 We’re using the subset from chromosome 22 only.
 
-Blacklisted regions  
+Blacklisted regions
 `blacklist.bed`
 
 Blacklisted regions are regions of the genomes with anomalous coverage. We use regions for the <span class="crg">hg19</span> assembly, taken from the [ENCODE project portal](https://www.encodeproject.org/annotations/ENCSR636HFF/). These regions were identified with DNAse and ChiP-seq samples over ~60 human tissues/cell types, and had a very high ratio of multi-mapping to unique-mapping reads and high variance in mappability.

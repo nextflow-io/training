@@ -4,21 +4,29 @@ repo_url: https://github.com/seqeralabs/nf-training-public
 # repo_name: seqeralabs/nf-training-public
 
 nav:
-    - index.md
-    - setup.md
-    - intro.md
-    - rnaseq_pipeline.md
-    - containers.md
-    - channels.md
-    - processes.md
-    - operators.md
-    - groovy.md
-    - modules.md
-    - config.md
-    - executors.md
-    - tower.md
-    - cache_and_resume.md
-    - debugging.md
+    - Basic Training:
+          - basic_training/index.md
+          - basic_training/setup.md
+          - basic_training/intro.md
+          - basic_training/rnaseq_pipeline.md
+          - basic_training/containers.md
+          - basic_training/channels.md
+          - basic_training/processes.md
+          - basic_training/operators.md
+          - basic_training/groovy.md
+          - basic_training/modules.md
+          - basic_training/config.md
+          - basic_training/executors.md
+          - basic_training/tower.md
+          - basic_training/cache_and_resume.md
+          - basic_training/debugging.md
+    - Hands on:
+          - hands_on/index.md
+          - hands_on/01_datasets.md
+          - hands_on/02_workflow.md
+          - hands_on/03_setup.md
+          - hands_on/04_implementation.md
+          - hands_on/pipeline_results.md
 
 theme:
     name: material
@@ -41,6 +49,7 @@ theme:
     font:
         text: Inter
     features:
+        - navigation.tabs
         - navigation.instant
         - navigation.tracking
         - toc.follow
