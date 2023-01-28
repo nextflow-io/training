@@ -147,7 +147,7 @@ To save any file from the explorer panel, right-click the file and select `Downl
 
 ### Training material
 
-The training course can be accessed in your browser from <https://training.seqera.io/>.
+The training course can be accessed in your browser from <https://training.seqera.io/>
 
 ## Selecting a Nextflow version
 
@@ -163,6 +163,8 @@ If you want to use a specific version of Nextflow, you can set the `NXF_VER` var
 export NXF_VER=22.04.5
 ```
 
-Most of this tutorial workshop requires `NXF_VER=22.04.0` or later, to use DSL2 as default.
+!!! Note
+
+    Most of this tutorial workshop requires `NXF_VER=22.04.0` or later, to use DSL2 as default.
 
 Run `nextflow -version` again to confirm that the change has taken effect.

@@ -13,9 +13,7 @@ It is designed around the idea that the Linux platform is the _lingua franca_ of
 Nextflow extends this approach, adding the ability to define complex program interactions and a high-level parallel computational environment, based on the dataflow programming model. Nextflow’s core features are:
 
 -   Workflow portability and reproducibility
-
 -   Scalability of parallelization and deployment
-
 -   Integration of existing tools, systems, and industry standards
 
 ### Processes and Channels
@@ -26,7 +24,7 @@ Processes are executed independently and are isolated from each other, i.e. they
 
 Any `process` can define one or more `channels` as an `input` and `output`. The interaction between these processes, and ultimately the pipeline execution flow itself, is implicitly defined by these `input` and `output` declarations.
 
-![](img/channel-process.png)
+![Channels and processes](img/channel-process.png)
 
 ### Execution abstraction
 
@@ -36,7 +34,7 @@ If not otherwise specified, processes are executed on the local computer. The lo
 
 In other words, Nextflow provides an abstraction between the pipeline’s functional logic and the underlying execution system (or runtime). Thus, it is possible to write a pipeline which runs seamlessly on your computer, a cluster, or the cloud, without being modified. You simply define the target execution platform in the configuration file.
 
-![](img/execution_abstraction.png)
+![Execution abstraction](img/execution_abstraction.png)
 
 ### Scripting language
 
@@ -145,7 +143,9 @@ The use of the operator `.flatten()` here is to split the two files into two sep
 
 Now copy the above example into your favourite text editor and save it to a file named `hello.nf`.
 
-For the Gitpod tutorial, make sure you are in the folder called `nf-training`
+!!! warning
+
+    For the Gitpod tutorial, make sure you are in the folder called `nf-training`
 
 Execute the script by entering the following command in your terminal:
 
@@ -174,9 +174,13 @@ The standard output shows (line by line):
 5. The second process is executed twice (once for chunk_aa, once for chunk_ab).
 6. The result string from stdout is printed.
 
-The hexadecimal numbers, like `69/870428`, identify the unique process execution. These numbers are also the prefix of the directories where each process is executed. You can inspect the files produced by changing to the directory `$PWD/work` and using these numbers to find the process-specific execution path.
+!!! info
 
-The second process runs twice, executing in two different work directories for each input file. Therefore, in the previous example the work directory \[9f/1dd42a\] represents just one of the two directories that were processed. To print all the relevant paths to the screen, use the `-ansi-log` flag (e.g. `nextflow run hello.nf -ansi-log false`).
+    The hexadecimal numbers, like `69/870428`, identify the unique process execution. These numbers are also the prefix of the directories where each process is executed. You can inspect the files produced by changing to the directory `$PWD/work` and using these numbers to find the process-specific execution path.
+
+!!! tip
+
+    The second process runs twice, executing in two different work directories for each input file. Therefore, in the previous example the work directory `[9f/1dd42a]` represents just one of the two directories that were processed. To print all the relevant paths to the screen, use the `-ansi-log` flag (e.g. `nextflow run hello.nf -ansi-log false`).
 
 It’s worth noting that the process `CONVERTTOUPPER` is executed in parallel, so there’s no guarantee that the instance processing the first split (the chunk _Hello ') will be executed before the one processing the second split (the chunk 'world!_).
 
@@ -225,7 +229,9 @@ executor >  local (3)
 
 You will see that the execution of the process `SPLITLETTERS` is actually skipped (the process ID is the same as in the first output) — its results are retrieved from the cache. The second process is executed as expected, printing the reversed strings.
 
-The pipeline results are cached by default in the directory `$PWD/work`. Depending on your script, this folder can take a lot of disk space. If you are sure you won’t need to resume your pipeline execution, clean this folder periodically.
+!!! info
+
+    The pipeline results are cached by default in the directory `$PWD/work`. Depending on your script, this folder can take a lot of disk space. If you are sure you won’t need to resume your pipeline execution, clean this folder periodically.
 
 ## Pipeline parameters
 
@@ -254,4 +260,4 @@ uojnoB
 
 To better understand how Nextflow is dealing with the data in this pipeline, below is a DAG-like figure to visualise all the `inputs`, `outputs`, `channels` and `processes`:
 
-![](img/helloworlddiagram.png)
+![Hello world diagram](img/helloworlddiagram.png)

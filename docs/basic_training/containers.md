@@ -8,7 +8,9 @@ To overcome these issues we use containers that allow the encapsulation of softw
 
 Containers can be executed in an isolated manner from the hosting system. Having its own copy of the file system, processing space, memory management, etc.
 
-Containers were first introduced with kernel 2.6 as a Linux feature known as _Control Groups_ or [Cgroups](https://en.wikipedia.org/wiki/Cgroups).
+!!! info
+
+    Containers were first introduced with kernel 2.6 as a Linux feature known as _Control Groups_ or [Cgroups](https://en.wikipedia.org/wiki/Cgroups).
 
 ## Docker
 
