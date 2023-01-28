@@ -9,16 +9,16 @@ publish = "build/"
 
 # Default build command.
 command = """
+
+    # training
+    # For social cards - not sure if these are really needed or not
+    apt-get install libcairo2-dev libfreetype6-dev libffi-dev libjpeg-dev libpng-dev libz-dev
+    mkdocs build --site-dir build
+
+    # asciidoctor install
     curl -s "https://get.sdkman.io" | bash
     source "/opt/buildhome/.sdkman/bin/sdkman-init.sh"
     sdk install asciidoctorj
-
-    # training
-    mkdir -p build
-    pushd asciidocs
-    asciidoctorj -D ../build index.adoc
-    cp -r img ../build/img
-    popd
 
     # hands-on
     mkdir -p build/hands-on
