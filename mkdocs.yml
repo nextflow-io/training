@@ -27,20 +27,6 @@ nav:
           - hands_on/02_workflow.md
           - hands_on/03_setup.md
           - hands_on/04_implementation.md
-          - hands_on/pipeline_results.md
-          - Solutions:
-                - hands_on/solutions/anxious_advice.md
-                - hands_on/solutions/busy_building.md
-                - hands_on/solutions/cooing_clock.md
-                - hands_on/solutions/discreet_direction.md
-                - hands_on/solutions/expensive_ear.md
-                - hands_on/solutions/fat_floor.md
-                - hands_on/solutions/gentle_garden.md
-                - hands_on/solutions/hulking_hospital.md
-                - hands_on/solutions/imported_iron.md
-                - hands_on/solutions/jumping_jack.md
-                - hands_on/solutions/kind_koala.md
-                - hands_on/solutions/laughing_lynx.md
     - Join Slack: https://www.nextflow.io/slack-invite.html
 
 theme:
