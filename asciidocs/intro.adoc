@@ -95,7 +95,7 @@ process CONVERTTOUPPER { <13>
     """ <20>
 } <21>
 
-workflow{ <22>
+workflow { <22>
     letters_ch = SPLITLETTERS(greeting_ch) <23>
     results_ch = CONVERTTOUPPER(letters_ch.flatten()) <24>
     results_ch.view{ it } <25>
@@ -147,13 +147,12 @@ The output will look similar to the text shown below:
 
 [cmd,linenums]
 ----
-N E X T F L O W  ~  version 22.09.7-edge
-Launching `hello.nf` [gigantic_poitras] DSL2 - revision: 197a0e289a
+Launching `hello.nf` [fabulous_torricelli] DSL2 - revision: 197a0e289a
 executor >  local (3)
-[0b/8b49d0] process > SPLITLETTERS (1)   [100%] 1 of 1 ✔
-[69/870428] process > CONVERTTOUPPER (1) [100%] 2 of 2 ✔
-WORLD!
+[c8/c36893] process > SPLITLETTERS (1)   [100%] 1 of 1 ✔
+[1a/3c54ed] process > CONVERTTOUPPER (2) [100%] 2 of 2 ✔
 HELLO
+WORLD!
 ----
 
 The standard output shows (line by line):
@@ -232,10 +231,10 @@ It will print output similar to this:
 [cmd,linenums]
 ----
 N E X T F L O W  ~  version 22.09.7-edge
-Launching `hello.nf` [amazing_becquerel] DSL2 - revision: 525206806b
-executor >  local (3)
-[4d/535c86] process > SPLITLETTERS (1)   [100%] 1 of 1 ✔
-[3c/67914f] process > CONVERTTOUPPER (1) [100%] 2 of 2 ✔
+Launching `hello.nf` [mighty_mcnulty] DSL2 - revision: 525206806b
+executor >  local (2)
+[c8/c36893] process > SPLITLETTERS (1)   [100%] 1 of 1, cached: 1 ✔
+[77/cf83b6] process > CONVERTTOUPPER (1) [100%] 2 of 2 ✔
 !dlrow
  olleH
 ----
