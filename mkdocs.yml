@@ -108,3 +108,12 @@ markdown_extensions:
 plugins:
     - search
     - social
+    - enumerate-headings:
+          # Requires: https://github.com/timvink/mkdocs-enumerate-headings-plugin/pull/33
+          # restart_increment_after:
+          #    - hands_on/01_datasets.md
+          exclude:
+              - index.md
+              - basic_training/index.md
+              - hands_on/index.md
+              - hands_on/solutions/*md
