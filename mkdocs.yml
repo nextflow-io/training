@@ -45,6 +45,7 @@ nav:
 
 theme:
     name: material
+    custom_dir: docs/assets/overrides
     language: en
     logo: assets/img/nf-square-mono.png
     favicon: assets/img/nf-square.png
@@ -78,7 +79,10 @@ theme:
         repo: fontawesome/brands/github
 extra_css:
     - assets/stylesheets/extra.css
-copyright: Copyright &copy; 2020-2022, Seqera Labs. CC BY-NC-ND 4.0.
+
+# Set in docs/assets/overrides/partials/copyright.html
+# so that we can have links and stuff
+# copyright: Seqera
 
 extra:
     analytics:
@@ -91,16 +95,12 @@ extra:
             as to measure the effectiveness of our documentation and whether users
             find what they're searching for. With your consent, you're helping us to
             make our documentation better.
+    # Overriden in docs/assets/overrides/partials/social.html
+    # Still needs to be set to something here so that the partial is used
     social:
-        - icon: fontawesome/brands/slack
-          link: https://www.nextflow.io/slack-invite.html
-          name: Nextflow commonity on Slack
         - icon: fontawesome/brands/twitter
           link: https://twitter.com/nextflowio
           name: Nextflow on twitter
-        - icon: fontawesome/brands/creative-commons
-          link: https://creativecommons.org/licenses/by-nc-nd/4.0/
-          name: Creative Commons CC BY-NC-ND 4.0
 markdown_extensions:
     - admonition
     - attr_list
