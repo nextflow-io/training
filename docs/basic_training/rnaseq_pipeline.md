@@ -35,11 +35,13 @@ Try to specify a different input parameter in your execution command, for exampl
 nextflow run script1.nf --reads '/workspace/nf-training-public/nf-training/data/ggal/lung_{1,2}.fq'
 ```
 
-!!! question "Exercise"
+### :material-progress-question: Exercises
+
+!!! exercise
 
     Modify the `script1.nf` by adding a fourth parameter named `outdir` and set it to a default path that will be used as the pipeline output directory.
 
-    ??? success "Click here for the answer"
+    ??? result
 
         ```groovy
         params.reads = "$projectDir/data/ggal/gut_{1,2}.fq"
@@ -48,7 +50,7 @@ nextflow run script1.nf --reads '/workspace/nf-training-public/nf-training/data/
         params.outdir = "results"
         ```
 
-!!! question "Exercise"
+!!! exercise
 
     Modify `script1.nf` to print all of the pipeline parameters by using a single `log.info` command as a [multiline string](https://www.nextflow.io/docs/latest/script.html#multi-line-strings) statement.
 
@@ -57,7 +59,7 @@ nextflow run script1.nf --reads '/workspace/nf-training-public/nf-training/data/
         :material-lightbulb: See an example [here](https://github.com/nextflow-io/rnaseq-nf/blob/3b5b49f/main.nf#L41-L48).
 
 
-    ??? success "Click here for the answer"
+    ??? result
 
         Add the following to your script file:
 
@@ -71,6 +73,8 @@ nextflow run script1.nf --reads '/workspace/nf-training-public/nf-training/data/
                     """
                     .stripIndent()
         ```
+
+### :material-check-all: Summary
 
 In this step you have learned:
 
@@ -147,15 +151,17 @@ To avoid adding `-with-docker` each time you execute the script, add the followi
 docker.enabled = true
 ```
 
-!!! question "Exercise"
+### :material-progress-question: Exercises
+
+!!! exercise
 
     Enable the Docker execution by default by adding the above setting in the `nextflow.config` file.
 
-!!! question "Exercise"
+!!! exercise
 
     Print the output of the `index_ch` channel by using the [view](https://www.nextflow.io/docs/latest/operator.html#view) operator.
 
-    ??? success "Click here for the answer"
+    ??? result
 
         Add the following to the end of your workflow block in your script file
 
@@ -163,11 +169,11 @@ docker.enabled = true
         index_ch.view()
         ```
 
-!!! question "Exercise"
+!!! exercise
 
     If you have more CPUs available, try changing your script to request more resources for this process. For example, see the [directive docs](https://www.nextflow.io/docs/latest/process.html#cpus). `$task.cpus` is already specified in this script, so setting the number of CPUs as a directive will tell Nextflow to run this job.
 
-    ??? success "Click here for the answer"
+    ??? result
 
         Add `cpus 2` to the top of the index process:
 
@@ -180,11 +186,11 @@ docker.enabled = true
 
         Then check it worked by looking at the script executed in the work directory. Look for the hexadecimal (e.g. `work/7f/f285b80022d9f61e82cd7f90436aa4/`), Then `cat` the `.command.sh` file.
 
-!!! question "Bonus Exercise"
+!!! exercise "Bonus Exercise"
 
     Use the command `tree work` to see how Nextflow organizes the process work directory. Check [here](https://www.tecmint.com/linux-tree-command-examples/) if you need to download `tree`.
 
-    ??? success "Click here for the answer"
+    ??? result
 
         It should look something like this:
 
@@ -212,6 +218,8 @@ docker.enabled = true
         │       └── transcriptome.fa -> /workspace/Gitpod_test/data/ggal/transcriptome.fa
         ├── 7f
         ```
+
+### :material-check-all: Summary
 
 In this step you have learned:
 
@@ -255,11 +263,13 @@ nextflow run script3.nf --reads 'data/ggal/*_{1,2}.fq'
 
     File paths that include one or more wildcards ie. `*`, `?`, etc., MUST be wrapped in single-quoted characters to avoid Bash expanding the glob.
 
-!!! question "Exercise"
+### :material-progress-question: Exercises
+
+!!! exercise
 
     Use the [set](https://www.nextflow.io/docs/latest/operator.html#set) operator in place of `=` assignment to define the `read_pairs_ch` channel.
 
-    ??? success "Click here for the answer"
+    ??? result
 
         ```groovy
         Channel
@@ -267,17 +277,19 @@ nextflow run script3.nf --reads 'data/ggal/*_{1,2}.fq'
             .set { read_pairs_ch }
         ```
 
-!!! question "Exercise"
+!!! exercise
 
     Use the `checkIfExists` option for the [fromFilePairs](https://www.nextflow.io/docs/latest/channel.html#fromfilepairs) method to check if the specified path contains file pairs.
 
-    ??? success "Click here for the answer"
+    ??? result
 
         ```groovy
         Channel
             .fromFilePairs( params.reads, checkIfExists: true )
             .set { read_pairs_ch }
         ```
+
+### :material-check-all: Summary
 
 In this step you have learned:
 
@@ -323,11 +335,13 @@ Nextflow parallelizes the execution of your pipeline simply by providing multipl
 
     It may be useful to apply optional settings to a specific process using [directives](https://www.nextflow.io/docs/latest/process.html#directives) by specifying them in the process body.
 
-!!! question "Exercise"
+### :material-progress-question: Exercises
+
+!!! exercise
 
     Add a [tag](https://www.nextflow.io/docs/latest/process.html#tag) directive to the `QUANTIFICATION` process to provide a more readable execution log.
 
-    ??? success "Click here for the answer"
+    ??? result
 
         Add the following before the input declaration:
 
@@ -335,17 +349,19 @@ Nextflow parallelizes the execution of your pipeline simply by providing multipl
         tag "Salmon on $sample_id"
         ```
 
-!!! question "Exercise"
+!!! exercise
 
     Add a [publishDir](https://www.nextflow.io/docs/latest/process.html#publishdir) directive to the `QUANTIFICATION` process to store the process results in a directory of your choice.
 
-    ??? success "Click here for the answer"
+    ??? result
 
         Add the following before the `input` declaration in the `QUANTIFICATION` process:
 
         ```groovy
         publishDir params.outdir, mode:'copy'
         ```
+
+### :material-check-all: Summary
 
 In this step you have learned:
 
@@ -385,6 +401,8 @@ MULTIQC(quant_ch.mix(fastqc_ch).collect())
 ```
 
 We only want one task of MultiQC to be executed to produce one report. Therefore, we use the `mix` channel operator to combine the two channels followed by the `collect` operator, to return the complete channel contents as a single element.
+
+### :material-check-all: Summary
 
 In this step you have learned:
 
@@ -467,6 +485,8 @@ Run it as before:
 ```bash
 nextflow run script7.nf -resume --reads 'data/ggal/*_{1,2}.fq'
 ```
+
+### :material-check-all: Summary
 
 In this step you have learned:
 
