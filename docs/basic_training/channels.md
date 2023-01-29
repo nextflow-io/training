@@ -22,7 +22,7 @@ A queue channel is implicitly created by process output definitions or using cha
 
 Try the following snippets:
 
-!!! info
+!!! info ""
 
     Click the :material-plus-circle: icons in the code for explanations.
 

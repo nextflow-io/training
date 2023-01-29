@@ -28,6 +28,10 @@ In more complex examples, the process body can contain up to **five** definition
 
 The full process syntax is defined as follows:
 
+!!! info ""
+
+    Click the :material-plus-circle: icons in the code for explanations.
+
 ```groovy linenums="1"
 process < name > {
 
