@@ -64,10 +64,10 @@ when using the AWS Batch executor:
 |Name           |Description
 |https://www.nextflow.io/docs/latest/process.html#accelerator[accelerator]  | The hardware accelerator i.e. GPU to be used.
 |https://www.nextflow.io/docs/latest/process.html#container[container]      | The Docker container to be used for the job execution.
-|https://www.nextflow.io/docs/latest/process.html#cpus[cpus]                | Number of CPUs (make sure the chosen instance types are able to fullfill the request).
+|https://www.nextflow.io/docs/latest/process.html#cpus[cpus]                | Number of CPUs (make sure the chosen instance types are able to fulfill the request).
 |https://www.nextflow.io/docs/latest/process.html#errorstrategy[errorStrategy]  | Errors handling policy.
 |https://www.nextflow.io/docs/latest/process.html#queue[queue]              | The (AWS) queue to be used to run the task.
-|https://www.nextflow.io/docs/latest/process.html#memory[memory]            | Amount of memory to be reserved to run the job (make sure the chosen instance types are able to fullfill the request).
+|https://www.nextflow.io/docs/latest/process.html#memory[memory]            | Amount of memory to be reserved to run the job (make sure the chosen instance types are able to fulfill the request).
 |https://www.nextflow.io/docs/latest/process.html#maxretries[maxRetries]    | Max number of times a failing job can be retried.
 |https://www.nextflow.io/docs/latest/process.html#time[time]                | Max job execution time i.e. job timeout.
 |=======================
