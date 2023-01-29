@@ -16,64 +16,11 @@ The libraries are <span class="crg">stranded PE76 Illumina GAIIx</span> RNA-Seq 
 
 Only reads mapped to the [22q11^](http://genome-euro.ucsc.edu/cgi-bin/hgTracks?db=hg19&lastVirtModeType=default&lastVirtModeExtraState=&virtModeType=default&virtMode=0&nonVirtPosition=&position=chr22%3A14700001-25900000&hgsid=221945779_QucOFSFGagd1cn9uVki0TFjrxSBU) locus of the human genome (`chr22:16000000-18000000`) are used.
 
-<table>
-<colgroup>
-<col style="width: 25%" />
-<col style="width: 25%" />
-<col style="width: 25%" />
-<col style="width: 25%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;"><p>ENCODE ID</p></td>
-<td style="text-align: left;"><p>Cellular fraction</p></td>
-<td style="text-align: left;"><p>replicate ID</p></td>
-<td style="text-align: left;"><p>file names</p></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><p><a href="https://www.encodeproject.org/experiments/ENCSR000COQ/">ENCSR000COQ</a></p></td>
-<td style="text-align: left;"><p>Whole Cell</p></td>
-<td style="text-align: left;"><p>1</p></td>
-<td style="text-align: left;"><pre><code>ENCSR000COQ1_1.fastq.gz
-ENCSR000COQ1_2.fastq.gz</code></pre></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><p>2</p></td>
-<td style="text-align: left;"><pre><code>ENCSR000COQ2_1.fastq.gz
-ENCSR000COQ2_2.fastq.gz</code></pre></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><p><a href="https://www.encodeproject.org/experiments/ENCSR000CPO/">ENCSR000CPO</a></p></td>
-<td style="text-align: left;"><p>Nuclear</p></td>
-<td style="text-align: left;"><p>1</p></td>
-<td style="text-align: left;"><pre><code>ENCSR000CPO1_1.fastq.gz
-ENCSR000CPO1_2.fastq.gz</code></pre></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><p>2</p></td>
-<td style="text-align: left;"><pre><code>ENCSR000CPO2_1.fastq.gz
-ENCSR000CPO2_2.fastq.gz</code></pre></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><p><a href="https://www.encodeproject.org/experiments/ENCSR000COR/">ENCSR000COR</a></p></td>
-<td style="text-align: left;"><p>Cytosolic</p></td>
-<td style="text-align: left;"><p>1</p></td>
-<td style="text-align: left;"><pre><code>ENCSR000COR1_1.fastq.gz
-ENCSR000COR1_1.fastq.gz</code></pre></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><p>2</p></td>
-<td style="text-align: left;"><pre><code>ENCSR000COR2_1.fastq.gz
-ENCSR000COR2_1.fastq.gz</code></pre></td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+| ENCODE ID                                                             | Cellular fraction | Replicate ID | File names                                             |                                                        |
+| --------------------------------------------------------------------- | ----------------- | ------------ | ------------------------------------------------------ | ------------------------------------------------------ |
+| [ENCSR000COQ](https://www.encodeproject.org/experiments/ENCSR000COQ/) | Whole Cell        | 1<br>2       | `ENCSR000COQ1_1.fastq.gz`<br>`ENCSR000COQ2_1.fastq.gz` | `ENCSR000COQ1_2.fastq.gz`<br>`ENCSR000COQ2_2.fastq.gz` |
+| [ENCSR000CPO](https://www.encodeproject.org/experiments/ENCSR000CPO/) | Nuclear           | 1<br>2       | `ENCSR000CPO1_1.fastq.gz`<br>`ENCSR000CPO2_1.fastq.gz` | `ENCSR000CPO1_2.fastq.gz`<br>`ENCSR000CPO2_2.fastq.gz` |
+| [ENCSR000COR](https://www.encodeproject.org/experiments/ENCSR000COR/) | Cytosolic         | 1<br>2       | `ENCSR000COR1_1.fastq.gz`<br>`ENCSR000COR2_1.fastq.gz` | `ENCSR000COR1_1.fastq.gz`<br>`ENCSR000COR2_1.fastq.gz` |
 
 "Known" variants
 `known_variants.vcf.gz`

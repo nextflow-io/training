@@ -120,7 +120,7 @@ See [here](https://www.nextflow.io/docs/latest/getstarted.html?highlight=resume#
 
 </div>
 
-[Solution](#solutions/anxious_advice.adoc#)
+[Solution](solutions/anxious_advice.md)
 
 **\***
 
@@ -189,7 +189,7 @@ nextflow run main.nf -resume
     executor >  local (1)
     [cd/47f882] process > 1A_prepare_genome_samtools [100%] 1 of 1 ✔
 
-[Solution](#solutions/busy_building.adoc#)
+[Solution](solutions/busy_building.md)
 
 **\*** == Process 1B
 
@@ -250,7 +250,7 @@ process '1B_prepare_genome_picard' {
 
 </div>
 
-[Solution](#solutions/cooing_clock.adoc#)
+[Solution](solutions/cooing_clock.md)
 
 **\***
 
@@ -307,7 +307,7 @@ The output of the STAR genomeGenerate command is specified here as `genome_dir`.
 
 </div>
 
-[Solution](#solutions/discreet_direction.adoc#)
+[Solution](solutions/discreet_direction.md)
 
 **\***
 
@@ -382,7 +382,7 @@ Try run the pipeline from the project directory with:
 nextflow run main.nf -resume
 ```
 
-[Solution](#solutions/expensive_ear.adoc#)
+[Solution](solutions/expensive_ear.md)
 
 Congratulations! Part 1 is now complete.
 
@@ -476,7 +476,7 @@ The final command produces an bam index which is the full filename with an addit
 
 </div>
 
-[Solution](#solutions/fat_floor.adoc#)
+[Solution](solutions/fat_floor.md)
 
 **\***
 
@@ -554,7 +554,7 @@ A `tag` line would also be useful in [???](#Process 2)
 
 </div>
 
-[Solution](#solutions/gentle_garden.adoc#)
+[Solution](solutions/gentle_garden.md)
 
 **\***
 
@@ -640,7 +640,7 @@ process '4_rnaseq_gatk_recalibrate' {
 
 -   The index of the unique bam file (bam file name + `.bai`)
 
-[Solution](#solutions/hulking_hospital.adoc#)
+[Solution](solutions/hulking_hospital.md)
 
 **\***
 
@@ -714,7 +714,7 @@ process '5_rnaseq_call_variants' {
 }
 ```
 
-[Solution](#solutions/imported_iron.adoc#)
+[Solution](solutions/imported_iron.md)
 
 **\***
 
@@ -810,7 +810,7 @@ process '6B_prepare_vcf_for_ase' {
 
 -   here the output location is specified as a combination of a pipeline parameter and a process input variable
 
-[Solution](#solutions/jumping_jack.adoc#)
+[Solution](solutions/jumping_jack.md)
 
 **\*** The final step is the GATK ASEReadCounter.
 
@@ -882,7 +882,7 @@ bam_for_ASE_ch
 
 </div>
 
-[Solution](#solutions/kind_koala.adoc#)
+[Solution](solutions/kind_koala.md)
 
 **\***
 
@@ -921,11 +921,11 @@ You should construct the process and run the pipeline in its entirety.
                   -sites ${vcf}
 ```
 
-[Solution](#solutions/laughing_lynx.adoc#)
+[Solution](solutions/laughing_lynx.md)
 
 Congratulations! If you made it this far you now have all the basics to create your own Nextflow workflows.
 
-**\***
+## Results overview
 
 For each processed sample the pipeline stores results into a folder named after the sample identifier. These folders are created in the directory specified as a parameter in `params.results`.
 
