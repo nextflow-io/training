@@ -159,8 +159,8 @@ The output will look similar to the text shown below:
 N E X T F L O W  ~  version 22.09.7-edge
 Launching `hello.nf` [gigantic_poitras] DSL2 - revision: 197a0e289a
 executor >  local (3)
-[0b/8b49d0] process > SPLITLETTERS (1)   [100%] 1 of 1 ✔
-[69/870428] process > CONVERTTOUPPER (1) [100%] 2 of 2 ✔
+[c8/c36893] process > SPLITLETTERS (1)   [100%] 1 of 1 ✔
+[1a/3c54ed] process > CONVERTTOUPPER (1) [100%] 2 of 2 ✔
 WORLD!
 HELLO
 ```
@@ -176,11 +176,11 @@ The standard output shows (line by line):
 
 !!! info
 
-    The hexadecimal numbers, like `69/870428`, identify the unique process execution. These numbers are also the prefix of the directories where each process is executed. You can inspect the files produced by changing to the directory `$PWD/work` and using these numbers to find the process-specific execution path.
+    The hexadecimal numbers, like `c8/c36893`, identify the unique process execution. These numbers are also the prefix of the directories where each process is executed. You can inspect the files produced by changing to the directory `$PWD/work` and using these numbers to find the process-specific execution path.
 
 !!! tip
 
-    The second process runs twice, executing in two different work directories for each input file. Therefore, in the previous example the work directory `[9f/1dd42a]` represents just one of the two directories that were processed. To print all the relevant paths to the screen, use the `-ansi-log` flag (e.g. `nextflow run hello.nf -ansi-log false`).
+    The second process runs twice, executing in two different work directories for each input file. Therefore, in the previous example the work directory `[1a/3c54ed]` represents just one of the two directories that were processed. To print all the relevant paths to the screen, use the `-ansi-log` flag (e.g. `nextflow run hello.nf -ansi-log false`).
 
 It’s worth noting that the process `CONVERTTOUPPER` is executed in parallel, so there’s no guarantee that the instance processing the first split (the chunk _Hello ') will be executed before the one processing the second split (the chunk 'world!_).
 
@@ -220,9 +220,9 @@ $ nextflow run hello.nf -resume
 
 N E X T F L O W  ~  version 22.09.7-edge
 Launching `hello.nf` [amazing_becquerel] DSL2 - revision: 525206806b
-executor >  local (3)
-[4d/535c86] process > SPLITLETTERS (1)   [100%] 1 of 1 ✔
-[3c/67914f] process > CONVERTTOUPPER (1) [100%] 2 of 2 ✔
+executor >  local (2)
+[c8/c36893] process > SPLITLETTERS (1)   [100%] 1 of 1, cached: 1 ✔
+[77/cf83b6] process > CONVERTTOUPPER (1) [100%] 2 of 2 ✔
 !dlrow
  olleH
 ```
