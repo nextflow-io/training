@@ -9,7 +9,7 @@ Nextflow is a domain specific language (DSL) implemented on top of the Groovy pr
 
 Here are some important Groovy syntax that are commonly used in Nextflow.
 
-# Printing values
+## Printing values
 
 To print something is as easy as using one of the `print` or `println` methods.
 
@@ -21,7 +21,7 @@ parentheses for function invocations are optional. Therefore, the following synt
 
     println "Hello, World!"
 
-# Comments
+## Comments
 
 Comments use the same syntax as C-family programming languages:
 
@@ -32,7 +32,7 @@ Comments use the same syntax as C-family programming languages:
        multiple lines
     */
 
-# Variables
+## Variables
 
 To define a variable, simply assign a value to it:
 
@@ -57,7 +57,7 @@ Local variables are defined using the `def` keyword:
 
 The `def` should be always used when defining variables local to a function or a closure.
 
-# Lists
+## Lists
 
 A List object can be defined by placing the list items in square brackets:
 
@@ -104,7 +104,7 @@ List objects implement all methods provided by the [java.util.List](https://docs
     assert [4,2,1,3].find{it%2 == 0} == 4
     assert [4,2,1,3].findAll{it%2 == 0} == [4,2]
 
-# Maps
+## Maps
 
 Maps are like lists that have an arbitrary key instead of an integer. Therefore, the syntax is very much aligned.
 
@@ -137,7 +137,7 @@ To add data or to modify a map, the syntax is similar to adding values to a list
 
 Map objects implement all methods provided by the [java.util.Map](https://docs.oracle.com/javase/8/docs/api/java/util/Map.html) interface, plus the extension methods provided by [Groovy](http://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/Map.html).
 
-# String interpolation
+## String interpolation
 
 String literals can be defined by enclosing them with either _single-_ ('') or _double-_ ("") quotation marks.
 
@@ -170,7 +170,7 @@ it prints:
     tic\tac\toe
     tic    ac    oe
 
-# Multi-line strings
+## Multi-line strings
 
 A block of text that spans multiple lines can be defined by delimiting it with triple single or double quotes:
 
@@ -191,7 +191,7 @@ Finally, multi-line strings can also be defined with slashy strings. For example
 
 Like before, multi-line strings inside double quotes and slash characters support variable interpolation, while single-quoted multi-line strings do not.
 
-# If statement
+## If statement
 
 The `if` statement uses the same syntax common in other programming languages, such as Java, C, JavaScript, etc.
 
@@ -238,7 +238,7 @@ The previous statement can be further simplified using the [Elvis operator](http
 
     println list ?: 'The list is empty'
 
-# For statement
+## For statement
 
 The classical `for` loop syntax is supported as shown here:
 
@@ -254,7 +254,7 @@ Iteration over list objects is also possible using the syntax below:
       println elem
     }
 
-# Functions
+## Functions
 
 It is possible to define a custom function into a script, as shown here:
 
@@ -272,7 +272,7 @@ A function can take multiple arguments separating them with a comma. The `return
 
     assert fact(5) == 120
 
-# Closures
+## Closures
 
 Closures are the Swiss army knife of Nextflow/Groovy programming. In a nutshell, a closure is a block of code that can be passed as an argument to a function. A closure can also be used to define an anonymous function.
 
@@ -335,7 +335,7 @@ As an example showing both these features, see the following code fragment:
 
 Learn more about closures in the [Groovy documentation](http://groovy-lang.org/closures.html).
 
-# More resources
+## More resources
 
 The complete Groovy language documentation is available at [this link](http://groovy-lang.org/documentation.html#languagespecification).
 
