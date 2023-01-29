@@ -169,13 +169,13 @@ The standard output shows (line by line):
 
 * *6-7*: The result string from stdout is printed.
 
-TIP: The hexadecimal numbers, like `69/870428`, identify the unique process
+TIP: The hexadecimal numbers, like `c8/c36893`, identify the unique process
 execution. These numbers are also the prefix of the directories where each
 process is executed. You can inspect the files produced by changing to the directory
 `$PWD/work` and using these numbers to find the process-specific execution path.
 
 IMPORTANT: The second process runs twice, executing in two different work directories
-for each input file. Therefore, in the previous example the work directory [9f/1dd42a]
+for each input file. Therefore, in the previous example the work directory [1a/3c54ed]
 represents just one of the two directories that were processed. To print all the
 relevant paths to the screen, use the `-ansi-log` flag (e.g. `nextflow run hello.nf -ansi-log false`).
 
