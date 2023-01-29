@@ -25,14 +25,14 @@ All training material was originally written by [Seqera Labs](https://seqera.io)
 We welcome fixes and improvements from the community.
 Every page has a :material-file-edit-outline: icon in the top right of the page, which will take you to GitHub where you can edit the training source material via a pull-request.
 
-<figure markdown>
+<figure markdown class="homepage_logos">
 
-![Nextflow](assets/img/nextflow_logo.png#only-light){: style="margin:auto"}
+![Nextflow](assets/img/nextflow_logo.svg#only-light)
 
-![Seqera Labs](assets/img/seqera_logo.png#only-light){: style="margin:auto"}
+![Seqera Labs](assets/img/seqera_logo.svg#only-light)
 
-![Nextflow](assets/img/nextflow_logo_dark.png#only-dark){: style="margin:auto"}
+![Nextflow](assets/img/nextflow_logo_dark.svg#only-dark)
 
-![Seqera Labs](assets/img/seqera_logo_dark.png#only-dark){: style="margin:auto"}
+![Seqera Labs](assets/img/seqera_logo_dark.svg#only-dark)
 
 </figure>
