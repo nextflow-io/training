@@ -17,6 +17,11 @@
 }
 
 /* Custom right-hand-side sidebar */
+@media screen and (max-width: 59.9375em) {
+    .sidebar_resources {
+        display: none !important;
+    }
+}
 .sidebar_resources {
     margin-top: 1rem;
 }
