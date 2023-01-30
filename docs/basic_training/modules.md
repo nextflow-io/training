@@ -15,309 +15,361 @@ Components defined in the module script can be imported into other Nextflow scri
 Using the `hello.nf` example, we can achieve this by:
 
 -   Creating a file called `modules.nf` in the top-level directory.
-
 -   Cutting and pasting the two process definitions for `SPLITLETTERS` and `CONVERTTOUPPER` into `modules.nf`.
-
 -   Removing the `process` definitions in the `hello.nf` script.
-
 -   Importing the processes from `modules.nf` within the `hello.nf` script anywhere above the `workflow` definition:
 
-<!-- -->
+```groovy linenums="1"
+include { SPLITLETTERS   } from './modules.nf'
+include { CONVERTTOUPPER } from './modules.nf'
+```
 
-    include { SPLITLETTERS   } from './modules.nf'
-    include { CONVERTTOUPPER } from './modules.nf'
+!!! note
 
-In general, you would use relative paths to define the location of the module scripts using the `./` prefix.
+    In general, you would use relative paths to define the location of the module scripts using the `./` prefix.
 
-Create a `modules.nf` file with the previously defined processes from `hello.nf`. Then remove these processes from `hello.nf` and add the `include` definitions shown above.
+!!! exercise
 
-The `hello.nf` script should look similar like this:
+    Create a `modules.nf` file with the previously defined processes from `hello.nf`. Then remove these processes from `hello.nf` and add the `include` definitions shown above.
 
-    #!/usr/bin/env nextflow
+    ??? result "Solution"
 
-    params.greeting  = 'Hello world!'
-    greeting_ch = Channel.of(params.greeting)
+        The `hello.nf` script should look similar like this:
 
-    include { SPLITLETTERS   } from './modules.nf'
-    include { CONVERTTOUPPER } from './modules.nf'
+        ```groovy linenums="1"
+        #!/usr/bin/env nextflow
 
-    workflow {
-        letters_ch = SPLITLETTERS(greeting_ch)
-        results_ch = CONVERTTOUPPER(letters_ch.flatten())
-        results_ch.view{ it }
-    }
+        params.greeting  = 'Hello world!'
+        greeting_ch = Channel.of(params.greeting)
 
-You should have the following in the file `./modules.nf`:
+        include { SPLITLETTERS   } from './modules.nf'
+        include { CONVERTTOUPPER } from './modules.nf'
 
-    process SPLITLETTERS {
+        workflow {
+            letters_ch = SPLITLETTERS(greeting_ch)
+            results_ch = CONVERTTOUPPER(letters_ch.flatten())
+            results_ch.view{ it }
+        }
+        ```
 
-        input:
-        val x
+        You should have the following in the file `./modules.nf`:
 
-        output:
-        path 'chunk_*'
+        ```groovy linenums="1"
+        process SPLITLETTERS {
 
-        """
-        printf '$x' | split -b 6 - chunk_
-        """
-    }
+            input:
+            val x
 
-    process CONVERTTOUPPER {
+            output:
+            path 'chunk_*'
 
-        input:
-        path y
+            """
+            printf '$x' | split -b 6 - chunk_
+            """
+        }
 
-        output:
-        stdout
+        process CONVERTTOUPPER {
 
-        """
-        cat $y | tr '[a-z]' '[A-Z]'
-        """
-    }
+            input:
+            path y
 
-We now have modularized processes which makes the code reusable.
+            output:
+            stdout
+
+            """
+            cat $y | tr '[a-z]' '[A-Z]'
+            """
+        }
+        ```
+
+        We now have modularized processes which makes the code reusable.
 
 ### Multiple imports
 
 If a Nextflow module script contains multiple `process` definitions they can also be imported using a single `include` statement as shown in the example below:
 
-    include { SPLITLETTERS; CONVERTTOUPPER } from './modules.nf'
+```groovy linenums="1"
+include { SPLITLETTERS; CONVERTTOUPPER } from './modules.nf'
+```
 
 ### Module aliases
 
 When including a module component it is possible to specify a name alias using the `as` declaration. This allows the inclusion and the invocation of the same component multiple times using different names:
 
-    #!/usr/bin/env nextflow
+```groovy linenums="1"
+#!/usr/bin/env nextflow
 
-    params.greeting = 'Hello world!'
-    greeting_ch = Channel.of(params.greeting)
+params.greeting = 'Hello world!'
+greeting_ch = Channel.of(params.greeting)
 
-    include { SPLITLETTERS as SPLITLETTERS_one } from './modules.nf'
-    include { SPLITLETTERS as SPLITLETTERS_two } from './modules.nf'
+include { SPLITLETTERS as SPLITLETTERS_one } from './modules.nf'
+include { SPLITLETTERS as SPLITLETTERS_two } from './modules.nf'
 
-    include { CONVERTTOUPPER as CONVERTTOUPPER_one } from './modules.nf'
-    include { CONVERTTOUPPER as CONVERTTOUPPER_two } from './modules.nf'
+include { CONVERTTOUPPER as CONVERTTOUPPER_one } from './modules.nf'
+include { CONVERTTOUPPER as CONVERTTOUPPER_two } from './modules.nf'
 
-    workflow {
-        letters_ch1 = SPLITLETTERS_one(greeting_ch)
-        results_ch1 = CONVERTTOUPPER_one(letters_ch1.flatten())
-        results_ch1.view{ it }
+workflow {
+    letters_ch1 = SPLITLETTERS_one(greeting_ch)
+    results_ch1 = CONVERTTOUPPER_one(letters_ch1.flatten())
+    results_ch1.view{ it }
 
-        letters_ch2 = SPLITLETTERS_two(greeting_ch)
-        results_ch2 = CONVERTTOUPPER_two(letters_ch2.flatten())
-        results_ch2.view{ it }
-    }
+    letters_ch2 = SPLITLETTERS_two(greeting_ch)
+    results_ch2 = CONVERTTOUPPER_two(letters_ch2.flatten())
+    results_ch2.view{ it }
+}
+```
 
-Save the previous snippet as `hello.2.nf`, and predict the output to screen.
+!!! exercise
 
-The `hello.2.nf` output should look something like this:
+    Save the previous snippet as `hello.2.nf`, and predict the output to screen.
 
-    N E X T F L O W  ~  version 22.04.3
-    Launching `hello.2.nf` [goofy_goldstine] DSL2 - revision: 449cf82eaf
-    executor >  local (6)
-    [e1/5e6523] process > SPLITLETTERS_one (1)   [100%] 1 of 1 ✔
-    [14/b77deb] process > CONVERTTOUPPER_one (1) [100%] 2 of 2 ✔
-    [c0/115bd6] process > SPLITLETTERS_two (1)   [100%] 1 of 1 ✔
-    [09/f9072d] process > CONVERTTOUPPER_two (2) [100%] 2 of 2 ✔
-    WORLD!
-    HELLO
-    WORLD!
-    HELLO
+    ??? result "Solution"
 
-You can store each process in separate files within separate sub-folders or combined in one big file (both are valid). For your own projects, it can be helpful to see examples on public repos. e.g. Seqera RNA-Seq tutorial [here](https://github.com/seqeralabs/rnaseq-nf/tree/master/modules) or within nf-core pipelines, such as [nf-core/rnaseq](https://github.com/nf-core/rnaseq/tree/master/modules/nf-core/modules).
+        The `hello.2.nf` output should look something like this:
+
+        ```console title="Output"
+        N E X T F L O W  ~  version 22.04.3
+        Launching `hello.2.nf` [goofy_goldstine] DSL2 - revision: 449cf82eaf
+        executor >  local (6)
+        [e1/5e6523] process > SPLITLETTERS_one (1)   [100%] 1 of 1 ✔
+        [14/b77deb] process > CONVERTTOUPPER_one (1) [100%] 2 of 2 ✔
+        [c0/115bd6] process > SPLITLETTERS_two (1)   [100%] 1 of 1 ✔
+        [09/f9072d] process > CONVERTTOUPPER_two (2) [100%] 2 of 2 ✔
+        WORLD!
+        HELLO
+        WORLD!
+        HELLO
+        ```
+
+!!! tip
+
+    You can store each process in separate files within separate sub-folders or combined in one big file (both are valid).
+    You can find examples of this on public repos such as the [Seqera RNA-Seq tutorial](https://github.com/seqeralabs/rnaseq-nf/tree/master/modules) or within nf-core pipelines, such as [nf-core/rnaseq](https://github.com/nf-core/rnaseq/tree/master/modules/nf-core/modules).
 
 ## Output definition
 
 Nextflow allows the use of alternative output definitions within workflows to simplify your code.
 
-In the previous basic example (`hello.nf`), we defined the channel names to specify the input to the next process.
+In the previous basic example (`hello.nf`), we defined the channel names to specify the input to the next process:
 
-e.g.
+```groovy linenums="1"
+workflow  {
+    greeting_ch = Channel.of(params.greeting)
+    letters_ch = SPLITLETTERS(greeting_ch)
+    results_ch = CONVERTTOUPPER(letters_ch.flatten())
+    results_ch.view{ it }
+}
+```
 
-    workflow  {
-        greeting_ch = Channel.of(params.greeting)
-        letters_ch = SPLITLETTERS(greeting_ch)
-        results_ch = CONVERTTOUPPER(letters_ch.flatten())
-        results_ch.view{ it }
-    }
+!!! note
 
-We have moved the `greeting_ch` into the workflow scope for this exercise.
+    We have moved the `greeting_ch` into the workflow scope for this exercise.
 
 We can also explicitly define the output of one channel to another using the `.out` attribute.
 
-    workflow  {
-        greeting_ch = Channel.of(params.greeting)
-        letters_ch = SPLITLETTERS(greeting_ch)
-        results_ch = CONVERTTOUPPER(letters_ch.out.flatten())
-        results_ch.view{ it }
-    }
+```groovy linenums="1" hl_lines="4"
+workflow  {
+    greeting_ch = Channel.of(params.greeting)
+    letters_ch = SPLITLETTERS(greeting_ch)
+    results_ch = CONVERTTOUPPER(letters_ch.out.flatten())
+    results_ch.view{ it }
+}
+```
 
 We can also remove the channel definitions completely from each line if we prefer (as at each call, a channel is implied):
 
-    workflow  {
-        greeting_ch = Channel.of(params.greeting)
-        SPLITLETTERS(greeting_ch)
-        CONVERTTOUPPER(SPLITLETTERS.out.flatten())
-        CONVERTTOUPPER.out.view()
-    }
+```groovy linenums="1" hl_lines="3-5"
+workflow  {
+    greeting_ch = Channel.of(params.greeting)
+    SPLITLETTERS(greeting_ch)
+    CONVERTTOUPPER(SPLITLETTERS.out.flatten())
+    CONVERTTOUPPER.out.view()
+}
+```
 
 If a process defines two or more output channels, each channel can be accessed by indexing the `.out` attribute, e.g., `.out[0]`, `.out[1]`, etc. In our example we only have the `[0]'th` output:
 
-    workflow  {
-        greeting_ch = Channel.of(params.greeting)
-        SPLITLETTERS(greeting_ch)
-        CONVERTTOUPPER(SPLITLETTERS.out.flatten())
-        CONVERTTOUPPER.out[0].view()
-    }
+```groovy linenums="1" hl_lines="5"
+workflow  {
+    greeting_ch = Channel.of(params.greeting)
+    SPLITLETTERS(greeting_ch)
+    CONVERTTOUPPER(SPLITLETTERS.out.flatten())
+    CONVERTTOUPPER.out[0].view()
+}
+```
 
 Alternatively, the process `output` definition allows the use of the `emit` statement to define a named identifier that can be used to reference the channel in the external scope.
 
 For example, try adding the `emit` statement on the `convertToUpper` process in your `modules.nf` file:
 
-    process SPLITLETTERS {
-        input:
-        val x
+```groovy linenums="1" title="modules.nf"
+process SPLITLETTERS {
+    input:
+    val x
 
-        output:
-        path 'chunk_*'
+    output:
+    path 'chunk_*'
 
-        """
-        printf '$x' | split -b 6 - chunk_
-        """
-    }
+    """
+    printf '$x' | split -b 6 - chunk_
+    """
+}
 
-    process CONVERTTOUPPER {
-        input:
-        path y
+process CONVERTTOUPPER {
+    input:
+    path y
 
-        output:
-        stdout emit: upper
+    output:
+    stdout emit: upper
 
-        """
-        cat $y | tr '[a-z]' '[A-Z]'
-        """
-    }
+    """
+    cat $y | tr '[a-z]' '[A-Z]'
+    """
+}
+```
 
 Then change the workflow scope in `hello.nf` to call this specific named output (notice the added `.upper`):
 
-    workflow {
-        greeting_ch = Channel.of(params.greeting)
-        SPLITLETTERS(greeting_ch)
-        CONVERTTOUPPER(SPLITLETTERS.out.flatten())
-        CONVERTTOUPPER.out.upper.view{ it }
-    }
+```groovy linenums="1" title="hello.nf"
+workflow {
+    greeting_ch = Channel.of(params.greeting)
+    SPLITLETTERS(greeting_ch)
+    CONVERTTOUPPER(SPLITLETTERS.out.flatten())
+    CONVERTTOUPPER.out.upper.view{ it }
+}
+```
 
 ### Using piped outputs
 
 Another way to deal with outputs in the workflow scope is to use pipes `|`.
 
-Try changing the workflow script to the snippet below:
+!!! exercise
 
+    Try changing the workflow script to the snippet below:
+
+    ```groovy linenums="1"
     workflow {
         Channel.of(params.greeting) | SPLITLETTERS | flatten() | CONVERTTOUPPER | view
     }
+    ```
 
-Here we use a [pipe](https://www.nextflow.io/docs/latest/dsl2.html#pipes) which passed the output as a channel to the next process.
+    Here we use a [pipe](https://www.nextflow.io/docs/latest/dsl2.html#pipes) which passed the output as a channel to the next process.
 
 ## Workflow definition
 
 The `workflow` scope allows the definition of components that define the invocation of one or more processes or operators:
 
-    #!/usr/bin/env nextflow
+```groovy linenums="1"
+#!/usr/bin/env nextflow
 
-    params.greeting = 'Hello world!'
+params.greeting = 'Hello world!'
 
-    include { SPLITLETTERS } from './modules.nf'
-    include { CONVERTTOUPPER } from './modules.nf'
+include { SPLITLETTERS } from './modules.nf'
+include { CONVERTTOUPPER } from './modules.nf'
 
 
-    workflow my_pipeline {
-        greeting_ch = Channel.of(params.greeting)
-        SPLITLETTERS(greeting_ch)
-        CONVERTTOUPPER(SPLITLETTERS.out.flatten())
-        CONVERTTOUPPER.out.upper.view{ it }
-    }
+workflow my_pipeline {
+    greeting_ch = Channel.of(params.greeting)
+    SPLITLETTERS(greeting_ch)
+    CONVERTTOUPPER(SPLITLETTERS.out.flatten())
+    CONVERTTOUPPER.out.upper.view{ it }
+}
 
-    workflow {
-        my_pipeline()
-    }
+workflow {
+    my_pipeline()
+}
+```
 
 For example, the snippet above defines a `workflow` named `my_pipeline`, that can be invoked via another `workflow` definition.
 
-Make sure that your modules.nf file is the one containing the `emit` on the `CONVERTTOUPPER` process.
+!!! note
 
-A workflow component can access any variable or parameter defined in the outer scope. In the running example, we can also access `params.greeting` directly within the `workflow` definition.
+    Make sure that your `modules.nf` file is the one containing the `emit` on the `CONVERTTOUPPER` process.
+
+!!! warning
+
+    A workflow component can access any variable or parameter defined in the outer scope. In the running example, we can also access `params.greeting` directly within the `workflow` definition.
 
 ### Workflow inputs
 
 A `workflow` component can declare one or more input channels using the `take` statement. For example:
 
-    #!/usr/bin/env nextflow
+```groovy linenums="1"
+#!/usr/bin/env nextflow
 
-    params.greeting = 'Hello world!'
+params.greeting = 'Hello world!'
 
-    include { SPLITLETTERS } from './modules.nf'
-    include { CONVERTTOUPPER } from './modules.nf'
+include { SPLITLETTERS } from './modules.nf'
+include { CONVERTTOUPPER } from './modules.nf'
 
-    workflow my_pipeline {
-        take:
-        greeting
+workflow my_pipeline {
+    take:
+    greeting
 
-        main:
-        SPLITLETTERS(greeting)
-        CONVERTTOUPPER(SPLITLETTERS.out.flatten())
-        CONVERTTOUPPER.out.upper.view{ it }
-    }
+    main:
+    SPLITLETTERS(greeting)
+    CONVERTTOUPPER(SPLITLETTERS.out.flatten())
+    CONVERTTOUPPER.out.upper.view{ it }
+}
+```
 
-When the `take` statement is used, the `workflow` definition needs to be declared within the `main` block.
+!!! note
+
+    When the `take` statement is used, the `workflow` definition needs to be declared within the `main` block.
 
 The input for the `workflow` can then be specified as an argument:
 
-    workflow {
-        my_pipeline(Channel.of(params.greeting))
-    }
+```groovy linenums="1"
+workflow {
+    my_pipeline(Channel.of(params.greeting))
+}
+```
 
 ### Workflow outputs
 
 A `workflow` can declare one or more output channels using the `emit` statement. For example:
 
-    workflow my_pipeline {
-        take:
-        greeting
+```groovy linenums="1"
+workflow my_pipeline {
+    take:
+    greeting
 
-        main:
-        SPLITLETTERS(greeting)
-        CONVERTTOUPPER(SPLITLETTERS.out.flatten())
+    main:
+    SPLITLETTERS(greeting)
+    CONVERTTOUPPER(SPLITLETTERS.out.flatten())
 
-        emit:
-        CONVERTTOUPPER.out.upper
-    }
+    emit:
+    CONVERTTOUPPER.out.upper
+}
 
-    workflow {
-        my_pipeline(Channel.of(params.greeting))
-        my_pipeline.out.view()
-    }
+workflow {
+    my_pipeline(Channel.of(params.greeting))
+    my_pipeline.out.view()
+}
+```
 
 As a result, we can use the `my_pipeline.out` notation to access the outputs of `my_pipeline` in the invoking `workflow`.
 
 We can also declare named outputs within the `emit` block.
 
-    workflow my_pipeline {
-        take:
-        greeting
+```groovy linenums="1" hl_lines="10 15"
+workflow my_pipeline {
+    take:
+    greeting
 
-        main:
-        SPLITLETTERS(greeting)
-        CONVERTTOUPPER(SPLITLETTERS.out.flatten())
+    main:
+    SPLITLETTERS(greeting)
+    CONVERTTOUPPER(SPLITLETTERS.out.flatten())
 
-        emit:
-        my_data = CONVERTTOUPPER.out.upper
-    }
+    emit:
+    my_data = CONVERTTOUPPER.out.upper
+}
 
-    workflow {
-        my_pipeline(Channel.of(params.greeting))
-        my_pipeline.out.my_data.view()
-    }
+workflow {
+    my_pipeline(Channel.of(params.greeting))
+    my_pipeline.out.my_data.view()
+}
+```
 
 The result of the above snippet can then be accessed using `my_pipeline.out.my_data`.
 
@@ -327,84 +379,101 @@ Within a `main.nf` script (called `hello.nf` in our example) we also can have mu
 
 The following snippet has two named workflows (`my_pipeline_one` and `my_pipeline_two`):
 
-    #!/usr/bin/env nextflow
+```groovy linenums="1"
+#!/usr/bin/env nextflow
 
-    params.greeting = 'Hello world!'
+params.greeting = 'Hello world!'
 
-    include { SPLITLETTERS as SPLITLETTERS_one } from './modules.nf'
-    include { SPLITLETTERS as SPLITLETTERS_two } from './modules.nf'
+include { SPLITLETTERS as SPLITLETTERS_one } from './modules.nf'
+include { SPLITLETTERS as SPLITLETTERS_two } from './modules.nf'
 
-    include { CONVERTTOUPPER as CONVERTTOUPPER_one } from './modules.nf'
-    include { CONVERTTOUPPER as CONVERTTOUPPER_two } from './modules.nf'
+include { CONVERTTOUPPER as CONVERTTOUPPER_one } from './modules.nf'
+include { CONVERTTOUPPER as CONVERTTOUPPER_two } from './modules.nf'
 
 
-    workflow my_pipeline_one {
-        letters_ch1 = SPLITLETTERS_one(params.greeting)
-        results_ch1 = CONVERTTOUPPER_one(letters_ch1.flatten())
-        results_ch1.view{ it }
-    }
+workflow my_pipeline_one {
+    letters_ch1 = SPLITLETTERS_one(params.greeting)
+    results_ch1 = CONVERTTOUPPER_one(letters_ch1.flatten())
+    results_ch1.view{ it }
+}
 
-    workflow my_pipeline_two {
-        letters_ch2 = SPLITLETTERS_two(params.greeting)
-        results_ch2 = CONVERTTOUPPER_two(letters_ch2.flatten())
-        results_ch2.view{ it }
-    }
+workflow my_pipeline_two {
+    letters_ch2 = SPLITLETTERS_two(params.greeting)
+    results_ch2 = CONVERTTOUPPER_two(letters_ch2.flatten())
+    results_ch2.view{ it }
+}
 
-    workflow {
-        my_pipeline_one(Channel.of(params.greeting))
-        my_pipeline_two(Channel.of(params.greeting))
-    }
+workflow {
+    my_pipeline_one(Channel.of(params.greeting))
+    my_pipeline_two(Channel.of(params.greeting))
+}
+```
 
 You can choose which pipeline runs by using the `entry` flag:
 
-    nextflow run hello.2.nf -entry my_pipeline_one
+```bash
+nextflow run hello.2.nf -entry my_pipeline_one
+```
 
 ### Parameter scopes
 
 A module script can define one or more parameters or custom functions using the same syntax as with any other Nextflow script. Using the minimal examples below:
 
-    params.foo = 'Hello'
-    params.bar = 'world!'
+```groovy linenums="1" title="Module script (<code>./modules.nf</code>)"
+params.foo = 'Hello'
+params.bar = 'world!'
 
-    def SAYHELLO() {
-        println "$params.foo $params.bar"
-    }
+def SAYHELLO() {
+    println "$params.foo $params.bar"
+}
 
-    #!/usr/bin/env nextflow
+```
 
-    params.foo = 'Hola'
-    params.bar = 'mundo!'
+```groovy linenums="1" title="Main script (<code>./hello.nf</code>)"
+#!/usr/bin/env nextflow
 
-    include { SAYHELLO } from './modules.nf'
+params.foo = 'Hola'
+params.bar = 'mundo!'
 
-    workflow {
-        SAYHELLO()
-    }
+include { SAYHELLO } from './modules.nf'
+
+workflow {
+    SAYHELLO()
+}
+```
 
 Running `hello.nf` should print:
 
-    Hola mundo!
+```console
+Hola mundo!
+```
 
 As highlighted above, the script will print `Hola mundo!` instead of `Hello world!` because parameters are inherited from the including context.
 
-To avoid being ignored, pipeline parameters should be defined at the beginning of the script before any `include` declarations.
+!!! info
+
+    To avoid being ignored, pipeline parameters should be defined at the beginning of the script before any `include` declarations.
 
 The `addParams` option can be used to extend the module parameters without affecting the external scope. For example:
 
-    #!/usr/bin/env nextflow
+```groovy linenums="1"
+#!/usr/bin/env nextflow
 
-    params.foo = 'Hola'
-    params.bar = 'mundo!'
+params.foo = 'Hola'
+params.bar = 'mundo!'
 
-    include { SAYHELLO } from './modules.nf' addParams(foo: 'Olá')
+include { SAYHELLO } from './modules.nf' addParams(foo: 'Olá')
 
-    workflow {
-        SAYHELLO()
-    }
+workflow {
+    SAYHELLO()
+}
+```
 
 Executing the main script above should print:
 
-    Olá mundo!
+```console
+Olá mundo!
+```
 
 ## DSL2 migration notes
 
