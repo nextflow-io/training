@@ -17,11 +17,6 @@
 }
 
 /* Custom right-hand-side sidebar */
-@media screen and (max-width: 59.9375em) {
-    .sidebar_resources {
-        display: none !important;
-    }
-}
 .sidebar_resources {
     margin-top: 1rem;
 }
@@ -34,6 +29,16 @@
 }
 .sidebar_resources .md-nav__link {
     justify-content: left;
+}
+@media screen and (min-width: 59.9375em) {
+    .md-sidebar--secondary .md-sidebar__inner > nav > .md-nav__list {
+        border-left: 3px solid var(--md-default-fg-color--lightest);
+    }
+}
+@media screen and (max-width: 59.9375em) {
+    .sidebar_resources {
+        display: none !important;
+    }
 }
 
 /* Custom Footer */
