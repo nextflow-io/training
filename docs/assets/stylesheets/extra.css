@@ -35,8 +35,15 @@
 .md-typeset .md-button:focus,
 .md-typeset .md-button:active {
     padding-right: 2.4rem;
-    background-color: var(--md-primary-fg-color);
+    background-color: transparent;
     border-color: var(--md-primary-fg-color);
+    color: var(--md-primary-fg-color);
+}
+.md-typeset .md-button.md-button--primary:hover,
+.md-typeset .md-button.md-button--primary:focus,
+.md-typeset .md-button.md-button--primary:active {
+    background-color: var(--md-primary-fg-color);
+    color: var(--md-primary-bg-color);
 }
 .md-typeset .md-button:hover .twemoji,
 .md-typeset .md-button:focus .twemoji,

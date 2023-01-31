@@ -10,13 +10,25 @@ hide:
 Welcome to the Nextflow community training portal!
 Below you can find the different training courses available at this site.
 
-## Nextflow Training Workshop
+!!! exercise "Nextflow Training Workshop"
 
-[Start the Nextflow Training Workshop :material-arrow-right:](basic_training/index.md){ .md-button .md-button--primary }
+    !!! tip inline end ""
 
-## Hands on training
+        :material-lightbulb: This is the primary Nextflow training material used in most Nextflow and nf-core training events.
 
-[Launch the Hands on Training :material-arrow-right:](hands_on/index.md){ .md-button .md-button--primary }
+    Basic training for all things Nextflow. Perfect for anyone looking to get to grips with using Nextflow to run analyses and build pipelines.
+
+    [Start the Nextflow Training Workshop :material-arrow-right:](basic_training/index.md){ .md-button .md-button--primary }
+
+!!! exercise "Hands on training"
+
+    !!! quote inline end ""
+
+        :material-alert: This material is not taught / updated as frequently as the other courses.
+
+    A "learn by doing" tutorial with less focus on theory, instead leading through exercises of slowly increasing complexity.
+
+    [Launch the Hands on Training :material-arrow-right:](hands_on/index.md){ .md-button }
 
 ## Credits and contributions
 
