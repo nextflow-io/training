@@ -107,7 +107,10 @@ markdown_extensions:
           permalink: true
 plugins:
     - search
-    - social
+    - social:
+          cards_color:
+              fill: "#27AE60"
+              text: "#FFFFFF"
     - enumerate-headings:
           # Requires: https://github.com/timvink/mkdocs-enumerate-headings-plugin/pull/33
           # restart_increment_after:
