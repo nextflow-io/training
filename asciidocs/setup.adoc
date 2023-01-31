@@ -128,7 +128,7 @@ This should come up with the Nextflow version and runtime information:
 === Gitpod resources
 
 - Gitpod gives you 50 hours of free environment runtime per month using the standard workspace (up to 4 cores, 8 GB RAM and 30GB storage).
-- The large workspace option gives you up to 8 cores, 16GB RAM, 50GB storage for each workspace (up to 4 parallel workspaces in the free version). Using these machines use your credits faster so it won't be 50 hours/month.
+- The large workspace option gives you up to 8 cores, 16GB RAM, and 50GB storage for each workspace (up to 4 parallel workspaces in the free version). It's important to mention that this option uses more free credits so your account will have less than 50h/month.
 - Gitpod will time out after 30 minutes. However, changes are saved for up to 2 weeks (see the next section for reopening a timed out session).
 
 See https://www.gitpod.io[gitpod.io] for more details.
