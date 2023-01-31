@@ -549,7 +549,7 @@ Contrary to other registries that will pull the latest image when no tag (versio
 
         ```groovy
         process FASTQC {
-            container = 'biocontainers/fastqc:v0.11.5'
+            container 'biocontainers/fastqc:v0.11.5'
             tag "FASTQC on $sample_id"
         ...
         ```
@@ -559,7 +559,7 @@ Contrary to other registries that will pull the latest image when no tag (versio
         ```groovy
         process QUANTIFICATION {
             tag "Salmon on $sample_id"
-            container = 'quay.io/biocontainers/salmon:1.7.0--h84f40af_0'
+            container 'quay.io/biocontainers/salmon:1.7.0--h84f40af_0'
             publishDir params.outdir, mode:'copy'
         ...
         ```
