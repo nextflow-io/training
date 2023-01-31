@@ -8,11 +8,15 @@ Nextflow has built-in support for the most commonly used batch schedulers, such 
 
 A key Nextflow feature is the ability to decouple the workflow implementation from the actual execution platform. The implementation of an abstraction layer allows the deployment of the resulting workflow on any executing platform supported by the framework.
 
-![](img/nf-executors.png)
+<figure markdown>
+![Nextflow executors](img/nf-executors.png)
+</figure>
 
 To run your pipeline with a batch scheduler, modify the `nextflow.config` file specifying the target executor and the required computing resources if needed. For example:
 
-    process.executor = 'slurm'
+```groovy linenums="1"
+process.executor = 'slurm'
+```
 
 ## Managing cluster resources
 
@@ -32,7 +36,7 @@ This can be done using the following process directives:
 
 Use the scope `process` to define the resource requirements for all processes in your workflow applications. For example:
 
-```groovy
+```groovy linenums="1"
 process {
     executor = 'slurm'
     queue = 'short'
@@ -46,7 +50,7 @@ process {
 
 In real-world applications, different tasks need different amounts of computing resources. It is possible to define the resources for a specific task using the select `withName:` followed by the process name:
 
-```groovy
+```groovy linenums="1"
 process {
     executor = 'slurm'
     queue = 'short'
@@ -68,16 +72,20 @@ process {
 }
 ```
 
-Run the RNA-Seq script (script7.nf) from earlier, but specify that the `quantification` `process` requires 2 CPUs and 5 GB of memory, within the `nextflow.config` file.
+!!! exercise
 
-```groovy
-process {
-    withName: quantification {
-        cpus = 2
-        memory = '5 GB'
-    }
-}
-```
+    Run the RNA-Seq script (`script7.nf`) from earlier, but specify that the `quantification` `process` requires 2 CPUs and 5 GB of memory, within the `nextflow.config` file.
+
+    ??? result "Solution"
+
+        ```groovy
+        process {
+            withName: quantification {
+                cpus = 2
+                memory = '5 GB'
+            }
+        }
+        ```
 
 ### Configure process by labels
 
@@ -87,7 +95,7 @@ A better strategy consists of annotating the processes with a [label](https://ww
 
 The workflow script:
 
-```nextflow
+```groovy linenums="1"
 process task1 {
   label 'long'
 
@@ -107,7 +115,7 @@ process task2 {
 
 The configuration file:
 
-```groovy
+```groovy linenums="1"
 process {
     executor = 'slurm'
 
@@ -129,7 +137,7 @@ process {
 
 Containers can be set for each process in your workflow. You can define their containers in a config file as shown below:
 
-```groovy
+```groovy linenums="1"
 process {
   withName: foo {
     container = 'some/image:x'
@@ -154,7 +162,7 @@ Configuration files can contain the definition of one or more _profiles_. A prof
 
 Configuration profiles are defined by using the special scope `profiles` which group the attributes that belong to the same profile using a common prefix. For example:
 
-```groovy
+```groovy linenums="1"
 profiles {
 
     standard {
@@ -184,7 +192,9 @@ This configuration defines three different profiles: `standard`, `cluster` and `
 
 To enable a specific profile use `-profile` option followed by the profile name:
 
-    nextflow run <your script> -profile cluster
+```bash
+nextflow run <your script> -profile cluster
+```
 
 !!! tip
 
@@ -202,21 +212,25 @@ Nextflow provides built-in support for AWS Batch which allows the seamless deplo
 
 Once the Batch environment is configured, specify the instance types to be used and the max number of CPUs to be allocated, you need to create a Nextflow configuration file like the one shown below:
 
-```groovy
-process.executor = 'awsbatch'                          //
-process.queue = 'nextflow-ci'                          //
-process.container = 'nextflow/rnaseq-nf:latest'        //
-workDir = 's3://nextflow-ci/work/'                     //
-aws.region = 'eu-west-1'                               //
-aws.batch.cliPath = '/home/ec2-user/miniconda/bin/aws' //
+!!! info ""
+
+    Click the :material-plus-circle: icons in the code for explanations.
+
+```groovy linenums="1"
+process.executor = 'awsbatch' // (1)!
+process.queue = 'nextflow-ci' // (2)!
+process.container = 'nextflow/rnaseq-nf:latest' // (3)!
+workDir = 's3://nextflow-ci/work/' // (4)!
+aws.region = 'eu-west-1' // (5)!
+aws.batch.cliPath = '/home/ec2-user/miniconda/bin/aws' // (6)!
 ```
 
--   Set AWS Batch as the executor to run the processes in the workflow
--   The name of the computing queue defined in the Batch environment
--   The Docker container image to be used to run each job
--   The workflow work directory must be a AWS S3 bucket
--   The AWS region to be used
--   The path of the AWS cli tool required to download/upload files to/from the container
+1. Set AWS Batch as the executor to run the processes in the workflow
+2. The name of the computing queue defined in the Batch environment
+3. The Docker container image to be used to run each job
+4. The workflow work directory must be a AWS S3 bucket
+5. The AWS region to be used
+6. The path of the AWS cli tool required to download/upload files to/from the container
 
 !!! tip
 
@@ -283,11 +297,13 @@ Since Nextflow requires the AWS CLI tool to be accessible in the computing envir
 
 The following snippet shows how to install AWS CLI with Miniconda:
 
-    sudo yum install -y bzip2 wget
-    wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
-    bash Miniconda3-latest-Linux-x86_64.sh -b -f -p $HOME/miniconda
-    $HOME/miniconda/bin/conda install -c conda-forge -y awscli
-    rm Miniconda3-latest-Linux-x86_64.sh
+```bash linenums="1"
+sudo yum install -y bzip2 wget
+wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
+bash Miniconda3-latest-Linux-x86_64.sh -b -f -p $HOME/miniconda
+$HOME/miniconda/bin/conda install -c conda-forge -y awscli
+rm Miniconda3-latest-Linux-x86_64.sh
+```
 
 !!! note
 
@@ -305,7 +321,7 @@ An alternative approach to is to create a custom AMI using a [Launch template](h
 
 In the EC2 dashboard, create a Launch template specifying the user data field:
 
-```bash
+```bash linenums="1"
 MIME-Version: 1.0
 Content-Type: multipart/mixed; boundary="//"
 
@@ -340,33 +356,27 @@ To enable this feature use one or more [process selectors](https://www.nextflow.
 
 For example, apply the [AWS Batch configuration](https://www.nextflow.io/docs/latest/awscloud.html#awscloud-batch-config) only to a subset of processes in your workflow. You can try the following:
 
-```groovy
+```groovy linenums="1"
 process {
-    executor = 'slurm'  //
-    queue = 'short'     //
+    executor = 'slurm' // (1)!
+    queue = 'short' // (2)!
 
-    withLabel: bigTask {          //
-      executor = 'awsbatch'       //
-      queue = 'my-batch-queue'    //
-      container = 'my/image:tag'  //
-  }
+    withLabel: bigTask {  // (3)!
+        executor = 'awsbatch' // (4)!
+        queue = 'my-batch-queue' // (5)!
+        container = 'my/image:tag' // (6)!
+    }
 }
 
 aws {
-    region = 'eu-west-1'    //
+    region = 'eu-west-1' // (7)!
 }
 ```
 
--   Set `slurm` as the default executor
-
--   Set the queue for the SLURM cluster
-
--   Setting of a process named `bigTask`
-
--   Set `awsbatch` as the executor for the `bigTask` process
-
--   Set the queue for the `bigTask` process
-
--   Set the container image to deploy for the `bigTask` process
-
--   Define the region for Batch execution
+1. Set `slurm` as the default executor
+2. Set the queue for the SLURM cluster
+3. Setting of a process named `bigTask`
+4. Set `awsbatch` as the executor for the `bigTask` process
+5. Set the queue for the `bigTask` process
+6. Set the container image to deploy for the `bigTask` process
+7. Define the region for Batch execution
