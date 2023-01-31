@@ -125,8 +125,8 @@ Encoding: UTF-8 (UTF-8)
 
 ### Gitpod resources
 
--   Gitpod gives you 50 hours of free environment runtime per month.
--   It includes up to 16 CPUs and 30GB of workspace.
+-   Gitpod gives you 500 free credits per month, which is equivalent to 50 hours of free environment runtime using the standard workspace (up to 4 cores, 8 GB RAM and 30GB storage).
+-   There is also a large workspace option that gives you up to 8 cores, 16GB RAM, and 50GB storage for each workspace (up to 4 parallel workspaces in the free version). However, the large workspace uses your free credits quicker so your account will have fewer hours of access to this space.
 -   Gitpod will time out after 30 minutes. However, changes are saved for up to 2 weeks (see the next section for reopening a timed out session).
 
 See [gitpod.io](https://www.gitpod.io) for more details.
