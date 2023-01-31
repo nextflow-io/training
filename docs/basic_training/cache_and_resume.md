@@ -10,7 +10,7 @@ The task unique ID is generated as a 128-bit hash number composing the task inpu
 
 The pipeline work directory is organized as shown below:
 
-```
+```txt
 work/
 ├── 12
 │   └── 1adacb582d2198cd32db0e6f808bce
@@ -47,13 +47,17 @@ work/
 │       └── index -> /data/../asciidocs/day2/work/12/1adacb582d2198cd32db0e6f808bce/index
 ```
 
-You can create these plots using the `tree` function if you have it installed. On unix, simply `sudo apt install -y tree` or with Homebrew: `brew install tree`
+!!! info
+
+    You can create these plots using the `tree` function if you have it installed. On unix, simply `sudo apt install -y tree` or with Homebrew: `brew install tree`
 
 ## How resume works
 
 The `-resume` command-line option allows the continuation of a pipeline execution from the last step that was completed successfully:
 
-    nextflow run <script> -resume
+```bash
+nextflow run <script> -resume
+```
 
 In practical terms, the pipeline is executed from the beginning. However, before launching the execution of a `process`, Nextflow uses the task unique ID to check if the work directory already exists and that it contains a valid command exit state with the expected output files.
 
@@ -65,15 +69,23 @@ The first task for which a new output is computed invalidates all downstream exe
 
 The task work directories are created in the folder `work` in the launching path by default. This is supposed to be a **scratch** storage area that can be cleaned up once the computation is completed.
 
-Workflow final output(s) are supposed to be stored in a different location specified using one or more [publishDir](https://www.nextflow.io/docs/latest/process.html#publishdir) directive.
+!!! note
 
-Make sure to delete your work directory occasionally, else your machine/environment may be filled with unused files.
+    Workflow final output(s) are supposed to be stored in a different location specified using one or more [publishDir](https://www.nextflow.io/docs/latest/process.html#publishdir) directive.
+
+!!! warning
+
+    Make sure to delete your work directory occasionally, else your machine/environment may be filled with unused files.
 
 A different location for the execution work directory can be specified using the command line option `-w`. For example:
 
-    nextflow run <script> -w /some/scratch/dir
+```bash
+nextflow run <script> -w /some/scratch/dir
+```
 
-If you delete or move the pipeline work directory, it will prevent the use of the resume feature in subsequent runs.
+!!! warning
+
+    If you delete or move the pipeline work directory, it will prevent the use of the resume feature in subsequent runs.
 
 The hash code for input files is computed using:
 
@@ -83,11 +95,13 @@ The hash code for input files is computed using:
 
 Therefore, just **touching** a file will invalidate the related task execution.
 
-## How to organize in silico experiments
+## How to organize _in-silico_ experiments
 
 It’s good practice to organize each **experiment** in its own folder. The main experiment input parameters should be specified using a Nextflow config file. This makes it simple to track and replicate an experiment over time.
 
-In the same experiment, the same pipeline can be executed multiple times, however, launching two (or more) Nextflow instances in the same directory concurrently should be avoided.
+!!! note
+
+    In the same experiment, the same pipeline can be executed multiple times, however, launching two (or more) Nextflow instances in the same directory concurrently should be avoided.
 
 The `nextflow log` command lists the executions run in the current folder:
 
@@ -103,7 +117,9 @@ TIMESTAMP            DURATION  RUN NAME          STATUS  REVISION ID  SESSION ID
 
 You can use either the **session ID** or the **run name** to recover a specific execution. For example:
 
-    nextflow run rnaseq-nf -resume mighty_boyd
+```bash
+nextflow run rnaseq-nf -resume mighty_boyd
+```
 
 ## Execution provenance
 
@@ -171,34 +187,38 @@ Finally, the `-t` option enables the creation of a basic custom provenance repor
 </div>
 ```
 
-Save the above snippet in a file named `template.html`. Then run this command (using the correct id for your run, e.g. not `tiny_fermat`):
+!!! exercise
 
+    Save the above snippet in a file named `template.html`. Then run this command (using the correct id for your run, e.g. not `tiny_fermat`):
+
+    ```bash
     nextflow log tiny_fermat -t template.html > prov.html
+    ```
 
-Finally, open the `prov.html` file with a browser.
+    Finally, open the `prov.html` file with a browser.
 
 ## Resume troubleshooting
 
 If your workflow execution is not resumed as expected with one or more tasks being unexpectedly re-executed each time, these may be the most likely causes:
 
-### Input file changed
+#### Input file changed
 
 Make sure that there’s no change in your input file(s). Don’t forget the task unique hash is computed by taking into account the complete file path, the last modified timestamp and the file size. If any of this information has changed, the workflow will be re-executed even if the input content is the same.
 
-### A process modifies an input
+#### A process modifies an input
 
 A process should never alter input files, otherwise the `resume` for future executions will be invalidated for the same reason explained in the previous point.
 
-### Inconsistent file attributes
+#### Inconsistent file attributes
 
 Some shared file systems, such as [NFS](https://en.wikipedia.org/wiki/Network_File_System), may report an inconsistent file timestamp (i.e. a different timestamp for the same file) even if it has not been modified. To prevent this problem use the [lenient cache strategy](https://www.nextflow.io/docs/latest/process.html#cache).
 
-### Race condition in global variable
+#### Race condition in global variable
 
 Nextflow is designed to simplify parallel programming without taking care about race conditions and the access to shared resources. One of the few cases in which a race condition can arise is when using a global variable with two (or more) operators.
 For example:
 
-```groovy
+```groovy linenums="1"
 Channel
     .of(1,2,3)
     .map { it -> X=it; X+=2 }
@@ -214,7 +234,7 @@ The problem in this snippet is that the `X` variable in the closure definition i
 
 The correct implementation requires the use of the `def` keyword to declare the variable **local**.
 
-```groovy
+```groovy linenums="1"
 Channel
     .of(1,2,3)
     .map { it -> def X=it; X+=2 }
@@ -226,13 +246,13 @@ Channel
     .println { "ch2 = $it" }
 ```
 
-### Not deterministic input channels
+#### Non-deterministic input channels
 
 While dataflow channel ordering is guaranteed (i.e. data is read in the same order in which it’s written in the channel), a process can declare as input two or more channels each of which is the output of a **different** process, the overall input ordering is not consistent over different executions.
 
 In practical terms, consider the following snippet:
 
-```groovy
+```groovy linenums="1"
 process foo {
     input:
     tuple val(pair), path(reads)
