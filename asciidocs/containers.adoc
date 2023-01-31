@@ -617,7 +617,7 @@ with the following container directives for each process:
 [source,nextflow,linenums]
 ----
 process FASTQC {
-    container = 'biocontainers/fastqc:v0.11.5'
+    container 'biocontainers/fastqc:v0.11.5'
     tag "FASTQC on $sample_id"
 ...
 ----
@@ -628,7 +628,7 @@ and
 ----
 process QUANTIFICATION {
     tag "Salmon on $sample_id"
-    container = 'quay.io/biocontainers/salmon:1.7.0--h84f40af_0'
+    container 'quay.io/biocontainers/salmon:1.7.0--h84f40af_0'
     publishDir params.outdir, mode:'copy'
 ...
 ----
