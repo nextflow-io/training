@@ -9,6 +9,41 @@
     --md-code-hl-comment-color: var(--md-default-fg-color--lighter);
 }
 
+/* Homepage Seqera-style buttons */
+
+.md-typeset .md-button {
+    border-radius: 2rem;
+    transition: padding 0.2s;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+.md-typeset .md-button .twemoji {
+    height: 1.15rem;
+    position: absolute;
+    right: 0.5rem;
+    top: 25%;
+    opacity: 0;
+}
+.md-typeset .md-button svg {
+    transition: opacity 0.1s;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 1;
+    height: 1.15rem;
+    width: 1.15rem;
+}
+.md-typeset .md-button:hover,
+.md-typeset .md-button:focus,
+.md-typeset .md-button:active {
+    padding-right: 2.4rem;
+    background-color: var(--md-primary-fg-color);
+    border-color: var(--md-primary-fg-color);
+}
+.md-typeset .md-button:hover .twemoji,
+.md-typeset .md-button:focus .twemoji,
+.md-typeset .md-button:active .twemoji {
+    opacity: 1;
+}
+
 /* Homepage logos */
 .homepage_logos img {
     height: 2rem;
@@ -18,7 +53,7 @@
 
 /* Custom right-hand-side sidebar */
 .sidebar_resources {
-    margin-top: 1rem;
+    margin-top: 2rem;
 }
 .sidebar_resources svg {
     fill: currentcolor;

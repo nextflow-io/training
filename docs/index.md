@@ -12,11 +12,11 @@ Below you can find the different training courses available at this site.
 
 ## Nextflow Training Workshop
 
-[Start the Nextflow Training Workshop :fontawesome-solid-child-reaching:](basic_training/index.md){ .md-button .md-button--primary }
+[Start the Nextflow Training Workshop :material-arrow-right:](basic_training/index.md){ .md-button .md-button--primary }
 
 ## Hands on training
 
-[Launch the Hands on Training :material-rocket-launch:](hands_on/index.md){ .md-button .md-button--primary }
+[Launch the Hands on Training :material-arrow-right:](hands_on/index.md){ .md-button .md-button--primary }
 
 ## Credits and contributions
 
