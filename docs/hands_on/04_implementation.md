@@ -7,122 +7,114 @@ A first step in any pipeline is to prepare the input data. You will find all the
 There are four data inputs that we will use in this tutorial:
 
 1. **Genome File** (`data/genome.fa`)
-
     - Human chromosome 22 in FASTA file format
-
 2. **Read Files** (`data/reads/`)
-
     - Sample ENCSR000COQ1: 76bp paired-end reads (`ENCSR000COQ1_1.fq.gz` and `ENCSR000COQ1_2.fq.gz`).
-
 3. **Variants File** (`data/known_variants.vcf.gz`)
-
     - Known variants, gzipped as a Variant Calling File (VCF) format.
-
 4. **Blacklist File** (`data/blacklist.bed`)
-
     - Genomic locations which are known to produce artifacts and spurious variants in Browser Extensible Data (BED) format.
-
-**\***
 
 ## Input parameters
 
 We can begin writing the pipeline by creating and editing a text file called `main.nf` from the `$HOME/nf-course/hands-on` repository directory with your favourite text editor. In this example we are using `nano`:
 
-```cmd
+```bash
 cd $HOME/nf-course/hands-on
 nano main.nf
 ```
 
 Edit this file to specify the input files as script parameters. Using this notation allows you to override them by specifying different values when launching the pipeline execution.
 
-```nextflow
+!!! info
+
+    Click the :material-plus-circle: icons in the code for explanations.
+
+```groovy linenums="1"
 /*
- * Define the default parameters
+ * Define the default parameters (1)
  */
 
-params.genome     = "$baseDir/data/genome.fa"
+params.genome     = "$baseDir/data/genome.fa" // (2)!
 params.variants   = "$baseDir/data/known_variants.vcf.gz"
 params.blacklist  = "$baseDir/data/blacklist.bed"
-params.reads      = "$baseDir/data/reads/ENCSR000COQ1_{1,2}.fastq.gz"
-params.results    = "results"
-params.gatk       = "/opt/broad/GenomeAnalysisTK.jar"
+params.reads      = "$baseDir/data/reads/ENCSR000COQ1_{1,2}.fastq.gz" // (3)!
+params.results    = "results" // (4)!
+params.gatk       = "/opt/broad/GenomeAnalysisTK.jar" // (5)!
 ```
 
-<div class="tip">
+1. The `/*`, `*` and `*/` specify comment lines which are ignored by Nextflow.
+2. The `baseDir` variable represents the main script path location.
+3. The `reads` parameter uses a glob pattern to specify the forward (`ENCSR000COQ1_1.fq.gz`) and reverse (`ENCSR000COQ1_2.fq.gz`) reads are pairs of the same sample.
+4. The `results` parameter is used to specify a directory called `results`.
+5. The `gatk` parameter specifies the location of the GATK jar file.
 
-You can copy the above text by using the kbd:\[Cmd+C\] keys, then move in the terminal window, open `nano` and paste the above text by using the kbd:\[Cmd+V\] keys shortcut.
+!!! tip
 
-</div>
-
--   The `/\*`, `*` and `*/` specify comment lines which are ignored by Nextflow.
-
--   The `baseDir` variable represents the main script path location.
-
--   The `reads` parameter uses a glob pattern to specify the forward (`ENCSR000COQ1_1.fq.gz`) and reverse (`ENCSR000COQ1_2.fq.gz`) reads are pairs of the same sample.
-
--   The `results` parameter is used to specify a directory called `results`.
-
--   The `gatk` parameter specifies the location of the GATK jar file.
+    You can copy the above text (:material-content-copy: top right or ++cmd+c++), then move in the terminal window, open `nano` and paste using the keyboard ++cmd+v++ shortcut.
 
 Once you have the default parameters in the `main.nf` file, you can save and run the main script for the first time.
 
-<div class="tip">
+!!! tip
 
-With `nano` you can save and close the file with kbd:\[Ctrl+O\], then kbd:\[Enter\], followed by kbd:\[Ctrl+X\].
-
-</div>
+    With `nano` you can save and close the file with ++ctrl+o++, then ++enter++, followed by ++ctrl+x++.
 
 To run the main script use the following command:
 
-```cmd
+```bash
 nextflow run main.nf
 ```
 
 You should see the script execute, print Nextflow version and pipeline revision and then exit.
 
-    N E X T F L O W  ~  version 20.10.0
-    Launching `main.nf` [lethal_faggin] - revision: 4c9a5c830c
-
-**\*** === Problem \#1 Great, now we need to define a [channel](https://www.nextflow.io/docs/latest/channel.html) variable to handle the read-pair files. To do that open the `main.nf` file and copy the lines below at the end of the file.
-
-<div class="tip">
-
-In `nano` you can move to the end of the file using kbd:\[Ctrl+W\] and then kbd:\[Ctrl+V\].
-
-</div>
-
-This time you must fill the `BLANK` space with the correct function and parameter.
-
-```nextflow
-/*
- *  Parse the input parameters
- */
-
-reads_ch        = BLANK
-GATK            = params.gatk
+```console
+N E X T F L O W  ~  version 20.10.0
+Launching `main.nf` [lethal_faggin] - revision: 4c9a5c830c
 ```
 
-<div class="tip">
+!!! exercise "Problem #1"
 
-Use the [fromFilePairs](https://www.nextflow.io/docs/latest/channel.html#fromfilepairs) channel factory method. The second one, declares a variable named `GATK` specifying the path of the GATK application file.
+    Great, now we need to define a [channel](https://www.nextflow.io/docs/latest/channel.html) variable to handle the read-pair files. To do that open the `main.nf` file and copy the lines below at the end of the file.
 
-</div>
+    !!! tip
 
-Once you think you have data organised, you can again run the pipeline. However this time, we can use the the `-resume` flag.
+        In `nano` you can move to the end of the file using ++ctrl+w++ and then ++ctrl+v++.
 
-```cmd
-nextflow run main.nf -resume
-```
+    This time you must fill the `BLANK` space with the correct function and parameter.
 
-<div class="tip">
+    ```groovy linenums="1" hl_lines="5"
+    /*
+     *  Parse the input parameters
+     */
 
-See [here](https://www.nextflow.io/docs/latest/getstarted.html?highlight=resume#modify-and-resume) for more details about using the `resume` option.
+    reads_ch        = BLANK
+    GATK            = params.gatk
+    ```
 
-</div>
+    !!! tip
 
-[Solution](solutions/anxious_advice.md)
+        Use the [fromFilePairs](https://www.nextflow.io/docs/latest/channel.html#fromfilepairs) channel factory method. The second one, declares a variable named `GATK` specifying the path of the GATK application file.
 
-**\***
+    Once you think you have data organised, you can again run the pipeline. However this time, we can use the the `-resume` flag.
+
+    ```bash
+    nextflow run main.nf -resume
+    ```
+
+    !!! tip
+
+        See [here](https://www.nextflow.io/docs/latest/getstarted.html?highlight=resume#modify-and-resume) for more details about using the `resume` option.
+
+    ??? result "Solution"
+
+
+        ```groovy linenums="1" hl_lines="1"
+        reads_ch        =  Channel.fromFilePairs(params.reads) // (1)!
+        GATK            =  params.gatk // (2)!
+        ```
+
+        1. Create a channel using [fromFilePairs()](https://www.nextflow.io/docs/latest/channel.html#fromfilepairs).
+        2. A variable representing the path of GATK application file.
 
 ## Process 1A
 
@@ -130,186 +122,234 @@ Now we have our inputs set up we can move onto the processes. In our first proce
 
 You should implement a process having the following structure:
 
-Name
-1A_prepare_genome_samtools
+-   **Name**: `1A_prepare_genome_samtools`
+-   **Command**: create a genome index for the genome fasta with samtools
+-   **Input**: the genome fasta file
+-   **Output**: the samtools genome index file
 
-Command
-create a genome index for the genome fasta with samtools
+!!! exercise "Problem #2"
 
-Input
-the genome fasta file
+    Copy the code below and paste it at the end of `main.nf`.
 
-Output
-the samtools genome index file
+    Your aim is to replace `BLANK` placeholder with the the correct variable name of the genome file that you have defined in previous problem.
 
-## Problem \#2
+    ```groovy linenums="1" hl_lines="8"
+    /*
+     * Process 1A: Create a FASTA genome index with samtools
+     */
 
-Copy the code below and paste it at the end of `main.nf`.
+    process '1A_prepare_genome_samtools' {
 
-Your aim is to replace `BLANK` placeholder with the the correct variable name of the genome file that you have defined in previous problem.
+        input:
+        path genome from BLANK
 
-```nextflow
-/*
- * Process 1A: Create a FASTA genome index with samtools
- */
+        output:
+        path "${genome}.fai" into genome_index_ch
 
-process '1A_prepare_genome_samtools' {
+        script:
+        """
+        samtools faidx ${genome}
+        """
+    }
+    ```
 
-  input:
-    path genome from BLANK
+    In plain english, the process could be written as:
 
-  output:
-    path "${genome}.fai" into genome_index_ch
+    -   A **process** called `1A_prepare_genome_samtools`
+    -   takes as **input** the genome file from `BLANK`
+    -   and creates as **output** a genome index file which goes into channel `genome_index_ch`
+    -   **script**: using samtools create the genome index from the genome file
 
-  script:
-  """
-  samtools faidx ${genome}
-  """
-}
-```
+    Now when we run the pipeline, we see that the process 1A is submitted:
 
-In plain english, the process could be written as:
-
--   A **process** called 1A_prepare_genome_samtools
-
--   takes as **input** the genome file from `BLANK`
-
--   and creates as **output** a genome index file which goes into channel `genome_index_ch`
-
--   **script**: using samtools create the genome index from the genome file
-
-Now when we run the pipeline, we see that the process 1A is submitted:
-
-```cmd
-nextflow run main.nf -resume
-```
-
+    ```bash
+    nextflow run main.nf -resume
+    ```
+    ```console
     N E X T F L O W  ~  version 20.10.0
     Launching `main.nf` [cranky_bose] - revision: d1df5b7267
     executor >  local (1)
     [cd/47f882] process > 1A_prepare_genome_samtools [100%] 1 of 1 ✔
+    ```
 
-[Solution](solutions/busy_building.md)
+    ??? result "Solution"
 
-**\*** == Process 1B
+        ```groovy linenums="1" hl_lines="8"
+        /*
+         * Process 1A: Create a FASTA genome index with samtools
+         */
+
+        process '1A_prepare_genome_samtools' {
+
+            input:
+            path genome from params.genome
+
+            output:
+            path "${genome}.fai" into genome_index_ch
+
+            script:
+            """
+            samtools faidx ${genome}
+            """
+        }
+        ```
+
+        - The solution is to use the **`params.genome`** parameter defined at the beginning of the script.
+
+## Process 1B
 
 Our first process created the genome index for GATK using samtools. For the next process we must do something very similar, this time creating a genome sequence dictionary using [Picard](https://broadinstitute.github.io/picard/).
 
 You should implement a process having the following structure:
 
-Name
-1B_prepare_genome_picard
+-   **Name**: `1B_prepare_genome_picard`
+-   **Command**: create a genome dictionary for the genome fasta with Picard tools
+-   **Input**: the genome fasta file
+-   **Output**: the genome dictionary file
 
-Command
-create a genome dictionary for the genome fasta with Picard tools
+!!! exercise "Problem #3"
 
-Input
-the genome fasta file
+    Fill in the `BLANK` words for both the input and output sections.
 
-Output
-the genome dictionary file
+    Copy the code below and paste it at the end of `main.nf`.
 
-## Problem \#3
+    Your aim is to insert the correct input name from into the input step (written as `BLANK`) of the process and run the pipeline.
 
-Fill in the `BLANK` words for both the input and output sections.
+    !!! info
 
-Copy the code below and paste it at the end of `main.nf`.
+        You can choose any channel output name that makes sense to you.
 
-Your aim is to insert the correct input name from into the input step (written as `BLANK`) of the process and run the pipeline.
+    ```groovy linenums="1" hl_lines="8 11"
+    /*
+     * Process 1B: Create a FASTA genome sequence dictionary with Picard for GATK
+     */
 
-<div class="tip">
+    process '1B_prepare_genome_picard' {
 
-You can choose any channel output name that makes sense to you.
+        input:
+        path genome BLANK BLANK
 
-</div>
+        output:
+        path "${genome.baseName}.dict" BLANK BLANK
 
-```nextflow
-/*
- * Process 1B: Create a FASTA genome sequence dictionary with Picard for GATK
- */
+        script:
+        """
+        PICARD=`which picard.jar`
+        java -jar \$PICARD CreateSequenceDictionary R= $genome O= ${genome.baseName}.dict
+        """
+    }
+    ```
 
-process '1B_prepare_genome_picard' {
+    !!! note
 
-  input:
-    path genome BLANK BLANK
+        `.baseName` returns the filename without the file suffix. If `"${genome}"` is `human.fa`, then `"${genome.baseName}.dict"` would be `human.dict`.
 
-  output:
-    path "${genome.baseName}.dict" BLANK BLANK
+    ??? result "Solution"
 
-  script:
-  """
-  PICARD=`which picard.jar`
-  java -jar \$PICARD CreateSequenceDictionary R= $genome O= ${genome.baseName}.dict
-  """
-}
-```
+        ```groovy linenums="1" hl_lines="8 11"
+        /*
+         * Process 1B: Create a FASTA genome sequence dictionary with Picard for GATK
+         */
 
-<div class="note">
+        process '1B_prepare_genome_picard' {
 
-`.baseName` returns the filename without the file suffix. If `"${genome}"` is `human.fa`, then `"${genome.baseName}.dict"` would be `human.dict`.
+            input:
+            path genome from params.genome
 
-</div>
+            output:
+            path "${genome.baseName}.dict" into genome_dict_ch
 
-[Solution](solutions/cooing_clock.md)
+            script:
+            """
+            PICARD=`which picard.jar`
+            java -jar \$PICARD CreateSequenceDictionary R= $genome O= ${genome.baseName}.dict
+            """
+        }
+        ```
 
-**\***
+        - Take as input the `genome` file from the `params.genome` parameter
+        - Give as output the file `${genome.baseName}.dict` and adds it to the channel `genome_dict_ch`
 
 ## Process 1C
+
+**Create STAR genome index file**
 
 Next we must create a genome index for the [STAR](https://github.com/alexdobin/STAR) mapping software.
 
 You should implement a process having the following structure:
 
-Name
-1C_prepare_star_genome_index
+-   **Name**: 1C_prepare_star_genome_index
+-   **Command**: create a STAR genome index for the genome fasta
+-   **Input**: the genome fasta file
+-   **Output**: a directory containing the STAR genome index
 
-Command
-create a STAR genome index for the genome fasta
+!!! exercise "Problem #4"
 
-Input
-the genome fasta file
+    This is a similar exercise as problem 3, except this time both `input` and `output` lines have been left `BLANK` and must be completed.
 
-Output
-a directory containing the STAR genome index
+    ```groovy linenums="1" hl_lines="8 11"
+    /*
+     * Process 1C: Create the genome index file for STAR
+     */
 
-## Problem \#4
+    process '1C_prepare_star_genome_index' {
 
-This is a similar exercise as problem 3, except this time both `input` and `output` lines have been left `BLANK` and must be completed.
+        input:
+        BLANK_LINE
 
-```nextflow
-/*
- * Process 1C: Create the genome index file for STAR
- */
+        output:
+        BLANK_LINE
 
-process '1C_prepare_star_genome_index' {
+        script:
+        """
+        mkdir genome_dir
 
-  input:
-      BLANK_LINE
+        STAR --runMode genomeGenerate \
+            --genomeDir genome_dir \
+            --genomeFastaFiles ${genome} \
+            --runThreadN ${task.cpus}
+        """
+    }
+    ```
 
-  output:
-      BLANK_LINE
+    !!! info
 
-  script:
-  """
-  mkdir genome_dir
+        The output of the STAR genomeGenerate command is specified here as `genome_dir`.
 
-  STAR --runMode genomeGenerate \
-       --genomeDir genome_dir \
-       --genomeFastaFiles ${genome} \
-       --runThreadN ${task.cpus}
-  """
-}
-```
+    ??? result "Solution"
 
-<div class="tip">
+        ```groovy linenums="1" hl_lines="8 11"
+        /*
+        * Process 1C: Create the genome index file for STAR
+        */
 
-The output of the STAR genomeGenerate command is specified here as `genome_dir`.
+        process '1C_prepare_star_genome_index' {
 
-</div>
+            input:
+            path genome from params.genome
 
-[Solution](solutions/discreet_direction.md)
+            output:
+            path 'genome_dir' into genome_dir_ch
 
-**\***
+            script:
+            """
+            mkdir genome_dir
+
+            STAR --runMode genomeGenerate \
+            --genomeDir genome_dir \
+            --genomeFastaFiles ${genome} \
+            --runThreadN ${task.cpus}
+            """
+        }
+        ```
+
+        - Take as input the `genome` file from the `params.genome` parameter.
+        - The `output` is a `file`\* called `genome_dir` and is added `into` a channel called `genome_dir_ch`. You can call the channel whatever you wish.
+        - Creates the output directory that will contain the resulting STAR genome index.
+
+        !!! note
+
+            The file in this case is a directory however it makes no difference.
 
 ## Process 1D
 
@@ -317,76 +357,111 @@ Next on to something a little more tricky. The next process takes two inputs: th
 
 It should output a channel named `prepared_vcf_ch` which emitting a tuple of two files.
 
-<div class="note">
+!!! info
 
-In Nextflow, tuples can be defined in the input or output using the [`tuple`](https://www.nextflow.io/docs/latest/process.html#input-of-type-tuple) qualifier.
-
-</div>
+    In Nextflow, tuples can be defined in the input or output using the [`tuple`](https://www.nextflow.io/docs/latest/process.html#input-of-type-tuple) qualifier.
 
 You should implement a process having the following structure:
 
-Name
-1D_prepare_vcf_file
+-   **Name**
+    -   `1D_prepare_vcf_file`
+-   **Command**
+    -   create a filtered and recoded set of variants
+-   **Input**
+    -   the variants file
+    -   the blacklisted regions file
+-   **Output**
+    -   a tuple containing the filtered/recoded VCF file and the tab index (TBI) file.
 
-Command
-create a filtered and recoded set of variants
+!!! exercise "Problem #5"
 
-Input
-the variants file
-the blacklisted regions file
+    You must fill in the two `BLANK_LINES` in the input and the two `BLANK` output files.
 
-Output
-a tuple containing the filtered/recoded VCF file and the tab index (TBI) file.
+    ```groovy linenums="1" hl_lines="8-9 12"
+    /*
+     * Process 1D: Create a file containing the filtered and recoded set of variants
+     */
 
-## Problem \#5
+    process '1D_prepare_vcf_file' {
 
-You must fill in the two `BLANK_LINES` in the input and the two `BLANK` output files.
+        input:
+        BLANK_LINE
+        BLANK_LINE
 
-```nextflow
-/*
- * Process 1D: Create a file containing the filtered and recoded set of variants
- */
+        output:
+        tuple BLANK, BLANK into prepared_vcf_ch
 
-process '1D_prepare_vcf_file' {
+        script:
+        """
+        vcftools --gzvcf $variantsFile -c \ #
+                 --exclude-bed ${blacklisted} \
+                 --recode | bgzip -c \
+                 > ${variantsFile.baseName}.filtered.recode.vcf.gz
 
-  input:
-      BLANK_LINE
-      BLANK_LINE
+        tabix ${variantsFile.baseName}.filtered.recode.vcf.gz
+        """
+    }
+    ```
 
-  output:
-      tuple BLANK, BLANK into prepared_vcf_ch
 
-  script:
-  """
-  vcftools --gzvcf $variantsFile -c \//
-           --exclude-bed ${blacklisted} \//
-           --recode | bgzip -c \
-           > ${variantsFile.baseName}.filtered.recode.vcf.gz
+    Broken down, here is what the script is doing:
 
-  tabix ${variantsFile.baseName}.filtered.recode.vcf.gz
-  """
-}
-```
+    ```bash
+    vcftools --gzvcf $variantsFile -c \ # (1)!
+             --exclude-bed ${blacklisted} \ # (2)!
+             --recode | bgzip -c \
+             > ${variantsFile.baseName}.filtered.recode.vcf.gz # (3)!
 
--   The input variable for the variants file
+    tabix ${variantsFile.baseName}.filtered.recode.vcf.gz # (4)!
+    ```
 
--   The input variable for the blacklist file
+    1.   The input variable for the variants file
+    2.   The input variable for the blacklist file
+    3.   The first of the two output files
+    4.   Generates the second output file named `"${variantsFile.baseName}.filtered.recode.vcf.gz.tbi"`
 
--   The first of the two output files
+    Try run the pipeline from the project directory with:
 
--   Generates the second output file named `"${variantsFile.baseName}.filtered.recode.vcf.gz.tbi"`
+    ```bash
+    nextflow run main.nf -resume
+    ```
 
-Try run the pipeline from the project directory with:
+    ??? result "Solution"
 
-```cmd
-nextflow run main.nf -resume
-```
+        ```groovy linenums="1" hl_lines="8-9 12-13"
+        /*
+         * Process 1D: Create a file containing the filtered and recoded set of variants
+         */
 
-[Solution](solutions/expensive_ear.md)
+        process '1D_prepare_vcf_file' {
+
+            input:
+            path variantsFile from params.variants
+            path blacklisted from params.blacklist
+
+            output:
+            tuple path("${variantsFile.baseName}.filtered.recode.vcf.gz"), \
+                  path("${variantsFile.baseName}.filtered.recode.vcf.gz.tbi") into prepared_vcf_ch
+
+            script:
+            """
+            vcftools --gzvcf $variantsFile -c \
+                    --exclude-bed ${blacklisted} \
+                    --recode | bgzip -c \
+                    > ${variantsFile.baseName}.filtered.recode.vcf.gz
+
+            tabix ${variantsFile.baseName}.filtered.recode.vcf.gz
+            """
+        }
+        ```
+
+        - Take as input the variants file, assigning the name `${variantsFile}`.
+        - Take as input the blacklisted file, assigning the name `${blacklisted}`.
+        - Out a tuple (or set) of two files into the `prepared_vcf_ch` channel.
+        - Defines the name of the first output file.
+        - Generates the second output file (with `.tbi` suffix).
 
 Congratulations! Part 1 is now complete.
-
-**\***
 
 We have all the data prepared and into channels ready for the more serious steps
 
