@@ -30,6 +30,14 @@ Below you can find the different training courses available at this site.
 
     [Launch the Hands on Training :material-arrow-right:](hands_on/index.md){ .md-button }
 
+## Resources
+
+| Reference                                                   |  Community                                                                    |
+| ----------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| [Nextflow Docs](https://nextflow.io/docs/latest/index.html) | [Nextflow Slack](https://www.nextflow.io/slack-invite.html)                   |
+| [Nextflow Homepage](https://nextflow.io/)                   | [nf-core](https://nf-co.re/)                                                  |
+| [Seqera Labs](https://seqera.io/)                           | [Training source on GitHub](https://github.com/seqeralabs/nf-training-public) |
+
 ## Credits and contributions
 
 All training material was originally written by [Seqera Labs](https://seqera.io) but has been made open-source ([CC BY-NC-ND](https://creativecommons.org/licenses/by-nc-nd/4.0/)) for the community.

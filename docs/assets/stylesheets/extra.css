@@ -132,3 +132,8 @@
     -webkit-mask-image: var(--md-admonition-icon--result);
     mask-image: var(--md-admonition-icon--result);
 }
+
+/* Bigger table font size */
+.md-typeset table:not([class]) {
+    font-size: 0.8rem;
+}

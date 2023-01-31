@@ -27,7 +27,6 @@ nav:
           - hands_on/02_workflow.md
           - hands_on/03_setup.md
           - hands_on/04_implementation.md
-    - Join Slack: https://www.nextflow.io/slack-invite.html
 
 theme:
     name: material
