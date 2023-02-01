@@ -1,5 +1,7 @@
 ---
 title: Introduction
+hide:
+    - toc
 ---
 
 # Nextflow course - Hands-on
