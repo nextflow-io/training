@@ -182,7 +182,7 @@ You should implement a process having the following structure:
         process '1A_prepare_genome_samtools' {
 
             input:
-            path genome from params.genome
+            path genome from params.genome // (1)!
 
             output:
             path "${genome}.fai" into genome_index_ch
@@ -194,7 +194,7 @@ You should implement a process having the following structure:
         }
         ```
 
-        - The solution is to use the **`params.genome`** parameter defined at the beginning of the script.
+        1. The solution is to use the **`params.genome`** parameter defined at the beginning of the script.
 
 ## Process 1B: Create a FASTA genome sequence dictionary with Picard for GATK
 
@@ -254,10 +254,10 @@ You should implement a process having the following structure:
         process '1B_prepare_genome_picard' {
 
             input:
-            path genome from params.genome
+            path genome from params.genome // (1)!
 
             output:
-            path "${genome.baseName}.dict" into genome_dict_ch
+            path "${genome.baseName}.dict" into genome_dict_ch // (2)!
 
             script:
             """
@@ -267,8 +267,8 @@ You should implement a process having the following structure:
         }
         ```
 
-        - Take as input the `genome` file from the `params.genome` parameter
-        - Give as output the file `${genome.baseName}.dict` and adds it to the channel `genome_dict_ch`
+        1. Take as input the `genome` file from the `params.genome` parameter
+        2. Give as output the file `${genome.baseName}.dict` and adds it to the channel `genome_dict_ch`
 
 ## Process 1C: Create STAR genome index file
 
@@ -324,12 +324,12 @@ You should implement a process having the following structure:
         process '1C_prepare_star_genome_index' {
 
             input:
-            path genome from params.genome
+            path genome from params.genome // (1)!
 
             output:
-            path 'genome_dir' into genome_dir_ch
+            path 'genome_dir' into genome_dir_ch // (2)!
 
-            script:
+            script: // (3)!
             """
             mkdir genome_dir
 
@@ -341,9 +341,9 @@ You should implement a process having the following structure:
         }
         ```
 
-        - Take as input the `genome` file from the `params.genome` parameter.
-        - The `output` is a `file`\* called `genome_dir` and is added `into` a channel called `genome_dir_ch`. You can call the channel whatever you wish.
-        - Creates the output directory that will contain the resulting STAR genome index.
+        1. Take as input the `genome` file from the `params.genome` parameter.
+        2. The `output` is a `file`\* called `genome_dir` and is added `into` a channel called `genome_dir_ch`. You can call the channel whatever you wish.
+        3. Creates the output directory that will contain the resulting STAR genome index.
 
         !!! note
 

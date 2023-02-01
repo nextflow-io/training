@@ -62,3 +62,11 @@ Please see the [official docs](https://squidfunk.github.io/mkdocs-material/refer
 -   Note that we have two custom admonitions: `exercise` and `result` (alias `solution`).
 -   `!!!` does a regular admonition, `???` makes it collapsed (click to expand).
 -   Intendation is important! Make sure you check the rendered site, as it's easy to make a mistake.
+
+## Annoying things
+
+There are a couple of known limitations that I haven't figured out how to get around yet
+
+### Code annotations
+
+Mkdocs Material uses `// code comments` to anchor the annotations. That's great, until you want an annotation in the middle of a large multi-line string (say, like a `script` block).
