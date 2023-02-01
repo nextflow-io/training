@@ -27,6 +27,7 @@ nav:
           - hands_on/02_workflow.md
           - hands_on/03_setup.md
           - hands_on/04_implementation.md
+    - help.md
 
 theme:
     name: material
@@ -108,6 +109,7 @@ markdown_extensions:
 plugins:
     - search
     - social:
+          cards: !ENV [CARDS, true]
           cards_color:
               fill: "#27AE60"
               text: "#FFFFFF"
@@ -117,6 +119,7 @@ plugins:
           #    - hands_on/01_datasets.md
           exclude:
               - index.md
+              - help.md
               - basic_training/index.md
               - hands_on/index.md
               - hands_on/solutions/*md
