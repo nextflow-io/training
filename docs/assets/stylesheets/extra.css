@@ -10,8 +10,55 @@
     --md-code-hl-comment-color: var(--md-default-fg-color--lighter);
 }
 
-/* Homepage Seqera-style buttons */
+/* Seqera style typography */
+.md-typeset h1 {
+    color: var(--md-default-fg-color);
+    font-size: 2rem;
+    line-height: 2.5rem;
+    font-weight: 600;
+    letter-spacing: 0;
+    margin-bottom: 0.5em;
+}
+.md-typeset h2 {
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 600;
+    letter-spacing: 0;
+}
+.md-typeset h3 {
+    font-size: 1.2rem;
+    line-height: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 0;
+}
+@media (min-width: 768px) {
+    .md-typeset h1 {
+        font-size: 3.2rem;
+        line-height: 4rem;
+    }
+    .md-typeset h2 {
+        font-size: 2rem;
+        line-height: 2.5rem;
+    }
+    .md-typeset h3 {
+        font-size: 1.5rem;
+        line-height: 2rem;
+    }
+}
 
+/* Only show heading enumerations at levels we care about */
+.enumerate-headings-plugin {
+    display: none;
+}
+h2 .enumerate-headings-plugin,
+h3 .enumerate-headings-plugin {
+    display: inline;
+}
+.md-typeset h1 .headerlink {
+    display: none;
+}
+
+/* Homepage Seqera-style buttons */
 .md-typeset .md-button {
     border-radius: 2rem;
     transition: padding 0.2s;
