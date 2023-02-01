@@ -57,7 +57,7 @@ Ensure you have Docker Desktop running on your machine. Download Docker [here](h
 
 ### Training material
 
-You can view the training material here: <https://training.seqera.io/>
+You can view the training material here: <https://training.nextflow.io/>
 
 To download the material use the command:
 
@@ -105,7 +105,7 @@ You should now see something similar to the following:
 
 -   **The sidebar** allows you to customize your Gitpod environment and perform basic tasks (copy, paste, open files, search, git, etc.). Click the Explorer button to see which files are in this repository.
 -   **The terminal** allows you to run all the programs in the repository. For example, both `nextflow` and `docker` are installed and can be executed.
--   **The main window** allows you to view and edit files. Clicking on a file in the explorer will open it within the main window. You should also see the nf-training material browser (<https://training.seqera.io/>).
+-   **The main window** allows you to view and edit files. Clicking on a file in the explorer will open it within the main window. You should also see the nf-training material browser (<https://training.nextflow.io/>).
 
 To test that the environment is working correctly, type the following into the terminal:
 
@@ -147,7 +147,7 @@ To save any file from the explorer panel, right-click the file and select `Downl
 
 ### Training material
 
-The training course can be accessed in your browser from <https://training.seqera.io/>
+The training course can be accessed in your browser from <https://training.nextflow.io/>
 
 ## Selecting a Nextflow version
 
