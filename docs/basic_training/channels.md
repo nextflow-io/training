@@ -226,7 +226,7 @@ Learn more about the glob patterns syntax at [this link](https://docs.oracle.com
 
     Use the `Channel.fromPath` method to create a channel emitting all files with the suffix `.fq` in the `data/ggal/` directory and any subdirectory, in addition to hidden files. Then print the file names.
 
-    ??? result "Solution"
+    ??? solution
 
         ```groovy linenums="1"
         Channel.fromPath( './data/ggal/**.fq' , hidden:true)
@@ -269,7 +269,7 @@ It will produce an output similar to the following:
 
     Use the `fromFilePairs` method to create a channel emitting all pairs of fastq read in the `data/ggal/` directory and print them. Then use the `flat:true` option and compare the output with the previous execution.
 
-    ??? result "Solution"
+    ??? solution
 
         Use the following, with or without `flat:true`:
 
@@ -497,7 +497,7 @@ for( List row : lines ) {
 
     Try inputting fastq reads into the RNA-Seq workflow from earlier using `.splitCSV`.
 
-    ??? result "Solution"
+    ??? solution
 
         Add a csv text file containing the following, as an example input with the name "fastq.csv":
 
@@ -603,7 +603,7 @@ Channel
     Try using the tab separation technique on the file `data/meta/regions.tsv`, but print just the first column, and remove the header.
 
 
-    ??? result "Solution"
+    ??? solution
 
         ```groovy linenums="1"
         Channel

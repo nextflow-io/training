@@ -76,7 +76,7 @@ process {
 
     Run the RNA-Seq script (`script7.nf`) from earlier, but specify that the `quantification` `process` requires 2 CPUs and 5 GB of memory, within the `nextflow.config` file.
 
-    ??? result "Solution"
+    ??? solution
 
         ```groovy
         process {
