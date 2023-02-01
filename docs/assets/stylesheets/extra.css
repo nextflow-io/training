@@ -9,6 +9,9 @@
 :root > * {
     --md-code-hl-comment-color: var(--md-default-fg-color--lighter);
 }
+.md-footer {
+    z-index: 1;
+}
 
 /* Seqera style typography */
 .md-typeset h1 {
