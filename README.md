@@ -2,13 +2,13 @@
 
 Welcome to the Nextflow training repo.
 
-We are excited to have you on the path to writing reproducible and scalable scientific workflows using Nextflow. To access the material for training, click [here](https://training.seqera.io).
+We are excited to have you on the path to writing reproducible and scalable scientific workflows using Nextflow. To access the material for training, click [here](https://training.nextflow.io).
 
 Our training course complements the full Nextflow documentation - if you ever have any doubts, head over to the docs located [here](https://www.nextflow.io/docs/latest/).
 
 There are two main ways to get started with Seqera's Nextflow training course.
 
-1. Install Locally - best if you are already confident with Git and Docker, or working offline. Follow the instructions [here](https://training.seqera.io/#_local_installation), section 1.1.
+1. Install Locally - best if you are already confident with Git and Docker, or working offline. Follow the instructions [here](https://training.nextflow.io/basic_training/setup/#local-installation), section 1.1.
 
 2. Gitpod - (recommended), is a containerized environment with all the programs and data pre-installed. Simply click the link and login via a GitHub account to start the tutorial. The full instructions are below.
 
@@ -38,7 +38,7 @@ You should now see something similar to the following:
 
 -   **The terminal** allows you to run all the programs in the repository. For example, both `nextflow` and `docker` are installed and can be executed.
 
--   **The main window** allows you to view and edit files. Clicking on a file in the explorer will open it within the main window. You should also see the nf-training material browser (<https://training.seqera.io/>).
+-   **The main window** allows you to view and edit files. Clicking on a file in the explorer will open it within the main window. You should also see the nf-training material browser (<https://training.nextflow.io/>).
 
 To test that the environment is working correctly, type the following into the terminal:
 
