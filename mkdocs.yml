@@ -1,4 +1,4 @@
-site_name: Nextflow Training
+site_name: training.nextflow.io
 site_url: https://training.nextflow.io/
 repo_url: https://github.com/seqeralabs/nf-training-public
 repo_name: seqeralabs/nf-training-public
@@ -32,7 +32,7 @@ theme:
     name: material
     custom_dir: docs/assets/overrides
     language: en
-    logo: assets/img/nf-square-mono.png
+    logo: assets/img/nextflow_logo_mono.svg
     favicon: assets/img/nf-square.png
     palette:
         # Palette toggle for dark mode
