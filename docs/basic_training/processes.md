@@ -347,7 +347,7 @@ workflow {
     Write a script that creates a channel containing all read files matching the pattern `data/ggal/*_1.fq` followed by a process that concatenates them into a single file and prints the first 20 lines.
 
 
-    ??? result "Solution"
+    ??? solution
 
         ```groovy linenums="1"
         params.reads = "$baseDir/data/ggal/*_1.fq"
@@ -484,7 +484,7 @@ This is because _value_ channels can be consumed multiple times and do not affec
 
     Write a process that is executed for each read file matching the pattern `data/ggal/*_1.fq` and use the same `data/ggal/transcriptome.fa` in each execution.
 
-    ??? result "Solution"
+    ??? solution
 
         ```groovy linenums="1"
         params.reads = "$baseDir/data/ggal/*_1.fq"
@@ -548,7 +548,7 @@ In the above example, every time a file of sequences is received as an input by 
 
     Extend the previous example so a task is executed for each read file matching the pattern `data/ggal/*_1.fq` and repeat the same task with both `salmon` and `kallisto`.
 
-    ??? result "Solution"
+    ??? solution
 
         ```groovy linenums="1"
         params.reads = "$baseDir/data/ggal/*_1.fq"
@@ -767,7 +767,7 @@ workflow {
 
     Modify the script of the previous exercise so that the _bam_ file is named as the given `sample_id`.
 
-    ??? result "Solution"
+    ??? solution
 
         ```groovy linenums="1"
         reads_ch = Channel.fromFilePairs('data/ggal/*_{1,2}.fq')

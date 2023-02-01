@@ -105,7 +105,7 @@ Launching `main.nf` [lethal_faggin] - revision: 4c9a5c830c
 
         See [here](https://www.nextflow.io/docs/latest/getstarted.html?highlight=resume#modify-and-resume) for more details about using the `resume` option.
 
-    ??? result "Solution"
+    ??? solution
 
 
         ```groovy linenums="1" hl_lines="1"
@@ -172,7 +172,7 @@ You should implement a process having the following structure:
     [cd/47f882] process > 1A_prepare_genome_samtools [100%] 1 of 1 ✔
     ```
 
-    ??? result "Solution"
+    ??? solution
 
         ```groovy linenums="1" hl_lines="8"
         /*
@@ -244,7 +244,7 @@ You should implement a process having the following structure:
 
         `.baseName` returns the filename without the file suffix. If `"${genome}"` is `human.fa`, then `"${genome.baseName}.dict"` would be `human.dict`.
 
-    ??? result "Solution"
+    ??? solution
 
         ```groovy linenums="1" hl_lines="8 11"
         /*
@@ -314,7 +314,7 @@ You should implement a process having the following structure:
 
         The output of the STAR genomeGenerate command is specified here as `genome_dir`.
 
-    ??? result "Solution"
+    ??? solution
 
         ```groovy linenums="1" hl_lines="8 11"
         /*
@@ -424,7 +424,7 @@ You should implement a process having the following structure:
     nextflow run main.nf -resume
     ```
 
-    ??? result "Solution"
+    ??? solution
 
         ```groovy linenums="1" hl_lines="8-9 12-13"
         /*
@@ -544,7 +544,7 @@ You should implement a process having the following structure:
 
         The final command produces an bam index which is the full filename with an additional `.bai` suffix.
 
-    ??? result "Solution"
+    ??? solution
 
         ```groovy linenums="1" hl_lines="8-10 13"
         /*
@@ -676,7 +676,7 @@ You should implement a process having the following structure:
 
         A `tag` line would also be useful in [Process 2](#process-2)
 
-    ??? result "Solution"
+    ??? solution
 
 
         ```groovy linenums="1" hl_lines="2 5-8 11"
@@ -794,7 +794,7 @@ You should implement a process having the following structure:
     -   The unique bam file
     -   The index of the unique bam file (bam file name + `.bai`)
 
-    ??? result "Solution"
+    ??? solution
 
 
         ```groovy linenums="1" hl_lines="5-9 12"
@@ -916,7 +916,7 @@ You should implement a process having the following structure:
     }
     ```
 
-    ??? result "Solution"
+    ??? solution
 
         ```groovy linenums="1" hl_lines="2 5-8 11"
         process '5_rnaseq_call_variants' {
@@ -1046,7 +1046,7 @@ You should implement two processes having the following structure:
 
     1. here the output location is specified as a combination of a pipeline parameter and a process input variable
 
-    ??? result "Solution"
+    ??? solution
 
 
         ```groovy linenums="1" hl_lines="2 6-7 10 21-22 25 28-29"
@@ -1158,7 +1158,7 @@ The final step is the GATK ASEReadCounter.
         `left` and `right` above are arbitary names. From the phase operator documentation, we see that phase returns pairs of items. So here `left` originates from contents of the `bam_for_ASE_ch` channel and `right` originates from the contents of `vcf_for_ASE` channel.
 
 
-    ??? result "Solution"
+    ??? solution
 
         ```groovy linenums="1" hl_lines="2 9"
         bam_for_ASE_ch
@@ -1206,7 +1206,7 @@ You should implement a process having the following structure:
                     -sites ${vcf}
     ```
 
-    ??? result "Solution"
+    ??? solution
 
         ```groovy linenums="1"
         process '6C_ASE_knownSNPs' {

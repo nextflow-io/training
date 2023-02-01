@@ -32,7 +32,7 @@ include { CONVERTTOUPPER } from './modules.nf'
 
     Create a `modules.nf` file with the previously defined processes from `hello.nf`. Then remove these processes from `hello.nf` and add the `include` definitions shown above.
 
-    ??? result "Solution"
+    ??? solution
 
         The `hello.nf` script should look similar like this:
 
@@ -123,7 +123,7 @@ workflow {
 
     Save the previous snippet as `hello.2.nf`, and predict the output to screen.
 
-    ??? result "Solution"
+    ??? solution
 
         The `hello.2.nf` output should look something like this:
 

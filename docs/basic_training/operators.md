@@ -97,7 +97,7 @@ Channel
 
     Use `fromPath` to create a channel emitting the _fastq_ files matching the pattern `data/ggal/*.fq`, then use `map` to return a pair containing the file name and the path itself, and finally, use `view` to print the resulting channel.
 
-    ??? result "Solution"
+    ??? solution
 
         ```groovy linenums="1"
         Channel
@@ -200,7 +200,7 @@ This operator is useful to process a group together with all the elements that s
 
     Use `fromPath` to create a channel emitting all of the files in the folder `data/meta/`, then use a `map` to associate the `baseName` prefix to each file. Finally, group all files that have the same common prefix.
 
-    ??? result "Solution
+    ??? solution
 
         ```groovy linenums="1"
         Channel.fromPath('data/meta/*')
