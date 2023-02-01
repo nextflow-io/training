@@ -1,0 +1,122 @@
+site_name: Nextflow Training
+site_url: https://training.seqera.io/
+repo_url: https://github.com/seqeralabs/nf-training-public
+repo_name: seqeralabs/nf-training-public
+
+nav:
+    - Home: index.md
+    - Basic Training:
+          - basic_training/index.md
+          - basic_training/setup.md
+          - basic_training/intro.md
+          - basic_training/rnaseq_pipeline.md
+          - basic_training/containers.md
+          - basic_training/channels.md
+          - basic_training/processes.md
+          - basic_training/operators.md
+          - basic_training/groovy.md
+          - basic_training/modules.md
+          - basic_training/config.md
+          - basic_training/executors.md
+          - basic_training/tower.md
+          - basic_training/cache_and_resume.md
+          - basic_training/debugging.md
+    - Hands on:
+          - hands_on/index.md
+          - hands_on/01_datasets.md
+          - hands_on/02_workflow.md
+          - hands_on/03_setup.md
+          - hands_on/04_implementation.md
+
+theme:
+    name: material
+    custom_dir: docs/assets/overrides
+    language: en
+    logo: assets/img/nf-square-mono.png
+    favicon: assets/img/nf-square.png
+    palette:
+        # Palette toggle for dark mode
+        - media: "(prefers-color-scheme: dark)"
+          scheme: slate
+          toggle:
+              icon: material/weather-night
+              name: Switch to light mode
+        # Palette toggle for light mode
+        - media: "(prefers-color-scheme: light)"
+          scheme: default
+          toggle:
+              icon: material/weather-sunny
+              name: Switch to dark mode
+    font:
+        text: Inter
+    features:
+        - content.action.edit
+        - content.code.annotate
+        - content.code.copy
+        - navigation.footer
+        - navigation.instant
+        - navigation.tabs
+        - navigation.top
+        - navigation.tracking
+        - search.share
+        - toc.follow
+    icon:
+        repo: fontawesome/brands/github
+extra_css:
+    - assets/stylesheets/extra.css
+
+# Set in docs/assets/overrides/partials/copyright.html
+# so that we can have links and stuff
+# copyright: Seqera
+
+extra:
+    analytics:
+        provider: google
+        property: G-244N3GEN75
+    consent:
+        title: Cookie consent
+        description: >-
+            We use cookies to recognize your repeated visits and preferences, as well
+            as to measure the effectiveness of our documentation and whether users
+            find what they're searching for. With your consent, you're helping us to
+            make our documentation better.
+    # Overriden in docs/assets/overrides/partials/social.html
+    # Still needs to be set to something here so that the partial is used
+    social:
+        - icon: fontawesome/brands/twitter
+          link: https://twitter.com/nextflowio
+          name: Nextflow on twitter
+markdown_extensions:
+    - admonition
+    - attr_list
+    - md_in_html
+    - pymdownx.details
+    - pymdownx.emoji:
+          emoji_index: !!python/name:materialx.emoji.twemoji
+          emoji_generator: !!python/name:materialx.emoji.to_svg
+    - pymdownx.highlight:
+          anchor_linenums: true
+    - pymdownx.inlinehilite
+    - pymdownx.keys
+    - pymdownx.snippets:
+          base_path: ["."]
+    - pymdownx.superfences
+    - tables
+    - toc:
+          title: On this page
+          permalink: true
+plugins:
+    - search
+    - social:
+          cards_color:
+              fill: "#27AE60"
+              text: "#FFFFFF"
+    - enumerate-headings:
+          # Requires: https://github.com/timvink/mkdocs-enumerate-headings-plugin/pull/33
+          # restart_increment_after:
+          #    - hands_on/01_datasets.md
+          exclude:
+              - index.md
+              - basic_training/index.md
+              - hands_on/index.md
+              - hands_on/solutions/*md

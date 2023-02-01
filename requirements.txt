@@ -1,0 +1,6 @@
+mkdocs
+mkdocs-material
+pymdown-extensions
+pillow
+cairosvg
+mkdocs-enumerate-headings-plugin
