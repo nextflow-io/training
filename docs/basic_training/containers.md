@@ -1,3 +1,7 @@
+---
+description: Basic Nextflow Training Workshop
+---
+
 # Manage dependencies and containers
 
 Computational workflows are rarely composed of a single script or tool. Most of the time they require the usage of dozens of different software components or libraries.

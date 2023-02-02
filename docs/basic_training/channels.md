@@ -1,3 +1,7 @@
+---
+description: Basic Nextflow Training Workshop
+---
+
 # Channels
 
 Channels are a key data structure of Nextflow that allows the implementation of reactive-functional oriented computational workflows based on the [Dataflow](https://en.wikipedia.org/wiki/Dataflow_programming) programming paradigm.

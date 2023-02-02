@@ -1,3 +1,7 @@
+---
+description: Basic Nextflow Training Workshop
+---
+
 # Simple RNA-Seq pipeline
 
 To demonstrate a real-world biomedical scenario, we will implement a proof of concept RNA-Seq pipeline which:

@@ -1,4 +1,6 @@
 ---
+title: Nextflow Training
+description: Welcome to the Nextflow community training portal!
 hide:
     - navigation
     - toc

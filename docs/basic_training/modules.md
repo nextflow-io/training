@@ -1,3 +1,7 @@
+---
+description: Basic Nextflow Training Workshop
+---
+
 # Modularization
 
 The definition of module libraries simplifies the writing of complex data analysis pipelines and makes re-use of processes much easier.
