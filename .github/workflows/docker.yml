@@ -1,4 +1,8 @@
-name: Publish Docker image
+# Build and push the Docker image for GitPod
+# - Only pushes if push or release
+# - Builds without push for PRs to check the Dockerfile
+
+name: Build Docker image
 
 on:
     push:
@@ -27,14 +31,5 @@ jobs:
               if: github.event_name == 'push'
               with:
                   file: .github/Dockerfile
-                  push: true
-                  tags: ghcr.io/nextflow-io/training:latest
-
-            - name: Push release image
-              uses: docker/build-push-action@v3
-              if: github.event_name == 'release'
-              with:
-                  file: .github/Dockerfile
-                  push: true
-                  tags: |
-                      ghcr.io/nextflow-io/training:${{ github.event.release.tag_name }}
+                  push: ${{ github.event_name == 'push' || github.event_name == 'release' }}
+                  tags: ghcr.io/nextflow-io/training:${{ (github.event_name == 'push' && 'latest') || github.event.release.tag_name }}
