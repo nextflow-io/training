@@ -114,9 +114,8 @@ plugins:
               fill: "#27AE60"
               text: "#FFFFFF"
     - enumerate-headings:
-          # Requires: https://github.com/timvink/mkdocs-enumerate-headings-plugin/pull/33
-          # restart_increment_after:
-          #    - hands_on/01_datasets.md
+          restart_increment_after:
+              - hands_on/01_datasets.md
           exclude:
               - index.md
               - help.md
