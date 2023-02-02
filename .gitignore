@@ -1,12 +1,9 @@
 .DS_Store
 .cache
-asciidocs/build
 .idea
 serve
 nextflow
 work
-.nextflow.log
 .nextflow*
 nf-training/results
 transcript-index
-Dockerfile
