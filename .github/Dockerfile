@@ -23,8 +23,6 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86
 ENV PATH="/opt/conda/bin:$PATH"
 
 # User permissions
-RUN useradd -ms /bin/bash gitpod
-
 RUN mkdir -p /workspace/data \
     && chown -R gitpod:gitpod /workspace/data \
     && chown -R gitpod:gitpod /opt/conda
