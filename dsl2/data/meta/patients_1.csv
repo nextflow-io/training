@@ -1,9 +1,0 @@
-patient_id,jira_id,s3_dir,num_samples,manual_failed_regions
-ATX-TBL-001-GB-02-117,PJ-48,atx-runoutputs/personalis/ATX-TBL-001-GB-02-117/wd_ATX-TBL-001-GB-02-117_20181211_preqc_to_peptides/paris_v2.0.10,3,NA
-ATX-TBL-001-GB-01-110,PJ-50,atx-runoutputs/personalis/ATX-TBL-001-GB-01-110/wd_ATX-TBL-001-GB-01-110_20181212_variant_calling_to_peptides/paris_v2.0.9,3,NA
-ATX-TBL-001-GB-03-101,PJ-54,atx-runoutputs/personalis/ATX-TBL-001-GB-03-101/wd_ATX-TBL-001-GB-03-101_20190104_preqc_to_peptides_v2/paris_v2.0.10,3,R1
-ATX-TBL-001-GB-04-201,PJ-60,atx-runoutputs/personalis/ATX-TBL-001-GB-04-201/wd_ATX-TBL-001-GB-04-201_20190121_v2_preqc_to_peptides/paris_v2.0.10,3,NA
-ATX-TBL-001-GB-02-120,PJ-65,atx-runoutputs/personalis/ATX-TBL-001-GB-02-120/wd_ATX-TBL-001-GB-02-120_20190130_v2_preqc_to_peptides/paris_v2.0.10,3,NA
-ATX-TBL-001-GB-04-102,PJ-67,atx-runoutputs/personalis/ATX-TBL-001-GB-04-102/wd_ATX-TBL-001-GB-04-102_20190305_v2_preqc_to_peptides/paris_v2.2.0,3,"R1,R2"
-ATX-TBL-001-GB-03-104,PJ-68,atx-runoutputs/personalis/ATX-TBL-001-GB-03-104/wd_ATX-TBL-001-GB-03-104_20190316_v2_preqc_to_peptides/paris_v2.2.1,3,R1
-ATX-TBL-001-GB-03-103,PJ-69,atx-runoutputs/personalis/ATX-TBL-001-GB-03-103/wd_ATX-TBL-001-GB-03-103_20190322_v2_preqc_to_peptides/paris_v2.2.2,3,NA
