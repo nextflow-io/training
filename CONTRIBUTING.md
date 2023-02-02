@@ -70,3 +70,7 @@ There are a couple of known limitations that I haven't figured out how to get ar
 ### Code annotations
 
 Mkdocs Material uses `// code comments` to anchor the annotations. That's great, until you want an annotation in the middle of a large multi-line string (say, like a `script` block).
+
+## TODO / FIXME
+
+-   Remove hack in `requirements.txt` when [this PR](https://github.com/timvink/mkdocs-enumerate-headings-plugin/pull/33) is merged
