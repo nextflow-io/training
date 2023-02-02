@@ -22,7 +22,7 @@ There are two main ways to get started with Seqera's Nextflow training course.
 
 To run Gitpod:
 
--   Click the following URL: <https://gitpod.io/#https://github.com/seqeralabs/nf-training-public>
+-   Click the following URL: <https://gitpod.io/#https://github.com/nextflow-io/training>
     -   (this is the Github repository URL, prefixed with <https://gitpod.io/#>).
 -   Log in to your Github account (and allow authorization).
 
@@ -71,7 +71,7 @@ You can reopen an environment by going to <https://gitpod.io/workspaces> and fin
 If you save the URL from your previous Gitpod environment, you can just paste this into your browser to open the previous environment.
 
 Alternatively, you can start a new workspace by following the Gitpod URL:
-<https://gitpod.io/#https://github.com/seqeralabs/nf-training-public>
+<https://gitpod.io/#https://github.com/nextflow-io/training>
 
 This tutorial provides all the scripts, so don't worry if you have lost your environment. In the `nf-training` directory, you can find the main scripts used in the tutorial.
 

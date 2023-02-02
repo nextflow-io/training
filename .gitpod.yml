@@ -17,7 +17,7 @@ github:
         addBadge: false
 
 # See .github/Dockerfile
-image: ghcr.io/seqeralabs/nf-training-public:latest
+image: ghcr.io/nextflow-io/training:latest
 
 tasks:
     - before: printf 'unset JAVA_TOOL_OPTIONS\n' >> $HOME/.bashrc && exit

@@ -506,7 +506,7 @@ for( List row : lines ) {
         Add a csv text file containing the following, as an example input with the name "fastq.csv":
 
         ```csv
-        gut,/workspace/nf-training-public/nf-training/data/ggal/gut_1.fq,/workspace/nf-training-public/nf-training/data/ggal/gut_2.fq
+        gut,/workspace/training/nf-training/data/ggal/gut_1.fq,/workspace/training/nf-training/data/ggal/gut_2.fq
         ```
 
         Then replace the input channel for the reads in `script7.nf`. Changing the following lines:

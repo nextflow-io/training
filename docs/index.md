@@ -12,7 +12,7 @@ hide:
 Welcome to the Nextflow community training portal!
 
 These training materials are open source and free to use for anyone.
-They are hosted in a [GitHub repository](https://github.com/seqeralabs/nf-training-public) along with example scripts and development configuration.
+They are hosted in a [GitHub repository](https://github.com/nextflow-io/training) along with example scripts and development configuration.
 
 Whilst you can follow the materials any time, you'll probably get most out of them by joining an organised training event.
 Free online events are organised regularly with the nf-core community, see the [nf-core events page](https://nf-co.re/events) for more.
@@ -46,11 +46,11 @@ Find the one that's right for you:
 
 Quick reference to some handy links:
 
-| Reference                                                   |  Community                                                                    |
-| ----------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| [Nextflow Docs](https://nextflow.io/docs/latest/index.html) | [Nextflow Slack](https://www.nextflow.io/slack-invite.html)                   |
-| [Nextflow Homepage](https://nextflow.io/)                   | [nf-core](https://nf-co.re/)                                                  |
-| [Seqera Labs](https://seqera.io/)                           | [Training source on GitHub](https://github.com/seqeralabs/nf-training-public) |
+| Reference                                                   |  Community                                                           |
+| ----------------------------------------------------------- | -------------------------------------------------------------------- |
+| [Nextflow Docs](https://nextflow.io/docs/latest/index.html) | [Nextflow Slack](https://www.nextflow.io/slack-invite.html)          |
+| [Nextflow Homepage](https://nextflow.io/)                   | [nf-core](https://nf-co.re/)                                         |
+| [Seqera Labs](https://seqera.io/)                           | [Training source on GitHub](https://github.com/nextflow-io/training) |
 
 Not sure where to go? Check out the [Getting help](help.md) page.
 
