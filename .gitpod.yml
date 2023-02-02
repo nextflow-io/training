@@ -16,8 +16,8 @@ github:
         # add a "Review in Gitpod" button to pull requests (defaults to false)
         addBadge: false
 
-# FIXME: Replace with a Dockerfile from this repo
-image: chriswyatt/seqeratraining_22.09.7
+# See .github/Dockerfile
+image: ghcr.io/seqeralabs/nf-training-public:latest
 
 tasks:
     - before: printf 'unset JAVA_TOOL_OPTIONS\n' >> $HOME/.bashrc && exit
