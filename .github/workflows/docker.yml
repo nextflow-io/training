@@ -5,6 +5,7 @@
 name: Build Docker image
 
 on:
+    pull_request:
     push:
         branches: [master]
     release:
@@ -26,10 +27,18 @@ jobs:
                   username: ${{ github.repository_owner }}
                   password: ${{ secrets.GITHUB_TOKEN }}
 
-            - name: Push latest image
+            - name: Build / push latest image
               uses: docker/build-push-action@v3
-              if: github.event_name == 'push'
+              if: github.event_name != 'release'
               with:
                   file: .github/Dockerfile
-                  push: ${{ github.event_name == 'push' || github.event_name == 'release' }}
-                  tags: ghcr.io/nextflow-io/training:${{ (github.event_name == 'push' && 'latest') || github.event.release.tag_name }}
+                  push: ${{ github.event_name == 'push' }}
+                  tags: ghcr.io/nextflow-io/training:latest
+
+            - name: Push release image
+              uses: docker/build-push-action@v3
+              if: github.event_name == 'release'
+              with:
+                  file: .github/Dockerfile
+                  push: true
+                  tags: ghcr.io/nextflow-io/training:${{ github.event.release.tag_name }}
