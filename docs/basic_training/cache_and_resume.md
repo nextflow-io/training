@@ -1,5 +1,6 @@
 ---
 title: Cache and resume
+description: Basic Nextflow Training Workshop
 ---
 
 # Execution cache and resume

@@ -1,3 +1,7 @@
+---
+description: Basic Nextflow Training Workshop
+---
+
 # Operators
 
 Operators are methods that allow you to connect channels, transform values emitted by a channel, or apply some user-provided rules.

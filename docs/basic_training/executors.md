@@ -1,3 +1,7 @@
+---
+description: Basic Nextflow Training Workshop
+---
+
 # Deployment scenarios
 
 Real-world genomic applications can spawn the execution of thousands of jobs. In this scenario a batch scheduler is commonly used to deploy a pipeline in a computing cluster, allowing the execution of many jobs in parallel across many compute nodes.
