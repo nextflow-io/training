@@ -8,7 +8,7 @@ on:
 
 jobs:
     push_to_registry:
-        if: github.repository == 'seqeralabs/nf-training-public'
+        if: github.repository == 'nextflow-io/training'
         name: Build + Push Docker image
         runs-on: ubuntu-latest
         steps:
@@ -28,7 +28,7 @@ jobs:
               with:
                   file: .github/Dockerfile
                   push: true
-                  tags: ghcr.io/seqeralabs/nf-training-public:latest
+                  tags: ghcr.io/nextflow-io/training:latest
 
             - name: Push release image
               uses: docker/build-push-action@v3
@@ -37,4 +37,4 @@ jobs:
                   file: .github/Dockerfile
                   push: true
                   tags: |
-                      ghcr.io/seqeralabs/nf-training-public:${{ github.event.release.tag_name }}
+                      ghcr.io/nextflow-io/training:${{ github.event.release.tag_name }}

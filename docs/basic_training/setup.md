@@ -62,7 +62,7 @@ You can view the training material here: <https://training.nextflow.io/>
 To download the material use the command:
 
 ```bash
-git clone https://github.com/seqeralabs/nf-training-public.git
+git clone https://github.com/nextflow-io/training.git
 ```
 
 Then `cd` into the `nf-training` directory.
@@ -91,7 +91,7 @@ A preconfigured Nextflow development environment is available using Gitpod.
 
 To run Gitpod:
 
--   Click the following URL: <https://gitpod.io/#https://github.com/seqeralabs/nf-training-public>
+-   Click the following URL: <https://gitpod.io/#https://github.com/nextflow-io/training>
     -   This is our GitHub repository URL, prefixed with `https://gitpod.io/#`
 -   Log in to your GitHub account (and allow authorization).
 
@@ -137,7 +137,7 @@ You can reopen an environment from <https://gitpod.io/workspaces>. Find your pre
 
 If you have saved the URL for your previous Gitpod environment, you can simply open it your browser to open the previous environment.
 
-Alternatively, you can start a new workspace by following the Gitpod URL: <https://gitpod.io/#https://github.com/seqeralabs/nf-training-public>
+Alternatively, you can start a new workspace by following the Gitpod URL: <https://gitpod.io/#https://github.com/nextflow-io/training>
 
 If you have lost your environment, you can find the main scripts used in this tutorial in the `nf-training` directory to resume with a new environment.
 

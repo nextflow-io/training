@@ -1,7 +1,7 @@
 site_name: training.nextflow.io
 site_url: https://training.nextflow.io/
-repo_url: https://github.com/seqeralabs/nf-training-public
-repo_name: seqeralabs/nf-training-public
+repo_url: https://github.com/nextflow-io/training
+repo_name: nextflow-io/training
 
 nav:
     - Home: index.md
