@@ -1,4 +1,4 @@
-FROM debian:stretch-slim
+FROM gitpod/workspace-base
 
 USER root
 
