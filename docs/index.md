@@ -63,11 +63,7 @@ Every page has a :material-file-edit-outline: icon in the top right of the page,
 
 <figure markdown class="homepage_logos">
 
-![Nextflow](assets/img/nextflow_logo.svg#only-light)
-
 ![Seqera Labs](assets/img/seqera_logo.svg#only-light)
-
-![Nextflow](assets/img/nextflow_logo_dark.svg#only-dark)
 
 ![Seqera Labs](assets/img/seqera_logo_dark.svg#only-dark)
 
