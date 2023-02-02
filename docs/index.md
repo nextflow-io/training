@@ -56,6 +56,8 @@ Not sure where to go? Check out the [Getting help](help.md) page.
 
 ## Credits and contributions
 
+[![Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0](assets/img/cc_by-nc-nd.svg){ align=right }](https://creativecommons.org/licenses/by-nc-nd/4.0/)
+
 All training material was originally written by [Seqera Labs](https://seqera.io) but has been made open-source ([CC BY-NC-ND](https://creativecommons.org/licenses/by-nc-nd/4.0/)) for the community.
 
 We welcome fixes and improvements from the community.
