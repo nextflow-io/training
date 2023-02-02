@@ -1,0 +1,40 @@
+name: Publish Docker image
+
+on:
+    push:
+        branches: [master]
+    release:
+        types: [published]
+
+jobs:
+    push_to_registry:
+        if: github.repository == 'seqeralabs/nf-training-public'
+        name: Build + Push Docker image
+        runs-on: ubuntu-latest
+        steps:
+            - name: Check out the repo
+              uses: actions/checkout@v3
+
+            - name: Login to GitHub Container Registry
+              uses: docker/login-action@v2
+              with:
+                  registry: ghcr.io
+                  username: ${{ github.repository_owner }}
+                  password: ${{ secrets.GITHUB_TOKEN }}
+
+            - name: Push latest image
+              uses: docker/build-push-action@v3
+              if: github.event_name == 'push'
+              with:
+                  file: .github/Dockerfile
+                  push: true
+                  tags: ghcr.io/seqeralabs/nf-training-public:latest
+
+            - name: Push release image
+              uses: docker/build-push-action@v3
+              if: github.event_name == 'release'
+              with:
+                  file: .github/Dockerfile
+                  push: true
+                  tags: |
+                      ghcr.io/seqeralabs/nf-training-public:${{ github.event.release.tag_name }}
