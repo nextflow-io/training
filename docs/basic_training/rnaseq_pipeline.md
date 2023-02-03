@@ -524,7 +524,7 @@ open graph.png
 
 !!! warning
 
-    Run time metrics may be incomplete for run short running tasks as in the case of this tutorial.
+    Run time metrics may be incomplete for runs with short running tasks as in the case of this tutorial.
 
 !!! info
 
