@@ -357,7 +357,7 @@ conda init
 bash
 ```
 
-Then write your YAML file (to `env.yml`). For example:
+Then write your YAML file (to `env.yml`). There is already a file named `env.yml` in the `nf-training` folder as an example. Its content is shown below.
 
 ```yaml
 name: nf-tutorial
@@ -372,7 +372,7 @@ dependencies:
     - conda-forge::tbb=2020.2
 ```
 
-Given the recipe file, the environment is created using the command shown below:
+Given the recipe file, the environment is created using the command shown below. The `conda env create` command may take several minutes, as conda tries to resolve dependencies of the desired packages at runtime, and then downloads everything that is required.
 
 ```bash
 conda env create --file env.yml
@@ -421,7 +421,7 @@ Another way to build conda-like environments is through a `Dockerfile` and [`mic
 
 This saves having to build a conda environment each time you want to use it (as outlined in previous sections).
 
-To do this, you simply require a `Dockerfile` and you use micromamba to install the packages. However, a good practice is to have a YAML recipe file like in the previous section, so we’ll do it here too.
+To do this, you simply require a `Dockerfile` and you use micromamba to install the packages. However, a good practice is to have a YAML recipe file like in the previous section, so we’ll do it here too, using the same `env.yml` as before.
 
 ```yaml
 name: nf-tutorial
@@ -444,7 +444,7 @@ FROM mambaorg/micromamba:0.25.1
 LABEL image.author.name "Your Name Here"
 LABEL image.author.email "your@email.here"
 
-COPY --chown=$MAMBA_USER:$MAMBA_USER micromamba.yml /tmp/env.yml
+COPY --chown=$MAMBA_USER:$MAMBA_USER env.yml /tmp/env.yml
 
 RUN micromamba create -n nf-tutorial
 
