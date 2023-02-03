@@ -1,6 +1,8 @@
-# Nextflow Training <a href="https://gitpod.io/#https://github.com/nextflow-io/training"> <img src="https://img.shields.io/badge/Gitpod-%20Run%20this%20training%20on%20Gitpod-908a85?logo=gitpod" alt="Click here to run on Gitpod!" />
+# Nextflow Training
 
 ## » <https://training.nextflow.io> «
+
+[![Open in GitPod](https://img.shields.io/badge/Gitpod-%20Open%20in%20Gitpod-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/nextflow-io/training")
 
 Welcome to the Nextflow training repository!
 We are excited to have you on the path to writing reproducible and scalable scientific workflows using Nextflow.
