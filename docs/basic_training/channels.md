@@ -8,7 +8,11 @@ Channels are a key data structure of Nextflow that allows the implementation of 
 
 They are used to logically connect tasks to each other or to implement functional style data transformations.
 
+<figure markdown>
+
 ![Nextflow Channels](img/channel-files.png)
+
+</figure>
 
 ## Channel types
 

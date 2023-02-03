@@ -49,6 +49,11 @@
     }
 }
 
+/* Dark mode figures */
+body[data-md-color-scheme="slate"] figure img {
+    filter: invert(100%) hue-rotate(180deg);
+}
+
 /* Only show heading enumerations at levels we care about */
 .enumerate-headings-plugin {
     display: none;
@@ -103,6 +108,9 @@ h3 .enumerate-headings-plugin {
 }
 
 /* Homepage logos */
+.homepage_logos {
+    text-align: center;
+}
 .homepage_logos img {
     height: 2rem;
     max-width: 100%;
