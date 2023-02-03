@@ -134,6 +134,8 @@ workflow {
 }
 ```
 
+Check the output below:
+
 ```console
 4
 
