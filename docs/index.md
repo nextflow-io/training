@@ -17,7 +17,7 @@ They are hosted in a [GitHub repository](https://github.com/nextflow-io/training
 Whilst you can follow the materials any time, you'll probably get most out of them by joining an organised training event.
 Free online events are organised regularly with the nf-core community, see the [nf-core events page](https://nf-co.re/events) for more.
 
-[![Open in GitPod](img/open_in_gitpod.svg)](https://gitpod.io/#https://github.com/nextflow-io/training)
+[![Open in GitPod](basic_training/img/open_in_gitpod.svg)](https://gitpod.io/#https://github.com/nextflow-io/training)
 
 ## Available workshops
 
