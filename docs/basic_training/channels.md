@@ -134,7 +134,7 @@ workflow {
 }
 ```
 
-```console
+```console title="Output"
 4
 
 3
