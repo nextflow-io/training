@@ -7,11 +7,33 @@ nav:
     - Home: index.md
     - Basic Training:
           - basic_training/index.md
-          - basic_training/setup.md
+          - Setup:
+                - basic_training/setup/index.md
+                - basic_training/setup/local.md
+                - basic_training/setup/gitpod.md
+                - basic_training/setup/version.md
           - basic_training/intro.md
-          - basic_training/rnaseq_pipeline.md
-          - basic_training/containers.md
-          - basic_training/channels.md
+          - Simple RNA-Seq pipeline:
+                - basic_training/rnaseq_pipeline/index.md
+                - basic_training/rnaseq_pipeline/params.md
+                - basic_training/rnaseq_pipeline/create_index.md
+                - basic_training/rnaseq_pipeline/collect_reads.md
+                - basic_training/rnaseq_pipeline/quantification.md
+                - basic_training/rnaseq_pipeline/quality_control.md
+                - basic_training/rnaseq_pipeline/completion.md
+                - basic_training/rnaseq_pipeline/custom_scripts.md
+                - basic_training/rnaseq_pipeline/github.md
+          - Dependencies and containers:
+                - basic_training/containers/index.md
+                - basic_training/containers/docker.md
+                - basic_training/containers/singularity.md
+                - basic_training/containers/conda.md
+                - basic_training/containers/biocontainers.md
+          - Channels:
+                - basic_training/channels/index.md
+                - basic_training/channels/types.md
+                - basic_training/channels/factories.md
+                - basic_training/channels/file_formats.md
           - basic_training/processes.md
           - basic_training/operators.md
           - basic_training/groovy.md
@@ -113,12 +135,3 @@ plugins:
           cards_color:
               fill: "#27AE60"
               text: "#FFFFFF"
-    - enumerate-headings:
-          restart_increment_after:
-              - hands_on/01_datasets.md
-          exclude:
-              - index.md
-              - help.md
-              - basic_training/index.md
-              - hands_on/index.md
-              - hands_on/solutions/*md
