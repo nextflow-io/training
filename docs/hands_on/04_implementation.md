@@ -513,7 +513,7 @@ You should implement a process having the following structure:
              --alignSJDBoverhangMin 1 \
              --outFilterMismatchNmax 999
 
-        # 2nd pass (improve alignmets using table of splice junctions and create a new index)
+        # 2nd pass (improve alignments using table of splice junctions and create a new index)
         mkdir genomeDir
         STAR --runMode genomeGenerate \
              --genomeDir genomeDir \
@@ -573,7 +573,7 @@ You should implement a process having the following structure:
                  --alignSJDBoverhangMin 1 \
                  --outFilterMismatchNmax 999
 
-            # 2nd pass (improve alignmets using table of splice junctions and create a new index)
+            # 2nd pass (improve alignments using table of splice junctions and create a new index)
             mkdir genomeDir
             STAR --runMode genomeGenerate \
                  --genomeDir genomeDir \
@@ -959,7 +959,7 @@ You should implement a process having the following structure:
         -   the genome dictionary from the `genome_dict_ch` channel created in the process `1B_prepare_genome_picard`.
         -   the sets grouped by sampleID from the `final_output_ch` channel created in the process `4_rnaseq_gatk_recalibrate`.
         -   the set containing the sample ID and final VCF file.
-        -   the line specifing the name resulting final vcf file.
+        -   the line specifying the name resulting final vcf file.
 
 ## Processes 6A and 6B: ASE & RNA Editing
 
@@ -992,7 +992,7 @@ You should implement two processes having the following structure:
 
 !!! exercise "Problem #10"
 
-    Here we introduce the `publishDir` directive. This allows us to specifiy a location for the outputs of the process. See [here](https://www.nextflow.io/docs/latest/process.html#publishdir) for more details.
+    Here we introduce the `publishDir` directive. This allows us to specify a location for the outputs of the process. See [here](https://www.nextflow.io/docs/latest/process.html#publishdir) for more details.
 
     You must have the output of process 6A become the input of process 6B.
 
@@ -1145,7 +1145,7 @@ The final step is the GATK ASEReadCounter.
 
     1.   an operator that groups tuples that contain a common first element.
     2.   the phase operator synchronizes the values emitted by two other channels. See [here](https://www.nextflow.io/docs/latest/operator.html?phase#phase) for more details
-    3.   the map operator can apply any function to every item on a channel. In this case we take our tuple from the phase operation, define the seperate elements and create a new tuple.
+    3.   the map operator can apply any function to every item on a channel. In this case we take our tuple from the phase operation, define the separate elements and create a new tuple.
     4.   define `sampleId` to be the first element of left.
     5.   define bam to be the second element of left.
     6.   define bai to be the third element of left.
@@ -1155,7 +1155,7 @@ The final step is the GATK ASEReadCounter.
 
     !!! note
 
-        `left` and `right` above are arbitary names. From the phase operator documentation, we see that phase returns pairs of items. So here `left` originates from contents of the `bam_for_ASE_ch` channel and `right` originates from the contents of `vcf_for_ASE` channel.
+        `left` and `right` above are arbitrary names. From the phase operator documentation, we see that phase returns pairs of items. So here `left` originates from contents of the `bam_for_ASE_ch` channel and `right` originates from the contents of `vcf_for_ASE` channel.
 
 
     ??? solution
