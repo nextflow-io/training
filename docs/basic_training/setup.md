@@ -49,7 +49,7 @@ Then ensure that the downloaded binary is executable:
 chmod +x nextflow
 ```
 
-AND put the nextflow executable into your `$PATH` (e.g. `/usr/local/bin` or `/bin/`)
+AND put the `nextflow` executable into your `$PATH` (e.g. `/usr/local/bin` or `/bin/`)
 
 ### Docker
 
@@ -116,18 +116,18 @@ nextflow info
 This should come up with the Nextflow version and runtime information:
 
 ```
-Version: 22.09.7-edge build 5806
-Created: 28-09-2022 09:36 UTC
+Version: 22.10.4 build 5836
+Created: 09-12-2022 09:58 UTC 
 System: Linux 5.15.0-47-generic
-Runtime: Groovy 3.0.13 on OpenJDK 64-Bit Server VM 11.0.1+13-LTS
+Runtime: Groovy 3.0.13 on OpenJDK 64-Bit Server VM 17.0.3-internal+0-adhoc..src
 Encoding: UTF-8 (UTF-8)
 ```
 
 ### Gitpod resources
 
--   Gitpod gives you 500 free credits per month, which is equivalent to 50 hours of free environment runtime using the standard workspace (up to 4 cores, 8 GB RAM and 30GB storage).
--   There is also a large workspace option that gives you up to 8 cores, 16GB RAM, and 50GB storage for each workspace (up to 4 parallel workspaces in the free version). However, the large workspace uses your free credits quicker so your account will have fewer hours of access to this space.
--   Gitpod will time out after 30 minutes. However, changes are saved for up to 2 weeks (see the next section for reopening a timed out session).
+-   Gitpod gives you 500 free credits per month, which is equivalent to 50 hours of free environment runtime using the standard workspace (up to 4 cores, 8 GB RAM and 30 GB storage).
+-   There is also a large workspace option that gives you up to 8 cores, 16GB RAM, and 50GB storage. However, the large workspace will use your free credits faster and you will have fewer hours of access to this space.
+-   Gitpod will time out after 30 minutes of inactivity and will save your changes for up to 2 weeks (see the next section for reopening a timed-out session).
 
 See [gitpod.io](https://www.gitpod.io) for more details.
 
@@ -135,11 +135,11 @@ See [gitpod.io](https://www.gitpod.io) for more details.
 
 You can reopen an environment from <https://gitpod.io/workspaces>. Find your previous environment in the list, then select the ellipsis (three dots icon) and select Open.
 
-If you have saved the URL for your previous Gitpod environment, you can simply open it your browser to open the previous environment.
+If you have saved the URL for your previous Gitpod environment, you can simply open it in your browser.
 
 Alternatively, you can start a new workspace by following the Gitpod URL: <https://gitpod.io/#https://github.com/nextflow-io/training>
 
-If you have lost your environment, you can find the main scripts used in this tutorial in the `nf-training` directory to resume with a new environment.
+If you have lost your environment, you can find the main scripts used in this tutorial in the `nf-training` directory.
 
 ### Saving files from Gitpod to your local machine
 
@@ -165,6 +165,6 @@ export NXF_VER=22.04.5
 
 !!! Note
 
-    Most of this tutorial workshop requires `NXF_VER=22.04.0` or later, to use DSL2 as default.
+    This tutorial workshop requires `NXF_VER=22.04.0`, or later, to will use DSL2 as default.
 
 Run `nextflow -version` again to confirm that the change has taken effect.
