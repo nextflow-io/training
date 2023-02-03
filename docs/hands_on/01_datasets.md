@@ -12,7 +12,7 @@ The human genome assembly hg19 (GRCh37) from [GenBank](https://www.ncbi.nlm.nih.
 
 `ENCSR000COQ[12]_[12].fastq.gz`
 
-The RNA-seq data comes from the human GM12878 cell line from whole cell, cytosol and nucleous extraction (see table below).
+The RNA-seq data comes from the human GM12878 cell line from whole cell, cytosol and nucleus extraction (see table below).
 
 The libraries are stranded PE76 Illumina GAIIx RNA-Seq from rRNA-depleted Poly-A+ long RNA (`> 200` nucleotides in size).
 

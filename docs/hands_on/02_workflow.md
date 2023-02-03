@@ -126,7 +126,7 @@ java -jar GenomeAnalysisTK.jar -T SplitNCigarReads \
 
 ### Base Recalibration
 
-The proposed worflow does not include an indel re-alignment step, which is an optional step in the GATK best practices. We excluded that since it is quite time-intensive and does not really improve variant calling.
+The proposed workflow does not include an indel re-alignment step, which is an optional step in the GATK best practices. We excluded that since it is quite time-intensive and does not really improve variant calling.
 
 We instead include a base re-calibration step. This step allows to remove possible systematic errors introduced by the sequencing machine during the assignment of read qualities. To do this, the list of known variants is used as a training set to the machine learning algorithm that models possible errors. Base quality scores are then adjusted based on the obtained results.
 
