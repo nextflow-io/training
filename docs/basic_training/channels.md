@@ -134,9 +134,7 @@ workflow {
 }
 ```
 
-Check the output below:
-
-```console
+```console title="Output"
 4
 
 3
