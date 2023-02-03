@@ -65,10 +65,10 @@ All training material was originally written by [Seqera Labs](https://seqera.io)
 We welcome fixes and improvements from the community.
 Every page has a :material-file-edit-outline: icon in the top right of the page, which will take you to GitHub where you can edit the training source material via a pull-request.
 
-<figure markdown class="homepage_logos">
+<div markdown class="homepage_logos">
 
 ![Seqera Labs](assets/img/seqera_logo.svg#only-light)
 
 ![Seqera Labs](assets/img/seqera_logo_dark.svg#only-dark)
 
-</figure>
+</div>
