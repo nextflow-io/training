@@ -1,4 +1,4 @@
-# Nextflow Training
+# Nextflow Training <a href="https://gitpod.io/#https://github.com/nextflow-io/training"> <img src="https://img.shields.io/badge/Gitpod-%20Run%20this%20training%20on%20Gitpod-908a85?logo=gitpod" alt="Click here to run on Gitpod!" />
 
 ## » <https://training.nextflow.io> «
 
