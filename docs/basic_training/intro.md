@@ -79,7 +79,8 @@ TODO: Maybe either:
     Click the :material-plus-circle: icons in the code for explanations.
 
 ```groovy title="nf-training/hello.nf" linenums="1"
-#!/usr/bin/env nextflow // (1)!
+#!/usr/bin/env nextflow
+// (1)!
 
 params.greeting = 'Hello world!' // (2)!
 greeting_ch = Channel.of(params.greeting) // (3)!
@@ -104,8 +105,8 @@ process CONVERTTOUPPER { // (11)!
     output: // (14)!
     stdout // (15)!
 
-
-    """ // (16)!
+    // (16)!
+    """
     cat $y | tr '[a-z]' '[A-Z]'
     """
 } // (17)!
