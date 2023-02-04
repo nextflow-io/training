@@ -50,8 +50,12 @@
 }
 
 /* Dark mode figures */
-body[data-md-color-scheme="slate"] figure img {
+body[data-md-color-scheme="slate"] figure img,
+body[data-md-color-scheme="slate"] .excalidraw svg {
     filter: invert(100%) hue-rotate(180deg);
+}
+.excalidraw svg rect {
+    fill: transparent;
 }
 
 /* Only show heading enumerations at levels we care about */

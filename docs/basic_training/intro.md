@@ -24,10 +24,8 @@ Processes are executed independently and are isolated from each other, i.e. they
 
 Any `process` can define one or more `channels` as an `input` and `output`. The interaction between these processes, and ultimately the pipeline execution flow itself, is implicitly defined by these `input` and `output` declarations.
 
-<figure markdown>
-
-![Channels and processes](img/channel-process.png)
-
+<figure class="excalidraw">
+--8<-- "docs/basic_training/img/channel-process.excalidraw.svg"
 </figure>
 
 ### Execution abstraction

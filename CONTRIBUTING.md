@@ -44,6 +44,24 @@ export CARDS=false
 mkdocs serve
 ```
 
+## Figures
+
+Graphics should be drawn using [Excalidraw](https://excalidraw.com/).
+Please use the [VSCode extension](https://marketplace.visualstudio.com/items?itemName=pomdtr.excalidraw-editor) and give files a `.excalidraw.svg` filename suffix.
+Files will continue to be editable by others using this method.
+
+Excalidraw SVGs should be embedded as follows:
+
+```markdown
+<figure class="excalidraw">
+--8<-- "docs/basic_training/img/channel-files.excalidraw.svg"
+</figure>
+```
+
+> Note: The file path is from the root of the repo, not the markdown file!
+
+If you embed the SVG as a markdown image, the fonts will not work properly.
+
 ## Content style and formatting
 
 All training content must be written as markdown.
