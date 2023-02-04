@@ -49,6 +49,15 @@
     }
 }
 
+/* Dark mode figures */
+body[data-md-color-scheme="slate"] figure img,
+body[data-md-color-scheme="slate"] .excalidraw svg {
+    filter: invert(100%) hue-rotate(180deg);
+}
+.excalidraw svg rect {
+    fill: transparent;
+}
+
 /* Only show heading enumerations at levels we care about */
 .enumerate-headings-plugin {
     display: none;
@@ -103,6 +112,9 @@ h3 .enumerate-headings-plugin {
 }
 
 /* Homepage logos */
+.homepage_logos {
+    text-align: center;
+}
 .homepage_logos img {
     height: 2rem;
     max-width: 100%;
@@ -137,7 +149,8 @@ h3 .enumerate-headings-plugin {
 /* Custom Footer */
 .footer_cc_link svg {
     fill: currentcolor;
-    max-height: 0.8rem;
+    width: 0.8rem;
+    height: 0.8rem;
     vertical-align: -18%;
 }
 .footer_seqera_logo img {

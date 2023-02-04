@@ -101,6 +101,7 @@ markdown_extensions:
     - pymdownx.keys
     - pymdownx.snippets:
           base_path: ["."]
+    - pymdownx.snippets
     - pymdownx.superfences
     - tables
     - toc:

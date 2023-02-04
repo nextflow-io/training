@@ -24,7 +24,9 @@ Processes are executed independently and are isolated from each other, i.e., the
 
 Any `process` can define one or more `channels` as an `input` and `output`. The interaction between these processes, and ultimately the pipeline execution flow itself, is implicitly defined by these `input` and `output` declarations.
 
-![Channels and processes](img/channel-process.png)
+<figure class="excalidraw">
+--8<-- "docs/basic_training/img/channel-process.excalidraw.svg"
+</figure>
 
 ### Execution abstraction
 
@@ -34,7 +36,11 @@ If not otherwise specified, processes are executed on the local computer. The lo
 
 In other words, Nextflow provides an abstraction between the pipeline’s functional logic and the underlying execution system (or runtime). Thus, it is possible to write a pipeline that runs seamlessly on your computer, a cluster, or the cloud, without being modified. You simply define the target execution platform in the configuration file.
 
+<figure markdown>
+
 ![Execution abstraction](img/execution_abstraction.png)
+
+</figure>
 
 ### Scripting language
 
@@ -259,4 +265,8 @@ uojnoB
 
 To better understand how Nextflow is dealing with the data in this pipeline, below is a DAG-like figure to visualize all the `inputs`, `outputs`, `channels` and `processes`:
 
+<figure markdown>
+
 ![Hello world diagram](img/helloworlddiagram.png)
+
+</figure>
