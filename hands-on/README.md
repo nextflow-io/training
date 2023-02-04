@@ -29,7 +29,7 @@
 3 directories, 19 files
 ```
 
-## Solutions 
+## Solutions
 
 1. https://public_docs.crg.es/rguigo/courses/ngs17/solutions/anxious_advice.html
 2. https://public_docs.crg.es/rguigo/courses/ngs17/solutions/busy_building.html
@@ -43,4 +43,3 @@
 10. https://public_docs.crg.es/rguigo/courses/ngs17/solutions/jumping_jack.html
 11. https://public_docs.crg.es/rguigo/courses/ngs17/solutions/kind_koala.html
 12. https://public_docs.crg.es/rguigo/courses/ngs17/solutions/laughing_lynx.html
-
