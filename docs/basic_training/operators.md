@@ -32,7 +32,9 @@ square.view() // (3)!
 2. Creates a new channel, transforming each number into its square
 3. Prints the channel content
 
-![Channel map](img/channel-map.png)
+<figure class="excalidraw">
+--8<-- "docs/basic_training/img/channel-map.excalidraw.svg"
+</figure>
 
 Operators can also be chained to implement custom behaviors, so the previous snippet can also be written as:
 
