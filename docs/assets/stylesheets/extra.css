@@ -149,7 +149,8 @@ h3 .enumerate-headings-plugin {
 /* Custom Footer */
 .footer_cc_link svg {
     fill: currentcolor;
-    max-height: 0.8rem;
+    width: 0.8rem;
+    height: 0.8rem;
     vertical-align: -18%;
 }
 .footer_seqera_logo img {
