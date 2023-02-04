@@ -1,5 +1,14 @@
 # Contributing
 
+Table of contents:
+
+-   [Contribution model](#contribution-model)
+-   [Installation](#installation) ([Docker](#docker) / [Python](#python))
+-   [Figures & Diagrams](#figures--diagrams)
+-   [Content style and formatting](#content-style-and-formatting)
+-   [Known limitations](#known-limitations)
+-   [TODO / FIXME](#todo--fixme)
+
 ## Contribution model
 
 The typical workflow for contributing to training content is as follows:
@@ -77,11 +86,13 @@ Files will continue to be editable by others using this method.
 
 Excalidraw SVGs should be embedded as follows:
 
-```markdown
+<!-- prettier-ignore-start -->
+```html
 <figure class="excalidraw">
 --8<-- "docs/basic_training/img/channel-files.excalidraw.svg"
 </figure>
 ```
+<!-- prettier-ignore-end -->
 
 > Note: The file path is from the root of the repo, not the markdown file!
 
@@ -117,7 +128,7 @@ Mkdocs Material uses `// code comments` to anchor the annotations. That's great,
 There will hopefully be a way to add annotations at arbitrary line numbers in the future.
 See the footnote on the mkdocs material docs:
 
-> Code annotations [are] currently not compatible with [..] languages that do not have comments in their grammar. However, we're actively working on supporting alternate ways of defining code annotations, allowing to always place code annotations at the end of lines. ↩
+> Code annotations [are] currently not compatible with [..] languages that do not have comments in their grammar. However, we're actively working on supporting alternate ways of defining code annotations, allowing to always place code annotations at the end of lines.
 
 See [this GitHub discussions thread](https://github.com/squidfunk/mkdocs-material/discussions/3832#discussioncomment-4871068) for updates.
 
