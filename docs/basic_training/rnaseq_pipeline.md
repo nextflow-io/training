@@ -36,7 +36,7 @@ nextflow run script1.nf
 Try to specify a different input parameter in your execution command, for example:
 
 ```bash
-nextflow run script1.nf --reads '/workspace/training/nf-training/data/ggal/lung_{1,2}.fq'
+nextflow run script1.nf --reads '/workspace/gitpod/nf-training/data/ggal/lung_{1,2}.fq'
 ```
 
 ### :material-progress-question: Exercises

@@ -250,9 +250,9 @@ Channel
 It will produce an output similar to the following:
 
 ```groovy
-[liver, [/user/nf-training/data/ggal/liver_1.fq, /user/nf-training/data/ggal/liver_2.fq]]
-[gut, [/user/nf-training/data/ggal/gut_1.fq, /user/nf-training/data/ggal/gut_2.fq]]
-[lung, [/user/nf-training/data/ggal/lung_1.fq, /user/nf-training/data/ggal/lung_2.fq]]
+[liver, [/workspace/gitpod/nf-training/data/ggal/liver_1.fq, /workspace/gitpod/nf-training/data/ggal/liver_2.fq]]
+[gut, [/workspace/gitpod/nf-training/data/ggal/gut_1.fq, /workspace/gitpod/nf-training/data/ggal/gut_2.fq]]
+[lung, [/workspace/gitpod/nf-training/data/ggal/lung_1.fq, /workspace/gitpod/nf-training/data/ggal/lung_2.fq]]
 ```
 
 !!! warning
@@ -506,7 +506,7 @@ for( List row : lines ) {
         Add a csv text file containing the following, as an example input with the name "fastq.csv":
 
         ```csv
-        gut,/workspace/training/nf-training/data/ggal/gut_1.fq,/workspace/training/nf-training/data/ggal/gut_2.fq
+        gut,/workspace/gitpod/nf-training/data/ggal/gut_1.fq,/workspace/gitpod/nf-training/data/ggal/gut_2.fq
         ```
 
         Then replace the input channel for the reads in `script7.nf`. Changing the following lines:
