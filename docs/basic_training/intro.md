@@ -186,11 +186,11 @@ The standard output shows (line by line):
 
 !!! tip
 
-    The second process runs twice, executing in two different work directories for each input file. Therefore, in the previous example the work directory `[1a/3c54ed]` represents just one of the two directories that were processed. To print all the relevant paths to the screen, use the `-ansi-log` flag (e.g., `nextflow run hello.nf -ansi-log false`).
+    The second process runs twice, executing in two different work directories for each input file. The [ANSI](https://en.wikipedia.org/wiki/ANSI_escape_code) log output from Nextflow dynamically refreshes as the pipeline runs; in the previous example the work directory `[1a/3c54ed]` is the second of the two directories that were processed (overwriting the log with the first). To print all the relevant paths to the screen, disable the ANSI log output usin the `-ansi-log` flag (e.g., `nextflow run hello.nf -ansi-log false`).
 
 It’s worth noting that the process `CONVERTTOUPPER` is executed in parallel, so there’s no guarantee that the instance processing the first split (the chunk _Hello ') will be executed before the one processing the second split (the chunk 'world!_).
 
-Thus, your final result will be printed out in a different order:
+Thus, it could be that your final result will be printed out in a different order:
 
 ```
 WORLD!

@@ -167,6 +167,6 @@ export NXF_VER=22.04.5
 
 !!! Note
 
-    This tutorial workshop requires `NXF_VER=22.04.0`, or later, to will use DSL2 as default.
+    This tutorial workshop requires `NXF_VER=22.04.0`, or later. This version will use DSL2 as default.
 
 Run `nextflow -version` again to confirm that the change has taken effect.
