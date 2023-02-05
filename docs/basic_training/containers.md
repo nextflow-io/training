@@ -360,16 +360,7 @@ bash
 Then write your YAML file (to `env.yml`). There is already a file named `env.yml` in the `nf-training` folder as an example. Its content is shown below.
 
 ```yaml
-name: nf-tutorial
-channels:
-    - conda-forge
-    - defaults
-    - bioconda
-dependencies:
-    - bioconda::salmon=1.5.1
-    - bioconda::fastqc=0.11.9
-    - bioconda::multiqc=1.12
-    - conda-forge::tbb=2020.2
+--8<-- "nf-training/env.yml"
 ```
 
 Given the recipe file, the environment is created using the command shown below. The `conda env create` command may take several minutes, as conda tries to resolve dependencies of the desired packages at runtime, and then downloads everything that is required.
@@ -424,16 +415,7 @@ This saves having to build a conda environment each time you want to use it (as 
 To do this, you simply require a `Dockerfile` and you use micromamba to install the packages. However, a good practice is to have a YAML recipe file like in the previous section, so we’ll do it here too, using the same `env.yml` as before.
 
 ```yaml
-name: nf-tutorial
-channels:
-    - conda-forge
-    - defaults
-    - bioconda
-dependencies:
-    - bioconda::salmon=1.5.1
-    - bioconda::fastqc=0.11.9
-    - bioconda::multiqc=1.12
-    - conda-forge::tbb=2020.2
+--8<-- "nf-training/env.yml"
 ```
 
 Then, we can write our Dockerfile with micromamba installing the packages from this recipe file.
