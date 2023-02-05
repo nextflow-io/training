@@ -181,7 +181,7 @@ docker run --volume $PWD:$PWD --workdir $PWD my-image \
 Or set a folder you want to mount as an environmental variable, called `DATA`:
 
 ```bash
-DATA=/workspace/training/nf-training/data
+DATA=/workspace/gitpod/nf-training/data
 docker run --volume $DATA:$DATA --workdir $PWD my-image \
     salmon index -t $PWD/data/ggal/transcriptome.fa -i transcript-index
 ```
@@ -357,22 +357,13 @@ conda init
 bash
 ```
 
-Then write your YAML file (to `env.yml`). For example:
+Then write your YAML file (to `env.yml`). There is already a file named `env.yml` in the `nf-training` folder as an example. Its content is shown below.
 
 ```yaml
-name: nf-tutorial
-channels:
-    - conda-forge
-    - defaults
-    - bioconda
-dependencies:
-    - bioconda::salmon=1.5.1
-    - bioconda::fastqc=0.11.9
-    - bioconda::multiqc=1.12
-    - conda-forge::tbb=2020.2
+--8<-- "nf-training/env.yml"
 ```
 
-Given the recipe file, the environment is created using the command shown below:
+Given the recipe file, the environment is created using the command shown below. The `conda env create` command may take several minutes, as conda tries to resolve dependencies of the desired packages at runtime, and then downloads everything that is required.
 
 ```bash
 conda env create --file env.yml
@@ -421,19 +412,10 @@ Another way to build conda-like environments is through a `Dockerfile` and [`mic
 
 This saves having to build a conda environment each time you want to use it (as outlined in previous sections).
 
-To do this, you simply require a `Dockerfile` and you use micromamba to install the packages. However, a good practice is to have a YAML recipe file like in the previous section, so we’ll do it here too.
+To do this, you simply require a `Dockerfile` and you use micromamba to install the packages. However, a good practice is to have a YAML recipe file like in the previous section, so we’ll do it here too, using the same `env.yml` as before.
 
 ```yaml
-name: nf-tutorial
-channels:
-    - conda-forge
-    - defaults
-    - bioconda
-dependencies:
-    - bioconda::salmon=1.5.1
-    - bioconda::fastqc=0.11.9
-    - bioconda::multiqc=1.12
-    - conda-forge::tbb=2020.2
+--8<-- "nf-training/env.yml"
 ```
 
 Then, we can write our Dockerfile with micromamba installing the packages from this recipe file.
@@ -444,7 +426,7 @@ FROM mambaorg/micromamba:0.25.1
 LABEL image.author.name "Your Name Here"
 LABEL image.author.email "your@email.here"
 
-COPY --chown=$MAMBA_USER:$MAMBA_USER micromamba.yml /tmp/env.yml
+COPY --chown=$MAMBA_USER:$MAMBA_USER env.yml /tmp/env.yml
 
 RUN micromamba create -n nf-tutorial
 

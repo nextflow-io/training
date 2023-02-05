@@ -169,18 +169,7 @@ workflow  {
 
     We have moved the `greeting_ch` into the workflow scope for this exercise.
 
-We can also explicitly define the output of one channel to another using the `.out` attribute.
-
-```groovy linenums="1" hl_lines="4"
-workflow  {
-    greeting_ch = Channel.of(params.greeting)
-    letters_ch = SPLITLETTERS(greeting_ch)
-    results_ch = CONVERTTOUPPER(letters_ch.out.flatten())
-    results_ch.view{ it }
-}
-```
-
-We can also remove the channel definitions completely from each line if we prefer (as at each call, a channel is implied):
+We can also explicitly define the output of one channel to another using the `.out` attribute, removing the channel definitions completely:
 
 ```groovy linenums="1" hl_lines="3-5"
 workflow  {
