@@ -123,3 +123,12 @@ plugins:
               - basic_training/index.md
               - hands_on/index.md
               - hands_on/solutions/*md
+    - i18n:
+          default_language: en
+          languages:
+              en:
+                  name: English
+                  build: true
+              pt_BR:
+                  name: Português Brasileiro
+                  build: true
