@@ -55,7 +55,6 @@ theme:
         - content.code.annotate
         - content.code.copy
         - navigation.footer
-        - navigation.instant
         - navigation.tabs
         - navigation.top
         - navigation.tracking
