@@ -1,9 +1,8 @@
 # 🌐 <abbr title="translation">Translation</abbr> Guide
 
 Table of contents:
-- [🌐 Translation Guide](#-translation-guide)
-  - [Contribution model](#contribution-model)
-  - [Preview](#preview)
+- [Contribution model](#contribution-model)
+- [Preview](#preview)
     - [Docker](#docker)
     - [Python](#python)
 
@@ -13,10 +12,10 @@ The typical workflow for contributing with translation is as follows:
 
 1. Make a _fork_ of the GitHub repository to your own account
 2. Work locally (see below) and make your changes
-2a. Check if the language you want to translate to is already enabled in the `mkdocs.yml` file. If it isn't do it according to [this](https://github.com/nextflow-io/training/pull/163/files#diff-98d0f806abc9af24e6a7c545d3d77e8f9ad57643e27211d7a7b896113e420ed2) example.
-2b. If you want to improve an already existing translation, the file already exists and the language is already set up. Simply open the file and work on it. Otherwise, create the new file with the following pattern: If the original file in English is `filename.md`, you will create in the same folder a new file named `filename.language_code.md`, where `language_code` is the language code that you can find [here](https://en.wikipedia.org/wiki/ISO_639-1), for the language you wish to translate to. Pay attention to the language code, as it has to be the same that is specified in the `mkdocs.yml` file for that language.
-1. Commit and push to your forked repository
-2. Open a pull-request against the main repo, which can be reviewed and merged
+    - Check if the language you want to translate to is already enabled in the `mkdocs.yml` file. If it isn't do it according to [this](https://github.com/nextflow-io/training/pull/163/files#diff-98d0f806abc9af24e6a7c545d3d77e8f9ad57643e27211d7a7b896113e420ed2) example.
+    - If you want to improve an already existing translation, the file already exists and the language is already set up. Simply open the file and work on it. Otherwise, create the new file with the following pattern: If the original file in English is `filename.md`, you will create in the same folder a new file named `filename.language_code.md`, where `language_code` is the language code that you can find [here](https://en.wikipedia.org/wiki/ISO_639-1), for the language you wish to translate to. Pay attention to the language code, as it has to be the same that is specified in the `mkdocs.yml` file for that language.
+3. Commit and push to your forked repository
+4. Open a pull-request against the main repo, which can be reviewed and merged
 
 The training website is built using [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/).
 It's a static site generator designed for documentation websites which is fast and lightweight and comes with a lot of nice features.
