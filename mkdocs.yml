@@ -55,7 +55,6 @@ theme:
         - content.code.annotate
         - content.code.copy
         - navigation.footer
-        - navigation.instant
         - navigation.tabs
         - navigation.top
         - navigation.tracking
@@ -123,3 +122,12 @@ plugins:
               - basic_training/index.md
               - hands_on/index.md
               - hands_on/solutions/*md
+    - i18n:
+          default_language: en
+          languages:
+              en:
+                  name: English
+                  build: true
+              pt_BR:
+                  name: Português Brasileiro
+                  build: true
