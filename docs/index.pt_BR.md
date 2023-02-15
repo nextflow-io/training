@@ -1,5 +1,5 @@
 ---
-title: Portal de Treinamento da comunidade do Nextflow
+title: Portal de Treinamento Nextflow
 description: Seja bem vindo ao portal de treinamento da comunidade do Nextflow!
 hide:
     - navigation
@@ -7,14 +7,14 @@ hide:
     - footer
 ---
 
-# Treinamentos de Nextflow
+# Treinamentos Nextflow
 
 Seja bem vindo ao portal de treinamento da comunidade do Nextflow!
 
-Esses materiais de treinamento são de código aberto e gratuitos para uso de qualquer pessoa.
-Eles estão hospedados em um [repositório do GitHub](https://github.com/nextflow-io/training) junto a scripts de exemplo e configuração de desenvolvimento.
+Esses materiais de treinamento são de código aberto e gratuitos para qualquer pessoa utilizar.
+Eles estão hospedados em um [repositório do GitHub](https://github.com/nextflow-io/training) junto a exemplos de scripts e de configurações de desenvolvimento.
 
-Ainda que você possa aprender com esse material quando bem entender, você provavelmente irá aproveitá-lo mais ao participar de um evento de treinamento.
+Ainda que você possa consultar e estudar esse material quando bem quiser, você provavelmente irá aproveitá-lo mais ao participar de um evento de treinamento.
 Eventos online e gratuitos são regularmente organizados pela comunidade do nf-core. Veja mais na [página de eventos do nf-core](https://nf-co.re/events).
 
 [![Abra no GitPod](https://img.shields.io/badge/Gitpod-%20Abra%20no%20Gitpod-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/nextflow-io/training)
@@ -40,7 +40,7 @@ Encontre o que se adequa mais ao que você está procurando:
 
         :material-alert: Esse material não é utilizado / atualizado com frequência como os outros materiais.
 
-    Um tutorial de "aprender fazendo" com menos foco na teoria, conduzindo através de exercícios de complexidade cada vez maior.
+    Um tutorial de "aprender fazendo" com menos foco na teoria, através de exercícios de complexidade cada vez maior.
 
     [Comece o treinamento prático :material-arrow-right:](hands_on/index.md){ .md-button }
 
@@ -48,7 +48,7 @@ Encontre o que se adequa mais ao que você está procurando:
 
 De referências rápidas à links úteis:
 
-| Reference                                                                      |  Community                                                                     |
+| Referências                                                                    |  Comunidade                                                                    |
 | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
 | [Documentação oficial do Nextflow](https://nextflow.io/docs/latest/index.html) | [Slack do Nextflow](https://www.nextflow.io/slack-invite.html)                 |
 | [Página ofiical do Nextflow](https://nextflow.io/)                             | [nf-core](https://nf-co.re/)                                                   |
@@ -63,7 +63,7 @@ Não sabe por onde começar? Confira a página [Conseguindo ajuda](help.md).
 Todo o material de treinamento foi escrito originalmente pela [Seqera Labs](https://seqera.io) mas foi compartilhado livremente ([CC BY-NC-ND](https://creativecommons.org/licenses/by-nc-nd/4.0/)) para a comunidade.
 
 Correções e melhorias pela comunidade são bem vindas.
-Toda página tem o ícone :material-file-edit-outline: em seu topo direito, o que irá te levar ao GitHub onde você poderá editá-la através de um Pull Request.
+Toda página tem o ícone :material-file-edit-outline: em seu topo direito, que irá te levar ao GitHub onde você poderá editá-la através de um Pull Request.
 
 <div markdown class="homepage_logos">
 
