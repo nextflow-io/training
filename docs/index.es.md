@@ -47,7 +47,7 @@ Encuentra el adecuado para ti:
 
 Referencia rápida a algunos enlaces útiles:
 
-| Reference                                                               |  Community                                                           |
+| Referencias                                                             |  Comunidad                                                           |
 | ------------------------------------------------------------------------| -------------------------------------------------------------------- |
 | [Documentación de Nextflow](https://nextflow.io/docs/latest/index.html) | [Slack de Nextflow](https://www.nextflow.io/slack-invite.html)       |
 | [Página principal de Nextflow](https://nextflow.io/)                    | [nf-core](https://nf-co.re/)                                         |
