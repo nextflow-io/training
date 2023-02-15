@@ -10,7 +10,7 @@ The first is to install the requirements [locally](#local-installation), which i
 
 The second is to use [Gitpod](#gitpod), which is best for first-timers as this platform contains all the programs and data required. Simply click the link and log in using your GitHub account to start the tutorial:
 
-[![Open in GitPod](/assets/img/open_in_gitpod.svg)](https://gitpod.io/#https://github.com/nextflow-io/training)
+[![Open in GitPod](https://img.shields.io/badge/Gitpod-%20Open%20in%20Gitpod-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/nextflow-io/training)
 
 ## Local installation
 
