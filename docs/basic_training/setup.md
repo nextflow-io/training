@@ -6,7 +6,7 @@ description: Como configurar um ambiente de desenvolvimento para executar o Next
 
 Existem duas maneiras principais de começar este treinamento em Nextflow da Seqera.
 
-A primeira é instalar os requisitos [localmente](#instalação-local), o que é melhor se você já estiver familiarizado com Git e Docker ou trabalhando offline.
+A primeira é instalar os requisitos [localmente](#instalacao-local), o que é melhor se você já estiver familiarizado com Git e Docker ou trabalhando offline.
 
 A segunda é usar o [Gitpod](#gitpod), o que é melhor para iniciantes, pois esta plataforma contém todos os programas e dados necessários. Basta clicar no link e fazer login usando sua conta do GitHub para iniciar o tutorial:
 
@@ -131,9 +131,9 @@ Encoding: UTF-8 (UTF-8)
 -   Há também uma opção de ambiente de trabalho que oferece até 8 núcleos, 16 GB de RAM e 50 GB de armazenamento. No entanto, o ambiente de trabalho grande usará seus créditos gratuitos mais rapidamente e você terá menos horas de acesso a esse ambiente.
 -   Sua sessão no Gitpod expirará após 30 minutos de inatividade e suas alterações serão salvas por até 2 semanas (consulte a próxima seção para reabrir uma sessão expirada).
 
-Veja [gitpod.io](https://www.gitpod.io) para mais detalhes.
+Acesse [gitpod.io](https://www.gitpod.io) para mais detalhes.
 
-### Reabrindo uma dessão do Gitpod
+### Reabrindo uma sessão do Gitpod
 
 Você pode reabrir um ambiente em <https://gitpod.io/workspaces>. Encontre seu ambiente anterior na lista, selecione as reticências (ícone de três pontos) e selecione Abrir.
 
