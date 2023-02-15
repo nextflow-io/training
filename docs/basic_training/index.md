@@ -1,31 +1,31 @@
 ---
-description: Overview of the Basic Nextflow Training material
+description: Visão geral do material de treinamento básico do Nextflow
 hide:
     - toc
 ---
 
-# Welcome
+# Seja bem vindo
 
-## Welcome to the Nextflow Training Workshop
+## Bem vindo ao treinamento básico do Nextflow
 
-We are excited to have you on the path to writing reproducible and scalable scientific workflows using Nextflow. This guide complements the full Nextflow documentation - if you ever have any doubts, head over to the docs located [here](https://www.nextflow.io/docs/latest).
+Estamos entusiasmados em tê-lo no caminho para escrever fluxos de trabalho científicos reprodutíveis e escaláveis usando o Nextflow. Este guia complementa a documentação oficial do Nextflow - se você tiver alguma dúvida, acesse a documentação oficial localizada [aqui](https://www.nextflow.io/docs/latest).
 
-By the end of this course you should:
+Ao final deste curso você deverá::
 
-1. Be proficient in writing Nextflow pipelines
-2. Know the basic Nextflow concepts of Channels, Processes and Operators
-3. Have an understanding of containerized workflows
-4. Understand the different execution platforms supported by Nextflow
-5. Be introduced to the Nextflow community and ecosystem
+1. Ser proficiente em escrever pipelines com o Nextflow
+2. Conhecer os conceitos básicos de Canais, Processos e Operadores no Nextflow
+3. Ter uma compreensão dos fluxos de trabalho usando contêineres
+4. Entender as diferentes plataformas de execução suportadas pelo Nextflow
+5. sentir-se apresentado à comunidade e ecossistema do Nextflow
 
-## Overview
+## Visão geral
 
-To get you started with Nextflow as quickly as possible, we will walk through the following steps:
+Para começar a usar o Nextflow o mais rápido possível, seguiremos as seguintes etapas::
 
-1. Set up a development environment to run Nextflow
-2. Explore Nextflow concepts using some basic workflows, including a multi-step RNA-Seq analysis
-3. Build and use Docker containers to encapsulate all workflow dependencies
-4. Dive deeper into the core Nextflow syntax, including Channels, Processes, and Operators
-5. Cover cluster and cloud deployment scenarios and explore Nextflow Tower capabilities
+1. Configurar um ambiente de desenvolvimento para executar o Nextflow
+2. Explorar os conceitos do Nextflow usando alguns fluxos de trabalho básicos, incluindo uma análise de RNA-Seq com várias etapas
+3. Criar e usar contêineres do Docker para encapsular todas as dependências do fluxo de trabalho
+4. Mergulhar mais fundo na sintaxe principal do Nextflow, incluindo Canais, Processos e Operadores
+5. Cobrir cenários de implantação na nuvem e em clusters e explorar os recursos do Nextflow Tower
 
-This will give you a broad understanding of Nextflow, to start writing your own pipelines. We hope you enjoy the course! This is an ever-evolving document - feedback is always welcome.
+Isso lhe dará uma ampla compreensão do Nextflow, para começar a escrever seus próprios pipelines. Esperamos que goste do curso! Este é um documento em constante evolução - feedback é sempre bem-vindo.
