@@ -2,7 +2,7 @@
 description: Basic Nextflow Training Workshop
 ---
 
-# Processes
+# Processos
 
 In Nextflow, a `process` is the basic computing primitive to execute foreign functions (i.e., custom scripts or tools).
 
