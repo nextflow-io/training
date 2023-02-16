@@ -4,11 +4,11 @@ description: Como configurar um ambiente de desenvolvimento para executar o Next
 
 # Configuração do ambiente
 
-Existem duas maneiras principais de começar este treinamento em Nextflow da Seqera.
+Existem duas principais maneiras de começar este treinamento em Nextflow da Seqera.
 
 A primeira é instalar os requisitos [localmente](#instalacao-local), o que é melhor se você já estiver familiarizado com Git e Docker ou trabalhando offline.
 
-A segunda é usar o [Gitpod](#gitpod), o que é melhor para iniciantes, pois esta plataforma contém todos os programas e dados necessários. Basta clicar no link e fazer login usando sua conta do GitHub para iniciar o tutorial:
+A segunda é usar o [Gitpod](#gitpod), o que é melhor para iniciantes, pois esta plataforma contém todos os programas e dados necessários. Basta clicar no link abaixo e fazer login usando sua conta do GitHub para iniciar o tutorial:
 
 [![Abra no GitPod](https://img.shields.io/badge/Gitpod-%20Abra%20no%20Gitpod-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/nextflow-io/training)
 
@@ -71,7 +71,7 @@ Em seguida, `cd` no diretório `nf-training`.
 
 ### Verificando sua instalação
 
-Verifique a instalação correta do `nextflow` executando o seguinte comando:
+Verifique se o `nextflow` foi instalado corretamente executando o seguinte comando:
 
 ```bash
 nextflow info
@@ -81,7 +81,7 @@ Isso deve mostrar a versão atual, sistema e tempo de execução.
 
 ## Gitpod
 
-Um ambiente de desenvolvimento Nextflow pré-configurado está disponível usando o Gitpod.
+Um ambiente de desenvolvimento Nextflow pré-configurado está disponível no Gitpod.
 
 #### Requisitos
 
@@ -107,9 +107,9 @@ Agora você deve ver algo semelhante a imagem a seguir:
 
 -   **A barra lateral** permite que você personalize seu ambiente Gitpod e execute tarefas básicas (copiar, colar, abrir arquivos, pesquisar, git, etc.). Clique no botão Explorer para ver quais arquivos estão neste repositório.
 -   **O terminal** permite que você execute todos os programas mencionados no repositório. Por exemplo, tanto `nextflow` quanto `docker` estão instalados e podem ser executados.
--   **A janela principal** permite visualizar e editar arquivos. Clicar em um arquivo no explorer o abrirá na janela principal. Você também deve ver o material de treinamento em uma janela (<https://training.nextflow.io/>).
+-   **A janela principal** permite visualizar e editar arquivos. Clique em um arquivo no explorer para abri-lo na janela principal. Você também deve ver o material de treinamento em uma das janelas (<https://training.nextflow.io/>).
 
-Para testar se o ambiente está funcionando corretamente, digite o seguinte no terminal:
+Para testar se o ambiente está funcionando corretamente, digite o seguinte comando no terminal:
 
 ```bash
 nextflow info
