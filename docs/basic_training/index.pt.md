@@ -10,7 +10,7 @@ hide:
 
 Estamos entusiasmados em tê-lo no caminho para escrever fluxos de trabalho científicos reprodutíveis e escaláveis usando o Nextflow. Este guia complementa a documentação oficial do Nextflow - se você tiver alguma dúvida, acesse a documentação oficial localizada [aqui](https://www.nextflow.io/docs/latest).
 
-Ao final deste curso você deverá::
+Ao final deste curso você deverá:
 
 1. Ser proficiente em escrever pipelines com o Nextflow
 2. Conhecer os conceitos básicos de Canais, Processos e Operadores no Nextflow
@@ -20,7 +20,7 @@ Ao final deste curso você deverá::
 
 ## Visão geral
 
-Para começar a usar o Nextflow o mais rápido possível, seguiremos as seguintes etapas::
+Para começar a usar o Nextflow o mais rápido possível, seguiremos as seguintes etapas:
 
 1. Configurar um ambiente de desenvolvimento para executar o Nextflow
 2. Explorar os conceitos do Nextflow usando alguns fluxos de trabalho básicos, incluindo uma análise de RNA-Seq com várias etapas
