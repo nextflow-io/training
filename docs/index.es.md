@@ -25,6 +25,7 @@ Tenemos varios talleres disponibles en este sitio web.
 Encuentra el adecuado para ti:
 
 !!! exercise "Taller de Entrenamiento Básico de Nextflow"
+
     !!! tip inline end ""
 
         :material-lightbulb: Este es el principal material de capacitación de Nextflow utilizado en la mayoría de los eventos de capacitación de Nextflow y nf-core.
@@ -47,11 +48,11 @@ Encuentra el adecuado para ti:
 
 Referencia rápida a algunos enlaces útiles:
 
-| Referencias                                                             |  Comunidad                                                           |
-| ------------------------------------------------------------------------| -------------------------------------------------------------------- |
-| [Documentación de Nextflow](https://nextflow.io/docs/latest/index.html) | [Slack de Nextflow](https://www.nextflow.io/slack-invite.html)       |
-| [Página principal de Nextflow](https://nextflow.io/)                    | [nf-core](https://nf-co.re/)                                         |
-| [Seqera Labs](https://seqera.io/)                                       | [Código fuente en GitHub](https://github.com/nextflow-io/training)   |
+| Referencias                                                             | Comunidad                                                          |
+| ----------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| [Documentación de Nextflow](https://nextflow.io/docs/latest/index.html) | [Slack de Nextflow](https://www.nextflow.io/slack-invite.html)     |
+| [Página principal de Nextflow](https://nextflow.io/)                    | [nf-core](https://nf-co.re/)                                       |
+| [Seqera Labs](https://seqera.io/)                                       | [Código fuente en GitHub](https://github.com/nextflow-io/training) |
 
 ¿No estás seguro por dónde comenzar? Consulta la página de [ayuda](help.md).
 
@@ -63,6 +64,7 @@ Todo el material de capacitación fue escrito originalmente por [Seqera Labs](ht
 
 Damos la bienvenida a las correcciones y mejoras de la comunidad.
 Cada página tiene un ícono :material-file-edit-outline: en la parte superior derecha de la página, que te llevará a GitHub, donde puedes editar el material a través de un Pull Request.
+
 <div markdown class="homepage_logos">
 
 ![Seqera Labs](assets/img/seqera_logo.svg#only-light)
