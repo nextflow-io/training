@@ -1,42 +1,42 @@
 ---
-description: Basic Nextflow Training Workshop
+description: Material de treinamento básico do Nextflow
 ---
 
-# Operators
+# Operadores
 
-Operators are methods that allow you to connect channels, transform values emitted by a channel, or apply some user-provided rules.
+Operadores são métodos para conectar canais, transformar valores emitidos por canais ou executar regras próprias em canais.
 
-There are seven main groups of operators are described in greater detail within the Nextflow Reference Documentation, linked below:
+Existem sete grupos de operadores descritos em detalhe na Documentação do Nextflow, estes são:
 
-1. [Filtering operators](https://www.nextflow.io/docs/latest/operator.html#filtering-operators)
-2. [Transforming operators](https://www.nextflow.io/docs/latest/operator.html#transforming-operators)
-3. [Splitting operators](https://www.nextflow.io/docs/latest/operator.html#splitting-operators)
-4. [Combining operators](https://www.nextflow.io/docs/latest/operator.html#combining-operators)
-5. [Forking operators](https://www.nextflow.io/docs/latest/operator.html#forking-operators)
-6. [Maths operators](https://www.nextflow.io/docs/latest/operator.html#maths-operators)
-7. [Other operators](https://www.nextflow.io/docs/latest/operator.html#other-operators)
+1. [Operadores de filtragem](https://www.nextflow.io/docs/latest/operator.html#filtering-operators)
+2. [Operadores de transformação](https://www.nextflow.io/docs/latest/operator.html#transforming-operators)
+3. [Operadores de divisão](https://www.nextflow.io/docs/latest/operator.html#splitting-operators)
+4. [Operadores de combinação](https://www.nextflow.io/docs/latest/operator.html#combining-operators)
+5. [Operadores de bifurcação](https://www.nextflow.io/docs/latest/operator.html#forking-operators)
+6. [Operadores matemáticos](https://www.nextflow.io/docs/latest/operator.html#maths-operators)
+7. [Outros operadores](https://www.nextflow.io/docs/latest/operator.html#other-operators)
 
-## Basic example
+## Exemplo básico
 
 !!! info ""
 
-    Click the :material-plus-circle: icons in the code for explanations.
+    Clique no ícone :material-plus-circle: para ver explicações do código.
 
 ```groovy linenums="1"
 nums = Channel.of(1,2,3,4) // (1)!
-square = nums.map { it -> it * it } // (2)!
-square.view() // (3)!
+quadrados = nums.map { it -> it * it } // (2)!
+quadrados.view() // (3)!
 ```
 
-1. Creates a queue channel emitting four values
-2. Creates a new channel, transforming each number into its square
-3. Prints the channel content
+1. Cria um canal de fila que emite quatro valores
+2. Cria um novo canal, transformando cada número ao quadrado
+3. Imprime o conteúdo do canal
 
 <figure class="excalidraw">
 --8<-- "docs/basic_training/img/channel-map.excalidraw.svg"
 </figure>
 
-Operators can also be chained to implement custom behaviors, so the previous snippet can also be written as:
+Para implementar funcionalidades específicas operadores também podem ser encadeados. Então, o código anterior também pode ser escrito assim:
 
 ```groovy linenums="1"
 Channel
@@ -45,13 +45,13 @@ Channel
     .view()
 ```
 
-## Basic operators
+## Operadores básicos
 
-Here we explore some of the most commonly used operators.
+Agora iremos explorar alguns dos operadores mais comuns.
 
 ### `view()`
 
-The `view` operator prints the items emitted by a channel to the console standard output, appending a _new line_ character to each item. For example:
+O operador `view` imprime os itens emitidos por um canal para o terminal, acrescentando um caractere de _quebra de linha_ após cada item. Por exemplo:
 
 ```groovy linenums="1"
 Channel
@@ -65,7 +65,7 @@ bar
 baz
 ```
 
-An optional _closure_ parameter can be specified to customize how items are printed. For example:
+Você também pode especificar uma _clausura_ para personalizar como os itens são impressos. Por exemplo:
 
 ```groovy linenums="1"
 Channel
@@ -81,27 +81,30 @@ Channel
 
 ### `map()`
 
-The `map` operator applies a function of your choosing to every item emitted by a channel and returns the items obtained as a new channel. The function applied is called the _mapping_ function and is expressed with a _closure_ as shown in the example below:
+O operador `map` aplica uma função de sua escolha em cada item emitido por um canal
+e retorna os items obtidos como um novo canal. A função aplicada é chamada de função
+de _mapeamento_ e é expressa com uma _clausura_, como demonstrado no exemplo abaixo:
 
 ```groovy linenums="1"
 Channel
-    .of( 'hello', 'world' )
+    .of( 'olá', 'mundo' )
     .map { it -> it.reverse() }
     .view()
 ```
 
-A `map` can associate a generic _tuple_ to each element and can contain any data.
+Um `map` pode associar uma _tupla_ genérica a cada elemento e pode conter qualquer
+tipo de dado.
 
 ```groovy linenums="1"
 Channel
-    .of( 'hello', 'world' )
+    .of( 'olá', 'mundo' )
     .map { word -> [word, word.size()] }
-    .view { word, len -> "$word contains $len letters" }
+    .view { word, len -> "$word contém $len letras" }
 ```
 
 !!! exercise
 
-    Use `fromPath` to create a channel emitting the _fastq_ files matching the pattern `data/ggal/*.fq`, then use `map` to return a pair containing the file name and the path itself, and finally, use `view` to print the resulting channel.
+    Use `fromPath` para criar um canal emitindo os arquivos _fastq_ que correspondam à expressão `data/ggal/*.fq`, então use `map` para retornar um par contendo o nome e o caminho para o arquivo, e, por fim, use `view` para imprimir o canal resultante.
 
     ??? solution
 
@@ -114,7 +117,7 @@ Channel
 
 ### `mix()`
 
-The `mix` operator combines the items emitted by two (or more) channels into a single channel.
+O operador `mix` combina os itens emitidos por dois (ou mais) canais em um único canal.
 
 ```groovy linenums="1"
 c1 = Channel.of( 1,2,3 )
@@ -135,11 +138,11 @@ z
 
 !!! warning
 
-    The items in the resulting channel have the same order as in the respective original channels. However, there is no guarantee that the element of the second channel are appended after the elements of the first. Indeed, in the example above, the element `a` has been printed before `3`.
+    Os itens no canal resultante possuem a mesma ordem dos seus respectivos canais originais. No entanto, não há garantia que o elemento do segundo canal é acrescentado ao final dos elementos do primeiro canal. Como se pode observar acima, o elemento `a` foi impresso antes de `3`.
 
 ### `flatten()`
 
-The `flatten` operator transforms a channel in such a way that every _tuple_ is flattened so that each entry is emitted as a sole element by the resulting channel.
+O operador `flatten` transforma um canal de maneira que cada _tupla_ é achatada, isto é, cada entrada é emitida como um único elemento pelo canal resultante.
 
 ```groovy linenums="1"
 foo = [1,2,3]
@@ -162,7 +165,7 @@ Channel
 
 ### `collect()`
 
-The `collect` operator collects all of the items emitted by a channel in a list and returns the object as a sole emission.
+O operador `collect` coleta todos os itens emitidos por um canal em uma lista e retorna o objeto como uma única emissão.
 
 ```groovy linenums="1"
 Channel
@@ -171,7 +174,7 @@ Channel
     .view()
 ```
 
-It prints a single value:
+Isto imprime o valor:
 
 ```console title="Output"
 [1,2,3,4]
@@ -179,13 +182,13 @@ It prints a single value:
 
 !!! info
 
-    The result of the `collect` operator is a **value** channel.
+    O resultado do operador `collect` é um canal de **valor**.
 
 ### `groupTuple()`
 
-The `groupTuple` operator collects tuples (or lists) of values emitted by the source channel, grouping the elements that share the same key. Finally, it emits a new tuple object for each distinct key collected.
+O operador `groupTuple` coleta as tuplas (ou listas) de valores emitidos pelo canal original, agrupando os elementos que possuem a mesma chave. Por fim, ele emite uma nova tupla para cada chave distinta.
 
-Try the following example:
+Por exemplo:
 
 ```groovy linenums="1"
 Channel
@@ -200,11 +203,11 @@ Channel
 [3, [B, D]]
 ```
 
-This operator is useful to process a group together with all the elements that share a common property or grouping key.
+Esse operador é útil para processar um grupo, juntando elementos que possuem uma propriedade ou uma chave em comum.
 
 !!! exercise
 
-    Use `fromPath` to create a channel emitting all of the files in the folder `data/meta/`, then use a `map` to associate the `baseName` prefix to each file. Finally, group all files that have the same common prefix.
+    Use `fromPath` para criar um canal emitindo todos os arquivos no diretório `data/meta/`, então use `map` para associar o prefixo `baseName` a cada arquivo. Por fim, agrupe todo os arquivos que possuem o mesmo prefixo.
 
     ??? solution
 
@@ -217,12 +220,13 @@ This operator is useful to process a group together with all the elements that s
 
 ### `join()`
 
-The `join` operator creates a channel that joins together the items emitted by two channels with a matching key. The key is defined, by default, as the first element in each item emitted.
+O operador `join` cria um canal que combina os itens emitidos por dois canais que possuam uma chave em comum. Por padrão, a chave é definida como o primeiro elemento
+em cada item emitido.
 
 ```groovy linenums="1"
-left = Channel.of(['X', 1], ['Y', 2], ['Z', 3], ['P', 7])
-right = Channel.of(['Z', 6], ['Y', 5], ['X', 4])
-left.join(right).view()
+esquerda = Channel.of(['X', 1], ['Y', 2], ['Z', 3], ['P', 7])
+direita = Channel.of(['Z', 6], ['Y', 5], ['X', 4])
+esquerda.join(direita).view()
 ```
 
 ```console title="Output"
@@ -233,35 +237,35 @@ left.join(right).view()
 
 !!! note
 
-    Notice _P_ is missing in the final result.
+    Perceba como _P_ está ausente no resultado final.
 
 ### `branch()`
 
-The `branch` operator allows you to forward the items emitted by a source channel to one or more output channels.
+O operador `branch` permite que você envie os itens emitidos por um canal de entrada para um ou mais canais de saída.
 
-The selection criterion is defined by specifying a closure that provides one or more boolean expressions, each of which is identified by a unique label. For the first expression that evaluates to a true value, the item is bound to a named channel as the label identifier. For example:
+O critério de seleção de cada canal de saída é definido especificando uma clausura que forneça uma ou mais expressões booleanas, cada uma das quais é identificada por um rótulo único. Para a primeira expressão verdadeira, o item é ligado a um canal nomeado com o rótulo. Por exemplo:
 
 ```groovy linenums="1"
 Channel
     .of(1,2,3,40,50)
     .branch {
-        small: it < 10
-        large: it > 10
+        pequeno: it < 10
+        grande: it > 10
     }
     .set { result }
 
-result.small.view { "$it is small" }
-result.large.view { "$it is large" }
+result.pequeno.view { "$it é pequeno" }
+result.grande.view { "$it é grande" }
 ```
 
 !!! info
 
-    The `branch` operator returns a multi-channel object (i.e., a variable that holds more than one channel object).
+    O operador `branch` retorna um objeto multi-canal (isto é, uma variável que possui mais de um canal).
 
 !!! note
 
-    In the above example, what would happen to a value of 10? To deal with this, you can also use `>=`.
+    No exemplo acima, o que aconteceria com um valor igual a 10? Para lidar com isso, você pode usar `>=`.
 
-## More resources
+## Outros recursos
 
-Check the [operators documentation](https://www.nextflow.io/docs/latest/operator.html) on Nextflow web site.
+Veja a [documentação de operadores](https://www.nextflow.io/docs/latest/operator.html) no site oficial do Nextflow.
