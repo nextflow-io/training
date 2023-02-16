@@ -128,6 +128,6 @@ plugins:
               en:
                   name: English
                   build: true
-              pt_BR:
-                  name: Português Brasileiro
+              pt:
+                  name: Português
                   build: true
