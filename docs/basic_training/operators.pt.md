@@ -98,8 +98,8 @@ tipo de dado.
 ```groovy linenums="1"
 Channel
     .of( 'olá', 'mundo' )
-    .map { word -> [word, word.size()] }
-    .view { word, len -> "$word contém $len letras" }
+    .map { palavra -> [palavra, palavra.size()] }
+    .view { palavra, comprimento -> "$palavra contém $comprimento letras" }
 ```
 
 !!! exercise
@@ -111,8 +111,8 @@ Channel
         ```groovy linenums="1"
         Channel
             .fromPath('data/ggal/*.fq')
-            .map { file -> [ file.name, file ] }
-            .view { name, file -> "> $name : $file" }
+            .map { arquivo -> [ arquivo.name, arquivo ] }
+            .view { nome, arquivo -> "> $nome : $arquivo" }
         ```
 
 ### `mix()`
@@ -213,9 +213,9 @@ Esse operador é útil para processar um grupo, juntando elementos que possuem u
 
         ```groovy linenums="1"
         Channel.fromPath('data/meta/*')
-            .map { file -> tuple(file.baseName, file) }
+            .map { arquivo -> tuple(arquivo.baseName, arquivo) }
             .groupTuple()
-            .view { baseName, file -> "> $baseName : $file" }
+            .view { baseName, arquivo -> "> $baseName : $arquivo" }
         ```
 
 ### `join()`
