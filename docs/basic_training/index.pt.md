@@ -16,7 +16,7 @@ Ao final deste curso você deverá:
 2. Conhecer os conceitos básicos de Canais, Processos e Operadores no Nextflow
 3. Ter uma compreensão dos fluxos de trabalho usando contêineres
 4. Entender as diferentes plataformas de execução suportadas pelo Nextflow
-5. sentir-se apresentado à comunidade e ecossistema do Nextflow
+5. Sentir-se apresentado à comunidade e ecossistema do Nextflow
 
 ## Visão geral
 
@@ -28,4 +28,4 @@ Para começar a usar o Nextflow o mais rápido possível, seguiremos as seguinte
 4. Mergulhar mais fundo na sintaxe principal do Nextflow, incluindo Canais, Processos e Operadores
 5. Cobrir cenários de implantação na nuvem e em clusters e explorar os recursos do Nextflow Tower
 
-Isso lhe dará uma ampla compreensão do Nextflow, para começar a escrever seus próprios pipelines. Esperamos que goste do curso! Este é um documento em constante evolução - feedback é sempre bem-vindo.
+Isso lhe dará uma ampla compreensão do Nextflow para começar a escrever seus próprios pipelines. Esperamos que goste do curso! Este é um documento em constante evolução - feedback é sempre bem-vindo.
