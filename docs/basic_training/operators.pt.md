@@ -186,7 +186,7 @@ Isto imprime o valor:
 
 ### `groupTuple()`
 
-O operador `groupTuple` coleta as tuplas (ou listas) de valores emitidos pelo canal original, agrupando os elementos que possuem a mesma chave. Por fim, ele emite uma nova tupla para cada chave distinta.
+O operador `groupTuple` coleta as tuplas (ou listas) de valores emitidos pelo canal de entrada, agrupando os elementos que possuem a mesma chave. Por fim, ele emite uma nova tupla para cada chave distinta.
 
 Por exemplo:
 
