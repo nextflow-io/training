@@ -1,17 +1,17 @@
 ---
-description: Basic Nextflow Training Workshop
+description: Material de treinamento básico do Nextflow
 ---
 
-# Simple RNA-Seq pipeline
+# Pipeline simples de RNA-Seq
 
-To demonstrate a real-world biomedical scenario, we will implement a proof of concept RNA-Seq pipeline which:
+Para demonstrar um cenário biomédico da vida real, nós iremos implementar uma prova de conceito de pipeline RNA-Seq que:
 
-1. Indexes a transcriptome file
-2. Performs quality controls
-3. Performs quantification
-4. Creates a MultiQC report
+1. Indexa um arquivo de transcriptoma
+2. Realiza controles de qualidade
+3. Realiza quantificação
+4. Cria um relatório MultiQC
 
-This will be done using a series of seven scripts, each of which builds on the previous to create a complete workflow. You can find these in the tutorial folder (`script1.nf` - `script7.nf`).
+Isso será feito usando uma série de sete scripts, cada um se baseia no anterior, para criar um fluxo de trabalho completo. Você poderá encontrá-los no diretório do tutorial (`script1.nf` - `script7.nf`). 
 
 ## Define the pipeline parameters
 
