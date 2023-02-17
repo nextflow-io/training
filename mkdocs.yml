@@ -131,3 +131,6 @@ plugins:
               pt:
                   name: Português
                   build: true
+              es:
+                  name: Español
+                  build: true
