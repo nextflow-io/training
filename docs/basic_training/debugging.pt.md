@@ -1,17 +1,18 @@
 ---
-title: Troubleshooting
-description: Error handling and troubleshooting
+title: Resolução de problemas
+description: Correção de erros e resolução de problemas
 ---
 
-# Error handling and troubleshooting
+# Correção de erros e resolução de problemas
 
-## Execution error debugging
+## Depuração de erros de execução
 
-When a process execution exits with a non-zero exit status, Nextflow stops the workflow execution and reports the failing task:
+Quando a execução de um processo termina com um status de saída diferente de zero,
+o Nextflow encerra a execução e expõe a tarefa com falhas:
 
 !!! info ""
 
-    Click the :material-plus-circle: icons in the code for explanations.
+    Clique o ícone :material-plus-circle: para ver explicações do código.
 
 ```bash
 ERROR ~ Error executing process > 'index'
@@ -36,78 +37,79 @@ Work dir: # (6)!
   /Users/pditommaso/work/0b/b59f362980defd7376ee0a75b41f62
 ```
 
-1. A description of the error cause
-2. The command executed
-3. The command exit status
-4. The command standard output, when available
-5. The command standard error
-6. The command work directory
+1. Uma descrição da causa do erro
+2. O comando executado
+3. O status de saída do comando
+4. A saída padrão do comando, quando disponível
+5. O erro padrão do comando
+6. O diretório de trabalho do comando
 
-Carefully review all error data as it can provide information valuable for debugging.
+Analise cuidadosamente os dados do erro, já que eles podem fornecer informações valiosas para a depuração.
 
-If this is not enough, `cd` into the task work directory. It contains all the files to replicate the issue in an isolated manner.
+Se isso não for o suficiente, use `cd` para entrar no diretório de trabalho da tarefa. Ele contem todos os arquivos necessários para reproduzir o erro de forma isolada.
 
-The task execution directory contains these files:
+O diretório de execução da tarefa possui os seguintes arquivos:
 
--   `.command.sh`: The command script.
--   `.command.run`: The command wrapped used to run the job.
--   `.command.out`: The complete job standard output.
--   `.command.err`: The complete job standard error.
--   `.command.log`: The wrapper execution output.
--   `.command.begin`: Sentinel file created as soon as the job is launched.
--   `.exitcode`: A file containing the task exit code.
--   Task input files (symlinks)
--   Task output files
+-   `.command.sh`: O script do comando.
+-   `.command.run`: Um wrapper do comando usado para executar a tarefa.
+-   `.command.out`: A saída padrão completa da tarefa.
+-   `.command.err`: O erro padrão completo da tarefa.
+-   `.command.log`: A saída do wrapper de execução.
+-   `.command.begin`: Um arquivo sentinela criado no momento que a tarefa é iniciada.
+-   `.exitcode`: Um arquivo contendo o código de saída da tarefa.
+-   Os arquivos de entrada da tarefa (ligações simbólicas)
+-   Os arquivos de saída da tarefa
 
-Verify that the `.command.sh` file contains the expected command and all variables are correctly resolved.
+Verifique que o arquivo `.command.sh` contém o comando esperado e todas as variáveis
+estão resolvidas corretamente.
 
-Also verify the existence of the `.exitcode` and `.command.begin` files, which if absent, suggest the task was never executed by the subsystem (e.g. the batch scheduler). If the `.command.begin` file exists, the job was launched but was likely killed abruptly.
+Também verifique a existência dos arquivos `.exitcode` e `.command.begin`, que, se ausentes, sugerem que a tarefa nunca foi executada pelo subsistema (isto é, o escalonador de lotes). Se o arquivo `.command.begin` existe, a tarefa foi iniciada mas provavelmente encerrada abruptamente.
 
-You can replicate the failing execution using the command `bash .command.run` to verify the cause of the error.
+Para verificar a causa do erro, você pode replicar a execução com falhas usando `bash .command.run`.
 
-## Ignore errors
+## Ignorando erros
 
-There are cases in which a process error may be expected and it should not stop the overall workflow execution.
+Existem casos em que um erro em um processo é esperado e não deve encerrar a execução do fluxo de trabalho.
 
-To handle this use case, set the process `errorStrategy` to `ignore`:
+Para lidar com isso, forneça o valor `ignore` a `errorStrategy`:
 
 ```groovy linenums="1"
 process foo {
     errorStrategy 'ignore'
     script:
     """
-    your_command --this --that
+    seu_comando --isso --aquilo
     """
 }
 ```
 
-If you want to ignore any error you can set the same directive in the config file as a default setting:
+Se você deseja ignorar qualquer erro, você pode especificar a mesma diretiva em um arquivo de configuração:
 
 ```groovy
 process.errorStrategy = 'ignore'
 ```
 
-## Automatic error fail-over
+## Tolerância a falhas automática
 
-In rare cases, errors may be caused by transient conditions. In this situation, an effective strategy is re-executing the failing task.
+Em casos mais raros, erros podem surgir por causa de condições transitórias. Nessas situações, uma estratégia eficaz é re-executar a tarefa com falhas.
 
 ```groovy linenums="1"
 process foo {
     errorStrategy 'retry'
     script:
     """
-    your_command --this --that
+    seu_comando --isso --aquilo
     """
 }
 ```
 
-Using the `retry` error strategy the task is re-executed a second time if it returns a non-zero exit status before stopping the complete workflow execution.
+Ao usar a estratégia de erro `retry` a tarefa é re-executada uma segunda vez se ela retornar um status de saída diferente de zero antes de encerrar a execução completa do fluxo de trabalho.
 
-The directive [maxRetries](https://www.nextflow.io/docs/latest/process.html#maxretries) can be used to set the number of attempts the task can be re-executed before declaring it failed with an error condition.
+A diretiva [maxRetries](https://www.nextflow.io/docs/latest/process.html#maxretries) pode ser utilizada para configurar o número de tentativas que uma tarefa pode ser re-executada antes de declarar que ela falhou com uma condição de erro.
 
-## Retry with backoff
+## Re-execução com atraso
 
-There are cases in which the required execution resources may be temporarily unavailable (e.g. network congestion). In these cases simply re-executing the same task will likely result in an identical error. A retry with an exponential backoff delay can better recover these error conditions.
+Existem casos em que os recursos necessários para a execução estão temporariamente indisponíveis (por exemplo, congestionamento de rede). Nesses casos apenas re-executar a tarefa provavelmente levará a um erro idêntico. Uma re-execução com um atraso exponencial pode contribuir melhor para a resolução desses erros.
 
 ```groovy linenums="1"
 process foo {
@@ -115,16 +117,16 @@ process foo {
     maxRetries 5
     script:
     '''
-    your_command --here
+    seu_comando --aqui
     '''
 }
 ```
 
-## Dynamic resources allocation
+## Alocação dinâmica de recursos
 
-It’s a very common scenario that different instances of the same process may have very different needs in terms of computing resources. In such situations requesting, for example, an amount of memory too low will cause some tasks to fail. Instead, using a higher limit that fits all the tasks in your execution could significantly decrease the execution priority of your jobs.
+Uma situação bastante comum é que diferentes instâncias de um mesmo processo podem ter necessidades diferentes de recursos computacionais. Nessas situações, solicitar uma quantidade de memória muito baixa, por exemplo, irá levar algumas tarefas a falharem. Por outro lado, usar um limite mais elevado que abrange todas as suas tarefas pode reduzir significativamente a prioridade de execução delas.
 
-To handle this use case, you can use a `retry` error strategy and increase the computing resources allocated by the job at each successive _attempt_.
+Para lidar com isso, você pode utilizar uma estratégia de erro `retry` e aumentar os recursos computacionais alocados pela tarefa em cada _tentativa_ consecutiva.
 
 ```groovy linenums="1"
 process foo {
@@ -136,12 +138,12 @@ process foo {
 
     script:
     """
-    your_command --cpus $task.cpus --mem $task.memory
+    seu_comando --cpus $task.cpus --mem $task.memory
     """
 }
 ```
 
-1. The memory is defined in a dynamic manner, the first attempt is 2 GB, the second 4 GB, and so on.
-2. The wall execution time is set dynamically as well, the first execution attempt is set to 1 hour, the second 2 hours, and so on.
-3. If the task returns an exit status equal to `140` it will set the error strategy to `retry` otherwise it will terminate the execution.
-4. It will retry the process execution up to three times.
+1. A memória é definida de forma dinâmica, a primeira tentativa é com 2 GB, a segunda com 4 GB, e assim sucessivamente.
+2. O tempo de execução da tarefa é configurado dinâmicamente também, a primeira tentativa é com 1 hora, a segunda com 2 horas, e assim sucessivamente.
+3. Se a tarefa retorna um status de saída igual a `140` a estratégia de erro será `retry`, caso contrário, a execução será encerrada.
+4. O processo será re-executado até três vezes.
