@@ -1,11 +1,4 @@
-# 🌐 <abbr title="translation">Translation</abbr> Guide
-
-Table of contents:
-- [Contribution model](#contribution-model)
-- [Preview](#preview)
-    - [Docker](#docker)
-    - [Python](#python)
-- [Translation Glossaries](#translation-glossaries)
+# 🌐 Translation Guide
 
 ## Contribution model
 
@@ -17,6 +10,7 @@ The typical workflow for contributing with translation is as follows:
     - If you want to improve an already existing translation, the file already exists and the language is already set up. Simply open the file and work on it. Otherwise, create the new file with the following pattern: If the original file in English is `filename.md`, you will create in the same folder a new file named `filename.language_code.md`, where `language_code` is the language code that you can find [here](https://en.wikipedia.org/wiki/ISO_639-1), for the language you wish to translate to. Pay attention to the language code, as it has to be the same that is specified in the `mkdocs.yml` file for that language.
 3. Commit and push to your forked repository
 4. Open a pull-request against the main repo, which can be reviewed and merged
+5. Tag other contributors with @ requesting a review. Pull Requests should only be merged if they have at least a single review.
 
 The training website is built using [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/).
 It's a static site generator designed for documentation websites which is fast and lightweight and comes with a lot of nice features.
