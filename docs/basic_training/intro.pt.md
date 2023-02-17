@@ -1,48 +1,48 @@
 ---
-description: Getting started with Nextflow
+description: Introdução ao Nextflow
 ---
 
-# Introduction
+# Introdução
 
-## Basic concepts
+## Conceitos básicos
 
-Nextflow is a workflow orchestration engine and domain-specific language (DSL) that makes it easy to write data-intensive computational pipelines.
+O Nextflow é tanto um motor de orquestração de fluxo de trabalho quanto uma linguagem de domínio específico (Domain-Specific Language - DSL) que facilita a escrita de pipelines computacionais com uso intensivo de dados.
 
-It is designed around the idea that the Linux platform is the _lingua franca_ of data science. Linux provides many simple but powerful command-line and scripting tools that, when chained together, facilitate complex data manipulations.
+Ele foi projetado com base na ideia de que a plataforma Linux é a _língua franca_ da ciência de dados. O Linux fornece muitas ferramentas de linha de comando que, ainda que simples, são poderosas ferramentas de script que, quando encadeadas, facilitam manipulações complexas de dados.
 
-Nextflow extends this approach, adding the ability to define complex program interactions and a high-level parallel computational environment, based on the dataflow programming model. Nextflow’s core features are:
+O Nextflow estende essa abordagem, adicionando a capacidade de definir interações complexas entre programas e um ambiente de computação paralela de alto nível, baseado no modelo de programação Dataflow. Os principais recursos do Nextflow são:
 
--   Workflow portability and reproducibility
--   Scalability of parallelization and deployment
--   Integration of existing tools, systems, and industry standards
+-   Portabilidade e reprodutibilidade do fluxo de trabalho
+-   Escalabilidade na paralelização e na implantação
+-   Integração de ferramentas já existentes, sistemas e padrões da indústria
 
-### Processes and Channels
+### Processos e Canais
 
-In practice, a Nextflow pipeline is made by joining together different processes. Each `process` can be written in any scripting language that can be executed by the Linux platform (Bash, Perl, Ruby, Python, etc.).
+Na prática, um pipeline Nextflow é feito juntando diferentes processos. Cada `processo` pode ser escrito em qualquer linguagem de script que possa ser executada pela plataforma Linux (Bash, Perl, Ruby, Python, etc.).
 
-Processes are executed independently and are isolated from each other, i.e., they do not share a common (writable) state. The only way they can communicate is via asynchronous first-in, first-out (FIFO) queues, called `channels`.
+Os processos são executados de forma independente e isolados uns dos outros, ou seja, não compartilham um estado (gravável) comum. A única maneira de eles se comunicarem é por meio de filas assíncronas, chamadas de `canais`, onde o primeiro elemento a entrar, é o primeiro a sair (FIFO - First-in-First-out).
 
-Any `process` can define one or more `channels` as an `input` and `output`. The interaction between these processes, and ultimately the pipeline execution flow itself, is implicitly defined by these `input` and `output` declarations.
+Qualquer `processo` pode definir um ou mais `canais` como uma `entrada` e `saída`. A interação entre esses processos e, em última análise, o próprio fluxo de execução do pipeline, é definido implicitamente por essas declarações de `entrada` e `saída`.
 
 <figure class="excalidraw">
 --8<-- "docs/basic_training/img/channel-process.excalidraw.svg"
 </figure>
 
-### Execution abstraction
+### Abstração de execução
 
-While a `process` defines _what_ command or `script` has to be executed, the executor determines _how_ that `script` is run in the target platform.
+Enquanto um `processo` define _qual_ comando ou `script` deve ser executado, o executor determina _como_ esse `script` é executado na plataforma alvo.
 
-If not otherwise specified, processes are executed on the local computer. The local executor is very useful for pipeline development and testing purposes, however, for real-world computational pipelines a high-performance computing (HPC) or cloud platform is often required.
+Se não for especificado de outra forma, os processos são executados no computador local. O executor local é muito útil para fins de desenvolvimento e teste de pipeline, no entanto, para pipelines computacionais do mundo real, uma plataforma de computação de alto desempenho (HPC) ou nuvem geralmente é necessária.
 
-In other words, Nextflow provides an abstraction between the pipeline’s functional logic and the underlying execution system (or runtime). Thus, it is possible to write a pipeline that runs seamlessly on your computer, a cluster, or the cloud, without being modified. You simply define the target execution platform in the configuration file.
+Em outras palavras, o Nextflow fornece uma abstração entre a lógica funcional do pipeline e o sistema de execução subjacente (ou sistema de tempo de execução). Assim, é possível escrever um pipeline que seja executado perfeitamente em seu computador, em um cluster ou na nuvem, sem ser modificado. Você simplesmente define a plataforma de execução alvo no arquivo de configuração.
 
 <figure markdown>
 
-![Execution abstraction](img/execution_abstraction.png)
+![Abstração de execução](img/execution_abstraction.png)
 
 </figure>
 
-### Scripting language
+### Linguagem de script
 
 Nextflow implements a declarative DSL that simplifies the writing of complex data analysis workflows as an extension of a general-purpose programming language.
 
@@ -50,13 +50,13 @@ This approach makes Nextflow flexible — it provides the benefits of a concise 
 
 In practical terms, Nextflow scripting is an extension of the [Groovy programming language](https://groovy-lang.org/) which, in turn, is a super-set of the Java programming language. Groovy can be thought of as "Python for Java", in that it simplifies the writing of code and is more approachable.
 
-## Your first script
+## Seu primeiro script
 
 Here you will execute your first Nextflow script (`hello.nf`), which we will go through line-by-line.
 
 In this toy example, the script takes an input string (a parameter called `params.greeting`) and splits it into chunks of six characters in the first process. The second process then converts the characters to upper case. The result is finally displayed on-screen.
 
-### Nextflow code
+### Código em Nextflow
 
 <!-- NOTE: (Phil, Jan 2023)
 We can dynamically include external files using mkdocs, as follows:
@@ -145,7 +145,7 @@ workflow { // (18)!
 
 The use of the operator `.flatten()` here is to split the two files into two separate items to be put through the next process (else they would be treated as a single element).
 
-### In practice
+### Hora de praticar
 
 Now copy the above example into your favorite text editor and save it to a file named `hello.nf`.
 
@@ -197,7 +197,7 @@ WORLD!
 HELLO
 ```
 
-## Modify and resume
+## Modifique e retome
 
 Nextflow keeps track of all the processes executed in your pipeline. If you modify some parts of your script, only the processes that are changed will be re-executed. The execution of the processes that are not changed will be skipped and the cached result will be used instead.
 
