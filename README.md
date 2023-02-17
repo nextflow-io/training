@@ -17,7 +17,7 @@ We are excited to have you on the path to writing reproducible and scalable scie
 
 We welcome fixes and improvements from the community. Please fork the repository and create pull-requests with any improvements to the docs.
 
-You can find instructions about how to develop the training material code in [`CONTRIBUTING.md`](CONTRIBUTING.md).
+You can find instructions about how to develop the training material code in [`CONTRIBUTING.md`](CONTRIBUTING.md). If you want to contribute with a translation instead, check [`TRANSLATING.md`](TRANSLATING.md).
 
 ## Credits & Copyright
 
