@@ -199,11 +199,11 @@ Olá mu
 
 ## Modifique e retome
 
-Nextflow keeps track of all the processes executed in your pipeline. If you modify some parts of your script, only the processes that are changed will be re-executed. The execution of the processes that are not changed will be skipped and the cached result will be used instead.
+O Nextflow acompanha todos os processos executados em seu pipeline. Se você modificar algumas partes do seu script, apenas os processos alterados serão executados novamente. A execução dos processos que não foram alterados será ignorada e o resultado armazenado em cache será usado em seu lugar.
 
-This allows for testing or modifying part of your pipeline without having to re-execute it from scratch.
+Isso permite testar ou modificar parte do pipeline sem precisar executá-lo novamente do zero.
 
-For the sake of this tutorial, modify the `CONVERTAEMMAIUSCULAS` process in the previous example, replacing the process script with the string `rev $y`, so that the process looks like this:
+Para este tutorial, modifique o processo `CONVERTAEMMAIUSCULAS` do exemplo anterior, substituindo o script do processo pela string `rev $y`, para que o processo fique assim:
 
 ```groovy
 process CONVERTAEMMAIUSCULAS {
@@ -219,7 +219,7 @@ process CONVERTAEMMAIUSCULAS {
 }
 ```
 
-Then save the file with the same name, and execute it by adding the `-resume` option to the command line:
+Em seguida, salve o arquivo com o mesmo nome e execute-o adicionando a opção `-resume` à linha de comando:
 
 ```console
 $ nextflow run hello.nf -resume
@@ -229,27 +229,27 @@ Launching `hello.nf` [amazing_becquerel] DSL2 - revision: 525206806b
 executor >  local (2)
 [c8/c36893] process > SEPARELETRAS (1)   [100%] 1 of 1, cached: 1 ✔
 [77/cf83b6] process > CONVERTAEMMAIUSCULAS (1) [100%] 2 of 2 ✔
-!dlrow
- olleH
+!odn
+um álO
 ```
 
-You will see that the execution of the process `SEPARELETRAS` is skipped (the process ID is the same as in the first output) — its results are retrieved from the cache. The second process is executed as expected, printing the reversed strings.
+Você verá que a execução do processo `SEPARELETRAS` é ignorada (o ID do processo é o mesmo da primeira saída) — seus resultados são recuperados do cache. O segundo processo é executado conforme o esperado, imprimindo as strings invertidas.
 
 !!! info
 
-    The pipeline results are cached by default in the directory `$PWD/work`. Depending on your script, this folder can take up a lot of disk space. If you are sure you won’t need to resume your pipeline execution, clean this folder periodically.
+    Os resultados do pipeline são armazenados em cache por padrão no diretório `$PWD/work`. Dependendo do seu script, esta pasta pode ocupar muito espaço em disco. Se tiver certeza de que não precisará retomar a execução do pipeline, limpe esta pasta periodicamente.
 
 ## Parâmetros do pipeline
 
-Pipeline parameters are simply declared by prepending the prefix `params` to a variable name, separated by a dot character. Their value can be specified on the command line by prefixing the parameter name with a double dash character, i.e. `--paramName`.
+Os parâmetros de pipeline são declarados simplesmente adicionando o prefixo `params` a um nome de variável, separando-os por um caractere de ponto. Seu valor pode ser especificado na linha de comando prefixando o nome do parâmetro com um traço duplo, ou seja, `--paramName`.
 
-Now, let’s try to execute the previous example specifying a different input string parameter, as shown below:
+Agora, vamos tentar executar o exemplo anterior especificando um parâmetro de string de entrada diferente, conforme mostrado abaixo:
 
 ```bash
 nextflow run hello.nf --saudacao 'Bonjour le monde!'
 ```
 
-The string specified on the command line will override the default value of the parameter. The output will look like this:
+A string especificada na linha de comando substituirá o valor padrão do parâmetro. A saída ficará assim:
 
 ```
 N E X T F L O W  ~  version 22.04.5
@@ -268,6 +268,6 @@ Para entender melhor como o Nextflow está lidando com os dados neste pipeline, 
 
 <figure markdown>
 
-![Hello world diagram](img/helloworlddiagram.png)
+![Diagrama do Olá mundo](img/helloworlddiagram.png)
 
 </figure>
