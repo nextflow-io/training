@@ -44,17 +44,17 @@ Em outras palavras, o Nextflow fornece uma abstração entre a lógica funcional
 
 ### Linguagem de script
 
-Nextflow implements a declarative DSL that simplifies the writing of complex data analysis workflows as an extension of a general-purpose programming language.
+O Nextflow implementa uma DSL declarativa que simplifica a escrita de fluxos de trabalho complexos de análise de dados como uma extensão de uma linguagem de programação de uso geral.
 
-This approach makes Nextflow flexible — it provides the benefits of a concise DSL for the handling of recurrent use cases with ease **and** the flexibility and power of a general-purpose programming language to handle corner cases in the same computing environment. This would be difficult to implement using a purely declarative approach.
+Essa abordagem torna o Nextflow flexível — ele fornece os benefícios de uma DSL concisa para lidar com casos de uso recorrentes com facilidade **e** a flexibilidade e o poder de uma linguagem de programação de propósito geral para lidar com casos extremos no mesmo ambiente de computação. Isso seria difícil de implementar usando uma abordagem puramente declarativa.
 
-In practical terms, Nextflow scripting is an extension of the [Groovy programming language](https://groovy-lang.org/) which, in turn, is a super-set of the Java programming language. Groovy can be thought of as "Python for Java", in that it simplifies the writing of code and is more approachable.
+Em termos práticos, a linguagem de script Nextflow é uma extensão da [linguagem de programação Groovy](https://groovy-lang.org/) a qual, por sua vez, é um superconjunto da linguagem de programação Java. Groovy pode ser pensado como "Python para Java", pois simplifica a escrita do código e é mais acessível.
 
 ## Seu primeiro script
 
-Here you will execute your first Nextflow script (`hello.nf`), which we will go through line-by-line.
+Aqui você executará seu primeiro script Nextflow (`hello.nf`), que veremos linha por linha.
 
-In this toy example, the script takes an input string (a parameter called `params.greeting`) and splits it into chunks of six characters in the first process. The second process then converts the characters to upper case. The result is finally displayed on-screen.
+Neste exemplo ilustrativo, o script recebe no primeiro processo uma string de entrada (um parâmetro chamado `params.saudacao`) e a divide em blocos de seis caracteres. O segundo processo converte os caracteres em maiúsculas. O resultado é então finalmente exibido na tela.
 
 ### Código em Nextflow
 
@@ -76,16 +76,16 @@ TODO: Maybe either:
 
 !!! info
 
-    Click the :material-plus-circle: icons in the code for explanations.
+    Clique no ícone :material-plus-circle: no código para ver explicações.
 
 ```groovy title="nf-training/hello.nf" linenums="1"
 #!/usr/bin/env nextflow
 // (1)!
 
-params.greeting = 'Hello world!' // (2)!
-greeting_ch = Channel.of(params.greeting) // (3)!
+params.saudacao = 'Olá mundo!' // (2)!
+canal_saudacao = Channel.of(params.saudacao) // (3)!
 
-process SPLITLETTERS { // (4)!
+process SEPARELETRAS { // (4)!
     input: // (5)!
     val x // (6)!
 
@@ -98,7 +98,7 @@ process SPLITLETTERS { // (4)!
     """
 } // (10)!
 
-process CONVERTTOUPPER { // (11)!
+process CONVERTAEMMAIUSCULAS { // (11)!
     input: // (12)!
     path y // (13)!
 
@@ -112,89 +112,89 @@ process CONVERTTOUPPER { // (11)!
 } // (17)!
 
 workflow { // (18)!
-    letters_ch = SPLITLETTERS(greeting_ch) // (19)!
-    results_ch = CONVERTTOUPPER(letters_ch.flatten()) // (20)!
-    results_ch.view{ it } // (21)!
+    canal_letras = SEPARELETRAS(canal_saudacao) // (19)!
+    canal_resultados = CONVERTAEMMAIUSCULAS(canal_letras.flatten()) // (20)!
+    canal_resultados.view{ it } // (21)!
 } // (22)!
 ```
 
-1. The code begins with a shebang, which declares Nextflow as the interpreter.
-2. Declares a parameter `greeting` that is initialized with the value 'Hello world!'.
-3. Initializes a `channel` labeled `greeting_ch`, which contains the value from `params.greeting`. Channels are the input type for processes in Nextflow.
-4. Begins the first process block, defined as `SPLITLETTERS`.
-5. Input declaration for the `SPLITLETTERS` process. Inputs can be values (`val`), files or paths (`path`), or other qualifiers ([see here](https://www.nextflow.io/docs/latest/process.html#inputs)).
-6. Tells the `process` to expect an input value (`val`), that we assign to the variable 'x'.
-7. Output declaration for the `SPLITLETTERS` process.
-8. Tells the process to expect an output file(s) (`path`), with a filename starting with 'chunk\_\*', as output from the script. The process sends the output as a channel.
-9. Three double quotes start and end the code block to execute this `process`.
-   Inside is the code to execute — printing the `input` value x (called using the dollar symbol [$] prefix), splitting the string into chunks with a length of 6 characters ("Hello " and "world!"), and saving each to a file (chunk_aa and chunk_ab).
-10. End of the first process block.
-11. Begins the second process block, defined as `CONVERTTOUPPER`.
-12. Input declaration for the `CONVERTTOUPPER` `process`.
-13. Tells the `process` to expect an `input` file(s) (`path`; i.e. chunk_aa and chunk_ab), that we assign to the variable 'y'.
-14. Output declaration for the `CONVERTTOUPPER` process.
-15. Tells the process to expect output as standard output (stdout) and sends this output as a channel.
-16. Three double quotes start and end the code block to execute this `process`.
-    Within the block there is a script to read files (cat) using the '$y' input variable, then pipe to uppercase conversion, outputting to standard output.
-17. End of second `process` block.
-18. Start of the workflow scope where each process can be called.
-19. Execute the `process` `SPLITLETTERS` on the `greeting_ch` (aka greeting channel), and store the output in the channel `letters_ch`.
-20. Execute the `process` `CONVERTTOUPPER` on the letters channel `letters_ch`, which is flattened using the operator `.flatten()`. This transforms the input channel in such a way that every item is a separate element. We store the output in the channel `results_ch`.
-21. The final output (in the `results_ch` channel) is printed to screen using the `view` operator (appended onto the channel name).
-22. End of the workflow scope.
+1. O código começa com um shebang, que declara o Nextflow como o interpretador.
+2. Declara um parâmetro `saudacao` que é inicializado com o valor 'Olá mundo!'.
+3. Inicializa um `canal` chamado `canal_saudacao`, que contém o valor de `params.saudacao`. Os canais são o tipo de entrada para processos no Nextflow.
+4. Inicia o primeiro bloco do processo, definido como `SEPARELETRAS`.
+5. Declaração de entrada para o processo `SEPARELETRAS`. As entradas podem ser valores (`val`), arquivos ou caminhos (`path`) ou outros qualificadores ([veja aqui](https://www.nextflow.io/docs/latest/process.html#inputs)).
+6. Diz ao `processo` para esperar um valor de entrada (`val`), que atribuímos à variável 'x'.
+7. Declaração de saída para o processo `SEPARELETRAS`.
+8. Diz ao processo para esperar um ou mais arquivo de saída (`path`), com um nome de arquivo começando com 'chunk\_\*', como saída do script. O processo envia a saída como um canal.
+9. Três aspas duplas iniciam e terminam o bloco de código para executar este `processo`.
+   Dentro está o código a ser executado — imprimindo o valor de `entrada` x (chamado usando o prefixo do símbolo de dólar [$]), dividindo a string em pedaços com um comprimento de 6 caracteres ("Olá mu" e "ndo!") e salvando cada um para um arquivo (chunk_aa e chunk_ab).
+10. Fim do primeiro bloco de processo.
+11. Inicia o segundo bloco de processo, definido como `CONVERTAEMMAIUSCULAS`.
+12. Declaração de entrada para o `processo` `CONVERTAEMMAIUSCULAS`.
+13. Diz ao `processo` para esperar um ou mais arquivos de `entrada` (`path`; ou seja, chunk_aa e chunk_ab), que atribuímos à variável 'y'.
+14. Declaração de saída para o processo `CONVERTAEMMAIUSCULAS`.
+15. Diz ao processo para esperar a saída padrão (stdout) como saída e envia essa saída como um canal.
+16. Três aspas duplas iniciam e terminam o bloco de código para executar este `processo`.
+    Dentro do bloco, há um script para ler arquivos (cat) usando a variável de entrada '$y' e, em seguida, um pipe (|) para a conversão em maiúsculas, imprimindo na saída padrão.
+17. Fim do segundo bloco de `processo`.
+18. Início do bloco de fluxo de trabalho (`workflow`) onde cada processo pode ser chamado.
+19. Execute o `processo` `SEPARELETRAS` no `canal_saudacao` (também conhecido como canal de saudação) e armazene a saída no canal `canal_letras`.
+20. Execute o `processo` `CONVERTAEMMAIUSCULAS` no canal de letras `canal_letras`, que é achatado usando o operador `.flatten()`. Isso transforma o canal de entrada de forma que cada item seja um elemento separado. Armazenamos a saída no canal `canal_resultados`.
+21. A saída final (no canal `canal_resultados`) é impressa na tela usando o operador `view` (aplicado ao nome do canal).
+22. Fim do bloco do fluxo de trabalho (`workflow`).
 
-The use of the operator `.flatten()` here is to split the two files into two separate items to be put through the next process (else they would be treated as a single element).
+O uso do operador `.flatten()` aqui é para dividir os dois arquivos em dois itens separados para serem colocados no próximo processo (caso contrário, eles seriam tratados como um único elemento).
 
 ### Hora de praticar
 
-Now copy the above example into your favorite text editor and save it to a file named `hello.nf`.
+Agora copie o exemplo acima em seu editor de texto favorito e salve-o em um arquivo chamado `hello.nf`.
 
 !!! warning
 
-    For the Gitpod tutorial, make sure you are in the folder called `nf-training`
+    Para o tutorial do Gitpod, verifique se você está na pasta chamada `nf-training`
 
-Execute the script by entering the following command in your terminal:
+Execute o script digitando o seguinte comando em seu terminal:
 
 ```bash
 nextflow run hello.nf
 ```
 
-The output will look similar to the text shown below:
+A saída será semelhante ao texto mostrado abaixo:
 
 ```linenums="1"
 N E X T F L O W  ~  version 22.04.5
 Launching `hello.nf` [gigantic_poitras] DSL2 - revision: 197a0e289a
 executor >  local (3)
-[c8/c36893] process > SPLITLETTERS (1)   [100%] 1 of 1 ✔
-[1a/3c54ed] process > CONVERTTOUPPER (2) [100%] 2 of 2 ✔
+[c8/c36893] process > SEPARELETRAS (1)   [100%] 1 of 1 ✔
+[1a/3c54ed] process > CONVERTAEMMAIUSCULAS (2) [100%] 2 of 2 ✔
 WORLD!
 HELLO
 ```
 
-The standard output shows (line by line):
+A saída padrão mostra (linha por linha):
 
-1. The version of Nextflow that was executed.
-2. The script and version names.
-3. The executor used (in the above case: local).
-4. The first `process` is executed once. The line starts with a unique hexadecimal value (see TIP below), and ends with the percentage and job completion information.
-5. The second process is executed twice (once for chunk_aa and once for chunk_ab).
-6. The result string from stdout is printed.
+1. A versão do Nextflow que foi executada.
+2. Os nomes do script e da versão.
+3. O executor usado (no caso acima: local).
+4. O primeiro `processo` é executado uma vez. A linha começa com um valor hexadecimal exclusivo (consulte a dica abaixo) e termina com as informações de porcentagem e conclusão do trabalho.
+5. O segundo processo é executado duas vezes (uma vez para chunk_aa e outra para chunk_ab).
+6. A string de resultado de stdout é impressa na tela.
 
 !!! info
 
-    The hexadecimal numbers, like `c8/c36893`, identify the unique process execution. These numbers are also the prefix of the directories where each process is executed. You can inspect the files produced by changing to the directory `$PWD/work` and using these numbers to find the process-specific execution path.
+    Os números hexadecimais, como `c8/c36893`, identificam a execução do processo exclusivo. Esses números também são o prefixo dos diretórios onde cada processo é executado. Você pode inspecionar os arquivos produzidos mudando para o diretório `$PWD/work` e usando esses números para encontrar o caminho de execução específico do processo.
 
 !!! tip
 
-    The second process runs twice, executing in two different work directories for each input file. The [ANSI](https://en.wikipedia.org/wiki/ANSI_escape_code) log output from Nextflow dynamically refreshes as the pipeline runs; in the previous example the work directory `[1a/3c54ed]` is the second of the two directories that were processed (overwriting the log with the first). To print all the relevant paths to the screen, disable the ANSI log output usin the `-ansi-log` flag (e.g., `nextflow run hello.nf -ansi-log false`).
+    O segundo processo é executado duas vezes, em dois diretórios de trabalho diferentes para cada arquivo de entrada. A saída de log [ANSI](https://en.wikipedia.org/wiki/ANSI_escape_code) do Nextflow é atualizada dinamicamente conforme o pipeline é executado; no exemplo anterior, o diretório de trabalho `[1a/3c54ed]` é o segundo dos dois diretórios que foram processados (sobrescrevendo o log com o primeiro). Para imprimir para a tela todos os caminhos relevantes, desative a saída de log ANSI usando o sinalizador `-ansi-log` (por exemplo, `nextflow run hello.nf -ansi-log false`).
 
-It’s worth noting that the process `CONVERTTOUPPER` is executed in parallel, so there’s no guarantee that the instance processing the first split (the chunk _Hello ') will be executed before the one processing the second split (the chunk 'world!_).
+Vale ressaltar que o processo `CONVERTAEMMAIUSCULAS` é executado em paralelo, portanto não há garantia de que a instância que processa a primeira divisão (o chunk _Olá mu') será executada antes daquela que processa o segundo split (o chunk 'ndo!_).
 
-Thus, it could be that your final result will be printed out in a different order:
+Assim, pode ser que seu resultado final seja impresso em uma ordem diferente:
 
 ```
-WORLD!
-HELLO
+ndo!
+Olá mu
 ```
 
 ## Modifique e retome
@@ -203,10 +203,10 @@ Nextflow keeps track of all the processes executed in your pipeline. If you modi
 
 This allows for testing or modifying part of your pipeline without having to re-execute it from scratch.
 
-For the sake of this tutorial, modify the `CONVERTTOUPPER` process in the previous example, replacing the process script with the string `rev $y`, so that the process looks like this:
+For the sake of this tutorial, modify the `CONVERTAEMMAIUSCULAS` process in the previous example, replacing the process script with the string `rev $y`, so that the process looks like this:
 
 ```groovy
-process CONVERTTOUPPER {
+process CONVERTAEMMAIUSCULAS {
     input:
     path y
 
@@ -227,26 +227,26 @@ $ nextflow run hello.nf -resume
 N E X T F L O W  ~  version 22.04.5
 Launching `hello.nf` [amazing_becquerel] DSL2 - revision: 525206806b
 executor >  local (2)
-[c8/c36893] process > SPLITLETTERS (1)   [100%] 1 of 1, cached: 1 ✔
-[77/cf83b6] process > CONVERTTOUPPER (1) [100%] 2 of 2 ✔
+[c8/c36893] process > SEPARELETRAS (1)   [100%] 1 of 1, cached: 1 ✔
+[77/cf83b6] process > CONVERTAEMMAIUSCULAS (1) [100%] 2 of 2 ✔
 !dlrow
  olleH
 ```
 
-You will see that the execution of the process `SPLITLETTERS` is skipped (the process ID is the same as in the first output) — its results are retrieved from the cache. The second process is executed as expected, printing the reversed strings.
+You will see that the execution of the process `SEPARELETRAS` is skipped (the process ID is the same as in the first output) — its results are retrieved from the cache. The second process is executed as expected, printing the reversed strings.
 
 !!! info
 
     The pipeline results are cached by default in the directory `$PWD/work`. Depending on your script, this folder can take up a lot of disk space. If you are sure you won’t need to resume your pipeline execution, clean this folder periodically.
 
-## Pipeline parameters
+## Parâmetros do pipeline
 
 Pipeline parameters are simply declared by prepending the prefix `params` to a variable name, separated by a dot character. Their value can be specified on the command line by prefixing the parameter name with a double dash character, i.e. `--paramName`.
 
 Now, let’s try to execute the previous example specifying a different input string parameter, as shown below:
 
 ```bash
-nextflow run hello.nf --greeting 'Bonjour le monde!'
+nextflow run hello.nf --saudacao 'Bonjour le monde!'
 ```
 
 The string specified on the command line will override the default value of the parameter. The output will look like this:
@@ -255,16 +255,16 @@ The string specified on the command line will override the default value of the 
 N E X T F L O W  ~  version 22.04.5
 Launching `hello.nf` [fervent_galileo] DSL2 - revision: 525206806b
 executor >  local (4)
-[e9/139d7d] process > SPLITLETTERS (1)   [100%] 1 of 1 ✔
-[bb/fc8548] process > CONVERTTOUPPER (1) [100%] 3 of 3 ✔
+[e9/139d7d] process > SEPARELETRAS (1)   [100%] 1 of 1 ✔
+[bb/fc8548] process > CONVERTAEMMAIUSCULAS (1) [100%] 3 of 3 ✔
 m el r
 !edno
 uojnoB
 ```
 
-### In DAG-like format
+### Em formato de DAG
 
-To better understand how Nextflow is dealing with the data in this pipeline, below is a DAG-like figure to visualize all the `inputs`, `outputs`, `channels` and `processes`:
+Para entender melhor como o Nextflow está lidando com os dados neste pipeline, abaixo está uma figura tipo DAG para visualizar todas as `entradas`, `saídas`, `canais` e `processos`:
 
 <figure markdown>
 
