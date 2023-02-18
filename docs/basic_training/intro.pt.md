@@ -126,16 +126,14 @@ workflow { // (18)!
 6. Diz ao `processo` para esperar um valor de entrada (`val`), que atribuímos à variável 'x'.
 7. Declaração de saída para o processo `SPLITLETTERS`.
 8. Diz ao processo para esperar um ou mais arquivos de saída (`path`), com um nome de arquivo começando com 'chunk\_\*', como saída do script. O processo envia a saída como um canal.
-9. Três aspas duplas iniciam e terminam o bloco de código para executar este `processo`.
-   Dentro está o código a ser executado — imprimindo o valor de `entrada` x (chamado usando o prefixo do símbolo de dólar [$]), dividindo a string em pedaços com um comprimento de 6 caracteres ("Hello " e "world!") e salvando cada um para um arquivo (chunk_aa e chunk_ab).
+9. Três aspas duplas iniciam e terminam o bloco de código para executar este `processo`. Dentro está o código a ser executado — imprimindo o valor de `entrada` x (chamado usando o prefixo do símbolo de dólar [$]), dividindo a string em pedaços com um comprimento de 6 caracteres ("Hello " e "world!") e salvando cada um para um arquivo (chunk_aa e chunk_ab).
 10. Fim do primeiro bloco de processo.
 11. Inicia o segundo bloco de processo, definido como `CONVERTTOUPPER`.
 12. Declaração de entrada para o `processo` `CONVERTTOUPPER`.
 13. Diz ao `processo` para esperar um ou mais arquivos de `entrada` (`path`; ou seja, chunk_aa e chunk_ab), que atribuímos à variável 'y'.
 14. Declaração de saída para o processo `CONVERTTOUPPER`.
 15. Diz ao processo para esperar a saída padrão (stdout) como saída e envia essa saída como um canal.
-16. Três aspas duplas iniciam e terminam o bloco de código para executar este `processo`.
-    Dentro do bloco, há um script para ler arquivos (cat) usando a variável de entrada '$y' e, em seguida, um pipe (|) para a conversão em maiúsculas, imprimindo na saída padrão.
+16. Três aspas duplas iniciam e terminam o bloco de código para executar este `processo`. Dentro do bloco, há um script para ler arquivos (cat) usando a variável de entrada '$y' e, em seguida, um pipe (|) para a conversão em maiúsculas, imprimindo na saída padrão.
 17. Fim do segundo bloco de `processo`.
 18. Início do bloco de fluxo de trabalho (`workflow`) onde cada processo pode ser chamado.
 19. Execute o `processo` `SPLITLETTERS` no `greeting_ch` (também conhecido como canal de saudação) e armazene a saída no canal `letters_ch`.
@@ -188,7 +186,7 @@ A saída padrão mostra (linha por linha):
 
     O segundo processo é executado duas vezes, em dois diretórios de trabalho diferentes para cada arquivo de entrada. A saída de log [ANSI](https://en.wikipedia.org/wiki/ANSI_escape_code) do Nextflow é atualizada dinamicamente conforme o pipeline é executado; no exemplo anterior, o diretório de trabalho `[1a/3c54ed]` é o segundo dos dois diretórios que foram processados (sobrescrevendo o log com o primeiro). Para imprimir para a tela todos os caminhos relevantes, desative a saída de log ANSI usando o sinalizador `-ansi-log` (por exemplo, `nextflow run hello.nf -ansi-log false`).
 
-Vale ressaltar que o processo `CONVERTTOUPPER` é executado em paralelo, portanto não há garantia de que a instância que processa a primeira divisão (o bloco _Hello _) será executada antes daquela que processa o segundo split (o bloco _world!_).
+Vale ressaltar que o processo `CONVERTTOUPPER` é executado em paralelo, portanto não há garantia de que a instância que processa a primeira divisão (o bloco _Hello_ ) será executada antes daquela que processa a segundo divisão (o bloco _world!_).
 
 Assim, pode ser que seu resultado final seja impresso em uma ordem diferente:
 
