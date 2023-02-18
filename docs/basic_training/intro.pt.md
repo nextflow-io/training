@@ -32,7 +32,7 @@ Qualquer `processo` pode definir um ou mais `canais` como uma `entrada` e `saíd
 
 Enquanto um `processo` define _qual_ comando ou `script` deve ser executado, o executor determina _como_ esse `script` é executado na plataforma alvo.
 
-Se não for especificado de outra forma, os processos são executados no computador local. O executor local é muito útil para fins de desenvolvimento e teste de pipeline, no entanto, para pipelines computacionais do mundo real, uma plataforma de computação de alto desempenho (HPC) ou nuvem geralmente é necessária.
+Se não for especificado de outra forma, os processos são executados no computador local. O executor local é muito útil para fins de desenvolvimento e teste de pipeline, no entanto, para pipelines computacionais do mundo real, uma plataforma de computação de alto desempenho (High-Performance Computing - HPC) ou de computação em nuvem geralmente é necessária.
 
 Em outras palavras, o Nextflow fornece uma abstração entre a lógica funcional do pipeline e o sistema de execução subjacente (ou sistema de tempo de execução). Assim, é possível escrever um pipeline que seja executado perfeitamente em seu computador, em um cluster ou na nuvem, sem ser modificado. Você simplesmente define a plataforma de execução alvo no arquivo de configuração.
 
@@ -122,10 +122,10 @@ workflow { // (18)!
 2. Declara um parâmetro `saudacao` que é inicializado com o valor 'Olá mundo!'.
 3. Inicializa um `canal` chamado `canal_saudacao`, que contém o valor de `params.saudacao`. Os canais são o tipo de entrada para processos no Nextflow.
 4. Inicia o primeiro bloco do processo, definido como `SEPARELETRAS`.
-5. Declaração de entrada para o processo `SEPARELETRAS`. As entradas podem ser valores (`val`), arquivos ou caminhos (`path`) ou outros qualificadores ([veja aqui](https://www.nextflow.io/docs/latest/process.html#inputs)).
+5. Declaração de entrada para o processo `SEPARELETRAS`. As entradas podem ser valores (`val`), arquivos ou caminhos (`path`), ou ainda outros qualificadores ([veja aqui](https://www.nextflow.io/docs/latest/process.html#inputs)).
 6. Diz ao `processo` para esperar um valor de entrada (`val`), que atribuímos à variável 'x'.
 7. Declaração de saída para o processo `SEPARELETRAS`.
-8. Diz ao processo para esperar um ou mais arquivo de saída (`path`), com um nome de arquivo começando com 'chunk\_\*', como saída do script. O processo envia a saída como um canal.
+8. Diz ao processo para esperar um ou mais arquivos de saída (`path`), com um nome de arquivo começando com 'chunk\_\*', como saída do script. O processo envia a saída como um canal.
 9. Três aspas duplas iniciam e terminam o bloco de código para executar este `processo`.
    Dentro está o código a ser executado — imprimindo o valor de `entrada` x (chamado usando o prefixo do símbolo de dólar [$]), dividindo a string em pedaços com um comprimento de 6 caracteres ("Olá mu" e "ndo!") e salvando cada um para um arquivo (chunk_aa e chunk_ab).
 10. Fim do primeiro bloco de processo.
@@ -182,7 +182,7 @@ A saída padrão mostra (linha por linha):
 
 !!! info
 
-    Os números hexadecimais, como `c8/c36893`, identificam a execução do processo exclusivo. Esses números também são o prefixo dos diretórios onde cada processo é executado. Você pode inspecionar os arquivos produzidos mudando para o diretório `$PWD/work` e usando esses números para encontrar o caminho de execução específico do processo.
+    Os números hexadecimais, como `c8/c36893`, identificam de forma única a execução do processo. Esses números também são o prefixo dos diretórios onde cada processo é executado. Você pode inspecionar os arquivos produzidos mudando para o diretório `$PWD/work` e usando esses números para encontrar o caminho de execução específico do processo.
 
 !!! tip
 
