@@ -1,18 +1,18 @@
 ---
 title: Resolução de problemas
-description: Correção de erros e resolução de problemas
+description: Tratamento de erros e resolução de problemas
 ---
 
-# Correção de erros e resolução de problemas
+# Tratamento de erros e resolução de problemas
 
 ## Depuração de erros de execução
 
 Quando a execução de um processo termina com um status de saída diferente de zero,
-o Nextflow encerra a execução e expõe a tarefa com falhas:
+o Nextflow encerra a execução e informa sobre a tarefa com falhas:
 
 !!! info ""
 
-    Clique o ícone :material-plus-circle: para ver explicações do código.
+    Clique no ícone :material-plus-circle: no código para ver explicações.
 
 ```bash
 ERROR ~ Error executing process > 'index'
@@ -60,10 +60,10 @@ O diretório de execução da tarefa possui os seguintes arquivos:
 -   Os arquivos de entrada da tarefa (ligações simbólicas)
 -   Os arquivos de saída da tarefa
 
-Verifique que o arquivo `.command.sh` contém o comando esperado e todas as variáveis
-estão resolvidas corretamente.
+Certifique-se que o arquivo `.command.sh` contém o comando esperado e que todas as variáveis
+foram substituídas pelos valores desejados.
 
-Também verifique a existência dos arquivos `.exitcode` e `.command.begin`, que, se ausentes, sugerem que a tarefa nunca foi executada pelo subsistema (isto é, o escalonador de lotes). Se o arquivo `.command.begin` existe, a tarefa foi iniciada mas provavelmente encerrada abruptamente.
+Também verifique a existência dos arquivos `.exitcode` e `.command.begin`, que, se ausentes, sugerem que a tarefa nunca foi executada pelo subsistema (o escalonador de lotes, por exemplo). Se o arquivo `.command.begin` existir, a tarefa foi iniciada mas foi provavelmente encerrada abruptamente.
 
 Para verificar a causa do erro, você pode replicar a execução com falhas usando `bash .command.run`.
 
