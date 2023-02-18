@@ -1,5 +1,5 @@
 ---
-description: Basic Nextflow Training Workshop
+description: Material de treinamento básico do Nextflow
 ---
 
 # Gerencie dependencias e containers
@@ -18,61 +18,61 @@ Containers podem ser executados de uma forma isolada pelo sistema do hospedeiro.
 
 ## Docker
 
-Docker is a handy management tool to build, run and share container images.
+Docker é uma ferramenta útil para o gerenciamento, execução e compartilhamento de imagens de containers.
 
-These images can be uploaded and published in a centralized repository known as [Docker Hub](https://hub.docker.com), or hosted by other parties like [Quay](https://quay.io).
+Essa imagens can podem ser carregadas e publicadas em um repositório centralizado conhecido como [Docker Hub](https://hub.docker.com), ou hospedada por outros grupos como [Quay](https://quay.io).
 
-### Run a container
+### Exectute um container
 
-A container can be run using the following command:
+Um container pode ser executado com o seguinte comando:
 
 ```bash
 docker run <container-name>
 ```
 
-Try for example the following publicly available container (if you have docker installed):
+Tente, por exemplo, o seguinte container público (se você tem docker instalado):
 
 ```bash
 docker run hello-world
 ```
 
-### Pull a container
+### Baixar um container
 
-The pull command allows you to download a Docker image without running it. For example:
+O comando pull possibilita que você baixe uma imagem Docker sem que execute-a. Por exemplo:
 
 ```bash
 docker pull debian:stretch-slim
 ```
 
-The above command downloads a Debian Linux image. You can check it exists by using:
+O comando acima baixa uma imagem Debian Linux. Você pode checar se ela existe usando:
 
 ```bash
 docker images
 ```
 
-### Run a container in interactive mode
+### Executar um container em mode interativo
 
-Launching a BASH shell in the container allows you to operate in an interactive mode in the containerized operating system. For example:
+Inciar um BASH shell em um container permite que você opere em modo interativo no sistema operacional containerizado. Por exemplo:
 
 ```
 docker run -it debian:stretch-slim bash
 ```
 
-Once launched, you will notice that it is running as root (!). Use the usual commands to navigate the file system. This is useful to check if the expected programs are present within a container.
+Uma vez iniciado, você vai notar que está como root (!). Use os comandos usuais para navegar pelo sistema de arquivos. Isso é útil para checar se os programas necessários estão presentes no container.
 
-To exit from the container, stop the BASH session with the `exit` command.
+Para sair do container, para a seção BASH com o comando `exit`.
 
-### Your first Dockerfile
+### Seu primeiro Dockerfile
 
-Docker images are created by using a so-called `Dockerfile`, which is a simple text file containing a list of commands to assemble and configure the image with the software packages required.
+Imagens docker são criadas utilizando um arquivo chamado `Dockerfile`, que é um simples arquivo de texto contendo uma lista de comandos para montar e configurar uma imagem com os pacotes de programas necessários.
 
-Here, you will create a Docker image containing cowsay and the Salmon tool.
+Aqui, você criará uma imagem Docker contendo cowsay e Salmon tool
 
 !!! warning
 
-    The Docker build process automatically copies all files that are located in the current directory to the Docker daemon in order to create the image. This can take a lot of time when big/many files exist. For this reason, it’s important to _always_ work in a directory containing only the files you really need to include in your Docker image. Alternatively, you can use the `.dockerignore` file to select paths to exclude from the build.
+    O processo de montagem do Docker automaticamente copia todos arquivos que estão no diretório atual para o Docker daemon para que possa criar a imagem. Isso pode custar muito tempo quando existem vários ou grandes arquivos. Por essa razão, é importante que _sempre_ trabalhe em um diretório contendo apenas os arquviso que você realmente precisa incluir em sua imagem Docker. Alternativamente, você pode usar o arquivo `.dockerignore` para selecionar os aquivos que serão excluidos da montagem.
 
-Use your favorite editor (e.g., `vim` or `nano`) to create a file named `Dockerfile` and copy the following content:
+Use seu editor favorito (ex.: `vim` ou `nano`) para criar um arquivo chamado `Dockerfile` e copiar o seguinte conteúdo:
 
 ```dockerfile
 FROM debian:stretch-slim
@@ -85,35 +85,35 @@ RUN apt-get update && apt-get install -y curl cowsay
 ENV PATH=$PATH:/usr/games/
 ```
 
-### Build the image
+### Monte a imagem
 
-Build the Dockerfile image by using the following command:
+Monte a imagem Dockerfile utilizando o seguinte comando:
 
 ```bash
 docker build -t my-image .
 ```
 
-Where "my-image" is the user-specified name tag for the Dockerfile, present in the current directory.
+Onde "my-image" é o nome que o usuário especificou para Dockerfile, presente no diretório atual.
 
 !!! tip
 
-    Don’t miss the dot in the above command.
+    Não esqueça do ponto no comando acima.
 
-When it completes, verify that the image has been created by listing all available images:
+Quando completo, verifique se a imagem foi criada listando todas imagens disponíveis:
 
 ```bash
 docker images
 ```
 
-You can try your new container by running this command:
+Você pode testar seu novo container executando esse comando:
 
 ```bash
 docker run my-image cowsay Hello Docker!
 ```
 
-### Add a software package to the image
+### Adicione um pacote de programa a imagem
 
-Add the Salmon package to the Docker image by adding the following snippet to the `Dockerfile`:
+Adicione o pacote Salmon para a imagem Docker adicionando o seguinte trecho para o `Dockerfile`:
 
 ```dockerfile
 RUN curl -sSL https://github.com/COMBINE-lab/salmon/releases/download/v1.5.2/salmon-1.5.2_linux_x86_64.tar.gz | tar xz \
@@ -121,46 +121,46 @@ RUN curl -sSL https://github.com/COMBINE-lab/salmon/releases/download/v1.5.2/sal
 && mv /salmon-*/lib/* /usr/lib/
 ```
 
-Save the file and build the image again with the same command as before:
+Salve o arquivo e monte a imagem novamente utilizando o mesmo comando anterior:
 
 ```bash
 docker build -t my-image .
 ```
 
-You will notice that it creates a new Docker image with the same name **but** with a different image ID.
+Você perceberá que isso cria uma nova imagem Docker **mas** com um ID de imagem diferente.
 
-### Run Salmon in the container
+### Execute Salmon no container
 
-Check that Salmon is running correctly in the container as shown below:
+Cheque se Salmon está executando corretamente no container como mostrado abaixo:
 
 ```bash
 docker run my-image salmon --version
 ```
 
-You can even launch a container in an interactive mode by using the following command:
+Você pode até iniciar o container no modo interativo utilizando o seguinte comando:
 
 ```bash
 docker run -it my-image bash
 ```
 
-Use the `exit` command to terminate the interactive session.
+Use o comando `exit` para finalizar a seção interativa.
 
-### File system mounts
+### Montagem do sitema de arquivos
 
-Create a genome index file by running Salmon in the container.
+Crie um arquivo index de genoma utilizando Salmon no container.
 
-Try to run Salmon in the container with the following command:
+Tente executar Salmon no container com o seguinte comando:
 
 ```bash
 docker run my-image \
     salmon index -t $PWD/data/ggal/transcriptome.fa -i transcript-index
 ```
 
-The above command fails because Salmon cannot access the input file.
+O comando acima falha porque Salmon não pode acessar o arquivo de entrada.
 
-This happens because the container runs in a completely separate file system and it cannot access the hosting file system by default.
+Isso acontece porque o container executa em um sistema de arquivos totalmente diferente e não pode acessar o arquivo no sistema de arquivo do host por default.
 
-You will need to use the `--volume` command-line option to mount the input file(s) e.g.
+Você precisará usar a opção de linha de comando `--volume` para montar o(s) arquivo(s) de entrada por exemplo.
 
 ```bash
 docker run --volume $PWD/data/ggal/transcriptome.fa:/transcriptome.fa my-image \
@@ -169,16 +169,16 @@ docker run --volume $PWD/data/ggal/transcriptome.fa:/transcriptome.fa my-image \
 
 !!! warning
 
-    The generated `transcript-index` directory is still not accessible in the host file system.
+    O `transcript-index` diretório gerado ainda está inacessível no sistema de arquivo do host.
 
-An easier way is to mount a parent directory to an identical one in the container, this allows you to use the same path when running it in the container e.g.
+Um jeito mais fácil é montar o diretório original em um indêntico no container, isso permite que você utilize o mesmo caminho durante a execução dentro do container por exemplo.
 
 ```bash
 docker run --volume $PWD:$PWD --workdir $PWD my-image \
     salmon index -t $PWD/data/ggal/transcriptome.fa -i transcript-index
 ```
 
-Or set a folder you want to mount as an environmental variable, called `DATA`:
+Ou definir uma pasta que você queira montar como uma variável de ambiente, chamada `DATA`:
 
 ```bash
 DATA=/workspace/gitpod/nf-training/data
@@ -186,7 +186,7 @@ docker run --volume $DATA:$DATA --workdir $PWD my-image \
     salmon index -t $PWD/data/ggal/transcriptome.fa -i transcript-index
 ```
 
-Now check the content of the `transcript-index` folder by entering the command:
+Agora cheque o conteúdo da pasta `transcript-index` utilizando o comando:
 
 ```bash
 ls -la transcript-index
@@ -194,44 +194,44 @@ ls -la transcript-index
 
 !!! note
 
-    Note that the permissions for files created by the Docker execution is `root`.
+    Note que as permissões para criação dos arquivos utilizado pelo Docker são `root`.
 
-### Upload the container in the Docker Hub (bonus)
+### Disponibilize o container no Docker Hub (bonus)
 
-Publish your container in the Docker Hub to share it with other people.
+Publique seu container no Docker Hub para compartilha-lo com outras pessoas.
 
-Create an account on the <https://hub.docker.com> website. Then from your shell terminal run the following command, entering the user name and password you specified when registering in the Hub:
+Crie uma conta no site <https://hub.docker.com>. Entao no seu terminal shell execute o seguinte comando, utilizando seu usuário e senha que criou quando se registrou no Hub:
 
 ```bash
 docker login
 ```
 
-Tag the image with your Docker user name account:
+Marque a imagem com seu nome de usuário Docker:
 
 ```bash
 docker tag my-image <user-name>/my-image
 ```
 
-Finally push it to the Docker Hub:
+Finalmente mande para o Docker Hub:
 
 ```bash
 docker push <user-name>/my-image
 ```
 
-After that anyone will be able to download it by using the command:
+Depois qualquer um conseguira baixar a imagem utilizando o comando:
 
 ```bash
 docker pull <user-name>/my-image
 ```
 
-Note how after a pull and push operation, Docker prints the container digest number e.g.
+Note que depois de uma operação push e pull, o Docker printa o número de registro do container, por exemplo:
 
 ```console
 Digest: sha256:aeacbd7ea1154f263cda972a96920fb228b2033544c2641476350b9317dab266
 Status: Downloaded newer image for nextflow/rnaseq-nf:latest
 ```
 
-This is a unique and immutable identifier that can be used to reference a container image in a univocally manner. For example:
+Isso é um identificador imutável e único que pode ser usado para referênciar a imagem de container de uma forma única. Por exemplo:
 
 ```bash
 docker pull nextflow/rnaseq-nf@sha256:aeacbd7ea1154f263cda972a96920fb228b2033544c2641476350b9317dab266
