@@ -2,19 +2,19 @@
 description: Basic Nextflow Training Workshop
 ---
 
-# Manage dependencies and containers
+# Gerencie dependencias e containers
 
-Computational workflows are rarely composed of a single script or tool. More often, they depend on dozens of software components or libraries.
+Fluxos de trabalhos computacionais são raramente compostos de um só script ou ferramenta.  Muitas vezes, eles dependem de duzias de componentes de softwares ou bibliotecas.
 
-Installing and maintaining such dependencies is a challenging task and the most common source of irreproducibility in scientific applications.
+Instalar e manter tais dependências é uma tarefa desafiadora e uma fonte comum de ireprodutibilidade em aplicações científicas.
 
-To overcome these issues, we use containers that enable software dependencies, i.e. tools and libraries required by a data analysis application, to be encapsulated in one or more self-contained, ready-to-run, immutable Linux container images, that can be easily deployed in any platform that supports the container runtime.
+Para superar esses problemas, nós utilizamos containers que habilitam essas dependências de softwares, isto é ferramentas e bibliotecas necessárias para uma análise de dados, para estar encapsuladas em um ou mais independente, pronto para executar, imutável imagens de containers Linux, que facilmente podem ser implementado em qualquer plataforma que suporta o motor de conteinerização.
 
-Containers can be executed in an isolated manner from the hosting system. Having its own copy of the file system, processing space, memory management, etc.
+Containers podem ser executados de uma forma isolada pelo sistema do hospedeiro. Tendo sua própria cópia do sistema de arquivos, espaço de processamento, gerencimento de memória, etc.
 
 !!! info
 
-    Containers were first introduced with kernel 2.6 as a Linux feature known as _Control Groups_ or [Cgroups](https://en.wikipedia.org/wiki/Cgroups).
+    Containers forma introduzidos com o kernel 2.6 como um recurso do Linux conhecido como _Control Groups_ or [Cgroups](https://en.wikipedia.org/wiki/Cgroups).
 
 ## Docker
 
