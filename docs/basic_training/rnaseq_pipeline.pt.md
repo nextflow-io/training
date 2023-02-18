@@ -11,13 +11,13 @@ Para demonstrar um cenário biomédico da vida real, nós iremos implementar uma
 3. Realiza quantificação
 4. Cria um relatório MultiQC
 
-Isso será feito usando uma série de sete scripts, cada um se baseia no anterior, para criar um fluxo de trabalho completo. Você poderá encontrá-los no diretório do tutorial (`script1.nf` - `script7.nf`). 
+Isso será feito usando uma série de sete scripts, cada qual se baseia no anterior, para criar um fluxo de trabalho completo. Você poderá encontrá-los no diretório do tutorial (`script1.nf` - `script7.nf`). 
 
-## Define the pipeline parameters
+## Defina os parâmetros do pipeline
 
-Parameters are inputs and options that can be changed when the pipeline is run.
+Parâmetros são entradas e opções que podem ser modificados quando um pipeline é executado.
 
-The script `script1.nf` defines the pipeline input parameters.
+O script `script1.nf` define os parâmetros de entrada do pipeline.
 
 ```groovy
 params.reads = "$projectDir/data/ggal/gut_{1,2}.fq"
@@ -27,23 +27,23 @@ params.multiqc = "$projectDir/multiqc"
 println "reads: $params.reads"
 ```
 
-Run it by using the following command:
+Execute-o usando o comando a seguir:
 
 ```bash
 nextflow run script1.nf
 ```
 
-Try to specify a different input parameter in your execution command, for example:
+Tente especificar um parâmetro de entrada diferente no seu comando de execução, por exemplo:
 
 ```bash
 nextflow run script1.nf --reads '/workspace/gitpod/nf-training/data/ggal/lung_{1,2}.fq'
 ```
 
-### :material-progress-question: Exercises
+### :material-progress-question: Exercícios
 
 !!! exercise
 
-    Modify the `script1.nf` by adding a fourth parameter named `outdir` and set it to a default path that will be used as the pipeline output directory.
+    Modifique o `script1.nf` ao adicionar um quarto parâmetro chamado `outdir` e defina-o como um caminho padrão que será usado como o diretório de saída do pipeline.
 
     ??? result
 
@@ -56,16 +56,16 @@ nextflow run script1.nf --reads '/workspace/gitpod/nf-training/data/ggal/lung_{1
 
 !!! exercise
 
-    Modify `script1.nf` to print all of the pipeline parameters by using a single `log.info` command as a [multiline string](https://www.nextflow.io/docs/latest/script.html#multi-line-strings) statement.
+    Modifique o `script1.nf` para imprimir todos os parâmetros do pipeline usando um único comando`log.info` como uma declaração de [string multilinha](https://www.nextflow.io/docs/latest/script.html#multi-line-strings) (multiline string).
 
     !!! tip ""
 
-        :material-lightbulb: See an example [here](https://github.com/nextflow-io/rnaseq-nf/blob/3b5b49f/main.nf#L41-L48).
+        :material-lightbulb: Veja um exemplo [aqui](https://github.com/nextflow-io/rnaseq-nf/blob/3b5b49f/main.nf#L41-L48).
 
 
     ??? result
 
-        Add the following to your script file:
+        Adicione o código abaixo para seu arquivo de script:
 
         ```groovy
         log.info """\
@@ -78,23 +78,23 @@ nextflow run script1.nf --reads '/workspace/gitpod/nf-training/data/ggal/lung_{1
                     .stripIndent()
         ```
 
-### :material-check-all: Summary
+### :material-check-all: Resumo
 
-In this step you have learned:
+Nesta etapa você aprendeu:
 
-1. How to define parameters in your pipeline script
-2. How to pass parameters by using the command line
-3. The use of `$var` and `${var}` variable placeholders
-4. How to use multiline strings
-5. How to use `log.info` to print information and save it in the log execution file
+1. Como definir parâmetros em seu script de pipeline
+2. Como atribuir parâmetros usando a linha de comando
+3. O uso de `$var` e `${var}` como espaço reservado para variáveis 
+4. Como usar strings multilinhas
+5. Como usar `log.info` para imprimir informações e salvá-las no arquivo de execução de log
 
-## Create a transcriptome index file
+## Criar um arquivo para indexação de transcriptoma
 
-Nextflow allows the execution of any command or script by using a `process` definition.
+Nextflow permite a execução de qualquer comando ou script usando uma definição de `processo`.
 
-A `process` is defined by providing three main declarations: the process [`input`](https://www.nextflow.io/docs/latest/process.html#inputs), [`output`](https://www.nextflow.io/docs/latest/process.html#outputs) and command [`script`](https://www.nextflow.io/docs/latest/process.html#script).
+Um `processo` é definido ao fornecer três principais declarações: as [`entradas`](https://www.nextflow.io/docs/latest/process.html#inputs), [`saídas`](https://www.nextflow.io/docs/latest/process.html#outputs) e comandos de [`script`](https://www.nextflow.io/docs/latest/process.html#script) do processo.
 
-To add a transcriptome `INDEX` processing step, try adding the following code blocks to your `script1.nf`. Alternatively, these code blocks have already been added to `script2.nf`.
+Para adicionar uma etapa de processamento de `INDEX` (em português, índice) do transcriptoma, tente adicionar os blocos de código a seguir no seu `script1.nf`. Como alternativa, esses blocos de código já foram adicionados ao `script2.nf`.
 
 ```groovy
 /*
@@ -115,7 +115,7 @@ process INDEX {
 }
 ```
 
-Additionally, add a workflow scope containing an input channel definition and the index process:
+Além disso, adicione um escopo de fluxo de trabalho contendo uma definição de canal de entrada e o processo de índice:
 
 ```groovy
 workflow {
@@ -123,51 +123,51 @@ workflow {
 }
 ```
 
-Here, the `params.transcriptome_file` parameter is used as the input for the `INDEX` process. The `INDEX` process (using the `salmon` tool) creates `salmon_index`, an indexed transcriptome that is passed as an output to the `index_ch` channel.
+Aqui, o parâmetro `params.transcriptome_file` é usado como entrada para o processo `INDEX`. O processo `INDEX` (usando a ferramenta `salmon`) cria `salmon_index`, um transcriptoma indexado que é passado como saída ao canal `index_ch`.
 
 !!! info
 
-    The `input` declaration defines a `transcriptome` path variable which is used in the `script` as a reference (using the dollar symbol) in the Salmon command line.
+    A declaração de `entrada` define a variável de caminho `transcriptoma` que é usada no `script` como uma referência (usando o símbolo de cifrão) na linha de comando Salmon.
 
 !!! warning
 
-    Resource requirements such as CPUs and memory limits can change with different workflow executions and platforms. Nextflow can use `$task.cpus` as a variable for the number of CPUs. See [process directives documentation](https://www.nextflow.io/docs/latest/process.html#directives) for more details.
+    Os requisitos de recursos, como CPUs e limites de memória, podem mudar com diferentes execuções e plataformas de fluxo de trabalho. Nextflow pode usar `$task.cpus` como uma variável para o número de CPUs.. Veja a [documentação de diretivas de processo](https://www.nextflow.io/docs/latest/process.html#directives) para mais detalhes.
 
-Run it by using the command:
+Execute-o usando o comando:
 
 ```bash
 nextflow run script2.nf
 ```
 
-The execution will fail because `salmon` is not installed in your environment.
+A execução irá falhar porque `salmon` não está instalado em seu ambiente.
 
-Add the command line option `-with-docker` to launch the execution through a Docker container, as shown below:
+Adicione a opção de linha de comando `-with-docker` para iniciar a execução através do container Docker, como mostrado abaixo:
 
 ```bash
 nextflow run script2.nf -with-docker
 ```
 
-This time the execution will work because it uses the Docker container `nextflow/rnaseq-nf` that is defined in the `nextflow.config` file in your current directory. If you are running this script locally then you will need to download docker to your machine, log in and activate docker, and allow the script to download the container containing the run scripts. You can learn more about docker [here](https://www.nextflow.io/docs/latest/docker.html).
+Dessa vez a execução vai funcionar porque usa o container Docker `nextflow/rnaseq-nf` que é definido no arquivo `nextflow.config` do seu diretório atual. Se você está executando esse script localmente, você precisará baixar o docker em seu computador, fazer log in e ativar o docker, e permitir que o script baixe o container contendo os scripts de execução. Você pode aprender mais sobre o docker [aqui](https://www.nextflow.io/docs/latest/docker.html).
 
-To avoid adding `-with-docker` each time you execute the script, add the following line to the `nextflow.config` file:
+Para evitar adicionar `-with-docker` cada vez que você executar o script, adicione a linha a seguir ao arquivo `nextflow.config`:
 
 ```groovy
 docker.enabled = true
 ```
 
-### :material-progress-question: Exercises
+### :material-progress-question: Exercícios
 
 !!! exercise
 
-    Enable the Docker execution by default by adding the above setting in the `nextflow.config` file.
+    Ative a execução do Docker por padrão adicionando a configuração acima no arquivo `nextflow.config`.
 
 !!! exercise
 
-    Print the output of the `index_ch` channel by using the [view](https://www.nextflow.io/docs/latest/operator.html#view) operator.
+    Imprima a saída do canal `index_ch` usando o operador [view](https://www.nextflow.io/docs/latest/operator.html#view).
 
     ??? result
 
-        Add the following to the end of your workflow block in your script file
+        Adicione o código a seguir ao final do bloco de fluxo de trabalho em seu arquivo de script
 
         ```groovy
         index_ch.view()
@@ -175,11 +175,11 @@ docker.enabled = true
 
 !!! exercise
 
-    If you have more CPUs available, try changing your script to request more resources for this process. For example, see the [directive docs](https://www.nextflow.io/docs/latest/process.html#cpus). `$task.cpus` is already specified in this script, so setting the number of CPUs as a directive will tell Nextflow to run this job.
+    Se você tiver mais CPUs disponíveis, tente alterar seu script para solicitar mais recursos para este processo. Por exemplo, consulte os [documentos de diretiva](https://www.nextflow.io/docs/latest/process.html#cpus). `$task.cpus` já está especificado no script, portanto definir o número de CPUs como uma diretiva informará ao Nextflow para executar este trabalho.
 
     ??? result
 
-        Add `cpus 2` to the top of the index process:
+        Adicione `cpus 2` no top do processo de índice:
 
         ```groovy
         process INDEX {
@@ -188,15 +188,15 @@ docker.enabled = true
             ...
         ```
 
-        Then check it worked by looking at the script executed in the work directory. Look for the hexadecimal (e.g. `work/7f/f285b80022d9f61e82cd7f90436aa4/`), Then `cat` the `.command.sh` file.
+        Em seguida verifique se funcionou observando o script executado no diretório de trabalho. Procure pelo hexadecimal (por exemplo, `work/7f/f285b80022d9f61e82cd7f90436aa4/`), depois `cat` o arquivo `.command.sh`.
 
 !!! exercise "Bonus Exercise"
 
-    Use the command `tree work` to see how Nextflow organizes the process work directory. Check [here](https://www.tecmint.com/linux-tree-command-examples/) if you need to download `tree`.
+    Use o comando `tree work` para observar como Nextflow organiza o diretório de trabalho do processo. Verifique [aqui](https://www.tecmint.com/linux-tree-command-examples/) se você precisa baixar `tree`.
 
     ??? result
 
-        It should look something like this:
+        Deve ser algo assim:
 
         ```
         work
@@ -223,15 +223,15 @@ docker.enabled = true
         ├── 7f
         ```
 
-### :material-check-all: Summary
+### :material-check-all: Resumo
 
-In this step you have learned:
+Nesta etapa você aprendeu:
 
-1. How to define a process executing a custom command
-2. How process inputs are declared
-3. How process outputs are declared
-4. How to print the content of a channel
-5. How to access the number of available CPUs
+1. Como definir um processo executando um comando personalizado
+2. Como as entradas do processo são declaradas
+3. Como as saídas do processo são declaradas
+4. Como imprimir o conteúdo de um canal
+5. Como acessar o número de CPUs disponíveis
 
 ## Collect read files by pairs
 
