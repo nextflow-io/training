@@ -1,8 +1,8 @@
 ---
-description: Basic Nextflow Training Workshop
+description: Material de treinamento básico do Nextflow
 ---
 
-# Channels
+# Canais
 
 Channels are a key data structure of Nextflow that allows the implementation of reactive-functional oriented computational workflows based on the [Dataflow](https://en.wikipedia.org/wiki/Dataflow_programming) programming paradigm.
 
@@ -12,11 +12,11 @@ They are used to logically connect tasks to each other or to implement functiona
 --8<-- "docs/basic_training/img/channel-files.excalidraw.svg"
 </figure>
 
-## Channel types
+## Tipos de canais
 
 Nextflow distinguishes two different kinds of channels: **queue** channels and **value** channels.
 
-### Queue channel
+### Canal de fila
 
 A _queue_ channel is an _asynchronous_ unidirectional _FIFO_ queue that connects two processes or operators.
 
@@ -50,7 +50,7 @@ ch.view() // (2)!
     ch.view()
     ```
 
-### Value channels
+### Canais de valor
 
 A **value** channel (a.k.a. singleton channel) by definition is bound to a single value and it can be read unlimited times without consuming its contents. A `value` channel is created using the [value](https://www.nextflow.io/docs/latest/channel.html#value) factory method or by operators returning a single value, such as [first](https://www.nextflow.io/docs/latest/operator.html#first), [last](https://www.nextflow.io/docs/latest/operator.html#last), [collect](https://www.nextflow.io/docs/latest/operator.html#operator-collect), [count](https://www.nextflow.io/docs/latest/operator.html#operator-count), [min](https://www.nextflow.io/docs/latest/operator.html#operator-min), [max](https://www.nextflow.io/docs/latest/operator.html#operator-max), [reduce](https://www.nextflow.io/docs/latest/operator.html#operator-reduce), and [sum](https://www.nextflow.io/docs/latest/operator.html#operator-sum).
 
@@ -146,7 +146,7 @@ workflow {
 
 Besides, in many situations, Nextflow will implicitly convert variables to value channels when they are used in a process invocation. For example, when you invoke a process with a pipeline parameter (`params.example`) which has a string value, it is automatically cast into a value channel.
 
-## Channel factories
+## Fábricas de canal
 
 These are Nextflow commands for creating channels that have implicit expected inputs and functions.
 
@@ -378,7 +378,7 @@ workflow {
 
 If you want to run the pipeline above and do not have fastqc installed in your machine, don’t forget what you learned in the previous section. Run this pipeline with `-with-docker biocontainers/fastqc:v0.11.5`, for example.
 
-### Text files
+### Arquivos de texto
 
 The `splitText` operator allows you to split multi-line strings or text file items, emitted by a source channel into chunks containing n lines, which will be emitted by the resulting channel. See:
 
@@ -440,7 +440,7 @@ for( String row : lines ) {
 }
 ```
 
-### Comma separate values (.csv)
+### Valores separados por vírgula (.csv)
 
 The `splitCsv` operator allows you to parse text items emitted by a channel, that are CSV formatted.
 
@@ -591,7 +591,7 @@ for( List row : lines ) {
 
         Now the workflow should run from a CSV file.
 
-### Tab separated values (.tsv)
+### Valores separados por tabulação (.tsv)
 
 Parsing tsv files works in a similar way, simply add the `sep:'\t'` option in the `splitCsv` context:
 
@@ -620,7 +620,7 @@ Channel
           .view { row -> "${row.patient_id}" }
         ```
 
-## More complex file formats
+## Formatos de arquivo mais complexos
 
 ### JSON
 
@@ -658,7 +658,7 @@ for( def entry : records ) {
 }
 ```
 
-### Storage of parsers into modules
+### Armazenamento em módulos de analisadores sintáticos
 
 The best way to store parser scripts is to keep them in a Nextflow module file.
 
