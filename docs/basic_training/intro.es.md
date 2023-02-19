@@ -1,40 +1,40 @@
 ---
-description: Getting started with Nextflow
+descripción: Primeros pasos con Nextflow
 ---
 
-# Introduction
+# Introducción
 
-## Basic concepts
+## Conceptos básicos
 
-Nextflow is a workflow orchestration engine and domain-specific language (DSL) that makes it easy to write data-intensive computational pipelines.
+Nextflow es un orquestador de flujos de trabajo y un lenguaje de dominio específico (DSL) que facilita la escritura de flujos computacionales con uso intensivo de datos.
 
-It is designed around the idea that the Linux platform is the _lingua franca_ of data science. Linux provides many simple but powerful command-line and scripting tools that, when chained together, facilitate complex data manipulations.
+Está diseñado en torno a la idea de que la plataforma Linux es la _lingua franca_ de la ciencia de datos. Linux proporciona muchas herramientas de linea de comandos simples pero poderosas que, cuando se encadenan, facilitan la manipulación de datos complejos.
 
-Nextflow extends this approach, adding the ability to define complex program interactions and a high-level parallel computational environment, based on the dataflow programming model. Nextflow’s core features are:
+Nextflow amplía este enfoque, agregando la capacidad de definir interacciones de programas complejas y un entorno computacional paralelo de alto nivel, basado en el modelo de programación de flujo de datos. Las características principales de Nextflow son:
 
--   Workflow portability and reproducibility
--   Scalability of parallelization and deployment
--   Integration of existing tools, systems, and industry standards
+- Portabilidad y reproducibilidad del flujo de trabajo
+- Escalabilidad de paralelización y despliegue
+- Integración de herramientas, sistemas y estándares industriales existentes
 
-### Processes and Channels
+### Procesos y Canales
 
-In practice, a Nextflow pipeline is made by joining together different processes. Each `process` can be written in any scripting language that can be executed by the Linux platform (Bash, Perl, Ruby, Python, etc.).
+En la práctica, un flujo de Nextflow se realiza uniendo diferentes procesos. Cada `proceso` se puede escribir en cualquier lenguaje de programación que pueda ejecutar la plataforma Linux (Bash, Perl, Ruby, Python, etc.).
 
-Processes are executed independently and are isolated from each other, i.e., they do not share a common (writable) state. The only way they can communicate is via asynchronous first-in, first-out (FIFO) queues, called `channels`.
+Los procesos se ejecutan de forma independiente y están aislados entre sí, es decir, no comparten un estado común (de escritura). La única forma en que pueden comunicarse es a través de colas FIFO (primero en entrar, primero en salir) asincrónicas, llamadas "canales".
 
-Any `process` can define one or more `channels` as an `input` and `output`. The interaction between these processes, and ultimately the pipeline execution flow itself, is implicitly defined by these `input` and `output` declarations.
+Cualquier `proceso` puede definir uno o más `canales` como `entrada` y `salida`. La interacción entre estos procesos y, en última instancia, el propio flujo de ejecución del flujo, se define implícitamente mediante estas declaraciones de "entrada" y "salida".
 
 <figure class="excalidraw">
 --8<-- "docs/basic_training/img/channel-process.excalidraw.svg"
 </figure>
 
-### Execution abstraction
+### Abstracción de ejecución
 
-While a `process` defines _what_ command or `script` has to be executed, the executor determines _how_ that `script` is run in the target platform.
+Mientras que un 'proceso' define _qué_ comando o 'script' debe ejecutarse, el ejecutor determina _cómo_ se ejecuta ese 'script' en la plataforma de destino.
 
-If not otherwise specified, processes are executed on the local computer. The local executor is very useful for pipeline development and testing purposes, however, for real-world computational pipelines a high-performance computing (HPC) or cloud platform is often required.
+Si no se especifica lo contrario, los procesos se ejecutan en la computadora local. El ejecutor local es muy útil para desarrollar flujos y con fines de prueba; sin embargo, para los flujos computacionales del mundo real, a menudo se requiere una plataforma de alto rendimiento (HPC) o la nube.
 
-In other words, Nextflow provides an abstraction between the pipeline’s functional logic and the underlying execution system (or runtime). Thus, it is possible to write a pipeline that runs seamlessly on your computer, a cluster, or the cloud, without being modified. You simply define the target execution platform in the configuration file.
+En otras palabras, Nextflow proporciona una abstracción entre la lógica funcional del flujo y el sistema de ejecución (o runtime) subyacente. Por lo tanto, es posible escribir un flujo que se ejecute sin problemas en su computadora, un clúster o la nube, sin ser modificada. Simplemente defina la plataforma de ejecución de destino en el archivo de configuración.
 
 <figure markdown>
 
@@ -42,19 +42,19 @@ In other words, Nextflow provides an abstraction between the pipeline’s functi
 
 </figure>
 
-### Scripting language
+### Lenguaje de escritura
 
-Nextflow implements a declarative DSL that simplifies the writing of complex data analysis workflows as an extension of a general-purpose programming language.
+Nextflow implementa un DSL declarativo que simplifica la escritura de flujos de trabajo de análisis de datos complejos como una extensión de un lenguaje de programación de propósito general.
 
-This approach makes Nextflow flexible — it provides the benefits of a concise DSL for the handling of recurrent use cases with ease **and** the flexibility and power of a general-purpose programming language to handle corner cases in the same computing environment. This would be difficult to implement using a purely declarative approach.
+Este enfoque hace que Nextflow sea flexible: brinda los beneficios de un DSL conciso para el manejo de casos de uso frecuente con facilidad **y** da la flexibilidad y el poder de un lenguaje de programación de propósito general para manejar casos más complejos en el mismo entorno. Esto sería difícil de implementar utilizando un enfoque puramente declarativo.
 
-In practical terms, Nextflow scripting is an extension of the [Groovy programming language](https://groovy-lang.org/) which, in turn, is a super-set of the Java programming language. Groovy can be thought of as "Python for Java", in that it simplifies the writing of code and is more approachable.
+En términos prácticos, las secuencias de comandos de Nextflow son una extensión del [lenguaje de programación Groovy] (https://groovy-lang.org/) que, a su vez, es un superconjunto del lenguaje de programación Java. Groovy puede considerarse como "Python para Java", ya que simplifica la escritura de código y es más accesible.
 
-## Your first script
+## Tu primer script
 
-Here you will execute your first Nextflow script (`hello.nf`), which we will go through line-by-line.
+Aquí ejecutará su primer script de Nextflow (`hello.nf`), que revisaremos línea por línea.
 
-In this toy example, the script takes an input string (a parameter called `params.greeting`) and splits it into chunks of six characters in the first process. The second process then converts the characters to upper case. The result is finally displayed on-screen.
+En este ejemplo sencillo, el script toma una cadena de entrada (un parámetro llamado `params.saludo`) y la divide en partes de seis caracteres en el primer proceso. El segundo proceso convierte los caracteres a mayúsculas. El resultado finalmente se muestra en la pantalla.
 
 ### Nextflow code
 
@@ -82,23 +82,23 @@ TODO: Maybe either:
 #!/usr/bin/env nextflow
 // (1)!
 
-params.greeting = 'Hello world!' // (2)!
-greeting_ch = Channel.of(params.greeting) // (3)!
+params.saludo = '¡Hola mundo!' // (2)!
+saludo_ch = Channel.of(params.saludo) // (3)!
 
-process SPLITLETTERS { // (4)!
+process SEPARALETRAS { // (4)!
     input: // (5)!
     val x // (6)!
 
     output: // (7)!
-    path 'chunk_*' // (8)!
+    path 'segmento_*' // (8)!
 
     // (9)!
     """
-    printf '$x' | split -b 6 - chunk_
+    printf '$x' | split -b 6 - segmento_
     """
 } // (10)!
 
-process CONVERTTOUPPER { // (11)!
+process MAYUSCULAS { // (11)!
     input: // (12)!
     path y // (13)!
 
@@ -112,101 +112,101 @@ process CONVERTTOUPPER { // (11)!
 } // (17)!
 
 workflow { // (18)!
-    letters_ch = SPLITLETTERS(greeting_ch) // (19)!
-    results_ch = CONVERTTOUPPER(letters_ch.flatten()) // (20)!
-    results_ch.view{ it } // (21)!
+    letras_ch = SEPARALETRAS(saludo_ch) // (19)!
+    resultados = MAYUSCULAS(letras_ch.flatten()) // (20)!
+    resultados.view{ it } // (21)!
 } // (22)!
 ```
 
-1. The code begins with a shebang, which declares Nextflow as the interpreter.
-2. Declares a parameter `greeting` that is initialized with the value 'Hello world!'.
-3. Initializes a `channel` labeled `greeting_ch`, which contains the value from `params.greeting`. Channels are the input type for processes in Nextflow.
-4. Begins the first process block, defined as `SPLITLETTERS`.
-5. Input declaration for the `SPLITLETTERS` process. Inputs can be values (`val`), files or paths (`path`), or other qualifiers ([see here](https://www.nextflow.io/docs/latest/process.html#inputs)).
-6. Tells the `process` to expect an input value (`val`), that we assign to the variable 'x'.
-7. Output declaration for the `SPLITLETTERS` process.
-8. Tells the process to expect an output file(s) (`path`), with a filename starting with 'chunk\_\*', as output from the script. The process sends the output as a channel.
-9. Three double quotes start and end the code block to execute this `process`.
-   Inside is the code to execute — printing the `input` value x (called using the dollar symbol [$] prefix), splitting the string into chunks with a length of 6 characters ("Hello " and "world!"), and saving each to a file (chunk_aa and chunk_ab).
-10. End of the first process block.
-11. Begins the second process block, defined as `CONVERTTOUPPER`.
-12. Input declaration for the `CONVERTTOUPPER` `process`.
-13. Tells the `process` to expect an `input` file(s) (`path`; i.e. chunk_aa and chunk_ab), that we assign to the variable 'y'.
-14. Output declaration for the `CONVERTTOUPPER` process.
-15. Tells the process to expect output as standard output (stdout) and sends this output as a channel.
-16. Three double quotes start and end the code block to execute this `process`.
-    Within the block there is a script to read files (cat) using the '$y' input variable, then pipe to uppercase conversion, outputting to standard output.
-17. End of second `process` block.
-18. Start of the workflow scope where each process can be called.
-19. Execute the `process` `SPLITLETTERS` on the `greeting_ch` (aka greeting channel), and store the output in the channel `letters_ch`.
-20. Execute the `process` `CONVERTTOUPPER` on the letters channel `letters_ch`, which is flattened using the operator `.flatten()`. This transforms the input channel in such a way that every item is a separate element. We store the output in the channel `results_ch`.
-21. The final output (in the `results_ch` channel) is printed to screen using the `view` operator (appended onto the channel name).
-22. End of the workflow scope.
+1. El código comienza con un "shebang", que declara a Nextflow como intérprete.
+2. Declara un parámetro 'saludo' que se inicializa con el valor 'Hello world!'.
+3. Inicializa un `canal` etiquetado como `saludo_ch`, que contiene el valor de `params.saludo`. Los canales son el tipo de entrada para los procesos en Nextflow.
+4. Comienza el primer bloque de proceso, definido como `SEPARALETRAS`.
+5. Declaración de entrada para el proceso `SEPARALETRAS`. Las entradas pueden ser valores (`val`), archivos o rutas (`path`), u otros calificadores ([ver aquí](https://www.nextflow.io/docs/latest/process.html#inputs)).
+6. Le dice al `proceso` que espere un valor de entrada (`val`), que asignamos a la variable 'x'.
+7. Declaración de salida para el proceso `SEPARALETRAS`.
+8. Le dice al proceso que espere un archivo de salida (`ruta`), con un nombre de archivo que comience con 'segmento\_\*', como salida del script. El proceso envía la salida como un canal.
+9. Tres comillas dobles inician y finalizan el bloque de código para ejecutar este `proceso`.
+   Dentro está el código para ejecutar: imprimir el valor de `entrada` x (llamado usando el prefijo del símbolo de dólar [$]), dividir la cadena en fragmentos con una longitud de 6 caracteres ("¡Hola " y "mundo!"), y guardar cada uno a un archivo (segmento_aa y segmento_ab).
+10. Fin del primer bloque de proceso.
+11. Comienza el segundo bloque de proceso, definido como `MAYUSCULAS`.
+12. Declaración de entrada para el `proceso` `MAYUSCULAS`.
+13. Le dice al `proceso` que espere un archivo(s) de `entrada` (`ruta`; es decir, segmento_aa y segmento_ab), que asignamos a la variable 'y'.
+14. Declaración de salida para el proceso `MAYUSCULAS`.
+15. Le dice al proceso que espere la salida como salida estándar (stdout) y envía esta salida como un canal.
+16. Tres comillas dobles inician y finalizan el bloque de código para ejecutar este `proceso`.
+    Dentro del bloque hay una secuencia de comandos para leer archivos (cat) usando la variable de entrada '$y', luego realizar la conversión a mayúsculas y generar la salida estándar.
+17. Fin del segundo bloque `proceso`.
+18. Inicio del alcance del flujo de trabajo donde se puede llamar a cada proceso.
+19. Ejecute el `proceso` `SEPARALETRAS` en `saludo_ch` (también conocido como canal de saludo), y almacene la salida en el canal `letras_ch`.
+20. Ejecute el `proceso` `MAYUSCULAS` en el canal de letras `letras_ch`, que se aplana usando el operador `.flatten()`. Esto transforma el canal de entrada de tal manera que cada elemento es un elemento separado. Almacenamos la salida en el canal `resultados_ch`.
+21. El resultado final (en el canal `resultados_ch`) se imprime en la pantalla usando el operador `view` (junto al nombre del canal).
+22. Fin del flujo de trabajo.
 
-The use of the operator `.flatten()` here is to split the two files into two separate items to be put through the next process (else they would be treated as a single element).
+El operador `.flatten()` se usa aquí para dividir los dos archivos en dos elementos separados para pasar por el siguiente proceso (de lo contrario, serían tratados como un solo elemento).
 
-### In practice
+### En la práctica
 
-Now copy the above example into your favorite text editor and save it to a file named `hello.nf`.
+Ahora copie el ejemplo anterior en su editor de texto favorito y guárdelo en un archivo llamado `hello.nf`.
 
-!!! warning
+!!! advertencia
 
-    For the Gitpod tutorial, make sure you are in the folder called `nf-training`
+    Para el tutorial de Gitpod, asegúrese de estar en la carpeta llamada `nf-training`
 
-Execute the script by entering the following command in your terminal:
+Ejecute el script ingresando el siguiente comando en su terminal:
 
 ```bash
-nextflow run hello.nf
+nextflow run hola.nf
 ```
 
-The output will look similar to the text shown below:
+El resultado será similar al texto que se muestra a continuación:
 
 ```linenums="1"
 N E X T F L O W  ~  version 22.04.5
-Launching `hello.nf` [gigantic_poitras] DSL2 - revision: 197a0e289a
+Launching `hola.nf` [gigantic_poitras] DSL2 - revision: 197a0e289a
 executor >  local (3)
-[c8/c36893] process > SPLITLETTERS (1)   [100%] 1 of 1 ✔
-[1a/3c54ed] process > CONVERTTOUPPER (2) [100%] 2 of 2 ✔
-WORLD!
-HELLO
+[c8/c36893] process > SEPARALETRAS (1)   [100%] 1 of 1 ✔
+[1a/3c54ed] process > MAYUSCULAS (2) [100%] 2 of 2 ✔
+MUNDO!
+¡HOLA
 ```
 
-The standard output shows (line by line):
+La salida estándar muestra (línea por línea):
 
-1. The version of Nextflow that was executed.
-2. The script and version names.
-3. The executor used (in the above case: local).
-4. The first `process` is executed once. The line starts with a unique hexadecimal value (see TIP below), and ends with the percentage and job completion information.
-5. The second process is executed twice (once for chunk_aa and once for chunk_ab).
-6. The result string from stdout is printed.
+1. La versión de Nextflow que se ejecutó.
+2. Los nombres de la secuencia de comandos y la versión.
+3. El ejecutor utilizado (en el caso anterior: local).
+4. El primer `proceso` se ejecuta una vez. La línea comienza con un valor hexadecimal único (consulte el CONSEJO a continuación) y finaliza con el porcentaje y la información de finalización del trabajo.
+5. El segundo proceso se ejecuta dos veces (una vez para segmento_aa y otra para segmento_ab).
+6. Se imprime la cadena de resultado de stdout.
 
 !!! info
 
-    The hexadecimal numbers, like `c8/c36893`, identify the unique process execution. These numbers are also the prefix of the directories where each process is executed. You can inspect the files produced by changing to the directory `$PWD/work` and using these numbers to find the process-specific execution path.
+    Los números hexadecimales, como `c8/c36893`, identifican una ejecución única del proceso. Estos números son también el prefijo de los directorios donde se ejecuta cada proceso. Puede inspeccionar los archivos producidos cambiando al directorio `$PWD/work` y usando estos números para encontrar la ruta de ejecución específica del proceso.
 
 !!! tip
 
-    The second process runs twice, executing in two different work directories for each input file. The [ANSI](https://en.wikipedia.org/wiki/ANSI_escape_code) log output from Nextflow dynamically refreshes as the pipeline runs; in the previous example the work directory `[1a/3c54ed]` is the second of the two directories that were processed (overwriting the log with the first). To print all the relevant paths to the screen, disable the ANSI log output usin the `-ansi-log` flag (e.g., `nextflow run hello.nf -ansi-log false`).
+    El segundo proceso se ejecuta dos veces, ejecutándose en dos directorios de trabajo diferentes para cada archivo de entrada. La salida de registro [ANSI](https://en.wikipedia.org/wiki/ANSI_escape_code) de Nextflow se actualiza dinámicamente a medida que se ejecuta el flujo; en el ejemplo anterior, el directorio de trabajo `[1a/3c54ed]` es el segundo de los dos directorios que se procesaron (sobrescribiendo el registro con el primero). Para imprimir todas las rutas relevantes a la pantalla, deshabilite la salida de registro ANSI usando el indicador `-ansi-log` (por ejemplo, `nextflow run hello.nf -ansi-log false`).
 
-It’s worth noting that the process `CONVERTTOUPPER` is executed in parallel, so there’s no guarantee that the instance processing the first split (the chunk _Hello ') will be executed before the one processing the second split (the chunk 'world!_).
+Vale la pena señalar que el proceso `MAYUSCULAS` se ejecuta en paralelo, por lo que no hay garantía de que la instancia que procesa el primer segmento (el fragmento '¡Hola ') se ejecute antes que la que procesa el segundo (el fragmento 'mundo!').
 
-Thus, it could be that your final result will be printed out in a different order:
+Por lo tanto, podría ser que su resultado final se imprima en un orden diferente:
 
 ```
-WORLD!
-HELLO
+MUNDO!
+¡HOLA
 ```
 
-## Modify and resume
+## Modificar y reanudar
 
-Nextflow keeps track of all the processes executed in your pipeline. If you modify some parts of your script, only the processes that are changed will be re-executed. The execution of the processes that are not changed will be skipped and the cached result will be used instead.
+Nextflow realiza un seguimiento de todos los procesos ejecutados en su flujo. Si modifica algunas partes de su secuencia de comandos, solo se volverán a ejecutar los procesos modificados. Se omitirá la ejecución de los procesos que no se modifican y, en su lugar, se utilizará el resultado almacenado en caché.
 
-This allows for testing or modifying part of your pipeline without having to re-execute it from scratch.
+Esto permite probar o modificar parte del script sin tener que volver a ejecutarla desde cero.
 
-For the sake of this tutorial, modify the `CONVERTTOUPPER` process in the previous example, replacing the process script with the string `rev $y`, so that the process looks like this:
+Modifique el proceso `MAYUSCULAS` en el ejemplo anterior, reemplazando el script del proceso con la cadena `rev $y`, para que el proceso se vea así:
 
 ```groovy
-process CONVERTTOUPPER {
+process MAYUSCULAS {
     input:
     path y
 
@@ -219,52 +219,53 @@ process CONVERTTOUPPER {
 }
 ```
 
-Then save the file with the same name, and execute it by adding the `-resume` option to the command line:
+Luego guarde el archivo con el mismo nombre y ejecútelo agregando la opción `-resume` a la línea de comando:
+
 
 ```console
 $ nextflow run hello.nf -resume
 
 N E X T F L O W  ~  version 22.04.5
-Launching `hello.nf` [amazing_becquerel] DSL2 - revision: 525206806b
+Launching `hola.nf` [amazing_becquerel] DSL2 - revision: 525206806b
 executor >  local (2)
-[c8/c36893] process > SPLITLETTERS (1)   [100%] 1 of 1, cached: 1 ✔
-[77/cf83b6] process > CONVERTTOUPPER (1) [100%] 2 of 2 ✔
-!dlrow
- olleH
+[c8/c36893] process > SEPARALETRAS (1)   [100%] 1 of 1, cached: 1 ✔
+[77/cf83b6] process > MAYUSCULAS (1) [100%] 2 of 2 ✔
+!odnum
+ aloH¡
 ```
 
-You will see that the execution of the process `SPLITLETTERS` is skipped (the process ID is the same as in the first output) — its results are retrieved from the cache. The second process is executed as expected, printing the reversed strings.
+Verá que se omite la ejecución del proceso `SEPARALETRAS` (el ID del proceso es el mismo que en la primera salida); sus resultados se recuperan de la caché. El segundo proceso se ejecuta como se esperaba, imprimiendo las cadenas invertidas.
 
 !!! info
 
-    The pipeline results are cached by default in the directory `$PWD/work`. Depending on your script, this folder can take up a lot of disk space. If you are sure you won’t need to resume your pipeline execution, clean this folder periodically.
+    Los resultados se almacenan en caché de forma predeterminada en el directorio `$PWD/work`. Dependiendo de su trabajo, esta carpeta puede ocupar mucho espacio en el disco. Si está seguro de que no necesitará reanudar la ejecución de su flujo, limpie esta carpeta periódicamente.
 
-## Pipeline parameters
+## Parámetros de la pipeline
 
-Pipeline parameters are simply declared by prepending the prefix `params` to a variable name, separated by a dot character. Their value can be specified on the command line by prefixing the parameter name with a double dash character, i.e. `--paramName`.
+Los parámetros se declaran simplemente anteponiendo el prefijo `params` al nombre de una variable, separados por un carácter de punto. Su valor se puede especificar en la línea de comando anteponiendo el nombre del parámetro con un carácter de doble guión, es decir, `--paramName`.
 
-Now, let’s try to execute the previous example specifying a different input string parameter, as shown below:
+Ahora, intentemos ejecutar el ejemplo anterior especificando un parámetro de cadena de entrada diferente, como se muestra a continuación:
 
 ```bash
-nextflow run hello.nf --greeting 'Bonjour le monde!'
+nextflow run hello.nf --saludo 'Bonjour le monde!'
 ```
 
-The string specified on the command line will override the default value of the parameter. The output will look like this:
+La cadena especificada en la línea de comando anulará el valor predeterminado del parámetro. La salida se verá así:
 
 ```
 N E X T F L O W  ~  version 22.04.5
 Launching `hello.nf` [fervent_galileo] DSL2 - revision: 525206806b
 executor >  local (4)
-[e9/139d7d] process > SPLITLETTERS (1)   [100%] 1 of 1 ✔
-[bb/fc8548] process > CONVERTTOUPPER (1) [100%] 3 of 3 ✔
+[e9/139d7d] process > SEPARALETRAS (1)   [100%] 1 of 1 ✔
+[bb/fc8548] process > MAYUSCULAS (1) [100%] 3 of 3 ✔
 m el r
 !edno
 uojnoB
 ```
 
-### In DAG-like format
+### En formato similar a DAG
 
-To better understand how Nextflow is dealing with the data in this pipeline, below is a DAG-like figure to visualize all the `inputs`, `outputs`, `channels` and `processes`:
+Para comprender mejor cómo Nextflow maneja los datos en este caso, a continuación se muestra una figura similar al DAG para visualizar todas las "entradas", "salidas", "canales" y "procesos":
 
 <figure markdown>
 
