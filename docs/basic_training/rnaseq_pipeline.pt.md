@@ -233,31 +233,31 @@ Nesta etapa você aprendeu:
 4. Como imprimir o conteúdo de um canal
 5. Como acessar o número de CPUs disponíveis
 
-## Collect read files by pairs
+## Colete arquivos lidos por pares
 
-This step shows how to match **read** files into pairs, so they can be mapped by **Salmon**.
+Essa etapa mostra como combinar arquivos **lidos** em pares, para que eles possam ser pareados pelo **Salmon**.
 
-Edit the script `script3.nf` by adding the following statement as the last line of the file:
+Edite o script `script3.nf` adicionando a seguinte declaração como a última linha do arquivo:
 
 ```groovy
 read_pairs_ch.view()
 ```
 
-Save it and execute it with the following command:
+Salve-o e execute-o com o comando a seguir:
 
 ```bash
 nextflow run script3.nf
 ```
 
-It will print something similar to this:
+Isso irá imprimir algo semelhante a isso:
 
 ```bash
 [gut, [/.../data/ggal/gut_1.fq, /.../data/ggal/gut_2.fq]]
 ```
 
-The above example shows how the `read_pairs_ch` channel emits tuples composed of two elements, where the first is the read pair prefix and the second is a list representing the actual files.
+O exemplo acima mostra como o canal `read_pairs_ch` emite tuplas compostas de dois elementos, onde o primeiro é o prefixo do par de leitura e o segundo é uma lista que representa os arquivos reais.
 
-Try it again specifying different read files by using a glob pattern:
+Tente novamente especificando arquivos de leitura diferentes usando o padrão glob:
 
 ```bash
 nextflow run script3.nf --reads 'data/ggal/*_{1,2}.fq'
@@ -265,13 +265,13 @@ nextflow run script3.nf --reads 'data/ggal/*_{1,2}.fq'
 
 !!! warning
 
-    File paths that include one or more wildcards ie. `*`, `?`, etc., MUST be wrapped in single-quoted characters to avoid Bash expanding the glob.
+    Caminhos de arquivo que incluem um ou mais caracteres especiais, como `*`, `?` etc., DEVEM ser colocados entre aspas simples para evitar que o Bash expanda o glob.
 
-### :material-progress-question: Exercises
+### :material-progress-question: Exercícios
 
 !!! exercise
 
-    Use the [set](https://www.nextflow.io/docs/latest/operator.html#set) operator in place of `=` assignment to define the `read_pairs_ch` channel.
+    Use o operador [set](https://www.nextflow.io/docs/latest/operator.html#set) no lugar da atribuição `=` para definir o canal `read_pairs_ch`.
 
     ??? result
 
@@ -283,7 +283,7 @@ nextflow run script3.nf --reads 'data/ggal/*_{1,2}.fq'
 
 !!! exercise
 
-    Use the `checkIfExists` option for the [fromFilePairs](https://www.nextflow.io/docs/latest/channel.html#fromfilepairs) method to check if the specified path contains file pairs.
+    Use a opção `checkIfExists` para o método [fromFilePairs](https://www.nextflow.io/docs/latest/channel.html#fromfilepairs) para checar se o caminho especificado contém os pares de arquivos.
 
     ??? result
 
@@ -293,17 +293,17 @@ nextflow run script3.nf --reads 'data/ggal/*_{1,2}.fq'
             .set { read_pairs_ch }
         ```
 
-### :material-check-all: Summary
+### :material-check-all: Resumo
 
-In this step you have learned:
+Nessa etapa você aprendeu:
 
-1. How to use `fromFilePairs` to handle read pair files
-2. How to use the `checkIfExists` option to check for the existence of input files
-3. How to use the `set` operator to define a new channel variable
+1. Como usar `fromFilePairs` para lidar com pares de arquivos de leitura
+2. Como usar a opção `checkIfExists` para checar a existência de arquivos de entrada
+3. Como usar o operador `set` para definir uma uma nova variável de canal
 
 !!! info
 
-    The declaration of a channel can be before the workflow scope of within it. As long as it is upstream of the process that requires the specific channel.
+    A declaração de um canal pode ser feita antes do escopo do fluxo de trabalho dentro dele. Desde que a declaração esteja acima do processo que requer o canal específico.
 
 ## Perform expression quantification
 
