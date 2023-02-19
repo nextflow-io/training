@@ -4,9 +4,9 @@ description: Material de treinamento básico do Nextflow
 
 # Canais
 
-Channels are a key data structure of Nextflow that allows the implementation of reactive-functional oriented computational workflows based on the [Dataflow](https://en.wikipedia.org/wiki/Dataflow_programming) programming paradigm.
+Canais são uma estrutura de dados chave do Nextflow que permite a implementação de fluxos de trabalho computacionais utilizando paradigmas funcional e reativo com base no paradigma de programação [Dataflow](https://en.wikipedia.org/wiki/Dataflow_programming).
 
-They are used to logically connect tasks to each other or to implement functional style data transformations.
+Eles são usados para conectar logicamente tarefas entre si ou para implementar transformações de dados de estilo funcional.
 
 <figure class="excalidraw">
 --8<-- "docs/basic_training/img/channel-files.excalidraw.svg"
@@ -14,23 +14,23 @@ They are used to logically connect tasks to each other or to implement functiona
 
 ## Tipos de canais
 
-Nextflow distinguishes two different kinds of channels: **queue** channels and **value** channels.
+O Nextflow distingue dois tipos diferentes de canais: canais de **fila** e canais de **valor**.
 
 ### Canal de fila
 
-A _queue_ channel is an _asynchronous_ unidirectional _FIFO_ queue that connects two processes or operators.
+Um canal de _fila_ é uma fila assíncrona undirecional FIFO (First-in-First-out, o primeiro a entrar, é o primeiro a sair) que conecta dois processos ou operadores.
 
--   _asynchronous_ means that operations are non-blocking.
--   _unidirectional_ means that data flows from a producer to a consumer.
--   _FIFO_ means that the data is guaranteed to be delivered in the same order as it is produced. First In, First Out.
+-   _assíncrono_ significa que as operações ocorrem sem bloqueio.
+-   _unidirecional_ significa que os dados fluem do gerador para o consumidor.
+-   _FIFO_ significa que os dados são entregues na mesma ordem em que são produzidos. Primeiro a entrar, primeiro a sair.
 
-A queue channel is implicitly created by process output definitions or using channel factories such as [Channel.of](https://www.nextflow.io/docs/latest/channel.html#of) or [Channel.fromPath](https://www.nextflow.io/docs/latest/channel.html#frompath).
+Um canal de fila é criado implicitamente por definições de saída de um processo ou usando fábricas de canal, como o [Channel.of](https://www.nextflow.io/docs/latest/channel.html#of) ou [Channel.fromPath](https://www.nextflow.io/docs/latest/channel.html#frompath).
 
-Try the following snippets:
+Tente os seguintes trechos de código:
 
 !!! info ""
 
-    Click the :material-plus-circle: icons in the code for explanations.
+    Clique no ícone :material-plus-circle: no código para ver explicações.
 
 ```groovy linenums="1"
 ch = Channel.of(1,2,3)
@@ -38,12 +38,12 @@ println(ch) // (1)!
 ch.view() // (2)!
 ```
 
-1. Use the built-in print line function `println` to print the `ch` channel
-2. Apply the `view` method to the `ch` channel prints each item emitted by the channels
+1. Use a função `println` embutida no Nextflow por padrão para imprimir o conteúdo do canal `ch`
+2. Aplique o método `view` no canal `ch` para imprimir cada ítem emitido por esse canal
 
 !!! exercise
 
-    Try to execute this snippet. You can do that by creating a new `.nf` file or by editing an already existing `.nf` file.
+    Tente executar este trecho de código. Você pode fazer isso criando um novo arquivo `.nf` ou editando um arquivo `.nf` já existente.
 
     ```groovy linenums="1"
     ch = Channel.of(1,2,3)
