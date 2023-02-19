@@ -6,7 +6,7 @@ description: Material de treinamento básico do Nextflow
 
 Para demonstrar um cenário biomédico da vida real, nós iremos implementar uma prova de conceito de pipeline RNA-Seq que:
 
-1. Indexa um arquivo de transcriptoma
+1. Cria arquivo de índice de transcriptoma
 2. Realiza controles de qualidade
 3. Realiza quantificação
 4. Cria um relatório MultiQC
@@ -88,13 +88,13 @@ Nesta etapa você aprendeu:
 4. Como usar strings multilinhas
 5. Como usar `log.info` para imprimir informações e salvá-las no arquivo de execução de log
 
-## Criar um arquivo para indexação de transcriptoma
+## Criar um arquivo de índice de transcriptoma
 
 Nextflow permite a execução de qualquer comando ou script usando uma definição de `processo`.
 
 Um `processo` é definido ao fornecer três principais declarações: as [`entradas`](https://www.nextflow.io/docs/latest/process.html#inputs), [`saídas`](https://www.nextflow.io/docs/latest/process.html#outputs) e comandos de [`script`](https://www.nextflow.io/docs/latest/process.html#script) do processo.
 
-Para adicionar uma etapa de processamento de `INDEX` (em português, índice) do transcriptoma, tente adicionar os blocos de código a seguir no seu `script1.nf`. Como alternativa, esses blocos de código já foram adicionados ao `script2.nf`.
+Para adicionar uma etapa de processamento de índice do transcriptoma `INDEX`, tente adicionar os blocos de código a seguir no seu `script1.nf`. Como alternativa, esses blocos de código já foram adicionados ao `script2.nf`.
 
 ```groovy
 /*
@@ -123,7 +123,7 @@ workflow {
 }
 ```
 
-Aqui, o parâmetro `params.transcriptome_file` é usado como entrada para o processo `INDEX`. O processo `INDEX` (usando a ferramenta `salmon`) cria `salmon_index`, um transcriptoma indexado que é passado como saída ao canal `index_ch`.
+Aqui, o parâmetro `params.transcriptome_file` é usado como entrada para o processo `INDEX`. O processo `INDEX` (usando a ferramenta `salmon`) cria `salmon_index`, um arquivo índice de transcriptoma que é passado como saída ao canal `index_ch`.
 
 !!! info
 
@@ -305,49 +305,49 @@ Nessa etapa você aprendeu:
 
     A declaração de um canal pode ser feita antes do escopo do fluxo de trabalho dentro dele. Desde que a declaração esteja acima do processo que requer o canal específico.
 
-## Perform expression quantification
+## Realizar a quantificação da expressão
 
-`script4.nf` adds a gene expression `QUANTIFICATION` process and call within the workflow scope. Quantification requires the index transcriptome and RNA-Seq read pair fastq files.
+`script4.nf` adiciona um processo `QUANTIFICATION` para quantificação de expressão e chama dentro do escopo do fluxo de trabalho. A quantificação requer o arquivo de índice de transcriptoma e os arquivos fastq do par de leitura de RNA-Seq.
 
-In the workflow scope, note how the `index_ch` channel is assigned as output in the `INDEX` process.
+No escopo do fluxo de trabalho, observe como o canal `index_ch` é designado como saída do processo `INDEX`.
 
-Next, note that the first input channel for the `QUANTIFICATION` process is the previously declared `index_ch`, which contains the `path` to the `salmon_index`.
+A seguir, note que o primeiro canal de entrada para o processo de `QUANTIFICATION` é o `index_ch` declarado previamente, que contém o caminho para `salmon_index`.
 
-Also, note that the second input channel for the `QUANTIFICATION` process, is the `read_pair_ch` we just created. This being a `tuple` composed of two elements (a value: `sample_id` and a list of paths to the fastq reads: `reads`) in order to match the structure of the items emitted by the `fromFilePairs` channel factory.
+Além disso, observe que o segundo canal de entrada para o processo `QUANTIFICATION` é o `read_pair_ch` que acabamos de criar. Este sendo uma `tupla` composta de dois elementos (um valor: `sample_id` e a lista de caminhos para os arquivos de leitura fastq: `reads`) para corresponder à estrutura dos itens emitidos pela fábrica de canais `fromFilePairs`. 
 
-Execute it by using the following command:
+Execute-o usando o comando a seguir:
 
 ```bash
 nextflow run script4.nf -resume
 ```
 
-You will see the execution of the `QUANTIFICATION` process.
+Você irá ver a execução do processo `QUANTIFICATION`.
 
-When using the `-resume` option, any step that has already been processed is skipped.
+Ao usar a opção `-resume`, qualquer etapa que já foi processada é ignorada.
 
-Try to execute the same script again with more read files, as shown below:
+Tente executar o mesmo script novamente com mais arquivos de leitura, como mostrado abaixo:
 
 ```bash
 nextflow run script4.nf -resume --reads 'data/ggal/*_{1,2}.fq'
 ```
 
-You will notice that the `QUANTIFICATION` process is executed multiple times.
+Você irá perceber que o processo `QUANTIFICATION` é executado múltiplas vezes.
 
-Nextflow parallelizes the execution of your pipeline simply by providing multiple sets of input data to your script.
+Nextflow paraleliza a execução de seu pipeline simplesmente fornecendo vários conjuntos de dados de entrada para seu script.
 
 !!! tip
 
-    It may be useful to apply optional settings to a specific process using [directives](https://www.nextflow.io/docs/latest/process.html#directives) by specifying them in the process body.
+    Pode ser útil aplicar configurações opcionais a um processo específico usando [diretivas](https://www.nextflow.io/docs/latest/process.html#directives) especificando-as no corpo do processo.
 
-### :material-progress-question: Exercises
+### :material-progress-question: Exercícios
 
 !!! exercise
 
-    Add a [tag](https://www.nextflow.io/docs/latest/process.html#tag) directive to the `QUANTIFICATION` process to provide a more readable execution log.
+    Adicione uma diretiva de [tag](https://www.nextflow.io/docs/latest/process.html#tag), ao processo `QUANTIFICATION` para fornecer um log de execução mais legível.
 
     ??? result
 
-        Add the following before the input declaration:
+        Adicione o código a seguir antes da declaração de entrada:
 
         ```groovy
         tag "Salmon on $sample_id"
@@ -355,24 +355,24 @@ Nextflow parallelizes the execution of your pipeline simply by providing multipl
 
 !!! exercise
 
-    Add a [publishDir](https://www.nextflow.io/docs/latest/process.html#publishdir) directive to the `QUANTIFICATION` process to store the process results in a directory of your choice.
+    Adicione a diretiva [publishDir](https://www.nextflow.io/docs/latest/process.html#publishdir) para o processo `QUANTIFICATION` para armazenar os resultados do processo em um diretório de sua escolha.
 
     ??? result
 
-        Add the following before the `input` declaration in the `QUANTIFICATION` process:
+        Adicione o código a seguir antes da declaração de `entrada` no processo de `QUANTIFICATION`:
 
         ```groovy
         publishDir params.outdir, mode:'copy'
         ```
 
-### :material-check-all: Summary
+### :material-check-all: Resumo
 
-In this step you have learned:
+Nessa etapa você aprendeu:
 
-1. How to connect two processes together by using the channel declarations
-2. How to `resume` the script execution and skip cached steps
-3. How to use the `tag` directive to provide a more readable execution output
-4. How to use the `publishDir` directive to store a process results in a path of your choice
+1. Como conectar dois processos juntos usando declarações de canal
+2. Como `retomar` a execução de script e pular etapas em cache
+3. Como usar a diretiva `tag` para fornecer uma saída de execução mais legível
+4. Como usar a diretiva `publishDir` para armanezar os resultados do processo em um caminho da sua escolha
 
 ## Quality control
 
