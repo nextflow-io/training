@@ -374,45 +374,45 @@ Nessa etapa você aprendeu:
 3. Como usar a diretiva `tag` para fornecer uma saída de execução mais legível
 4. Como usar a diretiva `publishDir` para armanezar os resultados do processo em um caminho da sua escolha
 
-## Quality control
+## Controle de qualidade
 
-Next, we implement a `FASTQC` quality control step for your input reads (using the label `fastqc`). The inputs are the same as the read pairs used in the `QUANTIFICATION` step.
+A seguir, nós implementamos uma etapa de controle de qualidade `FASTQC` para seus arquivos de leitura de entrada (usando a etiqueta `fastqc`). As entradas são as mesmas que os pares de arquivos de leitura na etapa `QUANTIFICATION`.
 
-You can run it by using the following command:
+Você pode executá-lo usando o comando a seguir:
 
 ```bash
 nextflow run script5.nf -resume
 ```
 
-Nextflow DSL2 knows to split the `reads_pair_ch` into two identical channels as they are required twice as an input for both of the `FASTQC` and the `QUANTIFICATION` process.
+Nextflow DSL2 sabe como dividir `reads_pair_ch` em dois canais idênticos, já que eles são requiridos duas vezes como entrada para os processos `FASTQC` e `QUANTIFICATION`.
 
-## MultiQC report
+## Relatório MultiQC
 
-This step collects the outputs from the `QUANTIFICATION` and `FASTQC` processes to create a final report using the [MultiQC](http://multiqc.info/) tool.
+Essa etapa coleta as saídas dos processos `QUANTIFICATION` e `FASTQC` para criar um relatório final usando a ferramenta [MultiQC](http://multiqc.info/).
 
-Execute the next script with the following command:
+Execute o próximo script com o comando a seguir:
 
 ```bash
 nextflow run script6.nf -resume --reads 'data/ggal/*_{1,2}.fq'
 ```
 
-It creates the final report in the `results` folder in the current `work` directory.
+Isso cria um relatório final no pasta de `resultados` no diretório de `trabalho` atual.
 
-In this script, note the use of the [mix](https://www.nextflow.io/docs/latest/operator.html#mix) and [collect](https://www.nextflow.io/docs/latest/operator.html#collect) operators chained together to gather the outputs of the `QUANTIFICATION` and `FASTQC` processes as a single input. [Operators](https://www.nextflow.io/docs/latest/operator.html) can be used to combine and transform channels.
+Neste script, observe que o uso dos operadores [mix](https://www.nextflow.io/docs/latest/operator.html#mix) e [collect](https://www.nextflow.io/docs/latest/operator.html#collect) de forma encadeada para reunir as saídas dos processos `QUANTIFICATION` e `FASTQC` como uma única entrada. [Operadores](https://www.nextflow.io/docs/latest/operator.html) podem ser usados para combinar e transformar canais.
 
 ```groovy
 MULTIQC(quant_ch.mix(fastqc_ch).collect())
 ```
 
-We only want one task of MultiQC to be executed to produce one report. Therefore, we use the `mix` channel operator to combine the two channels followed by the `collect` operator, to return the complete channel contents as a single element.
+Queremos que apenas uma tarefa do MultiQC seja executada para produzir um relatório. Portanto, usamos o operador de canal `mix` para combinar os dois canais, seguido pelo operador `collect` para retornar os conteúdos completos do canal como um único elemento.
 
-### :material-check-all: Summary
+### :material-check-all: Resumo
 
-In this step you have learned:
+Nessa etapa você aprendeu:
 
-1. How to collect many outputs to a single input with the `collect` operator
-2. How to `mix` two channels into a single channel
-3. How to chain two or more operators together
+1. Como coletar muitas saídas para uma única entrada com o operador `collect`
+2. Como combinar com `mix` dois canais em um único canal
+3. Como encadear dois ou mais operadores juntos
 
 ## Handle completion event
 
