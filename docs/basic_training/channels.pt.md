@@ -52,9 +52,9 @@ ch.view() // (2)!
 
 ### Canais de valor
 
-A **value** channel (a.k.a. singleton channel) by definition is bound to a single value and it can be read unlimited times without consuming its contents. A `value` channel is created using the [value](https://www.nextflow.io/docs/latest/channel.html#value) factory method or by operators returning a single value, such as [first](https://www.nextflow.io/docs/latest/operator.html#first), [last](https://www.nextflow.io/docs/latest/operator.html#last), [collect](https://www.nextflow.io/docs/latest/operator.html#operator-collect), [count](https://www.nextflow.io/docs/latest/operator.html#operator-count), [min](https://www.nextflow.io/docs/latest/operator.html#operator-min), [max](https://www.nextflow.io/docs/latest/operator.html#operator-max), [reduce](https://www.nextflow.io/docs/latest/operator.html#operator-reduce), and [sum](https://www.nextflow.io/docs/latest/operator.html#operator-sum).
+Um canal de **valor** (também conhecido como canal singleton), por definição, está vinculado a um único valor e pode ser lido quantas vezes for necessário sem consumir seu conteúdo. Um canal de `valor` é criado usando a fábrica de canal [value](https://www.nextflow.io/docs/latest/channel.html#value) ou por operadores que retornam um valor apenas, como [first](https://www.nextflow.io/docs/latest/operator.html#first), [last](https://www.nextflow.io/docs/latest/operator.html#last), [collect](https://www.nextflow.io/docs/latest/operator.html#operator-collect), [count](https://www.nextflow.io/docs/latest/operator.html#operator-count), [min](https://www.nextflow.io/docs/latest/operator.html#operator-min), [max](https://www.nextflow.io/docs/latest/operator.html#operator-max), [reduce](https://www.nextflow.io/docs/latest/operator.html#operator-reduce), e [sum](https://www.nextflow.io/docs/latest/operator.html#operator-sum).
 
-To better understand the difference between value and queue channels, save the snippet below as `example.nf`.
+Para entender melhor a diferença entre canais de valor e de fila, salve o trecho abaixo como `example.nf`.
 
 ```groovy linenums="1" title="example.nf" linenums="1"
 ch1 = Channel.of(1,2,3)
@@ -79,13 +79,13 @@ workflow {
 }
 ```
 
-When you run the script, it prints only 2, as you can see below:
+Ao rodar o script, ele imprime apenas 2, como você pode ver abaixo:
 
 ```console
 2
 ```
 
-To understand why, we can inspect the queue channel and running Nextflow with DSL1 gives us a more explicit comprehension of what is behind the curtains.
+Para entender o motivo, podemos inspecionar o canal de fila executando o Nextflow com DSL1, o que nos dá uma compreensão mais explícita do que está por trás das cortinas.
 
 ```groovy linenums="1"
 ch1 = Channel.of(1)
@@ -98,7 +98,7 @@ $ nextflow run example.nf -dsl1
 DataflowQueue(queue=[DataflowVariable(value=1), DataflowVariable(value=groovyx.gpars.dataflow.operator.PoisonPill@34be065a)])
 ```
 
-We have the value 1 as the single element of our queue channel and a poison pill, which will tell the process that there’s nothing left to be consumed. That’s why we only have one output for the example above, which is 2. Let’s inspect a value channel now.
+Temos o valor 1 como único elemento do nosso canal de fila e uma pílula de veneno, que vai dizer ao processo que não há mais nada para ser consumido. É por isso que temos apenas uma saída para o exemplo acima, que é 2. Vamos inspecionar um canal de valor agora.
 
 ```groovy linenums="1"
 ch1 = Channel.value(1)
@@ -111,7 +111,7 @@ $ nextflow run example.nf -dsl1
 DataflowVariable(value=1)
 ```
 
-There is no poison pill, and that’s why we get a different output with the code below, where `ch2` is turned into a value channel through the `first` operator.
+Não há pílula de veneno, e é por isso que obtemos uma saída diferente com o código abaixo, onde `ch2` é transformado em um canal de valor por meio do operador `first`.
 
 ```groovy linenums="1"
 ch1 = Channel.of(1,2,3)
@@ -144,7 +144,7 @@ workflow {
 2
 ```
 
-Besides, in many situations, Nextflow will implicitly convert variables to value channels when they are used in a process invocation. For example, when you invoke a process with a pipeline parameter (`params.example`) which has a string value, it is automatically cast into a value channel.
+Além disso, em muitas situações, o Nextflow converterá implicitamente variáveis em canais de valor quando forem usadas em uma chamada de processo. Por exemplo, quando você chama um processo com um parâmetro de pipeline (`params.example`) que possui um valor de string, ele é automaticamente convertido em um canal de valor.
 
 ## Fábricas de canal
 
