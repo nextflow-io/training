@@ -66,3 +66,6 @@ Even though it's required that you read this document in order to contribute wit
 In order to keep consistency in translations, every language should have a translation glossary where common technical terms and terms related to Nextflow have an official translation to be followed by future translators. Ideally, these links should point to an online spreadsheet where anyone can comment and make suggestions, but not edit.
 
 -   [Portuguese](https://docs.google.com/spreadsheets/d/1HUa3BO2kwukhX4EXQ-1blXeP5iueUdM23OwDRpfarDg/edit?usp=sharing)
+
+## Notes
+In the original version in English, it happens that many keywords are written just like the words in English (`value` channel factory for value channels). When translating to other languages, it doesn't make sense to use the back ticks for the translated word, _valor_, for example, as _valor_ is not a Nextflow keyword. In such circumstances, the keyword should be placed between parenthesis with the back ticks, or the back ticks should be simply ignored for the translation.
