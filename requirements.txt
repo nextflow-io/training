@@ -4,4 +4,4 @@ mkdocs-static-i18n
 pymdown-extensions
 pillow
 cairosvg
-mkdocs-enumerate-headings-plugin
+mkdocs-enumerate-headings-plugin>=0.6.0
