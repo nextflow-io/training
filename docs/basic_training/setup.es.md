@@ -2,120 +2,120 @@
 description: How to set up a development environment to run Nextflow
 ---
 
-# Environment setup
+# Configuración del entorno
 
-There are two main ways to get started with Seqera’s Nextflow training course.
+Hay dos formas principales de comenzar con el curso de capacitación Nextflow de Seqera.
 
-The first is to install the requirements [locally](#local-installation), which is best if you are already familiar with Git and Docker, or working offline.
+El primero es instalar los requisitos [localmente](#local-installation), lo cual resulta más cómodo si ya estás familiarizado con Git y Docker, o si trabajas sin conexión.
 
-The second is to use [Gitpod](#gitpod), which is best for first-timers as this platform contains all the programs and data required. Simply click the link and log in using your GitHub account to start the tutorial:
+La segunda es usar [Gitpod](#gitpod), que resulta más sencillo si no conoces Nextflow en profundidad, ya que esta plataforma contiene todos los programas y datos necesarios para la ejecución. Simplemente haz clic en el enlace e inicia sesión con tu cuenta de GitHub para comenzar el tutorial:
 
-[![Open in GitPod](https://img.shields.io/badge/Gitpod-%20Open%20in%20Gitpod-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/nextflow-io/training)
+[![Abrir en GitPod](https://img.shields.io/badge/Gitpod-%20Open%20in%20Gitpod-908a85?logo=gitpod)](https://gitpod.io/#https:// github.com/nextflow-io/entrenamiento)
 
-## Local installation
+## Instalación local
 
-Nextflow can be used on any POSIX-compatible system (Linux, macOS, Windows Subsystem for Linux, etc.).
+Nextflow se puede usar en cualquier sistema compatible con POSIX (Linux, macOS, subsistema de Windows para Linux, etc.).
 
-#### Requirements
+#### Requisitos
 
--   Bash
--   [Java 11 (or later, up to 18)](https://www.oracle.com/technetwork/java/javase/downloads/index.html)
--   Git
--   [Docker](https://docs.docker.com/get-docker/)
+- Bash
+- [Java 11 (o posterior, hasta 18)](https://www.oracle.com/technetwork/java/javase/downloads/index.html)
+- Git
+- [Docker](https://docs.docker.com/get-docker/)
 
-#### Optional requirements for this tutorial
+#### Requisitos opcionales para este tutorial
 
--   [Singularity](https://github.com/sylabs/singularity) 2.5.x (or later)
--   [Conda](https://conda.io/) 4.5 (or later)
--   [Graphviz](http://www.graphviz.org/)
--   [AWS CLI](https://aws.amazon.com/cli/)
--   A configured AWS Batch computing environment
+- [Singularity](https://github.com/sylabs/singularity) 2.5.x (o posterior)
+- [Conda](https://conda.io/) 4.5 (o posterior)
+- [Graphviz](http://www.graphviz.org/)
+- [CLI de AWS](https://aws.amazon.com/cli/)
+- Un entorno de AWS Batch configurado
 
-### Download Nextflow
+### Descargar Nextflow
 
-Enter this command in your terminal:
+Introduce este comando en tu terminal:
 
 ```bash
 wget -qO- https://get.nextflow.io | bash
 ```
 
-Or, if you prefer curl:
+O, si prefieres curl en lugar de wget:
 
 ```bash
 curl -s https://get.nextflow.io | bash
 ```
 
-Then ensure that the downloaded binary is executable:
+Luego asegúrate de que el binario descargado sea ejecutable:
 
 ```bash
 chmod +x nextflow
 ```
 
-AND put the `nextflow` executable into your `$PATH` (e.g. `/usr/local/bin` or `/bin/`)
+Y coloca el ejecutable `nextflow` en el `$PATH` (por ejemplo, `/usr/local/bin` o `/bin/`)
 
 ### Docker
 
-Ensure you have Docker Desktop running on your machine. Download Docker [here](https://docs.docker.com/get-docker/).
+Asegúrese de tener Docker Desktop ejecutándose en tu máquina. Descargue Docker en el siguiente [enlace](https://docs.docker.com/get-docker/).
 
-### Training material
+### Material
 
-You can view the training material here: <https://training.nextflow.io/>
+Puede ver el material de capacitación aquí: <https://training.nextflow.io/>
 
-To download the material use the command:
+Para descargar el material usa el comando:
 
 ```bash
 git clone https://github.com/nextflow-io/training.git
 ```
 
-Then `cd` into the `nf-training` directory.
+Ejecute ahora `cd` en el directorio `nf-training`.
 
-### Checking your installation
+### Comprobando su instalación
 
-Check the correct installation of `nextflow` by running the following command:
-
-```bash
-nextflow info
-```
-
-This should show the current version, system and runtime.
-
-## Gitpod
-
-A preconfigured Nextflow development environment is available using Gitpod.
-
-#### Requirements
-
--   A GitHub account
--   Web browser (Google Chrome, Firefox)
--   Internet connection
-
-### Gitpod quick start
-
-To run Gitpod:
-
--   Click the following URL: <https://gitpod.io/#https://github.com/nextflow-io/training>
-    -   This is our GitHub repository URL, prefixed with `https://gitpod.io/#`
--   Log in to your GitHub account (and allow authorization).
-
-Once you have signed in, Gitpod should load (skip prebuild if asked).
-
-### Explore your Gitpod IDE
-
-You should now see something similar to the following:
-
-![Gitpod welcome](img/gitpod.welcome.png)
-
--   **The sidebar** allows you to customize your Gitpod environment and perform basic tasks (copy, paste, open files, search, git, etc.). Click the Explorer button to see which files are in this repository.
--   **The terminal** allows you to run all the programs in the repository. For example, both `nextflow` and `docker` are installed and can be executed.
--   **The main window** allows you to view and edit files. Clicking on a file in the explorer will open it within the main window. You should also see the nf-training material browser (<https://training.nextflow.io/>).
-
-To test that the environment is working correctly, type the following into the terminal:
+Verifica la instalación correcta de `nextflow` ejecutando el siguiente comando:
 
 ```bash
 nextflow info
 ```
 
-This should come up with the Nextflow version and runtime information:
+Esto debería mostrar la versión actual, el sistema y el tiempo de ejecución.
+
+##Gitpod
+
+Gitpod te proporciona un entorno de desarrollo de Nextflow preconfigurado.
+
+#### Requisitos
+
+- Una cuenta de GitHub
+- Un navegador web (Google Chrome o Firefox)
+- Conexión a Internet
+
+### Inicio rápido de Gitpod
+
+Para ejecutar Gitpod:
+
+- Haga clic en la siguiente URL: <https://gitpod.io/#https://github.com/nextflow-io/training>
+    - Esta es la URL de nuestro repositorio de GitHub, con el prefijo `https://gitpod.io/#`
+- Inicie sesión en su cuenta de GitHub (y permita la autorización).
+
+Una vez que haya iniciado sesión, Gitpod debería cargarse (omite la compilación previa si se te solicita).
+
+### Explora tu IDE de Gitpod
+
+Ahora debes ver algo similar a lo siguiente:
+
+![Bienvenida Gitpod](img/gitpod.welcome.png)
+
+- **La barra lateral** te permite personalizar tu entorno Gitpod y realizar tareas básicas (copiar, pegar, abrir archivos, buscar, git, etc.). Haz clic en el botón Explorador para ver qué archivos hay en este repositorio.
+- **La terminal** te permite ejecutar todos los programas del repositorio. Por ejemplo, tanto `nextflow` como `docker` están instalados y se pueden ejecutar.
+- **La ventana principal** te permite ver y editar archivos. Al hacer clic en un archivo en el explorador, se abrirá dentro de la ventana principal. También deberías ver el navegador del material de formación de nextflow (<https://training.nextflow.io/>).
+
+Para probar que el entorno funciona correctamente, escriba lo siguiente en la terminal:
+
+```bash
+nextflow info
+```
+
+Esto debería generar la versión de Nextflow y la información del tiempo de ejecución:
 
 ```
 Version: 22.10.4 build 5836
@@ -125,41 +125,41 @@ Runtime: Groovy 3.0.13 on OpenJDK 64-Bit Server VM 17.0.3-internal+0-adhoc..src
 Encoding: UTF-8 (UTF-8)
 ```
 
-### Gitpod resources
+### Recursos de Gitpod
 
--   Gitpod gives you 500 free credits per month, which is equivalent to 50 hours of free environment runtime using the standard workspace (up to 4 cores, 8 GB RAM and 30 GB storage).
--   There is also a large workspace option that gives you up to 8 cores, 16GB RAM, and 50GB storage. However, the large workspace will use your free credits faster and you will have fewer hours of access to this space.
--   Gitpod will time out after 30 minutes of inactivity and will save your changes for up to 2 weeks (see the next section for reopening a timed-out session).
+- Gitpod le brinda 500 créditos gratuitos al mes, lo que equivale a 50 horas de tiempo de ejecución de entorno gratuito utilizando el espacio de trabajo estándar (hasta 4 núcleos, 8 GB de RAM y 30 GB de almacenamiento).
+- También hay una opción de espacio de trabajo que le brinda hasta 8 núcleos, 16 GB de RAM y 50 GB de almacenamiento. Sin embargo, el gran espacio de trabajo usará tus créditos más rápido y tendrás menos horas de acceso en este espacio.
+- Gitpod expirará después de 30 minutos de inactividad y guardará sus cambios hasta por 2 semanas (vea la siguiente sección para reabrir una sesión agotada).
 
-See [gitpod.io](https://www.gitpod.io) for more details.
+Consulte [gitpod.io](https://www.gitpod.io) para obtener más detalles.
 
-### Reopening a Gitpod session
+### Reapertura de una sesión de Gitpod
 
-You can reopen an environment from <https://gitpod.io/workspaces>. Find your previous environment in the list, then select the ellipsis (three dots icon) and select Open.
+Puedes reabrir un entorno de trabajo desde <https://gitpod.io/workspaces>. Busca tu entorno anterior en la lista, luego selecciona los puntos suspensivos (icono de tres puntos) y selecciona Abrir.
 
-If you have saved the URL for your previous Gitpod environment, you can simply open it in your browser.
+Si has guardado la URL para su entorno Gitpod anterior, simplemente puedes abrirla en tu navegador.
 
-Alternatively, you can start a new workspace by following the Gitpod URL: <https://gitpod.io/#https://github.com/nextflow-io/training>
+Alternativamente, puedes iniciar un nuevo espacio de trabajo en la URL de Gitpod: <https://gitpod.io/#https://github.com/nextflow-io/training>
 
-If you have lost your environment, you can find the main scripts used in this tutorial in the `nf-training` directory.
+Si has perdido tu entorno, puedes encontrar los scripts principales utilizados en este tutorial en el directorio `nf-training`.
 
-### Saving files from Gitpod to your local machine
+### Guardar archivos de Gitpod en tu máquina local
 
-To save any file from the explorer panel, right-click the file and select `Download`.
+Para guardar cualquier archivo desde el panel del explorador, haz clic derecho en el archivo y selecciona `Descargar`.
 
-### Training material
+### Material
 
-The training course can be accessed in your browser from <https://training.nextflow.io/>
+Puedes acceder al curso de capacitación en tu navegador desde <https://training.nextflow.io/>
 
-## Selecting a Nextflow version
+## Seleccionar una versión de Nextflow
 
-By default, Nextflow will pull the latest stable version into your environment.
+De forma predeterminada, Nextflow extraerá la última versión estable en el entorno.
 
-However, Nextflow is constantly evolving as we make improvements and fix bugs.
+Sin embargo, Nextflow evoluciona constantemente a medida que realizamos mejoras y solucionamos errores.
 
-The latest releases can be viewed on GitHub [here](https://github.com/nextflow-io/nextflow).
+Los últimos lanzamientos se pueden ver en [GitHub](https://github.com/nextflow-io/nextflow).
 
-If you want to use a specific version of Nextflow, you can set the `NXF_VER` variable as shown below:
+Si deseas utilizar una versión específica de Nextflow, puedes configurar la variable `NXF_VER` como se muestra a continuación:
 
 ```bash
 export NXF_VER=22.04.5
@@ -167,6 +167,6 @@ export NXF_VER=22.04.5
 
 !!! Note
 
-    This tutorial workshop requires `NXF_VER=22.04.0`, or later. This version will use DSL2 as default.
+    Este taller tutorial requiere `NXF_VER=22.04.0`, o posterior. Esta versión utilizará DSL2 por defecto.
 
-Run `nextflow -version` again to confirm that the change has taken effect.
+Ejecute `nextflow -version` nuevamente para confirmar que el cambio ha tenido efecto.
