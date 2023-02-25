@@ -148,41 +148,41 @@ Além disso, em muitas situações, o Nextflow converterá implicitamente variá
 
 ## Fábricas de canal
 
-These are Nextflow commands for creating channels that have implicit expected inputs and functions.
+Estes são comandos do Nextflow para criar canais que possuem entradas e funções implícitas esperadas.
 
 ### `value()`
 
-The `value` factory method is used to create a _value_ channel. An optional not `null` argument can be specified to bind the channel to a specific value. For example:
+A fábrica de canal `value` é utilizada para criar um canal de _valor_. Um argumento opcional não `nulo` pode ser especificado para vincular o canal a um valor específico. Por exemplo:
 
 ```groovy linenums="1"
-ch1 = Channel.value() // (1)!
-ch2 = Channel.value( 'Hello there' ) // (2)!
-ch3 = Channel.value( [1,2,3,4,5] ) // (3)!
+canal1 = Channel.value() // (1)!
+canal2 = Channel.value( 'Olá, você!' ) // (2)!
+canal3 = Channel.value( [1,2,3,4,5] ) // (3)!
 ```
 
-1. Creates an _empty_ value channel
-2. Creates a value channel and binds a string to it
-3. Creates a value channel and binds a list object to it that will be emitted as a sole emission
+1. Cria um canal de valor _vazio_
+2. Cria um canal de valor e vincula uma string a ele
+3. Cria um canal de valor e vincula a ele um objeto de lista que será emitido como uma única emissão
 
 ### `of()`
 
-The factory `Channel.of` allows the creation of a queue channel with the values specified as arguments.
+A fábrica `Channel.of` permite a criação de um canal de fila com os valores especificados como argumentos.
 
 ```groovy linenums="1"
-ch = Channel.of( 1, 3, 5, 7 )
-ch.view{ "value: $it" }
+canal = Channel.of( 1, 3, 5, 7 )
+canal.view{ "numero: $it" }
 ```
 
-The first line in this example creates a variable `ch` which holds a channel object. This channel emits the values specified as a parameter in the `of` method. Thus the second line will print the following:
+A primeira linha neste exemplo cria uma variável `canal` que contém um objeto de canal. Este canal emite os valores especificados como parâmetro no método `of`. Assim, a segunda linha imprimirá o seguinte:
 
 ```console
-value: 1
-value: 3
-value: 5
-value: 7
+numero: 1
+numero: 3
+numero: 5
+numero: 7
 ```
 
-The method `Channel.of` works in a similar manner to `Channel.from` (which is now [depreciated](https://www.nextflow.io/docs/latest/channel.html#of)), fixing some inconsistent behaviors of the latter and provides better handling when specifying a range of values. For example, the following works with a range from 1 to 23 :
+O método `Channel.of` funciona de maneira semelhante ao `Channel.from` (que foi [descontinuado](https://www.nextflow.io/docs/latest/channel.html#of)), corrigindo alguns comportamentos inconsistentes do último e fornecendo um melhor manuseio quando um intervalo de valores é especificado. Por exemplo, o seguinte funciona com um intervalo de 1 a 23:
 
 ```groovy linenums="1"
 Channel
@@ -192,10 +192,10 @@ Channel
 
 ### `fromList()`
 
-The method `Channel.fromList` creates a channel emitting the elements provided by a list object specified as an argument:
+O método `Channel.fromList` cria um canal emitindo os elementos fornecidos por um objeto de lista especificado como um argumento:
 
 ```groovy linenums="1"
-list = ['hello', 'world']
+list = ['olá', 'mundo']
 
 Channel
   .fromList(list)
@@ -204,33 +204,33 @@ Channel
 
 ### `fromPath()`
 
-The `fromPath` factory method creates a queue channel emitting one or more files matching the specified glob pattern.
+A fábrica `fromPath` cria um canal de fila emitindo um ou mais arquivos correspondentes ao padrão glob especificado.
 
 ```groovy linenums="1"
 Channel.fromPath( './data/meta/*.csv' )
 ```
 
-This example creates a channel and emits as many items as there are files with a `csv` extension in the `/data/meta` folder. Each element is a file object implementing the [Path](https://docs.oracle.com/javase/8/docs/api/java/nio/file/Paths.html) interface.
+Este exemplo cria um canal e emite tantos itens quanto arquivos com extensão `csv` existirem na pasta `/data/meta`. Cada elemento é um objeto de arquivo implementando a interface [Path](https://docs.oracle.com/javase/8/docs/api/java/nio/file/Paths.html) do Java.
 
 !!! tip
 
-    Two asterisks, i.e. `**`, works like `*` but cross directory boundaries. This syntax is generally used for matching complete paths. Curly brackets specify a collection of sub-patterns.
+    Dois asteriscos, ou seja, `**`, funcionam como `*`, mas cruzam os limites do diretório. Essa sintaxe geralmente é usada para percorrer caminhos completos. Os colchetes especificam uma coleção de subpadrões.
 
-| Name          | Description                                                                                                                                |
-| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| glob          | When `true` interprets characters `*`, `?`, `[]` and `{}` as glob wildcards, otherwise handles them as normal characters (default: `true`) |
-| type          | Type of path returned, either `file`, `dir` or `any` (default: `file`)                                                                     |
-| hidden        | When `true` includes hidden files in the resulting paths (default: `false`)                                                                |
-| maxDepth      | Maximum number of directory levels to visit (default: `no limit`)                                                                          |
-| followLinks   | When `true` symbolic links are followed during directory tree traversal, otherwise they are managed as files (default: `true`)             |
-| relative      | When `true` return paths are relative to the top-most common directory (default: `false`)                                                  |
-| checkIfExists | When `true` throws an exception when the specified path does not exist in the file system (default: `false`)                               |
+| Nome          | Descrição                                                                                                                                        |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| glob          | Quando `true` interpreta caracteres `*`, `?`, `[]` e `{}` como glob wildcards, caso contrário, os trata como caracteres normais (padrão: `true`) |
+| type          | Tipo de caminho retornado, ou `file`, `dir` ou `any` (padrão: `file`)                                                                           |
+| hidden        | Quando `true` inclui arquivos ocultos nos caminhos resultantes (padrão: `false`)                                                                      |
+| maxDepth      | Número máximo de níveis de diretório a serem visitados (padrão: `no limit`)                                                                                |
+| followLinks   | Quando `true` links simbólicos são seguidos durante a travessia da árvore de diretórios, caso contrário, eles são gerenciados como arquivos (padrão: `true`)                   |
+| relative      | Quando `true` os caminhos de retorno são relativos ao diretório de topo mais comum (padrão: `false`)                                                        |
+| checkIfExists | Quando `true` lança uma exceção quando o caminho especificado não existe no sistema de arquivos (padrão: `false`)                                     |
 
-Learn more about the glob patterns syntax at [this link](https://docs.oracle.com/javase/tutorial/essential/io/fileOps.html#glob).
+Saiba mais sobre a sintaxe dos padrões glob [neste link](https://docs.oracle.com/javase/tutorial/essential/io/fileOps.html#glob).
 
 !!! exercise
 
-    Use the `Channel.fromPath` method to create a channel emitting all files with the suffix `.fq` in the `data/ggal/` directory and any subdirectory, in addition to hidden files. Then print the file names.
+    Use o método `Channel.fromPath` para criar um canal emitindo todos os arquivos com o sufixo `.fq` no diretório `data/ggal/` e qualquer subdiretório, além dos arquivos ocultos. Em seguida, imprima os nomes dos arquivos.
 
     ??? solution
 
