@@ -33,21 +33,21 @@ Tente os seguintes trechos de código:
     Clique no ícone :material-plus-circle: no código para ver explicações.
 
 ```groovy linenums="1"
-ch = Channel.of(1,2,3)
-println(ch) // (1)!
-ch.view() // (2)!
+canal = Channel.of(1,2,3)
+println(canal) // (1)!
+canal.view() // (2)!
 ```
 
-1. Use a função `println` embutida no Nextflow por padrão para imprimir o conteúdo do canal `ch`
-2. Aplique o método `view` no canal `ch` para imprimir cada ítem emitido por esse canal
+1. Use a função `println` embutida no Nextflow por padrão para imprimir o conteúdo do canal `canal`
+2. Aplique o método `view` no canal `canal` para imprimir cada ítem emitido por esse canal
 
 !!! exercise
 
     Tente executar este trecho de código. Você pode fazer isso criando um novo arquivo `.nf` ou editando um arquivo `.nf` já existente.
 
     ```groovy linenums="1"
-    ch = Channel.of(1,2,3)
-    ch.view()
+    canal = Channel.of(1,2,3)
+    canal.view()
     ```
 
 ### Canais de valor
@@ -57,8 +57,8 @@ Um canal de **valor** (também conhecido como canal singleton), por definição,
 Para entender melhor a diferença entre canais de valor e de fila, salve o trecho abaixo como `example.nf`.
 
 ```groovy linenums="1" title="example.nf" linenums="1"
-ch1 = Channel.of(1,2,3)
-ch2 = Channel.of(1)
+canal1 = Channel.of(1,2,3)
+canal2 = Channel.of(1)
 
 process SUM {
     input:
@@ -75,7 +75,7 @@ process SUM {
 }
 
 workflow {
-    SUM(ch1,ch2).view()
+    SUM(canal1,canal2).view()
 }
 ```
 
@@ -88,8 +88,8 @@ Ao rodar o script, ele imprime apenas 2, como você pode ver abaixo:
 Para entender o motivo, podemos inspecionar o canal de fila executando o Nextflow com DSL1, o que nos dá uma compreensão mais explícita do que está por trás das cortinas.
 
 ```groovy linenums="1"
-ch1 = Channel.of(1)
-println ch1
+canal1 = Channel.of(1)
+println canal1
 ```
 
 ```console
@@ -101,8 +101,8 @@ DataflowQueue(queue=[DataflowVariable(value=1), DataflowVariable(value=groovyx.g
 Temos o valor 1 como único elemento do nosso canal de fila e uma pílula de veneno, que vai dizer ao processo que não há mais nada para ser consumido. É por isso que temos apenas uma saída para o exemplo acima, que é 2. Vamos inspecionar um canal de valor agora.
 
 ```groovy linenums="1"
-ch1 = Channel.value(1)
-println ch1
+canal1 = Channel.value(1)
+println canal1
 ```
 
 ```console
@@ -111,11 +111,11 @@ $ nextflow run example.nf -dsl1
 DataflowVariable(value=1)
 ```
 
-Não há pílula de veneno, e é por isso que obtemos uma saída diferente com o código abaixo, onde `ch2` é transformado em um canal de valor por meio do operador `first`.
+Não há pílula de veneno, e é por isso que obtemos uma saída diferente com o código abaixo, onde `canal2` é transformado em um canal de valor por meio do operador `first`.
 
 ```groovy linenums="1"
-ch1 = Channel.of(1,2,3)
-ch2 = Channel.of(1)
+canal1 = Channel.of(1,2,3)
+canal2 = Channel.of(1)
 
 process SUM {
     input:
@@ -132,7 +132,7 @@ process SUM {
 }
 
 workflow {
-    SUM(ch1,ch2.first()).view()
+    SUM(canal1,canal2.first()).view()
 }
 ```
 
