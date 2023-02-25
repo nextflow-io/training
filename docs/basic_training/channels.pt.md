@@ -624,7 +624,7 @@ Channel
 
 ### JSON
 
-We can also easily parse the JSON file format using the following groovy schema:
+Também podemos analisar facilmente o formato de arquivo JSON usando o seguinte esquema do Groovy:
 
 ```groovy linenums="1"
 import groovy.json.JsonSlurper
@@ -640,11 +640,11 @@ for( def entry : records ) {
 
 !!! warning
 
-    When using an older JSON version, you may need to replace `parse(f)` with `parseText(f.text)`
+    Ao usar uma versão JSON mais antiga, pode ser necessário substituir `parse(f)` por `parseText(f.text)`
 
 ### YAML
 
-This can also be used as a way to parse YAML files:
+Isso também pode ser usado como uma forma de analisar arquivos YAML:
 
 ```groovy linenums="1"
 import org.yaml.snakeyaml.Yaml
@@ -660,9 +660,9 @@ for( def entry : records ) {
 
 ### Armazenamento em módulos de analisadores sintáticos
 
-The best way to store parser scripts is to keep them in a Nextflow module file.
+A melhor maneira de armazenar scripts com analisadores é mantê-los em um arquivo de módulo Nextflow.
 
-See the following Nextflow script:
+Veja o seguinte script Nextflow:
 
 ```groovy linenums="1"
 include{ parseJsonFile } from './modules/parsers.nf'
@@ -672,7 +672,7 @@ process foo {
   tuple val(meta), path(data_file)
 
   """
-  echo your_command $meta.region_id $data_file
+  echo seu_comando $meta.region_id $data_file
   """
 }
 
@@ -684,12 +684,12 @@ workflow {
 }
 ```
 
-For this script to work, a module file called `parsers.nf` needs to be created and stored in a modules folder in the current directory.
+Para que este script funcione, um arquivo de módulo chamado `parsers.nf` precisa ser criado e armazenado em uma pasta de módulos no diretório atual.
 
-The `parsers.nf` file should contain the `parseJsonFile` function.
+O arquivo `parsers.nf` deve conter a função `parseJsonFile`.
 
-Nextflow will use this as a custom function within the workflow scope.
+O Nextflow usará isso como uma função personalizada dentro do escopo do fluxo de trabalho.
 
 !!! tip
 
-    You will learn more about module files later in section 8.1 of this tutorial.
+    Você aprenderá mais sobre arquivos de módulo posteriormente na seção 8.1 deste tutorial.
