@@ -241,7 +241,7 @@ Saiba mais sobre a sintaxe dos padrões glob [neste link](https://docs.oracle.co
 
 ### `fromFilePairs()`
 
-The `fromFilePairs` method creates a channel emitting the file pairs matching a glob pattern provided by the user. The matching files are emitted as tuples, in which the first element is the grouping key of the matching pair and the second element is the list of files (sorted in lexicographical order).
+O método `fromFilePairs` cria um canal emitindo os pares de arquivos correspondentes a um padrão glob fornecido pelo usuário. Os arquivos correspondentes são emitidos como tuplas, nas quais o primeiro elemento é a chave de agrupamento do par correspondente e o segundo elemento é a lista de arquivos (classificados em ordem lexicográfica).
 
 ```groovy linenums="1"
 Channel
@@ -249,7 +249,7 @@ Channel
   .view()
 ```
 
-It will produce an output similar to the following:
+Ele produzirá uma saída semelhante à seguinte:
 
 ```groovy
 [liver, [/workspace/gitpod/nf-training/data/ggal/liver_1.fq, /workspace/gitpod/nf-training/data/ggal/liver_2.fq]]
@@ -259,32 +259,32 @@ It will produce an output similar to the following:
 
 !!! warning
 
-    The glob pattern _must_ contain at least a star wildcard character (`*`).
+    O padrão glob _precisa_ conter pelo menos um caractere curinga de estrela (`*`).
 
-| Name          | Description                                                                                                                    |
-| ------------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| type          | Type of paths returned, either `file`, `dir` or `any` (default: `file`)                                                        |
-| hidden        | When `true` includes hidden files in the resulting paths (default: `false`)                                                    |
-| maxDepth      | Maximum number of directory levels to visit (default: <code>no limit</code>)                                                   |
-| followLinks   | When `true` symbolic links are followed during directory tree traversal, otherwise they are managed as files (default: `true`) |
-| size          | Defines the number of files each emitted item is expected to hold (default: 2). Set to `-1` for any.                           |
-| flat          | When `true` the matching files are produced as sole elements in the emitted tuples (default: `false`).                         |
-| checkIfExists | When `true`, it throws an exception of the specified path that does not exist in the file system (default: `false`)            |
+| Nome          | Descrição                                                                                                                                                    |
+| ------------- | -------------------------------------------------------------------------------------------------------------------------------                              |
+| type          | Tipo de caminhos retornados, ou `file`, `dir` ou `any` (padrão: `file`)                                                                                      |
+| hidden        | Quando `true` includes hidden files in the resulting paths (padrão: `false`)                                                                                 |
+| maxDepth      | Número máximo de níveis de diretório a serem visitados (padrão: <code>no limit</code>)                                                                       |
+| followLinks   | Quando `true` links simbólicos são seguidos durante a travessia da árvore de diretórios, caso contrário, eles são gerenciados como arquivos (padrão: `true`) |
+| size          | Define o número de arquivos que cada item emitido deve conter (padrão: 2). Use `-1` para qualquer número.                                                    |
+| flat          | Quando `true` os arquivos correspondentes são produzidos como únicos elementos nas tuplas emitidas (padrão: `false`).                                        |
+| checkIfExists | Quando `true`, lança uma exceção do caminho especificado que não existe no sistema de arquivos (padrão: `false`)                                             |
 
 !!! exercise
 
-    Use the `fromFilePairs` method to create a channel emitting all pairs of fastq read in the `data/ggal/` directory and print them. Then use the `flat:true` option and compare the output with the previous execution.
+    Use o método `fromFilePairs` para criar um canal emitindo todos os pares de leituras em fastq no diretório `data/ggal/` e imprima-os. Em seguida, use a opção `flat:true` e compare a saída com a execução anterior.
 
     ??? solution
 
-        Use the following, with or without `flat:true`:
+        Use o seguinte, com ou sem `flat:true`:
 
         ```groovy linenums="1"
         Channel.fromFilePairs( './data/ggal/*_{1,2}.fq', flat:true)
           .view()
         ```
 
-        Then check the square brackets around the file names, to see the difference with `flat`.
+        Em seguida, verifique os colchetes ao redor dos nomes dos arquivos, para ver a diferença com `flat`.
 
 ### `fromSRA()`
 
