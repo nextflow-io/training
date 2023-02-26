@@ -216,15 +216,15 @@ Este exemplo cria um canal e emite tantos itens quanto arquivos com extensão `c
 
     Dois asteriscos, ou seja, `**`, funcionam como `*`, mas cruzam os limites do diretório. Essa sintaxe geralmente é usada para percorrer caminhos completos. Os colchetes especificam uma coleção de subpadrões.
 
-| Nome          | Descrição                                                                                                                                        |
-| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| glob          | Quando `true` interpreta caracteres `*`, `?`, `[]` e `{}` como glob wildcards, caso contrário, os trata como caracteres normais (padrão: `true`) |
-| type          | Tipo de caminho retornado, ou `file`, `dir` ou `any` (padrão: `file`)                                                                           |
-| hidden        | Quando `true` inclui arquivos ocultos nos caminhos resultantes (padrão: `false`)                                                                      |
-| maxDepth      | Número máximo de níveis de diretório a serem visitados (padrão: `no limit`)                                                                                |
-| followLinks   | Quando `true` links simbólicos são seguidos durante a travessia da árvore de diretórios, caso contrário, eles são gerenciados como arquivos (padrão: `true`)                   |
-| relative      | Quando `true` os caminhos de retorno são relativos ao diretório de topo mais comum (padrão: `false`)                                                        |
-| checkIfExists | Quando `true` lança uma exceção quando o caminho especificado não existe no sistema de arquivos (padrão: `false`)                                     |
+| Nome          | Descrição                                                                                                                                                    |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| glob          | Quando `true` interpreta caracteres `*`, `?`, `[]` e `{}` como glob wildcards, caso contrário, os trata como caracteres normais (padrão: `true`)             |
+| type          | Tipo de caminho retornado, ou `file`, `dir` ou `any` (padrão: `file`)                                                                                        |
+| hidden        | Quando `true` inclui arquivos ocultos nos caminhos resultantes (padrão: `false`)                                                                             |
+| maxDepth      | Número máximo de níveis de diretório a serem visitados (padrão: `no limit`)                                                                                  |
+| followLinks   | Quando `true` links simbólicos são seguidos durante a travessia da árvore de diretórios, caso contrário, eles são gerenciados como arquivos (padrão: `true`) |
+| relative      | Quando `true` os caminhos de retorno são relativos ao diretório de topo mais comum (padrão: `false`)                                                         |
+| checkIfExists | Quando `true` lança uma exceção quando o caminho especificado não existe no sistema de arquivos (padrão: `false`)                                            |
 
 Saiba mais sobre a sintaxe dos padrões glob [neste link](https://docs.oracle.com/javase/tutorial/essential/io/fileOps.html#glob).
 
@@ -262,7 +262,7 @@ Ele produzirá uma saída semelhante à seguinte:
     O padrão glob _precisa_ conter pelo menos um caractere curinga de estrela (`*`).
 
 | Nome          | Descrição                                                                                                                                                    |
-| ------------- | -------------------------------------------------------------------------------------------------------------------------------                              |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | type          | Tipo de caminhos retornados, ou `file`, `dir` ou `any` (padrão: `file`)                                                                                      |
 | hidden        | Quando `true` includes hidden files in the resulting paths (padrão: `false`)                                                                                 |
 | maxDepth      | Número máximo de níveis de diretório a serem visitados (padrão: <code>no limit</code>)                                                                       |
