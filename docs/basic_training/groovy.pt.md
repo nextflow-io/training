@@ -5,44 +5,44 @@ description: Uma introdução rápida às estruturas básicas e expressões do G
 
 # Estruturas básicas e expressões do Groovy
 
-Nextflow is a domain specific language (DSL) implemented on top of the Groovy programming language, which in turn is a super-set of the Java programming language. This means that Nextflow can run any Groovy or Java code.
+Nextflow é uma linguagem específica de domínio (DSL) implementada sobre a linguagem de programação Groovy, que por sua vez é um superconjunto da linguagem de programação Java. Isso significa que o Nextflow pode executar qualquer código Groovy ou Java.
 
-Here are some important Groovy syntax that are commonly used in Nextflow.
+Aqui estão algumas sintaxes Groovy importantes que são comumente usadas no Nextflow.
 
 ## Imprimindo valores
 
-To print something is as easy as using one of the `print` or `println` methods.
+Imprimir algo é tão fácil quanto usar um dos métodos `print` ou `println`.
 
 ```groovy linenums="1"
-println("Hello, World!")
+println("Olá, mundo!")
 ```
 
-The only difference between the two is that the `println` method implicitly appends a new line character to the printed string.
+A única diferença entre os dois é que o método `println` anexa implicitamente um caractere de nova linha à string impressa.
 
 !!! tip
 
-    Parentheses for function invocations are optional. Therefore, the following syntax is also valid :
+    Parênteses para invocações de função são opcionais. Portanto, a seguinte sintaxe também é válida:
 
     ```groovy linenums="1"
-    println "Hello, World!"
+    println "Olá, mundo!"
     ```
 
 ## Comentários
 
-Comments use the same syntax as C-family programming languages:
+Os comentários usam a mesma sintaxe das linguagens de programação da família C:
 
 ```groovy linenums="1"
-// comment a single config file
+// comente um único arquivo de configuração
 
 /*
-    a comment spanning
-    multiple lines
+    um comentário abrangendo
+    várias linhas
 */
 ```
 
 ## Variáveis
 
-To define a variable, simply assign a value to it:
+Para definir uma variável, basta atribuir um valor a ela:
 
 ```groovy linenums="1"
 x = 1
@@ -57,62 +57,62 @@ println x
 x = false
 println x
 
-x = "Hi"
+x = "Oi"
 println x
 ```
 
-Local variables are defined using the `def` keyword:
+As variáveis locais são definidas usando a palavra-chave `def`:
 
 ```groovy linenums="1"
 def x = 'foo'
 ```
 
-The `def` should be always used when defining variables local to a function or a closure.
+O `def` deve ser sempre usado ao definir variáveis locais para uma função ou clausura.
 
 ## Listas
 
-A List object can be defined by placing the list items in square brackets:
+Um objeto List pode ser definido colocando os itens da lista entre colchetes:
 
 ```groovy linenums="1"
-list = [10,20,30,40]
+lista = [10,20,30,40]
 ```
 
-You can access a given item in the list with square-bracket notation (indexes start at `0`) or using the get method:
+Você pode acessar um determinado item na lista com a notação de colchetes (índices começam em `0`) ou usando o método get:
 
 ```groovy linenums="1"
-println list[0]
-println list.get(0)
+println lista[0]
+println lista.get(0)
 ```
 
-In order to get the length of a list you can use the size method:
+Para obter o comprimento de uma lista, você pode usar o método size:
 
 ```groovy linenums="1"
-println list.size()
+println lista.size()
 ```
 
-We use the `assert` keyword to test if a condition is true (similar to an `if` function). Here, Groovy will print nothing if it is correct, else it will raise an AssertionError message.
+Usamos a palavra-chave `assert` para testar se uma condição é verdadeira (semelhante a uma função `if`). Aqui, o Groovy não imprimirá nada se estiver correto, caso contrário, gerará uma mensagem AssertionError.
 
 ```groovy linenums="1"
-assert list[0] == 10
+assert lista[0] == 10
 ```
 
 !!! note
 
-    This assertion should be correct, try changing it to an incorrect one.
+    Esta afirmação deve estar correta, tente alterá-la para uma incorreta.
 
-Lists can also be indexed with negative indexes and reversed ranges.
+As listas também podem ser indexadas com índices negativos e intervalos invertidos.
 
 ```groovy linenums="1"
-list = [0,1,2]
-assert list[-1] == 2
-assert list[-1..0] == list.reverse()
+lista = [0,1,2]
+assert lista[-1] == 2
+assert lista[-1..0] == lista.reverse()
 ```
 
 !!! info
 
-    In the last assert line we are referencing the initial list and converting this with a "shorthand" range (`..`), to run from the -1th element (2) to the 0th element (0).
+    Na afirmação da última linha, estamos referenciando a lista inicial e convertendo-a com um intervalo "abreviado" (`..`), para executar do -1º elemento (2), o último, ao 0º elemento (0), o primeiro.
 
-List objects implement all methods provided by the [java.util.List](https://docs.oracle.com/javase/8/docs/api/java/util/List.html) interface, plus the extension methods provided by [Groovy](http://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/List.html).
+Objetos List implementam todos os métodos fornecidos pela interface [java.util.List](https://docs.oracle.com/javase/8/docs/api/java/util/List.html), mais os métodos de extensão fornecidos pelo [Groovy](http://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/List.html).
 
 ```groovy linenums="1"
 assert [1,2,3] << 1 == [1,2,3,1]
@@ -134,68 +134,68 @@ assert [4,2,1,3].findAll{it%2 == 0} == [4,2]
 
 ## Mapas
 
-Maps are like lists that have an arbitrary key instead of an integer. Therefore, the syntax is very much aligned.
+Os mapas são como listas que possuem uma chave arbitrária em vez de um número inteiro. Portanto, a sintaxe é bem parecida.
 
 ```groovy linenums="1"
-map = [a:0, b:1, c:2]
+mapa = [a:0, b:1, c:2]
 ```
 
-Maps can be accessed in a conventional square-bracket syntax or as if the key was a property of the map.
+Os mapas podem ser acessados em uma sintaxe convencional de colchetes ou como se a chave fosse uma propriedade do mapa.
 
 !!! info ""
 
-    Click the :material-plus-circle: icons in the code for explanations.
+    Clique no ícone :material-plus-circle: para ver explicações no código.
 
 ```groovy linenums="1"
-assert map['a'] == 0 // (1)!
-assert map.b == 1 // (2)!
-assert map.get('c') == 2 // (3)!
+assert mapa['a'] == 0 // (1)!
+assert mapa.b == 1 // (2)!
+assert mapa.get('c') == 2 // (3)!
 ```
 
-1. Using square brackets.
-2. Using dot notation.
-3. Using the get method.
+1. Usando colchetes.
+2. Usando a notação de ponto.
+3. Usando o método get.
 
-To add data or to modify a map, the syntax is similar to adding values to a list:
+Para adicionar dados ou modificar um mapa, a sintaxe é semelhante à adição de valores a uma lista:
 
 ```groovy linenums="1"
-map['a'] = 'x' // (1)!
-map.b = 'y' // (2)!
-map.put('c', 'z') // (3)!
-assert map == [a:'x', b:'y', c:'z']
+mapa['a'] = 'x' // (1)!
+mapa.b = 'y' // (2)!
+mapa.put('c', 'z') // (3)!
+assert mapa == [a:'x', b:'y', c:'z']
 ```
 
-1. Using square brackets.
-2. Using dot notation.
-3. Using the put method.
+1. Usando colchetes.
+2. Usando a notação de ponto.
+3. Usando o método put.
 
-Map objects implement all methods provided by the [java.util.Map](https://docs.oracle.com/javase/8/docs/api/java/util/Map.html) interface, plus the extension methods provided by [Groovy](http://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/Map.html).
+Objetos Map implementam todos os métodos fornecidos pela interface [java.util.Map](https://docs.oracle.com/javase/8/docs/api/java/util/Map.html), mais os métodos de extensão fornecidos pelo [Groovy](http://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/Map.html).
 
 ## Interpolação de Strings
 
-String literals can be defined by enclosing them with either _single-_ ('') or _double-_ ("") quotation marks.
+Strings podem ser definidas colocando-as entre aspas _simples_ ('') ou _duplas_ ("").
 
 ```groovy linenums="1"
-foxtype = 'quick'
-foxcolor = ['b', 'r', 'o', 'w', 'n']
-println "The $foxtype ${foxcolor.join()} fox"
+tipoderaposa = 'rápida'
+cordaraposa = ['m', 'a', 'r', 'r', 'o', 'm']
+println "A $tipoderaposa raposa ${cordaraposa.join()}"
 
-x = 'Hello'
+x = 'Olá'
 println '$x + $y'
 ```
 
 ```console title="Output"
-The quick brown fox
+A rápida raposa marrom
 $x + $y
 ```
 
 !!! info
 
-    Note the different use of `$` and `${..}` syntax to interpolate value expressions in a string literal.
+   Observe o uso diferente das sintaxes `$` e `${..}` para interpolar expressões de valor em uma string.
 
-Finally, string literals can also be defined using the `/` character as a delimiter. They are known as **slashy** strings and are useful for defining regular expressions and patterns, as there is no need to escape backslashes. As with double-quote strings they allow to interpolate variables prefixed with a `$` character.
+Por fim, strings também podem ser definidas usando o caractere `/` como delimitador. Elas são conhecidas como strings **com barras** e são úteis para definir expressões e padrões regulares, pois não há necessidade de escapar das barras invertidas. Assim como as strings de aspas duplas, elas permitem interpolar variáveis prefixadas com um caractere `$`.
 
-Try the following to see the difference:
+Tente o seguinte para ver a diferença:
 
 ```groovy linenums="1"
 x = /tic\tac\toe/
@@ -212,7 +212,7 @@ tic    ac    oe
 
 ## Strings de várias linhas
 
-A block of text that spans multiple lines can be defined by delimiting it with triple single or double quotes:
+Um bloco de texto que abrange várias linhas pode ser definido delimitando-o com aspas simples ou duplas triplas:
 
 ```groovy linenums="1"
 text = """
@@ -222,20 +222,20 @@ text = """
 println text
 ```
 
-Finally, multi-line strings can also be defined with slashy strings. For example:
+Por fim, strings de várias linhas também podem ser definidas com strings com barras. Por exemplo:
 
 ```groovy linenums="1"
 text = /
-    This is a multi-line
-    slashy string!
-    It's cool, isn't it?!
+    Esta é uma string abrangendo
+    várias linhas com barras!
+    Super legal, né?!
     /
 println text
 ```
 
 !!! info
 
-    Like before, multi-line strings inside double quotes and slash characters support variable interpolation, while single-quoted multi-line strings do not.
+    Como antes, strings de várias linhas dentro de aspas duplas e caracteres de barra suportam interpolação de variável, enquanto strings de várias linhas com aspas simples não.
 
 ## Declarações condicionais com if
 
