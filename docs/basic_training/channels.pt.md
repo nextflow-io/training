@@ -288,25 +288,25 @@ Ele produzirá uma saída semelhante à seguinte:
 
 ### `fromSRA()`
 
-The `Channel.fromSRA` method makes it possible to query the [NCBI SRA](https://www.ncbi.nlm.nih.gov/sra) archive and returns a channel emitting the FASTQ files matching the specified selection criteria.
+O método `Channel.fromSRA` permite consultar o banco de dados [NCBI SRA](https://www.ncbi.nlm.nih.gov/sra) e retorna um canal que emite os arquivos FASTQ correspondentes aos critérios de seleção especificados.
 
-The query can be project ID(s) or accession number(s) supported by the [NCBI ESearch API](https://www.ncbi.nlm.nih.gov/books/NBK25499/#chapter4.ESearch).
+A consulta pode ser ID(s) de projeto(s) ou número(s) de acesso suportado(s) pela API do [NCBI ESearch](https://www.ncbi.nlm.nih.gov/books/NBK25499/#chapter4.ESearch).
 
 !!! info
 
-    This function now requires an API key you can only get by logging into your NCBI account.
+    Esta função agora requer uma chave de API que você só pode obter fazendo login em sua conta NCBI.
 
-??? example "Instructions for NCBI login and key acquisition"
+??? example "Instruções para login do NCBI e aquisição de chave"
 
-    1. Go to: <https://www.ncbi.nlm.nih.gov/>
-    2. Click the top right "Log in" button to sign into NCBI. Follow their instructions.
-    3. Once into your account, click the button at the top right, usually your ID.
-    4. Go to Account settings
-    5. Scroll down to the API Key Management section.
-    6. Click on "Create an API Key".
-    7. The page will refresh and the key will be displayed where the button was. Copy your key.
+    1. Vá para: <https://www.ncbi.nlm.nih.gov/>
+    2. Clique no botão "Login" no canto superior direito para entrar no NCBI. Siga suas instruções.
+    3. Uma vez em sua conta, clique no botão no canto superior direito, geralmente seu ID.
+    4. Vá para Account settings
+    5. Role para baixo até a seção API Key Management.
+    6. Clique em "Criar uma chave de API".
+    7. A página será atualizada e a chave será exibida onde estava o botão. Copie sua chave.
 
-For example, the following snippet will print the contents of an NCBI project ID:
+Por exemplo, o trecho a seguir imprimirá o conteúdo de um ID de projeto NCBI:
 
 ```groovy linenums="1"
 params.ncbi_api_key = '<Your API key here>'
@@ -318,9 +318,9 @@ Channel
 
 !!! info ""
 
-    :material-lightbulb: Replace `<Your API key here>` with your API key.
+    :material-lightbulb: Substitua `<Your API key here>` com sua chave de API.
 
-This should print:
+Isso deve imprimir:
 
 ```groovy
 [SRR3383346, [/vol1/fastq/SRR338/006/SRR3383346/SRR3383346_1.fastq.gz, /vol1/fastq/SRR338/006/SRR3383346/SRR3383346_2.fastq.gz]]
@@ -330,7 +330,7 @@ This should print:
 // (remaining omitted)
 ```
 
-Multiple accession IDs can be specified using a list object:
+Vários IDs de acesso podem ser especificados usando um objeto lista:
 
 ```groovy linenums="1"
 ids = ['ERR908507', 'ERR908506', 'ERR908505']
@@ -347,9 +347,10 @@ Channel
 
 !!! info
 
-    Read pairs are implicitly managed and are returned as a list of files.
+    Os pares de leitura são gerenciados implicitamente e são retornados como uma lista de arquivos.
 
-It’s straightforward to use this channel as an input using the usual Nextflow syntax. The code below creates a channel containing two samples from a public SRA study and runs FASTQC on the resulting files. See:
+É fácil usar este canal como uma entrada usando a sintaxe usual do Nextflow. O código abaixo cria um canal contendo
+duas amostras de um estudo SRA público e executa o FASTQC nos arquivos resultantes. Veja:
 
 ```groovy linenums="1"
 params.ncbi_api_key = '<Your API key here>'
@@ -376,7 +377,7 @@ workflow {
 }
 ```
 
-If you want to run the pipeline above and do not have fastqc installed in your machine, don’t forget what you learned in the previous section. Run this pipeline with `-with-docker biocontainers/fastqc:v0.11.5`, for example.
+Se você deseja executar o pipeline acima e não possui o fastqc instalado em sua máquina, não esqueça o que aprendeu na seção anterior. Execute este pipeline com `-with-docker biocontainers/fastqc:v0.11.5`, por exemplo.
 
 ### Arquivos de texto
 
