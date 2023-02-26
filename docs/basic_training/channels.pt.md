@@ -381,7 +381,7 @@ Se você deseja executar o pipeline acima e não possui o fastqc instalado em su
 
 ### Arquivos de texto
 
-The `splitText` operator allows you to split multi-line strings or text file items, emitted by a source channel into chunks containing n lines, which will be emitted by the resulting channel. See:
+O operador `splitText` permite dividir strings de várias linhas ou itens de arquivo de texto, emitidos por um canal de origem em blocos contendo n linhas, que serão emitidos pelo canal resultante. Veja:
 
 ```groovy linenums="1"
 Channel
@@ -390,11 +390,11 @@ Channel
   .view() // (3)!
 ```
 
-1. Instructs Nextflow to make a channel from the path `data/meta/random.txt`
-2. The `splitText` operator splits each item into chunks of one line by default.
-3. View contents of the channel.
+1. Instrui o Nextflow a criar um canal a partir do caminho `data/meta/random.txt`
+2. O operador `splitText` divide cada item em pedaços de uma linha por padrão.
+3. Veja o conteúdo do canal.
 
-You can define the number of lines in each chunk by using the parameter `by`, as shown in the following example:
+Você pode definir o número de linhas em cada bloco usando o parâmetro `by`, conforme mostrado no exemplo a seguir:
 
 ```groovy linenums="1"
 Channel
@@ -402,15 +402,15 @@ Channel
   .splitText( by: 2 )
   .subscribe {
     print it;
-    print "--- end of the chunk ---\n"
+    print "--- fim do bloco ---\n"
   }
 ```
 
 !!! info
 
-    The `subscribe` operator permits execution of user defined functions each time a new value is emitted by the source channel.
+    O operador `subscribe` permite a execução de funções definidas pelo usuário cada vez que um novo valor é emitido pelo canal de origem.
 
-An optional closure can be specified in order to transform the text chunks produced by the operator. The following example shows how to split text files into chunks of 10 lines and transform them into capital letters:
+Uma clausura opcional pode ser especificada para transformar os blocos de texto produzidos pelo operador. O exemplo a seguir mostra como dividir arquivos de texto em blocos de 10 linhas e transformá-los em letras maiúsculas:
 
 ```groovy linenums="1"
 Channel
@@ -419,7 +419,7 @@ Channel
   .view()
 ```
 
-You can also make counts for each line:
+Você também pode fazer contagens para cada linha:
 
 ```groovy linenums="1"
 count=0
@@ -430,7 +430,7 @@ Channel
   .view { "${count++}: ${it.toUpperCase().trim()}" }
 ```
 
-Finally, you can also use the operator on plain files (outside of the channel context):
+Por fim, você também pode usar o operador em arquivos simples (fora do contexto do canal):
 
 ```groovy linenums="1"
 def f = file('data/meta/random.txt')
@@ -443,11 +443,11 @@ for( String row : lines ) {
 
 ### Valores separados por vírgula (.csv)
 
-The `splitCsv` operator allows you to parse text items emitted by a channel, that are CSV formatted.
+O operador `splitCsv` permite analisar itens de texto emitidos por um canal, que são formatados em CSV (Comma-separated value).
 
-It then splits them into records or groups them as a list of records with a specified length.
+Em seguida, ele os divide em registros ou os agrupa como uma lista de registros com um comprimento especificado.
 
-In the simplest case, just apply the `splitCsv` operator to a channel emitting a CSV formatted text files or text entries. For example, to view only the first and fourth columns:
+No caso mais simples, basta aplicar o operador `splitCsv` a um canal que emite arquivos de texto ou entradas de texto no formato CSV. Por exemplo, para visualizar apenas a primeira e a quarta colunas:
 
 ```groovy linenums="1"
 Channel
@@ -457,7 +457,7 @@ Channel
   .view { row -> "${row[0]},${row[3]}" }
 ```
 
-When the CSV begins with a header line defining the column names, you can specify the parameter `header: true` which allows you to reference each value by its column name, as shown in the following example:
+Quando o CSV começa com uma linha de cabeçalho definindo os nomes das colunas, você pode especificar o parâmetro `header: true` que permite referenciar cada valor pelo nome da coluna, conforme mostrado no exemplo a seguir:
 
 ```groovy linenums="1"
 Channel
@@ -467,7 +467,7 @@ Channel
   .view { row -> "${row.patient_id},${row.num_samples}" }
 ```
 
-Alternatively, you can provide custom header names by specifying a list of strings in the header parameter as shown below:
+Como alternativa, você pode fornecer nomes de cabeçalho personalizados especificando uma lista de strings no parâmetro de cabeçalho, conforme mostrado abaixo:
 
 ```groovy linenums="1"
 Channel
@@ -477,7 +477,7 @@ Channel
   .view { row -> "${row.col1},${row.col4}" }
 ```
 
-You can also process multiple csv files at the same time:
+Você também pode processar vários arquivos csv ao mesmo tempo:
 
 ```groovy linenums="1"
 Channel
@@ -488,9 +488,9 @@ Channel
 
 !!! tip
 
-    Notice that you can change the output format simply by adding a different delimiter.
+    Observe que você pode alterar o formato de saída simplesmente adicionando um delimitador diferente.
 
-Finally, you can also operate on csv files outside the channel context:
+Por fim, você também pode operar em arquivos csv fora do contexto do canal:
 
 ```groovy linenums="1"
 def f = file('data/meta/patients_1.csv')
@@ -502,17 +502,17 @@ for( List row : lines ) {
 
 !!! exercise
 
-    Try inputting fastq reads into the RNA-Seq workflow from earlier using `.splitCSV`.
+    Tente inserir leituras fastq no fluxo de trabalho do RNA-Seq anterior usando `.splitCSV`.
 
     ??? solution
 
-        Add a csv text file containing the following, as an example input with the name "fastq.csv":
+        Adicione um arquivo de texto csv contendo o seguinte, como uma entrada de exemplo com o nome "fastq.csv":
 
         ```csv
         gut,/workspace/gitpod/nf-training/data/ggal/gut_1.fq,/workspace/gitpod/nf-training/data/ggal/gut_2.fq
         ```
 
-        Then replace the input channel for the reads in `script7.nf`. Changing the following lines:
+        Em seguida, substitua o canal de entrada para as leituras em `script7.nf`, alterando as seguintes linhas:
 
         ```groovy linenums="1"
         Channel
@@ -520,7 +520,7 @@ for( List row : lines ) {
           .set { read_pairs_ch }
         ```
 
-        To a splitCsv channel factory input:
+        Para uma entrada de fábrica de canal splitCsv:
 
         ```groovy linenums="1" hl_lines="2 3 4"
         Channel
@@ -530,7 +530,7 @@ for( List row : lines ) {
           .set { read_pairs_ch }
         ```
 
-        Finally, change the cardinality of the processes that use the input data. For example, for the quantification process, change it from:
+        Por fim, altere a cardinalidade dos processos que usam os dados de entrada. Por exemplo, para o processo de quantificação, mude de:
 
         ```groovy linenums="1"
         process QUANTIFICATION {
@@ -550,7 +550,7 @@ for( List row : lines ) {
         }
         ```
 
-        To:
+        Para:
 
         ```groovy linenums="1" hl_lines="6 13"
         process QUANTIFICATION {
@@ -570,7 +570,7 @@ for( List row : lines ) {
         }
         ```
 
-        Repeat the above for the fastqc step.
+        Repita o procedimento acima para a etapa fastqc.
 
         ```groovy linenums="1"
         process FASTQC {
@@ -590,11 +590,11 @@ for( List row : lines ) {
         }
         ```
 
-        Now the workflow should run from a CSV file.
+        Agora o fluxo de trabalho deve ser executado a partir de um arquivo CSV.
 
 ### Valores separados por tabulação (.tsv)
 
-Parsing tsv files works in a similar way, simply add the `sep:'\t'` option in the `splitCsv` context:
+A análise de arquivos tsv funciona de maneira semelhante, basta adicionar a opção `sep:'\t'` no contexto `splitCsv`:
 
 ```groovy linenums="1"
 Channel
@@ -607,7 +607,7 @@ Channel
 
 !!! exercise
 
-    Try using the tab separation technique on the file `data/meta/regions.tsv`, but print just the first column, and remove the header.
+    Tente usar a técnica de separação por tabulação no arquivo `data/meta/regions.tsv`, mas imprima apenas a primeira coluna e remova o cabeçalho.
 
 
     ??? solution
