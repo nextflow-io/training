@@ -309,7 +309,7 @@ A consulta pode ser ID(s) de projeto(s) ou número(s) de acesso suportado(s) pel
 Por exemplo, o trecho a seguir imprimirá o conteúdo de um ID de projeto NCBI:
 
 ```groovy linenums="1"
-params.ncbi_api_key = '<Your API key here>'
+params.ncbi_api_key = '<Sua chave da API aqui>'
 
 Channel
   .fromSRA(['SRP073307'], apiKey: params.ncbi_api_key)
@@ -327,7 +327,7 @@ Isso deve imprimir:
 [SRR3383347, [/vol1/fastq/SRR338/007/SRR3383347/SRR3383347_1.fastq.gz, /vol1/fastq/SRR338/007/SRR3383347/SRR3383347_2.fastq.gz]]
 [SRR3383344, [/vol1/fastq/SRR338/004/SRR3383344/SRR3383344_1.fastq.gz, /vol1/fastq/SRR338/004/SRR3383344/SRR3383344_2.fastq.gz]]
 [SRR3383345, [/vol1/fastq/SRR338/005/SRR3383345/SRR3383345_1.fastq.gz, /vol1/fastq/SRR338/005/SRR3383345/SRR3383345_2.fastq.gz]]
-// (remaining omitted)
+// (o restante foi omitido)
 ```
 
 Vários IDs de acesso podem ser especificados usando um objeto lista:
@@ -443,7 +443,7 @@ for( String row : lines ) {
 
 ### Valores separados por vírgula (.csv)
 
-O operador `splitCsv` permite analisar itens de texto emitidos por um canal, que são formatados em CSV (Comma-separated value).
+O operador `splitCsv` permite analisar itens de texto formatados em CSV (Comma-separated value) emitidos por um canal.
 
 Em seguida, ele os divide em registros ou os agrupa como uma lista de registros com um comprimento especificado.
 
@@ -453,8 +453,8 @@ No caso mais simples, basta aplicar o operador `splitCsv` a um canal que emite a
 Channel
   .fromPath("data/meta/patients_1.csv")
   .splitCsv()
-  // row is a list object
-  .view { row -> "${row[0]},${row[3]}" }
+  // linha é um objeto de lista
+  .view { linha -> "${linha[0]},${linha[3]}" }
 ```
 
 Quando o CSV começa com uma linha de cabeçalho definindo os nomes das colunas, você pode especificar o parâmetro `header: true` que permite referenciar cada valor pelo nome da coluna, conforme mostrado no exemplo a seguir:
@@ -463,8 +463,8 @@ Quando o CSV começa com uma linha de cabeçalho definindo os nomes das colunas,
 Channel
   .fromPath("data/meta/patients_1.csv")
   .splitCsv(header: true)
-  // row is a list object
-  .view { row -> "${row.patient_id},${row.num_samples}" }
+  // linha é um objeto de lista
+  .view { linha -> "${linha.patient_id},${linha.num_samples}" }
 ```
 
 Como alternativa, você pode fornecer nomes de cabeçalho personalizados especificando uma lista de strings no parâmetro de cabeçalho, conforme mostrado abaixo:
@@ -473,15 +473,15 @@ Como alternativa, você pode fornecer nomes de cabeçalho personalizados especif
 Channel
   .fromPath("data/meta/patients_1.csv")
   .splitCsv(header: ['col1', 'col2', 'col3', 'col4', 'col5'] )
-  // row is a list object
-  .view { row -> "${row.col1},${row.col4}" }
+  // linha é um objeto de lista
+  .view { linha -> "${linha.col1},${linha.col4}" }
 ```
 
 Você também pode processar vários arquivos csv ao mesmo tempo:
 
 ```groovy linenums="1"
 Channel
-  .fromPath("data/meta/patients_*.csv") // <-- just use a pattern
+  .fromPath("data/meta/patients_*.csv") // <-- use um padrão de captura
   .splitCsv(header:true)
   .view { row -> "${row.patient_id}\t${row.num_samples}" }
 ```
@@ -599,9 +599,9 @@ A análise de arquivos tsv funciona de maneira semelhante, basta adicionar a op�
 ```groovy linenums="1"
 Channel
   .fromPath("data/meta/regions.tsv", checkIfExists:true)
-  // use `sep` option to parse TAB separated files
+  // Use a opção `sep` para analisar arquivos com tabulação como separador
   .splitCsv(sep:'\t')
-  // row is a list object
+  // linha é um objeto de lista
   .view()
 ```
 
@@ -615,10 +615,10 @@ Channel
         ```groovy linenums="1"
         Channel
           .fromPath("data/meta/regions.tsv", checkIfExists:true)
-          // use `sep` option to parse TAB separated files
+          // Use a opção `sep` para analisar arquivos com tabulação como separador
           .splitCsv(sep:'\t', header:true )
-          // row is a list object
-          .view { row -> "${row.patient_id}" }
+          // linha é um objeto de lista
+          .view { linha -> "${row.patient_id}" }
         ```
 
 ## Formatos de arquivo mais complexos
