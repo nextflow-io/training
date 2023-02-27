@@ -239,18 +239,18 @@ println text
 
 ## Declarações condicionais com if
 
-The `if` statement uses the same syntax common in other programming languages, such as Java, C, JavaScript, etc.
+A instrução `if` usa a mesma sintaxe comum em outras linguagens de programação, como Java, C, JavaScript, etc.
 
 ```groovy linenums="1"
 if( < boolean expression > ) {
-    // true branch
+    // ramo verdadeiro
 }
 else {
-    // false branch
+    // ramo falso
 }
 ```
 
-The `else` branch is optional. Also, the curly brackets are optional when the branch defines just a single statement.
+O ramo `else` é opcional. Além disso, os colchetes são opcionais quando a ramificação define apenas uma única instrução.
 
 ```groovy linenums="1"
 x = 1
@@ -260,69 +260,69 @@ if( x > 10 )
 
 !!! tip
 
-    `null`, empty strings, and empty collections are evaluated to `false`.
+    `null`, strings vazias e coleções (mapas e listas) vazias são avaliadas como `false`.
 
-    Therefore a statement like:
+    Portanto, uma declaração como:
 
     ```groovy linenums="1"
-    list = [1,2,3]
-    if( list != null && list.size() > 0 ) {
-        println list
+    lista = [1,2,3]
+    if( lista != null && lista.size() > 0 ) {
+        println lista
     }
     else {
-        println 'The list is empty'
+        println 'A lista está vazia'
     }
     ```
 
     Can be written as:
 
     ```groovy linenums="1"
-    list = [1,2,3]
-    if( list )
-        println list
+    lista = [1,2,3]
+    if( lista )
+        println lista
     else
-        println 'The list is empty'
+        println 'A lista está vazia'
     ```
 
-    See the [Groovy-Truth](http://groovy-lang.org/semantics.html#Groovy-Truth) for further details.
+    Veja o [Groovy-Truth](http://groovy-lang.org/semantics.html#Groovy-Truth) para mais detalhes.
 
 !!! tip
 
-    In some cases it can be useful to replace the `if` statement with a ternary expression (aka conditional expression). For example:
+    Em alguns casos, pode ser útil substituir a instrução `if` por uma expressão ternária (também conhecida como expressão condicional). Por exemplo:
 
     ```groovy linenums="1"
-    println list ? list : 'The list is empty'
+    println lista ? lista : 'A lista está vazia'
     ```
 
-    The previous statement can be further simplified using the [Elvis operator](http://groovy-lang.org/operators.html#_elvis_operator), as shown below:
+    A declaração anterior pode ser ainda mais simplificada usando o [operador Elvis](http://groovy-lang.org/operators.html#_elvis_operator), como mostrado abaixo:
 
     ```groovy linenums="1"
-    println list ?: 'The list is empty'
+    println lista ?: 'A lista está vazia'
     ```
 
 ## Declarações de loop com for
 
-The classical `for` loop syntax is supported as shown here:
+A sintaxe clássica do loop `for` é suportada como mostrado aqui:
 
 ```groovy linenums="1"
 for (int i = 0; i <3; i++) {
-    println("Hello World $i")
+    println("Olá mundo $i")
 }
 ```
 
-Iteration over list objects is also possible using the syntax below:
+A iteração sobre objetos de lista também é possível usando a sintaxe abaixo:
 
 ```groovy linenums="1"
 list = ['a','b','c']
 
-for( String elem : list ) {
+for( String elem : lista ) {
     println elem
 }
 ```
 
 ## Funções
 
-It is possible to define a custom function into a script, as shown here:
+É possível definir uma função personalizada em um script, conforme mostrado aqui:
 
 ```groovy linenums="1"
 int fib(int n) {
@@ -344,27 +344,27 @@ assert fact(5) == 120
 
 ## Clausuras
 
-Closures are the Swiss army knife of Nextflow/Groovy programming. In a nutshell, a closure is a block of code that can be passed as an argument to a function. A closure can also be used to define an anonymous function.
+Clausuras são o canivete suíço da programação com Nextflow/Groovy. Resumindo, uma clausura é um bloco de código que pode ser passado como um argumento para uma função. Clausuras também pode ser usadas para definir uma função anônima.
 
-More formally, a closure allows the definition of functions as first-class objects.
+Mais formalmente, uma clausura permite a definição de funções como objetos de primeira classe.
 
 ```groovy linenums="1"
-square = { it * it }
+quadrado = { it * it }
 ```
 
-The curly brackets around the expression `it * it` tells the script interpreter to treat this expression as code. The `it` identifier is an implicit variable that represents the value that is passed to the function when it is invoked.
+Os colchetes ao redor da expressão `it * it` informam ao interpretador de scripts para tratar essa expressão como código. O identificador `it` é uma variável implícita que representa o valor que é passado para a função quando ela é invocada.
 
-Once compiled, the function object is assigned to the variable `square` as any other variable assignment shown previously. To invoke the closure execution use the special method `call` or just use the round parentheses to specify the closure parameter(s). For example:
+Depois de compilado, o objeto de função é atribuído à variável `quadrado` como qualquer outra atribuição de variável mostrada anteriormente. Para invocar a execução da clausura, use o método especial `call` ou apenas use os parênteses para especificar o(s) parâmetro(s) da clausura. Por exemplo:
 
 ```groovy linenums="1"
-assert square.call(5) == 25
-assert square(9) == 81
+assert quadrado.call(5) == 25
+assert quadrado(9) == 81
 ```
 
-As is, this may not seem interesting, but we can now pass the `square` function as an argument to other functions or methods. Some built-in functions take a function like this as an argument. One example is the `collect` method on lists:
+Da forma como foi mostrado, isso pode não parecer interessante, mas agora podemos passar a função `quadrado` como um argumento para outras funções ou métodos. Algumas funções embutidas aceitam uma função como esta como um argumento. Um exemplo é o método `collect` em listas:
 
 ```groovy linenums="1"
-x = [ 1, 2, 3, 4 ].collect(square)
+x = [ 1, 2, 3, 4 ].collect(quadrado)
 println x
 ```
 
@@ -372,51 +372,51 @@ println x
 [ 1, 4, 9, 16 ]
 ```
 
-By default, closures take a single parameter called `it`, to give it a different name use the `\->` syntax. For example:
+Por padrão, as clausuras recebem um único parâmetro chamado `it`, para dar a ele um nome diferente, use a sintaxe `\->`. Por exemplo:
 
 ```groovy linenums="1"
-square = { num -> num * num }
+quadrado = { num -> num * num }
 ```
 
-It’s also possible to define closures with multiple, custom-named parameters.
+Também é possível definir clausuras com vários parâmetros com nomes personalizados.
 
-For example, when the method `each()` is applied to a map it can take a closure with two arguments, to which it passes the _key-value_ pair for each entry in the `map` object. For example:
+Por exemplo, quando o método `each()` é aplicado a um mapa, ele pode receber uma clausura com dois argumentos, para os quais passa o par _chave-valor_ para cada entrada no objeto `Map`. Por exemplo:
 
 ```groovy linenums="1"
-printMap = { a, b -> println "$a with value $b" }
-values = [ "Yue" : "Wu", "Mark" : "Williams", "Sudha" : "Kumari" ]
-values.each(printMap)
+imprimirMap = { a, b -> println "$a com o valor $b" }
+valores = [ "Yue" : "Wu", "Mark" : "Williams", "Sudha" : "Kumari" ]
+valores.each(imprimirMap)
 ```
 
 ```console title="Output"
-Yue with value Wu
-Mark with value Williams
-Sudha with value Kumari
+Yue com o valor Wu
+Mark com o valor Williams
+Sudha com o valor Kumari
 ```
 
-A closure has two other important features.
+Uma clausura tem duas outras características importantes.
 
-First, it can access and _modify_ variables in the scope where it is defined.
+Primeiro, ela pode acessar e _modificar_ variáveis no escopo em que está definida.
 
-Second, a closure can be defined in an _anonymous_ manner, meaning that it is not given a name, and is defined in the place where it needs to be used.
+Em segundo lugar, uma clausura pode ser definida de maneira _anônima_, o que significa que não recebe um nome e é definida no local em que precisa ser usada.
 
-As an example showing both these features, see the following code fragment:
+Para um exemplo mostrando esses dois recursos, consulte o seguinte trecho de código:
 
 ```groovy linenums="1"
-result = 0 // (1)!
-values = ["China": 1 , "India" : 2, "USA" : 3] // (2)!
-values.keySet().each { result += values[it] } // (3)!
-println result
+resultado = 0 // (1)!
+valores = ["China": 1 , "India" : 2, "USA" : 3] // (2)!
+valores.keySet().each { resultado += valores[it] } // (3)!
+println resultado
 ```
 
-1. Defines a global variable.
-2. Defines a map object.
-3. Invokes the `each` method passing the closure object which modifies the `result` variable.
+1. Define uma variável global.
+2. Define um objeto de mapa.
+3. Chama o método `each` passando o objeto de clausura que modifica a variável `resultado`.
 
-Learn more about closures in the [Groovy documentation](http://groovy-lang.org/closures.html).
+Saiba mais sobre clausuras na [documentação do Groovy](http://groovy-lang.org/closures.html).
 
 ## Mais recursos
 
-The complete Groovy language documentation is available at [this link](http://groovy-lang.org/documentation.html#languagespecification).
+A documentação completa da linguagem Groovy está disponível [nesse link](http://groovy-lang.org/documentation.html#languagespecification).
 
-A great resource to master Apache Groovy syntax is the book: [Groovy in Action](https://www.manning.com/books/groovy-in-action-second-edition).
+Um ótimo recurso para dominar a sintaxe do Apache Groovy é o livro: [Groovy in Action](https://www.manning.com/books/groovy-in-action-second-edition).
