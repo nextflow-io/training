@@ -193,7 +193,7 @@ $x + $y
 
     Observe o uso diferente das sintaxes `$` e `${..}` para interpolar expressões de valor em uma string.
 
-Por fim, strings também podem ser definidas usando o caractere `/` como delimitador. Elas são conhecidas como strings **com barras** e são úteis para definir expressões  regulares e padrões, pois não há necessidade de escapar as barras invertidas. Assim como as strings de aspas duplas, elas permitem interpolar variáveis prefixadas com um caractere `$`.
+Por fim, strings também podem ser definidas usando o caractere `/` como delimitador. Elas são conhecidas como strings **com barras** e são úteis para definir expressões regulares e padrões, pois não há necessidade de escapar as barras invertidas. Assim como as strings de aspas duplas, elas permitem interpolar variáveis prefixadas com um caractere `$`.
 
 Tente o seguinte para ver a diferença:
 
