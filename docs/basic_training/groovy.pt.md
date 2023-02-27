@@ -193,7 +193,7 @@ $x + $y
 
     Observe o uso diferente das sintaxes `$` e `${..}` para interpolar expressões de valor em uma string.
 
-Por fim, strings também podem ser definidas usando o caractere `/` como delimitador. Elas são conhecidas como strings **com barras** e são úteis para definir expressões e padrões regulares, pois não há necessidade de escapar das barras invertidas. Assim como as strings de aspas duplas, elas permitem interpolar variáveis prefixadas com um caractere `$`.
+Por fim, strings também podem ser definidas usando o caractere `/` como delimitador. Elas são conhecidas como strings **com barras** e são úteis para definir expressões  regulares e padrões, pois não há necessidade de escapar as barras invertidas. Assim como as strings de aspas duplas, elas permitem interpolar variáveis prefixadas com um caractere `$`.
 
 Tente o seguinte para ver a diferença:
 
@@ -215,22 +215,22 @@ tic    ac    oe
 Um bloco de texto que abrange várias linhas pode ser definido delimitando-o com aspas simples ou duplas triplas:
 
 ```groovy linenums="1"
-text = """
-    Hello there James.
-    How are you today?
+texto = """
+    E aí, James.
+    Como você está hoje?
     """
-println text
+println texto
 ```
 
 Por fim, strings de várias linhas também podem ser definidas com strings com barras. Por exemplo:
 
 ```groovy linenums="1"
-text = /
+texto = /
     Esta é uma string abrangendo
     várias linhas com barras!
     Super legal, né?!
     /
-println text
+println texto
 ```
 
 !!! info
@@ -242,7 +242,7 @@ println text
 A instrução `if` usa a mesma sintaxe comum em outras linguagens de programação, como Java, C, JavaScript, etc.
 
 ```groovy linenums="1"
-if( < boolean expression > ) {
+if( < expressão booleana > ) {
     // ramo verdadeiro
 }
 else {
@@ -250,12 +250,12 @@ else {
 }
 ```
 
-O ramo `else` é opcional. Além disso, os colchetes são opcionais quando a ramificação define apenas uma única instrução.
+O ramo `else` é opcional. Além disso, as chaves são opcionais quando a ramificação define apenas uma única instrução.
 
 ```groovy linenums="1"
 x = 1
 if( x > 10 )
-    println 'Hello'
+    println 'Olá'
 ```
 
 !!! tip
@@ -274,7 +274,7 @@ if( x > 10 )
     }
     ```
 
-    Can be written as:
+    Pode ser escrita como:
 
     ```groovy linenums="1"
     lista = [1,2,3]
@@ -332,7 +332,7 @@ int fib(int n) {
 assert fib(10)==89
 ```
 
-A function can take multiple arguments separating them with a comma. The `return` keyword can be omitted and the function implicitly returns the value of the last evaluated expression. Also, explicit types can be omitted, though not recommended:
+Uma função pode receber vários argumentos, separando-os com uma vírgula. A palavra-chave `return` pode ser omitida e a função retorna implicitamente o valor da última expressão avaliada. Além disso, tipos explícitos podem ser omitidos, embora não sejam recomendados:
 
 ```groovy linenums="1"
 def fact( n ) {
@@ -344,7 +344,7 @@ assert fact(5) == 120
 
 ## Clausuras
 
-Clausuras são o canivete suíço da programação com Nextflow/Groovy. Resumindo, uma clausura é um bloco de código que pode ser passado como um argumento para uma função. Clausuras também pode ser usadas para definir uma função anônima.
+Clausuras são o canivete suíço da programação com Nextflow/Groovy. Resumindo, uma clausura é um bloco de código que pode ser passado como um argumento para uma função. Clausuras também podem ser usadas para definir uma função anônima.
 
 Mais formalmente, uma clausura permite a definição de funções como objetos de primeira classe.
 
@@ -352,9 +352,9 @@ Mais formalmente, uma clausura permite a definição de funções como objetos d
 quadrado = { it * it }
 ```
 
-Os colchetes ao redor da expressão `it * it` informam ao interpretador de scripts para tratar essa expressão como código. O identificador `it` é uma variável implícita que representa o valor que é passado para a função quando ela é invocada.
+As chaves ao redor da expressão `it * it` informam ao interpretador de scripts para tratar essa expressão como código. O identificador `it` é uma variável implícita que representa o valor que é passado para a função quando ela é invocada.
 
-Depois de compilado, o objeto de função é atribuído à variável `quadrado` como qualquer outra atribuição de variável mostrada anteriormente. Para invocar a execução da clausura, use o método especial `call` ou apenas use os parênteses para especificar o(s) parâmetro(s) da clausura. Por exemplo:
+Depois de compilado, o objeto de função é atribuído à variável `quadrado` como qualquer outra atribuição de variável mostrada anteriormente. Para invocar a execução da clausura, use o método especial `call` ou simplesmente use os parênteses para especificar o(s) parâmetro(s) da clausura. Por exemplo:
 
 ```groovy linenums="1"
 assert quadrado.call(5) == 25
@@ -383,9 +383,9 @@ Também é possível definir clausuras com vários parâmetros com nomes persona
 Por exemplo, quando o método `each()` é aplicado a um mapa, ele pode receber uma clausura com dois argumentos, para os quais passa o par _chave-valor_ para cada entrada no objeto `Map`. Por exemplo:
 
 ```groovy linenums="1"
-imprimirMap = { a, b -> println "$a com o valor $b" }
+imprimirMapa = { a, b -> println "$a com o valor $b" }
 valores = [ "Yue" : "Wu", "Mark" : "Williams", "Sudha" : "Kumari" ]
-valores.each(imprimirMap)
+valores.each(imprimirMapa)
 ```
 
 ```console title="Output"
