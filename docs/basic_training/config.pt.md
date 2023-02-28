@@ -152,7 +152,7 @@ nextflow execute foo.nf -c my-env.config
 
      ```console
     BETA=/home/algum/caminho
-    ALPHA=algum valor
+    ALFA=algum valor
      ```
 
 ### Configurar processos
