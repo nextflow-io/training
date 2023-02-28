@@ -1,5 +1,5 @@
 ---
-title: Configuration
+title: Configuração
 description: Basic Nextflow Training Workshop
 ---
 
