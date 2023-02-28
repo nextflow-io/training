@@ -1,6 +1,6 @@
 ---
 title: Configuração
-description: Basic Nextflow Training Workshop
+description: Material de treinamento básico do Nextflow
 ---
 
 # Configuração do Nextflow
