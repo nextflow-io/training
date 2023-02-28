@@ -127,7 +127,7 @@ println "$params.foo $params.bar"
 O escopo `env` permite a definição de uma ou mais variáveis que serão exportadas para o ambiente onde serão executadas as tarefas do *workflow*.
 
 ```groovy linenums="1"
-env.ALPHA = 'algum valor'
+env.ALFA = 'algum valor'
 env.BETA = "$HOME/some/path"
 ```
 
