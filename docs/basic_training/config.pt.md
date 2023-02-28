@@ -201,7 +201,7 @@ A sintaxe para definir as diretivas `process` no arquivo de configuração reque
 
     script:
     """
-        your_command --cpus $task.cpus --mem $task.memory
+        seu_comando --cpus $task.cpus --mem $task.memory
     """
     }
     ```
