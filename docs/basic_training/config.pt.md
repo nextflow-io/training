@@ -31,7 +31,7 @@ process.conda = "/home/ubuntu/miniconda2/envs/nf-tutorial"
 
 !!! info
 
-Observe que *strings* precisam ser colocadas entre aspas, enquanto números e valores booleanos (`true`, `false`) não. Além disso, observe que os valores são tipados, o que significa, por exemplo, que `1` é diferente de `'1'`, pois o primeiro é interpretado como o número um, enquanto o último é interpretado como uma *string*.
+     Observe que *strings* precisam ser colocadas entre aspas, enquanto números e valores booleanos (`true`, `false`) não. Além disso, observe que os valores são tipados, o que significa, por exemplo, que `1` é diferente de `'1'`, pois o primeiro é interpretado como o número um, enquanto o último é interpretado como uma *string*.
 
 ### Variáveis de configuração
 
