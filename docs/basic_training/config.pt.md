@@ -38,7 +38,7 @@ Observe que *strings* precisam ser colocadas entre aspas, enquanto números e va
 As propriedades de configuração podem ser usadas como variáveis no próprio arquivo de configuração, usando a sintaxe usual `$propertyName` ou `${expression}`.
 
 ```groovy linenums="1"
-propertyOne = 'world'
+propriedadeUm = 'mundo'
 anotherProp = "Hello $propertyOne"
 customPath = "$PATH:/my/app/folder"
 ```
