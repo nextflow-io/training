@@ -39,7 +39,7 @@ As propriedades de configuração podem ser usadas como variáveis no próprio a
 
 ```groovy linenums="1"
 propriedadeUm = 'mundo'
-anotherProp = "Hello $propertyOne"
+umaOutraPropriedade = "Olá $propriedadeUm"
 customPath = "$PATH:/my/app/folder"
 ```
 
