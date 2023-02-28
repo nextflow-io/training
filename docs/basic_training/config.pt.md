@@ -128,7 +128,7 @@ O escopo `env` permite a definição de uma ou mais variáveis que serão export
 
 ```groovy linenums="1"
 env.ALFA = 'algum valor'
-env.BETA = "$HOME/some/path"
+env.BETA = "$HOME/algum/caminho"
 ```
 
 Salve o trecho acima como um arquivo chamado `my-env.config`. Em seguida, salve o trecho abaixo em um arquivo chamado `foo.nf`:
