@@ -66,7 +66,7 @@ As definições de configuração podem ser organizadas em diferentes escopos. P
 
 ```groovy linenums="1"
 alfa.x = 1
-alpha.y = 'valor da string..'
+alfa.y = 'valor da string..'
 
 beta {
      p = 2
