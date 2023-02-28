@@ -22,7 +22,7 @@ O mecanismo de pesquisa padrão do arquivo de configuração pode ser estendido 
 Um arquivo de configuração do Nextflow é um arquivo de texto simples contendo um conjunto de propriedades definidas usando a sintaxe:
 
 ```groovy linenums="1"
-name = value
+nome = valor
 ```
 
 ```groovy linenums="1"
