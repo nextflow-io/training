@@ -151,7 +151,7 @@ nextflow execute foo.nf -c my-env.config
 ??? result
 
      ```console
-    BETA=/home/some/path
+    BETA=/home/algum/caminho
     ALPHA=algum valor
      ```
 
