@@ -1,5 +1,5 @@
 ---
-description: Basic Nextflow Training Workshop
+description: Material de treinamento básico do Nextflow
 ---
 
 # Processos
@@ -111,7 +111,7 @@ workflow {
 
     Multiple programming languages can be used within the same workflow script. However, for large chunks of code it is better to save them into separate files and invoke them from the process script. One can store the specific scripts in the `./bin/` folder.
 
-### Script parameters
+### Parâmetros do script
 
 Script parameters (`params`) can be defined dynamically using variable values. For example:
 
@@ -190,7 +190,7 @@ workflow {
 }
 ```
 
-### Conditional script
+### Scripts condicionais
 
 The process script can also be defined in a completely dynamic manner using an `if` statement or any other expression for evaluating a string value. For example:
 
@@ -221,7 +221,7 @@ workflow {
 }
 ```
 
-## Inputs
+## Canais de entradas
 
 Nextflow processes are isolated from each other but can communicate between themselves by sending values through channels.
 
@@ -240,7 +240,7 @@ input:
   <input qualifier> <input name>
 ```
 
-### Input values
+### Valores de entrada
 
 The `val` qualifier allows you to receive data of any type as input. It can be accessed in the process script by using the specified input name, as shown in the following example:
 
@@ -276,7 +276,7 @@ process job 2
 
     The channel guarantees that items are delivered in the same order as they have been sent - but - since the process is executed in a parallel manner, there is no guarantee that they are processed in the same order as they are received.
 
-### Input files
+### Arquivo e caminhos de entrada
 
 The `path` qualifier allows the handling of file values in the process execution context. This means that Nextflow will stage it in the process execution directory, and it can be accessed in the script by using the name specified in the input declaration.
 
@@ -384,7 +384,7 @@ workflow {
         }
         ```
 
-### Combine input channels
+### Combinando canais de entrada
 
 A key feature of processes is the ability to handle inputs from multiple channels. However, it’s important to understand how channel contents and their semantics affect the execution of a process.
 
@@ -522,7 +522,7 @@ This is because _value_ channels can be consumed multiple times and do not affec
         }
         ```
 
-### Input repeaters
+### Repetidores de entradas
 
 The `each` qualifier allows you to repeat the execution of a process for each item in a collection every time new data is received. For example:
 
@@ -589,7 +589,7 @@ In the above example, every time a file of sequences is received as an input by 
         }
         ```
 
-## Outputs
+## Canais de saída
 
 The _output_ declaration block defines the channels used by the process to send out the results produced.
 
@@ -600,7 +600,7 @@ output:
   <output qualifier> <output name> , emit: <output channel>
 ```
 
-### Output values
+### Valores de saída
 
 The `val` qualifier specifies a defined _value_ in the script context. Values are frequently defined in the _input_ and/or _output_ declaration blocks, as shown in the following example:
 
@@ -627,7 +627,7 @@ workflow {
 }
 ```
 
-### Output files
+### Caminhos e arquivos de saída
 
 The `path` qualifier specifies one or more files produced by the process into the specified channel as an output.
 
@@ -654,7 +654,7 @@ In the above example the process `RANDOMNUM` creates a file named `result.txt` c
 
 Since a file parameter using the same name is declared in the output block, the file is sent over the `receiver_ch` channel when the task is complete. A downstream `process` declaring the same channel as _input_ will be able to receive it.
 
-### Multiple output files
+### Múltiplos arquivos de saída
 
 When an output file name contains a wildcard character (`*` or `?`) it is interpreted as a [glob](http://docs.oracle.com/javase/tutorial/essential/io/fileOps.html#glob) path matcher. This allows us to _capture_ multiple files into a list object and output them as a sole emission. For example:
 
@@ -702,7 +702,7 @@ Some caveats on glob pattern behavior:
         File: [chunk_aa, chunk_ab, chunk_ac, chunk_ad] => [H, o, l, a]
         ```
 
-### Dynamic output file names
+### Nomes dinâmicos de arquivos de saída
 
 When an output file name needs to be expressed dynamically, it is possible to define it using a dynamic string that references values defined in the input declaration block or in the script global context. For example:
 
@@ -736,7 +736,7 @@ workflow {
 
 In the above example, each time the process is executed an alignment file is produced whose name depends on the actual value of the `x` input.
 
-### Composite inputs and outputs
+### Entradas e saídas compostas
 
 So far we have seen how to declare multiple input and output channels that can handle one value at a time. However, Nextflow can also handle a _tuple_ of values.
 
@@ -798,7 +798,7 @@ workflow {
         }
         ```
 
-## When
+## Quando
 
 The `when` declaration allows you to define a condition that must be verified in order to execute the process. This can be any expression that evaluates a boolean value.
 
@@ -830,7 +830,7 @@ workflow {
 }
 ```
 
-## Directives
+## Diretivas
 
 Directive declarations allow the definition of optional settings that affect the execution of the current process without affecting the _semantic_ of the task itself.
 
@@ -863,9 +863,9 @@ process FOO {
 | [`disk`](https://www.nextflow.io/docs/latest/process.html#disk)     | Allows you to define how much local disk storage the process is allowed to use.                                                                      |
 | [`tag`](https://www.nextflow.io/docs/latest/process.html#tag)       | Allows you to associate each process execution with a custom label to make it easier to identify them in the log file or the trace execution report. |
 
-## Organize outputs
+## Organizando as saídas
 
-### PublishDir directive
+### A diretiva PublishDir
 
 Given each process is being executed in separate temporary `work/` folder (e.g., `work/f1/850698…`; `work/g3/239712…`; etc.), we may want to save important, non-intermediary, and/or final files in a results folder.
 
@@ -908,7 +908,7 @@ The above example will copy all blast script files created by the `BLASTSEQ` tas
 
     The publish directory can be local or remote. For example, output files could be stored using an [AWS S3 bucket](https://aws.amazon.com/s3/) by using the `s3://` prefix in the target path.
 
-### Manage semantic sub-directories
+### Gerenciar semântica de subdiretórios
 
 You can use more than one `publishDir` to keep different outputs in separate directories. For example:
 
