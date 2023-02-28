@@ -167,7 +167,7 @@ O escopo de configuração do `process` permite a configuração de quaisquer [d
 
 ```groovy linenums="1"
 process {
-     CPU = 10
+     cpus = 10
      memory = 8.GB
      container = 'biocontainers/bamtools:v2.4.0_cv3'
 }
