@@ -25,10 +25,6 @@ A Nextflow configuration file is a simple text file containing a set of properti
 name = value
 ```
 
-```groovy linenums="1"
-process.conda = "/home/ubuntu/miniconda2/envs/nf-tutorial"
-```
-
 !!! info
 
     Please note that string values need to be wrapped in quotation characters while numbers and boolean values (`true`, `false`) do not. Also, note that values are typed, meaning for example that, `1` is different from `'1'`, since the first is interpreted as the number one, while the latter is interpreted as a string value.
