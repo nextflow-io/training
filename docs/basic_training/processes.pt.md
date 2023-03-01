@@ -704,185 +704,185 @@ Algumas advertências sobre o comportamento de padrões de glob:
 
 ### Nomes dinâmicos de arquivos de saída
 
-When an output file name needs to be expressed dynamically, it is possible to define it using a dynamic string that references values defined in the input declaration block or in the script global context. For example:
+Quando um nome de arquivo de saída precisa ser expresso dinamicamente, é possível defini-lo usando uma string dinâmica que faz referência a valores definidos no bloco de declaração de entrada ou no contexto global do script. Por exemplo:
 
 ```groovy linenums="1"
-species = ['cat','dog', 'sloth']
-sequences = ['AGATAG','ATGCTCT', 'ATCCCAA']
+especies = ['gato','cachorro', 'preguiça']
+sequencias = ['AGATAG','ATGCTCT', 'ATCCCAA']
 
-Channel.fromList(species)
-        .set { species_ch }
+Channel.fromList(especies)
+        .set { canal_especies }
 
-process ALIGN {
+process ALINHAR {
 
   input:
   val x
-  val seq
+  val sequencia
 
   output:
   path "${x}.aln"
 
   script:
   """
-  echo align -in $seq > ${x}.aln
+  echo alinhar -in $sequencia > ${x}.aln
   """
 }
 
 workflow {
-  genomes = ALIGN( species_ch, sequences )
-  genomes.view()
+  genomas = ALINHAR( canal_especies, sequencias )
+  genomas.view()
 }
 ```
 
-In the above example, each time the process is executed an alignment file is produced whose name depends on the actual value of the `x` input.
+No exemplo acima, cada vez que o processo é executado, é gerado um arquivo de alinhamento cujo nome depende do valor da entrada `x`.
 
 ### Entradas e saídas compostas
 
-So far we have seen how to declare multiple input and output channels that can handle one value at a time. However, Nextflow can also handle a _tuple_ of values.
+Até agora, vimos como declarar vários canais de entrada e saída que podem lidar com um valor por vez. No entanto, o Nextflow também pode lidar com tuplas de valores.
 
-The input and output declarations for tuples must be declared with a `tuple` qualifier followed by the definition of each element in the tuple.
+As declarações de entrada e saída para tuplas devem ser declaradas com um qualificador `tuple` seguido pela definição de cada elemento na tupla.
 
 ```groovy linenums="1"
-reads_ch = Channel.fromFilePairs('data/ggal/*_{1,2}.fq')
+canal_leituras = Channel.fromFilePairs('data/ggal/*_{1,2}.fq')
 
 process FOO {
 
   input:
-    tuple val(sample_id), path(sample_id)
+    tuple val(id_amostra), path(arquivos_amostra)
 
   output:
-    tuple val(sample_id), path('sample.bam')
+    tuple val(id_amostra), path('amostra.bam')
 
   script:
   """
-    echo your_command_here --reads $sample_id > sample.bam
+    echo seu_comando_aqui --leituras $id_amostra > amostra.bam
   """
 }
 
 workflow {
-  bam_ch = FOO(reads_ch)
-  bam_ch.view()
+  canal_bam = FOO(canal_leituras)
+  canal_bam.view()
 }
 ```
 
 !!! info
 
-    In previous versions of Nextflow `tuple` was called `set` but it was used the same way with the same semantic.
+    Nas versões anteriores do Nextflow `tuple` era chamado `set`, mas era usado da mesma forma com a mesma semântica.
 
 !!! exercise
 
-    Modify the script of the previous exercise so that the _bam_ file is named as the given `sample_id`.
+    Modifique o script do exercício anterior para que o arquivo _bam_ seja nomeado com o `id_sample` fornecido.
 
     ??? solution
 
         ```groovy linenums="1"
-        reads_ch = Channel.fromFilePairs('data/ggal/*_{1,2}.fq')
+        canal_leituras = Channel.fromFilePairs('data/ggal/*_{1,2}.fq')
 
         process FOO {
 
           input:
-            tuple val(sample_id), path(sample_files)
+            tuple val(id_amostra), path(arquivos_amostra)
 
           output:
-            tuple val(sample_id), path("${sample_id}.bam")
+            tuple val(id_amostra), path("${id_amostra}.bam")
 
           script:
           """
-            echo your_command_here --reads $sample_id > ${sample_id}.bam
+            echo seu_comando_aqui --leituras $id_amostra > ${id_amostra}.bam
           """
         }
 
         workflow {
-          bam_ch = FOO(reads_ch)
-          bam_ch.view()
+          canal_bam = FOO(canal_leituras)
+          canal_bam.view()
         }
         ```
 
 ## Quando
 
-The `when` declaration allows you to define a condition that must be verified in order to execute the process. This can be any expression that evaluates a boolean value.
+A declaração `when` permite que você defina uma condição que deve ser verificada para executar o processo. Pode ser qualquer expressão que avalie um valor booleano.
 
-It is useful to enable/disable the process execution depending on the state of various inputs and parameters. For example:
+É útil habilitar/desabilitar a execução do processo dependendo do estado de várias entradas e parâmetros. Por exemplo:
 
 ```groovy linenums="1"
-params.dbtype = 'nr'
+params.tipo_banco = 'nr'
 params.prot = 'data/prots/*.tfa'
-proteins = Channel.fromPath(params.prot)
+proteinas = Channel.fromPath(params.prot)
 
-process FIND {
+process ENCONTRAR {
   debug true
 
   input:
   path fasta
-  val type
+  val tipo
 
   when:
-  fasta.name =~ /^BB11.*/ && type == 'nr'
+  fasta.name =~ /^BB11.*/ && tipo == 'nr'
 
   script:
   """
-  echo blastp -query $fasta -db nr
+  echo blastp -checar $fasta -tipo_banco nr
   """
 }
 
 workflow {
-  result = FIND(proteins, params.dbtype)
+  result = ENCONTRAR(proteinas, params.tipo_banco)
 }
 ```
 
 ## Diretivas
 
-Directive declarations allow the definition of optional settings that affect the execution of the current process without affecting the _semantic_ of the task itself.
+As declarações de diretiva permitem a definição de configurações opcionais que afetam a execução do processo atual sem afetar a _semântica_ da própria tarefa.
 
-They must be entered at the top of the process body, before any other declaration blocks (i.e., `input`, `output`, etc.).
+Elas devem ser inseridas no topo do corpo do processo, antes de quaisquer outros blocos de declaração (ou seja, `input`, `output`, etc.).
 
-Directives are commonly used to define the amount of computing resources to be used or other meta directives that allow the definition of extra configuration of logging information. For example:
+Diretivas são comumente usadas para definir a quantidade de recursos computacionais a serem usados ou outras meta diretivas que permitem a definição de configuração extra de informações de log. Por exemplo:
 
 ```groovy linenums="1"
 process FOO {
   cpus 2
   memory 1.GB
-  container 'image/name'
+  container 'nome/imagem'
 
   script:
   """
-  echo your_command --this --that
+  echo seu_comando --isso --aquilo
   """
 }
 ```
 
 !!! info ""
 
-    :material-lightbulb: The complete list of directives is available [at this link](https://www.nextflow.io/docs/latest/process.html#directives).
+    :material-lightbulb: A lista completa de diretivas está disponível [aqui](https://www.nextflow.io/docs/latest/process.html#directives).
 
-| Name                                                                | Description                                                                                                                                          |
+| Nome                                                                | Descrição                                                                                                                                          |
 | ------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`cpus`](https://www.nextflow.io/docs/latest/process.html#cpus)     | Allows you to define the number of (logical) CPUs required by the process’ task.                                                                     |
-| [`time`](https://www.nextflow.io/docs/latest/process.html#time)     | Allows you to define how long a process is allowed to run (e.g., time _1h_: 1 hour, _1s_ 1 second, _1m_ 1 minute, _1d_ 1 day).                       |
-| [`memory`](https://www.nextflow.io/docs/latest/process.html#memory) | Allows you to define how much memory the process is allowed to use (e.g., _2 GB_ is 2 GB). Can also use B, KB,MB,GB and TB.                          |
-| [`disk`](https://www.nextflow.io/docs/latest/process.html#disk)     | Allows you to define how much local disk storage the process is allowed to use.                                                                      |
-| [`tag`](https://www.nextflow.io/docs/latest/process.html#tag)       | Allows you to associate each process execution with a custom label to make it easier to identify them in the log file or the trace execution report. |
+| [`cpus`](https://www.nextflow.io/docs/latest/process.html#cpus)     | Permite definir o número de CPUs (lógicas) necessárias para a tarefa do processo.                                                                     |
+| [`time`](https://www.nextflow.io/docs/latest/process.html#time)     | Permite definir por quanto tempo um processo pode ser executado (por exemplo, tempo _1h_: 1 hora, _1s_ 1 segundo, _1m_ 1 minuto, _1d_ 1 dia).                       |
+| [`memory`](https://www.nextflow.io/docs/latest/process.html#memory) | Permite definir quanta memória o processo pode usar (por exemplo, _2 GB_ é 2 GB). Também pode usar B, KB, MB, GB e TB.                          |
+| [`disk`](https://www.nextflow.io/docs/latest/process.html#disk)     | Permite definir a quantidade de armazenamento em disco local que o processo pode usar.                                                                      |
+| [`tag`](https://www.nextflow.io/docs/latest/process.html#tag)       | Permite associar cada execução de processo a um rótulo personalizado para facilitar sua identificação no arquivo de log ou no relatório de execução do rastreamento. |
 
 ## Organizando as saídas
 
 ### A diretiva PublishDir
 
-Given each process is being executed in separate temporary `work/` folder (e.g., `work/f1/850698…`; `work/g3/239712…`; etc.), we may want to save important, non-intermediary, and/or final files in a results folder.
+Dado que cada processo está sendo executado em uma pasta `work/` temporária separada (por exemplo, `work/f1/850698…`; `work/g3/239712…`; etc.), podemos salvar informações importantes, não intermediárias, e/ou arquivos finais em uma pasta de resultados.
 
 !!! tip
 
-    Remember to delete the work folder from time to time to clear your intermediate files and stop them from filling your computer!
+    Lembre-se de excluir a pasta de trabalho (`work`) de vez em quando para limpar seus arquivos intermediários e impedir que eles encham seu computador!
 
-To store our workflow result files, we need to explicitly mark them using the directive [publishDir](https://www.nextflow.io/docs/latest/process.html#publishdir) in the process that’s creating the files. For example:
+Para armazenar nossos arquivos de resultado do fluxo de trabalho, precisamos marcá-los explicitamente usando a diretiva [publishDir](https://www.nextflow.io/docs/latest/process.html#publishdir) no processo que está criando os arquivos. Por exemplo:
 
 ```groovy linenums="1"
-params.outdir = 'my-results'
+params.diretorio_saida = 'meus-resultados'
 params.prot = 'data/prots/*.tfa'
-proteins = Channel.fromPath(params.prot)
+proteinas = Channel.fromPath(params.prot)
 
 
 process BLASTSEQ {
-    publishDir "$params.outdir/bam_files", mode: 'copy'
+    publishDir "$params.diretorio_saida/arquivos_bam", mode: 'copy'
 
     input:
     path fasta
@@ -892,59 +892,59 @@ process BLASTSEQ {
 
     script:
     """
-    echo blastp $fasta > ${fasta}_result.txt
+    echo blastp $fasta > ${fasta}_resultado.txt
     """
 }
 
 workflow {
-  blast_ch = BLASTSEQ(proteins)
-  blast_ch.view()
+  canal_blast = BLASTSEQ(proteinas)
+  canal_blast.view()
 }
 ```
 
-The above example will copy all blast script files created by the `BLASTSEQ` task into the directory path `my-results`.
+O exemplo acima copiará todos os arquivos de script blast criados pela tarefa `BLASTSEQ` no caminho do diretório `meus-resultados`.
 
 !!! tip
 
-    The publish directory can be local or remote. For example, output files could be stored using an [AWS S3 bucket](https://aws.amazon.com/s3/) by using the `s3://` prefix in the target path.
+    O diretório de publicação pode ser local ou remoto. Por exemplo, os arquivos de saída podem ser armazenados usando um [bucket AWS S3](https://aws.amazon.com/s3/) usando o prefixo `s3://` no caminho de destino.
 
 ### Gerenciar semântica de subdiretórios
 
-You can use more than one `publishDir` to keep different outputs in separate directories. For example:
+Você pode usar mais de um `publishDir` para manter saídas diferentes em diretórios separados. Por exemplo:
 
 ```groovy linenums="1"
-params.reads = 'data/reads/*_{1,2}.fq.gz'
-params.outdir = 'my-results'
+params.leituras = 'data/reads/*_{1,2}.fq.gz'
+params.diretorio_saida = 'meus-resultados'
 
-samples_ch = Channel.fromFilePairs(params.reads, flat: true)
+canal_amostras = Channel.fromFilePairs(params.leituras, flat: true)
 
 process FOO {
-  publishDir "$params.outdir/$sampleId/", pattern: '*.fq'
-  publishDir "$params.outdir/$sampleId/counts", pattern: "*_counts.txt"
-  publishDir "$params.outdir/$sampleId/outlooks", pattern: '*_outlook.txt'
+  publishDir "$params.diretorio_saida/$id_amostra/", pattern: '*.fq'
+  publishDir "$params.diretorio_saida/$id_amostra/contagens", pattern: "*_contagens.txt"
+  publishDir "$params.diretorio_saida/$id_amostra/panoramas", pattern: '*_panorama.txt'
 
   input:
-    tuple val(sampleId), path('sample1.fq.gz'), path('sample2.fq.gz')
+    tuple val(id_amostra), path('sample1.fq.gz'), path('sample2.fq.gz')
 
   output:
     path "*"
 
   script:
   """
-    < sample1.fq.gz zcat > sample1.fq
-    < sample2.fq.gz zcat > sample2.fq
+    < sample1.fq.gz zcat > amostra1.fq
+    < sample2.fq.gz zcat > amostra2.fq
 
-    awk '{s++}END{print s/4}' sample1.fq > sample1_counts.txt
-    awk '{s++}END{print s/4}' sample2.fq > sample2_counts.txt
+    awk '{s++}END{print s/4}' amostra1.fq > amostra1_contagens.txt
+    awk '{s++}END{print s/4}' amostra2.fq > amostra2_contagens.txt
 
-    head -n 50 sample1.fq > sample1_outlook.txt
-    head -n 50 sample2.fq > sample2_outlook.txt
+    head -n 50 sample1.fq > amostra1_panorama.txt
+    head -n 50 sample2.fq > amostra2_panorama.txt
   """
 }
 
 workflow {
-  out_channel = FOO(samples_ch)
+  canal_saida = FOO(canal_amostras)
 }
 ```
 
-The above example will create an output structure in the directory `my-results`, that contains a separate sub-directory for each given sample ID, each containing the folders `counts` and `outlooks`.
+O exemplo acima criará uma estrutura de saída no diretório `meus-resultados`, que contém um subdiretório separado para cada ID de amostra fornecido, cada um contendo as pastas `contagens` e `panoramas`.
