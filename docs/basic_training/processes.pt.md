@@ -237,7 +237,7 @@ O bloco `input` segue a sintaxe mostrada abaixo:
 
 ```groovy linenums="1"
 input:
-  <qualificador da variável entrada> <nome da variável entrada>
+  <qualificador da variável de entrada> <nome da variável de entrada>
 ```
 
 ### Valores de entrada
@@ -591,21 +591,21 @@ No exemplo acima, toda vez que um arquivo de sequências é recebido como entrad
 
 ## Canais de saída
 
-The _output_ declaration block defines the channels used by the process to send out the results produced.
+O bloco _output_ define os canais usados pelo processo para enviar os resultados produzidos.
 
 Only one output block, that can contain one or more output declaration, can be defined. The output block follows the syntax shown below:
 
 ```groovy linenums="1"
 output:
-  <output qualifier> <output name> , emit: <output channel>
+  <qualificador da variável de saída> <nome da variável de saída> , emit: <nome do canal de saída>
 ```
 
 ### Valores de saída
 
-The `val` qualifier specifies a defined _value_ in the script context. Values are frequently defined in the _input_ and/or _output_ declaration blocks, as shown in the following example:
+O qualificador `val` especifica um valor definido no contexto do script. Os valores são freqüentemente definidos nos blocos de _input_ e/ou _output_, conforme mostrado no exemplo a seguir:
 
 ```groovy linenums="1"
-methods = ['prot','dna', 'rna']
+metodos = ['prot','dna', 'rna']
 
 process FOO {
 
@@ -617,89 +617,89 @@ process FOO {
 
   script:
   """
-  echo $x > file
+  echo $x > arquivo
   """
 }
 
 workflow {
-  receiver_ch = FOO(Channel.of(methods))
-  receiver_ch.view { "Received: $it" }
+  canal_de_recebimento = FOO(Channel.of(metodos))
+  canal_de_recebimento.view { "Recebido: $it" }
 }
 ```
 
 ### Caminhos e arquivos de saída
 
-The `path` qualifier specifies one or more files produced by the process into the specified channel as an output.
+O qualificador `path` especifica um ou mais arquivos produzidos pelo processo no canal especificado como uma saída.
 
 ```groovy linenums="1"
-process RANDOMNUM {
+process NUMALEATORIO {
 
     output:
-    path 'result.txt'
+    path 'resultado.txt'
 
     script:
     """
-    echo $RANDOM > result.txt
+    echo $RANDOM > resultado.txt
     """
 }
 
 
 workflow {
-  receiver_ch = RANDOMNUM()
-  receiver_ch.view { "Received: " + it.text }
+  canal_de_recebimento = NUMALEATORIO()
+  canal_de_recebimento.view { "Recebido: " + it.text }
 }
 ```
 
-In the above example the process `RANDOMNUM` creates a file named `result.txt` containing a random number.
+No exemplo acima, o processo `NUMALEATORIO` cria um arquivo chamado `resultado.txt` contendo um número aleatório.
 
-Since a file parameter using the same name is declared in the output block, the file is sent over the `receiver_ch` channel when the task is complete. A downstream `process` declaring the same channel as _input_ will be able to receive it.
+Como um parâmetro de arquivo usando o mesmo nome é declarado no bloco de saída, o arquivo é enviado pelo canal `canal_de_recebimento` quando a tarefa é concluída. Um processo posterior declarando o mesmo canal como _input_ será capaz de recebê-lo.
 
 ### Múltiplos arquivos de saída
 
-When an output file name contains a wildcard character (`*` or `?`) it is interpreted as a [glob](http://docs.oracle.com/javase/tutorial/essential/io/fileOps.html#glob) path matcher. This allows us to _capture_ multiple files into a list object and output them as a sole emission. For example:
+Quando um nome de arquivo de saída contém um caractere curinga (`*` ou `?`), ele é interpretado como um [glob](http://docs.oracle.com/javase/tutorial/essential/io/fileOps.html#glob) de correspondência para um caminho. Isso nos permite _capturar_ vários arquivos em um objeto de lista e exibi-los como uma única emissão. Por exemplo:
 
 ```groovy linenums="1"
-process SPLITLETTERS {
+process SEPARARLETRAS {
 
     output:
-    path 'chunk_*'
+    path 'pedaco_*'
 
     """
-    printf 'Hola' | split -b 1 - chunk_
+    printf 'Hola' | split -b 1 - pedaco_
     """
 }
 
 workflow {
-    letters = SPLITLETTERS()
+    letters = SEPARARLETRAS()
     letters
         .flatMap()
-        .view { "File: ${it.name} => ${it.text}" }
+        .view { "Arquivo: ${it.name} => ${it.text}" }
 }
 ```
 
-Prints the following:
+Imprime o seguinte:
 
 ```console
-File: chunk_aa => H
-File: chunk_ab => o
-File: chunk_ac => l
-File: chunk_ad => a
+Arquivo: pedaco_aa => H
+Arquivo: pedaco_ab => o
+Arquivo: pedaco_ac => l
+Arquivo: pedaco_ad => a
 ```
 
-Some caveats on glob pattern behavior:
+Algumas advertências sobre o comportamento de padrões de glob:
 
--   Input files are not included in the list of possible matches
--   Glob pattern matches both files and directory paths
--   When a two stars pattern `**` is used to recourse across directories, only file paths are matched i.e., directories are not included in the result list.
+-   Os arquivos de entrada não estão incluídos na lista de possíveis correspondências
+-   O padrão glob corresponde tanto a arquivos quanto caminhos de diretório
+-   Quando um padrão de duas estrelas `**` é usado para acessar os diretórios, apenas os caminhos de arquivo são correspondidos, ou seja, os diretórios não são incluídos na lista de resultados.
 
 !!! exercise
 
-    Remove the `flatMap` operator and see out the output change. The documentation for the `flatMap` operator is available at [this link](https://www.nextflow.io/docs/latest/operator.html#flatmap).
+    Remova o operador `flatMap` e veja a mudança de saída. A documentação para o operador `flatMap` está disponível [nesse link](https://www.nextflow.io/docs/latest/operator.html#flatmap).
 
     ??? result
 
         ```groovy
-        File: [chunk_aa, chunk_ab, chunk_ac, chunk_ad] => [H, o, l, a]
+        File: [pedaco_aa, pedaco_ab, pedaco_ac, pedaco_ad] => [H, o, l, a]
         ```
 
 ### Nomes dinâmicos de arquivos de saída
