@@ -278,121 +278,121 @@ tarefa 2 do processo
 
 ### Arquivo e caminhos de entrada
 
-The `path` qualifier allows the handling of file values in the process execution context. This means that Nextflow will stage it in the process execution directory, and it can be accessed in the script by using the name specified in the input declaration.
+O qualificador `path` permite a manipulação de arquivos no contexto de execução do processo. Isso significa que o Nextflow irá mover os arquivos necessários para o diretório de execução do processo e estes poderão ser acessados no script usando o nome especificado na declaração de entrada.
 
 ```groovy linenums="1"
-reads = Channel.fromPath( 'data/ggal/*.fq' )
+leituras = Channel.fromPath( 'data/ggal/*.fq' )
 
 process FOO {
   debug true
 
   input:
-  path 'sample.fastq'
+  path 'amostra.fastq'
 
   script:
   """
-  ls sample.fastq
+  ls amostra.fastq
   """
 }
 
 workflow {
-  result = FOO(reads)
+  resultado = FOO(leituras)
 }
 ```
 
-The input file name can also be defined using a variable reference as shown below:
+O nome do arquivo de entrada também pode ser definido usando uma referência de variável conforme mostrado abaixo:
 
 ```groovy linenums="1"
-reads = Channel.fromPath( 'data/ggal/*.fq' )
+leituras = Channel.fromPath( 'data/ggal/*.fq' )
 
 process FOO {
   debug true
 
   input:
-  path sample
+  path amostra
 
   script:
   """
-  ls  $sample
+  ls  $amostra
   """
 }
 
 workflow {
-  result = FOO(reads)
+  resultado = FOO(leituras)
 }
 ```
 
-The same syntax is also able to handle more than one input file in the same execution and only requires changing the channel composition.
+A mesma sintaxe também é capaz de lidar com mais de um arquivo de entrada na mesma execução e requer apenas a alteração da composição do canal.
 
 ```groovy linenums="1"
-reads = Channel.fromPath( 'data/ggal/*.fq' )
+leituras = Channel.fromPath( 'data/ggal/*.fq' )
 
 process FOO {
   debug true
 
   input:
-  path sample
+  path amostra
 
   script:
   """
-  ls -lh $sample
+  ls -lh $amostra
   """
 }
 
 workflow {
-  FOO(reads.collect())
+  FOO(leituras.collect())
 }
 ```
 
 !!! warning
 
-    In the past, the `file` qualifier was used for files, but the `path` qualifier should be preferred over file to handle process input files when using Nextflow 19.10.0 or later. When a process declares an input file, the corresponding channel elements must be **file** objects created with the file helper function from the file specific channel factories (e.g., `Channel.fromPath` or `Channel.fromFilePairs`).
+    No passado, o qualificador `file` era usado para arquivos, mas o qualificador `path` deve ser preferido ao `file` para lidar com arquivos de entrada de processo ao usar o Nextflow 19.10.0 ou posterior. Quando um processo declara um arquivo de entrada, os elementos de canal correspondentes devem ser objetos **file** criados com a função auxiliar de arquivo das fábricas de canal específicas de arquivo (por exemplo, `Channel.fromPath` ou `Channel.fromFilePairs`).
 
 !!! exercise
 
-    Write a script that creates a channel containing all read files matching the pattern `data/ggal/*_1.fq` followed by a process that concatenates them into a single file and prints the first 20 lines.
+    Escreva um script que crie um canal contendo todos as leituras correspondentes ao padrão `data/ggal/*_1.fq` seguido por um processo que os concatene em um único arquivo e imprima as primeiras 20 linhas.
 
 
     ??? solution
 
         ```groovy linenums="1"
-        params.reads = "$baseDir/data/ggal/*_1.fq"
+        params.leituras = "$baseDir/data/ggal/*_1.fq"
 
         Channel
-          .fromPath( params.reads )
-          .set { read_ch }
+          .fromPath( params.leituras )
+          .set { canal_leituras }
 
-        process CONCATENATE {
-          tag "Concat all files"
+        process CONCATENE {
+          tag "Concatene todos os arquivos"
 
           input:
           path '*'
 
           output:
-          path 'top_10_lines'
+          path 'top_10_linhas'
 
           script:
           """
-          cat * > concatenated.txt
-          head -n 20 concatenated.txt > top_10_lines
+          cat * > concatenado.txt
+          head -n 20 concatenado.txt > top_10_linhas
           """
         }
 
         workflow {
-          concat_ch = CONCATENATE(read_ch.collect())
-          concat_ch.view()
+          canal_concatenado = CONCATENE(canal_leituras.collect())
+          canal_concatenado.view()
         }
         ```
 
 ### Combinando canais de entrada
 
-A key feature of processes is the ability to handle inputs from multiple channels. However, it’s important to understand how channel contents and their semantics affect the execution of a process.
+Uma característica fundamental dos processos é a capacidade de lidar com entradas de vários canais. No entanto, é importante entender como o conteúdo do canal e sua semântica afetam a execução de um processo.
 
-Consider the following example:
+Considere o seguinte exemplo:
 
 ```groovy linenums="1"
-ch1 = Channel.of(1,2,3)
-ch2 = Channel.of('a','b','c')
+canal1 = Channel.of(1,2,3)
+canal2 = Channel.of('a','b','c')
 
 process FOO {
   debug true
@@ -403,34 +403,34 @@ process FOO {
 
   script:
     """
-    echo $x and $y
+    echo $x e $y
     """
 }
 
 workflow {
-  FOO(ch1, ch2)
+  FOO(canal1, canal2)
 }
 ```
 
-Both channels emit three values, therefore the process is executed three times, each time with a different pair:
+Ambos os canais emitem três valores, portanto o processo é executado três vezes, cada vez com um par diferente:
 
 -   `(1, a)`
 -   `(2, b)`
 -   `(3, c)`
 
-What is happening is that the process waits until there’s a complete input configuration, i.e., it receives an input value from all the channels declared as input.
+O que está acontecendo é que o processo espera até que haja uma configuração de entrada completa, ou seja, recebe um valor de entrada de todos os canais declarados como entrada.
 
-When this condition is verified, it consumes the input values coming from the respective channels, spawns a task execution, then repeats the same logic until one or more channels have no more content.
+Quando essa condição é verificada, ele consome os valores de entrada provenientes dos respectivos canais, gera uma execução de tarefa e repete a mesma lógica até que um ou mais canais não tenham mais conteúdo.
 
-This means channel values are consumed serially one after another and the first empty channel causes the process execution to stop, even if there are other values in other channels.
+Isso significa que os valores do canal são consumidos serialmente um após o outro e o primeiro canal vazio faz com que a execução do processo pare, mesmo que existam outros valores em outros canais.
 
-**So what happens when channels do not have the same cardinality (i.e., they emit a different number of elements)?**
+**Então, o que acontece quando os canais não têm a mesma cardinalidade (isto é, eles emitem um número diferente de elementos)?**
 
-For example:
+Por exemplo:
 
 ```groovy linenums="1"
-input1 = Channel.of(1,2)
-input2 = Channel.of('a','b','c','d')
+entrada1 = Channel.of(1,2)
+entrada2 = Channel.of('a','b','c','d')
 
 process FOO {
   debug true
@@ -441,24 +441,24 @@ process FOO {
 
   script:
     """
-    echo $x and $y
+    echo $x e $y
     """
 }
 
 workflow {
-  FOO(input1, input2)
+  FOO(entrada1, entrada2)
 }
 ```
 
-In the above example, the process is only executed twice because the process stops when a channel has no more data to be processed.
+No exemplo acima, o processo só é executado duas vezes porque o processo para quando um canal não tem mais dados para serem processados.
 
-However, what happens if you replace value x with a `value` channel?
+No entanto, o que acontece se você substituir o valor x por um canal de valor?
 
-Compare the previous example with the following one :
+Compare o exemplo anterior com o seguinte :
 
 ```groovy linenums="1"
-input1 = Channel.value(1)
-input2 = Channel.of('a','b','c')
+entrada1 = Channel.value(1)
+entrada2 = Channel.of('a','b','c')
 
 process BAR {
   debug true
@@ -469,123 +469,123 @@ process BAR {
 
   script:
     """
-    echo $x and $y
+    echo $x e $y
     """
 }
 
 workflow {
-  BAR(input1, input2)
+  BAR(entrada1, entrada2)
 }
 ```
 
 ```console title="Script output"
-1 and b
-1 and a
-1 and c
+1 e b
+1 e a
+1 e c
 ```
 
-This is because _value_ channels can be consumed multiple times and do not affect process termination.
+Isso ocorre porque os canais de valor podem ser consumidos várias vezes e não afetam o término do processo.
 
 !!! exercise
 
-    Write a process that is executed for each read file matching the pattern `data/ggal/*_1.fq` and use the same `data/ggal/transcriptome.fa` in each execution.
+    Escreva um processo que é executado para cada arquivo de leitura correspondente ao padrão `data/ggal/*_1.fq` e use o mesmo `data/ggal/transcriptome.fa` em cada execução.
 
     ??? solution
 
         ```groovy linenums="1"
-        params.reads = "$baseDir/data/ggal/*_1.fq"
-        params.transcriptome_file = "$baseDir/data/ggal/transcriptome.fa"
+        params.leituras = "$baseDir/data/ggal/*_1.fq"
+        params.arquivo_transcriptoma = "$baseDir/data/ggal/transcriptome.fa"
 
         Channel
-            .fromPath( params.reads )
-            .set { read_ch }
+            .fromPath( params.leituras )
+            .set { canal_leituras }
 
-        process COMMAND {
-          tag "Run_command"
+        process COMANDO {
+          tag "Execute_comando"
 
           input:
-          path reads
-          path transcriptome
+          path leituras
+          path transcriptoma
 
           output:
-          path result
+          path resultado
 
           script:
           """
-          echo your_command $reads $transcriptome > result
+          echo seu_comando $leituras $transcriptoma > resultado
           """
         }
 
         workflow {
-          concat_ch = COMMAND(read_ch, params.transcriptome_file)
-          concat_ch.view()
+          canal_concatenado = COMANDO(canal_leituras, params.arquivo_transcriptoma)
+          canal_concatenado.view()
         }
         ```
 
 ### Repetidores de entradas
 
-The `each` qualifier allows you to repeat the execution of a process for each item in a collection every time new data is received. For example:
+O qualificador `each` permite que você repita a execução de um processo para cada item em uma coleção toda vez que novos dados são recebidos. Por exemplo:
 
 ```groovy linenums="1"
-sequences = Channel.fromPath('data/prots/*.tfa')
-methods = ['regular', 'espresso', 'psicoffee']
+sequencias = Channel.fromPath('data/prots/*.tfa')
+metodos = ['regular', 'espresso', 'psicoffee']
 
-process ALIGNSEQUENCES {
+process ALINHESEQUENCIAS {
   debug true
 
   input:
-  path seq
-  each mode
+  path sequencia
+  each modo
 
   script:
   """
-  echo t_coffee -in $seq -mode $mode
+  echo t_coffee -in $sequencia -mode $modo
   """
 }
 
 workflow {
-  ALIGNSEQUENCES(sequences, methods)
+  ALINHESEQUENCIAS(sequencias, metodos)
 }
 ```
 
-In the above example, every time a file of sequences is received as an input by the process, it executes three tasks, each running a different alignment method set as a `mode` variable. This is useful when you need to repeat the same task for a given set of parameters.
+No exemplo acima, toda vez que um arquivo de sequências é recebido como entrada pelo processo, ele executa três tarefas, cada uma executando um método de alinhamento diferente definido como uma variável `modo`. Isso é útil quando você precisa repetir a mesma tarefa para um determinado conjunto de parâmetros.
 
 !!! exercise
 
-    Extend the previous example so a task is executed for each read file matching the pattern `data/ggal/*_1.fq` and repeat the same task with both `salmon` and `kallisto`.
+    Estenda o exemplo anterior para que uma tarefa seja executada para cada arquivo de leitura correspondente ao padrão `data/ggal/*_1.fq` e repita a mesma tarefa com `salmon` e `kallisto`.
 
     ??? solution
 
         ```groovy linenums="1"
-        params.reads = "$baseDir/data/ggal/*_1.fq"
-        params.transcriptome_file = "$baseDir/data/ggal/transcriptome.fa"
-        methods= ['salmon', 'kallisto']
+        params.leituras = "$baseDir/data/ggal/*_1.fq"
+        params.arquivo_transcriptoma = "$baseDir/data/ggal/transcriptome.fa"
+        metodos= ['salmon', 'kallisto']
 
         Channel
-            .fromPath( params.reads )
-            .set { read_ch }
+            .fromPath( params.leituras )
+            .set { canal_leituras }
 
-        process COMMAND {
-          tag "Run_command"
+        process COMANDO {
+          tag "Execute_comando"
 
           input:
-          path reads
-          path transcriptome
-          each mode
+          path leituras
+          path transcriptoma
+          each modo
 
           output:
           path result
 
           script:
           """
-          echo $mode $reads $transcriptome > result
+          echo $modo $leituras $transcriptoma > resultado
           """
         }
 
         workflow {
-          concat_ch = COMMAND(read_ch , params.transcriptome_file, methods)
-          concat_ch
-              .view { "To run : ${it.text}" }
+          canal_concatenado = COMANDO(canal_leituras , params.arquivo_transcriptoma, metodos)
+          canal_concatenado
+              .view { "Para executar : ${it.text}" }
         }
         ```
 
