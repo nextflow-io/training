@@ -78,14 +78,14 @@ beta {
 
 O escopo `params` permite a definição de parâmetros que substituem os valores definidos no script principal do *workflow*.
 
-Isso é útil para reforçar um ou mais parâmetros de execução em um arquivo separado.
+Isso é útil para reforçar o uso de um ou mais parâmetros de execução em um arquivo separado.
 
-```groovy linenums="1" title="Config file"
+```groovy linenums="1" title="Arquivo de configuração"
 params.foo = 'Bonjour'
 params.bar = 'le monde!'
 ```
 
-```groovy linenums="1" title="Workflow script"
+```groovy linenums="1" title="Script do workflow"
 params.foo = 'Hello'
 params.bar = 'world!'
 
@@ -95,32 +95,31 @@ println "$params.foo $params.bar"
 
 !!! exercise
 
+    Salve o primeiro treco como `nextflow.config` e o segundo como `params.nf`. Em seguida, execute:
 
-     Salve o primeiro trecho como `nextflow.config` e o segundo como `params.nf`. Então execute:
+    ```bash
+    nextflow run params.nf
+    ```
 
-     ```bash
-     nextflow run params.nf
-     ```
+    ??? result
 
-     ??? result
+        ```console
+        Bonjour le monde!
+        ```
 
-         ```console
-         Bonjour le monde!
-         ```
+    Execute novamente o comando anterior especificando o parâmetro `foo` na linha de comando:
 
-     Execute está novamente especificando o parâmetro `foo` na linha de comando:
+    ```bash
+    nextflow run params.nf --foo Hola
+    ```
 
-     ```bash
-     nextflow run params.nf --foo Hola
-     ```
+    ??? result
 
-     ??? result
+        ```console
+        Hola le monde!
+        ```
 
-         ```console
-         Hola le monde!
-         ```
-
-     Compare o resultado das duas execuções.
+    Compare o resultado das duas execuções.
 
 ### Configurar ambiente
 
@@ -157,13 +156,13 @@ nextflow execute foo.nf -c my-env.config
 
 ### Configurar processos
 
-`process` [directives](https://www.nextflow.io/docs/latest/process.html#directives) permitem a especificação de configurações para a execução da tarefa, como `cpus`, `memory`, `container`, e outros recursos no script do pipeline.
+A [diretiva](https://www.nextflow.io/docs/latest/process.html#directives) `process`  permite a especificação de configurações para a execução de uma tarefa, como `cpus`, `memory`, `container`, além de outros recursos, no script do pipeline.
 
-Isso é útil ao criarmos um exemplo-teste ou um protótipo de fluxo de trabalho.
+Isso é útil ao criarmos um exemplo-teste ou um protótipo para o nosso pipeline.
 
-No entanto, é sempre uma boa prática desacoplar a lógica de execução do fluxo de trabalho das configurações do processo. Assim, é altamente recomendável definir as configurações do processo no arquivo de configuração do fluxo de trabalho em vez de no script do fluxo de trabalho.
+No entanto, é sempre uma boa prática desassociar a lógica de execução do pipeline das configurações que serão utilizadas por ele. Assim, é altamente recomendável definir as configurações do processo no arquivo de configuração do pipeline em vez de no script do pipeline.
 
-O escopo de configuração do `process` permite a configuração de quaisquer [diretivas] do `process` (https://www.nextflow.io/docs/latest/process.html#directives) no arquivo de configuração do Nextflow. Por exemplo:
+Além disso, quaisquer [diretivas](https://www.nextflow.io/docs/latest/process.html#directives) do escopo dos processos (`process`) podem ser usadas no arquivo de configuração. 
 
 ```groovy linenums="1"
 process {
@@ -173,22 +172,22 @@ process {
 }
 ```
 
-O trecho de configuração acima define as diretivas `cpus`, `memory` e `container` para todos os processos em seu script do *workflow*.
+O trecho de configuração acima define as diretivas `cpus`, `memory` e `container` para todos os processos em seu pipeline.
 
 O [seletor de processo](https://www.nextflow.io/docs/latest/config.html#process-selectors) pode ser usado para aplicar a configuração a um processo específico ou grupo de processos (discutido posteriormente).
 
 !!! info
 
-     As unidades de memória e a duração de tempo podem ser especificadas usando uma notação baseada em string na qual o(s) dígito(s) e a unidade **podem** ser separados por um espaço em branco, ou usando a notação numérica na qual o(s) dígito(s) e o(s) unidade são separados por um ponto e não são colocados entre aspas.
+     As unidades de memória e a duração de tempo podem ser especificadas usando uma notação baseada em string na qual o(s) dígito(s) e a unidade **podem** ser separados por um espaço em branco. Também pode-se usar a notação numérica na qual o(s) dígito(s) e a(s) unidade(s) são separados por um ponto e não são colocados entre aspas.
 
 | Sintaxe de string 	| Sintaxe numérica 	| Valor 	|
 |---	|---	|---	|
 | `'10 KB'` 	| `10.KB` 	| 10240 bytes 	|
 | `'500 MB'` 	| `500.MB` 	| 524288000 bytes 	|
-| `'1 min'` 	| 1.min 	| 60 segundos 	|
+| `'1 min'` 	| `1.min` 	| 60 segundos 	|
 | `'1 hour 25 sec'` 	| \- 	| 1 hora e 25 segundos 	|
 
-A sintaxe para definir as diretivas `process` no arquivo de configuração requer `=` (ou seja, operador de atribuição), enquanto não deve ser usado ao definir as diretivas do processo no script do fluxo de trabalho.
+A sintaxe para definir as diretivas `process` no arquivo de configuração requer `=` (ou seja, operador de atribuição). Esta notação não deve ser usada para definir as diretivas do processo no script do pipeline.
 
 ??? example
 
@@ -214,7 +213,7 @@ process foo {
 }
 ```
 
-Diretivas que exigem mais de um valor, por exemplo [pod](https://www.nextflow.io/docs/latest/process.html#pod), no arquivo de configuração, precisam ser expresso como um objeto de map.
+Diretivas que exigem mais de um valor, como a diretiva [pod](https://www.nextflow.io/docs/latest/process.html#pod), precisam ser expressas como um objeto *map* no arquivo de configuração.
 
 ```groovy linenums="1"
 process {
@@ -222,7 +221,7 @@ process {
 }
 ```
 
-Por fim, as diretivas que devem ser repetidas na definição do processo, nos arquivos de configuração, precisam ser definidas como um objeto de lista. Por exemplo:
+Por fim, as diretivas que devem ser repetidas na definição do processo e nos arquivos de configuração precisam ser definidas como um objeto lista. Por exemplo:
 
 ```groovy linenums="1"
 process {
@@ -240,7 +239,7 @@ process.container = 'nextflow/rnaseq-nf'
 docker.enabled = true
 ```
 
-O uso de IDs de imagem docker "SHA256" únicos garante que o conteúdo da imagem não mude com o tempo, por exemplo:
+O uso de IDs "SHA256" únicos de imagens docker garante que o conteúdo da imagem não mude com o tempo, por exemplo:
 
 ```groovy linenums="1"
 process.container = 'nextflow/rnaseq-nf@sha256:aeacbd7ea1154f263cda972a96920fb228b2033544c2641476350b9317dab266'
@@ -249,7 +248,7 @@ docker.enabled = true
 
 ### Configurar execução do Singularity
 
-Para rodar um *workflow* com Singularity, é necessário fornecer o caminho para o arquivo de imagem do contêiner usando a diretiva de contêiner:
+Para rodar um pipeline com Singularity, é necessário fornecer o caminho para o arquivo de imagem do contêiner usando a diretiva de contêiner (`container`):
 
 ```groovy linenums="1"
 process.container = '/some/singularity/image.sif'
@@ -269,7 +268,7 @@ Os seguintes protocolos são suportados:
 
 !!! tip
 
-     O hub do Singularity `shub://` não está mais disponível como um serviço de construção de contêiners. Entretanto, as imagens existentes anteriores a 19 de abril de 2021 ainda funcionam.
+     O hub do Singularity `shub://` não está mais disponível como serviço de construção de contêiners. Entretanto, as imagens existentes anteriores a 19 de abril de 2021 ainda funcionam.
 
 !!! tip
 
@@ -286,18 +285,18 @@ Os seguintes protocolos são suportados:
 
 !!! exercise
 
-     Tente executar o script conforme mostrado abaixo, alterando o arquivo `nextflow.config` para o acima usando `singularity`:
+     Tente executar o script conforme mostrado abaixo, alterando o arquivo `nextflow.config` para ser usado com o Singularity:
 
-     ```bash
-     nextflow executar script7.nf
-     ```
+    ```bash
+    nextflow run script7.nf
+    ```
 
-     !!! observação
+    !!! note
 
-         O Nextflow irá baixar a imagem do contêiner automaticamente. Isso levará alguns segundos, dependendo da velocidade da conexão de rede.
+        O Nextflow irá baixar a imagem do contêiner automaticamente. Isto levará alguns segundos, dependendo da velocidade da sua conexão. 
 
 ### Configurar execução com ambientes Conda
 
-O uso de um ambiente Conda também pode ser fornecido no arquivo de configuração adicionando a seguinte configuração no arquivo `nextflow.config`:
+Ambientes Conda também podem ser fornecidos no arquivo de configuração. Basta adicionar a seguinte configuração no arquivo `nextflow.config`:
 
 Você pode especificar o caminho de um ambiente Conda existente como **diretório** ou o caminho do arquivo YAML do ambiente Conda.
