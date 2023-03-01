@@ -299,4 +299,8 @@ The following protocols are supported:
 
 The use of a Conda environment can also be provided in the configuration file by adding the following setting in the `nextflow.config` file:
 
+```groovy linenums="1"
+process.conda = "/home/ubuntu/miniconda2/envs/nf-tutorial"
+```
+
 You can specify the path of an existing Conda environment as either **directory** or the path of Conda environment YAML file.
