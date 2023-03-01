@@ -4,125 +4,125 @@ description: Material de treinamento básico do Nextflow
 
 # Processos
 
-In Nextflow, a `process` is the basic computing primitive to execute foreign functions (i.e., custom scripts or tools).
+No Nextflow, um processo (`process`) é a primitiva de computação básica para executar funções estrangeiras (ou seja, scripts personalizados ou ferramentas).
 
-The `process` definition starts with the keyword `process`, followed by the process name and finally the process body delimited by curly brackets.
+A definição do processo começa com a palavra-chave `process`, seguida pelo nome do processo e, finalmente, o corpo do processo delimitado por chaves.
 
-The `process` name is commonly written in upper case by convention.
+O nome do process é comumente escrito em letras maiúsculas por convenção.
 
-A basic `process`, only using the `script` definition block, looks like the following:
+Um processo básico, usando apenas o bloco de definição `script`, se parece com o seguinte:
 
 ```groovy linenums="1"
-process SAYHELLO {
+process DIGAOLA {
 
   script:
   """
-  echo 'Hello world!'
+  echo 'Olá mundo!'
   """
 }
 ```
 
-In more complex examples, the process body can contain up to **five** definition blocks:
+Em exemplos mais complexos, o corpo do processo pode conter até **cinco** blocos de definição:
 
-1. **Directives** are initial declarations that define optional settings
-2. **Input** defines the expected input file(s) and the channel from where to find them
-3. **Output** defines the expected output file(s) and the channel to send the data to
-4. **When** is an optional clause statement to allow conditional processes
-5. **Script** is a string statement that defines the command to be executed by the process
+1. **Diretivas** são declarações iniciais que definem configurações opcionais
+2. **Input** (Bloco de entrada) define o(s) arquivo(s) de entrada esperado(s) e o canal onde encontrá-los
+3. **Output** (Bloco de saída) define o(s) arquivo(s) de saída esperado(s) e o canal para enviar os dados
+4. **When** é uma declaração de cláusula opcional para permitir processos condicionais
+5. **Script** é uma string que define o comando a ser executado pelo processo
 
-The full process syntax is defined as follows:
+A sintaxe completa do processo é definida da seguinte forma:
 
 !!! info ""
 
-    Click the :material-plus-circle: icons in the code for explanations.
+    Clique no ícone :material-plus-circle: no código para ver explicações.
 
 ```groovy linenums="1"
-process < name > {
+process < nome > {
 
-  [ directives ] // (1)!
+  [ diretivas ] // (1)!
 
   input: // (2)!
-  < process inputs >
+  < entradas do processo >
 
   output: // (3)!
-  < process outputs >
+  < saídas do processo >
 
   when: // (4)!
-  < condition >
+  < condição >
 
   [script|shell|exec]: // (5)!
   """
-  < user script to be executed >
+  < script do usuário a ser executado >
   """
 }
 ```
 
-1. Zero, one or more process directives
-2. Zero, one or more process inputs
-3. Zero, one or more process outputs
-4. An optional boolean conditional to trigger the process execution
-5. The command to be executed
+1. Zero, uma ou mais diretivas de processo
+2. Zero, uma ou mais entradas para o processo
+3. Zero, uma ou mais saídas para o processo
+4. Uma condicional booleana opcional para acionar a execução do processo
+5. O comando a ser executado
 
 ## Script
 
-The `script` block is a string statement that defines the command to be executed by the process.
+O bloco `script` é uma string que define o comando a ser executado pelo processo.
 
-A process can execute only one `script` block. It must be the last statement when the process contains input and output declarations.
+Um processo pode executar apenas um bloco `script`. Deve ser a última instrução quando o processo contém declarações de entrada e saída.
 
-The `script` block can be a single or a multi-line string. The latter simplifies the writing of non-trivial scripts composed of multiple commands spanning over multiple lines. For example:
+O bloco `script` pode ser uma string de uma ou várias linhas. A de várias linhas simplifica a escrita de scripts não triviais compostos por vários comandos abrangendo várias linhas. Por exemplo:
 
 ```groovy linenums="1"
-process EXAMPLE {
+process EXEMPLO {
 
   script:
   """
-  echo 'Hello world!\nHola mundo!\nCiao mondo!\nHallo Welt!' > file
-  cat file | head -n 1 | head -c 5 > chunk_1.txt
-  gzip -c chunk_1.txt  > chunk_archive.gz
+  echo 'Olá mundo!\nHola mundo!\nCiao mondo!\nHallo Welt!' > arquivo
+  cat arquivo | head -n 1 | head -c 5 > pedaco_1.txt
+  gzip -c pedaco_1.txt  > pedacos.gz
   """
 }
 
 workflow {
-  EXAMPLE()
+  EXEMPLO()
 }
 ```
 
-By default, the `process` command is interpreted as a **Bash** script. However, any other scripting language can be used by simply starting the script with the corresponding [Shebang](<https://en.wikipedia.org/wiki/Shebang_(Unix)>) declaration. For example:
+Por padrão, o comando `process` é interpretado como um script **Bash**. No entanto, qualquer outra linguagem de script pode ser usada simplesmente iniciando o script com a declaração [Shebang](<https://en.wikipedia.org/wiki/Shebang_(Unix)>) adequada. Por examplo:
 
 ```groovy linenums="1"
-process PYSTUFF {
+process CODIGOPYTHON {
 
   script:
   """
   #!/usr/bin/env python
 
-  x = 'Hello'
-  y = 'world!'
+  x = 'Olá'
+  y = 'mundo!'
   print ("%s - %s" % (x,y))
   """
 }
 
 workflow {
-  PYSTUFF()
+  CODIGOPYTHON()
 }
 ```
 
 !!! tip
 
-    Multiple programming languages can be used within the same workflow script. However, for large chunks of code it is better to save them into separate files and invoke them from the process script. One can store the specific scripts in the `./bin/` folder.
+    Várias linguagens de programação podem ser usadas no mesmo script de fluxo de trabalho. No entanto, para grandes blocos de código, é melhor salvá-los em arquivos separados e invocá-los a partir do script do processo. Pode-se armazenar os scripts específicos na pasta `./bin/`.
 
 ### Parâmetros do script
 
-Script parameters (`params`) can be defined dynamically using variable values. For example:
+Parâmetros de script (`params`) podem ser definidos dinamicamente usando valores variáveis. Por exemplo:
 
 ```groovy linenums="1"
-params.data = 'World'
+params.data = 'Mundo'
 
 process FOO {
 
   script:
   """
-  echo Hello $params.data
+  echo Olá $params.data
   """
 }
 
@@ -133,18 +133,18 @@ workflow {
 
 !!! info
 
-    A process script can contain any string format supported by the Groovy programming language. This allows us to use string interpolation as in the script above or multiline strings. Refer to [String interpolation](#groovy.adoc#_string_interpolation) for more information.
+    Um script de processo pode conter qualquer formato de string suportado pela linguagem de programação Groovy. Isso nos permite usar a interpolação de strings como no script acima ou strings multilinha. Consulte [Interpolação de string](#groovy.adoc#_string_interpolation) para obter mais informações.
 
 !!! warning
 
-    Since Nextflow uses the same Bash syntax for variable substitutions in strings, Bash environment variables need to be escaped using the `\` character.
+    Como o Nextflow usa a mesma sintaxe Bash para substituições de variáveis em strings, as variáveis de ambiente Bash precisam ser escapadas usando o caractere `\`.
 
 ```groovy linenums="1"
 process FOO {
 
   script:
   """
-  echo "The current directory is \$PWD"
+  echo "O diretório atual é \$PWD"
   """
 }
 
@@ -153,7 +153,7 @@ workflow {
 }
 ```
 
-It can be tricky to write a script uses many Bash variables. One possible alternative is to use a script string delimited by single-quote characters
+Pode ser complicado escrever um script que usa muitas variáveis Bash. Uma alternativa possível é usar uma string de script delimitada por aspas simples
 
 ```groovy linenums="1"
 process BAR {
@@ -169,9 +169,9 @@ workflow {
 }
 ```
 
-However, this blocks the usage of Nextflow variables in the command script.
+No entanto, isso bloqueia o uso de variáveis Nextflow no script de comando.
 
-Another alternative is to use a `shell` statement instead of `script` and use a different syntax for Nextflow variables, e.g., `!{..}`. This allows the use of both Nextflow and Bash variables in the same script.
+Outra alternativa é usar uma instrução `shell` em vez de `script` e usar uma sintaxe diferente para variáveis do Nextflow, por exemplo, `!{..}`. Isso permite o uso das variáveis Nextflow e Bash no mesmo script.
 
 ```groovy linenums="1"
 params.data = 'le monde'
@@ -192,62 +192,62 @@ workflow {
 
 ### Scripts condicionais
 
-The process script can also be defined in a completely dynamic manner using an `if` statement or any other expression for evaluating a string value. For example:
+O script do processo também pode ser definido de maneira completamente dinâmica usando uma instrução `if` ou qualquer outra expressão para avaliar um valor de string. Por exemplo:
 
 ```groovy linenums="1"
-params.compress = 'gzip'
-params.file2compress = "$baseDir/data/ggal/transcriptome.fa"
+params.compressao = 'gzip'
+params.arquivo_a_comprimir = "$baseDir/data/ggal/transcriptome.fa"
 
 process FOO {
 
   input:
-  path file
+  path arquivo
 
   script:
-  if( params.compress == 'gzip' )
+  if( params.compressao == 'gzip' )
     """
-    gzip -c $file > ${file}.gz
+    gzip -c $arquivo > ${arquivo}.gz
     """
-  else if( params.compress == 'bzip2' )
+  else if( params.compressao == 'bzip2' )
     """
-    bzip2 -c $file > ${file}.bz2
+    bzip2 -c $arquivo > ${arquivo}.bz2
     """
   else
-    throw new IllegalArgumentException("Unknown aligner $params.compress")
+    throw new IllegalArgumentException("Alinhador $params.compressao desconhecido")
 }
 
 workflow {
-  FOO(params.file2compress)
+  FOO(params.arquivo_a_comprimir)
 }
 ```
 
 ## Canais de entradas
 
-Nextflow processes are isolated from each other but can communicate between themselves by sending values through channels.
+Os processos Nextflow são isolados uns dos outros, mas podem se comunicar entre si enviando valores por meio de canais.
 
-Inputs implicitly determine the dependencies and the parallel execution of the process. The process execution is fired each time _new_ data is ready to be consumed from the input channel:
+As entradas determinam implicitamente as dependências e a execução paralela do processo. A execução do processo é disparada cada vez que dados _novos_ estão prontos para serem consumidos do canal de entrada:
 
 <figure class="excalidraw">
 --8<-- "docs/basic_training/img/channel-process.excalidraw.svg"
 </figure>
 
-The `input` block defines which channels the `process` is expecting to receive data from. You can only define one `input` block at a time, and it must contain one or more input declarations.
+O bloco `input` define de quais canais o processo espera receber dados. Você só pode definir um bloco `input` por vez e deve conter uma ou mais declarações de entrada.
 
-The `input` block follows the syntax shown below:
+O bloco `input` segue a sintaxe mostrada abaixo:
 
 ```groovy linenums="1"
 input:
-  <input qualifier> <input name>
+  <qualificador da variável entrada> <nome da variável entrada>
 ```
 
 ### Valores de entrada
 
-The `val` qualifier allows you to receive data of any type as input. It can be accessed in the process script by using the specified input name, as shown in the following example:
+O qualificador `val` permite receber dados de qualquer tipo como entrada. Ele pode ser acessado no script do processo usando o nome de entrada especificado, conforme mostrado no exemplo a seguir:
 
 ```groovy linenums="1"
 num = Channel.of( 1, 2, 3 )
 
-process BASICEXAMPLE {
+process EXEMPLOBASICO {
   debug true
 
   input:
@@ -255,26 +255,26 @@ process BASICEXAMPLE {
 
   script:
   """
-  echo process job $x
+  echo tarefa $x do processo
   """
 }
 
 workflow {
-  myrun = BASICEXAMPLE(num)
+  myrun = EXEMPLOBASICO(num)
 }
 ```
 
-In the above example the process is executed three times, each time a value is received from the channel `num` and used to process the script. Thus, it results in an output similar to the one shown below:
+No exemplo acima, o processo é executado três vezes, cada vez que um valor é recebido do canal `num` e usado para processar o script. Assim, resulta em uma saída semelhante à mostrada abaixo:
 
 ```console
-process job 3
-process job 1
-process job 2
+tarefa 3 do processo
+tarefa 1 do processo
+tarefa 2 do processo
 ```
 
 !!! warning
 
-    The channel guarantees that items are delivered in the same order as they have been sent - but - since the process is executed in a parallel manner, there is no guarantee that they are processed in the same order as they are received.
+    O canal garante que os itens sejam entregues na mesma ordem em que foram enviados - mas - como o processo é executado de forma paralela, não há garantia de que sejam processados na mesma ordem em que foram recebidos.
 
 ### Arquivo e caminhos de entrada
 
