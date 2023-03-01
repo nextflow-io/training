@@ -855,12 +855,12 @@ process FOO {
 
     :material-lightbulb: A lista completa de diretivas está disponível [aqui](https://www.nextflow.io/docs/latest/process.html#directives).
 
-| Nome                                                                | Descrição                                                                                                                                          |
-| ------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`cpus`](https://www.nextflow.io/docs/latest/process.html#cpus)     | Permite definir o número de CPUs (lógicas) necessárias para a tarefa do processo.                                                                     |
-| [`time`](https://www.nextflow.io/docs/latest/process.html#time)     | Permite definir por quanto tempo um processo pode ser executado (por exemplo, tempo _1h_: 1 hora, _1s_ 1 segundo, _1m_ 1 minuto, _1d_ 1 dia).                       |
-| [`memory`](https://www.nextflow.io/docs/latest/process.html#memory) | Permite definir quanta memória o processo pode usar (por exemplo, _2 GB_ é 2 GB). Também pode usar B, KB, MB, GB e TB.                          |
-| [`disk`](https://www.nextflow.io/docs/latest/process.html#disk)     | Permite definir a quantidade de armazenamento em disco local que o processo pode usar.                                                                      |
+| Nome                                                                | Descrição                                                                                                                                                            |
+| ------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`cpus`](https://www.nextflow.io/docs/latest/process.html#cpus)     | Permite definir o número de CPUs (lógicas) necessárias para a tarefa do processo.                                                                                    |
+| [`time`](https://www.nextflow.io/docs/latest/process.html#time)     | Permite definir por quanto tempo um processo pode ser executado (por exemplo, tempo _1h_: 1 hora, _1s_ 1 segundo, _1m_ 1 minuto, _1d_ 1 dia).                        |
+| [`memory`](https://www.nextflow.io/docs/latest/process.html#memory) | Permite definir quanta memória o processo pode usar (por exemplo, _2 GB_ é 2 GB). Também pode usar B, KB, MB, GB e TB.                                               |
+| [`disk`](https://www.nextflow.io/docs/latest/process.html#disk)     | Permite definir a quantidade de armazenamento em disco local que o processo pode usar.                                                                               |
 | [`tag`](https://www.nextflow.io/docs/latest/process.html#tag)       | Permite associar cada execução de processo a um rótulo personalizado para facilitar sua identificação no arquivo de log ou no relatório de execução do rastreamento. |
 
 ## Organizando as saídas
