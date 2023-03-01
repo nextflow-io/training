@@ -5,7 +5,7 @@ description: Material de treinamento básico do Nextflow
 
 # Configuração do Nextflow
 
-Um recurso importante do Nextflow é a capacidade de desacoplar a implementação do fluxo de trabalho e as configurações exigidas pela plataforma onde ele será executado. 
+Um recurso importante do Nextflow é a capacidade de desacoplar a implementação do fluxo de trabalho e as configurações exigidas pela plataforma onde ele será executado.
 
 Isso permite a portabilidade da aplicação sem a necessidade de modificar seu código quando se faz necessária a execução em diferentes ambientes.
 
@@ -176,12 +176,12 @@ O [seletor de processo](https://www.nextflow.io/docs/latest/config.html#process-
 
      As unidades de memória e a duração de tempo podem ser especificadas usando uma notação baseada em string na qual o(s) dígito(s) e a unidade **podem** ser separados por um espaço em branco. Também pode-se usar a notação numérica na qual o(s) dígito(s) e a(s) unidade(s) são separados por um ponto e não são colocados entre aspas.
 
-| Sintaxe de string 	| Sintaxe numérica 	| Valor 	|
-|---	|---	|---	|
-| `'10 KB'` 	| `10.KB` 	| 10240 bytes 	|
-| `'500 MB'` 	| `500.MB` 	| 524288000 bytes 	|
-| `'1 min'` 	| `1.min` 	| 60 segundos 	|
-| `'1 hour 25 sec'` 	| \- 	| 1 hora e 25 segundos 	|
+| Sintaxe de string | Sintaxe numérica | Valor                |
+| ----------------- | ---------------- | -------------------- |
+| `'10 KB'`         | `10.KB`          | 10240 bytes          |
+| `'500 MB'`        | `500.MB`         | 524288000 bytes      |
+| `'1 min'`         | `1.min`          | 60 segundos          |
+| `'1 hour 25 sec'` | \-               | 1 hora e 25 segundos |
 
 A sintaxe para definir as diretivas de processo no arquivo de configuração requer `=` (ou seja, operador de atribuição). Esta notação não deve ser usada para definir as diretivas do processo no script do pipeline.
 
@@ -257,10 +257,10 @@ singularity.enabled = true
 
 Os seguintes protocolos são suportados:
 
-- `library://` baixe a imagem do contêiner do [Singularity Library service](https://cloud.sylabs.io/library).
-- `shub://` baixe a imagem do contêiner do [Singularity Hub](https://singularity-hub.org/).
-- `docker://` baixe a imagem do contêiner do [Docker Hub](https://hub.docker.com/) e a converta para o formato Singularity.
-- `docker-daemon://` extraia a imagem do contêiner de uma instalação local do Docker e a converta em um arquivo de imagem Singularity.
+-   `library://` baixe a imagem do contêiner do [Singularity Library service](https://cloud.sylabs.io/library).
+-   `shub://` baixe a imagem do contêiner do [Singularity Hub](https://singularity-hub.org/).
+-   `docker://` baixe a imagem do contêiner do [Docker Hub](https://hub.docker.com/) e a converta para o formato Singularity.
+-   `docker-daemon://` extraia a imagem do contêiner de uma instalação local do Docker e a converta em um arquivo de imagem Singularity.
 
 !!! tip
 
@@ -289,7 +289,7 @@ Os seguintes protocolos são suportados:
 
     !!! note
 
-        O Nextflow irá baixar a imagem do contêiner automaticamente. Isto levará alguns segundos, dependendo da velocidade da sua conexão. 
+        O Nextflow irá baixar a imagem do contêiner automaticamente. Isto levará alguns segundos, dependendo da velocidade da sua conexão.
 
 ### Configurar execução com ambientes Conda
 
