@@ -771,7 +771,7 @@ workflow {
 
 !!! exercise
 
-    Modifique o script do exercício anterior para que o arquivo _bam_ seja nomeado com o `id_sample` fornecido.
+    Modifique o script do exercício anterior para que o arquivo _bam_ seja nomeado com o `id_amostra` fornecido.
 
     ??? solution
 
