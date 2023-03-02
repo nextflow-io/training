@@ -74,7 +74,27 @@ Aiming at a more comprehensive git history, pull requests will be squashed with 
   - What training material the translated file(s)/page(s) are part of
   - What language it was translated into
 
-This practice gives more freedom/space for committers to get into more detail in their commit title/message without having to add the info above.
+This practice gives more freedom/space for committers to get into more detail in their commit title/message without having to add the info above. For example:
+
+```
+PR: Translate to Brazilian Portuguese the Tower section of the basic training
+Commit #1: Add missing translations to sections 1 and 2
+Commit #2: Add translated image to section 3
+Commit #3: Translate sections 4, 5 and 6
+```
+
+Squashed commit to merge:
+
+```
+Translate to Brazilian Portuguese the Tower section of the Basic Training
+
+  - Add missing translations to sections 1 and 2 
+  - Add translated image to section 3
+  - Translate sections 4, 5 and 6 
+```
+
+It doesn't have to explicitly state every single commit in the PR.
+
 ## Notes
 
 In the original version in English, it happens that many keywords are written just like the words in English (`value` channel factory for value channels). When translating to other languages, it doesn't make sense to use the back ticks for the translated word, _valor_, for example, as _valor_ is not a Nextflow keyword. In such circumstances, the keyword should be placed between parenthesis with the back ticks, or the back ticks should be simply ignored for the translation.
