@@ -151,91 +151,91 @@ This makes it trivial for users without any expertise in Nextflow to enter their
 
 #### Adicionando um novo pipeline
 
-Adding a pipeline to the pre-saved workspace launchpad is detailed in full on the [tower webpage docs](https://help.tower.nf/launch/launch/).
+A adição de um pipeline pré-salvo ao launchpad da área de trabalho é detalhada na íntegra na [documentação do Tower](https://help.tower.nf/launch/launch/).
 
-In brief, these are the steps you need to follow to set up a pipeline.
+Em resumo, essas são as etapas que você precisa seguir para configurar um pipeline.
 
-1. Select the Launchpad button in the navigation bar. This will open the **Launch Form**.
-2. Select a [compute environment](https://help.tower.nf/compute-envs/overview).
-3. Enter the repository of the pipeline you want to launch. e.g. <https://github.com/nf-core/rnaseq.git>
-4. Select a pipeline **Revision number**. The Git default branch (main/master) or `manifest.defaultBranch` in the Nextflow configuration will be used by default.
-5. Set the **Work directory** location of the Nextflow work directory. The location associated with the compute environment will be selected by default.
-6. Enter the name(s) of each of the Nextflow **Config profiles** followed by the `Enter` key. See the Nextflow [Config profiles](https://www.nextflow.io/docs/latest/config.html#config-profiles) documentation for more details.
-7. Enter any Pipeline parameters in YAML or JSON format. YAML example:
+1. Selecione o botão Launchpad na barra de navegação. Isso abrirá o **Formulário de inicialização**.
+2. Selecione um [ambiente de computação](https://help.tower.nf/compute-envs/overview).
+3. Insira o repositório do pipeline que você deseja iniciar. e.g. <https://github.com/nf-core/rnaseq.git>
+4. Selecione um **número de revisão** para o pipeline. O branching padrão do Git (main/master) ou `manifest.defaultBranch` na configuração do Nextflow será usada por padrão.
+5. Defina o local do **diretório de trabalho** (`workDir`) do Nextflow. O local associado ao ambiente de computação será selecionado por padrão.
+6. Digite o(s) nome(s) de cada um dos **perfis de configuração** do Nextflow seguido da tecla `enter`. Veja mais [na documentação oficial](https://www.nextflow.io/docs/latest/config.html#config-profiles) sobre a configuração de perfis.
+7. Insira quaisquer parâmetros do Pipeline no formato YAML ou JSON. Exemplo com YAML:
 
     ```yaml
-    reads: "s3://nf-bucket/exome-data/ERR013140_{1,2}.fastq.bz2"
-    paired_end: true
+    leituras: "s3://nf-bucket/exome-data/ERR013140_{1,2}.fastq.bz2"
+    pares_de_leituras: true
     ```
 
-8. Select Launchpad to begin the pipeline execution.
+8. Selecione Launchpad para iniciar a execução do pipeline.
 
 !!! info
 
-    Nextflow pipelines are simply Git repositories and can be changed to any public or private Git-hosting platform. See Git Integration in the Tower docs and Pipeline Sharing in the Nextflow docs for more details.
+    Os pipelines do Nextflow são simplesmente repositórios Git e podem ser alterados para qualquer plataforma de hospedagem Git pública ou privada. Consulte Integração com o Git nos documentos do Tower e Compartilhamento de Pipelines na documentação do Nextflow para obter mais detalhes.
 
 !!! note
 
-    The credentials associated with the compute environment must be able to access the work directory.
+    As credenciais associadas ao ambiente de computação devem ser capazes de acessar o diretório de trabalho.
 
 !!! info
 
-    In the configuration, the full path to a bucket must be specified with single quotes around strings and no quotes around booleans or numbers.
+    Na configuração, o caminho completo para um bucket deve ser especificado com aspas simples em torno de strings e sem aspas em booleanos ou números.
 
 !!! tip
 
-    To create your own customized Nextflow Schema for your pipeline, see the examples from the `nf-core` workflows that have adopted this approach. For example, [eager](https://github.com/nf-core/eager/blob/2.3.3/nextflow_schema.json) and [rnaseq](https://github.com/nf-core/rnaseq/blob/3.0/nextflow_schema.json).
+    Para criar seu próprio esquema de Nextflow personalizado para seu pipeline, veja os exemplos dos fluxos de trabalho do `nf-core` que adotaram essa abordagem. Por exemplo, o [eager](https://github.com/nf-core/eager/blob/2.3.3/nextflow_schema.json) e o [rnaseq](https://github.com/nf-core/rnaseq/blob/3.0/nextflow_schema.json).
 
-For advanced settings options check out this [page](https://help.tower.nf/launch/advanced/).
+Para opções de configurações avançadas, confira essa [página](https://help.tower.nf/launch/advanced/).
 
-There is also community support available if you get into trouble, join the Nextflow Slack by following this [link](https://www.nextflow.io/slack-invite.html).
+Também há suporte da comunidade disponível se você tiver problemas, junte-se ao Nextflow Slack seguindo este [link](https://www.nextflow.io/slack-invite.html).
 
 ### API
 
-To learn more about using the Tower API, visit the [API section](https://help.tower.nf/api/overview/) in this documentation.
+Para saber mais sobre como usar a API do Tower, visite a [seção da API](https://help.tower.nf/api/overview/) na documentação.
 
 ## Áreas de trabalho e Organizações
 
-Nextflow Tower simplifies the development and execution of workflows by providing a centralized interface for users and organizations.
+O Nextflow Tower simplifica o desenvolvimento e a execução de fluxos de trabalho, fornecendo uma interface centralizada para usuários e organizações.
 
-Each user has a unique **workspace** where they can interact and manage all resources such as workflows, compute environments and credentials. Details of this can be found [here](https://help.tower.nf/getting-started/workspace/).
+Cada usuário tem uma **área de trabalho** exclusiva onde pode interagir e gerenciar todos os recursos, como pipelines, ambientes de computação e credenciais. Detalhes disso podem ser encontrados [aqui](https://help.tower.nf/getting-started/workspace/).
 
-By default, each user has their own private workspace, while organizations have the ability to run and manage users through role-based access as **members** and **collaborators**.
+Por padrão, cada usuário tem sua própria área de trabalho privada, enquanto as organizações têm a capacidade de executar e gerenciar usuários por meio de acesso baseado em papéis como **membros** e **colaboradores**.
 
 ### Recursos de organização
 
-You can create your own organization and participant workspace by following the docs at [tower](https://help.tower.nf/orgs-and-teams/workspace-management/).
+Você pode criar sua própria organização e área de trabalho de participante seguindo a documentação [aqui](https://help.tower.nf/orgs-and-teams/workspace-management/).
 
-Tower allows the creation of multiple organizations, each of which can contain multiple workspaces with shared users and resources. This allows any organization to customize and organize the usage of resources while maintaining an access control layer for users associated with a workspace.
+O Tower permite a criação de várias organizações, cada uma das quais pode conter várias áreas de trabalho com usuários e recursos compartilhados. Isso permite que qualquer organização personalize e organize o uso de recursos enquanto mantém uma camada de controle de acesso para usuários associados a uma área de trabalho.
 
 ### Usuários da organização
 
-Any user can be added or removed from a particular organization or a workspace and can be allocated a specific access role within that workspace.
+Qualquer usuário pode ser adicionado ou removido de uma determinada organização ou área de trabalho e pode receber um papel de acesso específico dentro dessa área de trabalho.
 
-The Teams feature provides a way for organizations to group various users and participants together into teams. For example, `workflow-developers` or `analysts`, and apply access control to all the users within this team collectively.
+O recurso Equipes fornece uma maneira para as organizações agruparem vários usuários e participantes em equipes. Por exemplo, `desenvolvedores-pipelines` ou `analistas`, e aplicar controle de acesso a todos os usuários dentro desta equipe coletivamente.
 
-For further information, please refer to the [User Management](https://help.tower.nf/orgs-and-teams/organizations/) section.
+Para mais informações, consulte a seção de [Gerenciamento de Usuário](https://help.tower.nf/orgs-and-teams/organizations/).
 
 #### Configurando uma nova organização
 
-Organizations are the top-level structure and contain Workspaces, Members, Teams and Collaborators.
+As organizações são a estrutura de nível mais alto e contêm áreas de trabalho, membros, equipes e colaboradores.
 
-To create a new Organization:
+Para criar uma nova Organização:
 
-1.  Click on the dropdown next to your name and select New organization to open the creation dialog.
-2.  On the dialog, fill in the fields as per your organization. The Name and Full name fields are compulsory.
-
-    !!! note
-
-        A valid name for the organization must follow a specific pattern. Please refer to the UI for further instructions.
-
-3.  The rest of the fields such as Description, Location, Website URL and Logo Url are optional.
-4.  Once the details are filled in, you can access the newly created organization using the organization’s page, which lists all of your organizations.
+1.  Clique no menu suspenso ao lado do seu nome e selecione New organization para abrir a caixa de diálogo de criação.
+2.  Na caixa de diálogo, preencha os campos de acordo com sua organização. Os campos Name e Full name são obrigatórios.
 
     !!! note
 
-        It is possible to change the values of the optional fields either using the Edit option on the organization’s page or by using the Settings tab within the organization page, provided that you are the Owner of the organization.
+        Um nome válido para a organização deve seguir um padrão específico. Consulte a interface de usuário para obter mais instruções.
+
+3.  O restante dos campos, como Description, Location, Website URL e logo URL, são opcionais.
+4.  Depois que os detalhes forem preenchidos, você poderá acessar a organização recém-criada usando a página da organização, que lista todas as suas organizações.
+
+    !!! note
+
+        É possível alterar os valores dos campos opcionais usando a opção Edit na página da organização ou usando a guia Settings na página da organização, desde que você seja o Proprietário (Owner) da organização.
 
     !!! tip
 
-        A list of all the included Members, Teams and Collaborators can be found on the organization page.
+        Uma lista de todos os Membros, Equipes e Colaboradores incluídos pode ser encontrada na página da organização.
