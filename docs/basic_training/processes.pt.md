@@ -8,7 +8,7 @@ No Nextflow, um processo (`process`) é a primitiva de computação básica para
 
 A definição do processo começa com a palavra-chave `process`, seguida pelo nome do processo e, finalmente, o corpo do processo delimitado por chaves.
 
-O nome do process é comumente escrito em letras maiúsculas por convenção.
+O nome do processo (`process`) é comumente escrito em letras maiúsculas por convenção.
 
 Um processo básico, usando apenas o bloco de definição `script`, se parece com o seguinte:
 
