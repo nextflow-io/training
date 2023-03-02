@@ -1,11 +1,11 @@
 ---
 title: Nextflow Tower
-description: Get started with Nextflow Tower
+description: Comece a usar o Nextflow Tower
 ---
 
-# Get started with Nextflow Tower
+# Comece a usar o Nextflow Tower
 
-## Basic concepts
+## Conceitos Básicos
 
 Nextflow Tower is the centralized command post for data management and pipelines. It brings monitoring, logging and observability to distributed workflows and simplifies the deployment of pipelines on any cloud, cluster or laptop.
 
@@ -20,11 +20,11 @@ Nextflow tower core features include:
 
     [Sign up](https://cloud.tower.nf/) to try Tower for free or request a [demo](https://seqera.io/demo/) for deployments in your own on-premise or cloud environment.
 
-## Usage
+## Como usar
 
 You can use Tower via either the `-with-tower` option while using the Nextflow **run** command, through the **online GUI** or through the **API**.
 
-### Via the Nextflow `run` command
+### Com o comando nextflow `run`
 
 Create an account and login into Tower.
 
@@ -87,7 +87,7 @@ To configure and execute Nextflow jobs in **Cloud environments**, visit the [Com
 
         Go to <https://tower.nf/>, login, then click the run tab, and select the run that you just submitted. If you can’t find it, double check your token was entered correctly.
 
-### Via online GUI
+### Com uma interface gráfica online
 
 To run using the GUI, there are three main steps:
 
@@ -95,7 +95,7 @@ To run using the GUI, there are three main steps:
 2. Create and configure a new [compute environment](https://help.tower.nf/compute-envs/overview/).
 3. Start [launching pipelines](https://help.tower.nf/launch/launchpad/).
 
-#### Configuring your compute environment
+#### Configurando seu ambiente de computação
 
 Tower uses the concept of **Compute Environments** to define the execution platform where a pipeline will run.
 
@@ -118,7 +118,7 @@ Each compute environment must be pre-configured to enable Tower to submit tasks.
     * [Google Kubernetes (GKE)](https://help.tower.nf/compute-envs/gke/)
     * [Hosted Kubernetes](https://help.tower.nf/compute-envs/k8s/)
 
-#### Selecting a default compute environment
+#### Selecionando um ambiente de computação padrão
 
 If you have more than one **Compute Environment**, you can select which one will be used by default when launching a pipeline.
 
@@ -137,7 +137,7 @@ Launchpad makes it easy for any workspace user to launch a pre-configured pipeli
 
 A pipeline is a repository containing a Nextflow workflow, a compute environment and pipeline parameters.
 
-#### Pipeline Parameters Form
+#### Formulário de Parâmetros de Pipeline
 
 Launchpad automatically detects the presence of a `nextflow_schema.json` in the root of the repository and dynamically creates a form where users can easily update the parameters.
 
@@ -149,7 +149,7 @@ This makes it trivial for users without any expertise in Nextflow to enter their
 
 ![Pipeline parameters](img/launch_rnaseq_nextflow_schema.png)
 
-#### Adding a new pipeline
+#### Adicionando um novo pipeline
 
 Adding a pipeline to the pre-saved workspace launchpad is detailed in full on the [tower webpage docs](https://help.tower.nf/launch/launch/).
 
@@ -194,7 +194,7 @@ There is also community support available if you get into trouble, join the Next
 
 To learn more about using the Tower API, visit the [API section](https://help.tower.nf/api/overview/) in this documentation.
 
-## Workspaces and Organizations
+## Workspaces e Organizações
 
 Nextflow Tower simplifies the development and execution of workflows by providing a centralized interface for users and organizations.
 
@@ -202,13 +202,13 @@ Each user has a unique **workspace** where they can interact and manage all reso
 
 By default, each user has their own private workspace, while organizations have the ability to run and manage users through role-based access as **members** and **collaborators**.
 
-### Organization resources
+### Recursos de organização
 
 You can create your own organization and participant workspace by following the docs at [tower](https://help.tower.nf/orgs-and-teams/workspace-management/).
 
 Tower allows the creation of multiple organizations, each of which can contain multiple workspaces with shared users and resources. This allows any organization to customize and organize the usage of resources while maintaining an access control layer for users associated with a workspace.
 
-### Organization users
+### Usuários da organização
 
 Any user can be added or removed from a particular organization or a workspace and can be allocated a specific access role within that workspace.
 
@@ -216,7 +216,7 @@ The Teams feature provides a way for organizations to group various users and pa
 
 For further information, please refer to the [User Management](https://help.tower.nf/orgs-and-teams/organizations/) section.
 
-#### Setting up a new organization
+#### Configurando uma nova organização
 
 Organizations are the top-level structure and contain Workspaces, Members, Teams and Collaborators.
 
