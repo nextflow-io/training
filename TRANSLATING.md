@@ -67,5 +67,14 @@ In order to keep consistency in translations, every language should have a trans
 
 -   [Portuguese](https://docs.google.com/spreadsheets/d/1HUa3BO2kwukhX4EXQ-1blXeP5iueUdM23OwDRpfarDg/edit?usp=sharing)
 
+## Merging
+
+Aiming at a more comprehensive git history, pull requests will be squashed with a commit message outlining:
+  - What file(s)/page(s) the PR translated (preferably, 1 PR per file)
+  - What training material the translated file(s)/page(s) are part of
+  - What language it was translated into
+
+This practice gives more freedom/space for committers to get into more detail in their commit title/message without having to add the info above.
 ## Notes
+
 In the original version in English, it happens that many keywords are written just like the words in English (`value` channel factory for value channels). When translating to other languages, it doesn't make sense to use the back ticks for the translated word, _valor_, for example, as _valor_ is not a Nextflow keyword. In such circumstances, the keyword should be placed between parenthesis with the back ticks, or the back ticks should be simply ignored for the translation.
