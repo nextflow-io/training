@@ -7,13 +7,13 @@ description: Comece a usar o Nextflow Tower
 
 ## Conceitos Básicos
 
-Nextflow Tower é o posto de comando centralizado para gerenciamento de dados e pipelines. Ele traz monitoramento, registro e observabilidade para fluxos de trabalho distribuídos e simplifica a implantação de pipelines em qualquer nuvem, cluster ou laptop.
+Nextflow Tower é o posto de comando centralizado para gerenciamento de dados e pipelines. Ele traz monitoramento, gerenciamento de logs e observabilidade para fluxos de trabalho distribuídos e simplifica a implantação de pipelines em qualquer nuvem, cluster ou laptop.
 
 Os principais recursos do Nextflow Tower incluem:
 
 -   O lançamento de pipelines pré-configurados com facilidade.
 -   Integração programática para atender às necessidades de uma organização.
--   Publicando pipelines em espaços de trabalho compartilhados.
+-   Disponibilização de pipelines em áreas de trabalho compartilhadas.
 -   Gerenciamento da infraestrutura necessária para executar análise de dados em escala.
 
 !!! tip
@@ -57,9 +57,9 @@ Onde `eyxxxxxxxxxxxxxxxQ1ZTE=` é o token que você acabou de criar.
 
 !!! note
 
-    Verifique seu `nextflow -version`. Os tokens de portador requerem o Nextflow versão 20.10.0 ou posterior e podem ser configurados com o segundo comando mostrado acima. Você pode alterar a versão, se necessário.
+    Verifique seu `nextflow -version`. Os tokens de portador requerem ao menos a versão 20.10.0 do Nextflow ou versões posteriores e isso pode ser configurado com o segundo comando mostrado acima. Você pode alterar para uma outra versão, se necessário.
 
-Para enviar um pipeline para uma [área de trabalho](https://help.tower.nf/getting-started/workspace/) (workspace) usando a ferramenta de linha de comando Nextflow, inclua o ID da área de trabalho em seu ambiente. Por exemplo:
+Para enviar um pipeline para uma [área de trabalho](https://help.tower.nf/getting-started/workspace/) (workspace) usando a ferramenta de linha de comando do Nextflow, adicione o ID da área de trabalho em seu ambiente. Por exemplo:
 
 ```bash
 export TOWER_WORKSPACE_ID=000000000000000
@@ -69,7 +69,7 @@ O ID da área de trabalho pode ser encontrado na página de visão geral das ár
 
 **5. Execute o Nextflow com o Tower**
 
-Execute seus fluxos de trabalho do Nextflow normalmente com a adição do comando `-with-tower`:
+Execute normalmente seus fluxos de trabalho do Nextflow com a adição do comando `-with-tower`:
 
 ```bash
 nextflow run hello.nf -with-tower
@@ -77,7 +77,7 @@ nextflow run hello.nf -with-tower
 
 Você verá e poderá monitorar seus **trabalhos do Nextflow** no Tower.
 
-Para configurar e executar tarefas do Nextflow em **ambientes de nuvem**, visite a [seção de ambientes de computação](https://help.tower.nf/compute-envs/overview/) (compute environment).
+Para configurar e executar tarefas do Nextflow em **ambientes na nuvem**, visite a [seção de ambientes de computação](https://help.tower.nf/compute-envs/overview/) (compute environments).
 
 !!! exercise
 
@@ -85,7 +85,7 @@ Para configurar e executar tarefas do Nextflow em **ambientes de nuvem**, visite
 
     ??? tip
 
-        Vá para <https://tower.nf/>, faça o login, em seguida, clique na guia de execução (Run) e selecione a execução que você acabou de enviar. Se você não conseguir encontrá-lo, verifique novamente se seu token foi inserido corretamente.
+        Vá para <https://tower.nf/>, faça o login, em seguida, clique na guia de execuções (Run) e selecione a execução que você acabou de enviar. Se você não conseguir encontrá-la, verifique novamente se seu token foi adicionado corretamente ao ambiente.
 
 ### Com uma interface gráfica online
 
@@ -97,7 +97,7 @@ Para executar usando a interface gráfica (GUI), existem três etapas principais
 
 #### Configurando seu ambiente de computação
 
-O Tower usa o conceito de **Ambientes de Computação** (compute environment) para definir a plataforma de execução onde um pipeline será executado.
+O Tower usa o conceito de **Ambientes de Computação** (compute environments) para definir a plataforma de execução onde um pipeline será executado.
 
 Ele suporta o lançamento de pipelines em um número crescente de infraestruturas de **nuvem** e **on-prem** (infraestrutura dedicada).
 
@@ -120,32 +120,32 @@ Cada ambiente de computação deve ser pré-configurado para permitir que o Towe
 
 #### Selecionando um ambiente de computação padrão
 
-If you have more than one **Compute Environment**, you can select which one will be used by default when launching a pipeline.
+Se você tiver mais de um **Ambiente de computação**, poderá selecionar qual deles será usado por padrão ao lançar um pipeline.
 
-1. Navigate to your [compute environments](https://help.tower.nf/compute-envs/overview/).
-2. Choose your default environment by selecting the **Make primary** button.
+1. Navegue até os seus [ambientes de computação](https://help.tower.nf/compute-envs/overview/).
+2. Escolha seu ambiente padrão selecionando o botão **Make primary**.
 
-**Congratulations!**
+**Parabéns!**
 
-You are now ready to launch pipelines with your primary compute environment.
+Agora você está pronto para lançar pipelines com seu ambiente de computação principal.
 
 #### Launchpad
 
-Launchpad makes it easy for any workspace user to launch a pre-configured pipeline.
+O Launchpad torna fácil para qualquer usuário da área de trabalho lançar um pipeline pré-configurado.
 
 ![Launchpad](img/overview_launch.png)
 
-A pipeline is a repository containing a Nextflow workflow, a compute environment and pipeline parameters.
+Um pipeline é um repositório que contém um fluxo de trabalho do Nextflow, um ambiente de computação e parâmetros de pipeline.
 
 #### Formulário de Parâmetros de Pipeline
 
-Launchpad automatically detects the presence of a `nextflow_schema.json` in the root of the repository and dynamically creates a form where users can easily update the parameters.
+O Launchpad detecta automaticamente a presença de um `nextflow_schema.json` na raiz do repositório e cria dinamicamente um formulário onde os usuários podem facilmente atualizar os parâmetros.
 
 !!! info
 
-    The parameter forms view will appear if the workflow has a Nextflow schema file for the parameters. Please refer to the [Nextflow Schema guide](https://help.tower.nf/pipeline-schema/overview) to learn more about the schema file use-cases and how to create them.
+    A exibição de formulários de parâmetro aparecerá se o fluxo de trabalho tiver um arquivo de esquema Nextflow para os parâmetros. Consulte o [Guia do esquema do Nextflow](https://help.tower.nf/pipeline-schema/overview) para saber mais sobre os casos de uso do arquivo de esquema e como criá-los.
 
-This makes it trivial for users without any expertise in Nextflow to enter their pipeline parameters and launch.
+Isso torna trivial para usuários sem experiência em Nextflow inserir seus parâmetros de pipeline e lançá-lo.
 
 ![Pipeline parameters](img/launch_rnaseq_nextflow_schema.png)
 
@@ -188,7 +188,7 @@ Em resumo, essas são as etapas que você precisa seguir para configurar um pipe
 
 Para opções de configurações avançadas, confira essa [página](https://help.tower.nf/launch/advanced/).
 
-Também há suporte da comunidade disponível se você tiver problemas, junte-se ao Nextflow Slack seguindo este [link](https://www.nextflow.io/slack-invite.html).
+Também há suporte da comunidade disponível se você tiver problemas, junte-se ao Slack do Nextflow seguindo este [link](https://www.nextflow.io/slack-invite.html).
 
 ### API
 
