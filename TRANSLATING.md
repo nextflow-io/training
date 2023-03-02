@@ -69,19 +69,17 @@ In order to keep consistency in translations, every language should have a trans
 
 ## Merging
 
-Aiming at a more comprehensive git history, pull requests will be squashed with a commit message outlining:
+Aiming at a more comprehensive git history, pull request commits will be [squashed](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/incorporating-changes-from-a-pull-request/about-pull-request-merges#squash-and-merge-your-commits) with a commit message outlining:
   - What file(s)/page(s) the PR translated (preferably, 1 PR per file)
-  - What training material the translated file(s)/page(s) are part of
+  - What training material the translated file(s)/page(s) is/are part of
   - What language it was translated into
 
-This practice gives more freedom/space for committers to get into more detail in their commit title/message without having to add the info above. For example:
+The squashing is done by the maintainers of the GitHub repository, so if you're doing a contribution, you don't have to worry about that. This practice gives more freedom/space for contributors to get into more detail in their commit title/message without having to add the info outlined above. For example:
 
-```
 PR: Translate to Brazilian Portuguese the Tower section of the basic training
-Commit #1: Add missing translations to sections 1 and 2
-Commit #2: Add translated image to section 3
-Commit #3: Translate sections 4, 5 and 6
-```
+  - Commit #1: Add missing translations to sections 1 and 2
+  - Commit #2: Add translated image to section 3
+  - Commit #3: Translate sections 4, 5 and 6
 
 Squashed commit to merge:
 
