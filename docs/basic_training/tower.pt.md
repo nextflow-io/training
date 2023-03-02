@@ -7,105 +7,105 @@ description: Comece a usar o Nextflow Tower
 
 ## Conceitos Básicos
 
-Nextflow Tower is the centralized command post for data management and pipelines. It brings monitoring, logging and observability to distributed workflows and simplifies the deployment of pipelines on any cloud, cluster or laptop.
+Nextflow Tower é o posto de comando centralizado para gerenciamento de dados e pipelines. Ele traz monitoramento, registro e observabilidade para fluxos de trabalho distribuídos e simplifica a implantação de pipelines em qualquer nuvem, cluster ou laptop.
 
-Nextflow tower core features include:
+Os principais recursos do Nextflow Tower incluem:
 
--   The launching of pre-configured pipelines with ease.
--   Programmatic integration to meet the needs of an organization.
--   Publishing pipelines to shared workspaces.
--   Management of the infrastructure required to run data analysis at scale.
+-   O lançamento de pipelines pré-configurados com facilidade.
+-   Integração programática para atender às necessidades de uma organização.
+-   Publicando pipelines em espaços de trabalho compartilhados.
+-   Gerenciamento da infraestrutura necessária para executar análise de dados em escala.
 
 !!! tip
 
-    [Sign up](https://cloud.tower.nf/) to try Tower for free or request a [demo](https://seqera.io/demo/) for deployments in your own on-premise or cloud environment.
+    [Registre-se](https://cloud.tower.nf/) para experimentar o Tower gratuitamente ou solicitar uma [demonstração](https://seqera.io/demo/) para implantações em seu próprio ambiente local ou na nuvem.
 
 ## Como usar
 
-You can use Tower via either the `-with-tower` option while using the Nextflow **run** command, through the **online GUI** or through the **API**.
+Você pode usar o Tower por meio da opção `-with-tower` ao usar o comando Nextflow **run**, por meio da **interface gráfica online** ou da **API**.
 
-### Com o comando nextflow `run`
+### Com o comando Nextflow `run`
 
-Create an account and login into Tower.
+Crie uma conta e faça login no Tower.
 
-**1. Create a new token**
+**1. Crie um novo token**
 
-You can access your tokens from the **Settings** drop-down menu :
+Você pode acessar seus tokens no menu suspenso **Settings**:
 
-![Create a token](img/usage_create_token.png)
+![Criar um token](img/usage_create_token.png)
 
-**2. Name your token**
+**2. Dê um nome para seu token**
 
-![Name your token](img/usage_name_token.png)
+![Dê um nome para seu token](img/usage_name_token.png)
 
-**3. Save your token safely**
+**3. Salve seu token com segurança**
 
-Copy and keep your new token in a safe place.
+Copie e guarde seu novo token em um local seguro.
 
-![Save token](img/usage_token.png)
+![Salve o seu token](img/usage_token.png)
 
-**4. Export your token**
+**4. Exporte seu token**
 
-Once your token has been created, open a terminal and type:
+Uma vez que seu token foi criado, abra um terminal e digite:
 
 ```bash
 export TOWER_ACCESS_TOKEN=eyxxxxxxxxxxxxxxxQ1ZTE=
 export NXF_VER=20.10.0
 ```
 
-Where `eyxxxxxxxxxxxxxxxQ1ZTE=` is the token you have just created.
+Onde `eyxxxxxxxxxxxxxxxQ1ZTE=` é o token que você acabou de criar.
 
 !!! note
 
-    Check your `nextflow -version`. Bearer tokens require Nextflow version 20.10.0 or later and can be set with the second command shown above. You can change the version if necessary.
+    Verifique seu `nextflow -version`. Os tokens de portador requerem o Nextflow versão 20.10.0 ou posterior e podem ser configurados com o segundo comando mostrado acima. Você pode alterar a versão, se necessário.
 
-To submit a pipeline to a [Workspace](https://help.tower.nf/getting-started/workspace/) using the Nextflow command-line tool, add the workspace ID to your environment. For example:
+Para enviar um pipeline para uma [área de trabalho](https://help.tower.nf/getting-started/workspace/) (workspace) usando a ferramenta de linha de comando Nextflow, inclua o ID da área de trabalho em seu ambiente. Por exemplo:
 
 ```bash
 export TOWER_WORKSPACE_ID=000000000000000
 ```
 
-The workspace ID can be found on the organization’s Workspaces overview page.
+O ID da área de trabalho pode ser encontrado na página de visão geral das áreas de trabalho (workspaces) da organização.
 
-**5. Run Nextflow with tower**
+**5. Execute o Nextflow com o Tower**
 
-Run your Nextflow workflows as usual with the addition of the `-with-tower` command:
+Execute seus fluxos de trabalho do Nextflow normalmente com a adição do comando `-with-tower`:
 
 ```bash
 nextflow run hello.nf -with-tower
 ```
 
-You will see and be able to monitor your **Nextflow jobs** in Tower.
+Você verá e poderá monitorar seus **trabalhos do Nextflow** no Tower.
 
-To configure and execute Nextflow jobs in **Cloud environments**, visit the [Compute environments section](https://help.tower.nf/compute-envs/overview/).
+Para configurar e executar tarefas do Nextflow em **ambientes de nuvem**, visite a [seção de ambientes de computação](https://help.tower.nf/compute-envs/overview/) (compute environment).
 
 !!! exercise
 
-    Run the RNA-Seq `script7.nf` using the `-with-tower` flag, after correctly completing the token settings outlined above.
+    Execute o script de RNA-Seq `script7.nf` usando o sinalizador `-with-tower`, depois de concluir corretamente as configurações de token descritas acima.
 
     ??? tip
 
-        Go to <https://tower.nf/>, login, then click the run tab, and select the run that you just submitted. If you can’t find it, double check your token was entered correctly.
+        Vá para <https://tower.nf/>, faça o login, em seguida, clique na guia de execução (Run) e selecione a execução que você acabou de enviar. Se você não conseguir encontrá-lo, verifique novamente se seu token foi inserido corretamente.
 
 ### Com uma interface gráfica online
 
-To run using the GUI, there are three main steps:
+Para executar usando a interface gráfica (GUI), existem três etapas principais:
 
-1. Create an account and login into Tower, available free of charge, at [tower.nf](https://tower.nf).
-2. Create and configure a new [compute environment](https://help.tower.nf/compute-envs/overview/).
-3. Start [launching pipelines](https://help.tower.nf/launch/launchpad/).
+1. Crie uma conta e faça login no Tower, disponível gratuitamente, em [tower.nf](https://tower.nf).
+2. Crie e configure um novo [ambiente de computação](https://help.tower.nf/compute-envs/overview/) (compute environment).
+3. Comece a [lançar pipelines](https://help.tower.nf/launch/launchpad/).
 
 #### Configurando seu ambiente de computação
 
-Tower uses the concept of **Compute Environments** to define the execution platform where a pipeline will run.
+O Tower usa o conceito de **Ambientes de Computação** (compute environment) para definir a plataforma de execução onde um pipeline será executado.
 
-It supports the launching of pipelines into a growing number of **cloud** and **on-premise** infrastructures.
+Ele suporta o lançamento de pipelines em um número crescente de infraestruturas de **nuvem** e **on-prem** (infraestrutura dedicada).
 
-![Compute environments](img/compute_env_platforms.png)
+![Ambientes de computação](img/compute_env_platforms.png)
 
-Each compute environment must be pre-configured to enable Tower to submit tasks. You can read more on how to set up each environment using the links below.
+Cada ambiente de computação deve ser pré-configurado para permitir que o Tower envie tarefas. Você pode ler mais sobre como configurar cada ambiente usando os links abaixo.
 
-!!! tip "The following guides describe how to configure each of these compute environments."
+!!! tip "Os guias a seguir descrevem como configurar cada um desses ambientes de computação."
 
     * [AWS Batch](https://help.tower.nf/compute-envs/aws-batch/)
     * [Azure Batch](https://help.tower.nf/compute-envs/azure-batch/)
@@ -194,7 +194,7 @@ There is also community support available if you get into trouble, join the Next
 
 To learn more about using the Tower API, visit the [API section](https://help.tower.nf/api/overview/) in this documentation.
 
-## Workspaces e Organizações
+## Áreas de trabalho e Organizações
 
 Nextflow Tower simplifies the development and execution of workflows by providing a centralized interface for users and organizations.
 
