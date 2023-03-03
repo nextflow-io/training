@@ -1,61 +1,61 @@
 ---
-description: Basic Nextflow Training Workshop
+description: Material de treinamento básico do Nextflow
 ---
 
-# Deployment scenarios
+# Cenários de implantação
 
-Real-world genomic applications can spawn the execution of thousands of jobs. In this scenario a batch scheduler is commonly used to deploy a pipeline in a computing cluster, allowing the execution of many jobs in parallel across many compute nodes.
+Aplicações genômicas do mundo real podem gerar milhares de tarefas sendo executadas. Nesse cenário, um escalonador de lote (batch scheduler) é comumente usado para implantar um pipeline em um cluster de computação, permitindo a execução de muitos trabalhos em paralelo em muitos nós de computação.
 
-Nextflow has built-in support for the most commonly used batch schedulers, such as Univa Grid Engine, [SLURM](https://slurm.schedmd.com/) and IBM LSF. Check the Nextflow documentation for the complete list of supported [execution platforms](https://www.nextflow.io/docs/latest/executor.html).
+O Nextflow possui suporte embutido para os escalonadores de lote mais usados, como o Univa Grid Engine, [SLURM](https://slurm.schedmd.com/) e o IBM LSF. Verifique a documentação do Nextflow para obter a lista completa dos [ambientes de computação](https://www.nextflow.io/docs/latest/executor.html).
 
-## Cluster deployment
+## Implantação em cluster
 
-A key Nextflow feature is the ability to decouple the workflow implementation from the actual execution platform. The implementation of an abstraction layer allows the deployment of the resulting workflow on any executing platform supported by the framework.
+Um recurso importante do Nextflow é a capacidade de desacoplar a implementação do fluxo de trabalho da plataforma de execução de fato. A implementação de uma camada de abstração permite a implantação do fluxo de trabalho resultante em qualquer plataforma de execução suportada pelo framework.
 
-![Nextflow executors](img/nf-executors.png)
+![Executores no Nextflow](img/nf-executors.png)
 
-To run your pipeline with a batch scheduler, modify the `nextflow.config` file specifying the target executor and the required computing resources if needed. For example:
+Para executar seu pipeline com um escalonador de lote, modifique o arquivo `nextflow.config` especificando o executor de destino e os recursos de computação necessários, se necessário. Por exemplo:
 
 ```groovy linenums="1"
 process.executor = 'slurm'
 ```
 
-## Managing cluster resources
+## Gerenciando recursos do cluster
 
-When using a batch scheduler, it is often needed to specify the number of resources (i.e. cpus, memory, execution time, etc.) required by each task.
+Ao usar um escalonador de lote, geralmente é necessário especificar o número de recursos (ou seja, CPU, memória, tempo de execução etc.) necessários para cada tarefa.
 
 This can be done using the following process directives:
 
-|                                                                   |                                                               |
-| ----------------------------------------------------------------- | ------------------------------------------------------------- |
-| [queue](https://www.nextflow.io/docs/latest/process.html#queue)   | the cluster _queue_ to be used for the computation            |
-| [cpus](https://www.nextflow.io/docs/latest/process.html#cpus)     | the number of _cpus_ to be allocated a task execution         |
-| [memory](https://www.nextflow.io/docs/latest/process.html#memory) | the amount of _memory_ to be allocated for a task execution   |
-| [time](https://www.nextflow.io/docs/latest/process.html#time)     | the max amount of _time_ to be allocated for a task execution |
-| [disk](https://www.nextflow.io/docs/latest/process.html#disk)     | the amount of disk storage required for a task execution      |
+|                                                                   |                                                                              |
+| ----------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| [queue](https://www.nextflow.io/docs/latest/process.html#queue)   | a _fila_ a ser utilizada no cluster para computação                          |
+| [cpus](https://www.nextflow.io/docs/latest/process.html#cpus)     | o número de _cpus_ a serem alocadas para execução da tarefa                  |
+| [memory](https://www.nextflow.io/docs/latest/process.html#memory) | a quantidade de _memória_ a ser alocada para execução da tarefa              |
+| [time](https://www.nextflow.io/docs/latest/process.html#time)     | a quantidade de _tempo_ máxima a ser alocada para execução da tarefa         |
+| [disk](https://www.nextflow.io/docs/latest/process.html#disk)     | a quantidade de espaço de armazenamento necessária para a execução da tarefa |
 
-### Workflow wide resources
+### Recursos do fluxo de trabalho de modo amplo
 
-Use the scope `process` to define the resource requirements for all processes in your workflow applications. For example:
+Use o escopo `process` para definir os requisitos de recursos para todos os processos em suas aplicações de fluxo de trabalho. Por exemplo:
 
 ```groovy linenums="1"
 process {
     executor = 'slurm'
-    queue = 'short'
+    queue = 'curta'
     memory = '10 GB'
     time = '30 min'
     cpus = 4
 }
 ```
 
-### Configure process by name
+### Configure processos por nome
 
-In real-world applications, different tasks need different amounts of computing resources. It is possible to define the resources for a specific task using the select `withName:` followed by the process name:
+Em aplicações do mundo real, diferentes tarefas precisam de diferentes quantidades de recursos de computação. É possível definir os recursos para uma tarefa específica usando o seletor `withName:` seguido do nome do processo:
 
 ```groovy linenums="1"
 process {
     executor = 'slurm'
-    queue = 'short'
+    queue = 'curta'
     memory = '10 GB'
     time = '30 min'
     cpus = 4
@@ -63,20 +63,20 @@ process {
     withName: foo {
         cpus = 2
         memory = '20 GB'
-        queue = 'short'
+        queue = 'curta'
     }
 
     withName: bar {
         cpus = 4
         memory = '32 GB'
-        queue = 'long'
+        queue = 'longa'
     }
 }
 ```
 
 !!! exercise
 
-    Run the RNA-Seq script (`script7.nf`) from earlier, but specify that the `quantification` `process` requires 2 CPUs and 5 GB of memory, within the `nextflow.config` file.
+    Execute o script RNA-Seq (`script7.nf`) visto na seção de RNAseq, mas especifique dentro do arquivo `nextflow.config` que o processo de quantificação (`QUANTIFICATION`) requer 2 CPUs e 5 GB de memória.
 
     ??? solution
 
@@ -89,45 +89,45 @@ process {
         }
         ```
 
-### Configure process by labels
+### Configure processos por rótulos
 
-When a workflow application is composed of many processes, listing all of the process names and choosing resources for each of them in the configuration file can be difficult.
+Quando uma aplicação de fluxo de trabalho é composta por muitos processos, pode ser difícil listar todos os nomes de processos e escolher recursos para cada um deles no arquivo de configuração.
 
-A better strategy consists of annotating the processes with a [label](https://www.nextflow.io/docs/latest/process.html#label) directive. Then specify the resources in the configuration file used for all processes having the same label.
+Uma melhor estratégia consiste em anotar os processos com uma diretiva de [rótulo](https://www.nextflow.io/docs/latest/process.html#label) (`label`). Em seguida, especifique os recursos no arquivo de configuração usados para todos os processos com o mesmo rótulo.
 
-The workflow script:
+O script do fluxo de trabalho:
 
 ```groovy linenums="1"
 process task1 {
-  label 'long'
+  label 'longo'
 
   """
-  first_command --here
+  primeiro_comando --aqui
   """
 }
 
 process task2 {
-  label 'short'
+  label 'curto'
 
   """
-  second_command --here
+  segundo_comando --aqui
   """
 }
 ```
 
-The configuration file:
+O arquivo de configuração:
 
 ```groovy linenums="1"
 process {
     executor = 'slurm'
 
-    withLabel: 'short' {
+    withLabel: 'curto' {
         cpus = 4
         memory = '20 GB'
-        queue = 'alpha'
+        queue = 'alfa'
     }
 
-    withLabel: 'long' {
+    withLabel: 'longo' {
         cpus = 8
         memory = '32 GB'
         queue = 'omega'
@@ -135,17 +135,17 @@ process {
 }
 ```
 
-### Configure multiple containers
+### Configure vários contêineres
 
-Containers can be set for each process in your workflow. You can define their containers in a config file as shown below:
+Os contêineres podem ser definidos para cada processo em seu fluxo de trabalho. Você pode definir seus contêineres em um arquivo de configuração conforme mostrado abaixo:
 
 ```groovy linenums="1"
 process {
   withName: foo {
-    container = 'some/image:x'
+    container = 'uma/imagem:x'
   }
   withName: bar {
-    container = 'other/image:y'
+    container = 'outra/imagem:y'
   }
 }
 
@@ -154,34 +154,34 @@ docker.enabled = true
 
 !!! tip
 
-    Should I use a single _fat_ container or many _slim_ containers? Both approaches have pros & cons. A single container is simpler to build and maintain, however when using many tools the image can become very big and tools can create conflicts with each other. Using a container for each process can result in many different images to build and maintain, especially when processes in your workflow use different tools for each task.
+    Devo usar um único contêiner _pesado_ ou muitos contêineres _leves_? Ambas as abordagens têm prós e contras. Um único container é mais simples de construir e manter, porém ao usar muitas ferramentas a imagem pode ficar muito grande e as ferramentas podem criar conflitos umas com as outras. O uso de um contêiner para cada processo pode resultar em muitas imagens diferentes para criar e manter, especialmente quando os processos em seu fluxo de trabalho usam ferramentas diferentes para cada tarefa.
 
-Read more about config process selectors at [this link](https://www.nextflow.io/docs/latest/config.html#process-selectors).
+Leia mais sobre seletores de processo de configuração [neste link](https://www.nextflow.io/docs/latest/config.html#process-selectors).
 
-## Configuration profiles
+## Perfis de configuração
 
-Configuration files can contain the definition of one or more _profiles_. A profile is a set of configuration attributes that can be activated/chosen when launching a pipeline execution by using the `-profile` command- line option.
+Os arquivos de configuração podem conter a definição de um ou mais _perfis_. Um perfil é um conjunto de atributos de configuração que podem ser ativados/escolhidos ao lançar a execução de um pipeline usando a opção de linha de comando `-profile`.
 
-Configuration profiles are defined by using the special scope `profiles` which group the attributes that belong to the same profile using a common prefix. For example:
+Os perfis de configuração são definidos usando o escopo especial `profiles` que agrupa os atributos que pertencem ao mesmo perfil usando um prefixo comum. Por exemplo:
 
 ```groovy linenums="1"
 profiles {
 
     standard {
-        params.genome = '/local/path/ref.fasta'
+        params.genoma = '/local/caminho/ref.fasta'
         process.executor = 'local'
     }
 
     cluster {
-        params.genome = '/data/stared/ref.fasta'
+        params.genoma = '/data/stared/ref.fasta'
         process.executor = 'sge'
-        process.queue = 'long'
+        process.queue = 'longa'
         process.memory = '10GB'
-        process.conda = '/some/path/env.yml'
+        process.conda = '/um/caminho/ambiente.yml'
     }
 
-    cloud {
-        params.genome = '/data/stared/ref.fasta'
+    nuvem {
+        params.genoma = '/data/stared/ref.fasta'
         process.executor = 'awsbatch'
         process.container = 'cbcrg/imagex'
         docker.enabled = true
@@ -190,23 +190,23 @@ profiles {
 }
 ```
 
-This configuration defines three different profiles: `standard`, `cluster` and `cloud` that set different process configuration strategies depending on the target runtime platform. By convention, the `standard` profile is implicitly used when no other profile is specified by the user.
+Essa configuração define três perfis diferentes: `standard`, `cluster` e `nuvem` que definem diferentes estratégias de configuração de processo dependendo da plataforma de tempo de execução de destino. Por convenção, o perfil `standard` é usado implicitamente quando nenhum outro perfil é especificado pelo usuário.
 
-To enable a specific profile use `-profile` option followed by the profile name:
+Para ativar um perfil específico, use a opção `-profile` seguida do nome do perfil:
 
 ```bash
-nextflow run <your script> -profile cluster
+nextflow run <seu script> -profile cluster
 ```
 
 !!! tip
 
-    Two or more configuration profiles can be specified by separating the profile names with a comma character:
+    Dois ou mais perfis de configuração podem ser especificados separando os nomes dos perfis com uma vírgula:
 
     ```bash
-    nextflow run <your script> -profile standard,cloud
+    nextflow run <seu script> -profile standard,nuvem
     ```
 
-## Cloud deployment
+## Implantação na nuvem
 
 [AWS Batch](https://aws.amazon.com/batch/) is a managed computing service that allows the execution of containerized workloads in the Amazon cloud infrastructure.
 
@@ -244,7 +244,7 @@ aws.batch.cliPath = '/home/ec2-user/miniconda/bin/aws' // (6)!
 
 The complete details about AWS Batch deployment are available at [this link](https://www.nextflow.io/docs/latest/awscloud.html#aws-batch).
 
-## Volume mounts
+## Montagens de volume
 
 Elastic Block Storage (EBS) volumes (or other supported storage) can be mounted in the job container using the following configuration snippet:
 
@@ -275,7 +275,7 @@ aws {
 
     Nextflow expects paths to be available. It does not handle the provision of EBS volumes or another kind of storage.
 
-## Custom job definition
+## Definição de tarefa personalizada
 
 Nextflow automatically creates the Batch [Job definitions](https://docs.aws.amazon.com/batch/latest/userguide/job_definitions.html) needed to execute your pipeline processes. Therefore it’s not required to define them before you run your workflow.
 
@@ -289,7 +289,7 @@ process {
 }
 ```
 
-## Custom image
+## Imagem personalizada
 
 Since Nextflow requires the AWS CLI tool to be accessible in the computing environment, a common solution consists of creating a custom Amazon Machine Image (AMI) and installing it in a self-contained manner (e.g. using Conda package manager).
 
@@ -317,7 +317,7 @@ Finally, specify the `aws` full path in the Nextflow config file as shown below:
 aws.batch.cliPath = '/home/ec2-user/miniconda/bin/aws'
 ```
 
-## Launch template
+## Modelo de lançamento
 
 An alternative approach to is to create a custom AMI using a [Launch template](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html) that installs the AWS CLI tool during the instance boot via custom user data.
 
@@ -350,7 +350,7 @@ chown -R ec2-user:ec2-user $USER/miniconda
 
 Then create a new compute environment in the Batch dashboard and specify the newly created launch template in the corresponding field.
 
-## Hybrid deployments
+## Implantação híbrida
 
 Nextflow allows the use of multiple executors in the same workflow application. This feature enables the deployment of hybrid workloads in which some jobs are executed on the local computer or local computing cluster, and some jobs are offloaded to the AWS Batch service.
 
