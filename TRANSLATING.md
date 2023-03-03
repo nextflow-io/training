@@ -8,7 +8,7 @@ The typical workflow for contributing with translation is as follows:
 2. Work locally (see below) and make your changes
     - Check if the language you want to translate to is already enabled in the `mkdocs.yml` file. If it isn't do it according to [this](https://github.com/nextflow-io/training/pull/163/files#diff-98d0f806abc9af24e6a7c545d3d77e8f9ad57643e27211d7a7b896113e420ed2) example.
     - If you want to improve an already existing translation, the file already exists and the language is already set up. Simply open the file and work on it. Otherwise, create the new file with the following pattern: If the original file in English is `filename.md`, you will create in the same folder a new file named `filename.language_code.md`, where `language_code` is the language code that you can find [here](https://en.wikipedia.org/wiki/ISO_639-1), for the language you wish to translate to. Pay attention to the language code, as it has to be the same that is specified in the `mkdocs.yml` file for that language.
-    - Ideally, for new files, copy-paste the original English file with the new filename and commit. This way, it's easier to review your pull request by seeing the original file in English vs the translated changes you did.
+    - Ideally, for new files, copy-paste the original English contents into the new file and commit _before_ starting to translate. This way, it's easier to review your pull request by seeing the original file in English vs the translated changes you did.
 3. Commit and push to your forked repository
 4. Open a pull-request against the main repo, which can be reviewed and merged
 5. Tag other contributors with @ requesting a review. Pull Requests should only be merged if they have at least a single review.
