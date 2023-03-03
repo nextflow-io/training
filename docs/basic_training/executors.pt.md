@@ -208,11 +208,11 @@ nextflow run <seu script> -profile cluster
 
 ## Implantação na nuvem
 
-[AWS Batch](https://aws.amazon.com/batch/) is a managed computing service that allows the execution of containerized workloads in the Amazon cloud infrastructure.
+[AWS Batch](https://aws.amazon.com/batch/) é um serviço de computação gerenciada que permite a execução de cargas de trabalho em contêineres na infraestrutura de nuvem da Amazon.
 
-Nextflow provides built-in support for AWS Batch which allows the seamless deployment of a Nextflow pipeline in the cloud, offloading the process executions as Batch jobs.
+O Nextflow fornece suporte embutido para o AWS Batch, que permite uma implantação simples de um pipeline do Nextflow na nuvem, descarregando as execuções de processo como trabalhos em lote.
 
-Once the Batch environment is configured, specify the instance types to be used and the max number of CPUs to be allocated, you need to create a Nextflow configuration file like the one shown below:
+Uma vez que o ambiente Batch esteja configurado, especifique os tipos de instância a serem usadas e o número máximo de CPUs a serem alocadas. Você precisa criar um arquivo de configuração do Nextflow como o mostrado abaixo:
 
 !!! info ""
 
@@ -227,22 +227,22 @@ aws.region = 'eu-west-1' // (5)!
 aws.batch.cliPath = '/home/ec2-user/miniconda/bin/aws' // (6)!
 ```
 
-1. Set AWS Batch as the executor to run the processes in the workflow
-2. The name of the computing queue defined in the Batch environment
-3. The Docker container image to be used to run each job
-4. The workflow work directory must be a AWS S3 bucket
-5. The AWS region to be used
-6. The path of the AWS cli tool required to download/upload files to/from the container
+1. Defina o AWS Batch como o executor para executar os processos no fluxo de trabalho
+2. O nome da fila de computação definida no ambiente Batch
+3. A imagem do contêiner do Docker a ser usada para executar cada trabalho
+4. O diretório de trabalho do fluxo de trabalho deve ser um bucket AWS S3
+5. A região da AWS a ser usada
+6. O caminho da ferramenta de linha de comando da AWS necessária para fazer download/upload de arquivos de/para o contêiner
 
 !!! tip
 
-    The best practice is to keep this setting as a separate profile in your workflow config file. This allows the execution with a simple command.
+    A prática recomendada é manter essa configuração como um perfil separado no arquivo de configuração do fluxo de trabalho. Isso permite a execução com um comando simples.
 
     ```bash
     nextflow run script7.nf
     ```
 
-The complete details about AWS Batch deployment are available at [this link](https://www.nextflow.io/docs/latest/awscloud.html#aws-batch).
+Os detalhes completos sobre a implantação no AWS Batch estão disponíveis [nesse link](https://www.nextflow.io/docs/latest/awscloud.html#aws-batch).
 
 ## Montagens de volume
 
@@ -251,41 +251,41 @@ Elastic Block Storage (EBS) volumes (or other supported storage) can be mounted 
 ```groovy
 aws {
   batch {
-      volumes = '/some/path'
+      volumes = '/algum/caminho'
   }
 }
 ```
 
-Multiple volumes can be specified using comma-separated paths. The usual Docker volume mount syntax can be used to define complex volumes for which the container path is different from the host path or to specify a read-only option:
+Vários volumes podem ser especificados usando caminhos separados por vírgulas. A sintaxe usual de montagem de volume do Docker pode ser usada para definir volumes complexos para os quais o caminho do contêiner é diferente do caminho do host ou para especificar uma opção somente leitura:
 
 ```groovy
 aws {
   region = 'eu-west-1'
   batch {
-      volumes = ['/tmp', '/host/path:/mnt/path:ro']
+      volumes = ['/tmp', '/host/caminho:/mnt/caminho:ro']
   }
 }
 ```
 
 !!! tip
 
-    This is a global configuration that has to be specified in a Nextflow config file and will be applied to **all** process executions.
+    Esta é uma configuração global que deve ser especificada em um arquivo de configuração do Nextflow e será aplicada a **todas** as execuções do processo.
 
 !!! warning
 
-    Nextflow expects paths to be available. It does not handle the provision of EBS volumes or another kind of storage.
+    O Nextflow espera que os caminhos estejam disponíveis. Ele não lida com o fornecimento de volumes EBS ou outro tipo de armazenamento.
 
 ## Definição de tarefa personalizada
 
-Nextflow automatically creates the Batch [Job definitions](https://docs.aws.amazon.com/batch/latest/userguide/job_definitions.html) needed to execute your pipeline processes. Therefore it’s not required to define them before you run your workflow.
+O Nextflow cria automaticamente as [definições de trabalho](https://docs.aws.amazon.com/batch/latest/userguide/job_definitions.html) do Batch necessárias para executar seus processos de pipeline. Portanto, não é necessário defini-las antes de executar seu fluxo de trabalho.
 
-However, you may still need to specify a custom Job Definition to provide fine-grained control of the configuration settings of a specific job (e.g. to define custom mount paths or other special settings of a Batch Job).
+No entanto, você ainda pode precisar especificar uma definição de tarefa personalizada para fornecer controle refinado das definições de configuração de uma tarefa específica (por exemplo, para definir caminhos de montagem personalizados ou outras configurações especiais de uma tarefa no Batch).
 
-To use your own job definition in a Nextflow workflow, use it in place of the container image name, prefixing it with the `job-definition://` string. For example:
+Para usar sua própria definição de tarefa em um fluxo de trabalho do Nextflow, use-a no lugar do nome da imagem do contêiner, prefixando-a com a string `job-definition://`. Por exemplo:
 
 ```groovy
 process {
-    container = 'job-definition://your-job-definition-name'
+    container = 'job-definition://o-nome-da-sua-definicao-de-tarefa'
 }
 ```
 
