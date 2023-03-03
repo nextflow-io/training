@@ -9,7 +9,7 @@ A definição de bibliotecas modulares simplifica a escrita de pipelines complex
 
 Ao usar o exemplo `hello.nf` do tópico anterior, nós converteremos os processos do pipeline em módulos e, em seguida, executaremos estes processos dentro do escope do workflow de diferentes formas. 
 
-## Modulos
+## Módulos
 
 O Nextflow DSL2 permite a definição de scripts de módulos autônomos que podem ser incluídos e compartilhados em vários fluxos de trabalho. Cada módulo pode conter sua própria definição de `process` ou `workflow`.
 
