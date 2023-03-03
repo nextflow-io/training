@@ -5,9 +5,9 @@ description: Material de treinamento básico do Nextflow
 
 # Modularização
 
-A definição de bibliotecas modulares simplifica a escrita de pipelines complexos de anaálise de dados, além tornar o reuso de processos mais fácil. 
+A definição de bibliotecas modulares simplifica a escrita de pipelines complexos de anaálise de dados, além tornar o reuso de processos mais fácil.
 
-Ao usar o exemplo `hello.nf` do tópico anterior, nós converteremos os processos do pipeline em módulos e, em seguida, executaremos estes processos dentro do escope do workflow de diferentes formas. 
+Ao usar o exemplo `hello.nf` do tópico anterior, nós converteremos os processos do pipeline em módulos e, em seguida, executaremos estes processos dentro do escope do workflow de diferentes formas.
 
 ## Módulos
 
@@ -19,14 +19,14 @@ Os componentes definidos no script do módulo podem ser importados para outros s
 
 Usando o exemplo `hello.nf`, podemos fazer isso:
 
-- Criando um arquivo chamado `modules.nf` no diretório de nível superior.
-- Recortando e colando as duas definições de processo para `SPLITLETTERS` e `CONVERTTOUPPER` em `modules.nf`.
-- Removendo as definições `process` no script `hello.nf`.
-- Importando os processos de `modules.nf` dentro do script `hello.nf` em qualquer lugar acima da definição de `workflow`:
+-   Criando um arquivo chamado `modules.nf` no diretório de nível superior.
+-   Recortando e colando as duas definições de processo para `SPLITLETTERS` e `CONVERTTOUPPER` em `modules.nf`.
+-   Removendo as definições `process` no script `hello.nf`.
+-   Importando os processos de `modules.nf` dentro do script `hello.nf` em qualquer lugar acima da definição de `workflow`:
 
 ```groovy linenums="1"
-include { SPLITLETTERS } de './modules.nf'
-include { CONVERTTOUPPER } de './modules.nf'
+include { SPLITLETTERS } from './modules.nf'
+include { CONVERTTOUPPER } from './modules.nf'
 ```
 
 !!! note
@@ -87,14 +87,14 @@ include { CONVERTTOUPPER } de './modules.nf'
         }
         ```
 
-        Agora nós modularizamos os processos, o que faz com que o código seja reutilizável. 
+        Agora nós modularizamos os processos, o que faz com que o código seja reutilizável.
 
 ### Importações múltiplas
 
 Se um script de módulo Nextflow contiver várias definições de `process`, elas também podem ser importadas usando uma única instrução `include`, conforme mostrado no exemplo abaixo:
 
 ```groovy linenums="1"
-include { SPLITLETTERS; CONVERTTOUPPER } de './modules.nf'
+include { SPLITLETTERS; CONVERTTOUPPER } from './modules.nf'
 ```
 
 ### Apelidos dos módulos
@@ -149,7 +149,7 @@ workflow {
 !!! tip
 
     Você pode armazenar cada processo em arquivos separados em subpastas separadas ou combinados em um arquivo grande (ambos são válidos).
-    Você pode encontrar exemplos disso em repositórios públicos, como o [tutorial Seqera RNA-Seq](https://github.com/seqeralabs/rnaseq-nf/tree/master/modules) ou em pipelines do nf-core, como [nf-core/rnaseq](https://github.com/nf-core/rnaseq/tree/master/modules/nf-core/modules). 
+    Você pode encontrar exemplos disso em repositórios públicos, como o [tutorial Seqera RNA-Seq](https://github.com/seqeralabs/rnaseq-nf/tree/master/modules) ou em pipelines do nf-core, como [nf-core/rnaseq](https://github.com/nf-core/rnaseq/tree/master/modules/nf-core/modules).
 
 ### Definição de saída
 
@@ -166,7 +166,7 @@ workflow  {
 }
 ```
 
-!!! note 
+!!! note
 
     Nós movemos o `greeting_ch` para o escopo do `workflow` para este exercício.
 
