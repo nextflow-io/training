@@ -246,7 +246,7 @@ Os detalhes completos sobre a implantação no AWS Batch estão disponíveis [ne
 
 ## Montagens de volume
 
-Elastic Block Storage (EBS) volumes (or other supported storage) can be mounted in the job container using the following configuration snippet:
+Elastic Block Storage (EBS) (ou outras formas de armazenamento suportadas) podem ser montados no contêiner da tarefa usando a seguinte configuração:
 
 ```groovy
 aws {
