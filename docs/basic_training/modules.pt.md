@@ -11,7 +11,7 @@ Ao usar o exemplo `hello.nf` da seção de introdução, nós converteremos os p
 
 ## Módulos
 
-O Nextflow DSL2 permite a definição de scripts de módulos autônomos que podem ser incluídos e compartilhados em vários fluxos de trabalho. Cada módulo pode conter sua própria definição de `process` ou `workflow`.
+A DSL2 do Nextflow permite a definição de scripts de módulos autônomos que podem ser incluídos e compartilhados em vários fluxos de trabalho. Cada módulo pode conter sua própria definição de `process` ou `workflow`.
 
 ### Importando módulos
 
