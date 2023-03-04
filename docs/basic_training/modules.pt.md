@@ -469,4 +469,4 @@ Olá mundo!
 
 ## Notas de migração DSL2
 
-Para visualizar um resumo das alterações introduzidas quando o Nextflow migrou de DSL1 para DSL2, consulte as [notas de migração DSL2](https://www.nextflow.io/docs/latest/dsl2.html#dsl2-migration-notes) na documentação oficial do Nextflow.
+Para visualizar um resumo das alterações introduzidas quando o Nextflow migrou da DSL1 para a DSL2, consulte as [notas de migração da DSL2](https://www.nextflow.io/docs/latest/dsl2.html#dsl2-migration-notes) na documentação oficial do Nextflow.
