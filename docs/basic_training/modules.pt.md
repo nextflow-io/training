@@ -5,7 +5,7 @@ description: Material de treinamento básico do Nextflow
 
 # Modularização
 
-A definição de bibliotecas modulares simplifica a escrita de pipelines complexos de anaálise de dados, além tornar o reuso de processos mais fácil.
+A definição de bibliotecas modulares simplifica a escrita de pipelines complexos de análise de dados, além tornar o reuso de processos mais fácil.
 
 Ao usar o exemplo `hello.nf` do tópico anterior, nós converteremos os processos do pipeline em módulos e, em seguida, executaremos estes processos dentro do escope do workflow de diferentes formas.
 
