@@ -149,7 +149,7 @@ workflow {
 !!! tip
 
     Você pode armazenar cada processo em arquivos separados em subpastas separadas ou combinados em um arquivo grande (ambos são válidos).
-    Você pode encontrar exemplos disso em repositórios públicos, como o [tutorial Seqera RNA-Seq](https://github.com/seqeralabs/rnaseq-nf/tree/master/modules) ou em pipelines do nf-core, como [nf-core/rnaseq](https://github.com/nf-core/rnaseq/tree/master/modules/nf-core/modules).
+    Você pode encontrar exemplos disso em repositórios públicos, como no [tutorial de RNA-Seq da Seqera](https://github.com/seqeralabs/rnaseq-nf/tree/master/modules) ou em pipelines do nf-core, como o [nf-core/rnaseq](https://github.com/nf-core/rnaseq/tree/master/modules/nf-core/modules).
 
 ### Definição de saída
 
