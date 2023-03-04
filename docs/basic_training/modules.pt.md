@@ -35,7 +35,7 @@ include { CONVERTTOUPPER } from './modules.nf'
 
 !!! exercise
 
-    Crie um arquivo `modules.nf` com os processos previamente definidos de `hello.nf`. Em seguida, remova esses processos de `hello.nf` e adicione as definições `include` mostradas acima.
+    Crie um arquivo `modules.nf` com os processos previamente definidos no script `hello.nf`. Em seguida, remova esses processos de `hello.nf` e adicione as definições `include` mostradas acima.
 
     ??? solution
 
