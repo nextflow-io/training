@@ -291,13 +291,13 @@ process {
 
 ## Imagem personalizada
 
-Since Nextflow requires the AWS CLI tool to be accessible in the computing environment, a common solution consists of creating a custom Amazon Machine Image (AMI) and installing it in a self-contained manner (e.g. using Conda package manager).
+Como o Nextflow exige que a ferramenta de linha de comando da AWS esteja acessível no ambiente de computação, uma solução comum consiste em criar uma Amazon Machine Image (AMI) personalizada e instalá-la de maneira independente (por exemplo, usando o gerenciador de pacotes Conda).
 
 !!! warning
 
-    When creating your custom AMI for AWS Batch, make sure to use the _Amazon ECS-Optimized Amazon Linux AMI_ as the base image.
+    Ao criar sua AMI personalizada para o AWS Batch, certifique-se de usar a _Amazon ECS-Optimized Amazon Linux AMI_ como imagem base.
 
-The following snippet shows how to install AWS CLI with Miniconda:
+O trecho de código a seguir mostra como instalar a ferramenta de linha de comando da AWS com o Miniconda:
 
 ```bash linenums="1"
 sudo yum install -y bzip2 wget
@@ -309,9 +309,9 @@ rm Miniconda3-latest-Linux-x86_64.sh
 
 !!! note
 
-    The `aws` tool will be placed in a directory named `bin` in the main installation folder. The tools will not work properly if you modify this directory     structure after the installation.
+    A ferramenta `aws` será colocada em um diretório chamado `bin` na pasta principal de instalação. As ferramentas não funcionarão corretamente se você modificar essa estrutura de diretórios após a instalação.
 
-Finally, specify the `aws` full path in the Nextflow config file as shown below:
+Por fim, especifique o caminho completo para a `aws` no arquivo de configuração do Nextflow, conforme mostrado abaixo:
 
 ```groovy
 aws.batch.cliPath = '/home/ec2-user/miniconda/bin/aws'
@@ -319,9 +319,9 @@ aws.batch.cliPath = '/home/ec2-user/miniconda/bin/aws'
 
 ## Modelo de lançamento
 
-An alternative approach to is to create a custom AMI using a [Launch template](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html) that installs the AWS CLI tool during the instance boot via custom user data.
+Uma abordagem alternativa é criar uma AMI personalizada usando um [modelo de lançamento](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html) que instala a ferramenta de linha de comando da AWS durante o lançamento da instância por meio de dados de usuário personalizados.
 
-In the EC2 dashboard, create a Launch template specifying the user data field:
+No painel do EC2, crie um modelo de lançamento especificando o campo de dados do usuário:
 
 ```bash linenums="1"
 MIME-Version: 1.0
@@ -348,25 +348,25 @@ chown -R ec2-user:ec2-user $USER/miniconda
 --//--
 ```
 
-Then create a new compute environment in the Batch dashboard and specify the newly created launch template in the corresponding field.
+Em seguida, crie um novo ambiente de computação no painel Batch e especifique o modelo de lançamento recém-criado no campo correspondente.
 
 ## Implantação híbrida
 
-Nextflow allows the use of multiple executors in the same workflow application. This feature enables the deployment of hybrid workloads in which some jobs are executed on the local computer or local computing cluster, and some jobs are offloaded to the AWS Batch service.
+O Nextflow permite o uso de vários executores na mesma aplicação do fluxo de trabalho. Esse recurso permite a implantação de cargas de trabalho híbridas nas quais alguns trabalhos são executados no computador local ou cluster de computação local e alguns trabalhos são transferidos para o serviço AWS Batch.
 
-To enable this feature use one or more [process selectors](https://www.nextflow.io/docs/latest/config.html#config-process-selectors) in your Nextflow configuration file.
+Para ativar esse recurso, use um ou mais [seletores de processo](https://www.nextflow.io/docs/latest/config.html#config-process-selectors) em seu arquivo de configuração do Nextflow.
 
-For example, apply the [AWS Batch configuration](https://www.nextflow.io/docs/latest/awscloud.html#awscloud-batch-config) only to a subset of processes in your workflow. You can try the following:
+Por exemplo, aplique a [configuração do AWS Batch](https://www.nextflow.io/docs/latest/awscloud.html#awscloud-batch-config) apenas a um subconjunto de processos em seu fluxo de trabalho. Você pode tentar o seguinte:
 
 ```groovy linenums="1"
 process {
     executor = 'slurm' // (1)!
-    queue = 'short' // (2)!
+    queue = 'curta' // (2)!
 
-    withLabel: bigTask {  // (3)!
+    withLabel: tarefaGrande {  // (3)!
         executor = 'awsbatch' // (4)!
-        queue = 'my-batch-queue' // (5)!
-        container = 'my/image:tag' // (6)!
+        queue = 'minha-fila-do-batch' // (5)!
+        container = 'minha/imagem:tag' // (6)!
     }
 }
 
@@ -375,10 +375,10 @@ aws {
 }
 ```
 
-1. Set `slurm` as the default executor
-2. Set the queue for the SLURM cluster
-3. Setting of a process named `bigTask`
-4. Set `awsbatch` as the executor for the `bigTask` process
-5. Set the queue for the `bigTask` process
-6. Set the container image to deploy for the `bigTask` process
-7. Define the region for Batch execution
+1. Defina o `slurm` como o executor padrão
+2. Defina a fila para o cluster SLURM
+3. Configure um processo chamado `taregaGrande`
+4. Defina `awsbatch` como o executor para o processo `tarefaGrande`
+5. Defina a fila para o processo `tarefaGrande`
+6. Defina a imagem do contêiner para implantar para o processo `tarefaGrande`
+7. Defina a região para execução do Batch
