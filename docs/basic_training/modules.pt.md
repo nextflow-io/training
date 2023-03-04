@@ -19,7 +19,7 @@ Os componentes definidos no script do módulo podem ser importados para outros s
 
 Usando o exemplo `hello.nf`, podemos fazer isso:
 
--   Criando um arquivo chamado `modules.nf` no diretório de nível superior.
+-   Criando um arquivo chamado `modules.nf` no mesmo diretório do `hello.nf`.
 -   Recortando e colando as duas definições de processo para `SPLITLETTERS` e `CONVERTTOUPPER` em `modules.nf`.
 -   Removendo as definições `process` no script `hello.nf`.
 -   Importando os processos de `modules.nf` dentro do script `hello.nf` em qualquer lugar acima da definição de `workflow`:
