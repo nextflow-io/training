@@ -6,7 +6,7 @@ description: Material de treinamento básico do Nextflow
 
 Aplicações genômicas do mundo real podem gerar milhares de tarefas sendo executadas. Nesse cenário, um escalonador de lote (batch scheduler) é comumente usado para implantar um pipeline em um cluster de computação, permitindo a execução de muitos trabalhos em paralelo em muitos nós de computação.
 
-O Nextflow possui suporte embutido para os escalonadores de lote mais usados, como o Univa Grid Engine, [SLURM](https://slurm.schedmd.com/) e o IBM LSF. Verifique a documentação do Nextflow para obter a lista completa dos [ambientes de computação](https://www.nextflow.io/docs/latest/executor.html).
+O Nextflow possui suporte embutido para os escalonadores de lote mais usados, como o Univa Grid Engine, o [SLURM](https://slurm.schedmd.com/) e o IBM LSF. Verifique a documentação do Nextflow para obter a lista completa dos [ambientes de computação](https://www.nextflow.io/docs/latest/executor.html).
 
 ## Implantação em cluster
 
@@ -24,7 +24,7 @@ process.executor = 'slurm'
 
 Ao usar um escalonador de lote, geralmente é necessário especificar o número de recursos (ou seja, CPU, memória, tempo de execução etc.) necessários para cada tarefa.
 
-This can be done using the following process directives:
+Isso pode ser feito utilizando as seguintes diretivas de processo:
 
 |                                                                   |                                                                              |
 | ----------------------------------------------------------------- | ---------------------------------------------------------------------------- |
@@ -98,7 +98,7 @@ Uma melhor estratégia consiste em anotar os processos com uma diretiva de [rót
 O script do fluxo de trabalho:
 
 ```groovy linenums="1"
-process task1 {
+process tarefa1 {
   label 'longo'
 
   """
@@ -106,7 +106,7 @@ process task1 {
   """
 }
 
-process task2 {
+process tarefa2 {
   label 'curto'
 
   """
@@ -216,7 +216,7 @@ Uma vez que o ambiente Batch esteja configurado, especifique os tipos de instân
 
 !!! info ""
 
-    Click the :material-plus-circle: icons in the code for explanations.
+    Clique no ícone :material-plus-circle: no código para ver explicações.
 
 ```groovy linenums="1"
 process.executor = 'awsbatch' // (1)!
@@ -377,7 +377,7 @@ aws {
 
 1. Defina o `slurm` como o executor padrão
 2. Defina a fila para o cluster SLURM
-3. Configure um processo chamado `taregaGrande`
+3. Configure um processo chamado `tarefaGrande`
 4. Defina `awsbatch` como o executor para o processo `tarefaGrande`
 5. Defina a fila para o processo `tarefaGrande`
 6. Defina a imagem do contêiner para implantar para o processo `tarefaGrande`
