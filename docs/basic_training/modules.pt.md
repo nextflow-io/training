@@ -363,7 +363,7 @@ workflow {
 }
 ```
 
-O resultado do snippet acima pode ser acessado usando `my_pipeline.out.my_data`.
+O resultado do trecho de código acima pode ser acessado usando `my_pipeline.out.my_data`.
 
 ### Chamando workflows nomeados
 
