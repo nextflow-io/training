@@ -21,7 +21,7 @@ The only difference between the two is that the `println` method implicitly appe
 
 !!! tip
 
-    Parentheses for function invocations are optional. Therefore, the following syntax is also valid :
+    Parentheses for function invocations are optional. Therefore, the following syntax is also valid:
 
     ```groovy linenums="1"
     println "Hello, World!"
@@ -32,7 +32,7 @@ The only difference between the two is that the `println` method implicitly appe
 Comments use the same syntax as C-family programming languages:
 
 ```groovy linenums="1"
-// comment a single config file
+// comment a single file
 
 /*
     a comment spanning
@@ -77,14 +77,14 @@ A List object can be defined by placing the list items in square brackets:
 list = [10,20,30,40]
 ```
 
-You can access a given item in the list with square-bracket notation (indexes start at `0`) or using the get method:
+You can access a given item in the list with square-bracket notation (indexes start at `0`) or using the `get` method:
 
 ```groovy linenums="1"
 println list[0]
 println list.get(0)
 ```
 
-In order to get the length of a list you can use the size method:
+In order to get the length of a list you can use the `size` method:
 
 ```groovy linenums="1"
 println list.size()
@@ -154,7 +154,7 @@ assert map.get('c') == 2 // (3)!
 
 1. Using square brackets.
 2. Using dot notation.
-3. Using the get method.
+3. Using the `get` method.
 
 To add data or to modify a map, the syntax is similar to adding values to a list:
 
@@ -191,7 +191,7 @@ $x + $y
 
 !!! info
 
-    Note the different use of `$` and `${..}` syntax to interpolate value expressions in a string literal.
+    Note the different use of `$` and `${..}` syntax to interpolate value expressions in a string literal. Besides, note that `$x` was not expanded, as it was enclosed by single quotes.
 
 Finally, string literals can also be defined using the `/` character as a delimiter. They are known as **slashy** strings and are useful for defining regular expressions and patterns, as there is no need to escape backslashes. As with double-quote strings they allow to interpolate variables prefixed with a `$` character.
 
@@ -372,7 +372,7 @@ println x
 [ 1, 4, 9, 16 ]
 ```
 
-By default, closures take a single parameter called `it`, to give it a different name use the `\->` syntax. For example:
+By default, closures take a single parameter called `it`, to give it a different name use the `->` syntax. For example:
 
 ```groovy linenums="1"
 square = { num -> num * num }

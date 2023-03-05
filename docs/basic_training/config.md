@@ -123,7 +123,7 @@ The `env` scope allows the definition of one or more variables that will be expo
 
 ```groovy linenums="1"
 env.ALPHA = 'some value'
-env.BETA = "$HOME/some/path"
+env.BETA = "$HOME/user/some/path"
 ```
 
 Save the above snippet as a file named `my-env.config`. Then save the snippet below in a file named `foo.nf`:
@@ -152,7 +152,7 @@ nextflow run foo.nf -c my-env.config
 
 ### Config process
 
-`process` [directives](https://www.nextflow.io/docs/latest/process.html#directives) allow the specification of settings for the task execution such as `cpus`, `memory`, `container`, and other resources in the pipeline script.
+Process [directives](https://www.nextflow.io/docs/latest/process.html#directives) allow the specification of settings for the task execution such as `cpus`, `memory`, `container`, and other resources in the pipeline script.
 
 This is useful when prototyping a small workflow script.
 
@@ -189,15 +189,15 @@ The syntax for setting `process` directives in the configuration file requires `
 
     ```groovy linenums="1"
     process foo {
-    cpus 4
-    memory 2.GB
-    time 1.hour
-    maxRetries 3
+        cpus 4
+        memory 2.GB
+        time 1.hour
+        maxRetries 3
 
-    script:
-    """
-        your_command --cpus $task.cpus --mem $task.memory
-    """
+        script:
+        """
+            your_command --cpus $task.cpus --mem $task.memory
+        """
     }
     ```
 

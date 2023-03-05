@@ -32,7 +32,7 @@ This can be done using the following process directives:
 | [cpus](https://www.nextflow.io/docs/latest/process.html#cpus)     | the number of _cpus_ to be allocated a task execution         |
 | [memory](https://www.nextflow.io/docs/latest/process.html#memory) | the amount of _memory_ to be allocated for a task execution   |
 | [time](https://www.nextflow.io/docs/latest/process.html#time)     | the max amount of _time_ to be allocated for a task execution |
-| [disk](https://www.nextflow.io/docs/latest/process.html#disk)     | the amount of disk storage required for a task execution      |
+| [disk](https://www.nextflow.io/docs/latest/process.html#disk)     | the amount of _disk_ storage required for a task execution    |
 
 ### Workflow wide resources
 
@@ -239,7 +239,7 @@ aws.batch.cliPath = '/home/ec2-user/miniconda/bin/aws' // (6)!
     The best practice is to keep this setting as a separate profile in your workflow config file. This allows the execution with a simple command.
 
     ```bash
-    nextflow run script7.nf
+    nextflow run script7.nf -profile amazon
     ```
 
 The complete details about AWS Batch deployment are available at [this link](https://www.nextflow.io/docs/latest/awscloud.html#aws-batch).

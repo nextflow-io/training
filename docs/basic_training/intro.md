@@ -125,7 +125,7 @@ workflow { // (18)!
 5. Input declaration for the `SPLITLETTERS` process. Inputs can be values (`val`), files or paths (`path`), or other qualifiers ([see here](https://www.nextflow.io/docs/latest/process.html#inputs)).
 6. Tells the `process` to expect an input value (`val`), that we assign to the variable 'x'.
 7. Output declaration for the `SPLITLETTERS` process.
-8. Tells the process to expect an output file(s) (`path`), with a filename starting with 'chunk\_\*', as output from the script. The process sends the output as a channel.
+8. Tells the process to expect an output file(s) (`path`), with a filename starting with 'chunk\_\', as output from the script. The process sends the output as a channel.
 9. Three double quotes start and end the code block to execute this `process`.
    Inside is the code to execute — printing the `input` value x (called using the dollar symbol [$] prefix), splitting the string into chunks with a length of 6 characters ("Hello " and "world!"), and saving each to a file (chunk_aa and chunk_ab).
 10. End of the first process block.
@@ -167,8 +167,8 @@ Launching `hello.nf` [gigantic_poitras] DSL2 - revision: 197a0e289a
 executor >  local (3)
 [c8/c36893] process > SPLITLETTERS (1)   [100%] 1 of 1 ✔
 [1a/3c54ed] process > CONVERTTOUPPER (2) [100%] 2 of 2 ✔
-WORLD!
 HELLO
+WORLD!
 ```
 
 The standard output shows (line by line):

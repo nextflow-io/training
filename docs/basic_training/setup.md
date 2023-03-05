@@ -4,7 +4,7 @@ description: How to set up a development environment to run Nextflow
 
 # Environment setup
 
-There are two main ways to get started with Seqera’s Nextflow training course.
+There are two main ways to get started with Nextflow's community training course.
 
 The first is to install the requirements [locally](#local-installation), which is best if you are already familiar with Git and Docker, or working offline.
 
@@ -39,7 +39,7 @@ Enter this command in your terminal:
 wget -qO- https://get.nextflow.io | bash
 ```
 
-Or, if you prefer curl:
+Or, if you prefer `curl`:
 
 ```bash
 curl -s https://get.nextflow.io | bash
@@ -51,7 +51,7 @@ Then ensure that the downloaded binary is executable:
 chmod +x nextflow
 ```
 
-AND put the `nextflow` executable into your `$PATH` (e.g. `/usr/local/bin` or `/bin/`)
+And put the `nextflow` executable into your `$PATH` (e.g. `/usr/local/bin` or `/bin/`)
 
 ### Docker
 

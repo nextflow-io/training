@@ -153,7 +153,7 @@ workflow {
 }
 ```
 
-It can be tricky to write a script uses many Bash variables. One possible alternative is to use a script string delimited by single-quote characters
+It can be tricky to write a script that uses many Bash variables. One possible alternative is to use a script string delimited by single-quote characters
 
 ```groovy linenums="1"
 process BAR {
@@ -213,7 +213,7 @@ process FOO {
     bzip2 -c $file > ${file}.bz2
     """
   else
-    throw new IllegalArgumentException("Unknown aligner $params.compress")
+    throw new IllegalArgumentException("Unknown compressor $params.compress")
 }
 
 workflow {
@@ -452,9 +452,9 @@ workflow {
 
 In the above example, the process is only executed twice because the process stops when a channel has no more data to be processed.
 
-However, what happens if you replace value x with a `value` channel?
+However, what happens if you replace value `x` with a `value` channel?
 
-Compare the previous example with the following one :
+Compare the previous example with the following one:
 
 ```groovy linenums="1"
 input1 = Channel.value(1)
@@ -707,8 +707,8 @@ Some caveats on glob pattern behavior:
 When an output file name needs to be expressed dynamically, it is possible to define it using a dynamic string that references values defined in the input declaration block or in the script global context. For example:
 
 ```groovy linenums="1"
-species = ['cat','dog', 'sloth']
-sequences = ['AGATAG','ATGCTCT', 'ATCCCAA']
+species = ['cat', 'dog', 'sloth']
+sequences = ['AGATAG', 'ATGCTCT', 'ATCCCAA']
 
 Channel.fromList(species)
         .set { species_ch }

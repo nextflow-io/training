@@ -109,10 +109,11 @@ Each compute environment must be pre-configured to enable Tower to submit tasks.
 
     * [AWS Batch](https://help.tower.nf/compute-envs/aws-batch/)
     * [Azure Batch](https://help.tower.nf/compute-envs/azure-batch/)
-    * [Google Cloud](https://help.tower.nf/compute-envs/google-cloud/)
+    * [Google Batch](https://help.tower.nf/compute-envs/google-cloud-batch/)
+    * [Google Life Sciences](https://help.tower.nf/compute-envs/google-cloud-lifesciences/)
     * [IBM LSF](https://help.tower.nf/compute-envs/lsf/)
     * [Slurm](https://help.tower.nf/compute-envs/slurm/)
-    * [Grid Engine](https://help.tower.nf/compute-envs/grid-engine/)
+    * [Grid Engine](https://help.tower.nf/compute-envs/altair-grid-engine/)
     * [Altair PBS Pro](https://help.tower.nf/compute-envs/altair-pbs-pro/)
     * [Amazon Kubernetes (EKS)](https://help.tower.nf/compute-envs/eks/)
     * [Google Kubernetes (GKE)](https://help.tower.nf/compute-envs/gke/)
@@ -161,14 +162,14 @@ In brief, these are the steps you need to follow to set up a pipeline.
 4. Select a pipeline **Revision number**. The Git default branch (main/master) or `manifest.defaultBranch` in the Nextflow configuration will be used by default.
 5. Set the **Work directory** location of the Nextflow work directory. The location associated with the compute environment will be selected by default.
 6. Enter the name(s) of each of the Nextflow **Config profiles** followed by the `Enter` key. See the Nextflow [Config profiles](https://www.nextflow.io/docs/latest/config.html#config-profiles) documentation for more details.
-7. Enter any Pipeline parameters in YAML or JSON format. YAML example:
+7. Enter any pipeline parameters in YAML or JSON format. YAML example:
 
     ```yaml
     reads: "s3://nf-bucket/exome-data/ERR013140_{1,2}.fastq.bz2"
     paired_end: true
     ```
 
-8. Select Launchpad to begin the pipeline execution.
+8. Select Launch to begin the pipeline execution.
 
 !!! info
 
