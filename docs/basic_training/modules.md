@@ -441,7 +441,7 @@ Running `hello.nf` should print:
 Hola mundo!
 ```
 
-As highlighted above, the script will print `Hola mundo!` instead of `Hello world!` because parameters are inherited from the including context.
+As highlighted above, the script will print `Hola mundo!` instead of `Hello world!` because parameters inherited from the including context are overwritten by the definitions in the script file where they're being included.
 
 !!! info
 
