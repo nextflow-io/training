@@ -201,7 +201,7 @@ Nextflow Tower simplifies the development and execution of workflows by providin
 
 Each user has a unique **workspace** where they can interact and manage all resources such as workflows, compute environments and credentials. Details of this can be found [here](https://help.tower.nf/getting-started/workspace/).
 
-By default, each user has their own private workspace, while organizations have the ability to run and manage users through role-based access as **members** and **collaborators**.
+By default, each user has their own private workspace, while organisations can have multiple workspaces with customized access for specific organisation **members** and **collaborators**.
 
 ### Organization resources
 
