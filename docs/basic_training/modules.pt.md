@@ -236,7 +236,7 @@ workflow {
 
 Outra maneira de lidar com as saídas no escopo do workflow é usar pipes `|`.
 
-!!! exercício
+!!! exercise
 
      Tente alterar o script do fluxo de trabalho para o trecho abaixo:
 
