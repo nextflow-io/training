@@ -343,6 +343,8 @@ workflow {
 
 Como resultado, podemos usar a notação `my_pipeline.out` para acessar as saídas de `my_pipeline` na chamada `workflow`.
 
+Também podemos declarar saídas nomeadas dentro do bloco `emit`.
+
 ```groovy linenums="1" hl_lines="10 15"
 workflow my_pipeline {
     take:
