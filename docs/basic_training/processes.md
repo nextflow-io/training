@@ -159,9 +159,9 @@ It can be tricky to write a script that uses many Bash variables. One possible a
 process BAR {
 
   script:
-  """
-  echo $PATH | tr : '\\n'
-  """
+  '''
+  echo "The current directory is $PWD"
+  '''
 }
 
 workflow {
