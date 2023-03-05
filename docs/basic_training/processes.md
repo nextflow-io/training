@@ -25,8 +25,8 @@ process SAYHELLO {
 In more complex examples, the process body can contain up to **five** definition blocks:
 
 1. **Directives** are initial declarations that define optional settings
-2. **Input** defines the expected input file(s) and the channel from where to find them
-3. **Output** defines the expected output file(s) and the channel to send the data to
+2. **Input** defines the expected input channel(s)
+3. **Output** defines the expected output channel(s)
 4. **When** is an optional clause statement to allow conditional processes
 5. **Script** is a string statement that defines the command to be executed by the process
 
@@ -231,7 +231,7 @@ Inputs implicitly determine the dependencies and the parallel execution of the p
 --8<-- "docs/basic_training/img/channel-process.excalidraw.svg"
 </figure>
 
-The `input` block defines which channels the `process` is expecting to receive data from. You can only define one `input` block at a time, and it must contain one or more input declarations.
+The `input` block defines the names and qualifiers of variables that refer to channel elements directed at the process. You can only define one `input` block at a time, and it must contain one or more input declarations.
 
 The `input` block follows the syntax shown below:
 
