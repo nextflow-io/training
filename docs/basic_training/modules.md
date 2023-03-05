@@ -246,7 +246,7 @@ Another way to deal with outputs in the workflow scope is to use pipes `|`.
     }
     ```
 
-    Here we use a [pipe](https://www.nextflow.io/docs/latest/dsl2.html#pipes) which passed the output as a channel to the next process.
+    Here we use a [pipe](https://www.nextflow.io/docs/latest/dsl2.html#pipes) which passed the output as a channel to the next process without the need of applying `.out` to the process name.
 
 ## Workflow definition
 
