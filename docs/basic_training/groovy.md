@@ -32,7 +32,7 @@ The only difference between the two is that the `println` method implicitly appe
 Comments use the same syntax as C-family programming languages:
 
 ```groovy linenums="1"
-// comment a single file
+// comment a single line
 
 /*
     a comment spanning
