@@ -1,5 +1,4 @@
 ---
-title: Módulos
 description: Material de treinamento básico do Nextflow
 ---
 
