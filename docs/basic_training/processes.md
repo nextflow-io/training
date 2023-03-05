@@ -374,7 +374,7 @@ workflow {
           script:
           """
           cat * > concatenated.txt
-          head -n 20 concatenated.txt > top_10_lines
+          head -n 10 concatenated.txt > top_10_lines
           """
         }
 

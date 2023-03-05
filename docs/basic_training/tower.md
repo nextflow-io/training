@@ -24,7 +24,7 @@ Nextflow tower core features include:
 
 You can use Tower via either the `-with-tower` option while using the Nextflow **run** command, through the **online GUI** or through the **API**.
 
-### Via the Nextflow `run` command
+### Via the `nextflow run` command
 
 Create an account and login into Tower.
 
@@ -173,7 +173,7 @@ In brief, these are the steps you need to follow to set up a pipeline.
 
 !!! info
 
-    Nextflow pipelines are simply Git repositories and can be changed to any public or private Git-hosting platform. See Git Integration in the Tower docs and Pipeline Sharing in the Nextflow docs for more details.
+    Nextflow pipelines are simply Git repositories and can be changed to any public or private Git-hosting platform. See [Git Integration](https://help.tower.nf/git/overview/?h=git+integration) in the Tower docs and [Pipeline Sharing](https://www.nextflow.io/docs/latest/sharing.html?highlight=pipeline%20sharing) in the Nextflow docs for more details.
 
 !!! note
 
