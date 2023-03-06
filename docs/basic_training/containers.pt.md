@@ -147,7 +147,7 @@ Use o comando `exit` para finalizar a seção interativa.
 
 ### Montagem do sitema de arquivos
 
-Crie um arquivo index de genoma utilizando Salmon no container.
+Crie um arquivo índice de genoma utilizando Salmon no container.
 
 Tente executar Salmon no container com o seguinte comando:
 
@@ -334,48 +334,48 @@ Simplesmente ative o uso do motor Singularity no lugar do Docker no arquivo de c
 nextflow run script7.nf -with-singularity nextflow/rnaseq-nf
 ```
 
-Com anteriomente, o container Singularity também pode ser disponibilizado no arquivo de confirguração do Nextflow. Nós iremos ver como funciona isso mais tarde.
+Anteriormente, o container Singularity também pode ser disponibilizado no arquivo de confirguração do Nextflow. Nós iremos ver como funciona isso mais tarde.
 
-### The Singularity Container Library
+### A Biblioteca de Containers Singularity
 
-The authors of Singularity, [SyLabs](https://www.sylabs.io/) have their own repository of Singularity containers.
+Os autores do Singularity, [SyLabs](https://www.sylabs.io/) tem o seu próprio repositório de containers Singularity.
 
-In the same way that we can push Docker images to Docker Hub, we can upload Singularity images to the Singularity Library.
+Da mesma forma que disponibilizamos as imagens Docker no Docker Hub, nós podemos disponibilizar as imagens Singularity na Singularity Library.
 
-## Conda/Bioconda packages
+## Pacotes Conda/Bioconda
 
-Conda is a popular package and environment manager. The built-in support for Conda allows Nextflow pipelines to automatically create and activate the Conda environment(s), given the dependencies specified by each process.
+Conda é um popular gerenciador de pacotes e ambientes. O suporte a Conda permite pipelines Nextflow automaticamente criarem e ativarem ambientes Conda and activate the Conda, dadas as dependências especificadas de cada processo.
 
-In this Gitpod environment, conda is already installed.
+Neste ambiente Gitpod, conda já está instalado.
 
-### Using conda
+### Usando conda
 
-A Conda environment is defined using a YAML file, which lists the required software packages. The first thing you need to do is to initiate conda for shell interaction, and then open a new terminal by running bash.
+Um ambiente Conda é definido utilizando um arquivo YAML, que lista todos os pacotes de programas. A primeira coisa que você precisa fazer é inciar o conda para uma interação shell, e daí abrir um novo terminal utilizando bash.
 
 ```bash
 conda init
 bash
 ```
 
-Then write your YAML file (to `env.yml`). There is already a file named `env.yml` in the `nf-training` folder as an example. Its content is shown below.
+Com isso escrever seu arquivo YAML (para `env.yml`). Já existe um arquivo `env.yml` na pasta `nf-training` como um exemplo. O seu conteúdo é mostrado abaixo.
 
 ```yaml
 --8<-- "nf-training/env.yml"
 ```
 
-Given the recipe file, the environment is created using the command shown below. The `conda env create` command may take several minutes, as conda tries to resolve dependencies of the desired packages at runtime, and then downloads everything that is required.
+Dado a receita do arquivo, o ambiente é criado utilizando o comando abaixo. O comando `conda env create` deve demorar vários minutos, pois o conda tenta resolver todas dependências dos desejados pacotes durante a execução, e então baixa tudo que é requerido.
 
 ```bash
 conda env create --file env.yml
 ```
 
-You can check the environment was created successfully with the command shown below:
+Você pode checar se o ambiente foi criado com êxito com o comando abaixo:
 
 ```bash
 conda env list
 ```
 
-This should look something like this:
+Isso deve parecer com algo assim:
 
 ```bash
 # conda environments:
@@ -384,13 +384,13 @@ base                  *  /opt/conda
 nf-tutorial              /opt/conda/envs/nf-tutorial
 ```
 
-To enable the environment, you can use the `activate` command:
+Para habilitar o ambiente, você pode usar o comando `activate`:
 
 ```bash
 conda activate nf-tutorial
 ```
 
-Nextflow is able to manage the activation of a Conda environment when its directory is specified using the `-with-conda` option (using the same path shown in the `list` function. For example:
+Nextflow consegue gerenciar a ativação de um ambiente Conda quando seu diretório é especificado utilizando a opção `-with-conda` (usando o mesmo caminho mostrado na função `list`). Por exemplo:
 
 ```bash
 nextflow run script7.nf -with-conda /opt/conda/envs/nf-tutorial
@@ -398,27 +398,27 @@ nextflow run script7.nf -with-conda /opt/conda/envs/nf-tutorial
 
 !!! info
 
-    When creating a Conda environment with a YAML recipe file, Nextflow automatically downloads the required dependencies, builds the environment and activates it.
+    Quando criar um ambiente Conda com o arquivo receita YAML, Nextflow automaticamente baixará todas dependências necessárias, montará o ambiente e ativará.
 
-This makes easier to manage different environments for the processes in the workflow script.
+Isso deixa fácil gerenciar diferentes ambientes pra os processos no fluxo de trabalho do script.
 
-See the [docs](https://www.nextflow.io/docs/latest/conda.html) for details.
+Veja a [documentação](https://www.nextflow.io/docs/latest/conda.html) para detalhes.
 
-### Create and use conda-like environments using micromamba
+### Crie e utilize ambientes conda-like utilizando micromamba
 
-Another way to build conda-like environments is through a `Dockerfile` and [`micromamba`](https://mamba.readthedocs.io/en/latest/user_guide/micromamba.html).
+Outra forma de construir um ambiente conda-like é pelo `Dockerfile` e [`micromamba`](https://mamba.readthedocs.io/en/latest/user_guide/micromamba.html).
 
-`micromamba` is a fast and robust package for building small conda-based environments.
+`micromamba` é um pacote rápido e robusto para montar pequenos ambientes conda-like.
 
-This saves having to build a conda environment each time you want to use it (as outlined in previous sections).
+Isso previne montar um ambiente conda para cada vez que queira utiliza-lo (como delineado nas seções anteriores).
 
-To do this, you simply require a `Dockerfile` and you use micromamba to install the packages. However, a good practice is to have a YAML recipe file like in the previous section, so we’ll do it here too, using the same `env.yml` as before.
+Para fazer isso, você simplesmente precisa de um `Dockerfile` e utilizar micromamba para instalar os pacotes. Porém, uma boa prática é ter o arquivo receita YAML como nas seções anteriores, então nós iremos fazer isso aqui também, utilizando o mesmo `env.yml` como antes.
 
 ```yaml
 --8<-- "nf-training/env.yml"
 ```
 
-Then, we can write our Dockerfile with micromamba installing the packages from this recipe file.
+Então, nós podemos escrever nosso Dockerfile com micromamba instalando os pacotes por esse arquivo receita.
 
 ```dockerfile
 FROM mambaorg/micromamba:0.25.1
@@ -436,25 +436,25 @@ RUN micromamba install -y -n nf-tutorial -f /tmp/env.yml && \
 ENV PATH /opt/conda/envs/nf-tutorial/bin:$PATH
 ```
 
-The above `Dockerfile` takes the parent image _mambaorg/micromamba_, then installs a `conda` environment using `micromamba`, and installs `salmon`, `fastqc` and `multiqc`.
+O `Dockerfile` acima pega a imagem pai _mambaorg/micromamba_, e instala um ambiente `conda` utilizando `micromamba`, e instala `salmon`, `fastqc` e `multiqc`.
 
-Try executing the RNA-Seq pipeline from earlier (script7.nf). Start by building your own micromamba `Dockerfile` (from above), save it to your docker hub repo, and direct Nextflow to run from this container (changing your `nextflow.config`).
+Tente executar o pipeline RNA-seq de antes (script7.nf). Comece montando seu próprio `Dockerfile`  micromamba (como mostrado acima), salve no seu repositório docker hub, e oriente o Nextflow a rodar por esse container (mudando seu `nextflow.config`).
 
 !!! warning
 
-    Building a Docker container and pushing to your personal repo can take &gt;10 minutes.
+    Montar um container Docker e disponibilizar no seu repósitorio pessoal pode levar &gt;10 minutos.
 
-??? example "For an overview of steps to take, click here:"
+??? example "Para um resumo dos passos a tomar, clique aqui:"
 
-    1. Make a file called `Dockerfile` in the current directory (with the code above).
+    1. crie um arquivo chamado `Dockerfile` no diretório atual (com os código acima).
 
-    2. Build the image: `docker build -t my-image .` (don’t forget the _._).
+    2. Monte a imagem: `docker build -t my-image .` (não esqueça o _._).
 
-    3. Publish the docker image to your online docker account.
+    3. Publique a imagem docker na sua conta docker.
 
-        Something similar to the following, with `<myrepo>` replaced with your own Docker ID, without _&lt;_ and _&gt;_ characters!
+        Algo parecido como o seguinte, com `<myrepo>` substituido para seu próprio Docker ID, sem _&lt;_ e _&gt;_ caracteres!
 
-        `my-image` could be replaced with any name you choose. As good practice, choose something memorable and ensure the name matches the name you used in the previous command.
+        `my-image` pode ser substituido por qualquer nome que escolher. como boa prática, escolha algo memorável e certifique que o nome combine com o nome usado no comando anterior.
 
         ```bash
         docker login
@@ -462,51 +462,51 @@ Try executing the RNA-Seq pipeline from earlier (script7.nf). Start by building 
         docker push <myrepo>/my-image
         ```
 
-    4. Add the image file name to the `nextflow.config` file.
+    4. Adicione o arquivo imagem no arquivo `nextflow.config`.
 
-        e.g. remove the following from the `nextflow.config`:
+        ex. remova o seguinte de `nextflow.config`:
 
         ```groovy
         process.container = 'nextflow/rnaseq-nf'
         ```
 
-        and replace with:
+        e mude por:
 
         ```groovy
         process.container = '<myrepo>/my-image'
         ```
 
-    5. Trying running Nextflow, e.g.:
+    5. Tente executar o Nextflow, ex.:
 
         ```bash
         nextflow run script7.nf -with-docker
         ```
 
-    Nextflow should now be able to find `salmon` to run the process.
+    Nextflow deve conseguir achar `salmon` pra rodar o processo.
 
 ## BioContainers
 
-Another useful resource linking together Bioconda and containers is the [BioContainers](https://biocontainers.pro) project. BioContainers is a community initiative that provides a registry of container images for every Bioconda recipe.
+Outro útilo recurso para conectar Bioconda e containers é o projeto [BioContainers](https://biocontainers.pro). BioContainers é uma inciativa da comunidade que prover um registro de imagens de container para toda receita Bioconda.
 
-So far, we’ve seen how to install packages with conda and micromamba, both locally and within containers. With BioContainers, you don’t need to create your own container image for the tools you want, and you don’t need to use conda or micromamba to install the packages. It already provides you with a Docker image containing the programs you want installed. For example, you can get the container image of fastqc using BioContainers with:
+Até agora, nós vimos como instalar pacotes com conda and micromamba, ambos localmente e com container. Com BioContainers, você não precisa criar sua própria imagem container pra as ferramentas que você quer, e não precisa utilizar conda or micromamba para instalar pacotes. Ele já disponiliza uma imagem Docker contendo os programas que você quer instalado. Por exemplo, você pode adquirir a imagem container do fastqc utilizando BioContainers:
 
 ```bash
 docker pull biocontainers/fastqc:v0.11.5
 ```
 
-You can check the registry for the packages you want in [BioContainers official website](https://biocontainers.pro/registry).
+Você pode checar o registro dos pacotes que quer no [site oficial do BioContainers](https://biocontainers.pro/registry).
 
-Contrary to other registries that will pull the latest image when no tag (version) is provided, you must specify a tag when pulling BioContainers (after a colon `:`, e.g. fastqc:v0.11.5). Check the tags within the registry and pick the one that better suits your needs.
+Contrariamente a outros registros que irão puxar a ultima imagem quando nenhuma tag (version) é disponibilizada, você precisa especificar uma tag quando baixando do BioContainers (depois de dois pontos `:`, ex. fastqc:v0.11.5). Cheque as tags com o registro e escolha a que melhor se adequa a suas necessidades.
 
 !!! tip
 
-    You can have more complex definitions within your process block by letting the appropriate container image or conda package be used depending on if the user selected singularity, Docker or conda to be used. You can click [here](https://nf-co.re/docs/contributing/modules#software-requirements) for more information and [here](https://github.com/nf-core/modules/blob/61f68913fefc20241ceccb671b104230b2d775d7/modules/bowtie2/align/main.nf#L6-L9) for an example.
+    Você pode ter definições mais complexas dentro de seu bloco de processo deixando a imagem de container apropriada ou o pacote conda seria usada dependendo se o usuário seleciona singularity, Docker ou conda. Você pode clicar [aqui](https://nf-co.re/docs/contributing/modules#software-requirements) para mais informações e [aqui](https://github.com/nf-core/modules/blob/61f68913fefc20241ceccb671b104230b2d775d7/modules/bowtie2/align/main.nf#L6-L9) para um exemplo.
 
 ### :material-progress-question: Exercises
 
 !!! exercise
 
-    During the earlier RNA-Seq tutorial (script2.nf), we created an index with the salmon tool. Given we do not have salmon installed locally in the machine provided by Gitpod, we had to either run it with `-with-conda` or `-with-docker`. Your task now is to run it again `-with-docker`, but without having to create your own Docker container image. Instead, use the BioContainers image for salmon 1.7.0.
+    Durante o anterior tutorial RNA-Seq (script2.nf), nós criamos um índice. Dado que nós não temos salmom instalado localmente na maquina provida pelo Gitpod, nós temos que ou executar com `-with-conda` ou `-with-docker`. Sua tarefa agora é executar novamente com `-with-docker`, mas sem ter que criar sua própria imagem de container Docker. Invés disso, use a imagem BioContainers para salmon 1.7.0.
 
 
     ??? result
@@ -517,21 +517,21 @@ Contrary to other registries that will pull the latest image when no tag (versio
 
 !!! exercise "Bonus Exercise"
 
-    Change the process directives in `script5.nf` or the `nextflow.config` file to make the pipeline automatically use BioContainers when using salmon, or fastqc.
+    Mude as diretivas do processo no `script5.nf` ou no arquivo `nextflow.config` para fazer o pipeline utilizar automaticamente BioContainers quando usando salmon, ou fastqc.
 
-    !!! tip "Hint"
+    !!! tip "Dica"
 
-        Temporarily comment out the line `#!groovy process.container = 'nextflow/rnaseq-nf'` in the `nextflow.config` file to make sure the processes are using the BioContainers that you set, and not the container image we have been using in this training.
+        temporariamente comente a linha `#!groovy process.container = 'nextflow/rnaseq-nf'` no arquivo `nextflow.config` para ter certeza que o processo está utilizando BioContainers que você configurou, e não a imagem de container que estavamos usando durante esse treinamento.
 
     ??? result
 
-        With these changes, you should be able to run the pipeline with BioContainers by running the following in the command line:
+        Com essas mudanças, você deve ser capaz de executar o pipeline com BioContainers executando a seguinte linha de comando:
 
         ```bash
         nextflow run script5.nf
         ```
 
-        with the following container directives for each process:
+        com as sequintes diretivas de container para cada processo:
 
         ```groovy
         process FASTQC {
@@ -540,7 +540,7 @@ Contrary to other registries that will pull the latest image when no tag (versio
         ...
         ```
 
-        and
+        e
 
         ```groovy
         process QUANTIFICATION {
@@ -550,4 +550,4 @@ Contrary to other registries that will pull the latest image when no tag (versio
         ...
         ```
 
-        Check the `.command.run` file in the work directory and ensure that the run line contains the correct Biocontainers.
+        Cheque o arquivo `.command.run` no diretório de trabalho e certifique-se que a linha de execução contém o Biocontainers correto.
