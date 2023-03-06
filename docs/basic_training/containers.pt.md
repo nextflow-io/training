@@ -249,19 +249,19 @@ Como visto na última seção, você também pode configurar o arquivo config (`
 
 ## Singularity
 
-[Singularity](http://singularity.lbl.gov) é um motor de conteinerização desenvolvido para trabalhar com computação de alta performace em centro de dados, onde geralmente o Docker não é permitido por motivos de restrições de segurança.
+[Singularity](http://singularity.lbl.gov) é um motor de contêinerização desenvolvido para trabalhar com computação de alta performace em centro de dados, onde geralmente o Docker não é permitido por motivos de restrições de segurança.
 
-Singularity implementa um modelo de execução de container similar ao Docker. Entretanto, ele usa um design de implementação completamente diferente.
+O Singularity implementa um modelo de execução de contêiner similar ao Docker. Entretanto, ele usa um design de implementação completamente diferente.
 
-Uma imagem container do Singularity é arquivada como um arquivo plain file que pode ser armazenado em um sistema de arquivo compartilhado e acessado por muitos nós computacionais gerenciados usando um escalonador de lote.
+Uma imagem de contêiner do Singularity é arquivada como um arquivo de texto simples que pode ser armazenado em um sistema de arquivo compartilhado e acessado por muitos nós computacionais gerenciados usando um escalonador de lote.
 
 !!! warning
 
-    Singularity não irá funcionar com Gitpod. Se você quer testar essa seção, por favor faça localmente, ou em um HPC.
+    O Singularity não irá funcionar com Gitpod. Se você quer testar essa seção, por favor faça localmente, ou em um cluster.
 
 ### Crie imagens do Singularity
 
-Imagens Singularity são criadas utilizando um arquivo `Singularity` de uma forma similar ao Docker mas utilizando uma sintase diferente.
+Imagens do Singularity são criadas utilizando um arquivo `Singularity` de uma forma similar ao Docker mas utilizando uma sintaxe diferente.
 
 ```singularity
 Bootstrap: docker
@@ -271,7 +271,7 @@ From: debian:stretch-slim
 export PATH=$PATH:/usr/games/
 
 %labels
-AUTHOR <your name>
+AUTHOR <seu nome>
 
 %post
 
@@ -284,49 +284,49 @@ curl -sSL https://github.com/COMBINE-lab/salmon/releases/download/v1.0.0/salmon-
 Uma vez que você salvou o arquivo `Singularity`. Você pode criar uma imagem utilizando esses comandos:
 
 ```bash
-sudo singularity build my-image.sif Singularity
+sudo singularity build minha-imagem.sif Singularity
 ```
 
-Note: o comando `build` requer permissões `sudo`. Uma forma de contorna isso consiste em criar a imagem em uma estação de trabalho local e então implementar no cluster copiando o arquivo imagem.
+Nota: O comando `build` requer permissões `sudo`. Uma forma de contornar isso consiste em criar a imagem em uma estação de trabalho local e então implementar no cluster copiando o arquivo imagem.
 
 ### Executando um container
 
-Quando terminar, você pode executar o container com o seguinte comando:
+Quando terminar, você pode executar o contêiner com o seguinte comando:
 
 ```bash
-singularity exec my-image.sif cowsay 'Hello Singularity'
+singularity exec minha-imagem.sif cowsay 'Olá Singularity'
 ```
 
-Utilizando o comando `shell` você pode entrar no container utilizando o modo interativo. Por exemplo:
+Utilizando o comando `shell` você pode entrar no contêiner utilizando o modo interativo. Por exemplo:
 
 ```bash
-singularity shell my-image.sif
+singularity shell minha-imagem.sif
 ```
 
-Uma vez dentro da instância do container execute o comando:
+Uma vez dentro da instância do contêiner execute o comando:
 
 ```bash
-touch hello.txt
+touch ola.txt
 ls -la
 ```
 
 !!! info
 
-    Note como os arquivos do hospedeiro são mostrados. Singularity automaticamente monta o diretório do hospedeiro `$HOME` e usa como diretório de trabalho.
+    Note como os arquivos do sistema de arquivos hospedeiro são mostrados. O Singularity automaticamente monta o diretório do hospedeiro `$HOME` e usa como diretório de trabalho.
 
 ### Importe uma imagem do Docker
 
-Uma forma mais fácil de criar um container Singularity não necessitando da permissão `sudo` permission e melhorando a interoperabilidade dos container é não importando um imagem de container Docker puxando diretamente do registro Docker. Por exemplo:
+Uma forma mais fácil de criar um contêiner com o Singularity não necessitando da permissão `sudo` e melhorando a interoperabilidade dos contêineres é importando uma imagem de contêiner do Docker puxando diretamente do registro do Docker. Por exemplo:
 
 ```bash
 singularity pull docker://debian:stretch-slim
 ```
 
-O comando acima automaticamente baixa uma imagem Debian Docker e converte para uma imagem Singularity no diretório atual com o nome`debian-jessie.simg`.
+O comando acima automaticamente baixa uma imagem Docker do Debian e converte para uma imagem Singularity no diretório atual com o nome`debian-jessie.simg`.
 
-### Execute um script do Nextflow utilizando um container Singularity
+### Execute um script do Nextflow utilizando um contêiner Singularity
 
-Nextflow permite um uso transparente de containers Singularity facilmente como com o Docker.
+O Nextflow permite um uso de contêineres Singularity de forma tão fácil e transparente quanto com o Docker.
 
 Simplesmente ative o uso do motor Singularity no lugar do Docker no arquivo de configurações do Nextflow utilizando a opção de linha de comando `-with-singularity`:
 
@@ -334,36 +334,36 @@ Simplesmente ative o uso do motor Singularity no lugar do Docker no arquivo de c
 nextflow run script7.nf -with-singularity nextflow/rnaseq-nf
 ```
 
-Anteriormente, o container Singularity também pode ser disponibilizado no arquivo de confirguração do Nextflow. Nós iremos ver como funciona isso mais tarde.
+Como antes, o contêiner Singularity também pode ser disponibilizado no arquivo de confirguração do Nextflow. Nós iremos ver como funciona isso mais tarde.
 
-### A Biblioteca de Containers Singularity
+### A Biblioteca de Contêineres Singularity
 
-Os autores do Singularity, [SyLabs](https://www.sylabs.io/) tem o seu próprio repositório de containers Singularity.
+Os autores do Singularity, [SyLabs](https://www.sylabs.io/) tem o seu próprio repositório de contêineres Singularity.
 
 Da mesma forma que disponibilizamos as imagens Docker no Docker Hub, nós podemos disponibilizar as imagens Singularity na Singularity Library.
 
 ## Pacotes Conda/Bioconda
 
-Conda é um popular gerenciador de pacotes e ambientes. O suporte a Conda permite pipelines Nextflow automaticamente criarem e ativarem ambientes Conda and activate the Conda, dadas as dependências especificadas de cada processo.
+O Conda é um popular gerenciador de pacotes e ambientes. O suporte a Conda permite que pipelines Nextflow automaticamente criem e ativem ambientes Conda, dadas as dependências especificadas de cada processo.
 
-Neste ambiente Gitpod, conda já está instalado.
+Neste ambiente Gitpod, o conda já está instalado.
 
 ### Usando conda
 
-Um ambiente Conda é definido utilizando um arquivo YAML, que lista todos os pacotes de programas. A primeira coisa que você precisa fazer é inciar o conda para uma interação shell, e daí abrir um novo terminal utilizando bash.
+Um ambiente Conda é definido utilizando um arquivo YAML, que lista todos os pacotes de programas. A primeira coisa que você precisa fazer é iniciar o conda para uma interação shell, e daí abrir um novo terminal utilizando bash.
 
 ```bash
 conda init
 bash
 ```
 
-Com isso escrever seu arquivo YAML (para `env.yml`). Já existe um arquivo `env.yml` na pasta `nf-training` como um exemplo. O seu conteúdo é mostrado abaixo.
+Com isso, escreva seu arquivo YAML (`env.yml`). Já existe um arquivo `env.yml` na pasta `nf-training` como um exemplo. O seu conteúdo é mostrado abaixo.
 
 ```yaml
 --8<-- "nf-training/env.yml"
 ```
 
-Dado a receita do arquivo, o ambiente é criado utilizando o comando abaixo. O comando `conda env create` deve demorar vários minutos, pois o conda tenta resolver todas dependências dos desejados pacotes durante a execução, e então baixa tudo que é requerido.
+Dado o arquivo de receita, o ambiente é criado utilizando o comando abaixo. O comando `conda env create` deve demorar vários minutos, pois o conda tenta resolver todas as dependências dos desejados pacotes durante a execução, e então baixa tudo que é requerido.
 
 ```bash
 conda env create --file env.yml
@@ -375,7 +375,7 @@ Você pode checar se o ambiente foi criado com êxito com o comando abaixo:
 conda env list
 ```
 
-Isso deve parecer com algo assim:
+Você deve ver algo similar ao mostrado abaixo:
 
 ```bash
 # conda environments:
@@ -390,7 +390,7 @@ Para habilitar o ambiente, você pode usar o comando `activate`:
 conda activate nf-tutorial
 ```
 
-Nextflow consegue gerenciar a ativação de um ambiente Conda quando seu diretório é especificado utilizando a opção `-with-conda` (usando o mesmo caminho mostrado na função `list`). Por exemplo:
+O Nextflow consegue gerenciar a ativação de um ambiente Conda quando seu diretório é especificado utilizando a opção `-with-conda` (usando o mesmo caminho mostrado com a função `list`). Por exemplo:
 
 ```bash
 nextflow run script7.nf -with-conda /opt/conda/envs/nf-tutorial
@@ -398,33 +398,33 @@ nextflow run script7.nf -with-conda /opt/conda/envs/nf-tutorial
 
 !!! info
 
-    Quando criar um ambiente Conda com o arquivo receita YAML, Nextflow automaticamente baixará todas dependências necessárias, montará o ambiente e ativará.
+    Quando criar um ambiente Conda com o arquivo de receita YAML, o Nextflow automaticamente baixará todas dependências necessárias, montará o ambiente e o ativará.
 
-Isso deixa fácil gerenciar diferentes ambientes pra os processos no fluxo de trabalho do script.
+Isso torna fácil gerenciar diferentes ambientes para os processos no fluxo de trabalho do script.
 
-Veja a [documentação](https://www.nextflow.io/docs/latest/conda.html) para detalhes.
+Veja a [documentação](https://www.nextflow.io/docs/latest/conda.html) para mais detalhes.
 
-### Crie e utilize ambientes conda-like utilizando micromamba
+### Crie e utilize ambientes no estilo do conda com o micromamba
 
-Outra forma de construir um ambiente conda-like é pelo `Dockerfile` e [`micromamba`](https://mamba.readthedocs.io/en/latest/user_guide/micromamba.html).
+Outra forma de construir um ambiente no estilo do conda é com o `Dockerfile` e o [`micromamba`](https://mamba.readthedocs.io/en/latest/user_guide/micromamba.html).
 
-`micromamba` é um pacote rápido e robusto para montar pequenos ambientes conda-like.
+O `micromamba` é um pacote rápido e robusto para montar pequenos ambientes baseados no conda.
 
-Isso previne montar um ambiente conda para cada vez que queira utiliza-lo (como delineado nas seções anteriores).
+Isso economiza tempo ao montar um ambiente conda toda vez que quiser utilizá-lo (como delineado nas seções anteriores).
 
-Para fazer isso, você simplesmente precisa de um `Dockerfile` e utilizar micromamba para instalar os pacotes. Porém, uma boa prática é ter o arquivo receita YAML como nas seções anteriores, então nós iremos fazer isso aqui também, utilizando o mesmo `env.yml` como antes.
+Para fazer isso, você simplesmente precisa de um `Dockerfile` e utilizar o micromamba para instalar os pacotes. Porém, uma boa prática é ter o arquivo de receita YAML como nas seções anteriores, então nós iremos fazer isso aqui também, utilizando o mesmo `env.yml` utilizado anteriormente.
 
 ```yaml
 --8<-- "nf-training/env.yml"
 ```
 
-Então, nós podemos escrever nosso Dockerfile com micromamba instalando os pacotes por esse arquivo receita.
+Então, nós podemos escrever nosso Dockerfile com o micromamba instalando os pacotes por esse arquivo de receita.
 
 ```dockerfile
 FROM mambaorg/micromamba:0.25.1
 
-LABEL image.author.name "Your Name Here"
-LABEL image.author.email "your@email.here"
+LABEL image.author.name "Seu Nome Aqui"
+LABEL image.author.email "seu@email.aqui"
 
 COPY --chown=$MAMBA_USER:$MAMBA_USER env.yml /tmp/env.yml
 
@@ -436,59 +436,59 @@ RUN micromamba install -y -n nf-tutorial -f /tmp/env.yml && \
 ENV PATH /opt/conda/envs/nf-tutorial/bin:$PATH
 ```
 
-O `Dockerfile` acima pega a imagem pai _mambaorg/micromamba_, e instala um ambiente `conda` utilizando `micromamba`, e instala `salmon`, `fastqc` e `multiqc`.
+O `Dockerfile` acima pega a imagem pai _mambaorg/micromamba_, e instala um ambiente `conda` utilizando `micromamba`, e então instala o `salmon`, o `fastqc` e o `multiqc`.
 
-Tente executar o pipeline RNA-seq de antes (script7.nf). Comece montando seu próprio `Dockerfile`  micromamba (como mostrado acima), salve no seu repositório docker hub, e oriente o Nextflow a rodar por esse container (mudando seu `nextflow.config`).
+Tente executar o pipeline RNA-seq de antes (script7.nf). Comece montando seu próprio `Dockerfile` micromamba (como mostrado acima), salve no seu repositório no Docker Hub, e oriente o Nextflow a rodar por esse container (mudando seu `nextflow.config`).
 
 !!! warning
 
-    Montar um container Docker e disponibilizar no seu repósitorio pessoal pode levar &gt;10 minutos.
+    Montar um contêiner Docker e disponibilizar no seu repósitorio pessoal pode levar &gt;10 minutos.
 
 ??? example "Para um resumo dos passos a tomar, clique aqui:"
 
     1. crie um arquivo chamado `Dockerfile` no diretório atual (com os código acima).
 
-    2. Monte a imagem: `docker build -t my-image .` (não esqueça o _._).
+    2. Monte a imagem: `docker build -t minha-imagem .` (não esqueça o _._).
 
-    3. Publique a imagem docker na sua conta docker.
+    3. Publique a imagem Docker na sua conta do Docker Hub.
 
-        Algo parecido como o seguinte, com `<myrepo>` substituido para seu próprio Docker ID, sem _&lt;_ e _&gt;_ caracteres!
+        Algo parecido como o seguinte, com `<meurepo>` substituido para seu próprio ID do Docker, sem _&lt;_ e _&gt;_ caracteres!
 
-        `my-image` pode ser substituido por qualquer nome que escolher. como boa prática, escolha algo memorável e certifique que o nome combine com o nome usado no comando anterior.
+        `minha-imagem` pode ser substituído por qualquer nome que você escolher. Como boa prática, escolha algo memorável e certifique-se de que o nome combine com o nome usado no comando anterior.
 
         ```bash
         docker login
-        docker tag my-image <myrepo>/my-image
-        docker push <myrepo>/my-image
+        docker tag my-image <meurepo>/minha-imagem
+        docker push <meurepo>/minha-imagem
         ```
 
-    4. Adicione o arquivo imagem no arquivo `nextflow.config`.
+    4. Adicione o arquivo da imagem no arquivo `nextflow.config`.
 
-        ex. remova o seguinte de `nextflow.config`:
+        ex. remova o seguinte do arquivo `nextflow.config`:
 
         ```groovy
         process.container = 'nextflow/rnaseq-nf'
         ```
 
-        e mude por:
+        e adicione:
 
         ```groovy
         process.container = '<myrepo>/my-image'
         ```
 
-    5. Tente executar o Nextflow, ex.:
+    5. Tente executar o Nextflow, por exemplo:
 
         ```bash
         nextflow run script7.nf -with-docker
         ```
 
-    Nextflow deve conseguir achar `salmon` pra rodar o processo.
+    Agora, o Nextflow deve conseguir achar `salmon` pra rodar o processo.
 
 ## BioContainers
 
-Outro útilo recurso para conectar Bioconda e containers é o projeto [BioContainers](https://biocontainers.pro). BioContainers é uma inciativa da comunidade que prover um registro de imagens de container para toda receita Bioconda.
+Outro recurso útil para conectar Bioconda e contêineres é o projeto [BioContainers](https://biocontainers.pro). BioContainers é uma iniciativa da comunidade para prover um registro de imagens de contêiner para cada receita do Bioconda.
 
-Até agora, nós vimos como instalar pacotes com conda and micromamba, ambos localmente e com container. Com BioContainers, você não precisa criar sua própria imagem container pra as ferramentas que você quer, e não precisa utilizar conda or micromamba para instalar pacotes. Ele já disponiliza uma imagem Docker contendo os programas que você quer instalado. Por exemplo, você pode adquirir a imagem container do fastqc utilizando BioContainers:
+Até agora, nós vimos como instalar pacotes com conda e micromamba, ambos localmente e com contêiner. Com o BioContainers, você não precisa criar sua própria imagem de contêiner para as ferramentas que você quiser, e não precisa utilizar conda or micromamba para instalar pacotes. Ele já disponiliza uma imagem Docker contendo os programas que você quer instalado. Por exemplo, você pode adquirir a imagem de contêiner do fastqc utilizando BioContainers:
 
 ```bash
 docker pull biocontainers/fastqc:v0.11.5
@@ -496,17 +496,17 @@ docker pull biocontainers/fastqc:v0.11.5
 
 Você pode checar o registro dos pacotes que quer no [site oficial do BioContainers](https://biocontainers.pro/registry).
 
-Contrariamente a outros registros que irão puxar a ultima imagem quando nenhuma tag (version) é disponibilizada, você precisa especificar uma tag quando baixando do BioContainers (depois de dois pontos `:`, ex. fastqc:v0.11.5). Cheque as tags com o registro e escolha a que melhor se adequa a suas necessidades.
+Contrariamente a outros registros que irão puxar a última imagem quando nenhum rótulo (versão) é especificado, você precisa especificar um rótulo quando for baixar do BioContainers (depois de dois pontos `:`, por exemplo fastqc:v0.11.5). Cheque os rótulos com o registro e escolha a que melhor se adequa a suas necessidades.
 
 !!! tip
 
-    Você pode ter definições mais complexas dentro de seu bloco de processo deixando a imagem de container apropriada ou o pacote conda seria usada dependendo se o usuário seleciona singularity, Docker ou conda. Você pode clicar [aqui](https://nf-co.re/docs/contributing/modules#software-requirements) para mais informações e [aqui](https://github.com/nf-core/modules/blob/61f68913fefc20241ceccb671b104230b2d775d7/modules/bowtie2/align/main.nf#L6-L9) para um exemplo.
+    Você pode ter definições mais complexas dentro de seu bloco de processo deixando a imagem de contêiner apropriada ou o pacote conda para serem usadas dependendo se o usuário selecionou singularity, Docker ou conda. Você pode clicar [aqui](https://nf-co.re/docs/contributing/modules#software-requirements) para mais informações e [aqui](https://github.com/nf-core/modules/blob/61f68913fefc20241ceccb671b104230b2d775d7/modules/bowtie2/align/main.nf#L6-L9) para um exemplo.
 
 ### :material-progress-question: Exercises
 
 !!! exercise
 
-    Durante o anterior tutorial RNA-Seq (script2.nf), nós criamos um índice. Dado que nós não temos salmom instalado localmente na maquina provida pelo Gitpod, nós temos que ou executar com `-with-conda` ou `-with-docker`. Sua tarefa agora é executar novamente com `-with-docker`, mas sem ter que criar sua própria imagem de container Docker. Invés disso, use a imagem BioContainers para salmon 1.7.0.
+    Durante a seção onde construímos o pipline de RNA-Seq, nós criamos um índice (script2.nf). Dado que nós não temos Salmon instalado localmente na máquina provida pelo Gitpod, nós temos que ou executar com `-with-conda` ou `-with-docker`. Sua tarefa agora é executar novamente com `-with-docker`, mas sem ter que criar sua própria imagem de contêiner Docker. Invés disso, use a imagem do BioContainers para Salmon 1.7.0.
 
 
     ??? result
@@ -521,7 +521,7 @@ Contrariamente a outros registros que irão puxar a ultima imagem quando nenhuma
 
     !!! tip "Dica"
 
-        temporariamente comente a linha `#!groovy process.container = 'nextflow/rnaseq-nf'` no arquivo `nextflow.config` para ter certeza que o processo está utilizando BioContainers que você configurou, e não a imagem de container que estavamos usando durante esse treinamento.
+        temporariamente comente a linha `#!groovy process.container = 'nextflow/rnaseq-nf'` no arquivo `nextflow.config` para ter certeza que o processo está utilizando o contêiner do BioContainers que você configurou, e não a imagem de contêiner que estávamos usando durante esse treinamento.
 
     ??? result
 
@@ -531,7 +531,7 @@ Contrariamente a outros registros que irão puxar a ultima imagem quando nenhuma
         nextflow run script5.nf
         ```
 
-        com as sequintes diretivas de container para cada processo:
+        com as sequintes diretivas de contêiner para cada processo:
 
         ```groovy
         process FASTQC {
