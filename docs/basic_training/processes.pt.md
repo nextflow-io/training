@@ -25,8 +25,8 @@ process DIGAOLA {
 Em exemplos mais complexos, o corpo do processo pode conter até **cinco** blocos de definição:
 
 1. **Diretivas** são declarações iniciais que definem configurações opcionais
-2. **Input** (Bloco de entrada) define o(s) arquivo(s) de entrada esperado(s) e o canal onde encontrá-los
-3. **Output** (Bloco de saída) define o(s) arquivo(s) de saída esperado(s) e o canal para enviar os dados
+2. **Input** (Bloco de entrada) define o(s) canal(is) de entrada esperado(s)
+3. **Output** (Bloco de saída) define o(s) canal(is) de saída esperado(s)
 4. **When** é uma declaração de cláusula opcional para permitir processos condicionais
 5. **Script** é uma string que define o comando a ser executado pelo processo
 
@@ -159,9 +159,9 @@ Pode ser complicado escrever um script que usa muitas variáveis Bash. Uma alter
 process BAR {
 
   script:
-  """
-  echo $PATH | tr : '\\n'
-  """
+  '''
+  echo "The current directory is $PWD"
+  '''
 }
 
 workflow {
@@ -195,7 +195,7 @@ workflow {
 O script do processo também pode ser definido de maneira completamente dinâmica usando uma instrução `if` ou qualquer outra expressão para avaliar um valor de string. Por exemplo:
 
 ```groovy linenums="1"
-params.compressao = 'gzip'
+params.compressor = 'gzip'
 params.arquivo_a_comprimir = "$baseDir/data/ggal/transcriptome.fa"
 
 process FOO {
@@ -204,16 +204,16 @@ process FOO {
   path arquivo
 
   script:
-  if( params.compressao == 'gzip' )
+  if( params.compressor == 'gzip' )
     """
     gzip -c $arquivo > ${arquivo}.gz
     """
-  else if( params.compressao == 'bzip2' )
+  else if( params.compressor == 'bzip2' )
     """
     bzip2 -c $arquivo > ${arquivo}.bz2
     """
   else
-    throw new IllegalArgumentException("Alinhador $params.compressao desconhecido")
+    throw new IllegalArgumentException("Compressor $params.compressor desconhecido")
 }
 
 workflow {
@@ -231,7 +231,7 @@ As entradas determinam implicitamente as dependências e a execução paralela d
 --8<-- "docs/basic_training/img/channel-process.excalidraw.svg"
 </figure>
 
-O bloco `input` define de quais canais o processo espera receber dados. Você só pode definir um bloco `input` por vez e deve conter uma ou mais declarações de entrada.
+O bloco `input` define os nomes e qualificadores das variáveis que se referem aos elementos do canal direcionados ao processo. Você só pode definir um bloco `input` por vez e deve conter uma ou mais declarações de entrada.
 
 O bloco `input` segue a sintaxe mostrada abaixo:
 
@@ -374,7 +374,7 @@ workflow {
           script:
           """
           cat * > concatenado.txt
-          head -n 20 concatenado.txt > top_10_linhas
+          head -n 10 concatenado.txt > top_10_linhas
           """
         }
 
@@ -452,9 +452,9 @@ workflow {
 
 No exemplo acima, o processo só é executado duas vezes porque o processo para quando um canal não tem mais dados para serem processados.
 
-No entanto, o que acontece se você substituir o valor x por um canal de valor?
+No entanto, o que acontece se você substituir o valor `x` por um canal de valor?
 
-Compare o exemplo anterior com o seguinte :
+Compare o exemplo anterior com o seguinte:
 
 ```groovy linenums="1"
 entrada1 = Channel.value(1)
@@ -707,8 +707,8 @@ Algumas advertências sobre o comportamento de padrões de glob:
 Quando um nome de arquivo de saída precisa ser expresso dinamicamente, é possível defini-lo usando uma string dinâmica que faz referência a valores definidos no bloco de declaração de entrada ou no contexto global do script. Por exemplo:
 
 ```groovy linenums="1"
-especies = ['gato','cachorro', 'preguiça']
-sequencias = ['AGATAG','ATGCTCT', 'ATCCCAA']
+especies = ['gato', 'cachorro', 'preguiça']
+sequencias = ['AGATAG', 'ATGCTCT', 'ATCCCAA']
 
 Channel.fromList(especies)
         .set { canal_especies }

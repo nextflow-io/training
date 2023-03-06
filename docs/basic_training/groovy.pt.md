@@ -32,7 +32,7 @@ A única diferença entre os dois é que o método `println` anexa implicitament
 Os comentários usam a mesma sintaxe das linguagens de programação da família C:
 
 ```groovy linenums="1"
-// comente um único arquivo de configuração
+// comente uma única linha
 
 /*
     um comentário abrangendo
@@ -77,14 +77,14 @@ Um objeto List pode ser definido colocando os itens da lista entre colchetes:
 lista = [10,20,30,40]
 ```
 
-Você pode acessar um determinado item na lista com a notação de colchetes (índices começam em `0`) ou usando o método get:
+Você pode acessar um determinado item na lista com a notação de colchetes (índices começam em `0`) ou usando o método `get`:
 
 ```groovy linenums="1"
 println lista[0]
 println lista.get(0)
 ```
 
-Para obter o comprimento de uma lista, você pode usar o método size:
+Para obter o comprimento de uma lista, você pode usar o método `size`:
 
 ```groovy linenums="1"
 println lista.size()
@@ -154,7 +154,7 @@ assert mapa.get('c') == 2 // (3)!
 
 1. Usando colchetes.
 2. Usando a notação de ponto.
-3. Usando o método get.
+3. Usando o método `get`.
 
 Para adicionar dados ou modificar um mapa, a sintaxe é semelhante à adição de valores a uma lista:
 
@@ -192,6 +192,7 @@ $x + $y
 !!! info
 
     Observe o uso diferente das sintaxes `$` e `${..}` para interpolar expressões de valor em uma string.
+    A variável `$x` _não_ foi expandida, pois estava entre aspas simples.
 
 Por fim, strings também podem ser definidas usando o caractere `/` como delimitador. Elas são conhecidas como strings **com barras** e são úteis para definir expressões regulares e padrões, pois não há necessidade de escapar as barras invertidas. Assim como as strings de aspas duplas, elas permitem interpolar variáveis prefixadas com um caractere `$`.
 
@@ -372,7 +373,7 @@ println x
 [ 1, 4, 9, 16 ]
 ```
 
-Por padrão, as clausuras recebem um único parâmetro chamado `it`, para dar a ele um nome diferente, use a sintaxe `\->`. Por exemplo:
+Por padrão, as clausuras recebem um único parâmetro chamado `it`, para dar a ele um nome diferente, use a sintaxe `->`. Por exemplo:
 
 ```groovy linenums="1"
 quadrado = { num -> num * num }
