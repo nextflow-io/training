@@ -2,13 +2,13 @@
 description: Material de treinamento básico do Nextflow
 ---
 
-# Gerencie dependencias e containers
+# Gerencie dependências e contêineres
 
 Fluxos de trabalhos computacionais são raramente compostos de um só script ou ferramenta.  Muitas vezes, eles dependem de duzias de componentes de softwares ou bibliotecas.
 
 Instalar e manter tais dependências é uma tarefa desafiadora e uma fonte comum de irreprodutibilidade em aplicações científicas.
 
-Para superar esses problemas, nós utilizamos contêineres que habilitam essas dependências de softwares, isto é ferramentas e bibliotecas necessárias para uma análise de dados, para estar encapsuladas em uma ou mais imagens de contêiner Linux independentes, prontas para serem executadas e imutáveis. Elas podem facilmente ser implementadas em qualquer plataforma que suporta o motor de conteinerização.
+Para superar esses problemas, nós utilizamos contêineres que habilitam essas dependências de softwares, isto é ferramentas e bibliotecas necessárias para uma análise de dados, para estar encapsuladas em uma ou mais imagens de contêiner Linux independentes, prontas para serem executadas e imutáveis. Elas podem facilmente ser implementadas em qualquer plataforma que suporta o motor de contêinerização.
 
 Contêineres podem ser executados de uma forma isolada pelo sistema do hospedeiro. Elas tem sua própria cópia do sistema de arquivos, espaço de processamento, gerenciamento de memória, etc.
 
@@ -70,7 +70,7 @@ Aqui, você criará uma imagem Docker contendo o cowsay e a ferramenta Salmon
 
 !!! warning
 
-    O processo de montagem do Docker automaticamente copia todos arquivos que estão no diretório atual para o Docker daemon para que possa criar a imagem. Isso pode custar muito tempo quando existem vários ou grandes arquivos. Por essa razão, é importante que _sempre_ trabalhe em um diretório contendo apenas os arquivos que você realmente precisa incluir em sua imagem Docker. Alternativamente, você pode usar o arquivo `.dockerignore` para selecionar os aquivos que serão excluidos da montagem.
+    O processo de montagem do Docker automaticamente copia todos os arquivos que estão no diretório atual para o Docker daemon para que ele possa criar a imagem. Isso pode custar muito tempo quando existem vários ou grandes arquivos. Por essa razão, é importante que _sempre_ se trabalhe em um diretório contendo apenas os arquivos que você realmente precisa incluir em sua imagem Docker. Alternativamente, você pode usar o arquivo `.dockerignore` para selecionar os aquivos que serão excluídos da montagem.
 
 Use seu editor favorito (ex.: `vim` ou `nano`) para criar um arquivo chamado `Dockerfile` e copiar o seguinte conteúdo:
 
@@ -129,7 +129,7 @@ docker build -t minha-imagem .
 
 Você perceberá que isso cria uma nova imagem Docker **mas** com um ID de imagem diferente.
 
-### Execute Salmon no container
+### Execute Salmon no contêiner
 
 Cheque se o Salmon está executando corretamente no contêiner como mostrado abaixo:
 
@@ -145,11 +145,11 @@ docker run -it minha-imagem bash
 
 Use o comando `exit` para finalizar a sessão interativa.
 
-### Montagem do sitema de arquivos
+### Montagem do sistema de arquivos
 
 Crie um arquivo índice de genoma utilizando o Salmon no contêiner.
 
-Tente executar o Salmon no container com o seguinte comando:
+Tente executar o Salmon no contêiner com o seguinte comando:
 
 ```bash
 docker run minha-imagem \
@@ -171,7 +171,7 @@ docker run --volume $PWD/data/ggal/transcriptome.fa:/transcriptome.fa minha-imag
 
     O diretório `transcript-index` gerado ainda está inacessível no sistema de arquivo do sistema operacional hospedeiro.
 
-Um jeito mais fácil é montar o diretório original em um indêntico no contêiner. Isso permite que você utilize o mesmo caminho durante a execução dentro do contêiner, por exemplo
+Um jeito mais fácil é montar o diretório original em um idêntico no contêiner. Isso permite que você utilize o mesmo caminho durante a execução dentro do contêiner, por exemplo
 
 ```bash
 docker run --volume $PWD:$PWD --workdir $PWD minha-imagem \
@@ -249,7 +249,7 @@ Como visto na última seção, você também pode configurar o arquivo config (`
 
 ## Singularity
 
-[Singularity](http://singularity.lbl.gov) é um motor de contêinerização desenvolvido para trabalhar com computação de alta performace em centro de dados, onde geralmente o Docker não é permitido por motivos de restrições de segurança.
+[Singularity](http://singularity.lbl.gov) é um motor de contêinerização desenvolvido para trabalhar com computação de alta performance em centro de dados, onde geralmente o Docker não é permitido por motivos de restrições de segurança.
 
 O Singularity implementa um modelo de execução de contêiner similar ao Docker. Entretanto, ele usa um design de implementação completamente diferente.
 
@@ -289,7 +289,7 @@ sudo singularity build minha-imagem.sif Singularity
 
 Nota: O comando `build` requer permissões `sudo`. Uma forma de contornar isso consiste em criar a imagem em uma estação de trabalho local e então implementar no cluster copiando o arquivo imagem.
 
-### Executando um container
+### Executando um contêiner
 
 Quando terminar, você pode executar o contêiner com o seguinte comando:
 
@@ -334,7 +334,7 @@ Simplesmente ative o uso do motor Singularity no lugar do Docker no arquivo de c
 nextflow run script7.nf -with-singularity nextflow/rnaseq-nf
 ```
 
-Como antes, o contêiner Singularity também pode ser disponibilizado no arquivo de confirguração do Nextflow. Nós iremos ver como funciona isso mais tarde.
+Como antes, o contêiner Singularity também pode ser disponibilizado no arquivo de configuração do Nextflow. Nós iremos ver como funciona isso mais tarde.
 
 ### A Biblioteca de Contêineres Singularity
 
@@ -438,11 +438,11 @@ ENV PATH /opt/conda/envs/nf-tutorial/bin:$PATH
 
 O `Dockerfile` acima pega a imagem pai _mambaorg/micromamba_, e instala um ambiente `conda` utilizando `micromamba`, e então instala o `salmon`, o `fastqc` e o `multiqc`.
 
-Tente executar o pipeline RNA-seq de antes (script7.nf). Comece montando seu próprio `Dockerfile` micromamba (como mostrado acima), salve no seu repositório no Docker Hub, e oriente o Nextflow a rodar por esse container (mudando seu `nextflow.config`).
+Tente executar o pipeline RNA-seq de antes (script7.nf). Comece montando seu próprio `Dockerfile` micromamba (como mostrado acima), salve no seu repositório no Docker Hub, e oriente o Nextflow a rodar por esse contêiner (mudando seu `nextflow.config`).
 
 !!! warning
 
-    Montar um contêiner Docker e disponibilizar no seu repósitorio pessoal pode levar &gt;10 minutos.
+    Montar um contêiner Docker e disponibilizar no seu repositório pessoal pode levar &gt;10 minutos.
 
 ??? example "Para um resumo dos passos a tomar, clique aqui:"
 
@@ -452,7 +452,7 @@ Tente executar o pipeline RNA-seq de antes (script7.nf). Comece montando seu pr�
 
     3. Publique a imagem Docker na sua conta do Docker Hub.
 
-        Algo parecido como o seguinte, com `<meurepo>` substituido para seu próprio ID do Docker, sem _&lt;_ e _&gt;_ caracteres!
+        Algo parecido como o seguinte, com `<meurepo>` substituído para seu próprio ID do Docker, sem _&lt;_ e _&gt;_ caracteres!
 
         `minha-imagem` pode ser substituído por qualquer nome que você escolher. Como boa prática, escolha algo memorável e certifique-se de que o nome combine com o nome usado no comando anterior.
 
@@ -488,7 +488,7 @@ Tente executar o pipeline RNA-seq de antes (script7.nf). Comece montando seu pr�
 
 Outro recurso útil para conectar Bioconda e contêineres é o projeto [BioContainers](https://biocontainers.pro). BioContainers é uma iniciativa da comunidade para prover um registro de imagens de contêiner para cada receita do Bioconda.
 
-Até agora, nós vimos como instalar pacotes com conda e micromamba, ambos localmente e com contêiner. Com o BioContainers, você não precisa criar sua própria imagem de contêiner para as ferramentas que você quiser, e não precisa utilizar conda or micromamba para instalar pacotes. Ele já disponiliza uma imagem Docker contendo os programas que você quer instalado. Por exemplo, você pode adquirir a imagem de contêiner do fastqc utilizando BioContainers:
+Até agora, nós vimos como instalar pacotes com conda e micromamba, ambos localmente e com contêiner. Com o BioContainers, você não precisa criar sua própria imagem de contêiner para as ferramentas que você quiser, e não precisa utilizar conda or micromamba para instalar pacotes. O BioContainers já disponibiliza uma imagem Docker contendo os programas que você quer instalado. Por exemplo, você pode adquirir a imagem de contêiner do fastqc utilizando BioContainers:
 
 ```bash
 docker pull biocontainers/fastqc:v0.11.5
@@ -496,7 +496,7 @@ docker pull biocontainers/fastqc:v0.11.5
 
 Você pode checar o registro dos pacotes que quer no [site oficial do BioContainers](https://biocontainers.pro/registry).
 
-Contrariamente a outros registros que irão puxar a última imagem quando nenhum rótulo (versão) é especificado, você precisa especificar um rótulo quando for baixar do BioContainers (depois de dois pontos `:`, por exemplo fastqc:v0.11.5). Cheque os rótulos com o registro e escolha a que melhor se adequa a suas necessidades.
+Contrariamente a outros registros que irão puxar a última imagem quando nenhum rótulo (versão) é especificado, você precisa especificar um rótulo quando for baixar do BioContainers (depois de dois pontos `:`, por exemplo fastqc:v0.11.5). Cheque os rótulos com o registro e escolha o que melhor se adéqua a suas necessidades.
 
 !!! tip
 
@@ -506,7 +506,7 @@ Contrariamente a outros registros que irão puxar a última imagem quando nenhum
 
 !!! exercise
 
-    Durante a seção onde construímos o pipline de RNA-Seq, nós criamos um índice (script2.nf). Dado que nós não temos Salmon instalado localmente na máquina provida pelo Gitpod, nós temos que ou executar com `-with-conda` ou `-with-docker`. Sua tarefa agora é executar novamente com `-with-docker`, mas sem ter que criar sua própria imagem de contêiner Docker. Invés disso, use a imagem do BioContainers para Salmon 1.7.0.
+    Durante a seção onde construímos o pipeline de RNA-Seq, nós criamos um índice (script2.nf). Dado que nós não temos Salmon instalado localmente na máquina provida pelo Gitpod, nós temos que ou executar com `-with-conda` ou `-with-docker`. Sua tarefa agora é executar novamente com `-with-docker`, mas sem ter que criar sua própria imagem de contêiner Docker. Invés disso, use a imagem do BioContainers para Salmon 1.7.0.
 
 
     ??? result
