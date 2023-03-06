@@ -72,7 +72,7 @@ Os diretórios de trabalho da tarefa são criados na pasta `work` no caminho de 
 
 !!! note
 
-    Saídas finais do workflow são supostas a ser guardadas em uma localização diferente especificada usando uma ou mais diretivas [publishDir](https://www.nextflow.io/docs/latest/process.html#publishdir).
+    Saídas finais do fluxo de trabalho são supostas a ser guardadas em uma localização diferente especificada usando uma ou mais diretivas [publishDir](https://www.nextflow.io/docs/latest/process.html#publishdir).
 
 !!! warning
 
@@ -98,13 +98,13 @@ Portanto, apenas usar **touch** em um arquivo irá invalidar a execução da tar
 
 ## Como organizar experimentos _in-silico_
 
-É uma boa prática organizar cada **experimento** em sua própria pasta. O experimento principal input parameters should be specified using a Nextflow config file. This makes it simple to track and replicate an experiment over time.
+É uma boa prática organizar cada **experimento** em sua própria pasta. Os parâmetros de entrada do experimento principal devem ser especificados usando o arquivo de configuração do Nextflow. Isso deixa simples de acompanhar e replicar o experimento ao longo do tempo.
 
 !!! note
 
-    In the same experiment, the same pipeline can be executed multiple times, however, launching two (or more) Nextflow instances in the same directory concurrently should be avoided.
+    No mesmo experimento, o mesmo pipeline pode ser executado diversas vezes, entretanto, inciar duas (ou mais) instâncias do Nextflow no mesmo diretório atualmente deve ser evitado.
 
-The `nextflow log` command lists the executions run in the current folder:
+O comando `nextflow log` lista todas execuções na pasta atual:
 
 ```console
 $ nextflow log
@@ -116,17 +116,17 @@ TIMESTAMP            DURATION  RUN NAME          STATUS  REVISION ID  SESSION ID
 2019-05-06 12:31:24  17s       stupefied_euclid  OK      b9aefc67b4   4dc656d2-c410-44c8-bc32-7dd0ea87bebf  nextflow run rnaseq-nf -resume -with-docker
 ```
 
-You can use either the **session ID** or the **run name** to recover a specific execution. For example:
+Você pode usar tanto o **ID da seção** ou o **nome da execução** para recuperar uma execução específica. Por exemplo:
 
 ```bash
 nextflow run rnaseq-nf -resume mighty_boyd
 ```
 
-## Execution provenance
+## Proveniência da execução
 
-The `log` command, when provided with a **run name** or **session ID**, can return many useful bits of information about a pipeline execution that can be used to create a provenance report.
+O comando `log`, quando provido do **nome da execução** ou **ID da seção**, pode retornar bits de informações importantes sobre um pipeline em execução que pode ser usado para criar um reporte de proveniência.
 
-By default, it will list the work directories used to compute each task. For example:
+Por padrão, irá listar todos diretórios de trabalho usados em cada tarefa. Por exemplo:
 
 ```console
 $ nextflow log tiny_fermat
@@ -139,7 +139,7 @@ $ nextflow log tiny_fermat
 /data/.../work/3b/3485d00b0115f89e4c202eacf82eba
 ```
 
-The `-f` (fields) option can be used to specify which metadata should be printed by the `log` command. For example:
+A opção `-f` (do inglês, fields) pode ser usada para especificar qual metadado deve ser impresso pelo comando `log`. Por exemplo:
 
 ```console
 $ nextflow log tiny_fermat -f 'process,exit,hash,duration'
@@ -152,13 +152,13 @@ quant    0   e5/2816b9  3.2s
 multiqc  0   3b/3485d0  6.3s
 ```
 
-The complete list of available fields can be retrieved with the command:
+A lista completa dos campos que pode ser recuperada com o comando:
 
 ```bash
 nextflow log -l
 ```
 
-The `-F` option allows the specification of filtering criteria to print only a subset of tasks. For example:
+A opção `-F` permite a especificação de um critério de filtro para imprimir apenas um subconjunto de tarefas. Por exemplo:
 
 ```console
 $ nextflow log tiny_fermat -F 'process =~ /fastqc/'
@@ -167,9 +167,9 @@ $ nextflow log tiny_fermat -F 'process =~ /fastqc/'
 /data/.../work/f7/659c65ef60582d9713252bcfbcc310
 ```
 
-This can be useful to locate specific task work directories.
+Isso pode ser útil para localizar um diretório de trabalho de uma específica tarefa.
 
-Finally, the `-t` option enables the creation of a basic custom provenance report, showing a template file in any format of your choice. For example:
+Finalmente, a opção `-t` permite a criação de um reporte básico e customizável de providência, mostrando um modelo de arquivo em qualquer formato de sua escolha. Por exemplo:
 
 ```html
 <div>
@@ -190,34 +190,33 @@ Finally, the `-t` option enables the creation of a basic custom provenance repor
 
 !!! exercise
 
-    Save the above snippet in a file named `template.html`. Then run this command (using the correct id for your run, e.g. not `tiny_fermat`):
+    Salve o trecho acima em um arquivo chamado `template.html`. Então execute o comando (usando o ID correto para sua execução, ex. não `tiny_fermat`):
 
     ```bash
     nextflow log tiny_fermat -t template.html > prov.html
     ```
 
-    Finally, open the `prov.html` file with a browser.
+    Finalmente, abra o arquivo `prov.html` com um navegador.
 
-## Resume troubleshooting
+## Resolução de problemas do resume
 
-If your workflow execution is not resumed as expected with one or more tasks being unexpectedly re-executed each time, these may be the most likely causes:
+Se a execução do seu fluxo de trabalho não foi retomada como esperado com uma ou mais tarefas sendo inesperadamente re-executadas toda vez, essas são as causas mais prováveis:
 
-#### Input file changed
+#### Arquivos de entrada mudados
 
-Make sure that there’s no change in your input file(s). Don’t forget the task unique hash is computed by taking into account the complete file path, the last modified timestamp and the file size. If any of this information has changed, the workflow will be re-executed even if the input content is the same.
+Tenha certeza que não há nenhuma mudança no(s) arquivo(s) de entrada. Não esqueça que cada tarefa tem seu hash único que é computado levando em conta o caminho completo do arquivo, a última marca temporal modificada e o tamanho do arquivo. Se alguma dessas informações foi alterada, o fluxo de trabalho deve ser re-executado mesmo que o conteúdo do arquivo é o mesmo.
 
-#### A process modifies an input
+#### Um processo modifica uma entrada
 
-A process should never alter input files, otherwise the `resume` for future executions will be invalidated for the same reason explained in the previous point.
+Um processo nunca deve alterar os arquivos de entrada, se não a função `resume` para execuções futuras será invalidado pela mesma razão explicada no ponto anterior.
 
-#### Inconsistent file attributes
+#### Atributos de arquivos inconsistentes
 
-Some shared file systems, such as [NFS](https://en.wikipedia.org/wiki/Network_File_System), may report an inconsistent file timestamp (i.e. a different timestamp for the same file) even if it has not been modified. To prevent this problem use the [lenient cache strategy](https://www.nextflow.io/docs/latest/process.html#cache).
+Alguns sistemas de arquivos compartilhado, como [NFS](https://en.wikipedia.org/wiki/Network_File_System), devem reportar uma marca temporal de arquivo inconsistente (ex. uma diferente marca temporal para um mesmo arquivo) até mesmo quando não foi modificado. Para prevenir esse problema use a [estratégia do cache leniente](https://www.nextflow.io/docs/latest/process.html#cache).
 
-#### Race condition in global variable
+#### Condição de corrida em uma variável global
 
-Nextflow is designed to simplify parallel programming without taking care about race conditions and the access to shared resources. One of the few cases in which a race condition can arise is when using a global variable with two (or more) operators.
-For example:
+Nextflow é desenvolvido para simplificar programação paralela sem ter que abdicar de condições de corrida e acessar recursos compartilhados. Um dos poucos casos que uma condição de corrida pode surgir é quando uma variável global com dois (ou mais) operadores. Por exemplo:
 
 ```groovy linenums="1"
 Channel
@@ -231,9 +230,9 @@ Channel
     .view { "ch2 = $it" }
 ```
 
-The problem in this snippet is that the `X` variable in the closure definition is defined in the global scope. Therefore, since operators are executed in parallel, the `X` value can be overwritten by the other `map` invocation.
+O problema desse trecho é que a variável `X` na definição fechada é definida no escopo global. Portanto, desde que operadores são executados em paralelo, o valor de `X` pode ser sobrescrito por outra invocação `map`.
 
-The correct implementation requires the use of the `def` keyword to declare the variable **local**.
+A implementação correta requer o uso da palavra chave `def` para declarar a variável **local**.
 
 ```groovy linenums="1"
 Channel
@@ -247,11 +246,11 @@ Channel
     .println { "ch2 = $it" }
 ```
 
-#### Non-deterministic input channels
+#### Canais de entrada não determinísticos.
 
-While dataflow channel ordering is guaranteed (i.e. data is read in the same order in which it’s written in the channel), a process can declare as input two or more channels each of which is the output of a **different** process, the overall input ordering is not consistent over different executions.
+Por enquanto que o pedido dos canais dataflow são garantidos (ex. dados são lidos na mesma ordem que são escritos pelo canal), um processo pode declarar como entrada dois ou mais canais que cada um pode ter saídas de processos **diferentes**, a entrada geral não é consistente em várias execuções.
 
-In practical terms, consider the following snippet:
+Em termos práticos, considere o trecho a seguir:
 
 ```groovy linenums="1"
 process foo {
@@ -292,9 +291,9 @@ process gather {
 }
 ```
 
-The inputs declared at line 29 and 30 can be delivered in any order because the execution order of the process `foo` and `bar` are not deterministic due to their parallel execution.
+As entradas declaradas nas linhas 29 e 30 podem ser colocadas em qualquer ordem porque a execução do processo `foo` e `bar` não são determinísticos por causa de sua execução paralela.
 
-Therefore the input of the third process needs to be synchronized using the [join](https://www.nextflow.io/docs/latest/operator.html#join) operator, or a similar approach. The third process should be written as:
+Portanto a entrada do terceiro processo precisa está sincronizada usando o operador [join](https://www.nextflow.io/docs/latest/operator.html#join), ou com uma abordagem similar. O terceiro processo deve ser escrito assim:
 
 ```groovy
 ...
