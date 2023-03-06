@@ -25,8 +25,8 @@ process SAYHELLO {
 In more complex examples, the process body can contain up to **five** definition blocks:
 
 1. **Directives** are initial declarations that define optional settings
-2. **Input** defines the expected input file(s) and the channel from where to find them
-3. **Output** defines the expected output file(s) and the channel to send the data to
+2. **Input** defines the expected input channel(s)
+3. **Output** defines the expected output channel(s)
 4. **When** is an optional clause statement to allow conditional processes
 5. **Script** is a string statement that defines the command to be executed by the process
 
@@ -153,15 +153,15 @@ workflow {
 }
 ```
 
-It can be tricky to write a script uses many Bash variables. One possible alternative is to use a script string delimited by single-quote characters
+It can be tricky to write a script that uses many Bash variables. One possible alternative is to use a script string delimited by single-quote characters
 
 ```groovy linenums="1"
 process BAR {
 
   script:
-  """
-  echo $PATH | tr : '\\n'
-  """
+  '''
+  echo "The current directory is $PWD"
+  '''
 }
 
 workflow {
@@ -213,7 +213,7 @@ process FOO {
     bzip2 -c $file > ${file}.bz2
     """
   else
-    throw new IllegalArgumentException("Unknown aligner $params.compress")
+    throw new IllegalArgumentException("Unknown compressor $params.compress")
 }
 
 workflow {
@@ -231,7 +231,7 @@ Inputs implicitly determine the dependencies and the parallel execution of the p
 --8<-- "docs/basic_training/img/channel-process.excalidraw.svg"
 </figure>
 
-The `input` block defines which channels the `process` is expecting to receive data from. You can only define one `input` block at a time, and it must contain one or more input declarations.
+The `input` block defines the names and qualifiers of variables that refer to channel elements directed at the process. You can only define one `input` block at a time, and it must contain one or more input declarations.
 
 The `input` block follows the syntax shown below:
 
@@ -374,7 +374,7 @@ workflow {
           script:
           """
           cat * > concatenated.txt
-          head -n 20 concatenated.txt > top_10_lines
+          head -n 10 concatenated.txt > top_10_lines
           """
         }
 
@@ -452,9 +452,9 @@ workflow {
 
 In the above example, the process is only executed twice because the process stops when a channel has no more data to be processed.
 
-However, what happens if you replace value x with a `value` channel?
+However, what happens if you replace value `x` with a `value` channel?
 
-Compare the previous example with the following one :
+Compare the previous example with the following one:
 
 ```groovy linenums="1"
 input1 = Channel.value(1)
@@ -707,8 +707,8 @@ Some caveats on glob pattern behavior:
 When an output file name needs to be expressed dynamically, it is possible to define it using a dynamic string that references values defined in the input declaration block or in the script global context. For example:
 
 ```groovy linenums="1"
-species = ['cat','dog', 'sloth']
-sequences = ['AGATAG','ATGCTCT', 'ATCCCAA']
+species = ['cat', 'dog', 'sloth']
+sequences = ['AGATAG', 'ATGCTCT', 'ATCCCAA']
 
 Channel.fromList(species)
         .set { species_ch }

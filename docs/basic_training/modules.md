@@ -19,7 +19,7 @@ Components defined in the module script can be imported into other Nextflow scri
 Using the `hello.nf` example, we can achieve this by:
 
 -   Creating a file called `modules.nf` in the top-level directory.
--   Cutting and pasting the two process definitions for `SPLITLETTERS` and `CONVERTTOUPPER` into `modules.nf`.
+-   Copying and pasting the two process definitions for `SPLITLETTERS` and `CONVERTTOUPPER` into `modules.nf`.
 -   Removing the `process` definitions in the `hello.nf` script.
 -   Importing the processes from `modules.nf` within the `hello.nf` script anywhere above the `workflow` definition:
 
@@ -125,7 +125,7 @@ workflow {
 
 !!! exercise
 
-    Save the previous snippet as `hello.2.nf`, and predict the output to screen.
+    Save the previous snippet as `hello.2.nf`, and try to guess what will be shown on the screen.
 
     ??? solution
 
@@ -193,7 +193,7 @@ workflow  {
 
 Alternatively, the process `output` definition allows the use of the `emit` statement to define a named identifier that can be used to reference the channel in the external scope.
 
-For example, try adding the `emit` statement on the `convertToUpper` process in your `modules.nf` file:
+For example, try adding the `emit` statement on the `CONVERTTOUPPER` process in your `modules.nf` file:
 
 ```groovy linenums="1" title="modules.nf"
 process SPLITLETTERS {
@@ -246,7 +246,7 @@ Another way to deal with outputs in the workflow scope is to use pipes `|`.
     }
     ```
 
-    Here we use a [pipe](https://www.nextflow.io/docs/latest/dsl2.html#pipes) which passed the output as a channel to the next process.
+    Here we use a [pipe](https://www.nextflow.io/docs/latest/dsl2.html#pipes) which passed the output as a channel to the next process without the need of applying `.out` to the process name.
 
 ## Workflow definition
 
@@ -402,7 +402,7 @@ workflow {
 }
 ```
 
-You can choose which pipeline runs by using the `entry` flag:
+You can choose which workflow to run by using the `entry` flag:
 
 ```bash
 nextflow run hello.2.nf -entry my_pipeline_one
@@ -441,7 +441,7 @@ Running `hello.nf` should print:
 Hola mundo!
 ```
 
-As highlighted above, the script will print `Hola mundo!` instead of `Hello world!` because parameters are inherited from the including context.
+As highlighted above, the script will print `Hola mundo!` instead of `Hello world!` because parameters inherited from the including context are overwritten by the definitions in the script file where they're being included.
 
 !!! info
 

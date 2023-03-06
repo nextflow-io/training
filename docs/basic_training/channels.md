@@ -182,7 +182,7 @@ value: 5
 value: 7
 ```
 
-The method `Channel.of` works in a similar manner to `Channel.from` (which is now [depreciated](https://www.nextflow.io/docs/latest/channel.html#of)), fixing some inconsistent behaviors of the latter and provides better handling when specifying a range of values. For example, the following works with a range from 1 to 23 :
+The method `Channel.of` works in a similar manner to `Channel.from` (which is now [deprecated](https://www.nextflow.io/docs/latest/channel.html#of)), fixing some inconsistent behaviors of the latter and providing better handling when specifying a range of values. For example, the following works with a range from 1 to 23 :
 
 ```groovy linenums="1"
 Channel
@@ -265,10 +265,10 @@ It will produce an output similar to the following:
 | ------------- | ------------------------------------------------------------------------------------------------------------------------------ |
 | type          | Type of paths returned, either `file`, `dir` or `any` (default: `file`)                                                        |
 | hidden        | When `true` includes hidden files in the resulting paths (default: `false`)                                                    |
-| maxDepth      | Maximum number of directory levels to visit (default: <code>no limit</code>)                                                   |
+| maxDepth      | Maximum number of directory levels to visit (default: `no limit`)                                                              |
 | followLinks   | When `true` symbolic links are followed during directory tree traversal, otherwise they are managed as files (default: `true`) |
-| size          | Defines the number of files each emitted item is expected to hold (default: 2). Set to `-1` for any.                           |
-| flat          | When `true` the matching files are produced as sole elements in the emitted tuples (default: `false`).                         |
+| size          | Defines the number of files each emitted item is expected to hold (default: 2). Set to `-1` for any                            |
+| flat          | When `true` the matching files are produced as sole elements in the emitted tuples (default: `false`)                          |
 | checkIfExists | When `true`, it throws an exception of the specified path that does not exist in the file system (default: `false`)            |
 
 !!! exercise
@@ -476,7 +476,7 @@ Channel
   .view { row -> "${row.col1},${row.col4}" }
 ```
 
-You can also process multiple csv files at the same time:
+You can also process multiple CSV files at the same time:
 
 ```groovy linenums="1"
 Channel
@@ -489,7 +489,7 @@ Channel
 
     Notice that you can change the output format simply by adding a different delimiter.
 
-Finally, you can also operate on csv files outside the channel context:
+Finally, you can also operate on CSV files outside the channel context:
 
 ```groovy linenums="1"
 def f = file('data/meta/patients_1.csv')
@@ -501,11 +501,11 @@ for( List row : lines ) {
 
 !!! exercise
 
-    Try inputting fastq reads into the RNA-Seq workflow from earlier using `.splitCSV`.
+    Try inputting fastq reads into the RNA-Seq workflow from earlier using `.splitCsv`.
 
     ??? solution
 
-        Add a csv text file containing the following, as an example input with the name "fastq.csv":
+        Add a CSV text file containing the following, as an example input with the name "fastq.csv":
 
         ```csv
         gut,/workspace/gitpod/nf-training/data/ggal/gut_1.fq,/workspace/gitpod/nf-training/data/ggal/gut_2.fq
@@ -692,4 +692,4 @@ Nextflow will use this as a custom function within the workflow scope.
 
 !!! tip
 
-    You will learn more about module files later in section 8.1 of this tutorial.
+    You will learn more about module files later in the [Modularization section](modules/) of this tutorial.

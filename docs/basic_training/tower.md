@@ -24,7 +24,7 @@ Nextflow tower core features include:
 
 You can use Tower via either the `-with-tower` option while using the Nextflow **run** command, through the **online GUI** or through the **API**.
 
-### Via the Nextflow `run` command
+### Via the `nextflow run` command
 
 Create an account and login into Tower.
 
@@ -109,10 +109,11 @@ Each compute environment must be pre-configured to enable Tower to submit tasks.
 
     * [AWS Batch](https://help.tower.nf/compute-envs/aws-batch/)
     * [Azure Batch](https://help.tower.nf/compute-envs/azure-batch/)
-    * [Google Cloud](https://help.tower.nf/compute-envs/google-cloud/)
+    * [Google Batch](https://help.tower.nf/compute-envs/google-cloud-batch/)
+    * [Google Life Sciences](https://help.tower.nf/compute-envs/google-cloud-lifesciences/)
     * [IBM LSF](https://help.tower.nf/compute-envs/lsf/)
     * [Slurm](https://help.tower.nf/compute-envs/slurm/)
-    * [Grid Engine](https://help.tower.nf/compute-envs/grid-engine/)
+    * [Grid Engine](https://help.tower.nf/compute-envs/altair-grid-engine/)
     * [Altair PBS Pro](https://help.tower.nf/compute-envs/altair-pbs-pro/)
     * [Amazon Kubernetes (EKS)](https://help.tower.nf/compute-envs/eks/)
     * [Google Kubernetes (GKE)](https://help.tower.nf/compute-envs/gke/)
@@ -161,18 +162,18 @@ In brief, these are the steps you need to follow to set up a pipeline.
 4. Select a pipeline **Revision number**. The Git default branch (main/master) or `manifest.defaultBranch` in the Nextflow configuration will be used by default.
 5. Set the **Work directory** location of the Nextflow work directory. The location associated with the compute environment will be selected by default.
 6. Enter the name(s) of each of the Nextflow **Config profiles** followed by the `Enter` key. See the Nextflow [Config profiles](https://www.nextflow.io/docs/latest/config.html#config-profiles) documentation for more details.
-7. Enter any Pipeline parameters in YAML or JSON format. YAML example:
+7. Enter any pipeline parameters in YAML or JSON format. YAML example:
 
     ```yaml
     reads: "s3://nf-bucket/exome-data/ERR013140_{1,2}.fastq.bz2"
     paired_end: true
     ```
 
-8. Select Launchpad to begin the pipeline execution.
+8. Select Launch to begin the pipeline execution.
 
 !!! info
 
-    Nextflow pipelines are simply Git repositories and can be changed to any public or private Git-hosting platform. See Git Integration in the Tower docs and Pipeline Sharing in the Nextflow docs for more details.
+    Nextflow pipelines are simply Git repositories and can be changed to any public or private Git-hosting platform. See [Git Integration](https://help.tower.nf/git/overview/) in the Tower docs and [Pipeline Sharing](https://www.nextflow.io/docs/latest/sharing.html) in the Nextflow docs for more details.
 
 !!! note
 
@@ -200,7 +201,7 @@ Nextflow Tower simplifies the development and execution of workflows by providin
 
 Each user has a unique **workspace** where they can interact and manage all resources such as workflows, compute environments and credentials. Details of this can be found [here](https://help.tower.nf/getting-started/workspace/).
 
-By default, each user has their own private workspace, while organizations have the ability to run and manage users through role-based access as **members** and **collaborators**.
+Organisations can have multiple workspaces with customized access for specific organisation **members** and **collaborators**.
 
 ### Organization resources
 
