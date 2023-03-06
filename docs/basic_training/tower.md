@@ -173,7 +173,7 @@ In brief, these are the steps you need to follow to set up a pipeline.
 
 !!! info
 
-    Nextflow pipelines are simply Git repositories and can be changed to any public or private Git-hosting platform. See [Git Integration](https://help.tower.nf/git/overview/?h=git+integration) in the Tower docs and [Pipeline Sharing](https://www.nextflow.io/docs/latest/sharing.html?highlight=pipeline%20sharing) in the Nextflow docs for more details.
+    Nextflow pipelines are simply Git repositories and can be changed to any public or private Git-hosting platform. See [Git Integration](https://help.tower.nf/git/overview/) in the Tower docs and [Pipeline Sharing](https://www.nextflow.io/docs/latest/sharing.html) in the Nextflow docs for more details.
 
 !!! note
 
@@ -201,7 +201,7 @@ Nextflow Tower simplifies the development and execution of workflows by providin
 
 Each user has a unique **workspace** where they can interact and manage all resources such as workflows, compute environments and credentials. Details of this can be found [here](https://help.tower.nf/getting-started/workspace/).
 
-By default, each user has their own private workspace, while organisations can have multiple workspaces with customized access for specific organisation **members** and **collaborators**.
+Organisations can have multiple workspaces with customized access for specific organisation **members** and **collaborators**.
 
 ### Organization resources
 

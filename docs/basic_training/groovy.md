@@ -191,7 +191,8 @@ $x + $y
 
 !!! info
 
-    Note the different use of `$` and `${..}` syntax to interpolate value expressions in a string literal. Besides, note that `$x` was not expanded, as it was enclosed by single quotes.
+    Note the different use of `$` and `${..}` syntax to interpolate value expressions in a string literal.
+    The `$x` variable was _not_ expanded, as it was enclosed by single quotes.
 
 Finally, string literals can also be defined using the `/` character as a delimiter. They are known as **slashy** strings and are useful for defining regular expressions and patterns, as there is no need to escape backslashes. As with double-quote strings they allow to interpolate variables prefixed with a `$` character.
 

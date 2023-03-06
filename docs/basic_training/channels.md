@@ -692,4 +692,4 @@ Nextflow will use this as a custom function within the workflow scope.
 
 !!! tip
 
-    You will learn more about module files later in the Modularization section of this tutorial.
+    You will learn more about module files later in the [Modularization section](modules/) of this tutorial.
