@@ -123,7 +123,7 @@ The `env` scope allows the definition of one or more variables that will be expo
 
 ```groovy linenums="1"
 env.ALPHA = 'some value'
-env.BETA = "$HOME/user/some/path"
+env.BETA = "$HOME/some/path"
 ```
 
 Save the above snippet as a file named `my-env.config`. Then save the snippet below in a file named `foo.nf`:
