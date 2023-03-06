@@ -180,7 +180,7 @@ The [process selector](https://www.nextflow.io/docs/latest/config.html#process-s
 | ----------------- | -------------- | --------------------- |
 | `'10 KB'`         | `10.KB`        | 10240 bytes           |
 | `'500 MB'`        | `500.MB`       | 524288000 bytes       |
-| `'1 min'`         | 1.min          | 60 seconds            |
+| `'1 min'`         | `1.min`        | 60 seconds            |
 | `'1 hour 25 sec'` | \-             | 1 hour and 25 seconds |
 
 The syntax for setting `process` directives in the configuration file requires `=` (i.e. assignment operator), whereas it should not be used when setting the process directives within the workflow script.
