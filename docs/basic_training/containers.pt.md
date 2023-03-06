@@ -6,39 +6,39 @@ description: Material de treinamento básico do Nextflow
 
 Fluxos de trabalhos computacionais são raramente compostos de um só script ou ferramenta.  Muitas vezes, eles dependem de duzias de componentes de softwares ou bibliotecas.
 
-Instalar e manter tais dependências é uma tarefa desafiadora e uma fonte comum de ireprodutibilidade em aplicações científicas.
+Instalar e manter tais dependências é uma tarefa desafiadora e uma fonte comum de irreprodutibilidade em aplicações científicas.
 
-Para superar esses problemas, nós utilizamos containers que habilitam essas dependências de softwares, isto é ferramentas e bibliotecas necessárias para uma análise de dados, para estar encapsuladas em um ou mais independente, pronto para executar, imutável imagens de containers Linux, que facilmente podem ser implementado em qualquer plataforma que suporta o motor de conteinerização.
+Para superar esses problemas, nós utilizamos contêineres que habilitam essas dependências de softwares, isto é ferramentas e bibliotecas necessárias para uma análise de dados, para estar encapsuladas em uma ou mais imagens de contêiner Linux independentes, prontas para serem executadas e imutáveis. Elas podem facilmente ser implementadas em qualquer plataforma que suporta o motor de conteinerização.
 
-Containers podem ser executados de uma forma isolada pelo sistema do hospedeiro. Tendo sua própria cópia do sistema de arquivos, espaço de processamento, gerencimento de memória, etc.
+Contêineres podem ser executados de uma forma isolada pelo sistema do hospedeiro. Elas tem sua própria cópia do sistema de arquivos, espaço de processamento, gerenciamento de memória, etc.
 
 !!! info
 
-    Containers forma introduzidos com o kernel 2.6 como um recurso do Linux conhecido como _Control Groups_ or [Cgroups](https://en.wikipedia.org/wiki/Cgroups).
+    Contêineres foram introduzidos no kernel 2.6 como um recurso do Linux conhecido como _Control Groups_ or [Cgroups](https://en.wikipedia.org/wiki/Cgroups).
 
 ## Docker
 
-Docker é uma ferramenta útil para o gerenciamento, execução e compartilhamento de imagens de containers.
+Docker é uma ferramenta útil para o gerenciamento, execução e compartilhamento de imagens de contêineres.
 
-Essa imagens can podem ser carregadas e publicadas em um repositório centralizado conhecido como [Docker Hub](https://hub.docker.com), ou hospedada por outros grupos como [Quay](https://quay.io).
+Essas imagens can podem ser carregadas e publicadas em um repositório centralizado conhecido como [Docker Hub](https://hub.docker.com), ou hospedadas por terceiros como o [Quay](https://quay.io).
 
-### Exectute um container
+### Execute um contêiner
 
-Um container pode ser executado com o seguinte comando:
+Um contêiner pode ser executado com o seguinte comando:
 
 ```bash
-docker run <container-name>
+docker run <nome-do-contêiner>
 ```
 
-Tente, por exemplo, o seguinte container público (se você tem docker instalado):
+Tente, por exemplo, o seguinte contêiner público (se você tiver o Docker instalado):
 
 ```bash
 docker run hello-world
 ```
 
-### Baixar um container
+### Baixe um contêiner
 
-O comando pull possibilita que você baixe uma imagem Docker sem que execute-a. Por exemplo:
+O comando pull possibilita que você baixe uma imagem Docker sem que a execute. Por exemplo:
 
 ```bash
 docker pull debian:stretch-slim
@@ -50,35 +50,35 @@ O comando acima baixa uma imagem Debian Linux. Você pode checar se ela existe u
 docker images
 ```
 
-### Executar um container em mode interativo
+### Execute um contêiner em mode interativo
 
-Inciar um BASH shell em um container permite que você opere em modo interativo no sistema operacional containerizado. Por exemplo:
+Iniciar uma shell BASH em um contêiner permite que você opere em modo interativo no sistema operacional contêinerizado. Por exemplo:
 
 ```
 docker run -it debian:stretch-slim bash
 ```
 
-Uma vez iniciado, você vai notar que está como root (!). Use os comandos usuais para navegar pelo sistema de arquivos. Isso é útil para checar se os programas necessários estão presentes no container.
+Uma vez iniciado, você vai notar que está como root (!). Use os comandos usuais para navegar pelo sistema de arquivos. Isso é útil para checar se os programas necessários estão presentes no contêiner.
 
-Para sair do container, para a seção BASH com o comando `exit`.
+Para sair do contêiner, pare a sessão BASH com o comando `exit`.
 
 ### Seu primeiro Dockerfile
 
-Imagens docker são criadas utilizando um arquivo chamado `Dockerfile`, que é um simples arquivo de texto contendo uma lista de comandos para montar e configurar uma imagem com os pacotes de programas necessários.
+Imagens Docker são criadas utilizando um arquivo chamado `Dockerfile`, que é um simples arquivo de texto contendo uma lista de comandos para montar e configurar uma imagem com os pacotes de programas necessários.
 
-Aqui, você criará uma imagem Docker contendo cowsay e Salmon tool
+Aqui, você criará uma imagem Docker contendo o cowsay e a ferramenta Salmon
 
 !!! warning
 
-    O processo de montagem do Docker automaticamente copia todos arquivos que estão no diretório atual para o Docker daemon para que possa criar a imagem. Isso pode custar muito tempo quando existem vários ou grandes arquivos. Por essa razão, é importante que _sempre_ trabalhe em um diretório contendo apenas os arquviso que você realmente precisa incluir em sua imagem Docker. Alternativamente, você pode usar o arquivo `.dockerignore` para selecionar os aquivos que serão excluidos da montagem.
+    O processo de montagem do Docker automaticamente copia todos arquivos que estão no diretório atual para o Docker daemon para que possa criar a imagem. Isso pode custar muito tempo quando existem vários ou grandes arquivos. Por essa razão, é importante que _sempre_ trabalhe em um diretório contendo apenas os arquivos que você realmente precisa incluir em sua imagem Docker. Alternativamente, você pode usar o arquivo `.dockerignore` para selecionar os aquivos que serão excluidos da montagem.
 
 Use seu editor favorito (ex.: `vim` ou `nano`) para criar um arquivo chamado `Dockerfile` e copiar o seguinte conteúdo:
 
 ```dockerfile
 FROM debian:stretch-slim
 
-LABEL image.author.name "Your Name Here"
-LABEL image.author.email "your@email.here"
+LABEL image.author.name "Seu nome aqui"
+LABEL image.author.email "seu@email.aqui"
 
 RUN apt-get update && apt-get install -y curl cowsay
 
@@ -87,13 +87,13 @@ ENV PATH=$PATH:/usr/games/
 
 ### Monte a imagem
 
-Monte a imagem Dockerfile utilizando o seguinte comando:
+Monte a imagem do Dockerfile utilizando o seguinte comando:
 
 ```bash
-docker build -t my-image .
+docker build -t minha-imagem .
 ```
 
-Onde "my-image" é o nome que o usuário especificou para Dockerfile, presente no diretório atual.
+Onde "minha-imagem" é o rótulo que o usuário especificou para o Dockerfile, presente no diretório atual.
 
 !!! tip
 
@@ -105,10 +105,10 @@ Quando completo, verifique se a imagem foi criada listando todas imagens dispon�
 docker images
 ```
 
-Você pode testar seu novo container executando esse comando:
+Você pode testar seu novo contêiner executando esse comando:
 
 ```bash
-docker run my-image cowsay Hello Docker!
+docker run minha-imagem cowsay Hello Docker!
 ```
 
 ### Adicione um pacote de programa a imagem
@@ -124,57 +124,57 @@ RUN curl -sSL https://github.com/COMBINE-lab/salmon/releases/download/v1.5.2/sal
 Salve o arquivo e monte a imagem novamente utilizando o mesmo comando anterior:
 
 ```bash
-docker build -t my-image .
+docker build -t minha-imagem .
 ```
 
 Você perceberá que isso cria uma nova imagem Docker **mas** com um ID de imagem diferente.
 
 ### Execute Salmon no container
 
-Cheque se Salmon está executando corretamente no container como mostrado abaixo:
+Cheque se o Salmon está executando corretamente no contêiner como mostrado abaixo:
 
 ```bash
-docker run my-image salmon --version
+docker run minha-imagem salmon --version
 ```
 
-Você pode até iniciar o container no modo interativo utilizando o seguinte comando:
+Você pode até iniciar o contêiner no modo interativo utilizando o seguinte comando:
 
 ```bash
-docker run -it my-image bash
+docker run -it minha-imagem bash
 ```
 
-Use o comando `exit` para finalizar a seção interativa.
+Use o comando `exit` para finalizar a sessão interativa.
 
 ### Montagem do sitema de arquivos
 
-Crie um arquivo índice de genoma utilizando Salmon no container.
+Crie um arquivo índice de genoma utilizando o Salmon no contêiner.
 
-Tente executar Salmon no container com o seguinte comando:
+Tente executar o Salmon no container com o seguinte comando:
 
 ```bash
-docker run my-image \
+docker run minha-imagem \
     salmon index -t $PWD/data/ggal/transcriptome.fa -i transcript-index
 ```
 
-O comando acima falha porque Salmon não pode acessar o arquivo de entrada.
+O comando acima falha porque o Salmon não pode acessar o arquivo de entrada.
 
-Isso acontece porque o container executa em um sistema de arquivos totalmente diferente e não pode acessar o arquivo no sistema de arquivo do host por default.
+Isso acontece porque o contêiner executa em um sistema de arquivos totalmente diferente e não pode acessar o arquivo no sistema de arquivo do host por padrão.
 
-Você precisará usar a opção de linha de comando `--volume` para montar o(s) arquivo(s) de entrada por exemplo.
+Você precisará usar a opção de linha de comando `--volume` para montar o(s) arquivo(s) de entrada, por exemplo
 
 ```bash
-docker run --volume $PWD/data/ggal/transcriptome.fa:/transcriptome.fa my-image \
+docker run --volume $PWD/data/ggal/transcriptome.fa:/transcriptome.fa minha-imagem \
     salmon index -t /transcriptome.fa -i transcript-index
 ```
 
 !!! warning
 
-    O `transcript-index` diretório gerado ainda está inacessível no sistema de arquivo do host.
+    O diretório `transcript-index` gerado ainda está inacessível no sistema de arquivo do sistema operacional hospedeiro.
 
-Um jeito mais fácil é montar o diretório original em um indêntico no container, isso permite que você utilize o mesmo caminho durante a execução dentro do container por exemplo.
+Um jeito mais fácil é montar o diretório original em um indêntico no contêiner. Isso permite que você utilize o mesmo caminho durante a execução dentro do contêiner, por exemplo
 
 ```bash
-docker run --volume $PWD:$PWD --workdir $PWD my-image \
+docker run --volume $PWD:$PWD --workdir $PWD minha-imagem \
     salmon index -t $PWD/data/ggal/transcriptome.fa -i transcript-index
 ```
 
@@ -182,7 +182,7 @@ Ou definir uma pasta que você queira montar como uma variável de ambiente, cha
 
 ```bash
 DATA=/workspace/gitpod/nf-training/data
-docker run --volume $DATA:$DATA --workdir $PWD my-image \
+docker run --volume $DATA:$DATA --workdir $PWD minha-imagem \
     salmon index -t $PWD/data/ggal/transcriptome.fa -i transcript-index
 ```
 
@@ -196,11 +196,11 @@ ls -la transcript-index
 
     Note que as permissões para criação dos arquivos utilizado pelo Docker são `root`.
 
-### Disponibilize o container no Docker Hub (bonus)
+### Disponibilize o contêiner no Docker Hub (bonus)
 
-Publique seu container no Docker Hub para compartilha-lo com outras pessoas.
+Publique seu contêiner no Docker Hub para compartilhá-lo com outras pessoas.
 
-Crie uma conta no site <https://hub.docker.com>. Entao no seu terminal shell execute o seguinte comando, utilizando seu usuário e senha que criou quando se registrou no Hub:
+Crie uma conta no site <https://hub.docker.com>. Então no seu terminal shell execute o seguinte comando, utilizando seu usuário e senha que criou quando se registrou no Hub:
 
 ```bash
 docker login
@@ -209,43 +209,43 @@ docker login
 Marque a imagem com seu nome de usuário Docker:
 
 ```bash
-docker tag my-image <user-name>/my-image
+docker tag minha-imagem <nome-de-usuario>/minha-imagem
 ```
 
 Finalmente mande para o Docker Hub:
 
 ```bash
-docker push <user-name>/my-image
+docker push <nome-de-usuario>/minha-imagem
 ```
 
-Depois qualquer um conseguira baixar a imagem utilizando o comando:
+Depois disso, qualquer um conseguirá baixar a imagem utilizando o comando:
 
 ```bash
 docker pull <user-name>/my-image
 ```
 
-Note que depois de uma operação push e pull, o Docker printa o número de registro do container, por exemplo:
+Note que depois de uma operação push e pull, o Docker imprime na tela o número de registro do contêiner, por exemplo:
 
 ```console
 Digest: sha256:aeacbd7ea1154f263cda972a96920fb228b2033544c2641476350b9317dab266
 Status: Downloaded newer image for nextflow/rnaseq-nf:latest
 ```
 
-Isso é um identificador imutável e único que pode ser usado para referênciar a imagem de container de uma forma única. Por exemplo:
+Isso é um identificador imutável e único que pode ser usado para referenciar a imagem de contêiner de uma forma única. Por exemplo:
 
 ```bash
 docker pull nextflow/rnaseq-nf@sha256:aeacbd7ea1154f263cda972a96920fb228b2033544c2641476350b9317dab266
 ```
 
-### Execute um script do Nextflow utilizando um container Docker
+### Execute um script do Nextflow utilizando um contêiner Docker
 
 A maneira mais simples de rodar um script Nextflow é usando a opção de linha de comando `-with-docker`:
 
 ```bash
-nextflow run script2.nf -with-docker my-image
+nextflow run script2.nf -with-docker minha-imagem
 ```
 
-Como visto na última seção, você também pode configurar o arquivo config (`nextflow.config`) para selecionar qual container utilizar invés de ter que especificar como um argumento de linha de comando toda vez.
+Como visto na última seção, você também pode configurar o arquivo config (`nextflow.config`) para selecionar qual contêiner utilizar invés de ter que especificar como um argumento de linha de comando toda vez.
 
 ## Singularity
 
