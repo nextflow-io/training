@@ -4,7 +4,7 @@ description: Material de treinamento básico do Nextflow
 
 # Gerencie dependências e contêineres
 
-Fluxos de trabalhos computacionais são raramente compostos de um só script ou ferramenta.  Muitas vezes, eles dependem de duzias de componentes de softwares ou bibliotecas.
+Fluxos de trabalhos computacionais são raramente compostos de um só script ou ferramenta. Muitas vezes, eles dependem de duzias de componentes de softwares ou bibliotecas.
 
 Instalar e manter tais dependências é uma tarefa desafiadora e uma fonte comum de irreprodutibilidade em aplicações científicas.
 
