@@ -281,7 +281,7 @@ curl -sSL https://github.com/COMBINE-lab/salmon/releases/download/v1.0.0/salmon-
 && mv /salmon-*/lib/* /usr/lib/
 ```
 
-Once you have saved the `Singularity` file. You can create the image with these commands:
+Once you have saved the `Singularity` file, you can create the image with these commands:
 
 ```bash
 sudo singularity build my-image.sif Singularity
@@ -462,7 +462,7 @@ Try executing the RNA-Seq pipeline from earlier (script7.nf). Start by building 
         docker push <myrepo>/my-image
         ```
 
-    4. Add the image file name to the `nextflow.config` file.
+    4. Add the container image name to the `nextflow.config` file.
 
         e.g. remove the following from the `nextflow.config`:
 
