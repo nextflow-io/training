@@ -265,10 +265,10 @@ Ele produzirá uma saída semelhante à seguinte:
 | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | type          | Tipo de caminhos retornados, ou `file`, `dir` ou `any` (padrão: `file`)                                                                                      |
 | hidden        | Quando `true` includes hidden files in the resulting paths (padrão: `false`)                                                                                 |
-| maxDepth      | Número máximo de níveis de diretório a serem visitados (padrão: `no limit`)                                                                       |
+| maxDepth      | Número máximo de níveis de diretório a serem visitados (padrão: `no limit`)                                                                                  |
 | followLinks   | Quando `true` links simbólicos são seguidos durante a travessia da árvore de diretórios, caso contrário, eles são gerenciados como arquivos (padrão: `true`) |
-| size          | Define o número de arquivos que cada item emitido deve conter (padrão: 2). Use `-1` para qualquer número                                                    |
-| flat          | Quando `true` os arquivos correspondentes são produzidos como únicos elementos nas tuplas emitidas (padrão: `false`)                                        |
+| size          | Define o número de arquivos que cada item emitido deve conter (padrão: 2). Use `-1` para qualquer número                                                     |
+| flat          | Quando `true` os arquivos correspondentes são produzidos como únicos elementos nas tuplas emitidas (padrão: `false`)                                         |
 | checkIfExists | Quando `true`, lança uma exceção do caminho especificado que não existe no sistema de arquivos (padrão: `false`)                                             |
 
 !!! exercise
