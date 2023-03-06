@@ -125,7 +125,7 @@ workflow { // (18)!
 5. Declaração de entrada para o processo `SPLITLETTERS`. As entradas podem ser valores (`val`), arquivos ou caminhos (`path`), ou ainda outros qualificadores ([veja aqui](https://www.nextflow.io/docs/latest/process.html#inputs)).
 6. Diz ao `processo` para esperar um valor de entrada (`val`), que atribuímos à variável 'x'.
 7. Declaração de saída para o processo `SPLITLETTERS`.
-8. Diz ao processo para esperar um ou mais arquivos de saída (`path`), com um nome de arquivo começando com 'chunk\_\*', como saída do script. O processo envia a saída como um canal.
+8. Diz ao processo para esperar um ou mais arquivos de saída (`path`), com um nome de arquivo começando com 'chunk\_', como saída do script. O processo envia a saída como um canal.
 9. Três aspas duplas iniciam e terminam o bloco de código para executar este `processo`. Dentro está o código a ser executado — imprimindo o valor de `entrada` x (chamado usando o prefixo do símbolo de dólar [$]), dividindo a string em pedaços com um comprimento de 6 caracteres ("Hello " e "world!") e salvando cada um para um arquivo (chunk_aa e chunk_ab).
 10. Fim do primeiro bloco de processo.
 11. Inicia o segundo bloco de processo, definido como `CONVERTTOUPPER`.
@@ -165,8 +165,8 @@ Launching `hello.nf` [gigantic_poitras] DSL2 - revision: 197a0e289a
 executor >  local (3)
 [c8/c36893] process > SPLITLETTERS (1)   [100%] 1 of 1 ✔
 [1a/3c54ed] process > CONVERTTOUPPER (2) [100%] 2 of 2 ✔
-WORLD!
 HELLO
+WORLD!
 ```
 
 A saída padrão mostra (linha por linha):

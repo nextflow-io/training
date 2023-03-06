@@ -26,13 +26,13 @@ Ao usar um escalonador de lote, geralmente é necessário especificar o número 
 
 Isso pode ser feito utilizando as seguintes diretivas de processo:
 
-|                                                                   |                                                                              |
-| ----------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| [queue](https://www.nextflow.io/docs/latest/process.html#queue)   | a _fila_ a ser utilizada no cluster para computação                          |
-| [cpus](https://www.nextflow.io/docs/latest/process.html#cpus)     | o número de _cpus_ a serem alocadas para execução da tarefa                  |
-| [memory](https://www.nextflow.io/docs/latest/process.html#memory) | a quantidade de _memória_ a ser alocada para execução da tarefa              |
-| [time](https://www.nextflow.io/docs/latest/process.html#time)     | a quantidade de _tempo_ máxima a ser alocada para execução da tarefa         |
-| [disk](https://www.nextflow.io/docs/latest/process.html#disk)     | a quantidade de espaço de armazenamento necessária para a execução da tarefa |
+|                                                                   |                                                                                |
+| ----------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| [queue](https://www.nextflow.io/docs/latest/process.html#queue)   | a _fila_ a ser utilizada no cluster para computação                            |
+| [cpus](https://www.nextflow.io/docs/latest/process.html#cpus)     | o número de _cpus_ a serem alocadas para execução da tarefa                    |
+| [memory](https://www.nextflow.io/docs/latest/process.html#memory) | a quantidade de _memória_ a ser alocada para execução da tarefa                |
+| [time](https://www.nextflow.io/docs/latest/process.html#time)     | a quantidade de _tempo_ máxima a ser alocada para execução da tarefa           |
+| [disk](https://www.nextflow.io/docs/latest/process.html#disk)     | a quantidade de _espaço de armazenamento_ necessária para a execução da tarefa |
 
 ### Recursos do fluxo de trabalho de modo amplo
 
@@ -239,7 +239,7 @@ aws.batch.cliPath = '/home/ec2-user/miniconda/bin/aws' // (6)!
     A prática recomendada é manter essa configuração como um perfil separado no arquivo de configuração do fluxo de trabalho. Isso permite a execução com um comando simples.
 
     ```bash
-    nextflow run script7.nf
+    nextflow run script7.nf -profile amazon
     ```
 
 Os detalhes completos sobre a implantação no AWS Batch estão disponíveis [nesse link](https://www.nextflow.io/docs/latest/awscloud.html#aws-batch).

@@ -4,7 +4,7 @@ description: Como configurar um ambiente de desenvolvimento para executar o Next
 
 # Configuração do ambiente
 
-Existem duas principais maneiras de começar este treinamento em Nextflow da Seqera.
+Existem duas principais maneiras de começar este treinamento da Comunidade do Nextflow.
 
 A primeira é instalar os requisitos [localmente](#instalacao-local), o que é melhor se você já estiver familiarizado com Git e Docker ou trabalhando offline.
 
@@ -39,7 +39,7 @@ Digite este comando no seu terminal:
 wget -qO- https://get.nextflow.io | bash
 ```
 
-Ou, se preferir o curl:
+Ou, se preferir o `curl`:
 
 ```bash
 curl -s https://get.nextflow.io | bash

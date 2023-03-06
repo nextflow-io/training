@@ -281,7 +281,7 @@ curl -sSL https://github.com/COMBINE-lab/salmon/releases/download/v1.0.0/salmon-
 && mv /salmon-*/lib/* /usr/lib/
 ```
 
-Uma vez que você salvou o arquivo `Singularity`. Você pode criar uma imagem utilizando esses comandos:
+Uma vez que você salvou o arquivo `Singularity`, você pode criar uma imagem utilizando esses comandos:
 
 ```bash
 sudo singularity build minha-imagem.sif Singularity
@@ -462,7 +462,7 @@ Tente executar o pipeline RNA-seq de antes (script7.nf). Comece montando seu pr�
         docker push <meurepo>/minha-imagem
         ```
 
-    4. Adicione o arquivo da imagem no arquivo `nextflow.config`.
+    4. Adicione a imagem do contêiner no arquivo `nextflow.config`.
 
         ex. remova o seguinte do arquivo `nextflow.config`:
 

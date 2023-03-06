@@ -265,10 +265,10 @@ Ele produzirá uma saída semelhante à seguinte:
 | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | type          | Tipo de caminhos retornados, ou `file`, `dir` ou `any` (padrão: `file`)                                                                                      |
 | hidden        | Quando `true` includes hidden files in the resulting paths (padrão: `false`)                                                                                 |
-| maxDepth      | Número máximo de níveis de diretório a serem visitados (padrão: <code>no limit</code>)                                                                       |
+| maxDepth      | Número máximo de níveis de diretório a serem visitados (padrão: `no limit`)                                                                                  |
 | followLinks   | Quando `true` links simbólicos são seguidos durante a travessia da árvore de diretórios, caso contrário, eles são gerenciados como arquivos (padrão: `true`) |
-| size          | Define o número de arquivos que cada item emitido deve conter (padrão: 2). Use `-1` para qualquer número.                                                    |
-| flat          | Quando `true` os arquivos correspondentes são produzidos como únicos elementos nas tuplas emitidas (padrão: `false`).                                        |
+| size          | Define o número de arquivos que cada item emitido deve conter (padrão: 2). Use `-1` para qualquer número                                                     |
+| flat          | Quando `true` os arquivos correspondentes são produzidos como únicos elementos nas tuplas emitidas (padrão: `false`)                                         |
 | checkIfExists | Quando `true`, lança uma exceção do caminho especificado que não existe no sistema de arquivos (padrão: `false`)                                             |
 
 !!! exercise
@@ -477,7 +477,7 @@ Channel
   .view { linha -> "${linha.col1},${linha.col4}" }
 ```
 
-Você também pode processar vários arquivos csv ao mesmo tempo:
+Você também pode processar vários arquivos CSV ao mesmo tempo:
 
 ```groovy linenums="1"
 Channel
@@ -490,7 +490,7 @@ Channel
 
     Observe que você pode alterar o formato de saída simplesmente adicionando um delimitador diferente.
 
-Por fim, você também pode operar em arquivos csv fora do contexto do canal:
+Por fim, você também pode operar em arquivos CSV fora do contexto do canal:
 
 ```groovy linenums="1"
 def f = file('data/meta/patients_1.csv')
@@ -502,11 +502,11 @@ for( List row : lines ) {
 
 !!! exercise
 
-    Tente inserir leituras fastq no fluxo de trabalho do RNA-Seq anterior usando `.splitCSV`.
+    Tente inserir leituras fastq no fluxo de trabalho do RNA-Seq anterior usando `.splitCsv`.
 
     ??? solution
 
-        Adicione um arquivo de texto csv contendo o seguinte, como uma entrada de exemplo com o nome "fastq.csv":
+        Adicione um arquivo de texto CSV contendo o seguinte, como uma entrada de exemplo com o nome "fastq.csv":
 
         ```csv
         gut,/workspace/gitpod/nf-training/data/ggal/gut_1.fq,/workspace/gitpod/nf-training/data/ggal/gut_2.fq
@@ -693,4 +693,4 @@ O Nextflow usará isso como uma função personalizada dentro do escopo do fluxo
 
 !!! tip
 
-    Você aprenderá mais sobre arquivos de módulo posteriormente na seção 8.1 deste tutorial.
+    Você aprenderá mais sobre arquivos de módulo posteriormente na [seção de Modularização](modules/) desse tutorial.

@@ -189,15 +189,15 @@ A sintaxe para definir as diretivas de processo no arquivo de configuração req
 
     ```groovy linenums="1"
     process foo {
-    cpus 4
-    memory 2.GB
-    time 1.hour
-    maxRetries 3
+        cpus 4
+        memory 2.GB
+        time 1.hour
+        maxRetries 3
 
-    script:
-    """
-        seu_comando --cpus $task.cpus --mem $task.memory
-    """
+        script:
+        """
+            seu_comando --cpus $task.cpus --mem $task.memory
+        """
     }
     ```
 

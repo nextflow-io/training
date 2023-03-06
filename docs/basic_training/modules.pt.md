@@ -19,7 +19,7 @@ Os componentes definidos no script do módulo podem ser importados para outros s
 Usando o exemplo `hello.nf`, podemos fazer isso:
 
 -   Criando um arquivo chamado `modules.nf` no mesmo diretório do `hello.nf`.
--   Recortando e colando as duas definições de processo para `SPLITLETTERS` e `CONVERTTOUPPER` em `modules.nf`.
+-   Copiando e colando as duas definições de processo para `SPLITLETTERS` e `CONVERTTOUPPER` em `modules.nf`.
 -   Removendo as definições `process` no script `hello.nf`.
 -   Importando os processos de `modules.nf` dentro do script `hello.nf` em qualquer lugar acima da definição de `workflow`:
 
@@ -125,7 +125,7 @@ workflow {
 
 !!! exercise
 
-    Salve o trecho anterior como `hello.2.nf`, e preveja a saída na tela.
+    Salve o trecho anterior como `hello.2.nf`, e tente adivinhar qual saída será mostrada na tela.
 
     ??? solution
 
@@ -193,7 +193,7 @@ workflow  {
 
 Alternativamente, a definição de `output` do processo permite o uso da instrução `emit` para definir um identificador nomeado que pode ser usado para referenciar o canal no escopo externo.
 
-Por exemplo, tente adicionar a instrução `emit` no processo `convertToUpper` em seu arquivo `modules.nf`:
+Por exemplo, tente adicionar a instrução `emit` no processo `CONVERTTOUPPER` em seu arquivo `modules.nf`:
 
 ```groovy linenums="1" title="modules.nf"
 process SPLITLETTERS {
@@ -246,7 +246,7 @@ Outra maneira de lidar com as saídas no escopo do workflow é usar pipes `|`.
     }
     ```
 
-     Aqui usamos um [pipe](https://www.nextflow.io/docs/latest/dsl2.html#pipes) que passa a saída de um processo como um canal para o próximo processo.
+     Aqui usamos um [pipe](https://www.nextflow.io/docs/latest/dsl2.html#pipes) que passa a saída de um processo como um canal para o próximo processo sem a necessidade de aplicar `.out` ao nome do processo.
 
 ## Definição de workflow
 
@@ -402,7 +402,7 @@ workflow {
 }
 ```
 
-Você pode escolher qual pipeline é executado usando o sinalizador `entry`:
+Você pode escolher qual workflow é executado usando o sinalizador `entry`:
 
 ```bash
 nextflow run hello.2.nf -entry my_pipeline_one
@@ -441,7 +441,7 @@ A execução de `hello.nf` deve imprimir:
 Hola mundo!
 ```
 
-Como destacado acima, o script imprimirá `Hola mundo!` em vez de `Hello world!` porque os parâmetros são herdados do contexto de inclusão.
+Como destacado acima, o script imprimirá `Hola mundo!` em vez de `Hello world!` porque os parâmetros herdados do contexto de inclusão são substituídos pelas definições no arquivo de script onde estão sendo incluídos.
 
 !!! info
 
