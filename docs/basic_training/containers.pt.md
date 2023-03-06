@@ -237,31 +237,31 @@ Isso é um identificador imutável e único que pode ser usado para referênciar
 docker pull nextflow/rnaseq-nf@sha256:aeacbd7ea1154f263cda972a96920fb228b2033544c2641476350b9317dab266
 ```
 
-### Run a Nextflow script using a Docker container
+### Execute um script do Nextflow utilizando um container Docker
 
-The simplest way to run a Nextflow script with a Docker image is using the `-with-docker` command-line option:
+A maneira mais simples de rodar um script Nextflow é usando a opção de linha de comando `-with-docker`:
 
 ```bash
 nextflow run script2.nf -with-docker my-image
 ```
 
-As seen in the last section, you can also configure the Nextflow config file (`nextflow.config`) to select which container to use instead of having to specify it as a command-line argument every time.
+Como visto na última seção, você também pode configurar o arquivo config (`nextflow.config`) para selecionar qual container utilizar invés de ter que especificar como um argumento de linha de comando toda vez.
 
 ## Singularity
 
-[Singularity](http://singularity.lbl.gov) is a container runtime designed to work in high-performance computing data centers, where the usage of Docker is generally not allowed due to security constraints.
+[Singularity](http://singularity.lbl.gov) é um motor de conteinerização desenvolvido para trabalhar com computação de alta performace em centro de dados, onde geralmente o Docker não é permitido por motivos de restrições de segurança.
 
-Singularity implements a container execution model similar to Docker. However, it uses a completely different implementation design.
+Singularity implementa um modelo de execução de container similar ao Docker. Entretanto, ele usa um design de implementação completamente diferente.
 
-A Singularity container image is archived as a plain file that can be stored in a shared file system and accessed by many computing nodes managed using a batch scheduler.
+Uma imagem container do Singularity é arquivada como um arquivo plain file que pode ser armazenado em um sistema de arquivo compartilhado e acessado por muitos nós computacionais gerenciados usando um escalonador de lote.
 
 !!! warning
 
-    Singularity will not work with Gitpod. If you wish to try this section, please do it locally, or on an HPC.
+    Singularity não irá funcionar com Gitpod. Se você quer testar essa seção, por favor faça localmente, ou em um HPC.
 
-### Create a Singularity images
+### Crie imagens do Singularity
 
-Singularity images are created using a `Singularity` file in a similar manner to Docker but using a different syntax.
+Imagens Singularity são criadas utilizando um arquivo `Singularity` de uma forma similar ao Docker mas utilizando uma sintase diferente.
 
 ```singularity
 Bootstrap: docker
@@ -281,29 +281,29 @@ curl -sSL https://github.com/COMBINE-lab/salmon/releases/download/v1.0.0/salmon-
 && mv /salmon-*/lib/* /usr/lib/
 ```
 
-Once you have saved the `Singularity` file. You can create the image with these commands:
+Uma vez que você salvou o arquivo `Singularity`. Você pode criar uma imagem utilizando esses comandos:
 
 ```bash
 sudo singularity build my-image.sif Singularity
 ```
 
-Note: the `build` command requires `sudo` permissions. A common workaround consists of building the image on a local workstation and then deploying it in the cluster by copying the image file.
+Note: o comando `build` requer permissões `sudo`. Uma forma de contorna isso consiste em criar a imagem em uma estação de trabalho local e então implementar no cluster copiando o arquivo imagem.
 
-### Running a container
+### Executando um container
 
-Once done, you can run your container with the following command
+Quando terminar, você pode executar o container com o seguinte comando:
 
 ```bash
 singularity exec my-image.sif cowsay 'Hello Singularity'
 ```
 
-By using the `shell` command you can enter in the container in interactive mode. For example:
+Utilizando o comando `shell` você pode entrar no container utilizando o modo interativo. Por exemplo:
 
 ```bash
 singularity shell my-image.sif
 ```
 
-Once in the container instance run the following commands:
+Uma vez dentro da instância do container execute o comando:
 
 ```bash
 touch hello.txt
@@ -312,29 +312,29 @@ ls -la
 
 !!! info
 
-    Note how the files on the host environment are shown. Singularity automatically mounts the host `$HOME` directory and uses the current work directory.
+    Note como os arquivos do hospedeiro são mostrados. Singularity automaticamente monta o diretório do hospedeiro `$HOME` e usa como diretório de trabalho.
 
-### Import a Docker image
+### Importe uma imagem do Docker
 
-An easier way to create a Singularity container without requiring `sudo` permission and boosting the containers interoperability is to import a Docker container image by pulling it directly from a Docker registry. For example:
+Uma forma mais fácil de criar um container Singularity não necessitando da permissão `sudo` permission e melhorando a interoperabilidade dos container é não importando um imagem de container Docker puxando diretamente do registro Docker. Por exemplo:
 
 ```bash
 singularity pull docker://debian:stretch-slim
 ```
 
-The above command automatically downloads the Debian Docker image and converts it to a Singularity image in the current directory with the name `debian-jessie.simg`.
+O comando acima automaticamente baixa uma imagem Debian Docker e converte para uma imagem Singularity no diretório atual com o nome`debian-jessie.simg`.
 
-### Run a Nextflow script using a Singularity container
+### Execute um script do Nextflow utilizando um container Singularity
 
-Nextflow allows the transparent usage of Singularity containers as easy as with Docker.
+Nextflow permite um uso transparente de containers Singularity facilmente como com o Docker.
 
-Simply enable the use of the Singularity engine in place of Docker in the Nextflow configuration file by using the `-with-singularity` command-line option:
+Simplesmente ative o uso do motor Singularity no lugar do Docker no arquivo de configurações do Nextflow utilizando a opção de linha de comando `-with-singularity`:
 
 ```bash
 nextflow run script7.nf -with-singularity nextflow/rnaseq-nf
 ```
 
-As before, the Singularity container can also be provided in the Nextflow config file. We’ll see how to do this later.
+Com anteriomente, o container Singularity também pode ser disponibilizado no arquivo de confirguração do Nextflow. Nós iremos ver como funciona isso mais tarde.
 
 ### The Singularity Container Library
 
