@@ -7,7 +7,7 @@ description: Basic Nextflow Training Workshop
 
 The Nextflow caching mechanism works by assigning a unique ID to each task which is used to create a separate execution directory where the tasks are executed and the results stored.
 
-The task unique ID is generated as a 128-bit hash number composing the task input values, files and command string.
+The task unique ID is generated as a 128-bit hash value composing the task input values, files and command string.
 
 The pipeline work directory is organized as shown below:
 
@@ -50,7 +50,7 @@ work/
 
 !!! info
 
-    You can create these plots using the `tree` function if you have it installed. On unix, simply `sudo apt install -y tree` or with Homebrew: `brew install tree`
+    You can create these plots using the `tree` function if you have it installed. On Debian-based operating systems, simply `sudo apt install -y tree` or for macOS use Homebrew: `brew install tree`
 
 ## How resume works
 
@@ -60,9 +60,9 @@ The `-resume` command-line option allows the continuation of a pipeline executio
 nextflow run <script> -resume
 ```
 
-In practical terms, the pipeline is executed from the beginning. However, before launching the execution of a `process`, Nextflow uses the task unique ID to check if the work directory already exists and that it contains a valid command exit state with the expected output files.
+In practical terms, the pipeline is executed from the beginning. However, before launching the execution of a process, Nextflow uses the task unique ID to check if the work directory already exists and that it contains a valid command exit state with the expected output files.
 
-If this condition is satisfied the task execution is skipped and previously computed results are used as the `process` results.
+If this condition is satisfied the task execution is skipped and previously computed results are used as the process results.
 
 The first task for which a new output is computed invalidates all downstream executions in the remaining DAG.
 
@@ -190,7 +190,7 @@ Finally, the `-t` option enables the creation of a basic custom provenance repor
 
 !!! exercise
 
-    Save the above snippet in a file named `template.html`. Then run this command (using the correct id for your run, e.g. not `tiny_fermat`):
+    Save the above snippet in a file named `template.html`. Then run this command (using the correct id for your run, e.g. `tiny_fermat`):
 
     ```bash
     nextflow log tiny_fermat -t template.html > prov.html
