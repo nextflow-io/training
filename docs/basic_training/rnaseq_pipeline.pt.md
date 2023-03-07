@@ -11,7 +11,7 @@ Para demonstrar um cenário biomédico da vida real, nós iremos implementar uma
 3. Realiza quantificação
 4. Cria um relatório MultiQC
 
-Isso será feito usando uma série de sete scripts, cada qual se baseia no anterior, para criar um fluxo de trabalho completo. Você poderá encontrá-los no diretório do tutorial (`script1.nf` - `script7.nf`). 
+Isso será feito usando uma série de sete scripts, cada qual se baseia no anterior, para criar um fluxo de trabalho completo. Você poderá encontrá-los no diretório do tutorial (`script1.nf` - `script7.nf`).
 
 ## Defina os parâmetros do pipeline
 
@@ -84,7 +84,7 @@ Nesta etapa você aprendeu:
 
 1. Como definir parâmetros em seu script de pipeline
 2. Como atribuir parâmetros usando a linha de comando
-3. O uso de `$var` e `${var}` como espaço reservado para variáveis 
+3. O uso de `$var` e `${var}` como espaço reservado para variáveis
 4. Como usar strings multilinhas
 5. Como usar `log.info` para imprimir informações e salvá-las no arquivo de execução de log
 
@@ -313,7 +313,7 @@ No escopo do fluxo de trabalho, observe como o canal `index_ch` é designado com
 
 A seguir, note que o primeiro canal de entrada para o processo de `QUANTIFICATION` é o `index_ch` declarado previamente, que contém o caminho para `salmon_index`.
 
-Além disso, observe que o segundo canal de entrada para o processo `QUANTIFICATION` é o `read_pair_ch` que acabamos de criar. Este sendo uma `tupla` composta de dois elementos (um valor: `sample_id` e a lista de caminhos para os arquivos de leituras fastq: `reads`) para corresponder à estrutura dos itens emitidos pela fábrica de canais `fromFilePairs`. 
+Além disso, observe que o segundo canal de entrada para o processo `QUANTIFICATION` é o `read_pair_ch` que acabamos de criar. Este sendo uma `tupla` composta de dois elementos (um valor: `sample_id` e a lista de caminhos para os arquivos de leituras fastq: `reads`) para corresponder à estrutura dos itens emitidos pela fábrica de canais `fromFilePairs`.
 
 Execute-o usando o comando a seguir:
 
@@ -499,7 +499,7 @@ Nessa etapa você aprendeu:
 
 ## Métricas e relatórios
 
-O Nextflow pode produzir vários relatórios e gráficos fornecendo várias métricas de tempo de execução e informações de execução. 
+O Nextflow pode produzir vários relatórios e gráficos fornecendo várias métricas de tempo de execução e informações de execução.
 
 Execute o pipeline [rnaseq-nf](https://github.com/nextflow-io/rnaseq-nf) introduzido anteriormente, conforme mostrado abaixo:
 
@@ -509,7 +509,7 @@ nextflow run rnaseq-nf -with-docker -with-report -with-trace -with-timeline -wit
 
 A opção `-with-docker` inicia cada tarefa da execução como um comando de execução de contêiner do Docker.
 
-A opção `-with-report` permite a criação do relatório de execução do fluxo de trabalho. Abra o arquivo `report.html` com um navegador para ver o relatório criado com o comando acima. 
+A opção `-with-report` permite a criação do relatório de execução do fluxo de trabalho. Abra o arquivo `report.html` com um navegador para ver o relatório criado com o comando acima.
 
 A opção `-with-trace` permite a criação de um arquivo separado por tabulações contendo informações de tempo de execução para cada tarefa executada. Verifique o `trace.txt` para um exemplo.
 
