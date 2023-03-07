@@ -18,7 +18,7 @@ O Nextflow distingue dois tipos diferentes de canais: canais de **fila** e canai
 
 ### Canal de fila
 
-Um canal de _fila_ é uma fila assíncrona undirecional FIFO (First-in-First-out, o primeiro a entrar, é o primeiro a sair) que conecta dois processos ou operadores.
+Um canal de _fila_ é uma fila assíncrona unidirecional FIFO (First-in-First-out, o primeiro a entrar, é o primeiro a sair) que conecta dois processos ou operadores.
 
 -   _assíncrono_ significa que as operações ocorrem sem bloqueio.
 -   _unidirecional_ significa que os dados fluem do gerador para o consumidor.
@@ -39,7 +39,7 @@ canal.view() // (2)!
 ```
 
 1. Use a função `println` embutida no Nextflow por padrão para imprimir o conteúdo do canal `canal`
-2. Aplique o método `view` no canal `canal` para imprimir cada ítem emitido por esse canal
+2. Aplique o método `view` no canal `canal` para imprimir cada item emitido por esse canal
 
 !!! exercise
 

@@ -85,7 +85,7 @@ params.bar = 'le monde!'
 params.foo = 'Olá'
 params.bar = 'mundo!'
 
-// imprime ambos os parametros
+// imprime ambos os parâmetros
 println "$params.foo $params.bar"
 ```
 
@@ -130,23 +130,23 @@ Salve o trecho acima como um arquivo chamado `my-env.config`. Em seguida, salve 
 
 ```groovy linenums="1"
 process foo {
-   eco true
-   '''
-   env | egrep 'ALFA|BETA'
-   '''
+  echo true
+  '''
+  env | egrep 'ALFA|BETA'
+  '''
 }
 ```
 
 Por fim, execute o seguinte comando:
 
 ```bash
-nextflow execute foo.nf -c my-env.config
+nextflow run foo.nf -c my-env.config
 ```
 
 ??? result
 
      ```console
-    BETA=/home/algum/caminho
+    BETA=/home/usuario/algum/caminho
     ALFA=algum valor
      ```
 
@@ -235,7 +235,7 @@ process.container = 'nextflow/rnaseq-nf'
 docker.enabled = true
 ```
 
-O uso de IDs "SHA256" únicos de imagens docker garante que o conteúdo da imagem não mude com o tempo, por exemplo:
+O uso de IDs "SHA256" únicos de imagens Docker garante que o conteúdo da imagem não mude com o tempo, por exemplo:
 
 ```groovy linenums="1"
 process.container = 'nextflow/rnaseq-nf@sha256:aeacbd7ea1154f263cda972a96920fb228b2033544c2641476350b9317dab266'

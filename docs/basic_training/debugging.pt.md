@@ -144,6 +144,6 @@ process foo {
 ```
 
 1. A memória é definida de forma dinâmica, a primeira tentativa é com 2 GB, a segunda com 4 GB, e assim sucessivamente.
-2. O tempo de execução da tarefa é configurado dinâmicamente também, a primeira tentativa é com 1 hora, a segunda com 2 horas, e assim sucessivamente.
+2. O tempo de execução da tarefa é configurado dinamicamente também, a primeira tentativa é com 1 hora, a segunda com 2 horas, e assim sucessivamente.
 3. Se a tarefa retorna um status de saída igual a `140` a estratégia de erro será `retry`, caso contrário, a execução será encerrada.
 4. O processo será re-executado até três vezes.

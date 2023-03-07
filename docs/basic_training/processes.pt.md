@@ -87,7 +87,7 @@ workflow {
 }
 ```
 
-Por padrão, o comando `process` é interpretado como um script **Bash**. No entanto, qualquer outra linguagem de script pode ser usada simplesmente iniciando o script com a declaração [Shebang](<https://en.wikipedia.org/wiki/Shebang_(Unix)>) adequada. Por examplo:
+Por padrão, o comando `process` é interpretado como um script **Bash**. No entanto, qualquer outra linguagem de script pode ser usada simplesmente iniciando o script com a declaração [Shebang](<https://en.wikipedia.org/wiki/Shebang_(Unix)>) adequada. Por exemplo:
 
 ```groovy linenums="1"
 process CODIGOPYTHON {
@@ -602,7 +602,7 @@ output:
 
 ### Valores de saída
 
-O qualificador `val` especifica um valor definido no contexto do script. Os valores são freqüentemente definidos nos blocos de _input_ e/ou _output_, conforme mostrado no exemplo a seguir:
+O qualificador `val` especifica um valor definido no contexto do script. Os valores são frequentemente definidos nos blocos de _input_ e/ou _output_, conforme mostrado no exemplo a seguir:
 
 ```groovy linenums="1"
 metodos = ['prot','dna', 'rna']

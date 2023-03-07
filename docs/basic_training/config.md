@@ -146,7 +146,7 @@ nextflow run foo.nf -c my-env.config
 ??? result
 
     ```console
-    BETA=/home/some/path
+    BETA=/home/user/some/path
     ALPHA=some value
     ```
 
