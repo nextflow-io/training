@@ -249,7 +249,7 @@ Channel
 
 #### Non-deterministic input channels
 
-While dataflow channel ordering is guaranteed (i.e. data is read in the same order in which it’s written in the channel), a process can declare as input two or more channels each of which is the output of a **different** process, the overall input ordering is not consistent over different executions.
+While dataflow channel ordering is guaranteed (i.e. data is read in the same order in which it’s written in the channel), a process can declare as input two or more channels each of which is the output of a **different** process. Due to the parallel execution of these processes, the ordering of the elements in the input channels of the downstream process is not consistent over different executions.
 
 In practical terms, consider the following snippet:
 
