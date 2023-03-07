@@ -56,7 +56,7 @@ nextflow run script1.nf --reads '/workspace/gitpod/nf-training/data/ggal/lung_{1
 
 !!! exercise
 
-    Modifique o `script1.nf` para imprimir todos os parâmetros do pipeline usando um único comando`log.info` como uma declaração de [string multilinha](https://www.nextflow.io/docs/latest/script.html#multi-line-strings) (multiline string).
+    Modifique o `script1.nf` para imprimir todos os parâmetros do pipeline usando um único comando`log.info` como uma declaração de [string multilinha](https://www.nextflow.io/docs/latest/script.html#multi-line-strings).
 
     !!! tip ""
 
@@ -71,9 +71,9 @@ nextflow run script1.nf --reads '/workspace/gitpod/nf-training/data/ggal/lung_{1
         log.info """\
                     R N A S E Q - N F   P I P E L I N E
                     ===================================
-                    transcriptome: ${params.transcriptome_file}
-                    reads        : ${params.reads}
-                    outdir       : ${params.outdir}
+                    transcriptoma               : ${params.transcriptome_file}
+                    arquivos de leituras        : ${params.reads}
+                    diretório de saíde          : ${params.outdir}
                     """
                     .stripIndent()
         ```
@@ -90,7 +90,7 @@ Nesta etapa você aprendeu:
 
 ## Criar um arquivo de índice de transcriptoma
 
-Nextflow permite a execução de qualquer comando ou script usando uma definição de `processo`.
+O Nextflow permite a execução de qualquer comando ou script usando uma definição de `processo`.
 
 Um `processo` é definido ao fornecer três principais declarações: as [`entradas`](https://www.nextflow.io/docs/latest/process.html#inputs), [`saídas`](https://www.nextflow.io/docs/latest/process.html#outputs) e comandos de [`script`](https://www.nextflow.io/docs/latest/process.html#script) do processo.
 
@@ -98,8 +98,8 @@ Para adicionar uma etapa de processamento de índice do transcriptoma `INDEX`, t
 
 ```groovy
 /*
- * define the `index` process that creates a binary index
- * given the transcriptome file
+ * define o processo `index` que cria um índice binário
+ * dá o arquivo de transcriptoma
  */
 process INDEX {
   input:
@@ -123,7 +123,7 @@ workflow {
 }
 ```
 
-Aqui, o parâmetro `params.transcriptome_file` é usado como entrada para o processo `INDEX`. O processo `INDEX` (usando a ferramenta `salmon`) cria `salmon_index`, um arquivo índice de transcriptoma que é passado como saída ao canal `index_ch`.
+Aqui, o parâmetro `params.transcriptome_file` é usado como entrada para o processo `INDEX`. O processo `INDEX` (usando a ferramenta `salmon`) cria `salmon_index`, um arquivo de índice de transcriptoma que é passado como saída ao canal `index_ch`.
 
 !!! info
 
@@ -131,7 +131,7 @@ Aqui, o parâmetro `params.transcriptome_file` é usado como entrada para o proc
 
 !!! warning
 
-    Os requisitos de recursos, como CPUs e limites de memória, podem mudar com diferentes execuções e plataformas de fluxo de trabalho. Nextflow pode usar `$task.cpus` como uma variável para o número de CPUs.. Veja a [documentação de diretivas de processo](https://www.nextflow.io/docs/latest/process.html#directives) para mais detalhes.
+    Os requisitos de recursos, como CPUs e limites de memória, podem mudar com diferentes execuções e plataformas de fluxo de trabalho. O Nextflow pode usar `$task.cpus` como uma variável para o número de CPUs. Veja a [documentação de diretivas de processo](https://www.nextflow.io/docs/latest/process.html#directives) para mais detalhes.
 
 Execute-o usando o comando:
 
@@ -141,13 +141,13 @@ nextflow run script2.nf
 
 A execução irá falhar porque `salmon` não está instalado em seu ambiente.
 
-Adicione a opção de linha de comando `-with-docker` para iniciar a execução através do container Docker, como mostrado abaixo:
+Adicione a opção de linha de comando `-with-docker` para iniciar a execução através do contêiner Docker, como mostrado abaixo:
 
 ```bash
 nextflow run script2.nf -with-docker
 ```
 
-Dessa vez a execução vai funcionar porque usa o container Docker `nextflow/rnaseq-nf` que é definido no arquivo `nextflow.config` do seu diretório atual. Se você está executando esse script localmente, você precisará baixar o docker em seu computador, fazer log in e ativar o docker, e permitir que o script baixe o container contendo os scripts de execução. Você pode aprender mais sobre o docker [aqui](https://www.nextflow.io/docs/latest/docker.html).
+Dessa vez a execução vai funcionar porque usa o contêiner Docker `nextflow/rnaseq-nf` que é definido no arquivo `nextflow.config` do seu diretório atual. Se você está executando esse script localmente, você precisará baixar o docker em seu computador, fazer login e ativar o docker, e permitir que o script baixe o contêiner contendo os scripts de execução. Você pode aprender mais sobre o docker [aqui](https://www.nextflow.io/docs/latest/docker.html).
 
 Para evitar adicionar `-with-docker` cada vez que você executar o script, adicione a linha a seguir ao arquivo `nextflow.config`:
 
@@ -175,7 +175,7 @@ docker.enabled = true
 
 !!! exercise
 
-    Se você tiver mais CPUs disponíveis, tente alterar seu script para solicitar mais recursos para este processo. Por exemplo, consulte os [documentos de diretiva](https://www.nextflow.io/docs/latest/process.html#cpus). `$task.cpus` já está especificado no script, portanto definir o número de CPUs como uma diretiva informará ao Nextflow para executar este trabalho.
+    Se você tiver mais CPUs disponíveis, tente alterar seu script para solicitar mais recursos para este processo. Por exemplo, consulte os [documentos de diretivas](https://www.nextflow.io/docs/latest/process.html#cpus). `$task.cpus` já está especificado no script, portanto definir o número de CPUs como uma diretiva informará ao Nextflow para executar este trabalho.
 
     ??? result
 
@@ -188,7 +188,7 @@ docker.enabled = true
             ...
         ```
 
-        Em seguida verifique se funcionou observando o script executado no diretório de trabalho. Procure pelo hexadecimal (por exemplo, `work/7f/f285b80022d9f61e82cd7f90436aa4/`), depois `cat` o arquivo `.command.sh`.
+        Em seguida verifique se funcionou observando o script executado no diretório de trabalho. Procure pelo hexadecimal (por exemplo, `work/7f/f285b80022d9f61e82cd7f90436aa4/`), depois use `cat` no arquivo `.command.sh`.
 
 !!! exercise "Bonus Exercise"
 
@@ -257,7 +257,7 @@ Isso irá imprimir algo semelhante a isso:
 
 O exemplo acima mostra como o canal `read_pairs_ch` emite tuplas compostas de dois elementos, onde o primeiro é o prefixo do par de leitura e o segundo é uma lista que representa os arquivos reais.
 
-Tente novamente especificando arquivos de leitura diferentes usando o padrão glob:
+Tente novamente especificando arquivos de leituras diferentes usando o padrão glob:
 
 ```bash
 nextflow run script3.nf --reads 'data/ggal/*_{1,2}.fq'
@@ -297,7 +297,7 @@ nextflow run script3.nf --reads 'data/ggal/*_{1,2}.fq'
 
 Nessa etapa você aprendeu:
 
-1. Como usar `fromFilePairs` para lidar com pares de arquivos de leitura
+1. Como usar `fromFilePairs` para lidar com pares de arquivos de leituras
 2. Como usar a opção `checkIfExists` para checar a existência de arquivos de entrada
 3. Como usar o operador `set` para definir uma uma nova variável de canal
 
@@ -307,13 +307,13 @@ Nessa etapa você aprendeu:
 
 ## Realizar a quantificação da expressão
 
-`script4.nf` adiciona um processo `QUANTIFICATION` para quantificação de expressão e chama dentro do escopo do fluxo de trabalho. A quantificação requer o arquivo de índice de transcriptoma e os arquivos fastq do par de leitura de RNA-Seq.
+O script `script4.nf` adiciona um processo `QUANTIFICATION` e chama dentro do escopo do fluxo de trabalho. A quantificação requer o arquivo de índice de transcriptoma e os arquivos fastq do par de leitura de RNA-Seq.
 
 No escopo do fluxo de trabalho, observe como o canal `index_ch` é designado como saída do processo `INDEX`.
 
 A seguir, note que o primeiro canal de entrada para o processo de `QUANTIFICATION` é o `index_ch` declarado previamente, que contém o caminho para `salmon_index`.
 
-Além disso, observe que o segundo canal de entrada para o processo `QUANTIFICATION` é o `read_pair_ch` que acabamos de criar. Este sendo uma `tupla` composta de dois elementos (um valor: `sample_id` e a lista de caminhos para os arquivos de leitura fastq: `reads`) para corresponder à estrutura dos itens emitidos pela fábrica de canais `fromFilePairs`. 
+Além disso, observe que o segundo canal de entrada para o processo `QUANTIFICATION` é o `read_pair_ch` que acabamos de criar. Este sendo uma `tupla` composta de dois elementos (um valor: `sample_id` e a lista de caminhos para os arquivos de leituras fastq: `reads`) para corresponder à estrutura dos itens emitidos pela fábrica de canais `fromFilePairs`. 
 
 Execute-o usando o comando a seguir:
 
@@ -325,7 +325,7 @@ Você irá ver a execução do processo `QUANTIFICATION`.
 
 Ao usar a opção `-resume`, qualquer etapa que já foi processada é ignorada.
 
-Tente executar o mesmo script novamente com mais arquivos de leitura, como mostrado abaixo:
+Tente executar o mesmo script novamente com mais arquivos de leituras, como mostrado abaixo:
 
 ```bash
 nextflow run script4.nf -resume --reads 'data/ggal/*_{1,2}.fq'
@@ -333,7 +333,7 @@ nextflow run script4.nf -resume --reads 'data/ggal/*_{1,2}.fq'
 
 Você irá perceber que o processo `QUANTIFICATION` é executado múltiplas vezes.
 
-Nextflow paraleliza a execução de seu pipeline simplesmente fornecendo vários conjuntos de dados de entrada para seu script.
+O Nextflow paraleliza a execução de seu pipeline simplesmente fornecendo vários conjuntos de dados de entrada para seu script.
 
 !!! tip
 
@@ -372,11 +372,11 @@ Nessa etapa você aprendeu:
 1. Como conectar dois processos juntos usando declarações de canal
 2. Como `retomar` a execução de script e pular etapas em cache
 3. Como usar a diretiva `tag` para fornecer uma saída de execução mais legível
-4. Como usar a diretiva `publishDir` para armanezar os resultados do processo em um caminho da sua escolha
+4. Como usar a diretiva `publishDir` para armazenar os resultados do processo em um caminho da sua escolha
 
 ## Controle de qualidade
 
-A seguir, nós implementamos uma etapa de controle de qualidade `FASTQC` para seus arquivos de leitura de entrada (usando a etiqueta `fastqc`). As entradas são as mesmas que os pares de arquivos de leitura na etapa `QUANTIFICATION`.
+A seguir, nós implementamos uma etapa de controle de qualidade `FASTQC` para seus arquivos de leituras de entrada (usando a etiqueta `fastqc`). As entradas são as mesmas que os pares de arquivos de leituras na etapa `QUANTIFICATION`.
 
 Você pode executá-lo usando o comando a seguir:
 
@@ -384,7 +384,7 @@ Você pode executá-lo usando o comando a seguir:
 nextflow run script5.nf -resume
 ```
 
-Nextflow DSL2 sabe como dividir `reads_pair_ch` em dois canais idênticos, já que eles são requiridos duas vezes como entrada para os processos `FASTQC` e `QUANTIFICATION`.
+O Nextflow DSL2 sabe como dividir `reads_pair_ch` em dois canais idênticos, já que eles são requiridos duas vezes como entrada para os processos `FASTQC` e `QUANTIFICATION`.
 
 ## Relatório MultiQC
 
@@ -410,29 +410,29 @@ Queremos que apenas uma tarefa do MultiQC seja executada para produzir um relat�
 
 Nessa etapa você aprendeu:
 
-1. Como coletar muitas saídas para uma única entrada com o operador `collect`
+1. Como coletar várias saídas para uma única entrada com o operador `collect`
 2. Como combinar com `mix` dois canais em um único canal
 3. Como encadear dois ou mais operadores juntos
 
-## Handle completion event
+## Lidar com evento de conclusão
 
-This step shows how to execute an action when the pipeline completes the execution.
+Essa etapa mostra como executar uma ação quando o pipeline completa a execução.
 
-Note that Nextflow processes define the execution of **asynchronous** tasks i.e. they are not executed one after another as if they were written in the pipeline script in a common **imperative** programming language.
+Observe que processos do Nextflow definem a execução de tarefas assíncronas, ou seja, elas não são executadas uma após a outra como se elas fossem escritas no script do pipeline em uma linguagem de programação **imperativa** comum.
 
-The script uses the `workflow.onComplete` event handler to print a confirmation message when the script completes.
+O script usa o manipulador de evento `workflow.onComplete` para imprimir uma mensagem de confirmação quando o script for concluído.
 
-Try to run it by using the following command:
+Tente executá-lo usando o comando a seguir:
 
 ```bash
 nextflow run script7.nf -resume --reads 'data/ggal/*_{1,2}.fq'
 ```
 
-## Email notifications
+## Notificações por email
 
-Send a notification email when the workflow execution completes using the `-N <email address>` command-line option.
+Envie uma notificação por email quando a execução do fluxo de trabalho ser concluída usando a opção de linha de comando `-N <endereço de email>`.
 
-Note: this requires the configuration of a SMTP server in the nextflow config file. Below is an example `nextflow.config` file showing the settings you would have to configure:
+Nota: isso requer a configuração de um servidor SMTP no arquivo de configuração do Nextflow. Abaixo há um exemplo de um arquivo `nextflow.config` mostrando as configurações que você teria que configurar:
 
 ```groovy
 mail {
@@ -447,13 +447,13 @@ mail {
 }
 ```
 
-See [mail documentation](https://www.nextflow.io/docs/latest/mail.html#mail-configuration) for details.
+Veja a [documentação de email](https://www.nextflow.io/docs/latest/mail.html#mail-configuration) para mais detalhes.
 
-## Custom scripts
+## Scripts personalizados
 
-Real-world pipelines use a lot of custom user scripts (BASH, R, Python, etc.) Nextflow allows you to consistently use and manage these scripts. Simply put them in a directory named `bin` in the pipeline project root. They will be automatically added to the pipeline execution `PATH`.
+Os pipelines do mundo real usam muitos scripts de usuário personalizados (BASH, R, Python, etc.). O Nextflow permite que você use e gerencie consistentemente esses scripts. Simplesmente os coloque em um diretório chamado `bin` na raiz do projeto de pipeline. Eles serão automaticamente adicionados para o `PATH` do pipeline de execução.
 
-For example, create a file named `fastqc.sh` with the following content:
+Por exemplo, crie um arquivo chamado de `fastqc.sh` com o conteúdo a seguir:
 
 ```bash
 #!/bin/bash
@@ -467,7 +467,7 @@ mkdir fastqc_${sample_id}_logs
 fastqc -o fastqc_${sample_id}_logs -f fastq -q ${reads}
 ```
 
-Save it, give execute permission, and move it into the `bin` directory as shown below:
+Salve-o, dê permissão de execução e mova-o para o diretório `bin` conforme mostrado abaixo:
 
 ```bash
 chmod +x fastqc.sh
@@ -475,7 +475,7 @@ mkdir -p bin
 mv fastqc.sh bin
 ```
 
-Then, open the `script7.nf` file and replace the `FASTQC` process’ script with the following code:
+Então, abra o arquivo `script7.nf` e substitua o script do processo `FASTQC` com o código a seguir:
 
 ```groovy
 script:
@@ -484,38 +484,38 @@ fastqc.sh "$sample_id" "$reads"
 """
 ```
 
-Run it as before:
+Execute-o como anteriormente:
 
 ```bash
 nextflow run script7.nf -resume --reads 'data/ggal/*_{1,2}.fq'
 ```
 
-### :material-check-all: Summary
+### :material-check-all: Resumo
 
-In this step you have learned:
+Nessa etapa você aprendeu:
 
-1. How to write or use existing custom scripts in your Nextflow pipeline.
-2. How to avoid the use of absolute paths by having your scripts in the `bin/` folder.
+1. Como escrever ou usar scripts personalizados existentes em seu pipeline do Nextflow.
+2. Como evitar o uso de caminhos absolutos tendo seus scripts na pasta `bin/`.
 
-## Metrics and reports
+## Métricas e relatórios
 
-Nextflow can produce multiple reports and charts providing several runtime metrics and execution information.
+O Nextflow pode produzir vários relatórios e gráficos fornecendo várias métricas de tempo de execução e informações de execução. 
 
-Run the [rnaseq-nf](https://github.com/nextflow-io/rnaseq-nf) pipeline previously introduced as shown below:
+Execute o pipeline [rnaseq-nf](https://github.com/nextflow-io/rnaseq-nf) introduzido anteriormente, conforme mostrado abaixo:
 
 ```bash
 nextflow run rnaseq-nf -with-docker -with-report -with-trace -with-timeline -with-dag dag.png
 ```
 
-The `-with-docker` option launches each task of the execution as a Docker container run command.
+A opção `-with-docker` inicia cada tarefa da execução como um comando de execução de contêiner do Docker.
 
-The `-with-report` option enables the creation of the workflow execution report. Open the file `report.html` with a browser to see the report created with the above command.
+A opção `-with-report` permite a criação do relatório de execução do fluxo de trabalho. Abra o arquivo `report.html` com um navegador para ver o relatório criado com o comando acima. 
 
-The `-with-trace` option enables the creation of a tab separated file containing runtime information for each executed task. Check the `trace.txt` for an example.
+A opção `-with-trace` permite a criação de um arquivo separado por tabulações contendo informações de tempo de execução para cada tarefa executada. Verifique o `trace.txt` para um exemplo.
 
-The `-with-timeline` option enables the creation of the workflow timeline report showing how processes were executed over time. This may be useful to identify the most time consuming tasks and bottlenecks. See an example at [this link](https://www.nextflow.io/docs/latest/tracing.html#timeline-report).
+A opção `-with-timeline` permite a criação do relatório da linha do tempo do fluxo de trabalho mostrando como os processos foram executados ao longo do tempo. Isso pode ser útil para identificar as tarefas e gargalos que consomem mais tempo. Veja um exemplo [neste link](https://www.nextflow.io/docs/latest/tracing.html#timeline-report).
 
-Finally, the `-with-dag` option enables the rendering of the workflow execution direct acyclic graph representation. Note: This feature requires the installation of [Graphviz](http://www.graphviz.org/) on your computer. See [here](https://www.nextflow.io/docs/latest/tracing.html#dag-visualisation) for further details. Then try running :
+Por fim, a opção `-with-dag` permite a renderização da representação de grafo acíclico direcionado da execução do fluxo de trabalho. Nota: Este recurso requer a instalação do [Graphviz](http://www.graphviz.org/) em seu computador. Veja [aqui](https://www.nextflow.io/docs/latest/tracing.html#dag-visualisation) para mais detalhes. Então tente executar:
 
 ```bash
 dot -Tpng dag.dot > graph.png
@@ -524,47 +524,47 @@ open graph.png
 
 !!! warning
 
-    Run time metrics may be incomplete for runs with short running tasks, as in the case of this tutorial.
+    As métricas de tempo de execução podem estar incompletas para execuções com tarefas de execução curta, como no caso deste tutorial.
 
 !!! info
 
-    You view the HTML files by right-clicking on the file name in the left side-bar and choosing the **Preview** menu item.
+    Você visualiza os arquivos HTML clicando com o botão direito do mouse no nome do arquivo na barra lateral esquerda e escolhendo o item de menu **Visualizar**.
 
-## Run a project from GitHub
+## Execute um projeto do GitHub
 
-Nextflow allows the execution of a pipeline project directly from a GitHub repository (or similar services, e.g., BitBucket and GitLab).
+O Nextflow permite a execução de um projeto de pipeline diretamente de um repositório do GitHub (ou serviços semelhantes, por exemplo, BitBucket e GitLab).
 
-This simplifies the sharing and deployment of complex projects and tracking changes in a consistent manner.
+Isso simplifica o compartilhamento e implantação de projetos complexos e o rastreamento de mudanças de uma maneira consistente.
 
-The following GitHub repository hosts a complete version of the workflow introduced in this tutorial: <https://github.com/nextflow-io/rnaseq-nf>
+O repositório do GitHub a seguir hospeda uma versão completa do fluxo de trabalho apresentado neste tutorial: <https://github.com/nextflow-io/rnaseq-nf>
 
-You can run it by specifying the project name and launching each task of the execution as a Docker container run command:
+Você pode executá-lo especificando o nome do projeto e iniciar cada tarefa da execução como um comando de execução de contêiner do Docker:
 
 ```bash
 nextflow run nextflow-io/rnaseq-nf -with-docker
 ```
 
-It automatically downloads the container and stores it in the `$HOME/.nextflow` folder.
+Ele baixa automaticamente o contêiner e o armazena na pasta `$HOME/.nextflow`.
 
-Use the command `info` to show the project information:
+Use o comando `info` para mostrar as informações do projeto:
 
 ```bash
 nextflow info nextflow-io/rnaseq-nf
 ```
 
-Nextflow allows the execution of a specific revision of your project by using the `-r` command line option. For example:
+O Nextflow permite a execução de uma revisão específica do seu projeto usando a opção de linha de comando `-r`. Por exemplo:
 
 ```bash
 nextflow run nextflow-io/rnaseq-nf -r v2.1 -with-docker
 ```
 
-Revision are defined by using Git tags or branches defined in the project repository.
+As revisões são definidas usando etiquetas do Git ou ramos definidas no repositório do projeto.
 
-Tags enable precise control of the changes in your project files and dependencies over time.
+As etiquetas permitem o controle preciso das alterações nos arquivos e dependências do projeto ao longo do tempo.
 
-## More resources
+## Mais recursos
 
--   [Nextflow documentation](http://docs.nextflow.io) - The Nextflow docs home.
--   [Nextflow patterns](https://github.com/nextflow-io/patterns) - A collection of Nextflow implementation patterns.
--   [CalliNGS-NF](https://github.com/CRG-CNAG/CalliNGS-NF) - A Variant calling pipeline implementing GATK best practices.
--   [nf-core](http://nf-co.re/) - A community collection of production ready genomic pipelines.
+-   [Documentação do Nextflow](http://docs.nextflow.io) - A página inicial dos documentos do Nextflow.
+-   [Nextflow patterns](https://github.com/nextflow-io/patterns) - Uma coleção de padrões de implementação do Nextflow.
+-   [CalliNGS-NF](https://github.com/CRG-CNAG/CalliNGS-NF) - Um pipeline de chamada Variant implementando as práticas recomendadas do GATK.
+-   [nf-core](http://nf-co.re/) - Uma coleção comunitária de pipelines genômicos prontos para produção.
