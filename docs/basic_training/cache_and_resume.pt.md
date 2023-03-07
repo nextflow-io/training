@@ -1,5 +1,5 @@
 ---
-title: Cache and reentrância
+title: Cache e reentrância
 description: Material de treinamento básico do Nextflow
 ---
 
@@ -7,7 +7,7 @@ description: Material de treinamento básico do Nextflow
 
 O mecanismo de caching do Nextflow funciona atribuindo uma ID única para cada tarefa que é usada para criar um diretório de execução separado onde as tarefas são executadas e os resultados guardados.
 
-A ID única de tarefa é gerada como um hash numérico de 128-bit compondo os valores de entrada da tarefa, arquivos e a string de comando.
+A ID única de tarefa é gerada como uma hash de 128-bit compondo os valores de entrada da tarefa, arquivos e a string de comando.
 
 O diretório de trabalho do pipeline é organizado como mostrado abaixo:
 
