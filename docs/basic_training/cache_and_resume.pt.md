@@ -1,13 +1,13 @@
 ---
-title: Cache and resume
-description: Basic Nextflow Training Workshop
+title: Cache and reentrância
+description: Material de treinamento básico do Nextflow
 ---
 
-# Execução de cache e resume
+# Execução de cache e de reentrância
 
 O mecanismo de caching do Nextflow funciona atribuindo uma ID única para cada tarefa que é usada para criar um diretório de execução separado onde as tarefas são executadas e os resultados guardados.
 
-A ID de tarefa única é gerada como um número hash de 128-bit compondo os valores de entrada da tarefa, arquivos e linha de comando.
+A ID única de tarefa é gerada como um hash numérico de 128-bit compondo os valores de entrada da tarefa, arquivos e a string de comando.
 
 O diretório de trabalho do pipeline é organizado como mostrado abaixo:
 
@@ -50,9 +50,9 @@ work/
 
 !!! info
 
-    Você pode criar esse plot usando a função `tree` se você tiver instalado. No unix, simplesmente use `sudo apt install -y tree` ou com Homebrew: `brew install tree`
+    Você pode criar esse plot usando a função `tree` se você a tiver instalada. No unix, simplesmente use `sudo apt install -y tree` ou com Homebrew: `brew install tree`
 
-## Como funciona resume
+## Como funciona a reentrância
 
 A opção de linha de comando `-resume` permite a continuação da execução do pipeline pelo último passo que foi completado com sucesso:
 
@@ -60,51 +60,51 @@ A opção de linha de comando `-resume` permite a continuação da execução do
 nextflow run <script> -resume
 ```
 
-Em termos práticos, o pipeline é executado do início. Entretanto, antes do lançamento da execução do `process`, Nextflow usa a ID única de tarefa para checar se o diretório de trabalho existe e se ele contém um estado de saída válido do comando com os esperados arquivos de saída.
+Em termos práticos, o pipeline é executado do início. Entretanto, antes do lançamento da execução de um `process`, o Nextflow usa a ID única da tarefa para checar se o diretório de trabalho existe e se ele contém um estado de saída válido do comando com os esperados arquivos de saída.
 
-Se a condição satisfeita a tarefa é ignorada e os resultado computados previamente são usados como resultados do `process`.
+Se esta condição for satisfeita a tarefa é ignorada e os resultados computados previamente são usados como resultados do `process`.
 
-A primeira tarefa que a nova saída é computada invalida todas execuções posteriores no restante do DAG.
+A primeira tarefa que tem uma nova saída computada invalida todas execuções posteriores no que resta do Grafo Acílico Direcionado (DAG, do inglês Directed Acyclic Graph).
 
 ## Diretório de trabalho
 
-Os diretórios de trabalho da tarefa são criados na pasta `work` no caminho de inicialização por padrão. Isso é suposto ser uma área de armazenamento **provisória** que pode ser limpada quando a computação termina.
+O diretório de trabalho das tarefas é criado por padrão na pasta `work` no mesmo diretório onde o pipeline foi executado. Essa localização é supostamente uma área de armazenamento **provisória** que pode ser limpada quando a execução do pipeline for finalizado.
 
 !!! note
 
-    Saídas finais do fluxo de trabalho são supostas a ser guardadas em uma localização diferente especificada usando uma ou mais diretivas [publishDir](https://www.nextflow.io/docs/latest/process.html#publishdir).
+    As saídas finais do fluxo de trabalho geralmente são guardadas em uma localização diferente especificada usando uma ou mais diretivas [publishDir](https://www.nextflow.io/docs/latest/process.html#publishdir).
 
 !!! warning
 
-    Tenha certeza de deletar o diretório de trabalho ocasionalmente, se não sua máquina ou ambiente estará cheia de arquivos sem uso.
+    Certifique-se de deletar o diretório de trabalho ocasionalmente, se não sua máquina ou ambiente estará cheia de arquivos sem uso.
 
-Uma diferente localização para o diretório de trabalho pode ser especificada usando `-w`. Por exemplo:
+Uma localização diferente para o diretório de trabalho pode ser especificada usando a opção `-w`. Por exemplo:
 
 ```bash
-nextflow run <script> -w /some/scratch/dir
+nextflow run <script> -w /algum/diretorio/de/scratch
 ```
 
 !!! warning
 
-    Se você deletar ou mover o diretório de trabalho do pipeline, isso irá prevenir que você use o recurso resume nas execuções posteriores.
+    Se você deletar ou mover o diretório de trabalho do pipeline, isso irá impedir que você use o recurso de reentrância nas execuções posteriores.
 
 O código hash para os arquivos de entrada são computados usando:
 
 -   O caminho completo do arquivo
 -   O tamanho do arquivo
--   A última marca temporal modificada
+-   A última marcação de tempo de modificação
 
-Portanto, apenas usar **touch** em um arquivo irá invalidar a execução da tarefa relacionada.
+Portanto, o simples uso do **touch** em um arquivo irá invalidar a execução da tarefa relacionada.
 
 ## Como organizar experimentos _in-silico_
 
-É uma boa prática organizar cada **experimento** em sua própria pasta. Os parâmetros de entrada do experimento principal devem ser especificados usando o arquivo de configuração do Nextflow. Isso deixa simples de acompanhar e replicar o experimento ao longo do tempo.
+É uma boa prática organizar cada **experimento** em sua própria pasta. Os parâmetros de entrada do experimento principal devem ser especificados usando o arquivo de configuração do Nextflow. Isso torna simples acompanhar e replicar o experimento ao longo do tempo.
 
 !!! note
 
-    No mesmo experimento, o mesmo pipeline pode ser executado diversas vezes, entretanto, inciar duas (ou mais) instâncias do Nextflow no mesmo diretório atualmente deve ser evitado.
+    No mesmo experimento, o mesmo pipeline pode ser executado diversas vezes, entretanto, iniciar duas (ou mais) instâncias do Nextflow no mesmo diretório ao mesmo tempo deve ser evitado.
 
-O comando `nextflow log` lista todas execuções na pasta atual:
+O comando `nextflow log` lista todas as execuções na pasta atual:
 
 ```console
 $ nextflow log
@@ -116,7 +116,7 @@ TIMESTAMP            DURATION  RUN NAME          STATUS  REVISION ID  SESSION ID
 2019-05-06 12:31:24  17s       stupefied_euclid  OK      b9aefc67b4   4dc656d2-c410-44c8-bc32-7dd0ea87bebf  nextflow run rnaseq-nf -resume -with-docker
 ```
 
-Você pode usar tanto o **ID da seção** ou o **nome da execução** para recuperar uma execução específica. Por exemplo:
+Você pode usar tanto o **ID da sessão** ou o **nome da execução** para recuperar uma execução específica. Por exemplo:
 
 ```bash
 nextflow run rnaseq-nf -resume mighty_boyd
@@ -124,9 +124,9 @@ nextflow run rnaseq-nf -resume mighty_boyd
 
 ## Proveniência da execução
 
-O comando `log`, quando provido do **nome da execução** ou **ID da seção**, pode retornar bits de informações importantes sobre um pipeline em execução que pode ser usado para criar um reporte de proveniência.
+O comando `log`, quando provido do **nome da execução** ou **ID da sessão**, pode retornar algumas informações importantes sobre um pipeline em execução que podem ser usadas para criar um relatório de proveniência.
 
-Por padrão, irá listar todos diretórios de trabalho usados em cada tarefa. Por exemplo:
+Por padrão, o comando irá listar todos diretórios de trabalho usados em cada tarefa. Por exemplo:
 
 ```console
 $ nextflow log tiny_fermat
@@ -152,7 +152,7 @@ quant    0   e5/2816b9  3.2s
 multiqc  0   3b/3485d0  6.3s
 ```
 
-A lista completa dos campos que pode ser recuperada com o comando:
+A lista completa dos campos disponíveis pode ser recuperada com o comando:
 
 ```bash
 nextflow log -l
@@ -167,9 +167,9 @@ $ nextflow log tiny_fermat -F 'process =~ /fastqc/'
 /data/.../work/f7/659c65ef60582d9713252bcfbcc310
 ```
 
-Isso pode ser útil para localizar um diretório de trabalho de uma específica tarefa.
+Isso pode ser útil para localizar um diretório de trabalho de uma tarefa específica.
 
-Finalmente, a opção `-t` permite a criação de um reporte básico e customizável de providência, mostrando um modelo de arquivo em qualquer formato de sua escolha. Por exemplo:
+Finalmente, a opção `-t` permite a criação de um relatório básico e customizável de proveniência, mostrando um modelo de arquivo em qualquer formato de sua escolha. Por exemplo:
 
 ```html
 <div>
@@ -198,39 +198,39 @@ Finalmente, a opção `-t` permite a criação de um reporte básico e customiz�
 
     Finalmente, abra o arquivo `prov.html` com um navegador.
 
-## Resolução de problemas do resume
+## Resolução de problemas de reentrância
 
 Se a execução do seu fluxo de trabalho não foi retomada como esperado com uma ou mais tarefas sendo inesperadamente re-executadas toda vez, essas são as causas mais prováveis:
 
 #### Arquivos de entrada mudados
 
-Tenha certeza que não há nenhuma mudança no(s) arquivo(s) de entrada. Não esqueça que cada tarefa tem seu hash único que é computado levando em conta o caminho completo do arquivo, a última marca temporal modificada e o tamanho do arquivo. Se alguma dessas informações foi alterada, o fluxo de trabalho deve ser re-executado mesmo que o conteúdo do arquivo é o mesmo.
+Tenha certeza que não há nenhuma mudança no(s) arquivo(s) de entrada. Não esqueça que cada tarefa tem seu hash único que é computado levando em conta o caminho completo do arquivo, a última marcação de tempo de modificação e o tamanho do arquivo. Se alguma dessas informações foi alterada, o fluxo de trabalho deve ser re-executado mesmo que o conteúdo do arquivo seja o mesmo.
 
 #### Um processo modifica uma entrada
 
-Um processo nunca deve alterar os arquivos de entrada, se não a função `resume` para execuções futuras será invalidado pela mesma razão explicada no ponto anterior.
+Um processo nunca deve alterar os arquivos de entrada, se não a função `resume` em execuções futuras será invalidada pela mesma razão explicada no ponto anterior.
 
 #### Atributos de arquivos inconsistentes
 
-Alguns sistemas de arquivos compartilhado, como [NFS](https://en.wikipedia.org/wiki/Network_File_System), devem reportar uma marca temporal de arquivo inconsistente (ex. uma diferente marca temporal para um mesmo arquivo) até mesmo quando não foi modificado. Para prevenir esse problema use a [estratégia do cache leniente](https://www.nextflow.io/docs/latest/process.html#cache).
+Alguns sistemas de arquivos compartilhados, como o [NFS](https://en.wikipedia.org/wiki/Network_File_System), podem reportar uma marcação de tempo inconsistente para os arquivos (por exemplo, uma diferente marcação de tempo para um mesmo arquivo) até mesmo quando este não foi modificado. Para prevenir esse problema use a [estratégia de cache leniente](https://www.nextflow.io/docs/latest/process.html#cache).
 
 #### Condição de corrida em uma variável global
 
-Nextflow é desenvolvido para simplificar programação paralela sem ter que abdicar de condições de corrida e acessar recursos compartilhados. Um dos poucos casos que uma condição de corrida pode surgir é quando uma variável global com dois (ou mais) operadores. Por exemplo:
+O Nextflow é desenvolvido para simplificar programação paralela, de modo que você não precise se preocupar com condições de corrida e acesso a recursos compartilhados. Um dos poucos casos que uma condição de corrida pode surgir é quando uma variável global é utilizada com dois (ou mais) operadores. Por exemplo:
 
 ```groovy linenums="1"
 Channel
     .of(1,2,3)
     .map { it -> X=it; X+=2 }
-    .view { "ch1 = $it" }
+    .view { "canal1 = $it" }
 
 Channel
     .of(1,2,3)
     .map { it -> X=it; X*=2 }
-    .view { "ch2 = $it" }
+    .view { "canal2 = $it" }
 ```
 
-O problema desse trecho é que a variável `X` na definição fechada é definida no escopo global. Portanto, desde que operadores são executados em paralelo, o valor de `X` pode ser sobrescrito por outra invocação `map`.
+O problema desse trecho é que a variável `X` na clausura é definida no escopo global. Portanto, como operadores são executados em paralelo, o valor de `X` pode ser sobrescrito pela outra invocação do `map`.
 
 A implementação correta requer o uso da palavra chave `def` para declarar a variável **local**.
 
@@ -238,73 +238,73 @@ A implementação correta requer o uso da palavra chave `def` para declarar a va
 Channel
     .of(1,2,3)
     .map { it -> def X=it; X+=2 }
-    .println { "ch1 = $it" }
+    .println { "canal1 = $it" }
 
 Channel
     .of(1,2,3)
     .map { it -> def X=it; X*=2 }
-    .println { "ch2 = $it" }
+    .println { "canal2 = $it" }
 ```
 
 #### Canais de entrada não determinísticos.
 
-Por enquanto que o pedido dos canais dataflow são garantidos (ex. dados são lidos na mesma ordem que são escritos pelo canal), um processo pode declarar como entrada dois ou mais canais que cada um pode ter saídas de processos **diferentes**, a entrada geral não é consistente em várias execuções.
+Embora a ordem de elementos em canais dataflow seja garantida (ou seja, os dados são lidos na mesma ordem que são escritos no canal), um processo pode declarar como entrada dois ou mais canais que são canais de saída de processos **diferentes**, fazendo com que a entrada não seja consistente entre diferentes execuções.
 
 Em termos práticos, considere o trecho a seguir:
 
 ```groovy linenums="1"
 process foo {
     input:
-    tuple val(pair), path(reads)
+    tuple val(par), path(leituras)
 
     output:
-    tuple val(pair), path('*.bam'), emit: bam_ch
+    tuple val(par), path('*.bam'), emit: canal_bam
 
     script:
     """
-    your_command --here
+    seu_comando --aqui
     """
 }
 
 process bar {
     input:
-    tuple val(pair), path(reads)
+    tuple val(par), path(leituras)
 
     output:
-    tuple val(pair), path('*.bai'), emit: bai_ch
+    tuple val(par), path('*.bai'), emit: canal_bai
 
     script:
     """
-    other_command --here
+    outro_comando --aqui
     """
 }
 
 process gather {
     input:
-    tuple val(pair), path(bam)
-    tuple val(pair), path(bai)
+    tuple val(par), path(bam)
+    tuple val(par), path(bai)
 
     script:
     """
-    merge_command $bam $bai
+    comando_de_mesclar $bam $bai
     """
 }
 ```
 
-As entradas declaradas nas linhas 29 e 30 podem ser colocadas em qualquer ordem porque a execução do processo `foo` e `bar` não são determinísticos por causa de sua execução paralela.
+As entradas declaradas nas linhas 29 e 30 podem ser colocadas em qualquer ordem porque a ordem da execução dos processos `foo` e `bar` não é determinística por causa de sua execução em paralelo.
 
-Portanto a entrada do terceiro processo precisa está sincronizada usando o operador [join](https://www.nextflow.io/docs/latest/operator.html#join), ou com uma abordagem similar. O terceiro processo deve ser escrito assim:
+Portanto a entrada do terceiro processo precisa estar sincronizada usando o operador [join](https://www.nextflow.io/docs/latest/operator.html#join), ou com uma abordagem similar. O terceiro processo deve ser escrito assim:
 
 ```groovy
 ...
 
 process gather {
     input:
-    tuple val(pair), path(bam), path(bai)
+    tuple val(par), path(bam), path(bai)
 
     script:
     """
-    merge_command $bam $bai
+    comando_de_mesclar $bam $bai
     """
 }
 ```
