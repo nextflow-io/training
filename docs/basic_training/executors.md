@@ -48,6 +48,36 @@ process {
 }
 ```
 
+### Submit Nextflow as a job
+
+Nextflow should not be run as a command in the login/head node of a cluster, as this node is not prepared for commands that run for too long, even if the amount of resources is negligible. Nextflow should be submit as a job instead, and in a job node it will submit new tasks and manage them. In a cluster using Slurm as job scheduler, for example, you'll need to create a file similar to the one below (save it as launch_nf.job or any other name of your choosing):
+
+```bash linenums="1"
+#!/bin/bash
+#SBATCH --partition WORK
+#SBATCH --mem 5G
+#SBATCH -c 1
+#SBATCH -t 12:00:00
+
+PIPELINE=$1
+CONFIG=$2
+
+conda activate nextflow
+
+nextflow -C ${CONFIG} run ${PIPELINE}
+```
+
+And then run submit it with:
+
+```bash linenums="1"
+sbatch launch_nf.job /home/my_user/path/mypipeline.nf /home/my_user/path/myconfig_file.conf
+```
+
+You can find more details about the example above [here](https://lescailab.unipv.it/guides/eos_guide/use_nextflow.html#large-testing-or-production). Besides, make sure to check the following blog posts on best tips for running Nextflow on HPC:
+
+-   [5 Nextflow Tips for HPC Users](https://www.nextflow.io/blog/2021/5_tips_for_hpc_users.html)
+-   [Five more tips for Nextflow user on HPC](https://www.nextflow.io/blog/2021/5-more-tips-for-nextflow-user-on-hpc.html)
+
 ### Configure process by name
 
 In real-world applications, different tasks need different amounts of computing resources. It is possible to define the resources for a specific task using the select `withName:` followed by the process name:
