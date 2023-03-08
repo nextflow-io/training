@@ -175,7 +175,7 @@ docker.enabled = true
 
 !!! exercise
 
-    Se você tiver mais CPUs disponíveis, tente alterar seu script para solicitar mais recursos para este processo. Por exemplo, consulte os [documentos de diretivas](https://www.nextflow.io/docs/latest/process.html#cpus). `$task.cpus` já está especificado no script, portanto definir o número de CPUs como uma diretiva informará ao Nextflow para executar este trabalho.
+    Se você tiver mais CPUs disponíveis, tente alterar seu script para solicitar mais recursos para este processo. Por exemplo, consulte os [documentos de diretivas](https://www.nextflow.io/docs/latest/process.html#cpus). `$task.cpus` já está especificado no script, portanto definir o número de CPUs como uma diretiva informará ao Nextflow para executar este trabalho levando isso em consideração.
 
     ??? result
 
@@ -303,11 +303,11 @@ Nessa etapa você aprendeu:
 
 !!! info
 
-    A declaração de um canal pode ser feita antes do escopo do fluxo de trabalho dentro dele. Desde que a declaração esteja acima do processo que requer o canal específico.
+    A declaração de um canal pode ser feita antes do escopo do fluxo de trabalho ou dentro dele. Desde que a declaração esteja acima do processo que requer o canal específico.
 
 ## Realize a quantificação da expressão
 
-O script `script4.nf` adiciona um processo de quantificação de expressão gênica (`QUANTIFICATION`) e uma chamada dentro do escopo do fluxo de trabalho. A quantificação requer o arquivo de índice de transcriptoma e os arquivos fastq do par de leitura de RNA-Seq.
+O script `script4.nf` adiciona um processo de quantificação de expressão gênica (`QUANTIFICATION`) e uma chamada para esse processo dentro do escopo workflow. A quantificação requer o arquivo de índice de transcriptoma e os arquivos fastq do par de leitura de RNA-Seq.
 
 No escopo do fluxo de trabalho, observe como o canal `index_ch` é designado como saída do processo `INDEX`.
 
@@ -511,7 +511,7 @@ A opção `-with-docker` inicia cada tarefa da execução como um comando de exe
 
 A opção `-with-report` permite a criação do relatório de execução do fluxo de trabalho. Abra o arquivo `report.html` com um navegador para ver o relatório criado com o comando acima.
 
-A opção `-with-trace` permite a criação de um arquivo separado por tabulações contendo informações de tempo de execução para cada tarefa executada. Verifique o `trace.txt` para um exemplo.
+A opção `-with-trace` permite a criação de um arquivo separado por tabulações (TSV) contendo informações de tempo de execução para cada tarefa executada. Verifique o `trace.txt` para um exemplo.
 
 A opção `-with-timeline` permite a criação do relatório da linha do tempo do fluxo de trabalho mostrando como os processos foram executados ao longo do tempo. Isso pode ser útil para identificar as tarefas e gargalos que consomem mais tempo. Veja um exemplo [neste link](https://www.nextflow.io/docs/latest/tracing.html#timeline-report).
 

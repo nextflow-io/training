@@ -175,7 +175,7 @@ docker.enabled = true
 
 !!! exercise
 
-    If you have more CPUs available, try changing your script to request more resources for this process. For example, see the [directive docs](https://www.nextflow.io/docs/latest/process.html#cpus). `$task.cpus` is already specified in this script, so setting the number of CPUs as a directive will tell Nextflow to run this job.
+    If you have more CPUs available, try changing your script to request more resources for this process. For example, see the [directive docs](https://www.nextflow.io/docs/latest/process.html#cpus). `$task.cpus` is already specified in this script, so setting the number of CPUs as a directive will tell Nextflow how to run this job, in terms of number of CPUs.
 
     ??? result
 
@@ -303,11 +303,11 @@ In this step you have learned:
 
 !!! info
 
-    The declaration of a channel can be before the workflow scope of within it. As long as it is upstream of the process that requires the specific channel.
+    The declaration of a channel can be before the workflow scope or within it. As long as it is upstream of the process that requires the specific channel.
 
 ## Perform expression quantification
 
-`script4.nf` adds a gene expression `QUANTIFICATION` process and call within the workflow scope. Quantification requires the index transcriptome and RNA-Seq read pair fastq files.
+`script4.nf` adds a gene expression `QUANTIFICATION` process and a call to it within the workflow scope. Quantification requires the index transcriptome and RNA-Seq read pair fastq files.
 
 In the workflow scope, note how the `index_ch` channel is assigned as output in the `INDEX` process.
 
@@ -451,7 +451,7 @@ See [mail documentation](https://www.nextflow.io/docs/latest/mail.html#mail-conf
 
 ## Custom scripts
 
-Real-world pipelines use a lot of custom user scripts (BASH, R, Python, etc.) Nextflow allows you to consistently use and manage these scripts. Simply put them in a directory named `bin` in the pipeline project root. They will be automatically added to the pipeline execution `PATH`.
+Real-world pipelines use a lot of custom user scripts (BASH, R, Python, etc.). Nextflow allows you to consistently use and manage these scripts. Simply put them in a directory named `bin` in the pipeline project root. They will be automatically added to the pipeline execution `PATH`.
 
 For example, create a file named `fastqc.sh` with the following content:
 
@@ -511,7 +511,7 @@ The `-with-docker` option launches each task of the execution as a Docker contai
 
 The `-with-report` option enables the creation of the workflow execution report. Open the file `report.html` with a browser to see the report created with the above command.
 
-The `-with-trace` option enables the creation of a tab separated file containing runtime information for each executed task. Check the `trace.txt` for an example.
+The `-with-trace` option enables the creation of a tab separated value (TSV) file containing runtime information for each executed task. Check the `trace.txt` for an example.
 
 The `-with-timeline` option enables the creation of the workflow timeline report showing how processes were executed over time. This may be useful to identify the most time consuming tasks and bottlenecks. See an example at [this link](https://www.nextflow.io/docs/latest/tracing.html#timeline-report).
 
