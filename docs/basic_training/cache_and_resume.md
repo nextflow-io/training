@@ -249,7 +249,7 @@ Channel
 
 #### Non-deterministic input channels
 
-While dataflow channel ordering is guaranteed (i.e. data is read in the same order in which it’s written in the channel), there is no guarantee that the elements will be placed in the same respective position in the output channel. This happens due to parallelism where multiple tasks may run at the same time, leading the operation on the second element to end sooner than the operation on the first element, for example.
+While dataflow channel ordering is guaranteed (i.e. data is read in the same order in which it’s written in the channel), there is no guarantee that the elements will be placed in the same respective position in the process output channel. This happens due to parallelism where multiple tasks may run at the same time, leading the operation on the second element to end sooner than the operation on the first element, for example.
 
 In practical terms, consider the following snippet:
 
@@ -280,4 +280,4 @@ Just like we saw at the beginning of this tutorial with HELLO WORLD or WORLD HEL
 [1, A]
 ```
 
-Imagine now that we have output channels from two processes like this that are input channels to a third downstream process. If this third process expects the ordering to be the same, so that the first element in the first process output channel is related ot the first element in the second process output channel, there will be a mismatch. An easy solution for this problem is to use the [fair](https://www.nextflow.io/docs/edge/process.html?highlight=fair#fair) process directive, which applies a fairness concept in multiprocessing that shares resources between the tasks in a fair way so that no task will get more computer resources than the other. Depending on your situation, using the `fair` directive will lead to a decrease in performance. Others have chose to use tuples assigning an id to elements to make sure the processes are not incurring into a mismatch.
+Imagine now that we have output channels from two processes like this that are input channels to a third downstream process. If this third process expects the ordering to be the same, so that the first element in the first process output channel is related to the first element in the second process output channel, there will be a mismatch. An easy solution for this problem is to use the [fair](https://www.nextflow.io/docs/edge/process.html?highlight=fair#fair) process directive, which applies a fairness concept in multiprocessing that shares resources between the tasks in a fair way so that no task will get more computer resources than the other. Depending on your situation, using the `fair` directive will lead to a decrease in performance. Others have chosen to use tuples assigning an identification to channel elements (`['SRR123', '/some/path/SRR123.fasta']` instead of simply `/some/path/SRR123.fasta`) to make sure the processes are not incurring into a mismatch.
