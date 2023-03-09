@@ -50,7 +50,7 @@ process {
 
 ### Submit Nextflow as a job
 
-Nextflow should not be run as a command in the login/head node of a cluster, as this node is not prepared for commands that run for too long, even if the amount of resources is negligible. Nextflow should be submit as a job instead, and in a job node it will submit new tasks and manage them. In a cluster using Slurm as job scheduler, for example, you'll need to create a file similar to the one below (save it as launch_nf.job or any other name of your choosing):
+Nextflow should not be run as a command in the login/head node of a cluster, as this node is not prepared for commands that run for too long, even if the amount of resources is negligible. Nextflow should be submitted as a job instead, and in a job node, it will submit new tasks and manage them. In a cluster using Slurm as a job scheduler, for example, you'll need to create a file similar to the one below (save it as `launch_nf.job` or any other name of your choosing):
 
 ```bash linenums="1"
 #!/bin/bash
