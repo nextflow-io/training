@@ -73,7 +73,7 @@ conda activate nextflow
 nextflow -C ${CONFIG} run ${PIPELINE}
 ```
 
-And then run submit it with:
+And then submit it with:
 
 ```bash linenums="1"
 sbatch launch_nf.job /home/my_user/path/mypipeline.nf /home/my_user/path/myconfig_file.conf
