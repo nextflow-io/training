@@ -76,7 +76,7 @@ nextflow -C ${CONFIG} run ${PIPELINE}
 And then submit it with:
 
 ```bash linenums="1"
-sbatch launch_nf.job /home/my_user/path/mypipeline.nf /home/my_user/path/myconfig_file.conf
+sbatch launch_nf.sh /home/my_user/path/mypipeline.nf /home/my_user/path/myconfig_file.conf
 ```
 
 You can find more details about the example above [here](https://lescailab.unipv.it/guides/eos_guide/use_nextflow.html#large-testing-or-production). Besides, make sure to check the following blog posts on best tips for running Nextflow on HPC:
