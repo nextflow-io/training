@@ -50,7 +50,7 @@ process {
 
 ### Submit Nextflow as a job
 
-Whilst the main Nextflow command can be launched on the login / head node of a cluster, be aware that the node must be set up for commands that run for a long time, even if the compute resources used are negligible. Another option  is to submit the main Nextflow process as a job on the cluster instead.
+Whilst the main Nextflow command can be launched on the login / head node of a cluster, be aware that the node must be set up for commands that run for a long time, even if the compute resources used are negligible. Another option is to submit the main Nextflow process as a job on the cluster instead.
 
 !!! note
 
