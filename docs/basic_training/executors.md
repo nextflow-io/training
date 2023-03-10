@@ -68,6 +68,8 @@ For example, if your cluster uses Slurm as a job scheduler, you could create a f
 PIPELINE=$1
 CONFIG=$2
 
+# Use a conda environment where you have installed Nextflow
+# (may not be needed if you have installed it in a different way)
 conda activate nextflow
 
 nextflow -C ${CONFIG} run ${PIPELINE}
