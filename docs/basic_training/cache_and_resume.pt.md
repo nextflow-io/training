@@ -248,63 +248,45 @@ Channel
 
 #### Canais de entrada não determinísticos.
 
-Embora a ordem de elementos em canais dataflow seja garantida (ou seja, os dados são lidos na mesma ordem que são escritos no canal), um processo pode declarar como entrada dois ou mais canais que são canais de saída de processos **diferentes**, fazendo com que a entrada não seja consistente entre diferentes execuções.
+Embora a ordem de elementos em canais dataflow seja garantida – os dados são lidos na mesma ordem em que são escritos no canal – saiba que não há garantia de que os elementos manterão sua ordem no canal de _saída_ do processo. Isso ocorre porque um processo pode gerar várias tarefas, que podem ser executadas em paralelo. Por exemplo, a operação no segundo elemento pode terminar antes da operação no primeiro elemento, alterando a ordem dos elementos no canal de saída.
 
 Em termos práticos, considere o trecho a seguir:
 
 ```groovy linenums="1"
 process foo {
-    input:
-    tuple val(par), path(leituras)
+  input:
+    val x
+  output:
+    tuple val(task.index), val(x)
 
-    output:
-    tuple val(par), path('*.bam'), emit: canal_bam
-
-    script:
+  script:
     """
-    seu_comando --aqui
-    """
-}
-
-process bar {
-    input:
-    tuple val(par), path(leituras)
-
-    output:
-    tuple val(par), path('*.bai'), emit: canal_bai
-
-    script:
-    """
-    outro_comando --aqui
+    sleep \$((RANDOM % 3))
     """
 }
 
-process gather {
-    input:
-    tuple val(par), path(bam)
-    tuple val(par), path(bai)
-
-    script:
-    """
-    comando_de_mesclar $bam $bai
-    """
+workflow {
+   channel.of('A','B','C','D') | foo | view
 }
 ```
 
-As entradas declaradas nas linhas 29 e 30 podem ser colocadas em qualquer ordem porque a ordem da execução dos processos `foo` e `bar` não é determinística por causa de sua execução em paralelo.
+Assim como vimos no início deste tutorial com HELLO WORLD ou WORLD HELLO, a saída do trecho acima pode ser:
 
-Portanto a entrada do terceiro processo precisa estar sincronizada usando o operador [join](https://www.nextflow.io/docs/latest/operator.html#join), ou com uma abordagem similar. O terceiro processo deve ser escrito assim:
-
-```groovy
-...
-
-process gather {
-    input:
-    tuple val(par), path(bam), path(bai)
-
-    script:
-    """
-    comando_de_mesclar $bam $bai
-    """
-}
+```console
+[3, C]
+[4, D]
+[2, B]
+[1, A]
 ```
+
+..e essa ordem provavelmente será diferente toda vez que o pipeline for executado.
+
+Imagine agora que temos dois processos como este, cujos canais de saída estão atuando como canais de entrada para um terceiro processo. Ambos os canais serão aleatórios de forma independente, portanto, o terceiro processo não deve esperar que eles retenham uma sequência pareada. Se assumir que o primeiro elemento no primeiro canal de saída do processo está relacionado ao primeiro elemento no segundo canal de saída do processo, haverá uma incompatibilidade.
+
+Uma solução comum para isso é usar o que é comumente chamado de _meta mapa_ (meta map). Um objeto groovy com informações de amostra é distribuído junto com os resultados do arquivo em um canal de saída como uma tupla. Isso pode então ser usado para emparelhar amostras que estão em canais separados para uso em processos posteriores. Por exemplo, em vez de colocar apenas `/algum/caminho/minhasaida.bam` em um canal, você pode usar `['SRR123', '/algum/caminho/minhasaida.bam']` para garantir que os processos não incorram em uma incompatibilidade.
+
+Se os meta mapas não forem possíveis, uma alternativa é usar a diretiva de processo [`fair`](https://nextflow.io/docs/edge/process.html#fair). Quando especificada, o Nextflow garantirá que a ordem dos elementos nos canais de saída corresponderá à ordem dos respectivos elementos nos canais de entrada.
+
+!!! aviso
+
+      Dependendo da sua situação, usar a diretiva `fair` levará a uma queda de desempenho.
