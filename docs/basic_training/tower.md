@@ -30,7 +30,7 @@ Create an account and login into Tower.
 
 **1. Create a new token**
 
-You can access your tokens from the **Settings** drop-down menu :
+You can access your tokens from the **Settings** drop-down menu:
 
 ![Create a token](img/usage_create_token.png)
 
