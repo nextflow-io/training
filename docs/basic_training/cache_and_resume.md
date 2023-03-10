@@ -249,7 +249,7 @@ Channel
 
 #### Non-deterministic input channels
 
-While dataflow channel ordering is guaranteed (i.e. data is read in the same order in which it’s written in the channel), there is no guarantee that the elements will be placed in the same respective position in the process output channel. This happens due to parallelism where multiple tasks may run at the same time, leading the operation on the second element to end sooner than the operation on the first element, for example.
+While dataflow channel ordering is guaranteed – data is read in the same order in which it’s written in the channel – be aware that there is no guarantee that the elements will maintain their order in the process _output_ channel. This is because a process may spawn multiple tasks, which can run in parallel. For example, the operation on the second element may end sooner than the operation on the first element, changing the output channel order.
 
 In practical terms, consider the following snippet:
 
