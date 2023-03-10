@@ -50,9 +50,15 @@ process {
 
 ### Submeta o Nextflow como um trabalho
 
-O Nextflow não deve ser executado como um comando no nó login/head de um cluster, pois este nó não está preparado para comandos que rodam por muito tempo, mesmo que a quantidade de recursos seja insignificante. Em vez disso, o Nextflow deve ser enviado como um trabalho e, em um nó de trabalho, o Nextflow enviará novas tarefas e as gerenciará. Em um cluster usando o Slurm como escalonador de tarefas, por exemplo, você precisará criar um arquivo semelhante ao abaixo (salve-o como `launch_nf.job` ou qualquer outro nome de sua preferência):
+Embora o comando principal do Nextflow possa ser iniciado no nó de login/head de um cluster, esteja ciente de que o nó deve ser configurado para comandos que são executados por um longo período de tempo, mesmo que os recursos computacionais usados sejam insignificantes. Outra opção é enviar o processo principal do Nextflow como um trabalho no cluster.
 
-```bash linenums="1"
+!!! note
+
+     Isso requer a configuração do seu cluster para permitir que as tarefas sejam iniciadas a partir dos nós de trabalho, pois o Nextflow enviará novas tarefas e as gerenciará a partir daqui.
+
+Por exemplo, se seu cluster usa Slurm como escalonador de tarefas, você pode criar um arquivo semelhante ao abaixo:
+
+```bash linenums="1" title="launch_nf.sh"
 #!/bin/bash
 #SBATCH --partition TRABALHO
 #SBATCH --mem 5G
@@ -62,6 +68,8 @@ O Nextflow não deve ser executado como um comando no nó login/head de um clust
 PIPELINE=$1
 CONFIG=$2
 
+# Use um ambiente conda onde você instalou o Nextflow
+# (pode não ser necessário se você o tiver instalado de uma maneira diferente)
 conda activate nextflow
 
 nextflow -C ${CONFIG} run ${PIPELINE}
@@ -70,10 +78,10 @@ nextflow -C ${CONFIG} run ${PIPELINE}
 E, em seguida, submeta-o com:
 
 ```bash linenums="1"
-sbatch launch_nf.job /home/my_user/path/mypipeline.nf /home/my_user/path/myconfig_file.conf
+sbatch launch_nf.sh /home/my_user/path/mypipeline.nf /home/my_user/path/myconfig_file.conf
 ```
 
-Você pode encontrar mais detalhes sobre o exemplo acima [aqui](https://lescailab.unipv.it/guides/eos_guide/use_nextflow.html#large-testing-or-production). Além disso, certifique-se de verificar as seguintes postagens de blog sobre as melhores dicas para executar o Nextflow em HPC:
+Você pode encontrar mais detalhes sobre o exemplo acima [aqui](https://lescailab.unipv.it/guides/eos_guide/use_nextflow.html#large-testing-or-production). Você também poderá encontrar mais dicas de como executar o Nextflow em HPC nos seguintes posts de blog:
 
 -   [5 Nextflow Tips for HPC Users](https://www.nextflow.io/blog/2021/5_tips_for_hpc_users.html)
 -   [Five more tips for Nextflow user on HPC](https://www.nextflow.io/blog/2021/5-more-tips-for-nextflow-user-on-hpc.html)
