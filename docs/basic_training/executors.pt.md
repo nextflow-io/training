@@ -48,6 +48,44 @@ process {
 }
 ```
 
+### Submeta o Nextflow como um trabalho
+
+Embora o comando principal do Nextflow possa ser iniciado no nó de login/head de um cluster, esteja ciente de que o nó deve ser configurado para comandos que são executados por um longo período de tempo, mesmo que os recursos computacionais usados sejam insignificantes. Outra opção é enviar o processo principal do Nextflow como um trabalho no cluster.
+
+!!! note
+
+     Isso requer a configuração do seu cluster para permitir que as tarefas sejam iniciadas a partir dos nós de trabalho, pois o Nextflow enviará novas tarefas e as gerenciará a partir daqui.
+
+Por exemplo, se seu cluster usa Slurm como escalonador de tarefas, você pode criar um arquivo semelhante ao abaixo:
+
+```bash linenums="1" title="launch_nf.sh"
+#!/bin/bash
+#SBATCH --partition TRABALHO
+#SBATCH --mem 5G
+#SBATCH -c 1
+#SBATCH -t 12:00:00
+
+PIPELINE=$1
+CONFIG=$2
+
+# Use um ambiente conda onde você instalou o Nextflow
+# (pode não ser necessário se você o tiver instalado de uma maneira diferente)
+conda activate nextflow
+
+nextflow -C ${CONFIG} run ${PIPELINE}
+```
+
+E, em seguida, submeta-o com:
+
+```bash linenums="1"
+sbatch launch_nf.sh /home/my_user/path/mypipeline.nf /home/my_user/path/myconfig_file.conf
+```
+
+Você pode encontrar mais detalhes sobre o exemplo acima [aqui](https://lescailab.unipv.it/guides/eos_guide/use_nextflow.html#large-testing-or-production). Você também poderá encontrar mais dicas de como executar o Nextflow em HPC nos seguintes posts de blog:
+
+-   [5 Nextflow Tips for HPC Users](https://www.nextflow.io/blog/2021/5_tips_for_hpc_users.html)
+-   [Five more tips for Nextflow user on HPC](https://www.nextflow.io/blog/2021/5-more-tips-for-nextflow-user-on-hpc.html)
+
 ### Configure processos por nome
 
 Em aplicações do mundo real, diferentes tarefas precisam de diferentes quantidades de recursos de computação. É possível definir os recursos para uma tarefa específica usando o seletor `withName:` seguido do nome do processo:

@@ -249,63 +249,45 @@ Channel
 
 #### Non-deterministic input channels
 
-While dataflow channel ordering is guaranteed (i.e. data is read in the same order in which it’s written in the channel), a process can declare as input two or more channels each of which is the output of a **different** process, the overall input ordering is not consistent over different executions.
+While dataflow channel ordering is guaranteed – data is read in the same order in which it’s written in the channel – be aware that there is no guarantee that the elements will maintain their order in the process _output_ channel. This is because a process may spawn multiple tasks, which can run in parallel. For example, the operation on the second element may end sooner than the operation on the first element, changing the output channel order.
 
 In practical terms, consider the following snippet:
 
 ```groovy linenums="1"
 process foo {
-    input:
-    tuple val(pair), path(reads)
+  input:
+    val x
+  output:
+    tuple val(task.index), val(x)
 
-    output:
-    tuple val(pair), path('*.bam'), emit: bam_ch
-
-    script:
+  script:
     """
-    your_command --here
-    """
-}
-
-process bar {
-    input:
-    tuple val(pair), path(reads)
-
-    output:
-    tuple val(pair), path('*.bai'), emit: bai_ch
-
-    script:
-    """
-    other_command --here
+    sleep \$((RANDOM % 3))
     """
 }
 
-process gather {
-    input:
-    tuple val(pair), path(bam)
-    tuple val(pair), path(bai)
-
-    script:
-    """
-    merge_command $bam $bai
-    """
+workflow {
+   channel.of('A','B','C','D') | foo | view
 }
 ```
 
-The inputs declared at line 29 and 30 can be delivered in any order because the execution order of the process `foo` and `bar` are not deterministic due to their parallel execution.
+Just like we saw at the beginning of this tutorial with HELLO WORLD or WORLD HELLO, the output of the snippet above can be:
 
-Therefore the input of the third process needs to be synchronized using the [join](https://www.nextflow.io/docs/latest/operator.html#join) operator, or a similar approach. The third process should be written as:
-
-```groovy
-...
-
-process gather {
-    input:
-    tuple val(pair), path(bam), path(bai)
-
-    script:
-    """
-    merge_command $bam $bai
-    """
-}
+```console
+[3, C]
+[4, D]
+[2, B]
+[1, A]
 ```
+
+..and that order will likely be different every time the pipeline is run.
+
+Imagine now that we have two processes like this, whose output channels are acting as input channels to a third process. Both channels will be independently random, so the third process must not expect them to retain a paired sequence. If it does assume that the first element in the first process output channel is related to the first element in the second process output channel, there will be a mismatch.
+
+A common solution for this is to use what is commonly referred to as a _meta map_. A groovy object with sample information is passed out together with the file results within an output channel as a tuple. This can then be used to pair samples from separate channels together for downstream use. For example, instead of putting just `/some/path/myoutput.bam` into a channel, you could use `['SRR123', '/some/path/myoutput.bam']` to make sure the processes are not incurring into a mismatch.
+
+If meta maps are not possible, an alternative is to use the [`fair`](https://nextflow.io/docs/edge/process.html#fair) process directive. When specified, Nextflow will guarantee that the order of outputs will match the order of inputs.
+
+!!! warning
+
+     Depending on your situation, using the `fair` directive will lead to a decrease in performance.

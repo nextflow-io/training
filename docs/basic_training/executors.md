@@ -48,6 +48,45 @@ process {
 }
 ```
 
+### Submit Nextflow as a job
+
+Whilst the main Nextflow command can be launched on the login / head node of a cluster, be aware that the node must be set up for commands that run for a long time, even if the compute resources used are negligible. Another option is to submit the main Nextflow process as a job on the cluster instead.
+
+!!! note
+
+    This requires your cluster configuration to allow jobs be launched from worker nodes, as Nextflow will submit new tasks and manage them from here.
+
+For example, if your cluster uses Slurm as a job scheduler, you could create a file similar to the one below:
+
+```bash linenums="1" title="launch_nf.sh"
+#!/bin/bash
+#SBATCH --partition WORK
+#SBATCH --mem 5G
+#SBATCH -c 1
+#SBATCH -t 12:00:00
+
+PIPELINE=$1
+CONFIG=$2
+
+# Use a conda environment where you have installed Nextflow
+# (may not be needed if you have installed it in a different way)
+conda activate nextflow
+
+nextflow -C ${CONFIG} run ${PIPELINE}
+```
+
+And then submit it with:
+
+```bash linenums="1"
+sbatch launch_nf.sh /home/my_user/path/mypipeline.nf /home/my_user/path/myconfig_file.conf
+```
+
+You can find more details about the example above [here](https://lescailab.unipv.it/guides/eos_guide/use_nextflow.html#large-testing-or-production).
+You can find more tips for running Nextflow on HPC in the following blog posts:
+
+-   [5 Nextflow Tips for HPC Users](https://www.nextflow.io/blog/2021/5_tips_for_hpc_users.html)
+-   [Five more tips for Nextflow user on HPC](https://www.nextflow.io/blog/2021/5-more-tips-for-nextflow-user-on-hpc.html)
+
 ### Configure process by name
 
 In real-world applications, different tasks need different amounts of computing resources. It is possible to define the resources for a specific task using the select `withName:` followed by the process name:
