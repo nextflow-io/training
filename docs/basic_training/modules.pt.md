@@ -150,7 +150,7 @@ workflow {
     Você pode armazenar cada processo em arquivos separados em subpastas separadas ou combinados em um arquivo grande (ambos são válidos).
     Você pode encontrar exemplos disso em repositórios públicos, como no [tutorial de RNA-Seq da Seqera](https://github.com/seqeralabs/rnaseq-nf/tree/master/modules) ou em pipelines do nf-core, como o [nf-core/rnaseq](https://github.com/nf-core/rnaseq/tree/master/modules/nf-core/modules).
 
-### Definição de saída
+## Definição de saída
 
 O Nextflow permite o uso de definições de saída alternativas em fluxos de trabalho para simplificar seu código.
 
@@ -306,7 +306,7 @@ workflow my_pipeline {
 }
 ```
 
-!!! observação
+!!! note
 
     Quando a instrução `take` é usada, a definição `workflow` precisa ser declarada dentro do bloco `main`.
 

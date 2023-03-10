@@ -287,6 +287,6 @@ Uma solução comum para isso é usar o que é comumente chamado de _meta mapa_ 
 
 Se os meta mapas não forem possíveis, uma alternativa é usar a diretiva de processo [`fair`](https://nextflow.io/docs/edge/process.html#fair). Quando especificada, o Nextflow garantirá que a ordem dos elementos nos canais de saída corresponderá à ordem dos respectivos elementos nos canais de entrada.
 
-!!! aviso
+!!! warning
 
       Dependendo da sua situação, usar a diretiva `fair` levará a uma queda de desempenho.
