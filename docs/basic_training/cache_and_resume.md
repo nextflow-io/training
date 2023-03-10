@@ -280,4 +280,15 @@ Just like we saw at the beginning of this tutorial with HELLO WORLD or WORLD HEL
 [1, A]
 ```
 
-Imagine now that we have output channels from two processes like this that are input channels to a third downstream process. If this third process expects the ordering to be the same, so that the first element in the first process output channel is related to the first element in the second process output channel, there will be a mismatch. An easy solution for this problem is to use the [fair](https://www.nextflow.io/docs/edge/process.html?highlight=fair#fair) process directive, which applies a fairness concept in multiprocessing that shares resources between the tasks in a fair way so that no task will get more computer resources than the other. Depending on your situation, using the `fair` directive will lead to a decrease in performance. Others have chosen to use tuples assigning an identification to channel elements (`['SRR123', '/some/path/SRR123.fasta']` instead of simply `/some/path/SRR123.fasta`) to make sure the processes are not incurring into a mismatch.
+
+..and that order will likely be different every time the pipeline is run.
+
+Imagine now that we have two processes like this, whose output channels are acting as input channels to a third process. Both channels will be independently random, so the third process must not expect them to retain a paired sequence. If it does assume that the first element in the first process output channel is related to the first element in the second process output channel, there will be a mismatch.
+
+A common solution for this is to use what is commonly referred to as a _meta map_. A groovy object with sample information is passed out together with the file results within an output channel as a tuple. This can then be used to pair samples from separate channels together for downstream use. For example, instead of putting just  `/some/path/myoutput.bam` into a channel, you could use `['SRR123', '/some/path/myoutput.bam']` to make sure the processes are not incurring into a mismatch.
+
+If meta maps are not possible, an alternative is to use the [`fair`](https://nextflow.io/docs/edge/process.html#fair) process directive. When specified, Nextflow will guarantee that the order of outputs will match the order of inputs.
+
+!!! warning
+
+     Depending on your situation, using the `fair` directive will lead to a decrease in performance.
