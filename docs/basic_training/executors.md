@@ -58,7 +58,7 @@ Whilst the main Nextflow command can be launched on the login / head node of a c
 
 For example, if your cluster uses Slurm as a job scheduler, you could create a file similar to the one below:
 
-```bash linenums="1"
+```bash linenums="1" title="launch_nf.sh"
 #!/bin/bash
 #SBATCH --partition WORK
 #SBATCH --mem 5G
