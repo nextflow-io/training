@@ -235,7 +235,7 @@ process.container = 'nextflow/rnaseq-nf'
 docker.enabled = true
 ```
 
-The use of unique "SHA256" docker image IDs guarantees that the image content does not change over time, for example:
+The use of unique "SHA256" Docker image IDs guarantees that the image content does not change over time, for example:
 
 ```groovy linenums="1"
 process.container = 'nextflow/rnaseq-nf@sha256:aeacbd7ea1154f263cda972a96920fb228b2033544c2641476350b9317dab266'

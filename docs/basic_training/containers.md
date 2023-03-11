@@ -30,7 +30,7 @@ A container can be run using the following command:
 docker run <container-name>
 ```
 
-Try for example the following publicly available container (if you have docker installed):
+Try for example the following publicly available container (if you have Docker installed):
 
 ```bash
 docker run hello-world
@@ -438,7 +438,7 @@ ENV PATH /opt/conda/envs/nf-tutorial/bin:$PATH
 
 The above `Dockerfile` takes the parent image _mambaorg/micromamba_, then installs a `conda` environment using `micromamba`, and installs `salmon`, `fastqc` and `multiqc`.
 
-Try executing the RNA-Seq pipeline from earlier (script7.nf). Start by building your own micromamba `Dockerfile` (from above), save it to your docker hub repo, and direct Nextflow to run from this container (changing your `nextflow.config`).
+Try executing the RNA-Seq pipeline from earlier (script7.nf). Start by building your own micromamba `Dockerfile` (from above), save it to your Docker hub repo, and direct Nextflow to run from this container (changing your `nextflow.config`).
 
 !!! warning
 
@@ -450,7 +450,7 @@ Try executing the RNA-Seq pipeline from earlier (script7.nf). Start by building 
 
     2. Build the image: `docker build -t my-image .` (don’t forget the _._).
 
-    3. Publish the docker image to your online docker account.
+    3. Publish the Docker image to your online Docker account.
 
         Something similar to the following, with `<myrepo>` replaced with your own Docker ID, without _&lt;_ and _&gt;_ characters!
 

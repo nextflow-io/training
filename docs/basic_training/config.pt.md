@@ -264,7 +264,7 @@ Os seguintes protocolos são suportados:
 
 !!! tip
 
-     O hub do Singularity `shub://` não está mais disponível como serviço de construção de contêiners. Entretanto, as imagens existentes anteriores a 19 de abril de 2021 ainda funcionam.
+     O hub do Singularity `shub://` não está mais disponível como serviço de construção de contêineres. Entretanto, as imagens existentes anteriores a 19 de abril de 2021 ainda funcionam.
 
 !!! tip
 

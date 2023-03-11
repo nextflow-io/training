@@ -64,7 +64,7 @@ Em termos práticos, o pipeline é executado do início. Entretanto, antes do la
 
 Se esta condição for satisfeita a tarefa é ignorada e os resultados computados previamente são usados como resultados do `process`.
 
-A primeira tarefa que tem uma nova saída computada invalida todas execuções posteriores no que resta do Grafo Acílico Direcionado (DAG, do inglês Directed Acyclic Graph).
+A primeira tarefa que tem uma nova saída computada invalida todas execuções posteriores no que resta do Grafo Acíclico Direcionado (DAG, do inglês Directed Acyclic Graph).
 
 ## Diretório de trabalho
 
@@ -183,7 +183,7 @@ Finalmente, a opção `-t` permite a criação de um relatório básico e custom
         <li>Exit: ${exit}</li>
         <li>Status: ${status}</li>
         <li>Work dir: ${workdir}</li>
-        <li>Container: ${container}</li>
+        <li>Contêiner: ${container}</li>
     </ul>
 </div>
 ```

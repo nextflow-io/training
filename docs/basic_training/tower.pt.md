@@ -182,7 +182,7 @@ Em resumo, essas são as etapas que você precisa seguir para configurar um pipe
 
 !!! info
 
-    Na configuração, o caminho completo para um bucket deve ser especificado com aspas simples em torno de strings e sem aspas em booleanos ou números.
+    Na configuração, o caminho completo para um bucket deve ser especificado com aspas simples em torno de strings e sem aspas em booleanas ou números.
 
 !!! tip
 

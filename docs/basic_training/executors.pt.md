@@ -78,7 +78,7 @@ nextflow -C ${CONFIG} run ${PIPELINE}
 E, em seguida, submeta-o com:
 
 ```bash linenums="1"
-sbatch launch_nf.sh /home/my_user/path/mypipeline.nf /home/my_user/path/myconfig_file.conf
+sbatch launch_nf.sh /home/meu_usuario/caminho/meupipeline.nf /home/meu_usuario/caminho/meu_arquivo_configuracao.conf
 ```
 
 Você pode encontrar mais detalhes sobre o exemplo acima [aqui](https://lescailab.unipv.it/guides/eos_guide/use_nextflow.html#large-testing-or-production). Você também poderá encontrar mais dicas de como executar o Nextflow em HPC nos seguintes posts de blog:
@@ -192,7 +192,7 @@ docker.enabled = true
 
 !!! tip
 
-    Devo usar um único contêiner _pesado_ ou muitos contêineres _leves_? Ambas as abordagens têm prós e contras. Um único container é mais simples de construir e manter, porém ao usar muitas ferramentas a imagem pode ficar muito grande e as ferramentas podem criar conflitos umas com as outras. O uso de um contêiner para cada processo pode resultar em muitas imagens diferentes para criar e manter, especialmente quando os processos em seu fluxo de trabalho usam ferramentas diferentes para cada tarefa.
+    Devo usar um único contêiner _pesado_ ou muitos contêineres _leves_? Ambas as abordagens têm prós e contras. Um único contêiner é mais simples de construir e manter, porém ao usar muitas ferramentas a imagem pode ficar muito grande e as ferramentas podem criar conflitos umas com as outras. O uso de um contêiner para cada processo pode resultar em muitas imagens diferentes para criar e manter, especialmente quando os processos em seu fluxo de trabalho usam ferramentas diferentes para cada tarefa.
 
 Leia mais sobre seletores de processo de configuração [neste link](https://www.nextflow.io/docs/latest/config.html#process-selectors).
 

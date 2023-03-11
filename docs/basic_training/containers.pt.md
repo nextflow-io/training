@@ -8,7 +8,7 @@ Fluxos de trabalhos computacionais são raramente compostos de um só script ou 
 
 Instalar e manter tais dependências é uma tarefa desafiadora e uma fonte comum de irreprodutibilidade em aplicações científicas.
 
-Para superar esses problemas, nós utilizamos contêineres que habilitam essas dependências de softwares, isto é ferramentas e bibliotecas necessárias para uma análise de dados, para estar encapsuladas em uma ou mais imagens de contêiner Linux independentes, prontas para serem executadas e imutáveis. Elas podem facilmente ser implementadas em qualquer plataforma que suporta o motor de contêinerização.
+Para superar esses problemas, nós utilizamos contêineres que habilitam essas dependências de softwares, isto é ferramentas e bibliotecas necessárias para uma análise de dados, para estar encapsuladas em uma ou mais imagens de contêiner Linux independentes, prontas para serem executadas e imutáveis. Elas podem facilmente ser implementadas em qualquer plataforma que suporta o motor de conteinerização.
 
 Contêineres podem ser executados de uma forma isolada pelo sistema do hospedeiro. Elas tem sua própria cópia do sistema de arquivos, espaço de processamento, gerenciamento de memória, etc.
 
@@ -52,7 +52,7 @@ docker images
 
 ### Execute um contêiner em mode interativo
 
-Iniciar uma shell BASH em um contêiner permite que você opere em modo interativo no sistema operacional contêinerizado. Por exemplo:
+Iniciar uma shell BASH em um contêiner permite que você opere em modo interativo no sistema operacional conteinerizado. Por exemplo:
 
 ```
 docker run -it debian:stretch-slim bash
@@ -249,7 +249,7 @@ Como visto na última seção, você também pode configurar o arquivo config (`
 
 ## Singularity
 
-[Singularity](http://singularity.lbl.gov) é um motor de contêinerização desenvolvido para trabalhar com computação de alta performance em centro de dados, onde geralmente o Docker não é permitido por motivos de restrições de segurança.
+[Singularity](http://singularity.lbl.gov) é um motor de conteinerização desenvolvido para trabalhar com computação de alta performance em centro de dados, onde geralmente o Docker não é permitido por motivos de restrições de segurança.
 
 O Singularity implementa um modelo de execução de contêiner similar ao Docker. Entretanto, ele usa um design de implementação completamente diferente.
 
@@ -531,7 +531,7 @@ Contrariamente a outros registros que irão puxar a última imagem quando nenhum
         nextflow run script5.nf
         ```
 
-        com as sequintes diretivas de contêiner para cada processo:
+        com as seguintes diretivas de contêiner para cada processo:
 
         ```groovy
         process FASTQC {

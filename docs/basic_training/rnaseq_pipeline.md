@@ -147,7 +147,7 @@ Add the command line option `-with-docker` to launch the execution through a Doc
 nextflow run script2.nf -with-docker
 ```
 
-This time the execution will work because it uses the Docker container `nextflow/rnaseq-nf` that is defined in the `nextflow.config` file in your current directory. If you are running this script locally then you will need to download docker to your machine, log in and activate docker, and allow the script to download the container containing the run scripts. You can learn more about docker [here](https://www.nextflow.io/docs/latest/docker.html).
+This time the execution will work because it uses the Docker container `nextflow/rnaseq-nf` that is defined in the `nextflow.config` file in your current directory. If you are running this script locally then you will need to download Docker to your machine, log in and activate Docker, and allow the script to download the container containing the run scripts. You can learn more about Docker [here](https://www.nextflow.io/docs/latest/docker.html).
 
 To avoid adding `-with-docker` each time you execute the script, add the following line to the `nextflow.config` file:
 
