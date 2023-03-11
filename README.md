@@ -1,4 +1,4 @@
-# Nextflow Training [![gitlocalized ](https://gitlocalize.com/repo/8431/pt/badge.svg)](#)
+# Nextflow Training [![gitlocalized ](https://gitlocalize.com/repo/8431/pt/badge.svg)](#)[![gitlocalized ](https://gitlocalize.com/repo/8431/es/badge.svg)](#)
 
 ## » <https://training.nextflow.io> «
 
