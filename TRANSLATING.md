@@ -13,6 +13,8 @@ The typical workflow for contributing with translation is as follows:
 4. Open a pull-request against the main repo, which can be reviewed and merged
 5. Tag other contributors with @ requesting a review. Pull Requests should only be merged if they have at least a single review.
 
+**Important**: Avoid making changes to both the original files in English and in their respective translated versions in the **same commit**. This breaks GitLocalize, which is the system that monitors what files need to be synced.
+
 The training website is built using [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/).
 It's a static site generator designed for documentation websites which is fast and lightweight and comes with a lot of nice features.
 We use the open-source version of the tool (not any of the "insiders" features, currently).
