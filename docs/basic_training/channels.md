@@ -210,7 +210,7 @@ The `fromPath` factory method creates a queue channel emitting one or more files
 Channel.fromPath( './data/meta/*.csv' )
 ```
 
-This example creates a channel and emits as many items as there are files with a `csv` extension in the `/data/meta` folder. Each element is a file object implementing the [Path](https://docs.oracle.com/javase/8/docs/api/java/nio/file/Paths.html) interface.
+This example creates a channel and emits as many items as there are files with a `csv` extension in the `./data/meta` folder. Each element is a file object implementing the [Path](https://docs.oracle.com/javase/8/docs/api/java/nio/file/Paths.html) interface.
 
 !!! tip
 
@@ -267,7 +267,7 @@ It will produce an output similar to the following:
 | hidden        | When `true` includes hidden files in the resulting paths (default: `false`)                                                    |
 | maxDepth      | Maximum number of directory levels to visit (default: `no limit`)                                                              |
 | followLinks   | When `true` symbolic links are followed during directory tree traversal, otherwise they are managed as files (default: `true`) |
-| size          | Defines the number of files each emitted item is expected to hold (default: 2). Set to `-1` for any                            |
+| size          | Defines the number of files each emitted item is expected to hold (default: `2`). Set to `-1` for any                            |
 | flat          | When `true` the matching files are produced as sole elements in the emitted tuples (default: `false`)                          |
 | checkIfExists | When `true`, it throws an exception of the specified path that does not exist in the file system (default: `false`)            |
 
@@ -571,7 +571,7 @@ for( List row : lines ) {
 
         Repeat the above for the fastqc step.
 
-        ```groovy linenums="1"
+        ```groovy linenums="1"  hl_lines="5 13"
         process FASTQC {
           tag "FASTQC on $sample_id"
 
@@ -593,14 +593,13 @@ for( List row : lines ) {
 
 ### Tab separated values (.tsv)
 
-Parsing tsv files works in a similar way, simply add the `sep:'\t'` option in the `splitCsv` context:
+Parsing TSV files works in a similar way, simply add the `sep:'\t'` option in the `splitCsv` context:
 
 ```groovy linenums="1"
 Channel
   .fromPath("data/meta/regions.tsv", checkIfExists:true)
   // use `sep` option to parse TAB separated files
   .splitCsv(sep:'\t')
-  // row is a list object
   .view()
 ```
 
