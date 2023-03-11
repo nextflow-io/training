@@ -639,7 +639,7 @@ process RANDOMNUM {
 
     script:
     """
-    echo $RANDOM > result.txt
+    echo \$RANDOM > result.txt
     """
 }
 
