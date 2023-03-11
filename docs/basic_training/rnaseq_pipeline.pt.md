@@ -147,7 +147,7 @@ Adicione a opção de linha de comando `-with-docker` para iniciar a execução 
 nextflow run script2.nf -with-docker
 ```
 
-Dessa vez a execução vai funcionar porque usa o contêiner Docker `nextflow/rnaseq-nf` que é definido no arquivo `nextflow.config` do seu diretório atual. Se você está executando esse script localmente, você precisará baixar o Docker em seu computador, fazer login e ativar o Docker, e permitir que o script baixe o contêiner contendo os scripts de execução. Você pode aprender mais sobre o Docker [aqui](https://www.nextflow.io/docs/latest/docker.html).
+Dessa vez a execução vai funcionar porque usa o contêiner Docker `nextflow/rnaseq-nf` que é definido no arquivo `nextflow.config` do seu diretório atual. Se você está executando esse script localmente, você precisará baixar o Docker em seu computador, fazer login e ativar o Docker, e permitir que o script baixe o contêiner contendo os scripts de execução. Você pode aprender mais sobre o Docker na documentação oficial do Nextflow [aqui](https://www.nextflow.io/docs/latest/docker.html).
 
 Para evitar adicionar `-with-docker` cada vez que você executar o script, adicione a linha a seguir ao arquivo `nextflow.config`:
 

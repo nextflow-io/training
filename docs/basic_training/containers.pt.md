@@ -30,7 +30,7 @@ Um contêiner pode ser executado com o seguinte comando:
 docker run <nome-do-contêiner>
 ```
 
-Tente, por exemplo, o seguinte contêiner público (se você tiver o Docker instalado):
+Tente executar o seguinte contêiner público (se você tiver o Docker instalado), por exemplo:
 
 ```bash
 docker run hello-world
@@ -438,7 +438,7 @@ ENV PATH /opt/conda/envs/nf-tutorial/bin:$PATH
 
 O `Dockerfile` acima pega a imagem pai _mambaorg/micromamba_, e instala um ambiente `conda` utilizando `micromamba`, e então instala o `salmon`, o `fastqc` e o `multiqc`.
 
-Tente executar o pipeline RNA-seq de antes (script7.nf). Comece montando seu próprio `Dockerfile` micromamba (como mostrado acima), salve no seu repositório no Docker Hub, e oriente o Nextflow a rodar por esse contêiner (mudando seu `nextflow.config`).
+Tente executar o pipeline RNA-seq visto anteriormente (script7.nf). Comece montando seu próprio `Dockerfile` micromamba (como mostrado acima), salve no seu repositório no Docker Hub, e oriente o Nextflow a rodar por esse contêiner (mudando seu `nextflow.config`).
 
 !!! warning
 
@@ -446,7 +446,7 @@ Tente executar o pipeline RNA-seq de antes (script7.nf). Comece montando seu pr�
 
 ??? example "Para um resumo dos passos a tomar, clique aqui:"
 
-    1. crie um arquivo chamado `Dockerfile` no diretório atual (com os código acima).
+    1. Crie um arquivo chamado `Dockerfile` no diretório atual (com os código acima).
 
     2. Monte a imagem: `docker build -t minha-imagem .` (não esqueça o _._).
 
