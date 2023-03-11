@@ -692,4 +692,4 @@ O Nextflow usará isso como uma função personalizada dentro do escopo do fluxo
 
 !!! tip
 
-    Você aprenderá mais sobre arquivos de módulo posteriormente na [seção de Modularização](modules/) desse tutorial.
+    Você aprenderá mais sobre arquivos de módulo posteriormente na [seção de Modularização](../modules/) desse tutorial.

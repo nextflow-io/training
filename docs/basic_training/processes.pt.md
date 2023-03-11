@@ -133,7 +133,7 @@ workflow {
 
 !!! info
 
-    Um script de processo pode conter qualquer formato de string suportado pela linguagem de programação Groovy. Isso nos permite usar a interpolação de strings como no script acima ou strings multilinha. Consulte [Interpolação de string](groovy/#interpolacao-de-strings) para obter mais informações.
+    Um script de processo pode conter qualquer formato de string suportado pela linguagem de programação Groovy. Isso nos permite usar a interpolação de strings como no script acima ou strings multilinha. Consulte [Interpolação de string](../groovy/#interpolacao-de-strings) para obter mais informações.
 
 !!! warning
 
