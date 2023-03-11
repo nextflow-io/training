@@ -54,9 +54,9 @@ canal.view() // (2)!
 
 Um canal de **valor** (também conhecido como canal singleton), por definição, está vinculado a um único valor e pode ser lido quantas vezes for necessário sem consumir seu conteúdo. Um canal de `valor` é criado usando a fábrica de canal [value](https://www.nextflow.io/docs/latest/channel.html#value) ou por operadores que retornam um valor apenas, como [first](https://www.nextflow.io/docs/latest/operator.html#first), [last](https://www.nextflow.io/docs/latest/operator.html#last), [collect](https://www.nextflow.io/docs/latest/operator.html#operator-collect), [count](https://www.nextflow.io/docs/latest/operator.html#operator-count), [min](https://www.nextflow.io/docs/latest/operator.html#operator-min), [max](https://www.nextflow.io/docs/latest/operator.html#operator-max), [reduce](https://www.nextflow.io/docs/latest/operator.html#operator-reduce), e [sum](https://www.nextflow.io/docs/latest/operator.html#operator-sum).
 
-Para entender melhor a diferença entre canais de valor e de fila, salve o trecho abaixo como `example.nf`.
+Para entender melhor a diferença entre canais de valor e de fila, salve o trecho abaixo como `exemplo.nf`.
 
-```groovy linenums="1" title="example.nf" linenums="1"
+```groovy linenums="1" title="exemplo.nf" linenums="1"
 canal1 = Channel.of(1,2,3)
 canal2 = Channel.of(1)
 
@@ -93,7 +93,7 @@ println canal1
 ```
 
 ```console
-$ nextflow run example.nf -dsl1
+$ nextflow run exemplo.nf -dsl1
 ...
 DataflowQueue(queue=[DataflowVariable(value=1), DataflowVariable(value=groovyx.gpars.dataflow.operator.PoisonPill@34be065a)])
 ```
@@ -106,7 +106,7 @@ println canal1
 ```
 
 ```console
-$ nextflow run example.nf -dsl1
+$ nextflow run exemplo.nf -dsl1
 ...
 DataflowVariable(value=1)
 ```
@@ -144,7 +144,7 @@ workflow {
 2
 ```
 
-Além disso, em muitas situações, o Nextflow converterá implicitamente variáveis em canais de valor quando forem usadas em uma chamada de processo. Por exemplo, quando você chama um processo com um parâmetro de pipeline (`params.example`) que possui um valor de string, ele é automaticamente convertido em um canal de valor.
+Além disso, em muitas situações, o Nextflow converterá implicitamente variáveis em canais de valor quando forem usadas em uma chamada de processo. Por exemplo, quando você chama um processo com um parâmetro de pipeline (`params.exemplo`) que possui um valor de string, ele é automaticamente convertido em um canal de valor.
 
 ## Fábricas de canal
 
@@ -210,7 +210,7 @@ A fábrica `fromPath` cria um canal de fila emitindo um ou mais arquivos corresp
 Channel.fromPath( './data/meta/*.csv' )
 ```
 
-Este exemplo cria um canal e emite tantos itens quanto arquivos com extensão `csv` existirem na pasta `/data/meta`. Cada elemento é um objeto de arquivo implementando a interface [Path](https://docs.oracle.com/javase/8/docs/api/java/nio/file/Paths.html) do Java.
+Este exemplo cria um canal e emite tantos itens quanto arquivos com extensão `csv` existirem na pasta `./data/meta`. Cada elemento é um objeto de arquivo implementando a interface [Path](https://docs.oracle.com/javase/8/docs/api/java/nio/file/Paths.html) do Java.
 
 !!! tip
 
@@ -264,12 +264,12 @@ Ele produzirá uma saída semelhante à seguinte:
 | Nome          | Descrição                                                                                                                                                    |
 | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | type          | Tipo de caminhos retornados, ou `file`, `dir` ou `any` (padrão: `file`)                                                                                      |
-| hidden        | Quando `true` includes hidden files in the resulting paths (padrão: `false`)                                                                                 |
+| hidden        | Quando `true` inclui arquivos ocultos nos caminhos resultantes (padrão: `false`)                                                                                 |
 | maxDepth      | Número máximo de níveis de diretório a serem visitados (padrão: `no limit`)                                                                                  |
 | followLinks   | Quando `true` links simbólicos são seguidos durante a travessia da árvore de diretórios, caso contrário, eles são gerenciados como arquivos (padrão: `true`) |
-| size          | Define o número de arquivos que cada item emitido deve conter (padrão: 2). Use `-1` para qualquer número                                                     |
+| size          | Define o número de arquivos que cada item emitido deve conter (padrão: `2`). Use `-1` para qualquer número                                                     |
 | flat          | Quando `true` os arquivos correspondentes são produzidos como únicos elementos nas tuplas emitidas (padrão: `false`)                                         |
-| checkIfExists | Quando `true`, lança uma exceção do caminho especificado que não existe no sistema de arquivos (padrão: `false`)                                             |
+| checkIfExists | Quando `true` lança uma exceção quando o caminho especificado não existe no sistema de arquivos (padrão: `false`)                                             |
 
 !!! exercise
 
@@ -318,7 +318,7 @@ Channel
 
 !!! info ""
 
-    :material-lightbulb: Substitua `<Your API key here>` com sua chave de API.
+    :material-lightbulb: Substitua `<Sua chave de API aqui>` com sua chave de API.
 
 Isso deve imprimir:
 
@@ -347,33 +347,33 @@ Channel
 
 !!! info
 
-    Os pares de leitura são gerenciados implicitamente e são retornados como uma lista de arquivos.
+    Os pares de leituras são gerenciados implicitamente e são retornados como uma lista de arquivos.
 
 É fácil usar este canal como uma entrada usando a sintaxe usual do Nextflow. O código abaixo cria um canal contendo
 duas amostras de um estudo SRA público e executa o FASTQC nos arquivos resultantes. Veja:
 
 ```groovy linenums="1"
-params.ncbi_api_key = '<Your API key here>'
+params.ncbi_chave_api = '<Sua chave de API aqui>'
 
 params.accession = ['ERR908507', 'ERR908506']
 
 process fastqc {
   input:
-  tuple val(sample_id), path(reads_file)
+  tuple val(id_amostra), path(arquivo_de_leituras)
 
   output:
-  path("fastqc_${sample_id}_logs")
+  path("fastqc_${id_amostra}_logs")
 
   script:
   """
-  mkdir fastqc_${sample_id}_logs
-  fastqc -o fastqc_${sample_id}_logs -f fastq -q ${reads_file}
+  mkdir fastqc_${id_amostra}_logs
+  fastqc -o fastqc_${id_amostra}_logs -f fastq -q ${arquivo_de_leituras}
   """
 }
 
 workflow {
-  reads = Channel.fromSRA(params.accession, apiKey: params.ncbi_api_key)
-  fastqc(reads)
+  leituras = Channel.fromSRA(params.accession, apiKey: params.ncbi_chave_api)
+  fastqc(leituras)
 }
 ```
 
@@ -422,22 +422,22 @@ Channel
 Você também pode fazer contagens para cada linha:
 
 ```groovy linenums="1"
-count=0
+contador=0
 
 Channel
   .fromPath('data/meta/random.txt')
   .splitText()
-  .view { "${count++}: ${it.toUpperCase().trim()}" }
+  .view { "${contador++}: ${it.toUpperCase().trim()}" }
 ```
 
 Por fim, você também pode usar o operador em arquivos simples (fora do contexto do canal):
 
 ```groovy linenums="1"
 def f = file('data/meta/random.txt')
-def lines = f.splitText()
-def count=0
-for( String row : lines ) {
-  log.info "${count++} ${row.toUpperCase()}"
+def linhas = f.splitText()
+def contador=0
+for( String linha : linhas ) {
+  log.info "${contador++} ${linha.toUpperCase()}"
 }
 ```
 
@@ -483,7 +483,7 @@ Você também pode processar vários arquivos CSV ao mesmo tempo:
 Channel
   .fromPath("data/meta/patients_*.csv") // <-- use um padrão de captura
   .splitCsv(header:true)
-  .view { row -> "${row.patient_id}\t${row.num_samples}" }
+  .view { linha -> "${linha.patient_id}\t${linha.num_samples}" }
 ```
 
 !!! tip
@@ -494,9 +494,9 @@ Por fim, você também pode operar em arquivos CSV fora do contexto do canal:
 
 ```groovy linenums="1"
 def f = file('data/meta/patients_1.csv')
-def lines = f.splitCsv()
-for( List row : lines ) {
-  log.info "${row[0]} -- ${row[2]}"
+def linhas = f.splitCsv()
+for( List linha : linhas ) {
+  log.info "${linha[0]} -- ${linha[2]}"
 }
 ```
 
@@ -526,7 +526,7 @@ for( List row : lines ) {
         Channel
           .fromPath("fastq.csv")
           .splitCsv()
-          .view () { row -> "${row[0]},${row[1]},${row[2]}" }
+          .view () { linha -> "${linha[0]},${linha[1]},${linha[2]}" }
           .set { read_pairs_ch }
         ```
 
@@ -572,7 +572,7 @@ for( List row : lines ) {
 
         Repita o procedimento acima para a etapa fastqc.
 
-        ```groovy linenums="1"
+        ```groovy linenums="1" hl_lines="5 13"
         process FASTQC {
           tag "FASTQC on $sample_id"
 
@@ -594,14 +594,13 @@ for( List row : lines ) {
 
 ### Valores separados por tabulação (.tsv)
 
-A análise de arquivos tsv funciona de maneira semelhante, basta adicionar a opção `sep:'\t'` no contexto `splitCsv`:
+A análise de arquivos TSV funciona de maneira semelhante, basta adicionar a opção `sep:'\t'` no contexto do `splitCsv`:
 
 ```groovy linenums="1"
 Channel
   .fromPath("data/meta/regions.tsv", checkIfExists:true)
   // Use a opção `sep` para analisar arquivos com tabulação como separador
   .splitCsv(sep:'\t')
-  // linha é um objeto de lista
   .view()
 ```
 
@@ -618,7 +617,7 @@ Channel
           // Use a opção `sep` para analisar arquivos com tabulação como separador
           .splitCsv(sep:'\t', header:true )
           // linha é um objeto de lista
-          .view { linha -> "${row.patient_id}" }
+          .view { linha -> "${linha.patient_id}" }
         ```
 
 ## Formatos de arquivo mais complexos
@@ -631,11 +630,11 @@ Também podemos analisar facilmente o formato de arquivo JSON usando o seguinte 
 import groovy.json.JsonSlurper
 
 def f = file('data/meta/regions.json')
-def records = new JsonSlurper().parse(f)
+def registros = new JsonSlurper().parse(f)
 
 
-for( def entry : records ) {
-  log.info "$entry.patient_id -- $entry.feature"
+for( def entrada : registros ) {
+  log.info "$entrada.patient_id -- $entrada.feature"
 }
 ```
 
@@ -651,11 +650,11 @@ Isso também pode ser usado como uma forma de analisar arquivos YAML:
 import org.yaml.snakeyaml.Yaml
 
 def f = file('data/meta/regions.yml')
-def records = new Yaml().load(f)
+def registros = new Yaml().load(f)
 
 
-for( def entry : records ) {
-  log.info "$entry.patient_id -- $entry.feature"
+for( def entrada : registros ) {
+  log.info "$entrada.patient_id -- $entrada.feature"
 }
 ```
 
@@ -670,22 +669,22 @@ include{ parseJsonFile } from './modules/parsers.nf'
 
 process foo {
   input:
-  tuple val(meta), path(data_file)
+  tuple val(meta), path(arquivo_de_dados)
 
   """
-  echo seu_comando $meta.region_id $data_file
+  echo seu_comando $meta.region_id $arquivo_de_dados
   """
 }
 
 workflow {
   Channel.fromPath('data/meta/regions*.json') \
     | flatMap { parseJsonFile(it) } \
-    | map { entry -> tuple(entry,"/some/data/${entry.patient_id}.txt") } \
+    | map { entrada -> tuple(entrada,"/algum/dado/${entrada.patient_id}.txt") } \
     | foo
 }
 ```
 
-Para que este script funcione, um arquivo de módulo chamado `parsers.nf` precisa ser criado e armazenado em uma pasta de módulos no diretório atual.
+Para que este script funcione, um arquivo de módulo chamado `parsers.nf` precisa ser criado e armazenado em uma pasta de módulos (`./modules`) no diretório atual.
 
 O arquivo `parsers.nf` deve conter a função `parseJsonFile`.
 
