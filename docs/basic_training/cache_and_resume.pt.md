@@ -283,7 +283,32 @@ Assim como vimos no início deste tutorial com HELLO WORLD ou WORLD HELLO, a sa�
 
 Imagine agora que temos dois processos como este, cujos canais de saída estão atuando como canais de entrada para um terceiro processo. Ambos os canais serão aleatórios de forma independente, portanto, o terceiro processo não deve esperar que eles retenham uma sequência pareada. Se assumir que o primeiro elemento no primeiro canal de saída do processo está relacionado ao primeiro elemento no segundo canal de saída do processo, haverá uma incompatibilidade.
 
-Uma solução comum para isso é usar o que é comumente chamado de _meta mapa_ (meta map). Um objeto groovy com informações de amostra é distribuído junto com os resultados do arquivo em um canal de saída como uma tupla. Isso pode então ser usado para emparelhar amostras que estão em canais separados para uso em processos posteriores. Por exemplo, em vez de colocar apenas `/algum/caminho/minhasaida.bam` em um canal, você pode usar `['SRR123', '/algum/caminho/minhasaida.bam']` para garantir que os processos não incorram em uma incompatibilidade.
+Uma solução comum para isso é usar o que é comumente chamado de _meta mapa_ (meta map). Um objeto groovy com informações de amostra é distribuído junto com os resultados do arquivo em um canal de saída como uma tupla. Isso pode então ser usado para emparelhar amostras que estão em canais separados para uso em processos posteriores. Por exemplo, em vez de colocar apenas `/algum/caminho/minhasaida.bam` em um canal, você pode usar `['SRR123', '/algum/caminho/minhasaida.bam']` para garantir que os processos não incorram em uma incompatibilidade. Verifique o exemplo abaixo:
+
+```nextflow
+// Apenas para fins de exemplos.
+// Estes abaixo seriam normalmente as saídas de processos anteriores
+Channel
+  .of(
+    [[id:'amostra_1'], '/caminho/para/amostra_1.bam'],
+    [[id:'amostra_2'], '/caminho/para/amostra_2.bam']
+  )
+  .set { bam }
+
+// Nota: amostra_2 é agora o primeiro elemento, em vez de amostra_1
+Channel
+  .of(
+    [[id:'amostra_2'], '/caminho/para/amostra_2.bai'],
+    [[id:'amostra_1'], '/caminho/para/amostra_1.bai']
+  )
+  .set { bai }
+
+// Em vez de alimentar o processo posterior com esses dois canais separadamente, nós podemos
+// uní-los com o operador `join` e entregar um único canal onde o meta mapa de amostra é correspondido implicitamente:
+bam
+  .join(bai)
+  | PROCESSO_C
+```
 
 Se os meta mapas não forem possíveis, uma alternativa é usar a diretiva de processo [`fair`](https://nextflow.io/docs/edge/process.html#fair). Quando especificada, o Nextflow garantirá que a ordem dos elementos nos canais de saída corresponderá à ordem dos respectivos elementos nos canais de entrada.
 
