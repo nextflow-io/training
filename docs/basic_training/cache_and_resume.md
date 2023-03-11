@@ -284,7 +284,32 @@ Just like we saw at the beginning of this tutorial with HELLO WORLD or WORLD HEL
 
 Imagine now that we have two processes like this, whose output channels are acting as input channels to a third process. Both channels will be independently random, so the third process must not expect them to retain a paired sequence. If it does assume that the first element in the first process output channel is related to the first element in the second process output channel, there will be a mismatch.
 
-A common solution for this is to use what is commonly referred to as a _meta map_. A groovy object with sample information is passed out together with the file results within an output channel as a tuple. This can then be used to pair samples from separate channels together for downstream use. For example, instead of putting just `/some/path/myoutput.bam` into a channel, you could use `['SRR123', '/some/path/myoutput.bam']` to make sure the processes are not incurring into a mismatch.
+A common solution for this is to use what is commonly referred to as a _meta map_. A groovy object with sample information is passed out together with the file results within an output channel as a tuple. This can then be used to pair samples from separate channels together for downstream use. For example, instead of putting just `/some/path/myoutput.bam` into a channel, you could use `['SRR123', '/some/path/myoutput.bam']` to make sure the processes are not incurring into a mismatch. Check the example below:
+
+```nextflow
+// Consider the channel below as the output of process A
+Channel
+  .of(
+    [[id:'sample_1'], '/path/to/sample_1.bam'],
+    [[id:'sample_2'], '/path/to/sample_2.bam']
+  )
+  .set { bam }
+
+// Consider the channel below as the output of process B
+// Note that sample_2 is now the first element instead of sample_1
+Channel
+  .of(
+    [[id:'sample_2'], '/path/to/sample_2.bai'],
+    [[id:'sample_1'], '/path/to/sample_1.bai']
+  )
+  .set { bai }
+
+// Instead of feeding process C with these two channels, we can
+// join them and provide a single channel as input to process C with:
+bam
+  .join(bai)
+  | PROCESS_C
+```
 
 If meta maps are not possible, an alternative is to use the [`fair`](https://nextflow.io/docs/edge/process.html#fair) process directive. When specified, Nextflow will guarantee that the order of outputs will match the order of inputs.
 
