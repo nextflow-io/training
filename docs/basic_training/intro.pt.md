@@ -18,11 +18,11 @@ O Nextflow estende essa abordagem, adicionando a capacidade de definir interaç�
 
 ### Processos e Canais
 
-Na prática, um pipeline Nextflow é feito juntando diferentes processos. Cada `processo` pode ser escrito em qualquer linguagem de script que possa ser executada pela plataforma Linux (Bash, Perl, Ruby, Python, etc.).
+Na prática, um pipeline Nextflow é feito juntando diferentes processos. Cada processo pode ser escrito em qualquer linguagem de script que possa ser executada pela plataforma Linux (Bash, Perl, Ruby, Python, etc.).
 
 Os processos são executados de forma independente e isolados uns dos outros, ou seja, não compartilham um estado (gravável) comum. A única maneira de eles se comunicarem é por meio de filas assíncronas, chamadas de `canais`, onde o primeiro elemento a entrar, é o primeiro a sair (FIFO - First-in-First-out).
 
-Qualquer `processo` pode definir um ou mais `canais` como uma `entrada` e `saída`. A interação entre esses processos e, em última análise, o próprio fluxo de execução do pipeline, é definido implicitamente por essas declarações de `entrada` e `saída`.
+Qualquer processo pode definir um ou mais `canais` como uma `entrada` e `saída`. A interação entre esses processos e, em última análise, o próprio fluxo de execução do pipeline, é definido implicitamente por essas declarações de `entrada` e `saída`.
 
 <figure class="excalidraw">
 --8<-- "docs/basic_training/img/channel-process.excalidraw.svg"
@@ -30,7 +30,7 @@ Qualquer `processo` pode definir um ou mais `canais` como uma `entrada` e `saíd
 
 ### Abstração de execução
 
-Enquanto um `processo` define _qual_ comando ou `script` deve ser executado, o executor determina _como_ esse `script` é executado na plataforma alvo.
+Enquanto um processo define _qual_ comando ou `script` deve ser executado, o executor determina _como_ esse `script` é executado na plataforma alvo.
 
 Se não for especificado de outra forma, os processos são executados no computador local. O executor local é muito útil para fins de desenvolvimento e teste de pipeline, no entanto, para pipelines computacionais do mundo real, uma plataforma de computação de alto desempenho (High-Performance Computing - HPC) ou de computação em nuvem geralmente é necessária.
 
@@ -120,24 +120,24 @@ workflow { // (18)!
 
 1. O código começa com um shebang, que declara o Nextflow como o interpretador.
 2. Declara um parâmetro `greeting` que é inicializado com o valor 'Hello world!'.
-3. Inicializa um `canal` chamado `greeting_ch`, que contém o valor de `params.greeting`. Os canais são o tipo de entrada para processos no Nextflow.
+3. Inicializa um canal chamado `greeting_ch`, que contém o valor de `params.greeting`. Os canais são o tipo de entrada para processos no Nextflow.
 4. Inicia o primeiro bloco do processo, definido como `SPLITLETTERS`.
 5. Declaração de entrada para o processo `SPLITLETTERS`. As entradas podem ser valores (`val`), arquivos ou caminhos (`path`), ou ainda outros qualificadores ([veja aqui](https://www.nextflow.io/docs/latest/process.html#inputs)).
-6. Diz ao `processo` para esperar um valor de entrada (`val`), que atribuímos à variável 'x'.
+6. Diz ao processo para esperar um valor de entrada (`val`), que atribuímos à variável 'x'.
 7. Declaração de saída para o processo `SPLITLETTERS`.
 8. Diz ao processo para esperar um ou mais arquivos de saída (`path`), com um nome de arquivo começando com 'chunk\_', como saída do script. O processo envia a saída como um canal.
-9. Três aspas duplas iniciam e terminam o bloco de código para executar este `processo`. Dentro está o código a ser executado — imprimindo o valor de `entrada` x (chamado usando o prefixo do símbolo de dólar [$]), dividindo a string em pedaços com um comprimento de 6 caracteres ("Hello " e "world!") e salvando cada um para um arquivo (chunk_aa e chunk_ab).
+9. Três aspas duplas iniciam e terminam o bloco de código para executar este processo. Dentro está o código a ser executado — imprimindo o valor de `entrada` x (chamado usando o prefixo do símbolo de dólar [$]), dividindo a string em pedaços com um comprimento de 6 caracteres ("Hello " e "world!") e salvando cada um para um arquivo (chunk_aa e chunk_ab).
 10. Fim do primeiro bloco de processo.
 11. Inicia o segundo bloco de processo, definido como `CONVERTTOUPPER`.
-12. Declaração de entrada para o `processo` `CONVERTTOUPPER`.
-13. Diz ao `processo` para esperar um ou mais arquivos de `entrada` (`path`; ou seja, chunk_aa e chunk_ab), que atribuímos à variável 'y'.
+12. Declaração de entrada para o processo `CONVERTTOUPPER`.
+13. Diz ao processo para esperar um ou mais arquivos de `entrada` (`path`; ou seja, chunk_aa e chunk_ab), que atribuímos à variável 'y'.
 14. Declaração de saída para o processo `CONVERTTOUPPER`.
 15. Diz ao processo para esperar a saída padrão (stdout) como saída e envia essa saída como um canal.
-16. Três aspas duplas iniciam e terminam o bloco de código para executar este `processo`. Dentro do bloco, há um script para ler arquivos (cat) usando a variável de entrada '$y' e, em seguida, um pipe (|) para a conversão em maiúsculas, imprimindo na saída padrão.
-17. Fim do segundo bloco de `processo`.
+16. Três aspas duplas iniciam e terminam o bloco de código para executar este processo. Dentro do bloco, há um script para ler arquivos (cat) usando a variável de entrada '$y' e, em seguida, um pipe (|) para a conversão em maiúsculas, imprimindo na saída padrão.
+17. Fim do segundo bloco de processo.
 18. Início do bloco de fluxo de trabalho (`workflow`) onde cada processo pode ser chamado.
-19. Execute o `processo` `SPLITLETTERS` no `greeting_ch` (também conhecido como canal de saudação) e armazene a saída no canal `letters_ch`.
-20. Execute o `processo` `CONVERTTOUPPER` no canal de letras `letters_ch`, que é achatado usando o operador `.flatten()`. Isso transforma o canal de entrada de forma que cada item seja um elemento separado. Armazenamos a saída no canal `results_ch`.
+19. Execute o processo `SPLITLETTERS` no `greeting_ch` (também conhecido como canal de saudação) e armazene a saída no canal `letters_ch`.
+20. Execute o processo `CONVERTTOUPPER` no canal de letras `letters_ch`, que é achatado usando o operador `.flatten()`. Isso transforma o canal de entrada de forma que cada item seja um elemento separado. Armazenamos a saída no canal `results_ch`.
 21. A saída final (no canal `results_ch`) é impressa na tela usando o operador `view` (aplicado ao nome do canal).
 22. Fim do bloco do fluxo de trabalho (`workflow`).
 
@@ -174,7 +174,7 @@ A saída padrão mostra (linha por linha):
 1. A versão do Nextflow que foi executada.
 2. Os nomes do script e da versão.
 3. O executor usado (no caso acima: local).
-4. O primeiro `processo` é executado uma vez. A linha começa com um valor hexadecimal exclusivo (consulte a dica abaixo) e termina com as informações de porcentagem e conclusão do trabalho.
+4. O primeiro processo é executado uma vez. A linha começa com um valor hexadecimal exclusivo (consulte a dica abaixo) e termina com as informações de porcentagem e conclusão do trabalho.
 5. O segundo processo é executado duas vezes (uma vez para chunk_aa e outra para chunk_ab).
 6. A string de resultado de stdout é impressa na tela.
 
@@ -239,7 +239,7 @@ Você verá que a execução do processo `SPLITLETTERS` é ignorada (o ID do pro
 
 ## Parâmetros do pipeline
 
-Os parâmetros de pipeline são declarados simplesmente adicionando o prefixo `params` a um nome de variável, separando-os por um caractere de ponto. Seu valor pode ser especificado na linha de comando prefixando o nome do parâmetro com um traço duplo, ou seja, `--paramName`.
+Os parâmetros de pipeline são declarados simplesmente adicionando o prefixo `params` a um nome de variável, separando-os por um caractere de ponto. Seu valor pode ser especificado na linha de comando prefixando o nome do parâmetro com um traço duplo, ou seja, `--nomeParametro`.
 
 Agora, vamos tentar executar o exemplo anterior especificando um parâmetro de string de entrada diferente, conforme mostrado abaixo:
 
@@ -262,7 +262,7 @@ uojnoB
 
 ### Em formato de DAG
 
-Para entender melhor como o Nextflow está lidando com os dados neste pipeline, abaixo está uma figura tipo DAG para visualizar todas as `entradas`, `saídas`, `canais` e `processos`:
+Para entender melhor como o Nextflow está lidando com os dados neste pipeline, abaixo está uma figura tipo DAG para visualizar todas as entradas (`input`), saídas (`output`), canais (`channel`) e processos (`process`):
 
 <figure markdown>
 

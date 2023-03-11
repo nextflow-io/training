@@ -98,7 +98,7 @@ To add a transcriptome `INDEX` processing step, try adding the following code bl
 
 ```groovy
 /*
- * define the `index` process that creates a binary index
+ * define the INDEX process that creates a binary index
  * given the transcriptome file
  */
 process INDEX {
@@ -518,8 +518,7 @@ The `-with-timeline` option enables the creation of the workflow timeline report
 Finally, the `-with-dag` option enables the rendering of the workflow execution direct acyclic graph representation. Note: This feature requires the installation of [Graphviz](http://www.graphviz.org/) on your computer. See [here](https://www.nextflow.io/docs/latest/tracing.html#dag-visualisation) for further details. Then try running:
 
 ```bash
-dot -Tpng dag.dot > graph.png
-open graph.png
+open dag.png
 ```
 
 !!! warning

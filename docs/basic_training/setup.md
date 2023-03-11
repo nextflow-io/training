@@ -145,7 +145,7 @@ If you have lost your environment, you can find the main scripts used in this tu
 
 ### Saving files from Gitpod to your local machine
 
-To save any file from the explorer panel, right-click the file and select `Download`.
+To save any file from the explorer panel, right-click the file and select Download.
 
 ### Training material
 

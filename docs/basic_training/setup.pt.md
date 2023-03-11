@@ -77,7 +77,7 @@ Verifique se o `nextflow` foi instalado corretamente executando o seguinte coman
 nextflow info
 ```
 
-Isso deve mostrar a versão atual, sistema e tempo de execução.
+Isso deve mostrar a versão atual, sistema operacional e sistema de tempo de execução.
 
 ## Gitpod
 
@@ -145,7 +145,7 @@ Se você perdeu seu ambiente, pode encontrar os principais scripts usados neste 
 
 ### Salvando arquivos do Gitpod em sua máquina local
 
-Para salvar qualquer arquivo a partir do Explorar na barra lateral, clique com o botão direito do mouse no arquivo e selecione 'Download'.
+Para salvar qualquer arquivo a partir do Explorar na barra lateral, clique com o botão direito do mouse no arquivo e selecione Download.
 
 ### Material do treinamento
 

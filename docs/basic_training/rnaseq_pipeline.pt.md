@@ -92,13 +92,13 @@ Nesta etapa você aprendeu:
 
 O Nextflow permite a execução de qualquer comando ou script usando uma definição de processo (`process`).
 
-Um processo é definido por três principais declarações: as entradas [`input`](https://www.nextflow.io/docs/latest/process.html#inputs), saídas [`output`](https://www.nextflow.io/docs/latest/process.html#outputs) e comandos de [`script`](https://www.nextflow.io/docs/latest/process.html#script) do processo.
+Um processo é definido por três principais declarações: as entradas ([`input`](https://www.nextflow.io/docs/latest/process.html#inputs)), saídas ([`output`](https://www.nextflow.io/docs/latest/process.html#outputs)) e comandos de [`script`](https://www.nextflow.io/docs/latest/process.html#script) do processo.
 
 Para adicionar uma etapa de processamento de índice do transcriptoma (`INDEX`), tente adicionar os blocos de código a seguir no seu `script1.nf`. Como alternativa, esses blocos de código já foram adicionados ao `script2.nf`.
 
 ```groovy
 /*
- * define o processo `index` que cria um índice binário
+ * define o processo INDEX que cria um índice binário
  * dado um arquivo de transcriptoma
  */
 process INDEX {
@@ -123,7 +123,7 @@ workflow {
 }
 ```
 
-Aqui, o parâmetro `params.transcriptome_file` é usado como entrada para o processo `INDEX`. O processo `INDEX` (usando a ferramenta `salmon`) cria `salmon_index`, um arquivo de índice de transcriptoma que é passado como saída ao canal `index_ch`.
+Aqui, o parâmetro `params.transcriptome_file` é usado como entrada para o processo `INDEX`. O processo `INDEX` (usando a ferramenta `salmon`) cria um arquivo chamado `salmon_index`, que é um arquivo de índice de transcriptoma que é passado como saída ao canal `index_ch`.
 
 !!! info
 
@@ -518,8 +518,7 @@ A opção `-with-timeline` permite a criação do relatório da linha do tempo d
 Por fim, a opção `-with-dag` permite a renderização da representação de grafo acíclico direcionado da execução do fluxo de trabalho. Nota: Este recurso requer a instalação do [Graphviz](http://www.graphviz.org/) em seu computador. Veja [aqui](https://www.nextflow.io/docs/latest/tracing.html#dag-visualisation) para mais detalhes. Então tente executar:
 
 ```bash
-dot -Tpng dag.dot > graph.png
-open graph.png
+open dag.png
 ```
 
 !!! warning
@@ -528,7 +527,7 @@ open graph.png
 
 !!! info
 
-    Você visualiza os arquivos HTML clicando com o botão direito do mouse no nome do arquivo na barra lateral esquerda e escolhendo o item de menu **Visualizar**.
+    Você visualiza os arquivos HTML clicando com o botão direito do mouse no nome do arquivo na barra lateral esquerda e escolhendo o item de menu **Show Preview**.
 
 ## Execute um projeto do GitHub
 
