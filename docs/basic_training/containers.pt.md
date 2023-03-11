@@ -4,7 +4,7 @@ description: Material de treinamento básico do Nextflow
 
 # Gerencie dependências e contêineres
 
-Fluxos de trabalhos computacionais são raramente compostos de um só script ou ferramenta. Muitas vezes, eles dependem de duzias de componentes de softwares ou bibliotecas.
+Fluxos de trabalhos computacionais são raramente compostos de um só script ou ferramenta. Muitas vezes, eles dependem de dúzias de componentes de softwares ou bibliotecas.
 
 Instalar e manter tais dependências é uma tarefa desafiadora e uma fonte comum de irreprodutibilidade em aplicações científicas.
 
@@ -108,7 +108,7 @@ docker images
 Você pode testar seu novo contêiner executando esse comando:
 
 ```bash
-docker run minha-imagem cowsay Hello Docker!
+docker run minha-imagem cowsay Olá Docker!
 ```
 
 ### Adicione um pacote de programa a imagem
@@ -158,7 +158,7 @@ docker run minha-imagem \
 
 O comando acima falha porque o Salmon não pode acessar o arquivo de entrada.
 
-Isso acontece porque o contêiner executa em um sistema de arquivos totalmente diferente e não pode acessar o arquivo no sistema de arquivo do host por padrão.
+Isso acontece porque o contêiner executa em um sistema de arquivos totalmente diferente e não pode acessar o arquivo no sistema de arquivo do hospedeiro por padrão.
 
 Você precisará usar a opção de linha de comando `--volume` para montar o(s) arquivo(s) de entrada, por exemplo
 
@@ -196,7 +196,7 @@ ls -la transcript-index
 
     Note que as permissões para criação dos arquivos utilizado pelo Docker são `root`.
 
-### Disponibilize o contêiner no Docker Hub (bonus)
+### Disponibilize o contêiner no Docker Hub (bônus)
 
 Publique seu contêiner no Docker Hub para compartilhá-lo com outras pessoas.
 
@@ -221,7 +221,7 @@ docker push <nome-de-usuario>/minha-imagem
 Depois disso, qualquer um conseguirá baixar a imagem utilizando o comando:
 
 ```bash
-docker pull <user-name>/my-image
+docker pull <nome-de-usuario>/minha-imagem
 ```
 
 Note que depois de uma operação push e pull, o Docker imprime na tela o número de registro do contêiner, por exemplo:
@@ -322,13 +322,13 @@ Uma forma mais fácil de criar um contêiner com o Singularity não necessitando
 singularity pull docker://debian:stretch-slim
 ```
 
-O comando acima automaticamente baixa uma imagem Docker do Debian e converte para uma imagem Singularity no diretório atual com o nome`debian-jessie.simg`.
+O comando acima automaticamente baixa uma imagem Docker do Debian e converte para uma imagem Singularity no diretório atual com o nome `debian-jessie.simg`.
 
 ### Execute um script do Nextflow utilizando um contêiner Singularity
 
-O Nextflow permite um uso de contêineres Singularity de forma tão fácil e transparente quanto com o Docker.
+O Nextflow permite o uso de contêineres Singularity de forma tão fácil e transparente quanto com o Docker.
 
-Simplesmente ative o uso do motor Singularity no lugar do Docker no arquivo de configurações do Nextflow utilizando a opção de linha de comando `-with-singularity`:
+Simplesmente ative o uso do motor Singularity no lugar do Docker na linha de comando do Nextflow utilizando a opção de linha de comando `-with-singularity`:
 
 ```bash
 nextflow run script7.nf -with-singularity nextflow/rnaseq-nf
@@ -363,7 +363,7 @@ Com isso, escreva seu arquivo YAML (`env.yml`). Já existe um arquivo `env.yml` 
 --8<-- "nf-training/env.yml"
 ```
 
-Dado o arquivo de receita, o ambiente é criado utilizando o comando abaixo. O comando `conda env create` deve demorar vários minutos, pois o conda tenta resolver todas as dependências dos desejados pacotes durante a execução, e então baixa tudo que é requerido.
+Dado o arquivo de receita, o ambiente é criado utilizando o comando abaixo. O comando `conda env create` deve demorar vários minutos, pois o conda tenta resolver todas as dependências dos pacotes desejados durante a execução, e então baixa tudo que é requerido.
 
 ```bash
 conda env create --file env.yml
@@ -458,7 +458,7 @@ Tente executar o pipeline RNA-seq visto anteriormente (script7.nf). Comece monta
 
         ```bash
         docker login
-        docker tag my-image <meurepo>/minha-imagem
+        docker tag minha-imagem <meurepo>/minha-imagem
         docker push <meurepo>/minha-imagem
         ```
 
@@ -473,7 +473,7 @@ Tente executar o pipeline RNA-seq visto anteriormente (script7.nf). Comece monta
         e adicione:
 
         ```groovy
-        process.container = '<myrepo>/my-image'
+        process.container = '<meurepo>/minha-imagem'
         ```
 
     5. Tente executar o Nextflow, por exemplo:
