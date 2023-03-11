@@ -14,7 +14,7 @@ Contêineres podem ser executados de uma forma isolada pelo sistema do hospedeir
 
 !!! info
 
-    Contêineres foram introduzidos no kernel 2.6 como um recurso do Linux conhecido como _Control Groups_ or [Cgroups](https://en.wikipedia.org/wiki/Cgroups).
+    Contêineres foram introduzidos no kernel 2.6 como um recurso do Linux conhecido como _Control Groups_ ou [Cgroups](https://en.wikipedia.org/wiki/Cgroups).
 
 ## Docker
 
@@ -488,7 +488,7 @@ Tente executar o pipeline RNA-seq visto anteriormente (script7.nf). Comece monta
 
 Outro recurso útil para conectar Bioconda e contêineres é o projeto [BioContainers](https://biocontainers.pro). BioContainers é uma iniciativa da comunidade para prover um registro de imagens de contêiner para cada receita do Bioconda.
 
-Até agora, nós vimos como instalar pacotes com conda e micromamba, ambos localmente e com contêiner. Com o BioContainers, você não precisa criar sua própria imagem de contêiner para as ferramentas que você quiser, e não precisa utilizar conda or micromamba para instalar pacotes. O BioContainers já disponibiliza uma imagem Docker contendo os programas que você quer instalado. Por exemplo, você pode adquirir a imagem de contêiner do fastqc utilizando BioContainers:
+Até agora, nós vimos como instalar pacotes com conda e micromamba, ambos localmente e com contêiner. Com o BioContainers, você não precisa criar sua própria imagem de contêiner para as ferramentas que você quiser, e não precisa utilizar conda ou micromamba para instalar pacotes. O BioContainers já disponibiliza uma imagem Docker contendo os programas que você quer instalado. Por exemplo, você pode adquirir a imagem de contêiner do fastqc utilizando BioContainers:
 
 ```bash
 docker pull biocontainers/fastqc:v0.11.5

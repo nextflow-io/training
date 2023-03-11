@@ -26,7 +26,7 @@ O Nextflow pode ser usado em qualquer sistema compatível com POSIX (Linux, macO
 #### Requisitos opcionais para este tutorial
 
 -   [Singularity](https://github.com/sylabs/singularity) 2.5.x (ou uma versão posterior)
--   [Conda](https://conda.io/) 4.5 (or later)
+-   [Conda](https://conda.io/) 4.5 (ou uma versão posterior)
 -   [Graphviz](http://www.graphviz.org/)
 -   [AWS CLI](https://aws.amazon.com/cli/)
 -   Um ambiente de computação do AWS Batch configurado

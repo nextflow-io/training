@@ -593,7 +593,7 @@ No exemplo acima, toda vez que um arquivo de sequências é recebido como entrad
 
 O bloco _output_ define os canais usados pelo processo para enviar os resultados produzidos.
 
-Only one output block, that can contain one or more output declaration, can be defined. The output block follows the syntax shown below:
+Apenas um bloco de saída, que pode conter uma ou mais declarações de saída, pode ser definido. O bloco de saída segue a sintaxe mostrada abaixo:
 
 ```groovy linenums="1"
 output:
