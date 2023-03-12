@@ -48,9 +48,9 @@ process {
 }
 ```
 
-### Submeta o Nextflow como um trabalho
+### Submeta o Nextflow como uma tarefa
 
-Embora o comando principal do Nextflow possa ser iniciado no nó de login/head de um cluster, esteja ciente de que o nó deve ser configurado para comandos que são executados por um longo período de tempo, mesmo que os recursos computacionais usados sejam insignificantes. Outra opção é enviar o processo principal do Nextflow como um trabalho no cluster.
+Embora o comando principal do Nextflow possa ser iniciado no nó de login/head de um cluster, esteja ciente de que o nó deve ser configurado para comandos que são executados por um longo período de tempo, mesmo que os recursos computacionais usados sejam insignificantes. Outra opção é enviar o processo principal do Nextflow como uma tarefa no cluster.
 
 !!! note
 
@@ -120,7 +120,7 @@ process {
 
         ```groovy
         process {
-            withName: quantification {
+            withName: QUANTIFICATION {
                 cpus = 2
                 memory = '5 GB'
             }
@@ -214,7 +214,7 @@ profiles {
         params.genoma = '/data/stared/ref.fasta'
         process.executor = 'sge'
         process.queue = 'longa'
-        process.memory = '10GB'
+        process.memory = '10 GB'
         process.conda = '/um/caminho/ambiente.yml'
     }
 
@@ -294,13 +294,13 @@ aws {
 }
 ```
 
-Vários volumes podem ser especificados usando caminhos separados por vírgulas. A sintaxe usual de montagem de volume do Docker pode ser usada para definir volumes complexos para os quais o caminho do contêiner é diferente do caminho do host ou para especificar uma opção somente leitura:
+Vários volumes podem ser especificados usando caminhos separados por vírgulas. A sintaxe usual de montagem de volume do Docker pode ser usada para definir volumes complexos para os quais o caminho do contêiner é diferente do caminho do hospedeiro ou para especificar uma opção somente leitura:
 
 ```groovy
 aws {
   region = 'eu-west-1'
   batch {
-      volumes = ['/tmp', '/host/caminho:/mnt/caminho:ro']
+      volumes = ['/tmp', '/caminho/no/hospedeiro:/mnt/caminho:ro']
   }
 }
 ```
@@ -390,7 +390,7 @@ Em seguida, crie um novo ambiente de computação no painel Batch e especifique 
 
 ## Implantação híbrida
 
-O Nextflow permite o uso de vários executores na mesma aplicação do fluxo de trabalho. Esse recurso permite a implantação de cargas de trabalho híbridas nas quais alguns trabalhos são executados no computador local ou cluster de computação local e alguns trabalhos são transferidos para o serviço AWS Batch.
+O Nextflow permite o uso de vários executores na mesma aplicação do fluxo de trabalho. Esse recurso permite a implantação de cargas de trabalho híbridas nas quais algumas tarefas são executados no computador local ou cluster de computação local e algumas tarefas são transferidas para o serviço AWS Batch.
 
 Para ativar esse recurso, use um ou mais [seletores de processo](https://www.nextflow.io/docs/latest/config.html#config-process-selectors) em seu arquivo de configuração do Nextflow.
 
@@ -415,8 +415,8 @@ aws {
 
 1. Defina o `slurm` como o executor padrão
 2. Defina a fila para o cluster SLURM
-3. Configure um processo chamado `tarefaGrande`
-4. Defina `awsbatch` como o executor para o processo `tarefaGrande`
-5. Defina a fila para o processo `tarefaGrande`
-6. Defina a imagem do contêiner para implantar para o processo `tarefaGrande`
+3. Configure um processo com o rótulo `tarefaGrande`
+4. Defina `awsbatch` como o executor para o(s) processo(s) com o rótulo `tarefaGrande`
+5. Defina a fila para o(s) processo(s) com o rótulo `tarefaGrande`
+6. Defina a imagem do contêiner para implantar para o(s) processo(s) com o rótulo `tarefaGrande`
 7. Defina a região para execução do Batch
