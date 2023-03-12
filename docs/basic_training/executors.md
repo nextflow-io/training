@@ -416,7 +416,7 @@ aws {
 
 1. Set `slurm` as the default executor
 2. Set the queue for the SLURM cluster
-3. Setting of a process with the label `bigTask`
+3. Setting of process(es) with the label `bigTask`
 4. Set `awsbatch` as the executor for the process(es) with the `bigTask` label
 5. Set the queue for the process(es) with the `bigTask` label
 6. Set the container image to deploy for the process(es) with the `bigTask` label
