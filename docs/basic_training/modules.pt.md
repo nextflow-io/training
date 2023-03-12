@@ -148,7 +148,7 @@ workflow {
 !!! tip
 
     Você pode armazenar cada processo em arquivos separados em subpastas separadas ou combinados em um arquivo grande (ambos são válidos).
-    Você pode encontrar exemplos disso em repositórios públicos, como no [tutorial de RNA-Seq da Seqera](https://github.com/seqeralabs/rnaseq-nf/tree/master/modules) ou em pipelines do nf-core, como o [nf-core/rnaseq](https://github.com/nf-core/rnaseq/tree/master/modules/nf-core/modules).
+    Você pode encontrar exemplos disso em repositórios públicos, como no [tutorial de RNA-Seq da Seqera](https://github.com/seqeralabs/rnaseq-nf/tree/master/modules) ou em pipelines do nf-core, como o [nf-core/rnaseq](https://github.com/nf-core/rnaseq/tree/master/modules/nf-core).
 
 ## Definição de saída
 
@@ -261,7 +261,7 @@ include { SPLITLETTERS } from './modules.nf'
 include { CONVERTTOUPPER } from './modules.nf'
 
 
-workflow my_pipeline {
+workflow meu_pipeline {
     greeting_ch = Channel.of(params.greeting)
     SPLITLETTERS(greeting_ch)
     CONVERTTOUPPER(SPLITLETTERS.out.flatten())
@@ -269,11 +269,11 @@ workflow my_pipeline {
 }
 
 workflow {
-    my_pipeline()
+    meu_pipeline()
 }
 ```
 
-Por exemplo, o trecho acima define um `workflow` chamado `my_pipeline`, que pode ser chamado por meio de outra definição de `workflow`.
+Por exemplo, o trecho acima define um `workflow` chamado `meu_pipeline`, que pode ser chamado por meio de outra definição de `workflow`.
 
 !!! note
 
@@ -295,7 +295,7 @@ params.greeting = 'Hello world!'
 include { SPLITLETTERS } from './modules.nf'
 include { CONVERTTOUPPER } from './modules.nf'
 
-workflow my_pipeline {
+workflow meu_pipeline {
     take:
     greeting
 
@@ -314,7 +314,7 @@ A entrada para o `workflow` pode então ser especificada como um argumento:
 
 ```groovy linenums="1"
 workflow {
-    my_pipeline(Channel.of(params.greeting))
+    meu_pipeline(Channel.of(params.greeting))
 }
 ```
 
@@ -323,7 +323,7 @@ workflow {
 Um `workflow` pode declarar um ou mais canais de saída usando a instrução `emit`. Por exemplo:
 
 ```groovy linenums="1"
-workflow my_pipeline {
+workflow meu_pipeline {
     take:
     greeting
 
@@ -336,17 +336,17 @@ workflow my_pipeline {
 }
 
 workflow {
-    my_pipeline(Channel.of(params.greeting))
-    my_pipeline.out.view()
+    meu_pipeline(Channel.of(params.greeting))
+    meu_pipeline.out.view()
 }
 ```
 
-Como resultado, podemos usar a notação `my_pipeline.out` para acessar as saídas de `my_pipeline` na chamada `workflow`.
+Como resultado, podemos usar a notação `meu_pipeline.out` para acessar as saídas de `meu_pipeline` na chamada `workflow`.
 
 Também podemos declarar saídas nomeadas dentro do bloco `emit`.
 
 ```groovy linenums="1" hl_lines="10 15"
-workflow my_pipeline {
+workflow meu_pipeline {
     take:
     greeting
 
@@ -355,22 +355,22 @@ workflow my_pipeline {
     CONVERTTOUPPER(SPLITLETTERS.out.flatten())
 
     emit:
-    my_data = CONVERTTOUPPER.out.upper
+    meus_dados = CONVERTTOUPPER.out.upper
 }
 
 workflow {
-    my_pipeline(Channel.of(params.greeting))
-    my_pipeline.out.my_data.view()
+    meu_pipeline(Channel.of(params.greeting))
+    meu_pipeline.out.meus_dados.view()
 }
 ```
 
-O resultado do trecho de código acima pode ser acessado usando `my_pipeline.out.my_data`.
+O resultado do trecho de código acima pode ser acessado usando `meu_pipeline.out.meus_dados`.
 
 ### Chamando workflows nomeados
 
-Dentro de um script `main.nf` (chamado `hello.nf` em nosso exemplo), também podemos ter vários fluxos de trabalho. Nesse caso, podemos chamar um fluxo de trabalho específico ao executar o código. Para isso, usamos a chamada de ponto de entrada `-entry <workflow_name>`.
+Dentro de um script `main.nf` (chamado `hello.nf` em nosso exemplo), também podemos ter vários fluxos de trabalho. Nesse caso, podemos chamar um fluxo de trabalho específico ao executar o código. Para isso, usamos a chamada de ponto de entrada `-entry <nome_do_workflow>`.
 
-O trecho a seguir tem dois fluxos de trabalho nomeados (`my_pipeline_one` e `my_pipeline_two`):
+O trecho a seguir tem dois fluxos de trabalho nomeados (`meu_pipeline_um` e `meu_pipeline_dois`):
 
 ```groovy linenums="1"
 #!/usr/bin/env nextflow
@@ -384,28 +384,28 @@ include { CONVERTTOUPPER as CONVERTTOUPPER_one } from './modules.nf'
 include { CONVERTTOUPPER as CONVERTTOUPPER_two } from './modules.nf'
 
 
-workflow my_pipeline_one {
-    letters_ch1 = SPLITLETTERS_one(params.greeting)
-    results_ch1 = CONVERTTOUPPER_one(letters_ch1.flatten())
-    results_ch1.view{ it }
+workflow meu_pipeline_um {
+    letras_canal1 = SPLITLETTERS_one(params.greeting)
+    resultados_canal1 = CONVERTTOUPPER_one(letters_ch1.flatten())
+    resultados_canal1.view{ it }
 }
 
-workflow my_pipeline_two {
-    letters_ch2 = SPLITLETTERS_two(params.greeting)
-    results_ch2 = CONVERTTOUPPER_two(letters_ch2.flatten())
-    results_ch2.view{ it }
+workflow meu_pipeline_dois {
+    letras_canal2 = SPLITLETTERS_two(params.greeting)
+    resultados_canal2 = CONVERTTOUPPER_two(letters_ch2.flatten())
+    resultados_canal2.view{ it }
 }
 
 workflow {
-    my_pipeline_one(Channel.of(params.greeting))
-    my_pipeline_two(Channel.of(params.greeting))
+    meu_pipeline_um(Channel.of(params.greeting))
+    meu_pipeline_dois(Channel.of(params.greeting))
 }
 ```
 
 Você pode escolher qual workflow é executado usando o sinalizador `entry`:
 
 ```bash
-nextflow run hello.2.nf -entry my_pipeline_one
+nextflow run hello.2.nf -entry meu_pipeline_um
 ```
 
 ### Escopos de parâmetros
@@ -416,7 +416,7 @@ Um script de módulo pode definir um ou mais parâmetros ou funções personaliz
 params.foo = 'Hello'
 params.bar = 'world!'
 
-def SAYHELLO() {
+def DIGAOLA() {
     println "$params.foo $params.bar"
 }
 
@@ -428,10 +428,10 @@ def SAYHELLO() {
 params.foo = 'Hola'
 params.bar = 'mundo!'
 
-include { SAYHELLO } from './modules.nf'
+include { DIGAOLA } from './modules.nf'
 
 workflow {
-    SAYHELLO()
+    DIGAOLA()
 }
 ```
 
@@ -455,10 +455,10 @@ A opção `addParams` pode ser usada para estender os parâmetros do módulo sem
 params.foo = 'Hola'
 params.bar = 'mundo!'
 
-include { SAYHELLO } from './modules.nf' addParams(foo: 'Olá')
+include { DIGAOLA } from './modules.nf' addParams(foo: 'Olá')
 
 workflow {
-    SAYHELLO()
+    DIGAOLA()
 }
 ```
 
