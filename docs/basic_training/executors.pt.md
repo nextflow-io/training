@@ -415,7 +415,7 @@ aws {
 
 1. Defina o `slurm` como o executor padrão
 2. Defina a fila para o cluster SLURM
-3. Configure um processo com o rótulo `tarefaGrande`
+3. Configuração de processo(s) com o rótulo `tarefaGrande`
 4. Defina `awsbatch` como o executor para o(s) processo(s) com o rótulo `tarefaGrande`
 5. Defina a fila para o(s) processo(s) com o rótulo `tarefaGrande`
 6. Defina a imagem do contêiner para implantar para o(s) processo(s) com o rótulo `tarefaGrande`
