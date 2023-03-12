@@ -9,7 +9,7 @@ Canais são uma estrutura de dados chave do Nextflow que permite a implementaç�
 Eles são usados para conectar logicamente tarefas entre si ou para implementar transformações de dados de estilo funcional.
 
 <figure class="excalidraw">
---8<-- "docs/basic_training/img/channel-files.excalidraw.svg"
+--8<-- "docs/basic_training/img/channel-files.excalidraw.pt.svg"
 </figure>
 
 ## Tipos de canais
