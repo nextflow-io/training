@@ -78,7 +78,7 @@ process EXEMPLO {
   """
   echo 'Olá mundo!\nHola mundo!\nCiao mondo!\nHallo Welt!' > arquivo
   cat arquivo | head -n 1 | head -c 5 > pedaco_1.txt
-  gzip -c pedaco_1.txt  > pedacos.gz
+  gzip -c pedaco_1.txt > pedacos.gz
   """
 }
 
@@ -87,7 +87,7 @@ workflow {
 }
 ```
 
-Por padrão, o comando `process` é interpretado como um script **Bash**. No entanto, qualquer outra linguagem de script pode ser usada simplesmente iniciando o script com a declaração [Shebang](<https://en.wikipedia.org/wiki/Shebang_(Unix)>) adequada. Por exemplo:
+Por padrão, o comando do processo é interpretado como um script **Bash**. No entanto, qualquer outra linguagem de script pode ser usada simplesmente iniciando o script com a declaração [Shebang](<https://en.wikipedia.org/wiki/Shebang_(Unix)>) adequada. Por exemplo:
 
 ```groovy linenums="1"
 process CODIGOPYTHON {
@@ -116,13 +116,13 @@ workflow {
 Parâmetros de script (`params`) podem ser definidos dinamicamente usando valores variáveis. Por exemplo:
 
 ```groovy linenums="1"
-params.data = 'Mundo'
+params.dado = 'Mundo'
 
 process FOO {
 
   script:
   """
-  echo Olá $params.data
+  echo Olá $params.dado
   """
 }
 
@@ -133,7 +133,7 @@ workflow {
 
 !!! info
 
-    Um script de processo pode conter qualquer formato de string suportado pela linguagem de programação Groovy. Isso nos permite usar a interpolação de strings como no script acima ou strings multilinha. Consulte [Interpolação de string](#groovy.adoc#_string_interpolation) para obter mais informações.
+    Um script de processo pode conter qualquer formato de string suportado pela linguagem de programação Groovy. Isso nos permite usar a interpolação de strings como no script acima ou strings multilinha. Consulte [Interpolação de string](../groovy/#interpolacao-de-strings) para obter mais informações.
 
 !!! warning
 
@@ -174,14 +174,14 @@ No entanto, isso bloqueia o uso de variáveis Nextflow no script de comando.
 Outra alternativa é usar uma instrução `shell` em vez de `script` e usar uma sintaxe diferente para variáveis do Nextflow, por exemplo, `!{..}`. Isso permite o uso das variáveis Nextflow e Bash no mesmo script.
 
 ```groovy linenums="1"
-params.data = 'le monde'
+params.dado = 'le monde'
 
 process BAZ {
 
   shell:
   '''
   X='Bonjour'
-  echo $X !{params.data}
+  echo $X !{params.dado}
   '''
 }
 
@@ -574,7 +574,7 @@ No exemplo acima, toda vez que um arquivo de sequências é recebido como entrad
           each modo
 
           output:
-          path result
+          path resultado
 
           script:
           """
@@ -591,7 +591,7 @@ No exemplo acima, toda vez que um arquivo de sequências é recebido como entrad
 
 ## Canais de saída
 
-O bloco _output_ define os canais usados pelo processo para enviar os resultados produzidos.
+O bloco `output` define os canais usados pelo processo para enviar os resultados produzidos.
 
 Apenas um bloco de saída, que pode conter uma ou mais declarações de saída, pode ser definido. O bloco de saída segue a sintaxe mostrada abaixo:
 
@@ -639,7 +639,7 @@ process NUMALEATORIO {
 
     script:
     """
-    echo $RANDOM > resultado.txt
+    echo \$RANDOM > resultado.txt
     """
 }
 
@@ -798,7 +798,7 @@ workflow {
         }
         ```
 
-## Quando
+## When
 
 A declaração `when` permite que você defina uma condição que deve ser verificada para executar o processo. Pode ser qualquer expressão que avalie um valor booleano.
 
@@ -826,7 +826,7 @@ process ENCONTRAR {
 }
 
 workflow {
-  result = ENCONTRAR(proteinas, params.tipo_banco)
+  resultado = ENCONTRAR(proteinas, params.tipo_banco)
 }
 ```
 
@@ -908,7 +908,7 @@ O exemplo acima copiará todos os arquivos de script blast criados pela tarefa `
 
     O diretório de publicação pode ser local ou remoto. Por exemplo, os arquivos de saída podem ser armazenados usando um [bucket AWS S3](https://aws.amazon.com/s3/) usando o prefixo `s3://` no caminho de destino.
 
-### Gerenciar semântica de subdiretórios
+### Gerenciando semântica de subdiretórios
 
 Você pode usar mais de um `publishDir` para manter saídas diferentes em diretórios separados. Por exemplo:
 
@@ -924,21 +924,21 @@ process FOO {
   publishDir "$params.diretorio_saida/$id_amostra/panoramas", pattern: '*_panorama.txt'
 
   input:
-    tuple val(id_amostra), path('sample1.fq.gz'), path('sample2.fq.gz')
+    tuple val(id_amostra), path('amostra1.fq.gz'), path('amostra2.fq.gz')
 
   output:
     path "*"
 
   script:
   """
-    < sample1.fq.gz zcat > amostra1.fq
-    < sample2.fq.gz zcat > amostra2.fq
+    < amostra1.fq.gz zcat > amostra1.fq
+    < amostra2.fq.gz zcat > amostra2.fq
 
     awk '{s++}END{print s/4}' amostra1.fq > amostra1_contagens.txt
     awk '{s++}END{print s/4}' amostra2.fq > amostra2_contagens.txt
 
-    head -n 50 sample1.fq > amostra1_panorama.txt
-    head -n 50 sample2.fq > amostra2_panorama.txt
+    head -n 50 amostra1.fq > amostra1_panorama.txt
+    head -n 50 amostra2.fq > amostra2_panorama.txt
   """
 }
 

@@ -328,7 +328,7 @@ The above command automatically downloads the Debian Docker image and converts i
 
 Nextflow allows the transparent usage of Singularity containers as easy as with Docker.
 
-Simply enable the use of the Singularity engine in place of Docker in the Nextflow configuration file by using the `-with-singularity` command-line option:
+Simply enable the use of the Singularity engine in place of Docker in the Nextflow command line by using the `-with-singularity` command-line option:
 
 ```bash
 nextflow run script7.nf -with-singularity nextflow/rnaseq-nf

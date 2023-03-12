@@ -133,7 +133,7 @@ workflow {
 
 !!! info
 
-    A process script can contain any string format supported by the Groovy programming language. This allows us to use string interpolation as in the script above or multiline strings. Refer to [String interpolation](#groovy.adoc#_string_interpolation) for more information.
+    A process script can contain any string format supported by the Groovy programming language. This allows us to use string interpolation as in the script above or multiline strings. Refer to [String interpolation](../groovy/#string-interpolation) for more information.
 
 !!! warning
 
@@ -639,7 +639,7 @@ process RANDOMNUM {
 
     script:
     """
-    echo $RANDOM > result.txt
+    echo \$RANDOM > result.txt
     """
 }
 

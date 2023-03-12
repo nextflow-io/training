@@ -57,7 +57,7 @@ O diretório de execução da tarefa possui os seguintes arquivos:
 -   `.command.log`: A saída do wrapper de execução.
 -   `.command.begin`: Um arquivo sentinela criado no momento que a tarefa é iniciada.
 -   `.exitcode`: Um arquivo contendo o código de saída da tarefa.
--   Os arquivos de entrada da tarefa (ligações simbólicas)
+-   Os arquivos de entrada da tarefa (links simbólicas)
 -   Os arquivos de saída da tarefa
 
 Certifique-se que o arquivo `.command.sh` contém o comando esperado e que todas as variáveis
@@ -109,7 +109,7 @@ A diretiva [maxRetries](https://www.nextflow.io/docs/latest/process.html#maxretr
 
 ## Re-execução com atraso
 
-Existem casos em que os recursos necessários para a execução estão temporariamente indisponíveis (por exemplo, congestionamento de rede). Nesses casos apenas re-executar a tarefa provavelmente levará a um erro idêntico. Uma re-execução com um atraso exponencial pode contribuir melhor para a resolução desses erros.
+Existem casos em que os recursos necessários para a execução estão temporariamente indisponíveis (por exemplo, congestionamento de rede). Nesses casos apenas re-executar a tarefa provavelmente levará a um erro idêntico. Uma re-execução com um atraso exponencial pode contribuir de uma melhor forma para a resolução desses erros.
 
 ```groovy linenums="1"
 process foo {
