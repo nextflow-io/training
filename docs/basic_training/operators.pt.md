@@ -33,7 +33,7 @@ quadrados.view() // (3)!
 3. Imprime o conteúdo do canal
 
 <figure class="excalidraw">
---8<-- "docs/basic_training/img/channel-map.excalidraw.svg"
+--8<-- "docs/basic_training/img/channel-map.excalidraw.pt.svg"
 </figure>
 
 Para implementar funcionalidades específicas operadores também podem ser encadeados. Então, o código anterior também pode ser escrito assim:

@@ -228,7 +228,7 @@ Os processos Nextflow são isolados uns dos outros, mas podem se comunicar entre
 As entradas determinam implicitamente as dependências e a execução paralela do processo. A execução do processo é disparada cada vez que dados _novos_ estão prontos para serem consumidos do canal de entrada:
 
 <figure class="excalidraw">
---8<-- "docs/basic_training/img/channel-process.excalidraw.svg"
+--8<-- "docs/basic_training/img/channel-process.excalidraw.pt.svg"
 </figure>
 
 O bloco `input` define os nomes e qualificadores das variáveis que se referem aos elementos do canal direcionados ao processo. Você só pode definir um bloco `input` por vez e deve conter uma ou mais declarações de entrada.
