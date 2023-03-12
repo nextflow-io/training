@@ -252,10 +252,10 @@ Channel
         pequeno: it < 10
         grande: it > 10
     }
-    .set { result }
+    .set { resultado }
 
-result.pequeno.view { "$it é pequeno" }
-result.grande.view { "$it é grande" }
+resultado.pequeno.view { "$it é pequeno" }
+resultado.grande.view { "$it é grande" }
 ```
 
 !!! info
@@ -269,3 +269,6 @@ result.grande.view { "$it é grande" }
 ## Outros recursos
 
 Veja a [documentação de operadores](https://www.nextflow.io/docs/latest/operator.html) no site oficial do Nextflow.
+esquerda = Channel.of(['X', 1], ['Y', 2], ['Z', 3], ['P', 7])
+direita = Channel.of(['Z', 6], ['Y', 5], ['X', 4])
+esquerda.join(direita).view()
