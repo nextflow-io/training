@@ -269,6 +269,3 @@ resultado.grande.view { "$it é grande" }
 ## Outros recursos
 
 Veja a [documentação de operadores](https://www.nextflow.io/docs/latest/operator.html) no site oficial do Nextflow.
-esquerda = Channel.of(['X', 1], ['Y', 2], ['Z', 3], ['P', 7])
-direita = Channel.of(['Z', 6], ['Y', 5], ['X', 4])
-esquerda.join(direita).view()

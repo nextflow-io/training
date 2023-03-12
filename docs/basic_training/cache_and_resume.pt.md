@@ -60,9 +60,9 @@ A opção de linha de comando `-resume` permite a continuação da execução do
 nextflow run <script> -resume
 ```
 
-Em termos práticos, o pipeline é executado do início. Entretanto, antes do lançamento da execução de um `process`, o Nextflow usa a ID única da tarefa para checar se o diretório de trabalho existe e se ele contém um estado de saída válido do comando com os esperados arquivos de saída.
+Em termos práticos, o pipeline é executado do início. Entretanto, antes do lançamento da execução de um processo, o Nextflow usa a ID única da tarefa para checar se o diretório de trabalho existe e se ele contém um estado de saída válido do comando com os esperados arquivos de saída.
 
-Se esta condição for satisfeita a tarefa é ignorada e os resultados computados previamente são usados como resultados do `process`.
+Se esta condição for satisfeita a tarefa é ignorada e os resultados computados previamente são usados como resultados do processo.
 
 A primeira tarefa que tem uma nova saída computada invalida todas execuções posteriores no que resta do Grafo Acíclico Direcionado (DAG, do inglês Directed Acyclic Graph).
 
@@ -190,7 +190,7 @@ Finalmente, a opção `-t` permite a criação de um relatório básico e custom
 
 !!! exercise
 
-    Salve o trecho acima em um arquivo chamado `template.html`. Então execute o comando (usando o ID correto para sua execução, ex. não `tiny_fermat`):
+    Salve o trecho acima em um arquivo chamado `template.html`. Então execute o comando (usando o ID correto para sua execução, ex. `tiny_fermat`):
 
     ```bash
     nextflow log tiny_fermat -t template.html > prov.html
@@ -303,8 +303,9 @@ Channel
   )
   .set { bai }
 
-// Em vez de alimentar o processo posterior com esses dois canais separadamente, nós podemos
-// uní-los com o operador `join` e entregar um único canal onde o meta mapa de amostra é correspondido implicitamente:
+// Em vez de alimentar o processo posterior com esses dois canais separadamente,
+// nós podemos uní-los com o operador `join` e entregar um único canal onde o
+// meta mapa de amostra é correspondido implicitamente:
 bam
   .join(bai)
   | PROCESSO_C

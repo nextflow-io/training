@@ -126,7 +126,7 @@ env.ALFA = 'algum valor'
 env.BETA = "$HOME/algum/caminho"
 ```
 
-Salve o trecho acima como um arquivo chamado `my-env.config`. Em seguida, salve o trecho abaixo em um arquivo chamado `foo.nf`:
+Salve o trecho acima como um arquivo chamado `meu-env.config`. Em seguida, salve o trecho abaixo em um arquivo chamado `foo.nf`:
 
 ```groovy linenums="1"
 process foo {
@@ -135,20 +135,24 @@ process foo {
   env | egrep 'ALFA|BETA'
   '''
 }
+
+workflow {
+    foo()
+}
 ```
 
 Por fim, execute o seguinte comando:
 
 ```bash
-nextflow run foo.nf -c my-env.config
+nextflow run foo.nf -c meu-env.config
 ```
 
 ??? result
 
-     ```console
+    ```console
     BETA=/home/usuario/algum/caminho
     ALFA=algum valor
-     ```
+    ```
 
 ### Configurar processos
 
@@ -247,7 +251,7 @@ docker.enabled = true
 Para rodar um pipeline com Singularity, é necessário fornecer o caminho para o arquivo de imagem do contêiner usando a diretiva de contêiner (`container`):
 
 ```groovy linenums="1"
-process.container = '/some/singularity/image.sif'
+process.container = '/alguma/imagem/singularity/imagem.sif'
 singularity.enabled = true
 ```
 

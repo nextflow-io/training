@@ -115,13 +115,13 @@ process {
 
 !!! exercise
 
-    Run the RNA-Seq script (`script7.nf`) from earlier, but specify that the `quantification` `process` requires 2 CPUs and 5 GB of memory, within the `nextflow.config` file.
+    Run the RNA-Seq script (`script7.nf`) from earlier, but specify that the `QUANTIFICATION` process requires 2 CPUs and 5 GB of memory, within the `nextflow.config` file.
 
     ??? solution
 
         ```groovy
         process {
-            withName: quantification {
+            withName: QUANTIFICATION {
                 cpus = 2
                 memory = '5 GB'
             }
@@ -215,7 +215,7 @@ profiles {
         params.genome = '/data/stared/ref.fasta'
         process.executor = 'sge'
         process.queue = 'long'
-        process.memory = '10GB'
+        process.memory = '10 GB'
         process.conda = '/some/path/env.yml'
     }
 
@@ -416,8 +416,8 @@ aws {
 
 1. Set `slurm` as the default executor
 2. Set the queue for the SLURM cluster
-3. Setting of a process named `bigTask`
-4. Set `awsbatch` as the executor for the `bigTask` process
-5. Set the queue for the `bigTask` process
-6. Set the container image to deploy for the `bigTask` process
+3. Setting of process(es) with the label `bigTask`
+4. Set `awsbatch` as the executor for the process(es) with the `bigTask` label
+5. Set the queue for the process(es) with the `bigTask` label
+6. Set the container image to deploy for the process(es) with the `bigTask` label
 7. Define the region for Batch execution

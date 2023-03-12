@@ -7,7 +7,7 @@ description: Comece a usar o Nextflow Tower
 
 ## Conceitos Básicos
 
-Nextflow Tower é o posto de comando centralizado para gerenciamento de dados e pipelines. Ele traz monitoramento, gerenciamento de logs e observabilidade para fluxos de trabalho distribuídos e simplifica a implantação de pipelines em qualquer nuvem, cluster ou laptop.
+O Nextflow Tower é o posto de comando centralizado para gerenciamento de dados e pipelines. Ele traz monitoramento, gerenciamento de logs e observabilidade para fluxos de trabalho distribuídos e simplifica a implantação de pipelines em qualquer nuvem, cluster ou laptop.
 
 Os principais recursos do Nextflow Tower incluem:
 
@@ -22,7 +22,7 @@ Os principais recursos do Nextflow Tower incluem:
 
 ## Como usar
 
-Você pode usar o Tower por meio da opção `-with-tower` ao usar o comando Nextflow **run**, por meio da **interface gráfica online** ou da **API**.
+Você pode usar o Tower por meio da opção `-with-tower` ao usar o comando `nextflow run`, por meio da **interface gráfica online** ou da **API**.
 
 ### Com o comando `nextflow run`
 
@@ -75,7 +75,7 @@ Execute normalmente seus fluxos de trabalho do Nextflow com a adição do comand
 nextflow run hello.nf -with-tower
 ```
 
-Você verá e poderá monitorar seus **trabalhos do Nextflow** no Tower.
+Você verá e poderá monitorar suas **tarefas do Nextflow** no Tower.
 
 Para configurar e executar tarefas do Nextflow em **ambientes na nuvem**, visite a [seção de ambientes de computação](https://help.tower.nf/compute-envs/overview/) (compute environments).
 
@@ -145,7 +145,7 @@ O Launchpad detecta automaticamente a presença de um `nextflow_schema.json` na 
 
 !!! info
 
-    A exibição de formulários de parâmetro aparecerá se o fluxo de trabalho tiver um arquivo de esquema Nextflow para os parâmetros. Consulte o [Guia do esquema do Nextflow](https://help.tower.nf/pipeline-schema/overview) para saber mais sobre os casos de uso do arquivo de esquema e como criá-los.
+    A exibição de formulários de parâmetro aparecerá se o fluxo de trabalho tiver um arquivo de esquema do Nextflow para os parâmetros. Consulte o [Guia do esquema do Nextflow](https://help.tower.nf/pipeline-schema/overview) para saber mais sobre os casos de uso do arquivo de esquema e como criá-los.
 
 Isso torna trivial para usuários sem experiência em Nextflow inserir seus parâmetros de pipeline e lançá-lo.
 

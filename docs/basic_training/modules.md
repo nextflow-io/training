@@ -148,7 +148,7 @@ workflow {
 !!! tip
 
     You can store each process in separate files within separate sub-folders or combined in one big file (both are valid).
-    You can find examples of this on public repos such as the [Seqera RNA-Seq tutorial](https://github.com/seqeralabs/rnaseq-nf/tree/master/modules) or within nf-core pipelines, such as [nf-core/rnaseq](https://github.com/nf-core/rnaseq/tree/master/modules/nf-core/modules).
+    You can find examples of this on public repos such as the [Seqera RNA-Seq tutorial](https://github.com/seqeralabs/rnaseq-nf/tree/master/modules) or within nf-core pipelines, such as [nf-core/rnaseq](https://github.com/nf-core/rnaseq/tree/master/modules/nf-core).
 
 ## Output definition
 
