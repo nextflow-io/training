@@ -373,7 +373,7 @@ println x
 [ 1, 4, 9, 16 ]
 ```
 
-By default, closures take a single parameter called `it`, to give it a different name use the `->` syntax. For example:
+By default, closures take a single parameter called `it`. To give it a different name use the `->` syntax. For example:
 
 ```groovy linenums="1"
 square = { num -> num * num }
