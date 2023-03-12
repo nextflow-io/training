@@ -267,7 +267,7 @@ It will produce an output similar to the following:
 | hidden        | When `true` includes hidden files in the resulting paths (default: `false`)                                                    |
 | maxDepth      | Maximum number of directory levels to visit (default: `no limit`)                                                              |
 | followLinks   | When `true` symbolic links are followed during directory tree traversal, otherwise they are managed as files (default: `true`) |
-| size          | Defines the number of files each emitted item is expected to hold (default: `2`). Set to `-1` for any                            |
+| size          | Defines the number of files each emitted item is expected to hold (default: `2`). Set to `-1` for any                          |
 | flat          | When `true` the matching files are produced as sole elements in the emitted tuples (default: `false`)                          |
 | checkIfExists | When `true`, it throws an exception of the specified path that does not exist in the file system (default: `false`)            |
 
