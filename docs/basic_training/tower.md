@@ -22,7 +22,7 @@ Nextflow tower core features include:
 
 ## Usage
 
-You can use Tower via either the `-with-tower` option while using the Nextflow **run** command, through the **online GUI** or through the **API**.
+You can use Tower via either the `-with-tower` option while using the `nextflow run` command, through the **online GUI** or through the **API**.
 
 ### Via the `nextflow run` command
 
