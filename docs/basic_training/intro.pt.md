@@ -25,7 +25,7 @@ Os processos são executados de forma independente e isolados uns dos outros, ou
 Qualquer processo pode definir um ou mais `canais` como uma `entrada` e `saída`. A interação entre esses processos e, em última análise, o próprio fluxo de execução do pipeline, é definido implicitamente por essas declarações de `entrada` e `saída`.
 
 <figure class="excalidraw">
---8<-- "docs/basic_training/img/channel-process.excalidraw.svg"
+--8<-- "docs/basic_training/img/channel-process.excalidraw.pt.svg"
 </figure>
 
 ### Abstração de execução
