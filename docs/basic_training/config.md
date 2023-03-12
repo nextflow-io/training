@@ -135,6 +135,10 @@ process foo {
   env | egrep 'ALPHA|BETA'
   '''
 }
+
+workflow {
+    foo()
+}
 ```
 
 Finally, execute the following command:
