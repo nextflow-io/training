@@ -373,7 +373,7 @@ println x
 [ 1, 4, 9, 16 ]
 ```
 
-Por padrão, as clausuras recebem um único parâmetro chamado `it`, para dar a ele um nome diferente, use a sintaxe `->`. Por exemplo:
+Por padrão, as clausuras recebem um único parâmetro chamado `it`. Para dar a ele um nome diferente, use a sintaxe `->`. Por exemplo:
 
 ```groovy linenums="1"
 quadrado = { num -> num * num }
