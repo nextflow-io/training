@@ -205,11 +205,20 @@ The syntax for setting `process` directives in the configuration file requires `
     }
     ```
 
-This is especially important when you want to define a config setting using a dynamic expression using a closure. For example:
+This is especially important when you want to define a config setting using a dynamic expression using a closure. For example, in a workflow script:
 
 ```groovy linenums="1"
 process foo {
+    memory { 4.GB * task.cpus }
+}
+```
+
+And the equivalent in the configuration file, if you choose to set it there:
+```groovy linenums="1"
+process {
+  withName:foo {
     memory = { 4.GB * task.cpus }
+  }
 }
 ```
 
