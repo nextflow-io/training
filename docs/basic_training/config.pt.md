@@ -205,11 +205,20 @@ A sintaxe para definir as diretivas de processo no arquivo de configuração req
     }
     ```
 
-Isso é especialmente importante quando você deseja criar uma definição de configuração usando uma expressão dinâmica com uma clausura. Por exemplo:
+Isso é especialmente importante quando você deseja criar uma definição de configuração usando uma expressão dinâmica com uma clausura. Por exemplo, em um arquivo de fluxo de trabalho:
 
 ```groovy linenums="1"
 process foo {
+    memory { 4.GB * task.cpus }
+}
+```
+
+E o equivalente em um arquivo de configuração, se você preferir configurar isso lá:
+```groovy linenums="1"
+process {
+  withName:foo {
     memory = { 4.GB * task.cpus }
+  }
 }
 ```
 
