@@ -214,6 +214,7 @@ process foo {
 ```
 
 E o equivalente em um arquivo de configuração, se você preferir configurar isso lá:
+
 ```groovy linenums="1"
 process {
   withName:foo {
