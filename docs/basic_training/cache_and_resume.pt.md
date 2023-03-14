@@ -200,7 +200,15 @@ Finalmente, a opção `-t` permite a criação de um relatório básico e custom
 
 ## Resolução de problemas de reentrância
 
-Se a execução do seu fluxo de trabalho não foi retomada como esperado com uma ou mais tarefas sendo inesperadamente re-executadas toda vez, essas são as causas mais prováveis:
+Ser capaz de retomar fluxos de trabalho é um recurso importante do Nextflow, mas nem sempre funciona como você espera. Nesta seção, analisamos alguns motivos comuns pelos quais o Nextflow pode estar ignorando seus resultados em cache.
+
+!!! tip
+
+    Para saber mais detalhes sobre o mecanismo de reentrância e como solucionar problemas, consulte as três postagens de blog a seguir:
+
+     1. [Demystifying Nextflow resume](https://www.nextflow.io/blog/2019/demystifying-nextflow-resume.html)
+     2. [Troubleshooting Nextflow resume](https://www.nextflow.io/blog/2019/troubleshooting-nextflow-resume.html)
+     3. [Analyzing caching behavior of pipelines](https://nextflow.io/blog/2022/caching-behavior-analysis.html)
 
 #### Arquivos de entrada mudados
 
