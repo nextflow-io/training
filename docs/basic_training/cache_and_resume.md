@@ -204,7 +204,7 @@ Being able to resume workflows is a key feature of Nextflow, but it doesn't alwa
 
 !!! tip
 
-    To learn more details about the resume mechanism and how to troubleshoot please refer the following three blog posts:
+    To learn more details about the resume mechanism and how to troubleshoot please refer to the following three blog posts:
 
      1. [Demystifying Nextflow resume](https://www.nextflow.io/blog/2019/demystifying-nextflow-resume.html)
      2. [Troubleshooting Nextflow resume](https://www.nextflow.io/blog/2019/troubleshooting-nextflow-resume.html)
