@@ -200,11 +200,17 @@ Finally, the `-t` option enables the creation of a basic custom provenance repor
 
 ## Resume troubleshooting
 
+Being able to resume workflows is a key feature of Nextflow, but it doesn't always work as you expect. In this section we go through a few common reasons why Nextflow may be ignoring your cached results.
+
 !!! tip
 
-    To learn more details about the resume mechanism and how to troubleshoot please refer the following three blog posts (i) [Demystefying Nextflow resume](https://www.nextflow.io/blog/2019/demystifying-nextflow-resume.html), (ii) [Troubleshooting Nextflow resume](https://www.nextflow.io/blog/2019/troubleshooting-nextflow-resume.html) and (iii) [Analyzing caching behavior of pipelines](https://nextflow.io/blog/2022/caching-behavior-analysis.html)
+    To learn more details about the resume mechanism and how to troubleshoot please refer the following three blog posts:
     
-If your workflow execution is not resumed as expected with one or more tasks being unexpectedly re-executed each time, these may be the most likely causes:
+     1. [Demystefying Nextflow resume](https://www.nextflow.io/blog/2019/demystifying-nextflow-resume.html)
+     2. [Troubleshooting Nextflow resume](https://www.nextflow.io/blog/2019/troubleshooting-nextflow-resume.html)
+     3. [Analyzing caching behavior of pipelines](https://nextflow.io/blog/2022/caching-behavior-analysis.html)
+    
+
 
 #### Input file changed
 
