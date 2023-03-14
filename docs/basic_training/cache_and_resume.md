@@ -200,6 +200,10 @@ Finally, the `-t` option enables the creation of a basic custom provenance repor
 
 ## Resume troubleshooting
 
+!!! tip
+
+    To learn more details about the resume mechanism and how to troubleshoot please refer the following three blog posts (i) [Demystefying Nextflow resume](https://www.nextflow.io/blog/2019/demystifying-nextflow-resume.html), (ii) [Troubleshooting Nextflow resume](https://www.nextflow.io/blog/2019/troubleshooting-nextflow-resume.html) and (iii) [Analyzing caching behavior of pipelines](https://nextflow.io/blog/2022/caching-behavior-analysis.html)
+    
 If your workflow execution is not resumed as expected with one or more tasks being unexpectedly re-executed each time, these may be the most likely causes:
 
 #### Input file changed
