@@ -350,7 +350,7 @@ workflow {
 
 !!! exercise
 
-    Write a script that creates a channel containing all read files matching the pattern `data/ggal/*_1.fq` followed by a process that concatenates them into a single file and prints the first 20 lines.
+    Write a script that creates a channel containing all read files matching the pattern `data/ggal/*_1.fq` followed by a process that concatenates them into a single file and prints the first 10 lines.
 
 
     ??? solution
