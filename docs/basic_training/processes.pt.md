@@ -350,7 +350,7 @@ workflow {
 
 !!! exercise
 
-    Escreva um script que crie um canal contendo todos as leituras correspondentes ao padrão `data/ggal/*_1.fq` seguido por um processo que os concatene em um único arquivo e imprima as primeiras 20 linhas.
+    Escreva um script que crie um canal contendo todos as leituras correspondentes ao padrão `data/ggal/*_1.fq` seguido por um processo que os concatene em um único arquivo e imprima as primeiras 10 linhas.
 
 
     ??? solution
