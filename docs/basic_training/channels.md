@@ -666,26 +666,40 @@ See the following Nextflow script:
 ```groovy linenums="1"
 include{ parseJsonFile } from './modules/parsers.nf'
 
-process foo {
+process FOO {
   input:
-  tuple val(meta), path(data_file)
+    tuple val(patient_id), val(feature)
+  output:
+    stdout
 
   """
-  echo your_command $meta.region_id $data_file
+  echo $patient_id has $feature as feature
   """
 }
 
 workflow {
-  Channel.fromPath('data/meta/regions*.json') \
-    | flatMap { parseJsonFile(it) } \
-    | map { entry -> tuple(entry,"/some/data/${entry.patient_id}.txt") } \
-    | foo
+  Channel.fromPath('data/meta/regions*.json')
+    | flatMap { parseJsonFile(it) }
+    | map { record -> [record.patient_id, record.feature] }
+    | unique
+    | FOO
+    | view
 }
 ```
 
 For this script to work, a module file called `parsers.nf` needs to be created and stored in a modules folder in the current directory.
 
-The `parsers.nf` file should contain the `parseJsonFile` function.
+The `parsers.nf` file should contain the `parseJsonFile` function. For example:
+
+```groovy linenums="1"
+import groovy.json.JsonSlurper
+
+def parseJsonFile(json_file) {
+    def f = file('data/meta/regions.json')
+    def records = new JsonSlurper().parse(f)
+    return records
+}
+```
 
 Nextflow will use this as a custom function within the workflow scope.
 
