@@ -114,7 +114,7 @@ process CONVERTTOUPPER { // (11)!
 workflow { // (18)!
     letters_ch = SPLITLETTERS(greeting_ch) // (19)!
     results_ch = CONVERTTOUPPER(letters_ch.flatten()) // (20)!
-    results_ch.view{ it } // (21)!
+    results_ch.view { it } // (21)!
 } // (22)!
 ```
 

@@ -204,11 +204,11 @@ process FOO {
   path file
 
   script:
-  if( params.compress == 'gzip' )
+  if (params.compress == 'gzip')
     """
     gzip -c $file > ${file}.gz
     """
-  else if( params.compress == 'bzip2' )
+  else if (params.compress == 'bzip2')
     """
     bzip2 -c $file > ${file}.bz2
     """
@@ -245,7 +245,7 @@ input:
 The `val` qualifier allows you to receive data of any type as input. It can be accessed in the process script by using the specified input name, as shown in the following example:
 
 ```groovy linenums="1"
-num = Channel.of( 1, 2, 3 )
+num = Channel.of(1, 2, 3)
 
 process BASICEXAMPLE {
   debug true
@@ -281,7 +281,7 @@ process job 2
 The `path` qualifier allows the handling of file values in the process execution context. This means that Nextflow will stage it in the process execution directory, and it can be accessed in the script by using the name specified in the input declaration.
 
 ```groovy linenums="1"
-reads = Channel.fromPath( 'data/ggal/*.fq' )
+reads = Channel.fromPath('data/ggal/*.fq')
 
 process FOO {
   debug true
@@ -303,7 +303,7 @@ workflow {
 The input file name can also be defined using a variable reference as shown below:
 
 ```groovy linenums="1"
-reads = Channel.fromPath( 'data/ggal/*.fq' )
+reads = Channel.fromPath('data/ggal/*.fq')
 
 process FOO {
   debug true
@@ -325,7 +325,7 @@ workflow {
 The same syntax is also able to handle more than one input file in the same execution and only requires changing the channel composition.
 
 ```groovy linenums="1"
-reads = Channel.fromPath( 'data/ggal/*.fq' )
+reads = Channel.fromPath('data/ggal/*.fq')
 
 process FOO {
   debug true
@@ -359,7 +359,7 @@ workflow {
         params.reads = "$baseDir/data/ggal/*_1.fq"
 
         Channel
-          .fromPath( params.reads )
+          .fromPath(params.reads)
           .set { read_ch }
 
         process CONCATENATE {
@@ -497,7 +497,7 @@ This is because _value_ channels can be consumed multiple times and do not affec
         params.transcriptome_file = "$baseDir/data/ggal/transcriptome.fa"
 
         Channel
-            .fromPath( params.reads )
+            .fromPath(params.reads)
             .set { read_ch }
 
         process COMMAND {
@@ -562,7 +562,7 @@ In the above example, every time a file of sequences is received as an input by 
         methods= ['salmon', 'kallisto']
 
         Channel
-            .fromPath( params.reads )
+            .fromPath(params.reads)
             .set { read_ch }
 
         process COMMAND {
@@ -583,7 +583,7 @@ In the above example, every time a file of sequences is received as an input by 
         }
 
         workflow {
-          concat_ch = COMMAND(read_ch , params.transcriptome_file, methods)
+          concat_ch = COMMAND(read_ch, params.transcriptome_file, methods)
           concat_ch
               .view { "To run : ${it.text}" }
         }
@@ -597,7 +597,7 @@ Only one output block, that can contain one or more output declaration, can be d
 
 ```groovy linenums="1"
 output:
-  <output qualifier> <output name> , emit: <output channel>
+  <output qualifier> <output name>, emit: <output channel>
 ```
 
 ### Output values
@@ -729,7 +729,7 @@ process ALIGN {
 }
 
 workflow {
-  genomes = ALIGN( species_ch, sequences )
+  genomes = ALIGN(species_ch, sequences)
   genomes.view()
 }
 ```

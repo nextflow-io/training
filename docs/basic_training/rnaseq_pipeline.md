@@ -277,7 +277,7 @@ nextflow run script3.nf --reads 'data/ggal/*_{1,2}.fq'
 
         ```groovy
         Channel
-            .fromFilePairs( params.reads )
+            .fromFilePairs(params.reads)
             .set { read_pairs_ch }
         ```
 
@@ -289,7 +289,7 @@ nextflow run script3.nf --reads 'data/ggal/*_{1,2}.fq'
 
         ```groovy
         Channel
-            .fromFilePairs( params.reads, checkIfExists: true )
+            .fromFilePairs(params.reads, checkIfExists: true)
             .set { read_pairs_ch }
         ```
 

@@ -156,8 +156,8 @@ The `value` factory method is used to create a _value_ channel. An optional not 
 
 ```groovy linenums="1"
 ch1 = Channel.value() // (1)!
-ch2 = Channel.value( 'Hello there' ) // (2)!
-ch3 = Channel.value( [1,2,3,4,5] ) // (3)!
+ch2 = Channel.value('Hello there') // (2)!
+ch3 = Channel.value([1,2,3,4,5]) // (3)!
 ```
 
 1. Creates an _empty_ value channel
@@ -169,8 +169,8 @@ ch3 = Channel.value( [1,2,3,4,5] ) // (3)!
 The factory `Channel.of` allows the creation of a queue channel with the values specified as arguments.
 
 ```groovy linenums="1"
-ch = Channel.of( 1, 3, 5, 7 )
-ch.view{ "value: $it" }
+ch = Channel.of(1, 3, 5, 7)
+ch.view { "value: $it" }
 ```
 
 The first line in this example creates a variable `ch` which holds a channel object. This channel emits the values specified as a parameter in the `of` method. Thus the second line will print the following:
@@ -207,7 +207,7 @@ Channel
 The `fromPath` factory method creates a queue channel emitting one or more files matching the specified glob pattern.
 
 ```groovy linenums="1"
-Channel.fromPath( './data/meta/*.csv' )
+Channel.fromPath('./data/meta/*.csv')
 ```
 
 This example creates a channel and emits as many items as there are files with a `csv` extension in the `./data/meta` folder. Each element is a file object implementing the [Path](https://docs.oracle.com/javase/8/docs/api/java/nio/file/Paths.html) interface.
@@ -235,7 +235,7 @@ Learn more about the glob patterns syntax at [this link](https://docs.oracle.com
     ??? solution
 
         ```groovy linenums="1"
-        Channel.fromPath( './data/ggal/**.fq' , hidden:true)
+        Channel.fromPath('./data/ggal/**.fq', hidden: true)
           .view()
         ```
 
@@ -273,14 +273,14 @@ It will produce an output similar to the following:
 
 !!! exercise
 
-    Use the `fromFilePairs` method to create a channel emitting all pairs of fastq read in the `data/ggal/` directory and print them. Then use the `flat:true` option and compare the output with the previous execution.
+    Use the `fromFilePairs` method to create a channel emitting all pairs of fastq read in the `data/ggal/` directory and print them. Then use the `flat: true` option and compare the output with the previous execution.
 
     ??? solution
 
-        Use the following, with or without `flat:true`:
+        Use the following, with or without `flat: true`:
 
         ```groovy linenums="1"
-        Channel.fromFilePairs( './data/ggal/*_{1,2}.fq', flat:true)
+        Channel.fromFilePairs('./data/ggal/*_{1,2}.fq', flat: true)
           .view()
         ```
 
@@ -398,7 +398,7 @@ You can define the number of lines in each chunk by using the parameter `by`, as
 ```groovy linenums="1"
 Channel
   .fromPath('data/meta/random.txt')
-  .splitText( by: 2 )
+  .splitText(by: 2)
   .subscribe {
     print it;
     print "--- end of the chunk ---\n"
@@ -414,7 +414,7 @@ An optional closure can be specified in order to transform the text chunks produ
 ```groovy linenums="1"
 Channel
   .fromPath('data/meta/random.txt')
-  .splitText( by: 10 ) { it.toUpperCase() }
+  .splitText(by: 10) { it.toUpperCase() }
   .view()
 ```
 
@@ -435,7 +435,7 @@ Finally, you can also use the operator on plain files (outside of the channel co
 def f = file('data/meta/random.txt')
 def lines = f.splitText()
 def count=0
-for( String row : lines ) {
+for (String row : lines) {
   log.info "${count++} ${row.toUpperCase()}"
 }
 ```
@@ -471,7 +471,7 @@ Alternatively, you can provide custom header names by specifying a list of strin
 ```groovy linenums="1"
 Channel
   .fromPath("data/meta/patients_1.csv")
-  .splitCsv(header: ['col1', 'col2', 'col3', 'col4', 'col5'] )
+  .splitCsv(header: ['col1', 'col2', 'col3', 'col4', 'col5'])
   // row is a list object
   .view { row -> "${row.col1},${row.col4}" }
 ```
@@ -481,7 +481,7 @@ You can also process multiple CSV files at the same time:
 ```groovy linenums="1"
 Channel
   .fromPath("data/meta/patients_*.csv") // <-- just use a pattern
-  .splitCsv(header:true)
+  .splitCsv(header: true)
   .view { row -> "${row.patient_id}\t${row.num_samples}" }
 ```
 
@@ -494,7 +494,7 @@ Finally, you can also operate on CSV files outside the channel context:
 ```groovy linenums="1"
 def f = file('data/meta/patients_1.csv')
 def lines = f.splitCsv()
-for( List row : lines ) {
+for (List row : lines) {
   log.info "${row[0]} -- ${row[2]}"
 }
 ```
@@ -515,7 +515,7 @@ for( List row : lines ) {
 
         ```groovy linenums="1"
         Channel
-          .fromFilePairs( params.reads, checkIfExists: true )
+          .fromFilePairs(params.reads, checkIfExists: true)
           .set { read_pairs_ch }
         ```
 
@@ -612,9 +612,9 @@ Channel
 
         ```groovy linenums="1"
         Channel
-          .fromPath("data/meta/regions.tsv", checkIfExists:true)
+          .fromPath("data/meta/regions.tsv", checkIfExists: true)
           // use `sep` option to parse TAB separated files
-          .splitCsv(sep:'\t', header:true )
+          .splitCsv(sep:'\t', header: true)
           // row is a list object
           .view { row -> "${row.patient_id}" }
         ```
@@ -632,7 +632,7 @@ def f = file('data/meta/regions.json')
 def records = new JsonSlurper().parse(f)
 
 
-for( def entry : records ) {
+for (def entry : records) {
   log.info "$entry.patient_id -- $entry.feature"
 }
 ```
@@ -652,7 +652,7 @@ def f = file('data/meta/regions.yml')
 def records = new Yaml().load(f)
 
 
-for( def entry : records ) {
+for (def entry : records) {
   log.info "$entry.patient_id -- $entry.feature"
 }
 ```
