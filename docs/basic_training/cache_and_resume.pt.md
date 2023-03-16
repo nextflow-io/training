@@ -261,7 +261,7 @@ Embora a ordem de elementos em canais dataflow seja garantida – os dados são 
 Em termos práticos, considere o trecho a seguir:
 
 ```groovy linenums="1"
-process foo {
+process FOO {
   input:
     val x
   output:
@@ -274,7 +274,7 @@ process foo {
 }
 
 workflow {
-   channel.of('A','B','C','D') | foo | view
+   channel.of('A','B','C','D') | FOO | view
 }
 ```
 

@@ -114,7 +114,7 @@ process CONVERTTOUPPER { // (11)!
 workflow { // (18)!
     letters_ch = SPLITLETTERS(greeting_ch) // (19)!
     results_ch = CONVERTTOUPPER(letters_ch.flatten()) // (20)!
-    results_ch.view{ it } // (21)!
+    results_ch.view { it } // (21)!
 } // (22)!
 ```
 
@@ -186,7 +186,7 @@ A saída padrão mostra (linha por linha):
 
     O segundo processo é executado duas vezes, em dois diretórios de trabalho diferentes para cada arquivo de entrada. A saída de log [ANSI](https://en.wikipedia.org/wiki/ANSI_escape_code) do Nextflow é atualizada dinamicamente conforme o pipeline é executado; no exemplo anterior, o diretório de trabalho `[1a/3c54ed]` é o segundo dos dois diretórios que foram processados (sobrescrevendo o log com o primeiro). Para imprimir para a tela todos os caminhos relevantes, desative a saída de log ANSI usando o sinalizador `-ansi-log` (por exemplo, `nextflow run hello.nf -ansi-log false`).
 
-Vale ressaltar que o processo `CONVERTTOUPPER` é executado em paralelo, portanto não há garantia de que a instância que processa a primeira divisão (o bloco _Hello_ ) será executada antes daquela que processa a segundo divisão (o bloco _world!_).
+Vale ressaltar que o processo `CONVERTTOUPPER` é executado em paralelo, portanto não há garantia de que a instância que processa a primeira divisão (o bloco _Hello_) será executada antes daquela que processa a segundo divisão (o bloco _world!_).
 
 Assim, pode ser que seu resultado final seja impresso em uma ordem diferente:
 

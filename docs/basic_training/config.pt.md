@@ -129,15 +129,15 @@ env.BETA = "$HOME/algum/caminho"
 Salve o trecho acima como um arquivo chamado `meu-env.config`. Em seguida, salve o trecho abaixo em um arquivo chamado `foo.nf`:
 
 ```groovy linenums="1"
-process foo {
-  echo true
+process FOO {
+  debug true
   '''
   env | egrep 'ALFA|BETA'
   '''
 }
 
 workflow {
-    foo()
+    FOO()
 }
 ```
 
@@ -192,7 +192,7 @@ A sintaxe para definir as diretivas de processo no arquivo de configuração req
 ??? example
 
     ```groovy linenums="1"
-    process foo {
+    process FOO {
         cpus 4
         memory 2.GB
         time 1.hour
@@ -208,7 +208,7 @@ A sintaxe para definir as diretivas de processo no arquivo de configuração req
 Isso é especialmente importante quando você deseja criar uma definição de configuração usando uma expressão dinâmica com uma clausura. Por exemplo, em um arquivo de fluxo de trabalho:
 
 ```groovy linenums="1"
-process foo {
+process FOO {
     memory { 4.GB * task.cpus }
 }
 ```

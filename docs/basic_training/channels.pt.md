@@ -156,8 +156,8 @@ A fábrica de canal `value` é utilizada para criar um canal de _valor_. Um argu
 
 ```groovy linenums="1"
 canal1 = Channel.value() // (1)!
-canal2 = Channel.value( 'Olá, você!' ) // (2)!
-canal3 = Channel.value( [1,2,3,4,5] ) // (3)!
+canal2 = Channel.value('Olá, você!') // (2)!
+canal3 = Channel.value([1,2,3,4,5]) // (3)!
 ```
 
 1. Cria um canal de valor _vazio_
@@ -169,8 +169,8 @@ canal3 = Channel.value( [1,2,3,4,5] ) // (3)!
 A fábrica `Channel.of` permite a criação de um canal de fila com os valores especificados como argumentos.
 
 ```groovy linenums="1"
-canal = Channel.of( 1, 3, 5, 7 )
-canal.view{ "numero: $it" }
+canal = Channel.of(1, 3, 5, 7)
+canal.view { "numero: $it" }
 ```
 
 A primeira linha neste exemplo cria uma variável `canal` que contém um objeto de canal. Este canal emite os valores especificados como parâmetro no método `of`. Assim, a segunda linha imprimirá o seguinte:
@@ -207,7 +207,7 @@ Channel
 A fábrica `fromPath` cria um canal de fila emitindo um ou mais arquivos correspondentes ao padrão glob especificado.
 
 ```groovy linenums="1"
-Channel.fromPath( './data/meta/*.csv' )
+Channel.fromPath('./data/meta/*.csv')
 ```
 
 Este exemplo cria um canal e emite tantos itens quanto arquivos com extensão `csv` existirem na pasta `./data/meta`. Cada elemento é um objeto de arquivo implementando a interface [Path](https://docs.oracle.com/javase/8/docs/api/java/nio/file/Paths.html) do Java.
@@ -235,7 +235,7 @@ Saiba mais sobre a sintaxe dos padrões glob [neste link](https://docs.oracle.co
     ??? solution
 
         ```groovy linenums="1"
-        Channel.fromPath( './data/ggal/**.fq' , hidden:true)
+        Channel.fromPath('./data/ggal/**.fq', hidden: true)
           .view()
         ```
 
@@ -273,14 +273,14 @@ Ele produzirá uma saída semelhante à seguinte:
 
 !!! exercise
 
-    Use o método `fromFilePairs` para criar um canal emitindo todos os pares de leituras em fastq no diretório `data/ggal/` e imprima-os. Em seguida, use a opção `flat:true` e compare a saída com a execução anterior.
+    Use o método `fromFilePairs` para criar um canal emitindo todos os pares de leituras em fastq no diretório `data/ggal/` e imprima-os. Em seguida, use a opção `flat: true` e compare a saída com a execução anterior.
 
     ??? solution
 
-        Use o seguinte, com ou sem `flat:true`:
+        Use o seguinte, com ou sem `flat: true`:
 
         ```groovy linenums="1"
-        Channel.fromFilePairs( './data/ggal/*_{1,2}.fq', flat:true)
+        Channel.fromFilePairs('./data/ggal/*_{1,2}.fq', flat: true)
           .view()
         ```
 
@@ -357,7 +357,7 @@ params.ncbi_chave_api = '<Sua chave de API aqui>'
 
 params.accession = ['ERR908507', 'ERR908506']
 
-process fastqc {
+process FASTQC {
   input:
   tuple val(id_amostra), path(arquivo_de_leituras)
 
@@ -373,7 +373,7 @@ process fastqc {
 
 workflow {
   leituras = Channel.fromSRA(params.accession, apiKey: params.ncbi_chave_api)
-  fastqc(leituras)
+  FASTQC(leituras)
 }
 ```
 
@@ -399,7 +399,7 @@ Você pode definir o número de linhas em cada bloco usando o parâmetro `by`, c
 ```groovy linenums="1"
 Channel
   .fromPath('data/meta/random.txt')
-  .splitText( by: 2 )
+  .splitText(by: 2)
   .subscribe {
     print it;
     print "--- fim do bloco ---\n"
@@ -415,7 +415,7 @@ Uma clausura opcional pode ser especificada para transformar os blocos de texto 
 ```groovy linenums="1"
 Channel
   .fromPath('data/meta/random.txt')
-  .splitText( by: 10 ) { it.toUpperCase() }
+  .splitText(by: 10) { it.toUpperCase() }
   .view()
 ```
 
@@ -436,7 +436,7 @@ Por fim, você também pode usar o operador em arquivos simples (fora do context
 def f = file('data/meta/random.txt')
 def linhas = f.splitText()
 def contador=0
-for( String linha : linhas ) {
+for (String linha : linhas) {
   log.info "${contador++} ${linha.toUpperCase()}"
 }
 ```
@@ -472,7 +472,7 @@ Como alternativa, você pode fornecer nomes de cabeçalho personalizados especif
 ```groovy linenums="1"
 Channel
   .fromPath("data/meta/patients_1.csv")
-  .splitCsv(header: ['col1', 'col2', 'col3', 'col4', 'col5'] )
+  .splitCsv(header: ['col1', 'col2', 'col3', 'col4', 'col5'])
   // linha é um objeto de lista
   .view { linha -> "${linha.col1},${linha.col4}" }
 ```
@@ -482,7 +482,7 @@ Você também pode processar vários arquivos CSV ao mesmo tempo:
 ```groovy linenums="1"
 Channel
   .fromPath("data/meta/patients_*.csv") // <-- use um padrão de captura
-  .splitCsv(header:true)
+  .splitCsv(header: true)
   .view { linha -> "${linha.patient_id}\t${linha.num_samples}" }
 ```
 
@@ -495,7 +495,7 @@ Por fim, você também pode operar em arquivos CSV fora do contexto do canal:
 ```groovy linenums="1"
 def f = file('data/meta/patients_1.csv')
 def linhas = f.splitCsv()
-for( List linha : linhas ) {
+for (List linha : linhas) {
   log.info "${linha[0]} -- ${linha[2]}"
 }
 ```
@@ -516,7 +516,7 @@ for( List linha : linhas ) {
 
         ```groovy linenums="1"
         Channel
-          .fromFilePairs( params.reads, checkIfExists: true )
+          .fromFilePairs(params.reads, checkIfExists: true)
           .set { read_pairs_ch }
         ```
 
@@ -598,7 +598,7 @@ A análise de arquivos TSV funciona de maneira semelhante, basta adicionar a op�
 
 ```groovy linenums="1"
 Channel
-  .fromPath("data/meta/regions.tsv", checkIfExists:true)
+  .fromPath("data/meta/regions.tsv", checkIfExists: true)
   // Use a opção `sep` para analisar arquivos com tabulação como separador
   .splitCsv(sep:'\t')
   .view()
@@ -613,9 +613,9 @@ Channel
 
         ```groovy linenums="1"
         Channel
-          .fromPath("data/meta/regions.tsv", checkIfExists:true)
+          .fromPath("data/meta/regions.tsv", checkIfExists: true)
           // Use a opção `sep` para analisar arquivos com tabulação como separador
-          .splitCsv(sep:'\t', header:true )
+          .splitCsv(sep:'\t', header: true)
           // linha é um objeto de lista
           .view { linha -> "${linha.patient_id}" }
         ```
@@ -633,7 +633,7 @@ def f = file('data/meta/regions.json')
 def registros = new JsonSlurper().parse(f)
 
 
-for( def entrada : registros ) {
+for (def entrada : registros) {
   log.info "$entrada.patient_id -- $entrada.feature"
 }
 ```
@@ -653,7 +653,7 @@ def f = file('data/meta/regions.yml')
 def registros = new Yaml().load(f)
 
 
-for( def entrada : registros ) {
+for (def entrada : registros) {
   log.info "$entrada.patient_id -- $entrada.feature"
 }
 ```
@@ -667,7 +667,7 @@ Veja o seguinte script Nextflow:
 ```groovy linenums="1"
 include{ parseJsonFile } from './modules/parsers.nf'
 
-process foo {
+process FOO {
   input:
   tuple val(meta), path(arquivo_de_dados)
 
@@ -680,7 +680,7 @@ workflow {
   Channel.fromPath('data/meta/regions*.json') \
     | flatMap { parseJsonFile(it) } \
     | map { entrada -> tuple(entrada,"/algum/dado/${entrada.patient_id}.txt") } \
-    | foo
+    | FOO
 }
 ```
 

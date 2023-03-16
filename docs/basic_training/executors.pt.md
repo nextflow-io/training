@@ -136,7 +136,7 @@ Uma melhor estratégia consiste em anotar os processos com uma diretiva de [rót
 O script do fluxo de trabalho:
 
 ```groovy linenums="1"
-process tarefa1 {
+process TAREFA1 {
   label 'longo'
 
   """
@@ -144,7 +144,7 @@ process tarefa1 {
   """
 }
 
-process tarefa2 {
+process TAREFA2 {
   label 'curto'
 
   """

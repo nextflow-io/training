@@ -204,11 +204,11 @@ process FOO {
   path arquivo
 
   script:
-  if( params.compressor == 'gzip' )
+  if (params.compressor == 'gzip')
     """
     gzip -c $arquivo > ${arquivo}.gz
     """
-  else if( params.compressor == 'bzip2' )
+  else if (params.compressor == 'bzip2')
     """
     bzip2 -c $arquivo > ${arquivo}.bz2
     """
@@ -245,7 +245,7 @@ input:
 O qualificador `val` permite receber dados de qualquer tipo como entrada. Ele pode ser acessado no script do processo usando o nome de entrada especificado, conforme mostrado no exemplo a seguir:
 
 ```groovy linenums="1"
-num = Channel.of( 1, 2, 3 )
+num = Channel.of(1, 2, 3)
 
 process EXEMPLOBASICO {
   debug true
@@ -281,7 +281,7 @@ tarefa 2 do processo
 O qualificador `path` permite a manipulação de arquivos no contexto de execução do processo. Isso significa que o Nextflow irá mover os arquivos necessários para o diretório de execução do processo e estes poderão ser acessados no script usando o nome especificado na declaração de entrada.
 
 ```groovy linenums="1"
-leituras = Channel.fromPath( 'data/ggal/*.fq' )
+leituras = Channel.fromPath('data/ggal/*.fq')
 
 process FOO {
   debug true
@@ -303,7 +303,7 @@ workflow {
 O nome do arquivo de entrada também pode ser definido usando uma referência de variável conforme mostrado abaixo:
 
 ```groovy linenums="1"
-leituras = Channel.fromPath( 'data/ggal/*.fq' )
+leituras = Channel.fromPath('data/ggal/*.fq')
 
 process FOO {
   debug true
@@ -325,7 +325,7 @@ workflow {
 A mesma sintaxe também é capaz de lidar com mais de um arquivo de entrada na mesma execução e requer apenas a alteração da composição do canal.
 
 ```groovy linenums="1"
-leituras = Channel.fromPath( 'data/ggal/*.fq' )
+leituras = Channel.fromPath('data/ggal/*.fq')
 
 process FOO {
   debug true
@@ -359,7 +359,7 @@ workflow {
         params.leituras = "$baseDir/data/ggal/*_1.fq"
 
         Channel
-          .fromPath( params.leituras )
+          .fromPath(params.leituras)
           .set { canal_leituras }
 
         process CONCATENE {
@@ -497,7 +497,7 @@ Isso ocorre porque os canais de valor podem ser consumidos várias vezes e não 
         params.arquivo_transcriptoma = "$baseDir/data/ggal/transcriptome.fa"
 
         Channel
-            .fromPath( params.leituras )
+            .fromPath(params.leituras)
             .set { canal_leituras }
 
         process COMANDO {
@@ -562,7 +562,7 @@ No exemplo acima, toda vez que um arquivo de sequências é recebido como entrad
         metodos= ['salmon', 'kallisto']
 
         Channel
-            .fromPath( params.leituras )
+            .fromPath(params.leituras)
             .set { canal_leituras }
 
         process COMANDO {
@@ -583,7 +583,7 @@ No exemplo acima, toda vez que um arquivo de sequências é recebido como entrad
         }
 
         workflow {
-          canal_concatenado = COMANDO(canal_leituras , params.arquivo_transcriptoma, metodos)
+          canal_concatenado = COMANDO(canal_leituras, params.arquivo_transcriptoma, metodos)
           canal_concatenado
               .view { "Para executar : ${it.text}" }
         }
@@ -597,7 +597,7 @@ Apenas um bloco de saída, que pode conter uma ou mais declarações de saída, 
 
 ```groovy linenums="1"
 output:
-  <qualificador da variável de saída> <nome da variável de saída> , emit: <nome do canal de saída>
+  <qualificador da variável de saída> <nome da variável de saída>, emit: <nome do canal de saída>
 ```
 
 ### Valores de saída
@@ -729,7 +729,7 @@ process ALINHAR {
 }
 
 workflow {
-  genomas = ALINHAR( canal_especies, sequencias )
+  genomas = ALINHAR(canal_especies, sequencias)
   genomas.view()
 }
 ```

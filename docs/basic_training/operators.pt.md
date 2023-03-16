@@ -87,7 +87,7 @@ de _mapeamento_ e é expressa com uma _clausura_, como demonstrado no exemplo ab
 
 ```groovy linenums="1"
 Channel
-    .of( 'olá', 'mundo' )
+    .of('olá', 'mundo')
     .map { it -> it.reverse() }
     .view()
 ```
@@ -97,7 +97,7 @@ tipo de dado.
 
 ```groovy linenums="1"
 Channel
-    .of( 'olá', 'mundo' )
+    .of('olá', 'mundo')
     .map { palavra -> [palavra, palavra.size()] }
     .view { palavra, comprimento -> "$palavra contém $comprimento letras" }
 ```
@@ -120,9 +120,9 @@ Channel
 O operador `mix` combina os itens emitidos por dois (ou mais) canais em um único canal.
 
 ```groovy linenums="1"
-c1 = Channel.of( 1,2,3 )
-c2 = Channel.of( 'a','b' )
-c3 = Channel.of( 'z' )
+c1 = Channel.of(1,2,3)
+c2 = Channel.of('a','b')
+c3 = Channel.of('z')
 
 c1 .mix(c2,c3).view()
 ```
@@ -169,7 +169,7 @@ O operador `collect` coleta todos os itens emitidos por um canal em uma lista e 
 
 ```groovy linenums="1"
 Channel
-    .of( 1, 2, 3, 4 )
+    .of(1, 2, 3, 4)
     .collect()
     .view()
 ```
@@ -192,7 +192,7 @@ Por exemplo:
 
 ```groovy linenums="1"
 Channel
-    .of( [1,'A'], [1,'B'], [2,'C'], [3, 'B'], [1,'C'], [2, 'A'], [3, 'D'] )
+    .of([1,'A'], [1,'B'], [2,'C'], [3, 'B'], [1,'C'], [2, 'A'], [3, 'D'])
     .groupTuple()
     .view()
 ```

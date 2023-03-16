@@ -121,15 +121,15 @@ assert [1,2,3,1] - [1] == [2,3]
 assert [1,2,3] * 2 == [1,2,3,1,2,3]
 assert [1,[2,3]].flatten() == [1,2,3]
 assert [1,2,3].reverse() == [3,2,1]
-assert [1,2,3].collect{ it+3 } == [4,5,6]
+assert [1,2,3].collect { it+3 } == [4,5,6]
 assert [1,2,3,1].unique().size() == 3
 assert [1,2,3,1].count(1) == 2
 assert [1,2,3,4].min() == 1
 assert [1,2,3,4].max() == 4
 assert [1,2,3,4].sum() == 10
 assert [4,2,1,3].sort() == [1,2,3,4]
-assert [4,2,1,3].find{it%2 == 0} == 4
-assert [4,2,1,3].findAll{it%2 == 0} == [4,2]
+assert [4,2,1,3].find { it%2 == 0 } == 4
+assert [4,2,1,3].findAll { it%2 == 0 } == [4,2]
 ```
 
 ## Mapas
@@ -243,7 +243,7 @@ println texto
 A instrução `if` usa a mesma sintaxe comum em outras linguagens de programação, como Java, C, JavaScript, etc.
 
 ```groovy linenums="1"
-if( < expressão booleana > ) {
+if (< expressão booleana >) {
     // ramo verdadeiro
 }
 else {
@@ -255,7 +255,7 @@ O ramo `else` é opcional. Além disso, as chaves são opcionais quando a ramifi
 
 ```groovy linenums="1"
 x = 1
-if( x > 10 )
+if (x > 10)
     println 'Olá'
 ```
 
@@ -267,7 +267,7 @@ if( x > 10 )
 
     ```groovy linenums="1"
     lista = [1,2,3]
-    if( lista != null && lista.size() > 0 ) {
+    if (lista != null && lista.size() > 0) {
         println lista
     }
     else {
@@ -279,7 +279,7 @@ if( x > 10 )
 
     ```groovy linenums="1"
     lista = [1,2,3]
-    if( lista )
+    if (lista)
         println lista
     else
         println 'A lista está vazia'
@@ -316,7 +316,7 @@ A iteração sobre objetos de lista também é possível usando a sintaxe abaixo
 ```groovy linenums="1"
 list = ['a','b','c']
 
-for( String elem : lista ) {
+for (String elem : lista) {
     println elem
 }
 ```
@@ -336,7 +336,7 @@ assert fib(10)==89
 Uma função pode receber vários argumentos, separando-os com uma vírgula. A palavra-chave `return` pode ser omitida e a função retorna implicitamente o valor da última expressão avaliada. Além disso, tipos explícitos podem ser omitidos, embora não sejam recomendados:
 
 ```groovy linenums="1"
-def fact( n ) {
+def fact(n) {
     n > 1 ? n * fact(n-1) : 1
 }
 
@@ -405,7 +405,7 @@ Para um exemplo mostrando esses dois recursos, consulte o seguinte trecho de có
 
 ```groovy linenums="1"
 resultado = 0 // (1)!
-valores = ["China": 1 , "India" : 2, "USA" : 3] // (2)!
+valores = ["China": 1, "India" : 2, "USA" : 3] // (2)!
 valores.keySet().each { resultado += valores[it] } // (3)!
 println resultado
 ```
