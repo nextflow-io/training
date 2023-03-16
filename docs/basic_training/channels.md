@@ -356,7 +356,7 @@ params.ncbi_api_key = '<Your API key here>'
 
 params.accession = ['ERR908507', 'ERR908506']
 
-process fastqc {
+process FASTQC {
   input:
   tuple val(sample_id), path(reads_file)
 
@@ -372,7 +372,7 @@ process fastqc {
 
 workflow {
   reads = Channel.fromSRA(params.accession, apiKey: params.ncbi_api_key)
-  fastqc(reads)
+  FASTQC(reads)
 }
 ```
 

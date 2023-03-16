@@ -137,7 +137,7 @@ A better strategy consists of annotating the processes with a [label](https://ww
 The workflow script:
 
 ```groovy linenums="1"
-process task1 {
+process TASK1 {
   label 'long'
 
   """
@@ -145,7 +145,7 @@ process task1 {
   """
 }
 
-process task2 {
+process TASK2 {
   label 'short'
 
   """

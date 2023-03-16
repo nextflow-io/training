@@ -262,7 +262,7 @@ While dataflow channel ordering is guaranteed – data is read in the same order
 In practical terms, consider the following snippet:
 
 ```groovy linenums="1"
-process foo {
+process FOO {
   input:
     val x
   output:
@@ -275,7 +275,7 @@ process foo {
 }
 
 workflow {
-   channel.of('A','B','C','D') | foo | view
+   channel.of('A','B','C','D') | FOO | view
 }
 ```
 

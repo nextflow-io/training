@@ -129,15 +129,15 @@ env.BETA = "$HOME/some/path"
 Save the above snippet as a file named `my-env.config`. Then save the snippet below in a file named `foo.nf`:
 
 ```groovy linenums="1"
-process foo {
-  echo true
+process FOO {
+  debug true
   '''
   env | egrep 'ALPHA|BETA'
   '''
 }
 
 workflow {
-    foo()
+    FOO()
 }
 ```
 
@@ -192,7 +192,7 @@ The syntax for setting `process` directives in the configuration file requires `
 ??? example
 
     ```groovy linenums="1"
-    process foo {
+    process FOO {
         cpus 4
         memory 2.GB
         time 1.hour
@@ -208,7 +208,7 @@ The syntax for setting `process` directives in the configuration file requires `
 This is especially important when you want to define a config setting using a dynamic expression using a closure. For example, in a workflow script:
 
 ```groovy linenums="1"
-process foo {
+process FOO {
     memory { 4.GB * task.cpus }
 }
 ```
@@ -217,7 +217,7 @@ And the equivalent in the configuration file, if you choose to set it there:
 
 ```groovy linenums="1"
 process {
-  withName:foo {
+  withName:FOO {
     memory = { 4.GB * task.cpus }
   }
 }
