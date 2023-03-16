@@ -108,6 +108,10 @@ markdown_extensions:
           permalink: true
 plugins:
     - search
+        lang: 
+            - en
+            - pt
+            - es
     - social:
           cards: !ENV [CARDS, true]
           cards_color:
