@@ -23,7 +23,7 @@ There are seven main groups of operators are described in greater detail within 
     Click the :material-plus-circle: icons in the code for explanations.
 
 ```groovy linenums="1"
-nums = Channel.of(1,2,3,4) // (1)!
+nums = Channel.of(1, 2, 3, 4) // (1)!
 square = nums.map { it -> it * it } // (2)!
 square.view() // (3)!
 ```
@@ -40,7 +40,7 @@ Operators can also be chained to implement custom behaviors, so the previous sni
 
 ```groovy linenums="1"
 Channel
-    .of(1,2,3,4)
+    .of(1, 2, 3, 4)
     .map { it -> it * it }
     .view()
 ```
@@ -108,7 +108,7 @@ Channel
         ```groovy linenums="1"
         Channel
             .fromPath('data/ggal/*.fq')
-            .map { file -> [ file.name, file ] }
+            .map { file -> [file.name, file] }
             .view { name, file -> "> $name : $file" }
         ```
 
@@ -117,8 +117,8 @@ Channel
 The `mix` operator combines the items emitted by two (or more) channels into a single channel.
 
 ```groovy linenums="1"
-c1 = Channel.of(1,2,3)
-c2 = Channel.of('a','b')
+c1 = Channel.of(1, 2, 3)
+c2 = Channel.of('a', 'b')
 c3 = Channel.of('z')
 
 c1.mix(c2,c3).view()
@@ -142,8 +142,8 @@ z
 The `flatten` operator transforms a channel in such a way that every _tuple_ is flattened so that each entry is emitted as a sole element by the resulting channel.
 
 ```groovy linenums="1"
-foo = [1,2,3]
-bar = [4,5,6]
+foo = [1, 2, 3]
+bar = [4, 5, 6]
 
 Channel
     .of(foo, bar)
@@ -174,7 +174,7 @@ Channel
 It prints a single value:
 
 ```console title="Output"
-[1,2,3,4]
+[1, 2, 3, 4]
 ```
 
 !!! info
@@ -243,7 +243,7 @@ The selection criterion is defined by specifying a closure that provides one or 
 
 ```groovy linenums="1"
 Channel
-    .of(1,2,3,40,50)
+    .of(1, 2, 3, 40, 50)
     .branch {
         small: it < 10
         large: it > 10

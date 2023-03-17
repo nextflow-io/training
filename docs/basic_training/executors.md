@@ -205,7 +205,6 @@ Configuration profiles are defined by using the special scope `profiles` which g
 
 ```groovy linenums="1"
 profiles {
-
     standard {
         params.genome = '/local/path/ref.fasta'
         process.executor = 'local'

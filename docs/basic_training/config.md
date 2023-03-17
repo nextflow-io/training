@@ -236,8 +236,8 @@ Finally, directives that are to be repeated in the process definition, in the co
 
 ```groovy linenums="1"
 process {
-    pod = [ [env: 'FOO', value: '123'],
-            [env: 'BAR', value: '456'] ]
+    pod = [[env: 'FOO', value: '123'],
+            [env: 'BAR', value: '456']]
 }
 ```
 

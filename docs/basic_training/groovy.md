@@ -74,7 +74,7 @@ The `def` should be always used when defining variables local to a function or a
 A List object can be defined by placing the list items in square brackets:
 
 ```groovy linenums="1"
-list = [10,20,30,40]
+list = [10, 20, 30, 40]
 ```
 
 You can access a given item in the list with square-bracket notation (indexes start at `0`) or using the `get` method:
@@ -103,7 +103,7 @@ assert list[0] == 10
 Lists can also be indexed with negative indexes and reversed ranges.
 
 ```groovy linenums="1"
-list = [0,1,2]
+list = [0, 1, 2]
 assert list[-1] == 2
 assert list[-1..0] == list.reverse()
 ```
@@ -115,21 +115,21 @@ assert list[-1..0] == list.reverse()
 List objects implement all methods provided by the [java.util.List](https://docs.oracle.com/javase/8/docs/api/java/util/List.html) interface, plus the extension methods provided by [Groovy](http://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/List.html).
 
 ```groovy linenums="1"
-assert [1,2,3] << 1 == [1,2,3,1]
-assert [1,2,3] + [1] == [1,2,3,1]
-assert [1,2,3,1] - [1] == [2,3]
-assert [1,2,3] * 2 == [1,2,3,1,2,3]
-assert [1,[2,3]].flatten() == [1,2,3]
-assert [1,2,3].reverse() == [3,2,1]
-assert [1,2,3].collect { it+3 } == [4,5,6]
-assert [1,2,3,1].unique().size() == 3
-assert [1,2,3,1].count(1) == 2
-assert [1,2,3,4].min() == 1
-assert [1,2,3,4].max() == 4
-assert [1,2,3,4].sum() == 10
-assert [4,2,1,3].sort() == [1,2,3,4]
-assert [4,2,1,3].find { it%2 == 0 } == 4
-assert [4,2,1,3].findAll { it%2 == 0 } == [4,2]
+assert [1, 2, 3] << 1 == [1, 2, 3, 1]
+assert [1, 2, 3] + [1] == [1, 2, 3, 1]
+assert [1, 2, 3, 1] - [1] == [2, 3]
+assert [1, 2, 3] * 2 == [1, 2, 3, 1, 2, 3]
+assert [1, [2, 3]].flatten() == [1, 2, 3]
+assert [1, 2, 3].reverse() == [3, 2, 1]
+assert [1, 2, 3].collect { it + 3 } == [4, 5, 6]
+assert [1, 2, 3, 1].unique().size() == 3
+assert [1, 2, 3, 1].count(1) == 2
+assert [1, 2, 3, 4].min() == 1
+assert [1, 2, 3, 4].max() == 4
+assert [1, 2, 3, 4].sum() == 10
+assert [4, 2, 1, 3].sort() == [1, 2, 3, 4]
+assert [4, 2, 1, 3].find { it % 2 == 0 } == 4
+assert [4, 2, 1, 3].findAll { it % 2 == 0 } == [4, 2]
 ```
 
 ## Maps
@@ -266,7 +266,7 @@ if (x > 10)
     Therefore a statement like:
 
     ```groovy linenums="1"
-    list = [1,2,3]
+    list = [1, 2, 3]
     if (list != null && list.size() > 0) {
         println list
     }
@@ -278,7 +278,7 @@ if (x > 10)
     Can be written as:
 
     ```groovy linenums="1"
-    list = [1,2,3]
+    list = [1, 2, 3]
     if (list)
         println list
     else
@@ -314,7 +314,7 @@ for (int i = 0; i <3; i++) {
 Iteration over list objects is also possible using the syntax below:
 
 ```groovy linenums="1"
-list = ['a','b','c']
+list = ['a', 'b', 'c']
 
 for (String elem : list) {
     println elem
@@ -365,12 +365,12 @@ assert square(9) == 81
 As is, this may not seem interesting, but we can now pass the `square` function as an argument to other functions or methods. Some built-in functions take a function like this as an argument. One example is the `collect` method on lists:
 
 ```groovy linenums="1"
-x = [ 1, 2, 3, 4 ].collect(square)
+x = [1, 2, 3, 4].collect(square)
 println x
 ```
 
 ```console title="Output"
-[ 1, 4, 9, 16 ]
+[1, 4, 9, 16]
 ```
 
 By default, closures take a single parameter called `it`. To give it a different name use the `->` syntax. For example:
@@ -385,7 +385,7 @@ For example, when the method `each()` is applied to a map it can take a closure 
 
 ```groovy linenums="1"
 printMap = { a, b -> println "$a with value $b" }
-values = [ "Yue" : "Wu", "Mark" : "Williams", "Sudha" : "Kumari" ]
+values = ["Yue": "Wu", "Mark": "Williams", "Sudha": "Kumari"]
 values.each(printMap)
 ```
 
@@ -405,7 +405,7 @@ As an example showing both these features, see the following code fragment:
 
 ```groovy linenums="1"
 result = 0 // (1)!
-values = ["China": 1, "India" : 2, "USA" : 3] // (2)!
+values = ["China": 1, "India": 2, "USA": 3] // (2)!
 values.keySet().each { result += values[it] } // (3)!
 println result
 ```

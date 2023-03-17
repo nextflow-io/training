@@ -546,7 +546,7 @@ Contrary to other registries that will pull the latest image when no tag (versio
         process QUANTIFICATION {
             tag "Salmon on $sample_id"
             container 'quay.io/biocontainers/salmon:1.7.0--h84f40af_0'
-            publishDir params.outdir, mode:'copy'
+            publishDir params.outdir, mode: 'copy'
         ...
         ```
 

@@ -229,13 +229,13 @@ For example:
 
 ```groovy linenums="1"
 Channel
-    .of(1,2,3)
-    .map { it -> X=it; X+=2 }
+    .of(1, 2, 3)
+    .map { it -> X = it; X += 2 }
     .view { "ch1 = $it" }
 
 Channel
-    .of(1,2,3)
-    .map { it -> X=it; X*=2 }
+    .of(1, 2, 3)
+    .map { it -> X = it; X *= 2 }
     .view { "ch2 = $it" }
 ```
 
@@ -245,13 +245,13 @@ The correct implementation requires the use of the `def` keyword to declare the 
 
 ```groovy linenums="1"
 Channel
-    .of(1,2,3)
-    .map { it -> def X=it; X+=2 }
+    .of(1, 2, 3)
+    .map { it -> def X = it; X += 2 }
     .println { "ch1 = $it" }
 
 Channel
-    .of(1,2,3)
-    .map { it -> def X=it; X*=2 }
+    .of(1, 2, 3)
+    .map { it -> def X = it; X *= 2 }
     .println { "ch2 = $it" }
 ```
 
@@ -276,7 +276,7 @@ process FOO {
 }
 
 workflow {
-    channel.of('A','B','C','D') | FOO | view
+    channel.of('A', 'B', 'C', 'D') | FOO | view
 }
 ```
 
