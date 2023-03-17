@@ -107,11 +107,6 @@ markdown_extensions:
           title: On this page
           permalink: true
 plugins:
-    - search
-        lang: 
-            - en
-            - pt
-            - es
     - social:
           cards: !ENV [CARDS, true]
           cards_color:
@@ -138,3 +133,4 @@ plugins:
               es:
                   name: Español
                   build: true
+    - search
