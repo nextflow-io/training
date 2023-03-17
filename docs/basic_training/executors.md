@@ -99,13 +99,13 @@ process {
     time = '30 min'
     cpus = 4
 
-    withName: foo {
+    withName: FOO {
         cpus = 2
         memory = '20 GB'
         queue = 'short'
     }
 
-    withName: bar {
+    withName: BAR {
         cpus = 4
         memory = '32 GB'
         queue = 'long'
@@ -180,10 +180,10 @@ Containers can be set for each process in your workflow. You can define their co
 
 ```groovy linenums="1"
 process {
-    withName: foo {
+    withName: FOO {
         container = 'some/image:x'
     }
-    withName: bar {
+    withName: BAR {
         container = 'other/image:y'
     }
 }
