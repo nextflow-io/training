@@ -52,7 +52,7 @@ include { CONVERTTOUPPER } from './modules.nf'
         workflow {
             letters_ch = SPLITLETTERS(greeting_ch)
             results_ch = CONVERTTOUPPER(letters_ch.flatten())
-            results_ch.view{ it }
+            results_ch.view { it }
         }
         ```
 
@@ -60,7 +60,6 @@ include { CONVERTTOUPPER } from './modules.nf'
 
         ```groovy linenums="1"
         process SPLITLETTERS {
-
             input:
             val x
 
@@ -73,7 +72,6 @@ include { CONVERTTOUPPER } from './modules.nf'
         }
 
         process CONVERTTOUPPER {
-
             input:
             path y
 
@@ -115,11 +113,11 @@ include { CONVERTTOUPPER as CONVERTTOUPPER_two } from './modules.nf'
 workflow {
     letters_ch1 = SPLITLETTERS_one(greeting_ch)
     results_ch1 = CONVERTTOUPPER_one(letters_ch1.flatten())
-    results_ch1.view{ it }
+    results_ch1.view { it }
 
     letters_ch2 = SPLITLETTERS_two(greeting_ch)
     results_ch2 = CONVERTTOUPPER_two(letters_ch2.flatten())
-    results_ch2.view{ it }
+    results_ch2.view { it }
 }
 ```
 
@@ -161,7 +159,7 @@ workflow  {
     greeting_ch = Channel.of(params.greeting)
     letters_ch = SPLITLETTERS(greeting_ch)
     results_ch = CONVERTTOUPPER(letters_ch.flatten())
-    results_ch.view{ it }
+    results_ch.view { it }
 }
 ```
 
@@ -228,7 +226,7 @@ workflow {
     greeting_ch = Channel.of(params.greeting)
     SPLITLETTERS(greeting_ch)
     CONVERTTOUPPER(SPLITLETTERS.out.flatten())
-    CONVERTTOUPPER.out.upper.view{ it }
+    CONVERTTOUPPER.out.upper.view { it }
 }
 ```
 
@@ -265,7 +263,7 @@ workflow my_pipeline {
     greeting_ch = Channel.of(params.greeting)
     SPLITLETTERS(greeting_ch)
     CONVERTTOUPPER(SPLITLETTERS.out.flatten())
-    CONVERTTOUPPER.out.upper.view{ it }
+    CONVERTTOUPPER.out.upper.view { it }
 }
 
 workflow {
@@ -302,7 +300,7 @@ workflow my_pipeline {
     main:
     SPLITLETTERS(greeting)
     CONVERTTOUPPER(SPLITLETTERS.out.flatten())
-    CONVERTTOUPPER.out.upper.view{ it }
+    CONVERTTOUPPER.out.upper.view { it }
 }
 ```
 
@@ -387,13 +385,13 @@ include { CONVERTTOUPPER as CONVERTTOUPPER_two } from './modules.nf'
 workflow my_pipeline_one {
     letters_ch1 = SPLITLETTERS_one(params.greeting)
     results_ch1 = CONVERTTOUPPER_one(letters_ch1.flatten())
-    results_ch1.view{ it }
+    results_ch1.view { it }
 }
 
 workflow my_pipeline_two {
     letters_ch2 = SPLITLETTERS_two(params.greeting)
     results_ch2 = CONVERTTOUPPER_two(letters_ch2.flatten())
-    results_ch2.view{ it }
+    results_ch2.view { it }
 }
 
 workflow {

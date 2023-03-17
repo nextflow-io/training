@@ -261,20 +261,21 @@ Embora a ordem de elementos em canais dataflow seja garantida – os dados são 
 Em termos práticos, considere o trecho a seguir:
 
 ```groovy linenums="1"
-process foo {
-  input:
+process FOO {
+    input:
     val x
-  output:
+
+    output:
     tuple val(task.index), val(x)
 
-  script:
+    script:
     """
     sleep \$((RANDOM % 3))
     """
 }
 
 workflow {
-   channel.of('A','B','C','D') | foo | view
+    channel.of('A','B','C','D') | FOO | view
 }
 ```
 
@@ -297,26 +298,26 @@ Uma solução comum para isso é usar o que é comumente chamado de _meta mapa_ 
 // Apenas para fins de exemplos.
 // Estes abaixo seriam normalmente as saídas de processos anteriores
 Channel
-  .of(
-    [[id:'amostra_1'], '/caminho/para/amostra_1.bam'],
-    [[id:'amostra_2'], '/caminho/para/amostra_2.bam']
-  )
-  .set { bam }
+    .of(
+        [[id:'amostra_1'], '/caminho/para/amostra_1.bam'],
+        [[id:'amostra_2'], '/caminho/para/amostra_2.bam']
+    )
+    .set { bam }
 
 // Nota: amostra_2 é agora o primeiro elemento, em vez de amostra_1
 Channel
-  .of(
-    [[id:'amostra_2'], '/caminho/para/amostra_2.bai'],
-    [[id:'amostra_1'], '/caminho/para/amostra_1.bai']
-  )
-  .set { bai }
+    .of(
+        [[id:'amostra_2'], '/caminho/para/amostra_2.bai'],
+        [[id:'amostra_1'], '/caminho/para/amostra_1.bai']
+    )
+    .set { bai }
 
 // Em vez de alimentar o processo posterior com esses dois canais separadamente,
 // nós podemos uní-los com o operador `join` e entregar um único canal onde o
 // meta mapa de amostra é correspondido implicitamente:
 bam
-  .join(bai)
-  | PROCESSO_C
+    .join(bai)
+    | PROCESSO_C
 ```
 
 Se os meta mapas não forem possíveis, uma alternativa é usar a diretiva de processo [`fair`](https://nextflow.io/docs/edge/process.html#fair). Quando especificada, o Nextflow garantirá que a ordem dos elementos nos canais de saída corresponderá à ordem dos respectivos elementos nos canais de entrada.

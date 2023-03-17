@@ -98,13 +98,13 @@ process {
     time = '30 min'
     cpus = 4
 
-    withName: foo {
+    withName: FOO {
         cpus = 2
         memory = '20 GB'
         queue = 'curta'
     }
 
-    withName: bar {
+    withName: BAR {
         cpus = 4
         memory = '32 GB'
         queue = 'longa'
@@ -136,20 +136,20 @@ Uma melhor estratégia consiste em anotar os processos com uma diretiva de [rót
 O script do fluxo de trabalho:
 
 ```groovy linenums="1"
-process tarefa1 {
-  label 'longo'
+process TAREFA1 {
+    label 'longo'
 
-  """
-  primeiro_comando --aqui
-  """
+    """
+    primeiro_comando --aqui
+    """
 }
 
-process tarefa2 {
-  label 'curto'
+process TAREFA2 {
+    label 'curto'
 
-  """
-  segundo_comando --aqui
-  """
+    """
+    segundo_comando --aqui
+    """
 }
 ```
 
@@ -179,12 +179,12 @@ Os contêineres podem ser definidos para cada processo em seu fluxo de trabalho.
 
 ```groovy linenums="1"
 process {
-  withName: foo {
-    container = 'uma/imagem:x'
-  }
-  withName: bar {
-    container = 'outra/imagem:y'
-  }
+    withName: FOO {
+        container = 'uma/imagem:x'
+    }
+    withName: BAR {
+        container = 'outra/imagem:y'
+    }
 }
 
 docker.enabled = true
@@ -288,9 +288,9 @@ Elastic Block Storage (EBS) (ou outras formas de armazenamento suportadas) podem
 
 ```groovy
 aws {
-  batch {
-      volumes = '/algum/caminho'
-  }
+    batch {
+        volumes = '/algum/caminho'
+    }
 }
 ```
 
@@ -298,10 +298,10 @@ Vários volumes podem ser especificados usando caminhos separados por vírgulas.
 
 ```groovy
 aws {
-  region = 'eu-west-1'
-  batch {
-      volumes = ['/tmp', '/caminho/no/hospedeiro:/mnt/caminho:ro']
-  }
+    region = 'eu-west-1'
+    batch {
+        volumes = ['/tmp', '/caminho/no/hospedeiro:/mnt/caminho:ro']
+    }
 }
 ```
 

@@ -15,10 +15,10 @@ o Nextflow encerra a execução e informa sobre a tarefa com falhas:
     Clique no ícone :material-plus-circle: no código para ver explicações.
 
 ```bash
-ERROR ~ Error executing process > 'index'
+ERROR ~ Error executing process > 'INDEX'
 
 Caused by: # (1)!
-  Process `index` terminated with an error exit status (127)
+  Process `INDEX` terminated with an error exit status (127)
 
 Command executed: # (2)!
 
@@ -74,8 +74,9 @@ Existem casos em que um erro em um processo é esperado e não deve encerrar a e
 Para lidar com isso, forneça o valor `ignore` a `errorStrategy`:
 
 ```groovy linenums="1"
-process foo {
+process FOO {
     errorStrategy 'ignore'
+
     script:
     """
     seu_comando --isso --aquilo
@@ -89,13 +90,14 @@ Se você deseja ignorar qualquer erro, você pode especificar a mesma diretiva e
 process.errorStrategy = 'ignore'
 ```
 
-## Tolerância a falhas automática
+## Tolerância automática a falhas
 
 Em casos mais raros, erros podem surgir por causa de condições transitórias. Nessas situações, uma estratégia eficaz é re-executar a tarefa com falhas.
 
 ```groovy linenums="1"
-process foo {
+process FOO {
     errorStrategy 'retry'
+
     script:
     """
     seu_comando --isso --aquilo
@@ -112,9 +114,10 @@ A diretiva [maxRetries](https://www.nextflow.io/docs/latest/process.html#maxretr
 Existem casos em que os recursos necessários para a execução estão temporariamente indisponíveis (por exemplo, congestionamento de rede). Nesses casos apenas re-executar a tarefa provavelmente levará a um erro idêntico. Uma re-execução com um atraso exponencial pode contribuir de uma melhor forma para a resolução desses erros.
 
 ```groovy linenums="1"
-process foo {
+process FOO {
     errorStrategy { sleep(Math.pow(2, task.attempt) * 200 as long); return 'retry' }
     maxRetries 5
+
     script:
     '''
     seu_comando --aqui
@@ -129,7 +132,7 @@ Uma situação bastante comum é que diferentes instâncias de um mesmo processo
 Para lidar com isso, você pode utilizar uma estratégia de erro `retry` e aumentar os recursos computacionais alocados pela tarefa em cada _tentativa_ consecutiva.
 
 ```groovy linenums="1"
-process foo {
+process FOO {
     cpus 4
     memory { 2.GB * task.attempt } // (1)!
     time { 1.hour * task.attempt } // (2)!

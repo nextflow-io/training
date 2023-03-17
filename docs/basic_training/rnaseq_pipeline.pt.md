@@ -102,16 +102,16 @@ Para adicionar uma etapa de processamento de índice do transcriptoma (`INDEX`),
  * dado um arquivo de transcriptoma
  */
 process INDEX {
-  input:
-  path transcriptome
+    input:
+    path transcriptome
 
-  output:
-  path 'salmon_index'
+    output:
+    path 'salmon_index'
 
-  script:
-  """
-  salmon index --threads $task.cpus -t $transcriptome -i salmon_index
-  """
+    script:
+    """
+    salmon index --threads $task.cpus -t $transcriptome -i salmon_index
+    """
 }
 ```
 
@@ -184,6 +184,7 @@ docker.enabled = true
         ```groovy
         process INDEX {
             cpus 2
+
             input:
             ...
         ```
@@ -277,7 +278,7 @@ nextflow run script3.nf --reads 'data/ggal/*_{1,2}.fq'
 
         ```groovy
         Channel
-            .fromFilePairs( params.reads )
+            .fromFilePairs(params.reads)
             .set { read_pairs_ch }
         ```
 
@@ -289,7 +290,7 @@ nextflow run script3.nf --reads 'data/ggal/*_{1,2}.fq'
 
         ```groovy
         Channel
-            .fromFilePairs( params.reads, checkIfExists: true )
+            .fromFilePairs(params.reads, checkIfExists: true)
             .set { read_pairs_ch }
         ```
 

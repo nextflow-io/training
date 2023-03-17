@@ -14,10 +14,10 @@ When a process execution exits with a non-zero exit status, Nextflow stops the w
     Click the :material-plus-circle: icons in the code for explanations.
 
 ```bash
-ERROR ~ Error executing process > 'index'
+ERROR ~ Error executing process > 'INDEX'
 
 Caused by: # (1)!
-  Process `index` terminated with an error exit status (127)
+  Process `INDEX` terminated with an error exit status (127)
 
 Command executed: # (2)!
 
@@ -72,8 +72,9 @@ There are cases in which a process error may be expected and it should not stop 
 To handle this use case, set the process `errorStrategy` to `ignore`:
 
 ```groovy linenums="1"
-process foo {
+process FOO {
     errorStrategy 'ignore'
+
     script:
     """
     your_command --this --that
@@ -92,8 +93,9 @@ process.errorStrategy = 'ignore'
 In rare cases, errors may be caused by transient conditions. In this situation, an effective strategy is re-executing the failing task.
 
 ```groovy linenums="1"
-process foo {
+process FOO {
     errorStrategy 'retry'
+
     script:
     """
     your_command --this --that
@@ -110,9 +112,10 @@ The directive [maxRetries](https://www.nextflow.io/docs/latest/process.html#maxr
 There are cases in which the required execution resources may be temporarily unavailable (e.g. network congestion). In these cases simply re-executing the same task will likely result in an identical error. A retry with an exponential backoff delay can better recover these error conditions.
 
 ```groovy linenums="1"
-process foo {
+process FOO {
     errorStrategy { sleep(Math.pow(2, task.attempt) * 200 as long); return 'retry' }
     maxRetries 5
+
     script:
     '''
     your_command --here
@@ -127,7 +130,7 @@ It’s a very common scenario that different instances of the same process may h
 To handle this use case, you can use a `retry` error strategy and increase the computing resources allocated by the job at each successive _attempt_.
 
 ```groovy linenums="1"
-process foo {
+process FOO {
     cpus 4
     memory { 2.GB * task.attempt } // (1)!
     time { 1.hour * task.attempt } // (2)!

@@ -85,7 +85,7 @@ The `map` operator applies a function of your choosing to every item emitted by 
 
 ```groovy linenums="1"
 Channel
-    .of( 'hello', 'world' )
+    .of('hello', 'world')
     .map { it -> it.reverse() }
     .view()
 ```
@@ -94,7 +94,7 @@ A `map` can associate a generic _tuple_ to each element and can contain any data
 
 ```groovy linenums="1"
 Channel
-    .of( 'hello', 'world' )
+    .of('hello', 'world')
     .map { word -> [word, word.size()] }
     .view { word, len -> "$word contains $len letters" }
 ```
@@ -117,11 +117,11 @@ Channel
 The `mix` operator combines the items emitted by two (or more) channels into a single channel.
 
 ```groovy linenums="1"
-c1 = Channel.of( 1,2,3 )
-c2 = Channel.of( 'a','b' )
-c3 = Channel.of( 'z' )
+c1 = Channel.of(1,2,3)
+c2 = Channel.of('a','b')
+c3 = Channel.of('z')
 
-c1 .mix(c2,c3).view()
+c1.mix(c2,c3).view()
 ```
 
 ```console title="Output"
@@ -166,7 +166,7 @@ The `collect` operator collects all of the items emitted by a channel in a list 
 
 ```groovy linenums="1"
 Channel
-    .of( 1, 2, 3, 4 )
+    .of(1, 2, 3, 4)
     .collect()
     .view()
 ```
@@ -189,7 +189,7 @@ Try the following example:
 
 ```groovy linenums="1"
 Channel
-    .of( [1,'A'], [1,'B'], [2,'C'], [3, 'B'], [1,'C'], [2, 'A'], [3, 'D'] )
+    .of([1,'A'], [1,'B'], [2,'C'], [3, 'B'], [1,'C'], [2, 'A'], [3, 'D'])
     .groupTuple()
     .view()
 ```

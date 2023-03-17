@@ -50,7 +50,6 @@ Once your token has been created, open a terminal and type:
 
 ```bash
 export TOWER_ACCESS_TOKEN=eyxxxxxxxxxxxxxxxQ1ZTE=
-export NXF_VER=20.10.0
 ```
 
 Where `eyxxxxxxxxxxxxxxxQ1ZTE=` is the token you have just created.

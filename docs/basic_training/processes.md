@@ -14,11 +14,10 @@ A basic `process`, only using the `script` definition block, looks like the foll
 
 ```groovy linenums="1"
 process SAYHELLO {
-
-  script:
-  """
-  echo 'Hello world!'
-  """
+    script:
+    """
+    echo 'Hello world!'
+    """
 }
 ```
 
@@ -38,22 +37,21 @@ The full process syntax is defined as follows:
 
 ```groovy linenums="1"
 process < name > {
+    [ directives ] // (1)!
 
-  [ directives ] // (1)!
+    input: // (2)!
+    < process inputs >
 
-  input: // (2)!
-  < process inputs >
+    output: // (3)!
+    < process outputs >
 
-  output: // (3)!
-  < process outputs >
+    when: // (4)!
+    < condition >
 
-  when: // (4)!
-  < condition >
-
-  [script|shell|exec]: // (5)!
-  """
-  < user script to be executed >
-  """
+    [script|shell|exec]: // (5)!
+    """
+    < user script to be executed >
+    """
 }
 ```
 
@@ -73,17 +71,16 @@ The `script` block can be a single or a multi-line string. The latter simplifies
 
 ```groovy linenums="1"
 process EXAMPLE {
-
-  script:
-  """
-  echo 'Hello world!\nHola mundo!\nCiao mondo!\nHallo Welt!' > file
-  cat file | head -n 1 | head -c 5 > chunk_1.txt
-  gzip -c chunk_1.txt  > chunk_archive.gz
-  """
+    script:
+    """
+    echo 'Hello world!\nHola mundo!\nCiao mondo!\nHallo Welt!' > file
+    cat file | head -n 1 | head -c 5 > chunk_1.txt
+    gzip -c chunk_1.txt  > chunk_archive.gz
+    """
 }
 
 workflow {
-  EXAMPLE()
+    EXAMPLE()
 }
 ```
 
@@ -91,19 +88,18 @@ By default, the `process` command is interpreted as a **Bash** script. However, 
 
 ```groovy linenums="1"
 process PYSTUFF {
+    script:
+    """
+    #!/usr/bin/env python
 
-  script:
-  """
-  #!/usr/bin/env python
-
-  x = 'Hello'
-  y = 'world!'
-  print ("%s - %s" % (x,y))
-  """
+    x = 'Hello'
+    y = 'world!'
+    print ("%s - %s" % (x,y))
+    """
 }
 
 workflow {
-  PYSTUFF()
+    PYSTUFF()
 }
 ```
 
@@ -119,15 +115,14 @@ Script parameters (`params`) can be defined dynamically using variable values. F
 params.data = 'World'
 
 process FOO {
-
-  script:
-  """
-  echo Hello $params.data
-  """
+    script:
+    """
+    echo Hello $params.data
+    """
 }
 
 workflow {
-  FOO()
+    FOO()
 }
 ```
 
@@ -141,15 +136,14 @@ workflow {
 
 ```groovy linenums="1"
 process FOO {
-
-  script:
-  """
-  echo "The current directory is \$PWD"
-  """
+    script:
+    """
+    echo "The current directory is \$PWD"
+    """
 }
 
 workflow {
-  FOO()
+    FOO()
 }
 ```
 
@@ -157,15 +151,14 @@ It can be tricky to write a script that uses many Bash variables. One possible a
 
 ```groovy linenums="1"
 process BAR {
-
-  script:
-  '''
-  echo "The current directory is $PWD"
-  '''
+    script:
+    '''
+    echo "The current directory is $PWD"
+    '''
 }
 
 workflow {
-  BAR()
+    BAR()
 }
 ```
 
@@ -177,16 +170,15 @@ Another alternative is to use a `shell` statement instead of `script` and use a 
 params.data = 'le monde'
 
 process BAZ {
-
-  shell:
-  '''
-  X='Bonjour'
-  echo $X !{params.data}
-  '''
+    shell:
+    '''
+    X='Bonjour'
+    echo $X !{params.data}
+    '''
 }
 
 workflow {
-  BAZ()
+    BAZ()
 }
 ```
 
@@ -199,25 +191,24 @@ params.compress = 'gzip'
 params.file2compress = "$baseDir/data/ggal/transcriptome.fa"
 
 process FOO {
+    input:
+    path file
 
-  input:
-  path file
-
-  script:
-  if( params.compress == 'gzip' )
-    """
-    gzip -c $file > ${file}.gz
-    """
-  else if( params.compress == 'bzip2' )
-    """
-    bzip2 -c $file > ${file}.bz2
-    """
-  else
-    throw new IllegalArgumentException("Unknown compressor $params.compress")
+    script:
+    if (params.compress == 'gzip')
+        """
+        gzip -c $file > ${file}.gz
+        """
+    else if (params.compress == 'bzip2')
+        """
+        bzip2 -c $file > ${file}.bz2
+        """
+    else
+        throw new IllegalArgumentException("Unknown compressor $params.compress")
 }
 
 workflow {
-  FOO(params.file2compress)
+    FOO(params.file2compress)
 }
 ```
 
@@ -237,7 +228,7 @@ The `input` block follows the syntax shown below:
 
 ```groovy linenums="1"
 input:
-  <input qualifier> <input name>
+<input qualifier> <input name>
 ```
 
 ### Input values
@@ -245,22 +236,22 @@ input:
 The `val` qualifier allows you to receive data of any type as input. It can be accessed in the process script by using the specified input name, as shown in the following example:
 
 ```groovy linenums="1"
-num = Channel.of( 1, 2, 3 )
+num = Channel.of(1, 2, 3)
 
 process BASICEXAMPLE {
-  debug true
+    debug true
 
-  input:
-  val x
+    input:
+    val x
 
-  script:
-  """
-  echo process job $x
-  """
+    script:
+    """
+    echo process job $x
+    """
 }
 
 workflow {
-  myrun = BASICEXAMPLE(num)
+    myrun = BASICEXAMPLE(num)
 }
 ```
 
@@ -281,66 +272,66 @@ process job 2
 The `path` qualifier allows the handling of file values in the process execution context. This means that Nextflow will stage it in the process execution directory, and it can be accessed in the script by using the name specified in the input declaration.
 
 ```groovy linenums="1"
-reads = Channel.fromPath( 'data/ggal/*.fq' )
+reads = Channel.fromPath('data/ggal/*.fq')
 
 process FOO {
-  debug true
+    debug true
 
-  input:
-  path 'sample.fastq'
+    input:
+    path 'sample.fastq'
 
-  script:
-  """
-  ls sample.fastq
-  """
+    script:
+    """
+    ls sample.fastq
+    """
 }
 
 workflow {
-  result = FOO(reads)
+    result = FOO(reads)
 }
 ```
 
 The input file name can also be defined using a variable reference as shown below:
 
 ```groovy linenums="1"
-reads = Channel.fromPath( 'data/ggal/*.fq' )
+reads = Channel.fromPath('data/ggal/*.fq')
 
 process FOO {
-  debug true
+    debug true
 
-  input:
-  path sample
+    input:
+    path sample
 
-  script:
-  """
-  ls  $sample
-  """
+    script:
+    """
+    ls  $sample
+    """
 }
 
 workflow {
-  result = FOO(reads)
+    result = FOO(reads)
 }
 ```
 
 The same syntax is also able to handle more than one input file in the same execution and only requires changing the channel composition.
 
 ```groovy linenums="1"
-reads = Channel.fromPath( 'data/ggal/*.fq' )
+reads = Channel.fromPath('data/ggal/*.fq')
 
 process FOO {
-  debug true
+    debug true
 
-  input:
-  path sample
+    input:
+    path sample
 
-  script:
-  """
-  ls -lh $sample
-  """
+    script:
+    """
+    ls -lh $sample
+    """
 }
 
 workflow {
-  FOO(reads.collect())
+    FOO(reads.collect())
 }
 ```
 
@@ -359,28 +350,28 @@ workflow {
         params.reads = "$baseDir/data/ggal/*_1.fq"
 
         Channel
-          .fromPath( params.reads )
-          .set { read_ch }
+            .fromPath(params.reads)
+            .set { read_ch }
 
         process CONCATENATE {
-          tag "Concat all files"
+            tag "Concat all files"
 
-          input:
-          path '*'
+            input:
+            path '*'
 
-          output:
-          path 'top_10_lines'
+            output:
+            path 'top_10_lines'
 
-          script:
-          """
-          cat * > concatenated.txt
-          head -n 10 concatenated.txt > top_10_lines
-          """
+            script:
+            """
+            cat * > concatenated.txt
+            head -n 10 concatenated.txt > top_10_lines
+            """
         }
 
         workflow {
-          concat_ch = CONCATENATE(read_ch.collect())
-          concat_ch.view()
+            concat_ch = CONCATENATE(read_ch.collect())
+            concat_ch.view()
         }
         ```
 
@@ -395,20 +386,20 @@ ch1 = Channel.of(1,2,3)
 ch2 = Channel.of('a','b','c')
 
 process FOO {
-  debug true
+    debug true
 
-  input:
-  val x
-  val y
+    input:
+    val x
+    val y
 
-  script:
+    script:
     """
     echo $x and $y
     """
 }
 
 workflow {
-  FOO(ch1, ch2)
+    FOO(ch1, ch2)
 }
 ```
 
@@ -433,20 +424,20 @@ input1 = Channel.of(1,2)
 input2 = Channel.of('a','b','c','d')
 
 process FOO {
-  debug true
+    debug true
 
-  input:
-  val x
-  val y
+    input:
+    val x
+    val y
 
-  script:
+    script:
     """
     echo $x and $y
     """
 }
 
 workflow {
-  FOO(input1, input2)
+    FOO(input1, input2)
 }
 ```
 
@@ -461,20 +452,20 @@ input1 = Channel.value(1)
 input2 = Channel.of('a','b','c')
 
 process BAR {
-  debug true
+    debug true
 
-  input:
-  val x
-  val y
+    input:
+    val x
+    val y
 
-  script:
+    script:
     """
     echo $x and $y
     """
 }
 
 workflow {
-  BAR(input1, input2)
+    BAR(input1, input2)
 }
 ```
 
@@ -497,28 +488,28 @@ This is because _value_ channels can be consumed multiple times and do not affec
         params.transcriptome_file = "$baseDir/data/ggal/transcriptome.fa"
 
         Channel
-            .fromPath( params.reads )
+            .fromPath(params.reads)
             .set { read_ch }
 
         process COMMAND {
-          tag "Run_command"
+            tag "Run_command"
 
-          input:
-          path reads
-          path transcriptome
+            input:
+            path reads
+            path transcriptome
 
-          output:
-          path result
+            output:
+            path result
 
-          script:
-          """
-          echo your_command $reads $transcriptome > result
-          """
+            script:
+            """
+            echo your_command $reads $transcriptome > result
+            """
         }
 
         workflow {
-          concat_ch = COMMAND(read_ch, params.transcriptome_file)
-          concat_ch.view()
+            concat_ch = COMMAND(read_ch, params.transcriptome_file)
+            concat_ch.view()
         }
         ```
 
@@ -531,20 +522,20 @@ sequences = Channel.fromPath('data/prots/*.tfa')
 methods = ['regular', 'espresso', 'psicoffee']
 
 process ALIGNSEQUENCES {
-  debug true
+    debug true
 
-  input:
-  path seq
-  each mode
+    input:
+    path seq
+    each mode
 
-  script:
-  """
-  echo t_coffee -in $seq -mode $mode
-  """
+    script:
+    """
+    echo t_coffee -in $seq -mode $mode
+    """
 }
 
 workflow {
-  ALIGNSEQUENCES(sequences, methods)
+    ALIGNSEQUENCES(sequences, methods)
 }
 ```
 
@@ -562,30 +553,30 @@ In the above example, every time a file of sequences is received as an input by 
         methods= ['salmon', 'kallisto']
 
         Channel
-            .fromPath( params.reads )
+            .fromPath(params.reads)
             .set { read_ch }
 
         process COMMAND {
-          tag "Run_command"
+            tag "Run_command"
 
-          input:
-          path reads
-          path transcriptome
-          each mode
+            input:
+            path reads
+            path transcriptome
+            each mode
 
-          output:
-          path result
+            output:
+            path result
 
-          script:
-          """
-          echo $mode $reads $transcriptome > result
-          """
+            script:
+            """
+            echo $mode $reads $transcriptome > result
+            """
         }
 
         workflow {
-          concat_ch = COMMAND(read_ch , params.transcriptome_file, methods)
-          concat_ch
-              .view { "To run : ${it.text}" }
+            concat_ch = COMMAND(read_ch, params.transcriptome_file, methods)
+            concat_ch
+                .view { "To run : ${it.text}" }
         }
         ```
 
@@ -597,7 +588,7 @@ Only one output block, that can contain one or more output declaration, can be d
 
 ```groovy linenums="1"
 output:
-  <output qualifier> <output name> , emit: <output channel>
+<output qualifier> <output name>, emit: <output channel>
 ```
 
 ### Output values
@@ -608,22 +599,21 @@ The `val` qualifier specifies a defined _value_ in the script context. Values ar
 methods = ['prot','dna', 'rna']
 
 process FOO {
+    input:
+    val x
 
-  input:
-  val x
+    output:
+    val x
 
-  output:
-  val x
-
-  script:
-  """
-  echo $x > file
-  """
+    script:
+    """
+    echo $x > file
+    """
 }
 
 workflow {
-  receiver_ch = FOO(Channel.of(methods))
-  receiver_ch.view { "Received: $it" }
+    receiver_ch = FOO(Channel.of(methods))
+    receiver_ch.view { "Received: $it" }
 }
 ```
 
@@ -633,7 +623,6 @@ The `path` qualifier specifies one or more files produced by the process into th
 
 ```groovy linenums="1"
 process RANDOMNUM {
-
     output:
     path 'result.txt'
 
@@ -645,8 +634,8 @@ process RANDOMNUM {
 
 
 workflow {
-  receiver_ch = RANDOMNUM()
-  receiver_ch.view { "Received: " + it.text }
+    receiver_ch = RANDOMNUM()
+    receiver_ch.view { "Received: " + it.text }
 }
 ```
 
@@ -660,7 +649,6 @@ When an output file name contains a wildcard character (`*` or `?`) it is interp
 
 ```groovy linenums="1"
 process SPLITLETTERS {
-
     output:
     path 'chunk_*'
 
@@ -710,27 +698,27 @@ When an output file name needs to be expressed dynamically, it is possible to de
 species = ['cat', 'dog', 'sloth']
 sequences = ['AGATAG', 'ATGCTCT', 'ATCCCAA']
 
-Channel.fromList(species)
-        .set { species_ch }
+Channel
+    .fromList(species)
+    .set { species_ch }
 
 process ALIGN {
+    input:
+    val x
+    val seq
 
-  input:
-  val x
-  val seq
+    output:
+    path "${x}.aln"
 
-  output:
-  path "${x}.aln"
-
-  script:
-  """
-  echo align -in $seq > ${x}.aln
-  """
+    script:
+    """
+    echo align -in $seq > ${x}.aln
+    """
 }
 
 workflow {
-  genomes = ALIGN( species_ch, sequences )
-  genomes.view()
+    genomes = ALIGN(species_ch, sequences)
+    genomes.view()
 }
 ```
 
@@ -746,22 +734,21 @@ The input and output declarations for tuples must be declared with a `tuple` qua
 reads_ch = Channel.fromFilePairs('data/ggal/*_{1,2}.fq')
 
 process FOO {
-
-  input:
+    input:
     tuple val(sample_id), path(sample_id)
 
-  output:
+    output:
     tuple val(sample_id), path('sample.bam')
 
-  script:
-  """
+    script:
+    """
     echo your_command_here --reads $sample_id > sample.bam
-  """
+    """
 }
 
 workflow {
-  bam_ch = FOO(reads_ch)
-  bam_ch.view()
+    bam_ch = FOO(reads_ch)
+    bam_ch.view()
 }
 ```
 
@@ -779,22 +766,21 @@ workflow {
         reads_ch = Channel.fromFilePairs('data/ggal/*_{1,2}.fq')
 
         process FOO {
-
-          input:
+            input:
             tuple val(sample_id), path(sample_files)
 
-          output:
+            output:
             tuple val(sample_id), path("${sample_id}.bam")
 
-          script:
-          """
+            script:
+            """
             echo your_command_here --reads $sample_id > ${sample_id}.bam
-          """
+            """
         }
 
         workflow {
-          bam_ch = FOO(reads_ch)
-          bam_ch.view()
+            bam_ch = FOO(reads_ch)
+            bam_ch.view()
         }
         ```
 
@@ -810,23 +796,23 @@ params.prot = 'data/prots/*.tfa'
 proteins = Channel.fromPath(params.prot)
 
 process FIND {
-  debug true
+    debug true
 
-  input:
-  path fasta
-  val type
+    input:
+    path fasta
+    val type
 
-  when:
-  fasta.name =~ /^BB11.*/ && type == 'nr'
+    when:
+    fasta.name =~ /^BB11.*/ && type == 'nr'
 
-  script:
-  """
-  echo blastp -query $fasta -db nr
-  """
+    script:
+    """
+    echo blastp -query $fasta -db nr
+    """
 }
 
 workflow {
-  result = FIND(proteins, params.dbtype)
+    result = FIND(proteins, params.dbtype)
 }
 ```
 
@@ -840,14 +826,14 @@ Directives are commonly used to define the amount of computing resources to be u
 
 ```groovy linenums="1"
 process FOO {
-  cpus 2
-  memory 1.GB
-  container 'image/name'
+    cpus 2
+    memory 1.GB
+    container 'image/name'
 
-  script:
-  """
-  echo your_command --this --that
-  """
+    script:
+    """
+    echo your_command --this --that
+    """
 }
 ```
 
@@ -897,8 +883,8 @@ process BLASTSEQ {
 }
 
 workflow {
-  blast_ch = BLASTSEQ(proteins)
-  blast_ch.view()
+    blast_ch = BLASTSEQ(proteins)
+    blast_ch.view()
 }
 ```
 
@@ -919,18 +905,18 @@ params.outdir = 'my-results'
 samples_ch = Channel.fromFilePairs(params.reads, flat: true)
 
 process FOO {
-  publishDir "$params.outdir/$sampleId/", pattern: '*.fq'
-  publishDir "$params.outdir/$sampleId/counts", pattern: "*_counts.txt"
-  publishDir "$params.outdir/$sampleId/outlooks", pattern: '*_outlook.txt'
+    publishDir "$params.outdir/$sampleId/", pattern: '*.fq'
+    publishDir "$params.outdir/$sampleId/counts", pattern: "*_counts.txt"
+    publishDir "$params.outdir/$sampleId/outlooks", pattern: '*_outlook.txt'
 
-  input:
+    input:
     tuple val(sampleId), path('sample1.fq.gz'), path('sample2.fq.gz')
 
-  output:
+    output:
     path "*"
 
-  script:
-  """
+    script:
+    """
     < sample1.fq.gz zcat > sample1.fq
     < sample2.fq.gz zcat > sample2.fq
 
@@ -939,11 +925,11 @@ process FOO {
 
     head -n 50 sample1.fq > sample1_outlook.txt
     head -n 50 sample2.fq > sample2_outlook.txt
-  """
+    """
 }
 
 workflow {
-  out_channel = FOO(samples_ch)
+    out_channel = FOO(samples_ch)
 }
 ```
 

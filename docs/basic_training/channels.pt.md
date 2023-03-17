@@ -156,8 +156,8 @@ A fábrica de canal `value` é utilizada para criar um canal de _valor_. Um argu
 
 ```groovy linenums="1"
 canal1 = Channel.value() // (1)!
-canal2 = Channel.value( 'Olá, você!' ) // (2)!
-canal3 = Channel.value( [1,2,3,4,5] ) // (3)!
+canal2 = Channel.value('Olá, você!') // (2)!
+canal3 = Channel.value([1,2,3,4,5]) // (3)!
 ```
 
 1. Cria um canal de valor _vazio_
@@ -169,8 +169,8 @@ canal3 = Channel.value( [1,2,3,4,5] ) // (3)!
 A fábrica `Channel.of` permite a criação de um canal de fila com os valores especificados como argumentos.
 
 ```groovy linenums="1"
-canal = Channel.of( 1, 3, 5, 7 )
-canal.view{ "numero: $it" }
+canal = Channel.of(1, 3, 5, 7)
+canal.view { "numero: $it" }
 ```
 
 A primeira linha neste exemplo cria uma variável `canal` que contém um objeto de canal. Este canal emite os valores especificados como parâmetro no método `of`. Assim, a segunda linha imprimirá o seguinte:
@@ -186,8 +186,8 @@ O método `Channel.of` funciona de maneira semelhante ao `Channel.from` (que foi
 
 ```groovy linenums="1"
 Channel
-  .of(1..23, 'X', 'Y')
-  .view()
+    .of(1..23, 'X', 'Y')
+    .view()
 ```
 
 ### `fromList()`
@@ -198,8 +198,8 @@ O método `Channel.fromList` cria um canal emitindo os elementos fornecidos por 
 list = ['olá', 'mundo']
 
 Channel
-  .fromList(list)
-  .view()
+    .fromList(list)
+    .view()
 ```
 
 ### `fromPath()`
@@ -207,7 +207,7 @@ Channel
 A fábrica `fromPath` cria um canal de fila emitindo um ou mais arquivos correspondentes ao padrão glob especificado.
 
 ```groovy linenums="1"
-Channel.fromPath( './data/meta/*.csv' )
+Channel.fromPath('./data/meta/*.csv')
 ```
 
 Este exemplo cria um canal e emite tantos itens quanto arquivos com extensão `csv` existirem na pasta `./data/meta`. Cada elemento é um objeto de arquivo implementando a interface [Path](https://docs.oracle.com/javase/8/docs/api/java/nio/file/Paths.html) do Java.
@@ -235,8 +235,8 @@ Saiba mais sobre a sintaxe dos padrões glob [neste link](https://docs.oracle.co
     ??? solution
 
         ```groovy linenums="1"
-        Channel.fromPath( './data/ggal/**.fq' , hidden:true)
-          .view()
+        Channel.fromPath('./data/ggal/**.fq', hidden: true)
+            .view()
         ```
 
 ### `fromFilePairs()`
@@ -245,8 +245,8 @@ O método `fromFilePairs` cria um canal emitindo os pares de arquivos correspond
 
 ```groovy linenums="1"
 Channel
-  .fromFilePairs('./data/ggal/*_{1,2}.fq')
-  .view()
+    .fromFilePairs('./data/ggal/*_{1,2}.fq')
+    .view()
 ```
 
 Ele produzirá uma saída semelhante à seguinte:
@@ -273,15 +273,15 @@ Ele produzirá uma saída semelhante à seguinte:
 
 !!! exercise
 
-    Use o método `fromFilePairs` para criar um canal emitindo todos os pares de leituras em fastq no diretório `data/ggal/` e imprima-os. Em seguida, use a opção `flat:true` e compare a saída com a execução anterior.
+    Use o método `fromFilePairs` para criar um canal emitindo todos os pares de leituras em fastq no diretório `data/ggal/` e imprima-os. Em seguida, use a opção `flat: true` e compare a saída com a execução anterior.
 
     ??? solution
 
-        Use o seguinte, com ou sem `flat:true`:
+        Use o seguinte, com ou sem `flat: true`:
 
         ```groovy linenums="1"
-        Channel.fromFilePairs( './data/ggal/*_{1,2}.fq', flat:true)
-          .view()
+        Channel.fromFilePairs('./data/ggal/*_{1,2}.fq', flat: true)
+            .view()
         ```
 
         Em seguida, verifique os colchetes ao redor dos nomes dos arquivos, para ver a diferença com `flat`.
@@ -312,8 +312,8 @@ Por exemplo, o trecho a seguir imprimirá o conteúdo de um ID de projeto NCBI:
 params.ncbi_api_key = '<Sua chave da API aqui>'
 
 Channel
-  .fromSRA(['SRP073307'], apiKey: params.ncbi_api_key)
-  .view()
+    .fromSRA(['SRP073307'], apiKey: params.ncbi_api_key)
+    .view()
 ```
 
 !!! info ""
@@ -335,8 +335,8 @@ Vários IDs de acesso podem ser especificados usando um objeto lista:
 ```groovy linenums="1"
 ids = ['ERR908507', 'ERR908506', 'ERR908505']
 Channel
-  .fromSRA(ids, apiKey: params.ncbi_api_key)
-  .view()
+    .fromSRA(ids, apiKey: params.ncbi_api_key)
+    .view()
 ```
 
 ```groovy
@@ -357,23 +357,23 @@ params.ncbi_chave_api = '<Sua chave de API aqui>'
 
 params.accession = ['ERR908507', 'ERR908506']
 
-process fastqc {
-  input:
-  tuple val(id_amostra), path(arquivo_de_leituras)
+process FASTQC {
+    input:
+    tuple val(id_amostra), path(arquivo_de_leituras)
 
-  output:
-  path("fastqc_${id_amostra}_logs")
+    output:
+    path("fastqc_${id_amostra}_logs")
 
-  script:
-  """
-  mkdir fastqc_${id_amostra}_logs
-  fastqc -o fastqc_${id_amostra}_logs -f fastq -q ${arquivo_de_leituras}
-  """
+    script:
+    """
+    mkdir fastqc_${id_amostra}_logs
+    fastqc -o fastqc_${id_amostra}_logs -f fastq -q ${arquivo_de_leituras}
+    """
 }
 
 workflow {
-  leituras = Channel.fromSRA(params.accession, apiKey: params.ncbi_chave_api)
-  fastqc(leituras)
+    leituras = Channel.fromSRA(params.accession, apiKey: params.ncbi_chave_api)
+    FASTQC(leituras)
 }
 ```
 
@@ -385,9 +385,9 @@ O operador `splitText` permite dividir strings de várias linhas ou itens de arq
 
 ```groovy linenums="1"
 Channel
-  .fromPath('data/meta/random.txt') // (1)!
-  .splitText() // (2)!
-  .view() // (3)!
+    .fromPath('data/meta/random.txt') // (1)!
+    .splitText() // (2)!
+    .view() // (3)!
 ```
 
 1. Instrui o Nextflow a criar um canal a partir do caminho `data/meta/random.txt`
@@ -398,12 +398,12 @@ Você pode definir o número de linhas em cada bloco usando o parâmetro `by`, c
 
 ```groovy linenums="1"
 Channel
-  .fromPath('data/meta/random.txt')
-  .splitText( by: 2 )
-  .subscribe {
-    print it;
-    print "--- fim do bloco ---\n"
-  }
+    .fromPath('data/meta/random.txt')
+    .splitText(by: 2)
+    .subscribe {
+        print it;
+        print "--- fim do bloco ---\n"
+    }
 ```
 
 !!! info
@@ -414,9 +414,9 @@ Uma clausura opcional pode ser especificada para transformar os blocos de texto 
 
 ```groovy linenums="1"
 Channel
-  .fromPath('data/meta/random.txt')
-  .splitText( by: 10 ) { it.toUpperCase() }
-  .view()
+    .fromPath('data/meta/random.txt')
+    .splitText(by: 10) { it.toUpperCase() }
+    .view()
 ```
 
 Você também pode fazer contagens para cada linha:
@@ -425,9 +425,9 @@ Você também pode fazer contagens para cada linha:
 contador=0
 
 Channel
-  .fromPath('data/meta/random.txt')
-  .splitText()
-  .view { "${contador++}: ${it.toUpperCase().trim()}" }
+    .fromPath('data/meta/random.txt')
+    .splitText()
+    .view { "${contador++}: ${it.toUpperCase().trim()}" }
 ```
 
 Por fim, você também pode usar o operador em arquivos simples (fora do contexto do canal):
@@ -436,8 +436,8 @@ Por fim, você também pode usar o operador em arquivos simples (fora do context
 def f = file('data/meta/random.txt')
 def linhas = f.splitText()
 def contador=0
-for( String linha : linhas ) {
-  log.info "${contador++} ${linha.toUpperCase()}"
+for (String linha : linhas) {
+    log.info "${contador++} ${linha.toUpperCase()}"
 }
 ```
 
@@ -451,39 +451,39 @@ No caso mais simples, basta aplicar o operador `splitCsv` a um canal que emite a
 
 ```groovy linenums="1"
 Channel
-  .fromPath("data/meta/patients_1.csv")
-  .splitCsv()
-  // linha é um objeto de lista
-  .view { linha -> "${linha[0]},${linha[3]}" }
+    .fromPath("data/meta/patients_1.csv")
+    .splitCsv()
+    // linha é um objeto de lista
+    .view { linha -> "${linha[0]},${linha[3]}" }
 ```
 
 Quando o CSV começa com uma linha de cabeçalho definindo os nomes das colunas, você pode especificar o parâmetro `header: true` que permite referenciar cada valor pelo nome da coluna, conforme mostrado no exemplo a seguir:
 
 ```groovy linenums="1"
 Channel
-  .fromPath("data/meta/patients_1.csv")
-  .splitCsv(header: true)
-  // linha é um objeto de lista
-  .view { linha -> "${linha.patient_id},${linha.num_samples}" }
+    .fromPath("data/meta/patients_1.csv")
+    .splitCsv(header: true)
+    // linha é um objeto de lista
+    .view { linha -> "${linha.patient_id},${linha.num_samples}" }
 ```
 
 Como alternativa, você pode fornecer nomes de cabeçalho personalizados especificando uma lista de strings no parâmetro de cabeçalho, conforme mostrado abaixo:
 
 ```groovy linenums="1"
 Channel
-  .fromPath("data/meta/patients_1.csv")
-  .splitCsv(header: ['col1', 'col2', 'col3', 'col4', 'col5'] )
-  // linha é um objeto de lista
-  .view { linha -> "${linha.col1},${linha.col4}" }
+    .fromPath("data/meta/patients_1.csv")
+    .splitCsv(header: ['col1', 'col2', 'col3', 'col4', 'col5'])
+    // linha é um objeto de lista
+    .view { linha -> "${linha.col1},${linha.col4}" }
 ```
 
 Você também pode processar vários arquivos CSV ao mesmo tempo:
 
 ```groovy linenums="1"
 Channel
-  .fromPath("data/meta/patients_*.csv") // <-- use um padrão de captura
-  .splitCsv(header:true)
-  .view { linha -> "${linha.patient_id}\t${linha.num_samples}" }
+    .fromPath("data/meta/patients_*.csv") // <-- use um padrão de captura
+    .splitCsv(header: true)
+    .view { linha -> "${linha.patient_id}\t${linha.num_samples}" }
 ```
 
 !!! tip
@@ -495,8 +495,8 @@ Por fim, você também pode operar em arquivos CSV fora do contexto do canal:
 ```groovy linenums="1"
 def f = file('data/meta/patients_1.csv')
 def linhas = f.splitCsv()
-for( List linha : linhas ) {
-  log.info "${linha[0]} -- ${linha[2]}"
+for (List linha : linhas) {
+    log.info "${linha[0]} -- ${linha[2]}"
 }
 ```
 
@@ -516,37 +516,37 @@ for( List linha : linhas ) {
 
         ```groovy linenums="1"
         Channel
-          .fromFilePairs( params.reads, checkIfExists: true )
-          .set { read_pairs_ch }
+            .fromFilePairs(params.reads, checkIfExists: true)
+            .set { read_pairs_ch }
         ```
 
         Para uma entrada de fábrica de canal splitCsv:
 
         ```groovy linenums="1" hl_lines="2 3 4"
         Channel
-          .fromPath("fastq.csv")
-          .splitCsv()
-          .view () { linha -> "${linha[0]},${linha[1]},${linha[2]}" }
-          .set { read_pairs_ch }
+            .fromPath("fastq.csv")
+            .splitCsv()
+            .view () { linha -> "${linha[0]},${linha[1]},${linha[2]}" }
+            .set { read_pairs_ch }
         ```
 
         Por fim, altere a cardinalidade dos processos que usam os dados de entrada. Por exemplo, para o processo de quantificação, mude de:
 
         ```groovy linenums="1"
         process QUANTIFICATION {
-          tag "$sample_id"
+            tag "$sample_id"
 
-          input:
-          path salmon_index
-          tuple val(sample_id), path(reads)
+            input:
+            path salmon_index
+            tuple val(sample_id), path(reads)
 
-          output:
-          path sample_id, emit: quant_ch
+            output:
+            path sample_id, emit: quant_ch
 
-          script:
-          """
-          salmon quant --threads $task.cpus --libType=U -i $salmon_index -1 ${reads[0]} -2 ${reads[1]} -o $sample_id
-          """
+            script:
+            """
+            salmon quant --threads $task.cpus --libType=U -i $salmon_index -1 ${reads[0]} -2 ${reads[1]} -o $sample_id
+            """
         }
         ```
 
@@ -554,19 +554,19 @@ for( List linha : linhas ) {
 
         ```groovy linenums="1" hl_lines="6 13"
         process QUANTIFICATION {
-          tag "$sample_id"
+            tag "$sample_id"
 
-          input:
-          path salmon_index
-          tuple val(sample_id), path(reads1), path(reads2)
+            input:
+            path salmon_index
+            tuple val(sample_id), path(reads1), path(reads2)
 
-          output:
-          path sample_id, emit: quant_ch
+            output:
+            path sample_id, emit: quant_ch
 
-          script:
-          """
-          salmon quant --threads $task.cpus --libType=U -i $salmon_index -1 ${reads1} -2 ${reads2} -o $sample_id
-          """
+            script:
+            """
+            salmon quant --threads $task.cpus --libType=U -i $salmon_index -1 ${reads1} -2 ${reads2} -o $sample_id
+            """
         }
         ```
 
@@ -574,19 +574,19 @@ for( List linha : linhas ) {
 
         ```groovy linenums="1" hl_lines="5 13"
         process FASTQC {
-          tag "FASTQC on $sample_id"
+            tag "FASTQC on $sample_id"
 
-          input:
-          tuple val(sample_id), path(reads1), path(reads2)
+            input:
+            tuple val(sample_id), path(reads1), path(reads2)
 
-          output:
-          path "fastqc_${sample_id}_logs"
+            output:
+            path "fastqc_${sample_id}_logs"
 
-          script:
-          """
-          mkdir fastqc_${sample_id}_logs
-          fastqc -o fastqc_${sample_id}_logs -f fastq -q ${reads1} ${reads2}
-          """
+            script:
+            """
+            mkdir fastqc_${sample_id}_logs
+            fastqc -o fastqc_${sample_id}_logs -f fastq -q ${reads1} ${reads2}
+            """
         }
         ```
 
@@ -598,10 +598,10 @@ A análise de arquivos TSV funciona de maneira semelhante, basta adicionar a op�
 
 ```groovy linenums="1"
 Channel
-  .fromPath("data/meta/regions.tsv", checkIfExists:true)
-  // Use a opção `sep` para analisar arquivos com tabulação como separador
-  .splitCsv(sep:'\t')
-  .view()
+    .fromPath("data/meta/regions.tsv", checkIfExists: true)
+    // Use a opção `sep` para analisar arquivos com tabulação como separador
+    .splitCsv(sep:'\t')
+    .view()
 ```
 
 !!! exercise
@@ -613,11 +613,11 @@ Channel
 
         ```groovy linenums="1"
         Channel
-          .fromPath("data/meta/regions.tsv", checkIfExists:true)
-          // Use a opção `sep` para analisar arquivos com tabulação como separador
-          .splitCsv(sep:'\t', header:true )
-          // linha é um objeto de lista
-          .view { linha -> "${linha.patient_id}" }
+            .fromPath("data/meta/regions.tsv", checkIfExists: true)
+            // Use a opção `sep` para analisar arquivos com tabulação como separador
+            .splitCsv(sep:'\t', header: true)
+            // linha é um objeto de lista
+            .view { linha -> "${linha.patient_id}" }
         ```
 
 ## Formatos de arquivo mais complexos
@@ -633,8 +633,8 @@ def f = file('data/meta/regions.json')
 def registros = new JsonSlurper().parse(f)
 
 
-for( def entrada : registros ) {
-  log.info "$entrada.patient_id -- $entrada.feature"
+for (def entrada : registros) {
+    log.info "$entrada.patient_id -- $entrada.feature"
 }
 ```
 
@@ -653,8 +653,8 @@ def f = file('data/meta/regions.yml')
 def registros = new Yaml().load(f)
 
 
-for( def entrada : registros ) {
-  log.info "$entrada.patient_id -- $entrada.feature"
+for (def entrada : registros) {
+    log.info "$entrada.patient_id -- $entrada.feature"
 }
 ```
 
@@ -665,28 +665,43 @@ A melhor maneira de armazenar scripts com analisadores é mantê-los em um arqui
 Veja o seguinte script Nextflow:
 
 ```groovy linenums="1"
-include{ parseJsonFile } from './modules/parsers.nf'
+include { parseJsonFile } from './modules/parsers.nf'
 
-process foo {
-  input:
-  tuple val(meta), path(arquivo_de_dados)
+process FOO {
+    input:
+    tuple val(patient_id), val(feature)
 
-  """
-  echo seu_comando $meta.region_id $arquivo_de_dados
-  """
+    output:
+    stdout
+
+    """
+    echo $patient_id has $feature as feature
+    """
 }
 
 workflow {
-  Channel.fromPath('data/meta/regions*.json') \
-    | flatMap { parseJsonFile(it) } \
-    | map { entrada -> tuple(entrada,"/algum/dado/${entrada.patient_id}.txt") } \
-    | foo
+    Channel.fromPath('data/meta/regions*.json')
+        | flatMap { parseJsonFile(it) }
+        | map { record -> [record.patient_id, record.feature] }
+        | unique
+        | FOO
+        | view
 }
 ```
 
 Para que este script funcione, um arquivo de módulo chamado `parsers.nf` precisa ser criado e armazenado em uma pasta de módulos (`./modules`) no diretório atual.
 
-O arquivo `parsers.nf` deve conter a função `parseJsonFile`.
+O arquivo `parsers.nf` deve conter a função `parseJsonFile`. Por exemplo:
+
+```groovy linenums="1"
+import groovy.json.JsonSlurper
+
+def parseJsonFile(json_file) {
+    def f = file('data/meta/regions.json')
+    def records = new JsonSlurper().parse(f)
+    return records
+}
+```
 
 O Nextflow usará isso como uma função personalizada dentro do escopo do fluxo de trabalho.
 

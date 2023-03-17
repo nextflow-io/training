@@ -65,8 +65,8 @@ alfa.x = 1
 alfa.y = 'valor da string..'
 
 beta {
-     p = 2
-     q = 'outra string ..'
+    p = 2
+    q = 'outra string ..'
 }
 ```
 
@@ -129,15 +129,16 @@ env.BETA = "$HOME/algum/caminho"
 Salve o trecho acima como um arquivo chamado `meu-env.config`. Em seguida, salve o trecho abaixo em um arquivo chamado `foo.nf`:
 
 ```groovy linenums="1"
-process foo {
-  echo true
-  '''
-  env | egrep 'ALFA|BETA'
-  '''
+process FOO {
+    debug true
+
+    '''
+    env | egrep 'ALFA|BETA'
+    '''
 }
 
 workflow {
-    foo()
+    FOO()
 }
 ```
 
@@ -166,9 +167,9 @@ Além disso, quaisquer [diretivas](https://www.nextflow.io/docs/latest/process.h
 
 ```groovy linenums="1"
 process {
-     cpus = 10
-     memory = 8.GB
-     container = 'biocontainers/bamtools:v2.4.0_cv3'
+    cpus = 10
+    memory = 8.GB
+    container = 'biocontainers/bamtools:v2.4.0_cv3'
 }
 ```
 
@@ -192,7 +193,7 @@ A sintaxe para definir as diretivas de processo no arquivo de configuração req
 ??? example
 
     ```groovy linenums="1"
-    process foo {
+    process FOO {
         cpus 4
         memory 2.GB
         time 1.hour
@@ -200,7 +201,7 @@ A sintaxe para definir as diretivas de processo no arquivo de configuração req
 
         script:
         """
-            seu_comando --cpus $task.cpus --mem $task.memory
+        seu_comando --cpus $task.cpus --mem $task.memory
         """
     }
     ```
@@ -208,7 +209,7 @@ A sintaxe para definir as diretivas de processo no arquivo de configuração req
 Isso é especialmente importante quando você deseja criar uma definição de configuração usando uma expressão dinâmica com uma clausura. Por exemplo, em um arquivo de fluxo de trabalho:
 
 ```groovy linenums="1"
-process foo {
+process FOO {
     memory { 4.GB * task.cpus }
 }
 ```
@@ -217,9 +218,9 @@ E o equivalente em um arquivo de configuração, se você preferir configurar is
 
 ```groovy linenums="1"
 process {
-  withName:foo {
-    memory = { 4.GB * task.cpus }
-  }
+    withName: FOO {
+      memory = { 4.GB * task.cpus }
+    }
 }
 ```
 
