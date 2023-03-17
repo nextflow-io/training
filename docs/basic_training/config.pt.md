@@ -65,8 +65,8 @@ alfa.x = 1
 alfa.y = 'valor da string..'
 
 beta {
-     p = 2
-     q = 'outra string ..'
+    p = 2
+    q = 'outra string ..'
 }
 ```
 
@@ -130,10 +130,11 @@ Salve o trecho acima como um arquivo chamado `meu-env.config`. Em seguida, salve
 
 ```groovy linenums="1"
 process FOO {
-  debug true
-  '''
-  env | egrep 'ALFA|BETA'
-  '''
+    debug true
+
+    '''
+    env | egrep 'ALFA|BETA'
+    '''
 }
 
 workflow {
@@ -166,9 +167,9 @@ Além disso, quaisquer [diretivas](https://www.nextflow.io/docs/latest/process.h
 
 ```groovy linenums="1"
 process {
-     cpus = 10
-     memory = 8.GB
-     container = 'biocontainers/bamtools:v2.4.0_cv3'
+    cpus = 10
+    memory = 8.GB
+    container = 'biocontainers/bamtools:v2.4.0_cv3'
 }
 ```
 
@@ -200,7 +201,7 @@ A sintaxe para definir as diretivas de processo no arquivo de configuração req
 
         script:
         """
-            seu_comando --cpus $task.cpus --mem $task.memory
+        seu_comando --cpus $task.cpus --mem $task.memory
         """
     }
     ```
@@ -217,9 +218,9 @@ E o equivalente em um arquivo de configuração, se você preferir configurar is
 
 ```groovy linenums="1"
 process {
-  withName:foo {
-    memory = { 4.GB * task.cpus }
-  }
+    withName:foo {
+      memory = { 4.GB * task.cpus }
+    }
 }
 ```
 

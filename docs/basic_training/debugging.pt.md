@@ -15,10 +15,10 @@ o Nextflow encerra a execução e informa sobre a tarefa com falhas:
     Clique no ícone :material-plus-circle: no código para ver explicações.
 
 ```bash
-ERROR ~ Error executing process > 'index'
+ERROR ~ Error executing process > 'INDEX'
 
 Caused by: # (1)!
-  Process `index` terminated with an error exit status (127)
+  Process `INDEX` terminated with an error exit status (127)
 
 Command executed: # (2)!
 
@@ -76,6 +76,7 @@ Para lidar com isso, forneça o valor `ignore` a `errorStrategy`:
 ```groovy linenums="1"
 process FOO {
     errorStrategy 'ignore'
+
     script:
     """
     seu_comando --isso --aquilo
@@ -96,6 +97,7 @@ Em casos mais raros, erros podem surgir por causa de condições transitórias. 
 ```groovy linenums="1"
 process FOO {
     errorStrategy 'retry'
+
     script:
     """
     seu_comando --isso --aquilo
@@ -115,6 +117,7 @@ Existem casos em que os recursos necessários para a execução estão temporari
 process FOO {
     errorStrategy { sleep(Math.pow(2, task.attempt) * 200 as long); return 'retry' }
     maxRetries 5
+
     script:
     '''
     seu_comando --aqui

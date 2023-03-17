@@ -102,16 +102,16 @@ Para adicionar uma etapa de processamento de índice do transcriptoma (`INDEX`),
  * dado um arquivo de transcriptoma
  */
 process INDEX {
-  input:
-  path transcriptome
+    input:
+    path transcriptome
 
-  output:
-  path 'salmon_index'
+    output:
+    path 'salmon_index'
 
-  script:
-  """
-  salmon index --threads $task.cpus -t $transcriptome -i salmon_index
-  """
+    script:
+    """
+    salmon index --threads $task.cpus -t $transcriptome -i salmon_index
+    """
 }
 ```
 
@@ -184,6 +184,7 @@ docker.enabled = true
         ```groovy
         process INDEX {
             cpus 2
+
             input:
             ...
         ```
