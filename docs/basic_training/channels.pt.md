@@ -669,24 +669,39 @@ include { parseJsonFile } from './modules/parsers.nf'
 
 process FOO {
     input:
-    tuple val(meta), path(arquivo_de_dados)
+    tuple val(patient_id), val(feature)
+
+    output:
+    stdout
 
     """
-    echo seu_comando $meta.region_id $arquivo_de_dados
+    echo $patient_id has $feature as feature
     """
 }
 
 workflow {
-    Channel.fromPath('data/meta/regions*.json') \
-        | flatMap { parseJsonFile(it) } \
-        | map { entrada -> tuple(entrada,"/algum/dado/${entrada.patient_id}.txt") } \
+    Channel.fromPath('data/meta/regions*.json')
+        | flatMap { parseJsonFile(it) }
+        | map { record -> [record.patient_id, record.feature] }
+        | unique
         | FOO
+        | view
 }
 ```
 
 Para que este script funcione, um arquivo de módulo chamado `parsers.nf` precisa ser criado e armazenado em uma pasta de módulos (`./modules`) no diretório atual.
 
-O arquivo `parsers.nf` deve conter a função `parseJsonFile`.
+O arquivo `parsers.nf` deve conter a função `parseJsonFile`. Por exemplo:
+
+```groovy linenums="1"
+import groovy.json.JsonSlurper
+
+def parseJsonFile(json_file) {
+    def f = file('data/meta/regions.json')
+    def records = new JsonSlurper().parse(f)
+    return records
+}
+```
 
 O Nextflow usará isso como uma função personalizada dentro do escopo do fluxo de trabalho.
 
