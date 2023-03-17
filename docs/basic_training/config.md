@@ -130,10 +130,11 @@ Save the above snippet as a file named `my-env.config`. Then save the snippet be
 
 ```groovy linenums="1"
 process FOO {
-  debug true
-  '''
-  env | egrep 'ALPHA|BETA'
-  '''
+    debug true
+
+    '''
+    env | egrep 'ALPHA|BETA'
+    '''
 }
 
 workflow {
@@ -200,7 +201,7 @@ The syntax for setting `process` directives in the configuration file requires `
 
         script:
         """
-            your_command --cpus $task.cpus --mem $task.memory
+        your_command --cpus $task.cpus --mem $task.memory
         """
     }
     ```
@@ -217,9 +218,9 @@ And the equivalent in the configuration file, if you choose to set it there:
 
 ```groovy linenums="1"
 process {
-  withName:FOO {
-    memory = { 4.GB * task.cpus }
-  }
+    withName:FOO {
+        memory = { 4.GB * task.cpus }
+    }
 }
 ```
 

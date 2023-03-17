@@ -74,6 +74,7 @@ To handle this use case, set the process `errorStrategy` to `ignore`:
 ```groovy linenums="1"
 process FOO {
     errorStrategy 'ignore'
+
     script:
     """
     your_command --this --that
@@ -94,6 +95,7 @@ In rare cases, errors may be caused by transient conditions. In this situation, 
 ```groovy linenums="1"
 process FOO {
     errorStrategy 'retry'
+
     script:
     """
     your_command --this --that
@@ -113,6 +115,7 @@ There are cases in which the required execution resources may be temporarily una
 process FOO {
     errorStrategy { sleep(Math.pow(2, task.attempt) * 200 as long); return 'retry' }
     maxRetries 5
+
     script:
     '''
     your_command --here

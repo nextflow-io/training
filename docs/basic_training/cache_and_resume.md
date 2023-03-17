@@ -263,19 +263,20 @@ In practical terms, consider the following snippet:
 
 ```groovy linenums="1"
 process FOO {
-  input:
+    input:
     val x
-  output:
+
+    output:
     tuple val(task.index), val(x)
 
-  script:
+    script:
     """
     sleep \$((RANDOM % 3))
     """
 }
 
 workflow {
-   channel.of('A','B','C','D') | FOO | view
+    channel.of('A','B','C','D') | FOO | view
 }
 ```
 
@@ -298,25 +299,25 @@ A common solution for this is to use what is commonly referred to as a _meta map
 // For example purposes only.
 // These would normally be outputs from upstream processes.
 Channel
-  .of(
-    [[id:'sample_1'], '/path/to/sample_1.bam'],
-    [[id:'sample_2'], '/path/to/sample_2.bam']
-  )
-  .set { bam }
+    .of(
+        [[id:'sample_1'], '/path/to/sample_1.bam'],
+        [[id:'sample_2'], '/path/to/sample_2.bam']
+    )
+    .set { bam }
 
 // NB: sample_2 is now the first element, instead of sample_1
 Channel
-  .of(
-    [[id:'sample_2'], '/path/to/sample_2.bai'],
-    [[id:'sample_1'], '/path/to/sample_1.bai']
-  )
+    .of(
+        [[id:'sample_2'], '/path/to/sample_2.bai'],
+        [[id:'sample_1'], '/path/to/sample_1.bai']
+    )
   .set { bai }
 
 // Instead of feeding the downstream process with these two channels separately, we can
 // join them and provide a single channel where the sample meta map is implicitly matched:
 bam
-  .join(bai)
-  | PROCESS_C
+    .join(bai)
+    | PROCESS_C
 ```
 
 If meta maps are not possible, an alternative is to use the [`fair`](https://nextflow.io/docs/edge/process.html#fair) process directive. When specified, Nextflow will guarantee that the order of outputs will match the order of inputs.

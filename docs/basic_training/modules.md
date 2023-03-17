@@ -60,7 +60,6 @@ include { CONVERTTOUPPER } from './modules.nf'
 
         ```groovy linenums="1"
         process SPLITLETTERS {
-
             input:
             val x
 
@@ -73,7 +72,6 @@ include { CONVERTTOUPPER } from './modules.nf'
         }
 
         process CONVERTTOUPPER {
-
             input:
             path y
 

@@ -357,22 +357,22 @@ params.ncbi_api_key = '<Your API key here>'
 params.accession = ['ERR908507', 'ERR908506']
 
 process FASTQC {
-  input:
-  tuple val(sample_id), path(reads_file)
+    input:
+    tuple val(sample_id), path(reads_file)
 
-  output:
-  path("fastqc_${sample_id}_logs")
+    output:
+    path("fastqc_${sample_id}_logs")
 
-  script:
-  """
-  mkdir fastqc_${sample_id}_logs
-  fastqc -o fastqc_${sample_id}_logs -f fastq -q ${reads_file}
-  """
+    script:
+    """
+    mkdir fastqc_${sample_id}_logs
+    fastqc -o fastqc_${sample_id}_logs -f fastq -q ${reads_file}
+    """
 }
 
 workflow {
-  reads = Channel.fromSRA(params.accession, apiKey: params.ncbi_api_key)
-  FASTQC(reads)
+    reads = Channel.fromSRA(params.accession, apiKey: params.ncbi_api_key)
+    FASTQC(reads)
 }
 ```
 
@@ -384,9 +384,9 @@ The `splitText` operator allows you to split multi-line strings or text file ite
 
 ```groovy linenums="1"
 Channel
-  .fromPath('data/meta/random.txt') // (1)!
-  .splitText() // (2)!
-  .view() // (3)!
+    .fromPath('data/meta/random.txt') // (1)!
+    .splitText() // (2)!
+    .view() // (3)!
 ```
 
 1. Instructs Nextflow to make a channel from the path `data/meta/random.txt`
@@ -397,12 +397,12 @@ You can define the number of lines in each chunk by using the parameter `by`, as
 
 ```groovy linenums="1"
 Channel
-  .fromPath('data/meta/random.txt')
-  .splitText(by: 2)
-  .subscribe {
-    print it;
-    print "--- end of the chunk ---\n"
-  }
+    .fromPath('data/meta/random.txt')
+    .splitText(by: 2)
+    .subscribe {
+        print it;
+        print "--- end of the chunk ---\n"
+    }
 ```
 
 !!! info
@@ -413,9 +413,9 @@ An optional closure can be specified in order to transform the text chunks produ
 
 ```groovy linenums="1"
 Channel
-  .fromPath('data/meta/random.txt')
-  .splitText(by: 10) { it.toUpperCase() }
-  .view()
+    .fromPath('data/meta/random.txt')
+    .splitText(by: 10) { it.toUpperCase() }
+    .view()
 ```
 
 You can also make counts for each line:
@@ -424,9 +424,9 @@ You can also make counts for each line:
 count=0
 
 Channel
-  .fromPath('data/meta/random.txt')
-  .splitText()
-  .view { "${count++}: ${it.toUpperCase().trim()}" }
+    .fromPath('data/meta/random.txt')
+    .splitText()
+    .view { "${count++}: ${it.toUpperCase().trim()}" }
 ```
 
 Finally, you can also use the operator on plain files (outside of the channel context):
@@ -436,7 +436,7 @@ def f = file('data/meta/random.txt')
 def lines = f.splitText()
 def count=0
 for (String row : lines) {
-  log.info "${count++} ${row.toUpperCase()}"
+    log.info "${count++} ${row.toUpperCase()}"
 }
 ```
 
@@ -450,39 +450,39 @@ In the simplest case, just apply the `splitCsv` operator to a channel emitting a
 
 ```groovy linenums="1"
 Channel
-  .fromPath("data/meta/patients_1.csv")
-  .splitCsv()
-  // row is a list object
-  .view { row -> "${row[0]},${row[3]}" }
+    .fromPath("data/meta/patients_1.csv")
+    .splitCsv()
+    // row is a list object
+    .view { row -> "${row[0]},${row[3]}" }
 ```
 
 When the CSV begins with a header line defining the column names, you can specify the parameter `header: true` which allows you to reference each value by its column name, as shown in the following example:
 
 ```groovy linenums="1"
 Channel
-  .fromPath("data/meta/patients_1.csv")
-  .splitCsv(header: true)
-  // row is a list object
-  .view { row -> "${row.patient_id},${row.num_samples}" }
+    .fromPath("data/meta/patients_1.csv")
+    .splitCsv(header: true)
+    // row is a list object
+    .view { row -> "${row.patient_id},${row.num_samples}" }
 ```
 
 Alternatively, you can provide custom header names by specifying a list of strings in the header parameter as shown below:
 
 ```groovy linenums="1"
 Channel
-  .fromPath("data/meta/patients_1.csv")
-  .splitCsv(header: ['col1', 'col2', 'col3', 'col4', 'col5'])
-  // row is a list object
-  .view { row -> "${row.col1},${row.col4}" }
+    .fromPath("data/meta/patients_1.csv")
+    .splitCsv(header: ['col1', 'col2', 'col3', 'col4', 'col5'])
+    // row is a list object
+    .view { row -> "${row.col1},${row.col4}" }
 ```
 
 You can also process multiple CSV files at the same time:
 
 ```groovy linenums="1"
 Channel
-  .fromPath("data/meta/patients_*.csv") // <-- just use a pattern
-  .splitCsv(header: true)
-  .view { row -> "${row.patient_id}\t${row.num_samples}" }
+    .fromPath("data/meta/patients_*.csv") // <-- just use a pattern
+    .splitCsv(header: true)
+    .view { row -> "${row.patient_id}\t${row.num_samples}" }
 ```
 
 !!! tip
@@ -495,7 +495,7 @@ Finally, you can also operate on CSV files outside the channel context:
 def f = file('data/meta/patients_1.csv')
 def lines = f.splitCsv()
 for (List row : lines) {
-  log.info "${row[0]} -- ${row[2]}"
+    log.info "${row[0]} -- ${row[2]}"
 }
 ```
 
@@ -515,37 +515,37 @@ for (List row : lines) {
 
         ```groovy linenums="1"
         Channel
-          .fromFilePairs(params.reads, checkIfExists: true)
-          .set { read_pairs_ch }
+            .fromFilePairs(params.reads, checkIfExists: true)
+            .set { read_pairs_ch }
         ```
 
         To a splitCsv channel factory input:
 
         ```groovy linenums="1" hl_lines="2 3 4"
         Channel
-          .fromPath("fastq.csv")
-          .splitCsv()
-          .view () { row -> "${row[0]},${row[1]},${row[2]}" }
-          .set { read_pairs_ch }
+            .fromPath("fastq.csv")
+            .splitCsv()
+            .view () { row -> "${row[0]},${row[1]},${row[2]}" }
+            .set { read_pairs_ch }
         ```
 
         Finally, change the cardinality of the processes that use the input data. For example, for the quantification process, change it from:
 
         ```groovy linenums="1"
         process QUANTIFICATION {
-          tag "$sample_id"
+            tag "$sample_id"
 
-          input:
-          path salmon_index
-          tuple val(sample_id), path(reads)
+            input:
+            path salmon_index
+            tuple val(sample_id), path(reads)
 
-          output:
-          path sample_id, emit: quant_ch
+            output:
+            path sample_id, emit: quant_ch
 
-          script:
-          """
-          salmon quant --threads $task.cpus --libType=U -i $salmon_index -1 ${reads[0]} -2 ${reads[1]} -o $sample_id
-          """
+            script:
+            """
+            salmon quant --threads $task.cpus --libType=U -i $salmon_index -1 ${reads[0]} -2 ${reads[1]} -o $sample_id
+            """
         }
         ```
 
@@ -553,19 +553,19 @@ for (List row : lines) {
 
         ```groovy linenums="1" hl_lines="6 13"
         process QUANTIFICATION {
-          tag "$sample_id"
+            tag "$sample_id"
 
-          input:
-          path salmon_index
-          tuple val(sample_id), path(reads1), path(reads2)
+            input:
+            path salmon_index
+            tuple val(sample_id), path(reads1), path(reads2)
 
-          output:
-          path sample_id, emit: quant_ch
+            output:
+            path sample_id, emit: quant_ch
 
-          script:
-          """
-          salmon quant --threads $task.cpus --libType=U -i $salmon_index -1 ${reads1} -2 ${reads2} -o $sample_id
-          """
+            script:
+            """
+            salmon quant --threads $task.cpus --libType=U -i $salmon_index -1 ${reads1} -2 ${reads2} -o $sample_id
+            """
         }
         ```
 
@@ -573,19 +573,19 @@ for (List row : lines) {
 
         ```groovy linenums="1"  hl_lines="5 13"
         process FASTQC {
-          tag "FASTQC on $sample_id"
+            tag "FASTQC on $sample_id"
 
-          input:
-          tuple val(sample_id), path(reads1), path(reads2)
+            input:
+            tuple val(sample_id), path(reads1), path(reads2)
 
-          output:
-          path "fastqc_${sample_id}_logs"
+            output:
+            path "fastqc_${sample_id}_logs"
 
-          script:
-          """
-          mkdir fastqc_${sample_id}_logs
-          fastqc -o fastqc_${sample_id}_logs -f fastq -q ${reads1} ${reads2}
-          """
+            script:
+            """
+            mkdir fastqc_${sample_id}_logs
+            fastqc -o fastqc_${sample_id}_logs -f fastq -q ${reads1} ${reads2}
+            """
         }
         ```
 
@@ -597,10 +597,10 @@ Parsing TSV files works in a similar way, simply add the `sep:'\t'` option in th
 
 ```groovy linenums="1"
 Channel
-  .fromPath("data/meta/regions.tsv", checkIfExists:true)
-  // use `sep` option to parse TAB separated files
-  .splitCsv(sep:'\t')
-  .view()
+    .fromPath("data/meta/regions.tsv", checkIfExists: true)
+    // use `sep` option to parse TAB separated files
+    .splitCsv(sep:'\t')
+    .view()
 ```
 
 !!! exercise
@@ -612,11 +612,11 @@ Channel
 
         ```groovy linenums="1"
         Channel
-          .fromPath("data/meta/regions.tsv", checkIfExists: true)
-          // use `sep` option to parse TAB separated files
-          .splitCsv(sep:'\t', header: true)
-          // row is a list object
-          .view { row -> "${row.patient_id}" }
+            .fromPath("data/meta/regions.tsv", checkIfExists: true)
+            // use `sep` option to parse TAB separated files
+            .splitCsv(sep:'\t', header: true)
+            // row is a list object
+            .view { row -> "${row.patient_id}" }
         ```
 
 ## More complex file formats
@@ -633,7 +633,7 @@ def records = new JsonSlurper().parse(f)
 
 
 for (def entry : records) {
-  log.info "$entry.patient_id -- $entry.feature"
+    log.info "$entry.patient_id -- $entry.feature"
 }
 ```
 
@@ -653,7 +653,7 @@ def records = new Yaml().load(f)
 
 
 for (def entry : records) {
-  log.info "$entry.patient_id -- $entry.feature"
+    log.info "$entry.patient_id -- $entry.feature"
 }
 ```
 
@@ -664,26 +664,27 @@ The best way to store parser scripts is to keep them in a Nextflow module file.
 See the following Nextflow script:
 
 ```groovy linenums="1"
-include{ parseJsonFile } from './modules/parsers.nf'
+include { parseJsonFile } from './modules/parsers.nf'
 
 process FOO {
-  input:
+    input:
     tuple val(patient_id), val(feature)
-  output:
+
+    output:
     stdout
 
-  """
-  echo $patient_id has $feature as feature
-  """
+    """
+    echo $patient_id has $feature as feature
+    """
 }
 
 workflow {
-  Channel.fromPath('data/meta/regions*.json')
-    | flatMap { parseJsonFile(it) }
-    | map { record -> [record.patient_id, record.feature] }
-    | unique
-    | FOO
-    | view
+    Channel.fromPath('data/meta/regions*.json')
+        | flatMap { parseJsonFile(it) }
+        | map { record -> [record.patient_id, record.feature] }
+        | unique
+        | FOO
+        | view
 }
 ```
 

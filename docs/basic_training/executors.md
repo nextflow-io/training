@@ -138,19 +138,19 @@ The workflow script:
 
 ```groovy linenums="1"
 process TASK1 {
-  label 'long'
+    label 'long'
 
-  """
-  first_command --here
-  """
+    """
+    first_command --here
+    """
 }
 
 process TASK2 {
-  label 'short'
+    label 'short'
 
-  """
-  second_command --here
-  """
+    """
+    second_command --here
+    """
 }
 ```
 
@@ -180,12 +180,12 @@ Containers can be set for each process in your workflow. You can define their co
 
 ```groovy linenums="1"
 process {
-  withName: foo {
-    container = 'some/image:x'
-  }
-  withName: bar {
-    container = 'other/image:y'
-  }
+    withName: foo {
+        container = 'some/image:x'
+    }
+    withName: bar {
+        container = 'other/image:y'
+    }
 }
 
 docker.enabled = true
@@ -289,9 +289,9 @@ Elastic Block Storage (EBS) volumes (or other supported storage) can be mounted 
 
 ```groovy
 aws {
-  batch {
-      volumes = '/some/path'
-  }
+    batch {
+        volumes = '/some/path'
+    }
 }
 ```
 
@@ -299,10 +299,10 @@ Multiple volumes can be specified using comma-separated paths. The usual Docker 
 
 ```groovy
 aws {
-  region = 'eu-west-1'
-  batch {
-      volumes = ['/tmp', '/host/path:/mnt/path:ro']
-  }
+    region = 'eu-west-1'
+    batch {
+        volumes = ['/tmp', '/host/path:/mnt/path:ro']
+    }
 }
 ```
 
