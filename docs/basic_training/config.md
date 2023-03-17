@@ -218,7 +218,7 @@ And the equivalent in the configuration file, if you choose to set it there:
 
 ```groovy linenums="1"
 process {
-    withName:FOO {
+    withName: FOO {
         memory = { 4.GB * task.cpus }
     }
 }
