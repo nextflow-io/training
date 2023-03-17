@@ -363,7 +363,7 @@ O Nextflow paraleliza a execução de seu pipeline simplesmente fornecendo vári
         Adicione o código a seguir antes da declaração de entrada no processo de `QUANTIFICATION`:
 
         ```groovy
-        publishDir params.outdir, mode:'copy'
+        publishDir params.outdir, mode: 'copy'
         ```
 
 ### :material-check-all: Resumo

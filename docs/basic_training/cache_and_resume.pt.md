@@ -228,13 +228,13 @@ O Nextflow é desenvolvido para simplificar programação paralela, de modo que 
 
 ```groovy linenums="1"
 Channel
-    .of(1,2,3)
-    .map { it -> X=it; X+=2 }
+    .of(1, 2, 3)
+    .map { it -> X = it; X += 2 }
     .view { "canal1 = $it" }
 
 Channel
-    .of(1,2,3)
-    .map { it -> X=it; X*=2 }
+    .of(1, 2, 3)
+    .map { it -> X = it; X *= 2 }
     .view { "canal2 = $it" }
 ```
 
@@ -244,13 +244,13 @@ A implementação correta requer o uso da palavra chave `def` para declarar a va
 
 ```groovy linenums="1"
 Channel
-    .of(1,2,3)
-    .map { it -> def X=it; X+=2 }
+    .of(1, 2, 3)
+    .map { it -> def X = it; X += 2 }
     .println { "canal1 = $it" }
 
 Channel
-    .of(1,2,3)
-    .map { it -> def X=it; X*=2 }
+    .of(1, 2, 3)
+    .map { it -> def X = it; X *= 2 }
     .println { "canal2 = $it" }
 ```
 
@@ -275,7 +275,7 @@ process FOO {
 }
 
 workflow {
-    channel.of('A','B','C','D') | FOO | view
+    channel.of('A', 'B', 'C', 'D') | FOO | view
 }
 ```
 

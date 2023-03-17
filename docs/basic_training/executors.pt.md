@@ -204,7 +204,6 @@ Os perfis de configuração são definidos usando o escopo especial `profiles` q
 
 ```groovy linenums="1"
 profiles {
-
     standard {
         params.genoma = '/local/caminho/ref.fasta'
         process.executor = 'local'

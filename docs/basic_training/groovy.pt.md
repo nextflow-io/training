@@ -74,7 +74,7 @@ O `def` deve ser sempre usado ao definir variáveis locais para uma função ou 
 Um objeto List pode ser definido colocando os itens da lista entre colchetes:
 
 ```groovy linenums="1"
-lista = [10,20,30,40]
+lista = [10, 20, 30, 40]
 ```
 
 Você pode acessar um determinado item na lista com a notação de colchetes (índices começam em `0`) ou usando o método `get`:
@@ -103,7 +103,7 @@ assert lista[0] == 10
 As listas também podem ser indexadas com índices negativos e intervalos invertidos.
 
 ```groovy linenums="1"
-lista = [0,1,2]
+lista = [0, 1, 2]
 assert lista[-1] == 2
 assert lista[-1..0] == lista.reverse()
 ```
@@ -115,21 +115,21 @@ assert lista[-1..0] == lista.reverse()
 Objetos List implementam todos os métodos fornecidos pela interface [java.util.List](https://docs.oracle.com/javase/8/docs/api/java/util/List.html), mais os métodos de extensão fornecidos pelo [Groovy](http://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/List.html).
 
 ```groovy linenums="1"
-assert [1,2,3] << 1 == [1,2,3,1]
-assert [1,2,3] + [1] == [1,2,3,1]
-assert [1,2,3,1] - [1] == [2,3]
-assert [1,2,3] * 2 == [1,2,3,1,2,3]
-assert [1,[2,3]].flatten() == [1,2,3]
-assert [1,2,3].reverse() == [3,2,1]
-assert [1,2,3].collect { it+3 } == [4,5,6]
-assert [1,2,3,1].unique().size() == 3
-assert [1,2,3,1].count(1) == 2
-assert [1,2,3,4].min() == 1
-assert [1,2,3,4].max() == 4
-assert [1,2,3,4].sum() == 10
-assert [4,2,1,3].sort() == [1,2,3,4]
-assert [4,2,1,3].find { it%2 == 0 } == 4
-assert [4,2,1,3].findAll { it%2 == 0 } == [4,2]
+assert [1, 2, 3] << 1 == [1, 2, 3, 1]
+assert [1, 2, 3] + [1] == [1, 2, 3, 1]
+assert [1, 2, 3, 1] - [1] == [2, 3]
+assert [1, 2, 3] * 2 == [1, 2, 3, 1, 2, 3]
+assert [1, [2, 3]].flatten() == [1, 2, 3]
+assert [1, 2, 3].reverse() == [3, 2, 1]
+assert [1, 2, 3].collect { it + 3 } == [4, 5, 6]
+assert [1, 2, 3, 1].unique().size() == 3
+assert [1, 2, 3, 1].count(1) == 2
+assert [1, 2, 3, 4].min() == 1
+assert [1, 2, 3, 4].max() == 4
+assert [1, 2, 3, 4].sum() == 10
+assert [4, 2, 1, 3].sort() == [1, 2, 3, 4]
+assert [4, 2, 1, 3].find { it % 2 == 0 } == 4
+assert [4, 2, 1, 3].findAll { it % 2 == 0 } == [4, 2]
 ```
 
 ## Mapas
@@ -266,7 +266,7 @@ if (x > 10)
     Portanto, uma declaração como:
 
     ```groovy linenums="1"
-    lista = [1,2,3]
+    lista = [1, 2, 3]
     if (lista != null && lista.size() > 0) {
         println lista
     }
@@ -278,7 +278,7 @@ if (x > 10)
     Pode ser escrita como:
 
     ```groovy linenums="1"
-    lista = [1,2,3]
+    lista = [1, 2, 3]
     if (lista)
         println lista
     else
@@ -314,7 +314,7 @@ for (int i = 0; i <3; i++) {
 A iteração sobre objetos de lista também é possível usando a sintaxe abaixo:
 
 ```groovy linenums="1"
-list = ['a','b','c']
+list = ['a', 'b', 'c']
 
 for (String elem : lista) {
     println elem
@@ -365,12 +365,12 @@ assert quadrado(9) == 81
 Da forma como foi mostrado, isso pode não parecer interessante, mas agora podemos passar a função `quadrado` como um argumento para outras funções ou métodos. Algumas funções embutidas aceitam uma função como esta como um argumento. Um exemplo é o método `collect` em listas:
 
 ```groovy linenums="1"
-x = [ 1, 2, 3, 4 ].collect(quadrado)
+x = [1, 2, 3, 4].collect(quadrado)
 println x
 ```
 
 ```console title="Output"
-[ 1, 4, 9, 16 ]
+[1, 4, 9, 16]
 ```
 
 Por padrão, as clausuras recebem um único parâmetro chamado `it`. Para dar a ele um nome diferente, use a sintaxe `->`. Por exemplo:
@@ -385,7 +385,7 @@ Por exemplo, quando o método `each()` é aplicado a um mapa, ele pode receber u
 
 ```groovy linenums="1"
 imprimirMapa = { a, b -> println "$a com o valor $b" }
-valores = [ "Yue" : "Wu", "Mark" : "Williams", "Sudha" : "Kumari" ]
+valores = ["Yue" : "Wu", "Mark" : "Williams", "Sudha" : "Kumari"]
 valores.each(imprimirMapa)
 ```
 
@@ -405,7 +405,7 @@ Para um exemplo mostrando esses dois recursos, consulte o seguinte trecho de có
 
 ```groovy linenums="1"
 resultado = 0 // (1)!
-valores = ["China": 1, "India" : 2, "USA" : 3] // (2)!
+valores = ["China" : 1, "India" : 2, "USA" : 3] // (2)!
 valores.keySet().each { resultado += valores[it] } // (3)!
 println resultado
 ```

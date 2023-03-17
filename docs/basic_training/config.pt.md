@@ -236,8 +236,8 @@ Por fim, as diretivas que devem ser repetidas na definição do processo e nos a
 
 ```groovy linenums="1"
 process {
-    pod = [ [ambiente: 'FOO', valor: '123'],
-            [ambiente: 'BAR', valor: '456'] ]
+    pod = [[ambiente: 'FOO', valor: '123'],
+            [ambiente: 'BAR', valor: '456']]
 }
 ```
 
