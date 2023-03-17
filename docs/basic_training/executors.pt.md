@@ -98,13 +98,13 @@ process {
     time = '30 min'
     cpus = 4
 
-    withName: foo {
+    withName: FOO {
         cpus = 2
         memory = '20 GB'
         queue = 'curta'
     }
 
-    withName: bar {
+    withName: BAR {
         cpus = 4
         memory = '32 GB'
         queue = 'longa'
@@ -179,10 +179,10 @@ Os contêineres podem ser definidos para cada processo em seu fluxo de trabalho.
 
 ```groovy linenums="1"
 process {
-    withName: foo {
+    withName: FOO {
         container = 'uma/imagem:x'
     }
-    withName: bar {
+    withName: BAR {
         container = 'outra/imagem:y'
     }
 }
