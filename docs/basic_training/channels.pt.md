@@ -75,7 +75,7 @@ process SUM {
 }
 
 workflow {
-    SUM(canal1,canal2).view()
+    SUM(canal1, canal2).view()
 }
 ```
 
@@ -132,7 +132,7 @@ process SUM {
 }
 
 workflow {
-    SUM(canal1,canal2.first()).view()
+    SUM(canal1, canal2.first()).view()
 }
 ```
 

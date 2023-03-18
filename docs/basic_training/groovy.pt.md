@@ -385,7 +385,7 @@ Por exemplo, quando o método `each()` é aplicado a um mapa, ele pode receber u
 
 ```groovy linenums="1"
 imprimirMapa = { a, b -> println "$a com o valor $b" }
-valores = ["Yue" : "Wu", "Mark" : "Williams", "Sudha" : "Kumari"]
+valores = ["Yue": "Wu", "Mark": "Williams", "Sudha": "Kumari"]
 valores.each(imprimirMapa)
 ```
 

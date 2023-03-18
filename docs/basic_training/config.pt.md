@@ -220,7 +220,7 @@ E o equivalente em um arquivo de configuração, se você preferir configurar is
 ```groovy linenums="1"
 process {
     withName: FOO {
-      memory = { 4.GB * task.cpus }
+        memory = { 4.GB * task.cpus }
     }
 }
 ```
@@ -238,7 +238,7 @@ Por fim, as diretivas que devem ser repetidas na definição do processo e nos a
 ```groovy linenums="1"
 process {
     pod = [[ambiente: 'FOO', valor: '123'],
-            [ambiente: 'BAR', valor: '456']]
+           [ambiente: 'BAR', valor: '456']]
 }
 ```
 

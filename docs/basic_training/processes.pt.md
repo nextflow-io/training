@@ -632,7 +632,6 @@ process NUMALEATORIO {
     """
 }
 
-
 workflow {
     canal_de_recebimento = NUMALEATORIO()
     canal_de_recebimento.view { "Recebido: " + it.text }
