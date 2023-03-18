@@ -75,7 +75,7 @@ process SUM {
 }
 
 workflow {
-    SUM(ch1,ch2).view()
+    SUM(ch1, ch2).view()
 }
 ```
 
@@ -132,7 +132,7 @@ process SUM {
 }
 
 workflow {
-    SUM(ch1,ch2.first()).view()
+    SUM(ch1, ch2.first()).view()
 }
 ```
 

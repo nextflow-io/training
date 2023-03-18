@@ -632,7 +632,6 @@ process RANDOMNUM {
     """
 }
 
-
 workflow {
     receiver_ch = RANDOMNUM()
     receiver_ch.view { "Received: " + it.text }
