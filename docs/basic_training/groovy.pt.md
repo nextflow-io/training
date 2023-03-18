@@ -137,7 +137,7 @@ assert [4, 2, 1, 3].findAll { it % 2 == 0 } == [4, 2]
 Os mapas são como listas que possuem uma chave arbitrária em vez de um número inteiro. Portanto, a sintaxe é bem parecida.
 
 ```groovy linenums="1"
-mapa = [a:0, b:1, c:2]
+mapa = [a: 0, b: 1, c: 2]
 ```
 
 Os mapas podem ser acessados em uma sintaxe convencional de colchetes ou como se a chave fosse uma propriedade do mapa.
@@ -162,7 +162,7 @@ Para adicionar dados ou modificar um mapa, a sintaxe é semelhante à adição d
 mapa['a'] = 'x' // (1)!
 mapa.b = 'y' // (2)!
 mapa.put('c', 'z') // (3)!
-assert mapa == [a:'x', b:'y', c:'z']
+assert mapa == [a: 'x', b: 'y', c: 'z']
 ```
 
 1. Usando colchetes.
@@ -306,7 +306,7 @@ if (x > 10)
 A sintaxe clássica do loop `for` é suportada como mostrado aqui:
 
 ```groovy linenums="1"
-for (int i = 0; i <3; i++) {
+for (int i = 0; i < 3; i++) {
     println("Olá mundo $i")
 }
 ```
@@ -327,7 +327,7 @@ for (String elem : lista) {
 
 ```groovy linenums="1"
 int fib(int n) {
-    return n < 2 ? 1 : fib(n-1) + fib(n-2)
+    return n < 2 ? 1 : fib(n - 1) + fib(n - 2)
 }
 
 assert fib(10)==89
@@ -337,7 +337,7 @@ Uma função pode receber vários argumentos, separando-os com uma vírgula. A p
 
 ```groovy linenums="1"
 def fact(n) {
-    n > 1 ? n * fact(n-1) : 1
+    n > 1 ? n * fact(n - 1) : 1
 }
 
 assert fact(5) == 120
@@ -405,7 +405,7 @@ Para um exemplo mostrando esses dois recursos, consulte o seguinte trecho de có
 
 ```groovy linenums="1"
 resultado = 0 // (1)!
-valores = ["China" : 1, "India" : 2, "USA" : 3] // (2)!
+valores = ["China": 1, "India": 2, "USA": 3] // (2)!
 valores.keySet().each { resultado += valores[it] } // (3)!
 println resultado
 ```

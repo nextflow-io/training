@@ -139,6 +139,7 @@ O script do fluxo de trabalho:
 process TAREFA1 {
     label 'longo'
 
+    script:
     """
     primeiro_comando --aqui
     """
@@ -147,6 +148,7 @@ process TAREFA1 {
 process TAREFA2 {
     label 'curto'
 
+    script:
     """
     segundo_comando --aqui
     """

@@ -132,6 +132,7 @@ Salve o trecho acima como um arquivo chamado `meu-env.config`. Em seguida, salve
 process FOO {
     debug true
 
+    script:
     '''
     env | egrep 'ALFA|BETA'
     '''

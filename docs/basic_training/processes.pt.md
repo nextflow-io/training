@@ -652,6 +652,7 @@ process SEPARARLETRAS {
     output:
     path 'pedaco_*'
 
+    script:
     """
     printf 'Hola' | split -b 1 - pedaco_
     """

@@ -299,16 +299,16 @@ Uma solução comum para isso é usar o que é comumente chamado de _meta mapa_ 
 // Estes abaixo seriam normalmente as saídas de processos anteriores
 Channel
     .of(
-        [[id:'amostra_1'], '/caminho/para/amostra_1.bam'],
-        [[id:'amostra_2'], '/caminho/para/amostra_2.bam']
+        [[id: 'amostra_1'], '/caminho/para/amostra_1.bam'],
+        [[id: 'amostra_2'], '/caminho/para/amostra_2.bam']
     )
     .set { bam }
 
 // Nota: amostra_2 é agora o primeiro elemento, em vez de amostra_1
 Channel
     .of(
-        [[id:'amostra_2'], '/caminho/para/amostra_2.bai'],
-        [[id:'amostra_1'], '/caminho/para/amostra_1.bai']
+        [[id: 'amostra_2'], '/caminho/para/amostra_2.bai'],
+        [[id: 'amostra_1'], '/caminho/para/amostra_1.bai']
     )
     .set { bai }
 

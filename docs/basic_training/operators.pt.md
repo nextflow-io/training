@@ -124,7 +124,7 @@ c1 = Channel.of(1, 2, 3)
 c2 = Channel.of('a', 'b')
 c3 = Channel.of('z')
 
-c1.mix(c2,c3).view()
+c1.mix(c2, c3).view()
 ```
 
 ```console title="Output"
@@ -192,7 +192,7 @@ Por exemplo:
 
 ```groovy linenums="1"
 Channel
-    .of([1,'A'], [1,'B'], [2,'C'], [3, 'B'], [1,'C'], [2, 'A'], [3, 'D'])
+    .of([1, 'A'], [1, 'B'], [2, 'C'], [3, 'B'], [1, 'C'], [2, 'A'], [3, 'D'])
     .groupTuple()
     .view()
 ```
