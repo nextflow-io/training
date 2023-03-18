@@ -33,7 +33,7 @@ Try the following snippets:
     Click the :material-plus-circle: icons in the code for explanations.
 
 ```groovy linenums="1"
-ch = Channel.of(1,2,3)
+ch = Channel.of(1, 2, 3)
 println(ch) // (1)!
 ch.view() // (2)!
 ```
@@ -46,7 +46,7 @@ ch.view() // (2)!
     Try to execute this snippet. You can do that by creating a new `.nf` file or by editing an already existing `.nf` file.
 
     ```groovy linenums="1"
-    ch = Channel.of(1,2,3)
+    ch = Channel.of(1, 2, 3)
     ch.view()
     ```
 
@@ -57,7 +57,7 @@ A **value** channel (a.k.a. singleton channel) by definition is bound to a singl
 To better understand the difference between value and queue channels, save the snippet below as `example.nf`.
 
 ```groovy linenums="1" title="example.nf" linenums="1"
-ch1 = Channel.of(1,2,3)
+ch1 = Channel.of(1, 2, 3)
 ch2 = Channel.of(1)
 
 process SUM {
@@ -75,7 +75,7 @@ process SUM {
 }
 
 workflow {
-    SUM(ch1,ch2).view()
+    SUM(ch1, ch2).view()
 }
 ```
 
@@ -114,7 +114,7 @@ DataflowVariable(value=1)
 There is no poison pill, and that’s why we get a different output with the code below, where `ch2` is turned into a value channel through the `first` operator.
 
 ```groovy linenums="1"
-ch1 = Channel.of(1,2,3)
+ch1 = Channel.of(1, 2, 3)
 ch2 = Channel.of(1)
 
 process SUM {
@@ -132,7 +132,7 @@ process SUM {
 }
 
 workflow {
-    SUM(ch1,ch2.first()).view()
+    SUM(ch1, ch2.first()).view()
 }
 ```
 
@@ -157,7 +157,7 @@ The `value` factory method is used to create a _value_ channel. An optional not 
 ```groovy linenums="1"
 ch1 = Channel.value() // (1)!
 ch2 = Channel.value('Hello there') // (2)!
-ch3 = Channel.value([1,2,3,4,5]) // (3)!
+ch3 = Channel.value([1, 2, 3, 4, 5]) // (3)!
 ```
 
 1. Creates an _empty_ value channel
@@ -186,8 +186,8 @@ The method `Channel.of` works in a similar manner to `Channel.from` (which is no
 
 ```groovy linenums="1"
 Channel
-  .of(1..23, 'X', 'Y')
-  .view()
+    .of(1..23, 'X', 'Y')
+    .view()
 ```
 
 ### `fromList()`
@@ -198,8 +198,8 @@ The method `Channel.fromList` creates a channel emitting the elements provided b
 list = ['hello', 'world']
 
 Channel
-  .fromList(list)
-  .view()
+    .fromList(list)
+    .view()
 ```
 
 ### `fromPath()`
@@ -236,7 +236,7 @@ Learn more about the glob patterns syntax at [this link](https://docs.oracle.com
 
         ```groovy linenums="1"
         Channel.fromPath('./data/ggal/**.fq', hidden: true)
-          .view()
+            .view()
         ```
 
 ### `fromFilePairs()`
@@ -245,8 +245,8 @@ The `fromFilePairs` method creates a channel emitting the file pairs matching a 
 
 ```groovy linenums="1"
 Channel
-  .fromFilePairs('./data/ggal/*_{1,2}.fq')
-  .view()
+    .fromFilePairs('./data/ggal/*_{1,2}.fq')
+    .view()
 ```
 
 It will produce an output similar to the following:
@@ -281,7 +281,7 @@ It will produce an output similar to the following:
 
         ```groovy linenums="1"
         Channel.fromFilePairs('./data/ggal/*_{1,2}.fq', flat: true)
-          .view()
+            .view()
         ```
 
         Then check the square brackets around the file names, to see the difference with `flat`.
@@ -312,8 +312,8 @@ For example, the following snippet will print the contents of an NCBI project ID
 params.ncbi_api_key = '<Your API key here>'
 
 Channel
-  .fromSRA(['SRP073307'], apiKey: params.ncbi_api_key)
-  .view()
+    .fromSRA(['SRP073307'], apiKey: params.ncbi_api_key)
+    .view()
 ```
 
 !!! info ""
@@ -335,8 +335,8 @@ Multiple accession IDs can be specified using a list object:
 ```groovy linenums="1"
 ids = ['ERR908507', 'ERR908506', 'ERR908505']
 Channel
-  .fromSRA(ids, apiKey: params.ncbi_api_key)
-  .view()
+    .fromSRA(ids, apiKey: params.ncbi_api_key)
+    .view()
 ```
 
 ```groovy
@@ -421,7 +421,7 @@ Channel
 You can also make counts for each line:
 
 ```groovy linenums="1"
-count=0
+count = 0
 
 Channel
     .fromPath('data/meta/random.txt')
@@ -434,7 +434,7 @@ Finally, you can also use the operator on plain files (outside of the channel co
 ```groovy linenums="1"
 def f = file('data/meta/random.txt')
 def lines = f.splitText()
-def count=0
+def count = 0
 for (String row : lines) {
     log.info "${count++} ${row.toUpperCase()}"
 }
@@ -525,7 +525,7 @@ for (List row : lines) {
         Channel
             .fromPath("fastq.csv")
             .splitCsv()
-            .view () { row -> "${row[0]},${row[1]},${row[2]}" }
+            .view { row -> "${row[0]},${row[1]},${row[2]}" }
             .set { read_pairs_ch }
         ```
 
@@ -593,13 +593,13 @@ for (List row : lines) {
 
 ### Tab separated values (.tsv)
 
-Parsing TSV files works in a similar way, simply add the `sep:'\t'` option in the `splitCsv` context:
+Parsing TSV files works in a similar way, simply add the `sep: '\t'` option in the `splitCsv` context:
 
 ```groovy linenums="1"
 Channel
     .fromPath("data/meta/regions.tsv", checkIfExists: true)
     // use `sep` option to parse TAB separated files
-    .splitCsv(sep:'\t')
+    .splitCsv(sep: '\t')
     .view()
 ```
 
@@ -614,7 +614,7 @@ Channel
         Channel
             .fromPath("data/meta/regions.tsv", checkIfExists: true)
             // use `sep` option to parse TAB separated files
-            .splitCsv(sep:'\t', header: true)
+            .splitCsv(sep: '\t', header: true)
             // row is a list object
             .view { row -> "${row.patient_id}" }
         ```
@@ -673,6 +673,7 @@ process FOO {
     output:
     stdout
 
+    script:
     """
     echo $patient_id has $feature as feature
     """

@@ -69,13 +69,13 @@ nextflow run script1.nf --reads '/workspace/gitpod/nf-training/data/ggal/lung_{1
 
         ```groovy
         log.info """\
-                    R N A S E Q - N F   P I P E L I N E
-                    ===================================
-                    transcriptoma               : ${params.transcriptome_file}
-                    arquivos de leituras        : ${params.reads}
-                    diretório de saíde          : ${params.outdir}
-                    """
-                    .stripIndent()
+            R N A S E Q - N F   P I P E L I N E
+            ===================================
+            transcriptoma               : ${params.transcriptome_file}
+            arquivos de leituras        : ${params.reads}
+            diretório de saíde          : ${params.outdir}
+            """
+            .stripIndent()
         ```
 
 ### :material-check-all: Resumo
@@ -363,7 +363,7 @@ O Nextflow paraleliza a execução de seu pipeline simplesmente fornecendo vári
         Adicione o código a seguir antes da declaração de entrada no processo de `QUANTIFICATION`:
 
         ```groovy
-        publishDir params.outdir, mode:'copy'
+        publishDir params.outdir, mode: 'copy'
         ```
 
 ### :material-check-all: Resumo

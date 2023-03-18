@@ -81,7 +81,6 @@ TODO: Maybe either:
 ```groovy title="nf-training/hello.nf" linenums="1"
 #!/usr/bin/env nextflow
 // (1)!
-
 params.greeting = 'Hello world!' // (2)!
 greeting_ch = Channel.of(params.greeting) // (3)!
 
@@ -92,7 +91,7 @@ process SPLITLETTERS { // (4)!
     output: // (7)!
     path 'chunk_*' // (8)!
 
-    // (9)!
+    script: // (9)!
     """
     printf '$x' | split -b 6 - chunk_
     """
@@ -105,7 +104,7 @@ process CONVERTTOUPPER { // (11)!
     output: // (14)!
     stdout // (15)!
 
-    // (16)!
+    script: // (16)!
     """
     cat $y | tr '[a-z]' '[A-Z]'
     """
@@ -213,6 +212,7 @@ process CONVERTTOUPPER {
     output:
     stdout
 
+    script:
     """
     rev $y
     """

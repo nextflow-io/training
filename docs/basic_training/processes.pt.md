@@ -94,7 +94,7 @@ process CODIGOPYTHON {
 
     x = 'Olá'
     y = 'mundo!'
-    print ("%s - %s" % (x,y))
+    print ("%s - %s" % (x, y))
     """
 }
 
@@ -382,8 +382,8 @@ Uma característica fundamental dos processos é a capacidade de lidar com entra
 Considere o seguinte exemplo:
 
 ```groovy linenums="1"
-canal1 = Channel.of(1,2,3)
-canal2 = Channel.of('a','b','c')
+canal1 = Channel.of(1, 2, 3)
+canal2 = Channel.of('a', 'b', 'c')
 
 process FOO {
     debug true
@@ -420,8 +420,8 @@ Isso significa que os valores do canal são consumidos serialmente um após o ou
 Por exemplo:
 
 ```groovy linenums="1"
-entrada1 = Channel.of(1,2)
-entrada2 = Channel.of('a','b','c','d')
+entrada1 = Channel.of(1, 2)
+entrada2 = Channel.of('a', 'b', 'c', 'd')
 
 process FOO {
     debug true
@@ -449,7 +449,7 @@ Compare o exemplo anterior com o seguinte:
 
 ```groovy linenums="1"
 entrada1 = Channel.value(1)
-entrada2 = Channel.of('a','b','c')
+entrada2 = Channel.of('a', 'b', 'c')
 
 process BAR {
     debug true
@@ -596,7 +596,7 @@ output:
 O qualificador `val` especifica um valor definido no contexto do script. Os valores são frequentemente definidos nos blocos de _input_ e/ou _output_, conforme mostrado no exemplo a seguir:
 
 ```groovy linenums="1"
-metodos = ['prot','dna', 'rna']
+metodos = ['prot', 'dna', 'rna']
 
 process FOO {
     input:
@@ -632,7 +632,6 @@ process NUMALEATORIO {
     """
 }
 
-
 workflow {
     canal_de_recebimento = NUMALEATORIO()
     canal_de_recebimento.view { "Recebido: " + it.text }
@@ -652,6 +651,7 @@ process SEPARARLETRAS {
     output:
     path 'pedaco_*'
 
+    script:
     """
     printf 'Hola' | split -b 1 - pedaco_
     """

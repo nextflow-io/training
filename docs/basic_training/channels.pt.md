@@ -33,7 +33,7 @@ Tente os seguintes trechos de código:
     Clique no ícone :material-plus-circle: no código para ver explicações.
 
 ```groovy linenums="1"
-canal = Channel.of(1,2,3)
+canal = Channel.of(1, 2, 3)
 println(canal) // (1)!
 canal.view() // (2)!
 ```
@@ -46,7 +46,7 @@ canal.view() // (2)!
     Tente executar este trecho de código. Você pode fazer isso criando um novo arquivo `.nf` ou editando um arquivo `.nf` já existente.
 
     ```groovy linenums="1"
-    canal = Channel.of(1,2,3)
+    canal = Channel.of(1, 2, 3)
     canal.view()
     ```
 
@@ -57,7 +57,7 @@ Um canal de **valor** (também conhecido como canal singleton), por definição,
 Para entender melhor a diferença entre canais de valor e de fila, salve o trecho abaixo como `exemplo.nf`.
 
 ```groovy linenums="1" title="exemplo.nf" linenums="1"
-canal1 = Channel.of(1,2,3)
+canal1 = Channel.of(1, 2, 3)
 canal2 = Channel.of(1)
 
 process SUM {
@@ -75,7 +75,7 @@ process SUM {
 }
 
 workflow {
-    SUM(canal1,canal2).view()
+    SUM(canal1, canal2).view()
 }
 ```
 
@@ -114,7 +114,7 @@ DataflowVariable(value=1)
 Não há pílula de veneno, e é por isso que obtemos uma saída diferente com o código abaixo, onde `canal2` é transformado em um canal de valor por meio do operador `first`.
 
 ```groovy linenums="1"
-canal1 = Channel.of(1,2,3)
+canal1 = Channel.of(1, 2, 3)
 canal2 = Channel.of(1)
 
 process SUM {
@@ -132,7 +132,7 @@ process SUM {
 }
 
 workflow {
-    SUM(canal1,canal2.first()).view()
+    SUM(canal1, canal2.first()).view()
 }
 ```
 
@@ -157,7 +157,7 @@ A fábrica de canal `value` é utilizada para criar um canal de _valor_. Um argu
 ```groovy linenums="1"
 canal1 = Channel.value() // (1)!
 canal2 = Channel.value('Olá, você!') // (2)!
-canal3 = Channel.value([1,2,3,4,5]) // (3)!
+canal3 = Channel.value([1, 2, 3, 4, 5]) // (3)!
 ```
 
 1. Cria um canal de valor _vazio_
@@ -422,7 +422,7 @@ Channel
 Você também pode fazer contagens para cada linha:
 
 ```groovy linenums="1"
-contador=0
+contador = 0
 
 Channel
     .fromPath('data/meta/random.txt')
@@ -435,7 +435,7 @@ Por fim, você também pode usar o operador em arquivos simples (fora do context
 ```groovy linenums="1"
 def f = file('data/meta/random.txt')
 def linhas = f.splitText()
-def contador=0
+def contador = 0
 for (String linha : linhas) {
     log.info "${contador++} ${linha.toUpperCase()}"
 }
@@ -526,7 +526,7 @@ for (List linha : linhas) {
         Channel
             .fromPath("fastq.csv")
             .splitCsv()
-            .view () { linha -> "${linha[0]},${linha[1]},${linha[2]}" }
+            .view { linha -> "${linha[0]},${linha[1]},${linha[2]}" }
             .set { read_pairs_ch }
         ```
 
@@ -594,13 +594,13 @@ for (List linha : linhas) {
 
 ### Valores separados por tabulação (.tsv)
 
-A análise de arquivos TSV funciona de maneira semelhante, basta adicionar a opção `sep:'\t'` no contexto do `splitCsv`:
+A análise de arquivos TSV funciona de maneira semelhante, basta adicionar a opção `sep: '\t'` no contexto do `splitCsv`:
 
 ```groovy linenums="1"
 Channel
     .fromPath("data/meta/regions.tsv", checkIfExists: true)
     // Use a opção `sep` para analisar arquivos com tabulação como separador
-    .splitCsv(sep:'\t')
+    .splitCsv(sep: '\t')
     .view()
 ```
 
@@ -615,7 +615,7 @@ Channel
         Channel
             .fromPath("data/meta/regions.tsv", checkIfExists: true)
             // Use a opção `sep` para analisar arquivos com tabulação como separador
-            .splitCsv(sep:'\t', header: true)
+            .splitCsv(sep: '\t', header: true)
             // linha é um objeto de lista
             .view { linha -> "${linha.patient_id}" }
         ```
@@ -674,6 +674,7 @@ process FOO {
     output:
     stdout
 
+    script:
     """
     echo $patient_id has $feature as feature
     """

@@ -139,6 +139,7 @@ O script do fluxo de trabalho:
 process TAREFA1 {
     label 'longo'
 
+    script:
     """
     primeiro_comando --aqui
     """
@@ -147,6 +148,7 @@ process TAREFA1 {
 process TAREFA2 {
     label 'curto'
 
+    script:
     """
     segundo_comando --aqui
     """
@@ -204,7 +206,6 @@ Os perfis de configuração são definidos usando o escopo especial `profiles` q
 
 ```groovy linenums="1"
 profiles {
-
     standard {
         params.genoma = '/local/caminho/ref.fasta'
         process.executor = 'local'

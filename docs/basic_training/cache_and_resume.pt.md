@@ -228,13 +228,13 @@ O Nextflow é desenvolvido para simplificar programação paralela, de modo que 
 
 ```groovy linenums="1"
 Channel
-    .of(1,2,3)
-    .map { it -> X=it; X+=2 }
+    .of(1, 2, 3)
+    .map { it -> X = it; X += 2 }
     .view { "canal1 = $it" }
 
 Channel
-    .of(1,2,3)
-    .map { it -> X=it; X*=2 }
+    .of(1, 2, 3)
+    .map { it -> X = it; X *= 2 }
     .view { "canal2 = $it" }
 ```
 
@@ -244,13 +244,13 @@ A implementação correta requer o uso da palavra chave `def` para declarar a va
 
 ```groovy linenums="1"
 Channel
-    .of(1,2,3)
-    .map { it -> def X=it; X+=2 }
+    .of(1, 2, 3)
+    .map { it -> def X = it; X += 2 }
     .println { "canal1 = $it" }
 
 Channel
-    .of(1,2,3)
-    .map { it -> def X=it; X*=2 }
+    .of(1, 2, 3)
+    .map { it -> def X = it; X *= 2 }
     .println { "canal2 = $it" }
 ```
 
@@ -275,7 +275,7 @@ process FOO {
 }
 
 workflow {
-    channel.of('A','B','C','D') | FOO | view
+    channel.of('A', 'B', 'C', 'D') | FOO | view
 }
 ```
 
@@ -299,16 +299,16 @@ Uma solução comum para isso é usar o que é comumente chamado de _meta mapa_ 
 // Estes abaixo seriam normalmente as saídas de processos anteriores
 Channel
     .of(
-        [[id:'amostra_1'], '/caminho/para/amostra_1.bam'],
-        [[id:'amostra_2'], '/caminho/para/amostra_2.bam']
+        [[id: 'amostra_1'], '/caminho/para/amostra_1.bam'],
+        [[id: 'amostra_2'], '/caminho/para/amostra_2.bam']
     )
     .set { bam }
 
 // Nota: amostra_2 é agora o primeiro elemento, em vez de amostra_1
 Channel
     .of(
-        [[id:'amostra_2'], '/caminho/para/amostra_2.bai'],
-        [[id:'amostra_1'], '/caminho/para/amostra_1.bai']
+        [[id: 'amostra_2'], '/caminho/para/amostra_2.bai'],
+        [[id: 'amostra_1'], '/caminho/para/amostra_1.bai']
     )
     .set { bai }
 

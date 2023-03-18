@@ -94,7 +94,7 @@ process PYSTUFF {
 
     x = 'Hello'
     y = 'world!'
-    print ("%s - %s" % (x,y))
+    print ("%s - %s" % (x, y))
     """
 }
 
@@ -382,8 +382,8 @@ A key feature of processes is the ability to handle inputs from multiple channel
 Consider the following example:
 
 ```groovy linenums="1"
-ch1 = Channel.of(1,2,3)
-ch2 = Channel.of('a','b','c')
+ch1 = Channel.of(1, 2, 3)
+ch2 = Channel.of('a', 'b', 'c')
 
 process FOO {
     debug true
@@ -420,8 +420,8 @@ This means channel values are consumed serially one after another and the first 
 For example:
 
 ```groovy linenums="1"
-input1 = Channel.of(1,2)
-input2 = Channel.of('a','b','c','d')
+input1 = Channel.of(1, 2)
+input2 = Channel.of('a', 'b', 'c', 'd')
 
 process FOO {
     debug true
@@ -449,7 +449,7 @@ Compare the previous example with the following one:
 
 ```groovy linenums="1"
 input1 = Channel.value(1)
-input2 = Channel.of('a','b','c')
+input2 = Channel.of('a', 'b', 'c')
 
 process BAR {
     debug true
@@ -596,7 +596,7 @@ output:
 The `val` qualifier specifies a defined _value_ in the script context. Values are frequently defined in the _input_ and/or _output_ declaration blocks, as shown in the following example:
 
 ```groovy linenums="1"
-methods = ['prot','dna', 'rna']
+methods = ['prot', 'dna', 'rna']
 
 process FOO {
     input:
@@ -632,7 +632,6 @@ process RANDOMNUM {
     """
 }
 
-
 workflow {
     receiver_ch = RANDOMNUM()
     receiver_ch.view { "Received: " + it.text }
@@ -652,6 +651,7 @@ process SPLITLETTERS {
     output:
     path 'chunk_*'
 
+    script:
     """
     printf 'Hola' | split -b 1 - chunk_
     """

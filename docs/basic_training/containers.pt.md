@@ -546,7 +546,7 @@ Contrariamente a outros registros que irão puxar a última imagem quando nenhum
         process QUANTIFICATION {
             tag "Salmon on $sample_id"
             container 'quay.io/biocontainers/salmon:1.7.0--h84f40af_0'
-            publishDir params.outdir, mode:'copy'
+            publishDir params.outdir, mode: 'copy'
         ...
         ```
 

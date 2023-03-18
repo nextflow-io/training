@@ -140,6 +140,7 @@ The workflow script:
 process TASK1 {
     label 'long'
 
+    script:
     """
     first_command --here
     """
@@ -148,6 +149,7 @@ process TASK1 {
 process TASK2 {
     label 'short'
 
+    script:
     """
     second_command --here
     """
@@ -205,7 +207,6 @@ Configuration profiles are defined by using the special scope `profiles` which g
 
 ```groovy linenums="1"
 profiles {
-
     standard {
         params.genome = '/local/path/ref.fasta'
         process.executor = 'local'

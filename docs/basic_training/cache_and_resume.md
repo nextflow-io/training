@@ -229,13 +229,13 @@ For example:
 
 ```groovy linenums="1"
 Channel
-    .of(1,2,3)
-    .map { it -> X=it; X+=2 }
+    .of(1, 2, 3)
+    .map { it -> X = it; X += 2 }
     .view { "ch1 = $it" }
 
 Channel
-    .of(1,2,3)
-    .map { it -> X=it; X*=2 }
+    .of(1, 2, 3)
+    .map { it -> X = it; X *= 2 }
     .view { "ch2 = $it" }
 ```
 
@@ -245,13 +245,13 @@ The correct implementation requires the use of the `def` keyword to declare the 
 
 ```groovy linenums="1"
 Channel
-    .of(1,2,3)
-    .map { it -> def X=it; X+=2 }
+    .of(1, 2, 3)
+    .map { it -> def X = it; X += 2 }
     .println { "ch1 = $it" }
 
 Channel
-    .of(1,2,3)
-    .map { it -> def X=it; X*=2 }
+    .of(1, 2, 3)
+    .map { it -> def X = it; X *= 2 }
     .println { "ch2 = $it" }
 ```
 
@@ -276,7 +276,7 @@ process FOO {
 }
 
 workflow {
-    channel.of('A','B','C','D') | FOO | view
+    channel.of('A', 'B', 'C', 'D') | FOO | view
 }
 ```
 
@@ -300,18 +300,18 @@ A common solution for this is to use what is commonly referred to as a _meta map
 // These would normally be outputs from upstream processes.
 Channel
     .of(
-        [[id:'sample_1'], '/path/to/sample_1.bam'],
-        [[id:'sample_2'], '/path/to/sample_2.bam']
+        [[id: 'sample_1'], '/path/to/sample_1.bam'],
+        [[id: 'sample_2'], '/path/to/sample_2.bam']
     )
     .set { bam }
 
 // NB: sample_2 is now the first element, instead of sample_1
 Channel
     .of(
-        [[id:'sample_2'], '/path/to/sample_2.bai'],
-        [[id:'sample_1'], '/path/to/sample_1.bai']
+        [[id: 'sample_2'], '/path/to/sample_2.bai'],
+        [[id: 'sample_1'], '/path/to/sample_1.bai']
     )
-  .set { bai }
+    .set { bai }
 
 // Instead of feeding the downstream process with these two channels separately, we can
 // join them and provide a single channel where the sample meta map is implicitly matched:
