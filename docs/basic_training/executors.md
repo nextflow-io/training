@@ -140,6 +140,7 @@ The workflow script:
 process TASK1 {
     label 'long'
 
+    script:
     """
     first_command --here
     """
@@ -148,6 +149,7 @@ process TASK1 {
 process TASK2 {
     label 'short'
 
+    script:
     """
     second_command --here
     """

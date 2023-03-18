@@ -66,6 +66,7 @@ include { CONVERTTOUPPER } from './modules.nf'
             output:
             path 'chunk_*'
 
+            script:
             """
             printf '$x' | split -b 6 - chunk_
             """
@@ -78,6 +79,7 @@ include { CONVERTTOUPPER } from './modules.nf'
             output:
             stdout
 
+            script:
             """
             cat $y | tr '[a-z]' '[A-Z]'
             """
@@ -201,6 +203,7 @@ process SPLITLETTERS {
     output:
     path 'chunk_*'
 
+    script:
     """
     printf '$x' | split -b 6 - chunk_
     """
@@ -213,6 +216,7 @@ process CONVERTTOUPPER {
     output:
     stdout emit: upper
 
+    script:
     """
     cat $y | tr '[a-z]' '[A-Z]'
     """
@@ -240,7 +244,7 @@ Another way to deal with outputs in the workflow scope is to use pipes `|`.
 
     ```groovy linenums="1"
     workflow {
-        Channel.of(params.greeting) | SPLITLETTERS | flatten() | CONVERTTOUPPER | view
+        Channel.of(params.greeting) | SPLITLETTERS | flatten | CONVERTTOUPPER | view
     }
     ```
 

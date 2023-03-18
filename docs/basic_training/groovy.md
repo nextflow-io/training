@@ -137,7 +137,7 @@ assert [4, 2, 1, 3].findAll { it % 2 == 0 } == [4, 2]
 Maps are like lists that have an arbitrary key instead of an integer. Therefore, the syntax is very much aligned.
 
 ```groovy linenums="1"
-map = [a:0, b:1, c:2]
+map = [a: 0, b: 1, c: 2]
 ```
 
 Maps can be accessed in a conventional square-bracket syntax or as if the key was a property of the map.
@@ -162,7 +162,7 @@ To add data or to modify a map, the syntax is similar to adding values to a list
 map['a'] = 'x' // (1)!
 map.b = 'y' // (2)!
 map.put('c', 'z') // (3)!
-assert map == [a:'x', b:'y', c:'z']
+assert map == [a: 'x', b: 'y', c: 'z']
 ```
 
 1. Using square brackets.
@@ -306,7 +306,7 @@ if (x > 10)
 The classical `for` loop syntax is supported as shown here:
 
 ```groovy linenums="1"
-for (int i = 0; i <3; i++) {
+for (int i = 0; i < 3; i++) {
     println("Hello World $i")
 }
 ```
@@ -327,7 +327,7 @@ It is possible to define a custom function into a script, as shown here:
 
 ```groovy linenums="1"
 int fib(int n) {
-    return n < 2 ? 1 : fib(n-1) + fib(n-2)
+    return n < 2 ? 1 : fib(n - 1) + fib(n - 2)
 }
 
 assert fib(10)==89
@@ -337,7 +337,7 @@ A function can take multiple arguments separating them with a comma. The `return
 
 ```groovy linenums="1"
 def fact(n) {
-    n > 1 ? n * fact(n-1) : 1
+    n > 1 ? n * fact(n - 1) : 1
 }
 
 assert fact(5) == 120

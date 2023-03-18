@@ -652,6 +652,7 @@ process SPLITLETTERS {
     output:
     path 'chunk_*'
 
+    script:
     """
     printf 'Hola' | split -b 1 - chunk_
     """

@@ -673,6 +673,7 @@ process FOO {
     output:
     stdout
 
+    script:
     """
     echo $patient_id has $feature as feature
     """

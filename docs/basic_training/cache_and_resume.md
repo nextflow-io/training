@@ -300,18 +300,18 @@ A common solution for this is to use what is commonly referred to as a _meta map
 // These would normally be outputs from upstream processes.
 Channel
     .of(
-        [[id:'sample_1'], '/path/to/sample_1.bam'],
-        [[id:'sample_2'], '/path/to/sample_2.bam']
+        [[id: 'sample_1'], '/path/to/sample_1.bam'],
+        [[id: 'sample_2'], '/path/to/sample_2.bam']
     )
     .set { bam }
 
 // NB: sample_2 is now the first element, instead of sample_1
 Channel
     .of(
-        [[id:'sample_2'], '/path/to/sample_2.bai'],
-        [[id:'sample_1'], '/path/to/sample_1.bai']
+        [[id: 'sample_2'], '/path/to/sample_2.bai'],
+        [[id: 'sample_1'], '/path/to/sample_1.bai']
     )
-  .set { bai }
+    .set { bai }
 
 // Instead of feeding the downstream process with these two channels separately, we can
 // join them and provide a single channel where the sample meta map is implicitly matched:
