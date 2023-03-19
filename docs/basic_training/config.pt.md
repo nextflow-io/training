@@ -11,7 +11,7 @@ Isso permite a portabilidade da aplicação sem a necessidade de modificar seu c
 
 ## Arquivo de configuração
 
-Quando um script de pipeline é executado, o Nextflow procura um arquivo chamado `nextflow.config` no diretório atual e no diretório base do script (se não for o mesmo que o diretório atual). Caso não encontre, o Nextflow verifica o arquivo: `$HOME/.nextflow/config`.
+Quando um script de fluxo de trabalho é executado, o Nextflow procura um arquivo chamado `nextflow.config` no diretório atual e no diretório base do script (se não for o mesmo que o diretório atual). Caso não encontre, o Nextflow verifica o arquivo: `$HOME/.nextflow/config`.
 
 Quando existir mais de um dos arquivos acima, eles serão mesclados, de modo que as configurações do primeiro substituam as mesmas configurações que podem aparecer no segundo e assim por diante.
 
@@ -72,7 +72,7 @@ beta {
 
 ### Configurar parâmetros
 
-O escopo `params` permite a definição de parâmetros que substituem os valores definidos no script principal do pipeline.
+O escopo `params` permite a definição de parâmetros que substituem os valores definidos no script principal do fluxo de trabalho.
 
 Isso é útil para reforçar o uso de um ou mais parâmetros de execução em um arquivo separado.
 
@@ -81,7 +81,7 @@ params.foo = 'Bonjour'
 params.bar = 'le monde!'
 ```
 
-```groovy linenums="1" title="Script do pipeline"
+```groovy linenums="1" title="Script do fluxo de trabalho"
 params.foo = 'Olá'
 params.bar = 'mundo!'
 
@@ -119,7 +119,7 @@ println "$params.foo $params.bar"
 
 ### Configurar ambiente
 
-O escopo `env` permite a definição de uma ou mais variáveis que serão exportadas para o ambiente onde serão executadas as tarefas do pipeline.
+O escopo `env` permite a definição de uma ou mais variáveis que serão exportadas para o ambiente onde serão executadas as tarefas do fluxo de trabalho.
 
 ```groovy linenums="1"
 env.ALFA = 'algum valor'
@@ -158,11 +158,11 @@ nextflow run foo.nf -c meu-env.config
 
 ### Configurar processos
 
-As [diretivas](https://www.nextflow.io/docs/latest/process.html#directives) de processos permite a especificação de configurações para a execução de uma tarefa, como `cpus`, `memory`, `container`, além de outros recursos, no script do pipeline.
+As [diretivas](https://www.nextflow.io/docs/latest/process.html#directives) de processos permite a especificação de configurações para a execução de uma tarefa, como `cpus`, `memory`, `container`, além de outros recursos, no script do fluxo de trabalho.
 
-Isso é útil ao criarmos um exemplo-teste ou um protótipo para o nosso pipeline.
+Isso é útil ao criarmos um exemplo-teste ou um protótipo para o nosso fluxo de trabalho.
 
-No entanto, é sempre uma boa prática desassociar a lógica de execução do pipeline das configurações que serão utilizadas por ele. Assim, é altamente recomendável definir as configurações do processo no arquivo de configuração do pipeline em vez de no script do pipeline.
+No entanto, é sempre uma boa prática desassociar a lógica de execução do fluxo de trabalho das configurações que serão utilizadas por ele. Assim, é altamente recomendável definir as configurações do processo no arquivo de configuração do fluxo de trabalho em vez de no script do fluxo de trabalho.
 
 Além disso, quaisquer [diretivas](https://www.nextflow.io/docs/latest/process.html#directives) do escopo dos processos (`process`) podem ser usadas no arquivo de configuração.
 
@@ -174,7 +174,7 @@ process {
 }
 ```
 
-O trecho de configuração acima define as diretivas `cpus`, `memory` e `container` para todos os processos em seu pipeline.
+O trecho de configuração acima define as diretivas `cpus`, `memory` e `container` para todos os processos em seu fluxo de trabalho.
 
 O [seletor de processo](https://www.nextflow.io/docs/latest/config.html#process-selectors) pode ser usado para aplicar a configuração a um processo específico ou grupo de processos (discutido posteriormente).
 
@@ -189,7 +189,7 @@ O [seletor de processo](https://www.nextflow.io/docs/latest/config.html#process-
 | `'1 min'`         | `1.min`          | 60 segundos          |
 | `'1 hour 25 sec'` | \-               | 1 hora e 25 segundos |
 
-A sintaxe para definir as diretivas de processo no arquivo de configuração requer `=` (ou seja, operador de atribuição). Esta notação não deve ser usada para definir as diretivas do processo no script do pipeline.
+A sintaxe para definir as diretivas de processo no arquivo de configuração requer `=` (ou seja, operador de atribuição). Esta notação não deve ser usada para definir as diretivas do processo no script do fluxo de trabalho.
 
 ??? example
 
@@ -260,7 +260,7 @@ docker.enabled = true
 
 ### Configurar execução do Singularity
 
-Para rodar um pipeline com Singularity, é necessário fornecer o caminho para o arquivo de imagem do contêiner usando a diretiva de contêiner (`container`):
+Para rodar um fluxo de trabalho com Singularity, é necessário fornecer o caminho para o arquivo de imagem do contêiner usando a diretiva de contêiner (`container`):
 
 ```groovy linenums="1"
 process.container = '/alguma/imagem/singularity/imagem.sif'

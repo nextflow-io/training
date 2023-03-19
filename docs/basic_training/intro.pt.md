@@ -6,7 +6,7 @@ description: Introdução ao Nextflow
 
 ## Conceitos básicos
 
-O Nextflow é tanto um motor de orquestração de fluxo de trabalho quanto uma linguagem de domínio específico (Domain-Specific Language - DSL) que facilita a escrita de pipelines computacionais com uso intensivo de dados.
+O Nextflow é tanto um motor de orquestração de fluxo de trabalho quanto uma linguagem de domínio específico (Domain-Specific Language - DSL) que facilita a escrita de fluxos de trabalho computacionais com uso intensivo de dados.
 
 Ele foi projetado com base na ideia de que a plataforma Linux é a _língua franca_ da ciência de dados. O Linux fornece muitas ferramentas de linha de comando que, ainda que simples, são poderosas ferramentas de script que, quando encadeadas, facilitam manipulações complexas de dados.
 
@@ -18,11 +18,11 @@ O Nextflow estende essa abordagem, adicionando a capacidade de definir interaç�
 
 ### Processos e Canais
 
-Na prática, um pipeline Nextflow é feito juntando diferentes processos. Cada processo pode ser escrito em qualquer linguagem de script que possa ser executada pela plataforma Linux (Bash, Perl, Ruby, Python, etc.).
+Na prática, um fluxo de trabalho Nextflow é feito juntando diferentes processos. Cada processo pode ser escrito em qualquer linguagem de script que possa ser executada pela plataforma Linux (Bash, Perl, Ruby, Python, etc.).
 
 Os processos são executados de forma independente e isolados uns dos outros, ou seja, não compartilham um estado (gravável) comum. A única maneira de eles se comunicarem é por meio de filas assíncronas, chamadas de `canais`, onde o primeiro elemento a entrar, é o primeiro a sair (FIFO - First-in-First-out).
 
-Qualquer processo pode definir um ou mais `canais` como uma `entrada` e `saída`. A interação entre esses processos e, em última análise, o próprio fluxo de execução do pipeline, é definido implicitamente por essas declarações de `entrada` e `saída`.
+Qualquer processo pode definir um ou mais `canais` como uma `entrada` e `saída`. A interação entre esses processos e, em última análise, o próprio fluxo de execução do fluxo de trabalho, é definido implicitamente por essas declarações de `entrada` e `saída`.
 
 <figure class="excalidraw">
 --8<-- "docs/basic_training/img/channel-process.excalidraw.pt.svg"
@@ -32,9 +32,9 @@ Qualquer processo pode definir um ou mais `canais` como uma `entrada` e `saída`
 
 Enquanto um processo define _qual_ comando ou `script` deve ser executado, o executor determina _como_ esse `script` é executado na plataforma alvo.
 
-Se não for especificado de outra forma, os processos são executados no computador local. O executor local é muito útil para fins de desenvolvimento e teste de pipeline, no entanto, para pipelines computacionais do mundo real, uma plataforma de computação de alto desempenho (High-Performance Computing - HPC) ou de computação em nuvem geralmente é necessária.
+Se não for especificado de outra forma, os processos são executados no computador local. O executor local é muito útil para fins de desenvolvimento e teste de fluxo de trabalho, no entanto, para fluxos de trabalho computacionais do mundo real, uma plataforma de computação de alto desempenho (High-Performance Computing - HPC) ou de computação em nuvem geralmente é necessária.
 
-Em outras palavras, o Nextflow fornece uma abstração entre a lógica funcional do pipeline e o sistema de execução subjacente (ou sistema de tempo de execução). Assim, é possível escrever um pipeline que seja executado perfeitamente em seu computador, em um cluster ou na nuvem, sem ser modificado. Você simplesmente define a plataforma de execução alvo no arquivo de configuração.
+Em outras palavras, o Nextflow fornece uma abstração entre a lógica funcional do fluxo de trabalho e o sistema de execução subjacente (ou sistema de tempo de execução). Assim, é possível escrever um fluxo de trabalho que seja executado perfeitamente em seu computador, em um cluster ou na nuvem, sem ser modificado. Você simplesmente define a plataforma de execução alvo no arquivo de configuração.
 
 <figure markdown>
 
@@ -184,7 +184,7 @@ A saída padrão mostra (linha por linha):
 
 !!! tip
 
-    O segundo processo é executado duas vezes, em dois diretórios de trabalho diferentes para cada arquivo de entrada. A saída de log [ANSI](https://en.wikipedia.org/wiki/ANSI_escape_code) do Nextflow é atualizada dinamicamente conforme o pipeline é executado; no exemplo anterior, o diretório de trabalho `[1a/3c54ed]` é o segundo dos dois diretórios que foram processados (sobrescrevendo o log com o primeiro). Para imprimir para a tela todos os caminhos relevantes, desative a saída de log ANSI usando o sinalizador `-ansi-log` (por exemplo, `nextflow run hello.nf -ansi-log false`).
+    O segundo processo é executado duas vezes, em dois diretórios de trabalho diferentes para cada arquivo de entrada. A saída de log [ANSI](https://en.wikipedia.org/wiki/ANSI_escape_code) do Nextflow é atualizada dinamicamente conforme o fluxo de trabalho é executado; no exemplo anterior, o diretório de trabalho `[1a/3c54ed]` é o segundo dos dois diretórios que foram processados (sobrescrevendo o log com o primeiro). Para imprimir para a tela todos os caminhos relevantes, desative a saída de log ANSI usando o sinalizador `-ansi-log` (por exemplo, `nextflow run hello.nf -ansi-log false`).
 
 Vale ressaltar que o processo `CONVERTTOUPPER` é executado em paralelo, portanto não há garantia de que a instância que processa a primeira divisão (o bloco _Hello_) será executada antes daquela que processa a segundo divisão (o bloco _world!_).
 
@@ -197,9 +197,9 @@ HELLO
 
 ## Modifique e retome
 
-O Nextflow acompanha todos os processos executados em seu pipeline. Se você modificar algumas partes do seu script, apenas os processos alterados serão executados novamente. A execução dos processos que não foram alterados será ignorada e o resultado armazenado em cache será usado em seu lugar.
+O Nextflow acompanha todos os processos executados em seu fluxo de trabalho. Se você modificar algumas partes do seu script, apenas os processos alterados serão executados novamente. A execução dos processos que não foram alterados será ignorada e o resultado armazenado em cache será usado em seu lugar.
 
-Isso permite testar ou modificar parte do pipeline sem precisar executá-lo novamente do zero.
+Isso permite testar ou modificar parte do fluxo de trabalho sem precisar executá-lo novamente do zero.
 
 Para este tutorial, modifique o processo `CONVERTTOUPPER` do exemplo anterior, substituindo o script do processo pela string `rev $y`, para que o processo fique assim:
 
@@ -236,11 +236,11 @@ Você verá que a execução do processo `SPLITLETTERS` é ignorada (o ID do pro
 
 !!! info
 
-    Os resultados do pipeline são armazenados em cache por padrão no diretório `$PWD/work`. Dependendo do seu script, esta pasta pode ocupar muito espaço em disco. Se tiver certeza de que não precisará retomar a execução do pipeline, limpe esta pasta periodicamente.
+    Os resultados do fluxo de trabalho são armazenados em cache por padrão no diretório `$PWD/work`. Dependendo do seu script, esta pasta pode ocupar muito espaço em disco. Se tiver certeza de que não precisará retomar a execução do fluxo de trabalho, limpe esta pasta periodicamente.
 
-## Parâmetros do pipeline
+## Parâmetros do fluxo de trabalho
 
-Os parâmetros de pipeline são declarados simplesmente adicionando o prefixo `params` a um nome de variável, separando-os por um caractere de ponto. Seu valor pode ser especificado na linha de comando prefixando o nome do parâmetro com um traço duplo, ou seja, `--nomeParametro`.
+Os parâmetros de fluxo de trabalho são declarados simplesmente adicionando o prefixo `params` a um nome de variável, separando-os por um caractere de ponto. Seu valor pode ser especificado na linha de comando prefixando o nome do parâmetro com um traço duplo, ou seja, `--nomeParametro`.
 
 Agora, vamos tentar executar o exemplo anterior especificando um parâmetro de string de entrada diferente, conforme mostrado abaixo:
 
@@ -263,7 +263,7 @@ uojnoB
 
 ### Em formato de DAG
 
-Para entender melhor como o Nextflow está lidando com os dados neste pipeline, abaixo está uma figura tipo DAG para visualizar todas as entradas (`input`), saídas (`output`), canais (`channel`) e processos (`process`):
+Para entender melhor como o Nextflow está lidando com os dados neste fluxo de trabalho, abaixo está uma figura tipo DAG para visualizar todas as entradas (`input`), saídas (`output`), canais (`channel`) e processos (`process`):
 
 <figure markdown>
 

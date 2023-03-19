@@ -4,9 +4,9 @@ description: Material de treinamento básico do Nextflow
 
 # Modularização
 
-A definição de bibliotecas modulares simplifica a escrita de pipelines complexos de análise de dados, além tornar o reuso de processos mais fácil.
+A definição de bibliotecas modulares simplifica a escrita de fluxos de trabalho complexos de análise de dados, além tornar o reuso de processos mais fácil.
 
-Ao usar o exemplo `hello.nf` da seção de introdução, nós converteremos os processos do pipeline em módulos e, em seguida, executaremos estes processos dentro do escopo do workflow de diferentes formas.
+Ao usar o exemplo `hello.nf` da seção de introdução, nós converteremos os processos do fluxo de trabalho em módulos e, em seguida, executaremos estes processos dentro do escopo do fluxo de trabalho de diferentes formas.
 
 ## Módulos
 
@@ -49,7 +49,7 @@ include { CONVERTTOUPPER } from './modules.nf'
         include { SPLITLETTERS   } from './modules.nf'
         include { CONVERTTOUPPER } from './modules.nf'
 
-        workflow {
+        fluxo de trabalho {
             letters_ch = SPLITLETTERS(greeting_ch)
             results_ch = CONVERTTOUPPER(letters_ch.flatten())
             results_ch.view { it }
@@ -148,7 +148,7 @@ workflow {
 !!! tip
 
     Você pode armazenar cada processo em arquivos separados em subpastas separadas ou combinados em um arquivo grande (ambos são válidos).
-    Você pode encontrar exemplos disso em repositórios públicos, como no [tutorial de RNA-Seq da Seqera](https://github.com/seqeralabs/rnaseq-nf/tree/master/modules) ou em pipelines do nf-core, como o [nf-core/rnaseq](https://github.com/nf-core/rnaseq/tree/master/modules/nf-core).
+    Você pode encontrar exemplos disso em repositórios públicos, como no [tutorial de RNA-Seq da Seqera](https://github.com/seqeralabs/rnaseq-nf/tree/master/modules) ou em fluxos de trabalho do nf-core, como o [nf-core/rnaseq](https://github.com/nf-core/rnaseq/tree/master/modules/nf-core).
 
 ## Definição de saída
 
@@ -223,7 +223,7 @@ process CONVERTTOUPPER {
 }
 ```
 
-Em seguida, altere o escopo do workflow em `hello.nf` para chamar essa saída nomeada específica (observe o `.upper` adicionado):
+Em seguida, altere o escopo do fluxo de trabalho em `hello.nf` para chamar essa saída nomeada específica (observe o `.upper` adicionado):
 
 ```groovy linenums="1" title="hello.nf"
 workflow {
@@ -236,14 +236,14 @@ workflow {
 
 ### Usando saídas canalizadas
 
-Outra maneira de lidar com as saídas no escopo do workflow é usar pipes `|`.
+Outra maneira de lidar com as saídas no escopo do fluxo de trabalho é usar pipes `|`.
 
 !!! exercise
 
      Tente alterar o script do fluxo de trabalho para o trecho abaixo:
 
     ```groovy linenums="1"
-    workflow {
+    fluxo de trabalho {
         Channel.of(params.greeting) | SPLITLETTERS | flatten | CONVERTTOUPPER | view
     }
     ```
@@ -263,7 +263,7 @@ include { SPLITLETTERS } from './modules.nf'
 include { CONVERTTOUPPER } from './modules.nf'
 
 
-workflow meu_pipeline {
+workflow meu_fluxo_de_trabalho {
     greeting_ch = Channel.of(params.greeting)
     SPLITLETTERS(greeting_ch)
     CONVERTTOUPPER(SPLITLETTERS.out.flatten())
@@ -271,11 +271,11 @@ workflow meu_pipeline {
 }
 
 workflow {
-    meu_pipeline()
+    meu_fluxo_de_trabalho()
 }
 ```
 
-Por exemplo, o trecho acima define um `workflow` chamado `meu_pipeline`, que pode ser chamado por meio de outra definição de `workflow`.
+Por exemplo, o trecho acima define um `workflow` chamado `meu_fluxo_de_trabalho`, que pode ser chamado por meio de outra definição de `workflow`.
 
 !!! note
 
@@ -283,7 +283,7 @@ Por exemplo, o trecho acima define um `workflow` chamado `meu_pipeline`, que pod
 
 !!! warning
 
-    Um componente de um workflow pode acessar qualquer variável ou parâmetro definido no escopo externo. No exemplo em execução, também podemos acessar `params.greeting` diretamente na definição de `workflow`.
+    Um componente de um fluxo de trabalho pode acessar qualquer variável ou parâmetro definido no escopo externo. No exemplo em execução, também podemos acessar `params.greeting` diretamente na definição de `workflow`.
 
 ### Entradas de workflow
 
@@ -297,7 +297,7 @@ params.greeting = 'Hello world!'
 include { SPLITLETTERS } from './modules.nf'
 include { CONVERTTOUPPER } from './modules.nf'
 
-workflow meu_pipeline {
+workflow meu_fluxo_de_trabalho {
     take:
     greeting
 
@@ -316,16 +316,16 @@ A entrada para o `workflow` pode então ser especificada como um argumento:
 
 ```groovy linenums="1"
 workflow {
-    meu_pipeline(Channel.of(params.greeting))
+    meu_fluxo_de_trabalho(Channel.of(params.greeting))
 }
 ```
 
 ### Saídas do workflow
 
-Um `workflow` pode declarar um ou mais canais de saída usando a instrução `emit`. Por exemplo:
+Um bloco `workflow` pode declarar um ou mais canais de saída usando a instrução `emit`. Por exemplo:
 
 ```groovy linenums="1"
-workflow meu_pipeline {
+workflow meu_fluxo_de_trabalho {
     take:
     greeting
 
@@ -338,17 +338,17 @@ workflow meu_pipeline {
 }
 
 workflow {
-    meu_pipeline(Channel.of(params.greeting))
-    meu_pipeline.out.view()
+    meu_fluxo_de_trabalho(Channel.of(params.greeting))
+    meu_fluxo_de_trabalho.out.view()
 }
 ```
 
-Como resultado, podemos usar a notação `meu_pipeline.out` para acessar as saídas de `meu_pipeline` na chamada `workflow`.
+Como resultado, podemos usar a notação `meu_fluxo_de_trabalho.out` para acessar as saídas de `meu_fluxo_de_trabalho` na chamada `workflow`.
 
 Também podemos declarar saídas nomeadas dentro do bloco `emit`.
 
 ```groovy linenums="1" hl_lines="10 15"
-workflow meu_pipeline {
+workflow meu_fluxo_de_trabalho {
     take:
     greeting
 
@@ -361,18 +361,18 @@ workflow meu_pipeline {
 }
 
 workflow {
-    meu_pipeline(Channel.of(params.greeting))
-    meu_pipeline.out.meus_dados.view()
+    meu_fluxo_de_trabalho(Channel.of(params.greeting))
+    meu_fluxo_de_trabalho.out.meus_dados.view()
 }
 ```
 
-O resultado do trecho de código acima pode ser acessado usando `meu_pipeline.out.meus_dados`.
+O resultado do trecho de código acima pode ser acessado usando `meu_fluxo_de_trabalho.out.meus_dados`.
 
-### Chamando workflows nomeados
+### Chamando fluxos de trabalho nomeados
 
-Dentro de um script `main.nf` (chamado `hello.nf` em nosso exemplo), também podemos ter vários fluxos de trabalho. Nesse caso, podemos chamar um fluxo de trabalho específico ao executar o código. Para isso, usamos a chamada de ponto de entrada `-entry <nome_do_workflow>`.
+Dentro de um script `main.nf` (chamado `hello.nf` em nosso exemplo), também podemos ter vários fluxos de trabalho. Nesse caso, podemos chamar um fluxo de trabalho específico ao executar o código. Para isso, usamos a chamada de ponto de entrada `-entry <nome_do_flux_de_trabalho>`.
 
-O trecho a seguir tem dois fluxos de trabalho nomeados (`meu_pipeline_um` e `meu_pipeline_dois`):
+O trecho a seguir tem dois fluxos de trabalho nomeados (`meu_fluxo_de_trabalho_um` e `meu_fluxo_de_trabalho_dois`):
 
 ```groovy linenums="1"
 #!/usr/bin/env nextflow
@@ -386,28 +386,28 @@ include { CONVERTTOUPPER as CONVERTTOUPPER_one } from './modules.nf'
 include { CONVERTTOUPPER as CONVERTTOUPPER_two } from './modules.nf'
 
 
-workflow meu_pipeline_um {
+workflow meu_fluxo_de_trabalho_um {
     letras_canal1 = SPLITLETTERS_one(params.greeting)
     resultados_canal1 = CONVERTTOUPPER_one(letters_ch1.flatten())
     resultados_canal1.view { it }
 }
 
-workflow meu_pipeline_dois {
+workflow meu_fluxo_de_trabalho_dois {
     letras_canal2 = SPLITLETTERS_two(params.greeting)
     resultados_canal2 = CONVERTTOUPPER_two(letters_ch2.flatten())
     resultados_canal2.view { it }
 }
 
 workflow {
-    meu_pipeline_um(Channel.of(params.greeting))
-    meu_pipeline_dois(Channel.of(params.greeting))
+    meu_fluxo_de_trabalho_um(Channel.of(params.greeting))
+    meu_fluxo_de_trabalho_dois(Channel.of(params.greeting))
 }
 ```
 
-Você pode escolher qual workflow é executado usando o sinalizador `entry`:
+Você pode escolher qual fluxo de trabalho é executado usando o sinalizador `entry`:
 
 ```bash
-nextflow run hello.2.nf -entry meu_pipeline_um
+nextflow run hello.2.nf -entry meu_fluxo_de_trabalho_um
 ```
 
 ### Escopos de parâmetros
@@ -447,7 +447,7 @@ Como destacado acima, o script imprimirá `Hola mundo!` em vez de `Hello world!`
 
 !!! info
 
-    Para evitar que sejam ignorados, os parâmetros do pipeline devem ser definidos no início do script antes de qualquer declaração de inclusão.
+    Para evitar que sejam ignorados, os parâmetros do fluxo de trabalho devem ser definidos no início do script antes de qualquer declaração de inclusão.
 
 A opção `addParams` pode ser usada para estender os parâmetros do módulo sem afetar o escopo externo. Por exemplo:
 

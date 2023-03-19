@@ -4,7 +4,7 @@ description: Material de treinamento básico do Nextflow
 
 # Cenários de implantação
 
-Aplicações genômicas do mundo real podem gerar milhares de tarefas sendo executadas. Nesse cenário, um escalonador de lote (batch scheduler) é comumente usado para implantar um pipeline em um cluster de computação, permitindo a execução de muitos trabalhos em paralelo em muitos nós de computação.
+Aplicações genômicas do mundo real podem gerar milhares de tarefas sendo executadas. Nesse cenário, um escalonador de lote (batch scheduler) é comumente usado para implantar um fluxo de trabalho em um cluster de computação, permitindo a execução de muitos trabalhos em paralelo em muitos nós de computação.
 
 O Nextflow possui suporte embutido para os escalonadores de lote mais usados, como o Univa Grid Engine, o [SLURM](https://slurm.schedmd.com/) e o IBM LSF. Verifique a documentação do Nextflow para obter a lista completa dos [ambientes de computação](https://www.nextflow.io/docs/latest/executor.html).
 
@@ -14,7 +14,7 @@ Um recurso importante do Nextflow é a capacidade de desacoplar a implementaçã
 
 ![Executores no Nextflow](img/nf-executors.png)
 
-Para executar seu pipeline com um escalonador de lote, modifique o arquivo `nextflow.config` especificando o executor de destino e os recursos de computação necessários, se necessário. Por exemplo:
+Para executar seu fluxo de trabalho com um escalonador de lote, modifique o arquivo `nextflow.config` especificando o executor de destino e os recursos de computação necessários, se necessário. Por exemplo:
 
 ```groovy linenums="1"
 process.executor = 'slurm'
@@ -65,20 +65,20 @@ Por exemplo, se seu cluster usa Slurm como escalonador de tarefas, você pode cr
 #SBATCH -c 1
 #SBATCH -t 12:00:00
 
-PIPELINE=$1
+FLUXO_DE_TRABALHO=$1
 CONFIG=$2
 
 # Use um ambiente conda onde você instalou o Nextflow
 # (pode não ser necessário se você o tiver instalado de uma maneira diferente)
 conda activate nextflow
 
-nextflow -C ${CONFIG} run ${PIPELINE}
+nextflow -C ${CONFIG} run ${FLUXO_DE_TRABALHO}
 ```
 
 E, em seguida, submeta-o com:
 
 ```bash linenums="1"
-sbatch launch_nf.sh /home/meu_usuario/caminho/meupipeline.nf /home/meu_usuario/caminho/meu_arquivo_configuracao.conf
+sbatch launch_nf.sh /home/meu_usuario/caminho/meu_fluxo_de_trabalho.nf /home/meu_usuario/caminho/meu_arquivo_configuracao.conf
 ```
 
 Você pode encontrar mais detalhes sobre o exemplo acima [aqui](https://lescailab.unipv.it/guides/eos_guide/use_nextflow.html#large-testing-or-production). Você também poderá encontrar mais dicas de como executar o Nextflow em HPC nos seguintes posts de blog:
@@ -200,7 +200,7 @@ Leia mais sobre seletores de processo de configuração [neste link](https://www
 
 ## Perfis de configuração
 
-Os arquivos de configuração podem conter a definição de um ou mais _perfis_. Um perfil é um conjunto de atributos de configuração que podem ser ativados/escolhidos ao lançar a execução de um pipeline usando a opção de linha de comando `-profile`.
+Os arquivos de configuração podem conter a definição de um ou mais _perfis_. Um perfil é um conjunto de atributos de configuração que podem ser ativados/escolhidos ao lançar a execução de um fluxo de trabalho usando a opção de linha de comando `-profile`.
 
 Os perfis de configuração são definidos usando o escopo especial `profiles` que agrupa os atributos que pertencem ao mesmo perfil usando um prefixo comum. Por exemplo:
 
@@ -249,7 +249,7 @@ nextflow run <seu script> -profile cluster
 
 [AWS Batch](https://aws.amazon.com/batch/) é um serviço de computação gerenciada que permite a execução de cargas de trabalho em contêineres na infraestrutura de nuvem da Amazon.
 
-O Nextflow fornece suporte embutido para o AWS Batch, que permite uma implantação simples de um pipeline do Nextflow na nuvem, descarregando as execuções de processo como trabalhos em lote.
+O Nextflow fornece suporte embutido para o AWS Batch, que permite uma implantação simples de um fluxo de trabalho do Nextflow na nuvem, descarregando as execuções de processo como trabalhos em lote.
 
 Uma vez que o ambiente Batch esteja configurado, especifique os tipos de instância a serem usadas e o número máximo de CPUs a serem alocadas. Você precisa criar um arquivo de configuração do Nextflow como o mostrado abaixo:
 
@@ -316,7 +316,7 @@ aws {
 
 ## Definição de tarefa personalizada
 
-O Nextflow cria automaticamente as [definições de trabalho](https://docs.aws.amazon.com/batch/latest/userguide/job_definitions.html) do Batch necessárias para executar seus processos de pipeline. Portanto, não é necessário defini-las antes de executar seu fluxo de trabalho.
+O Nextflow cria automaticamente as [definições de trabalho](https://docs.aws.amazon.com/batch/latest/userguide/job_definitions.html) do Batch necessárias para executar seus processos de fluxo de trabalho. Portanto, não é necessário defini-las antes de executar seu fluxo de trabalho.
 
 No entanto, você ainda pode precisar especificar uma definição de tarefa personalizada para fornecer controle refinado das definições de configuração de uma tarefa específica (por exemplo, para definir caminhos de montagem personalizados ou outras configurações especiais de uma tarefa no Batch).
 

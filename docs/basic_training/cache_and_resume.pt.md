@@ -9,7 +9,7 @@ O mecanismo de caching do Nextflow funciona atribuindo uma ID única para cada t
 
 A ID única de tarefa é gerada como uma hash de 128-bit compondo os valores de entrada da tarefa, arquivos e a string de comando.
 
-O diretório de trabalho do pipeline é organizado como mostrado abaixo:
+O diretório de trabalho do fluxo de trabalho é organizado como mostrado abaixo:
 
 ```txt
 work/
@@ -54,13 +54,13 @@ work/
 
 ## Como funciona a reentrância
 
-A opção de linha de comando `-resume` permite a continuação da execução do pipeline pelo último passo que foi completado com sucesso:
+A opção de linha de comando `-resume` permite a continuação da execução do fluxo de trabalho pelo último passo que foi completado com sucesso:
 
 ```bash
 nextflow run <script> -resume
 ```
 
-Em termos práticos, o pipeline é executado do início. Entretanto, antes do lançamento da execução de um processo, o Nextflow usa a ID única da tarefa para checar se o diretório de trabalho existe e se ele contém um estado de saída válido do comando com os esperados arquivos de saída.
+Em termos práticos, o fluxo de trabalho é executado do início. Entretanto, antes do lançamento da execução de um processo, o Nextflow usa a ID única da tarefa para checar se o diretório de trabalho existe e se ele contém um estado de saída válido do comando com os esperados arquivos de saída.
 
 Se esta condição for satisfeita a tarefa é ignorada e os resultados computados previamente são usados como resultados do processo.
 
@@ -68,7 +68,7 @@ A primeira tarefa que tem uma nova saída computada invalida todas execuções p
 
 ## Diretório de trabalho
 
-O diretório de trabalho das tarefas é criado por padrão na pasta `work` no mesmo diretório onde o pipeline foi executado. Essa localização é supostamente uma área de armazenamento **provisória** que pode ser limpada quando a execução do pipeline for finalizado.
+O diretório de trabalho das tarefas é criado por padrão na pasta `work` no mesmo diretório onde o fluxo de trabalho foi executado. Essa localização é supostamente uma área de armazenamento **provisória** que pode ser limpada quando a execução do fluxo de trabalho for finalizado.
 
 !!! note
 
@@ -86,7 +86,7 @@ nextflow run <script> -w /algum/diretorio/de/scratch
 
 !!! warning
 
-    Se você deletar ou mover o diretório de trabalho do pipeline, isso irá impedir que você use o recurso de reentrância nas execuções posteriores.
+    Se você deletar ou mover o diretório de trabalho do fluxo de trabalho, isso irá impedir que você use o recurso de reentrância nas execuções posteriores.
 
 O código hash para os arquivos de entrada são computados usando:
 
@@ -102,7 +102,7 @@ Portanto, o simples uso do **touch** em um arquivo irá invalidar a execução d
 
 !!! note
 
-    No mesmo experimento, o mesmo pipeline pode ser executado diversas vezes, entretanto, iniciar duas (ou mais) instâncias do Nextflow no mesmo diretório ao mesmo tempo deve ser evitado.
+    No mesmo experimento, o mesmo fluxo de trabalho pode ser executado diversas vezes, entretanto, iniciar duas (ou mais) instâncias do Nextflow no mesmo diretório ao mesmo tempo deve ser evitado.
 
 O comando `nextflow log` lista todas as execuções na pasta atual:
 
@@ -124,7 +124,7 @@ nextflow run rnaseq-nf -resume mighty_boyd
 
 ## Proveniência da execução
 
-O comando `log`, quando provido do **nome da execução** ou **ID da sessão**, pode retornar algumas informações importantes sobre um pipeline em execução que podem ser usadas para criar um relatório de proveniência.
+O comando `log`, quando provido do **nome da execução** ou **ID da sessão**, pode retornar algumas informações importantes sobre um fluxo de trabalho em execução que podem ser usadas para criar um relatório de proveniência.
 
 Por padrão, o comando irá listar todos diretórios de trabalho usados em cada tarefa. Por exemplo:
 
@@ -288,7 +288,7 @@ Assim como vimos no início deste tutorial com HELLO WORLD ou WORLD HELLO, a sa�
 [1, A]
 ```
 
-..e essa ordem provavelmente será diferente toda vez que o pipeline for executado.
+..e essa ordem provavelmente será diferente toda vez que o fluxo de trabalho for executado.
 
 Imagine agora que temos dois processos como este, cujos canais de saída estão atuando como canais de entrada para um terceiro processo. Ambos os canais serão aleatórios de forma independente, portanto, o terceiro processo não deve esperar que eles retenham uma sequência pareada. Se assumir que o primeiro elemento no primeiro canal de saída do processo está relacionado ao primeiro elemento no segundo canal de saída do processo, haverá uma incompatibilidade.
 

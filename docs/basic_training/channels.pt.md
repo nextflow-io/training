@@ -144,7 +144,7 @@ workflow {
 2
 ```
 
-Além disso, em muitas situações, o Nextflow converterá implicitamente variáveis em canais de valor quando forem usadas em uma chamada de processo. Por exemplo, quando você chama um processo com um parâmetro de pipeline (`params.exemplo`) que possui um valor de string, ele é automaticamente convertido em um canal de valor.
+Além disso, em muitas situações, o Nextflow converterá implicitamente variáveis em canais de valor quando forem usadas em uma chamada de processo. Por exemplo, quando você chama um processo com um parâmetro de fluxo de trabalho (`params.exemplo`) que possui um valor de string, ele é automaticamente convertido em um canal de valor.
 
 ## Fábricas de canal
 
@@ -377,7 +377,7 @@ workflow {
 }
 ```
 
-Se você deseja executar o pipeline acima e não possui o fastqc instalado em sua máquina, não esqueça o que aprendeu na seção anterior. Execute este pipeline com `-with-docker biocontainers/fastqc:v0.11.5`, por exemplo.
+Se você deseja executar o fluxo de trabalho acima e não possui o fastqc instalado em sua máquina, não esqueça o que aprendeu na seção anterior. Execute este fluxo de trabalho com `-with-docker biocontainers/fastqc:v0.11.5`, por exemplo.
 
 ### Arquivos de texto
 
