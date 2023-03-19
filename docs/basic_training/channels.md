@@ -144,7 +144,7 @@ workflow {
 2
 ```
 
-Besides, in many situations, Nextflow will implicitly convert variables to value channels when they are used in a process invocation. For example, when you invoke a process with a pipeline parameter (`params.example`) which has a string value, it is automatically cast into a value channel.
+Besides, in many situations, Nextflow will implicitly convert variables to value channels when they are used in a process invocation. For example, when you invoke a process with a workflow parameter (`params.example`) which has a string value, it is automatically cast into a value channel.
 
 ## Channel factories
 
@@ -376,7 +376,7 @@ workflow {
 }
 ```
 
-If you want to run the pipeline above and do not have fastqc installed in your machine, don’t forget what you learned in the previous section. Run this pipeline with `-with-docker biocontainers/fastqc:v0.11.5`, for example.
+If you want to run the workflow above and do not have fastqc installed in your machine, don’t forget what you learned in the previous section. Run this workflow with `-with-docker biocontainers/fastqc:v0.11.5`, for example.
 
 ### Text files
 

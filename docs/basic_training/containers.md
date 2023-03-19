@@ -344,7 +344,7 @@ In the same way that we can push Docker images to Docker Hub, we can upload Sing
 
 ## Conda/Bioconda packages
 
-Conda is a popular package and environment manager. The built-in support for Conda allows Nextflow pipelines to automatically create and activate the Conda environment(s), given the dependencies specified by each process.
+Conda is a popular package and environment manager. The built-in support for Conda allows Nextflow workflows to automatically create and activate the Conda environment(s), given the dependencies specified by each process.
 
 In this Gitpod environment, conda is already installed.
 
@@ -438,7 +438,7 @@ ENV PATH /opt/conda/envs/nf-tutorial/bin:$PATH
 
 The above `Dockerfile` takes the parent image _mambaorg/micromamba_, then installs a `conda` environment using `micromamba`, and installs `salmon`, `fastqc` and `multiqc`.
 
-Try executing the RNA-Seq pipeline from earlier (script7.nf). Start by building your own micromamba `Dockerfile` (from above), save it to your Docker hub repo, and direct Nextflow to run from this container (changing your `nextflow.config`).
+Try executing the RNA-Seq workflow from earlier (script7.nf). Start by building your own micromamba `Dockerfile` (from above), save it to your Docker hub repo, and direct Nextflow to run from this container (changing your `nextflow.config`).
 
 !!! warning
 
@@ -517,7 +517,7 @@ Contrary to other registries that will pull the latest image when no tag (versio
 
 !!! exercise "Bonus Exercise"
 
-    Change the process directives in `script5.nf` or the `nextflow.config` file to make the pipeline automatically use BioContainers when using salmon, or fastqc.
+    Change the process directives in `script5.nf` or the `nextflow.config` file to make the workflow automatically use BioContainers when using salmon, or fastqc.
 
     !!! tip "Hint"
 
@@ -525,7 +525,7 @@ Contrary to other registries that will pull the latest image when no tag (versio
 
     ??? result
 
-        With these changes, you should be able to run the pipeline with BioContainers by running the following in the command line:
+        With these changes, you should be able to run the workflow with BioContainers by running the following in the command line:
 
         ```bash
         nextflow run script5.nf

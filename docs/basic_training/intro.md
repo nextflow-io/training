@@ -6,7 +6,7 @@ description: Getting started with Nextflow
 
 ## Basic concepts
 
-Nextflow is a workflow orchestration engine and domain-specific language (DSL) that makes it easy to write data-intensive computational pipelines.
+Nextflow is a workflow orchestration engine and domain-specific language (DSL) that makes it easy to write data-intensive computational workflows.
 
 It is designed around the idea that the Linux platform is the _lingua franca_ of data science. Linux provides many simple but powerful command-line and scripting tools that, when chained together, facilitate complex data manipulations.
 
@@ -18,11 +18,11 @@ Nextflow extends this approach, adding the ability to define complex program int
 
 ### Processes and Channels
 
-In practice, a Nextflow pipeline is made by joining together different processes. Each `process` can be written in any scripting language that can be executed by the Linux platform (Bash, Perl, Ruby, Python, etc.).
+In practice, a Nextflow workflow is made by joining together different processes. Each `process` can be written in any scripting language that can be executed by the Linux platform (Bash, Perl, Ruby, Python, etc.).
 
 Processes are executed independently and are isolated from each other, i.e., they do not share a common (writable) state. The only way they can communicate is via asynchronous first-in, first-out (FIFO) queues, called `channels`.
 
-Any `process` can define one or more `channels` as an `input` and `output`. The interaction between these processes, and ultimately the pipeline execution flow itself, is implicitly defined by these `input` and `output` declarations.
+Any `process` can define one or more `channels` as an `input` and `output`. The interaction between these processes, and ultimately the workflow execution flow itself, is implicitly defined by these `input` and `output` declarations.
 
 <figure class="excalidraw">
 --8<-- "docs/basic_training/img/channel-process.excalidraw.svg"
@@ -32,9 +32,9 @@ Any `process` can define one or more `channels` as an `input` and `output`. The 
 
 While a `process` defines _what_ command or `script` has to be executed, the executor determines _how_ that `script` is run in the target platform.
 
-If not otherwise specified, processes are executed on the local computer. The local executor is very useful for pipeline development and testing purposes, however, for real-world computational pipelines a high-performance computing (HPC) or cloud platform is often required.
+If not otherwise specified, processes are executed on the local computer. The local executor is very useful for workflow development and testing purposes, however, for real-world computational workflows a high-performance computing (HPC) or cloud platform is often required.
 
-In other words, Nextflow provides an abstraction between the pipeline’s functional logic and the underlying execution system (or runtime). Thus, it is possible to write a pipeline that runs seamlessly on your computer, a cluster, or the cloud, without being modified. You simply define the target execution platform in the configuration file.
+In other words, Nextflow provides an abstraction between the workflow’s functional logic and the underlying execution system (or runtime). Thus, it is possible to write a workflow that runs seamlessly on your computer, a cluster, or the cloud, without being modified. You simply define the target execution platform in the configuration file.
 
 <figure markdown>
 
@@ -185,7 +185,7 @@ The standard output shows (line by line):
 
 !!! tip
 
-    The second process runs twice, executing in two different work directories for each input file. The [ANSI](https://en.wikipedia.org/wiki/ANSI_escape_code) log output from Nextflow dynamically refreshes as the pipeline runs; in the previous example the work directory `[1a/3c54ed]` is the second of the two directories that were processed (overwriting the log with the first). To print all the relevant paths to the screen, disable the ANSI log output usin the `-ansi-log` flag (e.g., `nextflow run hello.nf -ansi-log false`).
+    The second process runs twice, executing in two different work directories for each input file. The [ANSI](https://en.wikipedia.org/wiki/ANSI_escape_code) log output from Nextflow dynamically refreshes as the workflow runs; in the previous example the work directory `[1a/3c54ed]` is the second of the two directories that were processed (overwriting the log with the first). To print all the relevant paths to the screen, disable the ANSI log output usin the `-ansi-log` flag (e.g., `nextflow run hello.nf -ansi-log false`).
 
 It’s worth noting that the process `CONVERTTOUPPER` is executed in parallel, so there’s no guarantee that the instance processing the first split (the chunk _Hello ') will be executed before the one processing the second split (the chunk 'world!_).
 
@@ -198,9 +198,9 @@ HELLO
 
 ## Modify and resume
 
-Nextflow keeps track of all the processes executed in your pipeline. If you modify some parts of your script, only the processes that are changed will be re-executed. The execution of the processes that are not changed will be skipped and the cached result will be used instead.
+Nextflow keeps track of all the processes executed in your workflow. If you modify some parts of your script, only the processes that are changed will be re-executed. The execution of the processes that are not changed will be skipped and the cached result will be used instead.
 
-This allows for testing or modifying part of your pipeline without having to re-execute it from scratch.
+This allows for testing or modifying part of your workflow without having to re-execute it from scratch.
 
 For the sake of this tutorial, modify the `CONVERTTOUPPER` process in the previous example, replacing the process script with the string `rev $y`, so that the process looks like this:
 
@@ -237,7 +237,7 @@ You will see that the execution of the process `SPLITLETTERS` is skipped (the pr
 
 !!! info
 
-    The pipeline results are cached by default in the directory `$PWD/work`. Depending on your script, this folder can take up a lot of disk space. If you are sure you won’t need to resume your pipeline execution, clean this folder periodically.
+    The workflow results are cached by default in the directory `$PWD/work`. Depending on your script, this folder can take up a lot of disk space. If you are sure you won’t need to resume your workflow execution, clean this folder periodically.
 
 ## Pipeline parameters
 
@@ -264,7 +264,7 @@ uojnoB
 
 ### In DAG-like format
 
-To better understand how Nextflow is dealing with the data in this pipeline, below is a DAG-like figure to visualize all the `inputs`, `outputs`, `channels` and `processes`:
+To better understand how Nextflow is dealing with the data in this workflow, below is a DAG-like figure to visualize all the `inputs`, `outputs`, `channels` and `processes`:
 
 <figure markdown>
 

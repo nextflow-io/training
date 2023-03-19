@@ -9,7 +9,7 @@ The Nextflow caching mechanism works by assigning a unique ID to each task which
 
 The task unique ID is generated as a 128-bit hash value composing the task input values, files and command string.
 
-The pipeline work directory is organized as shown below:
+The workflow work directory is organized as shown below:
 
 ```txt
 work/
@@ -54,13 +54,13 @@ work/
 
 ## How resume works
 
-The `-resume` command-line option allows the continuation of a pipeline execution from the last step that was completed successfully:
+The `-resume` command-line option allows the continuation of a workflow execution from the last step that was completed successfully:
 
 ```bash
 nextflow run <script> -resume
 ```
 
-In practical terms, the pipeline is executed from the beginning. However, before launching the execution of a process, Nextflow uses the task unique ID to check if the work directory already exists and that it contains a valid command exit state with the expected output files.
+In practical terms, the workflow is executed from the beginning. However, before launching the execution of a process, Nextflow uses the task unique ID to check if the work directory already exists and that it contains a valid command exit state with the expected output files.
 
 If this condition is satisfied the task execution is skipped and previously computed results are used as the process results.
 
@@ -86,7 +86,7 @@ nextflow run <script> -w /some/scratch/dir
 
 !!! warning
 
-    If you delete or move the pipeline work directory, it will prevent the use of the resume feature in subsequent runs.
+    If you delete or move the workflow work directory, it will prevent the use of the resume feature in subsequent runs.
 
 The hash code for input files is computed using:
 
@@ -102,7 +102,7 @@ It’s good practice to organize each **experiment** in its own folder. The main
 
 !!! note
 
-    In the same experiment, the same pipeline can be executed multiple times, however, launching two (or more) Nextflow instances in the same directory concurrently should be avoided.
+    In the same experiment, the same workflow can be executed multiple times, however, launching two (or more) Nextflow instances in the same directory concurrently should be avoided.
 
 The `nextflow log` command lists the executions run in the current folder:
 
@@ -124,7 +124,7 @@ nextflow run rnaseq-nf -resume mighty_boyd
 
 ## Execution provenance
 
-The `log` command, when provided with a **run name** or **session ID**, can return many useful bits of information about a pipeline execution that can be used to create a provenance report.
+The `log` command, when provided with a **run name** or **session ID**, can return many useful bits of information about a workflow execution that can be used to create a provenance report.
 
 By default, it will list the work directories used to compute each task. For example:
 
@@ -289,7 +289,7 @@ Just like we saw at the beginning of this tutorial with HELLO WORLD or WORLD HEL
 [1, A]
 ```
 
-..and that order will likely be different every time the pipeline is run.
+..and that order will likely be different every time the workflow is run.
 
 Imagine now that we have two processes like this, whose output channels are acting as input channels to a third process. Both channels will be independently random, so the third process must not expect them to retain a paired sequence. If it does assume that the first element in the first process output channel is related to the first element in the second process output channel, there will be a mismatch.
 

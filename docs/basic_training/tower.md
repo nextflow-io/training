@@ -7,13 +7,13 @@ description: Get started with Nextflow Tower
 
 ## Basic concepts
 
-Nextflow Tower is the centralized command post for data management and pipelines. It brings monitoring, logging and observability to distributed workflows and simplifies the deployment of pipelines on any cloud, cluster or laptop.
+Nextflow Tower is the centralized command post for data management and workflows. It brings monitoring, logging and observability to distributed workflows and simplifies the deployment of workflows on any cloud, cluster or laptop.
 
 Nextflow tower core features include:
 
--   The launching of pre-configured pipelines with ease.
+-   The launching of pre-configured workflows with ease.
 -   Programmatic integration to meet the needs of an organization.
--   Publishing pipelines to shared workspaces.
+-   Publishing workflows to shared workspaces.
 -   Management of the infrastructure required to run data analysis at scale.
 
 !!! tip
@@ -58,7 +58,7 @@ Where `eyxxxxxxxxxxxxxxxQ1ZTE=` is the token you have just created.
 
     Check your `nextflow -version`. Bearer tokens require Nextflow version 20.10.0 or later and can be set with the second command shown above. You can change the version if necessary.
 
-To submit a pipeline to a [Workspace](https://help.tower.nf/getting-started/workspace/) using the Nextflow command-line tool, add the workspace ID to your environment. For example:
+To submit a workflow to a [Workspace](https://help.tower.nf/getting-started/workspace/) using the Nextflow command-line tool, add the workspace ID to your environment. For example:
 
 ```bash
 export TOWER_WORKSPACE_ID=000000000000000
@@ -92,13 +92,13 @@ To run using the GUI, there are three main steps:
 
 1. Create an account and login into Tower, available free of charge, at [tower.nf](https://tower.nf).
 2. Create and configure a new [compute environment](https://help.tower.nf/compute-envs/overview/).
-3. Start [launching pipelines](https://help.tower.nf/launch/launchpad/).
+3. Start [launching workflows](https://help.tower.nf/launch/launchpad/).
 
 #### Configuring your compute environment
 
-Tower uses the concept of **Compute Environments** to define the execution platform where a pipeline will run.
+Tower uses the concept of **Compute Environments** to define the execution platform where a workflow will run.
 
-It supports the launching of pipelines into a growing number of **cloud** and **on-premise** infrastructures.
+It supports the launching of workflows into a growing number of **cloud** and **on-premise** infrastructures.
 
 ![Compute environments](img/compute_env_platforms.png)
 
@@ -120,22 +120,22 @@ Each compute environment must be pre-configured to enable Tower to submit tasks.
 
 #### Selecting a default compute environment
 
-If you have more than one **Compute Environment**, you can select which one will be used by default when launching a pipeline.
+If you have more than one **Compute Environment**, you can select which one will be used by default when launching a workflow.
 
 1. Navigate to your [compute environments](https://help.tower.nf/compute-envs/overview/).
 2. Choose your default environment by selecting the **Make primary** button.
 
 **Congratulations!**
 
-You are now ready to launch pipelines with your primary compute environment.
+You are now ready to launch workflows with your primary compute environment.
 
 #### Launchpad
 
-Launchpad makes it easy for any workspace user to launch a pre-configured pipeline.
+Launchpad makes it easy for any workspace user to launch a pre-configured workflow.
 
 ![Launchpad](img/overview_launch.png)
 
-A pipeline is a repository containing a Nextflow workflow, a compute environment and pipeline parameters.
+A workflow is a repository containing a Nextflow workflow, a compute environment and workflow parameters.
 
 #### Pipeline Parameters Form
 
@@ -143,36 +143,36 @@ Launchpad automatically detects the presence of a `nextflow_schema.json` in the 
 
 !!! info
 
-    The parameter forms view will appear if the workflow has a Nextflow schema file for the parameters. Please refer to the [Nextflow Schema guide](https://help.tower.nf/pipeline-schema/overview) to learn more about the schema file use-cases and how to create them.
+    The parameter forms view will appear if the workflow has a Nextflow schema file for the parameters. Please refer to the [Nextflow Schema guide](https://help.tower.nf/workflow-schema/overview) to learn more about the schema file use-cases and how to create them.
 
-This makes it trivial for users without any expertise in Nextflow to enter their pipeline parameters and launch.
+This makes it trivial for users without any expertise in Nextflow to enter their workflow parameters and launch.
 
 ![Pipeline parameters](img/launch_rnaseq_nextflow_schema.png)
 
-#### Adding a new pipeline
+#### Adding a new workflow
 
-Adding a pipeline to the pre-saved workspace launchpad is detailed in full on the [tower webpage docs](https://help.tower.nf/launch/launch/).
+Adding a workflow to the pre-saved workspace launchpad is detailed in full on the [tower webpage docs](https://help.tower.nf/launch/launch/).
 
-In brief, these are the steps you need to follow to set up a pipeline.
+In brief, these are the steps you need to follow to set up a workflow.
 
 1. Select the Launchpad button in the navigation bar. This will open the **Launch Form**.
 2. Select a [compute environment](https://help.tower.nf/compute-envs/overview).
-3. Enter the repository of the pipeline you want to launch. e.g. <https://github.com/nf-core/rnaseq.git>
-4. Select a pipeline **Revision number**. The Git default branch (main/master) or `manifest.defaultBranch` in the Nextflow configuration will be used by default.
+3. Enter the repository of the workflow you want to launch. e.g. <https://github.com/nf-core/rnaseq.git>
+4. Select a workflow **Revision number**. The Git default branch (main/master) or `manifest.defaultBranch` in the Nextflow configuration will be used by default.
 5. Set the **Work directory** location of the Nextflow work directory. The location associated with the compute environment will be selected by default.
 6. Enter the name(s) of each of the Nextflow **Config profiles** followed by the `Enter` key. See the Nextflow [Config profiles](https://www.nextflow.io/docs/latest/config.html#config-profiles) documentation for more details.
-7. Enter any pipeline parameters in YAML or JSON format. YAML example:
+7. Enter any workflow parameters in YAML or JSON format. YAML example:
 
     ```yaml
     reads: "s3://nf-bucket/exome-data/ERR013140_{1,2}.fastq.bz2"
     paired_end: true
     ```
 
-8. Select Launch to begin the pipeline execution.
+8. Select Launch to begin the workflow execution.
 
 !!! info
 
-    Nextflow pipelines are simply Git repositories and can be changed to any public or private Git-hosting platform. See [Git Integration](https://help.tower.nf/git/overview/) in the Tower docs and [Pipeline Sharing](https://www.nextflow.io/docs/latest/sharing.html) in the Nextflow docs for more details.
+    Nextflow workflows are simply Git repositories and can be changed to any public or private Git-hosting platform. See [Git Integration](https://help.tower.nf/git/overview/) in the Tower docs and [Pipeline Sharing](https://www.nextflow.io/docs/latest/sharing.html) in the Nextflow docs for more details.
 
 !!! note
 
@@ -184,7 +184,7 @@ In brief, these are the steps you need to follow to set up a pipeline.
 
 !!! tip
 
-    To create your own customized Nextflow Schema for your pipeline, see the examples from the `nf-core` workflows that have adopted this approach. For example, [eager](https://github.com/nf-core/eager/blob/2.3.3/nextflow_schema.json) and [rnaseq](https://github.com/nf-core/rnaseq/blob/3.0/nextflow_schema.json).
+    To create your own customized Nextflow Schema for your workflow, see the examples from the `nf-core` workflows that have adopted this approach. For example, [eager](https://github.com/nf-core/eager/blob/2.3.3/nextflow_schema.json) and [rnaseq](https://github.com/nf-core/rnaseq/blob/3.0/nextflow_schema.json).
 
 For advanced settings options check out this [page](https://help.tower.nf/launch/advanced/).
 
