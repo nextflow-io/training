@@ -87,13 +87,13 @@ ENV PATH=$PATH:/usr/games/
 
 ### Build the image
 
-Build the Dockerfile image by using the following command:
+Build the Docker image based on the Dockerfile by using the following command:
 
 ```bash
 docker build -t my-image .
 ```
 
-Where "my-image" is the user-specified name tag for the Dockerfile, present in the current directory.
+Where "my-image" is the user-specified name for the container image you plan to build .
 
 !!! tip
 
@@ -206,7 +206,7 @@ Create an account on the <https://hub.docker.com> website. Then from your shell 
 docker login
 ```
 
-Tag the image with your Docker user name account:
+Rename the image to include your Docker user name account:
 
 ```bash
 docker tag my-image <user-name>/my-image
