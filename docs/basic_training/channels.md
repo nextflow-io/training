@@ -39,7 +39,7 @@ ch.view() // (2)!
 ```
 
 1. Use the built-in print line function `println` to print the `ch` channel
-2. Apply the `view` method to the `ch` channel prints each item emitted by the channels
+2. Apply the `view` channel operator to the `ch` channel prints each item emitted by the channels
 
 !!! exercise
 
@@ -52,7 +52,7 @@ ch.view() // (2)!
 
 ### Value channels
 
-A **value** channel (a.k.a. singleton channel) by definition is bound to a single value and it can be read unlimited times without consuming its contents. A `value` channel is created using the [value](https://www.nextflow.io/docs/latest/channel.html#value) factory method or by operators returning a single value, such as [first](https://www.nextflow.io/docs/latest/operator.html#first), [last](https://www.nextflow.io/docs/latest/operator.html#last), [collect](https://www.nextflow.io/docs/latest/operator.html#operator-collect), [count](https://www.nextflow.io/docs/latest/operator.html#operator-count), [min](https://www.nextflow.io/docs/latest/operator.html#operator-min), [max](https://www.nextflow.io/docs/latest/operator.html#operator-max), [reduce](https://www.nextflow.io/docs/latest/operator.html#operator-reduce), and [sum](https://www.nextflow.io/docs/latest/operator.html#operator-sum).
+A **value** channel (a.k.a. singleton channel) by definition is bound to a single value and it can be read unlimited times without consuming its contents. A `value` channel is created using the [value](https://www.nextflow.io/docs/latest/channel.html#value) channel factory or by operators returning a single value, such as [first](https://www.nextflow.io/docs/latest/operator.html#first), [last](https://www.nextflow.io/docs/latest/operator.html#last), [collect](https://www.nextflow.io/docs/latest/operator.html#operator-collect), [count](https://www.nextflow.io/docs/latest/operator.html#operator-count), [min](https://www.nextflow.io/docs/latest/operator.html#operator-min), [max](https://www.nextflow.io/docs/latest/operator.html#operator-max), [reduce](https://www.nextflow.io/docs/latest/operator.html#operator-reduce), and [sum](https://www.nextflow.io/docs/latest/operator.html#operator-sum).
 
 To better understand the difference between value and queue channels, save the snippet below as `example.nf`.
 
@@ -152,7 +152,7 @@ These are Nextflow commands for creating channels that have implicit expected in
 
 ### `value()`
 
-The `value` factory method is used to create a _value_ channel. An optional not `null` argument can be specified to bind the channel to a specific value. For example:
+The `value` channel factory is used to create a _value_ channel. An optional not `null` argument can be specified to bind the channel to a specific value. For example:
 
 ```groovy linenums="1"
 ch1 = Channel.value() // (1)!
@@ -173,7 +173,7 @@ ch = Channel.of(1, 3, 5, 7)
 ch.view { "value: $it" }
 ```
 
-The first line in this example creates a variable `ch` which holds a channel object. This channel emits the values specified as a parameter in the `of` method. Thus the second line will print the following:
+The first line in this example creates a variable `ch` which holds a channel object. This channel emits the values specified as a parameter in the `of` channel factory. Thus the second line will print the following:
 
 ```console
 value: 1
@@ -182,7 +182,7 @@ value: 5
 value: 7
 ```
 
-The method `Channel.of` works in a similar manner to `Channel.from` (which is now [deprecated](https://www.nextflow.io/docs/latest/channel.html#of)), fixing some inconsistent behaviors of the latter and providing better handling when specifying a range of values. For example, the following works with a range from 1 to 23:
+The `Channel.of` channel factory works in a similar manner to `Channel.from` (which is now [deprecated](https://www.nextflow.io/docs/latest/channel.html#of)), fixing some inconsistent behaviors of the latter and providing better handling when specifying a range of values. For example, the following works with a range from 1 to 23:
 
 ```groovy linenums="1"
 Channel
@@ -192,7 +192,7 @@ Channel
 
 ### `fromList()`
 
-The method `Channel.fromList` creates a channel emitting the elements provided by a list object specified as an argument:
+The `Channel.fromList` channel factory creates a channel emitting the elements provided by a list object specified as an argument:
 
 ```groovy linenums="1"
 list = ['hello', 'world']
@@ -204,7 +204,7 @@ Channel
 
 ### `fromPath()`
 
-The `fromPath` factory method creates a queue channel emitting one or more files matching the specified glob pattern.
+The `fromPath` channel factory creates a queue channel emitting one or more files matching the specified glob pattern.
 
 ```groovy linenums="1"
 Channel.fromPath('./data/meta/*.csv')
@@ -230,7 +230,7 @@ Learn more about the glob patterns syntax at [this link](https://docs.oracle.com
 
 !!! exercise
 
-    Use the `Channel.fromPath` method to create a channel emitting all files with the suffix `.fq` in the `data/ggal/` directory and any subdirectory, in addition to hidden files. Then print the file names.
+    Use the `Channel.fromPath` channel factory to create a channel emitting all files with the suffix `.fq` in the `data/ggal/` directory and any subdirectory, in addition to hidden files. Then print the file names.
 
     ??? solution
 
@@ -241,7 +241,7 @@ Learn more about the glob patterns syntax at [this link](https://docs.oracle.com
 
 ### `fromFilePairs()`
 
-The `fromFilePairs` method creates a channel emitting the file pairs matching a glob pattern provided by the user. The matching files are emitted as tuples, in which the first element is the grouping key of the matching pair and the second element is the list of files (sorted in lexicographical order).
+The `fromFilePairs` channel factory creates a channel emitting the file pairs matching a glob pattern provided by the user. The matching files are emitted as tuples, in which the first element is the grouping key of the matching pair and the second element is the list of files (sorted in lexicographical order).
 
 ```groovy linenums="1"
 Channel
@@ -273,7 +273,7 @@ It will produce an output similar to the following:
 
 !!! exercise
 
-    Use the `fromFilePairs` method to create a channel emitting all pairs of fastq read in the `data/ggal/` directory and print them. Then use the `flat: true` option and compare the output with the previous execution.
+    Use the `fromFilePairs` channel factory to create a channel emitting all pairs of fastq read in the `data/ggal/` directory and print them. Then use the `flat: true` option and compare the output with the previous execution.
 
     ??? solution
 
@@ -288,7 +288,7 @@ It will produce an output similar to the following:
 
 ### `fromSRA()`
 
-The `Channel.fromSRA` method makes it possible to query the [NCBI SRA](https://www.ncbi.nlm.nih.gov/sra) archive and returns a channel emitting the FASTQ files matching the specified selection criteria.
+The `Channel.fromSRA` channel factory makes it possible to query the [NCBI SRA](https://www.ncbi.nlm.nih.gov/sra) archive and returns a channel emitting the FASTQ files matching the specified selection criteria.
 
 The query can be project ID(s) or accession number(s) supported by the [NCBI ESearch API](https://www.ncbi.nlm.nih.gov/books/NBK25499/#chapter4.ESearch).
 
