@@ -284,7 +284,7 @@ nextflow run script3.nf --reads 'data/ggal/*_{1,2}.fq'
 
 !!! exercise
 
-    Use a opção `checkIfExists` para o método [fromFilePairs](https://www.nextflow.io/docs/latest/channel.html#fromfilepairs) para checar se o caminho especificado contém os pares de arquivos.
+    Use a opção `checkIfExists` para a fábrica de canal [fromFilePairs](https://www.nextflow.io/docs/latest/channel.html#fromfilepairs) para checar se o caminho especificado contém os pares de arquivos.
 
     ??? result
 

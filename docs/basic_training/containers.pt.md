@@ -87,13 +87,13 @@ ENV PATH=$PATH:/usr/games/
 
 ### Monte a imagem
 
-Monte a imagem do Dockerfile utilizando o seguinte comando:
+Monte a imagem do Docker com base no Dockerfile utilizando o seguinte comando:
 
 ```bash
 docker build -t minha-imagem .
 ```
 
-Onde "minha-imagem" é o rótulo que o usuário especificou para o Dockerfile, presente no diretório atual.
+Onde "minha-imagem" é o nome que o usuário especificou para a imagem que será criada.
 
 !!! tip
 
@@ -206,7 +206,7 @@ Crie uma conta no site <https://hub.docker.com>. Então no seu terminal shell ex
 docker login
 ```
 
-Marque a imagem com seu nome de usuário Docker:
+Renomeie a imagem para incluir seu nome de usuário Docker:
 
 ```bash
 docker tag minha-imagem <nome-de-usuario>/minha-imagem
