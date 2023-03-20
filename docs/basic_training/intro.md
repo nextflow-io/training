@@ -239,9 +239,9 @@ You will see that the execution of the process `SPLITLETTERS` is skipped (the pr
 
     The workflow results are cached by default in the directory `$PWD/work`. Depending on your script, this folder can take up a lot of disk space. If you are sure you won’t need to resume your workflow execution, clean this folder periodically.
 
-## Pipeline parameters
+## Workflow parameters
 
-Pipeline parameters are simply declared by prepending the prefix `params` to a variable name, separated by a dot character. Their value can be specified on the command line by prefixing the parameter name with a double dash character, i.e. `--paramName`.
+Workflow parameters are simply declared by prepending the prefix `params` to a variable name, separated by a dot character. Their value can be specified on the command line by prefixing the parameter name with a double dash character, i.e. `--paramName`.
 
 Now, let’s try to execute the previous example specifying a different input string parameter, as shown below:
 

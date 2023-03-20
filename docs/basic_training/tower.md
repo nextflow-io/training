@@ -7,13 +7,13 @@ description: Get started with Nextflow Tower
 
 ## Basic concepts
 
-Nextflow Tower is the centralized command post for data management and workflows. It brings monitoring, logging and observability to distributed workflows and simplifies the deployment of workflows on any cloud, cluster or laptop.
+Nextflow Tower is the centralized command post for data management and workflows. It brings monitoring, logging and observability to distributed workflows and simplifies the deployment of workflows on any cloud, cluster or laptop. In Tower terminology, a workflow is what we've been working on so far, and pipelines are pre-configured workflows that can be used by all users in a workspace. It is composed of a workflow repository, launch parameters, and a compute environment. We'll stick to these definitions in this section.
 
 Nextflow tower core features include:
 
--   The launching of pre-configured workflows with ease.
+-   The launching of pre-configured pipelines with ease.
 -   Programmatic integration to meet the needs of an organization.
--   Publishing workflows to shared workspaces.
+-   Publishing pipelines to shared workspaces.
 -   Management of the infrastructure required to run data analysis at scale.
 
 !!! tip
@@ -58,7 +58,7 @@ Where `eyxxxxxxxxxxxxxxxQ1ZTE=` is the token you have just created.
 
     Check your `nextflow -version`. Bearer tokens require Nextflow version 20.10.0 or later and can be set with the second command shown above. You can change the version if necessary.
 
-To submit a workflow to a [Workspace](https://help.tower.nf/getting-started/workspace/) using the Nextflow command-line tool, add the workspace ID to your environment. For example:
+To submit a pipeline to a [Workspace](https://help.tower.nf/getting-started/workspace/) using the Nextflow command-line tool, add the workspace ID to your environment. For example:
 
 ```bash
 export TOWER_WORKSPACE_ID=000000000000000
@@ -92,7 +92,7 @@ To run using the GUI, there are three main steps:
 
 1. Create an account and login into Tower, available free of charge, at [tower.nf](https://tower.nf).
 2. Create and configure a new [compute environment](https://help.tower.nf/compute-envs/overview/).
-3. Start [launching workflows](https://help.tower.nf/launch/launchpad/).
+3. Start [launching pipelines](https://help.tower.nf/launch/launchpad/).
 
 #### Configuring your compute environment
 
@@ -120,7 +120,7 @@ Each compute environment must be pre-configured to enable Tower to submit tasks.
 
 #### Selecting a default compute environment
 
-If you have more than one **Compute Environment**, you can select which one will be used by default when launching a workflow.
+If you have more than one **Compute Environment**, you can select which one will be used by default when launching a pipeline.
 
 1. Navigate to your [compute environments](https://help.tower.nf/compute-envs/overview/).
 2. Choose your default environment by selecting the **Make primary** button.
@@ -131,11 +131,11 @@ You are now ready to launch workflows with your primary compute environment.
 
 #### Launchpad
 
-Launchpad makes it easy for any workspace user to launch a pre-configured workflow.
+Launchpad makes it easy for any workspace user to launch a pre-configured pipeline.
 
 ![Launchpad](img/overview_launch.png)
 
-A workflow is a repository containing a Nextflow workflow, a compute environment and workflow parameters.
+A pipeline is a repository containing a Nextflow workflow, a compute environment and workflow parameters.
 
 #### Pipeline Parameters Form
 
@@ -143,21 +143,21 @@ Launchpad automatically detects the presence of a `nextflow_schema.json` in the 
 
 !!! info
 
-    The parameter forms view will appear if the workflow has a Nextflow schema file for the parameters. Please refer to the [Nextflow Schema guide](https://help.tower.nf/workflow-schema/overview) to learn more about the schema file use-cases and how to create them.
+    The parameter forms view will appear if the pipeline has a Nextflow schema file for the parameters. Please refer to the [Nextflow Schema guide](https://help.tower.nf/workflow-schema/overview) to learn more about the schema file use-cases and how to create them.
 
 This makes it trivial for users without any expertise in Nextflow to enter their workflow parameters and launch.
 
 ![Pipeline parameters](img/launch_rnaseq_nextflow_schema.png)
 
-#### Adding a new workflow
+#### Adding a new pipeline
 
-Adding a workflow to the pre-saved workspace launchpad is detailed in full on the [tower webpage docs](https://help.tower.nf/launch/launch/).
+Adding a pipeline to the pre-saved workspace launchpad is detailed in full on the [tower webpage docs](https://help.tower.nf/launch/launch/).
 
-In brief, these are the steps you need to follow to set up a workflow.
+In brief, these are the steps you need to follow to set up a pipeline.
 
 1. Select the Launchpad button in the navigation bar. This will open the **Launch Form**.
 2. Select a [compute environment](https://help.tower.nf/compute-envs/overview).
-3. Enter the repository of the workflow you want to launch. e.g. <https://github.com/nf-core/rnaseq.git>
+3. Enter the repository of the pipeline you want to launch. e.g. <https://github.com/nf-core/rnaseq.git>
 4. Select a workflow **Revision number**. The Git default branch (main/master) or `manifest.defaultBranch` in the Nextflow configuration will be used by default.
 5. Set the **Work directory** location of the Nextflow work directory. The location associated with the compute environment will be selected by default.
 6. Enter the name(s) of each of the Nextflow **Config profiles** followed by the `Enter` key. See the Nextflow [Config profiles](https://www.nextflow.io/docs/latest/config.html#config-profiles) documentation for more details.
@@ -168,7 +168,7 @@ In brief, these are the steps you need to follow to set up a workflow.
     paired_end: true
     ```
 
-8. Select Launch to begin the workflow execution.
+8. Select Launch to begin the pipeline execution.
 
 !!! info
 
@@ -196,7 +196,7 @@ To learn more about using the Tower API, visit the [API section](https://help.to
 
 ## Workspaces and Organizations
 
-Nextflow Tower simplifies the development and execution of workflows by providing a centralized interface for users and organizations.
+Nextflow Tower simplifies the development and execution of pipeline by providing a centralized interface for users and organizations.
 
 Each user has a unique **workspace** where they can interact and manage all resources such as workflows, compute environments and credentials. Details of this can be found [here](https://help.tower.nf/getting-started/workspace/).
 
