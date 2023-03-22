@@ -291,7 +291,7 @@ Os seguintes protocolos são suportados:
      singularity.enabled = true
      ```
 
-     A configuração acima instrui o Nextflow a usar o mecanismo Singularity para executar seus processos. O contêiner é extraído do registro do Docker e armazenado em cache no diretório atual para ser usado em outras execuções.
+     A configuração acima instrui o Nextflow a usar o mecanismo Singularity para executar seus processos. O contêiner é extraído do repositório de imagens do Docker e armazenado em cache no diretório atual para ser usado em outras execuções.
 
      Como alternativa, se você tiver uma imagem Singularity, seu caminho absoluto pode ser especificado por meio do nome do contêiner usando a opção `-with-singularity` ou a configuração `process.container` no arquivo de configuração.
 

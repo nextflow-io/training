@@ -316,7 +316,7 @@ ls -la
 
 ### Importe uma imagem do Docker
 
-Uma forma mais fácil de criar um contêiner com o Singularity não necessitando da permissão `sudo` e melhorando a interoperabilidade dos contêineres é importando uma imagem de contêiner do Docker puxando diretamente do registro do Docker. Por exemplo:
+Uma forma mais fácil de criar um contêiner com o Singularity não necessitando da permissão `sudo` e melhorando a interoperabilidade dos contêineres é importando uma imagem de contêiner do Docker puxando diretamente do repositório de imagens do Docker. Por exemplo:
 
 ```bash
 singularity pull docker://debian:stretch-slim
@@ -486,7 +486,7 @@ Tente executar o fluxo de trabalho RNA-seq visto anteriormente (script7.nf). Com
 
 ## BioContainers
 
-Outro recurso útil para conectar Bioconda e contêineres é o projeto [BioContainers](https://biocontainers.pro). BioContainers é uma iniciativa da comunidade para prover um registro de imagens de contêiner para cada receita do Bioconda.
+Outro recurso útil para conectar Bioconda e contêineres é o projeto [BioContainers](https://biocontainers.pro). BioContainers é uma iniciativa da comunidade para prover um repositório de imagens de contêiner para cada receita do Bioconda.
 
 Até agora, nós vimos como instalar pacotes com conda e micromamba, ambos localmente e com contêiner. Com o BioContainers, você não precisa criar sua própria imagem de contêiner para as ferramentas que você quiser, e não precisa utilizar conda ou micromamba para instalar pacotes. O BioContainers já disponibiliza uma imagem Docker contendo os programas que você quer instalado. Por exemplo, você pode adquirir a imagem de contêiner do fastqc utilizando BioContainers:
 
@@ -494,9 +494,9 @@ Até agora, nós vimos como instalar pacotes com conda e micromamba, ambos local
 docker pull biocontainers/fastqc:v0.11.5
 ```
 
-Você pode checar o registro dos pacotes que quer no [site oficial do BioContainers](https://biocontainers.pro/registry).
+Você pode checar o repositório dos pacotes que quer no [site oficial do BioContainers](https://biocontainers.pro/registry).
 
-Contrariamente a outros registros que irão puxar a última imagem quando nenhum rótulo (versão) é especificado, você precisa especificar um rótulo quando for baixar do BioContainers (depois de dois pontos `:`, por exemplo fastqc:v0.11.5). Cheque os rótulos com o registro e escolha o que melhor se adéqua a suas necessidades.
+Diferente de outros repositórios que irão puxar a imagem mais recente quando nenhum rótulo (versão) é especificado, você precisa especificar um rótulo quando for baixar do BioContainers (depois de dois pontos `:`, por exemplo fastqc:v0.11.5). Cheque os rótulos com o registro e escolha o que melhor se adéqua a suas necessidades.
 
 !!! tip
 
