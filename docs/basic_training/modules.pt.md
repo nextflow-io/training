@@ -6,7 +6,7 @@ description: Material de treinamento básico do Nextflow
 
 A definição de bibliotecas modulares simplifica a escrita de fluxos de trabalho complexos de análise de dados, além tornar o reuso de processos mais fácil.
 
-Ao usar o exemplo `hello.nf` da seção de introdução, nós converteremos os processos do fluxo de trabalho em módulos e, em seguida, executaremos estes processos dentro do escopo do fluxo de trabalho de diferentes formas.
+Ao usar o exemplo `hello.nf` da seção de introdução, nós converteremos os processos do fluxo de trabalho em módulos e, em seguida, executaremos estes processos dentro do escopo `workflow` de diferentes formas.
 
 ## Módulos
 
@@ -167,7 +167,7 @@ workflow  {
 
 !!! note
 
-    Nós movemos o `greeting_ch` para o escopo do `workflow` para este exercício.
+    Nós movemos o `greeting_ch` para o escopo `workflow` para este exercício.
 
 Também podemos definir explicitamente a saída de um canal para outro usando o atributo `.out`, removendo completamente as definições de canal:
 
@@ -223,7 +223,7 @@ process CONVERTTOUPPER {
 }
 ```
 
-Em seguida, altere o escopo do fluxo de trabalho em `hello.nf` para chamar essa saída nomeada específica (observe o `.upper` adicionado):
+Em seguida, altere o escopo `workflow` em `hello.nf` para chamar essa saída nomeada específica (observe o `.upper` adicionado):
 
 ```groovy linenums="1" title="hello.nf"
 workflow {
@@ -236,7 +236,7 @@ workflow {
 
 ### Usando saídas canalizadas
 
-Outra maneira de lidar com as saídas no escopo do fluxo de trabalho é usar pipes `|`.
+Outra maneira de lidar com as saídas no escopo `workflow` é usar pipes `|`.
 
 !!! exercise
 
@@ -250,7 +250,7 @@ Outra maneira de lidar com as saídas no escopo do fluxo de trabalho é usar pip
 
      Aqui usamos um [pipe](https://www.nextflow.io/docs/latest/dsl2.html#pipes) que passa a saída de um processo como um canal para o próximo processo sem a necessidade de aplicar `.out` ao nome do processo.
 
-## Definição de workflow
+## Definição do escopo workflow
 
 O escopo `workflow` permite a definição de componentes que definem a invocação de um ou mais processos ou operadores:
 
@@ -285,7 +285,7 @@ Por exemplo, o trecho acima define um `workflow` chamado `meu_fluxo_de_trabalho`
 
     Um componente de um fluxo de trabalho pode acessar qualquer variável ou parâmetro definido no escopo externo. No exemplo em execução, também podemos acessar `params.greeting` diretamente na definição de `workflow`.
 
-### Entradas de workflow
+### Entradas no escopo workflow
 
 Um componente `workflow` pode declarar um ou mais canais de entrada usando a instrução `take`. Por exemplo:
 
@@ -320,7 +320,7 @@ workflow {
 }
 ```
 
-### Saídas do workflow
+### Saídas no escopo workflow
 
 Um bloco `workflow` pode declarar um ou mais canais de saída usando a instrução `emit`. Por exemplo:
 
@@ -368,7 +368,7 @@ workflow {
 
 O resultado do trecho de código acima pode ser acessado usando `meu_fluxo_de_trabalho.out.meus_dados`.
 
-### Chamando fluxos de trabalho nomeados
+### Chamando escopos workflows nomeados
 
 Dentro de um script `main.nf` (chamado `hello.nf` em nosso exemplo), também podemos ter vários fluxos de trabalho. Nesse caso, podemos chamar um fluxo de trabalho específico ao executar o código. Para isso, usamos a chamada de ponto de entrada `-entry <nome_do_flux_de_trabalho>`.
 

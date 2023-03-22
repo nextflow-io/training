@@ -704,7 +704,7 @@ def parseJsonFile(json_file) {
 }
 ```
 
-O Nextflow usará isso como uma função personalizada dentro do escopo do fluxo de trabalho.
+O Nextflow usará isso como uma função personalizada dentro do escopo `workflow`.
 
 !!! tip
 

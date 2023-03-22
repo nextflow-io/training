@@ -6,13 +6,13 @@ description: Introdução ao Nextflow
 
 ## Conceitos básicos
 
-O Nextflow é tanto um motor de orquestração de fluxo de trabalho quanto uma linguagem de domínio específico (Domain-Specific Language - DSL) que facilita a escrita de fluxos de trabalho computacionais com uso intensivo de dados.
+O Nextflow é tanto um motor de orquestração de fluxo de trabalho quanto uma linguagem de domínio específico (Domain-Specific Language - DSL) que facilita a escrita de fluxos de trabalho computacionais que fazem uso intensivo de dados.
 
 Ele foi projetado com base na ideia de que a plataforma Linux é a _língua franca_ da ciência de dados. O Linux fornece muitas ferramentas de linha de comando que, ainda que simples, são poderosas ferramentas de script que, quando encadeadas, facilitam manipulações complexas de dados.
 
 O Nextflow estende essa abordagem, adicionando a capacidade de definir interações complexas entre programas e um ambiente de computação paralela de alto nível, baseado no modelo de programação Dataflow. Os principais recursos do Nextflow são:
 
--   Portabilidade e reprodutibilidade do fluxo de trabalho
+-   Portabilidade e reprodutibilidade de fluxos de trabalho
 -   Escalabilidade na paralelização e na implantação
 -   Integração de ferramentas já existentes, sistemas e padrões da indústria
 
@@ -32,7 +32,7 @@ Qualquer processo pode definir um ou mais `canais` como uma `entrada` e `saída`
 
 Enquanto um processo define _qual_ comando ou `script` deve ser executado, o executor determina _como_ esse `script` é executado na plataforma alvo.
 
-Se não for especificado de outra forma, os processos são executados no computador local. O executor local é muito útil para fins de desenvolvimento e teste de fluxo de trabalho, no entanto, para fluxos de trabalho computacionais do mundo real, uma plataforma de computação de alto desempenho (High-Performance Computing - HPC) ou de computação em nuvem geralmente é necessária.
+Se não for especificado de outra forma, os processos são executados no computador local. O executor local é muito útil para fins de desenvolvimento e teste de fluxos de trabalho, no entanto, para fluxos de trabalho computacionais do mundo real, uma plataforma de computação de alto desempenho (High-Performance Computing - HPC) ou de computação em nuvem geralmente é necessária.
 
 Em outras palavras, o Nextflow fornece uma abstração entre a lógica funcional do fluxo de trabalho e o sistema de execução subjacente (ou sistema de tempo de execução). Assim, é possível escrever um fluxo de trabalho que seja executado perfeitamente em seu computador, em um cluster ou na nuvem, sem ser modificado. Você simplesmente define a plataforma de execução alvo no arquivo de configuração.
 

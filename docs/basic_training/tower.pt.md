@@ -7,13 +7,13 @@ description: Comece a usar o Nextflow Tower
 
 ## Conceitos Básicos
 
-O Nextflow Tower é o posto de comando centralizado para gerenciamento de dados e fluxos de trabalho. Ele traz monitoramento, gerenciamento de logs e observabilidade para fluxos de trabalho distribuídos e simplifica a implantação de fluxos de trabalho em qualquer nuvem, cluster ou laptop.
+O Nextflow Tower é o posto de comando centralizado para gerenciamento de dados e fluxos de trabalho. Ele traz monitoramento, gerenciamento de logs e observabilidade para fluxos de trabalho distribuídos e simplifica a implantação de fluxos de trabalho em qualquer nuvem, cluster ou laptop. Na terminologia do Tower, um fluxo de trabalho é o que temos trabalhado até agora, e os pipelines são fluxos de trabalho pré-configurados que podem ser usados por todos os usuários em um espaço de trabalho. Ele é composto por um repositório de fluxo de trabalho, parâmetros de inicialização e um ambiente de computação. Vamos nos ater a essas definições nesta seção.
 
 Os principais recursos do Nextflow Tower incluem:
 
--   O lançamento de fluxos de trabalho pré-configurados com facilidade.
+-   O lançamento de pipelines pré-configurados com facilidade.
 -   Integração programática para atender às necessidades de uma organização.
--   Disponibilização de fluxos de trabalho em áreas de trabalho compartilhadas.
+-   Disponibilização pipelines em áreas de trabalho compartilhadas.
 -   Gerenciamento da infraestrutura necessária para executar análise de dados em escala.
 
 !!! tip
@@ -58,7 +58,7 @@ Onde `eyxxxxxxxxxxxxxxxQ1ZTE=` é o token que você acabou de criar.
 
     Verifique seu `nextflow -version`. Os tokens de portador requerem ao menos a versão 20.10.0 do Nextflow ou versões posteriores e isso pode ser configurado com o segundo comando mostrado acima. Você pode alterar para uma outra versão, se necessário.
 
-Para enviar um fluxo de trabalho para uma [área de trabalho](https://help.tower.nf/getting-started/workspace/) (workspace) usando a ferramenta de linha de comando do Nextflow, adicione o ID da área de trabalho em seu ambiente. Por exemplo:
+Para enviar um pipeline para uma [área de trabalho](https://help.tower.nf/getting-started/workspace/) (workspace) usando a ferramenta de linha de comando do Nextflow, adicione o ID da área de trabalho em seu ambiente. Por exemplo:
 
 ```bash
 export TOWER_WORKSPACE_ID=000000000000000
@@ -92,7 +92,7 @@ Para executar usando a interface gráfica (GUI), existem três etapas principais
 
 1. Crie uma conta e faça login no Tower, disponível gratuitamente, em [tower.nf](https://tower.nf).
 2. Crie e configure um novo [ambiente de computação](https://help.tower.nf/compute-envs/overview/) (compute environment).
-3. Comece a [lançar fluxos de trabalho](https://help.tower.nf/launch/launchpad/).
+3. Comece a [lançar pipelines](https://help.tower.nf/launch/launchpad/).
 
 #### Configurando seu ambiente de computação
 
@@ -121,7 +121,7 @@ Cada ambiente de computação deve ser pré-configurado para permitir que o Towe
 
 #### Selecionando um ambiente de computação padrão
 
-Se você tiver mais de um **Ambiente de computação**, poderá selecionar qual deles será usado por padrão ao lançar um fluxo de trabalho.
+Se você tiver mais de um **Ambiente de computação**, poderá selecionar qual deles será usado por padrão ao lançar um pipeline.
 
 1. Navegue até os seus [ambientes de computação](https://help.tower.nf/compute-envs/overview/).
 2. Escolha seu ambiente padrão selecionando o botão **Make primary**.
@@ -132,11 +132,11 @@ Agora você está pronto para lançar fluxos de trabalho com seu ambiente de com
 
 #### Launchpad
 
-O Launchpad torna fácil para qualquer usuário da área de trabalho lançar um fluxo de trabalho pré-configurado.
+O Launchpad torna fácil para qualquer usuário da área de trabalho lançar um pipeline pré-configurado.
 
 ![Launchpad](img/overview_launch.png)
 
-Um fluxo de trabalho é um repositório que contém um fluxo de trabalho do Nextflow, um ambiente de computação e parâmetros de fluxo de trabalho.
+Um pipeline é um repositório que contém um fluxo de trabalho do Nextflow, um ambiente de computação e parâmetros de fluxo de trabalho.
 
 #### Formulário de Parâmetros de Pipeline
 
@@ -144,17 +144,17 @@ O Launchpad detecta automaticamente a presença de um `nextflow_schema.json` na 
 
 !!! info
 
-    A exibição de formulários de parâmetro aparecerá se o fluxo de trabalho tiver um arquivo de esquema do Nextflow para os parâmetros. Consulte o [Guia do esquema do Nextflow](https://help.tower.nf/workflow-schema/overview) para saber mais sobre os casos de uso do arquivo de esquema e como criá-los.
+    A exibição de formulários de parâmetro aparecerá se o pipeline tiver um arquivo de esquema do Nextflow para os parâmetros. Consulte o [Guia do esquema do Nextflow](https://help.tower.nf/workflow-schema/overview) para saber mais sobre os casos de uso do arquivo de esquema e como criá-los.
 
 Isso torna trivial para usuários sem experiência em Nextflow inserir seus parâmetros de fluxo de trabalho e lançá-lo.
 
 ![Pipeline parameters](img/launch_rnaseq_nextflow_schema.png)
 
-#### Adicionando um novo fluxo de trabalho
+#### Adicionando um novo pipeline
 
-A adição de um fluxo de trabalho pré-salvo ao launchpad da área de trabalho é detalhada na íntegra na [documentação do Tower](https://help.tower.nf/launch/launch/).
+A adição de um pipeline ao launchpad da área de trabalho é detalhada na íntegra na [documentação do Tower](https://help.tower.nf/launch/launch/).
 
-Em resumo, essas são as etapas que você precisa seguir para configurar um fluxo de trabalho.
+Em resumo, essas são as etapas que você precisa seguir para configurar um pipeline.
 
 1. Selecione o botão Launchpad na barra de navegação. Isso abrirá o **Formulário de inicialização**.
 2. Selecione um [ambiente de computação](https://help.tower.nf/compute-envs/overview).
@@ -169,7 +169,7 @@ Em resumo, essas são as etapas que você precisa seguir para configurar um flux
     pares_de_leituras: true
     ```
 
-8. Selecione Launch para iniciar a execução do fluxo de trabalho.
+8. Selecione Launch para iniciar a execução do pipeline.
 
 !!! info
 
@@ -197,7 +197,7 @@ Para saber mais sobre como usar a API do Tower, visite a [seção da API](https:
 
 ## Áreas de trabalho e Organizações
 
-O Nextflow Tower simplifica o desenvolvimento e a execução de fluxos de trabalho, fornecendo uma interface centralizada para usuários e organizações.
+O Nextflow Tower simplifica o desenvolvimento e a execução de pipelines, fornecendo uma interface centralizada para usuários e organizações.
 
 Cada usuário tem uma **área de trabalho** exclusiva onde pode interagir e gerenciar todos os recursos, como fluxos de trabalho, ambientes de computação e credenciais. Detalhes disso podem ser encontrados [aqui](https://help.tower.nf/getting-started/workspace/).
 

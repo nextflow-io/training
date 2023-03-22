@@ -115,7 +115,7 @@ process INDEX {
 }
 ```
 
-Além disso, adicione um escopo de fluxo de trabalho contendo uma definição de canal de entrada e o processo de índice:
+Além disso, adicione um escopo `workflow` contendo uma definição de canal de entrada e o processo de índice:
 
 ```groovy
 workflow {
@@ -167,7 +167,7 @@ docker.enabled = true
 
     ??? result
 
-        Adicione o código a seguir ao final do bloco de fluxo de trabalho em seu arquivo de script
+        Adicione o código a seguir ao final do bloco `workflow` em seu arquivo de script
 
         ```groovy
         index_ch.view()
@@ -304,13 +304,13 @@ Nessa etapa você aprendeu:
 
 !!! info
 
-    A declaração de um canal pode ser feita antes do escopo do fluxo de trabalho ou dentro dele. Desde que a declaração esteja acima do processo que requer o canal específico.
+    A declaração de um canal pode ser feita antes do escopo `workflow` ou dentro dele. Desde que a declaração esteja acima do processo que requer o canal específico.
 
 ## Realize a quantificação da expressão
 
-O script `script4.nf` adiciona um processo de quantificação de expressão gênica (`QUANTIFICATION`) e uma chamada para esse processo dentro do escopo fluxo de trabalho. A quantificação requer o arquivo de índice de transcriptoma e os arquivos fastq do par de leitura de RNA-Seq.
+O script `script4.nf` adiciona um processo de quantificação de expressão gênica (`QUANTIFICATION`) e uma chamada para esse processo dentro do escopo `workflow`. A quantificação requer o arquivo de índice de transcriptoma e os arquivos fastq do par de leitura de RNA-Seq.
 
-No escopo do fluxo de trabalho, observe como o canal `index_ch` é designado como saída do processo `INDEX`.
+No escopo `workflow`, observe como o canal `index_ch` é designado como saída do processo `INDEX`.
 
 A seguir, note que o primeiro canal de entrada para o processo de `QUANTIFICATION` é o `index_ch` declarado previamente, que contém o caminho para o arquivo `salmon_index`.
 
