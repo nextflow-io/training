@@ -39,7 +39,7 @@ canal.view() // (2)!
 ```
 
 1. Use a função `println` embutida no Nextflow por padrão para imprimir o conteúdo do canal `canal`
-2. Aplique o operador `view` no canal `canal` para imprimir cada item emitido por esse canal
+2. Aplique o operador `view` no canal `canal` para imprimir cada emissão desse canal
 
 !!! exercise
 
