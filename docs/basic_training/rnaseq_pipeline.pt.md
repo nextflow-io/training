@@ -75,7 +75,7 @@ nextflow run script1.nf --reads '/workspace/gitpod/nf-training/data/ggal/lung_{1
             arquivos de leituras        : ${params.reads}
             diretório de saíde          : ${params.outdir}
             """
-            .stripIndent()
+            .stripIndent(true)
         ```
 
 ### :material-check-all: Resumo
