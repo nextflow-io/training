@@ -13,7 +13,7 @@ log.info """\
     reads        : ${params.reads}
     outdir       : ${params.outdir}
     """
-    .stripIndent()
+    .stripIndent(true)
 
 /*
  * define the `index` process that creates a binary index
