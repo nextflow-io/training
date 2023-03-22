@@ -2,9 +2,9 @@
 description: Material de treinamento básico do Nextflow
 ---
 
-# Pipeline simples de RNA-Seq
+# Fluxo de trabalho simples de RNA-Seq
 
-Para demonstrar um cenário biomédico da vida real, nós iremos implementar uma prova de conceito de pipeline RNA-Seq que:
+Para demonstrar um cenário biomédico da vida real, nós iremos implementar uma prova de conceito de fluxo de trabalho RNA-Seq que:
 
 1. Cria arquivo de índice de transcriptoma
 2. Realiza controles de qualidade
@@ -13,11 +13,11 @@ Para demonstrar um cenário biomédico da vida real, nós iremos implementar uma
 
 Isso será feito usando uma série de sete scripts, cada um se baseando no script anterior, para criar um fluxo de trabalho completo. Você poderá encontrá-los no diretório do tutorial (`script1.nf` - `script7.nf`).
 
-## Defina os parâmetros do pipeline
+## Defina os parâmetros do fluxo de trabalho
 
-Parâmetros são entradas e opções que podem ser modificadas quando um pipeline é executado.
+Parâmetros são entradas e opções que podem ser modificadas quando um fluxo de trabalho é executado.
 
-O script `script1.nf` define os parâmetros de entrada do pipeline.
+O script `script1.nf` define os parâmetros de entrada do fluxo de trabalho.
 
 ```groovy
 params.reads = "$projectDir/data/ggal/gut_{1,2}.fq"
@@ -43,7 +43,7 @@ nextflow run script1.nf --reads '/workspace/gitpod/nf-training/data/ggal/lung_{1
 
 !!! exercise
 
-    Modifique o `script1.nf` ao adicionar um quarto parâmetro chamado `outdir` e defina-o como um caminho padrão que será usado como o diretório de saída do pipeline.
+    Modifique o `script1.nf` ao adicionar um quarto parâmetro chamado `outdir` e defina-o como um caminho padrão que será usado como o diretório de saída do fluxo de trabalho.
 
     ??? result
 
@@ -56,7 +56,7 @@ nextflow run script1.nf --reads '/workspace/gitpod/nf-training/data/ggal/lung_{1
 
 !!! exercise
 
-    Modifique o `script1.nf` para imprimir todos os parâmetros do pipeline usando um único comando`log.info` como uma declaração de [string multilinha](https://www.nextflow.io/docs/latest/script.html#multi-line-strings).
+    Modifique o `script1.nf` para imprimir todos os parâmetros do fluxo de trabalho usando um único comando`log.info` como uma declaração de [string multilinha](https://www.nextflow.io/docs/latest/script.html#multi-line-strings).
 
     !!! tip ""
 
@@ -82,7 +82,7 @@ nextflow run script1.nf --reads '/workspace/gitpod/nf-training/data/ggal/lung_{1
 
 Nesta etapa você aprendeu:
 
-1. Como definir parâmetros em seu script de pipeline
+1. Como definir parâmetros em seu script de fluxo de trabalho
 2. Como atribuir parâmetros usando a linha de comando
 3. O uso de `$var` e `${var}` como espaço reservado para variáveis
 4. Como usar strings multilinhas
@@ -115,7 +115,7 @@ process INDEX {
 }
 ```
 
-Além disso, adicione um escopo de fluxo de trabalho contendo uma definição de canal de entrada e o processo de índice:
+Além disso, adicione um escopo `workflow` contendo uma definição de canal de entrada e o processo de índice:
 
 ```groovy
 workflow {
@@ -167,7 +167,7 @@ docker.enabled = true
 
     ??? result
 
-        Adicione o código a seguir ao final do bloco de fluxo de trabalho em seu arquivo de script
+        Adicione o código a seguir ao final do bloco `workflow` em seu arquivo de script
 
         ```groovy
         index_ch.view()
@@ -284,7 +284,7 @@ nextflow run script3.nf --reads 'data/ggal/*_{1,2}.fq'
 
 !!! exercise
 
-    Use a opção `checkIfExists` para o método [fromFilePairs](https://www.nextflow.io/docs/latest/channel.html#fromfilepairs) para checar se o caminho especificado contém os pares de arquivos.
+    Use a opção `checkIfExists` para a fábrica de canal [fromFilePairs](https://www.nextflow.io/docs/latest/channel.html#fromfilepairs) para checar se o caminho especificado contém os pares de arquivos.
 
     ??? result
 
@@ -304,13 +304,13 @@ Nessa etapa você aprendeu:
 
 !!! info
 
-    A declaração de um canal pode ser feita antes do escopo do fluxo de trabalho ou dentro dele. Desde que a declaração esteja acima do processo que requer o canal específico.
+    A declaração de um canal pode ser feita antes do escopo `workflow` ou dentro dele. Desde que a declaração esteja acima do processo que requer o canal específico.
 
 ## Realize a quantificação da expressão
 
-O script `script4.nf` adiciona um processo de quantificação de expressão gênica (`QUANTIFICATION`) e uma chamada para esse processo dentro do escopo workflow. A quantificação requer o arquivo de índice de transcriptoma e os arquivos fastq do par de leitura de RNA-Seq.
+O script `script4.nf` adiciona um processo de quantificação de expressão gênica (`QUANTIFICATION`) e uma chamada para esse processo dentro do escopo `workflow`. A quantificação requer o arquivo de índice de transcriptoma e os arquivos fastq do par de leitura de RNA-Seq.
 
-No escopo do fluxo de trabalho, observe como o canal `index_ch` é designado como saída do processo `INDEX`.
+No escopo `workflow`, observe como o canal `index_ch` é designado como saída do processo `INDEX`.
 
 A seguir, note que o primeiro canal de entrada para o processo de `QUANTIFICATION` é o `index_ch` declarado previamente, que contém o caminho para o arquivo `salmon_index`.
 
@@ -334,7 +334,7 @@ nextflow run script4.nf -resume --reads 'data/ggal/*_{1,2}.fq'
 
 Você irá perceber que o processo `QUANTIFICATION` é executado múltiplas vezes.
 
-O Nextflow paraleliza a execução de seu pipeline simplesmente fornecendo vários conjuntos de dados de entrada para seu script.
+O Nextflow paraleliza a execução de seu fluxo de trabalho simplesmente fornecendo vários conjuntos de dados de entrada para seu script.
 
 !!! tip
 
@@ -417,9 +417,9 @@ Nessa etapa você aprendeu:
 
 ## Lide com evento de conclusão
 
-Essa etapa mostra como executar uma ação quando o pipeline completa a execução.
+Essa etapa mostra como executar uma ação quando o fluxo de trabalho completa a execução.
 
-Observe que processos do Nextflow definem a execução de tarefas assíncronas, ou seja, elas não são executadas uma após a outra como se elas fossem escritas no script do pipeline em uma linguagem de programação **imperativa** comum.
+Observe que processos do Nextflow definem a execução de tarefas assíncronas, ou seja, elas não são executadas uma após a outra como se elas fossem escritas no script do fluxo de trabalho em uma linguagem de programação **imperativa** comum.
 
 O script usa o manipulador de evento `workflow.onComplete` para imprimir uma mensagem de confirmação quando o script for concluído.
 
@@ -452,7 +452,7 @@ Veja a [documentação de email](https://www.nextflow.io/docs/latest/mail.html#m
 
 ## Scripts personalizados
 
-Os pipelines do mundo real usam muitos scripts de usuário personalizados (BASH, R, Python, etc.). O Nextflow permite que você use e gerencie consistentemente esses scripts. Simplesmente os coloque em um diretório chamado `bin` na raiz do projeto do pipeline. Eles serão automaticamente adicionados para o `PATH` da execução do pipeline.
+Os fluxos de trabalho do mundo real usam muitos scripts de usuário personalizados (BASH, R, Python, etc.). O Nextflow permite que você use e gerencie consistentemente esses scripts. Simplesmente os coloque em um diretório chamado `bin` na raiz do projeto do fluxo de trabalho. Eles serão automaticamente adicionados para o `PATH` da execução do fluxo de trabalho.
 
 Por exemplo, crie um arquivo chamado de `fastqc.sh` com o conteúdo a seguir:
 
@@ -495,14 +495,14 @@ nextflow run script7.nf -resume --reads 'data/ggal/*_{1,2}.fq'
 
 Nessa etapa você aprendeu:
 
-1. Como escrever ou usar scripts personalizados existentes em seu pipeline do Nextflow.
+1. Como escrever ou usar scripts personalizados existentes em seu fluxo de trabalho do Nextflow.
 2. Como evitar o uso de caminhos absolutos tendo seus scripts na pasta `bin/`.
 
 ## Métricas e relatórios
 
 O Nextflow pode produzir vários relatórios e gráficos fornecendo várias métricas de tempo de execução e informações de execução.
 
-Execute o pipeline [rnaseq-nf](https://github.com/nextflow-io/rnaseq-nf) introduzido anteriormente, conforme mostrado abaixo:
+Execute o fluxo de trabalho [rnaseq-nf](https://github.com/nextflow-io/rnaseq-nf) introduzido anteriormente, conforme mostrado abaixo:
 
 ```bash
 nextflow run rnaseq-nf -with-docker -with-report -with-trace -with-timeline -with-dag dag.png
@@ -532,7 +532,7 @@ open dag.png
 
 ## Execute um projeto do GitHub
 
-O Nextflow permite a execução de um projeto de pipeline diretamente de um repositório do GitHub (ou serviços semelhantes, por exemplo, BitBucket e GitLab).
+O Nextflow permite a execução de um projeto de fluxo de trabalho diretamente de um repositório do GitHub (ou serviços semelhantes, por exemplo, BitBucket e GitLab).
 
 Isso simplifica o compartilhamento e implantação de projetos complexos e o rastreamento de mudanças de uma maneira consistente.
 
@@ -566,5 +566,5 @@ As etiquetas permitem o controle preciso das alterações nos arquivos e depend�
 
 -   [Documentação do Nextflow](http://docs.nextflow.io) - A página inicial dos documentos do Nextflow.
 -   [Nextflow patterns](https://github.com/nextflow-io/patterns) - Uma coleção de padrões de implementação do Nextflow.
--   [CalliNGS-NF](https://github.com/CRG-CNAG/CalliNGS-NF) - Um pipeline de chamada de variante implementando as melhores práticas recomendadas do GATK.
--   [nf-core](http://nf-co.re/) - Uma coleção comunitária de pipelines genômicos prontos para produção.
+-   [CalliNGS-NF](https://github.com/CRG-CNAG/CalliNGS-NF) - Um fluxo de trabalho de chamada de variante implementando as melhores práticas recomendadas do GATK.
+-   [nf-core](http://nf-co.re/) - Uma coleção comunitária de fluxos de trabalho genômicos prontos para produção.

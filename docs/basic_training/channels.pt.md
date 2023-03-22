@@ -39,7 +39,7 @@ canal.view() // (2)!
 ```
 
 1. Use a função `println` embutida no Nextflow por padrão para imprimir o conteúdo do canal `canal`
-2. Aplique o método `view` no canal `canal` para imprimir cada item emitido por esse canal
+2. Aplique o operador `view` no canal `canal` para imprimir cada item emitido por esse canal
 
 !!! exercise
 
@@ -144,7 +144,7 @@ workflow {
 2
 ```
 
-Além disso, em muitas situações, o Nextflow converterá implicitamente variáveis em canais de valor quando forem usadas em uma chamada de processo. Por exemplo, quando você chama um processo com um parâmetro de pipeline (`params.exemplo`) que possui um valor de string, ele é automaticamente convertido em um canal de valor.
+Além disso, em muitas situações, o Nextflow converterá implicitamente variáveis em canais de valor quando forem usadas em uma chamada de processo. Por exemplo, quando você chama um processo com um parâmetro de fluxo de trabalho (`params.exemplo`) que possui um valor de string, ele é automaticamente convertido em um canal de valor.
 
 ## Fábricas de canal
 
@@ -173,7 +173,7 @@ canal = Channel.of(1, 3, 5, 7)
 canal.view { "numero: $it" }
 ```
 
-A primeira linha neste exemplo cria uma variável `canal` que contém um objeto de canal. Este canal emite os valores especificados como parâmetro no método `of`. Assim, a segunda linha imprimirá o seguinte:
+A primeira linha neste exemplo cria uma variável `canal` que contém um objeto de canal. Este canal emite os valores especificados como parâmetro na fábrica de canal `of`. Assim, a segunda linha imprimirá o seguinte:
 
 ```console
 numero: 1
@@ -182,7 +182,7 @@ numero: 5
 numero: 7
 ```
 
-O método `Channel.of` funciona de maneira semelhante ao `Channel.from` (que foi [descontinuado](https://www.nextflow.io/docs/latest/channel.html#of)), corrigindo alguns comportamentos inconsistentes do último e fornecendo um melhor manuseio quando um intervalo de valores é especificado. Por exemplo, o seguinte funciona com um intervalo de 1 a 23:
+A fábrica de canal `Channel.of` funciona de maneira semelhante ao `Channel.from` (que foi [descontinuado](https://www.nextflow.io/docs/latest/channel.html#of)), corrigindo alguns comportamentos inconsistentes do último e fornecendo um melhor manuseio quando um intervalo de valores é especificado. Por exemplo, o seguinte funciona com um intervalo de 1 a 23:
 
 ```groovy linenums="1"
 Channel
@@ -192,7 +192,7 @@ Channel
 
 ### `fromList()`
 
-O método `Channel.fromList` cria um canal emitindo os elementos fornecidos por um objeto de lista especificado como um argumento:
+A fábrica de canal `Channel.fromList` cria um canal emitindo os elementos fornecidos por um objeto de lista especificado como um argumento:
 
 ```groovy linenums="1"
 list = ['olá', 'mundo']
@@ -204,7 +204,7 @@ Channel
 
 ### `fromPath()`
 
-A fábrica `fromPath` cria um canal de fila emitindo um ou mais arquivos correspondentes ao padrão glob especificado.
+A fábrica de canal `fromPath` cria um canal de fila emitindo um ou mais arquivos correspondentes ao padrão glob especificado.
 
 ```groovy linenums="1"
 Channel.fromPath('./data/meta/*.csv')
@@ -230,7 +230,7 @@ Saiba mais sobre a sintaxe dos padrões glob [neste link](https://docs.oracle.co
 
 !!! exercise
 
-    Use o método `Channel.fromPath` para criar um canal emitindo todos os arquivos com o sufixo `.fq` no diretório `data/ggal/` e qualquer subdiretório, além dos arquivos ocultos. Em seguida, imprima os nomes dos arquivos.
+    Use a fábrica de canal `Channel.fromPath` para criar um canal emitindo todos os arquivos com o sufixo `.fq` no diretório `data/ggal/` e qualquer subdiretório, além dos arquivos ocultos. Em seguida, imprima os nomes dos arquivos.
 
     ??? solution
 
@@ -241,7 +241,7 @@ Saiba mais sobre a sintaxe dos padrões glob [neste link](https://docs.oracle.co
 
 ### `fromFilePairs()`
 
-O método `fromFilePairs` cria um canal emitindo os pares de arquivos correspondentes a um padrão glob fornecido pelo usuário. Os arquivos correspondentes são emitidos como tuplas, nas quais o primeiro elemento é a chave de agrupamento do par correspondente e o segundo elemento é a lista de arquivos (classificados em ordem lexicográfica).
+A fábrica de canal `fromFilePairs` cria um canal emitindo os pares de arquivos correspondentes a um padrão glob fornecido pelo usuário. Os arquivos correspondentes são emitidos como tuplas, nas quais o primeiro elemento é a chave de agrupamento do par correspondente e o segundo elemento é a lista de arquivos (classificados em ordem lexicográfica).
 
 ```groovy linenums="1"
 Channel
@@ -273,7 +273,7 @@ Ele produzirá uma saída semelhante à seguinte:
 
 !!! exercise
 
-    Use o método `fromFilePairs` para criar um canal emitindo todos os pares de leituras em fastq no diretório `data/ggal/` e imprima-os. Em seguida, use a opção `flat: true` e compare a saída com a execução anterior.
+    Use a fábrica de canal `fromFilePairs` para criar um canal emitindo todos os pares de leituras em fastq no diretório `data/ggal/` e imprima-os. Em seguida, use a opção `flat: true` e compare a saída com a execução anterior.
 
     ??? solution
 
@@ -288,7 +288,7 @@ Ele produzirá uma saída semelhante à seguinte:
 
 ### `fromSRA()`
 
-O método `Channel.fromSRA` permite consultar o banco de dados [NCBI SRA](https://www.ncbi.nlm.nih.gov/sra) e retorna um canal que emite os arquivos FASTQ correspondentes aos critérios de seleção especificados.
+A fábrica de canal `Channel.fromSRA` permite consultar o banco de dados [NCBI SRA](https://www.ncbi.nlm.nih.gov/sra) e retorna um canal que emite os arquivos FASTQ correspondentes aos critérios de seleção especificados.
 
 A consulta pode ser ID(s) de projeto(s) ou número(s) de acesso suportado(s) pela API do [NCBI ESearch](https://www.ncbi.nlm.nih.gov/books/NBK25499/#chapter4.ESearch).
 
@@ -377,7 +377,7 @@ workflow {
 }
 ```
 
-Se você deseja executar o pipeline acima e não possui o fastqc instalado em sua máquina, não esqueça o que aprendeu na seção anterior. Execute este pipeline com `-with-docker biocontainers/fastqc:v0.11.5`, por exemplo.
+Se você deseja executar o fluxo de trabalho acima e não possui o fastqc instalado em sua máquina, não esqueça o que aprendeu na seção anterior. Execute este fluxo de trabalho com `-with-docker biocontainers/fastqc:v0.11.5`, por exemplo.
 
 ### Arquivos de texto
 
@@ -704,7 +704,7 @@ def parseJsonFile(json_file) {
 }
 ```
 
-O Nextflow usará isso como uma função personalizada dentro do escopo do fluxo de trabalho.
+O Nextflow usará isso como uma função personalizada dentro do escopo `workflow`.
 
 !!! tip
 

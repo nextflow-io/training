@@ -30,7 +30,7 @@ Encontre o que se adequa mais ao que você está procurando:
 
         :material-lightbulb: Esse é o material de treinamento primário do Nextflow utilizado na maior parte dos eventos de treinamento do Nextflow e do nf-core.
 
-    Treinamento básico cobrindo um pouquinho de tudo do Nextflow. Perfeito para quem quer se familiarizar com o uso do Nextflow para executar análises e construir pipelines.
+    Treinamento básico cobrindo um pouquinho de tudo do Nextflow. Perfeito para quem quer se familiarizar com o uso do Nextflow para executar análises e construir fluxos de trabalho.
 
     [Comece já o treinamento do Nextflow :material-arrow-right:](basic_training/index.md){ .md-button .md-button--primary }
 

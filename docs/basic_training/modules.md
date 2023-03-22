@@ -4,9 +4,9 @@ description: Basic Nextflow Training Workshop
 
 # Modularization
 
-The definition of module libraries simplifies the writing of complex data analysis pipelines and makes re-use of processes much easier.
+The definition of module libraries simplifies the writing of complex data analysis workflows and makes re-use of processes much easier.
 
-Using the `hello.nf` example from earlier, we will convert the pipeline’s processes into modules, then call them within the workflow scope in a variety of ways.
+Using the `hello.nf` example from earlier, we will convert the workflow’s processes into modules, then call them within the workflow scope in a variety of ways.
 
 ## Modules
 
@@ -148,7 +148,7 @@ workflow {
 !!! tip
 
     You can store each process in separate files within separate sub-folders or combined in one big file (both are valid).
-    You can find examples of this on public repos such as the [Seqera RNA-Seq tutorial](https://github.com/seqeralabs/rnaseq-nf/tree/master/modules) or within nf-core pipelines, such as [nf-core/rnaseq](https://github.com/nf-core/rnaseq/tree/master/modules/nf-core).
+    You can find examples of this on public repos such as the [Seqera RNA-Seq tutorial](https://github.com/seqeralabs/rnaseq-nf/tree/master/modules) or within nf-core workflows, such as [nf-core/rnaseq](https://github.com/nf-core/rnaseq/tree/master/modules/nf-core).
 
 ## Output definition
 
@@ -263,7 +263,7 @@ include { SPLITLETTERS } from './modules.nf'
 include { CONVERTTOUPPER } from './modules.nf'
 
 
-workflow my_pipeline {
+workflow my_workflow {
     greeting_ch = Channel.of(params.greeting)
     SPLITLETTERS(greeting_ch)
     CONVERTTOUPPER(SPLITLETTERS.out.flatten())
@@ -271,11 +271,11 @@ workflow my_pipeline {
 }
 
 workflow {
-    my_pipeline()
+    my_workflow()
 }
 ```
 
-For example, the snippet above defines a `workflow` named `my_pipeline`, that can be invoked via another `workflow` definition.
+For example, the snippet above defines a `workflow` named `my_workflow`, that can be invoked via another `workflow` definition.
 
 !!! note
 
@@ -297,7 +297,7 @@ params.greeting = 'Hello world!'
 include { SPLITLETTERS } from './modules.nf'
 include { CONVERTTOUPPER } from './modules.nf'
 
-workflow my_pipeline {
+workflow my_workflow {
     take:
     greeting
 
@@ -316,7 +316,7 @@ The input for the `workflow` can then be specified as an argument:
 
 ```groovy linenums="1"
 workflow {
-    my_pipeline(Channel.of(params.greeting))
+    my_workflow(Channel.of(params.greeting))
 }
 ```
 
@@ -325,7 +325,7 @@ workflow {
 A `workflow` can declare one or more output channels using the `emit` statement. For example:
 
 ```groovy linenums="1"
-workflow my_pipeline {
+workflow my_workflow {
     take:
     greeting
 
@@ -338,17 +338,17 @@ workflow my_pipeline {
 }
 
 workflow {
-    my_pipeline(Channel.of(params.greeting))
-    my_pipeline.out.view()
+    my_workflow(Channel.of(params.greeting))
+    my_workflow.out.view()
 }
 ```
 
-As a result, we can use the `my_pipeline.out` notation to access the outputs of `my_pipeline` in the invoking `workflow`.
+As a result, we can use the `my_workflow.out` notation to access the outputs of `my_workflow` in the invoking `workflow`.
 
 We can also declare named outputs within the `emit` block.
 
 ```groovy linenums="1" hl_lines="10 15"
-workflow my_pipeline {
+workflow my_workflow {
     take:
     greeting
 
@@ -361,18 +361,18 @@ workflow my_pipeline {
 }
 
 workflow {
-    my_pipeline(Channel.of(params.greeting))
-    my_pipeline.out.my_data.view()
+    my_workflow(Channel.of(params.greeting))
+    my_workflow.out.my_data.view()
 }
 ```
 
-The result of the above snippet can then be accessed using `my_pipeline.out.my_data`.
+The result of the above snippet can then be accessed using `my_workflow.out.my_data`.
 
 ### Calling named workflows
 
 Within a `main.nf` script (called `hello.nf` in our example) we also can have multiple workflows. In which case we may want to call a specific workflow when running the code. For this we use the entrypoint call `-entry <workflow_name>`.
 
-The following snippet has two named workflows (`my_pipeline_one` and `my_pipeline_two`):
+The following snippet has two named workflows (`my_workflow_one` and `my_workflow_two`):
 
 ```groovy linenums="1"
 #!/usr/bin/env nextflow
@@ -386,28 +386,28 @@ include { CONVERTTOUPPER as CONVERTTOUPPER_one } from './modules.nf'
 include { CONVERTTOUPPER as CONVERTTOUPPER_two } from './modules.nf'
 
 
-workflow my_pipeline_one {
+workflow my_workflow_one {
     letters_ch1 = SPLITLETTERS_one(params.greeting)
     results_ch1 = CONVERTTOUPPER_one(letters_ch1.flatten())
     results_ch1.view { it }
 }
 
-workflow my_pipeline_two {
+workflow my_workflow_two {
     letters_ch2 = SPLITLETTERS_two(params.greeting)
     results_ch2 = CONVERTTOUPPER_two(letters_ch2.flatten())
     results_ch2.view { it }
 }
 
 workflow {
-    my_pipeline_one(Channel.of(params.greeting))
-    my_pipeline_two(Channel.of(params.greeting))
+    my_workflow_one(Channel.of(params.greeting))
+    my_workflow_two(Channel.of(params.greeting))
 }
 ```
 
 You can choose which workflow to run by using the `entry` flag:
 
 ```bash
-nextflow run hello.2.nf -entry my_pipeline_one
+nextflow run hello.2.nf -entry my_workflow_one
 ```
 
 ### Parameter scopes
@@ -447,7 +447,7 @@ As highlighted above, the script will print `Hola mundo!` instead of `Hello worl
 
 !!! info
 
-    To avoid being ignored, pipeline parameters should be defined at the beginning of the script before any `include` declarations.
+    To avoid being ignored, workflow parameters should be defined at the beginning of the script before any `include` declarations.
 
 The `addParams` option can be used to extend the module parameters without affecting the external scope. For example:
 

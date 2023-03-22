@@ -11,7 +11,7 @@ This enables portable deployment without the need to modify the application code
 
 ## Configuration file
 
-When a pipeline script is launched, Nextflow looks for a file named `nextflow.config` in the current directory and in the script base directory (if it is not the same as the current directory). Finally, it checks for the file: `$HOME/.nextflow/config`.
+When a workflow script is launched, Nextflow looks for a file named `nextflow.config` in the current directory and in the script base directory (if it is not the same as the current directory). Finally, it checks for the file: `$HOME/.nextflow/config`.
 
 When more than one of the above files exists, they are merged, so that the settings in the first override the same settings that may appear in the second, and so on.
 
@@ -158,7 +158,7 @@ nextflow run foo.nf -c my-env.config
 
 ### Config process
 
-Process [directives](https://www.nextflow.io/docs/latest/process.html#directives) allow the specification of settings for the task execution such as `cpus`, `memory`, `container`, and other resources in the pipeline script.
+Process [directives](https://www.nextflow.io/docs/latest/process.html#directives) allow the specification of settings for the task execution such as `cpus`, `memory`, `container`, and other resources in the workflow script.
 
 This is useful when prototyping a small workflow script.
 

@@ -30,7 +30,7 @@ Find the one that's right for you:
 
         :material-lightbulb: This is the primary Nextflow training material used in most Nextflow and nf-core training events.
 
-    Basic training for all things Nextflow. Perfect for anyone looking to get to grips with using Nextflow to run analyses and build pipelines.
+    Basic training for all things Nextflow. Perfect for anyone looking to get to grips with using Nextflow to run analyses and build workflows.
 
     [Start the Nextflow Training Workshop :material-arrow-right:](basic_training/index.md){ .md-button .md-button--primary }
 

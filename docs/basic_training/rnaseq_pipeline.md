@@ -2,9 +2,9 @@
 description: Basic Nextflow Training Workshop
 ---
 
-# Simple RNA-Seq pipeline
+# Simple RNA-Seq workflow
 
-To demonstrate a real-world biomedical scenario, we will implement a proof of concept RNA-Seq pipeline which:
+To demonstrate a real-world biomedical scenario, we will implement a proof of concept RNA-Seq workflow which:
 
 1. Indexes a transcriptome file
 2. Performs quality controls
@@ -13,11 +13,11 @@ To demonstrate a real-world biomedical scenario, we will implement a proof of co
 
 This will be done using a series of seven scripts, each of which builds on the previous to create a complete workflow. You can find these in the tutorial folder (`script1.nf` - `script7.nf`).
 
-## Define the pipeline parameters
+## Define the workflow parameters
 
-Parameters are inputs and options that can be changed when the pipeline is run.
+Parameters are inputs and options that can be changed when the workflow is run.
 
-The script `script1.nf` defines the pipeline input parameters.
+The script `script1.nf` defines the workflow input parameters.
 
 ```groovy
 params.reads = "$projectDir/data/ggal/gut_{1,2}.fq"
@@ -43,7 +43,7 @@ nextflow run script1.nf --reads '/workspace/gitpod/nf-training/data/ggal/lung_{1
 
 !!! exercise
 
-    Modify the `script1.nf` by adding a fourth parameter named `outdir` and set it to a default path that will be used as the pipeline output directory.
+    Modify the `script1.nf` by adding a fourth parameter named `outdir` and set it to a default path that will be used as the workflow output directory.
 
     ??? result
 
@@ -56,7 +56,7 @@ nextflow run script1.nf --reads '/workspace/gitpod/nf-training/data/ggal/lung_{1
 
 !!! exercise
 
-    Modify `script1.nf` to print all of the pipeline parameters by using a single `log.info` command as a [multiline string](https://www.nextflow.io/docs/latest/script.html#multi-line-strings) statement.
+    Modify `script1.nf` to print all of the workflow parameters by using a single `log.info` command as a [multiline string](https://www.nextflow.io/docs/latest/script.html#multi-line-strings) statement.
 
     !!! tip ""
 
@@ -82,7 +82,7 @@ nextflow run script1.nf --reads '/workspace/gitpod/nf-training/data/ggal/lung_{1
 
 In this step you have learned:
 
-1. How to define parameters in your pipeline script
+1. How to define parameters in your workflow script
 2. How to pass parameters by using the command line
 3. The use of `$var` and `${var}` variable placeholders
 4. How to use multiline strings
@@ -284,7 +284,7 @@ nextflow run script3.nf --reads 'data/ggal/*_{1,2}.fq'
 
 !!! exercise
 
-    Use the `checkIfExists` option for the [fromFilePairs](https://www.nextflow.io/docs/latest/channel.html#fromfilepairs) method to check if the specified path contains file pairs.
+    Use the `checkIfExists` option for the [fromFilePairs](https://www.nextflow.io/docs/latest/channel.html#fromfilepairs) channel factory to check if the specified path contains file pairs.
 
     ??? result
 
@@ -334,7 +334,7 @@ nextflow run script4.nf -resume --reads 'data/ggal/*_{1,2}.fq'
 
 You will notice that the `QUANTIFICATION` process is executed multiple times.
 
-Nextflow parallelizes the execution of your pipeline simply by providing multiple sets of input data to your script.
+Nextflow parallelizes the execution of your workflow simply by providing multiple sets of input data to your script.
 
 !!! tip
 
@@ -417,9 +417,9 @@ In this step you have learned:
 
 ## Handle completion event
 
-This step shows how to execute an action when the pipeline completes the execution.
+This step shows how to execute an action when the workflow completes the execution.
 
-Note that Nextflow processes define the execution of **asynchronous** tasks i.e. they are not executed one after another as if they were written in the pipeline script in a common **imperative** programming language.
+Note that Nextflow processes define the execution of **asynchronous** tasks i.e. they are not executed one after another as if they were written in the workflow script in a common **imperative** programming language.
 
 The script uses the `workflow.onComplete` event handler to print a confirmation message when the script completes.
 
@@ -452,7 +452,7 @@ See [mail documentation](https://www.nextflow.io/docs/latest/mail.html#mail-conf
 
 ## Custom scripts
 
-Real-world pipelines use a lot of custom user scripts (BASH, R, Python, etc.). Nextflow allows you to consistently use and manage these scripts. Simply put them in a directory named `bin` in the pipeline project root. They will be automatically added to the pipeline execution `PATH`.
+Real-world workflows use a lot of custom user scripts (BASH, R, Python, etc.). Nextflow allows you to consistently use and manage these scripts. Simply put them in a directory named `bin` in the workflow project root. They will be automatically added to the workflow execution `PATH`.
 
 For example, create a file named `fastqc.sh` with the following content:
 
@@ -495,14 +495,14 @@ nextflow run script7.nf -resume --reads 'data/ggal/*_{1,2}.fq'
 
 In this step you have learned:
 
-1. How to write or use existing custom scripts in your Nextflow pipeline.
+1. How to write or use existing custom scripts in your Nextflow workflow.
 2. How to avoid the use of absolute paths by having your scripts in the `bin/` folder.
 
 ## Metrics and reports
 
 Nextflow can produce multiple reports and charts providing several runtime metrics and execution information.
 
-Run the [rnaseq-nf](https://github.com/nextflow-io/rnaseq-nf) pipeline previously introduced as shown below:
+Run the [rnaseq-nf](https://github.com/nextflow-io/rnaseq-nf) workflow previously introduced as shown below:
 
 ```bash
 nextflow run rnaseq-nf -with-docker -with-report -with-trace -with-timeline -with-dag dag.png
@@ -532,7 +532,7 @@ open dag.png
 
 ## Run a project from GitHub
 
-Nextflow allows the execution of a pipeline project directly from a GitHub repository (or similar services, e.g., BitBucket and GitLab).
+Nextflow allows the execution of a workflow project directly from a GitHub repository (or similar services, e.g., BitBucket and GitLab).
 
 This simplifies the sharing and deployment of complex projects and tracking changes in a consistent manner.
 
@@ -566,5 +566,5 @@ Tags enable precise control of the changes in your project files and dependencie
 
 -   [Nextflow documentation](http://docs.nextflow.io) - The Nextflow docs home.
 -   [Nextflow patterns](https://github.com/nextflow-io/patterns) - A collection of Nextflow implementation patterns.
--   [CalliNGS-NF](https://github.com/CRG-CNAG/CalliNGS-NF) - A Variant calling pipeline implementing GATK best practices.
--   [nf-core](http://nf-co.re/) - A community collection of production ready genomic pipelines.
+-   [CalliNGS-NF](https://github.com/CRG-CNAG/CalliNGS-NF) - A Variant calling workflow implementing GATK best practices.
+-   [nf-core](http://nf-co.re/) - A community collection of production ready genomic workflows.

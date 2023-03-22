@@ -87,13 +87,13 @@ ENV PATH=$PATH:/usr/games/
 
 ### Monte a imagem
 
-Monte a imagem do Dockerfile utilizando o seguinte comando:
+Monte a imagem do Docker com base no Dockerfile utilizando o seguinte comando:
 
 ```bash
 docker build -t minha-imagem .
 ```
 
-Onde "minha-imagem" é o rótulo que o usuário especificou para o Dockerfile, presente no diretório atual.
+Onde "minha-imagem" é o nome que o usuário especificou para a imagem que será criada.
 
 !!! tip
 
@@ -206,7 +206,7 @@ Crie uma conta no site <https://hub.docker.com>. Então no seu terminal shell ex
 docker login
 ```
 
-Marque a imagem com seu nome de usuário Docker:
+Renomeie a imagem para incluir seu nome de usuário Docker:
 
 ```bash
 docker tag minha-imagem <nome-de-usuario>/minha-imagem
@@ -344,7 +344,7 @@ Da mesma forma que disponibilizamos as imagens Docker no Docker Hub, nós podemo
 
 ## Pacotes Conda/Bioconda
 
-O Conda é um popular gerenciador de pacotes e ambientes. O suporte a Conda permite que pipelines Nextflow automaticamente criem e ativem ambientes Conda, dadas as dependências especificadas de cada processo.
+O Conda é um popular gerenciador de pacotes e ambientes. O suporte a Conda permite que fluxos de trabalho Nextflow automaticamente criem e ativem ambientes Conda, dadas as dependências especificadas de cada processo.
 
 Neste ambiente Gitpod, o conda já está instalado.
 
@@ -438,7 +438,7 @@ ENV PATH /opt/conda/envs/nf-tutorial/bin:$PATH
 
 O `Dockerfile` acima pega a imagem pai _mambaorg/micromamba_, e instala um ambiente `conda` utilizando `micromamba`, e então instala o `salmon`, o `fastqc` e o `multiqc`.
 
-Tente executar o pipeline RNA-seq visto anteriormente (script7.nf). Comece montando seu próprio `Dockerfile` micromamba (como mostrado acima), salve no seu repositório no Docker Hub, e oriente o Nextflow a rodar por esse contêiner (mudando seu `nextflow.config`).
+Tente executar o fluxo de trabalho RNA-seq visto anteriormente (script7.nf). Comece montando seu próprio `Dockerfile` micromamba (como mostrado acima), salve no seu repositório no Docker Hub, e oriente o Nextflow a rodar por esse contêiner (mudando seu `nextflow.config`).
 
 !!! warning
 
@@ -506,7 +506,7 @@ Contrariamente a outros registros que irão puxar a última imagem quando nenhum
 
 !!! exercise
 
-    Durante a seção onde construímos o pipeline de RNA-Seq, nós criamos um índice (script2.nf). Dado que nós não temos Salmon instalado localmente na máquina provida pelo Gitpod, nós temos que ou executar com `-with-conda` ou `-with-docker`. Sua tarefa agora é executar novamente com `-with-docker`, mas sem ter que criar sua própria imagem de contêiner Docker. Invés disso, use a imagem do BioContainers para Salmon 1.7.0.
+    Durante a seção onde construímos o fluxo de trabalho de RNA-Seq, nós criamos um índice (script2.nf). Dado que nós não temos Salmon instalado localmente na máquina provida pelo Gitpod, nós temos que ou executar com `-with-conda` ou `-with-docker`. Sua tarefa agora é executar novamente com `-with-docker`, mas sem ter que criar sua própria imagem de contêiner Docker. Invés disso, use a imagem do BioContainers para Salmon 1.7.0.
 
 
     ??? result
@@ -517,7 +517,7 @@ Contrariamente a outros registros que irão puxar a última imagem quando nenhum
 
 !!! exercise "Bonus Exercise"
 
-    Mude as diretivas do processo no `script5.nf` ou no arquivo `nextflow.config` para fazer o pipeline utilizar automaticamente BioContainers quando usando salmon, ou fastqc.
+    Mude as diretivas do processo no `script5.nf` ou no arquivo `nextflow.config` para fazer o fluxo de trabalho utilizar automaticamente BioContainers quando usando salmon, ou fastqc.
 
     !!! tip "Dica"
 
@@ -525,7 +525,7 @@ Contrariamente a outros registros que irão puxar a última imagem quando nenhum
 
     ??? result
 
-        Com essas mudanças, você deve ser capaz de executar o pipeline com BioContainers executando a seguinte linha de comando:
+        Com essas mudanças, você deve ser capaz de executar o fluxo de trabalho com BioContainers executando a seguinte linha de comando:
 
         ```bash
         nextflow run script5.nf

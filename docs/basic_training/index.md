@@ -12,7 +12,7 @@ We are excited to have you on the path to writing reproducible and scalable scie
 
 By the end of this course you should:
 
-1. Be proficient in writing Nextflow pipelines
+1. Be proficient in writing Nextflow workflows
 2. Know the basic Nextflow concepts of Channels, Processes and Operators
 3. Have an understanding of containerized workflows
 4. Understand the different execution platforms supported by Nextflow
@@ -28,4 +28,4 @@ To get you started with Nextflow as quickly as possible, we will walk through th
 4. Dive deeper into the core Nextflow syntax, including Channels, Processes, and Operators
 5. Cover cluster and cloud deployment scenarios and explore Nextflow Tower capabilities
 
-This will give you a broad understanding of Nextflow, to start writing your own pipelines. We hope you enjoy the course! This is an ever-evolving document - feedback is always welcome.
+This will give you a broad understanding of Nextflow, to start writing your own workflows. We hope you enjoy the course! This is an ever-evolving document - feedback is always welcome.

@@ -4,7 +4,7 @@ description: Basic Nextflow Training Workshop
 
 # Deployment scenarios
 
-Real-world genomic applications can spawn the execution of thousands of jobs. In this scenario a batch scheduler is commonly used to deploy a pipeline in a computing cluster, allowing the execution of many jobs in parallel across many compute nodes.
+Real-world genomic applications can spawn the execution of thousands of jobs. In this scenario a batch scheduler is commonly used to deploy a workflow in a computing cluster, allowing the execution of many jobs in parallel across many compute nodes.
 
 Nextflow has built-in support for the most commonly used batch schedulers, such as Univa Grid Engine, [SLURM](https://slurm.schedmd.com/) and IBM LSF. Check the Nextflow documentation for the complete list of supported [execution platforms](https://www.nextflow.io/docs/latest/executor.html).
 
@@ -14,7 +14,7 @@ A key Nextflow feature is the ability to decouple the workflow implementation fr
 
 ![Nextflow executors](img/nf-executors.png)
 
-To run your pipeline with a batch scheduler, modify the `nextflow.config` file specifying the target executor and the required computing resources if needed. For example:
+To run your workflow with a batch scheduler, modify the `nextflow.config` file specifying the target executor and the required computing resources if needed. For example:
 
 ```groovy linenums="1"
 process.executor = 'slurm'
@@ -65,20 +65,20 @@ For example, if your cluster uses Slurm as a job scheduler, you could create a f
 #SBATCH -c 1
 #SBATCH -t 12:00:00
 
-PIPELINE=$1
+WORKFLOW=$1
 CONFIG=$2
 
 # Use a conda environment where you have installed Nextflow
 # (may not be needed if you have installed it in a different way)
 conda activate nextflow
 
-nextflow -C ${CONFIG} run ${PIPELINE}
+nextflow -C ${CONFIG} run ${WORKFLOW}
 ```
 
 And then submit it with:
 
 ```bash linenums="1"
-sbatch launch_nf.sh /home/my_user/path/mypipeline.nf /home/my_user/path/myconfig_file.conf
+sbatch launch_nf.sh /home/my_user/path/my_workflow.nf /home/my_user/path/my_config_file.conf
 ```
 
 You can find more details about the example above [here](https://lescailab.unipv.it/guides/eos_guide/use_nextflow.html#large-testing-or-production).
@@ -201,7 +201,7 @@ Read more about config process selectors at [this link](https://www.nextflow.io/
 
 ## Configuration profiles
 
-Configuration files can contain the definition of one or more _profiles_. A profile is a set of configuration attributes that can be activated/chosen when launching a pipeline execution by using the `-profile` command- line option.
+Configuration files can contain the definition of one or more _profiles_. A profile is a set of configuration attributes that can be activated/chosen when launching a workflow execution by using the `-profile` command- line option.
 
 Configuration profiles are defined by using the special scope `profiles` which group the attributes that belong to the same profile using a common prefix. For example:
 
@@ -250,7 +250,7 @@ nextflow run <your script> -profile cluster
 
 [AWS Batch](https://aws.amazon.com/batch/) is a managed computing service that allows the execution of containerized workloads in the Amazon cloud infrastructure.
 
-Nextflow provides built-in support for AWS Batch which allows the seamless deployment of a Nextflow pipeline in the cloud, offloading the process executions as Batch jobs.
+Nextflow provides built-in support for AWS Batch which allows the seamless deployment of a Nextflow workflow in the cloud, offloading the process executions as Batch jobs.
 
 Once the Batch environment is configured, specify the instance types to be used and the max number of CPUs to be allocated, you need to create a Nextflow configuration file like the one shown below:
 
@@ -317,7 +317,7 @@ aws {
 
 ## Custom job definition
 
-Nextflow automatically creates the Batch [Job definitions](https://docs.aws.amazon.com/batch/latest/userguide/job_definitions.html) needed to execute your pipeline processes. Therefore it’s not required to define them before you run your workflow.
+Nextflow automatically creates the Batch [Job definitions](https://docs.aws.amazon.com/batch/latest/userguide/job_definitions.html) needed to execute your workflow processes. Therefore it’s not required to define them before you run your workflow.
 
 However, you may still need to specify a custom Job Definition to provide fine-grained control of the configuration settings of a specific job (e.g. to define custom mount paths or other special settings of a Batch Job).
 
