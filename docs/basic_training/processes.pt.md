@@ -27,7 +27,7 @@ Em exemplos mais complexos, o corpo do processo pode conter até **cinco** bloco
 2. **Input** (Bloco de entrada) define o(s) canal(is) de entrada esperado(s)
 3. **Output** (Bloco de saída) define o(s) canal(is) de saída esperado(s)
 4. **When** é uma declaração de cláusula opcional para permitir processos condicionais
-5. **Script** é uma string que define o comando a ser executado pelo processo
+5. **Script** é uma string que define o comando a ser executado pela tarefa do processo
 
 A sintaxe completa do processo é definida da seguinte forma:
 
@@ -214,7 +214,7 @@ workflow {
 
 ## Canais de entradas
 
-Os processos Nextflow são isolados uns dos outros, mas podem se comunicar entre si enviando valores por meio de canais.
+As instâncias dos processos (tarefas) Nextflow são isoladas umas das outras, mas podem se comunicar entre si enviando valores por meio de canais.
 
 As entradas determinam implicitamente as dependências e a execução paralela do processo. A execução do processo é disparada cada vez que dados _novos_ estão prontos para serem consumidos do canal de entrada:
 
@@ -843,16 +843,16 @@ process FOO {
 | Nome                                                                | Descrição                                                                                                                                                            |
 | ------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [`cpus`](https://www.nextflow.io/docs/latest/process.html#cpus)     | Permite definir o número de CPUs (lógicas) necessárias para a tarefa do processo.                                                                                    |
-| [`time`](https://www.nextflow.io/docs/latest/process.html#time)     | Permite definir por quanto tempo um processo pode ser executado (por exemplo, tempo _1h_: 1 hora, _1s_ 1 segundo, _1m_ 1 minuto, _1d_ 1 dia).                        |
-| [`memory`](https://www.nextflow.io/docs/latest/process.html#memory) | Permite definir quanta memória o processo pode usar (por exemplo, _2 GB_ é 2 GB). Também pode usar B, KB, MB, GB e TB.                                               |
-| [`disk`](https://www.nextflow.io/docs/latest/process.html#disk)     | Permite definir a quantidade de armazenamento em disco local que o processo pode usar.                                                                               |
+| [`time`](https://www.nextflow.io/docs/latest/process.html#time)     | Permite definir por quanto tempo a tarefa pode ser executado (por exemplo, tempo _1h_: 1 hora, _1s_ 1 segundo, _1m_ 1 minuto, _1d_ 1 dia).                        |
+| [`memory`](https://www.nextflow.io/docs/latest/process.html#memory) | Permite definir quanta memória a tarefa pode usar (por exemplo, _2 GB_ é 2 GB). Também pode usar B, KB, MB, GB e TB.                                               |
+| [`disk`](https://www.nextflow.io/docs/latest/process.html#disk)     | Permite definir a quantidade de armazenamento em disco local que a tarefa pode usar.                                                                               |
 | [`tag`](https://www.nextflow.io/docs/latest/process.html#tag)       | Permite associar cada execução de processo a um rótulo personalizado para facilitar sua identificação no arquivo de log ou no relatório de execução do rastreamento. |
 
 ## Organizando as saídas
 
 ### A diretiva PublishDir
 
-Dado que cada processo está sendo executado em uma pasta `work/` temporária separada (por exemplo, `work/f1/850698…`; `work/g3/239712…`; etc.), podemos salvar informações importantes, não intermediárias, e/ou arquivos finais em uma pasta de resultados.
+Dado que cada tarefa está sendo executada em uma pasta `work/` temporária separada (por exemplo, `work/f1/850698…`; `work/g3/239712…`; etc.), podemos salvar informações importantes, não intermediárias, e/ou arquivos finais em uma pasta de resultados.
 
 !!! tip
 
@@ -887,7 +887,7 @@ workflow {
 }
 ```
 
-O exemplo acima copiará todos os arquivos de script blast criados pela tarefa `BLASTSEQ` no caminho do diretório `meus-resultados`.
+O exemplo acima copiará todos os arquivos de script blast criados pelo processo `BLASTSEQ` no caminho do diretório `meus-resultados`.
 
 !!! tip
 

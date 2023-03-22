@@ -127,7 +127,7 @@ process FOO {
 
 ## Alocação dinâmica de recursos
 
-Uma situação bastante comum é que diferentes instâncias de um mesmo processo podem ter necessidades diferentes de recursos computacionais. Nessas situações, solicitar uma quantidade de memória muito baixa, por exemplo, irá levar algumas tarefas a falharem. Por outro lado, usar um limite mais elevado que abrange todas as suas tarefas pode reduzir significativamente a prioridade de execução delas.
+Uma situação bastante comum é que diferentes instâncias de um mesmo processo podem ter necessidades diferentes de recursos computacionais. Nessas situações, solicitar uma quantidade de memória muito baixa, por exemplo, irá levar algumas tarefas a falharem. Por outro lado, usar um limite mais elevado que abrange todas as suas tarefas pode reduzir significativamente a prioridade de execução delas em um sistema de escalonamento de tarefas.
 
 Para lidar com isso, você pode utilizar uma estratégia de erro `retry` e aumentar os recursos computacionais alocados pela tarefa em cada _tentativa_ consecutiva.
 
