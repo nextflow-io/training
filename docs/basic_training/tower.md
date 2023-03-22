@@ -157,7 +157,7 @@ In brief, these are the steps you need to follow to set up a pipeline.
 
 1. Select the Launchpad button in the navigation bar. This will open the **Launch Form**.
 2. Select a [compute environment](https://help.tower.nf/compute-envs/overview).
-3. Enter the repository of the pipeline you want to launch. e.g. <https://github.com/nf-core/rnaseq.git>
+3. Enter the repository of the workflow you want to launch. e.g. <https://github.com/nf-core/rnaseq.git>
 4. Select a workflow **Revision number**. The Git default branch (main/master) or `manifest.defaultBranch` in the Nextflow configuration will be used by default.
 5. Set the **Work directory** location of the Nextflow work directory. The location associated with the compute environment will be selected by default.
 6. Enter the name(s) of each of the Nextflow **Config profiles** followed by the `Enter` key. See the Nextflow [Config profiles](https://www.nextflow.io/docs/latest/config.html#config-profiles) documentation for more details.
