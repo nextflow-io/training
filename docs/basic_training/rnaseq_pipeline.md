@@ -175,7 +175,7 @@ docker.enabled = true
 
 !!! exercise
 
-    If you have more CPUs available, try changing your script to request more resources for this process. For example, see the [directive docs](https://www.nextflow.io/docs/latest/process.html#cpus). `$task.cpus` is already specified in this script, so setting the number of CPUs as a directive will tell Nextflow how to run this job, in terms of number of CPUs.
+    If you have more CPUs available, try changing your script to request more resources for this process. For example, see the [directive docs](https://www.nextflow.io/docs/latest/process.html#cpus). `$task.cpus` is already specified in this script, so setting the number of CPUs as a directive will tell Nextflow how to execute this process, in terms of number of CPUs.
 
     ??? result
 

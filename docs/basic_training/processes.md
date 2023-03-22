@@ -27,7 +27,7 @@ In more complex examples, the process body can contain up to **five** definition
 2. **Input** defines the expected input channel(s)
 3. **Output** defines the expected output channel(s)
 4. **When** is an optional clause statement to allow conditional processes
-5. **Script** is a string statement that defines the command to be executed by the process
+5. **Script** is a string statement that defines the command to be executed by the process' task
 
 The full process syntax is defined as follows:
 
@@ -214,7 +214,7 @@ workflow {
 
 ## Inputs
 
-Nextflow processes are isolated from each other but can communicate between themselves by sending values through channels.
+Nextflow processes instances (tasks) are isolated from each other but can communicate between themselves by sending values through channels.
 
 Inputs implicitly determine the dependencies and the parallel execution of the process. The process execution is fired each time _new_ data is ready to be consumed from the input channel:
 
@@ -844,16 +844,16 @@ process FOO {
 | Name                                                                | Description                                                                                                                                          |
 | ------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [`cpus`](https://www.nextflow.io/docs/latest/process.html#cpus)     | Allows you to define the number of (logical) CPUs required by the process’ task.                                                                     |
-| [`time`](https://www.nextflow.io/docs/latest/process.html#time)     | Allows you to define how long a process is allowed to run (e.g., time _1h_: 1 hour, _1s_ 1 second, _1m_ 1 minute, _1d_ 1 day).                       |
-| [`memory`](https://www.nextflow.io/docs/latest/process.html#memory) | Allows you to define how much memory the process is allowed to use (e.g., _2 GB_ is 2 GB). Can also use B, KB,MB,GB and TB.                          |
-| [`disk`](https://www.nextflow.io/docs/latest/process.html#disk)     | Allows you to define how much local disk storage the process is allowed to use.                                                                      |
+| [`time`](https://www.nextflow.io/docs/latest/process.html#time)     | Allows you to define how long the task is allowed to run (e.g., time _1h_: 1 hour, _1s_ 1 second, _1m_ 1 minute, _1d_ 1 day).                       |
+| [`memory`](https://www.nextflow.io/docs/latest/process.html#memory) | Allows you to define how much memory the task is allowed to use (e.g., _2 GB_ is 2 GB). Can also use B, KB,MB,GB and TB.                          |
+| [`disk`](https://www.nextflow.io/docs/latest/process.html#disk)     | Allows you to define how much local disk storage the task is allowed to use.                                                                      |
 | [`tag`](https://www.nextflow.io/docs/latest/process.html#tag)       | Allows you to associate each process execution with a custom label to make it easier to identify them in the log file or the trace execution report. |
 
 ## Organize outputs
 
 ### PublishDir directive
 
-Given each process is being executed in separate temporary `work/` folder (e.g., `work/f1/850698…`; `work/g3/239712…`; etc.), we may want to save important, non-intermediary, and/or final files in a results folder.
+Given each task is being executed in separate temporary `work/` folder (e.g., `work/f1/850698…`; `work/g3/239712…`; etc.), we may want to save important, non-intermediary, and/or final files in a results folder.
 
 !!! tip
 
@@ -888,7 +888,7 @@ workflow {
 }
 ```
 
-The above example will copy all blast script files created by the `BLASTSEQ` task into the directory path `my-results`.
+The above example will copy all blast script files created by the `BLASTSEQ` process into the directory path `my-results`.
 
 !!! tip
 
