@@ -124,7 +124,9 @@ c1 = Channel.of(1, 2, 3)
 c2 = Channel.of('a', 'b')
 c3 = Channel.of('z')
 
-c1.mix(c2, c3).view()
+c1
+    .mix(c2, c3)
+    .view()
 ```
 
 ```console title="Output"
@@ -212,7 +214,8 @@ Esse operador é útil para processar um grupo, juntando elementos que possuem u
     ??? solution
 
         ```groovy linenums="1"
-        Channel.fromPath('data/meta/*')
+        Channel
+            .fromPath('data/meta/*')
             .map { arquivo -> tuple(arquivo.baseName, arquivo) }
             .groupTuple()
             .view { baseName, arquivo -> "> $baseName : $arquivo" }
