@@ -235,7 +235,8 @@ Learn more about the glob patterns syntax at [this link](https://docs.oracle.com
     ??? solution
 
         ```groovy linenums="1"
-        Channel.fromPath('./data/ggal/**.fq', hidden: true)
+        Channel
+            .fromPath('./data/ggal/**.fq', hidden: true)
             .view()
         ```
 
@@ -280,7 +281,8 @@ It will produce an output similar to the following:
         Use the following, with or without `flat: true`:
 
         ```groovy linenums="1"
-        Channel.fromFilePairs('./data/ggal/*_{1,2}.fq', flat: true)
+        Channel
+            .fromFilePairs('./data/ggal/*_{1,2}.fq', flat: true)
             .view()
         ```
 
@@ -680,7 +682,8 @@ process FOO {
 }
 
 workflow {
-    Channel.fromPath('data/meta/regions*.json')
+    Channel
+        .fromPath('data/meta/regions*.json')
         | flatMap { parseJsonFile(it) }
         | map { record -> [record.patient_id, record.feature] }
         | unique

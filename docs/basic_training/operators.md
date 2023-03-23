@@ -121,7 +121,9 @@ c1 = Channel.of(1, 2, 3)
 c2 = Channel.of('a', 'b')
 c3 = Channel.of('z')
 
-c1.mix(c2, c3).view()
+c1
+    .mix(c2, c3)
+    .view()
 ```
 
 ```console title="Output"
@@ -209,7 +211,8 @@ This operator is useful to process a group together with all the elements that s
     ??? solution
 
         ```groovy linenums="1"
-        Channel.fromPath('data/meta/*')
+        Channel
+            .fromPath('data/meta/*')
             .map { file -> tuple(file.baseName, file) }
             .groupTuple()
             .view { baseName, file -> "> $baseName : $file" }
