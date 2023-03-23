@@ -844,9 +844,9 @@ process FOO {
 | Name                                                                | Description                                                                                                                                          |
 | ------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [`cpus`](https://www.nextflow.io/docs/latest/process.html#cpus)     | Allows you to define the number of (logical) CPUs required by the process’ task.                                                                     |
-| [`time`](https://www.nextflow.io/docs/latest/process.html#time)     | Allows you to define how long the task is allowed to run (e.g., time _1h_: 1 hour, _1s_ 1 second, _1m_ 1 minute, _1d_ 1 day).                       |
-| [`memory`](https://www.nextflow.io/docs/latest/process.html#memory) | Allows you to define how much memory the task is allowed to use (e.g., _2 GB_ is 2 GB). Can also use B, KB,MB,GB and TB.                          |
-| [`disk`](https://www.nextflow.io/docs/latest/process.html#disk)     | Allows you to define how much local disk storage the task is allowed to use.                                                                      |
+| [`time`](https://www.nextflow.io/docs/latest/process.html#time)     | Allows you to define how long the task is allowed to run (e.g., time _1h_: 1 hour, _1s_ 1 second, _1m_ 1 minute, _1d_ 1 day).                        |
+| [`memory`](https://www.nextflow.io/docs/latest/process.html#memory) | Allows you to define how much memory the task is allowed to use (e.g., _2 GB_ is 2 GB). Can also use B, KB,MB,GB and TB.                             |
+| [`disk`](https://www.nextflow.io/docs/latest/process.html#disk)     | Allows you to define how much local disk storage the task is allowed to use.                                                                         |
 | [`tag`](https://www.nextflow.io/docs/latest/process.html#tag)       | Allows you to associate each process execution with a custom label to make it easier to identify them in the log file or the trace execution report. |
 
 ## Organize outputs
