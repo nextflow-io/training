@@ -698,7 +698,8 @@ Quando um nome de arquivo de saída precisa ser expresso dinamicamente, é poss�
 especies = ['gato', 'cachorro', 'preguiça']
 sequencias = ['AGATAG', 'ATGCTCT', 'ATCCCAA']
 
-Channel.fromList(especies)
+Channel
+    .fromList(especies)
     .set { canal_especies }
 
 process ALINHAR {
