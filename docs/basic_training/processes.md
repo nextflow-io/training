@@ -575,8 +575,7 @@ In the above example, every time a file of sequences is received as an input by 
 
         workflow {
             concat_ch = COMMAND(read_ch, params.transcriptome_file, methods)
-            concat_ch
-                .view { "To run : ${it.text}" }
+            concat_ch.view { "To run : ${it.text}" }
         }
         ```
 

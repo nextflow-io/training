@@ -369,7 +369,7 @@ workflow {
             """
         }
 
-        fluxo de trabalho {
+        workflow {
             canal_concatenado = CONCATENE(canal_leituras.collect())
             canal_concatenado.view()
         }
@@ -507,7 +507,7 @@ Isso ocorre porque os canais de valor podem ser consumidos várias vezes e não 
             """
         }
 
-        fluxo de trabalho {
+        workflow {
             canal_concatenado = COMANDO(canal_leituras, params.arquivo_transcriptoma)
             canal_concatenado.view()
         }
@@ -573,10 +573,9 @@ No exemplo acima, toda vez que um arquivo de sequências é recebido como entrad
             """
         }
 
-        fluxo de trabalho {
+        workflow {
             canal_concatenado = COMANDO(canal_leituras, params.arquivo_transcriptoma, metodos)
-            canal_concatenado
-                .view { "Para executar : ${it.text}" }
+            canal_concatenado.view { "Para executar : ${it.text}" }
         }
         ```
 
@@ -778,7 +777,7 @@ workflow {
             """
         }
 
-        fluxo de trabalho {
+        workflow {
             canal_bam = FOO(canal_leituras)
             canal_bam.view()
         }

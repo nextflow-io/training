@@ -49,7 +49,7 @@ include { CONVERTTOUPPER } from './modules.nf'
         include { SPLITLETTERS   } from './modules.nf'
         include { CONVERTTOUPPER } from './modules.nf'
 
-        fluxo de trabalho {
+        workflow {
             letters_ch = SPLITLETTERS(greeting_ch)
             results_ch = CONVERTTOUPPER(letters_ch.flatten())
             results_ch.view { it }
@@ -243,7 +243,7 @@ Outra maneira de lidar com as saídas no escopo `workflow` é usar pipes `|`.
      Tente alterar o script do fluxo de trabalho para o trecho abaixo:
 
     ```groovy linenums="1"
-    fluxo de trabalho {
+    workflow {
         Channel.of(params.greeting) | SPLITLETTERS | flatten | CONVERTTOUPPER | view
     }
     ```
