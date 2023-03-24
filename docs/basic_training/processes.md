@@ -214,7 +214,7 @@ workflow {
 
 ## Inputs
 
-Nextflow processes instances (tasks) are isolated from each other but can communicate between themselves by sending values through channels.
+Nextflow process instances (tasks) are isolated from each other but can communicate between themselves by sending values through channels.
 
 Inputs implicitly determine the dependencies and the parallel execution of the process. The process execution is fired each time _new_ data is ready to be consumed from the input channel:
 

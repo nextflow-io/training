@@ -117,12 +117,12 @@ Channel
 The `mix` operator combines the items emitted by two (or more) channels into a single channel.
 
 ```groovy linenums="1"
-c1 = Channel.of(1, 2, 3)
-c2 = Channel.of('a', 'b')
-c3 = Channel.of('z')
+my_channel_1 = Channel.of(1, 2, 3)
+my_channel_2 = Channel.of('a', 'b')
+my_channel_3 = Channel.of('z')
 
-c1
-    .mix(c2, c3)
+my_channel_1
+    .mix(my_channel_2, my_channel_3)
     .view()
 ```
 
