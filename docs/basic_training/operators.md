@@ -117,11 +117,13 @@ Channel
 The `mix` operator combines the items emitted by two (or more) channels into a single channel.
 
 ```groovy linenums="1"
-c1 = Channel.of(1, 2, 3)
-c2 = Channel.of('a', 'b')
-c3 = Channel.of('z')
+my_channel_1 = Channel.of(1, 2, 3)
+my_channel_2 = Channel.of('a', 'b')
+my_channel_3 = Channel.of('z')
 
-c1.mix(c2, c3).view()
+my_channel_1
+    .mix(my_channel_2, my_channel_3)
+    .view()
 ```
 
 ```console title="Output"
@@ -209,7 +211,8 @@ This operator is useful to process a group together with all the elements that s
     ??? solution
 
         ```groovy linenums="1"
-        Channel.fromPath('data/meta/*')
+        Channel
+            .fromPath('data/meta/*')
             .map { file -> tuple(file.baseName, file) }
             .groupTuple()
             .view { baseName, file -> "> $baseName : $file" }

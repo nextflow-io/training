@@ -175,13 +175,13 @@ The standard output shows (line by line):
 1. The version of Nextflow that was executed.
 2. The script and version names.
 3. The executor used (in the above case: local).
-4. The first `process` is executed once. The line starts with a unique hexadecimal value (see TIP below), and ends with the percentage and job completion information.
-5. The second process is executed twice (once for chunk_aa and once for chunk_ab).
+4. The first `process` is executed once, which means there is one task. The line starts with a unique hexadecimal value (see TIP below), and ends with the percentage and other task completion information.
+5. The second process is executed twice (once for chunk_aa and once for chunk_ab), which means two tasks.
 6. The result string from stdout is printed.
 
 !!! info
 
-    The hexadecimal numbers, like `c8/c36893`, identify the unique process execution. These numbers are also the prefix of the directories where each process is executed. You can inspect the files produced by changing to the directory `$PWD/work` and using these numbers to find the process-specific execution path.
+    The hexadecimal numbers, like `c8/c36893`, identify the unique process execution, that we call a task. These numbers are also the prefix of the directories where each task is executed. You can inspect the files produced by changing to the directory `$PWD/work` and using these numbers to find the task-specific execution path.
 
 !!! tip
 
@@ -233,7 +233,7 @@ executor >  local (2)
  olleH
 ```
 
-You will see that the execution of the process `SPLITLETTERS` is skipped (the process ID is the same as in the first output) — its results are retrieved from the cache. The second process is executed as expected, printing the reversed strings.
+You will see that the execution of the process `SPLITLETTERS` is skipped (the task ID is the same as in the first output) — its results are retrieved from the cache. The second process is executed as expected, printing the reversed strings.
 
 !!! info
 

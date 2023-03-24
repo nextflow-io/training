@@ -4,7 +4,7 @@ description: Basic Nextflow Training Workshop
 
 # Deployment scenarios
 
-Real-world genomic applications can spawn the execution of thousands of jobs. In this scenario a batch scheduler is commonly used to deploy a workflow in a computing cluster, allowing the execution of many jobs in parallel across many compute nodes.
+Real-world genomic applications can spawn the execution of thousands of tasks. In this scenario a batch scheduler is commonly used to deploy a workflow in a computing cluster, allowing the execution of many jobs in parallel across many compute nodes.
 
 Nextflow has built-in support for the most commonly used batch schedulers, such as Univa Grid Engine, [SLURM](https://slurm.schedmd.com/) and IBM LSF. Check the Nextflow documentation for the complete list of supported [execution platforms](https://www.nextflow.io/docs/latest/executor.html).
 
@@ -29,7 +29,7 @@ This can be done using the following process directives:
 |                                                                   |                                                               |
 | ----------------------------------------------------------------- | ------------------------------------------------------------- |
 | [queue](https://www.nextflow.io/docs/latest/process.html#queue)   | the cluster _queue_ to be used for the computation            |
-| [cpus](https://www.nextflow.io/docs/latest/process.html#cpus)     | the number of _cpus_ to be allocated a task execution         |
+| [cpus](https://www.nextflow.io/docs/latest/process.html#cpus)     | the number of _cpus_ to be allocated for a task execution     |
 | [memory](https://www.nextflow.io/docs/latest/process.html#memory) | the amount of _memory_ to be allocated for a task execution   |
 | [time](https://www.nextflow.io/docs/latest/process.html#time)     | the max amount of _time_ to be allocated for a task execution |
 | [disk](https://www.nextflow.io/docs/latest/process.html#disk)     | the amount of _disk_ storage required for a task execution    |

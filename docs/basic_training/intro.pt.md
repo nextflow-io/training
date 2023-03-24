@@ -174,13 +174,13 @@ A saída padrão mostra (linha por linha):
 1. A versão do Nextflow que foi executada.
 2. Os nomes do script e da versão.
 3. O executor usado (no caso acima: local).
-4. O primeiro processo é executado uma vez. A linha começa com um valor hexadecimal exclusivo (consulte a dica abaixo) e termina com as informações de porcentagem e conclusão do trabalho.
-5. O segundo processo é executado duas vezes (uma vez para chunk_aa e outra para chunk_ab).
+4. O primeiro processo é executado uma vez, o que significa que houve 1 tarefa. A linha começa com um valor hexadecimal exclusivo (consulte a dica abaixo) e termina com a porcentagem e outras informações de conclusão da tarefa.
+5. O segundo processo é executado duas vezes (uma vez para chunk_aa e outra para chunk_ab), o que significa duas tarefas.
 6. A string de resultado de stdout é impressa na tela.
 
 !!! info
 
-    Os números hexadecimais, como `c8/c36893`, identificam de forma única a execução do processo. Esses números também são o prefixo dos diretórios onde cada processo é executado. Você pode inspecionar os arquivos produzidos mudando para o diretório `$PWD/work` e usando esses números para encontrar o caminho de execução específico do processo.
+    Os números hexadecimais, como `c8/c36893`, identificam de forma única a execução do processo. Esses números também são o prefixo dos diretórios onde cada tarefa é executado. Você pode inspecionar os arquivos produzidos mudando para o diretório `$PWD/work` e usando esses números para encontrar o caminho de execução específico da tarefa.
 
 !!! tip
 
@@ -232,7 +232,7 @@ executor >  local (2)
  olleH
 ```
 
-Você verá que a execução do processo `SPLITLETTERS` é ignorada (o ID do processo é o mesmo da primeira saída) — seus resultados são recuperados do cache. O segundo processo é executado conforme o esperado, imprimindo as strings invertidas.
+Você verá que a execução do processo `SPLITLETTERS` é ignorada (o ID da tarefa é o mesmo da primeira saída) — seus resultados são recuperados do cache. O segundo processo é executado conforme o esperado, imprimindo as strings invertidas.
 
 !!! info
 

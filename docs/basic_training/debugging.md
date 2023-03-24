@@ -50,18 +50,18 @@ If this is not enough, `cd` into the task work directory. It contains all the fi
 The task execution directory contains these files:
 
 -   `.command.sh`: The command script.
--   `.command.run`: The command wrapped used to run the job.
--   `.command.out`: The complete job standard output.
--   `.command.err`: The complete job standard error.
+-   `.command.run`: The command wrapped used to run the task.
+-   `.command.out`: The complete task standard output.
+-   `.command.err`: The complete task standard error.
 -   `.command.log`: The wrapper execution output.
--   `.command.begin`: Sentinel file created as soon as the job is launched.
+-   `.command.begin`: Sentinel file created as soon as the task is launched.
 -   `.exitcode`: A file containing the task exit code.
 -   Task input files (symlinks)
 -   Task output files
 
 Verify that the `.command.sh` file contains the expected command and all variables are correctly resolved.
 
-Also verify the existence of the `.exitcode` and `.command.begin` files, which if absent, suggest the task was never executed by the subsystem (e.g. the batch scheduler). If the `.command.begin` file exists, the job was launched but was likely killed abruptly.
+Also verify the existence of the `.exitcode` and `.command.begin` files, which if absent, suggest the task was never executed by the subsystem (e.g. the batch scheduler). If the `.command.begin` file exists, the task was launched but was likely killed abruptly.
 
 You can replicate the failing execution using the command `bash .command.run` to verify the cause of the error.
 
@@ -125,9 +125,9 @@ process FOO {
 
 ## Dynamic resources allocation
 
-It’s a very common scenario that different instances of the same process may have very different needs in terms of computing resources. In such situations requesting, for example, an amount of memory too low will cause some tasks to fail. Instead, using a higher limit that fits all the tasks in your execution could significantly decrease the execution priority of your jobs.
+It’s a very common scenario that different instances of the same process may have very different needs in terms of computing resources. In such situations requesting, for example, an amount of memory too low will cause some tasks to fail. Instead, using a higher limit that fits all the tasks in your execution could significantly decrease the execution priority of your job in a scheduling system.
 
-To handle this use case, you can use a `retry` error strategy and increase the computing resources allocated by the job at each successive _attempt_.
+To handle this use case, you can use a `retry` error strategy and increase the computing resources allocated by the task at each successive _attempt_.
 
 ```groovy linenums="1"
 process FOO {
