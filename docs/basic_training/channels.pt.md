@@ -304,8 +304,8 @@ A consulta pode ser ID(s) de projeto(s) ou número(s) de acesso suportado(s) pel
     2. Clique no botão "Login" no canto superior direito para entrar no NCBI. Siga suas instruções.
     3. Uma vez em sua conta, clique no botão no canto superior direito, geralmente seu ID.
     4. Vá para Account settings
-    5. Role para baixo até a seção API Key Management.
-    6. Clique em "Criar uma chave de API".
+    5. Role para baixo até a seção "API Key Management".
+    6. Clique em "Create an API Key".
     7. A página será atualizada e a chave será exibida onde estava o botão. Copie sua chave.
 
 Por exemplo, o trecho a seguir imprimirá o conteúdo de um ID de projeto NCBI:
