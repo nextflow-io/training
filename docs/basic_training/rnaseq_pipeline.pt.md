@@ -11,7 +11,13 @@ Para demonstrar um cenário biomédico da vida real, nós iremos implementar uma
 3. Realiza quantificação
 4. Cria um relatório MultiQC
 
-Isso será feito usando uma série de sete scripts, cada um se baseando no script anterior, para criar um fluxo de trabalho completo. Você poderá encontrá-los no diretório do tutorial (`script1.nf` - `script7.nf`).
+Isso será feito usando uma série de sete scripts, cada um se baseando no script anterior, para criar um fluxo de trabalho completo. Você poderá encontrá-los no diretório do tutorial (`script1.nf` - `script7.nf`). Esses scripts farão uso de ferramentas de terceiros que são conhecidas por bioinformatas, mas que podem ser novas para você, então vamos apresentá-las brevemente abaixo.
+
+1. [Salmon](https://combine-lab.github.io/salmon/) é uma ferramenta para quantificar moléculas conhecidas como transcritos por meio de um tipo de dados chamado dados de RNA-seq.
+2. [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) é uma ferramenta para executar o controle de qualidade para dados de sequenciamento de alta vazão. Você pode pensar nisso como uma forma de avaliar a qualidade de seus dados.
+3. [MultiQC](https://multiqc.info) pesquisa um determinado diretório por logs de análises e compila um relatório HTML. É uma ferramenta de uso geral, perfeita para resumir a saída de várias ferramentas de bioinformática.
+
+Embora essas ferramentas possam não ser as que você usará em seu pipeline, elas podem ser substituídas por qualquer ferramenta comum de sua área. Esse é o poder do Nextflow!
 
 ## Defina os parâmetros do fluxo de trabalho
 
