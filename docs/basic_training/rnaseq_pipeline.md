@@ -11,7 +11,13 @@ To demonstrate a real-world biomedical scenario, we will implement a proof of co
 3. Performs quantification
 4. Creates a MultiQC report
 
-This will be done using a series of seven scripts, each of which builds on the previous to create a complete workflow. You can find these in the tutorial folder (`script1.nf` - `script7.nf`).
+This will be done using a series of seven scripts, each of which builds on the previous to create a complete workflow. You can find these in the tutorial folder (`script1.nf` - `script7.nf`). These scripts will make use of third-party tools that are known by bioinformaticians but that may be new to you so we'll briefly introduce them below.
+
+1. [Salmon](https://combine-lab.github.io/salmon/) is a tool for quantifying molecules known as transcripts through a type of data called RNA-seq data.
+2. [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) is a tool to perform quality control for high throughput sequence data. You can think of it as a way to assess the quality of your data.
+3. [MultiQC](https://multiqc.info) searches a given directory for analysis logs and compiles a HTML report. It's a general use tool, perfect for summarizing the output from numerous bioinformatics tools.
+
+Though these tools may not be the ones you will use in your pipeline, they could just be replaced by any common tool of your area. That's the power of Nextflow!
 
 ## Define the workflow parameters
 
