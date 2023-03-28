@@ -10,7 +10,7 @@ hide:
 
 Nous sommes heureux de vous accompagner sur le chemin de redaction de workflows scientifiques reproductibles et évolutifs en utilisant Nextflow. Ce guide complète toute la documentation de Nextflow - si vous avez des doutes, consultez la documentation située [ici](https://www.nextflow.io/docs/latest).
 
-À la fin de ce cours, vous devriez: 
+À la fin de ce cours, vous devriez:
 
 1. Maîtriser la redaction de workflows Nextflow
 2. Connaître les concepts de base de Nextflow : canaux, processus et opérateurs.
