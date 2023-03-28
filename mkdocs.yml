@@ -133,4 +133,7 @@ plugins:
               es:
                   name: Español
                   build: true
+              fr:
+                  name: Français
+                  build: true
     - search
