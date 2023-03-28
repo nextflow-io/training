@@ -6,7 +6,7 @@ description: Comment mettre en place un environnement de développement pour ex�
 
 Il y a deux façons principales de commencer avec le cours de formation communautaire de Nextflow.
 
-La première consiste à installer les exigences [localement] (#local-installation), ce qui est préférable si vous êtes déjà familier avec Git et Docker, ou si vous travaillez hors ligne.
+La première consiste à installer les exigences [localement](#local-installation), ce qui est préférable si vous êtes déjà familier avec Git et Docker, ou si vous travaillez hors ligne.
 
 La seconde consiste à utiliser [Gitpod](#gitpod), ce qui est préférable pour les débutants car cette plateforme contient tous les programmes et données nécessaires. Il suffit de cliquer sur le lien et de se connecter à l'aide de son compte GitHub pour commencer le tutoriel :
 
@@ -55,7 +55,7 @@ Et mettez l'exécutable `nextflow` dans votre `$PATH` (par exemple `/usr/local/b
 
 ### Docker
 
-Assurez-vous que Docker Desktop fonctionne sur votre machine. Téléchargez Docker [ici] (https://docs.docker.com/get-docker/).
+Assurez-vous que Docker Desktop fonctionne sur votre machine. Téléchargez Docker [ici](https://docs.docker.com/get-docker/).
 
 ### Matériel de formation
 
