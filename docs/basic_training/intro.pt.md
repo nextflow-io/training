@@ -38,7 +38,7 @@ Em outras palavras, o Nextflow fornece uma abstração entre a lógica funcional
 
 <figure markdown>
 
-![Abstração de execução](img/execution_abstraction.png)
+![Abstração de execução](img/execution_abstraction.pt.png)
 
 </figure>
 
@@ -267,6 +267,6 @@ Para entender melhor como o Nextflow está lidando com os dados neste fluxo de t
 
 <figure markdown>
 
-![Diagrama do Olá mundo](img/helloworlddiagram.png)
+![Diagrama do Olá mundo](img/helloworlddiagram.pt.png)
 
 </figure>

@@ -12,7 +12,7 @@ O Nextflow possui suporte embutido para os escalonadores de lote mais usados, co
 
 Um recurso importante do Nextflow é a capacidade de desacoplar a implementação do fluxo de trabalho da plataforma de execução de fato. A implementação de uma camada de abstração permite a implantação do fluxo de trabalho resultante em qualquer plataforma de execução suportada pelo framework.
 
-![Executores no Nextflow](img/nf-executors.png)
+![Executores no Nextflow](img/nf-executors.pt.png)
 
 Para executar seu fluxo de trabalho com um escalonador de lote, modifique o arquivo `nextflow.config` especificando o executor de destino e os recursos de computação necessários, se necessário. Por exemplo:
 
