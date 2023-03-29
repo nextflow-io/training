@@ -129,7 +129,7 @@ Encoding: UTF-8 (UTF-8)
 
 -   Gitpod vous offre 500 crédits gratuits par mois, ce qui équivaut à 50 heures d'utilisation gratuite de l'environnement en utilisant l'espace de travail standard (jusqu'à 4 cœurs, 8 Go de RAM et 30 Go d'espace de stockage).
 -   Il existe également une option de grand espace de travail qui vous permet d'utiliser jusqu'à 8 cœurs, 16 Go de RAM et 50 Go d'espace de stockage. Cependant, le grand espace de travail utilisera vos crédits gratuits plus rapidement et vous aurez moins d'heures d'accès à cet espace.
--   Gitpod s'arrête au bout de 30 minutes d'inactivité et conserve les modifications jusqu'à deux semaines (voir la section suivante pour reouvrir une session interrompue).
+-   Gitpod s'arrête au bout de 30 minutes d'inactivité et conserve les modifications jusqu'à deux semaines (voir la section suivante pour réouvrir une session interrompue).
 
 Voir [gitpod.io](https://www.gitpod.io) pour plus de details.
 
