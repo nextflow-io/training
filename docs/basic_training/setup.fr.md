@@ -25,11 +25,11 @@ Nextflow peut être utilisé sur n'importe quel système compatible POSIX (Linux
 
 #### Exigences optionnelles pour ce tutoriel
 
--   [Singularity](https://github.com/sylabs/singularity) 2.5.x (or later)
--   [Conda](https://conda.io/) 4.5 (or later)
+-   [Singularity](https://github.com/sylabs/singularity) 2.5.x (ou plus)
+-   [Conda](https://conda.io/) 4.5 (ou plus)
 -   [Graphviz](http://www.graphviz.org/)
 -   [AWS CLI](https://aws.amazon.com/cli/)
--   A configured AWS Batch computing environment
+-   Un environnement AWS Batch configuré
 
 ### Télécharger Nextflow
 
@@ -39,7 +39,7 @@ Entrez cette commande dans votre terminal :
 wget -qO- https://get.nextflow.io | bash
 ```
 
-Or, if you prefer `curl`:
+Ou, vous préférez `curl`:
 
 ```bash
 curl -s https://get.nextflow.io | bash
