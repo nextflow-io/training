@@ -85,9 +85,9 @@ Un environnement de développement Nextflow préconfiguré est disponible via Gi
 
 #### Exigences
 
-- Un compte GitHub
-- Navigateur web (Google Chrome, Firefox)
-- Une connexion internet
+-   Un compte GitHub
+-   Navigateur web (Google Chrome, Firefox)
+-   Une connexion internet
 
 ### Démarrage rapide de Gitpod
 
@@ -125,7 +125,7 @@ Runtime: Groovy 3.0.13 on OpenJDK 64-Bit Server VM 17.0.3-internal+0-adhoc..src
 Encoding: UTF-8 (UTF-8)
 ```
 
-### Resources de Gitpod 
+### Resources de Gitpod
 
 -   Gitpod vous offre 500 crédits gratuits par mois, ce qui équivaut à 50 heures d'utilisation gratuite de l'environnement en utilisant l'espace de travail standard (jusqu'à 4 cœurs, 8 Go de RAM et 30 Go d'espace de stockage).
 -   Il existe également une option de grand espace de travail qui vous permet d'utiliser jusqu'à 8 cœurs, 16 Go de RAM et 50 Go d'espace de stockage. Cependant, le grand espace de travail utilisera vos crédits gratuits plus rapidement et vous aurez moins d'heures d'accès à cet espace.
