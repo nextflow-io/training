@@ -25,11 +25,3 @@ Nextflow est un logiciel libre et gratuit, développé par [Seqera Labs](https:/
 Seqera offre un service de support professionnel pour Nextflow et les produits associés, ainsi que des sessions de formation sur mesure.
 
 Si cela vous intéresse, veuillez [Prendre contact](https://seqera.io/demo/).
-
-
-
-
-
-
-
-
