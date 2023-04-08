@@ -66,7 +66,7 @@ Si cette condition est remplie, l'exécution de la tâche est sautée et les ré
 
 La première tâche pour laquelle une nouvelle sortie est calculée invalide toutes les exécutions en aval dans le DAG restant.
 
-## repertoire Work 
+## repertoire Work
 
 Les répertoires de travail des tâches sont créés par défaut dans le dossier `work` du chemin de lancement. Ce dossier est censé être une zone de stockage **scratch** qui peut être nettoyée une fois le calcul terminé.
 
@@ -90,9 +90,9 @@ nextflow run <script> -w /some/scratch/dir
 
 Le code de hachage des fichiers d'entrée est calculé en utilisant :
 
-- le chemin d'accès complet au fichier
-- la taille du fichier
-- l'horodatage de la dernière modification
+-   le chemin d'accès complet au fichier
+-   la taille du fichier
+-   l'horodatage de la dernière modification
 
 Par conséquent, le simple fait de ** toucher** un fichier invalidera l'exécution de la tâche correspondante.
 
@@ -325,4 +325,3 @@ Si les méta-cartes ne sont pas possibles, une alternative est d'utiliser la dir
 !!! avertissement
 
      En fonction de votre situation, l'utilisation de la directive `fair` peut entraîner une diminution des performances.
-

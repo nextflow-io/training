@@ -1,6 +1,6 @@
 ---
-description: Atelier de formation de base sur Nextflow
 
+description: Atelier de formation de base sur Nextflow
 
 # Workflow simple de RNA-Seq
 
@@ -563,12 +563,12 @@ Nextflow permet l'exécution d'une révision spécifique de votre projet en util
 ```bash
 nextflow run nextflow-io/rnaseq-nf -r v2.1 -with-docker
 ```
+
 Les révisions sont définies à l'aide de tags Git ou de branches définies dans le référentiel du projet.
 
 Les tags permettent un contrôle précis des modifications apportées à vos fichiers de projet et à vos dépendances au fil du temps.
 
 ## Plus de ressources
-
 
 -   [Documentation Nextflow](http://docs.nextflow.io) - L'accueil de la documentation Nextflow.
 -   [Modèles Nextflow](https://github.com/nextflow-io/patterns) - Une collection de modèles de mise en œuvre de Nextflow.

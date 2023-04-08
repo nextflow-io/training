@@ -1,6 +1,6 @@
 ---
-titre: Description 
-du Dépannage : Traitement des erreurs et dépannage
+titre: Description
+du Dépannage: Traitement des erreurs et dépannage
 ---
 
 # Traitement des erreurs et dépannage
@@ -109,7 +109,7 @@ La directive [maxRetries](https://www.nextflow.io/docs/latest/process.html#maxre
 
 ## Réessayer avec backoff
 
-Dans certains cas, les ressources d'exécution requises peuvent être temporairement indisponibles (par exemple, en cas de congestion du réseau). Dans ce cas, la simple réexécution de la même tâche entraînera probablement une erreur identique. Une nouvelle tentative avec un délai exponentiel  backoff permet de mieux récupérer ces conditions d'erreur.
+Dans certains cas, les ressources d'exécution requises peuvent être temporairement indisponibles (par exemple, en cas de congestion du réseau). Dans ce cas, la simple réexécution de la même tâche entraînera probablement une erreur identique. Une nouvelle tentative avec un délai exponentiel backoff permet de mieux récupérer ces conditions d'erreur.
 
 ```groovy linenums="1"
 process FOO {
