@@ -6,7 +6,7 @@ description: Démarrer avec Nextflow
 
 ## Concepts de base
 
-Nextflow est un moteur d'orchestration de workflow et un langage  de domaine spécifique (DSL) qui facilite la redaction dun workflow informatiques à forte intensité de données.
+Nextflow est un moteur d'orchestration de workflow et un langage de domaine spécifique (DSL) qui facilite la redaction dun workflow informatiques à forte intensité de données.
 
 Il est conçu autour de l'idée que la plateforme Linux est la _lingua franca_ de la science des données. Linux fournit de nombreux outils de ligne de commande et de script simples mais puissants qui, lorsqu'ils sont combinés, facilitent les manipulations de données complexes.
 
