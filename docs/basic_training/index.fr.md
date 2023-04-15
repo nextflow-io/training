@@ -8,7 +8,7 @@ hide:
 
 ## Bienvenue à l'atelier de formation Nextflow
 
-Nous sommes heureux de vous accompagner sur le chemin de redaction de workflows scientifiques reproductibles et évolutifs en utilisant Nextflow. Ce guide complète toute la documentation de Nextflow - si vous avez des doutes, consultez la documentation située [ici](https://www.nextflow.io/docs/latest).
+Nous sommes heureux de vous accompagner sur le chemin de rédaction de workflows scientifiques reproductibles et évolutifs en utilisant Nextflow. Ce guide complète toute la documentation de Nextflow - si vous avez des doutes, consultez la documentation située [ici](https://www.nextflow.io/docs/latest).
 
 À la fin de ce cours, vous devriez:
 
