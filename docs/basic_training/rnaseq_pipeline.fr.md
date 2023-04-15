@@ -1,6 +1,6 @@
 ---
-
 description: Atelier de formation de base sur Nextflow
+---
 
 # Workflow simple de RNA-Seq
 
@@ -45,13 +45,13 @@ Essayez de spécifier un paramètre d'entrée différent dans votre commande d'e
 nextflow run script1.nf --reads '/workspace/gitpod/nf-training/data/ggal/lung_{1,2}.fq'
 ```
 
-### :material-progress-question : Exercices
+### :material-progress-question: Exercices
 
-!!! exercice
+!!! exercise
 
     Modifiez le fichier `script1.nf` en ajoutant un quatrième paramètre nommé `outdir` et définissez-le comme chemin par défaut qui sera utilisé comme répertoire de sortie du workflow.
 
-    ??? resultat
+    ??? result
 
         ```groovy
         params.reads = "$projectDir/data/ggal/gut_{1,2}.fq"
@@ -60,16 +60,16 @@ nextflow run script1.nf --reads '/workspace/gitpod/nf-training/data/ggal/lung_{1
         params.outdir = "results"
         ```
 
-!!! exercice
+!!! exercise
 
     Modifier `script1.nf` pour imprimer tous les paramètres du workflow en utilisant une seule commande `log.info` sous la forme d'une [chaîne multiligne](https://www.nextflow.io/docs/latest/script.html#multi-line-strings).
 
-    !!! conseil ""
+    !!! tip ""
 
         :material-lightbulb: regarde l'example [ici](https://github.com/nextflow-io/rnaseq-nf/blob/3b5b49f/main.nf#L41-L48).
 
 
-    ??? resultat
+    ??? result
 
         Ajoutez ce qui suit à votre fichier script:
 
@@ -84,7 +84,7 @@ nextflow run script1.nf --reads '/workspace/gitpod/nf-training/data/ggal/lung_{1
             .stripIndent(true)
         ```
 
-### :material-check-all : Résumé
+### :material-check-all: Résumé
 
 Au cours de cette étape, vous avez appris:
 
@@ -135,7 +135,7 @@ Ici, le paramètre `params.transcriptome_file` est utilisé comme entrée pour l
 
     La déclaration `input` définit une variable de chemin `transcriptome` qui est utilisée dans le `script` comme référence (en utilisant le symbole du dollar) dans la ligne de commande Salmon.
 
-!!! avertissement
+!!! warning
 
     Les besoins en ressources tels que les CPUs et les limites de mémoire peuvent changer avec les différentes exécutions de workflow et les plateformes. Nextflow peut utiliser `$task.cpus` comme variable pour le nombre de CPU. Voir [process directives documentation](https://www.nextflow.io/docs/latest/process.html#directives) pour plus de détails.
 
@@ -163,15 +163,15 @@ docker.enabled = true
 
 ### :material-progress-question: Exercices
 
-!!! exercice
+!!! exercise
 
     Activez l'exécution Docker par défaut en ajoutant le paramètre ci-dessus dans le fichier `nextflow.config`.
 
-!!! exercice
+!!! exercise
 
     Imprimer la sortie du canal `index_ch` en utilisant l'opérateur [view](https://www.nextflow.io/docs/latest/operator.html#view).
 
-    ??? resultat
+    ??? result
 
         Ajoutez ce qui suit à la fin de votre bloc de workflow dans votre fichier script
 
@@ -179,11 +179,11 @@ docker.enabled = true
         index_ch.view()
         ```
 
-!!! exercice
+!!! exercise
 
     Si vous disposez de plus d'unités centrales, essayez de modifier votre script pour demander plus de ressources pour ce processus. Par exemple, voir la [directive docs](https://www.nextflow.io/docs/latest/process.html#cpus). `$task.cpus` est déjà spécifié dans ce script, donc définir le nombre de CPUs comme une directive indiquera à Nextflow comment exécuter ce processus, en termes de nombre de CPUs.
 
-    ??? resultat
+    ??? result
 
         Ajouter `cpus 2` au début du processus d'indexation :
 
@@ -197,11 +197,11 @@ docker.enabled = true
 
         Vérifiez ensuite qu'il a fonctionné en regardant le script exécuté dans le répertoire work. Cherchez l'hexadécimal (par exemple `work/7f/f285b80022d9f61e82cd7f90436aa4/`), puis `cat` le fichier `.command.sh`.
 
-!!! exercice "Exercice Bonus"
+!!! exercise "Exercice Bonus"
 
     Utilisez la commande `tree work` pour voir comment Nextflow organise le répertoire work du processus. Vérifiez [ici](https://www.tecmint.com/linux-tree-command-examples/) si vous avez besoin de télécharger `tree`.
 
-    ??? resultat
+    ??? result
 
         Il devrait ressembler à ceci :
 
@@ -270,17 +270,17 @@ Essayez à nouveau en spécifiant différents fichiers de lecture à l'aide d'un
 nextflow run script3.nf --reads 'data/ggal/*_{1,2}.fq'
 ```
 
-!!! avertissement
+!!! warning
 
     Les chemins d'accès aux fichiers qui incluent un ou plusieurs jokers, c'est-à-dire `*`, `?`, etc., DOIVENT être entourés de caractères entre guillemets simples afin d'éviter que Bash n'étende le glob.
 
 ### :material-progress-question: Exercices
 
-!!! exercice
+!!! exercise
 
     Utilisez l'opérateur [set](https://www.nextflow.io/docs/latest/operator.html#set) à la place de l'affectation `=` pour définir le canal `read_pairs_ch`.
 
-    ??? resultat
+    ??? result
 
         ```groovy
         Channel
@@ -288,11 +288,11 @@ nextflow run script3.nf --reads 'data/ggal/*_{1,2}.fq'
             .set { read_pairs_ch }
         ```
 
-!!! exercice
+!!! exercise
 
     Utilisez l'option `checkIfExists` pour la fabrique de canaux [fromFilePairs](https://www.nextflow.io/docs/latest/channel.html#fromfilepairs) pour vérifier si le chemin spécifié contient des paires de fichiers.
 
-    ??? resultat
+    ??? result
 
         ```groovy
         Channel
@@ -342,17 +342,17 @@ Vous remarquerez que le processus `QUANTIFICATION` est exécuté plusieurs fois.
 
 Nextflow parallélise l'exécution de votre workflow en fournissant simplement plusieurs jeux de données d'entrée à votre script.
 
-!!! conseil
+!!! tip
 
     Il peut être utile d'appliquer des paramètres facultatifs à un processus spécifique à l'aide de [directives](https://www.nextflow.io/docs/latest/process.html#directives) en les spécifiant dans le corps du processus.
 
 ### :material-progress-question: Exercices
 
-!!! exercice
+!!! exercise
 
     Ajout d'une directive [tag](https://www.nextflow.io/docs/latest/process.html#tag) au processus `QUANTIFICATION` pour fournir un journal d'exécution plus lisible.
 
-    ??? resultat
+    ??? result
 
         Ajoutez ce qui suit avant la déclaration d'entrée :
 
@@ -360,11 +360,11 @@ Nextflow parallélise l'exécution de votre workflow en fournissant simplement p
         tag "Salmon on $sample_id"
         ```
 
-!!! exercice
+!!! exercise
 
     Ajoutez une directive [publishDir](https://www.nextflow.io/docs/latest/process.html#publishdir) au processus `QUANTIFICATION` pour stocker les résultats du processus dans un répertoire de votre choix.
 
-    ??? resultat
+    ??? result
 
         Ajoutez ce qui suit avant la déclaration `input` dans le processus `QUANTIFICATION` :
 
@@ -372,7 +372,7 @@ Nextflow parallélise l'exécution de votre workflow en fournissant simplement p
         publishDir params.outdir, mode: 'copy'
         ```
 
-### :material-check-all : Résumé
+### :material-check-all: Résumé
 
 Dans cette étape, vous avez appris
 
@@ -413,7 +413,7 @@ MULTIQC(quant_ch.mix(fastqc_ch).collect())
 
 Nous voulons qu'une seule tâche de MultiQC soit exécutée pour produire un rapport. Nous utilisons donc l'opérateur de canal `mix` pour combiner les deux canaux, suivi de l'opérateur `collect`, pour retourner le contenu complet du canal en un seul élément.
 
-### :material-check-all : Résumé
+### :material-check-all: Résumé
 
 Dans cette étape, vous avez appris
 
@@ -497,7 +497,7 @@ Exécutez-la comme auparavant :
 nextflow run script7.nf -resume --reads 'data/ggal/*_{1,2}.fq'
 ```
 
-### :material-check-all : Résumé
+### :material-check-all: Résumé
 
 Dans cette étape, vous avez appris
 
@@ -528,7 +528,7 @@ Enfin, l'option `-with-dag` permet le rendu de la représentation graphique acyc
 open dag.png
 ```
 
-!!! avertissement
+!!! warning
 
     Les mesures de temps d'exécution peuvent être incomplètes pour les exécutions avec des tâches courtes, comme dans le cas de ce tutoriel.
 

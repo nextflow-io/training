@@ -24,7 +24,7 @@ Des événements gratuits en ligne sont organisés régulièrement avec la commu
 Plusieurs ateliers sont disponibles sur ce site.
 Trouvez celui qui vous convient le mieux :
 
-!!! exercice "Atelier de formation de base Nextflow"
+!!! exercise "Atelier de formation de base Nextflow"
 
     !!! tip inline end ""
 
@@ -34,7 +34,7 @@ Trouvez celui qui vous convient le mieux :
 
     [Démarrer l'atelier de formation Nextflow :material-arrow-right:](basic_training/index.md){ .md-button .md-button--primary }
 
-!!! exercice "Formation pratique"
+!!! exercise "Formation pratique"
 
     !!! quote inline end ""
 

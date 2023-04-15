@@ -74,7 +74,7 @@ Les répertoires de travail des tâches sont créés par défaut dans le dossier
 
     Les résultats finaux du workflow sont censés être stockés dans un emplacement différent spécifié à l'aide d'une ou plusieurs directives [publishDir](https://www.nextflow.io/docs/latest/process.html#publishdir).
 
-!!! Avertissement
+!!! warning
 
     Veillez à supprimer votre répertoire work de temps en temps, sinon votre machine/environnement risque d'être rempli de fichiers inutilisés.
 
@@ -84,7 +84,7 @@ Un emplacement différent pour le répertoire d'exécution work peut être spéc
 nextflow run <script> -w /some/scratch/dir
 ```
 
-!!! avertissement
+!!! warning
 
     Si vous supprimez ou déplacez le workflow du répertoire work, cela empêchera l'utilisation de la fonction de resume lors des exécutions suivantes.
 
@@ -188,7 +188,7 @@ Enfin, l'option `-t` permet de créer un rapport de provenance personnalisé de 
 </div>
 ```
 
-!!! exercice
+!!! exercise
 
     Sauvegardez l'extrait ci-dessus dans un fichier nommé `template.html`. Lancez ensuite cette commande (en utilisant l'identifiant correct pour votre exécution, par exemple `tiny_fermat`) :
 
@@ -202,7 +202,7 @@ Enfin, l'option `-t` permet de créer un rapport de provenance personnalisé de 
 
 La possibilité de reprendre les workflows est une fonctionnalité clé de Nextflow, mais elle ne fonctionne pas toujours comme vous l'attendez. Dans cette section, nous allons passer en revue quelques raisons courantes pour lesquelles Nextflow peut ignorer vos résultats mis en cache.
 
-!!! conseil
+!!! tip
 
     Pour en savoir plus sur le mécanisme de reprise et sur la manière de résoudre les problèmes, veuillez consulter les trois articles de blog suivants :
 
@@ -322,6 +322,6 @@ bam
 
 Si les méta-cartes ne sont pas possibles, une alternative est d'utiliser la directive de processus [`fair`](https://nextflow.io/docs/edge/process.html#fair). Lorsque cette directive est spécifiée, Nextflow garantira que l'ordre des sorties correspondra à l'ordre des entrées.
 
-!!! avertissement
+!!! warning
 
      En fonction de votre situation, l'utilisation de la directive `fair` peut entraîner une diminution des performances.

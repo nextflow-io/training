@@ -148,7 +148,7 @@ L'utilisation de l'opérateur `.flatten()` ici permet de diviser les deux fichie
 
 Copiez maintenant l'exemple ci-dessus dans votre éditeur de texte favori et enregistrez-le dans un fichier nommé `hello.nf`.
 
-!!! avertissement
+!!! warning
 
     Pour le tutoriel Gitpod, assurez-vous d'être dans le dossier appelé `nf-training`
 
@@ -183,7 +183,7 @@ La sortie standard affiche (ligne par ligne) :
 
     Les nombres hexadécimaux, comme `c8/c36893`, identifient l'exécution unique du processus, que nous appelons une tâche. Ces nombres sont également le préfixe des répertoires où chaque tâche est exécutée. Vous pouvez inspecter les fichiers produits en allant dans le répertoire `$PWD/work` et en utilisant ces numéros pour trouver le chemin d'exécution spécifique à la tâche.
 
-!!! conseil
+!!! tip
 
     Le second processus s'exécute deux fois, dans deux répertoires de travail différents pour chaque fichier d'entrée. La sortie du journal [ANSI](https://en.wikipedia.org/wiki/ANSI_escape_code) de Nextflow se rafraîchit dynamiquement au fur et à mesure que le workflow s'exécute ; dans l'exemple précédent, le répertoire de travail `[1a/3c54ed]` est le second des deux répertoires qui ont été traités (en écrasant le journal avec le premier). Pour imprimer tous les chemins pertinents à l'écran, désactivez la sortie du journal ANSI en utilisant l'option `-ansi-log` (par exemple, `nextflow run hello.nf -ansi-log false`).
 
