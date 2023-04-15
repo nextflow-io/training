@@ -11,7 +11,7 @@ Lorsqu'une exécution de processus se termine avec un statut de sortie non nul, 
 
 !!! info ""
 
-    Cliquez sur les icônes :material-plus-circle : dans le code pour obtenir des explications.
+    Cliquez sur les icônes :material-plus-circle: dans le code pour obtenir des explications.
 
 ```bash
 ERROR ~ Error executing process > 'INDEX'

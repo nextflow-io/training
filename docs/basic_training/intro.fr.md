@@ -76,7 +76,7 @@ A FAIRE: soit:
 
 !!! info
 
-    Cliquez sur les icônes :material-plus-circle : dans le code pour obtenir des explications.
+    Cliquez sur les icônes :material-plus-circle: dans le code pour obtenir des explications.
 
 ```groovy title="nf-training/hello.nf" linenums="1"
 #!/usr/bin/env nextflow
