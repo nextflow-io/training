@@ -198,7 +198,7 @@ Enfin, l'option `-t` permet de créer un rapport de provenance personnalisé de 
 
     Enfin, ouvrez le fichier `prov.html` avec un navigateur.
 
-## reprise du dépannage
+## Dépanner la reprise
 
 La possibilité de reprendre les workflows est une fonctionnalité clé de Nextflow, mais elle ne fonctionne pas toujours comme vous l'attendez. Dans cette section, nous allons passer en revue quelques raisons courantes pour lesquelles Nextflow peut ignorer vos résultats mis en cache.
 
