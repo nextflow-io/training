@@ -734,14 +734,14 @@ reads_ch = Channel.fromFilePairs('data/ggal/*_{1,2}.fq')
 
 process FOO {
     input:
-    tuple val(sample_id), path(sample_id)
+    tuple val(sample_id), path(sample_id_paths)
 
     output:
-    tuple val(sample_id), path('sample.bam')
+    tuple val(sample_id), path("${sample_id}.bam")
 
     script:
     """
-    echo your_command_here --reads $sample_id > sample.bam
+    echo your_command_here --reads $sample_id_paths > ${sample_id}.bam
     """
 }
 
