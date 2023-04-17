@@ -737,11 +737,11 @@ process FOO {
     tuple val(id_amostra), path(arquivos_amostra)
 
     output:
-    tuple val(id_amostra), path('amostra.bam')
+    tuple val(id_amostra), path("${id_amostra}.bam")
 
     script:
     """
-    echo seu_comando_aqui --leituras $id_amostra > amostra.bam
+    echo seu_comando_aqui --leituras $arquivos_amostra > ${id_amostra}.bam
     """
 }
 
