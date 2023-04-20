@@ -98,6 +98,7 @@ $ NXF_VER=22.10.4 nextflow run example2.nf -dsl1
 ```
 
 Output:
+
 ```console
 DataflowQueue(queue=[DataflowVariable(value=1), DataflowVariable(value=groovyx.gpars.dataflow.operator.PoisonPill@ed2f2f6)])
 ```
@@ -114,6 +115,7 @@ $ NXF_VER=22.10.4 nextflow run example3.nf -dsl1
 ```
 
 Output:
+
 ```console
 DataflowVariable(value=1)
 ```
