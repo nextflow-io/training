@@ -162,11 +162,11 @@ Os últimos lançamentos podem ser vistos no GitHub [aqui](https://github.com/ne
 Se você deseja usar uma versão específica do Nextflow, pode definir a variável `NXF_VER` conforme mostrado abaixo:
 
 ```bash
-export NXF_VER=22.04.5
+export NXF_VER=23.04.1
 ```
 
 !!! Note
 
-    Este treinamento requer `NXF_VER=22.04.0`, ou posterior. Esta versão usará a DSL2 como padrão.
+    Este treinamento requer `NXF_VER=23.04.1`, ou posterior. Esta versão usará a DSL2 como padrão.
 
 Execute `nextflow -version` novamente para confirmar que a alteração entrou em vigor.
