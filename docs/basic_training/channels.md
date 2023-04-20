@@ -85,17 +85,21 @@ When you run the script, it prints only 2, as you can see below:
 2
 ```
 
-To understand why, we can inspect the queue channel and running Nextflow with DSL1 gives us a more explicit comprehension of what is behind the curtains.
+To understand why, we can inspect the queue channel by running Nextflow with DSL1 which gives us a more explicit comprehension of what is behind the curtains.
+Save the script below as example2.nf.
 
-```groovy linenums="1"
+```groovy linenums="1" title="example2.nf"
 ch1 = Channel.of(1)
 println ch1
 ```
 
 ```console
-$ nextflow run example.nf -dsl1
-...
-DataflowQueue(queue=[DataflowVariable(value=1), DataflowVariable(value=groovyx.gpars.dataflow.operator.PoisonPill@34be065a)])
+$ NXF_VER=22.10.4 nextflow run example2.nf -dsl1
+```
+
+Output:
+```console
+DataflowQueue(queue=[DataflowVariable(value=1), DataflowVariable(value=groovyx.gpars.dataflow.operator.PoisonPill@ed2f2f6)])
 ```
 
 We have the value 1 as the single element of our queue channel and a poison pill, which will tell the process that there’s nothing left to be consumed. That’s why we only have one output for the example above, which is 2. Let’s inspect a value channel now.
