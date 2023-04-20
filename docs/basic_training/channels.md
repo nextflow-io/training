@@ -104,14 +104,17 @@ DataflowQueue(queue=[DataflowVariable(value=1), DataflowVariable(value=groovyx.g
 
 We have the value 1 as the single element of our queue channel and a poison pill, which will tell the process that there’s nothing left to be consumed. That’s why we only have one output for the example above, which is 2. Let’s inspect a value channel now.
 
-```groovy linenums="1"
+```groovy linenums="1" title="example3.nf"
 ch1 = Channel.value(1)
 println ch1
 ```
 
 ```console
-$ nextflow run example.nf -dsl1
-...
+$ NXF_VER=22.10.4 nextflow run example3.nf -dsl1
+```
+
+Output:
+```console
 DataflowVariable(value=1)
 ```
 
