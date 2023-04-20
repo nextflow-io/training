@@ -85,7 +85,7 @@ Ao rodar o script, ele imprime apenas 2, como você pode ver abaixo:
 2
 ```
 
-Para entender o motivo, podemos inspecionar o canal de fila executando o Nextflow com DSL1, o que nos dá uma compreensão mais explícita do que está por trás das cortinas. Salve o script abaixo como exemplo2.nf.
+Para entender o motivo, podemos inspecionar o canal de fila executando o Nextflow com DSL1, o que nos dá uma compreensão mais explícita do que está por trás das cortinas. Salve o script abaixo como `exemplo2.nf`.
 
 ```groovy linenums="1" title="exemplo2.nf"
 canal1 = Channel.of(1)
@@ -103,14 +103,17 @@ DataflowQueue(queue=[DataflowVariable(value=1), DataflowVariable(value=groovyx.g
 
 Temos o valor 1 como único elemento do nosso canal de fila e uma pílula de veneno, que vai dizer ao processo que não há mais nada para ser consumido. É por isso que temos apenas uma saída para o exemplo acima, que é 2. Vamos inspecionar um canal de valor agora.
 
-```groovy linenums="1"
+```groovy linenums="1" title="exemplo3.nf"
 canal1 = Channel.value(1)
 println canal1
 ```
 
 ```console
-$ nextflow run exemplo.nf -dsl1
-...
+$ NXF_VER=22.10.4 nextflow run exemplo3.nf -dsl1
+```
+
+Output:
+```console
 DataflowVariable(value=1)
 ```
 
