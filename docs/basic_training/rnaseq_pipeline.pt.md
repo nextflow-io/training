@@ -77,9 +77,9 @@ nextflow run script1.nf --reads '/workspace/gitpod/nf-training/data/ggal/lung_{1
         log.info """\
             R N A S E Q - N F   P I P E L I N E
             ===================================
-            transcriptoma               : ${params.transcriptome_file}
-            arquivos de leituras        : ${params.reads}
-            diretório de saíde          : ${params.outdir}
+            transcriptome: ${params.transcriptome_file}
+            reads        : ${params.reads}
+            outdir       : ${params.outdir}
             """
             .stripIndent(true)
         ```
