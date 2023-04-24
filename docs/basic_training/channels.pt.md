@@ -8,9 +8,7 @@ Canais são uma estrutura de dados chave do Nextflow que permite a implementaç�
 
 Eles são usados para conectar logicamente tarefas entre si ou para implementar transformações de dados de estilo funcional.
 
-<figure class="excalidraw">
---8<-- "docs/basic_training/img/channel-files.excalidraw.pt.svg"
-</figure>
+<figure class="excalidraw"> --8 </figure>
 
 ## Tipos de canais
 
@@ -18,11 +16,11 @@ O Nextflow distingue dois tipos diferentes de canais: canais de **fila** e canai
 
 ### Canal de fila
 
-Um canal de _fila_ é uma fila assíncrona unidirecional FIFO (First-in-First-out, o primeiro a entrar, é o primeiro a sair) que conecta dois processos ou operadores.
+Um canal de *fila* é uma fila assíncrona unidirecional FIFO (First-in-First-out, o primeiro a entrar, é o primeiro a sair) que conecta dois processos ou operadores.
 
--   _assíncrono_ significa que as operações ocorrem sem bloqueio.
--   _unidirecional_ significa que os dados fluem do gerador para o consumidor.
--   _FIFO_ significa que os dados são entregues na mesma ordem em que são produzidos. Primeiro a entrar, primeiro a sair.
+- *assíncrono* significa que as operações ocorrem sem bloqueio.
+- *unidirecional* significa que os dados fluem do gerador para o consumidor.
+- *FIFO* significa que os dados são entregues na mesma ordem em que são produzidos. Primeiro a entrar, primeiro a sair.
 
 Um canal de fila é criado implicitamente por definições de saída de um processo ou usando fábricas de canal, como o [Channel.of](https://www.nextflow.io/docs/latest/channel.html#of) ou [Channel.fromPath](https://www.nextflow.io/docs/latest/channel.html#frompath).
 
@@ -30,9 +28,11 @@ Tente os seguintes trechos de código:
 
 !!! info ""
 
-    Clique no ícone :material-plus-circle: no código para ver explicações.
+```
+Clique no ícone :material-plus-circle: no código para ver explicações.
+```
 
-```groovy linenums="1"
+```groovy
 canal = Channel.of(1, 2, 3)
 println(canal) // (1)!
 canal.view() // (2)!
@@ -43,12 +43,14 @@ canal.view() // (2)!
 
 !!! exercise
 
-    Tente executar este trecho de código. Você pode fazer isso criando um novo arquivo `.nf` ou editando um arquivo `.nf` já existente.
+```
+Tente executar este trecho de código. Você pode fazer isso criando um novo arquivo `.nf` ou editando um arquivo `.nf` já existente.
 
-    ```groovy linenums="1"
-    canal = Channel.of(1, 2, 3)
-    canal.view()
-    ```
+```groovy linenums="1"
+canal = Channel.of(1, 2, 3)
+canal.view()
+```
+```
 
 ### Canais de valor
 
@@ -56,7 +58,7 @@ Um canal de **valor** (também conhecido como canal singleton), por definição,
 
 Para entender melhor a diferença entre canais de valor e de fila, salve o trecho abaixo como `exemplo.nf`.
 
-```groovy linenums="1" title="exemplo.nf" linenums="1"
+```groovy
 canal1 = Channel.of(1, 2, 3)
 canal2 = Channel.of(1)
 
@@ -87,7 +89,7 @@ Ao rodar o script, ele imprime apenas 2, como você pode ver abaixo:
 
 Para entender o motivo, podemos inspecionar o canal de fila executando o Nextflow com DSL1, o que nos dá uma compreensão mais explícita do que está por trás das cortinas.
 
-```groovy linenums="1"
+```groovy
 canal1 = Channel.of(1)
 println canal1
 ```
@@ -100,7 +102,7 @@ DataflowQueue(queue=[DataflowVariable(value=1), DataflowVariable(value=groovyx.g
 
 Temos o valor 1 como único elemento do nosso canal de fila e uma pílula de veneno, que vai dizer ao processo que não há mais nada para ser consumido. É por isso que temos apenas uma saída para o exemplo acima, que é 2. Vamos inspecionar um canal de valor agora.
 
-```groovy linenums="1"
+```groovy
 canal1 = Channel.value(1)
 println canal1
 ```
@@ -113,7 +115,7 @@ DataflowVariable(value=1)
 
 Não há pílula de veneno, e é por isso que obtemos uma saída diferente com o código abaixo, onde `canal2` é transformado em um canal de valor por meio do operador `first`.
 
-```groovy linenums="1"
+```groovy
 canal1 = Channel.of(1, 2, 3)
 canal2 = Channel.of(1)
 
@@ -136,7 +138,7 @@ workflow {
 }
 ```
 
-```console title="Output"
+```console
 4
 
 3
@@ -152,15 +154,15 @@ Estes são comandos do Nextflow para criar canais que possuem entradas e funçõ
 
 ### `value()`
 
-A fábrica de canal `value` é utilizada para criar um canal de _valor_. Um argumento opcional não `nulo` pode ser especificado para vincular o canal a um valor específico. Por exemplo:
+A fábrica de canal `value` é utilizada para criar um canal de _valor_. Um argumento opcional não nulo pode ser especificado para vincular o canal a um valor específico. Por exemplo:
 
-```groovy linenums="1"
+```groovy
 canal1 = Channel.value() // (1)!
 canal2 = Channel.value('Olá, você!') // (2)!
 canal3 = Channel.value([1, 2, 3, 4, 5]) // (3)!
 ```
 
-1. Cria um canal de valor _vazio_
+1. Cria um canal de valor *vazio*
 2. Cria um canal de valor e vincula uma string a ele
 3. Cria um canal de valor e vincula a ele um objeto de lista que será emitido como uma única emissão
 
@@ -168,7 +170,7 @@ canal3 = Channel.value([1, 2, 3, 4, 5]) // (3)!
 
 A fábrica `Channel.of` permite a criação de um canal de fila com os valores especificados como argumentos.
 
-```groovy linenums="1"
+```groovy
 canal = Channel.of(1, 3, 5, 7)
 canal.view { "numero: $it" }
 ```
@@ -184,7 +186,7 @@ numero: 7
 
 A fábrica de canal `Channel.of` funciona de maneira semelhante ao `Channel.from` (que foi [descontinuado](https://www.nextflow.io/docs/latest/channel.html#of)), corrigindo alguns comportamentos inconsistentes do último e fornecendo um melhor manuseio quando um intervalo de valores é especificado. Por exemplo, o seguinte funciona com um intervalo de 1 a 23:
 
-```groovy linenums="1"
+```groovy
 Channel
     .of(1..23, 'X', 'Y')
     .view()
@@ -194,7 +196,7 @@ Channel
 
 A fábrica de canal `Channel.fromList` cria um canal emitindo os elementos fornecidos por um objeto de lista especificado como um argumento:
 
-```groovy linenums="1"
+```groovy
 list = ['olá', 'mundo']
 
 Channel
@@ -206,7 +208,7 @@ Channel
 
 A fábrica de canal `fromPath` cria um canal de fila emitindo um ou mais arquivos correspondentes ao padrão glob especificado.
 
-```groovy linenums="1"
+```groovy
 Channel.fromPath('./data/meta/*.csv')
 ```
 
@@ -214,37 +216,41 @@ Este exemplo cria um canal e emite tantos itens quanto arquivos com extensão `c
 
 !!! tip
 
-    Dois asteriscos, ou seja, `**`, funcionam como `*`, mas cruzam os limites do diretório. Essa sintaxe geralmente é usada para percorrer caminhos completos. Os colchetes especificam uma coleção de subpadrões.
+```
+Dois asteriscos, ou seja, `**`, funcionam como `*`, mas cruzam os limites do diretório. Essa sintaxe geralmente é usada para percorrer caminhos completos. Os colchetes especificam uma coleção de subpadrões.
+```
 
-| Nome          | Descrição                                                                                                                                                    |
-| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| glob          | Quando `true` interpreta caracteres `*`, `?`, `[]` e `{}` como glob wildcards, caso contrário, os trata como caracteres normais (padrão: `true`)             |
-| type          | Tipo de caminho retornado, ou `file`, `dir` ou `any` (padrão: `file`)                                                                                        |
-| hidden        | Quando `true` inclui arquivos ocultos nos caminhos resultantes (padrão: `false`)                                                                             |
-| maxDepth      | Número máximo de níveis de diretório a serem visitados (padrão: `no limit`)                                                                                  |
-| followLinks   | Quando `true` links simbólicos são seguidos durante a travessia da árvore de diretórios, caso contrário, eles são gerenciados como arquivos (padrão: `true`) |
-| relative      | Quando `true` os caminhos de retorno são relativos ao diretório de topo mais comum (padrão: `false`)                                                         |
-| checkIfExists | Quando `true` lança uma exceção quando o caminho especificado não existe no sistema de arquivos (padrão: `false`)                                            |
+Nome | Descrição
+--- | ---
+glob | Quando `true` interpreta caracteres `*`, `?`, `[]` e `{}` como glob wildcards, caso contrário, os trata como caracteres normais (padrão: `true`)
+type | Tipo de caminho retornado, ou `file`, `dir` ou `any` (padrão: `file`)
+hidden | Quando `true` inclui arquivos ocultos nos caminhos resultantes (padrão: `false`)
+maxDepth | Número máximo de níveis de diretório a serem visitados (padrão: `no limit`)
+followLinks | Quando `true` links simbólicos são seguidos durante a travessia da árvore de diretórios, caso contrário, eles são gerenciados como arquivos (padrão: `true`)
+relative | Quando `true` os caminhos de retorno são relativos ao diretório de topo mais comum (padrão: `false`)
+checkIfExists | Quando `true` lança uma exceção quando o caminho especificado não existe no sistema de arquivos (padrão: `false`)
 
 Saiba mais sobre a sintaxe dos padrões glob [neste link](https://docs.oracle.com/javase/tutorial/essential/io/fileOps.html#glob).
 
 !!! exercise
 
-    Use a fábrica de canal `Channel.fromPath` para criar um canal emitindo todos os arquivos com o sufixo `.fq` no diretório `data/ggal/` e qualquer subdiretório, além dos arquivos ocultos. Em seguida, imprima os nomes dos arquivos.
+```
+Use a fábrica de canal `Channel.fromPath` para criar um canal emitindo todos os arquivos com o sufixo `.fq` no diretório `data/ggal/` e qualquer subdiretório, além dos arquivos ocultos. Em seguida, imprima os nomes dos arquivos.
 
-    ??? solution
+??? solution
 
-        ```groovy linenums="1"
-        Channel
-            .fromPath('./data/ggal/**.fq', hidden: true)
-            .view()
-        ```
+    ```groovy linenums="1"
+    Channel
+        .fromPath('./data/ggal/**.fq', hidden: true)
+        .view()
+    ```
+```
 
 ### `fromFilePairs()`
 
 A fábrica de canal `fromFilePairs` cria um canal emitindo os pares de arquivos correspondentes a um padrão glob fornecido pelo usuário. Os arquivos correspondentes são emitidos como tuplas, nas quais o primeiro elemento é a chave de agrupamento do par correspondente e o segundo elemento é a lista de arquivos (classificados em ordem lexicográfica).
 
-```groovy linenums="1"
+```groovy
 Channel
     .fromFilePairs('./data/ggal/*_{1,2}.fq')
     .view()
@@ -260,33 +266,38 @@ Ele produzirá uma saída semelhante à seguinte:
 
 !!! warning
 
-    O padrão glob _precisa_ conter pelo menos um caractere curinga de estrela (`*`).
+```
+O padrão glob _precisa_ conter pelo menos um caractere curinga de estrela (`*`).
+```
 
-| Nome          | Descrição                                                                                                                                                    |
-| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| type          | Tipo de caminhos retornados, ou `file`, `dir` ou `any` (padrão: `file`)                                                                                      |
-| hidden        | Quando `true` inclui arquivos ocultos nos caminhos resultantes (padrão: `false`)                                                                             |
-| maxDepth      | Número máximo de níveis de diretório a serem visitados (padrão: `no limit`)                                                                                  |
-| followLinks   | Quando `true` links simbólicos são seguidos durante a travessia da árvore de diretórios, caso contrário, eles são gerenciados como arquivos (padrão: `true`) |
-| size          | Define o número de arquivos que cada item emitido deve conter (padrão: `2`). Use `-1` para qualquer número                                                   |
-| flat          | Quando `true` os arquivos correspondentes são produzidos como únicos elementos nas tuplas emitidas (padrão: `false`)                                         |
-| checkIfExists | Quando `true` lança uma exceção quando o caminho especificado não existe no sistema de arquivos (padrão: `false`)                                            |
+Nome | Descrição
+--- | ---
+type | Tipo de caminhos retornados, ou `file`, `dir` ou `any` (padrão: `file`)
+hidden | Quando `true` inclui arquivos ocultos nos caminhos resultantes (padrão: `false`)
+maxDepth | Número máximo de níveis de diretório a serem visitados (padrão: `no limit`)
+followLinks | Quando `true` links simbólicos são seguidos durante a travessia da árvore de diretórios, caso contrário, eles são gerenciados como arquivos (padrão: `true`)
+size | Define o número de arquivos que cada item emitido deve conter (padrão: `2`). Use `-1` para qualquer número
+flat | Quando `true` os arquivos correspondentes são produzidos como únicos elementos nas tuplas emitidas (padrão: `false`)
+checkIfExists | Quando `true` lança uma exceção quando o caminho especificado não existe no sistema de arquivos (padrão: `false`)
 
 !!! exercise
 
-    Use a fábrica de canal `fromFilePairs` para criar um canal emitindo todos os pares de leituras em fastq no diretório `data/ggal/` e imprima-os. Em seguida, use a opção `flat: true` e compare a saída com a execução anterior.
+```
+Use a fábrica de canal `fromFilePairs` para criar um canal emitindo todos os pares de leituras em fastq no diretório `data/ggal/` e imprima-os. Em seguida, use a opção `flat: true` e compare a saída com a execução anterior.
 
-    ??? solution
+??? solution
 
-        Use o seguinte, com ou sem `flat: true`:
+Use the following, with or without `flat: true`:
 
-        ```groovy linenums="1"
-        Channel
-            .fromFilePairs('./data/ggal/*_{1,2}.fq', flat: true)
-            .view()
-        ```
+    ```groovy linenums="1"
+    Channel
+        .fromFilePairs('./data/ggal/*_{1,2}.fq', flat: true)
+        .view()
+    ```
 
-        Em seguida, verifique os colchetes ao redor dos nomes dos arquivos, para ver a diferença com `flat`.
+Em seguida, verifique os colchetes ao redor dos nomes dos arquivos, para ver a diferença com `flat`.
+
+```
 
 ### `fromSRA()`
 
@@ -296,21 +307,25 @@ A consulta pode ser ID(s) de projeto(s) ou número(s) de acesso suportado(s) pel
 
 !!! info
 
-    Esta função agora requer uma chave de API que você só pode obter fazendo login em sua conta NCBI.
+```
+Esta função agora requer uma chave de API que você só pode obter fazendo login em sua conta NCBI.
+```
 
 ??? example "Instruções para login do NCBI e aquisição de chave"
 
-    1. Vá para: <https://www.ncbi.nlm.nih.gov/>
-    2. Clique no botão "Login" no canto superior direito para entrar no NCBI. Siga suas instruções.
-    3. Uma vez em sua conta, clique no botão no canto superior direito, geralmente seu ID.
-    4. Vá para Account settings
-    5. Role para baixo até a seção "API Key Management".
-    6. Clique em "Create an API Key".
-    7. A página será atualizada e a chave será exibida onde estava o botão. Copie sua chave.
+```
+1. Vá para: <https://www.ncbi.nlm.nih.gov/>
+2. Clique no botão "Login" no canto superior direito para entrar no NCBI. Siga suas instruções.
+3. Uma vez em sua conta, clique no botão no canto superior direito, geralmente seu ID.
+4. Vá para Account settings
+5. Role para baixo até a seção "API Key Management".
+6. Clique em "Create an API Key".
+7. A página será atualizada e a chave será exibida onde estava o botão. Copie sua chave.
+```
 
 Por exemplo, o trecho a seguir imprimirá o conteúdo de um ID de projeto NCBI:
 
-```groovy linenums="1"
+```groovy
 params.ncbi_api_key = '<Sua chave da API aqui>'
 
 Channel
@@ -320,7 +335,9 @@ Channel
 
 !!! info ""
 
-    :material-lightbulb: Substitua `<Sua chave de API aqui>` com sua chave de API.
+```
+:material-lightbulb: Substitua `<Sua chave de API aqui>` com sua chave de API.
+```
 
 Isso deve imprimir:
 
@@ -334,7 +351,7 @@ Isso deve imprimir:
 
 Vários IDs de acesso podem ser especificados usando um objeto lista:
 
-```groovy linenums="1"
+```groovy
 ids = ['ERR908507', 'ERR908506', 'ERR908505']
 Channel
     .fromSRA(ids, apiKey: params.ncbi_api_key)
@@ -349,12 +366,13 @@ Channel
 
 !!! info
 
-    Os pares de leituras são gerenciados implicitamente e são retornados como uma lista de arquivos.
+```
+Os pares de leituras são gerenciados implicitamente e são retornados como uma lista de arquivos.
+```
 
-É fácil usar este canal como uma entrada usando a sintaxe usual do Nextflow. O código abaixo cria um canal contendo
-duas amostras de um estudo SRA público e executa o FASTQC nos arquivos resultantes. Veja:
+É fácil usar este canal como uma entrada usando a sintaxe usual do Nextflow. O código abaixo cria um canal contendo duas amostras de um estudo SRA público e executa o FASTQC nos arquivos resultantes. Veja:
 
-```groovy linenums="1"
+```groovy
 params.ncbi_chave_api = '<Sua chave de API aqui>'
 
 params.accession = ['ERR908507', 'ERR908506']
@@ -385,7 +403,7 @@ Se você deseja executar o fluxo de trabalho acima e não possui o fastqc instal
 
 O operador `splitText` permite dividir strings de várias linhas ou itens de arquivo de texto, emitidos por um canal de origem em blocos contendo n linhas, que serão emitidos pelo canal resultante. Veja:
 
-```groovy linenums="1"
+```groovy
 Channel
     .fromPath('data/meta/random.txt') // (1)!
     .splitText() // (2)!
@@ -398,7 +416,7 @@ Channel
 
 Você pode definir o número de linhas em cada bloco usando o parâmetro `by`, conforme mostrado no exemplo a seguir:
 
-```groovy linenums="1"
+```groovy
 Channel
     .fromPath('data/meta/random.txt')
     .splitText(by: 2)
@@ -410,11 +428,13 @@ Channel
 
 !!! info
 
-    O operador `subscribe` permite a execução de funções definidas pelo usuário cada vez que um novo valor é emitido pelo canal de origem.
+```
+O operador `subscribe` permite a execução de funções definidas pelo usuário cada vez que um novo valor é emitido pelo canal de origem.
+```
 
 Uma clausura opcional pode ser especificada para transformar os blocos de texto produzidos pelo operador. O exemplo a seguir mostra como dividir arquivos de texto em blocos de 10 linhas e transformá-los em letras maiúsculas:
 
-```groovy linenums="1"
+```groovy
 Channel
     .fromPath('data/meta/random.txt')
     .splitText(by: 10) { it.toUpperCase() }
@@ -423,7 +443,7 @@ Channel
 
 Você também pode fazer contagens para cada linha:
 
-```groovy linenums="1"
+```groovy
 contador = 0
 
 Channel
@@ -434,7 +454,7 @@ Channel
 
 Por fim, você também pode usar o operador em arquivos simples (fora do contexto do canal):
 
-```groovy linenums="1"
+```groovy
 def f = file('data/meta/random.txt')
 def linhas = f.splitText()
 def contador = 0
@@ -451,7 +471,7 @@ Em seguida, ele os divide em registros ou os agrupa como uma lista de registros 
 
 No caso mais simples, basta aplicar o operador `splitCsv` a um canal que emite arquivos de texto ou entradas de texto no formato CSV. Por exemplo, para visualizar apenas a primeira e a quarta colunas:
 
-```groovy linenums="1"
+```groovy
 Channel
     .fromPath("data/meta/patients_1.csv")
     .splitCsv()
@@ -461,7 +481,7 @@ Channel
 
 Quando o CSV começa com uma linha de cabeçalho definindo os nomes das colunas, você pode especificar o parâmetro `header: true` que permite referenciar cada valor pelo nome da coluna, conforme mostrado no exemplo a seguir:
 
-```groovy linenums="1"
+```groovy
 Channel
     .fromPath("data/meta/patients_1.csv")
     .splitCsv(header: true)
@@ -471,7 +491,7 @@ Channel
 
 Como alternativa, você pode fornecer nomes de cabeçalho personalizados especificando uma lista de strings no parâmetro de cabeçalho, conforme mostrado abaixo:
 
-```groovy linenums="1"
+```groovy
 Channel
     .fromPath("data/meta/patients_1.csv")
     .splitCsv(header: ['col1', 'col2', 'col3', 'col4', 'col5'])
@@ -481,7 +501,7 @@ Channel
 
 Você também pode processar vários arquivos CSV ao mesmo tempo:
 
-```groovy linenums="1"
+```groovy
 Channel
     .fromPath("data/meta/patients_*.csv") // <-- use um padrão de captura
     .splitCsv(header: true)
@@ -490,11 +510,13 @@ Channel
 
 !!! tip
 
-    Observe que você pode alterar o formato de saída simplesmente adicionando um delimitador diferente.
+```
+Observe que você pode alterar o formato de saída simplesmente adicionando um delimitador diferente.
+```
 
 Por fim, você também pode operar em arquivos CSV fora do contexto do canal:
 
-```groovy linenums="1"
+```groovy
 def f = file('data/meta/patients_1.csv')
 def linhas = f.splitCsv()
 for (List linha : linhas) {
@@ -504,101 +526,103 @@ for (List linha : linhas) {
 
 !!! exercise
 
-    Tente inserir leituras fastq no fluxo de trabalho do RNA-Seq anterior usando `.splitCsv`.
+```
+Tente inserir leituras fastq no fluxo de trabalho do RNA-Seq anterior usando `.splitCsv`.
 
-    ??? solution
+??? solution
 
-        Adicione um arquivo de texto CSV contendo o seguinte, como uma entrada de exemplo com o nome "fastq.csv":
+    Adicione um arquivo de texto CSV contendo o seguinte, como uma entrada de exemplo com o nome "fastq.csv":
 
-        ```csv
-        gut,/workspace/gitpod/nf-training/data/ggal/gut_1.fq,/workspace/gitpod/nf-training/data/ggal/gut_2.fq
-        ```
+    ```csv
+    gut,/workspace/gitpod/nf-training/data/ggal/gut_1.fq,/workspace/gitpod/nf-training/data/ggal/gut_2.fq
+    ```
 
-        Em seguida, substitua o canal de entrada para as leituras em `script7.nf`, alterando as seguintes linhas:
+    Em seguida, substitua o canal de entrada para as leituras em `script7.nf`, alterando as seguintes linhas:
 
-        ```groovy linenums="1"
-        Channel
-            .fromFilePairs(params.reads, checkIfExists: true)
-            .set { read_pairs_ch }
-        ```
+    ```groovy linenums="1"
+    Channel
+        .fromFilePairs(params.reads, checkIfExists: true)
+        .set { read_pairs_ch }
+    ```
 
-        Para uma entrada de fábrica de canal splitCsv:
+    Para uma entrada de fábrica de canal splitCsv:
 
-        ```groovy linenums="1" hl_lines="2 3 4"
-        Channel
-            .fromPath("fastq.csv")
-            .splitCsv()
-            .view { linha -> "${linha[0]},${linha[1]},${linha[2]}" }
-            .set { read_pairs_ch }
-        ```
+    ```groovy linenums="1" hl_lines="2 3 4"
+    Channel
+        .fromPath("fastq.csv")
+        .splitCsv()
+        .view { linha -> "${linha[0]},${linha[1]},${linha[2]}" }
+        .set { read_pairs_ch }
+    ```
 
-        Por fim, altere a cardinalidade dos processos que usam os dados de entrada. Por exemplo, para o processo de quantificação, mude de:
+    Por fim, altere a cardinalidade dos processos que usam os dados de entrada. Por exemplo, para o processo de quantificação, mude de:
 
-        ```groovy linenums="1"
-        process QUANTIFICATION {
-            tag "$sample_id"
+    ```groovy linenums="1"
+    process QUANTIFICATION {
+        tag "$sample_id"
 
-            input:
-            path salmon_index
-            tuple val(sample_id), path(reads)
+        input:
+        path salmon_index
+        tuple val(sample_id), path(reads)
 
-            output:
-            path sample_id, emit: quant_ch
+        output:
+        path sample_id, emit: quant_ch
 
-            script:
-            """
-            salmon quant --threads $task.cpus --libType=U -i $salmon_index -1 ${reads[0]} -2 ${reads[1]} -o $sample_id
-            """
-        }
-        ```
+        script:
+        """
+        salmon quant --threads $task.cpus --libType=U -i $salmon_index -1 ${reads[0]} -2 ${reads[1]} -o $sample_id
+        """
+    }
+    ```
 
-        Para:
+    Para:
 
-        ```groovy linenums="1" hl_lines="6 13"
-        process QUANTIFICATION {
-            tag "$sample_id"
+    ```groovy linenums="1" hl_lines="6 13"
+    process QUANTIFICATION {
+        tag "$sample_id"
 
-            input:
-            path salmon_index
-            tuple val(sample_id), path(reads1), path(reads2)
+        input:
+        path salmon_index
+        tuple val(sample_id), path(reads1), path(reads2)
 
-            output:
-            path sample_id, emit: quant_ch
+        output:
+        path sample_id, emit: quant_ch
 
-            script:
-            """
-            salmon quant --threads $task.cpus --libType=U -i $salmon_index -1 ${reads1} -2 ${reads2} -o $sample_id
-            """
-        }
-        ```
+        script:
+        """
+        salmon quant --threads $task.cpus --libType=U -i $salmon_index -1 ${reads1} -2 ${reads2} -o $sample_id
+        """
+    }
+    ```
 
-        Repita o procedimento acima para a etapa fastqc.
+    Repita o procedimento acima para a etapa fastqc.
 
-        ```groovy linenums="1" hl_lines="5 13"
-        process FASTQC {
-            tag "FASTQC on $sample_id"
+    ```groovy linenums="1" hl_lines="5 13"
+    process FASTQC {
+        tag "FASTQC on $sample_id"
 
-            input:
-            tuple val(sample_id), path(reads1), path(reads2)
+        input:
+        tuple val(sample_id), path(reads1), path(reads2)
 
-            output:
-            path "fastqc_${sample_id}_logs"
+        output:
+        path "fastqc_${sample_id}_logs"
 
-            script:
-            """
-            mkdir fastqc_${sample_id}_logs
-            fastqc -o fastqc_${sample_id}_logs -f fastq -q ${reads1} ${reads2}
-            """
-        }
-        ```
+        script:
+        """
+        mkdir fastqc_${sample_id}_logs
+        fastqc -o fastqc_${sample_id}_logs -f fastq -q ${reads1} ${reads2}
+        """
+    }
+    ```
 
-        Agora o fluxo de trabalho deve ser executado a partir de um arquivo CSV.
+    Agora o fluxo de trabalho deve ser executado a partir de um arquivo CSV.
+```
 
 ### Valores separados por tabulação (.tsv)
 
 A análise de arquivos TSV funciona de maneira semelhante, basta adicionar a opção `sep: '\t'` no contexto do `splitCsv`:
 
-```groovy linenums="1"
+```groovy
 Channel
     .fromPath("data/meta/regions.tsv", checkIfExists: true)
     // Use a opção `sep` para analisar arquivos com tabulação como separador
@@ -608,19 +632,21 @@ Channel
 
 !!! exercise
 
-    Tente usar a técnica de separação por tabulação no arquivo `data/meta/regions.tsv`, mas imprima apenas a primeira coluna e remova o cabeçalho.
+```
+Tente usar a técnica de separação por tabulação no arquivo `data/meta/regions.tsv`, mas imprima apenas a primeira coluna e remova o cabeçalho.
 
 
-    ??? solution
+??? solution
 
-        ```groovy linenums="1"
-        Channel
-            .fromPath("data/meta/regions.tsv", checkIfExists: true)
-            // Use a opção `sep` para analisar arquivos com tabulação como separador
-            .splitCsv(sep: '\t', header: true)
-            // linha é um objeto de lista
-            .view { linha -> "${linha.patient_id}" }
-        ```
+    ```groovy linenums="1"
+    Channel
+        .fromPath("data/meta/regions.tsv", checkIfExists: true)
+        // Use a opção `sep` para analisar arquivos com tabulação como separador
+        .splitCsv(sep: '\t', header: true)
+        // linha é um objeto de lista
+        .view { linha -> "${linha.patient_id}" }
+    ```
+```
 
 ## Formatos de arquivo mais complexos
 
@@ -628,7 +654,7 @@ Channel
 
 Também podemos analisar facilmente o formato de arquivo JSON usando o seguinte esquema do Groovy:
 
-```groovy linenums="1"
+```groovy
 import groovy.json.JsonSlurper
 
 def f = file('data/meta/regions.json')
@@ -642,13 +668,15 @@ for (def entrada : registros) {
 
 !!! warning
 
-    Ao usar uma versão JSON mais antiga, pode ser necessário substituir `parse(f)` por `parseText(f.text)`
+```
+Ao usar uma versão JSON mais antiga, pode ser necessário substituir `parse(f)` por `parseText(f.text)`
+```
 
 ### YAML
 
 Isso também pode ser usado como uma forma de analisar arquivos YAML:
 
-```groovy linenums="1"
+```groovy
 import org.yaml.snakeyaml.Yaml
 
 def f = file('data/meta/regions.yml')
@@ -666,7 +694,7 @@ A melhor maneira de armazenar scripts com analisadores é mantê-los em um arqui
 
 Veja o seguinte script Nextflow:
 
-```groovy linenums="1"
+```groovy
 include { parseJsonFile } from './modules/parsers.nf'
 
 process FOO {
@@ -697,7 +725,7 @@ Para que este script funcione, um arquivo de módulo chamado `parsers.nf` precis
 
 O arquivo `parsers.nf` deve conter a função `parseJsonFile`. Por exemplo:
 
-```groovy linenums="1"
+```groovy
 import groovy.json.JsonSlurper
 
 def parseJsonFile(json_file) {
@@ -711,4 +739,6 @@ O Nextflow usará isso como uma função personalizada dentro do escopo `workflo
 
 !!! tip
 
-    Você aprenderá mais sobre arquivos de módulo posteriormente na [seção de Modularização](../modules/) desse tutorial.
+```
+Você aprenderá mais sobre arquivos de módulo posteriormente na [seção de Modularização](../modules/) desse tutorial.
+```
