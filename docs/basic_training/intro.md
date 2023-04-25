@@ -166,7 +166,7 @@ Launching `hello.nf` [cheeky_keller] DSL2 - revision: 197a0e289a
 executor >  local (3)
 [31/52c31e] process > SPLITLETTERS (1)   [100%] 1 of 1 ✔
 [37/b9332f] process > CONVERTTOUPPER (2) [100%] 2 of 2 ✔
-HELLO 
+HELLO
 WORLD!
 ```
 
