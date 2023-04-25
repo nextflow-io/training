@@ -161,11 +161,11 @@ nextflow run hello.nf
 Le résultat ressemblera au texte ci-dessous :
 
 ```linenums="1"
-N E X T F L O W  ~  version 22.04.5
-Launching `hello.nf` [gigantic_poitras] DSL2 - revision: 197a0e289a
+N E X T F L O W  ~  version 23.04.1
+Launching `hello.nf` [cheeky_keller] DSL2 - revision: 197a0e289a
 executor >  local (3)
-[c8/c36893] process > SPLITLETTERS (1)   [100%] 1 of 1 ✔
-[1a/3c54ed] process > CONVERTTOUPPER (2) [100%] 2 of 2 ✔
+[31/52c31e] process > SPLITLETTERS (1)   [100%] 1 of 1 ✔
+[37/b9332f] process > CONVERTTOUPPER (2) [100%] 2 of 2 ✔
 HELLO
 WORLD!
 ```
@@ -181,11 +181,11 @@ La sortie standard affiche (ligne par ligne) :
 
 !!! info
 
-    Les nombres hexadécimaux, comme `c8/c36893`, identifient l'exécution unique du processus, que nous appelons une tâche. Ces nombres sont également le préfixe des répertoires où chaque tâche est exécutée. Vous pouvez inspecter les fichiers produits en allant dans le répertoire `$PWD/work` et en utilisant ces numéros pour trouver le chemin d'exécution spécifique à la tâche.
+    Les nombres hexadécimaux, comme `31/52c31e`, identifient l'exécution unique du processus, que nous appelons une tâche. Ces nombres sont également le préfixe des répertoires où chaque tâche est exécutée. Vous pouvez inspecter les fichiers produits en allant dans le répertoire `$PWD/work` et en utilisant ces numéros pour trouver le chemin d'exécution spécifique à la tâche.
 
 !!! tip
 
-    Le second processus s'exécute deux fois, dans deux répertoires de travail différents pour chaque fichier d'entrée. La sortie du journal [ANSI](https://en.wikipedia.org/wiki/ANSI_escape_code) de Nextflow se rafraîchit dynamiquement au fur et à mesure que le workflow s'exécute ; dans l'exemple précédent, le répertoire de travail `[1a/3c54ed]` est le second des deux répertoires qui ont été traités (en écrasant le journal avec le premier). Pour imprimer tous les chemins pertinents à l'écran, désactivez la sortie du journal ANSI en utilisant l'option `-ansi-log` (par exemple, `nextflow run hello.nf -ansi-log false`).
+    Le second processus s'exécute deux fois, dans deux répertoires de travail différents pour chaque fichier d'entrée. La sortie du journal [ANSI](https://en.wikipedia.org/wiki/ANSI_escape_code) de Nextflow se rafraîchit dynamiquement au fur et à mesure que le workflow s'exécute ; dans l'exemple précédent, le répertoire de travail `[37/b9332f]` est le second des deux répertoires qui ont été traités (en écrasant le journal avec le premier). Pour imprimer tous les chemins pertinents à l'écran, désactivez la sortie du journal ANSI en utilisant l'option `-ansi-log` (par exemple, `nextflow run hello.nf -ansi-log false`).
 
 Il faut noter que le processus `CONVERTTOUPPER` est exécuté en parallèle, donc il n'y a aucune garantie que l'instance qui traite le premier split (le chunk _Hello ') sera exécutée avant celle qui traite le second split (le chunk 'world!_).
 
@@ -224,11 +224,11 @@ Enregistrez ensuite le fichier sous le même nom et exécutez-le en ajoutant l'o
 ```console
 $ nextflow run hello.nf -resume
 
-N E X T F L O W  ~  version 22.04.5
-Launching `hello.nf` [amazing_becquerel] DSL2 - revision: 525206806b
+N E X T F L O W  ~  version 23.04.1
+Launching `hello.nf` [zen_colden] DSL2 - revision: 0676c711e8
 executor >  local (2)
-[c8/c36893] process > SPLITLETTERS (1)   [100%] 1 of 1, cached: 1 ✔
-[77/cf83b6] process > CONVERTTOUPPER (1) [100%] 2 of 2 ✔
+[31/52c31e] process > SPLITLETTERS (1)   [100%] 1 of 1, cached: 1 ✔
+[0f/8175a7] process > CONVERTTOUPPER (1) [100%] 2 of 2 ✔
 !dlrow
  olleH
 ```
@@ -252,14 +252,14 @@ nextflow run hello.nf --greeting 'Bonjour le monde!'
 La chaîne spécifiée sur la ligne de commande remplacera la valeur par défaut du paramètre. La sortie ressemblera à ceci :
 
 ```
-N E X T F L O W  ~  version 22.04.5
-Launching `hello.nf` [fervent_galileo] DSL2 - revision: 525206806b
+N E X T F L O W  ~  version 23.04.1
+Launching `hello.nf` [goofy_kare] DSL2 - revision: 0676c711e8
 executor >  local (4)
-[e9/139d7d] process > SPLITLETTERS (1)   [100%] 1 of 1 ✔
-[bb/fc8548] process > CONVERTTOUPPER (1) [100%] 3 of 3 ✔
+[8b/7c7d13] process > SPLITLETTERS (1)   [100%] 1 of 1 ✔
+[58/3b2df0] process > CONVERTTOUPPER (3) [100%] 3 of 3 ✔
+uojnoB
 m el r
 !edno
-uojnoB
 ```
 
 ### Au format DAG
