@@ -132,17 +132,17 @@ workflow {
         The `hello.2.nf` output should look something like this:
 
         ```console title="Output"
-        N E X T F L O W  ~  version 22.04.3
-        Launching `hello.2.nf` [goofy_goldstine] DSL2 - revision: 449cf82eaf
+        N E X T F L O W  ~  version 23.04.1
+        Launching `hello.2.nf` [crazy_shirley] DSL2 - revision: 99f6b6e40e
         executor >  local (6)
-        [e1/5e6523] process > SPLITLETTERS_one (1)   [100%] 1 of 1 ✔
-        [14/b77deb] process > CONVERTTOUPPER_one (1) [100%] 2 of 2 ✔
-        [c0/115bd6] process > SPLITLETTERS_two (1)   [100%] 1 of 1 ✔
-        [09/f9072d] process > CONVERTTOUPPER_two (2) [100%] 2 of 2 ✔
+        [2b/ec0395] process > SPLITLETTERS_one (1)   [100%] 1 of 1 ✔
+        [d7/be3b77] process > CONVERTTOUPPER_one (1) [100%] 2 of 2 ✔
+        [04/9ffc05] process > SPLITLETTERS_two (1)   [100%] 1 of 1 ✔
+        [d9/91b029] process > CONVERTTOUPPER_two (2) [100%] 2 of 2 ✔
         WORLD!
         HELLO
-        WORLD!
         HELLO
+        WORLD!
         ```
 
 !!! tip
