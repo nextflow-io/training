@@ -85,7 +85,9 @@ When you run the script, it prints only 2, as you can see below:
 2
 ```
 
-A process will only instantiate a task when there are elements to be consumed from all the channels provided as input to it. Because `ch1` and `ch2` are queue channels, and the single element of `ch2` has been consumed, no new process instances will be launched, even if there are other elements to be consumed in `ch1`. To consume multiple times the single element in `ch2` we can either use `Channel.value` as mentioned above, or a channel operator that returns a single element, such as `first` below:
+A process will only instantiate a task when there are elements to be consumed from _all_ the channels provided as input to it. Because `ch1` and `ch2` are queue channels, and the single element of `ch2` has been consumed, no new process instances will be launched, even if there are other elements to be consumed in `ch1`.
+
+To use the single element in `ch2` multiple times, we can either use `Channel.value` as mentioned above, or use a channel operator that returns a single element such as `first()` below:
 
 ```groovy linenums="1"
 ch1 = Channel.of(1, 2, 3)
