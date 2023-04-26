@@ -160,11 +160,11 @@ nextflow run hello.nf
 A saída será semelhante ao texto mostrado abaixo:
 
 ```linenums="1"
-N E X T F L O W  ~  version 22.04.5
-Launching `hello.nf` [gigantic_poitras] DSL2 - revision: 197a0e289a
+N E X T F L O W  ~  version 23.04.1
+Launching `hello.nf` [cheeky_keller] DSL2 - revision: 197a0e289a
 executor >  local (3)
-[c8/c36893] process > SPLITLETTERS (1)   [100%] 1 of 1 ✔
-[1a/3c54ed] process > CONVERTTOUPPER (2) [100%] 2 of 2 ✔
+[31/52c31e] process > SPLITLETTERS (1)   [100%] 1 of 1 ✔
+[37/b9332f] process > CONVERTTOUPPER (2) [100%] 2 of 2 ✔
 HELLO
 WORLD!
 ```
@@ -180,11 +180,11 @@ A saída padrão mostra (linha por linha):
 
 !!! info
 
-    Os números hexadecimais, como `c8/c36893`, identificam de forma única a execução do processo. Esses números também são o prefixo dos diretórios onde cada tarefa é executado. Você pode inspecionar os arquivos produzidos mudando para o diretório `$PWD/work` e usando esses números para encontrar o caminho de execução específico da tarefa.
+    Os números hexadecimais, como `31/52c31e`, identificam de forma única a execução do processo. Esses números também são o prefixo dos diretórios onde cada tarefa é executado. Você pode inspecionar os arquivos produzidos mudando para o diretório `$PWD/work` e usando esses números para encontrar o caminho de execução específico da tarefa.
 
 !!! tip
 
-    O segundo processo é executado duas vezes, em dois diretórios de trabalho diferentes para cada arquivo de entrada. A saída de log [ANSI](https://en.wikipedia.org/wiki/ANSI_escape_code) do Nextflow é atualizada dinamicamente conforme o fluxo de trabalho é executado; no exemplo anterior, o diretório de trabalho `[1a/3c54ed]` é o segundo dos dois diretórios que foram processados (sobrescrevendo o log com o primeiro). Para imprimir para a tela todos os caminhos relevantes, desative a saída de log ANSI usando o sinalizador `-ansi-log` (por exemplo, `nextflow run hello.nf -ansi-log false`).
+    O segundo processo é executado duas vezes, em dois diretórios de trabalho diferentes para cada arquivo de entrada. A saída de log [ANSI](https://en.wikipedia.org/wiki/ANSI_escape_code) do Nextflow é atualizada dinamicamente conforme o fluxo de trabalho é executado; no exemplo anterior, o diretório de trabalho `[37/b9332f]` é o segundo dos dois diretórios que foram processados (sobrescrevendo o log com o primeiro). Para imprimir para a tela todos os caminhos relevantes, desative a saída de log ANSI usando o sinalizador `-ansi-log` (por exemplo, `nextflow run hello.nf -ansi-log false`).
 
 Vale ressaltar que o processo `CONVERTTOUPPER` é executado em paralelo, portanto não há garantia de que a instância que processa a primeira divisão (o bloco _Hello_) será executada antes daquela que processa a segundo divisão (o bloco _world!_).
 
@@ -223,11 +223,11 @@ Em seguida, salve o arquivo com o mesmo nome e execute-o adicionando a opção `
 ```console
 $ nextflow run hello.nf -resume
 
-N E X T F L O W  ~  version 22.04.5
-Launching `hello.nf` [amazing_becquerel] DSL2 - revision: 525206806b
+N E X T F L O W  ~  version 23.04.1
+Launching `hello.nf` [zen_colden] DSL2 - revision: 0676c711e8
 executor >  local (2)
-[c8/c36893] process > SPLITLETTERS (1)   [100%] 1 of 1, cached: 1 ✔
-[77/cf83b6] process > CONVERTTOUPPER (1) [100%] 2 of 2 ✔
+[31/52c31e] process > SPLITLETTERS (1)   [100%] 1 of 1, cached: 1 ✔
+[0f/8175a7] process > CONVERTTOUPPER (1) [100%] 2 of 2 ✔
 !dlrow
  olleH
 ```
@@ -251,14 +251,14 @@ nextflow run hello.nf --greeting 'Bonjour le monde!'
 A string especificada na linha de comando substituirá o valor padrão do parâmetro. A saída ficará assim:
 
 ```
-N E X T F L O W  ~  version 22.04.5
-Launching `hello.nf` [fervent_galileo] DSL2 - revision: 525206806b
+N E X T F L O W  ~  version 23.04.1
+Launching `hello.nf` [goofy_kare] DSL2 - revision: 0676c711e8
 executor >  local (4)
-[e9/139d7d] process > SPLITLETTERS (1)   [100%] 1 of 1 ✔
-[bb/fc8548] process > CONVERTTOUPPER (1) [100%] 3 of 3 ✔
+[8b/7c7d13] process > SPLITLETTERS (1)   [100%] 1 of 1 ✔
+[58/3b2df0] process > CONVERTTOUPPER (3) [100%] 3 of 3 ✔
+uojnoB
 m el r
 !edno
-uojnoB
 ```
 
 ### Em formato de DAG
