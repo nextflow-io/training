@@ -295,7 +295,7 @@ Imaginons maintenant que nous ayons deux processus de ce type, dont les canaux d
 
 Une solution courante consiste à utiliser ce que l'on appelle communément une _meta map_. Un objet groovy contenant des informations sur les échantillons est transmis avec les résultats du fichier dans un canal de sortie sous la forme d'un tuple. Cet objet peut ensuite être utilisé pour associer des échantillons provenant de canaux distincts en vue d'une utilisation en aval. Par exemple, au lieu de mettre juste `/some/path/myoutput.bam` dans un canal, vous pouvez utiliser `['SRR123', '/some/path/myoutput.bam']` pour vous assurer que les processus ne sont pas en conflit. Regardez l'exemple ci-dessous :
 
-```nextflow
+```groovy linenums="1"
 // For example purposes only.
 // These would normally be outputs from upstream processes.
 Channel

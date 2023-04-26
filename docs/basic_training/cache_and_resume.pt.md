@@ -294,7 +294,7 @@ Imagine agora que temos dois processos como este, cujos canais de saída estão 
 
 Uma solução comum para isso é usar o que é comumente chamado de _meta mapa_ (meta map). Um objeto groovy com informações de amostra é distribuído junto com os resultados do arquivo em um canal de saída como uma tupla. Isso pode então ser usado para emparelhar amostras que estão em canais separados para uso em processos posteriores. Por exemplo, em vez de colocar apenas `/algum/caminho/minhasaida.bam` em um canal, você pode usar `['SRR123', '/algum/caminho/minhasaida.bam']` para garantir que os processos não incorram em uma incompatibilidade. Verifique o exemplo abaixo:
 
-```nextflow
+```groovy linenums="1"
 // Apenas para fins de exemplos.
 // Estes abaixo seriam normalmente as saídas de processos anteriores
 Channel
