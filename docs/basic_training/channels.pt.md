@@ -85,33 +85,9 @@ Ao rodar o script, ele imprime apenas 2, como você pode ver abaixo:
 2
 ```
 
-Para entender o motivo, podemos inspecionar o canal de fila executando o Nextflow com DSL1, o que nos dá uma compreensão mais explícita do que está por trás das cortinas.
+Um processo só instanciará uma tarefa quando houver elementos a serem consumidos de _todos_ os canais fornecidos como entrada para ele. Como `canal1` e `canal2` são canais de fila, e o único elemento de `canal2` foi consumido, nenhuma nova instância de processo será iniciada, mesmo se houver outros elementos a serem consumidos em `canal1`.
 
-```groovy linenums="1"
-canal1 = Channel.of(1)
-println canal1
-```
-
-```console
-$ nextflow run exemplo.nf -dsl1
-...
-DataflowQueue(queue=[DataflowVariable(value=1), DataflowVariable(value=groovyx.gpars.dataflow.operator.PoisonPill@34be065a)])
-```
-
-Temos o valor 1 como único elemento do nosso canal de fila e uma pílula de veneno, que vai dizer ao processo que não há mais nada para ser consumido. É por isso que temos apenas uma saída para o exemplo acima, que é 2. Vamos inspecionar um canal de valor agora.
-
-```groovy linenums="1"
-canal1 = Channel.value(1)
-println canal1
-```
-
-```console
-$ nextflow run exemplo.nf -dsl1
-...
-DataflowVariable(value=1)
-```
-
-Não há pílula de veneno, e é por isso que obtemos uma saída diferente com o código abaixo, onde `canal2` é transformado em um canal de valor por meio do operador `first`.
+Para usar o único elemento em `canal2` várias vezes, podemos usar `Channel.value` como mencionado acima, ou usar um operador de canal que retorna um único elemento como `first()` abaixo:
 
 ```groovy linenums="1"
 canal1 = Channel.of(1, 2, 3)

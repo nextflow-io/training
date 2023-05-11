@@ -85,33 +85,9 @@ When you run the script, it prints only 2, as you can see below:
 2
 ```
 
-To understand why, we can inspect the queue channel and running Nextflow with DSL1 gives us a more explicit comprehension of what is behind the curtains.
+A process will only instantiate a task when there are elements to be consumed from _all_ the channels provided as input to it. Because `ch1` and `ch2` are queue channels, and the single element of `ch2` has been consumed, no new process instances will be launched, even if there are other elements to be consumed in `ch1`.
 
-```groovy linenums="1"
-ch1 = Channel.of(1)
-println ch1
-```
-
-```console
-$ nextflow run example.nf -dsl1
-...
-DataflowQueue(queue=[DataflowVariable(value=1), DataflowVariable(value=groovyx.gpars.dataflow.operator.PoisonPill@34be065a)])
-```
-
-We have the value 1 as the single element of our queue channel and a poison pill, which will tell the process that there’s nothing left to be consumed. That’s why we only have one output for the example above, which is 2. Let’s inspect a value channel now.
-
-```groovy linenums="1"
-ch1 = Channel.value(1)
-println ch1
-```
-
-```console
-$ nextflow run example.nf -dsl1
-...
-DataflowVariable(value=1)
-```
-
-There is no poison pill, and that’s why we get a different output with the code below, where `ch2` is turned into a value channel through the `first` operator.
+To use the single element in `ch2` multiple times, we can either use `Channel.value` as mentioned above, or use a channel operator that returns a single element such as `first()` below:
 
 ```groovy linenums="1"
 ch1 = Channel.of(1, 2, 3)

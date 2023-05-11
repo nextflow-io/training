@@ -161,11 +161,11 @@ nextflow run hello.nf
 The output will look similar to the text shown below:
 
 ```linenums="1"
-N E X T F L O W  ~  version 22.04.5
-Launching `hello.nf` [gigantic_poitras] DSL2 - revision: 197a0e289a
+N E X T F L O W  ~  version 23.04.1
+Launching `hello.nf` [cheeky_keller] DSL2 - revision: 197a0e289a
 executor >  local (3)
-[c8/c36893] process > SPLITLETTERS (1)   [100%] 1 of 1 ✔
-[1a/3c54ed] process > CONVERTTOUPPER (2) [100%] 2 of 2 ✔
+[31/52c31e] process > SPLITLETTERS (1)   [100%] 1 of 1 ✔
+[37/b9332f] process > CONVERTTOUPPER (2) [100%] 2 of 2 ✔
 HELLO
 WORLD!
 ```
@@ -181,11 +181,11 @@ The standard output shows (line by line):
 
 !!! info
 
-    The hexadecimal numbers, like `c8/c36893`, identify the unique process execution, that we call a task. These numbers are also the prefix of the directories where each task is executed. You can inspect the files produced by changing to the directory `$PWD/work` and using these numbers to find the task-specific execution path.
+    The hexadecimal numbers, like `31/52c31e`, identify the unique process execution, that we call a task. These numbers are also the prefix of the directories where each task is executed. You can inspect the files produced by changing to the directory `$PWD/work` and using these numbers to find the task-specific execution path.
 
 !!! tip
 
-    The second process runs twice, executing in two different work directories for each input file. The [ANSI](https://en.wikipedia.org/wiki/ANSI_escape_code) log output from Nextflow dynamically refreshes as the workflow runs; in the previous example the work directory `[1a/3c54ed]` is the second of the two directories that were processed (overwriting the log with the first). To print all the relevant paths to the screen, disable the ANSI log output using the `-ansi-log` flag (e.g., `nextflow run hello.nf -ansi-log false`).
+    The second process runs twice, executing in two different work directories for each input file. The [ANSI](https://en.wikipedia.org/wiki/ANSI_escape_code) log output from Nextflow dynamically refreshes as the workflow runs; in the previous example the work directory `[37/b9332f]` is the second of the two directories that were processed (overwriting the log with the first). To print all the relevant paths to the screen, disable the ANSI log output using the `-ansi-log` flag (e.g., `nextflow run hello.nf -ansi-log false`).
 
 It’s worth noting that the process `CONVERTTOUPPER` is executed in parallel, so there’s no guarantee that the instance processing the first split (the chunk _Hello ') will be executed before the one processing the second split (the chunk 'world!_).
 
@@ -224,11 +224,11 @@ Then save the file with the same name, and execute it by adding the `-resume` op
 ```console
 $ nextflow run hello.nf -resume
 
-N E X T F L O W  ~  version 22.04.5
-Launching `hello.nf` [amazing_becquerel] DSL2 - revision: 525206806b
+N E X T F L O W  ~  version 23.04.1
+Launching `hello.nf` [zen_colden] DSL2 - revision: 0676c711e8
 executor >  local (2)
-[c8/c36893] process > SPLITLETTERS (1)   [100%] 1 of 1, cached: 1 ✔
-[77/cf83b6] process > CONVERTTOUPPER (1) [100%] 2 of 2 ✔
+[31/52c31e] process > SPLITLETTERS (1)   [100%] 1 of 1, cached: 1 ✔
+[0f/8175a7] process > CONVERTTOUPPER (1) [100%] 2 of 2 ✔
 !dlrow
  olleH
 ```
@@ -252,14 +252,14 @@ nextflow run hello.nf --greeting 'Bonjour le monde!'
 The string specified on the command line will override the default value of the parameter. The output will look like this:
 
 ```
-N E X T F L O W  ~  version 22.04.5
-Launching `hello.nf` [fervent_galileo] DSL2 - revision: 525206806b
+N E X T F L O W  ~  version 23.04.1
+Launching `hello.nf` [goofy_kare] DSL2 - revision: 0676c711e8
 executor >  local (4)
-[e9/139d7d] process > SPLITLETTERS (1)   [100%] 1 of 1 ✔
-[bb/fc8548] process > CONVERTTOUPPER (1) [100%] 3 of 3 ✔
+[8b/7c7d13] process > SPLITLETTERS (1)   [100%] 1 of 1 ✔
+[58/3b2df0] process > CONVERTTOUPPER (3) [100%] 3 of 3 ✔
+uojnoB
 m el r
 !edno
-uojnoB
 ```
 
 ### In DAG-like format
