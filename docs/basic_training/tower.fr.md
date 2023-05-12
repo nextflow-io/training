@@ -30,7 +30,7 @@ Créez un compte et connectez-vous à Tower.
 
 **1. Créer un nouveau jeton**
 
-Vous pouvez accéder à vos tokens à partir du menu déroulant **Réglages** :
+Vous pouvez accéder à vos jetons à partir du menu déroulant **Réglages** :
 
 ![Creer un jeton](img/usage_create_token.png)
 
