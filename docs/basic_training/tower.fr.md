@@ -7,7 +7,7 @@ description: Demarrer avec Nextflow Tower
 
 ## Concept de Base
 
-Nextflow Tower est le poste de commande centralisé pour la gestion des données et des workflows. Il apporte la surveillance, la journalisation et l'observabilité aux flux de travail distribués et simplifie le déploiement des flux de travail sur n'importe quel nuage, cluster ou ordinateur portable. Dans la terminologie de Tower, un flux de travail est ce sur quoi nous avons travaillé jusqu'à présent, et les pipelines sont des workflows préconfigurés qui peuvent être utilisés par tous les utilisateurs d'un espace de travail. Il est composé d'un rrepositoire de workflows, de paramètres de lancement et d'un environnement de calcul. Nous nous en tiendrons à ces définitions dans cette section.
+Nextflow Tower est le poste de commande centralisé pour la gestion des données et des workflows. Il apporte la surveillance, la journalisation et l'observabilité aux flux de travail distribués et simplifie le déploiement des flux de travail sur n'importe quel cloud, cluster ou ordinateur portable. Dans la terminologie de Tower, un flux de travail est ce sur quoi nous avons travaillé jusqu'à présent, et les pipelines sont des workflows préconfigurés qui peuvent être utilisés par tous les utilisateurs d'un espace de travail. Il est composé d'un repositoire de workflows, de paramètres de lancement et d'un environnement de calcul. Nous nous en tiendrons à ces définitions dans cette section.
 
 Les principales caractéristiques de Nextflow tower sont les suivantes
 
