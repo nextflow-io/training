@@ -18,7 +18,7 @@ Les principales caractéristiques de Nextflow tower sont les suivantes
 
 !!! conseil
 
-    [Sign up](https://cloud.tower.nf/) pour essayer Tower gratuitement ou demander une [demo](https://seqera.io/demo/) pour des déploiements dans votre propre environnement sur site ou en could.
+    [Inscrivez-vous](https://cloud.tower.nf/) pour essayer Tower gratuitement ou demander une [demo](https://seqera.io/demo/) pour des déploiements dans votre propre environnement sur site ou en could.
 
 ## Utilisation
 
