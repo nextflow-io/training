@@ -66,7 +66,7 @@ export TOWER_WORKSPACE_ID=000000000000000
 
 L'identifiant de l'espace de travail se trouve sur la page de présentation des espaces de travail de l'organisation.
 
-**5. Exécuter Nextflow avec tower**
+**5. Exécuter Nextflow avec Tower**
 
 Exécutez vos workflows Nextflow comme d'habitude avec l'ajout de la commande `-with-tower` :
 
