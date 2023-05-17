@@ -41,7 +41,7 @@ docker run hello-world
 O comando pull possibilita que você baixe uma imagem Docker sem que a execute. Por exemplo:
 
 ```bash
-docker pull debian:stretch-slim
+docker pull debian:bullseye-slim
 ```
 
 O comando acima baixa uma imagem Debian Linux. Você pode checar se ela existe usando:
@@ -55,7 +55,7 @@ docker images
 Iniciar uma shell BASH em um contêiner permite que você opere em modo interativo no sistema operacional conteinerizado. Por exemplo:
 
 ```
-docker run -it debian:stretch-slim bash
+docker run -it debian:bullseye-slim bash
 ```
 
 Uma vez iniciado, você vai notar que está como root (!). Use os comandos usuais para navegar pelo sistema de arquivos. Isso é útil para checar se os programas necessários estão presentes no contêiner.
@@ -75,7 +75,7 @@ Aqui, você criará uma imagem Docker contendo o cowsay e a ferramenta Salmon
 Use seu editor favorito (ex.: `vim` ou `nano`) para criar um arquivo chamado `Dockerfile` e copiar o seguinte conteúdo:
 
 ```dockerfile
-FROM debian:stretch-slim
+FROM debian:bullseye-slim
 
 LABEL image.author.name "Seu nome aqui"
 LABEL image.author.email "seu@email.aqui"
@@ -265,7 +265,7 @@ Imagens do Singularity são criadas utilizando um arquivo `Singularity` de uma f
 
 ```singularity
 Bootstrap: docker
-From: debian:stretch-slim
+From: debian:bullseye-slim
 
 %environment
 export PATH=$PATH:/usr/games/
@@ -319,7 +319,7 @@ ls -la
 Uma forma mais fácil de criar um contêiner com o Singularity não necessitando da permissão `sudo` e melhorando a interoperabilidade dos contêineres é importando uma imagem de contêiner do Docker puxando diretamente do repositório de imagens do Docker. Por exemplo:
 
 ```bash
-singularity pull docker://debian:stretch-slim
+singularity pull docker://debian:bullseye-slim
 ```
 
 O comando acima automaticamente baixa uma imagem Docker do Debian e converte para uma imagem Singularity no diretório atual com o nome `debian-jessie.simg`.
