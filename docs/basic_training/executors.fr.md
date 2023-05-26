@@ -6,7 +6,7 @@ description: Atelier de formation de base sur Nextflow
 
 Les applications génomiques du monde réel peuvent engendrer l'exécution de milliers de tâches. Dans ce scénario, un planificateur de lots est généralement utilisé pour déployer un workflow dans un cluster informatique, permettant l'exécution de nombreuses tâches en parallèle sur de nombreux nœuds informatiques.
 
-Nextflow a un support intégré pour les  plannificateurs batch les plus couramment utilisés, tels que Univa Grid Engine, [SLURM](https://slurm.schedmd.com/) et IBM LSF. Consultez la documentation de Nextflow pour obtenir la liste complète des prises en charge [plates-formes d'exécution](https://www.nextflow.io/docs/latest/executor.html).
+Nextflow a un support intégré pour les plannificateurs batch les plus couramment utilisés, tels que Univa Grid Engine, [SLURM](https://slurm.schedmd.com/) et IBM LSF. Consultez la documentation de Nextflow pour obtenir la liste complète des prises en charge [plates-formes d'exécution](https://www.nextflow.io/docs/latest/executor.html).
 
 ## Déploiement du cluster
 
@@ -26,13 +26,13 @@ Lors de l'utilisation d'un planificateur batch, il est souvent nécessaire de sp
 
 Pour ce faire, il convient d'utiliser les directives de processus suivantes :
 
-|                                                                   |                                                               |
-| ----------------------------------------------------------------- | ------------------------------------------------------------- |
-| [queue](https://www.nextflow.io/docs/latest/process.html#queue)   | la _queue_ de cluster à utiliser pour le calcul            |
-| [cpus](https://www.nextflow.io/docs/latest/process.html#cpus)     | le nombre de _cpus_ à allouer pour l'exécution d'une tâche     |
-| [memoire](https://www.nextflow.io/docs/latest/process.html#memory) | la quantité de mémoire à allouer pour l'exécution d'une tâche   |
+|                                                                    |                                                                        |
+| ------------------------------------------------------------------ | ---------------------------------------------------------------------- |
+| [queue](https://www.nextflow.io/docs/latest/process.html#queue)    | la _queue_ de cluster à utiliser pour le calcul                        |
+| [cpus](https://www.nextflow.io/docs/latest/process.html#cpus)      | le nombre de _cpus_ à allouer pour l'exécution d'une tâche             |
+| [memoire](https://www.nextflow.io/docs/latest/process.html#memory) | la quantité de mémoire à allouer pour l'exécution d'une tâche          |
 | [temps](https://www.nextflow.io/docs/latest/process.html#time)     | la quantité maximale de _temps_ à allouer pour l'exécution d'une tâche |
-| [disque](https://www.nextflow.io/docs/latest/process.html#disk)     | la quantité de mémoire _disk_ requise pour l'exécution d'une tâche    |
+| [disque](https://www.nextflow.io/docs/latest/process.html#disk)    | la quantité de mémoire _disk_ requise pour l'exécution d'une tâche     |
 
 ### Ressources à l'échelle du workflow
 
@@ -47,6 +47,7 @@ process {
     cpus = 4
 }
 ```
+
 ### Soumettre Nextflow en tant que tache
 
 Bien que la commande principale de Nextflow puisse être lancée sur le nœud de connexion / tête d'un cluster, il faut savoir que le nœud doit être configuré pour des commandes qui s'exécutent pendant une longue période, même si les ressources informatiques utilisées sont négligeables. Une autre option est de soumettre le processus Nextflow principal en tant que tache sur le cluster.
@@ -54,7 +55,6 @@ Bien que la commande principale de Nextflow puisse être lancée sur le nœud de
 !!! remarque
 
     Cela nécessite que la configuration de votre cluster permette de lancer des tâches à partir des nœuds de travail, car Nextflow soumettra de nouvelles tâches et les gérera à partir d'ici.
-
 
 Par exemple, si votre cluster utilise Slurm comme planificateur de tâches, vous pouvez créer un fichier similaire à celui ci-dessous :
 
@@ -136,7 +136,6 @@ Une meilleure stratégie consiste à annoter les processus avec une directive [l
 
 Le script du workflow :
 
-
 ```groovy linenums="1"
 process TASK1 {
     label 'long'
@@ -156,6 +155,7 @@ process TASK2 {
     """
 }
 ```
+
 Le fichier de configuration :
 
 ```groovy linenums="1"
