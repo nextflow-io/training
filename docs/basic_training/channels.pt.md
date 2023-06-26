@@ -602,23 +602,40 @@ Channel
 
 ### JSON
 
-Também podemos analisar facilmente o formato de arquivo JSON usando o seguinte esquema do Groovy:
+Também podemos analisar facilmente o formato de arquivo JSON usando o oeprador de canal `splitJson`.
 
+O operador `splitJson` suporta arranjos JSON:
 ```groovy linenums="1"
-import groovy.json.JsonSlurper
-
-def f = file('data/meta/regions.json')
-def registros = new JsonSlurper().parse(f)
-
-
-for (def entrada : registros) {
-    log.info "$entrada.patient_id -- $entrada.feature"
-}
+Channel
+    .of('["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"]')
+    .splitJson()
+    .view { "Item: ${it}" }
 ```
 
-!!! warning
+Objetos JSON:
+```groovy linenums="1"
+Channel
+    .of('{"jogador": {"nome": "Bob", "altura": 180, "venceu_campeonato": false}}')
+    .splitJson()
+    .view { "Item: ${it}" }
+```
 
-    Ao usar uma versão JSON mais antiga, pode ser necessário substituir `parse(f)` por `parseText(f.text)`
+E inclusive arranjos JSON com objetos JSON!
+```groovy linenums="1"
+Channel
+    .of('[{"nome": "Bob", "altura": 180, "venceu_campeonato": false}, \
+          {"nome": "Alice", "height": 170, "venceu_campeonato": false}]')
+    .splitJson()
+    .view { "Item: ${it}" }
+```
+
+Arquivos contendo dados em formato JSON também podem ser analisados:
+```groovy linenums="1"
+Channel
+    .fromPath('arquivo.json')
+    .splitJson()
+    .view { "Item: ${it}" }
+```
 
 ### YAML
 
