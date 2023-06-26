@@ -601,23 +601,40 @@ Channel
 
 ### JSON
 
-We can also easily parse the JSON file format using the following groovy schema:
+We can also easily parse the JSON file format using the `splitJson` channel operator.
 
+The `splitJson` operator supports JSON arrays:
 ```groovy linenums="1"
-import groovy.json.JsonSlurper
-
-def f = file('data/meta/regions.json')
-def records = new JsonSlurper().parse(f)
-
-
-for (def entry : records) {
-    log.info "$entry.patient_id -- $entry.feature"
-}
+Channel
+    .of('["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]')
+    .splitJson()
+    .view { "Item: ${it}" }
 ```
 
-!!! warning
+JSON objects:
+```groovy linenums="1"
+Channel
+    .of('{"player": {"name": "Bob", "height": 180, "champion": false}}')
+    .splitJson()
+    .view { "Item: ${it}" }
+```
 
-    When using an older JSON version, you may need to replace `parse(f)` with `parseText(f.text)`
+And even a JSON array of JSON objects!
+```groovy linenums="1"
+Channel
+    .of('[{"name": "Bob", "height": 180, "champion": false}, \
+          {"name": "Alice", "height": 170, "champion": false}]')
+    .splitJson()
+    .view { "Item: ${it}" }
+```
+
+Files containing JSON content can also be parsed:
+```groovy linenums="1"
+Channel
+    .fromPath('file.json')
+    .splitJson()
+    .view { "Item: ${it}" }
+```
 
 ### YAML
 
