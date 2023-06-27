@@ -604,37 +604,87 @@ Channel
 We can also easily parse the JSON file format using the `splitJson` channel operator.
 
 The `splitJson` operator supports JSON arrays:
-```groovy linenums="1"
-Channel
-    .of('["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]')
-    .splitJson()
-    .view { "Item: ${it}" }
-```
+
+=== "Source code"
+
+    ```groovy linenums="1"
+    Channel
+        .of('["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]')
+        .splitJson()
+        .view { "Item: ${it}" }
+    ```
+
+=== "Output"
+
+    ```console
+    Item: Sunday
+    Item: Monday
+    Item: Tuesday
+    Item: Wednesday
+    Item: Thursday
+    Item: Friday
+    Item: Saturday
+    ```
 
 JSON objects:
-```groovy linenums="1"
-Channel
-    .of('{"player": {"name": "Bob", "height": 180, "champion": false}}')
-    .splitJson()
-    .view { "Item: ${it}" }
-```
+
+=== "Source code"
+
+    ```groovy linenums="1"
+    Channel
+        .of('{"player": {"name": "Bob", "height": 180, "champion": false}}')
+        .splitJson()
+        .view { "Item: ${it}" }
+    ```
+
+=== "Output"
+
+    ```console
+    Item: [key:player, value:[name:Bob, height:180, champion:false]]
+    ```
 
 And even a JSON array of JSON objects!
-```groovy linenums="1"
-Channel
-    .of('[{"name": "Bob", "height": 180, "champion": false}, \
-          {"name": "Alice", "height": 170, "champion": false}]')
-    .splitJson()
-    .view { "Item: ${it}" }
-```
+
+=== "Source code"
+
+    ```groovy linenums="1"
+    Channel
+        .of('[{"name": "Bob", "height": 180, "champion": false}, \
+            {"name": "Alice", "height": 170, "champion": false}]')
+        .splitJson()
+        .view { "Item: ${it}" }
+    ```
+
+=== "Output"
+
+    ```console
+    Item: [name:Bob, height:180, champion:false]
+    Item: [name:Alice, height:170, champion:false]
+    ```
 
 Files containing JSON content can also be parsed:
-```groovy linenums="1"
-Channel
-    .fromPath('file.json')
-    .splitJson()
-    .view { "Item: ${it}" }
-```
+
+=== "Source code"
+
+    ```groovy linenums="1"
+    Channel
+        .fromPath('file.json')
+        .splitJson()
+        .view { "Item: ${it}" }
+    ```
+
+=== "file.json"
+
+    ```json
+    [{"name": "Bob", "height": 180, "champion": false}, {"name": "Alice", "height": 170, "champion": false}]
+    ```
+
+=== "Output"
+
+    ```console
+    Item: [name:Bob, height:180, champion:false]
+    Item: [name:Alice, height:170, champion:false] 
+    ```
 
 ### YAML
 
