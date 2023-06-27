@@ -683,7 +683,7 @@ Files containing JSON content can also be parsed:
 
     ```console
     Item: [name:Bob, height:180, champion:false]
-    Item: [name:Alice, height:170, champion:false] 
+    Item: [name:Alice, height:170, champion:false]
     ```
 
 ### YAML
