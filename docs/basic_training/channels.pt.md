@@ -606,7 +606,7 @@ Também podemos analisar facilmente o formato de arquivo JSON usando o oeprador 
 
 O operador `splitJson` suporta arranjos JSON:
 
-=== "Source code"
+=== "Código-fonte"
 
     ```groovy linenums="1"
     Channel
@@ -615,7 +615,7 @@ O operador `splitJson` suporta arranjos JSON:
         .view { "Item: ${it}" }
     ```
 
-=== "Output"
+=== "Saída"
 
     ```console
     Item: Domingo
@@ -629,7 +629,7 @@ O operador `splitJson` suporta arranjos JSON:
 
 Objetos JSON:
 
-=== "Source code"
+=== "Código-fonte"
 
     ```groovy linenums="1"
     Channel
@@ -638,7 +638,7 @@ Objetos JSON:
         .view { "Item: ${it}" }
     ```
 
-=== "Output"
+=== "Saída"
 
     ```console
     Item: [key:jogador, value:[nome:Bob, altura:180, venceu_campeonato:false]]
@@ -646,7 +646,7 @@ Objetos JSON:
 
 E inclusive arranjos JSON com objetos JSON!
 
-=== "Source code"
+=== "Código-fonte"
 
     ```groovy linenums="1"
     Channel
@@ -656,7 +656,7 @@ E inclusive arranjos JSON com objetos JSON!
         .view { "Item: ${it}" }
     ```
 
-=== "Output"
+=== "Saída"
 
     ```console
     Item: [nome:Bob, altura:180, venceu_campeonato:false]
@@ -665,7 +665,7 @@ E inclusive arranjos JSON com objetos JSON!
 
 Arquivos contendo dados em formato JSON também podem ser analisados:
 
-=== "Source code"
+=== "Código-fonte"
 
     ```groovy linenums="1"
     Channel
@@ -680,7 +680,7 @@ Arquivos contendo dados em formato JSON também podem ser analisados:
     [{"nome": "Bob", "altura": 180, "venceu_campeonato": false}, {"nome": "Alice", "altura": 170, "venceu_campeonato": false}]
     ```
 
-=== "Output"
+=== "Saída"
 
     ```console
     Item: [nome:Bob, altura:180, venceu_campeonato:false]
