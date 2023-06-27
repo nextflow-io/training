@@ -102,6 +102,8 @@ markdown_extensions:
           base_path: ["."]
     - pymdownx.snippets
     - pymdownx.superfences
+    - pymdownx.tabbed:
+        alternate_style: true 
     - tables
     - toc:
           title: On this page
