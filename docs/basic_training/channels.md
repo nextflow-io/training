@@ -601,23 +601,93 @@ Channel
 
 ### JSON
 
-We can also easily parse the JSON file format using the following groovy schema:
+We can also easily parse the JSON file format using the `splitJson` channel operator.
 
-```groovy linenums="1"
-import groovy.json.JsonSlurper
+The `splitJson` operator supports JSON arrays:
 
-def f = file('data/meta/regions.json')
-def records = new JsonSlurper().parse(f)
+=== "Source code"
 
+    ```groovy linenums="1"
+    Channel
+        .of('["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]')
+        .splitJson()
+        .view { "Item: ${it}" }
+    ```
 
-for (def entry : records) {
-    log.info "$entry.patient_id -- $entry.feature"
-}
-```
+=== "Output"
 
-!!! warning
+    ```console
+    Item: Sunday
+    Item: Monday
+    Item: Tuesday
+    Item: Wednesday
+    Item: Thursday
+    Item: Friday
+    Item: Saturday
+    ```
 
-    When using an older JSON version, you may need to replace `parse(f)` with `parseText(f.text)`
+JSON objects:
+
+=== "Source code"
+
+    ```groovy linenums="1"
+    Channel
+        .of('{"player": {"name": "Bob", "height": 180, "champion": false}}')
+        .splitJson()
+        .view { "Item: ${it}" }
+    ```
+
+=== "Output"
+
+    ```console
+    Item: [key:player, value:[name:Bob, height:180, champion:false]]
+    ```
+
+And even a JSON array of JSON objects!
+
+=== "Source code"
+
+    ```groovy linenums="1"
+    Channel
+        .of('[{"name": "Bob", "height": 180, "champion": false}, \
+            {"name": "Alice", "height": 170, "champion": false}]')
+        .splitJson()
+        .view { "Item: ${it}" }
+    ```
+
+=== "Output"
+
+    ```console
+    Item: [name:Bob, height:180, champion:false]
+    Item: [name:Alice, height:170, champion:false]
+    ```
+
+Files containing JSON content can also be parsed:
+
+=== "Source code"
+
+    ```groovy linenums="1"
+    Channel
+        .fromPath('file.json')
+        .splitJson()
+        .view { "Item: ${it}" }
+    ```
+
+=== "file.json"
+
+    ```json
+    [
+      { "name": "Bob", "height": 180, "champion": false },
+      { "name": "Alice", "height": 170, "champion": false }
+    ]
+    ```
+
+=== "Output"
+
+    ```console
+    Item: [name:Bob, height:180, champion:false]
+    Item: [name:Alice, height:170, champion:false]
+    ```
 
 ### YAML
 

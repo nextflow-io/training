@@ -602,23 +602,90 @@ Channel
 
 ### JSON
 
-Também podemos analisar facilmente o formato de arquivo JSON usando o seguinte esquema do Groovy:
+Também podemos analisar facilmente o formato de arquivo JSON usando o oeprador de canal `splitJson`.
 
-```groovy linenums="1"
-import groovy.json.JsonSlurper
+O operador `splitJson` suporta arranjos JSON:
 
-def f = file('data/meta/regions.json')
-def registros = new JsonSlurper().parse(f)
+=== "Código-fonte"
 
+    ```groovy linenums="1"
+    Channel
+        .of('["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"]')
+        .splitJson()
+        .view { "Item: ${it}" }
+    ```
 
-for (def entrada : registros) {
-    log.info "$entrada.patient_id -- $entrada.feature"
-}
-```
+=== "Saída"
 
-!!! warning
+    ```console
+    Item: Domingo
+    Item: Segunda
+    Item: Terça
+    Item: Quarta
+    Item: Quinta
+    Item: Sexta
+    Item: Sábado
+    ```
 
-    Ao usar uma versão JSON mais antiga, pode ser necessário substituir `parse(f)` por `parseText(f.text)`
+Objetos JSON:
+
+=== "Código-fonte"
+
+    ```groovy linenums="1"
+    Channel
+        .of('{"jogador": {"nome": "Bob", "altura": 180, "venceu_campeonato": false}}')
+        .splitJson()
+        .view { "Item: ${it}" }
+    ```
+
+=== "Saída"
+
+    ```console
+    Item: [key:jogador, value:[nome:Bob, altura:180, venceu_campeonato:false]]
+    ```
+
+E inclusive arranjos JSON com objetos JSON!
+
+=== "Código-fonte"
+
+    ```groovy linenums="1"
+    Channel
+        .of('[{"nome": "Bob", "altura": 180, "venceu_campeonato": false}, \
+            {"nome": "Alice", "height": 170, "venceu_campeonato": false}]')
+        .splitJson()
+        .view { "Item: ${it}" }
+    ```
+
+=== "Saída"
+
+    ```console
+    Item: [nome:Bob, altura:180, venceu_campeonato:false]
+    Item: [nome:Alice, altura:170, venceu_campeonato:false]
+    ```
+
+Arquivos contendo dados em formato JSON também podem ser analisados:
+
+=== "Código-fonte"
+
+    ```groovy linenums="1"
+    Channel
+        .fromPath('arquivo.json')
+        .splitJson()
+        .view { "Item: ${it}" }
+    ```
+
+=== "arquivo.json"
+
+    ```json
+    [{"nome": "Bob", "altura": 180, "venceu_campeonato": false}, {"nome": "Alice", "altura": 170, "venceu_campeonato": false}]
+    ```
+
+=== "Saída"
+
+    ```console
+    Item: [nome:Bob, altura:180, venceu_campeonato:false]
+    Item: [nome:Alice, altura:170, venceu_campeonato:false]
+    ```
 
 ### YAML
 
