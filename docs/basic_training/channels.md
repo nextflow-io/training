@@ -676,7 +676,10 @@ Files containing JSON content can also be parsed:
 === "file.json"
 
     ```json
-    [{"name": "Bob", "height": 180, "champion": false}, {"name": "Alice", "height": 170, "champion": false}]
+    [
+      { "name": "Bob", "height": 180, "champion": false },
+      { "name": "Alice", "height": 170, "champion": false }
+    ]
     ```
 
 === "Output"
