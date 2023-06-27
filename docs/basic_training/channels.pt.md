@@ -605,37 +605,87 @@ Channel
 Também podemos analisar facilmente o formato de arquivo JSON usando o oeprador de canal `splitJson`.
 
 O operador `splitJson` suporta arranjos JSON:
-```groovy linenums="1"
-Channel
-    .of('["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"]')
-    .splitJson()
-    .view { "Item: ${it}" }
-```
+
+=== "Source code"
+
+    ```groovy linenums="1"
+    Channel
+        .of('["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"]')
+        .splitJson()
+        .view { "Item: ${it}" }
+    ```
+
+=== "Output"
+
+    ```console
+    Item: Domingo
+    Item: Segunda
+    Item: Terça
+    Item: Quarta
+    Item: Quinta
+    Item: Sexta
+    Item: Sábado
+    ```
 
 Objetos JSON:
-```groovy linenums="1"
-Channel
-    .of('{"jogador": {"nome": "Bob", "altura": 180, "venceu_campeonato": false}}')
-    .splitJson()
-    .view { "Item: ${it}" }
-```
+
+=== "Source code"
+
+    ```groovy linenums="1"
+    Channel
+        .of('{"jogador": {"nome": "Bob", "altura": 180, "venceu_campeonato": false}}')
+        .splitJson()
+        .view { "Item: ${it}" }
+    ```
+
+=== "Output"
+
+    ```console
+    Item: [key:jogador, value:[nome:Bob, altura:180, venceu_campeonato:false]]
+    ```
 
 E inclusive arranjos JSON com objetos JSON!
-```groovy linenums="1"
-Channel
-    .of('[{"nome": "Bob", "altura": 180, "venceu_campeonato": false}, \
-          {"nome": "Alice", "height": 170, "venceu_campeonato": false}]')
-    .splitJson()
-    .view { "Item: ${it}" }
-```
+
+=== "Source code"
+
+    ```groovy linenums="1"
+    Channel
+        .of('[{"nome": "Bob", "altura": 180, "venceu_campeonato": false}, \
+            {"nome": "Alice", "height": 170, "venceu_campeonato": false}]')
+        .splitJson()
+        .view { "Item: ${it}" }
+    ```
+
+=== "Output"
+
+    ```console
+    Item: [nome:Bob, altura:180, venceu_campeonato:false]
+    Item: [nome:Alice, altura:170, venceu_campeonato:false]
+    ```
 
 Arquivos contendo dados em formato JSON também podem ser analisados:
-```groovy linenums="1"
-Channel
-    .fromPath('arquivo.json')
-    .splitJson()
-    .view { "Item: ${it}" }
-```
+
+=== "Source code"
+
+    ```groovy linenums="1"
+    Channel
+        .fromPath('arquivo.json')
+        .splitJson()
+        .view { "Item: ${it}" }
+    ```
+
+=== "arquivo.json"
+
+    ```json
+    [{"nome": "Bob", "altura": 180, "venceu_campeonato": false}, {"nome": "Alice", "altura": 170, "venceu_campeonato": false}]
+    ```
+
+=== "Output"
+
+    ```console
+    Item: [nome:Bob, altura:180, venceu_campeonato:false]
+    Item: [nome:Alice, altura:170, venceu_campeonato:false]
+    ```
 
 ### YAML
 
