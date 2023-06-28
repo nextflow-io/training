@@ -705,7 +705,7 @@ This can also be used as a way to parse YAML files:
     for (def entry : records) {
         log.info "$entry.patient_id -- $entry.feature"
     }
-```
+    ```
 
 === "data/meta/regions.yml"
 
