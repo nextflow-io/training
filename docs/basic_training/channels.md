@@ -693,64 +693,162 @@ Files containing JSON content can also be parsed:
 
 This can also be used as a way to parse YAML files:
 
-```groovy linenums="1"
-import org.yaml.snakeyaml.Yaml
+=== "Source code"
 
-def f = file('data/meta/regions.yml')
-def records = new Yaml().load(f)
+    ```groovy linenums="1"
+    import org.yaml.snakeyaml.Yaml
+
+    def f = file('data/meta/regions.yml')
+    def records = new Yaml().load(f)
 
 
-for (def entry : records) {
-    log.info "$entry.patient_id -- $entry.feature"
-}
+    for (def entry : records) {
+        log.info "$entry.patient_id -- $entry.feature"
+    }
 ```
+
+=== "data/meta/regions.yml"
+
+    ```yml
+    - patient_id: ATX-TBL-001-GB-01-105
+    region_id: R1
+    feature: pass_vafqc_flag
+    pass_flag: "TRUE"
+    - patient_id: ATX-TBL-001-GB-01-105
+    region_id: R1
+    feature: pass_stripy_flag
+    pass_flag: "TRUE"
+    - patient_id: ATX-TBL-001-GB-01-105
+    region_id: R1
+    feature: pass_manual_flag
+    pass_flag: "TRUE"
+    - patient_id: ATX-TBL-001-GB-01-105
+    region_id: R1
+    feature: other_region_selection_flag
+    pass_flag: "TRUE"
+    - patient_id: ATX-TBL-001-GB-01-105
+    region_id: R1
+    feature: ace_information_gained
+    pass_flag: "TRUE"
+    - patient_id: ATX-TBL-001-GB-01-105
+    region_id: R1
+    feature: concordance_flag
+    pass_flag: "TRUE"
+    - patient_id: ATX-TBL-001-GB-01-105
+    region_id: R2
+    feature: pass_vafqc_flag
+    pass_flag: "TRUE"
+    - patient_id: ATX-TBL-001-GB-01-105
+    region_id: R2
+    feature: pass_stripy_flag
+    pass_flag: "TRUE"
+    - patient_id: ATX-TBL-001-GB-01-105
+    region_id: R2
+    feature: pass_manual_flag
+    pass_flag: "TRUE"
+    - patient_id: ATX-TBL-001-GB-01-105
+    region_id: R2
+    feature: other_region_selection_flag
+    pass_flag: "TRUE"
+    - patient_id: ATX-TBL-001-GB-01-105
+    region_id: R2
+    feature: ace_information_gained
+    pass_flag: "TRUE"
+    - patient_id: ATX-TBL-001-GB-01-105
+    region_id: R2
+    feature: concordance_flag
+    pass_flag: "TRUE"
+    - patient_id: ATX-TBL-001-GB-01-105
+    region_id: R3
+    feature: pass_vafqc_flag
+    pass_flag: "TRUE"
+    - patient_id: ATX-TBL-001-GB-01-105
+    region_id: R3
+    feature: pass_stripy_flag
+    pass_flag: "FALSE"
+    ```
+
+=== "Output"
+
+    ```console
+    ATX-TBL-001-GB-01-105 -- pass_vafqc_flag
+    ATX-TBL-001-GB-01-105 -- pass_stripy_flag
+    ATX-TBL-001-GB-01-105 -- pass_manual_flag
+    ATX-TBL-001-GB-01-105 -- other_region_selection_flag
+    ATX-TBL-001-GB-01-105 -- ace_information_gained
+    ATX-TBL-001-GB-01-105 -- concordance_flag
+    ATX-TBL-001-GB-01-105 -- pass_vafqc_flag
+    ATX-TBL-001-GB-01-105 -- pass_stripy_flag
+    ATX-TBL-001-GB-01-105 -- pass_manual_flag
+    ATX-TBL-001-GB-01-105 -- other_region_selection_flag
+    ATX-TBL-001-GB-01-105 -- ace_information_gained
+    ATX-TBL-001-GB-01-105 -- concordance_flag
+    ATX-TBL-001-GB-01-105 -- pass_vafqc_flag
+    ATX-TBL-001-GB-01-105 -- pass_stripy_flag
+    ```
 
 ### Storage of parsers into modules
 
 The best way to store parser scripts is to keep them in a Nextflow module file.
 
-See the following Nextflow script:
+Let's say we don't have a JSON channel operator, but we create a function instead. The `parsers.nf` file should contain the `parseJsonFile` function. See the contente below:
 
-```groovy linenums="1"
-include { parseJsonFile } from './modules/parsers.nf'
+=== "Source code"
 
-process FOO {
-    input:
-    tuple val(patient_id), val(feature)
+    ```groovy linenums="1"
+    include { parseJsonFile } from './modules/parsers.nf'
 
-    output:
-    stdout
+    process FOO {
+        input:
+        tuple val(patient_id), val(feature)
 
-    script:
-    """
-    echo $patient_id has $feature as feature
-    """
-}
+        output:
+        stdout
 
-workflow {
-    Channel
-        .fromPath('data/meta/regions*.json')
-        | flatMap { parseJsonFile(it) }
-        | map { record -> [record.patient_id, record.feature] }
-        | unique
-        | FOO
-        | view
-}
-```
+        script:
+        """
+        echo $patient_id has $feature as feature
+        """
+    }
 
-For this script to work, a module file called `parsers.nf` needs to be created and stored in a modules folder in the current directory.
+    workflow {
+        Channel
+            .fromPath('data/meta/regions*.json')
+            | flatMap { parseJsonFile(it) }
+            | map { record -> [record.patient_id, record.feature] }
+            | unique
+            | FOO
+            | view
+    }
+    ```
 
-The `parsers.nf` file should contain the `parseJsonFile` function. For example:
+=== "./modules/parsers.nf"
 
-```groovy linenums="1"
-import groovy.json.JsonSlurper
+    ```groovy linenums="1"
+    import groovy.json.JsonSlurper
 
-def parseJsonFile(json_file) {
-    def f = file('data/meta/regions.json')
-    def records = new JsonSlurper().parse(f)
-    return records
-}
-```
+    def parseJsonFile(json_file) {
+        def f = file(json_file)
+        def records = new JsonSlurper().parse(f)
+        return records
+    }
+    ```
+
+=== "Output"
+
+    ```console
+    ATX-TBL-001-GB-01-105 has pass_stripy_flag as feature
+
+    ATX-TBL-001-GB-01-105 has ace_information_gained as feature
+
+    ATX-TBL-001-GB-01-105 has concordance_flag as feature
+
+    ATX-TBL-001-GB-01-105 has pass_vafqc_flag as feature
+
+    ATX-TBL-001-GB-01-105 has pass_manual_flag as feature
+
+    ATX-TBL-001-GB-01-105 has other_region_selection_flag as feature
+    ```
 
 Nextflow will use this as a custom function within the workflow scope.
 
