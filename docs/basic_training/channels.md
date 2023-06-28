@@ -710,7 +710,7 @@ This can also be used as a way to parse YAML files:
 === "data/meta/regions.yml"
 
     ```yaml
-    --8<-- "../../nf-training/data/meta/regions.yml"
+    --8<-- "nf-training/data/meta/regions.yml"
     ```
 
 === "Output"
