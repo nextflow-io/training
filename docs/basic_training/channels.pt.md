@@ -750,7 +750,7 @@ Digamos que não temos um operador de canal JSON, mas criamos uma função para 
 
         script:
         """
-        echo $id_paciente tem $caracteristica como característica
+        echo $id_paciente tem $caracteristica como coluna
         """
     }
 
@@ -758,7 +758,7 @@ Digamos que não temos um operador de canal JSON, mas criamos uma função para 
         Channel
             .fromPath('data/meta/regions*.json')
             | flatMap { parseArquivoJson(it) }
-            | map { registro -> [registro.id_paciente, registro.caracteristica] }
+            | map { registro -> [registro.patient_id, registro.feature] }
             | unique
             | FOO
             | view
@@ -780,17 +780,17 @@ Digamos que não temos um operador de canal JSON, mas criamos uma função para 
 === "Saída"
 
     ```console
-    ATX-TBL-001-GB-01-105 has pass_stripy_flag as feature
+    ATX-TBL-001-GB-01-105 tem pass_stripy_flag como coluna
 
-    ATX-TBL-001-GB-01-105 has ace_information_gained as feature
+    ATX-TBL-001-GB-01-105 tem ace_information_gained como coluna
 
-    ATX-TBL-001-GB-01-105 has concordance_flag as feature
+    ATX-TBL-001-GB-01-105 tem concordance_flag como coluna
 
-    ATX-TBL-001-GB-01-105 has pass_vafqc_flag as feature
+    ATX-TBL-001-GB-01-105 tem pass_vafqc_flag como coluna
 
-    ATX-TBL-001-GB-01-105 has pass_manual_flag as feature
+    ATX-TBL-001-GB-01-105 tem pass_manual_flag como coluna
 
-    ATX-TBL-001-GB-01-105 has other_region_selection_flag as feature
+    ATX-TBL-001-GB-01-105 tem other_region_selection_flag como coluna
     ```
 
 O Nextflow usará isso como uma função personalizada dentro do escopo `workflow`.
