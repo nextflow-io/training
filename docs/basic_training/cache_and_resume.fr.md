@@ -320,7 +320,7 @@ bam
     | PROCESS_C
 ```
 
-Si les méta-cartes ne sont pas possibles, une alternative est d'utiliser la directive de processus [`fair`](https://nextflow.io/docs/edge/process.html#fair). Lorsque cette directive est spécifiée, Nextflow garantira que l'ordre des sorties correspondra à l'ordre des entrées.
+Si les méta-cartes ne sont pas possibles, une alternative est d'utiliser la directive de processus [`fair`](https://nextflow.io/docs/edge/process.html#fair). Lorsque cette directive est spécifiée, Nextflow garantira que l'ordre des sorties correspondra à l'ordre des entrées. Il est important de mentionner que l'ordre dans lequel les tâches seront terminées ne suivra pas nécessairement l'ordre dans le canal d'entrée, mais Nextflow garantit qu'à la fin de celui-ci, le canal de sortie contiendra les éléments dans l'ordre respectif.
 
 !!! warning
 
