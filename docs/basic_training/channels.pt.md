@@ -691,64 +691,107 @@ Arquivos contendo dados em formato JSON também podem ser analisados:
 
 Isso também pode ser usado como uma forma de analisar arquivos YAML:
 
-```groovy linenums="1"
-import org.yaml.snakeyaml.Yaml
+=== "Código-fonte"
 
-def f = file('data/meta/regions.yml')
-def registros = new Yaml().load(f)
+    ```groovy linenums="1"
+    import org.yaml.snakeyaml.Yaml
 
+    def f = file('data/meta/regions.yml')
+    def registros = new Yaml().load(f)
 
-for (def entrada : registros) {
-    log.info "$entrada.patient_id -- $entrada.feature"
-}
-```
+    for (def entrada : registros) {
+        log.info "$entrada.patient_id -- $entrada.feature"
+    }
+
+    ```
+
+=== "data/meta/regions.yml"
+
+    ```yaml
+    --8<-- "nf-training/data/meta/regions.yml"
+    ```
+
+=== "Saída"
+
+    ```console
+    ATX-TBL-001-GB-01-105 -- pass_vafqc_flag
+    ATX-TBL-001-GB-01-105 -- pass_stripy_flag
+    ATX-TBL-001-GB-01-105 -- pass_manual_flag
+    ATX-TBL-001-GB-01-105 -- other_region_selection_flag
+    ATX-TBL-001-GB-01-105 -- ace_information_gained
+    ATX-TBL-001-GB-01-105 -- concordance_flag
+    ATX-TBL-001-GB-01-105 -- pass_vafqc_flag
+    ATX-TBL-001-GB-01-105 -- pass_stripy_flag
+    ATX-TBL-001-GB-01-105 -- pass_manual_flag
+    ATX-TBL-001-GB-01-105 -- other_region_selection_flag
+    ATX-TBL-001-GB-01-105 -- ace_information_gained
+    ATX-TBL-001-GB-01-105 -- concordance_flag
+    ATX-TBL-001-GB-01-105 -- pass_vafqc_flag
+    ATX-TBL-001-GB-01-105 -- pass_stripy_flag
+    ```
 
 ### Armazenamento em módulos de analisadores sintáticos
 
 A melhor maneira de armazenar scripts com analisadores é mantê-los em um arquivo de módulo Nextflow.
 
-Veja o seguinte script Nextflow:
+Digamos que não temos um operador de canal JSON, mas criamos uma função para isso. O arquivo `parsers.nf` deve conter a função `parseArquivoJson`. Veja o conteúdo abaixo:
 
-```groovy linenums="1"
-include { parseJsonFile } from './modules/parsers.nf'
+=== "Código-fonte"
 
-process FOO {
-    input:
-    tuple val(patient_id), val(feature)
+    ```groovy linenums="1"
+    include { parseArquivoJson } from './modules/parsers.nf'
 
-    output:
-    stdout
+    process FOO {
+        input:
+        tuple val(id_paciente), val(caracteristica)
 
-    script:
-    """
-    echo $patient_id has $feature as feature
-    """
-}
+        output:
+        stdout
 
-workflow {
-    Channel
-        .fromPath('data/meta/regions*.json')
-        | flatMap { parseJsonFile(it) }
-        | map { record -> [record.patient_id, record.feature] }
-        | unique
-        | FOO
-        | view
-}
-```
+        script:
+        """
+        echo $id_paciente tem $caracteristica como característica
+        """
+    }
 
-Para que este script funcione, um arquivo de módulo chamado `parsers.nf` precisa ser criado e armazenado em uma pasta de módulos (`./modules`) no diretório atual.
+    workflow {
+        Channel
+            .fromPath('data/meta/regions*.json')
+            | flatMap { parseArquivoJson(it) }
+            | map { registro -> [registro.id_paciente, registro.caracteristica] }
+            | unique
+            | FOO
+            | view
+    }
+    ```
 
-O arquivo `parsers.nf` deve conter a função `parseJsonFile`. Por exemplo:
+=== "./modules/parsers.nf"
 
-```groovy linenums="1"
-import groovy.json.JsonSlurper
+    ```groovy linenums="1"
+    import groovy.json.JsonSlurper
 
-def parseJsonFile(json_file) {
-    def f = file('data/meta/regions.json')
-    def records = new JsonSlurper().parse(f)
-    return records
-}
-```
+    def parseArquivoJson(arquivo_json) {
+        def f = file(arquivo_json)
+        def registros = new JsonSlurper().parse(f)
+        return registros
+    }
+    ```
+
+=== "Saída"
+
+    ```console
+    ATX-TBL-001-GB-01-105 has pass_stripy_flag as feature
+
+    ATX-TBL-001-GB-01-105 has ace_information_gained as feature
+
+    ATX-TBL-001-GB-01-105 has concordance_flag as feature
+
+    ATX-TBL-001-GB-01-105 has pass_vafqc_flag as feature
+
+    ATX-TBL-001-GB-01-105 has pass_manual_flag as feature
+
+    ATX-TBL-001-GB-01-105 has other_region_selection_flag as feature
+    ```
 
 O Nextflow usará isso como uma função personalizada dentro do escopo `workflow`.
 
