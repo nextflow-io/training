@@ -320,7 +320,7 @@ bam
     | PROCESSO_C
 ```
 
-Se os meta mapas não forem possíveis, uma alternativa é usar a diretiva de processo [`fair`](https://nextflow.io/docs/edge/process.html#fair). Quando especificada, o Nextflow garantirá que a ordem dos elementos nos canais de saída corresponderá à ordem dos respectivos elementos nos canais de entrada.
+Se os meta mapas não forem possíveis, uma alternativa é usar a diretiva de processo [`fair`](https://nextflow.io/docs/edge/process.html#fair). Quando especificada, o Nextflow garantirá que a ordem dos elementos nos canais de saída corresponderá à ordem dos respectivos elementos nos canais de entrada. É importante deixar claro que a ordem em que as tarefas serão concluídas não será necessariamente a ordem dos elementos no canal entrada, mas Nextflow garante que, ao final do processamento, os elementos no canal de saída estarão na ordem correta.
 
 !!! warning
 

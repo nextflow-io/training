@@ -320,7 +320,7 @@ bam
     | PROCESS_C
 ```
 
-If meta maps are not possible, an alternative is to use the [`fair`](https://nextflow.io/docs/edge/process.html#fair) process directive. When specified, Nextflow will guarantee that the order of outputs will match the order of inputs.
+If meta maps are not possible, an alternative is to use the [`fair`](https://nextflow.io/docs/edge/process.html#fair) process directive. When this directive is specified, Nextflow will guarantee that the order of outputs will match the order of inputs (not the order in which the tasks run, only the order of the output channel).
 
 !!! warning
 
