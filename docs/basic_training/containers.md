@@ -488,13 +488,13 @@ Try executing the RNA-Seq workflow from earlier (script7.nf). Start by building 
 
 Another useful resource linking together Bioconda and containers is the [BioContainers](https://biocontainers.pro) project. BioContainers is a community initiative that provides a registry of container images for every Bioconda recipe.
 
-So far, we’ve seen how to install packages with conda and micromamba, both locally and within containers. With BioContainers, you don’t need to create your own container image for the tools you want, and you don’t need to use conda or micromamba to install the packages. It already provides you with a Docker image containing the programs you want installed. For example, you can get the container image of fastqc using BioContainers with:
+So far, we’ve seen how to install packages with conda and micromamba, both locally and within containers. With BioContainers, you don’t need to create your own container image for the tools you want, and you don’t need to use conda or micromamba to install the packages. It already provides you with a Docker image containing the programs you want to be installed. For example, you can get the container image of fastqc using BioContainers with:
 
 ```bash
 docker pull biocontainers/fastqc:v0.11.5
 ```
 
-You can check the registry for the packages you want in [BioContainers official website](https://biocontainers.pro/registry).
+You can check the registry for the packages you want at [BioContainers official website](https://biocontainers.pro/registry). For finding multi-tools container images, check their [Multi-package images](https://biocontainers.pro/multipackage).
 
 Contrary to other registries that will pull the latest image when no tag (version) is provided, you must specify a tag when pulling BioContainers (after a colon `:`, e.g. fastqc:v0.11.5). Check the tags within the registry and pick the one that better suits your needs.
 
