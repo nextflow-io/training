@@ -132,7 +132,7 @@ workflow {
 
 !!! warning
 
-    Since Nextflow uses the same Bash syntax for variable substitutions in strings, Bash environment variables need to be escaped using the `\` character.
+    Since Nextflow uses the same Bash syntax for variable substitutions in strings, Bash environment variables need to be escaped using the `\` character. When you use a `\`, the working directory you see is the temporary directory that Nextflow creates for that specific process. However, when you don't use a `\`, the directory you see is the location from which the script was executed.
 
 ```groovy linenums="1"
 process FOO {
