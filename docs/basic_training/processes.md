@@ -132,7 +132,7 @@ workflow {
 
 !!! warning
 
-    Since Nextflow uses the same Bash syntax for variable substitutions in strings, Bash environment variables need to be escaped using the `\` character.
+    Since Nextflow uses the same Bash syntax for variable substitutions in strings, Bash environment variables need to be escaped using the `\` character. The escaped version will be resolved later, returning the task directory (e.g. work/7f/f285b80022d9f61e82cd7f90436aa4/), while `$PWD` would show the directory where you're running Nextflow.
 
 ```groovy linenums="1"
 process FOO {
