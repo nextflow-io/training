@@ -494,9 +494,17 @@ Até agora, nós vimos como instalar pacotes com conda e micromamba, ambos local
 docker pull biocontainers/fastqc:v0.11.5
 ```
 
-Você pode checar o repositório dos pacotes que quer no [site oficial do BioContainers](https://biocontainers.pro/registry).
+Você pode checar o repositório dos pacotes que quer no [site oficial do BioContainers](https://biocontainers.pro/registry). Para encontrar imagens de container com várias ferramentas, confira a página [Multi-package images](https://biocontainers.pro/multipackage).
 
 Diferente de outros repositórios que irão puxar a imagem mais recente quando nenhum rótulo (versão) é especificado, você precisa especificar um rótulo quando for baixar do BioContainers (depois de dois pontos `:`, por exemplo fastqc:v0.11.5). Cheque os rótulos com o registro e escolha o que melhor se adéqua a suas necessidades.
+
+Você também pode instalar o pacote `galaxy-util-tools` e procurar por imagens de container _mulled_ através da linha de comando. Veja as instruções abaixo, usando o `conda` para instalar o pacote.
+
+```bash
+conda activate um-ambiente-conda-que-voce-ja-criou
+conda install galaxy-tool-util
+mulled-search --destination quay singularity --channel bioconda --search bowtie samtools | grep mulled
+```
 
 !!! tip
 

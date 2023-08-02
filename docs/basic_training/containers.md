@@ -498,7 +498,7 @@ You can check the registry for the packages you want at [BioContainers official 
 
 Contrary to other registries that will pull the latest image when no tag (version) is provided, you must specify a tag when pulling BioContainers (after a colon `:`, e.g. fastqc:v0.11.5). Check the tags within the registry and pick the one that better suits your needs.
 
-You can also install `galaxy-util-tools` and search for _mulled_ containers in your CLI. You'll find instructions below, using conda to install the tools.
+You can also install `galaxy-util-tools` and search for _mulled_ containers in your CLI. You'll find instructions below, using conda to install the tool.
 
 ```bash
 conda activate a-conda-env-you-already-have
