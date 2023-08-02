@@ -916,8 +916,8 @@ process FOO {
 
     script:
     """
-    < sample1.fq.gz zcat > sample1.fq
-    < sample2.fq.gz zcat > sample2.fq
+    zcat sample1.fq.gz > sample1.fq
+    zcat sample2.fq.gz > sample2.fq
 
     awk '{s++}END{print s/4}' sample1.fq > sample1_counts.txt
     awk '{s++}END{print s/4}' sample2.fq > sample2_counts.txt
