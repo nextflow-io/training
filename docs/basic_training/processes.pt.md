@@ -916,8 +916,8 @@ process FOO {
 
     script:
     """
-    < amostra1.fq.gz zcat > amostra1.fq
-    < amostra2.fq.gz zcat > amostra2.fq
+    zcat amostra1.fq.gz > amostra1.fq
+    zcat amostra2.fq.gz > amostra2.fq
 
     awk '{s++}END{print s/4}' amostra1.fq > amostra1_contagens.txt
     awk '{s++}END{print s/4}' amostra2.fq > amostra2_contagens.txt
