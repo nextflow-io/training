@@ -220,7 +220,7 @@ This operator is useful to process a group together with all the elements that s
 
 ### `join()`
 
-The `join` operator creates a channel that joins together the items emitted by two channels with a matching key. The key is defined, by default, as the first element in each item emitted.
+The `join` operator creates a channel that joins together the items emitted by two channels with a matching key. The key is defined, by default, as the first element in each item emitted. In the output, items from the 'left' channel always precede the corresponding items from the 'right' channel.
 
 ```groovy linenums="1"
 left = Channel.of(['X', 1], ['Y', 2], ['Z', 3], ['P', 7])
