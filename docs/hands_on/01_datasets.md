@@ -22,7 +22,7 @@ Only reads mapped to the [22q11^](http://genome-euro.ucsc.edu/cgi-bin/hgTracks?d
 | --------------------------------------------------------------------- | ----------------- | ------------ | ------------------------------------------------------ | ------------------------------------------------------ |
 | [ENCSR000COQ](https://www.encodeproject.org/experiments/ENCSR000COQ/) | Whole Cell        | 1<br>2       | `ENCSR000COQ1_1.fastq.gz`<br>`ENCSR000COQ2_1.fastq.gz` | `ENCSR000COQ1_2.fastq.gz`<br>`ENCSR000COQ2_2.fastq.gz` |
 | [ENCSR000CPO](https://www.encodeproject.org/experiments/ENCSR000CPO/) | Nuclear           | 1<br>2       | `ENCSR000CPO1_1.fastq.gz`<br>`ENCSR000CPO2_1.fastq.gz` | `ENCSR000CPO1_2.fastq.gz`<br>`ENCSR000CPO2_2.fastq.gz` |
-| [ENCSR000COR](https://www.encodeproject.org/experiments/ENCSR000COR/) | Cytosolic         | 1<br>2       | `ENCSR000COR1_1.fastq.gz`<br>`ENCSR000COR2_1.fastq.gz` | `ENCSR000COR1_1.fastq.gz`<br>`ENCSR000COR2_1.fastq.gz` |
+| [ENCSR000COR](https://www.encodeproject.org/experiments/ENCSR000COR/) | Cytosolic         | 1<br>2       | `ENCSR000COR1_1.fastq.gz`<br>`ENCSR000COR2_1.fastq.gz` | `ENCSR000COR1_2.fastq.gz`<br>`ENCSR000COR2_2.fastq.gz` |
 
 ## "Known" variants
 
