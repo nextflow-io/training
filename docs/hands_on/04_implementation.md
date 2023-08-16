@@ -304,7 +304,7 @@ You should implement a process having the following structure:
 
     This is a similar exercise as problem 3, except this time both `input` and `output` lines have been left `BLANK` and must be completed.
 
-    ```groovy linenums="1" hl_lines="21"
+    ```groovy linenums="1" hl_lines="24"
     /*
      * Process 1C: Create the genome index file for STAR
      */
@@ -338,7 +338,7 @@ You should implement a process having the following structure:
 
     ??? solution
 
-        ```groovy linenums="1" hl_lines="21"
+        ```groovy linenums="1" hl_lines="25"
         /*
         * Process 1C: Create the genome index file for STAR
         */
@@ -368,12 +368,12 @@ You should implement a process having the following structure:
         ```
 
         1. Take as input the `genome` file from the `params.genome` parameter.
-        2. The `output` is a `file`\* called `genome_dir`
+        2. The `output` is a `path` called `genome_dir`
         3. Creates the output directory that will contain the resulting STAR genome index.
 
         !!! note
 
-            The file in this case is a directory however it makes no difference.
+            The path in this case is a directory however it makes no difference, it could be a text file, for example.
 
 ## Process 1D: Filtered and recoded set of variants
 
