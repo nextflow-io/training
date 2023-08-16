@@ -402,7 +402,7 @@ You should implement a process having the following structure:
      * Process 1D: Create a file containing the filtered and recoded set of variants
      */
 
-    process '1D_prepare_vcf_file' {
+    process 1D_prepare_vcf_file {
         input:
         path variantsFile
         path blacklisted
@@ -457,7 +457,7 @@ You should implement a process having the following structure:
          * Process 1D: Create a file containing the filtered and recoded set of variants
          */
 
-        process 'prepare_vcf_file' {
+        process prepare_vcf_file {
             path variantsFile
             path blacklisted
 
@@ -498,7 +498,7 @@ In this process, for each sample, we align the reads to our genome using the STA
 You should implement a process having the following structure:
 
 -   **Name**
-    -   `2_rnaseq_mapping_star`
+    -   `rnaseq_mapping_star`
 -   **Command**
     -   mapping of the RNA-Seq reads using STAR
 -   **Input**
@@ -512,22 +512,22 @@ You should implement a process having the following structure:
 
     Copy the code below and paste it at the end of `main.nf`.
 
-    You must fill in the three `BLANK_LINE` lines in the input and the one `BLANK_LINE` line in the output.
+    You must fill the `BLANK` space with the correct function and parameter.
 
-    ```groovy linenums="1" hl_lines="8-10 13"
+    ```groovy linenums="1" hl_lines="54"
     /*
      * Process 2: Align RNA-Seq reads to the genome with STAR
      */
 
-    process '2_rnaseq_mapping_star' {
+    process rnaseq_mapping_star {
 
         input:
-        BLANK_LINE
-        BLANK_LINE
-        BLANK_LINE
+        path genome
+        path genomeDir
+        tuple val(replicateId), path(reads)
 
         output:
-        BLANK_LINE
+        tuple val(replicateId), path('Aligned.sortedByCoord.out.bam'), path('Aligned.sortedByCoord.out.bam.bai')
 
         script:
         """
@@ -566,6 +566,10 @@ You should implement a process having the following structure:
         samtools index Aligned.sortedByCoord.out.bam
         """
     }
+
+    workflow {
+        BLANK
+    }
     ```
 
     !!! info
@@ -574,12 +578,12 @@ You should implement a process having the following structure:
 
     ??? solution
 
-        ```groovy linenums="1" hl_lines="8-10 13"
+        ```groovy linenums="1" hl_lines="54"
         /*
          * Process 2: Align RNA-Seq reads to the genome with STAR
          */
 
-        process '2_rnaseq_mapping_star' {
+        process rnaseq_mapping_star {
 
             input:
             path genome from params.genome
@@ -626,11 +630,15 @@ You should implement a process having the following structure:
             samtools index Aligned.sortedByCoord.out.bam
             """
         }
+
+        workflow {
+            rnaseq_mapping_star(params.genome, prepare_star_genome_index.out, reads_ch)
+        }
         ```
 
         - the genome fasta file.
 
-        - the STAR genome index directory from the `genome_dir_ch` channel created in the process `1C_prepare_star_genome_index`.
+        - the STAR genome index directory in the output channel from the `prepare_star_genome_index` process.
 
         - set containing replicate ID and pairs of reads.
 
