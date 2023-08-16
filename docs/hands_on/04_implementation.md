@@ -655,7 +655,7 @@ The process creates `k+1` new reads (where `k` is the number of `N` cigar elemen
 You should implement a process having the following structure:
 
 -   **Name**
-    -   3_rnaseq_gatk_splitNcigar
+    -   rnaseq_gatk_splitNcigar
 -   **Command**
     -   split reads on Ns in CIGAR string using GATK
 -   **Input**
@@ -670,37 +670,45 @@ You should implement a process having the following structure:
 
     Copy the code below and paste it at the end of `main.nf`.
 
-    You must fill in the four `BLANK_LINE` lines in the input and the one `BLANK_LINE` line in the output.
+    You must fill the `BLANK` space with the correct function and parameter.
 
     !!! warning
 
         There is an optional [`tag`](https://www.nextflow.io/docs/latest/process.html#tag) line added to the start of this process. The [`tag`](https://www.nextflow.io/docs/latest/process.html#tag) line allows you to assign a name to a specific task (single execution of a process). This is particularly useful when there are many samples/replicates which pass through the same process.
 
 
-    ```groovy linenums="1" hl_lines="2 5-8 11"
-    process '3_rnaseq_gatk_splitNcigar' {
+    ```groovy linenums="1" hl_lines="31"
+    /*
+     * Process 3: Process 3: GATK Split on N
+     */
+
+    process rnaseq_gatk_splitNcigar {
         tag OPTIONAL_BLANK
 
         input:
-        BLANK_LINE
-        BLANK_LINE
-        BLANK_LINE
-        BLANK_LINE
+        path genome
+        path index
+        path genome_dict
+        tuple val(replicateId), path(bam), path(bai)
 
         output:
-        BLANK_LINE
+        tuple val(replicateId), path('split.bam'), path('split.bai')
 
         script:
         """
         # SplitNCigarReads and reassign mapping qualities
-        java -jar $GATK -T SplitNCigarReads \
-                        -R $genome -I $bam \
-                        -o split.bam \
-                        -rf ReassignOneMappingQuality \
-                        -RMQF 255 -RMQT 60 \
-                        -U ALLOW_N_CIGAR_READS \
-                        --fix_misencoded_quality_scores
+        java -jar $params.gatk -T SplitNCigarReads \
+                               -R $genome -I $bam \
+                               -o split.bam \
+                               -rf ReassignOneMappingQuality \
+                               -RMQF 255 -RMQT 60 \
+                               -U ALLOW_N_CIGAR_READS \
+                               --fix_misencoded_quality_scores
         """
+    }
+
+    workflow {
+        BLANK
     }
     ```
 
@@ -715,8 +723,8 @@ You should implement a process having the following structure:
     ??? solution
 
 
-        ```groovy linenums="1" hl_lines="2 5-8 11"
-        process '3_rnaseq_gatk_splitNcigar' {
+        ```groovy linenums="1" hl_lines="31-34"
+        process rnaseq_gatk_splitNcigar {
             tag "$replicateId"
 
             input:
@@ -731,23 +739,30 @@ You should implement a process having the following structure:
             script:
             """
             # SplitNCigarReads and reassign mapping qualities
-            java -jar $GATK -T SplitNCigarReads \
-                            -R $genome -I $bam \//
-                            -o split.bam \//
-                            -rf ReassignOneMappingQuality \
-                            -RMQF 255 -RMQT 60 \
-                            -U ALLOW_N_CIGAR_READS \
-                            --fix_misencoded_quality_scores
+            java -jar $params.gatk -T SplitNCigarReads \
+                                   -R $genome -I $bam \//
+                                   -o split.bam \//
+                                   -rf ReassignOneMappingQuality \
+                                   -RMQF 255 -RMQT 60 \
+                                   -U ALLOW_N_CIGAR_READS \
+                                   --fix_misencoded_quality_scores
 
             """
+        }
+
+        workflow {
+            rnaseq_gatk_splitNcigar(params.genome,
+                                    prepare_genome_samtools.out,
+                                    prepare_genome_picard.out,
+                                    rnaseq_mapping_star.out)
         }
         ```
 
         - [`tag`](https://www.nextflow.io/docs/latest/process.html#tag) line with the using the replicate id as the tag.
         - the genome fasta file
-        - the genome index from the `genome_index_ch` channel created in the process `1A_prepare_genome_samtools`
-        - the genome dictionary from the `genome_dict_ch` channel created in the process `1B_prepare_genome_picard`
-        - the set containing the aligned reads from the `aligned_bam_ch` channel created in the process `2 _rnaseq_mapping_star`
+        - the genome index in the output channel from the `prepare_genome_samtools` process
+        - the genome dictionary in the output channel from the `prepare_genome_picard` process
+        - the set containing the aligned reads in the output channel from the `rnaseq_mapping_star` process
         - a set containing the sample id, the split bam file and the split bam index
         - specifies the input file names `$genome` and `$bam` to GATK
         - specifies the output file names to GATK
