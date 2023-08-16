@@ -10,6 +10,8 @@ tree /workspace/gitpod/hands-on
 
 ```bash
 /workspace/gitpod/hands-on
+hands-on
+├── README.md
 ├── bin
 │   └── gghist.R
 ├── data
@@ -29,11 +31,11 @@ tree /workspace/gitpod/hands-on
 │       ├── ENCSR000CPO1_2.fastq.gz
 │       ├── ENCSR000CPO2_1.fastq.gz
 │       └── ENCSR000CPO2_2.fastq.gz
-├── nextflow.config
-└── README.md
+├── final_main.nf
+└── nextflow.config
 ```
 
-3 directories, 19 files
+4 directories, 19 files
 
 ## Pulling the Docker image
 

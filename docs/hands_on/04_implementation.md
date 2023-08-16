@@ -108,7 +108,7 @@ Launching `main.nf` [lethal_faggin] - revision: 4c9a5c830c
     ??? solution
 
 
-        ```groovy linenums="1" hl_lines="1"
+        ```groovy linenums="1" hl_lines="2"
         workflow {
             reads_ch = Channel.fromFilePairs(params.reads) // (1)!
         }
@@ -133,7 +133,7 @@ You should implement a process having the following structure:
 
     Your aim is to replace the `BLANK` placeholder with the the correct process call.
 
-    ```groovy linenums="1" hl_lines="8"
+    ```groovy linenums="1" hl_lines="20"
     /*
      * Process 1A: Create a FASTA genome index with samtools
      */
@@ -160,8 +160,8 @@ You should implement a process having the following structure:
     In plain english, the process could be written as:
 
     -   A **process** called `prepare_genome_samtools`
-    -   takes as **input** the genome file from `BLANK`
-    -   and creates as **output** a genome index file which goes into channel `genome_index_ch`
+    -   takes as **input** the genome file
+    -   and creates as **output** a genome index file
     -   **script**: using samtools create the genome index from the genome file
 
     Now when we run the pipeline, we see that the process 1A is submitted:
@@ -178,7 +178,7 @@ You should implement a process having the following structure:
 
     ??? solution
 
-        ```groovy linenums="1" hl_lines="8"
+        ```groovy linenums="1" hl_lines="20"
         /*
          * Process 1A: Create a FASTA genome index with samtools
          */
@@ -199,13 +199,14 @@ You should implement a process having the following structure:
         workflow {
             reads_ch = Channel.fromFilePairs(params.reads)
             prepare_genome_samtools(params.genome) // (1)!
+        }
         ```
 
         1. The solution is to provide **`params.genome`** as input to the `prepare_genome_samtools` process.
 
-    !!! warning
+        !!! warning
 
-        `params.genome` is just a regular variable, not a channel, but when passed as input to a process, it's automatically converted into a value channel.
+            `params.genome` is just a regular variable, not a channel, but when passed as input to a process, it's automatically converted into a value channel.
 
 ## Process 1B: Create a FASTA genome sequence dictionary with Picard for GATK
 
