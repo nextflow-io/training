@@ -221,11 +221,9 @@ You should implement a process having the following structure:
 
 !!! exercise "Problem #3"
 
-    Fill in the `BLANK` words for both the input and output sections.
+    Your aim is to replace the `BLANK` placeholder with the the correct process call.
 
     Copy the code below and paste it at the end of `main.nf`.
-
-    Your aim is to insert the correct input name from into the input step (written as `BLANK`) of the process and run the pipeline.
 
     !!! info
 
@@ -302,7 +300,7 @@ You should implement a process having the following structure:
 
 !!! exercise "Problem #4"
 
-    This is a similar exercise as problem 3, except this time both `input` and `output` lines have been left `BLANK` and must be completed.
+    This is a similar exercise as problem 3.
 
     ```groovy linenums="1" hl_lines="24"
     /*
@@ -311,10 +309,10 @@ You should implement a process having the following structure:
 
     process prepare_star_genome_index {
         input:
-        BLANK_LINE
+        path genome
 
         output:
-        BLANK_LINE
+        path 'genome_dir'
 
         script:
         """
@@ -379,8 +377,6 @@ You should implement a process having the following structure:
 
 Next on to something a little more tricky. The next process takes two inputs: the variants file and the blacklist file.
 
-It should output a channel named `prepared_vcf_ch` which emitting a tuple of two files.
-
 !!! info
 
     In Nextflow, tuples can be defined in the input or output using the [`tuple`](https://www.nextflow.io/docs/latest/process.html#input-of-type-tuple) qualifier.
@@ -388,7 +384,7 @@ It should output a channel named `prepared_vcf_ch` which emitting a tuple of two
 You should implement a process having the following structure:
 
 -   **Name**
-    -   `1D_prepare_vcf_file`
+    -   `prepare_vcf_file`
 -   **Command**
     -   create a filtered and recoded set of variants
 -   **Input**
@@ -399,7 +395,7 @@ You should implement a process having the following structure:
 
 !!! exercise "Problem #5"
 
-    You must fill in the two `BLANK_LINES` in the input and the two `BLANK` output files.
+    You must fill in the `BLANK`.
 
     ```groovy linenums="1" hl_lines="8-9 12"
     /*
@@ -407,13 +403,13 @@ You should implement a process having the following structure:
      */
 
     process '1D_prepare_vcf_file' {
-
         input:
-        BLANK_LINE
-        BLANK_LINE
+        path variantsFile
+        path blacklisted
 
         output:
-        tuple BLANK, BLANK into prepared_vcf_ch
+        tuple path("${variantsFile.baseName}.filtered.recode.vcf.gz"), \
+              path("${variantsFile.baseName}.filtered.recode.vcf.gz.tbi")
 
         script:
         """
@@ -424,6 +420,10 @@ You should implement a process having the following structure:
 
         tabix ${variantsFile.baseName}.filtered.recode.vcf.gz
         """
+    }
+
+    workflow {
+        BLANK
     }
     ```
 
@@ -457,15 +457,13 @@ You should implement a process having the following structure:
          * Process 1D: Create a file containing the filtered and recoded set of variants
          */
 
-        process '1D_prepare_vcf_file' {
-
-            input:
-            path variantsFile from params.variants
-            path blacklisted from params.blacklist
+        process 'prepare_vcf_file' {
+            path variantsFile
+            path blacklisted
 
             output:
             tuple path("${variantsFile.baseName}.filtered.recode.vcf.gz"), \
-                  path("${variantsFile.baseName}.filtered.recode.vcf.gz.tbi") into prepared_vcf_ch
+                  path("${variantsFile.baseName}.filtered.recode.vcf.gz.tbi")
 
             script:
             """
@@ -477,11 +475,15 @@ You should implement a process having the following structure:
             tabix ${variantsFile.baseName}.filtered.recode.vcf.gz
             """
         }
+
+        workflow {
+            prepare_vcf_file(params.variants, params.blacklist)
+        }
         ```
 
         - Take as input the variants file, assigning the name `${variantsFile}`.
         - Take as input the blacklisted file, assigning the name `${blacklisted}`.
-        - Out a tuple (or set) of two files into the `prepared_vcf_ch` channel.
+        - Out a tuple (or set) of two files
         - Defines the name of the first output file.
         - Generates the second output file (with `.tbi` suffix).
 
