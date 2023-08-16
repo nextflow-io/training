@@ -5,11 +5,11 @@
 All the files needed for the hands-on activity are stored in the directory shown below:
 
 ```bash
-tree $HOME/environment/hands-on
+tree /workspace/gitpod/hands-on
 ```
 
 ```bash
-$HOME/environment/hands-on
+/workspace/gitpod/hands-on
 ├── bin
 │   └── gghist.R
 ├── data
@@ -69,5 +69,5 @@ Status: Downloaded newer image for cbcrg/callings-with-gatk:latest
 Make sure the following R script has execute permissions:
 
 ```bash
-chmod +x $HOME/environment/hands-on/bin/gghist.R
+chmod +x /workspace/gitpod/hands-on/bin/gghist.R
 ```

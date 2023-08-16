@@ -2,7 +2,7 @@
 
 ## Data preparation
 
-A first step in any pipeline is to prepare the input data. You will find all the data required to run the pipeline in the folder `data` within the `$HOME/environment/hands-on` repository directory.
+A first step in any pipeline is to prepare the input data. You will find all the data required to run the pipeline in the folder `data` within the `/workspace/gitpod/hands-on` repository directory.
 
 There are four data inputs that we will use in this tutorial:
 
@@ -17,11 +17,11 @@ There are four data inputs that we will use in this tutorial:
 
 ## Input parameters
 
-We can begin writing the pipeline by creating and editing a text file called `main.nf` from the `$HOME/nf-course/hands-on` repository directory with your favourite text editor. In this example we are using `nano`:
+We can begin writing the pipeline by creating and editing a text file called `main.nf` from the `/workspace/gitpod/hands-on` repository directory with your favourite text editor. In this example we are using `code`:
 
 ```bash
-cd $HOME/nf-course/hands-on
-nano main.nf
+cd /workspace/gitpod/hands-on
+code main.nf
 ```
 
 Edit this file to specify the input files as script parameters. Using this notation allows you to override them by specifying different values when launching the pipeline execution.
@@ -47,17 +47,17 @@ params.gatk       = "/opt/broad/GenomeAnalysisTK.jar" // (5)!
 2. The `baseDir` variable represents the main script path location.
 3. The `reads` parameter uses a glob pattern to specify the forward (`ENCSR000COQ1_1.fq.gz`) and reverse (`ENCSR000COQ1_2.fq.gz`) reads are pairs of the same sample.
 4. The `results` parameter is used to specify a directory called `results`.
-5. The `gatk` parameter specifies the location of the GATK jar file.
+5. The `gatk` parameter specifies the location of the GATK jar file. This is a path within the container.
 
 !!! tip
 
-    You can copy the above text (:material-content-copy: top right or ++cmd+c++), then move in the terminal window, open `nano` and paste using the keyboard ++cmd+v++ shortcut.
+    You can copy the above text (:material-content-copy: top right or ++cmd+c++), then move in the terminal window, open `code` and paste using the keyboard ++cmd+v++ shortcut.
 
 Once you have the default parameters in the `main.nf` file, you can save and run the main script for the first time.
 
 !!! tip
 
-    With `nano` you can save and close the file with ++ctrl+o++, then ++enter++, followed by ++ctrl+x++.
+    With `code` you can save and close the file with ++ctrl+o++, then ++enter++, followed by ++ctrl+x++.
 
 To run the main script use the following command:
 
@@ -78,7 +78,7 @@ Launching `main.nf` [lethal_faggin] - revision: 4c9a5c830c
 
     !!! tip
 
-        In `nano` you can move to the end of the file using ++ctrl+w++ and then ++ctrl+v++.
+        In `code` you can move to the end of the file using ++ctrl+w++ and then ++ctrl+v++.
 
     This time you must fill the `BLANK` space with the correct function and parameter.
 
