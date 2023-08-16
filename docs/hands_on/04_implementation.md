@@ -1327,7 +1327,6 @@ Or run the final version of the Nextflow pipeline that is already prepared for y
 nextflow run final_main.nf -resume
 ```
 
-
 It will print an output similar to the one below:
 
 ```console
