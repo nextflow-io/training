@@ -295,7 +295,7 @@ Next we must create a genome index for the [STAR](https://github.com/alexdobin/S
 
 You should implement a process having the following structure:
 
--   **Name**: 1C_prepare_star_genome_index
+-   **Name**: prepare_star_genome_index
 -   **Command**: create a STAR genome index for the genome fasta
 -   **Input**: the genome fasta file
 -   **Output**: a directory containing the STAR genome index
@@ -304,13 +304,12 @@ You should implement a process having the following structure:
 
     This is a similar exercise as problem 3, except this time both `input` and `output` lines have been left `BLANK` and must be completed.
 
-    ```groovy linenums="1" hl_lines="8 11"
+    ```groovy linenums="1" hl_lines="21"
     /*
      * Process 1C: Create the genome index file for STAR
      */
 
-    process '1C_prepare_star_genome_index' {
-
+    process prepare_star_genome_index {
         input:
         BLANK_LINE
 
@@ -327,6 +326,10 @@ You should implement a process having the following structure:
             --runThreadN ${task.cpus}
         """
     }
+
+    workflow {
+        BLANK
+    }
     ```
 
     !!! info
@@ -335,18 +338,18 @@ You should implement a process having the following structure:
 
     ??? solution
 
-        ```groovy linenums="1" hl_lines="8 11"
+        ```groovy linenums="1" hl_lines="21"
         /*
         * Process 1C: Create the genome index file for STAR
         */
 
-        process '1C_prepare_star_genome_index' {
+        process prepare_star_genome_index {
 
             input:
-            path genome from params.genome // (1)!
+            path genome // (1)!
 
             output:
-            path 'genome_dir' into genome_dir_ch // (2)!
+            path 'genome_dir' // (2)!
 
             script: // (3)!
             """
@@ -358,10 +361,14 @@ You should implement a process having the following structure:
             --runThreadN ${task.cpus}
             """
         }
+
+        workflow {
+            prepare_star_genome_index(params.genome)
+        }
         ```
 
         1. Take as input the `genome` file from the `params.genome` parameter.
-        2. The `output` is a `file`\* called `genome_dir` and is added `into` a channel called `genome_dir_ch`. You can call the channel whatever you wish.
+        2. The `output` is a `file`\* called `genome_dir`
         3. Creates the output directory that will contain the resulting STAR genome index.
 
         !!! note
