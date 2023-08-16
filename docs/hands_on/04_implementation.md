@@ -402,7 +402,7 @@ You should implement a process having the following structure:
      * Process 1D: Create a file containing the filtered and recoded set of variants
      */
 
-    process 1D_prepare_vcf_file {
+    process prepare_vcf_file {
         input:
         path variantsFile
         path blacklisted
