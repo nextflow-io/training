@@ -86,9 +86,9 @@ Launching `main.nf` [lethal_faggin] - revision: 4c9a5c830c
     /*
      *  Parse the input parameters
      */
-
-    reads_ch        = BLANK
-    GATK            = params.gatk
+    workflow {
+        reads_ch = BLANK
+    }
     ```
 
     !!! tip
@@ -109,12 +109,12 @@ Launching `main.nf` [lethal_faggin] - revision: 4c9a5c830c
 
 
         ```groovy linenums="1" hl_lines="1"
-        reads_ch        =  Channel.fromFilePairs(params.reads) // (1)!
-        GATK            =  params.gatk // (2)!
+        workflow {
+            reads_ch = Channel.fromFilePairs(params.reads) // (1)!
+        }
         ```
 
         1. Create a channel using [fromFilePairs()](https://www.nextflow.io/docs/latest/channel.html#fromfilepairs).
-        2. A variable representing the path of GATK application file.
 
 ## Process 1A: Create a FASTA genome index
 
@@ -122,7 +122,7 @@ Now we have our inputs set up we can move onto the processes. In our first proce
 
 You should implement a process having the following structure:
 
--   **Name**: `1A_prepare_genome_samtools`
+-   **Name**: `prepare_genome_samtools`
 -   **Command**: create a genome index for the genome fasta with samtools
 -   **Input**: the genome fasta file
 -   **Output**: the samtools genome index file
@@ -131,31 +131,35 @@ You should implement a process having the following structure:
 
     Copy the code below and paste it at the end of `main.nf`.
 
-    Your aim is to replace `BLANK` placeholder with the the correct variable name of the genome file that you have defined in previous problem.
+    Your aim is to replace the `BLANK` placeholder with the the correct process call.
 
     ```groovy linenums="1" hl_lines="8"
     /*
      * Process 1A: Create a FASTA genome index with samtools
      */
 
-    process '1A_prepare_genome_samtools' {
-
+    process prepare_genome_samtools {
         input:
-        path genome from BLANK
+        path genome
 
         output:
-        path "${genome}.fai" into genome_index_ch
+        path "${genome}.fai"
 
         script:
         """
         samtools faidx ${genome}
         """
     }
+
+    workflow {
+        reads_ch = Channel.fromFilePairs(params.reads)
+        BLANK
+    }
     ```
 
     In plain english, the process could be written as:
 
-    -   A **process** called `1A_prepare_genome_samtools`
+    -   A **process** called `prepare_genome_samtools`
     -   takes as **input** the genome file from `BLANK`
     -   and creates as **output** a genome index file which goes into channel `genome_index_ch`
     -   **script**: using samtools create the genome index from the genome file
@@ -179,22 +183,29 @@ You should implement a process having the following structure:
          * Process 1A: Create a FASTA genome index with samtools
          */
 
-        process '1A_prepare_genome_samtools' {
-
+        process prepare_genome_samtools {
             input:
-            path genome from params.genome // (1)!
+            path genome
 
             output:
-            path "${genome}.fai" into genome_index_ch
+            path "${genome}.fai"
 
             script:
             """
             samtools faidx ${genome}
             """
         }
+
+        workflow {
+            reads_ch = Channel.fromFilePairs(params.reads)
+            prepare_genome_samtools(params.genome) // (1)!
         ```
 
-        1. The solution is to use the **`params.genome`** parameter defined at the beginning of the script.
+        1. The solution is to provide **`params.genome`** as input to the `prepare_genome_samtools` process.
+
+    !!! warning
+
+        `params.genome` is just a regular variable, not a channel, but when passed as input to a process, it's automatically converted into a value channel.
 
 ## Process 1B: Create a FASTA genome sequence dictionary with Picard for GATK
 
