@@ -922,7 +922,7 @@ You should implement a process having the following structure:
         - the genome index in the output channel from the `prepare_genome_samtools` process.
         - the genome dictionary in the output channel from the `prepare_genome_picard` process.
         - the set containing the split reads in the output channel from the `rnaseq_gatk_splitNcigar` process.
-        - the set containing the filtered/recoded VCF file and the tab index (TBI) file in the output channel from the process `prepare_vcf_file`.
+        - the set containing the filtered/recoded VCF file and the tab index (TBI) file in the output channel from the `prepare_vcf_file` process.
         - the set containing the replicate id, the unique bam file and the unique bam index file which goes into two channels.
         - line specifying the filename of the output bam file
 
@@ -935,7 +935,7 @@ This steps call variants with GATK HaplotypeCaller. You can find details of the 
 You should implement a process having the following structure:
 
 -   **Name**
-    -   5_rnaseq_call_variants
+    -   rnaseq_call_variants
 -   **Command**
     -   variant calling of each sample using GATK
 -   **Input**
@@ -956,18 +956,22 @@ You should implement a process having the following structure:
 
     Fill in the `BLANK_LINE` lines and `BLANK` words as before.
 
-    ```groovy linenums="1" hl_lines="2 5-8 11"
-    process '5_rnaseq_call_variants' {
-        tag BLANK
+    ```groovy linenums="1" hl_lines="39"
+    /*
+     * Process 5: GATK Variant Calling
+     */
+
+    process rnaseq_call_variants {
+        tag "$sampleId"
 
         input:
-        BLANK_LINE
-        BLANK_LINE
-        BLANK_LINE
-        BLANK from BLANK.groupTuple()
+        path genome
+        path index
+        path dict
+        tuple val(sampleId), path(bam), path(bai)
 
         output:
-        BLANK_LINE
+        tuple val(sampleId), path('final.vcf')
 
         script:
         """
@@ -989,22 +993,30 @@ You should implement a process having the following structure:
                         -o final.vcf
         """
     }
+
+    workflow {
+        BLANK
+    }
     ```
 
     ??? solution
 
-        ```groovy linenums="1" hl_lines="2 5-8 11"
-        process '5_rnaseq_call_variants' {
+        ```groovy linenums="1" hl_lines="39-42"
+        /*
+         * Process 5: GATK Variant Calling
+         */
+
+        process rnaseq_call_variants {
             tag "$sampleId"
 
             input:
-            path genome from params.genome
-            path index from genome_index_ch
-            path dict from genome_dict_ch
-            tuple val(sampleId), path(bam), path(bai) from final_output_ch.groupTuple()
+            path genome
+            path index
+            path dict
+            tuple val(sampleId), path(bam), path(bai)
 
             output:
-            tuple val(sampleId), path('final.vcf') into vcf_files
+            tuple val(sampleId), path('final.vcf')
 
             script:
             """
@@ -1026,15 +1038,22 @@ You should implement a process having the following structure:
                             -o final.vcf
             """
         }
+
+        workflow {
+            rnaseq_call_variants(params.genome,
+                                 prepare_genome_samtools.out,
+                                 prepare_genome_picard.out,
+                                 rnaseq_gatk_recalibrate.out)
+        }
         ```
 
         -   [`tag`](https://www.nextflow.io/docs/latest/process.html#tag) line with the using the sample id as the tag.
         -   the genome fasta file.
-        -   the genome index from the `genome_index_ch` channel created in the process `1A_prepare_genome_samtools`.
-        -   the genome dictionary from the `genome_dict_ch` channel created in the process `1B_prepare_genome_picard`.
-        -   the sets grouped by sampleID from the `final_output_ch` channel created in the process `4_rnaseq_gatk_recalibrate`.
+        -   the genome index in the output channel from the `prepare_genome_samtools` process.
+        -   the genome dictionary in the output channel from the `prepare_genome_picard` process.
+        -   the sets grouped by sampleID in the output channel from the `rnaseq_gatk_recalibrate` process.
         -   the set containing the sample ID and final VCF file.
-        -   the line specifying the name resulting final vcf file.
+        -   the line specifying the name resulting final VCF file.
 
 ## Processes 6A and 6B: ASE & RNA Editing
 
