@@ -231,7 +231,7 @@ You should implement a process having the following structure:
 
         You can choose any channel output name that makes sense to you.
 
-    ```groovy linenums="1" hl_lines="8 11"
+    ```groovy linenums="1" hl_lines="21"
     /*
      * Process 1B: Create a FASTA genome sequence dictionary with Picard for GATK
      */
@@ -262,7 +262,7 @@ You should implement a process having the following structure:
 
     ??? solution
 
-        ```groovy linenums="1" hl_lines="8 11"
+        ```groovy linenums="1" hl_lines="21"
         /*
          * Process 1B: Create a FASTA genome sequence dictionary with Picard for GATK
          */
