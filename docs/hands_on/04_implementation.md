@@ -397,7 +397,7 @@ You should implement a process having the following structure:
 
     You must fill in the `BLANK`.
 
-    ```groovy linenums="1" hl_lines="8-9 12"
+    ```groovy linenums="1" hl_lines="26"
     /*
      * Process 1D: Create a file containing the filtered and recoded set of variants
      */
@@ -452,7 +452,7 @@ You should implement a process having the following structure:
 
     ??? solution
 
-        ```groovy linenums="1" hl_lines="8-9 12-13"
+        ```groovy linenums="1" hl_lines="25"
         /*
          * Process 1D: Create a file containing the filtered and recoded set of variants
          */
