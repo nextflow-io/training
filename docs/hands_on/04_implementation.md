@@ -679,7 +679,7 @@ You should implement a process having the following structure:
 
     ```groovy linenums="1" hl_lines="31"
     /*
-     * Process 3: Process 3: GATK Split on N
+     * Process 3: GATK Split on N
      */
 
     process rnaseq_gatk_splitNcigar {
@@ -723,7 +723,11 @@ You should implement a process having the following structure:
     ??? solution
 
 
-        ```groovy linenums="1" hl_lines="31-34"
+        ```groovy linenums="1" hl_lines="32-35"
+        /*
+         * Process 3: GATK Split on N
+         */
+
         process rnaseq_gatk_splitNcigar {
             tag "$replicateId"
 
@@ -776,7 +780,7 @@ This step uses GATK to detect systematic errors in the base quality scores, sele
 You should implement a process having the following structure:
 
 -   **Name**
-    -   4_rnaseq_gatk_recalibrate
+    -   rnaseq_gatk_recalibrate
 -   **Command**
     -   recalibrate reads from each replicate using GATK
 -   **Input**
@@ -792,7 +796,7 @@ You should implement a process having the following structure:
 
     Copy the code below and paste it at the end of `main.nf`.
 
-    You must fill in the five `BLANK_LINE` lines in the input and the one `BLANK` in the output line.
+    Your aim is to replace the `BLANK` placeholder with the the correct process call.
 
     ```groovy linenums="1" hl_lines="5-9 12"
     process '4_rnaseq_gatk_recalibrate' {
