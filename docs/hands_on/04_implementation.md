@@ -173,7 +173,7 @@ You should implement a process having the following structure:
     N E X T F L O W  ~  version 23.04.1
     Launching `main.nf` [cranky_bose] - revision: d1df5b7267
     executor >  local (1)
-    [cd/47f882] process > 1A_prepare_genome_samtools [100%] 1 of 1 ✔
+    [cd/47f882] process > prepare_genome_samtools [100%] 1 of 1 ✔
     ```
 
     ??? solution
@@ -214,7 +214,7 @@ Our first process created the genome index for GATK using samtools. For the next
 
 You should implement a process having the following structure:
 
--   **Name**: `1B_prepare_genome_picard`
+-   **Name**: `prepare_genome_picard`
 -   **Command**: create a genome dictionary for the genome fasta with Picard tools
 -   **Input**: the genome fasta file
 -   **Output**: the genome dictionary file
@@ -236,19 +236,23 @@ You should implement a process having the following structure:
      * Process 1B: Create a FASTA genome sequence dictionary with Picard for GATK
      */
 
-    process '1B_prepare_genome_picard' {
+    process prepare_genome_picard {
 
         input:
-        path genome BLANK BLANK
+        path genome
 
         output:
-        path "${genome.baseName}.dict" BLANK BLANK
+        path "${genome.baseName}.dict"
 
         script:
         """
         PICARD=`which picard.jar`
         java -jar \$PICARD CreateSequenceDictionary R= $genome O= ${genome.baseName}.dict
         """
+    }
+
+    workflow {
+        BLANK
     }
     ```
 
@@ -263,13 +267,13 @@ You should implement a process having the following structure:
          * Process 1B: Create a FASTA genome sequence dictionary with Picard for GATK
          */
 
-        process '1B_prepare_genome_picard' {
+        process prepare_genome_picard {
 
             input:
-            path genome from params.genome // (1)!
+            path genome
 
             output:
-            path "${genome.baseName}.dict" into genome_dict_ch // (2)!
+            path "${genome.baseName}.dict"
 
             script:
             """
@@ -277,10 +281,13 @@ You should implement a process having the following structure:
             java -jar \$PICARD CreateSequenceDictionary R= $genome O= ${genome.baseName}.dict
             """
         }
+
+        workflow {
+            prepare_genome_picard(params.genome) // (1)!
+        }
         ```
 
-        1. Take as input the `genome` file from the `params.genome` parameter
-        2. Give as output the file `${genome.baseName}.dict` and adds it to the channel `genome_dict_ch`
+        1. The solution is to provide **`params.genome`** as input to the `prepare_genome_picard` process
 
 ## Process 1C: Create STAR genome index file
 
