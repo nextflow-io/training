@@ -798,19 +798,23 @@ You should implement a process having the following structure:
 
     Your aim is to replace the `BLANK` placeholder with the the correct process call.
 
-    ```groovy linenums="1" hl_lines="5-9 12"
-    process '4_rnaseq_gatk_recalibrate' {
+    ```groovy linenums="1" hl_lines="50"
+    /*
+     * Process 4: GATK Recalibrate
+     */
+
+    process rnaseq_gatk_recalibrate {
         tag "$replicateId"
 
         input:
-        BLANK_LINE
-        BLANK_LINE
-        BLANK_LINE
-        BLANK_LINE
-        BLANK_LINE
+        path genome
+        path index
+        path dict
+        tuple val(replicateId), path(bam), path(bai)
+        tuple path(prepared_variants_file), path(prepared_variants_file_index)
 
         output:
-        BLANK into (final_output_ch, bam_for_ASE_ch) // (1)!
+        tuple val(sampleId), path("${replicateId}.final.uniq.bam"), path("${replicateId}.final.uniq.bam.bai")
 
         script:
         sampleId = replicateId.replaceAll(/[12]$/,'')
@@ -842,6 +846,10 @@ You should implement a process having the following structure:
         samtools index ${replicateId}.final.uniq.bam
         """
     }
+
+    workflow {
+        BLANK // (1)!
+    }
     ```
 
     1. The files resulting from this process will be used in two downstream processes. If a process is executed more than once, and the downstream channel is used by more than one process, we must duplicate the channel. We can do this using the `into` operator with parenthesis in the output section. See [here](https://www.nextflow.io/docs/latest/operator.html#into) for more information on using `into`.
@@ -852,19 +860,23 @@ You should implement a process having the following structure:
     ??? solution
 
 
-        ```groovy linenums="1" hl_lines="5-9 12"
-        process '4_rnaseq_gatk_recalibrate' {
+        ```groovy linenums="1" hl_lines="50-54"
+        /*
+         * Process 4: GATK Recalibrate
+         */
+
+        process rnaseq_gatk_recalibrate {
             tag "$replicateId"
 
             input:
-            path genome from params.genome
-            path index from genome_index_ch
-            path dict from genome_dict_ch
-            tuple val(replicateId), path(bam), path(bai) from splitted_bam_ch
-            tuple path(prepared_variants_file), path(prepared_variants_file_index) from prepared_vcf_ch
+            path genome
+            path index
+            path dict
+            tuple val(replicateId), path(bam), path(bai)
+            tuple path(prepared_variants_file), path(prepared_variants_file_index)
 
             output:
-            tuple val(sampleId), path("${replicateId}.final.uniq.bam"), path("${replicateId}.final.uniq.bam.bai") into (final_output_ch, bam_for_ASE_ch)
+            tuple val(sampleId), path("${replicateId}.final.uniq.bam"), path("${replicateId}.final.uniq.bam.bai")
 
             script:
             sampleId = replicateId.replaceAll(/[12]$/,'')
@@ -896,13 +908,21 @@ You should implement a process having the following structure:
             samtools index ${replicateId}.final.uniq.bam
             """
         }
+
+        workflow {
+            rnaseq_gatk_recalibrate(params.genome,
+                           prepare_genome_samtools.out,
+                           prepare_genome_picard.out,
+                           rnaseq_gatk_splitNcigar.out,
+                           prepare_vcf_file.out)
+        }
         ```
 
         - the genome fasta file.
-        - the genome index from the `genome_index_ch` channel created in the process `1A_prepare_genome_samtools`.
-        - the genome dictionary from the `genome_dict_ch` channel created in the process `1B_prepare_genome_picard`.
-        - the set containing the split reads from the `splitted_bam_ch` channel created in the process `3_rnaseq_gatk_splitNcigar`.
-        - the set containing the filtered/recoded VCF file and the tab index (TBI) file from the `prepared_vcf_ch` channel created in the process `1D_prepare_vcf_file`.
+        - the genome index in the output channel from the `prepare_genome_samtools` process.
+        - the genome dictionary in the output channel from the `prepare_genome_picard` process.
+        - the set containing the split reads in the output channel from the `rnaseq_gatk_splitNcigar` process.
+        - the set containing the filtered/recoded VCF file and the tab index (TBI) file in the output channel from the process `prepare_vcf_file`.
         - the set containing the replicate id, the unique bam file and the unique bam index file which goes into two channels.
         - line specifying the filename of the output bam file
 
