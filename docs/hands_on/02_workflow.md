@@ -108,7 +108,7 @@ samtools index final_alignments.bam
 
 ### Split’N'Trim and reassign mapping qualities
 
-The RNA-seq reads overlapping exon-intron junctions can produce false positive variants due to inaccurate splicing. To solve this problem the GATK team recommend to hard-clip any sequence that overlap intronic regions and developed a speciall tool for this purpose: `SplitNCigarReads`. The tool identifies Ns in the CIGAR string of the alignment and split reads at this position so that few new reads are created.
+The RNA-seq reads overlapping exon-intron junctions can produce false positive variants due to inaccurate splicing. To solve this problem the GATK team recommend to hard-clip any sequence that overlap intronic regions and developed a special tool for this purpose: `SplitNCigarReads`. The tool identifies Ns in the CIGAR string of the alignment and split reads at this position so that few new reads are created.
 
 At this step we also reassign mapping qualities to the alignments. This is important because STAR assign the value `255` (high quality) to “unknown” mappings that are meaningless to GATK and to variant calling in general.
 

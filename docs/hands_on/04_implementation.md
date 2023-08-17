@@ -506,7 +506,7 @@ The next process has the following structure:
 
 Congratulations! Part 1 is now complete.
 
-We have all the data prepared and into channels ready for the more serious steps
+We have all the data prepared and into channels ready for the more serious steps.
 
 ## Process 2: STAR Mapping
 
