@@ -995,7 +995,7 @@ Now we are ready to perform the variant calling with GATK.
 
 This steps call variants with GATK HaplotypeCaller. You can find details of the specific GATK HaplotypeCaller parameters [here](https://software.broadinstitute.org/gatk/documentation/tooldocs/current/org_broadinstitute_gatk_tools_walkers_haplotypecaller_HaplotypeCaller.php).
 
-You should implement a process having the following structure:
+The next process has the following structure:
 
 -   **Name**: `rnaseq_call_variants`
 -   **Command**: variant calling of each sample using GATK
@@ -1008,13 +1008,13 @@ You should implement a process having the following structure:
 
 !!! exercise "Problem #9"
 
-    In this problem we will introduce the use of a channel operator in the input section. The [groupTuple](https://www.nextflow.io/docs/latest/operator.html#grouptuple) operator groups together the tuples emitted by a channel which share a common key.
+    Copy the code below and paste it at the end of `main.nf`, removing the previous workflow block. Be careful not to accidently have multiple workflow blocks.
 
     !!! warning
 
         Note that in process 4, we used the sampleID (not replicateID) as the first element of the tuple in the output. Now we combine the replicates by grouping them on the sample ID. It follows from this that process 4 is run one time per replicate and process 5 is run one time per sample.
 
-    Fill in the `BLANK_LINE` lines and `BLANK` words as before.
+    Your aim is to replace the `BLANK` placeholder with the the correct process call.
 
     ```groovy linenums="1" hl_lines="39"
     /*
@@ -1055,6 +1055,26 @@ You should implement a process having the following structure:
     }
 
     workflow {
+        reads_ch = Channel.fromFilePairs(params.reads)
+
+        prepare_genome_samtools(params.genome)
+        prepare_genome_picard(params.genome)
+        prepare_star_genome_index(params.genome)
+        prepare_vcf_file(params.variants, params.blacklist)
+
+        rnaseq_mapping_star(params.genome, prepare_star_genome_index.out, reads_ch)
+
+        rnaseq_gatk_splitNcigar(params.genome,
+                            prepare_genome_samtools.out,
+                            prepare_genome_picard.out,
+                            rnaseq_mapping_star.out)
+
+        rnaseq_gatk_recalibrate(params.genome,
+                       prepare_genome_samtools.out,
+                       prepare_genome_picard.out,
+                       rnaseq_gatk_splitNcigar.out,
+                       prepare_vcf_file.out)
+
         BLANK
     }
     ```
@@ -1100,6 +1120,26 @@ You should implement a process having the following structure:
         }
 
         workflow {
+            reads_ch = Channel.fromFilePairs(params.reads)
+
+            prepare_genome_samtools(params.genome)
+            prepare_genome_picard(params.genome)
+            prepare_star_genome_index(params.genome)
+            prepare_vcf_file(params.variants, params.blacklist)
+
+            rnaseq_mapping_star(params.genome, prepare_star_genome_index.out, reads_ch)
+
+            rnaseq_gatk_splitNcigar(params.genome,
+                                prepare_genome_samtools.out,
+                                prepare_genome_picard.out,
+                                rnaseq_mapping_star.out)
+
+            rnaseq_gatk_recalibrate(params.genome,
+                           prepare_genome_samtools.out,
+                           prepare_genome_picard.out,
+                           rnaseq_gatk_splitNcigar.out,
+                           prepare_vcf_file.out)
+
             rnaseq_call_variants(params.genome,
                                  prepare_genome_samtools.out,
                                  prepare_genome_picard.out,
