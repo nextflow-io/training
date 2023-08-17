@@ -126,7 +126,7 @@ The first process has the following structure:
 
 !!! exercise "Problem #2"
 
-    Copy the code below and paste it at the end of `main.nf`, but before the workflow block. Be careful not to accidently have multiple workflow blocks.
+    Copy the code below and paste it at the end of `main.nf`, removing the previous workflow block. Be careful not to accidently have multiple workflow blocks.
 
     Your aim is to replace the `BLANK` placeholder with the the correct process call.
 
@@ -222,7 +222,7 @@ The next process should have the following structure:
 
     Your aim is to replace the `BLANK` placeholder with the the correct process call.
 
-    Copy the code below and paste it at the end of `main.nf`, but before the workflow block.
+    Copy the code below and paste it at the end of `main.nf`, removing the previous workflow block.
 
     !!! info
 
@@ -525,7 +525,7 @@ The process has the following structure:
 
 !!! Exercise "Problem #6"
 
-    Copy the code below and paste it at the end of `main.nf`, but before the workflow block.
+    Copy the code below and paste it at the end of `main.nf`, removing the previous workflow block.
 
     You must fill the `BLANK` space with the correct process call and inputs.
 
@@ -690,7 +690,7 @@ You should implement a process having the following structure:
 
 !!! exercise "Problem #7"
 
-    Copy the code below and paste it at the end of `main.nf`, but before the workflow block.
+    Copy the code below and paste it at the end of `main.nf`, removing the previous workflow block.
 
     You must fill the `BLANK` space with the correct process call and inputs.
 
@@ -813,7 +813,7 @@ You should implement a process having the following structure:
 
 !!! exercise "Problem #8"
 
-    Copy the code below and paste it at the end of `main.nf`, but before the workflow block.
+    Copy the code below and paste it at the end of `main.nf`, removing the previous workflow block.
 
     Your aim is to replace the `BLANK` placeholder with the the correct process call.
 
