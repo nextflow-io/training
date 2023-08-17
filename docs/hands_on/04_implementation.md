@@ -150,6 +150,7 @@ The first process has the following structure:
 
     workflow {
         reads_ch = Channel.fromFilePairs(params.reads)
+
         BLANK
     }
     ```
@@ -512,7 +513,7 @@ We have all the data prepared and into channels ready for the more serious steps
 
 In this process, for each sample, we align the reads to our genome using the STAR index we created previously.
 
-You should implement a process having the following structure:
+The process has the following structure:
 
 -   **Name**: `rnaseq_mapping_star`
 -   **Command**: mapping of the RNA-Seq reads using STAR
@@ -526,7 +527,7 @@ You should implement a process having the following structure:
 
     Copy the code below and paste it at the end of `main.nf`, but before the workflow block.
 
-    You must fill the `BLANK` space with the correct function and parameter.
+    You must fill the `BLANK` space with the correct process call and inputs.
 
     ```groovy linenums="1" hl_lines="54"
     /*
@@ -581,6 +582,13 @@ You should implement a process having the following structure:
     }
 
     workflow {
+        reads_ch = Channel.fromFilePairs(params.reads)
+
+        prepare_genome_samtools(params.genome)
+        prepare_genome_picard(params.genome)
+        prepare_star_genome_index(params.genome)
+        prepare_vcf_file(params.variants, params.blacklist)
+
         BLANK
     }
     ```
@@ -598,12 +606,12 @@ You should implement a process having the following structure:
 
         process rnaseq_mapping_star {
             input:
-            path genome
-            path genomeDir
-            tuple val(replicateId), path(reads)
+            path genome // (1)!
+            path genomeDir // (2)!
+            tuple val(replicateId), path(reads) // (3)!
 
             output:
-            tuple val(replicateId), path('Aligned.sortedByCoord.out.bam'), path('Aligned.sortedByCoord.out.bam.bai')
+            tuple val(replicateId), path('Aligned.sortedByCoord.out.bam'), path('Aligned.sortedByCoord.out.bam.bai') // (4)!
 
             script:
             """
@@ -644,19 +652,24 @@ You should implement a process having the following structure:
         }
 
         workflow {
+            reads_ch = Channel.fromFilePairs(params.reads)
+
+            prepare_genome_samtools(params.genome)
+            prepare_genome_picard(params.genome)
+            prepare_star_genome_index(params.genome)
+            prepare_vcf_file(params.variants, params.blacklist)
+
             rnaseq_mapping_star(params.genome, prepare_star_genome_index.out, reads_ch)
         }
         ```
 
-        - the genome fasta file.
+        1. the genome fasta file.
 
-        - the STAR genome index directory in the output channel from the `prepare_star_genome_index` process.
+        2. the STAR genome index directory in the output channel from the `prepare_star_genome_index` process.
 
-        - set containing replicate ID and pairs of reads.
+        3. tuple containing replicate ID and pairs of reads.
 
-        - set containing the replicate ID, resulting bam file and bam index.
-
-        - line specifying the name of the resulting bam file which is indexed with samtools to create a bam index file (`.bai`).
+        4. tuple containing the replicate ID, resulting bam file and bam index.
 
 The next step is a filtering step using GATK. For each sample, we split all the reads that contain N characters in their [CIGAR](http://genome.sph.umich.edu/wiki/SAM#What_is_a_CIGAR.3F) string.
 
@@ -679,7 +692,7 @@ You should implement a process having the following structure:
 
     Copy the code below and paste it at the end of `main.nf`, but before the workflow block.
 
-    You must fill the `BLANK` space with the correct function and parameter.
+    You must fill the `BLANK` space with the correct process call and inputs.
 
     !!! warning
 
