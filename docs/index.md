@@ -38,7 +38,7 @@ Find the one that's right for you:
 
     !!! quote inline end ""
 
-        :material-alert: This material is not taught / updated as frequently as the other courses.
+        :material-alert: This material is not taught as frequently as the other courses, but if you're looking for a more hands-on approach with very little theory, this is the right course for you.
 
     A "learn by doing" tutorial with less focus on theory, instead leading through exercises of slowly increasing complexity.
 
