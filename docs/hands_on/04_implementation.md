@@ -1184,7 +1184,7 @@ You should implement two processes having the following structure:
 
     You must have the output of process 6A become the input of process 6B.
 
-    ```groovy linenums="1" hl_lines="52"
+    ```groovy linenums="1" hl_lines="77"
     /*
      * Processes 6: ASE & RNA Editing
      */
@@ -1236,6 +1236,31 @@ You should implement two processes having the following structure:
     }
 
     workflow {
+        reads_ch = Channel.fromFilePairs(params.reads)
+
+        prepare_genome_samtools(params.genome)
+        prepare_genome_picard(params.genome)
+        prepare_star_genome_index(params.genome)
+        prepare_vcf_file(params.variants, params.blacklist)
+
+        rnaseq_mapping_star(params.genome, prepare_star_genome_index.out, reads_ch)
+
+        rnaseq_gatk_splitNcigar(params.genome,
+                                prepare_genome_samtools.out,
+                                prepare_genome_picard.out,
+                                rnaseq_mapping_star.out)
+
+        rnaseq_gatk_recalibrate(params.genome,
+                                prepare_genome_samtools.out,
+                                prepare_genome_picard.out,
+                                rnaseq_gatk_splitNcigar.out,
+                                prepare_vcf_file.out)
+
+        rnaseq_call_variants(params.genome,
+                             prepare_genome_samtools.out,
+                             prepare_genome_picard.out,
+                             rnaseq_gatk_recalibrate.out)
+
         BLANK
     }
     ```
@@ -1245,7 +1270,7 @@ You should implement two processes having the following structure:
     ??? solution
 
 
-        ```groovy linenums="1" hl_lines="52-54"
+        ```groovy linenums="1" hl_lines="77-79"
         /*
          * Processes 6: ASE & RNA Editing
          */
@@ -1297,6 +1322,31 @@ You should implement two processes having the following structure:
         }
 
         workflow {
+            reads_ch = Channel.fromFilePairs(params.reads)
+
+            prepare_genome_samtools(params.genome)
+            prepare_genome_picard(params.genome)
+            prepare_star_genome_index(params.genome)
+            prepare_vcf_file(params.variants, params.blacklist)
+
+            rnaseq_mapping_star(params.genome, prepare_star_genome_index.out, reads_ch)
+
+            rnaseq_gatk_splitNcigar(params.genome,
+                                    prepare_genome_samtools.out,
+                                    prepare_genome_picard.out,
+                                    rnaseq_mapping_star.out)
+
+            rnaseq_gatk_recalibrate(params.genome,
+                                    prepare_genome_samtools.out,
+                                    prepare_genome_picard.out,
+                                    rnaseq_gatk_splitNcigar.out,
+                                    prepare_vcf_file.out)
+
+            rnaseq_call_variants(params.genome,
+                                 prepare_genome_samtools.out,
+                                 prepare_genome_picard.out,
+                                 rnaseq_gatk_recalibrate.out)
+
             post_process_vcf(rnaseq_call_variants.out,
                              prepare_vcf_file.out)
             prepare_vcf_for_ase(post_process_vcf.out)
@@ -1351,7 +1401,7 @@ The final step is the GATK ASEReadCounter.
 
     ??? solution
 
-        ```groovy linenums="1" hl_lines="5-28 60-63"
+        ```groovy linenums="1" hl_lines="33-36"
         workflow {
             reads_ch = Channel.fromFilePairs(params.reads)
 
