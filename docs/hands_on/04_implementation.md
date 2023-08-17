@@ -802,7 +802,7 @@ The next process has the following structure:
         }
         ```
 
-        - [`tag`](https://www.nextflow.io/docs/latest/process.html#tag) line with the using the replicate id as the tag.
+        - [`tag`](https://www.nextflow.io/docs/latest/process.html#tag) line using the replicate id as the tag.
         - the genome fasta file
         - the genome index in the output channel from the `prepare_genome_samtools` process
         - the genome dictionary in the output channel from the `prepare_genome_picard` process
@@ -817,7 +817,7 @@ Next we perform a Base Quality Score Recalibration step using GATK.
 
 This step uses GATK to detect systematic errors in the base quality scores, select unique alignments and then index the resulting bam file with samtools. You can find details of the specific GATK BaseRecalibrator parameters [here](https://software.broadinstitute.org/gatk/documentation/tooldocs/3.8-0/org_broadinstitute_gatk_tools_walkers_bqsr_BaseRecalibrator.php).
 
-You should implement a process having the following structure:
+The next process has the following structure:
 
 -   **Name**: `rnaseq_gatk_recalibrate`
 -   **Command**: recalibrate reads from each replicate using GATK
@@ -857,23 +857,23 @@ You should implement a process having the following structure:
         sampleId = replicateId.replaceAll(/[12]$/,'')
         """
         # Indel Realignment and Base Recalibration
-        java -jar $GATK -T BaseRecalibrator \
-                    --default_platform illumina \
-                    -cov ReadGroupCovariate \
-                    -cov QualityScoreCovariate \
-                    -cov CycleCovariate \
-                    -knownSites ${prepared_variants_file} \
-                    -cov ContextCovariate \
-                    -R ${genome} -I ${bam} \
-                    --downsampling_type NONE \
-                    -nct ${task.cpus} \
-                    -o final.rnaseq.grp
+        java -jar $params.gatk -T BaseRecalibrator \
+                               --default_platform illumina \
+                               -cov ReadGroupCovariate \
+                               -cov QualityScoreCovariate \
+                               -cov CycleCovariate \
+                               -knownSites ${prepared_variants_file} \
+                               -cov ContextCovariate \
+                               -R ${genome} -I ${bam} \
+                               --downsampling_type NONE \
+                               -nct ${task.cpus} \
+                               -o final.rnaseq.grp
 
-        java -jar $GATK -T PrintReads \
-                    -R ${genome} -I ${bam} \
-                    -BQSR final.rnaseq.grp \
-                    -nct ${task.cpus} \
-                    -o final.bam
+        java -jar $params.gatk -T PrintReads \
+                               -R ${genome} -I ${bam} \
+                               -BQSR final.rnaseq.grp \
+                               -nct ${task.cpus} \
+                               -o final.bam
 
         # Select only unique alignments, no multimaps
         (samtools view -H final.bam; samtools view final.bam| grep -w 'NH:i:1') \
@@ -885,11 +885,23 @@ You should implement a process having the following structure:
     }
 
     workflow {
-        BLANK // (1)!
+        reads_ch = Channel.fromFilePairs(params.reads)
+
+        prepare_genome_samtools(params.genome)
+        prepare_genome_picard(params.genome)
+        prepare_star_genome_index(params.genome)
+        prepare_vcf_file(params.variants, params.blacklist)
+
+        rnaseq_mapping_star(params.genome, prepare_star_genome_index.out, reads_ch)
+
+        rnaseq_gatk_splitNcigar(params.genome,
+                            prepare_genome_samtools.out,
+                            prepare_genome_picard.out,
+                            rnaseq_mapping_star.out)
+
+        BLANK
     }
     ```
-
-    1. The files resulting from this process will be used in two downstream processes. If a process is executed more than once, and the downstream channel is used by more than one process, we must duplicate the channel. We can do this using the `into` operator with parenthesis in the output section. See [here](https://www.nextflow.io/docs/latest/operator.html#into) for more information on using `into`.
 
     -   The unique bam file
     -   The index of the unique bam file (bam file name + `.bai`)
@@ -919,23 +931,23 @@ You should implement a process having the following structure:
             sampleId = replicateId.replaceAll(/[12]$/,'')
             """
             # Indel Realignment and Base Recalibration
-            java -jar $GATK -T BaseRecalibrator \
-                            --default_platform illumina \
-                            -cov ReadGroupCovariate \
-                            -cov QualityScoreCovariate \
-                            -cov CycleCovariate \
-                            -knownSites ${prepared_variants_file} \
-                            -cov ContextCovariate \
-                            -R ${genome} -I ${bam} \
-                            --downsampling_type NONE \
-                            -nct ${task.cpus} \
-                            -o final.rnaseq.grp
+            java -jar $params.gatk -T BaseRecalibrator \
+                                   --default_platform illumina \
+                                   -cov ReadGroupCovariate \
+                                   -cov QualityScoreCovariate \
+                                   -cov CycleCovariate \
+                                   -knownSites ${prepared_variants_file} \
+                                   -cov ContextCovariate \
+                                   -R ${genome} -I ${bam} \
+                                   --downsampling_type NONE \
+                                   -nct ${task.cpus} \
+                                   -o final.rnaseq.grp
 
-            java -jar $GATK -T PrintReads \
-                            -R ${genome} -I ${bam} \
-                            -BQSR final.rnaseq.grp \
-                            -nct ${task.cpus} \
-                            -o final.bam
+            java -jar $params.gatk -T PrintReads \
+                                   -R ${genome} -I ${bam} \
+                                   -BQSR final.rnaseq.grp \
+                                   -nct ${task.cpus} \
+                                   -o final.bam
 
             # Select only unique alignments, no multimaps
             (samtools view -H final.bam; samtools view final.bam| grep -w 'NH:i:1') \
@@ -947,6 +959,20 @@ You should implement a process having the following structure:
         }
 
         workflow {
+            reads_ch = Channel.fromFilePairs(params.reads)
+
+            prepare_genome_samtools(params.genome)
+            prepare_genome_picard(params.genome)
+            prepare_star_genome_index(params.genome)
+            prepare_vcf_file(params.variants, params.blacklist)
+
+            rnaseq_mapping_star(params.genome, prepare_star_genome_index.out, reads_ch)
+
+            rnaseq_gatk_splitNcigar(params.genome,
+                                prepare_genome_samtools.out,
+                                prepare_genome_picard.out,
+                                rnaseq_mapping_star.out)
+
             rnaseq_gatk_recalibrate(params.genome,
                            prepare_genome_samtools.out,
                            prepare_genome_picard.out,
@@ -1012,19 +1038,19 @@ You should implement a process having the following structure:
         echo "${bam.join('\n')}" > bam.list
 
         # Variant calling
-        java -jar $GATK -T HaplotypeCaller \
-                        -R $genome -I bam.list \
-                        -dontUseSoftClippedBases \
-                        -stand_call_conf 20.0 \
-                        -o output.gatk.vcf.gz
+        java -jar $params.gatk -T HaplotypeCaller \
+                               -R $genome -I bam.list \
+                               -dontUseSoftClippedBases \
+                               -stand_call_conf 20.0 \
+                               -o output.gatk.vcf.gz
 
         # Variant filtering
-        java -jar $GATK -T VariantFiltration \
-                        -R $genome -V output.gatk.vcf.gz \
-                        -window 35 -cluster 3 \
-                        -filterName FS -filter "FS > 30.0" \
-                        -filterName QD -filter "QD < 2.0" \
-                        -o final.vcf
+        java -jar $params.gatk -T VariantFiltration \
+                               -R $genome -V output.gatk.vcf.gz \
+                               -window 35 -cluster 3 \
+                               -filterName FS -filter "FS > 30.0" \
+                               -filterName QD -filter "QD < 2.0" \
+                               -o final.vcf
         """
     }
 
@@ -1057,19 +1083,19 @@ You should implement a process having the following structure:
             echo "${bam.join('\n')}" > bam.list
 
             # Variant calling
-            java -jar $GATK -T HaplotypeCaller \
-                            -R $genome -I bam.list \
-                            -dontUseSoftClippedBases \
-                            -stand_call_conf 20.0 \
-                            -o output.gatk.vcf.gz
+            java -jar $params.gatk -T HaplotypeCaller \
+                                   -R $genome -I bam.list \
+                                   -dontUseSoftClippedBases \
+                                   -stand_call_conf 20.0 \
+                                   -o output.gatk.vcf.gz
 
             # Variant filtering
-            java -jar $GATK -T VariantFiltration \
-                            -R $genome -V output.gatk.vcf.gz \
-                            -window 35 -cluster 3 \
-                            -filterName FS -filter "FS > 30.0" \
-                            -filterName QD -filter "QD < 2.0" \
-                            -o final.vcf
+            java -jar $params.gatk -T VariantFiltration \
+                                   -R $genome -V output.gatk.vcf.gz \
+                                   -window 35 -cluster 3 \
+                                   -filterName FS -filter "FS > 30.0" \
+                                   -filterName QD -filter "QD < 2.0" \
+                                   -o final.vcf
             """
         }
 
@@ -1316,11 +1342,11 @@ You should implement a process having the following structure:
     ```bash linenums="1"
     echo "${bam.join('\n')}" > bam.list
 
-    java -jar $GATK -R ${genome} \
-                    -T ASEReadCounter \
-                    -o ASE.tsv \
-                    -I bam.list \
-                    -sites ${vcf}
+    java -jar $params.gatk -R ${genome} \
+                           -T ASEReadCounter \
+                           -o ASE.tsv \
+                           -I bam.list \
+                           -sites ${vcf}
     ```
 
     ??? solution
@@ -1347,11 +1373,11 @@ You should implement a process having the following structure:
             """
             echo "${bam.join('\n')}" > bam.list
 
-            java -jar $GATK -R ${genome} \
-                            -T ASEReadCounter \
-                            -o ASE.tsv \
-                            -I bam.list \
-                            -sites ${vcf}
+            java -jar $params.gatk -R ${genome} \
+                                   -T ASEReadCounter \
+                                   -o ASE.tsv \
+                                   -I bam.list \
+                                   -sites ${vcf}
             """
         }
 
