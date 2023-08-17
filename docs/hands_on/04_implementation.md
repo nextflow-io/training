@@ -1065,7 +1065,7 @@ You should implement two processes having the following structure:
 
 -   _1st process_
     -   **Name**
-        -   6A_post_process_vcf
+        -   post_process_vcf
     -   **Command**
         -   post-process the variant calling file (vcf) of each sample
     -   **Input**
@@ -1075,7 +1075,7 @@ You should implement two processes having the following structure:
         -   a tuple containing the sample id, the variant calling file (vcf) and a file containing common SNPs
 -   _2nd process_
     -   **Name**
-        -   6B_prepare_vcf_for_ase
+        -   prepare_vcf_for_ase
     -   **Command**
         -   prepare the VCF for allele specific expression (ASE) and generate a figure in R.
     -   **Input**
@@ -1090,17 +1090,21 @@ You should implement two processes having the following structure:
 
     You must have the output of process 6A become the input of process 6B.
 
-    ```groovy linenums="1" hl_lines="2 6-7 10 21-22 25 28-29"
-    process '6A_post_process_vcf' {
-        tag BLANK
+    ```groovy linenums="1" hl_lines="52"
+    /*
+     * Processes 6: ASE & RNA Editing
+     */
+
+    process post_process_vcf {
+        tag "$sampleId"
         publishDir "$params.results/$sampleId" // (1)!
 
         input:
-        BLANK_LINE
-        BLANK_LINE
+        tuple val(sampleId), path('final.vcf')
+        tuple path('filtered.recode.vcf.gz'), path('filtered.recode.vcf.gz.tbi')
 
         output:
-        BLANK_LINE
+        tuple val(sampleId), path('final.vcf'), path('commonSNPs.diff.sites_in_files')
 
         script:
         '''
@@ -1110,16 +1114,16 @@ You should implement two processes having the following structure:
         '''
     }
 
-    process '6B_prepare_vcf_for_ase' {
-        tag BLANK
-        publishDir BLANK
+    process prepare_vcf_for_ase {
+        tag "$sampleId"
+        publishDir "$params.results/$sampleId"
 
         input:
-        BLANK_LINE
+        tuple val(sampleId), path('final.vcf'), path('commonSNPs.diff.sites_in_files')
 
         output:
-        BLANK_LINE
-        BLANK_LINE
+        tuple val(sampleId), path('known_snps.vcf'), emit: vcf_for_ASE
+        path 'AF.histogram.pdf'                    , emit: gghist_pdfs
 
         script:
         '''
@@ -1136,6 +1140,10 @@ You should implement two processes having the following structure:
         gghist.R -i AF.4R -o AF.histogram.pdf
         '''
     }
+
+    workflow {
+        BLANK
+    }
     ```
 
     1. here the output location is specified as a combination of a pipeline parameter and a process input variable
@@ -1143,17 +1151,21 @@ You should implement two processes having the following structure:
     ??? solution
 
 
-        ```groovy linenums="1" hl_lines="2 6-7 10 21-22 25 28-29"
-        process '6A_post_process_vcf' {
+        ```groovy linenums="1" hl_lines="52-54"
+        /*
+         * Processes 6: ASE & RNA Editing
+         */
+
+        process post_process_vcf {
             tag "$sampleId"
             publishDir "$params.results/$sampleId"
 
             input:
-            tuple val(sampleId), path('final.vcf') from vcf_files
-            tuple path('filtered.recode.vcf.gz'), path('filtered.recode.vcf.gz.tbi') from prepared_vcf_ch
+            tuple val(sampleId), path('final.vcf')
+            tuple path('filtered.recode.vcf.gz'), path('filtered.recode.vcf.gz.tbi')
 
             output:
-            tuple val(sampleId), path('final.vcf'), path('commonSNPs.diff.sites_in_files') into vcf_and_snps_ch
+            tuple val(sampleId), path('final.vcf'), path('commonSNPs.diff.sites_in_files')
 
             script:
             '''
@@ -1163,16 +1175,16 @@ You should implement two processes having the following structure:
             '''
         }
 
-        process '6B_prepare_vcf_for_ase' {
+        process prepare_vcf_for_ase {
             tag "$sampleId"
             publishDir "$params.results/$sampleId"
 
             input:
-            tuple val(sampleId), path('final.vcf'), path('commonSNPs.diff.sites_in_files') from vcf_and_snps_ch
+            tuple val(sampleId), path('final.vcf'), path('commonSNPs.diff.sites_in_files')
 
             output:
-            tuple val(sampleId), path('known_snps.vcf') into vcf_for_ASE
-            path 'AF.histogram.pdf' into gghist_pdfs
+            tuple val(sampleId), path('known_snps.vcf'), emit: vcf_for_ASE
+            path 'AF.histogram.pdf'                    , emit: gghist_pdfs
 
             script:
             '''
@@ -1188,6 +1200,12 @@ You should implement two processes having the following structure:
 
             gghist.R -i AF.4R -o AF.histogram.pdf
             '''
+        }
+
+        workflow {
+            post_process_vcf(rnaseq_call_variants.out,
+                             prepare_vcf_file.out)
+            prepare_vcf_for_ase(post_process_vcf.out)
         }
         ```
 
