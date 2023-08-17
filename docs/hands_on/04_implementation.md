@@ -699,7 +699,7 @@ The next process has the following structure:
         There is an optional [`tag`](https://www.nextflow.io/docs/latest/process.html#tag) line added to the start of this process. The [`tag`](https://www.nextflow.io/docs/latest/process.html#tag) line allows you to assign a name to a specific task (single instance of a process). This is particularly useful when there are many samples/replicates which pass through the same process.
 
 
-    ```groovy linenums="1" hl_lines="41-44"
+    ```groovy linenums="1" hl_lines="40"
     /*
      * Process 3: GATK Split on N
      */
@@ -754,7 +754,7 @@ The next process has the following structure:
     ??? solution
 
 
-        ```groovy linenums="1" hl_lines="32-35"
+        ```groovy linenums="1" hl_lines="41-44"
         /*
          * Process 3: GATK Split on N
          */
@@ -1351,7 +1351,7 @@ The final step is the GATK ASEReadCounter.
 
     ??? solution
 
-        ```groovy linenums="1" hl_lines="31-36"
+        ```groovy linenums="1" hl_lines="5-28 60-63"
         workflow {
             reads_ch = Channel.fromFilePairs(params.reads)
 
@@ -1422,7 +1422,7 @@ The next process has the following structure:
 
     ??? solution
 
-        ```groovy linenums="1" hl_lines="5-64"
+        ```groovy linenums="1" hl_lines="5-28 67-70"
         /*
          * Processes 7: Allele-Specific Expression analysis with GATK ASEReadCounter
          */
@@ -1481,6 +1481,13 @@ The next process has the following structure:
             post_process_vcf(rnaseq_call_variants.out,
                              prepare_vcf_file.out)
             prepare_vcf_for_ase(post_process_vcf.out)
+
+            rnaseq_gatk_recalibrate
+                .out
+                .groupTuple()
+                .join(prepare_vcf_for_ase.out.vcf_for_ASE)
+                .map { meta, bams, bais, vcf -> [meta, vcf, bams, bais] }
+                .set { grouped_vcf_bam_bai_ch }
 
             ASE_knownSNPs(params.genome,
                           prepare_genome_samtools.out,
