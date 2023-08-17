@@ -38,7 +38,7 @@ Trouvez celui qui vous convient le mieux :
 
     !!! quote inline end ""
 
-        :material-alert: Ce sujet n'est pas enseigné / mis à jour aussi fréquemment que les autres cours.
+        :material-alert: Ce sujet n'est pas enseigné aussi fréquemment que les autres cours, mais si vous recherchez une approche plus pratique avec très peu de théorie, ce cours est fait pour vous.
 
     Un didacticiel "learn by doing" qui met moins l'accent sur la théorie et propose plutôt des exercices d'une complexité croissante.
 
