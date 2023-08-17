@@ -1231,7 +1231,7 @@ The final step is the GATK ASEReadCounter.
 
     In the first operation, the BAMs are grouped together by sample id.
 
-    Next, this resulting channel is merged with the VCFs (vcf_for_ASE) having the same sample id.
+    Next, this resulting channel is merged with the VCFs having the same sample id.
 
     We must take the merged channel and creates a channel named `grouped_vcf_bam_bai_ch` emitting the following tuples:
 
@@ -1241,48 +1241,28 @@ The final step is the GATK ASEReadCounter.
 
     Your aim is to fill in the `BLANKS` below.
 
-    ```groovy linenums="1" hl_lines="2 9"
-    bam_for_ASE_ch
+    ```groovy linenums="1" hl_lines="3-6"
+    rnaseq_gatk_recalibrate
+        .out
         .BLANK // (1)!
-        .phase(vcf_for_ASE) // (2)!
-        .map{ left, right -> // (3)!
-            def sampleId = left[0] // (4)!
-            def bam = left[1] // (5)!
-            def bai = left[2] // (6)!
-            def vcf = right [1] // (7)!
-            tuple(BLANK, vcf, BLANK, BLANK) // (8)!
-        }
-        .set { grouped_vcf_bam_bai_ch } // (9)!
+        .BLANK // (2)!
+        .map { BLANK } // (3)!
+        .set { BLANK } // (4)!
     ```
 
     1.   an operator that groups tuples that contain a common first element.
-    2.   the phase operator synchronizes the values emitted by two other channels. See [here](https://www.nextflow.io/docs/latest/operator.html?phase#phase) for more details
-    3.   the map operator can apply any function to every item on a channel. In this case we take our tuple from the phase operation, define the separate elements and create a new tuple.
-    4.   define `sampleId` to be the first element of left.
-    5.   define bam to be the second element of left.
-    6.   define bai to be the third element of left.
-    7.   define vcf to be the first element of right.
-    8.   create a new tuple made of four elements
-    9.   rename the resulting as `grouped_vcf_bam_bai_ch`
-
-    !!! note
-
-        `left` and `right` above are arbitrary names. From the phase operator documentation, we see that phase returns pairs of items. So here `left` originates from contents of the `bam_for_ASE_ch` channel and `right` originates from the contents of `vcf_for_ASE` channel.
-
+    2.   an operator that joins two channels taking a key into consideration. See [here](https://www.nextflow.io/docs/latest/operator.html?join#join) for more details
+    3.   the map operator can apply any function to every item on a channel. In this case we take our tuple from the previous setp, define the separate elements and create a new tuple.
+    4.   rename the resulting as `grouped_vcf_bam_bai_ch`
 
     ??? solution
 
-        ```groovy linenums="1" hl_lines="2 9"
-        bam_for_ASE_ch
+        ```groovy linenums="1" hl_lines="1-6"
+        rnaseq_gatk_recalibrate
+            .out
             .groupTuple()
-            .phase(vcf_for_ASE)
-            .map{ left, right ->
-                def sampleId = left[0]
-                def bam = left[1]
-                def bai = left[2]
-                def vcf = right[1]
-                tuple(sampleId, vcf, bam, bai)
-            }
+            .join(prepare_vcf_for_ase.out.vcf_for_ASE)
+            .map { meta, bams, bais, vcf -> [meta, vcf, bams, bais] }
             .set { grouped_vcf_bam_bai_ch }
         ```
 
