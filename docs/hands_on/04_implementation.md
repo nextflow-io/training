@@ -895,9 +895,9 @@ The next process has the following structure:
         rnaseq_mapping_star(params.genome, prepare_star_genome_index.out, reads_ch)
 
         rnaseq_gatk_splitNcigar(params.genome,
-                            prepare_genome_samtools.out,
-                            prepare_genome_picard.out,
-                            rnaseq_mapping_star.out)
+                                prepare_genome_samtools.out,
+                                prepare_genome_picard.out,
+                                rnaseq_mapping_star.out)
 
         BLANK
     }
@@ -969,15 +969,15 @@ The next process has the following structure:
             rnaseq_mapping_star(params.genome, prepare_star_genome_index.out, reads_ch)
 
             rnaseq_gatk_splitNcigar(params.genome,
-                                prepare_genome_samtools.out,
-                                prepare_genome_picard.out,
-                                rnaseq_mapping_star.out)
+                                    prepare_genome_samtools.out,
+                                    prepare_genome_picard.out,
+                                    rnaseq_mapping_star.out)
 
             rnaseq_gatk_recalibrate(params.genome,
-                           prepare_genome_samtools.out,
-                           prepare_genome_picard.out,
-                           rnaseq_gatk_splitNcigar.out,
-                           prepare_vcf_file.out)
+                                    prepare_genome_samtools.out,
+                                    prepare_genome_picard.out,
+                                    rnaseq_gatk_splitNcigar.out,
+                                    prepare_vcf_file.out)
         }
         ```
 
@@ -1065,15 +1065,15 @@ The next process has the following structure:
         rnaseq_mapping_star(params.genome, prepare_star_genome_index.out, reads_ch)
 
         rnaseq_gatk_splitNcigar(params.genome,
-                            prepare_genome_samtools.out,
-                            prepare_genome_picard.out,
-                            rnaseq_mapping_star.out)
+                                prepare_genome_samtools.out,
+                                prepare_genome_picard.out,
+                                rnaseq_mapping_star.out)
 
         rnaseq_gatk_recalibrate(params.genome,
-                       prepare_genome_samtools.out,
-                       prepare_genome_picard.out,
-                       rnaseq_gatk_splitNcigar.out,
-                       prepare_vcf_file.out)
+                                prepare_genome_samtools.out,
+                                prepare_genome_picard.out,
+                                rnaseq_gatk_splitNcigar.out,
+                                prepare_vcf_file.out)
 
         BLANK
     }
@@ -1130,15 +1130,15 @@ The next process has the following structure:
             rnaseq_mapping_star(params.genome, prepare_star_genome_index.out, reads_ch)
 
             rnaseq_gatk_splitNcigar(params.genome,
-                                prepare_genome_samtools.out,
-                                prepare_genome_picard.out,
-                                rnaseq_mapping_star.out)
+                                    prepare_genome_samtools.out,
+                                    prepare_genome_picard.out,
+                                    rnaseq_mapping_star.out)
 
             rnaseq_gatk_recalibrate(params.genome,
-                           prepare_genome_samtools.out,
-                           prepare_genome_picard.out,
-                           rnaseq_gatk_splitNcigar.out,
-                           prepare_vcf_file.out)
+                                    prepare_genome_samtools.out,
+                                    prepare_genome_picard.out,
+                                    rnaseq_gatk_splitNcigar.out,
+                                    prepare_vcf_file.out)
 
             rnaseq_call_variants(params.genome,
                                  prepare_genome_samtools.out,
@@ -1363,15 +1363,15 @@ The final step is the GATK ASEReadCounter.
             rnaseq_mapping_star(params.genome, prepare_star_genome_index.out, reads_ch)
 
             rnaseq_gatk_splitNcigar(params.genome,
-                                prepare_genome_samtools.out,
-                                prepare_genome_picard.out,
-                                rnaseq_mapping_star.out)
+                                    prepare_genome_samtools.out,
+                                    prepare_genome_picard.out,
+                                    rnaseq_mapping_star.out)
 
             rnaseq_gatk_recalibrate(params.genome,
-                           prepare_genome_samtools.out,
-                           prepare_genome_picard.out,
-                           rnaseq_gatk_splitNcigar.out,
-                           prepare_vcf_file.out)
+                                    prepare_genome_samtools.out,
+                                    prepare_genome_picard.out,
+                                    rnaseq_gatk_splitNcigar.out,
+                                    prepare_vcf_file.out)
 
             rnaseq_call_variants(params.genome,
                                  prepare_genome_samtools.out,
@@ -1468,10 +1468,10 @@ The next process has the following structure:
                                 rnaseq_mapping_star.out)
 
             rnaseq_gatk_recalibrate(params.genome,
-                           prepare_genome_samtools.out,
-                           prepare_genome_picard.out,
-                           rnaseq_gatk_splitNcigar.out,
-                           prepare_vcf_file.out)
+                                    prepare_genome_samtools.out,
+                                    prepare_genome_picard.out,
+                                    rnaseq_gatk_splitNcigar.out,
+                                    prepare_vcf_file.out)
 
             rnaseq_call_variants(params.genome,
                                  prepare_genome_samtools.out,
