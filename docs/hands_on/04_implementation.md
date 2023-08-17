@@ -1352,19 +1352,49 @@ The final step is the GATK ASEReadCounter.
     ??? solution
 
         ```groovy linenums="1" hl_lines="3-6"
-        rnaseq_gatk_recalibrate
-            .out
-            .groupTuple()
-            .join(prepare_vcf_for_ase.out.vcf_for_ASE)
-            .map { meta, bams, bais, vcf -> [meta, vcf, bams, bais] }
-            .set { grouped_vcf_bam_bai_ch }
+        workflow {
+            reads_ch = Channel.fromFilePairs(params.reads)
+
+            prepare_genome_samtools(params.genome)
+            prepare_genome_picard(params.genome)
+            prepare_star_genome_index(params.genome)
+            prepare_vcf_file(params.variants, params.blacklist)
+
+            rnaseq_mapping_star(params.genome, prepare_star_genome_index.out, reads_ch)
+
+            rnaseq_gatk_splitNcigar(params.genome,
+                                prepare_genome_samtools.out,
+                                prepare_genome_picard.out,
+                                rnaseq_mapping_star.out)
+
+            rnaseq_gatk_recalibrate(params.genome,
+                           prepare_genome_samtools.out,
+                           prepare_genome_picard.out,
+                           rnaseq_gatk_splitNcigar.out,
+                           prepare_vcf_file.out)
+
+            rnaseq_call_variants(params.genome,
+                                 prepare_genome_samtools.out,
+                                 prepare_genome_picard.out,
+                                 rnaseq_gatk_recalibrate.out)
+
+            post_process_vcf(rnaseq_call_variants.out,
+                             prepare_vcf_file.out)
+            prepare_vcf_for_ase(post_process_vcf.out)
+
+            rnaseq_gatk_recalibrate
+                .out
+                .groupTuple()
+                .join(prepare_vcf_for_ase.out.vcf_for_ASE)
+                .map { meta, bams, bais, vcf -> [meta, vcf, bams, bais] }
+                .set { grouped_vcf_bam_bai_ch }
         ```
 
 ## Process 7: Allele-Specific Expression analysis with GATK ASEReadCounter
 
 Now we are ready for the final process.
 
-You should implement a process having the following structure:
+The next process has the following structure:
 
 -   **Name**: `ASE_knownSNPs`
 -   **Command**: calculate allele counts at a set of positions with GATK tools
@@ -1377,7 +1407,7 @@ You should implement a process having the following structure:
 
 !!! exercise "Problem #12"
 
-    You should construct the process and run the pipeline in its entirety.
+    You should construct the process from scratch, add the process call and inputs to the workflow block and run the pipeline in its entirety.
 
     ```bash linenums="1"
     echo "${bam.join('\n')}" > bam.list
@@ -1422,6 +1452,35 @@ You should implement a process having the following structure:
         }
 
         workflow {
+            reads_ch = Channel.fromFilePairs(params.reads)
+
+            prepare_genome_samtools(params.genome)
+            prepare_genome_picard(params.genome)
+            prepare_star_genome_index(params.genome)
+            prepare_vcf_file(params.variants, params.blacklist)
+
+            rnaseq_mapping_star(params.genome, prepare_star_genome_index.out, reads_ch)
+
+            rnaseq_gatk_splitNcigar(params.genome,
+                                prepare_genome_samtools.out,
+                                prepare_genome_picard.out,
+                                rnaseq_mapping_star.out)
+
+            rnaseq_gatk_recalibrate(params.genome,
+                           prepare_genome_samtools.out,
+                           prepare_genome_picard.out,
+                           rnaseq_gatk_splitNcigar.out,
+                           prepare_vcf_file.out)
+
+            rnaseq_call_variants(params.genome,
+                                 prepare_genome_samtools.out,
+                                 prepare_genome_picard.out,
+                                 rnaseq_gatk_recalibrate.out)
+
+            post_process_vcf(rnaseq_call_variants.out,
+                             prepare_vcf_file.out)
+            prepare_vcf_for_ase(post_process_vcf.out)
+
             ASE_knownSNPs(params.genome,
                           prepare_genome_samtools.out,
                           prepare_genome_picard.out,
