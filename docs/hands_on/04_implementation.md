@@ -677,7 +677,7 @@ The next step is a filtering step using GATK. For each sample, we split all the 
 
 The process creates `k+1` new reads (where `k` is the number of `N` cigar elements) that correspond to the segments of the original read beside/between the splicing events represented by the `N`s in the original CIGAR.
 
-You should implement a process having the following structure:
+The next process has the following structure:
 
 -   **Name**: `rnaseq_gatk_splitNcigar`
 -   **Command**: split reads on Ns in CIGAR string using GATK
@@ -696,7 +696,7 @@ You should implement a process having the following structure:
 
     !!! warning
 
-        There is an optional [`tag`](https://www.nextflow.io/docs/latest/process.html#tag) line added to the start of this process. The [`tag`](https://www.nextflow.io/docs/latest/process.html#tag) line allows you to assign a name to a specific task (single execution of a process). This is particularly useful when there are many samples/replicates which pass through the same process.
+        There is an optional [`tag`](https://www.nextflow.io/docs/latest/process.html#tag) line added to the start of this process. The [`tag`](https://www.nextflow.io/docs/latest/process.html#tag) line allows you to assign a name to a specific task (single instance of a process). This is particularly useful when there are many samples/replicates which pass through the same process.
 
 
     ```groovy linenums="1" hl_lines="31"
@@ -705,7 +705,7 @@ You should implement a process having the following structure:
      */
 
     process rnaseq_gatk_splitNcigar {
-        tag OPTIONAL_BLANK
+        tag "$replicateId"
 
         input:
         path genome
@@ -730,6 +730,15 @@ You should implement a process having the following structure:
     }
 
     workflow {
+        reads_ch = Channel.fromFilePairs(params.reads)
+
+        prepare_genome_samtools(params.genome)
+        prepare_genome_picard(params.genome)
+        prepare_star_genome_index(params.genome)
+        prepare_vcf_file(params.variants, params.blacklist)
+
+        rnaseq_mapping_star(params.genome, prepare_star_genome_index.out, reads_ch)
+
         BLANK
     }
     ```
@@ -740,7 +749,7 @@ You should implement a process having the following structure:
 
     !!! example
 
-        A `tag` line would also be useful in [Process 2](#process-2)
+        A `tag` line would also be useful in [Process 2](#process-2-star-mapping)
 
     ??? solution
 
@@ -766,8 +775,8 @@ You should implement a process having the following structure:
             """
             # SplitNCigarReads and reassign mapping qualities
             java -jar $params.gatk -T SplitNCigarReads \
-                                   -R $genome -I $bam \//
-                                   -o split.bam \//
+                                   -R $genome -I $bam \
+                                   -o split.bam \
                                    -rf ReassignOneMappingQuality \
                                    -RMQF 255 -RMQT 60 \
                                    -U ALLOW_N_CIGAR_READS \
@@ -777,6 +786,15 @@ You should implement a process having the following structure:
         }
 
         workflow {
+            reads_ch = Channel.fromFilePairs(params.reads)
+
+            prepare_genome_samtools(params.genome)
+            prepare_genome_picard(params.genome)
+            prepare_star_genome_index(params.genome)
+            prepare_vcf_file(params.variants, params.blacklist)
+
+            rnaseq_mapping_star(params.genome, prepare_star_genome_index.out, reads_ch)
+
             rnaseq_gatk_splitNcigar(params.genome,
                                     prepare_genome_samtools.out,
                                     prepare_genome_picard.out,
