@@ -396,8 +396,8 @@ The next process has the following structure:
 -   **Name**: `prepare_vcf_file`
 -   **Command**: create a filtered and recoded set of variants
 -   **Input**:
-    - the variants file
-    - the blacklisted regions file
+    -   the variants file
+    -   the blacklisted regions file
 -   **Output**: a tuple containing the filtered/recoded VCF file and the tab index (TBI) file.
 
 !!! exercise "Problem #5"
@@ -518,9 +518,9 @@ The process has the following structure:
 -   **Name**: `rnaseq_mapping_star`
 -   **Command**: mapping of the RNA-Seq reads using STAR
 -   **Input**:
-    - the genome fasta file
-    - the STAR genome index
-    - a tuple containing the replicate id and paired read files
+    -   the genome fasta file
+    -   the STAR genome index
+    -   a tuple containing the replicate id and paired read files
 -   **Output**: a tuple containing replicate id, aligned bam file & aligned bam file index
 
 !!! Exercise "Problem #6"
@@ -682,10 +682,10 @@ The next process has the following structure:
 -   **Name**: `rnaseq_gatk_splitNcigar`
 -   **Command**: split reads on Ns in CIGAR string using GATK
 -   **Input**:
-    - the genome fasta file
-    - the genome index made with samtools
-    - the genome dictionary made with picard
-    - a tuple containing replicate id, aligned bam file and aligned bam file index from the STAR mapping
+    -   the genome fasta file
+    -   the genome index made with samtools
+    -   the genome dictionary made with picard
+    -   a tuple containing replicate id, aligned bam file and aligned bam file index from the STAR mapping
 -   **Output**: a tuple containing the replicate id, the split bam file and the split bam index file
 
 !!! exercise "Problem #7"
