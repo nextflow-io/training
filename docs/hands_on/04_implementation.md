@@ -69,7 +69,7 @@ You should see the script execute, print Nextflow version and pipeline revision 
 
 ```console
 N E X T F L O W  ~  version 23.04.1
-Launching `main.nf` [lethal_faggin] - revision: 4c9a5c830c
+Launching `main.nf` [elated_davinci] DSL2 - revision: 5187dd3166
 ```
 
 !!! exercise "Problem #1"
@@ -80,12 +80,9 @@ Launching `main.nf` [lethal_faggin] - revision: 4c9a5c830c
 
         In `code` you can move to the end of the file using ++ctrl+w++ and then ++ctrl+v++.
 
-    This time you must fill the `BLANK` space with the correct function and parameter.
+    This time you must fill the `BLANK` space with a channel factory that will create a channel out of the `params.reads` information.
 
-    ```groovy linenums="1" hl_lines="5"
-    /*
-     *  Parse the input parameters
-     */
+    ```groovy linenums="1" hl_lines="2"
     workflow {
         reads_ch = BLANK
     }
@@ -93,7 +90,7 @@ Launching `main.nf` [lethal_faggin] - revision: 4c9a5c830c
 
     !!! tip
 
-        Use the [fromFilePairs](https://www.nextflow.io/docs/latest/channel.html#fromfilepairs) channel factory method. The second one, declares a variable named `GATK` specifying the path of the GATK application file.
+        Use the [fromFilePairs](https://www.nextflow.io/docs/latest/channel.html#fromfilepairs) channel factory.
 
     Once you think you have data organised, you can again run the pipeline. However this time, we can use the the `-resume` flag.
 
@@ -114,13 +111,13 @@ Launching `main.nf` [lethal_faggin] - revision: 4c9a5c830c
         }
         ```
 
-        1. Create a channel using [fromFilePairs()](https://www.nextflow.io/docs/latest/channel.html#fromfilepairs).
+        1. Creates a channel using the [fromFilePairs()](https://www.nextflow.io/docs/latest/channel.html#fromfilepairs) channel factory.
 
 ## Process 1A: Create a FASTA genome index
 
 Now we have our inputs set up we can move onto the processes. In our first process we will create a genome index using [samtools](http://www.htslib.org/).
 
-You should implement a process having the following structure:
+The first process has the following structure:
 
 -   **Name**: `prepare_genome_samtools`
 -   **Command**: create a genome index for the genome fasta with samtools
@@ -129,7 +126,7 @@ You should implement a process having the following structure:
 
 !!! exercise "Problem #2"
 
-    Copy the code below and paste it at the end of `main.nf`.
+    Copy the code below and paste it at the end of `main.nf`, but before the workflow block. Be careful not to accidently have multiple workflow blocks.
 
     Your aim is to replace the `BLANK` placeholder with the the correct process call.
 
@@ -164,7 +161,7 @@ You should implement a process having the following structure:
     -   and creates as **output** a genome index file
     -   **script**: using samtools create the genome index from the genome file
 
-    Now when we run the pipeline, we see that the process 1A is submitted:
+    Now when we run the pipeline, we see that the process `prepare_genome_samtools` is submitted:
 
     ```bash
     nextflow run main.nf -resume
@@ -198,6 +195,7 @@ You should implement a process having the following structure:
 
         workflow {
             reads_ch = Channel.fromFilePairs(params.reads)
+
             prepare_genome_samtools(params.genome) // (1)!
         }
         ```
@@ -212,7 +210,7 @@ You should implement a process having the following structure:
 
 Our first process created the genome index for GATK using samtools. For the next process we must do something very similar, this time creating a genome sequence dictionary using [Picard](https://broadinstitute.github.io/picard/).
 
-You should implement a process having the following structure:
+The next process should have the following structure:
 
 -   **Name**: `prepare_genome_picard`
 -   **Command**: create a genome dictionary for the genome fasta with Picard tools
@@ -223,7 +221,7 @@ You should implement a process having the following structure:
 
     Your aim is to replace the `BLANK` placeholder with the the correct process call.
 
-    Copy the code below and paste it at the end of `main.nf`.
+    Copy the code below and paste it at the end of `main.nf`, but before the workflow block.
 
     !!! info
 
@@ -235,7 +233,6 @@ You should implement a process having the following structure:
      */
 
     process prepare_genome_picard {
-
         input:
         path genome
 
@@ -250,6 +247,9 @@ You should implement a process having the following structure:
     }
 
     workflow {
+        reads_ch = Channel.fromFilePairs(params.reads)
+
+        prepare_genome_samtools(params.genome)
         BLANK
     }
     ```
@@ -266,7 +266,6 @@ You should implement a process having the following structure:
          */
 
         process prepare_genome_picard {
-
             input:
             path genome
 
@@ -281,6 +280,9 @@ You should implement a process having the following structure:
         }
 
         workflow {
+            reads_ch = Channel.fromFilePairs(params.reads)
+
+            prepare_genome_samtools(params.genome)
             prepare_genome_picard(params.genome) // (1)!
         }
         ```
@@ -291,9 +293,9 @@ You should implement a process having the following structure:
 
 Next we must create a genome index for the [STAR](https://github.com/alexdobin/STAR) mapping software.
 
-You should implement a process having the following structure:
+The next process has the following structure:
 
--   **Name**: prepare_star_genome_index
+-   **Name**: `prepare_star_genome_index`
 -   **Command**: create a STAR genome index for the genome fasta
 -   **Input**: the genome fasta file
 -   **Output**: a directory containing the STAR genome index
@@ -326,6 +328,10 @@ You should implement a process having the following structure:
     }
 
     workflow {
+        reads_ch = Channel.fromFilePairs(params.reads)
+
+        prepare_genome_samtools(params.genome)
+        prepare_genome_picard(params.genome)
         BLANK
     }
     ```
@@ -342,7 +348,6 @@ You should implement a process having the following structure:
         */
 
         process prepare_star_genome_index {
-
             input:
             path genome // (1)!
 
@@ -361,6 +366,10 @@ You should implement a process having the following structure:
         }
 
         workflow {
+            reads_ch = Channel.fromFilePairs(params.reads)
+
+            prepare_genome_samtools(params.genome)
+            prepare_genome_picard(params.genome)
             prepare_star_genome_index(params.genome)
         }
         ```
@@ -379,19 +388,16 @@ Next on to something a little more tricky. The next process takes two inputs: th
 
 !!! info
 
-    In Nextflow, tuples can be defined in the input or output using the [`tuple`](https://www.nextflow.io/docs/latest/process.html#input-of-type-tuple) qualifier.
+    In Nextflow, tuples can be defined in the input or output using the [`tuple`](https://www.nextflow.io/docs/latest/process.html#input-type-tuple) qualifier.
 
-You should implement a process having the following structure:
+The next process has the following structure:
 
--   **Name**
-    -   `prepare_vcf_file`
--   **Command**
-    -   create a filtered and recoded set of variants
--   **Input**
-    -   the variants file
-    -   the blacklisted regions file
--   **Output**
-    -   a tuple containing the filtered/recoded VCF file and the tab index (TBI) file.
+-   **Name**: `prepare_vcf_file`
+-   **Command**: create a filtered and recoded set of variants
+-   **Input**:
+    - the variants file
+    - the blacklisted regions file
+-   **Output**: a tuple containing the filtered/recoded VCF file and the tab index (TBI) file.
 
 !!! exercise "Problem #5"
 
@@ -423,6 +429,11 @@ You should implement a process having the following structure:
     }
 
     workflow {
+        reads_ch = Channel.fromFilePairs(params.reads)
+
+        prepare_genome_samtools(params.genome)
+        prepare_genome_picard(params.genome)
+        prepare_star_genome_index(params.genome)
         BLANK
     }
     ```
@@ -458,6 +469,7 @@ You should implement a process having the following structure:
          */
 
         process prepare_vcf_file {
+            input:
             path variantsFile
             path blacklisted
 
@@ -477,13 +489,18 @@ You should implement a process having the following structure:
         }
 
         workflow {
+            reads_ch = Channel.fromFilePairs(params.reads)
+
+            prepare_genome_samtools(params.genome)
+            prepare_genome_picard(params.genome)
+            prepare_star_genome_index(params.genome)
             prepare_vcf_file(params.variants, params.blacklist)
         }
         ```
 
         - Take as input the variants file, assigning the name `${variantsFile}`.
         - Take as input the blacklisted file, assigning the name `${blacklisted}`.
-        - Out a tuple (or set) of two files
+        - Out a tuple of two files
         - Defines the name of the first output file.
         - Generates the second output file (with `.tbi` suffix).
 
@@ -497,20 +514,17 @@ In this process, for each sample, we align the reads to our genome using the STA
 
 You should implement a process having the following structure:
 
--   **Name**
-    -   `rnaseq_mapping_star`
--   **Command**
-    -   mapping of the RNA-Seq reads using STAR
--   **Input**
-    -   the genome fasta file
-    -   the STAR genome index
-    -   a tuple containing the replicate id and paired read files
--   **Output**
-    -   a tuple containing replicate id, aligned bam file & aligned bam file index
+-   **Name**: `rnaseq_mapping_star`
+-   **Command**: mapping of the RNA-Seq reads using STAR
+-   **Input**:
+    - the genome fasta file
+    - the STAR genome index
+    - a tuple containing the replicate id and paired read files
+-   **Output**: a tuple containing replicate id, aligned bam file & aligned bam file index
 
 !!! Exercise "Problem #6"
 
-    Copy the code below and paste it at the end of `main.nf`.
+    Copy the code below and paste it at the end of `main.nf`, but before the workflow block.
 
     You must fill the `BLANK` space with the correct function and parameter.
 
@@ -520,7 +534,6 @@ You should implement a process having the following structure:
      */
 
     process rnaseq_mapping_star {
-
         input:
         path genome
         path genomeDir
@@ -584,14 +597,13 @@ You should implement a process having the following structure:
          */
 
         process rnaseq_mapping_star {
-
             input:
-            path genome from params.genome
-            path genomeDir from genome_dir_ch
-            tuple val(replicateId), path(reads) from reads_ch
+            path genome
+            path genomeDir
+            tuple val(replicateId), path(reads)
 
             output:
-            tuple val(replicateId), path('Aligned.sortedByCoord.out.bam'), path('Aligned.sortedByCoord.out.bam.bai') into aligned_bam_ch
+            tuple val(replicateId), path('Aligned.sortedByCoord.out.bam'), path('Aligned.sortedByCoord.out.bam.bai')
 
             script:
             """
@@ -654,21 +666,18 @@ The process creates `k+1` new reads (where `k` is the number of `N` cigar elemen
 
 You should implement a process having the following structure:
 
--   **Name**
-    -   rnaseq_gatk_splitNcigar
--   **Command**
-    -   split reads on Ns in CIGAR string using GATK
--   **Input**
-    -   the genome fasta file
-    -   the genome index made with samtools
-    -   the genome dictionary made with picard
-    -   a tuple containing replicate id, aligned bam file and aligned bam file index from the STAR mapping
--   **Output**
-    -   a tuple containing the replicate id, the split bam file and the split bam index file
+-   **Name**: `rnaseq_gatk_splitNcigar`
+-   **Command**: split reads on Ns in CIGAR string using GATK
+-   **Input**:
+    - the genome fasta file
+    - the genome index made with samtools
+    - the genome dictionary made with picard
+    - a tuple containing replicate id, aligned bam file and aligned bam file index from the STAR mapping
+-   **Output**: a tuple containing the replicate id, the split bam file and the split bam index file
 
 !!! exercise "Problem #7"
 
-    Copy the code below and paste it at the end of `main.nf`.
+    Copy the code below and paste it at the end of `main.nf`, but before the workflow block.
 
     You must fill the `BLANK` space with the correct function and parameter.
 
@@ -732,13 +741,13 @@ You should implement a process having the following structure:
             tag "$replicateId"
 
             input:
-            path genome from params.genome
-            path index from genome_index_ch
-            path genome_dict from genome_dict_ch
-            tuple val(replicateId), path(bam), path(bai) from aligned_bam_ch
+            path genome
+            path index
+            path genome_dict
+            tuple val(replicateId), path(bam), path(bai)
 
             output:
-            tuple val(replicateId), path('split.bam'), path('split.bai') into splitted_bam_ch
+            tuple val(replicateId), path('split.bam'), path('split.bai')
 
             script:
             """
@@ -779,22 +788,19 @@ This step uses GATK to detect systematic errors in the base quality scores, sele
 
 You should implement a process having the following structure:
 
--   **Name**
-    -   rnaseq_gatk_recalibrate
--   **Command**
-    -   recalibrate reads from each replicate using GATK
+-   **Name**: `rnaseq_gatk_recalibrate`
+-   **Command**: recalibrate reads from each replicate using GATK
 -   **Input**
     -   the genome fasta file
     -   the genome index made with samtools
     -   the genome dictionary made with picard
     -   a tuple containing replicate id, aligned bam file and aligned bam file index from process 3
     -   a tuple containing the filtered/recoded VCF file and the tab index (TBI) file from process 1D
--   **Output**
-    -   a tuple containing the sample id, the unique bam file and the unique bam index file
+-   **Output**: a tuple containing the sample id, the unique bam file and the unique bam index file
 
 !!! exercise "Problem #8"
 
-    Copy the code below and paste it at the end of `main.nf`.
+    Copy the code below and paste it at the end of `main.nf`, but before the workflow block.
 
     Your aim is to replace the `BLANK` placeholder with the the correct process call.
 
@@ -934,17 +940,14 @@ This steps call variants with GATK HaplotypeCaller. You can find details of the 
 
 You should implement a process having the following structure:
 
--   **Name**
-    -   rnaseq_call_variants
--   **Command**
-    -   variant calling of each sample using GATK
--   **Input**
+-   **Name**: `rnaseq_call_variants`
+-   **Command**: variant calling of each sample using GATK
+-   **Input**:
     -   the genome fasta file
     -   the genome index made with samtools
     -   the genome dictionary made with picard
     -   a tuple containing replicate id, aligned bam file and aligned bam file index from process 4
--   **Output**
-    -   a tuple containing the sample id the resulting variant calling file (vcf)
+-   **Output**: a tuple containing the sample id the resulting variant calling file (vcf)
 
 !!! exercise "Problem #9"
 
@@ -1064,23 +1067,17 @@ We must process the VCF result to prepare variants file for allele specific expr
 You should implement two processes having the following structure:
 
 -   _1st process_
-    -   **Name**
-        -   post_process_vcf
-    -   **Command**
-        -   post-process the variant calling file (vcf) of each sample
-    -   **Input**
+    -   **Name**: `post_process_vcf`
+    -   **Command**: post-process the variant calling file (vcf) of each sample
+    -   **Input**:
         -   tuple containing the sample ID and vcf file
         -   a tuple containing the filtered/recoded VCF file and the tab index (TBI) file from process 1D
-    -   **Output**
-        -   a tuple containing the sample id, the variant calling file (vcf) and a file containing common SNPs
+    -   **Output**: a tuple containing the sample id, the variant calling file (vcf) and a file containing common SNPs
 -   _2nd process_
-    -   **Name**
-        -   prepare_vcf_for_ase
-    -   **Command**
-        -   prepare the VCF for allele specific expression (ASE) and generate a figure in R.
-    -   **Input**
-        -   a tuple containing the sample id, the variant calling file (vcf) and a file containing common SNPs
-    -   **Output**
+    -   **Name**: `prepare_vcf_for_ase`
+    -   **Command**: prepare the VCF for allele specific expression (ASE) and generate a figure in R.
+    -   **Input**: a tuple containing the sample id, the variant calling file (vcf) and a file containing common SNPs
+    -   **Output**:
         -   a tuple containing the sample ID and known SNPs in the sample for ASE
         -   a figure of the SNPs generated in R as a PDF file
 
@@ -1272,17 +1269,14 @@ Now we are ready for the final process.
 
 You should implement a process having the following structure:
 
--   **Name**
-    -   ASE_knownSNPs
--   **Command**
-    -   calculate allele counts at a set of positions with GATK tools
--   **Input**
+-   **Name**: `ASE_knownSNPs`
+-   **Command**: calculate allele counts at a set of positions with GATK tools
+-   **Input**:
     -   genome fasta file
     -   genome index file from samtools
     -   genome dictionary file
     -   the `grouped_vcf_bam_bai_ch` channel
--   **Output**
-    -   the allele specific expression file (`ASE.tsv`)
+-   **Output**: the allele specific expression file (`ASE.tsv`)
 
 !!! exercise "Problem #12"
 
