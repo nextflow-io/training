@@ -1257,7 +1257,7 @@ The final step is the GATK ASEReadCounter.
 
     ??? solution
 
-        ```groovy linenums="1" hl_lines="1-6"
+        ```groovy linenums="1" hl_lines="3-6"
         rnaseq_gatk_recalibrate
             .out
             .groupTuple()
@@ -1266,21 +1266,21 @@ The final step is the GATK ASEReadCounter.
             .set { grouped_vcf_bam_bai_ch }
         ```
 
-## Process 6C: Allele-Specific Expression analysis with GATK ASEReadCounter
+## Process 7: Allele-Specific Expression analysis with GATK ASEReadCounter
 
 Now we are ready for the final process.
 
 You should implement a process having the following structure:
 
 -   **Name**
-    -   6C_ASE_knownSNPs
+    -   ASE_knownSNPs
 -   **Command**
     -   calculate allele counts at a set of positions with GATK tools
 -   **Input**
     -   genome fasta file
     -   genome index file from samtools
     -   genome dictionary file
-    -   the `grouped_vcf_bam_bai_ch`channel
+    -   the `grouped_vcf_bam_bai_ch` channel
 -   **Output**
     -   the allele specific expression file (`ASE.tsv`)
 
@@ -1301,15 +1301,19 @@ You should implement a process having the following structure:
     ??? solution
 
         ```groovy linenums="1"
-        process '6C_ASE_knownSNPs' {
+        /*
+         * Processes 7: Allele-Specific Expression analysis with GATK ASEReadCounter
+         */
+
+        process ASE_knownSNPs {
             tag "$sampleId"
             publishDir "$params.results/$sampleId"
 
             input:
-            path genome from params.genome
-            path index from genome_index_ch
-            path dict from genome_dict_ch
-            tuple val(sampleId), path(vcf), path(bam), path(bai) from grouped_vcf_bam_bai_ch
+            path genome
+            path index
+            path dict
+            tuple val(sampleId), path(vcf), path(bam), path(bai)
 
             output:
             path "ASE.tsv"
@@ -1324,6 +1328,13 @@ You should implement a process having the following structure:
                             -I bam.list \
                             -sites ${vcf}
             """
+        }
+
+        workflow {
+            ASE_knownSNPs(params.genome,
+                          prepare_genome_samtools.out,
+                          prepare_genome_picard.out,
+                          grouped_vcf_bam_bai_ch)
         }
         ```
 
