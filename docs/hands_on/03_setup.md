@@ -5,11 +5,13 @@
 All the files needed for the hands-on activity are stored in the directory shown below:
 
 ```bash
-tree $HOME/environment/hands-on
+tree /workspace/gitpod/hands-on
 ```
 
 ```bash
-$HOME/environment/hands-on
+/workspace/gitpod/hands-on
+hands-on
+├── README.md
 ├── bin
 │   └── gghist.R
 ├── data
@@ -29,11 +31,11 @@ $HOME/environment/hands-on
 │       ├── ENCSR000CPO1_2.fastq.gz
 │       ├── ENCSR000CPO2_1.fastq.gz
 │       └── ENCSR000CPO2_2.fastq.gz
-├── nextflow.config
-└── README.md
+├── final_main.nf
+└── nextflow.config
 ```
 
-3 directories, 19 files
+4 directories, 19 files
 
 ## Pulling the Docker image
 
@@ -69,5 +71,5 @@ Status: Downloaded newer image for cbcrg/callings-with-gatk:latest
 Make sure the following R script has execute permissions:
 
 ```bash
-chmod +x $HOME/environment/hands-on/bin/gghist.R
+chmod +x /workspace/gitpod/hands-on/bin/gghist.R
 ```
