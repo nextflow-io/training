@@ -18,17 +18,17 @@ By the end of this course you should:
 4. Understand the different execution platforms supported by Nextflow
 5. Be introduced to the Nextflow community and ecosystem
 
-## This content is also available on video!
+## Follow the training videos
 
 In our latest [nf-core training in March, 2023](https://nf-co.re/events/2023/training-march-2023), we used this training material to teach Nextflow and the recording is available for you to watch at your pace in multiple languages.
 
 Check the links below for the YouTube videos in the available languages:
 
--   [English recording](https://www.youtube.com/watch?v=nzR8DRq13nE&list=PL3xpfTVZLcNhoWxHR0CS-7xzu5eRT8uHo&pp=iAQB)
--   [Hindi recording](https://www.youtube.com/watch?v=84XtbqRkKSk&list=PL3xpfTVZLcNikun1FrSvtXW8ic32TciTJ&pp=iAQB)
--   [Spanish recording](https://www.youtube.com/watch?v=pGUxK2WnwKs&list=PL3xpfTVZLcNhSlCWVoa3GURacuLWeFc8O&pp=iAQB)
--   [Portuguese recording](https://www.youtube.com/watch?v=751E-yOH7H8&list=PL3xpfTVZLcNhi41yDYhyHitUhIcUHIbJg&pp=iAQB)
--   [French recording](https://www.youtube.com/watch?v=dk7I5SZgAEU&list=PL3xpfTVZLcNhiv9SjhoA1EDOXj9nzIqdS&pp=iAQB)
+-   [English recording](https://youtube.com/playlist?list=PL3xpfTVZLcNhoWxHR0CS-7xzu5eRT8uHo)
+-   [Hindi recording](https://youtube.com/playlist?list=PL3xpfTVZLcNikun1FrSvtXW8ic32TciTJ)
+-   [Spanish recording](https://youtube.com/playlist?list=PL3xpfTVZLcNhSlCWVoa3GURacuLWeFc8O)
+-   [Portuguese recording](https://youtube.com/playlist?list=PL3xpfTVZLcNhi41yDYhyHitUhIcUHIbJg)
+-   [French recording](https://youtube.com/playlist?list=PL3xpfTVZLcNhiv9SjhoA1EDOXj9nzIqdS)
 
 ## Overview
 
