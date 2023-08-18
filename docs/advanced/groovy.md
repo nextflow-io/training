@@ -10,7 +10,7 @@ cd chapter_04_groovy
 
 Let's assume that we would like to pull in a samplesheet, parse the entries and run them through the FastP tool. So far, we have been concerned with local files, but Nextflow will handle remote files transparently:
 
-```groovy
+```groovy linenums="1"
 workflow {
     params.input = "https://raw.githubusercontent.com/nf-core/test-datasets/rnaseq/samplesheet/v3.4/samplesheet_test.csv"
 
@@ -22,7 +22,7 @@ workflow {
 
 Let's write a small closure to parse each row into the now-familiar map + files shape. We might start by constructing the meta-map:
 
-```groovy
+```groovy linenums="1"
 workflow {
     params.input = "https://raw.githubusercontent.com/nf-core/test-datasets/rnaseq/samplesheet/v3.4/samplesheet_test.csv"
 
@@ -38,7 +38,7 @@ workflow {
 
 ... but this precludes the possibility of adding additional columns to the samplesheet. We might to ensure the parsing will capture any extra metadata columns should they be added. Instead, let's partition the column names into those that begin with "fastq" and those that don't:
 
-```groovy
+```groovy linenums="1"
 (readKeys, metaKeys) = row.keySet().split { it =~ /^fastq/ }
 ```
 
@@ -51,19 +51,19 @@ workflow {
 
 From here, let's
 
-```groovy
+```groovy linenums="1"
 reads = row.subMap(readKeys).values().collect { file(it) }
 ```
 
 ... but we run into an error:
 
-```groovy
+```groovy linenums="1"
 Argument of `file` function cannot be empty
 ```
 
 If we have a closer look at the samplesheet, we notice that not all rows have two read pairs. Let's add a condition
 
-```groovy
+```groovy linenums="1"
 reads = row
 .subMap(readKeys)
 .values()
@@ -73,7 +73,7 @@ reads = row
 
 Now we need to construct the meta map. Let's have a quick look at the FASTP module that I've already pre-defined:
 
-```groovy
+```groovy linenums="1"
 process FASTP {
     container 'quay.io/biocontainers/fastp:0.23.2--h79da9fb_0'
 
@@ -95,7 +95,7 @@ process FASTP {
 
 I can see that we require two extra keys, `id` and `single_end`:
 
-```groovy
+```groovy linenums="1"
 meta = row.subMap(metaKeys)
 meta.id ?= meta.sample
 meta.single_end = reads.size == 1
@@ -103,7 +103,7 @@ meta.single_end = reads.size == 1
 
 This is now able to be passed through to our FASTP process:
 
-```groovy
+```groovy linenums="1"
 Channel.fromPath(params.input)
 | splitCsv(header: true)
 | map { row ->
@@ -125,7 +125,7 @@ Let's assume that we want to pull some information out of these JSON files. To m
 
 We'd like to add a `publishDir` directive to our FASTP process.
 
-```groovy
+```groovy linenums="1"
 process {
     withName: 'FASTP' {
         publishDir = [
@@ -141,13 +141,13 @@ process {
 
     This pattern of returning something if it is true and `somethingElse` if not:
 
-    ```groovy
+    ```groovy linenums="1"
     somethingThatMightBeFalsey ? somethingThatMightBeFalsey : somethingElse
     ```
 
     has a shortcut in Groovy - the "Elvis" operator:
 
-    ```groovy
+    ```groovy linenums="1"
     somethingThatMightBeFalsey ?: somethingElse
     ```
 
@@ -159,7 +159,7 @@ nextflow run . -resume
 
 Let's consider the possibility that we'd like to capture some of these metrics so that they can be used downstream. First, we'll have a quick peek at the [Groovy docs](https://groovy-lang.org/documentation.html) and I see that I need to import a `JsonSlurper`:
 
-```groovy
+```groovy linenums="1"
 import groovy.json.JsonSlurper
 
 // We can also import a Yaml parser just as easily:
@@ -174,7 +174,7 @@ Now let's create a second entrypoint to quickly pass these JSON files through so
 
     Using a second Entrypoint allows us to do quick debugging or development using a small section of the workflow without disturbing the main flow.
 
-```groovy
+```groovy linenums="1"
 workflow Jsontest {
     Channel.fromPath("results/fastp/json/*.json")
     | view
@@ -203,7 +203,7 @@ def getFilteringResult(json_file) {
 
         Here is one potential solution.
 
-        ```groovy
+        ```groovy linenums="1"
         def getFilteringResult(json_file) {
             new JsonSlurper().parseText(json_file.text)
             ?.summary
@@ -217,7 +217,7 @@ def getFilteringResult(json_file) {
 
 We can then join this new map back to the original reads using the `join` operator:
 
-```groovy
+```groovy linenums="1"
 FASTP.out.json
 | map { meta, json -> [meta, getFilteringResult(json)] }
 | join( FASTP.out.reads )
@@ -230,7 +230,7 @@ FASTP.out.json
 
     ??? solution
 
-        ```groovy
+        ```groovy linenums="1"
         FASTP.out.json
         | map { meta, json -> [meta, getFilteringResult(json)] }
         | join( FASTP.out.reads )

@@ -10,7 +10,7 @@ We'll start with a simple main.nf in the `chapter_03_grouping` directory
 cd chapter_03_grouping
 ```
 
-```groovy
+```groovy linenums="1"
 workflow {
     Channel.fromPath("data/samplesheet.csv")
     | splitCsv( header:true )
@@ -26,7 +26,7 @@ workflow {
 
 The first change we're going to make is to correct some repetitive code that we've seen quite a lot already in this workshop. The construction of the meta map from this row stutters quite a lot. We can make use of the [`subMap`](<https://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/Map.html#subMap(java.util.Collection)>) method available Maps to quickly return a new map constructed from the subset of an existing map:
 
-```groovy
+```groovy linenums="1"
 workflow {
     Channel.fromPath("data/samplesheet.csv")
     | splitCsv( header:true )
@@ -55,7 +55,7 @@ workflow {
 
         To ensure that the modification of the map happens first, we introduce a `sleep` into the first map operation. This `sleep` emulates a long-running Nextflow process.
 
-        ```groovy
+        ```groovy linenums="1"
         workflow {
             Channel.fromPath("data/samplesheet.csv")
             | splitCsv( header:true )
@@ -117,7 +117,7 @@ workflow {
 
 Let's construct a dummy read mapping process. This is not a bioinformatics workshop, so we can 'cheat' in the interests of time.
 
-```groovy
+```groovy linenums="1"
 process MapReads {
     input:
     tuple val(meta), path(reads)
@@ -149,7 +149,7 @@ workflow {
 
 Let's consider that we might now want to merge the repeats. We'll need to group bams that share the `id` and `type` attributes.
 
-```groovy
+```groovy linenums="1"
 MapReads( samples, reference )
 | map { meta, bam -> [meta.subMap('id', 'type'), bam]}
 | groupTuple
@@ -160,7 +160,7 @@ This is easy enough, but the `groupTuple` operator has to wait until all items a
 
 By default, the `groupTuple` operator groups on the first item in the element, which at the moment is a `Map`. We can turn this map into a special class using the `groupKey` method, which takes our grouping object as a first parameter and the number of expected elements in the second parameter.
 
-```groovy
+```groovy linenums="1"
 MapReads( samples, reference )
 | map { meta, bam ->
     key = groupKey(meta.subMap('id', 'type'), NUMBER_OF_ITEMS_IN_GROUP)
@@ -176,7 +176,7 @@ MapReads( samples, reference )
 
     ??? solution
 
-        ```groovy
+        ```groovy linenums="1"
         workflow {
             reference = Channel.fromPath("data/genome.fasta").first()
 
@@ -205,7 +205,7 @@ MapReads( samples, reference )
 
 Now that we have our repeats together in an output channel, we can combine them using "advanced bioinformatics":
 
-```groovy
+```groovy linenums="1"
 process CombineBams {
     input:
     tuple val(meta), path("input/in_*_.bam")
@@ -219,7 +219,7 @@ process CombineBams {
 
 In our workflow:
 
-```groovy
+```groovy linenums="1"
 MapReads( samples, reference )
 | map { meta, bam ->
     key = groupKey(meta.subMap('id', 'type'), meta.repeatcount)
@@ -235,7 +235,7 @@ The previous exercise demonstrated the fan-in approach using `groupTuple` and `g
 
 We can take an existing bed file, for example and turn it into a channel of Maps.
 
-```groovy
+```groovy linenums="1"
 Channel.fromPath("data/intervals.bed")
 | splitCsv(header: ['chr', 'start', 'stop', 'name'], sep: '\t')
 | collectFile { entry -> ["${entry.name}.bed", entry*.value.join("\t")] }
@@ -252,7 +252,7 @@ return
 
 Given a dummy genotyping process:
 
-```groovy
+```groovy linenums="1"
 process GenotypeOnInterval {
     input:
     tuple val(meta), path(bam), path(bed)
@@ -266,7 +266,7 @@ process GenotypeOnInterval {
 
 We can use the `combine` operator to emit a new channel where each combined bam is attached to each bed file. These can then be piped into the genotyping process:
 
-```groovy
+```groovy linenums="1"
 MapReads( samples, reference )
 | map { meta, bam ->
     key = groupKey(meta.subMap('id', 'type'), meta.repeatcount)
@@ -281,7 +281,7 @@ MapReads( samples, reference )
 
 Finally, we can combine these genotyped bams back using `groupTuple` and another bam merge process:
 
-```groovy
+```groovy linenums="1"
 process MergeGenotyped {
     input:
     tuple val(meta), path("input/in_*_.bam")
@@ -293,7 +293,7 @@ process MergeGenotyped {
 }
 ```
 
-```groovy
+```groovy linenums="1"
 MapReads( samples, reference )
 | map { meta, bam ->
     key = groupKey(meta.subMap('id', 'type'), meta.repeatcount)

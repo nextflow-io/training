@@ -19,7 +19,7 @@ If a process script block is becoming too long, it can be moved to a template fi
 
 The chapter_05_structure directory already contains an example template - a very simple python script. We can add a new process that uses this template:
 
-```groovy
+```groovy linenums="1"
 process SayHiTemplate {
     debug true
     input: val(name)
@@ -45,7 +45,7 @@ The classes listed above all provide utility executed at the beginning of a work
 
 Let's consider an example where we create our own custom class to handle metadata. We can create a new class in `./lib/Metadata.groovy`. We'll extend the built-in `HashMap` class, and add a simple method to return a value:
 
-```groovy
+```groovy linenums="1"
 class Metadata extends HashMap {
     def hi() {
         return "Hello, workshop participants!"
@@ -55,7 +55,7 @@ class Metadata extends HashMap {
 
 We can then use this class in our workflow:
 
-```groovy
+```groovy linenums="1"
 workflow {
     Channel.of("Montreal")
     | map { new Metadata() }
@@ -65,7 +65,7 @@ workflow {
 
 We can use the new `hi` method in the workflow:
 
-```groovy
+```groovy linenums="1"
 workflow {
     Channel.of("Montreal")
     | map { new Metadata() }
@@ -75,7 +75,7 @@ workflow {
 
 At the moment, the `Metadata` class is not making use of the "Montreal" being passed into the closure. Let's change that by adding a constructor to the class:
 
-```groovy
+```groovy linenums="1"
 class Metadata extends HashMap {
     Metadata(String location) {
         this.location = location
@@ -89,7 +89,7 @@ class Metadata extends HashMap {
 
 Which we can use like so:
 
-```groovy
+```groovy linenums="1"
 workflow {
     Channel.of("Montreal")
     | map { place -> new Metadata(place) }
@@ -99,7 +99,7 @@ workflow {
 
 We can also use this method when passing the object to a process:
 
-```groovy
+```groovy linenums="1"
 process UseMeta {
     input: val(meta)
     output: path("out.txt")
@@ -116,7 +116,7 @@ workflow {
 
 Why might this be helpful? You can add extra classes to the metadata which can be computed from the existing metadata. For exmaple, we might want want to grab the adapter prefix:
 
-```groovy
+```groovy linenums="1"
 def getAdapterStart() {
     this.adapter?.substring(0, 3)
 }
@@ -124,7 +124,7 @@ def getAdapterStart() {
 
 Which we might use like so:
 
-```groovy
+```groovy linenums="1"
 process UseMeta {
     input: val(meta)
     output: path("out.txt")
@@ -142,7 +142,7 @@ workflow {
 
 You might even want to reach out to external services such as a LIMS or e-utilis API. Here we add a dummy "getSampleName()" method that reaches out to a public API:
 
-```groovy
+```groovy linenums="1"
 def getSampleName() {
     def get = new URL('https://postman-echo.com/get?sampleName=Fido').openConnection()
     def getRC = get.getResponseCode();
@@ -156,7 +156,7 @@ def getSampleName() {
 
 Which we can use like so:
 
-```groovy
+```groovy linenums="1"
 process UseMeta {
     input: val(meta)
     output: path("out.txt")
@@ -180,7 +180,7 @@ process UseMeta {
 
         We might increase the length of the adapter prefix to 5 characters:
 
-        ```{groovy}
+        ```groovy linenums="1"
             def getAdapterStart() {
                 this.adapter?.substring(0, 5)
             }
@@ -190,7 +190,7 @@ process UseMeta {
 
 We are not limited to using or extending the built-in Groovy classes. Let's start by creating a `Dog` class in `./lib/Dog.groovy`:
 
-```groovy
+```groovy linenums="1"
 class Dog {
     String name
     Boolean isHungry = true
@@ -199,7 +199,7 @@ class Dog {
 
 We can create a new dog at the beginning of the workflow:
 
-```groovy
+```groovy linenums="1"
 workflow {
     dog = new Dog(name: "fido")
     log.info "Found a new dog: $dog"
@@ -208,7 +208,7 @@ workflow {
 
 We can pass objects of our class through channels. Here we take a channel of dog names and create a channel of dogs:
 
-```groovy
+```groovy linenums="1"
 workflow {
     Channel.of("Argente", "Absolon", "Chowne")
     | map { new Dog(name: it) }
@@ -228,7 +228,7 @@ Nextflow has provided a decorator to help serialize your custom classes. By addi
 
 Let's add the decorator to our `Dog` class:
 
-```groovy
+```groovy linenums="1"
 import nextflow.io.ValueObject
 
 @ValueObject
@@ -240,7 +240,7 @@ class Dog {
 
 Lastly, we will need to register the class with Kyro, the Java serialization framework. Again, Nextflow provides a helper method to do this. We can add the following to the `main.nf` file:
 
-```groovy
+```groovy linenums="1"
 import nextflow.util.KryoHelper
 
 KryoHelper.register(Dog)

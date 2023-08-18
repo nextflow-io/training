@@ -58,7 +58,7 @@ data/reads/
 
 A first pass attempt at pulling these files into Nextflow might use the `fromFilePairs` method:
 
-```groovy
+```groovy linenums="1"
 workflow {
     Channel.fromFilePairs("data/reads/*/*_R{1,2}.fastq.gz")
     | view
@@ -73,7 +73,7 @@ There are a couple of different ways we can pull out the metadata
 
 We can use the `tokenize` method to split our id. To sanity-check, I just pipe the result directly into the `view` operator.
 
-```groovy
+```groovy linenums="1"
 workflow {
     Channel.fromFilePairs("data/reads/*/*_R{1,2}.fastq.gz")
     | map { id, reads ->
@@ -85,7 +85,7 @@ workflow {
 
 If we are confident about the stability of the naming scheme, we can destructure the list returned by `tokenize` and assign them to variables directly:
 
-```groovy
+```groovy linenums="1"
 map { id, reads ->
     (sample, replicate, type) = id.tokenize("_")
     meta = [sample:sample, replicate:replicate, type:type]
@@ -100,7 +100,7 @@ map { id, reads ->
 
 Another option is to use the [`transpose`](<https://docs.groovy-lang.org/latest/html/api/groovy/util/GroovyCollections.html#transpose(java.util.List)>) method with the [`collectEntries()`](<https://docs.groovy-lang.org/latest/html/api/org/codehaus/groovy/runtime/DefaultGroovyMethods.html#collectEntries(E[])>) to produce the same map. I'd warn that this method is bordering on a little 'too clever' and is more difficult to read. It also assumes that the order of the filename-encoded metadata is consistent.
 
-```groovy
+```groovy linenums="1"
 map { id, reads ->
     meta = [id.tokenize("_"), ['sample', 'replicate', 'type']]
         .transpose()
@@ -111,7 +111,7 @@ map { id, reads ->
 
 If we move back to the previous method, but decided that the 'rep' prefix on the replicate should be removed, we can use regular expressions to simply "subtract" pieces of a string. Here we remove a 'rep' prefix from the `replicate` variable if the prefix is present:
 
-```groovy
+```groovy linenums="1"
 map { id, reads ->
     (sample, replicate, type) = id.tokenize("_")
     replicate -= ~/^rep/
@@ -126,14 +126,14 @@ map { id, reads ->
 
     Groovy has a lot of very helpful syntactic sugar for string manipulation. You can trim parts of a string by simply subtracting another string:
 
-    ```groovy
+    ```groovy linenums="1"
     demo = "one two three"
     assertEquals(demo - "two ", "one three")
     ```
 
     ... or by subtracting a regular expression:
 
-    ```groovy
+    ```groovy linenums="1"
     demo = "one two three"
     assertEquals(demo - ~/t.o ?/, "one three")
     ```
@@ -144,7 +144,7 @@ We are almost there, but the we still don't have the "treatment" metadata captur
 
 We can call the `getParent()` method on each of the paths like so:
 
-```groovy
+```groovy linenums="1"
 map { id, reads ->
     reads.collect { it.getParent() }
 }
@@ -152,7 +152,7 @@ map { id, reads ->
 
 If we want to call a set method on every item in a Collection, Groovy provides this convenient "spread dot" notation:
 
-```groovy
+```groovy linenums="1"
 map { id, reads ->
     reads*.getParent()
 }
@@ -160,7 +160,7 @@ map { id, reads ->
 
 This returns another Path object, but we only want the name of the last directory, so we need to call `.getName()` method on each of these Paths. We can use the spread-dot notation again:
 
-```groovy
+```groovy linenums="1"
 map { id, reads ->
     reads*.getParent()*.getName()
 }
@@ -168,7 +168,7 @@ map { id, reads ->
 
 The last piece of Groovy sugar is to note that methods with `get` and `set` prefixes can be called with a property-style notation, converting `getParent()` to `parent` and `getName()` to `name`:
 
-```groovy
+```groovy linenums="1"
 map { id, reads ->
     reads*.parent*.name
 }
@@ -176,7 +176,7 @@ map { id, reads ->
 
 If we wanted to remove the "treatment" prefix, we can combine this new notation with the "minus" method which we used earlier in the aliased `-` form.
 
-```groovy
+```groovy linenums="1"
 map { id, reads ->
     reads*.parent*.name*.minus(~/treatment/)
 }
@@ -184,7 +184,7 @@ map { id, reads ->
 
 In this particular example, we know ahead of time that the treatments must be the same because of the way the `fromFilePairs` method gathers pairs, but we'll continue for the sake of the demonstration. Our final `map` closure might look like:
 
-```groovy
+```groovy linenums="1"
 workflow {
     Channel.fromFilePairs("data/reads/*/*_R{1,2}.fastq.gz")
     | map { id, reads ->
@@ -205,7 +205,7 @@ workflow {
 
 This metadata map can be passed through the workflow with the reads and used to split, join and recombine the data. The resulting channel would be suitable for any Nextflow process with inputs of the form
 
-```groovy
+```groovy linenums="1"
 process ExampleProcess {
     input:
     tuple val(meta), path(reads)

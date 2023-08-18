@@ -10,7 +10,7 @@ These modest set of operators have been chosen to simultaneously demo tangential
 
 Map is certainly the most commonly used of the operators covered here. It's a way to supply a closure through which each element in the channel is passed. The return value of the closure is emitted as an element in a new output channel. A canonical example is a closure that multiplies two numbers:
 
-```groovy
+```groovy linenums="1"
 workflow {
     Channel.of( 1, 2, 3, 4, 5 )
     | map { it * it }
@@ -20,7 +20,7 @@ workflow {
 
 By default, the element being passed to the closure is given the default name `it`. The variable can be named by using the `->` notation:
 
-```groovy
+```groovy linenums="1"
 workflow {
     Channel.of( 1, 2, 3, 4, 5 )
     | map { num -> num * num }
@@ -30,7 +30,7 @@ workflow {
 
 Groovy is an optionally typed language, and it is possible to specify the type of the argument passed to the closure.
 
-```groovy
+```groovy linenums="1"
 workflow {
     Channel.of( 1, 2, 3, 4, 5 )
     | map { Integer num -> num * num }
@@ -42,7 +42,7 @@ workflow {
 
 If you find yourself re-using the same closure multiple times in your pipeline, the closure can be named and referenced:
 
-```groovy
+```groovy linenums="1"
 def squareIt = { Integer num -> num * num }
 
 workflow {
@@ -54,7 +54,7 @@ workflow {
 
 If you have these re-usable closures defined, you can compose them together.
 
-```groovy
+```groovy linenums="1"
 def squareIt = { it * it }
 def addTwo = { it + 2 }
 
@@ -65,9 +65,7 @@ workflow {
 }
 ```
 
-**Output**
-
-```bash
+```console title="Output"
 N E X T F L O W  ~  version 23.04.1
 Launching `./main.nf` [focused_borg] DSL2 - revision: f3c3e751fe
 3
@@ -79,7 +77,7 @@ Launching `./main.nf` [focused_borg] DSL2 - revision: f3c3e751fe
 
 The above is the same as writing:
 
-```groovy
+```groovy linenums="1"
 def squareIt = { it * it }
 def addTwo = { it + 2 }
 
@@ -93,7 +91,7 @@ workflow {
 
 For those inclined towards functional programming, you'll be happy to know that closures can be curried:
 
-```groovy
+```groovy linenums="1"
 def timesN = { multiplier, it -> it * multiplier }
 def timesTen = timesN.curry(10)
 
@@ -108,7 +106,7 @@ workflow {
 
 In addition to the argument-less usage of `view` as shown above, this operator can also take a closure to customize the stdout message. We can create a closure to print the value of the elements in a channel as well as their type, for example:
 
-```groovy
+```groovy linenums="1"
 def timesN = { multiplier, it -> it * multiplier }
 def timesTen = timesN.curry(10)
 def prettyPrint = { "Found '$it' (${it.getClass()})"}
@@ -130,7 +128,7 @@ workflow {
 
 It is common that a samplesheet is passed as input into a Nextflow workflow. We'll see some more complicated ways to manage these inputs later on in the workshop, but the `splitCsv` is an excellent tool to have in a pinch.
 
-```groovy
+```groovy linenums="1"
 workflow {
     Channel.fromPath("data/samplesheet.csv")
     | splitCsv( header: true )
@@ -142,7 +140,7 @@ workflow {
 
     From the directory `chapter_01_operators`, use the `splitCsv` and `map` operators to create a channel that would be suitable input to the
 
-    ```groovy
+    ```groovy linenums="1"
     process FastQC {
         input:
         tuple val(id), path(fastqs)
@@ -152,7 +150,7 @@ workflow {
     ??? solution
         Specifying the `header` argument in the `splitCsv` operator, we have convenient named access to csv elements. The closure returns a list of two elements where the second element a list of paths.
 
-        ```groovy
+        ```groovy linenums="1"
         workflow {
             Channel.fromPath("data/samplesheet.csv")
             | splitCsv( header: true )
@@ -172,7 +170,7 @@ workflow {
 
         In the next chapter, we'll discuss the "meta map" pattern in more detail, but we can preview that here.
 
-        ```groovy
+        ```groovy linenums="1"
         workflow {
             Channel.fromPath("data/samplesheet.csv")
             | splitCsv( header: true )
@@ -199,7 +197,7 @@ cat data/samplesheet.ugly.csv
 
 Using the `splitCsv` operator would give us one entry that would contain all four fastq files. Let's consider that we wanted to split these fastqs into separate channels for tumor and normal, we could use `multiMap`:
 
-```groovy
+```groovy linenums="1"
 workflow {
     Channel.fromPath("data/samplesheet.ugly.csv")
     | splitCsv( header: true )
@@ -227,7 +225,7 @@ workflow {
 
 In the example above, the `multiMap` operator was necessary because we were supplied with a samplesheet that combined two pairs of fastq per row. If we were to use the neater samplesheet, we could use the `branch` operator to achieve the same result.
 
-```groovy
+```groovy linenums="1"
 workflow {
     Channel.fromPath("data/samplesheet.csv")
     | splitCsv( header: true )
@@ -245,7 +243,7 @@ workflow {
 
 An element is only emitted to the first channel were the test condition is met. If an element does not meet any of the tests, it is not emitted to any of the output channels. You can 'catch' any such samples by specifying `true` as a condition. If we knew that all samples would be either tumor or normal and no third 'type', we could write
 
-```groovy
+```groovy linenums="1"
 branch { meta, reads ->
     tumor: meta.type == "tumor"
     normal: true
@@ -254,7 +252,7 @@ branch { meta, reads ->
 
 We can optionally return a new element to one or more of the output channels. For example, to add an extra key in the meta map of the tumor samples, we add a new line under the condition and return our new element. In this example, we modify the first element of the `List` to be a new list that is the result of merging the existing meta map with a new map containing a single key:
 
-```groovy
+```groovy linenums="1"
 branch { meta, reads ->
     tumor: meta.type == "tumor"
         return [meta + [newKey: 'myValue'], reads]
@@ -270,7 +268,7 @@ branch { meta, reads ->
 
         There are many ways to accomplish this, but the map merging pattern introduced above can also be used to safely and concisely rename values in a map.
 
-        ```groovy
+        ```groovy linenums="1"
         branch { meta, reads ->
             tumor: meta.type == "tumor"
                 return [meta + [type: 'abnormal'], reads]
@@ -289,7 +287,7 @@ branch { meta, reads ->
 
 Some Nextflow operators return objects that contain _multiple_ channels. The `multiMap` and `branch` operators are excellent examples. In most instances, the output is assigned to a variable and then addressed by name:
 
-```groovy
+```groovy linenums="1"
 numbers = Channel.from(1,2,3,4,5)
 | multiMap {
     small: it
@@ -301,7 +299,7 @@ numbers.large | view { num -> "Large: $num"}
 
 or by using `set`:
 
-```groovy
+```groovy linenums="1"
 Channel.from(1,2,3,4,5)
 | multiMap {
     small: it
@@ -315,7 +313,7 @@ numbers.large | view { num -> "Large: $num"}
 
 Given a process that takes multiple channels
 
-```groovy
+```groovy linenums="1"
 process MultiInput {
     debug true
     input:
@@ -328,7 +326,7 @@ process MultiInput {
 
 You can either provide the channels individually:
 
-```groovy
+```groovy linenums="1"
 Channel.from(1,2,3,4,5)
 | multiMap {
     small: it
@@ -341,7 +339,7 @@ MultiInput(numbers.small, numbers.large)
 
 or you can provide the multichannel as a single input:
 
-```groovy
+```groovy linenums="1"
 Channel.from(1,2,3,4,5)
 | multiMap {
     small: it
@@ -354,7 +352,7 @@ MultiInput(numbers)
 
 This also means you can skip the `set` operator for the cleanest solution:
 
-```groovy
+```groovy linenums="1"
 Channel.from(1,2,3,4,5)
 | multiMap {
     small: it
@@ -371,7 +369,7 @@ The transpose operator is often misunderstood. It can be thought of as the inver
 
 Given a workflow that returns one element per sample, where we have grouped the samplesheet lines on a meta containing only id and type:
 
-```groovy
+```groovy linenums="1"
 workflow {
     Channel.fromPath("data/samplesheet.csv")
     | splitCsv(header: true)
@@ -384,9 +382,7 @@ workflow {
 }
 ```
 
-**Output**
-
-```bash
+```console title="Output"
 N E X T F L O W  ~  version 23.04.1
 Launching `./main.nf` [spontaneous_rutherford] DSL2 - revision: 7dc1cc0039
 [[id:sampleA, type:normal], [1, 2], [[data/reads/sampleA_rep1_normal_R1.fastq.gz, data/reads/sampleA_rep1_normal_R2.fastq.gz], [data/reads/sampleA_rep2_normal_R1.fastq.gz, data/reads/sampleA_rep2_normal_R2.fastq.gz]]]
@@ -399,7 +395,7 @@ Launching `./main.nf` [spontaneous_rutherford] DSL2 - revision: 7dc1cc0039
 
 If we add in a `transpose`, each repeat number is matched back to the appropriate list of reads:
 
-```groovy
+```groovy linenums="1"
 workflow {
     Channel.fromPath("data/samplesheet.csv")
     | splitCsv(header: true)
@@ -413,9 +409,7 @@ workflow {
 }
 ```
 
-**Output**
-
-```bash
+```console title="Output"
 N E X T F L O W  ~  version 23.04.1
 Launching `./main.nf` [elegant_rutherford] DSL2 - revision: 2c5476b133
 [[id:sampleA, type:normal], 1, [data/reads/sampleA_rep1_normal_R1.fastq.gz, data/reads/sampleA_rep1_normal_R2.fastq.gz]]
