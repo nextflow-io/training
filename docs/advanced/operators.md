@@ -18,7 +18,7 @@ workflow {
 }
 ```
 
-By default, the element being passed to the closure is given the default name `it`. The variable can be named by using the `->` notation: 
+By default, the element being passed to the closure is given the default name `it`. The variable can be named by using the `->` notation:
 
 ```groovy
 workflow {
@@ -140,7 +140,7 @@ workflow {
 
 !!! exercise
 
-    From the directory `chapter_01_operators`, use the `splitCsv` and `map` operators to create a channel that would be suitable input to the 
+    From the directory `chapter_01_operators`, use the `splitCsv` and `map` operators to create a channel that would be suitable input to the
 
     ```groovy
     process FastQC {
@@ -149,14 +149,14 @@ workflow {
         //
     ```
 
-    ??? solution 
+    ??? solution
         Specifying the `header` argument in the `splitCsv` operator, we have convenient named access to csv elements. The closure returns a list of two elements where the second element a list of paths.
 
         ```groovy
         workflow {
             Channel.fromPath("data/samplesheet.csv")
             | splitCsv( header: true )
-            | map { row -> 
+            | map { row ->
                 [row.id, [file(row.fastq1), file(row.fastq2)]]
             }
             | view
@@ -166,7 +166,7 @@ workflow {
         !!! warning
             **Convert Strings to Paths**
 
-            The fastq paths are simple strings in the context of a csv row. In order to pass them as paths to a Nextflow process, they need to be converted into objects that adjere to the `Path` interface. This is accomplished by wrapping them in `file`. 
+            The fastq paths are simple strings in the context of a csv row. In order to pass them as paths to a Nextflow process, they need to be converted into objects that adjere to the `Path` interface. This is accomplished by wrapping them in `file`.
 
         In the sample above, we've lost an important piece of metadata - the tumor/normal classification, choosing only the sample id as the first element in the output list.
 
@@ -176,7 +176,7 @@ workflow {
         workflow {
             Channel.fromPath("data/samplesheet.csv")
             | splitCsv( header: true )
-            | map { row -> 
+            | map { row ->
                 metaMap = [id: row.id, type: row.type, repeat: row.repeat]
                 [metaMap, [file(row.fastq1), file(row.fastq2)]]
             }
@@ -204,7 +204,7 @@ workflow {
     Channel.fromPath("data/samplesheet.ugly.csv")
     | splitCsv( header: true )
     | multiMap { row ->
-        tumor: 
+        tumor:
             metamap = [id: row.id, type:'tumor', repeat:row.repeat]
             [metamap, file(row.tumor_fastq_1), file(row.tumor_fastq_2)]
         normal:
@@ -219,10 +219,9 @@ workflow {
 ```
 
 !!! tip
-    **`multiMapCriteria`**
+**`multiMapCriteria`**
 
     The closure supplied to `multiMap` needs to return multiple channels, so using named closures as described in the `map` section above will not work. Fortunately, Nextflow provides the convenience `multiMapCriteria` method to allow you to define named `multiMap` closures should you need them. See the [`multiMap` documentation](https://www.nextflow.io/docs/latest/operator.html#multimap) for more info.
-
 
 ## `branch`
 
@@ -291,7 +290,7 @@ branch { meta, reads ->
 Some Nextflow operators return objects that contain _multiple_ channels. The `multiMap` and `branch` operators are excellent examples. In most instances, the output is assigned to a variable and then addressed by name:
 
 ```groovy
-numbers = Channel.from(1,2,3,4,5) 
+numbers = Channel.from(1,2,3,4,5)
 | multiMap {
     small: it
     large: it * 10
@@ -330,7 +329,7 @@ process MultiInput {
 You can either provide the channels individually:
 
 ```groovy
-Channel.from(1,2,3,4,5) 
+Channel.from(1,2,3,4,5)
 | multiMap {
     small: it
     large: it * 10
@@ -343,7 +342,7 @@ MultiInput(numbers.small, numbers.large)
 or you can provide the multichannel as a single input:
 
 ```groovy
-Channel.from(1,2,3,4,5) 
+Channel.from(1,2,3,4,5)
 | multiMap {
     small: it
     large: it * 10
@@ -356,7 +355,7 @@ MultiInput(numbers)
 This also means you can skip the `set` operator for the cleanest solution:
 
 ```groovy
-Channel.from(1,2,3,4,5) 
+Channel.from(1,2,3,4,5)
 | multiMap {
     small: it
     large: it * 10
@@ -376,7 +375,7 @@ Given a workflow that returns one element per sample, where we have grouped the 
 workflow {
     Channel.fromPath("data/samplesheet.csv")
     | splitCsv(header: true)
-    | map { row -> 
+    | map { row ->
         meta = [id: row.id, type: row.type]
         [meta, row.repeat, [row.fastq1, row.fastq2]]
     }
@@ -386,7 +385,7 @@ workflow {
 ```
 
 **Output**
-    
+
 ```bash
 N E X T F L O W  ~  version 23.04.1
 Launching `./main.nf` [spontaneous_rutherford] DSL2 - revision: 7dc1cc0039
@@ -404,7 +403,7 @@ If we add in a `transpose`, each repeat number is matched back to the appropriat
 workflow {
     Channel.fromPath("data/samplesheet.csv")
     | splitCsv(header: true)
-    | map { row -> 
+    | map { row ->
         meta = [id: row.id, type: row.type]
         [meta, row.repeat, [row.fastq1, row.fastq2]]
     }

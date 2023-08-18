@@ -2,8 +2,8 @@
 
 There are two fundamental metadata tenents in Nextflow:
 
-- Metadata should be explicit - be extremely wary of metadata encoded in filenames
-- Metadata should travel through channels with the data in a tuple element.
+-   Metadata should be explicit - be extremely wary of metadata encoded in filenames
+-   Metadata should travel through channels with the data in a tuple element.
 
 <figure markdown>
 
@@ -69,7 +69,7 @@ Nextflow will pull out the first part of the fastq filename and returned us a ch
 
 The id is stored as a simple string. We'd like to move to using a map of key-value pairs because we have more than one piece of metadata to track. In this example, we have sample, replicate, tumor/normal, and treatment. We could add extra elements to the tuple, but this changes the 'cardinality' of the elements in the channel and adding extra elements would require updating all downstream processes. A map is a single object and is passed through Nextflow channels as one value, so adding extra metadata fields will not require us to change the cardinality of the downstream processes.
 
-There are a couple of different ways we can pull out the metadata 
+There are a couple of different ways we can pull out the metadata
 
 We can use the `tokenize` method to split our id. To sanity-check, I just pipe the result directly into the `view` operator.
 
@@ -94,11 +94,11 @@ map { id, reads ->
 ```
 
 !!! note
-    **Destructuring requires parentheses**
+**Destructuring requires parentheses**
 
     Make sure that you're using a tuple with parentheses e.g. `(one, two)` rather than a List e.g. `[one, two]`
 
-Another option is to use the [`transpose`](https://docs.groovy-lang.org/latest/html/api/groovy/util/GroovyCollections.html#transpose(java.util.List)) method with the [`collectEntries()`](https://docs.groovy-lang.org/latest/html/api/org/codehaus/groovy/runtime/DefaultGroovyMethods.html#collectEntries(E[])) to produce the same map. I'd warn that this method is bordering on a little 'too clever' and is more difficult to read. It also assumes that the order of the filename-encoded metadata is consistent.
+Another option is to use the [`transpose`](<https://docs.groovy-lang.org/latest/html/api/groovy/util/GroovyCollections.html#transpose(java.util.List)>) method with the [`collectEntries()`](<https://docs.groovy-lang.org/latest/html/api/org/codehaus/groovy/runtime/DefaultGroovyMethods.html#collectEntries(E[])>) to produce the same map. I'd warn that this method is bordering on a little 'too clever' and is more difficult to read. It also assumes that the order of the filename-encoded metadata is consistent.
 
 ```groovy
 map { id, reads ->
@@ -202,7 +202,6 @@ workflow {
     | view
 }
 ```
-
 
 This metadata map can be passed through the workflow with the reads and used to split, join and recombine the data. The resulting channel would be suitable for any Nextflow process with inputs of the form
 

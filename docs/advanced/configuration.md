@@ -4,8 +4,8 @@ To be introduced on day 2.
 
 This is an aspect of Nextflow that can be confusing. There are multiple ways of loading configuration and parameters into a Nextflow. This gives us two complications:
 
-- At which location should I be loading a configuration value?
-- Given a particular parameter, how do I know where it was set?
+-   At which location should I be loading a configuration value?
+-   Given a particular parameter, how do I know where it was set?
 
 ## Precedence
 

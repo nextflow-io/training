@@ -8,11 +8,13 @@ description: Advanced Nextflow Training Workshop
 There are three directories in a Nextflow workflow repository that have a special purpose:
 
 ## `./bin`
+
 The `bin` directory (if it exists) is always added to the `$PATH` for all tasks. If the tasks are performed on a remote machine, the directory is copied across to the new machine before the task begins. It is important to know that Nextflow will take care of updating `$PATH` and ensuring the files are available wherever the task is running, but will not change the permissions of any files in that directory. If a file is called by a task as an executable, the workflow developer must ensure that the file has the correct permissions to be executed.
 
 <!-- TODO: Add example of adding a script to the bin directory and using it in the workflow -->
 
 ## `./templates`
+
 If a process script block is becoming too long, it can be moved to a template file. The template file can then be imported into the process script block using the `template` method. This is useful for keeping the process block tidy and readable. Nextflow's use of `$` to indicate variables also allows for directly testing the template file by running it as a script.
 
 The chapter_05_structure directory already contains an example template - a very simple python script. We can add a new process that uses this template:
@@ -21,19 +23,21 @@ The chapter_05_structure directory already contains an example template - a very
 process SayHiTemplate {
     debug true
     input: val(name)
-    script: template 'adder.py'    
+    script: template 'adder.py'
 }
 ```
 
 ## `./lib`
-In the previous chapter, we saw the addition of small helper Groovy functions to the `main.nf` file. It may at times be helpful to bundle functionality into a new Groovy class. Any classes defined in the `lib` directory are available for use in the workflow - both `main.nf` and any imported modules. 
+
+In the previous chapter, we saw the addition of small helper Groovy functions to the `main.nf` file. It may at times be helpful to bundle functionality into a new Groovy class. Any classes defined in the `lib` directory are available for use in the workflow - both `main.nf` and any imported modules.
 
 Classes defined in `lib` can be used for a variety of purposes. For example, the [nf-core/rnaseq](https://github.com/nf-core/rnaseq/tree/master/lib) workflow uses five custom classes:
-1) `NfcoreSchema.groovy` for parsing the schema.json file and validating the workflow parameters.
-2) `NfcoreTemplate.groovy` for email templating and nf-core utility functions.
-3) `Utils.groovy` for provision of a single `checkCondaChannels` method.
-4) `WorkflowMain.groovy` for workflow setup and to call the `NfcoreTemplate` class.
-5) `WorkflowRnaseq.groovy` for the workflow-specific functions.
+
+1. `NfcoreSchema.groovy` for parsing the schema.json file and validating the workflow parameters.
+2. `NfcoreTemplate.groovy` for email templating and nf-core utility functions.
+3. `Utils.groovy` for provision of a single `checkCondaChannels` method.
+4. `WorkflowMain.groovy` for workflow setup and to call the `NfcoreTemplate` class.
+5. `WorkflowRnaseq.groovy` for the workflow-specific functions.
 
 The classes listed above all provide utility executed at the beginning of a workflow, and are generally used to "set up" the workflow. However, classes defined in `lib` can also be used to provide functionality to the workflow itself.
 
@@ -53,18 +57,18 @@ We can then use this class in our workflow:
 
 ```groovy
 workflow {
-    Channel.of("Montreal") 
-    | map { new Metadata() } 
+    Channel.of("Montreal")
+    | map { new Metadata() }
     | view
 }
 ```
 
 We can use the new `hi` method in the workflow:
 
-```groovy 
+```groovy
 workflow {
-    Channel.of("Montreal") 
-    | map { new Metadata() } 
+    Channel.of("Montreal")
+    | map { new Metadata() }
     | view { it.hi() }
 }
 ```
@@ -87,8 +91,8 @@ Which we can use like so:
 
 ```groovy
 workflow {
-    Channel.of("Montreal") 
-    | map { place -> new Metadata(place) } 
+    Channel.of("Montreal")
+    | map { place -> new Metadata(place) }
     | view { it.hi() }
 }
 ```
@@ -102,9 +106,9 @@ process UseMeta {
     script: "echo '${meta.hi()}' | tee out.txt"
 }
 
-workflow {   
+workflow {
     Channel.of("Montreal")
-    | map { place -> new Metadata(place) } 
+    | map { place -> new Metadata(place) }
     | UseMeta
     | view
 }
@@ -128,9 +132,9 @@ process UseMeta {
 }
 
 workflow {
-    Channel.of("Montreal") 
-    | map { place -> new Metadata(place) } 
-    | map { it + [adapter:"AACGTAGCTTGAC"] } 
+    Channel.of("Montreal")
+    | map { place -> new Metadata(place) }
+    | map { it + [adapter:"AACGTAGCTTGAC"] }
     | UseMeta
     | view
 }
@@ -156,16 +160,15 @@ Which we can use like so:
 process UseMeta {
     input: val(meta)
     output: path("out.txt")
-    script: 
+    script:
     "echo '${meta.adapter} prefix is ${meta.getAdapterStart()} with sampleName ${meta.getSampleName()}' | tee out.txt"
 }
 ```
 
 !!! note
-    **Nextflow Caching**
+**Nextflow Caching**
 
     When we start passing custom classes through the workflow, it's important to understand a little about the Nextflow caching mechanism. When a task is run, a unique hash is calculated based on the task name, the input files/values, and the input parameters. Our class extends from `HashMap`, which means that the hash will be calculated based on the contents of the `HashMap`. If we add a new method to the class, or ammend a class method, this does not change the value of the objects in the hash, which means that the hash will not change.
-
 
 !!! exercise
 
@@ -246,4 +249,3 @@ KryoHelper.register(Dog)
 !!! exercise
 
     Show that the `Dog` class can now be used in processes and cached correctly.
-

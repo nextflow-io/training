@@ -42,14 +42,14 @@ workflow {
 (readKeys, metaKeys) = row.keySet().split { it =~ /^fastq/ }
 ```
 
-!!! note 
-    **New methods**
+!!! note
+**New methods**
 
     We've introduced a new keySet method here. This is a method on Java's LinkedHashMap class ([docs here](https://docs.oracle.com/javase/8/docs/api/java/util/LinkedHashMap.html#keySet--))
 
     We're also using the `.split()` method, which divides collection based on the return value of the closure. The mrhaki blog [provides a succinct summary](https://blog.mrhaki.com/2009/12/groovy-goodness-splitting-with-closures.html).
 
-From here, let's 
+From here, let's
 
 ```groovy
 reads = row.subMap(readKeys).values().collect { file(it) }
@@ -137,8 +137,8 @@ process {
 ```
 
 !!! note
-    **Groovy Tip: Elvis Operator**
-    
+**Groovy Tip: Elvis Operator**
+
     This pattern of returning something if it is true and `somethingElse` if not:
 
     ```groovy
@@ -170,10 +170,9 @@ import groovy.json.JsonSlurper
 Now let's create a second entrypoint to quickly pass these JSON files through some tests:
 
 !!! note
-    **Entrypoint developing**
+**Entrypoint developing**
 
     Using a second Entrypoint allows us to do quick debugging or development using a small section of the workflow without disturbing the main flow.
-    
 
 ```groovy
 workflow Jsontest {
@@ -219,7 +218,7 @@ def getFilteringResult(json_file) {
 We can then join this new map back to the original reads using the `join` operator:
 
 ```groovy
-FASTP.out.json 
+FASTP.out.json
 | map { meta, json -> [meta, getFilteringResult(json)] }
 | join( FASTP.out.reads )
 | view
@@ -232,7 +231,7 @@ FASTP.out.json
     ??? solution
 
         ```groovy
-        FASTP.out.json 
+        FASTP.out.json
         | map { meta, json -> [meta, getFilteringResult(json)] }
         | join( FASTP.out.reads )
         | map { meta, fastpMap, reads -> [meta + fastpMap, reads] }
@@ -245,4 +244,3 @@ FASTP.out.json
         reads.fail | view { meta, reads -> "Failed: ${meta.id}" }
         reads.pass | view { meta, reads -> "Passed: ${meta.id}" }
         ```
-

@@ -17,14 +17,14 @@ workflow {
     | map { row ->
         meta = [id:row.id, repeat:row.repeat, type:row.type]
         [meta, [
-            file(row.fastq1, checkIfExists: true), 
+            file(row.fastq1, checkIfExists: true),
             file(row.fastq2, checkIfExists: true)]]
     }
     | view
 }
 ```
 
-The first change we're going to make is to correct some repetitive code that we've seen quite a lot already in this workshop. The construction of the meta map from this row stutters quite a lot. We can make use of the [`subMap`](https://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/Map.html#subMap(java.util.Collection)) method available Maps to quickly return a new map constructed from the subset of an existing map:
+The first change we're going to make is to correct some repetitive code that we've seen quite a lot already in this workshop. The construction of the meta map from this row stutters quite a lot. We can make use of the [`subMap`](<https://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/Map.html#subMap(java.util.Collection)>) method available Maps to quickly return a new map constructed from the subset of an existing map:
 
 ```groovy
 workflow {
@@ -33,7 +33,7 @@ workflow {
     | map { row ->
         meta = row.subMap('id', 'repeat', 'type')
         [meta, [
-            file(row.fastq1, checkIfExists: true), 
+            file(row.fastq1, checkIfExists: true),
             file(row.fastq2, checkIfExists: true)]]
     }
     | view
@@ -41,7 +41,7 @@ workflow {
 ```
 
 !!! note
-    **Complete meta map safety**
+**Complete meta map safety**
 
     The `subMap` method will take a collection of keys and construct a _new_ map with just the keys listed in the collection. This method, in combination with the `plus` or `+` method for combining maps and resetting values should allow all contraction, expansion and modification of maps safely.
 
@@ -51,7 +51,7 @@ workflow {
 
     Note that we're trying to do the _wrong_ thing in this example to clarify what the correct approach might be.
 
-    ??? solution 
+    ??? solution
 
         To ensure that the modification of the map happens first, we introduce a `sleep` into the first map operation. This `sleep` emulates a long-running Nextflow process.
 
@@ -71,7 +71,7 @@ workflow {
             samples
             | map { sleep 10; it }
             | view { meta, reads -> "Should be unmodified: $meta" }
-            
+
             samples
             | map { meta, reads ->
                 meta.type = meta.type == "tumor" ? "abnormal" : "normal"
@@ -103,7 +103,7 @@ workflow {
             samples
             | map { sleep 10; it }
             | view { meta, reads -> "Should be unmodified: $meta" }
-            
+
             samples
             | map { meta, reads ->
                 newmap = [type: meta.type == "tumor" ? "abnormal" : "normal"]
@@ -137,11 +137,11 @@ workflow {
     | map { row ->
         meta = row.subMap('id', 'repeat', 'type')
         [meta, [
-            file(row.fastq1, checkIfExists: true), 
+            file(row.fastq1, checkIfExists: true),
             file(row.fastq2, checkIfExists: true)]]
     }
     | set { samples }
-    
+
     MapReads( samples, reference )
     | view
 }
@@ -162,12 +162,12 @@ By default, the `groupTuple` operator groups on the first item in the element, w
 
 ```groovy
 MapReads( samples, reference )
-| map { meta, bam -> 
+| map { meta, bam ->
     key = groupKey(meta.subMap('id', 'type'), NUMBER_OF_ITEMS_IN_GROUP)
     [key, bam]
 }
 | groupTuple
-| view 
+| view
 ```
 
 !!! exercise
@@ -192,14 +192,14 @@ MapReads( samples, reference )
             | transpose
             | map { meta, repeat, reads -> [meta + [repeat:repeat], reads]}
             | set { samples }
-            
+
             MapReads( samples, reference )
-            | map { meta, bam -> 
+            | map { meta, bam ->
                 key = groupKey(meta.subMap('id', 'type'), meta.repeatcount)
                 [key, bam]
             }
             | groupTuple
-            | view 
+            | view
         }
         ```
 
@@ -214,14 +214,14 @@ process CombineBams {
     tuple val(meta), path("combined.bam")
 
     "cat input/*.bam > combined.bam"
-} 
+}
 ```
 
 In our workflow:
 
 ```groovy
 MapReads( samples, reference )
-| map { meta, bam -> 
+| map { meta, bam ->
     key = groupKey(meta.subMap('id', 'type'), meta.repeatcount)
     [key, bam]
 }
@@ -236,7 +236,7 @@ The previous exercise demonstrated the fan-in approach using `groupTuple` and `g
 We can take an existing bed file, for example and turn it into a channel of Maps.
 
 ```groovy
-Channel.fromPath("data/intervals.bed") 
+Channel.fromPath("data/intervals.bed")
 | splitCsv(header: ['chr', 'start', 'stop', 'name'], sep: '\t')
 | collectFile { entry -> ["${entry.name}.bed", entry*.value.join("\t")] }
 | view
@@ -246,7 +246,7 @@ return
 ```
 
 !!! note
-    **Quick return**
+**Quick return**
 
     In the example above, I add a `return` statement for quick debugging. This ensures that all workflow operations after the `return` are not included in the process DAG.
 
@@ -268,7 +268,7 @@ We can use the `combine` operator to emit a new channel where each combined bam 
 
 ```groovy
 MapReads( samples, reference )
-| map { meta, bam -> 
+| map { meta, bam ->
     key = groupKey(meta.subMap('id', 'type'), meta.repeatcount)
     [key, bam]
 }
@@ -276,7 +276,7 @@ MapReads( samples, reference )
 | CombineBams
 | combine( intervals )
 | GenotypeOnInterval
-| view 
+| view
 ```
 
 Finally, we can combine these genotyped bams back using `groupTuple` and another bam merge process:
@@ -295,7 +295,7 @@ process MergeGenotyped {
 
 ```groovy
 MapReads( samples, reference )
-| map { meta, bam -> 
+| map { meta, bam ->
     key = groupKey(meta.subMap('id', 'type'), meta.repeatcount)
     [key, bam]
 }
