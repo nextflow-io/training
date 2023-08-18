@@ -65,18 +65,17 @@ workflow {
 }
 ```
 
-!!! solution
+**Output**
 
-    ```bash
-    N E X T F L O W  ~  version 23.04.1
-    Launching `./main.nf` [focused_borg] DSL2 - revision: f3c3e751fe
-    3
-    6
-    11
-    18
-    27
-    ```
-
+```bash
+N E X T F L O W  ~  version 23.04.1
+Launching `./main.nf` [focused_borg] DSL2 - revision: f3c3e751fe
+3
+6
+11
+18
+27
+```
 
 The above is the same as writing:
 
@@ -151,7 +150,6 @@ workflow {
     ```
 
     !!! solution
-
         Specifying the `header` argument in the `splitCsv` operator, we have convenient named access to csv elements. The closure returns a list of two elements where the second element a list of paths.
 
         ```groovy
@@ -266,11 +264,9 @@ branch { meta, reads ->
 ```
 
 !!! exercise
-
     How would you modify the element returned in the `tumor` channel to have the key:value pair `type:'abnormal'` instead of `type:'tumor'`?
 
     !!! solution
-
         There are many ways to accomplish this, but the map merging pattern introduced above can also be used to safely and concisely rename values in a map.
 
         ```groovy
@@ -281,7 +277,7 @@ branch { meta, reads ->
         }
         ```
 
-            !!! note
+        !!! note
             ***Merging maps is safe***
 
             Using the `+` operator to merge two or more Maps returns a _new_ Map. There are rare edge cases where modification of map rather than returning a new map can affect other channels. We discuss this further in the next chapter, but just be aware that this `+` operator is safer and often more convenient than modifying the `meta` object directly.
@@ -387,18 +383,18 @@ workflow {
 }
 ```
 
-!!! solution
+**Output**
     
-    ```bash
-    N E X T F L O W  ~  version 23.04.1
-    Launching `./main.nf` [spontaneous_rutherford] DSL2 - revision: 7dc1cc0039
-    [[id:sampleA, type:normal], [1, 2], [[data/reads/sampleA_rep1_normal_R1.fastq.gz, data/reads/sampleA_rep1_normal_R2.fastq.gz], [data/reads/sampleA_rep2_normal_R1.fastq.gz, data/reads/sampleA_rep2_normal_R2.fastq.gz]]]
-    [[id:sampleA, type:tumor], [1, 2], [[data/reads/sampleA_rep1_tumor_R1.fastq.gz, data/reads/sampleA_rep1_tumor_R2.fastq.gz], [data/reads/sampleA_rep2_tumor_R1.fastq.gz, data/reads/sampleA_rep2_tumor_R2.fastq.gz]]]
-    [[id:sampleB, type:normal], [1], [[data/reads/sampleB_rep1_normal_R1.fastq.gz, data/reads/sampleB_rep1_normal_R2.fastq.gz]]]
-    [[id:sampleB, type:tumor], [1], [[data/reads/sampleB_rep1_tumor_R1.fastq.gz, data/reads/sampleB_rep1_tumor_R2.fastq.gz]]]
-    [[id:sampleC, type:normal], [1], [[data/reads/sampleC_rep1_normal_R1.fastq.gz, data/reads/sampleC_rep1_normal_R2.fastq.gz]]]
-    [[id:sampleC, type:tumor], [1], [[data/reads/sampleC_rep1_tumor_R1.fastq.gz, data/reads/sampleC_rep1_tumor_R2.fastq.gz]]]
-    ```
+```bash
+N E X T F L O W  ~  version 23.04.1
+Launching `./main.nf` [spontaneous_rutherford] DSL2 - revision: 7dc1cc0039
+[[id:sampleA, type:normal], [1, 2], [[data/reads/sampleA_rep1_normal_R1.fastq.gz, data/reads/sampleA_rep1_normal_R2.fastq.gz], [data/reads/sampleA_rep2_normal_R1.fastq.gz, data/reads/sampleA_rep2_normal_R2.fastq.gz]]]
+[[id:sampleA, type:tumor], [1, 2], [[data/reads/sampleA_rep1_tumor_R1.fastq.gz, data/reads/sampleA_rep1_tumor_R2.fastq.gz], [data/reads/sampleA_rep2_tumor_R1.fastq.gz, data/reads/sampleA_rep2_tumor_R2.fastq.gz]]]
+[[id:sampleB, type:normal], [1], [[data/reads/sampleB_rep1_normal_R1.fastq.gz, data/reads/sampleB_rep1_normal_R2.fastq.gz]]]
+[[id:sampleB, type:tumor], [1], [[data/reads/sampleB_rep1_tumor_R1.fastq.gz, data/reads/sampleB_rep1_tumor_R2.fastq.gz]]]
+[[id:sampleC, type:normal], [1], [[data/reads/sampleC_rep1_normal_R1.fastq.gz, data/reads/sampleC_rep1_normal_R2.fastq.gz]]]
+[[id:sampleC, type:tumor], [1], [[data/reads/sampleC_rep1_tumor_R1.fastq.gz, data/reads/sampleC_rep1_tumor_R2.fastq.gz]]]
+```
 
 If we add in a `transpose`, each repeat number is matched back to the appropriate list of reads:
 
@@ -416,17 +412,17 @@ workflow {
 }
 ```
 
-!!! solution
+**Output**
 
-    ```bash
-    N E X T F L O W  ~  version 23.04.1
-    Launching `./main.nf` [elegant_rutherford] DSL2 - revision: 2c5476b133
-    [[id:sampleA, type:normal], 1, [data/reads/sampleA_rep1_normal_R1.fastq.gz, data/reads/sampleA_rep1_normal_R2.fastq.gz]]
-    [[id:sampleA, type:normal], 2, [data/reads/sampleA_rep2_normal_R1.fastq.gz, data/reads/sampleA_rep2_normal_R2.fastq.gz]]
-    [[id:sampleA, type:tumor], 1, [data/reads/sampleA_rep1_tumor_R1.fastq.gz, data/reads/sampleA_rep1_tumor_R2.fastq.gz]]
-    [[id:sampleA, type:tumor], 2, [data/reads/sampleA_rep2_tumor_R1.fastq.gz, data/reads/sampleA_rep2_tumor_R2.fastq.gz]]
-    [[id:sampleB, type:normal], 1, [data/reads/sampleB_rep1_normal_R1.fastq.gz, data/reads/sampleB_rep1_normal_R2.fastq.gz]]
-    [[id:sampleB, type:tumor], 1, [data/reads/sampleB_rep1_tumor_R1.fastq.gz, data/reads/sampleB_rep1_tumor_R2.fastq.gz]]
-    [[id:sampleC, type:normal], 1, [data/reads/sampleC_rep1_normal_R1.fastq.gz, data/reads/sampleC_rep1_normal_R2.fastq.gz]]
-    [[id:sampleC, type:tumor], 1, [data/reads/sampleC_rep1_tumor_R1.fastq.gz, data/reads/sampleC_rep1_tumor_R2.fastq.gz]]
-    ```
+```bash
+N E X T F L O W  ~  version 23.04.1
+Launching `./main.nf` [elegant_rutherford] DSL2 - revision: 2c5476b133
+[[id:sampleA, type:normal], 1, [data/reads/sampleA_rep1_normal_R1.fastq.gz, data/reads/sampleA_rep1_normal_R2.fastq.gz]]
+[[id:sampleA, type:normal], 2, [data/reads/sampleA_rep2_normal_R1.fastq.gz, data/reads/sampleA_rep2_normal_R2.fastq.gz]]
+[[id:sampleA, type:tumor], 1, [data/reads/sampleA_rep1_tumor_R1.fastq.gz, data/reads/sampleA_rep1_tumor_R2.fastq.gz]]
+[[id:sampleA, type:tumor], 2, [data/reads/sampleA_rep2_tumor_R1.fastq.gz, data/reads/sampleA_rep2_tumor_R2.fastq.gz]]
+[[id:sampleB, type:normal], 1, [data/reads/sampleB_rep1_normal_R1.fastq.gz, data/reads/sampleB_rep1_normal_R2.fastq.gz]]
+[[id:sampleB, type:tumor], 1, [data/reads/sampleB_rep1_tumor_R1.fastq.gz, data/reads/sampleB_rep1_tumor_R2.fastq.gz]]
+[[id:sampleC, type:normal], 1, [data/reads/sampleC_rep1_normal_R1.fastq.gz, data/reads/sampleC_rep1_normal_R2.fastq.gz]]
+[[id:sampleC, type:tumor], 1, [data/reads/sampleC_rep1_tumor_R1.fastq.gz, data/reads/sampleC_rep1_tumor_R2.fastq.gz]]
+```
