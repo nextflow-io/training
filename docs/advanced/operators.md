@@ -217,7 +217,7 @@ workflow {
 ```
 
 !!! tip
-**`multiMapCriteria`**
+    **`multiMapCriteria`**
 
     The closure supplied to `multiMap` needs to return multiple channels, so using named closures as described in the `map` section above will not work. Fortunately, Nextflow provides the convenience `multiMapCriteria` method to allow you to define named `multiMap` closures should you need them. See the [`multiMap` documentation](https://www.nextflow.io/docs/latest/operator.html#multimap) for more info.
 

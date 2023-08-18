@@ -43,7 +43,7 @@ workflow {
 ```
 
 !!! note
-**New methods**
+    **New methods**
 
     We've introduced a new keySet method here. This is a method on Java's LinkedHashMap class ([docs here](https://docs.oracle.com/javase/8/docs/api/java/util/LinkedHashMap.html#keySet--))
 
@@ -137,7 +137,7 @@ process {
 ```
 
 !!! note
-**Groovy Tip: Elvis Operator**
+    **Groovy Tip: Elvis Operator**
 
     This pattern of returning something if it is true and `somethingElse` if not:
 
@@ -170,7 +170,7 @@ import groovy.json.JsonSlurper
 Now let's create a second entrypoint to quickly pass these JSON files through some tests:
 
 !!! note
-**Entrypoint developing**
+    **Entrypoint developing**
 
     Using a second Entrypoint allows us to do quick debugging or development using a small section of the workflow without disturbing the main flow.
 

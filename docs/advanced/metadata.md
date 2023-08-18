@@ -24,7 +24,7 @@ cd chapter_02_metadata
 tree data/reads
 ```
 
-```bash
+```console title="Output"
 data/reads/
 |-- treatmentA
 |   |-- sampleA_rep1_normal_R1.fastq.gz
@@ -94,7 +94,7 @@ map { id, reads ->
 ```
 
 !!! note
-**Destructuring requires parentheses**
+    **Destructuring requires parentheses**
 
     Make sure that you're using a tuple with parentheses e.g. `(one, two)` rather than a List e.g. `[one, two]`
 

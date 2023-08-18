@@ -41,7 +41,7 @@ workflow {
 ```
 
 !!! note
-**Complete meta map safety**
+    **Complete meta map safety**
 
     The `subMap` method will take a collection of keys and construct a _new_ map with just the keys listed in the collection. This method, in combination with the `plus` or `+` method for combining maps and resetting values should allow all contraction, expansion and modification of maps safely.
 
@@ -246,7 +246,7 @@ return
 ```
 
 !!! note
-**Quick return**
+    **Quick return**
 
     In the example above, I add a `return` statement for quick debugging. This ensures that all workflow operations after the `return` are not included in the process DAG.
 
