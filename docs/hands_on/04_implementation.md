@@ -45,7 +45,7 @@ params.gatk       = "/opt/broad/GenomeAnalysisTK.jar" // (5)!
 
 1. The `/*`, `*` and `*/` specify comment lines which are ignored by Nextflow.
 2. The `baseDir` variable represents the main script path location.
-3. The `reads` parameter uses a glob pattern to specify the forward (`ENCSR000COQ1_1.fq.gz`) and reverse (`ENCSR000COQ1_2.fq.gz`) reads are pairs of the same sample.
+3. The `reads` parameter uses a glob pattern to specify the forward (`ENCSR000COQ1_1.fq.gz`) and reverse (`ENCSR000COQ1_2.fq.gz`) reads (paired-end) of a sample.
 4. The `results` parameter is used to specify a directory called `results`.
 5. The `gatk` parameter specifies the location of the GATK jar file. This is a path within the container.
 
@@ -288,7 +288,7 @@ The next process should have the following structure:
         }
         ```
 
-        1. The solution is to provide **`params.genome`** as input to the `prepare_genome_picard` process
+        1. The solution is to provide **`params.genome`** as input to the `prepare_genome_picard` process.
 
 ## Process 1C: Create STAR genome index file
 
@@ -451,10 +451,10 @@ The next process has the following structure:
     tabix ${variantsFile.baseName}.filtered.recode.vcf.gz # (4)!
     ```
 
-    1.   The input variable for the variants file
-    2.   The input variable for the blacklist file
-    3.   The first of the two output files
-    4.   Generates the second output file named `"${variantsFile.baseName}.filtered.recode.vcf.gz.tbi"`
+    1.   The `$variantsFile` variable contains the path to the file with the known variants
+    2.   The `$blacklisted` variable contains the path to the file with the genomic locations which are known to produce artifacts and spurious variants
+    3.   The `>` symbol is used to redirect the output to the file specified after it
+    4.   `tabix` is used here to create the second output that we want to consider from this process
 
     Try run the pipeline from the project directory with:
 
@@ -606,12 +606,12 @@ The process has the following structure:
 
         process rnaseq_mapping_star {
             input:
-            path genome // (1)!
-            path genomeDir // (2)!
-            tuple val(replicateId), path(reads) // (3)!
+            path genome
+            path genomeDir
+            tuple val(replicateId), path(reads)
 
             output:
-            tuple val(replicateId), path('Aligned.sortedByCoord.out.bam'), path('Aligned.sortedByCoord.out.bam.bai') // (4)!
+            tuple val(replicateId), path('Aligned.sortedByCoord.out.bam'), path('Aligned.sortedByCoord.out.bam.bai')
 
             script:
             """
@@ -662,14 +662,6 @@ The process has the following structure:
             rnaseq_mapping_star(params.genome, prepare_star_genome_index.out, reads_ch)
         }
         ```
-
-        1. the genome fasta file.
-
-        2. the STAR genome index directory in the output channel from the `prepare_star_genome_index` process.
-
-        3. tuple containing replicate ID and pairs of reads.
-
-        4. tuple containing the replicate ID, resulting bam file and bam index.
 
 The next step is a filtering step using GATK. For each sample, we split all the reads that contain N characters in their [CIGAR](http://genome.sph.umich.edu/wiki/SAM#What_is_a_CIGAR.3F) string.
 
@@ -1265,7 +1257,7 @@ You should implement two processes having the following structure:
     }
     ```
 
-    1. here the output location is specified as a combination of a pipeline parameter and a process input variable
+    1. The path to the `publishDir` process directive consists of variables that will be evaluated before saving the files over there
 
     ??? solution
 
