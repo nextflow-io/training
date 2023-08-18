@@ -51,7 +51,7 @@ workflow {
 
     Note that we're trying to do the _wrong_ thing in this example to clarify what the correct approach might be.
 
-    !!! solution
+    ??? solution 
 
         To ensure that the modification of the map happens first, we introduce a `sleep` into the first map operation. This `sleep` emulates a long-running Nextflow process.
 
@@ -85,7 +85,7 @@ workflow {
 
     How would you fix the example above to use the safe operators `plus` and `subMap` to ensure that the original map remains unmodified?
 
-    !!! solution
+    ??? solution
 
         ```{groovy}
         workflow {
@@ -174,7 +174,7 @@ MapReads( samples, reference )
 
     How might we modify the upstream channels to the number of repeats into the metamap?
 
-    !!! solution
+    ??? solution
 
         ```groovy
         workflow {

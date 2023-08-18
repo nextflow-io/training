@@ -171,7 +171,7 @@ process UseMeta {
 
     Can you show changing a method in our `Metadata` class does not change the hash?
 
-    !!! solution
+    ??? solution
 
         **Show answer**
 

@@ -149,7 +149,7 @@ workflow {
         //
     ```
 
-    !!! solution
+    ??? solution 
         Specifying the `header` argument in the `splitCsv` operator, we have convenient named access to csv elements. The closure returns a list of two elements where the second element a list of paths.
 
         ```groovy
@@ -264,9 +264,11 @@ branch { meta, reads ->
 ```
 
 !!! exercise
+
     How would you modify the element returned in the `tumor` channel to have the key:value pair `type:'abnormal'` instead of `type:'tumor'`?
 
-    !!! solution
+    ??? solution
+
         There are many ways to accomplish this, but the map merging pattern introduced above can also be used to safely and concisely rename values in a map.
 
         ```groovy

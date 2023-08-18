@@ -229,7 +229,7 @@ FASTP.out.json
 
     Can you amend this pipeline to create two channels that filter the reads to exclude any samples where the Q30 rate is less than 93.5%?
 
-    !!! solution
+    ??? solution
 
         ```groovy
         FASTP.out.json 
