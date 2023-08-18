@@ -6,9 +6,9 @@ hide:
 
 # Welcome
 
-## Welcome to the Nextflow Training Workshop
+We are excited to have you on the path to writing reproducible and scalable scientific workflows using Nextflow. This guide complements the full [Nextflow documentation](https://www.nextflow.io/docs/latest) - if you ever have any doubts, please refer to that.
 
-We are excited to have you on the path to writing reproducible and scalable scientific workflows using Nextflow. This guide complements the full Nextflow documentation - if you ever have any doubts, head over to the docs located [here](https://www.nextflow.io/docs/latest).
+## Objectives
 
 By the end of this course you should:
 
