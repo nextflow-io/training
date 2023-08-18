@@ -42,9 +42,7 @@ workflow {
 (readKeys, metaKeys) = row.keySet().split { it =~ /^fastq/ }
 ```
 
-!!! note
-
-    **New methods**
+!!! note "New methods"
 
     We've introduced a new keySet method here. This is a method on Java's LinkedHashMap class ([docs here](https://docs.oracle.com/javase/8/docs/api/java/util/LinkedHashMap.html#keySet--))
 
@@ -137,9 +135,7 @@ process {
 }
 ```
 
-!!! note
-
-    **Groovy Tip: Elvis Operator**
+!!! note "Groovy Tip: Elvis Operator"
 
     This pattern of returning something if it is true and `somethingElse` if not:
 

@@ -93,9 +93,7 @@ map { id, reads ->
 }
 ```
 
-!!! note
-
-    **Destructuring requires parentheses**
+!!! note "Destructuring requires parentheses"
 
     Make sure that you're using a tuple with parentheses e.g. `(one, two)` rather than a List e.g. `[one, two]`
 
@@ -121,9 +119,7 @@ map { id, reads ->
 }
 ```
 
-!!! tip
-
-    **Trim strings**
+!!! tip "Trim strings"
 
     Groovy has a lot of very helpful syntactic sugar for string manipulation. You can trim parts of a string by simply subtracting another string:
 

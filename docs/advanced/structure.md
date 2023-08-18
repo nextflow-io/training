@@ -165,9 +165,7 @@ process UseMeta {
 }
 ```
 
-!!! note
-
-    **Nextflow Caching**
+!!! note "Nextflow caching"
 
     When we start passing custom classes through the workflow, it's important to understand a little about the Nextflow caching mechanism. When a task is run, a unique hash is calculated based on the task name, the input files/values, and the input parameters. Our class extends from `HashMap`, which means that the hash will be calculated based on the contents of the `HashMap`. If we add a new method to the class, or ammend a class method, this does not change the value of the objects in the hash, which means that the hash will not change.
 
