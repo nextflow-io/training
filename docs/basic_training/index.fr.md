@@ -32,6 +32,7 @@ Consultez les liens ci-dessous pour les vidéos YouTube dans les langues disponi
 
 <div style="text-align: center;">
     <iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?list=PL3xpfTVZLcNhoWxHR0CS-7xzu5eRT8uHo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" data-ruffle-polyfilled=""></iframe>
+</div>
 ## Aperçu
 
 Pour que vous puissiez commencer à utiliser Nextflow le plus rapidement possible, nous allons suivre les étapes suivantes :
