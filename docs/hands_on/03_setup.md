@@ -66,6 +66,10 @@ Digest: sha256:93910bf77bc197cb790eca776e42950bc8eff117bdc6e67157295e09c98fc381
 Status: Downloaded newer image for cbcrg/callings-with-gatk:latest
 ```
 
+!!! note
+
+    Ideally, you should have a light container image for every process, containing exclusively what is required for that task. This not only contributes to the image being light to pull, run and stop but also makes it easier to debug in case of problems. For this course specifically, we won't bother with that and use a single bulky container image (mentioned above) that has everything we need.
+
 ## Script permission
 
 Make sure the following R script has execute permissions:
