@@ -162,6 +162,7 @@ workflow {
         ```
 
         !!! warning
+
             **Convert Strings to Paths**
 
             The fastq paths are simple strings in the context of a csv row. In order to pass them as paths to a Nextflow process, they need to be converted into objects that adjere to the `Path` interface. This is accomplished by wrapping them in `file`.
@@ -217,6 +218,7 @@ workflow {
 ```
 
 !!! tip
+
     **`multiMapCriteria`**
 
     The closure supplied to `multiMap` needs to return multiple channels, so using named closures as described in the `map` section above will not work. Fortunately, Nextflow provides the convenience `multiMapCriteria` method to allow you to define named `multiMap` closures should you need them. See the [`multiMap` documentation](https://www.nextflow.io/docs/latest/operator.html#multimap) for more info.
@@ -277,7 +279,8 @@ branch { meta, reads ->
         ```
 
         !!! note
-            ***Merging maps is safe***
+        
+            **Merging maps is safe**
 
             Using the `+` operator to merge two or more Maps returns a _new_ Map. There are rare edge cases where modification of map rather than returning a new map can affect other channels. We discuss this further in the next chapter, but just be aware that this `+` operator is safer and often more convenient than modifying the `meta` object directly.
 
