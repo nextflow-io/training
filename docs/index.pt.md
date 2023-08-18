@@ -38,7 +38,7 @@ Encontre o que se adequa mais ao que você está procurando:
 
     !!! quote inline end ""
 
-        :material-alert: Esse material não é utilizado com frequência como os outros materiais, mas se você gostaria de uma abordagem mais prática com pouca teoria, esse é o curso certo para você.
+        :material-run-fast: Esse material é mais curto e bem prático, o que é perfeito se você quiser praticar suas habilidades com o Nextflow.
 
     Um tutorial de "aprender fazendo" com menos foco na teoria, através de exercícios de complexidade cada vez maior.
 
