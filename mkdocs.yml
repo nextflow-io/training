@@ -128,6 +128,7 @@ plugins:
     - enumerate-headings:
           restart_increment_after:
               - hands_on/01_datasets.md
+              - advanced/operators.md
           exclude:
               - index.md
               - help.md
