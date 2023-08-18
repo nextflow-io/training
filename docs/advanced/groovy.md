@@ -171,9 +171,7 @@ import groovy.json.JsonSlurper
 
 Now let's create a second entrypoint to quickly pass these JSON files through some tests:
 
-!!! note
-
-    **Entrypoint developing**
+!!! note title="Entrypoint developing"
 
     Using a second Entrypoint allows us to do quick debugging or development using a small section of the workflow without disturbing the main flow.
 
