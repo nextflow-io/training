@@ -18,6 +18,21 @@ Nous sommes heureux de vous accompagner sur le chemin de rédaction de workflows
 4. Comprendre les différentes plateformes d'exécution supportées par Nextflow
 5. Connaître la communauté et l'écosystème Nextflow
 
+## Suivez les vidéos de formation
+
+Dans notre dernière formation [nf-core en mars 2023](https://nf-co.re/events/2023/training-march-2023), nous avons utilisé ce matériel de formation pour enseigner Nextflow et l'enregistrement est disponible pour que vous puissiez le regarder à votre rythme dans plusieurs langues.
+
+Consultez les liens ci-dessous pour les vidéos YouTube dans les langues disponibles :
+
+-   :flag_gb: [En Anglais](https://youtube.com/playlist?list=PL3xpfTVZLcNhoWxHR0CS-7xzu5eRT8uHo)
+-   :flag_in: [En Hindi](https://youtube.com/playlist?list=PL3xpfTVZLcNikun1FrSvtXW8ic32TciTJ)
+-   :flag_es: [En Espagnol](https://youtube.com/playlist?list=PL3xpfTVZLcNhSlCWVoa3GURacuLWeFc8O)
+-   :flag_pt: [En Portugais](https://youtube.com/playlist?list=PL3xpfTVZLcNhi41yDYhyHitUhIcUHIbJg)
+-   :flag_fr: [En Français](https://youtube.com/playlist?list=PL3xpfTVZLcNhiv9SjhoA1EDOXj9nzIqdS)
+
+<div style="text-align: center;">
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?list=PL3xpfTVZLcNhoWxHR0CS-7xzu5eRT8uHo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" data-ruffle-polyfilled=""></iframe>
+</div>
 ## Aperçu
 
 Pour que vous puissiez commencer à utiliser Nextflow le plus rapidement possible, nous allons suivre les étapes suivantes :
