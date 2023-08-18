@@ -4,4 +4,4 @@ description: Advanced Nextflow Training Workshop
 ---
 
 -   Nextflow documentation: [www.nextflow.io/docs/latest](https://www.nextflow.io/docs/latest/)
--   Seqera support: [support@seqera.io](mailto:support@seqera.io)
+-   Nextflow Slack: [https://www.nextflow.io/slack-invite.html](https://www.nextflow.io/slack-invite.html)
