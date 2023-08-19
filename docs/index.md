@@ -40,7 +40,7 @@ Find the one that's right for you:
 
         :material-lightbulb: This is the advanced Nextflow training material used in advanced training events.
 
-    A advanced material explores the advanced features of the Nextflow language and runtime, and how to use them to write efficient and scalable data-intensive workflows.
+    An advanced material explores the advanced features of the Nextflow language and runtime, and how to use them to write efficient and scalable data-intensive workflows.
 
     [Launch the Hands on Training :material-arrow-right:](advanced/index.md){ .md-button .md-button--primary }
 

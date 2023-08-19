@@ -114,7 +114,7 @@ workflow {
 }
 ```
 
-Why might this be helpful? You can add extra classes to the metadata which can be computed from the existing metadata. For exmaple, we might want want to grab the adapter prefix:
+Why might this be helpful? You can add extra classes to the metadata which can be computed from the existing metadata. For example, we might want want to grab the adapter prefix:
 
 ```groovy linenums="1"
 def getAdapterStart() {
@@ -140,7 +140,7 @@ workflow {
 }
 ```
 
-You might even want to reach out to external services such as a LIMS or e-utilis API. Here we add a dummy "getSampleName()" method that reaches out to a public API:
+You might even want to reach out to external services such as a LIMS or the E-utilities API. Here we add a dummy "getSampleName()" method that reaches out to a public API:
 
 ```groovy linenums="1"
 def getSampleName() {
@@ -167,7 +167,7 @@ process UseMeta {
 
 !!! note "Nextflow caching"
 
-    When we start passing custom classes through the workflow, it's important to understand a little about the Nextflow caching mechanism. When a task is run, a unique hash is calculated based on the task name, the input files/values, and the input parameters. Our class extends from `HashMap`, which means that the hash will be calculated based on the contents of the `HashMap`. If we add a new method to the class, or ammend a class method, this does not change the value of the objects in the hash, which means that the hash will not change.
+    When we start passing custom classes through the workflow, it's important to understand a little about the Nextflow caching mechanism. When a task is run, a unique hash is calculated based on the task name, the input files/values, and the input parameters. Our class extends from `HashMap`, which means that the hash will be calculated based on the contents of the `HashMap`. If we add a new method to the class, or amend a class method, this does not change the value of the objects in the hash, which means that the hash will not change.
 
 !!! exercise
 
