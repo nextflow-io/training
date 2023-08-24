@@ -2,7 +2,7 @@
 
 ## Gitpod
 
-This material intends to be a quick hands-on tutorial on Nextflow, so we prepared a Gitpod environment with everything you need to follow it. Gitpod offers a virtual machine with everything already set up for you, accessible from your web browser. To start, click on the button bellow.
+This material intends to be a quick hands-on tutorial on Nextflow, so we prepared a Gitpod environment with everything you need to follow it. Gitpod offers a virtual machine with everything already set up for you, accessible from your web browser or built into your code editor (eg. VSCode). To start, click on the button bellow.
 
 [![Open in GitPod](https://img.shields.io/badge/Gitpod-%20Open%20in%20Gitpod-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/nextflow-io/training)
 
