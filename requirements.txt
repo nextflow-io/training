@@ -1,6 +1,6 @@
-mkdocs==1.5.2
-mkdocs-material==9.2.5
-mkdocs-static-i18n==1.0.2
+mkdocs
+mkdocs-material
+mkdocs-static-i18n
 pymdown-extensions
 pillow
 cairosvg
