@@ -613,7 +613,7 @@ The process has the following structure:
 
     ??? solution
 
-        ```groovy linenums="1" hl_lines="62"
+        ```groovy linenums="1" hl_lines="62-64"
         /*
          * Process 2: Align RNA-Seq reads to the genome with STAR
          */
@@ -675,7 +675,9 @@ The process has the following structure:
             prepare_star_genome_index(params.genome)
             prepare_vcf_file(params.variants, params.blacklist)
 
-            rnaseq_mapping_star(params.genome, prepare_star_genome_index.out, reads_ch)
+            rnaseq_mapping_star(params.genome,
+                                prepare_star_genome_index.out,
+                                reads_ch)
         }
         ```
 
@@ -707,7 +709,7 @@ The next process has the following structure:
         There is an optional [`tag`](https://www.nextflow.io/docs/latest/process.html#tag) line added to the start of this process. The [`tag`](https://www.nextflow.io/docs/latest/process.html#tag) line allows you to assign a name to a specific task (single instance of a process). This is particularly useful when there are many samples/replicates which pass through the same process.
 
 
-    ```groovy linenums="1" hl_lines="41"
+    ```groovy linenums="1" hl_lines="43"
     /*
      * Process 3: GATK Split on N
      */
@@ -746,7 +748,9 @@ The next process has the following structure:
         prepare_star_genome_index(params.genome)
         prepare_vcf_file(params.variants, params.blacklist)
 
-        rnaseq_mapping_star(params.genome, prepare_star_genome_index.out, reads_ch)
+        rnaseq_mapping_star(params.genome,
+                            prepare_star_genome_index.out,
+                            reads_ch)
 
         BLANK
     }
@@ -763,7 +767,7 @@ The next process has the following structure:
     ??? solution
 
 
-        ```groovy linenums="1" hl_lines="42-45"
+        ```groovy linenums="1" hl_lines="44-47"
         /*
          * Process 3: GATK Split on N
          */
@@ -803,7 +807,9 @@ The next process has the following structure:
             prepare_star_genome_index(params.genome)
             prepare_vcf_file(params.variants, params.blacklist)
 
-            rnaseq_mapping_star(params.genome, prepare_star_genome_index.out, reads_ch)
+            rnaseq_mapping_star(params.genome,
+                                prepare_star_genome_index.out,
+                                reads_ch)
 
             rnaseq_gatk_splitNcigar(params.genome,
                                     prepare_genome_samtools.out,
@@ -845,7 +851,7 @@ The next process has the following structure:
 
     Your aim is to replace the `BLANK` placeholder with the the correct process call.
 
-    ```groovy linenums="1" hl_lines="65"
+    ```groovy linenums="1" hl_lines="67"
     /*
      * Process 4: GATK Recalibrate
      */
@@ -903,7 +909,9 @@ The next process has the following structure:
         prepare_star_genome_index(params.genome)
         prepare_vcf_file(params.variants, params.blacklist)
 
-        rnaseq_mapping_star(params.genome, prepare_star_genome_index.out, reads_ch)
+        rnaseq_mapping_star(params.genome,
+                            prepare_star_genome_index.out,
+                            reads_ch)
 
         rnaseq_gatk_splitNcigar(params.genome,
                                 prepare_genome_samtools.out,
@@ -920,7 +928,7 @@ The next process has the following structure:
     ??? solution
 
 
-        ```groovy linenums="1" hl_lines="65-69"
+        ```groovy linenums="1" hl_lines="67-71"
         /*
          * Process 4: GATK Recalibrate
          */
@@ -978,7 +986,9 @@ The next process has the following structure:
             prepare_star_genome_index(params.genome)
             prepare_vcf_file(params.variants, params.blacklist)
 
-            rnaseq_mapping_star(params.genome, prepare_star_genome_index.out, reads_ch)
+            rnaseq_mapping_star(params.genome,
+                                prepare_star_genome_index.out,
+                                reads_ch)
 
             rnaseq_gatk_splitNcigar(params.genome,
                                     prepare_genome_samtools.out,
@@ -1028,7 +1038,7 @@ The next process has the following structure:
 
     Your aim is to replace the `BLANK` placeholder with the the correct process call.
 
-    ```groovy linenums="1" hl_lines="60"
+    ```groovy linenums="1" hl_lines="62"
     /*
      * Process 5: GATK Variant Calling
      */
@@ -1075,7 +1085,9 @@ The next process has the following structure:
         prepare_star_genome_index(params.genome)
         prepare_vcf_file(params.variants, params.blacklist)
 
-        rnaseq_mapping_star(params.genome, prepare_star_genome_index.out, reads_ch)
+        rnaseq_mapping_star(params.genome,
+                            prepare_star_genome_index.out,
+                            reads_ch)
 
         rnaseq_gatk_splitNcigar(params.genome,
                                 prepare_genome_samtools.out,
@@ -1094,7 +1106,7 @@ The next process has the following structure:
 
     ??? solution
 
-        ```groovy linenums="1" hl_lines="60-63"
+        ```groovy linenums="1" hl_lines="61-64"
         /*
          * Process 5: GATK Variant Calling
          */
@@ -1140,7 +1152,9 @@ The next process has the following structure:
             prepare_star_genome_index(params.genome)
             prepare_vcf_file(params.variants, params.blacklist)
 
-            rnaseq_mapping_star(params.genome, prepare_star_genome_index.out, reads_ch)
+            rnaseq_mapping_star(params.genome,
+                                prepare_star_genome_index.out,
+                                reads_ch)
 
             rnaseq_gatk_splitNcigar(params.genome,
                                     prepare_genome_samtools.out,
@@ -1197,7 +1211,7 @@ You should implement two processes having the following structure:
 
     You must have the output of process 6A become the input of process 6B.
 
-    ```groovy linenums="1" hl_lines="78"
+    ```groovy linenums="1" hl_lines="80"
     /*
      * Processes 6: ASE & RNA Editing
      */
@@ -1257,7 +1271,9 @@ You should implement two processes having the following structure:
         prepare_star_genome_index(params.genome)
         prepare_vcf_file(params.variants, params.blacklist)
 
-        rnaseq_mapping_star(params.genome, prepare_star_genome_index.out, reads_ch)
+        rnaseq_mapping_star(params.genome,
+                            prepare_star_genome_index.out,
+                            reads_ch)
 
         rnaseq_gatk_splitNcigar(params.genome,
                                 prepare_genome_samtools.out,
@@ -1284,7 +1300,7 @@ You should implement two processes having the following structure:
     ??? solution
 
 
-        ```groovy linenums="1" hl_lines="79-81"
+        ```groovy linenums="1" hl_lines="81-83"
         /*
          * Processes 6: ASE & RNA Editing
          */
@@ -1345,7 +1361,9 @@ You should implement two processes having the following structure:
             prepare_star_genome_index(params.genome)
             prepare_vcf_file(params.variants, params.blacklist)
 
-            rnaseq_mapping_star(params.genome, prepare_star_genome_index.out, reads_ch)
+            rnaseq_mapping_star(params.genome,
+                                prepare_star_genome_index.out,
+                                reads_ch)
 
             rnaseq_gatk_splitNcigar(params.genome,
                                     prepare_genome_samtools.out,
@@ -1417,7 +1435,7 @@ The final step is the GATK ASEReadCounter.
 
     ??? solution
 
-        ```groovy linenums="1" hl_lines="33-36"
+        ```groovy linenums="1" hl_lines="35-38"
         workflow {
             reads_ch = Channel.fromFilePairs(params.reads)
 
@@ -1426,7 +1444,9 @@ The final step is the GATK ASEReadCounter.
             prepare_star_genome_index(params.genome)
             prepare_vcf_file(params.variants, params.blacklist)
 
-            rnaseq_mapping_star(params.genome, prepare_star_genome_index.out, reads_ch)
+            rnaseq_mapping_star(params.genome,
+                                prepare_star_genome_index.out,
+                                reads_ch)
 
             rnaseq_gatk_splitNcigar(params.genome,
                                     prepare_genome_samtools.out,
@@ -1488,7 +1508,7 @@ The next process has the following structure:
 
     ??? solution
 
-        ```groovy linenums="1" hl_lines="6-29 68-71"
+        ```groovy linenums="1" hl_lines="5-29 70-73"
         /*
          * Processes 7: Allele-Specific Expression analysis with GATK ASEReadCounter
          */
@@ -1527,7 +1547,9 @@ The next process has the following structure:
             prepare_star_genome_index(params.genome)
             prepare_vcf_file(params.variants, params.blacklist)
 
-            rnaseq_mapping_star(params.genome, prepare_star_genome_index.out, reads_ch)
+            rnaseq_mapping_star(params.genome,
+                                prepare_star_genome_index.out,
+                                reads_ch)
 
             rnaseq_gatk_splitNcigar(params.genome,
                                 prepare_genome_samtools.out,
