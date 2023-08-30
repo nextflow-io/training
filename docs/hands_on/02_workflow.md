@@ -34,7 +34,7 @@ Genome indices with `samtools` and `picard` are produced first. They will be nee
 
 ```bash
 samtools faidx genome.fa
-java -jar picard.jar CreateSequenceDictionary R= genome.fa O= genome.dict
+picard CreateSequenceDictionary R= genome.fa O= genome.dict
 ```
 
 Genome index for `STAR`, needed for RNA-seq reads mappings, is created next. Index files are written to the folder `genome_dir` :
@@ -115,13 +115,13 @@ At this step we also reassign mapping qualities to the alignments. This is impor
 This step is done with recommended parameters from the GATK best practices.
 
 ```bash
-java -jar GenomeAnalysisTK.jar -T SplitNCigarReads \
-    -R genome.fa -I final_alignments.bam \
-    -o split.bam \
-    -rf ReassignOneMappingQuality \
-    -RMQF 255 -RMQT 60 \
-    -U ALLOW_N_CIGAR_READS \
-    --fix_misencoded_quality_scores
+java -jar /usr/gitc/GATK35.jar -T SplitNCigarReads \
+                               -R genome.fa -I final_alignments.bam \
+                               -o split.bam \
+                               -rf ReassignOneMappingQuality \
+                               -RMQF 255 -RMQT 60 \
+                               -U ALLOW_N_CIGAR_READS \
+                               --fix_misencoded_quality_scores
 ```
 
 ### Base Recalibration
@@ -131,25 +131,25 @@ The proposed workflow does not include an indel re-alignment step, which is an o
 We instead include a base re-calibration step. This step allows to remove possible systematic errors introduced by the sequencing machine during the assignment of read qualities. To do this, the list of known variants is used as a training set to the machine learning algorithm that models possible errors. Base quality scores are then adjusted based on the obtained results.
 
 ```bash
-java -jar GenomeAnalysisTK.jar -T BaseRecalibrator \
-    --default_platform illumina \
-    -cov ReadGroupCovariate \
-    -cov QualityScoreCovariate \
-    -cov CycleCovariate \
-    -knownSites known_variants.filtered.recode.vcf.gz\
-    -cov ContextCovariate \
-    -R genome.fa -I split.bam \
-    --downsampling_type NONE \
-    -nct 4 \
-    -o final.rnaseq.grp
+gatk3 -T BaseRecalibrator \
+      --default_platform illumina \
+      -cov ReadGroupCovariate \
+      -cov QualityScoreCovariate \
+      -cov CycleCovariate \
+      -knownSites known_variants.filtered.recode.vcf.gz\
+      -cov ContextCovariate \
+      -R genome.fa -I split.bam \
+      --downsampling_type NONE \
+      -nct 4 \
+      -o final.rnaseq.grp
 ```
 
 ```bash
-java -jar GenomeAnalysisTK.jar -T PrintReads \
-    -R genome.fa -I split.bam \
-    -BQSR final.rnaseq.grp \
-    -nct 4 \
-    -o final.bam
+gatk3 -T PrintReads \
+      -R genome.fa -I split.bam \
+      -BQSR final.rnaseq.grp \
+      -nct 4 \
+      -o final.bam
 ```
 
 ### Variant Calling and Variant filtering
@@ -169,11 +169,11 @@ For variant calling we’re using the GATK tool `HaplotypeCaller` with default p
 
 ```bash
 ls final.uniq.bam  > bam.list
-java -jar GenomeAnalysisTK.jar -T HaplotypeCaller \
-    -R genome.fa -I bam.list \
-    -dontUseSoftClippedBases \
-    -stand_call_conf 20.0 \
-    -o output.gatk.vcf.gz
+java -jar /usr/gitc/GATK35.jar -T HaplotypeCaller \
+                               -R genome.fa -I bam.list \
+                               -dontUseSoftClippedBases \
+                               -stand_call_conf 20.0 \
+                               -o output.gatk.vcf.gz
 ```
 
 Variant filtering is done as recommended in the GATK best practices:
@@ -183,12 +183,12 @@ Variant filtering is done as recommended in the GATK best practices:
 -   use variant call confidence score `QualByDepth` (QD) with values \< 2.0. The QD is the QUAL score normalized by allele depth (AD) for a variant.
 
 ```bash
-java -jar GenomeAnalysisTK.jar -T VariantFiltration \
-    -R genome.fa -V output.gatk.vcf.gz \
-    -window 35 -cluster 3 \
-    -filterName FS -filter "FS > 30.0" \
-    -filterName QD -filter "QD < 2.0" \
-    -o final.vcf
+java -jar /usr/gitc/GATK35.jar -T VariantFiltration \
+                               -R genome.fa -V output.gatk.vcf.gz \
+                               -window 35 -cluster 3 \
+                               -filterName FS -filter "FS > 30.0" \
+                               -filterName QD -filter "QD < 2.0" \
+                               -o final.vcf
 ```
 
 ### Variant Post-processing
@@ -244,10 +244,10 @@ gghist.R -i AF.4R -o AF.histogram.pdf
 Calculate read counts for each "known" SNVs per allele for allele specific expression analysis:
 
 ```bash
-java -jar GenomeAnalysisTK.jar \
-    -R genome.fa \
-    -T ASEReadCounter \
-    -o ASE.tsv \
-    -I bam.list \
-    -sites known_snps.vcf
+java -jar /usr/gitc/GATK35.jar \
+     -R genome.fa \
+     -T ASEReadCounter \
+     -o ASE.tsv \
+     -I bam.list \
+     -sites known_snps.vcf
 ```

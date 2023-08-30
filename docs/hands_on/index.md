@@ -10,4 +10,4 @@ The tutorial in this hands-on session shows how to implement a Variant Calling a
 
 !!! warning
 
-    The content and pipeline in this course is aimed at teaching Nextflow, not bioinformatics. Software versions are outdated, among other things, so if you want a variant calling Nextflow pipeline for production you should use [nf-core/sarek](https://nf-co.re/sarek) or [nf-core/viralrecon](https://nf-co.re/viralrecon) instead.
+    The content and pipeline in this course is aimed at teaching Nextflow, not bioinformatics. Software versions are outdated, among other things, so if you want a variant calling Nextflow pipeline for production you should use [nf-core/sarek](https://nf-co.re/sarek), [nf-core/viralrecon](https://nf-co.re/viralrecon) or [nf-core/rnavar](https://nf-co.re/rnavar) instead.

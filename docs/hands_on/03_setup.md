@@ -51,7 +51,9 @@ hands-on
 
 ## Pulling the Docker image
 
-Nextflow can pull Docker images at runtime, but let’s just download it manually to see how Docker works:
+Nextflow can pull Docker images at runtime, which is very useful as we usually work with multiple container images. The best practice when it comes to containers and Nextflow is to have a light container image for each process. This makes pulling/running/stopping containers faster and it's easier to debug, when compared to a bulky container image. Nextflow will make sure these container images are pulled, when not found locally, ran as containers, with volumes mounted plus many other things that you don't have to worry.
+
+Even though Nextflow takes care of that for you, let’s just download manually one of the container images that we will use to see how Docker works:
 
 ```bash
 docker pull cbcrg/callings-with-gatk:latest
@@ -78,9 +80,20 @@ Digest: sha256:93910bf77bc197cb790eca776e42950bc8eff117bdc6e67157295e09c98fc381
 Status: Downloaded newer image for cbcrg/callings-with-gatk:latest
 ```
 
-!!! note
+You can run this container and launch bash to interact with it by typing the following command:
 
-    Ideally, you should have a light container image for every process, containing exclusively what is required for that task. This not only contributes to the image being light to pull, run and stop but also makes it easier to debug in case of problems. For this course specifically, we won't bother with that and use a single bulky container image (mentioned above) that has everything we need.
+```console
+docker run -ti --rm cbcrg/callings-with-gatk:latest bash
+```
+
+Once inside, you can check the version of R, for example. You should see something like:
+
+```console
+root@3e832700345f:/home/pditommaso/projects/callings-nf# Rscript --version
+R scripting front-end version 3.1.1 (2014-07-10)
+```
+
+Type `exit` to exit the container and come back to your shell.
 
 ## Script permission
 
