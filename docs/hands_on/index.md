@@ -6,7 +6,7 @@ hide:
 
 # Nextflow course - Hands-on
 
-The tutorial in this hands-on session shows how to implement a Variant Calling analysis pipeline for RNA-seq data based on GATK best practices and using Nextflow as the pipeline framework.
+This hands-on session shows how to implement a Nextflow Variant Calling analysis pipeline for RNA-seq data that is based on GATK best practices.
 
 !!! warning
 
