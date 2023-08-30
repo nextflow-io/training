@@ -40,14 +40,12 @@ params.variants   = "$baseDir/data/known_variants.vcf.gz"
 params.blacklist  = "$baseDir/data/blacklist.bed"
 params.reads      = "$baseDir/data/reads/ENCSR000COQ1_{1,2}.fastq.gz" // (3)!
 params.results    = "results" // (4)!
-params.gatk       = "/opt/broad/GenomeAnalysisTK.jar" // (5)!
 ```
 
 1. The `/*`, `*` and `*/` specify comment lines which are ignored by Nextflow.
 2. The `baseDir` variable represents the main script path location.
 3. The `reads` parameter uses a glob pattern to specify the forward (`ENCSR000COQ1_1.fq.gz`) and reverse (`ENCSR000COQ1_2.fq.gz`) reads (paired-end) of a sample.
 4. The `results` parameter is used to specify a directory called `results`.
-5. The `gatk` parameter specifies the location of the GATK jar file. This is a path within the container.
 
 !!! tip
 
@@ -130,12 +128,14 @@ The first process has the following structure:
 
     Your aim is to replace the `BLANK` placeholder with the the correct process call.
 
-    ```groovy linenums="1" hl_lines="21"
+    ```groovy linenums="1" hl_lines="23"
     /*
      * Process 1A: Create a FASTA genome index with samtools
      */
 
     process prepare_genome_samtools {
+        container 'quay.io/biocontainers/samtools:1.3.1--h0cf4675_11'
+
         input:
         path genome
 
@@ -176,12 +176,14 @@ The first process has the following structure:
 
     ??? solution
 
-        ```groovy linenums="1" hl_lines="21"
+        ```groovy linenums="1" hl_lines="23"
         /*
          * Process 1A: Create a FASTA genome index with samtools
          */
 
         process prepare_genome_samtools {
+            container 'quay.io/biocontainers/samtools:1.3.1--h0cf4675_11'
+
             input:
             path genome
 
@@ -228,12 +230,14 @@ The next process should have the following structure:
 
         You can choose any channel output name that makes sense to you.
 
-    ```groovy linenums="1" hl_lines="23"
+    ```groovy linenums="1" hl_lines="24"
     /*
      * Process 1B: Create a FASTA genome sequence dictionary with Picard for GATK
      */
 
     process prepare_genome_picard {
+        container 'quay.io/biocontainers/picard:1.141--hdfd78af_6'
+
         input:
         path genome
 
@@ -242,8 +246,7 @@ The next process should have the following structure:
 
         script:
         """
-        PICARD=`which picard.jar`
-        java -jar \$PICARD CreateSequenceDictionary R= $genome O= ${genome.baseName}.dict
+        picard CreateSequenceDictionary R= $genome O= ${genome.baseName}.dict
         """
     }
 
@@ -261,12 +264,14 @@ The next process should have the following structure:
 
     ??? solution
 
-        ```groovy linenums="1" hl_lines="23"
+        ```groovy linenums="1" hl_lines="24"
         /*
          * Process 1B: Create a FASTA genome sequence dictionary with Picard for GATK
          */
 
         process prepare_genome_picard {
+            container 'quay.io/biocontainers/picard:1.141--hdfd78af_6'
+
             input:
             path genome
 
@@ -275,8 +280,7 @@ The next process should have the following structure:
 
             script:
             """
-            PICARD=`which picard.jar`
-            java -jar \$PICARD CreateSequenceDictionary R= $genome O= ${genome.baseName}.dict
+            picard CreateSequenceDictionary R= $genome O= ${genome.baseName}.dict
             """
         }
 
@@ -305,12 +309,14 @@ The next process has the following structure:
 
     This is a similar exercise as problem 3.
 
-    ```groovy linenums="1" hl_lines="28"
+    ```groovy linenums="1" hl_lines="30"
     /*
      * Process 1C: Create the genome index file for STAR
      */
 
     process prepare_star_genome_index {
+        container 'quay.io/biocontainers/star:2.7.10b--h6b7c446_1'
+
         input:
         path genome
 
@@ -322,9 +328,9 @@ The next process has the following structure:
         mkdir genome_dir
 
         STAR --runMode genomeGenerate \
-            --genomeDir genome_dir \
-            --genomeFastaFiles ${genome} \
-            --runThreadN ${task.cpus}
+             --genomeDir genome_dir \
+             --genomeFastaFiles ${genome} \
+             --runThreadN ${task.cpus}
         """
     }
 
@@ -343,12 +349,14 @@ The next process has the following structure:
 
     ??? solution
 
-        ```groovy linenums="1" hl_lines="28"
+        ```groovy linenums="1" hl_lines="30"
         /*
         * Process 1C: Create the genome index file for STAR
         */
 
         process prepare_star_genome_index {
+            container 'quay.io/biocontainers/star:2.7.10b--h6b7c446_1'
+
             input:
             path genome // (1)!
 
@@ -360,9 +368,9 @@ The next process has the following structure:
             mkdir genome_dir
 
             STAR --runMode genomeGenerate \
-            --genomeDir genome_dir \
-            --genomeFastaFiles ${genome} \
-            --runThreadN ${task.cpus}
+                 --genomeDir genome_dir \
+                 --genomeFastaFiles ${genome} \
+                 --runThreadN ${task.cpus}
             """
         }
 
@@ -404,12 +412,14 @@ The next process has the following structure:
 
     You must fill in the `BLANK`.
 
-    ```groovy linenums="1" hl_lines="31"
+    ```groovy linenums="1" hl_lines="33"
     /*
      * Process 1D: Create a file containing the filtered and recoded set of variants
      */
 
     process prepare_vcf_file {
+        container 'quay.io/biocontainers/mulled-v2-b9358559e3ae3b9d7d8dbf1f401ae1fcaf757de3:ac05763cf181a5070c2fdb9bb5461f8d08f7b93b-0'
+
         input:
         path variantsFile
         path blacklisted
@@ -464,12 +474,14 @@ The next process has the following structure:
 
     ??? solution
 
-        ```groovy linenums="1" hl_lines="31"
+        ```groovy linenums="1" hl_lines="33"
         /*
          * Process 1D: Create a file containing the filtered and recoded set of variants
          */
 
         process prepare_vcf_file {
+            container 'quay.io/biocontainers/mulled-v2-b9358559e3ae3b9d7d8dbf1f401ae1fcaf757de3:ac05763cf181a5070c2fdb9bb5461f8d08f7b93b-0'
+
             input:
             path variantsFile
             path blacklisted
@@ -481,9 +493,9 @@ The next process has the following structure:
             script:
             """
             vcftools --gzvcf $variantsFile -c \
-                    --exclude-bed ${blacklisted} \
-                    --recode | bgzip -c \
-                    > ${variantsFile.baseName}.filtered.recode.vcf.gz
+                     --exclude-bed ${blacklisted} \
+                     --recode | bgzip -c \
+                     > ${variantsFile.baseName}.filtered.recode.vcf.gz
 
             tabix ${variantsFile.baseName}.filtered.recode.vcf.gz
             """
@@ -529,12 +541,14 @@ The process has the following structure:
 
     You must fill the `BLANK` space with the correct process call and inputs.
 
-    ```groovy linenums="1" hl_lines="60"
+    ```groovy linenums="1" hl_lines="62"
     /*
      * Process 2: Align RNA-Seq reads to the genome with STAR
      */
 
     process rnaseq_mapping_star {
+        container 'quay.io/biocontainers/mulled-v2-52f8f283e3c401243cee4ee45f80122fbf6df3bb:e3bc54570927dc255f0e580cba1789b64690d611-0'
+
         input:
         path genome
         path genomeDir
@@ -599,12 +613,14 @@ The process has the following structure:
 
     ??? solution
 
-        ```groovy linenums="1" hl_lines="60"
+        ```groovy linenums="1" hl_lines="62"
         /*
          * Process 2: Align RNA-Seq reads to the genome with STAR
          */
 
         process rnaseq_mapping_star {
+            container 'quay.io/biocontainers/mulled-v2-52f8f283e3c401243cee4ee45f80122fbf6df3bb:e3bc54570927dc255f0e580cba1789b64690d611-0'
+
             input:
             path genome
             path genomeDir
@@ -691,12 +707,13 @@ The next process has the following structure:
         There is an optional [`tag`](https://www.nextflow.io/docs/latest/process.html#tag) line added to the start of this process. The [`tag`](https://www.nextflow.io/docs/latest/process.html#tag) line allows you to assign a name to a specific task (single instance of a process). This is particularly useful when there are many samples/replicates which pass through the same process.
 
 
-    ```groovy linenums="1" hl_lines="40"
+    ```groovy linenums="1" hl_lines="41"
     /*
      * Process 3: GATK Split on N
      */
 
     process rnaseq_gatk_splitNcigar {
+        container 'quay.io/broadinstitute/gotc-prod-gatk:1.0.0-4.1.8.0-1626439571'
         tag "$replicateId"
 
         input:
@@ -711,13 +728,13 @@ The next process has the following structure:
         script:
         """
         # SplitNCigarReads and reassign mapping qualities
-        java -jar $params.gatk -T SplitNCigarReads \
-                               -R $genome -I $bam \
-                               -o split.bam \
-                               -rf ReassignOneMappingQuality \
-                               -RMQF 255 -RMQT 60 \
-                               -U ALLOW_N_CIGAR_READS \
-                               --fix_misencoded_quality_scores
+        java -jar /usr/gitc/GATK35.jar -T SplitNCigarReads \
+                                       -R $genome -I $bam \
+                                       -o split.bam \
+                                       -rf ReassignOneMappingQuality \
+                                       -RMQF 255 -RMQT 60 \
+                                       -U ALLOW_N_CIGAR_READS \
+                                       --fix_misencoded_quality_scores
         """
     }
 
@@ -746,12 +763,13 @@ The next process has the following structure:
     ??? solution
 
 
-        ```groovy linenums="1" hl_lines="41-44"
+        ```groovy linenums="1" hl_lines="42-45"
         /*
          * Process 3: GATK Split on N
          */
 
         process rnaseq_gatk_splitNcigar {
+            container 'quay.io/broadinstitute/gotc-prod-gatk:1.0.0-4.1.8.0-1626439571'
             tag "$replicateId"
 
             input:
@@ -766,13 +784,13 @@ The next process has the following structure:
             script:
             """
             # SplitNCigarReads and reassign mapping qualities
-            java -jar $params.gatk -T SplitNCigarReads \
-                                   -R $genome -I $bam \
-                                   -o split.bam \
-                                   -rf ReassignOneMappingQuality \
-                                   -RMQF 255 -RMQT 60 \
-                                   -U ALLOW_N_CIGAR_READS \
-                                   --fix_misencoded_quality_scores
+            java -jar /usr/gitc/GATK35.jar -T SplitNCigarReads \
+                                           -R $genome -I $bam \
+                                           -o split.bam \
+                                           -rf ReassignOneMappingQuality \
+                                           -RMQF 255 -RMQT 60 \
+                                           -U ALLOW_N_CIGAR_READS \
+                                           --fix_misencoded_quality_scores
 
             """
         }
@@ -827,12 +845,13 @@ The next process has the following structure:
 
     Your aim is to replace the `BLANK` placeholder with the the correct process call.
 
-    ```groovy linenums="1" hl_lines="64"
+    ```groovy linenums="1" hl_lines="65"
     /*
      * Process 4: GATK Recalibrate
      */
 
     process rnaseq_gatk_recalibrate {
+        container 'quay.io/biocontainers/mulled-v2-aa1d7bddaee5eb6c4cbab18f8a072e3ea7ec3969:f963c36fd770e89d267eeaa27cad95c1c3dbe660-0'
         tag "$replicateId"
 
         input:
@@ -849,23 +868,23 @@ The next process has the following structure:
         sampleId = replicateId.replaceAll(/[12]$/,'')
         """
         # Indel Realignment and Base Recalibration
-        java -jar $params.gatk -T BaseRecalibrator \
-                               --default_platform illumina \
-                               -cov ReadGroupCovariate \
-                               -cov QualityScoreCovariate \
-                               -cov CycleCovariate \
-                               -knownSites ${prepared_variants_file} \
-                               -cov ContextCovariate \
-                               -R ${genome} -I ${bam} \
-                               --downsampling_type NONE \
-                               -nct ${task.cpus} \
-                               -o final.rnaseq.grp
+        gatk3 -T BaseRecalibrator \
+              --default_platform illumina \
+              -cov ReadGroupCovariate \
+              -cov QualityScoreCovariate \
+              -cov CycleCovariate \
+              -knownSites ${prepared_variants_file} \
+              -cov ContextCovariate \
+              -R ${genome} -I ${bam} \
+              --downsampling_type NONE \
+              -nct ${task.cpus} \
+              -o final.rnaseq.grp
 
-        java -jar $params.gatk -T PrintReads \
-                               -R ${genome} -I ${bam} \
-                               -BQSR final.rnaseq.grp \
-                               -nct ${task.cpus} \
-                               -o final.bam
+        gatk3 -T PrintReads \
+              -R ${genome} -I ${bam} \
+              -BQSR final.rnaseq.grp \
+              -nct ${task.cpus} \
+              -o final.bam
 
         # Select only unique alignments, no multimaps
         (samtools view -H final.bam; samtools view final.bam| grep -w 'NH:i:1') \
@@ -901,12 +920,13 @@ The next process has the following structure:
     ??? solution
 
 
-        ```groovy linenums="1" hl_lines="64-68"
+        ```groovy linenums="1" hl_lines="65-69"
         /*
          * Process 4: GATK Recalibrate
          */
 
         process rnaseq_gatk_recalibrate {
+            container 'quay.io/biocontainers/mulled-v2-aa1d7bddaee5eb6c4cbab18f8a072e3ea7ec3969:f963c36fd770e89d267eeaa27cad95c1c3dbe660-0'
             tag "$replicateId"
 
             input:
@@ -923,23 +943,23 @@ The next process has the following structure:
             sampleId = replicateId.replaceAll(/[12]$/,'')
             """
             # Indel Realignment and Base Recalibration
-            java -jar $params.gatk -T BaseRecalibrator \
-                                   --default_platform illumina \
-                                   -cov ReadGroupCovariate \
-                                   -cov QualityScoreCovariate \
-                                   -cov CycleCovariate \
-                                   -knownSites ${prepared_variants_file} \
-                                   -cov ContextCovariate \
-                                   -R ${genome} -I ${bam} \
-                                   --downsampling_type NONE \
-                                   -nct ${task.cpus} \
-                                   -o final.rnaseq.grp
+            gatk3 -T BaseRecalibrator \
+                  --default_platform illumina \
+                  -cov ReadGroupCovariate \
+                  -cov QualityScoreCovariate \
+                  -cov CycleCovariate \
+                  -knownSites ${prepared_variants_file} \
+                  -cov ContextCovariate \
+                  -R ${genome} -I ${bam} \
+                  --downsampling_type NONE \
+                  -nct ${task.cpus} \
+                  -o final.rnaseq.grp
 
-            java -jar $params.gatk -T PrintReads \
-                                   -R ${genome} -I ${bam} \
-                                   -BQSR final.rnaseq.grp \
-                                   -nct ${task.cpus} \
-                                   -o final.bam
+            gatk3 -T PrintReads \
+                  -R ${genome} -I ${bam} \
+                  -BQSR final.rnaseq.grp \
+                  -nct ${task.cpus} \
+                  -o final.bam
 
             # Select only unique alignments, no multimaps
             (samtools view -H final.bam; samtools view final.bam| grep -w 'NH:i:1') \
@@ -1008,12 +1028,13 @@ The next process has the following structure:
 
     Your aim is to replace the `BLANK` placeholder with the the correct process call.
 
-    ```groovy linenums="1" hl_lines="59"
+    ```groovy linenums="1" hl_lines="60"
     /*
      * Process 5: GATK Variant Calling
      */
 
     process rnaseq_call_variants {
+        container 'quay.io/broadinstitute/gotc-prod-gatk:1.0.0-4.1.8.0-1626439571'
         tag "$sampleId"
 
         input:
@@ -1030,19 +1051,19 @@ The next process has the following structure:
         echo "${bam.join('\n')}" > bam.list
 
         # Variant calling
-        java -jar $params.gatk -T HaplotypeCaller \
-                               -R $genome -I bam.list \
-                               -dontUseSoftClippedBases \
-                               -stand_call_conf 20.0 \
-                               -o output.gatk.vcf.gz
+        java -jar /usr/gitc/GATK35.jar -T HaplotypeCaller \
+                                       -R $genome -I bam.list \
+                                       -dontUseSoftClippedBases \
+                                       -stand_call_conf 20.0 \
+                                       -o output.gatk.vcf.gz
 
         # Variant filtering
-        java -jar $params.gatk -T VariantFiltration \
-                               -R $genome -V output.gatk.vcf.gz \
-                               -window 35 -cluster 3 \
-                               -filterName FS -filter "FS > 30.0" \
-                               -filterName QD -filter "QD < 2.0" \
-                               -o final.vcf
+        java -jar /usr/gitc/GATK35.jar -T VariantFiltration \
+                                       -R $genome -V output.gatk.vcf.gz \
+                                       -window 35 -cluster 3 \
+                                       -filterName FS -filter "FS > 30.0" \
+                                       -filterName QD -filter "QD < 2.0" \
+                                       -o final.vcf
         """
     }
 
@@ -1073,7 +1094,7 @@ The next process has the following structure:
 
     ??? solution
 
-        ```groovy linenums="1" hl_lines="59-62"
+        ```groovy linenums="1" hl_lines="60-63"
         /*
          * Process 5: GATK Variant Calling
          */
@@ -1095,19 +1116,19 @@ The next process has the following structure:
             echo "${bam.join('\n')}" > bam.list
 
             # Variant calling
-            java -jar $params.gatk -T HaplotypeCaller \
-                                   -R $genome -I bam.list \
-                                   -dontUseSoftClippedBases \
-                                   -stand_call_conf 20.0 \
-                                   -o output.gatk.vcf.gz
+            java -jar /usr/gitc/GATK35.jar -T HaplotypeCaller \
+                                           -R $genome -I bam.list \
+                                           -dontUseSoftClippedBases \
+                                           -stand_call_conf 20.0 \
+                                           -o output.gatk.vcf.gz
 
             # Variant filtering
-            java -jar $params.gatk -T VariantFiltration \
-                                   -R $genome -V output.gatk.vcf.gz \
-                                   -window 35 -cluster 3 \
-                                   -filterName FS -filter "FS > 30.0" \
-                                   -filterName QD -filter "QD < 2.0" \
-                                   -o final.vcf
+            java -jar /usr/gitc/GATK35.jar -T VariantFiltration \
+                                           -R $genome -V output.gatk.vcf.gz \
+                                           -window 35 -cluster 3 \
+                                           -filterName FS -filter "FS > 30.0" \
+                                           -filterName QD -filter "QD < 2.0" \
+                                           -o final.vcf
             """
         }
 
@@ -1176,12 +1197,13 @@ You should implement two processes having the following structure:
 
     You must have the output of process 6A become the input of process 6B.
 
-    ```groovy linenums="1" hl_lines="77"
+    ```groovy linenums="1" hl_lines="78"
     /*
      * Processes 6: ASE & RNA Editing
      */
 
     process post_process_vcf {
+        container 'quay.io/biocontainers/mulled-v2-b9358559e3ae3b9d7d8dbf1f401ae1fcaf757de3:ac05763cf181a5070c2fdb9bb5461f8d08f7b93b-0'
         tag "$sampleId"
         publishDir "$params.results/$sampleId" // (1)!
 
@@ -1262,12 +1284,13 @@ You should implement two processes having the following structure:
     ??? solution
 
 
-        ```groovy linenums="1" hl_lines="77-79"
+        ```groovy linenums="1" hl_lines="79-81"
         /*
          * Processes 6: ASE & RNA Editing
          */
 
         process post_process_vcf {
+            container 'quay.io/biocontainers/mulled-v2-b9358559e3ae3b9d7d8dbf1f401ae1fcaf757de3:ac05763cf181a5070c2fdb9bb5461f8d08f7b93b-0'
             tag "$sampleId"
             publishDir "$params.results/$sampleId"
 
@@ -1287,6 +1310,7 @@ You should implement two processes having the following structure:
         }
 
         process prepare_vcf_for_ase {
+            container 'cbcrg/callings-with-gatk:latest'
             tag "$sampleId"
             publishDir "$params.results/$sampleId"
 
@@ -1455,21 +1479,22 @@ The next process has the following structure:
     ```bash linenums="1"
     echo "${bam.join('\n')}" > bam.list
 
-    java -jar $params.gatk -R ${genome} \
-                           -T ASEReadCounter \
-                           -o ASE.tsv \
-                           -I bam.list \
-                           -sites ${vcf}
+    java -jar /usr/gitc/GATK35.jar -R ${genome} \
+                                   -T ASEReadCounter \
+                                   -o ASE.tsv \
+                                   -I bam.list \
+                                   -sites ${vcf}
     ```
 
     ??? solution
 
-        ```groovy linenums="1" hl_lines="5-28 67-70"
+        ```groovy linenums="1" hl_lines="6-29 68-71"
         /*
          * Processes 7: Allele-Specific Expression analysis with GATK ASEReadCounter
          */
 
         process ASE_knownSNPs {
+            container 'quay.io/broadinstitute/gotc-prod-gatk:1.0.0-4.1.8.0-1626439571'
             tag "$sampleId"
             publishDir "$params.results/$sampleId"
 
@@ -1486,11 +1511,11 @@ The next process has the following structure:
             """
             echo "${bam.join('\n')}" > bam.list
 
-            java -jar $params.gatk -R ${genome} \
-                                   -T ASEReadCounter \
-                                   -o ASE.tsv \
-                                   -I bam.list \
-                                   -sites ${vcf}
+            java -jar /usr/gitc/GATK35.jar -R ${genome} \
+                                           -T ASEReadCounter \
+                                           -o ASE.tsv \
+                                           -I bam.list \
+                                           -sites ${vcf}
             """
         }
 
