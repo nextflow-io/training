@@ -91,7 +91,7 @@ println "$params.foo $params.bar"
 
 !!! exercise
 
-    Save the first snippet as `nextflow.config` and the second one as `params.nf`. Then run:
+    Save the first snippet above (Config file) as `nextflow.config` and the second one as `params.nf`. Then run:
 
     ```bash
     nextflow run params.nf
