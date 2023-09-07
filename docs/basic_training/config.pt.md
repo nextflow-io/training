@@ -97,7 +97,7 @@ println "$params.foo $params.bar"
     nextflow run params.nf
     ```
 
-    ??? result
+    ??? Solution
 
         ```console
         Bonjour le monde!
@@ -109,7 +109,7 @@ println "$params.foo $params.bar"
     nextflow run params.nf --foo Olá
     ```
 
-    ??? result
+    ??? Solution
 
         ```console
         Olá le monde!
@@ -149,7 +149,7 @@ Por fim, execute o seguinte comando:
 nextflow run foo.nf -c meu-env.config
 ```
 
-??? result
+??? Solution
 
     ```console
     BETA=/home/usuario/algum/caminho

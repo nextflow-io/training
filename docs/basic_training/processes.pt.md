@@ -683,7 +683,7 @@ Algumas advertências sobre o comportamento de padrões de glob:
 
     Remova o operador `flatMap` e veja a mudança de saída. A documentação para o operador `flatMap` está disponível [nesse link](https://www.nextflow.io/docs/latest/operator.html#flatmap).
 
-    ??? result
+    ??? Solution
 
         ```groovy
         File: [pedaco_aa, pedaco_ab, pedaco_ac, pedaco_ad] => [H, o, l, a]
