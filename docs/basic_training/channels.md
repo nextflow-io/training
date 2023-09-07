@@ -431,7 +431,7 @@ Channel
     .fromPath("data/meta/patients_1.csv")
     .splitCsv()
     // row is a list object
-    .view { row -> "${row[0]},${row[3]}" }
+    .view { row -> "${row[0]}, ${row[3]}" }
 ```
 
 When the CSV begins with a header line defining the column names, you can specify the parameter `header: true` which allows you to reference each value by its column name, as shown in the following example:
@@ -441,7 +441,7 @@ Channel
     .fromPath("data/meta/patients_1.csv")
     .splitCsv(header: true)
     // row is a list object
-    .view { row -> "${row.patient_id},${row.num_samples}" }
+    .view { row -> "${row.patient_id}, ${row.num_samples}" }
 ```
 
 Alternatively, you can provide custom header names by specifying a list of strings in the header parameter as shown below:
@@ -451,7 +451,7 @@ Channel
     .fromPath("data/meta/patients_1.csv")
     .splitCsv(header: ['col1', 'col2', 'col3', 'col4', 'col5'])
     // row is a list object
-    .view { row -> "${row.col1},${row.col4}" }
+    .view { row -> "${row.col1}, ${row.col4}" }
 ```
 
 You can also process multiple CSV files at the same time:
@@ -503,7 +503,7 @@ for (List row : lines) {
         Channel
             .fromPath("fastq.csv")
             .splitCsv()
-            .view { row -> "${row[0]},${row[1]},${row[2]}" }
+            .view { row -> "${row[0]}, ${row[1]}, ${row[2]}" }
             .set { read_pairs_ch }
         ```
 
