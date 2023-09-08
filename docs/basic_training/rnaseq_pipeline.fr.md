@@ -51,7 +51,7 @@ nextflow run script1.nf --reads '/workspace/gitpod/nf-training/data/ggal/lung_{1
 
     Modifiez le fichier `script1.nf` en ajoutant un quatrième paramètre nommé `outdir` et définissez-le comme chemin par défaut qui sera utilisé comme répertoire de sortie du workflow.
 
-    ??? result
+    ??? Solution
 
         ```groovy
         params.reads = "$projectDir/data/ggal/gut_{1,2}.fq"
@@ -69,7 +69,7 @@ nextflow run script1.nf --reads '/workspace/gitpod/nf-training/data/ggal/lung_{1
         :material-lightbulb: regarde l'example [ici](https://github.com/nextflow-io/rnaseq-nf/blob/3b5b49f/main.nf#L41-L48).
 
 
-    ??? result
+    ??? Solution
 
         Ajoutez ce qui suit à votre fichier script:
 
@@ -171,7 +171,7 @@ docker.enabled = true
 
     Imprimer la sortie du canal `index_ch` en utilisant l'opérateur [view](https://www.nextflow.io/docs/latest/operator.html#view).
 
-    ??? result
+    ??? Solution
 
         Ajoutez ce qui suit à la fin de votre bloc de workflow dans votre fichier script
 
@@ -183,7 +183,7 @@ docker.enabled = true
 
     Si vous disposez de plus d'unités centrales, essayez de modifier votre script pour demander plus de ressources pour ce processus. Par exemple, voir la [directive docs](https://www.nextflow.io/docs/latest/process.html#cpus). `$task.cpus` est déjà spécifié dans ce script, donc définir le nombre de CPUs comme une directive indiquera à Nextflow comment exécuter ce processus, en termes de nombre de CPUs.
 
-    ??? result
+    ??? Solution
 
         Ajouter `cpus 2` au début du processus d'indexation :
 
@@ -201,7 +201,7 @@ docker.enabled = true
 
     Utilisez la commande `tree work` pour voir comment Nextflow organise le répertoire work du processus. Vérifiez [ici](https://www.tecmint.com/linux-tree-command-examples/) si vous avez besoin de télécharger `tree`.
 
-    ??? result
+    ??? Solution
 
         Il devrait ressembler à ceci :
 
@@ -280,7 +280,7 @@ nextflow run script3.nf --reads 'data/ggal/*_{1,2}.fq'
 
     Utilisez l'opérateur [set](https://www.nextflow.io/docs/latest/operator.html#set) à la place de l'affectation `=` pour définir le canal `read_pairs_ch`.
 
-    ??? result
+    ??? Solution
 
         ```groovy
         Channel
@@ -292,7 +292,7 @@ nextflow run script3.nf --reads 'data/ggal/*_{1,2}.fq'
 
     Utilisez l'option `checkIfExists` pour la fabrique de canaux [fromFilePairs](https://www.nextflow.io/docs/latest/channel.html#fromfilepairs) pour vérifier si le chemin spécifié contient des paires de fichiers.
 
-    ??? result
+    ??? Solution
 
         ```groovy
         Channel
@@ -352,7 +352,7 @@ Nextflow parallélise l'exécution de votre workflow en fournissant simplement p
 
     Ajout d'une directive [tag](https://www.nextflow.io/docs/latest/process.html#tag) au processus `QUANTIFICATION` pour fournir un journal d'exécution plus lisible.
 
-    ??? result
+    ??? Solution
 
         Ajoutez ce qui suit avant la déclaration d'entrée :
 
@@ -364,7 +364,7 @@ Nextflow parallélise l'exécution de votre workflow en fournissant simplement p
 
     Ajoutez une directive [publishDir](https://www.nextflow.io/docs/latest/process.html#publishdir) au processus `QUANTIFICATION` pour stocker les résultats du processus dans un répertoire de votre choix.
 
-    ??? result
+    ??? Solution
 
         Ajoutez ce qui suit avant la déclaration `input` dans le processus `QUANTIFICATION` :
 

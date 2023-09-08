@@ -517,7 +517,7 @@ mulled-search --destination quay singularity --channel bioconda --search bowtie 
     During the earlier RNA-Seq tutorial (script2.nf), we created an index with the salmon tool. Given we do not have salmon installed locally in the machine provided by Gitpod, we had to either run it with `-with-conda` or `-with-docker`. Your task now is to run it again `-with-docker`, but without having to create your own Docker container image. Instead, use the BioContainers image for salmon 1.7.0.
 
 
-    ??? result
+    ??? Solution
 
         ```bash
         nextflow run script2.nf -with-docker quay.io/biocontainers/salmon:1.7.0--h84f40af_0
@@ -531,7 +531,7 @@ mulled-search --destination quay singularity --channel bioconda --search bowtie 
 
         Temporarily comment out the line `#!groovy process.container = 'nextflow/rnaseq-nf'` in the `nextflow.config` file to make sure the processes are using the BioContainers that you set, and not the container image we have been using in this training.
 
-    ??? result
+    ??? Solution
 
         With these changes, you should be able to run the workflow with BioContainers by running the following in the command line:
 
