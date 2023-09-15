@@ -2,7 +2,7 @@
 
 In this chapter, we take a curated tour of the Nextflow operators. Commonly used and well understood operators are not covered here - only those that we've seen could use more attention or those where the usage could be more elaborate.
 
-These modest set of operators have been chosen to simultaneously demo tangential concepts and Nextflow features.
+These modest set of operators have been chosen to illustrate tangential concepts and Nextflow features.
 
 ## `map`
 
@@ -18,7 +18,14 @@ workflow {
 }
 ```
 
-By default, the element being passed to the closure is given the default name `it`. The variable can be named by using the `->` notation:
+The code above is available in a starter `main.nf` file available at `advanced/chapter_01_operators/main.nf`. It is recommended to open and edit this file to follow along wih the examples given in the rest of this chapter. The workflow can be executed with:
+
+```bash
+cd advanced/chapter_01_operators
+nextflow run .
+```
+
+By default, the element being passed to the closure is given the default name `it`. If you would prefer a more informative variable name, it can be named by using the `->` notation:
 
 ```groovy linenums="1"
 workflow {
@@ -109,12 +116,11 @@ In addition to the argument-less usage of `view` as shown above, this operator c
 ```groovy linenums="1"
 def timesN = { multiplier, it -> it * multiplier }
 def timesTen = timesN.curry(10)
-def prettyPrint = { "Found '$it' (${it.getClass()})"}
 
 workflow {
     Channel.of( 1, 2, 3, 4, 5 )
     | map( timesTen )
-    | view( prettyPrint )
+    | view { "Found '$it' (${it.getClass()})"}
 }
 ```
 
@@ -124,7 +130,7 @@ workflow {
 
 ## `splitCsv`
 
-It is common that a samplesheet is passed as input into a Nextflow workflow. We'll see some more complicated ways to manage these inputs later on in the workshop, but the `splitCsv` is an excellent tool to have in a pinch.
+A common Nextflow pattern is for a simple samplesheet to be passed as primary input into a workflow. We'll see some more complicated ways to manage these inputs later on in the workshop, but the `splitCsv` ([docs](https://www.nextflow.io/docs/latest/operator.html#splitcsv)) is an excellent tool to have in a pinch. This operator will parse a csv/tsv and return a channel where each item is a row in the csv/tsv:
 
 ```groovy linenums="1"
 workflow {
@@ -136,13 +142,13 @@ workflow {
 
 !!! exercise
 
-    From the directory `chapter_01_operators`, use the `splitCsv` and `map` operators to create a channel that would be suitable input to the
+    From the directory `advanced/chapter_01_operators`, use the `splitCsv` and `map` operators to read the file `data/samplesheet.csv` and return a channel that would be suitable input to the process below. Feel free to consult the [splitCsv documentation](https://www.nextflow.io/docs/latest/operator.html#splitcsv) for tips.
 
     ```groovy linenums="1"
     process FastQC {
         input:
         tuple val(id), path(fastqs)
-        //
+        // ... rest of the process
     ```
 
     ??? solution
@@ -183,16 +189,16 @@ workflow {
 
 ## `multiMap`
 
-The `multiMap` operator is a way of creating multiple channels from a single source.
+The `multiMap` ([documentation](https://www.nextflow.io/docs/latest/operator.html#multimap)) operator is a way of taking a single input channel and emitting into **multiple channels for each input element**.
 
-Let's assume we've been given a samplesheet that has tumor/normal pairs bundled together on the same row.
+Let's assume we've been given a samplesheet that has tumor/normal pairs bundled together on the same row. View the example samplesheet with:
 
 ```bash
-cd chapter_01_operators
+cd advanced/chapter_01_operators
 cat data/samplesheet.ugly.csv
 ```
 
-Using the `splitCsv` operator would give us one entry that would contain all four fastq files. Let's consider that we wanted to split these fastqs into separate channels for tumor and normal, we could use `multiMap`:
+Using the `splitCsv` operator would give us one entry that would contain all four fastq files. Let's consider that we wanted to split these fastqs into separate channels for tumor and normal. In other words, for every row in the samplesheet, we would like to emit an entry into two new channels. To do this, we can use the `multiMap` operator:
 
 ```groovy linenums="1"
 workflow {
@@ -219,7 +225,9 @@ workflow {
 
 ## `branch`
 
-In the example above, the `multiMap` operator was necessary because we were supplied with a samplesheet that combined two pairs of fastq per row. If we were to use the neater samplesheet, we could use the `branch` operator to achieve the same result.
+The `branch` operator ([documentation](https://www.nextflow.io/docs/latest/operator.html#branch)) is a way of taking a single input channel and emitting a new element into one (and only one) of a selection of output channels.
+
+In the example above, the `multiMap` operator was necessary because we were supplied with a samplesheet that combined two pairs of fastq per row and we wanted to turn each row into new elements in multiple channels. If we were to use the neater samplesheet that had tumor/normal pairs on separate rows, we could use the `branch` operator to achieve the same result as we are routing each input element into a single output channel.
 
 ```groovy linenums="1"
 workflow {
@@ -246,7 +254,7 @@ branch { meta, reads ->
 }
 ```
 
-We can optionally return a new element to one or more of the output channels. For example, to add an extra key in the meta map of the tumor samples, we add a new line under the condition and return our new element. In this example, we modify the first element of the `List` to be a new list that is the result of merging the existing meta map with a new map containing a single key:
+We may want to emit a slightly different element than the one passed as input. The `branch` operator can (optionally) return a _new_ element to an channel. For example, to add an extra key in the meta map of the tumor samples, we add a new line under the condition and return our new element. In this example, we modify the first element of the `List` to be a new list that is the result of merging the existing meta map with a new map containing a single key:
 
 ```groovy linenums="1"
 branch { meta, reads ->
@@ -292,7 +300,7 @@ numbers.small | view { num -> "Small: $num"}
 numbers.large | view { num -> "Large: $num"}
 ```
 
-or by using `set`:
+or by using the `set` operator ([documentation](https://www.nextflow.io/docs/latest/operator.html#set)):
 
 ```groovy linenums="1"
 Channel.from(1,2,3,4,5)
@@ -306,7 +314,7 @@ numbers.small | view { num -> "Small: $num"}
 numbers.large | view { num -> "Large: $num"}
 ```
 
-Given a process that takes multiple channels
+A more interesting situation occurs when given a process that takes multiple channels as input:
 
 ```groovy linenums="1"
 process MultiInput {
@@ -345,7 +353,7 @@ Channel.from(1,2,3,4,5)
 MultiInput(numbers)
 ```
 
-This also means you can skip the `set` operator for the cleanest solution:
+For an even cleaner solution, you can skip the now-redundant `set` operator:
 
 ```groovy linenums="1"
 Channel.from(1,2,3,4,5)
