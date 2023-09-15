@@ -26,7 +26,7 @@ We run a free online training event for this course approximately every six mont
     <iframe width="560" height="315" src="https://www.youtube.com/embed/watch?v=ERbTqLtAkps&list=PL3xpfTVZLcNiLFLiDqk_H5b3TBwvgO_-W" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" data-ruffle-polyfilled=""></iframe>
 </div>
 
-If English is not your preferred language, you may find it useful to follow the training from the [March 2023 event](https://nf-co.re/events/2023/training-march-2023) , which we ran in multiple languages.
+If English is not your preferred language, you may find it useful to follow the training from the [March 2023 event](https://nf-co.re/events/2023/training-march-2023), which we ran in multiple languages.
 Please note that some parts of the training material may have been updated since this was recorded.
 
 -   :flag_gb: [English recording](https://youtube.com/playlist?list=PL3xpfTVZLcNhoWxHR0CS-7xzu5eRT8uHo)
