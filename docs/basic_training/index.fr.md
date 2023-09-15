@@ -4,11 +4,11 @@ hide:
     - toc
 ---
 
-## Bienvenue
-
-## Bienvenue à l'atelier de formation Nextflow
+# Bienvenue
 
 Nous sommes heureux de vous accompagner sur le chemin de rédaction de workflows scientifiques reproductibles et évolutifs en utilisant Nextflow. Ce guide complète toute la documentation de Nextflow - si vous avez des doutes, consultez la documentation située [ici](https://www.nextflow.io/docs/latest).
+
+## Objectifs
 
 À la fin de ce cours, vous devriez:
 
@@ -20,9 +20,14 @@ Nous sommes heureux de vous accompagner sur le chemin de rédaction de workflows
 
 ## Suivez les vidéos de formation
 
-Dans notre dernière formation [nf-core en mars 2023](https://nf-co.re/events/2023/training-march-2023), nous avons utilisé ce matériel de formation pour enseigner Nextflow et l'enregistrement est disponible pour que vous puissiez le regarder à votre rythme dans plusieurs langues.
+Nous organisons un événement de formation en ligne gratuit pour ce cours environ tous les six mois. Les vidéos sont diffusées sur YouTube et les questions sont traitées dans la communauté nf-core Slack. Vous pouvez regarder l'enregistrement de la formation la plus récente ([septembre 2023](https://nf-co.re/events/2023/training-basic-2023)) dans la [playlist YouTube](https://youtu.be/ERbTqLtAkps?si=6xDoDXsb6kGQ_Qa8) ci-dessous :
 
-Consultez les liens ci-dessous pour les vidéos YouTube dans les langues disponibles :
+<div style="text-align: center;">
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/watch?v=ERbTqLtAkps&list=PL3xpfTVZLcNiLFLiDqk_H5b3TBwvgO_-W" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" data-ruffle-polyfilled=""></iframe>
+</div>
+
+Si l'anglais n'est pas votre langue préférée, vous trouverez peut-être utile de suivre la formation de [l'événement de mars 2023](https://nf-co.re/events/2023/training-march-2023), que nous avons organisé plusieurs langues.
+Veuillez noter que certaines parties du matériel de formation peuvent avoir été mises à jour depuis leur enregistrement.
 
 -   :flag_gb: [En Anglais](https://youtube.com/playlist?list=PL3xpfTVZLcNhoWxHR0CS-7xzu5eRT8uHo)
 -   :flag_in: [En Hindi](https://youtube.com/playlist?list=PL3xpfTVZLcNikun1FrSvtXW8ic32TciTJ)
@@ -30,9 +35,6 @@ Consultez les liens ci-dessous pour les vidéos YouTube dans les langues disponi
 -   :flag_pt: [En Portugais](https://youtube.com/playlist?list=PL3xpfTVZLcNhi41yDYhyHitUhIcUHIbJg)
 -   :flag_fr: [En Français](https://youtube.com/playlist?list=PL3xpfTVZLcNhiv9SjhoA1EDOXj9nzIqdS)
 
-<div style="text-align: center;">
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?list=PL3xpfTVZLcNhoWxHR0CS-7xzu5eRT8uHo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" data-ruffle-polyfilled=""></iframe>
-</div>
 ## Aperçu
 
 Pour que vous puissiez commencer à utiliser Nextflow le plus rapidement possible, nous allons suivre les étapes suivantes :
