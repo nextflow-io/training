@@ -138,16 +138,17 @@ plugins:
     - i18n:
           default_language: en
           languages:
-              en:
-                  name: English
-                  build: true
-              pt:
-                  name: Português
-                  build: true
-              es:
-                  name: Español
-                  build: true
-              fr:
-                  name: Français
-                  build: true
+            - locale: en
+              default: true  
+              name: English
+              build: true
+            - locale: pt
+              name: Português
+              build: true
+            - locale: es
+              name: Español
+              build: true
+            - locale: fr
+              name: Français
+              build: true
     - search
