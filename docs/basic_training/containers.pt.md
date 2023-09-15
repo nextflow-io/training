@@ -494,9 +494,17 @@ Até agora, nós vimos como instalar pacotes com conda e micromamba, ambos local
 docker pull biocontainers/fastqc:v0.11.5
 ```
 
-Você pode checar o repositório dos pacotes que quer no [site oficial do BioContainers](https://biocontainers.pro/registry).
+Você pode checar o repositório dos pacotes que quer no [site oficial do BioContainers](https://biocontainers.pro/registry). Para encontrar imagens de container com várias ferramentas, confira a página [Multi-package images](https://biocontainers.pro/multipackage).
 
 Diferente de outros repositórios que irão puxar a imagem mais recente quando nenhum rótulo (versão) é especificado, você precisa especificar um rótulo quando for baixar do BioContainers (depois de dois pontos `:`, por exemplo fastqc:v0.11.5). Cheque os rótulos com o registro e escolha o que melhor se adéqua a suas necessidades.
+
+Você também pode instalar o pacote `galaxy-util-tools` e procurar por imagens de container _mulled_ através da linha de comando. Veja as instruções abaixo, usando o `conda` para instalar o pacote.
+
+```bash
+conda activate um-ambiente-conda-que-voce-ja-criou
+conda install galaxy-tool-util
+mulled-search --destination quay singularity --channel bioconda --search bowtie samtools | grep mulled
+```
 
 !!! tip
 
@@ -509,7 +517,7 @@ Diferente de outros repositórios que irão puxar a imagem mais recente quando n
     Durante a seção onde construímos o fluxo de trabalho de RNA-Seq, nós criamos um índice (script2.nf). Dado que nós não temos Salmon instalado localmente na máquina provida pelo Gitpod, nós temos que ou executar com `-with-conda` ou `-with-docker`. Sua tarefa agora é executar novamente com `-with-docker`, mas sem ter que criar sua própria imagem de contêiner Docker. Invés disso, use a imagem do BioContainers para Salmon 1.7.0.
 
 
-    ??? result
+    ??? Solution
 
         ```bash
         nextflow run script2.nf -with-docker quay.io/biocontainers/salmon:1.7.0--h84f40af_0
@@ -523,7 +531,7 @@ Diferente de outros repositórios que irão puxar a imagem mais recente quando n
 
         temporariamente comente a linha `#!groovy process.container = 'nextflow/rnaseq-nf'` no arquivo `nextflow.config` para ter certeza que o processo está utilizando o contêiner do BioContainers que você configurou, e não a imagem de contêiner que estávamos usando durante esse treinamento.
 
-    ??? result
+    ??? Solution
 
         Com essas mudanças, você deve ser capaz de executar o fluxo de trabalho com BioContainers executando a seguinte linha de comando:
 

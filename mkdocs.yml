@@ -136,19 +136,25 @@ plugins:
               - hands_on/index.md
               - hands_on/solutions/*md
     - i18n:
-          default_language: en
+          docs_structure: suffix
+          fallback_to_default: true
           languages:
-            - locale: en
-              default: true  
+            - build: true
+              default: true
+              locale: en
               name: English
-              build: true
-            - locale: pt
+            - build: true
+              default: false
+              locale: pt
               name: Português
-              build: true
-            - locale: es
+            - build: true
+              default: false
+              locale: es
               name: Español
-              build: true
-            - locale: fr
+            - build: true
+              default: false
+              locale: fr
               name: Français
-              build: true
+          reconfigure_material: true
+          reconfigure_search: true
     - search

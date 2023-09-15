@@ -432,7 +432,7 @@ Channel
     .fromPath("data/meta/patients_1.csv")
     .splitCsv()
     // linha é um objeto de lista
-    .view { linha -> "${linha[0]},${linha[3]}" }
+    .view { linha -> "${linha[0]}, ${linha[3]}" }
 ```
 
 Quando o CSV começa com uma linha de cabeçalho definindo os nomes das colunas, você pode especificar o parâmetro `header: true` que permite referenciar cada valor pelo nome da coluna, conforme mostrado no exemplo a seguir:
@@ -442,7 +442,7 @@ Channel
     .fromPath("data/meta/patients_1.csv")
     .splitCsv(header: true)
     // linha é um objeto de lista
-    .view { linha -> "${linha.patient_id},${linha.num_samples}" }
+    .view { linha -> "${linha.patient_id}, ${linha.num_samples}" }
 ```
 
 Como alternativa, você pode fornecer nomes de cabeçalho personalizados especificando uma lista de strings no parâmetro de cabeçalho, conforme mostrado abaixo:
@@ -452,7 +452,7 @@ Channel
     .fromPath("data/meta/patients_1.csv")
     .splitCsv(header: ['col1', 'col2', 'col3', 'col4', 'col5'])
     // linha é um objeto de lista
-    .view { linha -> "${linha.col1},${linha.col4}" }
+    .view { linha -> "${linha.col1}, ${linha.col4}" }
 ```
 
 Você também pode processar vários arquivos CSV ao mesmo tempo:
@@ -504,7 +504,7 @@ for (List linha : linhas) {
         Channel
             .fromPath("fastq.csv")
             .splitCsv()
-            .view { linha -> "${linha[0]},${linha[1]},${linha[2]}" }
+            .view { linha -> "${linha[0]}, ${linha[1]}, ${linha[2]}" }
             .set { read_pairs_ch }
         ```
 

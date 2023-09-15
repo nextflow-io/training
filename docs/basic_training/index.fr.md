@@ -4,11 +4,11 @@ hide:
     - toc
 ---
 
-## Bienvenue
-
-## Bienvenue à l'atelier de formation Nextflow
+# Bienvenue
 
 Nous sommes heureux de vous accompagner sur le chemin de rédaction de workflows scientifiques reproductibles et évolutifs en utilisant Nextflow. Ce guide complète toute la documentation de Nextflow - si vous avez des doutes, consultez la documentation située [ici](https://www.nextflow.io/docs/latest).
+
+## Objectifs
 
 À la fin de ce cours, vous devriez:
 
@@ -17,6 +17,23 @@ Nous sommes heureux de vous accompagner sur le chemin de rédaction de workflows
 3. Avoir une compréhension des workflows conteneurisés
 4. Comprendre les différentes plateformes d'exécution supportées par Nextflow
 5. Connaître la communauté et l'écosystème Nextflow
+
+## Suivez les vidéos de formation
+
+Nous organisons un événement de formation en ligne gratuit pour ce cours environ tous les six mois. Les vidéos sont diffusées sur YouTube et les questions sont traitées dans la communauté nf-core Slack. Vous pouvez regarder l'enregistrement de la formation la plus récente ([septembre 2023](https://nf-co.re/events/2023/training-basic-2023)) dans la [playlist YouTube](https://youtu.be/ERbTqLtAkps?si=6xDoDXsb6kGQ_Qa8) ci-dessous :
+
+<div style="text-align: center;">
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/watch?v=ERbTqLtAkps&list=PL3xpfTVZLcNiLFLiDqk_H5b3TBwvgO_-W" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" data-ruffle-polyfilled=""></iframe>
+</div>
+
+Si l'anglais n'est pas votre langue préférée, vous trouverez peut-être utile de suivre la formation de [l'événement de mars 2023](https://nf-co.re/events/2023/training-march-2023), que nous avons organisé plusieurs langues.
+Veuillez noter que certaines parties du matériel de formation peuvent avoir été mises à jour depuis leur enregistrement.
+
+-   :flag_gb: [En Anglais](https://youtube.com/playlist?list=PL3xpfTVZLcNhoWxHR0CS-7xzu5eRT8uHo)
+-   :flag_in: [En Hindi](https://youtube.com/playlist?list=PL3xpfTVZLcNikun1FrSvtXW8ic32TciTJ)
+-   :flag_es: [En Espagnol](https://youtube.com/playlist?list=PL3xpfTVZLcNhSlCWVoa3GURacuLWeFc8O)
+-   :flag_pt: [En Portugais](https://youtube.com/playlist?list=PL3xpfTVZLcNhi41yDYhyHitUhIcUHIbJg)
+-   :flag_fr: [En Français](https://youtube.com/playlist?list=PL3xpfTVZLcNhiv9SjhoA1EDOXj9nzIqdS)
 
 ## Aperçu
 

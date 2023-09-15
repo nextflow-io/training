@@ -38,7 +38,7 @@ Encuentra el adecuado para ti:
 
     !!! quote inline end ""
 
-        :material-alert: Este material no se enseña/actualiza con tanta frecuencia como los otros cursos.
+        :material-run-fast: Este material es bastante corto y práctico, excelente si desea practicar sus habilidades de Nextflow.
 
     Un tutorial para "aprender haciendo" con menos enfoque en la teoría, guiándote hacia ejercicios que aumentan en complejidad.
 

@@ -683,7 +683,7 @@ Some caveats on glob pattern behavior:
 
     Remove the `flatMap` operator and see out the output change. The documentation for the `flatMap` operator is available at [this link](https://www.nextflow.io/docs/latest/operator.html#flatmap).
 
-    ??? result
+    ??? Solution
 
         ```groovy
         File: [chunk_aa, chunk_ab, chunk_ac, chunk_ad] => [H, o, l, a]

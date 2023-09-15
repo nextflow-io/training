@@ -1,6 +1,7 @@
 {
     "folders": [
-        { "path": "./nf-training" }
+        { "path": "./nf-training" },
+        { "path": "./hands-on" }
     ],
     "settings": {
         "typescript.tsdk": "gitpod/node_modules/typescript/lib",

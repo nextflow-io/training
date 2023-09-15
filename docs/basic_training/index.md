@@ -6,9 +6,9 @@ hide:
 
 # Welcome
 
-## Welcome to the Nextflow Training Workshop
+We are excited to have you on the path to writing reproducible and scalable scientific workflows using Nextflow. This guide complements the full [Nextflow documentation](https://www.nextflow.io/docs/latest) - if you ever have any doubts, please refer to that.
 
-We are excited to have you on the path to writing reproducible and scalable scientific workflows using Nextflow. This guide complements the full Nextflow documentation - if you ever have any doubts, head over to the docs located [here](https://www.nextflow.io/docs/latest).
+## Objectives
 
 By the end of this course you should:
 
@@ -17,6 +17,23 @@ By the end of this course you should:
 3. Have an understanding of containerized workflows
 4. Understand the different execution platforms supported by Nextflow
 5. Be introduced to the Nextflow community and ecosystem
+
+## Follow the training videos
+
+We run a free online training event for this course approximately every six months. Videos are streamed to YouTube and questions are handled in the nf-core Slack community. You can watch the recording of the most recent training ([September, 2023](https://nf-co.re/events/2023/training-basic-2023)) in the [YouTube playlist](https://youtu.be/ERbTqLtAkps?si=6xDoDXsb6kGQ_Qa8) below:
+
+<div style="text-align: center;">
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/watch?v=ERbTqLtAkps&list=PL3xpfTVZLcNiLFLiDqk_H5b3TBwvgO_-W" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" data-ruffle-polyfilled=""></iframe>
+</div>
+
+If English is not your preferred language, you may find it useful to follow the training from the [March 2023 event](https://nf-co.re/events/2023/training-march-2023), which we ran in multiple languages.
+Please note that some parts of the training material may have been updated since this was recorded.
+
+-   :flag_gb: [English recording](https://youtube.com/playlist?list=PL3xpfTVZLcNhoWxHR0CS-7xzu5eRT8uHo)
+-   :flag_in: [Hindi recording](https://youtube.com/playlist?list=PL3xpfTVZLcNikun1FrSvtXW8ic32TciTJ)
+-   :flag_es: [Spanish recording](https://youtube.com/playlist?list=PL3xpfTVZLcNhSlCWVoa3GURacuLWeFc8O)
+-   :flag_pt: [Portuguese recording](https://youtube.com/playlist?list=PL3xpfTVZLcNhi41yDYhyHitUhIcUHIbJg)
+-   :flag_fr: [French recording](https://youtube.com/playlist?list=PL3xpfTVZLcNhiv9SjhoA1EDOXj9nzIqdS)
 
 ## Overview
 

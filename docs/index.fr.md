@@ -38,7 +38,7 @@ Trouvez celui qui vous convient le mieux :
 
     !!! quote inline end ""
 
-        :material-alert: Ce sujet n'est pas enseigné / mis à jour aussi fréquemment que les autres cours.
+        :material-run-fast: Ce cours est assez court et pratique, idéal si vous souhaitez mettre en pratique vos compétences Nextflow.
 
     Un didacticiel "learn by doing" qui met moins l'accent sur la théorie et propose plutôt des exercices d'une complexité croissante.
 
