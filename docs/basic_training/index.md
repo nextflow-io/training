@@ -20,7 +20,7 @@ By the end of this course you should:
 
 ## Follow the training videos
 
-In our latest [nf-core training in September, 2023](https://nf-co.re/events/2023/training-basic-2023), we used this training material to teach Nextflow and the recording is available for you to watch at your pace below.
+We run a free online training event for this course approximately every six months. Videos are streamed to YouTube and questions are handled in the nf-core Slack community. You can watch the recording of the most recent training ([September, 2023](https://nf-co.re/events/2023/training-basic-2023)) in the [YouTube playlist](https://youtu.be/ERbTqLtAkps?si=6xDoDXsb6kGQ_Qa8) below:
 
 <div style="text-align: center;">
     <iframe width="560" height="315" src="https://www.youtube.com/embed/watch?v=ERbTqLtAkps&list=PL3xpfTVZLcNiLFLiDqk_H5b3TBwvgO_-W" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" data-ruffle-polyfilled=""></iframe>
