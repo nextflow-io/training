@@ -18,7 +18,7 @@ workflow {
 }
 ```
 
-The code above is available in a starter `main.nf` file available at `advanced/chapter_01_operators/main.nf`. It is recommended to open and edit this file to follow along wih the examples given in the rest of this chapter. The workflow can be executed with:
+The code above is available in a starter `main.nf` file available at `advanced/chapter_01_operators/main.nf`. It is recommended to open and edit this file to follow along with the examples given in the rest of this chapter. The workflow can be executed with:
 
 ```bash
 cd advanced/chapter_01_operators
