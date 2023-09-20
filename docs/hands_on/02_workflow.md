@@ -179,8 +179,8 @@ java -jar /usr/gitc/GATK35.jar -T HaplotypeCaller \
 Variant filtering is done as recommended in the GATK best practices:
 
 -   keep clusters of at least 3 SNPs that are within a window of 35 bases between them
--   estimate strand bias using Fisher’s Exact Test with values \> 30.0 (Phred-scaled p-value)
--   use variant call confidence score `QualByDepth` (QD) with values \< 2.0. The QD is the QUAL score normalized by allele depth (AD) for a variant.
+-   estimate strand bias using Fisher’s Exact Test with values > 30.0 (Phred-scaled p-value)
+-   use variant call confidence score `QualByDepth` (QD) with values < 2.0. The QD is the QUAL score normalized by allele depth (AD) for a variant.
 
 ```bash
 java -jar /usr/gitc/GATK35.jar -T VariantFiltration \
