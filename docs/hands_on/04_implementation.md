@@ -430,7 +430,7 @@ The next process has the following structure:
 
         script:
         """
-        vcftools --gzvcf $variantsFile -c \ #
+        vcftools --gzvcf $variantsFile -c \
                  --exclude-bed ${blacklisted} \
                  --recode | bgzip -c \
                  > ${variantsFile.baseName}.filtered.recode.vcf.gz
