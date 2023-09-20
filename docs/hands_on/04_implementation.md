@@ -1112,6 +1112,7 @@ The next process has the following structure:
          */
 
         process rnaseq_call_variants {
+            container 'quay.io/broadinstitute/gotc-prod-gatk:1.0.0-4.1.8.0-1626439571'
             tag "$sampleId"
 
             input:
@@ -1237,6 +1238,7 @@ You should implement two processes having the following structure:
     }
 
     process prepare_vcf_for_ase {
+        container 'cbcrg/callings-with-gatk:latest'
         tag "$sampleId"
         publishDir "$params.results/$sampleId"
 
