@@ -375,7 +375,7 @@ workflow {
     // New channel to aggregate bam from different replicates into sample level.
     rnaseq_gatk_recalibrate.out
         | groupTuple
-        | set { relicabrated_samples }
+        | set { recalibrated_samples }
 
     rnaseq_call_variants(params.genome,
                          prepare_genome_samtools.out,
