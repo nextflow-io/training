@@ -373,21 +373,21 @@ workflow {
                            prepare_vcf_file.out)
 
     // New channel to aggregate bam from different replicates into sample level.
-    rnaseq_gatk_recalibrate.out 
+    rnaseq_gatk_recalibrate.out
         | groupTuple
-        | set {sample_bam_ch}
+        | set { relicabrated_samples }
 
     rnaseq_call_variants(params.genome,
                          prepare_genome_samtools.out,
                          prepare_genome_picard.out,
-                         sample_bam_ch)
+                         recalibrated_samples)
 
     post_process_vcf(rnaseq_call_variants.out,
                         prepare_vcf_file.out)
 
     prepare_vcf_for_ase(post_process_vcf.out)
 
-    sample_bam_ch 
+    recalibrated_samples
         .join(prepare_vcf_for_ase.out.vcf_for_ASE)
         .map { meta, bams, bais, vcf -> [meta, vcf, bams, bais] }
         .set { grouped_vcf_bam_bai_ch }
