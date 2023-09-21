@@ -325,7 +325,7 @@ The next process has the following structure:
 
         script:
         """
-        mkdir genome_dir
+        mkdir -p genome_dir
 
         STAR --runMode genomeGenerate \
              --genomeDir genome_dir \
@@ -365,7 +365,7 @@ The next process has the following structure:
 
             script: // (3)!
             """
-            mkdir genome_dir
+            mkdir -p genome_dir
 
             STAR --runMode genomeGenerate \
                  --genomeDir genome_dir \
@@ -570,7 +570,7 @@ The process has the following structure:
              --outFilterMismatchNmax 999
 
         # 2nd pass (improve alignments using table of splice junctions and create a new index)
-        mkdir genomeDir
+        mkdir -p genomeDir
         STAR --runMode genomeGenerate \
              --genomeDir genomeDir \
              --genomeFastaFiles $genome \
@@ -642,7 +642,7 @@ The process has the following structure:
                  --outFilterMismatchNmax 999
 
             # 2nd pass (improve alignments using table of splice junctions and create a new index)
-            mkdir genomeDir
+            mkdir -p genomeDir
             STAR --runMode genomeGenerate \
                  --genomeDir genomeDir \
                  --genomeFastaFiles $genome \
