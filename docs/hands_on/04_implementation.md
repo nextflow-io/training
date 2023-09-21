@@ -124,7 +124,7 @@ The first process has the following structure:
 
 !!! exercise "Problem #2"
 
-    Copy the code below and paste it at the end of `main.nf`, removing the previous workflow block. Be careful not to accidently have multiple workflow blocks.
+    Copy the code below and paste it at the end of `main.nf`, removing the previous workflow block. Be careful not to accidentally ave multiple workflow blocks.
 
     Your aim is to replace the `BLANK` placeholder with the the correct process call.
 
@@ -609,7 +609,7 @@ The process has the following structure:
 
     !!! info
 
-        The final command produces an bam index which is the full filename with an additional `.bai` suffix.
+        The final command produces a bam index which is the full filename with an additional `.bai` suffix.
 
     ??? solution
 
@@ -1030,7 +1030,7 @@ The next process has the following structure:
 
 !!! exercise "Problem #9"
 
-    Copy the code below and paste it at the end of `main.nf`, removing the previous workflow block. Be careful not to accidently have multiple workflow blocks.
+    Copy the code below and paste it at the end of `main.nf`, removing the previous workflow block. Be careful not to accidentally have multiple workflow blocks.
 
     !!! warning
 
@@ -1430,7 +1430,7 @@ The final step is the GATK ASEReadCounter.
     < sample_id, output.vcf >
     ```
 
-    In the first operation, the BAMs are grouped together by sample id.
+    In the first operation, the BAM files are grouped together by sample id.
 
     Next, this resulting channel is merged with the VCFs having the same sample id.
 
