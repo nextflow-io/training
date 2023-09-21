@@ -1106,7 +1106,7 @@ The next process has the following structure:
 
     ??? solution
 
-        ```groovy linenums="1" hl_lines="61-64"
+        ```groovy linenums="1" hl_lines="62-71"
         /*
          * Process 5: GATK Variant Calling
          */
@@ -1168,10 +1168,16 @@ The next process has the following structure:
                                     rnaseq_gatk_splitNcigar.out,
                                     prepare_vcf_file.out)
 
+            // New channel to aggregate bam from different replicates
+            // into sample level.
+            rnaseq_gatk_recalibrate.out
+                | groupTuple
+                | set { recalibrated_samples }
+
             rnaseq_call_variants(params.genome,
                                  prepare_genome_samtools.out,
                                  prepare_genome_picard.out,
-                                 rnaseq_gatk_recalibrate.out)
+                                 recalibrated_samples)
         }
         ```
 
@@ -1212,7 +1218,7 @@ You should implement two processes having the following structure:
 
     You must have the output of process 6A become the input of process 6B.
 
-    ```groovy linenums="1" hl_lines="80"
+    ```groovy linenums="1" hl_lines="87"
     /*
      * Processes 6: ASE & RNA Editing
      */
@@ -1288,10 +1294,16 @@ You should implement two processes having the following structure:
                                 rnaseq_gatk_splitNcigar.out,
                                 prepare_vcf_file.out)
 
+        // New channel to aggregate bam from different replicates
+        // into sample level.
+        rnaseq_gatk_recalibrate.out
+            | groupTuple
+            | set { recalibrated_samples }
+
         rnaseq_call_variants(params.genome,
                              prepare_genome_samtools.out,
                              prepare_genome_picard.out,
-                             rnaseq_gatk_recalibrate.out)
+                             recalibrated_samples)
 
         BLANK
     }
@@ -1302,7 +1314,7 @@ You should implement two processes having the following structure:
     ??? solution
 
 
-        ```groovy linenums="1" hl_lines="81-83"
+        ```groovy linenums="1" hl_lines="87-89"
         /*
          * Processes 6: ASE & RNA Editing
          */
@@ -1378,10 +1390,16 @@ You should implement two processes having the following structure:
                                     rnaseq_gatk_splitNcigar.out,
                                     prepare_vcf_file.out)
 
+            // New channel to aggregate bam from different replicates
+            // into sample level.
+            rnaseq_gatk_recalibrate.out
+                | groupTuple
+                | set { recalibrated_samples }
+
             rnaseq_call_variants(params.genome,
                                  prepare_genome_samtools.out,
                                  prepare_genome_picard.out,
-                                 rnaseq_gatk_recalibrate.out)
+                                 recalibrated_samples)
 
             post_process_vcf(rnaseq_call_variants.out,
                              prepare_vcf_file.out)
@@ -1421,23 +1439,20 @@ The final step is the GATK ASEReadCounter.
 
     Your aim is to fill in the `BLANKS` below.
 
-    ```groovy linenums="1" hl_lines="3-6"
-    rnaseq_gatk_recalibrate
-        .out
+    ```groovy linenums="1" hl_lines="2-4"
+    recalibrated_samples
         .BLANK // (1)!
-        .BLANK // (2)!
-        .map { BLANK } // (3)!
-        .set { BLANK } // (4)!
+        .map { BLANK } // (2)!
+        .set { BLANK } // (3)!
     ```
 
-    1.   an operator that groups tuples that contain a common first element.
-    2.   an operator that joins two channels taking a key into consideration. See [here](https://www.nextflow.io/docs/latest/operator.html?join#join) for more details
-    3.   the map operator can apply any function to every item on a channel. In this case we take our tuple from the previous setp, define the separate elements and create a new tuple.
-    4.   rename the resulting as `grouped_vcf_bam_bai_ch`
+    1.   an operator that joins two channels taking a key into consideration. See [here](https://www.nextflow.io/docs/latest/operator.html?join#join) for more details
+    2.   the map operator can apply any function to every item on a channel. In this case we take our tuple from the previous setp, define the separate elements and create a new tuple.
+    3.   rename the resulting as `grouped_vcf_bam_bai_ch`
 
     ??? solution
 
-        ```groovy linenums="1" hl_lines="35-38"
+        ```groovy linenums="1" hl_lines="34-36"
         workflow {
             reads_ch = Channel.fromFilePairs(params.reads)
 
@@ -1470,9 +1485,7 @@ The final step is the GATK ASEReadCounter.
                              prepare_vcf_file.out)
             prepare_vcf_for_ase(post_process_vcf.out)
 
-            rnaseq_gatk_recalibrate
-                .out
-                .groupTuple()
+            recalibrated_samples
                 .join(prepare_vcf_for_ase.out.vcf_for_ASE)
                 .map { meta, bams, bais, vcf -> [meta, vcf, bams, bais] }
                 .set { grouped_vcf_bam_bai_ch }
@@ -1510,7 +1523,7 @@ The next process has the following structure:
 
     ??? solution
 
-        ```groovy linenums="1" hl_lines="5-29 70-73"
+        ```groovy linenums="1" hl_lines="5-29 74-77"
         /*
          * Processes 7: Allele-Specific Expression analysis with GATK ASEReadCounter
          */
@@ -1564,18 +1577,22 @@ The next process has the following structure:
                                     rnaseq_gatk_splitNcigar.out,
                                     prepare_vcf_file.out)
 
+            // New channel to aggregate bam from different replicates
+            // into sample level.
+            rnaseq_gatk_recalibrate.out
+                | groupTuple
+                | set { recalibrated_samples }
+
             rnaseq_call_variants(params.genome,
                                  prepare_genome_samtools.out,
                                  prepare_genome_picard.out,
-                                 rnaseq_gatk_recalibrate.out)
+                                 recalibrated_samples)
 
             post_process_vcf(rnaseq_call_variants.out,
                              prepare_vcf_file.out)
             prepare_vcf_for_ase(post_process_vcf.out)
 
-            rnaseq_gatk_recalibrate
-                .out
-                .groupTuple()
+            recalibrated_samples
                 .join(prepare_vcf_for_ase.out.vcf_for_ASE)
                 .map { meta, bams, bais, vcf -> [meta, vcf, bams, bais] }
                 .set { grouped_vcf_bam_bai_ch }
