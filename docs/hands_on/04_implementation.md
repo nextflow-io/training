@@ -760,7 +760,7 @@ The next process has the following structure:
 
         The GATK command above automatically creates a bam index (`.bai`) of the `split.bam` output file
 
-    !!! example
+    !!! tip
 
         A `tag` line would also be useful in [Process 2](#process-2-star-mapping)
 
@@ -1106,7 +1106,7 @@ The next process has the following structure:
 
     ??? solution
 
-        ```groovy linenums="1" hl_lines="62-71"
+        ```groovy linenums="1" hl_lines="62-72"
         /*
          * Process 5: GATK Variant Calling
          */
@@ -1170,7 +1170,8 @@ The next process has the following structure:
 
             // New channel to aggregate bam from different replicates
             // into sample level.
-            rnaseq_gatk_recalibrate.out
+            rnaseq_gatk_recalibrate
+                .out
                 | groupTuple
                 | set { recalibrated_samples }
 
@@ -1218,7 +1219,7 @@ You should implement two processes having the following structure:
 
     You must have the output of process 6A become the input of process 6B.
 
-    ```groovy linenums="1" hl_lines="87"
+    ```groovy linenums="1" hl_lines="88"
     /*
      * Processes 6: ASE & RNA Editing
      */
@@ -1296,7 +1297,8 @@ You should implement two processes having the following structure:
 
         // New channel to aggregate bam from different replicates
         // into sample level.
-        rnaseq_gatk_recalibrate.out
+        rnaseq_gatk_recalibrate
+            .out
             | groupTuple
             | set { recalibrated_samples }
 
@@ -1314,7 +1316,7 @@ You should implement two processes having the following structure:
     ??? solution
 
 
-        ```groovy linenums="1" hl_lines="87-89"
+        ```groovy linenums="1" hl_lines="88-90"
         /*
          * Processes 6: ASE & RNA Editing
          */
@@ -1392,7 +1394,8 @@ You should implement two processes having the following structure:
 
             // New channel to aggregate bam from different replicates
             // into sample level.
-            rnaseq_gatk_recalibrate.out
+            rnaseq_gatk_recalibrate
+                .out
                 | groupTuple
                 | set { recalibrated_samples }
 
@@ -1452,7 +1455,7 @@ The final step is the GATK ASEReadCounter.
 
     ??? solution
 
-        ```groovy linenums="1" hl_lines="34-36"
+        ```groovy linenums="1" hl_lines="40-42"
         workflow {
             reads_ch = Channel.fromFilePairs(params.reads)
 
@@ -1475,6 +1478,13 @@ The final step is the GATK ASEReadCounter.
                                     prepare_genome_picard.out,
                                     rnaseq_gatk_splitNcigar.out,
                                     prepare_vcf_file.out)
+
+            // New channel to aggregate bam from different replicates
+            // into sample level.
+            rnaseq_gatk_recalibrate
+                .out
+                | groupTuple
+                | set { recalibrated_samples }
 
             rnaseq_call_variants(params.genome,
                                  prepare_genome_samtools.out,
@@ -1523,7 +1533,7 @@ The next process has the following structure:
 
     ??? solution
 
-        ```groovy linenums="1" hl_lines="5-29 74-77"
+        ```groovy linenums="1" hl_lines="5-29 75-78"
         /*
          * Processes 7: Allele-Specific Expression analysis with GATK ASEReadCounter
          */
@@ -1579,7 +1589,8 @@ The next process has the following structure:
 
             // New channel to aggregate bam from different replicates
             // into sample level.
-            rnaseq_gatk_recalibrate.out
+            rnaseq_gatk_recalibrate
+                .out
                 | groupTuple
                 | set { recalibrated_samples }
 
