@@ -1455,7 +1455,7 @@ The final step is the GATK ASEReadCounter.
 
     ??? solution
 
-        ```groovy linenums="1" hl_lines="40-42"
+        ```groovy linenums="1" hl_lines="41-43"
         workflow {
             reads_ch = Channel.fromFilePairs(params.reads)
 
