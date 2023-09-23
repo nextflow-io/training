@@ -18,10 +18,10 @@ workflow {
 }
 ```
 
-The code above is available in a starter `main.nf` file available at `advanced/chapter_01_operators/main.nf`. It is recommended to open and edit this file to follow along with the examples given in the rest of this chapter. The workflow can be executed with:
+The code above is available in a starter `main.nf` file available at `advanced/operators/main.nf`. It is recommended to open and edit this file to follow along with the examples given in the rest of this chapter. The workflow can be executed with:
 
 ```bash
-cd advanced/chapter_01_operators
+cd advanced/operators
 nextflow run .
 ```
 
@@ -142,7 +142,7 @@ workflow {
 
 !!! exercise
 
-    From the directory `advanced/chapter_01_operators`, use the `splitCsv` and `map` operators to read the file `data/samplesheet.csv` and return a channel that would be suitable input to the process below. Feel free to consult the [splitCsv documentation](https://www.nextflow.io/docs/latest/operator.html#splitcsv) for tips.
+    From the directory `advanced/operators`, use the `splitCsv` and `map` operators to read the file `data/samplesheet.csv` and return a channel that would be suitable input to the process below. Feel free to consult the [splitCsv documentation](https://www.nextflow.io/docs/latest/operator.html#splitcsv) for tips.
 
     ```groovy linenums="1"
     process FastQC {
@@ -194,7 +194,7 @@ The `multiMap` ([documentation](https://www.nextflow.io/docs/latest/operator.htm
 Let's assume we've been given a samplesheet that has tumor/normal pairs bundled together on the same row. View the example samplesheet with:
 
 ```bash
-cd advanced/chapter_01_operators
+cd advanced/operators
 cat data/samplesheet.ugly.csv
 ```
 

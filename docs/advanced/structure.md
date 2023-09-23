@@ -17,7 +17,7 @@ The `bin` directory (if it exists) is always added to the `$PATH` for all tasks.
 
 If a process script block is becoming too long, it can be moved to a template file. The template file can then be imported into the process script block using the `template` method. This is useful for keeping the process block tidy and readable. Nextflow's use of `$` to indicate variables also allows for directly testing the template file by running it as a script.
 
-The chapter_05_structure directory already contains an example template - a very simple python script. We can add a new process that uses this template:
+The structure directory already contains an example template - a very simple python script. We can add a new process that uses this template:
 
 ```groovy linenums="1"
 process SayHiTemplate {

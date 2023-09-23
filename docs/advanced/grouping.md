@@ -4,10 +4,10 @@
 
 Now that we have a channel that conforms to the `tuple val(meta) path(<something>)` pattern, we can investigate splitting and grouping patterns.
 
-We'll start with a simple main.nf in the `chapter_03_grouping` directory
+We'll start with a simple main.nf in the `grouping` directory
 
 ```bash
-cd chapter_03_grouping
+cd grouping
 ```
 
 ```groovy linenums="1"

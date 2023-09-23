@@ -20,7 +20,7 @@ Ideally, you have sample information stored in a simple and structured sampleshe
 Given a bag of fastq reads:
 
 ```bash
-cd chapter_02_metadata
+cd metadata
 tree data/reads
 ```
 
