@@ -35,10 +35,10 @@ Edit this file to specify the input files as script parameters. Using this notat
  * Define the default parameters (1)
  */
 
-params.genome     = "$baseDir/data/genome.fa" // (2)!
-params.variants   = "$baseDir/data/known_variants.vcf.gz"
-params.blacklist  = "$baseDir/data/blacklist.bed"
-params.reads      = "$baseDir/data/reads/ENCSR000COQ1_{1,2}.fastq.gz" // (3)!
+params.genome     = "${baseDir}/data/genome.fa" // (2)!
+params.variants   = "${baseDir}/data/known_variants.vcf.gz"
+params.blacklist  = "${baseDir}/data/blacklist.bed"
+params.reads      = "${baseDir}/data/reads/ENCSR000COQ1_{1,2}.fastq.gz" // (3)!
 params.results    = "results" // (4)!
 ```
 
@@ -246,7 +246,7 @@ The next process should have the following structure:
 
         script:
         """
-        picard CreateSequenceDictionary R= $genome O= ${genome.baseName}.dict
+        picard CreateSequenceDictionary R= ${genome} O= ${genome.baseName}.dict
         """
     }
 
@@ -280,7 +280,7 @@ The next process should have the following structure:
 
             script:
             """
-            picard CreateSequenceDictionary R= $genome O= ${genome.baseName}.dict
+            picard CreateSequenceDictionary R= ${genome} O= ${genome.baseName}.dict
             """
         }
 
@@ -430,7 +430,7 @@ The next process has the following structure:
 
         script:
         """
-        vcftools --gzvcf $variantsFile -c \
+        vcftools --gzvcf ${variantsFile} -c \
                  --exclude-bed ${blacklisted} \
                  --recode | bgzip -c \
                  > ${variantsFile.baseName}.filtered.recode.vcf.gz
@@ -453,7 +453,7 @@ The next process has the following structure:
     Broken down, here is what the script is doing:
 
     ```bash
-    vcftools --gzvcf $variantsFile -c \ # (1)!
+    vcftools --gzvcf ${variantsFile} -c \ # (1)!
              --exclude-bed ${blacklisted} \ # (2)!
              --recode | bgzip -c \
              > ${variantsFile.baseName}.filtered.recode.vcf.gz # (3)!
@@ -461,8 +461,8 @@ The next process has the following structure:
     tabix ${variantsFile.baseName}.filtered.recode.vcf.gz # (4)!
     ```
 
-    1.   The `$variantsFile` variable contains the path to the file with the known variants
-    2.   The `$blacklisted` variable contains the path to the file with the genomic locations which are known to produce artifacts and spurious variants
+    1.   The `variantsFile` variable contains the path to the file with the known variants
+    2.   The `blacklisted` variable contains the path to the file with the genomic locations which are known to produce artifacts and spurious variants
     3.   The `>` symbol is used to redirect the output to the file specified after it
     4.   `tabix` is used here to create the second output that we want to consider from this process
 
@@ -492,7 +492,7 @@ The next process has the following structure:
 
             script:
             """
-            vcftools --gzvcf $variantsFile -c \
+            vcftools --gzvcf ${variantsFile} -c \
                      --exclude-bed ${blacklisted} \
                      --recode | bgzip -c \
                      > ${variantsFile.baseName}.filtered.recode.vcf.gz
@@ -560,8 +560,8 @@ The process has the following structure:
         script:
         """
         # ngs-nf-dev Align reads to genome
-        STAR --genomeDir $genomeDir \
-             --readFilesIn $reads \
+        STAR --genomeDir ${genomeDir} \
+             --readFilesIn ${reads} \
              --runThreadN ${task.cpus} \
              --readFilesCommand zcat \
              --outFilterType BySJout \
@@ -573,14 +573,14 @@ The process has the following structure:
         mkdir genomeDir
         STAR --runMode genomeGenerate \
              --genomeDir genomeDir \
-             --genomeFastaFiles $genome \
+             --genomeFastaFiles ${genome} \
              --sjdbFileChrStartEnd SJ.out.tab \
              --sjdbOverhang 75 \
              --runThreadN ${task.cpus}
 
         # Final read alignments
         STAR --genomeDir genomeDir \
-             --readFilesIn $reads \
+             --readFilesIn ${reads} \
              --runThreadN ${task.cpus} \
              --readFilesCommand zcat \
              --outFilterType BySJout \
@@ -588,7 +588,7 @@ The process has the following structure:
              --alignSJDBoverhangMin 1 \
              --outFilterMismatchNmax 999 \
              --outSAMtype BAM SortedByCoordinate \
-             --outSAMattrRGline ID:$replicateId LB:library PL:illumina PU:machine SM:GM12878
+             --outSAMattrRGline ID:${replicateId} LB:library PL:illumina PU:machine SM:GM12878
 
         # Index the BAM file
         samtools index Aligned.sortedByCoord.out.bam
@@ -632,8 +632,8 @@ The process has the following structure:
             script:
             """
             # ngs-nf-dev Align reads to genome
-            STAR --genomeDir $genomeDir \
-                 --readFilesIn $reads \
+            STAR --genomeDir ${genomeDir} \
+                 --readFilesIn ${reads} \
                  --runThreadN ${task.cpus} \
                  --readFilesCommand zcat \
                  --outFilterType BySJout \
@@ -645,14 +645,14 @@ The process has the following structure:
             mkdir genomeDir
             STAR --runMode genomeGenerate \
                  --genomeDir genomeDir \
-                 --genomeFastaFiles $genome \
+                 --genomeFastaFiles ${genome} \
                  --sjdbFileChrStartEnd SJ.out.tab \
                  --sjdbOverhang 75 \
                  --runThreadN ${task.cpus}
 
             # Final read alignments
             STAR --genomeDir genomeDir \
-                 --readFilesIn $reads \
+                 --readFilesIn ${reads} \
                  --runThreadN ${task.cpus} \
                  --readFilesCommand zcat \
                  --outFilterType BySJout \
@@ -660,7 +660,7 @@ The process has the following structure:
                  --alignSJDBoverhangMin 1 \
                  --outFilterMismatchNmax 999 \
                  --outSAMtype BAM SortedByCoordinate \
-                 --outSAMattrRGline ID:$replicateId LB:library PL:illumina PU:machine SM:GM12878
+                 --outSAMattrRGline ID:${replicateId} LB:library PL:illumina PU:machine SM:GM12878
 
             # Index the BAM file
             samtools index Aligned.sortedByCoord.out.bam
@@ -716,7 +716,7 @@ The next process has the following structure:
 
     process rnaseq_gatk_splitNcigar {
         container 'quay.io/broadinstitute/gotc-prod-gatk:1.0.0-4.1.8.0-1626439571'
-        tag "$replicateId"
+        tag "${replicateId}"
 
         input:
         path genome
@@ -731,7 +731,7 @@ The next process has the following structure:
         """
         # SplitNCigarReads and reassign mapping qualities
         java -jar /usr/gitc/GATK35.jar -T SplitNCigarReads \
-                                       -R $genome -I $bam \
+                                       -R ${genome} -I ${bam} \
                                        -o split.bam \
                                        -rf ReassignOneMappingQuality \
                                        -RMQF 255 -RMQT 60 \
@@ -774,7 +774,7 @@ The next process has the following structure:
 
         process rnaseq_gatk_splitNcigar {
             container 'quay.io/broadinstitute/gotc-prod-gatk:1.0.0-4.1.8.0-1626439571'
-            tag "$replicateId"
+            tag "${replicateId}"
 
             input:
             path genome
@@ -789,7 +789,7 @@ The next process has the following structure:
             """
             # SplitNCigarReads and reassign mapping qualities
             java -jar /usr/gitc/GATK35.jar -T SplitNCigarReads \
-                                           -R $genome -I $bam \
+                                           -R ${genome} -I ${bam} \
                                            -o split.bam \
                                            -rf ReassignOneMappingQuality \
                                            -RMQF 255 -RMQT 60 \
@@ -858,7 +858,7 @@ The next process has the following structure:
 
     process rnaseq_gatk_recalibrate {
         container 'quay.io/biocontainers/mulled-v2-aa1d7bddaee5eb6c4cbab18f8a072e3ea7ec3969:f963c36fd770e89d267eeaa27cad95c1c3dbe660-0'
-        tag "$replicateId"
+        tag "${replicateId}"
 
         input:
         path genome
@@ -922,9 +922,6 @@ The next process has the following structure:
     }
     ```
 
-    -   The unique bam file
-    -   The index of the unique bam file (bam file name + `.bai`)
-
     ??? solution
 
 
@@ -935,7 +932,7 @@ The next process has the following structure:
 
         process rnaseq_gatk_recalibrate {
             container 'quay.io/biocontainers/mulled-v2-aa1d7bddaee5eb6c4cbab18f8a072e3ea7ec3969:f963c36fd770e89d267eeaa27cad95c1c3dbe660-0'
-            tag "$replicateId"
+            tag "${replicateId}"
 
             input:
             path genome
@@ -1045,7 +1042,7 @@ The next process has the following structure:
 
     process rnaseq_call_variants {
         container 'quay.io/broadinstitute/gotc-prod-gatk:1.0.0-4.1.8.0-1626439571'
-        tag "$sampleId"
+        tag "${sampleId}"
 
         input:
         path genome
@@ -1062,14 +1059,14 @@ The next process has the following structure:
 
         # Variant calling
         java -jar /usr/gitc/GATK35.jar -T HaplotypeCaller \
-                                       -R $genome -I bam.list \
+                                       -R ${genome} -I bam.list \
                                        -dontUseSoftClippedBases \
                                        -stand_call_conf 20.0 \
                                        -o output.gatk.vcf.gz
 
         # Variant filtering
         java -jar /usr/gitc/GATK35.jar -T VariantFiltration \
-                                       -R $genome -V output.gatk.vcf.gz \
+                                       -R ${genome} -V output.gatk.vcf.gz \
                                        -window 35 -cluster 3 \
                                        -filterName FS -filter "FS > 30.0" \
                                        -filterName QD -filter "QD < 2.0" \
@@ -1113,7 +1110,7 @@ The next process has the following structure:
 
         process rnaseq_call_variants {
             container 'quay.io/broadinstitute/gotc-prod-gatk:1.0.0-4.1.8.0-1626439571'
-            tag "$sampleId"
+            tag "${sampleId}"
 
             input:
             path genome
@@ -1130,14 +1127,14 @@ The next process has the following structure:
 
             # Variant calling
             java -jar /usr/gitc/GATK35.jar -T HaplotypeCaller \
-                                           -R $genome -I bam.list \
+                                           -R ${genome} -I bam.list \
                                            -dontUseSoftClippedBases \
                                            -stand_call_conf 20.0 \
                                            -o output.gatk.vcf.gz
 
             # Variant filtering
             java -jar /usr/gitc/GATK35.jar -T VariantFiltration \
-                                           -R $genome -V output.gatk.vcf.gz \
+                                           -R ${genome} -V output.gatk.vcf.gz \
                                            -window 35 -cluster 3 \
                                            -filterName FS -filter "FS > 30.0" \
                                            -filterName QD -filter "QD < 2.0" \
@@ -1226,8 +1223,8 @@ You should implement two processes having the following structure:
 
     process post_process_vcf {
         container 'quay.io/biocontainers/mulled-v2-b9358559e3ae3b9d7d8dbf1f401ae1fcaf757de3:ac05763cf181a5070c2fdb9bb5461f8d08f7b93b-0'
-        tag "$sampleId"
-        publishDir "$params.results/$sampleId" // (1)!
+        tag "${sampleId}"
+        publishDir "${params.results}/${sampleId}" // (1)!
 
         input:
         tuple val(sampleId), path('final.vcf')
@@ -1246,8 +1243,8 @@ You should implement two processes having the following structure:
 
     process prepare_vcf_for_ase {
         container 'cbcrg/callings-with-gatk:latest'
-        tag "$sampleId"
-        publishDir "$params.results/$sampleId"
+        tag "${sampleId}"
+        publishDir "${params.results}/${sampleId}"
 
         input:
         tuple val(sampleId), path('final.vcf'), path('commonSNPs.diff.sites_in_files')
@@ -1323,8 +1320,8 @@ You should implement two processes having the following structure:
 
         process post_process_vcf {
             container 'quay.io/biocontainers/mulled-v2-b9358559e3ae3b9d7d8dbf1f401ae1fcaf757de3:ac05763cf181a5070c2fdb9bb5461f8d08f7b93b-0'
-            tag "$sampleId"
-            publishDir "$params.results/$sampleId"
+            tag "${sampleId}"
+            publishDir "${params.results}/${sampleId}"
 
             input:
             tuple val(sampleId), path('final.vcf')
@@ -1343,8 +1340,8 @@ You should implement two processes having the following structure:
 
         process prepare_vcf_for_ase {
             container 'cbcrg/callings-with-gatk:latest'
-            tag "$sampleId"
-            publishDir "$params.results/$sampleId"
+            tag "${sampleId}"
+            publishDir "${params.results}/${sampleId}"
 
             input:
             tuple val(sampleId), path('final.vcf'), path('commonSNPs.diff.sites_in_files')
@@ -1540,8 +1537,8 @@ The next process has the following structure:
 
         process ASE_knownSNPs {
             container 'quay.io/broadinstitute/gotc-prod-gatk:1.0.0-4.1.8.0-1626439571'
-            tag "$sampleId"
-            publishDir "$params.results/$sampleId"
+            tag "${sampleId}"
+            publishDir "${params.results}/${sampleId}"
 
             input:
             path genome
