@@ -80,7 +80,7 @@ extra:
             as to measure the effectiveness of our documentation and whether users
             find what they're searching for. With your consent, you're helping us to
             make our documentation better.
-    # Overriden in docs/assets/overrides/partials/social.html
+    # Overridden in docs/assets/overrides/partials/social.html
     # Still needs to be set to something here so that the partial is used
     social:
         - icon: fontawesome/brands/twitter
