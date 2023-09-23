@@ -425,7 +425,7 @@ The next process has the following structure:
         path blacklisted
 
         output:
-        tuple path("${variantsFile.baseName}.filtered.recode.vcf.gz"), \
+        tuple path("${variantsFile.baseName}.filtered.recode.vcf.gz"),
               path("${variantsFile.baseName}.filtered.recode.vcf.gz.tbi")
 
         script:
@@ -483,12 +483,12 @@ The next process has the following structure:
             container 'quay.io/biocontainers/mulled-v2-b9358559e3ae3b9d7d8dbf1f401ae1fcaf757de3:ac05763cf181a5070c2fdb9bb5461f8d08f7b93b-0'
 
             input:
-            path variantsFile
-            path blacklisted
+            path variantsFile // (1)!
+            path blacklisted // (2)!
 
-            output:
-            tuple path("${variantsFile.baseName}.filtered.recode.vcf.gz"), \
-                  path("${variantsFile.baseName}.filtered.recode.vcf.gz.tbi")
+            output: // (3)!
+            tuple path("${variantsFile.baseName}.filtered.recode.vcf.gz"), // (4)!
+                  path("${variantsFile.baseName}.filtered.recode.vcf.gz.tbi") // (5)!
 
             script:
             """
@@ -511,11 +511,11 @@ The next process has the following structure:
         }
         ```
 
-        - Take as input the variants file, assigning the name `${variantsFile}`.
-        - Take as input the blacklisted file, assigning the name `${blacklisted}`.
-        - Out a tuple of two files
-        - Defines the name of the first output file.
-        - Generates the second output file (with `.tbi` suffix).
+        1. Take as input the variants file, assigning the name `variantsFile`.
+        2. Take as input the blacklisted file, assigning the name `blacklisted`.
+        3. Out a tuple of two files
+        4. Defines the name of the first output file.
+        5. Generates the second output file (with `.tbi` suffix).
 
 Congratulations! Part 1 is now complete.
 
@@ -541,7 +541,7 @@ The process has the following structure:
 
     You must fill the `BLANK` space with the correct process call and inputs.
 
-    ```groovy linenums="1" hl_lines="62"
+    ```groovy linenums="1" hl_lines="66"
     /*
      * Process 2: Align RNA-Seq reads to the genome with STAR
      */
@@ -555,7 +555,9 @@ The process has the following structure:
         tuple val(replicateId), path(reads)
 
         output:
-        tuple val(replicateId), path('Aligned.sortedByCoord.out.bam'), path('Aligned.sortedByCoord.out.bam.bai')
+        tuple val(replicateId),
+              path('Aligned.sortedByCoord.out.bam'),
+              path('Aligned.sortedByCoord.out.bam.bai')
 
         script:
         """
@@ -569,7 +571,8 @@ The process has the following structure:
              --alignSJDBoverhangMin 1 \
              --outFilterMismatchNmax 999
 
-        # 2nd pass (improve alignments using table of splice junctions and create a new index)
+        # 2nd pass (improve alignments using table of splice
+        # junctions and create a new index)
         mkdir genomeDir
         STAR --runMode genomeGenerate \
              --genomeDir genomeDir \
@@ -588,7 +591,8 @@ The process has the following structure:
              --alignSJDBoverhangMin 1 \
              --outFilterMismatchNmax 999 \
              --outSAMtype BAM SortedByCoordinate \
-             --outSAMattrRGline ID:${replicateId} LB:library PL:illumina PU:machine SM:GM12878
+             --outSAMattrRGline ID:${replicateId} LB:library PL:illumina \
+                                PU:machine SM:GM12878
 
         # Index the BAM file
         samtools index Aligned.sortedByCoord.out.bam
@@ -613,7 +617,7 @@ The process has the following structure:
 
     ??? solution
 
-        ```groovy linenums="1" hl_lines="62-64"
+        ```groovy linenums="1" hl_lines="66-68"
         /*
          * Process 2: Align RNA-Seq reads to the genome with STAR
          */
@@ -627,7 +631,9 @@ The process has the following structure:
             tuple val(replicateId), path(reads)
 
             output:
-            tuple val(replicateId), path('Aligned.sortedByCoord.out.bam'), path('Aligned.sortedByCoord.out.bam.bai')
+            tuple val(replicateId),
+                  path('Aligned.sortedByCoord.out.bam'),
+                  path('Aligned.sortedByCoord.out.bam.bai')
 
             script:
             """
@@ -641,7 +647,8 @@ The process has the following structure:
                  --alignSJDBoverhangMin 1 \
                  --outFilterMismatchNmax 999
 
-            # 2nd pass (improve alignments using table of splice junctions and create a new index)
+            # 2nd pass (improve alignments using table of splice
+            # junctions and create a new index)
             mkdir genomeDir
             STAR --runMode genomeGenerate \
                  --genomeDir genomeDir \
@@ -660,7 +667,8 @@ The process has the following structure:
                  --alignSJDBoverhangMin 1 \
                  --outFilterMismatchNmax 999 \
                  --outSAMtype BAM SortedByCoordinate \
-                 --outSAMattrRGline ID:${replicateId} LB:library PL:illumina PU:machine SM:GM12878
+                 --outSAMattrRGline ID:${replicateId} LB:library PL:illumina \
+                                    PU:machine SM:GM12878
 
             # Index the BAM file
             samtools index Aligned.sortedByCoord.out.bam
@@ -777,13 +785,13 @@ The next process has the following structure:
             tag "${replicateId}"
 
             input:
-            path genome
-            path index
-            path genome_dict
-            tuple val(replicateId), path(bam), path(bai)
+            path genome // (2)!
+            path index // (3)!
+            path genome_dict // (4)!
+            tuple val(replicateId), path(bam), path(bai) // (5)!
 
             output:
-            tuple val(replicateId), path('split.bam'), path('split.bai')
+            tuple val(replicateId), path('split.bam'), path('split.bai') // (6)!
 
             script:
             """
@@ -818,14 +826,14 @@ The next process has the following structure:
         }
         ```
 
-        - [`tag`](https://www.nextflow.io/docs/latest/process.html#tag) line using the replicate id as the tag.
-        - the genome fasta file
-        - the genome index in the output channel from the `prepare_genome_samtools` process
-        - the genome dictionary in the output channel from the `prepare_genome_picard` process
-        - the set containing the aligned reads in the output channel from the `rnaseq_mapping_star` process
-        - a set containing the sample id, the split bam file and the split bam index
-        - specifies the input file names `$genome` and `$bam` to GATK
-        - specifies the output file names to GATK
+        1. [`tag`](https://www.nextflow.io/docs/latest/process.html#tag) line using the replicate id as the tag.
+        2. the genome fasta file
+        3. the genome index in the output channel from the `prepare_genome_samtools` process
+        4. the genome dictionary in the output channel from the `prepare_genome_picard` process
+        5. the tuple containing the aligned reads in the output channel from the `rnaseq_mapping_star` process
+        6. a tuple containing the sample id, the split bam file and the split bam index
+        7. specifies the input file names `genome` and `bam` to GATK
+        8. specifies the output file names to GATK
 
 Next we perform a Base Quality Score Recalibration step using GATK.
 
@@ -851,7 +859,7 @@ The next process has the following structure:
 
     Your aim is to replace the `BLANK` placeholder with the the correct process call.
 
-    ```groovy linenums="1" hl_lines="67"
+    ```groovy linenums="1" hl_lines="69"
     /*
      * Process 4: GATK Recalibrate
      */
@@ -868,7 +876,9 @@ The next process has the following structure:
         tuple path(prepared_variants_file), path(prepared_variants_file_index)
 
         output:
-        tuple val(sampleId), path("${replicateId}.final.uniq.bam"), path("${replicateId}.final.uniq.bam.bai")
+        tuple val(sampleId),
+              path("${replicateId}.final.uniq.bam"),
+              path("${replicateId}.final.uniq.bam.bai")
 
         script:
         sampleId = replicateId.replaceAll(/[12]$/,'')
@@ -893,8 +903,8 @@ The next process has the following structure:
               -o final.bam
 
         # Select only unique alignments, no multimaps
-        (samtools view -H final.bam; samtools view final.bam| grep -w 'NH:i:1') \
-        |samtools view -Sb -  > ${replicateId}.final.uniq.bam
+        (samtools view -H final.bam; samtools view final.bam | \
+        grep -w 'NH:i:1') | samtools view -Sb -  > ${replicateId}.final.uniq.bam
 
         # Index BAM files
         samtools index ${replicateId}.final.uniq.bam
@@ -925,7 +935,7 @@ The next process has the following structure:
     ??? solution
 
 
-        ```groovy linenums="1" hl_lines="67-71"
+        ```groovy linenums="1" hl_lines="70-74"
         /*
          * Process 4: GATK Recalibrate
          */
@@ -935,17 +945,20 @@ The next process has the following structure:
             tag "${replicateId}"
 
             input:
-            path genome
-            path index
-            path dict
-            tuple val(replicateId), path(bam), path(bai)
-            tuple path(prepared_variants_file), path(prepared_variants_file_index)
+            path genome // (1)!
+            path index // (2)!
+            path dict // (3)!
+            tuple val(replicateId), path(bam), path(bai) // (4)!
+            tuple path(prepared_variants_file), // (5)!
+                  path(prepared_variants_file_index)
 
-            output:
-            tuple val(sampleId), path("${replicateId}.final.uniq.bam"), path("${replicateId}.final.uniq.bam.bai")
+            output: // (6)!
+            tuple val(sampleId),
+                  path("${replicateId}.final.uniq.bam"),
+                  path("${replicateId}.final.uniq.bam.bai")
 
             script:
-            sampleId = replicateId.replaceAll(/[12]$/,'')
+            sampleId = replicateId.replaceAll(/[12]$/,'') // (7)!
             """
             # Indel Realignment and Base Recalibration
             gatk3 -T BaseRecalibrator \
@@ -967,8 +980,8 @@ The next process has the following structure:
                   -o final.bam
 
             # Select only unique alignments, no multimaps
-            (samtools view -H final.bam; samtools view final.bam| grep -w 'NH:i:1') \
-            |samtools view -Sb -  > ${replicateId}.final.uniq.bam
+            (samtools view -H final.bam; samtools view final.bam | \
+            grep -w 'NH:i:1') | samtools view -Sb -  > ${replicateId}.final.uniq.bam
 
             # Index BAM files
             samtools index ${replicateId}.final.uniq.bam
@@ -1000,13 +1013,13 @@ The next process has the following structure:
         }
         ```
 
-        - the genome fasta file.
-        - the genome index in the output channel from the `prepare_genome_samtools` process.
-        - the genome dictionary in the output channel from the `prepare_genome_picard` process.
-        - the set containing the split reads in the output channel from the `rnaseq_gatk_splitNcigar` process.
-        - the set containing the filtered/recoded VCF file and the tab index (TBI) file in the output channel from the `prepare_vcf_file` process.
-        - the set containing the replicate id, the unique bam file and the unique bam index file which goes into two channels.
-        - line specifying the filename of the output bam file
+        1. the genome fasta file.
+        2. the genome index in the output channel from the `prepare_genome_samtools` process.
+        3. the genome dictionary in the output channel from the `prepare_genome_picard` process.
+        4. the tupe containing the split reads in the output channel from the `rnaseq_gatk_splitNcigar` process.
+        5. the tuple containing the filtered/recoded VCF file and the tab index (TBI) file in the output channel from the `prepare_vcf_file` process.
+        6. the tuple containing the replicate id, the unique bam file and the unique bam index file which goes into two channels.
+        7. line specifying the filename of the output bam file
 
 Now we are ready to perform the variant calling with GATK.
 
@@ -1110,16 +1123,16 @@ The next process has the following structure:
 
         process rnaseq_call_variants {
             container 'quay.io/broadinstitute/gotc-prod-gatk:1.0.0-4.1.8.0-1626439571'
-            tag "${sampleId}"
+            tag "${sampleId}" // (1)!
 
             input:
-            path genome
-            path index
-            path dict
-            tuple val(sampleId), path(bam), path(bai)
+            path genome // (2)!
+            path index // (3)!
+            path dict // (4)!
+            tuple val(sampleId), path(bam), path(bai) // (5)!
 
             output:
-            tuple val(sampleId), path('final.vcf')
+            tuple val(sampleId), path('final.vcf') // (6)!
 
             script:
             """
@@ -1165,12 +1178,10 @@ The next process has the following structure:
                                     rnaseq_gatk_splitNcigar.out,
                                     prepare_vcf_file.out)
 
-            // New channel to aggregate bam from different replicates
-            // into sample level.
             rnaseq_gatk_recalibrate
                 .out
                 | groupTuple
-                | set { recalibrated_samples }
+                | set { recalibrated_samples } // (7)!
 
             rnaseq_call_variants(params.genome,
                                  prepare_genome_samtools.out,
@@ -1179,13 +1190,13 @@ The next process has the following structure:
         }
         ```
 
-        -   [`tag`](https://www.nextflow.io/docs/latest/process.html#tag) line with the using the sample id as the tag.
-        -   the genome fasta file.
-        -   the genome index in the output channel from the `prepare_genome_samtools` process.
-        -   the genome dictionary in the output channel from the `prepare_genome_picard` process.
-        -   the sets grouped by sampleID in the output channel from the `rnaseq_gatk_recalibrate` process.
-        -   the set containing the sample ID and final VCF file.
-        -   the line specifying the name resulting final VCF file.
+        1.   [`tag`](https://www.nextflow.io/docs/latest/process.html#tag) line with the using the sample id as the tag.
+        2.   the genome fasta file.
+        3.   the genome index in the output channel from the `prepare_genome_samtools` process.
+        4.   the genome dictionary in the output channel from the `prepare_genome_picard` process.
+        5.   the tuples grouped by sampleID in the output channel from the `rnaseq_gatk_recalibrate` process.
+        6.   the tuple containing the sample ID and final VCF file.
+        7.   new channel to aggregate the `bam` files from different replicates into sample level.
 
 ## Processes 6A and 6B: ASE & RNA Editing
 
@@ -1216,7 +1227,7 @@ You should implement two processes having the following structure:
 
     You must have the output of process 6A become the input of process 6B.
 
-    ```groovy linenums="1" hl_lines="88"
+    ```groovy linenums="1" hl_lines="96"
     /*
      * Processes 6: ASE & RNA Editing
      */
@@ -1228,16 +1239,22 @@ You should implement two processes having the following structure:
 
         input:
         tuple val(sampleId), path('final.vcf')
-        tuple path('filtered.recode.vcf.gz'), path('filtered.recode.vcf.gz.tbi')
+        tuple path('filtered.recode.vcf.gz'),
+              path('filtered.recode.vcf.gz.tbi')
 
         output:
-        tuple val(sampleId), path('final.vcf'), path('commonSNPs.diff.sites_in_files')
+        tuple val(sampleId),
+              path('final.vcf'),
+              path('commonSNPs.diff.sites_in_files')
 
         script:
         '''
-        grep -v '#' final.vcf | awk '$7~/PASS/' |perl -ne 'chomp($_); ($dp)=$_=~/DP\\=(\\d+)\\;/; if($dp>=8){print $_."\\n"};' > result.DP8.vcf
+        grep -v '#' final.vcf | awk '$7~/PASS/' | perl -ne 'chomp($_); \
+             ($dp)=$_=~/DP\\=(\\d+)\\;/; if($dp>=8){print $_."\\n"};' \
+             > result.DP8.vcf
 
-        vcftools --vcf result.DP8.vcf --gzdiff filtered.recode.vcf.gz  --diff-site --out commonSNPs
+        vcftools --vcf result.DP8.vcf --gzdiff filtered.recode.vcf.gz \
+                 --diff-site --out commonSNPs
         '''
     }
 
@@ -1247,22 +1264,26 @@ You should implement two processes having the following structure:
         publishDir "${params.results}/${sampleId}"
 
         input:
-        tuple val(sampleId), path('final.vcf'), path('commonSNPs.diff.sites_in_files')
+        tuple val(sampleId),
+              path('final.vcf'),
+              path('commonSNPs.diff.sites_in_files')
 
         output:
         tuple val(sampleId), path('known_snps.vcf'), emit: vcf_for_ASE
-        path 'AF.histogram.pdf'                    , emit: gghist_pdfs
+        path 'AF.histogram.pdf'     , emit: gghist_pdfs
 
         script:
         '''
-        awk 'BEGIN{OFS="\t"} $4~/B/{print $1,$2,$3}' commonSNPs.diff.sites_in_files  > test.bed
+        awk 'BEGIN{OFS="\t"} $4~/B/{print $1,$2,$3}' \
+            commonSNPs.diff.sites_in_files  > test.bed
 
-        vcftools --vcf final.vcf --bed test.bed --recode --keep-INFO-all --stdout > known_snps.vcf
+        vcftools --vcf final.vcf --bed test.bed --recode --keep-INFO-all \
+                 --stdout > known_snps.vcf
 
         grep -v '#'  known_snps.vcf | awk -F '\\t' '{print $10}' \
-                    |awk -F ':' '{print $2}'|perl -ne 'chomp($_); \
+                    | awk -F ':' '{print $2}' | perl -ne 'chomp($_); \
                     @v=split(/\\,/,$_); if($v[0]!=0 ||$v[1] !=0)\
-                    {print  $v[1]/($v[1]+$v[0])."\\n"; }' |awk '$1!=1' \
+                    {print  $v[1]/($v[1]+$v[0])."\\n"; }' | awk '$1!=1' \
                     >AF.4R
 
         gghist.R -i AF.4R -o AF.histogram.pdf
@@ -1292,8 +1313,6 @@ You should implement two processes having the following structure:
                                 rnaseq_gatk_splitNcigar.out,
                                 prepare_vcf_file.out)
 
-        // New channel to aggregate bam from different replicates
-        // into sample level.
         rnaseq_gatk_recalibrate
             .out
             | groupTuple
@@ -1313,7 +1332,7 @@ You should implement two processes having the following structure:
     ??? solution
 
 
-        ```groovy linenums="1" hl_lines="88-90"
+        ```groovy linenums="1" hl_lines="96-98"
         /*
          * Processes 6: ASE & RNA Editing
          */
@@ -1325,16 +1344,22 @@ You should implement two processes having the following structure:
 
             input:
             tuple val(sampleId), path('final.vcf')
-            tuple path('filtered.recode.vcf.gz'), path('filtered.recode.vcf.gz.tbi')
+            tuple path('filtered.recode.vcf.gz'),
+                  path('filtered.recode.vcf.gz.tbi')
 
             output:
-            tuple val(sampleId), path('final.vcf'), path('commonSNPs.diff.sites_in_files')
+            tuple val(sampleId),
+                  path('final.vcf'),
+                  path('commonSNPs.diff.sites_in_files')
 
             script:
             '''
-            grep -v '#' final.vcf | awk '$7~/PASS/' |perl -ne 'chomp($_); ($dp)=$_=~/DP\\=(\\d+)\\;/; if($dp>=8){print $_."\\n"};' > result.DP8.vcf
+            grep -v '#' final.vcf | awk '$7~/PASS/' | perl -ne 'chomp($_); \
+                    ($dp)=$_=~/DP\\=(\\d+)\\;/; if($dp>=8){print $_."\\n"};' \
+                    > result.DP8.vcf
 
-            vcftools --vcf result.DP8.vcf --gzdiff filtered.recode.vcf.gz  --diff-site --out commonSNPs
+            vcftools --vcf result.DP8.vcf --gzdiff filtered.recode.vcf.gz \
+                     --diff-site --out commonSNPs
             '''
         }
 
@@ -1344,7 +1369,9 @@ You should implement two processes having the following structure:
             publishDir "${params.results}/${sampleId}"
 
             input:
-            tuple val(sampleId), path('final.vcf'), path('commonSNPs.diff.sites_in_files')
+            tuple val(sampleId),
+                  path('final.vcf'),
+                  path('commonSNPs.diff.sites_in_files')
 
             output:
             tuple val(sampleId), path('known_snps.vcf'), emit: vcf_for_ASE
@@ -1352,14 +1379,16 @@ You should implement two processes having the following structure:
 
             script:
             '''
-            awk 'BEGIN{OFS="\t"} $4~/B/{print $1,$2,$3}' commonSNPs.diff.sites_in_files  > test.bed
+            awk 'BEGIN{OFS="\t"} $4~/B/{print $1,$2,$3}' \
+                commonSNPs.diff.sites_in_files  > test.bed
 
-            vcftools --vcf final.vcf --bed test.bed --recode --keep-INFO-all --stdout > known_snps.vcf
+            vcftools --vcf final.vcf --bed test.bed --recode --keep-INFO-all \
+                     --stdout > known_snps.vcf
 
             grep -v '#'  known_snps.vcf | awk -F '\\t' '{print $10}' \
-                        |awk -F ':' '{print $2}'|perl -ne 'chomp($_); \
+                        | awk -F ':' '{print $2}' | perl -ne 'chomp($_); \
                         @v=split(/\\,/,$_); if($v[0]!=0 ||$v[1] !=0)\
-                        {print  $v[1]/($v[1]+$v[0])."\\n"; }' |awk '$1!=1' \
+                        {print  $v[1]/($v[1]+$v[0])."\\n"; }' | awk '$1!=1' \
                         >AF.4R
 
             gghist.R -i AF.4R -o AF.histogram.pdf
@@ -1389,8 +1418,6 @@ You should implement two processes having the following structure:
                                     rnaseq_gatk_splitNcigar.out,
                                     prepare_vcf_file.out)
 
-            // New channel to aggregate bam from different replicates
-            // into sample level.
             rnaseq_gatk_recalibrate
                 .out
                 | groupTuple
@@ -1452,7 +1479,7 @@ The final step is the GATK ASEReadCounter.
 
     ??? solution
 
-        ```groovy linenums="1" hl_lines="41-43"
+        ```groovy linenums="1" hl_lines="38-41"
         workflow {
             reads_ch = Channel.fromFilePairs(params.reads)
 
@@ -1476,8 +1503,6 @@ The final step is the GATK ASEReadCounter.
                                     rnaseq_gatk_splitNcigar.out,
                                     prepare_vcf_file.out)
 
-            // New channel to aggregate bam from different replicates
-            // into sample level.
             rnaseq_gatk_recalibrate
                 .out
                 | groupTuple
@@ -1530,7 +1555,7 @@ The next process has the following structure:
 
     ??? solution
 
-        ```groovy linenums="1" hl_lines="5-29 75-78"
+        ```groovy linenums="1" hl_lines="5-29 73-76"
         /*
          * Processes 7: Allele-Specific Expression analysis with GATK ASEReadCounter
          */
@@ -1584,8 +1609,6 @@ The next process has the following structure:
                                     rnaseq_gatk_splitNcigar.out,
                                     prepare_vcf_file.out)
 
-            // New channel to aggregate bam from different replicates
-            // into sample level.
             rnaseq_gatk_recalibrate
                 .out
                 | groupTuple
