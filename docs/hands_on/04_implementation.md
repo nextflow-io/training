@@ -1418,7 +1418,7 @@ The final step is the GATK ASEReadCounter.
 
     Before we perform the GATK ASEReadCounter process, we must group the data for allele-specific expression. To do this we must combine channels.
 
-    The `bam_for_ASE_ch` channel emites tuples having the following structure, holding the final BAM/BAI files:
+    The output channel of the `rnaseq_gatk_recalibrate` process (`rnaseq_gatk_recalibrate.out`) emites tuples having the following structure, holding the final BAM/BAI files:
 
     ```bash
     < sample_id, file_bam, file_bai >
