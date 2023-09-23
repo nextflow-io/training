@@ -82,7 +82,7 @@ process prepare_vcf_file {
     path blacklisted
 
     output:
-    tuple path("${variantsFile.baseName}.filtered.recode.vcf.gz"), \
+    tuple path("${variantsFile.baseName}.filtered.recode.vcf.gz"),
           path("${variantsFile.baseName}.filtered.recode.vcf.gz.tbi")
 
     script:
@@ -109,7 +109,9 @@ process rnaseq_mapping_star {
     tuple val(replicateId), path(reads)
 
     output:
-    tuple val(replicateId), path('Aligned.sortedByCoord.out.bam'), path('Aligned.sortedByCoord.out.bam.bai')
+    tuple val(replicateId),
+          path('Aligned.sortedByCoord.out.bam'),
+          path('Aligned.sortedByCoord.out.bam.bai')
 
     script:
     """
@@ -123,7 +125,8 @@ process rnaseq_mapping_star {
          --alignSJDBoverhangMin 1 \
          --outFilterMismatchNmax 999
 
-    # 2nd pass (improve alignments using table of splice junctions and create a new index)
+    # 2nd pass (improve alignments using table of splice
+    # junctions and create a new index)
     mkdir genomeDir
     STAR --runMode genomeGenerate \
          --genomeDir genomeDir \
@@ -142,7 +145,8 @@ process rnaseq_mapping_star {
          --alignSJDBoverhangMin 1 \
          --outFilterMismatchNmax 999 \
          --outSAMtype BAM SortedByCoordinate \
-         --outSAMattrRGline ID:${replicateId} LB:library PL:illumina PU:machine SM:GM12878
+         --outSAMattrRGline ID:${replicateId} LB:library PL:illumina \
+                            PU:machine SM:GM12878
 
     # Index the BAM file
     samtools index Aligned.sortedByCoord.out.bam
@@ -161,7 +165,9 @@ process rnaseq_gatk_splitNcigar {
     path genome
     path index
     path genome_dict
-    tuple val(replicateId), path(bam), path(bai)
+    tuple val(replicateId),
+          path(bam),
+          path(bai)
 
     output:
     tuple val(replicateId), path('split.bam'), path('split.bai')
@@ -196,7 +202,9 @@ process rnaseq_gatk_recalibrate {
     tuple path(prepared_variants_file), path(prepared_variants_file_index)
 
     output:
-    tuple val(sampleId), path("${replicateId}.final.uniq.bam"), path("${replicateId}.final.uniq.bam.bai")
+    tuple val(sampleId),
+          path("${replicateId}.final.uniq.bam"),
+          path("${replicateId}.final.uniq.bam.bai")
 
     script:
     sampleId = replicateId.replaceAll(/[12]$/,'')
@@ -221,8 +229,8 @@ process rnaseq_gatk_recalibrate {
           -o final.bam
 
     # Select only unique alignments, no multimaps
-    (samtools view -H final.bam; samtools view final.bam| grep -w 'NH:i:1') \
-    |samtools view -Sb -  > ${replicateId}.final.uniq.bam
+    (samtools view -H final.bam; samtools view final.bam | \
+    grep -w 'NH:i:1') | samtools view -Sb -  > ${replicateId}.final.uniq.bam
 
     # Index BAM files
     samtools index ${replicateId}.final.uniq.bam
@@ -279,16 +287,22 @@ process post_process_vcf {
 
     input:
     tuple val(sampleId), path('final.vcf')
-    tuple path('filtered.recode.vcf.gz'), path('filtered.recode.vcf.gz.tbi')
+    tuple path('filtered.recode.vcf.gz'),
+          path('filtered.recode.vcf.gz.tbi')
 
     output:
-    tuple val(sampleId), path('final.vcf'), path('commonSNPs.diff.sites_in_files')
+    tuple val(sampleId),
+          path('final.vcf'),
+          path('commonSNPs.diff.sites_in_files')
 
     script:
     '''
-    grep -v '#' final.vcf | awk '$7~/PASS/' |perl -ne 'chomp($_); ($dp)=$_=~/DP\\=(\\d+)\\;/; if($dp>=8){print $_."\\n"};' > result.DP8.vcf
+    grep -v '#' final.vcf | awk '$7~/PASS/' | perl -ne 'chomp($_); \
+                            ($dp)=$_=~/DP\\=(\\d+)\\;/; \
+                            if($dp>=8){print $_."\\n"};' > result.DP8.vcf
 
-    vcftools --vcf result.DP8.vcf --gzdiff filtered.recode.vcf.gz  --diff-site --out commonSNPs
+    vcftools --vcf result.DP8.vcf --gzdiff filtered.recode.vcf.gz  --diff-site \
+             --out commonSNPs
     '''
 }
 
@@ -298,7 +312,9 @@ process prepare_vcf_for_ase {
     publishDir "${params.results}/${sampleId}"
 
     input:
-    tuple val(sampleId), path('final.vcf'), path('commonSNPs.diff.sites_in_files')
+    tuple val(sampleId),
+          path('final.vcf'),
+          path('commonSNPs.diff.sites_in_files')
 
     output:
     tuple val(sampleId), path('known_snps.vcf'), emit: vcf_for_ASE
@@ -308,13 +324,14 @@ process prepare_vcf_for_ase {
     '''
     awk 'BEGIN{OFS="\t"} $4~/B/{print $1,$2,$3}' commonSNPs.diff.sites_in_files  > test.bed
 
-    vcftools --vcf final.vcf --bed test.bed --recode --keep-INFO-all --stdout > known_snps.vcf
+    vcftools --vcf final.vcf --bed test.bed --recode --keep-INFO-all \
+             --stdout > known_snps.vcf
 
-    grep -v '#'  known_snps.vcf | awk -F '\\t' '{print $10}' \
-                |awk -F ':' '{print $2}'|perl -ne 'chomp($_); \
+    grep -v '#' known_snps.vcf | awk -F '\\t' '{print $10}' \
+                | awk -F ':' '{print $2}' | perl -ne 'chomp($_); \
                 @v=split(/\\,/,$_); if($v[0]!=0 ||$v[1] !=0)\
-                {print  $v[1]/($v[1]+$v[0])."\\n"; }' |awk '$1!=1' \
-                >AF.4R
+                {print  $v[1]/($v[1]+$v[0])."\\n"; }' | awk '$1!=1' \
+                > AF.4R
 
     gghist.R -i AF.4R -o AF.histogram.pdf
     '''
