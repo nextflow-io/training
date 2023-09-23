@@ -2,10 +2,10 @@
  * Define the default parameters
  */
 
-params.genome     = "$baseDir/data/genome.fa"
-params.variants   = "$baseDir/data/known_variants.vcf.gz"
-params.blacklist  = "$baseDir/data/blacklist.bed"
-params.reads      = "$baseDir/data/reads/ENCSR000C*_{1,2}.fastq.gz"
+params.genome     = "${baseDir}/data/genome.fa"
+params.variants   = "${baseDir}/data/known_variants.vcf.gz"
+params.blacklist  = "${baseDir}/data/blacklist.bed"
+params.reads      = "${baseDir}/data/reads/ENCSR000C*_{1,2}.fastq.gz"
 params.results    = "results"
 
 /*
@@ -42,7 +42,7 @@ process prepare_genome_picard {
 
     script:
     """
-    picard CreateSequenceDictionary R= $genome O= ${genome.baseName}.dict
+    picard CreateSequenceDictionary R= ${genome} O= ${genome.baseName}.dict
     """
 }
 
@@ -82,12 +82,12 @@ process prepare_vcf_file {
     path blacklisted
 
     output:
-    tuple path("${variantsFile.baseName}.filtered.recode.vcf.gz"), \
+    tuple path("${variantsFile.baseName}.filtered.recode.vcf.gz"),
           path("${variantsFile.baseName}.filtered.recode.vcf.gz.tbi")
 
     script:
     """
-    vcftools --gzvcf $variantsFile -c \
+    vcftools --gzvcf ${variantsFile} -c \
              --exclude-bed ${blacklisted} \
              --recode | bgzip -c \
              > ${variantsFile.baseName}.filtered.recode.vcf.gz
@@ -109,13 +109,15 @@ process rnaseq_mapping_star {
     tuple val(replicateId), path(reads)
 
     output:
-    tuple val(replicateId), path('Aligned.sortedByCoord.out.bam'), path('Aligned.sortedByCoord.out.bam.bai')
+    tuple val(replicateId),
+          path('Aligned.sortedByCoord.out.bam'),
+          path('Aligned.sortedByCoord.out.bam.bai')
 
     script:
     """
     # ngs-nf-dev Align reads to genome
-    STAR --genomeDir $genomeDir \
-         --readFilesIn $reads \
+    STAR --genomeDir ${genomeDir} \
+         --readFilesIn ${reads} \
          --runThreadN ${task.cpus} \
          --readFilesCommand zcat \
          --outFilterType BySJout \
@@ -123,18 +125,19 @@ process rnaseq_mapping_star {
          --alignSJDBoverhangMin 1 \
          --outFilterMismatchNmax 999
 
-    # 2nd pass (improve alignments using table of splice junctions and create a new index)
+    # 2nd pass (improve alignments using table of splice
+    # junctions and create a new index)
     mkdir -p genomeDir
     STAR --runMode genomeGenerate \
          --genomeDir genomeDir \
-         --genomeFastaFiles $genome \
+         --genomeFastaFiles ${genome} \
          --sjdbFileChrStartEnd SJ.out.tab \
          --sjdbOverhang 75 \
          --runThreadN ${task.cpus}
 
     # Final read alignments
     STAR --genomeDir genomeDir \
-         --readFilesIn $reads \
+         --readFilesIn ${reads} \
          --runThreadN ${task.cpus} \
          --readFilesCommand zcat \
          --outFilterType BySJout \
@@ -142,7 +145,8 @@ process rnaseq_mapping_star {
          --alignSJDBoverhangMin 1 \
          --outFilterMismatchNmax 999 \
          --outSAMtype BAM SortedByCoordinate \
-         --outSAMattrRGline ID:$replicateId LB:library PL:illumina PU:machine SM:GM12878
+         --outSAMattrRGline ID:${replicateId} LB:library PL:illumina \
+                            PU:machine SM:GM12878
 
     # Index the BAM file
     samtools index Aligned.sortedByCoord.out.bam
@@ -155,13 +159,15 @@ process rnaseq_mapping_star {
 
 process rnaseq_gatk_splitNcigar {
     container 'quay.io/broadinstitute/gotc-prod-gatk:1.0.0-4.1.8.0-1626439571'
-    tag "$replicateId"
+    tag "${replicateId}"
 
     input:
     path genome
     path index
     path genome_dict
-    tuple val(replicateId), path(bam), path(bai)
+    tuple val(replicateId),
+          path(bam),
+          path(bai)
 
     output:
     tuple val(replicateId), path('split.bam'), path('split.bai')
@@ -170,7 +176,7 @@ process rnaseq_gatk_splitNcigar {
     """
     # SplitNCigarReads and reassign mapping qualities
     java -jar /usr/gitc/GATK35.jar -T SplitNCigarReads \
-                                   -R $genome -I $bam \
+                                   -R ${genome} -I ${bam} \
                                    -o split.bam \
                                    -rf ReassignOneMappingQuality \
                                    -RMQF 255 -RMQT 60 \
@@ -186,7 +192,7 @@ process rnaseq_gatk_splitNcigar {
 
 process rnaseq_gatk_recalibrate {
     container 'quay.io/biocontainers/mulled-v2-aa1d7bddaee5eb6c4cbab18f8a072e3ea7ec3969:f963c36fd770e89d267eeaa27cad95c1c3dbe660-0'
-    tag "$replicateId"
+    tag "${replicateId}"
 
     input:
     path genome
@@ -196,7 +202,9 @@ process rnaseq_gatk_recalibrate {
     tuple path(prepared_variants_file), path(prepared_variants_file_index)
 
     output:
-    tuple val(sampleId), path("${replicateId}.final.uniq.bam"), path("${replicateId}.final.uniq.bam.bai")
+    tuple val(sampleId),
+          path("${replicateId}.final.uniq.bam"),
+          path("${replicateId}.final.uniq.bam.bai")
 
     script:
     sampleId = replicateId.replaceAll(/[12]$/,'')
@@ -221,8 +229,8 @@ process rnaseq_gatk_recalibrate {
           -o final.bam
 
     # Select only unique alignments, no multimaps
-    (samtools view -H final.bam; samtools view final.bam| grep -w 'NH:i:1') \
-    |samtools view -Sb -  > ${replicateId}.final.uniq.bam
+    (samtools view -H final.bam; samtools view final.bam | \
+    grep -w 'NH:i:1') | samtools view -Sb -  > ${replicateId}.final.uniq.bam
 
     # Index BAM files
     samtools index ${replicateId}.final.uniq.bam
@@ -236,7 +244,7 @@ process rnaseq_gatk_recalibrate {
 
 process rnaseq_call_variants {
     container 'quay.io/broadinstitute/gotc-prod-gatk:1.0.0-4.1.8.0-1626439571'
-    tag "$sampleId"
+    tag "${sampleId}"
 
     input:
     path genome
@@ -253,14 +261,14 @@ process rnaseq_call_variants {
 
     # Variant calling
     java -jar /usr/gitc/GATK35.jar -T HaplotypeCaller \
-                    -R $genome -I bam.list \
+                    -R ${genome} -I bam.list \
                     -dontUseSoftClippedBases \
                     -stand_call_conf 20.0 \
                     -o output.gatk.vcf.gz
 
     # Variant filtering
     java -jar /usr/gitc/GATK35.jar -T VariantFiltration \
-                                   -R $genome -V output.gatk.vcf.gz \
+                                   -R ${genome} -V output.gatk.vcf.gz \
                                    -window 35 -cluster 3 \
                                    -filterName FS -filter "FS > 30.0" \
                                    -filterName QD -filter "QD < 2.0" \
@@ -274,31 +282,39 @@ process rnaseq_call_variants {
 
 process post_process_vcf {
     container 'quay.io/biocontainers/mulled-v2-b9358559e3ae3b9d7d8dbf1f401ae1fcaf757de3:ac05763cf181a5070c2fdb9bb5461f8d08f7b93b-0'
-    tag "$sampleId"
-    publishDir "$params.results/$sampleId"
+    tag "${sampleId}"
+    publishDir "${params.results}/${sampleId}"
 
     input:
     tuple val(sampleId), path('final.vcf')
-    tuple path('filtered.recode.vcf.gz'), path('filtered.recode.vcf.gz.tbi')
+    tuple path('filtered.recode.vcf.gz'),
+          path('filtered.recode.vcf.gz.tbi')
 
     output:
-    tuple val(sampleId), path('final.vcf'), path('commonSNPs.diff.sites_in_files')
+    tuple val(sampleId),
+          path('final.vcf'),
+          path('commonSNPs.diff.sites_in_files')
 
     script:
     '''
-    grep -v '#' final.vcf | awk '$7~/PASS/' |perl -ne 'chomp($_); ($dp)=$_=~/DP\\=(\\d+)\\;/; if($dp>=8){print $_."\\n"};' > result.DP8.vcf
+    grep -v '#' final.vcf | awk '$7~/PASS/' | perl -ne 'chomp($_); \
+                            ($dp)=$_=~/DP\\=(\\d+)\\;/; \
+                            if($dp>=8){print $_."\\n"};' > result.DP8.vcf
 
-    vcftools --vcf result.DP8.vcf --gzdiff filtered.recode.vcf.gz  --diff-site --out commonSNPs
+    vcftools --vcf result.DP8.vcf --gzdiff filtered.recode.vcf.gz  --diff-site \
+             --out commonSNPs
     '''
 }
 
 process prepare_vcf_for_ase {
     container 'cbcrg/callings-with-gatk:latest'
-    tag "$sampleId"
-    publishDir "$params.results/$sampleId"
+    tag "${sampleId}"
+    publishDir "${params.results}/${sampleId}"
 
     input:
-    tuple val(sampleId), path('final.vcf'), path('commonSNPs.diff.sites_in_files')
+    tuple val(sampleId),
+          path('final.vcf'),
+          path('commonSNPs.diff.sites_in_files')
 
     output:
     tuple val(sampleId), path('known_snps.vcf'), emit: vcf_for_ASE
@@ -308,13 +324,14 @@ process prepare_vcf_for_ase {
     '''
     awk 'BEGIN{OFS="\t"} $4~/B/{print $1,$2,$3}' commonSNPs.diff.sites_in_files  > test.bed
 
-    vcftools --vcf final.vcf --bed test.bed --recode --keep-INFO-all --stdout > known_snps.vcf
+    vcftools --vcf final.vcf --bed test.bed --recode --keep-INFO-all \
+             --stdout > known_snps.vcf
 
-    grep -v '#'  known_snps.vcf | awk -F '\\t' '{print $10}' \
-                |awk -F ':' '{print $2}'|perl -ne 'chomp($_); \
+    grep -v '#' known_snps.vcf | awk -F '\\t' '{print $10}' \
+                | awk -F ':' '{print $2}' | perl -ne 'chomp($_); \
                 @v=split(/\\,/,$_); if($v[0]!=0 ||$v[1] !=0)\
-                {print  $v[1]/($v[1]+$v[0])."\\n"; }' |awk '$1!=1' \
-                >AF.4R
+                {print  $v[1]/($v[1]+$v[0])."\\n"; }' | awk '$1!=1' \
+                > AF.4R
 
     gghist.R -i AF.4R -o AF.histogram.pdf
     '''
@@ -326,8 +343,8 @@ process prepare_vcf_for_ase {
 
 process ASE_knownSNPs {
     container 'quay.io/broadinstitute/gotc-prod-gatk:1.0.0-4.1.8.0-1626439571'
-    tag "$sampleId"
-    publishDir "$params.results/$sampleId"
+    tag "${sampleId}"
+    publishDir "${params.results}/${sampleId}"
 
     input:
     path genome
