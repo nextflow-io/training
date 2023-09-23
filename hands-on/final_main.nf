@@ -61,7 +61,7 @@ process prepare_star_genome_index {
 
     script:
     """
-    mkdir genome_dir
+    mkdir -p genome_dir
 
     STAR --runMode genomeGenerate \
          --genomeDir genome_dir \
@@ -127,7 +127,7 @@ process rnaseq_mapping_star {
 
     # 2nd pass (improve alignments using table of splice
     # junctions and create a new index)
-    mkdir genomeDir
+    mkdir -p genomeDir
     STAR --runMode genomeGenerate \
          --genomeDir genomeDir \
          --genomeFastaFiles ${genome} \
