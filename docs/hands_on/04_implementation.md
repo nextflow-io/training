@@ -538,7 +538,7 @@ The process has the following structure:
 
     You must fill the `BLANK` space with the correct process call and inputs.
 
-    ```groovy linenums="1" hl_lines="66"
+    ```groovy linenums="1" hl_lines="61"
     /*
      * Process 2: Align RNA-Seq reads to the genome with STAR
      */
@@ -558,7 +558,6 @@ The process has the following structure:
 
         script:
         """
-        # ngs-nf-dev Align reads to genome
         STAR --genomeDir ${genomeDir} \
              --readFilesIn ${reads} \
              --runThreadN ${task.cpus} \
@@ -568,8 +567,6 @@ The process has the following structure:
              --alignSJDBoverhangMin 1 \
              --outFilterMismatchNmax 999
 
-        # 2nd pass (improve alignments using table of splice
-        # junctions and create a new index)
         mkdir -p genomeDir
         STAR --runMode genomeGenerate \
              --genomeDir genomeDir \
@@ -578,7 +575,6 @@ The process has the following structure:
              --sjdbOverhang 75 \
              --runThreadN ${task.cpus}
 
-        # Final read alignments
         STAR --genomeDir genomeDir \
              --readFilesIn ${reads} \
              --runThreadN ${task.cpus} \
@@ -591,7 +587,6 @@ The process has the following structure:
              --outSAMattrRGline ID:${replicateId} LB:library PL:illumina \
                                 PU:machine SM:GM12878
 
-        # Index the BAM file
         samtools index Aligned.sortedByCoord.out.bam
         """
     }
@@ -612,9 +607,50 @@ The process has the following structure:
 
         The final command produces a bam index which is the full filename with an additional `.bai` suffix.
 
+    Broken down, here is what the script is doing:
+
+    ```bash
+    STAR --genomeDir ${genomeDir} \ # (1)!
+         --readFilesIn ${reads} \
+         --runThreadN ${task.cpus} \
+         --readFilesCommand zcat \
+         --outFilterType BySJout \
+         --alignSJoverhangMin 8 \
+         --alignSJDBoverhangMin 1 \
+         --outFilterMismatchNmax 999
+
+    mkdir -p genomeDir # (2)!
+    STAR --runMode genomeGenerate \ # (3)!
+         --genomeDir genomeDir \
+         --genomeFastaFiles ${genome} \
+         --sjdbFileChrStartEnd SJ.out.tab \
+         --sjdbOverhang 75 \
+         --runThreadN ${task.cpus}
+
+    STAR --genomeDir genomeDir \ # (4)!
+         --readFilesIn ${reads} \
+         --runThreadN ${task.cpus} \
+         --readFilesCommand zcat \
+         --outFilterType BySJout \
+         --alignSJoverhangMin 8 \
+         --alignSJDBoverhangMin 1 \
+         --outFilterMismatchNmax 999 \
+         --outSAMtype BAM SortedByCoordinate \
+         --outSAMattrRGline ID:${replicateId} LB:library PL:illumina \
+                            PU:machine SM:GM12878
+
+    samtools index Aligned.sortedByCoord.out.bam # (5)!
+    ```
+
+    1.   Align reads to the reference genome
+    2.   Create output directory `genomeDir` for next STAR calls within the same task
+    3.   2nd pass (improve alignments using table of splice junctions and create a new index)
+    4.   Final read alignments
+    5.   Index the BAM file
+
     ??? solution
 
-        ```groovy linenums="1" hl_lines="66-68"
+        ```groovy linenums="1" hl_lines="61-63"
         /*
          * Process 2: Align RNA-Seq reads to the genome with STAR
          */
@@ -634,7 +670,6 @@ The process has the following structure:
 
             script:
             """
-            # ngs-nf-dev Align reads to genome
             STAR --genomeDir ${genomeDir} \
                  --readFilesIn ${reads} \
                  --runThreadN ${task.cpus} \
@@ -644,8 +679,6 @@ The process has the following structure:
                  --alignSJDBoverhangMin 1 \
                  --outFilterMismatchNmax 999
 
-            # 2nd pass (improve alignments using table of splice
-            # junctions and create a new index)
             mkdir -p genomeDir
             STAR --runMode genomeGenerate \
                  --genomeDir genomeDir \
@@ -654,7 +687,6 @@ The process has the following structure:
                  --sjdbOverhang 75 \
                  --runThreadN ${task.cpus}
 
-            # Final read alignments
             STAR --genomeDir genomeDir \
                  --readFilesIn ${reads} \
                  --runThreadN ${task.cpus} \
@@ -667,7 +699,6 @@ The process has the following structure:
                  --outSAMattrRGline ID:${replicateId} LB:library PL:illumina \
                                     PU:machine SM:GM12878
 
-            # Index the BAM file
             samtools index Aligned.sortedByCoord.out.bam
             """
         }
@@ -1471,7 +1502,7 @@ The final step is the GATK ASEReadCounter.
     ```
 
     1.   an operator that joins two channels taking a key into consideration. See [here](https://www.nextflow.io/docs/latest/operator.html?join#join) for more details
-    2.   the map operator can apply any function to every item on a channel. In this case we take our tuple from the previous setp, define the separate elements and create a new tuple.
+    2.   the map operator can apply any function to every item on a channel. In this case we take our tuple from the previous step, define the separate elements and create a new tuple.
     3.   rename the resulting as `grouped_vcf_bam_bai_ch`
 
     ??? solution
