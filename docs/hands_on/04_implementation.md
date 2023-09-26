@@ -124,7 +124,7 @@ The first process has the following structure:
 
 !!! exercise "Problem #2"
 
-    Copy the code below and paste it at the end of `main.nf`, removing the previous workflow block. Be careful not to accidentally ave multiple workflow blocks.
+    Copy the code below and paste it at the end of `main.nf`, removing the previous workflow block. Be careful not to accidentally have multiple workflow blocks.
 
     Your aim is to replace the `BLANK` placeholder with the the correct process call.
 
@@ -137,10 +137,10 @@ The first process has the following structure:
         container 'quay.io/biocontainers/samtools:1.3.1--h0cf4675_11'
 
         input:
-        path genome
+        path genome // (1)!
 
         output:
-        path "${genome}.fai"
+        path "${genome}.fai" // (2)!
 
         script:
         """
@@ -155,24 +155,15 @@ The first process has the following structure:
     }
     ```
 
+    1. Take as input the genome file from the `params.genome` parameter and refer to it within the process as `genome`
+    2. The output is a path named just like the input file but adding `.fai` to the end, e.g. `ref_genome.fa.fai`
+
     In plain english, the process could be written as:
 
     -   A **process** called `prepare_genome_samtools`
     -   takes as **input** the genome file
     -   and creates as **output** a genome index file
     -   **script**: using samtools create the genome index from the genome file
-
-    Now when we run the pipeline, we see that the process `prepare_genome_samtools` is submitted:
-
-    ```bash
-    nextflow run main.nf -resume
-    ```
-    ```console
-    N E X T F L O W  ~  version 23.04.1
-    Launching `main.nf` [cranky_bose] - revision: d1df5b7267
-    executor >  local (1)
-    [cd/47f882] process > prepare_genome_samtools [100%] 1 of 1 ✔
-    ```
 
     ??? solution
 
@@ -208,6 +199,18 @@ The first process has the following structure:
         !!! warning
 
             `params.genome` is just a regular variable, not a channel, but when passed as input to a process, it's automatically converted into a value channel.
+
+    Now when we run the pipeline, we see that the process `prepare_genome_samtools` is submitted:
+
+    ```bash
+    nextflow run main.nf -resume
+    ```
+    ```console
+    N E X T F L O W  ~  version 23.04.1
+    Launching `main.nf` [cranky_bose] - revision: d1df5b7267
+    executor >  local (1)
+    [cd/47f882] process > prepare_genome_samtools [100%] 1 of 1 ✔
+    ```
 
 ## Process 1B: Create a FASTA genome sequence dictionary with Picard for GATK
 
@@ -321,9 +324,9 @@ The next process has the following structure:
         path genome
 
         output:
-        path 'genome_dir'
+        path 'genome_dir' // (1)!
 
-        script:
+        script: // (2)!
         """
         mkdir -p genome_dir
 
@@ -343,6 +346,9 @@ The next process has the following structure:
     }
     ```
 
+    1. The `output` is a `path` called `genome_dir`
+    2. Before running `STAR`, it creates the output directory that will contain the resulting STAR genome index.
+
     !!! info
 
         The output of the STAR genomeGenerate command is specified here as `genome_dir`.
@@ -358,12 +364,12 @@ The next process has the following structure:
             container 'quay.io/biocontainers/star:2.7.10b--h6b7c446_1'
 
             input:
-            path genome // (1)!
+            path genome
 
             output:
-            path 'genome_dir' // (2)!
+            path 'genome_dir'
 
-            script: // (3)!
+            script:
             """
             mkdir -p genome_dir
 
@@ -382,10 +388,6 @@ The next process has the following structure:
             prepare_star_genome_index(params.genome)
         }
         ```
-
-        1. Take as input the `genome` file from the `params.genome` parameter.
-        2. The `output` is a `path` called `genome_dir`
-        3. Creates the output directory that will contain the resulting STAR genome index.
 
         !!! note
 
@@ -424,7 +426,7 @@ The next process has the following structure:
         path variantsFile
         path blacklisted
 
-        output:
+        output: // (1)!
         tuple path("${variantsFile.baseName}.filtered.recode.vcf.gz"),
               path("${variantsFile.baseName}.filtered.recode.vcf.gz.tbi")
 
@@ -449,6 +451,7 @@ The next process has the following structure:
     }
     ```
 
+    1. The output is a tuple with two paths that here are files
 
     Broken down, here is what the script is doing:
 
@@ -461,16 +464,10 @@ The next process has the following structure:
     tabix ${variantsFile.baseName}.filtered.recode.vcf.gz # (4)!
     ```
 
-    1.   The `variantsFile` variable contains the path to the file with the known variants
-    2.   The `blacklisted` variable contains the path to the file with the genomic locations which are known to produce artifacts and spurious variants
-    3.   The `>` symbol is used to redirect the output to the file specified after it
-    4.   `tabix` is used here to create the second output that we want to consider from this process
-
-    Try run the pipeline from the project directory with:
-
-    ```bash
-    nextflow run main.nf -resume
-    ```
+    1. The `variantsFile` variable contains the path to the file with the known variants
+    2. The `blacklisted` variable contains the path to the file with the genomic locations which are known to produce artifacts and spurious variants
+    3. The `>` symbol is used to redirect the output to the file specified after it
+    4. `tabix` is used here to create the second output that we want to consider from this process
 
     ??? solution
 
@@ -483,12 +480,12 @@ The next process has the following structure:
             container 'quay.io/biocontainers/mulled-v2-b9358559e3ae3b9d7d8dbf1f401ae1fcaf757de3:ac05763cf181a5070c2fdb9bb5461f8d08f7b93b-0'
 
             input:
-            path variantsFile // (1)!
-            path blacklisted // (2)!
+            path variantsFile
+            path blacklisted
 
-            output: // (3)!
-            tuple path("${variantsFile.baseName}.filtered.recode.vcf.gz"), // (4)!
-                  path("${variantsFile.baseName}.filtered.recode.vcf.gz.tbi") // (5)!
+            output:
+            tuple path("${variantsFile.baseName}.filtered.recode.vcf.gz"),
+                  path("${variantsFile.baseName}.filtered.recode.vcf.gz.tbi")
 
             script:
             """
@@ -511,11 +508,11 @@ The next process has the following structure:
         }
         ```
 
-        1. Take as input the variants file, assigning the name `variantsFile`.
-        2. Take as input the blacklisted file, assigning the name `blacklisted`.
-        3. Out a tuple of two files
-        4. Defines the name of the first output file.
-        5. Generates the second output file (with `.tbi` suffix).
+    Try running the pipeline from the project directory with:
+
+    ```bash
+    nextflow run main.nf -resume
+    ```
 
 Congratulations! Part 1 is now complete.
 
@@ -541,7 +538,7 @@ The process has the following structure:
 
     You must fill the `BLANK` space with the correct process call and inputs.
 
-    ```groovy linenums="1" hl_lines="66"
+    ```groovy linenums="1" hl_lines="61"
     /*
      * Process 2: Align RNA-Seq reads to the genome with STAR
      */
@@ -561,7 +558,6 @@ The process has the following structure:
 
         script:
         """
-        # ngs-nf-dev Align reads to genome
         STAR --genomeDir ${genomeDir} \
              --readFilesIn ${reads} \
              --runThreadN ${task.cpus} \
@@ -571,8 +567,6 @@ The process has the following structure:
              --alignSJDBoverhangMin 1 \
              --outFilterMismatchNmax 999
 
-        # 2nd pass (improve alignments using table of splice
-        # junctions and create a new index)
         mkdir -p genomeDir
         STAR --runMode genomeGenerate \
              --genomeDir genomeDir \
@@ -581,7 +575,6 @@ The process has the following structure:
              --sjdbOverhang 75 \
              --runThreadN ${task.cpus}
 
-        # Final read alignments
         STAR --genomeDir genomeDir \
              --readFilesIn ${reads} \
              --runThreadN ${task.cpus} \
@@ -594,7 +587,6 @@ The process has the following structure:
              --outSAMattrRGline ID:${replicateId} LB:library PL:illumina \
                                 PU:machine SM:GM12878
 
-        # Index the BAM file
         samtools index Aligned.sortedByCoord.out.bam
         """
     }
@@ -615,9 +607,50 @@ The process has the following structure:
 
         The final command produces a bam index which is the full filename with an additional `.bai` suffix.
 
+    Broken down, here is what the script is doing:
+
+    ```bash
+    STAR --genomeDir ${genomeDir} \ # (1)!
+         --readFilesIn ${reads} \
+         --runThreadN ${task.cpus} \
+         --readFilesCommand zcat \
+         --outFilterType BySJout \
+         --alignSJoverhangMin 8 \
+         --alignSJDBoverhangMin 1 \
+         --outFilterMismatchNmax 999
+
+    mkdir -p genomeDir # (2)!
+    STAR --runMode genomeGenerate \ # (3)!
+         --genomeDir genomeDir \
+         --genomeFastaFiles ${genome} \
+         --sjdbFileChrStartEnd SJ.out.tab \
+         --sjdbOverhang 75 \
+         --runThreadN ${task.cpus}
+
+    STAR --genomeDir genomeDir \ # (4)!
+         --readFilesIn ${reads} \
+         --runThreadN ${task.cpus} \
+         --readFilesCommand zcat \
+         --outFilterType BySJout \
+         --alignSJoverhangMin 8 \
+         --alignSJDBoverhangMin 1 \
+         --outFilterMismatchNmax 999 \
+         --outSAMtype BAM SortedByCoordinate \
+         --outSAMattrRGline ID:${replicateId} LB:library PL:illumina \
+                            PU:machine SM:GM12878
+
+    samtools index Aligned.sortedByCoord.out.bam # (5)!
+    ```
+
+    1. Align reads to the reference genome
+    2. Create output directory `genomeDir` for next STAR calls within the same task
+    3. 2nd pass (improve alignments using table of splice junctions and create a new index)
+    4. Final read alignments
+    5. Index the BAM file
+
     ??? solution
 
-        ```groovy linenums="1" hl_lines="66-68"
+        ```groovy linenums="1" hl_lines="61-63"
         /*
          * Process 2: Align RNA-Seq reads to the genome with STAR
          */
@@ -637,7 +670,6 @@ The process has the following structure:
 
             script:
             """
-            # ngs-nf-dev Align reads to genome
             STAR --genomeDir ${genomeDir} \
                  --readFilesIn ${reads} \
                  --runThreadN ${task.cpus} \
@@ -647,8 +679,6 @@ The process has the following structure:
                  --alignSJDBoverhangMin 1 \
                  --outFilterMismatchNmax 999
 
-            # 2nd pass (improve alignments using table of splice
-            # junctions and create a new index)
             mkdir -p genomeDir
             STAR --runMode genomeGenerate \
                  --genomeDir genomeDir \
@@ -657,7 +687,6 @@ The process has the following structure:
                  --sjdbOverhang 75 \
                  --runThreadN ${task.cpus}
 
-            # Final read alignments
             STAR --genomeDir genomeDir \
                  --readFilesIn ${reads} \
                  --runThreadN ${task.cpus} \
@@ -670,7 +699,6 @@ The process has the following structure:
                  --outSAMattrRGline ID:${replicateId} LB:library PL:illumina \
                                     PU:machine SM:GM12878
 
-            # Index the BAM file
             samtools index Aligned.sortedByCoord.out.bam
             """
         }
@@ -717,27 +745,26 @@ The next process has the following structure:
         There is an optional [`tag`](https://www.nextflow.io/docs/latest/process.html#tag) line added to the start of this process. The [`tag`](https://www.nextflow.io/docs/latest/process.html#tag) line allows you to assign a name to a specific task (single instance of a process). This is particularly useful when there are many samples/replicates which pass through the same process.
 
 
-    ```groovy linenums="1" hl_lines="43"
+    ```groovy linenums="1" hl_lines="42"
     /*
      * Process 3: GATK Split on N
      */
 
     process rnaseq_gatk_splitNcigar {
         container 'quay.io/broadinstitute/gotc-prod-gatk:1.0.0-4.1.8.0-1626439571'
-        tag "${replicateId}"
+        tag "${replicateId}" // (1)!
 
         input:
-        path genome
-        path index
-        path genome_dict
-        tuple val(replicateId), path(bam), path(bai)
+        path genome // (2)!
+        path index // (3)!
+        path genome_dict // (4)!
+        tuple val(replicateId), path(bam), path(bai) // (5)!
 
         output:
-        tuple val(replicateId), path('split.bam'), path('split.bai')
+        tuple val(replicateId), path('split.bam'), path('split.bai') // (6)!
 
         script:
         """
-        # SplitNCigarReads and reassign mapping qualities
         java -jar /usr/gitc/GATK35.jar -T SplitNCigarReads \
                                        -R ${genome} -I ${bam} \
                                        -o split.bam \
@@ -764,6 +791,13 @@ The next process has the following structure:
     }
     ```
 
+    1. [`tag`](https://www.nextflow.io/docs/latest/process.html#tag) line using the replicate id as the tag.
+    2. The genome fasta file
+    3. The genome index in the output channel from the `prepare_genome_samtools` process
+    4. The genome dictionary in the output channel from the `prepare_genome_picard` process
+    5. The tuple containing the aligned reads in the output channel from the `rnaseq_mapping_star` process
+    6. A tuple containing the replicate id, the split bam file and the split bam index
+
     !!! info
 
         The GATK command above automatically creates a bam index (`.bai`) of the `split.bam` output file
@@ -772,10 +806,28 @@ The next process has the following structure:
 
         A `tag` line would also be useful in [Process 2](#process-2-star-mapping)
 
+    Broken down, here is what the script is doing:
+
+    ```bash
+    java -jar /usr/gitc/GATK35.jar -T SplitNCigarReads \ # (1)!
+                                   -R ${genome} -I ${bam} \ # (2)!
+                                   -o split.bam \ # (3)!
+                                   -rf ReassignOneMappingQuality \ # (4)!
+                                   -RMQF 255 -RMQT 60 \
+                                   -U ALLOW_N_CIGAR_READS \
+                                   --fix_misencoded_quality_scores
+    ```
+
+    1. Use the `SplitNCigarReads` tool from GATK
+    2. Set the reference sequence file (`-R`) and the input files containing reads (`-I`)
+    3. Write the output BAM file to `split.bam` (`-o`)
+    4. Reassign mapping qualities too
+
+
     ??? solution
 
 
-        ```groovy linenums="1" hl_lines="44-47"
+        ```groovy linenums="1" hl_lines="43-46"
         /*
          * Process 3: GATK Split on N
          */
@@ -785,17 +837,16 @@ The next process has the following structure:
             tag "${replicateId}"
 
             input:
-            path genome // (2)!
-            path index // (3)!
-            path genome_dict // (4)!
-            tuple val(replicateId), path(bam), path(bai) // (5)!
+            path genome
+            path index
+            path genome_dict
+            tuple val(replicateId), path(bam), path(bai)
 
             output:
-            tuple val(replicateId), path('split.bam'), path('split.bai') // (6)!
+            tuple val(replicateId), path('split.bam'), path('split.bai')
 
             script:
             """
-            # SplitNCigarReads and reassign mapping qualities
             java -jar /usr/gitc/GATK35.jar -T SplitNCigarReads \
                                            -R ${genome} -I ${bam} \
                                            -o split.bam \
@@ -826,15 +877,6 @@ The next process has the following structure:
         }
         ```
 
-        1. [`tag`](https://www.nextflow.io/docs/latest/process.html#tag) line using the replicate id as the tag.
-        2. the genome fasta file
-        3. the genome index in the output channel from the `prepare_genome_samtools` process
-        4. the genome dictionary in the output channel from the `prepare_genome_picard` process
-        5. the tuple containing the aligned reads in the output channel from the `rnaseq_mapping_star` process
-        6. a tuple containing the sample id, the split bam file and the split bam index
-        7. specifies the input file names `genome` and `bam` to GATK
-        8. specifies the output file names to GATK
-
 Next we perform a Base Quality Score Recalibration step using GATK.
 
 ## Process 4: GATK Recalibrate
@@ -859,7 +901,7 @@ The next process has the following structure:
 
     Your aim is to replace the `BLANK` placeholder with the the correct process call.
 
-    ```groovy linenums="1" hl_lines="69"
+    ```groovy linenums="1" hl_lines="67"
     /*
      * Process 4: GATK Recalibrate
      */
@@ -872,18 +914,18 @@ The next process has the following structure:
         path genome
         path index
         path dict
-        tuple val(replicateId), path(bam), path(bai)
-        tuple path(prepared_variants_file), path(prepared_variants_file_index)
+        tuple val(replicateId), path(bam), path(bai) // (1)!
+        tuple path(prepared_variants_file),
+              path(prepared_variants_file_index) // (2)!
 
-        output:
+        output: // (3)!
         tuple val(sampleId),
               path("${replicateId}.final.uniq.bam"),
               path("${replicateId}.final.uniq.bam.bai")
 
         script:
-        sampleId = replicateId.replaceAll(/[12]$/,'')
+        sampleId = replicateId.replaceAll(/[12]$/,'') // (4)!
         """
-        # Indel Realignment and Base Recalibration
         gatk3 -T BaseRecalibrator \
               --default_platform illumina \
               -cov ReadGroupCovariate \
@@ -902,11 +944,9 @@ The next process has the following structure:
               -nct ${task.cpus} \
               -o final.bam
 
-        # Select only unique alignments, no multimaps
         (samtools view -H final.bam; samtools view final.bam | \
         grep -w 'NH:i:1') | samtools view -Sb -  > ${replicateId}.final.uniq.bam
 
-        # Index BAM files
         samtools index ${replicateId}.final.uniq.bam
         """
     }
@@ -932,10 +972,46 @@ The next process has the following structure:
     }
     ```
 
+    1. The tuple containing the split reads in the output channel from the `rnaseq_gatk_splitNcigar` process.
+    2. The tuple containing the filtered/recoded VCF file and the tab index (TBI) file in the output channel from the `prepare_vcf_file` process.
+    3. The tuple containing the replicate id, the unique bam file and the unique bam index file which goes into two channels.
+    4. Line specifying the filename of the output bam file
+
+    Broken down, here is what the script is doing:
+
+    ```bash
+    gatk3 -T BaseRecalibrator \ # (1)!
+          --default_platform illumina \
+          -cov ReadGroupCovariate \
+          -cov QualityScoreCovariate \
+          -cov CycleCovariate \
+          -knownSites ${prepared_variants_file} \
+          -cov ContextCovariate \
+          -R ${genome} -I ${bam} \
+          --downsampling_type NONE \
+          -nct ${task.cpus} \
+          -o final.rnaseq.grp
+
+    gatk3 -T PrintReads \
+          -R ${genome} -I ${bam} \
+          -BQSR final.rnaseq.grp \
+          -nct ${task.cpus} \
+          -o final.bam
+
+    (samtools view -H final.bam; samtools view final.bam | \
+    grep -w 'NH:i:1') | samtools view -Sb -  > ${replicateId}.final.uniq.bam # (2)!
+
+    samtools index ${replicateId}.final.uniq.bam # (3)!
+    ```
+
+    1. Generates recalibration table for Base Quality Score Recalibration (BQSR)
+    2. Select only unique alignments, no multimaps
+    3. Index BAM file
+
     ??? solution
 
 
-        ```groovy linenums="1" hl_lines="70-74"
+        ```groovy linenums="1" hl_lines="67-71"
         /*
          * Process 4: GATK Recalibrate
          */
@@ -945,22 +1021,21 @@ The next process has the following structure:
             tag "${replicateId}"
 
             input:
-            path genome // (1)!
-            path index // (2)!
-            path dict // (3)!
-            tuple val(replicateId), path(bam), path(bai) // (4)!
-            tuple path(prepared_variants_file), // (5)!
+            path genome
+            path index
+            path dict
+            tuple val(replicateId), path(bam), path(bai)
+            tuple path(prepared_variants_file),
                   path(prepared_variants_file_index)
 
-            output: // (6)!
+            output:
             tuple val(sampleId),
                   path("${replicateId}.final.uniq.bam"),
                   path("${replicateId}.final.uniq.bam.bai")
 
             script:
-            sampleId = replicateId.replaceAll(/[12]$/,'') // (7)!
+            sampleId = replicateId.replaceAll(/[12]$/,'')
             """
-            # Indel Realignment and Base Recalibration
             gatk3 -T BaseRecalibrator \
                   --default_platform illumina \
                   -cov ReadGroupCovariate \
@@ -979,11 +1054,9 @@ The next process has the following structure:
                   -nct ${task.cpus} \
                   -o final.bam
 
-            # Select only unique alignments, no multimaps
             (samtools view -H final.bam; samtools view final.bam | \
             grep -w 'NH:i:1') | samtools view -Sb -  > ${replicateId}.final.uniq.bam
 
-            # Index BAM files
             samtools index ${replicateId}.final.uniq.bam
             """
         }
@@ -1013,14 +1086,6 @@ The next process has the following structure:
         }
         ```
 
-        1. the genome fasta file.
-        2. the genome index in the output channel from the `prepare_genome_samtools` process.
-        3. the genome dictionary in the output channel from the `prepare_genome_picard` process.
-        4. the tupe containing the split reads in the output channel from the `rnaseq_gatk_splitNcigar` process.
-        5. the tuple containing the filtered/recoded VCF file and the tab index (TBI) file in the output channel from the `prepare_vcf_file` process.
-        6. the tuple containing the replicate id, the unique bam file and the unique bam index file which goes into two channels.
-        7. line specifying the filename of the output bam file
-
 Now we are ready to perform the variant calling with GATK.
 
 ## Process 5: GATK Variant Calling
@@ -1048,36 +1113,34 @@ The next process has the following structure:
 
     Your aim is to replace the `BLANK` placeholder with the the correct process call.
 
-    ```groovy linenums="1" hl_lines="62"
+    ```groovy linenums="1" hl_lines="60"
     /*
      * Process 5: GATK Variant Calling
      */
 
     process rnaseq_call_variants {
         container 'quay.io/broadinstitute/gotc-prod-gatk:1.0.0-4.1.8.0-1626439571'
-        tag "${sampleId}"
+        tag "${sampleId}" // (1)!
 
         input:
-        path genome
-        path index
-        path dict
-        tuple val(sampleId), path(bam), path(bai)
+        path genome // (2)!
+        path index // (3)!
+        path dict  // (4)!
+        tuple val(sampleId), path(bam), path(bai) // (5)!
 
         output:
-        tuple val(sampleId), path('final.vcf')
+        tuple val(sampleId), path('final.vcf') // (6)!
 
         script:
         """
         echo "${bam.join('\n')}" > bam.list
 
-        # Variant calling
         java -jar /usr/gitc/GATK35.jar -T HaplotypeCaller \
                                        -R ${genome} -I bam.list \
                                        -dontUseSoftClippedBases \
                                        -stand_call_conf 20.0 \
                                        -o output.gatk.vcf.gz
 
-        # Variant filtering
         java -jar /usr/gitc/GATK35.jar -T VariantFiltration \
                                        -R ${genome} -V output.gatk.vcf.gz \
                                        -window 35 -cluster 3 \
@@ -1114,38 +1177,66 @@ The next process has the following structure:
     }
     ```
 
+    1. [`tag`](https://www.nextflow.io/docs/latest/process.html#tag) line with the using the sample id as the tag.
+    2. The genome fasta file.
+    3. The genome index in the output channel from the `prepare_genome_samtools` process.
+    4. The genome dictionary in the output channel from the `prepare_genome_picard` process.
+    5. The tuples grouped by sampleID in the output channel from the `rnaseq_gatk_recalibrate` process.
+    6. The tuple containing the sample ID and final VCF file.
+
+    Broken down, here is what the script is doing:
+
+    ```bash
+    echo "${bam.join('\n')}" > bam.list # (1)!
+
+    java -jar /usr/gitc/GATK35.jar -T HaplotypeCaller \ # (2)!
+                                   -R ${genome} -I bam.list \
+                                   -dontUseSoftClippedBases \
+                                   -stand_call_conf 20.0 \
+                                   -o output.gatk.vcf.gz
+
+    java -jar /usr/gitc/GATK35.jar -T VariantFiltration \ # (3)!
+                                   -R ${genome} -V output.gatk.vcf.gz \
+                                   -window 35 -cluster 3 \
+                                   -filterName FS -filter "FS > 30.0" \
+                                   -filterName QD -filter "QD < 2.0" \
+                                   -o final.vcf
+    ```
+
+    1. Create a file containing a list of BAM files
+    2. Variant calling step
+    3. Variant filtering step
+
     ??? solution
 
-        ```groovy linenums="1" hl_lines="62-72"
+        ```groovy linenums="1" hl_lines="60-69"
         /*
          * Process 5: GATK Variant Calling
          */
 
         process rnaseq_call_variants {
             container 'quay.io/broadinstitute/gotc-prod-gatk:1.0.0-4.1.8.0-1626439571'
-            tag "${sampleId}" // (1)!
+            tag "${sampleId}"
 
             input:
-            path genome // (2)!
-            path index // (3)!
-            path dict // (4)!
-            tuple val(sampleId), path(bam), path(bai) // (5)!
+            path genome
+            path index
+            path dict
+            tuple val(sampleId), path(bam), path(bai)
 
             output:
-            tuple val(sampleId), path('final.vcf') // (6)!
+            tuple val(sampleId), path('final.vcf')
 
             script:
             """
             echo "${bam.join('\n')}" > bam.list
 
-            # Variant calling
             java -jar /usr/gitc/GATK35.jar -T HaplotypeCaller \
                                            -R ${genome} -I bam.list \
                                            -dontUseSoftClippedBases \
                                            -stand_call_conf 20.0 \
                                            -o output.gatk.vcf.gz
 
-            # Variant filtering
             java -jar /usr/gitc/GATK35.jar -T VariantFiltration \
                                            -R ${genome} -V output.gatk.vcf.gz \
                                            -window 35 -cluster 3 \
@@ -1181,7 +1272,7 @@ The next process has the following structure:
             rnaseq_gatk_recalibrate
                 .out
                 | groupTuple
-                | set { recalibrated_samples } // (7)!
+                | set { recalibrated_samples } // (1)!
 
             rnaseq_call_variants(params.genome,
                                  prepare_genome_samtools.out,
@@ -1190,13 +1281,7 @@ The next process has the following structure:
         }
         ```
 
-        1.   [`tag`](https://www.nextflow.io/docs/latest/process.html#tag) line with the using the sample id as the tag.
-        2.   the genome fasta file.
-        3.   the genome index in the output channel from the `prepare_genome_samtools` process.
-        4.   the genome dictionary in the output channel from the `prepare_genome_picard` process.
-        5.   the tuples grouped by sampleID in the output channel from the `rnaseq_gatk_recalibrate` process.
-        6.   the tuple containing the sample ID and final VCF file.
-        7.   new channel to aggregate the `bam` files from different replicates into sample level.
+        1. New channel to aggregate the `bam` files from different replicates into sample level.
 
 ## Processes 6A and 6B: ASE & RNA Editing
 
@@ -1270,7 +1355,7 @@ You should implement two processes having the following structure:
 
         output:
         tuple val(sampleId), path('known_snps.vcf'), emit: vcf_for_ASE
-        path 'AF.histogram.pdf'     , emit: gghist_pdfs
+        path 'AF.histogram.pdf'                    , emit: gghist_pdfs
 
         script:
         '''
@@ -1473,9 +1558,9 @@ The final step is the GATK ASEReadCounter.
         .set { BLANK } // (3)!
     ```
 
-    1.   an operator that joins two channels taking a key into consideration. See [here](https://www.nextflow.io/docs/latest/operator.html?join#join) for more details
-    2.   the map operator can apply any function to every item on a channel. In this case we take our tuple from the previous setp, define the separate elements and create a new tuple.
-    3.   rename the resulting as `grouped_vcf_bam_bai_ch`
+    1. An operator that joins two channels taking a key into consideration. See [here](https://www.nextflow.io/docs/latest/operator.html?join#join) for more details
+    2. The map operator can apply any function to every item on a channel. In this case we take our tuple from the previous step, define the separate elements and create a new tuple.
+    3. Rename the resulting as `grouped_vcf_bam_bai_ch`
 
     ??? solution
 
