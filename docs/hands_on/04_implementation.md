@@ -901,7 +901,7 @@ The next process has the following structure:
 
     Your aim is to replace the `BLANK` placeholder with the the correct process call.
 
-    ```groovy linenums="1" hl_lines="69"
+    ```groovy linenums="1" hl_lines="67"
     /*
      * Process 4: GATK Recalibrate
      */
@@ -914,18 +914,18 @@ The next process has the following structure:
         path genome
         path index
         path dict
-        tuple val(replicateId), path(bam), path(bai)
-        tuple path(prepared_variants_file), path(prepared_variants_file_index)
+        tuple val(replicateId), path(bam), path(bai) // (1)!
+        tuple path(prepared_variants_file),
+              path(prepared_variants_file_index) // (2)!
 
-        output:
+        output: // (3)!
         tuple val(sampleId),
               path("${replicateId}.final.uniq.bam"),
               path("${replicateId}.final.uniq.bam.bai")
 
         script:
-        sampleId = replicateId.replaceAll(/[12]$/,'')
+        sampleId = replicateId.replaceAll(/[12]$/,'') // (4)!
         """
-        # Indel Realignment and Base Recalibration
         gatk3 -T BaseRecalibrator \
               --default_platform illumina \
               -cov ReadGroupCovariate \
@@ -944,11 +944,9 @@ The next process has the following structure:
               -nct ${task.cpus} \
               -o final.bam
 
-        # Select only unique alignments, no multimaps
         (samtools view -H final.bam; samtools view final.bam | \
         grep -w 'NH:i:1') | samtools view -Sb -  > ${replicateId}.final.uniq.bam
 
-        # Index BAM files
         samtools index ${replicateId}.final.uniq.bam
         """
     }
@@ -974,10 +972,46 @@ The next process has the following structure:
     }
     ```
 
+    1. The tuple containing the split reads in the output channel from the `rnaseq_gatk_splitNcigar` process.
+    2. The tuple containing the filtered/recoded VCF file and the tab index (TBI) file in the output channel from the `prepare_vcf_file` process.
+    3. The tuple containing the replicate id, the unique bam file and the unique bam index file which goes into two channels.
+    4. Line specifying the filename of the output bam file
+
+    Broken down, here is what the script is doing:
+
+    ```bash
+    gatk3 -T BaseRecalibrator \ # (1)!
+          --default_platform illumina \
+          -cov ReadGroupCovariate \
+          -cov QualityScoreCovariate \
+          -cov CycleCovariate \
+          -knownSites ${prepared_variants_file} \
+          -cov ContextCovariate \
+          -R ${genome} -I ${bam} \
+          --downsampling_type NONE \
+          -nct ${task.cpus} \
+          -o final.rnaseq.grp
+
+    gatk3 -T PrintReads \
+          -R ${genome} -I ${bam} \
+          -BQSR final.rnaseq.grp \
+          -nct ${task.cpus} \
+          -o final.bam
+
+    (samtools view -H final.bam; samtools view final.bam | \
+    grep -w 'NH:i:1') | samtools view -Sb -  > ${replicateId}.final.uniq.bam # (2)!
+
+    samtools index ${replicateId}.final.uniq.bam # (3)!
+    ```
+
+    1. Generates recalibration table for Base Quality Score Recalibration (BQSR)
+    2. Select only unique alignments, no multimaps
+    3. Index BAM file
+
     ??? solution
 
 
-        ```groovy linenums="1" hl_lines="70-74"
+        ```groovy linenums="1" hl_lines="67-71"
         /*
          * Process 4: GATK Recalibrate
          */
@@ -987,22 +1021,21 @@ The next process has the following structure:
             tag "${replicateId}"
 
             input:
-            path genome // (1)!
-            path index // (2)!
-            path dict // (3)!
-            tuple val(replicateId), path(bam), path(bai) // (4)!
-            tuple path(prepared_variants_file), // (5)!
+            path genome
+            path index
+            path dict
+            tuple val(replicateId), path(bam), path(bai)
+            tuple path(prepared_variants_file),
                   path(prepared_variants_file_index)
 
-            output: // (6)!
+            output:
             tuple val(sampleId),
                   path("${replicateId}.final.uniq.bam"),
                   path("${replicateId}.final.uniq.bam.bai")
 
             script:
-            sampleId = replicateId.replaceAll(/[12]$/,'') // (7)!
+            sampleId = replicateId.replaceAll(/[12]$/,'')
             """
-            # Indel Realignment and Base Recalibration
             gatk3 -T BaseRecalibrator \
                   --default_platform illumina \
                   -cov ReadGroupCovariate \
@@ -1021,11 +1054,9 @@ The next process has the following structure:
                   -nct ${task.cpus} \
                   -o final.bam
 
-            # Select only unique alignments, no multimaps
             (samtools view -H final.bam; samtools view final.bam | \
             grep -w 'NH:i:1') | samtools view -Sb -  > ${replicateId}.final.uniq.bam
 
-            # Index BAM files
             samtools index ${replicateId}.final.uniq.bam
             """
         }
@@ -1054,14 +1085,6 @@ The next process has the following structure:
                                     prepare_vcf_file.out)
         }
         ```
-
-        1. the genome fasta file.
-        2. the genome index in the output channel from the `prepare_genome_samtools` process.
-        3. the genome dictionary in the output channel from the `prepare_genome_picard` process.
-        4. the tupe containing the split reads in the output channel from the `rnaseq_gatk_splitNcigar` process.
-        5. the tuple containing the filtered/recoded VCF file and the tab index (TBI) file in the output channel from the `prepare_vcf_file` process.
-        6. the tuple containing the replicate id, the unique bam file and the unique bam index file which goes into two channels.
-        7. line specifying the filename of the output bam file
 
 Now we are ready to perform the variant calling with GATK.
 
