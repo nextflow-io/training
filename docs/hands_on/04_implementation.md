@@ -1803,7 +1803,7 @@ nextflow run final_main.nf -resume
 
 It will immediately print an output similar to the one below:
 
-````console
+```console
 Launching `final_main.nf` [evil_almeida] DSL2 - revision: 09802c02ae
 executor >  local (5)
 [6d/fafc39] process > prepare_genome_samtools                [100%] 1 of 1, cached: 1 ✔

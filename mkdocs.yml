@@ -127,22 +127,22 @@ plugins:
           docs_structure: suffix
           fallback_to_default: true
           languages:
-            - build: true
-              default: true
-              locale: en
-              name: English
-            - build: true
-              default: false
-              locale: pt
-              name: Português
-            - build: true
-              default: false
-              locale: es
-              name: Español
-            - build: true
-              default: false
-              locale: fr
-              name: Français
+              - build: true
+                default: true
+                locale: en
+                name: English
+              - build: true
+                default: false
+                locale: pt
+                name: Português
+              - build: true
+                default: false
+                locale: es
+                name: Español
+              - build: true
+                default: false
+                locale: fr
+                name: Français
           reconfigure_material: true
           reconfigure_search: true
     - search
