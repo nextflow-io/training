@@ -1355,7 +1355,7 @@ You should implement two processes having the following structure:
 
         output:
         tuple val(sampleId), path('known_snps.vcf'), emit: vcf_for_ASE
-        path 'AF.histogram.pdf'     , emit: gghist_pdfs
+        path 'AF.histogram.pdf'                    , emit: gghist_pdfs
 
         script:
         '''
