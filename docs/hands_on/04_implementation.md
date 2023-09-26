@@ -324,9 +324,9 @@ The next process has the following structure:
         path genome
 
         output:
-        path 'genome_dir'
+        path 'genome_dir' // (1)!
 
-        script:
+        script: // (2)!
         """
         mkdir -p genome_dir
 
@@ -346,6 +346,9 @@ The next process has the following structure:
     }
     ```
 
+    1. The `output` is a `path` called `genome_dir`
+    2. Before running `STAR`, it creates the output directory that will contain the resulting STAR genome index.
+
     !!! info
 
         The output of the STAR genomeGenerate command is specified here as `genome_dir`.
@@ -361,12 +364,12 @@ The next process has the following structure:
             container 'quay.io/biocontainers/star:2.7.10b--h6b7c446_1'
 
             input:
-            path genome // (1)!
+            path genome
 
             output:
-            path 'genome_dir' // (2)!
+            path 'genome_dir'
 
-            script: // (3)!
+            script:
             """
             mkdir -p genome_dir
 
@@ -385,10 +388,6 @@ The next process has the following structure:
             prepare_star_genome_index(params.genome)
         }
         ```
-
-        1. Take as input the `genome` file from the `params.genome` parameter.
-        2. The `output` is a `path` called `genome_dir`
-        3. Creates the output directory that will contain the resulting STAR genome index.
 
         !!! note
 
@@ -427,7 +426,7 @@ The next process has the following structure:
         path variantsFile
         path blacklisted
 
-        output:
+        output: // (1)!
         tuple path("${variantsFile.baseName}.filtered.recode.vcf.gz"),
               path("${variantsFile.baseName}.filtered.recode.vcf.gz.tbi")
 
@@ -452,6 +451,7 @@ The next process has the following structure:
     }
     ```
 
+    1. The output is a tuple with two paths that here are files
 
     Broken down, here is what the script is doing:
 
@@ -469,12 +469,6 @@ The next process has the following structure:
     3.   The `>` symbol is used to redirect the output to the file specified after it
     4.   `tabix` is used here to create the second output that we want to consider from this process
 
-    Try run the pipeline from the project directory with:
-
-    ```bash
-    nextflow run main.nf -resume
-    ```
-
     ??? solution
 
         ```groovy linenums="1" hl_lines="33"
@@ -486,12 +480,12 @@ The next process has the following structure:
             container 'quay.io/biocontainers/mulled-v2-b9358559e3ae3b9d7d8dbf1f401ae1fcaf757de3:ac05763cf181a5070c2fdb9bb5461f8d08f7b93b-0'
 
             input:
-            path variantsFile // (1)!
-            path blacklisted // (2)!
+            path variantsFile
+            path blacklisted
 
-            output: // (3)!
-            tuple path("${variantsFile.baseName}.filtered.recode.vcf.gz"), // (4)!
-                  path("${variantsFile.baseName}.filtered.recode.vcf.gz.tbi") // (5)!
+            output:
+            tuple path("${variantsFile.baseName}.filtered.recode.vcf.gz"),
+                  path("${variantsFile.baseName}.filtered.recode.vcf.gz.tbi")
 
             script:
             """
@@ -514,11 +508,11 @@ The next process has the following structure:
         }
         ```
 
-        1. Take as input the variants file, assigning the name `variantsFile`.
-        2. Take as input the blacklisted file, assigning the name `blacklisted`.
-        3. Out a tuple of two files
-        4. Defines the name of the first output file.
-        5. Generates the second output file (with `.tbi` suffix).
+    Try running the pipeline from the project directory with:
+
+    ```bash
+    nextflow run main.nf -resume
+    ```
 
 Congratulations! Part 1 is now complete.
 
