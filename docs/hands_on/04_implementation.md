@@ -745,27 +745,26 @@ The next process has the following structure:
         There is an optional [`tag`](https://www.nextflow.io/docs/latest/process.html#tag) line added to the start of this process. The [`tag`](https://www.nextflow.io/docs/latest/process.html#tag) line allows you to assign a name to a specific task (single instance of a process). This is particularly useful when there are many samples/replicates which pass through the same process.
 
 
-    ```groovy linenums="1" hl_lines="43"
+    ```groovy linenums="1" hl_lines="42"
     /*
      * Process 3: GATK Split on N
      */
 
     process rnaseq_gatk_splitNcigar {
         container 'quay.io/broadinstitute/gotc-prod-gatk:1.0.0-4.1.8.0-1626439571'
-        tag "${replicateId}"
+        tag "${replicateId}" // (1)!
 
         input:
-        path genome
-        path index
-        path genome_dict
-        tuple val(replicateId), path(bam), path(bai)
+        path genome // (2)!
+        path index // (3)!
+        path genome_dict // (4)!
+        tuple val(replicateId), path(bam), path(bai) // (5)!
 
         output:
-        tuple val(replicateId), path('split.bam'), path('split.bai')
+        tuple val(replicateId), path('split.bam'), path('split.bai') // (6)!
 
         script:
         """
-        # SplitNCigarReads and reassign mapping qualities
         java -jar /usr/gitc/GATK35.jar -T SplitNCigarReads \
                                        -R ${genome} -I ${bam} \
                                        -o split.bam \
@@ -792,6 +791,13 @@ The next process has the following structure:
     }
     ```
 
+    1. [`tag`](https://www.nextflow.io/docs/latest/process.html#tag) line using the replicate id as the tag.
+    2. the genome fasta file
+    3. the genome index in the output channel from the `prepare_genome_samtools` process
+    4. the genome dictionary in the output channel from the `prepare_genome_picard` process
+    5. the tuple containing the aligned reads in the output channel from the `rnaseq_mapping_star` process
+    6. a tuple containing the replicate id, the split bam file and the split bam index
+
     !!! info
 
         The GATK command above automatically creates a bam index (`.bai`) of the `split.bam` output file
@@ -800,10 +806,28 @@ The next process has the following structure:
 
         A `tag` line would also be useful in [Process 2](#process-2-star-mapping)
 
+    Broken down, here is what the script is doing:
+
+    ```bash
+    java -jar /usr/gitc/GATK35.jar -T SplitNCigarReads \ # (1)!
+                                   -R ${genome} -I ${bam} \ # (2)!
+                                   -o split.bam \ # (3)!
+                                   -rf ReassignOneMappingQuality \ # (4)!
+                                   -RMQF 255 -RMQT 60 \
+                                   -U ALLOW_N_CIGAR_READS \
+                                   --fix_misencoded_quality_scores
+    ```
+
+    1.   Use the `SplitNCigarReads` tool from GATK
+    2.   Set the reference sequence file (`-R`) and the input files containing reads (`-I`)
+    3.   Write the output BAM file to `split.bam` (`-o`)
+    4.   Reassign mapping qualities too
+
+
     ??? solution
 
 
-        ```groovy linenums="1" hl_lines="44-47"
+        ```groovy linenums="1" hl_lines="43-46"
         /*
          * Process 3: GATK Split on N
          */
@@ -813,17 +837,16 @@ The next process has the following structure:
             tag "${replicateId}"
 
             input:
-            path genome // (2)!
-            path index // (3)!
-            path genome_dict // (4)!
-            tuple val(replicateId), path(bam), path(bai) // (5)!
+            path genome
+            path index
+            path genome_dict
+            tuple val(replicateId), path(bam), path(bai)
 
             output:
-            tuple val(replicateId), path('split.bam'), path('split.bai') // (6)!
+            tuple val(replicateId), path('split.bam'), path('split.bai')
 
             script:
             """
-            # SplitNCigarReads and reassign mapping qualities
             java -jar /usr/gitc/GATK35.jar -T SplitNCigarReads \
                                            -R ${genome} -I ${bam} \
                                            -o split.bam \
@@ -853,15 +876,6 @@ The next process has the following structure:
                                     rnaseq_mapping_star.out)
         }
         ```
-
-        1. [`tag`](https://www.nextflow.io/docs/latest/process.html#tag) line using the replicate id as the tag.
-        2. the genome fasta file
-        3. the genome index in the output channel from the `prepare_genome_samtools` process
-        4. the genome dictionary in the output channel from the `prepare_genome_picard` process
-        5. the tuple containing the aligned reads in the output channel from the `rnaseq_mapping_star` process
-        6. a tuple containing the sample id, the split bam file and the split bam index
-        7. specifies the input file names `genome` and `bam` to GATK
-        8. specifies the output file names to GATK
 
 Next we perform a Base Quality Score Recalibration step using GATK.
 
