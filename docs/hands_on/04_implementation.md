@@ -1716,23 +1716,43 @@ Or run the final version of the Nextflow pipeline that is already prepared for y
 nextflow run final_main.nf -resume
 ```
 
-It will print an output similar to the one below:
+It will immediately print an output similar to the one below:
+
+````console
+Launching `final_main.nf` [evil_almeida] DSL2 - revision: 09802c02ae
+executor >  local (5)
+[6d/fafc39] process > prepare_genome_samtools                [100%] 1 of 1, cached: 1 ✔
+[38/5e729e] process > prepare_genome_picard                  [100%] 1 of 1, cached: 1 ✔
+[cb/7d9286] process > prepare_star_genome_index              [100%] 1 of 1, cached: 1 ✔
+[f7/3b5953] process > prepare_vcf_file                       [100%] 1 of 1, cached: 1 ✔
+[29/83ed80] process > rnaseq_mapping_star (3)                [ 16%] 1 of 6, cached: 1
+[e6/332dcc] process > rnaseq_gatk_splitNcigar (ENCSR000COQ1) [100%] 1 of 1, cached: 1
+[9d/359eac] process > rnaseq_gatk_recalibrate (ENCSR000COQ1) [100%] 1 of 1, cached: 1
+[-        ] process > rnaseq_call_variants                   -
+[-        ] process > post_process_vcf                       -
+[-        ] process > prepare_vcf_for_ase                    -
+[-        ] process > ASE_knownSNPs                          -
+```
+
+As you can see, it won't process everything from scratch. Even though we're running a different Nextflwo script, cache from previous runs will be taken into consideration.
+
+At the end, you should see something like the output below:
 
 ```console
-N E X T F L O W  ~  version 23.04.1
-Launching `main.nf` [nice_kirch] DSL2 - revision: 45de8f41e4
-executor >  local (43)
-[8f/0010ac] process > prepare_genome_samtools                [100%] 1 of 1 ✔
-[7e/9404fb] process > prepare_genome_picard                  [100%] 1 of 1 ✔
-[c1/52f4c2] process > prepare_star_genome_index              [100%] 1 of 1 ✔
-[d7/edc7d4] process > prepare_vcf_file                       [100%] 1 of 1 ✔
-[c6/469237] process > rnaseq_mapping_star (5)                [100%] 6 of 6 ✔
-[c4/c689ec] process > rnaseq_gatk_splitNcigar (ENCSR000CPO1) [100%] 6 of 6 ✔
-[8f/3b28cd] process > rnaseq_gatk_recalibrate (ENCSR000CPO2) [100%] 6 of 6 ✔
-[8e/3305f0] process > rnaseq_call_variants (ENCSR000CPO)     [100%] 6 of 6 ✔
-[fd/02e430] process > post_process_vcf (ENCSR000CPO)         [100%] 6 of 6 ✔
-[11/9af6f7] process > prepare_vcf_for_ase (ENCSR000CPO)      [100%] 6 of 6 ✔
-[33/6f0d90] process > ASE_knownSNPs (ENCSR000CPO)            [100%] 3 of 3 ✔
+N E X T F L O W  ~  version 23.04.3
+Launching `final_main.nf` [cranky_rosalind] DSL2 - revision: 09802c02ae
+executor >  local (34)
+[0a/e7bf16] process > prepare_genome_samtools                [100%] 1 of 1 ✔
+[87/233b95] process > prepare_genome_picard                  [100%] 1 of 1 ✔
+[25/228128] process > prepare_star_genome_index              [100%] 1 of 1 ✔
+[e3/ef7c40] process > prepare_vcf_file                       [100%] 1 of 1 ✔
+[14/3eccab] process > rnaseq_mapping_star (6)                [100%] 6 of 6 ✔
+[71/ac2c3e] process > rnaseq_gatk_splitNcigar (ENCSR000CPO2) [100%] 6 of 6 ✔
+[79/47a057] process > rnaseq_gatk_recalibrate (ENCSR000CPO2) [100%] 6 of 6 ✔
+[36/75c49b] process > rnaseq_call_variants (ENCSR000CPO)     [100%] 3 of 3 ✔
+[22/c86980] process > post_process_vcf (ENCSR000CPO)         [100%] 3 of 3 ✔
+[11/e66735] process > prepare_vcf_for_ase (ENCSR000CPO)      [100%] 3 of 3 ✔
+[7d/b7376e] process > ASE_knownSNPs (ENCSR000CPO)            [100%] 3 of 3 ✔
 ```
 
 You can notice that this time the pipeline spawns the execution of more tasks because three samples have been provided instead of one.
