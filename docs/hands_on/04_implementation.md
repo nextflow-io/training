@@ -464,10 +464,10 @@ The next process has the following structure:
     tabix ${variantsFile.baseName}.filtered.recode.vcf.gz # (4)!
     ```
 
-    1.   The `variantsFile` variable contains the path to the file with the known variants
-    2.   The `blacklisted` variable contains the path to the file with the genomic locations which are known to produce artifacts and spurious variants
-    3.   The `>` symbol is used to redirect the output to the file specified after it
-    4.   `tabix` is used here to create the second output that we want to consider from this process
+    1. The `variantsFile` variable contains the path to the file with the known variants
+    2. The `blacklisted` variable contains the path to the file with the genomic locations which are known to produce artifacts and spurious variants
+    3. The `>` symbol is used to redirect the output to the file specified after it
+    4. `tabix` is used here to create the second output that we want to consider from this process
 
     ??? solution
 
@@ -642,11 +642,11 @@ The process has the following structure:
     samtools index Aligned.sortedByCoord.out.bam # (5)!
     ```
 
-    1.   Align reads to the reference genome
-    2.   Create output directory `genomeDir` for next STAR calls within the same task
-    3.   2nd pass (improve alignments using table of splice junctions and create a new index)
-    4.   Final read alignments
-    5.   Index the BAM file
+    1. Align reads to the reference genome
+    2. Create output directory `genomeDir` for next STAR calls within the same task
+    3. 2nd pass (improve alignments using table of splice junctions and create a new index)
+    4. Final read alignments
+    5. Index the BAM file
 
     ??? solution
 
@@ -792,11 +792,11 @@ The next process has the following structure:
     ```
 
     1. [`tag`](https://www.nextflow.io/docs/latest/process.html#tag) line using the replicate id as the tag.
-    2. the genome fasta file
-    3. the genome index in the output channel from the `prepare_genome_samtools` process
-    4. the genome dictionary in the output channel from the `prepare_genome_picard` process
-    5. the tuple containing the aligned reads in the output channel from the `rnaseq_mapping_star` process
-    6. a tuple containing the replicate id, the split bam file and the split bam index
+    2. The genome fasta file
+    3. The genome index in the output channel from the `prepare_genome_samtools` process
+    4. The genome dictionary in the output channel from the `prepare_genome_picard` process
+    5. The tuple containing the aligned reads in the output channel from the `rnaseq_mapping_star` process
+    6. A tuple containing the replicate id, the split bam file and the split bam index
 
     !!! info
 
@@ -818,10 +818,10 @@ The next process has the following structure:
                                    --fix_misencoded_quality_scores
     ```
 
-    1.   Use the `SplitNCigarReads` tool from GATK
-    2.   Set the reference sequence file (`-R`) and the input files containing reads (`-I`)
-    3.   Write the output BAM file to `split.bam` (`-o`)
-    4.   Reassign mapping qualities too
+    1. Use the `SplitNCigarReads` tool from GATK
+    2. Set the reference sequence file (`-R`) and the input files containing reads (`-I`)
+    3. Write the output BAM file to `split.bam` (`-o`)
+    4. Reassign mapping qualities too
 
 
     ??? solution
