@@ -38,7 +38,7 @@ Find the one that's right for you:
 
     !!! quote inline end ""
 
-        :material-lightbulb: This is the advanced Nextflow training material used in advanced training events.
+        :material-lightbulb: This is the Nextflow training material used in advanced training events.
 
     An advanced material explores the advanced features of the Nextflow language and runtime, and how to use them to write efficient and scalable data-intensive workflows.
 
