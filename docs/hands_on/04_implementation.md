@@ -1113,36 +1113,34 @@ The next process has the following structure:
 
     Your aim is to replace the `BLANK` placeholder with the the correct process call.
 
-    ```groovy linenums="1" hl_lines="62"
+    ```groovy linenums="1" hl_lines="60"
     /*
      * Process 5: GATK Variant Calling
      */
 
     process rnaseq_call_variants {
         container 'quay.io/broadinstitute/gotc-prod-gatk:1.0.0-4.1.8.0-1626439571'
-        tag "${sampleId}"
+        tag "${sampleId}" // (1)!
 
         input:
-        path genome
-        path index
-        path dict
-        tuple val(sampleId), path(bam), path(bai)
+        path genome // (2)!
+        path index // (3)!
+        path dict  // (4)!
+        tuple val(sampleId), path(bam), path(bai) // (5)!
 
         output:
-        tuple val(sampleId), path('final.vcf')
+        tuple val(sampleId), path('final.vcf') // (6)!
 
         script:
         """
         echo "${bam.join('\n')}" > bam.list
 
-        # Variant calling
         java -jar /usr/gitc/GATK35.jar -T HaplotypeCaller \
                                        -R ${genome} -I bam.list \
                                        -dontUseSoftClippedBases \
                                        -stand_call_conf 20.0 \
                                        -o output.gatk.vcf.gz
 
-        # Variant filtering
         java -jar /usr/gitc/GATK35.jar -T VariantFiltration \
                                        -R ${genome} -V output.gatk.vcf.gz \
                                        -window 35 -cluster 3 \
@@ -1179,38 +1177,66 @@ The next process has the following structure:
     }
     ```
 
+    1. [`tag`](https://www.nextflow.io/docs/latest/process.html#tag) line with the using the sample id as the tag.
+    2. The genome fasta file.
+    3. The genome index in the output channel from the `prepare_genome_samtools` process.
+    4. The genome dictionary in the output channel from the `prepare_genome_picard` process.
+    5. The tuples grouped by sampleID in the output channel from the `rnaseq_gatk_recalibrate` process.
+    6. The tuple containing the sample ID and final VCF file.
+
+    Broken down, here is what the script is doing:
+
+    ```bash
+    echo "${bam.join('\n')}" > bam.list # (1)!
+
+    java -jar /usr/gitc/GATK35.jar -T HaplotypeCaller \ # (2)!
+                                   -R ${genome} -I bam.list \
+                                   -dontUseSoftClippedBases \
+                                   -stand_call_conf 20.0 \
+                                   -o output.gatk.vcf.gz
+
+    java -jar /usr/gitc/GATK35.jar -T VariantFiltration \ # (3)!
+                                   -R ${genome} -V output.gatk.vcf.gz \
+                                   -window 35 -cluster 3 \
+                                   -filterName FS -filter "FS > 30.0" \
+                                   -filterName QD -filter "QD < 2.0" \
+                                   -o final.vcf
+    ```
+
+    1. Create a file containing a list of BAM files
+    2. Variant calling step
+    3. Variant filtering step
+
     ??? solution
 
-        ```groovy linenums="1" hl_lines="62-72"
+        ```groovy linenums="1" hl_lines="60-69"
         /*
          * Process 5: GATK Variant Calling
          */
 
         process rnaseq_call_variants {
             container 'quay.io/broadinstitute/gotc-prod-gatk:1.0.0-4.1.8.0-1626439571'
-            tag "${sampleId}" // (1)!
+            tag "${sampleId}"
 
             input:
-            path genome // (2)!
-            path index // (3)!
-            path dict // (4)!
-            tuple val(sampleId), path(bam), path(bai) // (5)!
+            path genome
+            path index
+            path dict
+            tuple val(sampleId), path(bam), path(bai)
 
             output:
-            tuple val(sampleId), path('final.vcf') // (6)!
+            tuple val(sampleId), path('final.vcf')
 
             script:
             """
             echo "${bam.join('\n')}" > bam.list
 
-            # Variant calling
             java -jar /usr/gitc/GATK35.jar -T HaplotypeCaller \
                                            -R ${genome} -I bam.list \
                                            -dontUseSoftClippedBases \
                                            -stand_call_conf 20.0 \
                                            -o output.gatk.vcf.gz
 
-            # Variant filtering
             java -jar /usr/gitc/GATK35.jar -T VariantFiltration \
                                            -R ${genome} -V output.gatk.vcf.gz \
                                            -window 35 -cluster 3 \
@@ -1246,7 +1272,7 @@ The next process has the following structure:
             rnaseq_gatk_recalibrate
                 .out
                 | groupTuple
-                | set { recalibrated_samples } // (7)!
+                | set { recalibrated_samples } // (1)!
 
             rnaseq_call_variants(params.genome,
                                  prepare_genome_samtools.out,
@@ -1255,13 +1281,7 @@ The next process has the following structure:
         }
         ```
 
-        1.   [`tag`](https://www.nextflow.io/docs/latest/process.html#tag) line with the using the sample id as the tag.
-        2.   the genome fasta file.
-        3.   the genome index in the output channel from the `prepare_genome_samtools` process.
-        4.   the genome dictionary in the output channel from the `prepare_genome_picard` process.
-        5.   the tuples grouped by sampleID in the output channel from the `rnaseq_gatk_recalibrate` process.
-        6.   the tuple containing the sample ID and final VCF file.
-        7.   new channel to aggregate the `bam` files from different replicates into sample level.
+        1. New channel to aggregate the `bam` files from different replicates into sample level.
 
 ## Processes 6A and 6B: ASE & RNA Editing
 
@@ -1538,9 +1558,9 @@ The final step is the GATK ASEReadCounter.
         .set { BLANK } // (3)!
     ```
 
-    1.   an operator that joins two channels taking a key into consideration. See [here](https://www.nextflow.io/docs/latest/operator.html?join#join) for more details
-    2.   the map operator can apply any function to every item on a channel. In this case we take our tuple from the previous step, define the separate elements and create a new tuple.
-    3.   rename the resulting as `grouped_vcf_bam_bai_ch`
+    1. An operator that joins two channels taking a key into consideration. See [here](https://www.nextflow.io/docs/latest/operator.html?join#join) for more details
+    2. The map operator can apply any function to every item on a channel. In this case we take our tuple from the previous step, define the separate elements and create a new tuple.
+    3. Rename the resulting as `grouped_vcf_bam_bai_ch`
 
     ??? solution
 
