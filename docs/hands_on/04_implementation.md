@@ -124,7 +124,7 @@ The first process has the following structure:
 
 !!! exercise "Problem #2"
 
-    Copy the code below and paste it at the end of `main.nf`, removing the previous workflow block. Be careful not to accidentally ave multiple workflow blocks.
+    Copy the code below and paste it at the end of `main.nf`, removing the previous workflow block. Be careful not to accidentally have multiple workflow blocks.
 
     Your aim is to replace the `BLANK` placeholder with the the correct process call.
 
@@ -137,10 +137,10 @@ The first process has the following structure:
         container 'quay.io/biocontainers/samtools:1.3.1--h0cf4675_11'
 
         input:
-        path genome
+        path genome // (1)!
 
         output:
-        path "${genome}.fai"
+        path "${genome}.fai" // (2)!
 
         script:
         """
@@ -155,24 +155,15 @@ The first process has the following structure:
     }
     ```
 
+    1. Take as input the genome file from the `params.genome` parameter and refer to it within the process as `genome`
+    2. The output is a path named just like the input file but adding `.fai` to the end, e.g. `ref_genome.fa.fai`
+
     In plain english, the process could be written as:
 
     -   A **process** called `prepare_genome_samtools`
     -   takes as **input** the genome file
     -   and creates as **output** a genome index file
     -   **script**: using samtools create the genome index from the genome file
-
-    Now when we run the pipeline, we see that the process `prepare_genome_samtools` is submitted:
-
-    ```bash
-    nextflow run main.nf -resume
-    ```
-    ```console
-    N E X T F L O W  ~  version 23.04.1
-    Launching `main.nf` [cranky_bose] - revision: d1df5b7267
-    executor >  local (1)
-    [cd/47f882] process > prepare_genome_samtools [100%] 1 of 1 ✔
-    ```
 
     ??? solution
 
@@ -208,6 +199,18 @@ The first process has the following structure:
         !!! warning
 
             `params.genome` is just a regular variable, not a channel, but when passed as input to a process, it's automatically converted into a value channel.
+
+    Now when we run the pipeline, we see that the process `prepare_genome_samtools` is submitted:
+
+    ```bash
+    nextflow run main.nf -resume
+    ```
+    ```console
+    N E X T F L O W  ~  version 23.04.1
+    Launching `main.nf` [cranky_bose] - revision: d1df5b7267
+    executor >  local (1)
+    [cd/47f882] process > prepare_genome_samtools [100%] 1 of 1 ✔
+    ```
 
 ## Process 1B: Create a FASTA genome sequence dictionary with Picard for GATK
 
