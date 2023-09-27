@@ -78,7 +78,6 @@ process {
 }
 ```
 
-
 ### Dynamic Directives
 
 We can specify dynamic directives using closures that are computed as the task is submitted. This allows us to (for example) scale the number of CPUs used by a task by the number of input files.
@@ -95,7 +94,7 @@ process FASTQC {
     tuple val(sample_id), path(reads)
 
     output:
-    path "fastqc_${sample_id}_logs" 
+    path "fastqc_${sample_id}_logs"
 
     script:
     """
@@ -135,7 +134,7 @@ Launching `https://github.com/nextflow-io/rnaseq-nf` [fabulous_bartik] DSL2 - re
  transcriptome: /home/gitpod/.nextflow/assets/nextflow-io/rnaseq-nf/data/ggal/ggal_1_48850000_49020000.Ggal71.500bpflank.fa
  reads        : /home/gitpod/.nextflow/assets/nextflow-io/rnaseq-nf/data/ggal/ggal_gut_{1,2}.fq
  outdir       : results
- 
+
 executor >  local (4)
 [1d/3c5cfc] process > RNASEQ:INDEX (ggal_1_48850000_49020000) [100%] 1 of 1 ✔
 [38/a6b717] process > RNASEQ:FASTQC (Total size: 1.3 MB)      [100%] 1 of 1 ✔
@@ -147,21 +146,21 @@ Done! Open the following report in your browser --> results/multiqc_report.html
 
 Note that dynamic directives need to be supplied as closures encases in curly braces.
 
-
 ### Retry Strategies
 
 The most common use for dynamic process directives is to enable tasks that fail due to insufficient memory to be resubmitted for a second attempt with more memory.
 
 To enable this, two directives are needed:
 
-- `maxRetries`
-- `errorStrategy`
+-   `maxRetries`
+-   `errorStrategy`
 
 The `errorStrategy` directive determines what action Nextflow should take in the event of a task failure (a non-zero exit code). The available options are:
-- `terminate`: Nextflow terminates the execution as soon as an error condition is reported. Pending jobs are killed (default)
-- `finish`: Initiates an orderly pipeline shutdown when an error condition is raised, waiting the completion of any submitted job.
-- `ignore`: Ignores processes execution errors.
-- `retry`: Re-submit for execution a process returning an error condition.
+
+-   `terminate`: Nextflow terminates the execution as soon as an error condition is reported. Pending jobs are killed (default)
+-   `finish`: Initiates an orderly pipeline shutdown when an error condition is raised, waiting the completion of any submitted job.
+-   `ignore`: Ignores processes execution errors.
+-   `retry`: Re-submit for execution a process returning an error condition.
 
 If the `errorStrategy` is "retry", then it will retry up to the value of `maxRetries` times.
 
@@ -189,6 +188,3 @@ process {
         cpus 2
         // ...
     ```
-
-
-
