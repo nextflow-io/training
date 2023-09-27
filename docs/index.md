@@ -34,6 +34,16 @@ Find the one that's right for you:
 
     [Start the Nextflow Training Workshop :material-arrow-right:](basic_training/index.md){ .md-button .md-button--primary }
 
+!!! exercise "Advanced training"
+
+    !!! quote inline end ""
+
+        :material-lightbulb: This is the Nextflow training material used in advanced training events.
+
+    An advanced material exploring the advanced features of the Nextflow language and runtime, and how to use them to write efficient and scalable data-intensive workflows.
+
+    [Launch the Advanced Training :material-arrow-right:](advanced/index.md){ .md-button .md-button--primary }
+
 !!! exercise "Hands on training"
 
     !!! quote inline end ""

@@ -21,6 +21,17 @@ nav:
           - basic_training/tower.md
           - basic_training/cache_and_resume.md
           - basic_training/debugging.md
+    - Advanced Training:
+          - advanced/index.md
+          - advanced/setup.md
+          - advanced/operators.md
+          - advanced/metadata.md
+          - advanced/grouping.md
+          - advanced/groovy.md
+          - advanced/structure.md
+          - advanced/configuration.md
+          - advanced/summary.md
+          - advanced/support.md
     - Hands on:
           - hands_on/index.md
           - hands_on/01_datasets.md
@@ -117,6 +128,7 @@ plugins:
     - enumerate-headings:
           restart_increment_after:
               - hands_on/01_datasets.md
+              - advanced/operators.md
           exclude:
               - index.md
               - help.md
