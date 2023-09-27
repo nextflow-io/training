@@ -23,13 +23,13 @@ nav:
           - basic_training/debugging.md
     - Advanced Training:
           - advanced/index.md
+          - advanced/setup.md
           - advanced/operators.md
           - advanced/metadata.md
           - advanced/grouping.md
           - advanced/groovy.md
           - advanced/structure.md
           - advanced/configuration.md
-          - advanced/testing.md
           - advanced/summary.md
           - advanced/support.md
     - Hands on:

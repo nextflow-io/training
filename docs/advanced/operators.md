@@ -1,8 +1,6 @@
 # Operator Tour
 
-In this chapter, we take a curated tour of the Nextflow operators. Commonly used and well understood operators are not covered here - only those that we've seen could use more attention or those where the usage could be more elaborate.
-
-These modest set of operators have been chosen to illustrate tangential concepts and Nextflow features.
+In this chapter, we take a curated tour of the Nextflow operators. Commonly used and well understood operators are not covered here - only those that we've seen could use more attention or those where the usage could be more elaborate. These set of operators have been chosen to illustrate tangential concepts and Nextflow features.
 
 ## `map`
 
@@ -365,6 +363,39 @@ Channel.from(1,2,3,4,5)
 ```
 
 If you have processes that output multiple channels and input multiple channels and the cardinality matches, they can be chained together in the same manner.
+
+## `groupTuple`
+
+A common operation is to group elements from a _single_ channel where those elements share a common key. Take this example samplesheet as an example:
+
+```groovy linenums="1"
+workflow {
+    Channel.fromPath("data/samplesheet.csv")
+    | splitCsv(header: true)
+    | map { row ->
+        meta = [id: row.id, type: row.type]
+        [meta, row.repeat, [row.fastq1, row.fastq2]]
+    }
+    | view
+}
+```
+
+We see that there are multiple rows where the first element in the item emitted by the channel is the Map `[id:sampleA, type:normal]` and items in the channel where the first element is the Map `[id:sampleA, type:tumor]`.
+
+The `groupTuple` operator allows us to combine elements that share a common key:
+
+```groovy linenums="1"
+workflow {
+    Channel.fromPath("data/samplesheet.csv")
+    | splitCsv(header: true)
+    | map { row ->
+        meta = [id: row.id, type: row.type]
+        [meta, row.repeat, [row.fastq1, row.fastq2]]
+    }
+    | groupTuple
+    | view
+}
+```
 
 ## `transpose`
 

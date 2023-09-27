@@ -1,17 +1,9 @@
 # Metadata Propagation
 
-There are two fundamental metadata tenents in Nextflow:
+A central challenge in a lot of batch-style computation is how to ensure the metadata describing a file remains with the file. Two good rules for handling metadata in Nextflow are:
 
 -   Metadata should be explicit - be extremely wary of metadata encoded in filenames
 -   Metadata should travel through channels with the data in a tuple element.
-
-<figure markdown>
-
-![Instructions from on-hAI.](img/metadata.png)
-
-</figure>
-
-While ChatGTP advocates for storing metadata in a separate file, we have even more convenient options when using Nextflow. We can pass through Groovy objects such as maps (aka dictionaries aka associative lists aka hashes).
 
 ## Metadata Import
 

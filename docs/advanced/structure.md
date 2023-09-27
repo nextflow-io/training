@@ -9,9 +9,105 @@ There are three directories in a Nextflow workflow repository that have a specia
 
 ## `./bin`
 
-The `bin` directory (if it exists) is always added to the `$PATH` for all tasks. If the tasks are performed on a remote machine, the directory is copied across to the new machine before the task begins. It is important to know that Nextflow will take care of updating `$PATH` and ensuring the files are available wherever the task is running, but will not change the permissions of any files in that directory. If a file is called by a task as an executable, the workflow developer must ensure that the file has the correct permissions to be executed.
+The `bin` directory (if it exists) is always added to the `$PATH` for all tasks. If the tasks are performed on a remote machine, the directory is copied across to the new machine before the task begins. This Nextflow feature is designed to make it easy to include accessory scripts directly in the workflow without having to commit those scripts into the container. This feature also ensures that the scripts used inside of the workflow move on the same revision schedule as the workflow itself.
 
-<!-- TODO: Add example of adding a script to the bin directory and using it in the workflow -->
+It is important to know that Nextflow will take care of updating `$PATH` and ensuring the files are available wherever the task is running, but will not change the permissions of any files in that directory. If a file is called by a task as an executable, the workflow developer must ensure that the file has the correct permissions to be executed.
+
+For example, let's say we have a small R script that produces a csv and a tsv:
+
+
+```R linenums="1"
+#!/usr/bin/env Rscript
+library(tidyverse)
+
+plot <- ggplot(mpg, aes(displ, hwy, colour = class)) + geom_point()
+mtcars |> write_tsv("cars.tsv")
+ggsave("cars.png", plot = plot)
+```
+
+We'd like to use this script in a simple workflow:
+
+```groovy linenums="1"
+process PlotCars {
+    container 'rocker/tidyverse:latest'
+
+    output:
+    path("*.png"), emit: "plot"
+    path("*.tsv"), emit: "table"
+
+    script:
+    """
+    cars.R
+    """
+}
+
+workflow {
+    PlotCars()
+
+    PlotCars.out.table | view { "Found a tsv: $it" }
+    PlotCars.out.plot | view { "Found a png: $it" }
+}
+```
+
+To do this, we can create the bin directory, write our R script into the directory. Finally, and crucially, we make the script executable:
+
+```bash linenums="1"
+mkdir -p bin
+cat << EOF > bin/cars.R
+#!/usr/bin/env Rscript
+library(tidyverse)
+
+plot <- ggplot(mpg, aes(displ, hwy, colour = class)) + geom_point()
+mtcars |> write_tsv("cars.tsv")
+ggsave("cars.png", plot = plot)
+EOF
+chmod +x bin/cars.R
+```
+
+!!! warning
+
+    Always ensure that your scripts are executable. The scripts will not be available to your Nextflow processes without this step.
+
+
+Let's run the script and see what Nextflow is doing for us behind the scenes:
+
+```bash linenums="1"
+cat << EOF > nextflow.config
+profiles {
+    docker {
+        docker.enabled = true
+    }
+}
+EOF
+rm -r work
+nextflow run . -profile docker
+```
+
+and then inspect the `.command.run` file that Nextflow has generated
+
+``` bash
+code work/*/*/.command.run
+```
+
+You'll notice a `nxf_container_env` bash function that appends our bin directory to `$PATH`:
+
+``` bash
+nxf_container_env() {
+cat << EOF
+export PATH="\$PATH:/workspace/gitpod/nf-training/advanced/structure/bin"
+EOF
+}
+```
+
+When working on the cloud, Nextflow will also ensure that the bin directory is copied onto the virtual machine running your task in addition to the modification of `$PATH`.
+
+!!! warning
+
+    Always use a portable shebang line in your bin directory scripts.
+
+    In the R script example shown above, I may have the `Rscript` program installed at (for example) `/opt/homebrew/bin/Rscript`. If I hard-code this path into my `cars.R`, everything will work when I'm testing locally outside of the docker container, but will fail when running with docker/singularity or in the cloud as the `Rscript` program may be installed in a different location in those contexts. 
+    
+    It is __strongly__ recommended to use `#!/usr/bin/env` when setting the shebang for scripts in the `bin` directory to ensure maximum portability.
 
 ## `./templates`
 
@@ -31,7 +127,7 @@ process SayHiTemplate {
 
 In the previous chapter, we saw the addition of small helper Groovy functions to the `main.nf` file. It may at times be helpful to bundle functionality into a new Groovy class. Any classes defined in the `lib` directory are available for use in the workflow - both `main.nf` and any imported modules.
 
-Classes defined in `lib` can be used for a variety of purposes. For example, the [nf-core/rnaseq](https://github.com/nf-core/rnaseq/tree/master/lib) workflow uses five custom classes:
+Classes defined in `lib` directory can be used for a variety of purposes. For example, the [nf-core/rnaseq](https://github.com/nf-core/rnaseq/tree/master/lib) workflow uses five custom classes:
 
 1. `NfcoreSchema.groovy` for parsing the schema.json file and validating the workflow parameters.
 2. `NfcoreTemplate.groovy` for email templating and nf-core utility functions.
