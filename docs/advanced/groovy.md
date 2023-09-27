@@ -5,14 +5,14 @@ There exists in Groovy a wealth of helper classes that can be imported into Next
 First, let's move into the chapter 4 directory:
 
 ```bash
-cd groovy
+cd advanced/groovy
 ```
 
 Let's assume that we would like to pull in a samplesheet, parse the entries and run them through the FastP tool. So far, we have been concerned with local files, but Nextflow will handle remote files transparently:
 
 ```groovy linenums="1"
 workflow {
-    params.input = "https://raw.githubusercontent.com/nf-core/test-datasets/rnaseq/samplesheet/v3.4/samplesheet_test.csv"
+    params.input = "https://raw.githubusercontent.com/nf-core/test-datasets/rnaseq/samplesheet/v3.10/samplesheet_test.csv"
 
     Channel.fromPath(params.input)
     | splitCsv(header: true)
@@ -24,7 +24,7 @@ Let's write a small closure to parse each row into the now-familiar map + files 
 
 ```groovy linenums="1"
 workflow {
-    params.input = "https://raw.githubusercontent.com/nf-core/test-datasets/rnaseq/samplesheet/v3.4/samplesheet_test.csv"
+    params.input = "https://raw.githubusercontent.com/nf-core/test-datasets/rnaseq/samplesheet/v3.10/samplesheet_test.csv"
 
     Channel.fromPath(params.input)
     | splitCsv(header: true)
