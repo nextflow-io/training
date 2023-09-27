@@ -93,7 +93,7 @@ Another option is to use the [`transpose`](<https://docs.groovy-lang.org/latest/
 
 ```groovy linenums="1"
 map { id, reads ->
-    meta = [id.tokenize("_"), ['sample', 'replicate', 'type']]
+    meta = [['sample', 'replicate', 'type'], id.tokenize("_")]
         .transpose()
         .collectEntries()
     [meta, reads]
