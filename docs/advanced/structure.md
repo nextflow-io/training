@@ -15,7 +15,6 @@ It is important to know that Nextflow will take care of updating `$PATH` and ens
 
 For example, let's say we have a small R script that produces a csv and a tsv:
 
-
 ```R linenums="1"
 #!/usr/bin/env Rscript
 library(tidyverse)
@@ -68,7 +67,6 @@ chmod +x bin/cars.R
 
     Always ensure that your scripts are executable. The scripts will not be available to your Nextflow processes without this step.
 
-
 Let's run the script and see what Nextflow is doing for us behind the scenes:
 
 ```bash linenums="1"
@@ -85,13 +83,13 @@ nextflow run . -profile docker
 
 and then inspect the `.command.run` file that Nextflow has generated
 
-``` bash
+```bash
 code work/*/*/.command.run
 ```
 
 You'll notice a `nxf_container_env` bash function that appends our bin directory to `$PATH`:
 
-``` bash
+```bash
 nxf_container_env() {
 cat << EOF
 export PATH="\$PATH:/workspace/gitpod/nf-training/advanced/structure/bin"
@@ -105,8 +103,8 @@ When working on the cloud, Nextflow will also ensure that the bin directory is c
 
     Always use a portable shebang line in your bin directory scripts.
 
-    In the R script example shown above, I may have the `Rscript` program installed at (for example) `/opt/homebrew/bin/Rscript`. If I hard-code this path into my `cars.R`, everything will work when I'm testing locally outside of the docker container, but will fail when running with docker/singularity or in the cloud as the `Rscript` program may be installed in a different location in those contexts. 
-    
+    In the R script example shown above, I may have the `Rscript` program installed at (for example) `/opt/homebrew/bin/Rscript`. If I hard-code this path into my `cars.R`, everything will work when I'm testing locally outside of the docker container, but will fail when running with docker/singularity or in the cloud as the `Rscript` program may be installed in a different location in those contexts.
+
     It is __strongly__ recommended to use `#!/usr/bin/env` when setting the shebang for scripts in the `bin` directory to ensure maximum portability.
 
 ## `./templates`
