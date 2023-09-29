@@ -289,7 +289,7 @@ branch { meta, reads ->
 Some Nextflow operators return objects that contain _multiple_ channels. The `multiMap` and `branch` operators are excellent examples. In most instances, the output is assigned to a variable and then addressed by name:
 
 ```groovy linenums="1"
-numbers = Channel.from(1,2,3,4,5)
+numbers = Channel.of(1,2,3,4,5)
 | multiMap {
     small: it
     large: it * 10
@@ -301,7 +301,7 @@ numbers.large | view { num -> "Large: $num"}
 or by using the `set` operator ([documentation](https://www.nextflow.io/docs/latest/operator.html#set)):
 
 ```groovy linenums="1"
-Channel.from(1,2,3,4,5)
+Channel.of(1,2,3,4,5)
 | multiMap {
     small: it
     large: it * 10
@@ -328,7 +328,7 @@ process MultiInput {
 You can either provide the channels individually:
 
 ```groovy linenums="1"
-Channel.from(1,2,3,4,5)
+Channel.of(1,2,3,4,5)
 | multiMap {
     small: it
     large: it * 10
@@ -341,7 +341,7 @@ MultiInput(numbers.small, numbers.large)
 or you can provide the multichannel as a single input:
 
 ```groovy linenums="1"
-Channel.from(1,2,3,4,5)
+Channel.of(1,2,3,4,5)
 | multiMap {
     small: it
     large: it * 10
@@ -354,7 +354,7 @@ MultiInput(numbers)
 For an even cleaner solution, you can skip the now-redundant `set` operator:
 
 ```groovy linenums="1"
-Channel.from(1,2,3,4,5)
+Channel.of(1,2,3,4,5)
 | multiMap {
     small: it
     large: it * 10
