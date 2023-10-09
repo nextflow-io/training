@@ -326,7 +326,7 @@ for (String elem : list) {
 It is possible to define a custom function into a script, as shown here:
 
 ```groovy linenums="1"
-int fib(int n) {
+def fib(int n) {
     return n < 2 ? 1 : fib(n - 1) + fib(n - 2)
 }
 
