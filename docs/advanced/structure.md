@@ -329,7 +329,7 @@ class Dog {
 }
 ```
 
-Lastly, we will need to register the class with Kyro, the Java serialization framework. Again, Nextflow provides a helper method to do this. We can add the following to the `main.nf` file:
+Lastly, we will need to register the class with Kryo, the Java serialization framework. Again, Nextflow provides a helper method to do this. We can add the following to the `main.nf` file:
 
 ```groovy linenums="1"
 import nextflow.util.KryoHelper
