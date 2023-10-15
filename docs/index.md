@@ -62,7 +62,7 @@ Quick reference to some handy links:
 | ----------------------------------------------------------- | -------------------------------------------------------------------- |
 | [Nextflow Docs](https://nextflow.io/docs/latest/index.html) | [Nextflow Slack](https://www.nextflow.io/slack-invite.html)          |
 | [Nextflow Homepage](https://nextflow.io/)                   | [nf-core](https://nf-co.re/)                                         |
-| [Seqera Labs](https://seqera.io/)                           | [Training source on GitHub](https://github.com/nextflow-io/training) |
+| [Seqera Labs](https://seqera.io/)                           | [Seqera Community](https://community.seqera.io) |
 
 Not sure where to go? Check out the [Getting help](help.md) page.
 
