@@ -21,20 +21,20 @@ done
 
 
 nextflow run nf-core/sarek \
---input /workspace/gitpod/nf-training/variantcalling/other_data/dataset_exercise_resequencing/raw_data/sarek-input.csv \
+--input /workspace/gitpod/nf-training/data/reads/variantcalling/sarek-input.csv \
 --outdir . \
 --tools haplotypecaller \
---genome GRCh38local \
+--genome GRCh38chr21 \
 --skip_tools haplotypecaller_filter
 
 ## to run joint calling
 
 nextflow run nf-core/sarek \
---input /workspace/gitpod/nf-training/variantcalling/other_data/dataset_exercise_resequencing/raw_data/sarek-input.csv \
+--input /workspace/gitpod/nf-training/data/reads/variantcalling/sarek-input.csv \
 --outdir . \
 --tools haplotypecaller \
---genome GRCh38local \
+--genome GRCh38chr21 \
 --skip_tools haplotypecaller_filter \
 --joint_germline \
---intervals chr21_interval.list
+--intervals /workspace/gitpod/nf-training/variantcalling/chr21_intervals.list
 
