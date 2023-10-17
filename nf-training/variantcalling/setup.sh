@@ -22,3 +22,6 @@ nextflow run nf-core/sarek \
 --intervals /workspace/gitpod/nf-training/variantcalling/chr21_intervals.list \
 -resume
 
+cd /workspace/gitpod/nf-training/variantcalling/annotation/haplotypecaller/joint_variant_calling
+
+zcat joint_germline_recalibrated_snpEff.ann.vcf.gz | grep HIGH | perl -nae 'if($F[10]~/0\/0/){print $_;}'
