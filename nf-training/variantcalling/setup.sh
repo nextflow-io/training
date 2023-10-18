@@ -24,4 +24,4 @@ nextflow run nf-core/sarek \
 
 cd /workspace/gitpod/nf-training/variantcalling/annotation/haplotypecaller/joint_variant_calling
 
-zcat joint_germline_recalibrated_snpEff.ann.vcf.gz | grep HIGH | perl -nae 'if($F[10]~/0\/0/){print $_;}'
+zcat joint_germline_recalibrated_snpEff.ann.vcf.gz | grep HIGH | perl -nae 'if($F[10]=~/0\/0/){print $_;}'
