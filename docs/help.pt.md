@@ -21,7 +21,7 @@ A exceção é se você estiver seguindo o treinamento através de um workshop o
 
 ## Pergunte aos profissionais
 
-O Nextflow é um software gratuito e de código aberto, desenvolvido pela [Seqera Labs](https://seqera.io/).
+O Nextflow é um software gratuito e de código aberto, desenvolvido pela [Seqera](https://seqera.io/).
 A Seqera oferece um serviço de suporte profissional para o Nextflow e produtos associados, além de realizar sessões de treinamento sob medida.
 
 Se isso soa como algo que pode ser do seu interesse, por favor [entre em contato conosco](https://seqera.io/demo/).

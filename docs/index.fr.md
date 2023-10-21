@@ -52,7 +52,7 @@ Référence rapide de quelques liens utiles :
 | ---------------------------------------------------------------- | -------------------------------------------------------------------------- |
 | [Documents Nextflow](https://nextflow.io/docs/latest/index.html) | [Slack Nextflow ](https://www.nextflow.io/slack-invite.html)               |
 | [Page d'accueil de Nextflow](https://nextflow.io/)               | [nf-core](https://nf-co.re/)                                               |
-| [Seqera Labs](https://seqera.io/)                                | [Lien de la formation sur GitHub](https://github.com/nextflow-io/training) |
+| [Seqera](https://seqera.io/)                                | [Lien de la formation sur GitHub](https://github.com/nextflow-io/training) |
 
 Vous ne savez pas où aller ? Consultez la page [Obtenir de l'aide](help.fr.md).
 
@@ -60,15 +60,15 @@ Vous ne savez pas où aller ? Consultez la page [Obtenir de l'aide](help.fr.md).
 
 [![Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0](assets/img/cc_by-nc-nd.svg){ align=right }](https://creativecommons.org/licenses/by-nc-nd/4.0/)
 
-Tous les documents de formation ont été rédigés à l'origine par [Seqera Labs](https://seqera.io) mais il a été mis en libre accès ([CC BY-NC-ND](https://creativecommons.org/licenses/by-nc-nd/4.0/)) pour la communauté.
+Tous les documents de formation ont été rédigés à l'origine par [Seqera](https://seqera.io) mais il a été mis en libre accès ([CC BY-NC-ND](https://creativecommons.org/licenses/by-nc-nd/4.0/)) pour la communauté.
 
 Les corrections et améliorations apportées par la communauté sont les bienvenues.
 Chaque page a un :material-file-edit-outline: l'icône en haut à droite de la page, qui vous conduira à GitHub où vous pourrez éditer le matériel source de la formation par le biais d'une pull-request.
 
 <div markdown class="homepage_logos">
 
-![Seqera Labs](assets/img/seqera_logo.svg#only-light)
+![Seqera](assets/img/seqera_logo.png#only-light)
 
-![Seqera Labs](assets/img/seqera_logo_dark.svg#only-dark)
+![Seqera](assets/img/seqera_logo_dark.png#only-dark)
 
 </div>

@@ -52,7 +52,7 @@ Referencia rápida a algunos enlaces útiles:
 | ----------------------------------------------------------------------- | ------------------------------------------------------------------ |
 | [Documentación de Nextflow](https://nextflow.io/docs/latest/index.html) | [Slack de Nextflow](https://www.nextflow.io/slack-invite.html)     |
 | [Página principal de Nextflow](https://nextflow.io/)                    | [nf-core](https://nf-co.re/)                                       |
-| [Seqera Labs](https://seqera.io/)                                       | [Código fuente en GitHub](https://github.com/nextflow-io/training) |
+| [Seqera](https://seqera.io/)                                       | [Código fuente en GitHub](https://github.com/nextflow-io/training) |
 
 ¿No estás seguro por dónde comenzar? Consulta la página de [ayuda](help.md).
 
@@ -60,15 +60,15 @@ Referencia rápida a algunos enlaces útiles:
 
 [![Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0](assets/img/cc_by-nc-nd.svg){ align=right }](https://creativecommons.org/licenses/by-nc-nd/4.0/)
 
-Todo el material de capacitación fue escrito originalmente por [Seqera Labs](https://seqera.io) pero se ha hecho de código abierto ([CC BY-NC-ND](https://creativecommons.org/licenses/by-nc -nd/4.0/)) para la comunidad.
+Todo el material de capacitación fue escrito originalmente por [Seqera](https://seqera.io) pero se ha hecho de código abierto ([CC BY-NC-ND](https://creativecommons.org/licenses/by-nc -nd/4.0/)) para la comunidad.
 
 Damos la bienvenida a las correcciones y mejoras de la comunidad.
 Cada página tiene un ícono :material-file-edit-outline: en la parte superior derecha de la página, que te llevará a GitHub, donde puedes editar el material a través de un Pull Request.
 
 <div markdown class="homepage_logos">
 
-![Seqera Labs](assets/img/seqera_logo.svg#only-light)
+![Seqera](assets/img/seqera_logo.png#only-light)
 
-![Seqera Labs](assets/img/seqera_logo_dark.svg#only-dark)
+![Seqera](assets/img/seqera_logo_dark.png#only-dark)
 
 </div>

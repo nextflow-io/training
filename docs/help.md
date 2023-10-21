@@ -21,7 +21,7 @@ The exception is if you're following the training with a workshop organised by n
 
 ## Ask the professionals
 
-Nextflow is a free and open-source software, developed by [Seqera Labs](https://seqera.io/).
+Nextflow is a free and open-source software, developed by [Seqera](https://seqera.io/).
 Seqera offers a professional support service for Nextflow and associated products, as well as running bespoke training sessions.
 
 If this sounds like something that might be of interest, please [Get in touch](https://seqera.io/demo/).

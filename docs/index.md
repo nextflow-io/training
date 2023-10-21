@@ -62,7 +62,7 @@ Quick reference to some handy links:
 | ----------------------------------------------------------- | -------------------------------------------------------------------- |
 | [Nextflow Docs](https://nextflow.io/docs/latest/index.html) | [Nextflow Slack](https://www.nextflow.io/slack-invite.html)          |
 | [Nextflow Homepage](https://nextflow.io/)                   | [nf-core](https://nf-co.re/)                                         |
-| [Seqera Labs](https://seqera.io/)                           | [Seqera Community](https://community.seqera.io) |
+| [Seqera](https://seqera.io/)                           | [Seqera Community](https://community.seqera.io) |
 
 Not sure where to go? Check out the [Getting help](help.md) page.
 
@@ -70,15 +70,15 @@ Not sure where to go? Check out the [Getting help](help.md) page.
 
 [![Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0](assets/img/cc_by-nc-nd.svg){ align=right }](https://creativecommons.org/licenses/by-nc-nd/4.0/)
 
-All training material was originally written by [Seqera Labs](https://seqera.io) but has been made open-source ([CC BY-NC-ND](https://creativecommons.org/licenses/by-nc-nd/4.0/)) for the community.
+All training material was originally written by [Seqera](https://seqera.io) but has been made open-source ([CC BY-NC-ND](https://creativecommons.org/licenses/by-nc-nd/4.0/)) for the community.
 
 We welcome fixes and improvements from the community.
 Every page has a :material-file-edit-outline: icon in the top right of the page, which will take you to GitHub where you can edit the training source material via a pull-request.
 
 <div markdown class="homepage_logos">
 
-![Seqera Labs](assets/img/seqera_logo.svg#only-light)
+![Seqera](assets/img/seqera_logo.png#only-light)
 
-![Seqera Labs](assets/img/seqera_logo_dark.svg#only-dark)
+![Seqera](assets/img/seqera_logo_dark.png#only-dark)
 
 </div>
