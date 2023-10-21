@@ -74,7 +74,7 @@ Exécutez vos workflows Nextflow comme d'habitude avec l'ajout de la commande `-
 nextflow run hello.nf -with-tower
 ```
 
-Vous verrez et pourrez suivre vos **Nextflow jobs** dans Seqera Platform**.
+Vous verrez et pourrez suivre vos **Nextflow jobs** dans Seqera Platform.
 
 Pour configurer et exécuter des jobs Nextflow dans des **environnements Cloud**, visitez la [section Environnements de calcul](https://help.tower.nf/compute-envs/overview/).
 

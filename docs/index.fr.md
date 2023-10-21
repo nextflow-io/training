@@ -48,11 +48,11 @@ Trouvez celui qui vous convient le mieux :
 
 Référence rapide de quelques liens utiles :
 
-| Reference                                                        |  Communité                                                                 |
-| ---------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| [Documents Nextflow](https://nextflow.io/docs/latest/index.html) | [Slack Nextflow ](https://www.nextflow.io/slack-invite.html)               |
-| [Page d'accueil de Nextflow](https://nextflow.io/)               | [nf-core](https://nf-co.re/)                                               |
-| [Seqera](https://seqera.io/)                                | [Lien de la formation sur GitHub](https://github.com/nextflow-io/training) |
+| Reference                                                        |  Communité                                                    |
+| ---------------------------------------------------------------- | ------------------------------------------------------------- |
+| [Documents Nextflow](https://nextflow.io/docs/latest/index.html) | [Slack Nextflow ](https://www.nextflow.io/slack-invite.html)  |
+| [Page d'accueil de Nextflow](https://nextflow.io/)               | [nf-core](https://nf-co.re/)                                  |
+| [Seqera](https://seqera.io/)                                     | [Seqera Community](https://community.seqera.io)               |
 
 Vous ne savez pas où aller ? Consultez la page [Obtenir de l'aide](help.fr.md).
 
