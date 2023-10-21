@@ -18,7 +18,7 @@ nav:
           - basic_training/modules.md
           - basic_training/config.md
           - basic_training/executors.md
-          - basic_training/tower.md
+          - basic_training/seqera_platform.md
           - basic_training/cache_and_resume.md
           - basic_training/debugging.md
     - Advanced Training:
