@@ -4,6 +4,12 @@
 ## Overview
 
 
+<figure class="excalidraw">
+--8<-- "docs/variantcalling/img/interpretation.excalidraw.svg"
+</figure>
+
+
+
 ## Finding Causative Variants
 
 
@@ -54,6 +60,12 @@ chr21   44406660        rs139273180     C       T       44.91   PASS    AC=1;AF=
 chr21   45505247        .       G       GGC     52.87   PASS    AC=1;AF=0.25;AN=4;BaseQRankSum=-0.524;DP=61;ExcessHet=0;FS=0;MLEAC=1;MLEAF=0.25;MQ=60;MQRankSum=0;POSITIVE_TRAIN_SITE;QD=13.22;ReadPosRankSum=-0.842;SOR=0.446;VQSLOD=77479.67;culprit=DP;ANN=GGC|frameshift_variant|HIGH|COL18A1|ENSG00000182871|transcript|ENST00000359759.8|protein_coding|34/41|c.4227_4228insGC|p.Pro1410fs|4228/6586|4228/5265|1410/1754||,GGC|intragenic_variant|MODIFIER|SLC19A1|ENSG00000173638|gene_variant|ENSG00000173638|||n.45505248_45505247insGC||||||;LOF=(COL18A1|ENSG00000182871|1|1.00)    GT:AD:DP:GQ:PL  0/1:3,1:5:25:61,0,25 0/0:54,0:54:99:0,102,1020
 chr21   45989090        .       C       T       41.91   PASS    AC=1;AF=0.25;AN=4;BaseQRankSum=2.37;DP=86;ExcessHet=0;FS=0;MLEAC=1;MLEAF=0.25;MQ=60;MQRankSum=0;QD=2.99;ReadPosRankSum=-0.737;SOR=1.022;VQSLOD=9.09;culprit=QD;ANN=T|stop_gained|HIGH|COL6A1|ENSG00000142156|transcript|ENST00000361866.8|protein_coding|9/35|c.811C>T|p.Arg271*|892/4203|811/3087|271/1028||;LOF=(COL6A1|ENSG00000142156|1|1.00);NMD=(COL6A1|ENSG00000142156|1|1.00)     GT:AD:DP:GQ:PL       0/1:8,6:15:40:50,0,40   0/0:70,0:70:99:0,112,1494
 ```
+
+
+Looking at [clinvar](https://www.ncbi.nlm.nih.gov/clinvar/)
+
+
+
 
 
 ## Conclusions
