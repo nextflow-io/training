@@ -19,6 +19,7 @@
 .md-typeset h1 {
     color: var(--md-default-fg-color);
     font-size: 2rem;
+    font-family: 'degular';
     line-height: 2.5rem;
     font-weight: 600;
     letter-spacing: 0;
@@ -26,26 +27,31 @@
 }
 .md-typeset h2 {
     font-size: 1.5rem;
+    font-family: 'degular';
     line-height: 2rem;
     font-weight: 600;
     letter-spacing: 0;
 }
 .md-typeset h3 {
     font-size: 1.2rem;
+    font-family: 'degular';
     line-height: 1.5rem;
     font-weight: 600;
     letter-spacing: 0;
 }
 @media (min-width: 768px) {
     .md-typeset h1 {
+        font-family: 'degular';
         font-size: 3.2rem;
         line-height: 4rem;
     }
     .md-typeset h2 {
+        font-family: 'degular';
         font-size: 2rem;
         line-height: 2.5rem;
     }
     .md-typeset h3 {
+        font-family: 'degular';
         font-size: 1.5rem;
         line-height: 2rem;
     }
