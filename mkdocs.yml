@@ -18,7 +18,7 @@ nav:
           - basic_training/modules.md
           - basic_training/config.md
           - basic_training/executors.md
-          - basic_training/tower.md
+          - basic_training/seqera_platform.md
           - basic_training/cache_and_resume.md
           - basic_training/debugging.md
     - Advanced Training:
@@ -44,8 +44,8 @@ theme:
     name: material
     custom_dir: docs/assets/overrides
     language: en
-    logo: assets/img/nextflow_logo_mono.svg
-    favicon: assets/img/nf-square.png
+    logo: assets/img/nextflow-logo-white.png
+    favicon: assets/img/nextflow-icon.png
     palette:
         # Palette toggle for dark mode
         - media: "(prefers-color-scheme: dark)"
@@ -123,7 +123,7 @@ plugins:
     - social:
           cards: !ENV [CARDS, true]
           cards_color:
-              fill: "#27AE60"
+              fill: "#58BD9F"
               text: "#FFFFFF"
     - enumerate-headings:
           restart_increment_after:

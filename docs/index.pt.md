@@ -60,15 +60,15 @@ Não sabe por onde começar? Confira a página [Conseguindo ajuda](help.md).
 
 [![Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0](assets/img/cc_by-nc-nd.svg){ align=right }](https://creativecommons.org/licenses/by-nc-nd/4.0/)
 
-Todo o material de treinamento foi escrito originalmente pela [Seqera Labs](https://seqera.io) mas foi compartilhado livremente ([CC BY-NC-ND](https://creativecommons.org/licenses/by-nc-nd/4.0/)) para a comunidade.
+Todo o material de treinamento foi escrito originalmente pela [Seqera](https://seqera.io) mas foi compartilhado livremente ([CC BY-NC-ND](https://creativecommons.org/licenses/by-nc-nd/4.0/)) para a comunidade.
 
 Correções e melhorias pela comunidade são bem vindas.
 Toda página tem o ícone :material-file-edit-outline: em seu topo direito, que irá te levar ao GitHub onde você poderá editá-la através de um Pull Request.
 
 <div markdown class="homepage_logos">
 
-![Seqera Labs](assets/img/seqera_logo.svg#only-light)
+![Seqera](assets/img/seqera_logo.png#only-light)
 
-![Seqera Labs](assets/img/seqera_logo_dark.svg#only-dark)
+![Seqera](assets/img/seqera_logo_dark.png#only-dark)
 
 </div>
