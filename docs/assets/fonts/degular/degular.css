@@ -1,0 +1,15 @@
+@font-face {
+  font-family: Degular;
+  src: url("./Degular-Semibold.woff2") format("woff2");
+  src: url("./Degular-Semibold.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Degular;
+  src: url("./Degular-Bold.woff2") format("woff2");
+  src: url("./Degular-Bold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+}
