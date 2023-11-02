@@ -74,6 +74,7 @@ theme:
     icon:
         repo: fontawesome/brands/github
 extra_css:
+    - assets/stylesheets/fonts.css
     - assets/stylesheets/extra.css
 
 # Set in docs/assets/overrides/partials/copyright.html
