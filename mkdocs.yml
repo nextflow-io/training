@@ -75,7 +75,7 @@ theme:
         repo: fontawesome/brands/github
 extra_css:
     - assets/stylesheets/fonts.css
-    - assets/fonts/degular/degular.css
+    - assets/stylesheets/extra.css
 
 # Set in docs/assets/overrides/partials/copyright.html
 # so that we can have links and stuff
