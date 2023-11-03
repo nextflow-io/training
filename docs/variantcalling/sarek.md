@@ -150,5 +150,5 @@ The whole pipeline from FASTQ input to annotated VCF should run in about 25 minu
 Our final VCF file will be located in 
 
 ```bash
-./variant_calling/haplotypecaller/joint_variant_calling
+./annotation/haplotypecaller/joint_variant_calling
 ```
