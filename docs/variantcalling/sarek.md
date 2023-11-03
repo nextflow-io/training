@@ -75,8 +75,8 @@ genomes {
 		known_indels          = "${params.igenomes_base}/annotations/Mills_and_1000G_gold_standard.indels.hg38_chr21.vcf.gz"
 		known_indels_tbi      = "${params.igenomes_base}/annotations/Mills_and_1000G_gold_standard.indels.hg38_chr21.vcf.gz.tbi"
 		known_indels_vqsr     = '--resource:mills,known=false,training=true,truth=true,prior=10.0 Mills_and_1000G_gold_standard.indels.hg38_chr21.vcf.gz'
-		snpeff_db     = '105'
-		snpeff_genome = 'GRCh38'
+		snpeff_db             = '105'
+		snpeff_genome         = 'GRCh38'
 	}
 }
 ```
@@ -88,10 +88,10 @@ They can also be added to the parameters directive in the config file we just ed
 
 ```groovy
 params {
-	max_cpus   = 2
+    max_cpus   = 2
     max_memory = '6.5GB'
     max_time   = '2.h'
-	use_annotation_cache_keys = true
+    use_annotation_cache_keys = true
 }
 ```
 
