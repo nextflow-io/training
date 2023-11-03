@@ -101,18 +101,43 @@ This approach makes the computation more approachable, especially for large samp
 
 ### Identifying Variants
 
+In this phase, which is performed on each sample independently, a first step uses a sliding window to count differences compared to the reference (i.e. mismatches, INDELs) and potentially variable regions are identified. GATK calls these "active regions".
+Then, a local graph assembly of the reads is created to identify plausible haplotypes, which are aligned to the reference with a traditional alignment algorithm called "Smith-Waterman": this is used to identify variants.
+For each read in an active region, the support for each of the haplotypes is counted and a likelihood score for each combination of read/haplotype is calculated.
+The likelihoods at this step allow to calculate the support for each of the alleles in a variant site, and read-haplotype likelihoods are a key input for the Bayesian statistics used to determine the most likely genotype.
+This first genotype assignment could be sufficient if one analysed a single sample.
 
 ### Assigning Genotypes
 
+When multiple samples are analysed, information from each of them could collectively improve the genotype assignment.
+This is because the magnitude of potential biases (example: strand bias) can be better estimated, and because the distributions of those annotations used to inform the genotype assignment become more stable when more data are available, by combining multiple samples.
+The use of a larger cohort also increases the sensitivity.
+
+This is possible if the variant calling step is run by producing a variation of the VCF file format called GVCF: this format includes, in addition to variant sites, also non-variant intervals in the genome of each sample. Moreover, it reports probability likelihoods of a non-reference symbolic allele at these non-variant intervals.
+This information allows to re-genotype each sample by using data from the whole cohort.
 
 
 You can read more on the GATK website about the [logic of joint calling](https://gatk.broadinstitute.org/hc/en-us/articles/360035890431-The-logic-of-joint-calling-for-germline-short-variants).
 
 ### Filtering Variants
 
+There are several ways to spot potential false positives through filtering.
 
+*Hard filtering* uses pre-defined thresholds of different variant annotations (allele-depth, mapping quality and many others) in order to flag variants passing all these criteria, and those failing to meet any of them. This approach is mostly useful when calling a few samples and many data are not available.
+
+*Soft filtering* infers the thresholds to be applied by using the distributions of the annotations, and their overlap with known and validated variants: this approach defines those combinations of annotations more likely to describe true positives (the variants they refer to in the analysis cohort overlap with those validated in other databases). This approach is followed by a GATK tool called Variant Quality Score Recalibration (VQSR).
 
 More details can be found on the [GATK VQSR pages](https://gatk.broadinstitute.org/hc/en-us/articles/360035531612-Variant-Quality-Score-Recalibration-VQSR-).
 
+More recently, pre-trained deep learning models are also available to filter variants based on neural network architectures trained on a large number of variants from population databases.
 
 ## Annotation
+
+Once the analysis has produced a final VCF file, the final step which is necessary to interpret the results is called "annotation". 
+This step uses different databases to describe (annotate) each variant from a genomic, biological, or population point of view.
+The software used to carry out this task will add information to the VCF file such as:
+- the gene each variant overlaps with
+- the transcript the variant overlaps with
+- the potential biological consequence on each of those transcripts
+- population frequency (minor allele frequency, described in different databases such as gnomAD)
+And several other items we can use to interpret our findings from a biological or clinical point of view.
