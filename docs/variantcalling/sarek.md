@@ -129,7 +129,7 @@ process {
 
 ### Launching the pipeline
 
-Now we are ready to launch the pipeline, and we can us
+Now we are ready to launch the pipeline, and we can use the following command line:
 
 ```bash
 nextflow run nf-core/sarek \
@@ -138,5 +138,11 @@ nextflow run nf-core/sarek \
 --tools haplotypecaller,snpeff \
 --genome GRCh38chr21 \
 --joint_germline \
---intervals /workspace/gitpod/nf-training/variantcalling/chr21_intervals.list
+--intervals /workspace/gitpod/nf-training/variantcalling/exome_target_hg38_chr21.bed \
+--wes
 ```
+
+Notice that we have selected `--joint_germline` to enable the joint-genotyping workflow, we have specified our library strategy is using a capture with `--wes` and we have provided a bed file with the targets with `--intervals`. 
+The target file in this case refers to the capture intervals on chromosome 21 only, where the data have been simulated.
+
+The whole pipeline from FASTQ input to annotated VCF should run in about 25 minutes.
