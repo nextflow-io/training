@@ -88,9 +88,9 @@ They can also be added to the parameters directive in the config file we just ed
 
 ```groovy
 params {
-    max_cpus   = 2
-    max_memory = '6.5GB'
-    max_time   = '2.h'
+    max_cpus                  = 2
+    max_memory                = '6.5GB'
+    max_time                  = '2.h'
     use_annotation_cache_keys = true
 }
 ```
@@ -110,7 +110,7 @@ We can do this by editing the process descriptors for the Sarek modules running 
 process {
     withName: 'VARIANTRECALIBRATOR_INDEL' {
         ext.prefix = { "${meta.id}_INDEL" }
-        ext.args = "-an QD -an FS -an SOR -an DP  -mode INDEL"
+        ext.args   = "-an QD -an FS -an SOR -an DP  -mode INDEL"
         publishDir = [
             enabled: false
         ]
@@ -118,7 +118,7 @@ process {
 
     withName: 'VARIANTRECALIBRATOR_SNP' {
         ext.prefix = { "${meta.id}_SNP" }
-        ext.args = "-an QD -an MQ -an FS -an SOR -mode SNP"
+        ext.args   = "-an QD -an MQ -an FS -an SOR -mode SNP"
         publishDir = [
             enabled: false
         ]
