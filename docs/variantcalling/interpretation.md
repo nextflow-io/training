@@ -44,8 +44,14 @@ chr21   32576780        rs541034925     A       AC      218.41  PASS    AC=2;AF=
 ```
 
 
+![gnomad search](./img/gnomad_search.png)
+
+
 [variant data](https://gnomad.broadinstitute.org/region/21-32576780-32576780?dataset=gnomad_r3)
 
+
+
+![gnomad results](./img/gnomad_var_present.png)
 
 
 ```bash
@@ -64,7 +70,10 @@ chr21   45989090        .       C       T       41.91   PASS    AC=1;AF=0.25;AN=
 
 Looking at [clinvar](https://www.ncbi.nlm.nih.gov/clinvar/)
 
+![clinvar search](./img/clinvar_search.png)
 
+
+![clinvar results](./img/clinvar_results.png)
 
 
 
