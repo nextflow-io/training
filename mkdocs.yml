@@ -38,6 +38,11 @@ nav:
           - hands_on/02_workflow.md
           - hands_on/03_setup.md
           - hands_on/04_implementation.md
+    - Variant Calling:
+          - variantcalling/index.md
+          - variantcalling/theory.md
+          - variantcalling/sarek.md
+          - variantcalling/interpretation.md
     - help.md
 
 theme:

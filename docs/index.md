@@ -54,6 +54,18 @@ Find the one that's right for you:
 
     [Launch the Hands on Training :material-arrow-right:](hands_on/index.md){ .md-button }
 
+
+!!! exercise "Variant calling training"
+
+    !!! quote inline end ""
+
+        :material-lightbulb: This is the Nextflow training material used in training events showcasing the nf-core pipeline Sarek.
+
+    An advanced material exploring the application of a Nextflow pipeline for variant calling on sequencing data. This course will show the basics of using the nf-core pipeline Sarek to run the GATK best practices germline short variant calling workflow.
+
+    [Launch the Variant Calling Training :material-arrow-right:](variantcalling/index.md){ .md-button .md-button--primary }
+
+
 ## Resources
 
 Quick reference to some handy links:
