@@ -146,3 +146,9 @@ Notice that we have selected `--joint_germline` to enable the joint-genotyping w
 The target file in this case refers to the capture intervals on chromosome 21 only, where the data have been simulated.
 
 The whole pipeline from FASTQ input to annotated VCF should run in about 25 minutes.
+
+Our final VCF file will be located in 
+
+```bash
+./variant_calling/haplotypecaller/joint_variant_calling
+```
