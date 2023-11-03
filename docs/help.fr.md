@@ -21,7 +21,7 @@ La seule exception est si vous suivez la formation dans le cadre d'un atelier or
 
 ## Demandez aux professionnels
 
-Nextflow est un logiciel libre et gratuit, développé par [Seqera Labs](https://seqera.io/).
+Nextflow est un logiciel libre et gratuit, développé par [Seqera](https://seqera.io/).
 Seqera offre un service de support professionnel pour Nextflow et les produits associés, ainsi que des sessions de formation sur mesure.
 
 Si cela vous intéresse, veuillez [Prendre contact](https://seqera.io/demo/).

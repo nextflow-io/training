@@ -80,7 +80,7 @@ Aiming at a more comprehensive git history, pull request commits will be [squash
 
 The squashing is done by the maintainers of the GitHub repository, so if you're doing a contribution, you don't have to worry about that. This practice gives more freedom/space for contributors to get into more detail in their commit title/message without having to add the info outlined above. For example:
 
-PR: Translate to Brazilian Portuguese the Tower section of the basic training
+PR: Translate to Brazilian Portuguese the Seqera Platform section of the basic training
 
 -   Commit #1: Add missing translations to sections 1 and 2
 -   Commit #2: Add translated image to section 3
@@ -89,7 +89,7 @@ PR: Translate to Brazilian Portuguese the Tower section of the basic training
 Squashed commit to merge:
 
 ```
-Translate to Brazilian Portuguese the Tower section of the Basic Training
+Translate to Brazilian Portuguese the Seqera Platform section of the Basic Training
 
   - Add missing translations to sections 1 and 2
   - Add translated image to section 3

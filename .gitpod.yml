@@ -28,9 +28,6 @@ tasks:
     - name: Load Nextflow Tutorial
       command: docker pull -q nextflow/rnaseq-nf
 
-    - name: Install nf-core dev
-      command: pip install --upgrade --force-reinstall git+https://github.com/nf-core/tools.git@dev
-
     - name: Start Nextflow Tutorial
       command: |
           cd nf-training
