@@ -51,7 +51,7 @@ Then ensure that the downloaded binary is executable:
 chmod +x nextflow
 ```
 
-And put the `nextflow` executable into your `$PATH` (e.g. `/usr/local/bin` or `/bin/`)
+And put the `nextflow` executable into your `$PATH`. The executable could be in `/usr/local/bin`, `/bin/`, etc.
 
 ### Docker
 
