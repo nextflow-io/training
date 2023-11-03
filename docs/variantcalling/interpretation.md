@@ -8,6 +8,7 @@ When only a few individuals are involved, and in particular in clinical contexts
 ## Overview
 
 When variants have been called, and a diagnosis is necessary, investigators will need to combine:
+
 - the predictions resulting from annotations like the one we carried out
 - biological and clinical information
 
