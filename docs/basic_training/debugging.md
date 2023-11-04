@@ -65,6 +65,51 @@ Also verify the existence of the `.exitcode` and `.command.begin` files, which i
 
 You can replicate the failing execution using the command `bash .command.run` to verify the cause of the error.
 
+## Explore exactly what is run
+
+If you want to see the full commands executed when running `bash .command.run`,
+you can edit the `.command.run` file and add the following line somewhere near
+the top, but under the `#!/bin/bash` part:
+
+```bash
+set -x
+```
+
+This will make sure that all executed commands are printed out as they are
+executed.
+
+Note that you might want to do this for `.command.sh` also, since this is the
+actual command generated from the task definition in the pipeline code.
+
+You can also explore the `nxf_launch()` bash function inside `.command.run` in
+a text editor, to make sure that it looks as expected. This can be useful
+especially in a new environment, to make sure that containers are initialized
+correctly.
+
+Finally, if you want to explore the temporary folder where commands are being
+executed, you need to comment out the line that deletes this folder after the
+command is finished or interrupted. This line you can find in the
+`nxf_onexit()` function in `.command.run`.
+
+There, you can comment out (Add a `#` character in the beginning of the line)
+for the line that looks like so:
+
+```bash
+rm -rf $NXF_SCRATCH || true
+```
+
+... so that it instead becomes:
+
+```bash
+#rm -rf $NXF_SCRATCH || true
+```
+
+And then you can run `bash .command.run` again. Make note of a folder named
+something like `/tmp/nxf.XXXXXXXXX` in the output from the command, as this is
+the temporary execution folder. Now you can `cd` into this folder, since it is
+not removed after the command is finished. There you can check for example that
+the input files are correctly linked and accessible.
+
 ## Ignore errors
 
 There are cases in which a process error may be expected and it should not stop the overall workflow execution.
