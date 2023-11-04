@@ -73,14 +73,14 @@ We can see the resulting table in the following image:
 
 ![gnomad results](./img/gnomad_var_present.png)
 
-Quite importantly, the gnomAD database allows us to gather more information on the gene this variant occurs in. We can inspect the so called "constraint data", although these are currently only available for version 2.1
+Quite importantly, the gnomAD database allows us to gather more information on the gene this variant occurs in. We can inspect the so called "constraint data", by clicking on the gene name and inspecting the "constraint" table on the top right of the page.
 
 
 ![constraint](./img/gnomAD_constraint.png)
 
 This information gives us a better view of the selective pressure variation on this gene might be subject to, and therefore inform our understanding of the potential impact of a loss of function variant in this location.
 
-In this specific case however the gene is not under purifying selection neither for loss of function variants nor for missense ones.
+In this specific case however the gene is not under purifying selection neither for loss of function variants (LOEUF 0.89) nor for missense ones.
 
 
 We can continue our analysis by looking at the heterozygous variants in our case, for which the control carries a reference homozygous, with the code:
@@ -97,9 +97,13 @@ chr21   44406660        rs139273180     C       T       35.91   PASS    AC=1;AF=
 chr21   45989090        .       C       T       43.91   PASS    AC=1;AF=0.25;AN=4;BaseQRankSum=2.65;DP=89;ExcessHet=0;FS=4.359;MLEAC=1;MLEAF=0.25;MQ=60;MQRankSum=0;QD=2.58;ReadPosRankSum=-1.071;SOR=1.863;VQSLOD=240.19;culprit=FS;ANN=T|stop_gained|HIGH|COL6A1|ENSG00000142156|transcript|ENST00000361866.8|protein_coding|9/35|c.811C>T|p.Arg271*|892/4203|811/3087|271/1028||;LOF=(COL6A1|ENSG00000142156|1|1.00);NMD=(COL6A1|ENSG00000142156|1|1.00)        GT:AD:DP:GQ:PL  0/1:10,7:18:51:52,0,51  0/0:70,0:70:99:0,120,1800
 ```
 
-If we search them one by one, we will see that one in particular occurs on a gene (COL6A1) which is constrained for loss of function variants:
+If we search them one by one, we will see that one in particular occurs on a gene (COL6A1) which was previously reported as constrained for loss of function variants in the database version 2.1:
 
-![col6a1](./img/gnomAD_COL6A1.png)
+![col6a1v2](./img/gnomAD_COL6A1_v2.1.png)
+
+while the version 4.0 of the database, resulting from almost one million samples, reports the gene as *not* constrained:
+
+![col6a1v4](./img/gnomAD_COL6A1_v4.0.png)
 
 We can search for this variant in ClinVar by using an advanced search and limiting our search to both chromosome and base position, like indicated in figure below:
 
