@@ -9,8 +9,8 @@ When only a few individuals are involved, and in particular in clinical contexts
 
 When variants have been called, and a diagnosis is necessary, investigators will need to combine:
 
-- the predictions resulting from annotations like the one we carried out
-- biological and clinical information
+-   the predictions resulting from annotations like the one we carried out
+-   biological and clinical information
 
 with the goal of narrowing the search space and reducing the number of variants to be inspected.
 This approach is summarised in the diagram below:
@@ -20,7 +20,6 @@ This approach is summarised in the diagram below:
 </figure>
 
 Once the list of variants has been reduced, more in-depth analyses of the reported cases and the genomic region in existing databases might be useful to reach a conclusion.
-
 
 ## Finding Causative Variants
 
@@ -75,13 +74,11 @@ We can see the resulting table in the following image:
 
 Quite importantly, the gnomAD database allows us to gather more information on the gene this variant occurs in. We can inspect the so called "constraint data", by clicking on the gene name and inspecting the "constraint" table on the top right of the page.
 
-
 ![constraint](./img/gnomAD_constraint.png)
 
 This information gives us a better view of the selective pressure variation on this gene might be subject to, and therefore inform our understanding of the potential impact of a loss of function variant in this location.
 
 In this specific case however the gene is not under purifying selection neither for loss of function variants (LOEUF 0.89) nor for missense ones.
-
 
 We can continue our analysis by looking at the heterozygous variants in our case, for which the control carries a reference homozygous, with the code:
 
@@ -101,7 +98,7 @@ If we search them one by one, we will see that one in particular occurs on a gen
 
 ![col6a1v2](./img/gnomAD_COL6A1_v2.1.png)
 
-while the version 4.0 of the database, resulting from almost one million samples, reports the gene as *not* constrained:
+while the version 4.0 of the database, resulting from almost one million samples, reports the gene as _not_ constrained:
 
 ![col6a1v4](./img/gnomAD_COL6A1_v4.0.png)
 

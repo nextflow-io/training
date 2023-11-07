@@ -12,6 +12,6 @@ In this workshop, we will recap the application of next generation sequencing to
 
 Please note that this is not an introductory workshop, and we will assume some basic familiarity with Nextflow.
 
-By the end of this workshop, you will have the skills and knowledge to run the *sarek* workflow and customise some of its features for your own variant calling analyses.
+By the end of this workshop, you will have the skills and knowledge to run the _sarek_ workflow and customise some of its features for your own variant calling analyses.
 
 Let's get started!

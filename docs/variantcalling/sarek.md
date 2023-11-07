@@ -18,14 +18,13 @@ In order to choose the different options Sarek offers, the user should collect a
 ### Library design
 
 If the experiment used a capture (or targeted) strategy, the user will need to make sure the `bed` file with the target regions is available.
-This file will be useful if the user wants to limit variant calling and annotation to those regions. 
+This file will be useful if the user wants to limit variant calling and annotation to those regions.
 In this case the file can be passed to Sarek command line using the `--intervals target.bed` parameter.
-Should the sequencing strategy be a *whole exome* or *panel*, the pipeline gives the possibility to enable specific settings for this library type, using the parameter `--wes`.
-
+Should the sequencing strategy be a _whole exome_ or _panel_, the pipeline gives the possibility to enable specific settings for this library type, using the parameter `--wes`.
 
 ### Reference genome
 
-nf-core pipelines make use of the Illumina iGenomes collection as [reference genomes](https://nf-co.re/docs/usage/reference_genomes). 
+nf-core pipelines make use of the Illumina iGenomes collection as [reference genomes](https://nf-co.re/docs/usage/reference_genomes).
 Before starting the analysis, the user might want to check whether the genome they need is part of this collection.
 They also might want to consider downloading the reference locally, when running on premises: this would be useful for multiple runs and to speed up the analysis. In this case the parameter `--igenomes_base` might be used to pass the root directory of the downloaded references.
 
@@ -33,19 +32,16 @@ One might also need to use custom files: in this case the user might either prov
 
 We will follow this specific approach in this tutorial, since the data we will be using have been simulated on chromosome 21 of the Human GRCh38 reference, and we have prepared fasta, indexes and annotation files containing only this chromosome locally.
 
-
 ### Input files
 
 The input data should be provided in a CSV file, according to a format that is largely common for nf-core pipelines.
 The format is described in the [sarek usage pages](https://nf-co.re/sarek/3.3.2/docs/usage#input-sample-sheet-configurations).
-
 
 ## GATK Best Practices
 
 During this tutorial we will use the options Sarek offers to follow the [GATK best practices workflow](https://gatk.broadinstitute.org/hc/en-us/articles/360035535932-Germline-short-variant-discovery-SNPs-Indels-).
 
 This is solely for educational purposes, since the tutorial dataset includes only 2 samples: while joint-genotyping is a valid choice, the use of soft filtering for such a limited dataset will not offer significant improvements. Additionally, running VQSR on a small dataset will incur in issues with some annotations and will require limiting this step to fewer parameters than usual.
-
 
 ## Running Sarek Germline
 
@@ -97,7 +93,6 @@ params {
 
 The parameter `use_annotation_cache_keys` allows the annotation software to deal with the local paths when the cache is downloaded on the environment.
 
-
 ### Filtering parameters
 
 As we mentioned earlier, we will be using the VQSR filtering tool once the variants have been called.
@@ -126,7 +121,6 @@ process {
 }
 ```
 
-
 ### Launching the pipeline
 
 Now we are ready to launch the pipeline, and we can use the following command line:
@@ -142,12 +136,12 @@ nextflow run nf-core/sarek \
 --wes
 ```
 
-Notice that we have selected `--joint_germline` to enable the joint-genotyping workflow, we have specified our library strategy is using a capture with `--wes` and we have provided a bed file with the targets with `--intervals`. 
+Notice that we have selected `--joint_germline` to enable the joint-genotyping workflow, we have specified our library strategy is using a capture with `--wes` and we have provided a bed file with the targets with `--intervals`.
 The target file in this case refers to the capture intervals on chromosome 21 only, where the data have been simulated.
 
 The whole pipeline from FASTQ input to annotated VCF should run in about 25 minutes.
 
-Our final VCF file will be located in 
+Our final VCF file will be located in
 
 ```bash
 ./annotation/haplotypecaller/joint_variant_calling

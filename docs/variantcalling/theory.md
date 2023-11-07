@@ -17,7 +17,6 @@ Over the years, also thanks to the work carried out by the [GATK team](https://g
 In this scheme we can identify a few key phases in the workflow. Pre-processing is the first part, where raw data are handled and mapped to a genome reference, to be then transformed in order to increase the accuracy of the following analyses. Then, variant calling is carried out. This is followed by filtering and annotation.
 Here we will briefly discuss these key steps, which might vary depending on the specific type of data one is performing variant calling on.
 
-
 ## Alignment
 
 The alignment step is where reads obtained from genome fragments of a sample are identified as originating from a specific location in the genome.  
@@ -28,7 +27,6 @@ Mismatches, insertions and deletions (INDELs) as well as duplicated regions make
 Once each raw read has been aligned to the region of the genome it is most likely originating from, the sequence of all reads overlapping each locus can be used to identify potentially variable sites. Each read will support the presence of an allele identical to the reference, or a different one (alternative allele), and the variant calling algorithm will measure the weighted support for each allele.
 
 However, the support given by the raw data to alternative variants might be biased. For this reason, one can apply certain corrections to the data to ensure the support for the alleles is assessed correctly. This is done by performing the two steps described below: marking duplicates, and recalibrating base quality scores.
-
 
 ## Marking Duplicates
 
@@ -41,7 +39,6 @@ Duplicates can be caused by PCR during library preparation (library duplicates) 
 
 A specific step called "marking duplicates" identifies these identical pairs using their orientation and 5' position (before any clipping), which will be assumed to be coming from the same input DNA template: one representative pair is then chosen based on quality scores and other criteria, while the other ones are marked.
 Marked reads are then ignored in the following steps.
-
 
 ## Base Quality Score Recalibration
 
@@ -70,7 +67,7 @@ Let's use a simple example like the one in the diagram below, where for illustra
 --8<-- "docs/variantcalling/img/bqsr.excalidraw.svg"
 </figure>
 
-In this example we have 3 mismatches, but one is a reported variant site: we therefore only count 2 errors, over 10 observed bases. According to the approach we just explained, 
+In this example we have 3 mismatches, but one is a reported variant site: we therefore only count 2 errors, over 10 observed bases. According to the approach we just explained,
 
 $$
 Q_{empirical} = -10 \times log_{10}(\frac{2 + 1}{10 +2}) = 6.29
@@ -86,14 +83,11 @@ Our empirical Q score would be 6.29, the average reported Q score is 11.94, and 
 
 The recalibrated Q score of each base would correspond to the reported Q score minus this $\Delta$.
 
-
 In a real sequencing dataset, this calculation is performed for different groups (bins) of bases: those in the same lane, those with the same original quality score, per machine cycle, per sequencing context.
 In each bin, the difference ($\Delta$) between the average reported quality and the empirical quality is calculated.
 The recalibrated score would then be the reported score minus the sum of all deltas calculated in each bin the base belongs to.
 
 A detailed summary of this approach can be found on the [GATK BQSR page](https://gatk.broadinstitute.org/hc/en-us/articles/360035890531-Base-Quality-Score-Recalibration-BQSR-). We also found quite useful this [step by step guide](https://rstudio-pubs-static.s3.amazonaws.com/64456_4778547202f24f32b0edc325e96b061a.html) through the matematical approach. Full details are explained in the [publication](https://www.nature.com/articles/ng.806) that first proposed this method.
-
-
 
 ## Calling Variants
 
@@ -118,16 +112,15 @@ The use of a larger cohort also increases the sensitivity.
 This is possible if the variant calling step is run by producing a variation of the VCF file format called GVCF: this format includes, in addition to variant sites, also non-variant intervals in the genome of each sample. Moreover, it reports probability likelihoods of a non-reference symbolic allele at these non-variant intervals.
 This information allows to re-genotype each sample by using data from the whole cohort.
 
-
 You can read more on the GATK website about the [logic of joint calling](https://gatk.broadinstitute.org/hc/en-us/articles/360035890431-The-logic-of-joint-calling-for-germline-short-variants).
 
 ### Filtering Variants
 
 There are several ways to spot potential false positives through filtering.
 
-*Hard filtering* uses pre-defined thresholds of different variant annotations (allele-depth, mapping quality and many others) in order to flag variants passing all these criteria, and those failing to meet any of them. This approach is mostly useful when calling a few samples and enough data are not available for more sophisticated solutions.
+_Hard filtering_ uses pre-defined thresholds of different variant annotations (allele-depth, mapping quality and many others) in order to flag variants passing all these criteria, and those failing to meet any of them. This approach is mostly useful when calling a few samples and enough data are not available for more sophisticated solutions.
 
-*Soft filtering* infers the thresholds to be applied from the data themselves. This approach uses the distributions of the annotations, and their overlap with known and validated variants: it defines those combinations of annotations which are more likely to describe true positives (the variants they refer to in the analysis cohort overlap with those validated in other databases). This approach is used by a GATK tool called Variant Quality Score Recalibration (VQSR).
+_Soft filtering_ infers the thresholds to be applied from the data themselves. This approach uses the distributions of the annotations, and their overlap with known and validated variants: it defines those combinations of annotations which are more likely to describe true positives (the variants they refer to in the analysis cohort overlap with those validated in other databases). This approach is used by a GATK tool called Variant Quality Score Recalibration (VQSR).
 
 More details can be found on the [GATK VQSR pages](https://gatk.broadinstitute.org/hc/en-us/articles/360035531612-Variant-Quality-Score-Recalibration-VQSR-).
 
@@ -139,9 +132,9 @@ Once the analysis has produced a final VCF file, the final step which is necessa
 This step uses different databases to describe (annotate) each variant from a genomic, biological, or population point of view.
 The software used to carry out this task will add information to the VCF file such as:
 
-- the gene each variant overlaps with
-- the transcript the variant overlaps with
-- the potential biological consequence on each of those transcripts
-- population frequency (minor allele frequency, described in different databases such as gnomAD)
+-   the gene each variant overlaps with
+-   the transcript the variant overlaps with
+-   the potential biological consequence on each of those transcripts
+-   population frequency (minor allele frequency, described in different databases such as gnomAD)
 
 And several other items we can use to interpret our findings from a biological or clinical point of view.
