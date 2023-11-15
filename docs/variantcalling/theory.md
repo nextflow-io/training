@@ -122,7 +122,7 @@ _Hard filtering_ uses pre-defined thresholds of different variant annotations (a
 
 _Soft filtering_ infers the thresholds to be applied from the data themselves. This approach uses the distributions of the annotations, and their overlap with known and validated variants: it defines those combinations of annotations which are more likely to describe true positives (the variants they refer to in the analysis cohort overlap with those validated in other databases). This approach is used by a GATK tool called Variant Quality Score Recalibration (VQSR).
 
-More details can be found on the [GATK VQSR pages](https://gatk.broadinstitute.org/hc/en-us/articles/360035531612-Variant-Quality-Score-Recalibration-VQSR-).
+More details can be found on the [GATK VQSR page](https://gatk.broadinstitute.org/hc/en-us/articles/360035531612-Variant-Quality-Score-Recalibration-VQSR-).
 
 More recently, pre-trained deep learning models are also available to filter variants based on neural network architectures trained on a large number of variants from population databases.
 
