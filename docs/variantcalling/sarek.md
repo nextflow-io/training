@@ -35,7 +35,7 @@ We will follow this specific approach in this tutorial, since the data we will b
 ### Input files
 
 The input data should be provided in a CSV file, according to a format that is largely common for nf-core pipelines.
-The format is described in the [sarek usage pages](https://nf-co.re/sarek/3.3.2/docs/usage#input-sample-sheet-configurations).
+The format is described in the [sarek usage page](https://nf-co.re/sarek/3.3.2/docs/usage#input-sample-sheet-configurations).
 
 ## GATK Best Practices
 
