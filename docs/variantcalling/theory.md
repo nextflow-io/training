@@ -6,7 +6,7 @@ Before we dive into one of the nf-core pipelines used for variant calling, it's 
 
 The term "variant calling" is rooted in the history of DNA sequencing, and it indicates an approach where we identify (i.e. call) positions in a genome (loci) which are variable in a population (genetic variants). The specific genotype of an individual at that variant locus is then assigned.
 
-There are many different approaches for calling variants from sequencing data: here, we will look more specifically at a reference-based variant calling approach, i.e. where a reference genome is needed variant sites and variant sites are identified by comparing the reads to this reference.
+There are many different approaches for calling variants from sequencing data: here, we will look more specifically at a reference-based variant calling approach, i.e. where a reference genome is needed and variant sites are identified by comparing the reads to this reference.
 
 Over the years, also thanks to the work carried out by the [GATK team](https://gatk.broadinstitute.org/hc/en-us) at the Broad Institute, there has been a convergence on a "best practices" workflow, which is summarised in the diagram below:
 
