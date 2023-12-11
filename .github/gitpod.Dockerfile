@@ -40,8 +40,9 @@ RUN conda config --add channels defaults && \
     conda config --add channels conda-forge && \
     conda config --set channel_priority strict && \
     conda update --quiet --yes --all && \
-    conda install --quiet --yes --name base mamba && \
-    mamba install --quiet --yes --name base \
+    conda install --quiet --yes --name base python==3.11 mamba
+
+RUN mamba install --quiet --yes --name base \
         nextflow \
         nf-core \
         pytest-workflow && \
