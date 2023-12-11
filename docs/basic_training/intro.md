@@ -150,7 +150,8 @@ The `CONVERTTOUPPER` process thus launches two tasks, one for each element. The 
 
 #### Python instead of bash
 
-If you're not completely comfortable with the bash code used in the example, don't worry! You can use whatever programming language you like within Nextflow `script` blocks. For example, here is the same example using Python code:
+If you're not completely comfortable with the bash code used in the example, don't worry! You can use whatever programming language you like within Nextflow `script` blocks.
+For example, the `hello_py.nf` file contains the same example but using Python code:
 
 ```python title="nf-training/hello_py.nf" linenums="14"
 --8<-- "nf-training/hello_py.nf:14:18"
