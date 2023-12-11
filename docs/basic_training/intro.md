@@ -155,6 +155,7 @@ If you're not completely comfortable with the bash code used in the example, don
 ```python title="nf-training/hello_py.nf" linenums="14"
 --8<-- "nf-training/hello_py.nf:14:18"
 ```
+
 ```python title="nf-training/hello_py.nf" linenums="30"
 --8<-- "nf-training/hello_py.nf:30:32"
 ```
