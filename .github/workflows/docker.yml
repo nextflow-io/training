@@ -2,7 +2,7 @@
 # - Only pushes if push or release
 # - Builds without push for PRs to check the Dockerfile
 
-name: Build Docker image
+name: Build GitPod Docker image
 
 on:
     pull_request:
@@ -14,7 +14,7 @@ on:
 jobs:
     push_to_registry:
         if: github.repository == 'nextflow-io/training'
-        name: Build + Push Docker image
+        name: Build + Push Gitpod Docker image
         runs-on: ubuntu-latest
         steps:
             - name: Check out the repo
