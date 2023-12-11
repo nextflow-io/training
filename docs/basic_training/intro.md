@@ -142,7 +142,25 @@ workflow { // (18)!
 21. The final output (in the `results_ch` channel) is printed to screen using the `view` operator (appended onto the channel name).
 22. End of the workflow scope.
 
-The use of the operator `.flatten()` here is to split the two files into two separate items to be put through the next process (else they would be treated as a single element).
+This pipeline takes `params.greeting`, which defaults to the string `Hello world!`, and splits it into indiviudual words in the `SPLITLETTERS` process. Each word is written to a separate file, named `chunk_aa`, `chunk_ab`, `chunk_ac`and so on. These files are picked up as the process `output`.
+
+The second process `CONVERTTOUPPER` takes the output channel from the first process as its input.
+The use of the operator `.flatten()` here is to split the two files into two separate items to be put through the this process, else they would be treated as a single element.
+The `CONVERTTOUPPER` process thus launches two tasks, one for each element. The bash script uses `cat` to print the file contents and `tr` to convert to upper-case. It takes the resulting standard-out as the process output channel.
+
+#### Python instead of bash
+
+If you're not completely comfortable with the bash code used in the example, don't worry! You can use whatever programming language you like within Nextflow `script` blocks. For example, here is the same example using Python code:
+
+```python title="nf-training/hello_py.nf" linenums="14"
+--8<-- "nf-training/hello_py.nf:14:18"
+```
+
+```python title="nf-training/hello_py.nf" linenums="30"
+--8<-- "nf-training/hello_py.nf:30:32"
+```
+
+Note that the `$x` and `$y` variables are interpolated by Nextflow, so the resulting Python scripts will have fixed strings here (`#!python x="Hello world!"`).
 
 ### In practice
 
