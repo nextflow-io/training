@@ -1,6 +1,5 @@
 ---
 description: Getting started with Nextflow
-toc_depth: 1
 ---
 
 # Introduction
