@@ -142,7 +142,7 @@ workflow { // (18)!
 21. The final output (in the `results_ch` channel) is printed to screen using the `view` operator (appended onto the channel name).
 22. End of the workflow scope.
 
-This pipeline takes `params.greeting`, which defaults to the string `Hello world!`, and splits it into indiviudual words in the `SPLITLETTERS` process. Each word is written to a separate file, named `chunk_aa`, `chunk_ab`,  `chunk_ac`and so on. These files are picked up as the process `output`.
+This pipeline takes `params.greeting`, which defaults to the string `Hello world!`, and splits it into indiviudual words in the `SPLITLETTERS` process. Each word is written to a separate file, named `chunk_aa`, `chunk_ab`, `chunk_ac`and so on. These files are picked up as the process `output`.
 
 The second process `CONVERTTOUPPER` takes the output channel from the first process as its input.
 The use of the operator `.flatten()` here is to split the two files into two separate items to be put through the this process, else they would be treated as a single element.
