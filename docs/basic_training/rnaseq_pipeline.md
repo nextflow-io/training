@@ -1,5 +1,5 @@
 ---
-description: Basic Nextflow Training Workshop
+description: Foundational Nextflow Training Workshop
 ---
 
 # Simple RNA-Seq workflow
@@ -53,9 +53,7 @@ Launching `script1.nf` [big_baekeland] DSL2 - revision: 86d466d737
 reads: /workspace/gitpod/nf-training/data/ggal/lung_{1,2}.fq
 ```
 
-### :material-progress-question: Exercises
-
-!!! exercise
+!!! question "Exercise" 
 
     Add a fourth parameter named `outdir` to `script1.nf` and give it the string "results".
 
@@ -80,7 +78,7 @@ log.info """\
 
 `log.info` 
 
-!!! exercise
+!!! question "Exercise" 
 
     Modify `script1.nf` to print all of the workflow parameters by using a single `log.info` command as a [multiline string](https://www.nextflow.io/docs/latest/script.html#multi-line-strings) statement.
 
@@ -104,13 +102,13 @@ log.info """\
             .stripIndent(true)
         ```
 
-### :material-check-all: Summary
+!!! cboard-list-2 "Summary"
 
-In this step you have learned:
+    In this step you have learned:
 
-1. How to define parameters in your workflow script
-2. How to pass parameters by using the command line
-3. How to use `log.info` to print information and save it in the log execution file
+    1. How to define parameters in your workflow script
+    2. How to pass parameters by using the command line
+    3. How to use `log.info` to print information and save it in the log execution file
 
 ## Create a transcriptome index file
 
@@ -162,7 +160,7 @@ Here, the `params.transcriptome_file` parameter is used as the input for the `IN
     Resource requirements such as CPUs and memory limits can change with different workflow executions and platforms. Nextflow can use `$task.cpus` as a variable for the number of CPUs. See [process directives documentation](https://www.nextflow.io/docs/latest/process.html#directives) for more details.
 
 
-!!! exercise
+!!! question "Exercise" 
     
     Use the `nextflow run` command to execute `script2.nf`:
 
@@ -174,7 +172,7 @@ This execution will fail because `salmon` is not installed in your environment. 
 
 Nextflow has support for managing the execution of processes in Docker containers. This is useful when you need to execute a process that requires a specific software version or a specific operating system.
 
-!!! exercise
+!!! question "Exercise" 
     
     Add the command line option `-with-docker` to launch script2.nf with the docker container:
 
@@ -188,7 +186,7 @@ You can learn more about Docker [here](https://www.nextflow.io/docs/latest/docke
 
 To avoid being required to add `-with-docker` to your execution command every time you execute the script, you can enable docker in your `nextflow.config` file.
 
-!!! exercise
+!!! question "Exercise" 
     
     Enable docker by adding `docker.enabled = true` to your `nextflow.config` file.
 
@@ -198,7 +196,7 @@ Viewing a channel with the [`view`](https://www.nextflow.io/docs/latest/operator
 index_ch.view()
 ```
 
-!!! exercise
+!!! question "Exercise" 
 
     Print the output of the `index_ch` channel by using the [view](https://www.nextflow.io/docs/latest/operator.html#view) operator.
 
@@ -219,7 +217,7 @@ process INDEX {
 }
 ```
 
-!!! exercise
+!!! question "Exercise" 
 
     Add the `cpus` directive to the `SALMON` process to modify the number of CPUs allocated for its execution.
 
@@ -241,48 +239,44 @@ process INDEX {
         cat work/7f/f285b80022d9f61e82cd7f90436aa4/.command.sh
         ```
 
-!!! exercise "Bonus Exercise"
+Nextflow will organizes the process work directory into a series of folders. The hexadecimal folder name is the process identifier. You can view the structure of these files using the `tree` command.
 
-    Use the command `tree work` to see how Nextflow organizes the process work directory. Check [here](https://www.tecmint.com/linux-tree-command-examples/) if you need to download `tree`.
+    For example, executing `tree work` should look something like this:
 
-    ??? Solution
+```
+work
+├── 17
+│   └── 263d3517b457de4525513ae5e34ea8
+│       ├── index
+│       │   ├── complete_ref_lens.bin
+│       │   ├── ctable.bin
+│       │   ├── ctg_offsets.bin
+│       │   ├── duplicate_clusters.tsv
+│       │   ├── eqtable.bin
+│       │   ├── info.json
+│       │   ├── mphf.bin
+│       │   ├── pos.bin
+│       │   ├── pre_indexing.log
+│       │   ├── rank.bin
+│       │   ├── refAccumLengths.bin
+│       │   ├── ref_indexing.log
+│       │   ├── reflengths.bin
+│       │   ├── refseq.bin
+│       │   ├── seq.bin
+│       │   └── versionInfo.json
+│       └── transcriptome.fa -> /workspace/Gitpod_test/data/ggal/transcriptome.fa
+├── 7f
+```
 
-        It should look something like this:
+!!! cboard-list-2 "Summary"
 
-        ```
-        work
-        ├── 17
-        │   └── 263d3517b457de4525513ae5e34ea8
-        │       ├── index
-        │       │   ├── complete_ref_lens.bin
-        │       │   ├── ctable.bin
-        │       │   ├── ctg_offsets.bin
-        │       │   ├── duplicate_clusters.tsv
-        │       │   ├── eqtable.bin
-        │       │   ├── info.json
-        │       │   ├── mphf.bin
-        │       │   ├── pos.bin
-        │       │   ├── pre_indexing.log
-        │       │   ├── rank.bin
-        │       │   ├── refAccumLengths.bin
-        │       │   ├── ref_indexing.log
-        │       │   ├── reflengths.bin
-        │       │   ├── refseq.bin
-        │       │   ├── seq.bin
-        │       │   └── versionInfo.json
-        │       └── transcriptome.fa -> /workspace/Gitpod_test/data/ggal/transcriptome.fa
-        ├── 7f
-        ```
+    In this step you have learned:
 
-### :material-check-all: Summary
-
-In this step you have learned:
-
-1. How to define a process executing a custom command
-2. How process inputs are declared
-3. How process outputs are declared
-4. How to view a channel
-5. How to add a directive to a process
+    1. How to define a process executing a custom command
+    2. How process inputs are declared
+    3. How process outputs are declared
+    4. How to view a channel
+    5. How to add a directive to a process
 
 ## Collect read files by pairs
 
@@ -296,7 +290,7 @@ By adding the `view` operator to the `read_pairs_ch` channel, you can see the co
 read_pairs_ch.view()
 ```
 
-!!! exercise
+!!! question "Exercise" 
 
     Add the `read_pairs_ch.view()` command to the end of your workflow block in your script file.
 
@@ -328,7 +322,7 @@ nextflow run script3.nf --reads 'data/ggal/*_{1,2}.fq'
 
 The [`set`](https://www.nextflow.io/docs/latest/operator.html#set) operator can also be used to define a new channel variable in place of an `=` assignment.
 
-!!! exercise
+!!! question "Exercise" 
 
     Use the [set](https://www.nextflow.io/docs/latest/operator.html#set) operator in place of `=` assignment to define the `read_pairs_ch` channel.
 
@@ -342,7 +336,7 @@ The [`set`](https://www.nextflow.io/docs/latest/operator.html#set) operator can 
 
 Channel factories also have options that can be used to modify their behaviour. For example, the `checkIfExists` option can be used to check if the specified path contains file pairs. If the path does not contain file pairs, an error is thrown. A full list of options can be found in the [channel factory documentation](https://www.nextflow.io/docs/latest/channel.html#channel-factories).
 
-!!! exercise
+!!! question "Exercise" 
 
     Use the `checkIfExists` option for the [fromFilePairs](https://www.nextflow.io/docs/latest/channel.html#fromfilepairs) channel factory to check if the specified path contains file pairs.
 
@@ -354,13 +348,13 @@ Channel factories also have options that can be used to modify their behaviour. 
             .set { read_pairs_ch }
         ```
 
-### :material-check-all: Summary
+!!! cboard-list-2 "Summary"
 
-In this step you have learned:
+    In this step you have learned:
 
-1. How to use `fromFilePairs` to handle read pair files
-2. How to use the `set` operator to define a new channel variable
-3. How to use the `checkIfExists` option to check for the existence of input files
+    1. How to use `fromFilePairs` to handle read pair files
+    2. How to use the `set` operator to define a new channel variable
+    3. How to use the `checkIfExists` option to check for the existence of input files
 
 !!! info
 
@@ -400,9 +394,7 @@ Nextflow parallelizes the execution of your workflow simply by providing multipl
 
     It may be useful to apply optional settings to a specific process using [directives](https://www.nextflow.io/docs/latest/process.html#directives) by specifying them in the process body.
 
-### :material-progress-question: Exercises
-
-!!! exercise
+!!! question "Exercise" 
 
     Add a [tag](https://www.nextflow.io/docs/latest/process.html#tag) directive to the `QUANTIFICATION` process to provide a more readable execution log.
 
@@ -414,7 +406,7 @@ Nextflow parallelizes the execution of your workflow simply by providing multipl
         tag "Salmon on $sample_id"
         ```
 
-!!! exercise
+!!! question "Exercise" 
 
     Add a [publishDir](https://www.nextflow.io/docs/latest/process.html#publishdir) directive to the `QUANTIFICATION` process to store the process results in a directory of your choice.
 
@@ -426,14 +418,14 @@ Nextflow parallelizes the execution of your workflow simply by providing multipl
         publishDir params.outdir, mode: 'copy'
         ```
 
-### :material-check-all: Summary
+!!! cboard-list-2 "Summary"
 
-In this step you have learned:
+    In this step you have learned:
 
-1. How to connect two processes together by using the channel declarations
-2. How to `resume` the script execution and skip cached steps
-3. How to use the `tag` directive to provide a more readable execution output
-4. How to use the `publishDir` directive to store a process results in a path of your choice
+    1. How to connect two processes together by using the channel declarations
+    2. How to `resume` the script execution and skip cached steps
+    3. How to use the `tag` directive to provide a more readable execution output
+    4. How to use the `publishDir` directive to store a process results in a path of your choice
 
 ## Quality control
 
@@ -467,7 +459,7 @@ MULTIQC(quant_ch.mix(fastqc_ch).collect())
 
 We only want one task of MultiQC to be executed to produce one report. Therefore, we use the `mix` channel operator to combine the `quant_ch` and the `fastqc_ch` channels, followed by the `collect` operator, to return the complete channel contents as a single element.
 
-!!! exercise
+!!! question "Exercise" 
 
     Remove the `collect` operators from the `MULTIQC` process and run the script again. See what happens.
 
@@ -490,13 +482,13 @@ We only want one task of MultiQC to be executed to produce one report. Therefore
 
         Note how the `MULTIQC` process is executed **6** times.
 
-### :material-check-all: Summary
+!!! cboard-list-2 "Summary"
 
-In this step you have learned:
+    In this step you have learned:
 
-1. How to collect many outputs to a single input with the `collect` operator
-2. How to `mix` two channels into a single channel
-3. How to chain two or more operators together
+    1. How to collect many outputs to a single input with the `collect` operator
+    2. How to `mix` two channels into a single channel
+    3. How to chain two or more operators together
 
 ## Handle completion event
 
@@ -511,6 +503,12 @@ Try to run it by using the following command:
 ```bash
 nextflow run script7.nf -resume --reads 'data/ggal/*_{1,2}.fq'
 ```
+
+!!! cboard-list-2 "Summary"
+
+    In this step you have learned:
+
+    1. How to add completion events to your workflow
 
 ## Email notifications
 
@@ -573,16 +571,16 @@ fastqc.sh "$sample_id" "$reads"
 """
 ```
 
-!!! exercise
+!!! question "Exercise" 
 
     Use the example above to create an executable replace the `FASTQC` process’ in `script7.nf` with an executable `fastqc.sh` script.
 
-### :material-check-all: Summary
+!!! cboard-list-2 "Summary"
 
-In this step you have learned:
+    In this step you have learned:
 
-1. How to write or use existing custom scripts in your Nextflow workflow.
-2. How to avoid the use of absolute paths by having your scripts in the `bin/` folder.
+    1. How to write or use existing custom scripts in your Nextflow workflow.
+    2. How to avoid the use of absolute paths by having your scripts in the `bin/` folder.
 
 ## Metrics and reports
 
@@ -596,7 +594,7 @@ The `-with-timeline` option enables the creation of the workflow timeline report
 
 Finally, the `-with-dag` option enables the rendering of the workflow execution direct acyclic graph representation. The dag needs to be given a name (`-with-dag dag.png`). Note: This feature requires the installation of [Graphviz](http://www.graphviz.org/) on your computer. See [here](https://www.nextflow.io/docs/latest/tracing.html#dag-visualisation) for further details. 
 
-!!! exercise
+!!! question "Exercise" 
 
     Execute `script7.nf` and and generate a report (`-with-report`), trace (`-with-trace`), timeline (`-with-timeline`), and dag ('-with-dag dag.png').
 
@@ -618,11 +616,11 @@ Finally, the `-with-dag` option enables the rendering of the workflow execution 
 
             Run time metrics may be incomplete for runs with short running tasks, as in the case of this tutorial.
 
-### :material-check-all: Summary
+!!! cboard-list-2 "Summary"
 
-In this step you have learned:
+    In this step you have learned:
 
-1. How to generate reports and charts for your executions.
+    1. How to generate reports and charts for your executions.
 
 ## Run a project from GitHub
 
@@ -656,9 +654,9 @@ Revision are defined by using Git tags or branches defined in the project reposi
 
 Tags enable precise control of the changes in your project files and dependencies over time.
 
-### :material-check-all: Summary
+!!! cboard-list-2 "Summary"
 
-In this step you have learned:
+    In this step you have learned:
 
-1. How to execute a project directly from GitHub.
-2. How to specify a specific revision of a project.
+    1. How to execute a project directly from GitHub.
+    2. How to specify a specific revision of a project.
