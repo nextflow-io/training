@@ -154,7 +154,9 @@ docker images
 
 ### Adding additional software package to the image
 
-    Additional tools can be added to the image by adding the appropriate `RUN` command to the Dockerfile. For example, to add the `salmon` tool to the image, you can add the following line to the bottom of your Dockerfile:
+Additional tools can be added to the image by adding the appropriate `RUN` command to the Dockerfile.
+
+For example, to add the `salmon` tool to the image, you would add the following line to the bottom of your Dockerfile:
 
     ```dockerfile
     RUN curl -sSL https://github.com/COMBINE-lab/salmon/releases/download/v1.5.2/salmon-1.5.2_linux_x86_64.tar.gz | tar xz \
