@@ -86,7 +86,6 @@ To exit from the container, stop the BASH session with the `exit` command.
 
 Docker images are created by using a so-called `Dockerfile`, a simple text file containing a list of commands to assemble and configure the image with the software packages required. For example, a Dockerfile to create a container with `cowsay` and installed could be as simple as this:
 
-
 ```dockerfile
 FROM debian:bullseye-slim
 
@@ -113,7 +112,6 @@ Where "<my-image>" is the user-specified name for the container image you plan t
 !!! warning
 
     The Docker build process automatically copies all files that are located in the current directory to the Docker daemon in order to create the image. This can take a lot of time when big/many files exist. For this reason, it’s important to _always_ work in a directory containing only the files you really need to include in your Docker image. Alternatively, you can use the `.dockerignore` file to select paths to exclude from the build.
-
 
 When it completes, you can verify that the image has been created by listing all available images:
 
@@ -221,8 +219,8 @@ docker run my-image \
 
 To mount a filesystem within a Docker container, we use the `--volume` command-line option when running the container. Its argument consists of two fields separated by a colon (:):
 
-- Host source directory path 
-- Container target directory path
+-   Host source directory path
+-   Container target directory path
 
 For example:
 
