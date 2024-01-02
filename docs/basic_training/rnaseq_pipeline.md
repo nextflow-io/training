@@ -637,7 +637,7 @@ nextflow run nextflow-io/rnaseq-nf -with-docker
 
 It automatically downloads the container and stores it in the `$HOME/.nextflow` folder.
 
-The command `info` can be used to show the project information:
+The nextflow `info` command can be used to show the project information:
 
 ```bash
 nextflow info nextflow-io/rnaseq-nf
