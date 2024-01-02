@@ -53,7 +53,7 @@ Launching `script1.nf` [big_baekeland] DSL2 - revision: 86d466d737
 reads: /workspace/gitpod/nf-training/data/ggal/lung_{1,2}.fq
 ```
 
-!!! question "Exercise" 
+!!! question "Exercise"
 
     Add a fourth parameter named `outdir` to `script1.nf` and give it the string "results".
 
@@ -76,9 +76,9 @@ log.info """\
 """
 ```
 
-`log.info` 
+`log.info`
 
-!!! question "Exercise" 
+!!! question "Exercise"
 
     Modify `script1.nf` to print all of the workflow parameters by using a single `log.info` command as a [multiline string](https://www.nextflow.io/docs/latest/script.html#multi-line-strings) statement.
 
@@ -116,9 +116,9 @@ Nextflow allows the execution of any command or script by using a `process` defi
 
 A `process` is defined by providing three main declarations:
 
-- [`input`](https://www.nextflow.io/docs/latest/process.html#inputs)
-- [`output`](https://www.nextflow.io/docs/latest/process.html#outputs)
-- [`script`](https://www.nextflow.io/docs/latest/process.html#script)
+-   [`input`](https://www.nextflow.io/docs/latest/process.html#inputs)
+-   [`output`](https://www.nextflow.io/docs/latest/process.html#outputs)
+-   [`script`](https://www.nextflow.io/docs/latest/process.html#script)
 
 To add a transcriptome `INDEX` processing step to your pipeline, you will need to add the following code blocks to your `script1.nf`. Alternatively, these code blocks have already been added to `script2.nf`.
 
@@ -159,9 +159,8 @@ Here, the `params.transcriptome_file` parameter is used as the input for the `IN
 
     Resource requirements such as CPUs and memory limits can change with different workflow executions and platforms. Nextflow can use `$task.cpus` as a variable for the number of CPUs. See [process directives documentation](https://www.nextflow.io/docs/latest/process.html#directives) for more details.
 
+!!! question "Exercise"
 
-!!! question "Exercise" 
-    
     Use the `nextflow run` command to execute `script2.nf`:
 
     ```bash
@@ -172,8 +171,8 @@ This execution will fail because `salmon` is not installed in your environment. 
 
 Nextflow has support for managing the execution of processes in Docker containers. This is useful when you need to execute a process that requires a specific software version or a specific operating system.
 
-!!! question "Exercise" 
-    
+!!! question "Exercise"
+
     Add the command line option `-with-docker` to launch script2.nf with the docker container:
 
     ```bash
@@ -186,8 +185,8 @@ You can learn more about Docker [here](https://www.nextflow.io/docs/latest/docke
 
 To avoid being required to add `-with-docker` to your execution command every time you execute the script, you can enable docker in your `nextflow.config` file.
 
-!!! question "Exercise" 
-    
+!!! question "Exercise"
+
     Enable docker by adding `docker.enabled = true` to your `nextflow.config` file.
 
 Viewing a channel with the [`view`](https://www.nextflow.io/docs/latest/operator.html#view) operator is a useful way to see what is in a channel and is useful for testing and debugging:
@@ -196,7 +195,7 @@ Viewing a channel with the [`view`](https://www.nextflow.io/docs/latest/operator
 index_ch.view()
 ```
 
-!!! question "Exercise" 
+!!! question "Exercise"
 
     Print the output of the `index_ch` channel by using the [view](https://www.nextflow.io/docs/latest/operator.html#view) operator.
 
@@ -217,7 +216,7 @@ process INDEX {
 }
 ```
 
-!!! question "Exercise" 
+!!! question "Exercise"
 
     Add the `cpus` directive to the `SALMON` process to modify the number of CPUs allocated for its execution.
 
@@ -290,7 +289,7 @@ By adding the `view` operator to the `read_pairs_ch` channel, you can see the co
 read_pairs_ch.view()
 ```
 
-!!! question "Exercise" 
+!!! question "Exercise"
 
     Add the `read_pairs_ch.view()` command to the end of your workflow block in your script file.
 
@@ -301,9 +300,9 @@ read_pairs_ch.view()
         ```groovy
         read_pairs_ch.view()
         ```
-        
+
         It will print something similar to this:
-        
+
         ```bash
         [gut, [/.../data/ggal/gut_1.fq, /.../data/ggal/gut_2.fq]]
         ```
@@ -322,7 +321,7 @@ nextflow run script3.nf --reads 'data/ggal/*_{1,2}.fq'
 
 The [`set`](https://www.nextflow.io/docs/latest/operator.html#set) operator can also be used to define a new channel variable in place of an `=` assignment.
 
-!!! question "Exercise" 
+!!! question "Exercise"
 
     Use the [set](https://www.nextflow.io/docs/latest/operator.html#set) operator in place of `=` assignment to define the `read_pairs_ch` channel.
 
@@ -336,7 +335,7 @@ The [`set`](https://www.nextflow.io/docs/latest/operator.html#set) operator can 
 
 Channel factories also have options that can be used to modify their behaviour. For example, the `checkIfExists` option can be used to check if the specified path contains file pairs. If the path does not contain file pairs, an error is thrown. A full list of options can be found in the [channel factory documentation](https://www.nextflow.io/docs/latest/channel.html#channel-factories).
 
-!!! question "Exercise" 
+!!! question "Exercise"
 
     Use the `checkIfExists` option for the [fromFilePairs](https://www.nextflow.io/docs/latest/channel.html#fromfilepairs) channel factory to check if the specified path contains file pairs.
 
@@ -394,7 +393,7 @@ Nextflow parallelizes the execution of your workflow simply by providing multipl
 
     It may be useful to apply optional settings to a specific process using [directives](https://www.nextflow.io/docs/latest/process.html#directives) by specifying them in the process body.
 
-!!! question "Exercise" 
+!!! question "Exercise"
 
     Add a [tag](https://www.nextflow.io/docs/latest/process.html#tag) directive to the `QUANTIFICATION` process to provide a more readable execution log.
 
@@ -406,7 +405,7 @@ Nextflow parallelizes the execution of your workflow simply by providing multipl
         tag "Salmon on $sample_id"
         ```
 
-!!! question "Exercise" 
+!!! question "Exercise"
 
     Add a [publishDir](https://www.nextflow.io/docs/latest/process.html#publishdir) directive to the `QUANTIFICATION` process to store the process results in a directory of your choice.
 
@@ -459,7 +458,7 @@ MULTIQC(quant_ch.mix(fastqc_ch).collect())
 
 We only want one task of MultiQC to be executed to produce one report. Therefore, we use the `mix` channel operator to combine the `quant_ch` and the `fastqc_ch` channels, followed by the `collect` operator, to return the complete channel contents as a single element.
 
-!!! question "Exercise" 
+!!! question "Exercise"
 
     Remove the `collect` operators from the `MULTIQC` process and run the script again. See what happens.
 
@@ -571,7 +570,7 @@ fastqc.sh "$sample_id" "$reads"
 """
 ```
 
-!!! question "Exercise" 
+!!! question "Exercise"
 
     Use the example above to create an executable replace the `FASTQC` process’ in `script7.nf` with an executable `fastqc.sh` script.
 
@@ -592,9 +591,9 @@ The `-with-trace` option enables the creation of a tab separated value (TSV) fil
 
 The `-with-timeline` option enables the creation of the workflow timeline report showing how processes were executed over time. This may be useful to identify the most time consuming tasks and bottlenecks.
 
-Finally, the `-with-dag` option enables the rendering of the workflow execution direct acyclic graph representation. The dag needs to be given a name (`-with-dag dag.png`). Note: This feature requires the installation of [Graphviz](http://www.graphviz.org/) on your computer. See [here](https://www.nextflow.io/docs/latest/tracing.html#dag-visualisation) for further details. 
+Finally, the `-with-dag` option enables the rendering of the workflow execution direct acyclic graph representation. The dag needs to be given a name (`-with-dag dag.png`). Note: This feature requires the installation of [Graphviz](http://www.graphviz.org/) on your computer. See [here](https://www.nextflow.io/docs/latest/tracing.html#dag-visualisation) for further details.
 
-!!! question "Exercise" 
+!!! question "Exercise"
 
     Execute `script7.nf` and and generate a report (`-with-report`), trace (`-with-trace`), timeline (`-with-timeline`), and dag ('-with-dag dag.png').
 
