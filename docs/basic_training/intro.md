@@ -128,7 +128,7 @@ workflow { // (18)!
 9. Three double quotes start and end the code block to execute this `process`.
    Inside is the code to execute — printing the `input` value 'x' (called using the dollar symbol [$] prefix), splitting the string into chunks with a length of 6 characters ("Hello " and "world!"), and saving each to a separate file (chunk_aa and chunk_ab).
 10. End of the first process block.
-11. Beginning the second process block, defined as `CONVERTTOUPPER`.
+11. Beginning of the second process block, defined as `CONVERTTOUPPER`.
 12. Input declaration for the `CONVERTTOUPPER` `process`.
 13. Tells the `process` to expect an `input` file(s) (`path`; i.e. chunk_aa and chunk_ab), that we assign to the variable 'y'.
 14. Output declaration for the `CONVERTTOUPPER` process.
