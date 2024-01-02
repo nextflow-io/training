@@ -174,4 +174,4 @@ export NXF_VER=23.10.0
 
     This tutorial workshop requires `NXF_VER=23.10.0`, or later.
 
-If you have exported `NXF_VER` variable, execute `nextflow -version` again to confirm that the change has taken effect.
+If you have exported the `NXF_VER` variable, execute `nextflow -version` again to confirm that the change has taken effect.
