@@ -6,49 +6,69 @@ description: Basic Nextflow Training Workshop
 
 Computational workflows are rarely composed of a single script or tool. More often, they depend on dozens of software components or libraries.
 
-Installing and maintaining such dependencies is a challenging task and the most common source of irreproducibility in scientific applications.
+Installing and maintaining such dependencies is a challenging task and a common source of irreproducibility in scientific applications.
 
-To overcome these issues, we use containers that enable software dependencies, i.e. tools and libraries required by a data analysis application, to be encapsulated in one or more self-contained, ready-to-run, immutable Linux container images, that can be easily deployed in any platform that supports the container runtime.
+To overcome these issues, we use containers that enable software dependencies, i.e. tools and libraries required by a data analysis application, to be encapsulated in one or more self-contained, ready-to-run, immutable Linux container images. These container images can be easily deployed in any platform that supports the container runtime.
 
-Containers can be executed in an isolated manner from the hosting system. Having its own copy of the file system, processing space, memory management, etc.
+Containers can be executed in an isolated manner from the hosting system. Having its own copy of the file system, processing space, and memory management.
 
 !!! info
 
     Containers were first introduced with kernel 2.6 as a Linux feature known as _Control Groups_ or [Cgroups](https://en.wikipedia.org/wiki/Cgroups).
 
-## Docker
+## Docker basics
 
 Docker is a handy management tool to build, run and share container images.
 
-These images can be uploaded and published in a centralized repository known as [Docker Hub](https://hub.docker.com), or hosted by other parties like [Quay](https://quay.io).
+These container images can be uploaded and published in a centralized repository known as [Docker Hub](https://hub.docker.com), or hosted by other parties, such as [Quay](https://quay.io).
 
 ### Run a container
 
-A container can be run using the following command:
+A container can be `run` using the following command:
 
 ```bash
 docker run <container-name>
 ```
 
-Try for example the following publicly available container (if you have Docker installed):
+!!! question "Exercise"
 
-```bash
-docker run hello-world
-```
+    Run the publicly available `hello-world` container:
+
+    ```bash
+    docker run hello-world
+    ```
 
 ### Pull a container
 
-The pull command allows you to download a Docker image without running it. For example:
+The `pull` command allows you to download a Docker image without running it. For example:
 
 ```bash
-docker pull debian:bullseye-slim
+docker pull <container-name>
 ```
 
-The above command downloads a Debian Linux image. You can check it exists by using:
+You can check a container has been pulled using the `images` command. For example:
 
 ```bash
 docker images
 ```
+
+!!! question "Exercise"
+
+    Pull the publicly available `debian:bullseye-slim` container and check that it has been downloaded:
+
+    ??? Solution
+
+        Pull the container:
+
+        ```bash
+        docker pull debian:bullseye-slim
+        ```
+
+        Check the container has been downloaded:
+
+        ```bash
+        docker images
+        ```
 
 ### Run a container in interactive mode
 
@@ -64,15 +84,8 @@ To exit from the container, stop the BASH session with the `exit` command.
 
 ### Your first Dockerfile
 
-Docker images are created by using a so-called `Dockerfile`, which is a simple text file containing a list of commands to assemble and configure the image with the software packages required.
+Docker images are created by using a so-called `Dockerfile`, a simple text file containing a list of commands to assemble and configure the image with the software packages required. For example, a Dockerfile to create a container with `cowsay` and installed could be as simple as this:
 
-Here, you will create a Docker image containing cowsay and the Salmon tool.
-
-!!! warning
-
-    The Docker build process automatically copies all files that are located in the current directory to the Docker daemon in order to create the image. This can take a lot of time when big/many files exist. For this reason, it’s important to _always_ work in a directory containing only the files you really need to include in your Docker image. Alternatively, you can use the `.dockerignore` file to select paths to exclude from the build.
-
-Use your favorite editor (e.g., `vim` or `nano`) to create a file named `Dockerfile` and copy the following content:
 
 ```dockerfile
 FROM debian:bullseye-slim
@@ -85,53 +98,101 @@ RUN apt-get update && apt-get install -y curl cowsay
 ENV PATH=$PATH:/usr/games/
 ```
 
-### Build the image
-
-Build the Docker image based on the Dockerfile by using the following command:
+Once your Dockerfile is ready, you can build the image by using the `build` command. For example:
 
 ```bash
-docker build -t my-image .
+docker build -t <my-image> .
 ```
 
-Where "my-image" is the user-specified name for the container image you plan to build .
+Where "<my-image>" is the user-specified name for the container image you plan to build.
 
 !!! tip
 
     Don’t miss the dot in the above command.
 
-When it completes, verify that the image has been created by listing all available images:
+!!! warning
+
+    The Docker build process automatically copies all files that are located in the current directory to the Docker daemon in order to create the image. This can take a lot of time when big/many files exist. For this reason, it’s important to _always_ work in a directory containing only the files you really need to include in your Docker image. Alternatively, you can use the `.dockerignore` file to select paths to exclude from the build.
+
+
+When it completes, you can verify that the image has been created by listing all available images:
 
 ```bash
 docker images
 ```
 
-You can try your new container by running this command:
+!!! question "Exercise"
 
-```bash
-docker run my-image cowsay Hello Docker!
-```
+    Create a Docker image containing `cowsay`.
 
-### Add a software package to the image
+    ??? Solution
 
-Add the Salmon package to the Docker image by adding the following snippet to the `Dockerfile`:
+        Use your favorite editor (e.g., `vim` or `nano`) to create a file named `Dockerfile`. Alternatively, run `code Dockerfile` to create a a file named `Dockerfile` in GitPod. Copy the following content:
 
-```dockerfile
-RUN curl -sSL https://github.com/COMBINE-lab/salmon/releases/download/v1.5.2/salmon-1.5.2_linux_x86_64.tar.gz | tar xz \
-&& mv /salmon-*/bin/* /usr/bin/ \
-&& mv /salmon-*/lib/* /usr/lib/
-```
+        ```dockerfile
+        FROM debian:bullseye-slim
 
-Save the file and build the image again with the same command as before:
+        LABEL image.author.name "Your Name Here"
+        LABEL image.author.email "your@email.here"
 
-```bash
-docker build -t my-image .
-```
+        RUN apt-get update && apt-get install -y curl cowsay
 
-You will notice that it creates a new Docker image with the same name **but** with a different image ID.
+        ENV PATH=$PATH:/usr/games/
+        ```
+
+        Build the Docker image based on the Dockerfile by using the following command:
+
+        ```bash
+        docker build -t my-image .
+        ```
+
+        Try your new container by running this command:
+
+        ```bash
+        docker run my-image cowsay Hello Docker!
+        ```
+
+### Adding additional software package to the image
+
+    Additional tools can be added to the image by adding the appropriate `RUN` command to the Dockerfile. For example, to add the `salmon` tool to the image, you can add the following line to the bottom of your Dockerfile:
+
+    ```dockerfile
+    RUN curl -sSL https://github.com/COMBINE-lab/salmon/releases/download/v1.5.2/salmon-1.5.2_linux_x86_64.tar.gz | tar xz \
+    && mv /salmon-*/bin/* /usr/bin/ \
+    && mv /salmon-*/lib/* /usr/lib/
+    ```
+
+    You will then need to save the file and build the image again with the same command as before:
+
+    ```bash
+    docker build -t my-image .
+    ```
+
+!!! question "Exercise"
+
+    Add the Salmon tool to your Docker file and rebuild the image.
+
+    ??? Solution
+
+        Open your Dockerfile and add the following lines to the bottom of the file:
+
+        ```dockerfile
+        RUN curl -sSL https://github.com/COMBINE-lab/salmon/releases/download/v1.5.2/salmon-1.5.2_linux_x86_64.tar.gz | tar xz \
+        && mv /salmon-*/bin/* /usr/bin/ \
+        && mv /salmon-*/lib/* /usr/lib/
+        ```
+
+        Save the file and build the image again with the same command as before:
+
+        ```bash
+        docker build -t my-image .
+        ```
+
+        You will notice that it creates a new Docker image with the same name **but** with a different image ID.
 
 ### Run Salmon in the container
 
-Check that Salmon is running correctly in the container as shown below:
+You can run the software installed in the container by using the `run` command. For example, you can check that Salmon is running correctly in the container generated above by using the following command:
 
 ```bash
 docker run my-image salmon --version
@@ -147,20 +208,21 @@ Use the `exit` command to terminate the interactive session.
 
 ### File system mounts
 
-Create a genome index file by running Salmon in the container.
+Containers run in a completely separate file system and it cannot access the hosting file system by default.
 
-Try to run Salmon in the container with the following command:
+For example, running the following command that is attempting to generate a genome index using the Salmon tool will fail because Salmon cannot access the input file:
 
 ```bash
 docker run my-image \
     salmon index -t $PWD/data/ggal/transcriptome.fa -i transcript-index
 ```
 
-The above command fails because Salmon cannot access the input file.
+To mount a filesystem within a Docker container, we use the `--volume` command-line option when running the container. Its argument consists of two fields separated by a colon (:):
 
-This happens because the container runs in a completely separate file system and it cannot access the hosting file system by default.
+- Host source directory path 
+- Container target directory path
 
-You will need to use the `--volume` command-line option to mount the input file(s) e.g.
+For example:
 
 ```bash
 docker run --volume $PWD/data/ggal/transcriptome.fa:/transcriptome.fa my-image \
@@ -169,9 +231,9 @@ docker run --volume $PWD/data/ggal/transcriptome.fa:/transcriptome.fa my-image \
 
 !!! warning
 
-    The generated `transcript-index` directory is still not accessible in the host file system.
+    The generated `transcript-index` directory is still not accessible in the **host** file system.
 
-An easier way is to mount a parent directory to an identical one in the container, this allows you to use the same path when running it in the container e.g.
+An easier way to mount file systems is to mount a parent directory to an identical directory in the container. This allows you to use the same path when running it in the container. For example:
 
 ```bash
 docker run --volume $PWD:$PWD --workdir $PWD my-image \
@@ -186,7 +248,7 @@ docker run --volume $DATA:$DATA --workdir $PWD my-image \
     salmon index -t $PWD/data/ggal/transcriptome.fa -i transcript-index
 ```
 
-Now check the content of the `transcript-index` folder by entering the command:
+You can check the content of the `transcript-index` folder by entering the command:
 
 ```bash
 ls -la transcript-index
@@ -196,7 +258,7 @@ ls -la transcript-index
 
     Note that the permissions for files created by the Docker execution is `root`.
 
-### Upload the container in the Docker Hub (bonus)
+### Bonus: Upload the container in the Docker Hub
 
 Publish your container in the Docker Hub to share it with other people.
 
@@ -246,6 +308,16 @@ nextflow run script2.nf -with-docker my-image
 ```
 
 As seen in the last section, you can also configure the Nextflow config file (`nextflow.config`) to select which container to use instead of having to specify it as a command-line argument every time.
+
+!!! cboard-list-2 "Summary"
+
+    In this step you have learned:
+
+    1. How to `run` a docker container
+    2. How to `pull` a docker container
+    3. How to create your own docker container using a `Dockerfile`
+    4. How to add additional software packages to your container
+    5. How to use your own container when running a nextflow script
 
 ## Singularity
 
