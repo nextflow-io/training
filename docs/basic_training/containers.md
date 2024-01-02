@@ -158,17 +158,17 @@ Additional tools can be added to the image by adding the appropriate `RUN` comma
 
 For example, to add the `salmon` tool to the image, you would add the following line to the bottom of your Dockerfile:
 
-    ```dockerfile
-    RUN curl -sSL https://github.com/COMBINE-lab/salmon/releases/download/v1.5.2/salmon-1.5.2_linux_x86_64.tar.gz | tar xz \
-    && mv /salmon-*/bin/* /usr/bin/ \
-    && mv /salmon-*/lib/* /usr/lib/
-    ```
+```dockerfile
+RUN curl -sSL https://github.com/COMBINE-lab/salmon/releases/download/v1.5.2/salmon-1.5.2_linux_x86_64.tar.gz | tar xz \
+&& mv /salmon-*/bin/* /usr/bin/ \
+&& mv /salmon-*/lib/* /usr/lib/
+```
 
-    You will then need to save the file and build the image again with the same command as before:
+You will then need to save the file and build the image again with the same command as before:
 
-    ```bash
-    docker build -t my-image .
-    ```
+```bash
+docker build -t my-image .
+```
 
 !!! question "Exercise"
 
