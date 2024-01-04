@@ -721,7 +721,7 @@ Since a file parameter using the same name is declared in the output block, the 
 
 When an output file name contains a wildcard character (`*` or `?`) it is interpreted as a [glob](http://docs.oracle.com/javase/tutorial/essential/io/fileOps.html#glob) path matcher. This allows us to _capture_ multiple files into a list object and output them as a sole emission. For example:
 
-```groovy linenums="1"
+```groovy linenums="1" title="snippet.nf"
 process SPLITLETTERS {
     output:
     path 'chunk_*'
@@ -734,19 +734,14 @@ process SPLITLETTERS {
 
 workflow {
     letters = SPLITLETTERS()
-    letters
-        .flatMap()
-        .view { "File: ${it.name} => ${it.text}" }
+    letters.view()
 }
 ```
 
 Prints the following:
 
-```console
-File: chunk_aa => H
-File: chunk_ab => o
-File: chunk_ac => l
-File: chunk_ad => a
+```console title="Output"
+[/workspace/gitpod/nf-training/work/ca/baf931d379aa7fa37c570617cb06d1/chunk_aa, /workspace/gitpod/nf-training/work/ca/baf931d379aa7fa37c570617cb06d1/chunk_ab, /workspace/gitpod/nf-training/work/ca/baf931d379aa7fa37c570617cb06d1/chunk_ac, /workspace/gitpod/nf-training/work/ca/baf931d379aa7fa37c570617cb06d1/chunk_ad]
 ```
 
 Some caveats on glob pattern behavior:
@@ -757,12 +752,36 @@ Some caveats on glob pattern behavior:
 
 !!! question "Exercise"
 
-    Remove the `flatMap` operator and see out the output change. The documentation for the `flatMap` operator is available at [this link](https://www.nextflow.io/docs/latest/operator.html#flatmap).
+    Add the `flatMap` operator and see out the output changes. The documentation for the `flatMap` operator is available at [this link](https://www.nextflow.io/docs/latest/operator.html#flatmap).
 
     ??? Solution
 
-        ```groovy
-        File: [chunk_aa, chunk_ab, chunk_ac, chunk_ad] => [H, o, l, a]
+        Add the `flatMap` operator to the `letters` channel.
+
+        ```groovy linenums="1" title="snippet.nf"
+        process SPLITLETTERS {
+            output:
+            path 'chunk_*'
+
+            script:
+            """
+            printf 'Hola' | split -b 1 - chunk_
+            """
+        }
+
+        workflow {
+            letters = SPLITLETTERS()
+            letters.flatMap().view()
+        }
+        ```
+
+        Your output will look something like this:
+
+        ```console title="Output"
+        /workspace/gitpod/nf-training/work/54/9d79f9149f15085e00dde2d8ead150/chunk_aa
+        /workspace/gitpod/nf-training/work/54/9d79f9149f15085e00dde2d8ead150/chunk_ab
+        /workspace/gitpod/nf-training/work/54/9d79f9149f15085e00dde2d8ead150/chunk_ac
+        /workspace/gitpod/nf-training/work/54/9d79f9149f15085e00dde2d8ead150/chunk_ad
         ```
 
 ### Dynamic output file names
@@ -803,9 +822,9 @@ In the above example, each time the process is executed an alignment file is pro
 
 So far we have seen how to declare multiple input and output channels that can handle one value at a time. However, Nextflow can also handle a _tuple_ of values.
 
-The input and output declarations for tuples must be declared with a `tuple` qualifier followed by the definition of each element in the tuple.
+The `input` and `output` declarations for tuples must be declared with a `tuple` qualifier followed by the definition of each element in the tuple.
 
-```groovy linenums="1"
+```groovy linenums="1" title="snippet.nf"
 reads_ch = Channel.fromFilePairs('data/ggal/*_{1,2}.fq')
 
 process FOO {
@@ -817,23 +836,27 @@ process FOO {
 
     script:
     """
-    echo your_command_here --reads $sample_id_paths > sample.bam
+    echo your_command_here --sample $sample_id_paths > sample.bam
     """
 }
 
 workflow {
-    bam_ch = FOO(reads_ch)
-    bam_ch.view()
+    sample_ch = FOO(reads_ch)
+    sample_ch.view()
 }
 ```
 
-!!! info
+The output will looks something like this:
 
-    In previous versions of Nextflow `tuple` was called `set` but it was used the same way with the same semantic.
+```console title="Output"
+[lung, /workspace/gitpod/nf-training/work/23/fe268295bab990a40b95b7091530b6/sample.bam]
+[liver, /workspace/gitpod/nf-training/work/32/656b96a01a460f27fa207e85995ead/sample.bam]
+[gut, /workspace/gitpod/nf-training/work/ae/3cfc7cf0748a598c5e2da750b6bac6/sample.bam]
+```
 
 !!! question "Exercise"
 
-    Modify the script of the previous exercise so that the _bam_ file is named as the given `sample_id`.
+    Modify the script of the previous exercise so that the _--sample_ file is named as the given `sample_id`.
 
     ??? solution
 
@@ -849,13 +872,13 @@ workflow {
 
             script:
             """
-            echo your_command_here --reads $sample_id_paths > ${sample_id}.bam
+            echo your_command_here --sample $sample_id_paths > ${sample_id}.bam
             """
         }
 
         workflow {
-            bam_ch = FOO(reads_ch)
-            bam_ch.view()
+            sample_ch = FOO(reads_ch)
+            sample_ch.view()
         }
         ```
 
@@ -899,7 +922,7 @@ They must be entered at the top of the process body, before any other declaratio
 
 Directives are commonly used to define the amount of computing resources to be used or other meta directives that allow the definition of extra configuration of logging information. For example:
 
-```groovy linenums="1"
+```groovy linenums="1" title="snippet.nf"
 process FOO {
     cpus 2
     memory 1.GB
@@ -932,7 +955,7 @@ Given each task is being executed in separate temporary `work/` folder (e.g., `w
 
 !!! tip
 
-    Remember to delete the work folder from time to time to clear your intermediate files and stop them from filling your computer!
+    Remember to clean the work folder from time to time to clear your intermediate files and stop them from filling your computer!
 
 To store our workflow result files, we need to explicitly mark them using the directive [publishDir](https://www.nextflow.io/docs/latest/process.html#publishdir) in the process that’s creating the files. For example:
 
