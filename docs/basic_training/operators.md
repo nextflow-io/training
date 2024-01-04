@@ -99,7 +99,7 @@ Channel
     .view { word, len -> "$word contains $len letters" }
 ```
 
-!!! exercise
+!!! question "Exercise"
 
     Use `fromPath` to create a channel emitting the _fastq_ files matching the pattern `data/ggal/*.fq`, then use `map` to return a pair containing the file name and the path itself, and finally, use `view` to print the resulting channel.
 
@@ -204,7 +204,7 @@ Channel
 
 This operator is useful to process a group together with all the elements that share a common property or grouping key.
 
-!!! exercise
+!!! question "Exercise"
 
     Use `fromPath` to create a channel emitting all of the files in the folder `data/meta/`, then use a `map` to associate the `baseName` prefix to each file. Finally, group all files that have the same common prefix.
 
@@ -264,6 +264,452 @@ result.large.view { "$it is large" }
 !!! note
 
     In the above example, what would happen to a value of 10? To deal with this, you can also use `>=`.
+
+### Text files
+
+The `splitText` operator allows you to split multi-line strings or text file items, emitted by a source channel into chunks containing n lines, which will be emitted by the resulting channel. See:
+
+```groovy linenums="1"
+Channel
+    .fromPath('data/meta/random.txt') // (1)!
+    .splitText() // (2)!
+    .view() // (3)!
+```
+
+1. Instructs Nextflow to make a channel from the path `data/meta/random.txt`
+2. The `splitText` operator splits each item into chunks of one line by default.
+3. View contents of the channel.
+
+You can define the number of lines in each chunk by using the parameter `by`, as shown in the following example:
+
+```groovy linenums="1"
+Channel
+    .fromPath('data/meta/random.txt')
+    .splitText(by: 2)
+    .subscribe {
+        print it;
+        print "--- end of the chunk ---\n"
+    }
+```
+
+!!! info
+
+    The `subscribe` operator permits execution of user defined functions each time a new value is emitted by the source channel.
+
+An optional closure can be specified in order to transform the text chunks produced by the operator. The following example shows how to split text files into chunks of 10 lines and transform them into capital letters:
+
+```groovy linenums="1"
+Channel
+    .fromPath('data/meta/random.txt')
+    .splitText(by: 10) { it.toUpperCase() }
+    .view()
+```
+
+You can also make counts for each line:
+
+```groovy linenums="1"
+count = 0
+
+Channel
+    .fromPath('data/meta/random.txt')
+    .splitText()
+    .view { "${count++}: ${it.toUpperCase().trim()}" }
+```
+
+Finally, you can also use the operator on plain files (outside of the channel context):
+
+```groovy linenums="1"
+def f = file('data/meta/random.txt')
+def lines = f.splitText()
+def count = 0
+for (String row : lines) {
+    log.info "${count++} ${row.toUpperCase()}"
+}
+```
+
+### Comma separate values (.csv)
+
+The `splitCsv` operator allows you to parse text items emitted by a channel, that are CSV formatted.
+
+It then splits them into records or groups them as a list of records with a specified length.
+
+In the simplest case, just apply the `splitCsv` operator to a channel emitting a CSV formatted text files or text entries. For example, to view only the first and fourth columns:
+
+```groovy linenums="1"
+Channel
+    .fromPath("data/meta/patients_1.csv")
+    .splitCsv()
+    // row is a list object
+    .view { row -> "${row[0]}, ${row[3]}" }
+```
+
+When the CSV begins with a header line defining the column names, you can specify the parameter `header: true` which allows you to reference each value by its column name, as shown in the following example:
+
+```groovy linenums="1"
+Channel
+    .fromPath("data/meta/patients_1.csv")
+    .splitCsv(header: true)
+    // row is a list object
+    .view { row -> "${row.patient_id}, ${row.num_samples}" }
+```
+
+Alternatively, you can provide custom header names by specifying a list of strings in the header parameter as shown below:
+
+```groovy linenums="1"
+Channel
+    .fromPath("data/meta/patients_1.csv")
+    .splitCsv(header: ['col1', 'col2', 'col3', 'col4', 'col5'])
+    // row is a list object
+    .view { row -> "${row.col1}, ${row.col4}" }
+```
+
+You can also process multiple CSV files at the same time:
+
+```groovy linenums="1"
+Channel
+    .fromPath("data/meta/patients_*.csv") // <-- just use a pattern
+    .splitCsv(header: true)
+    .view { row -> "${row.patient_id}\t${row.num_samples}" }
+```
+
+!!! tip
+
+    Notice that you can change the output format simply by adding a different delimiter.
+
+Finally, you can also operate on CSV files outside the channel context:
+
+```groovy linenums="1"
+def f = file('data/meta/patients_1.csv')
+def lines = f.splitCsv()
+for (List row : lines) {
+    log.info "${row[0]} -- ${row[2]}"
+}
+```
+
+!!! question "Exercise"
+
+    Try inputting fastq reads into the RNA-Seq workflow from earlier using `.splitCsv`.
+
+    ??? solution
+
+        Add a CSV text file containing the following, as an example input with the name "fastq.csv":
+
+        ```csv
+        gut,/workspace/gitpod/nf-training/data/ggal/gut_1.fq,/workspace/gitpod/nf-training/data/ggal/gut_2.fq
+        ```
+
+        Then replace the input channel for the reads in `script7.nf`. Changing the following lines:
+
+        ```groovy linenums="1"
+        Channel
+            .fromFilePairs(params.reads, checkIfExists: true)
+            .set { read_pairs_ch }
+        ```
+
+        To a splitCsv channel factory input:
+
+        ```groovy linenums="1" hl_lines="2 3 4"
+        Channel
+            .fromPath("fastq.csv")
+            .splitCsv()
+            .view { row -> "${row[0]}, ${row[1]}, ${row[2]}" }
+            .set { read_pairs_ch }
+        ```
+
+        Finally, change the cardinality of the processes that use the input data. For example, for the quantification process, change it from:
+
+        ```groovy linenums="1"
+        process QUANTIFICATION {
+            tag "$sample_id"
+
+            input:
+            path salmon_index
+            tuple val(sample_id), path(reads)
+
+            output:
+            path sample_id, emit: quant_ch
+
+            script:
+            """
+            salmon quant --threads $task.cpus --libType=U -i $salmon_index -1 ${reads[0]} -2 ${reads[1]} -o $sample_id
+            """
+        }
+        ```
+
+        To:
+
+        ```groovy linenums="1" hl_lines="6 13"
+        process QUANTIFICATION {
+            tag "$sample_id"
+
+            input:
+            path salmon_index
+            tuple val(sample_id), path(reads1), path(reads2)
+
+            output:
+            path sample_id, emit: quant_ch
+
+            script:
+            """
+            salmon quant --threads $task.cpus --libType=U -i $salmon_index -1 ${reads1} -2 ${reads2} -o $sample_id
+            """
+        }
+        ```
+
+        Repeat the above for the fastqc step.
+
+        ```groovy linenums="1"  hl_lines="5 13"
+        process FASTQC {
+            tag "FASTQC on $sample_id"
+
+            input:
+            tuple val(sample_id), path(reads1), path(reads2)
+
+            output:
+            path "fastqc_${sample_id}_logs"
+
+            script:
+            """
+            mkdir fastqc_${sample_id}_logs
+            fastqc -o fastqc_${sample_id}_logs -f fastq -q ${reads1} ${reads2}
+            """
+        }
+        ```
+
+        Now the workflow should run from a CSV file.
+
+### Tab separated values (.tsv)
+
+Parsing TSV files works in a similar way, simply add the `sep: '\t'` option in the `splitCsv` context:
+
+```groovy linenums="1"
+Channel
+    .fromPath("data/meta/regions.tsv", checkIfExists: true)
+    // use `sep` option to parse TAB separated files
+    .splitCsv(sep: '\t')
+    .view()
+```
+
+!!! question "Exercise"
+
+    Try using the tab separation technique on the file `data/meta/regions.tsv`, but print just the first column, and remove the header.
+
+
+    ??? solution
+
+        ```groovy linenums="1"
+        Channel
+            .fromPath("data/meta/regions.tsv", checkIfExists: true)
+            // use `sep` option to parse TAB separated files
+            .splitCsv(sep: '\t', header: true)
+            // row is a list object
+            .view { row -> "${row.patient_id}" }
+        ```
+
+## More complex file formats
+
+### JSON
+
+We can also easily parse the JSON file format using the `splitJson` channel operator.
+
+The `splitJson` operator supports JSON arrays:
+
+=== "Source code"
+
+    ```groovy linenums="1"
+    Channel
+        .of('["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]')
+        .splitJson()
+        .view { "Item: ${it}" }
+    ```
+
+=== "Output"
+
+    ```console
+    Item: Sunday
+    Item: Monday
+    Item: Tuesday
+    Item: Wednesday
+    Item: Thursday
+    Item: Friday
+    Item: Saturday
+    ```
+
+JSON objects:
+
+=== "Source code"
+
+    ```groovy linenums="1"
+    Channel
+        .of('{"player": {"name": "Bob", "height": 180, "champion": false}}')
+        .splitJson()
+        .view { "Item: ${it}" }
+    ```
+
+=== "Output"
+
+    ```console
+    Item: [key:player, value:[name:Bob, height:180, champion:false]]
+    ```
+
+And even a JSON array of JSON objects!
+
+=== "Source code"
+
+    ```groovy linenums="1"
+    Channel
+        .of('[{"name": "Bob", "height": 180, "champion": false}, \
+            {"name": "Alice", "height": 170, "champion": false}]')
+        .splitJson()
+        .view { "Item: ${it}" }
+    ```
+
+=== "Output"
+
+    ```console
+    Item: [name:Bob, height:180, champion:false]
+    Item: [name:Alice, height:170, champion:false]
+    ```
+
+Files containing JSON content can also be parsed:
+
+=== "Source code"
+
+    ```groovy linenums="1"
+    Channel
+        .fromPath('file.json')
+        .splitJson()
+        .view { "Item: ${it}" }
+    ```
+
+=== "file.json"
+
+    ```json
+    [
+      { "name": "Bob", "height": 180, "champion": false },
+      { "name": "Alice", "height": 170, "champion": false }
+    ]
+    ```
+
+=== "Output"
+
+    ```console
+    Item: [name:Bob, height:180, champion:false]
+    Item: [name:Alice, height:170, champion:false]
+    ```
+
+### YAML
+
+This can also be used as a way to parse YAML files:
+
+=== "Source code"
+
+    ```groovy linenums="1"
+    import org.yaml.snakeyaml.Yaml
+
+    def f = file('data/meta/regions.yml')
+    def records = new Yaml().load(f)
+
+
+    for (def entry : records) {
+        log.info "$entry.patient_id -- $entry.feature"
+    }
+    ```
+
+=== "data/meta/regions.yml"
+
+    ```yaml
+    --8<-- "nf-training/data/meta/regions.yml"
+    ```
+
+=== "Output"
+
+    ```console
+    ATX-TBL-001-GB-01-105 -- pass_vafqc_flag
+    ATX-TBL-001-GB-01-105 -- pass_stripy_flag
+    ATX-TBL-001-GB-01-105 -- pass_manual_flag
+    ATX-TBL-001-GB-01-105 -- other_region_selection_flag
+    ATX-TBL-001-GB-01-105 -- ace_information_gained
+    ATX-TBL-001-GB-01-105 -- concordance_flag
+    ATX-TBL-001-GB-01-105 -- pass_vafqc_flag
+    ATX-TBL-001-GB-01-105 -- pass_stripy_flag
+    ATX-TBL-001-GB-01-105 -- pass_manual_flag
+    ATX-TBL-001-GB-01-105 -- other_region_selection_flag
+    ATX-TBL-001-GB-01-105 -- ace_information_gained
+    ATX-TBL-001-GB-01-105 -- concordance_flag
+    ATX-TBL-001-GB-01-105 -- pass_vafqc_flag
+    ATX-TBL-001-GB-01-105 -- pass_stripy_flag
+    ```
+
+### Storage of parsers into modules
+
+The best way to store parser scripts is to keep them in a Nextflow module file.
+
+Let's say we don't have a JSON channel operator, but we create a function instead. The `parsers.nf` file should contain the `parseJsonFile` function. See the contente below:
+
+=== "Source code"
+
+    ```groovy linenums="1"
+    include { parseJsonFile } from './modules/parsers.nf'
+
+    process FOO {
+        input:
+        tuple val(patient_id), val(feature)
+
+        output:
+        stdout
+
+        script:
+        """
+        echo $patient_id has $feature as feature
+        """
+    }
+
+    workflow {
+        Channel
+            .fromPath('data/meta/regions*.json')
+            | flatMap { parseJsonFile(it) }
+            | map { record -> [record.patient_id, record.feature] }
+            | unique
+            | FOO
+            | view
+    }
+    ```
+
+=== "./modules/parsers.nf"
+
+    ```groovy linenums="1"
+    import groovy.json.JsonSlurper
+
+    def parseJsonFile(json_file) {
+        def f = file(json_file)
+        def records = new JsonSlurper().parse(f)
+        return records
+    }
+    ```
+
+=== "Output"
+
+    ```console
+    ATX-TBL-001-GB-01-105 has pass_stripy_flag as feature
+
+    ATX-TBL-001-GB-01-105 has ace_information_gained as feature
+
+    ATX-TBL-001-GB-01-105 has concordance_flag as feature
+
+    ATX-TBL-001-GB-01-105 has pass_vafqc_flag as feature
+
+    ATX-TBL-001-GB-01-105 has pass_manual_flag as feature
+
+    ATX-TBL-001-GB-01-105 has other_region_selection_flag as feature
+    ```
+
+Nextflow will use this as a custom function within the workflow scope.
+
+!!! tip
+
+    You will learn more about module files later in the [Modularization section](../modules/) of this tutorial.
+
 
 ## More resources
 

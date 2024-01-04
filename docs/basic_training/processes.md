@@ -8,8 +8,6 @@ In Nextflow, a `process` is the basic computing primitive to execute foreign fun
 
 The `process` definition starts with the keyword `process`, followed by the process name and finally the process body delimited by curly brackets.
 
-The `process` name is commonly written in upper case by convention.
-
 A basic `process`, only using the `script` definition block, looks like the following:
 
 ```groovy linenums="1"
@@ -21,7 +19,11 @@ process SAYHELLO {
 }
 ```
 
-In more complex examples, the process body can contain up to **five** definition blocks:
+!!! info
+
+    The `process` name is commonly written in upper case by convention.
+
+However, the process body can contain up to **five** definition blocks:
 
 1. **Directives** are initial declarations that define optional settings
 2. **Input** defines the expected input channel(s)
@@ -55,9 +57,9 @@ process < name > {
 }
 ```
 
-1. Zero, one or more process directives
-2. Zero, one or more process inputs
-3. Zero, one or more process outputs
+1. Zero, one, or more process directives
+2. Zero, one, or more process inputs
+3. Zero, one, or more process outputs
 4. An optional boolean conditional to trigger the process execution
 5. The command to be executed
 
@@ -65,11 +67,11 @@ process < name > {
 
 The `script` block is a string statement that defines the command to be executed by the process.
 
-A process can execute only one `script` block. It must be the last statement when the process contains input and output declarations.
+A process can execute only one `script` block. It must be the last statement when the process contains `input` and `output` declarations.
 
 The `script` block can be a single or a multi-line string. The latter simplifies the writing of non-trivial scripts composed of multiple commands spanning over multiple lines. For example:
 
-```groovy linenums="1"
+```groovy linenums="1" title="snippet.nf"
 process EXAMPLE {
     script:
     """
@@ -84,10 +86,16 @@ workflow {
 }
 ```
 
+!!! tip
+
+    In the snippet above the directive `debug` is used to enable the debug mode for the process. This is useful to print the output of the process script in the console.
+
 By default, the `process` command is interpreted as a **Bash** script. However, any other scripting language can be used by simply starting the script with the corresponding [Shebang](<https://en.wikipedia.org/wiki/Shebang_(Unix)>) declaration. For example:
 
-```groovy linenums="1"
+```groovy linenums="1" title="snippet.nf"
 process PYSTUFF {
+    debug true
+
     script:
     """
     #!/usr/bin/env python
@@ -103,6 +111,10 @@ workflow {
 }
 ```
 
+```console title="Output"
+Hello-world
+```
+
 !!! tip
 
     Multiple programming languages can be used within the same workflow script. However, for large chunks of code it is better to save them into separate files and invoke them from the process script. One can store the specific scripts in the `./bin/` folder.
@@ -111,10 +123,12 @@ workflow {
 
 Script parameters (`params`) can be defined dynamically using variable values. For example:
 
-```groovy linenums="1"
+```groovy linenums="1" title="snippet.nf"
 params.data = 'World'
 
 process FOO {
+    debug true
+
     script:
     """
     echo Hello $params.data
@@ -126,6 +140,10 @@ workflow {
 }
 ```
 
+```console title="Output"
+Hello World
+```
+
 !!! info
 
     A process script can contain any string format supported by the Groovy programming language. This allows us to use string interpolation as in the script above or multiline strings. Refer to [String interpolation](../groovy/#string-interpolation) for more information.
@@ -134,8 +152,10 @@ workflow {
 
     Since Nextflow uses the same Bash syntax for variable substitutions in strings, Bash environment variables need to be escaped using the `\` character. The escaped version will be resolved later, returning the task directory (e.g. work/7f/f285b80022d9f61e82cd7f90436aa4/), while `$PWD` would show the directory where you're running Nextflow.
 
-```groovy linenums="1"
+```groovy linenums="1" title="snippet.nf"
 process FOO {
+    debug true
+
     script:
     """
     echo "The current directory is \$PWD"
@@ -147,10 +167,18 @@ workflow {
 }
 ```
 
-It can be tricky to write a script that uses many Bash variables. One possible alternative is to use a script string delimited by single-quote characters
+Your expected output will look something like this:
 
-```groovy linenums="1"
+```console title="Output"
+The current directory is /workspace/gitpod/nf-training/work/7a/4b050a6cdef4b6c1333ce29f7059a0
+```
+
+It can be tricky to write a script that uses many Bash variables. One possible alternative is to use a `script` string delimited by single-quote characters (`'`).
+
+```groovy linenums="1" title="snippet.nf"
 process BAR {
+    debug true
+
     script:
     '''
     echo "The current directory is $PWD"
@@ -162,11 +190,17 @@ workflow {
 }
 ```
 
-However, this blocks the usage of Nextflow variables in the command script.
+Your expected output will look something like this:
+
+```console title="Output"
+The current directory is /workspace/gitpod/nf-training/work/7a/4b050a6cdef4b6c1333ce29f7059a0
+```
+
+However, this using the single quotes (`'`) will block the usage of Nextflow variables in the command script.
 
 Another alternative is to use a `shell` statement instead of `script` and use a different syntax for Nextflow variables, e.g., `!{..}`. This allows the use of both Nextflow and Bash variables in the same script.
 
-```groovy linenums="1"
+```groovy linenums="1" title="snippet.nf"
 params.data = 'le monde'
 
 process BAZ {
@@ -186,22 +220,24 @@ workflow {
 
 The process script can also be defined in a completely dynamic manner using an `if` statement or any other expression for evaluating a string value. For example:
 
-```groovy linenums="1"
+```groovy linenums="1" title="snippet.nf"
 params.compress = 'gzip'
 params.file2compress = "$baseDir/data/ggal/transcriptome.fa"
 
 process FOO {
+    debug true 
+
     input:
     path file
 
     script:
     if (params.compress == 'gzip')
         """
-        gzip -c $file > ${file}.gz
+        echo "gzip -c $file > ${file}.gz"
         """
     else if (params.compress == 'bzip2')
         """
-        bzip2 -c $file > ${file}.bz2
+        echo "bzip2 -c $file > ${file}.bz2"
         """
     else
         throw new IllegalArgumentException("Unknown compressor $params.compress")
@@ -211,6 +247,24 @@ workflow {
     FOO(params.file2compress)
 }
 ```
+
+!!! question "Exercise"
+
+    Execute this script using the command line to choose `bzip2` compression.
+
+    ??? solution
+
+        Execute the following command:
+
+        ```bash
+        nextflow run snippet.nf --compress bzip2
+        ```
+
+        The output will look like this:
+
+        ```console title="Output"
+        bzip2 -c transcriptome.fa > transcriptome.fa.bz2
+        ```
 
 ## Inputs
 
@@ -231,11 +285,13 @@ input:
 <input qualifier> <input name>
 ```
 
+There are [several input qualifiers](https://www.nextflow.io/docs/latest/process.html#inputs) that can be used to define the input declaration. The most common are outlined in detail below.
+
 ### Input values
 
-The `val` qualifier allows you to receive data of any type as input. It can be accessed in the process script by using the specified input name, as shown in the following example:
+The `val` qualifier allows you to receive data of any type as input. It can be accessed in the process script by using the specified input name. For example:
 
-```groovy linenums="1"
+```groovy linenums="1" title="snippet.nf"
 num = Channel.of(1, 2, 3)
 
 process BASICEXAMPLE {
@@ -251,16 +307,16 @@ process BASICEXAMPLE {
 }
 
 workflow {
-    myrun = BASICEXAMPLE(num)
+    BASICEXAMPLE(num)
 }
 ```
 
-In the above example the process is executed three times, each time a value is received from the channel `num` and used to process the script. Thus, it results in an output similar to the one shown below:
+In the above example the process is executed three times, each time a value is received from the channel `num` it is used by the script. Thus, it results in an output similar to the one shown below:
 
 ```console
-process job 3
 process job 1
 process job 2
+process job 3
 ```
 
 !!! warning
@@ -269,9 +325,9 @@ process job 2
 
 ### Input files
 
-The `path` qualifier allows the handling of file values in the process execution context. This means that Nextflow will stage it in the process execution directory, and it can be accessed in the script by using the name specified in the input declaration.
+The `path` qualifier allows the handling of file values in the process execution context. This means that Nextflow will stage it in the process execution directory, and it can be accessed by the script using the name specified in the input declaration. For example:
 
-```groovy linenums="1"
+```groovy linenums="1" title="snippet.nf"
 reads = Channel.fromPath('data/ggal/*.fq')
 
 process FOO {
@@ -291,9 +347,20 @@ workflow {
 }
 ```
 
+In this case, the process is executed six times and will print the name of the file `sample.fastq` six times as this is the name of the file in the input declaration and despite the input file name being different in each execution (e.g., `lung_1.fq`). 
+
+```console title="Output"
+sample.fastq
+sample.fastq
+sample.fastq
+sample.fastq
+sample.fastq
+sample.fastq
+```
+
 The input file name can also be defined using a variable reference as shown below:
 
-```groovy linenums="1"
+```groovy linenums="1" title="snippet.nf"
 reads = Channel.fromPath('data/ggal/*.fq')
 
 process FOO {
@@ -313,7 +380,18 @@ workflow {
 }
 ```
 
-The same syntax is also able to handle more than one input file in the same execution and only requires changing the channel composition.
+In this case, the process is executed six times and will print the name of the variable input file six times (e.g., `lung_1.fq`). 
+
+```console title="Output"
+lung_1.fq
+gut_2.fq
+liver_2.fq
+lung_2.fq
+liver_1.fq
+gut_1.fq
+```
+
+The same syntax is also able to handle more than one input file in the same execution and only requires changing the channel composition using an operator (e.g., `collect`).
 
 ```groovy linenums="1"
 reads = Channel.fromPath('data/ggal/*.fq')
@@ -326,7 +404,7 @@ process FOO {
 
     script:
     """
-    ls -lh $sample
+    ls $sample
     """
 }
 
@@ -335,45 +413,20 @@ workflow {
 }
 ```
 
+Note that while the output looks the same, this process is only executed once.
+
+```console title="Output"
+lung_1.fq
+gut_2.fq
+liver_2.fq
+lung_2.fq
+liver_1.fq
+gut_1.fq
+```
+
 !!! warning
 
     In the past, the `file` qualifier was used for files, but the `path` qualifier should be preferred over file to handle process input files when using Nextflow 19.10.0 or later. When a process declares an input file, the corresponding channel elements must be **file** objects created with the file helper function from the file specific channel factories (e.g., `Channel.fromPath` or `Channel.fromFilePairs`).
-
-!!! exercise
-
-    Write a script that creates a channel containing all read files matching the pattern `data/ggal/*_1.fq` followed by a process that concatenates them into a single file and prints the first 10 lines.
-
-
-    ??? solution
-
-        ```groovy linenums="1"
-        params.reads = "$baseDir/data/ggal/*_1.fq"
-
-        Channel
-            .fromPath(params.reads)
-            .set { read_ch }
-
-        process CONCATENATE {
-            tag "Concat all files"
-
-            input:
-            path '*'
-
-            output:
-            path 'top_10_lines'
-
-            script:
-            """
-            cat * > concatenated.txt
-            head -n 10 concatenated.txt > top_10_lines
-            """
-        }
-
-        workflow {
-            concat_ch = CONCATENATE(read_ch.collect())
-            concat_ch.view()
-        }
-        ```
 
 ### Combine input channels
 
@@ -405,23 +458,23 @@ workflow {
 
 Both channels emit three values, therefore the process is executed three times, each time with a different pair:
 
--   `(1, a)`
--   `(2, b)`
--   `(3, c)`
+```console title="Output"
+1 and a
+3 and c
+2 and b
+```
 
-What is happening is that the process waits until there’s a complete input configuration, i.e., it receives an input value from all the channels declared as input.
+The process waits until there’s a complete input configuration, i.e., it receives an input value from all the channels declared as input.
 
 When this condition is verified, it consumes the input values coming from the respective channels, spawns a task execution, then repeats the same logic until one or more channels have no more content.
 
 This means channel values are consumed serially one after another and the first empty channel causes the process execution to stop, even if there are other values in other channels.
 
-**So what happens when channels do not have the same cardinality (i.e., they emit a different number of elements)?**
+**What happens when channels do not have the same cardinality (i.e., they emit a different number of elements)?**
 
-For example:
-
-```groovy linenums="1"
-input1 = Channel.of(1, 2)
-input2 = Channel.of('a', 'b', 'c', 'd')
+```groovy linenums="1" title="snippet.nf"
+ch1 = Channel.of(1, 2, 3)
+ch2 = Channel.of('a')
 
 process FOO {
     debug true
@@ -437,21 +490,23 @@ process FOO {
 }
 
 workflow {
-    FOO(input1, input2)
+    FOO(ch1, ch2)
 }
 ```
 
-In the above example, the process is only executed twice because the process stops when a channel has no more data to be processed.
+In the above example, the process is only executed once because the process stops when a channel has no more data to be processed.
 
-However, what happens if you replace value `x` with a `value` channel?
+```console title="Output"
+1 and a
+```
 
-Compare the previous example with the following one:
+However, replacing `ch2` with a `value` channel will cause the process to be executed three times, each time with the same value of `a`:
 
-```groovy linenums="1"
-input1 = Channel.value(1)
-input2 = Channel.of('a', 'b', 'c')
+```groovy linenums="1" title="snippet.nf"
+ch1 = Channel.of(1, 2, 3)
+ch2 = Channel.value('a')
 
-process BAR {
+process FOO {
     debug true
 
     input:
@@ -465,25 +520,27 @@ process BAR {
 }
 
 workflow {
-    BAR(input1, input2)
+    FOO(ch1, ch2)
 }
 ```
 
 ```console title="Script output"
-1 and b
 1 and a
-1 and c
+2 and a
+3 and a
 ```
 
-This is because _value_ channels can be consumed multiple times and do not affect process termination.
+As `ch2` is now a _value_ channel, it can be consumed multiple times and do not affect process termination.
 
-!!! exercise
+!!! question "Exercise"
 
     Write a process that is executed for each read file matching the pattern `data/ggal/*_1.fq` and use the same `data/ggal/transcriptome.fa` in each execution.
 
     ??? solution
 
-        ```groovy linenums="1"
+        One possible solution is shown below:
+
+        ```groovy linenums="1" title="snippet.nf"
         params.reads = "$baseDir/data/ggal/*_1.fq"
         params.transcriptome_file = "$baseDir/data/ggal/transcriptome.fa"
 
@@ -492,20 +549,22 @@ This is because _value_ channels can be consumed multiple times and do not affec
             .set { read_ch }
 
         process COMMAND {
-            tag "Run_command"
+            debug true
 
             input:
             path reads
             path transcriptome
 
-            output:
-            path result
-
             script:
             """
-            echo your_command $reads $transcriptome > result
+            echo $reads $transcriptome
             """
         }
+
+        workflow {
+            COMMAND(read_ch, params.transcriptome_file)
+        }
+        ```
 
         workflow {
             concat_ch = COMMAND(read_ch, params.transcriptome_file)
@@ -513,13 +572,15 @@ This is because _value_ channels can be consumed multiple times and do not affec
         }
         ```
 
+        You may also consider using other Channel factories or operators to create your input channels.
+
 ### Input repeaters
 
 The `each` qualifier allows you to repeat the execution of a process for each item in a collection every time new data is received. For example:
 
 ```groovy linenums="1"
-sequences = Channel.fromPath('data/prots/*.tfa')
-methods = ['regular', 'espresso', 'psicoffee']
+sequences = Channel.fromPath("$baseDir/data/ggal/*_1.fq")
+methods = ['regular', 'espresso']
 
 process ALIGNSEQUENCES {
     debug true
@@ -539,44 +600,59 @@ workflow {
 }
 ```
 
+```console title="Output"
+t_coffee -in gut_1.fq -mode regular
+t_coffee -in lung_1.fq -mode espresso
+t_coffee -in liver_1.fq -mode regular
+t_coffee -in gut_1.fq -mode espresso
+t_coffee -in lung_1.fq -mode regular
+t_coffee -in liver_1.fq -mode espresso
+```
+
 In the above example, every time a file of sequences is received as an input by the process, it executes three tasks, each running a different alignment method set as a `mode` variable. This is useful when you need to repeat the same task for a given set of parameters.
 
-!!! exercise
+!!! question "Exercise"
 
-    Extend the previous example so a task is executed for each read file matching the pattern `data/ggal/*_1.fq` and repeat the same task with both `salmon` and `kallisto`.
+    Extend the previous example so a task is executed for an additional type of coffee.
 
     ??? solution
 
-        ```groovy linenums="1"
-        params.reads = "$baseDir/data/ggal/*_1.fq"
-        params.transcriptome_file = "$baseDir/data/ggal/transcriptome.fa"
-        methods= ['salmon', 'kallisto']
+        Modify the methods list and add another coffee type:
 
-        Channel
-            .fromPath(params.reads)
-            .set { read_ch }
+        ```groovy linenums="1" title="snippet.nf"
+        sequences = Channel.fromPath("$baseDir/data/ggal/*_1.fq")
+        methods = ['regular', 'espresso', 'cappuccino']
 
-        process COMMAND {
-            tag "Run_command"
+        process ALIGNSEQUENCES {
+            debug true
 
             input:
-            path reads
-            path transcriptome
+            path seq
             each mode
-
-            output:
-            path result
 
             script:
             """
-            echo $mode $reads $transcriptome > result
+            echo t_coffee -in $seq -mode $mode
             """
         }
 
         workflow {
-            concat_ch = COMMAND(read_ch, params.transcriptome_file, methods)
-            concat_ch.view { "To run : ${it.text}" }
+            ALIGNSEQUENCES(sequences, methods)
         }
+        ```
+
+        Your output will look something like this:
+
+        ```console title="Output"
+        t_coffee -in gut_1.fq -mode regular
+        t_coffee -in lung_1.fq -mode regular
+        t_coffee -in gut_1.fq -mode espresso
+        t_coffee -in liver_1.fq -mode cappuccino
+        t_coffee -in liver_1.fq -mode espresso
+        t_coffee -in lung_1.fq -mode espresso
+        t_coffee -in liver_1.fq -mode regular
+        t_coffee -in gut_1.fq -mode cappuccino
+        t_coffee -in lung_1.fq -mode cappuccino
         ```
 
 ## Outputs
@@ -592,10 +668,10 @@ output:
 
 ### Output values
 
-The `val` qualifier specifies a defined _value_ in the script context. Values are frequently defined in the _input_ and/or _output_ declaration blocks, as shown in the following example:
+The `val` qualifier specifies a defined _value_ in the script context. Values are frequently defined in the `input` and/or `output` declaration blocks, as shown in the following example:
 
-```groovy linenums="1"
-methods = ['prot', 'dna', 'rna']
+```groovy linenums="1" title="snippet.nf"
+greeting = "Hello world!"
 
 process FOO {
     input:
@@ -611,8 +687,8 @@ process FOO {
 }
 
 workflow {
-    receiver_ch = FOO(Channel.of(methods))
-    receiver_ch.view { "Received: $it" }
+    FOO(Channel.of(greeting))
+        .view()
 }
 ```
 
@@ -620,7 +696,7 @@ workflow {
 
 The `path` qualifier specifies one or more files produced by the process into the specified channel as an output.
 
-```groovy linenums="1"
+```groovy linenums="1" title="snippet.nf"
 process RANDOMNUM {
     output:
     path 'result.txt'
@@ -633,7 +709,7 @@ process RANDOMNUM {
 
 workflow {
     receiver_ch = RANDOMNUM()
-    receiver_ch.view { "Received: " + it.text }
+    receiver_ch.view()
 }
 ```
 
@@ -679,7 +755,7 @@ Some caveats on glob pattern behavior:
 -   Glob pattern matches both files and directory paths
 -   When a two stars pattern `**` is used to recourse across directories, only file paths are matched i.e., directories are not included in the result list.
 
-!!! exercise
+!!! question "Exercise"
 
     Remove the `flatMap` operator and see out the output change. The documentation for the `flatMap` operator is available at [this link](https://www.nextflow.io/docs/latest/operator.html#flatmap).
 
@@ -755,7 +831,7 @@ workflow {
 
     In previous versions of Nextflow `tuple` was called `set` but it was used the same way with the same semantic.
 
-!!! exercise
+!!! question "Exercise"
 
     Modify the script of the previous exercise so that the _bam_ file is named as the given `sample_id`.
 
@@ -819,7 +895,7 @@ workflow {
 
 Directive declarations allow the definition of optional settings that affect the execution of the current process without affecting the _semantic_ of the task itself.
 
-They must be entered at the top of the process body, before any other declaration blocks (i.e., `input`, `output`, etc.).
+They must be entered at the top of the process body, before any other declaration blocks (i.e., _input_, _output_, etc.).
 
 Directives are commonly used to define the amount of computing resources to be used or other meta directives that allow the definition of extra configuration of logging information. For example:
 
