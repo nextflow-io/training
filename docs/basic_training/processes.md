@@ -935,54 +935,63 @@ process FOO {
 }
 ```
 
-!!! info ""
+The complete list of directives is available [at this link](https://www.nextflow.io/docs/latest/process.html#directives). Some of the most common are described in detail below.
 
-    :material-lightbulb: The complete list of directives is available [at this link](https://www.nextflow.io/docs/latest/process.html#directives).
+### Resource allocation
 
-| Name                                                                | Description                                                                                                                                          |
-| ------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`cpus`](https://www.nextflow.io/docs/latest/process.html#cpus)     | Allows you to define the number of (logical) CPUs required by the process’ task.                                                                     |
-| [`time`](https://www.nextflow.io/docs/latest/process.html#time)     | Allows you to define how long the task is allowed to run (e.g., time _1h_: 1 hour, _1s_ 1 second, _1m_ 1 minute, _1d_ 1 day).                        |
-| [`memory`](https://www.nextflow.io/docs/latest/process.html#memory) | Allows you to define how much memory the task is allowed to use (e.g., _2 GB_ is 2 GB). Can also use B, KB,MB,GB and TB.                             |
-| [`disk`](https://www.nextflow.io/docs/latest/process.html#disk)     | Allows you to define how much local disk storage the task is allowed to use.                                                                         |
-| [`tag`](https://www.nextflow.io/docs/latest/process.html#tag)       | Allows you to associate each process execution with a custom label to make it easier to identify them in the log file or the trace execution report. |
+Directives that allow you to define the amount of computing resources to be used by the process. These are:
 
-## Organize outputs
+| Name                                                                | Description                                                                                                                   |
+| ------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| [`cpus`](https://www.nextflow.io/docs/latest/process.html#cpus)     | Allows you to define the number of (logical) CPUs required by the process’ task.                                              |
+| [`time`](https://www.nextflow.io/docs/latest/process.html#time)     | Allows you to define how long the task is allowed to run (e.g., time _1h_: 1 hour, _1s_ 1 second, _1m_ 1 minute, _1d_ 1 day). |
+| [`memory`](https://www.nextflow.io/docs/latest/process.html#memory) | Allows you to define how much memory the task is allowed to use (e.g., _2 GB_ is 2 GB). Can also use B, KB,MB,GB and TB.      |
+| [`disk`](https://www.nextflow.io/docs/latest/process.html#disk)     | Allows you to define how much local disk storage the task is allowed to use.                                                  |
 
-### PublishDir directive
+These directives can be used in combination with each other to allocate specific resources to each process. For example:
 
-Given each task is being executed in separate temporary `work/` folder (e.g., `work/f1/850698…`; `work/g3/239712…`; etc.), we may want to save important, non-intermediary, and/or final files in a results folder.
-
-!!! tip
-
-    Remember to clean the work folder from time to time to clear your intermediate files and stop them from filling your computer!
-
-To store our workflow result files, we need to explicitly mark them using the directive [publishDir](https://www.nextflow.io/docs/latest/process.html#publishdir) in the process that’s creating the files. For example:
-
-```groovy linenums="1"
-params.outdir = 'my-results'
-params.prot = 'data/prots/*.tfa'
-proteins = Channel.fromPath(params.prot)
-
-
-process BLASTSEQ {
-    publishDir "$params.outdir/bam_files", mode: 'copy'
-
-    input:
-    path fasta
-
-    output:
-    path ('*.txt')
+```groovy linenums="1" title="snippet.nf"
+process FOO {
+    cpus 2
+    memory 1.GB
+    time '1h'
+    disk '10 GB'
 
     script:
     """
-    echo blastp $fasta > ${fasta}_result.txt
+    echo your_command --this --that
+    """
+}
+```
+
+### PublishDir directive
+
+Given each task is being executed in separate temporary `work/` folder (e.g., `work/f1/850698…`), you may want to save important, non-intermediary, and/or final files in a results folder.
+
+To store our workflow result files, you need to explicitly mark them using the directive [publishDir](https://www.nextflow.io/docs/latest/process.html#publishdir) in the process that’s creating the files. For example:
+
+```groovy linenums="1"
+reads_ch = Channel.fromFilePairs('data/ggal/*_{1,2}.fq')
+
+process FOO {
+    publishDir "results", pattern: "*.bam"
+
+    input:
+    tuple val(sample_id), path(sample_id_paths)
+
+    output:
+    tuple val(sample_id), path("*.bam")
+    tuple val(sample_id), path("*.bai")
+
+    script:
+    """
+    echo your_command_here --sample $sample_id_paths > ${sample_id}.bam
+    echo your_command_here --sample $sample_id_paths > ${sample_id}.bai
     """
 }
 
 workflow {
-    blast_ch = BLASTSEQ(proteins)
-    blast_ch.view()
+    FOO(reads_ch)
 }
 ```
 
@@ -992,43 +1001,48 @@ The above example will copy all blast script files created by the `BLASTSEQ` pro
 
     The publish directory can be local or remote. For example, output files could be stored using an [AWS S3 bucket](https://aws.amazon.com/s3/) by using the `s3://` prefix in the target path.
 
-### Manage semantic sub-directories
-
 You can use more than one `publishDir` to keep different outputs in separate directories. For example:
 
 ```groovy linenums="1"
-params.reads = 'data/reads/*_{1,2}.fq.gz'
-params.outdir = 'my-results'
-
-samples_ch = Channel.fromFilePairs(params.reads, flat: true)
+reads_ch = Channel.fromFilePairs('data/ggal/*_{1,2}.fq')
 
 process FOO {
-    publishDir "$params.outdir/$sampleId/", pattern: '*.fq'
-    publishDir "$params.outdir/$sampleId/counts", pattern: "*_counts.txt"
-    publishDir "$params.outdir/$sampleId/outlooks", pattern: '*_outlook.txt'
+    publishDir "results/bam", pattern: "*.bam"
+    publishDir "results/bai", pattern: "*.bai"
 
     input:
-    tuple val(sampleId), path('sample1.fq.gz'), path('sample2.fq.gz')
+    tuple val(sample_id), path(sample_id_paths)
 
     output:
-    path "*"
+    tuple val(sample_id), path("*.bam")
+    tuple val(sample_id), path("*.bai")
 
     script:
     """
-    zcat sample1.fq.gz > sample1.fq
-    zcat sample2.fq.gz > sample2.fq
-
-    awk '{s++}END{print s/4}' sample1.fq > sample1_counts.txt
-    awk '{s++}END{print s/4}' sample2.fq > sample2_counts.txt
-
-    head -n 50 sample1.fq > sample1_outlook.txt
-    head -n 50 sample2.fq > sample2_outlook.txt
+    echo your_command_here --sample $sample_id_paths > ${sample_id}.bam
+    echo your_command_here --sample $sample_id_paths > ${sample_id}.bai
     """
 }
 
 workflow {
-    out_channel = FOO(samples_ch)
+    FOO(reads_ch)
 }
 ```
 
-The above example will create an output structure in the directory `my-results`, that contains a separate sub-directory for each given sample ID, each containing the folders `counts` and `outlooks`.
+!!! question "Exercise"
+
+    Edit the `publishDir` directive in the previous example to store the output files for each sample type in a different directory.
+
+    ??? Solution
+
+        Your solution could look something like this:
+
+        ```groovy linenums="1"
+        reads_ch = Channel.fromFilePairs('data/ggal/*_{1,2}.fq')
+
+        process FOO {
+            publishDir "results/$sample_id", pattern: "*.{bam,bai}"
+
+            input:
+        ...
+        ```
