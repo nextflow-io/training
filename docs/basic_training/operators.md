@@ -4,7 +4,7 @@ description: Basic Nextflow Training Workshop
 
 # Operators
 
-Operators are methods that allow you to connect channels, transform values emitted by a channel, or apply some user-provided rules.
+Nextflow operators are methods that allow you to manipulate channels. Every operator, with the exception of `set` and `subscribe`, produces one or more new channels, allowing you to chain operators to fit your needs.
 
 There are seven main groups of operators are described in greater detail within the Nextflow Reference Documentation, linked below:
 
@@ -17,6 +17,8 @@ There are seven main groups of operators are described in greater detail within 
 7. [Other operators](https://www.nextflow.io/docs/latest/operator.html#other-operators)
 
 ## Basic example
+
+The `map` operator applies a function of your choosing to every item emitted by a channel, and returns the items so obtained as a new channel. The function applied is called the mapping function and is expressed with a closure as shown in the example below:
 
 !!! info ""
 
@@ -45,7 +47,7 @@ Channel
     .view()
 ```
 
-## Basic operators
+## Commonly used operators
 
 Here we explore some of the most commonly used operators.
 
@@ -53,7 +55,7 @@ Here we explore some of the most commonly used operators.
 
 The `view` operator prints the items emitted by a channel to the console standard output, appending a _new line_ character to each item. For example:
 
-```groovy linenums="1"
+```groovy linenums="1" title="snippet.nf"
 Channel
     .of('foo', 'bar', 'baz')
     .view()
@@ -67,7 +69,7 @@ baz
 
 An optional _closure_ parameter can be specified to customize how items are printed. For example:
 
-```groovy linenums="1"
+```groovy linenums="1" title="snippet.nf"
 Channel
     .of('foo', 'bar', 'baz')
     .view { "- $it" }
@@ -81,42 +83,64 @@ Channel
 
 ### `map()`
 
-The `map` operator applies a function of your choosing to every item emitted by a channel and returns the items obtained as a new channel. The function applied is called the _mapping_ function and is expressed with a _closure_ as shown in the example below:
+The `map` operator applies a function of your choosing to every item emitted by a channel and returns the items obtained as a new channel. The function applied is called the _mapping_ function and is expressed with a _closure_. In the example below the groovy `reverse` method has been used to reverse the order of the characters in each string emitted by the channel.
 
-```groovy linenums="1"
+```groovy linenums="1" title="snippet.nf"
 Channel
     .of('hello', 'world')
     .map { it -> it.reverse() }
     .view()
 ```
 
-A `map` can associate a generic _tuple_ to each element and can contain any data.
+A `map` can associate a generic _tuple_ to each element and can contain any data. In the example below the groovy `size` method is used to return the length of each string emitted by the channel.
 
-```groovy linenums="1"
+```groovy linenums="1" title="snippet.nf"
 Channel
     .of('hello', 'world')
     .map { word -> [word, word.size()] }
-    .view { word, len -> "$word contains $len letters" }
+    .view()
+```
+
+```console title="Output"
+[hello, 5]
+[world, 5]
 ```
 
 !!! question "Exercise"
 
-    Use `fromPath` to create a channel emitting the _fastq_ files matching the pattern `data/ggal/*.fq`, then use `map` to return a pair containing the file name and the path itself, and finally, use `view` to print the resulting channel.
+    Use `fromPath` to create a channel emitting the _fastq_ files matching the pattern `data/ggal/*.fq`, then use `map` to return a pair containing the file name and the file path. Finally, use `view` to print the resulting channel.
+
+    !!! hint
+
+        You can use the `name` method to get the file name.
 
     ??? solution
 
-        ```groovy linenums="1"
+        Here is one possible solution:
+
+        ```groovy linenums="1" title="snippet.nf"
         Channel
             .fromPath('data/ggal/*.fq')
             .map { file -> [file.name, file] }
-            .view { name, file -> "> $name : $file" }
+            .view()
+        ```
+
+        Your output should look like this:
+
+        ```console title="Output"
+        [gut_1.fq, /workspace/gitpod/nf-training/data/ggal/gut_1.fq]
+        [gut_2.fq, /workspace/gitpod/nf-training/data/ggal/gut_2.fq]
+        [liver_1.fq, /workspace/gitpod/nf-training/data/ggal/liver_1.fq]
+        [liver_2.fq, /workspace/gitpod/nf-training/data/ggal/liver_2.fq]
+        [lung_1.fq, /workspace/gitpod/nf-training/data/ggal/lung_1.fq]
+        [lung_2.fq, /workspace/gitpod/nf-training/data/ggal/lung_2.fq]
         ```
 
 ### `mix()`
 
-The `mix` operator combines the items emitted by two (or more) channels into a single channel.
+The `mix` operator combines the items emitted by two (or more) channels.
 
-```groovy linenums="1"
+```groovy linenums="1" title="snippet.nf"
 my_channel_1 = Channel.of(1, 2, 3)
 my_channel_2 = Channel.of('a', 'b')
 my_channel_3 = Channel.of('z')
@@ -125,6 +149,8 @@ my_channel_1
     .mix(my_channel_2, my_channel_3)
     .view()
 ```
+
+It prints a single channel containing all the items emitted by the three channels:
 
 ```console title="Output"
 1
@@ -143,7 +169,7 @@ z
 
 The `flatten` operator transforms a channel in such a way that every _tuple_ is flattened so that each entry is emitted as a sole element by the resulting channel.
 
-```groovy linenums="1"
+```groovy linenums="1" title="snippet.nf"
 foo = [1, 2, 3]
 bar = [4, 5, 6]
 
@@ -166,14 +192,12 @@ Channel
 
 The `collect` operator collects all of the items emitted by a channel in a list and returns the object as a sole emission.
 
-```groovy linenums="1"
+```groovy linenums="1" title="snippet.nf"
 Channel
     .of(1, 2, 3, 4)
     .collect()
     .view()
 ```
-
-It prints a single value:
 
 ```console title="Output"
 [1, 2, 3, 4]
@@ -187,9 +211,7 @@ It prints a single value:
 
 The `groupTuple` operator collects tuples (or lists) of values emitted by the source channel, grouping the elements that share the same key. Finally, it emits a new tuple object for each distinct key collected.
 
-Try the following example:
-
-```groovy linenums="1"
+```groovy linenums="1" title="snippet.nf"
 Channel
     .of([1, 'A'], [1, 'B'], [2, 'C'], [3, 'B'], [1, 'C'], [2, 'A'], [3, 'D'])
     .groupTuple()
@@ -202,20 +224,28 @@ Channel
 [3, [B, D]]
 ```
 
-This operator is useful to process a group together with all the elements that share a common property or grouping key.
+This operator is especially useful to process a group together with all the elements that share a common property or grouping key.
 
 !!! question "Exercise"
 
-    Use `fromPath` to create a channel emitting all of the files in the folder `data/meta/`, then use a `map` to associate the `baseName` prefix to each file. Finally, group all files that have the same common prefix.
+    Use `fromPath` to create a channel emitting all of the files in the folder `data/meta/`, then use a `map` to associate the `baseName` method to each file. Finally, group all files that have the same common prefix.
 
     ??? solution
 
-        ```groovy linenums="1"
+        ```groovy linenums="1" title="snippet.nf"
         Channel
-            .fromPath('data/meta/*')
+            .fromPath('data/meta/')
             .map { file -> tuple(file.baseName, file) }
             .groupTuple()
-            .view { baseName, file -> "> $baseName : $file" }
+            .view()
+        ```
+
+        ```console title="Output"
+        [patients_1, [/workspace/gitpod/nf-training/data/meta/patients_1.csv]]
+        [patients_2, [/workspace/gitpod/nf-training/data/meta/patients_2.csv]]
+        [random, [/workspace/gitpod/nf-training/data/meta/random.txt]]
+        [regions, [/workspace/gitpod/nf-training/data/meta/regions.json, /workspace/gitpod/nf-training/data/meta/regions.tsv, /workspace/gitpod/nf-training/data/meta/regions.yml]]
+        [regions2, [/workspace/gitpod/nf-training/data/meta/regions2.json]]
         ```
 
 ### `join()`
@@ -242,7 +272,7 @@ left.join(right).view()
 
 The `branch` operator allows you to forward the items emitted by a source channel to one or more output channels.
 
-The selection criterion is defined by specifying a closure that provides one or more boolean expressions, each of which is identified by a unique label. For the first expression that evaluates to a true value, the item is bound to a named channel as the label identifier. For example:
+The selection criterion is defined by specifying a closure that provides one or more boolean expressions, each of which is identified by a unique label. For the first expression that evaluates to a true value, the item is bound to a named channel as the label identifier.
 
 ```groovy linenums="1"
 Channel
@@ -257,6 +287,14 @@ result.small.view { "$it is small" }
 result.large.view { "$it is large" }
 ```
 
+```console title="Output"
+1 is small
+40 is large
+2 is small
+3 is small
+50 is large
+```
+
 !!! info
 
     The `branch` operator returns a multi-channel object (i.e., a variable that holds more than one channel object).
@@ -265,9 +303,9 @@ result.large.view { "$it is large" }
 
     In the above example, what would happen to a value of 10? To deal with this, you can also use `>=`.
 
-### Text files
+## Text files
 
-The `splitText` operator allows you to split multi-line strings or text file items, emitted by a source channel into chunks containing n lines, which will be emitted by the resulting channel. See:
+The `splitText` operator allows you to split multi-line strings or text file items, emitted by a source channel into chunks containing _n_ lines, which will be emitted by the resulting channel.
 
 ```groovy linenums="1"
 Channel
@@ -280,54 +318,52 @@ Channel
 2. The `splitText` operator splits each item into chunks of one line by default.
 3. View contents of the channel.
 
+```console title="Output"
+Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
+when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+It has survived not only five centuries, but also the leap into electronic typesetting,
+...
+```
+
 You can define the number of lines in each chunk by using the parameter `by`, as shown in the following example:
 
 ```groovy linenums="1"
 Channel
     .fromPath('data/meta/random.txt')
     .splitText(by: 2)
-    .subscribe {
-        print it;
-        print "--- end of the chunk ---\n"
+    .view()
     }
 ```
 
-!!! info
+```console title="Output"
+Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
 
-    The `subscribe` operator permits execution of user defined functions each time a new value is emitted by the source channel.
+when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+It has survived not only five centuries, but also the leap into electronic typesetting,
+...
+```
 
-An optional closure can be specified in order to transform the text chunks produced by the operator. The following example shows how to split text files into chunks of 10 lines and transform them into capital letters:
+An optional closure can also be specified in order to transform the text chunks produced by the operator. The following example shows how to split text files into chunks of 2 lines and transform them into capital letters:
 
-```groovy linenums="1"
+```groovy linenums="1" title="snippet.nf"
 Channel
     .fromPath('data/meta/random.txt')
-    .splitText(by: 10) { it.toUpperCase() }
+    .splitText(by: 2) { it.toUpperCase() }
     .view()
 ```
 
-You can also make counts for each line:
+```console title="Output"
+LOREM IPSUM IS SIMPLY DUMMY TEXT OF THE PRINTING AND TYPESETTING INDUSTRY.
+LOREM IPSUM HAS BEEN THE INDUSTRY'S STANDARD DUMMY TEXT EVER SINCE THE 1500S,
 
-```groovy linenums="1"
-count = 0
-
-Channel
-    .fromPath('data/meta/random.txt')
-    .splitText()
-    .view { "${count++}: ${it.toUpperCase().trim()}" }
+WHEN AN UNKNOWN PRINTER TOOK A GALLEY OF TYPE AND SCRAMBLED IT TO MAKE A TYPE SPECIMEN BOOK.
+IT HAS SURVIVED NOT ONLY FIVE CENTURIES, BUT ALSO THE LEAP INTO ELECTRONIC TYPESETTING,
+...
 ```
 
-Finally, you can also use the operator on plain files (outside of the channel context):
-
-```groovy linenums="1"
-def f = file('data/meta/random.txt')
-def lines = f.splitText()
-def count = 0
-for (String row : lines) {
-    log.info "${count++} ${row.toUpperCase()}"
-}
-```
-
-### Comma separate values (.csv)
+### `splitText()`
 
 The `splitCsv` operator allows you to parse text items emitted by a channel, that are CSV formatted.
 
@@ -339,8 +375,19 @@ In the simplest case, just apply the `splitCsv` operator to a channel emitting a
 Channel
     .fromPath("data/meta/patients_1.csv")
     .splitCsv()
-    // row is a list object
     .view { row -> "${row[0]}, ${row[3]}" }
+```
+
+```console title="Output"
+patient_id, num_samples
+ATX-TBL-001-GB-02-117, 3
+ATX-TBL-001-GB-01-110, 3
+ATX-TBL-001-GB-03-101, 3
+ATX-TBL-001-GB-04-201, 3
+ATX-TBL-001-GB-02-120, 3
+ATX-TBL-001-GB-04-102, 3
+ATX-TBL-001-GB-03-104, 3
+ATX-TBL-001-GB-03-103, 3
 ```
 
 When the CSV begins with a header line defining the column names, you can specify the parameter `header: true` which allows you to reference each value by its column name, as shown in the following example:
@@ -359,8 +406,19 @@ Alternatively, you can provide custom header names by specifying a list of strin
 Channel
     .fromPath("data/meta/patients_1.csv")
     .splitCsv(header: ['col1', 'col2', 'col3', 'col4', 'col5'])
-    // row is a list object
     .view { row -> "${row.col1}, ${row.col4}" }
+```
+
+```console title="Output"
+patient_id, num_samples
+ATX-TBL-001-GB-02-117, 3
+ATX-TBL-001-GB-01-110, 3
+ATX-TBL-001-GB-03-101, 3
+ATX-TBL-001-GB-04-201, 3
+ATX-TBL-001-GB-02-120, 3
+ATX-TBL-001-GB-04-102, 3
+ATX-TBL-001-GB-03-104, 3
+ATX-TBL-001-GB-03-103, 3
 ```
 
 You can also process multiple CSV files at the same time:
@@ -372,43 +430,46 @@ Channel
     .view { row -> "${row.patient_id}\t${row.num_samples}" }
 ```
 
+```console title="Output"
+ATX-TBL-001-GB-02-117   3
+ATX-TBL-001-GB-01-110   3
+ATX-TBL-001-GB-03-101   3
+ATX-TBL-001-GB-04-201   3
+ATX-TBL-001-GB-02-120   3
+ATX-TBL-001-GB-04-102   3
+ATX-TBL-001-GB-03-104   3
+ATX-TBL-001-GB-03-103   3
+ATX-TBL-001-GB-01-111   2
+ATX-TBL-001-GB-01-112   3
+ATX-TBL-001-GB-04-202   3
+ATX-TBL-001-GB-02-124   3
+ATX-TBL-001-GB-02-107   3
+ATX-TBL-001-GB-01-105   3
+ATX-TBL-001-GB-02-108   3
+ATX-TBL-001-GB-01-113   3
+```
+
 !!! tip
 
     Notice that you can change the output format simply by adding a different delimiter.
 
 Finally, you can also operate on CSV files outside the channel context:
 
-```groovy linenums="1"
-def f = file('data/meta/patients_1.csv')
-def lines = f.splitCsv()
-for (List row : lines) {
-    log.info "${row[0]} -- ${row[2]}"
-}
-```
-
 !!! question "Exercise"
 
-    Try inputting fastq reads into the RNA-Seq workflow from earlier using `.splitCsv`.
+    Create a CSV file that can be used as an input for `script7.nf`.
 
     ??? solution
 
         Add a CSV text file containing the following, as an example input with the name "fastq.csv":
 
-        ```csv
+        ```csv title="input.csv"
         gut,/workspace/gitpod/nf-training/data/ggal/gut_1.fq,/workspace/gitpod/nf-training/data/ggal/gut_2.fq
         ```
 
-        Then replace the input channel for the reads in `script7.nf`. Changing the following lines:
+        Then, add a .splitCsv() operator:
 
-        ```groovy linenums="1"
-        Channel
-            .fromFilePairs(params.reads, checkIfExists: true)
-            .set { read_pairs_ch }
-        ```
-
-        To a splitCsv channel factory input:
-
-        ```groovy linenums="1" hl_lines="2 3 4"
+        ```groovy linenums="1" title="script7.nf"
         Channel
             .fromPath("fastq.csv")
             .splitCsv()
@@ -416,29 +477,9 @@ for (List row : lines) {
             .set { read_pairs_ch }
         ```
 
-        Finally, change the cardinality of the processes that use the input data. For example, for the quantification process, change it from:
+        Finally, change the cardinality of the processes that use the input data:
 
-        ```groovy linenums="1"
-        process QUANTIFICATION {
-            tag "$sample_id"
-
-            input:
-            path salmon_index
-            tuple val(sample_id), path(reads)
-
-            output:
-            path sample_id, emit: quant_ch
-
-            script:
-            """
-            salmon quant --threads $task.cpus --libType=U -i $salmon_index -1 ${reads[0]} -2 ${reads[1]} -o $sample_id
-            """
-        }
-        ```
-
-        To:
-
-        ```groovy linenums="1" hl_lines="6 13"
+        ```groovy linenums="1" title="script7.nf"
         process QUANTIFICATION {
             tag "$sample_id"
 
@@ -476,13 +517,9 @@ for (List row : lines) {
         }
         ```
 
-        Now the workflow should run from a CSV file.
+Parsing TSV files works in a similar way. Simply add the `sep: '\t'` option in the `splitCsv` context:
 
-### Tab separated values (.tsv)
-
-Parsing TSV files works in a similar way, simply add the `sep: '\t'` option in the `splitCsv` context:
-
-```groovy linenums="1"
+```groovy linenums="1" title="snippet.nf"
 Channel
     .fromPath("data/meta/regions.tsv", checkIfExists: true)
     // use `sep` option to parse TAB separated files
@@ -492,8 +529,7 @@ Channel
 
 !!! question "Exercise"
 
-    Try using the tab separation technique on the file `data/meta/regions.tsv`, but print just the first column, and remove the header.
-
+    Use the tab separation technique on the file `data/meta/regions.tsv`, but print just the first column, and remove the header.
 
     ??? solution
 
@@ -506,209 +542,110 @@ Channel
             .view { row -> "${row.patient_id}" }
         ```
 
-## More complex file formats
-
-### JSON
+### `splitJson()`
 
 We can also easily parse the JSON file format using the `splitJson` channel operator.
 
 The `splitJson` operator supports JSON arrays:
 
-=== "Source code"
+```groovy linenums="1" title="snippet.nf"
+Channel
+    .of('["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]')
+    .splitJson()
+    .view { "Item: ${it}" }
+```
 
-    ```groovy linenums="1"
-    Channel
-        .of('["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]')
-        .splitJson()
-        .view { "Item: ${it}" }
-    ```
+```console title="Output"
+Item: Sunday
+Item: Monday
+Item: Tuesday
+Item: Wednesday
+Item: Thursday
+Item: Friday
+Item: Saturday
+```
 
-=== "Output"
+```groovy linenums="1" title="snippet.nf"
+Channel
+    .of('{"player": {"name": "Bob", "height": 180, "champion": false}}')
+    .splitJson()
+    .view { "Item: ${it}" }
+```
 
-    ```console
-    Item: Sunday
-    Item: Monday
-    Item: Tuesday
-    Item: Wednesday
-    Item: Thursday
-    Item: Friday
-    Item: Saturday
-    ```
-
-JSON objects:
-
-=== "Source code"
-
-    ```groovy linenums="1"
-    Channel
-        .of('{"player": {"name": "Bob", "height": 180, "champion": false}}')
-        .splitJson()
-        .view { "Item: ${it}" }
-    ```
-
-=== "Output"
-
-    ```console
-    Item: [key:player, value:[name:Bob, height:180, champion:false]]
-    ```
+```console title="Output"
+Item: [key:player, value:[name:Bob, height:180, champion:false]]
+```
 
 And even a JSON array of JSON objects!
 
-=== "Source code"
+```groovy linenums="1" title="snippet.nf"
+Channel
+    .of('[{"name": "Bob", "height": 180, "champion": false}, \
+        {"name": "Alice", "height": 170, "champion": false}]')
+    .splitJson()
+    .view { "Item: ${it}" }
+```
 
-    ```groovy linenums="1"
-    Channel
-        .of('[{"name": "Bob", "height": 180, "champion": false}, \
-            {"name": "Alice", "height": 170, "champion": false}]')
-        .splitJson()
-        .view { "Item: ${it}" }
-    ```
+```console title="Output"
+Item: [name:Bob, height:180, champion:false]
+Item: [name:Alice, height:170, champion:false]
+```
 
-=== "Output"
+```groovy linenums="1" title="snippet.nf"
+Channel
+    .fromPath('file.json')
+    .splitJson()
+    .view { "Item: ${it}" }
+```
 
-    ```console
-    Item: [name:Bob, height:180, champion:false]
-    Item: [name:Alice, height:170, champion:false]
-    ```
+```json title="file.json"
+[
+    { "name": "Bob", "height": 180, "champion": false },
+    { "name": "Alice", "height": 170, "champion": false }
+]
+```
 
-Files containing JSON content can also be parsed:
-
-=== "Source code"
-
-    ```groovy linenums="1"
-    Channel
-        .fromPath('file.json')
-        .splitJson()
-        .view { "Item: ${it}" }
-    ```
-
-=== "file.json"
-
-    ```json
-    [
-      { "name": "Bob", "height": 180, "champion": false },
-      { "name": "Alice", "height": 170, "champion": false }
-    ]
-    ```
-
-=== "Output"
-
-    ```console
-    Item: [name:Bob, height:180, champion:false]
-    Item: [name:Alice, height:170, champion:false]
-    ```
+```console title="Output"
+Item: [name:Bob, height:180, champion:false]
+Item: [name:Alice, height:170, champion:false]
+```
 
 ### YAML
 
 This can also be used as a way to parse YAML files:
 
-=== "Source code"
+```groovy linenums="1" title="snippet.nf"
+import org.yaml.snakeyaml.Yaml
 
-    ```groovy linenums="1"
-    import org.yaml.snakeyaml.Yaml
-
-    def f = file('data/meta/regions.yml')
-    def records = new Yaml().load(f)
+def f = file('data/meta/regions.yml')
+def records = new Yaml().load(f)
 
 
-    for (def entry : records) {
-        log.info "$entry.patient_id -- $entry.feature"
-    }
-    ```
+for (def entry : records) {
+    log.info "$entry.patient_id -- $entry.feature"
+}
+```
 
-=== "data/meta/regions.yml"
+```yaml title="regions.yml"
+--8<-- "nf-training/data/meta/regions.yml"
+```
 
-    ```yaml
-    --8<-- "nf-training/data/meta/regions.yml"
-    ```
-
-=== "Output"
-
-    ```console
-    ATX-TBL-001-GB-01-105 -- pass_vafqc_flag
-    ATX-TBL-001-GB-01-105 -- pass_stripy_flag
-    ATX-TBL-001-GB-01-105 -- pass_manual_flag
-    ATX-TBL-001-GB-01-105 -- other_region_selection_flag
-    ATX-TBL-001-GB-01-105 -- ace_information_gained
-    ATX-TBL-001-GB-01-105 -- concordance_flag
-    ATX-TBL-001-GB-01-105 -- pass_vafqc_flag
-    ATX-TBL-001-GB-01-105 -- pass_stripy_flag
-    ATX-TBL-001-GB-01-105 -- pass_manual_flag
-    ATX-TBL-001-GB-01-105 -- other_region_selection_flag
-    ATX-TBL-001-GB-01-105 -- ace_information_gained
-    ATX-TBL-001-GB-01-105 -- concordance_flag
-    ATX-TBL-001-GB-01-105 -- pass_vafqc_flag
-    ATX-TBL-001-GB-01-105 -- pass_stripy_flag
-    ```
-
-### Storage of parsers into modules
-
-The best way to store parser scripts is to keep them in a Nextflow module file.
-
-Let's say we don't have a JSON channel operator, but we create a function instead. The `parsers.nf` file should contain the `parseJsonFile` function. See the contente below:
-
-=== "Source code"
-
-    ```groovy linenums="1"
-    include { parseJsonFile } from './modules/parsers.nf'
-
-    process FOO {
-        input:
-        tuple val(patient_id), val(feature)
-
-        output:
-        stdout
-
-        script:
-        """
-        echo $patient_id has $feature as feature
-        """
-    }
-
-    workflow {
-        Channel
-            .fromPath('data/meta/regions*.json')
-            | flatMap { parseJsonFile(it) }
-            | map { record -> [record.patient_id, record.feature] }
-            | unique
-            | FOO
-            | view
-    }
-    ```
-
-=== "./modules/parsers.nf"
-
-    ```groovy linenums="1"
-    import groovy.json.JsonSlurper
-
-    def parseJsonFile(json_file) {
-        def f = file(json_file)
-        def records = new JsonSlurper().parse(f)
-        return records
-    }
-    ```
-
-=== "Output"
-
-    ```console
-    ATX-TBL-001-GB-01-105 has pass_stripy_flag as feature
-
-    ATX-TBL-001-GB-01-105 has ace_information_gained as feature
-
-    ATX-TBL-001-GB-01-105 has concordance_flag as feature
-
-    ATX-TBL-001-GB-01-105 has pass_vafqc_flag as feature
-
-    ATX-TBL-001-GB-01-105 has pass_manual_flag as feature
-
-    ATX-TBL-001-GB-01-105 has other_region_selection_flag as feature
-    ```
-
-Nextflow will use this as a custom function within the workflow scope.
-
-!!! tip
-
-    You will learn more about module files later in the [Modularization section](../modules/) of this tutorial.
+```console
+ATX-TBL-001-GB-01-105 -- pass_vafqc_flag
+ATX-TBL-001-GB-01-105 -- pass_stripy_flag
+ATX-TBL-001-GB-01-105 -- pass_manual_flag
+ATX-TBL-001-GB-01-105 -- other_region_selection_flag
+ATX-TBL-001-GB-01-105 -- ace_information_gained
+ATX-TBL-001-GB-01-105 -- concordance_flag
+ATX-TBL-001-GB-01-105 -- pass_vafqc_flag
+ATX-TBL-001-GB-01-105 -- pass_stripy_flag
+ATX-TBL-001-GB-01-105 -- pass_manual_flag
+ATX-TBL-001-GB-01-105 -- other_region_selection_flag
+ATX-TBL-001-GB-01-105 -- ace_information_gained
+ATX-TBL-001-GB-01-105 -- concordance_flag
+ATX-TBL-001-GB-01-105 -- pass_vafqc_flag
+ATX-TBL-001-GB-01-105 -- pass_stripy_flag
+```
 
 ## More resources
 
