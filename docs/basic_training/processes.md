@@ -225,7 +225,7 @@ params.compress = 'gzip'
 params.file2compress = "$baseDir/data/ggal/transcriptome.fa"
 
 process FOO {
-    debug true 
+    debug true
 
     input:
     path file
@@ -347,7 +347,7 @@ workflow {
 }
 ```
 
-In this case, the process is executed six times and will print the name of the file `sample.fastq` six times as this is the name of the file in the input declaration and despite the input file name being different in each execution (e.g., `lung_1.fq`). 
+In this case, the process is executed six times and will print the name of the file `sample.fastq` six times as this is the name of the file in the input declaration and despite the input file name being different in each execution (e.g., `lung_1.fq`).
 
 ```console title="Output"
 sample.fastq
@@ -380,7 +380,7 @@ workflow {
 }
 ```
 
-In this case, the process is executed six times and will print the name of the variable input file six times (e.g., `lung_1.fq`). 
+In this case, the process is executed six times and will print the name of the variable input file six times (e.g., `lung_1.fq`).
 
 ```console title="Output"
 lung_1.fq
