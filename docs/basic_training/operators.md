@@ -710,7 +710,6 @@ Nextflow will use this as a custom function within the workflow scope.
 
     You will learn more about module files later in the [Modularization section](../modules/) of this tutorial.
 
-
 ## More resources
 
 Check the [operators documentation](https://www.nextflow.io/docs/latest/operator.html) on Nextflow web site.

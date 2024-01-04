@@ -416,7 +416,6 @@ The authors of Singularity, [SyLabs](https://www.sylabs.io/) have their own repo
 
 In the same way that we can push Docker images to Docker Hub, we can upload Singularity images to the Singularity Library.
 
-
 !!! cboard-list-2 "Summary"
 
     In this step you have learned:
@@ -448,7 +447,7 @@ There is already a file named `env.yml` in the `nf-training` folder as an exampl
 --8<-- "nf-training/env.yml"
 ```
 
-Given the `env.yml` recipe file, the environment can be created using the command shown below. 
+Given the `env.yml` recipe file, the environment can be created using the command shown below.
 
 ```bash
 conda env create --file env.yml
@@ -550,7 +549,7 @@ The above `Dockerfile` takes the parent image _mambaorg/micromamba_, installs a 
         ```
 
         Build the image:
-        
+
         ```bash
         docker build -t my-image .`
         ```
@@ -568,7 +567,7 @@ The above `Dockerfile` takes the parent image _mambaorg/micromamba_, installs a 
         `my-image` can be replaced with any name you choose. As good practice, choose something memorable and ensure the name matches the name you used in the previous command.
 
         Add the container image name to the `nextflow.config` file.
-        
+
         e.g. remove the following from the `nextflow.config`:
 
         ```groovy
@@ -642,7 +641,6 @@ mulled-search --destination quay singularity --channel bioconda --search bowtie 
     1. What Biocontainers are and where to find them
     2. How to use Biocontainers in your Nextflow workflow
 
-
 ## Software directives
 
 Directives are optional settings that affect the execution of the current process.
@@ -683,8 +681,8 @@ Nextflow automatically sets up an environment for the given package names listed
 
     ??? Solution
 
-        Add the container directive with the appropriate BioContainers to the `FASTQC` and `QUANTIFICATION` processes in `script5.nf`:      
-        
+        Add the container directive with the appropriate BioContainers to the `FASTQC` and `QUANTIFICATION` processes in `script5.nf`:
+
         ```groovy
         process FASTQC {
             container 'biocontainers/fastqc:v0.11.5'
@@ -716,4 +714,3 @@ Nextflow automatically sets up an environment for the given package names listed
     In this step you have learned:
 
     1. How to add software with directives.
-

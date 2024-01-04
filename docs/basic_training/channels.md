@@ -201,7 +201,6 @@ As you can see, the output is the same as the previous example when the `first()
         }
         ```
 
-
 !!! cboard-list-2 "Summary"
 
     In this step you have learned:
