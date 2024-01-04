@@ -266,6 +266,15 @@ workflow {
         bzip2 -c transcriptome.fa > transcriptome.fa.bz2
         ```
 
+!!! cboard-list-2 "Summary"
+
+    In this step you have learned:
+
+    1. How to use the `script` declaration to define the command to be executed by the process.
+    2. How to use the `params` variable to define dynamic script parameters.
+    3. How to use the `shell` declaration to define the command to be executed by the process.
+    4. How to use the `if` statement to define a conditional script.
+
 ## Inputs
 
 Nextflow process instances (tasks) are isolated from each other but can communicate between themselves by sending values through channels.
@@ -470,7 +479,7 @@ When this condition is verified, it consumes the input values coming from the re
 
 This means channel values are consumed serially one after another and the first empty channel causes the process execution to stop, even if there are other values in other channels.
 
-**What happens when channels do not have the same cardinality (i.e., they emit a different number of elements)?**
+What happens when channels do not have the same cardinality (i.e., they emit a different number of elements)?
 
 ```groovy linenums="1" title="snippet.nf"
 ch1 = Channel.of(1, 2, 3)
@@ -654,6 +663,14 @@ In the above example, every time a file of sequences is received as an input by 
         t_coffee -in gut_1.fq -mode cappuccino
         t_coffee -in lung_1.fq -mode cappuccino
         ```
+
+!!! cboard-list-2 "Summary"
+
+    In this step you have learned:
+
+    1. How to use the `val` qualifier to define the input channel(s) of a process.
+    2. How to use the `path` qualifier to define the input file(s) of a process.
+    3. How to use the `each` qualifier to repeat the execution of a process for each item in a collection.
 
 ## Outputs
 
@@ -882,6 +899,17 @@ The output will looks something like this:
         }
         ```
 
+!!! cboard-list-2 "Summary"
+
+    In this step you have learned:
+
+    1. How to use the `val` qualifier to define the output channel(s) of a process.
+    2. How to use the `path` qualifier to define the output file(s) of a process.
+    3. How to use the `tuple` qualifier to define the output channel(s) of a process.
+    4. How to manage multiple output files using glob patterns.
+    5. How to use dynamic output file names.
+    6. How to use composite inputs and outputs.
+
 ## When
 
 The `when` declaration allows you to define a condition that must be verified in order to execute the process. This can be any expression that evaluates a boolean value.
@@ -913,6 +941,12 @@ workflow {
     result = FIND(proteins, params.dbtype)
 }
 ```
+
+!!! cboard-list-2 "Summary"
+
+    In this step you have learned:
+
+    1. How to use the `when` declaration to allow conditional processes.
 
 ## Directives
 
@@ -1046,3 +1080,10 @@ workflow {
             input:
         ...
         ```
+
+!!! cboard-list-2 "Summary"
+
+    In this step you have learned:
+
+    1. How to use the cpus, time, memory, and disk directives to define the amount of computing resources to be used by the process.
+    2. How to use the publishDir directive to store the output files in a results folder.
