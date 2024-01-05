@@ -14,9 +14,9 @@ Nextflow DSL2 allows for the definition of stand-alone module scripts that can b
 
 ### Importing modules
 
-Components defined in the module script can be imported into other Nextflow scripts using the `include` statement. This allows you to store these components in a separate file(s) so that they can be re-used in multiple workflows.
+Components defined in the module script can be imported into other Nextflow scripts using the `include` statement. This allows you to store these components in one or more file(s) that they can be re-used in multiple workflows.
 
-Using the `hello.nf` example, we can achieve this by:
+Using the `hello.nf` example, you can achieve this by:
 
 -   Creating a file called `modules.nf` in the top-level directory.
 -   Copying and pasting the two process definitions for `SPLITLETTERS` and `CONVERTTOUPPER` into `modules.nf`.
@@ -86,7 +86,7 @@ include { CONVERTTOUPPER } from './modules.nf'
         }
         ```
 
-        We now have modularized processes which makes the code reusable.
+        You now have modularized processes which makes the code reusable.
 
 ### Multiple imports
 
@@ -154,7 +154,7 @@ workflow {
 
 Nextflow allows the use of alternative output definitions within workflows to simplify your code.
 
-In the previous basic example (`hello.nf`), we defined the channel names to specify the input to the next process:
+In the previous basic example (`hello.nf`), you defined the channel names to specify the input to the next process:
 
 ```groovy linenums="1"
 workflow  {
@@ -167,9 +167,9 @@ workflow  {
 
 !!! note
 
-    We have moved the `greeting_ch` into the workflow scope for this exercise.
+    You have moved the `greeting_ch` into the workflow scope for this exercise.
 
-We can also explicitly define the output of one channel to another using the `.out` attribute, removing the channel definitions completely:
+You can also explicitly define the output of one channel to another using the `.out` attribute, removing the channel definitions completely:
 
 ```groovy linenums="1" hl_lines="3-5"
 workflow  {

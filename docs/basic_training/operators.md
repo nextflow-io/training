@@ -544,7 +544,7 @@ Channel
 
 ### `splitJson()`
 
-We can also easily parse the JSON file format using the `splitJson` channel operator.
+You can parse the JSON file format using the `splitJson` channel operator.
 
 The `splitJson` operator supports JSON arrays:
 
@@ -552,51 +552,48 @@ The `splitJson` operator supports JSON arrays:
 Channel
     .of('["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]')
     .splitJson()
-    .view { "Item: ${it}" }
+    .view()
 ```
 
 ```console title="Output"
-Item: Sunday
-Item: Monday
-Item: Tuesday
-Item: Wednesday
-Item: Thursday
-Item: Friday
-Item: Saturday
+Sunday
+Monday
+Tuesday
+Wednesday
+Thursday
+Friday
+Saturday
 ```
+
+As well as JSON arrays in objects:
 
 ```groovy linenums="1" title="snippet.nf"
 Channel
     .of('{"player": {"name": "Bob", "height": 180, "champion": false}}')
     .splitJson()
-    .view { "Item: ${it}" }
+    .view()
 ```
 
 ```console title="Output"
-Item: [key:player, value:[name:Bob, height:180, champion:false]]
+[value:[name:Bob, height:180, champion:false], key:player]
 ```
 
-And even a JSON array of JSON objects!
+And even a JSON array of JSON objects:
 
 ```groovy linenums="1" title="snippet.nf"
 Channel
     .of('[{"name": "Bob", "height": 180, "champion": false}, \
         {"name": "Alice", "height": 170, "champion": false}]')
     .splitJson()
-    .view { "Item: ${it}" }
+    .view()
 ```
 
 ```console title="Output"
-Item: [name:Bob, height:180, champion:false]
-Item: [name:Alice, height:170, champion:false]
+[name:Bob, height:180, champion:false]
+[name:Alice, height:170, champion:false]
 ```
 
-```groovy linenums="1" title="snippet.nf"
-Channel
-    .fromPath('file.json')
-    .splitJson()
-    .view { "Item: ${it}" }
-```
+You can also parse JSON files directly:
 
 ```json title="file.json"
 [
@@ -605,46 +602,16 @@ Channel
 ]
 ```
 
-```console title="Output"
-Item: [name:Bob, height:180, champion:false]
-Item: [name:Alice, height:170, champion:false]
-```
-
-### YAML
-
-This can also be used as a way to parse YAML files:
-
 ```groovy linenums="1" title="snippet.nf"
-import org.yaml.snakeyaml.Yaml
-
-def f = file('data/meta/regions.yml')
-def records = new Yaml().load(f)
-
-
-for (def entry : records) {
-    log.info "$entry.patient_id -- $entry.feature"
-}
+Channel
+    .fromPath('file.json')
+    .splitJson()
+    .view()
 ```
 
-```yaml title="regions.yml"
---8<-- "nf-training/data/meta/regions.yml"
-```
-
-```console
-ATX-TBL-001-GB-01-105 -- pass_vafqc_flag
-ATX-TBL-001-GB-01-105 -- pass_stripy_flag
-ATX-TBL-001-GB-01-105 -- pass_manual_flag
-ATX-TBL-001-GB-01-105 -- other_region_selection_flag
-ATX-TBL-001-GB-01-105 -- ace_information_gained
-ATX-TBL-001-GB-01-105 -- concordance_flag
-ATX-TBL-001-GB-01-105 -- pass_vafqc_flag
-ATX-TBL-001-GB-01-105 -- pass_stripy_flag
-ATX-TBL-001-GB-01-105 -- pass_manual_flag
-ATX-TBL-001-GB-01-105 -- other_region_selection_flag
-ATX-TBL-001-GB-01-105 -- ace_information_gained
-ATX-TBL-001-GB-01-105 -- concordance_flag
-ATX-TBL-001-GB-01-105 -- pass_vafqc_flag
-ATX-TBL-001-GB-01-105 -- pass_stripy_flag
+```console title="Output"
+[name:Bob, height:180, champion:false]
+[name:Alice, height:170, champion:false]
 ```
 
 ## More resources
