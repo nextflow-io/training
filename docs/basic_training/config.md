@@ -1,6 +1,6 @@
 ---
 title: Configuration
-description: Basic Nextflow Training Workshop
+description: Foundational Nextflow Training Workshop
 ---
 
 # Nextflow configuration
@@ -8,6 +8,16 @@ description: Basic Nextflow Training Workshop
 A key Nextflow feature is the ability to decouple the workflow implementation by the configuration setting required by the underlying execution platform.
 
 This enables portable deployment without the need to modify the application code.
+
+Nextflow will look for configuration files in several locations. As each source can contain conflicting settings, the sources are ranked to decide which settings to apply. Configuration sources are reported below and listed in order of priority:
+
+1. Parameters specified on the command line (`--parameter`)
+2. Parameters that are provided using the `-params-file` option
+3. Config file that are provided using the `-c` option
+4. The config file named `nextflow.config` in the current directory
+5. The config file named `nextflow.config` in the pipeline project directory
+6. The config file `$HOME/.nextflow/config`
+7. Values defined within the pipeline script itself (e.g., `main.nf`)
 
 ## Configuration file
 

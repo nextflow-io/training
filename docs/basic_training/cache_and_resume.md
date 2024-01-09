@@ -1,6 +1,6 @@
 ---
 title: Cache and resume
-description: Basic Nextflow Training Workshop
+description: Foundational Nextflow Training Workshop
 ---
 
 # Execution cache and resume
@@ -200,7 +200,7 @@ Finally, the `-t` option enables the creation of a basic custom provenance repor
 
 ## Resume troubleshooting
 
-Being able to resume workflows is a key feature of Nextflow, but it doesn't always work as you expect. In this section we go through a few common reasons why Nextflow may be ignoring your cached results.
+Being able to resume workflows is a key feature of Nextflow, but it doesn't always work as you expect. In this section you will learn common reasons why Nextflow may be ignoring your cached results.
 
 !!! tip
 
@@ -280,7 +280,7 @@ workflow {
 }
 ```
 
-Just like we saw at the beginning of this tutorial with HELLO WORLD or WORLD HELLO, the output of the snippet above can be:
+Just like you saw at the beginning of this tutorial with HELLO WORLD or WORLD HELLO, the output of the snippet above can be:
 
 ```console
 [3, C]
@@ -291,7 +291,7 @@ Just like we saw at the beginning of this tutorial with HELLO WORLD or WORLD HEL
 
 ..and that order will likely be different every time the workflow is run.
 
-Imagine now that we have two processes like this, whose output channels are acting as input channels to a third process. Both channels will be independently random, so the third process must not expect them to retain a paired sequence. If it does assume that the first element in the first process output channel is related to the first element in the second process output channel, there will be a mismatch.
+Imagine that you now have two processes like this, whose output channels are acting as input channels to a third process. Both channels will be independently random, so the third process must not expect them to retain a paired sequence. If it does assume that the first element in the first process output channel is related to the first element in the second process output channel, there will be a mismatch.
 
 A common solution for this is to use what is commonly referred to as a _meta map_. A groovy object with sample information is passed out together with the file results within an output channel as a tuple. This can then be used to pair samples from separate channels together for downstream use. For example, instead of putting just `/some/path/myoutput.bam` into a channel, you could use `['SRR123', '/some/path/myoutput.bam']` to make sure the processes are not incurring into a mismatch. Check the example below:
 

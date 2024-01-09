@@ -1,10 +1,11 @@
 ---
+title: Simple RNA-Seq workflow
 description: Foundational Nextflow Training Workshop
 ---
 
 # Simple RNA-Seq workflow
 
-To demonstrate a real-world biomedical scenario, we will implement a proof of concept RNA-Seq workflow which:
+To demonstrate a real-world biomedical scenario, you will implement a proof of concept RNA-Seq workflow which:
 
 1. Indexes a transcriptome file
 2. Performs quality controls
@@ -279,7 +280,7 @@ work
 
 ## Collect read files by pairs
 
-There are numerous Channel factories that can be used to create channels. In this step, we will use the [fromFilePairs](https://www.nextflow.io/docs/latest/channel.html#fromfilepairs) channel factory to create a channel of read pairs.
+There are numerous Channel factories that can be used to create channels. In this step, you will use the [fromFilePairs](https://www.nextflow.io/docs/latest/channel.html#fromfilepairs) channel factory to create a channel of read pairs.
 
 The `fromFilePairs` channel factory takes a glob pattern as input and returns a channel of tuples. Each tuple contains two elements: the first is the read pair prefix and the second is a list of paths to the read files.
 
@@ -367,7 +368,7 @@ In the workflow scope, note how the `index_ch` channel is assigned as output in 
 
 Next, note that the first input channel for the `QUANTIFICATION` process is the previously declared `index_ch`, which contains the `path` to the `salmon_index`.
 
-Also, note that the second input channel for the `QUANTIFICATION` process, is the `read_pair_ch` we just created. This being a `tuple` composed of two elements (a value: `sample_id` and a list of paths to the fastq reads: `reads`) in order to match the structure of the items emitted by the `fromFilePairs` channel factory.
+Also, note that the second input channel for the `QUANTIFICATION` process, is the `read_pair_ch` you just created. This being a `tuple` composed of two elements (a value: `sample_id` and a list of paths to the fastq reads: `reads`) in order to match the structure of the items emitted by the `fromFilePairs` channel factory.
 
 Execute it by using the following command:
 
@@ -428,7 +429,7 @@ Nextflow parallelizes the execution of your workflow simply by providing multipl
 
 ## Quality control
 
-Next, we implement a `FASTQC` quality control step for your input reads (using the label `fastqc`). The inputs are the same as the read pairs used in the `QUANTIFICATION` step.
+Next, you will implement a `FASTQC` quality control step for your input reads (using the label `fastqc`). The inputs are the same as the read pairs used in the `QUANTIFICATION` step.
 
 You can run it by using the following command:
 
@@ -456,7 +457,7 @@ In this script, note the use of the [mix](https://www.nextflow.io/docs/latest/op
 MULTIQC(quant_ch.mix(fastqc_ch).collect())
 ```
 
-We only want one task of MultiQC to be executed to produce one report. Therefore, we use the `mix` channel operator to combine the `quant_ch` and the `fastqc_ch` channels, followed by the `collect` operator, to return the complete channel contents as a single element.
+You will only want one task of MultiQC to be executed to produce one report. Therefore, you can use the `mix` channel operator to combine the `quant_ch` and the `fastqc_ch` channels, followed by the `collect` operator, to return the complete channel contents as a single element.
 
 !!! question "Exercise"
 

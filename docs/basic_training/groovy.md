@@ -145,7 +145,7 @@ assert list[-1..0] == list.reverse()
 
 !!! info
 
-    In the last assert line we are referencing the initial list and converting this with a "shorthand" range (`..`), to run from the -1th element (2) to the 0th element (0).
+    In the last assert line you are referencing the initial list and converting this with a "shorthand" range (`..`), to run from the -1th element (2) to the 0th element (0).
 
 List objects implement all methods provided by the [java.util.List](https://docs.oracle.com/javase/8/docs/api/java/util/List.html) interface, plus the extension methods provided by [Groovy](http://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/List.html).
 
@@ -469,7 +469,7 @@ assert square.call(5) == 25
 assert square(9) == 81
 ```
 
-As is, this may not seem interesting, but we can now pass the `square` function as an argument to other functions or methods. Some built-in functions take a function like this as an argument. One example is the `collect` method on lists:
+As is, this may not seem interesting, but you can now pass the `square` function as an argument to other functions or methods. Some built-in functions take a function like this as an argument. One example is the `collect` method on lists:
 
 ```groovy linenums="1" title="snippet.nf"
 x = [1, 2, 3, 4].collect(square)
