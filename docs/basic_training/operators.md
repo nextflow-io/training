@@ -1,4 +1,5 @@
 ---
+title: Operators
 description: Basic Nextflow Training Workshop
 ---
 
@@ -49,7 +50,7 @@ Channel
 
 ## Commonly used operators
 
-Here we explore some of the most commonly used operators.
+Here you will explore some of the most commonly used operators.
 
 ### `view()`
 

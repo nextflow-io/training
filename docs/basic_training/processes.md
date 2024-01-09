@@ -1,4 +1,5 @@
 ---
+title: Processes
 description: Basic Nextflow Training Workshop
 ---
 
@@ -146,7 +147,7 @@ Hello World
 
 !!! info
 
-    A process script can contain any string format supported by the Groovy programming language. This allows us to use string interpolation as in the script above or multiline strings. Refer to [String interpolation](../groovy/#string-interpolation) for more information.
+    A process script can contain any string format supported by the Groovy programming language. This allows us to use string interpolation as in the script above or multiline strings. Refer to [String interpolation](../groovy#string-interpolation) for more information.
 
 !!! warning
 
@@ -837,7 +838,7 @@ In the above example, each time the process is executed an alignment file is pro
 
 ### Composite inputs and outputs
 
-So far we have seen how to declare multiple input and output channels that can handle one value at a time. However, Nextflow can also handle a _tuple_ of values.
+So far you have seen how to declare multiple input and output channels that can handle one value at a time. However, Nextflow can also handle a _tuple_ of values.
 
 The `input` and `output` declarations for tuples must be declared with a `tuple` qualifier followed by the definition of each element in the tuple.
 
@@ -899,6 +900,120 @@ The output will looks something like this:
         }
         ```
 
+### Output definitions
+
+Nextflow allows the use of alternative output definitions within workflows to simplify your code.
+
+You can also explicitly define the output of a channel using the `.out` attribute:
+
+```groovy linenums="1" title="snippet.nf"
+reads_ch = Channel.fromFilePairs('data/ggal/*_{1,2}.fq')
+
+process FOO {
+    input:
+    tuple val(sample_id), path(sample_id_paths)
+
+    output:
+    tuple val(sample_id), path('sample.bam')
+    tuple val(sample_id), path('sample.bai')
+
+    script:
+    """
+    echo your_command_here --sample $sample_id_paths > sample.bam
+    echo your_command_here --sample $sample_id_paths > sample.bai
+    """
+}
+
+workflow {
+    FOO(reads_ch)
+    FOO.out.view()
+}
+```
+
+If a process defines two or more output channels, each channel can be accessed by indexing the `.out` attribute, e.g., `.out[0]`, `.out[1]`, etc. In this example you only have the `[0]'th` output:
+
+```groovy linenums="1" title="snippet.nf"
+reads_ch = Channel.fromFilePairs('data/ggal/*_{1,2}.fq')
+
+process FOO {
+    input:
+    tuple val(sample_id), path(sample_id_paths)
+
+    output:
+    tuple val(sample_id), path('sample.bam')
+    tuple val(sample_id), path('sample.bai')
+
+    script:
+    """
+    echo your_command_here --sample $sample_id_paths > sample.bam
+    echo your_command_here --sample $sample_id_paths > sample.bai
+    """
+}
+
+workflow {
+    FOO(reads_ch)
+    FOO.out[0].view()
+}
+```
+
+Alternatively, the process `output` definition allows the use of the `emit` statement to define a named identifier that can be used to reference the channel in the external scope.
+
+```groovy linenums="1" title="snippet.nf"
+reads_ch = Channel.fromFilePairs('data/ggal/*_{1,2}.fq')
+
+process FOO {
+    input:
+    tuple val(sample_id), path(sample_id_paths)
+
+    output:
+    tuple val(sample_id), path('sample.bam'), emit: bam
+    tuple val(sample_id), path('sample.bai'), emit: bai
+
+    script:
+    """
+    echo your_command_here --sample $sample_id_paths > sample.bam
+    echo your_command_here --sample $sample_id_paths > sample.bai
+    """
+}
+
+workflow {
+    FOO(reads_ch)
+    FOO.out.bam.view()
+}
+```
+
+!!! question "Exercise"
+
+    Modify the previous example so that the `bai` output channel is printed to your terminal.
+
+    ??? solution
+
+        Your workflow will look something like this:
+
+        ```groovy linenums="1" title="snippet.nf"
+        reads_ch = Channel.fromFilePairs('data/ggal/*_{1,2}.fq')
+
+        process FOO {
+            input:
+            tuple val(sample_id), path(sample_id_paths)
+
+            output:
+            tuple val(sample_id), path('sample.bam'), emit: bam
+            tuple val(sample_id), path('sample.bai'), emit: bai
+
+            script:
+            """
+            echo your_command_here --sample $sample_id_paths > sample.bam
+            echo your_command_here --sample $sample_id_paths > sample.bai
+            """
+        }
+
+        workflow {
+            FOO(reads_ch)
+            FOO.out.bai.view()
+        }
+        ```
+
 !!! cboard-list-2 "Summary"
 
     In this step you have learned:
@@ -909,6 +1024,7 @@ The output will looks something like this:
     4. How to manage multiple output files using glob patterns.
     5. How to use dynamic output file names.
     6. How to use composite inputs and outputs.
+    7. How to define outputs.
 
 ## When
 

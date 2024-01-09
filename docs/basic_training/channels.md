@@ -1,5 +1,6 @@
 ---
-description: Basic Nextflow Training Workshop
+title: Channels
+description: Foundational Nextflow Training Workshop
 ---
 
 # Channels
@@ -98,7 +99,7 @@ When you run this script, it only prints `2`, as you can see below:
 
 A process will only instantiate a task when there are elements to be consumed from _all_ the channels provided as input to it. Because `ch1` and `ch2` are queue channels, and the single element of `ch2` has been consumed, no new process instances will be launched, even if there are other elements to be consumed in `ch1`.
 
-To use the single element in `ch2` multiple times, we can either use the `Channel.value` channel factory, or use a channel operator that returns a single element, such as `first()`:
+To use the single element in `ch2` multiple times, you can either use the `Channel.value` channel factory, or use a channel operator that returns a single element, such as `first()`:
 
 ```groovy linenums="1" title="snippet.nf"
 ch1 = Channel.of(1, 2, 3)

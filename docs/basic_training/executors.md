@@ -1,4 +1,5 @@
 ---
+title: Deployment scenarios
 description: Basic Nextflow Training Workshop
 ---
 

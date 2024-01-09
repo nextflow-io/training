@@ -1,4 +1,5 @@
 ---
+title: Dependencies and containers
 description: Basic Nextflow Training Workshop
 ---
 
@@ -8,7 +9,7 @@ Computational workflows are rarely composed of a single script or tool. More oft
 
 Installing and maintaining such dependencies is a challenging task and a common source of irreproducibility in scientific applications.
 
-To overcome these issues, we use containers that enable software dependencies, i.e. tools and libraries required by a data analysis application, to be encapsulated in one or more self-contained, ready-to-run, immutable Linux container images. These container images can be easily deployed in any platform that supports the container runtime.
+To overcome these issues, you can use containers that enable software dependencies, i.e. tools and libraries required by a data analysis application, to be encapsulated in one or more self-contained, ready-to-run, immutable Linux container images. These container images can be easily deployed in any platform that supports the container runtime.
 
 Containers can be executed in an isolated manner from the hosting system. Having its own copy of the file system, processing space, and memory management.
 
@@ -217,7 +218,7 @@ docker run my-image \
     salmon index -t $PWD/data/ggal/transcriptome.fa -i transcript-index
 ```
 
-To mount a filesystem within a Docker container, we use the `--volume` command-line option when running the container. Its argument consists of two fields separated by a colon (:):
+To mount a filesystem within a Docker container, you can use the `--volume` command-line option when running the container. Its argument consists of two fields separated by a colon (:):
 
 -   Host source directory path
 -   Container target directory path
@@ -414,7 +415,7 @@ As before, the Singularity container can also be provided in the Nextflow config
 
 The authors of Singularity, [SyLabs](https://www.sylabs.io/) have their own repository of Singularity containers.
 
-In the same way that we can push Docker images to Docker Hub, we can upload Singularity images to the Singularity Library.
+In the same way that you can push Docker images to Docker Hub, you can upload Singularity images to the Singularity Library.
 
 !!! cboard-list-2 "Summary"
 
@@ -623,7 +624,7 @@ mulled-search --destination quay singularity --channel bioconda --search bowtie 
 
 !!! question "Exercise"
 
-    During the earlier RNA-Seq tutorial (script2.nf), we created an index with the salmon tool. Given we do not have salmon installed locally in the machine provided by Gitpod, we had to either run it with `-with-conda` or `-with-docker`. Your task now is to run it again `-with-docker`, but without creating your own container image. Instead, use the BioContainers image for salmon 1.7.0.
+    During the earlier RNA-Seq tutorial (script2.nf), you created an index with the salmon tool. Given you do not have salmon installed locally in the machine provided by Gitpod, you had to either run it with `-with-conda` or `-with-docker`. Your task now is to run it again `-with-docker`, but without creating your own container image. Instead, use the BioContainers image for salmon 1.7.0.
 
 
     ??? Solution
@@ -673,11 +674,11 @@ Nextflow automatically sets up an environment for the given package names listed
 
 !!! question "Exercise"
 
-    The tools `fastqc` and `salmon` are both available in BioContainers. Add the appropriate `container` directives to the `FASTQC` and `QUANTIFICATION` processes in `script5.nf` to use BioContainers instead of the container image we have been using in this training.
+    The tools `fastqc` and `salmon` are both available in BioContainers. Add the appropriate `container` directives to the `FASTQC` and `QUANTIFICATION` processes in `script5.nf` to use BioContainers instead of the container image you have been using in this training.
 
     !!! tip "Hint"
 
-        Temporarily comment out the line `#!groovy process.container = 'nextflow/rnaseq-nf'` in the `nextflow.config` file to make sure the processes are using the BioContainers that you set, and not the container image we have been using in this training.
+        Temporarily comment out the line `#!groovy process.container = 'nextflow/rnaseq-nf'` in the `nextflow.config` file to make sure the processes are using the BioContainers that you set, and not the container image you have been using in this training.
 
     ??? Solution
 

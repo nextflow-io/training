@@ -1,4 +1,5 @@
 ---
+title: Environment setup
 description: How to set up a development environment to run Nextflow
 ---
 

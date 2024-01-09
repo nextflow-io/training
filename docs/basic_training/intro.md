@@ -1,4 +1,5 @@
 ---
+title: Introduction
 description: Getting started with Nextflow
 ---
 
