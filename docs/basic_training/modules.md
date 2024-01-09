@@ -135,7 +135,7 @@ workflow {
 
 Note how the `SPLITLETTERS` and `CONVERTTOUPPER` processes are imported twice, each time with a different alias, and how these aliases are used to invoke the processes:
 
-```console title="Output"   
+```console title="Output"
 N E X T F L O W  ~  version 23.10.0
 Launching `hello.nf` [crazy_shirley] DSL2 - revision: 99f6b6e40e
 executor >  local (6)
@@ -340,7 +340,7 @@ process CONVERTTOUPPER {
     stdout emit: upper
 
     """
-    cat $y | tr '[a-z]' '[A-Z]' 
+    cat $y | tr '[a-z]' '[A-Z]'
     """
 }
 
@@ -390,7 +390,7 @@ process CONVERTTOUPPER {
     stdout emit: upper
 
     """
-    cat $y | tr '[a-z]' '[A-Z]' 
+    cat $y | tr '[a-z]' '[A-Z]'
     """
 }
 
