@@ -234,7 +234,11 @@ nextflow run <your script> -profile cluster
     nextflow run <your script> -profile standard,cloud
     ```
 
-### Cloud deployment
+## Cloud deployment
+
+Nextflow supports deployment on your favourite cloud providers. The following sections describe how to deploy Nextflow workflows on AWS.
+
+### AWS Batch
 
 [AWS Batch](https://aws.amazon.com/batch/) is a managed computing service that allows the execution of containerized workloads in the Amazon cloud infrastructure.
 
@@ -282,10 +286,6 @@ The complete details about AWS Batch deployment are available at [this link](htt
     4. How to configure process by name
     5. How to configure process by labels
 
-## Skills for other deployment scenarios
-
-There are many different ways to deploy Nextflow workflows. The following sections describe some of the most common scenarios.
-
 ### Volume mounts
 
 Elastic Block Storage (EBS) volumes (or other supported storage) can be mounted in the job container using the following configuration snippet:
@@ -313,9 +313,20 @@ aws {
 
     This is a global configuration that has to be specified in a Nextflow config file and will be applied to **all** process executions.
 
-!!! warning
+!!! tip
 
-    Nextflow expects paths to be available. It does not handle the provision of EBS volumes or another kind of storage.
+    Addtional documentation for [AWS](https://www.nextflow.io/docs/latest/aws.html#), [GCP](https://www.nextflow.io/docs/latest/google.html), and [Azure](https://www.nextflow.io/docs/latest/azure.html) are available on the Nextflow documentation site. 
+
+!!! cboard-list-2 "Summary"
+
+    In this step you have learned:
+
+    1. How to configure AWS Batch
+    2. How to configure volume mounts
+
+## Additional configuration options
+
+There are many different ways to deploy Nextflow workflows. The following sections describe additional configuration options for deployments.
 
 ### Custom job definition
 
@@ -429,8 +440,7 @@ aws {
 
     In this step you have learned:
 
-    1. How to configure volume mounts
-    2. How to use a custom job definition
-    3. How to use a custom image
-    4. How to use a launch template
-    5. How to use hybrid deployments
+    1. How to use a custom job definition
+    2. How to use a custom image
+    3. How to use a launch template
+    4. How to use hybrid deployments

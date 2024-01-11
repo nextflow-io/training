@@ -6,6 +6,12 @@ Even the most proficient developers need documentation.
 Nextflow is no different, and has an excellent set of docs.
 You can find the Nextflow docs at <https://nextflow.io/docs/latest/> - we recommend keeping them open in a tab whilst you follow the training!
 
+## community.seqera.io
+
+The [Seqera community forum](https://community.seqera.io) is a great place to ask questions about Nextflow. It's also a great place to find answers to questions that have already been asked!
+
+Questions about Nextflow can be asked under the [Nextflow category](https://community.seqera.io/c/nextflow/5) with any relevant tags.
+
 ## Slack
 
 If you're struggling with the training please don't hesitate to reach out for help.

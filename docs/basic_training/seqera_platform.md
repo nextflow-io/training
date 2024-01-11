@@ -5,8 +5,6 @@ description: Get started with Seqera Platform
 
 # Get started with Seqera Platform
 
-## Basic concepts
-
 Seqera Platform, previously known as Nextflow Tower, is the centralized command post for data management and workflows. It brings monitoring, logging and observability to distributed workflows and simplifies the deployment of workflows on any cloud, cluster or laptop. In Seqera Platform terminology, a workflow is what we've been working on so far, and pipelines are pre-configured workflows that can be used by all users in a workspace. It is composed of a workflow repository, launch parameters, and a compute environment. We'll stick to these definitions in this section.
 
 Seqera core features include:
@@ -20,11 +18,11 @@ Seqera core features include:
 
     [Sign up](https://cloud.tower.nf/) to try Seqera for free or request a [demo](https://seqera.io/demo/) for deployments in your own on-premise or cloud environment.
 
-## Usage
+You can use Seqera Platform via either the **CLI**, through the **online GUI** or through the **API**.
 
-You can use Seqera Platform via either the `-with-tower` option while using the `nextflow run` command, through the **online GUI** or through the **API**.
+## CLI
 
-### Via the `nextflow run` command
+You will need to set up your environment to use Seqera Platform. This is a one-time setup.
 
 Create an account and login into Seqera Platform.
 
@@ -86,7 +84,14 @@ To configure and execute Nextflow jobs in **Cloud environments**, visit the [Com
 
         Go to <https://tower.nf/>, login, then click the run tab, and select the run that you just submitted. If you can’t find it, double check your token was entered correctly.
 
-### Via online GUI
+!!! cboard-list-2 "Summary"
+
+    In this step you have learned:
+
+    1. How to create and add your token and workspace.
+    2. How to launch a pipeline with Seqera Platform.
+
+## Online GUI
 
 To run using the GUI, there are three main steps:
 
@@ -94,7 +99,7 @@ To run using the GUI, there are three main steps:
 2. Create and configure a new [compute environment](https://help.tower.nf/compute-envs/overview/).
 3. Start [launching pipelines](https://help.tower.nf/launch/launchpad/).
 
-#### Configuring your compute environment
+### Configuring your compute environment
 
 Seqera Platform uses the concept of **Compute Environments** to define the execution platform where a workflow will run.
 
@@ -118,7 +123,7 @@ Each compute environment must be pre-configured to enable Seqera Platofrm to sub
     * [Google Kubernetes (GKE)](https://help.tower.nf/compute-envs/gke/)
     * [Hosted Kubernetes](https://help.tower.nf/compute-envs/k8s/)
 
-#### Selecting a default compute environment
+### Selecting a default compute environment
 
 If you have more than one **Compute Environment**, you can select which one will be used by default when launching a pipeline.
 
@@ -129,7 +134,7 @@ If you have more than one **Compute Environment**, you can select which one will
 
 You are now ready to launch workflows with your primary compute environment.
 
-#### Launchpad
+### Launchpad
 
 Launchpad makes it easy for any workspace user to launch a pre-configured pipeline.
 
@@ -137,7 +142,7 @@ Launchpad makes it easy for any workspace user to launch a pre-configured pipeli
 
 A pipeline is a repository containing a Nextflow workflow, a compute environment and workflow parameters.
 
-#### Pipeline Parameters Form
+### Pipeline Parameters Form
 
 Launchpad automatically detects the presence of a `nextflow_schema.json` in the root of the repository and dynamically creates a form where users can easily update the parameters.
 
@@ -149,7 +154,7 @@ This makes it trivial for users without any expertise in Nextflow to enter their
 
 ![Pipeline parameters](img/launch_rnaseq_nextflow_schema.png)
 
-#### Adding a new pipeline
+### Adding a new pipeline
 
 Adding a pipeline to the pre-saved workspace launchpad is detailed in full on the [Seqera webpage docs](https://help.tower.nf/launch/launch/).
 
@@ -190,7 +195,15 @@ For advanced settings options check out this [page](https://help.tower.nf/launch
 
 There is also community support available if you get into trouble, join the Nextflow Slack by following this [link](https://www.nextflow.io/slack-invite.html).
 
-### API
+!!! cboard-list-2 "Summary"
+
+    In this step you have learned:
+
+    1. How to create an account and login into Seqera Platform
+    2. How to configure your compute environment.
+    3. How to add, customize, and launch a pipeline with Seqera Platform.
+
+## API
 
 To learn more about using the Seqera Platform API, visit the [API section](https://help.tower.nf/api/overview/) in this documentation.
 
@@ -216,7 +229,7 @@ The Teams feature provides a way for organizations to group various users and pa
 
 For further information, please refer to the [User Management](https://help.tower.nf/orgs-and-teams/organizations/) section.
 
-#### Setting up a new organization
+### Setting up a new organization
 
 Organizations are the top-level structure and contain Workspaces, Members, Teams and Collaborators.
 
@@ -239,3 +252,11 @@ To create a new Organization:
     !!! tip
 
         A list of all the included Members, Teams and Collaborators can be found on the organization page.
+
+!!! cboard-list-2 "Summary"
+
+    In this step you have learned:
+
+    1. How to create a new organization
+    2. How to access the newly created organization
+    3. How to change organization settings

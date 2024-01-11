@@ -30,7 +30,7 @@ Find the one that's right for you:
 
         :material-lightbulb: This is the primary Nextflow training material used in most Nextflow and nf-core training events.
 
-    Foundational training for all things Nextflow. Perfect for anyone looking to get to grips with using Nextflow to run analyses and build workflows.
+    The Foundational Training material includes all things Nextflow. Perfect for anyone looking to get to grips with using Nextflow to run analyses and build workflows.
 
     [Launch the Foundational Training :material-arrow-right:](basic_training/index.md){ .md-button .md-button--primary }
 
@@ -40,7 +40,7 @@ Find the one that's right for you:
 
         :material-lightbulb: This is the Nextflow training material used in advanced training events.
 
-    An advanced material exploring the advanced features of the Nextflow language and runtime, and how to use them to write efficient and scalable data-intensive workflows.
+    Advanced material exploring the advanced features of the Nextflow language and runtime, and how to use them to write efficient and scalable data-intensive workflows.
 
     [Launch the Advanced Training :material-arrow-right:](advanced/index.md){ .md-button .md-button--primary }
 

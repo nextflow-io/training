@@ -50,9 +50,9 @@ work/
 
 !!! info
 
-    You can create these plots using the `tree` function if you have it installed. On Debian-based operating systems, simply `sudo apt install -y tree` or for macOS use Homebrew: `brew install tree`
+    You can create these plots using the `tree` function if you have it installed.
 
-## How resume works
+### How resume works
 
 The `-resume` command-line option allows the continuation of a workflow execution from the last step that was completed successfully:
 
@@ -66,13 +66,13 @@ If this condition is satisfied the task execution is skipped and previously comp
 
 The first task for which a new output is computed invalidates all downstream executions in the remaining DAG.
 
-## Work directory
+### Work directory
 
-The task work directories are created in the folder `work` in the launching path by default. This is supposed to be a **scratch** storage area that can be cleaned up once the computation is completed.
+The task work directories are created in the folder `work` in the launching path by default. It is recommended that this is a **scratch** storage area that can be cleaned up once the computation is completed.
 
 !!! note
 
-    Workflow final output(s) are supposed to be stored in a different location specified using one or more [publishDir](https://www.nextflow.io/docs/latest/process.html#publishdir) directive.
+    It is recommended that you store the final output(s) in a different location using one or more [publishDir](https://www.nextflow.io/docs/latest/process.html#publishdir) directives.
 
 !!! warning
 
@@ -96,7 +96,7 @@ The hash code for input files is computed using:
 
 Therefore, just **touching** a file will invalidate the related task execution.
 
-## How to organize _in-silico_ experiments
+### How to organize _in-silico_ experiments
 
 It’s good practice to organize each **experiment** in its own folder. The main experiment input parameters should be specified using a Nextflow config file. This makes it simple to track and replicate an experiment over time.
 
@@ -108,7 +108,9 @@ The `nextflow log` command lists the executions run in the current folder:
 
 ```console
 $ nextflow log
+```
 
+```console title="Output"
 TIMESTAMP            DURATION  RUN NAME          STATUS  REVISION ID  SESSION ID                            COMMAND
 2019-05-06 12:07:32  1.2s      focused_carson    ERR     a9012339ce   7363b3f0-09ac-495b-a947-28cf430d0b85  nextflow run hello
 2019-05-06 12:08:33  21.1s     mighty_boyd       OK      a9012339ce   7363b3f0-09ac-495b-a947-28cf430d0b85  nextflow run rnaseq-nf -with-docker
@@ -122,7 +124,7 @@ You can use either the **session ID** or the **run name** to recover a specific 
 nextflow run rnaseq-nf -resume mighty_boyd
 ```
 
-## Execution provenance
+### Execution provenance
 
 The `log` command, when provided with a **run name** or **session ID**, can return many useful bits of information about a workflow execution that can be used to create a provenance report.
 
@@ -204,7 +206,16 @@ Finally, the `-t` option enables the creation of a basic custom provenance repor
 
     Finally, open the `prov.html` file with a browser.
 
-## Resume troubleshooting
+!!! cboard-list-2 "Summary"
+
+    In this step you have learned:
+
+    1. How the workflow execution cache works
+    2. How to use the `-resume` command line option
+    3. How to organize _in-silico_ experiments in different folders
+    4. How to create and customize a basic provenance report
+
+## Troubleshooting resume
 
 Being able to resume workflows is a key feature of Nextflow, but it doesn't always work as you expect. In this section you will learn common reasons why Nextflow may be ignoring your cached results.
 
@@ -216,19 +227,19 @@ Being able to resume workflows is a key feature of Nextflow, but it doesn't alwa
      2. [Troubleshooting Nextflow resume](https://www.nextflow.io/blog/2019/troubleshooting-nextflow-resume.html)
      3. [Analyzing caching behavior of pipelines](https://nextflow.io/blog/2022/caching-behavior-analysis.html)
 
-#### Input file changed
+### Input file changed
 
 Make sure that there’s no change in your input file(s). Don’t forget the task unique hash is computed by taking into account the complete file path, the last modified timestamp and the file size. If any of this information has changed, the workflow will be re-executed even if the input content is the same.
 
-#### A process modifies an input
+### A process modifies an input
 
 A process should never alter input files, otherwise the `resume` for future executions will be invalidated for the same reason explained in the previous point.
 
-#### Inconsistent file attributes
+### Inconsistent file attributes
 
 Some shared file systems, such as [NFS](https://en.wikipedia.org/wiki/Network_File_System), may report an inconsistent file timestamp (i.e. a different timestamp for the same file) even if it has not been modified. To prevent this problem use the [lenient cache strategy](https://www.nextflow.io/docs/latest/process.html#cache).
 
-#### Race condition in global variable
+### Race condition in global variable
 
 Nextflow is designed to simplify parallel programming without taking care about race conditions and the access to shared resources. One of the few cases in which a race condition can arise is when using a global variable with two (or more) operators
 
@@ -260,7 +271,7 @@ Channel
     .println { "ch2 = $it" }
 ```
 
-#### Non-deterministic input channels
+### Non-deterministic input channels
 
 While dataflow channel ordering is guaranteed – data is read in the same order in which it’s written in the channel – be aware that there is no guarantee that the elements will maintain their order in the process _output_ channel. This is because a process may spawn multiple tasks, which can run in parallel. For example, the operation on the second element may end sooner than the operation on the first element, changing the output channel order.
 
@@ -331,3 +342,9 @@ If meta maps are not possible, an alternative is to use the [`fair`](https://nex
 !!! warning
 
      Depending on your situation, using the `fair` directive will lead to a decrease in performance.
+
+!!! cboard-list-2 "Summary"
+
+    In this step you have learned:
+
+    1. Common reasons why Nextflow may be ignoring your cached results
