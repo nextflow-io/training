@@ -154,7 +154,7 @@ WORLD!
     You can store each process in separate files within separate sub-folders or combined in one big file (both are valid).
     You can find examples of this on public repos such as the [Seqera RNA-Seq tutorial](https://github.com/seqeralabs/rnaseq-nf/tree/master/modules) or within nf-core workflows, such as [nf-core/rnaseq](https://github.com/nf-core/rnaseq/tree/master/modules/nf-core).
 
-## Output definition
+### Output definition
 
 Nextflow allows the use of alternative output definitions within workflows to simplify your code.
 
@@ -246,11 +246,23 @@ Another way to deal with outputs in the workflow scope is to use pipes `|`.
 
     Here, a [pipe](https://www.nextflow.io/docs/latest/dsl2.html#pipes) passes the output as a channel to the next process without the need of applying `.out` to the process name.
 
+!!! cboard-list-2 "Summary"
+
+    In this step you have learned:
+
+    1. How to import modules
+    2. How to import multiple modules
+    3. How to use module aliases
+    4. How to use alternative output definitions
+    5. How to use piped outputs
+
 ## Workflow definition
 
 The `workflow` scope allows the definition of components that define the invocation of one or more processes or operators:
 
 ```groovy linenums="1" title="hello.nf"
+#!/usr/bin/env nextflow
+
 params.greeting = 'Hello world!'
 
 include { SPLITLETTERS } from './modules.nf'
@@ -284,6 +296,8 @@ For example, the snippet above defines a `workflow` named `my_workflow`, that is
 A `workflow` component can declare one or more input channels using the `take` statement. For example:
 
 ```groovy linenums="1" title="hello.nf"
+#!/usr/bin/env nextflow
+
 params.greeting = 'Hello world!'
 
 include { SPLITLETTERS } from './modules.nf'
@@ -317,6 +331,8 @@ workflow {
 A `workflow` can declare one or more output channels using the `emit` statement. For example:
 
 ```groovy linenums="1" title="hello.nf"
+#!/usr/bin/env nextflow
+
 params.greeting = 'Hello world!'
 greeting_ch = Channel.of(params.greeting)
 
@@ -367,6 +383,8 @@ As a result, you can use the `my_workflow.out` notation to access the outputs of
 You can also declare named outputs within the `emit` block.
 
 ```groovy linenums="1" title="hello.nf"
+#!/usr/bin/env nextflow
+
 params.greeting = 'Hello world!'
 greeting_ch = Channel.of(params.greeting)
 
@@ -421,6 +439,8 @@ Within a `main.nf` script (called `hello.nf` in our example) you can also have m
 The following snippet has two named workflows (`my_workflow_one` and `my_workflow_two`):
 
 ```groovy linenums="1" title="hello2.nf"
+#!/usr/bin/env nextflow
+
 params.greeting = 'Hello world!'
 
 include { SPLITLETTERS as SPLITLETTERS_one } from './modules.nf'
@@ -453,6 +473,14 @@ You can choose which workflow to run by using the `entry` flag:
 ```bash
 nextflow run hello2.nf -entry my_workflow_one
 ```
+
+!!! cboard-list-2 "Summary"
+
+    In this step you have learned:
+
+    1. How to define workflow inputs
+    2. How to define workflow outputs
+    3. How to use named workflows
 
 ## DSL2 migration notes
 

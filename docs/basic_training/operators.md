@@ -48,6 +48,12 @@ Channel
     .view()
 ```
 
+!!! cboard-list-2 "Summary"
+
+    In this step you have learned:
+
+    1. The basic features of an operator
+
 ## Commonly used operators
 
 Here you will explore some of the most commonly used operators.
@@ -303,6 +309,19 @@ result.large.view { "$it is large" }
 !!! note
 
     In the above example, what would happen to a value of 10? To deal with this, you can also use `>=`.
+
+!!! cboard-list-2 "Summary"
+
+    In this step you have learned:
+
+    1. How to use the `view` operator to print the content of a channel
+    2. How to use the `map` operator to transform the content of a channel
+    3. How to use the `mix` operator to combine the content of two or more channels
+    4. How to use the `flatten` operator to flatten the content of a channel
+    5. How to use the `collect` operator to collect the content of a channel
+    6. How to use the `groupTuple` operator to group the content of a channel
+    7. How to use the `join` operator to join the content of two channels
+    8. How to use the `branch` operator to split the content of a channel
 
 ## Text files
 
@@ -614,6 +633,13 @@ Channel
 [name:Bob, height:180, champion:false]
 [name:Alice, height:170, champion:false]
 ```
+
+!!! cboard-list-2 "Summary"
+
+    In this step you have learned:
+
+    1. How to use the `splitText` operator to split text files of various formats
+    2. How to use the `splitJson` operator to split JSON files of various formats
 
 ## More resources
 
