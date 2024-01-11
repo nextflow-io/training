@@ -5,7 +5,7 @@ repo_name: nextflow-io/training
 
 nav:
     - Home: index.md
-    - Basic Training:
+    - Foundational Training:
           - basic_training/index.md
           - basic_training/setup.md
           - basic_training/intro.md
