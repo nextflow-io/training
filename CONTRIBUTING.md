@@ -2,12 +2,20 @@
 
 Table of contents:
 
--   [Contribution model](#contribution-model)
--   [Installation](#installation) ([Docker](#docker) / [Python](#python))
--   [Figures & Diagrams](#figures--diagrams)
--   [Content style and formatting](#content-style-and-formatting)
--   [Known limitations](#known-limitations)
--   [TODO / FIXME](#todo--fixme)
+-   [Contributing](#contributing)
+    -   [Contribution model](#contribution-model)
+    -   [Installation](#installation)
+        -   [Docker](#docker)
+        -   [Python](#python)
+        -   [Social cards](#social-cards)
+    -   [Figures \& diagrams](#figures--diagrams)
+    -   [Content style and formatting](#content-style-and-formatting)
+        -   [Formatting / linting](#formatting--linting)
+        -   [Admonitions](#admonitions)
+    -   [Known limitations](#known-limitations)
+        -   [Code annotations](#code-annotations)
+        -   [Word highlighting](#word-highlighting)
+    -   [TODO / FIXME](#todo--fixme)
 
 ## Contribution model
 
