@@ -714,4 +714,4 @@ Nextflow automatically sets up an environment for the given package names listed
 
     In this step you have learned:
 
-    1. How to add software with directives.
+    1. How to add software with directives

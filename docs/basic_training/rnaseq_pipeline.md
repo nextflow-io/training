@@ -579,8 +579,8 @@ fastqc.sh "$sample_id" "$reads"
 
     In this step you have learned:
 
-    1. How to write or use existing custom scripts in your Nextflow workflow.
-    2. How to avoid the use of absolute paths by having your scripts in the `bin/` folder.
+    1. How to write or use existing custom scripts in your Nextflow workflow
+    2. How to avoid the use of absolute paths by having your scripts in the `bin/` folder
 
 ## Metrics and reports
 
@@ -620,7 +620,7 @@ Finally, the `-with-dag` option enables the rendering of the workflow execution 
 
     In this step you have learned:
 
-    1. How to generate reports and charts for your executions.
+    1. How to generate reports and charts for your executions
 
 ## Run a project from GitHub
 
@@ -658,5 +658,5 @@ Tags enable precise control of the changes in your project files and dependencie
 
     In this step you have learned:
 
-    1. How to execute a project directly from GitHub.
-    2. How to specify a specific revision of a project.
+    1. How to execute a project directly from GitHub
+    2. How to specify a specific revision of a project

@@ -206,8 +206,8 @@ As you can see, the output is the same as the previous example when the `first()
 
     In this step you have learned:
 
-    1. The features of a value and queue channels.
-    3. Strategies to change channel types.
+    1. The features of a value and queue channels
+    3. Strategies to change channel types
 
 ## Channel factories
 
@@ -464,5 +464,5 @@ workflow {
 
     In this step you have learned:
 
-    1. How to use common channel factories.
-    2. How to use the `fromSRA` channel factory to query the NCBI SRA archive.
+    1. How to use common channel factories
+    2. How to use the `fromSRA` channel factory to query the NCBI SRA archive

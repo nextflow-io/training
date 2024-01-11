@@ -78,7 +78,7 @@ The task work directories are created in the folder `work` in the launching path
 
     Make sure to delete your work directory occasionally, else your machine/environment may be filled with unused files.
 
-A different location for the execution work directory can be specified using the command line option `-w`. For example:
+A different location for the execution work directory can be specified using the command line option `-w`:
 
 ```bash
 nextflow run <script> -w /some/scratch/dir
@@ -116,7 +116,7 @@ TIMESTAMP            DURATION  RUN NAME          STATUS  REVISION ID  SESSION ID
 2019-05-06 12:31:24  17s       stupefied_euclid  OK      b9aefc67b4   4dc656d2-c410-44c8-bc32-7dd0ea87bebf  nextflow run rnaseq-nf -resume -with-docker
 ```
 
-You can use either the **session ID** or the **run name** to recover a specific execution. For example:
+You can use either the **session ID** or the **run name** to recover a specific execution:
 
 ```bash
 nextflow run rnaseq-nf -resume mighty_boyd
@@ -126,11 +126,13 @@ nextflow run rnaseq-nf -resume mighty_boyd
 
 The `log` command, when provided with a **run name** or **session ID**, can return many useful bits of information about a workflow execution that can be used to create a provenance report.
 
-By default, it will list the work directories used to compute each task. For example:
+By default, it will list the work directories used to compute each task:
 
 ```console
-$ nextflow log tiny_fermat
+nextflow log tiny_fermat
+```
 
+```console title="Output"
 /data/.../work/7b/3753ff13b1fa5348d2d9b6f512153a
 /data/.../work/c1/56a36d8f498c99ac6cba31e85b3e0c
 /data/.../work/f7/659c65ef60582d9713252bcfbcc310
@@ -139,11 +141,13 @@ $ nextflow log tiny_fermat
 /data/.../work/3b/3485d00b0115f89e4c202eacf82eba
 ```
 
-The `-f` (fields) option can be used to specify which metadata should be printed by the `log` command. For example:
+The `-f` (fields) option can be used to specify which metadata should be printed by the `log` command:
 
 ```console
 $ nextflow log tiny_fermat -f 'process,exit,hash,duration'
+```
 
+```console title="Output"
 index    0   7b/3753ff  2.0s
 fastqc   0   c1/56a36d  9.3s
 fastqc   0   f7/659c65  9.1s
@@ -158,18 +162,20 @@ The complete list of available fields can be retrieved with the command:
 nextflow log -l
 ```
 
-The `-F` option allows the specification of filtering criteria to print only a subset of tasks. For example:
+The `-F` option allows the specification of filtering criteria to print only a subset of tasks:
 
 ```console
 $ nextflow log tiny_fermat -F 'process =~ /fastqc/'
+```
 
+```console title="Output"
 /data/.../work/c1/56a36d8f498c99ac6cba31e85b3e0c
 /data/.../work/f7/659c65ef60582d9713252bcfbcc310
 ```
 
 This can be useful to locate specific task work directories.
 
-Finally, the `-t` option enables the creation of a basic custom provenance report, showing a template file in any format of your choice. For example:
+Finally, the `-t` option enables the creation of a basic custom provenance report, showing a template file in any format of your choice:
 
 ```html
 <div>
@@ -190,7 +196,7 @@ Finally, the `-t` option enables the creation of a basic custom provenance repor
 
 !!! exercise
 
-    Save the above snippet in a file named `template.html`. Then run this command (using the correct id for your run, e.g. `tiny_fermat`):
+    Save the above snippet in a file named `template.html`. Then run this command (using the correct id for your run, e.g., `tiny_fermat`):
 
     ```bash
     nextflow log tiny_fermat -t template.html > prov.html
@@ -224,10 +230,9 @@ Some shared file systems, such as [NFS](https://en.wikipedia.org/wiki/Network_Fi
 
 #### Race condition in global variable
 
-Nextflow is designed to simplify parallel programming without taking care about race conditions and the access to shared resources. One of the few cases in which a race condition can arise is when using a global variable with two (or more) operators.
-For example:
+Nextflow is designed to simplify parallel programming without taking care about race conditions and the access to shared resources. One of the few cases in which a race condition can arise is when using a global variable with two (or more) operators
 
-```groovy linenums="1"
+```groovy linenums="1" title="snippet.nf"
 Channel
     .of(1, 2, 3)
     .map { it -> X = it; X += 2 }
@@ -243,7 +248,7 @@ The problem in this snippet is that the `X` variable in the closure definition i
 
 The correct implementation requires the use of the `def` keyword to declare the variable **local**.
 
-```groovy linenums="1"
+```groovy linenums="1" title="snippet.nf"
 Channel
     .of(1, 2, 3)
     .map { it -> def X = it; X += 2 }
@@ -261,7 +266,7 @@ While dataflow channel ordering is guaranteed – data is read in the same order
 
 In practical terms, consider the following snippet:
 
-```groovy linenums="1"
+```groovy linenums="1" title="snippet.nf"
 process FOO {
     input:
     val x
@@ -282,7 +287,8 @@ workflow {
 
 Just like you saw at the beginning of this tutorial with HELLO WORLD or WORLD HELLO, the output of the snippet above can be:
 
-```console
+```console title="Output"
+[0, A]
 [3, C]
 [4, D]
 [2, B]
@@ -295,7 +301,7 @@ Imagine that you now have two processes like this, whose output channels are act
 
 A common solution for this is to use what is commonly referred to as a _meta map_. A groovy object with sample information is passed out together with the file results within an output channel as a tuple. This can then be used to pair samples from separate channels together for downstream use. For example, instead of putting just `/some/path/myoutput.bam` into a channel, you could use `['SRR123', '/some/path/myoutput.bam']` to make sure the processes are not incurring into a mismatch. Check the example below:
 
-```groovy linenums="1"
+```groovy linenums="1" title="snippet.nf"
 // For example purposes only.
 // These would normally be outputs from upstream processes.
 Channel
@@ -313,7 +319,7 @@ Channel
     )
     .set { bai }
 
-// Instead of feeding the downstream process with these two channels separately, we can
+// Instead of feeding the downstream process with these two channels separately, you can
 // join them and provide a single channel where the sample meta map is implicitly matched:
 bam
     .join(bai)

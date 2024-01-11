@@ -27,6 +27,12 @@ The only difference between the two is that the `println` method implicitly appe
     println "Hello, World!"
     ```
 
+!!! cboard-list-2 "Summary"
+
+    In this step you have learned:
+
+    1. How to print a string to the console
+
 ## Comments
 
 Comments use the same syntax as C-family programming languages:
@@ -39,6 +45,12 @@ Comments use the same syntax as C-family programming languages:
     multiple lines
 */
 ```
+
+!!! cboard-list-2 "Summary"
+
+    In this step you have learned:
+
+    1. How to write comments in Groovy
 
 ## Variables
 
@@ -68,6 +80,12 @@ def x = 'foo'
 ```
 
 The `def` should be always used when defining variables local to a function or a closure.
+
+!!! cboard-list-2 "Summary"
+
+    In this step you have learned:
+
+    1. How to define variables in Groovy
 
 ## Lists
 
@@ -167,6 +185,15 @@ assert [4, 2, 1, 3].find { it % 2 == 0 } == 4
 assert [4, 2, 1, 3].findAll { it % 2 == 0 } == [4, 2]
 ```
 
+!!! cboard-list-2 "Summary"
+
+    In this step you have learned:
+
+    1. How to define a list in Groovy
+    2. How to access a list item
+    3. How to apply methods
+    4. How to use the `assert` keyword
+
 ## Maps
 
 Maps are like lists that have an arbitrary key instead of an integer. Therefore, the syntax is very much aligned.
@@ -209,6 +236,13 @@ assert map == [a: 'x', b: 'y', c: 'z']
 3. Using the put method.
 
 Map objects implement all methods provided by the [java.util.Map](https://docs.oracle.com/javase/8/docs/api/java/util/Map.html) interface, plus the extension methods provided by [Groovy](http://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/Map.html).
+
+!!! cboard-list-2 "Summary"
+
+    In this step you have learned:
+
+    1. How to define a map in Groovy
+    2. How to access and update maps
 
 ## String interpolation
 
@@ -272,6 +306,13 @@ tic\tac\toe
 tic    ac    oe
 ```
 
+!!! cboard-list-2 "Summary"
+
+    In this step you have learned:
+
+    1. How to define string literals in Groovy
+    2. How to interpolate variables in string literals
+
 ## Multi-line strings
 
 A block of text that spans multiple lines can be defined by delimiting it with triple single or double quotes:
@@ -309,6 +350,12 @@ It's cool, isn't it?!
 !!! info
 
     Like before, multi-line strings inside double quotes and slash characters support variable interpolation, while single-quoted multi-line strings do not.
+
+!!! cboard-list-2 "Summary"
+
+    In this step you have learned:
+
+    1. How to define multi-line strings in Groovy
 
 ## If statement
 
@@ -402,6 +449,14 @@ Hello
     println x > 10 ? 'Hello' : 'Goodbye'
     ```
 
+!!! cboard-list-2 "Summary"
+
+    In this step you have learned:
+
+    1. How to define an `if` statement in Groovy
+    2. How to use the ternary operator
+    3. How to use the Elvis operator
+
 ## For statement
 
 The classical `for` loop syntax is supported:
@@ -421,6 +476,12 @@ for (String elem : list) {
     println elem
 }
 ```
+
+!!! cboard-list-2 "Summary"
+
+    In this step you have learned:
+
+    1. How to define a `for` loop in Groovy
 
 ## Functions
 
@@ -445,6 +506,12 @@ def fact(n) {
 
 assert fact(5) == 120
 ```
+
+!!! cboard-list-2 "Summary"
+
+    In this step you have learned:
+
+    1. How to define a function in Groovy
 
 ## Closures
 
@@ -532,6 +599,13 @@ println result
 ```
 
 Learn more about closures in the [Groovy documentation](http://groovy-lang.org/closures.html).
+
+!!! cboard-list-2 "Summary"
+
+    In this step you have learned:
+
+    1. How to define a closure in Groovy
+    2. How to invoke a closure
 
 ## More resources
 

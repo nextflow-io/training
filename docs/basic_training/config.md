@@ -6,10 +6,9 @@ description: Foundational Nextflow Training Workshop
 # Nextflow configuration
 
 A key Nextflow feature is the ability to decouple the workflow implementation by the configuration setting required by the underlying execution platform.
-
 This enables portable deployment without the need to modify the application code.
 
-Nextflow will look for configuration files in several locations. As each source can contain conflicting settings, the sources are ranked to decide which settings to apply. Configuration sources are reported below and listed in order of priority:
+When you launch Nextflow, it will look for configuration files in several locations. As each source can contain conflicting settings, the sources are ranked to decide which settings to apply. Configuration sources are reported below and listed in order of priority:
 
 1. Parameters specified on the command line (`--parameter`)
 2. Parameters that are provided using the `-params-file` option
@@ -19,31 +18,98 @@ Nextflow will look for configuration files in several locations. As each source 
 6. The config file `$HOME/.nextflow/config`
 7. Values defined within the pipeline script itself (e.g., `main.nf`)
 
-## Configuration file
+## Parameters
+
+Parameters are pipeline specific settings. Parameters can be defined in the workflow script using the `params` keyword followed by the parameter name. For example:
+
+```groovy linenums="1" title="hello.nf"
+#!/usr/bin/env nextflow
+
+params.greeting = 'Hello world!'
+...
+```
+
+At the highest level, parameters can be customised using the command line.
+Any parameter can be configured on the command line by prefixing the parameter name with a double dash (--).
+For example, the `greeting` parameter in the `hello.nf` script can be configured using the command line as follows:
+
+```bash
+nextflow run hello.nf --greeting 'Bonjour le monde!'
+```
+
+Instead of including each parameter on the command line, parameters can also be configured using the `-params-file` and a JSON or YML file:
+
+```json linenums="1" title="params.json"
+{
+    "greeting": "Bonjour le monde!"
+}
+```
+
+Multiple parameters can be included in one params file and added to the execution command using the `-params-file` option:
+
+```bash
+nextflow run hello.nf -params-file params.json
+```
+
+!!! question "Exercise"
+
+    Run the `hello.nf` script with the `greeting` parameter set to `Hallo Welt!` using a params file.
+
+    ??? solution
+
+        ```json linenums="1" title="params.json"
+        {
+        "greeting": "Hallo Welt!"
+        }
+        ```
+
+        ```bash
+        nextflow run hello.nf -params-file params.json
+        ```
+
+!!! tip
+
+    Parameters files are useful to consolidate large number of parameters in a single file.
+
+!!! cboard-list-2 "Summary"
+
+    In this step you have learned:
+
+    1. How to define parameters in a workflow script
+    2. How to configure parameters on the command line
+    3. How to configure parameters using `-params-file`
+
+## Configuration files
 
 When a workflow script is launched, Nextflow looks for a file named `nextflow.config` in the current directory and in the script base directory (if it is not the same as the current directory). Finally, it checks for the file: `$HOME/.nextflow/config`.
 
 When more than one of the above files exists, they are merged, so that the settings in the first override the same settings that may appear in the second, and so on.
 
-The default config file search mechanism can be extended by providing an extra configuration file by using the command line option: `-c <config file>`.
+The default config file search mechanism can be extended by providing an extra configuration file by using the command line option: `-c <config file>`. For example:
+
+```bash
+nextflow run hello.nf -c custom.config
+```
+
+````
 
 ### Config syntax
 
 A Nextflow configuration file is a simple text file containing a set of properties defined using the syntax:
 
-```groovy linenums="1"
+```groovy linenums="1" title="nextflow.config"
 name = value
-```
+````
 
 !!! info
 
-    Please note that string values need to be wrapped in quotation characters while numbers and boolean values (`true`, `false`) do not. Also, note that values are typed, meaning for example that, `1` is different from `'1'`, since the first is interpreted as the number one, while the latter is interpreted as a string value.
+    String values need to be wrapped in quotation characters while numbers and boolean values (`true`, `false`) do not. Also, note that values are typed, meaning for example that, `1` is different from `'1'`, since the first is interpreted as the number one, while the latter is interpreted as a string value.
 
 ### Config variables
 
 Configuration properties can be used as variables in the configuration file itself, by using the usual `$propertyName` or `${expression}` syntax.
 
-```groovy linenums="1"
+```groovy linenums="1" title="nextflow.config"
 propertyOne = 'world'
 anotherProp = "Hello $propertyOne"
 customPath = "$PATH:/my/app/folder"
@@ -68,9 +134,9 @@ Configuration files use the same conventions for comments used in the Nextflow s
 
 ### Config scopes
 
-Configuration settings can be organized in different scopes by dot prefixing the property names with a scope identifier or grouping the properties in the same scope using the curly brackets notation. This is shown in the following example:
+Configuration settings can be organized in different scopes by dot prefixing the property names with a scope identifier or grouping the properties in the same scope using the curly brackets notation:
 
-```groovy linenums="1"
+```groovy linenums="1" title="nextflow.config"
 alpha.x  = 1
 alpha.y  = 'string value..'
 
@@ -86,12 +152,12 @@ The scope `params` allows the definition of workflow parameters that override th
 
 This is useful to consolidate one or more execution parameters in a separate file.
 
-```groovy linenums="1" title="Config file"
+```groovy linenums="1" title="nextflow.config"
 params.foo = 'Bonjour'
 params.bar = 'le monde!'
 ```
 
-```groovy linenums="1" title="Workflow script"
+```groovy linenums="1" title="snippet.nf"
 params.foo = 'Hello'
 params.bar = 'world!'
 
@@ -101,44 +167,46 @@ println "$params.foo $params.bar"
 
 !!! exercise
 
-    Save the first snippet above (Config file) as `nextflow.config` and the second one as `params.nf`. Then run:
+    Using the code blocks above, run `snippet.nf` without specifying any parameters. Then, run it again specifying the `foo` parameter on the command line.
 
     ```bash
-    nextflow run params.nf
+    nextflow run snippet.nf
     ```
 
     ??? Solution
 
-        ```console
+        Run the script without any modification:
+
+        ```bash
+        nextflow run snippet.nf
+        ```
+
+        ```console title="Output"
         Bonjour le monde!
         ```
 
-    Execute is again specifying the `foo` parameter on the command line:
+        Execute the snippit again specifying the `foo` parameter on the command line:
 
-    ```bash
-    nextflow run params.nf --foo Hola
-    ```
+        ```bash
+        nextflow run snippet.nf --foo Hola
+        ```
 
-    ??? Solution
-
-        ```console
+        ```console title="Output"
         Hola le monde!
         ```
 
-    Compare the result of the two executions.
+        Note how the `foo` parameter is overridden by the value specified on the command line and the `bar` parameter is taken from the configuration file.
 
 ### Config env
 
 The `env` scope allows the definition of one or more variables that will be exported into the environment where the workflow tasks will be executed.
 
-```groovy linenums="1"
+```groovy linenums="1" title="my-env.config"
 env.ALPHA = 'some value'
 env.BETA = "$HOME/some/path"
 ```
 
-Save the above snippet as a file named `my-env.config`. Then save the snippet below in a file named `foo.nf`:
-
-```groovy linenums="1"
+```groovy linenums="1" title="snippet.nf"
 process FOO {
     debug true
 
@@ -153,18 +221,16 @@ workflow {
 }
 ```
 
-Finally, execute the following command:
+Executing the snippets above will produce the following output:
 
 ```bash
-nextflow run foo.nf -c my-env.config
+nextflow run snippet.nf -c my-env.config
 ```
 
-??? Solution
-
-    ```console
-    BETA=/home/user/some/path
-    ALPHA=some value
-    ```
+```console title="Output"
+BETA=/home/user/some/path
+ALPHA=some value
+```
 
 ### Config process
 
@@ -174,9 +240,9 @@ This is useful when prototyping a small workflow script.
 
 However, it’s always a good practice to decouple the workflow execution logic from the process configuration settings, i.e. it’s strongly suggested to define the process settings in the workflow configuration file instead of the workflow script.
 
-The `process` configuration scope allows the setting of any `process` [directives](https://www.nextflow.io/docs/latest/process.html#directives) in the Nextflow configuration file. For example:
+The `process` configuration scope allows the setting of any `process` [directives](https://www.nextflow.io/docs/latest/process.html#directives) in the Nextflow configuration file:
 
-```groovy linenums="1"
+```groovy linenums="1" title="nextflow.config"
 process {
     cpus = 10
     memory = 8.GB
@@ -203,7 +269,7 @@ The syntax for setting `process` directives in the configuration file requires `
 
 ??? example
 
-    ```groovy linenums="1"
+    ```groovy linenums="1" title="snippet.nf"
     process FOO {
         cpus 4
         memory 2.GB
@@ -219,15 +285,15 @@ The syntax for setting `process` directives in the configuration file requires `
 
 This is especially important when you want to define a config setting using a dynamic expression using a closure. For example, in a workflow script:
 
-```groovy linenums="1"
+```groovy linenums="1" title="snippet.nf"
 process FOO {
     memory { 4.GB * task.cpus }
 }
 ```
 
-And the equivalent in the configuration file, if you choose to set it there:
+You can also define the same setting in the configuration file using a similar syntax:
 
-```groovy linenums="1"
+```groovy linenums="1" title="snippet.nf"
 process {
     withName: FOO {
         memory = { 4.GB * task.cpus }
@@ -237,15 +303,15 @@ process {
 
 Directives that require more than one value, e.g. [pod](https://www.nextflow.io/docs/latest/process.html#pod), in the configuration file need to be expressed as a map object.
 
-```groovy linenums="1"
+```groovy linenums="1" title="nextflow.config"
 process {
     pod = [env: 'FOO', value: '123']
 }
 ```
 
-Finally, directives that are to be repeated in the process definition, in the configuration files need to be defined as a list object. For example:
+Finally, directives that are to be repeated in the process definition, in the configuration files need to be defined as a list object:
 
-```groovy linenums="1"
+```groovy linenums="1" title="nextflow.config"
 process {
     pod = [[env: 'FOO', value: '123'],
            [env: 'BAR', value: '456']]
@@ -256,14 +322,14 @@ process {
 
 The container image to be used for the process execution can be specified in the `nextflow.config` file:
 
-```groovy linenums="1"
+```groovy linenums="1" title="nextflow.config"
 process.container = 'nextflow/rnaseq-nf'
 docker.enabled = true
 ```
 
 The use of unique "SHA256" Docker image IDs guarantees that the image content does not change over time, for example:
 
-```groovy linenums="1"
+```groovy linenums="1" title="nextflow.config"
 process.container = 'nextflow/rnaseq-nf@sha256:aeacbd7ea1154f263cda972a96920fb228b2033544c2641476350b9317dab266'
 docker.enabled = true
 ```
@@ -272,7 +338,7 @@ docker.enabled = true
 
 To run a workflow execution with Singularity, a container image file path is required in the Nextflow config file using the container directive:
 
-```groovy linenums="1"
+```groovy linenums="1" title="nextflow.config"
 process.container = '/some/singularity/image.sif'
 singularity.enabled = true
 ```
@@ -296,7 +362,7 @@ The following protocols are supported:
 
     By specifying a plain Docker container image name, Nextflow implicitly downloads and converts it to a Singularity image when the Singularity execution is enabled.
 
-    ```groovy linenums="1"
+    ```groovy linenums="1" title="nextflow.config"
     process.container = 'nextflow/rnaseq-nf'
     singularity.enabled = true
     ```
@@ -305,24 +371,21 @@ The following protocols are supported:
 
     Alternatively, if you have a Singularity image file, its absolute path location can be specified as the container name either using the `-with-singularity` option or the `process.container` setting in the config file.
 
-!!! exercise
-
-    Try to run the script as shown below, changing the `nextflow.config` file to the one above using `singularity`:
-
-    ```bash
-    nextflow run script7.nf
-    ```
-
-    !!! note
-
-        Nextflow will pull the container image automatically, it will require a few seconds depending on the network connection speed.
-
 ### Config Conda execution
 
 The use of a Conda environment can also be provided in the configuration file by adding the following setting in the `nextflow.config` file:
 
-```groovy linenums="1"
+```groovy linenums="1" title="nextflow.config"
 process.conda = "/home/ubuntu/miniconda2/envs/nf-tutorial"
 ```
 
 You can specify the path of an existing Conda environment as either **directory** or the path of Conda environment YAML file.
+
+!!! cboard-list-2 "Summary"
+
+    In this step you have learned:
+
+    1. How to write a Nextflow configuration file.
+    2. How to use configuration files to define parameters, environment variables, and process directives
+    3. How to use configuration files to define Docker, Singularity, and Conda execution
+    4. How to use configuration files to define process directives

@@ -271,10 +271,10 @@ workflow {
 
     In this step you have learned:
 
-    1. How to use the `script` declaration to define the command to be executed by the process.
-    2. How to use the `params` variable to define dynamic script parameters.
-    3. How to use the `shell` declaration to define the command to be executed by the process.
-    4. How to use the `if` statement to define a conditional script.
+    1. How to use the `script` declaration to define the command to be executed by the process
+    2. How to use the `params` variable to define dynamic script parameters
+    3. How to use the `shell` declaration to define the command to be executed by the process
+    4. How to use the `if` statement to define a conditional script
 
 ## Inputs
 
@@ -669,9 +669,9 @@ In the above example, every time a file of sequences is received as an input by 
 
     In this step you have learned:
 
-    1. How to use the `val` qualifier to define the input channel(s) of a process.
-    2. How to use the `path` qualifier to define the input file(s) of a process.
-    3. How to use the `each` qualifier to repeat the execution of a process for each item in a collection.
+    1. How to use the `val` qualifier to define the input channel(s) of a process
+    2. How to use the `path` qualifier to define the input file(s) of a process
+    3. How to use the `each` qualifier to repeat the execution of a process for each item in a collection
 
 ## Outputs
 
@@ -1018,13 +1018,13 @@ workflow {
 
     In this step you have learned:
 
-    1. How to use the `val` qualifier to define the output channel(s) of a process.
-    2. How to use the `path` qualifier to define the output file(s) of a process.
-    3. How to use the `tuple` qualifier to define the output channel(s) of a process.
-    4. How to manage multiple output files using glob patterns.
-    5. How to use dynamic output file names.
-    6. How to use composite inputs and outputs.
-    7. How to define outputs.
+    1. How to use the `val` qualifier to define the output channel(s) of a process
+    2. How to use the `path` qualifier to define the output file(s) of a process
+    3. How to use the `tuple` qualifier to define the output channel(s) of a process
+    4. How to manage multiple output files using glob patterns
+    5. How to use dynamic output file names
+    6. How to use composite inputs and outputs
+    7. How to define outputs
 
 ## When
 
@@ -1062,7 +1062,7 @@ workflow {
 
     In this step you have learned:
 
-    1. How to use the `when` declaration to allow conditional processes.
+    1. How to use the `when` declaration to allow conditional processes
 
 ## Directives
 
@@ -1201,5 +1201,5 @@ workflow {
 
     In this step you have learned:
 
-    1. How to use the cpus, time, memory, and disk directives to define the amount of computing resources to be used by the process.
-    2. How to use the publishDir directive to store the output files in a results folder.
+    1. How to use the cpus, time, memory, and disk directives to define the amount of computing resources to be used by the process
+    2. How to use the publishDir directive to store the output files in a results folder
