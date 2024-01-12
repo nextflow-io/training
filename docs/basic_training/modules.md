@@ -1,6 +1,6 @@
 ---
 title: Modularization
-description: Basic Nextflow Training Workshop
+description: Foundational Nextflow Training Workshop
 ---
 
 # Modularization
