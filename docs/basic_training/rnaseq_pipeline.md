@@ -168,7 +168,7 @@ Here, the `params.transcriptome_file` parameter is used as the input for the `IN
     nextflow run script2.nf
     ```
 
-This execution will fail because `salmon` is not installed in your environment. Fortunately, a docker containter with the salmon software is available and has already been defined in your `nextflow.config` file.
+This execution will fail because `salmon` is not installed in your environment. Fortunately, a docker container with the salmon software is available and has already been defined in your `nextflow.config` file.
 
 Nextflow has support for managing the execution of processes in Docker containers. This is useful when you need to execute a process that requires a specific software version or a specific operating system.
 

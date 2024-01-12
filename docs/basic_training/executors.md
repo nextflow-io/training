@@ -315,7 +315,7 @@ aws {
 
 !!! tip
 
-    Addtional documentation for [AWS](https://www.nextflow.io/docs/latest/aws.html#), [GCP](https://www.nextflow.io/docs/latest/google.html), and [Azure](https://www.nextflow.io/docs/latest/azure.html) are available on the Nextflow documentation site.
+    Additional documentation for [AWS](https://www.nextflow.io/docs/latest/aws.html#), [GCP](https://www.nextflow.io/docs/latest/google.html), and [Azure](https://www.nextflow.io/docs/latest/azure.html) are available on the Nextflow documentation site.
 
 !!! cboard-list-2 "Summary"
 

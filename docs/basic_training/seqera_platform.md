@@ -107,7 +107,7 @@ It supports the launching of workflows into a growing number of **cloud** and **
 
 ![Compute environments](img/compute_env_platforms.png)
 
-Each compute environment must be pre-configured to enable Seqera Platofrm to submit tasks. You can read more on how to set up each environment using the links below.
+Each compute environment must be pre-configured to enable Seqera Platform to submit tasks. You can read more on how to set up each environment using the links below.
 
 !!! tip "The following guides describe how to configure each of these compute environments."
 
