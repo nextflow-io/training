@@ -173,6 +173,7 @@ process {
     withName: FOO {
         container = 'some/image:x'
     }
+
     withName: BAR {
         container = 'other/image:y'
     }
@@ -214,7 +215,6 @@ profiles {
         process.container = 'cbcrg/imagex'
         docker.enabled = true
     }
-
 }
 ```
 
