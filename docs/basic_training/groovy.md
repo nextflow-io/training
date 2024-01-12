@@ -277,8 +277,6 @@ $x + $y
         Modify `println '$x $y'` to `println "$x $y"`.
 
         ```groovy linenums="1" title="snippet.nf"
-
-        ```groovy linenums="1" title="snippet.nf"
         foxtype = 'quick'
         foxcolor = ['b', 'r', 'o', 'w', 'n']
         println "The $foxtype ${foxcolor.join()} fox"
