@@ -136,22 +136,22 @@ assert list[0] == 10
 
     ??? Solution
 
-    Your solution could look something similar to this:
+        Your solution could look something similar to this:
 
-    ```groovy linenums="1" title="snippet.nf"
-    list = [10, 20, 30, 40]
+        ```groovy linenums="1" title="snippet.nf"
+        list = [10, 20, 30, 40]
 
-    assert list[0] == 11
-    ```
+        assert list[0] == 11
+        ```
 
-    You should see an error message similar to this:
+        You should see an error message similar to this:
 
-    ```console title="Output"
-    ERROR ~ assert list[0] == 11
-       |   |
-       |   10
-       [10, 20, 30, 40]
-    ```
+        ```console title="Output"
+        ERROR ~ assert list[0] == 11
+           |   |
+           |   10
+           [10, 20, 30, 40]
+        ```
 
 Lists can also be indexed with negative indexes and reversed ranges.
 
@@ -274,19 +274,19 @@ $x + $y
 
     ??? Solution
 
-    Modify `println '$x $y'` to `println "$x $y"`.
+        Modify `println '$x $y'` to `println "$x $y"`.
 
-    ```groovy linenums="1" title="snippet.nf"
+        ```groovy linenums="1" title="snippet.nf"
 
-    ```groovy linenums="1" title="snippet.nf"
-    foxtype = 'quick'
-    foxcolor = ['b', 'r', 'o', 'w', 'n']
-    println "The $foxtype ${foxcolor.join()} fox"
+        ```groovy linenums="1" title="snippet.nf"
+        foxtype = 'quick'
+        foxcolor = ['b', 'r', 'o', 'w', 'n']
+        println "The $foxtype ${foxcolor.join()} fox"
 
-    x = 'Hello'
-    y = 'World'
-    println "$x $y"
-    ```
+        x = 'Hello'
+        y = 'World'
+        println "$x $y"
+        ```
 
 Finally, string literals can also be defined using the `/` character as a delimiter. They are known as **slashy** strings and are useful for defining regular expressions and patterns, as there is no need to escape backslashes. As with double-quote strings they allow to interpolate variables prefixed with a `$` character.
 
@@ -424,30 +424,30 @@ Hello
     println list ?: 'The list is empty'
     ```
 
-!!!
+!!! Question "Exercise"
 
     Write an if statement that prints `Hello` if the variable `x` is greater than 10 and `Goodbye` if it is less than 10.
 
     ??? Solution
 
-    Your solution could look something similar to this:
+        Your solution could look something similar to this:
 
-    ```groovy linenums="1" title="snippet.nf"
-    x = 11
+        ```groovy linenums="1" title="snippet.nf"
+        x = 11
 
-    if (x > 10)
-        println 'Hello'
-    else
-        println 'Goodbye'
-    ```
+        if (x > 10)
+            println 'Hello'
+        else
+            println 'Goodbye'
+        ```
 
-    Or this:
+        Or this:
 
-    ```groovy linenums="1" title="snippet.nf"
-    x = 11
+        ```groovy linenums="1" title="snippet.nf"
+        x = 11
 
-    println x > 10 ? 'Hello' : 'Goodbye'
-    ```
+        println x > 10 ? 'Hello' : 'Goodbye'
+        ```
 
 !!! cboard-list-2 "Summary"
 
