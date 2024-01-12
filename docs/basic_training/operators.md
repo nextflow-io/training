@@ -603,7 +603,7 @@ And even a JSON array of JSON objects:
 ```groovy linenums="1" title="snippet.nf"
 Channel
     .of('[{"name": "Bob", "height": 180, "champion": false}, \
-        {"name": "Alice", "height": 170, "champion": false}]')
+          {"name": "Alice", "height": 170, "champion": false}]')
     .splitJson()
     .view()
 ```

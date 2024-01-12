@@ -59,7 +59,7 @@ nextflow run hello.nf -params-file params.json
 
         ```json linenums="1" title="params.json"
         {
-        "greeting": "Hallo Welt!"
+            "greeting": "Hallo Welt!"
         }
         ```
 
@@ -125,9 +125,9 @@ Configuration files use the same conventions for comments used in the Nextflow s
 // comment a single line
 
 /*
-   a comment spanning
-   multiple lines
- */
+    a comment spanning
+    multiple lines
+*/
 ```
 
 ### Config scopes
