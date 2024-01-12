@@ -97,7 +97,7 @@ A Nextflow configuration file is a simple text file containing a set of properti
 
 ```groovy linenums="1" title="nextflow.config"
 name = value
-````
+```
 
 !!! info
 
