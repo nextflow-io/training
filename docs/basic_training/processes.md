@@ -1,6 +1,6 @@
 ---
 title: Processes
-description: Basic Nextflow Training Workshop
+description: Foundational Nextflow Training Workshop
 ---
 
 # Processes
