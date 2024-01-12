@@ -91,8 +91,6 @@ The default config file search mechanism can be extended by providing an extra c
 nextflow run hello.nf -c custom.config
 ```
 
-````
-
 ### Config syntax
 
 A Nextflow configuration file is a simple text file containing a set of properties defined using the syntax:
