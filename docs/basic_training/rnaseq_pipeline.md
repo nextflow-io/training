@@ -410,7 +410,7 @@ Nextflow parallelizes the execution of your workflow simply by providing multipl
             tag "Salmon on $sample_id"
 
             input:
-            ...   
+            ...
         ```
 
 !!! question "Exercise"
