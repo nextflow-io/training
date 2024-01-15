@@ -353,7 +353,6 @@ Channel
     .fromPath('data/meta/random.txt')
     .splitText(by: 2)
     .view()
-    }
 ```
 
 ```console title="Output"
