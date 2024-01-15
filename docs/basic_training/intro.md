@@ -1,4 +1,5 @@
 ---
+title: Introduction
 description: Getting started with Nextflow
 ---
 
@@ -126,13 +127,13 @@ workflow { // (18)!
 7. Output declaration for the `SPLITLETTERS` process.
 8. Tells the process to expect an output file(s) (`path`), with a filename starting with 'chunk\_', as output from the script. The process sends the output as a channel.
 9. Three double quotes start and end the code block to execute this `process`.
-   Inside is the code to execute — printing the `input` value x (called using the dollar symbol [$] prefix), splitting the string into chunks with a length of 6 characters ("Hello " and "world!"), and saving each to a file (chunk_aa and chunk_ab).
+   Inside is the code to execute — printing the `input` value 'x' (called using the dollar symbol [$] prefix), splitting the string into chunks with a length of 6 characters ("Hello " and "world!"), and saving each to a separate file (chunk_aa and chunk_ab).
 10. End of the first process block.
-11. Begins the second process block, defined as `CONVERTTOUPPER`.
+11. Beginning of the second process block, defined as `CONVERTTOUPPER`.
 12. Input declaration for the `CONVERTTOUPPER` `process`.
 13. Tells the `process` to expect an `input` file(s) (`path`; i.e. chunk_aa and chunk_ab), that we assign to the variable 'y'.
 14. Output declaration for the `CONVERTTOUPPER` process.
-15. Tells the process to expect output as standard output (stdout) and sends this output as a channel.
+15. Tells the process to expect output as standard output (`stdout`) and sends this output as a channel.
 16. Three double quotes start and end the code block to execute this `process`.
     Within the block there is a script to read files (cat) using the '$y' input variable, then pipe to uppercase conversion, outputting to standard output.
 17. End of second `process` block.
@@ -142,7 +143,7 @@ workflow { // (18)!
 21. The final output (in the `results_ch` channel) is printed to screen using the `view` operator (appended onto the channel name).
 22. End of the workflow scope.
 
-This pipeline takes `params.greeting`, which defaults to the string `Hello world!`, and splits it into indiviudual words in the `SPLITLETTERS` process. Each word is written to a separate file, named `chunk_aa`, `chunk_ab`, `chunk_ac`and so on. These files are picked up as the process `output`.
+This pipeline takes `params.greeting`, which defaults to the string `Hello world!`, and splits it into individual words in the `SPLITLETTERS` process. Each word is written to a separate file, named `chunk_aa`, `chunk_ab`, `chunk_ac`and so on. These files are picked up as the process `output`.
 
 The second process `CONVERTTOUPPER` takes the output channel from the first process as its input.
 The use of the operator `.flatten()` here is to split the two files into two separate items to be put through the this process, else they would be treated as a single element.
@@ -196,7 +197,7 @@ The standard output shows (line by line):
 3. The executor used (in the above case: local).
 4. The first `process` is executed once, which means there is one task. The line starts with a unique hexadecimal value (see TIP below), and ends with the percentage and other task completion information.
 5. The second process is executed twice (once for chunk_aa and once for chunk_ab), which means two tasks.
-6. The result string from stdout is printed.
+6. The result string from `stdout` is printed.
 
 !!! info
 
@@ -210,7 +211,7 @@ It’s worth noting that the process `CONVERTTOUPPER` is executed in parallel, s
 
 Thus, it could be that your final result will be printed out in a different order:
 
-```
+```console
 WORLD!
 HELLO
 ```

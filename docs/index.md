@@ -24,27 +24,27 @@ Free online events are organised regularly with the nf-core community, see the [
 We have several workshops available on this website.
 Find the one that's right for you:
 
-!!! exercise "Basic Nextflow Training Workshop"
+!!! exercise "Foundational Training"
 
     !!! tip inline end ""
 
         :material-lightbulb: This is the primary Nextflow training material used in most Nextflow and nf-core training events.
 
-    Basic training for all things Nextflow. Perfect for anyone looking to get to grips with using Nextflow to run analyses and build workflows.
+    The Foundational Training material includes all things Nextflow. Perfect for anyone looking to get to grips with using Nextflow to run analyses and build workflows.
 
-    [Start the Nextflow Training Workshop :material-arrow-right:](basic_training/index.md){ .md-button .md-button--primary }
+    [Launch the Foundational Training :material-arrow-right:](basic_training/index.md){ .md-button .md-button--primary }
 
-!!! exercise "Advanced training"
+!!! exercise "Advanced Training"
 
     !!! quote inline end ""
 
         :material-lightbulb: This is the Nextflow training material used in advanced training events.
 
-    An advanced material exploring the advanced features of the Nextflow language and runtime, and how to use them to write efficient and scalable data-intensive workflows.
+    Advanced material exploring the advanced features of the Nextflow language and runtime, and how to use them to write efficient and scalable data-intensive workflows.
 
     [Launch the Advanced Training :material-arrow-right:](advanced/index.md){ .md-button .md-button--primary }
 
-!!! exercise "Hands on training"
+!!! exercise "Hands-on Training"
 
     !!! quote inline end ""
 
@@ -52,7 +52,7 @@ Find the one that's right for you:
 
     A "learn by doing" tutorial with less focus on theory, instead leading through exercises of slowly increasing complexity.
 
-    [Launch the Hands on Training :material-arrow-right:](hands_on/index.md){ .md-button }
+    [Launch the Hands-on Training :material-arrow-right:](hands_on/index.md){ .md-button }
 
 ## Resources
 

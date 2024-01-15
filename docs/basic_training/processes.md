@@ -1,5 +1,6 @@
 ---
-description: Basic Nextflow Training Workshop
+title: Processes
+description: Foundational Nextflow Training Workshop
 ---
 
 # Processes
@@ -7,8 +8,6 @@ description: Basic Nextflow Training Workshop
 In Nextflow, a `process` is the basic computing primitive to execute foreign functions (i.e., custom scripts or tools).
 
 The `process` definition starts with the keyword `process`, followed by the process name and finally the process body delimited by curly brackets.
-
-The `process` name is commonly written in upper case by convention.
 
 A basic `process`, only using the `script` definition block, looks like the following:
 
@@ -21,7 +20,11 @@ process SAYHELLO {
 }
 ```
 
-In more complex examples, the process body can contain up to **five** definition blocks:
+!!! info
+
+    The `process` name is commonly written in upper case by convention.
+
+However, the process body can contain up to **five** definition blocks:
 
 1. **Directives** are initial declarations that define optional settings
 2. **Input** defines the expected input channel(s)
@@ -55,9 +58,9 @@ process < name > {
 }
 ```
 
-1. Zero, one or more process directives
-2. Zero, one or more process inputs
-3. Zero, one or more process outputs
+1. Zero, one, or more process directives
+2. Zero, one, or more process inputs
+3. Zero, one, or more process outputs
 4. An optional boolean conditional to trigger the process execution
 5. The command to be executed
 
@@ -65,11 +68,11 @@ process < name > {
 
 The `script` block is a string statement that defines the command to be executed by the process.
 
-A process can execute only one `script` block. It must be the last statement when the process contains input and output declarations.
+A process can execute only one `script` block. It must be the last statement when the process contains `input` and `output` declarations.
 
 The `script` block can be a single or a multi-line string. The latter simplifies the writing of non-trivial scripts composed of multiple commands spanning over multiple lines. For example:
 
-```groovy linenums="1"
+```groovy linenums="1" title="snippet.nf"
 process EXAMPLE {
     script:
     """
@@ -84,10 +87,16 @@ workflow {
 }
 ```
 
+!!! tip
+
+    In the snippet above the directive `debug` is used to enable the debug mode for the process. This is useful to print the output of the process script in the console.
+
 By default, the `process` command is interpreted as a **Bash** script. However, any other scripting language can be used by simply starting the script with the corresponding [Shebang](<https://en.wikipedia.org/wiki/Shebang_(Unix)>) declaration. For example:
 
-```groovy linenums="1"
+```groovy linenums="1" title="snippet.nf"
 process PYSTUFF {
+    debug true
+
     script:
     """
     #!/usr/bin/env python
@@ -103,6 +112,10 @@ workflow {
 }
 ```
 
+```console title="Output"
+Hello-world
+```
+
 !!! tip
 
     Multiple programming languages can be used within the same workflow script. However, for large chunks of code it is better to save them into separate files and invoke them from the process script. One can store the specific scripts in the `./bin/` folder.
@@ -111,10 +124,12 @@ workflow {
 
 Script parameters (`params`) can be defined dynamically using variable values. For example:
 
-```groovy linenums="1"
+```groovy linenums="1" title="snippet.nf"
 params.data = 'World'
 
 process FOO {
+    debug true
+
     script:
     """
     echo Hello $params.data
@@ -126,16 +141,22 @@ workflow {
 }
 ```
 
+```console title="Output"
+Hello World
+```
+
 !!! info
 
-    A process script can contain any string format supported by the Groovy programming language. This allows us to use string interpolation as in the script above or multiline strings. Refer to [String interpolation](../groovy/#string-interpolation) for more information.
+    A process script can contain any string format supported by the Groovy programming language. This allows us to use string interpolation as in the script above or multiline strings. Refer to [String interpolation](../groovy#string-interpolation) for more information.
 
 !!! warning
 
     Since Nextflow uses the same Bash syntax for variable substitutions in strings, Bash environment variables need to be escaped using the `\` character. The escaped version will be resolved later, returning the task directory (e.g. work/7f/f285b80022d9f61e82cd7f90436aa4/), while `$PWD` would show the directory where you're running Nextflow.
 
-```groovy linenums="1"
+```groovy linenums="1" title="snippet.nf"
 process FOO {
+    debug true
+
     script:
     """
     echo "The current directory is \$PWD"
@@ -147,10 +168,18 @@ workflow {
 }
 ```
 
-It can be tricky to write a script that uses many Bash variables. One possible alternative is to use a script string delimited by single-quote characters
+Your expected output will look something like this:
 
-```groovy linenums="1"
+```console title="Output"
+The current directory is /workspace/gitpod/nf-training/work/7a/4b050a6cdef4b6c1333ce29f7059a0
+```
+
+It can be tricky to write a script that uses many Bash variables. One possible alternative is to use a `script` string delimited by single-quote characters (`'`).
+
+```groovy linenums="1" title="snippet.nf"
 process BAR {
+    debug true
+
     script:
     '''
     echo "The current directory is $PWD"
@@ -162,11 +191,17 @@ workflow {
 }
 ```
 
-However, this blocks the usage of Nextflow variables in the command script.
+Your expected output will look something like this:
+
+```console title="Output"
+The current directory is /workspace/gitpod/nf-training/work/7a/4b050a6cdef4b6c1333ce29f7059a0
+```
+
+However, this using the single quotes (`'`) will block the usage of Nextflow variables in the command script.
 
 Another alternative is to use a `shell` statement instead of `script` and use a different syntax for Nextflow variables, e.g., `!{..}`. This allows the use of both Nextflow and Bash variables in the same script.
 
-```groovy linenums="1"
+```groovy linenums="1" title="snippet.nf"
 params.data = 'le monde'
 
 process BAZ {
@@ -186,22 +221,24 @@ workflow {
 
 The process script can also be defined in a completely dynamic manner using an `if` statement or any other expression for evaluating a string value. For example:
 
-```groovy linenums="1"
+```groovy linenums="1" title="snippet.nf"
 params.compress = 'gzip'
 params.file2compress = "$baseDir/data/ggal/transcriptome.fa"
 
 process FOO {
+    debug true
+
     input:
     path file
 
     script:
     if (params.compress == 'gzip')
         """
-        gzip -c $file > ${file}.gz
+        echo "gzip -c $file > ${file}.gz"
         """
     else if (params.compress == 'bzip2')
         """
-        bzip2 -c $file > ${file}.bz2
+        echo "bzip2 -c $file > ${file}.bz2"
         """
     else
         throw new IllegalArgumentException("Unknown compressor $params.compress")
@@ -211,6 +248,33 @@ workflow {
     FOO(params.file2compress)
 }
 ```
+
+!!! question "Exercise"
+
+    Execute this script using the command line to choose `bzip2` compression.
+
+    ??? solution
+
+        Execute the following command:
+
+        ```bash
+        nextflow run snippet.nf --compress bzip2
+        ```
+
+        The output will look like this:
+
+        ```console title="Output"
+        bzip2 -c transcriptome.fa > transcriptome.fa.bz2
+        ```
+
+!!! cboard-list-2 "Summary"
+
+    In this step you have learned:
+
+    1. How to use the `script` declaration to define the command to be executed by the process
+    2. How to use the `params` variable to define dynamic script parameters
+    3. How to use the `shell` declaration to define the command to be executed by the process
+    4. How to use the `if` statement to define a conditional script
 
 ## Inputs
 
@@ -231,11 +295,13 @@ input:
 <input qualifier> <input name>
 ```
 
+There are [several input qualifiers](https://www.nextflow.io/docs/latest/process.html#inputs) that can be used to define the input declaration. The most common are outlined in detail below.
+
 ### Input values
 
-The `val` qualifier allows you to receive data of any type as input. It can be accessed in the process script by using the specified input name, as shown in the following example:
+The `val` qualifier allows you to receive data of any type as input. It can be accessed in the process script by using the specified input name. For example:
 
-```groovy linenums="1"
+```groovy linenums="1" title="snippet.nf"
 num = Channel.of(1, 2, 3)
 
 process BASICEXAMPLE {
@@ -251,16 +317,16 @@ process BASICEXAMPLE {
 }
 
 workflow {
-    myrun = BASICEXAMPLE(num)
+    BASICEXAMPLE(num)
 }
 ```
 
-In the above example the process is executed three times, each time a value is received from the channel `num` and used to process the script. Thus, it results in an output similar to the one shown below:
+In the above example the process is executed three times, each time a value is received from the channel `num` it is used by the script. Thus, it results in an output similar to the one shown below:
 
 ```console
-process job 3
 process job 1
 process job 2
+process job 3
 ```
 
 !!! warning
@@ -269,9 +335,9 @@ process job 2
 
 ### Input files
 
-The `path` qualifier allows the handling of file values in the process execution context. This means that Nextflow will stage it in the process execution directory, and it can be accessed in the script by using the name specified in the input declaration.
+The `path` qualifier allows the handling of file values in the process execution context. This means that Nextflow will stage it in the process execution directory, and it can be accessed by the script using the name specified in the input declaration. For example:
 
-```groovy linenums="1"
+```groovy linenums="1" title="snippet.nf"
 reads = Channel.fromPath('data/ggal/*.fq')
 
 process FOO {
@@ -291,9 +357,20 @@ workflow {
 }
 ```
 
+In this case, the process is executed six times and will print the name of the file `sample.fastq` six times as this is the name of the file in the input declaration and despite the input file name being different in each execution (e.g., `lung_1.fq`).
+
+```console title="Output"
+sample.fastq
+sample.fastq
+sample.fastq
+sample.fastq
+sample.fastq
+sample.fastq
+```
+
 The input file name can also be defined using a variable reference as shown below:
 
-```groovy linenums="1"
+```groovy linenums="1" title="snippet.nf"
 reads = Channel.fromPath('data/ggal/*.fq')
 
 process FOO {
@@ -313,7 +390,18 @@ workflow {
 }
 ```
 
-The same syntax is also able to handle more than one input file in the same execution and only requires changing the channel composition.
+In this case, the process is executed six times and will print the name of the variable input file six times (e.g., `lung_1.fq`).
+
+```console title="Output"
+lung_1.fq
+gut_2.fq
+liver_2.fq
+lung_2.fq
+liver_1.fq
+gut_1.fq
+```
+
+The same syntax is also able to handle more than one input file in the same execution and only requires changing the channel composition using an operator (e.g., `collect`).
 
 ```groovy linenums="1"
 reads = Channel.fromPath('data/ggal/*.fq')
@@ -326,7 +414,7 @@ process FOO {
 
     script:
     """
-    ls -lh $sample
+    ls $sample
     """
 }
 
@@ -335,45 +423,20 @@ workflow {
 }
 ```
 
+Note that while the output looks the same, this process is only executed once.
+
+```console title="Output"
+lung_1.fq
+gut_2.fq
+liver_2.fq
+lung_2.fq
+liver_1.fq
+gut_1.fq
+```
+
 !!! warning
 
     In the past, the `file` qualifier was used for files, but the `path` qualifier should be preferred over file to handle process input files when using Nextflow 19.10.0 or later. When a process declares an input file, the corresponding channel elements must be **file** objects created with the file helper function from the file specific channel factories (e.g., `Channel.fromPath` or `Channel.fromFilePairs`).
-
-!!! exercise
-
-    Write a script that creates a channel containing all read files matching the pattern `data/ggal/*_1.fq` followed by a process that concatenates them into a single file and prints the first 10 lines.
-
-
-    ??? solution
-
-        ```groovy linenums="1"
-        params.reads = "$baseDir/data/ggal/*_1.fq"
-
-        Channel
-            .fromPath(params.reads)
-            .set { read_ch }
-
-        process CONCATENATE {
-            tag "Concat all files"
-
-            input:
-            path '*'
-
-            output:
-            path 'top_10_lines'
-
-            script:
-            """
-            cat * > concatenated.txt
-            head -n 10 concatenated.txt > top_10_lines
-            """
-        }
-
-        workflow {
-            concat_ch = CONCATENATE(read_ch.collect())
-            concat_ch.view()
-        }
-        ```
 
 ### Combine input channels
 
@@ -405,23 +468,23 @@ workflow {
 
 Both channels emit three values, therefore the process is executed three times, each time with a different pair:
 
--   `(1, a)`
--   `(2, b)`
--   `(3, c)`
+```console title="Output"
+1 and a
+3 and c
+2 and b
+```
 
-What is happening is that the process waits until there’s a complete input configuration, i.e., it receives an input value from all the channels declared as input.
+The process waits until there’s a complete input configuration, i.e., it receives an input value from all the channels declared as input.
 
 When this condition is verified, it consumes the input values coming from the respective channels, spawns a task execution, then repeats the same logic until one or more channels have no more content.
 
 This means channel values are consumed serially one after another and the first empty channel causes the process execution to stop, even if there are other values in other channels.
 
-**So what happens when channels do not have the same cardinality (i.e., they emit a different number of elements)?**
+What happens when channels do not have the same cardinality (i.e., they emit a different number of elements)?
 
-For example:
-
-```groovy linenums="1"
-input1 = Channel.of(1, 2)
-input2 = Channel.of('a', 'b', 'c', 'd')
+```groovy linenums="1" title="snippet.nf"
+ch1 = Channel.of(1, 2, 3)
+ch2 = Channel.of('a')
 
 process FOO {
     debug true
@@ -437,21 +500,23 @@ process FOO {
 }
 
 workflow {
-    FOO(input1, input2)
+    FOO(ch1, ch2)
 }
 ```
 
-In the above example, the process is only executed twice because the process stops when a channel has no more data to be processed.
+In the above example, the process is only executed once because the process stops when a channel has no more data to be processed.
 
-However, what happens if you replace value `x` with a `value` channel?
+```console title="Output"
+1 and a
+```
 
-Compare the previous example with the following one:
+However, replacing `ch2` with a `value` channel will cause the process to be executed three times, each time with the same value of `a`:
 
-```groovy linenums="1"
-input1 = Channel.value(1)
-input2 = Channel.of('a', 'b', 'c')
+```groovy linenums="1" title="snippet.nf"
+ch1 = Channel.of(1, 2, 3)
+ch2 = Channel.value('a')
 
-process BAR {
+process FOO {
     debug true
 
     input:
@@ -465,25 +530,27 @@ process BAR {
 }
 
 workflow {
-    BAR(input1, input2)
+    FOO(ch1, ch2)
 }
 ```
 
 ```console title="Script output"
-1 and b
 1 and a
-1 and c
+2 and a
+3 and a
 ```
 
-This is because _value_ channels can be consumed multiple times and do not affect process termination.
+As `ch2` is now a _value_ channel, it can be consumed multiple times and do not affect process termination.
 
-!!! exercise
+!!! question "Exercise"
 
     Write a process that is executed for each read file matching the pattern `data/ggal/*_1.fq` and use the same `data/ggal/transcriptome.fa` in each execution.
 
     ??? solution
 
-        ```groovy linenums="1"
+        One possible solution is shown below:
+
+        ```groovy linenums="1" title="snippet.nf"
         params.reads = "$baseDir/data/ggal/*_1.fq"
         params.transcriptome_file = "$baseDir/data/ggal/transcriptome.fa"
 
@@ -492,20 +559,22 @@ This is because _value_ channels can be consumed multiple times and do not affec
             .set { read_ch }
 
         process COMMAND {
-            tag "Run_command"
+            debug true
 
             input:
             path reads
             path transcriptome
 
-            output:
-            path result
-
             script:
             """
-            echo your_command $reads $transcriptome > result
+            echo $reads $transcriptome
             """
         }
+
+        workflow {
+            COMMAND(read_ch, params.transcriptome_file)
+        }
+        ```
 
         workflow {
             concat_ch = COMMAND(read_ch, params.transcriptome_file)
@@ -513,13 +582,15 @@ This is because _value_ channels can be consumed multiple times and do not affec
         }
         ```
 
+        You may also consider using other Channel factories or operators to create your input channels.
+
 ### Input repeaters
 
 The `each` qualifier allows you to repeat the execution of a process for each item in a collection every time new data is received. For example:
 
 ```groovy linenums="1"
-sequences = Channel.fromPath('data/prots/*.tfa')
-methods = ['regular', 'espresso', 'psicoffee']
+sequences = Channel.fromPath("$baseDir/data/ggal/*_1.fq")
+methods = ['regular', 'espresso']
 
 process ALIGNSEQUENCES {
     debug true
@@ -539,45 +610,68 @@ workflow {
 }
 ```
 
+```console title="Output"
+t_coffee -in gut_1.fq -mode regular
+t_coffee -in lung_1.fq -mode espresso
+t_coffee -in liver_1.fq -mode regular
+t_coffee -in gut_1.fq -mode espresso
+t_coffee -in lung_1.fq -mode regular
+t_coffee -in liver_1.fq -mode espresso
+```
+
 In the above example, every time a file of sequences is received as an input by the process, it executes three tasks, each running a different alignment method set as a `mode` variable. This is useful when you need to repeat the same task for a given set of parameters.
 
-!!! exercise
+!!! question "Exercise"
 
-    Extend the previous example so a task is executed for each read file matching the pattern `data/ggal/*_1.fq` and repeat the same task with both `salmon` and `kallisto`.
+    Extend the previous example so a task is executed for an additional type of coffee.
 
     ??? solution
 
-        ```groovy linenums="1"
-        params.reads = "$baseDir/data/ggal/*_1.fq"
-        params.transcriptome_file = "$baseDir/data/ggal/transcriptome.fa"
-        methods= ['salmon', 'kallisto']
+        Modify the methods list and add another coffee type:
 
-        Channel
-            .fromPath(params.reads)
-            .set { read_ch }
+        ```groovy linenums="1" title="snippet.nf"
+        sequences = Channel.fromPath("$baseDir/data/ggal/*_1.fq")
+        methods = ['regular', 'espresso', 'cappuccino']
 
-        process COMMAND {
-            tag "Run_command"
+        process ALIGNSEQUENCES {
+            debug true
 
             input:
-            path reads
-            path transcriptome
+            path seq
             each mode
-
-            output:
-            path result
 
             script:
             """
-            echo $mode $reads $transcriptome > result
+            echo t_coffee -in $seq -mode $mode
             """
         }
 
         workflow {
-            concat_ch = COMMAND(read_ch, params.transcriptome_file, methods)
-            concat_ch.view { "To run : ${it.text}" }
+            ALIGNSEQUENCES(sequences, methods)
         }
         ```
+
+        Your output will look something like this:
+
+        ```console title="Output"
+        t_coffee -in gut_1.fq -mode regular
+        t_coffee -in lung_1.fq -mode regular
+        t_coffee -in gut_1.fq -mode espresso
+        t_coffee -in liver_1.fq -mode cappuccino
+        t_coffee -in liver_1.fq -mode espresso
+        t_coffee -in lung_1.fq -mode espresso
+        t_coffee -in liver_1.fq -mode regular
+        t_coffee -in gut_1.fq -mode cappuccino
+        t_coffee -in lung_1.fq -mode cappuccino
+        ```
+
+!!! cboard-list-2 "Summary"
+
+    In this step you have learned:
+
+    1. How to use the `val` qualifier to define the input channel(s) of a process
+    2. How to use the `path` qualifier to define the input file(s) of a process
+    3. How to use the `each` qualifier to repeat the execution of a process for each item in a collection
 
 ## Outputs
 
@@ -592,10 +686,10 @@ output:
 
 ### Output values
 
-The `val` qualifier specifies a defined _value_ in the script context. Values are frequently defined in the _input_ and/or _output_ declaration blocks, as shown in the following example:
+The `val` qualifier specifies a defined _value_ in the script context. Values are frequently defined in the `input` and/or `output` declaration blocks, as shown in the following example:
 
-```groovy linenums="1"
-methods = ['prot', 'dna', 'rna']
+```groovy linenums="1" title="snippet.nf"
+greeting = "Hello world!"
 
 process FOO {
     input:
@@ -611,8 +705,8 @@ process FOO {
 }
 
 workflow {
-    receiver_ch = FOO(Channel.of(methods))
-    receiver_ch.view { "Received: $it" }
+    FOO(Channel.of(greeting))
+        .view()
 }
 ```
 
@@ -620,7 +714,7 @@ workflow {
 
 The `path` qualifier specifies one or more files produced by the process into the specified channel as an output.
 
-```groovy linenums="1"
+```groovy linenums="1" title="snippet.nf"
 process RANDOMNUM {
     output:
     path 'result.txt'
@@ -633,7 +727,7 @@ process RANDOMNUM {
 
 workflow {
     receiver_ch = RANDOMNUM()
-    receiver_ch.view { "Received: " + it.text }
+    receiver_ch.view()
 }
 ```
 
@@ -645,7 +739,7 @@ Since a file parameter using the same name is declared in the output block, the 
 
 When an output file name contains a wildcard character (`*` or `?`) it is interpreted as a [glob](http://docs.oracle.com/javase/tutorial/essential/io/fileOps.html#glob) path matcher. This allows us to _capture_ multiple files into a list object and output them as a sole emission. For example:
 
-```groovy linenums="1"
+```groovy linenums="1" title="snippet.nf"
 process SPLITLETTERS {
     output:
     path 'chunk_*'
@@ -658,19 +752,14 @@ process SPLITLETTERS {
 
 workflow {
     letters = SPLITLETTERS()
-    letters
-        .flatMap()
-        .view { "File: ${it.name} => ${it.text}" }
+    letters.view()
 }
 ```
 
 Prints the following:
 
-```console
-File: chunk_aa => H
-File: chunk_ab => o
-File: chunk_ac => l
-File: chunk_ad => a
+```console title="Output"
+[/workspace/gitpod/nf-training/work/ca/baf931d379aa7fa37c570617cb06d1/chunk_aa, /workspace/gitpod/nf-training/work/ca/baf931d379aa7fa37c570617cb06d1/chunk_ab, /workspace/gitpod/nf-training/work/ca/baf931d379aa7fa37c570617cb06d1/chunk_ac, /workspace/gitpod/nf-training/work/ca/baf931d379aa7fa37c570617cb06d1/chunk_ad]
 ```
 
 Some caveats on glob pattern behavior:
@@ -679,14 +768,38 @@ Some caveats on glob pattern behavior:
 -   Glob pattern matches both files and directory paths
 -   When a two stars pattern `**` is used to recourse across directories, only file paths are matched i.e., directories are not included in the result list.
 
-!!! exercise
+!!! question "Exercise"
 
-    Remove the `flatMap` operator and see out the output change. The documentation for the `flatMap` operator is available at [this link](https://www.nextflow.io/docs/latest/operator.html#flatmap).
+    Add the `flatMap` operator and see out the output changes. The documentation for the `flatMap` operator is available at [this link](https://www.nextflow.io/docs/latest/operator.html#flatmap).
 
     ??? Solution
 
-        ```groovy
-        File: [chunk_aa, chunk_ab, chunk_ac, chunk_ad] => [H, o, l, a]
+        Add the `flatMap` operator to the `letters` channel.
+
+        ```groovy linenums="1" title="snippet.nf"
+        process SPLITLETTERS {
+            output:
+            path 'chunk_*'
+
+            script:
+            """
+            printf 'Hola' | split -b 1 - chunk_
+            """
+        }
+
+        workflow {
+            letters = SPLITLETTERS()
+            letters.flatMap().view()
+        }
+        ```
+
+        Your output will look something like this:
+
+        ```console title="Output"
+        /workspace/gitpod/nf-training/work/54/9d79f9149f15085e00dde2d8ead150/chunk_aa
+        /workspace/gitpod/nf-training/work/54/9d79f9149f15085e00dde2d8ead150/chunk_ab
+        /workspace/gitpod/nf-training/work/54/9d79f9149f15085e00dde2d8ead150/chunk_ac
+        /workspace/gitpod/nf-training/work/54/9d79f9149f15085e00dde2d8ead150/chunk_ad
         ```
 
 ### Dynamic output file names
@@ -725,11 +838,11 @@ In the above example, each time the process is executed an alignment file is pro
 
 ### Composite inputs and outputs
 
-So far we have seen how to declare multiple input and output channels that can handle one value at a time. However, Nextflow can also handle a _tuple_ of values.
+So far you have seen how to declare multiple input and output channels that can handle one value at a time. However, Nextflow can also handle a _tuple_ of values.
 
-The input and output declarations for tuples must be declared with a `tuple` qualifier followed by the definition of each element in the tuple.
+The `input` and `output` declarations for tuples must be declared with a `tuple` qualifier followed by the definition of each element in the tuple.
 
-```groovy linenums="1"
+```groovy linenums="1" title="snippet.nf"
 reads_ch = Channel.fromFilePairs('data/ggal/*_{1,2}.fq')
 
 process FOO {
@@ -741,23 +854,27 @@ process FOO {
 
     script:
     """
-    echo your_command_here --reads $sample_id_paths > sample.bam
+    echo your_command_here --sample $sample_id_paths > sample.bam
     """
 }
 
 workflow {
-    bam_ch = FOO(reads_ch)
-    bam_ch.view()
+    sample_ch = FOO(reads_ch)
+    sample_ch.view()
 }
 ```
 
-!!! info
+The output will looks something like this:
 
-    In previous versions of Nextflow `tuple` was called `set` but it was used the same way with the same semantic.
+```console title="Output"
+[lung, /workspace/gitpod/nf-training/work/23/fe268295bab990a40b95b7091530b6/sample.bam]
+[liver, /workspace/gitpod/nf-training/work/32/656b96a01a460f27fa207e85995ead/sample.bam]
+[gut, /workspace/gitpod/nf-training/work/ae/3cfc7cf0748a598c5e2da750b6bac6/sample.bam]
+```
 
-!!! exercise
+!!! question "Exercise"
 
-    Modify the script of the previous exercise so that the _bam_ file is named as the given `sample_id`.
+    Modify the script of the previous exercise so that the _--sample_ file is named as the given `sample_id`.
 
     ??? solution
 
@@ -773,15 +890,141 @@ workflow {
 
             script:
             """
-            echo your_command_here --reads $sample_id_paths > ${sample_id}.bam
+            echo your_command_here --sample $sample_id_paths > ${sample_id}.bam
             """
         }
 
         workflow {
-            bam_ch = FOO(reads_ch)
-            bam_ch.view()
+            sample_ch = FOO(reads_ch)
+            sample_ch.view()
         }
         ```
+
+### Output definitions
+
+Nextflow allows the use of alternative output definitions within workflows to simplify your code.
+
+You can also explicitly define the output of a channel using the `.out` attribute:
+
+```groovy linenums="1" title="snippet.nf"
+reads_ch = Channel.fromFilePairs('data/ggal/*_{1,2}.fq')
+
+process FOO {
+    input:
+    tuple val(sample_id), path(sample_id_paths)
+
+    output:
+    tuple val(sample_id), path('sample.bam')
+    tuple val(sample_id), path('sample.bai')
+
+    script:
+    """
+    echo your_command_here --sample $sample_id_paths > sample.bam
+    echo your_command_here --sample $sample_id_paths > sample.bai
+    """
+}
+
+workflow {
+    FOO(reads_ch)
+    FOO.out.view()
+}
+```
+
+If a process defines two or more output channels, each channel can be accessed by indexing the `.out` attribute, e.g., `.out[0]`, `.out[1]`, etc. In this example you only have the `[0]'th` output:
+
+```groovy linenums="1" title="snippet.nf"
+reads_ch = Channel.fromFilePairs('data/ggal/*_{1,2}.fq')
+
+process FOO {
+    input:
+    tuple val(sample_id), path(sample_id_paths)
+
+    output:
+    tuple val(sample_id), path('sample.bam')
+    tuple val(sample_id), path('sample.bai')
+
+    script:
+    """
+    echo your_command_here --sample $sample_id_paths > sample.bam
+    echo your_command_here --sample $sample_id_paths > sample.bai
+    """
+}
+
+workflow {
+    FOO(reads_ch)
+    FOO.out[0].view()
+}
+```
+
+Alternatively, the process `output` definition allows the use of the `emit` statement to define a named identifier that can be used to reference the channel in the external scope.
+
+```groovy linenums="1" title="snippet.nf"
+reads_ch = Channel.fromFilePairs('data/ggal/*_{1,2}.fq')
+
+process FOO {
+    input:
+    tuple val(sample_id), path(sample_id_paths)
+
+    output:
+    tuple val(sample_id), path('sample.bam'), emit: bam
+    tuple val(sample_id), path('sample.bai'), emit: bai
+
+    script:
+    """
+    echo your_command_here --sample $sample_id_paths > sample.bam
+    echo your_command_here --sample $sample_id_paths > sample.bai
+    """
+}
+
+workflow {
+    FOO(reads_ch)
+    FOO.out.bam.view()
+}
+```
+
+!!! question "Exercise"
+
+    Modify the previous example so that the `bai` output channel is printed to your terminal.
+
+    ??? solution
+
+        Your workflow will look something like this:
+
+        ```groovy linenums="1" title="snippet.nf"
+        reads_ch = Channel.fromFilePairs('data/ggal/*_{1,2}.fq')
+
+        process FOO {
+            input:
+            tuple val(sample_id), path(sample_id_paths)
+
+            output:
+            tuple val(sample_id), path('sample.bam'), emit: bam
+            tuple val(sample_id), path('sample.bai'), emit: bai
+
+            script:
+            """
+            echo your_command_here --sample $sample_id_paths > sample.bam
+            echo your_command_here --sample $sample_id_paths > sample.bai
+            """
+        }
+
+        workflow {
+            FOO(reads_ch)
+            FOO.out.bai.view()
+        }
+        ```
+
+!!! cboard-list-2 "Summary"
+
+    In this step you have learned:
+
+    1. How to use the `val` qualifier to define the output channel(s) of a process
+    2. How to use the `path` qualifier to define the output file(s) of a process
+    3. How to use the `tuple` qualifier to define the output channel(s) of a process
+    4. How to manage multiple output files using glob patterns
+    5. How to use dynamic output file names
+    6. How to use composite inputs and outputs
+    7. How to define outputs
 
 ## When
 
@@ -815,15 +1058,21 @@ workflow {
 }
 ```
 
+!!! cboard-list-2 "Summary"
+
+    In this step you have learned:
+
+    1. How to use the `when` declaration to allow conditional processes
+
 ## Directives
 
 Directive declarations allow the definition of optional settings that affect the execution of the current process without affecting the _semantic_ of the task itself.
 
-They must be entered at the top of the process body, before any other declaration blocks (i.e., `input`, `output`, etc.).
+They must be entered at the top of the process body, before any other declaration blocks (i.e., _input_, _output_, etc.).
 
 Directives are commonly used to define the amount of computing resources to be used or other meta directives that allow the definition of extra configuration of logging information. For example:
 
-```groovy linenums="1"
+```groovy linenums="1" title="snippet.nf"
 process FOO {
     cpus 2
     memory 1.GB
@@ -836,54 +1085,63 @@ process FOO {
 }
 ```
 
-!!! info ""
+The complete list of directives is available [at this link](https://www.nextflow.io/docs/latest/process.html#directives). Some of the most common are described in detail below.
 
-    :material-lightbulb: The complete list of directives is available [at this link](https://www.nextflow.io/docs/latest/process.html#directives).
+### Resource allocation
 
-| Name                                                                | Description                                                                                                                                          |
-| ------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`cpus`](https://www.nextflow.io/docs/latest/process.html#cpus)     | Allows you to define the number of (logical) CPUs required by the process’ task.                                                                     |
-| [`time`](https://www.nextflow.io/docs/latest/process.html#time)     | Allows you to define how long the task is allowed to run (e.g., time _1h_: 1 hour, _1s_ 1 second, _1m_ 1 minute, _1d_ 1 day).                        |
-| [`memory`](https://www.nextflow.io/docs/latest/process.html#memory) | Allows you to define how much memory the task is allowed to use (e.g., _2 GB_ is 2 GB). Can also use B, KB,MB,GB and TB.                             |
-| [`disk`](https://www.nextflow.io/docs/latest/process.html#disk)     | Allows you to define how much local disk storage the task is allowed to use.                                                                         |
-| [`tag`](https://www.nextflow.io/docs/latest/process.html#tag)       | Allows you to associate each process execution with a custom label to make it easier to identify them in the log file or the trace execution report. |
+Directives that allow you to define the amount of computing resources to be used by the process. These are:
 
-## Organize outputs
+| Name                                                                | Description                                                                                                                   |
+| ------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| [`cpus`](https://www.nextflow.io/docs/latest/process.html#cpus)     | Allows you to define the number of (logical) CPUs required by the process’ task.                                              |
+| [`time`](https://www.nextflow.io/docs/latest/process.html#time)     | Allows you to define how long the task is allowed to run (e.g., time _1h_: 1 hour, _1s_ 1 second, _1m_ 1 minute, _1d_ 1 day). |
+| [`memory`](https://www.nextflow.io/docs/latest/process.html#memory) | Allows you to define how much memory the task is allowed to use (e.g., _2 GB_ is 2 GB). Can also use B, KB,MB,GB and TB.      |
+| [`disk`](https://www.nextflow.io/docs/latest/process.html#disk)     | Allows you to define how much local disk storage the task is allowed to use.                                                  |
 
-### PublishDir directive
+These directives can be used in combination with each other to allocate specific resources to each process. For example:
 
-Given each task is being executed in separate temporary `work/` folder (e.g., `work/f1/850698…`; `work/g3/239712…`; etc.), we may want to save important, non-intermediary, and/or final files in a results folder.
-
-!!! tip
-
-    Remember to delete the work folder from time to time to clear your intermediate files and stop them from filling your computer!
-
-To store our workflow result files, we need to explicitly mark them using the directive [publishDir](https://www.nextflow.io/docs/latest/process.html#publishdir) in the process that’s creating the files. For example:
-
-```groovy linenums="1"
-params.outdir = 'my-results'
-params.prot = 'data/prots/*.tfa'
-proteins = Channel.fromPath(params.prot)
-
-
-process BLASTSEQ {
-    publishDir "$params.outdir/bam_files", mode: 'copy'
-
-    input:
-    path fasta
-
-    output:
-    path ('*.txt')
+```groovy linenums="1" title="snippet.nf"
+process FOO {
+    cpus 2
+    memory 1.GB
+    time '1h'
+    disk '10 GB'
 
     script:
     """
-    echo blastp $fasta > ${fasta}_result.txt
+    echo your_command --this --that
+    """
+}
+```
+
+### PublishDir directive
+
+Given each task is being executed in separate temporary `work/` folder (e.g., `work/f1/850698…`), you may want to save important, non-intermediary, and/or final files in a results folder.
+
+To store our workflow result files, you need to explicitly mark them using the directive [publishDir](https://www.nextflow.io/docs/latest/process.html#publishdir) in the process that’s creating the files. For example:
+
+```groovy linenums="1"
+reads_ch = Channel.fromFilePairs('data/ggal/*_{1,2}.fq')
+
+process FOO {
+    publishDir "results", pattern: "*.bam"
+
+    input:
+    tuple val(sample_id), path(sample_id_paths)
+
+    output:
+    tuple val(sample_id), path("*.bam")
+    tuple val(sample_id), path("*.bai")
+
+    script:
+    """
+    echo your_command_here --sample $sample_id_paths > ${sample_id}.bam
+    echo your_command_here --sample $sample_id_paths > ${sample_id}.bai
     """
 }
 
 workflow {
-    blast_ch = BLASTSEQ(proteins)
-    blast_ch.view()
+    FOO(reads_ch)
 }
 ```
 
@@ -893,43 +1151,55 @@ The above example will copy all blast script files created by the `BLASTSEQ` pro
 
     The publish directory can be local or remote. For example, output files could be stored using an [AWS S3 bucket](https://aws.amazon.com/s3/) by using the `s3://` prefix in the target path.
 
-### Manage semantic sub-directories
-
 You can use more than one `publishDir` to keep different outputs in separate directories. For example:
 
 ```groovy linenums="1"
-params.reads = 'data/reads/*_{1,2}.fq.gz'
-params.outdir = 'my-results'
-
-samples_ch = Channel.fromFilePairs(params.reads, flat: true)
+reads_ch = Channel.fromFilePairs('data/ggal/*_{1,2}.fq')
 
 process FOO {
-    publishDir "$params.outdir/$sampleId/", pattern: '*.fq'
-    publishDir "$params.outdir/$sampleId/counts", pattern: "*_counts.txt"
-    publishDir "$params.outdir/$sampleId/outlooks", pattern: '*_outlook.txt'
+    publishDir "results/bam", pattern: "*.bam"
+    publishDir "results/bai", pattern: "*.bai"
 
     input:
-    tuple val(sampleId), path('sample1.fq.gz'), path('sample2.fq.gz')
+    tuple val(sample_id), path(sample_id_paths)
 
     output:
-    path "*"
+    tuple val(sample_id), path("*.bam")
+    tuple val(sample_id), path("*.bai")
 
     script:
     """
-    zcat sample1.fq.gz > sample1.fq
-    zcat sample2.fq.gz > sample2.fq
-
-    awk '{s++}END{print s/4}' sample1.fq > sample1_counts.txt
-    awk '{s++}END{print s/4}' sample2.fq > sample2_counts.txt
-
-    head -n 50 sample1.fq > sample1_outlook.txt
-    head -n 50 sample2.fq > sample2_outlook.txt
+    echo your_command_here --sample $sample_id_paths > ${sample_id}.bam
+    echo your_command_here --sample $sample_id_paths > ${sample_id}.bai
     """
 }
 
 workflow {
-    out_channel = FOO(samples_ch)
+    FOO(reads_ch)
 }
 ```
 
-The above example will create an output structure in the directory `my-results`, that contains a separate sub-directory for each given sample ID, each containing the folders `counts` and `outlooks`.
+!!! question "Exercise"
+
+    Edit the `publishDir` directive in the previous example to store the output files for each sample type in a different directory.
+
+    ??? Solution
+
+        Your solution could look something like this:
+
+        ```groovy linenums="1"
+        reads_ch = Channel.fromFilePairs('data/ggal/*_{1,2}.fq')
+
+        process FOO {
+            publishDir "results/$sample_id", pattern: "*.{bam,bai}"
+
+            input:
+        ...
+        ```
+
+!!! cboard-list-2 "Summary"
+
+    In this step you have learned:
+
+    1. How to use the cpus, time, memory, and disk directives to define the amount of computing resources to be used by the process
+    2. How to use the publishDir directive to store the output files in a results folder

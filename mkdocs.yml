@@ -5,7 +5,7 @@ repo_name: nextflow-io/training
 
 nav:
     - Home: index.md
-    - Basic Training:
+    - Foundational Training:
           - basic_training/index.md
           - basic_training/setup.md
           - basic_training/intro.md
@@ -32,7 +32,7 @@ nav:
           - advanced/configuration.md
           - advanced/summary.md
           - advanced/support.md
-    - Hands on:
+    - Hands-on Training:
           - hands_on/index.md
           - hands_on/01_datasets.md
           - hands_on/02_workflow.md
@@ -104,8 +104,8 @@ markdown_extensions:
     - md_in_html
     - pymdownx.details
     - pymdownx.emoji:
-          emoji_index: !!python/name:materialx.emoji.twemoji
-          emoji_generator: !!python/name:materialx.emoji.to_svg
+          emoji_index: !!python/name:material.extensions.emoji.twemoji
+          emoji_generator: !!python/name:material.extensions.emoji.to_svg
     - pymdownx.highlight:
           anchor_linenums: true
     - pymdownx.inlinehilite

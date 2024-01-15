@@ -1,12 +1,15 @@
 ---
-description: Basic Nextflow Training Workshop
+title: Deployment scenarios
+description: Foundational Nextflow Training Workshop
 ---
 
 # Deployment scenarios
 
 Real-world genomic applications can spawn the execution of thousands of tasks. In this scenario a batch scheduler is commonly used to deploy a workflow in a computing cluster, allowing the execution of many jobs in parallel across many compute nodes.
 
-Nextflow has built-in support for the most commonly used batch schedulers, such as Univa Grid Engine, [SLURM](https://slurm.schedmd.com/) and IBM LSF. Check the Nextflow documentation for the complete list of supported [execution platforms](https://www.nextflow.io/docs/latest/executor.html).
+Nextflow has built-in support for the most commonly used batch schedulers, such as Univa Grid Engine, SLURM, and IBM LSF.
+
+You can view the Nextflow documentation for the complete list of supported [execution platforms](https://www.nextflow.io/docs/latest/executor.html).
 
 ## Cluster deployment
 
@@ -16,11 +19,11 @@ A key Nextflow feature is the ability to decouple the workflow implementation fr
 
 To run your workflow with a batch scheduler, modify the `nextflow.config` file specifying the target executor and the required computing resources if needed. For example:
 
-```groovy linenums="1"
+```groovy linenums="1" title="nextflow.config"
 process.executor = 'slurm'
 ```
 
-## Managing cluster resources
+### Managing cluster resources
 
 When using a batch scheduler, it is often needed to specify the number of resources (i.e. cpus, memory, execution time, etc.) required by each task.
 
@@ -38,7 +41,7 @@ This can be done using the following process directives:
 
 Use the scope `process` to define the resource requirements for all processes in your workflow applications. For example:
 
-```groovy linenums="1"
+```groovy linenums="1" title="nextflow.config"
 process {
     executor = 'slurm'
     queue = 'short'
@@ -77,7 +80,7 @@ nextflow -C ${CONFIG} run ${WORKFLOW}
 
 And then submit it with:
 
-```bash linenums="1"
+```bash
 sbatch launch_nf.sh /home/my_user/path/my_workflow.nf /home/my_user/path/my_config_file.conf
 ```
 
@@ -91,7 +94,7 @@ You can find more tips for running Nextflow on HPC in the following blog posts:
 
 In real-world applications, different tasks need different amounts of computing resources. It is possible to define the resources for a specific task using the select `withName:` followed by the process name:
 
-```groovy linenums="1"
+```groovy linenums="1" title="nextflow.config"
 process {
     executor = 'slurm'
     queue = 'short'
@@ -112,21 +115,6 @@ process {
     }
 }
 ```
-
-!!! exercise
-
-    Run the RNA-Seq script (`script7.nf`) from earlier, but specify that the `QUANTIFICATION` process requires 2 CPUs and 5 GB of memory, within the `nextflow.config` file.
-
-    ??? solution
-
-        ```groovy
-        process {
-            withName: QUANTIFICATION {
-                cpus = 2
-                memory = '5 GB'
-            }
-        }
-        ```
 
 ### Configure process by labels
 
@@ -185,6 +173,7 @@ process {
     withName: FOO {
         container = 'some/image:x'
     }
+
     withName: BAR {
         container = 'other/image:y'
     }
@@ -199,13 +188,13 @@ docker.enabled = true
 
 Read more about config process selectors at [this link](https://www.nextflow.io/docs/latest/config.html#process-selectors).
 
-## Configuration profiles
+### Configuration profiles
 
 Configuration files can contain the definition of one or more _profiles_. A profile is a set of configuration attributes that can be activated/chosen when launching a workflow execution by using the `-profile` command- line option.
 
 Configuration profiles are defined by using the special scope `profiles` which group the attributes that belong to the same profile using a common prefix. For example:
 
-```groovy linenums="1"
+```groovy linenums="1" title="nextflow.config"
 profiles {
     standard {
         params.genome = '/local/path/ref.fasta'
@@ -226,7 +215,6 @@ profiles {
         process.container = 'cbcrg/imagex'
         docker.enabled = true
     }
-
 }
 ```
 
@@ -248,6 +236,10 @@ nextflow run <your script> -profile cluster
 
 ## Cloud deployment
 
+Nextflow supports deployment on your favourite cloud providers. The following sections describe how to deploy Nextflow workflows on AWS.
+
+### AWS Batch
+
 [AWS Batch](https://aws.amazon.com/batch/) is a managed computing service that allows the execution of containerized workloads in the Amazon cloud infrastructure.
 
 Nextflow provides built-in support for AWS Batch which allows the seamless deployment of a Nextflow workflow in the cloud, offloading the process executions as Batch jobs.
@@ -258,7 +250,7 @@ Once the Batch environment is configured, specify the instance types to be used 
 
     Click the :material-plus-circle: icons in the code for explanations.
 
-```groovy linenums="1"
+```groovy linenums="1" title="nextflow.config"
 process.executor = 'awsbatch' // (1)!
 process.queue = 'nextflow-ci' // (2)!
 process.container = 'nextflow/rnaseq-nf:latest' // (3)!
@@ -284,11 +276,21 @@ aws.batch.cliPath = '/home/ec2-user/miniconda/bin/aws' // (6)!
 
 The complete details about AWS Batch deployment are available at [this link](https://www.nextflow.io/docs/latest/awscloud.html#aws-batch).
 
-## Volume mounts
+!!! cboard-list-2 "Summary"
+
+    In this step you have learned:
+
+    1. How to configure a cluster deployment
+    2. How to manage cluster resources
+    3. How to submit Nextflow as a job
+    4. How to configure process by name
+    5. How to configure process by labels
+
+### Volume mounts
 
 Elastic Block Storage (EBS) volumes (or other supported storage) can be mounted in the job container using the following configuration snippet:
 
-```groovy
+```groovy title="nextflow.config"
 aws {
     batch {
         volumes = '/some/path'
@@ -298,7 +300,7 @@ aws {
 
 Multiple volumes can be specified using comma-separated paths. The usual Docker volume mount syntax can be used to define complex volumes for which the container path is different from the host path or to specify a read-only option:
 
-```groovy
+```groovy title="nextflow.config"
 aws {
     region = 'eu-west-1'
     batch {
@@ -311,11 +313,22 @@ aws {
 
     This is a global configuration that has to be specified in a Nextflow config file and will be applied to **all** process executions.
 
-!!! warning
+!!! tip
 
-    Nextflow expects paths to be available. It does not handle the provision of EBS volumes or another kind of storage.
+    Additional documentation for [AWS](https://www.nextflow.io/docs/latest/aws.html#), [GCP](https://www.nextflow.io/docs/latest/google.html), and [Azure](https://www.nextflow.io/docs/latest/azure.html) are available on the Nextflow documentation site.
 
-## Custom job definition
+!!! cboard-list-2 "Summary"
+
+    In this step you have learned:
+
+    1. How to configure AWS Batch
+    2. How to configure volume mounts
+
+## Additional configuration options
+
+There are many different ways to deploy Nextflow workflows. The following sections describe additional configuration options for deployments.
+
+### Custom job definition
 
 Nextflow automatically creates the Batch [Job definitions](https://docs.aws.amazon.com/batch/latest/userguide/job_definitions.html) needed to execute your workflow processes. Therefore it’s not required to define them before you run your workflow.
 
@@ -329,7 +342,7 @@ process {
 }
 ```
 
-## Custom image
+### Custom image
 
 Since Nextflow requires the AWS CLI tool to be accessible in the computing environment, a common solution consists of creating a custom Amazon Machine Image (AMI) and installing it in a self-contained manner (e.g. using Conda package manager).
 
@@ -357,7 +370,7 @@ Finally, specify the `aws` full path in the Nextflow config file as shown below:
 aws.batch.cliPath = '/home/ec2-user/miniconda/bin/aws'
 ```
 
-## Launch template
+### Launch template
 
 An alternative approach to is to create a custom AMI using a [Launch template](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html) that installs the AWS CLI tool during the instance boot via custom user data.
 
@@ -390,7 +403,7 @@ chown -R ec2-user:ec2-user $USER/miniconda
 
 Then create a new compute environment in the Batch dashboard and specify the newly created launch template in the corresponding field.
 
-## Hybrid deployments
+### Hybrid deployments
 
 Nextflow allows the use of multiple executors in the same workflow application. This feature enables the deployment of hybrid workloads in which some jobs are executed on the local computer or local computing cluster, and some jobs are offloaded to the AWS Batch service.
 
@@ -422,3 +435,12 @@ aws {
 5. Set the queue for the process(es) with the `bigTask` label
 6. Set the container image to deploy for the process(es) with the `bigTask` label
 7. Define the region for Batch execution
+
+!!! cboard-list-2 "Summary"
+
+    In this step you have learned:
+
+    1. How to use a custom job definition
+    2. How to use a custom image
+    3. How to use a launch template
+    4. How to use hybrid deployments
