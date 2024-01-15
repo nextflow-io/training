@@ -26,7 +26,7 @@ Parameters are inputs and options that can be modified when the workflow is exec
 
 The script `script1.nf` defines three workflow input parameters and uses the [groovy `println`](https://www.tutorialspoint.com/groovy/groovy_basic_syntax.htm) command to print one of these to the console.
 
-```groovy
+```groovy linenums="1" title="script1.nf"
 params.reads = "$projectDir/data/ggal/gut_{1,2}.fq"
 params.transcriptome_file = "$projectDir/data/ggal/transcriptome.fa"
 params.multiqc = "$projectDir/multiqc"
@@ -60,7 +60,7 @@ reads: /workspace/gitpod/nf-training/data/ggal/lung_{1,2}.fq
 
     ??? Solution
 
-        ```groovy
+        ```groovy linenums="1" title="script1.nf"
         params.reads = "$projectDir/data/ggal/gut_{1,2}.fq"
         params.transcriptome_file = "$projectDir/data/ggal/transcriptome.fa"
         params.multiqc = "$projectDir/multiqc"
@@ -69,7 +69,7 @@ reads: /workspace/gitpod/nf-training/data/ggal/lung_{1,2}.fq
 
 The `log.info` command can be used to print multiline information using groovy’s logger functionality. Instead of writing a series of `println` commands, it can be used to include a multiline message.
 
-```groovy
+```groovy linenums="1" title="example.nf"
 log.info """\
     This is
     a multiline
@@ -92,7 +92,7 @@ log.info """\
 
         Add the following to your script file:
 
-        ```groovy
+        ```groovy linenums="9" title="script1.nf"
         log.info """\
             R N A S E Q - N F   P I P E L I N E
             ===================================
@@ -123,9 +123,9 @@ A `process` is defined by providing three main declarations:
 
 To add a transcriptome `INDEX` processing step to your pipeline, you will need to add the following code blocks to your `script1.nf`. Alternatively, these code blocks have already been added to `script2.nf`.
 
-```groovy
+```groovy linenums="18" title="script2.nf"
 /*
- * define the INDEX process that creates a binary index
+ * define the `index` process that creates a binary index
  * given the transcriptome file
  */
 process INDEX {
@@ -144,7 +144,7 @@ process INDEX {
 
 Additionally, you will need to add a workflow scope containing an input channel definition and the index process:
 
-```groovy
+```groovy linenums="35" title="script2.nf"
 workflow {
     index_ch = INDEX(params.transcriptome_file)
 }
@@ -174,7 +174,7 @@ Nextflow has support for managing the execution of processes in Docker container
 
 !!! question "Exercise"
 
-    Add the command line option `-with-docker` to launch script2.nf with the docker container:
+    Add the command line option `-with-docker` to launch `script2.nf` with the docker container:
 
     ```bash
     nextflow run script2.nf -with-docker
@@ -192,7 +192,7 @@ To avoid being required to add `-with-docker` to your execution command every ti
 
 Viewing a channel with the [`view`](https://www.nextflow.io/docs/latest/operator.html#view) operator is a useful way to see what is in a channel and is useful for testing and debugging:
 
-```groovy
+```groovy linenums="1" title="example.nf"
 index_ch.view()
 ```
 
@@ -204,13 +204,16 @@ index_ch.view()
 
         Add the following to the end of your workflow block in your script file
 
-        ```groovy
-        index_ch.view()
+        ```groovy linenums="35" title="script2.nf"
+        workflow {
+            index_ch = INDEX(params.transcriptome_file)
+            index_ch.view()
+        }
         ```
 
 Directives are used to specify the execution requirements of a process. For example, the `cpus` directive specifies the number of CPUs required to execute the process. Directives can be added under the `process` declaration.
 
-```
+```groovy linenums="22" title="script2.nf"
 process INDEX {
     cpus 2
     ...
@@ -225,7 +228,7 @@ process INDEX {
 
         Add `cpus 2` to the top of the index process:
 
-        ```groovy
+        ```groovy linenums="22" title="script2.nf"
         process INDEX {
             cpus 2
 
@@ -243,7 +246,7 @@ Nextflow will organizes the process work directory into a series of folders. The
 
     For example, executing `tree work` should look something like this:
 
-```
+```console title="Output"
 work
 ├── 17
 │   └── 263d3517b457de4525513ae5e34ea8
@@ -286,7 +289,7 @@ The `fromFilePairs` channel factory takes a glob pattern as input and returns a 
 
 By adding the `view` operator to the `read_pairs_ch` channel, you can see the contents of the channel:
 
-```groovy
+```groovy linenums="19" title="script3.nf"
 read_pairs_ch.view()
 ```
 
@@ -298,13 +301,13 @@ read_pairs_ch.view()
 
         Add the following to the end of your workflow block in your script file
 
-        ```groovy
+        ```groovy linenums="19" title="script3.nf"
         read_pairs_ch.view()
         ```
 
         It will print something similar to this:
 
-        ```bash
+        ```console title="Output"
         [gut, [/.../data/ggal/gut_1.fq, /.../data/ggal/gut_2.fq]]
         ```
 
@@ -328,7 +331,7 @@ The [`set`](https://www.nextflow.io/docs/latest/operator.html#set) operator can 
 
     ??? Solution
 
-        ```groovy
+        ```groovy linenums="18" title="script3.nf"
         Channel
             .fromFilePairs(params.reads)
             .set { read_pairs_ch }
@@ -342,7 +345,7 @@ Channel factories also have options that can be used to modify their behaviour. 
 
     ??? Solution
 
-        ```groovy
+        ```groovy linenums="18" title="script3.nf"
         Channel
             .fromFilePairs(params.reads, checkIfExists: true)
             .set { read_pairs_ch }
@@ -402,7 +405,7 @@ Nextflow parallelizes the execution of your workflow simply by providing multipl
 
         Add the following before the input declaration:
 
-        ```groovy
+        ```groovy linenums="1" title="script4.nf"
         tag "Salmon on $sample_id"
         ```
 
@@ -414,8 +417,12 @@ Nextflow parallelizes the execution of your workflow simply by providing multipl
 
         Add the following before the `input` declaration in the `QUANTIFICATION` process:
 
-        ```groovy
-        publishDir params.outdir, mode: 'copy'
+        ```groovy linenums="35" title="script4.nf"
+        process QUANTIFICATION {
+            publishDir params.outdir, mode: 'copy'
+
+            input:
+            ...
         ```
 
 !!! cboard-list-2 "Summary"
@@ -453,7 +460,7 @@ It creates the final report in the `results` folder in the current `work` direct
 
 In this script, note the use of the [mix](https://www.nextflow.io/docs/latest/operator.html#mix) and [collect](https://www.nextflow.io/docs/latest/operator.html#collect) operators chained together to gather the outputs of the `QUANTIFICATION` and `FASTQC` processes as a single input. [Operators](https://www.nextflow.io/docs/latest/operator.html) can be used in combinations to combine, split, and transform channels.
 
-```groovy
+```groovy linenums="91" title="script6.nf"
 MULTIQC(quant_ch.mix(fastqc_ch).collect())
 ```
 
@@ -467,7 +474,7 @@ You will only want one task of MultiQC to be executed to produce one report. The
 
         Modify the workflow block to look like this:
 
-        ```groovy
+        ```groovy linenums="83" title="script6.nf"
         workflow {
             Channel
                 .fromFilePairs(params.reads, checkIfExists: true)
@@ -516,7 +523,7 @@ Send a notification email when the workflow execution completes using the `-N <e
 
 Note: this requires the configuration of a SMTP server in the nextflow config file. Below is an example `nextflow.config` file showing the settings you would have to configure:
 
-```groovy
+```groovy linenums="1" title="nextflow.config"
 mail {
     from = 'info@nextflow.io'
     smtp.host = 'email-smtp.eu-west-1.amazonaws.com'
@@ -542,7 +549,7 @@ For example, the `FASTQC` process in `script7.nf` could be replaced by creating 
 
 Create a new file named `fastqc.sh` with the following content:
 
-```bash title="fastqc.sh"
+```bash linenums="1" title="fastqc.sh"
 #!/bin/bash
 set -e
 set -u
@@ -564,7 +571,7 @@ mv fastqc.sh bin
 
 Open the `script7.nf` file and replace the `FASTQC` process’ script with the following code:
 
-```groovy title="script7.nf"
+```groovy linenums="60" title="script7.nf"
 script:
 """
 fastqc.sh "$sample_id" "$reads"
