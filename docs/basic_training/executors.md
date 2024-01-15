@@ -124,7 +124,7 @@ A better strategy consists of annotating the processes with a [label](https://ww
 
 The workflow script:
 
-```groovy linenums="1"
+```groovy linenums="1" title="snippet.nf"
 process TASK1 {
     label 'long'
 
@@ -146,7 +146,7 @@ process TASK2 {
 
 The configuration file:
 
-```groovy linenums="1"
+```groovy linenums="1" title="nextflow.config"
 process {
     executor = 'slurm'
 
@@ -168,7 +168,7 @@ process {
 
 Containers can be set for each process in your workflow. You can define their containers in a config file as shown below:
 
-```groovy linenums="1"
+```groovy linenums="1" title="nextflow.config"
 process {
     withName: FOO {
         container = 'some/image:x'
@@ -336,7 +336,7 @@ However, you may still need to specify a custom Job Definition to provide fine-g
 
 To use your own job definition in a Nextflow workflow, use it in place of the container image name, prefixing it with the `job-definition://` string. For example:
 
-```groovy
+```groovy linenums="1" title="nextflow.config"
 process {
     container = 'job-definition://your-job-definition-name'
 }
@@ -411,7 +411,7 @@ To enable this feature use one or more [process selectors](https://www.nextflow.
 
 For example, apply the [AWS Batch configuration](https://www.nextflow.io/docs/latest/awscloud.html#awscloud-batch-config) only to a subset of processes in your workflow. You can try the following:
 
-```groovy linenums="1"
+```groovy linenums="1" title="nextflow.config"
 process {
     executor = 'slurm' // (1)!
     queue = 'short' // (2)!
