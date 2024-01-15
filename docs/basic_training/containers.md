@@ -693,7 +693,7 @@ Nextflow automatically sets up an environment for the given package names listed
 
         and
 
-        ```groovy title="script5.nf" linenums="35"
+        ```groovy title="script5.nf" linenums="35 git "
         process QUANTIFICATION {
             tag "Salmon on $sample_id"
             container 'quay.io/biocontainers/salmon:1.7.0--h84f40af_0'
