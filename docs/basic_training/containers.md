@@ -87,7 +87,7 @@ To exit from the container, stop the BASH session with the `exit` command.
 
 Docker images are created by using a so-called `Dockerfile`, a simple text file containing a list of commands to assemble and configure the image with the software packages required. For example, a Dockerfile to create a container with `cowsay` and installed could be as simple as this:
 
-```dockerfile linenums="1"
+```dockerfile linenums="1" title="Dockerfile"
 FROM debian:bullseye-slim
 
 LABEL image.author.name "Your Name Here"
