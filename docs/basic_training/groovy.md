@@ -13,7 +13,7 @@ You have already been using some Groovy code in the previous sections, but now i
 
 To print something is as easy as using one of the `print` or `println` methods.
 
-```groovy linenums="1"
+```groovy linenums="1" title="snippet.nf"
 println("Hello, World!")
 ```
 
@@ -315,7 +315,7 @@ tic    ac    oe
 
 A block of text that spans multiple lines can be defined by delimiting it with triple single or double quotes:
 
-```groovy linenums="1"
+```groovy linenums="1" title="snippet.nf"
 text = """
     Hello there James.
     How are you today?
@@ -330,7 +330,7 @@ How are you today?
 
 Finally, multi-line strings can also be defined with slashy strings. For example:
 
-```groovy linenums="1"
+```groovy linenums="1" title="snippet.nf"
 text = /
     This is a multi-line
     slashy string!
@@ -370,7 +370,7 @@ else {
 
 The `else` branch is optional. Also, the curly brackets are optional when the branch defines just a single statement.
 
-```groovy linenums="1"
+```groovy linenums="1" title="snippet.nf"
 x = 1
 if (x > 10)
     println 'Hello'
@@ -386,7 +386,7 @@ Hello
 
     Therefore a statement like:
 
-    ```groovy linenums="1"
+    ```groovy linenums="1" title="snippet.nf"
     list = [1, 2, 3]
     if (list != null && list.size() > 0) {
         println list
@@ -398,7 +398,7 @@ Hello
 
     Can be written as:
 
-    ```groovy linenums="1"
+    ```groovy linenums="1" title="snippet.nf"
     list = [1, 2, 3]
     if (list)
         println list
@@ -412,13 +412,13 @@ Hello
 
     In some cases it can be useful to replace the `if` statement with a ternary expression (aka a conditional expression):
 
-    ```groovy linenums="1"
+    ```groovy linenums="1" title="snippet.nf"
     println list ? list : 'The list is empty'
     ```
 
     The previous statement can be further simplified using the [Elvis operator](http://groovy-lang.org/operators.html#_elvis_operator):
 
-    ```groovy linenums="1"
+    ```groovy linenums="1" title="snippet.nf"
     println list ?: 'The list is empty'
     ```
 
@@ -497,7 +497,7 @@ A function can take multiple arguments separating them with a comma.
 
 The `return` keyword can be omitted and the function implicitly returns the value of the last evaluated expression. Also, explicit types can be omitted, though not recommended:
 
-```groovy linenums="1"
+```groovy linenums="1" title="snippet.nf"
 def fact(n) {
     n > 1 ? n * fact(n - 1) : 1
 }
