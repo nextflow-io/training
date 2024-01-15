@@ -405,8 +405,12 @@ Nextflow parallelizes the execution of your workflow simply by providing multipl
 
         Add the following before the input declaration:
 
-        ```groovy linenums="1" title="script4.nf"
-        tag "Salmon on $sample_id"
+        ```groovy linenums="35" title="script4.nf"
+        process QUANTIFICATION {
+            tag "Salmon on $sample_id"
+
+            input:
+            ...   
         ```
 
 !!! question "Exercise"
@@ -419,6 +423,7 @@ Nextflow parallelizes the execution of your workflow simply by providing multipl
 
         ```groovy linenums="35" title="script4.nf"
         process QUANTIFICATION {
+            tag "Salmon on $sample_id"
             publishDir params.outdir, mode: 'copy'
 
             input:

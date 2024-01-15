@@ -180,17 +180,15 @@ nextflow run hello.nf
 
 The output will look similar to the text shown below:
 
-```console linenums="1" console title="Output"
+```console title="Output"
 N E X T F L O W  ~  version 23.04.1
-Launching `hello.nf` [cheeky_keller] DSL2 - revision: 197a0e289a
+Launching hello.nf [cheeky_keller] DSL2 - revision: 197a0e289a
 executor >  local (3)
 [31/52c31e] process > SPLITLETTERS (1)   [100%] 1 of 1 ✔
 [37/b9332f] process > CONVERTTOUPPER (2) [100%] 2 of 2 ✔
 HELLO
 WORLD!
 ```
-
-The standard output shows (line by line):
 
 1. The version of Nextflow that was executed.
 2. The script and version names.
