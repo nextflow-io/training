@@ -71,7 +71,7 @@ There are cases in which a process error may be expected and it should not stop 
 
 To handle this use case, set the process `errorStrategy` to `ignore`:
 
-```groovy linenums="1"
+```groovy linenums="1" title="snippet.nf"
 process FOO {
     errorStrategy 'ignore'
 
@@ -92,7 +92,7 @@ process.errorStrategy = 'ignore'
 
 In rare cases, errors may be caused by transient conditions. In this situation, an effective strategy is re-executing the failing task.
 
-```groovy linenums="1"
+```groovy linenums="1" title="snippet.nf"
 process FOO {
     errorStrategy 'retry'
 
@@ -111,7 +111,7 @@ The directive [maxRetries](https://www.nextflow.io/docs/latest/process.html#maxr
 
 There are cases in which the required execution resources may be temporarily unavailable (e.g. network congestion). In these cases simply re-executing the same task will likely result in an identical error. A retry with an exponential backoff delay can better recover these error conditions.
 
-```groovy linenums="1"
+```groovy linenums="1" title="snippet.nf"
 process FOO {
     errorStrategy { sleep(Math.pow(2, task.attempt) * 200 as long); return 'retry' }
     maxRetries 5
@@ -129,7 +129,7 @@ It’s a very common scenario that different instances of the same process may h
 
 To handle this use case, you can use a `retry` error strategy and increase the computing resources allocated by the task at each successive _attempt_.
 
-```groovy linenums="1"
+```groovy linenums="1" title="snippet.nf"
 process FOO {
     cpus 4
     memory { 2.GB * task.attempt } // (1)!
