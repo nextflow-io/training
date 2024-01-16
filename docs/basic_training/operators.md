@@ -25,7 +25,7 @@ The `map` operator applies a function of your choosing to every item emitted by 
 
     Click the :material-plus-circle: icons in the code for explanations.
 
-```groovy linenums="1"
+```groovy linenums="1" title="snippet.nf"
 nums = Channel.of(1, 2, 3, 4) // (1)!
 square = nums.map { it -> it * it } // (2)!
 square.view() // (3)!
@@ -41,7 +41,7 @@ square.view() // (3)!
 
 Operators can also be chained to implement custom behaviors, so the previous snippet can also be written as:
 
-```groovy linenums="1"
+```groovy linenums="1" title="snippet.nf"
 Channel
     .of(1, 2, 3, 4)
     .map { it -> it * it }
@@ -259,7 +259,7 @@ This operator is especially useful to process a group together with all the elem
 
 The `join` operator creates a channel that joins together the items emitted by two channels with a matching key. The key is defined, by default, as the first element in each item emitted.
 
-```groovy linenums="1"
+```groovy linenums="1" title="snippet.nf"
 left = Channel.of(['X', 1], ['Y', 2], ['Z', 3], ['P', 7])
 right = Channel.of(['Z', 6], ['Y', 5], ['X', 4])
 left.join(right).view()
@@ -281,7 +281,7 @@ The `branch` operator allows you to forward the items emitted by a source channe
 
 The selection criterion is defined by specifying a closure that provides one or more boolean expressions, each of which is identified by a unique label. For the first expression that evaluates to a true value, the item is bound to a named channel as the label identifier.
 
-```groovy linenums="1"
+```groovy linenums="1" title="snippet.nf"
 Channel
     .of(1, 2, 3, 40, 50)
     .branch {
@@ -327,7 +327,7 @@ result.large.view { "$it is large" }
 
 The `splitText` operator allows you to split multi-line strings or text file items, emitted by a source channel into chunks containing _n_ lines, which will be emitted by the resulting channel.
 
-```groovy linenums="1"
+```groovy linenums="1" title="snippet.nf"
 Channel
     .fromPath('data/meta/random.txt') // (1)!
     .splitText() // (2)!
@@ -348,12 +348,11 @@ It has survived not only five centuries, but also the leap into electronic types
 
 You can define the number of lines in each chunk by using the parameter `by`, as shown in the following example:
 
-```groovy linenums="1"
+```groovy linenums="1" title="snippet.nf"
 Channel
     .fromPath('data/meta/random.txt')
     .splitText(by: 2)
     .view()
-    }
 ```
 
 ```console title="Output"
@@ -391,7 +390,7 @@ It then splits them into records or groups them as a list of records with a spec
 
 In the simplest case, just apply the `splitCsv` operator to a channel emitting a CSV formatted text files or text entries. For example, to view only the first and fourth columns:
 
-```groovy linenums="1"
+```groovy linenums="1" title="snippet.nf"
 Channel
     .fromPath("data/meta/patients_1.csv")
     .splitCsv()
@@ -412,7 +411,7 @@ ATX-TBL-001-GB-03-103, 3
 
 When the CSV begins with a header line defining the column names, you can specify the parameter `header: true` which allows you to reference each value by its column name, as shown in the following example:
 
-```groovy linenums="1"
+```groovy linenums="1" title="snippet.nf"
 Channel
     .fromPath("data/meta/patients_1.csv")
     .splitCsv(header: true)
@@ -422,7 +421,7 @@ Channel
 
 Alternatively, you can provide custom header names by specifying a list of strings in the header parameter as shown below:
 
-```groovy linenums="1"
+```groovy linenums="1" title="snippet.nf"
 Channel
     .fromPath("data/meta/patients_1.csv")
     .splitCsv(header: ['col1', 'col2', 'col3', 'col4', 'col5'])
@@ -443,7 +442,7 @@ ATX-TBL-001-GB-03-103, 3
 
 You can also process multiple CSV files at the same time:
 
-```groovy linenums="1"
+```groovy linenums="1" title="snippet.nf"
 Channel
     .fromPath("data/meta/patients_*.csv") // <-- just use a pattern
     .splitCsv(header: true)
@@ -519,7 +518,7 @@ Finally, you can also operate on CSV files outside the channel context:
 
         Repeat the above for the fastqc step.
 
-        ```groovy linenums="1"  hl_lines="5 13"
+        ```groovy linenums="1" hl_lines="5 13" title="script7.nf"
         process FASTQC {
             tag "FASTQC on $sample_id"
 
@@ -553,7 +552,7 @@ Channel
 
     ??? solution
 
-        ```groovy linenums="1"
+        ```groovy linenums="1" title="snippet.nf"
         Channel
             .fromPath("data/meta/regions.tsv", checkIfExists: true)
             // use `sep` option to parse TAB separated files

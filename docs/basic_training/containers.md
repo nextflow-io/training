@@ -75,7 +75,7 @@ docker images
 
 Launching a BASH shell in the container allows you to operate in an interactive mode in the containerized operating system. For example:
 
-```
+```bash
 docker run -it debian:bullseye-slim bash
 ```
 
@@ -87,7 +87,7 @@ To exit from the container, stop the BASH session with the `exit` command.
 
 Docker images are created by using a so-called `Dockerfile`, a simple text file containing a list of commands to assemble and configure the image with the software packages required. For example, a Dockerfile to create a container with `cowsay` and installed could be as simple as this:
 
-```dockerfile
+```dockerfile linenums="1" title="Dockerfile"
 FROM debian:bullseye-slim
 
 LABEL image.author.name "Your Name Here"
@@ -128,7 +128,7 @@ docker images
 
         Use your favorite editor (e.g., `vim` or `nano`) to create a file named `Dockerfile`. Alternatively, run `code Dockerfile` to create a a file named `Dockerfile` in GitPod. Copy the following content:
 
-        ```dockerfile
+        ```dockerfile linenums="1" title="Dockerfile"
         FROM debian:bullseye-slim
 
         LABEL image.author.name "Your Name Here"
@@ -157,7 +157,7 @@ Additional tools can be added to the image by adding the appropriate `RUN` comma
 
 For example, to add the `salmon` tool to the image, you would add the following line to the bottom of your Dockerfile:
 
-```dockerfile
+```dockerfile linenums="10" title="Dockerfile"
 RUN curl -sSL https://github.com/COMBINE-lab/salmon/releases/download/v1.5.2/salmon-1.5.2_linux_x86_64.tar.gz | tar xz \
 && mv /salmon-*/bin/* /usr/bin/ \
 && mv /salmon-*/lib/* /usr/lib/
@@ -177,7 +177,7 @@ docker build -t my-image .
 
         Open your Dockerfile and add the following lines to the bottom of the file:
 
-        ```dockerfile
+        ```dockerfile linenums="10" title="Dockerfile"
         RUN curl -sSL https://github.com/COMBINE-lab/salmon/releases/download/v1.5.2/salmon-1.5.2_linux_x86_64.tar.gz | tar xz \
         && mv /salmon-*/bin/* /usr/bin/ \
         && mv /salmon-*/lib/* /usr/lib/
@@ -289,7 +289,7 @@ docker pull <user-name>/my-image
 
 Note how after a pull and push operation, Docker prints the container digest number e.g.
 
-```console
+```console title="Output"
 Digest: sha256:aeacbd7ea1154f263cda972a96920fb228b2033544c2641476350b9317dab266
 Status: Downloaded newer image for nextflow/rnaseq-nf:latest
 ```
@@ -336,7 +336,7 @@ A Singularity container image is archived as a plain file that can be stored in 
 
 Singularity images are created using a `Singularity` file in a similar manner to Docker but using a different syntax.
 
-```singularity
+```singularity title="Singularity" linenums="1"
 Bootstrap: docker
 From: debian:bullseye-slim
 
@@ -444,7 +444,7 @@ bash
 
 There is already a file named `env.yml` in the `nf-training` folder as an example. Its content is shown below:
 
-```yaml title="nf-training/env.yml"
+```yaml title="nf-training/env.yml" linenums="1"
 --8<-- "nf-training/env.yml"
 ```
 
@@ -464,7 +464,7 @@ conda env list
 
 This output will look something like this:
 
-```bash
+```console title="Output"
 # conda environments:
 #
 base                  *  /opt/conda
@@ -503,7 +503,7 @@ To do this, you simply require a `Dockerfile` and you use micromamba to install 
 
 Using the same `env.yml` from above, you can write a Dockerfile with `micromamba` installing the packages from the recipe file. For example:
 
-```dockerfile title="Dockerfile"
+```dockerfile title="Dockerfile" linenums="1"
 FROM mambaorg/micromamba:0.25.1
 
 LABEL image.author.name "Your Name Here"
@@ -533,7 +533,7 @@ The above `Dockerfile` takes the parent image _mambaorg/micromamba_, installs a 
 
         Make a file called `Dockerfile` in the current directory.
 
-        ```dockerfile title="Dockerfile"
+        ```dockerfile title="Dockerfile" linenums="1"
         FROM mambaorg/micromamba:0.25.1
 
         LABEL image.author.name "Your Name Here"
@@ -569,15 +569,15 @@ The above `Dockerfile` takes the parent image _mambaorg/micromamba_, installs a 
 
         Add the container image name to the `nextflow.config` file.
 
-        e.g. remove the following from the `nextflow.config`:
+        For example, remove the following from the `nextflow.config`:
 
-        ```groovy
+        ```groovy title="nextflow.config" linenums="1"
         process.container = 'nextflow/rnaseq-nf'
         ```
 
         Replace it with:
 
-        ```groovy
+        ```groovy title="nextflow.config" linenums="1"
         process.container = '<myrepo>/my-image'
         ```
 
@@ -652,7 +652,7 @@ They must be entered at the top of the process body, before any other declaratio
 
 The `container` directive allows you to execute the process script in a Docker container.
 
-```groovy
+```groovy title="example.nf" linenums="1"
 process FASTQC {
     container 'biocontainers/fastqc:v0.11.5'
     tag "FASTQC on $sample_id"
@@ -663,7 +663,7 @@ process FASTQC {
 
 Similarly, the `conda` directive allows for the definition of the process dependencies using the Conda package manager.
 
-```groovy
+```groovy title="example.nf" linenums="1"
 process FASTQC {
     conda 'fastqc=0.11.5'
     tag "FASTQC on $sample_id"
@@ -684,7 +684,7 @@ Nextflow automatically sets up an environment for the given package names listed
 
         Add the container directive with the appropriate BioContainers to the `FASTQC` and `QUANTIFICATION` processes in `script5.nf`:
 
-        ```groovy
+        ```groovy title="script5.nf" linenums="52"
         process FASTQC {
             container 'biocontainers/fastqc:v0.11.5'
             tag "FASTQC on $sample_id"
@@ -693,7 +693,7 @@ Nextflow automatically sets up an environment for the given package names listed
 
         and
 
-        ```groovy
+        ```groovy title="script5.nf" linenums="35 git "
         process QUANTIFICATION {
             tag "Salmon on $sample_id"
             container 'quay.io/biocontainers/salmon:1.7.0--h84f40af_0'

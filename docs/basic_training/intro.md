@@ -180,17 +180,15 @@ nextflow run hello.nf
 
 The output will look similar to the text shown below:
 
-```linenums="1"
+```console title="Output"
 N E X T F L O W  ~  version 23.04.1
-Launching `hello.nf` [cheeky_keller] DSL2 - revision: 197a0e289a
+Launching hello.nf [cheeky_keller] DSL2 - revision: 197a0e289a
 executor >  local (3)
 [31/52c31e] process > SPLITLETTERS (1)   [100%] 1 of 1 ✔
 [37/b9332f] process > CONVERTTOUPPER (2) [100%] 2 of 2 ✔
 HELLO
 WORLD!
 ```
-
-The standard output shows (line by line):
 
 1. The version of Nextflow that was executed.
 2. The script and version names.
@@ -211,7 +209,7 @@ It’s worth noting that the process `CONVERTTOUPPER` is executed in parallel, s
 
 Thus, it could be that your final result will be printed out in a different order:
 
-```console
+```console title="Output"
 WORLD!
 HELLO
 ```
@@ -224,7 +222,7 @@ This allows for testing or modifying part of your workflow without having to re-
 
 For the sake of this tutorial, modify the `CONVERTTOUPPER` process in the previous example, replacing the process script with the string `rev $y`, so that the process looks like this:
 
-```groovy
+```groovy title="nf-training/hello.nf" linenums="18"
 process CONVERTTOUPPER {
     input:
     path y
@@ -241,9 +239,11 @@ process CONVERTTOUPPER {
 
 Then save the file with the same name, and execute it by adding the `-resume` option to the command line:
 
-```console
+```bash
 $ nextflow run hello.nf -resume
+```
 
+```console title="Output"
 N E X T F L O W  ~  version 23.04.1
 Launching `hello.nf` [zen_colden] DSL2 - revision: 0676c711e8
 executor >  local (2)
@@ -271,7 +271,7 @@ nextflow run hello.nf --greeting 'Bonjour le monde!'
 
 The string specified on the command line will override the default value of the parameter. The output will look like this:
 
-```
+```console title="Output"
 N E X T F L O W  ~  version 23.04.1
 Launching `hello.nf` [goofy_kare] DSL2 - revision: 0676c711e8
 executor >  local (4)

@@ -11,7 +11,7 @@ The `process` definition starts with the keyword `process`, followed by the proc
 
 A basic `process`, only using the `script` definition block, looks like the following:
 
-```groovy linenums="1"
+```groovy linenums="1" title="snippet.nf"
 process SAYHELLO {
     script:
     """
@@ -323,7 +323,7 @@ workflow {
 
 In the above example the process is executed three times, each time a value is received from the channel `num` it is used by the script. Thus, it results in an output similar to the one shown below:
 
-```console
+```console title="Output"
 process job 1
 process job 2
 process job 3
@@ -403,7 +403,7 @@ gut_1.fq
 
 The same syntax is also able to handle more than one input file in the same execution and only requires changing the channel composition using an operator (e.g., `collect`).
 
-```groovy linenums="1"
+```groovy linenums="1" title="snippet.nf"
 reads = Channel.fromPath('data/ggal/*.fq')
 
 process FOO {
@@ -444,7 +444,7 @@ A key feature of processes is the ability to handle inputs from multiple channel
 
 Consider the following example:
 
-```groovy linenums="1"
+```groovy linenums="1" title="snippet.nf"
 ch1 = Channel.of(1, 2, 3)
 ch2 = Channel.of('a', 'b', 'c')
 
@@ -576,19 +576,13 @@ As `ch2` is now a _value_ channel, it can be consumed multiple times and do not 
         }
         ```
 
-        workflow {
-            concat_ch = COMMAND(read_ch, params.transcriptome_file)
-            concat_ch.view()
-        }
-        ```
-
         You may also consider using other Channel factories or operators to create your input channels.
 
 ### Input repeaters
 
 The `each` qualifier allows you to repeat the execution of a process for each item in a collection every time new data is received. For example:
 
-```groovy linenums="1"
+```groovy linenums="1" title="snippet.nf"
 sequences = Channel.fromPath("$baseDir/data/ggal/*_1.fq")
 methods = ['regular', 'espresso']
 
@@ -806,7 +800,7 @@ Some caveats on glob pattern behavior:
 
 When an output file name needs to be expressed dynamically, it is possible to define it using a dynamic string that references values defined in the input declaration block or in the script global context. For example:
 
-```groovy linenums="1"
+```groovy linenums="1" title="snippet.nf"
 species = ['cat', 'dog', 'sloth']
 sequences = ['AGATAG', 'ATGCTCT', 'ATCCCAA']
 
@@ -878,7 +872,7 @@ The output will looks something like this:
 
     ??? solution
 
-        ```groovy linenums="1"
+        ```groovy linenums="1" title="snippet.nf"
         reads_ch = Channel.fromFilePairs('data/ggal/*_{1,2}.fq')
 
         process FOO {
@@ -1032,7 +1026,7 @@ The `when` declaration allows you to define a condition that must be verified in
 
 It is useful to enable/disable the process execution depending on the state of various inputs and parameters. For example:
 
-```groovy linenums="1"
+```groovy linenums="1" title="snippet.nf"
 params.dbtype = 'nr'
 params.prot = 'data/prots/*.tfa'
 proteins = Channel.fromPath(params.prot)
@@ -1120,7 +1114,7 @@ Given each task is being executed in separate temporary `work/` folder (e.g., `w
 
 To store our workflow result files, you need to explicitly mark them using the directive [publishDir](https://www.nextflow.io/docs/latest/process.html#publishdir) in the process that’s creating the files. For example:
 
-```groovy linenums="1"
+```groovy linenums="1" title="snippet.nf"
 reads_ch = Channel.fromFilePairs('data/ggal/*_{1,2}.fq')
 
 process FOO {
@@ -1153,7 +1147,7 @@ The above example will copy all blast script files created by the `BLASTSEQ` pro
 
 You can use more than one `publishDir` to keep different outputs in separate directories. For example:
 
-```groovy linenums="1"
+```groovy linenums="1" title="snippet.nf"
 reads_ch = Channel.fromFilePairs('data/ggal/*_{1,2}.fq')
 
 process FOO {
@@ -1187,7 +1181,7 @@ workflow {
 
         Your solution could look something like this:
 
-        ```groovy linenums="1"
+        ```groovy linenums="1" title="snippet.nf"
         reads_ch = Channel.fromFilePairs('data/ggal/*_{1,2}.fq')
 
         process FOO {
