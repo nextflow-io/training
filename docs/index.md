@@ -17,12 +17,11 @@ They are hosted in a [GitHub repository](https://github.com/nextflow-io/training
 Whilst you can follow the materials any time, you'll probably get most out of them by joining an organised training event.
 Free online events are organised regularly with the nf-core community, see the [nf-core events page](https://nf-co.re/events) for more.
 
+We have several workshops available on this website - find the one that's right for you!
+
 [![Open in GitPod](https://img.shields.io/badge/Gitpod-%20Open%20in%20Gitpod-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/nextflow-io/training)
 
-## Available workshops
-
-We have several workshops available on this website.
-Find the one that's right for you:
+## Nextflow Training
 
 !!! exercise "Foundational Training"
 
@@ -44,7 +43,9 @@ Find the one that's right for you:
 
     [Launch the Advanced Training :material-arrow-right:](advanced/index.md){ .md-button .md-button--primary }
 
-!!! exercise "Hands-on Training"
+## Applied Training
+
+!!! exercise "RNA-seq Variant Calling"
 
     !!! quote inline end ""
 
@@ -52,7 +53,7 @@ Find the one that's right for you:
 
     A "learn by doing" tutorial with less focus on theory, instead leading through exercises of slowly increasing complexity.
 
-    [Launch the Hands-on Training :material-arrow-right:](hands_on/index.md){ .md-button }
+    [Launch the RNA-seq Variant Calling Training :material-arrow-right:](hands_on/index.md){ .md-button }
 
 ## Resources
 
