@@ -32,7 +32,7 @@ nav:
           - advanced/configuration.md
           - advanced/summary.md
           - advanced/support.md
-    - Hands-on Training:
+    - RNA-seq Variant Calling:
           - hands_on/index.md
           - hands_on/01_datasets.md
           - hands_on/02_workflow.md

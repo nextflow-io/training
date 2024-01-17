@@ -45,7 +45,7 @@ We have several workshops available on this website - find the one that's right 
 
 ## Applied Training
 
-!!! exercise "RNA-seq Variant Calling"
+!!! exercise "RNA-seq Variant Calling Training"
 
     !!! quote inline end ""
 
