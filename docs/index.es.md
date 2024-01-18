@@ -42,7 +42,7 @@ Encuentra el adecuado para ti:
 
     Un tutorial para "aprender haciendo" con menos enfoque en la teoría, guiándote hacia ejercicios que aumentan en complejidad.
 
-    [Comienza el entrenamiento práctico :material-arrow-right:](hands_on/index.md){ .md-button }
+    [Comienza el entrenamiento práctico :material-arrow-right:](rna-vc/index.md){ .md-button }
 
 ## Recursos
 

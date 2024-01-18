@@ -42,7 +42,7 @@ Trouvez celui qui vous convient le mieux :
 
     Un didacticiel "learn by doing" qui met moins l'accent sur la théorie et propose plutôt des exercices d'une complexité croissante.
 
-    [Lancer la formation pratique :material-arrow-right:](hands_on/index.md){ .md-button }
+    [Lancer la formation pratique :material-arrow-right:](rna-vc/index.md){ .md-button }
 
 ## Resources
 

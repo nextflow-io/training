@@ -38,7 +38,7 @@ nav:
           - rna-vc/02_workflow.md
           - rna-vc/03_setup.md
           - rna-vc/04_implementation.md
-    - Variant Calling:
+    - DNA Variant Calling:
           - dna-vc/index.md
           - dna-vc/setup.md
           - dna-vc/theory.md

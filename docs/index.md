@@ -53,7 +53,7 @@ We have several workshops available on this website - find the one that's right 
 
     A "learn by doing" tutorial with less focus on theory, instead leading through exercises of slowly increasing complexity.
 
-    [Launch the RNA-seq Variant Calling Training :material-arrow-right:](hands_on/index.md){ .md-button }
+    [Launch the RNA-seq Variant Calling Training :material-arrow-right:](rna-vc/index.md){ .md-button }
 
 !!! exercise "DNA Variant Calling Training"
 
@@ -63,7 +63,7 @@ We have several workshops available on this website - find the one that's right 
 
     Material exploring the application of a Nextflow pipeline for variant calling on sequencing data.
 
-    [Launch the Variant Calling Training :material-arrow-right:](dna-vc/index.md){ .md-button .md-button--primary }
+    [Launch the DNA Variant Calling Training :material-arrow-right:](dna-vc/index.md){ .md-button }
 
 ## Resources
 

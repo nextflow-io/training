@@ -8,7 +8,7 @@ The pipeline is organised following the three main analysis blocks we previously
 
 ![sarek_overview](./img/sarek_subway.png)
 
-> The image above is taken from the [nf-core/sarek] v3.3.2 (https://nf-co.re/sarek/3.3.2/docs/output) documentation page.
+> The image above is taken from the [nf-core/sarek](https://nf-co.re/sarek/3.3.2/docs/output) v3.3.2 documentation page.
 
 In each analysis block, the user can choose among a range of different options in terms of aligners, callers and software to carry out the annotation.
 The analysis can also start from different steps, depending the input available and whether it has been partially processed already.
@@ -56,6 +56,8 @@ In the following sections we will first prepare our references, then set our com
     ```bash
     cd /workspace/gitpod/applied-training/dna-vc/
     ```
+
+    > If you are not running this tutorial in GitPod you will need to modify the path.
 
 To configure the pipeline we can create and edit a `nextflow.config` file in our working directory. Parameters set in a `nextflow.config` file in our working directory will override the default settings in the pipeline when the pipeline is launched.
 
