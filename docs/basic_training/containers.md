@@ -552,7 +552,7 @@ The above `Dockerfile` takes the parent image _mambaorg/micromamba_, installs a 
         Build the image:
 
         ```bash
-        docker build -t my-image .`
+        docker build -t my-image .
         ```
 
         Publish the Docker image to your online Docker account.
