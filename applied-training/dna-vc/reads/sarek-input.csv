@@ -1,0 +1,3 @@
+patient,sample,lane,fastq_1,fastq_2
+case,case,L1,/workspace/gitpod/applied-training/dna-vc/reads/case_1.fq.gz,/workspace/gitpod/applied-training/dna-vc/reads/case_2.fq.gz
+control,control,L1,/workspace/gitpod/applied-training/dna-vc/reads/control_1.fq.gz,/workspace/gitpod/applied-training/dna-vc/reads/control_2.fq.gz
