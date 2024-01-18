@@ -29,7 +29,7 @@ We will start by looking at the annotated VCF, which is found at this location i
 
 !!! question "Exercise"
 
-	Move into the working directory containing the annotated VCF file:
+    Move into the working directory containing the annotated VCF file:
 
     ```bash
     cd /workspace/gitpod/applied-training/dna-vc/annotation/haplotypecaller/joint_variant_calling
@@ -39,7 +39,7 @@ Here, we should verify in which order the two samples we used for this analysis 
 
 !!! question "Exercise"
 
-	Verify in which order the two samples we used using `zcat`, `grep` and `cut`:
+    Verify in which order the two samples we used using `zcat`, `grep` and `cut`:
 
     ```bash
     zcat joint_germline_recalibrated_snpEff.ann.vcf.gz | grep "#CHROM" | cut -f 10-

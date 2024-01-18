@@ -51,19 +51,19 @@ In the following sections we will first prepare our references, then set our com
 
 !!! question "Exercise"
 
-	Move into the working directory for this tutorial:
+    Move into the working directory for this tutorial:
 
-	```bash
-	cd /workspace/gitpod/applied-training/dna-vc/
-	```
+    ```bash
+    cd /workspace/gitpod/applied-training/dna-vc/
+    ```
 
 To configure the pipeline we can create and edit a `nextflow.config` file in our working directory. Parameters set in a `nextflow.config` file in our working directory will override the default settings in the pipeline when the pipeline is launched.
 
 !!! question "Exercise"
 
-	Create a `nextflow.config` file in your working directory.
+    Create a `nextflow.config` file in your working directory.
 
-	> This file **must** be called `nextflow.config` and **must** be in your working directory.
+    > This file **must** be called `nextflow.config` and **must** be in your working directory.
 
 ### Enable Docker
 
@@ -71,12 +71,12 @@ In order to run the pipeline on gitpod, we will need to enable docker. Docker is
 
 !!! question "Exercise"
 
-	Add the following lines to your `nextflow.config` as shown below:
+    Add the following lines to your `nextflow.config` as shown below:
 
-	```groovy title="nextflow.config" linenums="1"
-	docker.enabled = true
-	docker.runOptions = '-u $(id -u):$(id -g)'
-	```
+    ```groovy title="nextflow.config" linenums="1"
+    docker.enabled = true
+    docker.runOptions = '-u $(id -u):$(id -g)'
+    ```
 
 ### Reference Genome
 
@@ -85,35 +85,35 @@ It is sufficient to add the following code to the `parameters` directive in the 
 
 !!! question "Exercise"
 
-	Add the following lines to your `nextflow.config` as shown below:
+    Add the following lines to your `nextflow.config` as shown below:
 
-	```groovy title="nextflow.config" linenums="4"
-	igenomes_base = '/workspace/gitpod/applied-training/dna-vc/refs/'
+    ```groovy title="nextflow.config" linenums="4"
+    igenomes_base = '/workspace/gitpod/applied-training/dna-vc/refs/'
 
-	params {
-		genomes {
-			'GRCh38chr21' {
-				bwa                   = "${params.igenomes_base}/sequence/Homo_sapiens_assembly38_chr21.fasta.{amb,ann,bwt,pac,sa}"
-				dbsnp                 = "${params.igenomes_base}/annotations/dbsnp_146.hg38_chr21.vcf.gz"
-				dbsnp_tbi             = "${params.igenomes_base}/annotations/dbsnp_146.hg38_chr21.vcf.gz.tbi"
-				dbsnp_vqsr            = '--resource:dbsnp,known=false,training=true,truth=false,prior=2.0 dbsnp_146.hg38_chr21.vcf.gz'
-				dict                  = "${params.igenomes_base}/sequence/Homo_sapiens_assembly38_chr21.dict"
-				fasta                 = "${params.igenomes_base}/sequence/Homo_sapiens_assembly38_chr21.fasta"
-				fasta_fai             = "${params.igenomes_base}/sequence/Homo_sapiens_assembly38_chr21.fasta.fai"
-				germline_resource     = "${params.igenomes_base}/annotations/gnomAD.r2.1.1.GRCh38.PASS.AC.AF.only_chr21.vcf.gz"
-				germline_resource_tbi = "${params.igenomes_base}/annotations/gnomAD.r2.1.1.GRCh38.PASS.AC.AF.only_chr21.vcf.gz.tbi"
-				known_snps            = "${params.igenomes_base}/annotations/1000G_phase1.snps.high_confidence.hg38_chr21.vcf.gz"
-				known_snps_tbi        = "${params.igenomes_base}/annotations/1000G_phase1.snps.high_confidence.hg38_chr21.vcf.gz.tbi"
-				known_snps_vqsr       = '--resource:1000G,known=false,training=true,truth=true,prior=10.0 1000G_phase1.snps.high_confidence.hg38_chr21.vcf.gz'
-				known_indels          = "${params.igenomes_base}/annotations/Mills_and_1000G_gold_standard.indels.hg38_chr21.vcf.gz"
-				known_indels_tbi      = "${params.igenomes_base}/annotations/Mills_and_1000G_gold_standard.indels.hg38_chr21.vcf.gz.tbi"
-				known_indels_vqsr     = '--resource:mills,known=false,training=true,truth=true,prior=10.0 Mills_and_1000G_gold_standard.indels.hg38_chr21.vcf.gz'
-				snpeff_db     = '105'
-				snpeff_genome = 'GRCh38'
-			}
-		}
-	}
-	```
+    params {
+    	genomes {
+    		'GRCh38chr21' {
+    			bwa                   = "${params.igenomes_base}/sequence/Homo_sapiens_assembly38_chr21.fasta.{amb,ann,bwt,pac,sa}"
+    			dbsnp                 = "${params.igenomes_base}/annotations/dbsnp_146.hg38_chr21.vcf.gz"
+    			dbsnp_tbi             = "${params.igenomes_base}/annotations/dbsnp_146.hg38_chr21.vcf.gz.tbi"
+    			dbsnp_vqsr            = '--resource:dbsnp,known=false,training=true,truth=false,prior=2.0 dbsnp_146.hg38_chr21.vcf.gz'
+    			dict                  = "${params.igenomes_base}/sequence/Homo_sapiens_assembly38_chr21.dict"
+    			fasta                 = "${params.igenomes_base}/sequence/Homo_sapiens_assembly38_chr21.fasta"
+    			fasta_fai             = "${params.igenomes_base}/sequence/Homo_sapiens_assembly38_chr21.fasta.fai"
+    			germline_resource     = "${params.igenomes_base}/annotations/gnomAD.r2.1.1.GRCh38.PASS.AC.AF.only_chr21.vcf.gz"
+    			germline_resource_tbi = "${params.igenomes_base}/annotations/gnomAD.r2.1.1.GRCh38.PASS.AC.AF.only_chr21.vcf.gz.tbi"
+    			known_snps            = "${params.igenomes_base}/annotations/1000G_phase1.snps.high_confidence.hg38_chr21.vcf.gz"
+    			known_snps_tbi        = "${params.igenomes_base}/annotations/1000G_phase1.snps.high_confidence.hg38_chr21.vcf.gz.tbi"
+    			known_snps_vqsr       = '--resource:1000G,known=false,training=true,truth=true,prior=10.0 1000G_phase1.snps.high_confidence.hg38_chr21.vcf.gz'
+    			known_indels          = "${params.igenomes_base}/annotations/Mills_and_1000G_gold_standard.indels.hg38_chr21.vcf.gz"
+    			known_indels_tbi      = "${params.igenomes_base}/annotations/Mills_and_1000G_gold_standard.indels.hg38_chr21.vcf.gz.tbi"
+    			known_indels_vqsr     = '--resource:mills,known=false,training=true,truth=true,prior=10.0 Mills_and_1000G_gold_standard.indels.hg38_chr21.vcf.gz'
+    			snpeff_db     = '105'
+    			snpeff_genome = 'GRCh38'
+    		}
+    	}
+    }
+    ```
 
 ### Computing resources
 
@@ -122,18 +122,18 @@ They can be added below the parameters directive in the `nextflow.config` file w
 
 !!! question "Exercise"
 
-	Edit the `nextflow.config` as shown below:
+    Edit the `nextflow.config` as shown below:
 
-	Add the following lines to your `nextflow.config` as shown below:
-	
-	```groovy title="nextflow.config" linenums="30"
-	params {
-		max_cpus                  = 2
-		max_memory                = '6.5GB'
-		max_time                  = '2.h'
-		use_annotation_cache_keys = true
-	}
-	```
+    Add the following lines to your `nextflow.config` as shown below:
+
+    ```groovy title="nextflow.config" linenums="30"
+    params {
+    	max_cpus                  = 2
+    	max_memory                = '6.5GB'
+    	max_time                  = '2.h'
+    	use_annotation_cache_keys = true
+    }
+    ```
 
 The parameter `use_annotation_cache_keys` allows the annotation software to deal with the local paths when the cache is downloaded on the environment.
 
@@ -147,27 +147,27 @@ We can do this by editing the process descriptors for the Sarek modules running 
 
 !!! question "Exercise"
 
-	Edit the `nextflow.config` as shown below:
+    Edit the `nextflow.config` as shown below:
 
-	```groovy title="nextflow.config" linenums="37"
-	process {
-		withName: 'VARIANTRECALIBRATOR_INDEL' {
-			ext.prefix = { "${meta.id}_INDEL" }
-			ext.args   = "-an QD -an FS -an SOR -an DP  -mode INDEL"
-			publishDir = [
-				enabled: false
-			]
-		}
+    ```groovy title="nextflow.config" linenums="37"
+    process {
+    	withName: 'VARIANTRECALIBRATOR_INDEL' {
+    		ext.prefix = { "${meta.id}_INDEL" }
+    		ext.args   = "-an QD -an FS -an SOR -an DP  -mode INDEL"
+    		publishDir = [
+    			enabled: false
+    		]
+    	}
 
-		withName: 'VARIANTRECALIBRATOR_SNP' {
-			ext.prefix = { "${meta.id}_SNP" }
-			ext.args   = "-an QD -an MQ -an FS -an SOR -mode SNP"
-			publishDir = [
-				enabled: false
-			]
-		}
-	}
-	```
+    	withName: 'VARIANTRECALIBRATOR_SNP' {
+    		ext.prefix = { "${meta.id}_SNP" }
+    		ext.args   = "-an QD -an MQ -an FS -an SOR -mode SNP"
+    		publishDir = [
+    			enabled: false
+    		]
+    	}
+    }
+    ```
 
 ### Launching the pipeline
 
@@ -175,19 +175,19 @@ Now we are ready to launch the pipeline, and we can use the following command li
 
 !!! question "Exercise"
 
-	Launch the pipeline using the command below:
+    Launch the pipeline using the command below:
 
-	```bash
-	nextflow run nf-core/sarek \
-	--input /workspace/gitpod/applied-training/dna-vc/reads/sarek-input.csv \
-	--outdir . \
-	--tools haplotypecaller,snpeff \
-	--genome GRCh38chr21 \
-	--joint_germline \
-	--intervals /workspace/gitpod/applied-training/dna-vc/variantcalling/exome_target_hg38_chr21.bed \
-	--wes
-	-r 3.3.2
-	```
+    ```bash
+    nextflow run nf-core/sarek \
+    --input /workspace/gitpod/applied-training/dna-vc/reads/sarek-input.csv \
+    --outdir . \
+    --tools haplotypecaller,snpeff \
+    --genome GRCh38chr21 \
+    --joint_germline \
+    --intervals /workspace/gitpod/applied-training/dna-vc/variantcalling/exome_target_hg38_chr21.bed \
+    --wes
+    -r 3.3.2
+    ```
 
 Notice that we have selected `--joint_germline` to enable the joint-genotyping workflow, we have specified our library strategy is using a capture with `--wes` and we have provided a bed file with the targets with `--intervals`.
 The target file in this case refers to the capture intervals on chromosome 21 only, where the data have been simulated.
