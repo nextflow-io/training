@@ -63,7 +63,7 @@ We have several workshops available on this website - find the one that's right 
 
     Material exploring the application of a Nextflow pipeline for variant calling on sequencing data.
 
-    [Launch the Variant Calling Training :material-arrow-right:](variantcalling/index.md){ .md-button .md-button--primary }
+    [Launch the Variant Calling Training :material-arrow-right:](dna-vc/index.md){ .md-button .md-button--primary }
 
 ## Resources
 

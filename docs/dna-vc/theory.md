@@ -11,7 +11,7 @@ There are many different approaches for calling variants from sequencing data: h
 Over the years, also thanks to the work carried out by the [GATK team](https://gatk.broadinstitute.org/hc/en-us) at the Broad Institute, there has been a convergence on a "best practices" workflow, which is summarised in the diagram below:
 
 <figure class="excalidraw">
---8<-- "docs/variantcalling/img/overview.excalidraw.svg"
+--8<-- "docs/dna-vc/img/overview.excalidraw.svg"
 </figure>
 
 In this scheme we can identify a few key phases in the workflow. Pre-processing is the first part, where raw data are handled and mapped to a genome reference, to be then transformed in order to increase the accuracy of the following analyses. Then, variant calling is carried out. This is followed by filtering and annotation.
@@ -64,7 +64,7 @@ $$
 Let's use a simple example like the one in the diagram below, where for illustrative purposes we only consider the bases belonging to the same read.
 
 <figure class="excalidraw">
---8<-- "docs/variantcalling/img/bqsr.excalidraw.svg"
+--8<-- "docs/dna-vc/img/bqsr.excalidraw.svg"
 </figure>
 
 In this example we have 3 mismatches, but one is a reported variant site: we therefore only count 2 errors, over 10 observed bases. According to the approach we just explained,

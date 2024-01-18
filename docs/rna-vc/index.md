@@ -4,9 +4,9 @@ hide:
     - toc
 ---
 
-# Nextflow course - Hands-on
+# Nextflow course - RNA-seq variant calling
 
-This hands-on session shows how to implement a Nextflow Variant Calling analysis pipeline for RNA-seq data that is based on GATK best practices.
+This RNA-seq variant calling session shows how to implement a Nextflow Variant Calling analysis pipeline for RNA-seq data that is based on GATK best practices.
 
 !!! warning
 
@@ -19,3 +19,5 @@ We run a free online training event for this course approximately every six mont
 <div style="text-align: center;">
     <iframe width="560" height="315" src="https://www.youtube.com/embed/x5klpxczAXA?si=moNZUFGd4veMdtC8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" data-ruffle-polyfilled=""></iframe>
 </div>
+
+> Please note the training had been updated since this video was recorded. However, the principals remain the same. 

@@ -16,7 +16,7 @@ with the goal of narrowing the search space and reducing the number of variants 
 This approach is summarised in the diagram below:
 
 <figure class="excalidraw">
---8<-- "docs/variantcalling/img/interpretation.excalidraw.svg"
+--8<-- "docs/dna-vc/img/interpretation.excalidraw.svg"
 </figure>
 
 Once the list of variants has been reduced, more in-depth analyses of the reported cases and the genomic region in existing databases might be useful to reach a conclusion.

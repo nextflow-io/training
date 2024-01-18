@@ -2,27 +2,27 @@
 
 ## Gitpod
 
-This material intends to be a quick hands-on tutorial on Nextflow, so we prepared a Gitpod environment with everything you need to follow it. Gitpod offers a virtual machine with everything already set up for you, accessible from your web browser or built into your code editor (eg. VSCode). To start, click on the button below.
+This material intends to be a quick applied RNA-seq variant calling tutorial on Nextflow, so we prepared a Gitpod environment with everything you need to follow it. Gitpod offers a virtual machine with everything already set up for you, accessible from your web browser or built into your code editor (eg. VSCode). To start, click on the button below.
 
 [![Open in GitPod](https://img.shields.io/badge/Gitpod-%20Open%20in%20Gitpod-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/nextflow-io/training)
 
 In the gitpod window, you'll see a terminal. Type the following command to switch to the folder of this training material:
 
 ```bash
-cd /workspace/gitpod/hands-on
+cd /workspace/gitpod/rna-vc
 ```
 
 ## Pipeline data
 
-All the files needed for the hands-on activity are stored in the directory shown below:
+All the files needed for the applied activity are stored in the directory shown below:
 
 ```bash
-tree /workspace/gitpod/hands-on
+tree /workspace/gitpod/rna-vc
 ```
 
 ```bash
-/workspace/gitpod/hands-on
-hands-on
+/workspace/gitpod/rna-vc
+rna-vc
 ├── README.md
 ├── bin
 │   └── gghist.R
@@ -91,5 +91,5 @@ Type `exit` to exit the container and come back to your shell.
 Make sure the following R script has execute permissions:
 
 ```bash
-chmod +x /workspace/gitpod/hands-on/bin/gghist.R
+chmod +x /workspace/gitpod/rna-vc/bin/gghist.R
 ```

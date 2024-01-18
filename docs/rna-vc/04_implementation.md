@@ -2,7 +2,7 @@
 
 ## Data preparation
 
-A first step in any pipeline is to prepare the input data. You will find all the data required to run the pipeline in the folder `data` within the `/workspace/gitpod/hands-on` repository directory.
+A first step in any pipeline is to prepare the input data. You will find all the data required to run the pipeline in the folder `data` within the `/workspace/gitpod/rna-vc` repository directory.
 
 There are four data inputs that we will use in this tutorial:
 
@@ -17,10 +17,10 @@ There are four data inputs that we will use in this tutorial:
 
 ## Input parameters
 
-We can begin writing the pipeline by creating and editing a text file called `main.nf` from the `/workspace/gitpod/hands-on` repository directory with your favourite text editor. In this example we are using `code`:
+We can begin writing the pipeline by creating and editing a text file called `main.nf` from the `/workspace/gitpod/rna-vc` repository directory with your favourite text editor. In this example we are using `code`:
 
 ```bash
-cd /workspace/gitpod/hands-on
+cd /workspace/gitpod/rna-vc
 code main.nf
 ```
 
