@@ -167,9 +167,13 @@ The latest releases can be viewed on GitHub [here](https://github.com/nextflow-i
 
 If you want to use a specific version of Nextflow, you can set the `NXF_VER` variable as shown below:
 
-```bash
-export NXF_VER=23.10.0
-```
+!!! question "Exercise"
+
+    Export the version of Nextflow used for this tutorial
+
+    ```bash
+    export NXF_VER=23.10.0
+    ```
 
 !!! Note
 
