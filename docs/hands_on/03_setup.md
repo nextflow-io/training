@@ -12,16 +12,17 @@ In the gitpod window, you'll see a terminal. Type the following command to switc
 cd /workspace/gitpod/hands-on
 ```
 
-## Pipeline data
+## Pipeline data and scripts
 
-All the files needed for the hands-on activity are stored in the directory shown below:
+All the files needed for the hands-on activity are stored in the directory shown below.
+This includes all input data (in the `data` directory) and the scripts
+required by the workflow (in the `bin` directory; see [documentation](https://nextflow.io/docs/latest/sharing.html#bundling-executables-in-the-workflow)).
 
 ```bash
 tree /workspace/gitpod/hands-on
 ```
 
 ```bash
-/workspace/gitpod/hands-on
 hands-on
 ├── README.md
 ├── bin
@@ -45,9 +46,17 @@ hands-on
 │       └── ENCSR000CPO2_2.fastq.gz
 ├── final_main.nf
 └── nextflow.config
-```
 
 4 directories, 19 files
+```
+
+### Script permission
+
+Make sure the following R script has execute permissions:
+
+```bash
+chmod +x /workspace/gitpod/hands-on/bin/gghist.R
+```
 
 ## Pulling the Docker image
 
@@ -85,11 +94,3 @@ root@0c3770b24a24:/#
 ```
 
 Type `exit` to exit the container and come back to your shell.
-
-## Script permission
-
-Make sure the following R script has execute permissions:
-
-```bash
-chmod +x /workspace/gitpod/hands-on/bin/gghist.R
-```
