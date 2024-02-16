@@ -79,44 +79,60 @@ h3 .enumerate-headings-plugin {
 }
 
 /* Homepage Seqera-style buttons */
-.md-typeset .md-button {
+*:is(.md-typeset .md-button, .md-banner .md-button) {
     border-radius: 2rem;
     transition: padding 0.2s;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
 }
-.md-typeset .md-button .twemoji {
+*:is(.md-typeset .md-button, .md-banner .md-button) .twemoji {
     height: 1.15rem;
     position: absolute;
     right: 0.5rem;
     top: 25%;
     opacity: 0;
 }
-.md-typeset .md-button svg {
+.md-banner .md-button {
+    padding: 0.3em 0.8em;
+    font-size: 0.8em;
+}
+.md-banner .md-button .twemoji {
+    height: 0.6rem;
+}
+*:is(.md-typeset .md-button, .md-banner .md-button) svg {
     transition: opacity 0.1s;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     opacity: 1;
     height: 1.15rem;
     width: 1.15rem;
 }
-.md-typeset .md-button:hover,
-.md-typeset .md-button:focus,
-.md-typeset .md-button:active {
+*:is(.md-typeset .md-button, .md-banner .md-button):hover,
+*:is(.md-typeset .md-button, .md-banner .md-button):focus,
+*:is(.md-typeset .md-button, .md-banner .md-button):active {
     padding-right: 2.4rem;
     background-color: transparent;
     border-color: var(--md-primary-fg-color);
     color: var(--md-primary-fg-color);
 }
-.md-typeset .md-button.md-button--primary:hover,
-.md-typeset .md-button.md-button--primary:focus,
-.md-typeset .md-button.md-button--primary:active {
+.md-banner .md-button:hover,
+.md-banner .md-button:focus,
+.md-banner .md-button:active {
+    padding-right: 1.6rem;
+}
+*:is(.md-typeset .md-button, .md-banner .md-button).md-button--primary:hover,
+*:is(.md-typeset .md-button, .md-banner .md-button).md-button--primary:focus,
+*:is(.md-typeset .md-button, .md-banner .md-button).md-button--primary:active {
     background-color: var(--md-primary-fg-color);
     color: var(--md-primary-bg-color);
 }
-.md-typeset .md-button:hover .twemoji,
-.md-typeset .md-button:focus .twemoji,
-.md-typeset .md-button:active .twemoji {
+*:is(.md-typeset .md-button, .md-banner .md-button):hover .twemoji,
+*:is(.md-typeset .md-button, .md-banner .md-button):focus .twemoji,
+*:is(.md-typeset .md-button, .md-banner .md-button):active .twemoji {
     opacity: 1;
+}
+
+.md-banner {
+    background-color: rgba(153, 153, 153, 0.1);
 }
 
 /* Homepage logos */

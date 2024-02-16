@@ -78,6 +78,21 @@ CARDS=false mkdocs serve
 docker run --rm -it -p 8000:8000 -e 'CARDS=false' -v ${PWD}:/docs ghcr.io/nextflow-io/training-mkdocs:latest
 ```
 
+## Announcement banner
+
+If there is an announcement banner, you can enable and customise it using the following config in `mkdocs.yml`:
+
+```yaml
+extra:
+    # Announcement banner for upcoming training
+    announcement:
+        active: false
+        date_text: March 5-6, 2024
+        register_url: https://nf-co.re/events/2024/training-foundational-march
+```
+
+If you need more customisation, edit `docs/assets/overrides/main.html`
+
 ## Figures & diagrams
 
 Graphics should be drawn using [Excalidraw](https://excalidraw.com/).
