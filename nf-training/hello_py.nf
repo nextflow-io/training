@@ -10,6 +10,7 @@ process SPLITLETTERS {
     output:
     path 'chunk_*'
 
+    script:
     """
     #!/usr/bin/env python
     x="$x"
