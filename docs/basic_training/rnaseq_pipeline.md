@@ -49,7 +49,7 @@ nextflow run script1.nf --reads '/workspace/gitpod/nf-training/data/ggal/lung_{1
 Your output will look something like this:
 
 ```console title="Output"
-N E X T F L O W  ~  version 23.10.0
+N E X T F L O W  ~  version 23.10.1
 Launching `script1.nf` [big_baekeland] DSL2 - revision: 86d466d737
 reads: /workspace/gitpod/nf-training/data/ggal/lung_{1,2}.fq
 ```
