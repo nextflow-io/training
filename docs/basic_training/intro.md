@@ -181,7 +181,7 @@ nextflow run hello.nf
 The output will look similar to the text shown below:
 
 ```console title="Output"
-N E X T F L O W  ~  version 23.04.1
+N E X T F L O W  ~  version 23.10.1
 Launching hello.nf [cheeky_keller] DSL2 - revision: 197a0e289a
 executor >  local (3)
 [31/52c31e] process > SPLITLETTERS (1)   [100%] 1 of 1 ✔
@@ -244,7 +244,7 @@ $ nextflow run hello.nf -resume
 ```
 
 ```console title="Output"
-N E X T F L O W  ~  version 23.04.1
+N E X T F L O W  ~  version 23.10.1
 Launching `hello.nf` [zen_colden] DSL2 - revision: 0676c711e8
 executor >  local (2)
 [31/52c31e] process > SPLITLETTERS (1)   [100%] 1 of 1, cached: 1 ✔
@@ -272,7 +272,7 @@ nextflow run hello.nf --greeting 'Bonjour le monde!'
 The string specified on the command line will override the default value of the parameter. The output will look like this:
 
 ```console title="Output"
-N E X T F L O W  ~  version 23.04.1
+N E X T F L O W  ~  version 23.10.1
 Launching `hello.nf` [goofy_kare] DSL2 - revision: 0676c711e8
 executor >  local (4)
 [8b/7c7d13] process > SPLITLETTERS (1)   [100%] 1 of 1 ✔
