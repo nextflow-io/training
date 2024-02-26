@@ -409,7 +409,7 @@ As before, the Singularity container can also be provided in the Nextflow config
 
 ### The Singularity Container Library
 
-The authors of Singularity, [SyLabs](https://www.sylabs.io/) have their own repository of Singularity containers.
+The authors of Singularity, [SyLabs](https://www.sylabs.io/) have their [own repository](https://cloud.sylabs.io) of Singularity containers.
 
 In the same way that you can push Docker images to Docker Hub, you can upload Singularity images to the Singularity Library.
 
