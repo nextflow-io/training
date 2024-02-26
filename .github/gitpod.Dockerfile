@@ -17,6 +17,13 @@ RUN apt-get update --quiet && \
         graphviz \
         software-properties-common
 
+
+# Taken from: https://github.com/nf-core/tools/blob/master/nf_core/gitpod/gitpod.Dockerfile
+# Install Apptainer (Singularity)
+RUN add-apt-repository -y ppa:apptainer/ppa && \
+    apt-get update --quiet && \
+    apt install -y apptainer
+
 # Install Conda
 RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
     bash Miniconda3-latest-Linux-x86_64.sh -b -p /opt/conda && \
