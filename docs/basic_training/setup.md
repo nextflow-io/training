@@ -147,7 +147,7 @@ If you have saved the URL for your previous Gitpod environment, you can simply o
 
 Alternatively, you can open a new training workspace by following the Gitpod URL: <https://gitpod.io/#https://github.com/nextflow-io/training>
 
-If you have lost your environment, you can find the main scripts used in this tutorial in the `nf-training` directory.
+If you have lost your environment, you can find the main scripts used in this tutorial in the `nf-training` directory, which is the folder opened by default in the file explorer on the left.
 
 ### Saving files from Gitpod to your local machine
 
