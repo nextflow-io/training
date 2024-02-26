@@ -100,10 +100,9 @@ To run Gitpod:
 
 -   Click the following URL: <https://gitpod.io/#https://github.com/nextflow-io/training>
     -   This is our GitHub repository URL, prefixed with `https://gitpod.io/#`
--   Log in to your GitHub account (and allow authorization).
+-   Log in with your GitHub account (and follow the next steps).
 
 Once you have signed in, Gitpod should load.
-You can skip the prebuild if asked.
 
 ### Explore your Gitpod IDE
 
@@ -113,7 +112,8 @@ You should now see something similar to the following:
 
 -   **The sidebar** allows you to customize your Gitpod environment and perform basic tasks (copy, paste, open files, search, git, etc.). You can click the explorer button to see which files are in this repository.
 -   **The terminal** allows you to run all the programs in the repository. For example, both `nextflow` and `docker` are installed and can be executed.
--   **The main window** allows you to view and edit files. Clicking on a file in the explorer will open it within the main window. The nf-training material browser (<https://training.nextflow.io/>) will also be shown in your main window.
+-   **The file explorer** allows you to view and edit files. Clicking on a file in the explorer will open it within the main window.
+-   **The Simple Browser** lets you view the nf-training material browser (<https://training.nextflow.io/>). If you close it by accident, you can load the simple browser again by typing the following in the terminal: `gp preview https://training.nextflow.io`.
 
 To test that the environment is working correctly, type the following into the terminal:
 
@@ -124,10 +124,10 @@ nextflow info
 This should come up with the Nextflow version and runtime information:
 
 ```console
-Version: 22.10.4 build 5836
-Created: 09-12-2023 09:58 UTC
-System: Linux 5.15.0-47-generic
-Runtime: Groovy 3.0.13 on OpenJDK 64-Bit Server VM 17.0.3-internal+0-adhoc..src
+Version: 23.10.1 build 5891
+Created: 12-01-2024 22:01 UTC
+System: Linux 6.1.75-060175-generic
+Runtime: Groovy 3.0.19 on OpenJDK 64-Bit Server VM 11.0.1-internal+0-adhoc..src
 Encoding: UTF-8 (UTF-8)
 ```
 
