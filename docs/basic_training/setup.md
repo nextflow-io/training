@@ -20,7 +20,7 @@ Nextflow can be used on any POSIX-compatible system (Linux, macOS, Windows Subsy
 #### Requirements
 
 -   Bash
--   [Java 11 (or later, up to 18)](https://www.oracle.com/technetwork/java/javase/downloads/index.html)
+-   [Java 11 (or later, up to 21)](https://www.oracle.com/technetwork/java/javase/downloads/index.html)
 -   [Git](https://git-scm.com/)
 -   [Docker](https://docs.docker.com/get-docker/)
 
