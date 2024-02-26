@@ -328,10 +328,6 @@ Singularity implements a container execution model similar to Docker. However, i
 
 A Singularity container image is archived as a plain file that can be stored in a shared file system and accessed by many computing nodes managed using a batch scheduler.
 
-!!! warning
-
-    Singularity will not work with Gitpod. If you wish to try this section, please do it locally, or on an HPC.
-
 ### Create a Singularity images
 
 Singularity images are created using a `Singularity` file in a similar manner to Docker but using a different syntax.
