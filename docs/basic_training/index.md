@@ -44,6 +44,6 @@ To get you started with Nextflow as quickly as possible, you will be walked thro
 2. Explore Nextflow concepts using some basic workflows, including a multi-step RNA-Seq analysis
 3. Build and use Docker containers to encapsulate all workflow dependencies
 4. Dive deeper into the core Nextflow syntax, including Channels, Processes, and Operators
-5. Cover cluster and cloud deployment scenarios and explore Nextflow Tower capabilities
+5. Cover cluster and cloud deployment scenarios and explore Seqera Platform capabilities
 
 This will give you a broad understanding of Nextflow, to start writing your own workflows. We hope you enjoy the course! This is an ever-evolving document - feedback is always welcome.
