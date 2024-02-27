@@ -4,38 +4,38 @@
         "typescript.tsdk": "gitpod/node_modules/typescript/lib",
         "[javascript]": {
             "editor.defaultFormatter": "esbenp.prettier-vscode",
-            "editor.formatOnSave": true
+            "editor.formatOnSave": true,
         },
         "[typescript]": {
             "editor.defaultFormatter": "esbenp.prettier-vscode",
-            "editor.formatOnSave": true
+            "editor.formatOnSave": true,
         },
         "[json]": {
             "editor.insertSpaces": true,
-            "editor.tabSize": 2
+            "editor.tabSize": 2,
         },
         "[yaml]": {
             "editor.insertSpaces": true,
-            "editor.tabSize": 2
+            "editor.tabSize": 2,
         },
         "[go]": {
-            "editor.formatOnSave": true
+            "editor.formatOnSave": true,
         },
         "[tf]": {
             "editor.insertSpaces": true,
-            "editor.tabSize": 2
+            "editor.tabSize": 2,
         },
         "go.formatTool": "goimports",
         "go.useLanguageServer": true,
         "workspace.supportMultiRootWorkspace": true,
         "launch": {},
         "files.exclude": {
-            "**/.git": true
+            "**/.git": true,
         },
         "go.lintTool": "golangci-lint",
         "gopls": {
-            "allowModfileModifications": true
+            "allowModfileModifications": true,
         },
-        "prettier.configPath": ".prettierrc.json"
-    }
+        "prettier.configPath": ".prettierrc.json",
+    },
 }
