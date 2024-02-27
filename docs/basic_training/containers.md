@@ -9,7 +9,7 @@ Computational workflows are rarely composed of a single script or tool. More oft
 
 Installing and maintaining such dependencies is a challenging task and a common source of irreproducibility in scientific applications.
 
-To overcome these issues, you can use containers that enable software dependencies, i.e. tools and libraries required by a data analysis application, to be encapsulated in one or more self-contained, ready-to-run, immutable Linux container images. These container images can be easily deployed in any platform that supports the container runtime.
+To overcome these issues, you can use a container technology that enables software dependencies, i.e. tools and libraries required by a data analysis application, to be encapsulated in one or more self-contained, ready-to-run, immutable container images. These container images can be easily deployed in any platform that supports the container runtime.
 
 Containers can be executed in an isolated manner from the hosting system. Having its own copy of the file system, processing space, and memory management.
 
@@ -47,7 +47,7 @@ The `pull` command allows you to download a Docker image without running it. For
 docker pull <container-name>
 ```
 
-You can check a container has been pulled using the `images` command. For example:
+You can check if a container has been pulled using the `images` command. For example:
 
 ```bash
 docker images
@@ -85,7 +85,7 @@ To exit from the container, stop the BASH session with the `exit` command.
 
 ### Your first Dockerfile
 
-Docker images are created by using a so-called `Dockerfile`, a simple text file containing a list of commands to assemble and configure the image with the software packages required. For example, a Dockerfile to create a container with `cowsay` and installed could be as simple as this:
+Docker images are created by using a so-called `Dockerfile`, a simple text file containing a list of commands to assemble and configure the image with the software packages required. For example, a Dockerfile to create a container with `cowsay` installed could be as simple as this:
 
 ```dockerfile linenums="1" title="Dockerfile"
 FROM debian:bullseye-slim
@@ -104,7 +104,7 @@ Once your Dockerfile is ready, you can build the image by using the `build` comm
 docker build -t <my-image> .
 ```
 
-Where "<my-image>" is the user-specified name for the container image you plan to build.
+Where `<my-image>` is the user-specified name for the container image you plan to build.
 
 !!! tip
 
@@ -308,7 +308,7 @@ The simplest way to run a Nextflow script with a Docker image is using the `-wit
 nextflow run script2.nf -with-docker my-image
 ```
 
-As seen in the last section, you can also configure the Nextflow config file (`nextflow.config`) to select which container to use instead of having to specify it as a command-line argument every time.
+As seen in the last section, you can also configure the Nextflow config file (`nextflow.config`) to select which container image to use instead of having to specify it as a command-line argument every time.
 
 !!! cboard-list-2 "Summary"
 
@@ -435,7 +435,7 @@ In this Gitpod environment, conda is already installed.
 
 A Conda environment is defined using a YAML file, which lists the required software packages.
 
-To you conda, you need to initiate conda and open a new terminal by running bash:
+To use conda, you need to initiate conda and open a new terminal by running bash:
 
 ```bash
 conda init
@@ -456,7 +456,7 @@ conda env create --file env.yml
 
 The `conda env create` command may take several minutes, as conda tries to resolve dependencies of the desired packages at runtime, and then downloads everything that is required.
 
-You can check the environment was created successfully with the command shown below:
+You can check if the environment was created successfully with the command shown below:
 
 ```bash
 conda env list
