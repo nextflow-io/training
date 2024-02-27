@@ -77,8 +77,6 @@ log.info """\
 """
 ```
 
-`log.info`
-
 !!! question "Exercise"
 
     Modify `script1.nf` to print all of the workflow parameters by using a single `log.info` command as a [multiline string](https://www.nextflow.io/docs/latest/script.html#multi-line-strings) statement.
@@ -121,11 +119,11 @@ A `process` is defined by providing three main declarations:
 -   [`output`](https://www.nextflow.io/docs/latest/process.html#outputs)
 -   [`script`](https://www.nextflow.io/docs/latest/process.html#script)
 
-To add a transcriptome `INDEX` processing step to your pipeline, you will need to add the following code blocks to your `script1.nf`. Alternatively, these code blocks have already been added to `script2.nf`.
+To add a transcriptome `INDEX` processing step to your pipeline, you will need to add the following code block to your `script1.nf`. Alternatively, this code block has already been added to `script2.nf`.
 
 ```groovy linenums="18" title="script2.nf"
 /*
- * define the `index` process that creates a binary index
+ * define the `INDEX` process that creates a binary index
  * given the transcriptome file
  */
 process INDEX {
@@ -168,7 +166,7 @@ Here, the `params.transcriptome_file` parameter is used as the input for the `IN
     nextflow run script2.nf
     ```
 
-This execution will fail because `salmon` is not installed in your environment. Fortunately, a docker container with the salmon software is available and has already been defined in your `nextflow.config` file.
+This execution will fail because `salmon` is not installed in your environment. Fortunately, a docker container image with the salmon software is available and has already been defined in your `nextflow.config` file.
 
 Nextflow has support for managing the execution of processes in Docker containers. This is useful when you need to execute a process that requires a specific software version or a specific operating system.
 
@@ -236,15 +234,15 @@ process INDEX {
             ...
         ```
 
-        You can check the directive has been applied by viewing the script executed in the work directory. Look for the hexadecimal (e.g. `work/7f/f285b80022d9f61e82cd7f90436aa4/`), Then `cat` the `.command.sh` file.
+        You can check the directive has been applied by viewing the script executed in the work directory. Look for the hexadecimal (e.g. `work/7f/f285b80022d9f61e82cd7f90436aa4/`), then `cat` the `.command.sh` file.
 
         ```bash
         cat work/7f/f285b80022d9f61e82cd7f90436aa4/.command.sh
         ```
 
-Nextflow will organizes the process work directory into a series of folders. The hexadecimal folder name is the process identifier. You can view the structure of these files using the `tree` command.
+Nextflow will organize the process work directory into a series of folders. The hexadecimal folder name is the process identifier. You can view the structure of these files using the `tree` command.
 
-    For example, executing `tree work` should look something like this:
+For example, executing `tree work` should look something like this:
 
 ```console title="Output"
 work
@@ -283,15 +281,11 @@ work
 
 ## Collect read files by pairs
 
-There are numerous Channel factories that can be used to create channels. In this step, you will use the [fromFilePairs](https://www.nextflow.io/docs/latest/channel.html#fromfilepairs) channel factory to create a channel of read pairs.
+There are numerous channel factories that can be used to create channels. In this step, you will use the [fromFilePairs](https://www.nextflow.io/docs/latest/channel.html#fromfilepairs) channel factory to create a channel of read pairs.
 
-The `fromFilePairs` channel factory takes a glob pattern as input and returns a channel of tuples. Each tuple contains two elements: the first is the read pair prefix and the second is a list of paths to the read files.
+The `fromFilePairs` channel factory takes a glob pattern as input and returns a channel of tuples. Each tuple contains two items: the first is the read pair prefix and the second is a list of paths to the read files.
 
-By adding the `view` operator to the `read_pairs_ch` channel, you can see the contents of the channel:
-
-```groovy linenums="19" title="script3.nf"
-read_pairs_ch.view()
-```
+By adding the `view` operator to the `read_pairs_ch` channel, you can see the contents of the channel.
 
 !!! question "Exercise"
 
@@ -311,7 +305,7 @@ read_pairs_ch.view()
         [gut, [/.../data/ggal/gut_1.fq, /.../data/ggal/gut_2.fq]]
         ```
 
-The above exercise shows how the `read_pairs_ch` channel emits tuples composed of two elements, where the first is the read pair prefix and the second is a list representing the actual files.
+The above exercise shows how the `read_pairs_ch` channel emits tuples composed of two items, where the first is the read pair prefix and the second is a list representing the actual files.
 
 Glob patterns can also be used to create channels of files. For example, the following command creates a channel of all the files in the `data/ggal` directory:
 
@@ -371,7 +365,7 @@ In the workflow scope, note how the `index_ch` channel is assigned as output in 
 
 Next, note that the first input channel for the `QUANTIFICATION` process is the previously declared `index_ch`, which contains the `path` to the `salmon_index`.
 
-Also, note that the second input channel for the `QUANTIFICATION` process, is the `read_pair_ch` you just created. This being a `tuple` composed of two elements (a value: `sample_id` and a list of paths to the fastq reads: `reads`) in order to match the structure of the items emitted by the `fromFilePairs` channel factory.
+Also, note that the second input channel for the `QUANTIFICATION` process, is the `read_pair_ch` you just created. This being a `tuple` composed of two items (a value: `sample_id` and a list of paths to the fastq reads: `reads`) in order to match the structure of the items emitted by the `fromFilePairs` channel factory.
 
 Execute it by using the following command:
 
@@ -574,7 +568,7 @@ mkdir -p bin
 mv fastqc.sh bin
 ```
 
-Open the `script7.nf` file and replace the `FASTQC` process’ script with the following code:
+Open the `script7.nf` file and replace the `FASTQC` process script block with the following code:
 
 ```groovy linenums="60" title="script7.nf"
 script:
@@ -585,7 +579,7 @@ fastqc.sh "$sample_id" "$reads"
 
 !!! question "Exercise"
 
-    Use the example above to create an executable replace the `FASTQC` process’ in `script7.nf` with an executable `fastqc.sh` script.
+    Use the example above to replace the `FASTQC` process script block in `script7.nf` with an executable `fastqc.sh` script.
 
 !!! cboard-list-2 "Summary"
 
@@ -604,7 +598,7 @@ The `-with-trace` option enables the creation of a tab separated value (TSV) fil
 
 The `-with-timeline` option enables the creation of the workflow timeline report showing how processes were executed over time. This may be useful to identify the most time consuming tasks and bottlenecks.
 
-Finally, the `-with-dag` option enables the rendering of the workflow execution direct acyclic graph representation. The dag needs to be given a name (`-with-dag dag.png`). Note: This feature requires the installation of [Graphviz](http://www.graphviz.org/) on your computer. See [here](https://www.nextflow.io/docs/latest/tracing.html#dag-visualisation) for further details.
+Finally, the `-with-dag` option enables the rendering of the workflow execution direct acyclic graph representation. The dag needs to be given a name (`-with-dag dag.png`). Note: This feature requires the installation of [Graphviz](http://www.graphviz.org/) on your computer. See [here](https://www.nextflow.io/docs/latest/tracing.html#dag-visualisation) for further details. You can also output HTML DAGs, and the `-preview` command my allow you to have a look at an approximate DAG without having to run the pipeline.
 
 !!! question "Exercise"
 
@@ -622,7 +616,7 @@ Finally, the `-with-dag` option enables the rendering of the workflow execution 
         open dag.png
         ```
 
-        You can view the HTML files by right-clicking on the file name in the left side-bar and choosing the **Preview** menu item.
+        You can view the HTML files by right-clicking on the file name in the left side-bar and choosing the **Show Preview** menu item.
 
         !!! warning
 
@@ -662,7 +656,7 @@ Nextflow allows the execution of a specific revision of your project by using th
 nextflow run nextflow-io/rnaseq-nf -r v2.1 -with-docker
 ```
 
-Revision are defined by using Git tags or branches defined in the project repository.
+Revisions are defined by using Git tags or branches defined in the project repository.
 
 Tags enable precise control of the changes in your project files and dependencies over time.
 
