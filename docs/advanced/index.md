@@ -15,3 +15,11 @@ Please note that this is not an introductory workshop, and we will assume some b
 By the end of this workshop, you will have the skills and knowledge to create complex and powerful Nextflow pipelines for your own data analysis projects.
 
 Let's get started!
+
+## Follow the training video
+
+We run a free online training event for this course approximately every six months. Videos are streamed to YouTube and questions are handled in the nf-core Slack community. You can watch the recording of the most recent training ([September, 2023](https://nf-co.re/events/2023/training-sept-2023/)) below:
+
+<div style="text-align: center;">
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/nPAH9owvKvI?si=Kt3WmxF7rGhRp2L1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" data-ruffle-polyfilled=""></iframe>
+</div>
