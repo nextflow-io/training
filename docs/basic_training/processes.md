@@ -89,7 +89,7 @@ workflow {
 
 !!! tip
 
-    In the snippet above the directive `debug` is used to enable the debug mode for the process. This is useful to print the output of the process script in the console.
+    In the snippet below the directive `debug` is used to enable the debug mode for the process. This is useful to print the output of the process script in the console.
 
 By default, the `process` command is interpreted as a **Bash** script. However, any other scripting language can be used by simply starting the script with the corresponding [Shebang](<https://en.wikipedia.org/wiki/Shebang_(Unix)>) declaration. For example:
 
@@ -1139,7 +1139,7 @@ workflow {
 }
 ```
 
-The above example will copy all blast script files created by the `BLASTSEQ` process into the directory path `my-results`.
+The above example will copy all blast script files created by the `BLASTSEQ` process into the directory path `results`.
 
 !!! tip
 

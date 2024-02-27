@@ -325,6 +325,8 @@ result.large.view { "$it is large" }
 
 ## Text files
 
+### `splitText()`
+
 The `splitText` operator allows you to split multi-line strings or text file items, emitted by a source channel into chunks containing _n_ lines, which will be emitted by the resulting channel.
 
 ```groovy linenums="1" title="snippet.nf"
@@ -382,7 +384,7 @@ IT HAS SURVIVED NOT ONLY FIVE CENTURIES, BUT ALSO THE LEAP INTO ELECTRONIC TYPES
 ...
 ```
 
-### `splitText()`
+### `splitCsv()`
 
 The `splitCsv` operator allows you to parse text items emitted by a channel, that are CSV formatted.
 
