@@ -163,7 +163,7 @@ By default, Nextflow will pull the latest stable version into your environment.
 
 However, Nextflow is constantly evolving as improvements are made.
 
-The latest releases can be viewed on GitHub [here](https://github.com/nextflow-io/nextflow).
+The latest releases can be viewed on GitHub [here](https://github.com/nextflow-io/nextflow/releases).
 
 If you want to use a specific version of Nextflow, you can set the `NXF_VER` variable as shown below:
 
