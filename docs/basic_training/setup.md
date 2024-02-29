@@ -5,7 +5,7 @@ description: How to set up a development environment to run Nextflow
 
 # Environment setup
 
-There are two main ways to get started with Nextflow's foundational workshop material.
+There are two main ways to get started with Nextflow's Fundamentals workshop material.
 
 The first is to install the requirements [locally](#local-installation), which is best if you are already familiar with Git and Docker, or working offline.
 

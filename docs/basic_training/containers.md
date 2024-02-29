@@ -1,6 +1,6 @@
 ---
 title: Dependencies and containers
-description: Foundational Nextflow Training Workshop
+description: Fundamentals Nextflow Training Workshop
 ---
 
 # Manage dependencies and containers

@@ -1,6 +1,6 @@
 ---
 title: Channels
-description: Foundational Nextflow Training Workshop
+description: Fundamentals Nextflow Training Workshop
 ---
 
 # Channels
