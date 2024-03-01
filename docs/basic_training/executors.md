@@ -1,6 +1,6 @@
 ---
 title: Deployment scenarios
-description: Foundational Nextflow Training Workshop
+description: Fundamentals Nextflow Training Workshop
 ---
 
 # Deployment scenarios

@@ -1,6 +1,6 @@
 ---
 title: Operators
-description: Foundational Nextflow Training Workshop
+description: Fundamentals Nextflow Training Workshop
 ---
 
 # Operators

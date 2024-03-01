@@ -1,6 +1,6 @@
 ---
 title: Configuration
-description: Foundational Nextflow Training Workshop
+description: Fundamentals Nextflow Training Workshop
 ---
 
 # Nextflow configuration

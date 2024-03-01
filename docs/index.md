@@ -23,15 +23,15 @@ We have several workshops available on this website - find the one that's right 
 
 ## Nextflow Training
 
-!!! exercise "Foundational Training"
+!!! exercise "Fundamentals Training"
 
     !!! tip inline end ""
 
         :material-lightbulb: This is the primary Nextflow training material used in most Nextflow and nf-core training events.
 
-    The Foundational Training material includes all things Nextflow. Perfect for anyone looking to get to grips with using Nextflow to run analyses and build workflows.
+    The Fundamentals Training material includes all things Nextflow. Perfect for anyone looking to get to grips with using Nextflow to run analyses and build workflows.
 
-    [Launch the Foundational Training :material-arrow-right:](basic_training/index.md){ .md-button .md-button--primary }
+    [Launch the Fundamentals Training :material-arrow-right:](basic_training/index.md){ .md-button .md-button--primary }
 
 !!! exercise "Advanced Training"
 

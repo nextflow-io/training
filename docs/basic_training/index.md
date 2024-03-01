@@ -1,5 +1,5 @@
 ---
-description: Overview of the Foundational Nextflow Training material
+description: Overview of the Fundamentals Nextflow Training material
 hide:
     - toc
 ---
