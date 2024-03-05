@@ -190,10 +190,6 @@ To avoid being required to add `-with-docker` to your execution command every ti
 
 Viewing a channel with the [`view`](https://www.nextflow.io/docs/latest/operator.html#view) operator is a useful way to see what is in a channel and is useful for testing and debugging:
 
-```groovy linenums="1" title="example.nf"
-index_ch.view()
-```
-
 !!! question "Exercise"
 
     Print the output of the `index_ch` channel by using the [view](https://www.nextflow.io/docs/latest/operator.html#view) operator.
@@ -212,7 +208,7 @@ index_ch.view()
 Directives are used to specify the execution requirements of a process. For example, the `cpus` directive specifies the number of CPUs required to execute the process. Directives can be added under the `process` declaration.
 
 ```groovy linenums="22" title="script2.nf"
-process INDEX {
+process PROCESS_NAME {
     cpus 2
     ...
 }
@@ -220,7 +216,7 @@ process INDEX {
 
 !!! question "Exercise"
 
-    Add the `cpus` directive to the `SALMON` process to modify the number of CPUs allocated for its execution.
+    Add the `cpus` directive to the `INDEX` process to modify the number of CPUs allocated for its execution.
 
     ??? Solution
 
