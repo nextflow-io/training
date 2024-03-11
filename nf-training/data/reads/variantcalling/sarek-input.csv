@@ -1,0 +1,3 @@
+patient,sample,lane,fastq_1,fastq_2
+case,case,L1,/workspace/gitpod/nf-training/data/reads/variantcalling/case_1.fq.gz,/workspace/gitpod/nf-training/data/reads/variantcalling/case_2.fq.gz
+control,control,L1,/workspace/gitpod/nf-training/data/reads/variantcalling/control_1.fq.gz,/workspace/gitpod/nf-training/data/reads/variantcalling/control_2.fq.gz

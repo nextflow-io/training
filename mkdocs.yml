@@ -38,6 +38,11 @@ nav:
           - hands_on/02_workflow.md
           - hands_on/03_setup.md
           - hands_on/04_implementation.md
+    - Variant Calling:
+          - variantcalling/index.md
+          - variantcalling/theory.md
+          - variantcalling/sarek.md
+          - variantcalling/interpretation.md
     - help.md
 
 theme:
@@ -122,6 +127,8 @@ markdown_extensions:
     - pymdownx.superfences
     - pymdownx.tabbed:
           alternate_style: true
+    - pymdownx.arithmatex:
+          generic: true
     - tables
     - toc:
           title: On this page
@@ -165,3 +172,7 @@ plugins:
           reconfigure_material: true
           reconfigure_search: true
     - search
+extra_javascript:
+    - javascripts/mathjax.js
+    - https://polyfill.io/v3/polyfill.min.js?features=es6
+    - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
