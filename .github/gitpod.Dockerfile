@@ -39,8 +39,8 @@ RUN mkdir -p /workspace/data \
 USER gitpod
 
 # Uncomment if we need to pin the Nextflow version
-# ENV NXF_EDGE=1
-# ENV NXF_VER=22.09.7-edge
+ENV NXF_EDGE=1
+ENV NXF_VER=24.02.0-edge
 
 # Install nextflow, nf-core, Mamba, and pytest-workflow
 RUN conda config --add channels defaults && \
