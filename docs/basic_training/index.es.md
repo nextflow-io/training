@@ -20,10 +20,10 @@ Al final de este curso debería:
 
 ## Sigue los videos de entrenamiento
 
-Realizamos un evento de capacitación en línea gratuito para este curso aproximadamente cada seis meses. Los videos se transmiten a YouTube y las preguntas se manejan en la comunidad nf-core de Slack. Puedes ver la grabación del último entrenamiento ([septiembre de 2023](https://nf-co.re/events/2023/training-basic-2023)) en la [lista de reproducción de YouTube](https://youtu.be/ERbTqLtAkps?si=6xDoDXsb6kGQ_Qa8) aquí debajo:
+Realizamos un evento de capacitación en línea gratuito para este curso aproximadamente cada seis meses. Los videos se transmiten a YouTube y las preguntas se manejan en la comunidad nf-core de Slack. Puedes ver la grabación del último entrenamiento ([marzo de 2024](https://nf-co.re/events/2024/training-foundational-march)) en la [lista de reproducción de YouTube](https://youtu.be/dbOKB3VRpuE?si=MYBy4-gjRfEYkVRM) aquí debajo:
 
 <div style="text-align: center;">
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/watch?v=ERbTqLtAkps&list=PL3xpfTVZLcNiLFLiDqk_H5b3TBwvgO_-W" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" data-ruffle-polyfilled=""></iframe>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/watch?v=dbOKB3VRpuE&list=PL3xpfTVZLcNgLBGLAiY6Rl9fizsz-DTCT" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" data-ruffle-polyfilled=""></iframe>
 </div>
 
 Si el inglés no es su idioma preferido, puede resultarle útil seguir la capacitación del [evento de marzo de 2023](https://nf-co.re/events/2023/training-march-2023), que realizamos en múltiples idiomas.

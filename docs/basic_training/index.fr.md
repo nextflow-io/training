@@ -20,10 +20,10 @@ Nous sommes heureux de vous accompagner sur le chemin de rédaction de workflows
 
 ## Suivez les vidéos de formation
 
-Nous organisons un événement de formation en ligne gratuit pour ce cours environ tous les six mois. Les vidéos sont diffusées sur YouTube et les questions sont traitées dans la communauté nf-core Slack. Vous pouvez regarder l'enregistrement de la formation la plus récente ([septembre 2023](https://nf-co.re/events/2023/training-basic-2023)) dans la [playlist YouTube](https://youtu.be/ERbTqLtAkps?si=6xDoDXsb6kGQ_Qa8) ci-dessous :
+Nous organisons un événement de formation en ligne gratuit pour ce cours environ tous les six mois. Les vidéos sont diffusées sur YouTube et les questions sont traitées dans la communauté nf-core Slack. Vous pouvez regarder l'enregistrement de la formation la plus récente ([mars 2024](https://nf-co.re/events/2024/training-foundational-march)) dans la [playlist YouTube](https://youtu.be/dbOKB3VRpuE?si=MYBy4-gjRfEYkVRM) ci-dessous :
 
 <div style="text-align: center;">
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/watch?v=ERbTqLtAkps&list=PL3xpfTVZLcNiLFLiDqk_H5b3TBwvgO_-W" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" data-ruffle-polyfilled=""></iframe>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/watch?v=dbOKB3VRpuE&list=PL3xpfTVZLcNgLBGLAiY6Rl9fizsz-DTCT" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" data-ruffle-polyfilled=""></iframe>
 </div>
 
 Si l'anglais n'est pas votre langue préférée, vous trouverez peut-être utile de suivre la formation de [l'événement de mars 2023](https://nf-co.re/events/2023/training-march-2023), que nous avons organisé plusieurs langues.
