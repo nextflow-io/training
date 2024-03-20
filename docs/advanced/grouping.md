@@ -339,7 +339,7 @@ This will return us six bam files - a tumor and normal pair for each of the thre
 [[id:sampleC, type:tumor], merged.genotyped.bam]
 ```
 
-If we would like to save the output of our `MergeGenotyped` process into a save location, we can "publish" the outputs of a process using the `publishDir` directive. We will cover this in more detail on day 2, but try modifying the `MergeGenotyped` process to include the directive:
+If we would like to save the output of our `MergeGenotyped` process, we can "publish" the outputs of a process using the `publishDir` directive. We will cover this in more detail on day 2, but try modifying the `MergeGenotyped` process to include the directive:
 
 ```groovy
 process MergeGenotyped {
