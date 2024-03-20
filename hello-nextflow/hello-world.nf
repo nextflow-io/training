@@ -1,7 +1,3 @@
-workflow {
-    sayHello()
-}
-
 process sayHello {
 
     output: 
@@ -10,4 +6,8 @@ process sayHello {
     """
     echo 'Hello World!'
     """
+}
+
+workflow {
+    sayHello()
 }

@@ -106,7 +106,7 @@ Let's open the script and look at how it's structured.
 
 The first block of code describes a **process** called `sayHello` that writes its output to `stdout`:
 
-```groovy linenums="5" title="hello-world.nf"
+```groovy linenums="1" title="hello-world.nf"
 process sayHello {
 
     output:
@@ -120,7 +120,7 @@ process sayHello {
 
 The second block of code describes the **workflow** itself, which consists of one call to the `sayHello` process.
 
-```groovy linenums="1" title="hello-world.nf"
+```groovy linenums="11" title="hello-world.nf"
 workflow {
     sayHello()
 }
@@ -128,7 +128,7 @@ workflow {
 
 #### 2. Add a comment block above the process to document what it does in plain English
 
-```groovy linenums="5" title="hello-world.nf" hl_lines="5 8"
+```groovy linenums="1" title="hello-world.nf" hl_lines="1 3"
 /*
  * Use echo to print 'Hello World!' to standard out
  */
@@ -137,7 +137,7 @@ process sayHello {
 
 #### 3. Add an in-line comment above the process call
 
-```
+```groovy linenums="14" title="hello-world.nf" hl_lines="16"
 workflow {
 
     // emit a greeting
