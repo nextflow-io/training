@@ -45,6 +45,16 @@ We have several workshops available on this website - find the one that's right 
 
 ## Applied Training
 
+!!! exercise "Hello Nextflow"
+
+    !!! quote inline end ""
+
+        :material-run-fast: This course is short workshop to introduce you to Nextflow.
+
+    A "learn by doing" tutorial that will take you from running tools on the command line into running your first Nextflow pipelines.
+
+    [Launch the Hello Nextflow :material-arrow-right:](hands_on/index.md){ .md-button }
+
 !!! exercise "RNA-seq Variant Calling Training"
 
     !!! quote inline end ""
