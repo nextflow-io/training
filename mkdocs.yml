@@ -148,7 +148,7 @@ plugins:
               - basic_training/index.md
               - hands_on/index.md
               - hands_on/solutions/*md
-              - hello_nextflow/index.md
+              - hello_nextflow/*.md
     - i18n:
           docs_structure: suffix
           fallback_to_default: true
