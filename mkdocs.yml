@@ -38,6 +38,11 @@ nav:
           - hands_on/02_workflow.md
           - hands_on/03_setup.md
           - hands_on/04_implementation.md
+    - Hello Nextflow:
+          - hello_nextflow/index.md
+          - hello_nextflow/01_orientation.md
+          - hello_nextflow/02_hello_world.md
+          - hello_nextflow/03_hello_gatk.md
     - help.md
 
 theme:
@@ -136,12 +141,14 @@ plugins:
           restart_increment_after:
               - hands_on/01_datasets.md
               - advanced/operators.md
+              - hello_nextflow/01_orientation.md
           exclude:
               - index.md
               - help.md
               - basic_training/index.md
               - hands_on/index.md
               - hands_on/solutions/*md
+              - hello_nextflow/*.md
     - i18n:
           docs_structure: suffix
           fallback_to_default: true
