@@ -42,7 +42,7 @@ nav:
           - hello_nextflow/index.md
           - hello_nextflow/01_orientation.md
           - hello_nextflow/02_hello_world.md
-          - hello_nextflow/03_hello_gatk.md      
+          - hello_nextflow/03_hello_gatk.md
     - help.md
 
 theme:
