@@ -538,7 +538,7 @@ The input channel has two elements. For each element in the input channel, we re
     !!! tip
         You may find it helpful to use Groovy's `collate()` method ([docs](http://docs.groovy-lang.org/docs/groovy-2.3.5/html/groovy-jdk/java/util/List.html#collate(int)), [tutorial](https://blog.mrhaki.com/2012/04/groovy-goodness-collate-list-into-sub.html)). This method segments a list into sub-lists of specified size.
 
-        You may also need the `collect()` method, which is like the `map` operator for collections in Groovy ([docs](http://docs.groovy-lang.org/2.4.3/html/groovy-jdk/java/util/Collection.html#collect(groovy.lang.Closure)), [tutorial](https://www.baeldung.com/groovy-lists#Collecting)).
+        You may also need the `collect()` method, which will perform an operation on every element in the collection (array, tuple, etc) and return a new collection of the outputs. This is similar to the `map` operator for but works on collections instead of channels ([docs](http://docs.groovy-lang.org/2.4.3/html/groovy-jdk/java/util/Collection.html#collect(groovy.lang.Closure)), [tutorial](https://www.baeldung.com/groovy-lists#Collecting)).
 
     ??? solution
         This is a sensible approach:
