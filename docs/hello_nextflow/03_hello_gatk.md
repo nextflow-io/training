@@ -464,9 +464,7 @@ Make it easier to handle samples in bulk.
 
 #### 4.1. Create a text file listing the input paths
 
-_sample_bams.txt:_
-
-```bash
+```csv title="sample_bams.txt"
 /workspace/gitpod/hello-nextflow/data/bam/reads_mother.bam
 /workspace/gitpod/hello-nextflow/data/bam/reads_father.bam
 /workspace/gitpod/hello-nextflow/data/bam/reads_son.bam
@@ -782,4 +780,4 @@ Celebrate your success and take an extra long break! This was tough and you dese
 
 In future trainings, you'll learn more sophisticated methods for managing inputs and outputs (including using the publishDir directive to save the outputs you care about to a storage directory).
 
-Good luck!
+**Good luck!**
