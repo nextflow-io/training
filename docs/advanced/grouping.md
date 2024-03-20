@@ -277,7 +277,7 @@ MapReads( samples, reference )
 | view
 ```
 
-Finally, we can combine these genotyped bams back using `groupTuple` and another bam merge process:
+Finally, we can combine these genotyped bams back using `groupTuple` and another bam merge process. We construct our "merge" process that will combine the bam files from multiple intervals:
 
 ```groovy linenums="1"
 process MergeGenotyped {
@@ -291,6 +291,8 @@ process MergeGenotyped {
 }
 ```
 
+We might be tempted to pipe the output of `GenotypeOnInterval` directly into groupTuple, but the `meta` object we are passing down is still the `groupKey` we created earlier:
+
 ```groovy linenums="1"
 MapReads( samples, reference )
 | map { meta, bam ->
@@ -302,7 +304,95 @@ MapReads( samples, reference )
 | map { meta, bam -> [meta.subMap('id', 'type'), bam] }
 | combine( intervals )
 | GenotypeOnInterval
+| view { meta, bamfile -> "Meta is of ${meta.getClass()}" }
+```
+
+To remove the `groupKey` and go back to the standard map, we can just call its `target` property. This is now appropriate to send through to the `groupTuple` operator and we will be grouping now only on the elements in the map.
+
+```groovy linenums="1"
+MapReads( samples, reference )
+| map { meta, bam ->
+    key = groupKey(meta.subMap('id', 'type'), meta.repeatcount)
+    [key, bam]
+}
+| groupTuple
+| CombineBams
+| map { meta, bam -> [meta.subMap('id', 'type'), bam] }
+| combine( intervals )
+| GenotypeOnInterval
+| map { groupKey, bamfile -> [groupKey.target, bamfile] }
 | groupTuple
 | MergeGenotyped
 | view
 ```
+
+## Publishing the bams
+
+This will return us six bam files - a tumor and normal pair for each of the three samples:
+
+```output title="Final channel output"
+[[id:sampleB, type:normal], merged.genotyped.bam]
+[[id:sampleB, type:tumor], merged.genotyped.bam]
+[[id:sampleA, type:normal], merged.genotyped.bam]
+[[id:sampleA, type:tumor], merged.genotyped.bam]
+[[id:sampleC, type:normal], merged.genotyped.bam]
+[[id:sampleC, type:tumor], merged.genotyped.bam]
+```
+
+If we would like to save the output of our `MergeGenotyped` process into a save location, we can "publish" the outputs of a process using the `publishDir` directive. We will cover this in more detail on day 2, but try modifying the `MergeGenotyped` process to include the directive:
+
+```groovy
+process MergeGenotyped {
+    publishDir 'results/genotyped'
+
+    input:
+    tuple val(meta), path("input/in_*_.bam")
+
+    output:
+    tuple val(meta), path("merged.genotyped.bam")
+
+    "cat input/*.bam > merged.genotyped.bam"
+}
+```
+
+This will publish all of the files in the `output` block of this process to the `results/genotyped` directory.
+
+!!! exercise
+Inspect the contents of the `results` directory. Does this match what you were expecting? What is missing here?
+
+    Can you modify the `MergeGenotyped` process to ensure we are capturing all of the expected output files?
+
+    ??? solution
+        One solution might be to modify the `script` block to ensure that each file has a unique name:
+
+        ```groovy
+        process MergeGenotyped {
+            publishDir 'results/genotyped'
+
+            input:
+            tuple val(meta), path("input/in_*_.bam")
+
+            output:
+            tuple val(meta), path("*.bam")
+
+            "cat input/*.bam > ${meta.id}.${meta.type}.genotyped.bam"
+        }
+        ```
+
+        Another option might be to use the `saveAs` argument to the `publishDir` directive:
+
+        ```groovy
+        process MergeGenotyped {
+            publishDir 'results/genotyped', saveAs: { "${meta.id}.${meta.type}.genotyped.bam" }
+
+            input:
+            tuple val(meta), path("input/in_*_.bam")
+
+            output:
+            tuple val(meta), path("merged.genotyped.bam")
+
+            "cat input/*.bam > merged.genotyped.bam"
+        }
+        ```
+
+        We will cover this in more detail on day 2.
