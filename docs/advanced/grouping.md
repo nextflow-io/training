@@ -7,7 +7,7 @@ Now that we have a channel that conforms to the `tuple val(meta) path(<something
 We'll start with a simple main.nf in the `grouping` directory
 
 ```bash
-cd advanced/grouping
+cd grouping
 ```
 
 ```groovy linenums="1"

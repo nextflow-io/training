@@ -19,7 +19,7 @@ workflow {
 The code above is available in a starter `main.nf` file available at `advanced/operators/main.nf`. It is recommended to open and edit this file to follow along with the examples given in the rest of this chapter. The workflow can be executed with:
 
 ```bash
-cd advanced/operators
+cd operators
 nextflow run .
 ```
 
@@ -192,7 +192,7 @@ The `multiMap` ([documentation](https://www.nextflow.io/docs/latest/operator.htm
 Let's assume we've been given a samplesheet that has tumor/normal pairs bundled together on the same row. View the example samplesheet with:
 
 ```bash
-cd advanced/operators
+cd operators
 cat data/samplesheet.ugly.csv
 ```
 
