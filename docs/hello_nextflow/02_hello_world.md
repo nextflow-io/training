@@ -128,7 +128,7 @@ workflow {
 
 #### 2. Add a comment block above the process to document what it does in plain English
 
-```groovy linenums="1" title="hello-world.nf" hl_lines="1 3"
+```groovy linenums="1" title="hello-world.nf" hl_lines="1-3"
 /*
  * Use echo to print 'Hello World!' to standard out
  */
@@ -137,7 +137,7 @@ process sayHello {
 
 #### 3. Add an in-line comment above the process call
 
-```groovy linenums="14" title="hello-world.nf" hl_lines="16"
+```groovy linenums="14" title="hello-world.nf" hl_lines="3"
 workflow {
 
     // emit a greeting
@@ -163,13 +163,13 @@ It's the same thing we did when just running in the terminal. In a real-world pi
 
 _Before:_
 
-```
+```groovy linenums="10" title="hello-world.nf" hl_lines="1"
 echo 'Hello World!'
 ```
 
 _After:_
 
-```
+```groovy linenums="10" title="hello-world.nf" hl_lines="1"
 echo 'Hello World!' > output.txt
 ```
 
@@ -177,27 +177,27 @@ echo 'Hello World!' > output.txt
 
 _Before:_
 
-```
+```groovy linenums="6" title="hello-world.nf" hl_lines="2"
     output:
         stdout
 ```
 
 _After:_
 
-```
+```groovy linenums="6" title="hello-world.nf" hl_lines="7"
     output:
         path 'output.txt'
 ```
 
 #### 3. Run the workflow again
 
-```
+```bash
 nextflow run hello-world.nf
 ```
 
 The log output should be very similar to the first time your ran the workflow:
 
-```
+```console title="Output"
 N E X T F L O W  ~  version 23.10.1
 Launching `scripts/hello-world.nf` [disturbed_cajal] DSL2 - revision: 9512241567
 executor >  local (1)
@@ -228,14 +228,14 @@ Here we introduce `params` (short for 'parameters') as the construct that holds 
 
 _Before:_
 
-```
+```groovy linenums="6" title="hello-world.nf" hl_lines="7"
     output:
         path 'output.txt'
 ```
 
 _After:_
 
-```
+```groovy linenums="6" title="hello-world.nf" hl_lines="7"
     output:
         path params.output_file
 ```
