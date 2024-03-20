@@ -33,7 +33,8 @@ cat output.txt
 ```
 
 !!! tip
-In the Gitpod environment, you can also find the output file in the file explorer, and view its contents by clicking on it.
+
+    In the Gitpod environment, you can also find the output file in the file explorer, and view its contents by clicking on it.
 
 ### Takeaway
 
@@ -50,7 +51,8 @@ Learn how to turn that into a step in a Nextflow pipeline.
 Now we're going to run a script (named `hello-world.nf`) that does the same thing as before (write 'Hello World!' to a file) but with Nextflow.
 
 !!! info
-We're intentionally not looking at the script yet. Understanding what is the result _before_ we look into the machine will help us understand what the parts do.
+
+    We're intentionally not looking at the script yet. Understanding what is the result _before_ we look into the machine will help us understand what the parts do.
 
 #### 1. Run the workflow
 
