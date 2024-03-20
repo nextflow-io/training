@@ -541,7 +541,7 @@ The input channel has two elements. For each element in the input channel, we re
         You may also need the `collect()` method, which will perform an operation on every element in the collection (array, tuple, etc) and return a new collection of the outputs. This is similar to the `map` operator for but works on collections instead of channels ([docs](http://docs.groovy-lang.org/2.4.3/html/groovy-jdk/java/util/Collection.html#collect(groovy.lang.Closure)), [tutorial](https://www.baeldung.com/groovy-lists#Collecting)).
 
     ??? solution
-        This is a sensible approach:
+        This is a sensible approach. For each item in the channel, the `flatmap` will collate the files into groups of 3 using `.collate(3)`, then collect them into a single tuple using the id as the first value and the collection of 3 files as the second value.
 
         ```groovy
         workflow {
