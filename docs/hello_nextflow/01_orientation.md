@@ -22,7 +22,7 @@ tree /workspace/gitpod/hello-nextflow
 
 You should see the following output:
 
-```bash
+```console title="Output"
 hello-nextflow
 ├── data
 │   ├── bam

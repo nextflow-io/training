@@ -10,25 +10,25 @@ Let's demonstrate this with a simple command that we run directly in the termina
 
 #### 1. Make the terminal say hello
 
-```
+```bash
 echo 'Hello World!'
 ```
 
 #### 2. Now make it write the text output to a file
 
-```
+```bash
 echo 'Hello World!' > output.txt
 ```
 
 #### 3. Verify that the output file is there using the `ls` command
 
-```
+```bash
 ls
 ```
 
 #### 4. Show the file contents
 
-```
+```bash
 cat output.txt
 ```
 
@@ -56,13 +56,13 @@ Now we're going to run a script (named `hello-world.nf`) that does the same thin
 
 #### 1. Run the workflow
 
-```
+```bash
 nextflow run hello-world.nf
 ```
 
 You should see something like this:
 
-```
+```console title="Output"
 N E X T F L O W  ~  version 23.10.1
 Launching `hello-world.nf` [mighty_murdock] DSL2 - revision: 80e92a677c
 executor >  local (1)
@@ -106,7 +106,7 @@ Let's open the script and look at how it's structured.
 
 The first block of code describes a **process** called `sayHello` that writes its output to `stdout`:
 
-```
+```groovy linenums="5" title="hello-world.nf"
 process sayHello {
 
     output:
@@ -120,7 +120,7 @@ process sayHello {
 
 The second block of code describes the **workflow** itself, which consists of one call to the `sayHello` process.
 
-```
+```groovy linenums="1" title="hello-world.nf"
 workflow {
     sayHello()
 }
@@ -128,7 +128,7 @@ workflow {
 
 #### 2. Add a comment block above the process to document what it does in plain English
 
-```
+```groovy linenums="5" title="hello-world.nf" hl_lines="5 8"
 /*
  * Use echo to print 'Hello World!' to standard out
  */
