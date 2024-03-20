@@ -39,7 +39,7 @@ These configuration values would be inherited by every run on that system withou
 Move into the chapter example directory:
 
 ```
-cd advanced/configuration
+cd configuration
 ```
 
 ### Overriding Process Directives

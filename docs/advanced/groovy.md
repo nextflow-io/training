@@ -5,7 +5,7 @@ There exists in Groovy a wealth of helper classes that can be imported into Next
 First, let's move into the chapter 4 directory:
 
 ```bash
-cd advanced/groovy
+cd groovy
 ```
 
 Let's assume that we would like to pull in a samplesheet, parse the entries and run them through the FastP tool. So far, we have been concerned with local files, but Nextflow will handle remote files transparently:
