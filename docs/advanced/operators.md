@@ -456,15 +456,14 @@ Launching `./main.nf` [elegant_rutherford] DSL2 - revision: 2c5476b133
 [[id:sampleC, type:tumor], 1, [data/reads/sampleC_rep1_tumor_R1.fastq.gz, data/reads/sampleC_rep1_tumor_R2.fastq.gz]]
 ```
 
-
 ## `flatMap`
 
 As the name suggests, the `flatMap` operator allows you to modify the elements in a channel and then flatten the resulting collection. This is useful if you need to "expand" elements in a channel an incoming element can turn into zero or more elements in the output channel. For example:
 
-```groovy 
+```groovy
 workflow {
     numbers = Channel.of(1, 2)
-    
+
     numbers
     | flatMap { n -> [ n, n*10, n*100 ] }
     | view
@@ -489,7 +488,7 @@ The input channel has two elements. For each element in the input channel, we re
     ```
     workflow {
         numbers = Channel.of(1, 2)
-        
+
         numbers
         | flatMap { n -> [ n, [n*10, n*100] ] }
         | view
@@ -534,7 +533,7 @@ The input channel has two elements. For each element in the input channel, we re
     [sample2, [sample2/data.4.dat]]
     ```
 
-    This is a challenging problem that pushes slightly beyond what we have covered. 
+    This is a challenging problem that pushes slightly beyond what we have covered.
 
     !!! tip
         You may find it helpful to use Groovy's `collate()` method ([docs](http://docs.groovy-lang.org/docs/groovy-2.3.5/html/groovy-jdk/java/util/List.html#collate(int)), [tutorial](https://blog.mrhaki.com/2012/04/groovy-goodness-collate-list-into-sub.html)). This method segments a list into sub-lists of specified size.
@@ -575,8 +574,8 @@ workflow {
         ['name': 'Michael', 'title': 'Detective'],
         ['name': 'Norm', 'title': 'Detective']
     )
-    
-    characters 
+
+    characters
     | map { it.name }
     | collectFile
     | view
@@ -600,7 +599,7 @@ RaymondTerryNormRosaCharlesJakeGinaMichaelAmy
 We can supply arguments `name` and `newLine` to the `collectFile` operator to return a file with a more informative name and newlines separating each entry:
 
 ```groovy
-characters 
+characters
 | map { it.name }
 | collectFile(name: 'people.txt', newLine: true)
 | view
@@ -623,7 +622,7 @@ Amy
 By default, the collected file is written into the work directory, which makes it suitable for input into a downstream process. If the collected file is an output of the workflow instead of an intermediate, it can be written to a directory of your choosing using the `storeDir` argument:
 
 ```groovy
-characters 
+characters
 | map { it.name }
 | collectFile(name: 'characters.txt', newLine: true, storeDir: 'results')
 | view
@@ -637,8 +636,8 @@ If the contents of the input channel is a file, its _contents_ are appended to t
 
     In the example below, we include a line of groovy to define a variable `article` which is used in the interpolated script string. This is a convenient way to avoid crowding the final string block with too much logic.
 
-    This line includes two Groovy synax features: 
-    
+    This line includes two Groovy synax features:
+
     1. The [ternary operator](https://docs.groovy-lang.org/latest/html/documentation/core-operators.html#_ternary_operator) - a terse if/else block
     2. The [find operator](https://docs.groovy-lang.org/latest/html/documentation/core-operators.html#_find_operator) `=~`
 
@@ -665,8 +664,8 @@ workflow {
         ['name': 'Michael', 'title': 'Detective'],
         ['name': 'Norm', 'title': 'Detective']
     )
-    
-    characters 
+
+    characters
     | WriteBio
     | collectFile
     | view
@@ -691,13 +690,13 @@ Michael is a Detective
 
 Instead of writing all entries to a single file, you can direct entries from the input channel to different files by supplying a closure to the `collectFile` operator. The closure _must_ return a `List` of two entries where the two elements in the `List` are
 
-1. the name of the file into which the data should be written, and 
+1. the name of the file into which the data should be written, and
 2. the data to write.
 
 For example:
 
 ```groovy
-characters 
+characters
 | collectFile(newLine: true, storeDir: 'results') { character ->
     filename = "${character.title}s.txt"
     article = character.title.toLowerCase() =~ ~/^[aeiou]/ ? 'an' : 'a'
@@ -736,7 +735,7 @@ process WriteBio {
 If we run this with the same workflow as before:
 
 ```groovy
-characters 
+characters
 | WriteBio
 | collectFile(name: 'characters.csv', storeDir: 'results')
 | view
@@ -757,7 +756,7 @@ precinct,name,title
 To keep the header from only the first entry, we can use the `keepHeader` argument to `collectFile`:
 
 ```groovy
-characters 
+characters
 | WriteBio
 | collectFile(name: 'characters.csv', storeDir: 'results', keepHeader: true)
 | view
@@ -793,7 +792,7 @@ characters
         A good solution would be to pass a closure to the `collectFile` operator. The closure will return the filename and the file in a List:
 
         ```groovy
-        characters 
+        characters
         | WriteBio
         | collectFile(storeDir: 'results', keepHeader: true) { character, file ->
             ["${character.title}s.csv", file]
@@ -804,7 +803,7 @@ characters
         Another viable option would be to `map` over the channel before `collectFile`:
 
         ```groovy
-        characters 
+        characters
         | WriteBio
         | map { character, file -> ["${character.title}s.csv", file] }
         | collectFile(storeDir: 'results', keepHeader: true)
