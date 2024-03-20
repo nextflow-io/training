@@ -1,10 +1,11 @@
-params.output_file = 'hello-output.txt'
-greeting_ch = Channel.of('Hello world!')
+/*
+ * Pipeline parameters
+ */
+params.output_file = 'output.txt'
 
-workflow {
-    sayHello(greeting_ch)
-}
-
+/*
+ * Use echo to print 'Hello World!' to standard out
+ */
 process sayHello {
     input:
         val greeting  
@@ -15,4 +16,13 @@ process sayHello {
     """
     echo '$greeting' > $params.output_file
     """
+}
+
+workflow {
+
+    // create a channel for inputs
+    greeting_ch = Channel.of('Hello world!')
+
+    // emit a greeting
+    sayHello(greeting_ch)
 }

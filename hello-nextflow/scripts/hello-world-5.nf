@@ -1,9 +1,11 @@
-params.output_file = 'hello-output.txt'
+/*
+ * Pipeline parameters
+ */
+params.output_file = 'output.txt'
 
-workflow {
-    sayHello()
-}
-
+/*
+ * Use echo to print 'Hello World!' to standard out
+ */
 process sayHello {
 
     output: 
@@ -12,4 +14,10 @@ process sayHello {
     """
     echo 'Hello World!' > $params.output_file
     """
+}
+
+workflow {
+
+    // emit a greeting
+    sayHello()
 }
