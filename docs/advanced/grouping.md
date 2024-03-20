@@ -307,7 +307,7 @@ MapReads( samples, reference )
 | view { meta, bamfile -> "Meta is of ${meta.getClass()}" }
 ```
 
-To remove the `groupKey` and go back to the standard map, we can just call its `target` property. This is now appropriate to send through to the `groupTuple` operator and we will be grouping now only on the elements in the map.
+The `groupKey` has a property `target`, which contains the original map. If we call this property, we can replace the groupKey with the original map and get back to the original data structure. This is now appropriate to send through to the `groupTuple` operator and we will be grouping now only on the elements in the map.
 
 ```groovy linenums="1"
 MapReads( samples, reference )
