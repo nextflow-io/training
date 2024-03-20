@@ -358,6 +358,7 @@ process MergeGenotyped {
 This will publish all of the files in the `output` block of this process to the `results/genotyped` directory.
 
 !!! exercise
+
     Inspect the contents of the `results` directory. Does this match what you were expecting? What is missing here?
 
     Can you modify the `MergeGenotyped` process to ensure we are capturing all of the expected output files?
