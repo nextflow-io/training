@@ -83,7 +83,8 @@ Browse the work directory in the file explorer to find the log files and any out
 In this case, look for your output in the `.command.out` file.
 
 !!! tip
-Some of the specifics will be different in your log output. For example, here `[mighty_murdock]` and `[4e/6ba912]` are randomly generated names, so those will be different every time.
+
+    Some of the specifics will be different in your log output. For example, here `[mighty_murdock]` and `[4e/6ba912]` are randomly generated names, so those will be different every time.
 
 ### Takeaway
 
@@ -204,7 +205,8 @@ executor >  local (1)
 Like you did before, find the work directory in the file explorer. Find the `output.txt` output file and click on it to open it and verify that it contains the greeting as expected.
 
 !!! warning
-This example is brittle because we hardcoded the output filename in two separate places. If we change one but not the other, the script will break.
+
+    This example is brittle because we hardcoded the output filename in two separate places. If we change one but not the other, the script will break.
 
 ### Takeaway
 
@@ -268,10 +270,12 @@ executor >  local (1)
 Follow the same procedure as before to find the `output.txt` output file. If you want to convince yourself that the parameter is working as intended, feel free to repeat this step with a different output filename.
 
 !!! warning
-If you forget to add the output filename parameter, you get a warning and the output file is called `null`. If you add it but don't give it a value, the output file is called `true`.
+
+    If you forget to add the output filename parameter, you get a warning and the output file is called `null`. If you add it but don't give it a value, the output file is called `true`.
 
 !!! tip
-Command-line arguments take one dash (-) for Nextflow options, two dashes (--) for pipeline parameters.
+
+    Command-line arguments take one dash (-) for Nextflow options, two dashes (--) for pipeline parameters.
 
 ### Takeaway
 
@@ -331,7 +335,8 @@ executor >  local (1)
 Check the output directory and look for the output with the new filename. Tadaa again! The value of the parameter we passed on the command line overrode the value we gave the variable in the script. In fact, parameters can be set in several different ways; if the same parameter is set in multiple places, its value is determined based on the order of precedence described [here](https://www.nextflow.io/docs/latest/config.html).
 
 !!! tip
-You can put the parameter declaration inside the workflow block if you prefer. Whatever you choose, try to group similar things in the same place so you don't end up with declarations all over the place.
+
+    You can put the parameter declaration inside the workflow block if you prefer. Whatever you choose, try to group similar things in the same place so you don't end up with declarations all over the place.
 
 ### Takeaway
 
@@ -348,7 +353,8 @@ Learn how to add in variable inputs.
 So far, we've been emitting a greeting hardcoded into the process command. Now we're going to add some flexibility by introducing channels as the construct that holds the data we want to feed as input to a process. We're going to start with the simplest kind of channel, a value channel.
 
 !!! tip
-You can build [different kinds of channels](https://www.nextflow.io/docs/latest/channel.html#channel-types) depending on the shape of the input data; we'll cover how to deal with other kinds of fairly simple inputs later, but more complex input channel types are out of scope for this training.
+
+    You can build [different kinds of channels](https://www.nextflow.io/docs/latest/channel.html#channel-types) depending on the shape of the input data; we'll cover how to deal with other kinds of fairly simple inputs later, but more complex input channel types are out of scope for this training.
 
 #### 1. Create an input channel (with a bonus in-line comment)
 
@@ -497,7 +503,8 @@ executor >  local (1)
 Be sure to open up the output file to check that you now have the new version of the greeting. Voilà!
 
 !!! note
-The current form of the script doesn't have a variable declaration for `greeting` so that parameter is REQUIRED to be included in the command line. If we wanted, we could put in a default value by adding for example `params.greeting = 'Holà el mundo!'` at the top of the script (just like we did for the output filename). But it's less common to want to have a default value set for the input data.
+
+    The current form of the script doesn't have a variable declaration for `greeting` so that parameter is REQUIRED to be included in the command line. If we wanted, we could put in a default value by adding for example `params.greeting = 'Holà el mundo!'` at the top of the script (just like we did for the output filename). But it's less common to want to have a default value set for the input data.
 
 ### Takeaway
 
@@ -596,7 +603,8 @@ executor >  local (2)
 This time the workflow produced two work directories; one per process. Check out the work directory of the second process, where you should find two different output files listed. If you look carefully, you'll notice one of them (the output of the first process) has a little arrow icon on the right; that signifies it's a symbolic link. It points to the location where that file lives in the work directory of the first process.
 
 !!! note
-As a little bonus, we composed the second output filename based on the first one. Very important to remember: you have to use double quotes around the filename expression (NOT single quotes) or it will fail.
+
+    As a little bonus, we composed the second output filename based on the first one. Very important to remember: you have to use double quotes around the filename expression (NOT single quotes) or it will fail.
 
 ### Takeaway
 
@@ -663,7 +671,8 @@ process sayHello {
 ```
 
 !!! note
-In practice, naming files based on the data input itself is almost always impractical; the better way to generate dynamic filenames is to use a samplesheet and create a map of metadata (aka metamap) from which we can grab an appropriate identifier to generate the filenames. We'll show how to do that later in this training.
+
+    In practice, naming files based on the data input itself is almost always impractical; the better way to generate dynamic filenames is to use a samplesheet and create a map of metadata (aka metamap) from which we can grab an appropriate identifier to generate the filenames. We'll show how to do that later in this training.
 
 #### 3. Run the command and look at the log output
 
@@ -707,7 +716,8 @@ Launching `hello-world.nf` [disturbed_panini] DSL2 - revision: 719dae218c
 That's much better; at least for this number of processes. For a complex pipeline, or a large list of inputs, having the full list output to the terminal might get a bit overwhelming.
 
 !!! tip
-Another way to show that all six calls are happening is to delete all the work directories before you run again. Then you'll see the six new ones pop up.
+
+    Another way to show that all six calls are happening is to delete all the work directories before you run again. Then you'll see the six new ones pop up.
 
 ### Takeaway
 
@@ -761,10 +771,12 @@ Launching `hello-world.nf` [small_albattani] DSL2 - revision: 5cea973c3c
 Looking at the outputs, we see each greeting was correctly extracted and processed through the workflow. We've achieved the same result as the previous step, but now we have a lot more flexibility to add more elements to the list of greetings we want to process.
 
 !!! tip
-Nextflow offers a variety of predefined operators and functions for reading data in from common file formats and applying text transformations to it. In this example, we used the `fromPath()` channel factory with the `splitText()` operator to read each line as a separate value, then we used a closure to apply the `trim()` function to strip the newline (`\n`) character from each element.
+
+    Nextflow offers a variety of predefined operators and functions for reading data in from common file formats and applying text transformations to it. In this example, we used the `fromPath()` channel factory with the `splitText()` operator to read each line as a separate value, then we used a closure to apply the `trim()` function to strip the newline (`\n`) character from each element.
 
 !!! tip
-But don't worry if this feels like a lot to grapple with all of a sudden! This is just meant to be a little peek at the kind of things you will learn in later training modules.
+
+    But don't worry if this feels like a lot to grapple with all of a sudden! This is just meant to be a little peek at the kind of things you will learn in later training modules.
 
 ### Takeaway
 

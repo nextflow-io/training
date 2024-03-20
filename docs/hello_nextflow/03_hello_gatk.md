@@ -5,7 +5,8 @@ The [GATK](https://gatk.broadinstitute.org/) (Genome Analysis Toolkit) is a wide
 ![GATK pipeline](img/gatk-pipeline.png)
 
 !!! note
-Don't worry if you're not familiar with GATK or genomics in general. We'll summarize the necessary concepts as we go, and the workflow implementation principles we demonstrate here apply broadly to any command line tool that takes in some input files and produce some output files.
+
+    Don't worry if you're not familiar with GATK or genomics in general. We'll summarize the necessary concepts as we go, and the workflow implementation principles we demonstrate here apply broadly to any command line tool that takes in some input files and produce some output files.
 
 A full variant calling pipeline typically involves a lot of steps. For simplicity, we are only going to look at the core variant calling steps.
 
@@ -264,9 +265,12 @@ executor >  local (2)
 If you check the work directory, you'll find the output file `reads_mother.bam.g.vcf`. Because this is a small test file, you can click on it to open it and view the contents, which consist of 92 lines of header metadata followed by a list of genomic variant calls, one per line.
 
 !!! note
-A GVCF is a special kind of VCF that contains non-variant records as well as variant calls. The first actual variant call in this file occurs at line 325:
 
+    A GVCF is a special kind of VCF that contains non-variant records as well as variant calls. The first actual variant call in this file occurs at line 325:
+
+    ```
     20	10040772	.	C	CT,<NON_REF>	473.03	.	DP=22;ExcessHet=0.0000;MLEAC=2,0;MLEAF=1.00,0.00;RAW_MQandDP=79200,22	GT:AD:DP:GQ:PL:SB	1/1:0,17,0:17:51:487,51,0,488,51,488:0,0,7,10
+    ```
 
 ### Takeaway
 
@@ -636,6 +640,7 @@ This involves using a GATK tool called GenomicsDBImport that combines the per-sa
 One slight complication is that these tools require the use of a sample map that lists per-sample GVCF files, which is different enough from a samplesheet that we need to generate it separately. And for that, we need to pass the sample ID between processes.
 
 !!! tip
+
 For a more sophisticated and efficient method of metadata propagation, see the topic of [meta maps](https://training.nextflow.io/advanced/metadata/).
 
 #### 6.2. Add the sample ID to the tuple emitted by SAMTOOLS_INDEX
