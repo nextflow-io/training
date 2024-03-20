@@ -1,33 +1,32 @@
 # Part 2: Hello GATK
 
-The [GATK](https://gatk.broadinstitute.org/) (Genome Analysis Toolkit) is a widely used software package developed by the Broad Institute to analyze high-throughput sequencing data. We're going to use GATK and a related tool, [Samtools](https://www.htslib.org/), in a very basic pipeline that identifies genomic variants through a method called **variant calling**. 
+The [GATK](https://gatk.broadinstitute.org/) (Genome Analysis Toolkit) is a widely used software package developed by the Broad Institute to analyze high-throughput sequencing data. We're going to use GATK and a related tool, [Samtools](https://www.htslib.org/), in a very basic pipeline that identifies genomic variants through a method called **variant calling**.
 
 ![GATK pipeline](img/gatk-pipeline.png)
 
 !!! note
-    Don't worry if you're not familiar with GATK or genomics in general. We'll summarize the necessary concepts as we go, and the workflow implementation principles we demonstrate here apply broadly to any command line tool that takes in some input files and produce some output files.
+Don't worry if you're not familiar with GATK or genomics in general. We'll summarize the necessary concepts as we go, and the workflow implementation principles we demonstrate here apply broadly to any command line tool that takes in some input files and produce some output files.
 
-
-A full variant calling pipeline typically involves a lot of steps. For simplicity, we are only going to look at the core variant calling steps. 
+A full variant calling pipeline typically involves a lot of steps. For simplicity, we are only going to look at the core variant calling steps.
 
 ### Method overview
 
 1. Generate an index file for each BAM input file using Samtools
-2. Run the GATK HaplotypeCaller on each BAM input file to generate per-sample variant calls in GVCF (Genomic Variant Call Format) 
+2. Run the GATK HaplotypeCaller on each BAM input file to generate per-sample variant calls in GVCF (Genomic Variant Call Format)
 
 ![Variant calling](img/haplotype-caller.png)
 
 ### Dataset
 
-- **A reference genome** consisting of the human chromosome 20 (from hg19/b37) and its accessory files (index and sequence dictionary). The reference files are compressed to keep the Gitpod size small so we'll have to decompress them in order to use them. 
-- **Three whole genome sequencing samples** corresponding to a family trio (mother, father and son), which have been subset to a small portion on chromosome 20 to keep the file sizes small. The sequencing data is in [BAM](https://samtools.github.io/hts-specs/SAMv1.pdf) (Binary Alignment Map) format, i.e. genome sequencing reads that have already been mapped to the reference genome. 
-- **A list of genomic intervals**, i.e. coordinates on the genome where our samples have data suitable for calling variants.
+-   **A reference genome** consisting of the human chromosome 20 (from hg19/b37) and its accessory files (index and sequence dictionary). The reference files are compressed to keep the Gitpod size small so we'll have to decompress them in order to use them.
+-   **Three whole genome sequencing samples** corresponding to a family trio (mother, father and son), which have been subset to a small portion on chromosome 20 to keep the file sizes small. The sequencing data is in [BAM](https://samtools.github.io/hts-specs/SAMv1.pdf) (Binary Alignment Map) format, i.e. genome sequencing reads that have already been mapped to the reference genome.
+-   **A list of genomic intervals**, i.e. coordinates on the genome where our samples have data suitable for calling variants.
 
-----
+---
 
 ## 0. Warmup: Run Samtools and GATK directly
 
-Just like in the Hello World example, we want to try out the commands manually before we attempt to wrap them in a workflow. The difference here is that we're going to use Docker containers to obtain and run the tools. 
+Just like in the Hello World example, we want to try out the commands manually before we attempt to wrap them in a workflow. The difference here is that we're going to use Docker containers to obtain and run the tools.
 
 ### 0.1. Index a BAM input file with Samtools
 
@@ -69,7 +68,6 @@ Where `reads_mother.bam.bai` has been created as an index to `reads_mother.bam`.
 exit
 ```
 
-
 ### 0.2. Call variants with GATK HaplotypeCaller
 
 #### 0.2.1. Decompress the reference genome files
@@ -107,7 +105,7 @@ gatk HaplotypeCaller \
 cat reads_mother.g.vcf
 ```
 
-----
+---
 
 ## 1. Write a single-stage workflow that runs Samtools index on a BAM file
 
@@ -119,7 +117,7 @@ cat reads_mother.g.vcf
  */
 process SAMTOOLS_INDEX {
 
-    container 'quay.io/biocontainers/samtools:1.19.2--h50ea8bc_1' 
+    container 'quay.io/biocontainers/samtools:1.19.2--h50ea8bc_1'
 
     input:
         path input_bam
@@ -135,14 +133,14 @@ process SAMTOOLS_INDEX {
 ```
 
 #### 1.2. Add parameter declarations up top
-    
+
 ```
 /*
  * Pipeline parameters
  */
 
 // Execution environment setup
-params.baseDir = "/workspace/gitpod/hello-nextflow" 
+params.baseDir = "/workspace/gitpod/hello-nextflow"
 $baseDir = params.baseDir
 
 // Primary input
@@ -179,16 +177,18 @@ executor >  local (1)
 ```
 
 ### Takeaway
+
 You know how to wrap a real bioinformatics tool in a single-step Nextflow workflow.
 
-### What's next? 
+### What's next?
+
 Add a second step that consumes the output of the first.
 
-----
+---
 
-## 2. Add a second step that runs GATK HaplotypeCaller on the indexed BAM file 
+## 2. Add a second step that runs GATK HaplotypeCaller on the indexed BAM file
 
-#### 2.1. Define the variant calling process 
+#### 2.1. Define the variant calling process
 
 ```
 /*
@@ -264,18 +264,19 @@ executor >  local (2)
 If you check the work directory, you'll find the output file `reads_mother.bam.g.vcf`. Because this is a small test file, you can click on it to open it and view the contents, which consist of 92 lines of header metadata followed by a list of genomic variant calls, one per line.
 
 !!! note
-    A GVCF is a special kind of VCF that contains non-variant records as well as variant calls. The first actual variant call in this file occurs at line 325:
+A GVCF is a special kind of VCF that contains non-variant records as well as variant calls. The first actual variant call in this file occurs at line 325:
 
     20	10040772	.	C	CT,<NON_REF>	473.03	.	DP=22;ExcessHet=0.0000;MLEAC=2,0;MLEAF=1.00,0.00;RAW_MQandDP=79200,22	GT:AD:DP:GQ:PL:SB	1/1:0,17,0:17:51:487,51,0,488,51,488:0,0,7,10
 
-
 ### Takeaway
+
 You know how to make a very basic two-step variant calling workflow.
 
-### What's next? 
+### What's next?
+
 Make the workflow handle multiple samples in bulk.
 
-----
+---
 
 ## 3. Adapt the workflow to run on a batch of samples
 
@@ -296,94 +297,97 @@ nextflow run hello-gatk.nf
 
 Uh-oh! Sometimes it works, but sometimes, some of the runs fail with an error like this:
 
-> executor >  local (6)
-> [f3/80670d] process > SAMTOOLS_INDEX (1)       [100%] 3 of 3 ✔
+> executor > local (6)
+> [f3/80670d] process > SAMTOOLS_INDEX (1) [100%] 3 of 3 ✔
 > [27/78b83d] process > GATK_HAPLOTYPECALLER (3) [100%] 1 of 1, failed: 1
 > ERROR ~ Error executing process > 'GATK_HAPLOTYPECALLER (1)'
-> 
+>
 > Caused by:
->   Process `GATK_HAPLOTYPECALLER (1)` terminated with an error exit status (2)
-> 
+> Process `GATK_HAPLOTYPECALLER (1)` terminated with an error exit status (2)
+>
 > Command executed:
-> 
->   gatk HaplotypeCaller         -R ref.fasta         -I reads_mother.bam         -O reads_mother.bam.g.vcf         -L intervals-min.list         -ERC GVCF
-> 
+>
+> gatk HaplotypeCaller -R ref.fasta -I reads_mother.bam -O reads_mother.bam.g.vcf -L intervals-min.list -ERC GVCF
+>
 > Command exit status:
->   2
-> 
+> 2
+>
 > Command output:
->   (empty)
-> 
+> (empty)
+>
 > Command error:
->   04:52:05.954 INFO  HaplotypeCaller - Java runtime: OpenJDK 64-Bit Server VM v17.0.9+9-Ubuntu-122.04
->   04:52:05.955 INFO  HaplotypeCaller - Start Date/Time: March 15, 2024 at 4:52:05 AM GMT
->   04:52:05.955 INFO  HaplotypeCaller - ------------------------------------------------------------
->   04:52:05.955 INFO  HaplotypeCaller - ------------------------------------------------------------
->   04:52:05.956 INFO  HaplotypeCaller - HTSJDK Version: 4.1.0
->   04:52:05.956 INFO  HaplotypeCaller - Picard Version: 3.1.1
->   04:52:05.956 INFO  HaplotypeCaller - Built for Spark Version: 3.5.0
->   04:52:05.957 INFO  HaplotypeCaller - HTSJDK Defaults.COMPRESSION_LEVEL : 2
->   04:52:05.957 INFO  HaplotypeCaller - HTSJDK Defaults.USE_ASYNC_IO_READ_FOR_SAMTOOLS : false
->   04:52:05.957 INFO  HaplotypeCaller - HTSJDK Defaults.USE_ASYNC_IO_WRITE_FOR_SAMTOOLS : true
->   04:52:05.957 INFO  HaplotypeCaller - HTSJDK Defaults.USE_ASYNC_IO_WRITE_FOR_TRIBBLE : false
->   04:52:05.958 INFO  HaplotypeCaller - Deflater: IntelDeflater
->   04:52:05.958 INFO  HaplotypeCaller - Inflater: IntelInflater
->   04:52:05.958 INFO  HaplotypeCaller - GCS max retries/reopens: 20
->   04:52:05.958 INFO  HaplotypeCaller - Requester pays: disabled
->   04:52:05.959 INFO  HaplotypeCaller - Initializing engine
->   04:52:06.563 INFO  IntervalArgumentCollection - Processing 20000 bp from intervals
->   04:52:06.572 INFO  HaplotypeCaller - Done initializing engine
->   04:52:06.575 INFO  HaplotypeCallerEngine - Tool is in reference confidence mode and the annotation, the following changes will be made to any specified annotations: 'StrandBiasBySample' will be enabled. 'ChromosomeCounts', 'FisherStrand', 'StrandOddsRatio' and 'QualByDepth' annotations have been disabled
->   04:52:06.653 INFO  NativeLibraryLoader - Loading libgkl_utils.so from jar:file:/gatk/gatk-package-4.5.0.0-local.jar!/com/intel/gkl/native/libgkl_utils.so
->   04:52:06.656 INFO  NativeLibraryLoader - Loading libgkl_smithwaterman.so from jar:file:/gatk/gatk-package-4.5.0.0-local.jar!/com/intel/gkl/native/libgkl_smithwaterman.so
->   04:52:06.657 INFO  SmithWatermanAligner - Using AVX accelerated SmithWaterman implementation
->   04:52:06.662 INFO  HaplotypeCallerEngine - Standard Emitting and Calling confidence set to -0.0 for reference-model confidence output
->   04:52:06.663 INFO  HaplotypeCallerEngine - All sites annotated with PLs forced to true for reference-model confidence output
->   04:52:06.676 INFO  NativeLibraryLoader - Loading libgkl_pairhmm_omp.so from jar:file:/gatk/gatk-package-4.5.0.0-local.jar!/com/intel/gkl/native/libgkl_pairhmm_omp.so
->   04:52:06.756 INFO  IntelPairHmm - Flush-to-zero (FTZ) is enabled when running PairHMM
->   04:52:06.757 INFO  IntelPairHmm - Available threads: 16
->   04:52:06.757 INFO  IntelPairHmm - Requested threads: 4
->   04:52:06.757 INFO  PairHMM - Using the OpenMP multi-threaded AVX-accelerated native PairHMM implementation
->   04:52:06.954 INFO  ProgressMeter - Starting traversal
->   04:52:06.955 INFO  ProgressMeter -        Current Locus  Elapsed Minutes     Regions Processed   Regions/Minute
->   04:52:06.967 INFO  VectorLoglessPairHMM - Time spent in setup for JNI call : 0.0
->   04:52:06.968 INFO  PairHMM - Total compute time in PairHMM computeLogLikelihoods() : 0.0
->   04:52:06.969 INFO  SmithWatermanAligner - Total compute time in native Smith-Waterman : 0.00 sec
->   04:52:06.971 INFO  HaplotypeCaller - Shutting down engine
->   [March 15, 2024 at 4:52:06 AM GMT] org.broadinstitute.hellbender.tools.walkers.haplotypecaller.HaplotypeCaller done. Elapsed time: 0.03 minutes.
->   Runtime.totalMemory()=629145600
->   ***********************************************************************
->   
->   A USER ERROR has occurred: Traversal by intervals was requested but some input files are not indexed.
->   Please index all input files:
->   
->   samtools index reads_mother.bam
->   
->   
->   ***********************************************************************
->   Set the system property GATK_STACKTRACE_ON_USER_EXCEPTION (--java-options '-DGATK_STACKTRACE_ON_USER_EXCEPTION=true') to print the stack trace.
->   Using GATK jar /gatk/gatk-package-4.5.0.0-local.jar
->   Running:
->       java -Dsamjdk.use_async_io_read_samtools=false -Dsamjdk.use_async_io_write_samtools=true -Dsamjdk.use_async_io_write_tribble=false -Dsamjdk.compression_level=2 -jar /gatk/gatk-package-4.5.0.0-local.jar HaplotypeCaller -R ref.fasta -I reads_mother.bam -O reads_mother.bam.g.vcf -L intervals-min.list -ERC GVCF
-> 
+> 04:52:05.954 INFO HaplotypeCaller - Java runtime: OpenJDK 64-Bit Server VM v17.0.9+9-Ubuntu-122.04
+> 04:52:05.955 INFO HaplotypeCaller - Start Date/Time: March 15, 2024 at 4:52:05 AM GMT
+> 04:52:05.955 INFO HaplotypeCaller - ------------------------------------------------------------
+> 04:52:05.955 INFO HaplotypeCaller - ------------------------------------------------------------
+> 04:52:05.956 INFO HaplotypeCaller - HTSJDK Version: 4.1.0
+> 04:52:05.956 INFO HaplotypeCaller - Picard Version: 3.1.1
+> 04:52:05.956 INFO HaplotypeCaller - Built for Spark Version: 3.5.0
+> 04:52:05.957 INFO HaplotypeCaller - HTSJDK Defaults.COMPRESSION_LEVEL : 2
+> 04:52:05.957 INFO HaplotypeCaller - HTSJDK Defaults.USE_ASYNC_IO_READ_FOR_SAMTOOLS : false
+> 04:52:05.957 INFO HaplotypeCaller - HTSJDK Defaults.USE_ASYNC_IO_WRITE_FOR_SAMTOOLS : true
+> 04:52:05.957 INFO HaplotypeCaller - HTSJDK Defaults.USE_ASYNC_IO_WRITE_FOR_TRIBBLE : false
+> 04:52:05.958 INFO HaplotypeCaller - Deflater: IntelDeflater
+> 04:52:05.958 INFO HaplotypeCaller - Inflater: IntelInflater
+> 04:52:05.958 INFO HaplotypeCaller - GCS max retries/reopens: 20
+> 04:52:05.958 INFO HaplotypeCaller - Requester pays: disabled
+> 04:52:05.959 INFO HaplotypeCaller - Initializing engine
+> 04:52:06.563 INFO IntervalArgumentCollection - Processing 20000 bp from intervals
+> 04:52:06.572 INFO HaplotypeCaller - Done initializing engine
+> 04:52:06.575 INFO HaplotypeCallerEngine - Tool is in reference confidence mode and the annotation, the following changes will be made to any specified annotations: 'StrandBiasBySample' will be enabled. 'ChromosomeCounts', 'FisherStrand', 'StrandOddsRatio' and 'QualByDepth' annotations have been disabled
+> 04:52:06.653 INFO NativeLibraryLoader - Loading libgkl_utils.so from jar:file:/gatk/gatk-package-4.5.0.0-local.jar!/com/intel/gkl/native/libgkl_utils.so
+> 04:52:06.656 INFO NativeLibraryLoader - Loading libgkl_smithwaterman.so from jar:file:/gatk/gatk-package-4.5.0.0-local.jar!/com/intel/gkl/native/libgkl_smithwaterman.so
+> 04:52:06.657 INFO SmithWatermanAligner - Using AVX accelerated SmithWaterman implementation
+> 04:52:06.662 INFO HaplotypeCallerEngine - Standard Emitting and Calling confidence set to -0.0 for reference-model confidence output
+> 04:52:06.663 INFO HaplotypeCallerEngine - All sites annotated with PLs forced to true for reference-model confidence output
+> 04:52:06.676 INFO NativeLibraryLoader - Loading libgkl_pairhmm_omp.so from jar:file:/gatk/gatk-package-4.5.0.0-local.jar!/com/intel/gkl/native/libgkl_pairhmm_omp.so
+> 04:52:06.756 INFO IntelPairHmm - Flush-to-zero (FTZ) is enabled when running PairHMM
+> 04:52:06.757 INFO IntelPairHmm - Available threads: 16
+> 04:52:06.757 INFO IntelPairHmm - Requested threads: 4
+> 04:52:06.757 INFO PairHMM - Using the OpenMP multi-threaded AVX-accelerated native PairHMM implementation
+> 04:52:06.954 INFO ProgressMeter - Starting traversal
+> 04:52:06.955 INFO ProgressMeter - Current Locus Elapsed Minutes Regions Processed Regions/Minute
+> 04:52:06.967 INFO VectorLoglessPairHMM - Time spent in setup for JNI call : 0.0
+> 04:52:06.968 INFO PairHMM - Total compute time in PairHMM computeLogLikelihoods() : 0.0
+> 04:52:06.969 INFO SmithWatermanAligner - Total compute time in native Smith-Waterman : 0.00 sec
+> 04:52:06.971 INFO HaplotypeCaller - Shutting down engine
+> [March 15, 2024 at 4:52:06 AM GMT] org.broadinstitute.hellbender.tools.walkers.haplotypecaller.HaplotypeCaller done. Elapsed time: 0.03 minutes.
+> Runtime.totalMemory()=629145600
+>
+> ---
+>
+> A USER ERROR has occurred: Traversal by intervals was requested but some input files are not indexed.
+> Please index all input files:
+>
+> samtools index reads_mother.bam
+>
+> ---
+>
+> Set the system property GATK_STACKTRACE_ON_USER_EXCEPTION (--java-options '-DGATK_STACKTRACE_ON_USER_EXCEPTION=true') to print the stack trace.
+> Using GATK jar /gatk/gatk-package-4.5.0.0-local.jar
+> Running:
+> java -Dsamjdk.use_async_io_read_samtools=false -Dsamjdk.use_async_io_write_samtools=true -Dsamjdk.use_async_io_write_tribble=false -Dsamjdk.compression_level=2 -jar /gatk/gatk-package-4.5.0.0-local.jar HaplotypeCaller -R ref.fasta -I reads_mother.bam -O reads_mother.bam.g.vcf -L intervals-min.list -ERC GVCF
+>
 > Work dir:
->   /workspace/gitpod/nf-training/work/22/611b8c5703daaf459188d79cd68db0
-> 
+> /workspace/gitpod/nf-training/work/22/611b8c5703daaf459188d79cd68db0
+>
 > Tip: you can try to figure out what's wrong by changing to the process work dir and showing the script file named `.command.sh`
-> 
->  -- Check '.nextflow.log' file for details
+>
+> -- Check '.nextflow.log' file for details
 
 **Why does this happen?** Because the order of outputs is not guaranteed, so the script as written so far is not safe for running on multiple samples!
 
 #### 3.3. Change the output of the SAMTOOLS_INDEX process into a tuple that keeps the input file and its index together
 
 _Before:_
+
 ```
     output:
         path "${input_bam}.bai"
 ```
 
 _After:_
+
 ```
     output:
         tuple path(input_bam), path("${input_bam}.bai")
@@ -392,6 +396,7 @@ _After:_
 #### 3.4. Change the input to the GATK_HAPLOTYPECALLER process to be a tuple
 
 _Before:_
+
 ```
     input:
         path input_bam
@@ -399,14 +404,16 @@ _Before:_
 ```
 
 _After:_
+
 ```
-    input: 
+    input:
         tuple path(input_bam), path(input_bam_index)
 ```
 
 #### 3.5. Update the call to GATK_HAPLOTYPECALLER in the workflow block
 
 _Before:_
+
 ```
     GATK_HAPLOTYPECALLER(
         reads_ch,
@@ -414,12 +421,13 @@ _Before:_
 ```
 
 _After:_
+
 ```
     GATK_HAPLOTYPECALLER(
         SAMTOOLS_INDEX.out,
 ```
 
-#### 3.6. Run the workflow to verify it works correctly on all three samples now 
+#### 3.6. Run the workflow to verify it works correctly on all three samples now
 
 ```
 nextflow run hello-gatk.nf -ansi-log false
@@ -439,18 +447,21 @@ Launching `hello-gatk.nf` [adoring_hopper] DSL2 - revision: 8cad21ea51
 ```
 
 ### Takeaway
+
 You know how to make a variant calling workflow run on multiple samples (independently).
 
-### What's next? 
+### What's next?
+
 Make it easier to handle samples in bulk.
 
-----
+---
 
 ## 4. Make it nicer to run on arbitrary samples by using a list of files as input
 
 #### 4.1. Create a text file listing the input paths
 
 _sample_bams.txt:_
+
 ```
 /workspace/gitpod/hello-nextflow/data/bam/reads_mother.bam
 /workspace/gitpod/hello-nextflow/data/bam/reads_father.bam
@@ -460,6 +471,7 @@ _sample_bams.txt:_
 #### 4.2. Update the parameter default
 
 _Before:_
+
 ```
 // Primary input
 params.reads_bam = ["${baseDir}/data/bam/reads_mother.bam",
@@ -468,6 +480,7 @@ params.reads_bam = ["${baseDir}/data/bam/reads_mother.bam",
 ```
 
 _After:_
+
 ```
 // Primary input (list of input files, one per line)
 params.reads_bam = "${baseDir}/data/bam/sample_bams.txt"
@@ -476,14 +489,16 @@ params.reads_bam = "${baseDir}/data/bam/sample_bams.txt"
 #### 4.3. Update the channel factory to read lines from a file
 
 _Before:_
+
 ```
     // Create input channel
     reads_ch = Channel.from(params.reads_bam)
 ```
 
 _After:_
+
 ```
-    // Create input channel from list of input files in plain text 
+    // Create input channel from list of input files in plain text
     reads_ch = Channel.fromPath(params.reads_bam).splitText
 ```
 
@@ -507,19 +522,23 @@ Launching `hello-gatk.nf` [kickass_faggin] DSL2 - revision: dcfa9f34e3
 ```
 
 ### Takeaway
+
 You know how to make a variant calling workflow handle a list of input samples.
 
-### What's next? 
+### What's next?
+
 Turn the list of input files into a samplesheet by including some metadata.
 
-----
+---
 
-## 5. Upgrade to using a (primitive) samplesheet 
+## 5. Upgrade to using a (primitive) samplesheet
+
 This is a very common pattern in Nextflow pipelines.
 
 #### 5.1. Add a header line and the sample IDs to a copy of the sample list, in CSV format
 
 _samplesheet.csv:_
+
 ```
 ID,reads_bam
 NA12878,/workspace/gitpod/hello-nextflow/data/bam/reads_mother.bam
@@ -530,12 +549,14 @@ NA12882,/workspace/gitpod/hello-nextflow/data/bam/reads_son.bam
 #### 5.2. Update the parameter default
 
 _Before:_
+
 ```
 // Primary input (list of input files, one sample per line)
 params.reads_bam = "${baseDir}/data/bam/sample_bams.txt"
 ```
 
 _After:_
+
 ```
 // Primary input (samplesheet in CSV format with ID and file path, one sample per line)
 params.reads_bam = "${baseDir}/data/samplesheet.csv"
@@ -544,12 +565,14 @@ params.reads_bam = "${baseDir}/data/samplesheet.csv"
 #### 5.3. Update the channel factory to parse a CSV file
 
 _Before:_
+
 ```
-    // Create input channel from list of input files in plain text 
+    // Create input channel from list of input files in plain text
     reads_ch = Channel.fromPath(params.reads_bam).splitText()
 ```
 
 _After:_
+
 ```
     // Create input channel from samplesheet in CSV format
     reads_ch = Channel.fromPath(params.reads_bam)
@@ -560,12 +583,14 @@ _After:_
 #### 5.4. Add the sample ID to the SAMTOOLS_INDEX input definition
 
 _Before:_
+
 ```
     input:
         path input_bam
 ```
 
 _After:_
+
 ```
     input:
         tuple val(id), path(input_bam)
@@ -577,7 +602,7 @@ _After:_
 nextflow run hello-gatk.nf -ansi-log false
 ```
 
-If everything is wired up correctly, it should produce essentially the same result. 
+If everything is wired up correctly, it should produce essentially the same result.
 
 ```
 N E X T F L O W  ~  version 23.10.1
@@ -591,35 +616,39 @@ Launching `hello-gatk.nf` [extravagant_panini] DSL2 - revision: 56accbf948
 ```
 
 ### Takeaway
+
 You know how to make a variant calling workflow handle a basic samplesheet.
 
-### What's next? 
+### What's next?
+
 Add a joint genotyping step that combines the data from all the samples.
 
-----
+---
 
 ## 6. Stretch goal: Add joint genotyping step
 
-To complicate matters a little, the GATK variant calling method calls for a consolidation step where we combine and re-analyze the variant calls obtained per sample in order to obtain definitive 'joint' variant calls for a group or _cohort_ of samples (in this case, the family trio). 
+To complicate matters a little, the GATK variant calling method calls for a consolidation step where we combine and re-analyze the variant calls obtained per sample in order to obtain definitive 'joint' variant calls for a group or _cohort_ of samples (in this case, the family trio).
 
 ![Joint analysis](img/joint-calling.png)
 
 This involves using a GATK tool called GenomicsDBImport that combines the per-sample calls into a sort of mini-database, followed by another GATK tool, GenotypeGVCFs, which performs the actual 'joint genotyping' analysis. These two tools can be run in series within the same process.
 
-One slight complication is that these tools require the use of a sample map that lists per-sample GVCF files, which is different enough from a samplesheet that we need to generate it separately. And for that, we need to pass the sample ID between processes. 
+One slight complication is that these tools require the use of a sample map that lists per-sample GVCF files, which is different enough from a samplesheet that we need to generate it separately. And for that, we need to pass the sample ID between processes.
 
 !!! tip
-    For a more sophisticated and efficient method of metadata propagation, see the topic of [meta maps](https://training.nextflow.io/advanced/metadata/).
+For a more sophisticated and efficient method of metadata propagation, see the topic of [meta maps](https://training.nextflow.io/advanced/metadata/).
 
-#### 6.2. Add the sample ID to the tuple emitted by  SAMTOOLS_INDEX
+#### 6.2. Add the sample ID to the tuple emitted by SAMTOOLS_INDEX
 
 _Before:_
+
 ```
     output:
         tuple path(input_bam), path("${input_bam}.bai")
 ```
 
 _After:_
+
 ```
     output:
         tuple val(id), path(input_bam), path("${input_bam}.bai")
@@ -628,27 +657,29 @@ _After:_
 #### 6.3. Add the sample ID to the GATK_HAPLOTYPECALLER process input and output definitions
 
 _Before:_
+
 ```
     input:
         tuple path(input_bam), path(input_bam_index)
         ...
-        
+
     output:
         path "${input_bam}.g.vcf"
         path "${input_bam}.g.vcf.idx"
 ```
 
 _After:_
+
 ```
     input:
         tuple val(id), path(input_bam), path(input_bam_index)
         ...
-        
+
     output:
         tuple val(id), path("${input_bam}.g.vcf"), path("${input_bam}.g.vcf.idx")
 ```
 
-#### 6.4. Generate a sample map based on the output of GATK_HAPLOTYPECALLER 
+#### 6.4. Generate a sample map based on the output of GATK_HAPLOTYPECALLER
 
 ```
     // Create a sample map of the output GVCFs
@@ -699,8 +730,8 @@ process GATK_JOINTGENOTYPING {
 ```
     // Consolidate GVCFs and apply joint genotyping analysis
     GATK_JOINTGENOTYPING(
-        sample_map, 
-        params.cohort_name, 
+        sample_map,
+        params.cohort_name,
         params.genome_reference,
         params.genome_reference_index,
         params.genome_reference_dict,
@@ -732,16 +763,18 @@ executor >  local (7)
 [14/7145b6] process > GATK_JOINTGENOTYPING (1) [100%] 1 of 1 ✔
 ```
 
-You can find the final output file, `family_trio.joint.vcf`, in the work directory for the last process. Click on it to open it and you'll see 40 lines of metadata header followed by just under 30 jointly genotyped variant records (meaning at least one of the family members has a variant genotype at each genomic position listed). 
+You can find the final output file, `family_trio.joint.vcf`, in the work directory for the last process. Click on it to open it and you'll see 40 lines of metadata header followed by just under 30 jointly genotyped variant records (meaning at least one of the family members has a variant genotype at each genomic position listed).
 
-!!! tip 
-    Keep in mind the data files covered only a tiny portion of chromosome 20; the real size of a variant callset would be counted in millions of variants. That's why we use only tiny subsets of data for training purposes! 
+!!! tip
+Keep in mind the data files covered only a tiny portion of chromosome 20; the real size of a variant callset would be counted in millions of variants. That's why we use only tiny subsets of data for training purposes!
 
 ### Takeaway
+
 You know how to make a joint variant calling workflow that outputs a cohort VCF.
 
-### What's next? 
-Celebrate your success and take an extra long break! This was tough and you deserve it. 
+### What's next?
+
+Celebrate your success and take an extra long break! This was tough and you deserve it.
 
 In future trainings, you'll learn more sophisticated methods for managing inputs and outputs (including using the publishDir directive to save the outputs you care about to a storage directory).
 

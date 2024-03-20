@@ -7,22 +7,25 @@ hide:
 # Hello Nextflow
 
 ### Audience & prerequisites
-- Beginners with Nextflow
-- Required: basic experience with command line and scripting
-- Some bioinformatics and genomics concepts will be introduced
+
+-   Beginners with Nextflow
+-   Required: basic experience with command line and scripting
+-   Some bioinformatics and genomics concepts will be introduced
 
 ### Learning objectives
-This training module aims to build basic proficiency in the following areas: 
 
-- Nextflow language:
-    - practical use of core components (sufficient to build a simple multi-step workflow)
-    - awareness of next-step concepts such as operators and channel factories
+This training module aims to build basic proficiency in the following areas:
 
-- CLI execution: 
-    - launch a Nextflow workflow locally
-    - find outputs (results)
-    - interpret log outputs
-    - troubleshoot basic issues
+-   Nextflow language:
+
+    -   practical use of core components (sufficient to build a simple multi-step workflow)
+    -   awareness of next-step concepts such as operators and channel factories
+
+-   CLI execution:
+    -   launch a Nextflow workflow locally
+    -   find outputs (results)
+    -   interpret log outputs
+    -   troubleshoot basic issues
 
 ## Run it in Gitpod
 
