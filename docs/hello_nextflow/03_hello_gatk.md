@@ -641,7 +641,7 @@ One slight complication is that these tools require the use of a sample map that
 
 !!! tip
 
-For a more sophisticated and efficient method of metadata propagation, see the topic of [meta maps](https://training.nextflow.io/advanced/metadata/).
+    For a more sophisticated and efficient method of metadata propagation, see the topic of [meta maps](https://training.nextflow.io/advanced/metadata/).
 
 #### 6.2. Add the sample ID to the tuple emitted by SAMTOOLS_INDEX
 
