@@ -1,14 +1,23 @@
+/*
+ * Pipeline parameters
+ */
 
-params.baseDir = "/workspace/gitpod/nf-training" 
+// Execution environment setup
+params.baseDir = "/workspace/gitpod/nf-training/hello-nextflow" 
 $baseDir = params.baseDir
 
-params.reads_bam = "${baseDir}/data/gatk/bam/reads_mother.bam"
+// Primary input
+params.reads_bam = "${baseDir}/data/bam/reads_mother.bam"
 
-params.genome_reference = "${baseDir}/data/gatk/ref/ref.fasta"
-params.genome_reference_index = "${baseDir}/data/gatk/ref/ref.fasta.fai"
-params.genome_reference_dict = "${baseDir}/data/gatk/ref/ref.dict"
-params.calling_intervals = "${baseDir}/data/gatk/intervals.list"
+// Accessory files
+params.genome_reference = "${baseDir}/data/ref/ref.fasta"
+params.genome_reference_index = "${baseDir}/data/ref/ref.fasta.fai"
+params.genome_reference_dict = "${baseDir}/data/ref/ref.dict"
+params.calling_intervals = "${baseDir}/data/intervals.list"
 
+/*
+ * Generate BAM index file
+ */
 process SAMTOOLS_INDEX {
 
     container 'quay.io/biocontainers/samtools:1.19.2--h50ea8bc_1' 
@@ -25,6 +34,9 @@ process SAMTOOLS_INDEX {
     """
 }
 
+/*
+ * Call variants with GATK HapolotypeCaller in GVCF mode
+ */
 process GATK_HAPLOTYPECALLER {
 
     container "broadinstitute/gatk:4.5.0.0"
@@ -53,10 +65,13 @@ process GATK_HAPLOTYPECALLER {
 
 workflow {
 
+    // Create input channel
     reads_ch = Channel.from(params.reads_bam)
 
+    // Create index file for input BAM file
     SAMTOOLS_INDEX(reads_ch)
 
+    // Call variants from the indexed BAM file
     GATK_HAPLOTYPECALLER(
         reads_ch,
         SAMTOOLS_INDEX.out,
