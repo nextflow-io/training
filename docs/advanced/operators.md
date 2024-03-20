@@ -455,3 +455,358 @@ Launching `./main.nf` [elegant_rutherford] DSL2 - revision: 2c5476b133
 [[id:sampleC, type:normal], 1, [data/reads/sampleC_rep1_normal_R1.fastq.gz, data/reads/sampleC_rep1_normal_R2.fastq.gz]]
 [[id:sampleC, type:tumor], 1, [data/reads/sampleC_rep1_tumor_R1.fastq.gz, data/reads/sampleC_rep1_tumor_R2.fastq.gz]]
 ```
+
+
+## `flatMap`
+
+As the name suggests, the `flatMap` operator allows you to modify the elements in a channel and then flatten the resulting collection. This is useful if you need to "expand" elements in a channel an incoming element can turn into zero or more elements in the output channel. For example:
+
+```groovy 
+workflow {
+    numbers = Channel.of(1, 2)
+    
+    numbers
+    | flatMap { n -> [ n, n*10, n*100 ] }
+    | view
+}
+```
+
+The input channel has two elements. For each element in the input channel, we return a List of length three. The List is flattened and each element in our returned list is emitted independently into the output channel:
+
+```output
+1
+10
+100
+2
+20
+200
+```
+
+!!! exercise
+
+    The `flatten` operation only "unfolds" one layer from the retuned collection. Given this information, what do you expect the following workflow to return?
+
+    ```
+    workflow {
+        numbers = Channel.of(1, 2)
+        
+        numbers
+        | flatMap { n -> [ n, [n*10, n*100] ] }
+        | view
+    }
+    ```
+
+!!! exercise
+
+    Let's say we have some collection of data for two samples:
+
+    ```bash
+    mkdir -p data/datfiles/sample{1,2}
+    touch data/datfiles/sample1/data.{1,2,3,4,5,6,7}.dat
+    touch data/datfiles/sample2/data.{1,2,3,4}.dat
+    tree data/datfiles
+    ```
+
+    You would like to process these datfiles in batches - up to three at a time. The catch is that your batch process requires that the samples are processed independently. You have begun your workflow and grouped the samples together:
+
+    ```grooovy
+    workflow {
+        Channel.fromPath("data/datfiles/sample*/*.dat")
+        | map { [it.getParent().name, it] }
+        | groupTuple
+        | view
+    }
+    ```
+
+    Which returns a channel with two elements corresponding to each sample:
+
+    ```
+    [sample2, [sample2/data.1.dat, sample2/data.3.dat, sample2/data.2.dat, sample2/data.4.dat]]
+    [sample1, [sample1/data.1.dat, sample1/data.3.dat, sample1/data.2.dat, sample1/data.6.dat, sample1/data.5.dat, sample1/data.4.dat]]
+    ```
+
+    You would like to turn this channel into something that has at most three datfiles in each element. Something like:
+
+    ```
+    [sample1, [sample1/data.1.dat, sample1/data.3.dat, sample1/data.2.dat]]
+    [sample1, [sample1/data.6.dat, sample1/data.5.dat, sample1/data.4.dat]]
+    [sample2, [sample2/data.1.dat, sample2/data.3.dat, sample2/data.2.dat]]
+    [sample2, [sample2/data.4.dat]]
+    ```
+
+    This is a challenging problem that pushes slightly beyond what we have covered. 
+
+    !!! tip
+        You may find it helpful to use Groovy's `collate()` method ([docs](http://docs.groovy-lang.org/docs/groovy-2.3.5/html/groovy-jdk/java/util/List.html#collate(int)), [tutorial](https://blog.mrhaki.com/2012/04/groovy-goodness-collate-list-into-sub.html)). This method segments a list into sub-lists of specified size.
+
+        You may also need the `collect()` method, which is like the `map` operator for collections in Groovy ([docs](http://docs.groovy-lang.org/2.4.3/html/groovy-jdk/java/util/Collection.html#collect(groovy.lang.Closure)), [tutorial](https://www.baeldung.com/groovy-lists#Collecting)).
+
+    ??? solution
+        This is a sensible approach:
+
+        ```groovy
+        workflow {
+            Channel.fromPath("data/datfiles/sample*/*.dat")
+            | map { [it.getParent().name, it] }
+            | groupTuple
+            | flatMap { id, files -> files.collate(3).collect { chunk -> [id, chunk] } }
+            | view
+        }
+        ```
+
+## `collectFile`
+
+The `collectFile` operator allows you to write one or more new files based on the contents of a channel.
+
+### Writing strings to a single file
+
+At its most basic, this operator writes the contents of the elements of a channel directly into a file. If the objecting being passed into the `collectFile` operator is a string, the strings are written to the collected file:
+
+```groovy
+workflow {
+    characters = Channel.of(
+        ['name': 'Jake', 'title': 'Detective'],
+        ['name': 'Rosa', 'title': 'Detective'],
+        ['name': 'Terry', 'title': 'Sergeant'],
+        ['name': 'Amy', 'title': 'Detective'],
+        ['name': 'Charles', 'title': 'Detective'],
+        ['name': 'Gina', 'title': 'Administrator'],
+        ['name': 'Raymond', 'title': 'Captain'],
+        ['name': 'Michael', 'title': 'Detective'],
+        ['name': 'Norm', 'title': 'Detective']
+    )
+    
+    characters 
+    | map { it.name }
+    | collectFile
+    | view
+}
+```
+
+The operator returns a channel containing a new file `collect-file.data`:
+
+```console title="Output"
+N E X T F L O W  ~  version 23.10.1
+Launching `./main.nf` [distracted_ritchie] DSL2 - revision: 1e5061406d
+work/tmp/57/8052c566f657c59679f07958031231/collect-file.data
+```
+
+If we view the contents of this file, we see the strings written (without delimiter) to a single file:
+
+```console title="collect-file.data"
+RaymondTerryNormRosaCharlesJakeGinaMichaelAmy
+```
+
+We can supply arguments `name` and `newLine` to the `collectFile` operator to return a file with a more informative name and newlines separating each entry:
+
+```groovy
+characters 
+| map { it.name }
+| collectFile(name: 'people.txt', newLine: true)
+| view
+```
+
+```console title="people.txt"
+Raymond
+Terry
+Norm
+Rosa
+Charles
+Jake
+Gina
+Michael
+Amy
+```
+
+### Collecting to a new location
+
+By default, the collected file is written into the work directory, which makes it suitable for input into a downstream process. If the collected file is an output of the workflow instead of an intermediate, it can be written to a directory of your choosing using the `storeDir` argument:
+
+```groovy
+characters 
+| map { it.name }
+| collectFile(name: 'characters.txt', newLine: true, storeDir: 'results')
+| view
+```
+
+### Collecting file contents
+
+If the contents of the input channel is a file, its _contents_ are appended to the collected file. Here we make a small process `WriteBio` that generates a CSV from the Map object supplied as input:
+
+!!! note "Groovy in the script block"
+
+    In the example below, we include a line of groovy to define a variable `article` which is used in the interpolated script string. This is a convenient way to avoid crowding the final string block with too much logic.
+
+    This line includes two Groovy synax features: 
+    
+    1. The [ternary operator](https://docs.groovy-lang.org/latest/html/documentation/core-operators.html#_ternary_operator) - a terse if/else block
+    2. The [find operator](https://docs.groovy-lang.org/latest/html/documentation/core-operators.html#_find_operator) `=~`
+
+```groovy
+process WriteBio {
+    input: val(character)
+    output: path('bio.txt')
+    script:
+    def article = character.title.toLowerCase() =~ ~/^[aeiou]/ ? 'an' : 'a'
+    """
+    echo ${character.name} is ${article} ${character.title} > bio.txt
+    """
+}
+
+workflow {
+    characters = Channel.of(
+        ['name': 'Jake', 'title': 'Detective'],
+        ['name': 'Rosa', 'title': 'Detective'],
+        ['name': 'Terry', 'title': 'Sergeant'],
+        ['name': 'Amy', 'title': 'Detective'],
+        ['name': 'Charles', 'title': 'Detective'],
+        ['name': 'Gina', 'title': 'Administrator'],
+        ['name': 'Raymond', 'title': 'Captain'],
+        ['name': 'Michael', 'title': 'Detective'],
+        ['name': 'Norm', 'title': 'Detective']
+    )
+    
+    characters 
+    | WriteBio
+    | collectFile
+    | view
+}
+```
+
+... to produce the collected file
+
+```text title="bio.txt"
+Charles is a Detective
+Amy is a Detective
+Norm is a Detective
+Jake is a Detective
+Rosa is a Detective
+Raymond is a Captain
+Gina is an Administrator
+Terry is a Sergeant
+Michael is a Detective
+```
+
+### Collecting into multiple files
+
+Instead of writing all entries to a single file, you can direct entries from the input channel to different files by supplying a closure to the `collectFile` operator. The closure _must_ return a `List` of two entries where the two elements in the `List` are
+
+1. the name of the file into which the data should be written, and 
+2. the data to write.
+
+For example:
+
+```groovy
+characters 
+| collectFile(newLine: true, storeDir: 'results') { character ->
+    filename = "${character.title}s.txt"
+    article = character.title.toLowerCase() =~ ~/^[aeiou]/ ? 'an' : 'a'
+    text = "${character.name} is ${article} ${character.title}"
+    [filename, text]
+}
+| view
+```
+
+The `collectFile` operator now returns a channel containing four files where we have the outputs grouped by the filename we specified.
+
+```output
+Launching `./main.nf` [marvelous_legentil] DSL2 - revision: a571cfd449
+results/Administrators.txt
+results/Captains.txt
+results/Detectives.txt
+results/Sergeants.txt
+```
+
+### Dealing with headers
+
+Let's say we have a process that returns a CSV. In this example, we're going to create very small two-line CVSs, but the same approach is applicable to larger files as well.
+
+```groovy
+process WriteBio {
+    input: val(character)
+    output: path('bio.csv')
+    script:
+    """
+    echo "precinct,name,title" > bio.csv
+    echo 99th,${character.name},${character.title} >> bio.csv
+    """
+}
+```
+
+If we run this with the same workflow as before:
+
+```groovy
+characters 
+| WriteBio
+| collectFile(name: 'characters.csv', storeDir: 'results')
+| view
+```
+
+... the CSVs are simply concatenated with the header included each time:
+
+```text title="results/characters.csv"
+precinct,name,title
+99th,Jake,Detective
+precinct,name,title
+99th,Terry,Sergeant
+precinct,name,title
+99th,Rosa,Detective
+...
+```
+
+To keep the header from only the first entry, we can use the `keepHeader` argument to `collectFile`:
+
+```groovy
+characters 
+| WriteBio
+| collectFile(name: 'characters.csv', storeDir: 'results', keepHeader: true)
+| view
+```
+
+!!! exercise
+
+    If we modify the `WriteBio` to also emit the `character` Map into the output channel:
+
+    ```groovy linenums="1"
+    process WriteBio {
+        input: val(character)
+        output: tuple val(character), path('bio.csv')
+        script:
+        """
+        echo "precinct,name,title" > bio.csv
+        echo 99th,${character.name},${character.title} >> bio.csv
+        """
+    }
+    ```
+
+    How might we produce a `results` directory that has one csv for each character title/rank where the csv includes the appropriate header?
+
+    ```output
+    results
+    ├── Administrators.csv
+    ├── Captains.csv
+    ├── Detectives.csv
+    └── Sergeants.csv
+    ```
+
+    ??? solution
+        A good solution would be to pass a closure to the `collectFile` operator. The closure will return the filename and the file in a List:
+
+        ```groovy
+        characters 
+        | WriteBio
+        | collectFile(storeDir: 'results', keepHeader: true) { character, file ->
+            ["${character.title}s.csv", file]
+        }
+        | view
+        ```
+
+        Another viable option would be to `map` over the channel before `collectFile`:
+
+        ```groovy
+        characters 
+        | WriteBio
+        | map { character, file -> ["${character.title}s.csv", file] }
+        | collectFile(storeDir: 'results', keepHeader: true)
+        | view
+        ```
