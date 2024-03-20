@@ -302,7 +302,7 @@ nextflow run hello-gatk.nf
 
 Uh-oh! Sometimes it works, but sometimes, some of the runs fail with an error like this:
 
-```console
+```console title="Output"
 executor > local (6)
 [f3/80670d] process > SAMTOOLS_INDEX (1) [100%] 3 of 3 ✔
 [27/78b83d] process > GATK_HAPLOTYPECALLER (3) [100%] 1 of 1, failed: 1
