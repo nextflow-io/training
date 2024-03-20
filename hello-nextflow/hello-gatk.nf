@@ -1,28 +1,30 @@
+/*
+ * Pipeline parameters
+ */
 
-params.baseDir = "/workspace/gitpod/nf-training" 
-$baseDir = params.baseDir
+// Execution environment setup
 
-params.reads_bam = "${baseDir}/data/gatk/bam/reads_mother.bam"
+// Primary input
 
+/*
+ * Generate BAM index file
+ */
 process SAMTOOLS_INDEX {
 
-    container 'quay.io/biocontainers/samtools:1.19.2--h50ea8bc_1' 
+    container 
 
     input:
-        path input_bam
 
     output:
-        path "${input_bam}.bai"
 
     """
-    samtools index '$input_bam'
 
     """
 }
 
 workflow {
 
-    reads_ch = Channel.from(params.reads_bam)
+    // Create input channel
 
-    SAMTOOLS_INDEX(reads_ch)
+    // Create index file for input BAM file
 }
