@@ -33,31 +33,31 @@ Just like in the Hello World example, we want to try out the commands manually b
 
 #### 0.1.1. Pull the samtools container
 
-```
+```bash
 docker pull quay.io/biocontainers/samtools:1.19.2--h50ea8bc_1
 ```
 
 #### 0.1.2. Spin up the container interactively
 
-```
+```bash
 docker run -it -v ./data:/data quay.io/biocontainers/samtools:1.19.2--h50ea8bc_1
 ```
 
 #### 0.1.3. Run the indexing command
 
-```
+```bash
 samtools index data/bam/reads_mother.bam
 ```
 
 #### 0.1.4. Check that the BAM index has been produced
 
-```
+```bash
 ls data/bam/
 ```
 
 This should show:
 
-```
+```console title="Output"
 reads_father.bam      reads_mother.bam      reads_mother.bam.bai  reads_son.bam
 ```
 
@@ -65,7 +65,7 @@ Where `reads_mother.bam.bai` has been created as an index to `reads_mother.bam`.
 
 #### 0.1.5. Exit the container
 
-```
+```bash
 exit
 ```
 
@@ -73,25 +73,25 @@ exit
 
 #### 0.2.1. Decompress the reference genome files
 
-```
+```bash
 tar -zxvf data/ref.tar.gz -C data/
 ```
 
 #### 0.2.2. Pull the GATK container
 
-```
+```bash
 docker pull broadinstitute/gatk:4.5.0.0
 ```
 
 #### 0.2.3. Spin up the container interactively
 
-```
+```bash
 docker run -it -v ./data:/data broadinstitute/gatk:4.5.0.0
 ```
 
 #### 0.2.4. Run the variant calling command
 
-```
+```bash
 gatk HaplotypeCaller \
         -R /data/ref/ref.fasta \
         -I /data/bam/reads_mother.bam \
@@ -102,7 +102,7 @@ gatk HaplotypeCaller \
 
 #### 0.2.5. Check the contents of the output file
 
-```
+```bash
 cat reads_mother.g.vcf
 ```
 
@@ -112,7 +112,7 @@ cat reads_mother.g.vcf
 
 #### 1.1. Define the indexing process
 
-```
+```groovy title="hello-gatk.nf"
 /*
  * Generate BAM index file
  */
@@ -135,7 +135,7 @@ process SAMTOOLS_INDEX {
 
 #### 1.2. Add parameter declarations up top
 
-```
+```groovy title="hello-gatk.nf"
 /*
  * Pipeline parameters
  */
@@ -150,7 +150,7 @@ params.reads_bam = "${baseDir}/data/bam/reads_mother.bam"
 
 #### 1.3. Add workflow block to run SAMTOOLS_INDEX
 
-```
+```groovy title="hello-gatk.nf"
 workflow {
 
     // Create input channel (single file via CLI parameter)
@@ -163,13 +163,13 @@ workflow {
 
 #### 1.4. Run it to verify you can run the indexing step
 
-```
+```bash
 nextflow run hello-gatk.nf
 ```
 
 Should produce something like:
 
-```
+```console title="Output"
 N E X T F L O W  ~  version 23.10.1
 Launching `hello-gatk.nf` [compassionate_cray] DSL2 - revision: 9b97744397
 executor >  local (1)
@@ -191,7 +191,7 @@ Add a second step that consumes the output of the first.
 
 #### 2.1. Define the variant calling process
 
-```
+```groovy title="hello-gatk.nf"
 /*
  * Call variants with GATK HapolotypeCaller in GVCF mode
  */
@@ -224,7 +224,7 @@ process GATK_HAPLOTYPECALLER {
 
 #### 2.2. Add accessory inputs up top
 
-```
+```groovy title="hello-gatk.nf"
 // Accessory files
 params.genome_reference = "${baseDir}/data/ref/ref.fasta"
 params.genome_reference_index = "${baseDir}/data/ref/ref.fasta.fai"
@@ -234,7 +234,7 @@ params.calling_intervals = "${baseDir}/data/intervals.list"
 
 #### 2.3. Add a call to the workflow block to run GATK_HAPLOTYPECALLER
 
-```
+```groovy title="hello-gatk.nf"
     // Call variants from the indexed BAM file
     GATK_HAPLOTYPECALLER(
         reads_ch,
@@ -248,13 +248,13 @@ params.calling_intervals = "${baseDir}/data/intervals.list"
 
 #### 2.4. Run the workflow to verify that the variant calling step works
 
-```
+```bash
 nextflow run hello-gatk.nf
 ```
 
 Now we see the two processes being run:
 
-```
+```console title="Output"
 N E X T F L O W  ~  version 23.10.1
 Launching `hello-gatk.nf` [lethal_keller] DSL2 - revision: 30a64b9325
 executor >  local (2)
@@ -286,7 +286,7 @@ Make the workflow handle multiple samples in bulk.
 
 #### 3.1. Turn the input param declaration into a list of the three samples
 
-```
+```groovy title="hello-gatk.nf"
 // Primary input
 params.reads_bam = ["${baseDir}/data/gatk/bam/reads_mother.bam",
                     "${baseDir}/data/gatk/bam/reads_father.bam",
@@ -295,7 +295,7 @@ params.reads_bam = ["${baseDir}/data/gatk/bam/reads_mother.bam",
 
 #### 3.2. Run the workflow to verify that it runs on all three samples
 
-```
+```bash
 nextflow run hello-gatk.nf
 ```
 
@@ -385,14 +385,14 @@ Uh-oh! Sometimes it works, but sometimes, some of the runs fail with an error li
 
 _Before:_
 
-```
+```groovy title="hello-gatk.nf"
     output:
         path "${input_bam}.bai"
 ```
 
 _After:_
 
-```
+```groovy title="hello-gatk.nf"
     output:
         tuple path(input_bam), path("${input_bam}.bai")
 ```
@@ -401,7 +401,7 @@ _After:_
 
 _Before:_
 
-```
+```groovy title="hello-gatk.nf"
     input:
         path input_bam
         path input_bam_index
@@ -409,7 +409,7 @@ _Before:_
 
 _After:_
 
-```
+```groovy title="hello-gatk.nf"
     input:
         tuple path(input_bam), path(input_bam_index)
 ```
@@ -418,7 +418,7 @@ _After:_
 
 _Before:_
 
-```
+```groovy title="hello-gatk.nf"
     GATK_HAPLOTYPECALLER(
         reads_ch,
         SAMTOOLS_INDEX.out,
@@ -426,20 +426,20 @@ _Before:_
 
 _After:_
 
-```
+```groovy title="hello-gatk.nf"
     GATK_HAPLOTYPECALLER(
         SAMTOOLS_INDEX.out,
 ```
 
 #### 3.6. Run the workflow to verify it works correctly on all three samples now
 
-```
+```bash
 nextflow run hello-gatk.nf -ansi-log false
 ```
 
 This time everything should run correctly:
 
-```
+```console title="Output"
 N E X T F L O W  ~  version 23.10.1
 Launching `hello-gatk.nf` [adoring_hopper] DSL2 - revision: 8cad21ea51
 [e0/bbd6ef] Submitted process > SAMTOOLS_INDEX (3)
@@ -466,7 +466,7 @@ Make it easier to handle samples in bulk.
 
 _sample_bams.txt:_
 
-```
+```bash
 /workspace/gitpod/hello-nextflow/data/bam/reads_mother.bam
 /workspace/gitpod/hello-nextflow/data/bam/reads_father.bam
 /workspace/gitpod/hello-nextflow/data/bam/reads_son.bam
@@ -476,7 +476,7 @@ _sample_bams.txt:_
 
 _Before:_
 
-```
+```groovy title="hello-gatk.nf"
 // Primary input
 params.reads_bam = ["${baseDir}/data/bam/reads_mother.bam",
                     "${baseDir}/data/bam/reads_father.bam",
@@ -485,7 +485,7 @@ params.reads_bam = ["${baseDir}/data/bam/reads_mother.bam",
 
 _After:_
 
-```
+```groovy title="hello-gatk.nf"
 // Primary input (list of input files, one per line)
 params.reads_bam = "${baseDir}/data/bam/sample_bams.txt"
 ```
@@ -494,27 +494,27 @@ params.reads_bam = "${baseDir}/data/bam/sample_bams.txt"
 
 _Before:_
 
-```
+```groovy title="hello-gatk.nf"
     // Create input channel
     reads_ch = Channel.from(params.reads_bam)
 ```
 
 _After:_
 
-```
+```groovy title="hello-gatk.nf"
     // Create input channel from list of input files in plain text
     reads_ch = Channel.fromPath(params.reads_bam).splitText
 ```
 
 #### 4.4. Run the workflow to verify that it works correctly
 
-```
+```bash
 nextflow run hello-gatk.nf -ansi-log false
 ```
 
 This should produce essentially the same result as before:
 
-```
+```console title="Output"
 N E X T F L O W  ~  version 23.10.1
 Launching `hello-gatk.nf` [kickass_faggin] DSL2 - revision: dcfa9f34e3
 [ff/0c08e6] Submitted process > SAMTOOLS_INDEX (2)
@@ -541,9 +541,7 @@ This is a very common pattern in Nextflow pipelines.
 
 #### 5.1. Add a header line and the sample IDs to a copy of the sample list, in CSV format
 
-_samplesheet.csv:_
-
-```
+```csv title="samplesheet.csv"
 ID,reads_bam
 NA12878,/workspace/gitpod/hello-nextflow/data/bam/reads_mother.bam
 NA12877,/workspace/gitpod/hello-nextflow/data/bam/reads_father.bam
@@ -554,14 +552,14 @@ NA12882,/workspace/gitpod/hello-nextflow/data/bam/reads_son.bam
 
 _Before:_
 
-```
+```groovy title="hello-gatk.nf"
 // Primary input (list of input files, one sample per line)
 params.reads_bam = "${baseDir}/data/bam/sample_bams.txt"
 ```
 
 _After:_
 
-```
+```groovy title="hello-gatk.nf"
 // Primary input (samplesheet in CSV format with ID and file path, one sample per line)
 params.reads_bam = "${baseDir}/data/samplesheet.csv"
 ```
@@ -570,14 +568,14 @@ params.reads_bam = "${baseDir}/data/samplesheet.csv"
 
 _Before:_
 
-```
+```groovy title="hello-gatk.nf"
     // Create input channel from list of input files in plain text
     reads_ch = Channel.fromPath(params.reads_bam).splitText()
 ```
 
 _After:_
 
-```
+```groovy title="hello-gatk.nf"
     // Create input channel from samplesheet in CSV format
     reads_ch = Channel.fromPath(params.reads_bam)
                         .splitCsv(header: true)
@@ -588,27 +586,27 @@ _After:_
 
 _Before:_
 
-```
+```groovy title="hello-gatk.nf"
     input:
         path input_bam
 ```
 
 _After:_
 
-```
+```groovy title="hello-gatk.nf"
     input:
         tuple val(id), path(input_bam)
 ```
 
 #### 5.5. Run the workflow to verify that it works
 
-```
+```bash
 nextflow run hello-gatk.nf -ansi-log false
 ```
 
 If everything is wired up correctly, it should produce essentially the same result.
 
-```
+```console title="Output"
 N E X T F L O W  ~  version 23.10.1
 Launching `hello-gatk.nf` [extravagant_panini] DSL2 - revision: 56accbf948
 [19/00f4a5] Submitted process > SAMTOOLS_INDEX (3)
@@ -647,14 +645,14 @@ One slight complication is that these tools require the use of a sample map that
 
 _Before:_
 
-```
+```groovy title="hello-gatk.nf"
     output:
         tuple path(input_bam), path("${input_bam}.bai")
 ```
 
 _After:_
 
-```
+```groovy title="hello-gatk.nf"
     output:
         tuple val(id), path(input_bam), path("${input_bam}.bai")
 ```
@@ -663,7 +661,7 @@ _After:_
 
 _Before:_
 
-```
+```groovy title="hello-gatk.nf"
     input:
         tuple path(input_bam), path(input_bam_index)
         ...
@@ -675,7 +673,7 @@ _Before:_
 
 _After:_
 
-```
+```groovy title="hello-gatk.nf"
     input:
         tuple val(id), path(input_bam), path(input_bam_index)
         ...
@@ -686,7 +684,7 @@ _After:_
 
 #### 6.4. Generate a sample map based on the output of GATK_HAPLOTYPECALLER
 
-```
+```groovy title="hello-gatk.nf"
     // Create a sample map of the output GVCFs
     sample_map = GATK_HAPLOTYPECALLER.out.collectFile(){ id, gvcf, idx ->
             ["${params.cohort_name}_map.tsv", "${id}\t${gvcf}\t${idx}\n"]
@@ -695,7 +693,7 @@ _After:_
 
 #### 6.5. Write a process that wraps GenomicsDBImport and GenotypeGVCFs called GATK_JOINTGENOTYPING
 
-```
+```groovy title="hello-gatk.nf"
 /*
  * Consolidate GVCFs and apply joint genotyping analysis
  */
@@ -732,7 +730,7 @@ process GATK_JOINTGENOTYPING {
 
 #### 6.6. Add call to workflow block to run GATK_JOINTGENOTYPING
 
-```
+```groovy title="hello-gatk.nf"
     // Consolidate GVCFs and apply joint genotyping analysis
     GATK_JOINTGENOTYPING(
         sample_map,
@@ -746,20 +744,20 @@ process GATK_JOINTGENOTYPING {
 
 #### 6.7. Add default value for the cohort name parameter up top
 
-```
+```groovy title="hello-gatk.nf"
 // Base name for final output file
 params.cohort_name = "family_trio"
 ```
 
 #### 6.8. Run the workflow to verify that it generates the final VCF output as expected
 
-```
+```bash
 nextflow run hello-gatk.nf
 ```
 
 Now we see the additional process show up in the log output (showing the compact view):
 
-```
+```console title="Output"
 N E X T F L O W  ~  version 23.10.1
 Launching `hello-gatk.nf` [nauseous_thompson] DSL2 - revision: b346a53aae
 executor >  local (7)

@@ -128,7 +128,7 @@ workflow {
 
 #### 2. Add a comment block above the process to document what it does in plain English
 
-```groovy title="hello-world.nf" hl_lines="1-3"
+```groovy title="hello-world.nf"
 /*
  * Use echo to print 'Hello World!' to standard out
  */
@@ -137,7 +137,7 @@ process sayHello {
 
 #### 3. Add an in-line comment above the process call
 
-```groovy title="hello-world.nf" hl_lines="3"
+```groovy title="hello-world.nf"
 workflow {
 
     // emit a greeting
@@ -163,13 +163,13 @@ It's the same thing we did when just running in the terminal. In a real-world pi
 
 _Before:_
 
-```groovy title="hello-world.nf" hl_lines="1"
+```groovy title="hello-world.nf"
 echo 'Hello World!'
 ```
 
 _After:_
 
-```groovy title="hello-world.nf" hl_lines="1"
+```groovy title="hello-world.nf"
 echo 'Hello World!' > output.txt
 ```
 
@@ -177,14 +177,14 @@ echo 'Hello World!' > output.txt
 
 _Before:_
 
-```groovy title="hello-world.nf" hl_lines="2"
+```groovy title="hello-world.nf"
     output:
         stdout
 ```
 
 _After:_
 
-```groovy title="hello-world.nf" hl_lines="2"
+```groovy title="hello-world.nf"
     output:
         path 'output.txt'
 ```
@@ -235,7 +235,7 @@ _Before:_
 
 _After:_
 
-```groovy title="hello-world.nf" hl_lines="2"
+```groovy title="hello-world.nf"
     output:
         path params.output_file
 ```
@@ -250,7 +250,7 @@ echo 'Hello World!' > output.txt
 
 _After:_
 
-```groovy title="hello-world.nf" hl_lines="1"
+```groovy title="hello-world.nf"
     echo 'Hello World!' > $params.output_file
 ```
 
@@ -295,7 +295,7 @@ In many cases, it makes sense to supply a default value for a given parameter, s
 
 #### 1. Add the parameter declaration at the top of the script (with a comment block as a free bonus)
 
-```groovy title="hello-world.nf" hl_lines="4"
+```groovy title="hello-world.nf"
 /*
  * Pipeline parameters
  */
@@ -372,7 +372,7 @@ workflow {
 
 _After:_
 
-```groovy title="hello-world.nf" hl_lines="3-4"
+```groovy title="hello-world.nf"
 workflow {
 
     // create a channel for inputs
@@ -394,7 +394,7 @@ _Before:_
 
 _After:_
 
-```groovy title="hello-world.nf" hl_lines="2"
+```groovy title="hello-world.nf"
     // emit a greeting
     sayHello(greeting_ch)
 ```
@@ -412,7 +412,7 @@ process sayHello {
 
 _After:_
 
-```groovy title="hello-world.nf" hl_lines="3-4"
+```groovy title="hello-world.nf"
 process sayHello {
 
     input:
@@ -434,7 +434,7 @@ _Before:_
 
 _After:_
 
-```groovy title="hello-world.nf" hl_lines="2"
+```groovy title="hello-world.nf"
     """
     echo '$greeting' > $params.output_file
     """
@@ -482,7 +482,7 @@ _Before:_
 
 _After:_
 
-```groovy title="hello-world.nf" hl_lines="2"
+```groovy title="hello-world.nf"
     // create a channel for inputs
     greeting_ch = Channel.of(params.greeting)
 ```
@@ -546,7 +546,7 @@ Now the `HELLO WORLD` output is in the new output file, `UPPER-output.txt`.
 
 #### 3. Turn that into a process definition (documented with a comment block)
 
-```groovy title="hello-world.nf" hl_lines="1-14"
+```groovy title="hello-world.nf"
 /*
  * Use a text replace utility to convert the greeting to uppercase
  */
@@ -565,7 +565,7 @@ process convertToUpper {
 
 #### 4. Add a call to the new process in the workflow block
 
-```groovy title="hello-world.nf" hl_lines="9-10"
+```groovy title="hello-world.nf"
 workflow {
 
     // create a channel for inputs
@@ -581,7 +581,7 @@ workflow {
 
 #### 5. Pass the output of the first process to the second process
 
-```groovy title="hello-world.nf" hl_lines="2"
+```groovy title="hello-world.nf"
     // convert the greeting to uppercase
     convertToUpper(sayHello.out)
 ```
@@ -633,7 +633,7 @@ _Before:_
 
 _After:_
 
-```groovy title="hello-world.nf" hl_lines="2"
+```groovy title="hello-world.nf"
     // create a channel for inputs
     greeting_ch = Channel.of('Hello','Bonjour','Holà')
 ```
@@ -658,7 +658,7 @@ process sayHello {
 
 _After:_
 
-```groovy title="hello-world.nf" hl_lines="6 9"
+```groovy title="hello-world.nf"
 process sayHello {
     input:
         val greeting
@@ -746,7 +746,7 @@ _Before:_
 
 _After:_
 
-```groovy title="hello-world.nf" hl_lines="1-2"
+```groovy title="hello-world.nf"
     // create a channel for inputs from a file
     greeting_ch = Channel.fromPath(params.input_file).splitText() { it.trim() }
 ```
