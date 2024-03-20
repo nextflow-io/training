@@ -174,7 +174,6 @@ N E X T F L O W  ~  version 23.10.1
 Launching `hello-gatk.nf` [compassionate_cray] DSL2 - revision: 9b97744397
 executor >  local (1)
 [bf/072bd7] process > SAMTOOLS_INDEX (1) [100%] 1 of 1 ✔
-
 ```
 
 ### Takeaway
@@ -235,15 +234,15 @@ params.calling_intervals = "${baseDir}/data/intervals.list"
 #### 2.3. Add a call to the workflow block to run GATK_HAPLOTYPECALLER
 
 ```groovy title="hello-gatk.nf"
-    // Call variants from the indexed BAM file
-    GATK_HAPLOTYPECALLER(
-        reads_ch,
-        SAMTOOLS_INDEX.out,
-        params.genome_reference,
-        params.genome_reference_index,
-        params.genome_reference_dict,
-        params.calling_intervals
-    )
+// Call variants from the indexed BAM file
+GATK_HAPLOTYPECALLER(
+    reads_ch,
+    SAMTOOLS_INDEX.out,
+    params.genome_reference,
+    params.genome_reference_index,
+    params.genome_reference_dict,
+    params.calling_intervals
+)
 ```
 
 #### 2.4. Run the workflow to verify that the variant calling step works
@@ -390,15 +389,15 @@ Tip: you can try to figure out what's wrong by changing to the process work dir 
 _Before:_
 
 ```groovy title="hello-gatk.nf"
-    output:
-        path "${input_bam}.bai"
+output:
+    path "${input_bam}.bai"
 ```
 
 _After:_
 
 ```groovy title="hello-gatk.nf"
-    output:
-        tuple path(input_bam), path("${input_bam}.bai")
+output:
+    tuple path(input_bam), path("${input_bam}.bai")
 ```
 
 #### 3.4. Change the input to the GATK_HAPLOTYPECALLER process to be a tuple
@@ -406,16 +405,16 @@ _After:_
 _Before:_
 
 ```groovy title="hello-gatk.nf"
-    input:
-        path input_bam
-        path input_bam_index
+input:
+    path input_bam
+    path input_bam_index
 ```
 
 _After:_
 
 ```groovy title="hello-gatk.nf"
-    input:
-        tuple path(input_bam), path(input_bam_index)
+input:
+    tuple path(input_bam), path(input_bam_index)
 ```
 
 #### 3.5. Update the call to GATK_HAPLOTYPECALLER in the workflow block
@@ -423,16 +422,16 @@ _After:_
 _Before:_
 
 ```groovy title="hello-gatk.nf"
-    GATK_HAPLOTYPECALLER(
-        reads_ch,
-        SAMTOOLS_INDEX.out,
+GATK_HAPLOTYPECALLER(
+    reads_ch,
+    SAMTOOLS_INDEX.out,
 ```
 
 _After:_
 
 ```groovy title="hello-gatk.nf"
-    GATK_HAPLOTYPECALLER(
-        SAMTOOLS_INDEX.out,
+GATK_HAPLOTYPECALLER(
+    SAMTOOLS_INDEX.out,
 ```
 
 #### 3.6. Run the workflow to verify it works correctly on all three samples now
@@ -480,9 +479,11 @@ _Before:_
 
 ```groovy title="hello-gatk.nf"
 // Primary input
-params.reads_bam = ["${baseDir}/data/bam/reads_mother.bam",
-                    "${baseDir}/data/bam/reads_father.bam",
-                    "${baseDir}/data/bam/reads_son.bam"]
+params.reads_bam = [
+    "${baseDir}/data/bam/reads_mother.bam",
+    "${baseDir}/data/bam/reads_father.bam",
+    "${baseDir}/data/bam/reads_son.bam"
+]
 ```
 
 _After:_
@@ -497,15 +498,15 @@ params.reads_bam = "${baseDir}/data/bam/sample_bams.txt"
 _Before:_
 
 ```groovy title="hello-gatk.nf"
-    // Create input channel
-    reads_ch = Channel.from(params.reads_bam)
+// Create input channel
+reads_ch = Channel.from(params.reads_bam)
 ```
 
 _After:_
 
 ```groovy title="hello-gatk.nf"
-    // Create input channel from list of input files in plain text
-    reads_ch = Channel.fromPath(params.reads_bam).splitText
+// Create input channel from list of input files in plain text
+reads_ch = Channel.fromPath(params.reads_bam).splitText
 ```
 
 #### 4.4. Run the workflow to verify that it works correctly
@@ -571,17 +572,17 @@ params.reads_bam = "${baseDir}/data/samplesheet.csv"
 _Before:_
 
 ```groovy title="hello-gatk.nf"
-    // Create input channel from list of input files in plain text
-    reads_ch = Channel.fromPath(params.reads_bam).splitText()
+// Create input channel from list of input files in plain text
+reads_ch = Channel.fromPath(params.reads_bam).splitText()
 ```
 
 _After:_
 
 ```groovy title="hello-gatk.nf"
-    // Create input channel from samplesheet in CSV format
-    reads_ch = Channel.fromPath(params.reads_bam)
-                        .splitCsv(header: true)
-                        .map{row -> [row.id, file(row.reads_bam)]}
+// Create input channel from samplesheet in CSV format
+reads_ch = Channel.fromPath(params.reads_bam)
+                    .splitCsv(header: true)
+                    .map{row -> [row.id, file(row.reads_bam)]}
 ```
 
 #### 5.4. Add the sample ID to the SAMTOOLS_INDEX input definition
@@ -589,15 +590,15 @@ _After:_
 _Before:_
 
 ```groovy title="hello-gatk.nf"
-    input:
-        path input_bam
+input:
+    path input_bam
 ```
 
 _After:_
 
 ```groovy title="hello-gatk.nf"
-    input:
-        tuple val(id), path(input_bam)
+input:
+    tuple val(id), path(input_bam)
 ```
 
 #### 5.5. Run the workflow to verify that it works
@@ -648,15 +649,15 @@ One slight complication is that these tools require the use of a sample map that
 _Before:_
 
 ```groovy title="hello-gatk.nf"
-    output:
-        tuple path(input_bam), path("${input_bam}.bai")
+output:
+    tuple path(input_bam), path("${input_bam}.bai")
 ```
 
 _After:_
 
 ```groovy title="hello-gatk.nf"
-    output:
-        tuple val(id), path(input_bam), path("${input_bam}.bai")
+output:
+    tuple val(id), path(input_bam), path("${input_bam}.bai")
 ```
 
 #### 6.3. Add the sample ID to the GATK_HAPLOTYPECALLER process input and output definitions
@@ -664,33 +665,33 @@ _After:_
 _Before:_
 
 ```groovy title="hello-gatk.nf"
-    input:
-        tuple path(input_bam), path(input_bam_index)
-        ...
+input:
+    tuple path(input_bam), path(input_bam_index)
+    ...
 
-    output:
-        path "${input_bam}.g.vcf"
-        path "${input_bam}.g.vcf.idx"
+output:
+    path "${input_bam}.g.vcf"
+    path "${input_bam}.g.vcf.idx"
 ```
 
 _After:_
 
 ```groovy title="hello-gatk.nf"
-    input:
-        tuple val(id), path(input_bam), path(input_bam_index)
-        ...
+input:
+    tuple val(id), path(input_bam), path(input_bam_index)
+    ...
 
-    output:
-        tuple val(id), path("${input_bam}.g.vcf"), path("${input_bam}.g.vcf.idx")
+output:
+    tuple val(id), path("${input_bam}.g.vcf"), path("${input_bam}.g.vcf.idx")
 ```
 
 #### 6.4. Generate a sample map based on the output of GATK_HAPLOTYPECALLER
 
 ```groovy title="hello-gatk.nf"
-    // Create a sample map of the output GVCFs
-    sample_map = GATK_HAPLOTYPECALLER.out.collectFile(){ id, gvcf, idx ->
-            ["${params.cohort_name}_map.tsv", "${id}\t${gvcf}\t${idx}\n"]
-    }
+// Create a sample map of the output GVCFs
+sample_map = GATK_HAPLOTYPECALLER.out.collectFile(){ id, gvcf, idx ->
+        ["${params.cohort_name}_map.tsv", "${id}\t${gvcf}\t${idx}\n"]
+}
 ```
 
 #### 6.5. Write a process that wraps GenomicsDBImport and GenotypeGVCFs called GATK_JOINTGENOTYPING
@@ -733,15 +734,15 @@ process GATK_JOINTGENOTYPING {
 #### 6.6. Add call to workflow block to run GATK_JOINTGENOTYPING
 
 ```groovy title="hello-gatk.nf"
-    // Consolidate GVCFs and apply joint genotyping analysis
-    GATK_JOINTGENOTYPING(
-        sample_map,
-        params.cohort_name,
-        params.genome_reference,
-        params.genome_reference_index,
-        params.genome_reference_dict,
-        params.calling_intervals
-    )
+// Consolidate GVCFs and apply joint genotyping analysis
+GATK_JOINTGENOTYPING(
+    sample_map,
+    params.cohort_name,
+    params.genome_reference,
+    params.genome_reference_index,
+    params.genome_reference_dict,
+    params.calling_intervals
+)
 ```
 
 #### 6.7. Add default value for the cohort name parameter up top

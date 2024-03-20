@@ -178,15 +178,15 @@ echo 'Hello World!' > output.txt
 _Before:_
 
 ```groovy title="hello-world.nf"
-    output:
-        stdout
+output:
+    stdout
 ```
 
 _After:_
 
 ```groovy title="hello-world.nf"
-    output:
-        path 'output.txt'
+output:
+    path 'output.txt'
 ```
 
 #### 3. Run the workflow again
@@ -229,15 +229,15 @@ Here we introduce `params` (short for 'parameters') as the construct that holds 
 _Before:_
 
 ```groovy title="hello-world.nf"
-    output:
-        path 'output.txt'
+output:
+    path 'output.txt'
 ```
 
 _After:_
 
 ```groovy title="hello-world.nf"
-    output:
-        path params.output_file
+output:
+    path params.output_file
 ```
 
 #### 2. Change the process command to use the parameter too
@@ -251,7 +251,7 @@ echo 'Hello World!' > output.txt
 _After:_
 
 ```groovy title="hello-world.nf"
-    echo 'Hello World!' > $params.output_file
+echo 'Hello World!' > $params.output_file
 ```
 
 #### 3. Run the workflow again with the `--output_file` parameter
@@ -388,15 +388,15 @@ workflow {
 _Before:_
 
 ```groovy title="hello-world.nf"
-    // emit a greeting
-    sayHello()
+// emit a greeting
+sayHello()
 ```
 
 _After:_
 
 ```groovy title="hello-world.nf"
-    // emit a greeting
-    sayHello(greeting_ch)
+// emit a greeting
+sayHello(greeting_ch)
 ```
 
 #### 3. Add an input definition to the process block
@@ -427,17 +427,17 @@ process sayHello {
 _Before:_
 
 ```groovy title="hello-world.nf"
-    """
-    echo 'Hello World!' > $params.output_file
-    """
+"""
+echo 'Hello World!' > $params.output_file
+"""
 ```
 
 _After:_
 
 ```groovy title="hello-world.nf"
-    """
-    echo '$greeting' > $params.output_file
-    """
+"""
+echo '$greeting' > $params.output_file
+"""
 ```
 
 #### 5. Run the workflow command again
@@ -476,15 +476,15 @@ We want to be able to specify the input from the command line because that is th
 _Before:_
 
 ```groovy title="hello-world.nf"
-    // create a channel for inputs
-    greeting_ch = Channel.of('Hello world!')
+// create a channel for inputs
+greeting_ch = Channel.of('Hello world!')
 ```
 
 _After:_
 
 ```groovy title="hello-world.nf"
-    // create a channel for inputs
-    greeting_ch = Channel.of(params.greeting)
+// create a channel for inputs
+greeting_ch = Channel.of(params.greeting)
 ```
 
 #### 2. Run the workflow again with the `--greeting` parameter
@@ -582,8 +582,8 @@ workflow {
 #### 5. Pass the output of the first process to the second process
 
 ```groovy title="hello-world.nf"
-    // convert the greeting to uppercase
-    convertToUpper(sayHello.out)
+// convert the greeting to uppercase
+convertToUpper(sayHello.out)
 ```
 
 #### 6. Run the same workflow command as before
@@ -627,15 +627,15 @@ Workflows typically run on batches of inputs that we want to process in bulk. He
 _Before:_
 
 ```groovy title="hello-world.nf"
-    // create a channel for inputs
-    greeting_ch = Channel.of(params.greeting)
+// create a channel for inputs
+greeting_ch = Channel.of(params.greeting)
 ```
 
 _After:_
 
 ```groovy title="hello-world.nf"
-    // create a channel for inputs
-    greeting_ch = Channel.of('Hello','Bonjour','Holà')
+// create a channel for inputs
+greeting_ch = Channel.of('Hello','Bonjour','Holà')
 ```
 
 #### 2. Modify the first process to generate dynamic filenames so the final filenames will be unique
@@ -740,15 +740,15 @@ In most cases, when we run on multiple inputs, the input values are contained in
 _Before:_
 
 ```groovy title="hello-world.nf"
-    // create a channel for inputs
-    greeting_ch = Channel.of('Hello','Bonjour','Holà')
+// create a channel for inputs
+greeting_ch = Channel.of('Hello','Bonjour','Holà')
 ```
 
 _After:_
 
 ```groovy title="hello-world.nf"
-    // create a channel for inputs from a file
-    greeting_ch = Channel.fromPath(params.input_file).splitText() { it.trim() }
+// create a channel for inputs from a file
+greeting_ch = Channel.fromPath(params.input_file).splitText() { it.trim() }
 ```
 
 #### 2. Run the workflow with the `-ansi-log false` option and an `--input_file` parameter
