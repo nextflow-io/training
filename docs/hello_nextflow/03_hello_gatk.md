@@ -288,9 +288,9 @@ Make the workflow handle multiple samples in bulk.
 ```groovy title="hello-gatk.nf"
 // Primary input
 params.reads_bam = [
-    "${baseDir}/data/gatk/bam/reads_mother.bam",
-    "${baseDir}/data/gatk/bam/reads_father.bam",
-    "${baseDir}/data/gatk/bam/reads_son.bam"
+    "${baseDir}/data/bam/reads_mother.bam",
+    "${baseDir}/data/bam/reads_father.bam",
+    "${baseDir}/data/bam/reads_son.bam"
 ]
 ```
 
@@ -300,89 +300,16 @@ params.reads_bam = [
 nextflow run hello-gatk.nf
 ```
 
-Uh-oh! Sometimes it works, but sometimes, some of the runs fail with an error like this:
+Uh-oh! It fails with an error like this:
 
 ```console title="Output"
-executor > local (6)
-[f3/80670d] process > SAMTOOLS_INDEX (1) [100%] 3 of 3 ✔
-[27/78b83d] process > GATK_HAPLOTYPECALLER (3) [100%] 1 of 1, failed: 1
-ERROR ~ Error executing process > 'GATK_HAPLOTYPECALLER (1)'
-
-Caused by:
-Process `GATK_HAPLOTYPECALLER (1)` terminated with an error exit status (2)
-
-Command executed:
-
-gatk HaplotypeCaller -R ref.fasta -I reads_mother.bam -O reads_mother.bam.g.vcf -L intervals-min.list -ERC GVCF
-
-Command exit status:
-2
-
-Command output:
-(empty)
-
-Command error:
-04:52:05.954 INFO HaplotypeCaller - Java runtime: OpenJDK 64-Bit Server VM v17.0.9+9-Ubuntu-122.04
-04:52:05.955 INFO HaplotypeCaller - Start Date/Time: March 15, 2024 at 4:52:05 AM GMT
-04:52:05.955 INFO HaplotypeCaller - ------------------------------------------------------------
-04:52:05.955 INFO HaplotypeCaller - ------------------------------------------------------------
-04:52:05.956 INFO HaplotypeCaller - HTSJDK Version: 4.1.0
-04:52:05.956 INFO HaplotypeCaller - Picard Version: 3.1.1
-04:52:05.956 INFO HaplotypeCaller - Built for Spark Version: 3.5.0
-04:52:05.957 INFO HaplotypeCaller - HTSJDK Defaults.COMPRESSION_LEVEL : 2
-04:52:05.957 INFO HaplotypeCaller - HTSJDK Defaults.USE_ASYNC_IO_READ_FOR_SAMTOOLS : false
-04:52:05.957 INFO HaplotypeCaller - HTSJDK Defaults.USE_ASYNC_IO_WRITE_FOR_SAMTOOLS : true
-04:52:05.957 INFO HaplotypeCaller - HTSJDK Defaults.USE_ASYNC_IO_WRITE_FOR_TRIBBLE : false
-04:52:05.958 INFO HaplotypeCaller - Deflater: IntelDeflater
-04:52:05.958 INFO HaplotypeCaller - Inflater: IntelInflater
-04:52:05.958 INFO HaplotypeCaller - GCS max retries/reopens: 20
-04:52:05.958 INFO HaplotypeCaller - Requester pays: disabled
-04:52:05.959 INFO HaplotypeCaller - Initializing engine
-04:52:06.563 INFO IntervalArgumentCollection - Processing 20000 bp from intervals
-04:52:06.572 INFO HaplotypeCaller - Done initializing engine
-04:52:06.575 INFO HaplotypeCallerEngine - Tool is in reference confidence mode and the annotation, the following changes will be made to any specified annotations: 'StrandBiasBySample' will be enabled. 'ChromosomeCounts', 'FisherStrand', 'StrandOddsRatio' and 'QualByDepth' annotations have been disabled
-04:52:06.653 INFO NativeLibraryLoader - Loading libgkl_utils.so from jar:file:/gatk/gatk-package-4.5.0.0-local.jar!/com/intel/gkl/native/libgkl_utils.so
-04:52:06.656 INFO NativeLibraryLoader - Loading libgkl_smithwaterman.so from jar:file:/gatk/gatk-package-4.5.0.0-local.jar!/com/intel/gkl/native/libgkl_smithwaterman.so
-04:52:06.657 INFO SmithWatermanAligner - Using AVX accelerated SmithWaterman implementation
-04:52:06.662 INFO HaplotypeCallerEngine - Standard Emitting and Calling confidence set to -0.0 for reference-model confidence output
-04:52:06.663 INFO HaplotypeCallerEngine - All sites annotated with PLs forced to true for reference-model confidence output
-04:52:06.676 INFO NativeLibraryLoader - Loading libgkl_pairhmm_omp.so from jar:file:/gatk/gatk-package-4.5.0.0-local.jar!/com/intel/gkl/native/libgkl_pairhmm_omp.so
-04:52:06.756 INFO IntelPairHmm - Flush-to-zero (FTZ) is enabled when running PairHMM
-04:52:06.757 INFO IntelPairHmm - Available threads: 16
-04:52:06.757 INFO IntelPairHmm - Requested threads: 4
-04:52:06.757 INFO PairHMM - Using the OpenMP multi-threaded AVX-accelerated native PairHMM implementation
-04:52:06.954 INFO ProgressMeter - Starting traversal
-04:52:06.955 INFO ProgressMeter - Current Locus Elapsed Minutes Regions Processed Regions/Minute
-04:52:06.967 INFO VectorLoglessPairHMM - Time spent in setup for JNI call : 0.0
-04:52:06.968 INFO PairHMM - Total compute time in PairHMM computeLogLikelihoods() : 0.0
-04:52:06.969 INFO SmithWatermanAligner - Total compute time in native Smith-Waterman : 0.00 sec
-04:52:06.971 INFO HaplotypeCaller - Shutting down engine
-[March 15, 2024 at 4:52:06 AM GMT] org.broadinstitute.hellbender.tools.walkers.haplotypecaller.HaplotypeCaller done. Elapsed time: 0.03 minutes.
-Runtime.totalMemory()=629145600
-
----
-
 A USER ERROR has occurred: Traversal by intervals was requested but some input files are not indexed.
 Please index all input files:
 
-samtools index reads_mother.bam
-
----
-
-Set the system property GATK_STACKTRACE_ON_USER_EXCEPTION (--java-options '-DGATK_STACKTRACE_ON_USER_EXCEPTION=true') to print the stack trace.
-Using GATK jar /gatk/gatk-package-4.5.0.0-local.jar
-Running:
-java -Dsamjdk.use_async_io_read_samtools=false -Dsamjdk.use_async_io_write_samtools=true -Dsamjdk.use_async_io_write_tribble=false -Dsamjdk.compression_level=2 -jar /gatk/gatk-package-4.5.0.0-local.jar HaplotypeCaller -R ref.fasta -I reads_mother.bam -O reads_mother.bam.g.vcf -L intervals-min.list -ERC GVCF
-
-Work dir:
-/workspace/gitpod/nf-training/work/22/611b8c5703daaf459188d79cd68db0
-
-Tip: you can try to figure out what's wrong by changing to the process work dir and showing the script file named `.command.sh`
-
--- Check '.nextflow.log' file for details
+samtools index reads_son.bam
 ```
 
-**Why does this happen?** Because the order of outputs is not guaranteed, so the script as written so far is not safe for running on multiple samples!
+This is because the file paths are different for the BAM files and their index files, so GATK does not recognize that they go together. This can be addressed by passing in the index files explicitly, but there's a plot twist: the script as written so far is not safe for running on multiple samples, because the order of outputs is not guaranteed. Even if we solved the indexing problem, we would end up with race condition issues. So we need to make sure the BAM files and their index files travel together through the channels.
 
 #### 3.3. Change the output of the SAMTOOLS_INDEX process into a tuple that keeps the input file and its index together
 
@@ -490,7 +417,7 @@ _After:_
 
 ```groovy title="hello-gatk.nf"
 // Primary input (list of input files, one per line)
-params.reads_bam = "${baseDir}/data/bam/sample_bams.txt"
+params.reads_bam = "${baseDir}/data/sample_bams.txt"
 ```
 
 #### 4.3. Update the channel factory to read lines from a file
@@ -506,7 +433,7 @@ _After:_
 
 ```groovy title="hello-gatk.nf"
 // Create input channel from list of input files in plain text
-reads_ch = Channel.fromPath(params.reads_bam).splitText
+reads_ch = Channel.fromPath(params.reads_bam).splitText()
 ```
 
 #### 4.4. Run the workflow to verify that it works correctly
