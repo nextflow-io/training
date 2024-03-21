@@ -3,7 +3,7 @@
  */
 
 // Execution environment setup
-params.baseDir = "/workspace/gitpod/nf-training/hello-nextflow" 
+params.baseDir = "/workspace/gitpod/hello-nextflow" 
 $baseDir = params.baseDir
 
 // Primary input (samplesheet in CSV format with ID and file path, one sample per line)
