@@ -3,17 +3,16 @@
  */
 
 // Execution environment setup
-params.baseDir = "/workspace/gitpod/nf-training/hello-nextflow" 
-$baseDir = params.baseDir
+params.data_dir = "/workspace/gitpod/nf-training/hello-nextflow" 
 
 // Primary input
-params.reads_bam = "${baseDir}/data/samplesheet.csv"
+params.reads_bam = "${params.data_dir}/data/samplesheet.csv"
 
 // Accessory files
-params.genome_reference = "${baseDir}/data/ref/ref.fasta"
-params.genome_reference_index = "${baseDir}/data/ref/ref.fasta.fai"
-params.genome_reference_dict = "${baseDir}/data/ref/ref.dict"
-params.calling_intervals = "${baseDir}/data/intervals.list"
+params.genome_reference = "${params.data_dir}/data/ref/ref.fasta"
+params.genome_reference_index = "${params.data_dir}/data/ref/ref.fasta.fai"
+params.genome_reference_dict = "${params.data_dir}/data/ref/ref.dict"
+params.calling_intervals = "${params.data_dir}/data/intervals.list"
 
 // Base name for final output file
 params.cohort_name = "family_trio"
