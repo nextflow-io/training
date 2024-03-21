@@ -3,7 +3,10 @@
  */
 
 // Path for input data
-params.data_dir = "/workspace/gitpod/nf-training/hello-nextflow" 
+params.data_dir = "/workspace/gitpod/nf-training/hello-nextflow"
+
+// Path to publish output files
+params.outdir = 'results'
 
 // Primary samplesheet input
 params.reads_bam = "${params.data_dir}/data/samplesheet.csv"
@@ -67,6 +70,7 @@ process GATK_HAPLOTYPECALLER {
  */
 process GATK_JOINTGENOTYPING {
 
+    publishDir "${params.outdir}/jointgenotyping", mode: 'copy'
     container "broadinstitute/gatk:4.5.0.0"
 
     input:
