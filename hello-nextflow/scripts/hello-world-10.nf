@@ -36,7 +36,7 @@ process convertToUpper {
 workflow {
 
     // create a channel for inputs from a file
-    greeting_ch = Channel.fromPath(params.input_file)
+    greeting_ch = Channel.fromPath(params.input_file).splitText() { it.trim() }
 
     // emit a greeting
     sayHello(greeting_ch)
