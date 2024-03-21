@@ -2,13 +2,13 @@
  * Pipeline parameters
  */
 
-// Execution environment setup
+// Path for input data
 params.data_dir = "/workspace/gitpod/nf-training/hello-nextflow" 
 
-// Primary input
+// Primary samplesheet input
 params.reads_bam = "${params.data_dir}/data/samplesheet.csv"
 
-// Accessory files
+// Reference genome files
 params.genome_reference = "${params.data_dir}/data/ref/ref.fasta"
 params.genome_reference_index = "${params.data_dir}/data/ref/ref.fasta.fai"
 params.genome_reference_dict = "${params.data_dir}/data/ref/ref.dict"
@@ -31,8 +31,7 @@ process SAMTOOLS_INDEX {
         tuple val(id), path(input_bam), path("${input_bam}.bai")
 
     """
-    samtools index '$input_bam'
-
+    samtools index $input_bam
     """
 }
 
@@ -54,11 +53,11 @@ process GATK_HAPLOTYPECALLER {
         tuple val(id), path("${input_bam}.g.vcf"), path("${input_bam}.g.vcf.idx")
 
     """
-    gatk HaplotypeCaller \
-        -R ${ref_fasta} \
-        -I ${input_bam} \
-        -O ${input_bam}.g.vcf \
-        -L ${interval_list} \
+    gatk HaplotypeCaller \\
+        -R ${ref_fasta} \\
+        -I ${input_bam} \\
+        -O ${input_bam}.g.vcf \\
+        -L ${interval_list} \\
         -ERC GVCF
     """
 }
@@ -71,8 +70,9 @@ process GATK_JOINTGENOTYPING {
     container "broadinstitute/gatk:4.5.0.0"
 
     input:
-        path(sample_map)
-        val(cohort_name)
+        path gvcf_files
+        path sample_map
+        val cohort_name
         path ref_fasta
         path ref_index
         path ref_dict
@@ -83,15 +83,15 @@ process GATK_JOINTGENOTYPING {
         path "${cohort_name}.joint.vcf.idx"
 
     """
-    gatk GenomicsDBImport \
-        --sample-name-map ${sample_map} \
-        --genomicsdb-workspace-path ${cohort_name}_gdb \
+    gatk GenomicsDBImport \\
+        --sample-name-map ${sample_map} \\
+        --genomicsdb-workspace-path ${cohort_name}_gdb \\
         -L ${interval_list}
 
-    gatk GenotypeGVCFs \
-        -R ${ref_fasta} \
-        -V gendb://${cohort_name}_gdb \
-        -O ${cohort_name}.joint.vcf \
+    gatk GenotypeGVCFs \\
+        -R ${ref_fasta} \\
+        -V gendb://${cohort_name}_gdb \\
+        -O ${cohort_name}.joint.vcf \\
         -L ${interval_list}
     """
 }
@@ -99,15 +99,21 @@ process GATK_JOINTGENOTYPING {
 workflow {
 
     // Create input channel from samplesheet in CSV format (via CLI parameter)
-    reads_ch = Channel.fromPath(params.reads_bam)
-                        .splitCsv(header: true)
-                        .map{row -> [row.id, file(row.reads_bam)]}
+    Channel
+        .fromPath(params.reads_bam)
+        .splitCsv(header: true)
+        .map {
+            row -> [ row.id, file(row.reads_bam) ] 
+        }
+        .set { reads_ch }
 
     // Create index file for input BAM file
-    SAMTOOLS_INDEX(reads_ch)
+    SAMTOOLS_INDEX (
+        reads_ch
+    )
 
     // Call variants from the indexed BAM file
-    GATK_HAPLOTYPECALLER(
+    GATK_HAPLOTYPECALLER (
         SAMTOOLS_INDEX.out,
         params.genome_reference,
         params.genome_reference_index,
@@ -116,12 +122,27 @@ workflow {
     )
 
     // Create a sample map of the output GVCFs
-    sample_map = GATK_HAPLOTYPECALLER.out.collectFile(){ id, gvcf, idx ->
-            ["${params.cohort_name}_map.tsv", "${id}\t${gvcf}\t${idx}\n"]
-    }
+    GATK_HAPLOTYPECALLER
+        .out
+        .collectFile(){ 
+            id, gvcf, idx ->
+                [ "${params.cohort_name}_map.tsv", "${id}\t${gvcf.Name}\t${idx.Name}\n" ]
+        }
+        .set { sample_map }
+
+    // Create and stage a list of GVCF and index files
+    GATK_HAPLOTYPECALLER
+        .out
+        .map {
+            id, gvcf, idx -> [ gvcf, idx ]
+        }
+        .flatten()
+        .collect()
+        .set { gvcf_files }
 
     // Consolidate GVCFs and apply joint genotyping analysis
-    GATK_JOINTGENOTYPING(
+    GATK_JOINTGENOTYPING (
+        gvcf_files,
         sample_map, 
         params.cohort_name, 
         params.genome_reference,
