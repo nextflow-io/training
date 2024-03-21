@@ -302,10 +302,10 @@ nextflow run hello-gatk.nf
 Uh-oh! It fails with an error like this:
 
 ```
-  A USER ERROR has occurred: Traversal by intervals was requested but some input files are not indexed.
-  Please index all input files:
-  
-  samtools index reads_son.bam
+A USER ERROR has occurred: Traversal by intervals was requested but some input files are not indexed.
+Please index all input files:
+
+samtools index reads_son.bam
 ```
 
 This is because the file paths are different for the BAM files and their index files, so GATK does not recognize that they go together. This can be addressed by passing in the index files explicitly, but there's a plot twist: the script as written so far is not safe for running on multiple samples, because the order of outputs is not guaranteed. Even if we solved the indexing problem, we would end up with race condition issues. So we need to make sure the BAM files and their index files travel together through the channels.
