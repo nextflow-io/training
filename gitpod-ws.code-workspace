@@ -1,5 +1,10 @@
 {
-    "folders": [{ "path": "./nf-training" }, { "path": "./nf-training-advanced" }, { "path": "./hands-on" }, { "path": "./hello-nextflow" }],
+    "folders": [
+        { "path": "./nf-training" },
+        { "path": "./nf-training-advanced" },
+        { "path": "./hands-on" },
+        { "path": "./hello-nextflow" },
+    ],
     "settings": {
         "typescript.tsdk": "gitpod/node_modules/typescript/lib",
         "[javascript]": {
