@@ -1,0 +1,5 @@
+reports:
+  "*.joint.vcf":
+    display: "Joint VCF file created by GATK GenotypeGVCFs"
+  "*.joint.vcf.idx":
+    display: "Joint VCF index file created by GATK GenotypeGVCFs"
