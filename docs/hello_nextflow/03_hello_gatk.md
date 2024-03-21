@@ -288,9 +288,9 @@ Make the workflow handle multiple samples in bulk.
 
 ```
 // Primary input
-params.reads_bam = ["${baseDir}/data/gatk/bam/reads_mother.bam",
-                    "${baseDir}/data/gatk/bam/reads_father.bam",
-                    "${baseDir}/data/gatk/bam/reads_son.bam"]
+params.reads_bam = ["${baseDir}/data/bam/reads_mother.bam",
+                    "${baseDir}/data/bam/reads_father.bam",
+                    "${baseDir}/data/bam/reads_son.bam"]
 ```
 
 #### 3.2. Run the workflow to verify that it runs on all three samples
