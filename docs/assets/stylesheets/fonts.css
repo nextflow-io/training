@@ -5,3 +5,11 @@
     font-weight: 600;
     font-style: normal;
 }
+@font-face {
+    font-family: "Virgil";
+    src: url("../fonts/excalidraw/Virgil.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Cascadia";
+    src: url("../fonts/excalidraw/Cascadia.woff2") format("woff2");
+}
