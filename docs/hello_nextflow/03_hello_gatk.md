@@ -15,7 +15,9 @@ A full variant calling pipeline typically involves a lot of steps. For simplicit
 1. Generate an index file for each BAM input file using Samtools
 2. Run the GATK HaplotypeCaller on each BAM input file to generate per-sample variant calls in GVCF (Genomic Variant Call Format)
 
-![Variant calling](img/haplotype-caller.png)
+<figure class="excalidraw">
+--8<-- "docs/hello_nextflow/img/haplotype-caller.excalidraw.svg"
+</figure>
 
 ### Dataset
 
