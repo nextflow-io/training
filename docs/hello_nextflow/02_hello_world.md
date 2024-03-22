@@ -10,25 +10,25 @@ Let's demonstrate this with a simple command that we run directly in the termina
 
 #### 1. Make the terminal say hello
 
-```
+```bash
 echo 'Hello World!'
 ```
 
 #### 2. Now make it write the text output to a file
 
-```
+```bash
 echo 'Hello World!' > output.txt
 ```
 
 #### 3. Verify that the output file is there using the `ls` command
 
-```
+```bash
 ls
 ```
 
 #### 4. Show the file contents
 
-```
+```bash
 cat output.txt
 ```
 
@@ -56,13 +56,13 @@ Now we're going to run a script (named `hello-world.nf`) that does the same thin
 
 #### 1. Run the workflow
 
-```
+```bash
 nextflow run hello-world.nf
 ```
 
 You should see something like this:
 
-```
+```console title="Output"
 N E X T F L O W  ~  version 23.10.1
 Launching `hello-world.nf` [mighty_murdock] DSL2 - revision: 80e92a677c
 executor >  local (1)
@@ -106,7 +106,7 @@ Let's open the script and look at how it's structured.
 
 The first block of code describes a **process** called `sayHello` that writes its output to `stdout`:
 
-```
+```groovy title="hello-world.nf"
 process sayHello {
 
     output:
@@ -120,7 +120,7 @@ process sayHello {
 
 The second block of code describes the **workflow** itself, which consists of one call to the `sayHello` process.
 
-```
+```groovy title="hello-world.nf"
 workflow {
     sayHello()
 }
@@ -128,7 +128,7 @@ workflow {
 
 #### 2. Add a comment block above the process to document what it does in plain English
 
-```
+```groovy title="hello-world.nf"
 /*
  * Use echo to print 'Hello World!' to standard out
  */
@@ -137,7 +137,7 @@ process sayHello {
 
 #### 3. Add an in-line comment above the process call
 
-```
+```groovy title="hello-world.nf"
 workflow {
 
     // emit a greeting
@@ -163,13 +163,13 @@ It's the same thing we did when just running in the terminal. In a real-world pi
 
 _Before:_
 
-```
+```groovy title="hello-world.nf"
 echo 'Hello World!'
 ```
 
 _After:_
 
-```
+```groovy title="hello-world.nf"
 echo 'Hello World!' > output.txt
 ```
 
@@ -177,27 +177,27 @@ echo 'Hello World!' > output.txt
 
 _Before:_
 
-```
-    output:
-        stdout
+```groovy title="hello-world.nf"
+output:
+    stdout
 ```
 
 _After:_
 
-```
-    output:
-        path 'output.txt'
+```groovy title="hello-world.nf"
+output:
+    path 'output.txt'
 ```
 
 #### 3. Run the workflow again
 
-```
+```bash
 nextflow run hello-world.nf
 ```
 
 The log output should be very similar to the first time your ran the workflow:
 
-```
+```console title="Output"
 N E X T F L O W  ~  version 23.10.1
 Launching `scripts/hello-world.nf` [disturbed_cajal] DSL2 - revision: 9512241567
 executor >  local (1)
@@ -228,41 +228,41 @@ Here we introduce `params` (short for 'parameters') as the construct that holds 
 
 _Before:_
 
-```
-    output:
-        path 'output.txt'
+```groovy title="hello-world.nf"
+output:
+    path 'output.txt'
 ```
 
 _After:_
 
-```
-    output:
-        path params.output_file
+```groovy title="hello-world.nf"
+output:
+    path params.output_file
 ```
 
 #### 2. Change the process command to use the parameter too
 
 _Before:_
 
-```
+```groovy title="hello-world.nf"
 echo 'Hello World!' > output.txt
 ```
 
 _After:_
 
-```
-    echo 'Hello World!' > $params.output_file
+```groovy title="hello-world.nf"
+echo 'Hello World!' > $params.output_file
 ```
 
 #### 3. Run the workflow again with the `--output_file` parameter
 
-```
+```bash
 nextflow run hello-world.nf --output_file 'output.txt'
 ```
 
 The log output should start looking very familiar:
 
-```
+```console title="Output"
 N E X T F L O W  ~  version 23.10.1
 Launching `hello-world.nf` [evil_bose] DSL2 - revision: 6907ac9da2
 executor >  local (1)
@@ -295,7 +295,7 @@ In many cases, it makes sense to supply a default value for a given parameter, s
 
 #### 1. Add the parameter declaration at the top of the script (with a comment block as a free bonus)
 
-```
+```groovy title="hello-world.nf"
 /*
  * Pipeline parameters
  */
@@ -304,13 +304,13 @@ params.output_file = 'output.txt'
 
 #### 2. Run the workflow again without specifying the parameter
 
-```
+```bash
 nextflow run hello-world.nf
 ```
 
 Still looking pretty much the same...
 
-```
+```console title="Output"
 N E X T F L O W  ~  version 23.10.1
 Launching `hello-world.nf` [tiny_elion] DSL2 - revision: 7ad1cd6bfe
 executor >  local (1)
@@ -321,13 +321,13 @@ Check the output in the work directory, and... Tadaa! It works, Nextflow used th
 
 #### 3. Run the workflow again with the `--output_file` parameter on the command line using a DIFFERENT filename
 
-```
+```bash
 nextflow run hello-world.nf --output_file 'output-cli.txt'
 ```
 
 Nextflow's not complaining, that's a good sign:
 
-```
+```console title="Output"
 N E X T F L O W  ~  version 23.10.1
 Launching `hello-world.nf` [exotic_lichterman] DSL2 - revision: 7ad1cd6bfe
 executor >  local (1)
@@ -362,7 +362,7 @@ So far, we've been emitting a greeting hardcoded into the process command. Now w
 
 _Before:_
 
-```
+```groovy title="hello-world.nf"
 workflow {
 
     // emit a greeting
@@ -372,7 +372,7 @@ workflow {
 
 _After:_
 
-```
+```groovy title="hello-world.nf"
 workflow {
 
     // create a channel for inputs
@@ -387,23 +387,23 @@ workflow {
 
 _Before:_
 
-```
-    // emit a greeting
-    sayHello()
+```groovy title="hello-world.nf"
+// emit a greeting
+sayHello()
 ```
 
 _After:_
 
-```
-    // emit a greeting
-    sayHello(greeting_ch)
+```groovy title="hello-world.nf"
+// emit a greeting
+sayHello(greeting_ch)
 ```
 
 #### 3. Add an input definition to the process block
 
 _Before:_
 
-```
+```groovy title="hello-world.nf"
 process sayHello {
 
     output:
@@ -412,7 +412,7 @@ process sayHello {
 
 _After:_
 
-```
+```groovy title="hello-world.nf"
 process sayHello {
 
     input:
@@ -426,29 +426,29 @@ process sayHello {
 
 _Before:_
 
-```
-    """
-    echo 'Hello World!' > $params.output_file
-    """
+```groovy title="hello-world.nf"
+"""
+echo 'Hello World!' > $params.output_file
+"""
 ```
 
 _After:_
 
-```
-    """
-    echo '$greeting' > $params.output_file
-    """
+```groovy title="hello-world.nf"
+"""
+echo '$greeting' > $params.output_file
+"""
 ```
 
 #### 5. Run the workflow command again
 
-```
+```bash
 nextflow run hello-world.nf
 ```
 
 If you made all four edits correctly, you should get another successful execution:
 
-```
+```console title="Output"
 N E X T F L O W  ~  version 23.10.1
 Launching `hello-world.nf` [maniac_euler] DSL2 - revision: 73bfbe197f
 executor >  local (1)
@@ -475,27 +475,27 @@ We want to be able to specify the input from the command line because that is th
 
 _Before:_
 
-```
-    // create a channel for inputs
-    greeting_ch = Channel.of('Hello world!')
+```groovy title="hello-world.nf"
+// create a channel for inputs
+greeting_ch = Channel.of('Hello world!')
 ```
 
 _After:_
 
-```
-    // create a channel for inputs
-    greeting_ch = Channel.of(params.greeting)
+```groovy title="hello-world.nf"
+// create a channel for inputs
+greeting_ch = Channel.of(params.greeting)
 ```
 
 #### 2. Run the workflow again with the `--greeting` parameter
 
-```
+```bash
 nextflow run hello-world.nf --greeting 'Bonjour le monde!'
 ```
 
 In case you're wondering, yes it's normal to have dreams where the Nextflow log output scrolls endlessly in front of you after running through a training session... Or is that just me?
 
-```
+```console title="Output"
 N E X T F L O W  ~  version 23.10.1
 Launching `hello-world.nf` [hopeful_laplace] DSL2 - revision: a8ed9a6202
 executor >  local (1)
@@ -526,19 +526,19 @@ We're going to run the command by itself in the terminal first to verify that it
 
 #### 1. Run the command in the terminal by itself
 
-```
+```bash
 echo 'Hello World' | tr '[a-z]' '[A-Z]'
 ```
 
 The output is simply the uppercase version of the text string:
 
-```
+```console title="Output"
 HELLO WORLD
 ```
 
 #### 2. Make the command take a file as input and write the output to a file
 
-```
+```bash
 cat output.txt | tr '[a-z]' '[A-Z]' > UPPER-output.txt
 ```
 
@@ -546,7 +546,7 @@ Now the `HELLO WORLD` output is in the new output file, `UPPER-output.txt`.
 
 #### 3. Turn that into a process definition (documented with a comment block)
 
-```
+```groovy title="hello-world.nf"
 /*
  * Use a text replace utility to convert the greeting to uppercase
  */
@@ -565,7 +565,7 @@ process convertToUpper {
 
 #### 4. Add a call to the new process in the workflow block
 
-```
+```groovy title="hello-world.nf"
 workflow {
 
     // create a channel for inputs
@@ -581,20 +581,20 @@ workflow {
 
 #### 5. Pass the output of the first process to the second process
 
-```
-    // convert the greeting to uppercase
-    convertToUpper(sayHello.out)
+```groovy title="hello-world.nf"
+// convert the greeting to uppercase
+convertToUpper(sayHello.out)
 ```
 
 #### 6. Run the same workflow command as before
 
-```
+```bash
 nextflow run hello-world.nf --greeting 'Hello World!'
 ```
 
 Oh, how exciting! There is now an extra line in the log output, which corresponds to the second process we've added:
 
-```
+```console title="Output"
 N E X T F L O W  ~  version 23.10.1
 Launching `hello-world.nf` [kickass_pasteur] DSL2 - revision: d15b2c482c
 executor >  local (2)
@@ -626,23 +626,23 @@ Workflows typically run on batches of inputs that we want to process in bulk. He
 
 _Before:_
 
-```
-    // create a channel for inputs
-    greeting_ch = Channel.of(params.greeting)
+```groovy title="hello-world.nf"
+// create a channel for inputs
+greeting_ch = Channel.of(params.greeting)
 ```
 
 _After:_
 
-```
-    // create a channel for inputs
-    greeting_ch = Channel.of('Hello','Bonjour','Holà')
+```groovy title="hello-world.nf"
+// create a channel for inputs
+greeting_ch = Channel.of('Hello','Bonjour','Holà')
 ```
 
 #### 2. Modify the first process to generate dynamic filenames so the final filenames will be unique
 
 _Before:_
 
-```
+```groovy title="hello-world.nf"
 process sayHello {
     input:
         val greeting
@@ -658,7 +658,7 @@ process sayHello {
 
 _After:_
 
-```
+```groovy title="hello-world.nf"
 process sayHello {
     input:
         val greeting
@@ -678,13 +678,13 @@ process sayHello {
 
 #### 3. Run the command and look at the log output
 
-```
+```bash
 nextflow run hello-world.nf
 ```
 
 How many log lines do you expect to see in the terminal? And how many do you actually see?
 
-```
+```console title="Output"
 N E X T F L O W  ~  version 23.10.1
 Launching `hello-world.nf` [cranky_hypatia] DSL2 - revision: 719dae218c
 executor >  local (6)
@@ -698,13 +698,13 @@ This is because by default, the ANSI logging system writes the logging from mult
 
 #### 4. Run the command again with the `-ansi-log false` option
 
-```
+```bash
 nextflow run hello-world.nf -ansi-log false
 ```
 
 This time it works fine, we see six work directories in the terminal:
 
-```
+```console title="Output"
 N E X T F L O W  ~  version 23.10.1
 Launching `hello-world.nf` [disturbed_panini] DSL2 - revision: 719dae218c
 [8c/77b534] Submitted process > sayHello (1)
@@ -739,27 +739,27 @@ In most cases, when we run on multiple inputs, the input values are contained in
 
 _Before:_
 
-```
-    // create a channel for inputs
-    greeting_ch = Channel.of('Hello','Bonjour','Holà')
+```groovy title="hello-world.nf"
+// create a channel for inputs
+greeting_ch = Channel.of('Hello','Bonjour','Holà')
 ```
 
 _After:_
 
-```
-    // create a channel for inputs from a file
-    greeting_ch = Channel.fromPath(params.input_file).splitText() { it.trim() }
+```groovy title="hello-world.nf"
+// create a channel for inputs from a file
+greeting_ch = Channel.fromPath(params.input_file).splitText() { it.trim() }
 ```
 
 #### 2. Run the workflow with the `-ansi-log false` option and an `--input_file` parameter
 
-```
+```bash
 nextflow run hello-world.nf -ansi-log false --input_file greetings.txt
 ```
 
 Once again we see each process get executed three times:
 
-```
+```console title="Output"
 N E X T F L O W  ~  version 23.10.1
 Launching `hello-world.nf` [small_albattani] DSL2 - revision: 5cea973c3c
 [45/18d159] Submitted process > sayHello (1)
