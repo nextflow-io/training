@@ -4,15 +4,13 @@ The nf-core pipeline template comes packed with a lot of files and folders which
 
 Fortunately, a complete understanding isn't required to get started.
 
-<figure class="excalidraw">
---8<-- "docs/nf_templates/img/4_template.excalidraw.svg"
-</figure>
+![Anatomy of the nf-core template](img/4_template.png)
 
 !!! note "Viewing files"
 
     Dot files are not shown using the `ls` command. You can use `ll` or `ls -la` to view all files. Alternatively, `tree -a` command can be used to show the branching structure of your repository.
 
-For this workshop, important parts of the template include:
+For this workshop, the important parts of the template include:
 
 1. The `.github/workflows` folder and files
 2. The `conf/test.config` file
