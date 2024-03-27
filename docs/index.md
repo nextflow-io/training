@@ -55,6 +55,16 @@ We have several workshops available on this website - find the one that's right 
 
     [Launch the Hello Nextflow Training:material-arrow-right:](hello_nextflow/index.md){ .md-button }
 
+!!! exercise "nf-core Pipeline Template"
+
+    !!! quote inline end ""
+
+        :material-run-fast: This course is short workshop to introduce you to the nf-core pipeline template.
+
+    A "learn by doing" tutorial that will show you how to create a pipeline starting with the nf-core pipeline template and how to utilize its features.
+
+    [Launch the nf-core Pipeline Template Training:material-arrow-right:](hello_nextflow/index.md){ .md-button }
+
 !!! exercise "RNA-seq Variant Calling Training"
 
     !!! quote inline end ""
