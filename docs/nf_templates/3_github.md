@@ -13,8 +13,8 @@ Your personal account is your identity on github.com and has a username and prof
 
 Signing up for a new personal account:
 
-1. Navigate to https://github.com/.
-2. Click Sign up.
+1. Navigate to [https://github.com/](https://github.com/).
+2. Click **Sign up**.
 3. Follow the prompts to create your personal account.
 
 !!! warning "Verified accounts"
@@ -64,6 +64,8 @@ Feature branches should be checked out from the `dev` branch.
 <figure class="excalidraw">
 --8<-- "docs/nf_templates/img/3_branches.excalidraw.svg"
 </figure>
+
+You can find out more about working collaboratively with branches on the [GitHub documentation](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests) website.
 
 !!! note "What is the `TEMPLATE` branch?"
 

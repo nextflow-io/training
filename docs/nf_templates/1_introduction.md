@@ -16,7 +16,7 @@ As the Nextflow ecosystem evolves, so does the nf-core template. New nf-core too
 
 This workshop will explore the nf-core template and how it supports the adoption of best practises.
 
-### Audience & prerequisites
+## Audience & prerequisites
 
 Please note that this is not a beginners workshop and some familiarity the Nextflow, the command line, and common file formats is assumed.
 
