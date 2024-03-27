@@ -7,14 +7,14 @@ It is recommended that you use the `nf-core lint` command to check for inconsist
 Executing the `nf-core lint` command from within your pipeline repository will print a list of ignored tests, warnings, failed tests, and a summary. 
 
 ```console
-╭──────────────────────╮
+╭───────────────────────╮
 │ LINT RESULTS SUMMARY  │
-├──────────────────────┤
+├───────────────────────┤
 │ [✔] 184 Tests Passed  │
 │ [?]   0 Tests Ignored │
 │ [!]  29 Test Warnings │
 │ [✗]   0 Tests Failed  │
-╰──────────────────────╯
+╰───────────────────────╯
 ```
 
 The linting tests in the nf-core template are designed for nf-core pipeline that are shared as a part of the nf-core community. As such, you may find that you want to ignore certain linting failures that are not required for your use case.
@@ -33,7 +33,7 @@ For example, there is a linting test that checks the `CODE_OF_CONDUCT.md` and wi
 
 In this scenario, the nf-core lint command will offer a command to fix this warning.
 
-```
+```console
 Tip: Some of these linting errors can automatically be resolved with the following command:
 
     nf-core lint   --fix files_unchanged
