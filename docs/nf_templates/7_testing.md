@@ -1,4 +1,4 @@
-# A pipeline out of the box
+# Testing your pipeline
 
 The nf-core pipeline template is a working pipeline. It comes with a `test` profile that can be used to run the pipeline with some small test datasets hosted on the nf-core test-data repository. The test profile is located in the `conf/test.config` file and is included as a profile in the `nextflow.config` file in your repository.
 
