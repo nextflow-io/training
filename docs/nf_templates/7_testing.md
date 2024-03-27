@@ -70,4 +70,4 @@ For example, adding new test profiles runs, with or without different parameters
 
 !!! question "Exercise"
 
-    Create a new test profile and add it to your CI workflows.
+    Create a new test profile and add it to your CI workflows
