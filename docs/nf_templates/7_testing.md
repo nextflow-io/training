@@ -58,7 +58,9 @@ test2     { includeConfig 'conf/test2.config'     }
 test_full { includeConfig 'conf/test_full.config' }
 ```
 
-Finally, you can customise CI pipeline run tests as required. For example: adding new test profiles runs, with or without different parameters.
+Finally, you can customise CI pipeline run tests as required.
+
+For example, adding new test profiles runs, with or without different parameters.
 
 ```console title=".github/workflows/ci.yml"
 - name: Run pipeline with a second test profile
