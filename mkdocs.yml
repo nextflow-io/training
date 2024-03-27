@@ -44,7 +44,6 @@ nav:
           - hello_nextflow/02_hello_world.md
           - hello_nextflow/03_hello_gatk.md
     - nf-core template:
-          - nf_templates/0_index.md
           - nf_templates/1_introduction.md
           - nf_templates/2_create.md
           - nf_templates/3_github.md

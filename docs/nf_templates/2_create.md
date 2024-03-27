@@ -10,7 +10,7 @@ nf-core create
 
 Although you can provide options on the command line, it’s easiest to use the interactive prompts.
 
-```console
+```bash
 ? Workflow name <pipeline name>
 ? Description <pipeline description>
 ? Author <your name>
@@ -25,19 +25,15 @@ There is also flexibility for which template areas you include in your template.
 
 The following template areas can be skipped:
 
-**GitHub hosting:** Files required for GitHub hosting of the pipeline. E.g., `.github/` and `.gitignore`.
-
-**GitHub CI:** Files required for GitHub continuous integration tests. E.g., `.github/workflows/`.
-
-**GitHub badges:** GitHub badges in the `README.md` file.
-
-**iGenomes config:** Pipeline options related to iGenomes. E.g., `conf/igenomes.config`.
-
-**nf-core/configs:** Repository options that integrate nf-core config profiles.
+- **GitHub hosting:** Files required for GitHub hosting of the pipeline. E.g., `.github/` and `.gitignore`.
+- **GitHub CI:** Files required for GitHub continuous integration tests. E.g., `.github/workflows/`.
+- **GitHub badges:** GitHub badges in the `README.md` file.
+- **iGenomes config:** Pipeline options related to iGenomes. E.g., `conf/igenomes.config`.
+- **nf-core/configs:** Repository options that integrate nf-core config profiles.
 
 If you choose to modify the template, the nf-core tooling will provide a series of interactive prompts help guide your choices.
 
-```console
+```bash
 ? Workflow name mypipeline
 ? Description My pipeline
 ? Author Chris
