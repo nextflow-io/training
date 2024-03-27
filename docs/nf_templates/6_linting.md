@@ -41,7 +41,7 @@ Tip: Some of these linting errors can automatically be resolved with the followi
 
 Alternatively, you can add this file to `files_unchanged:` in the `.nf-core.yml` file to ignore the tests:
 
-```yml
+```yml title=".nf-core.yml"
 repository_type: pipeline
 lint:
     files_unchanged:
@@ -68,7 +68,7 @@ Multiple linting test types exist and can all be added to the `.nf-core.yml` fil
 
 For example, the linting for pipeline `TODOs` can also be turned off to prevent warnings by adding `pipeline_todos: false` to your `.nf-core.yml` file.
 
-```yml
+```yml title=".nf-core.yml"
 repository_type: pipeline
 lint:
     pipeline_todos: false

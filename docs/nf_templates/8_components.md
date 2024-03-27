@@ -69,7 +69,7 @@ include { FASTP } from '../modules/nf-core/fastp/main'
 
 To implement the module in your pipeline you will need to check what inputs are required. You can view the inputs channels for the module by opening the `/modules/nf-core/fastp/main` file.
 
-```groovy title="/modules/nf-core/fastp/main"
+```groovy title="/modules/nf-core/fastp/main.nf"
 input:
 tuple val(meta), path(reads)
 path  adapter_fasta
@@ -85,7 +85,7 @@ Code for `workflows/mypipeline.nf`
 
     Add the following code to your `workflows/mypipeline.nf` file to include the fastp process in your pipeline.
 
-```groovy
+```groovy title="workflows/mypipeline.nf"
 //
 // MODULE: Run Fastp
 //
@@ -127,7 +127,7 @@ tuple val(meta), path('*.json')           , emit: jsons
 
 Running `nf-core lint` after you have modified an nf-core module will cause it to throw an error.
 
-```
+```console
 ╭─ [✗] 1 Module Test Failed ────────────────────────────────────────────────────────────────╮
 │              ╷                               ╷                                            │
 │ Module name  │ File path                     │ Test message                               │
@@ -141,19 +141,19 @@ Changing a module does not mean you can't continue to use that module.
 
 The nf-core modules patch command allows you keep using the nf-core component without needing to make it into a local module and curate it yourself. Instead, it creates a path file that will keep track of the changes you made. If you subsequently update the module using the nf-core tooling, the diff file will be retained. If any subsequent changes to the module conflict with your diff file, you will prompted to resolve the conflicts.
 
-```
+```bash
 nf-core modules patch
 ```
 
 The prompt can be followed to patch the `fastp` module.
 
-```
+```bash
 ? Module name: fastp
 ```
 
 A patch file is created in the fastp module directory
 
-```
+```bash
 ...
 INFO     'modules/nf-core/fastp/tests/main.nf.test.snap' is unchanged
 INFO     'modules/nf-core/fastp/tests/tags.yml' is unchanged
