@@ -43,7 +43,6 @@ git push --all origin
 
     Push your new nf-core template pipeline to GitHub using the commands above.
 
-
 ## Working with branches
 
 GitHub branches are used to isolate development work without affecting other branches in the repository. Each repository has one default branch, and can have multiple other branches. You can merge a branch into another branch using a pull request.

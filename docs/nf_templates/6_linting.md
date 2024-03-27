@@ -4,7 +4,7 @@ Linting is a static analysis process that helps ensure code quality by automatic
 
 It is recommended that you use the `nf-core lint` command to check for inconsistencies in your code, compare your code against source code, and compare your code against nf-core standards.
 
-Executing the `nf-core lint` command from within your pipeline repository will print a list of ignored tests, warnings, failed tests, and a summary. 
+Executing the `nf-core lint` command from within your pipeline repository will print a list of ignored tests, warnings, failed tests, and a summary.
 
 ```console
 ╭───────────────────────╮
@@ -39,13 +39,13 @@ Tip: Some of these linting errors can automatically be resolved with the followi
     nf-core lint   --fix files_unchanged
 ```
 
-Alternatively, you can add this file to  `files_unchanged:` in the `.nf-core.yml` file to ignore the tests:
+Alternatively, you can add this file to `files_unchanged:` in the `.nf-core.yml` file to ignore the tests:
 
 ```yml
 repository_type: pipeline
 lint:
-  files_unchanged:
-    - CODE_OF_CONDUCT.md
+    files_unchanged:
+        - CODE_OF_CONDUCT.md
 ```
 
 If you run nf-core lint again, you will see that the test is now ignored and there are no more failed tests.
@@ -64,16 +64,16 @@ If you run nf-core lint again, you will see that the test is now ignored and the
 
 ### Choosing your linting tests
 
-Multiple linting test types exist and can all be added to the `.nf-core.yml` file. A full list of checks, descriptions of how they work, and how they can be customized can be found on the [tools documentation website](https://nf-co.re/tools/docs). 
+Multiple linting test types exist and can all be added to the `.nf-core.yml` file. A full list of checks, descriptions of how they work, and how they can be customized can be found on the [tools documentation website](https://nf-co.re/tools/docs).
 
 For example, the linting for pipeline `TODOs` can also be turned off to prevent warnings by adding `pipeline_todos: false` to your `.nf-core.yml` file.
 
 ```yml
 repository_type: pipeline
 lint:
-  pipeline_todos: false
-  files_unchanged:
-    - CODE_OF_CONDUCT.md
+    pipeline_todos: false
+    files_unchanged:
+        - CODE_OF_CONDUCT.md
 ```
 
 !!! question "Bonus Exercise"

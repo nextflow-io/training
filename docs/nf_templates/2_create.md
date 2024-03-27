@@ -55,6 +55,6 @@ Skip template areas?
 
     GitHub badges were skipped in the example above.
 
-!!! question "Exercise" 
+!!! question "Exercise"
 
     Create a pipeline named `mypipeline` using the `nf-core create` command. Do **not** modify the template.

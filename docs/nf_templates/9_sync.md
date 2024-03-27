@@ -17,8 +17,8 @@ nf-core sync
 The tooling merges updates suggesting a git command.
 
 ```bash
-cd /Users/chris/workspace/myorg-mypipeline                            
-git merge TEMPLATE 
+cd /Users/chris/workspace/myorg-mypipeline
+git merge TEMPLATE
 ```
 
 ## Bump the version across

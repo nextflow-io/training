@@ -1,9 +1,9 @@
 # Bump your pipeline version
 
-The pipeline version number is mentioned in a lot of different places in nf-core pipelines. This   
-tool updates the version for you automatically, so that you don't accidentally miss any.           
-Should be used for each pipeline release, and again for the next development version after         
-release.            
+The pipeline version number is mentioned in a lot of different places in nf-core pipelines. This  
+tool updates the version for you automatically, so that you don't accidentally miss any.  
+Should be used for each pipeline release, and again for the next development version after  
+release.
 
 ```bash
 nf-core bump-version 1.0
@@ -25,11 +25,11 @@ git push
 
 !!! question "Bonus Exercise"
 
-    Create a 
+    Create a
 
-## Update 
+## Update
 
- As well as the pipeline version, you can also change the required version of Nextflow.
+As well as the pipeline version, you can also change the required version of Nextflow.
 
 ```bash
 nf-core bump-version 23.04.0 --nextflow

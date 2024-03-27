@@ -8,7 +8,7 @@ It is recommended that you maintain a working test profile in your pipeline.
 
 ## Software dependencies
 
-The nf-core template pipeline also comes with profiles for the management of software dependencies (e.g., `docker`, `singularity`, & `conda`). For pipelines with modules that have been shipped with containers/images/recipes, these profiles can be used to change the way dependencies are handled when you execute your pipeline. 
+The nf-core template pipeline also comes with profiles for the management of software dependencies (e.g., `docker`, `singularity`, & `conda`). For pipelines with modules that have been shipped with containers/images/recipes, these profiles can be used to change the way dependencies are handled when you execute your pipeline.
 
 Using the `test` profile with one of the profiles for managing your software dependencies the nf-core template pipeline will execute two processes, `FASTQC` and `MULTIQC`.
 

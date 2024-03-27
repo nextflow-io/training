@@ -14,7 +14,7 @@ This workshop will explore the nf-core template and how it supports the adoption
 
 This workshop can be completed using the [![Nextflow Training GitPod](https://img.shields.io/badge/Gitpod-%20Open%20in%20Gitpod-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/nextflow-io/training), which provides a virtual machine with everything you need.
 
-!!! question "Exercise" 
+!!! question "Exercise"
 
     Use the following command to switch to the empty `nf-templates` folder:
 

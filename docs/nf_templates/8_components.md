@@ -2,8 +2,8 @@
 
 The nf-core ecosystem includes a repository of components. These components are written and maintained by the nf-core community. Components are written for diverse users and may require additional configuration to suit different use cases. There are two types of components, modules and subworkflows:
 
-- **Modules** are wrappers around single process that contain tests, environments, and meta data.
-- **Subworkflows** are two or more modules that are packaged together and also come with tests and metadata.
+-   **Modules** are wrappers around single process that contain tests, environments, and meta data.
+-   **Subworkflows** are two or more modules that are packaged together and also come with tests and metadata.
 
 Currently, there are more than [1200 modules](https://nf-co.re/modules) and [60 subworkflows](https://nf-co.re/subworkflows) (April 2024) available through nf-core.
 
@@ -41,11 +41,11 @@ You can follow the prompts to find and install the module you are interested in:
 Once selected, the tooling will install the module in `modules/nf-core/` folder and give you a suggested line of code for your main workflow file (e.g., `workflows/mypipeline.nf`).
 
 ```console
-INFO     Installing 'fastp'                                                                                                                              
-INFO     Use the following statement to include this module:                                                                                             
+INFO     Installing 'fastp'
+INFO     Use the following statement to include this module:
 
-include { FASTP } from '../modules/nf-core/fastp/main'  
-``` 
+include { FASTP } from '../modules/nf-core/fastp/main'
+```
 
 !!! question "Exercise"
 
@@ -128,18 +128,18 @@ tuple val(meta), path('*.json')           , emit: jsons
 Running `nf-core lint` after you have modified an nf-core module will cause it to throw an error.
 
 ```
-╭─ [✗] 1 Module Test Failed ─────────────────────────────────────────────────────────────────────╮
-│              ╷                               ╷                                                 │
-│ Module name  │ File path                     │ Test message                                    │
-│╶─────────────┼───────────────────────────────┼─────────────────────────────────────────────────│
-│ fastp        │ modules/nf-core/fastp/main.nf │ Local copy of module does not match remote      │
-│              ╵                               ╵                                                 │
-╰────────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ [✗] 1 Module Test Failed ────────────────────────────────────────────────────────────────╮
+│              ╷                               ╷                                            │
+│ Module name  │ File path                     │ Test message                               │
+│╶─────────────┼───────────────────────────────┼────────────────────────────────────────────│
+│ fastp        │ modules/nf-core/fastp/main.nf │ Local copy of module does not match remote │
+│              ╵                               ╵                                            │
+╰───────────────────────────────────────────────────────────────────────────────────────────╯
 ```
 
 Changing a module does not mean you can't continue to use that module.
 
-The nf-core modules patch command allows you keep using the nf-core component without needing to make it into a local module and curate it yourself. Instead, it creates a path file that will keep track of the changes you made. If you subsequently update the module using the nf-core tooling, the diff file will be retained. If any subsequent changes to the module conflict with your diff file, you will prompted to resolve the conflicts. 
+The nf-core modules patch command allows you keep using the nf-core component without needing to make it into a local module and curate it yourself. Instead, it creates a path file that will keep track of the changes you made. If you subsequently update the module using the nf-core tooling, the diff file will be retained. If any subsequent changes to the module conflict with your diff file, you will prompted to resolve the conflicts.
 
 ```
 nf-core modules patch
@@ -158,10 +158,10 @@ A patch file is created in the fastp module directory
 INFO     'modules/nf-core/fastp/tests/main.nf.test.snap' is unchanged
 INFO     'modules/nf-core/fastp/tests/tags.yml' is unchanged
 INFO     'modules/nf-core/fastp/tests/nextflow.config' is unchanged
-INFO     'modules/nf-core/fastp/tests/main.nf.test' is unchanged 
-INFO     Patch file of 'modules/nf-core/fastp' written to 'modules/nf-core/fastp/fastp.diff' 
+INFO     'modules/nf-core/fastp/tests/main.nf.test' is unchanged
+INFO     Patch file of 'modules/nf-core/fastp' written to 'modules/nf-core/fastp/fastp.diff'
 ```
 
 !!! question "Exercise"
 
-    Patch the `fastp` module to fix the linting error. 
+    Patch the `fastp` module to fix the linting error.

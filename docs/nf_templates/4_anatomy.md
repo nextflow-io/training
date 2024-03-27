@@ -17,7 +17,7 @@ For this workshop, important parts of the template include:
 1. The `.github/workflows` folder and files
 2. The `conf/test.config` file
 3. The `nf-core.yml` file
-4. 2. The `workflow`, `subworkflow`, and `modules` folders and files
+4.  2. The `workflow`, `subworkflow`, and `modules` folders and files
 5. The `modules.json` file
 6. The `nextflow.config` file
 7. The `nextflow_schema.json` file
