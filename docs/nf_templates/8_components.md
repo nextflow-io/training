@@ -2,7 +2,7 @@
 
 The nf-core ecosystem includes a repository of components. These components are written and maintained by the nf-core community. Components are written for diverse users and may require additional configuration to suit different use cases. There are two types of components, modules and subworkflows:
 
--   **Modules** are wrappers around single process that contain tests, environments, and meta data.
+-   **Modules** are wrappers around a single process that contains tests, environments, and metadata.
 -   **Subworkflows** are two or more modules that are packaged together and also come with tests and metadata.
 
 Currently, there are more than [1200 modules](https://nf-co.re/modules) and [60 subworkflows](https://nf-co.re/subworkflows) (April 2024) available through nf-core.
