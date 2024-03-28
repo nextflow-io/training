@@ -38,7 +38,7 @@ You can follow the prompts to find and install the module you are interested in:
 ? Tool name: fastp
 ```
 
-Once selected, the tooling will install the module in `modules/nf-core/` folder and give you a suggested line of code for your main workflow file (e.g., `workflows/mypipeline.nf`).
+Once selected, the tooling will install the module in the `modules/nf-core/` folder and give you a suggested line of code for your main workflow file (e.g., `workflows/mypipeline.nf`).
 
 ```console
 INFO     Installing 'fastp'
@@ -51,13 +51,13 @@ include { FASTP } from '../modules/nf-core/fastp/main'
 
     Install the `fastp` module to your pipeline.
 
-!!! note "What is fastp?
+!!! note "What is fastp?"
 
     Fastp is a...
 
 ### Adding a module to your pipeline
 
-Although the modules has been installed in your repository, it is not yet added to your pipeline. The suggested `include` statement needs to be added to your `workflows/mypipeline.nf` file.
+Although the module has been installed in your repository, it is not yet added to your pipeline. The suggested `include` statement needs to be added to your `workflows/mypipeline.nf` file.
 
 ```console
 include { FASTP } from '../modules/nf-core/fastp/main'
@@ -67,7 +67,7 @@ include { FASTP } from '../modules/nf-core/fastp/main'
 
     Add the `include { FASTP } from '../modules/nf-core/fastp/main'` statement to your `workflows/mypipeline.nf` file.
 
-To implement the module in your pipeline you will need to check what inputs are required. You can view the inputs channels for the module by opening the `/modules/nf-core/fastp/main` file.
+To implement the module in your pipeline you will need to check what inputs are required. You can view the input channels for the module by opening the `/modules/nf-core/fastp/main` file.
 
 ```groovy title="/modules/nf-core/fastp/main.nf"
 input:
@@ -77,7 +77,7 @@ val   save_trimmed_fail
 val   save_merged
 ```
 
-Each module has a meta file which describes the required inputs. The meta file is rendered on the [nf-core website](https://nf-co.re/modules/fastp), or can be viewed using the `nf-core modules info command`.
+Each module has a `meta.yml` file which describes the required inputs. This meta file is rendered on the [nf-core website](https://nf-co.re/modules/fastp), or can be viewed using the `nf-core modules info command`.
 
 Code for `workflows/mypipeline.nf`
 

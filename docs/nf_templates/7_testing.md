@@ -17,7 +17,7 @@ Using the `test` profile with one of the profiles for managing your software dep
     From within the `nf-core-mypipeline` folder, execute your pipeline template using the `test` and `docker` profiles using the following command.
 
     ```bash
-    nextflow run nf-core-mypipeline -profile test,docker --outdir results
+    nextflow run main.nf -profile test,docker --outdir results
     ```
 
 ## Adding new test profiles
