@@ -58,7 +58,7 @@ test2     { includeConfig 'conf/test2.config'     }
 test_full { includeConfig 'conf/test_full.config' }
 ```
 
-Finally, you can customise CI pipeline run tests as required.
+Finally, you can customize CI pipeline run tests as required.
 
 For example, adding new test profiles runs, with or without different parameters.
 
