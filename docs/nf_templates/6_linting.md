@@ -17,7 +17,7 @@ Executing the `nf-core lint` command from within your pipeline repository will p
 ╰───────────────────────╯
 ```
 
-The linting tests in the nf-core template are designed for nf-core pipeline that are shared as a part of the nf-core community. As such, you may find that you want to ignore certain linting failures that are not required for your use case.
+The linting tests in the nf-core template are designed for pipelines that are shared as a part of the nf-core project. As such, you may find that you want to ignore certain linting failures that are not required for your use case.
 
 A full list of checks, descriptions of how they work, and how they can be customized can be found on the [tools documentation website](https://nf-co.re/tools/docs).
 
