@@ -101,7 +101,7 @@ FASTP (
 
     Every channel needs to be filled for a process to run. In the example above `[]` was used to fill the channel with an empty list.
 
-Importantly, nf-core components are tracked in `modules.json`. Tracking components improves reproducibility and reporting by giving some certainty about the version of the tool you were using. The `modules.json` will be updated with a hash for the module.
+Importantly, nf-core components are tracked in the `modules.json` file. Tracking components improves reproducibility and reporting by giving some certainty about the version of the tool you were using. The `modules.json` file will be updated with a hash for the installed module.
 
 !!! tip "Private modules repositories"
 
