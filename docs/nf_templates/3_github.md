@@ -30,7 +30,7 @@ Before you can use these commands, you will need to create an empty repository f
 Once you have created the repository you can push your template to GitHub.
 
 ```bash
-cd /Users/workspace/nf-core-mypipeline
+cd /workspace/gitpod/docs/nf_templates/nf-core-mypipeline
 git remote add origin git@github.com:<USERNAME>/<REPO>.git
 git push --all origin
 ```
