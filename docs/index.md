@@ -63,7 +63,7 @@ We have several workshops available on this website - find the one that's right 
 
     A "learn by doing" tutorial that will show you how to create a pipeline starting with the nf-core pipeline template and how to utilize its features.
 
-    [Launch the nf-core Pipeline Template Training:material-arrow-right:](hello_nextflow/index.md){ .md-button }
+    [Launch the nf-core Pipeline Template Training:material-arrow-right:](nf_templates/1_introduction.md){ .md-button }
 
 !!! exercise "RNA-seq Variant Calling Training"
 
