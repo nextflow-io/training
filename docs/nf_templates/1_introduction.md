@@ -18,7 +18,7 @@ This workshop will explore the nf-core template and how it supports the adoption
 
 ## Audience & prerequisites
 
-Please note that this is not a beginners workshop and some familiarity the Nextflow, the command line, and common file formats is assumed.
+Please note that this is not a beginners workshop and some familiarity with Nextflow, the command line, and common file formats is assumed.
 
 **Prerequisites**
 
