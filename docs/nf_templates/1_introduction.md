@@ -35,5 +35,5 @@ This workshop can be completed using the [![Nextflow Training GitPod](https://im
     Open the [Gitpod training environment](https://gitpod.io/#https://github.com/nextflow-io/training) and use the following command to switch to the empty `nf-templates` folder:
 
     ```bash
-    cd /workspace/gitpod/nf-templates
+    cd /workspace/gitpod/docs/nf_templates
     ```
