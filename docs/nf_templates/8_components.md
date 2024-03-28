@@ -139,7 +139,7 @@ Running `nf-core lint` after you have modified an nf-core module will cause it t
 
 Changing a module does not mean you can't continue to use that module.
 
-The nf-core modules patch command allows you keep using the nf-core component without needing to make it into a local module and curate it yourself. Instead, it creates a path file that will keep track of the changes you made. If you subsequently update the module using the nf-core tooling, the diff file will be retained. If any subsequent changes to the module conflict with your diff file, you will prompted to resolve the conflicts.
+The nf-core modules patch command allows you keep using the nf-core component without needing to make it into a local module and curate it yourself. Instead, it creates a path file that will keep track of the changes you made. If you subsequently update the module using the nf-core tooling, the diff file will be retained. If any subsequent changes to the module conflict with your diff file, you will be prompted to resolve the conflicts.
 
 ```bash
 nf-core modules patch
