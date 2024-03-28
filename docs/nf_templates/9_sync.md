@@ -2,7 +2,7 @@
 
 The template evolves as the ecosystem evolves.
 
-New templates are release semi-regularly and the nf-core tooling helps incorporate these changes through syncs with the `TEMPLATE` branch.
+New templates are released semi-regularly and the nf-core tooling helps incorporate these changes through syncs with the `TEMPLATE` branch.
 
 To keep nf-core pipelines up to date with improvements in the main template, we use a method of synchronisation with the `TEMPLATE` branch.
 
