@@ -18,7 +18,7 @@ git push
 
 ## Update minimum Nextflow version
 
-The template also includes a minimum Nextflow version that is required for the pipeline to to. You can also change the required version of Nextflow using the `nf-core bump-version` command.
+The template also includes a minimum Nextflow version that is required for the pipeline to run. You can also change the required version of Nextflow using the `nf-core bump-version` command.
 
 ```bash
 nf-core bump-version 23.04.0 --nextflow
