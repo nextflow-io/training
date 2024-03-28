@@ -33,4 +33,4 @@ Many of these tests are configured for the nf-core repo. However, they can be mo
 
 !!! warning "Deleting workflows"
 
-    Even though many of these workflows are not relevant for private repos. It is recommended to keep them in place to prevent `nf-core lint` from throwing errors. Extra steps or modifications to these workflows can be added for repositories outside of nf-core.
+    Even though many of these workflows are not relevant for private repositories, it is recommended to keep them in place to prevent `nf-core lint` from throwing errors. Extra steps or modifications to these workflows can be added for repositories outside of nf-core.
