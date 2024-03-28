@@ -32,4 +32,4 @@ You can explore any nf-core pipeline and expect to find the same files in the sa
 
 ## New features as of nf-core/tools version 2.13
 
-The groovy code that use to live in the `lib` folder has been moved to `subworkflows/`. Moving this code has made it easier to find, modify, and test. Importantly, its modular and is paving the way for a more flexible template in the future.
+The groovy code that used to live in the `lib` folder has been moved to `subworkflows/`. Moving this code has made it easier to find, modify, and test. Importantly, it's modular and is paving the way for a more flexible template in the future.
