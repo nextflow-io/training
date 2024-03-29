@@ -43,6 +43,17 @@ nav:
           - hello_nextflow/01_orientation.md
           - hello_nextflow/02_hello_world.md
           - hello_nextflow/03_hello_gatk.md
+    - nf-core template:
+          - nf_templates/1_introduction.md
+          - nf_templates/2_envsetup.md
+          - nf_templates/3_create.md
+          - nf_templates/4_anatomy.md
+          - nf_templates/5_workflows.md
+          - nf_templates/6_linting.md
+          - nf_templates/7_configuration.md
+          - nf_templates/8_components.md
+          - nf_templates/9_sync.md
+          - nf_templates/10_bump.md
     - help.md
 
 theme:
@@ -132,16 +143,12 @@ markdown_extensions:
           title: On this page
           permalink: true
 plugins:
-    - social:
-          cards: !ENV [CARDS, true]
-          cards_color:
-              fill: "#58BD9F"
-              text: "#FFFFFF"
     - enumerate-headings:
           restart_increment_after:
               - hands_on/01_datasets.md
               - advanced/operators.md
               - hello_nextflow/01_orientation.md
+              - nf_templates/1_introduction.md
           exclude:
               - index.md
               - help.md
