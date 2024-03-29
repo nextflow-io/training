@@ -30,7 +30,7 @@ To enable reporting and reproducibility, subworkflows and modules from the nf-co
 
 ### Configuration files
 
-The nf-core pipeline template utilizes Nextflows flexible customization and has a series of abstracted configuration files throughout the template. Many of which can be flexibly applied using profiles.  
+The nf-core pipeline template utilizes Nextflows flexible customization and has a series of abstracted configuration files throughout the template. Many of which can be flexibly applied using profiles.
 
 In the template, the `nextflow.config` file is a central configuration file that is used to set pipeline defaults.
 
@@ -49,7 +49,7 @@ The `nf-core.yml` file
 
 ### `nextflow_schema.json`
 
-The `nextflow_schema.json` file 
+The `nextflow_schema.json` file
 
 ## Changes to the template structure
 
