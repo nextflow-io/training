@@ -44,16 +44,11 @@ nav:
           - hello_nextflow/02_hello_world.md
           - hello_nextflow/03_hello_gatk.md
     - nf-core template:
-          - nf_templates/1_introduction.md
-          - nf_templates/2_envsetup.md
-          - nf_templates/3_create.md
-          - nf_templates/4_anatomy.md
-          - nf_templates/5_workflows.md
-          - nf_templates/6_linting.md
-          - nf_templates/7_configuration.md
-          - nf_templates/8_components.md
-          - nf_templates/9_sync.md
-          - nf_templates/10_bump.md
+          - nf_template/1_index.md
+          - nf_template/2_envsetup.md
+          - nf_template/3_create.md
+          - nf_template/4_pipeline.md
+          - nf_template/5_customizing.md
     - help.md
 
 theme:
@@ -77,6 +72,7 @@ theme:
               name: Switch to dark mode
     font:
         text: Inter
+        code: Roboto Mono
     features:
         - content.action.edit
         - content.code.annotate
@@ -148,7 +144,7 @@ plugins:
               - hands_on/01_datasets.md
               - advanced/operators.md
               - hello_nextflow/01_orientation.md
-              - nf_templates/1_introduction.md
+              - nf_template/2_envsetup.md
           exclude:
               - index.md
               - help.md

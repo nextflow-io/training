@@ -2,7 +2,9 @@
 
 This workshop can be completed using the [Nextflow Training Gitpod Environment](https://gitpod.io/#https://github.com/nextflow-io/training).
 
-Gitpod offers a virtual machine with everything already set up for you, accessible from your web browser or built into your code editor (e.g., VSCode). To start, click on the button below.
+Gitpod offers a virtual machine with everything already set up for you, accessible from your web browser or built into your code editor (e.g., VSCode).
+
+To start, click on the button below.
 
 [![Open in GitPod](https://img.shields.io/badge/Gitpod-%20Open%20in%20Gitpod-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/nextflow-io/training)
 
@@ -21,7 +23,7 @@ When you first sign up to Gitpod you may need to authenticate your account.
     Open the [Gitpod training environment](https://gitpod.io/#https://github.com/nextflow-io/training) and use the following command to switch to the empty `nf-templates` folder:
 
     ```bash
-    cd /workspace/gitpod/docs/nf_templates
+    cd /workspace/gitpod/nf-template
     ```
 
 ### Explore your Gitpod IDE

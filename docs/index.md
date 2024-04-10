@@ -55,13 +55,23 @@ We have several workshops available on this website - find the one that's right 
 
     [Launch the Hello Nextflow Training:material-arrow-right:](hello_nextflow/index.md){ .md-button }
 
-!!! exercise "RNA-seq Variant Calling Training"
+!!! exercise "nf-core Pipeline Template"
+
+    !!! quote inline end ""
+
+        :material-run-fast: This course is will help you to understand the structure of the nf-core pipeline template.
+
+    A "learn by doing" pipeline development tutorial with a focus on the nf-core pipeline template.
+
+    [Launch the nf-core Pipeline Template Training :material-arrow-right:](nf_template/1_index.md){ .md-button }
+
+!!! exercise "RNA-seq Variant Calling"
 
     !!! quote inline end ""
 
         :material-run-fast: This course is quite short and hands-on, great if you want to practice your Nextflow skills.
 
-    A "learn by doing" tutorial with less focus on theory, instead leading through exercises of slowly increasing complexity.
+    A "learn by doing" tutorial with with a focus on theory, instead leading through exercises of slowly increasing complexity.
 
     [Launch the RNA-seq Variant Calling Training :material-arrow-right:](hands_on/index.md){ .md-button }
 
