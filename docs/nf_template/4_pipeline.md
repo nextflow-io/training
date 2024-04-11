@@ -2,10 +2,10 @@
 
 The nf-core pipeline template is a working pipeline and comes preconfigured with two modules:
 
--   [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/): A tool that performs quality control checks on raw sequence data coming from high throughput sequencing pipelines. It provides a modular set of analyses which can be used to give a quick impression of whether your data has any problems of which you should be aware before doing any further analysis.
+-   [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/): A tool that performs quality control checks on raw sequence data coming from high throughput sequencing pipelines. It provides a modular set of analyses which can be used to give a quick impression of your data.
 -   [MultiQC](https://multiqc.info/): A modular tool to aggregate results from bioinformatics analyses across many samples into a single report.
 
-The template `test` profile leverages small test files that are stored in the nf-core test data GitHub repository as inputs for the pipeline.
+The default template `test` profile leverages small test files that are stored in the nf-core [test data GitHub repository](https://github.com/nf-core/test-datasets) as inputs for the pipeline.
 
 Additionally, the template comes with profiles for the management of software dependencies (e.g., `docker`, `singularity`, and `conda`). For pipelines with processes that have been shipped with containers/images/recipes, these profiles can be used to change the way dependencies are handled when you execute your pipeline.
 
@@ -15,9 +15,9 @@ Additionally, the template comes with profiles for the management of software de
 
 ## Testing your pipeline
 
-Running the `test` profile is an effective way to see if your pipeline is working.
+The `test` profile can be used to check if your pipeline is still working during your development cycle. It is also used as a part of GitHub Actions to test your pipeline during pull requests.
 
-The `test` profile can be used to check your pipeline is still working during your development cycle and can be used as a part of GitHub Actions to test your pipeline during pull requests. Additional test profiles can be created to test different parts of you pipeline.
+Additional test profiles can be created to test different parts of you pipeline and can also be added to GitHub actions.
 
 !!! question "Exercise"
 
@@ -30,7 +30,7 @@ The `test` profile can be used to check your pipeline is still working during yo
 
 ## Adding a new tool to your pipeline
 
-Here, you will be adding an nf-core module for `fastp`, a fastq data pre-processing tool that has functions for quality control, trimming of adapters, filtering by quality, and read pruning.
+Here, you will be a process for `fastp`, a fastq data pre-processing tool that has functions for quality control, trimming of adapters, filtering by quality, and read pruning.
 
 The `fastp` module will take fastq files from the sample sheet as inputs and will produce reports that you will add as inputs for the `MultiQC`
 
@@ -322,7 +322,7 @@ nf-core bump-version 1.0
 
 After you have updated the version of you pipeline, your changes can be pushed to GitHub.
 
-!!! question "Exercsie"
+!!! question "Exercise"
 
     Bump your pipeline version to `1.0` using the `nf-core bump-version` command and push your changes to GitHub.
 

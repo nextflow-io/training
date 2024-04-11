@@ -1,12 +1,12 @@
 # Environment setup
 
-This workshop can be completed using the [Nextflow Training Gitpod Environment](https://gitpod.io/#https://github.com/nextflow-io/training).
+This workshop should be completed using the [Nextflow Training Gitpod Environment](https://gitpod.io/#https://github.com/nextflow-io/training).
 
 Gitpod offers a virtual machine with everything already set up for you, accessible from your web browser or built into your code editor (e.g., VSCode).
 
 To start, click on the button below.
 
-[![Open in GitPod](https://img.shields.io/badge/Gitpod-%20Open%20in%20Gitpod-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/nextflow-io/training)
+[![Open in Gitpod](https://img.shields.io/badge/Gitpod-%20Open%20in%20Gitpod-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/nextflow-io/training)
 
 ## Running Gitpod
 
@@ -43,7 +43,7 @@ You should now see something similar to the following:
 -   There is also a large workspace option that gives you up to 8 cores, 16GB RAM, and 50GB storage. However, the large workspace will use your free credits quicker and you will have fewer hours of access to this space.
 -   Gitpod will time out after 30 minutes of inactivity and will save your changes for up to 2 weeks.
 
-More information about gitpod is available at [gitpod.io](https://www.gitpod.io).
+More information about Gitpod is available at [gitpod.io](https://www.gitpod.io).
 
 ### Reopening a Gitpod session
 

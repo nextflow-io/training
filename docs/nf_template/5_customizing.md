@@ -1,4 +1,4 @@
-# Customizing your pipelines
+# Customizing the template
 
 As a developer you may want more flexibility when developing your pipelines.
 
@@ -174,7 +174,7 @@ git merge TEMPLATE
 
 ## Update minimum Nextflow version
 
-The template also includes a minimum Nextflow version that is required for the pipeline to run. You can also change the required version of Nextflow using the `nf-core bump-version` command.
+The template also includes a minimum Nextflow version that is required for the pipeline to run. You can also change the required version of Nextflow using the `nf-core bump-version` command. These versions can also be used during GitHub Actions to test your pipeline with upper and lower version limits.
 
 ```bash
 nf-core bump-version 23.04.0 --nextflow

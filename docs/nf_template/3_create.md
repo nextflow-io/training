@@ -2,13 +2,13 @@
 
 The nf-core pipeline template is a standardized framework designed to streamline the development of Nextflow-based bioinformatics pipelines.
 
-Creating a pipeline using the nf-core template is greatly simplified by the nf-core tooling, which will help you create a pipeline using the set framework, which you can then modify to suit your own purposes.
+Creating a pipeline using the nf-core template is greatly simplified by the nf-core tooling, which will help you create a pipeline using the set framework and can be modified to suit your own purposes.
 
 Here, you will use the nf-core template to kickstart your pipeline development.
 
 ## The `nf-core create` command
 
-The `nf-core create` command makes a new pipeline using the nf-core base template with pipeline name, description, and author. It is the first and most important step for creating a pipeline that will seamlessly integrate to the rest of the wider Nextflow ecosystem.
+The `nf-core create` command makes a new pipeline using the nf-core base template with a pipeline name, description, and author. It is the first and most important step for creating a pipeline that will seamlessly integrate to the rest of the wider Nextflow ecosystem.
 
 ```bash
 nf-core create
@@ -67,7 +67,7 @@ Skip template areas?
 
 ## Working with GitHub
 
-GitHub is a web-based interface allowing real-time collaboration. It encourages teams to work together in developing code. With GitHub, you can easily track changes, navigate revisions, and automate some of the more mundane tasks, such as testing.
+[GitHub](https://github.com/) is a web-based interface allowing real-time collaboration. It encourages teams to work together in developing code. With GitHub, you can easily track changes, navigate revisions, and automate some of the more mundane tasks, such as testing.
 
 It is recommended that you work with GitHub (or another code repository) when you are developing your pipelines.
 
@@ -105,7 +105,7 @@ git push --all origin
 
 !!! question "Exercise"
 
-    Push your new nf-core template pipeline to GitHub using the commands above.
+    Create a new GitHub repository named `myfirstpipeline` and push your new pipeline using the commands above. You will need to replace the `<USERNAME>` and `<REPO>` with your GitHub username and `myfirstpipeline`, respectively.
 
 ### Working with branches
 
@@ -115,13 +115,13 @@ The `nf-core create` command will create three branches that will all be pushed 
 
 ```console
 remote: Resolving deltas: 100% (10/10), done.
-To https://github.com/<USERNAME>/<REPO>.git
+To https://github.com/<USERNAME>/myfirstpipeline.git
  * [new branch]      TEMPLATE -> TEMPLATE
  * [new branch]      dev -> dev
  * [new branch]      main -> main
 ```
 
-In nf-core the `main` branch for stable releases and the `dev` branch is for merging feature branches.
+In nf-core the `main` branch is for stable releases and the `dev` branch is for merging feature branches. This enables `main` branch to remain fully functional while new features are developed, collected in the `dev` branch, and then merged once checks have been performed.
 
 <figure class="excalidraw">
 --8<-- "docs/nf_template/img/branches.excalidraw.svg"
@@ -131,7 +131,7 @@ Feature branches should be checked out from the `dev` branch.
 
 !!! question "Exercise"
 
-    Checkout a new feature branch from the dev branch
+    Checkout a new feature branch named `myFeature` from the dev branch
 
     ```
     git checkout -b myFeature dev
@@ -141,13 +141,13 @@ You can find out more about working collaboratively with branches on the [GitHub
 
 !!! note
 
-    You can execute different remote GitHub branches using the revision flag (`-r`).
+    Remote GitHub branches can be executed using the revision flag (e.g., `-r dev`).
 
 ### The `TEMPLATE` branch
 
 The `TEMPLATE` branch is used by the `nf-core sync` command to integrate template changes to your pipeline. You should **never** modify the `TEMPLATE` branch as any changes will likely disrupt the syncing functionality.
 
-You will learn more about the `TEMPLATE` branch in a later section.
+You will learn more about the `TEMPLATE` branch in later sections.
 
 ## Template tour
 
@@ -172,7 +172,9 @@ Modules and subworkflows are stored within `local` and `nf-core` folders. nf-cor
 modules/
 ├── local
 │   └── <toolname>
-│       └── main.nf
+│   │   └── main.nf
+│   .
+│
 └── nf-core
     ├── <toolname>
     │   ├── environment.yml
@@ -182,13 +184,14 @@ modules/
     │       ├── main.nf.test
     │       ├── main.nf.test.snap
     │       └── tags.yml
+    .
 ```
 
 ### Configuration files
 
 The nf-core pipeline template utilizes Nextflows flexible customization options and has a series of configuration files throughout the template.
 
-In the template, the `nextflow.config` file is a central configuration file and is used to set default values for parameters and other configuration options.
+In the template, the `nextflow.config` file is a central configuration file and is used to set default values for parameters and other configuration options. The majority of configuration options are applied by default while others (e.g., software dependency profiles) are included as optional profiles and can be applied at runtime.
 
 There are several additional configuration files that are stored in the `conf` folder and are either added to the configuration scope by default or optionally as profiles:
 
@@ -235,7 +238,7 @@ By default, the template comes with several automated tests that utilize GitHub 
 -   `release-announcements.yml` (_Configured for nf-core repo only_)
     -   Automatic release toot and tweet announcements for nf-core pipeline releases
 
-Notable, many of these tests are only configured for the nf-core repo. However, they can be modified to better suit your needs or ignored if they are superfluous to your requirements.
+Notable, many of these tests are only configured for the nf-core repo. However, they can be modified for your repository or ignored if they are superfluous to your requirements.
 
 You can read more about creating and modifying workflows on the [GitHub Actions documentation webpage](https://docs.github.com/en/actions).
 
