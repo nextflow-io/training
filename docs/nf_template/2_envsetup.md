@@ -55,4 +55,4 @@ Alternatively, you can open a new training workspace by following the Gitpod URL
 
 ### Saving files from Gitpod to your local machine
 
-To save any file from the explorer panel, right-click the file and select Download.
+To save any file from the explorer panel, right-click the file and select `Download`.

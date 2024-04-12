@@ -1,4 +1,4 @@
-# Pipeline development
+# Developing your pipeline
 
 The nf-core pipeline template is a working pipeline and comes preconfigured with two modules:
 
@@ -46,7 +46,7 @@ Modules and subworkflows can be listed, installed, updated, removed, and patched
 
 ### Installing the `fastp` module
 
-The `nf-core modules list` command can be used to list modules in your local pipeline or the remote repository.
+The `nf-core modules list` command can be used to list modules in your local pipeline or the nf-core remote repository.
 
 ```
 nf-core modules list remote
@@ -64,7 +64,7 @@ You can follow the prompts to find and install the module you are interested in:
 ? Tool name: fastp
 ```
 
-Once selected, the tooling will install the module in the `modules/nf-core/` folder and suggest code for your main workflow file (e.g., `workflows/mypipeline.nf`).
+Once selected, the tooling will install the module in the `modules/nf-core/` folder and suggest code that you can add to your main workflow file (`workflows/mypipeline.nf`).
 
 ```console
 INFO     Installing 'fastp'
@@ -119,20 +119,20 @@ Each nf-core module also has a `meta.yml` file which describes the inputs and ou
     nf-core modules info fastp
     ```
 
-Using this module information you can work out what inputs are required and make decisions about how flexible you want your pipeline to be:
+Using this module information you can work out what inputs are required and make decisions about how flexible you want your four inputs to be:
 
--   `tuple val(meta), path(reads)`
+1.   `tuple val(meta), path(reads)`
     -   A tuple with meta _map_ and a list of fastq _files_
     -   The channel `ch_samplesheet` used by the `FASTQC` process can be used as the input.
--   `path  adapter_fasta`
+2.   `path  adapter_fasta`
     -   A fasta _file_ with possible adapters
     -   Should be a parameter as the the adapter file may change between runs
--   `val   save_trimmed_fail`
+3.   `val   save_trimmed_fail`
     -   A _boolean_ to specify if files that failed to pass trimming should be saved
     -   Could be hard coded as true or false, or made into a parameter
--   `val save_merged`
+4.   `val save_merged`
     -   A _boolean_ to specify if merged read files should be saved
-    -   Could be hard coded as true or false or made into a parameter
+    -   Could be hard coded as true or false, or made into a parameter
 
 To maximise the flexibility of your pipeline the second, third, and fourth inputs can create parameters.
 
@@ -155,7 +155,7 @@ A ternary expression (aka a conditional expression) can be used to crate a chann
 
 !!! question "Exercise"
 
-    Create a new channel (`ch_adapters`) using a ternary expression to use with `[]` or a fasta file.
+    Create a new channel (`ch_adapters`) using a ternary expression to use either a supplied fasta file or `[]`.
 
     ```groovy title="workflows/mypipeline.nf" linenums="7"
     ch_adapters = params.adapters ? params.adapters : []
@@ -163,7 +163,7 @@ A ternary expression (aka a conditional expression) can be used to crate a chann
 
 Now you have all four input channels, you can add the `FASTP` process to your pipeline.
 
-Be sure to comment your code so you can recognise the process easily.
+Make sure to comment your code so you can recognise the process.
 
 !!! question "Exercise"
 
@@ -208,7 +208,7 @@ MultiQC will accept json files as well as collected software versions.
 
 ### Additional configuration options
 
-Additional configuration options can be applied to a module using scopes within configuraiton files.
+Additional configuration options can be applied to a module using scopes within configuration files.
 
 The configuration of modules is commonly added to the `modules.conf` file in the `conf` folder. Process selectors (e.g., `withName`) are used to apply configuration to modules selectively. Process selectors must be used withing the process scope.
 
@@ -265,9 +265,9 @@ For these tests to pass the `nextflow_schema.json` must be updated with the para
 
 !!! warning
 
-    You should never touch this file by hand. The `nf-core schema build` command can be used to render and edit this file in your web browser.
+    You should never touch this file by hand.
 
-The `nf-core schema build` command is designed to support developers write this file and will check, validate, and propose additions to your `nextflow_schema.json` file.
+The `nf-core schema build` command is designed to support developers write, check, validate, and propose additions to your `nextflow_schema.json` file. It will enable you to launch a web builder to edit this file in your web browser.
 
 ```console
 INFO     [✓] Default parameters match schema validation
@@ -286,11 +286,25 @@ The parameters that you have added to your pipeline will be added to the bottom 
 
 ![Pipeline parameters](img/schemabuild.png)
 
-Once you added you can click Finished and the updates will be added to your `nf-core schema build` automatically.
+Once you have made your edits you can click `Finished` and the all changes will be automatically added to your `nextflow_schema.json` file.
 
 !!! question "Exercise"
 
     Use the `nf-core schema build` command to update your schema. Add any grouping and information you think is appropriate. Lint your pipeline again.
+
+## Bump your pipeline version
+
+The pipeline version number is mentioned in a lot of different places in nf-core pipelines. The `nf-core bump-version` command updates the version for you automatically, so that you don't accidentally miss any. It can be used for each pipeline release, and again for the next development version after release.
+
+```bash
+nf-core bump-version 1.0
+```
+
+After you have updated the version of you pipeline, your changes can be pushed to GitHub.
+
+!!! question "Exercise"
+
+    Bump your pipeline version to `1.0` using the `nf-core bump-version` command.
 
 ### Push your changes to GitHub
 
@@ -311,24 +325,3 @@ As your current branch `myFeature` has no upstream branch you will need to set t
 !!! note
 
     To automatically add an origin for branches without a tracking upstream, see 'push.autoSetupRemote' in 'git help config'.
-
-## Bump your pipeline version
-
-The pipeline version number is mentioned in a lot of different places in nf-core pipelines. The `nf-core bump-version` command updates the version for you automatically, so that you don't accidentally miss any. It can be used for each pipeline release, and again for the next development version after release.
-
-```bash
-nf-core bump-version 1.0
-```
-
-After you have updated the version of you pipeline, your changes can be pushed to GitHub.
-
-!!! question "Exercise"
-
-    Bump your pipeline version to `1.0` using the `nf-core bump-version` command and push your changes to GitHub.
-
-    ```bash
-    nf-core bump-version 1.0
-    git add .
-    git commit -m "Version 1.0 release"
-    git push
-    ```

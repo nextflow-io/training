@@ -47,8 +47,9 @@ nav:
           - nf_template/1_index.md
           - nf_template/2_envsetup.md
           - nf_template/3_create.md
-          - nf_template/4_pipeline.md
-          - nf_template/5_customizing.md
+          - nf_template/4_tour.md
+          - nf_template/5_pipeline.md
+          - nf_template/6_customizing.md
     - help.md
 
 theme:
