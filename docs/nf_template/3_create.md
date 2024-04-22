@@ -45,7 +45,7 @@ The following template areas can be customized:
 -   **iGenomes config:** Pipeline options related to iGenomes, e.g., `conf/igenomes.config`.
 -   **nf-core/configs:** Repository options that integrate nf-core config profiles.
 
-If you choose to customize the template, the nf-core tooling will provide a series of interactive prompts help guide your choices.
+If you choose to customize the template, the nf-core tooling will provide a series of interactive prompts to help guide your choices.
 
 ```bash
 ? Workflow name <name>
@@ -78,7 +78,7 @@ Every person who uses github.com signs in to a personal account. Your personal a
 Signing up for a new personal account:
 
 1. Navigate to [https://github.com/](https://github.com/).
-2. Click `Sign up`.
+2. Click `Sign up` at the top right corner.
 3. Follow the prompts to create your personal account.
 
 !!! warning "Verified accounts"
@@ -89,7 +89,7 @@ Signing up for a new personal account:
 
 The `nf-core create` command suggests commands for submitting this to GitHub.
 
-Before you can use these commands, you will need to create an empty repository for your template to be pushed to.
+Before you can use these commands, you will need to create an empty repository on GitHub for your template to be pushed to.
 
 When you are logged into GitHub, you can use the `New` repository button or navigate to [https://github.com/new](https://github.com/new) and follow the prompts to make a new repository.
 
@@ -121,7 +121,7 @@ To https://github.com/<USERNAME>/myfirstpipeline.git
  * [new branch]      main -> main
 ```
 
-In nf-core, the `main` branch is for stable releases and the `dev` branch is for merging feature branches together. This enables `main` branch to remain fully functional while new features are developed in feature branches, collected in the `dev` branch, and then merged into `main` once they are ready.
+In nf-core, the `main` branch is for stable releases and the `dev` branch is for merging feature branches together. This enables the `main` branch to remain fully functional while new features are developed in feature branches, collected in the `dev` branch, and then merged into `main` once they are ready.
 
 <figure class="excalidraw">
 --8<-- "docs/nf_template/img/branches.excalidraw.svg"
@@ -141,7 +141,7 @@ You can find out more about working collaboratively with branches on the [GitHub
 
 !!! note
 
-    Remote GitHub branches can be executed using the revision flag (e.g., `-r dev`).
+    Remote GitHub branches can be executed with Nextflow using the revision flag (e.g., `-r dev`).
 
 ### The `TEMPLATE` branch
 
@@ -153,7 +153,7 @@ You will learn more about the `TEMPLATE` branch in later sections.
 
 The nf-core pipeline template comes packed with a lot of files and folders.
 
-While the template may feel overwhelming, a complete understanding isn't required start developing your pipeline.
+While the template may feel overwhelming, a complete understanding isn't required to start developing your pipeline.
 
 ### Workflows, subworkflows, and modules
 
@@ -166,7 +166,7 @@ The nf-core pipeline template has a `main.nf` file that calls `mypipeline.nf` fr
 --8<-- "docs/nf_template/img/nested.excalidraw.svg"
 </figure>
 
-Within your pipeline repository, `modules` and `subworkflows` are stored within `local` and `nf-core` folders. The `nf-core` folders are for components that have come from nf-core while `local` folders are for components that have been developed independently.
+Within your pipeline repository, `modules` and `subworkflows` are stored within the `local` and `nf-core` folders. The `nf-core` folder is for components that have come from nf-core while the `local` folder is for components that have been developed independently.
 
 ```
 modules/
@@ -197,7 +197,7 @@ There are several configuration files that are stored in the `conf` folder and a
 
 -   `base.config`: sensible defaults for pipeline resource requests.
 -   `igenomes.config`: configuration settings required to access the igenomes registry.
--   `modules.config`: additional module directives amd arguments.
+-   `modules.config`: additional module directives and arguments.
 -   `test.config`: a profile to run the pipeline with minimal test data.
 -   `test_full.config`: a profile to run the pipeline with a full-sized test dataset.
 
@@ -223,7 +223,7 @@ By default, the template comes with several automated tests that utilize GitHub 
 
 -   `branch.yml`: Sets the branch protection for the nf-core repository
 -   `ci.yml`: Run small pipeline tests with the small test datasets
--   `clean-up.yml`: Automated testing for stale and closed GitHub issues and PRs in nf-core repo
+-   `clean-up.yml`: Automated testing for stale and closed GitHub issues and PRs in the nf-core repo
 -   `download_pipeline.yml`: Test a pipeline download with `nf-core download`.
 -   `fix-linting.yml`: Fix linting by adding a comment to a PR
 -   `linting_comment.yml`: Triggered after the linting action and posts an automated comment to the PR, even if the PR is coming from a fork

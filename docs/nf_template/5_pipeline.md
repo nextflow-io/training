@@ -24,15 +24,15 @@ Additional test profiles can be created to test different parts of you pipeline 
     Run your pipeline with the `test` and `docker` profile.
 
     ```bash
-    cd ..
-    nextflow run nf-core-mypipeline -profile test,docker --outdir results
+    cd /workspace/gitpod/nf-template
+    nextflow run <YOUR PIPELINE NAME HERE> -profile test,docker --outdir results
     ```
 
 ## Adding a new tool to your pipeline
 
-Here, you will be a process for `fastp`, a fastq data pre-processing tool that has functions for quality control, trimming of adapters, filtering by quality, and read pruning.
+Here, as an example, let's say you need a process for `fastp`, a fastq data pre-processing tool that has functions for quality control, trimming of adapters, filtering by quality, and read pruning.
 
-The `fastp` module will take fastq files from the sample sheet as inputs and will produce reports that you will add as inputs for the `MultiQC`
+The `fastp` module will take fastq files from the sample sheet as inputs and will produce reports that you will add as inputs for the `MultiQC` process
 
 <figure class="excalidraw">
 --8<-- "docs/nf_template/img/pipeline.excalidraw.svg"
@@ -55,6 +55,7 @@ nf-core modules list remote
 The `nf-core modules install` command can be used to install the `fastp` module directly from the nf-core repository:
 
 ```
+cd <YOUR PIPELINE NAME HERE>
 nf-core modules install
 ```
 
@@ -75,7 +76,7 @@ include { FASTP } from '../modules/nf-core/fastp/main'
 
 !!! question "Exercise"
 
-    You the `nf-core modules install` command to add the `fastp` module to your pipeline.
+    Run the `nf-core modules install` command to add the `fastp` module to your pipeline.
 
 To enable reporting and reproducibility, modules and subworkflows from the nf-core repository are tracked using hashes in the `modules.json` file. When modules are installed or removed using the nf-core tooling the `modules.json` file will be automatically updated.
 
@@ -85,7 +86,7 @@ To enable reporting and reproducibility, modules and subworkflows from the nf-co
 
 ### Adding a module to your pipeline
 
-Although the module has been installed in your local pipeline repository, it is not yet added to your pipeline. The suggested `include` statement needs to be added to your `workflows/mypipeline.nf` file and the process (with inputs) needs to be added to the workflow block.
+Although the module has been installed in your local pipeline repository, it is not yet added to your pipeline. The suggested `include` statement needs to be added to your `workflows/mypipeline.nf` file and the process call (with inputs) needs to be added to the workflow block.
 
 ```groovy title="workflows/mypipeline.nf" linenums="7"
 include { FASTQC                 } from '../modules/nf-core/fastqc/main'
@@ -99,7 +100,7 @@ include { MULTIQC                } from '../modules/nf-core/multiqc/main'
 
 To add the fastp module to your workflow you will need to check what inputs are required.
 
-You can view the input channels for the module by opening the `/modules/nf-core/fastp/main` file.
+You can view the input channels for the module by opening the `./modules/nf-core/fastp/main.nf` file.
 
 ```groovy title="/modules/nf-core/fastp/main.nf" linenums="10"
 input:
@@ -123,8 +124,8 @@ Using this module information you can work out what inputs are required and make
 
 1.  `tuple val(meta), path(reads)`
 
-    -   A tuple with meta _map_ and a list of fastq _files_
-    -   The channel `ch_samplesheet` used by the `FASTQC` process can be used as the input.
+    -   A tuple with a meta _map_ and a list of fastq _files_
+    -   The channel `ch_samplesheet` used by the `FASTQC` process can be used as the reads input.
 
 2.  `path  adapter_fasta`
 
@@ -141,7 +142,7 @@ Using this module information you can work out what inputs are required and make
     -   A _boolean_ to specify if merged read files should be saved
     -   Could be hard coded as true or false, or made into a parameter
 
-To maximise the flexibility of your pipeline the second, third, and fourth inputs can create parameters.
+To maximize the flexibility of your pipeline the second, third, and fourth inputs can be set via pipeline parameters.
 
 Parameter names should be unique and easily identifiable. Default values should be added to your `nextflow.config` file within the `params` scope.
 
@@ -158,7 +159,7 @@ Parameter names should be unique and easily identifiable. Default values should 
 
 While `save_trimmed_fail` and `save_merged` are boolean and can have a default value (in this case false), `adapters` is a file and a default value of `null` will prevent the `FASTP` process from running. However, empty square brackets (`[]`) can be used as an input to fill the channel without supplying a file.
 
-A ternary expression (aka a conditional expression) can be used to crate a channel that will be either the square brackets or a supplied fasta file.
+A ternary expression (aka a conditional expression) can be used to create a channel that will be either the square brackets or a supplied fasta file.
 
 !!! question "Exercise"
 
@@ -168,9 +169,9 @@ A ternary expression (aka a conditional expression) can be used to crate a chann
     ch_adapters = params.adapters ? params.adapters : []
     ```
 
-Now you have all four input channels, you can add the `FASTP` process to your pipeline.
+Now you have all four input channels, you can add the `FASTP` process to your pipeline workflow block.
 
-Make sure to comment your code so you can recognise the process.
+Make sure to comment your code so you can recognize the process.
 
 !!! question "Exercise"
 
@@ -187,9 +188,9 @@ Make sure to comment your code so you can recognise the process.
     )
     ```
 
-Finally, to add include the `FASTP` outputs as inputs to your `MULTIQC` process, you can mix them into existing channels.
+Finally, to provide the `FASTP` outputs as inputs to your `MULTIQC` process, you can mix them into existing channels.
 
-As with the inputs, you can view the outputs for the module by opening the `/modules/nf-core/fastp/main` file and viewing the module metadata.
+As with the inputs, you can view the outputs for the module by opening the `/modules/nf-core/fastp/main.nf` file and viewing the module metadata.
 
 ```groovy title="/modules/nf-core/fastp/main.nf" linenums="10"
 output:
@@ -206,7 +207,7 @@ MultiQC will accept json files as well as collected software versions.
 
 !!! question "Exercise"
 
-    Mix the `json` and `versions` channels with the `ch_multiqc_files` and `ch_versions` channels, respectively.
+    Use the `mix` channel operator to mix the `json` and `versions` channels with the `ch_multiqc_files` and `ch_versions` channels, respectively.
 
     ```groovy title="workflows/mypipeline.nf" linenums="50"
     ch_multiqc_files = ch_multiqc_files.mix(FASTP.out.json.collect{it[1]}.ifEmpty([]))
@@ -217,9 +218,9 @@ MultiQC will accept json files as well as collected software versions.
 
 Additional configuration options can be applied to a module using scopes within configuration files.
 
-The configuration of modules is commonly added to the `modules.conf` file in the `conf` folder. Process selectors (e.g., `withName`) are used to apply configuration to modules selectively. Process selectors must be used withing the process scope.
+The configuration of modules is commonly added to the `modules.conf` file in the `conf` folder. Process selectors (e.g., `withName`) are used to apply configuration to modules selectively. Process selectors must be used within the process scope.
 
-Extra configuration may be applied as directives of by using `args`.
+Extra configuration may be applied as directives by using `args`.
 
 !!! question "Exercise"
 
@@ -268,7 +269,7 @@ schema_params: Param save_trimmed_fail from nextflow config not found in nextflo
 schema_params: Param save_merged from nextflow config not found in nextflow_schema.json
 ```
 
-For these tests to pass the `nextflow_schema.json` must be updated with the parameters that were added to your pipeline but have not been documented.
+For these tests to pass the `nextflow_schema.json` file must be updated with the parameters that were added to your pipeline but have not been documented.
 
 !!! warning
 
@@ -293,7 +294,7 @@ The parameters that you have added to your pipeline will be added to the bottom 
 
 ![Pipeline parameters](img/schemabuild.png)
 
-Once you have made your edits you can click `Finished` and the all changes will be automatically added to your `nextflow_schema.json` file.
+Once you have made your edits you can click `Finished` and all changes will be automatically added to your `nextflow_schema.json` file.
 
 !!! question "Exercise"
 
@@ -331,4 +332,4 @@ As your current branch `myFeature` has no upstream branch you will need to set t
 
 !!! note
 
-    To automatically add an origin for branches without a tracking upstream, see 'push.autoSetupRemote' in 'git help config'.
+    To automatically add an origin for branches without a tracking upstream, see `push.autoSetupRemote` in `git help config`.

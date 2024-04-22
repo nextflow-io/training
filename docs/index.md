@@ -59,7 +59,7 @@ We have several workshops available on this website - find the one that's right 
 
     !!! quote inline end ""
 
-        :material-run-fast: This course is will help you to understand the structure of the nf-core pipeline template.
+        :material-run-fast: This course will help you to understand the structure of the nf-core pipeline template.
 
     A "learn by doing" pipeline development tutorial with a focus on the nf-core pipeline template.
 

@@ -2,13 +2,13 @@
 
 As a developer you may want more flexibility when developing your pipelines.
 
-While the template the nf-core template comes with specific standards, many of these can be altered to better suit your needs.
+While the nf-core template comes with specific standards, many of these can be altered to better suit your needs.
 
 Here, you will learn how to use the nf-core tooling to customize different parts of the nf-core template and nf-core components without compromising their integration into the nf-core ecosystem.
 
 ## Patching modules
 
-The `nf-core lint` command will help manage nf-core components and test that they match the remote they came from. Although modules are written to be flexible, you may want to modify a component to fit your purpose.
+The `nf-core lint` command will help manage nf-core components and test that they match the remote source they came from. Although modules are written to be flexible, you may want to modify a component to fit your purpose.
 
 For example, if you modify an nf-core module, it will no longer match the remote and a linting test of this module would fail.
 
@@ -16,7 +16,7 @@ For example, if you modify an nf-core module, it will no longer match the remote
 
     Edit the `fastp` module by adding an `ed` to the end of `reads_fail`. Check to see if your change has caused the linting test to fail.
 
-    ```groovy title="modules/nf-core/fastp/main.nf" linenum
+    ```groovy title="modules/nf-core/fastp/main.nf" linenums="22"
     tuple val(meta), path('*.fail.fastq.gz')  , optional:true, emit: reads_failed
     ```
 
@@ -108,7 +108,7 @@ If you run `nf-core lint` again, you would see that the test is now ignored and 
 
     Make an edit to the `CODE_OF_CONDUCT.md` in your pipeline repository (e.g., add another bullet point). Use the `nf-core lint` command to see if it passes or fails. Add the `CODE_OF_CONDUCT.md` as a `files_unchanged:` in the `.nf-core.yml` file and lint your pipeline again to show that the test has been ignored.
 
-A full list of checks, descriptions of how they work, and how they can be customized can be found on the [tools documentation website](https://nf-co.re/tools/docs).
+A full list of checks, descriptions of how they work, and how they can be customized can be found on the [tools documentation website](https://nf-co.re/tools/docs/latest/).
 
 !!! question "Bonus Exercise"
 
@@ -143,7 +143,7 @@ The modules commands will, during initialization, try to pull changes from the r
 
 !!! info "Private modules repositories"
 
-    In order to browse private repositories you have to configure the [GitHub CLI auth](https://cli.github.com/manual/gh_auth_login) and provide here your credentials.
+    In order to browse private repositories you have to configure the [GitHub CLI auth](https://cli.github.com/manual/gh_auth_login) and provide your credentials with the command below.
 
     ```
     gh auth login
@@ -153,9 +153,9 @@ The modules commands will, during initialization, try to pull changes from the r
 
 The template evolves as the ecosystem evolves.
 
-To keep nf-core pipelines up to date with improvements in the main template, you can use a method of synchronisation with the `TEMPLATE` branch.
+To keep nf-core pipelines up to date with improvements in the main template, you can use a method of synchronization with the `TEMPLATE` branch.
 
-To sync the template, you first need to commit and push your changes to GitHub. The `nf-core sync` command can then be used to update the `TEMPLATE` branch with the latest version of the nf-core template, so that these updates can be synchronised with the pipeline. It is run automatically for all pipelines when ever a new release of nf-core/tools (and the included template) is made.
+To sync the template, you first need to commit and push your changes to GitHub. The `nf-core sync` command can then be used to update the `TEMPLATE` branch with the latest version of the nf-core template, so that these updates can be synchronized with the pipeline. It is run automatically for all pipelines whenever a new release of nf-core/tools (and the included template) is made.
 
 ```bash
 nf-core sync
@@ -164,7 +164,7 @@ nf-core sync
 The tooling merges updates suggesting a git command
 
 ```bash
-cd /workspace/gitpod/nf-template/nf-core-mypipeline
+cd /workspace/gitpod/nf-template/<YOUR PIPELINE NAME HERE>
 git merge TEMPLATE
 ```
 
@@ -182,7 +182,7 @@ nf-core bump-version 23.04.0 --nextflow
 
 !!! question "Exercise"
 
-    Update your pipeline version number to `1.0` and push the changes to GitHub.
+    Update the minimum version of Nextflow required to run your pipeline to `23.04.0` and push the changes to GitHub.
 
 !!! note "Tagged versions"
 
