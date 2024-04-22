@@ -3,8 +3,8 @@
  */
 
 // Execution environment setup
-params.baseDir = "/workspace/gitpod/nf-training/troubleshoot" 
-$baseDir = params.baseDir
+params.baseDir = "/workspace/gitpod/troubleshoot" 
+baseDir = params.baseDir
 
 // Primary input
 params.reads_bam = "${baseDir}/data/samplesheet.csv"
