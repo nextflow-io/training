@@ -121,16 +121,27 @@ Each nf-core module also has a `meta.yml` file which describes the inputs and ou
 
 Using this module information you can work out what inputs are required and make decisions about how flexible you want your four inputs to be:
 
-1.   `tuple val(meta), path(reads)`
+1.  `tuple val(meta), path(reads)`
+
+
     -   A tuple with meta _map_ and a list of fastq _files_
     -   The channel `ch_samplesheet` used by the `FASTQC` process can be used as the input.
-2.   `path  adapter_fasta`
+
+2.  `path  adapter_fasta`
+
+
     -   A fasta _file_ with possible adapters
     -   Should be a parameter as the the adapter file may change between runs
-3.   `val   save_trimmed_fail`
+
+3.  `val   save_trimmed_fail`
+
+
     -   A _boolean_ to specify if files that failed to pass trimming should be saved
     -   Could be hard coded as true or false, or made into a parameter
-4.   `val save_merged`
+
+4.  `val save_merged`
+
+
     -   A _boolean_ to specify if merged read files should be saved
     -   Could be hard coded as true or false, or made into a parameter
 
