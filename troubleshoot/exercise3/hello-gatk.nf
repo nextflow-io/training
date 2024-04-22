@@ -45,7 +45,7 @@ process GATK_HAPLOTYPECALLER {
     container "broadinstitute/gatk:4.5.0.0"
 
     input:
-        tuple val(id), path(input_bam), path(input_bam_index)
+        tuple path(input_bam), path(input_bam_index)
         path ref_fasta
         path ref_index
         path ref_dict

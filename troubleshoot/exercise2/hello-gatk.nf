@@ -72,7 +72,7 @@ process GATK_JOINTGENOTYPING {
     container "broadinstitute/gatk:4.5.0.0"
 
     input:
-        path(sample_map)
+        val(sample_map)
         val(cohort_name)
         path ref_fasta
         path ref_index
@@ -110,10 +110,10 @@ workflow {
     // Call variants from the indexed BAM file
     GATK_HAPLOTYPECALLER(
         SAMTOOLS_INDEX.out,
-        params.genome_reference,
-        params.genome_reference_index,
-        params.genome_reference_dict,
-        params.calling_intervals
+        Channel.of(params.genome_reference),
+        Channel.of(params.genome_reference_index),
+        Channel.of(params.genome_reference_dict),
+        Channel.of(params.calling_intervals)
     )
 
     // Create a sample map of the output GVCFs
