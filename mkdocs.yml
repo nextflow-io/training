@@ -43,6 +43,14 @@ nav:
           - hello_nextflow/01_orientation.md
           - hello_nextflow/02_hello_world.md
           - hello_nextflow/03_hello_gatk.md
+    - Troubleshooting:
+          - troubleshoot/index.md
+          - troubleshoot/01_exercise.md
+          - troubleshoot/02_exercise.md
+          - troubleshoot/03_exercise.md
+          - troubleshoot/04_exercise.md
+          - troubleshoot/05_exercise.md
+          - troubleshoot/06_exercise.md
     - help.md
 
 theme:
