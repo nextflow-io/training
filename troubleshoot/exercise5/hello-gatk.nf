@@ -118,7 +118,7 @@ workflow {
 
     // Create a sample map of the output GVCFs
     sample_map = GATK_HAPLOTYPECALLER.out.collectFile(){ id, gvcf, idx ->
-            ["${params.cohort_name}_map.tsv", "${id}\t${gvcf}\t${idx}\n"]
+            ["${params.cohort_name}_map.tsv", "${id}/t${gvcf}/t${idx}/n"]
     }
 
     // Consolidate GVCFs and apply joint genotyping analysis

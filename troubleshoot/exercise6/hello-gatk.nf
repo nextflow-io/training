@@ -4,7 +4,7 @@
 
 // Execution environment setup
 params.baseDir = "/workspace/gitpod/troubleshoot" 
-baseDir = params.baseDir
+$baseDir = params.baseDir
 
 // Primary input
 params.reads_bam = "${baseDir}/data/samplesheet.csv"

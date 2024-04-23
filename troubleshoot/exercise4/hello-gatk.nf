@@ -112,7 +112,7 @@ workflow {
         SAMTOOLS_INDEX.out,
         params.genome_reference,
         params.genome_reference_index,
-        params.genome_reference_dict,
+        params.genome_reference_dict
         params.calling_intervals
     )
 
