@@ -1,4 +1,4 @@
-# Leveraging the nf-core template
+# Introduction
 
 Nextflow provides a powerful way to develop pipelines. However, it does not provide standards for how pipelines should be developed. This gap has led to the establishment of pipeline registries, such as [nf-core](https://nf-co.re/), with tools and implementation guidelines that provide support and standards for pipeline development.
 

@@ -44,12 +44,11 @@ nav:
           - hello_nextflow/02_hello_world.md
           - hello_nextflow/03_hello_gatk.md
     - nf-core template:
-          - nf_template/1_index.md
-          - nf_template/2_envsetup.md
+          - nf_template/1_introduction.md
+          - nf_template/2_orientation.md
           - nf_template/3_create.md
-          - nf_template/4_tour.md
-          - nf_template/5_pipeline.md
-          - nf_template/6_customizing.md
+          - nf_template/4_pipeline.md
+          - nf_template/5_customizing.md
     - help.md
 
 theme:

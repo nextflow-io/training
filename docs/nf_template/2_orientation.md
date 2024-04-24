@@ -1,4 +1,4 @@
-# Environment setup
+# Orientation
 
 This workshop should be completed using the [Nextflow Training Gitpod Environment](https://gitpod.io/#https://github.com/nextflow-io/training).
 

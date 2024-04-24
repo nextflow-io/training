@@ -101,6 +101,12 @@ git remote add origin git@github.com:<USERNAME>/<REPO>.git
 git push --all origin
 ```
 
+!!! warning "Permissions"
+
+    If this is the first time you have used Gitpod for development work you will need to edit your permissions to push changes.
+
+    To edit your Gitpod permissions, click on your avatar in the top right hand corner of your Gitpod window and select `User Settings` from the dropdown window. Click on `Git Providers` on the right hand menu. Click on the three dots to edit the permissions for your GitHub account.
+
 !!! question "Exercise"
 
     Create a new GitHub repository named `myfirstpipeline` and push your new pipeline using the commands above. You will need to replace `<USERNAME>` and `<REPO>` with your GitHub username and `myfirstpipeline`, respectively.
