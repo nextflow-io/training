@@ -16,6 +16,24 @@ To run Gitpod:
     -   This is our GitHub repository URL, prefixed with `https://gitpod.io/#`
 -   Log in with your GitHub account.
 
+!!! note title="Getting started with GitHub"
+
+    [GitHub](https://github.com/) is a web-based interface allowing real-time collaboration. It encourages teams to work together in developing code. With GitHub, you can easily track changes, navigate revisions, and automate some of the more mundane tasks, such as testing.
+
+    To get started with GitHub, you'll need to create a free personal account on [github.com](https://github.com/) and verify your email address.
+
+    Every person who uses github.com signs in to a personal account. Your personal account is your identity and has a username and profile.
+
+    Signing up for a new personal account:
+
+    1. Navigate to [https://github.com/](https://github.com/).
+    2. Click `Sign up` at the top right corner.
+    3. Follow the prompts to create your personal account.
+
+!!! warning "Verified accounts"
+
+    You won't be able to complete some basic GitHub tasks, such as creating a repository, without a verified email address.
+
 When you first sign up to Gitpod you may need to authenticate your account.
 
 !!! question "Exercise"

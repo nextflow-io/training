@@ -18,7 +18,7 @@ Tip: view the complete command output by changing to the process work dir and en
 ??? Solution
 
     I can be immediately seen that the `GATK_HAPLOTYPECALLER` has an offending value `[NA12878, /workspace/gitpod/troubleshoot/exercise3/work/aa/e0741cf287ce3a0c23f4dc12604b8c/reads_mother.bam, /workspace/gitpod/troubleshoot/exercise3/work/aa/e0741cf287ce3a0c23f4dc12604b8c/reads_mother.bam.bai]`.
-    
+
     Specifically, the value 'NA12878' is not a valid path.
 
     There is only one tuple for the `GATK_HAPLOTYPECALLER` process:
@@ -29,7 +29,7 @@ Tip: view the complete command output by changing to the process work dir and en
 
     It can be seen that there are two paths, but no values, in the tuple.
 
-    In reality the 
+    In reality the
 
     ```
     tuple val(id), path(input_bam), path(input_bam_index)

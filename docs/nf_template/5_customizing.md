@@ -8,7 +8,9 @@ Here, you will learn how to use the nf-core tooling to customize different parts
 
 ## Patching modules
 
-The `nf-core lint` command will help manage nf-core components and test that they match the remote source they came from. Although modules are written to be flexible, you may want to modify a component to fit your purpose.
+Although modules are written to be flexible you may want to modify them to better fit your purpose. While you are free to edit modules locally, any changes
+
+The `nf-core lint` command will help manage nf-core components and test that they match the remote source they came from.
 
 For example, if you modify an nf-core module, it will no longer match the remote and a linting test of this module would fail.
 
@@ -34,7 +36,7 @@ Running `nf-core lint` after you have modified an nf-core module will cause it t
 
 Changing a module does not mean you can't continue to use that module.
 
-The `nf-core modules patch` command allows you keep using the nf-core component without needing to make it into a local module. Instead, it creates a `diff` file that will keep track of the changes you made. If you subsequently update the module using the nf-core tooling, the `diff` file will be retained. If any subsequent changes to the module conflict with your `diff` file, you will be prompted to resolve the conflicts.
+The `nf-core modules patch` command allows you keep using the nf-core component without needing to make it into a `local` module for tests to pass. Instead, `nf-core modules patch` command creates a `diff` file that will keep track of the changes you made. If you subsequently update the module using the nf-core tooling, the `diff` file will be retained. If any subsequent changes to the module conflict with your `diff` file, you will be prompted to resolve the conflicts.
 
 ```bash
 nf-core modules patch
@@ -164,13 +166,23 @@ nf-core sync
 The tooling merges updates suggesting a git command
 
 ```bash
-cd /workspace/gitpod/nf-template/<YOUR PIPELINE NAME HERE>
+cd /workspace/gitpod/nf-template/nf-core-myfirstpipeline
 git merge TEMPLATE
 ```
 
 !!! note
 
     For a newly created pipeline the `TEMPLATE` branch doesn't need to be synced.
+
+### Changes to the template structure
+
+Occasionally, the structure of the nf-core pipeline template is updated during a new release of the nf-core tooling. Most of the time these changes are minor. However, sometimes, larger structural changes are adopted to align with changes in the wider ecosystem.
+
+For example, as of nf-core tools 2.13, the groovy code that once lived in the `lib` folder has been moved to `subworkflows/`. Moving this code has made it easier to find, modify, and test the code. Importantly, it's modular nature is paving the way for a more flexible template in the future.
+
+!!! note
+
+    The `TEMPLATE` branch is essential for adopting these changes.
 
 ## Update minimum Nextflow version
 

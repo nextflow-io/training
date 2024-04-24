@@ -65,26 +65,6 @@ Skip template areas?
 
     GitHub badges were skipped in the example above.
 
-## Working with GitHub
-
-[GitHub](https://github.com/) is a web-based interface allowing real-time collaboration. It encourages teams to work together in developing code. With GitHub, you can easily track changes, navigate revisions, and automate some of the more mundane tasks, such as testing.
-
-### Getting started with GitHub
-
-To get started with GitHub, you'll need to create a free personal account on [github.com](https://github.com/) and verify your email address.
-
-Every person who uses github.com signs in to a personal account. Your personal account is your identity and has a username and profile.
-
-Signing up for a new personal account:
-
-1. Navigate to [https://github.com/](https://github.com/).
-2. Click `Sign up` at the top right corner.
-3. Follow the prompts to create your personal account.
-
-!!! warning "Verified accounts"
-
-    You won't be able to complete some basic GitHub tasks, such as creating a repository, without a verified email address.
-
 ### Submit your code to GitHub
 
 The `nf-core create` command suggests commands for submitting this to GitHub.
@@ -101,23 +81,7 @@ git remote add origin git@github.com:<USERNAME>/<REPO>.git
 git push --all origin
 ```
 
-!!! warning "Permissions"
-
-    If this is the first time you have used Gitpod for development work you will need to edit your permissions to push changes.
-
-    To edit your Gitpod permissions, click on your avatar in the top right hand corner of your Gitpod window and select `User Settings` from the dropdown window. Click on `Git Providers` on the right hand menu. Click on the three dots to edit the permissions for your GitHub account.
-
-!!! question "Exercise"
-
-    Create a new GitHub repository named `myfirstpipeline` and push your new pipeline using the commands above. You will need to replace `<USERNAME>` and `<REPO>` with your GitHub username and `myfirstpipeline`, respectively.
-
-### Working with branches
-
-GitHub branches are used to isolate development work without affecting other branches in a repository. Each repository has one default branch, and can have multiple other branches.
-
-You can merge updates from one branch into another branch using a pull request.
-
-The `nf-core create` command will create three branches that will all be pushed to GitHub using the commands above.
+By default, three branches will all be pushed to GitHub using the commands above.
 
 ```console
 remote: Resolving deltas: 100% (10/10), done.
@@ -127,33 +91,15 @@ To https://github.com/<USERNAME>/myfirstpipeline.git
  * [new branch]      main -> main
 ```
 
-In nf-core, the `main` branch is for stable releases and the `dev` branch is for merging feature branches together. This enables the `main` branch to remain fully functional while new features are developed in feature branches, collected in the `dev` branch, and then merged into `main` once they are ready.
+!!! warning "Permissions"
 
-<figure class="excalidraw">
---8<-- "docs/nf_template/img/branches.excalidraw.svg"
-</figure>
+    If this is the first time you have used Gitpod for development work you will need to edit your permissions to push changes.
 
-Feature branches should be checked out from the `dev` branch.
+    To edit your Gitpod permissions, click on your avatar in the top right hand corner of your Gitpod window and select `User Settings` from the dropdown window. Click on `Git Providers` on the right hand menu. Edit the permissions for your GitHub account by clicking on the three dots next to your GitHub account and give your Gitpod account permissions to access for GitHub repositories.
 
 !!! question "Exercise"
 
-    Checkout a new feature branch named `myFeature` from the dev branch
-
-    ```
-    git checkout -b myFeature dev
-    ```
-
-You can find out more about working collaboratively with branches on the [GitHub documentation](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests).
-
-!!! note
-
-    Remote GitHub branches can be executed with Nextflow using the revision flag (e.g., `-r dev`).
-
-### The `TEMPLATE` branch
-
-The `TEMPLATE` branch is used by the `nf-core sync` command to integrate template changes to your pipeline. You should **never** modify the `TEMPLATE` branch as any changes will likely disrupt the syncing functionality.
-
-You will learn more about the `TEMPLATE` branch in later sections.
+    Create a new GitHub repository named `myfirstpipeline` and push your new pipeline using the commands above. You will need to replace `<USERNAME>` and `<REPO>` with your GitHub username and `myfirstpipeline`, respectively.
 
 ## Template tour
 
@@ -247,13 +193,3 @@ You can read more about creating and modifying workflows on the [GitHub Actions 
 !!! warning "Deleting Workflows"
 
     Even though many of these action workflows are not relevant for private repositories, it is recommended to keep them in place to prevent `nf-core lint` from throwing errors.
-
-## Changes to the template structure
-
-Occasionally, the structure of the nf-core pipeline template is updated during a new release of the nf-core tooling. Most of the time these changes are minor. However, sometimes, larger structural changes are adopted to align with changes in the wider ecosystem.
-
-For example, as of nf-core tools 2.13, the groovy code that once lived in the `lib` folder has been moved to `subworkflows/`. Moving this code has made it easier to find, modify, and test the code. Importantly, it's modular nature is paving the way for a more flexible template in the future.
-
-!!! note
-
-    The `TEMPLATE` branch is essential for adopting these changes.

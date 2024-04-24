@@ -25,7 +25,7 @@ Additional test profiles can be created to test different parts of you pipeline 
 
     ```bash
     cd /workspace/gitpod/nf-template
-    nextflow run <YOUR PIPELINE NAME HERE> -profile test,docker --outdir results
+    nextflow run nf-core-myfirstpipeline -profile test,docker --outdir results
     ```
 
 ## Adding a new tool to your pipeline
@@ -44,6 +44,42 @@ nf-core modules and subworkflows are written and maintained by the nf-core commu
 
 Modules and subworkflows can be listed, installed, updated, removed, and patched using nf-core tooling.
 
+### Working with branches
+
+GitHub branches are used to isolate development work without affecting other branches in a repository. Each repository has one default branch, and can have multiple other branches.
+
+You can merge updates from one branch into another branch using a pull request.
+
+The `nf-core create` created three branches: `main`, `dev`, and `TEMPLATE`.
+
+In nf-core, the `main` branch is for stable releases and the `dev` branch is for merging feature branches together. This enables the `main` branch to remain fully functional while new features are developed in feature branches, collected in the `dev` branch, and then merged into `main` once they are ready.
+
+<figure class="excalidraw">
+--8<-- "docs/nf_template/img/branches.excalidraw.svg"
+</figure>
+
+Feature branches should be checked out from the `dev` branch.
+
+!!! question "Exercise"
+
+    Checkout a new feature branch named `myFeature` from the dev branch
+
+    ```
+    git checkout -b myFeature dev
+    ```
+
+You can find out more about working collaboratively with branches on the [GitHub documentation](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests).
+
+!!! note title="Executing revisions"
+
+    Remote GitHub branches can be executed with Nextflow using the revision flag (e.g., `-r dev`).
+
+### The `TEMPLATE` branch
+
+The `TEMPLATE` branch is used by the `nf-core sync` command to integrate template changes to your pipeline. You should **never** modify the `TEMPLATE` branch as any changes will likely disrupt the syncing functionality.
+
+You will learn more about the `TEMPLATE` branch in later sections.
+
 ### Installing the `fastp` module
 
 The `nf-core modules list` command can be used to list modules in your local pipeline or the nf-core remote repository.
@@ -55,7 +91,7 @@ nf-core modules list remote
 The `nf-core modules install` command can be used to install the `fastp` module directly from the nf-core repository:
 
 ```
-cd <YOUR PIPELINE NAME HERE>
+cd nf-core-myfirstpipeline
 nf-core modules install
 ```
 
@@ -216,11 +252,11 @@ MultiQC will accept json files as well as collected software versions.
 
 ### Additional configuration options
 
-Additional configuration options can be applied to a module using scopes within configuration files.
+To prevent changing the nf-core modules, additional configuration options can be applied to a module using scopes within configuration files.
 
 The configuration of modules is commonly added to the `modules.conf` file in the `conf` folder. Process selectors (e.g., `withName`) are used to apply configuration to modules selectively. Process selectors must be used within the process scope.
 
-Extra configuration may be applied as directives by using `args`.
+Extra configuration may be applied as directives by using `args`. You can find many examples of how arguments are added to modules in nf-core pipelines, for example, the nf-core/rnaseq [modules.config](https://github.com/nf-core/rnaseq/blob/master/conf/modules.config) file.
 
 !!! question "Exercise"
 
@@ -271,11 +307,7 @@ schema_params: Param save_merged from nextflow config not found in nextflow_sche
 
 For these tests to pass the `nextflow_schema.json` file must be updated with the parameters that were added to your pipeline but have not been documented.
 
-!!! warning
-
-    You should never touch this file by hand.
-
-The `nf-core schema build` command is designed to support developers write, check, validate, and propose additions to your `nextflow_schema.json` file. It will enable you to launch a web builder to edit this file in your web browser.
+The `nextflow_schema.json` file can get very big and very complicated very quickly. The `nf-core schema build` command is designed to support developers write, check, validate, and propose additions to your `nextflow_schema.json` file. It will enable you to launch a web builder to edit this file in your web browser rather than trying to edit this file manually.
 
 ```console
 INFO     [✓] Default parameters match schema validation
@@ -302,6 +334,14 @@ Once you have made your edits you can click `Finished` and all changes will be a
 
 ## Bump your pipeline version
 
+Having a universal way of versioning the development projects is the best way to track what is going on with the software as new features are added. This problem can be solved by following semantic versioning rules: `[major].[minor].[patch]`
+
+For example, starting with with a release version `1.4.3`, bumping the version to:
+
+-   `1.4.4` would be a patch release for minor things such as fixing bugs.
+-   `1.5` would be a minor release, for example adding some new features.
+-   `2.0` would correspond to the major release where results would no longer be backwards compatible.
+
 The pipeline version number is mentioned in a lot of different places in nf-core pipelines. The `nf-core bump-version` command updates the version for you automatically, so that you don't accidentally miss any. It can be used for each pipeline release, and again for the next development version after release.
 
 ```bash
@@ -317,6 +357,8 @@ After you have updated the version of you pipeline, your changes can be pushed t
 ### Push your changes to GitHub
 
 When you are satisfied with your improvements you can `add`, `commit`, and `push` your changes to GitHub.
+
+You can check which branch you are on using the `git branch` command.
 
 As your current branch `myFeature` has no upstream branch you will need to set the remote as upstream the first time you push your changes.
 
