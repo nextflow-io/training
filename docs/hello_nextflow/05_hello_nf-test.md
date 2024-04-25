@@ -838,11 +838,71 @@ It works! And that's it for per-process unit tests for our pipeline.
 
 ## 4. Add a pipeline-level test
 
+Now all that remains is to add a test for checking that the whole pipeline runs to completion.
+
 ### 4.1 Generate pipeline-level stub test file
 
-### 4.2 Run test (assert success)
+The command is similar to the one for module tests: 
 
-### 4.3 Optionally add more specific assertions if needed
+```bash
+nf-test generate pipeline hello-nf-test.nf
+```
+
+It produces a similar stub file:
+
+```groovy
+nextflow_pipeline {
+
+    name "Test Workflow hello-nf-test.nf"
+    script "hello-nf-test.nf"
+
+    test("Should run without failures") {
+
+        when {
+            params {
+                // define parameters here. Example: 
+                // outdir = "tests/results"
+            }
+        }
+
+        then {
+            assert workflow.success
+        }
+
+    }
+
+}
+```
+
+The line `assert workflow.success` is a simple assertion testing for whether the pipeline ran successfully.
+
+
+### 4.2 Run the test 
+
+Unlike the module test stubs, the pipeline test is fully functional and can be run directly as follows:
+
+```bash
+nf-test test tests/hello-nf-test.nf.test
+```
+
+This produces: 
+
+```bash
+🚀 nf-test 0.8.4
+https://code.askimed.com/nf-test
+(c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
+
+
+Test Workflow hello-nf-test.nf
+
+  Test [df3a3a8c] 'Should run without failures' PASSED (62.493s)
+
+
+SUCCESS: Executed 1 tests in 62.498s
+```
+
+That's it! If necessary, more nuanced assertions can be added to test for the validity and content of the pipeline outputs. See [TODO: add link to pipeline assertion docs]
+
 
 
 
