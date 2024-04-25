@@ -3,7 +3,7 @@
 [short blurb about modularizing a pipeline]
 [note you can also do subworkflows but that's out of scope of this training]
 
-## O. Warmup
+## 0. Warmup
 
 We start from a stub workflow called `hello-modules.nf` that is a copy of `scripts/hello-gatk-6.nf`. [TODO: add brief description of what the pipeline does]
 
@@ -15,6 +15,7 @@ nextflow run hello-modules.nf
 
 [TODO: briefly describe outputs; refer to Part 2 for full details]
 
+---
 
 ## 1. Move parameter declarations from the workflow file to a config file
 
