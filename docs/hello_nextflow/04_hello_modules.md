@@ -3,9 +3,20 @@
 [short blurb about modularizing a pipeline]
 [note you can also do subworkflows but that's out of scope of this training]
 
+---
+
 ## 0. Warmup
 
-We start from a stub workflow called `hello-modules.nf` that is a copy of `scripts/hello-gatk-6.nf`. [TODO: add brief description of what the pipeline does]
+We start from a base workflow called `hello-modules.nf`, which corresponds to the workflow we produced in Part 2: Hello 
+GATK (equivalent to `scripts/hello-gatk-6.nf`). 
+
+[TODO: add brief description of what the pipeline does]
+
+This workflow relies on reference file that are provided in compressed form in the Gitpod environment. If you completed the previous parts of the training course, then you already have everything you need in the working directory. However, if you're picking this up here, you need to run the following command to expand the reference files:
+
+```bash
+tar -zxvf data/ref.tar.gz -C data/
+```
 
 ### 0.1 Run the workflow to verify that it produces the expected outputs 
 
@@ -159,7 +170,7 @@ Move this code to `modules/local/gatk/haplotypecaller/main.nf`:
 
 ```groovy
 /*
- * Call variants with GATK HapolotypeCaller in GVCF mode
+ * Call variants with GATK HaplotypeCaller in GVCF mode
  */
 process GATK_HAPLOTYPECALLER {
 
