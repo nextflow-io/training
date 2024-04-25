@@ -523,7 +523,7 @@ The error message tells you there were differences between the snapshots for the
 
 Why? To make a long story short, the HaplotypeCaller tool includes a timestamp in the VCF header that is different every time (by definition), so we can't just expect the files to have identical md5sums even if they have identical content in terms of the variant calls themselves.
 
-### 2.6 Use content assertion method
+### 2.6 Use a content assertion method
 
 One way to solve the problem is to use a [different kind of assertion](https://nf-co.re/docs/contributing/tutorials/nf-test_assertions). In this case, we're going to check for specific content instead of asserting identity. More exactly, we'll have the tool read the lines of the VCF file and check for the existence of specific lines.
 
@@ -550,7 +550,7 @@ Here we're reading in the full content of the VCF output file and searching for 
 
 This approach does require choosing more carefully what we want to use as the 'signal' to test for. On the bright side, it can be used to test with great precision whether an analysis tool can consistently identify 'difficult' features (such as rare variants) as it undergoes further development.  
 
-### 3.6 Run again and observe success
+### 2.7 Run again and observe success
 
 Once we've modified the test in this way, we can run the test multiple times, and it will consistently pass.
 
@@ -574,94 +574,118 @@ Test Process GATK_HAPLOTYPECALLER
 SUCCESS: Executed 1 tests in 19.77s
 ```
 
-### 2.7 Add more test data
+### 2.8 Add more test data
 
-If you'd like to practice writing these kinds of tests, you can repeat the procedure for the other two input data files provided. You'll need to make sure to copy lines from the corresponding output VCFs.
-
-[TODO: put these in a folding thing]
+To practice writing these kinds of tests, you can repeat the procedure for the other two input data files provided. You'll need to make sure to copy lines from the corresponding output VCFs.
 
 Test for the 'mother' sample:
 
 ```groovy
+test("reads_mother [bam]") {
 
-    test("reads_mother [bam]") {
-
-        setup {
-            run("SAMTOOLS_INDEX") {
-                script "../../../samtools/index/main.nf"
-                process {
-                    """
-                    input[0] =  [ [id: 'NA12882' ], file("/workspace/gitpod/hello-nextflow/data/bam/reads_mother.bam") ]
-                    """
-                }
-            }
-        }
-
-        when {
-            params {
-                outdir = "tests/results"
-            }
+    setup {
+        run("SAMTOOLS_INDEX") {
+            script "../../../samtools/index/main.nf"
             process {
                 """
-                input[0] = SAMTOOLS_INDEX.out
-                input[1] = file("${baseDir}/data/ref/ref.fasta")
-                input[2] = file("${baseDir}/data/ref/ref.fasta.fai")
-                input[3] = file("${baseDir}/data/ref/ref.dict")
-                input[4] = file("${baseDir}/data/intervals.list")
+                input[0] =  [ [id: 'NA12882' ], file("/workspace/gitpod/hello-nextflow/data/bam/reads_mother.bam") ]
                 """
             }
         }
+    }
+
+    when {
+        params {
+            outdir = "tests/results"
+        }
+        process {
+            """
+            input[0] = SAMTOOLS_INDEX.out
+            input[1] = file("${baseDir}/data/ref/ref.fasta")
+            input[2] = file("${baseDir}/data/ref/ref.fasta.fai")
+            input[3] = file("${baseDir}/data/ref/ref.dict")
+            input[4] = file("${baseDir}/data/intervals.list")
+            """
+        }
+    }
+
+    then {
+        assert process.success
+        assert path(process.out[0][0][1]).readLines().contains('#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	NA12878')
+        assert path(process.out[0][0][1]).readLines().contains('20	10040001	.	T	<NON_REF>	.	.	END=10040013	GT:DP:GQ:MIN_DP:PL	0/0:28:81:27:0,81,829')
+    }
+}
 ```
 
 Test for the 'father' sample:
 
 ```groovy
-        then {
-            assert process.success
-            assert path(process.out[0][0][1]).readLines().contains('#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	NA12878')
-            assert path(process.out[0][0][1]).readLines().contains('20	10040001	.	T	<NON_REF>	.	.	END=10040013	GT:DP:GQ:MIN_DP:PL	0/0:28:81:27:0,81,829')
-        }
-    }
+test("reads_father [bam]") {
 
-    test("reads_father [bam]") {
-
-        setup {
-            run("SAMTOOLS_INDEX") {
-                script "../../../samtools/index/main.nf"
-                process {
-                    """
-                    input[0] =  [ [id: 'NA12882' ], file("/workspace/gitpod/hello-nextflow/data/bam/reads_father.bam") ]
-                    """
-                }
-            }
-        }
-
-        when {
-            params {
-                outdir = "tests/results"
-            }
+    setup {
+        run("SAMTOOLS_INDEX") {
+            script "../../../samtools/index/main.nf"
             process {
                 """
-                input[0] = SAMTOOLS_INDEX.out
-                input[1] = file("${baseDir}/data/ref/ref.fasta")
-                input[2] = file("${baseDir}/data/ref/ref.fasta.fai")
-                input[3] = file("${baseDir}/data/ref/ref.dict")
-                input[4] = file("${baseDir}/data/intervals.list")
+                input[0] =  [ [id: 'NA12882' ], file("/workspace/gitpod/hello-nextflow/data/bam/reads_father.bam") ]
                 """
             }
         }
+    }
 
-        then {
-            assert process.success
-            assert path(process.out[0][0][1]).readLines().contains('#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	NA12877')
-            assert path(process.out[0][0][1]).readLines().contains('20	10040001	.	T	<NON_REF>	.	.	END=10040011	GT:DP:GQ:MIN_DP:PL	0/0:30:81:29:0,81,1025')
+    when {
+        params {
+            outdir = "tests/results"
+        }
+        process {
+            """
+            input[0] = SAMTOOLS_INDEX.out
+            input[1] = file("${baseDir}/data/ref/ref.fasta")
+            input[2] = file("${baseDir}/data/ref/ref.fasta.fai")
+            input[3] = file("${baseDir}/data/ref/ref.dict")
+            input[4] = file("${baseDir}/data/intervals.list")
+            """
         }
     }
+
+    then {
+        assert process.success
+        assert path(process.out[0][0][1]).readLines().contains('#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	NA12877')
+        assert path(process.out[0][0][1]).readLines().contains('20	10040001	.	T	<NON_REF>	.	.	END=10040011	GT:DP:GQ:MIN_DP:PL	0/0:30:81:29:0,81,1025')
+    }
+}
 ```
+
+### 2.9 Run the test command
+
+```bash
+nf-test test modules/local/gatk/haplotypecaller/tests/main.nf.test
+```
+
+Produces:
+
+```bash
+🚀 nf-test 0.8.4
+https://code.askimed.com/nf-test
+(c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
+
+
+Test Process GATK_HAPLOTYPECALLER
+
+  Test [86fd1bce] 'reads_son [bam]' PASSED (21.639s)
+  Test [547788fd] 'reads_mother [bam]' PASSED (18.153s)
+  Test [be786719] 'reads_father [bam]' PASSED (18.058s)
+
+
+SUCCESS: Executed 3 tests in 57.858s
+```
+
 
 ---
 
-## 5. Add local input tests to third process
+## 5. Use locally stored inputs
+
+For the third step in our pipeline we'll simply use manually generated intermediate test data, stored with the module itself.
 
 [ensure test files are in dir]
 
