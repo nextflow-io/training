@@ -44,7 +44,7 @@ nav:
           - hello_nextflow/02_hello_world.md
           - hello_nextflow/03_hello_gatk.md
           - hello_nextflow/04_hello_modules.md
-          - hello_nextflow/04_hello_nf-test.md
+          - hello_nextflow/05_hello_nf-test.md
     - help.md
 
 theme:
