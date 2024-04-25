@@ -680,30 +680,169 @@ Test Process GATK_HAPLOTYPECALLER
 SUCCESS: Executed 3 tests in 57.858s
 ```
 
+The outputs 
+
 
 ---
 
-## 5. Use locally stored inputs
+## 3. Use locally stored inputs
 
-For the third step in our pipeline we'll simply use manually generated intermediate test data, stored with the module itself.
+For the third step in our pipeline we'll simply use manually generated intermediate test data, stored with the module itself. 
 
-[ensure test files are in dir]
+We've included a copy of the intermediate files produced by the first part of the pipeline under the `jointgenotyping` module in the pre-finished `scripts` directory. 
 
-### 5.1 [generate process test files for third module]
+```bash
+cp -r scripts/modules/local/gatk/jointgenotyping/tests modules/local/gatk/jointgenotyping/.
+```
 
-### 5.2 [set up test (may be more steps?)]
+This should be the result:
 
-### 5.3 [run test]
+```bash
+modules/local/gatk/jointgenotyping/tests/inputs/
+├── family_trio_map.tsv
+├── reads_father.bam.g.vcf
+├── reads_father.bam.g.vcf.idx
+├── reads_mother.bam.g.vcf
+├── reads_mother.bam.g.vcf.idx
+├── reads_son.bam.g.vcf
+└── reads_son.bam.g.vcf.idx
+```
+
+### 3.1 Generate the test file stub 
+
+As previously, first we generate the file stub:
+
+```bash
+nf-test generate process modules/local/gatk/jointgenotyping/main.nf
+```
+
+This produces the following test stub:
+
+```groovy
+nextflow_process {
+
+    name "Test Process GATK_JOINTGENOTYPING"
+    script "modules/local/gatk/jointgenotyping/main.nf"
+    process "GATK_JOINTGENOTYPING"
+
+    test("Should run without failures") {
+
+        when {
+            params {
+                // define parameters here. Example:
+                // outdir = "tests/results"
+            }
+            process {
+                """
+                // define inputs of the process here. Example:
+                // input[0] = file("test-file.txt")
+                """
+            }
+        }
+
+        then {
+            assert process.success
+            assert snapshot(process.out).match()
+        }
+
+    }
+
+}
+```
+
+### 3.2 Move the test file and update the script path
+
+This time we already have a directory for tests co-located with the module's `main.nf` file, so we can move the test stub file there:
+
+```bash
+mv tests/modules/local/gatk/jointgenotyping/main.nf.test modules/local/gatk/jointgenotyping/tests/
+```
+
+And don't forget to update the script path:
+
+_Before:_
+```groovy
+name "Test Process GATK_JOINTGENOTYPING"
+script "modules/local/gatk/jointgenotyping/main.nf"
+process "GATK_JOINTGENOTYPING"
+```
+
+_After:_
+```groovy
+name "Test Process GATK_JOINTGENOTYPING"
+script "../main.nf"
+process "GATK_JOINTGENOTYPING"
+```
+
+### 3.3 Provide inputs
+
+Fill in the inputs based on the process input definitions and rename the test accordingly:
+
+```groovy
+test("family_trio [vcf] [idx]") {
+
+    when {
+        params {
+            outdir = "tests/results"
+        }
+        process {
+            """
+            input[0] = file("${baseDir}/modules/local/gatk/jointgenotyping/tests/inputs/family_trio_map.tsv")
+            input[1] = "family_trio"
+            input[2] = file("${baseDir}/data/ref/ref.fasta")
+            input[3] = file("${baseDir}/data/ref/ref.fasta.fai")
+            input[4] = file("${baseDir}/data/ref/ref.dict")
+            input[5] = file("${baseDir}/data/intervals.list")
+            """
+        }
+    }
+```
+
+### 3.4 Use content assertions
+
+The output of the joint genotyping step is another VCF file, so we're going to use a content assertion again.
+
+```groovy
+then {
+    assert process.success
+    assert path(process.out[0][0]).readLines().contains('#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	NA12877	NA12878	NA12882')
+    assert path(process.out[0][0]).readLines().contains('20	10040772	.	C	CT	1568.89	.	AC=5;AF=0.833;AN=6;BaseQRankSum=0.399;DP=82;ExcessHet=0.0000;FS=4.291;MLEAC=5;MLEAF=0.833;MQ=60.00;MQRankSum=0.00;QD=21.79;ReadPosRankSum=-9.150e-01;SOR=0.510	GT:AD:DP:GQ:PL	0/1:14,16:30:99:370,0,348	1/1:0,17:17:51:487,51,0	1/1:0,25:25:75:726,75,0')
+}
+```
+
+### 3.5 Run the test
+
+```bash
+nf-test test modules/local/gatk/jointgenotyping/tests/main.nf.test
+```
+
+Produces:
+
+```bash
+🚀 nf-test 0.8.4
+https://code.askimed.com/nf-test
+(c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
+
+
+Test Process GATK_JOINTGENOTYPING
+
+  Test [24c3cb4b] 'family_trio [vcf] [idx]' PASSED (14.881s)
+
+
+SUCCESS: Executed 1 tests in 14.885s
+```
+
+It works! And that's it for per-process unit tests for our pipeline. 
 
 ---
 
-## 6. Generate pipeline level test
+## 4. Add a pipeline-level test
 
-### 6.1 [generate pipeline-level nf-test file]
+### 4.1 Generate pipeline-level stub test file
 
-### 6.2 [run test (assert success)]
+### 4.2 Run test (assert success)
 
-### 6.3 [optionally add more specific assertions if needed]
+### 4.3 Optionally add more specific assertions if needed
 
 
 
