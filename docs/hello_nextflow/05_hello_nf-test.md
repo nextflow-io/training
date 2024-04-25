@@ -8,11 +8,11 @@ For a more detailed overview, read the [blog post about nf-test](https://nextflo
 
 ## 0. Warmup
 
-We start from a base workflow called `hello-nf-test.nf`, which corresponds to the workflow we produced in Part 3: Hello modules (equivalent to `scripts/hello-modules-3.nf`). 
+We start from a base workflow called `hello-nf-test.nf`, which corresponds to the workflow we produced in Part 3: Hello modules (equivalent to `scripts/hello-modules-3.nf`).
 
 This is a modularized pipeline; the processes are in local modules and the parameter declarations are in a configuration file. If you completed the previous parts of the training course, then you already have everything you need in the working directory. However, if you're picking this up here, you need to copy the `nextflow.config` file and the `modules` folder from `scripts/` to the working directory.
 
-### 0.1 Run the workflow to verify that it produces the expected outputs 
+### 0.1 Run the workflow to verify that it produces the expected outputs
 
 ```bash
 nextflow run hello-nf-test.nf
@@ -116,6 +116,7 @@ mv tests/modules/local/samtools/index/main.nf.test modules/local/samtools/index/
 As a result, we can update the full path in the `script` section of the test file to a relative path:
 
 _Before:_
+
 ```groovy
 name "Test Process SAMTOOLS_INDEX"
 script "modules/local/samtools/index/main.nf"
@@ -123,18 +124,19 @@ process "SAMTOOLS_INDEX"
 ```
 
 _After:_
+
 ```groovy
 name "Test Process SAMTOOLS_INDEX"
 script "../main.nf"
 process "SAMTOOLS_INDEX"
 ```
 
-
 ### 1.3 Provide inputs to the test process
 
 The stub file includes a placeholder that we need to replace with an actual test input:
 
 _Before:_
+
 ```groovy
 process {
     """
@@ -147,6 +149,7 @@ process {
 We choose one of our available data files and plug it into the `process` block:
 
 _After:_
+
 ```groovy
 process {
     """
@@ -160,6 +163,7 @@ process {
 The stub file gives the test a generic name referring to the assertion that it should run without failures. Since we added a specific input, it's good practice to rename the test accordingly.
 
 _Before:_
+
 ```groovy
 test("Should run without failures") {
 ```
@@ -167,6 +171,7 @@ test("Should run without failures") {
 This takes an arbitrary string, so we could put anything we want. Here we choose to refer to the file name and its format:
 
 _After:_
+
 ```groovy
 test("reads_son [bam]") {
 ```
@@ -176,6 +181,7 @@ test("reads_son [bam]") {
 The `params` block in the stub file includes a placeholder for parameters:
 
 _Before:_
+
 ```groovy
 params {
     // define parameters here. Example:
@@ -186,6 +192,7 @@ params {
 We use it to specify a location for the results to be output, using the default suggestion:
 
 _After:_
+
 ```groovy
 params {
     outdir = "tests/results"
@@ -198,7 +205,7 @@ params {
 nf-test test modules/local/samtools/index/tests/main.nf.test
 ```
 
-This should produce the following output: 
+This should produce the following output:
 
 ```bash
 🚀 nf-test 0.8.4
@@ -221,11 +228,11 @@ SUCCESS: Executed 1 tests in 10.068s
 
 The test verified the first assertion, that the process should complete successfully.
 
-Additionally, this also produces a snapshot file called `main.nf.test.snap` that captures all the output channels and the MD5SUMs of all elements. If we re-run the test, the program will check that the new output matches the output that was originally recorded. 
+Additionally, this also produces a snapshot file called `main.nf.test.snap` that captures all the output channels and the MD5SUMs of all elements. If we re-run the test, the program will check that the new output matches the output that was originally recorded.
 
 Note: That does mean that we have to be sure that the output we record in the original run is correct.
 
-If, in the course of future development, something in the code changes that causes the output to be different, the test will fail and we will have to determine whether the change is expected or not. If it turns out that something in the code broke, we will have to fix it, with the expectation that the fixed code will pass the test. If it is an expected change (e.g. the tool has been improved and the results are better) then we will need to update the snapshot to accept the new output as the reference to match, using the parameter `--update-snapshot` when we run the test command. 
+If, in the course of future development, something in the code changes that causes the output to be different, the test will fail and we will have to determine whether the change is expected or not. If it turns out that something in the code broke, we will have to fix it, with the expectation that the fixed code will pass the test. If it is an expected change (e.g. the tool has been improved and the results are better) then we will need to update the snapshot to accept the new output as the reference to match, using the parameter `--update-snapshot` when we run the test command.
 
 ### 1.7 Add more tests to `SAMTOOLS_INDEX`
 
@@ -320,7 +327,7 @@ Now that we know how to handle the simplest case, we're going to kick things up 
 
 Spoiler: We're going to use the setup method.
 
-### 2.1 Generate the test file stub 
+### 2.1 Generate the test file stub
 
 As previously, first we generate the file stub:
 
@@ -379,6 +386,7 @@ mv tests/modules/local/gatk/haplotypecaller/main.nf.test modules/local/gatk/hapl
 Finally, don't forget to update the script path:
 
 _Before:_
+
 ```groovy
 name "Test Process GATK_HAPLOTYPECALLER"
 script "modules/local/gatk/haplotypecaller/main.nf"
@@ -386,17 +394,19 @@ process "GATK_HAPLOTYPECALLER"
 ```
 
 _After:_
+
 ```groovy
 name "Test Process GATK_HAPLOTYPECALLER"
 script "../main.nf"
 process "GATK_HAPLOTYPECALLER"
 ```
 
-### 2.3 Provide inputs using the setup method 
+### 2.3 Provide inputs using the setup method
 
-We insert a `setup` block before the `when` block, where we can trigger a run of the `SAMTOOLS_INDEX` process on one of our original input files.  
+We insert a `setup` block before the `when` block, where we can trigger a run of the `SAMTOOLS_INDEX` process on one of our original input files.
 
 _Before:_
+
 ```groovy
 test("Should run without failures") {
 
@@ -404,6 +414,7 @@ test("Should run without failures") {
 ```
 
 _After:_
+
 ```groovy
 test("reads_son [bam]") {
 
@@ -505,13 +516,13 @@ Test Process GATK_HAPLOTYPECALLER
           ]                                                                                                     ]
       }                                                                                                     }
   ]                                                                                                     ]
-  
+
   Nextflow stdout:
-  
+
   Nextflow stderr:
-  
+
   Nextflow 24.03.0-edge is available - Please consider updating your version to it
-  
+
 
     Obsolete snapshots can only be checked if all tests of a file are executed successful.
 
@@ -519,7 +530,7 @@ Test Process GATK_HAPLOTYPECALLER
 FAILURE: Executed 1 tests in 23.79s (1 failed)
 ```
 
-The error message tells you there were differences between the snapshots for the two runs; specifically, the md5sum values are different for the VCF files. 
+The error message tells you there were differences between the snapshots for the two runs; specifically, the md5sum values are different for the VCF files.
 
 Why? To make a long story short, the HaplotypeCaller tool includes a timestamp in the VCF header that is different every time (by definition), so we can't just expect the files to have identical md5sums even if they have identical content in terms of the variant calls themselves.
 
@@ -530,6 +541,7 @@ One way to solve the problem is to use a [different kind of assertion](https://n
 In practice, we replace the second assertion in the `then` block as follows:
 
 _Before:_
+
 ```groovy
 then {
     assert process.success
@@ -538,6 +550,7 @@ then {
 ```
 
 _After:_
+
 ```groovy
 then {
     assert process.success
@@ -546,9 +559,9 @@ then {
 }
 ```
 
-Here we're reading in the full content of the VCF output file and searching for a content match, which is okay to do on a small test file, but you wouldn't want to do that on a larger file. You might instead choose to read in specific lines. 
+Here we're reading in the full content of the VCF output file and searching for a content match, which is okay to do on a small test file, but you wouldn't want to do that on a larger file. You might instead choose to read in specific lines.
 
-This approach does require choosing more carefully what we want to use as the 'signal' to test for. On the bright side, it can be used to test with great precision whether an analysis tool can consistently identify 'difficult' features (such as rare variants) as it undergoes further development.  
+This approach does require choosing more carefully what we want to use as the 'signal' to test for. On the bright side, it can be used to test with great precision whether an analysis tool can consistently identify 'difficult' features (such as rare variants) as it undergoes further development.
 
 ### 2.7 Run again and observe success
 
@@ -680,16 +693,15 @@ Test Process GATK_HAPLOTYPECALLER
 SUCCESS: Executed 3 tests in 57.858s
 ```
 
-The outputs 
-
+The outputs
 
 ---
 
 ## 3. Use locally stored inputs
 
-For the third step in our pipeline we'll simply use manually generated intermediate test data, stored with the module itself. 
+For the third step in our pipeline we'll simply use manually generated intermediate test data, stored with the module itself.
 
-We've included a copy of the intermediate files produced by the first part of the pipeline under the `jointgenotyping` module in the pre-finished `scripts` directory. 
+We've included a copy of the intermediate files produced by the first part of the pipeline under the `jointgenotyping` module in the pre-finished `scripts` directory.
 
 ```bash
 cp -r scripts/modules/local/gatk/jointgenotyping/tests modules/local/gatk/jointgenotyping/.
@@ -708,7 +720,7 @@ modules/local/gatk/jointgenotyping/tests/inputs/
 └── reads_son.bam.g.vcf.idx
 ```
 
-### 3.1 Generate the test file stub 
+### 3.1 Generate the test file stub
 
 As previously, first we generate the file stub:
 
@@ -761,6 +773,7 @@ mv tests/modules/local/gatk/jointgenotyping/main.nf.test modules/local/gatk/join
 And don't forget to update the script path:
 
 _Before:_
+
 ```groovy
 name "Test Process GATK_JOINTGENOTYPING"
 script "modules/local/gatk/jointgenotyping/main.nf"
@@ -768,6 +781,7 @@ process "GATK_JOINTGENOTYPING"
 ```
 
 _After:_
+
 ```groovy
 name "Test Process GATK_JOINTGENOTYPING"
 script "../main.nf"
@@ -832,7 +846,7 @@ Test Process GATK_JOINTGENOTYPING
 SUCCESS: Executed 1 tests in 14.885s
 ```
 
-It works! And that's it for per-process unit tests for our pipeline. 
+It works! And that's it for per-process unit tests for our pipeline.
 
 ---
 
@@ -842,7 +856,7 @@ Now all that remains is to add a test for checking that the whole pipeline runs 
 
 ### 4.1 Generate pipeline-level stub test file
 
-The command is similar to the one for module tests: 
+The command is similar to the one for module tests:
 
 ```bash
 nf-test generate pipeline hello-nf-test.nf
@@ -860,7 +874,7 @@ nextflow_pipeline {
 
         when {
             params {
-                // define parameters here. Example: 
+                // define parameters here. Example:
                 // outdir = "tests/results"
             }
         }
@@ -876,8 +890,7 @@ nextflow_pipeline {
 
 The line `assert workflow.success` is a simple assertion testing for whether the pipeline ran successfully.
 
-
-### 4.2 Run the test 
+### 4.2 Run the test
 
 Unlike the module test stubs, the pipeline test is fully functional and can be run directly as follows:
 
@@ -885,7 +898,7 @@ Unlike the module test stubs, the pipeline test is fully functional and can be r
 nf-test test tests/hello-nf-test.nf.test
 ```
 
-This produces: 
+This produces:
 
 ```bash
 🚀 nf-test 0.8.4
@@ -902,9 +915,3 @@ SUCCESS: Executed 1 tests in 62.498s
 ```
 
 That's it! If necessary, more nuanced assertions can be added to test for the validity and content of the pipeline outputs. See [TODO: add link to pipeline assertion docs]
-
-
-
-
-
-

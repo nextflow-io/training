@@ -7,8 +7,8 @@
 
 ## 0. Warmup
 
-We start from a base workflow called `hello-modules.nf`, which corresponds to the workflow we produced in Part 2: Hello 
-GATK (equivalent to `scripts/hello-gatk-6.nf`). 
+We start from a base workflow called `hello-modules.nf`, which corresponds to the workflow we produced in Part 2: Hello
+GATK (equivalent to `scripts/hello-gatk-6.nf`).
 
 [TODO: add brief description of what the pipeline does]
 
@@ -18,7 +18,7 @@ This workflow relies on reference file that are provided in compressed form in t
 tar -zxvf data/ref.tar.gz -C data/
 ```
 
-### 0.1 Run the workflow to verify that it produces the expected outputs 
+### 0.1 Run the workflow to verify that it produces the expected outputs
 
 ```bash
 nextflow run hello-modules.nf
@@ -62,7 +62,6 @@ nextflow run hello-modules.nf
 
 [TODO: Note where else config elements can be found and mention the order of precedence]
 
-
 ### Takeaway
 
 You know how to move parameter definitions to a configuration file.
@@ -99,7 +98,7 @@ touch modules/local/samtools/index/main.nf
  */
 process SAMTOOLS_INDEX {
 
-    container 'quay.io/biocontainers/samtools:1.19.2--h50ea8bc_1' 
+    container 'quay.io/biocontainers/samtools:1.19.2--h50ea8bc_1'
 
     input:
         tuple val(id), path(input_bam)
@@ -114,7 +113,7 @@ process SAMTOOLS_INDEX {
 }
 ```
 
-### 2.4 Add an import declaration before the workflow 
+### 2.4 Add an import declaration before the workflow
 
 _Before:_
 
@@ -130,7 +129,6 @@ include { SAMTOOLS_INDEX } from './modules/local/samtools/index/main.nf'
 
 workflow {
 ```
-
 
 ### 2.5 Run the workflow to verify that it does the same thing as before
 
@@ -234,7 +232,7 @@ process GATK_JOINTGENOTYPING {
 }
 ```
 
-### 3.4 Add import declarations before the workflow 
+### 3.4 Add import declarations before the workflow
 
 _Before:_
 
@@ -269,4 +267,3 @@ You know how to modularize an entire workflow.
 ### What's next?
 
 Learn to add tests to your pipeline using the nf-test framework.
-
