@@ -46,7 +46,7 @@ It also creates a `tests` directory containing a configuration file stub.
 
 We're going to start by adding a test for the `SAMTOOLS_INDEX` process. It's a very simple process that takes a single input file (which we have test data for on hand) and generates an index file. We want to test that the process runs successfully and that the file it produces is always the same for a given input.
 
-### 1.1 Run the `nf-test generate` command to create a test file stub
+### 1.1 Generate a test file stub
 
 ```bash
 nf-test generate process modules/local/samtools/index/main.nf
@@ -318,11 +318,9 @@ Note the warning, referring to the effect of the `--update-snapshot` parameter.
 
 Now that we know how to handle the simplest case, we're going to kick things up a notch with the `GATK_HAPLOTYPECALLER` process. As the second step in our pipeline, its input depends on the output of another process. We can deal with this in two ways: either manually generate some static test data that is suitable as intermediate input to the process, or we can use a special [setup method](https://www.nf-test.com/docs/testcases/setup/) to handle it dynamically for us.
 
-Spoiler: we're going to use the setup method.
+Spoiler: We're going to use the setup method.
 
-We're going to test that the process runs successfully and we're also going to check for specific content within the output file. 
-
-### 2.1 Generate the test file stub and move it to the right place
+### 2.1 Generate the test file stub 
 
 As previously, first we generate the file stub:
 
@@ -330,7 +328,43 @@ As previously, first we generate the file stub:
 nf-test generate process modules/local/gatk/haplotypecaller/main.nf
 ```
 
-Then we create a directory for it co-located with the module's `main.nf` file:
+This produces the following test stub:
+
+```groovy
+nextflow_process {
+
+    name "Test Process GATK_HAPLOTYPECALLER"
+    script "modules/local/gatk/haplotypecaller/main.nf"
+    process "GATK_HAPLOTYPECALLER"
+
+    test("Should run without failures") {
+
+        when {
+            params {
+                // define parameters here. Example:
+                // outdir = "tests/results"
+            }
+            process {
+                """
+                // define inputs of the process here. Example:
+                // input[0] = file("test-file.txt")
+                """
+            }
+        }
+
+        then {
+            assert process.success
+            assert snapshot(process.out).match()
+        }
+
+    }
+
+}
+```
+
+### 2.2 Move the test file and update the script path
+
+We create a directory for the test file co-located with the module's `main.nf` file:
 
 ```bash
 mkdir -p modules/local/gatk/haplotypecaller/tests
@@ -358,26 +392,272 @@ script "../main.nf"
 process "GATK_HAPLOTYPECALLER"
 ```
 
-### 2.2 Provide inputs using the setup method 
+### 2.3 Provide inputs using the setup method 
+
+We insert a `setup` block before the `when` block, where we can trigger a run of the `SAMTOOLS_INDEX` process on one of our original input files.  
+
+_Before:_
+```groovy
+test("Should run without failures") {
+
+    when {
+```
+
+_After:_
+```groovy
+test("reads_son [bam]") {
+
+    setup {
+        run("SAMTOOLS_INDEX") {
+            script "../../../samtools/index/main.nf"
+            process {
+                """
+                input[0] =  [ [id: 'NA12882' ], file("/workspace/gitpod/hello-nextflow/data/bam/reads_son.bam") ]
+                """
+            }
+        }
+    }
+
+    when {
+```
+
+Then we can refer to the output of that process in the `when` block where we specify the test inputs:
+
+```groovy
+    when {
+        params {
+            outdir = "tests/results"
+        }
+        process {
+            """
+            input[0] = SAMTOOLS_INDEX.out
+            input[1] = file("${baseDir}/data/ref/ref.fasta")
+            input[2] = file("${baseDir}/data/ref/ref.fasta.fai")
+            input[3] = file("${baseDir}/data/ref/ref.dict")
+            input[4] = file("${baseDir}/data/intervals.list")
+            """
+        }
+    }
+```
+
+Using the setup method is convenient, though you should consider its use carefully. Unit tests are supposed to test processes in isolation in order to detect changes at the individual process level; breaking that isolation undermines that principle. You may find that generating intermediate test files is the right thing to do in many cases. But it's important to know that you can do this if you need to.
+
+### 2.4 Run test and examine output
+
+```bash
+nf-test test modules/local/gatk/haplotypecaller/tests/main.nf.test
+```
+
+This produces the following output:
+
+```bash
+🚀 nf-test 0.8.4
+https://code.askimed.com/nf-test
+(c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
 
 
+Test Process GATK_HAPLOTYPECALLER
+
+  Test [86fd1bce] 'reads_son [bam]' PASSED (19.082s)
+  Snapshots:
+    1 created [reads_son [bam]]
 
 
-### 3.3 [run test and examine output]
+Snapshot Summary:
+  1 created
 
-### 3.4 [run again and observe failure]
+SUCCESS: Executed 1 tests in 19.09s
+```
 
-### 3.5 [use contains assertion method]
+It also produces a snapshot file like earlier.
 
-### 3.6 [run and observe success]
+### 2.5 Run again and observe failure
 
----
+Interestingly, if you run the exact same command again, this time the test will fail with the following:
 
-## 4. Add more inputs to second module test
+```bash
+nf-test test modules/local/gatk/haplotypecaller/tests/main.nf.test
+```
 
-[...]
+Produces:
 
-### 4.x [run full set of tests]
+```bash
+🚀 nf-test 0.8.4
+https://code.askimed.com/nf-test
+(c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
+
+
+Test Process GATK_HAPLOTYPECALLER
+
+  Test [86fd1bce] 'reads_son [bam]' FAILED (23.781s)
+
+  java.lang.RuntimeException: Different Snapshot:
+  [                                                                                                     [
+      {                                                                                                     {
+          "0": [                                                                                                        "0": [
+              [                                                                                                     [
+                  {                                                                                                     {
+                      "id": "NA12882"                                                                                       "id": "NA12882"
+                  },                                                                                                    },
+                  "reads_son.bam.g.vcf:md5,f3583cbbe439469bfc166612e1617694",                      |                    "reads_son.bam.g.vcf:md5,428f855d616b34d44a4f0a3bcc1a0b14",
+                  "reads_son.bam.g.vcf.idx:md5,16a78feaf6602adb2a131494e0274f9e"                           |                    "reads_son.bam.g.vcf.idx:md5,5a8d299625ef3cd3266229507a789dbb"
+              ]                                                                                                     ]
+          ]                                                                                                     ]
+      }                                                                                                     }
+  ]                                                                                                     ]
+  
+  Nextflow stdout:
+  
+  Nextflow stderr:
+  
+  Nextflow 24.03.0-edge is available - Please consider updating your version to it
+  
+
+    Obsolete snapshots can only be checked if all tests of a file are executed successful.
+
+
+FAILURE: Executed 1 tests in 23.79s (1 failed)
+```
+
+The error message tells you there were differences between the snapshots for the two runs; specifically, the md5sum values are different for the VCF files. 
+
+Why? To make a long story short, the HaplotypeCaller tool includes a timestamp in the VCF header that is different every time (by definition), so we can't just expect the files to have identical md5sums even if they have identical content in terms of the variant calls themselves.
+
+### 2.6 Use content assertion method
+
+One way to solve the problem is to use a [different kind of assertion](https://nf-co.re/docs/contributing/tutorials/nf-test_assertions). In this case, we're going to check for specific content instead of asserting identity. More exactly, we'll have the tool read the lines of the VCF file and check for the existence of specific lines.
+
+In practice, we replace the second assertion in the `then` block as follows:
+
+_Before:_
+```groovy
+then {
+    assert process.success
+    assert snapshot(process.out).match()
+}
+```
+
+_After:_
+```groovy
+then {
+    assert process.success
+    assert path(process.out[0][0][1]).readLines().contains('#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	NA12882')
+    assert path(process.out[0][0][1]).readLines().contains('20	10040001	.	T	<NON_REF>	.	.	END=10040048	GT:DP:GQ:MIN_DP:PL	0/0:40:99:37:0,99,1150')
+}
+```
+
+Here we're reading in the full content of the VCF output file and searching for a content match, which is okay to do on a small test file, but you wouldn't want to do that on a larger file. You might instead choose to read in specific lines. 
+
+This approach does require choosing more carefully what we want to use as the 'signal' to test for. On the bright side, it can be used to test with great precision whether an analysis tool can consistently identify 'difficult' features (such as rare variants) as it undergoes further development.  
+
+### 3.6 Run again and observe success
+
+Once we've modified the test in this way, we can run the test multiple times, and it will consistently pass.
+
+```bash
+nf-test test modules/local/gatk/haplotypecaller/tests/main.nf.test
+```
+
+Produces:
+
+```bash
+🚀 nf-test 0.8.4
+https://code.askimed.com/nf-test
+(c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
+
+
+Test Process GATK_HAPLOTYPECALLER
+
+  Test [86fd1bce] 'reads_son [bam]' PASSED (19.765s)
+
+
+SUCCESS: Executed 1 tests in 19.77s
+```
+
+### 2.7 Add more test data
+
+If you'd like to practice writing these kinds of tests, you can repeat the procedure for the other two input data files provided. You'll need to make sure to copy lines from the corresponding output VCFs.
+
+[TODO: put these in a folding thing]
+
+Test for the 'mother' sample:
+
+```groovy
+
+    test("reads_mother [bam]") {
+
+        setup {
+            run("SAMTOOLS_INDEX") {
+                script "../../../samtools/index/main.nf"
+                process {
+                    """
+                    input[0] =  [ [id: 'NA12882' ], file("/workspace/gitpod/hello-nextflow/data/bam/reads_mother.bam") ]
+                    """
+                }
+            }
+        }
+
+        when {
+            params {
+                outdir = "tests/results"
+            }
+            process {
+                """
+                input[0] = SAMTOOLS_INDEX.out
+                input[1] = file("${baseDir}/data/ref/ref.fasta")
+                input[2] = file("${baseDir}/data/ref/ref.fasta.fai")
+                input[3] = file("${baseDir}/data/ref/ref.dict")
+                input[4] = file("${baseDir}/data/intervals.list")
+                """
+            }
+        }
+```
+
+Test for the 'father' sample:
+
+```groovy
+        then {
+            assert process.success
+            assert path(process.out[0][0][1]).readLines().contains('#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	NA12878')
+            assert path(process.out[0][0][1]).readLines().contains('20	10040001	.	T	<NON_REF>	.	.	END=10040013	GT:DP:GQ:MIN_DP:PL	0/0:28:81:27:0,81,829')
+        }
+    }
+
+    test("reads_father [bam]") {
+
+        setup {
+            run("SAMTOOLS_INDEX") {
+                script "../../../samtools/index/main.nf"
+                process {
+                    """
+                    input[0] =  [ [id: 'NA12882' ], file("/workspace/gitpod/hello-nextflow/data/bam/reads_father.bam") ]
+                    """
+                }
+            }
+        }
+
+        when {
+            params {
+                outdir = "tests/results"
+            }
+            process {
+                """
+                input[0] = SAMTOOLS_INDEX.out
+                input[1] = file("${baseDir}/data/ref/ref.fasta")
+                input[2] = file("${baseDir}/data/ref/ref.fasta.fai")
+                input[3] = file("${baseDir}/data/ref/ref.dict")
+                input[4] = file("${baseDir}/data/intervals.list")
+                """
+            }
+        }
+
+        then {
+            assert process.success
+            assert path(process.out[0][0][1]).readLines().contains('#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	NA12877')
+            assert path(process.out[0][0][1]).readLines().contains('20	10040001	.	T	<NON_REF>	.	.	END=10040011	GT:DP:GQ:MIN_DP:PL	0/0:30:81:29:0,81,1025')
+        }
+    }
+```
 
 ---
 
