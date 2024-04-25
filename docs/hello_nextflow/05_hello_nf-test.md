@@ -75,7 +75,7 @@ SUCCESS: Generated 1 test files.
 
 You can navigate to the directory in the file explorer and open the file, which should contain the following code:
 
-```groovy title="tests/modules/local/samtools/index/main.nf.test" 
+```groovy title="tests/modules/local/samtools/index/main.nf.test"
 nextflow_process {
 
     name "Test Process SAMTOOLS_INDEX"
