@@ -2,7 +2,6 @@
 
 Move into the exercise 3 directory and execute the `hello-gatk.nf` script.
 
-
 ```bash
 cd /workspace/gitpod/troubleshoot/exercise3
 ```
@@ -28,13 +27,13 @@ nextflow run hello-gatk.nf
 
 ??? Solution
 
-    This warning can be broken down to help identify the cause: 
+    This warning can be broken down to help identify the cause:
 
     You can immediately see that the `GATK_HAPLOTYPECALLER` has an offending value `[NA12878, /workspace/gitpod/troubleshoot/exercise3/work/aa/e0741cf287ce3a0c23f4dc12604b8c/reads_mother.bam, /workspace/gitpod/troubleshoot/exercise3/work/aa/e0741cf287ce3a0c23f4dc12604b8c/reads_mother.bam.bai]`.
-    
+
     _Your offending value may be NA12878, NA12877, or NA12882_
 
-    In this example, the value 'NA12878' is not a valid path. 
+    In this example, the value 'NA12878' is not a valid path.
 
     There is only one tuple for the `GATK_HAPLOTYPECALLER` process:
 
@@ -47,7 +46,7 @@ nextflow run hello-gatk.nf
     It can be concluded that the tuple is a missing value in the first position.
 
     To resolve this error a `val` must be added to this input.
-    
+
     The name of this `val` might be used in the script block and must be considered.
 
     While all of the variables in the script block are accounted for. The `id` value in the output has not been specified.

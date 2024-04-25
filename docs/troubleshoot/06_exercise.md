@@ -1,7 +1,7 @@
 # Script 6
 
 ```bash
-cd /workspace/gitpod/troubleshoot/exercise5
+cd /workspace/gitpod/troubleshoot/exercise6
 ```
 
 ```bash
@@ -16,9 +16,13 @@ nextflow run hello-gatk.nf
     -- Check '.nextflow.log' file for details
     ```
 
-## Solution
-
 ??? Solution
+
+    The error message suggests that there is an error for the path to the `samplesheet.csv`
+
+    Searching the file directory, indeed, `/workspace/gitpod/troubleshoot/exercise6/data/samplesheet.csv` does not exist.
+
+
 
     ```
     Solution goes here

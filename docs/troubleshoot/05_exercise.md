@@ -19,7 +19,7 @@ nextflow run hello-gatk.nf
     Command executed:
 
     gatk GenomicsDBImport         --sample-name-map family_trio_map.tsv         --genomicsdb-workspace-path family_trio_gdb         -L intervals.list
-    
+
     gatk GenotypeGVCFs         -R ref.fasta         -V gendb://family_trio_gdb         -O family_trio.joint.vcf         -L intervals.list
 
     Command exit status:
@@ -54,13 +54,13 @@ nextflow run hello-gatk.nf
     [April 24, 2024 at 4:33:09 PM GMT] org.broadinstitute.hellbender.tools.genomicsdb.GenomicsDBImport done. Elapsed time: 0.01 minutes.
     Runtime.totalMemory()=201326592
     ***********************************************************************
-    
+
     A USER ERROR has occurred: Bad input: Sample name map file must have 2 or 3 fields per line in the format:
     Sample        File
     or:
     Sample        File    Index
     but found line: "NA12877/t/workspace/gitpod/troubleshoot/exercise5/work/db/0d4c6d0c8bad080cec4a1e09217159/reads_father.bam.g.vcf/t/workspace/gitpod/troubleshoot/exercise5/work/db/0d4c6d0c8bad080cec4a1e09217159/reads_father.bam.g.vcf.idx/nNA12882/t/workspace/gitpod/troubleshoot/exercise5/work/a7/84fe9e9038bed36bdbf620847b47c2/reads_son.bam.g.vcf/t/workspace/gitpod/troubleshoot/exercise5/work/a7/84fe9e9038bed36bdbf620847b47c2/reads_son.bam.g.vcf.idx/nNA12878/t/workspace/gitpod/troubleshoot/exercise5/work/59/a653a3855cf6f6c70bc7b42aff0a0d/reads_mother.bam.g.vcf/t/workspace/gitpod/troubleshoot/exercise5/work/59/a653a3855cf6f6c70bc7b42aff0a0d/reads_mother.bam.g.vcf.idx/n" with 1 fields
-    
+
     ***********************************************************************
     Set the system property GATK_STACKTRACE_ON_USER_EXCEPTION (--java-options '-DGATK_STACKTRACE_ON_USER_EXCEPTION=true') to print the stack trace.
     Using GATK jar /gatk/gatk-package-4.5.0.0-local.jar
@@ -109,7 +109,7 @@ nextflow run hello-gatk.nf
 
     | Argument name     | Default value   | Summary                            |
     | ----------------- | ----------------| -----------------------------------|
-    | --sample-name-map | null            | Path to file containing a mapping of sample name to file uri in tab delimited format. If this is specified then the header from the first sample will be treated as the merged header rather than merging the headers, and the sample names will be taken from this file. This may be used to rename input samples. This is a performance optimization that relaxes the normal checks for consistent headers. Using vcfs with incompatible headers may result in silent data corruption. |                                
+    | --sample-name-map | null            | Path to file containing a mapping of sample name to file uri in tab delimited format. If this is specified then the header from the first sample will be treated as the merged header rather than merging the headers, and the sample names will be taken from this file. This may be used to rename input samples. This is a performance optimization that relaxes the normal checks for consistent headers. Using vcfs with incompatible headers may result in silent data corruption. |
 
     Although the documentation does not explicitly describe the error, it highlights the importance of the strucutre of the map, something that is also suggested in the error message.
 

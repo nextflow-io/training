@@ -1,5 +1,3 @@
-
-
 ```
 cd /workspace/gitpod/troubleshoot
 cp -r /workspace/gitpod/hello-nextflow/data/ .

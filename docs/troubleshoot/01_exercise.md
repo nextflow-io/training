@@ -1,4 +1,3 @@
-
 # Script 1
 
 Move into the exercise 1 directory and execute the `hello-gatk.nf` script.
@@ -54,7 +53,7 @@ nextflow run hello-gatk.nf
     The command error `.command.sh: line 2: samtools: command not found` suggests that `samtools` was not available.
 
     Every process in the `hello-gatk.nf` pipeline contains a container directive with a relevant container. However, in this case, docker was not enabled and the `samtools` tooling was not available locally.
-    
+
     Enabling docker in the `nextflow.config` file will activate the docker containers for each process and resolve this error.
 
     ```console title="nextflow.config" linenums="1"
