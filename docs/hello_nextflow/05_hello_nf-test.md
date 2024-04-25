@@ -1,6 +1,6 @@
 # Part 4: Hello nf-test
 
-[short blurb about testing]
+[short blurb about testing + acknowledgement to Sateesh Peri for contributing all the code and sumary instructions for this training]
 
 For a more detailed overview, read the [blog post about nf-test](https://nextflow.io/blog/2024/nf-test-in-nf-core.html) on the nf-core blog.
 
