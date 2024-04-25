@@ -1,5 +1,7 @@
 # Script 4
 
+Move into the exercise 4 directory and execute the `hello-gatk.nf` script.
+
 ```bash
 cd /workspace/gitpod/troubleshoot/exercise4
 ```
@@ -10,7 +12,7 @@ nextflow run hello-gatk.nf
 
 !!! warning title="Error message"
 
-    ```
+    ```console
     ERROR ~ Script compilation error
     - file : /workspace/gitpod/troubleshoot/exercise4/hello-gatk.nf
     - cause: Unexpected input: '{' @ line 100, column 10.
