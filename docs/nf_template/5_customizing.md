@@ -1,6 +1,6 @@
 # Customizing the template
 
-As a developer you may want more flexibility when developing your pipelines.
+As a developer, you may want more flexibility when developing your pipelines.
 
 While the nf-core template comes with specific standards, many of these can be altered to better suit your needs.
 
