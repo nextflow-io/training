@@ -4,6 +4,7 @@
         { "path": "./nf-training-advanced" },
         { "path": "./hands-on" },
         { "path": "./hello-nextflow" },
+        { "path": "./troubleshoot" },
     ],
     "settings": {
         "typescript.tsdk": "gitpod/node_modules/typescript/lib",
