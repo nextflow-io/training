@@ -43,6 +43,12 @@ nav:
           - hello_nextflow/01_orientation.md
           - hello_nextflow/02_hello_world.md
           - hello_nextflow/03_hello_gatk.md
+    - nf-core template:
+          - nf_template/1_introduction.md
+          - nf_template/2_orientation.md
+          - nf_template/3_create.md
+          - nf_template/4_pipeline.md
+          - nf_template/5_customizing.md
     - Troubleshooting:
           - troubleshoot/index.md
           - troubleshoot/orientation.md
@@ -75,6 +81,7 @@ theme:
               name: Switch to dark mode
     font:
         text: Inter
+        code: Roboto Mono
     features:
         - content.action.edit
         - content.code.annotate
@@ -141,16 +148,12 @@ markdown_extensions:
           title: On this page
           permalink: true
 plugins:
-    - social:
-          cards: !ENV [CARDS, true]
-          cards_color:
-              fill: "#58BD9F"
-              text: "#FFFFFF"
     - enumerate-headings:
           restart_increment_after:
               - hands_on/01_datasets.md
               - advanced/operators.md
               - hello_nextflow/01_orientation.md
+              - nf_template/1_introduction.md
           exclude:
               - index.md
               - help.md
