@@ -144,7 +144,7 @@ plugins:
               - hands_on/01_datasets.md
               - advanced/operators.md
               - hello_nextflow/01_orientation.md
-              - nf_template/2_envsetup.md
+              - nf_template/1_introduction.md
           exclude:
               - index.md
               - help.md
