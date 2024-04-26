@@ -884,7 +884,7 @@ nf-test generate pipeline hello-nf-test.nf
 
 It produces a similar stub file:
 
-```groovy
+```groovy title="tests/hello-nf-test.nf.test" linenums="1"
 nextflow_pipeline {
 
     name "Test Workflow hello-nf-test.nf"
