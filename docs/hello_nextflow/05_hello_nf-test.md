@@ -15,7 +15,7 @@ This is a modularized pipeline; the processes are in local modules and the param
 ```
 cd /workspace/gitpod/hello-nextflow
 cp scripts/nextflow.config .
-cp -r scripts/modules/* modules/
+cp -r scripts/modules .
 ```
 
 Similarly, you will need to unzip the reference data files.
@@ -165,7 +165,7 @@ _After:_
 ```groovy title="modules/local/samtools/index/tests/main.nf.test" linenums="14"
 process {
     """
-    input[0] = [ [id: 'NA12882' ], file("/workspace/gitpod/hello-nextflow/data/bam/reads_son.bam") ]
+    input[0] = [ [id: 'NA12882' ], file("${baseDir}/data/bam/reads_son.bam") ]
     """
 }
 ```
@@ -267,7 +267,7 @@ test("reads_mother [bam]") {
         }
         process {
             """
-            input[0] = [ [id: 'NA12878' ], file("/workspace/gitpod/hello-nextflow/data/bam/reads_mother.bam") ]
+            input[0] = [ [id: 'NA12878' ], file("${baseDir}/data/bam/reads_mother.bam") ]
             """
         }
     }
@@ -291,7 +291,7 @@ test("reads_father [bam]") {
         }
         process {
             """
-            input[0] = [ [id: 'NA12877' ], file("/workspace/gitpod/hello-nextflow/data/bam/reads_father.bam") ]
+            input[0] = [ [id: 'NA12877' ], file("${baseDir}/data/bam/reads_father.bam") ]
             """
         }
     }
@@ -443,7 +443,7 @@ test("reads_son [bam]") {
             script "../../../samtools/index/main.nf"
             process {
                 """
-                input[0] =  [ [id: 'NA12882' ], file("/workspace/gitpod/hello-nextflow/data/bam/reads_son.bam") ]
+                input[0] =  [ [id: 'NA12882' ], file("${baseDir}/data/bam/reads_son.bam") ]
                 """
             }
         }
@@ -621,7 +621,7 @@ test("reads_mother [bam]") {
             script "../../../samtools/index/main.nf"
             process {
                 """
-                input[0] =  [ [id: 'NA12882' ], file("/workspace/gitpod/hello-nextflow/data/bam/reads_mother.bam") ]
+                input[0] =  [ [id: 'NA12882' ], file("${baseDir}/data/bam/reads_mother.bam") ]
                 """
             }
         }
@@ -660,7 +660,7 @@ test("reads_father [bam]") {
             script "../../../samtools/index/main.nf"
             process {
                 """
-                input[0] =  [ [id: 'NA12882' ], file("/workspace/gitpod/hello-nextflow/data/bam/reads_father.bam") ]
+                input[0] =  [ [id: 'NA12882' ], file("${baseDir}/data/bam/reads_father.bam") ]
                 """
             }
         }
@@ -713,7 +713,7 @@ Test Process GATK_HAPLOTYPECALLER
 SUCCESS: Executed 3 tests in 57.858s
 ```
 
-The outputs
+The outputs [TODO: finish the sentence]
 
 ---
 
