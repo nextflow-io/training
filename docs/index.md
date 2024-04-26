@@ -75,6 +75,16 @@ We have several workshops available on this website - find the one that's right 
 
     [Launch the RNA-seq Variant Calling Training :material-arrow-right:](hands_on/index.md){ .md-button }
 
+!!! exercise "Troubleshooting Exercises"
+
+    !!! quote inline end ""
+
+        :material-run-fast: This course will help you troubleshooting common pipeline errors.
+
+    A "learn by doing" troubleshooting tutorial for pipeline developers and users.
+
+    [Launch the Troubleshooting Exercises Training :material-arrow-right:](troubleshoot/1_introduction.md){ .md-button }
+
 ## Resources
 
 Quick reference to some handy links:

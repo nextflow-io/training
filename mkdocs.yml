@@ -50,7 +50,7 @@ nav:
           - nf_template/4_pipeline.md
           - nf_template/5_customizing.md
     - Troubleshooting:
-          - troubleshoot/index.md
+          - troubleshoot/introduction.md
           - troubleshoot/orientation.md
           - troubleshoot/01_exercise.md
           - troubleshoot/02_exercise.md
@@ -154,6 +154,7 @@ plugins:
               - advanced/operators.md
               - hello_nextflow/01_orientation.md
               - nf_template/1_introduction.md
+              - troubleshoot/introduction.md
           exclude:
               - index.md
               - help.md
