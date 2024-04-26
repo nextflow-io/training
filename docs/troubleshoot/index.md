@@ -25,4 +25,3 @@ Please note that this is **not** a beginner's workshop and familiarity with Next
 -   A GitHub account
 -   Experience with command line
 -   Experience writing pipelines with Nextflow
-
