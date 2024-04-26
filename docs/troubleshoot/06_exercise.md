@@ -1,4 +1,4 @@
-# Script 6
+# Exercise 6
 
 Move into the exercise 6 directory and execute the `hello-gatk.nf` script.
 
@@ -41,5 +41,5 @@ nextflow run hello-gatk.nf
     By removing the `$` the proper path should be resolved.
 
     ```console title="hello-gatk.nf" linenums="7"
-    $baseDir = params.baseDir
+    baseDir = params.baseDir
     ```

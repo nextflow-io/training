@@ -1,4 +1,4 @@
-# Script 2
+# Exercise 2
 
 Move into the exercise 2 directory and execute the `hello-gatk.nf` script.
 

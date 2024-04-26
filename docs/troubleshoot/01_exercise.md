@@ -1,4 +1,4 @@
-# Script 1
+# Exercise 1
 
 Move into the exercise 1 directory and execute the `hello-gatk.nf` script.
 
@@ -14,23 +14,23 @@ nextflow run hello-gatk.nf
     ```
     ERROR ~ Error executing process > 'SAMTOOLS_INDEX (2)'
 
-    Caused by: # (1)!
+    Caused by:
       Process `SAMTOOLS_INDEX (2)` terminated with an error exit status (127)
 
-    Command executed: # (2)!
+    Command executed:
 
       samtools index 'reads_father.bam'
 
-    Command exit status: # (3)!
+    Command exit status:
       127
 
-    Command output: # (4)!
+    Command output:
       (empty)
 
-    Command error: # (5)!
+    Command error:
       .command.sh: line 2: samtools: command not found
 
-    Work dir: # (6)!
+    Work dir:
       /workspace/gitpod/troubleshoot/exercise1/work/46/e01f274e2ef1735164061d62c51169
 
     Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
@@ -38,12 +38,12 @@ nextflow run hello-gatk.nf
     -- Check '.nextflow.log' file for details
     ```
 
-    1. A description of the error cause
-    2. The command executed
-    3. The command exit status
-    4. The command standard output, when available
-    5. The command standard error
-    6. The command work directory
+    Caused by: A description of the error cause
+    Command executed: The command executed
+    Command exit status: The command exit status
+    Command output: The command standard output, when available
+    Command error: The command standard error
+    Work dir: The command work directory
 
 ??? Solution
 
