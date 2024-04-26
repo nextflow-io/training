@@ -10,7 +10,19 @@ For a more detailed overview, read the [blog post about nf-test](https://nextflo
 
 We start from a base workflow called `hello-nf-test.nf`, which corresponds to the workflow we produced in Part 3: Hello modules (equivalent to `scripts/hello-modules-3.nf`).
 
-This is a modularized pipeline; the processes are in local modules and the parameter declarations are in a configuration file. If you completed the previous parts of the training course, then you already have everything you need in the working directory. However, if you're picking this up here, you need to copy the `nextflow.config` file and the `modules` folder from `scripts/` to the working directory.
+This is a modularized pipeline; the processes are in local modules and the parameter declarations are in a configuration file. If you completed the previous parts of the training course, then you already have everything you need in the working directory. However, if you're picking this up here, you need to copy the `nextflow.config` file and the `modules` folder from `scripts/` to the `hello-nextflow` directory.
+
+```
+cd /workspace/gitpod/hello-nextflow
+cp scripts/nextflow.config .
+cp -r scripts/modules/* modules/
+```
+
+Similarly, you will need to unzip the reference data files.
+
+```
+tar -zxvf data/ref.tar.gz -C data/
+```
 
 ### 0.1 Run the workflow to verify that it produces the expected outputs
 
@@ -63,7 +75,7 @@ SUCCESS: Generated 1 test files.
 
 You can navigate to the directory in the file explorer and open the file, which should contain the following code:
 
-```groovy
+```groovy title="tests/modules/local/samtools/index/main.nf.test"
 nextflow_process {
 
     name "Test Process SAMTOOLS_INDEX"
@@ -117,7 +129,7 @@ As a result, we can update the full path in the `script` section of the test fil
 
 _Before:_
 
-```groovy
+```groovy title="modules/local/samtools/index/tests/main.nf.test" linenums="3"
 name "Test Process SAMTOOLS_INDEX"
 script "modules/local/samtools/index/main.nf"
 process "SAMTOOLS_INDEX"
@@ -125,7 +137,7 @@ process "SAMTOOLS_INDEX"
 
 _After:_
 
-```groovy
+```groovy title="modules/local/samtools/index/tests/main.nf.test" linenums="3"
 name "Test Process SAMTOOLS_INDEX"
 script "../main.nf"
 process "SAMTOOLS_INDEX"
@@ -137,7 +149,7 @@ The stub file includes a placeholder that we need to replace with an actual test
 
 _Before:_
 
-```groovy
+```groovy title="modules/local/samtools/index/tests/main.nf.test" linenums="14"
 process {
     """
     // define inputs of the process here. Example:
@@ -150,7 +162,7 @@ We choose one of our available data files and plug it into the `process` block:
 
 _After:_
 
-```groovy
+```groovy title="modules/local/samtools/index/tests/main.nf.test" linenums="14"
 process {
     """
     input[0] = [ [id: 'NA12882' ], file("/workspace/gitpod/hello-nextflow/data/bam/reads_son.bam") ]
@@ -164,7 +176,7 @@ The stub file gives the test a generic name referring to the assertion that it s
 
 _Before:_
 
-```groovy
+```groovy title="modules/local/samtools/index/tests/main.nf.test" linenums="7"
 test("Should run without failures") {
 ```
 
@@ -172,7 +184,7 @@ This takes an arbitrary string, so we could put anything we want. Here we choose
 
 _After:_
 
-```groovy
+```groovy title="modules/local/samtools/index/tests/main.nf.test" linenums="7"
 test("reads_son [bam]") {
 ```
 
@@ -182,7 +194,7 @@ The `params` block in the stub file includes a placeholder for parameters:
 
 _Before:_
 
-```groovy
+```groovy title="modules/local/samtools/index/tests/main.nf.test" linenums="11"
 params {
     // define parameters here. Example:
     // outdir = "tests/results"
@@ -193,7 +205,7 @@ We use it to specify a location for the results to be output, using the default 
 
 _After:_
 
-```groovy
+```groovy title="modules/local/samtools/index/tests/main.nf.test" linenums="11"
 params {
     outdir = "tests/results"
 }
@@ -228,19 +240,25 @@ SUCCESS: Executed 1 tests in 10.068s
 
 The test verified the first assertion, that the process should complete successfully.
 
-Additionally, this also produces a snapshot file called `main.nf.test.snap` that captures all the output channels and the MD5SUMs of all elements. If we re-run the test, the program will check that the new output matches the output that was originally recorded.
+Additionally, this also produces a snapshot file called `main.nf.test.snap` that captures all the output channels and the MD5SUMs of all elements.
 
-Note: That does mean that we have to be sure that the output we record in the original run is correct.
+If we re-run the test, the program will check that the new output matches the output that was originally recorded.
 
-If, in the course of future development, something in the code changes that causes the output to be different, the test will fail and we will have to determine whether the change is expected or not. If it turns out that something in the code broke, we will have to fix it, with the expectation that the fixed code will pass the test. If it is an expected change (e.g. the tool has been improved and the results are better) then we will need to update the snapshot to accept the new output as the reference to match, using the parameter `--update-snapshot` when we run the test command.
+!!! note
+
+    That does mean that we have to be sure that the output we record in the original run is correct.
+
+If, in the course of future development, something in the code changes that causes the output to be different, the test will fail and we will have to determine whether the change is expected or not. If it turns out that something in the code broke, we will have to fix it, with the expectation that the fixed code will pass the test. If it is an expected change (e.g., the tool has been improved and the results are better) then we will need to update the snapshot to accept the new output as the reference to match, using the parameter `--update-snapshot` when we run the test command.
 
 ### 1.7 Add more tests to `SAMTOOLS_INDEX`
 
-Sometimes it's useful to test a range of different input files to ensure we're testing for a variety of potential issues. We can add as many tests as we want inside the same test file for a module.
+Sometimes it's useful to test a range of different input files to ensure we're testing for a variety of potential issues.
+
+We can add as many tests as we want inside the same test file for a module.
 
 Try adding the following tests to the module's test file:
 
-```groovy
+```groovy title="modules/local/samtools/index/tests/main.nf.test" linenums="27"
 test("reads_mother [bam]") {
 
     when {
@@ -264,7 +282,7 @@ test("reads_mother [bam]") {
 
 And:
 
-```groovy
+```groovy title="modules/local/samtools/index/tests/main.nf.test" linenums="47"
 test("reads_father [bam]") {
 
     when {
@@ -288,7 +306,9 @@ test("reads_father [bam]") {
 
 These simply go one after another in the test file.
 
-Note: Watch those curly braces, make sure they're all paired up appropriately...
+!!! warning
+
+    Watch those curly braces, make sure they're all paired up appropriately...
 
 ### 1.8 Run the test suite and update the snapshot
 
@@ -325,7 +345,7 @@ Note the warning, referring to the effect of the `--update-snapshot` parameter.
 
 Now that we know how to handle the simplest case, we're going to kick things up a notch with the `GATK_HAPLOTYPECALLER` process. As the second step in our pipeline, its input depends on the output of another process. We can deal with this in two ways: either manually generate some static test data that is suitable as intermediate input to the process, or we can use a special [setup method](https://www.nf-test.com/docs/testcases/setup/) to handle it dynamically for us.
 
-Spoiler: We're going to use the setup method.
+**Spoiler:** We're going to use the setup method.
 
 ### 2.1 Generate the test file stub
 
@@ -337,7 +357,7 @@ nf-test generate process modules/local/gatk/haplotypecaller/main.nf
 
 This produces the following test stub:
 
-```groovy
+```groovy title="tests/modules/local/gatk/haplotypecaller/main.nf.test" linenums="1"
 nextflow_process {
 
     name "Test Process GATK_HAPLOTYPECALLER"
@@ -387,7 +407,7 @@ Finally, don't forget to update the script path:
 
 _Before:_
 
-```groovy
+```groovy title="modules/local/gatk/haplotypecaller/tests/main.nf.test" linenums="3"
 name "Test Process GATK_HAPLOTYPECALLER"
 script "modules/local/gatk/haplotypecaller/main.nf"
 process "GATK_HAPLOTYPECALLER"
@@ -395,7 +415,7 @@ process "GATK_HAPLOTYPECALLER"
 
 _After:_
 
-```groovy
+```groovy title="modules/local/gatk/haplotypecaller/tests/main.nf.test" linenums="3"
 name "Test Process GATK_HAPLOTYPECALLER"
 script "../main.nf"
 process "GATK_HAPLOTYPECALLER"
@@ -407,7 +427,7 @@ We insert a `setup` block before the `when` block, where we can trigger a run of
 
 _Before:_
 
-```groovy
+```groovy title="modules/local/gatk/haplotypecaller/tests/main.nf.test" linenums="7"
 test("Should run without failures") {
 
     when {
@@ -415,7 +435,7 @@ test("Should run without failures") {
 
 _After:_
 
-```groovy
+```groovy title="modules/local/gatk/haplotypecaller/tests/main.nf.test" linenums="7"
 test("reads_son [bam]") {
 
     setup {
@@ -434,7 +454,7 @@ test("reads_son [bam]") {
 
 Then we can refer to the output of that process in the `when` block where we specify the test inputs:
 
-```groovy
+```groovy title="modules/local/gatk/haplotypecaller/tests/main.nf.test" linenums="20"
     when {
         params {
             outdir = "tests/results"
@@ -542,7 +562,7 @@ In practice, we replace the second assertion in the `then` block as follows:
 
 _Before:_
 
-```groovy
+```groovy title="modules/local/gatk/haplotypecaller/tests/main.nf.test" linenums="35"
 then {
     assert process.success
     assert snapshot(process.out).match()
@@ -551,7 +571,7 @@ then {
 
 _After:_
 
-```groovy
+```groovy title="modules/local/gatk/haplotypecaller/tests/main.nf.test" linenums="35"
 then {
     assert process.success
     assert path(process.out[0][0][1]).readLines().contains('#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	NA12882')
@@ -593,7 +613,7 @@ To practice writing these kinds of tests, you can repeat the procedure for the o
 
 Test for the 'mother' sample:
 
-```groovy
+```groovy title="modules/local/gatk/haplotypecaller/tests/main.nf.test" linenums="43"
 test("reads_mother [bam]") {
 
     setup {
@@ -632,7 +652,7 @@ test("reads_mother [bam]") {
 
 Test for the 'father' sample:
 
-```groovy
+```groovy title="modules/local/gatk/haplotypecaller/tests/main.nf.test" linenums="78"
 test("reads_father [bam]") {
 
     setup {
@@ -730,7 +750,7 @@ nf-test generate process modules/local/gatk/jointgenotyping/main.nf
 
 This produces the following test stub:
 
-```groovy
+```groovy title="tests/modules/local/gatk/jointgenotyping/main.nf.test" linenums="1"
 nextflow_process {
 
     name "Test Process GATK_JOINTGENOTYPING"
@@ -774,7 +794,7 @@ And don't forget to update the script path:
 
 _Before:_
 
-```groovy
+```groovy title="modules/local/gatk/jointgenotyping/tests/main.nf.test" linenums="3"
 name "Test Process GATK_JOINTGENOTYPING"
 script "modules/local/gatk/jointgenotyping/main.nf"
 process "GATK_JOINTGENOTYPING"
@@ -782,7 +802,7 @@ process "GATK_JOINTGENOTYPING"
 
 _After:_
 
-```groovy
+```groovy title="modules/local/gatk/jointgenotyping/tests/main.nf.test" linenums="3"
 name "Test Process GATK_JOINTGENOTYPING"
 script "../main.nf"
 process "GATK_JOINTGENOTYPING"
@@ -792,7 +812,7 @@ process "GATK_JOINTGENOTYPING"
 
 Fill in the inputs based on the process input definitions and rename the test accordingly:
 
-```groovy
+```groovy title="modules/local/gatk/jointgenotyping/tests/main.nf.test" linenums="7"
 test("family_trio [vcf] [idx]") {
 
     when {
@@ -816,7 +836,7 @@ test("family_trio [vcf] [idx]") {
 
 The output of the joint genotyping step is another VCF file, so we're going to use a content assertion again.
 
-```groovy
+```groovy title="modules/local/gatk/jointgenotyping/tests/main.nf.test" linenums="25"
 then {
     assert process.success
     assert path(process.out[0][0]).readLines().contains('#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	NA12877	NA12878	NA12882')
