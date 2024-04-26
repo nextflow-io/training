@@ -36,14 +36,6 @@ To run Gitpod:
 
 When you first sign up to Gitpod you may need to authenticate your account.
 
-!!! question "Exercise"
-
-    Open the [Gitpod training environment](https://gitpod.io/#https://github.com/nextflow-io/training) and use the following command to switch to the empty `nf-templates` folder:
-
-    ```bash
-    cd /workspace/gitpod/nf-template
-    ```
-
 ### Explore your Gitpod IDE
 
 You should now see something similar to the following:
@@ -74,3 +66,16 @@ Alternatively, you can open a new training workspace by following the Gitpod URL
 ### Saving files from Gitpod to your local machine
 
 To save any file from the explorer panel, right-click the file and select `Download`.
+
+
+## Getting started
+
+You will need to move into the `nf-template` folder to get started.
+
+!!! question "Exercise"
+
+    Open the [Gitpod training environment](https://gitpod.io/#https://github.com/nextflow-io/training) and use the following command to switch to the empty `nf-templates` folder:
+
+    ```bash
+    cd /workspace/gitpod/nf-template
+    ```
