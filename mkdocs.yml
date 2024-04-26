@@ -133,7 +133,7 @@ markdown_extensions:
     - pymdownx.snippets:
           base_path: ["."]
     - pymdownx.snippets
-    - pymdownx.superfences
+    - pymdownx.superfences:
           preserve_tabs: true
     - pymdownx.tabbed:
           alternate_style: true
