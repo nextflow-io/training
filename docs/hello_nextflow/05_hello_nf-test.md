@@ -571,7 +571,7 @@ then {
 
 _After:_
 
-```groovy title="modules/local/gatk/haplotypecaller/tests/main.nf.test" linenums="35"
+```console title="modules/local/gatk/haplotypecaller/tests/main.nf.test" linenums="35"
 then {
     assert process.success
     assert path(process.out[0][0][1]).readLines().contains('#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	NA12882')
