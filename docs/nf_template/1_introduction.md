@@ -10,7 +10,7 @@ Let's get started!
 
 ## Learning objectives
 
-In this workshop you will utilize the nf-core tooling to build a small pipeline.
+In this workshop, you will utilize the nf-core tooling to build a small pipeline.
 
 By the end of this workshop you will be able to:
 
@@ -20,7 +20,7 @@ By the end of this workshop you will be able to:
 
 ## Audience & prerequisites
 
-Please note that this is **not** a beginners workshop and familiarity with Nextflow, the command line, and common file formats is assumed.
+Please note that this is **not** a beginner's workshop and familiarity with Nextflow, the command line, and common file formats is assumed.
 
 **Prerequisites**
 
