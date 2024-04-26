@@ -67,7 +67,6 @@ Alternatively, you can open a new training workspace by following the Gitpod URL
 
 To save any file from the explorer panel, right-click the file and select `Download`.
 
-
 ## Getting started
 
 You will need to move into the `nf-template` folder to get started.
