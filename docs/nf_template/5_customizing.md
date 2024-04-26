@@ -12,7 +12,7 @@ Although modules are written to be flexible you may want to modify them to bette
 
 The `nf-core lint` command will help manage nf-core components and test that they match the remote source they came from.
 
-For example, if you modify an nf-core module, it will no longer match the remote and a linting test of this module would fail.
+For example, if you modify an nf-core module, it will no longer match the remote and a linting test of this module will fail.
 
 !!! question "Exercise"
 
@@ -108,7 +108,7 @@ If you run `nf-core lint` again, you would see that the test is now ignored and 
 
 !!! question "Exercise"
 
-    Make an edit to the `CODE_OF_CONDUCT.md` in your pipeline repository (e.g., add another bullet point). Use the `nf-core lint` command to see if it passes or fails. Add the `CODE_OF_CONDUCT.md` as a `files_unchanged:` in the `.nf-core.yml` file and lint your pipeline again to show that the test has been ignored.
+    Edit the `CODE_OF_CONDUCT.md` in your pipeline repository (e.g., add another bullet point). Use the `nf-core lint` command to see if it passes or fails. Add the `CODE_OF_CONDUCT.md` as a `files_unchanged:` in the `.nf-core.yml` file and lint your pipeline again to show that the test has been ignored.
 
 A full list of checks, descriptions of how they work, and how they can be customized can be found on the [tools documentation website](https://nf-co.re/tools/docs/latest/).
 
@@ -126,7 +126,7 @@ A full list of checks, descriptions of how they work, and how they can be custom
 
 ## Custom remote modules
 
-As an individual or group you may want to keep your own library of modules and/or subworkflows.
+As an individual or group, you may want to keep your own library of modules and/or subworkflows.
 
 The nf-core modules command comes with two flags for specifying a custom remote:
 
@@ -141,7 +141,7 @@ The directory where modules are installed will be prompted or obtained from `org
 org_path: my-folder
 ```
 
-The modules commands will, during initialization, try to pull changes from the remote repositories. If you want to disable this, for example due to performance reason, you can use the flag `--no-pull`. Commands will still need to clone repositories that have previously not been used.
+The modules commands will, during initialization, try to pull changes from the remote repositories. If you want to disable this, for example, due to performance reasons, you can use the flag `--no-pull`. Commands will still need to clone repositories that have previously not been used.
 
 !!! info "Private modules repositories"
 
@@ -198,4 +198,4 @@ nf-core bump-version 23.04.0 --nextflow
 
 !!! note "Tagged versions"
 
-    Creating a tagged version release allows you to execute specific versions of you pipeline using the revision flag.
+    Creating a tagged version release allows you to execute specific versions of your pipeline using the revision flag.
