@@ -1,3 +1,3 @@
-NA12877	/workspace/gitpod/hello-nextflow/work/09/24bdfe6674e339b3e750a6d4f8eacf/reads_father.bam.g.vcf	/workspace/gitpod/hello-nextflow/work/09/24bdfe6674e339b3e750a6d4f8eacf/reads_father.bam.g.vcf.idx
-NA12882	/workspace/gitpod/hello-nextflow/work/5b/9e3f129f52edaaed5addad79fcf194/reads_son.bam.g.vcf	/workspace/gitpod/hello-nextflow/work/5b/9e3f129f52edaaed5addad79fcf194/reads_son.bam.g.vcf.idx
-NA12878	/workspace/gitpod/hello-nextflow/work/59/2d03595febf3a4727892851c5d8cb3/reads_mother.bam.g.vcf	/workspace/gitpod/hello-nextflow/work/59/2d03595febf3a4727892851c5d8cb3/reads_mother.bam.g.vcf.idx
+NA12877	/workspace/gitpod/hello-nextflow/modules/local/gatk/jointgenotyping/tests/inputs/reads_father.bam.g.vcf	/workspace/gitpod/hello-nextflow/modules/local/gatk/jointgenotyping/tests/inputs/reads_father.bam.g.vcf.idx
+NA12882	/workspace/gitpod/hello-nextflow/modules/local/gatk/jointgenotyping/tests/inputs/reads_son.bam.g.vcf	/workspace/gitpod/hello-nextflow/modules/local/gatk/jointgenotyping/tests/inputs/reads_son.bam.g.vcf.idx
+NA12878	/workspace/gitpod/hello-nextflow/modules/local/gatk/jointgenotyping/tests/inputs/reads_mother.bam.g.vcf	/workspace/gitpod/hello-nextflow/modules/local/gatk/jointgenotyping/tests/inputs/reads_mother.bam.g.vcf.idx
