@@ -40,7 +40,7 @@ The `fastp` module will take fastq files from the sample sheet as inputs and wil
 
 While you could develop a module for this tool independently, you can save a lot of time and effort by leveraging nf-core modules and subworkflows.
 
-nf-core modules and subworkflows are written and maintained by the nf-core community. They are designed to be flexible but may require additional configuration to suit different use cases. Currently, there are more than [1200 nf-core modules](https://nf-co.re/modules) and [60 nf-core subworkflows](https://nf-co.re/subworkflows) (April 2024) available .
+nf-core modules and subworkflows are written and maintained by the nf-core community. They are designed to be flexible but may require additional configuration to suit different use cases. Currently, there are more than [1200 nf-core modules](https://nf-co.re/modules) and [60 nf-core subworkflows](https://nf-co.re/subworkflows) (April 2024) available.
 
 Modules and subworkflows can be listed, installed, updated, removed, and patched using nf-core tooling.
 
@@ -70,7 +70,7 @@ Feature branches should be checked out from the `dev` branch.
 
 You can find out more about working collaboratively with branches on the [GitHub documentation](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests).
 
-!!! note title="Executing revisions"
+!!! note "Executing revisions"
 
     Remote GitHub branches can be executed with Nextflow using the revision flag (e.g., `-r dev`).
 
@@ -272,7 +272,7 @@ Extra configuration may be applied as directives by using `args`. You can find m
     }
     ```
 
-!!! note
+!!! note "Closures"
 
     Closures can be used in configuration files to inject code evaluated at runtime.
 
@@ -372,6 +372,6 @@ As your current branch `myFeature` has no upstream branch you will need to set t
     git push --set-upstream origin myFeature
     ```
 
-!!! note
+!!! note "Branch origin"
 
     To automatically add an origin for branches without a tracking upstream, see `push.autoSetupRemote` in `git help config`.
