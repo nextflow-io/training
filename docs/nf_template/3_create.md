@@ -95,7 +95,7 @@ To https://github.com/<USERNAME>/myfirstpipeline.git
 
     If this is the first time you have used Gitpod for development work you will need to edit your permissions to push changes.
 
-    To edit your Gitpod permissions, click on your avatar in the top right hand corner of your Gitpod window and select `User Settings` from the dropdown window. Click on `Git Providers` on the right hand menu. Edit the permissions for your GitHub account by clicking on the three dots next to your GitHub account and give your Gitpod account permissions to access for GitHub repositories.
+    To edit your Gitpod permissions, click on your avatar in the top right-hand corner of your Gitpod window and select `User Settings` from the dropdown window. Click on `Git Providers` on the right hand menu. Edit the permissions for your GitHub account by clicking on the three dots next to your GitHub account and give your Gitpod account permissions to access for GitHub repositories.
 
 !!! question "Exercise"
 
@@ -182,7 +182,7 @@ By default, the template comes with several automated tests that utilize GitHub 
 -   `linting.yml`: Triggered on pushes and PRs to the repository and runs `nf-core lint` and markdown lint tests to ensure that the code meets the nf-core guidelines
 -   `release-announcements.yml`: Automatic release toot and tweet announcements for nf-core pipeline releases
 
-Notable, many of these tests are only configured for the nf-core repo. However, they can be modified for your repository or ignored if they are superfluous to your requirements.
+Notably, many of these tests are only configured for the nf-core repo. However, they can be modified for your repository or ignored if they are superfluous to your requirements.
 
 You can read more about creating and modifying workflows on the [GitHub Actions documentation webpage](https://docs.github.com/en/actions).
 
