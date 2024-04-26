@@ -4,13 +4,10 @@ Move into the exercise 1 directory and execute the `hello-gatk.nf` script.
 
 ```bash
 cd /workspace/gitpod/troubleshoot/exercise1
-```
-
-```bash
 nextflow run hello-gatk.nf
 ```
 
-!!! warning title="Error message"
+!!! warning "Error message"
 
     Nextflow stops the workflow execution and reports the failing task when a process execution exits with a non-zero exit status:
 

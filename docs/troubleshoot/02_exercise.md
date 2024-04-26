@@ -4,13 +4,10 @@ Move into the exercise 2 directory and execute the `hello-gatk.nf` script.
 
 ```bash
 cd /workspace/gitpod/troubleshoot/exercise2
-```
-
-```bash
 nextflow run hello-gatk.nf
 ```
 
-!!! warning title="Error message"
+!!! warning "Error message"
 
     Although there is no error message, the `GATK_HAPLOTYPECALLER` process is only being run once not three times as expected.
 

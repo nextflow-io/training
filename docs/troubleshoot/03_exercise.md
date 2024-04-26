@@ -4,13 +4,10 @@ Move into the exercise 3 directory and execute the `hello-gatk.nf` script.
 
 ```bash
 cd /workspace/gitpod/troubleshoot/exercise3
-```
-
-```bash
 nextflow run hello-gatk.nf
 ```
 
-!!! warning title="Error message"
+!!! warning "Error message"
 
     ```console
     WARN: Input tuple does not match tuple declaration in process `GATK_HAPLOTYPECALLER` -- offending value: [NA12878, /workspace/gitpod/troubleshoot/exercise3/work/aa/e0741cf287ce3a0c23f4dc12604b8c/reads_mother.bam, /workspace/gitpod/troubleshoot/exercise3/work/aa/e0741cf287ce3a0c23f4dc12604b8c/reads_mother.bam.bai]

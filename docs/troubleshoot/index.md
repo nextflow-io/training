@@ -1,5 +1,28 @@
-```
-cd /workspace/gitpod/troubleshoot
-cp -r /workspace/gitpod/hello-nextflow/data/ .
-tar -zxvf data/ref.tar.gz -C data/
-```
+# Introduction
+
+Effective troubleshooting strategies are essential for identifying and resolving issues efficiently, minimizing downtime, and ensuring the smooth development cycles. Investing in troubleshooting strategies not only resolves immediate issues but also cultivates a culture of problem-solving and continuous improvement.
+
+This training will focus on examples of common mistakes that are introduced into pipelines during development.
+
+Let's get started!
+
+## Learning objectives
+
+In this workshop, you will utilize a the `hello-gatk.nf` script created for the [Hello Nextflow](https://training.nextflow.io/hello_nextflow/) workshop.
+
+By the end of this workshop you will be able to:
+
+-   Describe Nextflow error outputs
+-   List common causes of pipeline errors
+-   Troubleshoot basic pipeline errors
+
+## Audience & prerequisites
+
+Please note that this is **not** a beginner's workshop and familiarity with Nextflow, the command line, and common file formats is assumed.
+
+**Prerequisites**
+
+-   A GitHub account
+-   Experience with command line
+-   Experience writing pipelines with Nextflow
+

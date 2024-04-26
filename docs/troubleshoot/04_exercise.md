@@ -4,13 +4,10 @@ Move into the exercise 4 directory and execute the `hello-gatk.nf` script.
 
 ```bash
 cd /workspace/gitpod/troubleshoot/exercise4
-```
-
-```bash
 nextflow run hello-gatk.nf
 ```
 
-!!! warning title="Error message"
+!!! warning "Error message"
 
     ```console
     ERROR ~ Script compilation error

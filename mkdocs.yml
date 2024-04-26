@@ -45,6 +45,7 @@ nav:
           - hello_nextflow/03_hello_gatk.md
     - Troubleshooting:
           - troubleshoot/index.md
+          - troubleshoot/orientation.md
           - troubleshoot/01_exercise.md
           - troubleshoot/02_exercise.md
           - troubleshoot/03_exercise.md

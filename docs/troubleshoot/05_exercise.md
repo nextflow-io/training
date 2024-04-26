@@ -1,14 +1,13 @@
 # Script 5
 
-```bash
-cd /workspace/gitpod/troubleshoot/exercise5
-```
+Move into the exercise 5 directory and execute the `hello-gatk.nf` script.
 
 ```bash
+cd /workspace/gitpod/troubleshoot/exercise5
 nextflow run hello-gatk.nf
 ```
 
-!!! warning title="Error message"
+!!! warning "Error message"
 
     ```console
     ERROR ~ Error executing process > 'GATK_JOINTGENOTYPING (1)'
