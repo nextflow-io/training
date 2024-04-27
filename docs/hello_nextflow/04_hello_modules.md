@@ -1,7 +1,10 @@
 # Part 3: Hello Modules
 
-[short blurb about modularizing a pipeline]
-[note you can also do subworkflows but that's out of scope of this training]
+In Nextflow, a module is a way to encapsulate a single process by itself in a standalone code file. To use a module in a workflow, you just add a single-line import statement to your workflow code file; then you can integrate the process into the workflow the same way you normally would.
+
+Putting processes into individual modules makes it possible to reuse process descriptions in multiple workflows instead of just replicating the code. This makes the code more shareable, flexible and maintainable.
+
+Note: It is also possible to encapsulate a section of a workflow as a 'subworkflow' that can be imported into a larger pipeline, but that is outside the scope of this training.
 
 ---
 
@@ -10,11 +13,12 @@
 We start from a base workflow called `hello-modules.nf`, which corresponds to the workflow we produced in Part 2: Hello
 GATK (equivalent to `scripts/hello-gatk-6.nf`).
 
-[TODO: add brief description of what the pipeline does]
+Note: This is a basic variant calling pipeline consisting of three processes. You can find a complete description of the pipeline in the previous section of this training.
 
 This workflow relies on reference file that are provided in compressed form in the Gitpod environment. If you completed the previous parts of the training course, then you already have everything you need in the working directory. However, if you're picking this up here, you need to run the following command to expand the reference files:
 
 ```bash
+cd /workspace/gitpod/hello-nextflow
 tar -zxvf data/ref.tar.gz -C data/
 ```
 
@@ -24,7 +28,7 @@ tar -zxvf data/ref.tar.gz -C data/
 nextflow run hello-modules.nf
 ```
 
-[TODO: briefly describe outputs; refer to Part 2 for full details]
+The pipeline takes in three BAM files containing sequencing data for three samples from a human family trio (mother, father and son) and outputs a VCF file containing variant calls. For more details, see the previous section of this training.
 
 ---
 
