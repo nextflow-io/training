@@ -1,8 +1,10 @@
 # Part 4: Hello nf-test
 
-[short blurb about testing + acknowledgement to Sateesh Peri for contributing all the code and sumary instructions for this training]
+It is critical for reproducibility and long-term maintenance to have a way to systematically test that every part of your workflow is doing what it's supposed to do. To that end, people often focus on top-level tests, in which the workflow is un on some test data from start to finish. This is useful but unfortunately incomplete. You should also implement module-level tests (equivalent to what is called 'unit tests' in general software engineering) to verify the functionality of individual components of your workflow, ensuring that each module performs as expected under different conditions and inputs.
 
-For a more detailed overview, read the [blog post about nf-test](https://nextflow.io/blog/2024/nf-test-in-nf-core.html) on the nf-core blog.
+The [nf-test](https://www.nf-test.com/) package provides a testing framework that integrates well with Nextflow and makes it straightforward to add both module-level and workflow-level tests to your pipeline. For more background information, read the [blog post about nf-test](https://nextflow.io/blog/2024/nf-test-in-nf-core.html) on the nf-core blog.
+
+Note: This part of the training was developed in collaboration with Sateesh Peri, who implemented all the tests. 
 
 ---
 
@@ -10,7 +12,7 @@ For a more detailed overview, read the [blog post about nf-test](https://nextflo
 
 We start from a base workflow called `hello-nf-test.nf`, which corresponds to the workflow we produced in Part 3: Hello modules (equivalent to `scripts/hello-modules-3.nf`).
 
-This is a modularized pipeline; the processes are in local modules and the parameter declarations are in a configuration file. If you completed the previous parts of the training course, then you already have everything you need in the working directory. However, if you're picking this up here, you need to copy the `nextflow.config` file and the `modules` folder from `scripts/` to the `hello-nextflow` directory.
+This is a modularized pipeline; the processes are in local modules and the parameter declarations are in a configuration file. If you completed the previous parts of the training course, then you already have everything you need in the working directory. However, if you're just starting from this section, you need to copy the `nextflow.config` file and the `modules` folder from `scripts/` to the `hello-nextflow` directory.
 
 ```
 cd /workspace/gitpod/hello-nextflow
@@ -18,7 +20,7 @@ cp scripts/nextflow.config .
 cp -r scripts/modules .
 ```
 
-Similarly, you will need to unzip the reference data files.
+You also need to unzip the reference data files:
 
 ```
 tar -zxvf data/ref.tar.gz -C data/
@@ -29,8 +31,7 @@ tar -zxvf data/ref.tar.gz -C data/
 ```bash
 nextflow run hello-nf-test.nf
 ```
-
-[TODO: as before, briefly describe outputs; refer to Part 2 for full details]
+The pipeline takes in three BAM files, each one containing sequencing data for one of three samples from a human family trio (mother, father and son), and outputs a VCF file containing variant calls. For more details, see the previous section of this training.
 
 ### 0.2 Initialize nf-test
 
@@ -107,9 +108,11 @@ nextflow_process {
 }
 ```
 
-[TODO: Add a brief explanation of the two `assert` statements]
+In plain English, the logic of the test reads as follows: "**When** these _parameters_ are provided to this _process_, **then** we expect to see these results."
 
-As you can see, this is just a stub, it's not yet a functional test. We need to add parameters and inputs that will be fed to the process.
+The expected results are formulated as `assert` statements. The first, `assert process.success`, simply states that we expect the process to run successfully and complete without any failures. The second, `snapshot(process.out).match()`, says that we expect the result of the run to be identical to the result obtained in a previous run (if applicable). We discuss this in more detail later.
+
+For most real-world modules (which usually require some kind of input), this is not yet a functional test. We need to add the inputs that will be fed to the process, and any parameters if applicable.
 
 ### 1.2 Move the test file and update the script path
 
@@ -335,9 +338,9 @@ Test Process SAMTOOLS_INDEX
 SUCCESS: Executed 3 tests in 28.281s
 ```
 
-Note the warning, referring to the effect of the `--update-snapshot` parameter.
+Notice the warning, referring to the effect of the `--update-snapshot` parameter.
 
-[Anything to add? Maybe a note about being careful to keep unit tests light by using small data, otherwise runtime adds up. Here we could be using even smaller data snippets if we cared about reducing runtime for a production environment.]
+Note: Here we are using test data that we used previously to demonstrate the scientific outputs of the pipeline. If we had been planning to  operate these tests in a production environment, we would have generated smaller inputs for testing purposes. In general it's important to keep unit tests as light as possible by using the smallest pieces of data necessary and sufficient for evaluating process functionality, otherwise the total runtime can add up quite seriously. A test suite that takes too long to run regularly is a test suite that's likely to get skipped in the interest of convenience.
 
 ---
 
@@ -471,7 +474,7 @@ Then we can refer to the output of that process in the `when` block where we spe
     }
 ```
 
-Using the setup method is convenient, though you should consider its use carefully. Unit tests are supposed to test processes in isolation in order to detect changes at the individual process level; breaking that isolation undermines that principle. You may find that generating intermediate test files is the right thing to do in many cases. But it's important to know that you can do this if you need to.
+Using the setup method is convenient, though you should consider its use carefully. Module-level tests are supposed to test processes in isolation in order to detect changes at the individual process level; breaking that isolation undermines that principle. You may find that generating intermediate test files is the right thing to do in many cases. But it's important to know that you can use this setup method if you need to.
 
 ### 2.4 Run test and examine output
 
@@ -866,7 +869,7 @@ Test Process GATK_JOINTGENOTYPING
 SUCCESS: Executed 1 tests in 14.885s
 ```
 
-It works! And that's it for per-process unit tests for our pipeline.
+It works! And that's it for module-level tests for our pipeline.
 
 ---
 
@@ -912,7 +915,7 @@ The line `assert workflow.success` is a simple assertion testing for whether the
 
 ### 4.2 Run the test
 
-Unlike the module test stubs, the pipeline test is fully functional and can be run directly as follows:
+In this case the pipeline test is fully functional (because we have default inputs set up in the configuration file) and can be run directly as follows:
 
 ```bash
 nf-test test tests/hello-nf-test.nf.test
@@ -934,4 +937,4 @@ Test Workflow hello-nf-test.nf
 SUCCESS: Executed 1 tests in 62.498s
 ```
 
-That's it! If necessary, more nuanced assertions can be added to test for the validity and content of the pipeline outputs. See [TODO: add link to pipeline assertion docs]
+That's it! If necessary, more nuanced assertions can be added to test for the validity and content of the pipeline outputs. You can learn more about the different kinds of assertions you can use in the [nf-test documentation](https://www.nf-test.com/docs/assertions/assertions/).
