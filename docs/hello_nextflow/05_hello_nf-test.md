@@ -4,7 +4,7 @@ It is critical for reproducibility and long-term maintenance to have a way to sy
 
 The [nf-test](https://www.nf-test.com/) package provides a testing framework that integrates well with Nextflow and makes it straightforward to add both module-level and workflow-level tests to your pipeline. For more background information, read the [blog post about nf-test](https://nextflow.io/blog/2024/nf-test-in-nf-core.html) on the nf-core blog.
 
-Note: This part of the training was developed in collaboration with Sateesh Peri, who implemented all the tests. 
+Note: This part of the training was developed in collaboration with Sateesh Peri, who implemented all the tests.
 
 ---
 
@@ -31,6 +31,7 @@ tar -zxvf data/ref.tar.gz -C data/
 ```bash
 nextflow run hello-nf-test.nf
 ```
+
 The pipeline takes in three BAM files, each one containing sequencing data for one of three samples from a human family trio (mother, father and son), and outputs a VCF file containing variant calls. For more details, see the previous section of this training.
 
 ### 0.2 Initialize nf-test
@@ -340,7 +341,7 @@ SUCCESS: Executed 3 tests in 28.281s
 
 Notice the warning, referring to the effect of the `--update-snapshot` parameter.
 
-Note: Here we are using test data that we used previously to demonstrate the scientific outputs of the pipeline. If we had been planning to  operate these tests in a production environment, we would have generated smaller inputs for testing purposes. In general it's important to keep unit tests as light as possible by using the smallest pieces of data necessary and sufficient for evaluating process functionality, otherwise the total runtime can add up quite seriously. A test suite that takes too long to run regularly is a test suite that's likely to get skipped in the interest of convenience.
+Note: Here we are using test data that we used previously to demonstrate the scientific outputs of the pipeline. If we had been planning to operate these tests in a production environment, we would have generated smaller inputs for testing purposes. In general it's important to keep unit tests as light as possible by using the smallest pieces of data necessary and sufficient for evaluating process functionality, otherwise the total runtime can add up quite seriously. A test suite that takes too long to run regularly is a test suite that's likely to get skipped in the interest of convenience.
 
 ---
 
