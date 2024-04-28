@@ -28,7 +28,7 @@ tar -zxvf data/ref.tar.gz -C data/
 nextflow run hello-modules.nf
 ```
 
-The pipeline takes in three BAM files containing sequencing data for three samples from a human family trio (mother, father and son) and outputs a VCF file containing variant calls. For more details, see the previous section of this training.
+The pipeline takes in three BAM files, each one containing sequencing data for one of three samples from a human family trio (mother, father and son), and outputs a VCF file containing variant calls. For more details, see the previous section of this training.
 
 ---
 
@@ -64,7 +64,9 @@ params.calling_intervals = "${baseDir}/data/intervals.list"
 nextflow run hello-modules.nf
 ```
 
-[TODO: Note where else config elements can be found and mention the order of precedence]
+You should see the same output as earlier.
+
+Note: Workflow parameters and other elements of configuration can be specified in several different places. When the same element is defined in more than one place, the conflict is resolved according to the order of precedence detailed in [this documentation](https://nextflow.io/docs/latest/config.html).
 
 ### Takeaway
 
@@ -78,9 +80,9 @@ Learn how to extract processes into local modules for code reuse.
 
 ## 2. Create a module for the `SAMTOOLS_INDEX` process
 
-[TODO: Briefly explain that for local modules, there should be a directory for each process, containing a file called `main.nf`; folder structure follows the toolkit/tool naming convention]
+By convention, a process module should be written to a standalone file named `main.nf` and stored in a directory structure named after the tool (and optionally, toolkit) that the process invokes. For example, the module we create for the `SAMTOOLS_INDEX` process will live under `samtools/index/`.
 
-[TODO: Note non-local, nf-core cases exist but no details; covered later]
+Additionally, local modules are grouped under the directory structure `modules/local/`. Modules can also belong to remote repositories; we will not cover those in this training.
 
 ### 2.1 Create a folder to house the local module code for the `SAMTOOLS_INDEX` process
 
@@ -93,6 +95,8 @@ mkdir -p modules/local/samtools/index
 ```bash
 touch modules/local/samtools/index/main.nf
 ```
+
+This creates an empty file named `main.nf` under the appropriate directory structure.
 
 ### 2.3 Move the `SAMTOOLS_INDEX` process code to the module file
 
@@ -159,6 +163,8 @@ mkdir -p modules/local/gatk/haplotypecaller
 mkdir -p modules/local/gatk/jointgenotyping
 ```
 
+Here we are grouping the two modules under `gatk/` because the corresponding processes both invoke tools that belong to the GATK toolkit.
+
 ### 3.2 Create file stubs for the process modules
 
 ```bash
@@ -176,7 +182,7 @@ Move this code to `modules/local/gatk/haplotypecaller/main.nf`:
  */
 process GATK_HAPLOTYPECALLER {
 
-    container "broadinstitute/gatk:4.5.0.0"
+    container "docker.io/broadinstitute/gatk:4.5.0.0"
 
     input:
         tuple val(id), path(input_bam), path(input_bam_index)
@@ -207,7 +213,7 @@ And move this code to `modules/local/gatk/jointgenotyping/main.nf`:
  */
 process GATK_JOINTGENOTYPING {
 
-    container "broadinstitute/gatk:4.5.0.0"
+    container "docker.io/broadinstitute/gatk:4.5.0.0"
 
     input:
         path(sample_map)
@@ -263,6 +269,8 @@ workflow {
 ```bash
 nextflow run hello-modules.nf
 ```
+
+This should still produce the same output. Congratulations, you've done all this work and absolutely nothing has changed to how the pipeline works! But now your code is more modular, and if you decide to write another pipeline that calls on one of those processes, you just need to type one short import statement to use the relevant module. This is better than just copy-pasting the code, because if later you decide to improve the module, all your pipelines will inherit the improvement.
 
 ### Takeaway
 

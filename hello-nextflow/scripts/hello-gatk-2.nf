@@ -39,7 +39,7 @@ process SAMTOOLS_INDEX {
  */
 process GATK_HAPLOTYPECALLER {
 
-    container "broadinstitute/gatk:4.5.0.0"
+    container "docker.io/broadinstitute/gatk:4.5.0.0"
 
     input:
         path input_bam
