@@ -717,7 +717,7 @@ Test Process GATK_HAPLOTYPECALLER
 SUCCESS: Executed 3 tests in 57.858s
 ```
 
-The outputs [TODO: finish the sentence]
+That completes the basic test plan for this second step in the pipeline. On to the third and last!
 
 ---
 
