@@ -15,7 +15,7 @@ GATK (equivalent to `scripts/hello-gatk-6.nf`).
 
 Note: This is a basic variant calling pipeline consisting of three processes. You can find a complete description of the pipeline in the previous section of this training.
 
-This workflow relies on reference file that are provided in compressed form in the Gitpod environment. If you completed the previous parts of the training course, then you already have everything you need in the working directory. However, if you're picking this up here, you need to run the following command to expand the reference files:
+This workflow relies on reference files that are provided in compressed form in the Gitpod environment. If you completed the previous parts of the training course, then you already have everything you need in the working directory. However, if you're picking this up here, you need to run the following command to expand the reference files:
 
 ```bash
 cd /workspace/gitpod/hello-nextflow
@@ -48,14 +48,14 @@ $baseDir = params.baseDir
 // Primary input (samplesheet in CSV format with ID and file path, one sample per line)
 params.reads_bam = "${baseDir}/data/samplesheet.csv"
 
-// Base name for final output file
-params.cohort_name = "family_trio"
-
 // Accessory files
 params.genome_reference = "${baseDir}/data/ref/ref.fasta"
 params.genome_reference_index = "${baseDir}/data/ref/ref.fasta.fai"
 params.genome_reference_dict = "${baseDir}/data/ref/ref.dict"
 params.calling_intervals = "${baseDir}/data/intervals.list"
+
+// Base name for final output file
+params.cohort_name = "family_trio"
 ```
 
 ### 1.2 Run the workflow to verify that it does the same thing as before
@@ -66,7 +66,7 @@ nextflow run hello-modules.nf
 
 You should see the same output as earlier.
 
-Note: Workflow parameters and other elements of configuration can be specified in several different places. When the same element is defined in more than one place, the conflict is resolved according to the order of precedence detailed in [this documentation](https://nextflow.io/docs/latest/config.html).
+Note: Workflow parameters and other elements of configuration can be specified in several different places. When the same element is defined in more than one place, the conflict is resolved according to the order of precedence detailed in [this documentation](https://nextflow.io/docs/latest/config.html#configuration-file).
 
 ### Takeaway
 
