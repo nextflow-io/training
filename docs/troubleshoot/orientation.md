@@ -16,7 +16,7 @@ To run Gitpod:
     -   This is our GitHub repository URL, prefixed with `https://gitpod.io/#`
 -   Log in with your GitHub account.
 
-!!! note "Getting Started with GitHub"
+### Getting Started with GitHub
 
     [GitHub](https://github.com/) is a web-based interface allowing real-time collaboration. It encourages teams to work together in developing code. With GitHub, you can easily track changes, navigate revisions, and automate some of the more mundane tasks, such as testing.
 
@@ -69,12 +69,22 @@ To save any file from the explorer panel, right-click the file and select `Downl
 
 ## Getting started
 
-You will need to move into the `nf-template` folder to get started.
+You will need to move into the `troubleshoot` folder, copy, and unzip the data required for this training.
 
 !!! question "Exercise"
 
-    Open the [Gitpod training environment](https://gitpod.io/#https://github.com/nextflow-io/training) and use the following command to switch to the empty `nf-templates` folder:
+    Use the following command to switch to the empty `troubleshoot` folder:
 
     ```bash
-    cd /workspace/gitpod/nf-template
+    cd /workspace/gitpod/troubleshoot
+    cp -r /workspace/gitpod/hello-nextflow/data/ .
+    tar -zxvf data/ref.tar.gz -C data/
     ```
+
+To check everything is working as expected you can run the `hello-gatk.nf` script located in the `troubleshoot` folder.
+
+If all of the data has been copied and unzipped correctly you should see the pipeline execute three processes:
+
+-   `SAMTOOLS_INDEX`
+-   `GATK_HAPLOTYPECALLER`
+-   `GATK_JOINTGENOTYPING`
