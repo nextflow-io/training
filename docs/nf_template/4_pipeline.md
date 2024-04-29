@@ -2,22 +2,22 @@
 
 The nf-core pipeline template is a working pipeline and comes preconfigured with two modules:
 
--   [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/): A tool that performs quality control checks on raw sequence data coming from high throughput sequencing pipelines. It provides a modular set of analyses which can be used to give a quick impression of your data.
+-   [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/): A tool that performs quality control checks on raw sequence data coming from high throughput sequencing pipelines. It provides a modular set of analyses that can be used to give a quick impression of your data.
 -   [MultiQC](https://multiqc.info/): A modular tool to aggregate results from bioinformatics analyses across many samples into a single report.
-
-The default template `test` profile leverages small test files that are stored in the nf-core [test data GitHub repository](https://github.com/nf-core/test-datasets) as inputs for the pipeline.
-
-Additionally, the template comes with profiles for the management of software dependencies (e.g., `docker`, `singularity`, and `conda`). For pipelines with processes that have been shipped with containers/images/recipes, these profiles can be used to change the way dependencies are handled when you execute your pipeline.
-
-!!! warning
-
-    If `-profile` for managing software dependencies is not specified, the pipeline will run locally and expect all software to be installed and available on the `PATH`. **This is not recommended.**
 
 ## Testing your pipeline
 
 The `test` profile can be used to check if your pipeline is still working during your development cycle. It is also used as a part of GitHub Actions to test your pipeline during pull requests.
 
-Additional test profiles can be created to test different parts of you pipeline and can also be added to GitHub actions.
+The default template `test` profile leverages small test files that are stored in the nf-core [test data GitHub repository](https://github.com/nf-core/test-datasets) as inputs for the pipeline.
+
+Additionally, the template comes with profiles for the management of software dependencies (e.g., `docker`, `singularity`, and `conda`). For pipelines with processes are shipped with containers/images/recipes, these profiles can be used to change the way dependencies are handled when you execute your pipeline.
+
+!!! warning
+
+    If `-profile` for managing software dependencies is not specified, the pipeline will run locally and expect all software to be installed and available on the `PATH`. **This is not recommended.**
+
+Additional test profiles can be created to test different parts of your pipeline and can also be added to GitHub actions.
 
 !!! question "Exercise"
 
@@ -193,7 +193,7 @@ Parameter names should be unique and easily identifiable. Default values should 
     save_merged                = false
     ```
 
-While `save_trimmed_fail` and `save_merged` are boolean and can have a default value (in this case false), `adapters` is a file and a default value of `null` will prevent the `FASTP` process from running. However, empty square brackets (`[]`) can be used as an input to fill the channel without supplying a file.
+While `save_trimmed_fail` and `save_merged` are boolean and can have a default value (in this case false), `adapters` is a file, and a default value of `null` will prevent the `FASTP` process from running. However, empty square brackets (`[]`) can be used as input to fill the channel without supplying a file.
 
 A ternary expression (aka a conditional expression) can be used to create a channel that will be either the square brackets or a supplied fasta file.
 
@@ -317,12 +317,12 @@ INFO     [✓] Pipeline schema looks valid (found 31 params)
 ✨ Found 'params.save_merged' in the pipeline config, but not in the schema. Add to pipeline schema? [y/n]: y
 INFO     Writing schema with 34 params: 'nextflow_schema.json'
 
-🚀  Launch web builder for customisation and editing? [y/n]:
+🚀  Launch web builder for customization and editing? [y/n]:
 ```
 
 Using the web builder you can add add details about your new parameters.
 
-The parameters that you have added to your pipeline will be added to the bottom of the `nf-core schema build` file. Some information about these parameters will be automatically filled based on the the default value from your `nextflow.config`. You will be able to categorize your new parameters into a group, add icons, and add descriptions for each.
+The parameters that you have added to your pipeline will be added to the bottom of the `nf-core schema build` file. Some information about these parameters will be automatically filled based on the default value from your `nextflow.config`. You will be able to categorize your new parameters into a group, add icons, and add descriptions for each.
 
 ![Pipeline parameters](img/schemabuild.png)
 
@@ -336,11 +336,11 @@ Once you have made your edits you can click `Finished` and all changes will be a
 
 Having a universal way of versioning the development projects is the best way to track what is going on with the software as new features are added. This problem can be solved by following semantic versioning rules: `[major].[minor].[patch]`
 
-For example, starting with with a release version `1.4.3`, bumping the version to:
+For example, starting with a release version `1.4.3`, bumping the version to:
 
 -   `1.4.4` would be a patch release for minor things such as fixing bugs.
 -   `1.5` would be a minor release, for example adding some new features.
--   `2.0` would correspond to the major release where results would no longer be backwards compatible.
+-   `2.0` would correspond to the major release where results would no longer be backward compatible.
 
 The pipeline version number is mentioned in a lot of different places in nf-core pipelines. The `nf-core bump-version` command updates the version for you automatically, so that you don't accidentally miss any. It can be used for each pipeline release, and again for the next development version after release.
 
@@ -348,7 +348,7 @@ The pipeline version number is mentioned in a lot of different places in nf-core
 nf-core bump-version 1.0
 ```
 
-After you have updated the version of you pipeline, your changes can be pushed to GitHub.
+After you have updated the version of your pipeline, your changes can be pushed to GitHub.
 
 !!! question "Exercise"
 
