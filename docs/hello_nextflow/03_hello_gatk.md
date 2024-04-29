@@ -82,13 +82,13 @@ tar -zxvf data/ref.tar.gz -C data/
 #### 0.2.2. Pull the GATK container
 
 ```bash
-docker pull broadinstitute/gatk:4.5.0.0
+docker pull docker.io/broadinstitute/gatk:4.5.0.0
 ```
 
 #### 0.2.3. Spin up the container interactively
 
 ```bash
-docker run -it -v ./data:/data broadinstitute/gatk:4.5.0.0
+docker run -it -v ./data:/data docker.io/broadinstitute/gatk:4.5.0.0
 ```
 
 #### 0.2.4. Run the variant calling command
@@ -198,7 +198,7 @@ Add a second step that consumes the output of the first.
  */
 process GATK_HAPLOTYPECALLER {
 
-    container "broadinstitute/gatk:4.5.0.0"
+    container "docker.io/broadinstitute/gatk:4.5.0.0"
 
     input:
         path input_bam
@@ -631,7 +631,7 @@ sample_map = GATK_HAPLOTYPECALLER.out.collectFile(){ id, gvcf, idx ->
  */
 process GATK_JOINTGENOTYPING {
 
-    container "broadinstitute/gatk:4.5.0.0"
+    container "docker.io/broadinstitute/gatk:4.5.0.0"
 
     input:
         path(sample_map)

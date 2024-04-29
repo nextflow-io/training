@@ -1,43 +1,4 @@
 /*
- * Pipeline parameters
- */
-
-// Execution environment setup
-params.baseDir = "/workspace/gitpod/nf-training/hello-nextflow" 
-$baseDir = params.baseDir
-
-// Primary input
-params.reads_bam = "${baseDir}/data/samplesheet.csv"
-
-// Accessory files
-params.genome_reference = "${baseDir}/data/ref/ref.fasta"
-params.genome_reference_index = "${baseDir}/data/ref/ref.fasta.fai"
-params.genome_reference_dict = "${baseDir}/data/ref/ref.dict"
-params.calling_intervals = "${baseDir}/data/intervals.list"
-
-// Base name for final output file
-params.cohort_name = "family_trio"
-
-/*
- * Generate BAM index file
- */
-process SAMTOOLS_INDEX {
-
-    container 'quay.io/biocontainers/samtools:1.19.2--h50ea8bc_1' 
-
-    input:
-        tuple val(id), path(input_bam)
-
-    output:
-        tuple val(id), path(input_bam), path("${input_bam}.bai")
-
-    """
-    samtools index '$input_bam'
-
-    """
-}
-
-/*
  * Call variants with GATK HapolotypeCaller in GVCF mode
  */
 process GATK_HAPLOTYPECALLER {
@@ -96,6 +57,9 @@ process GATK_JOINTGENOTYPING {
         -L ${interval_list}
     """
 }
+
+// Include modules
+include { SAMTOOLS_INDEX } from './modules/local/samtools/index/main.nf'
 
 workflow {
 
