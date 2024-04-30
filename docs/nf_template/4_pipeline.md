@@ -201,7 +201,7 @@ A ternary expression (aka a conditional expression) can be used to create a chan
 
     Create a new channel (`ch_adapters`) using a ternary expression to use either a supplied fasta file or `[]`.
 
-    ```groovy title="workflows/mypipeline.nf" linenums="7"
+    ```groovy title="workflows/mypipeline.nf" linenums="40"
     ch_adapters = params.adapters ? params.adapters : []
     ```
 
