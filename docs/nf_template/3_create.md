@@ -77,7 +77,7 @@ Once you have created the repository you can push your template to GitHub.
 
 ```bash
 cd /workspace/gitpod/nf-template/nf-core-mypipeline
-git remote add origin git@github.com:<USERNAME>/<REPO>.git
+git remote add origin https://github.com/<USERNAME>/<REPO>.git
 git push --all origin
 ```
 
