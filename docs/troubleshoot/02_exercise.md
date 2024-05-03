@@ -24,7 +24,7 @@ nextflow run hello-gatk.nf
 
     Nextflow distinguishes two different kinds of channels: queue channels and value channels.
 
-    - A **queue** channel is an asynchronous unidirectional FIFO queue that connects two processes or operators that can be read once.
+    - A **queue** channel is an asynchronous unidirectional FIFO queue that connects two processes or operators. Channel elements are consumed till the channel is empty.
     - A **value** channel (a.k.a. a singleton channel) is bound to a single value and it can be read unlimited times without consuming its contents.
 
     It is likely that one or more channel type has been converted to a *queue* channel and is only being read once.
@@ -37,6 +37,7 @@ nextflow run hello-gatk.nf
 
     By removing these the inputs will be read multiple times.
 
+    Currently:
     ```console title="hello-gatk.nf" linenums="111"
     GATK_HAPLOTYPECALLER(
         SAMTOOLS_INDEX.out,
@@ -44,5 +45,16 @@ nextflow run hello-gatk.nf
         Channel.of(params.genome_reference_index),
         Channel.of(params.genome_reference_dict),
         Channel.of(params.calling_intervals)
+    )
+    ```
+
+    After:
+    ```console
+    GATK_HAPLOTYPECALLER(
+        SAMTOOLS_INDEX.out,
+        params.genome_reference,
+        params.genome_reference_index,
+        params.genome_reference_dict,
+        params.calling_intervals
     )
     ```

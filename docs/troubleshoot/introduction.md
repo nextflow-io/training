@@ -1,6 +1,6 @@
 # Introduction
 
-Effective troubleshooting strategies are essential for identifying and resolving issues efficiently, minimizing downtime, and ensuring the smooth development cycles. Investing in troubleshooting strategies not only resolves immediate issues but also cultivates a culture of problem-solving and continuous improvement.
+Effective troubleshooting strategies are essential for identifying and resolving issues efficiently, minimizing downtime, and ensuring smooth development cycles. Investing in troubleshooting strategies not only resolves immediate issues but also cultivates a culture of problem-solving and continuous improvement.
 
 This training will focus on examples of common mistakes that are introduced into pipelines during development.
 
@@ -8,7 +8,7 @@ Let's get started!
 
 ## Learning objectives
 
-In this workshop, you will utilize a the `hello-gatk.nf` script created for the [Hello Nextflow](https://training.nextflow.io/hello_nextflow/) workshop.
+In this workshop, you will utilize the `hello-gatk.nf` script created for the [Hello Nextflow](https://training.nextflow.io/hello_nextflow/) workshop.
 
 By the end of this workshop you will be able to:
 
