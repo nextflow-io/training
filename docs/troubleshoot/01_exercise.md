@@ -50,7 +50,6 @@ nextflow run hello-gatk.nf
 
     **Work dir**: The command work directory
 
-
 ??? Solution
 
     The command error `.command.sh: line 2: samtools: command not found` suggests that `samtools` was not available.
