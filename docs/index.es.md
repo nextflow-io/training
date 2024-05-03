@@ -52,7 +52,7 @@ Referencia rápida a algunos enlaces útiles:
 | ----------------------------------------------------------------------- | -------------------------------------------------------------- |
 | [Documentación de Nextflow](https://nextflow.io/docs/latest/index.html) | [Slack de Nextflow](https://www.nextflow.io/slack-invite.html) |
 | [Página principal de Nextflow](https://nextflow.io/)                    | [nf-core](https://nf-co.re/)                                   |
-| [Seqera](https://seqera.io/)                                       | [Seqera Community](https://community.seqera.io)                |
+| [Seqera](https://seqera.io/)                                            | [Seqera Community](https://community.seqera.io)                |
 
 ¿No estás seguro por dónde comenzar? Consulta la página de [ayuda](help.md).
 
