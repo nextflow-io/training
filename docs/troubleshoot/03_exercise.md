@@ -38,15 +38,15 @@ nextflow run hello-gatk.nf
     tuple path(input_bam), path(input_bam_index)
     ```
 
-    It can be seen that this tuple is make up of two paths and offending value has one value and two paths.
+    It can be seen that this tuple is made up of two paths and offending value has one value and two paths.
 
-    It can be concluded that the tuple is a missing value in the first position.
+    It can be concluded that the tuple has a missing value in the first position.
 
     To resolve this error a `val` must be added to this input.
 
     The name of this `val` might be used in the script block and must be considered.
 
-    While all of the variables in the script block are accounted for. The `id` value in the output has not been specified.
+    While all of the variables in the script block are accounted for, the `id` value in the output has not been specified.
 
     It can be concluded that the input val should be `val(id)` to match the output.
 
