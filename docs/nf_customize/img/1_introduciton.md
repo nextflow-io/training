@@ -1,0 +1,30 @@
+# Introduction
+
+nf-core is a community effort to collaborate on a curated set of analysis pipelines built using Nextflow. It provides a standardized set of best practices, guidelines, and templates for building and sharing bioinformatics pipelines. nf-core pipelines are designed to be modular, scalable, and portable, allowing researchers to easily adapt and execute them using their data and compute resources.
+
+nf-core pipelines are designed to work out of the box. However, many researchers will want to customize their execution to deploy them to different infrastructures, activate or deactivate pipeline features, and selectively customize tool parameters. For this, researchers need to understand how these pipelines fit together and how to apply configuration options.
+
+Using the [nf-core/demo](https://github.com/nf-core/demo) pipeline as an example, you will first identify the files and code contributing to the default pipeline configuration. Next, you will customize the pipeline using parameters and configuration files. Finally, you will track the provenance of each execution using reports and logs.
+
+Let's get started!
+
+## Learning objectives
+
+In this workshop, you learn how to customize the execution of nf-core pipelines.
+
+By the end of this workshop you will be able to:
+
+-   Discuss the ways an nf-core pipeline can be customized
+-   Identify the files and code contributing to the default pipeline configuration
+-   Utilize nf-core tooling to list, launch, and download pipelines
+-   Track the provenance of your pipeline executions
+
+## Audience & prerequisites
+
+Please note that this is **not** a beginner's workshop and familiarity with Nextflow, the command line, and common file formats is assumed.
+
+**Prerequisites**
+
+-   A GitHub account
+-   Experience with command line
+-   Experience writing pipelines with Nextflow
