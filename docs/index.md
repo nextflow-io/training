@@ -53,9 +53,9 @@ We have several workshops available on this website - find the one that's right 
 
     A "learn by doing" tutorial that will take you from running tools on the command line into running your first Nextflow pipelines.
 
-    [Launch the Hello Nextflow Training:material-arrow-right:](hello_nextflow/index.md){ .md-button }
+    [Launch the Hello Nextflow Training :material-arrow-right:](hello_nextflow/index.md){ .md-button }
 
-!!! exercise "Customizing nf-core"
+!!! exercise "Configure the execution of an nf-core pipeline"
 
     !!! quote inline end ""
 
@@ -63,19 +63,19 @@ We have several workshops available on this website - find the one that's right 
 
     A "learn by doing" pipeline development tutorial focusing on the configuration of nf-core pipelines.
 
-    [Launch the Customizing nf-core Training :material-arrow-right:](nf_customize/1_introduction.md){ .md-button }
+    [Launch the configuring an nf-core pipeline training :material-arrow-right:](nf_customize/1_introduction.md){ .md-button }
 
-!!! exercise "nf-core Template"
+!!! exercise "Develop a pipeline with the nf-core template"
 
     !!! quote inline end ""
 
         :material-run-fast: This course will help you to understand the structure of the nf-core pipeline template.
 
-    A "learn by doing" pipeline development tutorial focusing on the nf-core pipeline template.
+    A "learn by doing" pipeline development tutorial focusing on developing a pipeline with the nf-core template.
 
-    [Launch the nf-core Pipeline Template Training :material-arrow-right:](nf_template/1_introduction.md){ .md-button }
+    [Launch the nf-core template training :material-arrow-right:](nf_template/1_introduction.md){ .md-button }
 
-!!! exercise "RNA-seq Variant Calling"
+!!! exercise "RNA-seq variant calling"
 
     !!! quote inline end ""
 
@@ -83,9 +83,9 @@ We have several workshops available on this website - find the one that's right 
 
     A "learn by doing" tutorial focusing on theory, instead of leading through exercises of slowly increasing complexity.
 
-    [Launch the RNA-seq Variant Calling Training :material-arrow-right:](hands_on/index.md){ .md-button }
+    [Launch the RNA-seq variant calling training :material-arrow-right:](hands_on/index.md){ .md-button }
 
-!!! exercise "Troubleshooting Exercises"
+!!! exercise "Troubleshooting exercises"
 
     !!! quote inline end ""
 
@@ -93,7 +93,7 @@ We have several workshops available on this website - find the one that's right 
 
     A "learn by doing" troubleshooting tutorial for pipeline developers and users.
 
-    [Launch the Troubleshooting Exercises Training :material-arrow-right:](troubleshoot/introduction.md){ .md-button }
+    [Launch the troubleshooting exercises training :material-arrow-right:](troubleshoot/introduction.md){ .md-button }
 
 ## Resources
 

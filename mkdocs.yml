@@ -45,14 +45,14 @@ nav:
           - hello_nextflow/03_hello_gatk.md
           - hello_nextflow/04_hello_modules.md
           - hello_nextflow/05_hello_nf-test.md
-    - Customize nf-core:
+    - Configure nf-core:
           - nf_customize/1_introduction.md
           - nf_customize/2_orientation.md
           - nf_customize/3_nf-core.md
           - nf_customize/4_execution.md
           - nf_customize/5_config.md
           - nf_customize/6_tools.md
-    - nf-core template:
+    - Develop nf-core:
           - nf_template/1_introduction.md
           - nf_template/2_orientation.md
           - nf_template/3_create.md
