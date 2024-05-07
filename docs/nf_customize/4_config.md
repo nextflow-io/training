@@ -1,14 +1,63 @@
-# Pipeline structure
+# `nf-core/demo`
+
+[`nf-core/demo`](https://nf-co.re/demo/dev) is a simple nf-core style bioinformatics pipeline for workshops and demonstrations.
+
+It was created using the nf-core template and is designed to run quickly using small test data files.
+
+<figure class="excalidraw">
+--8<-- "docs/nf_customize/img/subway.excalidraw.svg"
+</figure>
+
+It consists of three processes:
+
+1. ([`FASTQC`](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)): Read QC
+2. ([`FASTP`](https://github.com/OpenGene/fastp)): Adapter and quality trimming
+3. ([`MULTIQC`](http://multiqc.info/)): Present QC for raw reads
+
+It requires two parameters (`--input` and `--outdir`) to be supplied for the pipeline to run successfully.
+
+### `--input`
+
+The `input` parameter requires a path to comma-separated file containing information about the samples in the experiment.
+
+```bash
+--input '[path/to/samplesheet.csv]'
+```
+
+It has to be a comma-separated file (`.csv`) with 3 columns, and a header row as shown in the example below.
+
+A samplesheet file consisting of both single- and paired-end data may look something like the one below. This is for 3 samples:
+
+```csv "samplesheet.csv"
+sample,fastq_1,fastq_2
+SAMPLE1_PE,path/to/sample1_R1.fastq.gz,path/to/sample1_R2.fastq.gz
+SAMPLE2_PE,path/to/sample2_R1.fastq.gz,path/to/sample2_R2.fastq.gz
+SAMPLE3_SE,path/to/sample3_R1.fastq.gz,
+```
+
+The pipeline will auto-detect whether a sample is single- or paired-end and if a sample has been sequenced more than once using the information provided in the samplesheet.
+
+### `--outdir`
+
+The `--output` parameter is used to name the directory where the results will be saved.
+
+```bash
+--output results
+```
+
+## Pipeline structure
 
 nf-core pipelines follow a set of best practices and standardised conventions. nf-core pipelines start from a common template and follow the same structure.
 
 Although you won’t need to edit code in the pipeline project directory, having an understanding of the project structure and some core terminology will help you understand how to configure its execution.
 
-Nextflow DSL2 pipelines are built up of subworkflows and modules that are stored as separate `.nf` files.
+Most nf-core pipelines consist of a single workflow file (there are a few exceptions). This is the main `<workflow>.nf` inside the workflows folder.
 
-Most nf-core pipelines consist of a single workflow file (there are a few exceptions). This is the main `<workflow>.nf` file that is used to bring everything else together.
+Instead of having one large monolithic script, it is broken up into a combination of modules and subworkflows that are stored as separate `.nf` files.
 
-Instead of having one large monolithic script, it is broken up into a combination of subworkflows and modules.
+<figure class="excalidraw">
+--8<-- "docs/nf_customize/img/nested.excalidraw.svg"
+</figure>
 
 A subworkflow is a groups of modules that are used in combination with each other and have a common purpose. For example, the [`SAMTOOLS_STATS`](https://github.com/nf-core/modules/blob/master/modules/nf-core/samtools/stats/main.nf), [`SAMTOOLS_IDXSTATS`](https://github.com/nf-core/modules/blob/master/modules/nf-core/samtools/faidx/main.nf), and [`SAMTOOLS_FLAGSTAT`](https://github.com/nf-core/modules/blob/master/modules/nf-core/samtools/flagstat/main.nf) modules are all included in the [`BAM_STATS_SAMTOOLS`](https://github.com/nf-core/modules/blob/master/subworkflows/nf-core/bam_stats_samtools/main.nf) subworkflow.
 
@@ -20,21 +69,47 @@ A modules is a wrapper for a process, the basic processing primitive to execute 
 
 Most modules will execute a single tool in the script block and will make use of the directives, inputs, outputs, and when statements dynamically. Like subworkflows, modules can also be developed and shared in the [nf-core modules GitHub repository](https://github.com/nf-core/modules/tree/master/modules/nf-core) or stored as a local module. Local modules are pipeline specific that are not shared in the nf-core modules repository.
 
-## Testing a pipeline
+## Testing `nf-core/demo`
 
-It is useful to test the execution of pipeline in this way to see if your environment is able to execute the pipeline before you start adding your own data. Fortunately, nf-core pipelines come with a profile that allow them to be tested quickly using a small dataset.
+It is useful to test the execution of pipeline in this way to see if your environment is able to execute the pipeline before you start adding your own data. Fortunately, nf-core pipelines come with a `profile` that allow them to be tested quickly using a [small dataset that is hosted on the nf-core GitHub](https://github.com/nf-core/test-datasets).
+
+!!! note "Profiles"
+
+    A profile is a set of configuration attributes that can be selected during pipeline execution by using the -profile command line option. Multiple configuration profiles can be specified by separating the profile names with a comma, for example:
+
+    ```bash
+    nextflow run nf-core/demo -profile test,singularity
+    ```
+
+The [`test` profile](https://github.com/nf-core/demo/blob/main/conf/test.config) provides a minimal set of parameter inputs for the pipeline to run.
+
+```groovy title="demo/conf/test.config" linenums="13"
+params {
+    config_profile_name        = 'Test profile'
+    config_profile_description = 'Minimal test dataset to check pipeline function'
+
+    // Limit resources so that this can run on GitHub Actions
+    max_cpus   = 2
+    max_memory = '6.GB'
+    max_time   = '6.h'
+
+    // Input data
+    input  = 'https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv'
+
+    // Genome references
+    genome = 'R64-1-1'
+}
+```
 
 !!! question "Exercise"
 
-    Test the execution of the nf-core/demo pipeline using the following command:
+    Test the execution of the `nf-core/demo` pipeline using the following command:
 
     ```
     nextflow run nf-core/demo -profile test,gitpod,singularity -r master --outdir results
     ```
 
     This execution command will be explained in the next section.
-
-Subsequent runs can use the `-resume` options to utilize the cache.
 
 ## Configuration
 

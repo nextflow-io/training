@@ -86,11 +86,9 @@ Instead, you can use Nextflow’s built-in functionality to `pull` a pipeline:
 nextflow pull nf-core/demo
 ```
 
-Similarly, Nextflow `run` command will also automatically `pull` the pipeline if it was not already available locally:
+!!! note "nextflow run"
 
-```bash
-nextflow run nf-core/demo
-```
+    The `nextflow run` command will also automatically `pull` the pipeline if it was not already available locally.
 
 Nextflow will `pull` the default git branch if a pipeline version is not specified. This will be the master branch for nf-core pipelines with a stable release.
 
@@ -98,10 +96,10 @@ nf-core pipelines use GitHub releases to tag stable versions of the code and sof
 
 !!! question "Exercise"
 
-    Pull the latest version of the `nf-core/demo` pipeline directly from GitHub:
+    Pull the dev of the `nf-core/demo` pipeline directly from GitHub:
 
     ```bash
-    nextflow pull nf-core/demo -r master
+    nextflow pull nf-core/demo -r dev
     ```
 
     Check that it has been pulled by listing your cached pipelines:
