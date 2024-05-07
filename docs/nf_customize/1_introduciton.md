@@ -4,7 +4,7 @@ nf-core is a community effort to collaborate on a curated set of analysis pipeli
 
 nf-core pipelines are designed to work out of the box. However, many researchers will want to customize their execution to deploy them to different infrastructures, activate or deactivate pipeline features, and selectively customize tool parameters. For this, researchers need to understand how these pipelines fit together and how to apply configuration options.
 
-Using the [nf-core/demo](https://github.com/nf-core/demo) pipeline as an example, you will first identify the files and code contributing to the default pipeline configuration. Next, you will customize the pipeline using parameters and configuration files. Finally, you will track the provenance of each execution using reports and logs.
+Using the [nf-core/demo](https://github.com/nf-core/demo) pipeline as an example you will learn how customize parameters and configuration files.
 
 Let's get started!
 
@@ -17,7 +17,6 @@ By the end of this workshop you will be able to:
 -   Discuss the ways an nf-core pipeline can be customized
 -   Identify the files and code contributing to the default pipeline configuration
 -   Utilize nf-core tooling to list, launch, and download pipelines
--   Track the provenance of your pipeline executions
 
 ## Audience & prerequisites
 

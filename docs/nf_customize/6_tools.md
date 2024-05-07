@@ -37,7 +37,7 @@ A pipeline can have a large number of optional parameters. To help with this, th
 The nf-core `launch` command takes one argument - either the name of an nf-core pipeline which will be pulled automatically **or** the path to a directory containing a Nextflow pipeline:
 
 ```bash
-nf-core launch nf-core/<pipeline>
+nf-core launch nf-core/demo
 ```
 
 When running this command, you will first be asked about which version of the pipeline you would like to execute. Next, you will be given the choice between a web-based graphical interface or an interactive command-line wizard tool to enter the pipeline parameters. Both interfaces show documentation alongside each parameter, will generate a run ID, and will validate your inputs.
@@ -50,22 +50,20 @@ The command line wizard will finish by asking if you want to launch the pipeline
 
 !!! question "Exercise"
 
-    Use `nf-core launch` to launch the the `nf-core/demo` pipeline. Use the `test` and `singularity` profiles and name your output folder `my_test_output`.
+    Use `nf-core launch` to launch the the `nf-core/demo` pipeline. Use the full path to your samplesheet and the `singularity` profile.
 
-    ??? success "Solution"
+    Use the nf-core `launch` command for the `nf-core/demo` pipeline. Your `nf-params.json` file should look like this:
 
-        Use the nf-core `launch` command for the `nf-core/demo` pipeline. Your `nf-params.json` file should look like this:
-
-        ```json
-        {
-            "outdir": "my_test_output"
-        }
-        ```
+    ```json
+    {
+        "outdir": "my_test_output"
+    }
+    ```
 
         Your final `run` command should look like this:
 
         ```bash
-        nextflow run nf-core/demo -r dev -profile test,singularity -params-file nf-params.json
+        nextflow run nf-core/demo -r dev -profile singularity -params-file nf-params.json
         ```
 
 !!! tip "The launch website"
