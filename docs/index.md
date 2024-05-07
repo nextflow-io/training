@@ -55,7 +55,17 @@ We have several workshops available on this website - find the one that's right 
 
     [Launch the Hello Nextflow Training:material-arrow-right:](hello_nextflow/index.md){ .md-button }
 
-!!! exercise "nf-core Pipeline Template"
+!!! exercise "Customizing nf-core"
+
+    !!! quote inline end ""
+
+        :material-run-fast: This course will help you to understand how to customize the execution of an nf-core pipeline.
+
+    A "learn by doing" pipeline development tutorial focusing on the configuration of nf-core pipelines.
+
+    [Launch the Customizing nf-core Training :material-arrow-right:](nf_customize/1_introduction.md){ .md-button }
+
+!!! exercise "nf-core Template"
 
     !!! quote inline end ""
 
