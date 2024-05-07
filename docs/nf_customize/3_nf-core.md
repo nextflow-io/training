@@ -1,4 +1,4 @@
-# nf-core
+# What is nf-core?
 
 nf-core is a community effort to collect a curated set of analysis pipelines built using Nextflow.
 

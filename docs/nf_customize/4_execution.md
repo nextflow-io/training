@@ -39,8 +39,6 @@ You can explore the documentation for the `nf-core/demo` pipeline [here](https:/
 
 ## Your first `nf-core/demo` execution command
 
-Here you will build your first `nf-core/demo` execution command.
-
 Each nf-core pipeline comes with extensive usage documentation to help you understand the requirements for running each pipeline.
 
 You can explore the usage documentation for the `nf-core/demo` pipeline [here](https://nf-co.re/demo/docs/usage).
@@ -49,7 +47,7 @@ Notably, the `nf-core/demo` pipeline **requires** two parameters (`--input` and 
 
 Without these, the pipeline will not launch and nextflow will throw an error.
 
-## `--input`
+### `--input`
 
 The `--input` parameter requires a path to comma-separated file containing information about the samples in the experiment.
 
@@ -61,7 +59,7 @@ Using the nf-core/demo usage documentation, you can see that it requires a comma
 
 This is for 3 samples:
 
-```csv "samplesheet.csv"
+```csv title="samplesheet.csv"
 sample,fastq_1,fastq_2
 SAMPLE1_PE,path/to/sample1_R1.fastq.gz,path/to/sample1_R2.fastq.gz
 SAMPLE2_PE,path/to/sample2_R1.fastq.gz,path/to/sample2_R2.fastq.gz
@@ -82,7 +80,7 @@ The pipeline will auto-detect whether a sample is single- or paired-end and if a
 
     Next, fill is with the header line, and for each sample, an id and the complete paths to the forward and reverse reads:
 
-    ```csv "samplesheet.csv"
+    ```csv title="samplesheet.csv"
     sample,fastq_1,fastq_2
     gut,/workspace/gitpod/nf-customize/data/gut_1.fq.gz,/workspace/gitpod/nf-customize/data/gut_2.fq.gz
     liver,/workspace/gitpod/nf-customize/data/liver_1.fq.gz,/workspace/gitpod/nf-customize/data/liver_2.fq.gz
@@ -91,7 +89,7 @@ The pipeline will auto-detect whether a sample is single- or paired-end and if a
 
     Make sure it is saved in your working directory (`/workspace/gitpod/nf-customize/`)
 
-## `--outdir`
+### `--outdir`
 
 The `--output` parameter is used to name the output directory where the results will be saved.
 
@@ -138,5 +136,3 @@ Here, we will can add the `singularity` profile to our execution command, which 
     ```
 
     The `nf-core/demo` pipeline should now run successfully.
-
-##

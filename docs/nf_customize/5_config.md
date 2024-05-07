@@ -20,7 +20,7 @@ While some of these files are already included in the nf-core pipeline repositor
 
 Understanding how and when these files are interpreted by Nextflow is critical for the accurate configuration of a pipelines execution.
 
-### Parameters
+## Parameters
 
 Parameters are pipeline specific settings that can be used to customise the execution of a pipeline.
 
@@ -36,7 +36,7 @@ Parameters and their descriptions can also be viewed in the command line using t
     nextflow run nf-core/demo -r dev --help
     ```
 
-### Parameters in the command line
+## Parameters in the command line
 
 At the highest level, parameters can be customised using the command line. Any parameter can be configured on the command line by prefixing the parameter name with a double dash (`--`):
 
@@ -62,7 +62,7 @@ nextflow nf-core/demo -r dev --<parameter> string
     nextflow run nf-core/demo -r dev --input samplesheet.csv --outdir results_new -profile singularity
     ```
 
-### Default configuration files
+## Default configuration files
 
 All parameters will have a default setting that is defined using the `nextflow.config` file in the pipeline project directory. By default, most parameters are set to `null` or `false` and are only activated by a profile or configuration file.
 
@@ -110,13 +110,13 @@ nf-core pipelines are required to define software containers and environments th
 
     The `test` data profile will pull small test files directly from the `nf-core/test-data` GitHub repository and run it on your local system. The `test` profile is an important control to check the pipeline is working as expected and is a great way to trial a pipeline. Some pipelines have multiple test `profiles` for you to try.
 
-### Shared configuration files
+## Shared configuration files
 
 An `includeConfig` statement in the `nextflow.config` file is also used to include custom institutional profiles that have been submitted to the nf-core [config repository](https://github.com/nf-core/configs). At run time, nf-core pipelines will fetch these configuration profiles from the [nf-core config repository](https://github.com/nf-core/configs) and make them available.
 
 For shared resources such as an HPC cluster, you may consider developing a shared institutional profile. You can follow [this tutorial](https://nf-co.re/docs/usage/tutorials/step_by_step_institutional_profile) for more help.
 
-### Custom configuration files
+## Custom configuration files
 
 Nextflow will also look for files that are external to the pipeline project directory. These files include:
 
@@ -314,6 +314,8 @@ In the example above, the nf-core [`MULTIQC`](https://github.com/nf-core/demo/bl
     ```bash
     ls
     ```
+
+## Mixing configuration
 
 It is important to consider how the different configuration options interact during each execution and how you can apply these to minimise mistakes and extra configuration.
 
