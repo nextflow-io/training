@@ -238,7 +238,7 @@ The `process` scope allows you to configure pipeline processes and is used exten
 
 By default, process resources are allocated in the `conf/base.config` file using the `withLabel` selector:
 
-```bash title="base.config"
+```bash title="conf/base.config"
 process {
     withLabel: BIG_JOB {
         cpus = 16
