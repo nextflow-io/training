@@ -149,7 +149,7 @@ nf-core pipelines come with a series of profiles for running the pipelines using
 
 Here, you will need to add the `singularity` profile to your execution command, which will download and enable software images to run each process.
 
-!!! Exercise
+!!! question "Exercise"
 
     Execute the command again, but this time with the singularity profile:
 
@@ -193,7 +193,7 @@ params {
 }
 ```
 
-!!! tip "Using multiple profiles"
+!!! note "Using multiple profiles"
 
     Multiple profiles can be specified in a comma-separated (`,`) list when you execute your command. The order of profiles is important as they will be read from left to right, for example:
 
@@ -203,7 +203,7 @@ params {
 
 Note that the test profile for nf-core/demo has supplied an `input` but no `outdir`, meaning that an `outdir` must still be added to your execution command separately.
 
-!!! Exercise
+!!! question "Exercise"
 
     Execute `nf-core/demo` using the test and singularity profiles:
 
@@ -211,7 +211,7 @@ Note that the test profile for nf-core/demo has supplied an `input` but no `outd
     nextflow run nf-core/demo -r dev -profile test,singularity --outdir results
     ```
 
-!!! tip "Utilizing profiles"
+!!! note "Utilizing profiles"
 
     If you're computer has internet access and one of Conda, Singularity, or Docker installed, you should be able to run any nf-core pipeline with the `test` profile and the respective software management profile 'out of the box'.
 

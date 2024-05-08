@@ -44,7 +44,7 @@ At the highest level, parameters can be customised using the command line. Any p
 nextflow nf-core/demo --<parameter>
 ```
 
-!!! tip "When to use `--` and `-`"
+!!! note "When to use `--` and `-`"
 
     Nextflow options are prefixed with a single dash (`-`) and pipeline parameters are prefixed with a double dash (`--`).
 
