@@ -94,27 +94,15 @@ Profiles used by nf-core pipelines can be broadly categorised into two groups:
 -   **Test profiles**
     -   Profiles to execute the pipeline with a standardised set of test data and parameters, e.g., `test` and `test_full`.
 
-!!! tip "Multiple profiles"
-
-    Multiple profiles can be specified in a comma-separated (`,`) list when you execute your command. The order of profiles is important as they will be read from left to right, for example:
-
-    ```bash
-    nextflow run nf-core/demo -profile test,singularity -r dev --outdir results
-    ```
-
 nf-core pipelines are required to define software containers and environments that can be activated using profiles. Although it is possible to run the pipelines with software installed by other methods (e.g., environment modules or manual installation), using Docker or Singularity is more convenient and more reproducible.
-
-!!! tip "Utilizing profiles"
-
-    If you're computer has internet access and one of Conda, Singularity, or Docker installed, you should be able to run any nf-core pipeline with the `test` profile and the respective software management profile 'out of the box'.
-
-    The `test` data profile will pull small test files directly from the `nf-core/test-data` GitHub repository and run it on your local system. The `test` profile is an important control to check the pipeline is working as expected and is a great way to trial a pipeline. Some pipelines have multiple test `profiles` for you to try.
 
 ## Shared configuration files
 
 An `includeConfig` statement in the `nextflow.config` file is also used to include custom institutional profiles that have been submitted to the nf-core [config repository](https://github.com/nf-core/configs). At run time, nf-core pipelines will fetch these configuration profiles from the [nf-core config repository](https://github.com/nf-core/configs) and make them available.
 
-For shared resources such as an HPC cluster, you may consider developing a shared institutional profile. You can follow [this tutorial](https://nf-co.re/docs/usage/tutorials/step_by_step_institutional_profile) for more help.
+For shared resources such as an HPC cluster, you may consider developing a shared institutional profile.
+
+You can follow [this tutorial](https://nf-co.re/docs/usage/tutorials/step_by_step_institutional_profile) for more help.
 
 ## Custom configuration files
 
@@ -197,7 +185,9 @@ alpha {
 }
 ```
 
-Scopes allow you to quickly configure settings required to deploy a pipeline on different infrastructure using different software management. For example, the `executor` scope can be used to provide settings for the deployment of a pipeline on a HPC cluster. Similarly, the `singularity` scope controls how Singularity containers are executed by Nextflow.
+Scopes allow you to quickly configure settings required to deploy a pipeline on different infrastructure using different software management.
+
+For example, the `executor` scope can be used to provide settings for the deployment of a pipeline on a HPC cluster. Similarly, the `singularity` scope controls how Singularity containers are executed by Nextflow.
 
 A common scenario is for users to write a custom configuration file specific to running a pipeline on their infrastructure.
 
@@ -205,7 +195,18 @@ A common scenario is for users to write a custom configuration file specific to 
 
     Do not use -c <file> to specify parameters as this will result in errors. Custom config files specified with -c must only be used for tuning process resource specifications, other infrastructural tweaks (such as output directories), or module arguments (args).
 
-Multiple scopes can be included in the same `.config` file using a mix of dot prefixes and curly brackets. A full list of scopes is described in detail [here](https://www.nextflow.io/docs/latest/config.html#config-scopes).
+Multiple scopes can be included in the same `.config` file using a mix of dot prefixes and curly brackets.
+
+```console title="mycustom.config"
+executor.name = "sge"
+
+singularity {
+    enabled    = true
+    autoMounts = true
+}
+```
+
+A full list of scopes is described in detail [here](https://www.nextflow.io/docs/latest/config.html#config-scopes).
 
 !!! question "Exercise"
 
@@ -262,7 +263,7 @@ While some tool arguments are included as a part of a module. To make modules sh
 
 Importantly, having these arguments outside of the module also allows them to be customised at runtime.
 
-For example, if you were trying to add arguments in the `MULTIQC` process in the `nf-core/demo` pipeline, you could use the process scope:
+For example, if you wanted to add arguments to the `MULTIQC` process in the `nf-core/demo` pipeline, you could use the process scope and the `withName` selector:
 
 ```console title="mycustomconfig.config"
 process {
@@ -289,9 +290,13 @@ In the example above, the nf-core [`MULTIQC`](https://github.com/nf-core/demo/bl
 
     Modify your existing `mycustomconfig.config` by adding a process scope with the `withName` selector. Modify the `publishDir` path to create a `multiqc` folder directly inside your working directory:
 
+    Start by opening `mycustomconfig.config` that contains your singularity scope:
+
     ```bash
     code mycustomconfig.config
     ```
+
+    Next, using a `process` scope and using the `withName` selector for `MULTIQC`, change the `publishDir` to `"multiqc"`.
 
     ```console title="custom.config"
     process {
@@ -315,7 +320,7 @@ In the example above, the nf-core [`MULTIQC`](https://github.com/nf-core/demo/bl
     ls
     ```
 
-## Mixing configuration
+## Mixing configuration files
 
 It is important to consider how the different configuration options interact during each execution and how you can apply these to minimise mistakes and extra configuration.
 

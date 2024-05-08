@@ -2,7 +2,15 @@
 
 nf-core tools has additional commands to help users execute pipelines. Although you do not need to use these commands to execute the nf-core pipelines, they can greatly improve and simplify your experience.
 
-There are also nf-core tools for developers. However, these will not be covered as a part of this workshop. If you are curious to learn more about these tools you can find more information on the nf-core websites [tools page](https://nf-co.re/tools/). There are also lots of excellent ByteSize talks on the [nf-core YouTube channel](https://www.youtube.com/c/nf-core).
+nf-core tools are for everyone and has commands to help both users and developers.
+
+For users, the tools make it easier to execute pipelines.
+
+There are also nf-core tools for developers. However, these will not be covered as a part of this workshop. If you are curious to learn more about nf-core developer tools you can visit the websites [tools page](https://nf-co.re/tools/) and complete the Develop a pipeline with the nf-core template training.
+
+!!! question "Exercise"
+
+    Find out what nf-core commands and options are available using the `nf-core --help` option.
 
 ## `nf-core list`
 
@@ -37,10 +45,12 @@ A pipeline can have a large number of optional parameters. To help with this, th
 The nf-core `launch` command takes one argument - either the name of an nf-core pipeline which will be pulled automatically **or** the path to a directory containing a Nextflow pipeline:
 
 ```bash
-nf-core launch nf-core/demo
+nf-core launch
 ```
 
 When running this command, you will first be asked about which version of the pipeline you would like to execute. Next, you will be given the choice between a web-based graphical interface or an interactive command-line wizard tool to enter the pipeline parameters. Both interfaces show documentation alongside each parameter, will generate a run ID, and will validate your inputs.
+
+![nf-core launch](img/launch.png)
 
 The nf-core `launch` tool uses the `nextflow_schema.json` file from a pipeline to give parameter descriptions, defaults, and grouping. If no file for the pipeline is found, one will be automatically generated at runtime.
 
@@ -50,13 +60,19 @@ The command line wizard will finish by asking if you want to launch the pipeline
 
 !!! question "Exercise"
 
-    Use `nf-core launch` to launch the the `nf-core/demo` pipeline. Use the full path to your samplesheet and the `singularity` profile.
+    Use `nf-core launch` to launch the the `nf-core/demo` pipeline.
 
-    Use the nf-core `launch` command for the `nf-core/demo` pipeline. Your `nf-params.json` file should look like this:
+    Make sure you add:
+        - The full path to your samplesheet (`input`)
+        - An output directory (`outdir`)
+        - The `singularity` profile
+
+    Use the nf-core `launch` command for the `nf-core/demo` pipeline. Your `nf-params.json` file should look something like this:
 
     ```json
     {
-        "outdir": "my_test_output"
+        "input": "/workspace/gitpod/nf-customize/samplesheet.csv",
+        "outdir": "results"
     }
     ```
 
