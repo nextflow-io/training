@@ -1,4 +1,4 @@
-# Configuration options
+# Demystifying configuration options
 
 Each nf-core pipeline comes with a set of “sensible defaults”. While the defaults are a great place to start, you will almost certainly want to modify these to fit your own purposes and system requirements.
 
@@ -24,24 +24,10 @@ Understanding how and when these files are interpreted by Nextflow is critical f
 
 Parameters are pipeline specific settings that can be used to customise the execution of a pipeline.
 
-Every nf-core pipeline has a full list of parameters on the nf-core website. When viewing these parameters, you will also be shown a description and the type of the parameter. Some parameters will have additional text to help you understand how a parameter should be used.
-
-Parameters and their descriptions can also be viewed in the command line using the `run` command with the `--help` parameter.
-
-!!! question "Exercise"
-
-    View the parameters for the `nf-core/demo` pipeline using the command line:
-
-    ```bash
-    nextflow run nf-core/demo -r dev --help
-    ```
-
-## Parameters in the command line
-
 At the highest level, parameters can be customised using the command line. Any parameter can be configured on the command line by prefixing the parameter name with a double dash (`--`):
 
 ```bash
-nextflow nf-core/demo --<parameter>
+--<parameter>
 ```
 
 !!! note "When to use `--` and `-`"
@@ -53,6 +39,18 @@ Depending on the parameter type, you may be required to add additional informati
 ```bash
 nextflow nf-core/demo -r dev --<parameter> string
 ```
+
+Every nf-core pipeline has a full list of parameters on the nf-core website. When viewing these parameters, you will also be shown a description and the type of the parameter. Some parameters will have additional text to help you understand how a parameter should be used.
+
+Parameters and their descriptions can also be viewed in the command line using the `run` command with the `--help` parameter.
+
+!!! question "Exercise"
+
+    View the parameters for the `nf-core/demo` pipeline using the command line:
+
+    ```bash
+    nextflow run nf-core/demo -r dev --help
+    ```
 
 ## Default configuration files
 

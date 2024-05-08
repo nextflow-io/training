@@ -1,6 +1,6 @@
 # What is nf-core?
 
-![Gitpod welcome](img/nf-core-logo.png)
+![nf-core logo](img/nf-core-logo.png)
 
 nf-core is a community effort to collect a curated set of analysis pipelines built using Nextflow.
 
@@ -48,15 +48,13 @@ Each released pipeline has a dedicated page that includes expansive documentatio
 
 ## Pulling an nf-core pipeline
 
-Unless you intend to develop an nf-core pipeline independently, you do not need to clone a copy of a pipeine.
-
-Instead, you can use Nextflow’s built-in functionality to `pull` a pipeline:
+Unless you intend to develop an nf-core pipeline independently, you do not need to clone a copy of a pipeine. Instead, you can use Nextflow’s built-in functionality to `pull` a pipeline:
 
 ```bash
 nextflow pull nf-core/demo
 ```
 
-!!! note "nextflow run"
+!!! note "The `nextflow run` command"
 
     The `nextflow run` command will also automatically `pull` the pipeline if it was not already available locally.
 

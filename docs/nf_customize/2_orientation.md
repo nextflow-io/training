@@ -4,7 +4,7 @@ This workshop should be completed using the [Nextflow Training Gitpod Environmen
 
 Gitpod offers a virtual machine with everything already set up for you, accessible from your web browser or built into your code editor (e.g., VSCode).
 
-To start, click on the button below.
+To get started quickly, click on the button below.
 
 [![Open in Gitpod](https://img.shields.io/badge/Gitpod-%20Open%20in%20Gitpod-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/nextflow-io/training)
 
@@ -18,8 +18,6 @@ To run Gitpod:
 
 !!! note "Getting Started with GitHub"
 
-    [GitHub](https://github.com/) is a web-based interface allowing real-time collaboration. It encourages teams to work together in developing code. With GitHub, you can easily track changes, navigate revisions, and automate some of the more mundane tasks, such as testing.
-
     To get started with GitHub, you will need to create a free personal account on [github.com](https://github.com/) and verify your email address.
 
     Every person who uses github.com signs in to a personal account. Your account is your identity and has a username and profile.
@@ -30,15 +28,11 @@ To run Gitpod:
     2. Click `Sign up` at the top right corner.
     3. Follow the prompts to create your account.
 
-!!! warning "Verified accounts"
-
-    You won't be able to complete some basic GitHub tasks, such as creating a repository, without a verified email address.
-
-When you first sign up to Gitpod you may need to authenticate your account.
+When you first sign up to Gitpod you may need to authenticate your account and supply some additional details.
 
 ### Explore your Gitpod IDE
 
-You should now see something similar to the following:
+After Gitpod has loaded, you should now see something similar to the following:
 
 ![Gitpod welcome](img/gitpod.welcome.png)
 
