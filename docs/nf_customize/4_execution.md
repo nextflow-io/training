@@ -121,7 +121,7 @@ Caused by:
 
 Fortunately, nf-core pipelines come packed with directives for containers and environments that can be flexibly enabled during execution. You will learn more about this below.
 
-### Profiles
+### `-profile`
 
 Configuration files can contain the definition of one or more profiles. A profile is a set of configuration attributes that can be selected during pipeline execution by using the `-profile` command line option.
 
@@ -129,7 +129,7 @@ Configuration files can contain the definition of one or more profiles. A profil
 -profile <profile name>
 ```
 
-Configuration profiles are defined by using the special scope`profiles`, which group the attributes that belong to the same profile using a common prefix. For example:
+Configuration profiles are defined by using the special scope `profile`, which group the attributes that belong to the same profile using a common prefix. For example:
 
 ```console title="example.config"
 process.cpus = 1
