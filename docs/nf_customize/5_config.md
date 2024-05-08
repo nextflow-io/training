@@ -54,14 +54,6 @@ Depending on the parameter type, you may be required to add additional informati
 nextflow nf-core/demo -r dev --<parameter> string
 ```
 
-!!! question "Exercise"
-
-    Give the pipeline a different output directory using the `outdir` parameter:
-
-    ```bash
-    nextflow run nf-core/demo -r dev --input samplesheet.csv --outdir results_new -profile singularity
-    ```
-
 ## Default configuration files
 
 All parameters will have a default setting that is defined using the `nextflow.config` file in the pipeline project directory. By default, most parameters are set to `null` or `false` and are only activated by a profile or configuration file.
@@ -104,7 +96,7 @@ For shared resources such as an HPC cluster, you may consider developing a share
 
 You can follow [this tutorial](https://nf-co.re/docs/usage/tutorials/step_by_step_institutional_profile) for more help.
 
-## Custom configuration files
+## Custom parameter and configuration files
 
 Nextflow will also look for files that are external to the pipeline project directory. These files include:
 
