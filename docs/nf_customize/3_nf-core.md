@@ -64,7 +64,7 @@ Nextflow will `pull` the default git branch if a pipeline version is not specifi
 
 nf-core pipelines use GitHub releases to tag stable versions of the code and software. You will always be able to execute a previous version of a pipeline once it is released using the `-revision` or `-r` option.
 
-Similarly, you can use the `-r` option to specify a GitHub branch. 
+Similarly, you can use the `-r` option to specify a GitHub branch.
 
 !!! question "Exercise"
 
