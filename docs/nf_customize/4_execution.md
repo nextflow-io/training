@@ -131,7 +131,7 @@ Configuration files can contain the definition of one or more profiles. A profil
 
 Configuration profiles are defined by using the special scope`profiles`, which group the attributes that belong to the same profile using a common prefix. For example:
 
-```
+```console title="example.config"
 process.cpus = 1
 
 profiles {
@@ -165,7 +165,7 @@ The `test` profile can be very useful for performing a test run of nf-core pipel
 
 The `test` profile for `nf-core/demo` is shown below:
 
-```groovy title="conf/test.config"
+```groovy title="conf/test.config" linenums="1"
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Nextflow config file for running minimal tests
