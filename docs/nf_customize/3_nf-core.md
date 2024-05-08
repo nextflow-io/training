@@ -29,47 +29,15 @@ nf-core is published in Nature Biotechnology: [Nat Biotechnol 38, 276–278 (202
 
 It is important to remember all nf-core pipelines are open-source, community driven, and are under active community development.
 
-## nf-core tools
-
-This workshop will make use of nf-core tools, a set of helper tools for use with Nextflow pipelines. These tools have been developed to provide a range of additional functionality for using, developing, and testing pipelines.
-
-??? tip "How to download nf-core tools"
-
-    nf-core tools is written in Python and is available from the [Python Package Index (PyPI)](https://pypi.org/project/nf-core/):
-
-    ```bash
-    pip install nf-core
-    ```
-
-The nf-core `--version` option can be used to print your version of nf-core tools:
-
-```bash
-nf-core --version
-```
-
-!!! question "Exercise"
-
-    Find out what version of nf-core tools you have available using the `nf-core --version` command.
-
-nf-core tools are for everyone and has commands to help both users and developers.
-
-For users, the tools make it easier to execute pipelines.
-
-For developers, the tools make it easier to develop and test your pipelines using best practices.
-
-!!! question "Exercise"
-
-    Find out what nf-core commands and options are available using the `nf-core --help` option.
-
 ## nf-core pipelines
 
-There are currently >100 pipelines (April 2024) available as part of nf-core.
+There are currently >100 nf-core pipelines (April 2024).
 
 These pipelines are at various stages of development with 60 released, 34 under development, and 11 archived.
 
-The [nf-core website](https://nf-co.re/) has a full list of pipelines, as well as their documentation, which can be explored.
+The [nf-core website](https://nf-co.re/) contains a full list of pipelines, as well as their documentation, which can be explored.
 
-Each pipeline has a dedicated page that includes expansive documentation that is split into 6 sections:
+Each released pipeline has a dedicated page that includes expansive documentation that is split into 6 sections:
 
 -   **Introduction:** An introduction and overview of the pipeline
 -   **Usage:** Descriptions of how to execute the pipeline
@@ -94,11 +62,13 @@ nextflow pull nf-core/demo
 
 Nextflow will `pull` the default git branch if a pipeline version is not specified. This will be the master branch for nf-core pipelines with a stable release.
 
-nf-core pipelines use GitHub releases to tag stable versions of the code and software. You will always be able to execute a previous version of a pipeline once it is released using the `-revision` or `-r` flag.
+nf-core pipelines use GitHub releases to tag stable versions of the code and software. You will always be able to execute a previous version of a pipeline once it is released using the `-revision` or `-r` option.
+
+Similarly, you can use the `-r` option to specify a GitHub branch. 
 
 !!! question "Exercise"
 
-    Pull the dev of the `nf-core/demo` pipeline directly from GitHub:
+    Pull the `dev` branch of the `nf-core/demo` pipeline from GitHub:
 
     ```bash
     nextflow pull nf-core/demo -r dev
@@ -108,4 +78,10 @@ nf-core pipelines use GitHub releases to tag stable versions of the code and sof
 
     ```bash
     nextflow list
+    ```
+
+    You can also view pipelines in your hidden assets folder:
+
+    ```bash
+    ls $HOME/.nextflow/assets/
     ```
