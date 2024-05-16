@@ -18,17 +18,17 @@ To run Gitpod:
 
 ### Getting Started with GitHub
 
-    [GitHub](https://github.com/) is a web-based interface allowing real-time collaboration. It encourages teams to work together in developing code. With GitHub, you can easily track changes, navigate revisions, and automate some of the more mundane tasks, such as testing.
+[GitHub](https://github.com/) is a web-based interface allowing real-time collaboration. It encourages teams to work together in developing code. With GitHub, you can easily track changes, navigate revisions, and automate some of the more mundane tasks, such as testing.
 
-    To get started with GitHub, you will need to create a free personal account on [github.com](https://github.com/) and verify your email address.
+To get started with GitHub, you will need to create a free personal account on [github.com](https://github.com/) and verify your email address.
 
-    Every person who uses github.com signs in to a personal account. Your account is your identity and has a username and profile.
+Every person who uses github.com signs in to a personal account. Your account is your identity and has a username and profile.
 
-    Signing up for a new personal account:
+Signing up for a new personal account:
 
-    1. Navigate to [https://github.com/](https://github.com/).
-    2. Click `Sign up` at the top right corner.
-    3. Follow the prompts to create your account.
+1. Navigate to [https://github.com/](https://github.com/).
+2. Click `Sign up` at the top right corner.
+3. Follow the prompts to create your account.
 
 !!! warning "Verified accounts"
 

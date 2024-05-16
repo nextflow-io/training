@@ -110,9 +110,9 @@ nextflow run hello-gatk.nf
     | ----------------- | ----------------| -----------------------------------|
     | --sample-name-map | null            | Path to file containing a mapping of sample name to file uri in tab delimited format. If this is specified then the header from the first sample will be treated as the merged header rather than merging the headers, and the sample names will be taken from this file. This may be used to rename input samples. This is a performance optimization that relaxes the normal checks for consistent headers. Using vcfs with incompatible headers may result in silent data corruption. |
 
-    Although the documentation does not explicitly describe the error, it highlights the importance of the strucutre of the map, something that is also suggested in the error message.
+    Although the documentation does not explicitly describe the error, it highlights the importance of the structure of the map, something that is also suggested in the error message.
 
-    By reviewing the code where the `sample_map` channel is created, it can be seem that the map has `/` rather than `\` for the tab delimiter.
+    By reviewing the code where the `sample_map` channel is created, it can be seen that the map has `/` rather than `\` for the tab delimiter.
 
     ```console title="hello-gatk.nf" linenums="119"
     // Create a sample map of the output GVCFs
