@@ -63,7 +63,7 @@ The command line wizard will finish by asking if you want to launch the pipeline
     Use `nf-core launch` to launch the the `nf-core/demo` pipeline.
 
     Make sure you add:
-        - The full path to your samplesheet (`input`)
+        - The full path to your sample sheet (`input`)
         - An output directory (`outdir`)
         - The `singularity` profile
 
@@ -131,3 +131,4 @@ Alternatively, you could build your own execution command with the command line 
       Output directory: 'nf-core-demo_dev'
       Include default institutional configuration: 'False'
     ```
+    
