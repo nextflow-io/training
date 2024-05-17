@@ -131,4 +131,3 @@ Alternatively, you could build your own execution command with the command line 
       Output directory: 'nf-core-demo_dev'
       Include default institutional configuration: 'False'
     ```
-    
