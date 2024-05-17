@@ -69,12 +69,12 @@ To save any file from the explorer panel, right-click the file and select `Downl
 
 ## Getting started
 
-You will need to move into the `nf-template` folder to get started.
+You will need to move into the `nf-develop` folder to get started.
 
 !!! question "Exercise"
 
-    Open the [Gitpod training environment](https://gitpod.io/#https://github.com/nextflow-io/training) and use the following command to switch to the empty `nf-templates` folder:
+    Open the [Gitpod training environment](https://gitpod.io/#https://github.com/nextflow-io/training) and use the following command to switch to the empty `nf-develop` folder:
 
     ```bash
-    cd /workspace/gitpod/nf-template
+    cd /workspace/gitpod/nf-develop
     ```

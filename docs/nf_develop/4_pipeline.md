@@ -24,7 +24,7 @@ Additional test profiles can be created to test different parts of your pipeline
     Run your pipeline with the `test` and `docker` profile.
 
     ```bash
-    cd /workspace/gitpod/nf-template
+    cd /workspace/gitpod/nf-develop
     nextflow run nf-core-myfirstpipeline -profile test,docker --outdir results
     ```
 

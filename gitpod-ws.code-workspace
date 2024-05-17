@@ -5,6 +5,8 @@
         { "path": "./hands-on" },
         { "path": "./hello-nextflow" },
         { "path": "./troubleshoot" },
+        { "path": "./nf-customize" },
+        { "path": "./nf-develop" },
     ],
     "settings": {
         "typescript.tsdk": "gitpod/node_modules/typescript/lib",
