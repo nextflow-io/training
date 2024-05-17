@@ -93,7 +93,7 @@ We have several workshops available on this website - find the one that's right 
 
     A "learn by doing" troubleshooting tutorial for pipeline developers and users.
 
-    [Launch the troubleshooting exercises training :material-arrow-right:](troubleshoot/introduction.md){ .md-button }
+    [Launch the troubleshooting training :material-arrow-right:](troubleshoot/introduction.md){ .md-button }
 
 ## Resources
 
