@@ -53,11 +53,11 @@ nav:
           - nf_customize/5_config.md
           - nf_customize/6_tools.md
     - Develop nf-core:
-          - nf_template/1_introduction.md
-          - nf_template/2_orientation.md
-          - nf_template/3_create.md
-          - nf_template/4_pipeline.md
-          - nf_template/5_customizing.md
+          - nf_develop/1_introduction.md
+          - nf_develop/2_orientation.md
+          - nf_develop/3_create.md
+          - nf_develop/4_pipeline.md
+          - nf_develop/5_customizing.md
     - Troubleshooting:
           - troubleshoot/introduction.md
           - troubleshoot/orientation.md
@@ -164,7 +164,7 @@ plugins:
               - advanced/operators.md
               - hello_nextflow/01_orientation.md
               - nf_customize/1_introduction.md
-              - nf_template/1_introduction.md
+              - nf_develop/1_introduction.md
               - troubleshoot/introduction.md
           exclude:
               - index.md
