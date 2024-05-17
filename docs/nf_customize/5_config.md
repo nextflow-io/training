@@ -56,7 +56,7 @@ Parameters and their descriptions can also be viewed in the command line using t
 
 All parameters will have a default setting that is defined using the `nextflow.config` file in the pipeline project directory. By default, most parameters are set to `null` or `false` and are only activated by a profile or configuration file.
 
-There are also several `includeConfig` statements in the `nextflow.config` file that are used to include additional `.config` files from the `conf/` folder. Each additional `.config` file contains categorised configuration information for your pipeline execution, some of which can be optionally included:
+There are also several `includeConfig` statements in the `nextflow.config` file that are used to include additional `.config` files from the `conf/` folder. Each additional `.config` file contains categorized configuration information for your pipeline execution, some of which can be optionally included:
 
 -   `base.config`
     -   Included by the pipeline by default.
@@ -75,16 +75,16 @@ There are also several `includeConfig` statements in the `nextflow.config` file 
     -   Only included if specified as a profile.
     -   A configuration profile to test the pipeline with a full-size test dataset.
 
-Notably, configuration files contain the definition of profiles.
+Notably, some configuration files contain the definition of profiles.
 
 Profiles used by nf-core pipelines can be broadly categorised into two groups:
 
 -   **Software management profiles**
     -   Profiles for the management of software using software management tools, e.g., `docker`, `singularity`, and `conda`.
 -   **Test profiles**
-    -   Profiles to execute the pipeline with a standardised set of test data and parameters, e.g., `test` and `test_full`.
+    -   Profiles to execute the pipeline with a standardized set of test data and parameters, e.g., `test` and `test_full`.
 
-nf-core pipelines are required to define software containers and environments that can be activated using profiles. Although it is possible to run the pipelines with software installed by other methods (e.g., environment modules or manual installation), using Docker or Singularity is more convenient and more reproducible.
+nf-core pipelines are required to define software containers and environments that can be activated using profiles. Although it is possible to run the pipelines with software installed by other methods (e.g., environment modules or manual installation), using Docker or Singularity is more convenient and reproducible.
 
 ## Shared configuration files
 
@@ -92,7 +92,7 @@ An `includeConfig` statement in the `nextflow.config` file is also used to inclu
 
 For shared resources such as an HPC cluster, you may consider developing a shared institutional profile.
 
-You can follow [this tutorial](https://nf-co.re/docs/usage/tutorials/step_by_step_institutional_profile) for more help.
+You can follow [this tutorial](https://nf-co.re/docs/usage/tutorials/step_by_step_institutional_profile) for more help setting up an institutional profile.
 
 ## Custom parameter and configuration files
 
@@ -104,7 +104,7 @@ Nextflow will also look for files that are external to the pipeline project dire
     -   A parameter file that is provided using the `-params-file` option
     -   A config file that are provided using the `-c` option
 
-You don't need to use all of these files to execute your pipeline.
+You **don't** need to use all of these files to execute your pipeline.
 
 **Parameter files**
 
@@ -128,13 +128,15 @@ nextflow run nf-core/demo -r dev -profile singularity -param-file <path/to/param
 
     Add the `input` and `outdir` parameters to a params file.
 
-    Give your "input" the complete path to your samplesheet and give your `outdir` the name `results_customparams`.
+    Give your "input" the complete path to your sample sheet and give your `outdir` the name `results_customparams`.
 
     Start by creating `mycustomparams.json` and adding your parameters using the format described above:
 
     ```bash
     code mycustomparams.json
     ```
+
+    Then, add your input and output parameters.
 
     ```json title="mycustomparams.json"
     {
@@ -143,7 +145,7 @@ nextflow run nf-core/demo -r dev -profile singularity -param-file <path/to/param
     }
     ```
 
-    Next, include the custom `mycustomparams.json` file in your execution command with the `-params-file` option:
+    Finally, include the custom `mycustomparams.json` file in your execution command with the `-params-file` option:
 
     ```bash
     nextflow run nf-core/demo -r dev -profile singularity -params-file mycustomparams.json
@@ -200,13 +202,15 @@ A full list of scopes is described in detail [here](https://www.nextflow.io/docs
 
 !!! question "Exercise"
 
-    Create a custom configuration file and enable singularity and singularity automounts using the singularity scope.
+    Create a custom configuration file and enable singularity and singularity auto mounts using the singularity scope.
 
-    Start by creating `mycustomconfig.config` and adding your singularity scope:
+    Start by creating `mycustomconfig.config`:
 
     ```bash
     code mycustomconfig.config
     ```
+
+    Next, add your configuration to the singularity scope:
 
     ```console title="mycustomconfig.config"
     singularity {
@@ -215,7 +219,7 @@ A full list of scopes is described in detail [here](https://www.nextflow.io/docs
     }
     ```
 
-    Next, include `mycustomconfig.config` file in your execution command with the `-c` option:
+    Finally, include `mycustomconfig.config` file in your execution command with the `-c` option:
 
     ```bash
     nextflow run nf-core/demo -r dev -params-file mycustomparams.json -c mycustomconfig.config
@@ -251,7 +255,7 @@ process {
 
 While some tool arguments are included as a part of a module. To make modules sharable across pipelines, most tool arguments are defined in the `conf/modules.conf` file in the pipeline code under the `ext.args` entry.
 
-Importantly, having these arguments outside of the module also allows them to be customised at runtime.
+Importantly, having these arguments outside of the module also allows them to be customized at runtime.
 
 For example, if you wanted to add arguments to the `MULTIQC` process in the `nf-core/demo` pipeline, you could use the process scope and the `withName` selector:
 
@@ -273,8 +277,6 @@ process {
 ```
 
 The extended execution path is built from the pipelines, subworkflows, and module used to execute the process.
-
-In the example above, the nf-core [`MULTIQC`](https://github.com/nf-core/demo/blob/master/modules/nf-core/multiqc/main.nf) module, was called by the [`RNASEQ`](https://github.com/nf-core/demo/blob/b89fac32650aacc86fcda9ee77e00612a1d77066/workflows/rnaseq.nf#L875) pipeline, which was called by the [`NFCORE_RNASEQ`](https://github.com/nf-core/demo/blob/b89fac32650aacc86fcda9ee77e00612a1d77066/main.nf#L68) pipeline in the `main.nf` file.
 
 !!! question "Exercise"
 
@@ -298,7 +300,7 @@ In the example above, the nf-core [`MULTIQC`](https://github.com/nf-core/demo/bl
     }
     ```
 
-    Execute your run command again:
+    Finally, execute your run command again:
 
     ```bash
     nextflow run nf-core/demo -r dev -profile test,singularity -params-file mycustomparams.json -c mycustomconfig.config
@@ -312,7 +314,7 @@ In the example above, the nf-core [`MULTIQC`](https://github.com/nf-core/demo/bl
 
 ## Mixing configuration files
 
-It is important to consider how the different configuration options interact during each execution and how you can apply these to minimise mistakes and extra configuration.
+It is important to consider how the different configuration options interact during each execution and how you can apply these to minimize mistakes and extra configuration.
 
 !!! question "Exercise"
 

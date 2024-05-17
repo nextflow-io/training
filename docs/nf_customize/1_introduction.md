@@ -1,8 +1,8 @@
 # Introduction
 
-nf-core is a community effort to collaborate on a curated set of analysis pipelines built using Nextflow. It provides a standardized set of best practices, guidelines, and templates for building and sharing bioinformatics pipelines. nf-core pipelines are designed to be modular, scalable, and portable, allowing researchers to easily adapt and execute them using their data and compute resources.
+nf-core is a community effort to collaborate on a curated set of analysis pipelines built using Nextflow. It provides a standardized set of best practices, guidelines, and templates for building and sharing bioinformatics pipelines.
 
-nf-core pipelines are designed to work out of the box. However, many researchers will want to customize their execution to deploy them to different infrastructures, activate or deactivate pipeline features, and selectively customize tool parameters. For this, researchers need to understand how these pipelines fit together and how to apply configuration options.
+nf-core pipelines are designed to be modular, scalable, and portable, allowing researchers to easily adapt and execute them using their data and compute resources. They are designed to work out of the box. However, many researchers will want to customize their execution to deploy them to different infrastructures, activate or deactivate pipeline features, and selectively customize tool parameters. For this, researchers need to understand how these pipelines fit together and how to apply configuration options.
 
 In this workshop, using the [nf-core/demo](https://github.com/nf-core/demo) pipeline as an example, you will learn how customize parameters and configuration files.
 

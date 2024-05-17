@@ -12,6 +12,8 @@ One of the key benefits of nf-core is that it promotes open development, testing
 
 nf-core is published in Nature Biotechnology: [Nat Biotechnol 38, 276–278 (2020). Nature Biotechnology](https://www.nature.com/articles/s41587-020-0439-x)
 
+An updated preprint is available at [bioRxiv](https://www.biorxiv.org/content/10.1101/2024.05.10.592912v1).
+
 **Key Features of nf-core pipelines**
 
 -   **Documentation**
@@ -31,9 +33,9 @@ It is important to remember all nf-core pipelines are open-source, community dri
 
 ## nf-core pipelines
 
-There are currently >100 nf-core pipelines (April 2024).
+There are currently >100 nf-core pipelines.
 
-These pipelines are at various stages of development with 60 released, 34 under development, and 11 archived.
+These pipelines are at various stages of development with 60 released, 34 under development, and 11 archived (April 2024).
 
 The [nf-core website](https://nf-co.re/) contains a full list of pipelines, as well as their documentation, which can be explored.
 

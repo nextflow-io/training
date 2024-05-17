@@ -37,7 +37,7 @@ You can view the code for this pipeline on the [`nf-core/demo` GitHub repository
 
 To help you understand the expectations for running an nf-core pipeline, they come with extensive documentation about its parameters, usage, and outputs.
 
-The documentation for the `nf-core/demo` pipeline [here](https://nf-co.re/demo/docs/usage).
+The documentation for the `nf-core/demo` pipeline can be found [here](https://nf-co.re/demo/docs/usage).
 
 ## Your first `nf-core/demo` execution command
 
@@ -93,7 +93,7 @@ The pipeline will auto-detect whether a sample is single- or paired-end and if a
 
 ### `--outdir`
 
-The `--output` parameter is used to name the output directory where the results will be saved and takes a string as input.
+The `--output` parameter is used to name the output directory where the results will be saved. It takes a string as its input.
 
 ```bash
 --output results
@@ -119,11 +119,11 @@ Caused by:
 <truncated>
 ```
 
-Fortunately, nf-core pipelines come packed with directives for containers and environments that can be flexibly enabled during execution. You will learn more about this below.
+Fortunately, nf-core pipelines come packed with directives for containers and environments that can be flexibly enabled during execution.
 
 ### `-profile`
 
-Configuration files can contain the definition of one or more profiles. A profile is a set of configuration attributes that can be selected during pipeline execution by using the `-profile` command line option.
+Configuration files can contain the definition of one or more profiles. A profile is a set of configuration attributes that can be selected during pipeline execution by using the `-profile` option.
 
 ```bash
 -profile <profile name>
@@ -213,7 +213,7 @@ Note that the test profile for nf-core/demo has supplied an `input` but no `outd
 
 !!! note "Utilizing profiles"
 
-    If you're computer has internet access and one of Conda, Singularity, or Docker installed, you should be able to run any nf-core pipeline with the `test` profile and the respective software management profile 'out of the box'.
+    If you're computer has internet access and one of Conda, Singularity, or Docker installed, you should be able to run any nf-core pipeline with the `test` profile and the respective software management profile "out of the box".
 
     The `test` data profile will pull small test files directly from the `nf-core/test-datasets` GitHub repository and run it on your local system. The `test` profile is an important control to check the pipeline is working as expected and is a great way to trial a pipeline.
 

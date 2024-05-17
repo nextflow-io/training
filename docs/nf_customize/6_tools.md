@@ -6,7 +6,7 @@ nf-core tools are for everyone and has commands to help both users and developer
 
 For users, the tools make it easier to execute pipelines.
 
-There are also nf-core tools for developers. However, these will not be covered as a part of this workshop. If you are curious to learn more about nf-core developer tools you can visit the websites [tools page](https://nf-co.re/tools/) and complete the Develop a pipeline with the nf-core template training.
+For developers, the tools make it easier to develop pipelines using best practises. However, the developer commands will not be covered as a part of this workshop. If you are curious to learn more about nf-core developer tools you can visit the websites [tools page](https://nf-co.re/tools/) and complete the Develop a pipeline with the nf-core template training.
 
 !!! question "Exercise"
 
