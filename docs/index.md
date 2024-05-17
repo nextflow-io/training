@@ -29,9 +29,9 @@ We have several workshops available on this website - find the one that's right 
 
         :material-lightbulb: This is the primary Nextflow training material used in most Nextflow and nf-core training events.
 
-    The Fundamentals Training material includes all things Nextflow. Perfect for anyone looking to get to grips with using Nextflow to run analyses and build workflows.
+    The fundamentals training material includes all things Nextflow. Perfect for anyone looking to get to grips with using Nextflow to run analyses and build workflows.
 
-    [Launch the Fundamentals Training :material-arrow-right:](basic_training/index.md){ .md-button .md-button--primary }
+    [Launch the fundamentals training :material-arrow-right:](basic_training/index.md){ .md-button .md-button--primary }
 
 !!! exercise "Advanced Training"
 
@@ -41,7 +41,7 @@ We have several workshops available on this website - find the one that's right 
 
     Advanced material exploring the advanced features of the Nextflow language and runtime, and how to use them to write efficient and scalable data-intensive workflows.
 
-    [Launch the Advanced Training :material-arrow-right:](advanced/index.md){ .md-button .md-button--primary }
+    [Launch the advanced training :material-arrow-right:](advanced/index.md){ .md-button .md-button--primary }
 
 ## Applied Training
 
@@ -53,7 +53,7 @@ We have several workshops available on this website - find the one that's right 
 
     A "learn by doing" tutorial that will take you from running tools on the command line into running your first Nextflow pipelines.
 
-    [Launch the Hello Nextflow Training :material-arrow-right:](hello_nextflow/index.md){ .md-button }
+    [Launch the Hello Nextflow training :material-arrow-right:](hello_nextflow/index.md){ .md-button }
 
 !!! exercise "Configure the execution of an nf-core pipeline"
 
@@ -61,9 +61,9 @@ We have several workshops available on this website - find the one that's right 
 
         :material-run-fast: This course will help you to understand how to customize the execution of an nf-core pipeline.
 
-    A "learn by doing" pipeline development tutorial focusing on the configuration of nf-core pipelines.
+    A "learn by doing" tutorial focusing on the configuration of nf-core pipelines.
 
-    [Launch the configuring an nf-core pipeline training :material-arrow-right:](nf_customize/1_introduction.md){ .md-button }
+    [Launch the nf-core configuration training :material-arrow-right:](nf_customize/1_introduction.md){ .md-button }
 
 !!! exercise "Develop a pipeline with the nf-core template"
 
