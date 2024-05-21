@@ -2,10 +2,10 @@
  * Define the default parameters
  */
 
-params.genome     = "${baseDir}/data/genome.fa"
-params.variants   = "${baseDir}/data/known_variants.vcf.gz"
-params.blacklist  = "${baseDir}/data/blacklist.bed"
-params.reads      = "${baseDir}/data/reads/ENCSR000C*_{1,2}.fastq.gz"
+params.genome     = "${projectDir}/data/genome.fa"
+params.variants   = "${projectDir}/data/known_variants.vcf.gz"
+params.blacklist  = "${projectDir}/data/blacklist.bed"
+params.reads      = "${projectDir}/data/reads/ENCSR000C*_{1,2}.fastq.gz"
 params.results    = "results"
 
 /*
