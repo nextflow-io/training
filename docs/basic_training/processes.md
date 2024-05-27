@@ -223,7 +223,7 @@ The process script can also be defined in a completely dynamic manner using an `
 
 ```groovy linenums="1" title="snippet.nf"
 params.compress = 'gzip'
-params.file2compress = "$baseDir/data/ggal/transcriptome.fa"
+params.file2compress = "$projectDir/data/ggal/transcriptome.fa"
 
 process FOO {
     debug true
@@ -551,8 +551,8 @@ As `ch2` is now a _value_ channel, it can be consumed multiple times and do not 
         One possible solution is shown below:
 
         ```groovy linenums="1" title="snippet.nf"
-        params.reads = "$baseDir/data/ggal/*_1.fq"
-        params.transcriptome_file = "$baseDir/data/ggal/transcriptome.fa"
+        params.reads = "$projectDir/data/ggal/*_1.fq"
+        params.transcriptome_file = "$projectDir/data/ggal/transcriptome.fa"
 
         Channel
             .fromPath(params.reads)
@@ -583,7 +583,7 @@ As `ch2` is now a _value_ channel, it can be consumed multiple times and do not 
 The `each` qualifier allows you to repeat the execution of a process for each item in a collection every time new data is received. For example:
 
 ```groovy linenums="1" title="snippet.nf"
-sequences = Channel.fromPath("$baseDir/data/ggal/*_1.fq")
+sequences = Channel.fromPath("$projectDir/data/ggal/*_1.fq")
 methods = ['regular', 'espresso']
 
 process ALIGNSEQUENCES {
@@ -624,7 +624,7 @@ In the above example, every time a file of sequences is received as an input by 
         Modify the methods list and add another coffee type:
 
         ```groovy linenums="1" title="snippet.nf"
-        sequences = Channel.fromPath("$baseDir/data/ggal/*_1.fq")
+        sequences = Channel.fromPath("$projectDir/data/ggal/*_1.fq")
         methods = ['regular', 'espresso', 'cappuccino']
 
         process ALIGNSEQUENCES {

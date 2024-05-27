@@ -169,7 +169,7 @@ _After:_
 ```groovy title="modules/local/samtools/index/tests/main.nf.test" linenums="14"
 process {
     """
-    input[0] = [ [id: 'NA12882' ], file("${baseDir}/data/bam/reads_son.bam") ]
+    input[0] = [ [id: 'NA12882' ], file("${projectDir}/data/bam/reads_son.bam") ]
     """
 }
 ```
@@ -271,7 +271,7 @@ test("reads_mother [bam]") {
         }
         process {
             """
-            input[0] = [ [id: 'NA12878' ], file("${baseDir}/data/bam/reads_mother.bam") ]
+            input[0] = [ [id: 'NA12878' ], file("${projectDir}/data/bam/reads_mother.bam") ]
             """
         }
     }
@@ -295,7 +295,7 @@ test("reads_father [bam]") {
         }
         process {
             """
-            input[0] = [ [id: 'NA12877' ], file("${baseDir}/data/bam/reads_father.bam") ]
+            input[0] = [ [id: 'NA12877' ], file("${projectDir}/data/bam/reads_father.bam") ]
             """
         }
     }
@@ -447,7 +447,7 @@ test("reads_son [bam]") {
             script "../../../samtools/index/main.nf"
             process {
                 """
-                input[0] =  [ [id: 'NA12882' ], file("${baseDir}/data/bam/reads_son.bam") ]
+                input[0] =  [ [id: 'NA12882' ], file("${projectDir}/data/bam/reads_son.bam") ]
                 """
             }
         }
@@ -466,10 +466,10 @@ Then we can refer to the output of that process in the `when` block where we spe
         process {
             """
             input[0] = SAMTOOLS_INDEX.out
-            input[1] = file("${baseDir}/data/ref/ref.fasta")
-            input[2] = file("${baseDir}/data/ref/ref.fasta.fai")
-            input[3] = file("${baseDir}/data/ref/ref.dict")
-            input[4] = file("${baseDir}/data/intervals.list")
+            input[1] = file("${projectDir}/data/ref/ref.fasta")
+            input[2] = file("${projectDir}/data/ref/ref.fasta.fai")
+            input[3] = file("${projectDir}/data/ref/ref.dict")
+            input[4] = file("${projectDir}/data/intervals.list")
             """
         }
     }
@@ -625,7 +625,7 @@ test("reads_mother [bam]") {
             script "../../../samtools/index/main.nf"
             process {
                 """
-                input[0] =  [ [id: 'NA12882' ], file("${baseDir}/data/bam/reads_mother.bam") ]
+                input[0] =  [ [id: 'NA12882' ], file("${projectDir}/data/bam/reads_mother.bam") ]
                 """
             }
         }
@@ -638,10 +638,10 @@ test("reads_mother [bam]") {
         process {
             """
             input[0] = SAMTOOLS_INDEX.out
-            input[1] = file("${baseDir}/data/ref/ref.fasta")
-            input[2] = file("${baseDir}/data/ref/ref.fasta.fai")
-            input[3] = file("${baseDir}/data/ref/ref.dict")
-            input[4] = file("${baseDir}/data/intervals.list")
+            input[1] = file("${projectDir}/data/ref/ref.fasta")
+            input[2] = file("${projectDir}/data/ref/ref.fasta.fai")
+            input[3] = file("${projectDir}/data/ref/ref.dict")
+            input[4] = file("${projectDir}/data/intervals.list")
             """
         }
     }
@@ -664,7 +664,7 @@ test("reads_father [bam]") {
             script "../../../samtools/index/main.nf"
             process {
                 """
-                input[0] =  [ [id: 'NA12882' ], file("${baseDir}/data/bam/reads_father.bam") ]
+                input[0] =  [ [id: 'NA12882' ], file("${projectDir}/data/bam/reads_father.bam") ]
                 """
             }
         }
@@ -677,10 +677,10 @@ test("reads_father [bam]") {
         process {
             """
             input[0] = SAMTOOLS_INDEX.out
-            input[1] = file("${baseDir}/data/ref/ref.fasta")
-            input[2] = file("${baseDir}/data/ref/ref.fasta.fai")
-            input[3] = file("${baseDir}/data/ref/ref.dict")
-            input[4] = file("${baseDir}/data/intervals.list")
+            input[1] = file("${projectDir}/data/ref/ref.fasta")
+            input[2] = file("${projectDir}/data/ref/ref.fasta.fai")
+            input[3] = file("${projectDir}/data/ref/ref.dict")
+            input[4] = file("${projectDir}/data/intervals.list")
             """
         }
     }
@@ -825,12 +825,12 @@ test("family_trio [vcf] [idx]") {
         }
         process {
             """
-            input[0] = file("${baseDir}/modules/local/gatk/jointgenotyping/tests/inputs/family_trio_map.tsv")
+            input[0] = file("${projectDir}/modules/local/gatk/jointgenotyping/tests/inputs/family_trio_map.tsv")
             input[1] = "family_trio"
-            input[2] = file("${baseDir}/data/ref/ref.fasta")
-            input[3] = file("${baseDir}/data/ref/ref.fasta.fai")
-            input[4] = file("${baseDir}/data/ref/ref.dict")
-            input[5] = file("${baseDir}/data/intervals.list")
+            input[2] = file("${projectDir}/data/ref/ref.fasta")
+            input[3] = file("${projectDir}/data/ref/ref.fasta.fai")
+            input[4] = file("${projectDir}/data/ref/ref.dict")
+            input[5] = file("${projectDir}/data/intervals.list")
             """
         }
     }

@@ -3,17 +3,17 @@
  */
 
 // Execution environment setup
-params.baseDir = "/workspace/gitpod/hello-nextflow" 
-$baseDir = params.baseDir
+params.projectDir = "/workspace/gitpod/hello-nextflow" 
+$projectDir = params.projectDir
 
 // Primary input (list of input files, one per line)
-params.reads_bam = "${baseDir}/data/sample_bams.txt"
+params.reads_bam = "${projectDir}/data/sample_bams.txt"
 
 // Accessory files
-params.genome_reference = "${baseDir}/data/ref/ref.fasta"
-params.genome_reference_index = "${baseDir}/data/ref/ref.fasta.fai"
-params.genome_reference_dict = "${baseDir}/data/ref/ref.dict"
-params.calling_intervals = "${baseDir}/data/intervals.list"
+params.genome_reference = "${projectDir}/data/ref/ref.fasta"
+params.genome_reference_index = "${projectDir}/data/ref/ref.fasta.fai"
+params.genome_reference_dict = "${projectDir}/data/ref/ref.dict"
+params.calling_intervals = "${projectDir}/data/intervals.list"
 
 /*
  * Generate BAM index file

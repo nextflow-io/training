@@ -3,11 +3,11 @@
  */
 
 // Execution environment setup
-params.baseDir = "/workspace/gitpod/hello-nextflow" 
-$baseDir = params.baseDir
+params.projectDir = "/workspace/gitpod/hello-nextflow" 
+$projectDir = params.projectDir
 
 // Primary input
-params.reads_bam = "${baseDir}/data/bam/reads_mother.bam"
+params.reads_bam = "${projectDir}/data/bam/reads_mother.bam"
 
 /*
  * Generate BAM index file
@@ -31,7 +31,7 @@ process SAMTOOLS_INDEX {
 workflow {
 
     // Create input channel
-    reads_ch = Channel.from(params.reads_bam)
+    reads_ch = Channel.of(params.reads_bam)
 
     // Create index file for input BAM file
     SAMTOOLS_INDEX(reads_ch)

@@ -143,11 +143,11 @@ process SAMTOOLS_INDEX {
  */
 
 // Execution environment setup
-params.baseDir = "/workspace/gitpod/hello-nextflow"
-$baseDir = params.baseDir
+params.projectDir = "/workspace/gitpod/hello-nextflow"
+$projectDir = params.projectDir
 
 // Primary input
-params.reads_bam = "${baseDir}/data/bam/reads_mother.bam"
+params.reads_bam = "${projectDir}/data/bam/reads_mother.bam"
 ```
 
 #### 1.3. Add workflow block to run SAMTOOLS_INDEX
@@ -156,7 +156,7 @@ params.reads_bam = "${baseDir}/data/bam/reads_mother.bam"
 workflow {
 
     // Create input channel (single file via CLI parameter)
-    reads_ch = Channel.from(params.reads_bam)
+    reads_ch = Channel.of(params.reads_bam)
 
     // Create index file for input BAM file
     SAMTOOLS_INDEX(reads_ch)
@@ -227,10 +227,10 @@ process GATK_HAPLOTYPECALLER {
 
 ```groovy title="hello-gatk.nf"
 // Accessory files
-params.genome_reference = "${baseDir}/data/ref/ref.fasta"
-params.genome_reference_index = "${baseDir}/data/ref/ref.fasta.fai"
-params.genome_reference_dict = "${baseDir}/data/ref/ref.dict"
-params.calling_intervals = "${baseDir}/data/intervals.list"
+params.genome_reference = "${projectDir}/data/ref/ref.fasta"
+params.genome_reference_index = "${projectDir}/data/ref/ref.fasta.fai"
+params.genome_reference_dict = "${projectDir}/data/ref/ref.dict"
+params.calling_intervals = "${projectDir}/data/intervals.list"
 ```
 
 #### 2.3. Add a call to the workflow block to run GATK_HAPLOTYPECALLER
@@ -290,9 +290,9 @@ Make the workflow handle multiple samples in bulk.
 ```groovy title="hello-gatk.nf"
 // Primary input
 params.reads_bam = [
-    "${baseDir}/data/bam/reads_mother.bam",
-    "${baseDir}/data/bam/reads_father.bam",
-    "${baseDir}/data/bam/reads_son.bam"
+    "${projectDir}/data/bam/reads_mother.bam",
+    "${projectDir}/data/bam/reads_father.bam",
+    "${projectDir}/data/bam/reads_son.bam"
 ]
 ```
 
@@ -409,9 +409,9 @@ _Before:_
 ```groovy title="hello-gatk.nf"
 // Primary input
 params.reads_bam = [
-    "${baseDir}/data/bam/reads_mother.bam",
-    "${baseDir}/data/bam/reads_father.bam",
-    "${baseDir}/data/bam/reads_son.bam"
+    "${projectDir}/data/bam/reads_mother.bam",
+    "${projectDir}/data/bam/reads_father.bam",
+    "${projectDir}/data/bam/reads_son.bam"
 ]
 ```
 
@@ -419,7 +419,7 @@ _After:_
 
 ```groovy title="hello-gatk.nf"
 // Primary input (list of input files, one per line)
-params.reads_bam = "${baseDir}/data/sample_bams.txt"
+params.reads_bam = "${projectDir}/data/sample_bams.txt"
 ```
 
 #### 4.3. Update the channel factory to read lines from a file
@@ -428,7 +428,7 @@ _Before:_
 
 ```groovy title="hello-gatk.nf"
 // Create input channel
-reads_ch = Channel.from(params.reads_bam)
+reads_ch = Channel.of(params.reads_bam)
 ```
 
 _After:_
@@ -486,14 +486,14 @@ _Before:_
 
 ```groovy title="hello-gatk.nf"
 // Primary input (list of input files, one sample per line)
-params.reads_bam = "${baseDir}/data/bam/sample_bams.txt"
+params.reads_bam = "${projectDir}/data/bam/sample_bams.txt"
 ```
 
 _After:_
 
 ```groovy title="hello-gatk.nf"
 // Primary input (samplesheet in CSV format with ID and file path, one sample per line)
-params.reads_bam = "${baseDir}/data/samplesheet.csv"
+params.reads_bam = "${projectDir}/data/samplesheet.csv"
 ```
 
 #### 5.3. Update the channel factory to parse a CSV file
