@@ -27,16 +27,16 @@ nextflow run hello-gatk.nf
 
     ```console title="hello-gatk.nf" linenums="5"
     // Execution environment setup
-    params.projectDir = "/workspace/gitpod/troubleshoot"
-    $projectDir = params.projectDir
+    params.baseDir = "/workspace/gitpod/troubleshoot"
+    $baseDir = params.baseDir
 
     // Primary input
-    params.reads_bam = "${projectDir}/data/samplesheet.csv"
+    params.reads_bam = "${baseDir}/data/samplesheet.csv"
     ```
 
-    However, it can be noted that there is a `$` before `projectDir` on line 7 which would suggest it is a variable.
+    However, it can be noted that there is a `$` before `baseDir` on line 7 which would suggest it is a variable.
 
-    `$projectDir` was once an implicit variable, and its usage here is causing the wrong path.
+    `$baseDir` was once an implicit variable, and its usage here is causing the wrong path.
 
     By removing the `$` the proper path should be resolved.
 
