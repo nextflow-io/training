@@ -41,5 +41,5 @@ nextflow run hello-gatk.nf
     By removing the `$` the proper path should be resolved.
 
     ```console title="hello-gatk.nf" linenums="7"
-    projectDir = params.projectDir
+    baseDir = params.baseDir
     ```
