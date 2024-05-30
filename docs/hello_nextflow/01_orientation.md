@@ -2,8 +2,6 @@
 
 ## Tour of Gitpod
 
-If you haven't yet, log into the [![Nextflow Training GitPod](https://img.shields.io/badge/Gitpod-%20Open%20in%20Gitpod-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/nextflow-io/training), which provides a virtual machine with everything already set up for you.
-
 In the Gitpod window, you'll see a terminal. Type the following command to switch to the folder of this training material:
 
 ```bash

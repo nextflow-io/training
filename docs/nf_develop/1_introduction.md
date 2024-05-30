@@ -27,3 +27,11 @@ Please note that this is **not** a beginner's workshop and familiarity with Next
 -   A GitHub account
 -   Experience with command line
 -   Experience writing pipelines with Nextflow
+
+## Log in to Gitpod
+
+To start this module you will need to log in to your Gitpod account using the link below.
+
+[![Open in Gitpod](https://img.shields.io/badge/Gitpod-%20Open%20in%20Gitpod-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/nextflow-io/training)
+
+You can create a Gitpod account following these instructions if you do not already have one.
