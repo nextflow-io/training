@@ -2,7 +2,7 @@
 
 [`nf-core/demo`](https://nf-co.re/demo/) is a simple nf-core style pipeline for workshops and demonstrations.
 
-It was created using the nf-core template and is designed to run quickly and configure easily.
+It was created using the nf-core template and is designed to run and configure quickly.
 
 <figure class="excalidraw">
 --8<-- "docs/nf_customize/img/subway.excalidraw.svg"
@@ -11,7 +11,7 @@ It was created using the nf-core template and is designed to run quickly and con
 The [`nf-core/demo`](https://nf-co.re/demo/) pipeline consists of three processes:
 
 -   ([`FASTQC`](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)): Read QC
--   ([`FASTP`](https://github.com/OpenGene/fastp)): Adapter and quality trimming
+-   ([`SEQTK_TRIM`](https://github.com/lh3/seqtk)): Trim low quality bases from FastQ files
 -   ([`MULTIQC`](http://multiqc.info/)): Present QC for raw reads
 
 [`nf-core/demo`](https://nf-co.re/demo/) takes a samplesheet that contains paths to fastq files as an input and will produce four output folders with a variety of logs and reports:
@@ -19,11 +19,8 @@ The [`nf-core/demo`](https://nf-co.re/demo/) pipeline consists of three processe
 -   `fastqc/`
     -   `*_fastqc.html`: FastQC report containing quality metrics.
     -   `*_fastqc.zip`: Zip archive containing the FastQC report, tab-delimited data file and plot images.
--   `fastp/`
-    -   `*.fastp.html`: Trimming report in html format.
-    -   `*.fastp.json`: Trimming report in json format.
-    -   `*.fastp.log`: Trimming log file.
-    -   `*.fastq.gz`: If --save_trimmed
+-   `fq/`
+    -   `*.fastp.html`: Trimmed fq files.
 -   `multiqc/`
     -   `multiqc_report.html`: a standalone HTML file that can be viewed in your web browser.
     -   `multiqc_data/`: directory containing parsed statistics from the different tools used in the pipeline.
@@ -59,7 +56,9 @@ The `--input` parameter requires a path to comma-separated file containing infor
 --input 'path/to/samplesheet.csv'
 ```
 
-Using the nf-core/demo usage documentation, you can see that it requires a comma-separated file (`.csv`) that contains 3 columns with the headers `sample`, `fastq_1`, and `fastq_2`. The samplesheet file may consist of both single- and paired-end data and may look something like the one below.
+The nf-core/demo usage documentation describes the required `--input` as a comma-separated file (`.csv`). The `.csv` file must contain 3 columns with the headers `sample`, `fastq_1`, and `fastq_2`.
+
+The samplesheet file may consist of both single- and paired-end data and may look something like the one below.
 
 ```csv title="samplesheet.csv"
 sample,fastq_1,fastq_2
@@ -72,15 +71,15 @@ The pipeline will auto-detect whether a sample is single- or paired-end and if a
 
 !!! question "Exercise"
 
-    Within the `data` folder there are three sets of paired-end reads for gut, liver, and lung samples. Create a samplesheet named `samplesheet.csv` for this data.
+    Within the `data` folder there are three sets of paired-end reads for gut, liver, and lung samples. Create a samplesheet for this data.
 
-    First, create `samplesheet.csv`:
+    First, create a `.csv` file named `samplesheet.csv`:
 
     ```bash
     code samplesheet.csv
     ```
 
-    Next, add the header line, and for each sample, an id and the complete paths to the paired-end reads:
+    Next, add the header line, and, for each sample, an id and the complete paths to the paired-end reads:
 
     ```csv title="samplesheet.csv"
     sample,fastq_1,fastq_2
@@ -106,16 +105,16 @@ You do not need to create this folder before you run the pipeline.
     Execute the `nf-core/demo` pipeline with your new samplesheet as an input and an output directory named `results`:
 
     ```bash
-    nextflow run nf-core/demo -r dev --input samplesheet.csv --outdir results
+    nextflow run nf-core/demo --input samplesheet.csv --outdir results
     ```
 
 As the software required to run each process is not available in the Gitpod environment this exercise is expected to fail.
 
 ```console
-ERROR ~ Error executing process > 'NFCORE_DEMO:DEMO:FASTP (sample1)'
+ERROR ~ Error executing process > 'NFCORE_DEMO:DEMO:SEQTK_TRIM (gut)'
 
 Caused by:
-  Process `NFCORE_DEMO:DEMO:FASTP (sample1)` terminated with an error exit status (127)
+  Process `NFCORE_DEMO:DEMO:SEQTK_TRIM (gut)` terminated with an error exit status (127)
 <truncated>
 ```
 
@@ -123,7 +122,7 @@ Fortunately, nf-core pipelines come packed with directives for containers and en
 
 ### `-profile`
 
-Configuration files can contain the definition of one or more profiles. A profile is a set of configuration attributes that can be selected during pipeline execution by using the `-profile` option.
+Configuration files can contain the definition of one or more profiles. A profile is a set of configuration attributes that can be added to your execution command by using the `-profile` option.
 
 ```bash
 -profile <profile name>
@@ -147,14 +146,14 @@ profiles {
 
 nf-core pipelines come with a series of profiles for running the pipelines using different software (e.g., Docker, Singularity, and Conda).
 
-Here, you will need to add the `singularity` profile to your execution command, which will download and enable software images to run each process.
+Here, you will need to add the `singularity` profile to your execution command. Nextflow will download and enable Singularity software images to run each process.
 
 !!! question "Exercise"
 
     Execute the command again, but this time with the singularity profile:
 
     ```bash
-    nextflow run nf-core/demo -r dev --input samplesheet.csv --outdir results -profile singularity
+    nextflow run nf-core/demo --input samplesheet.csv --outdir results -profile singularity
     ```
 
     The `nf-core/demo` pipeline should now run successfully!
@@ -162,6 +161,8 @@ Here, you will need to add the `singularity` profile to your execution command, 
 Every nf-core pipeline also comes with a `test` profile. This is a minimal set of configuration settings for the pipeline to run using a small test dataset that is hosted on the [nf-core/test-datasets](https://github.com/nf-core/test-datasets) repository.
 
 The `test` profile can be very useful for performing a test run of nf-core pipeline on your infrastructure before using your own data. As the `test` profile is expected to run it can be used to help diagnose local issues before you scale up your analysis.
+
+You should use the `test` profile to check the pipeline runs before analyzing your own data. 
 
 The `test` profile for `nf-core/demo` is shown below:
 
@@ -205,7 +206,7 @@ Note that the test profile for nf-core/demo has supplied an `input` but no `outd
 
 !!! question "Exercise"
 
-    Execute `nf-core/demo` using the test and singularity profiles:
+    Execute `nf-core/demo` using the `test` and `singularity` profiles:
 
     ```bash
     nextflow run nf-core/demo -r dev -profile test,singularity --outdir results

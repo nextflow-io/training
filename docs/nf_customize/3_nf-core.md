@@ -6,13 +6,7 @@ nf-core is a community effort to collect a curated set of analysis pipelines bui
 
 nf-core provides a standardised set of best practices, guidelines, and templates for building and sharing bioinformatics pipelines. These pipelines are designed to be modular, scalable, and portable, allowing researchers to easily adapt and execute them using their own data and compute resources.
 
-The community is a diverse group of bioinformaticians, developers, and researchers from around the world who collaborate on developing and maintaining a growing collection of high-quality pipelines. These pipelines cover a range of applications, including transcriptomics, proteomics, and metagenomics.
-
 One of the key benefits of nf-core is that it promotes open development, testing, and peer review, ensuring that the pipelines are robust, well-documented, and validated against real-world datasets. This helps to increase the reliability and reproducibility of bioinformatics analyses and ultimately enables researchers to accelerate their scientific discoveries.
-
-nf-core is published in Nature Biotechnology: [Nat Biotechnol 38, 276–278 (2020). Nature Biotechnology](https://www.nature.com/articles/s41587-020-0439-x)
-
-An updated preprint is available at [bioRxiv](https://www.biorxiv.org/content/10.1101/2024.05.10.592912v1).
 
 **Key Features of nf-core pipelines**
 
@@ -29,17 +23,17 @@ An updated preprint is available at [bioRxiv](https://www.biorxiv.org/content/10
 -   **Cloud-ready**
     -   nf-core pipelines are tested on AWS after every major release. You can even browse results live on the website and use outputs for your own benchmarking.
 
-It is important to remember all nf-core pipelines are open-source, community driven, and are under active community development.
+nf-core is published in Nature Biotechnology: [Nat Biotechnol 38, 276–278 (2020). Nature Biotechnology](https://www.nature.com/articles/s41587-020-0439-x). An updated preprint is available at [bioRxiv](https://www.biorxiv.org/content/10.1101/2024.05.10.592912v1).
 
 ## nf-core pipelines
 
-There are currently >100 nf-core pipelines.
-
-These pipelines are at various stages of development with 60 released, 34 under development, and 11 archived (April 2024).
+There are currently >100 nf-core pipelines. These pipelines are at various stages of development with 60 released, 34 under development, and 11 archived (April 2024).
 
 The [nf-core website](https://nf-co.re/) contains a full list of pipelines, as well as their documentation, which can be explored.
 
-Each released pipeline has a dedicated page that includes expansive documentation that is split into 6 sections:
+![nf-core logo](img/pipelines.png)
+
+Each released pipeline has a dedicated page that includes 6 documentation sections:
 
 -   **Introduction:** An introduction and overview of the pipeline
 -   **Usage:** Descriptions of how to execute the pipeline
@@ -48,9 +42,11 @@ Each released pipeline has a dedicated page that includes expansive documentatio
 -   **Results:** Example output files generated from the full test dataset
 -   **Releases & Statistics:** pipeline version history and statistics
 
+Each section should be explored by a user to understand what the pipeline does and how it can be configured.
+
 ## Pulling an nf-core pipeline
 
-Unless you intend to develop an nf-core pipeline independently, you do not need to clone a copy of a pipeine. Instead, you can use Nextflow’s built-in functionality to `pull` a pipeline:
+Unless you intend to develop an nf-core pipeline independently, you do not need to clone a copy of a pipeline. Instead, you can use Nextflow’s `pull` command:
 
 ```bash
 nextflow pull nf-core/demo
@@ -58,29 +54,29 @@ nextflow pull nf-core/demo
 
 !!! note "The `nextflow run` command"
 
-    The `nextflow run` command will also automatically `pull` the pipeline if it was not already available locally.
+    The `nextflow run` command will also automatically `pull` the pipeline if it was not pulled previously.
 
-Nextflow will `pull` the default git branch if a pipeline version is not specified. This will be the master branch for nf-core pipelines with a stable release.
+Nextflow will `pull` the pipelines default GitHub branch if a pipeline version is not specified. This will be the master branch for nf-core pipelines with a stable release.
 
-nf-core pipelines use GitHub releases to tag stable versions of the code and software. You will always be able to execute a previous version of a pipeline once it is released using the `-revision` or `-r` option.
+nf-core pipelines use GitHub releases to tag stable versions of the code and software. You will always be able to execute different versions of a pipeline using the `-revision` or `-r` option.
 
-Similarly, you can use the `-r` option to specify a GitHub branch.
+Similarly, you can use the `-r` option to specify a specific GitHub branch.
 
 !!! question "Exercise"
 
-    Pull the `dev` branch of the `nf-core/demo` pipeline from GitHub:
+    Use nextflow to pull the `nf-core/demo` pipeline:
 
     ```bash
-    nextflow pull nf-core/demo -r dev
+    nextflow pull nf-core/demo
     ```
 
-    Check that it has been pulled by listing your cached pipelines:
+    Use the list command to view your cached pipelines:
 
     ```bash
     nextflow list
     ```
 
-    You can also view pipelines in your hidden assets folder:
+    Pulled pipelines are stored in a hidden assets folder:
 
     ```bash
     ls $HOME/.nextflow/assets/

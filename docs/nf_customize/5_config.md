@@ -1,6 +1,6 @@
 # Demystifying configuration options
 
-Each nf-core pipeline comes with a set of “sensible defaults”. While the defaults are a great place to start, you will almost certainly want to modify these to fit your own purposes and system requirements.
+Each nf-core pipeline comes with a set of “sensible defaults”. While the defaults are a great place to start, you will certainly want to modify these to fit your own purposes and system requirements.
 
 **You do not need to edit the pipeline code to configure nf-core pipelines.**
 
@@ -22,25 +22,21 @@ Understanding how and when these files are interpreted by Nextflow is critical f
 
 ## Parameters
 
-Parameters are pipeline specific settings that can be used to customise the execution of a pipeline.
+Parameters are pipeline specific settings that can be used to customize the execution of a pipeline.
 
-At the highest level, parameters can be customised using the command line. Any parameter can be configured on the command line by prefixing the parameter name with a double dash (`--`):
+At the highest level, parameters can be customized using the command line. Any parameter can be configured on the command line by prefixing the parameter name with a double dash (`--`):
 
 ```bash
 --<parameter>
 ```
 
-!!! note "When to use `--` and `-`"
-
-    Nextflow options are prefixed with a single dash (`-`) and pipeline parameters are prefixed with a double dash (`--`).
-
 Depending on the parameter type, you may be required to add additional information after your parameter flag. For example, for a string parameter, you would add the string after the parameter flag:
 
 ```bash
-nextflow nf-core/demo -r dev --<parameter> string
+nextflow nf-core/demo --<parameter> string
 ```
 
-Every nf-core pipeline has a full list of parameters on the nf-core website. When viewing these parameters, you will also be shown a description and the type of the parameter. Some parameters will have additional text to help you understand how a parameter should be used.
+Every nf-core pipeline has a full list of parameters on the nf-core website. You will also be shown a description and the type of the parameter when viewing these parameters. Some parameters will also have additional text to help you understand how a parameter should be used.
 
 Parameters and their descriptions can also be viewed in the command line using the `run` command with the `--help` parameter.
 
@@ -49,12 +45,12 @@ Parameters and their descriptions can also be viewed in the command line using t
     View the parameters for the `nf-core/demo` pipeline using the command line:
 
     ```bash
-    nextflow run nf-core/demo -r dev --help
+    nextflow run nf-core/demo --help
     ```
 
 ## Default configuration files
 
-All parameters will have a default setting that is defined using the `nextflow.config` file in the pipeline project directory. By default, most parameters are set to `null` or `false` and are only activated by a profile or configuration file.
+All parameters have default configuration that is defined using the `nextflow.config` file in the pipeline project directory. Most parameters are set to `null` or `false` by default and are only activated by a profile or configuration file.
 
 There are also several `includeConfig` statements in the `nextflow.config` file that are used to include additional `.config` files from the `conf/` folder. Each additional `.config` file contains categorized configuration information for your pipeline execution, some of which can be optionally included:
 
@@ -75,16 +71,16 @@ There are also several `includeConfig` statements in the `nextflow.config` file 
     -   Only included if specified as a profile.
     -   A configuration profile to test the pipeline with a full-size test dataset.
 
-Notably, some configuration files contain the definition of profiles.
+Notably, some configuration files contain the definition of profiles. For example, the `docker`, `singularity`, and `conda` profiles are defined in the `nextflow.config` file in the pipeline project directory.
 
-Profiles used by nf-core pipelines can be broadly categorised into two groups:
+Profiles used by nf-core pipelines can be broadly categorized into two groups:
 
 -   **Software management profiles**
     -   Profiles for the management of software using software management tools, e.g., `docker`, `singularity`, and `conda`.
 -   **Test profiles**
     -   Profiles to execute the pipeline with a standardized set of test data and parameters, e.g., `test` and `test_full`.
 
-nf-core pipelines are required to define software containers and environments that can be activated using profiles. Although it is possible to run the pipelines with software installed by other methods (e.g., environment modules or manual installation), using Docker or Singularity is more convenient and reproducible.
+nf-core pipelines are required to define software containers and environments that can be activated using profiles. Although it is possible to run the pipelines with software installed by other methods (e.g., environment modules or manual installation), using Docker or Singularity is more sharable, convenient, and reproducible.
 
 ## Shared configuration files
 
@@ -92,7 +88,7 @@ An `includeConfig` statement in the `nextflow.config` file is also used to inclu
 
 For shared resources such as an HPC cluster, you may consider developing a shared institutional profile.
 
-You can follow [this tutorial](https://nf-co.re/docs/usage/tutorials/step_by_step_institutional_profile) for more help setting up an institutional profile.
+[This tutorial](https://nf-co.re/docs/usage/tutorials/step_by_step_institutional_profile) can be used to help setting up an institutional profile.
 
 ## Custom parameter and configuration files
 
