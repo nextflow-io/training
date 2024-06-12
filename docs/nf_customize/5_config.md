@@ -76,9 +76,9 @@ Notably, some configuration files contain the definition of profiles. For exampl
 Profiles used by nf-core pipelines can be broadly categorized into two groups:
 
 -   **Software management profiles**
-    -   Profiles for the management of software using software management tools, e.g., `docker`, `singularity`, and `conda`.
+    -   Profiles for the management of software using software management tools, for example, `docker`, `singularity`, and `conda`.
 -   **Test profiles**
-    -   Profiles to execute the pipeline with a standardized set of test data and parameters, e.g., `test` and `test_full`.
+    -   Profiles to execute the pipeline with a standardized set of test data and parameters, for example, `test` and `test_full`.
 
 nf-core pipelines are required to define software containers and environments that can be activated using profiles. Although it is possible to run the pipelines with software installed by other methods (e.g., environment modules or manual installation), using Docker or Singularity is more sharable, convenient, and reproducible.
 
@@ -100,7 +100,7 @@ Nextflow will also look for files that are external to the pipeline project dire
     -   A parameter file that is provided using the `-params-file` option
     -   A config file that are provided using the `-c` option
 
-You **don't** need to use all of these files to execute your pipeline.
+_You do not need to use all of these files to execute your pipeline._
 
 **Parameter files**
 
@@ -114,17 +114,17 @@ Parameter files are `.json` files that can contain an unlimited number of parame
 }
 ```
 
-You can override default parameters by creating a custom `.json` file and passing it as a command-line argument using the `-param-file` option.
+You can override default parameters by creating a `.json` file and passing it as a command-line argument using the `-param-file` option.
 
 ```bash
-nextflow run nf-core/demo -r dev -profile singularity -param-file <path/to/params.json>
+nextflow run nf-core/demo -profile singularity -param-file <path/to/params.json>
 ```
 
 !!! question "Exercise"
 
     Add the `input` and `outdir` parameters to a params file.
 
-    Give your "input" the complete path to your sample sheet and give your `outdir` the name `results_customparams`.
+    Give your "input" the complete path to your sample sheet and give your `outdir` the name `results_mycustomparams`.
 
     Start by creating `mycustomparams.json` and adding your parameters using the format described above:
 
@@ -137,27 +137,29 @@ nextflow run nf-core/demo -r dev -profile singularity -param-file <path/to/param
     ```json title="mycustomparams.json"
     {
     "input": "/workspace/gitpod/nf-customize/samplesheet.csv",
-    "outdir": "results_customparams"
+    "outdir": "results_mycustomparams"
     }
     ```
 
     Finally, include the custom `mycustomparams.json` file in your execution command with the `-params-file` option:
 
     ```bash
-    nextflow run nf-core/demo -r dev -profile singularity -params-file mycustomparams.json
+    nextflow run nf-core/demo -profile singularity -params-file mycustomparams.json
     ```
+
+    The pipeline should run successfully.
 
 **Configuration files**
 
 Configuration files are `.config` files that can contain various pipeline properties. Custom paths passed in the command-line using the `-c` option:
 
 ```bash
-nextflow run nf-core/demo -r dev -profile singularity -params-file mycustomparams.json -c <path/to/custom.config>
+nextflow run nf-core/demo -profile singularity -params-file mycustomparams.json -c <path/to/custom.config>
 ```
 
 Custom configuration files are the same format as the configuration file included in the pipeline directory.
 
-Configuration properties are organised into [scopes](https://www.nextflow.io/docs/latest/config.html#config-scopes) by dot prefixing the property names with a scope identifier or grouping the properties in the same scope using the curly brackets notation. For example:
+Configuration properties are organized into [scopes](https://www.nextflow.io/docs/latest/config.html#config-scopes) by dot prefixing the property names with a scope identifier or grouping the properties in the same scope using the curly brackets notation. For example:
 
 ```console title="custom.config"
 alpha.x  = 1
@@ -194,11 +196,11 @@ singularity {
 }
 ```
 
-A full list of scopes is described in detail [here](https://www.nextflow.io/docs/latest/config.html#config-scopes).
+A full list of scopes is described in detail in the [Nextflow documentation](https://www.nextflow.io/docs/latest/config.html#config-scopes).
 
 !!! question "Exercise"
 
-    Create a custom configuration file and enable singularity and singularity auto mounts using the singularity scope.
+    Instead of using the `singularity` profile a custom configuration file can be used to enable singularity. Create a custom configuration file and enable singularity and singularity auto mounts using the singularity scope.
 
     Start by creating `mycustomconfig.config`:
 
@@ -218,8 +220,10 @@ A full list of scopes is described in detail [here](https://www.nextflow.io/docs
     Finally, include `mycustomconfig.config` file in your execution command with the `-c` option:
 
     ```bash
-    nextflow run nf-core/demo -r dev -params-file mycustomparams.json -c mycustomconfig.config
+    nextflow run nf-core/demo -params-file mycustomparams.json -c mycustomconfig.config
     ```
+
+    The pipeline will run successfully.
 
 !!! note "Multiple config files"
 
@@ -262,7 +266,7 @@ process {
     }
 ```
 
-If a process is used multiple times in the same pipeline, an extended execution path of the module may be required to make it more specific:
+An extended execution path of the module may be required to make it more specific if a process is used multiple times in a pipeline:
 
 ```console title="custom.config"
 process {
@@ -276,7 +280,7 @@ The extended execution path is built from the pipelines, subworkflows, and modul
 
 !!! question "Exercise"
 
-    Modify your existing `mycustomconfig.config` by adding a process scope with the `withName` selector. Modify the `publishDir` path to create a `multiqc` folder directly inside your working directory:
+    Modify your existing `mycustomconfig.config` by adding a process scope with the `withName` selector. Modify the `publishDir` path to create a `reports` folder directly inside your working directory:
 
     Start by opening `mycustomconfig.config` that contains your singularity scope:
 
@@ -284,13 +288,13 @@ The extended execution path is built from the pipelines, subworkflows, and modul
     code mycustomconfig.config
     ```
 
-    Next, using a `process` scope and using the `withName` selector for `MULTIQC`, change the `publishDir` to `"multiqc"`.
+    Next, using a `process` scope and using the `withName` selector for `MULTIQC`, change the `publishDir` to `"reports"`.
 
     ```console title="custom.config"
     process {
         withName: 'MULTIQC' {
             publishDir = [
-                path: { "multiqc" }
+                path: { "reports" }
             ]
         }
     }
@@ -299,7 +303,7 @@ The extended execution path is built from the pipelines, subworkflows, and modul
     Finally, execute your run command again:
 
     ```bash
-    nextflow run nf-core/demo -r dev -profile test,singularity -params-file mycustomparams.json -c mycustomconfig.config
+    nextflow run nf-core/demo -profile test,singularity -params-file mycustomparams.json -c mycustomconfig.config
     ```
 
     View the `multiqc` folder inside your working directory:
@@ -314,10 +318,10 @@ It is important to consider how the different configuration options interact dur
 
 !!! question "Exercise"
 
-    Execute the `nf-core/demo` pipeline with your `mycustomparams.json` file, your `mycustomconfig.config` file, and a command line flag `--outdir finalexecution`:
+    Execute the `nf-core/demo` pipeline with your `mycustomparams.json` file, your `mycustomconfig.config` file, and a command line flag `--outdir results_mixed`:
 
     ```bash
-    nextflow run nf-core/demo -r dev -params-file mycustomparams.json -c mycustomconfig.config --outdir finalexecution
+    nextflow run nf-core/demo -params-file mycustomparams.json -c mycustomconfig.config --outdir results_mixed
     ```
 
-    Note how you now have a new output directory named `finalexecution` despite the directory being named `results_customparams` in your custom parameters file.
+    You now have a new output directory named `results_mixed` despite the directory being named `results_customparams` in your custom parameters file.
