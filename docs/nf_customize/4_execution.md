@@ -162,7 +162,7 @@ Every nf-core pipeline also comes with a `test` profile. This is a minimal set o
 
 The `test` profile can be very useful for performing a test run of nf-core pipeline on your infrastructure before using your own data. As the `test` profile is expected to run it can be used to help diagnose local issues before you scale up your analysis.
 
-You should use the `test` profile to check the pipeline runs before analyzing your own data. 
+You should use the `test` profile to check the pipeline runs before analyzing your own data.
 
 The `test` profile for `nf-core/demo` is shown below:
 
