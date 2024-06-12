@@ -1,10 +1,10 @@
 # Introduction
 
-This workshop should be completed using the [Nextflow Training Gitpod Environment](https://gitpod.io/#https://github.com/nextflow-io/training).
+Training on the Nextflow community training portal are optimized for use withing our Gitpod environment.
 
 Gitpod offers a virtual machine with everything already set up for you, accessible from your web browser or built into your code editor (e.g., VSCode).
 
-If you already have an account, click on the button below, otherwise continue in this module to set up your account for the first time.
+If you already have a Gitpod account, click on the button below, otherwise continue in this module to set up your account for the first time.
 
 Let's get started!
 

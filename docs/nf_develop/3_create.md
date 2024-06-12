@@ -2,19 +2,27 @@
 
 The nf-core pipeline template is a standardized framework designed to streamline the development of Nextflow-based bioinformatics pipelines.
 
-Creating a pipeline using the nf-core template is greatly simplified by the nf-core tooling, which will help you create a pipeline using the set framework and can be modified to suit your own purposes.
+Creating a pipeline using the nf-core template is greatly simplified by the nf-core tooling. It will help you create a pipeline using the set framework that can be modified to suit your own purposes.
 
 Here, you will use the nf-core template to kickstart your pipeline development using the latest version of Nextflow and the nf-core tooling.
 
 ## The `nf-core create` command
 
-The `nf-core create` command makes a new pipeline using the nf-core base template with a pipeline name, description, and author. It is the first and most important step for creating a pipeline that will seamlessly integrate to the rest of the wider Nextflow ecosystem.
+nf-core tooling has commands for pipeline users and developers.
+
+```
+nf-core --help
+```
+
+Here we will focus on the tooling to assist pipeline developers.
+
+The `nf-core create` command makes a new pipeline using the nf-core base template with a pipeline name, description, and author. It is the first and most important step for creating a pipeline that will integrate with the wider Nextflow ecosystem.
 
 ```bash
 nf-core create
 ```
 
-Although you can provide options on the command line, it’s easiest to use the interactive prompts.
+When executing this command you will be given a series of prompts to setup your pipeline.
 
 ```bash
 ? Workflow name <name>
@@ -23,13 +31,15 @@ Although you can provide options on the command line, it’s easiest to use the 
 ? Do you want to customize which parts of the template are used? (y/N) <n>
 ```
 
+If the command has run successfully, you will see a new folder in your current directory.
+
 !!! question "Exercise"
 
     Create a pipeline named `mypipeline` using the `nf-core create` command.
 
 !!! note
 
-    If the command has run successfully, you will see a new folder in your current directory that has been given the name `nf-core-mypipeline`.
+    If run successfully you will see a new folder in your current directory that has been given the name `nf-core-mypipeline`.
 
 ### Customizing the template
 
@@ -69,9 +79,11 @@ Skip template areas?
 
 The `nf-core create` command suggests commands for submitting this to GitHub.
 
-Before you can use these commands, you will need to create an empty repository on GitHub for your template to be pushed to.
+You will first need to create an empty repository on GitHub for your template to be pushed to.
 
 When you are logged into GitHub, you can use the `New` repository button or navigate to [https://github.com/new](https://github.com/new) and follow the prompts to make a new repository.
+
+![Github new repo](img/github.new.png)
 
 Once you have created the repository you can push your template to GitHub.
 
@@ -80,6 +92,22 @@ cd /workspace/gitpod/nf-develop/nf-core-mypipeline
 git remote add origin https://github.com/<USERNAME>/<REPO>.git
 git push --all origin
 ```
+
+!!! warning "https vs ssh"
+
+    When using Gitpod you must use **https** not **ssh** when adding your remote:
+
+    For example, you should use:
+
+    ```
+    git remote add origin https://github.com/<USERNAME>/<REPO>.git
+    ```
+
+    Not:
+
+    ```
+    git remote add origin git@github.com:<USERNAME>/<REPO>.git
+    ```
 
 By default, three branches will all be pushed to GitHub using the commands above.
 
@@ -91,11 +119,7 @@ To https://github.com/<USERNAME>/myfirstpipeline.git
  * [new branch]      main -> main
 ```
 
-!!! warning "Permissions"
-
-    If this is the first time you have used Gitpod for development work you will need to edit your permissions to push changes.
-
-    To edit your Gitpod permissions, click on your avatar in the top right-hand corner of your Gitpod window and select `User Settings` from the dropdown window. Click on `Git Providers` on the right hand menu. Edit the permissions for your GitHub account by clicking on the three dots next to your GitHub account and give your Gitpod account permissions to access for GitHub repositories.
+The role each of these branches have in pipeline development will be explained in subsequent sections.
 
 !!! question "Exercise"
 
@@ -118,7 +142,7 @@ The nf-core pipeline template has a `main.nf` file that calls `mypipeline.nf` fr
 --8<-- "docs/nf_template/img/nested.excalidraw.svg"
 </figure>
 
-Within your pipeline repository, `modules` and `subworkflows` are stored within the `local` and `nf-core` folders. The `nf-core` folder is for components that have come from nf-core while the `local` folder is for components that have been developed independently.
+Within your pipeline repository, `modules` and `subworkflows` are stored within `local` and `nf-core` folders. The `nf-core` folder is for components that have come from the online nf-core repository while the `local` folder is for components that have been developed independently.
 
 ```
 modules/
@@ -139,13 +163,15 @@ modules/
     .
 ```
 
+Modules from nf-core follow the same structure and contain a small number of additional files that are used for testing and documentation.
+
 ### Configuration files
 
 The nf-core pipeline template utilizes Nextflows flexible customization options and has a series of configuration files throughout the template.
 
 In the template, the `nextflow.config` file is a central configuration file and is used to set default values for parameters and other configuration options. The majority of these configuration options are applied by default while others (e.g., software dependency profiles) are included as optional profiles.
 
-There are several configuration files that are stored in the `conf` folder and are either added to the configuration by default or optionally as profiles:
+There are several configuration files that are stored in the `conf` folder and are added to the configuration by default or optionally as profiles:
 
 -   `base.config`: sensible defaults for pipeline resource requests.
 -   `igenomes.config`: configuration settings required to access the igenomes registry.
@@ -165,7 +191,7 @@ By default, the `.nf-core.yml` file will only show the repository is a pipeline.
 
 ### `nextflow_schema.json`
 
-The `nextflow_schema.json` is a file used to store parameter related information including type, description and help text in a machine readable format. This file is used for various purposes, including automated parameter validation, help text generation, and interactive parameter form rendering in UI interfaces.
+The `nextflow_schema.json` is a file used to store parameter related information including type, description and help text in a machine readable format. The schema is used for various purposes, including automated parameter validation, help text generation, and interactive parameter form rendering in UI interfaces.
 
 ### GitHub actions workflows
 
@@ -186,10 +212,10 @@ Notably, many of these tests are only configured for the nf-core repo. However, 
 
 You can read more about creating and modifying workflows on the [GitHub Actions documentation webpage](https://docs.github.com/en/actions).
 
+Even though many of these action workflows are not relevant for private repositories, it is recommended to keep them in place to prevent `nf-core lint` from throwing errors.
+
 !!! note
 
     To enable these workflows you need to click `Enable Actions on this Repository` under the `Actions` tab in your GitHub repository.
 
-!!! warning "Deleting Workflows"
-
-    Even though many of these action workflows are not relevant for private repositories, it is recommended to keep them in place to prevent `nf-core lint` from throwing errors.
+    ![Github actions](img/github.actions.png)

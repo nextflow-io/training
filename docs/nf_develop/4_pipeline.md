@@ -1,6 +1,6 @@
 # Developing your pipeline
 
-The nf-core pipeline template is a working pipeline and comes preconfigured with two modules:
+The nf-core pipeline template is a working pipeline and comes pre-configured with two modules:
 
 -   [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/): A tool that performs quality control checks on raw sequence data coming from high throughput sequencing pipelines. It provides a modular set of analyses that can be used to give a quick impression of your data.
 -   [MultiQC](https://multiqc.info/): A modular tool to aggregate results from bioinformatics analyses across many samples into a single report.
@@ -30,9 +30,9 @@ Additional test profiles can be created to test different parts of your pipeline
 
 ## Adding a new tool to your pipeline
 
-Here, as an example, let's say you need a process for `fastp`, a fastq data pre-processing tool that has functions for quality control, trimming of adapters, filtering by quality, and read pruning.
+Here, as an example, you want to trim low-quality bases from both ends of your fastq files using the [`seqtk trim`](https://github.com/lh3/seqtk) command.
 
-The `fastp` module will take fastq files from the sample sheet as inputs and will produce reports that you will add as inputs for the `MultiQC` process
+The `seqtk trim` module will take fastq files from the sample sheet as inputs and will produce trimmed fastq files that can be used as an input for other tools and version information about the `seqtk` tools that will be mixed into the inputs for the `MultiQC` process.
 
 <figure class="excalidraw">
 --8<-- "docs/nf_template/img/pipeline.excalidraw.svg"
@@ -50,7 +50,7 @@ GitHub branches are used to isolate development work without affecting other bra
 
 You can merge updates from one branch into another branch using a pull request.
 
-The `nf-core create` created three branches: `main`, `dev`, and `TEMPLATE`.
+The `nf-core create` command initiated three branches: `main`, `dev`, and `TEMPLATE`.
 
 In nf-core, the `main` branch is for stable releases and the `dev` branch is for merging feature branches together. This enables the `main` branch to remain fully functional while new features are developed in feature branches, collected in the `dev` branch, and then merged into `main` once they are ready.
 
@@ -78,11 +78,9 @@ You can find out more about working collaboratively with branches on the [GitHub
 
 The `TEMPLATE` branch is used by the `nf-core sync` command to integrate template changes to your pipeline. You should **never** modify the `TEMPLATE` branch as any changes will likely disrupt the syncing functionality.
 
-You will learn more about the `TEMPLATE` branch in later sections.
-
 ### Installing the `fastp` module
 
-The `nf-core modules list` command can be used to list modules in your local pipeline or the nf-core remote repository.
+The `nf-core modules list` command can be used to show the modules in your local pipeline or the nf-core remote repository.
 
 ```
 nf-core modules list remote
@@ -98,35 +96,38 @@ nf-core modules install
 You can follow the prompts to find and install the module you are interested in:
 
 ```console
-? Tool name: fastp
+? Tool name: seqtk_trim
 ```
 
 Once selected, the tooling will install the module in the `modules/nf-core/` folder and suggest code that you can add to your main workflow file (`workflows/mypipeline.nf`).
 
 ```console
-INFO     Installing 'fastp'
+INFO     Installing 'seqtk_trim'
 INFO     Use the following statement to include this module:
 
-include { FASTP } from '../modules/nf-core/fastp/main'
+include { SEQTK_TRIM } from '../modules/nf-core/seqtk/trim/main'
+
 ```
 
 !!! question "Exercise"
 
-    Run the `nf-core modules install` command to add the `fastp` module to your pipeline.
+    Run the `nf-core modules install` command to add the `seqtk_trim` module to your pipeline.
 
 To enable reporting and reproducibility, modules and subworkflows from the nf-core repository are tracked using hashes in the `modules.json` file. When modules are installed or removed using the nf-core tooling the `modules.json` file will be automatically updated.
 
 !!! question "Exercise"
 
-    Open your `modules.json` file and see if the `fastp` module is being tracked.
+    Open your `modules.json` file and see if the `seqtk_trim` module is being tracked.
 
 ### Adding a module to your pipeline
 
-Although the module has been installed in your local pipeline repository, it is not yet added to your pipeline. The suggested `include` statement needs to be added to your `workflows/mypipeline.nf` file and the process call (with inputs) needs to be added to the workflow block.
+Although the module has been installed in your local pipeline repository, it is not yet added to your pipeline.
+
+The suggested `include` statement needs to be added to your `workflows/mypipeline.nf` file and the process call (with inputs) needs to be added to the workflow block.
 
 ```groovy title="workflows/mypipeline.nf" linenums="7"
 include { FASTQC                 } from '../modules/nf-core/fastqc/main'
-include { FASTP                  } from '../modules/nf-core/fastp/main'
+include { SEQTK_TRIM             } from '../modules/nf-core/seqtk/trim/main'
 include { MULTIQC                } from '../modules/nf-core/multiqc/main'
 ```
 
@@ -134,121 +135,79 @@ include { MULTIQC                } from '../modules/nf-core/multiqc/main'
 
     Add the suggested `include` statement to your `mypipeline.nf` file.
 
-To add the fastp module to your workflow you will need to check what inputs are required.
+To add the `SEQTK_TRIM` module to your workflow you will need to check what inputs are required.
 
-You can view the input channels for the module by opening the `./modules/nf-core/fastp/main.nf` file.
+You can view the input channels for the module by opening the `./modules/nf-core/seqtk/trim/main.nf` file.
 
-```groovy title="/modules/nf-core/fastp/main.nf" linenums="10"
+```groovy title="/modules/nf-core/seqtk/trim/main.nf" linenums="10"
 input:
 tuple val(meta), path(reads)
-path  adapter_fasta
-val   save_trimmed_fail
-val   save_merged
 ```
 
-Each nf-core module also has a `meta.yml` file which describes the inputs and outputs. This meta file is rendered on the [nf-core website](https://nf-co.re/modules/fastp), or can be viewed using the `nf-core modules info` command.
+Each nf-core module also has a `meta.yml` file which describes the inputs and outputs. This meta file is rendered on the [nf-core website](https://nf-co.re/modules/seqtk_trim), or can be viewed using the `nf-core modules info` command.
 
 !!! question "Exercise"
 
-    Use the `nf-core modules info` command to view information for the `fastp` module
+    Use the `nf-core modules info` command to view information for the `seqtk_trim` module
 
     ```
-    nf-core modules info fastp
+    nf-core modules info seqtk_trim
     ```
 
-Using this module information you can work out what inputs are required and make decisions about how flexible you want your four inputs to be:
+Using this module information you can work out what inputs are required for the `SEQTK_TRIM` process:
 
 1.  `tuple val(meta), path(reads)`
 
     -   A tuple with a meta _map_ and a list of fastq _files_
     -   The channel `ch_samplesheet` used by the `FASTQC` process can be used as the reads input.
 
-2.  `path  adapter_fasta`
-
-    -   A fasta _file_ with possible adapters
-    -   Should be a parameter as the the adapter file may change between runs
-
-3.  `val   save_trimmed_fail`
-
-    -   A _boolean_ to specify if files that failed to pass trimming should be saved
-    -   Could be hard coded as true or false, or made into a parameter
-
-4.  `val save_merged`
-
-    -   A _boolean_ to specify if merged read files should be saved
-    -   Could be hard coded as true or false, or made into a parameter
-
-To maximize the flexibility of your pipeline the second, third, and fourth inputs can be set via pipeline parameters.
-
-Parameter names should be unique and easily identifiable. Default values should be added to your `nextflow.config` file within the `params` scope.
+As only one input channel required and it already exists it can be added to your `mypipeline.nf` file without any additional channel creation or modifications.
 
 !!! question "Exercise"
 
-    Add new parameters with default values to your `nextflow.config` file.
-
-    ```console title="nextflow.config" linenums="26"
-    // FASTP options
-    adapters                   = null
-    save_trimmed_fail          = false
-    save_merged                = false
-    ```
-
-While `save_trimmed_fail` and `save_merged` are boolean and can have a default value (in this case false), `adapters` is a file, and a default value of `null` will prevent the `FASTP` process from running. However, empty square brackets (`[]`) can be used as input to fill the channel without supplying a file.
-
-A ternary expression (aka a conditional expression) can be used to create a channel that will be either the square brackets or a supplied fasta file.
-
-!!! question "Exercise"
-
-    Create a new channel (`ch_adapters`) using a ternary expression to use either a supplied fasta file or `[]`.
-
-    ```groovy title="workflows/mypipeline.nf" linenums="40"
-    ch_adapters = params.adapters ? params.adapters : []
-    ```
-
-Now you have all four input channels, you can add the `FASTP` process to your pipeline workflow block.
-
-Make sure to comment your code so you can recognize the process.
-
-!!! question "Exercise"
+    Add the `SEQTK_TRIM` process to your `mypipeline.nf` file.
 
     ```groovy title="workflows/mypipeline.nf" linenums="40"
     //
-    // MODULE: FASTP
+    // MODULE: Run SEQTK_TRIM
     //
-    ch_adapters = params.adapters ? params.adapters : []
-    FASTP (
-        ch_samplesheet,
-        ch_adapters,
-        params.save_trimmed_fail,
-        params.save_merged
+    SEQTK_TRIM (
+        ch_samplesheet
     )
     ```
 
-Finally, to provide the `FASTP` outputs as inputs to your `MULTIQC` process, you can mix them into existing channels.
+As with the inputs, you can view the outputs for the module by opening the `/modules/nf-core/seqtk/trim/main.nf` file and viewing the module metadata.
 
-As with the inputs, you can view the outputs for the module by opening the `/modules/nf-core/fastp/main.nf` file and viewing the module metadata.
-
-```groovy title="/modules/nf-core/fastp/main.nf" linenums="10"
+```groovy title="/modules/nf-core/seqtk/trim/main.nf" linenums="13"
 output:
-tuple val(meta), path('*.fastp.fastq.gz') , optional:true, emit: reads
-tuple val(meta), path('*.json')           , emit: json
-tuple val(meta), path('*.html')           , emit: html
-tuple val(meta), path('*.log')            , emit: log
-path "versions.yml"                       , emit: versions
-tuple val(meta), path('*.fail.fastq.gz')  , optional:true, emit: reads_fail
-tuple val(meta), path('*.merged.fastq.gz'), optional:true, emit: reads_merged
+tuple val(meta), path("*.fastq.gz"), emit: reads
+path "versions.yml"                , emit: versions
 ```
 
-MultiQC will accept json files as well as collected software versions.
+To help with organization and readability it can be useful to create named output channels.
+
+```groovy title="workflows/mypipeline.nf" linenums="46"
+ch_trimmed  = SEQTK_TRIM.out.reads
+```
+
+Similarly, it can be useful to immediately mix the versions of tools into the `ch_versions` channel so they can be used as an input for the `MULTIQC` process.
+
+```groovy title="workflows/mypipeline.nf" linenums="47"
+ch_versions = ch_versions.mix(SEQTK_TRIM.out.versions.first())
+```
 
 !!! question "Exercise"
 
-    Use the `mix` channel operator to mix the `json` and `versions` channels with the `ch_multiqc_files` and `ch_versions` channels, respectively.
+    Create a channel named `ch_trimmed` from the `reads` output mix the `seqtk` `versions` output into the `ch_versions` channel.
 
     ```groovy title="workflows/mypipeline.nf" linenums="50"
-    ch_multiqc_files = ch_multiqc_files.mix(FASTP.out.json.collect{it[1]}.ifEmpty([]))
-    ch_versions      = ch_versions.mix(FASTP.out.versions.first())
+    ch_trimmed  = SEQTK_TRIM.out.reads
+    ch_versions = ch_versions.mix(SEQTK_TRIM.out.versions.first())
     ```
+
+### Add custom parameters
+
+Parameter names should be unique and easily identifiable. Default values should be added to your `nextflow.config` file within the `params` scope.
 
 ### Additional configuration options
 
@@ -262,12 +221,12 @@ Extra configuration may be applied as directives by using `args`. You can find m
 
     Add this snippet to your `conf/modules.config` file to save fastp reports in folders named using `meta.id`.
 
-    ```console title="conf/modules.config" linenums="25"
-    withName: 'FASTP' {
+    ```console title="conf/modules.config" linenums="31"
+    withName: 'SEQTK_TRIM' {
         publishDir = [
-            path: { "${params.outdir}/fastp/${meta.id}" },
+            path: { "${params.outdir}/fq/${meta.id}" },
             mode: params.publish_dir_mode,
-            pattern: "*.{html,json,log}"
+            pattern: "*.{fastq.gz}"
         ]
     }
     ```
