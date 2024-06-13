@@ -255,12 +255,12 @@ println "The $foxtype ${foxcolor.join()} fox"
 
 x = 'Hello'
 y = 'World'
-println '$x + $y'
+println '$x $y'
 ```
 
 ```console title="Output"
 The quick brown fox
-$x + $y
+$x $y
 ```
 
 !!! info
@@ -270,11 +270,11 @@ $x + $y
 
 !!! question "Exercise"
 
-    Modify the script above to print `Hello World` instead of `$x + $y`.
+    Modify the script above to print `Hello World` instead of `$x $y`.
 
     ??? Solution
 
-        Modify `println '$x + $y'` to `println "$x + $y"`.
+        Modify `println '$x $y'` to `println "$x $y"`.
 
         ```groovy linenums="1" title="snippet.nf"
         foxtype = 'quick'
@@ -283,7 +283,7 @@ $x + $y
 
         x = 'Hello'
         y = 'World'
-        println "$x + $y"
+        println "$x $y"
         ```
 
 Finally, string literals can also be defined using the `/` character as a delimiter. They are known as **slashy** strings and are useful for defining regular expressions and patterns, as there is no need to escape backslashes. As with double-quote strings they allow to interpolate variables prefixed with a `$` character.
