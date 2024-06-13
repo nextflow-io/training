@@ -2,6 +2,10 @@
 
 The Gitpod environment contains some test data that will be used in this workshop.
 
+!!! note
+
+    Follow [this link](envsetup/00_introduction.md) if you have not yet setup your Gitpod environment.
+
 You will complete this module in the `nf-develop` folder.
 
 This is an empty directory where you will create an launch your pipeline.

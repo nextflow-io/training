@@ -58,10 +58,10 @@ Executing the `nf-core lint` command from within your pipeline repository will p
 ╭───────────────────────╮
 │ LINT RESULTS SUMMARY  │
 ├───────────────────────┤
-│ [✔] 184 Tests Passed  │
+│ [✔] 192 Tests Passed  │
 │ [?]   0 Tests Ignored │
 │ [!]  26 Test Warnings │
-│ [✗]   1 Tests Failed  │
+│ [✗]   1 Test Failed   │
 ╰───────────────────────╯
 ```
 
@@ -71,7 +71,7 @@ Executing the `nf-core lint` command from within your pipeline repository will p
 
 It is expected that some of these tests will fail.
 
-### Updating `nextflow_schema.json`
+## Updating `nextflow_schema.json`
 
 If you have added parameters and they have not been documented in the `nextflow_schema.json` file then pipeline tests will fail during linting.
 
@@ -94,7 +94,7 @@ INFO     [✓] Default parameters match schema validation
 INFO     [✓] Pipeline schema looks valid (found 31 params)
 ✨ Found 'params.skip_trim' in the pipeline config, but not in the schema. Add to pipeline schema? [y/n]: y
 
-🚀  Launch web builder for customization and editing? [y/n]:
+🚀  Launch web builder for customization and editing? [y/n]: y
 ```
 
 Using the web builder you can add add details about your new parameters.
@@ -109,7 +109,7 @@ Once you have made your edits you can click `Finished` and all changes will be a
 
     Use the `nf-core schema build` command to update your schema. Add any grouping and information you think is appropriate.
 
-    Lint your pipeline again to see if the tests now pass.
+    Lint your pipeline again to see if the tests pass.
 
 ## Push your changes to GitHub
 
@@ -125,6 +125,8 @@ As your current branch `myFeature` has no upstream branch you will need to set t
 
     ```bash
     git add .
-    git commit -m "Added fastp to pipeline"
+    git commit -m "Added setk_trim to pipeline"
     git push --set-upstream origin myFeature
     ```
+
+From this point, you could merge your update into the dev branch or continue your development.

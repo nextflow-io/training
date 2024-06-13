@@ -45,6 +45,16 @@ We have several workshops available on this website - find the one that's right 
 
 ## Applied Training
 
+!!! exercise "Environment Setup"
+
+    !!! quote inline end ""
+
+        :material-lightbulb: Essential for setting up your Gitpod for the first time.
+
+    An essential tutorial for setting up your Gitpod environment for the first time.
+
+    [Launch the environment setup training :material-arrow-right:](envsetup/00_introduction.md){ .md-button .md-button--primary }
+
 !!! exercise "Hello Nextflow"
 
     !!! quote inline end ""

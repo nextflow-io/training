@@ -32,12 +32,9 @@ nav:
           - advanced/configuration.md
           - advanced/summary.md
           - advanced/support.md
-    - RNA-seq Variant Calling:
-          - hands_on/index.md
-          - hands_on/01_datasets.md
-          - hands_on/02_workflow.md
-          - hands_on/03_setup.md
-          - hands_on/04_implementation.md
+    - Environment setup:
+          - envsetup/00_introduction.md
+          - envsetup/01_setup.md
     - Hello Nextflow:
           - hello_nextflow/00_introduction.md
           - hello_nextflow/01_orientation.md
@@ -163,6 +160,7 @@ plugins:
               - hands_on/01_datasets.md
               - advanced/operators.md
               - hello_nextflow/01_orientation.md
+              - envsetup/00_introduction.md
               - nf_customize/00_introduction.md
               - nf_develop/00_introduction.md
               - troubleshoot/00_introduction.md

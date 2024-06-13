@@ -2,6 +2,10 @@
 
 The Gitpod environment contains some test data that will be used in this workshop.
 
+!!! note
+
+    Follow [this link](envsetup/00_introduction.md) if you have not yet setup your Gitpod environment.
+
 You will complete this module in the `nf-customize/` folder.
 
 In this folder you will find three pairs of zipped fastq files (`*.fq.gz`) in a `data/` folder and an example samplesheet (`samplesheet.csv`) in a `scripts/` folder.
