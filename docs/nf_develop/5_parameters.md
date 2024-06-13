@@ -10,7 +10,7 @@ In the nf-core template the default values for parameters are set in the `nextfl
 
 Any new parameters should be added to the `nextflow.config` with a default value within the `params` scope.
 
-Parameter names should be unique and easily identifiable. 
+Parameter names should be unique and easily identifiable.
 
 !!! question "Exercise"
 
@@ -27,7 +27,7 @@ Parameters are accessible in the pipeline script.
 
 Here, an `if` statement that is depended on the `skip_trim` parameter can be used to modulate the execution of the `SEQTK_TRIM` process. An `!` can be used to imply the logical "not".
 
-Thus, if the `skip_trim` parameter is **not** `true`,  the `SEQTK_TRIM` will be be executed.
+Thus, if the `skip_trim` parameter is **not** `true`, the `SEQTK_TRIM` will be be executed.
 
 !!! question "Exercise"
 
@@ -108,7 +108,7 @@ Once you have made your edits you can click `Finished` and all changes will be a
 !!! question "Exercise"
 
     Use the `nf-core schema build` command to update your schema. Add any grouping and information you think is appropriate.
-    
+
     Lint your pipeline again to see if the tests now pass.
 
 ## Push your changes to GitHub
