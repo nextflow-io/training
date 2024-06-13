@@ -511,7 +511,7 @@ _After:_
 // Create input channel from samplesheet in CSV format
 reads_ch = Channel.fromPath(params.reads_bam)
                     .splitCsv(header: true)
-                    .map{row -> [row.id, file(row.reads_bam)]}
+                    .map{row -> [file(row.ID), file(row.reads_bam)]}
 ```
 
 #### 5.4. Add the sample ID to the SAMTOOLS_INDEX input definition
