@@ -260,7 +260,7 @@ println '$x $y'
 
 ```console title="Output"
 The quick brown fox
-$x + $y
+$x $y
 ```
 
 !!! info
@@ -270,7 +270,7 @@ $x + $y
 
 !!! question "Exercise"
 
-    Modify the script above to print `Hello World` instead of `$x + $y`.
+    Modify the script above to print `Hello World` instead of `$x $y`.
 
     ??? Solution
 
