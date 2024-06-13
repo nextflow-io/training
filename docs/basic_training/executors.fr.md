@@ -282,7 +282,7 @@ aws.batch.cliPath = '/home/ec2-user/miniconda/bin/aws' // (6)!
     nextflow run script7.nf -profile amazon
     ```
 
-Les détails complets sur le déploiement par lots d'AWS sont disponibles sur [ce lien](https://www.nextflow.io/docs/latest/awscloud.html#aws-batch).
+Les détails complets sur le déploiement par lots d'AWS sont disponibles sur [ce lien](https://www.nextflow.io/docs/latest/aws.html#aws-batch).
 
 ## Montages des volumes
 
@@ -396,7 +396,7 @@ Nextflow permet l'utilisation de plusieurs exécuteurs dans la même application
 
 Pour activer cette fonctionnalité, utilisez un ou plusieurs [selecteur de processes](https://www.nextflow.io/docs/latest/config.html#config-process-selectors) dans votre fichier de configuration Nextflow.
 
-Par exemple, appliquez la [configuration AWS Batch](https://www.nextflow.io/docs/latest/awscloud.html#awscloud-batch-config) uniquement à un sous-ensemble de processus dans votre flux de travail. Vous pouvez essayer ce qui suit :
+Par exemple, appliquez la [configuration AWS Batch](https://www.nextflow.io/docs/latest/aws.html#configuration) uniquement à un sous-ensemble de processus dans votre flux de travail. Vous pouvez essayer ce qui suit :
 
 ```groovy linenums="1"
 process {
