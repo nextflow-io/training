@@ -274,7 +274,7 @@ aws.batch.cliPath = '/home/ec2-user/miniconda/bin/aws' // (6)!
     nextflow run script7.nf -profile amazon
     ```
 
-The complete details about AWS Batch deployment are available at [this link](https://www.nextflow.io/docs/latest/awscloud.html#aws-batch).
+The complete details about AWS Batch deployment are available at [this link](https://www.nextflow.io/docs/latest/aws.html#aws-batch).
 
 !!! cboard-list-2 "Summary"
 
@@ -411,7 +411,7 @@ To enable this feature use one or more [process selectors](https://www.nextflow.
 
 When running a hybrid workflow, `-bucket-dir` and `-work-dir` should be used to define separate work directories for remote tasks and local tasks, respectively.
 
-For example, apply the [AWS Batch configuration](https://www.nextflow.io/docs/latest/awscloud.html#awscloud-batch-config) only to a subset of processes in your workflow. You can try the following:
+For example, apply the [AWS Batch configuration](https://www.nextflow.io/docs/latest/aws.html#configuration) only to a subset of processes in your workflow. You can try the following:
 
 ```groovy linenums="1" title="nextflow.config"
 process {
