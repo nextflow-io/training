@@ -1,4 +1,4 @@
-# Developing your pipeline
+# Adding modules
 
 The nf-core pipeline template is a working pipeline and comes pre-configured with two modules:
 
@@ -135,6 +135,10 @@ include { MULTIQC                } from '../modules/nf-core/multiqc/main'
 
     Add the suggested `include` statement to your `mypipeline.nf` file.
 
+    ```groovy title="workflows/mypipeline.nf" linenums="8"
+    include { SEQTK_TRIM             } from '../modules/nf-core/seqtk/trim/main'
+    ```
+
 To add the `SEQTK_TRIM` module to your workflow you will need to check what inputs are required.
 
 You can view the input channels for the module by opening the `./modules/nf-core/seqtk/trim/main.nf` file.
@@ -184,13 +188,15 @@ tuple val(meta), path("*.fastq.gz"), emit: reads
 path "versions.yml"                , emit: versions
 ```
 
-To help with organization and readability it can be useful to create named output channels.
+To help with organization and readability it is beneficial to create named output channels.
+
+For `SEQTK_TRIM`, the `reads` output could be put into a channel named `ch_trimmed`.
 
 ```groovy title="workflows/mypipeline.nf" linenums="46"
 ch_trimmed  = SEQTK_TRIM.out.reads
 ```
 
-Similarly, it can be useful to immediately mix the versions of tools into the `ch_versions` channel so they can be used as an input for the `MULTIQC` process.
+Similarly, it is beneficial immediately mix the versions of tools into the `ch_versions` channel so they can be used as an input for the `MULTIQC` process.
 
 ```groovy title="workflows/mypipeline.nf" linenums="47"
 ch_versions = ch_versions.mix(SEQTK_TRIM.out.versions.first())
@@ -198,28 +204,28 @@ ch_versions = ch_versions.mix(SEQTK_TRIM.out.versions.first())
 
 !!! question "Exercise"
 
-    Create a channel named `ch_trimmed` from the `reads` output mix the `seqtk` `versions` output into the `ch_versions` channel.
+    Create a channel named `ch_trimmed` from the `SEQTK_TRIM.out.reads` output mix the `SEQTK_TRIM.out.versions` output with the `ch_versions` channel.
 
-    ```groovy title="workflows/mypipeline.nf" linenums="50"
+    ```groovy title="workflows/mypipeline.nf" linenums="46"
     ch_trimmed  = SEQTK_TRIM.out.reads
     ch_versions = ch_versions.mix(SEQTK_TRIM.out.versions.first())
     ```
 
-### Add custom parameters
+!!! note
 
-Parameter names should be unique and easily identifiable. Default values should be added to your `nextflow.config` file within the `params` scope.
+    The `first` operator is used to emit the first item from `SEQTK_TRIM.out.versions` to avoid duplication.
 
 ### Additional configuration options
 
 To prevent changing the nf-core modules, additional configuration options can be applied to a module using scopes within configuration files.
 
-The configuration of modules is commonly added to the `modules.conf` file in the `conf` folder. Process selectors (e.g., `withName`) are used to apply configuration to modules selectively. Process selectors must be used within the process scope.
+The configuration of modules is commonly added to the `modules.conf` file in the `conf` folder. Process selectors (e.g., `withName`) are used to apply configuration to modules selectively. Process selectors must be used within the `process` scope.
 
-Extra configuration may be applied as directives by using `args`. You can find many examples of how arguments are added to modules in nf-core pipelines, for example, the nf-core/rnaseq [modules.config](https://github.com/nf-core/rnaseq/blob/master/conf/modules.config) file.
+Extra configuration may also be applied as directives by using `args`. You can find many examples of how arguments are added to modules in nf-core pipelines, for example, the nf-core/rnaseq [modules.config](https://github.com/nf-core/rnaseq/blob/master/conf/modules.config) file.
 
 !!! question "Exercise"
 
-    Add this snippet to your `conf/modules.config` file to save fastp reports in folders named using `meta.id`.
+    Add this snippet to your `conf/modules.config` file to save the trimmed fastq files reports in folders named using `meta.id`.
 
     ```console title="conf/modules.config" linenums="31"
     withName: 'SEQTK_TRIM' {
@@ -234,103 +240,3 @@ Extra configuration may be applied as directives by using `args`. You can find m
 !!! note "Closures"
 
     Closures can be used in configuration files to inject code evaluated at runtime.
-
-### Linting your changes
-
-Linting is a static analysis process that helps ensure code quality by automatically identifying syntax errors, potential bugs, and adherence to coding standards. By enforcing consistency and best practices, linting enhances code readability, reduces errors, and streamlines the development workflow.
-
-As a part of nf-core tools, the `nf-core lint` command can be used to check for inconsistencies in your code, compare your code against source code, and compare your code against nf-core standards.
-
-Executing the `nf-core lint` command from within your pipeline repository will print a list of ignored tests, warnings, failed tests, and a summary.
-
-```console
-╭───────────────────────╮
-│ LINT RESULTS SUMMARY  │
-├───────────────────────┤
-│ [✔] 184 Tests Passed  │
-│ [?]   0 Tests Ignored │
-│ [!]  26 Test Warnings │
-│ [✗]   3 Tests Failed  │
-╰───────────────────────╯
-```
-
-### Updating `nextflow_schema.json`
-
-If you have added parameters and they have not been documented in the `nextflow_schema.json` file then pipeline tests will fail during linting.
-
-```
-schema_params: Param adapters from nextflow config not found in nextflow_schema.json
-schema_params: Param save_trimmed_fail from nextflow config not found in nextflow_schema.json
-schema_params: Param save_merged from nextflow config not found in nextflow_schema.json
-```
-
-For these tests to pass the `nextflow_schema.json` file must be updated with the parameters that were added to your pipeline but have not been documented.
-
-The `nextflow_schema.json` file can get very big and very complicated very quickly. The `nf-core schema build` command is designed to support developers write, check, validate, and propose additions to your `nextflow_schema.json` file. It will enable you to launch a web builder to edit this file in your web browser rather than trying to edit this file manually.
-
-```console
-INFO     [✓] Default parameters match schema validation
-INFO     [✓] Pipeline schema looks valid (found 31 params)
-✨ Found 'params.adapters' in the pipeline config, but not in the schema. Add to pipeline schema? [y/n]: y
-✨ Found 'params.save_trimmed_fail' in the pipeline config, but not in the schema. Add to pipeline schema? [y/n]: y
-✨ Found 'params.save_merged' in the pipeline config, but not in the schema. Add to pipeline schema? [y/n]: y
-INFO     Writing schema with 34 params: 'nextflow_schema.json'
-
-🚀  Launch web builder for customization and editing? [y/n]:
-```
-
-Using the web builder you can add add details about your new parameters.
-
-The parameters that you have added to your pipeline will be added to the bottom of the `nf-core schema build` file. Some information about these parameters will be automatically filled based on the default value from your `nextflow.config`. You will be able to categorize your new parameters into a group, add icons, and add descriptions for each.
-
-![Pipeline parameters](img/schemabuild.png)
-
-Once you have made your edits you can click `Finished` and all changes will be automatically added to your `nextflow_schema.json` file.
-
-!!! question "Exercise"
-
-    Use the `nf-core schema build` command to update your schema. Add any grouping and information you think is appropriate. Lint your pipeline again.
-
-## Bump your pipeline version
-
-Having a universal way of versioning the development projects is the best way to track what is going on with the software as new features are added. This problem can be solved by following semantic versioning rules: `[major].[minor].[patch]`
-
-For example, starting with a release version `1.4.3`, bumping the version to:
-
--   `1.4.4` would be a patch release for minor things such as fixing bugs.
--   `1.5` would be a minor release, for example adding some new features.
--   `2.0` would correspond to the major release where results would no longer be backward compatible.
-
-The pipeline version number is mentioned in a lot of different places in nf-core pipelines. The `nf-core bump-version` command updates the version for you automatically, so that you don't accidentally miss any. It can be used for each pipeline release, and again for the next development version after release.
-
-```bash
-nf-core bump-version 1.0
-```
-
-After you have updated the version of your pipeline, your changes can be pushed to GitHub.
-
-!!! question "Exercise"
-
-    Bump your pipeline version to `1.0` using the `nf-core bump-version` command.
-
-### Push your changes to GitHub
-
-When you are satisfied with your improvements you can `add`, `commit`, and `push` your changes to GitHub.
-
-You can check which branch you are on using the `git branch` command.
-
-As your current branch `myFeature` has no upstream branch you will need to set the remote as upstream the first time you push your changes.
-
-!!! question "Exercise"
-
-    Push your changes to your GitHub repository.
-
-    ```bash
-    git add .
-    git commit -m "Added fastp to pipeline"
-    git push --set-upstream origin myFeature
-    ```
-
-!!! note "Branch origin"
-
-    To automatically add an origin for branches without a tracking upstream, see `push.autoSetupRemote` in `git help config`.

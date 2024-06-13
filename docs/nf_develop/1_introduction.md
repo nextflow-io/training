@@ -16,7 +16,8 @@ By the end of this workshop you will be able to:
 
 -   Discuss the benefits of using the nf-core pipeline template
 -   Identify the features of nf-core pipeline template that enable best practices
--   Utilize nf-core tooling to accelerate your pipeline development
+-   Add nf-core modules to a pipeline using the nf-core tooling
+-   Add parameters to a pipeline and update the schema using the nf-core tooling
 
 ## Audience & prerequisites
 
