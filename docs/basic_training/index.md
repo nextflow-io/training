@@ -12,11 +12,11 @@ You are now on the path to writing reproducible and scalable scientific workflow
 
 By the end of this course you should:
 
--  Write simple Nextflow workflows
--  Describe the Nextflow concepts of Channels, Processes and Operators
--  Have an understanding of containerized workflows
--  Understand the different execution platforms supported by Nextflow
--  Describe the Nextflow community and ecosystem
+-   Write simple Nextflow workflows
+-   Describe the Nextflow concepts of Channels, Processes and Operators
+-   Have an understanding of containerized workflows
+-   Understand the different execution platforms supported by Nextflow
+-   Describe the Nextflow community and ecosystem
 
 ## Audience & prerequisites
 

@@ -197,7 +197,7 @@ params {
 !!! note "Using multiple profiles"
 
     Multiple profiles can be specified in a comma-separated (`,`) list when you execute your command.
-    
+
     The order of profiles is important as they will be read from left to right, for example:
 
     ```bash
@@ -219,7 +219,7 @@ Note that the test profile for nf-core/demo has supplied an `input` but no `outd
     If you're computer has internet access and one of Conda, Singularity, or Docker installed, you should be able to run any nf-core pipeline with the `test` profile and the respective profile "out of the box".
 
     The `test` data profile will pull small test files directly from the `nf-core/test-datasets` GitHub repository and run it locally.
-    
+
     The `test` profile is an important control to check the pipeline is working as expected and is a great way to trial a pipeline.
 
     Some pipelines have multiple test `profiles` for you to try.
