@@ -1,49 +1,51 @@
 ---
-description: Overview of the Fundamentals Nextflow Training material
+description: Introduction
 hide:
     - toc
 ---
 
-# Welcome
+# Introduction
 
 You are now on the path to writing reproducible and scalable scientific workflows using Nextflow. This guide complements the full [Nextflow documentation](https://www.nextflow.io/docs/latest) - if you ever have any doubts, please refer to that.
 
-## Objectives
+## Learning objectives
 
 By the end of this course you should:
 
-1. Be proficient in writing Nextflow workflows
-2. Know the basic Nextflow concepts of Channels, Processes and Operators
-3. Have an understanding of containerized workflows
-4. Understand the different execution platforms supported by Nextflow
-5. Be introduced to the Nextflow community and ecosystem
+-  Write simple Nextflow workflows
+-  Describe the Nextflow concepts of Channels, Processes and Operators
+-  Have an understanding of containerized workflows
+-  Understand the different execution platforms supported by Nextflow
+-  Describe the Nextflow community and ecosystem
+
+## Audience & prerequisites
+
+Please note that this is **not** a beginner's workshop and familiarity with Nextflow, the command line, and common file formats is assumed.
+
+**Prerequisites**
+
+-   A GitHub account
+-   Experience with command line
+-   An understanding of common file formats
 
 ## Follow the training videos
 
-Free online training events for this course are run approximately every six months. Videos are streamed to YouTube and questions are handled in the nf-core Slack community. You can watch the recording of the most recent training ([March, 2024](https://nf-co.re/events/2024/training-foundational-march)) in the [YouTube playlist](https://youtu.be/dbOKB3VRpuE?si=MYBy4-gjRfEYkVRM) below:
+Free online training events for this course are run approximately every six months. Videos are streamed to YouTube and questions are handled in the nf-core Slack community.
+
+You can watch the recording of the most recent training ([March, 2024](https://nf-co.re/events/2024/training-foundational-march)) in the [YouTube playlist](https://youtu.be/dbOKB3VRpuE?si=MYBy4-gjRfEYkVRM) below:
 
 <div style="text-align: center;">
     <iframe width="560" height="315" src="https://www.youtube.com/embed/watch?v=dbOKB3VRpuE&list=PL3xpfTVZLcNgLBGLAiY6Rl9fizsz-DTCT" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" data-ruffle-polyfilled=""></iframe>
 </div>
 
-If English is not your preferred language, you may find it useful to follow the training from the [March 2023 event](https://nf-co.re/events/2023/training-march-2023), which is available in multiple languages.
+!!! warning
 
-Please note that some parts of the training material may have been updated since this was recorded.
+    Please note that the training material is updated regularly and that the videos may be out of date.
+
+If English is not your preferred language, you may find it useful to follow the training from the [March 2023 event](https://nf-co.re/events/2023/training-march-2023), which is available in multiple languages.
 
 -   :flag_gb: [English recording](https://youtube.com/playlist?list=PL3xpfTVZLcNhoWxHR0CS-7xzu5eRT8uHo)
 -   :flag_in: [Hindi recording](https://youtube.com/playlist?list=PL3xpfTVZLcNikun1FrSvtXW8ic32TciTJ)
 -   :flag_es: [Spanish recording](https://youtube.com/playlist?list=PL3xpfTVZLcNhSlCWVoa3GURacuLWeFc8O)
 -   :flag_pt: [Portuguese recording](https://youtube.com/playlist?list=PL3xpfTVZLcNhi41yDYhyHitUhIcUHIbJg)
 -   :flag_fr: [French recording](https://youtube.com/playlist?list=PL3xpfTVZLcNhiv9SjhoA1EDOXj9nzIqdS)
-
-## Overview
-
-To get you started with Nextflow as quickly as possible, you will be walked through the following steps:
-
-1. Set up a development environment to run Nextflow
-2. Explore Nextflow concepts using some basic workflows, including a multi-step RNA-Seq analysis
-3. Build and use Docker containers to encapsulate all workflow dependencies
-4. Dive deeper into the core Nextflow syntax, including Channels, Processes, and Operators
-5. Cover cluster and cloud deployment scenarios and explore Seqera Platform's capabilities
-
-This will give you a broad understanding of Nextflow, to start writing your own workflows. We hope you enjoy the course! This is an ever-evolving document - feedback is always welcome.

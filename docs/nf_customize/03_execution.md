@@ -118,7 +118,7 @@ Caused by:
 <truncated>
 ```
 
-Fortunately, nf-core pipelines come packed with directives for containers and environments that can be flexibly enabled during execution.
+Fortunately, nf-core pipelines come packed with directives for containers and environments that can be flexibly enabled using configuration profiles.
 
 ### `-profile`
 
@@ -196,7 +196,9 @@ params {
 
 !!! note "Using multiple profiles"
 
-    Multiple profiles can be specified in a comma-separated (`,`) list when you execute your command. The order of profiles is important as they will be read from left to right, for example:
+    Multiple profiles can be specified in a comma-separated (`,`) list when you execute your command.
+    
+    The order of profiles is important as they will be read from left to right, for example:
 
     ```bash
     nextflow run nf-core/demo -r dev -profile test,singularity --outdir results
@@ -214,8 +216,10 @@ Note that the test profile for nf-core/demo has supplied an `input` but no `outd
 
 !!! note "Utilizing profiles"
 
-    If you're computer has internet access and one of Conda, Singularity, or Docker installed, you should be able to run any nf-core pipeline with the `test` profile and the respective software management profile "out of the box".
+    If you're computer has internet access and one of Conda, Singularity, or Docker installed, you should be able to run any nf-core pipeline with the `test` profile and the respective profile "out of the box".
 
-    The `test` data profile will pull small test files directly from the `nf-core/test-datasets` GitHub repository and run it on your local system. The `test` profile is an important control to check the pipeline is working as expected and is a great way to trial a pipeline.
+    The `test` data profile will pull small test files directly from the `nf-core/test-datasets` GitHub repository and run it locally.
+    
+    The `test` profile is an important control to check the pipeline is working as expected and is a great way to trial a pipeline.
 
     Some pipelines have multiple test `profiles` for you to try.

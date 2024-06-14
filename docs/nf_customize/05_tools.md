@@ -10,7 +10,7 @@ For developers, the tools make it easier to develop pipelines using best practic
 
 !!! question "Exercise"
 
-    Find out what nf-core commands and options are available using the `nf-core --help` option.
+    View nf-core commands and options are available using the `nf-core --help` option.
 
 ## `nf-core list`
 
@@ -63,6 +63,7 @@ The command line wizard will conclude by asking if you want to launch the pipeli
     Use `nf-core launch` to launch the the `nf-core/demo` pipeline.
 
     Make sure you add:
+
         - The full path to your sample sheet (`input`)
         - An output directory (`outdir`)
         - The `singularity` profile
@@ -134,4 +135,6 @@ Alternatively, you could build your own execution command with the command line 
 
     If the command has been executed successfully you will see outputs indicating the singularity images and pipeline are being downloaded.
 
-If you were working on an offline system you would now move these files offline and launch specify paths to these files using environmental variables, for example, the `NXF_SINGULARITY_CACHEDIR`.
+If you normally work on an offline system you would now move these files to your offline system and specify paths to these files using environmental variables, for example, the `NXF_SINGULARITY_CACHEDIR`.
+
+Follow [this link](https://nf-co.re/docs/usage/getting_started/offline) to find out more about running a pipeline offline.

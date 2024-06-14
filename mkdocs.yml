@@ -5,6 +5,9 @@ repo_name: nextflow-io/training
 
 nav:
     - Home: index.md
+    - Environment setup:
+          - envsetup/00_introduction.md
+          - envsetup/01_setup.md
     - Fundamentals Training:
           - basic_training/index.md
           - basic_training/setup.md
@@ -32,9 +35,6 @@ nav:
           - advanced/configuration.md
           - advanced/summary.md
           - advanced/support.md
-    - Environment setup:
-          - envsetup/00_introduction.md
-          - envsetup/01_setup.md
     - Hello Nextflow:
           - hello_nextflow/00_introduction.md
           - hello_nextflow/01_orientation.md
@@ -56,8 +56,8 @@ nav:
           - nf_develop/03_pipeline.md
           - nf_develop/04_parameters.md
     - Troubleshooting:
-          - troubleshoot/introduction.md
-          - troubleshoot/orientation.md
+          - troubleshoot/00_introduction.md
+          - troubleshoot/01_orientation.md
           - troubleshoot/01_exercise.md
           - troubleshoot/02_exercise.md
           - troubleshoot/03_exercise.md

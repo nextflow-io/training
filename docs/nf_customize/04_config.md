@@ -1,4 +1,4 @@
-# Demystifying configuration options
+# Configuration options
 
 Each nf-core pipeline comes with a set of “sensible defaults”. While the defaults are a great place to start, you will certainly want to modify these to fit your own purposes and system requirements.
 

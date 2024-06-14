@@ -1,11 +1,9 @@
 ---
-title: Introduction
+title: Basic concepts
 description: Getting started with Nextflow
 ---
 
-# Introduction
-
-## Basic concepts
+# Basic concepts
 
 Nextflow is a workflow orchestration engine and domain-specific language (DSL) that makes it easy to write data-intensive computational workflows.
 
@@ -17,7 +15,7 @@ Nextflow extends this approach, adding the ability to define complex program int
 -   Scalability of parallelization and deployment
 -   Integration of existing tools, systems, and industry standards
 
-### Processes and Channels
+## Processes and Channels
 
 In practice, a Nextflow workflow is made by joining together different processes. Each process can be written in any scripting language that can be executed by the Linux platform (Bash, Perl, Ruby, Python, etc.).
 
@@ -27,7 +25,7 @@ Processes are executed independently and are isolated from each other, i.e., the
 --8<-- "docs/basic_training/img/channel-process.excalidraw.svg"
 </figure>
 
-### Execution abstraction
+## Execution abstraction
 
 While a process defines _what_ command or `script` has to be executed, the executor determines _how_ that `script` is run in the target platform.
 
@@ -41,7 +39,7 @@ In other words, Nextflow provides an abstraction between the workflow’s functi
 
 </figure>
 
-### Scripting language
+## Scripting language
 
 Nextflow implements a declarative DSL that simplifies the writing of complex data analysis workflows as an extension of a general-purpose programming language.
 
@@ -147,7 +145,7 @@ The second process `CONVERTTOUPPER` takes the output channel from the first proc
 The use of the operator `.flatten()` here is to split the `SPLITLETTERS` output channel element that contains two files into two separate elements to be put through the `CONVERTTOUPPER`process, else they would be treated as a single element.
 The `CONVERTTOUPPER` process thus launches two tasks, one for each element. The bash script uses `cat` to print the file contents and `tr` to convert to upper-case. It takes the resulting standard-out as the process output channel.
 
-#### Python instead of bash
+### Python instead of bash
 
 If you're not completely comfortable with the bash code used in the example, don't worry! You can use whatever programming language you like within Nextflow `script` blocks.
 For example, the `hello_py.nf` file contains the same example but using Python code:
@@ -280,7 +278,7 @@ m el r
 !edno
 ```
 
-### In DAG-like format
+## In DAG-like format
 
 To better understand how Nextflow is dealing with the data in this workflow, below is a DAG-like figure to visualize all the inputs, outputs, channels and processes:
 

@@ -21,6 +21,18 @@ We have several workshops available on this website - find the one that's right 
 
 [![Open in GitPod](https://img.shields.io/badge/Gitpod-%20Open%20in%20Gitpod-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/nextflow-io/training)
 
+## Training Environment
+
+!!! exercise "Environment Setup"
+
+    !!! quote inline end ""
+
+        :material-lightbulb: Essential for setting up your Gitpod for the first time.
+
+    An essential tutorial for setting up your Gitpod environment for the first time.
+
+    [Launch the environment setup training :material-arrow-right:](envsetup/00_introduction.md){ .md-button .md-button--primary }
+
 ## Nextflow Training
 
 !!! exercise "Fundamentals Training"
@@ -44,16 +56,6 @@ We have several workshops available on this website - find the one that's right 
     [Launch the advanced training :material-arrow-right:](advanced/index.md){ .md-button .md-button--primary }
 
 ## Applied Training
-
-!!! exercise "Environment Setup"
-
-    !!! quote inline end ""
-
-        :material-lightbulb: Essential for setting up your Gitpod for the first time.
-
-    An essential tutorial for setting up your Gitpod environment for the first time.
-
-    [Launch the environment setup training :material-arrow-right:](envsetup/00_introduction.md){ .md-button .md-button--primary }
 
 !!! exercise "Hello Nextflow"
 
