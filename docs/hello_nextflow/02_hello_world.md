@@ -164,13 +164,17 @@ It's the same thing we did when just running in the terminal. In a real-world pi
 _Before:_
 
 ```groovy title="hello-world.nf"
+"""
 echo 'Hello World!'
+"""
 ```
 
 _After:_
 
 ```groovy title="hello-world.nf"
+"""
 echo 'Hello World!' > output.txt
+"""
 ```
 
 #### 2. Change the output declaration in the process
@@ -245,13 +249,17 @@ output:
 _Before:_
 
 ```groovy title="hello-world.nf"
+"""
 echo 'Hello World!' > output.txt
+"""
 ```
 
 _After:_
 
 ```groovy title="hello-world.nf"
+"""
 echo 'Hello World!' > $params.output_file
+"""
 ```
 
 #### 3. Run the workflow again with the `--output_file` parameter
