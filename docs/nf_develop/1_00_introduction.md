@@ -10,7 +10,7 @@ Let's get started!
 
 ## Learning objectives
 
-In this workshop, you will utilize the nf-core tooling to build a small pipeline.
+In In Part 1 of this workshop, you will utilize the nf-core tooling to build a small pipeline using the nf-core template.
 
 By the end of this workshop you will be able to:
 
@@ -18,6 +18,16 @@ By the end of this workshop you will be able to:
 -   Identify the features of nf-core pipeline template that enable best practices
 -   Add nf-core modules to a pipeline using the nf-core tooling
 -   Add parameters to a pipeline and update the schema using the nf-core tooling
+
+In Part 2 of this workshop, you will use the nf-core tooling to continue development of your pipeline and customize parts of the nf-core template.
+
+By the end of this workshop you will be able to:
+
+-   Add local modules
+-   Patch nf-core modules
+-   Customize linting tests
+-   Sync TEMPLATE
+-   Bump versions
 
 ## Audience & prerequisites
 

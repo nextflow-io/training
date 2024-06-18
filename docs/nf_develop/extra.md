@@ -1,26 +1,8 @@
 # Customizing the template
 
-As a developer, you may want more flexibility when developing your pipelines.
+## Adding a custom modules
 
-While the nf-core template comes with specific standards, many of these can be altered to better suit your needs.
-
-Here, you will learn how to use the nf-core tooling to customize different parts of the nf-core template and nf-core components without compromising their integration into the nf-core ecosystem.
-
-## Patching modules
-
-Although modules are written to be flexible you may want to modify them to better fit your purpose. While you are free to edit modules locally, any changes
-
-The `nf-core lint` command will help manage nf-core components and test that they match the remote source they came from.
-
-For example, if you modify an nf-core module, it will no longer match the remote and a linting test of this module will fail.
-
-!!! question "Exercise"
-
-    Edit the `fastp` module by adding an `ed` to the end of `reads_fail`. Check to see if your change has caused the linting test to fail.
-
-    ```groovy title="modules/nf-core/fastp/main.nf" linenums="22"
-    tuple val(meta), path('*.fail.fastq.gz')  , optional:true, emit: reads_failed
-    ```
+nf-core offers a comprehensive set of modules that have been created and curated by the community. However, as a developer, you may be interested in bespoke pieces of software that are not apart of the nf-core repository or customizing a module that already exists.
 
 Running `nf-core lint` after you have modified an nf-core module will cause it to throw an error.
 

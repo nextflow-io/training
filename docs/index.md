@@ -85,7 +85,7 @@ We have several workshops available on this website - find the one that's right 
 
     A "learn by doing" pipeline development tutorial focusing on developing a pipeline with the nf-core template.
 
-    [Launch the nf-core template training :material-arrow-right:](nf_develop/00_introduction.md){ .md-button }
+    [Launch the nf-core template training :material-arrow-right:](nf_develop/1_00_introduction.md){ .md-button }
 
 !!! exercise "RNA-seq variant calling"
 
