@@ -8,6 +8,7 @@ nav:
     - Environment setup:
           - envsetup/00_introduction.md
           - envsetup/01_setup.md
+          - envsetup/02_local.md
     - Fundamentals Training:
           - basic_training/index.md
           - basic_training/setup.md

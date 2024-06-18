@@ -57,10 +57,6 @@ git clone https://github.com/nextflow-io/training.git
 
 Then `cd` into the `nf-training` directory.
 
-```bash
-cd nf-training
-```
-
 ## Checking your installation
 
 Check that you have correctly installed `nextflow` by running the following command:
