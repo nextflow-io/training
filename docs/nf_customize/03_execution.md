@@ -214,12 +214,10 @@ Note that the test profile for nf-core/demo has supplied an `input` but no `outd
     nextflow run nf-core/demo -r dev -profile test,singularity --outdir results
     ```
 
-!!! note "Utilizing profiles"
+If you're computer has internet access and one of Conda, Singularity, or Docker installed, you should be able to run any nf-core pipeline with the `test` profile and the respective profile "out of the box".
 
-    If you're computer has internet access and one of Conda, Singularity, or Docker installed, you should be able to run any nf-core pipeline with the `test` profile and the respective profile "out of the box".
+The `test` data profile will pull small test files directly from the `nf-core/test-datasets` GitHub repository and run it locally.
 
-    The `test` data profile will pull small test files directly from the `nf-core/test-datasets` GitHub repository and run it locally.
+The `test` profile is an important control to check the pipeline is working as expected and is a great way to trial a pipeline.
 
-    The `test` profile is an important control to check the pipeline is working as expected and is a great way to trial a pipeline.
-
-    Some pipelines have multiple test `profiles` for you to try.
+Some pipelines have multiple test `profiles` for you to try.
