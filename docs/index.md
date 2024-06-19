@@ -21,7 +21,7 @@ We have several workshops available on this website - find the one that's right 
 
 [![Open in GitPod](https://img.shields.io/badge/Gitpod-%20Open%20in%20Gitpod-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/nextflow-io/training)
 
-## Training Environment
+## Training Environment Setup
 
 !!! exercise "Environment Setup"
 
