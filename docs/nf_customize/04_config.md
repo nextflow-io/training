@@ -183,7 +183,7 @@ A common scenario is for users to write a custom configuration file specific to 
 
 !!! warning
 
-    Do not use -c <file> to specify parameters as this will result in errors. Custom config files specified with -c must only be used for tuning process resource specifications, other infrastructural tweaks (such as output directories), or module arguments (args).
+    Do not use `-c <file>` to specify parameters as this will result in errors. Custom config files specified with `-c` must only be used for tuning process resource specifications, other infrastructural tweaks (such as output directories), or module arguments (args).
 
 Multiple scopes can be included in the same `.config` file using a mix of dot prefixes and curly brackets.
 
