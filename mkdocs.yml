@@ -158,7 +158,7 @@ markdown_extensions:
 plugins:
     - enumerate-headings:
           restart_increment_after:
-              - envsetup/00_introduction.md
+              - envsetup/01_setup.md
               - basic_training/orientation.md
               - advanced/orientation.md
               - hello_nextflow/01_orientation.md
@@ -170,6 +170,7 @@ plugins:
           exclude:
               - index.md
               - help.md
+              - envsetup/00_introduction.md
               - basic_training/index.md
               - advanced/introduction.md
               - hello_nextflow/01_orientation.md
