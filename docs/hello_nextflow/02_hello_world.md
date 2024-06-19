@@ -164,13 +164,17 @@ It's the same thing we did when just running in the terminal. In a real-world pi
 _Before:_
 
 ```groovy title="hello-world.nf"
+"""
 echo 'Hello World!'
+"""
 ```
 
 _After:_
 
 ```groovy title="hello-world.nf"
+"""
 echo 'Hello World!' > output.txt
+"""
 ```
 
 #### 2. Change the output declaration in the process
@@ -245,13 +249,17 @@ output:
 _Before:_
 
 ```groovy title="hello-world.nf"
+"""
 echo 'Hello World!' > output.txt
+"""
 ```
 
 _After:_
 
 ```groovy title="hello-world.nf"
+"""
 echo 'Hello World!' > $params.output_file
+"""
 ```
 
 #### 3. Run the workflow again with the `--output_file` parameter
@@ -614,15 +622,15 @@ You know how to add a second step that takes the output of the first as input.
 
 ### What's next?
 
-Learn how to make the workflow run on a list of input values.
+Learn how to make the workflow run on many values for the same input.
 
 ---
 
-## 9. Modify the workflow to run on a list of inputs
+## 9. Modify the workflow to run on many values for the same input
 
-Workflows typically run on batches of inputs that we want to process in bulk. Here we upgrade the workflow to accept a list of inputs. For simplicity, we go back to hardcoding the greetings instead of using a parameter for the input.
+Workflows typically run on batches of inputs that we want to process in bulk. Here we upgrade the workflow to accept an input with multiple values. For simplicity, we go back to hardcoding the greetings instead of using a parameter for the input.
 
-#### 1. Modify the channel to be a list of greetings (hardcoded for now)
+#### 1. Modify the channel to contain multiple greetings (hardcoded for now)
 
 _Before:_
 
@@ -715,7 +723,7 @@ Launching `hello-world.nf` [disturbed_panini] DSL2 - revision: 719dae218c
 [90/e88919] Submitted process > convertToUpper (3)
 ```
 
-That's much better; at least for this number of processes. For a complex pipeline, or a large list of inputs, having the full list output to the terminal might get a bit overwhelming.
+That's much better; at least for this number of processes. For a complex pipeline, or a large number of inputs, having the full list output to the terminal might get a bit overwhelming.
 
 !!! tip
 
@@ -727,11 +735,11 @@ You know how to feed multiple inputs through a value channel.
 
 ### What's next?
 
-Learn how to make the workflow take a file that contains the list of input values.
+Learn how to make the workflow take a file that contains multiple values for an input.
 
 ---
 
-## 10. Modify the workflow to run on a file that contains a list of input values
+## 10. Modify the workflow to run on a file that contains an input with multiple values
 
 In most cases, when we run on multiple inputs, the input values are contained in a file. Here we're going to use a file where each value is on a new line.
 
@@ -770,7 +778,7 @@ Launching `hello-world.nf` [small_albattani] DSL2 - revision: 5cea973c3c
 [02/f0ff38] Submitted process > convertToUpper (3)
 ```
 
-Looking at the outputs, we see each greeting was correctly extracted and processed through the workflow. We've achieved the same result as the previous step, but now we have a lot more flexibility to add more elements to the list of greetings we want to process.
+Looking at the outputs, we see each greeting was correctly extracted and processed through the workflow. We've achieved the same result as the previous step, but now we have a lot more flexibility to add more elements to the channel of greetings we want to process.
 
 !!! tip
 

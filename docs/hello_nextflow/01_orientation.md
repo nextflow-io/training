@@ -27,35 +27,64 @@ In this folder you will all test data, code and accessory needed to work through
 You should see the following output:
 
 ```console title="Output"
-hello-nextflow
+/workspace/gitpod/hello-nextflow
 ├── data
-│   ├── bam
-│       ├── reads_father.bam
-│       ├── reads_mother.bam
-│       └── reads_son.bam
-│   ├── intervals.list
-│   ├── ref.tar.gz
-│   ├── sample_bams.txt
-│   └── samplesheet.csv
-├── scripts
-│   ├── hello-gatk-1.nf
-│   ├── hello-gatk-2.nf
-│   ├── hello-gatk-3.nf
-│   ├── hello-gatk-4.nf
-│   ├── hello-gatk-5.nf
-│   ├── hello-gatk-6.nf
-│   ├── hello-world-1.nf
-│   ├── hello-world-2.nf
-│   ├── hello-world-3.nf
-│   ├── hello-world-4.nf
-│   ├── hello-world-5.nf
-│   ├── hello-world-6.nf
-│   ├── hello-world-7.nf
-│   └── hello-world-8.nf
-├── greetings.txt
+│   ├── bam
+│   │   ├── reads_father.bam
+│   │   ├── reads_mother.bam
+│   │   └── reads_son.bam
+│   ├── greetings.txt
+│   ├── intervals.list
+│   ├── ref.tar.gz
+│   ├── sample_bams.txt
+│   └── samplesheet.csv
 ├── hello-gatk.nf
+├── hello-modules.nf
+├── hello-nf-test.nf
 ├── hello-world.nf
-└── nextflow.config
+├── nextflow.config
+└── scripts
+    ├── hello-gatk-1.nf
+    ├── hello-gatk-2.nf
+    ├── hello-gatk-3.nf
+    ├── hello-gatk-4.nf
+    ├── hello-gatk-5.nf
+    ├── hello-gatk-6.nf
+    ├── hello-modules-1.nf
+    ├── hello-modules-2.nf
+    ├── hello-modules-3.nf
+    ├── hello-world-10.nf
+    ├── hello-world-1.nf
+    ├── hello-world-2.nf
+    ├── hello-world-3.nf
+    ├── hello-world-4.nf
+    ├── hello-world-5.nf
+    ├── hello-world-6.nf
+    ├── hello-world-7.nf
+    ├── hello-world-8.nf
+    ├── hello-world-9.nf
+    ├── modules
+    │   └── local
+    │       ├── gatk
+    │       │   ├── haplotypecaller
+    │       │   │   └── main.nf
+    │       │   └── jointgenotyping
+    │       │       ├── main.nf
+    │       │       └── tests
+    │       │           └── inputs
+    │       │               ├── family_trio_map.tsv
+    │       │               ├── reads_father.bam.g.vcf
+    │       │               ├── reads_father.bam.g.vcf.idx
+    │       │               ├── reads_mother.bam.g.vcf
+    │       │               ├── reads_mother.bam.g.vcf.idx
+    │       │               ├── reads_son.bam.g.vcf
+    │       │               └── reads_son.bam.g.vcf.idx
+    │       └── samtools
+    │           └── index
+    │               └── main.nf
+    └── nextflow.config
+
+12 directories, 43 files
 
 ```
 
