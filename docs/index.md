@@ -53,7 +53,7 @@ We have several workshops available on this website - find the one that's right 
 
     Advanced material exploring the advanced features of the Nextflow language and runtime, and how to use them to write efficient and scalable data-intensive workflows.
 
-    [Launch the advanced training :material-arrow-right:](advanced/index.md){ .md-button .md-button--primary }
+    [Launch the advanced training :material-arrow-right:](advanced/introduction.md){ .md-button .md-button--primary }
 
 ## Applied Training
 

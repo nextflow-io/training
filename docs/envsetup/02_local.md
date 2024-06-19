@@ -2,6 +2,8 @@
 
 If you **can not** access Gitpod you can also install everything locally.
 
+## Requirements
+
 Nextflow can be used on any POSIX-compatible system (Linux, macOS, Windows Subsystem for Linux, etc.).
 
 **Requirements**

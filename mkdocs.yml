@@ -11,7 +11,7 @@ nav:
           - envsetup/02_local.md
     - Fundamentals Training:
           - basic_training/index.md
-          - basic_training/setup.md
+          - basic_training/orientation.md
           - basic_training/intro.md
           - basic_training/rnaseq_pipeline.md
           - basic_training/containers.md
@@ -26,8 +26,8 @@ nav:
           - basic_training/cache_and_resume.md
           - basic_training/debugging.md
     - Advanced Training:
-          - advanced/index.md
-          - advanced/setup.md
+          - advanced/introduction.md
+          - advanced/orientation.md
           - advanced/operators.md
           - advanced/metadata.md
           - advanced/grouping.md
@@ -158,17 +158,24 @@ markdown_extensions:
 plugins:
     - enumerate-headings:
           restart_increment_after:
-              - hands_on/01_datasets.md
-              - advanced/operators.md
-              - hello_nextflow/01_orientation.md
               - envsetup/00_introduction.md
-              - nf_customize/00_introduction.md
-              - nf_develop/1_00_introduction.md
-              - troubleshoot/00_introduction.md
+              - basic_training/orientation.md
+              - advanced/orientation.md
+              - hello_nextflow/01_orientation.md
+              - nf_customize/01_orientation.md
+              - nf_develop/1_01_orientation.md
+              - troubleshoot/01_orientation.md
+              - hands_on/01_datasets.md
+
           exclude:
               - index.md
               - help.md
               - basic_training/index.md
+              - advanced/introduction.md
+              - hello_nextflow/01_orientation.md
+              - nf_customize/00_introduction.md
+              - nf_develop/1_00_introduction.md
+              - troubleshoot/00_introduction.md
               - hands_on/index.md
               - hands_on/solutions/*md
               - hello_nextflow/*.md

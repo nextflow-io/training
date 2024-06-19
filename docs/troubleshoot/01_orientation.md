@@ -4,7 +4,9 @@ This workshop should be completed using the [Nextflow Training Gitpod Environmen
 
 ## Getting started
 
-You will need to move into the `troubleshoot` folder, copy, and unzip the data required for this training.
+You will need to move into the `troubleshoot` folder.
+
+You will need to copy and unzip the data required for this training.
 
 !!! question "Exercise"
 

@@ -6,6 +6,8 @@ The Gitpod environment contains some test data that will be used in this worksho
 
     Follow [this link](../envsetup/00_introduction.md) if you have not yet setup your Gitpod environment.
 
+## Getting started
+
 You will complete this module in the `hello-nextflow/` folder.
 
 ```bash
