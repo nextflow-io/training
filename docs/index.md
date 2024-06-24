@@ -21,6 +21,18 @@ We have several workshops available on this website - find the one that's right 
 
 [![Open in GitPod](https://img.shields.io/badge/Gitpod-%20Open%20in%20Gitpod-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/nextflow-io/training)
 
+## Training Environment Setup
+
+!!! exercise "Environment Setup"
+
+    !!! quote inline end ""
+
+        :material-lightbulb: Essential for setting up your Gitpod for the first time.
+
+    An essential tutorial for setting up your Gitpod environment for the first time.
+
+    [Launch the environment setup training :material-arrow-right:](envsetup/00_introduction.md){ .md-button .md-button--primary }
+
 ## Nextflow Training
 
 !!! exercise "Fundamentals Training"
@@ -41,7 +53,7 @@ We have several workshops available on this website - find the one that's right 
 
     Advanced material exploring the advanced features of the Nextflow language and runtime, and how to use them to write efficient and scalable data-intensive workflows.
 
-    [Launch the advanced training :material-arrow-right:](advanced/index.md){ .md-button .md-button--primary }
+    [Launch the advanced training :material-arrow-right:](advanced/introduction.md){ .md-button .md-button--primary }
 
 ## Applied Training
 
@@ -53,7 +65,7 @@ We have several workshops available on this website - find the one that's right 
 
     A "learn by doing" tutorial that will take you from running tools on the command line into running your first Nextflow pipelines.
 
-    [Launch the Hello Nextflow training :material-arrow-right:](hello_nextflow/index.md){ .md-button }
+    [Launch the Hello Nextflow training :material-arrow-right:](hello_nextflow/00_introduction.md){ .md-button }
 
 !!! exercise "Configure the execution of an nf-core pipeline"
 
@@ -63,7 +75,7 @@ We have several workshops available on this website - find the one that's right 
 
     A "learn by doing" tutorial focusing on the configuration of nf-core pipelines.
 
-    [Launch the nf-core configuration training :material-arrow-right:](nf_customize/1_introduction.md){ .md-button }
+    [Launch the nf-core configuration training :material-arrow-right:](nf_customize/00_introduction.md){ .md-button }
 
 !!! exercise "Develop a pipeline with the nf-core template"
 
@@ -73,7 +85,7 @@ We have several workshops available on this website - find the one that's right 
 
     A "learn by doing" pipeline development tutorial focusing on developing a pipeline with the nf-core template.
 
-    [Launch the nf-core template training :material-arrow-right:](nf_develop/1_introduction.md){ .md-button }
+    [Launch the nf-core template training :material-arrow-right:](nf_develop/1_00_introduction.md){ .md-button }
 
 !!! exercise "RNA-seq variant calling"
 
@@ -93,7 +105,7 @@ We have several workshops available on this website - find the one that's right 
 
     A "learn by doing" troubleshooting tutorial for pipeline developers and users.
 
-    [Launch the troubleshooting training :material-arrow-right:](troubleshoot/introduction.md){ .md-button }
+    [Launch the troubleshooting training :material-arrow-right:](troubleshoot/00_introduction.md){ .md-button }
 
 ## Resources
 

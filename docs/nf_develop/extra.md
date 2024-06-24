@@ -1,26 +1,8 @@
 # Customizing the template
 
-As a developer, you may want more flexibility when developing your pipelines.
+## Adding a custom modules
 
-While the nf-core template comes with specific standards, many of these can be altered to better suit your needs.
-
-Here, you will learn how to use the nf-core tooling to customize different parts of the nf-core template and nf-core components without compromising their integration into the nf-core ecosystem.
-
-## Patching modules
-
-Although modules are written to be flexible you may want to modify them to better fit your purpose. While you are free to edit modules locally, any changes
-
-The `nf-core lint` command will help manage nf-core components and test that they match the remote source they came from.
-
-For example, if you modify an nf-core module, it will no longer match the remote and a linting test of this module will fail.
-
-!!! question "Exercise"
-
-    Edit the `fastp` module by adding an `ed` to the end of `reads_fail`. Check to see if your change has caused the linting test to fail.
-
-    ```groovy title="modules/nf-core/fastp/main.nf" linenums="22"
-    tuple val(meta), path('*.fail.fastq.gz')  , optional:true, emit: reads_failed
-    ```
+nf-core offers a comprehensive set of modules that have been created and curated by the community. However, as a developer, you may be interested in bespoke pieces of software that are not apart of the nf-core repository or customizing a module that already exists.
 
 Running `nf-core lint` after you have modified an nf-core module will cause it to throw an error.
 
@@ -199,3 +181,47 @@ nf-core bump-version 23.04.0 --nextflow
 !!! note "Tagged versions"
 
     Creating a tagged version release allows you to execute specific versions of your pipeline using the revision flag.
+
+## Bump your pipeline version
+
+Having a universal way of versioning the development projects is the best way to track what is going on with the software as new features are added. This problem can be solved by following semantic versioning rules: `[major].[minor].[patch]`
+
+For example, starting with a release version `1.4.3`, bumping the version to:
+
+-   `1.4.4` would be a patch release for minor things such as fixing bugs.
+-   `1.5` would be a minor release, for example adding some new features.
+-   `2.0` would correspond to the major release where results would no longer be backward compatible.
+
+The pipeline version number is mentioned in a lot of different places in nf-core pipelines. The `nf-core bump-version` command updates the version for you automatically, so that you don't accidentally miss any. It can be used for each pipeline release, and again for the next development version after release.
+
+```bash
+nf-core bump-version 1.0
+```
+
+After you have updated the version of your pipeline, your changes can be pushed to GitHub.
+
+!!! question "Exercise"
+
+    Bump your pipeline version to `1.0` using the `nf-core bump-version` command.
+
+### Push your changes to GitHub
+
+When you are satisfied with your improvements you can `add`, `commit`, and `push` your changes to GitHub.
+
+You can check which branch you are on using the `git branch` command.
+
+As your current branch `myFeature` has no upstream branch you will need to set the remote as upstream the first time you push your changes.
+
+!!! question "Exercise"
+
+    Push your changes to your GitHub repository.
+
+    ```bash
+    git add .
+    git commit -m "Added fastp to pipeline"
+    git push --set-upstream origin myFeature
+    ```
+
+!!! note "Branch origin"
+
+    To automatically add an origin for branches without a tracking upstream, see `push.autoSetupRemote` in `git help config`.

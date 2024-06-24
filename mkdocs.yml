@@ -5,9 +5,13 @@ repo_name: nextflow-io/training
 
 nav:
     - Home: index.md
+    - Environment setup:
+          - envsetup/00_introduction.md
+          - envsetup/01_setup.md
+          - envsetup/02_local.md
     - Fundamentals Training:
           - basic_training/index.md
-          - basic_training/setup.md
+          - basic_training/orientation.md
           - basic_training/intro.md
           - basic_training/rnaseq_pipeline.md
           - basic_training/containers.md
@@ -22,8 +26,8 @@ nav:
           - basic_training/cache_and_resume.md
           - basic_training/debugging.md
     - Advanced Training:
-          - advanced/index.md
-          - advanced/setup.md
+          - advanced/introduction.md
+          - advanced/orientation.md
           - advanced/operators.md
           - advanced/metadata.md
           - advanced/grouping.md
@@ -32,35 +36,29 @@ nav:
           - advanced/configuration.md
           - advanced/summary.md
           - advanced/support.md
-    - RNA-seq Variant Calling:
-          - hands_on/index.md
-          - hands_on/01_datasets.md
-          - hands_on/02_workflow.md
-          - hands_on/03_setup.md
-          - hands_on/04_implementation.md
     - Hello Nextflow:
-          - hello_nextflow/index.md
+          - hello_nextflow/00_introduction.md
           - hello_nextflow/01_orientation.md
           - hello_nextflow/02_hello_world.md
           - hello_nextflow/03_hello_gatk.md
           - hello_nextflow/04_hello_modules.md
           - hello_nextflow/05_hello_nf-test.md
     - Configure nf-core:
-          - nf_customize/1_introduction.md
-          - nf_customize/2_orientation.md
-          - nf_customize/3_nf-core.md
-          - nf_customize/4_execution.md
-          - nf_customize/5_config.md
-          - nf_customize/6_tools.md
+          - nf_customize/00_introduction.md
+          - nf_customize/01_orientation.md
+          - nf_customize/02_nf-core.md
+          - nf_customize/03_execution.md
+          - nf_customize/04_config.md
+          - nf_customize/05_tools.md
     - Develop nf-core:
-          - nf_develop/1_introduction.md
-          - nf_develop/2_orientation.md
-          - nf_develop/3_create.md
-          - nf_develop/4_pipeline.md
-          - nf_develop/5_customizing.md
+          - nf_develop/1_00_introduction.md
+          - nf_develop/1_01_orientation.md
+          - nf_develop/1_02_create.md
+          - nf_develop/1_03_pipeline.md
+          - nf_develop/1_04_parameters.md
     - Troubleshooting:
-          - troubleshoot/introduction.md
-          - troubleshoot/orientation.md
+          - troubleshoot/00_introduction.md
+          - troubleshoot/01_orientation.md
           - troubleshoot/01_exercise.md
           - troubleshoot/02_exercise.md
           - troubleshoot/03_exercise.md
@@ -160,16 +158,25 @@ markdown_extensions:
 plugins:
     - enumerate-headings:
           restart_increment_after:
-              - hands_on/01_datasets.md
-              - advanced/operators.md
+              - envsetup/01_setup.md
+              - basic_training/orientation.md
+              - advanced/orientation.md
               - hello_nextflow/01_orientation.md
-              - nf_customize/1_introduction.md
-              - nf_develop/1_introduction.md
-              - troubleshoot/introduction.md
+              - nf_customize/01_orientation.md
+              - nf_develop/1_01_orientation.md
+              - troubleshoot/01_orientation.md
+              - hands_on/01_datasets.md
+
           exclude:
               - index.md
               - help.md
+              - envsetup/00_introduction.md
               - basic_training/index.md
+              - advanced/introduction.md
+              - hello_nextflow/01_orientation.md
+              - nf_customize/00_introduction.md
+              - nf_develop/1_00_introduction.md
+              - troubleshoot/00_introduction.md
               - hands_on/index.md
               - hands_on/solutions/*md
               - hello_nextflow/*.md

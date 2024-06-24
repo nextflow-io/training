@@ -1,24 +1,28 @@
 # Orientation
 
-## Tour of Gitpod
+The Gitpod environment contains some test data that will be used in this workshop.
 
-If you haven't yet, log into the [![Nextflow Training GitPod](https://img.shields.io/badge/Gitpod-%20Open%20in%20Gitpod-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/nextflow-io/training), which provides a virtual machine with everything already set up for you.
+!!! note
 
-In the Gitpod window, you'll see a terminal. Type the following command to switch to the folder of this training material:
+    Follow [this link](../envsetup/00_introduction.md) if you have not yet setup your Gitpod environment.
+
+## Getting started
+
+You will complete this module in the `hello-nextflow/` folder.
 
 ```bash
 cd /workspace/gitpod/hello-nextflow
 ```
 
-Take a few minutes to familiarize yourself with the gitpod environment, especially the file explorer, file browser and terminal.
+In this folder you will all test data, code and accessory needed to work through this training module.
 
-## Pipeline data and scripts
+!!! question "Exercise"
 
-We provide all test data, code and accessory needed to work through this training module. To view a full list, run the following command in the Gitpod terminal:
+    View all the folder and files in the `hello-nextflow` directory.
 
-```bash
-tree /workspace/gitpod/hello-nextflow
-```
+    ```console
+    tree .
+    ```
 
 You should see the following output:
 
@@ -84,7 +88,7 @@ You should see the following output:
 
 ```
 
-### Description of contents
+Each file will be used in this training module.
 
 **The `data` directory** contains the input data we'll use in Part 2: Hello GATK, which uses an example from genomics to demonstrate how to build a simple analysis pipeline. The data is described in detail in that section of the training.
 
