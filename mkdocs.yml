@@ -6,7 +6,7 @@ repo_name: nextflow-io/training
 nav:
     - Home: index.md
     - Environment setup:
-          - envsetup/00_introduction.md
+          - envsetup/index.md
           - envsetup/01_setup.md
           - envsetup/02_local.md
     - Fundamentals Training:
@@ -26,7 +26,7 @@ nav:
           - basic_training/cache_and_resume.md
           - basic_training/debugging.md
     - Advanced Training:
-          - advanced/introduction.md
+          - advanced/index.md
           - advanced/orientation.md
           - advanced/operators.md
           - advanced/metadata.md
@@ -37,27 +37,27 @@ nav:
           - advanced/summary.md
           - advanced/support.md
     - Hello Nextflow:
-          - hello_nextflow/00_introduction.md
+          - hello_nextflow/index.md
           - hello_nextflow/01_orientation.md
           - hello_nextflow/02_hello_world.md
           - hello_nextflow/03_hello_gatk.md
           - hello_nextflow/04_hello_modules.md
           - hello_nextflow/05_hello_nf-test.md
     - Configure nf-core:
-          - nf_customize/00_introduction.md
+          - nf_customize/index.md
           - nf_customize/01_orientation.md
           - nf_customize/02_nf-core.md
           - nf_customize/03_execution.md
           - nf_customize/04_config.md
           - nf_customize/05_tools.md
     - Develop nf-core:
-          - nf_develop/1_00_introduction.md
+          - nf_develop/index.md
           - nf_develop/1_01_orientation.md
           - nf_develop/1_02_create.md
           - nf_develop/1_03_pipeline.md
           - nf_develop/1_04_parameters.md
     - Troubleshooting:
-          - troubleshoot/00_introduction.md
+          - troubleshoot/index.md
           - troubleshoot/01_orientation.md
           - troubleshoot/01_exercise.md
           - troubleshoot/02_exercise.md
@@ -170,13 +170,13 @@ plugins:
           exclude:
               - index.md
               - help.md
-              - envsetup/00_introduction.md
+              - envsetup/index.md
               - basic_training/index.md
-              - advanced/introduction.md
-              - hello_nextflow/01_orientation.md
-              - nf_customize/00_introduction.md
-              - nf_develop/1_00_introduction.md
-              - troubleshoot/00_introduction.md
+              - advanced/index.md
+              - hello_nextflow/index.md
+              - nf_customize/index.md
+              - nf_develop/index.md
+              - troubleshoot/index.md
               - hands_on/index.md
               - hands_on/solutions/*md
               - hello_nextflow/*.md
