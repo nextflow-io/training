@@ -19,7 +19,7 @@ Free online events are organized regularly with the nf-core community, see the [
 
 We have several workshops available on this website - find the one that's right for you!
 
-[![Open in GitPod](https://img.shields.io/badge/Gitpod-%20Open%20in%20Gitpod-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/nextflow-io/training)
+[![Open in Gitpod](https://img.shields.io/badge/Gitpod-%20Open%20in%20Gitpod-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/nextflow-io/training)
 
 ## Training Environment Setup
 

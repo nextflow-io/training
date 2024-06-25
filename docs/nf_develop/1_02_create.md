@@ -83,7 +83,7 @@ You will first need to create an empty repository on GitHub for your template to
 
 When you are logged into GitHub, you can use the `New` repository button or navigate to [https://github.com/new](https://github.com/new) and follow the prompts to make a new repository.
 
-![Github new repo](img/github.new.png)
+![GitHub new repo](img/github.new.png)
 
 Once you have created the repository you can push your template to GitHub.
 
@@ -218,4 +218,4 @@ Even though many of these action workflows are not relevant for private reposito
 
     To enable these workflows you need to click `Enable Actions on this Repository` under the `Actions` tab in your GitHub repository.
 
-    ![Github actions](img/github.actions.png)
+    ![GitHub actions](img/github.actions.png)

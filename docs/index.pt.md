@@ -17,7 +17,7 @@ Eles estão hospedados em um [repositório do GitHub](https://github.com/nextflo
 Ainda que você possa consultar e estudar esse material quando bem quiser, você provavelmente irá aproveitá-lo mais ao participar de um evento de treinamento.
 Eventos online e gratuitos são regularmente organizados pela comunidade do nf-core. Veja mais na [página de eventos do nf-core](https://nf-co.re/events).
 
-[![Abra no GitPod](https://img.shields.io/badge/Gitpod-%20Abra%20no%20Gitpod-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/nextflow-io/training)
+[![Abra no Gitpod](https://img.shields.io/badge/Gitpod-%20Abra%20no%20Gitpod-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/nextflow-io/training)
 
 ## Treinamentos disponíveis
 

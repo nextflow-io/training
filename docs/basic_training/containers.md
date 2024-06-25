@@ -126,7 +126,7 @@ docker images
 
     ??? Solution
 
-        Use your favorite editor (e.g., `vim` or `nano`) to create a file named `Dockerfile`. Alternatively, run `code Dockerfile` to create a a file named `Dockerfile` in GitPod. Copy the following content:
+        Use your favorite editor (e.g., `vim` or `nano`) to create a file named `Dockerfile`. Alternatively, run `code Dockerfile` to create a a file named `Dockerfile` in Gitpod. Copy the following content:
 
         ```dockerfile linenums="1" title="Dockerfile"
         FROM debian:bullseye-slim
