@@ -38,7 +38,7 @@ process SAMTOOLS_INDEX {
 }
 
 /*
- * Call variants with GATK HapolotypeCaller in GVCF mode
+ * Call variants with GATK HaplotypeCaller in GVCF mode
  */
 process GATK_HAPLOTYPECALLER {
 

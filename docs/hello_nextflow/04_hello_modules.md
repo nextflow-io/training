@@ -116,12 +116,11 @@ process SAMTOOLS_INDEX {
 
     """
     samtools index '$input_bam'
-
     """
 }
 ```
 
-### 2.4 Add an import declaration before the workflow
+### 2.4 Add an import declaration before the workflow block
 
 _Before:_
 
@@ -242,7 +241,7 @@ process GATK_JOINTGENOTYPING {
 }
 ```
 
-### 3.4 Add import declarations before the workflow
+### 3.4 Add import declarations before the workflow block
 
 _Before:_
 
@@ -274,7 +273,7 @@ This should still produce the same output. Congratulations, you've done all this
 
 ### Takeaway
 
-You know how to modularize an entire workflow.
+You know how to modularize multiple processes in a workflow.
 
 ### What's next?
 
