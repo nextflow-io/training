@@ -21,7 +21,7 @@ A full variant calling pipeline typically involves a lot of steps. For simplicit
 
 ### Dataset
 
--   **A reference genome** consisting of the human chromosome 20 (from hg19/b37) and its accessory files (index and sequence dictionary). The reference files are compressed to keep the Gitpod size small so we'll have to decompress them in order to use them.
+-   **A reference genome** consisting of the human chromosome 20 (from hg19/b37) and its accessory files (index and sequence dictionary). The reference files are compressed to keep the Gitpod instance size small so we'll have to decompress them in order to use them.
 -   **Three whole genome sequencing samples** corresponding to a family trio (mother, father and son), which have been subset to a small portion on chromosome 20 to keep the file sizes small. The sequencing data is in [BAM](https://samtools.github.io/hts-specs/SAMv1.pdf) (Binary Alignment Map) format, i.e. genome sequencing reads that have already been mapped to the reference genome.
 -   **A list of genomic intervals**, i.e. coordinates on the genome where our samples have data suitable for calling variants.
 
@@ -136,7 +136,6 @@ process SAMTOOLS_INDEX {
 
     """
     samtools index '$input_bam'
-
     """
 }
 ```
@@ -464,11 +463,11 @@ Launching `hello-gatk.nf` [kickass_faggin] DSL2 - revision: dcfa9f34e3
 
 ### Takeaway
 
-You know how to make a variant calling workflow handle a list of input samples.
+You know how to make a variant calling workflow handle a file containing input samples.
 
 ### What's next?
 
-Turn the list of input files into a samplesheet by including some metadata.
+Turn the input file of the previous example into a samplesheet by including some metadata.
 
 ---
 
@@ -515,8 +514,8 @@ _After:_
 ```groovy title="hello-gatk.nf"
 // Create input channel from samplesheet in CSV format
 reads_ch = Channel.fromPath(params.reads_bam)
-                    .splitCsv(header: true)
-                    .map{row -> [row.id, file(row.reads_bam)]}
+                  .splitCsv(header: true)
+                  .map { row -> [row.id, file(row.reads_bam)] }
 ```
 
 #### 5.4. Add the sample ID to the SAMTOOLS_INDEX input definition
@@ -623,7 +622,7 @@ output:
 
 ```groovy title="hello-gatk.nf"
 // Create a sample map of the output GVCFs
-sample_map = GATK_HAPLOTYPECALLER.out.collectFile(){ id, gvcf, idx ->
+sample_map = GATK_HAPLOTYPECALLER.out.collectFile() { id, gvcf, idx ->
         ["${params.cohort_name}_map.tsv", "${id}\t${gvcf}\t${idx}\n"]
 }
 ```
@@ -717,6 +716,6 @@ You know how to make a joint variant calling workflow that outputs a cohort VCF.
 
 Celebrate your success and take an extra long break! This was tough and you deserve it.
 
-In future trainings, you'll learn more sophisticated methods for managing inputs and outputs (including using the publishDir directive to save the outputs you care about to a storage directory).
+In future trainings, you'll learn more sophisticated methods for managing inputs and outputs (including using the `publishDir` directive to save the outputs you care about to a storage directory).
 
 **Good luck!**
