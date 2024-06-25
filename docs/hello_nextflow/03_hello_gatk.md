@@ -21,7 +21,7 @@ A full variant calling pipeline typically involves a lot of steps. For simplicit
 
 ### Dataset
 
--   **A reference genome** consisting of the human chromosome 20 (from hg19/b37) and its accessory files (index and sequence dictionary). The reference files are compressed to keep the Gitpod size small so we'll have to decompress them in order to use them.
+-   **A reference genome** consisting of the human chromosome 20 (from hg19/b37) and its accessory files (index and sequence dictionary). The reference files are compressed to keep the Gitpod instance size small so we'll have to decompress them in order to use them.
 -   **Three whole genome sequencing samples** corresponding to a family trio (mother, father and son), which have been subset to a small portion on chromosome 20 to keep the file sizes small. The sequencing data is in [BAM](https://samtools.github.io/hts-specs/SAMv1.pdf) (Binary Alignment Map) format, i.e. genome sequencing reads that have already been mapped to the reference genome.
 -   **A list of genomic intervals**, i.e. coordinates on the genome where our samples have data suitable for calling variants.
 
@@ -108,6 +108,12 @@ gatk HaplotypeCaller \
 cat reads_mother.g.vcf
 ```
 
+#### 0.2.6. Exit the container
+
+```bash
+exit
+```
+
 ---
 
 ## 1. Write a single-stage workflow that runs Samtools index on a BAM file
@@ -130,7 +136,6 @@ process SAMTOOLS_INDEX {
 
     """
     samtools index '$input_bam'
-
     """
 }
 ```
@@ -305,10 +310,9 @@ nextflow run hello-gatk.nf
 Uh-oh! It fails with an error like this:
 
 ```console title="Output"
-A USER ERROR has occurred: Traversal by intervals was requested but some input files are not indexed.
-Please index all input files:
-
-samtools index reads_son.bam
+Command error:
+  [E::hts_open_format] Failed to open file "reads_mother.bam reads_father.bam reads_son.bam" : No such file or directory
+  samtools index: failed to open "reads_mother.bam reads_father.bam reads_son.bam": No such file or directory
 ```
 
 This is because the file paths are different for the BAM files and their index files, so GATK does not recognize that they go together. This can be addressed by passing in the index files explicitly, but there's a plot twist: the script as written so far is not safe for running on multiple samples, because the order of outputs is not guaranteed. Even if we solved the indexing problem, we would end up with race condition issues. So we need to make sure the BAM files and their index files travel together through the channels.
@@ -363,7 +367,23 @@ GATK_HAPLOTYPECALLER(
     SAMTOOLS_INDEX.out,
 ```
 
-#### 3.6. Run the workflow to verify it works correctly on all three samples now
+#### 3.6 Update the channel factory to read from a list
+
+_Before:_
+
+```groovy title="hello-gatk.nf"
+// Create input channel (single file via CLI parameter)
+reads_ch = Channel.of(params.reads_bam)
+```
+
+_After:_
+
+```groovy title="hello-gatk.nf"
+// Create input channel (multiple files via CLI parameter)
+reads_ch = Channel.fromList(params.reads_bam)
+```
+
+#### 3.7. Run the workflow to verify it works correctly on all three samples now
 
 ```bash
 nextflow run hello-gatk.nf -ansi-log false
@@ -427,8 +447,8 @@ params.reads_bam = "${projectDir}/data/sample_bams.txt"
 _Before:_
 
 ```groovy title="hello-gatk.nf"
-// Create input channel
-reads_ch = Channel.of(params.reads_bam)
+// Create input channel (single file via CLI parameter)
+reads_ch = Channel.fromList(params.reads_bam)
 ```
 
 _After:_
@@ -459,11 +479,11 @@ Launching `hello-gatk.nf` [kickass_faggin] DSL2 - revision: dcfa9f34e3
 
 ### Takeaway
 
-You know how to make a variant calling workflow handle a list of input samples.
+You know how to make a variant calling workflow handle a file containing input samples.
 
 ### What's next?
 
-Turn the list of input files into a samplesheet by including some metadata.
+Turn the input file of the previous example into a samplesheet by including some metadata.
 
 ---
 
@@ -510,8 +530,8 @@ _After:_
 ```groovy title="hello-gatk.nf"
 // Create input channel from samplesheet in CSV format
 reads_ch = Channel.fromPath(params.reads_bam)
-                    .splitCsv(header: true)
-                    .map{row -> [row.id, file(row.reads_bam)]}
+                  .splitCsv(header: true)
+                  .map { row -> [row.id, file(row.reads_bam)] }
 ```
 
 #### 5.4. Add the sample ID to the SAMTOOLS_INDEX input definition
@@ -618,7 +638,7 @@ output:
 
 ```groovy title="hello-gatk.nf"
 // Create a sample map of the output GVCFs
-sample_map = GATK_HAPLOTYPECALLER.out.collectFile(){ id, gvcf, idx ->
+sample_map = GATK_HAPLOTYPECALLER.out.collectFile() { id, gvcf, idx ->
         ["${params.cohort_name}_map.tsv", "${id}\t${gvcf}\t${idx}\n"]
 }
 ```
@@ -712,6 +732,6 @@ You know how to make a joint variant calling workflow that outputs a cohort VCF.
 
 Celebrate your success and take an extra long break! This was tough and you deserve it.
 
-In future trainings, you'll learn more sophisticated methods for managing inputs and outputs (including using the publishDir directive to save the outputs you care about to a storage directory).
+In future trainings, you'll learn more sophisticated methods for managing inputs and outputs (including using the `publishDir` directive to save the outputs you care about to a storage directory).
 
 **Good luck!**

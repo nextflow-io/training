@@ -73,13 +73,17 @@ Congratulations, you ran your first Nextflow pipeline!
 
 The most important thing here is the last line, which reports that the `sayHello` process was executed once, successfully. At the start of the line, you can find the name of the work directory that was created for the process execution.
 
-Browse the work directory in the file explorer to find the log files and any outputs created by the process. You should find the following files:
+!!! warning
 
--   **`.command.begin`**: Metadata related to the beginning of the execution of the process
--   **`.command.err`**: Error messages emitted by the process (stderr)
--   **`.command.log`**: Complete log output emitted by the process
--   **`.command.out`**: Regular output by the process (stdout)
--   **`.command.sh`**: The command that was run by the process call
+    Check your output for the work directory. It won't necessarily be the same as in the output above.
+
+Browse the work directory in the file explorer to find the log files and any outputs created by the task. You should find the following files:
+
+-   **`.command.begin`**: Metadata related to the beginning of the execution of the process task
+-   **`.command.err`**: Error messages (stderr) emitted by the process task
+-   **`.command.log`**: Complete log output emitted by the process task
+-   **`.command.out`**: Regular output (stdout) by the process task
+-   **`.command.sh`**: The command that was run by the process task call
 -   **`.exitcode`**: The exit code resulting from the command
 
 In this case, look for your output in the `.command.out` file.
@@ -103,6 +107,10 @@ Learn how to interpret the Nextflow code.
 Let's open the script and look at how it's structured.
 
 #### 1. Double click on the file in the file explorer to open it in the editor pane
+
+!!! tip
+
+    The file is in the current directory. Optionally, you can type `ls` in the terminal and Ctrl+Click on the file to open it. If you're on macOS, you can use Cmd+Click.
 
 The first block of code describes a **process** called `sayHello` that writes its output to `stdout`:
 
@@ -610,7 +618,7 @@ executor >  local (2)
 [01/2b32ee] process > convertToUpper (1) [100%] 1 of 1 ✔
 ```
 
-This time the workflow produced two work directories; one per process. Check out the work directory of the second process, where you should find two different output files listed. If you look carefully, you'll notice one of them (the output of the first process) has a little arrow icon on the right; that signifies it's a symbolic link. It points to the location where that file lives in the work directory of the first process.
+This time the workflow produced two work directories; one per process instance (task). Check out the work directory of the task from the second process, where you should find two different output files listed. If you look carefully, you'll notice one of them (the output of the first process) has a little arrow icon on the right; that signifies it's a symbolic link. It points to the location where that file lives in the work directory of the first process.
 
 !!! note
 
@@ -731,7 +739,7 @@ That's much better; at least for this number of processes. For a complex pipelin
 
 ### Takeaway
 
-You know how to feed multiple inputs through a value channel.
+You know how to feed an input with multiple elements through a queue channel.
 
 ### What's next?
 
@@ -762,7 +770,7 @@ greeting_ch = Channel.fromPath(params.input_file).splitText() { it.trim() }
 #### 2. Run the workflow with the `-ansi-log false` option and an `--input_file` parameter
 
 ```bash
-nextflow run hello-world.nf -ansi-log false --input_file greetings.txt
+nextflow run hello-world.nf -ansi-log false --input_file data/greetings.txt
 ```
 
 Once again we see each process get executed three times:

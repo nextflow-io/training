@@ -1,10 +1,10 @@
 # Orientation
 
-The Gitpod environment contains some test data that will be used in this workshop.
+The Gitpod environment contains some test data that will be used in this workshop. All software required are already installed and configured in it too.
 
 !!! note
 
-    Follow [this link](../envsetup/00_introduction.md) if you have not yet setup your Gitpod environment.
+    Follow [this link](../../envsetup/) if you have not yet setup your Gitpod environment.
 
 ## Getting started
 
