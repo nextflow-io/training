@@ -108,6 +108,12 @@ gatk HaplotypeCaller \
 cat reads_mother.g.vcf
 ```
 
+#### 0.2.6. Exit the container
+
+```bash
+exit
+```
+
 ---
 
 ## 1. Write a single-stage workflow that runs Samtools index on a BAM file
