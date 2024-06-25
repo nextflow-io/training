@@ -112,7 +112,6 @@ Let's open the script and look at how it's structured.
 
     The file is in the current directory. Optionally, you can type `ls` in the terminal and Ctrl+Click on the file to open it. If you're on macOS, you can use Cmd+Click.
 
-
 The first block of code describes a **process** called `sayHello` that writes its output to `stdout`:
 
 ```groovy title="hello-world.nf"

@@ -377,6 +377,7 @@ reads_ch = Channel.of(params.reads_bam)
 ```
 
 _After:_
+
 ```groovy title="hello-gatk.nf"
 // Create input channel (multiple files via CLI parameter)
 reads_ch = Channel.fromList(params.reads_bam)
