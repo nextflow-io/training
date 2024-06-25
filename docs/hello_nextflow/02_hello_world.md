@@ -762,7 +762,7 @@ greeting_ch = Channel.fromPath(params.input_file).splitText() { it.trim() }
 #### 2. Run the workflow with the `-ansi-log false` option and an `--input_file` parameter
 
 ```bash
-nextflow run hello-world.nf -ansi-log false --input_file greetings.txt
+nextflow run hello-world.nf -ansi-log false --input_file data/greetings.txt
 ```
 
 Once again we see each process get executed three times:
