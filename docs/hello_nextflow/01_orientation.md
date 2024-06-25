@@ -1,6 +1,6 @@
 # Orientation
 
-The Gitpod environment contains some test data that will be used in this workshop.
+The Gitpod environment contains some test data that will be used in this workshop. All software required are already installed and configured in it too.
 
 !!! note
 

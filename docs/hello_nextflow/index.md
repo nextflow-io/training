@@ -8,9 +8,9 @@ hide:
 
 Hello! You are now on the path to writing reproducible and scalable scientific workflows using Nextflow.
 
-The rise of big data has made it increasingly necessary to be able to analyze and perform experiments on large datasets in a portable and reproducible manner. Parallelization and distributed computing are the best ways to tackle this challenge, but the tools commonly available to computational scientists often lack good support for these techniques, or they provide a model that fits poorly with the needs of computational scientists Nextflow was created to address these challenges.
+The rise of big data has made it increasingly necessary to be able to analyze and perform experiments on large datasets in a portable and reproducible manner. Parallelization and distributed computing are the best ways to tackle this challenge, but the tools commonly available to computational scientists often lack good support for these techniques, or they provide a model that fits poorly with the needs of computational scientists. Nextflow was particularly created to address these challenges.
 
-In the series you will be introduced to Nextflow in a series of complementary hands-on workshops.
+During this training, you will be introduced to Nextflow in a series of complementary hands-on workshops.
 
 Let's get started!
 
