@@ -367,7 +367,22 @@ GATK_HAPLOTYPECALLER(
     SAMTOOLS_INDEX.out,
 ```
 
-#### 3.6. Run the workflow to verify it works correctly on all three samples now
+#### 3.6 Update the channel factory to read from a list
+
+_Before:_
+
+```groovy title="hello-gatk.nf"
+// Create input channel (single file via CLI parameter)
+reads_ch = Channel.of(params.reads_bam)
+```
+
+_After:_
+```groovy title="hello-gatk.nf"
+// Create input channel (multiple files via CLI parameter)
+reads_ch = Channel.fromList(params.reads_bam)
+```
+
+#### 3.7. Run the workflow to verify it works correctly on all three samples now
 
 ```bash
 nextflow run hello-gatk.nf -ansi-log false
@@ -431,8 +446,8 @@ params.reads_bam = "${projectDir}/data/sample_bams.txt"
 _Before:_
 
 ```groovy title="hello-gatk.nf"
-// Create input channel
-reads_ch = Channel.of(params.reads_bam)
+// Create input channel (single file via CLI parameter)
+reads_ch = Channel.fromList(params.reads_bam)
 ```
 
 _After:_
