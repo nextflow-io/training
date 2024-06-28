@@ -195,6 +195,16 @@ In a real-world pipeline, this is like having a command that specifies an output
 
 Bother the script and the output definition blocks need to be updated.
 
+!!! note
+
+    Inputs and outputs in the process blocks require a qualifier and a variable name:
+
+    ```
+    <qualifier> <name>
+    ```
+
+    An definition consists of a qualifier and a name. The qualifier defines the type of data to be received. This information is used by Nextflow to apply the semantic rules associated with each qualifier, and handle it properly. Common qualifiers include `val` and `path`.
+
 #### 1. Change the process command to output a named file
 
 _Before:_
