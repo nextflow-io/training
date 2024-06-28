@@ -75,7 +75,7 @@ executor >  local (1)
 
 Congratulations, you ran your first Nextflow pipeline!
 
-The most important output here is the last line (line 4), which reports that the `sayHello` process was successfully executed once. At the start of the line, you can find the name of the work directory that was created for the process execution.
+The most important output here is the last line (line 4), which reports that the `sayHello` process was successfully executed once.
 
 When a Nextflow pipeline is run a `work` directory that stores various files is created.
 
@@ -114,19 +114,19 @@ Learn how to interpret the Nextflow code.
 
 ## 2. Interpret the Hello World script
 
-Nextflow scripts can be built up of multiple parts.
+Nextflow scripts is built up of multiple parts.
 
 A **process** is the basic processing primitive to execute a user script.
 
-The process definition starts with the keyword process, followed by process name and finally the process body delimited by curly braces. The process body must contain a string which represents the command or, more generally, a script that is executed by it.
+The process definition starts with the keyword `process`, followed by process name and finally the process body delimited by curly braces. The process body must contain a script block which represents the command or, more generally, a script that is executed by it.
 
-A process may contain any of the following definition blocks: directives, inputs, outputs, when clause, and the process script.
+A process may contain any of the following definition blocks: directives, inputs, outputs, when clauses, and of course, the script.
 
 A **workflow** is a composition of processes and dataflow logic.
 
 The workflow definition starts with the keyword `workflow`, followed by an optional name, and finally the workflow body delimited by curly braces.
 
-Comments can be used to help annotate the script and make it more understandable for others.
+Processes are connected through asynchronous first-in, first-out (FIFO) queues, called **channels**. The interaction between processes, and ultimately the workflow execution flow itself, are defined by the process input and output declarations.
 
 Let's open the `hello-world.nf` script and look at how it's structured.
 
