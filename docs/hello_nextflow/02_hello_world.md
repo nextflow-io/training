@@ -46,7 +46,7 @@ You now know how to run a simple command in the terminal that outputs some text,
 
 ### What's next?
 
-Learn how to turn that into a step in a Nextflow pipeline.
+Learn how to turn that into a step in a Nextflow workflow.
 
 ---
 
@@ -73,11 +73,11 @@ executor >  local (1)
 [4e/6ba912] process > sayHello [100%] 1 of 1 ✔
 ```
 
-Congratulations, you ran your first Nextflow pipeline!
+Congratulations, you ran your first Nextflow workflow!
 
 The most important output here is the last line (line 4), which reports that the `sayHello` process was successfully executed once.
 
-When a Nextflow pipeline is run a `work` directory that stores various files is created.
+When a Nextflow workflow is run a `work` directory that stores various files is created.
 
 Each task uses a unique directory based on its [hash](https://www.nextflow.io/docs/latest/cache-and-resume.html#task-hash) (e.g., `4e/6ba912`) within the work directory.
 
@@ -191,7 +191,7 @@ Learn how to make it output a named file.
 
 Instead of printing "Hello World!" to the standard output it can be saved to a file (it's the same thing we did when running in the terminal earlier).
 
-In a real-world pipeline, this is like having a command that specifies an output file as part of its normal syntax. We'll see examples of that later.
+In a real-world workflow, this is like having a command that specifies an output file as part of its normal syntax. We'll see examples of that later.
 
 Bother the script and the output definition blocks need to be updated.
 
@@ -272,11 +272,11 @@ Learn how to pass parameters to the workflow from the command line.
 
 ## 4. Use a command line parameter for naming the output file
 
-Here we introduce `params` (short for 'parameters') as the construct that can hold command line arguments. This is useful because there will be many parameters, such as filenames and processing options, that you may want to decide at the time you run the pipeline. Parameters allow you to do this without editing the script itself every time.
+Here we introduce `params` (short for 'parameters') as the construct that can hold command line arguments. This is useful because there will be many parameters, such as filenames and processing options, that you may want to decide at the time you run the workflow. Parameters allow you to do this without editing the script itself every time.
 
 Parameters can be created by prefixing a parameter names with the params scope (e.g., `params.output_file`). When including these in a script block, a `$` must be used to treat it like a variable.
 
-Parameters can be modified when you run your pipeline by adding a double hypen (`--`) to the start of the parameter name and including it in the run command (e.g., `nextflow run hello-world --output_file results).
+Parameters can be modified when you run your workflow by adding a double hypen (`--`) to the start of the parameter name and including it in the run command (e.g., `nextflow run hello-world --output_file results).
 
 #### 1. Change the output declaration in the process to use a parameter
 
@@ -335,7 +335,7 @@ Follow the same procedure as before to find the `output.txt` output file. If you
 
 !!! tip
 
-    Command-line arguments take one dash (-) for Nextflow options, two dashes (--) for pipeline parameters.
+    Command-line arguments take one dash (-) for Nextflow options, two dashes (--) for workflow parameters.
 
 ### Takeaway
 
@@ -550,7 +550,7 @@ Learn how to pass inputs from the command line.
 
 ## 7. Use params for inputs too
 
-We want to be able to specify the input from the command line because that is the piece that will almost always be different in subsequent runs of the pipeline. Good news: we can use the same `params` construct we used for the output filename.
+We want to be able to specify the input from the command line because that is the piece that will almost always be different in subsequent runs of the workflow. Good news: we can use the same `params` construct we used for the output filename.
 
 #### 1. Edit the input channel declaration to use a parameter
 
@@ -800,7 +800,7 @@ Launching `hello-world.nf` [disturbed_panini] DSL2 - revision: 719dae218c
 [90/e88919] Submitted process > convertToUpper (3)
 ```
 
-That's much better; at least for this number of processes. For a complex pipeline, or a large number of inputs, having the full list output to the terminal might get a bit overwhelming.
+That's much better; at least for this number of processes. For a complex workflow, or a large number of inputs, having the full list output to the terminal might get a bit overwhelming.
 
 !!! tip
 
