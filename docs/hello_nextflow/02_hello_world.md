@@ -197,13 +197,13 @@ Bother the script and the output definition blocks need to be updated.
 
 !!! note
 
-    Inputs and outputs in the process blocks require a qualifier and a variable name:
+    Inputs and outputs in the process blocks typically require a qualifier and a variable name:
 
     ```
-    <qualifier> <name>
+    <input/output qualifier> <input/output name>
     ```
 
-    An definition consists of a qualifier and a name. The qualifier defines the type of data to be received. This information is used by Nextflow to apply the semantic rules associated with each qualifier, and handle it properly. Common qualifiers include `val` and `path`.
+    A definition consists of a qualifier and a name. The qualifier defines the type of data to be received. This information is used by Nextflow to apply the semantic rules associated with each qualifier, and handle it properly. Common qualifiers include `val` and `path`.
 
 #### 1. Change the process command to output a named file
 
@@ -430,7 +430,7 @@ Importantly, there are two kinds of channels (queue channels and value channels)
 
 **Value channel**
 
--   A value channel can be bound (i.e. assigned) with one and only one value
+-   Can be bound (i.e. assigned) with one and only one value
 -   Can be consumed any number of times
 
 We're going to start by creating a value channel with the `Channel.of()` channel factory.
@@ -601,7 +601,11 @@ Learn how to add in a second process and chain them together.
 
 ## 8. Add a second step to the workflow
 
-Most real-world workflows involve more than one step. Here we introduce a second process that converts the text to uppercase (all-caps), using the classic UNIX one-liner `tr '[a-z]' '[A-Z]'`.
+Most real-world workflows involve more than one step. Here we introduce a second process that converts the text to uppercase (all-caps), using the classic UNIX one-liner:
+
+```bash
+tr '[a-z]' '[A-Z]'`
+```
 
 We're going to run the command by itself in the terminal first to verify that it works as expected without any of the workflow code getting in the way of clarity, just like we did at the start with `echo 'Hello World'`. Then we'll write a process that does the same thing, and finally we'll connect the two processes so the output of the first serves as input to the second.
 
@@ -865,4 +869,6 @@ You know how to provide inputs in a file.
 
 ### What's next?
 
-Celebrate your success and take a break! Then, move on to Part 2 of this training to learn how to apply what you've learned to an actual data analysis use case.
+Celebrate your success and take a break!
+
+When you are ready, move on to Part 2 of this training to learn how to apply what you've learned to a more realistic data analysis use case.
