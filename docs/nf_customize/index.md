@@ -8,6 +8,8 @@ In this workshop, using the [nf-core/demo](https://github.com/nf-core/demo) pipe
 
 Let's get started!
 
+[![Open in Gitpod](https://img.shields.io/badge/Gitpod-%20Open%20in%20Gitpod-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/nextflow-io/training)
+
 ## Learning objectives
 
 By the end of this workshop you will be able to:

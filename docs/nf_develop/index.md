@@ -8,6 +8,8 @@ Leveraging the nf-core template enables accelerated maintenance and development 
 
 Let's get started!
 
+[![Open in Gitpod](https://img.shields.io/badge/Gitpod-%20Open%20in%20Gitpod-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/nextflow-io/training)
+
 ## Learning objectives
 
 In In Part 1 of this workshop, you will utilize the nf-core tooling to build a small pipeline using the nf-core template.

@@ -6,13 +6,17 @@ Gitpod is a cloud development environment for teams to efficiently and securely 
 
 You can create a free [Gitpod](https://gitpod.io/) account using your GitLab, GitHub, or Bitbucket account.
 
+You can create an account using the [Gitpod login page](https://gitpod.io/login/).
+
 ![Gitpod log in](img/login.png)
 
 It is best to connect your LinkedIn account to receive a full 50 hours usage allocation.
 
-![Gitpod log in](img/onestepaway.png)
+![Gitpod log in one step](img/onestepaway.png)
 
 After selecting your preferred editor, theme, and profile details, click continue and your account will be created and ready to use.
+
+It is recommended to use the VS code editor.
 
 ## Running Gitpod
 
@@ -20,11 +24,15 @@ To run Gitpod click the following URL: <https://gitpod.io/#https://github.com/ne
 
 This is our GitHub repository URL, prefixed with `https://gitpod.io/#`
 
+Alternatively, you can click on the button below.
+
+[![Open Gitpod](https://img.shields.io/badge/Gitpod-%20Open%20in%20Gitpod-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/nextflow-io/training)
+
 If you already logged in, your Gitpod environment will start to load.
 
 ### Explore your Gitpod IDE
 
-After Gitpod has loaded, you should now see something similar to the following:
+After Gitpod has loaded, you should see something similar to the following:
 
 ![Gitpod welcome](img/gitpod.welcome.png)
 
