@@ -76,7 +76,7 @@ The `--output` parameter is used to name the output directory where the results 
 ```
 
 !!! note
-    
+
     You do not need to create the output folder before you run the pipeline.
 
 ## Testing `nf-core/demo` with profiles
@@ -170,7 +170,7 @@ In Gitpod, you can need to add the `singularity` profile to your execution comma
     Execute the command again, but this time with the singularity profile:
 
     ```bash
-    nextflow run nf-core/demo -profile test,singularity --outdir results 
+    nextflow run nf-core/demo -profile test,singularity --outdir results
     ```
 
     The `nf-core/demo` pipeline should now run successfully!

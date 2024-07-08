@@ -10,7 +10,7 @@ The Gitpod environment contains some test data that will be used in this worksho
 
 You will complete this module in the `nf-customize/` folder.
 
-In this folder you will find three pairs of zipped fastq files (`*.fq.gz`) in a `data/` folder and an example samplesheet (`samplesheet.csv`) in a `scripts/` folder.
+In this folder you will find three pairs of zipped fastq files (`*.fastq.gz`) in a `data/` folder and an example samplesheet (`samplesheet.csv`) in a `scripts/` folder.
 
 ```console
 .
