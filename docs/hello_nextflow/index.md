@@ -14,6 +14,8 @@ During this training, you will be introduced to Nextflow in a series of compleme
 
 Let's get started!
 
+[![Open in Gitpod](https://img.shields.io/badge/Gitpod-%20Open%20in%20Gitpod-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/nextflow-io/training)
+
 ## Learning objectives
 
 In this workshop, you will learn foundational concepts for building pipelines.
