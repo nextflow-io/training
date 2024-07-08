@@ -36,15 +36,15 @@ To help you understand the expectations for running an nf-core pipeline, they co
 
 The documentation for the `nf-core/demo` pipeline can be found [here](https://nf-co.re/demo/docs/usage).
 
-## Your first `nf-core/demo` execution command
+## Required inputs
 
 Before running any pipeline you will need to check if there are any parameters that are required.
 
 You can view these on the parameters page of the pipeline.
 
-By viewing the [parameters page of the `nf-core/demo` pipeline](https://nf-co.re/demo/dev/parameters), you can see that requires two parameters (`--input` and `--outdir`) to run.
+The [parameters page of the `nf-core/demo` pipeline](https://nf-co.re/demo/dev/parameters) shows that this pipeline requires two parameters (`--input` and `--outdir`) to run.
 
-![nf-core logo](img/demo-parameters.png)
+![nf-core/demo parameters](img/demo-parameters.png)
 
 Without these, the pipeline will not launch and nextflow will throw an error.
 
@@ -67,29 +67,6 @@ SAMPLE2_PE,path/to/sample2_R1.fastq.gz,path/to/sample2_R2.fastq.gz
 SAMPLE3_SE,path/to/sample3_R1.fastq.gz,
 ```
 
-The pipeline will auto-detect whether a sample is single- or paired-end and if a sample has been sequenced more than once using the information provided in the samplesheet.
-
-!!! question "Exercise"
-
-    Within the `data` folder there are three sets of paired-end reads for gut, liver, and lung samples. Create a samplesheet for this data.
-
-    First, create a `.csv` file named `samplesheet.csv`:
-
-    ```bash
-    code samplesheet.csv
-    ```
-
-    Next, add the header line, and, for each sample, an id and the complete paths to the paired-end reads:
-
-    ```csv title="samplesheet.csv"
-    sample,fastq_1,fastq_2
-    gut,/workspace/gitpod/nf-customize/data/gut_1.fq.gz,/workspace/gitpod/nf-customize/data/gut_2.fq.gz
-    liver,/workspace/gitpod/nf-customize/data/liver_1.fq.gz,/workspace/gitpod/nf-customize/data/liver_2.fq.gz
-    lung,/workspace/gitpod/nf-customize/data/lung_1.fq.gz,/workspace/gitpod/nf-customize/data/lung_2.fq.gz
-    ```
-
-    **Make sure you save this file in your working directory (`/workspace/gitpod/nf-customize/`)**
-
 ### `--outdir`
 
 The `--output` parameter is used to name the output directory where the results will be saved. It takes a string as its input.
@@ -98,41 +75,21 @@ The `--output` parameter is used to name the output directory where the results 
 --output results
 ```
 
-You do not need to create this folder before you run the pipeline.
+!!! note
+    
+    You do not need to create the output folder before you run the pipeline.
 
-!!! question "Exercise"
+## Testing `nf-core/demo` with profiles
 
-    Execute the `nf-core/demo` pipeline with your new samplesheet as an input and an output directory named `results`:
-
-    ```bash
-    nextflow run nf-core/demo --input samplesheet.csv --outdir results
-    ```
-
-As the software required to run each process is not available in the Gitpod environment this exercise is expected to fail.
-
-```console
-ERROR ~ Error executing process > 'NFCORE_DEMO:DEMO:SEQTK_TRIM (gut)'
-
-Caused by:
-  Process `NFCORE_DEMO:DEMO:SEQTK_TRIM (gut)` terminated with an error exit status (127)
-<truncated>
-```
-
-Fortunately, nf-core pipelines come packed with directives for containers and environments that can be flexibly enabled using configuration profiles.
-
-### `-profile`
-
-Configuration files can contain the definition of one or more profiles. A profile is a set of configuration attributes that can be added to your execution command by using the `-profile` option.
+A profile is a set of configuration attributes that can be added to your execution command by using the `-profile` option.
 
 ```bash
 -profile <profile name>
 ```
 
-Configuration profiles are defined by using the special scope `profile`, which group the attributes that belong to the same profile using a common prefix. For example:
+Configuration profiles are defined by using the special scope `profile` within configuration files. Profiles group the attributes that belong to the same profile using a common prefix. For example, `foo` and `bar` are separate profiles:
 
 ```console title="example.config"
-process.cpus = 1
-
 profiles {
   foo {
     process.memory = '2 GB'
@@ -144,25 +101,11 @@ profiles {
 }
 ```
 
-nf-core pipelines come with a series of profiles for running the pipelines using different software (e.g., Docker, Singularity, and Conda).
-
-Here, you will need to add the `singularity` profile to your execution command. Nextflow will download and enable Singularity software images to run each process.
-
-!!! question "Exercise"
-
-    Execute the command again, but this time with the singularity profile:
-
-    ```bash
-    nextflow run nf-core/demo --input samplesheet.csv --outdir results -profile singularity
-    ```
-
-    The `nf-core/demo` pipeline should now run successfully!
+Before executing **any** nf-core pipeline with your own data you should test it with its `test` profile.
 
 Every nf-core pipeline also comes with a `test` profile. This is a minimal set of configuration settings for the pipeline to run using a small test dataset that is hosted on the [nf-core/test-datasets](https://github.com/nf-core/test-datasets) repository.
 
-The `test` profile can be very useful for performing a test run of nf-core pipeline on your infrastructure before using your own data. As the `test` profile is expected to run it can be used to help diagnose local issues before you scale up your analysis.
-
-You should use the `test` profile to check the pipeline runs before analyzing your own data.
+As the `test` profile is expected to run it can be used to help diagnose local issues before you scale up your analysis.
 
 The `test` profile for `nf-core/demo` is shown below:
 
@@ -194,30 +137,83 @@ params {
 }
 ```
 
-!!! note "Using multiple profiles"
+The `nf-core/demo` `test` profile already contains the input parameter (this will be explained in more detail shortly). This means that the `--input` parameter does not need to be added to the execution command. However, as the `outdir` parameter is included in the `test` profile it must still be added to the execution command using the `--outdir` flag.
 
-    Multiple profiles can be specified in a comma-separated (`,`) list when you execute your command.
-
-    The order of profiles is important as they will be read from left to right, for example:
-
-    ```bash
-    nextflow run nf-core/demo -r dev -profile test,singularity --outdir results
-    ```
-
-Note that the test profile for nf-core/demo has supplied an `input` but no `outdir`, meaning that an `outdir` must still be added to your execution command separately.
+```bash
+nextflow run nf-core/demo -profile test --outdir results
+```
 
 !!! question "Exercise"
 
-    Execute `nf-core/demo` using the `test` and `singularity` profiles:
+    Execute the `nf-core/demo` pipeline with your new samplesheet as an input and an output directory named `results`:
 
     ```bash
-    nextflow run nf-core/demo -r dev -profile test,singularity --outdir results
+    nextflow run nf-core/demo -profile test --outdir results
     ```
 
-If you're computer has internet access and one of Conda, Singularity, or Docker installed, you should be able to run any nf-core pipeline with the `test` profile and the respective profile "out of the box".
+    This execution is expected to fail.
 
-The `test` data profile will pull small test files directly from the `nf-core/test-datasets` GitHub repository and run it locally.
+As the software required to run each process (e.g., seqtk) is not available in the Gitpod environment this exercise is expected to fail.
 
-The `test` profile is an important control to check the pipeline is working as expected and is a great way to trial a pipeline.
+```console
+Caused by:
+  Process `NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE2_PE)` terminated with an error exit status (127)
+<truncated>
+```
 
-Some pipelines have multiple test `profiles` for you to try.
+Fortunately, nf-core pipelines come packed with directives for containers and environments that can be flexibly enabled using profiles for running the pipelines using different software (e.g., `docker`, `singularity`, and `conda`).
+
+In Gitpod, you can need to add the `singularity` profile to your execution command and Nextflow will download and enable Singularity software images to run each process.
+
+!!! question "Exercise"
+
+    Execute the command again, but this time with the singularity profile:
+
+    ```bash
+    nextflow run nf-core/demo -profile test,singularity --outdir results 
+    ```
+
+    The `nf-core/demo` pipeline should now run successfully!
+
+## Using your own data
+
+Instead of using the test profile you can use the `--input` parameter to choose your own samplesheet as an input.
+
+As described above, the input is a `.csv` file with 3 columns with the headers `sample`, `fastq_1`, and `fastq_2`.
+
+The pipeline will auto-detect whether a sample is single- or paired-end and if a sample has been sequenced more than once using the information provided in the samplesheet.
+
+!!! question "Exercise"
+
+    Within the `data` folder there are three sets of paired-end reads for gut, liver, and lung samples. Create a samplesheet for this data.
+
+    First, create a `.csv` file named `samplesheet.csv`:
+
+    ```bash
+    code samplesheet.csv
+    ```
+
+    Next, add the header line, and, for each sample, an id and the complete paths to the paired-end reads:
+
+    ```csv title="samplesheet.csv"
+    sample,fastq_1,fastq_2
+    gut,/workspace/gitpod/nf-customize/data/gut_1.fastq.gz,/workspace/gitpod/nf-customize/data/gut_2.fastq.gz
+    liver,/workspace/gitpod/nf-customize/data/liver_1.fastq.gz,/workspace/gitpod/nf-customize/data/liver_2.fastq.gz
+    lung,/workspace/gitpod/nf-customize/data/lung_1.fastq.gz,/workspace/gitpod/nf-customize/data/lung_2.fastq.gz
+    ```
+
+    **Make sure you save this file in your working directory (`/workspace/gitpod/nf-customize/`)**
+
+With your new samplesheet, you can use the `--input` parameter in your execution command.
+
+In this case, the other parameters in the test profile can be ignored as they are not required by the pipeline.
+
+!!! question "Exercise"
+
+    Execute the `nf-core/demo` pipeline with the `singularity` profile and your newly created samplesheet as your input.
+
+    ```
+    nextflow run nf-core/demo -profile singularity --input samplesheet.csv --outdir results
+    ```
+
+    The pipeline should run successfully!
