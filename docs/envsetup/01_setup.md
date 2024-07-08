@@ -16,19 +16,21 @@ It is best to connect your LinkedIn account to receive a full 50 hours usage all
 
 After selecting your preferred editor, theme, and profile details, click continue and your account will be created and ready to use.
 
-It is recommended to use the VS code editor.
+!!! note
+
+    It is recommended to use the VS code editor.
 
 ## Running Gitpod
 
-To run Gitpod click the following URL: <https://gitpod.io/#https://github.com/nextflow-io/training>
+Click the following URL to run Gitpod: <https://gitpod.io/#https://github.com/nextflow-io/training>
 
-This is our GitHub repository URL, prefixed with `https://gitpod.io/#`
+This URL is our the Nextflow training repository prefixed with `https://gitpod.io/#`.
 
 Alternatively, you can click on the button below.
 
 [![Open Gitpod](https://img.shields.io/badge/Gitpod-%20Open%20in%20Gitpod-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/nextflow-io/training)
 
-If you already logged in, your Gitpod environment will start to load.
+If you are already logged in, your Gitpod environment will start to load.
 
 ### Explore your Gitpod IDE
 
