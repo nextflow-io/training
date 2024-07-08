@@ -101,8 +101,6 @@ profiles {
 }
 ```
 
-Before executing **any** nf-core pipeline with your own data you should test it with its `test` profile.
-
 Every nf-core pipeline also comes with a `test` profile. This is a minimal set of configuration settings for the pipeline to run using a small test dataset that is hosted on the [nf-core/test-datasets](https://github.com/nf-core/test-datasets) repository.
 
 As the `test` profile is expected to run it can be used to help diagnose local issues before you scale up your analysis.
@@ -137,7 +135,7 @@ params {
 }
 ```
 
-The `nf-core/demo` `test` profile already contains the input parameter (this will be explained in more detail shortly). This means that the `--input` parameter does not need to be added to the execution command. However, as the `outdir` parameter is included in the `test` profile it must still be added to the execution command using the `--outdir` flag.
+The `nf-core/demo` `test` profile already contains the input parameter (this will be explained in more detail shortly). This means that the `--input` parameter does not need to be added to the execution command. However, as the `outdir` parameter is not included in the `test` profile it must still be added to the execution command using the `--outdir` flag.
 
 ```bash
 nextflow run nf-core/demo -profile test --outdir results
