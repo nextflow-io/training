@@ -24,7 +24,7 @@ After selecting your preferred editor, theme, and profile details, click continu
 
 Click the following URL to run Gitpod: <https://gitpod.io/#https://github.com/nextflow-io/training>
 
-This URL is our the Nextflow training repository prefixed with `https://gitpod.io/#`.
+This URL is the Nextflow training repository prefixed with `https://gitpod.io/#`.
 
 Alternatively, you can click on the button below.
 
