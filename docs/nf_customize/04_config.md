@@ -151,7 +151,7 @@ nextflow run nf-core/demo -profile singularity -param-file <path/to/params.json>
 
 **Configuration files**
 
-Configuration files are `.config` files that can contain various pipeline properties and can be passed to Nextflow using `-c` option in your execution command:
+Configuration files are `.config` files that can contain various pipeline properties and can be passed to Nextflow using the `-c` option in your execution command:
 
 ```bash
 nextflow run nf-core/demo -profile singularity -params-file mycustomparams.json -c <path/to/custom.config>
