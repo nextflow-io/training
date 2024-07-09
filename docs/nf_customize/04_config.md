@@ -30,7 +30,7 @@ At the highest level, parameters can be customized using the command line. Any p
 --<parameter>
 ```
 
-Depending on the parameter type, you may be required to add additional information after your parameter flag. For example, for a string parameter, you would add the string after the parameter flag. For example, the `outdir` parameter required by the `nf-core/demo` pipelin:
+Depending on the parameter type, you may be required to add additional information after your parameter flag. For example, for a string parameter, you would add the string after the parameter flag. For example, the `outdir` parameter required by the `nf-core/demo` pipeline:
 
 ```bash
 nextflow nf-core/demo --outdir results
