@@ -54,13 +54,19 @@ nextflow pull nf-core/demo
 
 !!! note "The `nextflow run` command"
 
-    The `nextflow run` command will also automatically `pull` the pipeline if it was not pulled previously.
+    The `nextflow run` command will also automatically `pull` the pipeline if it had not been pulled.
 
 Nextflow will `pull` the pipelines default GitHub branch if a pipeline version is not specified. This will be the master branch for nf-core pipelines with a stable release.
 
 nf-core pipelines use GitHub releases to tag stable versions of the code and software. You will always be able to execute different versions of a pipeline using the `-revision` or `-r` option.
 
-Similarly, you can use the `-r` option to specify a specific GitHub branch.
+Similarly, you can use the `-r` option to specify a specific GitHub branch. For example, the `dev` branch of the `nf-core/demo` pipeline could be pulled with the command:
+
+```
+nextflow pull nf-core/demo -r dev
+```
+
+If updates to a remote pipeline have been made, the pull command can be used to update or revery your local copy.
 
 !!! question "Exercise"
 

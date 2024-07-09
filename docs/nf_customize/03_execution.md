@@ -34,13 +34,13 @@ You can view the code for this pipeline on the [`nf-core/demo` GitHub repository
 
 To help you understand the expectations for running an nf-core pipeline, they come with extensive documentation about its parameters, usage, and outputs.
 
-The documentation for the `nf-core/demo` pipeline can be found [here](https://nf-co.re/demo/docs/usage).
+The documentation for the `nf-core/demo` pipeline can be found [on the nf-core/demo pipelines page](https://nf-co.re/demo/docs/usage).
 
 ## Required inputs
 
-Before running any pipeline you will need to check if there are any parameters that are required.
+Before running any nf-core pipeline you will need to check if there are any parameters that are required.
 
-You can view these on the parameters page of the pipeline.
+You can view these on the pipelines parameters page.
 
 The [parameters page of the `nf-core/demo` pipeline](https://nf-co.re/demo/dev/parameters) shows that this pipeline requires two parameters (`--input` and `--outdir`) to run.
 
@@ -56,7 +56,7 @@ The `--input` parameter requires a path to comma-separated file containing infor
 --input 'path/to/samplesheet.csv'
 ```
 
-The nf-core/demo usage documentation describes the required `--input` as a comma-separated file (`.csv`). The `.csv` file must contain 3 columns with the headers `sample`, `fastq_1`, and `fastq_2`.
+The [nf-core/demo usage documentation](https://nf-co.re/demo/dev/docs/usage/) describes the required `--input` as a comma-separated file (`.csv`). The `.csv` file must contain 3 columns with the headers `sample`, `fastq_1`, and `fastq_2`.
 
 The samplesheet file may consist of both single- and paired-end data and may look something like the one below.
 
@@ -87,7 +87,7 @@ A profile is a set of configuration attributes that can be added to your executi
 -profile <profile name>
 ```
 
-Configuration profiles are defined by using the special scope `profile` within configuration files. Profiles group the attributes that belong to the same profile using a common prefix. For example, `foo` and `bar` are separate profiles:
+Configuration profiles are defined using the special scope `profile` within configuration files. Profiles group the attributes that belong to the same profile using a common prefix.
 
 ```console title="example.config"
 profiles {
@@ -101,7 +101,7 @@ profiles {
 }
 ```
 
-Every nf-core pipeline also comes with a `test` profile. This is a minimal set of configuration settings for the pipeline to run using a small test dataset that is hosted on the [nf-core/test-datasets](https://github.com/nf-core/test-datasets) repository.
+Every nf-core pipeline comes with a `test` profile. This is a minimal set of configuration settings for the pipeline to run using a small test dataset that is hosted on the [nf-core/test-datasets](https://github.com/nf-core/test-datasets) repository.
 
 As the `test` profile is expected to run it can be used to help diagnose local issues before you scale up your analysis.
 
@@ -135,7 +135,7 @@ params {
 }
 ```
 
-The `nf-core/demo` `test` profile already contains the input parameter (this will be explained in more detail shortly). This means that the `--input` parameter does not need to be added to the execution command. However, as the `outdir` parameter is not included in the `test` profile it must still be added to the execution command using the `--outdir` flag.
+The `nf-core/demo` `test` profile already contains the input parameter (this will be explained in more detail shortly). This means that the `--input` parameter does not need to be added to the execution command. However, as the `outdir` parameter is not included in the `test` profile it must be added to the execution command using the `--outdir` flag.
 
 ```bash
 nextflow run nf-core/demo -profile test --outdir results
@@ -143,15 +143,15 @@ nextflow run nf-core/demo -profile test --outdir results
 
 !!! question "Exercise"
 
-    Execute the `nf-core/demo` pipeline with your new samplesheet as an input and an output directory named `results`:
+    Execute the `nf-core/demo` pipeline with the `test` profile and an output directory named `results`:
 
     ```bash
     nextflow run nf-core/demo -profile test --outdir results
     ```
 
-    This execution is expected to fail.
+    **This execution is expected to fail!**
 
-As the software required to run each process (e.g., seqtk) is not available in the Gitpod environment this exercise is expected to fail.
+As the software required to run each process (e.g., seqtk) is not available in the Gitpod environment the exercise above is expected to fail.
 
 ```console
 Caused by:
@@ -159,9 +159,13 @@ Caused by:
 <truncated>
 ```
 
-Fortunately, nf-core pipelines come packed with directives for containers and environments that can be flexibly enabled using profiles for running the pipelines using different software (e.g., `docker`, `singularity`, and `conda`).
+Fortunately, nf-core pipelines come packed with directives for containers and environments that can be flexibly enabled using profiles for different software (e.g., `docker`, `singularity`, and `conda`).
 
-In Gitpod, you can need to add the `singularity` profile to your execution command and Nextflow will download and enable Singularity software images to run each process.
+In Gitpod, you can add the `singularity` profile to your execution command and Nextflow will download and enable Singularity software images to run each process.
+
+!!! note "Multiple config files"
+
+    Multiple profiles can be included at execution by separating them with a comma (`,`).
 
 !!! question "Exercise"
 
@@ -175,7 +179,7 @@ In Gitpod, you can need to add the `singularity` profile to your execution comma
 
 ## Using your own data
 
-Instead of using the test profile you can use the `--input` parameter to choose your own samplesheet as an input.
+Instead of using the `test` profile you can use the `--input` parameter to choose your own samplesheet as an input.
 
 As described above, the input is a `.csv` file with 3 columns with the headers `sample`, `fastq_1`, and `fastq_2`.
 
@@ -202,9 +206,9 @@ The pipeline will auto-detect whether a sample is single- or paired-end and if a
 
     **Make sure you save this file in your working directory (`/workspace/gitpod/nf-customize/`)**
 
-With your new samplesheet, you can use the `--input` parameter in your execution command.
+You can use you new samplesheet with the `--input` parameter in your execution command.
 
-In this case, the other parameters in the test profile can be ignored as they are not required by the pipeline.
+In this case, the other parameters in the test profile can be ignored as they are not explicitly required by the pipeline.
 
 !!! question "Exercise"
 
@@ -215,3 +219,5 @@ In this case, the other parameters in the test profile can be ignored as they ar
     ```
 
     The pipeline should run successfully!
+
+Congratulations! You have now run the `nf-core/demo` pipeline using you own dataset!
