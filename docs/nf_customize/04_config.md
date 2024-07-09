@@ -124,7 +124,7 @@ nextflow run nf-core/demo -profile singularity -param-file <path/to/params.json>
 
 !!! question "Exercise"
 
-    Add the `input` and `outdir` parameters to a params file. Give your "input" the complete path to your sample sheet and give your `outdir` the name `results_mycustomparams`.
+    Add the `input` and `outdir` parameters to a params file. Give your `input` the complete path to your sample sheet and give your `outdir` the name `results_mycustomparams`.
 
     Start by creating `mycustomparams.json` and adding your parameters using the format described above:
 
