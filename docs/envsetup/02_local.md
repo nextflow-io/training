@@ -73,7 +73,7 @@ This should print the current version, system, and runtime.
 
 !!! question "Exercise"
 
-    To test that the environment is working correctly, type the following into the terminal:
+    To test that the environment is working correctly, execute the following command:
 
     ```bash
     nextflow info
