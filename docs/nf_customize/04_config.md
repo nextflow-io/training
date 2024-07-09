@@ -280,7 +280,7 @@ The extended execution path is built from the pipelines, subworkflows, and modul
 
 !!! question "Exercise"
 
-    Modify your existing `mycustomconfig.config` by adding a process scope with the `withName` selector. Modify the add a custom title to your MultiQC report:
+    Modify your existing `mycustomconfig.config` by adding a process scope with the `withName` selector. Add a custom title to your MultiQC report:
 
     Start by opening `mycustomconfig.config` that contains your singularity scope:
 
