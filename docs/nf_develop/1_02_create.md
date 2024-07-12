@@ -6,15 +6,19 @@ Creating a pipeline using the nf-core template is greatly simplified by the nf-c
 
 Here, you will use the nf-core template to kickstart your pipeline development using the latest version of Nextflow and the nf-core tooling.
 
-## The `nf-core create` command
+## Creating your pipeline
 
 nf-core tooling has commands for pipeline users and developers.
+
+You can view all of the tooling using the `--help` argument.
 
 ```
 nf-core --help
 ```
 
-Here we will focus on the tooling to assist pipeline developers.
+Here we will focus on the tooling to assist pipeline developers, starting with the `nf-core create` command.
+
+### `nf-core create`
 
 The `nf-core create` command makes a new pipeline using the nf-core base template with a pipeline name, description, and author. It is the first and most important step for creating a pipeline that will integrate with the wider Nextflow ecosystem.
 
@@ -45,7 +49,7 @@ If the command has run successfully, you will see a new folder in your current d
 
 The nf-core pipeline comes packed with features. However, you may not want to include all of these in your pipeline.
 
-Instead of manually removing these features once the template has been created, you can customize certain areas of the template when it is being created.
+Instead of manually removing these features once the template has been created, you can customize certain areas of the template as it is being created.
 
 The following template areas can be customized:
 
@@ -77,15 +81,15 @@ Skip template areas?
 
 ### Submit your code to GitHub
 
-The `nf-core create` command suggests commands for submitting this to GitHub.
+The `nf-core create` command suggests commands for submitting your pipeline to GitHub.
 
 You will first need to create an empty repository on GitHub for your template to be pushed to.
 
-When you are logged into GitHub, you can use the `New` repository button or navigate to [https://github.com/new](https://github.com/new) and follow the prompts to make a new repository.
+When you are logged into GitHub, you can use the green `New` repository button in the top right hand corner of the webpage or navigate to [https://github.com/new](https://github.com/new) and follow the prompts to make a new repository.
 
 ![GitHub new repo](img/github.new.png)
 
-Once you have created the repository you can push your template to GitHub.
+Once you have created the repository you can use `git` to push your template to GitHub.
 
 ```bash
 cd /workspace/gitpod/nf-develop/nf-core-mypipeline
@@ -136,10 +140,10 @@ While the template may feel overwhelming, a complete understanding isn't require
 The nf-core pipeline template has a `main.nf` file that calls `mypipeline.nf` from the `workflows` folder. The `mypipeline.nf` file is the central pipeline file that is used to bring everything else together. Instead of having one large monolithic pipeline script, it's broken up into smaller script components, namely, modules and subworkflows:
 
 -   **Modules** are wrappers around a single process.
--   **Subworkflows** are two or more modules that are packaged together.
+-   **Subworkflows** are two or more modules that are packaged together as a mini workflow.
 
 <figure class="excalidraw">
---8<-- "docs/nf_template/img/nested.excalidraw.svg"
+--8<-- "docs/nf_develop/img/nested.excalidraw.svg"
 </figure>
 
 Within your pipeline repository, `modules` and `subworkflows` are stored within `local` and `nf-core` folders. The `nf-core` folder is for components that have come from the online nf-core repository while the `local` folder is for components that have been developed independently.
@@ -163,7 +167,7 @@ modules/
     .
 ```
 
-Modules from nf-core follow the same structure and contain a small number of additional files that are used for testing and documentation.
+Modules from nf-core follow the same structure and contain a small number of additional files that are used for testing using [nf-test](https://www.nf-test.com/) and documentation about the module.
 
 ### Configuration files
 
@@ -183,7 +187,7 @@ There are several configuration files that are stored in the `conf` folder and a
 
 The `.nf-core.yml` file is used to specify the repository type and manage linting tests.
 
-```yml title=".nf-core.yml"
+```yml title=".nf-core.yml" linenums="1"
 repository_type: pipeline
 ```
 
@@ -219,3 +223,7 @@ Even though many of these action workflows are not relevant for private reposito
     To enable these workflows you need to click `Enable Actions on this Repository` under the `Actions` tab in your GitHub repository.
 
     ![GitHub actions](img/github.actions.png)
+
+---
+
+Congratulations! You have now created a template pipeline, pushed it to Github and learned about important template files!

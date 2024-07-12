@@ -35,3 +35,7 @@ Each file will be used in this training module.
     cd /workspace/gitpod/nf-customize
     tree .
     ```
+
+---
+
+Congratulations! You are now ready to start the workshop!

@@ -70,7 +70,7 @@ The command line wizard will conclude by asking if you want to launch the pipeli
 
     Use the nf-core `launch` command for the `nf-core/demo` pipeline. Your `nf-params.json` file should look something like this:
 
-    ```json
+    ```json title="nf-params.json" linenums="1"
     {
         "input": "/workspace/gitpod/nf-customize/samplesheet.csv",
         "outdir": "results"
@@ -136,3 +136,7 @@ Alternatively, you could build your own execution command with the command line 
 If you normally work on an offline system you would now move these files to your offline system and specify paths to these files using environmental variables, for example, the `NXF_SINGULARITY_CACHEDIR`.
 
 Follow [this link](https://nf-co.re/docs/usage/getting_started/offline) to find out more about running a pipeline offline.
+
+---
+
+Congratulations! You have now utilived nf-core tools for finding, launching and downloading pipeline!

@@ -108,7 +108,7 @@ Nextflow will also look for files that are external to the pipeline project dire
 
 Parameter files are `.json` files that can contain an unlimited number of parameters:
 
-```json title="my-params.json"
+```json title="my-params.json" linenums="1"
 {
     "<parameter1_name>": 1,
     "<parameter2_name>": "<string>",
@@ -233,7 +233,7 @@ The `process` scope allows you to configure pipeline processes and is used exten
 
 By default, process resources are allocated in the `conf/base.config` file using the `withLabel` selector:
 
-```bash title="conf/base.config"
+```bash title="conf/base.config" linenums="1"
 process {
     withLabel: BIG_JOB {
         cpus = 16
@@ -244,7 +244,7 @@ process {
 
 Similarly, the `withName` selector enables the configuration of a process by name. By default, module parameters are defined in the `conf/modules.config` file:
 
-```bash title="conf/modules.config"
+```bash title="conf/modules.config" linenums="1"
 process {
     withName: MYPROCESS {
         cpus = 4
@@ -323,5 +323,7 @@ It is important to consider how the different configuration options interact dur
     ```
 
     You now have a new output directory named `results_mixed` despite the directory being named `results_customparams` in your custom parameters file.
+
+---
 
 Congratulations! You have successfully customized the execution of the `nf-core/demo` pipeline using different methods!

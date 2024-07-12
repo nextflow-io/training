@@ -87,3 +87,7 @@ If updates to a remote pipeline have been made, the pull command can be used to 
     ```bash
     ls $HOME/.nextflow/assets/
     ```
+
+---
+
+Congratulations! You have now ready to start running the `nf-core/demo` pipeline!
