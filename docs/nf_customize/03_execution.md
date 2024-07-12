@@ -241,4 +241,6 @@ In this case, the other parameters in the test profile (e.g., `config_profile_na
 
     The pipeline should run successfully!
 
+---
+
 Congratulations! You have now run the `nf-core/demo` pipeline using you own dataset!

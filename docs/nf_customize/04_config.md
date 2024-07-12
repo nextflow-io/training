@@ -324,4 +324,6 @@ It is important to consider how the different configuration options interact dur
 
     You now have a new output directory named `results_mixed` despite the directory being named `results_customparams` in your custom parameters file.
 
+---
+
 Congratulations! You have successfully customized the execution of the `nf-core/demo` pipeline using different methods!

@@ -137,4 +137,6 @@ If you normally work on an offline system you would now move these files to your
 
 Follow [this link](https://nf-co.re/docs/usage/getting_started/offline) to find out more about running a pipeline offline.
 
+---
+
 Congratulations! You have now utilived nf-core tools for finding, launching and downloading pipeline!
