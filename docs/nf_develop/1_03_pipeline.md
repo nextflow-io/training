@@ -21,12 +21,14 @@ Additional test profiles can be created to test different parts of your pipeline
 
 !!! question "Exercise"
 
-    Run your pipeline with the `test` and `docker` profile.
+    Run your pipeline with the `test` and `singularity` profile.
 
     ```bash
     cd /workspace/gitpod/nf-develop
-    nextflow run nf-core-myfirstpipeline -profile test,docker --outdir results
+    nextflow run nf-core-myfirstpipeline -profile test,singularity --outdir results
     ```
+
+    The pipeline should run successfully!
 
 ## Adding a new tool to your pipeline
 
@@ -78,7 +80,7 @@ You can find out more about working collaboratively with branches on the [GitHub
 
 The `TEMPLATE` branch is used by the `nf-core sync` command to integrate template changes to your pipeline. You should **never** modify the `TEMPLATE` branch as any changes will likely disrupt the syncing functionality.
 
-### Installing the `fastp` module
+### Installing the `seqtk_trim` module
 
 The `nf-core modules list` command can be used to show the modules in your local pipeline or the nf-core remote repository.
 
@@ -86,7 +88,7 @@ The `nf-core modules list` command can be used to show the modules in your local
 nf-core modules list remote
 ```
 
-The `nf-core modules install` command can be used to install the `fastp` module directly from the nf-core repository:
+The `nf-core modules install` command can be used to install the `seqtk_trim` module directly from the nf-core repository:
 
 ```
 cd nf-core-myfirstpipeline
@@ -240,3 +242,21 @@ Extra configuration may also be applied as directives by using `args`. You can f
 !!! note "Closures"
 
     Closures can be used in configuration files to inject code evaluated at runtime.
+
+### Checking your module has been added
+
+It is important to regularly check that you have not broken your pipeline during development. Testing often can help identify issues quicker as you have less files have been modified and mistakes will be easier to identify.
+
+The `test` profile is perfect for this use case.
+
+    Check your new `SEQTK_TRIM` process is working by testing your pipeline.
+
+    ```console
+    nextflow run nf-core-myfirstpipeline -profile test,singularity --outdir results
+    ```
+
+    The pipeline should execute successfully with a new `SEQTK_TRIM` process shown in the terminal and result files.
+
+---
+
+Congratulations! You have added your first nf-core module to the nf-core template!

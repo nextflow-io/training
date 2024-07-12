@@ -1,3 +1,13 @@
+In Part 2 of this workshop, you will use the nf-core tooling to continue development of your pipeline and customize parts of the nf-core template.
+
+By the end of this workshop you will be able to:
+
+-   Add local modules
+-   Patch nf-core modules
+-   Customize linting tests
+-   Sync TEMPLATE
+-   Bump versions
+
 # Customizing the template
 
 ## Adding a custom modules

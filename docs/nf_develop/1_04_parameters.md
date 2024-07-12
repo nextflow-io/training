@@ -2,7 +2,7 @@
 
 Parameters that can be overridden, either using the command line or the Nextflow configuration file, and should be used for anything that a pipeline user may want to configure regularly
 
-Here, as an example, you will add a new parameter to your pipeline that will skip the `SEQTK_TRIM` process.
+Here, as a simple example, you will add a new parameter to your pipeline that will skip the `SEQTK_TRIM` process.
 
 ## Default values
 
@@ -46,6 +46,18 @@ Thus, if the `skip_trim` parameter is **not** `true`, the `SEQTK_TRIM` will be b
     }
     ```
 
+Now your if statement has been added to your main workflow file and has a default setting in your `nextflow.config` file, you will be able to flexibly skip the new trimming step using the `skip_trim` parameter.
+
+!!! question "Exercise"
+
+    Check your new `skip_trim` parameter is working by adding it to your execution command.
+
+    ```console
+    nextflow run nf-core-myfirstpipeline -profile test,singularity --outdir results --skip_trim
+    ```
+
+    You should see that the `SEQTK_TRIM` process has been skipped in your execution.
+
 ## Linting your changes
 
 Linting is a static analysis process that helps ensure code quality by automatically identifying syntax errors, potential bugs, and adherence to coding standards. By enforcing consistency and best practices, linting enhances code readability, reduces errors, and streamlines the development workflow.
@@ -69,13 +81,13 @@ Executing the `nf-core lint` command from within your pipeline repository will p
 
     Execute the `nf-core lint` command to test your pipeline.
 
-It is expected that some of these tests will fail.
+**It is expected that some of these tests will fail.**
 
 ## Updating `nextflow_schema.json`
 
 If you have added parameters and they have not been documented in the `nextflow_schema.json` file then pipeline tests will fail during linting.
 
-```
+```console
 schema_params: Param skip_trim from nextflow config not found in nextflow_schema.json
 ```
 
@@ -83,7 +95,7 @@ For linting tests to pass the `nextflow_schema.json` file must be updated with t
 
 The `nextflow_schema.json` file can get very big and very complicated very quickly. The `nf-core schema build` command is designed to support developers write, check, validate, and propose additions to your `nextflow_schema.json` file.
 
-```
+```console
 nf-core schema build
 ```
 
@@ -109,7 +121,17 @@ Once you have made your edits you can click `Finished` and all changes will be a
 
     Use the `nf-core schema build` command to update your schema. Add any grouping and information you think is appropriate.
 
+    ```console
+    nf-core schema build
+    ```
+
     Lint your pipeline again to see if the tests pass.
+
+    ```console
+    nf-core lint
+    ```
+
+    All pipeline tests should pass.
 
 ## Push your changes to GitHub
 
@@ -130,3 +152,8 @@ As your current branch `myFeature` has no upstream branch you will need to set t
     ```
 
 From this point, you could merge your update into the dev branch or continue your development.
+
+---
+
+Congratulations! You have now added a new parameter to your pipeline and updated the schema for linting tests to pass
+!
