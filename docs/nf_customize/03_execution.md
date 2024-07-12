@@ -60,7 +60,7 @@ The [nf-core/demo usage documentation](https://nf-co.re/demo/dev/docs/usage/) de
 
 The samplesheet file may consist of both single- and paired-end data and may look something like the one below.
 
-```csv title="samplesheet.csv"
+```csv title="samplesheet.csv" linenums="1"
 sample,fastq_1,fastq_2
 SAMPLE1_PE,path/to/sample1_R1.fastq.gz,path/to/sample1_R2.fastq.gz
 SAMPLE2_PE,path/to/sample2_R1.fastq.gz,path/to/sample2_R2.fastq.gz
@@ -89,7 +89,7 @@ A profile is a set of configuration attributes that can be added to your executi
 
 Configuration profiles are defined using the special scope `profile` within configuration files. Profiles group the attributes that belong to the same profile using a common prefix.
 
-```console title="example.config"
+```console title="example.config" linenums="1"
 profiles {
   foo {
     process.memory = '2 GB'
@@ -100,6 +100,8 @@ profiles {
   }
 }
 ```
+
+### `-profile test`
 
 Every nf-core pipeline comes with a `test` profile. This is a minimal set of configuration settings for the pipeline to run using a small test dataset that is hosted on the [nf-core/test-datasets](https://github.com/nf-core/test-datasets) repository.
 
@@ -161,11 +163,28 @@ Caused by:
 
 Fortunately, nf-core pipelines come packed with directives for containers and environments that can be flexibly enabled using profiles for different software (e.g., `docker`, `singularity`, and `conda`).
 
+`-profile singularity`
+
 In Gitpod, you can add the `singularity` profile to your execution command and Nextflow will download and enable Singularity software images to run each process.
+
+The singularity profile is defined in the nextflow.config file in the main pipeline repository.
+
+```groovy title="nextflow.config" linenums="120"
+singularity {
+    singularity.enabled     = true
+    singularity.autoMounts  = true
+    conda.enabled           = false
+    docker.enabled          = false
+    podman.enabled          = false
+    shifter.enabled         = false
+    charliecloud.enabled    = false
+    apptainer.enabled       = false
+    }
+```
 
 !!! note "Multiple config files"
 
-    Multiple profiles can be included at execution by separating them with a comma (`,`).
+    Multiple profiles can be included at execution by separating them with a comma (`,`), e.g., `-profile test,singularity`.
 
 !!! question "Exercise"
 
@@ -177,11 +196,13 @@ In Gitpod, you can add the `singularity` profile to your execution command and N
 
     The `nf-core/demo` pipeline should now run successfully!
 
+If you were running this tutorial you will need to have Singularity installed for this command to run.
+
 ## Using your own data
 
 Instead of using the `test` profile you can use the `--input` parameter to choose your own samplesheet as an input.
 
-As described above, the input is a `.csv` file with 3 columns with the headers `sample`, `fastq_1`, and `fastq_2`.
+As described above, the input is a CSV file with 3 columns and the headers `sample`, `fastq_1`, and `fastq_2`.
 
 The pipeline will auto-detect whether a sample is single- or paired-end and if a sample has been sequenced more than once using the information provided in the samplesheet.
 
@@ -197,7 +218,7 @@ The pipeline will auto-detect whether a sample is single- or paired-end and if a
 
     Next, add the header line, and, for each sample, an id and the complete paths to the paired-end reads:
 
-    ```csv title="samplesheet.csv"
+    ```csv title="samplesheet.csv" linenums="1"
     sample,fastq_1,fastq_2
     gut,/workspace/gitpod/nf-customize/data/gut_1.fastq.gz,/workspace/gitpod/nf-customize/data/gut_2.fastq.gz
     liver,/workspace/gitpod/nf-customize/data/liver_1.fastq.gz,/workspace/gitpod/nf-customize/data/liver_2.fastq.gz
@@ -208,7 +229,7 @@ The pipeline will auto-detect whether a sample is single- or paired-end and if a
 
 You can use you new samplesheet with the `--input` parameter in your execution command.
 
-In this case, the other parameters in the test profile can be ignored as they are not explicitly required by the pipeline.
+In this case, the other parameters in the test profile (e.g., `config_profile_name` and `max_cpus`) can be ignored as they are not explicitly required by the pipeline or in this Gitpod environment.
 
 !!! question "Exercise"
 
