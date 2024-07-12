@@ -31,7 +31,7 @@ Thus, if the `skip_trim` parameter is **not** `true`, the `SEQTK_TRIM` will be b
 
 !!! question "Exercise"
 
-    Add an `if` statement that is dependant on the `skip_trim` parameter to your pipeline.
+    Add an `if` statement that is dependent on the `skip_trim` parameter to your pipeline.
 
     ```groovy title="workflows/mypipeline.nf" linenums="40"
     //
