@@ -6,6 +6,8 @@ There are multiple ways to approach this.
 
 ## Adding a local module
 
+Local modules are 
+
 !!! question "Exercise"
 
     Add a `CUSTOM_FASTQC` process to your pipeline.
@@ -226,6 +228,15 @@ org_path: my-folder
 
 The modules commands will, during initialization, try to pull changes from the remote repositories. If you want to disable this, for example, due to performance reasons, you can use the flag `--no-pull`. Commands will still need to clone repositories that have previously not been used.
 
+!!! info "Private modules repositories"
+
+    In order to browse private repositories you have to configure the [GitHub CLI auth](https://cli.github.com/manual/gh_auth_login) and provide your credentials with the command below.
+
+    ```
+    gh auth login
+    ```
+
+
 ## Push your changes to GitHub
 
 Now you have added a new custom module and patched a module you should commit your changes to GitHub.
@@ -246,4 +257,3 @@ You can push your changes to the same `myFeature` branch you have been working o
 ---
 
 Congratulations! You have added a local module to your pipeline and patched an nf-core module!
-!
