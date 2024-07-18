@@ -6,7 +6,7 @@ There are multiple ways to approach this.
 
 ## Adding a local module
 
-Local modules are 
+Local modules are
 
 !!! question "Exercise"
 
@@ -235,7 +235,6 @@ The modules commands will, during initialization, try to pull changes from the r
     ```
     gh auth login
     ```
-
 
 ## Push your changes to GitHub
 

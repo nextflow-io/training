@@ -8,7 +8,6 @@ By the end of this workshop you will be able to:
 -   Sync TEMPLATE
 -   Bump versions
 
-
 ## `TEMPLATE` syncs
 
 The template evolves as the ecosystem evolves.
