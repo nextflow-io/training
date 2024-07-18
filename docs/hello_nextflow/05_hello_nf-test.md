@@ -1,8 +1,8 @@
 # Part 4: Hello nf-test
 
-It is critical for reproducibility and long-term maintenance to have a way to systematically test that every part of your workflow is doing what it's supposed to do. To that end, people often focus on top-level tests, in which the workflow is un on some test data from start to finish. This is useful but unfortunately incomplete. You should also implement module-level tests (equivalent to what is called 'unit tests' in general software engineering) to verify the functionality of individual components of your workflow, ensuring that each module performs as expected under different conditions and inputs.
+It is critical for reproducibility and long-term maintenance to have a way to systematically test that every part of your workflow is doing what it's supposed to do. To that end, people often focus on top-level tests, in which the workflow is run on some test data from start to finish. This is useful but unfortunately incomplete. You should also implement module-level tests (equivalent to what is called 'unit tests' in general software engineering) to verify the functionality of individual components of your workflow, ensuring that each module performs as expected under different conditions and inputs.
 
-The [nf-test](https://www.nf-test.com/) package provides a testing framework that integrates well with Nextflow and makes it straightforward to add both module-level and workflow-level tests to your pipeline. For more background information, read the [blog post about nf-test](https://nextflow.io/blog/2024/nf-test-in-nf-core.html) on the nf-core blog.
+The [nf-test](https://www.nf-test.com/) package provides a testing framework that integrates well with Nextflow and makes it straightforward to add both module-level and workflow-level tests to your pipeline. For more background information, read the [blog post about nf-test](https://nextflow.io/blog/2024/nf-test-in-nf-core.html) on the Nextflow blog.
 
 !!! note
 
