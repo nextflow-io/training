@@ -249,6 +249,8 @@ It is important to regularly check that you have not broken your pipeline during
 
 The `test` profile is perfect for this use case.
 
+!!! question "Exercise"
+
     Check your new `SEQTK_TRIM` process is working by testing your pipeline.
 
     ```console
