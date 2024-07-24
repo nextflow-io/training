@@ -276,7 +276,7 @@ Here we introduce `params` (short for 'parameters') as the construct that can ho
 
 Parameters can be created by prefixing a parameter names with the params scope (e.g., `params.output_file`). When including these in a script block, a `$` must be used to treat it like a variable.
 
-Parameters can be modified when you run your workflow by adding a double hyphen (`--`) to the start of the parameter name and including it in the run command (e.g., `nextflow run hello-world --output_file results).
+Parameters can be modified when you run your workflow by adding a double hyphen (`--`) to the start of the parameter name and including it in the run command (e.g., `nextflow run hello-world --output_file results`).
 
 #### 1. Change the output declaration in the process to use a parameter
 
