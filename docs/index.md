@@ -87,7 +87,7 @@ We have several workshops available on this website - find the one that's right 
 
     [Launch the nf-core template training :material-arrow-right:](nf_develop/index.md){ .md-button }
 
-!!! exercise "RNA-seq variant calling"
+!!! exercise "Simple RNA-seq variant calling"
 
     !!! quote inline end ""
 
@@ -95,7 +95,7 @@ We have several workshops available on this website - find the one that's right 
 
     A "learn by doing" tutorial focusing on theory, instead of leading through exercises of slowly increasing complexity.
 
-    [Launch the RNA-seq variant calling training :material-arrow-right:](hands_on/index.md){ .md-button }
+    [Launch the simple RNA-seq variant calling training :material-arrow-right:](hands_on/index.md){ .md-button }
 
 !!! exercise "Troubleshooting exercises"
 
