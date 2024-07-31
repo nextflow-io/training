@@ -71,7 +71,6 @@ nav:
           - troubleshoot/04_exercise.md
           - troubleshoot/05_exercise.md
           - troubleshoot/06_exercise.md
-    - help.md
 
 theme:
     name: material
