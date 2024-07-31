@@ -56,7 +56,7 @@ nav:
           - nf_develop/1_02_create.md
           - nf_develop/1_03_pipeline.md
           - nf_develop/1_04_parameters.md
-    - RNA-seq variant calling:
+    - Simple RNA-seq:
           - hands_on/index.md
           - hands_on/01_datasets.md
           - hands_on/02_workflow.md
