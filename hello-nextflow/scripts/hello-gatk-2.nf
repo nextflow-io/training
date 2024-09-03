@@ -3,13 +3,13 @@
  */
 
 // Primary input
-params.reads_bam = "${projectDir}/../data/bam/reads_mother.bam"
+params.reads_bam = "${projectDir}/data/bam/reads_mother.bam"
 
 // Accessory files
-params.reference = "${workflow.projectDir}/../data/ref/ref.fasta"
-params.reference_index = "${workflow.projectDir}/../data/ref/ref.fasta.fai"
-params.reference_dict = "${workflow.projectDir}/../data/ref/ref.dict"
-params.calling_intervals = "${workflow.projectDir}/../data/ref/intervals.bed"
+params.reference = "${workflow.projectDir}/data/ref/ref.fasta"
+params.reference_index = "${workflow.projectDir}/data/ref/ref.fasta.fai"
+params.reference_dict = "${workflow.projectDir}/data/ref/ref.dict"
+params.calling_intervals = "${workflow.projectDir}/data/ref/intervals.bed"
 
 /*
  * Generate BAM index file

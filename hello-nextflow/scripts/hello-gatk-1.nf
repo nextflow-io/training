@@ -3,7 +3,7 @@
  */
 
 // Primary input
-params.reads_bam = "${workflow.projectDir}/../data/bam/reads_mother.bam"
+params.reads_bam = "${workflow.projectDir}/data/bam/reads_mother.bam"
 
 
 /*
