@@ -2,33 +2,30 @@
  * Pipeline parameters
  */
 
-// Execution environment setup
-params.projectDir = "/workspace/gitpod/hello-nextflow" 
-$projectDir = params.projectDir
-
 // Primary input
-params.reads_bam = ["${projectDir}/data/bam/reads_mother.bam",
-                    "${projectDir}/data/bam/reads_father.bam",
-                    "${projectDir}/data/bam/reads_son.bam"]
+params.reads_bam = ["${workflow.projectDir}/../data/bam/reads_mother.bam",
+                    "${workflow.projectDir}/../data/bam/reads_father.bam",
+                    "${workflow.projectDir}/../data/bam/reads_son.bam"]
 
 // Accessory files
-params.genome_reference = "${projectDir}/data/ref/ref.fasta"
-params.genome_reference_index = "${projectDir}/data/ref/ref.fasta.fai"
-params.genome_reference_dict = "${projectDir}/data/ref/ref.dict"
-params.calling_intervals = "${projectDir}/data/intervals.list"
+params.reference = "${workflow.projectDir}/../data/ref/ref.fasta"
+params.reference_index = "${workflow.projectDir}/../data/ref/ref.fasta.fai"
+params.reference_dict = "${workflow.projectDir}/../data/ref/ref.dict"
+params.calling_intervals = "${workflow.projectDir}/../data/ref/intervals.bed"
 
 /*
  * Generate BAM index file
  */
 process SAMTOOLS_INDEX {
 
-    container 'quay.io/biocontainers/samtools:1.19.2--h50ea8bc_1' 
+    container 'community.wave.seqera.io/library/samtools:1.20--b5dfbd93de237464'
+    conda "bioconda::samtools=1.19.2"
 
     input:
         path input_bam
 
     output:
-        tuple path(input_bam), path("${input_bam}.bai")
+        tuple path(input_bam, includeInputs: true), path("${input_bam}.bai")
 
     """
     samtools index '$input_bam'
@@ -41,7 +38,8 @@ process SAMTOOLS_INDEX {
  */
 process GATK_HAPLOTYPECALLER {
 
-    container "docker.io/broadinstitute/gatk:4.5.0.0"
+    container "community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"
+    conda "bioconda::gatk4=4.5.0.0"
 
     input:
         tuple path(input_bam), path(input_bam_index)
@@ -67,17 +65,25 @@ process GATK_HAPLOTYPECALLER {
 workflow {
 
     // Create input channel
-    reads_ch = Channel.of(params.reads_bam)
+    bam_ch = Channel.fromPath(params.reads_bam, checkIfExists: true)
+
+    // Create reference channels using the fromPath channel factory
+    // The collect converts from a queue channel to a value channel
+    // See https://www.nextflow.io/docs/latest/channel.html#channel-types for details
+    ref_ch               = Channel.fromPath(params.reference, checkIfExists: true).collect()
+    ref_index_ch         = Channel.fromPath(params.reference_index, checkIfExists: true).collect()
+    ref_dict_ch          = Channel.fromPath(params.reference_dict, checkIfExists: true).collect()
+    calling_intervals_ch = Channel.fromPath(params.calling_intervals, checkIfExists: true).collect()
 
     // Create index file for input BAM file
-    SAMTOOLS_INDEX(reads_ch)
+    SAMTOOLS_INDEX(bam_ch)
 
     // Call variants from the indexed BAM file
     GATK_HAPLOTYPECALLER(
         SAMTOOLS_INDEX.out,
-        params.genome_reference,
-        params.genome_reference_index,
-        params.genome_reference_dict,
-        params.calling_intervals
+        ref_ch,
+        ref_index_ch,
+        ref_dict_ch,
+        calling_intervals_ch
     )
 }

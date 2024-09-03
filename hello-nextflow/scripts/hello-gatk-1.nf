@@ -2,19 +2,17 @@
  * Pipeline parameters
  */
 
-// Execution environment setup
-params.projectDir = "/workspace/gitpod/hello-nextflow" 
-$projectDir = params.projectDir
-
 // Primary input
-params.reads_bam = "${projectDir}/data/bam/reads_mother.bam"
+params.bams = "${workflow.projectDir}/../data/bam/reads_mother.bam"
+
 
 /*
  * Generate BAM index file
  */
 process SAMTOOLS_INDEX {
 
-    container 'quay.io/biocontainers/samtools:1.19.2--h50ea8bc_1' 
+    container 'community.wave.seqera.io/library/samtools:1.20--b5dfbd93de237464'
+    conda "bioconda::samtools=1.19.2"
 
     input:
         path input_bam
@@ -31,7 +29,7 @@ process SAMTOOLS_INDEX {
 workflow {
 
     // Create input channel
-    reads_ch = Channel.of(params.reads_bam)
+    reads_ch = Channel.fromPath(params.bams, checkIfExists: true)
 
     // Create index file for input BAM file
     SAMTOOLS_INDEX(reads_ch)
