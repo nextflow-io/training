@@ -3,7 +3,7 @@
  */
 process SAMTOOLS_INDEX {
 
-    container 'quay.io/biocontainers/samtools:1.19.2--h50ea8bc_1' 
+    container 'community.wave.seqera.io/library/samtools:1.20--b5dfbd93de237464' 
 
     input:
         tuple val(id), path(input_bam)
@@ -22,7 +22,7 @@ process SAMTOOLS_INDEX {
  */
 process GATK_HAPLOTYPECALLER {
 
-    container "docker.io/broadinstitute/gatk:4.5.0.0"
+    container "community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"
 
     input:
         tuple val(id), path(input_bam), path(input_bam_index)
@@ -49,7 +49,7 @@ process GATK_HAPLOTYPECALLER {
  */
 process GATK_JOINTGENOTYPING {
 
-    container "docker.io/broadinstitute/gatk:4.5.0.0"
+    container "community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"
 
     input:
         path(sample_map)

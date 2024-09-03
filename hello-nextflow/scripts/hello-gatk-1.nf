@@ -3,7 +3,7 @@
  */
 
 // Primary input
-params.bams = "${workflow.projectDir}/../data/bam/reads_mother.bam"
+params.reads_bam = "${workflow.projectDir}/../data/bam/reads_mother.bam"
 
 
 /*
@@ -29,7 +29,7 @@ process SAMTOOLS_INDEX {
 workflow {
 
     // Create input channel
-    reads_ch = Channel.fromPath(params.bams, checkIfExists: true)
+    reads_ch = Channel.fromPath(params.bam, checkIfExists: true)
 
     // Create index file for input BAM file
     SAMTOOLS_INDEX(reads_ch)

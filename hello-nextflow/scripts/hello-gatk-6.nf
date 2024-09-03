@@ -3,13 +3,13 @@
  */
 
 // Primary input
-params.bams = "${workflow.projectDir}/../data/bam/*.bam"
+params.reads_bam = "${workflow.projectDir}/data/bam/*.bam"
 
 // Accessory files
-params.reference = "${workflow.projectDir}/../data/ref/ref.fasta"
-params.reference_index = "${workflow.projectDir}/../data/ref/ref.fasta.fai"
-params.reference_dict = "${workflow.projectDir}/../data/ref/ref.dict"
-params.calling_intervals = "${workflow.projectDir}/../data/ref/intervals.bed"
+params.reference = "${workflow.projectDir}/data/ref/ref.fasta"
+params.reference_index = "${workflow.projectDir}/data/ref/ref.fasta.fai"
+params.reference_dict = "${workflow.projectDir}/data/ref/ref.dict"
+params.calling_intervals = "${workflow.projectDir}/data/ref/intervals.bed"
 
 
 // Base name for final output file
@@ -106,7 +106,7 @@ workflow {
     // Create input channel from BAM files
     // We convert it to a tuple with the file name and the file path
     // See https://www.nextflow.io/docs/latest/script.html#getting-file-attributes
-    bam_ch = Channel.fromPath(params.bams, checkIfExists: true)
+    bam_ch = Channel.fromPath(params.reads_bam, checkIfExists: true)
 
     // Create reference channels using the fromPath channel factory
     // The collect converts from a queue channel to a value channel

@@ -1,3 +1,0 @@
-NA12877	/workspace/gitpod/hello-nextflow/modules/local/gatk/jointgenotyping/tests/inputs/reads_father.bam.g.vcf	/workspace/gitpod/hello-nextflow/modules/local/gatk/jointgenotyping/tests/inputs/reads_father.bam.g.vcf.idx
-NA12882	/workspace/gitpod/hello-nextflow/modules/local/gatk/jointgenotyping/tests/inputs/reads_son.bam.g.vcf	/workspace/gitpod/hello-nextflow/modules/local/gatk/jointgenotyping/tests/inputs/reads_son.bam.g.vcf.idx
-NA12878	/workspace/gitpod/hello-nextflow/modules/local/gatk/jointgenotyping/tests/inputs/reads_mother.bam.g.vcf	/workspace/gitpod/hello-nextflow/modules/local/gatk/jointgenotyping/tests/inputs/reads_mother.bam.g.vcf.idx

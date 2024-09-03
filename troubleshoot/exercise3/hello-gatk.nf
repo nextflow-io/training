@@ -2,18 +2,14 @@
  * Pipeline parameters
  */
 
-// Execution environment setup
-params.projectDir = "/workspace/gitpod/troubleshoot" 
-projectDir = params.projectDir
-
 // Primary input
-params.reads_bam = "${projectDir}/data/samplesheet.csv"
+params.reads_bam = "${workflow.projectDir}/data/samplesheet.csv"
 
 // Accessory files
-params.genome_reference = "${projectDir}/data/ref/ref.fasta"
-params.genome_reference_index = "${projectDir}/data/ref/ref.fasta.fai"
-params.genome_reference_dict = "${projectDir}/data/ref/ref.dict"
-params.calling_intervals = "${projectDir}/data/intervals.list"
+params.genome_reference = "${workflow.projectDir}/data/ref/ref.fasta"
+params.genome_reference_index = "${workflow.projectDir}/data/ref/ref.fasta.fai"
+params.genome_reference_dict = "${workflow.projectDir}/data/ref/ref.dict"
+params.calling_intervals = "${workflow.projectDir}/data/ref/intervals.bed"
 
 // Base name for final output file
 params.cohort_name = "family_trio"
@@ -23,7 +19,7 @@ params.cohort_name = "family_trio"
  */
 process SAMTOOLS_INDEX {
 
-    container 'quay.io/biocontainers/samtools:1.19.2--h50ea8bc_1' 
+    container 'community.wave.seqera.io/library/samtools:1.20--b5dfbd93de237464' 
 
     input:
         tuple val(id), path(input_bam)

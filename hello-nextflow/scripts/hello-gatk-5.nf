@@ -3,7 +3,7 @@
  */
 
 // Primary input
-params.bams = "${workflow.projectDir}/../data/bam/*.bam"
+params.reads_bam = "${workflow.projectDir}/../data/bam/*.bam"
 
 // Accessory files
 params.reference = "${workflow.projectDir}/../data/ref/ref.fasta"
@@ -65,7 +65,7 @@ workflow {
     // Create input channel from BAM files
     // We convert it to a tuple with the file name and the file path
     // See https://www.nextflow.io/docs/latest/script.html#getting-file-attributes
-    bam_ch = Channel.fromPath(params.bams, checkIfExists: true)
+    bam_ch = Channel.fromPath(params.reads_bam, checkIfExists: true)
                             .map{ bam -> [bam.simpleName, bam] }
     
     // Create reference channels using the fromPath channel factory

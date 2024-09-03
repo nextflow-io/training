@@ -15,13 +15,6 @@ GATK (equivalent to `scripts/hello-gatk-6.nf`).
 
 Note: This is a basic variant calling pipeline consisting of three processes. You can find a complete description of the pipeline in the previous section of this training.
 
-This workflow relies on reference files that are provided in compressed form in the Gitpod environment. If you completed the previous parts of the training course, then you already have everything you need in the working directory. However, if you're picking this up here, you need to run the following command to expand the reference files:
-
-```bash
-cd /workspace/gitpod/hello-nextflow
-tar -zxvf data/ref.tar.gz -C data/
-```
-
 ### 0.1 Run the workflow to verify that it produces the expected outputs
 
 ```bash
@@ -41,18 +34,14 @@ The pipeline takes in three BAM files, each one containing sequencing data for o
  * Pipeline parameters
  */
 
-// Execution environment setup
-params.projectDir = "/workspace/gitpod/hello-nextflow"
-$projectDir = params.projectDir
-
 // Primary input (samplesheet in CSV format with ID and file path, one sample per line)
-params.reads_bam = "${projectDir}/data/samplesheet.csv"
+params.reads_bam = "./data/samplesheet.csv"
 
 // Accessory files
-params.genome_reference = "${projectDir}/data/ref/ref.fasta"
-params.genome_reference_index = "${projectDir}/data/ref/ref.fasta.fai"
-params.genome_reference_dict = "${projectDir}/data/ref/ref.dict"
-params.calling_intervals = "${projectDir}/data/intervals.list"
+params.reference = "./data/ref/ref.fasta"
+params.reference_index = "./data/ref/ref.fasta.fai"
+params.reference_dict = "./data/ref/ref.dict"
+params.calling_intervals = "./data/intervals.list"
 
 // Base name for final output file
 params.cohort_name = "family_trio"
@@ -106,16 +95,18 @@ This creates an empty file named `main.nf` under the appropriate directory struc
  */
 process SAMTOOLS_INDEX {
 
-    container 'quay.io/biocontainers/samtools:1.19.2--h50ea8bc_1'
+    container 'community.wave.seqera.io/library/samtools:1.20--b5dfbd93de237464'
+    conda "bioconda::samtools=1.19.2"
 
     input:
-        tuple val(id), path(input_bam)
+        path input_bam
 
     output:
-        tuple val(id), path(input_bam), path("${input_bam}.bai")
+        tuple path(input_bam), path("${input_bam}.bai")
 
     """
     samtools index '$input_bam'
+
     """
 }
 ```
@@ -177,21 +168,22 @@ Move this code to `modules/local/gatk/haplotypecaller/main.nf`:
 
 ```groovy
 /*
- * Call variants with GATK HaplotypeCaller in GVCF mode
+ * Call variants with GATK HapolotypeCaller in GVCF mode
  */
 process GATK_HAPLOTYPECALLER {
 
-    container "docker.io/broadinstitute/gatk:4.5.0.0"
+    container "community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"
+    conda "bioconda::gatk4=4.5.0.0"
 
     input:
-        tuple val(id), path(input_bam), path(input_bam_index)
+        tuple path(input_bam), path(input_bam_index)
         path ref_fasta
         path ref_index
         path ref_dict
         path interval_list
 
     output:
-        tuple val(id), path("${input_bam}.g.vcf"), path("${input_bam}.g.vcf.idx")
+        tuple path("${input_bam}.g.vcf"), path("${input_bam}.g.vcf.idx")
 
     """
     gatk HaplotypeCaller \
@@ -212,11 +204,11 @@ And move this code to `modules/local/gatk/jointgenotyping/main.nf`:
  */
 process GATK_JOINTGENOTYPING {
 
-    container "docker.io/broadinstitute/gatk:4.5.0.0"
+    container "community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"
+    conda "bioconda::gatk4=4.5.0.0"
 
     input:
-        path(sample_map)
-        val(cohort_name)
+        tuple val(cohort_name), path(vcfs), path(idxs)
         path ref_fasta
         path ref_index
         path ref_dict
@@ -226,9 +218,11 @@ process GATK_JOINTGENOTYPING {
         path "${cohort_name}.joint.vcf"
         path "${cohort_name}.joint.vcf.idx"
 
+    script:
+    def inputs = vcfs.collect { "-V ${it}" }.join(' ')
     """
     gatk GenomicsDBImport \
-        --sample-name-map ${sample_map} \
+        ${inputs} \
         --genomicsdb-workspace-path ${cohort_name}_gdb \
         -L ${interval_list}
 

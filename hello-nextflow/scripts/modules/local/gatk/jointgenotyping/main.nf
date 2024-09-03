@@ -3,11 +3,13 @@
  */
 process GATK_JOINTGENOTYPING {
 
-    container "docker.io/broadinstitute/gatk:4.5.0.0"
+    container "community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"
+    conda "bioconda::gatk4=4.5.0.0"
 
     input:
-        path(sample_map)
-        val(cohort_name)
+        path vcfs
+        path idxs
+        val cohort_name
         path ref_fasta
         path ref_index
         path ref_dict
@@ -17,9 +19,11 @@ process GATK_JOINTGENOTYPING {
         path "${cohort_name}.joint.vcf"
         path "${cohort_name}.joint.vcf.idx"
 
+    script:
+    def inputs = vcfs.collect { "-V ${it}" }.join(' ')
     """
     gatk GenomicsDBImport \
-        --sample-name-map ${sample_map} \
+        ${inputs} \
         --genomicsdb-workspace-path ${cohort_name}_gdb \
         -L ${interval_list}
 

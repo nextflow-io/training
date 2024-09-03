@@ -2,7 +2,6 @@
  * Pipeline parameters
  */
 
-
 // Primary input
 params.reads_bam = "${projectDir}/../data/bam/reads_mother.bam"
 
