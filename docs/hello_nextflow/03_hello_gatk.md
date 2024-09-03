@@ -21,9 +21,9 @@ A full variant calling pipeline typically involves a lot of steps. For simplicit
 
 ### Dataset
 
-- **A reference genome** consisting of a small region of the human chromosome 20 (from hg19/b37) and its accessory files (index and sequence dictionary).
-- **Three whole genome sequencing samples** corresponding to a family trio (mother, father and son), which have been subset to a small portion on chromosome 20 to keep the file sizes small. The sequencing data is in [BAM](https://samtools.github.io/hts-specs/SAMv1.pdf) (Binary Alignment Map) format, i.e. genome sequencing reads that have already been mapped to the reference genome.
-- **A list of genomic intervals**, i.e. coordinates on the genome where our samples have data suitable for calling variants.
+-   **A reference genome** consisting of a small region of the human chromosome 20 (from hg19/b37) and its accessory files (index and sequence dictionary).
+-   **Three whole genome sequencing samples** corresponding to a family trio (mother, father and son), which have been subset to a small portion on chromosome 20 to keep the file sizes small. The sequencing data is in [BAM](https://samtools.github.io/hts-specs/SAMv1.pdf) (Binary Alignment Map) format, i.e. genome sequencing reads that have already been mapped to the reference genome.
+-   **A list of genomic intervals**, i.e. coordinates on the genome where our samples have data suitable for calling variants.
 
 ---
 
@@ -483,8 +483,8 @@ gatk GenomicsDBImport \
 
 So to perform joint genotyping we need to do 2 things:
 
-- Collect all VCF files together in a single process
-- Construct a command line for GenomicsDBImport
+-   Collect all VCF files together in a single process
+-   Construct a command line for GenomicsDBImport
 
 Let's start by showing how to collect all VCFs into a single process.
 
@@ -575,7 +575,7 @@ You will see the pipeline produces an error! When we look at the console, we can
 Command executed:
 
   gatk GenomicsDBImport -V reads_mother.bam.g.vcf reads_father.bam.g.vcf reads_son.bam.g.vcf         --genomicsdb-workspace-path family_trio_gdb -L intervals.bed
-  
+
   gatk GenotypeGVCFs -R ref.fasta -V gendb://family_trio_gdb -O family_trio.joint.vcf -L intervals.bed
 ```
 
