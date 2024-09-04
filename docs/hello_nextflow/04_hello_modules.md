@@ -35,13 +35,13 @@ The pipeline takes in three BAM files, each one containing sequencing data for o
  */
 
 // Primary input (samplesheet in CSV format with ID and file path, one sample per line)
-params.reads_bam = "./data/samplesheet.csv"
+params.reads_bam = "./data/bam/*.bam"
 
 // Accessory files
 params.reference = "./data/ref/ref.fasta"
 params.reference_index = "./data/ref/ref.fasta.fai"
 params.reference_dict = "./data/ref/ref.dict"
-params.calling_intervals = "./data/intervals.list"
+params.calling_intervals = "./data/ref/intervals.bed"
 
 // Base name for final output file
 params.cohort_name = "family_trio"
@@ -183,7 +183,8 @@ process GATK_HAPLOTYPECALLER {
         path interval_list
 
     output:
-        tuple path("${input_bam}.g.vcf"), path("${input_bam}.g.vcf.idx")
+        path "${input_bam}.g.vcf"
+        path "${input_bam}.g.vcf.idx"
 
     """
     gatk HaplotypeCaller \
@@ -208,7 +209,9 @@ process GATK_JOINTGENOTYPING {
     conda "bioconda::gatk4=4.5.0.0"
 
     input:
-        tuple val(cohort_name), path(vcfs), path(idxs)
+        path vcfs
+        path idxs
+        val cohort_name
         path ref_fasta
         path ref_index
         path ref_dict
@@ -242,8 +245,6 @@ _Before:_
 ```groovy
 // Include modules
 include { SAMTOOLS_INDEX } from './modules/local/samtools/index/main.nf'
-
-workflow {
 ```
 
 _After:_
@@ -253,8 +254,6 @@ _After:_
 include { SAMTOOLS_INDEX } from './modules/local/samtools/index/main.nf'
 include { GATK_HAPLOTYPECALLER } from './modules/local/gatk/haplotypecaller/main.nf'
 include { GATK_JOINTGENOTYPING } from './modules/local/gatk/jointgenotyping/main.nf'
-
-workflow {
 ```
 
 ### 3.5 Run the workflow to verify that it does the same thing as before
