@@ -39,8 +39,8 @@ nf-test init
 This should produce the following output:
 
 ```bash
-🚀 nf-test 0.8.4
-https://code.askimed.com/nf-test
+🚀 nf-test 0.9.0
+https://www.nf-test.com
 (c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
 
 Project configured. Configuration is stored in nf-test.config
@@ -818,8 +818,8 @@ test("family_trio [vcf] [idx]") {
         }
         process {
             """
-            input[0] = Channel.fromPath("${projectDir}/modules/local/gatk/jointgenotyping/tests/inputs/*.bam")
-            input[1] = Channel.fromPath("${projectDir}/modules/local/gatk/jointgenotyping/tests/inputs/*.bam.bai")
+            input[0] = Channel.fromPath("${projectDir}/modules/local/gatk/jointgenotyping/tests/inputs/*.g.vcf").collect()
+            input[1] = Channel.fromPath("${projectDir}/modules/local/gatk/jointgenotyping/tests/inputs/*.g.vcf.idx").collect()
             input[2] = "family_trio"
             input[3] = file("${projectDir}/data/ref/ref.fasta")
             input[4] = file("${projectDir}/data/ref/ref.fasta.fai")
