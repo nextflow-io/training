@@ -168,7 +168,7 @@ Move this code to `modules/local/gatk/haplotypecaller/main.nf`:
 
 ```groovy
 /*
- * Call variants with GATK HapolotypeCaller in GVCF mode
+ * Call variants with GATK HaplotypeCaller in GVCF mode
  */
 process GATK_HAPLOTYPECALLER {
 
