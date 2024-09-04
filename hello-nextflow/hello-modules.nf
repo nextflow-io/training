@@ -86,10 +86,10 @@ process GATK_JOINTGENOTYPING {
         path "${cohort_name}.joint.vcf.idx"
 
     script:
-    def inputs = vcfs.collect { "-V ${it}" }.join(' ')
+    def input_vcfs = vcfs.collect { "-V ${it}" }.join(' ')
     """
     gatk GenomicsDBImport \
-        ${inputs} \
+        ${input_vcfs} \
         --genomicsdb-workspace-path ${cohort_name}_gdb \
         -L ${interval_list}
 

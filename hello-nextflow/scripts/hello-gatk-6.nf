@@ -86,10 +86,10 @@ process GATK_JOINTGENOTYPING {
         path "${cohort_name}.joint.vcf.idx"
 
     script:
-    def inputs = vcfs.collect { "-V ${it}" }.join(' ')
+    def input_vcfs = vcfs.collect { "-V ${it}" }.join(' ')
     """
     gatk GenomicsDBImport \
-        ${inputs} \
+        ${input_vcfs} \
         --genomicsdb-workspace-path ${cohort_name}_gdb \
         -L ${interval_list}
 
@@ -104,8 +104,6 @@ process GATK_JOINTGENOTYPING {
 workflow {
 
     // Create input channel from BAM files
-    // We convert it to a tuple with the file name and the file path
-    // See https://www.nextflow.io/docs/latest/script.html#getting-file-attributes
     bam_ch = Channel.fromPath(params.reads_bam, checkIfExists: true)
 
     // Create reference channels using the fromPath channel factory

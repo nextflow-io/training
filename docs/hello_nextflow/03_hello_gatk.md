@@ -48,13 +48,13 @@ docker run -it -v ./data:/data community.wave.seqera.io/library/samtools:1.20--b
 #### 0.1.3. Run the indexing command
 
 ```bash
-samtools index data/bam/reads_mother.bam
+samtools index /data/bam/reads_mother.bam
 ```
 
 #### 0.1.4. Check that the BAM index has been produced
 
 ```bash
-ls data/bam/
+ls /data/bam/
 ```
 
 This should show:
@@ -92,7 +92,7 @@ gatk HaplotypeCaller \
         -R /data/ref/ref.fasta \
         -I /data/bam/reads_mother.bam \
         -O reads_mother.g.vcf \
-        -L /data/intervals.list \
+        -L /data/ref/intervals.bed \
         -ERC GVCF
 ```
 
@@ -143,7 +143,7 @@ process SAMTOOLS_INDEX {
  */
 
 // Primary input
-params.reads_bam = "${projectDir}/../data/bam/reads_mother.bam"
+params.reads_bam = "${projectDir}/data/bam/reads_mother.bam"
 ```
 
 #### 1.3. Add workflow block to run SAMTOOLS_INDEX
@@ -152,7 +152,7 @@ params.reads_bam = "${projectDir}/../data/bam/reads_mother.bam"
 workflow {
 
     // Create input channel
-    reads_ch = Channel.fromPath(params.reads_bam, checkIfExists: true)
+    bam_ch = Channel.fromPath(params.reads_bam, checkIfExists: true)
 
     // Create index file for input BAM file
     SAMTOOLS_INDEX(reads_ch)
@@ -224,13 +224,22 @@ process GATK_HAPLOTYPECALLER {
 
 ```groovy title="hello-gatk.nf"
 // Accessory files
-params.reference = "${workflow.projectDir}/../data/ref/ref.fasta"
-params.reference_index = "${workflow.projectDir}/../data/ref/ref.fasta.fai"
-params.reference_dict = "${workflow.projectDir}/../data/ref/ref.dict"
-params.calling_intervals = "${workflow.projectDir}/../data/ref/intervals.bed"
+params.reference = "${workflow.projectDir}/data/ref/ref.fasta"
+params.reference_index = "${workflow.projectDir}/data/ref/ref.fasta.fai"
+params.reference_dict = "${workflow.projectDir}/data/ref/ref.dict"
+params.calling_intervals = "${workflow.projectDir}/data/ref/intervals.bed"
 ```
 
-#### 2.3. Add a call to the workflow block to run GATK_HAPLOTYPECALLER
+#### 2.3. Make each of these references a value channel
+
+```groovy title="hello-gatk.nf"
+ref_ch               = Channel.fromPath(params.reference, checkIfExists: true).collect()
+ref_index_ch         = Channel.fromPath(params.reference_index, checkIfExists: true).collect()
+ref_dict_ch          = Channel.fromPath(params.reference_dict, checkIfExists: true).collect()
+calling_intervals_ch = Channel.fromPath(params.calling_intervals, checkIfExists: true).collect()
+```
+
+#### 2.4. Add a call to the workflow block to run GATK_HAPLOTYPECALLER
 
 ```groovy title="hello-gatk.nf"
 // Call variants from the indexed BAM file
@@ -244,10 +253,10 @@ GATK_HAPLOTYPECALLER(
 )
 ```
 
-#### 2.4. Run the workflow to verify that the variant calling step works
+#### 2.5. Run the workflow to verify that the variant calling step works
 
 ```bash
-nextflow run hello-gatk.nf
+nextflow run hello-gatk.nf -resume
 ```
 
 Now we see the two processes being run:
@@ -296,7 +305,7 @@ params.reads_bam = [
 #### 3.2. Run the workflow to verify that it runs on all three samples
 
 ```bash
-nextflow run hello-gatk.nf
+nextflow run hello-gatk.nf -resume
 ```
 
 Uh-oh! It fails with an error like this:
@@ -362,7 +371,7 @@ GATK_HAPLOTYPECALLER(
 #### 3.6. Run the workflow to verify it works correctly on all three samples now
 
 ```bash
-nextflow run hello-gatk.nf -ansi-log false
+nextflow run hello-gatk.nf -resume -ansi-log false
 ```
 
 This time everything should run correctly:
@@ -388,17 +397,9 @@ Make it easier to handle samples in bulk.
 
 ---
 
-## 4. Make it nicer to run on arbitrary samples by using a list of files as input
+## 4. Make it nicer to run on arbitrary samples by using a glob
 
-#### 4.1. Create a text file listing the input paths
-
-```csv title="sample_bams.txt"
-/workspace/gitpod/hello-nextflow/data/bam/reads_mother.bam
-/workspace/gitpod/hello-nextflow/data/bam/reads_father.bam
-/workspace/gitpod/hello-nextflow/data/bam/reads_son.bam
-```
-
-#### 4.2. Update the parameter default
+#### 4.1. Replace the params.reads_bam with a glob
 
 _Before:_
 
@@ -414,30 +415,14 @@ params.reads_bam = [
 _After:_
 
 ```groovy title="hello-gatk.nf"
-// Primary input (list of input files, one per line)
-params.reads_bam = "${projectDir}/data/sample_bams.txt"
-```
-
-#### 4.3. Update the channel factory to read lines from a file
-
-_Before:_
-
-```groovy title="hello-gatk.nf"
-// Create input channel (single file via CLI parameter)
-reads_ch = Channel.fromList(params.reads_bam)
-```
-
-_After:_
-
-```groovy title="hello-gatk.nf"
-// Create input channel from list of input files in plain text
-reads_ch = Channel.fromPath(params.reads_bam).splitText()
+// Primary input
+params.reads_bam = "${workflow.projectDir}/data/bam/*.bam"
 ```
 
 #### 4.4. Run the workflow to verify that it works correctly
 
 ```bash
-nextflow run hello-gatk.nf -ansi-log false
+nextflow run hello-gatk.nf -ansi-log false -resume
 ```
 
 This should produce essentially the same result as before:
@@ -488,16 +473,12 @@ So to perform joint genotyping we need to do 2 things:
 
 Let's start by showing how to collect all VCFs into a single process.
 
-#### 6.2. Add collect to the output channels of GATK_HAPLOTYPECALLER
+#### 6.2. Add default value for the cohort name parameter up top
 
 ```groovy title="hello-gatk.nf"
-all_vcfs = GATK_HAPLOTYPECALLER.out[0].collect()
-all_tbis = GATK_HAPLOTYPECALLER.out[1].collect()
+// Base name for final output file
+params.cohort_name = "family_trio"
 ```
-
-!!! tip
-
-    You can view the channel after performing this collect operation using `.view()`:
 
 #### 6.3. Write a process that wraps GenomicsDBImport and GenotypeGVCFs called GATK_JOINTGENOTYPING
 
@@ -539,7 +520,18 @@ process GATK_JOINTGENOTYPING {
 }
 ```
 
-#### 6.4. Add call to workflow block to run GATK_JOINTGENOTYPING
+#### 6.4. Add collect to the output channels of GATK_HAPLOTYPECALLER
+
+```groovy title="hello-gatk.nf"
+all_vcfs = GATK_HAPLOTYPECALLER.out[0].collect()
+all_tbis = GATK_HAPLOTYPECALLER.out[1].collect()
+```
+
+!!! tip
+
+    You can view the channel after performing this collect operation using `.view()`
+
+#### 6.5. Add call to workflow block to run GATK_JOINTGENOTYPING
 
 ```groovy title="hello-gatk.nf"
 // Consolidate GVCFs and apply joint genotyping analysis
@@ -552,13 +544,6 @@ GATK_JOINTGENOTYPING(
     ref_dict_ch,
     calling_intervals_ch
 )
-```
-
-#### 6.5. Add default value for the cohort name parameter up top
-
-```groovy title="hello-gatk.nf"
-// Base name for final output file
-params.cohort_name = "family_trio"
 ```
 
 #### 6.6. Run the workflow
