@@ -1,20 +1,23 @@
 /*
  * Pipeline parameters
  */
-params.output_file = 'output.txt'
+params.input_file = "data/greetings.txt"
 
 /*
  * Use echo to print 'Hello World!' to standard out
  */
 process sayHello {
+
+    publishDir 'results', mode: 'copy'
+
     input:
         val greeting  
 
     output: 
-        path "${greeting}-${params.output_file}"
+        path "${greeting}-output.txt"
     
     """
-    echo '$greeting' > '$greeting-$params.output_file'
+    echo '$greeting' > '$greeting-output.txt'
     """
 }
 
@@ -22,6 +25,9 @@ process sayHello {
  * Use a text replace utility to convert the greeting to uppercase
  */
 process convertToUpper {
+
+    publishDir 'results', mode: 'copy'
+    
     input:
         path input_file
 

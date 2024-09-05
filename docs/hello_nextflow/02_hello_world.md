@@ -270,52 +270,36 @@ Learn how to pass parameters to the workflow from the command line.
 
 ---
 
-## 4. Use a command line parameter for naming the output file
+## 4. Write the result out to a file
 
-Here we introduce `params` (short for 'parameters') as the construct that can hold command line arguments. This is useful because there will be many parameters, such as filenames and processing options, that you may want to decide at the time you run the workflow. Parameters allow you to do this without editing the script itself every time.
+The output file is locked inside a working directory. While this is great for isolating our process it isn't very helpful in this randomly named directory. We can export it using the Nextflow publishDir directive, which will move it to an accessible output directory.
 
-Parameters can be created by prefixing a parameter names with the params scope (e.g., `params.output_file`). When including these in a script block, a `$` must be used to treat it like a variable.
-
-Parameters can be modified when you run your workflow by adding a double hyphen (`--`) to the start of the parameter name and including it in the run command (e.g., `nextflow run hello-world --output_file results`).
-
-#### 1. Change the output declaration in the process to use a parameter
+#### 1. Add a publishDir to the process
 
 _Before:_
 
 ```groovy title="hello-world.nf" linenums="6"
-output:
-    path 'output.txt'
+process sayHello {
+
+    output: 
+        path 'output.txt'
 ```
 
 _After:_
 
 ```groovy title="hello-world.nf" linenums="6"
-output:
-    path params.output_file
+process sayHello {
+
+    publishDir 'results', mode: 'copy'
+
+    output: 
+        path 'output.txt'
 ```
 
-#### 2. Change the process command to use the parameter too
-
-_Before:_
-
-```groovy title="hello-world.nf" linenums="9"
-"""
-echo 'Hello World!' > output.txt
-"""
-```
-
-_After:_
-
-```groovy title="hello-world.nf" linenums="9"
-"""
-echo 'Hello World!' > $params.output_file
-"""
-```
-
-#### 3. Run the workflow again with the `--output_file` parameter
+#### 2. Run the workflow again
 
 ```bash
-nextflow run hello-world.nf --output_file 'output.txt'
+nextflow run hello-world.nf -resume
 ```
 
 The log output should start looking very familiar:
@@ -327,85 +311,43 @@ executor >  local (1)
 [46/e4ff05] process > sayHello [100%] 1 of 1 ✔
 ```
 
-Follow the same procedure as before to find the `output.txt` output file. If you want to convince yourself that the parameter is working as intended, feel free to repeat this step with a different output filename.
-
-!!! warning
-
-    If you forget to add the output filename parameter, you get a warning and the output file is called `null`. If you add it but don't give it a value, the output file is called `true`.
-
-!!! tip
-
-    Command-line arguments take one dash (-) for Nextflow options, two dashes (--) for workflow parameters.
+Nextflow will have created a folder called `results/`. In this folder is our `output.txt` file. If you check the contents it should match our existing output. This is how we move results files outside of the working directories.
 
 ### Takeaway
 
-You know how to use a command line parameter to set the output filename.
+You know how to use the publishDir directive to move files outside of the Nextflow working directory.
 
 ### What's next?
 
-Learn how to set a default value in case we leave out the parameter.
+Learn how to use resume to repeat re-use cached results
 
 ---
 
-## 5. Set a default value for a command line parameter
+## 5. Using the Nextflow resume feature
 
-In many cases, it makes sense to supply a default value for a given parameter so that you don't have to specify it for every run.
+In many cases, you will need to re-run the same analysis many times with slightly different parameters while you iterate and improve settings. Nextflow has a built in resume feature which will only run a new process if any of the inputs or process settings have changed. This can save you time when developing a Nextflow workflow.
 
-Let's initialize the `output_file` parameter with a default value.
-
-#### 1. Add the parameter declaration at the top of the script (with a comment block as a free bonus)
-
-```groovy title="hello-world.nf" linenums="1"
-/*
- * Pipeline parameters
- */
-params.output_file = 'output.txt'
-
-```
-
-#### 2. Run the workflow again without specifying the parameter
+#### 2. Run the workflow again with `-resume`
 
 ```bash
-nextflow run hello-world.nf
+nextflow run hello-world.nf -resume
 ```
 
-The console output is expected to look the same...
+The console output should look similar.
 
 ```console title="Output"
 N E X T F L O W  ~  version 23.10.1
 Launching `hello-world.nf` [tiny_elion] DSL2 - revision: 7ad1cd6bfe
 executor >  local (1)
-[8b/1f9ded] process > sayHello [100%] 1 of 1 ✔
+[8b/1f9ded] process > sayHello [100%] 1 of 1 ✔, cached: 1 ✔
 ```
 
-Check the output in the work directory, and... Tadaa! It works! Nextflow used the default value to name the output. But wait, what happens now if we provide the parameter in the command line?
+Notice the additional `cached`. Nextflow has cached the process and re-used the result. It will also not replace the output file at `results/output.txt`. 
 
-#### 3. Run the workflow again with the `--output_file` parameter on the command line using a DIFFERENT filename
-
-```bash
-nextflow run hello-world.nf --output_file 'output-cli.txt'
-```
-
-Nextflow's not complaining, that's a good sign:
-
-```console title="Output"
-N E X T F L O W  ~  version 23.10.1
-Launching `hello-world.nf` [exotic_lichterman] DSL2 - revision: 7ad1cd6bfe
-executor >  local (1)
-[36/47354a] process > sayHello [100%] 1 of 1 ✔
-```
-
-Check the output directory and look for the output with the new filename. Tadaa again!
-
-The value of the parameter we passed on the command line overrode the value we gave the variable in the script. In fact, parameters can be set in several different ways; if the same parameter is set in multiple places, its value is determined based on the order of precedence that is described [here](https://www.nextflow.io/docs/latest/config.html).
-
-!!! tip
-
-    You can put the parameter declaration inside the workflow block if you prefer. Whatever you choose, try to group similar things in the same place so you don't end up with declarations all over the place.
 
 ### Takeaway
 
-You know how to handle command line parameters and set default values.
+Use Nextflow resume to repeat a previous analysis faster.
 
 ### What's next?
 
@@ -488,7 +430,7 @@ _Before:_
 process sayHello {
 
     output:
-        path params.output_file
+        path "output.txt"
 ```
 
 _After:_
@@ -500,7 +442,7 @@ process sayHello {
         val greeting
 
     output:
-        path params.output_file
+        path "output.txt"
 ```
 
 #### 4. Edit the process command to use the input variable
@@ -509,7 +451,7 @@ _Before:_
 
 ```groovy title="hello-world.nf" linenums="16"
 """
-echo 'Hello World!' > $params.output_file
+echo 'Hello World!' > output.txt
 """
 ```
 
@@ -517,7 +459,7 @@ _After:_
 
 ```groovy title="hello-world.nf" linenums="16"
 """
-echo '$greeting' > $params.output_file
+echo '$greeting' > output.txt
 """
 ```
 
@@ -548,9 +490,15 @@ Learn how to pass inputs from the command line.
 
 ---
 
-## 7. Use params for inputs too
+## 7. Use params for inputs
 
-We want to be able to specify the input from the command line because that is the piece that will almost always be different in subsequent runs of the workflow. Good news: we can use the same `params` construct we used for the output filename.
+We want to be able to specify the input from the command line because that is the piece that will almost always be different in subsequent runs of the workflow. Good news: we can use `params`.
+
+Here we introduce `params` (short for 'parameters') as the construct that can hold command line arguments. This is useful because there will be many parameters, such as filenames and processing options, that you may want to decide at the time you run the workflow. Parameters allow you to do this without editing the script itself every time.
+
+Parameters can be created by prefixing a parameter names with the params scope (e.g., `params.greeting`). When including these in a script block, a `$` must be used to treat it like a variable.
+
+Parameters can be modified when you run your workflow by adding a double hyphen (`--`) to the start of the parameter name and including it in the run command (e.g., `nextflow run hello-world --greeting 'Bonjour le monde!'`).
 
 #### 1. Edit the input channel declaration to use a parameter
 
@@ -585,9 +533,60 @@ executor >  local (1)
 
 Be sure to open up the output file to check that you now have the new version of the greeting. Voilà!
 
-!!! note
+## 3. Set a default value for a command line parameter
 
-    The current form of the script doesn't have a variable declaration for `greeting` so that parameter is **REQUIRED** to be included in the command line. If we wanted, we could put in a default value by adding for example `params.greeting = 'Holà el mundo!'` at the top of the script (just like we did for the output filename). But it's less common to want to have a default value set for the input data.
+In many cases, it makes sense to supply a default value for a given parameter so that you don't have to specify it for every run.
+
+Let's initialize the `greeting` parameter with a default value.
+
+#### 4. Add the parameter declaration at the top of the script (with a comment block as a free bonus)
+
+```groovy title="hello-world.nf" linenums="1"
+/*
+ * Pipeline parameters
+ */
+params.greeting = "Bonjour le monde!"
+```
+
+#### 2. Run the workflow again without specifying the parameter
+
+```bash
+nextflow run hello-world.nf
+```
+
+The console output is expected to look the same...
+
+```console title="Output"
+N E X T F L O W  ~  version 23.10.1
+Launching `hello-world.nf` [tiny_elion] DSL2 - revision: 7ad1cd6bfe
+executor >  local (1)
+[8b/1f9ded] process > sayHello [100%] 1 of 1 ✔
+```
+
+Check the output in the results directory, and... Tadaa! It works! Nextflow used the default value to name the output. But wait, what happens now if we provide the parameter in the command line?
+
+#### 3. Run the workflow again with the `--greeting` parameter on the command line using a DIFFERENT greeting
+
+```bash
+nextflow run hello-world.nf --greeting 'Holà!'
+```
+
+Nextflow's not complaining, that's a good sign:
+
+```console title="Output"
+N E X T F L O W  ~  version 23.10.1
+Launching `hello-world.nf` [exotic_lichterman] DSL2 - revision: 7ad1cd6bfe
+executor >  local (1)
+[36/47354a] process > sayHello [100%] 1 of 1 ✔
+```
+
+Check the results directory and look at the contents of `output.txt`. Tadaa again!
+
+The value of the parameter we passed on the command line overrode the value we gave the variable in the script. In fact, parameters can be set in several different ways; if the same parameter is set in multiple places, its value is determined based on the order of precedence that is described [here](https://www.nextflow.io/docs/latest/config.html).
+
+!!! tip
+
+    You can put the parameter declaration inside the workflow block if you prefer. Whatever you choose, try to group similar things in the same place so you don't end up with declarations all over the place.
 
 ### Takeaway
 
@@ -599,7 +598,7 @@ Learn how to add in a second process and chain them together.
 
 ---
 
-## 8. Add a second step to the workflow
+## 5. Add a second step to the workflow
 
 Most real-world workflows involve more than one step. Here we introduce a second process that converts the text to uppercase (all-caps), using the classic UNIX one-liner:
 
@@ -636,6 +635,9 @@ Now the `HELLO WORLD` output is in the new output file, `UPPER-output.txt`.
  * Use a text replace utility to convert the greeting to uppercase
  */
 process convertToUpper {
+
+    publishDir 'results', mode: 'copy'
+
     input:
         path input_file
 
@@ -703,7 +705,7 @@ Learn how to make the workflow run on many values for the same input.
 
 ---
 
-## 9. Modify the workflow to run on many values for the same input
+## 6. Modify the workflow to run on many values for the same input
 
 Workflows typically run on batches of inputs that we want to process in bulk. Here we upgrade the workflow to accept an input with multiple values. For simplicity, we go back to hardcoding the greetings instead of using a parameter for the input.
 
@@ -729,14 +731,17 @@ _Before:_
 
 ```groovy title="hello-world.nf" linenums="9"
 process sayHello {
+
+    publishDir 'results', mode: 'copy'
+
     input:
         val greeting
 
     output:
-        path params.output_file
+        path "output.txt"
 
     """
-    echo '$greeting' > $params.output_file
+    echo '$greeting' > "output.txt"
     """
 }
 ```
@@ -745,14 +750,17 @@ _After:_
 
 ```groovy title="hello-world.nf" linenums="9"
 process sayHello {
+
+    publishDir 'results', mode: 'copy'
+
     input:
         val greeting
 
     output:
-        path "${greeting}-${params.output_file}"
+        path "${greeting}-output.txt"
 
     """
-    echo '$greeting' > '$greeting-$params.output_file'
+    echo '$greeting' > '$greeting-output.txt'
     """
 }
 ```
@@ -822,13 +830,13 @@ In most cases, when we run on multiple inputs, the input values are contained in
 
 Nextflow offers a variety of predefined operators and functions for reading data in from common file formats and applying text transformations. In this example, we used the [`fromPath()`](https://www.nextflow.io/docs/latest/channel.html#frompath) channel factory with the [`splitText()`](https://www.nextflow.io/docs/latest/operator.html#splittext) operator to read each line as a separate value, then we used a [closure](https://www.nextflow.io/docs/latest/script.html) to apply the [`trim()`](https://www.tutorialspoint.com/java/java_string_trim.htm) method to strip the newline (`\n`) character from each element.
 
-#### 1. Modify the channel declaration to take an input file (through a parameter) instead of hardcoded values
+#### 1. Modify the channel declaration to take an input file (through a parameter) instead of a single parameter
 
 _Before:_
 
 ```groovy title="hello-world.nf" linenums="38"
 // create a channel for inputs
-greeting_ch = Channel.of('Hello','Bonjour','Holà')
+greeting_ch = Channel.of(params.greeting)
 ```
 
 _After:_
@@ -838,7 +846,27 @@ _After:_
 greeting_ch = Channel.fromPath(params.input_file).splitText() { it.trim() }
 ```
 
-#### 2. Run the workflow with the `-ansi-log false` option and an `--input_file` parameter
+#### 2. Modify the default parameter to point to an input file
+
+_Before:_
+
+```groovy title="hello-world" linenums=38
+/*
+ * Pipeline parameters
+ */
+params.greeting = "Bonjour le monde!"
+```
+
+_After:_
+
+```groovy title="hello-world" linenums=38
+/*
+ * Pipeline parameters
+ */
+params.input_file = "data/greetings.txt"
+```
+
+#### 3. Run the workflow with the `-ansi-log false` option and an `--input_file` parameter
 
 ```bash
 nextflow run hello-world.nf -ansi-log false --input_file data/greetings.txt
