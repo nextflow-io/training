@@ -281,7 +281,7 @@ _Before:_
 ```groovy title="hello-world.nf" linenums="6"
 process sayHello {
 
-    output: 
+    output:
         path 'output.txt'
 ```
 
@@ -292,7 +292,7 @@ process sayHello {
 
     publishDir 'results', mode: 'copy'
 
-    output: 
+    output:
         path 'output.txt'
 ```
 
@@ -342,8 +342,7 @@ executor >  local (1)
 [8b/1f9ded] process > sayHello [100%] 1 of 1 ✔, cached: 1 ✔
 ```
 
-Notice the additional `cached`. Nextflow has cached the process and re-used the result. It will also not replace the output file at `results/output.txt`. 
-
+Notice the additional `cached`. Nextflow has cached the process and re-used the result. It will also not replace the output file at `results/output.txt`.
 
 ### Takeaway
 
