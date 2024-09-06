@@ -853,7 +853,7 @@ greeting_ch = Channel.fromPath(params.input_file).splitText() { it.trim() }
 
 _Before:_
 
-```groovy title="hello-world" linenums=38
+```groovy title="hello-world.nf" linenums="38"
 /*
  * Pipeline parameters
  */
@@ -862,7 +862,7 @@ params.greeting = "Bonjour le monde!"
 
 _After:_
 
-```groovy title="hello-world" linenums=38
+```groovy title="hello-world.nf" linenums="38"
 /*
  * Pipeline parameters
  */
