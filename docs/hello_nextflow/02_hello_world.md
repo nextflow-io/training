@@ -698,6 +698,10 @@ This time the workflow produced two work directories; one per process instance (
 
 You know how to add a second step that takes the output of the first as input.
 
+!!! note
+
+    publishDir has been the primary method of outputting files in Nextflow for a considerable amount of time. However, there is a new syntax that publishes files from the workflow level. Over time we expect this method to become the more prevalent method but we teach publishDir here so you can read older pipelines. As an extension challenge, give the new syntax a try, you can find the documentation here: https://www.nextflow.io/docs/latest/workflow.html#publishing-outputs
+
 ### What's next?
 
 Learn how to make the workflow run on many values for the same input.
