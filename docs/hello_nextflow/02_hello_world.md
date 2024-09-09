@@ -482,12 +482,6 @@ Learn how to pass inputs from the command line.
 
 We want to be able to specify the input from the command line because that is the piece that will almost always be different in subsequent runs of the workflow. Good news: we can use `params`.
 
-Here we introduce `params` (short for 'parameters') as the construct that can hold command line arguments. This is useful because there will be many parameters, such as filenames and processing options, that you may want to decide at the time you run the workflow. Parameters allow you to do this without editing the script itself every time.
-
-Parameters can be created by prefixing a parameter names with the params scope (e.g., `params.greeting`). When including these in a script block, a `$` must be used to treat it like a variable.
-
-You can specify a value for any parameter at launch time by adding a double hyphen (--) to the start of the parameter name and including it in the run command (e.g., `nextflow run hello-world --greeting 'Bonjour le monde!'`).
-
 #### 1. Edit the input channel declaration to use a parameter
 
 _Before:_
@@ -521,6 +515,10 @@ executor >  local (1)
 
 Be sure to open up the output file to check that you now have the new version of the greeting. Voilà!
 
+!!! note
+
+    A double hyphen (`--`) is used to set a `params` item while a single hyphen (`-`) is used to modify a Nextflow setting, e.g. the `-resume` feature we used earlier.
+
 #### 3. Set a default value for a command line parameter
 
 In many cases, it makes sense to supply a default value for a given parameter so that you don't have to specify it for every run.
@@ -553,7 +551,7 @@ executor >  local (1)
 
 Check the output in the results directory, and... Tadaa! It works! Nextflow used the default value to name the output. But wait, what happens now if we provide the parameter in the command line?
 
-#### 3. Run the workflow again with the `--greeting` parameter on the command line using a DIFFERENT greeting
+#### 3. Run the workflow again with the `--greeting` parameter on the command line using a different greeting
 
 ```bash
 nextflow run hello-world.nf --greeting 'Holà!'
