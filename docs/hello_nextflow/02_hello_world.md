@@ -333,8 +333,8 @@ Nextflow has an option called -resume that allows you to re-run a pipeline you'v
 
 There are two key advantages to doing this:
 
-- If you're in the middle of developing your pipeline, you can iterate more rapidly since you only effectively have to run the process(es) you're working on to test your changes.
-- If you're running a pipeline in production and something goes wrong, in many cases you can fix the issue and relaunch the pipeline, and it will resume running from the point of failure, which can save you a lot of time and compute.
+-   If you're in the middle of developing your pipeline, you can iterate more rapidly since you only effectively have to run the process(es) you're working on to test your changes.
+-   If you're running a pipeline in production and something goes wrong, in many cases you can fix the issue and relaunch the pipeline, and it will resume running from the point of failure, which can save you a lot of time and compute.
 
 #### 2. Run the workflow again with `-resume`
 
