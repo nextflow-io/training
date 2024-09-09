@@ -56,6 +56,12 @@ nav:
           - nf_develop/1_02_create.md
           - nf_develop/1_03_pipeline.md
           - nf_develop/1_04_parameters.md
+    - Simple RNA-seq:
+          - hands_on/index.md
+          - hands_on/01_datasets.md
+          - hands_on/02_workflow.md
+          - hands_on/03_setup.md
+          - hands_on/04_implementation.md
     - Troubleshooting:
           - troubleshoot/index.md
           - troubleshoot/01_orientation.md
@@ -65,7 +71,6 @@ nav:
           - troubleshoot/04_exercise.md
           - troubleshoot/05_exercise.md
           - troubleshoot/06_exercise.md
-    - help.md
 
 theme:
     name: material
