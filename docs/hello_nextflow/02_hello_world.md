@@ -367,27 +367,7 @@ Learn how to add in variable inputs.
 
 So far, we've been emitting a greeting hardcoded into the process command. Now we're going to add some flexibility by introducing channels.
 
-Nextflow is based on the dataflow programming model in which processes communicate through channels.
-
-Channels are created used channel factories methods. There are several types of channel factories which can be utilized for creating different channel types for different data types.
-
-Importantly, there are two kinds of channels (queue channels and value channels) which behave differently.
-
-**Queue channel**
-
--   A non-blocking unidirectional first-in first-out queue connecting a producer process (i.e. outputting a value) to a consumer process, or an operators
--   Can be consumed only once
-
-**Value channel**
-
--   Can be bound (i.e. assigned) with one and only one value
--   Can be consumed any number of times
-
-We're going to start by creating a value channel with the `Channel.of()` channel factory.
-
-!!! tip
-
-    You can build [different kinds of channels](https://www.nextflow.io/docs/latest/channel.html#channel-types) depending on the shape of the input data; we'll cover how to deal with simple inputs later, but more complex input channel types are out of scope for this training.
+Nextflow uses channels to feed inputs to processes and ferry data between chained processes. For now, we're just going to use the simplest possible channel, a single value.
 
 #### 1. Create an input channel (with a bonus in-line comment)
 
@@ -699,6 +679,8 @@ executor >  local (2)
 
 This time the workflow produced two work directories; one per process instance (task). Check out the work directory of the task from the second process, where you should find two different output files listed. If you look carefully, you'll notice one of them (the output of the first process) has a little arrow icon on the right; that signifies it's a symbolic link. It points to the location where that file lives in the work directory of the first process.
 
+Note how all we did was connect the output of `sayHello` to the input of `convertToUpper` and the two processes could be ran in serial. Nextflow did the hard work of handling input and output files and passing them between the two commands for us. This is the power of channels in Nextflow, doing the laborious work of connecting our pipeline steps up together.
+
 !!! note
 
     As a little bonus, we composed the second output filename based on the first one. Very important to remember: you have to use double quotes around the filename expression (NOT single quotes) or it will fail.
@@ -824,7 +806,7 @@ That's much better; at least for this number of processes. For a complex workflo
 
 ### Takeaway
 
-You know how to feed an input with multiple elements through a queue channel.
+You know how to feed an input with multiple elements through a channel.
 
 ### What's next?
 
@@ -836,15 +818,13 @@ Learn how to make the workflow take a file that contains multiple values for an 
 
 In most cases, when we run on multiple inputs, the input values are contained in a file. Here we're going to use a file where each value is on a new line.
 
-Nextflow offers a variety of predefined operators and functions for reading data in from common file formats and applying text transformations. In this example, we used the [`fromPath()`](https://www.nextflow.io/docs/latest/channel.html#frompath) channel factory with the [`splitText()`](https://www.nextflow.io/docs/latest/operator.html#splittext) operator to read each line as a separate value, then we used a [closure](https://www.nextflow.io/docs/latest/script.html) to apply the [`trim()`](https://www.tutorialspoint.com/java/java_string_trim.htm) method to strip the newline (`\n`) character from each element.
-
 #### 1. Modify the channel declaration to take an input file (through a parameter) instead of a single parameter
 
 _Before:_
 
 ```groovy title="hello-world.nf" linenums="38"
 // create a channel for inputs
-greeting_ch = Channel.of(params.greeting)
+greeting_ch = Channel.of('Hello','Bonjour','Holà')
 ```
 
 _After:_
@@ -853,6 +833,12 @@ _After:_
 // create a channel for inputs from a file
 greeting_ch = Channel.fromPath(params.input_file).splitText() { it.trim() }
 ```
+
+This is quite involved so let's run through the changes we have made:
+
+1. We used the `Channel.fromPath()` function to create a channel containing any file located at the path specified.
+2. We use the `splitText()` function to read in the contents of that file line-per-line.
+3. We use a closure `{ it.trim() }` to remove any blank lines that were present in the file.
 
 #### 2. Modify the default parameter to point to an input file
 
@@ -897,7 +883,7 @@ Looking at the outputs, we see each greeting was correctly extracted and process
 
 !!! tip
 
-    Don't worry if the channel types and operators, closures etc feel like a lot to grapple with the first time you encounter them. You'll get more opportunities to practice using these components in various settings in later training modules.
+    Don't worry if the channel types and operators, closures etc feel like a lot to grapple with the first time you encounter them. The key learning point is that we can create a channel from a file and then read in the contents of that file. You'll get more opportunities to practice using these components in various settings in later training modules.
 
 ### Takeaway
 
