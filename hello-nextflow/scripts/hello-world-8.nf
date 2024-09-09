@@ -14,10 +14,10 @@ process sayHello {
         val greeting  
 
     output: 
-        path "output.txt"
+        path "${greeting}-output.txt"
     
     """
-    echo '$greeting' > "output.txt"
+    echo '$greeting' > '$greeting-output.txt'
     """
 }
 
@@ -39,7 +39,7 @@ process convertToUpper {
 workflow {
 
     // create a channel for inputs
-    greeting_ch = Channel.of(params.greeting)
+    greeting_ch = Channel.of('Hello', 'Bonjour', 'Holà')
 
     // emit a greeting
     sayHello(greeting_ch)

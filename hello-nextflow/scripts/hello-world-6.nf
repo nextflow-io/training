@@ -1,4 +1,9 @@
 /*
+ * Pipeline parameters
+ */
+params.greeting = "Bonjour le monde!"
+
+/*
  * Use echo to print 'Hello World!' to standard out
  */
 process sayHello {
@@ -19,7 +24,7 @@ process sayHello {
 workflow {
 
     // create a channel for inputs
-    greeting_ch = Channel.of('Hello world!')
+    greeting_ch = Channel.of(params.greeting)
 
     // emit a greeting
     sayHello(greeting_ch)

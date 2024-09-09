@@ -21,6 +21,21 @@ process sayHello {
     """
 }
 
+/*
+ * Use a text replace utility to convert the greeting to uppercase
+ */
+process convertToUpper {
+    input:
+        path input_file
+
+    output:
+        path "UPPER-${input_file}"
+
+    """
+    cat $input_file | tr '[a-z]' '[A-Z]' > 'UPPER-${input_file}'
+    """
+}
+
 workflow {
 
     // create a channel for inputs
@@ -28,4 +43,7 @@ workflow {
 
     // emit a greeting
     sayHello(greeting_ch)
+
+    // convert the greeting to uppercase
+    convertToUpper(sayHello.out)
 }
