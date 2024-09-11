@@ -414,6 +414,8 @@ _After:_
 ```groovy title="hello-world.nf" linenums="9"
 process sayHello {
 
+    publishDir 'results', mode: 'copy'
+
     input:
         val greeting
 
