@@ -539,7 +539,7 @@ executor >  local (1)
 
 Check the output in the results directory, and... Tadaa! It works! Nextflow used the default value to name the output. But wait, what happens now if we provide the parameter in the command line?
 
-#### 3. Run the workflow again with the `--greeting` parameter on the command line using a different greeting
+#### 6. Run the workflow again with the `--greeting` parameter on the command line using a different greeting
 
 ```bash
 nextflow run hello-world.nf --greeting 'Holà!'
