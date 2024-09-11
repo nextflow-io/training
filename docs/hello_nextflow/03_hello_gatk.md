@@ -155,7 +155,7 @@ workflow {
     bam_ch = Channel.fromPath(params.reads_bam, checkIfExists: true)
 
     // Create index file for input BAM file
-    SAMTOOLS_INDEX(reads_ch)
+    SAMTOOLS_INDEX(bam_ch)
 }
 ```
 

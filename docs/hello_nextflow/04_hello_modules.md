@@ -50,7 +50,7 @@ params.cohort_name = "family_trio"
 ### 1.2 Run the workflow to verify that it does the same thing as before
 
 ```bash
-nextflow run hello-modules.nf
+nextflow run hello-modules.nf -resume
 ```
 
 You should see the same output as earlier.
@@ -131,7 +131,7 @@ workflow {
 ### 2.5 Run the workflow to verify that it does the same thing as before
 
 ```bash
-nextflow run hello-modules.nf
+nextflow run hello-modules.nf -resume
 ```
 
 ### Takeaway
@@ -259,7 +259,7 @@ include { GATK_JOINTGENOTYPING } from './modules/local/gatk/jointgenotyping/main
 ### 3.5 Run the workflow to verify that it does the same thing as before
 
 ```bash
-nextflow run hello-modules.nf
+nextflow run hello-modules.nf -resume
 ```
 
 This should still produce the same output. Congratulations, you've done all this work and absolutely nothing has changed to how the pipeline works! But now your code is more modular, and if you decide to write another pipeline that calls on one of those processes, you just need to type one short import statement to use the relevant module. This is better than just copy-pasting the code, because if later you decide to improve the module, all your pipelines will inherit the improvement.
