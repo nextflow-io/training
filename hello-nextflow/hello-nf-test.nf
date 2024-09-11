@@ -6,8 +6,6 @@ include { GATK_JOINTGENOTYPING } from './modules/local/gatk/jointgenotyping/main
 workflow {
 
     // Create input channel from BAM files
-    // We convert it to a tuple with the file name and the file path
-    // See https://www.nextflow.io/docs/latest/script.html#getting-file-attributes
     bam_ch = Channel.fromPath(params.reads_bam, checkIfExists: true)
 
     // Create reference channels using the fromPath channel factory
