@@ -23,5 +23,11 @@
             // Add the IDs of extensions you want installed when the container is created.
             "extensions": ["ms-python.python", "ms-python.vscode-pylance", "nf-core.nf-core-extensionpack"]
         }
+    },
+    "portsAttributes": {
+        "3000": {
+            "label": "Application",
+            "onAutoForward": "openPreview"
+        }
     }
 }
