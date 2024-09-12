@@ -3,11 +3,13 @@
  */
 process sayHello {
 
+    publishDir 'results', mode: 'copy'
+
     output: 
-        path params.output_file
+        path 'output.txt'
     
     """
-    echo 'Hello World!' > $params.output_file
+    echo 'Hello World!' > output.txt
     """
 }
 
