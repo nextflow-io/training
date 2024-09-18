@@ -80,7 +80,7 @@ You can find out more about working collaboratively with branches on the [GitHub
 
 The `TEMPLATE` branch is used by the `nf-core sync` command to integrate template changes to your pipeline. You should **never** modify the `TEMPLATE` branch as any changes will likely disrupt the syncing functionality.
 
-### Installing the `seqtk_trim` module
+### Installing the `seqtk/trim` module
 
 The `nf-core modules list` command can be used to show the modules in your local pipeline or the nf-core remote repository.
 
@@ -88,7 +88,7 @@ The `nf-core modules list` command can be used to show the modules in your local
 nf-core modules list remote
 ```
 
-The `nf-core modules install` command can be used to install the `seqtk_trim` module directly from the nf-core repository:
+The `nf-core modules install` command can be used to install the `seqtk/trim` module directly from the nf-core repository:
 
 ```
 cd nf-core-myfirstpipeline
@@ -98,13 +98,13 @@ nf-core modules install
 You can follow the prompts to find and install the module you are interested in:
 
 ```console
-? Tool name: seqtk_trim
+? Tool name: seqtk/trim
 ```
 
 Once selected, the tooling will install the module in the `modules/nf-core/` folder and suggest code that you can add to your main workflow file (`workflows/mypipeline.nf`).
 
 ```console
-INFO     Installing 'seqtk_trim'
+INFO     Installing 'seqtk/trim'
 INFO     Use the following statement to include this module:
 
 include { SEQTK_TRIM } from '../modules/nf-core/seqtk/trim/main'
@@ -113,13 +113,13 @@ include { SEQTK_TRIM } from '../modules/nf-core/seqtk/trim/main'
 
 !!! question "Exercise"
 
-    Run the `nf-core modules install` command to add the `seqtk_trim` module to your pipeline.
+    Run the `nf-core modules install` command to add the `seqtk/trim` module to your pipeline.
 
 To enable reporting and reproducibility, modules and subworkflows from the nf-core repository are tracked using hashes in the `modules.json` file. When modules are installed or removed using the nf-core tooling the `modules.json` file will be automatically updated.
 
 !!! question "Exercise"
 
-    Open your `modules.json` file and see if the `seqtk_trim` module is being tracked.
+    Open your `modules.json` file and see if the `seqtk/trim` module is being tracked.
 
 ### Adding a module to your pipeline
 
