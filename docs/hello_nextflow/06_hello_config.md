@@ -153,7 +153,7 @@ Now the settings are only applied to the GATK HaplotypeCaller process. This is u
 
 ## 4. Executor
 
-## 4.1. Local executor
+### 4.1. Local executor
 
 Up until now, we have been running our pipeline with the local executor. This runs each step on the same machine that Nextflow is running on. However, for large genomics pipelines, you will want to use a distributed executor. Nextflow supports a number of different distributed executors, including:
 
@@ -171,7 +171,7 @@ process {
 }
 ```
 
-## 4.2. Other executors
+### 4.2. Other executors
 
 !!! note
 
@@ -213,7 +213,7 @@ NXF_CHDIR=/home/gitpod/work/34/850fe31af0eb62a0eb1643ed77b84f
 
 If our process had more directives, such as `clusterOptions`, `cpus`, `memory`, `queue`, and `time`, these would also be included in the `.command.run` file and directly passed to the Slurm execution. They would also be translated to the equivalent options for other executors. This is how Nextflow creates the commands required to correctly submit a job to the sbatch cluster via a single configuration change.
 
-## 4.3. Using Executors in Profiles
+### 4.3. Using Executors in Profiles
 
 Let's combine `profiles` with `executors`. Add the following to your configuration file:
 
@@ -261,6 +261,6 @@ nextflow run seqeralabs/nf-hello-gatk -profile docker,local
 
 Note, we have returned back to the original configuration of using Docker containers with a local execution, but we can now use profiles to switch to a different software packaging system (conda) or a different executor (slurm) with a single command-line option.
 
-## 4.3 Seqera Platform
+### 4.3 Seqera Platform
 
 Setting up and configuring Nextflow for different executors can be complex and time-consuming. Seqera Platform simplifies this process by providing a user-friendly interface to manage and run Nextflow pipelines on various compute platforms. With Seqera Platform, you can easily configure and launch your pipelines on local machines, HPC clusters, cloud environments, and Kubernetes clusters. The platform abstracts the underlying infrastructure, allowing you to focus on your analysis and research without worrying about the technical details of setting up and managing the execution environment.
