@@ -43,6 +43,7 @@ nav:
           - hello_nextflow/03_hello_gatk.md
           - hello_nextflow/04_hello_modules.md
           - hello_nextflow/05_hello_nf-test.md
+          - hello_nextflow/06_hello_config.md
     - Configure nf-core:
           - nf_customize/index.md
           - nf_customize/01_orientation.md
