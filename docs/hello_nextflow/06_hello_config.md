@@ -157,11 +157,11 @@ Now the settings are only applied to the GATK HaplotypeCaller process. This is u
 
 Up until now, we have been running our pipeline with the local executor. This runs each step on the same machine that Nextflow is running on. However, for large genomics pipelines, you will want to use a distributed executor. Nextflow supports a number of different distributed executors, including:
 
-- HPC (SLURM, PBS, SGE)
-- AWS Batch
-- Google Batch
-- Azure Batch
-- Kubernetes
+-   HPC (SLURM, PBS, SGE)
+-   AWS Batch
+-   Google Batch
+-   Azure Batch
+-   Kubernetes
 
 We can modify the executor used by nextflow using the `executor` process directive. Until now, we have been using the `local` executor (default). The following configuration is implied:
 
@@ -218,6 +218,7 @@ If our process had more directives, such as `clusterOptions`, `cpus`, `memory`, 
 Let's combine `profiles` with `executors`. Add the following to your configuration file:
 
 before:
+
 ```groovy title="nextflow.config"
 profiles {
     'docker' {
