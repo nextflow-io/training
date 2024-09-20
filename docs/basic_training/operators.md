@@ -536,7 +536,7 @@ for (List row : lines) {
 
         Repeat the above for the fastqc step.
 
-        ```groovy linenums="1" title="script7.nf"
+        ```groovy linenums="1" hl_lines="5 13" title="script7.nf"
         process FASTQC {
             tag "FASTQC on $sample_id"
 
