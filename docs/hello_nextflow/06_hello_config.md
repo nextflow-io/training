@@ -258,7 +258,3 @@ nextflow run seqeralabs/nf-hello-gatk -profile docker,local
 ```
 
 Note, we have returned back to the original configuration of using Docker containers with a local execution, but we can now use profiles to switch to a different software packaging system (conda) or a different executor (slurm) with a single command-line option.
-
-### 4.3 Seqera Platform
-
-Setting up and configuring Nextflow for different executors can be complex and time-consuming. Seqera Platform simplifies this process by providing a user-friendly interface to manage and run Nextflow pipelines on various compute platforms. With Seqera Platform, you can easily configure and launch your pipelines on local machines, HPC clusters, cloud environments, and Kubernetes clusters. The platform abstracts the underlying infrastructure, allowing you to focus on your analysis and research without worrying about the technical details of setting up and managing the execution environment.
