@@ -65,6 +65,16 @@ nextflow run seqeralabs/nf-hello-gatk
 
 This time, the pipeline will use Conda environments to run the required tools.
 
+### Takeaway
+
+You know how to switch software packaging systems using configuration files.
+
+### What's next?
+
+Learn how to use profiles to customize the behavior of your pipeline.
+
+---
+
 ## 2. Profiles
 
 Profiles are a way to customize the behavior of Nextflow pipelines by selection, rather than setting them permanently.
@@ -106,6 +116,16 @@ nextflow run seqeralabs/nf-hello-gatk -profile conda
 As demonstrated above, by creating and using profiles, we've enhanced our pipeline's flexibility and ease of use. 
 We can now run our pipeline with Docker or Conda using a single command line argument by specifying the appropriate profile (`-profile docker` or `-profile conda`).
 This method of configuration management improves the portability and maintainability of our Nextflow pipeline, enabling us to accommodate various execution scenarios easily.
+
+### Takeaway
+
+You know how to use profiles to customize the configuration of your pipeline.
+
+### What's next?
+
+Learn how to change process resources use with configuration.
+
+---
 
 ## 3. Process directives and resources
 
@@ -158,6 +178,16 @@ nextflow run seqeralabs/nf-hello-gatk -profile docker
 
 Now, the settings are only applied to the GATK HaplotypeCaller process.
 This is useful when your processes have different resource requirements so you can right-size your resources for each process.
+
+### Takeaway
+
+You know how to modify process resources using configuration files.
+
+### What's next?
+
+Learn how to change the executor used by Nextflow.
+
+---
 
 ## 4. Executor
 
