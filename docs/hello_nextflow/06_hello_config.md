@@ -42,7 +42,7 @@ This config block tells the pipeline to use Docker containers to run the require
 
 ### 1.3. Modify configuration
 
-Let's modify the configuration to use Conda instead of Docker.
+Let's modify the configuration to use Conda instead of Docker and explicitly disable Docker.
 
 _Before:_
 
