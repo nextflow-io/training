@@ -143,7 +143,7 @@ Add the following to the end of your `nextflow.config` file:
 ```groovy title="nextflow.config" linenums="11"
 process {
     cpus = 8
-    memory = 4GB
+    memory = 4.GB
 }
 ```
 
