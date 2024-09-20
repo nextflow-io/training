@@ -123,7 +123,7 @@ You know how to use profiles to customize the configuration of your pipeline.
 
 ### What's next?
 
-Learn how to change process resources use with configuration.
+Learn how to change process resource use with configuration.
 
 ---
 
