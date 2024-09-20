@@ -492,7 +492,7 @@ for (List row : lines) {
 
         Add a CSV text file containing the following, as an example input with the name "fastq.csv":
 
-        ```csv
+        ```csv title="fastq.csv"
         gut,/workspace/gitpod/nf-training/data/ggal/gut_1.fq,/workspace/gitpod/nf-training/data/ggal/gut_2.fq
         ```
 
