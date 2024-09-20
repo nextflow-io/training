@@ -506,7 +506,7 @@ for (List row : lines) {
 
         To a splitCsv channel factory input:
 
-        ```groovy linenums="1" hl_lines="2 3 4"
+        ```groovy linenums="1" title="script7.nf"
         Channel
             .fromPath("fastq.csv")
             .splitCsv()
@@ -514,27 +514,7 @@ for (List row : lines) {
             .set { read_pairs_ch }
         ```
 
-        Finally, change the cardinality of the processes that use the input data. For example, for the quantification process, change it from:
-
-        ```groovy linenums="1"
-        process QUANTIFICATION {
-            tag "$sample_id"
-
-            input:
-            path salmon_index
-            tuple val(sample_id), path(reads)
-
-            output:
-            path sample_id, emit: quant_ch
-
-            script:
-            """
-            salmon quant --threads $task.cpus --libType=U -i $salmon_index -1 ${reads[0]} -2 ${reads[1]} -o $sample_id
-            """
-        }
-        ```
-
-        To:
+        Finally, change the cardinality of the processes that use the input data:
 
         ```groovy linenums="1" hl_lines="6 13"
         process QUANTIFICATION {
