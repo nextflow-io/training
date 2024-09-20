@@ -670,7 +670,7 @@ Nextflow automatically sets up an environment for the given package names listed
 
 !!! question "Exercise"
 
-    The tools `fastqc` and `salmon` are both available in BioContainers. Add the appropriate `container` directives to the `FASTQC` and `QUANTIFICATION` processes in `script5.nf` to use BioContainers instead of the container image you have been using in this training.
+    The tools `fastqc` and `salmon` are both available in BioContainers (`quay.io/biocontainers/fastqc:v0.11.5` and `quay.io/biocontainers/salmon:1.7.0--h84f40af_0`, respectively). Add the appropriate `container` directives to the `FASTQC` and `QUANTIFICATION` processes in `script5.nf` to use BioContainers instead of the container image you have been using in this training.
 
     !!! tip "Hint"
 
