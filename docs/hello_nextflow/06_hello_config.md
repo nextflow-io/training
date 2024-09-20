@@ -307,3 +307,11 @@ nextflow run seqeralabs/nf-hello-gatk -profile docker,local
 
 We have returned to the original configuration of using Docker containers with local execution.
 However, now we can use profiles to switch to a different software packaging system (conda) or a different executor (slurm) with a single command-line option.
+
+### Takeaway
+
+You now know how to change the executor in Nextflow.
+
+### What's next?
+
+Well done! You've successfully modified the execution of a pipeline *without altering a single line of code*. This highlights the power of Nextflow's configuration; enabling you to control how the pipeline runs without changing what it runs. Use this flexibility to adapt your pipeline to run in any environment.
