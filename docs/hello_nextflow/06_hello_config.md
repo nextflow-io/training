@@ -113,7 +113,7 @@ or
 nextflow run seqeralabs/nf-hello-gatk -profile conda
 ```
 
-As demonstrated above, by creating and using profiles, we've enhanced our pipeline's flexibility and ease of use. 
+As demonstrated above, by creating and using profiles, we've enhanced our pipeline's flexibility and ease of use.
 We can now run our pipeline with Docker or Conda using a single command line argument by specifying the appropriate profile (`-profile docker` or `-profile conda`).
 This method of configuration management improves the portability and maintainability of our Nextflow pipeline, enabling us to accommodate various execution scenarios easily.
 
@@ -131,13 +131,13 @@ Learn how to change process resources use with configuration.
 
 ### 3.1. Process directives
 
-In a previous training module, we used process directives to modify the behavior of a process when we added the `publishDir` directive to export files from the working directory. 
+In a previous training module, we used process directives to modify the behavior of a process when we added the `publishDir` directive to export files from the working directory.
 Let's look into directives in more detail.
 
 ### 3.1.1 Set process resources
 
-By default, Nextflow will use a single CPU and 2GB of memory for each process. 
-We can modify this behavior by setting the `cpu` and `memory` directives in the `process` block. 
+By default, Nextflow will use a single CPU and 2GB of memory for each process.
+We can modify this behavior by setting the `cpu` and `memory` directives in the `process` block.
 Add the following to the end of your `nextflow.config` file:
 
 ```groovy title="nextflow.config" linenums="11"
@@ -153,12 +153,12 @@ Run the pipeline again with the modified configuration:
 nextflow run seqeralabs/nf-hello-gatk -profile docker
 ```
 
-You shouldn't see any difference; however, you might notice that the three processes get bottlenecked behind each other. 
+You shouldn't see any difference; however, you might notice that the three processes get bottlenecked behind each other.
 This is because Nextflow will ensure we aren't using more CPUs than are available.
 
 ### 3.1.2 Modify process resources for a specific process
 
-We can also modify the resources for a specific process using the `withName` directive. 
+We can also modify the resources for a specific process using the `withName` directive.
 Add the following to the end of your `nextflow.config` file:
 
 ```groovy title="nextflow.config" linenums="11"
@@ -194,8 +194,8 @@ Learn how to change the executor used by Nextflow.
 ### 4.1. Local executor
 
 Until now, we have been running our pipeline with the local executor.
-This runs each step on the same machine that Nextflow is running on. 
-However, for large genomics pipelines, you will want to use a distributed executor. 
+This runs each step on the same machine that Nextflow is running on.
+However, for large genomics pipelines, you will want to use a distributed executor.
 Nextflow supports several different distributed executors, including:
 
 -   HPC (SLURM, PBS, SGE)
@@ -232,13 +232,13 @@ However, if we add this to our config and run the pipeline we will that includes
 Cannot run program "sbatch"
 ```
 
-Nextflow has interpreted that we wish to submit to a Slurm cluster, which requires the use of the command `sbatch`. 
-However, because our Gitpod instance doesn't have slurm installed (and isn't connected to a cluster)  this throws an error.
+Nextflow has interpreted that we wish to submit to a Slurm cluster, which requires the use of the command `sbatch`.
+However, because our Gitpod instance doesn't have slurm installed (and isn't connected to a cluster) this throws an error.
 
 If we check inside the `.command.run` file created in the work directory, we can see that Nextflow has created a script to submit the job to Slurm.
 !!! note
-	
-	The output of your nextflow console will have the hash of the work subdirectory, which will differ from the paths shown below.
+The output of your nextflow console will have the hash of the work subdirectory, which will differ from the paths shown below.
+
 ```bash title=".command.run" linenums="1"
 #!/bin/bash
 #SBATCH -J nf-SAMTOOLS_INDEX_(1)
@@ -255,8 +255,8 @@ NXF_CHDIR=/home/gitpod/work/34/850fe31af0eb62a0eb1643ed77b84f
 ### ...
 ```
 
-If our process had more directives, such as `clusterOptions`, `cpus`, `memory`, `queue`, and `time`, these would also be included in the `.command.run` file and directly passed to the Slurm execution. 
-They would also be translated to the equivalent options for other executors. 
+If our process had more directives, such as `clusterOptions`, `cpus`, `memory`, `queue`, and `time`, these would also be included in the `.command.run` file and directly passed to the Slurm execution.
+They would also be translated to the equivalent options for other executors.
 This is how Nextflow creates the commands required to correctly submit a job to the sbatch cluster via a single configuration change.
 
 ### 4.3. Using Executors in Profiles
@@ -305,5 +305,5 @@ Now run the pipeline using two profiles, `docker` and `local`:
 nextflow run seqeralabs/nf-hello-gatk -profile docker,local
 ```
 
-We have returned to the original configuration of using Docker containers with local execution. 
+We have returned to the original configuration of using Docker containers with local execution.
 However, now we can use profiles to switch to a different software packaging system (conda) or a different executor (slurm) with a single command-line option.
