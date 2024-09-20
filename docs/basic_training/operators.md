@@ -516,7 +516,7 @@ for (List row : lines) {
 
         Finally, change the cardinality of the processes that use the input data:
 
-        ```groovy linenums="1" hl_lines="6 13"
+        ```groovy linenums="1" title="script7.nf"
         process QUANTIFICATION {
             tag "$sample_id"
 
@@ -536,7 +536,7 @@ for (List row : lines) {
 
         Repeat the above for the fastqc step.
 
-        ```groovy linenums="1"  hl_lines="5 13"
+        ```groovy linenums="1" title="script7.nf"
         process FASTQC {
             tag "FASTQC on $sample_id"
 
