@@ -9,7 +9,7 @@ By understanding and effectively utilizing these configuration options, you can 
 ### 1.1. Run nf-hello-gatk with default settings
 
 ```bash
-nextflow run seqeralabs/nf-hello-gatk
+nextflow run seqeralabs/nf-hello-gatk -r main
 ```
 
 When you run the pipeline with the default settings using the command above, the following happens:
@@ -60,7 +60,7 @@ conda.enabled = true
 Now let's run the pipeline again with the modified configuration:
 
 ```bash
-nextflow run seqeralabs/nf-hello-gatk
+nextflow run seqeralabs/nf-hello-gatk -r main
 ```
 
 This time, the pipeline will use Conda environments to run the required tools.
@@ -92,10 +92,10 @@ _After:_
 
 ```groovy title="nextflow.config" linenums="1"
 profiles {
-    'docker' {
+    docker {
         docker.enabled = true
     }
-    'conda' {
+    conda {
         conda.enabled = true
     }
 }
@@ -104,13 +104,13 @@ profiles {
 ### 2.2. Run the pipeline with a profile
 
 ```bash
-nextflow run seqeralabs/nf-hello-gatk -profile docker
+nextflow run seqeralabs/nf-hello-gatk -r main -profile docker
 ```
 
 or
 
 ```bash
-nextflow run seqeralabs/nf-hello-gatk -profile conda
+nextflow run seqeralabs/nf-hello-gatk -r main -profile conda
 ```
 
 As demonstrated above, by creating and using profiles, we've enhanced our pipeline's flexibility and ease of use.
@@ -150,11 +150,15 @@ process {
 Run the pipeline again with the modified configuration:
 
 ```bash
-nextflow run seqeralabs/nf-hello-gatk -profile docker
+nextflow run seqeralabs/nf-hello-gatk -r main -profile docker
 ```
 
 You shouldn't see any difference; however, you might notice that the three processes get bottlenecked behind each other.
 This is because Nextflow will ensure we aren't using more CPUs than are available.
+
+!!! tip
+
+    You can check the number of CPUs given to the process by looking at the .command.run. There will be a function called `nxf_launch()` that includes the command `docker run -i --cpu-shares 1024`, where `--cpu-shares` is the number of CPUs given to the process multiplied by 1024.
 
 ### 3.1.2 Modify process resources for a specific process
 
@@ -173,7 +177,7 @@ process {
 Run the pipeline again with the modified configuration:
 
 ```bash
-nextflow run seqeralabs/nf-hello-gatk -profile docker
+nextflow run seqeralabs/nf-hello-gatk -r main -profile docker
 ```
 
 Now, the settings are only applied to the GATK HaplotypeCaller process.
@@ -263,15 +267,23 @@ This is how Nextflow creates the commands required to correctly submit a job to 
 
 Let's combine `profiles` with `executors`. Add the following to your configuration file:
 
-before:
+Remove the following lines:
+
+```groovy title="nextflow.config" linenums="17"
+process {
+    executor = 'slurm'
+}
+```
+
+Before:
 
 ```groovy title="nextflow.config" linenums="1"
 profiles {
-    'docker' {
+    docker {
         docker.enabled = true
         conda.enabled = false
     }
-    'conda' {
+    conda {
         docker.enabled = false
         conda.enabled = true
     }
@@ -282,18 +294,18 @@ After:
 
 ```groovy title="nextflow.config"
 profiles {
-    'docker' {
+    docker {
         docker.enabled = true
         conda.enabled = false
     }
-    'conda' {
+    conda {
         docker.enabled = false
         conda.enabled = true
     }
-    'local' {
+    local {
         process.executor = 'local'
     }
-    'slurm' {
+    slurm {
         process.executor = 'slurm'
     }
 }
@@ -302,7 +314,7 @@ profiles {
 Now run the pipeline using two profiles, `docker` and `local`:
 
 ```bash
-nextflow run seqeralabs/nf-hello-gatk -profile docker,local
+nextflow run seqeralabs/nf-hello-gatk -r main -profile docker,local
 ```
 
 We have returned to the original configuration of using Docker containers with local execution.
@@ -314,4 +326,4 @@ You now know how to change the executor in Nextflow.
 
 ### What's next?
 
-Well done! You've successfully modified the execution of a pipeline *without altering a single line of code*. This highlights the power of Nextflow's configuration; enabling you to control how the pipeline runs without changing what it runs. Use this flexibility to adapt your pipeline to run in any environment.
+Well done! You've successfully modified the execution of a pipeline _without altering a single line of code_. This highlights the power of Nextflow's configuration; enabling you to control how the pipeline runs without changing what it runs. Use this flexibility to adapt your pipeline to run in any environment.
