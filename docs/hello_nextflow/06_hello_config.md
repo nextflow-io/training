@@ -26,13 +26,13 @@ Now let's move on to seeing how this was configured and set up.
 
 Open the `nextflow.config` file and inspect the contents:
 
-```bash title="nextflow.config"
+```bash
 code nextflow.config
 ```
 
 The contents should look like this:
 
-```groovy title="nextflow.config"
+```groovy title="nextflow.config" linenums="1"
 docker.enabled = true
 ```
 
@@ -44,13 +44,13 @@ Let's modify the configuration to use Conda instead of Docker.
 
 _Before:_
 
-```groovy title="nextflow.config"
+```groovy title="nextflow.config" linenums="1"
 docker.enabled = true
 ```
 
 _After:_
 
-```groovy title="nextflow.config"
+```groovy title="nextflow.config" linenums="1"
 docker.enabled = false
 conda.enabled = true
 ```
@@ -71,14 +71,14 @@ Profiles are a way to customize the behavior of Nextflow pipelines by selection,
 
 _Before:_
 
-```groovy title="nextflow.config"
+```groovy title="nextflow.config" linenums="1"
 docker.enabled = false
 conda.enabled = true
 ```
 
 _After:_
 
-```groovy title="nextflow.config"
+```groovy title="nextflow.config" linenums="1"
 profiles {
     'docker' {
         docker.enabled = true
@@ -115,7 +115,7 @@ Previously, we have seen the use of process directives to modify the behaviour o
 
 By default, Nextflow will use a single CPU and 2GB of memory for each process. We can modify this behaviour by setting the `cpu` and `memory` directives in the `process` block. Add the following to the end of your `nextflow.config` file:
 
-```groovy title="nextflow.config"
+```groovy title="nextflow.config" linenums="11"
 process {
     cpus = 8
     memory = 4GB
@@ -134,7 +134,7 @@ You shouldn't see any difference, however you might notice the three processes g
 
 We can also modify the resources for a specific process using the `withName` directive. Add the following to the end of your `nextflow.config` file:
 
-```groovy title="nextflow.config"
+```groovy title="nextflow.config" linenums="11"
 process {
     withName: 'GATK_HAPLOTYPECALLER' {
         cpus = 8
@@ -165,7 +165,7 @@ Up until now, we have been running our pipeline with the local executor. This ru
 
 We can modify the executor used by nextflow using the `executor` process directive. Until now, we have been using the `local` executor (default). The following configuration is implied:
 
-```groovy title="nextflow.config"
+```groovy title="nextflow.config" linenums="18"
 process {
     executor = 'local'
 }
@@ -179,7 +179,7 @@ process {
 
 If we wish to change executor, we could simply set this to one of the values in the documentation:
 
-```groovy title="nextflow.config"
+```groovy title="nextflow.config" linenums="18"
 process {
     executor = 'slurm'
 }
@@ -187,7 +187,7 @@ process {
 
 However, if we add this to our config and run the pipeline we will that includes this error:
 
-```console title="Error"
+```console
 Cannot run program "sbatch"
 ```
 
@@ -195,7 +195,7 @@ Nextflow has interpreted that we wish to submit to a Slurm cluster, which requir
 
 If we check inside the `.command.run` file created in the work directory, we can see that Nextflow has created a script to submit the job to Slurm.
 
-```bash title=".command.run"
+```bash title=".command.run" linenums="1"
 #!/bin/bash
 #SBATCH -J nf-SAMTOOLS_INDEX_(1)
 #SBATCH -o /home/gitpod/work/34/850fe31af0eb62a0eb1643ed77b84f/.command.log
@@ -219,7 +219,7 @@ Let's combine `profiles` with `executors`. Add the following to your configurati
 
 before:
 
-```groovy title="nextflow.config"
+```groovy title="nextflow.config" linenums="1"
 profiles {
     'docker' {
         docker.enabled = true
@@ -255,7 +255,7 @@ profiles {
 
 Now run the pipeline using two profiles, `docker` and `local`:
 
-```bash title="Run the pipeline with two profiles"
+```bash
 nextflow run seqeralabs/nf-hello-gatk -profile docker,local
 ```
 
