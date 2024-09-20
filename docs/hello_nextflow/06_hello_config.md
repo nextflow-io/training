@@ -82,10 +82,8 @@ _After:_
 profiles {
     'docker' {
         docker.enabled = true
-        conda.enabled = false
     }
     'conda' {
-        docker.enabled = false
         conda.enabled = true
     }
 }
