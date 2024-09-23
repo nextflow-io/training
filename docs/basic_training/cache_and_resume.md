@@ -402,7 +402,18 @@ workflow {
 }
 ```
 
-Now, we define `ch_letters` with a meta map (e.g. `[id: 'A']`). Both FOO and BAR pass the `meta` through and attach it to their outputs. Then, in our call to FOOBAR we can use a `join` operation to ensure that only matched values are passed.
+Now, we define `ch_letters` with a meta map (e.g. `[id: 'A']`). Both FOO and BAR pass the `meta` through and attach it to their outputs. Then, in our call to FOOBAR we can use a `join` operation to ensure that only matched values are passed. Running this code provides us with matched processes, as we'd expect:
+
+```console title="Output"
+...
+D - d
+
+B - b
+
+A - a
+
+C - c
+```
 
 If meta maps are not possible, an alternative is to use the [`fair`](https://nextflow.io/docs/edge/process.html#fair) process directive. When this directive is specified, Nextflow will guarantee that the order of outputs will match the order of inputs (not the order in which the tasks run, only the order of the output channel).
 
