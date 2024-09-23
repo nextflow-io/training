@@ -107,7 +107,7 @@ It’s good practice to organize each **experiment** in its own folder. The main
 The `nextflow log` command lists the executions run in the current folder:
 
 ```console
-$ nextflow log
+nextflow log
 ```
 
 ```console title="Output"
@@ -146,7 +146,7 @@ nextflow log tiny_fermat
 The `-f` (fields) option can be used to specify which metadata should be printed by the `log` command:
 
 ```console
-$ nextflow log tiny_fermat -f 'process,exit,hash,duration'
+nextflow log tiny_fermat -f 'process,exit,hash,duration'
 ```
 
 ```console title="Output"
@@ -167,7 +167,7 @@ nextflow log -l
 The `-F` option allows the specification of filtering criteria to print only a subset of tasks:
 
 ```console
-$ nextflow log tiny_fermat -F 'process =~ /fastqc/'
+nextflow log tiny_fermat -F 'process =~ /fastqc/'
 ```
 
 ```console title="Output"
