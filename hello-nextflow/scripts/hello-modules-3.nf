@@ -5,18 +5,17 @@ include { GATK_JOINTGENOTYPING } from './modules/local/gatk/jointgenotyping/main
 
 workflow {
 
-    // Create input channel from BAM files
-    bam_ch = Channel.fromPath(params.reads_bam, checkIfExists: true)
+    // Create input channel from list of input files in plain text
+    reads_ch = Channel.fromPath(params.reads_bam).splitText()
 
-
-    // Reference objects
-    ref_file               = file(params.reference)
-    ref_index_file         = file(params.reference_index)
-    ref_dict_file          = file(params.reference_dict)
-    calling_intervals_file = file(params.calling_intervals)
+    // Create channels for the accessory files (reference and intervals)
+    ref_file        = file(params.reference)
+    ref_index_file  = file(params.reference_index)
+    ref_dict_file   = file(params.reference_dict)
+    intervals_file  = file(params.intervals)
 
     // Create index file for input BAM file
-    SAMTOOLS_INDEX(bam_ch)
+    SAMTOOLS_INDEX(reads_ch)
 
     // Call variants from the indexed BAM file
     GATK_HAPLOTYPECALLER(
@@ -24,9 +23,10 @@ workflow {
         ref_file,
         ref_index_file,
         ref_dict_file,
-        calling_intervals_file
+        intervals_file
     )
 
+    // Collect variant calling outputs across samples
     all_vcfs = GATK_HAPLOTYPECALLER.out[0].collect()
     all_tbis = GATK_HAPLOTYPECALLER.out[1].collect()
 
@@ -38,6 +38,6 @@ workflow {
         ref_file,
         ref_index_file,
         ref_dict_file,
-        calling_intervals_file
+        intervals_file
     )
 }

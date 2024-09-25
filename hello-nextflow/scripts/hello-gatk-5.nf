@@ -2,14 +2,14 @@
  * Pipeline parameters
  */
 
-// Primary input
-params.reads_bam = "${workflow.projectDir}/data/bam/*.bam"
+// Primary input (list of input files, one per line)
+params.reads_bam = "${projectDir}/data/sample_bams.txt"
 
 // Accessory files
-params.reference = "${workflow.projectDir}/data/ref/ref.fasta"
+params.reference       = "${workflow.projectDir}/data/ref/ref.fasta"
 params.reference_index = "${workflow.projectDir}/data/ref/ref.fasta.fai"
-params.reference_dict = "${workflow.projectDir}/data/ref/ref.dict"
-params.calling_intervals = "${workflow.projectDir}/data/ref/intervals.bed"
+params.reference_dict  = "${workflow.projectDir}/data/ref/ref.dict"
+params.intervals       = "${workflow.projectDir}/data/ref/intervals.bed"
 
 /*
  * Generate BAM index file
@@ -17,7 +17,6 @@ params.calling_intervals = "${workflow.projectDir}/data/ref/intervals.bed"
 process SAMTOOLS_INDEX {
 
     container 'community.wave.seqera.io/library/samtools:1.20--b5dfbd93de237464'
-    conda "bioconda::samtools=1.19.2"
 
     publishDir 'results', mode: 'copy'
 
@@ -38,7 +37,6 @@ process SAMTOOLS_INDEX {
 process GATK_HAPLOTYPECALLER {
 
     container "community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"
-    conda "bioconda::gatk4=4.5.0.0"
     
     publishDir 'results', mode: 'copy'
 
@@ -103,18 +101,17 @@ process GATK_JOINTGENOTYPING {
 
 workflow {
 
-    // Create input channel from BAM files
-    bam_ch = Channel.fromPath(params.reads_bam, checkIfExists: true)
-    
+    // Create input channel from list of input files in plain text
+    reads_ch = Channel.fromPath(params.reads_bam).splitText()
 
-    // Reference objects
-    ref_file       = file(params.reference)
-    ref_index_file = file(params.reference_index)
-    ref_dict_file  = file(params.reference_dict)
-    intervals_file = file(params.calling_intervals)
+    // Create channels for the accessory files (reference and intervals)
+    ref_file        = file(params.reference)
+    ref_index_file  = file(params.reference_index)
+    ref_dict_file   = file(params.reference_dict)
+    intervals_file  = file(params.intervals)
 
     // Create index file for input BAM file
-    SAMTOOLS_INDEX(bam_ch)
+    SAMTOOLS_INDEX(reads_ch)
 
     // Call variants from the indexed BAM file
     GATK_HAPLOTYPECALLER(

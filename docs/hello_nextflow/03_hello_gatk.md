@@ -126,7 +126,6 @@ exit
 process SAMTOOLS_INDEX {
 
     container 'community.wave.seqera.io/library/samtools:1.20--b5dfbd93de237464'
-    conda "bioconda::samtools=1.19.2"
 
     publishDir 'results', mode: 'copy'
 
@@ -158,11 +157,11 @@ params.reads_bam = "${projectDir}/data/bam/reads_mother.bam"
 ```groovy title="hello-gatk.nf"
 workflow {
 
-    // Create input channel
-    bam_ch = Channel.fromPath(params.reads_bam)
+    // Create input channel (single file via CLI parameter)
+    reads_ch = Channel.fromPath(params.reads_bam)
 
     // Create index file for input BAM file
-    SAMTOOLS_INDEX(bam_ch)
+    SAMTOOLS_INDEX(reads_ch)
 }
 ```
 
@@ -202,7 +201,6 @@ Add a second step that consumes the output of the first.
 process GATK_HAPLOTYPECALLER {
 
     container "community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"
-    conda "bioconda::gatk4=4.5.0.0"
 
     publishDir 'results', mode: 'copy'
 
@@ -233,32 +231,35 @@ process GATK_HAPLOTYPECALLER {
 
 ```groovy title="hello-gatk.nf"
 // Accessory files
-params.reference = "${workflow.projectDir}/data/ref/ref.fasta"
+params.reference       = "${workflow.projectDir}/data/ref/ref.fasta"
 params.reference_index = "${workflow.projectDir}/data/ref/ref.fasta.fai"
-params.reference_dict = "${workflow.projectDir}/data/ref/ref.dict"
-params.calling_intervals = "${workflow.projectDir}/data/ref/intervals.bed"
+params.reference_dict  = "${workflow.projectDir}/data/ref/ref.dict"
+params.intervals       = "${workflow.projectDir}/data/ref/intervals.bed"
 ```
 
 #### 2.3. Create a file object from each reference parameter
 
 ```groovy title="hello-gatk.nf"
-ref_file               = file(params.reference)
-ref_index_file         = file(params.reference_index)
-ref_dict_file          = file(params.reference_dict)
-calling_intervals_file = file(params.calling_intervals)
+// Create channels for the accessory files (reference and intervals)
+ref_file       = file(params.reference)
+ref_index_file = file(params.reference_index)
+ref_dict_file  = file(params.reference_dict)
+intervals_file = file(params.intervals)
 ```
+
+This will load each of the accessory files in its own single-element value channel.
 
 #### 2.4. Add a call to the workflow block to run GATK_HAPLOTYPECALLER
 
 ```groovy title="hello-gatk.nf"
 // Call variants from the indexed BAM file
 GATK_HAPLOTYPECALLER(
-    bam_ch,
+    reads_ch,
     SAMTOOLS_INDEX.out,
     ref_file,
     ref_index_file,
     ref_dict_file,
-    calling_intervals_file
+    intervals_file
 )
 ```
 
@@ -405,7 +406,7 @@ GATK_HAPLOTYPECALLER(
 #### 3.6. Run the workflow to verify it works correctly on all three samples now
 
 ```bash
-nextflow run hello-gatk.nf -resume -ansi-log false
+nextflow run hello-gatk.nf -ansi-log false
 ```
 
 This time everything should run correctly:

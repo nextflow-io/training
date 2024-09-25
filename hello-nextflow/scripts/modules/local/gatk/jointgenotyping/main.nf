@@ -4,8 +4,9 @@
 process GATK_JOINTGENOTYPING {
 
     container "community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"
-    conda "bioconda::gatk4=4.5.0.0"
 
+    publishDir 'results', mode: 'copy'
+    
     input:
         path vcfs
         path idxs
@@ -20,10 +21,10 @@ process GATK_JOINTGENOTYPING {
         path "${cohort_name}.joint.vcf.idx"
 
     script:
-    def input_vcfs = vcfs.collect { "-V ${it}" }.join(' ')
+    def vcfs_line = vcfs.collect { "-V ${it}" }.join(' ')
     """
     gatk GenomicsDBImport \
-        ${input_vcfs} \
+        ${vcfs_line} \
         --genomicsdb-workspace-path ${cohort_name}_gdb \
         -L ${interval_list}
 
