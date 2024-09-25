@@ -238,10 +238,10 @@ Add this to the workflow block (after the `reads_ch` creation):
 
 ```groovy title="hello-gatk.nf"
 // Create channels for the accessory files (reference and intervals)
-ref_ch          = Channel.fromPath(params.reference).collect()
-ref_index_ch    = Channel.fromPath(params.reference_index).collect()
-ref_dict_ch     = Channel.fromPath(params.reference_dict).collect()
-intervals_ch    = Channel.fromPath(params.calling_intervals).collect()
+ref_file        = file(params.reference)
+ref_index_file  = file(params.reference_index)
+ref_dict_file   = file(params.reference_dict)
+intervals_file  = file(params.intervals)
 ```
 
 Here, the `collect()` operator converts the **queue channel** created by `Channel.fromPath()` to a **value channel**. See [docs](https://www.nextflow.io/docs/latest/channel.html#channel-types) for more details.
@@ -253,10 +253,10 @@ Here, the `collect()` operator converts the **queue channel** created by `Channe
 GATK_HAPLOTYPECALLER(
     reads_ch,
     SAMTOOLS_INDEX.out,
-    ref_ch,
-    ref_index_ch,
-    ref_dict_ch,
-    intervals_ch
+    ref_file,
+    ref_index_file,
+    ref_dict_file,
+    intervals_file
 )
 ```
 
@@ -596,10 +596,10 @@ GATK_JOINTGENOTYPING(
     all_vcfs,
     all_tbis,
     params.cohort_name,
-    ref_ch,
-    ref_index_ch,
-    ref_dict_ch,
-    intervals_ch
+    ref_file,
+    ref_index_file,
+    ref_dict_file,
+    intervals_file
 )
 ```
 

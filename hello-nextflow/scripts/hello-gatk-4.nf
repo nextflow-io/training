@@ -67,10 +67,10 @@ workflow {
     reads_ch = Channel.fromPath(params.reads_bam).splitText()
 
     // Create channels for the accessory files (reference and intervals)
-    ref_ch          = Channel.fromPath(params.reference).collect()
-    ref_index_ch    = Channel.fromPath(params.reference_index).collect()
-    ref_dict_ch     = Channel.fromPath(params.reference_dict).collect()
-    intervals_ch    = Channel.fromPath(params.intervals).collect()
+    ref_file        = file(params.reference)
+    ref_index_file  = file(params.reference_index)
+    ref_dict_file   = file(params.reference_dict)
+    intervals_file  = file(params.intervals)
 
     // Create index file for input BAM file
     SAMTOOLS_INDEX(reads_ch)
@@ -78,9 +78,9 @@ workflow {
     // Call variants from the indexed BAM file
     GATK_HAPLOTYPECALLER(
         SAMTOOLS_INDEX.out,
-        ref_ch,
-        ref_index_ch,
-        ref_dict_ch,
-        intervals_ch
+        ref_file,
+        ref_index_file,
+        ref_dict_file,
+        intervals_file
     )
 }
