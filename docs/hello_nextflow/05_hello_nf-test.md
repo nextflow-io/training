@@ -163,7 +163,7 @@ _After:_
 ```groovy title="modules/local/samtools/index/tests/main.nf.test" linenums="14"
 process {
     """
-    input[0] = file("${projectDir}/data/bam/reads_son.bam", checkIfExists: true)
+    input[0] = file("${projectDir}/data/bam/reads_son.bam")
     """
 }
 ```
@@ -265,7 +265,7 @@ test("reads_mother [bam]") {
         }
         process {
             """
-            input[0] = file("${projectDir}/data/bam/reads_mother.bam", checkIfExists: true)
+            input[0] = file("${projectDir}/data/bam/reads_mother.bam")
             """
         }
     }
@@ -289,7 +289,7 @@ test("reads_father [bam]") {
         }
         process {
             """
-            input[0] = file("${projectDir}/data/bam/reads_father.bam", checkIfExists: true)
+            input[0] = file("${projectDir}/data/bam/reads_father.bam")
             """
         }
     }
@@ -441,7 +441,7 @@ test("reads_son [bam]") {
             script "../../../samtools/index/main.nf"
             process {
                 """
-                input[0] =  file("${projectDir}/data/bam/reads_son.bam", checkIfExists: true)
+                input[0] =  file("${projectDir}/data/bam/reads_son.bam")
                 """
             }
         }
@@ -619,7 +619,7 @@ test("reads_mother [bam]") {
             script "../../../samtools/index/main.nf"
             process {
                 """
-                input[0] =  file("${projectDir}/data/bam/reads_mother.bam", checkIfExists: true)
+                input[0] =  file("${projectDir}/data/bam/reads_mother.bam")
                 """
             }
         }
@@ -658,7 +658,7 @@ test("reads_father [bam]") {
             script "../../../samtools/index/main.nf"
             process {
                 """
-                input[0] =  file("${projectDir}/data/bam/reads_father.bam", checkIfExists: true)
+                input[0] =  file("${projectDir}/data/bam/reads_father.bam")
                 """
             }
         }

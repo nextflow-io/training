@@ -152,7 +152,7 @@ params.reads_bam = "${projectDir}/data/bam/reads_mother.bam"
 workflow {
 
     // Create input channel
-    bam_ch = Channel.fromPath(params.reads_bam, checkIfExists: true)
+    bam_ch = Channel.fromPath(params.reads_bam)
 
     // Create index file for input BAM file
     SAMTOOLS_INDEX(bam_ch)
@@ -230,13 +230,13 @@ params.reference_dict = "${workflow.projectDir}/data/ref/ref.dict"
 params.calling_intervals = "${workflow.projectDir}/data/ref/intervals.bed"
 ```
 
-#### 2.3. Make each of these references a value channel
+#### 2.3. Create a file object from each reference parameter
 
 ```groovy title="hello-gatk.nf"
-ref_ch               = Channel.fromPath(params.reference, checkIfExists: true).collect()
-ref_index_ch         = Channel.fromPath(params.reference_index, checkIfExists: true).collect()
-ref_dict_ch          = Channel.fromPath(params.reference_dict, checkIfExists: true).collect()
-calling_intervals_ch = Channel.fromPath(params.calling_intervals, checkIfExists: true).collect()
+ref_file               = file(params.reference)
+ref_index_file         = file(params.reference_index)
+ref_dict_file          = file(params.reference_dict)
+calling_intervals_file = file(params.calling_intervals)
 ```
 
 #### 2.4. Add a call to the workflow block to run GATK_HAPLOTYPECALLER
@@ -246,10 +246,10 @@ calling_intervals_ch = Channel.fromPath(params.calling_intervals, checkIfExists:
 GATK_HAPLOTYPECALLER(
     bam_ch,
     SAMTOOLS_INDEX.out,
-    ref_ch,
-    ref_index_ch,
-    ref_dict_ch,
-    calling_intervals_ch
+    ref_file,
+    ref_index_file,
+    ref_dict_file,
+    calling_intervals_file
 )
 ```
 
@@ -539,10 +539,10 @@ GATK_JOINTGENOTYPING(
     all_vcfs,
     all_tbis,
     params.cohort_name,
-    ref_ch,
-    ref_index_ch,
-    ref_dict_ch,
-    calling_intervals_ch
+    ref_file,
+    ref_index_file,
+    ref_dict_file,
+    calling_intervals_file
 )
 ```
 
