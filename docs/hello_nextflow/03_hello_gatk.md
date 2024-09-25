@@ -31,6 +31,11 @@ A full variant calling pipeline typically involves a lot of steps. For simplicit
 
 Just like in the Hello World example, we want to try out the commands manually before we attempt to wrap them in a workflow. The difference here is that we're going to use Docker containers to obtain and run the tools.
 
+!!! note
+
+     Make sure you're in the correct working directory:
+     `cd /workspace/gitpod/hello-nextflow`
+
 ### 0.1. Index a BAM input file with Samtools
 
 #### 0.1.1. Pull the samtools container
@@ -244,7 +249,7 @@ ref_dict_file   = file(params.reference_dict)
 intervals_file  = file(params.intervals)
 ```
 
-Here, the `collect()` operator converts the **queue channel** created by `Channel.fromPath()` to a **value channel**. See [docs](https://www.nextflow.io/docs/latest/channel.html#channel-types) for more details.
+This will load each of the accessory files in its own single-element value channel.
 
 #### 2.4. Add a call to the workflow block to run GATK_HAPLOTYPECALLER
 
