@@ -193,6 +193,10 @@ docker build -t my-image .
 
 ### Run Salmon in the container
 
+!!! tip
+
+    If you didn't complete the steps above, you can copy a public one like with two commnads: `docker pull quay.io/biocontainers/salmon:0.14.1--h86b0361_1` and `docker tag quay.io/biocontainers/salmon:0.14.1--h86b0361_1 my-image`
+
 You can run the software installed in the container by using the `run` command. For example, you can check that Salmon is running correctly in the container generated above by using the following command:
 
 ```bash
