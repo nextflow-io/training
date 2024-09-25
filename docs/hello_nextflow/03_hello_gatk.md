@@ -196,7 +196,7 @@ Add a second step that consumes the output of the first.
 process GATK_HAPLOTYPECALLER {
 
     container "community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"
-    
+
     publishDir 'results', mode: 'copy'
 
     input:
@@ -572,7 +572,7 @@ process GATK_JOINTGENOTYPING {
 params.cohort_name = "family_trio"
 ```
 
-#### 5.3. Gather the outputs of GATK_HAPLOTYPECALLER across samples using `collect()`  
+#### 5.3. Gather the outputs of GATK_HAPLOTYPECALLER across samples using `collect()`
 
 We collect the VCFs and their indices separately in order to list only the VCFs in the command we're going to construct. Since we'll give all of those files together to the joint genotyping process, we don't have to worry about the order of files like we did earlier.
 
