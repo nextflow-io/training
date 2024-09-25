@@ -476,19 +476,35 @@ ATX-TBL-001-GB-01-113   3
 
 Finally, you can also operate on CSV files outside the channel context:
 
+```groovy linenums="1"
+def f = file('data/meta/patients_1.csv')
+def lines = f.splitCsv()
+for (List row : lines) {
+    log.info "${row[0]} -- ${row[2]}"
+}
+```
+
 !!! question "Exercise"
 
-    Create a CSV file that can be used as an input for `script7.nf`.
+    Create a CSV file and use it as input for `script7.nf`, part of the [Simple RNA-Seq workflow tutorial](https://training.nextflow.io/basic_training/rnaseq_pipeline/).
 
     ??? solution
 
         Add a CSV text file containing the following, as an example input with the name "fastq.csv":
 
-        ```csv title="input.csv"
+        ```csv title="fastq.csv"
         gut,/workspace/gitpod/nf-training/data/ggal/gut_1.fq,/workspace/gitpod/nf-training/data/ggal/gut_2.fq
         ```
 
-        Then, add a .splitCsv() operator:
+        Then replace the input channel for the reads in `script7.nf`. Changing the following lines:
+
+        ```groovy linenums="1"
+        Channel
+            .fromFilePairs(params.reads, checkIfExists: true)
+            .set { read_pairs_ch }
+        ```
+
+        To a splitCsv channel factory input:
 
         ```groovy linenums="1" title="script7.nf"
         Channel
@@ -537,6 +553,10 @@ Finally, you can also operate on CSV files outside the channel context:
             """
         }
         ```
+
+        Now the workflow should run from a CSV file.
+
+### Tab separated values (.tsv)
 
 Parsing TSV files works in a similar way. Simply add the `sep: '\t'` option in the `splitCsv` context:
 
