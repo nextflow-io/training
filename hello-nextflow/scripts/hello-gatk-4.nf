@@ -19,6 +19,8 @@ process SAMTOOLS_INDEX {
     container 'community.wave.seqera.io/library/samtools:1.20--b5dfbd93de237464'
     conda "bioconda::samtools=1.19.2"
 
+    publishDir 'results', mode: 'copy'
+
     input:
         path input_bam
 
@@ -27,17 +29,18 @@ process SAMTOOLS_INDEX {
 
     """
     samtools index '$input_bam'
-
     """
 }
 
 /*
- * Call variants with GATK HapolotypeCaller in GVCF mode
+ * Call variants with GATK HaplotypeCaller in GVCF mode
  */
 process GATK_HAPLOTYPECALLER {
 
     container "community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"
     conda "bioconda::gatk4=4.5.0.0"
+    
+    publishDir 'results', mode: 'copy'
 
     input:
         tuple path(input_bam), path(input_bam_index)
@@ -63,14 +66,19 @@ process GATK_HAPLOTYPECALLER {
 workflow {
 
     // Create input channel from BAM files
-    bam_ch = Channel.fromPath(params.reads_bam, checkIfExists: true)
-    
+    bam_ch = Channel.fromPath(params.reads_bam).splitText()
 
     // Reference objects
     ref_file               = file(params.reference)
     ref_index_file         = file(params.reference_index)
     ref_dict_file          = file(params.reference_dict)
     calling_intervals_file = file(params.calling_intervals)
+
+    // Create channels for the accessory files (reference and intervals)
+    ref_file        = file(params.reference)
+    ref_index_file  = file(params.reference_index)
+    ref_dict_file   = file(params.reference_dict)
+    intervals_file  = file(params.intervals)
 
     // Create index file for input BAM file
     SAMTOOLS_INDEX(bam_ch)

@@ -108,10 +108,10 @@ workflow {
 
 
     // Reference objects
-    ref_file               = file(params.reference)
-    ref_index_file         = file(params.reference_index)
-    ref_dict_file          = file(params.reference_dict)
-    calling_intervals_file = file(params.calling_intervals)
+    ref_file       = file(params.reference)
+    ref_index_file = file(params.reference_index)
+    ref_dict_file  = file(params.reference_dict)
+    intervals_file = file(params.calling_intervals)
 
     // Create index file for input BAM file
     SAMTOOLS_INDEX(bam_ch)
@@ -122,7 +122,7 @@ workflow {
         ref_file,
         ref_index_file,
         ref_dict_file,
-        calling_intervals_file
+        intervals_file
     )
 
     all_vcfs = GATK_HAPLOTYPECALLER.out[0].collect()
@@ -136,6 +136,6 @@ workflow {
         ref_file,
         ref_index_file,
         ref_dict_file,
-        calling_intervals_file
+        intervals_file
     )
 }

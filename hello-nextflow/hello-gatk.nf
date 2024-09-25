@@ -2,8 +2,6 @@
  * Pipeline parameters
  */
 
-// Execution environment setup
-
 // Primary input
 
 /*
@@ -13,6 +11,8 @@ process SAMTOOLS_INDEX {
 
     container 
 
+    publishDir
+
     input:
 
     output:
@@ -20,6 +20,7 @@ process SAMTOOLS_INDEX {
     """
 
     """
+
 }
 
 workflow {
@@ -27,4 +28,5 @@ workflow {
     // Create input channel
 
     // Create index file for input BAM file
+    
 }

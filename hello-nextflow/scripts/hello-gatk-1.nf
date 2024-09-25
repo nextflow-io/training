@@ -14,6 +14,8 @@ process SAMTOOLS_INDEX {
     container 'community.wave.seqera.io/library/samtools:1.20--b5dfbd93de237464'
     conda "bioconda::samtools=1.19.2"
 
+    publishDir 'results', mode: 'copy'
+
     input:
         path input_bam
 
@@ -22,15 +24,16 @@ process SAMTOOLS_INDEX {
 
     """
     samtools index '$input_bam'
-
     """
 }
 
+
 workflow {
 
-    // Create input channel
-    reads_ch = Channel.fromPath(params.bam, checkIfExists: true)
+    // Create input channel (single file via CLI parameter)
+    reads_ch = Channel.fromPath(params.reads_bam)
 
     // Create index file for input BAM file
     SAMTOOLS_INDEX(reads_ch)
+    
 }
