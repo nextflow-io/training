@@ -924,6 +924,8 @@ workflow {
 }
 ```
 
+This command will produce an error message, because `.view()` operates on single channels, and FOO.out contains multiple channels.
+
 If a process defines two or more output channels, each channel can be accessed by indexing the `.out` attribute, e.g., `.out[0]`, `.out[1]`, etc. In this example you only have the `[0]'th` output:
 
 ```groovy linenums="1" title="snippet.nf"
