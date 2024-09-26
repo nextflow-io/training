@@ -195,7 +195,7 @@ docker build -t my-image .
 
 !!! tip
 
-    If you didn't complete the steps above, you can copy a public image to use in the following sections with two commnads: `docker pull quay.io/biocontainers/salmon:0.14.1--h86b0361_1` and `docker tag quay.io/biocontainers/salmon:0.14.1--h86b0361_1 my-image`
+    If you didn't complete the steps above, use the 'rnaseq-nf' image used elsewhere in these materials by specifying `nextflow/rnaseq-nf` in place of `my-image` in the following examples.
 
 You can run the software installed in the container by using the `run` command. For example, you can check that Salmon is running correctly in the container generated above by using the following command:
 
