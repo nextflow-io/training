@@ -670,7 +670,7 @@ Nextflow automatically sets up an environment for the given package names listed
 
 !!! question "Exercise"
 
-    The tools `fastqc` and `salmon` are both available in BioContainers. Add the appropriate `container` directives to the `FASTQC` and `QUANTIFICATION` processes in `script5.nf` to use BioContainers instead of the container image you have been using in this training.
+    The tools `fastqc` and `salmon` are both available in Seqera Containers (`community.wave.seqera.io/library/fastqc:0.12.1--5cfd0f3cb6760c42` and `community.wave.seqera.io/library/salmon:1.10.3--482593b6cd04c9b7`, respectively). Add the appropriate `container` directives to the `FASTQC` and `QUANTIFICATION` processes in `script5.nf` to use Seqera Containers instead of the container image you have been using in this training.
 
     !!! tip "Hint"
 
