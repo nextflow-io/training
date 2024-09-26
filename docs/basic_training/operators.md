@@ -241,7 +241,7 @@ This operator is especially useful to process a group together with all the elem
 
         ```groovy linenums="1" title="snippet.nf"
         Channel
-            .fromPath('data/meta/')
+            .fromPath('data/meta/*')
             .map { file -> tuple(file.baseName, file) }
             .groupTuple()
             .view()
