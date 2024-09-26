@@ -193,6 +193,10 @@ docker build -t my-image .
 
 ### Run Salmon in the container
 
+!!! tip
+
+    If you didn't complete the steps above, use the 'rnaseq-nf' image used elsewhere in these materials by specifying `nextflow/rnaseq-nf` in place of `my-image` in the following examples.
+
 You can run the software installed in the container by using the `run` command. For example, you can check that Salmon is running correctly in the container generated above by using the following command:
 
 ```bash
