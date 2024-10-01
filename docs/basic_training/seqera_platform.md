@@ -16,7 +16,7 @@ Seqera core features include:
 
 !!! tip
 
-    [Sign up](https://cloud.tower.nf/) to try Seqera for free or request a [demo](https://seqera.io/demo/) for deployments in your own on-premise or cloud environment.
+    [Sign up](https://cloud.seqera.io/) to try Seqera for free or request a [demo](https://seqera.io/demo/) for deployments in your own on-premise or cloud environment.
 
 You can use Seqera Platform via either the **CLI**, through the **online GUI** or through the **API**.
 
@@ -56,7 +56,7 @@ Where `eyxxxxxxxxxxxxxxxQ1ZTE=` is the token you have just created.
 
     Check your `nextflow -version`. Bearer tokens require Nextflow version 20.10.0 or later and can be set with the second command shown above. You can change the version if necessary.
 
-To submit a pipeline to a [Workspace](https://help.tower.nf/getting-started/workspace/) using the Nextflow command-line tool, add the workspace ID to your environment. For example:
+To submit a pipeline to a [Workspace](https://docs.seqera.io/platform/24.1/getting-started/workspace-setup) using the Nextflow command-line tool, add the workspace ID to your environment. For example:
 
 ```bash
 export TOWER_WORKSPACE_ID=000000000000000
@@ -74,7 +74,7 @@ nextflow run hello.nf -with-tower
 
 You will see and be able to monitor your **Nextflow jobs** in Seqera Platform.
 
-To configure and execute Nextflow jobs in **Cloud environments**, visit the [Compute environments section](https://help.tower.nf/compute-envs/overview/).
+To configure and execute Nextflow jobs in **Cloud environments**, visit the [Compute environments section](https://docs.seqera.io/platform/24.1/compute-envs/overview).
 
 !!! exercise
 
@@ -82,7 +82,7 @@ To configure and execute Nextflow jobs in **Cloud environments**, visit the [Com
 
     ??? tip
 
-        Go to <https://tower.nf/>, login, then click the run tab, and select the run that you just submitted. If you can’t find it, double check your token was entered correctly.
+        Go to <https://cloud.seqera.io/>, login, then click the run tab, and select the run that you just submitted. If you can’t find it, double check your token was entered correctly.
 
 !!! cboard-list-2 "Summary"
 
@@ -95,9 +95,9 @@ To configure and execute Nextflow jobs in **Cloud environments**, visit the [Com
 
 To run using the GUI, there are three main steps:
 
-1. Create an account and login into Seqera Platform, available free of charge, at [tower.nf](https://tower.nf).
-2. Create and configure a new [compute environment](https://help.tower.nf/compute-envs/overview/).
-3. Start [launching pipelines](https://help.tower.nf/launch/launchpad/).
+1. Create an account and login into Seqera Platform, available free of charge, at [cloud.seqera.io](https://cloud.seqera.io).
+2. Create and configure a new [compute environment](https://docs.seqera.io/platform/24.1/compute-envs/overview).
+3. Start [launching pipelines](https://docs.seqera.io/platform/24.1/launch/launchpad#launchpad).
 
 ### Configuring your compute environment
 
@@ -111,23 +111,20 @@ Each compute environment must be pre-configured to enable Seqera Platform to sub
 
 !!! tip "The following guides describe how to configure each of these compute environments."
 
-    * [AWS Batch](https://help.tower.nf/compute-envs/aws-batch/)
-    * [Azure Batch](https://help.tower.nf/compute-envs/azure-batch/)
-    * [Google Batch](https://help.tower.nf/compute-envs/google-cloud-batch/)
-    * [Google Life Sciences](https://help.tower.nf/compute-envs/google-cloud-lifesciences/)
-    * [IBM LSF](https://help.tower.nf/compute-envs/lsf/)
-    * [Slurm](https://help.tower.nf/compute-envs/slurm/)
-    * [Grid Engine](https://help.tower.nf/compute-envs/altair-grid-engine/)
-    * [Altair PBS Pro](https://help.tower.nf/compute-envs/altair-pbs-pro/)
-    * [Amazon Kubernetes (EKS)](https://help.tower.nf/compute-envs/eks/)
-    * [Google Kubernetes (GKE)](https://help.tower.nf/compute-envs/gke/)
-    * [Hosted Kubernetes](https://help.tower.nf/compute-envs/k8s/)
+    * [AWS Batch](https://docs.seqera.io/platform/24.1/compute-envs/aws-batch)
+    * [Azure Batch](https://docs.seqera.io/platform/24.1/compute-envs/azure-batch)
+    * [Google Batch](https://docs.seqera.io/platform/24.1/compute-envs/google-cloud-batch)
+    * [Google Life Sciences](https://docs.seqera.io/platform/24.1/compute-envs/google-cloud-lifesciences)
+    * [HPC (LSF, Slurm, Grid Engine, Altair PBS Pro)](https://docs.seqera.io/platform/24.1/compute-envs/hpc)
+    * [Amazon Kubernetes (EKS)](https://docs.seqera.io/platform/24.1/compute-envs/eks)
+    * [Google Kubernetes (GKE)](https://docs.seqera.io/platform/24.1/compute-envs/gke)
+    * [Hosted Kubernetes](https://docs.seqera.io/platform/24.1/compute-envs/k8s)
 
 ### Selecting a default compute environment
 
 If you have more than one **Compute Environment**, you can select which one will be used by default when launching a pipeline.
 
-1. Navigate to your [compute environments](https://help.tower.nf/compute-envs/overview/).
+1. Navigate to your [compute environments](https://docs.seqera.io/platform/24.1/compute-envs/overview).
 2. Choose your default environment by selecting the **Make primary** button.
 
 **Congratulations!**
@@ -148,7 +145,7 @@ Launchpad automatically detects the presence of a `nextflow_schema.json` in the 
 
 !!! info
 
-    The parameter forms view will appear if the pipeline has a Nextflow schema file for the parameters. Please refer to the [Nextflow Schema guide](https://help.tower.nf/workflow-schema/overview) to learn more about the schema file use-cases and how to create them.
+    The parameter forms view will appear if the pipeline has a Nextflow schema file for the parameters. Please refer to the [Nextflow Schema guide](https://docs.seqera.io/platform/24.1/pipeline-schema/overview) to learn more about the schema file use-cases and how to create them.
 
 This makes it trivial for users without any expertise in Nextflow to enter their workflow parameters and launch.
 
@@ -156,12 +153,12 @@ This makes it trivial for users without any expertise in Nextflow to enter their
 
 ### Adding a new pipeline
 
-Adding a pipeline to the pre-saved workspace launchpad is detailed in full on the [Seqera webpage docs](https://help.tower.nf/launch/launch/).
+Adding a pipeline to the pre-saved workspace launchpad is detailed in full on the [Seqera webpage docs](https://docs.seqera.io/platform/24.1/launch/launchpad#add-new-pipeline).
 
 In brief, these are the steps you need to follow to set up a pipeline.
 
 1. Select the Launchpad button in the navigation bar. This will open the **Launch Form**.
-2. Select a [compute environment](https://help.tower.nf/compute-envs/overview).
+2. Select a [compute environment](https://docs.seqera.io/platform/24.1/compute-envs/overview).
 3. Enter the repository of the workflow you want to launch. e.g. <https://github.com/nf-core/rnaseq.git>
 4. Select a workflow **Revision number**. The Git default branch (main/master) or `manifest.defaultBranch` in the Nextflow configuration will be used by default.
 5. Set the **Work directory** location of the Nextflow work directory. The location associated with the compute environment will be selected by default.
@@ -177,7 +174,7 @@ In brief, these are the steps you need to follow to set up a pipeline.
 
 !!! info
 
-    Nextflow workflows are simply Git repositories and can be changed to any public or private Git-hosting platform. See [Git Integration](https://help.tower.nf/git/overview/) in the Seqera Platform docs and [Pipeline Sharing](https://www.nextflow.io/docs/latest/sharing.html) in the Nextflow docs for more details.
+    Nextflow workflows are simply Git repositories and can be changed to any public or private Git-hosting platform. See [Git Integration](https://docs.seqera.io/platform/24.1/git/overview) in the Seqera Platform docs and [Pipeline Sharing](https://www.nextflow.io/docs/latest/sharing.html) in the Nextflow docs for more details.
 
 !!! note
 
@@ -191,7 +188,7 @@ In brief, these are the steps you need to follow to set up a pipeline.
 
     To create your own customized Nextflow Schema for your workflow, see the examples from the `nf-core` workflows that have adopted this approach. For example, [eager](https://github.com/nf-core/eager/blob/2.3.3/nextflow_schema.json) and [rnaseq](https://github.com/nf-core/rnaseq/blob/3.0/nextflow_schema.json).
 
-For advanced settings options check out this [page](https://help.tower.nf/launch/advanced/).
+For advanced settings options check out this [page](https://docs.seqera.io/platform/24.1/launch/launchpad#advanced-settings).
 
 There is also community support available if you get into trouble, join the Nextflow Slack by following this [link](https://www.nextflow.io/slack-invite.html).
 
@@ -205,19 +202,19 @@ There is also community support available if you get into trouble, join the Next
 
 ## API
 
-To learn more about using the Seqera Platform API, visit the [API section](https://help.tower.nf/api/overview/) in this documentation.
+To learn more about using the Seqera Platform API, visit the [API section](https://docs.seqera.io/platform/24.1/api/overview) in the documentation.
 
 ## Workspaces and Organizations
 
 Seqera Platform simplifies the development and execution of pipeline by providing a centralized interface for users and organizations.
 
-Each user has a unique **workspace** where they can interact and manage all resources such as workflows, compute environments and credentials. Details of this can be found [here](https://help.tower.nf/getting-started/workspace/).
+Each user has a unique **workspace** where they can interact and manage all resources such as workflows, compute environments and credentials. Details of this can be found [here](https://docs.seqera.io/platform/24.1/getting-started/workspace-setup).
 
 Organisations can have multiple workspaces with customized access for specific organisation **members** and **collaborators**.
 
 ### Organization resources
 
-You can create your own organization and participant workspace by following the docs at [Seqera](https://help.tower.nf/orgs-and-teams/workspace-management/).
+You can create your own organization and participant workspace by following the docs at [Seqera](https://docs.seqera.io/platform/24.1/orgs-and-teams/workspace-management).
 
 Seqera Platform allows the creation of multiple organizations, each of which can contain multiple workspaces with shared users and resources. This allows any organization to customize and organize the usage of resources while maintaining an access control layer for users associated with a workspace.
 
@@ -227,7 +224,7 @@ Any user can be added or removed from a particular organization or a workspace a
 
 The Teams feature provides a way for organizations to group various users and participants together into teams. For example, `workflow-developers` or `analysts`, and apply access control to all the users within this team collectively.
 
-For further information, please refer to the [User Management](https://help.tower.nf/orgs-and-teams/organizations/) section.
+For further information, please refer to the [User Management](https://docs.seqera.io/platform/24.1/orgs-and-teams/organizations) section.
 
 ### Setting up a new organization
 
