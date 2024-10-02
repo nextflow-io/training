@@ -613,8 +613,8 @@ Contrary to other registries that will pull the latest image when no tag (versio
 You can also install `galaxy-util-tools` and search for _mulled_ containers in your CLI. You'll find instructions below, using conda to install the tool.
 
 ```bash
-conda activate a-conda-env-you-already-have
-conda install galaxy-tool-util
+conda create -n galaxy-tool-util -y galaxy-tool-util # Create a new environment with 'galaxy-tool-util' installed
+conda activate galaxy-tool-util
 mulled-search --destination quay singularity --channel bioconda --search bowtie samtools | grep mulled
 ```
 
