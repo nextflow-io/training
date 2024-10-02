@@ -85,7 +85,7 @@ To exit from the container, stop the BASH session with the `exit` command.
 
 ### Your first Dockerfile
 
-Docker images are created by using a so-called `Dockerfile`, a simple text file containing a list of commands to assemble and configure the image with the software packages required. For example, a Dockerfile to create a container with `cowsay` installed could be as simple as this:
+Docker images are created by using a so-called `Dockerfile`, a simple text file containing a list of commands to assemble and configure the image with the software packages required. For example, a Dockerfile to create a container with `curl` installed could be as simple as this:
 
 ```dockerfile linenums="1" title="Dockerfile"
 FROM debian:bullseye-slim
@@ -93,7 +93,7 @@ FROM debian:bullseye-slim
 LABEL image.author.name "Your Name Here"
 LABEL image.author.email "your@email.here"
 
-RUN apt-get update && apt-get install -y curl cowsay
+RUN apt-get update && apt-get install -y curl
 
 ENV PATH=$PATH:/usr/games/
 ```
@@ -101,10 +101,10 @@ ENV PATH=$PATH:/usr/games/
 Once your Dockerfile is ready, you can build the image by using the `build` command. For example:
 
 ```bash
-docker build -t <my-image> .
+docker build -t my-image .
 ```
 
-Where `<my-image>` is the user-specified name for the container image you plan to build.
+Where `my-image` is the user-specified name for the container image you plan to build.
 
 !!! tip
 
