@@ -42,7 +42,7 @@ ch.view() // (1)!
 
 !!! question "Exercise"
 
-    The script `snippet1.nf` contains the code from above. Execute it with Nextflow and view the output.
+    The script `snippet.nf` contains the code from above. Execute it with Nextflow and view the output.
 
     ??? solution
 
