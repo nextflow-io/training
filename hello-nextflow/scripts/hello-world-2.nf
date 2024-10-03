@@ -1,3 +1,5 @@
+#!/usr/bin/env nextflow
+
 /*
  * Use echo to print 'Hello World!' to standard out
  */

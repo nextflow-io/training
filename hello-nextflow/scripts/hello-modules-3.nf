@@ -1,3 +1,5 @@
+#!/usr/bin/env nextflow
+
 // Include modules
 include { SAMTOOLS_INDEX } from './modules/local/samtools/index/main.nf'
 include { GATK_HAPLOTYPECALLER } from './modules/local/gatk/haplotypecaller/main.nf'

@@ -1,3 +1,5 @@
+#!/usr/bin/env nextflow
+
 /*
  * Call variants with GATK HapolotypeCaller in GVCF mode
  */
