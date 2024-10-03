@@ -231,22 +231,20 @@ process GATK_HAPLOTYPECALLER {
 
 ```groovy title="hello-gatk.nf"
 // Accessory files
-params.reference        = "${projectDir}/data/ref/ref.fasta"
-params.reference_index  = "${projectDir}/data/ref/ref.fasta.fai"
-params.reference_dict   = "${projectDir}/data/ref/ref.dict"
-params.intervals        = "${projectDir}/data/ref/intervals.bed"
+params.reference       = "${workflow.projectDir}/data/ref/ref.fasta"
+params.reference_index = "${workflow.projectDir}/data/ref/ref.fasta.fai"
+params.reference_dict  = "${workflow.projectDir}/data/ref/ref.dict"
+params.intervals       = "${workflow.projectDir}/data/ref/intervals.bed"
 ```
 
-#### 2.3. Make a value channel for each of the accessory files
-
-Add this to the workflow block (after the `reads_ch` creation):
+#### 2.3. Create a file object from each reference parameter
 
 ```groovy title="hello-gatk.nf"
 // Create channels for the accessory files (reference and intervals)
-ref_file        = file(params.reference)
-ref_index_file  = file(params.reference_index)
-ref_dict_file   = file(params.reference_dict)
-intervals_file  = file(params.intervals)
+ref_file       = file(params.reference)
+ref_index_file = file(params.reference_index)
+ref_dict_file  = file(params.reference_dict)
+intervals_file = file(params.intervals)
 ```
 
 This will load each of the accessory files in its own single-element value channel.
@@ -265,7 +263,7 @@ GATK_HAPLOTYPECALLER(
 )
 ```
 
-#### 2.4. Run the workflow to verify that the variant calling step works
+#### 2.5. Run the workflow to verify that the variant calling step works
 
 ```bash
 nextflow run hello-gatk.nf -resume
@@ -353,7 +351,7 @@ And buried in the GATK command error output, there will be a line like this:
 A USER ERROR has occurred: Traversal by intervals was requested but some input files are not indexed.
 ```
 
-This is because the script as written so far is not safe for running on multiple samples, because the order of items in the output channel is not guaranteed to match the order of items in the original input channel. This causes the wrong files to be paired up in the second step. So we need to make sure the BAM files and their index files travel together through the channels.
+The script as written so far does not work because there is no association between the BAM files and their index files. This lack of association causes the files to not be used together in the same process, leading to a missing index file in the second step. We need to ensure that the BAM files and their index files travel together through the channels.
 
 #### 3.3. Change the output of the SAMTOOLS_INDEX process into a tuple that keeps the input file and its index together
 

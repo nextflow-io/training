@@ -6,13 +6,10 @@
 params.reads_bam = "${projectDir}/data/sample_bams.txt"
 
 // Accessory files
-params.reference        = "${projectDir}/data/ref/ref.fasta"
-params.reference_index  = "${projectDir}/data/ref/ref.fasta.fai"
-params.reference_dict   = "${projectDir}/data/ref/ref.dict"
-params.intervals        = "${projectDir}/data/ref/intervals.bed"
-
-// Base name for final output file
-params.cohort_name = "family_trio"
+params.reference       = "${workflow.projectDir}/data/ref/ref.fasta"
+params.reference_index = "${workflow.projectDir}/data/ref/ref.fasta.fai"
+params.reference_dict  = "${workflow.projectDir}/data/ref/ref.dict"
+params.intervals       = "${workflow.projectDir}/data/ref/intervals.bed"
 
 /*
  * Generate BAM index file
