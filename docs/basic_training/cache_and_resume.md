@@ -358,7 +358,7 @@ So D is matched with 'a' here, which was not the intention. That order will like
          [84/e88fd9] BAR (4)    [100%] 4 of 4, cached: 4 ✔
          [6f/d3f672] FOOBAR (1) [100%] 4 of 4, cached: 2 ✔
          D - c
-         
+
          A - d
 
          C - a
