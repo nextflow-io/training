@@ -343,6 +343,29 @@ A - b
 
 So D is matched with 'a' here, which was not the intention. That order will likely be different every time the workflow is run, meaning that the processing will not be deterministic, and caching will also not work, since the inputs to FOOBAR will vary constantly.
 
+!!! question "Exercise"
+
+    Re-run the above code a couple of times using `-resume`, and determine if the FOOBAR process reruns, or uses cached results.
+
+    ??? solution
+
+        You should see that while FOO and BAR reliably re-use their cache, FOOBAR will re-run at least a subset of its tasks due to differences in the combinations of inputs it recieves.
+
+        The output will look like this:
+
+        ```console title="Output"
+         [58/f117ed] FOO (4)    [100%] 4 of 4, cached: 4 ✔
+         [84/e88fd9] BAR (4)    [100%] 4 of 4, cached: 4 ✔
+         [6f/d3f672] FOOBAR (1) [100%] 4 of 4, cached: 2 ✔
+         D - c
+
+         A - d
+
+         C - a
+
+         B - b
+        ```
+
 A common solution for this is to use what is commonly referred to as a _meta map_. A groovy object with sample information is passed out together with the file results within an output channel as a tuple. This can then be used to pair samples from separate channels together for downstream use.
 
 To illustrate, here is a change to the above workflow, with meta maps added:
