@@ -2,10 +2,6 @@
  * Pipeline parameters
  */
 
-// Execution environment setup
-params.projectDir = "/workspace/gitpod/hello-nextflow" 
-$projectDir = params.projectDir
-
 // Primary input
 params.reads_bam = "${projectDir}/data/bam/reads_mother.bam"
 
@@ -14,7 +10,9 @@ params.reads_bam = "${projectDir}/data/bam/reads_mother.bam"
  */
 process SAMTOOLS_INDEX {
 
-    container 'quay.io/biocontainers/samtools:1.19.2--h50ea8bc_1' 
+    container 'community.wave.seqera.io/library/samtools:1.20--b5dfbd93de237464'
+
+    publishDir 'results', mode: 'copy'
 
     input:
         path input_bam
@@ -24,15 +22,16 @@ process SAMTOOLS_INDEX {
 
     """
     samtools index '$input_bam'
-
     """
 }
 
+
 workflow {
 
-    // Create input channel
-    reads_ch = Channel.of(params.reads_bam)
+    // Create input channel (single file via CLI parameter)
+    reads_ch = Channel.fromPath(params.reads_bam)
 
     // Create index file for input BAM file
     SAMTOOLS_INDEX(reads_ch)
+    
 }

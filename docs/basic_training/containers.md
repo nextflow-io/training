@@ -85,7 +85,7 @@ To exit from the container, stop the BASH session with the `exit` command.
 
 ### Your first Dockerfile
 
-Docker images are created by using a so-called `Dockerfile`, a simple text file containing a list of commands to assemble and configure the image with the software packages required. For example, a Dockerfile to create a container with `cowsay` installed could be as simple as this:
+Docker images are created by using a so-called `Dockerfile`, a simple text file containing a list of commands to assemble and configure the image with the software packages required. For example, a Dockerfile to create a container with `curl` installed could be as simple as this:
 
 ```dockerfile linenums="1" title="Dockerfile"
 FROM debian:bullseye-slim
@@ -93,7 +93,7 @@ FROM debian:bullseye-slim
 LABEL image.author.name "Your Name Here"
 LABEL image.author.email "your@email.here"
 
-RUN apt-get update && apt-get install -y curl cowsay
+RUN apt-get update && apt-get install -y curl
 
 ENV PATH=$PATH:/usr/games/
 ```
@@ -101,10 +101,10 @@ ENV PATH=$PATH:/usr/games/
 Once your Dockerfile is ready, you can build the image by using the `build` command. For example:
 
 ```bash
-docker build -t <my-image> .
+docker build -t my-image .
 ```
 
-Where `<my-image>` is the user-specified name for the container image you plan to build.
+Where `my-image` is the user-specified name for the container image you plan to build.
 
 !!! tip
 
@@ -192,6 +192,10 @@ docker build -t my-image .
         You will notice that it creates a new Docker image with the same name **but** with a different image ID.
 
 ### Run Salmon in the container
+
+!!! tip
+
+    If you didn't complete the steps above, use the 'rnaseq-nf' image used elsewhere in these materials by specifying `nextflow/rnaseq-nf` in place of `my-image` in the following examples.
 
 You can run the software installed in the container by using the `run` command. For example, you can check that Salmon is running correctly in the container generated above by using the following command:
 
@@ -609,8 +613,8 @@ Contrary to other registries that will pull the latest image when no tag (versio
 You can also install `galaxy-util-tools` and search for _mulled_ containers in your CLI. You'll find instructions below, using conda to install the tool.
 
 ```bash
-conda activate a-conda-env-you-already-have
-conda install galaxy-tool-util
+conda create -n galaxy-tool-util -y galaxy-tool-util # Create a new environment with 'galaxy-tool-util' installed
+conda activate galaxy-tool-util
 mulled-search --destination quay singularity --channel bioconda --search bowtie samtools | grep mulled
 ```
 
@@ -670,7 +674,7 @@ Nextflow automatically sets up an environment for the given package names listed
 
 !!! question "Exercise"
 
-    The tools `fastqc` and `salmon` are both available in BioContainers. Add the appropriate `container` directives to the `FASTQC` and `QUANTIFICATION` processes in `script5.nf` to use BioContainers instead of the container image you have been using in this training.
+    The tools `fastqc` and `salmon` are both available in Biocontainers (`biocontainers/fastqc:v0.11.5` and `quay.io/biocontainers/salmon:1.7.0--h84f40af_0`, respectively). Add the appropriate `container` directives to the `FASTQC` and `QUANTIFICATION` processes in `script5.nf` to use Seqera Containers instead of the container image you have been using in this training.
 
     !!! tip "Hint"
 

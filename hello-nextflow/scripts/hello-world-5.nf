@@ -1,23 +1,26 @@
 /*
- * Pipeline parameters
- */
-params.output_file = 'output.txt'
-
-/*
  * Use echo to print 'Hello World!' to standard out
  */
 process sayHello {
 
+    publishDir 'results', mode: 'copy'
+
+    input:
+        val greeting  
+
     output: 
-        path params.output_file
+        path "output.txt"
     
     """
-    echo 'Hello World!' > $params.output_file
+    echo '$greeting' > output.txt
     """
 }
 
 workflow {
 
+    // create a channel for inputs
+    greeting_ch = Channel.of('Hello world!')
+
     // emit a greeting
-    sayHello()
+    sayHello(greeting_ch)
 }

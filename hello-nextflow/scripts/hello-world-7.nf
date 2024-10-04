@@ -1,20 +1,38 @@
 /*
  * Pipeline parameters
  */
-params.output_file = 'output.txt'
+params.greeting = "Bonjour le monde!"
 
 /*
  * Use echo to print 'Hello World!' to standard out
  */
 process sayHello {
+
+    publishDir 'results', mode: 'copy'
+
     input:
         val greeting  
 
     output: 
-        path params.output_file
+        path "output.txt"
     
     """
-    echo '$greeting' > $params.output_file
+    echo '$greeting' > "output.txt"
+    """
+}
+
+/*
+ * Use a text replace utility to convert the greeting to uppercase
+ */
+process convertToUpper {
+    input:
+        path input_file
+
+    output:
+        path "UPPER-${input_file}"
+
+    """
+    cat '$input_file' | tr '[a-z]' '[A-Z]' > UPPER-${input_file}
     """
 }
 
@@ -25,4 +43,7 @@ workflow {
 
     // emit a greeting
     sayHello(greeting_ch)
+
+    // convert the greeting to uppercase
+    convertToUpper(sayHello.out)
 }

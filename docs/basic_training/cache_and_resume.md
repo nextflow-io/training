@@ -107,7 +107,7 @@ It’s good practice to organize each **experiment** in its own folder. The main
 The `nextflow log` command lists the executions run in the current folder:
 
 ```console
-$ nextflow log
+nextflow log
 ```
 
 ```console title="Output"
@@ -146,7 +146,7 @@ nextflow log tiny_fermat
 The `-f` (fields) option can be used to specify which metadata should be printed by the `log` command:
 
 ```console
-$ nextflow log tiny_fermat -f 'process,exit,hash,duration'
+nextflow log tiny_fermat -f 'process,exit,hash,duration'
 ```
 
 ```console title="Output"
@@ -167,7 +167,7 @@ nextflow log -l
 The `-F` option allows the specification of filtering criteria to print only a subset of tasks:
 
 ```console
-$ nextflow log tiny_fermat -F 'process =~ /fastqc/'
+nextflow log tiny_fermat -F 'process =~ /fastqc/'
 ```
 
 ```console title="Output"
@@ -283,58 +283,159 @@ process FOO {
     val x
 
     output:
-    tuple val(task.index), val(x)
+    stdout
 
     script:
     """
     sleep \$((RANDOM % 3))
+    echo -n "$x"
+    """
+}
+
+process BAR {
+    input:
+    val x
+
+    output:
+    stdout
+
+    script:
+    """
+    echo -n "$x" | tr '[:upper:]' '[:lower:]'
+    """
+}
+
+process FOOBAR {
+    input:
+    val foo
+    val bar
+
+    output:
+    stdout
+
+    script:
+    """
+    echo $foo - $bar
     """
 }
 
 workflow {
-    channel.of('A', 'B', 'C', 'D') | FOO | view
+    ch_letters = channel.of('A', 'B', 'C', 'D')
+    FOO(ch_letters)
+    BAR(ch_letters)
+    FOOBAR(FOO.out, BAR.out).view()
+
 }
 ```
 
-Just like you saw at the beginning of this tutorial with HELLO WORLD or WORLD HELLO, the output of the snippet above can be:
+Processes FOO and BAR receive the same inputs, and return something on standard output. Somebody wrote process FOOBAR to receive those processed outputs and generate combined output, from matched inputs. But even though we set the order of the input values, the FOO and BAR processes output whenever their tasks are complete, not respecting input order. So FOOBAR receiving the outputs of those channels, will not receive them in the same order, as you can see from the output:
 
 ```console title="Output"
-[0, A]
-[3, C]
-[4, D]
-[2, B]
-[1, A]
+...
+B - c
+
+D - a
+
+C - d
+
+A - b
 ```
 
-..and that order will likely be different every time the workflow is run.
+So D is matched with 'a' here, which was not the intention. That order will likely be different every time the workflow is run, meaning that the processing will not be deterministic, and caching will also not work, since the inputs to FOOBAR will vary constantly.
 
-Imagine that you now have two processes like this, whose output channels are acting as input channels to a third process. Both channels will be independently random, so the third process must not expect them to retain a paired sequence. If it does assume that the first element in the first process output channel is related to the first element in the second process output channel, there will be a mismatch.
+!!! question "Exercise"
 
-A common solution for this is to use what is commonly referred to as a _meta map_. A groovy object with sample information is passed out together with the file results within an output channel as a tuple. This can then be used to pair samples from separate channels together for downstream use. For example, instead of putting just `/some/path/myoutput.bam` into a channel, you could use `['SRR123', '/some/path/myoutput.bam']` to make sure the processes are not incurring into a mismatch. Check the example below:
+    Re-run the above code a couple of times using `-resume`, and determine if the FOOBAR process reruns, or uses cached results.
+
+    ??? solution
+
+        You should see that while FOO and BAR reliably re-use their cache, FOOBAR will re-run at least a subset of its tasks due to differences in the combinations of inputs it recieves.
+
+        The output will look like this:
+
+        ```console title="Output"
+         [58/f117ed] FOO (4)    [100%] 4 of 4, cached: 4 ✔
+         [84/e88fd9] BAR (4)    [100%] 4 of 4, cached: 4 ✔
+         [6f/d3f672] FOOBAR (1) [100%] 4 of 4, cached: 2 ✔
+         D - c
+
+         A - d
+
+         C - a
+
+         B - b
+        ```
+
+A common solution for this is to use what is commonly referred to as a _meta map_. A groovy object with sample information is passed out together with the file results within an output channel as a tuple. This can then be used to pair samples from separate channels together for downstream use.
+
+To illustrate, here is a change to the above workflow, with meta maps added:
 
 ```groovy linenums="1" title="snippet.nf"
-// For example purposes only.
-// These would normally be outputs from upstream processes.
-Channel
-    .of(
-        [[id: 'sample_1'], '/path/to/sample_1.bam'],
-        [[id: 'sample_2'], '/path/to/sample_2.bam']
-    )
-    .set { bam }
+process FOO {
+    input:
+    tuple val(meta), val(x)
 
-// NB: sample_2 is now the first element, instead of sample_1
-Channel
-    .of(
-        [[id: 'sample_2'], '/path/to/sample_2.bai'],
-        [[id: 'sample_1'], '/path/to/sample_1.bai']
-    )
-    .set { bai }
+    output:
+    tuple val(meta), stdout
 
-// Instead of feeding the downstream process with these two channels separately, you can
-// join them and provide a single channel where the sample meta map is implicitly matched:
-bam
-    .join(bai)
-    | PROCESS_C
+    script:
+    """
+    sleep \$((RANDOM % 3))
+    echo -n "$x"
+    """
+}
+
+process BAR {
+    input:
+    tuple val(meta), val(x)
+
+    output:
+    tuple val(meta), stdout
+
+    script:
+    """
+    echo -n "$x" | tr '[:upper:]' '[:lower:]'
+    """
+}
+
+process FOOBAR {
+    input:
+    tuple val(meta), val(foo), val(bar)
+
+    output:
+    stdout
+
+    script:
+    """
+    echo $foo - $bar
+    """
+}
+
+workflow {
+    ch_letters = channel.of(
+        [[id: 'A'], 'A'],
+        [[id: 'B'], 'B'],
+        [[id: 'C'], 'C'],
+        [[id: 'D'], 'D']
+    )
+    FOO(ch_letters)
+    BAR(ch_letters)
+    FOOBAR(FOO.out.join(BAR.out)).view()
+
+}
+```
+
+Now, we define `ch_letters` with a meta map (e.g. `[id: 'A']`). Both FOO and BAR pass the `meta` through and attach it to their outputs. Then, in our call to FOOBAR we can use a `join` operation to ensure that only matched values are passed. Running this code provides us with matched processes, as we'd expect:
+
+```console title="Output"
+...
+D - d
+
+B - b
+
+A - a
+
+C - c
 ```
 
 If meta maps are not possible, an alternative is to use the [`fair`](https://nextflow.io/docs/edge/process.html#fair) process directive. When this directive is specified, Nextflow will guarantee that the order of outputs will match the order of inputs (not the order in which the tasks run, only the order of the output channel).

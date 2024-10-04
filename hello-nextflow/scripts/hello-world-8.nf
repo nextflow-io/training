@@ -1,20 +1,23 @@
 /*
  * Pipeline parameters
  */
-params.output_file = 'output.txt'
+params.greeting = "Bonjour le monde!"
 
 /*
  * Use echo to print 'Hello World!' to standard out
  */
 process sayHello {
+
+    publishDir 'results', mode: 'copy'
+
     input:
         val greeting  
 
     output: 
-        path params.output_file
+        path "${greeting}-output.txt"
     
     """
-    echo '$greeting' > $params.output_file
+    echo '$greeting' > '$greeting-output.txt'
     """
 }
 
@@ -29,14 +32,14 @@ process convertToUpper {
         path "UPPER-${input_file}"
 
     """
-    cat $input_file | tr '[a-z]' '[A-Z]' > 'UPPER-${input_file}'
+    cat '$input_file' | tr '[a-z]' '[A-Z]' > UPPER-${input_file}
     """
 }
 
 workflow {
 
     // create a channel for inputs
-    greeting_ch = Channel.of(params.greeting)
+    greeting_ch = Channel.of('Hello', 'Bonjour', 'Holà')
 
     // emit a greeting
     sayHello(greeting_ch)

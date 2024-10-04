@@ -36,10 +36,10 @@ These configuration values would be inherited by every run on that system withou
 
 ## Overriding for a run - `$PWD/nextflow.config`
 
-Move into the chapter example directory:
+Create a chapter example directory:
 
 ```
-cd configuration
+mkdir configuration && cd configuration
 ```
 
 ### Overriding Process Directives
@@ -72,7 +72,7 @@ Glob pattern matching can also be used:
 
 ```groovy
 process {
-    withLabel: '.*:INDEX' {
+    withName: '.*:INDEX' {
         cpus = 2
     }
 }
