@@ -15,13 +15,6 @@ GATK (equivalent to `scripts/hello-gatk-6.nf`).
 
 Note: This is a basic variant calling pipeline consisting of three processes. You can find a complete description of the pipeline in the previous section of this training.
 
-This workflow relies on reference files that are provided in compressed form in the Gitpod environment. If you completed the previous parts of the training course, then you already have everything you need in the working directory. However, if you're picking this up here, you need to run the following command to expand the reference files:
-
-```bash
-cd /workspace/gitpod/hello-nextflow
-tar -zxvf data/ref.tar.gz -C data/
-```
-
 ### 0.1 Run the workflow to verify that it produces the expected outputs
 
 ```bash
