@@ -45,7 +45,7 @@ params.reads_bam = "${projectDir}/data/samplesheet.csv"
 params.genome_reference = "${projectDir}/data/ref/ref.fasta"
 params.genome_reference_index = "${projectDir}/data/ref/ref.fasta.fai"
 params.genome_reference_dict = "${projectDir}/data/ref/ref.dict"
-params.calling_intervals = "${projectDir}/data/intervals.list"
+params.calling_intervals = "${projectDir}/data/ref/intervals.bed"
 
 // Base name for final output file
 params.cohort_name = "family_trio"
