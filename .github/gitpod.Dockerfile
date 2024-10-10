@@ -15,7 +15,6 @@ RUN apt-get update --quiet && \
         curl \
         tree \
         graphviz \
-        linkify-it-py \
         software-properties-common
 
 
@@ -57,6 +56,7 @@ RUN conda config --add channels defaults && \
         black \
         prettier \
         pre-commit \
+        linkify-it-py \
         pytest-workflow && \
     conda clean --all --force-pkgs-dirs --yes
 
