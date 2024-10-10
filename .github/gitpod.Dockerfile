@@ -15,7 +15,7 @@ RUN apt-get update --quiet && \
         curl \
         tree \
         graphviz \
-        linkify-it-py \     
+        linkify-it-py \
         software-properties-common
 
 
