@@ -1,20 +1,22 @@
-# Part 2: Hello GATK
+# Part 3: Hello Channels
 
-The [GATK](https://gatk.broadinstitute.org/) (Genome Analysis Toolkit) is a widely used software package developed by the Broad Institute to analyze high-throughput sequencing data. We're going to use GATK and a related tool, [Samtools](https://www.htslib.org/), in a very basic pipeline that identifies genomic variants through a method called **variant calling**.
+_INSERT EXPLANATION HERE_
 
-![GATK pipeline](img/gatk-pipeline.png)
+![Joint analysis](img/joint-calling.png)
 
 !!! note
 
-    Don't worry if you're not familiar with GATK or genomics in general. We'll summarize the necessary concepts as we go, and the workflow implementation principles we demonstrate here apply broadly to any command line tool that takes in some input files and produce some output files.
+    Don't worry if you're not familiar with GATK or genomics in general. We'll summarize the necessary concepts as we go, and the workflow implementation principles we demonstrate here apply broadly to any use case that follows a similar pattern.
 
-A full variant calling pipeline typically involves a lot of steps. For simplicity, we are only going to look at the core variant calling steps.
+_ANY ADDITIONAL EXPLANATION_
 
 ### Method overview
 
 1. Generate an index file for each BAM input file using Samtools
 2. Run the GATK HaplotypeCaller on each BAM input file to generate per-sample variant calls in GVCF (Genomic Variant Call Format)
+3. Collect all the GVCFs and run joint genotyping on them to produce a cohort-level VCF.
 
+_UPDATE THE FLOWCHART_
 <figure class="excalidraw">
 --8<-- "docs/hello_nextflow/img/haplotype-caller.excalidraw.svg"
 </figure>
@@ -29,7 +31,7 @@ A full variant calling pipeline typically involves a lot of steps. For simplicit
 
 ## 0. Warmup: Run Samtools and GATK directly
 
-Just like in the Hello World example, we want to try out the commands manually before we attempt to wrap them in a workflow. The difference here is that we're going to use Docker containers to obtain and run the tools.
+Just like previously, we want to try out the commands manually before we attempt to wrap them in a workflow.
 
 !!! note
 
@@ -37,6 +39,8 @@ Just like in the Hello World example, we want to try out the commands manually b
      `cd /workspace/gitpod/hello-nextflow`
 
 ### 0.1. Index a BAM input file with Samtools
+
+This first step is the same as in Part 2: Hello-GATK so you can skip it if you've already done that in this session. 
 
 #### 0.1.1. Pull the samtools container
 
@@ -76,7 +80,7 @@ Where `reads_mother.bam.bai` has been created as an index to `reads_mother.bam`.
 exit
 ```
 
-### 0.2. Call variants with GATK HaplotypeCaller
+### 0.2. Call variants with GATK HaplotypeCaller in GVCF mode
 
 #### 0.2.1. Pull the GATK container
 
@@ -90,7 +94,7 @@ docker pull community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867
 docker run -it -v ./data:/data community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867
 ```
 
-#### 0.2.3. Run the variant calling command
+#### 0.2.3. Run the variant calling command with the GVCF option
 
 ```bash
 gatk HaplotypeCaller \
@@ -112,6 +116,14 @@ cat reads_mother.g.vcf
 ```bash
 exit
 ```
+
+### Takeaway
+
+You know how to _DO THE THING_.
+
+### What's next?
+
+_DO THE NEXT THING_.
 
 ---
 
