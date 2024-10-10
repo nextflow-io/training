@@ -20,6 +20,8 @@ This is an empty directory where you will create an launch your pipeline.
     cd /workspace/gitpod/nf-develop
     ```
 
+<!---
+
 ## Configuring GitHub
 
 As a part of this workshop you will push changes to your GitHub.
@@ -42,7 +44,9 @@ Edit the permissions for your GitHub account by clicking on the three dots next 
 
 ![GitHub permissions](img/gitpod.permissions.png)
 
-Once complete, click `Update permissions` and return reopen your Gitpod training environment.
+Once complete, click `Update permissions` and return to your Gitpod training environment.
+
+-->
 
 ---
 
