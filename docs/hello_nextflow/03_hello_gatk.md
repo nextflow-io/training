@@ -1,19 +1,31 @@
 # Part 2: Hello GATK
 
-The [GATK](https://gatk.broadinstitute.org/) (Genome Analysis Toolkit) is a widely used software package developed by the Broad Institute to analyze high-throughput sequencing data. We're going to use GATK and a related tool, [Samtools](https://www.htslib.org/), in a very basic pipeline that identifies genomic variants through a method called **variant calling**.
+In Part 1, you learned how to use the basic building blocks of Nextflow to assemble a simple pipeline capable of processing some text and parallelizing execution if there were multiple inputs. Now, we show you how to use the same components and principles to build a pipeline that does something a bit more interesting, and hopefully a bit more relatable to your work.
 
-![GATK pipeline](img/gatk-pipeline.png)
+Specifically, we show you how to implement a simple variant calling pipeline with [GATK](https://gatk.broadinstitute.org/) (Genome Analysis Toolkit), a widely used software package for analyzing high-throughput sequencing data.
 
 !!! note
 
     Don't worry if you're not familiar with GATK or genomics in general. We'll summarize the necessary concepts as we go, and the workflow implementation principles we demonstrate here apply broadly to any command line tool that takes in some input files and produce some output files.
 
-A full variant calling pipeline typically involves a lot of steps. For simplicity, we are only going to look at the core variant calling steps.
-
 ### Method overview
 
-1. Generate an index file for each BAM input file using Samtools
-2. Run the GATK HaplotypeCaller on each BAM input file to generate per-sample variant calls in GVCF (Genomic Variant Call Format)
+Variant calling is a genomic analysis method that aims to identify variations in a genome sequence relative to a reference genome. Here we are going to use tools and methods designed for calling short variants, *i.e.* SNPs and indels.
+
+A full variant calling pipeline typically involves a lot of steps, including mapping to the reference and variant filtering and prioritization. For simplicity, we are going to focus on the core variant calling step, which takes as its main input a file of short-read sequencing data in BAM format (Binary-compressed version of SAM, for Sequence Alignment Map), as well as a reference genome and a list of genomic intervals to analyze.
+
+![GATK pipeline](img/gatk-pipeline.png)
+
+For this exercise, we provide you with three samples in BAM format (see Dataset below). However, GATK requires an index file for each BAM file, which we did not provide (on purpose), so the workflow will have to create one as a preliminary step.
+
+!!! note
+
+    Index files are a common feature of bioinformatics file formats; they contain information about the structure of the main file that allows tools like GATK to access a subset of the data without having to read through the whole file. This is important because of how big these files can get.
+
+So to recap, we're going to develop a workflow that does the following:
+
+1. Generate an index file for each BAM input file using [Samtools](https://www.htslib.org/)
+2. Run the GATK HaplotypeCaller on each BAM input file to generate per-sample variant calls in VCF (Variant Call Format)
 
 <figure class="excalidraw">
 --8<-- "docs/hello_nextflow/img/haplotype-caller.excalidraw.svg"
@@ -118,11 +130,11 @@ exit
 
 ### Takeaway
 
-You know how to _DO THE THING_.
+You know how to pull a container and run it interactively, and you know how to run the indexing and variant calling commands directly in the terminal.
 
 ### What's next?
 
-_DO THE NEXT THING_.
+Learn how to wrap those same commands into a two-step workflow that uses containers to execute the work.
 
 ---
 
@@ -503,12 +515,12 @@ Launching `hello-gatk.nf` [backstabbing_raman] DSL2 - revision: 5378632b71
 
 ### Takeaway
 
-You know how to make a multi-step variant calling workflow handle a file containing input samples.
+You know how to make a multi-step workflow handle a file containing input samples.
 
 ### What's next?
 
 Celebrate your success and take an extra long break! 
 
-In the next training module, you'll learn how to _DO MORE THINGS_.
+In the next training module, you'll learn how to use channel operators to develop pipelines with more interesting plumbing.
 
 **Good luck!**

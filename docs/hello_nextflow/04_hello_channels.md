@@ -1,25 +1,35 @@
 # Part 3: Hello Channels
 
-_INSERT EXPLANATION HERE_
+In Part 2, you built a pipeline that was completely linear and processed each sample's data independently of the others. However, in real pipelines, you may need to combine data from multiple samples, or combine different kinds of data. Here we show you how to use channels and channel operators to implement a pipeline with more interesting plumbing.
 
-![Joint analysis](img/joint-calling.png)
+Specifically, we show you how to implement joint variant calling with GATK, building on the pipeline from Part 2.
 
 !!! note
 
     Don't worry if you're not familiar with GATK or genomics in general. We'll summarize the necessary concepts as we go, and the workflow implementation principles we demonstrate here apply broadly to any use case that follows a similar pattern.
 
-_ANY ADDITIONAL EXPLANATION_
-
 ### Method overview
 
-1. Generate an index file for each BAM input file using Samtools
-2. Run the GATK HaplotypeCaller on each BAM input file to generate per-sample variant calls in GVCF (Genomic Variant Call Format)
-3. Collect all the GVCFs and run joint genotyping on them to produce a cohort-level VCF.
+The GATK variant calling method we used in Part 2 simply generated variant calls per sample. That's fine if you only want to look at the variants from each sample in isolation, but that only yields limited information. It's often more interesting to look at variant calls across multiple samples, and to do so, GATK offers an alternative method called joint variant calling, which we demonstrate here.
 
-_UPDATE THE FLOWCHART_
+Joint variant calling involves generating a special kind of variant output called GVCF (for Genomic VCF) for each sample, then combining the GVCF data from all the samples and finally, running a 'joint genotyping' analysis to produce the final cohort-level VCF containing variant calls calculated based on the information from all samples.
+
+![Joint analysis](img/joint-calling.png)
+
+What's special about a sample's GVCF is that it contains records summarizing sequence data statistics about all positions in the targeted area of the genome, not just the positions where the program found evidence of variation. This is critical for the joint genotyping calculation. _TODO: ADD LINK FOR MORE READING_
+
+The GVCF is produced by GATK HaplotypeCaller, the same tool we used in Part 2, with an additional parameter (`-ERC GVCF`). Combining the GVCFs is done with GATK GenomicsDBImport, which combines the per-sample calls into a data store (analogous to a database), then the actual 'joint genotyping' analysis is done with GATK GenotypeGVCFs.
+
+So to recap, we're going to develop a workflow that does the following:
+
+_ADD joint genotyping FLOWCHART_
 <figure class="excalidraw">
 --8<-- "docs/hello_nextflow/img/haplotype-caller.excalidraw.svg"
 </figure>
+
+1. Generate an index file for each BAM input file using Samtools
+2. Run the GATK HaplotypeCaller on each BAM input file to generate a GVCF of per-sample genomic variant calls
+3. Collect all the GVCFs and run joint genotyping on them to produce a cohort-level VCF.
 
 ### Dataset
 
@@ -96,7 +106,7 @@ docker run -it -v ./data:/data community.wave.seqera.io/library/gatk4:4.5.0.0--7
 
 #### 0.2.3. Run the variant calling command with the GVCF option
 
-_EXPLANATION OF WHAT GVCF DOES_
+This is the same base command as in Part 2, except this time we add the `-ERC GVCF` option, which switches on the HaplotypeCaller's GVCF mode to produce genomic VCFs.
 
 ```bash
 gatk HaplotypeCaller \
@@ -113,7 +123,7 @@ gatk HaplotypeCaller \
 cat reads_mother.g.vcf
 ```
 
-_POINT OUT WHAT'S DIFFERENT_
+_POINT OUT WHAT'S DIFFERENT COMPARED TO THE VCF IN PART 2_
 
 #### 0.2.5. Repeat the process on the other two samples
 
@@ -203,13 +213,9 @@ _DO THE NEXT THING_.
 
 ---
 
-## 2. Add joint genotyping step _UPDATE BASED ON ADAM'S PROPOSAL
+## 2. Add joint genotyping step _UPDATE BASED ON ADAM'S PROPOSAL_
 
-To complicate matters a little, the GATK variant calling method calls for a consolidation step where we combine and re-analyze the variant calls obtained per sample in order to obtain definitive 'joint' variant calls for a group or _cohort_ of samples (in this case, the family trio).
 
-![Joint analysis](img/joint-calling.png)
-
-This involves using a GATK tool called GenomicsDBImport that combines the per-sample calls into a data store (analogous to a database), followed by another GATK tool, GenotypeGVCFs, which performs the actual 'joint genotyping' analysis. These two tools can be run in series within the same process.
 
 One slight complication is that these tools require the use of individually specified VCF files, and the syntax of the GenomicsDBImport tool looks like this:
 
