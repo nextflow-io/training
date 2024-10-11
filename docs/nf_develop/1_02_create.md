@@ -10,40 +10,51 @@ Here, you will use the nf-core template to kickstart your pipeline development u
 
 nf-core tooling has commands for pipeline users and developers.
 
-You can view all of the tooling using the `--help` argument.
+View all of the tooling using the `nf-core --help` argument.
 
-```
+```bash
 nf-core --help
 ```
 
-Here we will focus on the tooling to assist pipeline developers, starting with the `nf-core create` command.
+Here we will focus on the tooling to assist pipeline developers, starting with the `nf-core pipelines create` command.
 
-### `nf-core create`
+### `nf-core pipelines create`
 
-The `nf-core create` command makes a new pipeline using the nf-core base template with a pipeline name, description, and author. It is the first and most important step for creating a pipeline that will integrate with the wider Nextflow ecosystem.
-
-```bash
-nf-core create
-```
-
-When executing this command you will be given a series of prompts to setup your pipeline.
+The `nf-core pipelines create` command makes a new pipeline using the nf-core base template with a pipeline name, description, and author. It is the first and most important step for creating a pipeline that will integrate with the wider Nextflow ecosystem.
 
 ```bash
-? Workflow name <name>
-? Description <description>
-? Author <name>
-? Do you want to customize which parts of the template are used? (y/N) <n>
+nf-core pipelines create
 ```
 
-If the command has run successfully, you will see a new folder in your current directory.
+Running this command will open a Text User Interface (TUI) for pipeline creation.
+
+<div style="text-align: center;">
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/VwjXNXONHlY?si=d0HkFSISnKn76TeI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" data-ruffle-polyfilled=""></iframe>
+</div>
+
+Template features can be flexibly included or excluded at the time of creation. You can still use the CLI by providing all values as parameters.
 
 !!! question "Exercise"
 
-    Create a pipeline named `mypipeline` using the `nf-core create` command.
+    Follow these steps create your first pipeline using the `nf-core pipelines create` TUI:
 
-!!! note
+    1. Run the `nf-core pipelines create` command
+    2. Select **Let's go!** on the welcome screen
+    3. Select **Custom** on the Choose pipeline type screen
+    4. Enter your pipeline details, replacing < YOUR NAME > with your own name, then select **Next**
+        - **GitHub organisation:** myorg
+        - **Workflow name:** myfirstpipeline
+        - **A short description of your pipeline:** My first pipeline
+        - **Name of the main author / authors:** < YOUR NAME >
+    5. Select **Continue** on the Template features screen
+    6. Select **Finish** on the Final details screen
+    7. Wait for the pipeline to be created, then select **Continue**
+    8. Select **Finish without creating a repo** on the Create GitHub repository screen
+    9. Select **Close** on the HowTo create a GitHub repository page
 
-    If run successfully you will see a new folder in your current directory that has been given the name `nf-core-mypipeline`.
+If run successfully, you will see a new folder in your current directory named `myorg-myfirstpipeline`.
+
+<!---
 
 ### Customizing the template
 
@@ -81,7 +92,7 @@ Skip template areas?
 
 ### Submit your code to GitHub
 
-The `nf-core create` command suggests commands for submitting your pipeline to GitHub.
+The `nf-core pipelines create` command suggests commands for submitting your pipeline to GitHub.
 
 You will first need to create an empty repository on GitHub for your template to be pushed to.
 
@@ -92,7 +103,7 @@ When you are logged into GitHub, you can use the green `New` repository button i
 Once you have created the repository you can use `git` to push your template to GitHub.
 
 ```bash
-cd /workspace/gitpod/nf-develop/nf-core-mypipeline
+cd /workspace/gitpod/nf-develop/myorg-mypipeline
 git remote add origin https://github.com/<USERNAME>/<REPO>.git
 git push --all origin
 ```
@@ -129,26 +140,32 @@ The role each of these branches have in pipeline development will be explained i
 
     Create a new GitHub repository named `myfirstpipeline` and push your new pipeline using the commands above. You will need to replace `<USERNAME>` and `<REPO>` with your GitHub username and `myfirstpipeline`, respectively.
 
+-->
+
 ## Template tour
 
 The nf-core pipeline template comes packed with a lot of files and folders.
+
+Here, almost everything was included in the template to create opportunities to explore these features.
 
 While the template may feel overwhelming, a complete understanding isn't required to start developing your pipeline.
 
 ### Workflows, subworkflows, and modules
 
-The nf-core pipeline template has a `main.nf` file that calls `mypipeline.nf` from the `workflows` folder. The `mypipeline.nf` file is the central pipeline file that is used to bring everything else together. Instead of having one large monolithic pipeline script, it's broken up into smaller script components, namely, modules and subworkflows:
+The nf-core pipeline template has a `main.nf` script that calls `myfirstpipeline.nf` from the `workflows` folder. The `myfirstpipeline.nf` file inside the workflows folder is the central pipeline file that is used to bring everything else together.
 
--   **Modules** are wrappers around a single process.
--   **Subworkflows** are two or more modules that are packaged together as a mini workflow.
+Instead of having one large monolithic pipeline script, it's broken up into smaller script components, namely, modules and subworkflows:
+
+-   **Modules:** Wrappers around a single process
+-   **Subworkflows:** Two or more modules that are packaged together as a mini workflow
 
 <figure class="excalidraw">
 --8<-- "docs/nf_develop/img/nested.excalidraw.svg"
 </figure>
 
-Within your pipeline repository, `modules` and `subworkflows` are stored within `local` and `nf-core` folders. The `nf-core` folder is for components that have come from the online nf-core repository while the `local` folder is for components that have been developed independently.
+Within your pipeline repository, `modules` and `subworkflows` are stored within `local` and `nf-core` folders. The `nf-core` folder is for components that have come from the nf-core GitHub repository while the `local` folder is for components that have been developed independently:
 
-```
+```console
 modules/
 ├── local
 │   └── <toolname>
@@ -156,7 +173,7 @@ modules/
 │   .
 │
 └── nf-core
-    ├── <toolname>
+    ├── <tool name>
     │   ├── environment.yml
     │   ├── main.nf
     │   ├── meta.yml
@@ -167,7 +184,28 @@ modules/
     .
 ```
 
-Modules from nf-core follow the same structure and contain a small number of additional files that are used for testing using [nf-test](https://www.nf-test.com/) and documentation about the module.
+Modules from nf-core follow a similar same structure and contain a small number of additional files that are used for testing using [nf-test](https://www.nf-test.com/) and documentation about the module.
+
+!!!note
+
+    Some nf-core modules are also split into command specific directories:
+
+    ```console
+    │
+    └── <tool name>
+        └── <command>
+            ├── environment.yml
+            ├── main.nf
+            ├── meta.yml
+            └── tests
+                ├── main.nf.test
+                ├── main.nf.test.snap
+                └── tags.yml
+    ```
+
+!!!note
+
+    The nf-core template does not come with a local modules folder by default.
 
 ### Configuration files
 
@@ -177,21 +215,62 @@ In the template, the `nextflow.config` file is a central configuration file and 
 
 There are several configuration files that are stored in the `conf` folder and are added to the configuration by default or optionally as profiles:
 
--   `base.config`: sensible defaults for pipeline resource requests.
--   `igenomes.config`: configuration settings required to access the igenomes registry.
--   `modules.config`: additional module directives and arguments.
--   `test.config`: a profile to run the pipeline with minimal test data.
--   `test_full.config`: a profile to run the pipeline with a full-sized test dataset.
+-   `base.config`: A 'blank slate' config file, appropriate for general use on most high performance compute environments.
+-   `igenomes.config`: Defines reference genomes using iGenome paths.
+-   `igenomes_ignored.config`: Empty genomes dictionary to use when igenomes is ignored
+-   `modules.config`: Additional module directives and arguments.
+-   `test.config`: A profile to run the pipeline with minimal test data.
+-   `test_full.config`: A profile to run the pipeline with a full-sized test dataset.
 
 ### `.nf-core.yml`
 
 The `.nf-core.yml` file is used to specify the repository type and manage linting tests.
 
 ```yml title=".nf-core.yml" linenums="1"
+bump_version: null
+lint:
+    files_exist:
+        - CODE_OF_CONDUCT.md
+        - assets/nf-core-myfirstpipeline_logo_light.png
+        - docs/images/nf-core-myfirstpipeline_logo_light.png
+        - docs/images/nf-core-myfirstpipeline_logo_dark.png
+        - .github/ISSUE_TEMPLATE/config.yml
+        - .github/workflows/awstest.yml
+        - .github/workflows/awsfulltest.yml
+    files_unchanged:
+        - CODE_OF_CONDUCT.md
+        - assets/nf-core-myfirstpipeline_logo_light.png
+        - docs/images/nf-core-myfirstpipeline_logo_light.png
+        - docs/images/nf-core-myfirstpipeline_logo_dark.png
+        - .github/ISSUE_TEMPLATE/bug_report.yml
+    multiqc_config:
+        - report_comment
+    nextflow_config:
+        - manifest.name
+        - manifest.homePage
+        - validation.help.beforeText
+        - validation.help.afterText
+        - validation.summary.beforeText
+        - validation.summary.afterText
+nf_core_version: 3.0.1
+org_path: null
 repository_type: pipeline
+template:
+    author: Chris
+    description: My first pipeline
+    force: true
+    is_nfcore: false
+    name: myfirstpipeline
+    org: myorg
+    outdir: .
+    skip_features: []
+    version: 1.0.0dev
+update: null
 ```
 
-By default, the `.nf-core.yml` file will only show the repository is a pipeline. However, if the template is customized and parts of the template are removed, this file needs to be modified for linting tests to pass.
+!!!note
+
+    The `.nf-core.yml` file must match your template features for linting tests to pass.
 
 ### `nextflow_schema.json`
 
@@ -206,23 +285,25 @@ By default, the template comes with several automated tests that utilize GitHub 
 -   `branch.yml`: Sets the branch protection for the nf-core repository
 -   `ci.yml`: Run small pipeline tests with the small test datasets
 -   `clean-up.yml`: Automated testing for stale and closed GitHub issues and PRs in the nf-core repo
--   `download_pipeline.yml`: Test a pipeline download with `nf-core download`.
+-   `download_pipeline.yml`: Test a pipeline download with `nf-core pipelines download`.
 -   `fix-linting.yml`: Fix linting by adding a comment to a PR
 -   `linting_comment.yml`: Triggered after the linting action and posts an automated comment to the PR, even if the PR is coming from a fork
--   `linting.yml`: Triggered on pushes and PRs to the repository and runs `nf-core lint` and markdown lint tests to ensure that the code meets the nf-core guidelines
+-   `linting.yml`: Triggered on pushes and PRs to the repository and runs `nf-core pipelines lint` and markdown lint tests to ensure that the code meets the nf-core guidelines
 -   `release-announcements.yml`: Automatic release toot and tweet announcements for nf-core pipeline releases
 
-Notably, many of these tests are only configured for the nf-core repo. However, they can be modified for your repository or ignored if they are superfluous to your requirements.
+Many of these tests are only configured for the nf-core repo. However, they can be modified for your repository or ignored if they are superfluous to your requirements.
 
-You can read more about creating and modifying workflows on the [GitHub Actions documentation webpage](https://docs.github.com/en/actions).
+Read more about creating and modifying workflows on the [GitHub Actions documentation webpage](https://docs.github.com/en/actions).
 
-Even though many of these action workflows are not relevant for private repositories, it is recommended to keep them in place to prevent `nf-core lint` from throwing errors.
+<!---
 
 !!! note
 
     To enable these workflows you need to click `Enable Actions on this Repository` under the `Actions` tab in your GitHub repository.
 
     ![GitHub actions](img/github.actions.png)
+
+--->
 
 ---
 
