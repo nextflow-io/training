@@ -125,7 +125,7 @@ include { SEQTK_TRIM } from '../modules/nf-core/seqtk/trim/main'
 
 !!! question "Exercise"
 
-    Run the `nf-core modules install` ass the `seqtk/trim` module to your pipeline.
+    Run the `nf-core modules install` command to add the `seqtk/trim` module to your pipeline.
 
     ```
     cd my-myfirstpipeline
