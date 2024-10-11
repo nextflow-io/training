@@ -87,9 +87,7 @@ Executing the `nf-core pipelines lint` command from within your pipeline reposit
     nf-core pipelines lint
     ```
 
-!!!warning
-
-    It is expected that some of these tests will fail.
+    !!! warning "It is expected some tests will fail"
 
 ## Updating `nextflow_schema.json`
 
