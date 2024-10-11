@@ -9,7 +9,7 @@ The Gitpod environment contains some test data that will be used in this worksho
 
 !!! note
 
-    Follow [this link](../envsetup/00_introduction.md) if you have not yet setup your Gitpod environment.
+    Follow [this link](../envsetup/index.md) if you have not yet setup your Gitpod environment.
 
 ## Getting started
 
