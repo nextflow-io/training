@@ -27,9 +27,9 @@ nf-core is published in Nature Biotechnology: [Nat Biotechnol 38, 276–278 (202
 
 ## nf-core pipelines
 
-There are currently >100 nf-core pipelines. These pipelines are at various stages of development with 60 released, 34 under development, and 11 archived (April 2024).
+There are currently 113 nf-core pipelines. These pipelines are at various stages of development, with 68 released, 32 under development, and 13 archived (October 2024).
 
-The [nf-core website](https://nf-co.re/) contains a full list of pipelines, as well as their documentation, which can be explored.
+The [nf-core website](https://nf-co.re/) hosts a full list of pipelines, as well as their documentation, which can be explored.
 
 ![nf-core logo](img/pipelines.png)
 
@@ -40,13 +40,19 @@ Each released pipeline has a dedicated page that includes 6 documentation sectio
 -   **Parameters:** Grouped pipeline parameters with descriptions
 -   **Output:** Descriptions and examples of the expected output files
 -   **Results:** Example output files generated from the full test dataset
--   **Releases & Statistics:** pipeline version history and statistics
+-   **Releases & Statistics:** Pipeline version history and statistics
 
 Each section should be explored by a user to understand what the pipeline does and how it can be configured.
 
+!!! question "Exercise"
+
+    Explore the nf-core website to see the range of resources available.
+
 ## Pulling an nf-core pipeline
 
-Unless you intend to develop an nf-core pipeline independently, you do not need to clone a copy of a pipeline. Instead, you can use Nextflow’s `pull` command:
+Unless you intend to develop an nf-core pipeline independently, you do not need to clone a copy of a pipeline.
+
+Instead, use Nextflow’s `pull` command:
 
 ```bash
 nextflow pull nf-core/demo
@@ -54,35 +60,37 @@ nextflow pull nf-core/demo
 
 !!! note "The `nextflow run` command"
 
-    The `nextflow run` command will also automatically `pull` the pipeline if it had not been pulled.
+    The `nextflow run` command will also automatically `pull` the pipeline.
 
-Nextflow will `pull` the pipelines default GitHub branch if a pipeline version is not specified. This will be the master branch for nf-core pipelines with a stable release.
+Nextflow will `pull` the pipelines default GitHub branch if a pipeline version is not specified. The master branch is the default branch for nf-core pipelines with a stable release and the dev branch for pipelines that are still being developed.
 
-nf-core pipelines use GitHub releases to tag stable versions of the code and software. You will always be able to execute different versions of a pipeline using the `-revision` or `-r` option.
+Pipelines pulled from GitHub using Nextflow are automatically stored in a Nextflow assets folder (default: `$HOME/.nextflow/assets/`).
+
+nf-core pipelines use GitHub releases to tag stable versions of the code and software. You can execute different versions of a pipeline using the `-revision` or `-r` option.
 
 Similarly, you can use the `-r` option to specify a specific GitHub branch. For example, the `dev` branch of the `nf-core/demo` pipeline could be pulled with the command:
 
-```
+```bash
 nextflow pull nf-core/demo -r dev
 ```
 
-If updates to a remote pipeline have been made, the pull command can be used to update or revery your local copy.
+If updates to a remote pipeline have been made, run the pull command to update or revert your local copy.
 
 !!! question "Exercise"
 
-    Use nextflow to pull the `nf-core/demo` pipeline:
+    Pull the `nf-core/demo` pipeline:
 
     ```bash
     nextflow pull nf-core/demo
     ```
 
-    Use the list command to view your cached pipelines:
+    Use the `list` command to view your cached pipelines:
 
     ```bash
     nextflow list
     ```
 
-    Pulled pipelines are stored in a hidden assets folder:
+    View your pulled pipelines in the nextflow assets folder:
 
     ```bash
     ls $HOME/.nextflow/assets/
