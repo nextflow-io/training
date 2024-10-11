@@ -148,7 +148,7 @@ Once you have made your edits you can click `Finished` and all changes will be a
     nf-core lint
     ```
 
-    All pipeline tests should pass.
+All pipeline tests should pass.
 
 <!---
 
