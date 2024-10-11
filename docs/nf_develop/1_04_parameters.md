@@ -131,7 +131,7 @@ Once you have made your edits you can click `Finished` and all changes will be a
 
 !!! question "Exercise"
 
-    Execute the `nf-core pipelines schema build` command to update your schema.
+    Execute the `nf-core pipelines schema build` commanddd to update your schema.
 
     ```console
     cd /workspace/gitpod/nf-develop/myorg-mypipeline
@@ -143,7 +143,7 @@ Once you have made your edits you can click `Finished` and all changes will be a
     Lint your pipeline again to see if the tests pass.
 
     ```console
-    nf-core lint
+    nf-core pipelines lint
     ```
 
 All pipeline tests should pass.
