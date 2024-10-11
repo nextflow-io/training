@@ -57,7 +57,7 @@ Now your if statement has been added to your main workflow file and has a defaul
     nextflow run myorg-myfirstpipeline -profile test,singularity --outdir results --skip_trim
     ```
 
-    You should see that the `SEQTK_TRIM` process has been skipped in your execution.
+You should see that the `SEQTK_TRIM` process has been skipped in your execution.
 
 ## Linting your changes
 
