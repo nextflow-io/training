@@ -211,13 +211,13 @@ To help with organization and readability it is beneficial to create named outpu
 
 For `SEQTK_TRIM`, the `reads` output could be put into a channel named `ch_trimmed`.
 
-```groovy title="workflows/mypipeline.nf" linenums="46"
+```groovy title="workflows/mypipeline.nf"
 ch_trimmed  = SEQTK_TRIM.out.reads
 ```
 
 Similarly, it is beneficial immediately mix the versions of tools into the `ch_versions` channel so they can be used as an input for the `MULTIQC` process.
 
-```groovy title="workflows/mypipeline.nf" linenums="47"
+```groovy title="workflows/mypipeline.nf"
 ch_versions = ch_versions.mix(SEQTK_TRIM.out.versions.first())
 ```
 
