@@ -97,9 +97,12 @@ nf-core modules list remote
 The `nf-core modules install` command can be used to install the `seqtk/trim` module directly from the nf-core repository:
 
 ```
-cd nf-core-myfirstpipeline
 nf-core modules install
 ```
+
+!!!warning
+
+    You need to be in the my-myfirstpipeline directory when executing `nf-core modules install`
 
 You can follow the prompts to find and install the module you are interested in:
 
@@ -118,7 +121,12 @@ include { SEQTK_TRIM } from '../modules/nf-core/seqtk/trim/main'
 
 !!! question "Exercise"
 
-    Run the `nf-core modules install` command to add the `seqtk/trim` module to your pipeline.
+    Run the `nf-core modules install` ass the `seqtk/trim` module to your pipeline.
+
+    ```
+    cd my-myfirstpipeline
+    nf-core modules install
+    ```
 
 To enable reporting and reproducibility, modules and subworkflows from the nf-core repository are tracked using hashes in the `modules.json` file. When modules are installed or removed using the nf-core tooling the `modules.json` file will be automatically updated.
 
@@ -259,7 +267,8 @@ The `test` profile is perfect for this use case.
     Test your profile to see if the `SEQTK_TRIM` process is working:
 
     ```console
-    nextflow run nf-core-myfirstpipeline -profile test,singularity --outdir results
+    cd /workspace/gitpod/nf-develop
+    nextflow run myorg-myfirstpipeline -profile test,singularity --outdir results
     ```
 
     The pipeline should execute successfully with a new `SEQTK_TRIM` process shown in the terminal and result files.

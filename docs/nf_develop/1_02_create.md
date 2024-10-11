@@ -26,18 +26,26 @@ The `nf-core pipelines create` command makes a new pipeline using the nf-core ba
 nf-core pipelines create
 ```
 
+Running this command will open a Text User Interface (TUI) for pipeline creation.
+
+<div style="text-align: center;">
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/VwjXNXONHlY?si=d0HkFSISnKn76TeI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" data-ruffle-polyfilled=""></iframe>
+</div>
+
+Template features can be flexibly included or excluded at the time of creation. You can still use the CLI by providing all values as parameters.
+
 !!! question "Exercise"
 
-    Follow these steps create your first pipeline:
+    Follow these steps create your first pipeline using the `nf-core pipelines create` TUI:
 
-    1. Enter the `nf-core pipelines create` command
+    1. Run the `nf-core pipelines create` command
     2. Select **Let's go!** on the welcome screen
     3. Select **Custom** on the Choose pipeline type screen
-    4. Enter your pipeline details, enter the following details, replacing <your name> with your own name, then select **Next**
+    4. Enter your pipeline details, replacing < YOUR NAME > with your own name, then select **Next**
         - **GitHub organisation:** myorg
         - **Workflow name:** myfirstpipeline
         - **A short description of your pipeline:** My first pipeline
-        - **Name of the main author / authors:** <you name>
+        - **Name of the main author / authors:** < YOUR NAME >
     5. Select **Continue** on the Template features screen
     6. Select **Finish** on the Final details screen
     7. Wait for the pipeline to be created, then select **Continue**
@@ -95,7 +103,7 @@ When you are logged into GitHub, you can use the green `New` repository button i
 Once you have created the repository you can use `git` to push your template to GitHub.
 
 ```bash
-cd /workspace/gitpod/nf-develop/nf-core-mypipeline
+cd /workspace/gitpod/nf-develop/myorg-mypipeline
 git remote add origin https://github.com/<USERNAME>/<REPO>.git
 git push --all origin
 ```
@@ -277,10 +285,10 @@ By default, the template comes with several automated tests that utilize GitHub 
 -   `branch.yml`: Sets the branch protection for the nf-core repository
 -   `ci.yml`: Run small pipeline tests with the small test datasets
 -   `clean-up.yml`: Automated testing for stale and closed GitHub issues and PRs in the nf-core repo
--   `download_pipeline.yml`: Test a pipeline download with `nf-core download`.
+-   `download_pipeline.yml`: Test a pipeline download with `nf-core pipelines download`.
 -   `fix-linting.yml`: Fix linting by adding a comment to a PR
 -   `linting_comment.yml`: Triggered after the linting action and posts an automated comment to the PR, even if the PR is coming from a fork
--   `linting.yml`: Triggered on pushes and PRs to the repository and runs `nf-core lint` and markdown lint tests to ensure that the code meets the nf-core guidelines
+-   `linting.yml`: Triggered on pushes and PRs to the repository and runs `nf-core pipelines lint` and markdown lint tests to ensure that the code meets the nf-core guidelines
 -   `release-announcements.yml`: Automatic release toot and tweet announcements for nf-core pipeline releases
 
 Many of these tests are only configured for the nf-core repo. However, they can be modified for your repository or ignored if they are superfluous to your requirements.
