@@ -5,6 +5,10 @@ The nf-core pipeline template is a working pipeline and comes pre-configured wit
 -   [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/): A tool that performs quality control checks on raw sequence data coming from high throughput sequencing pipelines. It provides a modular set of analyses that can be used to give a quick impression of your data.
 -   [MultiQC](https://multiqc.info/): A modular tool to aggregate results from bioinformatics analyses across many samples into a single report.
 
+!!! note "Pre-configured modules are optional"
+
+    From nf-core tools 3.0 onwards pre-configured modules are optional and can be removed during template creation.
+
 ## Testing your pipeline
 
 You can use the `test` profile can be used to check if your pipeline is still working during your development cycle. You can also use it in GitHub Actions to test your pipeline during pull requests.
