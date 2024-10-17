@@ -530,14 +530,14 @@ nf-test test modules/local/gatk/haplotypecaller/tests/main.nf.test
 Produces:
 
 ```bash
-🚀 nf-test 0.8.4
-https://code.askimed.com/nf-test
+🚀 nf-test 0.9.0
+https://www.nf-test.com
 (c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
 
 
 Test Process GATK_HAPLOTYPECALLER
 
-  Test [86fd1bce] 'reads_son [bam]' FAILED (23.781s)
+  Test [86fd1bce] 'reads_son [bam]' FAILED (15.209s)
 
   java.lang.RuntimeException: Different Snapshot:
   [                                                                                                     [
@@ -547,24 +547,24 @@ Test Process GATK_HAPLOTYPECALLER
                   {                                                                                                     {
                       "id": "NA12882"                                                                                       "id": "NA12882"
                   },                                                                                                    },
-                  "reads_son.bam.g.vcf:md5,f3583cbbe439469bfc166612e1617694",                      |                    "reads_son.bam.g.vcf:md5,428f855d616b34d44a4f0a3bcc1a0b14",
-                  "reads_son.bam.g.vcf.idx:md5,16a78feaf6602adb2a131494e0274f9e"                           |                    "reads_son.bam.g.vcf.idx:md5,5a8d299625ef3cd3266229507a789dbb"
+                  "reads_son.bam.g.vcf:md5,1715fa260695fe0bde5af5641d962053",                      |                    "reads_son.bam.g.vcf:md5,aa0cb4c2c28d8adcdeeda9323bac5b24",
+                  "reads_son.bam.g.vcf.idx:md5,dbb55a1e7b40340a46f57dd76ef537aa"                           |                    "reads_son.bam.g.vcf.idx:md5,b7c53459ecb4ba757fe84f33f1f9f7ca"
               ]                                                                                                     ]
           ]                                                                                                     ]
       }                                                                                                     }
   ]                                                                                                     ]
-
+  
   Nextflow stdout:
-
+  
   Nextflow stderr:
-
-  Nextflow 24.03.0-edge is available - Please consider updating your version to it
-
+  
+  Nextflow 24.09.2-edge is available - Please consider updating your version to it
+  
 
     Obsolete snapshots can only be checked if all tests of a file are executed successful.
 
 
-FAILURE: Executed 1 tests in 23.79s (1 failed)
+FAILURE: Executed 1 tests in 15.223s (1 failed)
 ```
 
 The error message tells you there were differences between the snapshots for the two runs; specifically, the md5sum values are different for the VCF files.
