@@ -244,7 +244,7 @@ SUCCESS: Executed 1 tests in 5.935s
 
 !!! note
 
-    If you get a `java.nio.file.AccessDeniedException` error, remove the work directory with 
+    If you get a `java.nio.file.AccessDeniedException` error, remove the work directory with
     ```
     sudo rm -rf work/
     ```
@@ -553,13 +553,13 @@ Test Process GATK_HAPLOTYPECALLER
           ]                                                                                                     ]
       }                                                                                                     }
   ]                                                                                                     ]
-  
+
   Nextflow stdout:
-  
+
   Nextflow stderr:
-  
+
   Nextflow 24.09.2-edge is available - Please consider updating your version to it
-  
+
 
     Obsolete snapshots can only be checked if all tests of a file are executed successful.
 
@@ -843,7 +843,7 @@ test("family_trio [vcf] [idx]") {
             input[2] = file("${projectDir}/data/ref/ref.fasta")
             input[3] = file("${projectDir}/data/ref/ref.fasta.fai")
             input[4] = file("${projectDir}/data/ref/ref.dict")
-            input[5] = file("${projectDir}/data/intervals.list")
+            input[5] = file("${projectDir}/data/ref/intervals.bed")
             """
         }
     }
@@ -857,7 +857,7 @@ The output of the joint genotyping step is another VCF file, so we're going to u
 then {
     assert process.success
     assert path(process.out[0][0]).readLines().contains('#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	NA12877	NA12878	NA12882')
-    assert path(process.out[0][0]).readLines().contains('20	10040772	.	C	CT	1568.89	.	AC=5;AF=0.833;AN=6;BaseQRankSum=0.399;DP=82;ExcessHet=0.0000;FS=4.291;MLEAC=5;MLEAF=0.833;MQ=60.00;MQRankSum=0.00;QD=21.79;ReadPosRankSum=-9.150e-01;SOR=0.510	GT:AD:DP:GQ:PL	0/1:14,16:30:99:370,0,348	1/1:0,17:17:51:487,51,0	1/1:0,25:25:75:726,75,0')
+    assert path(process.out[0][0]).readLines().contains('20_10037292_10066351	3480	.	C	CT	1625.89	.	AC=5;AF=0.833;AN=6;BaseQRankSum=0.220;DP=85;ExcessHet=0.0000;FS=2.476;MLEAC=5;MLEAF=0.833;MQ=60.00;MQRankSum=0.00;QD=21.68;ReadPosRankSum=-1.147e+00;SOR=0.487	GT:AD:DP:GQ:PL	0/1:15,16:31:99:367,0,375	1/1:0,18:18:54:517,54,0	1/1:0,26:26:78:756,78,0')
 }
 ```
 
