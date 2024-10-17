@@ -436,7 +436,7 @@ Make it easier to handle samples in bulk.
 
 ## 4. Make it nicer to run on arbitrary samples by using a list of files as input
 
-#### 4.1. Create a text file listing the input paths
+#### 4.1. Look at the `data/sample_bam.txt` text file, which is listing the input paths
 
 ```csv title="sample_bams.txt"
 /workspace/gitpod/hello-nextflow/data/bam/reads_mother.bam
