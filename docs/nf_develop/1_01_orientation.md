@@ -4,7 +4,7 @@ The Gitpod environment contains some test data that will be used in this worksho
 
 !!! note
 
-    Follow [this link](../envsetup/00_introduction.md) if you have not yet setup your Gitpod environment.
+    Follow [this link](../envsetup/index.md) if you have not yet setup your Gitpod environment.
 
 ## Getting started
 
@@ -19,6 +19,8 @@ This is an empty directory where you will create an launch your pipeline.
     ```bash
     cd /workspace/gitpod/nf-develop
     ```
+
+<!---
 
 ## Configuring GitHub
 
@@ -42,7 +44,9 @@ Edit the permissions for your GitHub account by clicking on the three dots next 
 
 ![GitHub permissions](img/gitpod.permissions.png)
 
-Once complete, click `Update permissions` and return reopen your Gitpod training environment.
+Once complete, click `Update permissions` and return to your Gitpod training environment.
+
+-->
 
 ---
 
