@@ -10,7 +10,7 @@ Specifically, we show you how to implement a simple variant calling pipeline wit
 
 ### Method overview
 
-Variant calling is a genomic analysis method that aims to identify variations in a genome sequence relative to a reference genome. Here we are going to use tools and methods designed for calling short variants, *i.e.* SNPs and indels.
+Variant calling is a genomic analysis method that aims to identify variations in a genome sequence relative to a reference genome. Here we are going to use tools and methods designed for calling short variants, _i.e._ SNPs and indels.
 
 A full variant calling pipeline typically involves a lot of steps, including mapping to the reference and variant filtering and prioritization. For simplicity, we are going to focus on the core variant calling step, which takes as its main input a file of short-read sequencing data in BAM format (Binary-compressed version of SAM, for Sequence Alignment Map), as well as a reference genome and a list of genomic intervals to analyze.
 
@@ -501,7 +501,7 @@ You know how to make a multi-step workflow handle a file containing input sample
 
 ### What's next?
 
-Celebrate your success and take an extra long break! 
+Celebrate your success and take an extra long break!
 
 In the next training module, you'll learn how to use channel operators to develop pipelines with more interesting plumbing.
 

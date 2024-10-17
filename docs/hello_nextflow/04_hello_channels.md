@@ -23,6 +23,7 @@ The GVCF is produced by GATK HaplotypeCaller, the same tool we used in Part 2, w
 So to recap, we're going to develop a workflow that does the following:
 
 _ADD joint genotyping FLOWCHART_
+
 <figure class="excalidraw">
 --8<-- "docs/hello_nextflow/img/haplotype-caller.excalidraw.svg"
 </figure>
@@ -51,7 +52,7 @@ Just like previously, we want to try out the commands manually before we attempt
 
 ### 0.1. Index a BAM input file with Samtools
 
-This first step is the same as in Part 2: Hello-GATK so you can skip it if you've already done that in this session. 
+This first step is the same as in Part 2: Hello-GATK so you can skip it if you've already done that in this session.
 
 #### 0.1.1. Pull the samtools container
 
@@ -145,7 +146,7 @@ gatk HaplotypeCaller \
 
 Once this completes, you should have three files ending in `.g.vcf` in your work directory; one per sample.
 
-### 0.3. Run joint genotyping 
+### 0.3. Run joint genotyping
 
 This is a new command that looks at the data in all the GVCFs for each genomic position and recalculates variant statistics and individual genotypes in light of the data available across all samples in the cohort.
 
@@ -190,7 +191,7 @@ Wrap these commands into an actual pipeline.
 
 ## 1. Modify the per-sample variant calling step to produce a GVCF
 
-We'll start from `hello-channels.nf`, which is a copy of the workflow that results from Part 2 of this training series. However, that pipeline produces VCF files, whereas now we want GVCF files in order to do the joint genotyping, so we need to switch on the GVCF variant calling mode and update the output file extension. 
+We'll start from `hello-channels.nf`, which is a copy of the workflow that results from Part 2 of this training series. However, that pipeline produces VCF files, whereas now we want GVCF files in order to do the joint genotyping, so we need to switch on the GVCF variant calling mode and update the output file extension.
 
 ### 1.1. Tell HaplotypeCaller to emit a GVCF and update the output file path
 
@@ -230,11 +231,12 @@ nextflow run hello-channels.nf
 Should produce something like:
 
 _TODO: COPY OUTPUT_
+
 ```console title="Output"
 
 ```
 
-If you open the file and scroll through it, you can see that GATK HaplotypeCaller produced a GVCF file, which contains additional information compared to the VCF file. 
+If you open the file and scroll through it, you can see that GATK HaplotypeCaller produced a GVCF file, which contains additional information compared to the VCF file.
 
 ### Takeaway
 
@@ -330,9 +332,9 @@ Command executed:
   gatk GenomicsDBImport -V reads_mother.bam.g.vcf reads_father.bam.g.vcf reads_son.bam.g.vcf --genomicsdb-workspace-path family_trio_gdb
 ```
 
-Can you spot the error? We gave `gatk GenomicsDBImport` multiple VCF files for a single `-V` argument, but the tool expects a separate `-V` argument for each GVCF file. 
+Can you spot the error? We gave `gatk GenomicsDBImport` multiple VCF files for a single `-V` argument, but the tool expects a separate `-V` argument for each GVCF file.
 
-As a reminder, this was the command we ran in the container: 
+As a reminder, this was the command we ran in the container:
 
 ```bash
 gatk GenomicsDBImport \
@@ -449,7 +451,7 @@ _After:_
 
 ### 3.3. Add the reference genome files to the GATK_JOINTGENOTYPING process input definitions
 
-The second command requires the reference genome files, so we need to add those to the process inputs. 
+The second command requires the reference genome files, so we need to add those to the process inputs.
 
 _Before:_
 
@@ -474,11 +476,11 @@ input:
 
 ### 3.4. Update the process output definition to emit the VCF of cohort-level variant calls
 
-We don't really care to save the GenomicsDB datastore; the output we're actually interested in is the VCF produced by the joint genotyping command. 
+We don't really care to save the GenomicsDB datastore; the output we're actually interested in is the VCF produced by the joint genotyping command.
 
 _Before:_
 
-```groovy title="hello-channels.nf"
+````groovy title="hello-channels.nf"
 output:
     path "${cohort_name}_gdb"
 _After:_
@@ -487,7 +489,7 @@ _After:_
 output:
     path "${cohort_name}.joint.vcf"
     path "${cohort_name}.joint.vcf.idx"
-```
+````
 
 ### 3.5. Update the process call from GATK_GENOMICSDB to GATK_JOINTGENOTYPING
 

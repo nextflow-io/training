@@ -148,7 +148,7 @@ This a very minimal process definition that just contains an output definition a
 
 !!! note
 
-    The output definition does not _determine_ what output will be created. It simply _declares_ what is the expected output, so that Nextflow can look for it once execution is complete. This is necessary for verifying that the command was executed successfully and for passing the output to downstream processes if needed. 
+    The output definition does not _determine_ what output will be created. It simply _declares_ what is the expected output, so that Nextflow can look for it once execution is complete. This is necessary for verifying that the command was executed successfully and for passing the output to downstream processes if needed.
 
 #### 2.1.2 The `workflow` definition
 
@@ -162,7 +162,7 @@ workflow {
 }
 ```
 
-This a very minimal **workflow** definition. In a real-world pipeline, the workflow typically contains multiple calls to **processes** connected by **channels**. You'll learn how to add more processes and connect them by channels in the course of this training. 
+This a very minimal **workflow** definition. In a real-world pipeline, the workflow typically contains multiple calls to **processes** connected by **channels**. You'll learn how to add more processes and connect them by channels in the course of this training.
 
 ### 2.2. Add a comment block above the process to document what it does
 
@@ -221,7 +221,7 @@ echo 'Hello World!' > output.txt
 
 ### 3.2. Change the output declaration in the `sayHello` process
 
-We need to tell Nextflow that it should now look for a specific file to be produced by the process execution. 
+We need to tell Nextflow that it should now look for a specific file to be produced by the process execution.
 
 _Before:_
 
@@ -294,9 +294,9 @@ process sayHello {
 
 !!! note
 
-    There is a newer syntax option that makes it possible to declare and publish workflow-level outputs, documented [here](https://www.nextflow.io/docs/latest/workflow.html#publishing-outputs), which makes using `publishDir` at the process level redundant once your pipeline is fully operational. However, `publishDir` is still very useful during pipeline development; that is why we include it in this training series. This will also ensure that you can read and understand the large number of pipelines that have already been written with `publishDir`. 
-    
-    You'll learn how to use the workflow-level outputs syntax later in this training series. 
+    There is a newer syntax option that makes it possible to declare and publish workflow-level outputs, documented [here](https://www.nextflow.io/docs/latest/workflow.html#publishing-outputs), which makes using `publishDir` at the process level redundant once your pipeline is fully operational. However, `publishDir` is still very useful during pipeline development; that is why we include it in this training series. This will also ensure that you can read and understand the large number of pipelines that have already been written with `publishDir`.
+
+    You'll learn how to use the workflow-level outputs syntax later in this training series.
 
 ### 3.5. Run the workflow again
 
@@ -414,7 +414,7 @@ echo '$greeting' > output.txt
 
 ### 5.3. Create an input channel
 
-Now that our process expects an input, we need to set up that input in the workflow body. This is where channels come in: Nextflow uses channels to feed inputs to processes and ferry data between processes that are connected together. 
+Now that our process expects an input, we need to set up that input in the workflow body. This is where channels come in: Nextflow uses channels to feed inputs to processes and ferry data between processes that are connected together.
 
 There are multiple ways to do this, but for now, we're just going to use the simplest possible channel, containing a single value.
 
@@ -621,9 +621,10 @@ The output is simply the uppercase version of the text string:
 ```console title="Output"
 HELLO WORLD
 ```
+
 !!! note
 
-    This is a very naive text replacement one-liner that does not account for accented letters, so for example 'Holà' will become 'HOLà'. This is expected. 
+    This is a very naive text replacement one-liner that does not account for accented letters, so for example 'Holà' will become 'HOLà'. This is expected.
 
 ### 7.2. Make the command take a file as input and write the output to a file
 
@@ -690,7 +691,7 @@ The output of the `sayHello()` process is automatically set up as a channel call
 convertToUpper(sayHello.out)
 ```
 
-For a simple case like this, that's all we need to do to connect two processes! 
+For a simple case like this, that's all we need to do to connect two processes!
 
 ### 7.6. Run the same workflow command as before
 
@@ -715,7 +716,7 @@ You'll notice that this time the workflow produced two work directories; one per
 !!! note
 
     Note how all we did was connect the output of `sayHello` to the input of `convertToUpper` and the two processes could be ran in serial. Nextflow did the hard work of handling input and output files and passing them between the two commands for us. This is the power of channels in Nextflow, doing the laborious work of connecting our pipeline steps up together.
-    
+
     What's more, Nextflow will automatically determine which call needs to be executed first based on how they're connected, so the order in which they're written in the workflow body does not matter. However, we do recommend you be kind to your collaborators and to your future self, and try to write them in a logical order!
 
 ### Takeaway
@@ -730,7 +731,7 @@ Learn how to make the workflow run on many values for the same input.
 
 ## 8. Modify the workflow to run on many values for the same input
 
-Workflows typically run on batches of inputs that we want to process in bulk, so we want to upgrade the workflow to accept an input with multiple values. 
+Workflows typically run on batches of inputs that we want to process in bulk, so we want to upgrade the workflow to accept an input with multiple values.
 
 ### 8.1. Modify the channel to contain multiple greetings
 
@@ -875,8 +876,7 @@ greeting_ch = Channel.fromPath(params.input_file).splitCsv()
 
 !!! tip
 
-    While you're developing your pipeline, you can inspect the contents of any channel by adding the `.view()` operator to the name of the channel. For example, if you add `greeting_ch.view()` anywhere in the workflow body, when you run the script, Nextflow will print the channel contents to standard out. 
-
+    While you're developing your pipeline, you can inspect the contents of any channel by adding the `.view()` operator to the name of the channel. For example, if you add `greeting_ch.view()` anywhere in the workflow body, when you run the script, Nextflow will print the channel contents to standard out.
 
 ### 9.2. Modify the default parameter to point to an input file
 
