@@ -242,7 +242,8 @@ Snapshot Summary:
 SUCCESS: Executed 1 tests in 5.935s
 ```
 
-!!! note 
+!!! note
+
     If you get a `java.nio.file.AccessDeniedException` error, remove the work directory with 
     ```
     sudo rm -rf work/
@@ -330,20 +331,25 @@ nf-test test modules/local/samtools/index/tests/main.nf.test --update-snapshot
 This should produce the following output:
 
 ```bash
-🚀 nf-test 0.8.4
-https://code.askimed.com/nf-test
+🚀 nf-test 0.9.0
+https://www.nf-test.com
 (c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
 
 Warning: every snapshot that fails during this test run is re-record.
 
 Test Process SAMTOOLS_INDEX
 
-  Test [bc664c47] 'reads_son [bam]' PASSED (9.6s)
-  Test [f413ec92] 'reads_mother [bam]' PASSED (9.138s)
-  Test [99a73481] 'reads_father [bam]' PASSED (9.536s)
+  Test [bc664c47] 'reads_son [bam]' PASSED (5.917s)
+  Test [f413ec92] 'reads_mother [bam]' PASSED (5.448s)
+  Test [99a73481] 'reads_father [bam]' PASSED (5.872s)
+  Snapshots:
+    2 created [reads_father [bam], reads_mother [bam]]
 
 
-SUCCESS: Executed 3 tests in 28.281s
+Snapshot Summary:
+  2 created
+
+SUCCESS: Executed 3 tests in 17.248s
 ```
 
 Notice the warning, referring to the effect of the `--update-snapshot` parameter.
