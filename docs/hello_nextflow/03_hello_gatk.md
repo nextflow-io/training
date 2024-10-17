@@ -285,10 +285,10 @@ If you check the work directory, you'll find the output file `reads_mother.bam.g
 
 !!! note
 
-    A GVCF is a special kind of VCF that contains non-variant records as well as variant calls. The first actual variant call in this file occurs at line 329:
+    A GVCF is a special kind of VCF that contains non-variant records as well as variant calls. The first actual variant call in this file occurs at line 175:
 
     ```
-    20_10037292_10066351	4012	.	C	T,<NON_REF>	1398.06	.	DP=44;ExcessHet=0.0000;MLEAC=2,0;MLEAF=1.00,0.00;RAW_MQandDP=158400,44	GT:AD:DP:GQ:PL:SB	1/1:0,43,0:43:99:1412,129,0,1412,129,1412:0,0,21,22
+    20_10037292_10066351	3480	.	C	CT,<NON_REF>	503.03	.	DP=23;ExcessHet=0.0000;MLEAC=2,0;MLEAF=1.00,0.00;RAW_MQandDP=82800,23	GT:AD:DP:GQ:PL:SB	1/1:0,18,0:18:54:517,54,0,517,54,517:0,0,7,11
     ```
 
 ### Takeaway
