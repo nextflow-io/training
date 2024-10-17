@@ -224,14 +224,14 @@ nf-test test modules/local/samtools/index/tests/main.nf.test
 This should produce the following output:
 
 ```bash
-🚀 nf-test 0.8.4
-https://code.askimed.com/nf-test
+🚀 nf-test 0.9.0
+https://www.nf-test.com
 (c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
 
 
 Test Process SAMTOOLS_INDEX
 
-  Test [bc664c47] 'reads_son [bam]' PASSED (10.06s)
+  Test [bc664c47] 'reads_son [bam]' PASSED (5.928s)
   Snapshots:
     1 created [reads_son [bam]]
 
@@ -239,8 +239,15 @@ Test Process SAMTOOLS_INDEX
 Snapshot Summary:
   1 created
 
-SUCCESS: Executed 1 tests in 10.068s
+SUCCESS: Executed 1 tests in 5.935s
 ```
+
+!!! note 
+    If you get a `java.nio.file.AccessDeniedException` error, remove the work directory with 
+    ```
+    sudo rm -rf work/
+    ```
+    and run the test again.
 
 The test verified the first assertion, that the process should complete successfully.
 
