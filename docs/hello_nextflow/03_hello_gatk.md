@@ -68,21 +68,9 @@ docker run -it -v ./data:/data community.wave.seqera.io/library/samtools:1.20--b
 samtools index /data/bam/reads_mother.bam
 ```
 
-#### 0.1.4. Check that the BAM index has been produced
+This should complete immediately, and you should now see a file called `reads_mother.bam.bai` in your working directory.
 
-```bash
-ls /data/bam/
-```
-
-This should show:
-
-```console title="Output"
-reads_father.bam      reads_mother.bam      reads_mother.bam.bai  reads_son.bam
-```
-
-Where `reads_mother.bam.bai` has been created as an index to `reads_mother.bam`.
-
-#### 0.1.5. Exit the container
+#### 0.1.4. Exit the container
 
 ```bash
 exit
@@ -112,17 +100,11 @@ gatk HaplotypeCaller \
         -L /data/ref/intervals.bed
 ```
 
-#### 0.2.4. Check the contents of the output file
+The output file `reads_mother.vcf` is a small test file, so you can `cat` it or click on it to open it and view the contents. If you scroll through, you'll find a header composed of many lines of metadata, followed by a list of variant calls, one per line.
 
-The output file `reads_mother.vcf` is a small test file, so you can `cat` it or click on it to open it and view the contents.
+_TODO: SHOW A FEW LINES_
 
-```bash
-cat reads_mother.vcf
-```
-
-If you scroll through, you'll find a header composed of many lines of metadata, followed by a list of variant calls, one per line.
-
-#### 0.2.5. Exit the container
+#### 0.2.4. Exit the container
 
 ```bash
 exit
@@ -140,7 +122,7 @@ Learn how to wrap those same commands into a two-step workflow that uses contain
 
 ## 1. Write a single-stage workflow that runs Samtools index on a BAM file
 
-#### 1.1. Define the indexing process
+### 1.1. Define the indexing process
 
 ```groovy title="hello-gatk.nf"
 /*
@@ -164,7 +146,7 @@ process SAMTOOLS_INDEX {
 }
 ```
 
-#### 1.2. Add parameter declarations up top
+### 1.2. Add parameter declarations up top
 
 ```groovy title="hello-gatk.nf"
 /*
@@ -175,7 +157,7 @@ process SAMTOOLS_INDEX {
 params.reads_bam = "${projectDir}/data/bam/reads_mother.bam"
 ```
 
-#### 1.3. Add workflow block to run SAMTOOLS_INDEX
+### 1.3. Add workflow block to run SAMTOOLS_INDEX
 
 ```groovy title="hello-gatk.nf"
 workflow {
@@ -188,7 +170,7 @@ workflow {
 }
 ```
 
-#### 1.4. Run it to verify you can run the indexing step
+### 1.4. Run it to verify you can run the indexing step
 
 ```bash
 nextflow run hello-gatk.nf
@@ -215,7 +197,7 @@ Add a second step that consumes the output of the first.
 
 ## 2. Add a second step that runs GATK HaplotypeCaller on the indexed BAM file
 
-#### 2.1. Define the variant calling process
+### 2.1. Define the variant calling process
 
 ```groovy title="hello-gatk.nf"
 /*
@@ -249,7 +231,7 @@ process GATK_HAPLOTYPECALLER {
 }
 ```
 
-#### 2.2. Add definitions for accessory inputs
+### 2.2. Add definitions for accessory inputs
 
 ```groovy title="hello-gatk.nf"
 // Accessory files
@@ -259,7 +241,7 @@ params.reference_dict   = "${projectDir}/data/ref/ref.dict"
 params.intervals        = "${projectDir}/data/ref/intervals.bed"
 ```
 
-#### 2.3. Make a value channel for each of the accessory files
+### 2.3. Make a value channel for each of the accessory files
 
 Add this to the workflow block (after the `reads_ch` creation):
 
@@ -273,7 +255,7 @@ intervals_file  = file(params.intervals)
 
 This will load each of the accessory files in its own single-element value channel.
 
-#### 2.4. Add a call to the workflow block to run GATK_HAPLOTYPECALLER
+### 2.4. Add a call to the workflow block to run GATK_HAPLOTYPECALLER
 
 ```groovy title="hello-gatk.nf"
 // Call variants from the indexed BAM file
@@ -287,7 +269,7 @@ GATK_HAPLOTYPECALLER(
 )
 ```
 
-#### 2.4. Run the workflow to verify that the variant calling step works
+### 2.5. Run the workflow to verify that the variant calling step works
 
 ```bash
 nextflow run hello-gatk.nf -resume
@@ -317,7 +299,7 @@ Make the workflow handle multiple samples in bulk.
 
 ## 3. Adapt the workflow to run on a batch of samples
 
-#### 3.1. Turn the input parameter declaration into a list of the three samples
+### 3.1. Turn the input parameter declaration into a list of the three samples
 
 _Before:_
 
@@ -337,7 +319,7 @@ params.reads_bam = [
 ]
 ```
 
-#### 3.2. Run the workflow to verify that it runs on all three samples
+### 3.2. Run the workflow to verify that it runs on all three samples
 
 ```bash
 nextflow run hello-gatk.nf -resume
@@ -369,7 +351,7 @@ A USER ERROR has occurred: Traversal by intervals was requested but some input f
 
 This is because the script as written so far is not safe for running on multiple samples, because the order of items in the output channel is not guaranteed to match the order of items in the original input channel. This causes the wrong files to be paired up in the second step. So we need to make sure the BAM files and their index files travel together through the channels.
 
-#### 3.3. Change the output of the SAMTOOLS_INDEX process into a tuple that keeps the input file and its index together
+### 3.3. Change the output of the SAMTOOLS_INDEX process into a tuple that keeps the input file and its index together
 
 _Before:_
 
@@ -385,7 +367,7 @@ output:
     tuple path(input_bam), path("${input_bam}.bai")
 ```
 
-#### 3.4. Change the input to the GATK_HAPLOTYPECALLER process to be a tuple
+### 3.4. Change the input to the GATK_HAPLOTYPECALLER process to be a tuple
 
 _Before:_
 
@@ -402,7 +384,7 @@ input:
     tuple path(input_bam), path(input_bam_index)
 ```
 
-#### 3.5. Update the call to GATK_HAPLOTYPECALLER in the workflow block
+### 3.5. Update the call to GATK_HAPLOTYPECALLER in the workflow block
 
 _Before:_
 
@@ -419,7 +401,7 @@ GATK_HAPLOTYPECALLER(
     SAMTOOLS_INDEX.out,
 ```
 
-#### 3.6. Run the workflow to verify it works correctly on all three samples now
+### 3.6. Run the workflow to verify it works correctly on all three samples now
 
 ```bash
 nextflow run hello-gatk.nf -ansi-log false
@@ -450,7 +432,7 @@ Make it easier to handle samples in bulk.
 
 ## 4. Make it nicer to run on arbitrary samples by using a list of files as input
 
-#### 4.1. Create a text file listing the input paths
+### 4.1. Create a text file listing the input paths
 
 ```csv title="sample_bams.txt"
 /workspace/gitpod/hello-nextflow/data/bam/reads_mother.bam
@@ -458,7 +440,7 @@ Make it easier to handle samples in bulk.
 /workspace/gitpod/hello-nextflow/data/bam/reads_son.bam
 ```
 
-#### 4.2. Update the parameter default
+### 4.2. Update the parameter default
 
 _Before:_
 
@@ -478,7 +460,7 @@ _After:_
 params.reads_bam = "${projectDir}/data/sample_bams.txt"
 ```
 
-#### 4.3. Update the channel factory to read lines from a file
+### 4.3. Update the channel factory to read lines from a file
 
 _Before:_
 
@@ -494,7 +476,7 @@ _After:_
 reads_ch = Channel.fromPath(params.reads_bam).splitText()
 ```
 
-#### 4.4. Run the workflow to verify that it works correctly
+### 4.4. Run the workflow to verify that it works correctly
 
 ```bash
 nextflow run hello-gatk.nf -resume -ansi-log false
