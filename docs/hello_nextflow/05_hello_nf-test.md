@@ -482,7 +482,7 @@ Then we can refer to the output of that process in the `when` block where we spe
             input[1] = file("${projectDir}/data/ref/ref.fasta")
             input[2] = file("${projectDir}/data/ref/ref.fasta.fai")
             input[3] = file("${projectDir}/data/ref/ref.dict")
-            input[4] = file("${projectDir}/data/intervals.list")
+            input[4] = file("${projectDir}/data/ref/intervals.bed")
             """
         }
     }
@@ -499,14 +499,14 @@ nf-test test modules/local/gatk/haplotypecaller/tests/main.nf.test
 This produces the following output:
 
 ```bash
-🚀 nf-test 0.8.4
-https://code.askimed.com/nf-test
+🚀 nf-test 0.9.0
+https://www.nf-test.com
 (c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
 
 
 Test Process GATK_HAPLOTYPECALLER
 
-  Test [86fd1bce] 'reads_son [bam]' PASSED (19.082s)
+  Test [86fd1bce] 'reads_son [bam]' PASSED (11.073s)
   Snapshots:
     1 created [reads_son [bam]]
 
@@ -514,7 +514,7 @@ Test Process GATK_HAPLOTYPECALLER
 Snapshot Summary:
   1 created
 
-SUCCESS: Executed 1 tests in 19.09s
+SUCCESS: Executed 1 tests in 11.084s
 ```
 
 It also produces a snapshot file like earlier.
