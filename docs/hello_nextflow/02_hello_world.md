@@ -858,7 +858,15 @@ In most cases, when we run on multiple inputs, the input values are contained in
 
 ### 9.1. Modify the channel declaration to take an input file through a parameter
 
-Here we introduce a new channel constructor, `Channel.fromPath()`, which has some built-in functionality for handling file paths. We're going to use that instead of the `Channel.of()` constructor we used previously. And since our goal is to read in the contents of a `.csv` file, we're going to add the `.splitCsv()` operator to make Nextflow process the file contents accordingly.
+Here we introduce a new channel constructor, `Channel.fromPath()`, which has some built-in functionality for handling file paths. We're going to use that instead of the `Channel.of()` constructor we used previously: 
+
+`greeting_ch = Channel.fromPath(params.input_file)`
+
+Since our goal is to read in the contents of a `.csv` file, we're going to add the `.splitCsv()` operator to make Nextflow parse the file contents accordingly, as well as the `.flatten()` operator to turn the array element produced by `.splitCsv()` into a channel of individual elements. So the line becomes: 
+
+`greeting_ch = Channel.fromPath(params.input_file).splitCsv().flatten()`
+
+And here it is in the context of the workflow body:
 
 _Before:_
 
@@ -871,12 +879,15 @@ _After:_
 
 ```groovy title="hello-world.nf" linenums="38"
 // create a channel for inputs from a file
-greeting_ch = Channel.fromPath(params.input_file).splitCsv()
+greeting_ch = Channel.fromPath(params.input_file).splitCsv().flatten()
 ```
 
 !!! tip
 
-    While you're developing your pipeline, you can inspect the contents of any channel by adding the `.view()` operator to the name of the channel. For example, if you add `greeting_ch.view()` anywhere in the workflow body, when you run the script, Nextflow will print the channel contents to standard out.
+    While you're developing your pipeline, you can inspect the contents of any channel by adding the `.view()` operator to the name of the channel. For example, if you add `greeting_ch.view()` anywhere in the workflow body, when you run the script, Nextflow will print the channel contents to standard out. 
+    
+    You can also use this to inspect the effect of the operators; for example, try comparing the output of `Channel.fromPath(params.input_file).splitCsv().view()` and `Channel.fromPath(params.input_file).splitCsv().flatten().view()`.
+    
 
 ### 9.2. Modify the default parameter to point to an input file
 

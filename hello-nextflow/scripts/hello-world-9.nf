@@ -3,7 +3,7 @@
 /*
  * Pipeline parameters
  */
-params.input_file = "data/greetings.txt"
+params.input_file = "data/greetings.csv"
 
 /*
  * Use echo to print 'Hello World!' to standard out
@@ -43,8 +43,8 @@ process convertToUpper {
 
 workflow {
 
-    // create a channel for inputs from a file
-    greeting_ch = Channel.fromPath(params.input_file).splitText() { it.trim() }
+    // create a channel for inputs from a CSV file
+    greeting_ch = Channel.fromPath(params.input_file).splitCsv().flatten()
 
     // emit a greeting
     sayHello(greeting_ch)
