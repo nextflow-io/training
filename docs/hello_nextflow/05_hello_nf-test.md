@@ -45,8 +45,8 @@ nf-test init
 This should produce the following output:
 
 ```bash
-🚀 nf-test 0.8.4
-https://code.askimed.com/nf-test
+🚀 nf-test 0.9.0
+https://www.nf-test.com
 (c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
 
 Project configured. Configuration is stored in nf-test.config
