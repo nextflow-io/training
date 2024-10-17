@@ -654,15 +654,15 @@ test("reads_mother [bam]") {
             input[1] = file("${projectDir}/data/ref/ref.fasta")
             input[2] = file("${projectDir}/data/ref/ref.fasta.fai")
             input[3] = file("${projectDir}/data/ref/ref.dict")
-            input[4] = file("${projectDir}/data/intervals.list")
+            input[4] = file("${projectDir}/data/ref/intervals.bed")
             """
         }
     }
 
     then {
         assert process.success
-        assert path(process.out[0][0][1]).readLines().contains('#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	NA12878')
-        assert path(process.out[0][0][1]).readLines().contains('20	10040001	.	T	<NON_REF>	.	.	END=10040013	GT:DP:GQ:MIN_DP:PL	0/0:28:81:27:0,81,829')
+        assert path(process.out[0][0][1]).readLines().contains('#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	reads_mother')
+        assert path(process.out[0][0][1]).readLines().contains('20_10037292_10066351	3277	.	G	<NON_REF>	.	.	END=3278	GT:DP:GQ:MIN_DP:PL	0/0:38:99:37:0,102,1530')
     }
 }
 ```
@@ -693,15 +693,15 @@ test("reads_father [bam]") {
             input[1] = file("${projectDir}/data/ref/ref.fasta")
             input[2] = file("${projectDir}/data/ref/ref.fasta.fai")
             input[3] = file("${projectDir}/data/ref/ref.dict")
-            input[4] = file("${projectDir}/data/intervals.list")
+            input[4] = file("${projectDir}/data/ref/intervals.bed")
             """
         }
     }
 
     then {
         assert process.success
-        assert path(process.out[0][0][1]).readLines().contains('#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	NA12877')
-        assert path(process.out[0][0][1]).readLines().contains('20	10040001	.	T	<NON_REF>	.	.	END=10040011	GT:DP:GQ:MIN_DP:PL	0/0:30:81:29:0,81,1025')
+        assert path(process.out[0][0][1]).readLines().contains('#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	reads_father')
+        assert path(process.out[0][0][1]).readLines().contains('20_10037292_10066351	3277	.	G	<NON_REF>	.	.	END=3281	GT:DP:GQ:MIN_DP:PL	0/0:44:99:42:0,120,1800')
     }
 }
 ```
@@ -715,19 +715,19 @@ nf-test test modules/local/gatk/haplotypecaller/tests/main.nf.test
 Produces:
 
 ```bash
-🚀 nf-test 0.8.4
-https://code.askimed.com/nf-test
+🚀 nf-test 0.9.0
+https://www.nf-test.com
 (c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
 
 
 Test Process GATK_HAPLOTYPECALLER
 
-  Test [86fd1bce] 'reads_son [bam]' PASSED (21.639s)
-  Test [547788fd] 'reads_mother [bam]' PASSED (18.153s)
-  Test [be786719] 'reads_father [bam]' PASSED (18.058s)
+  Test [86fd1bce] 'reads_son [bam]' PASSED (10.826s)
+  Test [547788fd] 'reads_mother [bam]' PASSED (10.999s)
+  Test [be786719] 'reads_father [bam]' PASSED (10.799s)
 
 
-SUCCESS: Executed 3 tests in 57.858s
+SUCCESS: Executed 3 tests in 32.657s
 ```
 
 That completes the basic test plan for this second step in the pipeline. On to the third and last!
