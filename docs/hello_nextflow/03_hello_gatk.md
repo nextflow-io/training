@@ -1,19 +1,31 @@
 # Part 2: Hello GATK
 
-The [GATK](https://gatk.broadinstitute.org/) (Genome Analysis Toolkit) is a widely used software package developed by the Broad Institute to analyze high-throughput sequencing data. We're going to use GATK and a related tool, [Samtools](https://www.htslib.org/), in a very basic pipeline that identifies genomic variants through a method called **variant calling**.
+In Part 1, you learned how to use the basic building blocks of Nextflow to assemble a simple pipeline capable of processing some text and parallelizing execution if there were multiple inputs. Now, we show you how to use the same components and principles to build a pipeline that does something a bit more interesting, and hopefully a bit more relatable to your work.
 
-![GATK pipeline](img/gatk-pipeline.png)
+Specifically, we show you how to implement a simple variant calling pipeline with [GATK](https://gatk.broadinstitute.org/) (Genome Analysis Toolkit), a widely used software package for analyzing high-throughput sequencing data.
 
 !!! note
 
     Don't worry if you're not familiar with GATK or genomics in general. We'll summarize the necessary concepts as we go, and the workflow implementation principles we demonstrate here apply broadly to any command line tool that takes in some input files and produce some output files.
 
-A full variant calling pipeline typically involves a lot of steps. For simplicity, we are only going to look at the core variant calling steps.
-
 ### Method overview
 
-1. Generate an index file for each BAM input file using Samtools
-2. Run the GATK HaplotypeCaller on each BAM input file to generate per-sample variant calls in GVCF (Genomic Variant Call Format)
+Variant calling is a genomic analysis method that aims to identify variations in a genome sequence relative to a reference genome. Here we are going to use tools and methods designed for calling short variants, _i.e._ SNPs and indels.
+
+A full variant calling pipeline typically involves a lot of steps, including mapping to the reference and variant filtering and prioritization. For simplicity, we are going to focus on the core variant calling step, which takes as its main input a file of short-read sequencing data in BAM format (Binary-compressed version of SAM, for Sequence Alignment Map), as well as a reference genome and a list of genomic intervals to analyze.
+
+![GATK pipeline](img/gatk-pipeline.png)
+
+For this exercise, we provide you with three samples in BAM format (see Dataset below). However, GATK requires an index file for each BAM file, which we did not provide (on purpose), so the workflow will have to create one as a preliminary step.
+
+!!! note
+
+    Index files are a common feature of bioinformatics file formats; they contain information about the structure of the main file that allows tools like GATK to access a subset of the data without having to read through the whole file. This is important because of how big these files can get.
+
+So to recap, we're going to develop a workflow that does the following:
+
+1. Generate an index file for each BAM input file using [Samtools](https://www.htslib.org/)
+2. Run the GATK HaplotypeCaller on each BAM input file to generate per-sample variant calls in VCF (Variant Call Format)
 
 <figure class="excalidraw">
 --8<-- "docs/hello_nextflow/img/haplotype-caller.excalidraw.svg"
@@ -56,21 +68,9 @@ docker run -it -v ./data:/data community.wave.seqera.io/library/samtools:1.20--b
 samtools index /data/bam/reads_mother.bam
 ```
 
-#### 0.1.4. Check that the BAM index has been produced
+This should complete immediately, and you should now see a file called `reads_mother.bam.bai` in your working directory.
 
-```bash
-ls /data/bam/
-```
-
-This should show:
-
-```console title="Output"
-reads_father.bam      reads_mother.bam      reads_mother.bam.bai  reads_son.bam
-```
-
-Where `reads_mother.bam.bai` has been created as an index to `reads_mother.bam`.
-
-#### 0.1.5. Exit the container
+#### 0.1.4. Exit the container
 
 ```bash
 exit
@@ -96,28 +96,33 @@ docker run -it -v ./data:/data community.wave.seqera.io/library/gatk4:4.5.0.0--7
 gatk HaplotypeCaller \
         -R /data/ref/ref.fasta \
         -I /data/bam/reads_mother.bam \
-        -O reads_mother.g.vcf \
-        -L /data/ref/intervals.bed \
-        -ERC GVCF
+        -O reads_mother.vcf \
+        -L /data/ref/intervals.bed
 ```
 
-#### 0.2.4. Check the contents of the output file
+The output file `reads_mother.vcf` is a small test file, so you can `cat` it or click on it to open it and view the contents. If you scroll through, you'll find a header composed of many lines of metadata, followed by a list of variant calls, one per line.
 
-```bash
-cat reads_mother.g.vcf
-```
+_TODO: SHOW A FEW LINES_
 
-#### 0.2.5. Exit the container
+#### 0.2.4. Exit the container
 
 ```bash
 exit
 ```
 
+### Takeaway
+
+You know how to pull a container and run it interactively, and you know how to run the indexing and variant calling commands directly in the terminal.
+
+### What's next?
+
+Learn how to wrap those same commands into a two-step workflow that uses containers to execute the work.
+
 ---
 
 ## 1. Write a single-stage workflow that runs Samtools index on a BAM file
 
-#### 1.1. Define the indexing process
+### 1.1. Define the indexing process
 
 ```groovy title="hello-gatk.nf"
 /*
@@ -141,7 +146,7 @@ process SAMTOOLS_INDEX {
 }
 ```
 
-#### 1.2. Add parameter declarations up top
+### 1.2. Add parameter declarations up top
 
 ```groovy title="hello-gatk.nf"
 /*
@@ -152,7 +157,7 @@ process SAMTOOLS_INDEX {
 params.reads_bam = "${projectDir}/data/bam/reads_mother.bam"
 ```
 
-#### 1.3. Add workflow block to run SAMTOOLS_INDEX
+### 1.3. Add workflow block to run SAMTOOLS_INDEX
 
 ```groovy title="hello-gatk.nf"
 workflow {
@@ -165,7 +170,7 @@ workflow {
 }
 ```
 
-#### 1.4. Run it to verify you can run the indexing step
+### 1.4. Run it to verify you can run the indexing step
 
 ```bash
 nextflow run hello-gatk.nf
@@ -192,11 +197,11 @@ Add a second step that consumes the output of the first.
 
 ## 2. Add a second step that runs GATK HaplotypeCaller on the indexed BAM file
 
-#### 2.1. Define the variant calling process
+### 2.1. Define the variant calling process
 
 ```groovy title="hello-gatk.nf"
 /*
- * Call variants with GATK HaplotypeCaller in GVCF mode
+ * Call variants with GATK HaplotypeCaller
  */
 process GATK_HAPLOTYPECALLER {
 
@@ -213,21 +218,20 @@ process GATK_HAPLOTYPECALLER {
         path interval_list
 
     output:
-        path "${input_bam}.g.vcf"
-        path "${input_bam}.g.vcf.idx"
+        path "${input_bam}.vcf"
+        path "${input_bam}.vcf.idx"
 
     """
     gatk HaplotypeCaller \
         -R ${ref_fasta} \
         -I ${input_bam} \
-        -O ${input_bam}.g.vcf \
-        -L ${interval_list} \
-        -ERC GVCF
+        -O ${input_bam}.vcf \
+        -L ${interval_list}
     """
 }
 ```
 
-#### 2.2. Add definitions for accessory inputs
+### 2.2. Add definitions for accessory inputs
 
 ```groovy title="hello-gatk.nf"
 // Accessory files
@@ -237,7 +241,7 @@ params.reference_dict   = "${projectDir}/data/ref/ref.dict"
 params.intervals        = "${projectDir}/data/ref/intervals.bed"
 ```
 
-#### 2.3. Make a value channel for each of the accessory files
+### 2.3. Make a value channel for each of the accessory files
 
 Add this to the workflow block (after the `reads_ch` creation):
 
@@ -251,7 +255,7 @@ intervals_file  = file(params.intervals)
 
 This will load each of the accessory files in its own single-element value channel.
 
-#### 2.4. Add a call to the workflow block to run GATK_HAPLOTYPECALLER
+### 2.4. Add a call to the workflow block to run GATK_HAPLOTYPECALLER
 
 ```groovy title="hello-gatk.nf"
 // Call variants from the indexed BAM file
@@ -265,7 +269,7 @@ GATK_HAPLOTYPECALLER(
 )
 ```
 
-#### 2.4. Run the workflow to verify that the variant calling step works
+### 2.5. Run the workflow to verify that the variant calling step works
 
 ```bash
 nextflow run hello-gatk.nf -resume
@@ -281,15 +285,7 @@ executor >  local (2)
 [2d/43c247] process > GATK_HAPLOTYPECALLER (1) [100%] 1 of 1 ✔
 ```
 
-If you check the work directory, you'll find the output file `reads_mother.bam.g.vcf`. Because this is a small test file, you can click on it to open it and view the contents, which consist of 92 lines of header metadata followed by a list of genomic variant calls, one per line.
-
-!!! note
-
-    A GVCF is a special kind of VCF that contains non-variant records as well as variant calls. The first actual variant call in this file occurs at line 325:
-
-    ```
-    20 10040772 . C CT,<NON_REF> 473.03 . DP=22;ExcessHet=0.0000;MLEAC=2,0;MLEAF=1.00,0.00;RAW_MQandDP=79200,22 GT:AD:DP:GQ:PL:SB 1/1:0,17,0:17:51:487,51,0,488,51,488:0,0,7,10
-    ```
+You'll find the output file `reads_mother.bam.vcf` in the results directory. If you open it, you should see the same contents as in the file you generated by running the GATK command directly in the container.
 
 ### Takeaway
 
@@ -303,7 +299,7 @@ Make the workflow handle multiple samples in bulk.
 
 ## 3. Adapt the workflow to run on a batch of samples
 
-#### 3.1. Turn the input parameter declaration into a list of the three samples
+### 3.1. Turn the input parameter declaration into a list of the three samples
 
 _Before:_
 
@@ -323,7 +319,7 @@ params.reads_bam = [
 ]
 ```
 
-#### 3.2. Run the workflow to verify that it runs on all three samples
+### 3.2. Run the workflow to verify that it runs on all three samples
 
 ```bash
 nextflow run hello-gatk.nf -resume
@@ -339,7 +335,7 @@ Caused by:
 
 Command executed:
 
-  gatk HaplotypeCaller         -R ref.fasta         -I reads_father.bam         -O reads_father.bam.g.vcf         -L intervals.bed         -ERC GVCF
+  gatk HaplotypeCaller         -R ref.fasta         -I reads_father.bam         -O reads_father.bam.vcf         -L intervals.bed         -ERC GVCF
 
 Command exit status:
   2
@@ -355,7 +351,7 @@ A USER ERROR has occurred: Traversal by intervals was requested but some input f
 
 This is because the script as written so far is not safe for running on multiple samples, because the order of items in the output channel is not guaranteed to match the order of items in the original input channel. This causes the wrong files to be paired up in the second step. So we need to make sure the BAM files and their index files travel together through the channels.
 
-#### 3.3. Change the output of the SAMTOOLS_INDEX process into a tuple that keeps the input file and its index together
+### 3.3. Change the output of the SAMTOOLS_INDEX process into a tuple that keeps the input file and its index together
 
 _Before:_
 
@@ -371,7 +367,7 @@ output:
     tuple path(input_bam), path("${input_bam}.bai")
 ```
 
-#### 3.4. Change the input to the GATK_HAPLOTYPECALLER process to be a tuple
+### 3.4. Change the input to the GATK_HAPLOTYPECALLER process to be a tuple
 
 _Before:_
 
@@ -388,7 +384,7 @@ input:
     tuple path(input_bam), path(input_bam_index)
 ```
 
-#### 3.5. Update the call to GATK_HAPLOTYPECALLER in the workflow block
+### 3.5. Update the call to GATK_HAPLOTYPECALLER in the workflow block
 
 _Before:_
 
@@ -405,7 +401,7 @@ GATK_HAPLOTYPECALLER(
     SAMTOOLS_INDEX.out,
 ```
 
-#### 3.6. Run the workflow to verify it works correctly on all three samples now
+### 3.6. Run the workflow to verify it works correctly on all three samples now
 
 ```bash
 nextflow run hello-gatk.nf -ansi-log false
@@ -436,7 +432,7 @@ Make it easier to handle samples in bulk.
 
 ## 4. Make it nicer to run on arbitrary samples by using a list of files as input
 
-#### 4.1. Create a text file listing the input paths
+### 4.1. Create a text file listing the input paths
 
 ```csv title="sample_bams.txt"
 /workspace/gitpod/hello-nextflow/data/bam/reads_mother.bam
@@ -444,7 +440,7 @@ Make it easier to handle samples in bulk.
 /workspace/gitpod/hello-nextflow/data/bam/reads_son.bam
 ```
 
-#### 4.2. Update the parameter default
+### 4.2. Update the parameter default
 
 _Before:_
 
@@ -464,7 +460,7 @@ _After:_
 params.reads_bam = "${projectDir}/data/sample_bams.txt"
 ```
 
-#### 4.3. Update the channel factory to read lines from a file
+### 4.3. Update the channel factory to read lines from a file
 
 _Before:_
 
@@ -480,7 +476,7 @@ _After:_
 reads_ch = Channel.fromPath(params.reads_bam).splitText()
 ```
 
-#### 4.4. Run the workflow to verify that it works correctly
+### 4.4. Run the workflow to verify that it works correctly
 
 ```bash
 nextflow run hello-gatk.nf -resume -ansi-log false
@@ -501,189 +497,12 @@ Launching `hello-gatk.nf` [backstabbing_raman] DSL2 - revision: 5378632b71
 
 ### Takeaway
 
-You know how to make a variant calling workflow handle a file containing input samples.
+You know how to make a multi-step workflow handle a file containing input samples.
 
 ### What's next?
 
-Add a joint genotyping step that combines the data from all the samples.
+Celebrate your success and take an extra long break!
 
----
-
-## 5. Stretch goal: Add joint genotyping step
-
-To complicate matters a little, the GATK variant calling method calls for a consolidation step where we combine and re-analyze the variant calls obtained per sample in order to obtain definitive 'joint' variant calls for a group or _cohort_ of samples (in this case, the family trio).
-
-![Joint analysis](img/joint-calling.png)
-
-This involves using a GATK tool called GenomicsDBImport that combines the per-sample calls into a data store (analogous to a database), followed by another GATK tool, GenotypeGVCFs, which performs the actual 'joint genotyping' analysis. These two tools can be run in series within the same process.
-
-One slight complication is that these tools require the use of individually specified VCF files, and the syntax of the GenomicsDBImport tool looks like this:
-
-```bash title="hello-gatk.nf"
-gatk GenomicsDBImport \
-    -V sample1.vcf.gz \
-    -V sample2.vcf.gz \
-    -V sample3.vcf.gz \
-    ...
-```
-
-So to perform joint genotyping, we will need to collect all VCF files together in a single process and construct a command line for GenomicsDBImport.
-
-#### 5.1. Write a process called GATK_JOINTGENOTYPING that wraps GenomicsDBImport and GenotypeGVCFs
-
-```groovy title="hello-gatk.nf"
-/*
- * Consolidate GVCFs and apply joint genotyping analysis
- */
-process GATK_JOINTGENOTYPING {
-
-    container "community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"
-
-    publishDir 'results', mode: 'copy'
-
-    input:
-        path vcfs
-        path idxs
-        val cohort_name
-        path ref_fasta
-        path ref_index
-        path ref_dict
-        path interval_list
-
-    output:
-        path "${cohort_name}.joint.vcf"
-        path "${cohort_name}.joint.vcf.idx"
-
-    script:
-    """
-    gatk GenomicsDBImport \
-        -V ${vcfs} \
-        --genomicsdb-workspace-path ${cohort_name}_gdb \
-        -L ${interval_list}
-
-    gatk GenotypeGVCFs \
-        -R ${ref_fasta} \
-        -V gendb://${cohort_name}_gdb \
-        -O ${cohort_name}.joint.vcf \
-        -L ${interval_list}
-    """
-}
-```
-
-#### 5.2. Add default value for the cohort name parameter up top
-
-```groovy title="hello-gatk.nf"
-// Base name for final output file
-params.cohort_name = "family_trio"
-```
-
-#### 5.3. Gather the outputs of GATK_HAPLOTYPECALLER across samples using `collect()`
-
-We collect the VCFs and their indices separately in order to list only the VCFs in the command we're going to construct. Since we'll give all of those files together to the joint genotyping process, we don't have to worry about the order of files like we did earlier.
-
-Add this after the call to GATK_HAPLOTYPECALLER:
-
-```groovy title="hello-gatk.nf"
-// Collect variant calling outputs across samples
-all_vcfs = GATK_HAPLOTYPECALLER.out[0].collect()
-all_tbis = GATK_HAPLOTYPECALLER.out[1].collect()
-```
-
-!!! tip
-
-    You can view the contents of the channel after performing this collect operation using `.view()`
-
-#### 5.4. Add a call to the workflow block to run GATK_JOINTGENOTYPING
-
-```groovy title="hello-gatk.nf"
-// Consolidate GVCFs and apply joint genotyping analysis
-GATK_JOINTGENOTYPING(
-    all_vcfs,
-    all_tbis,
-    params.cohort_name,
-    ref_file,
-    ref_index_file,
-    ref_dict_file,
-    intervals_file
-)
-```
-
-#### 5.5. Run the workflow
-
-```bash
-nextflow run hello-gatk.nf -resume
-```
-
-Oh no! The pipeline produces an error. When we dig into the console output, we can see the command executed isn't correct:
-
-```bash
-Command executed:
-
-  gatk GenomicsDBImport -V reads_mother.bam.g.vcf reads_father.bam.g.vcf reads_son.bam.g.vcf --genomicsdb-workspace-path family_trio_gdb -L intervals.bed
-
-  gatk GenotypeGVCFs -R ref.fasta -V gendb://family_trio_gdb -O family_trio.joint.vcf -L intervals.bed
-```
-
-Can you spot the error? We gave `gatk GenomicsDBImport` multiple VCF files for a single `-V` argument, but the tool expects a separate `-V` argument for each VCF file.
-
-#### 5.6. Construct a command line with a separate `-V` argument for each input VCF
-
-We use some string manipulations to repeat the VCFs with the argument `-V`, and replace `-V ${vcfs}` with the resulting `${vcfs_line}`:
-
-_Before:_
-
-```groovy title="hello-gatk.nf"
-    script:
-    """
-    gatk GenomicsDBImport \
-        -V ${vcfs} \
-        --genomicsdb-workspace-path ${cohort_name}_gdb \
-        -L ${interval_list}
-```
-
-_After:_
-
-```groovy title="hello-gatk.nf"
-    script:
-    def vcfs_line = vcfs.collect { "-V ${it}" }.join(' ')
-    """
-    gatk GenomicsDBImport \
-        ${vcfs_line} \
-        --genomicsdb-workspace-path ${cohort_name}_gdb \
-        -L ${interval_list}
-```
-
-#### 5.7. Run the workflow to verify that it generates the final VCF output as expected
-
-```bash
-nextflow run hello-gatk.nf -resume
-```
-
-Now we see the additional process show up in the log output (showing the compact view):
-
-```console title="Output"
-N E X T F L O W  ~  version 24.02.0-edge
-Launching `hello-gatk.nf` [nauseous_thompson] DSL2 - revision: b346a53aae
-executor >  local (7)
-[d1/43979a] process > SAMTOOLS_INDEX (2)       [100%] 3 of 3 ✔
-[20/247592] process > GATK_HAPLOTYPECALLER (3) [100%] 3 of 3 ✔
-[14/7145b6] process > GATK_JOINTGENOTYPING (1) [100%] 1 of 1 ✔
-```
-
-You can find the final output file, `family_trio.joint.vcf`, in the work directory for the last process. Click on it to open it and you'll see 40 lines of metadata header followed by just under 30 jointly genotyped variant records (meaning at least one of the family members has a variant genotype at each genomic position listed).
-
-!!! tip
-
-    Keep in mind the data files covered only a tiny portion of chromosome 20; the real size of a variant callset would be counted in millions of variants. That's why we use only tiny subsets of data for training purposes!
-
-### Takeaway
-
-You know how to make a joint variant calling workflow that outputs a cohort VCF.
-
-### What's next?
-
-Celebrate your success and take an extra long break! This was tough and you deserve it.
-
-In future trainings, you'll learn more sophisticated methods for managing inputs and outputs, as well as modularizing your code, testing it, and configuring execution.
+In the next training module, you'll learn how to use channel operators to develop pipelines with more interesting plumbing.
 
 **Good luck!**
