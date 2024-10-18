@@ -441,7 +441,7 @@ test("reads_son [bam]") {
             script "../../../samtools/index/main.nf"
             process {
                 """
-                input[0] =  [ [id: 'NA12882' ], file("${projectDir}/data/bam/reads_son.bam") ]
+                input[0] =  [ [id: 'reads_son' ], file("${projectDir}/data/bam/reads_son.bam") ]
                 """
             }
         }
@@ -526,7 +526,7 @@ Test Process GATK_HAPLOTYPECALLER
           "0": [                                                                                                        "0": [
               [                                                                                                     [
                   {                                                                                                     {
-                      "id": "NA12882"                                                                                       "id": "NA12882"
+                      "id": "reads_son"                                                                                       "id": "reads_son"
                   },                                                                                                    },
                   "reads_son.bam.g.vcf:md5,f3583cbbe439469bfc166612e1617694",                      |                    "reads_son.bam.g.vcf:md5,428f855d616b34d44a4f0a3bcc1a0b14",
                   "reads_son.bam.g.vcf.idx:md5,16a78feaf6602adb2a131494e0274f9e"                           |                    "reads_son.bam.g.vcf.idx:md5,5a8d299625ef3cd3266229507a789dbb"
@@ -572,8 +572,8 @@ _After:_
 ```console title="modules/local/gatk/haplotypecaller/tests/main.nf.test" linenums="35"
 then {
     assert process.success
-    assert path(process.out[0][0][1]).readLines().contains('#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	NA12882')
-    assert path(process.out[0][0][1]).readLines().contains('20	10040001	.	T	<NON_REF>	.	.	END=10040048	GT:DP:GQ:MIN_DP:PL	0/0:40:99:37:0,99,1150')
+    assert path(process.out[0][0][1]).readLines().contains('#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	reads_son')
+    assert path(process.out[0][0][1]).readLines().contains('20_10037292_10066351	3277	.	G	<NON_REF>	.	.	END=3282	GT:DP:GQ:MIN_DP:PL	0/0:25:72:24:0,72,719')
 }
 ```
 
@@ -619,7 +619,7 @@ test("reads_mother [bam]") {
             script "../../../samtools/index/main.nf"
             process {
                 """
-                input[0] =  [ [id: 'NA12882' ], file("${projectDir}/data/bam/reads_mother.bam") ]
+                input[0] =  [ [id: 'reads_mother' ], file("${projectDir}/data/bam/reads_mother.bam") ]
                 """
             }
         }
@@ -635,15 +635,15 @@ test("reads_mother [bam]") {
             input[1] = file("${projectDir}/data/ref/ref.fasta")
             input[2] = file("${projectDir}/data/ref/ref.fasta.fai")
             input[3] = file("${projectDir}/data/ref/ref.dict")
-            input[4] = file("${projectDir}/data/intervals.list")
+            input[4] = file("${projectDir}/data/ref/intervals.bed")
             """
         }
     }
 
     then {
         assert process.success
-        assert path(process.out[0][0][1]).readLines().contains('#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	NA12878')
-        assert path(process.out[0][0][1]).readLines().contains('20	10040001	.	T	<NON_REF>	.	.	END=10040013	GT:DP:GQ:MIN_DP:PL	0/0:28:81:27:0,81,829')
+        assert path(process.out[0][0][1]).readLines().contains('#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	reads_mother')
+        assert path(process.out[0][0][1]).readLines().contains('20_10037292_10066351	3277	.	G	<NON_REF>	.	.	END=3278	GT:DP:GQ:MIN_DP:PL	0/0:38:99:37:0,102,1530')
     }
 }
 ```
@@ -658,7 +658,7 @@ test("reads_father [bam]") {
             script "../../../samtools/index/main.nf"
             process {
                 """
-                input[0] =  [ [id: 'NA12882' ], file("${projectDir}/data/bam/reads_father.bam") ]
+                input[0] =  [ [id: 'reads_father' ], file("${projectDir}/data/bam/reads_father.bam") ]
                 """
             }
         }
@@ -674,15 +674,15 @@ test("reads_father [bam]") {
             input[1] = file("${projectDir}/data/ref/ref.fasta")
             input[2] = file("${projectDir}/data/ref/ref.fasta.fai")
             input[3] = file("${projectDir}/data/ref/ref.dict")
-            input[4] = file("${projectDir}/data/intervals.list")
+            input[4] = file("${projectDir}/data/ref/intervals.bed")
             """
         }
     }
 
     then {
         assert process.success
-        assert path(process.out[0][0][1]).readLines().contains('#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	NA12877')
-        assert path(process.out[0][0][1]).readLines().contains('20	10040001	.	T	<NON_REF>	.	.	END=10040011	GT:DP:GQ:MIN_DP:PL	0/0:30:81:29:0,81,1025')
+        assert path(process.out[0][0][1]).readLines().contains('#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	reads_father')
+        assert path(process.out[0][0][1]).readLines().contains('20_10037292_10066351	3277	.	G	<NON_REF>	.	.	END=3281	GT:DP:GQ:MIN_DP:PL	0/0:44:99:42:0,120,1800')
     }
 }
 ```
@@ -824,7 +824,7 @@ test("family_trio [vcf] [idx]") {
             input[2] = file("${projectDir}/data/ref/ref.fasta")
             input[3] = file("${projectDir}/data/ref/ref.fasta.fai")
             input[4] = file("${projectDir}/data/ref/ref.dict")
-            input[5] = file("${projectDir}/data/intervals.list")
+            input[5] = file("${projectDir}/data/ref/intervals.bed")
             """
         }
     }
@@ -837,8 +837,8 @@ The output of the joint genotyping step is another VCF file, so we're going to u
 ```groovy title="modules/local/gatk/jointgenotyping/tests/main.nf.test" linenums="25"
 then {
     assert process.success
-    assert path(process.out[0][0]).readLines().contains('#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	NA12877	NA12878	NA12882')
-    assert path(process.out[0][0]).readLines().contains('20	10040772	.	C	CT	1568.89	.	AC=5;AF=0.833;AN=6;BaseQRankSum=0.399;DP=82;ExcessHet=0.0000;FS=4.291;MLEAC=5;MLEAF=0.833;MQ=60.00;MQRankSum=0.00;QD=21.79;ReadPosRankSum=-9.150e-01;SOR=0.510	GT:AD:DP:GQ:PL	0/1:14,16:30:99:370,0,348	1/1:0,17:17:51:487,51,0	1/1:0,25:25:75:726,75,0')
+    assert path(process.out[0][0]).readLines().contains('#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	reads_father	reads_mother	reads_son')
+    assert path(process.out[0][0]).readLines().contains('20_10037292_10066351	3480	.	C	CT	1625.89	.	AC=5;AF=0.833;AN=6;BaseQRankSum=0.220;DP=85;ExcessHet=0.0000;FS=2.476;MLEAC=5;MLEAF=0.833;MQ=60.00;MQRankSum=0.00;QD=21.68;ReadPosRankSum=-1.147e+00;SOR=0.487	GT:AD:DP:GQ:PL	0/1:15,16:31:99:367,0,375	1/1:0,18:18:54:517,54,0	1/1:0,26:26:78:756,78,0')
 }
 ```
 
