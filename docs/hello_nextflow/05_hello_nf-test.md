@@ -870,17 +870,17 @@ nf-test test modules/local/gatk/jointgenotyping/tests/main.nf.test
 Produces:
 
 ```bash
-🚀 nf-test 0.8.4
-https://code.askimed.com/nf-test
+🚀 nf-test 0.9.0
+https://www.nf-test.com
 (c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
 
 
 Test Process GATK_JOINTGENOTYPING
 
-  Test [24c3cb4b] 'family_trio [vcf] [idx]' PASSED (14.881s)
+  Test [24c3cb4b] 'family_trio [vcf] [idx]' PASSED (10.945s)
 
 
-SUCCESS: Executed 1 tests in 14.885s
+SUCCESS: Executed 1 tests in 10.952s
 ```
 
 It works! And that's it for module-level tests for our pipeline.
@@ -938,17 +938,17 @@ nf-test test tests/hello-nf-test.nf.test
 This produces:
 
 ```bash
-🚀 nf-test 0.8.4
-https://code.askimed.com/nf-test
+🚀 nf-test 0.9.0
+https://www.nf-test.com
 (c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
 
 
 Test Workflow hello-nf-test.nf
 
-  Test [df3a3a8c] 'Should run without failures' PASSED (62.493s)
+  Test [df3a3a8c] 'Should run without failures' PASSED (33.485s)
 
 
-SUCCESS: Executed 1 tests in 62.498s
+SUCCESS: Executed 1 tests in 33.492s
 ```
 
 That's it! If necessary, more nuanced assertions can be added to test for the validity and content of the pipeline outputs. You can learn more about the different kinds of assertions you can use in the [nf-test documentation](https://www.nf-test.com/docs/assertions/assertions/).
