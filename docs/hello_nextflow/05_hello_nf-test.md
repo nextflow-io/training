@@ -20,12 +20,6 @@ cp scripts/nextflow.config .
 cp -r scripts/modules .
 ```
 
-You also need to unzip the reference data files:
-
-```
-tar -zxvf data/ref.tar.gz -C data/
-```
-
 ### 0.1 Run the workflow to verify that it produces the expected outputs
 
 ```bash
@@ -469,7 +463,7 @@ Then we can refer to the output of that process in the `when` block where we spe
             input[1] = file("${projectDir}/data/ref/ref.fasta")
             input[2] = file("${projectDir}/data/ref/ref.fasta.fai")
             input[3] = file("${projectDir}/data/ref/ref.dict")
-            input[4] = file("${projectDir}/data/intervals.list")
+            input[4] = file("${projectDir}/data/ref/intervals.bed")
             """
         }
     }
