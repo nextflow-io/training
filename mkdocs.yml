@@ -165,13 +165,9 @@ plugins:
     - enumerate-headings:
           restart_increment_after:
               - envsetup/01_setup.md
+              - hello_nextflow/01_orientation.md
               - basic_training/orientation.md
               - advanced/orientation.md
-              - hello_nextflow/01_orientation.md
-              - nf_customize/01_orientation.md
-              - nf_develop/1_01_orientation.md
-              - troubleshoot/01_orientation.md
-              - hands_on/01_datasets.md
 
           exclude:
               - index.md

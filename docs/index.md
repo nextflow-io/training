@@ -53,7 +53,7 @@ The training courses listed below are designed to be useable as a self-service r
 
         :material-lightbulb: Comprehensive training material for exploring the full scope of Nextflow's capabilities.
 
-    The fundamentals training material covers all things Nextflow. Excellent reference material for anyone looking build complex workflows with Nextflow.
+    The fundamentals training material covers all things Nextflow. Excellent reference material for anyone looking to build complex workflows with Nextflow.
 
     [Launch the fundamentals training :material-arrow-right:](basic_training/index.md){ .md-button .md-button--primary }
 
