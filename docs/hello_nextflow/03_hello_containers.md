@@ -2,7 +2,7 @@
 
 NOTE: THIS IS A PLACEHOLDER FOR MATERIAL THAT IS COMING SOON
 
-In Part 1, you learned how to use the basic building blocks of Nextflow to assemble a simple pipeline capable of processing some text and parallelizing execution if there were multiple inputs. 
+In Part 1, you learned how to use the basic building blocks of Nextflow to assemble a simple pipeline capable of processing some text and parallelizing execution if there were multiple inputs.
 
 However, you were limited to utilizing only basic UNIX tools that were already installed in your computing environment. Real-world work typically requires you to use all sorts of tools and packages that don't come standard. Usually you'd have to figure out how to install all of the necessary tools and their software dependencies, as well as manage any conflicts that may arise between dependencies that aren't compatible with each other.
 
