@@ -1,4 +1,4 @@
-# Part 4: Hello Config
+# Part 5: Hello Config
 
 This section will explore how to configure Nextflow pipelines using configuration files, profiles, process directives, and executors.
 Configuration management is an essential aspect of Nextflow pipeline development, allowing you to customize the behavior of your pipeline, adapt it to different environments, and optimize resource usage.

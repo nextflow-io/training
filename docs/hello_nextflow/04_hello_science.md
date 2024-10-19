@@ -1,4 +1,4 @@
-# Part 2: Hello GATK
+# Part 3: Hello Science
 
 In Part 1, you learned how to use the basic building blocks of Nextflow to assemble a simple pipeline capable of processing some text and parallelizing execution if there were multiple inputs. Now, we show you how to use the same components and principles to build a pipeline that does something a bit more interesting, and hopefully a bit more relatable to your work.
 

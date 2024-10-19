@@ -1,4 +1,4 @@
-# Part 5: Hello Modules
+# Part 6: Hello Modules
 
 In Nextflow, a module is a way to encapsulate a single process by itself in a standalone code file. To use a module in a workflow, you just add a single-line import statement to your workflow code file; then you can integrate the process into the workflow the same way you normally would.
 

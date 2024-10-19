@@ -1,4 +1,4 @@
-# Part 3: Hello Channels
+# Part 4: Hello Channels
 
 In Part 2, you built a pipeline that was completely linear and processed each sample's data independently of the others. However, in real pipelines, you may need to combine data from multiple samples, or combine different kinds of data. Here we show you how to use channels and channel operators to implement a pipeline with more interesting plumbing.
 
