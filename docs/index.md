@@ -107,9 +107,7 @@ The training courses listed below are designed to be useable as a self-service r
 
         :material-run-fast: A short hands-on tutorial focused on a concrete analysis pipeline example.
 
-    This course was developed as a "learn by doing" tutorial intended as a fast, hands-on way to get to grips with Nextflow using a very concrete analysis pipeline example. It is no longer being maintained and will eventually be removed from the training portal.
-
-    [Launch the simple RNA-seq variant calling training :material-arrow-right:](hands_on/index.md){ .md-button }
+    This course was developed as a "learn by doing" tutorial intended as a fast, hands-on way to get to grips with Nextflow using a very concrete analysis pipeline example. You can still find the materials in the Github repository, but it is no longer being maintained and can no longer be launched in Gitpod or in the training portal.
 
 ## Resources
 
