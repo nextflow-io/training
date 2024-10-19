@@ -9,15 +9,15 @@ hide:
 
 # Nextflow Training
 
-Welcome to the Nextflow community training portal! 
+Welcome to the Nextflow community training portal!
 
 We have several distinct training courses available on this website. Scroll down to find the one that's right for you!
 
 The training courses listed below are designed to be useable as a self-service resource; you can work through them on your own at any time (see Training Environment Setup for practical details). However, you may get even more out of them by joining a group training event.
 
-- Free online events are run regularly by the nf-core community, see the [nf-core events page](https://nf-co.re/events) for more.
-- Seqera (the company that develops Nextflow) runs a variety of training events, see the [Seqera Events](https://seqera.io/events/) page and look for 'Seqera Sessions' and 'Nextflow Summit'.
-- Our Community team also regularly teaches trainings hosted by third party organizations; announcements and signups for those are typically managed by the third-party hosts. 
+-   Free online events are run regularly by the nf-core community, see the [nf-core events page](https://nf-co.re/events) for more.
+-   Seqera (the company that develops Nextflow) runs a variety of training events, see the [Seqera Events](https://seqera.io/events/) page and look for 'Seqera Sessions' and 'Nextflow Summit'.
+-   Our Community team also regularly teaches trainings hosted by third party organizations; announcements and signups for those are typically managed by the third-party hosts.
 
 [![Open in Gitpod](https://img.shields.io/badge/Gitpod-%20Open%20in%20Gitpod-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/nextflow-io/training)
 
@@ -41,7 +41,7 @@ The training courses listed below are designed to be useable as a self-service r
 
         :material-run-fast: A modular training series for getting started with Nextflow.
 
-    This is a foundational course for those who are completely new to Nextflow. It consists of a series of training modules that are designed to help learners build up their skills progressively. The series covers the core components of the Nextflow language as well as essential pipeline design and development practices, and effective use of third-party resources. 
+    This is a foundational course for those who are completely new to Nextflow. It consists of a series of training modules that are designed to help learners build up their skills progressively. The series covers the core components of the Nextflow language as well as essential pipeline design and development practices, and effective use of third-party resources.
 
     [Launch the Hello Nextflow training :material-arrow-right:](hello_nextflow/index.md){ .md-button }
 
@@ -119,7 +119,7 @@ Quick reference to some handy links:
 | ----------------------------------------------------------- | ------------------------------------------------------------ |
 | [Nextflow Docs](https://nextflow.io/docs/latest/index.html) | [Nextflow Slack](https://www.nextflow.io/slack-invite.html)  |
 | [Nextflow Homepage](https://nextflow.io/)                   | [nf-core](https://nf-co.re/)                                 |
-| [Seqera](https://seqera.io/)                                | [Seqera Community Forum](https://community.seqera.io)              |
+| [Seqera](https://seqera.io/)                                | [Seqera Community Forum](https://community.seqera.io)        |
 
 Not sure where to go? Check out the [Getting help](help.md) page.
 
