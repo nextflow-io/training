@@ -35,7 +35,6 @@
         },
         "go.formatTool": "goimports",
         "go.useLanguageServer": true,
-        "explorer.expandSingleFolderWorkspaces": false,
         "launch": {},
         "files.exclude": {
             "**/.git": true,
