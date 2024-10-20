@@ -48,4 +48,4 @@ vscode:
         # - oderwat.indent-rainbow # Highlight indentation level
         - streetsidesoftware.code-spell-checker # Spelling checker for source code
         - ms-vscode.live-server
-        - vscode-auto-collapse-explorer
+        - lukegeneva.auto-collapse-explorer
