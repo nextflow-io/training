@@ -23,14 +23,14 @@ tasks:
     - before: printf 'unset JAVA_TOOL_OPTIONS\n' >> $HOME/.bashrc && exit
 
     - name: Start web server
-      command: gp ports await 23000 && gp preview https://training.nextflow.io
+      command: gp ports await 23000 && gp preview https://training.nextflow.io/hello_nextflow
 
     - name: Load Nextflow Tutorial
       command: docker pull -q nextflow/rnaseq-nf
 
     - name: Start Nextflow Tutorial
       command: |
-          cd nf-training
+          cd hello-nextflow
           source $HOME/.bashrc
           export PS1='\[\e[3;36m\]${PWD/*\//} ->\[\e[0m\] '
           unset JAVA_TOOL_OPTIONS
