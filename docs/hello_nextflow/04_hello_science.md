@@ -419,18 +419,42 @@ And buried in the GATK command error output, there will be a line like this:
 A USER ERROR has occurred: Traversal by intervals was requested but some input files are not indexed.
 ```
 
-Well, that's weird, considering we explicitly indexed the BAM files in the first step of the workflow. Could there be something wrong with the plumbing? Let's check the work directories for the relevant calls.
+Well, that's weird, considering we explicitly indexed the BAM files in the first step of the workflow. Could there be something wrong with the plumbing?
+
+#### 3.2.1. Check the work directories for the relevant calls
 
 TODO _Add snippet of output showing mismatch between main file and index_
 
 What the heck? Nextflow has staged an index file in this process call's work directory, but it's the wrong one. How could this have happened?
 
+#### 3.2.1. Use the [view() operator](https://www.nextflow.io/docs/latest/reference/operator.html#view) to inspect channel contents
+
+Add these two lines in the workflow body before the `GATK_HAPLOTYPER` process call:
+
+```groovy title="hello-gatk.nf"
+    reads_ch.view()
+    SAMTOOLS_INDEX.out.view()
+```
+
+Then run the workflow command again.
+
+```bash
+nextflow run hello-gatk.nf -resume
+```
+
+TODO show result
+
+We see that the BAM files and index files for the three samples are not listed in the same order in these two channels!
+
 !!! note
-When you call a Nextflow process on a channel containing multiple elements, Nextflow will try to parallelize execution as much as possible. The consequence is that the corresponding outputs may be collected in a different order than the original inputs were fed in.
+When you call a Nextflow process on a channel containing multiple elements, Nextflow will try to parallelize execution as much as possible, and will collect outputs in whatever order they become available. The consequence is that the corresponding outputs may be collected in a different order than the original inputs were fed in.
 
 As currently written, our workflow script assumes that the index files will come out of the indexing step listed in the same mother/father/son order as the inputs were given. But that is not guaranteed to be the case, which is why sometimes (though not always) the wrong files get paired up in the second step.
 
 To fix this, we need to make sure the BAM files and their index files travel together through the channels.
+
+!!! tip
+The `view()` statements in the workflow code don't do anything, so it's not a problem to leave them in; however they will clutter up your console output so we recommend removing them when you're done troubleshooting the issue.
 
 ### 3.3. Change the output of the SAMTOOLS_INDEX process into a tuple that keeps the input file and its index together
 
@@ -484,6 +508,8 @@ Of course, since we've now changed the shape of the inputs that `GATK_HAPLOTYPEC
 
 We no longer need to provide the original `reads_ch` to the `GATK_HAPLOTYPECALLER` process, since the BAM file is now bundled (in the form of a symlink) into the channel output by `SAMTOOLS_INDEX`.
 
+As a result, we can simply delete that line.
+
 _Before:_
 
 ```groovy title="hello-gatk.nf"
@@ -499,13 +525,19 @@ GATK_HAPLOTYPECALLER(
     SAMTOOLS_INDEX.out,
 ```
 
-### 3.6. Run the workflow to verify it works correctly on all three samples now
+That is all the re-wiring that is necessary to solve the index mismatch problem.
+
+### 3.6. Run the workflow to verify it works correctly on all three samples every time
+
+Of course, the proof is in the pudding, so let's run the workflow again a few times to make sure this will work reliably going forward.
 
 ```bash
-nextflow run hello-gatk.nf -ansi-log false
+nextflow run hello-gatk.nf -resume
 ```
 
-This time everything should run correctly:
+This time (and every time) everything should run correctly:
+
+TODO update console output snippet
 
 ```console title="Output"
 N E X T F L O W  ~  version 24.02.0-edge
@@ -520,7 +552,7 @@ Launching `hello-gatk.nf` [adoring_hopper] DSL2 - revision: 8cad21ea51
 
 ### Takeaway
 
-You know how to make a variant calling workflow run on multiple samples (independently).
+You know how to make your workflow run on multiple samples (independently).
 
 ### What's next?
 
@@ -528,17 +560,30 @@ Make it easier to handle samples in bulk.
 
 ---
 
-## 4. Make it nicer to run on arbitrary samples by using a list of files as input
+## 4. Make the workflow accept a text file containing a list of files as input
 
-### 4.1. Create a text file listing the input paths
+A very common way to provide multiple data input files to a workflow is to do it with a text file containing the file paths. It can be as simple as a text list with one file path per line and nothing else, or the file can contain additional metadata, in which case it's often called a samplesheet.
 
-```csv title="sample_bams.txt"
+Here we are going to show you how to do the simple case.
+
+### 4.1. Examine the provided text file listing the input paths
+
+We already made a text file listing the input file paths, called `sample_bams.txt`, which you can find in the `data/` directory.
+
+```txt title="sample_bams.txt"
 /workspace/gitpod/hello-nextflow/data/bam/reads_mother.bam
 /workspace/gitpod/hello-nextflow/data/bam/reads_father.bam
 /workspace/gitpod/hello-nextflow/data/bam/reads_son.bam
 ```
 
+As you can see, we listed one file path per line, and they are absolute paths.
+
+!!! note
+Here the files are just on our local filesystem, but we could also point to files in cloud storage.
+
 ### 4.2. Update the parameter default
+
+Let's switch the default value for our `reads_bam` input parameter to point to the `sample_bams.txt` file.
 
 _Before:_
 
@@ -558,7 +603,13 @@ _After:_
 params.reads_bam = "${projectDir}/data/sample_bams.txt"
 ```
 
-### 4.3. Update the channel factory to read lines from a file
+This way we can continue to be lazy but now the list of files no longer lives in the workflow itself, which is a step in the right direction.
+
+### 4.3. Update the channel constructor to read lines from a file
+
+Currently, our input channel constructor treats any files we give it as the data inputs we want to feed to the indexing process. Since we're now giving it a file containing a list of input files, we need to change its behavior to parse the file and treat the file paths it contains as the data inputs.
+
+Fortunately we can do that very simply, just by adding the [`.splitText()` operator](https://www.nextflow.io/docs/latest/reference/operator.html#operator-splittext) to the channel setup step.
 
 _Before:_
 
@@ -574,13 +625,20 @@ _After:_
 reads_ch = Channel.fromPath(params.reads_bam).splitText()
 ```
 
+!!! tip
+This is another good opportunity to use the `.view()` operator to look at what the channel contents look like before and after applying an operator.
+
 ### 4.4. Run the workflow to verify that it works correctly
 
+Let's run the workflow one more time.
+
 ```bash
-nextflow run hello-gatk.nf -resume -ansi-log false
+nextflow run hello-gatk.nf -resume
 ```
 
 This should produce essentially the same result as before:
+
+TODO _update the console output_
 
 ```console title="Output"
 N E X T F L O W  ~  version 24.02.0-edge
@@ -593,14 +651,14 @@ Launching `hello-gatk.nf` [backstabbing_raman] DSL2 - revision: 5378632b71
 [af/2ea71a] Cached process > GATK_HAPLOTYPECALLER (3)
 ```
 
+And that's it! Our simple variant calling workflow has all the basic features we wanted.
+
 ### Takeaway
 
-You know how to make a multi-step workflow handle a file containing input samples.
+You know how to make a multi-step linear workflow handle a file containing input file paths.
 
 ### What's next?
 
 Celebrate your success and take an extra long break!
 
-In the next training module, you'll learn how to use channel operators to develop pipelines with more interesting plumbing.
-
-**Good luck!**
+In the next training module, you'll learn how to use a few other channel operators to develop pipelines with more complex plumbing.
