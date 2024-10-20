@@ -319,6 +319,9 @@ GATK_HAPLOTYPECALLER(
 )
 ```
 
+You should recognize the `SAMTOOLS_INDEX.out` syntax from Part 1 of this training series; we are telling Nextflow to take the channel output by `SAMTOOLS_INDEX` and plugging that into the `GATK_HAPLOTYPECALLER` process.
+
+!!! note
 You'll notice that the inputs are provided in the exact same order in the call to the process as they are listed in the process' input block. In Nextflow, inputs are positional, meaning you _must_ follow the same order; and of course there have to be the same number of elements.
 
 ### 2.5. Run the workflow to verify that the variant calling step works
@@ -418,15 +421,25 @@ A USER ERROR has occurred: Traversal by intervals was requested but some input f
 
 Well, that's weird, considering we explicitly indexed the BAM files in the first step of the workflow. Could there be something wrong with the plumbing? Let's check the work directories for the relevant calls.
 
-TODO Add snippet of output showing mismatch between main file and index
+TODO _Add snippet of output showing mismatch between main file and index_
 
-What we're seeing is that the script as written so far is not safe for running on multiple samples, because the order of items in the indexing call's output channel is not guaranteed to match the order of items in the original input channel. This causes the wrong files to be paired up in the second step.
+What the heck? Nextflow has staged an index file in this process call's work directory, but it's the wrong one. How could this have happened?
 
-So we need to make sure the BAM files and their index files travel together through the channels.
+!!! note
+When you call a Nextflow process on a channel containing multiple elements, Nextflow will try to parallelize execution as much as possible. The consequence is that the corresponding outputs may be collected in a different order than the original inputs were fed in.
+
+As currently written, our workflow script assumes that the index files will come out of the indexing step listed in the same mother/father/son order as the inputs were given. But that is not guaranteed to be the case, which is why sometimes (though not always) the wrong files get paired up in the second step.
+
+To fix this, we need to make sure the BAM files and their index files travel together through the channels.
 
 ### 3.3. Change the output of the SAMTOOLS_INDEX process into a tuple that keeps the input file and its index together
 
-The simplest way to ensure a BAM file and its index stay closely associated is to package them together into a tuple coming out of the index task. TODO TODO TODO
+The simplest way to ensure a BAM file and its index stay closely associated is to package them together into a tuple coming out of the index task.
+
+!!! note
+A **tuple** is a finite, ordered list of elements that is commonly used for returning multiple values from a function.
+
+First, let's change the output of the `SAMTOOLS_INDEX` process to include the BAM file in its output declaration.
 
 _Before:_
 
@@ -442,7 +455,13 @@ output:
     tuple path(input_bam), path("${input_bam}.bai")
 ```
 
+This way, each index file will be tightly coupled with its original BAM file, and the overall output of the indexing step will be a single channel containing pairs of files.
+
 ### 3.4. Change the input to the GATK_HAPLOTYPECALLER process to be a tuple
+
+Since we've changed the 'shape' of the output of the first process in the workflow, we need to update the input definition of the second process to match.
+
+Specifically, where we previously declared two separate input paths in the input block of the `GATK_HAPLOTYPECALLER` process, we now declare a single input matching the structure of the tuple emitted by `SAMTOOLS_INDEX`.
 
 _Before:_
 
@@ -459,7 +478,11 @@ input:
     tuple path(input_bam), path(input_bam_index)
 ```
 
+Of course, since we've now changed the shape of the inputs that `GATK_HAPLOTYPECALLER` expects, we need to update the process call accordingly in the workflow body.
+
 ### 3.5. Update the call to GATK_HAPLOTYPECALLER in the workflow block
+
+We no longer need to provide the original `reads_ch` to the `GATK_HAPLOTYPECALLER` process, since the BAM file is now bundled (in the form of a symlink) into the channel output by `SAMTOOLS_INDEX`.
 
 _Before:_
 
