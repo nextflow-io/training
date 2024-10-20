@@ -35,7 +35,6 @@
         },
         "go.formatTool": "goimports",
         "go.useLanguageServer": true,
-        "workbench.tree.expandMode": "singleClick",
         "explorer.expandSingleFolderWorkspaces": false,
         "launch": {},
         "files.exclude": {
