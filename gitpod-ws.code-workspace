@@ -35,7 +35,7 @@
         },
         "go.formatTool": "goimports",
         "go.useLanguageServer": true,
-        "workspace.supportMultiRootWorkspace": true,
+        "workspace.supportMultiRootWorkspace": false,
         "launch": {},
         "files.exclude": {
             "**/.git": true,
