@@ -1,4 +1,4 @@
-# Introduction
+# Fundamentals Training
 
 You are now on the path to writing reproducible and scalable scientific workflows using Nextflow. This guide complements the full [Nextflow documentation](https://www.nextflow.io/docs/latest) - if you ever have any doubts, please refer to that.
 
