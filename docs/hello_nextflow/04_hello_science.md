@@ -39,9 +39,9 @@ So to recap, we're going to develop a workflow that does the following:
 
 ---
 
-## 0. Warmup: Run Samtools and GATK directly
+## 0. Warmup: Test the Samtools and GATK commands interactively
 
-Just like in the Hello World example, we want to try out the commands manually before we attempt to wrap them in a workflow. The difference here is that we're going to use Docker containers to obtain and run the tools.
+Just like in the Hello World example, we want to try out the commands manually before we attempt to wrap them in a workflow. The tools we need (Samtools and GATK) are not installed in the Gitpod environment, but that's not a problem since you learned how to work with containers in Part 2 of this training series (Hello Containers).
 
 !!! note
 
@@ -64,11 +64,15 @@ docker run -it -v ./data:/data community.wave.seqera.io/library/samtools:1.20--b
 
 #### 0.1.3. Run the indexing command
 
+The [Samtools documentation](https://www.htslib.org/doc/samtools-index.html) gives us the command line to run to index a BAM file.
+
+We only need to provide the input file; the tool will automatically generate a name for the output by appending `.bai` to the input filename.
+
 ```bash
 samtools index /data/bam/reads_mother.bam
 ```
 
-This should complete immediately, and you should now see a file called `reads_mother.bam.bai` in your working directory.
+This should complete immediately, and you should now see a file called `reads_mother.bam.bai` in the same directory as the original BAM input file.
 
 #### 0.1.4. Exit the container
 
@@ -92,6 +96,12 @@ docker run -it -v ./data:/data community.wave.seqera.io/library/gatk4:4.5.0.0--7
 
 #### 0.2.3. Run the variant calling command
 
+The [GATK documentation](https://gatk.broadinstitute.org/hc/en-us/articles/21905025322523-HaplotypeCaller) gives us the command line to run to perform variant calling on a BAM file.
+
+We need to provide the BAM input file (`-I`) as well as the reference genome (`-R`), a name for the output file (`-O`) and a list of genomic intervals to analyze (`-L`).
+
+However, we don't need to specify the path to the index file; the tool will automatically look for it in the same directory, based on the established naming and co-location convention. The same applies to the reference genome's accessory files (index and sequence dictionary files).
+
 ```bash
 gatk HaplotypeCaller \
         -R /data/ref/ref.fasta \
@@ -102,7 +112,7 @@ gatk HaplotypeCaller \
 
 The output file `reads_mother.vcf` is a small test file, so you can `cat` it or click on it to open it and view the contents. If you scroll through, you'll find a header composed of many lines of metadata, followed by a list of variant calls, one per line.
 
-_TODO: SHOW A FEW LINES_
+TODO _SHOW A FEW LINES_
 
 #### 0.2.4. Exit the container
 
@@ -112,7 +122,7 @@ exit
 
 ### Takeaway
 
-You know how to pull a container and run it interactively, and you know how to run the indexing and variant calling commands directly in the terminal.
+You know how to test the Samtools indexing and GATK variant calling commands in their respective containers.
 
 ### What's next?
 
@@ -122,7 +132,11 @@ Learn how to wrap those same commands into a two-step workflow that uses contain
 
 ## 1. Write a single-stage workflow that runs Samtools index on a BAM file
 
+We provide you with a workflow file, `hello-gatk.nf`, that outlines the main parts of the workflow. It's not functional; its purpose is just to serve as a skeleton that you'll use to write the actual workflow.
+
 ### 1.1. Define the indexing process
+
+Let's start by writing a process, which we'll call `SAMTOOLS_INDEX`, describing the indexing operation.
 
 ```groovy title="hello-gatk.nf"
 /*
@@ -132,7 +146,7 @@ process SAMTOOLS_INDEX {
 
     container 'community.wave.seqera.io/library/samtools:1.20--b5dfbd93de237464'
 
-    publishDir 'results', mode: 'copy'
+    publishDir 'results_genomics', mode: 'symlink'
 
     input:
         path input_bam
@@ -146,7 +160,16 @@ process SAMTOOLS_INDEX {
 }
 ```
 
-### 1.2. Add parameter declarations up top
+You should recognize all the pieces from what you learned in Part 1 & Part 2 of this training series; the only notable change is that this time we're using `mode: symlink` for the `publishDir` directive.
+
+!!! note
+Even though the data files we're using here are very small, in genomics they can get very large, so we should get into the habit of using symbolic links rather than making actual copies of these files, unless there's a compelling reason to do so.
+
+This process is going to require passing in a filepath via the `input_bam` input, so let's set that up next.
+
+### 1.2. Add an input parameter declaration
+
+At the top of the file, under the `Pipeline parameters` section, we declare a CLI parameter called `reads_bam` and give it a default value. That way, we can be lazy and not specify the input when we type the command to launch the pipeline (for development purposes).
 
 ```groovy title="hello-gatk.nf"
 /*
@@ -157,7 +180,11 @@ process SAMTOOLS_INDEX {
 params.reads_bam = "${projectDir}/data/bam/reads_mother.bam"
 ```
 
+Now we have a process ready, and a parameter to give it an input to run on, so let's wire those things up together.
+
 ### 1.3. Add workflow block to run SAMTOOLS_INDEX
+
+In the `workflow` block, we need to set up a **channel** to feed the input to the `SAMTOOLS_INDEX` process; then we can call the process itself to run on the contents of that channel.
 
 ```groovy title="hello-gatk.nf"
 workflow {
@@ -170,13 +197,17 @@ workflow {
 }
 ```
 
-### 1.4. Run it to verify you can run the indexing step
+You'll notice we're using the same `.fromPath` channel constructor as we used at the end of Part 1 (Hello World) of this training series. Indeed, we're doing something very similar; the difference is that this time we're telling Nextflow to load the filepath itself into the channel as an input element, rather than reading in its contents.
+
+### 1.4. Run the workflow to verify that the indexing step works
+
+Let's run the workflow! As a reminder, we don't need to specify an input in the command line because we set up a default value for the input when we declared the input parameter.
 
 ```bash
 nextflow run hello-gatk.nf
 ```
 
-Should produce something like:
+The command should produce something like this:
 
 ```console title="Output"
 N E X T F L O W  ~  version 24.02.0-edge
@@ -185,9 +216,11 @@ executor >  local (1)
 [bf/072bd7] process > SAMTOOLS_INDEX (1) [100%] 1 of 1 ✔
 ```
 
+You can check that the index file has been generated correctly by looking in the work directory or in the directory set up with `publishDir`.
+
 ### Takeaway
 
-You know how to wrap a real bioinformatics tool in a single-step Nextflow workflow.
+You know how to wrap a real bioinformatics tool in a single-step Nextflow workflow and have it run using a container.
 
 ### What's next?
 
@@ -195,9 +228,13 @@ Add a second step that consumes the output of the first.
 
 ---
 
-## 2. Add a second step that runs GATK HaplotypeCaller on the indexed BAM file
+## 2. Add a second process to run GATK HaplotypeCaller on the indexed BAM file
+
+Now that we have an index for our input file, we can move on to setting up the variant calling step, which is the interesting part of the workflow.
 
 ### 2.1. Define the variant calling process
+
+Let's write a process, which we'll call `GATK_HAPLOTYPECALLER`, describing the variant calling operation.
 
 ```groovy title="hello-gatk.nf"
 /*
@@ -207,7 +244,7 @@ process GATK_HAPLOTYPECALLER {
 
     container "community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"
 
-    publishDir 'results', mode: 'copy'
+    publishDir 'results_genomics', mode: 'symlink'
 
     input:
         path input_bam
@@ -231,7 +268,16 @@ process GATK_HAPLOTYPECALLER {
 }
 ```
 
+This command takes quite a few more inputs, because GATK needs more information to perform the analysis compared to a simple indexing job. But you'll note that there are even more inputs defined in the inputs block than are listed in the GATK command. Why is that?
+
+!!! note
+The GATK knows to look for the BAM index file and the reference genome's accessory files because it is aware of the conventions surrounding those files. However, Nextflow is designed to be domain-agnostic and doesn't know anything about bioinformatics file format requirements. So we need to tell it explicitly that it has to stage those files in the working directory at runtime; otherwise it won't do it, and GATK will (correctly) throw an error about the index files being missing.
+
+    Similarly, we have to list the output VCF's index file (the `"${input_bam}.vcf.idx"` file) explicitly so that Nextflow will know to keep track of that file in case it's needed in subsequent steps.
+
 ### 2.2. Add definitions for accessory inputs
+
+Since our new process expects a handful of additional files to be provided, we set up some CLI parameters for them under the `Pipeline parameters` section, along with some default values (same reasons as before).
 
 ```groovy title="hello-gatk.nf"
 // Accessory files
@@ -241,21 +287,25 @@ params.reference_dict   = "${projectDir}/data/ref/ref.dict"
 params.intervals        = "${projectDir}/data/ref/intervals.bed"
 ```
 
-### 2.3. Make a value channel for each of the accessory files
+### 2.3. Create variables to hold the accessory file paths
+
+Unlike the main data inputs, which must be fed to processes through channels, the accessory files can be handled a bit more simply: we can use the `file()` function to create variables to hold those file paths.
 
 Add this to the workflow block (after the `reads_ch` creation):
 
 ```groovy title="hello-gatk.nf"
-// Create channels for the accessory files (reference and intervals)
+// Load the file paths for the accessory files (reference and intervals)
 ref_file        = file(params.reference)
 ref_index_file  = file(params.reference_index)
 ref_dict_file   = file(params.reference_dict)
 intervals_file  = file(params.intervals)
 ```
 
-This will load each of the accessory files in its own single-element value channel.
+This will make the accessory file paths available for input to processes.
 
 ### 2.4. Add a call to the workflow block to run GATK_HAPLOTYPECALLER
+
+Now that we've got our second process set up and all the inputs and accessory files are ready and available, we can add a call to the `GATK_HAPLOTYPECALLER` process in the workflow body.
 
 ```groovy title="hello-gatk.nf"
 // Call variants from the indexed BAM file
@@ -269,13 +319,17 @@ GATK_HAPLOTYPECALLER(
 )
 ```
 
+You'll notice that the inputs are provided in the exact same order in the call to the process as they are listed in the process' input block. In Nextflow, inputs are positional, meaning you _must_ follow the same order; and of course there have to be the same number of elements.
+
 ### 2.5. Run the workflow to verify that the variant calling step works
+
+Let's run the expanded workflow with `-resume` so that we don't have to run the indexing step again.
 
 ```bash
 nextflow run hello-gatk.nf -resume
 ```
 
-Now we see the two processes being run:
+Now if we look at the console output, we see the two processes being run:
 
 ```console title="Output"
 N E X T F L O W  ~  version 24.02.0-edge
@@ -289,7 +343,7 @@ You'll find the output file `reads_mother.bam.vcf` in the results directory. If 
 
 ### Takeaway
 
-You know how to make a very basic two-step variant calling workflow.
+You know how to make a very basic two-step workflow that does real analysis work and is capable of dealing with bioinformatics idiosyncrasies like the accessory files.
 
 ### What's next?
 
@@ -299,7 +353,13 @@ Make the workflow handle multiple samples in bulk.
 
 ## 3. Adapt the workflow to run on a batch of samples
 
+It's all well and good to have a workflow that can automate processing on a single sample, but what if you have 1000 samples? Do you need to write a bash script that loops through all your samples?
+
+No, thank goodness! Just make a minor tweak to the code and Nextflow will handle that for you too.
+
 ### 3.1. Turn the input parameter declaration into a list of the three samples
+
+Let's turn that default file path in the input BAM file declaration into a list of file paths, up under the `Pipeline parameters` section.
 
 _Before:_
 
@@ -319,13 +379,20 @@ params.reads_bam = [
 ]
 ```
 
+And that's actually all you need to do, because the channel constructor we use in the workflow body (`.fromPath`) is just as happy to accept multiple file paths to load into the input channel as it was to load a single one.
+
+!!! note
+Normally, you wouldn't want to hardcode the list of samples into your workflow file, but we're doing that here to keep things simple. We'll go over more elegant ways of handling inputs later in this training series.
+
 ### 3.2. Run the workflow to verify that it runs on all three samples
+
+Let's try running the workflow now that the plumbing is set up to run on all three test samples.
 
 ```bash
 nextflow run hello-gatk.nf -resume
 ```
 
-Uh-oh! It will probably fail with an error like this:
+Funny thing: this might work, OR it might fail with an error like this:
 
 ```console title="Output"
 ERROR ~ Error executing process > 'GATK_HAPLOTYPECALLER (2)'
@@ -349,9 +416,17 @@ And buried in the GATK command error output, there will be a line like this:
 A USER ERROR has occurred: Traversal by intervals was requested but some input files are not indexed.
 ```
 
-This is because the script as written so far is not safe for running on multiple samples, because the order of items in the output channel is not guaranteed to match the order of items in the original input channel. This causes the wrong files to be paired up in the second step. So we need to make sure the BAM files and their index files travel together through the channels.
+Well, that's weird, considering we explicitly indexed the BAM files in the first step of the workflow. Could there be something wrong with the plumbing? Let's check the work directories for the relevant calls.
+
+TODO Add snippet of output showing mismatch between main file and index
+
+What we're seeing is that the script as written so far is not safe for running on multiple samples, because the order of items in the indexing call's output channel is not guaranteed to match the order of items in the original input channel. This causes the wrong files to be paired up in the second step.
+
+So we need to make sure the BAM files and their index files travel together through the channels.
 
 ### 3.3. Change the output of the SAMTOOLS_INDEX process into a tuple that keeps the input file and its index together
+
+The simplest way to ensure a BAM file and its index stay closely associated is to package them together into a tuple coming out of the index task. TODO TODO TODO
 
 _Before:_
 
