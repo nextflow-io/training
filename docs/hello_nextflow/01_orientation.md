@@ -1,41 +1,33 @@
 # Orientation
 
-The Gitpod environment contains some test data that will be used in this workshop. All software required are already installed and configured in it too.
+The Gitpod environment contains some test data that will be used in this training course. All software required is already installed and configured in it too.
 
 !!! note
 
-    Follow [this link](../../envsetup/) if you have not yet setup your Gitpod environment.
+    Follow [this link](../../envsetup/) if you have not yet set up your Gitpod environment.
 
-## Getting started
+## Materials provided
 
-You will complete this module in the `hello-nextflow/` folder.
+Throughout this training course, we'll be working in the `hello-nextflow/` directory.
 
 ```bash
 cd /workspace/gitpod/hello-nextflow
 ```
 
-In this folder you will all test data, code and accessory needed to work through this training module.
+This directory contains all the code files, test data and accessory files you will need. Feel free to explore the contents of this directory; the easiest way to see what it contains is the use the `tree` command (here we generate a table of contents to the second level down).
 
-!!! question "Exercise"
-
-    View all the folder and files in the `hello-nextflow` directory.
-
-    ```console
-    tree .
-    ```
+```bash
+tree . -L 2
+```
 
 You should see the following output:
 
-```console title="Output"
+```console title="Directory contents"
 /workspace/gitpod/hello-nextflow
 ├── data
 │   ├── bam
-│   │   ├── reads_father.bam
-│   │   ├── reads_mother.bam
-│   │   └── reads_son.bam
-│   ├── greetings.txt
-│   ├── intervals.list
-│   ├── ref.tar.gz
+│   ├── greetings.csv
+│   ├── ref
 │   ├── sample_bams.txt
 │   └── samplesheet.csv
 ├── hello-gatk.nf
@@ -44,6 +36,10 @@ You should see the following output:
 ├── hello-world.nf
 ├── nextflow.config
 └── scripts
+    ├── hello-config-1.config
+    ├── hello-config-2.config
+    ├── hello-config-3.config
+    ├── hello-config-4.config
     ├── hello-gatk-1.nf
     ├── hello-gatk-2.nf
     ├── hello-gatk-3.nf
@@ -53,7 +49,6 @@ You should see the following output:
     ├── hello-modules-1.nf
     ├── hello-modules-2.nf
     ├── hello-modules-3.nf
-    ├── hello-world-10.nf
     ├── hello-world-1.nf
     ├── hello-world-2.nf
     ├── hello-world-3.nf
@@ -64,40 +59,20 @@ You should see the following output:
     ├── hello-world-8.nf
     ├── hello-world-9.nf
     ├── modules
-    │   └── local
-    │       ├── gatk
-    │       │   ├── haplotypecaller
-    │       │   │   └── main.nf
-    │       │   └── jointgenotyping
-    │       │       ├── main.nf
-    │       │       └── tests
-    │       │           └── inputs
-    │       │               ├── family_trio_map.tsv
-    │       │               ├── reads_father.bam.g.vcf
-    │       │               ├── reads_father.bam.g.vcf.idx
-    │       │               ├── reads_mother.bam.g.vcf
-    │       │               ├── reads_mother.bam.g.vcf.idx
-    │       │               ├── reads_son.bam.g.vcf
-    │       │               └── reads_son.bam.g.vcf.idx
-    │       └── samtools
-    │           └── index
-    │               └── main.nf
     └── nextflow.config
 
-12 directories, 43 files
+13 directories, 48 files
 
 ```
 
-Each file will be used in this training module.
+**The `data` directory** contains the input data we'll use in Part 2: Hello Science, which uses an example from genomics to demonstrate how to build a simple analysis pipeline. The data is described in detail in that section of the course.
 
-**The `data` directory** contains the input data we'll use in Part 2: Hello GATK, which uses an example from genomics to demonstrate how to build a simple analysis pipeline. The data is described in detail in that section of the training.
-
-**The `scripts` directory** contains the completed workflow scripts that result from each step of the tutorial and are intended to be used as a reference to check your work. The name and number in the filename correspond to the step of the relevant tutorial. For example, the file `hello-world-4.nf` is the expected result of completing steps 1 through 4 of Part 1: Hello World.
-
-**The file `greetings.txt`** is a plain text file used to provide inputs in Part 1: Hello World.
-
-**The file `hello-gatk.nf`** is a stub that serves as a starting point to Part 2: Hello GATK. In its initial state, it is NOT a functional workflow script.
+**The file `nextflow.config`** is a configuration file that sets minimal environment properties.
 
 **The file `hello-world.nf`** is a simple but fully functional workflow script that serves as a starting point to Part 1: Hello World.
 
-**The file `nextflow.config`** is a configuration file that sets minimal environment properties.
+**The file `hello-gatk.nf`** is a stub that serves as a starting point to Part 2: Hello Science. In its initial state, it is NOT a functional workflow script.
+
+**The remaining `.nf` files** are functional workflow scripts that serve as starting points for the corresponding parts of the course.
+
+**The `scripts` directory** contains the completed workflow scripts that result from each step of the course. They are intended to be used as a reference to check your work and troubleshoot any issues. The name and number in the filename correspond to the step of the relevant part of the course. For example, the file `hello-world-4.nf` is the expected result of completing steps 1 through 4 of Part 1: Hello World.
