@@ -1,6 +1,8 @@
 # Part 3: Hello Science
 
-In Part 1, you learned how to use the basic building blocks of Nextflow to assemble a simple pipeline capable of processing some text and parallelizing execution if there were multiple inputs. Now, we show you how to use the same components and principles to build a pipeline that does something a bit more interesting, and hopefully a bit more relatable to your work.
+In Part 1, you learned how to use the basic building blocks of Nextflow to assemble a simple pipeline capable of processing some text and parallelizing execution if there were multiple inputs. Then in Part 2, you learned how to use containers to pull in command line tools without dealing with software dependency issues.
+
+Now, we show you how to use the same components and principles to build a pipeline that does something a bit more interesting, and hopefully a bit more relatable to your work.
 
 Specifically, we show you how to implement a simple variant calling pipeline with [GATK](https://gatk.broadinstitute.org/) (Genome Analysis Toolkit), a widely used software package for analyzing high-throughput sequencing data.
 
@@ -657,8 +659,10 @@ And that's it! Our simple variant calling workflow has all the basic features we
 
 You know how to make a multi-step linear workflow handle a file containing input file paths.
 
+More generally, you've learned how to use essential Nextflow components and logic to build a pipeline that does real work, taking into account the idiosyncrasies of bioinformatics file formats and tool requirements.
+
 ### What's next?
 
 Celebrate your success and take an extra long break!
 
-In the next training module, you'll learn how to use a few other channel operators to develop pipelines with more complex plumbing.
+In the next training module, you'll learn how to use a few additional Nextflow features (including more channel operators) to develop pipelines with more complex plumbing.
