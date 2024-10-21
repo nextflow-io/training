@@ -1,4 +1,4 @@
-# Introduction
+# Advanced Training
 
 Welcome to our Nextflow workshop for intermediate and advanced users!
 

@@ -1,6 +1,6 @@
-# Introduction
+# Environment Setup
 
-Training on the Nextflow community training portal are optimized for use within our Gitpod environment.
+The training courses offered on the Nextflow community training portal are optimized for use within our Gitpod environment.
 
 Gitpod offers a virtual machine with everything already set up for you, accessible from your web browser or built into your code editor (e.g., VSCode).
 
