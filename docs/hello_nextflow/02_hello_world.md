@@ -116,7 +116,8 @@ process sayHello {
 This a very minimal process definition that just contains an output definition and the script itself. In a real-world pipeline, a process usually contains additional blocks such as directives, inputs, and conditional clauses, which we'll introduce later in this training course.
 
 !!! note
-The output definition does not _determine_ what output will be created. It simply _declares_ what is the expected output, so that Nextflow can look for it once execution is complete. This is necessary for verifying that the command was executed successfully and for passing the output to downstream processes if needed.
+
+    The output definition does not _determine_ what output will be created. It simply _declares_ what is the expected output, so that Nextflow can look for it once execution is complete. This is necessary for verifying that the command was executed successfully and for passing the output to downstream processes if needed.
 
 #### 1.1.2 The `workflow` definition
 
@@ -164,25 +165,29 @@ Okay, that's great, but where do we find the output? The `sayHello` process defi
 When you run Nextflow for the first time in a given directory, it creates a directory called `work` where it will write all files (and symlinks) generated in the course of execution. Have a look inside; you'll find a subdirectory named with a hash (in order to make it unique; we'll discuss why in a bit), nested two levels deep and containing a handful of log files.
 
 !!! tip
-If you browse the contents of the task subdirectory in the Gitpod's VSCode file explorer, you'll see all these files right away. However, these files are set to be invisible in the terminal, so if you want to use `ls` or `tree` to view them, you'll need to set the relevant option for displaying invisible files.
 
-You should see something like this, though the exact subdirectory names will be different on your system.
+    If you browse the contents of the task subdirectory in the Gitpod's VSCode file explorer, you'll see all these files right away. However, these files are set to be invisible in the terminal, so if you want to use `ls` or `tree` to view them, you'll need to set the relevant option for displaying invisible files.
 
-```bash
-tree -a work
-work
-└── 1c
-    └── 7d08e685a7aa7060b9c21667924824
-        ├── .command.begin
-        ├── .command.err
-        ├── .command.log
-        ├── .command.out
-        ├── .command.run
-        ├── .command.sh
-        └── .exitcode
-```
+    ```bash
+    tree -a work
+    ```
 
-You may have noticed that the subdirectory names appeared (in truncated form) in the console output, in the line that says:
+    You should see something like this, though the exact subdirectory names will be different on your system.
+
+    ```console title="Output"
+    work
+    └── 1c
+        └── 7d08e685a7aa7060b9c21667924824
+            ├── .command.begin
+            ├── .command.err
+            ├── .command.log
+            ├── .command.out
+            ├── .command.run
+            ├── .command.sh
+            └── .exitcode
+    ```
+
+You may have noticed that the subdirectory names appeared (in truncated form) in the output from the workflow run, in the line that says:
 
 ```console title="Output"
 [1c/7d08e6] sayHello [100%] 1 of 1 ✔
@@ -191,9 +196,10 @@ You may have noticed that the subdirectory names appeared (in truncated form) in
 This tells you what is the subdirectory path for that specific process call (sometimes called task).
 
 !!! note
-Nextflow creates a separate unique subdirectory for each process call. It stages the relevant input files, script, and other helper files there, and writes any output files and logs there as well.
 
-Here we find the following log files:
+    Nextflow creates a separate unique subdirectory for each process call. It stages the relevant input files, script, and other helper files there, and writes any output files and logs there as well.
+
+If we look inside the subdirectory, we find the following log files:
 
 -   **`.command.begin`**: Metadata related to the beginning of the execution of the process task
 -   **`.command.err`**: Error messages (stderr) emitted by the process task
@@ -202,7 +208,7 @@ Here we find the following log files:
 -   **`.command.sh`**: The command that was run by the process task call
 -   **`.exitcode`**: The exit code resulting from the command
 
-In this case, look for your output in the `.command.out` file, since that's where stdout output is captured. If you open it, you'll find the `Hello World!` greeting, which was the expected result of our minimalist workflow.
+In this case, you can look for your output in the `.command.out` file, since that's where stdout output is captured. If you open it, you'll find the `Hello World!` greeting, which was the expected result of our minimalist workflow.
 
 It's also worth having a look at the `.command.sh` file, which tells you what command Nextflow actually executed. In this case it's very straightforward, but later in the course you'll see commands that involve some interpolation of variables. When you're dealing with that, you need to be able to check exactly what was run, especially when troubleshooting an issue.
 
@@ -290,7 +296,8 @@ executor >  local (1)
 Like you did before, find the `work` directory in the file explorer. There, find the `output.txt` output file and click on it to open it, and verify that it contains the greeting as expected.
 
 !!! warning
-This example is brittle because we hardcoded the output filename in two separate places (the script and the output blocks). If we change one but not the other, the script will break. Later, you'll learn how to use variables to avoid this problem.
+
+    This example is brittle because we hardcoded the output filename in two separate places (the script and the output blocks). If we change one but not the other, the script will break. Later, you'll learn how to use variables to avoid this problem.
 
 ### 3.4. Add a `publishDir` directive to the process
 
@@ -347,7 +354,7 @@ You know how to send outputs to a specific named file and use the `publishDir` d
 
 ### What's next?
 
-Learn how to use `-resume` to have Nextflow use cached results to skip any steps it has already completed when you re-launch a pipeline.
+Learn how to make Nextflow resume running a pipeline using cached results from a prior run to skip any steps it had already completed successfully.
 
 ---
 
@@ -376,11 +383,15 @@ The console output should look similar.
 [10/15498d] sayHello [100%] 1 of 1, cached: 1 ✔
 ```
 
-Notice the additional `cached:` qualifier, which means that Nextflow has recognized that it has already done this work and simply re-used the result from the last run. It will also not replace the output file at `results/output.txt`.
+Notice the additional `cached:` bit in the process status line, which means that Nextflow has recognized that it has already done this work and simply re-used the result from the last run.
+
+!!! note
+
+    When your re-run a pipeline with `resume`, Nextflow does not overwrite any files written to a publishDir directory by any process call that was previously run successfully.
 
 ### Takeaway
 
-You know how to to relaunch a pipeline without repeating steps that were already executed in an identical way.
+You know how to to relaunch a pipeline without repeating steps that were already run in an identical way.
 
 ### What's next?
 
@@ -489,6 +500,8 @@ sayHello(greeting_ch)
 ```
 
 ### 5.5. Run the workflow command again
+
+Let's run it!
 
 ```bash
 nextflow run hello-world.nf
@@ -698,7 +711,8 @@ process convertToUpper {
 As a little bonus, here we composed the second output filename based on the first one.
 
 !!! tip
-Very important to remember: you have to use double quotes around the output filename expression (NOT single quotes) or it will fail.
+
+    Very important to remember: you have to use double quotes around the output filename expression (NOT single quotes) or it will fail.
 
 ### 7.4. Add a call to the new process in the workflow body
 
@@ -755,7 +769,7 @@ You'll notice that this time the workflow produced two new work subdirectories; 
 
 !!! note
 
-    Note how all we did was connect the output of `sayHello` to the input of `convertToUpper` and the two processes could be run in serial. Nextflow did the hard work of handling input and output files and passing them between the two commands for us. This is the power of channels in Nextflow, doing the laborious work of connecting our pipeline steps together.
+    All we did was connect the output of `sayHello` to the input of `convertToUpper` and the two processes could be run in serial. Nextflow did the hard work of handling input and output files and passing them between the two commands for us. This is the power of channels in Nextflow, doing the laborious work of connecting our pipeline steps together.
 
     What's more, Nextflow will automatically determine which call needs to be executed first based on how they're connected, so the order in which they're written in the workflow body does not matter. However, we do recommend you be kind to your collaborators and to your future self, and try to write them in a logical order!
 
@@ -844,7 +858,7 @@ That's much better; at least for this number of processes. For a complex workflo
 
 That being said, we have another problem. If you look in the `results` directory, there are only two files: `output.txt` and `UPPER-output.txt`!
 
-```bash
+```console title="Output"
 results
 ├── output.txt
 └── UPPER-output.txt
@@ -862,7 +876,7 @@ So how do we make the file names unique? A common way to do that is to use some 
 
 _Before:_
 
-```groovy title="hello-world.nf" linenums="9"
+```groovy title="hello-world.nf" linenums="11"
 process sayHello {
 
     publishDir 'results', mode: 'copy'
@@ -922,7 +936,7 @@ executor >  local (6)
 
 But more importantly, now we have six new files in addition to the two we already had in the `results` directory:
 
-```bash
+```console title="Output"
 results
 ├── Bonjour-output.txt
 ├── Hello-output.txt
@@ -979,20 +993,26 @@ _After:_
 /*
  * Pipeline parameters
  */
-params.input_file = "data/greetings.txt"
+params.input_file = "data/greetings.csv"
 ```
 
 ### 9.2. Update the channel declaration to handle the input file
 
 At this point we introduce a new channel constructor, `Channel.fromPath()`, which has some built-in functionality for handling file paths. We're going to use that instead of the `Channel.of()` constructor we used previously; the base syntax looks like this:
 
-`greeting_ch = Channel.fromPath(params.input_file)`
+```groovy title="channel construction syntax"
+Channel.fromPath(input_file)
+```
 
 Since our goal is to read in the contents of a `.csv` file, we're going to add the `.splitCsv()` operator to make Nextflow parse the file contents accordingly, as well as the `.flatten()` operator to turn the array element produced by `.splitCsv()` into a channel of individual elements.
 
-So the line becomes:
+So the channel construction instruction becomes:
 
-`greeting_ch = Channel.fromPath(params.input_file).splitCsv().flatten()`
+```groovy title="channel construction syntax"
+Channel.fromPath(input_file)
+       .splitCsv()
+       .flatten()
+```
 
 And here it is in the context of the workflow body:
 
@@ -1007,7 +1027,9 @@ _After:_
 
 ```groovy title="hello-world.nf" linenums="46"
 // create a channel for inputs from a CSV file
-greeting_ch = Channel.fromPath(params.input_file).splitCsv().flatten()
+greeting_ch = Channel.fromPath(params.input_file)
+                     .splitCsv()
+                     .flatten()
 ```
 
 ### 9.3. Run the workflow (one last time!)
