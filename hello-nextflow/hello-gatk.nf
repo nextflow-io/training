@@ -11,7 +11,7 @@
  */
 process SAMTOOLS_INDEX {
 
-    container 
+    container
 
     publishDir
 
