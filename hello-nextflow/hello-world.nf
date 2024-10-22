@@ -1,5 +1,8 @@
 #!/usr/bin/env nextflow
 
+/*
+ * Use echo to print 'Hello World!' to standard out
+ */
 process sayHello {
 
     output: 
@@ -11,5 +14,7 @@ process sayHello {
 }
 
 workflow {
+    
+    // emit a greeting
     sayHello()
 }

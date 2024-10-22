@@ -1,4 +1,4 @@
-# Part 4: Hello nf-test
+# Part 7: Hello nf-test
 
 It is critical for reproducibility and long-term maintenance to have a way to systematically test that every part of your workflow is doing what it's supposed to do. To that end, people often focus on top-level tests, in which the workflow is run on some test data from start to finish. This is useful but unfortunately incomplete. You should also implement module-level tests (equivalent to what is called 'unit tests' in general software engineering) to verify the functionality of individual components of your workflow, ensuring that each module performs as expected under different conditions and inputs.
 

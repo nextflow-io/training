@@ -14,7 +14,7 @@ process SAMTOOLS_INDEX {
 
     container 'community.wave.seqera.io/library/samtools:1.20--b5dfbd93de237464'
 
-    publishDir 'results', mode: 'copy'
+    publishDir 'results_genomics', mode: 'copy'
 
     input:
         path input_bam
@@ -26,7 +26,6 @@ process SAMTOOLS_INDEX {
     samtools index '$input_bam'
     """
 }
-
 
 workflow {
 
