@@ -1,28 +1,33 @@
 # Part 3: Hello Science
 
-In Part 1, you learned how to use the basic building blocks of Nextflow to assemble a simple pipeline capable of processing some text and parallelizing execution if there were multiple inputs. Then in Part 2, you learned how to use containers to pull in command line tools to test them and integrate them into your pipelines without having to deal with software dependency issues.
+In Part 1, you learned how to use the basic building blocks of Nextflow to assemble a simple pipeline capable of processing some text and parallelizing execution if there were multiple inputs.
+Then in Part 2, you learned how to use containers to pull in command line tools to test them and integrate them into your pipelines without having to deal with software dependency issues.
 
 Now, we show you how to use the same components and principles to build a pipeline that does something a bit more interesting, and hopefully a bit more relatable to your work.
-
 Specifically, we show you how to implement a simple variant calling pipeline with [GATK](https://gatk.broadinstitute.org/) (Genome Analysis Toolkit), a widely used software package for analyzing high-throughput sequencing data.
 
 !!! note
 
-    Don't worry if you're not familiar with GATK or genomics in general. We'll summarize the necessary concepts as we go, and the workflow implementation principles we demonstrate here apply broadly to any command line tool that takes in some input files and produce some output files.
+    Don't worry if you're not familiar with GATK or genomics in general.
+    We'll summarize the necessary concepts as we go, and the workflow implementation principles we demonstrate here apply broadly to any command line tool that takes in some input files and produce some output files.
 
 ### Method overview
 
-Variant calling is a genomic analysis method that aims to identify variations in a genome sequence relative to a reference genome. Here we are going to use tools and methods designed for calling short variants, _i.e._ SNPs and indels.
+Variant calling is a genomic analysis method that aims to identify variations in a genome sequence relative to a reference genome.
+Here we are going to use tools and methods designed for calling short variants, _i.e._ SNPs and indels.
 
 ![GATK pipeline](img/gatk-pipeline.png)
 
-A full variant calling pipeline typically involves a lot of steps, including mapping to the reference and variant filtering and prioritization. For simplicity, we are going to focus on the core variant calling step, which takes as its main input a file of short-read sequencing data in [BAM](https://samtools.github.io/hts-specs/SAMv1.pdf) format (Binary Alignment Map, a compressed version of SAM, Sequence Alignment Map), as well as a reference genome and a list of genomic intervals to analyze.
+A full variant calling pipeline typically involves a lot of steps, including mapping to the reference and variant filtering and prioritization.
+For simplicity, we are going to focus on the core variant calling step, which takes as its main input a file of short-read sequencing data in [BAM](https://samtools.github.io/hts-specs/SAMv1.pdf) format (Binary Alignment Map, a compressed version of SAM, Sequence Alignment Map), as well as a reference genome and a list of genomic intervals to analyze.
 
-For this exercise, we provide you with three samples in BAM format (see Dataset below). However, GATK requires an index file for each BAM file, which we did not provide (on purpose), so the workflow will have to create one as a preliminary step.
+For this exercise, we provide you with three samples in BAM format (see Dataset below).
+However, GATK requires an index file for each BAM file, which we did not provide (on purpose), so the workflow will have to create one as a preliminary step.
 
 !!! note
 
-    Index files are a common feature of bioinformatics file formats; they contain information about the structure of the main file that allows tools like GATK to access a subset of the data without having to read through the whole file. This is important because of how big these files can get.
+    Index files are a common feature of bioinformatics file formats; they contain information about the structure of the main file that allows tools like GATK to access a subset of the data without having to read through the whole file.
+    This is important because of how big these files can get.
 
 So to recap, we're going to develop a workflow that does the following:
 
@@ -36,7 +41,8 @@ So to recap, we're going to develop a workflow that does the following:
 ### Dataset
 
 -   **A reference genome** consisting of a small region of the human chromosome 20 (from hg19/b37) and its accessory files (index and sequence dictionary).
--   **Three whole genome sequencing samples** corresponding to a family trio (mother, father and son), which have been subset to a small slice of data on chromosome 20 to keep the file sizes small. The sequencing data is in (Binary Alignment Map) format, i.e. genome sequencing reads that have already been mapped to the reference genome.
+-   **Three whole genome sequencing samples** corresponding to a family trio (mother, father and son), which have been subset to a small slice of data on chromosome 20 to keep the file sizes small.
+    The sequencing data is in (Binary Alignment Map) format, i.e. genome sequencing reads that have already been mapped to the reference genome.
 -   **A list of genomic intervals**, i.e. coordinates on the genome where our samples have data suitable for calling variants, provided in BED format.
 
 ---
