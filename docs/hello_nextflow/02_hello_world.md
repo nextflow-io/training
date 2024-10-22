@@ -63,7 +63,8 @@ To get you started, we'll first open up the workflow script so you can get a sen
 Let's open the `hello-world.nf` script in the editor pane.
 
 !!! note
-The file is in the `hello-nextflow` directory, which should be your current working directory. You can either double-click on the file in the file explorer, or type `ls` in the terminal and Cmd+Click (MacOS) or Ctrl+Click (PC) on the file to open it.
+    The file is in the `hello-nextflow` directory, which should be your current working directory.
+    You can either double-click on the file in the file explorer, or type `ls` in the terminal and Cmd+Click (MacOS) or Ctrl+Click (PC) on the file to open it.
 
 ```groovy title="hello-world.nf" linenums="1"
 #!/usr/bin/env nextflow
@@ -88,13 +89,16 @@ workflow {
 }
 ```
 
-As you can see, a Nextflow script involves two main types of core components: one or more **processes**, and the **workflow** itself. Each **process** describes what operation(s) the corresponding step in the pipeline should accomplish, while the **workflow** describes the dataflow logic that connects the various steps.
+As you can see, a Nextflow script involves two main types of core components: one or more **processes**, and the **workflow** itself.
+Each **process** describes what operation(s) the corresponding step in the pipeline should accomplish, while the **workflow** describes the dataflow logic that connects the various steps.
 
 Let's take a closer look at the **process** block first, then we'll look at the **workflow** block.
 
 #### 1.1.1 The `process` definition
 
-The first block of code describes a **process**. The process definition starts with the keyword `process`, followed by the process name and finally the process body delimited by curly braces. The process body must contain a script block which specifies the command to run, which can be anything you would be able to run in a command line terminal.
+The first block of code describes a **process**.
+The process definition starts with the keyword `process`, followed by the process name and finally the process body delimited by curly braces.
+The process body must contain a script block which specifies the command to run, which can be anything you would be able to run in a command line terminal.
 
 Here we have a **process** called `sayHello` that writes its **output** to `stdout`.
 
@@ -113,15 +117,19 @@ process sayHello {
 }
 ```
 
-This a very minimal process definition that just contains an output definition and the script itself. In a real-world pipeline, a process usually contains additional blocks such as directives, inputs, and conditional clauses, which we'll introduce later in this training course.
+This a very minimal process definition that just contains an output definition and the script itself.
+In a real-world pipeline, a process usually contains additional blocks such as directives, inputs, and conditional clauses, which we'll introduce later in this training course.
 
 !!! note
 
-    The output definition does not _determine_ what output will be created. It simply _declares_ what is the expected output, so that Nextflow can look for it once execution is complete. This is necessary for verifying that the command was executed successfully and for passing the output to downstream processes if needed.
+    The output definition does not _determine_ what output will be created.
+    It simply _declares_ what is the expected output, so that Nextflow can look for it once execution is complete.
+    This is necessary for verifying that the command was executed successfully and for passing the output to downstream processes if needed.
 
 #### 1.1.2 The `workflow` definition
 
-The second block of code describes the **workflow** itself. The workflow definition starts with the keyword `workflow`, followed by an optional name, then the workflow body delimited by curly braces.
+The second block of code describes the **workflow** itself.
+The workflow definition starts with the keyword `workflow`, followed by an optional name, then the workflow body delimited by curly braces.
 
 Here we have a **workflow** that consists of one call to the `sayHello` process.
 
@@ -133,7 +141,9 @@ workflow {
 }
 ```
 
-This a very minimal **workflow** definition. In a real-world pipeline, the workflow typically contains multiple calls to **processes** connected by **channels**. You'll learn how to add more processes and connect them by channels in a little bit.
+This a very minimal **workflow** definition.
+In a real-world pipeline, the workflow typically contains multiple calls to **processes** connected by **channels**.
+You'll learn how to add more processes and connect them by channels in a little bit.
 
 ### 1.2. Run the workflow
 
@@ -158,15 +168,18 @@ Congratulations, you just ran your first Nextflow workflow!
 
 The most important output here is the last line (line 6), which reports that the `sayHello` process was successfully executed once.
 
-Okay, that's great, but where do we find the output? The `sayHello` process definition said that the output would be sent to standard out, but nothing got printed in the console, did it?
+Okay, that's great, but where do we find the output?
+The `sayHello` process definition said that the output would be sent to standard out, but nothing got printed in the console, did it?
 
 ### 1.3. Find the output and logs in the `work` directory
 
-When you run Nextflow for the first time in a given directory, it creates a directory called `work` where it will write all files (and symlinks) generated in the course of execution. Have a look inside; you'll find a subdirectory named with a hash (in order to make it unique; we'll discuss why in a bit), nested two levels deep and containing a handful of log files.
+When you run Nextflow for the first time in a given directory, it creates a directory called `work` where it will write all files (and symlinks) generated in the course of execution.
+Have a look inside; you'll find a subdirectory named with a hash (in order to make it unique; we'll discuss why in a bit), nested two levels deep and containing a handful of log files.
 
 !!! tip
 
-    If you browse the contents of the task subdirectory in the Gitpod's VSCode file explorer, you'll see all these files right away. However, these files are set to be invisible in the terminal, so if you want to use `ls` or `tree` to view them, you'll need to set the relevant option for displaying invisible files.
+    If you browse the contents of the task subdirectory in the Gitpod's VSCode file explorer, you'll see all these files right away.
+    However, these files are set to be invisible in the terminal, so if you want to use `ls` or `tree` to view them, you'll need to set the relevant option for displaying invisible files.
 
     ```bash
     tree -a work
@@ -197,7 +210,8 @@ This tells you what is the subdirectory path for that specific process call (som
 
 !!! note
 
-    Nextflow creates a separate unique subdirectory for each process call. It stages the relevant input files, script, and other helper files there, and writes any output files and logs there as well.
+    Nextflow creates a separate unique subdirectory for each process call.
+    It stages the relevant input files, script, and other helper files there, and writes any output files and logs there as well.
 
 If we look inside the subdirectory, we find the following log files:
 
@@ -208,7 +222,8 @@ If we look inside the subdirectory, we find the following log files:
 -   **`.command.sh`**: The command that was run by the process task call
 -   **`.exitcode`**: The exit code resulting from the command
 
-In this case, you can look for your output in the `.command.out` file, since that's where stdout output is captured. If you open it, you'll find the `Hello World!` greeting, which was the expected result of our minimalist workflow.
+In this case, you can look for your output in the `.command.out` file, since that's where stdout output is captured.
+If you open it, you'll find the `Hello World!` greeting, which was the expected result of our minimalist workflow.
 
 It's also worth having a look at the `.command.sh` file, which tells you what command Nextflow actually executed. In this case it's very straightforward, but later in the course you'll see commands that involve some interpolation of variables. When you're dealing with that, you need to be able to check exactly what was run, especially when troubleshooting an issue.
 
@@ -224,7 +239,8 @@ Learn how to make the script output a named file.
 
 ## 3. Send the output to a file
 
-Instead of printing "Hello World!" to standard output, we'd prefer to save that output to a specific file, just like we did when running in the terminal earlier. This is how most tools that you'll run as part of real-world pipelines typically behave; we'll see examples of that later.
+Instead of printing "Hello World!" to standard output, we'd prefer to save that output to a specific file, just like we did when running in the terminal earlier.
+This is how most tools that you'll run as part of real-world pipelines typically behave; we'll see examples of that later.
 
 To achieve this result, both the script and the output definition blocks need to be updated.
 
@@ -274,7 +290,10 @@ output:
     <input/output qualifier> <input/output name>
     ```
 
-    The qualifier defines the type of data to be received. This information is used by Nextflow to apply the semantic rules associated with each qualifier, and handle it properly. Common qualifiers include `val` and `path`. In the example above, `stdout` is an exception since it is not associated with a name.
+    The qualifier defines the type of data to be received.
+    This information is used by Nextflow to apply the semantic rules associated with each qualifier, and handle it properly.
+    Common qualifiers include `val` and `path`.
+    In the example above, `stdout` is an exception since it is not associated with a name.
 
 ### 3.3. Run the workflow again
 
@@ -293,15 +312,22 @@ executor >  local (1)
 [7a/6bd54c] sayHello [100%] 1 of 1 ✔
 ```
 
-Like you did before, find the `work` directory in the file explorer. There, find the `output.txt` output file and click on it to open it, and verify that it contains the greeting as expected.
+Like you did before, find the `work` directory in the file explorer.
+There, find the `output.txt` output file and click on it to open it, and verify that it contains the greeting as expected.
 
 !!! warning
 
-    This example is brittle because we hardcoded the output filename in two separate places (the script and the output blocks). If we change one but not the other, the script will break. Later, you'll learn how to use variables to avoid this problem.
+    This example is brittle because we hardcoded the output filename in two separate places (the script and the output blocks).
+    If we change one but not the other, the script will break.
+    Later, you'll learn how to use variables to avoid this problem.
 
 ### 3.4. Add a `publishDir` directive to the process
 
-You'll have noticed that the output is buried in a working directory several layers deep. Nextflow is in control of this directory and we are not supposed to interact with it. To make the output file more accessible, we can utilize the `publishDir` directive. By specifying this directive, we are telling Nextflow to automatically copy the output file to a designated output directory. This allows us to leave the working directory alone, while still having easy access to the desired output file.
+You'll have noticed that the output is buried in a working directory several layers deep.
+Nextflow is in control of this directory and we are not supposed to interact with it.
+To make the output file more accessible, we can utilize the `publishDir` directive.
+By specifying this directive, we are telling Nextflow to automatically copy the output file to a designated output directory.
+This allows us to leave the working directory alone, while still having easy access to the desired output file.
 
 _Before:_
 
@@ -325,7 +351,9 @@ process sayHello {
 
 !!! note
 
-    There is a newer syntax option that makes it possible to declare and publish workflow-level outputs, documented [here](https://www.nextflow.io/docs/latest/workflow.html#publishing-outputs), which makes using `publishDir` at the process level redundant once your pipeline is fully operational. However, `publishDir` is still very useful during pipeline development; that is why we include it in this training series. This will also ensure that you can read and understand the large number of pipelines that have already been written with `publishDir`.
+    There is a newer syntax option that makes it possible to declare and publish workflow-level outputs, documented [here](https://www.nextflow.io/docs/latest/workflow.html#publishing-outputs), which makes using `publishDir` at the process level redundant once your pipeline is fully operational.
+    However, `publishDir` is still very useful during pipeline development; that is why we include it in this training series.
+    This will also ensure that you can read and understand the large number of pipelines that have already been written with `publishDir`.
 
     You'll learn how to use the workflow-level outputs syntax later in this training series.
 
@@ -346,7 +374,10 @@ executor >  local (1)
 [10/15498d] sayHello [100%] 1 of 1 ✔
 ```
 
-This time, Nextflow will have created a new directory called `results/`. In this directory is our `output.txt` file. If you check the contents it should match our existing output. This is how we move results files outside of the working directories.
+This time, Nextflow will have created a new directory called `results/`.
+In this directory is our `output.txt` file.
+If you check the contents it should match the output in our work/task directory.
+This is how we move results files outside of the working directories.
 
 ### Takeaway
 
@@ -360,7 +391,9 @@ Learn how to make Nextflow resume running a pipeline using cached results from a
 
 ## 4. Use the Nextflow resume feature
 
-Nextflow has an option called `-resume` that allows you to re-run a pipeline you've already launched previously, in such a way that any processes that have already been run with the exact same code, settings and inputs will be skipped. Using this mode means Nextflow will only run processes that are either new, have been modified or are being provided new settings or inputs.
+Nextflow has an option called `-resume` that allows you to re-run a pipeline you've already launched previously. 
+When launched with `-resume` any processes that have already been run with the exact same code, settings and inputs will be skipped.
+Using this mode means Nextflow will only run processes that are either new, have been modified or are being provided new settings or inputs.
 
 There are two key advantages to doing this:
 
@@ -401,7 +434,9 @@ Learn how to add in variable inputs.
 
 ## 5. Add in variable inputs using a channel
 
-So far, we've been emitting a greeting hardcoded into the process command. Now we're going to add some flexibility by using an input variable, so that we can easily change the greeting. This is going to require us to use a **channel**; more on that in a minute.
+So far, we've been emitting a greeting hardcoded into the process command.
+Now we're going to add some flexibility by using an input variable, so that we can easily change the greeting.
+This is going to require us to use a **channel**; more on that in a minute.
 
 ### 5.1. Add an input definition to the process block
 
@@ -452,7 +487,8 @@ echo '$greeting' > output.txt
 
 ### 5.3. Create an input channel
 
-Now that our process expects an input, we need to set up that input in the workflow body. This is where channels come in: Nextflow uses channels to feed inputs to processes and ferry data between processes that are connected together.
+Now that our process expects an input, we need to set up that input in the workflow body.
+This is where channels come in: Nextflow uses channels to feed inputs to processes and ferry data between processes that are connected together.
 
 There are multiple ways to do this, but for now, we're just going to use the simplest possible channel, containing a single value.
 
@@ -532,7 +568,8 @@ Learn how to pass inputs from the command line.
 
 ## 6. Use CLI parameters for inputs
 
-We want to be able to specify the input from the command line, since that is the piece that will almost always be different in subsequent runs of the workflow. Good news: Nextflow built-in workflow parameter system called `params`, which makes it easy to declare and use CLI parameters.
+We want to be able to specify the input from the command line, since that is the piece that will almost always be different in subsequent runs of the workflow.
+Good news: Nextflow built-in workflow parameter system called `params`, which makes it easy to declare and use CLI parameters.
 
 ### 6.1. Edit the input channel declaration to use a parameter
 
@@ -577,7 +614,8 @@ Be sure to open up the output file to check that you now have the new version of
 
 !!! tip
 
-    It's helpful to distinguish Nextflow-level parameters from pipeline-level parameters. For parameters that apply to a pipeline, we use a double hyphen (`--`), whereas we use a single hyphen (`-`) for parameters that modify a specific Nextflow setting, _e.g._ the `-resume` feature we used earlier.
+    It's helpful to distinguish Nextflow-level parameters from pipeline-level parameters.
+    For parameters that apply to a pipeline, we use a double hyphen (`--`), whereas we use a single hyphen (`-`) for parameters that modify a specific Nextflow setting, _e.g._ the `-resume` feature we used earlier.
 
 ### 6.3. Set a default value for a command line parameter
 
@@ -765,13 +803,19 @@ executor >  local (2)
 [ee/bb3cc8] convertToUpper (1) [100%] 1 of 1 ✔
 ```
 
-You'll notice that this time the workflow produced two new work subdirectories; one per process call. Check out the work directory of the call to the second process, where you should find two different output files listed. If you look carefully, you'll notice one of them (the output of the first process) has a little arrow icon on the right; that signifies it's a symbolic link. It points to the location where that file lives in the work directory of the first process. By default, Nextflow uses symbolic links to stage input files whenever possible, to avoid making duplicate copies.
+You'll notice that this time the workflow produced two new work subdirectories; one per process call.
+Check out the work directory of the call to the second process, where you should find two different output files listed. If you look carefully, you'll notice one of them (the output of the first process) has a little arrow icon on the right; that signifies it's a symbolic link.
+It points to the location where that file lives in the work directory of the first process.
+By default, Nextflow uses symbolic links to stage input files whenever possible, to avoid making duplicate copies.
 
 !!! note
 
-    All we did was connect the output of `sayHello` to the input of `convertToUpper` and the two processes could be run in serial. Nextflow did the hard work of handling input and output files and passing them between the two commands for us. This is the power of channels in Nextflow, doing the laborious work of connecting our pipeline steps together.
+    All we did was connect the output of `sayHello` to the input of `convertToUpper` and the two processes could be run in serial.
+    Nextflow did the hard work of handling input and output files and passing them between the two commands for us.
+    This is the power of channels in Nextflow, doing the busywork of connecting our pipeline steps together.
 
-    What's more, Nextflow will automatically determine which call needs to be executed first based on how they're connected, so the order in which they're written in the workflow body does not matter. However, we do recommend you be kind to your collaborators and to your future self, and try to write them in a logical order!
+    What's more, Nextflow will automatically determine which call needs to be executed first based on how they're connected, so the order in which they're written in the workflow body does not matter.
+    However, we do recommend you be kind to your collaborators and to your future self, and try to write them in a logical order!
 
 ### Takeaway
 
@@ -854,7 +898,8 @@ Launching `hello-world.nf` [big_woese] DSL2 - revision: 53f20aeb70
 [c5/4fedda] Submitted process > convertToUpper (3)
 ```
 
-That's much better; at least for this number of processes. For a complex workflow, or a large number of inputs, having the full list output to the terminal might get a bit overwhelming.
+That's much better; at least for this number of processes.
+For a complex workflow, or a large number of inputs, having the full list output to the terminal might get a bit overwhelming.
 
 That being said, we have another problem. If you look in the `results` directory, there are only two files: `output.txt` and `UPPER-output.txt`!
 
@@ -866,13 +911,17 @@ results
 
 What's up with that? Shouldn't we be expecting two files per input greeting, so six files in all?
 
-You may recall that we hardcoded the output file name for the first process. This was fine as long as there was only a single call made per process, but when we start processing multiple input values and publishing the outputs into the same directory of results, it becomes a problem. For a given process, every call produces an output with the same file name, so Nextflow just overwrites the previous output file every time a new one is produced.
+You may recall that we hardcoded the output file name for the first process.
+This was fine as long as there was only a single call made per process, but when we start processing multiple input values and publishing the outputs into the same directory of results, it becomes a problem.
+For a given process, every call produces an output with the same file name, so Nextflow just overwrites the previous output file every time a new one is produced.
 
 ### 8.4. Ensure the output file names will be unique
 
-Since we're going to be publishing all the outputs to the same results directory, we need to ensure they will have unique names. Specifically, we need to modify the first process to generate a file name dynamically so that the final file names will be unique.
+Since we're going to be publishing all the outputs to the same results directory, we need to ensure they will have unique names.
+Specifically, we need to modify the first process to generate a file name dynamically so that the final file names will be unique.
 
-So how do we make the file names unique? A common way to do that is to use some unique piece of metadata as part of the file name. Here, for convenience, we'll just use the greeting itself.
+So how do we make the file names unique? A common way to do that is to use some unique piece of metadata as part of the file name.
+Here, for convenience, we'll just use the greeting itself.
 
 _Before:_
 
@@ -952,7 +1001,8 @@ Success! Now we can add as many greetings as we like without worrying about outp
 
 !!! note
 
-    In practice, naming files based on the input data itself is almost always impractical; the better way to generate dynamic filenames is to use a samplesheet contain relevant metadata (such as unique sample IDs) and create a map of metadata (aka metamap) from which we can grab an appropriate identifier to generate the filenames. We'll show you how to do that later in this training course.
+    In practice, naming files based on the input data itself is almost always impractical; the better way to generate dynamic filenames is to use a samplesheet contain relevant metadata (such as unique sample IDs) and create a map of metadata (aka metamap) from which we can grab an appropriate identifier to generate the filenames.
+    We'll show you how to do that later in this training course.
 
 ### Takeaway
 
@@ -966,7 +1016,8 @@ Learn how to make the workflow take a file as its source of input values.
 
 ## 9. Modify the workflow to take a file as its source of input values
 
-It's often the case that, when we want to run on a batch of multiple input elements, the input values are contained in a file. As an example, we provide you with a CSV file called `greetings.csv` in the `data/` directory, containing several greetings separated by commas.
+It's often the case that, when we want to run on a batch of multiple input elements, the input values are contained in a file.
+As an example, we provide you with a CSV file called `greetings.csv` in the `data/` directory, containing several greetings separated by commas.
 
 ```csv title="greetings.csv"
 Hello,Bonjour,Holà
@@ -998,7 +1049,8 @@ params.input_file = "data/greetings.csv"
 
 ### 9.2. Update the channel declaration to handle the input file
 
-At this point we introduce a new channel constructor, `Channel.fromPath()`, which has some built-in functionality for handling file paths. We're going to use that instead of the `Channel.of()` constructor we used previously; the base syntax looks like this:
+At this point we introduce a new channel constructor, `Channel.fromPath()`, which has some built-in functionality for handling file paths.
+We're going to use that instead of the `Channel.of()` constructor we used previously; the base syntax looks like this:
 
 ```groovy title="channel construction syntax"
 Channel.fromPath(input_file)
@@ -1054,9 +1106,11 @@ Looking at the outputs, we see each greeting was correctly extracted and process
 
 !!! tip
 
-    While you're developing your pipeline, you can inspect the contents of any channel by adding the `.view()` operator to the name of the channel. For example, if you add `greeting_ch.view()` anywhere in the workflow body, when you run the script, Nextflow will print the channel contents to standard out.
+    While you're developing your pipeline, you can inspect the contents of any channel by adding the `.view()` operator to the name of the channel.
+    For example, if you add `greeting_ch.view()` anywhere in the workflow body, when you run the script, Nextflow will print the channel contents to standard out.
 
-    You can also use this to inspect the effect of the operators; for example, the output of `Channel.fromPath(params.input_file).splitCsv().view()` will look like this:
+    You can also use this to inspect the effect of the operators.
+    For example, the output of `Channel.fromPath(params.input_file).splitCsv().view()` will look like this:
 
     ```console title="Output"
     [Hello, Bonjour, Holà]
@@ -1080,6 +1134,7 @@ More generally, you've learned how to use the essential components of Nextflow a
 
 Celebrate your success and take a break!
 
-Don't worry if the channel types and operators feel like a lot to grapple with the first time you encounter them. You'll get more opportunities to practice using these components in various settings as you work through this training course.
+Don't worry if the channel types and operators feel like a lot to grapple with the first time you encounter them.
+You'll get more opportunities to practice using these components in various settings as you work through this training course.
 
 When you're ready, move on to Part 2 to learn how to apply what you've learned to a more realistic data analysis use case.
