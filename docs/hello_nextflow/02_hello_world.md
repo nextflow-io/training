@@ -63,6 +63,7 @@ To get you started, we'll first open up the workflow script so you can get a sen
 Let's open the `hello-world.nf` script in the editor pane.
 
 !!! note
+
     The file is in the `hello-nextflow` directory, which should be your current working directory.
     You can either double-click on the file in the file explorer, or type `ls` in the terminal and Cmd+Click (MacOS) or Ctrl+Click (PC) on the file to open it.
 
@@ -391,7 +392,7 @@ Learn how to make Nextflow resume running a pipeline using cached results from a
 
 ## 4. Use the Nextflow resume feature
 
-Nextflow has an option called `-resume` that allows you to re-run a pipeline you've already launched previously. 
+Nextflow has an option called `-resume` that allows you to re-run a pipeline you've already launched previously.
 When launched with `-resume` any processes that have already been run with the exact same code, settings and inputs will be skipped.
 Using this mode means Nextflow will only run processes that are either new, have been modified or are being provided new settings or inputs.
 

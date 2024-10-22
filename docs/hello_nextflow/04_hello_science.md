@@ -466,8 +466,9 @@ nextflow run hello-gatk.nf -resume
 ```
 
 Funny thing: this might work, OR it might fail with an error like this:
-Funny thing: this *might work*, OR it *might fail*.
+Funny thing: this _might work_, OR it _might fail_.
 If your pipeline run succeeded run it again until you get an error like this:
+
 ```console title="Output"
  N E X T F L O W   ~  version 24.02.0-edge
 

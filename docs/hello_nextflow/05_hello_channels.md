@@ -28,15 +28,13 @@ Combining the GVCFs is done with GATK GenomicsDBImport, which combines the per-s
 
 So to recap, we're going to develop a workflow that does the following:
 
-_ADD joint genotyping FLOWCHART_
-
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/haplotype-caller.excalidraw.svg"
+--8<-- "docs/hello_nextflow/img/hello-gatk-2.svg"
 </figure>
 
 1. Generate an index file for each BAM input file using Samtools
 2. Run the GATK HaplotypeCaller on each BAM input file to generate a GVCF of per-sample genomic variant calls
-3. Collect all the GVCFs and combine them into a data store
+3. Collect all the GVCFs and combine them into a GenomicsDB data store
 4. Run joint genotyping on the combined GVCF data store to produce a cohort-level VCF
 
 ### Dataset
@@ -59,7 +57,7 @@ Just like previously, we want to try out the commands manually before we attempt
 
 ### 0.1. Index a BAM input file with Samtools
 
-This first step is the same as in Part 2: Hello-GATK so you can skip it if you've already done that in this session.
+This first step is the same as in Part 2: Hello-GATK, so you can skip it if you've already done that in this session.
 
 #### 0.1.1. Pull the samtools container
 
