@@ -1,6 +1,8 @@
 # Part 4: Hello Channels
 
-In Part 2, you built a pipeline that was completely linear and processed each sample's data independently of the others. However, in real pipelines, you may need to combine data from multiple samples, or combine different kinds of data. Here we show you how to use channels and channel operators to implement a pipeline with more interesting plumbing.
+In Part 3, you built a pipeline that was completely linear and processed each sample's data independently of the others.
+However, in real pipelines, you may need to combine data from multiple samples, or combine different kinds of data.
+Here we show you how to use channels and channel operators to implement a pipeline with more interesting plumbing.
 
 Specifically, we show you how to implement joint variant calling with GATK, building on the pipeline from Part 2.
 
@@ -10,15 +12,19 @@ Specifically, we show you how to implement joint variant calling with GATK, buil
 
 ### Method overview
 
-The GATK variant calling method we used in Part 2 simply generated variant calls per sample. That's fine if you only want to look at the variants from each sample in isolation, but that only yields limited information. It's often more interesting to look at variant calls across multiple samples, and to do so, GATK offers an alternative method called joint variant calling, which we demonstrate here.
+The GATK variant calling method we used in Part 3 simply generated variant calls per sample.
+That's fine if you only want to look at the variants from each sample in isolation, but that only yields limited information.
+It's often more interesting to look at variant calls differ across multiple samples, and to do so, GATK offers an alternative method called joint variant calling, which we demonstrate here.
 
-Joint variant calling involves generating a special kind of variant output called GVCF (for Genomic VCF) for each sample, then combining the GVCF data from all the samples and finally, running a 'joint genotyping' analysis to produce the final cohort-level VCF containing variant calls calculated based on the information from all samples.
+Joint variant calling involves generating a special kind of variant output called GVCF (for Genomic VCF) for each sample, then combining the GVCF data from all the samples and finally, running a 'joint genotyping' statistical analysis.
 
 ![Joint analysis](img/joint-calling.png)
 
-What's special about a sample's GVCF is that it contains records summarizing sequence data statistics about all positions in the targeted area of the genome, not just the positions where the program found evidence of variation. This is critical for the joint genotyping calculation. _TODO: ADD LINK FOR MORE READING_
+What's special about a sample's GVCF is that it contains records summarizing sequence data statistics about all positions in the targeted area of the genome, not just the positions where the program found evidence of variation.
+This is critical for the joint genotyping calculation ([further reading](https://gatk.broadinstitute.org/hc/en-us/articles/360035890431-The-logic-of-joint-calling-for-germline-short-variants)).
 
-The GVCF is produced by GATK HaplotypeCaller, the same tool we used in Part 2, with an additional parameter (`-ERC GVCF`). Combining the GVCFs is done with GATK GenomicsDBImport, which combines the per-sample calls into a data store (analogous to a database), then the actual 'joint genotyping' analysis is done with GATK GenotypeGVCFs.
+The GVCF is produced by GATK HaplotypeCaller, the same tool we used in Part 2, with an additional parameter (`-ERC GVCF`).
+Combining the GVCFs is done with GATK GenomicsDBImport, which combines the per-sample calls into a data store (analogous to a database), then the actual 'joint genotyping' analysis is done with GATK GenotypeGVCFs.
 
 So to recap, we're going to develop a workflow that does the following:
 
@@ -36,7 +42,8 @@ _ADD joint genotyping FLOWCHART_
 ### Dataset
 
 -   **A reference genome** consisting of a small region of the human chromosome 20 (from hg19/b37) and its accessory files (index and sequence dictionary).
--   **Three whole genome sequencing samples** corresponding to a family trio (mother, father and son), which have been subset to a small portion on chromosome 20 to keep the file sizes small. The sequencing data is in [BAM](https://samtools.github.io/hts-specs/SAMv1.pdf) (Binary Alignment Map) format, i.e. genome sequencing reads that have already been mapped to the reference genome.
+-   **Three whole genome sequencing samples** corresponding to a family trio (mother, father and son), which have been subset to a small portion on chromosome 20 to keep the file sizes small.
+    The sequencing data is in [BAM](https://samtools.github.io/hts-specs/SAMv1.pdf) (Binary Alignment Map) format, i.e. genome sequencing reads that have already been mapped to the reference genome.
 -   **A list of genomic intervals**, i.e. coordinates on the genome where our samples have data suitable for calling variants, provided in BED format.
 
 ---
@@ -94,7 +101,7 @@ exit
 
 ### 0.2. Call variants with GATK HaplotypeCaller in GVCF mode
 
-This second step is **different** from Part 2: Hello-GATK, since now we are running GGATK in 'GVCF mode', so you **should NOT skip it**.
+This second step is **different** from Part 2: Hello-GATK, since now we are running GATK in 'GVCF mode', so you **should NOT skip it**.
 
 #### 0.2.1. Pull the GATK container
 
@@ -386,7 +393,8 @@ _TODO: check the output_
 
 ### Takeaway
 
-Now you know how to collect outputs from a channel and bundle them as a single input to another process. You also know how to construct a command line to provide the file names to the tool with the appropriate syntax.
+Now you know how to collect outputs from a channel and bundle them as a single input to another process.
+You also know how to construct a command line to provide the file names to the tool with the appropriate syntax.
 
 ### What's next?
 
@@ -539,7 +547,8 @@ executor >  local (7)
 [14/7145b6] process > GATK_JOINTGENOTYPING (1)      [100%] 1 of 1 ✔
 ```
 
-You can find the final output file, `family_trio.joint.vcf`, in the work directory for the last process. Click on it to open it and you'll see 40 lines of metadata header followed by just under 30 jointly genotyped variant records (meaning at least one of the family members has a variant genotype at each genomic position listed).
+You can find the final output file, `family_trio.joint.vcf`, in the work directory for the last process.
+Click on it to open it and you'll see 40 lines of metadata header followed by just under 30 jointly genotyped variant records (meaning at least one of the family members has a variant genotype at each genomic position listed).
 
 !!! tip
 
