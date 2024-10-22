@@ -13,7 +13,7 @@ Specifically, we show you how to implement joint variant calling with GATK, buil
 ### Method overview
 
 The GATK variant calling method we used in Part 3 simply generated variant calls per sample.
-That's fine if you only want to look at the variants from each sample in isolation, but that only yields limited information.
+That's fine if you only want to look at the variants from each sample in isolation, but that yields limited information.
 It's often more interesting to look at variant calls differ across multiple samples, and to do so, GATK offers an alternative method called joint variant calling, which we demonstrate here.
 
 Joint variant calling involves generating a special kind of variant output called GVCF (for Genomic VCF) for each sample, then combining the GVCF data from all the samples and finally, running a 'joint genotyping' statistical analysis.
@@ -23,7 +23,7 @@ Joint variant calling involves generating a special kind of variant output calle
 What's special about a sample's GVCF is that it contains records summarizing sequence data statistics about all positions in the targeted area of the genome, not just the positions where the program found evidence of variation.
 This is critical for the joint genotyping calculation ([further reading](https://gatk.broadinstitute.org/hc/en-us/articles/360035890431-The-logic-of-joint-calling-for-germline-short-variants)).
 
-The GVCF is produced by GATK HaplotypeCaller, the same tool we used in Part 2, with an additional parameter (`-ERC GVCF`).
+The GVCF is produced by GATK HaplotypeCaller, the same tool we used in Part 3, with an additional parameter (`-ERC GVCF`).
 Combining the GVCFs is done with GATK GenomicsDBImport, which combines the per-sample calls into a data store (analogous to a database), then the actual 'joint genotyping' analysis is done with GATK GenotypeGVCFs.
 
 So to recap, we're going to develop a workflow that does the following:
@@ -41,8 +41,8 @@ So to recap, we're going to develop a workflow that does the following:
 
 -   **A reference genome** consisting of a small region of the human chromosome 20 (from hg19/b37) and its accessory files (index and sequence dictionary).
 -   **Three whole genome sequencing samples** corresponding to a family trio (mother, father and son), which have been subset to a small portion on chromosome 20 to keep the file sizes small.
-    The sequencing data is in [BAM](https://samtools.github.io/hts-specs/SAMv1.pdf) (Binary Alignment Map) format, i.e. genome sequencing reads that have already been mapped to the reference genome.
--   **A list of genomic intervals**, i.e. coordinates on the genome where our samples have data suitable for calling variants, provided in BED format.
+    The sequencing data is in [BAM](https://samtools.github.io/hts-specs/SAMv1.pdf) (Binary Alignment Map) format, _i.e._ genome sequencing reads that have already been mapped to the reference genome.
+-   **A list of genomic intervals**, _i.e._ coordinates on the genome where our samples have data suitable for calling variants, provided in BED format.
 
 ---
 
@@ -57,7 +57,7 @@ Just like previously, we want to try out the commands manually before we attempt
 
 ### 0.1. Index a BAM input file with Samtools
 
-This first step is the same as in Part 2: Hello-GATK, so you can skip it if you've already done that in this session.
+This first step is the same as in Part 3: Hello-Science, so you can skip it if you've already done that in this session.
 
 #### 0.1.1. Pull the samtools container
 
@@ -99,7 +99,7 @@ exit
 
 ### 0.2. Call variants with GATK HaplotypeCaller in GVCF mode
 
-This second step is **different** from Part 2: Hello-GATK, since now we are running GATK in 'GVCF mode', so you **should NOT skip it**.
+This second step is **different** from Part 3: Hello-Science, since we are now running GATK in 'GVCF mode', so you **should NOT skip it**.
 
 #### 0.2.1. Pull the GATK container
 
@@ -115,7 +115,7 @@ docker run -it -v ./data:/data community.wave.seqera.io/library/gatk4:4.5.0.0--7
 
 #### 0.2.3. Run the variant calling command with the GVCF option
 
-Most of this command is the same as in Part 2, except this time we add the `-ERC GVCF` option, which switches on the HaplotypeCaller's GVCF mode to produce genomic VCFs.
+Most of this command is the same as in Part 3, except this time we add the `-ERC GVCF` option, which switches on the HaplotypeCaller's GVCF mode to produce genomic VCFs.
 
 ```bash
 gatk HaplotypeCaller \
