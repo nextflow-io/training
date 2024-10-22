@@ -49,7 +49,8 @@ So to recap, we're going to develop a workflow that does the following:
 
 ## 0. Warmup: Test the Samtools and GATK commands interactively
 
-Just like in the Hello World example, we want to try out the commands manually before we attempt to wrap them in a workflow. The tools we need (Samtools and GATK) are not installed in the Gitpod environment, but that's not a problem since you learned how to work with containers in Part 2 of this training series (Hello Containers).
+Just like in the Hello World example, we want to try out the commands manually before we attempt to wrap them in a workflow.
+The tools we need (Samtools and GATK) are not installed in the Gitpod environment, but that's not a problem since you learned how to work with containers in Part 2 of this training series (Hello Containers).
 
 !!! note
 
@@ -108,7 +109,8 @@ The [GATK documentation](https://gatk.broadinstitute.org/hc/en-us/articles/21905
 
 We need to provide the BAM input file (`-I`) as well as the reference genome (`-R`), a name for the output file (`-O`) and a list of genomic intervals to analyze (`-L`).
 
-However, we don't need to specify the path to the index file; the tool will automatically look for it in the same directory, based on the established naming and co-location convention. The same applies to the reference genome's accessory files (index and sequence dictionary files, `*.fai` and `*.dict`).
+However, we don't need to specify the path to the index file; the tool will automatically look for it in the same directory, based on the established naming and co-location convention.
+The same applies to the reference genome's accessory files (index and sequence dictionary files, `*.fai` and `*.dict`).
 
 ```bash
 gatk HaplotypeCaller \
@@ -118,7 +120,8 @@ gatk HaplotypeCaller \
         -L /data/ref/intervals.bed
 ```
 
-The output file `reads_mother.vcf` is a small test file, so you can `cat` it or click on it to open it and view the contents. If you scroll through, you'll find a header composed of many lines of metadata, followed by a list of variant calls, one per line.
+The output file `reads_mother.vcf` is a small test file, so you can `cat` it or click on it to open it and view the contents.
+If you scroll through, you'll find a header composed of many lines of metadata, followed by a list of variant calls, one per line.
 
 ```console title="VCF (variant calls)" linenums="26"
 #CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	reads_mother
@@ -147,7 +150,8 @@ Learn how to wrap those same commands into a two-step workflow that uses contain
 
 ## 1. Write a single-stage workflow that runs Samtools index on a BAM file
 
-We provide you with a workflow file, `hello-gatk.nf`, that outlines the main parts of the workflow. It's not functional; its purpose is just to serve as a skeleton that you'll use to write the actual workflow.
+We provide you with a workflow file, `hello-gatk.nf`, that outlines the main parts of the workflow.
+It's not functional; its purpose is just to serve as a skeleton that you'll use to write the actual workflow.
 
 ### 1.1. Define the indexing process
 
@@ -185,7 +189,8 @@ This process is going to require us to pass in a filepath via the `input_bam` in
 
 ### 1.2. Add an input parameter declaration
 
-At the top of the file, under the `Pipeline parameters` section, we declare a CLI parameter called `reads_bam` and give it a default value. That way, we can be lazy and not specify the input when we type the command to launch the pipeline (for development purposes).
+At the top of the file, under the `Pipeline parameters` section, we declare a CLI parameter called `reads_bam` and give it a default value.
+That way, we can be lazy and not specify the input when we type the command to launch the pipeline (for development purposes).
 
 ```groovy title="hello-gatk.nf" linenums="3"
 /*
@@ -213,7 +218,9 @@ workflow {
 }
 ```
 
-You'll notice we're using the same `.fromPath` channel constructor as we used at the end of Part 1 (Hello World) of this training series. Indeed, we're doing something very similar; the difference is that this time we're telling Nextflow to load the filepath itself into the channel as an input element, rather than reading in its contents.
+You'll notice we're using the same `.fromPath` channel constructor as we used at the end of Part 1 (Hello World) of this training series.
+Indeed, we're doing something very similar.
+The difference is that this time we're telling Nextflow to load the filepath itself into the channel as an input element, rather than reading in its contents.
 
 ### 1.4. Run the workflow to verify that the indexing step works
 
@@ -299,11 +306,13 @@ process GATK_HAPLOTYPECALLER {
 }
 ```
 
-This command takes quite a few more inputs, because GATK needs more information to perform the analysis compared to a simple indexing job. But you'll note that there are even more inputs defined in the inputs block than are listed in the GATK command. Why is that?
+This command takes quite a few more inputs, because GATK needs more information to perform the analysis compared to a simple indexing job.
+But you'll note that there are even more inputs defined in the inputs block than are listed in the GATK command. Why is that?
 
 !!! note
 
-    The GATK knows to look for the BAM index file and the reference genome's accessory files because it is aware of the conventions surrounding those files. However, Nextflow is designed to be domain-agnostic and doesn't know anything about bioinformatics file format requirements.
+    The GATK knows to look for the BAM index file and the reference genome's accessory files because it is aware of the conventions surrounding those files.
+    However, Nextflow is designed to be domain-agnostic and doesn't know anything about bioinformatics file format requirements.
 
 We need to tell Nextflow explicitly that it has to stage those files in the working directory at runtime; otherwise it won't do it, and GATK will (correctly) throw an error about the index files being missing.
 
@@ -357,7 +366,8 @@ You should recognize the `*.out` syntax from Part 1 of this training series; we 
 
 !!! note
 
-    You'll notice that the inputs are provided in the exact same order in the call to the process as they are listed in the input block of the process. In Nextflow, inputs are positional, meaning you _must_ follow the same order; and of course there have to be the same number of elements.
+    You'll notice that the inputs are provided in the exact same order in the call to the process as they are listed in the input block of the process.
+    In Nextflow, inputs are positional, meaning you _must_ follow the same order; and of course there have to be the same number of elements.
 
 ### 2.5. Run the workflow to verify that the variant calling step works
 
@@ -413,7 +423,8 @@ Make the workflow handle multiple samples in bulk.
 
 ## 3. Adapt the workflow to run on a batch of samples
 
-It's all well and good to have a workflow that can automate processing on a single sample, but what if you have 1000 samples? Do you need to write a bash script that loops through all your samples?
+It's all well and good to have a workflow that can automate processing on a single sample, but what if you have 1000 samples?
+Do you need to write a bash script that loops through all your samples?
 
 No, thank goodness! Just make a minor tweak to the code and Nextflow will handle that for you too.
 
@@ -443,7 +454,8 @@ And that's actually all we need to do, because the channel constructor we use in
 
 !!! note
 
-    Normally, you wouldn't want to hardcode the list of samples into your workflow file, but we're doing that here to keep things simple. We'll present more elegant ways for handling inputs later in this training series.
+    Normally, you wouldn't want to hardcode the list of samples into your workflow file, but we're doing that here to keep things simple.
+    We'll present more elegant ways for handling inputs later in this training series.
 
 ### 3.2. Run the workflow to verify that it runs on all three samples
 
@@ -454,7 +466,8 @@ nextflow run hello-gatk.nf -resume
 ```
 
 Funny thing: this might work, OR it might fail with an error like this:
-
+Funny thing: this *might work*, OR it *might fail*.
+If your pipeline run succeeded run it again until you get an error like this:
 ```console title="Output"
  N E X T F L O W   ~  version 24.02.0-edge
 
@@ -522,7 +535,8 @@ Then run the workflow command again.
 nextflow run hello-gatk.nf
 ```
 
-You may need to run it several times for it to fail again; this error will not reproduce consistently because it is dependent on some variability in the execution times of the individual process calls.
+You may need to run it several times for it to fail again.
+This error will not reproduce consistently because it is dependent on some variability in the execution times of the individual process calls.
 
 This is what the output of the two `.view` calls we added looks like for a failed run:
 
@@ -535,17 +549,21 @@ This is what the output of the two `.view` calls we added looks like for a faile
 /workspace/gitpod/hello-nextflow/work/4d/dff681a3d137ba7d9866e3d9307bd0/reads_mother.bam.bai
 ```
 
-The first three lines correspond to the input channel and the second, to the output channel. You can see that the BAM files and index files for the three samples are not listed in the same order!
+The first three lines correspond to the input channel and the second, to the output channel.
+You can see that the BAM files and index files for the three samples are not listed in the same order!
 
 !!! note
-When you call a Nextflow process on a channel containing multiple elements, Nextflow will try to parallelize execution as much as possible, and will collect outputs in whatever order they become available. The consequence is that the corresponding outputs may be collected in a different order than the original inputs were fed in.
+When you call a Nextflow process on a channel containing multiple elements, Nextflow will try to parallelize execution as much as possible, and will collect outputs in whatever order they become available.
+The consequence is that the corresponding outputs may be collected in a different order than the original inputs were fed in.
 
-As currently written, our workflow script assumes that the index files will come out of the indexing step listed in the same mother/father/son order as the inputs were given. But that is not guaranteed to be the case, which is why sometimes (though not always) the wrong files get paired up in the second step.
+As currently written, our workflow script assumes that the index files will come out of the indexing step listed in the same mother/father/son order as the inputs were given.
+But that is not guaranteed to be the case, which is why sometimes (though not always) the wrong files get paired up in the second step.
 
 To fix this, we need to make sure the BAM files and their index files travel together through the channels.
 
 !!! tip
-The `view()` statements in the workflow code don't do anything, so it's not a problem to leave them in; however they will clutter up your console output, so we recommend removing them when you're done troubleshooting the issue.
+The `view()` statements in the workflow code don't do anything, so it's not a problem to leave them in.
+However they will clutter up your console output, so we recommend removing them when you're done troubleshooting the issue.
 
 ### 3.3. Change the output of the SAMTOOLS_INDEX process into a tuple that keeps the input file and its index together
 
@@ -666,7 +684,8 @@ Make it easier to handle samples in bulk.
 
 ## 4. Make the workflow accept a text file containing a batch of input files
 
-A very common way to provide multiple data input files to a workflow is to do it with a text file containing the file paths. It can be as simple as a text list with one file path per line and nothing else, or the file can contain additional metadata, in which case it's often called a samplesheet.
+A very common way to provide multiple data input files to a workflow is to do it with a text file containing the file paths.
+It can be as simple as a text list with one file path per line and nothing else, or the file can contain additional metadata, in which case it's often called a samplesheet.
 
 Here we are going to show you how to do the simple case.
 
@@ -711,7 +730,8 @@ This way we can continue to be lazy, but the list of files no longer lives in th
 
 ### 4.3. Update the channel constructor to read lines from a file
 
-Currently, our input channel constructor treats any files we give it as the data inputs we want to feed to the indexing process. Since we're now giving it a file that lists input file paths, we need to change its behavior to parse the file and treat the file paths it contains as the data inputs.
+Currently, our input channel constructor treats any files we give it as the data inputs we want to feed to the indexing process.
+Since we're now giving it a file that lists input file paths, we need to change its behavior to parse the file and treat the file paths it contains as the data inputs.
 
 Fortunately we can do that very simply, just by adding the [`.splitText()` operator](https://www.nextflow.io/docs/latest/reference/operator.html#operator-splittext) to the channel construction step.
 
