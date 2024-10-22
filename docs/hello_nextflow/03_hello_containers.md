@@ -240,7 +240,10 @@ After it has finished building, you can run the container image you just built.
 docker run --rm quote:latest quote "Margaret Oakley Dayhoff"
 ```
 
-!Hint: Even if Seqera Containers doesn't manage to successfully build a container image for you, the `Dockerfile` and `conda.yml` are great starting point for a manual build.
+!!! Hint
+
+    Even if Seqera Containers doesn't manage to successfully build a container image for you, the `Dockerfile` and `conda.yml` are great starting point for a manual build.
+
 It often only takes a few additional `RUN` commands added to the Dockerfile to add the missing dependencies or system libraries.
 
 ### Takeaway
@@ -262,7 +265,7 @@ This means that you can use any container image you like to run your processes, 
 
 Edit the `hello_containers.nf` script to add a `container` directive to the `cowsay` process.
 
-_Before_:\_
+_Before:_
 
 ```groovy title="hello-containers.nf"
 process COW_SAY {
@@ -287,8 +290,9 @@ Run the script to see the container in action.
 nextflow run hello_containers.nf
 ```
 
-!NOTE
-The `nextflow.config` in our current working directory contains `docker.enabled = true`, which tells Nextflow to use Docker to run processes.
+!!! NOTE
+
+    The `nextflow.config` in our current working directory contains `docker.enabled = true`, which tells Nextflow to use Docker to run processes.
 Without that configuration we would have to specify the `-with-docker` flag when running the script.
 
 ### 3.3. Check the results
