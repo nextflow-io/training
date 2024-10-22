@@ -1002,7 +1002,7 @@ Success! Now we can add as many greetings as we like without worrying about outp
 
 !!! note
 
-    In practice, naming files based on the input data itself is almost always impractical; the better way to generate dynamic filenames is to use a samplesheet contain relevant metadata (such as unique sample IDs) and create a map of metadata (aka metamap) from which we can grab an appropriate identifier to generate the filenames.
+    In practice, naming files based on the input data itself is almost always impractical. The better way to generate dynamic filenames is to use a samplesheet contain relevant metadata (such as unique sample IDs) and create a map of metadata (aka metamap) from which we can grab an appropriate identifier to generate the filenames.
     We'll show you how to do that later in this training course.
 
 ### Takeaway

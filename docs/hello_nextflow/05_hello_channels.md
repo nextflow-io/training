@@ -196,7 +196,8 @@ Wrap these commands into an actual pipeline.
 
 ## 1. Modify the per-sample variant calling step to produce a GVCF
 
-We'll start from `hello-channels.nf`, which is a copy of the workflow that results from Part 2 of this training series. However, that pipeline produces VCF files, whereas now we want GVCF files in order to do the joint genotyping, so we need to switch on the GVCF variant calling mode and update the output file extension.
+We'll start from `hello-channels.nf`, which is a copy of the workflow that results from Part 2 of this training series.
+However, that pipeline produces VCF files, whereas now we want GVCF files in order to do the joint genotyping, so we need to switch on the GVCF variant calling mode and update the output file extension.
 
 ### 1.1. Tell HaplotypeCaller to emit a GVCF and update the output file path
 
@@ -245,7 +246,8 @@ If you open the file and scroll through it, you can see that GATK HaplotypeCalle
 
 ### Takeaway
 
-Okay, this one was minimal in terms of Nextflow learning... But hey, now you know the difference between a regular VCF and a Genomic VCF!
+Okay, this one was minimal in terms of Nextflow learning...
+But hey, now you know the difference between a regular VCF and a Genomic VCF!
 
 ### What's next?
 
@@ -289,7 +291,8 @@ process GATK_GENOMICSDB {
 
 ### 2.2. Add default value for the cohort name parameter up top
 
-We need to provide an arbitrary name for the cohort. Later in the series you'll learn how to use the available metadata for this, but for now we just declare a CLI parameter using `params` and give it a default value for convenience.
+We need to provide an arbitrary name for the cohort.
+Later in the series you'll learn how to use the available metadata for this, but for now we just declare a CLI parameter using `params` and give it a default value for convenience.
 
 ```groovy title="hello-channels.nf"
 // Base name for final output file
@@ -298,7 +301,8 @@ params.cohort_name = "family_trio"
 
 ### 2.3. Gather the outputs of GATK_HAPLOTYPECALLER across samples using `collect()`
 
-We collect the VCFs and their index files (`.idx`) separately in order to list only the VCFs in the command we're going to construct. Since we'll give all of those files together to the joint genotyping process, we don't have to worry about the order of files like we did in Part 2.
+We collect the VCFs and their index files (`.idx`) separately in order to list only the VCFs in the command we're going to construct.
+Since we'll give all of those files together to the joint genotyping process, we don't have to worry about the order of files like we did in Part 2.
 
 Add this to the `workflow` body, right after the call to GATK_HAPLOTYPECALLER:
 
@@ -499,7 +503,9 @@ output:
 
 ### 3.5. Update the process call from GATK_GENOMICSDB to GATK_JOINTGENOTYPING
 
-We need to rename the process call from GATK_GENOMICSDB to GATK_JOINTGENOTYPING; and since the expanded process requires the reference genome files as inputs, we need to provide them in the GATK_JOINTGENOTYPING process call.
+Let's rename the process call from GATK_GENOMICSDB to GATK_JOINTGENOTYPING.
+
+And while we're at it, let's add the reference genome files as inputs, since we need to provide them to the joint genotyping tool.
 
 _Before:_
 
