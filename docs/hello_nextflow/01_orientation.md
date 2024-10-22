@@ -65,13 +65,15 @@ You should see the following output:
 
 ```
 
-**The `data` directory** contains the input data we'll use in Part 2: Hello Science, which uses an example from genomics to demonstrate how to build a simple analysis pipeline. The data is described in detail in that section of the course.
+**The `data` directory** contains the input data we'll use in Part 3: Hello Science, which uses an example from genomics to demonstrate how to build a simple analysis pipeline.
+The data are described in detail in that section of the course.
 
 **The file `nextflow.config`** is a configuration file that sets minimal environment properties.
 
 **The file `hello-world.nf`** is a simple but fully functional workflow script that serves as a starting point to Part 1: Hello World.
 
-**The file `hello-gatk.nf`** is a stub that serves as a starting point to Part 2: Hello Science. In its initial state, it is NOT a functional workflow script.
+**The file `hello-gatk.nf`** is a stub that serves as a starting point to Part 3: Hello Science.
+In its initial state, it is NOT a functional workflow script.
 
 **The remaining `.nf` files** are functional workflow scripts that serve as starting points for the corresponding parts of the course.
 
