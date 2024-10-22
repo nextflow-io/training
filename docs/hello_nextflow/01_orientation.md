@@ -14,7 +14,7 @@ Throughout this training course, we'll be working in the `hello-nextflow/` direc
 cd /workspace/gitpod/hello-nextflow
 ```
 
-This directory contains all the code files, test data and accessory files you will need. Feel free to explore the contents of this directory; the easiest way to see what it contains is the use the `tree` command (here we generate a table of contents to the second level down).
+This directory contains all the code files, test data and accessory files you will need. Feel free to explore the contents of this directory; an easy way to see what it contains is the use the `tree` command (here we generate a table of contents to the second level down).
 
 ```bash
 tree . -L 2
