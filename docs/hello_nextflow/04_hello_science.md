@@ -223,7 +223,7 @@ Now we have a process ready, as well as a parameter to give it an input to run o
 
 In the `workflow` block, we need to set up a **channel** to feed the input to the `SAMTOOLS_INDEX` process; then we can call the process itself to run on the contents of that channel.
 
-```groovy title="hello-gatk.nf" linenums="31"
+```groovy title="hello-gatk.nf" linenums="30"
 workflow {
 
     // Create input channel (single file via CLI parameter)
@@ -458,7 +458,7 @@ params.reads_bam = "${projectDir}/data/bam/reads_mother.bam"
 _After:_
 
 ```groovy title="hello-gatk.nf" linenums="7"
-// Primary input (list of three samples)
+// Primary input (array of three samples)
 params.reads_bam = [
     "${projectDir}/data/bam/reads_mother.bam",
     "${projectDir}/data/bam/reads_father.bam",
@@ -481,9 +481,8 @@ Let's try running the workflow now that the plumbing is set up to run on all thr
 nextflow run hello-gatk.nf -resume
 ```
 
-Funny thing: this might work, OR it might fail with an error like this:
 Funny thing: this _might work_, OR it _might fail_.
-If your pipeline run succeeded run it again until you get an error like this:
+If your workflow run succeeded, run it again until you get an error like this:
 
 ```console title="Output"
  N E X T F L O W   ~  version 24.02.0-edge
@@ -508,7 +507,7 @@ Command exit status:
 Command error:
 ```
 
-And further down, buried in the GATK command error output, there will be a line like this:
+Further down, buried in the GATK command error output, there will be a line like this:
 
 ```console title="Output"
 A USER ERROR has occurred: Traversal by intervals was requested but some input files are not indexed.
@@ -570,8 +569,9 @@ The first three lines correspond to the input channel and the second, to the out
 You can see that the BAM files and index files for the three samples are not listed in the same order!
 
 !!! note
-When you call a Nextflow process on a channel containing multiple elements, Nextflow will try to parallelize execution as much as possible, and will collect outputs in whatever order they become available.
-The consequence is that the corresponding outputs may be collected in a different order than the original inputs were fed in.
+
+    When you call a Nextflow process on a channel containing multiple elements, Nextflow will try to parallelize execution as much as possible, and will collect outputs in whatever order they become available.
+    The consequence is that the corresponding outputs may be collected in a different order than the original inputs were fed in.
 
 As currently written, our workflow script assumes that the index files will come out of the indexing step listed in the same mother/father/son order as the inputs were given.
 But that is not guaranteed to be the case, which is why sometimes (though not always) the wrong files get paired up in the second step.
@@ -579,15 +579,17 @@ But that is not guaranteed to be the case, which is why sometimes (though not al
 To fix this, we need to make sure the BAM files and their index files travel together through the channels.
 
 !!! tip
-The `view()` statements in the workflow code don't do anything, so it's not a problem to leave them in.
-However they will clutter up your console output, so we recommend removing them when you're done troubleshooting the issue.
+
+    The `view()` statements in the workflow code don't do anything, so it's not a problem to leave them in.
+    However they will clutter up your console output, so we recommend removing them when you're done troubleshooting the issue.
 
 ### 3.3. Change the output of the SAMTOOLS_INDEX process into a tuple that keeps the input file and its index together
 
 The simplest way to ensure a BAM file and its index stay closely associated is to package them together into a tuple coming out of the index task.
 
 !!! note
-A **tuple** is a finite, ordered list of elements that is commonly used for returning multiple values from a function.
+
+    A **tuple** is a finite, ordered list of elements that is commonly used for returning multiple values from a function.
 
 First, let's change the output of the `SAMTOOLS_INDEX` process to include the BAM file in its output declaration.
 
@@ -702,7 +704,7 @@ Make it easier to handle samples in bulk.
 ## 4. Make the workflow accept a text file containing a batch of input files
 
 A very common way to provide multiple data input files to a workflow is to do it with a text file containing the file paths.
-It can be as simple as a text list with one file path per line and nothing else, or the file can contain additional metadata, in which case it's often called a samplesheet.
+It can be as simple as a text file listing one file path per line and nothing else, or the file can contain additional metadata, in which case it's often called a samplesheet.
 
 Here we are going to show you how to do the simple case.
 
@@ -719,7 +721,8 @@ We already made a text file listing the input file paths, called `sample_bams.tx
 As you can see, we listed one file path per line, and they are absolute paths.
 
 !!! note
-The files we are using here are just on your Gitpod's local filesystem, but we could also point to files in cloud storage.
+
+    The files we are using here are just on your Gitpod's local filesystem, but we could also point to files in cloud storage.
 
 ### 4.2. Update the parameter default
 
@@ -739,7 +742,7 @@ params.reads_bam = [
 _After:_
 
 ```groovy title="hello-gatk.nf" linenums="7"
-// Primary input (list of input files, one per line)
+// Primary input (file of input files, one per line)
 params.reads_bam = "${projectDir}/data/sample_bams.txt"
 ```
 
