@@ -3,7 +3,7 @@
 /*
  * Pipeline parameters
  */
-params.input_file = "containers/data/pioneers.csv"
+params.input_file = "containers/data/greetings.csv"
 // params.character can be any of 'beavis', 'cheese', 'cow', 'daemon', 'dragon', 'fox', 'ghostbusters', 'kitty',
 // 'meow', 'miki', 'milk', 'octopus', 'pig', 'stegosaurus', 'stimpy', 'trex', 'turkey', 'turtle', 'tux'
 params.character = "cow"
@@ -30,7 +30,7 @@ process sayHello {
 }
 
 /*
- * Use a text replace utility to convert the greeting to uppercase
+ * Use a cow (or other character) to say some text
  */
 process cowSay {
 
@@ -48,28 +48,6 @@ process cowSay {
     """
 }
 
-process quote {
-
-    publishDir 'containers/results', mode: 'copy'
-    container 'community.wave.seqera.io/library/pip_quote:25b3982790125217'
-
-    input:
-        val author
-
-    output:
-        path "quote-*.txt"
-
-    script:
-        // Replace the spaces in the author with hyphens for the output filename
-        def safe_author = author.tokenize(' ').join('-')
-        """
-        # The stdout and stderr of the quote command are swapped so we redirect them to the correct files
-        # Pending fix: https://github.com/maxhumber/quote/issues/12
-        # quote "$author" > quote-${safe_author}.txt
-        quote "$author" > /dev/null 2> quote-${safe_author}.txt || true
-        """
-}
-
 workflow {
 
     // create a channel for inputs from a CSV file
@@ -77,8 +55,8 @@ workflow {
         .splitCsv()
         .flatten()
 
-    getQuote(input_ch)
+    sayHello(input_ch)
 
     // cowSay the text
-    cowSay(getQuote.out)
+    cowSay(sayHello.out)
 }

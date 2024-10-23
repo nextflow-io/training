@@ -180,14 +180,14 @@ Click on "+Add" and then "Get Container" to request a container image for the `q
 ![Seqera Containers](img/seqera-containers-2.png)
 
 If this is the first time a community container has been built for this package, it may take a few minutes to complete.
-Click to copy the URI (e.g. `community.wave.seqera.io/library/pip_quote:25b3982790125217`) of the container image that was created for you.
+Click to copy the URI (e.g. `community.wave.seqera.io/library/pip_quote:ae07804021465ee9`) of the container image that was created for you.
 
 ### 2.3. Use the container image
 
 You can now use the container image to run the `quote` command and get a random saying from Grace Hopper.
 
 ```bash
-docker run --rm community.wave.seqera.io/library/pip_quote:25b3982790125217 quote "Albert Einstein"
+docker run --rm community.wave.seqera.io/library/pip_quote:ae07804021465ee9 quote "Grace Hopper"
 ```
 
 Output:
@@ -211,7 +211,7 @@ channels:
 dependencies:
 - pip
 - pip:
-  - quote==2.0.4
+  - quote==3.0.0
 ```
 
 ```Dockerfile
@@ -293,6 +293,7 @@ nextflow run hello_containers.nf
 !!! NOTE
 
     The `nextflow.config` in our current working directory contains `docker.enabled = true`, which tells Nextflow to use Docker to run processes.
+
 Without that configuration we would have to specify the `-with-docker` flag when running the script.
 
 ### 3.3. Check the results
@@ -312,6 +313,47 @@ You should see a new directory called `containers/results` that contains the out
               ||     ||
 ```
 
+### 3.4. Explore how Nextflow launched the containerized task
+
+Let's take a look at the task directory for one of the cowsay tasks to see how Nextflow works with containers under the hood.
+
+Check your the output form your `nextflow run` command to find the task ID for the `cowsay` process.
+Then checkout the task directory for that task.
+
+```bash
+tree -a work/8c/738ac55b80e7b6170aa84a68412454
+work/8c/738ac55b80e7b6170aa84a68412454
+├── .command.begin
+├── .command.err
+├── .command.log
+├── .command.out
+├── .command.run
+├── .command.sh
+├── .exitcode
+├── cowsay-output-Bonjour.txt
+└── output-Bonjour.txt -> /workspace/gitpod/nf-training/hello-nextflow/work/0e/e96c123cb7ae9ff7b7bed1c5444009/output-Bonjour.txt
+
+1 directory, 9 files
+```
+
+Open the `.command.run` file which holds all the busywork that Nextflow does under the hood.
+
+```bash
+code work/8c/738ac55b80e7b6170aa84a68412454/.command.run
+```
+
+Search for `nxf_launch` and you should see something like this:
+
+```bash
+nxf_launch() {
+    docker run -i --cpu-shares 1024 -e "NXF_TASK_WORKDIR" -v /workspace/gitpod/nf-training/hello-nextflow/work:/workspace/gitpod/nf-training/hello-nextflow/work -w "$NXF_TASK_WORKDIR" --name $NXF_BOXID community.wave.seqera.io/library/pip_cowsay:131d6a1b707a8e65 /bin/bash -ue /workspace/gitpod/nf-training/hello-nextflow/work/8c/738ac55b80e7b6170aa84a68412454/.command.sh
+}
+```
+
+As you can see, Nextflow is using the `docker run` command to launch the task.
+It also mounts the task's working directory into the container, sets the working directory inside the container to the task's working directory, and runs our templated bash script in the `.command.sh` file.
+All the hard work we learned about in the previous sections is done for us by Nextflow!
+
 ### Takeaway
 
 You know how to use containers in Nextflow to run processes.
@@ -320,18 +362,40 @@ You know how to use containers in Nextflow to run processes.
 
 An optional exercise to fetch quotes on computer/biology pioneers using the `quote` container and output them using the `cowsay` container.
 
-## 4. OPTIONAL EXERCISE: Connect the `quote` container with the `cowsay` container
+## 4. STRETCH EXERCISE: Connect the `quote` container with the `cowsay` container
 
-As an optional exercise, you can add a locally-built or Seqera Containers-built `quote` container to a getQuote process in the `hello_containers.nf` script and connect the output to the `cowsay` container.
+This section contains some stretch exercises, to practice what you've learned so far.
+Doing these exercises are _not required_ to understand later parts of the training, but provide a fun way to reinforce your learnings by figuring out how to connect the `quote` container with the `cowsay` container.
+
+```console title="cowsay-output-Grace-Hopper.txt"
+  _________________________________________________
+ /                                                 \
+| Humans are allergic to change. They love to       |
+| say, 'We've always done it this way.' I try to fi |
+| ght that. That's why I have a clock on my wall th |
+| at runs counter-clockwise.                        |
+| -Grace Hopper                                     |
+ \                                                 /
+  =================================================
+                                                 \
+                                                  \
+                                                    ^__^
+                                                    (oo)\_______
+                                                    (__)\       )\/\
+                                                        ||----w |
+                                                        ||     ||
+```
 
 ### 4.1. Modify the `hello_containers.nf` script to use a getQuote process
 
 We have a list of computer and biology pioneers in the `containers/data/pioneers.csv` file.
 At a high level, to complete this exercise you will need to:
 
--   modify the `params.input_file` to point to the `pioneers.csv` file.
+-   modify the default `params.input_file` to point to the `pioneers.csv` file.
 -   Create a `getQuote` process that uses the `quote` container to fetch a quote for each input.
 -   Connect the output of the `getQuote` process to the `cowsay` process to display the quote.
+
+For the `quote` container image, you can either use the one you built yourself in the previous stretch exercise or use the one you got from Seqera Containers .
 
 !!! Hint
 
@@ -341,6 +405,7 @@ At a high level, to complete this exercise you will need to:
             def safe_author = author.tokenize(' ').join('-')
             """
             quote "$author" > quote-${safe_author}.txt
+            echo "-${author}" >> quote-${safe_author}.txt
             """
         ```
 

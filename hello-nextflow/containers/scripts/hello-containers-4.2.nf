@@ -31,7 +31,7 @@ process sayHello {
 }
 
 /*
- * Use a text replace utility to convert the greeting to uppercase
+ * Use a cow (or other character) to say some text
  */
 process cowSay {
 
@@ -49,10 +49,13 @@ process cowSay {
     """
 }
 
+/*
+ * Get a quote by author name from the goodreads API
+ */
 process getQuote {
 
     publishDir 'containers/results', mode: 'copy'
-    container 'community.wave.seqera.io/library/pip_quote:25b3982790125217'
+    container 'community.wave.seqera.io/library/pip_quote:ae07804021465ee9'
 
     input:
         val author
@@ -64,10 +67,8 @@ process getQuote {
         // Replace the spaces in the author with hyphens for the output filename
         def safe_author = author.tokenize(' ').join('-')
         """
-        # The stdout and stderr of the quote command are swapped so we redirect them to the correct files
-        # Pending fix: https://github.com/maxhumber/quote/issues/12
-        # quote "$author" > quote-${safe_author}.txt
-        quote "$author" > /dev/null 2> quote-${safe_author}.txt || true
+        quote "$author" > quote-${safe_author}.txt
+        echo "-${author}" >> quote-${safe_author}.txt
         """
 }
 
@@ -80,8 +81,8 @@ workflow {
 
     // create a channel for the text to be processed
     if (params.quote) {
-        quote(input_ch)
-        text_ch = quote.out
+        getQuote(input_ch)
+        text_ch = getQuote.out
     } else {
         sayHello(input_ch)
         text_ch = sayHello.out

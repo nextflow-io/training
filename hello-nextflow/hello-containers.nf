@@ -30,7 +30,7 @@ process sayHello {
 }
 
 /*
- * Use a text replace utility to convert the greeting to uppercase
+ * Use a cow (or other character) to say some text
  */
 process cowSay {
 
