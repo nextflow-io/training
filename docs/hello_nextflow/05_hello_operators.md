@@ -57,7 +57,7 @@ Just like previously, we want to try out the commands manually before we attempt
 
 ### 0.1. Index a BAM input file with Samtools
 
-This first step is the same as in Part 3: Hello-Science, so it should feel very familiar, but this time we need to do it for all three samples.
+This first step is the same as in Part 3: Hello Genomics, so it should feel very familiar, but this time we need to do it for all three samples.
 
 !!! note
 
@@ -99,7 +99,7 @@ exit
 
 ### 0.2. Call variants with GATK HaplotypeCaller in GVCF mode
 
-This second step is very similar to what we did Part 3: Hello-Science, but we are now going to run GATK in 'GVCF mode'.
+This second step is very similar to what we did Part 3: Hello Genomics, but we are now going to run GATK in 'GVCF mode'.
 
 #### 0.2.1. Spin up the GATK container interactively
 
@@ -143,7 +143,7 @@ In a GVCF, there are typically lots of such non-variant lines, with a smaller nu
 20_10037292_10066351    3481    .       T       <NON_REF>       .       .       END=3481        GT:DP:GQ:MIN_DP:PL       0/0:21:51:21:0,51,765
 ```
 
-The second line shows the first variant record in the file, which corresponds to the first variant in the VCF file we looked at it Part 3.
+The second line shows the first variant record in the file, which corresponds to the first variant in the VCF file we looked at in Part 3.
 
 Just like the original VCF was, the output GVCF file is also accompanied by an index file, called `reads_mother.g.vcf.idx`.
 
@@ -681,7 +681,7 @@ _After:_
 process GATK_JOINTGENOTYPING {
 ```
 
-Remember to keep your process names as descriptive as possible, to maximize readabilty for your colleagues —and your future self!
+Remember to keep your process names as descriptive as possible, to maximize readability for your colleagues —and your future self!
 
 ### 3.2. Add the joint genotyping command to the GATK_JOINTGENOTYPING process
 
