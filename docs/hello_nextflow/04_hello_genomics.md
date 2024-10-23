@@ -85,7 +85,7 @@ samtools index /data/bam/reads_mother.bam
 
 This should complete immediately, and you should now see a file called `reads_mother.bam.bai` in the same directory as the original BAM input file.
 
-```console title="Output"
+```console title="Directory contents"
 data/bam/
 ├── reads_father.bam
 ├── reads_mother.bam
@@ -259,13 +259,13 @@ executor >  local (1)
 
 You can check that the index file has been generated correctly by looking in the work directory or in the directory set up with `publishDir`.
 
-```console title="Output"
+```console title="Directory contents"
 work/2a/e695367b2f60df09cf826b07192dc3
 ├── reads_mother.bam -> /workspace/gitpod/hello-nextflow/data/bam/reads_mother.bam
 └── reads_mother.bam.bai
 ```
 
-```console title="Output"
+```console title="Directory contents"
 results_genomics/
 └── reads_mother.bam.bai
 ```
@@ -409,7 +409,7 @@ The first process was skipped thanks to the caching, as expected, whereas the se
 
 You'll find the output file `reads_mother.bam.vcf` in the results directory, as well its index file (`*.vcf.idx`). Both are symbolic links to the original files in the work directory where the process call was executed.
 
-```console title="Output"
+```console title="Directory contents"
 results_genomics/
 ├── reads_mother.bam.bai
 ├── reads_mother.bam.vcf -> /workspace/gitpod/hello-nextflow/work/53/e18e987d56c47f59b7dd268649ec01/reads_mother.bam.vcf
@@ -519,7 +519,7 @@ Well, that's weird, considering we explicitly indexed the BAM files in the first
 
 Let's take a look inside the work directory listed in the console output.
 
-```console title="Output"
+```console title="Directory contents"
 work/a5/fa9fd0994b6beede5fb9ea073596c2
 ├── intervals.bed -> /workspace/gitpod/hello-nextflow/data/ref/intervals.bed
 ├── reads_father.bam.bai -> /workspace/gitpod/hello-nextflow/work/01/eea16597bd6e810fb4cf89e60f8c2d/reads_father.bam.bai

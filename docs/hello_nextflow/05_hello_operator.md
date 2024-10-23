@@ -79,7 +79,7 @@ samtools index /data/bam/reads_son.bam
 
 Just like previously, this should produce the index files in the same directory as the corresponding BAM files.
 
-```console title="Output"
+```console title="Directory contents"
 data/bam/
 ├── reads_father.bam
 ├── reads_father.bam.bai
