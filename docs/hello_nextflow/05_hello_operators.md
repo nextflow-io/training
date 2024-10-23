@@ -1,4 +1,4 @@
-# Part 4: Hello Operator
+# Part 4: Hello Operators
 
 In Part 3, you built a pipeline that was completely linear and processed each sample's data independently of the others.
 However, in real pipelines, you may need to combine data from multiple samples, or combine different kinds of data.
@@ -247,11 +247,11 @@ So we need to start by switching on the GVCF variant calling mode and updating t
 
 !!! note
 
-    For convenience, we are going to work with a fresh copy of the GATK workflow as it stands at the end of Part 3, but under a different name: `hello-operator.nf`.
+    For convenience, we are going to work with a fresh copy of the GATK workflow as it stands at the end of Part 3, but under a different name: `hello-operators.nf`.
 
 ### 1.1. Tell HaplotypeCaller to emit a GVCF and update the output extension
 
-Let's open the `hello-operator.nf` file in the code editor.
+Let's open the `hello-operators.nf` file in the code editor.
 It should look very familiar, but feel free to run it if you want to satisfy yourself that it runs as expected.
 
 We're going to start by making two changes:
@@ -261,7 +261,7 @@ We're going to start by making two changes:
 
 _Before:_
 
-```groovy title="hello-operator.nf" linenums="56"
+```groovy title="hello-operators.nf" linenums="56"
     """
     gatk HaplotypeCaller \
         -R ${ref_fasta} \
@@ -273,7 +273,7 @@ _Before:_
 
 _After:_
 
-```groovy title="hello-operator.nf" linenums="56"
+```groovy title="hello-operators.nf" linenums="56"
     """
     gatk HaplotypeCaller \
         -R ${ref_fasta} \
@@ -292,7 +292,7 @@ The Nextflow execution command is the same as before, save for the workflow file
 Make sure to update that appropriately.
 
 ```bash
-nextflow run hello-operator.nf
+nextflow run hello-operators.nf
 ```
 
 And the output is... all red! Oh no.
@@ -300,7 +300,7 @@ And the output is... all red! Oh no.
 ```console title="Output"
  N E X T F L O W   ~  version 24.02.0-edge
 
- ┃ Launching `hello-operator.nf` [nice_gates] DSL2 - revision: 43c7de9890
+ ┃ Launching `hello-operators.nf` [nice_gates] DSL2 - revision: 43c7de9890
 
 executor >  local (6)
 [a1/0b5d00] SAMTOOLS_INDEX (3)       | 3 of 3 ✔
@@ -326,7 +326,7 @@ Because it's not enough to just change the file extension in the tool command it
 
 _Before:_
 
-```groovy title="hello-operator.nf" linenums="52"
+```groovy title="hello-operators.nf" linenums="52"
     output:
         path "${input_bam}.vcf"
         path "${input_bam}.vcf.idx"
@@ -334,7 +334,7 @@ _Before:_
 
 _After:_
 
-```groovy title="hello-operator.nf" linenums="52"
+```groovy title="hello-operators.nf" linenums="52"
     output:
         path "${input_bam}.g.vcf"
         path "${input_bam}.g.vcf.idx"
@@ -345,7 +345,7 @@ _After:_
 Let's run it with `-resume` this time.
 
 ```bash
-nextflow run hello-operator.nf -resume
+nextflow run hello-operators.nf -resume
 ```
 
 Ah, this time it works.
@@ -353,7 +353,7 @@ Ah, this time it works.
 ```console title="Output"
  N E X T F L O W   ~  version 24.02.0-edge
 
- ┃ Launching `hello-operator.nf` [elated_carlsson] DSL2 - revision: 6a5786a6fa
+ ┃ Launching `hello-operators.nf` [elated_carlsson] DSL2 - revision: 6a5786a6fa
 
 executor >  local (3)
 [47/f7fac1] SAMTOOLS_INDEX (2)       | 3 of 3, cached: 3 ✔
@@ -401,7 +401,7 @@ As a reminder of what we did earlier in the warmup section, combining the GVCFs 
 
 Let's write a new process to define how that's going to work, based on the command we used earlier in the warmup section.
 
-```groovy title="hello-operator.nf" linenums="66"
+```groovy title="hello-operators.nf" linenums="66"
 /*
  * Combine GVCFs into GenomicsDB datastore
  */
@@ -438,7 +438,7 @@ Let's wire it up and see what happens.
 We need to provide an arbitrary name for the cohort.
 Later in the training series you'll learn how to use sample metadata for this sort of thing, but for now we just declare a CLI parameter using `params` and give it a default value for convenience.
 
-```groovy title="hello-operator.nf" linenums="16"
+```groovy title="hello-operators.nf" linenums="16"
 // Base name for final output file
 params.cohort_name = "family_trio"
 ```
@@ -450,7 +450,7 @@ However, we want to bundle all three GVCFs (and their index files) in such a way
 
 Good news: we can do that using the `collect()` operator. Let's add the following lines to the `workflow` body, right after the call to GATK_HAPLOTYPECALLER:
 
-```groovy title="hello-operator.nf" linenums="118"
+```groovy title="hello-operators.nf" linenums="118"
 // Collect variant calling outputs across samples
 all_gvcfs_ch = GATK_HAPLOTYPECALLER.out[0].collect()
 all_idxs_ch = GATK_HAPLOTYPECALLER.out[1].collect()
@@ -476,7 +476,7 @@ The resulting `all_gvcfs_ch` and `all_idxs_ch` channels are what we're going to 
 
 We've got a process, and we've got input channels. We just need to add the process call.
 
-```groovy title="hello-operator.nf" linenums="122"
+```groovy title="hello-operators.nf" linenums="122"
 // Combine GVCFs into a GenomicsDB datastore
 GATK_GENOMICSDB(
     all_gvcfs,
@@ -492,7 +492,7 @@ Ok, everything is wired up.
 Let's see if this works.
 
 ```bash
-nextflow run hello-operator.nf -resume
+nextflow run hello-operators.nf -resume
 ```
 
 It run fairly quickly, since we're running with `-resume`, but...
@@ -500,7 +500,7 @@ It run fairly quickly, since we're running with `-resume`, but...
 ```console title="Output"
  N E X T F L O W   ~  version 24.02.0-edge
 
- ┃ Launching `hello-operator.nf` [mad_edison] DSL2 - revision: 6aea0cfded
+ ┃ Launching `hello-operators.nf` [mad_edison] DSL2 - revision: 6aea0cfded
 
 executor >  local (1)
 [a2/56a3a8] SAMTOOLS_INDEX (1)       | 3 of 3, cached: 3 ✔
@@ -577,7 +577,7 @@ Great, let's add the `script:` keyword and string manipulation line there then, 
 
 _Before:_
 
-```groovy title="hello-operator.nf" linenums="87"
+```groovy title="hello-operators.nf" linenums="87"
     """
     gatk GenomicsDBImport \
         -V ${all_gvcfs} \
@@ -588,7 +588,7 @@ _Before:_
 
 _After:_
 
-```groovy title="hello-operator.nf" linenums="87"
+```groovy title="hello-operators.nf" linenums="87"
     script:
     def gvcfs_line = gvcfs.collect { "-V ${it}" }.join(' ')
     """
@@ -610,7 +610,7 @@ That should be all that's needed to provide the inputs to `gatk GenomicsDBImport
 Alright, let's see if that addressed the issue.
 
 ```bash
-nextflow run hello-operator.nf -resume
+nextflow run hello-operators.nf -resume
 ```
 
 Aha! It seems to be working now.
@@ -618,7 +618,7 @@ Aha! It seems to be working now.
 ```console title="Output"
  N E X T F L O W   ~  version 24.02.0-edge
 
- ┃ Launching `hello-operator.nf` [special_noyce] DSL2 - revision: 11f7a51bbe
+ ┃ Launching `hello-operators.nf` [special_noyce] DSL2 - revision: 11f7a51bbe
 
 executor >  local (1)
 [6a/5dcf6a] SAMTOOLS_INDEX (3)       | 3 of 3, cached: 3 ✔
@@ -665,7 +665,7 @@ Since the process will be running more than one tool, we change its name to refe
 
 _Before:_
 
-```groovy title="hello-operator.nf"
+```groovy title="hello-operators.nf"
 /*
  * Combine GVCFs into GenomicsDB datastore
  */
@@ -674,7 +674,7 @@ process GATK_GENOMICSDB {
 
 _After:_
 
-```groovy title="hello-operator.nf"
+```groovy title="hello-operators.nf"
 /*
  * Combine GVCFs into GenomicsDB datastore and run joint genotyping to produce cohort-level calls
  */
@@ -689,7 +689,7 @@ Simply add the second command after the first one inside the script section.
 
 _Before:_
 
-```groovy title="hello-operator.nf" linenums="89"
+```groovy title="hello-operators.nf" linenums="89"
     """
     gatk GenomicsDBImport \
         ${gvcfs_line} \
@@ -700,7 +700,7 @@ _Before:_
 
 _After:_
 
-```groovy title="hello-operator.nf" linenums="89"
+```groovy title="hello-operators.nf" linenums="89"
     """
     gatk GenomicsDBImport \
         ${gvcfs_line} \
@@ -723,7 +723,7 @@ The second command requires the reference genome files, so we need to add those 
 
 _Before:_
 
-```groovy title="hello-operator.nf" linenums="78"
+```groovy title="hello-operators.nf" linenums="78"
 input:
     path all_gvcfs_ch
     path all_idxs_ch
@@ -733,7 +733,7 @@ input:
 
 _After:_
 
-```groovy title="hello-operator.nf" linenums="78"
+```groovy title="hello-operators.nf" linenums="78"
 input:
     path all_gvcfs_ch
     path all_idxs_ch
@@ -754,14 +754,14 @@ The output we're actually interested in is the VCF produced by the joint genotyp
 
 _Before:_
 
-```groovy title="hello-operator.nf" linenums="87"
+```groovy title="hello-operators.nf" linenums="87"
 output:
     path "${cohort_name}_gdb"
 ```
 
 _After:_
 
-```groovy title="hello-operator.nf" linenums="87"
+```groovy title="hello-operators.nf" linenums="87"
 output:
     path "${cohort_name}.joint.vcf"
     path "${cohort_name}.joint.vcf.idx"
@@ -775,7 +775,7 @@ Let's not forget to rename the process call in the workflow body from GATK_GENOM
 
 _Before:_
 
-```groovy title="hello-operator.nf" linenums="134"
+```groovy title="hello-operators.nf" linenums="134"
 // Combine GVCFs into a GenomicsDB data store
 GATK_GENOMICSDB(
     all_gvcfs,
@@ -788,7 +788,7 @@ GATK_GENOMICSDB(
 
 _After:_
 
-```groovy title="hello-operator.nf" linenums="134"
+```groovy title="hello-operators.nf" linenums="134"
 // Combine GVCFs into a GenomicsDB data store and apply joint genotyping
 GATK_JOINTGENOTYPING(
     all_gvcfs,
@@ -808,7 +808,7 @@ Now everything should be completely wired up.
 Finally, we can run the modified workflow...
 
 ```bash
-nextflow run hello-operator.nf -resume
+nextflow run hello-operators.nf -resume
 ```
 
 And it works!
@@ -816,7 +816,7 @@ And it works!
 ```console title="Output"
  N E X T F L O W   ~  version 24.02.0-edge
 
- ┃ Launching `hello-operator.nf` [modest_gilbert] DSL2 - revision: 4f49922223
+ ┃ Launching `hello-operators.nf` [modest_gilbert] DSL2 - revision: 4f49922223
 
 executor >  local (1)
 [6a/5dcf6a] SAMTOOLS_INDEX (3)       | 3 of 3, cached: 3 ✔
