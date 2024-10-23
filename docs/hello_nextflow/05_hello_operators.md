@@ -217,7 +217,8 @@ It's another reasonably small file so you can `cat` this file to view its conten
 20_10037292_10066351    3529    .       T       A       154.29  .       AC=1;AF=0.167;AN=6;BaseQRankSum=-5.440e-01;DP=104;ExcessHet=0.0000;FS=1.871;MLEAC=1;MLEAF=0.167;MQ=60.00;MQRankSum=0.00;QD=7.71;ReadPosRankSum=-1.158e+00;SOR=1.034       GT:AD:DP:GQ:PL  0/0:44,0:44:99:0,112,1347       0/1:12,8:20:99:163,0,328        0/0:39,0:39:99:0,105,1194
 ```
 
-This looks more like the original VCF we generated in Part 3, except this time we have genotype-level information for all three samples. The last three columns in the file are the genotype blocks for the samples, listed in alphabetical order.
+This looks more like the original VCF we generated in Part 3, except this time we have genotype-level information for all three samples.
+The last three columns in the file are the genotype blocks for the samples, listed in alphabetical order.
 
 If we look at the genotypes called for our test family trio for the very first variant, we see that the father is heterozygous-variant (`0/1`), and the mother and son are both homozygous-variant (`1/1`).
 
@@ -544,23 +545,32 @@ So that means we need to somehow transform our bundle of GVCF files into a prope
 
 This is where Nextflow being based on Groovy comes in handy, because it's going to allow us to use some fairly straightforward string manipulations to construct the necessary command string.
 
-Specifically, using this syntax: `all_gvcfs.collect { "-V ${it}" }.join(' ')`
+Specifically, using this syntax: `all_gvcfs.collect { gvcf -> "-V ${gvcf}" }.join(' ')`
 
 Once again, let's break it down into its components.
 
 1. First, we take the contents of the `all_gvcfs` input channel and apply `.collect()` on it (just like earlier).
-2. That allows us to pass each individual GVCF file path in the bundle to the **closure**, `{ "-V ${it}" }`, where `${it}` refers to that GVCF, and compose a new string that appends `-V ` to the file path.
+2. That allows us to pass each individual GVCF file path in the bundle to the **closure**, `{ gvcf -> "-V ${gvcf}" }`, where `gvcf` refers to that GVCF file path.
+   The closure is a mini-function that we use to prepend `-V ` to the file path, in the form of `"-V ${gvcf}"`.
 3. Then we use `.join(' ')` to concatenate all three strings with a single space as separator.
 
 With a concrete example, it looks like this:
 
-1. We have three files: `[A.ext, B.ext, C.ext]`
-2. The closure modifies each one to create the strings: `"-V A.ext", "-V B.ext", "-V C.ext"`
-3. The `.join(' ')` operation generates the final string: `"-V A.ext -V B.ext -V C.ext"`
+1. We have three files:
 
-Once we have that string, we can assign it to a local variable defined with the `def` keyword:
+    `[A.ext, B.ext, C.ext]`
 
-`def gvcfs_line = gvcfs.collect { "-V ${it}" }.join(' ')`
+2. The closure modifies each one to create the strings:
+
+    `"-V A.ext", "-V B.ext", "-V C.ext"`
+
+3. The `.join(' ')` operation generates the final string:
+
+    `"-V A.ext -V B.ext -V C.ext"`
+
+Once we have that string, we can assign it to a local variable, `gvcfs_line`, defined with the `def` keyword:
+
+`def gvcfs_line = gvcfs.collect { gvcf -> "-V ${gvcf}" }.join(' ')`
 
 Ok, so we have our string manipulation thingy. Where do we put it?
 

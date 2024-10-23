@@ -85,7 +85,7 @@ process GATK_GENOMICSDB {
         path "${cohort_name}_gdb"
 
     script:
-        def gvcfs_line = all_gvcfs.collect { "-V ${it}" }.join(' ')
+        def gvcfs_line = all_gvcfs.collect { gvcf -> "-V ${gvcf}" }.join(' ')
     """
     gatk GenomicsDBImport \
         ${gvcfs_line} \
