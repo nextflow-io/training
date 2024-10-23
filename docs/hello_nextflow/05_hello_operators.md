@@ -258,6 +258,7 @@ It should look very familiar, but feel free to run it if you want to satisfy you
 We're going to start by making two changes:
 
 -   Add the `-ERC GVCF` parameter to the GATK HaplotypeCaller command;
+-   Make sure you add a backslash (`\`) at the end of the line before;
 -   Update the output file path to use the corresponding `.g.vcf` extension, as per GATK convention.
 
 _Before:_
@@ -410,7 +411,7 @@ process GATK_GENOMICSDB {
 
     container "community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"
 
-    publishDir 'results', mode: 'copy'
+    publishDir 'results_genomics', mode: 'copy'
 
     input:
         path all_gvcfs
@@ -444,12 +445,16 @@ Later in the training series you'll learn how to use sample metadata for this so
 params.cohort_name = "family_trio"
 ```
 
+!!! Tip
+
+    A good practice is to group the parameter definitions closer to the top of a Nextflow script file.
+
 ### 2.3. Gather the outputs of GATK_HAPLOTYPECALLER across samples
 
 If we were to just plug the output channel from the `GATK_HAPLOTYPECALLER` process as is, Nextflow would call the process on each sample GVCF separately.
 However, we want to bundle all three GVCFs (and their index files) in such a way that Nextflow hands all of them together to a single process call.
 
-Good news: we can do that using the `collect()` operator. Let's add the following lines to the `workflow` body, right after the call to GATK_HAPLOTYPECALLER:
+Good news: we can do that using the `collect()` channel operator. Let's add the following lines to the `workflow` body, right after the call to GATK_HAPLOTYPECALLER:
 
 ```groovy title="hello-operators.nf" linenums="118"
 // Collect variant calling outputs across samples
@@ -459,13 +464,13 @@ all_idxs_ch = GATK_HAPLOTYPECALLER.out[1].collect()
 
 Does that seem a bit complicated? Let's break this down and translate it into plain language.
 
-1. We're taking the output channel from the `GATK_HAPLOTYPECALLER`, referred to using the `.out` operator.
-2. Each 'item' coming out of the channel is a pair of files: the GVCF and its index file, in that order because that's the order they're listed in the process output block. Conveniently, we can pick out the GVCFs on one hand by adding `[0]` and the index files on the other by adding `[1]` to the `.out` call.
-3. We append the `collect()` operator to bundle all the GVCF files together into a single element in a new channel called `all_gvcfs_ch`, and do the same with the index files to form the new channel called `all_idxs_ch`.
+1. We're taking the output channel from the `GATK_HAPLOTYPECALLER` process, referred to using the `.out` property.
+2. Each 'element' coming out of the channel is a pair of files: the GVCF and its index file, in that order because that's the order they're listed in the process output block. Conveniently, we can pick out the GVCFs on one hand by adding `[0]` and the index files on the other by adding `[1]` after the `.out` property.
+3. We append the `collect()` channel operator to bundle all the GVCF files together into a single element in a new channel called `all_gvcfs_ch`, and do the same with the index files to form the new channel called `all_idxs_ch`.
 
 !!!tip
 
-    If you're having a hard time envisioning exactly what is happening here, remember that you can use the `view()` operator to inspect the contents of channels before and after applying operators.
+    If you're having a hard time envisioning exactly what is happening here, remember that you can use the `view()` operator to inspect the contents of channels before and after applying channel operators.
 
 The resulting `all_gvcfs_ch` and `all_idxs_ch` channels are what we're going to plug into the `GATK_GENOMICSDB` process we just wrote.
 
@@ -480,8 +485,9 @@ We've got a process, and we've got input channels. We just need to add the proce
 ```groovy title="hello-operators.nf" linenums="122"
 // Combine GVCFs into a GenomicsDB datastore
 GATK_GENOMICSDB(
-    all_gvcfs,
-    all_idxs,
+    all_gvcfs_ch,
+    all_idxs_ch,
+    intervals_file,
     params.cohort_name
 )
 ```
@@ -570,7 +576,7 @@ With a concrete example, it looks like this:
 
 Once we have that string, we can assign it to a local variable, `gvcfs_line`, defined with the `def` keyword:
 
-`def gvcfs_line = gvcfs.collect { gvcf -> "-V ${gvcf}" }.join(' ')`
+`def gvcfs_line = all_gvcfs.collect { gvcf -> "-V ${gvcf}" }.join(' ')`
 
 Ok, so we have our string manipulation thingy. Where do we put it?
 
@@ -598,7 +604,7 @@ _After:_
 
 ```groovy title="hello-operators.nf" linenums="87"
     script:
-    def gvcfs_line = gvcfs.collect { "-V ${it}" }.join(' ')
+    def gvcfs_line = all_gvcfs.collect { "-V ${it}" }.join(' ')
     """
     gatk GenomicsDBImport \
         ${gvcfs_line} \
@@ -689,7 +695,7 @@ _After:_
 process GATK_JOINTGENOTYPING {
 ```
 
-Remember to keep your process names as descriptive as possible, to maximize readability for your colleagues —and your future self!
+Remember to keep your process names as descriptive as possible, to maximize readability for your colleagues — and your future self!
 
 ### 3.2. Add the joint genotyping command to the GATK_JOINTGENOTYPING process
 
@@ -786,8 +792,8 @@ _Before:_
 ```groovy title="hello-operators.nf" linenums="134"
 // Combine GVCFs into a GenomicsDB data store
 GATK_GENOMICSDB(
-    all_gvcfs,
-    all_idxs,
+    all_gvcfs_ch,
+    all_idxs_ch,
     intervals_file,
     path interval_list,
     params.cohort_name
@@ -799,8 +805,8 @@ _After:_
 ```groovy title="hello-operators.nf" linenums="134"
 // Combine GVCFs into a GenomicsDB data store and apply joint genotyping
 GATK_JOINTGENOTYPING(
-    all_gvcfs,
-    all_idxs,
+    all_gvcfs_ch,
+    all_idxs_ch,
     intervals_file,
     params.cohort_name,
     ref_file,
@@ -851,7 +857,7 @@ You now have an automated, fully reproducible variant calling workflow!
 
 ### Takeaway
 
-You know how to use some common operators as well as simple Groovy closures to control the flow of data in your workflow.
+You know how to use some common operators as well as Groovy closures to control the flow of data in your workflow.
 
 ### What's next?
 
