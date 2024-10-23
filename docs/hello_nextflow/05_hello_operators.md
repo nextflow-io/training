@@ -258,8 +258,9 @@ It should look very familiar, but feel free to run it if you want to satisfy you
 We're going to start by making two changes:
 
 -   Add the `-ERC GVCF` parameter to the GATK HaplotypeCaller command;
--   Make sure you add a backslash (`\`) at the end of the line before;
 -   Update the output file path to use the corresponding `.g.vcf` extension, as per GATK convention.
+
+Make sure you add a backslash (`\`) at the end of the line before.
 
 _Before:_
 
@@ -691,7 +692,7 @@ _After:_
 process GATK_JOINTGENOTYPING {
 ```
 
-Remember to keep your process names as descriptive as possible, to maximize readability for your colleagues — and your future self!
+Remember to keep your process names as descriptive as possible, to maximize readability for your colleagues —and your future self!
 
 ### 3.2. Add the joint genotyping command to the GATK_JOINTGENOTYPING process
 
