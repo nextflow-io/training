@@ -14,8 +14,8 @@ nav:
           - hello_nextflow/01_orientation.md
           - hello_nextflow/02_hello_world.md
           - hello_nextflow/03_hello_containers.md
-          - hello_nextflow/04_hello_science.md
-          - hello_nextflow/05_hello_channels.md
+          - hello_nextflow/04_hello_genomics.md
+          - hello_nextflow/05_hello_operator.md
           - hello_nextflow/06_hello_config.md
           - hello_nextflow/07_hello_modules.md
           - hello_nextflow/08_hello_nf-test.md
