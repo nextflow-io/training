@@ -201,7 +201,7 @@ You should recognize all the pieces from what you learned in Part 1 & Part 2 of 
 
     Even though the data files we're using here are very small, in genomics they can get very large, so we should get into the habit of using symbolic links rather than making actual copies of these files, unless there's a compelling reason to do so.
 
-This process is going to require us to pass in a filepath via the `input_bam` input, so let's set that up next.
+This process is going to require us to pass in a file path via the `input_bam` input, so let's set that up next.
 
 ### 1.2. Add an input parameter declaration
 
@@ -236,7 +236,7 @@ workflow {
 
 You'll notice we're using the same `.fromPath` channel constructor as we used at the end of Part 1 (Hello World) of this training series.
 Indeed, we're doing something very similar.
-The difference is that this time we're telling Nextflow to load the filepath itself into the channel as an input element, rather than reading in its contents.
+The difference is that this time we're telling Nextflow to load the file path itself into the channel as an input element, rather than reading in its contents.
 
 ### 1.4. Run the workflow to verify that the indexing step works
 
@@ -675,13 +675,13 @@ executor >  local (6)
 [88/1783aa] GATK_HAPLOTYPECALLER (2) | 3 of 3 ✔
 ```
 
-If you'd like, you can use `.view()` again to peek at what the contents of the `` output channel looks like:
+If you'd like, you can use `.view()` again to peek at what the contents of the `SAMTOOLS_INDEX` output channel looks like:
 
 ```groovy title="hello-genomics.nf" linenums="92"
 SAMTOOLS_INDEX.out.view()
 ```
 
-You'll see the channel contains the three expected tuples (filepaths truncated for readability).
+You'll see the channel contains the three expected tuples (file paths truncated for readability).
 
 ```console title="Output"
 [.../4c/e16099*/reads_son.bam, .../4c/e16099*/reads_son.bam.bai]
