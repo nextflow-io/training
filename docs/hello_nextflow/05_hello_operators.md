@@ -445,10 +445,6 @@ Later in the training series you'll learn how to use sample metadata for this so
 params.cohort_name = "family_trio"
 ```
 
-!!! Tip
-
-    A good practice is to group the parameter definitions closer to the top of a Nextflow script file.
-
 ### 2.3. Gather the outputs of GATK_HAPLOTYPECALLER across samples
 
 If we were to just plug the output channel from the `GATK_HAPLOTYPECALLER` process as is, Nextflow would call the process on each sample GVCF separately.
