@@ -657,6 +657,8 @@ Learn how to add a second command to the same process.
 
 Now that we have the combined genomic variant calls, we can run the joint genotyping tool, which will produce the final output that we actually care about: the VCF of cohort-level variant calls.
 
+For logistical reasons, we decide to include the joint genotyping inside the same process.
+
 ### 3.1. Rename the process from GATK_GENOMICSDB to GATK_JOINTGENOTYPING
 
 Since the process will be running more than one tool, we change its name to refer to the overall operation rather than a single tool name.
@@ -679,34 +681,41 @@ _After:_
 process GATK_JOINTGENOTYPING {
 ```
 
+Remember to keep your process names as descriptive as possible, to maximize readabilty for your colleagues —and your future self!
+
 ### 3.2. Add the joint genotyping command to the GATK_JOINTGENOTYPING process
 
 Simply add the second command after the first one inside the script section.
 
 _Before:_
 
-```groovy title="hello-operator.nf"
+```groovy title="hello-operator.nf" linenums="89"
     """
     gatk GenomicsDBImport \
-        -V ${gvcfs} \
+        ${gvcfs_line} \
+        -L ${interval_list} \
         --genomicsdb-workspace-path ${cohort_name}_gdb
     """
 ```
 
 _After:_
 
-```groovy title="hello-operator.nf"
+```groovy title="hello-operator.nf" linenums="89"
     """
     gatk GenomicsDBImport \
         ${gvcfs_line} \
+        -L ${interval_list} \
         --genomicsdb-workspace-path ${cohort_name}_gdb
 
     gatk GenotypeGVCFs \
         -R ${ref_fasta} \
         -V gendb://${cohort_name}_gdb \
+        -L ${interval_list} \
         -O ${cohort_name}.joint.vcf
     """
 ```
+
+The two commands will be run in serial, in the same way that they would if we were to run them manually in the terminal.
 
 ### 3.3. Add the reference genome files to the GATK_JOINTGENOTYPING process input definitions
 
@@ -714,66 +723,77 @@ The second command requires the reference genome files, so we need to add those 
 
 _Before:_
 
-```groovy title="hello-operator.nf"
+```groovy title="hello-operator.nf" linenums="78"
 input:
-    path gvcfs
-    path idxs
+    path all_gvcfs_ch
+    path all_idxs_ch
+    path interval_list
     val cohort_name
 ```
 
 _After:_
 
-```groovy title="hello-operator.nf"
+```groovy title="hello-operator.nf" linenums="78"
 input:
-    path gvcfs
-    path idxs
+    path all_gvcfs_ch
+    path all_idxs_ch
+    path interval_list
     val cohort_name
     path ref_fasta
     path ref_index
     path ref_dict
 ```
 
+It may seem annoying to type these out, but remember, you only type them once, and then you can run the workflow a million times. Worth it?
+
 ### 3.4. Update the process output definition to emit the VCF of cohort-level variant calls
 
-We don't really care to save the GenomicsDB datastore; the output we're actually interested in is the VCF produced by the joint genotyping command.
+We don't really care about saving the GenomicsDB datastore, which is just an intermediate format that only exists for logistical reasons, so we can just remove it from the output block if we want.
+
+The output we're actually interested in is the VCF produced by the joint genotyping command.
 
 _Before:_
 
-````groovy title="hello-operator.nf"
+```groovy title="hello-operator.nf" linenums="87"
 output:
     path "${cohort_name}_gdb"
+```
+
 _After:_
 
-```groovy title="hello-operator.nf"
+```groovy title="hello-operator.nf" linenums="87"
 output:
     path "${cohort_name}.joint.vcf"
     path "${cohort_name}.joint.vcf.idx"
-````
+```
+
+We're almost done!
 
 ### 3.5. Update the process call from GATK_GENOMICSDB to GATK_JOINTGENOTYPING
 
-Let's rename the process call from GATK_GENOMICSDB to GATK_JOINTGENOTYPING.
-
-And while we're at it, let's add the reference genome files as inputs, since we need to provide them to the joint genotyping tool.
+Let's not forget to rename the process call in the workflow body from GATK_GENOMICSDB to GATK_JOINTGENOTYPING. And while we're at it, we should also add the reference genome files as inputs, since we need to provide them to the joint genotyping tool.
 
 _Before:_
 
-```groovy title="hello-operator.nf"
-// Combine GVCFs into a GenomicsDB datastore
+```groovy title="hello-operator.nf" linenums="134"
+// Combine GVCFs into a GenomicsDB data store
 GATK_GENOMICSDB(
     all_gvcfs,
     all_idxs,
+    intervals_file,
+    path interval_list,
     params.cohort_name
 )
 ```
 
 _After:_
 
-```groovy title="hello-operator.nf"
-// Combine GVCFs into a GenomicsDB datastore and apply joint genotyping
+```groovy title="hello-operator.nf" linenums="134"
+// Combine GVCFs into a GenomicsDB data store and apply joint genotyping
 GATK_JOINTGENOTYPING(
     all_gvcfs,
     all_idxs,
+    intervals_file,
     params.cohort_name,
     ref_file,
     ref_index_file,
@@ -781,40 +801,54 @@ GATK_JOINTGENOTYPING(
 )
 ```
 
+Now everything should be completely wired up.
+
 ### 3.6. Run the workflow
 
-Finally, we can run the modified workflow!
+Finally, we can run the modified workflow...
 
 ```bash
 nextflow run hello-operator.nf -resume
 ```
 
-The output should look like this:
+And it works!
 
 ```console title="Output"
-N E X T F L O W  ~  version 24.02.0-edge
-Launching `hello-operator.nf` [nauseous_thompson] DSL2 - revision: b346a53aae
-executor >  local (7)
-[d1/43979a] process > SAMTOOLS_INDEX (2)       [100%] 3 of 3 ✔
-[20/247592] process > GATK_HAPLOTYPECALLER (3) [100%] 3 of 3 ✔
-[14/7145b6] process > GATK_JOINTGENOTYPING (1)      [100%] 1 of 1 ✔
+ N E X T F L O W   ~  version 24.02.0-edge
+
+ ┃ Launching `hello-operator.nf` [modest_gilbert] DSL2 - revision: 4f49922223
+
+executor >  local (1)
+[6a/5dcf6a] SAMTOOLS_INDEX (3)       | 3 of 3, cached: 3 ✔
+[fe/6c9ad4] GATK_HAPLOTYPECALLER (1) | 3 of 3, cached: 3 ✔
+[e2/a8d95f] GATK_JOINTGENOTYPING     | 1 of 1 ✔
 ```
 
-You can find the final output file, `family_trio.joint.vcf`, in the work directory for the last process.
-Click on it to open it and you'll see 40 lines of metadata header followed by just under 30 jointly genotyped variant records (meaning at least one of the family members has a variant genotype at each genomic position listed).
+You'll find the final output file, `family_trio.joint.vcf` (and its file index), in the results directory. If you're the skeptical type, you can click on it to open it and verify that the workflow has generated the same variant calls that you obtained by running the tools manually at the start of this section.
 
-!!! tip
+```console title="family_trio.joint.vcf" linenums="40"
+#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	reads_father	reads_mother	reads_son
+20_10037292_10066351	3480	.	C	CT	1625.89	.	AC=5;AF=0.833;AN=6;BaseQRankSum=0.220;DP=85;ExcessHet=0.0000;FS=2.476;MLEAC=5;MLEAF=0.833;MQ=60.00;MQRankSum=0.00;QD=21.68;ReadPosRankSum=-1.147e+00;SOR=0.487	GT:AD:DP:GQ:PL	0/1:15,16:31:99:367,0,375	1/1:0,18:18:54:517,54,0	1/1:0,26:26:78:756,78,0
+20_10037292_10066351	3520	.	AT	A	1678.89	.	AC=5;AF=0.833;AN=6;BaseQRankSum=1.03;DP=80;ExcessHet=0.0000;FS=2.290;MLEAC=5;MLEAF=0.833;MQ=60.00;MQRankSum=0.00;QD=22.39;ReadPosRankSum=0.701;SOR=0.730	GT:AD:DP:GQ:PL	0/1:18,13:31:99:296,0,424	1/1:0,18:18:54:623,54,0	1/1:0,26:26:78:774,78,0
+20_10037292_10066351	3529	.	T	A	154.29	.	AC=1;AF=0.167;AN=6;BaseQRankSum=-5.440e-01;DP=104;ExcessHet=0.0000;FS=1.871;MLEAC=1;MLEAF=0.167;MQ=60.00;MQRankSum=0.00;QD=7.71;ReadPosRankSum=-1.158e+00;SOR=1.034	GT:AD:DP:GQ:PL	0/0:44,0:44:99:0,112,1347	0/1:12,8:20:99:163,0,328	0/0:39,0:39:99:0,105,1194
+```
 
-    Keep in mind the data files covered only a tiny portion of chromosome 20; the real size of a variant callset would be counted in millions of variants. That's why we use only tiny subsets of data for training purposes!
+You now have an automated, fully reproducible variant calling workflow!
+
+!!!note
+
+    Keep in mind the data files we gave you cover only a tiny portion of chromosome 20.
+    The real size of a variant callset would be counted in millions of variants.
+    That's why we use only tiny subsets of data for training purposes!
 
 ### Takeaway
 
-You know how to modify how channel contents are grouped using the collect() operator, in order to generate a cohort-level VCF of variant calls.
+You know how to use some common operators as well as simple Groovy closures to control the flow of data in your workflow.
 
 ### What's next?
 
-Celebrate your success and take an extra long break! This was tough and you deserve it.
+Celebrate your success and take an extra super mega long break! This was tough and you deserve it.
 
-In the next training, you'll learn how to manage metadata and use a more sophisticated samplesheet for passing inputs.
+In the next training, you'll learn how to leverage commonly used workflow configuration options.
 
 **Good luck!**
