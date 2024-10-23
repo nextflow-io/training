@@ -246,21 +246,21 @@ So we need to start by switching on the GVCF variant calling mode and updating t
 
 !!! note
 
-    For convenience, we are going to work with a fresh copy of the GATK workflow as it stands at the end of Part 3, but under a different name: `hello-channels.nf`.
+    For convenience, we are going to work with a fresh copy of the GATK workflow as it stands at the end of Part 3, but under a different name: `hello-operator.nf`.
 
 ### 1.1. Tell HaplotypeCaller to emit a GVCF and update the output file path
 
-Let's open the `hello-channels.nf` file in the code editor.
+Let's open the `hello-operator.nf` file in the code editor.
 It should look very familiar, but feel free to run it if you want to satisfy yourself that it runs as expected.
 
-We are going to start by making two changes:
+We're going to start by making two changes:
 
 -   Add the `-ERC GVCF` parameter to the GATK HaplotypeCaller command;
 -   Update the output file path to use the corresponding `.g.vcf` extension, as per GATK convention.
 
 _Before:_
 
-```groovy title="hello-channels.nf"
+```groovy title="hello-operator.nf"
     """
     gatk HaplotypeCaller \
         -R ${ref_fasta} \
@@ -272,7 +272,7 @@ _Before:_
 
 _After:_
 
-```groovy title="hello-channels.nf"
+```groovy title="hello-operator.nf"
     """
     gatk HaplotypeCaller \
         -R ${ref_fasta} \
@@ -287,11 +287,11 @@ That is all it takes to switch HaplotypeCaller to generating GVCFs instead of VC
 
 ### 1.2. Run the pipeline to verify that you can generate GVCFs
 
-The Nextflow execution command is the same as before, save for the workflow file itself.
+The Nextflow execution command is the same as before, save for the workflow filename itself.
 Make sure to update that appropriately.
 
 ```bash
-nextflow run hello-channels.nf
+nextflow run hello-operator.nf
 ```
 
 Should produce something like:
@@ -323,7 +323,7 @@ We now need to collect all the GVCF files together and bundle them together as a
 
 ### 2.1. Write a process called GATK_GENOMICSDB
 
-```groovy title="hello-channels.nf"
+```groovy title="hello-operator.nf"
 /*
  * Combine GVCFs into GenomicsDB datastore
  */
@@ -354,7 +354,7 @@ process GATK_GENOMICSDB {
 We need to provide an arbitrary name for the cohort.
 Later in the series you'll learn how to use the available metadata for this, but for now we just declare a CLI parameter using `params` and give it a default value for convenience.
 
-```groovy title="hello-channels.nf"
+```groovy title="hello-operator.nf"
 // Base name for final output file
 params.cohort_name = "family_trio"
 ```
@@ -366,7 +366,7 @@ Since we'll give all of those files together to the joint genotyping process, we
 
 Add this to the `workflow` body, right after the call to GATK_HAPLOTYPECALLER:
 
-```groovy title="hello-channels.nf"
+```groovy title="hello-operator.nf"
 // Collect variant calling outputs across samples
 all_gvcfs = GATK_HAPLOTYPECALLER.out[0].collect()
 all_idxs = GATK_HAPLOTYPECALLER.out[1].collect()
@@ -378,7 +378,7 @@ all_idxs = GATK_HAPLOTYPECALLER.out[1].collect()
 
 ### 2.4. Add a call to the workflow block to run GATK_GENOMICSDB
 
-```groovy title="hello-channels.nf"
+```groovy title="hello-operator.nf"
 // Combine GVCFs into a GenomicsDB datastore
 GATK_GENOMICSDB(
     all_gvcfs,
@@ -390,7 +390,7 @@ GATK_GENOMICSDB(
 ### 2.5. Run the workflow
 
 ```bash
-nextflow run hello-channels.nf -resume
+nextflow run hello-operator.nf -resume
 ```
 
 Oh no! The pipeline produces an error. When we dig into the console output, we can see the command executed isn't correct:
@@ -419,7 +419,7 @@ We add the reserved keyword `script:` to declare the start of the script section
 
 _Before:_
 
-```groovy title="hello-channels.nf"
+```groovy title="hello-operator.nf"
     """
     gatk GenomicsDBImport \
         -V ${gvcfs} \
@@ -429,7 +429,7 @@ _Before:_
 
 _After:_
 
-```groovy title="hello-channels.nf"
+```groovy title="hello-operator.nf"
     script:
     def gvcfs_line = gvcfs.collect { "-V ${it}" }.join(' ')
     """
@@ -444,7 +444,7 @@ In this new code, `gvcfs.collect { "-V ${it}" }.join(' ')` takes each GVCF path 
 ### 2.7. Run the workflow to verify that it generates the GenomicsDB output as expected
 
 ```bash
-nextflow run hello-channels.nf -resume
+nextflow run hello-operator.nf -resume
 ```
 
 Now we see the additional process show up in the log output (showing the compact view):
@@ -474,7 +474,7 @@ Since the process will be running more than one tool, we change its name to refe
 
 _Before:_
 
-```groovy title="hello-channels.nf"
+```groovy title="hello-operator.nf"
 /*
  * Combine GVCFs into GenomicsDB datastore
  */
@@ -483,7 +483,7 @@ process GATK_GENOMICSDB {
 
 _After:_
 
-```groovy title="hello-channels.nf"
+```groovy title="hello-operator.nf"
 /*
  * Combine GVCFs into GenomicsDB datastore and run joint genotyping to produce cohort-level calls
  */
@@ -496,7 +496,7 @@ Simply add the second command after the first one inside the script section.
 
 _Before:_
 
-```groovy title="hello-channels.nf"
+```groovy title="hello-operator.nf"
     """
     gatk GenomicsDBImport \
         -V ${gvcfs} \
@@ -506,7 +506,7 @@ _Before:_
 
 _After:_
 
-```groovy title="hello-channels.nf"
+```groovy title="hello-operator.nf"
     """
     gatk GenomicsDBImport \
         ${gvcfs_line} \
@@ -525,7 +525,7 @@ The second command requires the reference genome files, so we need to add those 
 
 _Before:_
 
-```groovy title="hello-channels.nf"
+```groovy title="hello-operator.nf"
 input:
     path gvcfs
     path idxs
@@ -534,7 +534,7 @@ input:
 
 _After:_
 
-```groovy title="hello-channels.nf"
+```groovy title="hello-operator.nf"
 input:
     path gvcfs
     path idxs
@@ -550,12 +550,12 @@ We don't really care to save the GenomicsDB datastore; the output we're actually
 
 _Before:_
 
-````groovy title="hello-channels.nf"
+````groovy title="hello-operator.nf"
 output:
     path "${cohort_name}_gdb"
 _After:_
 
-```groovy title="hello-channels.nf"
+```groovy title="hello-operator.nf"
 output:
     path "${cohort_name}.joint.vcf"
     path "${cohort_name}.joint.vcf.idx"
@@ -569,7 +569,7 @@ And while we're at it, let's add the reference genome files as inputs, since we 
 
 _Before:_
 
-```groovy title="hello-channels.nf"
+```groovy title="hello-operator.nf"
 // Combine GVCFs into a GenomicsDB datastore
 GATK_GENOMICSDB(
     all_gvcfs,
@@ -580,7 +580,7 @@ GATK_GENOMICSDB(
 
 _After:_
 
-```groovy title="hello-channels.nf"
+```groovy title="hello-operator.nf"
 // Combine GVCFs into a GenomicsDB datastore and apply joint genotyping
 GATK_JOINTGENOTYPING(
     all_gvcfs,
@@ -597,14 +597,14 @@ GATK_JOINTGENOTYPING(
 Finally, we can run the modified workflow!
 
 ```bash
-nextflow run hello-channels.nf -resume
+nextflow run hello-operator.nf -resume
 ```
 
 The output should look like this:
 
 ```console title="Output"
 N E X T F L O W  ~  version 24.02.0-edge
-Launching `hello-channels.nf` [nauseous_thompson] DSL2 - revision: b346a53aae
+Launching `hello-operator.nf` [nauseous_thompson] DSL2 - revision: b346a53aae
 executor >  local (7)
 [d1/43979a] process > SAMTOOLS_INDEX (2)       [100%] 3 of 3 ✔
 [20/247592] process > GATK_HAPLOTYPECALLER (3) [100%] 3 of 3 ✔
