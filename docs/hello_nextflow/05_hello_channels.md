@@ -57,41 +57,41 @@ Just like previously, we want to try out the commands manually before we attempt
 
 ### 0.1. Index a BAM input file with Samtools
 
-This first step is the same as in Part 3: Hello-Science, so you can skip it if you've already done that in this session.
+This first step is the same as in Part 3: Hello-Science, so it should feel very familiar, but this time we need to do it for all three samples.
 
-#### 0.1.1. Pull the samtools container
+!!! note
 
-```bash
-docker pull community.wave.seqera.io/library/samtools:1.20--b5dfbd93de237464
-```
+    We've technically already generated index files for the three samples through our pipeline, so we could go fish those out of the results directory. However, it's cleaner to just redo this manually, and it'll only take a minute.
 
-#### 0.1.2. Spin up the container interactively
+#### 0.1.1. Spin up the Samtools container interactively
 
 ```bash
 docker run -it -v ./data:/data community.wave.seqera.io/library/samtools:1.20--b5dfbd93de237464
 ```
 
-#### 0.1.3. Run the indexing command
+#### 0.1.2. Run the indexing command for the three samples
 
 ```bash
 samtools index /data/bam/reads_mother.bam
+samtools index /data/bam/reads_father.bam
+samtools index /data/bam/reads_son.bam
 ```
 
-#### 0.1.4. Check that the BAM index has been produced
-
-```bash
-ls /data/bam/
-```
-
-This should show:
+Just like previously, this should produce the index files in the same directory as the corresponding BAM files.
 
 ```console title="Output"
-reads_father.bam      reads_mother.bam      reads_mother.bam.bai  reads_son.bam
+data/bam/
+├── reads_father.bam
+├── reads_father.bam.bai
+├── reads_mother.bam
+├── reads_mother.bam.bai
+├── reads_son.bam
+└── reads_son.bam.bai
 ```
 
-Where `reads_mother.bam.bai` has been created as an index to `reads_mother.bam`.
+Now that we have index files for all three samples, we can proceed to generating the GVCFs for each of them.
 
-#### 0.1.5. Exit the container
+#### 0.1.3. Exit the Samtools container
 
 ```bash
 exit
@@ -99,23 +99,20 @@ exit
 
 ### 0.2. Call variants with GATK HaplotypeCaller in GVCF mode
 
-This second step is **different** from Part 3: Hello-Science, since we are now running GATK in 'GVCF mode', so you **should NOT skip it**.
+This second step is very similar to what we did Part 3: Hello-Science, but we are now going to run GATK in 'GVCF mode'.
 
-#### 0.2.1. Pull the GATK container
-
-```bash
-docker pull community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867
-```
-
-#### 0.2.2. Spin up the container interactively
+#### 0.2.1. Spin up the GATK container interactively
 
 ```bash
 docker run -it -v ./data:/data community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867
 ```
 
-#### 0.2.3. Run the variant calling command with the GVCF option
+#### 0.2.2. Run the variant calling command with the GVCF option
 
-Most of this command is the same as in Part 3, except this time we add the `-ERC GVCF` option, which switches on the HaplotypeCaller's GVCF mode to produce genomic VCFs.
+In order to produce a genomic VCF (GVCF), we add the `-ERC GVCF` option to the base command, which switches on the HaplotypeCaller's GVCF mode.
+
+We also change the file extension for the output file from `.vcf` to `.g.vcf`.
+This is technically not a requirement, but it is a strongly recommended convention.
 
 ```bash
 gatk HaplotypeCaller \
@@ -126,10 +123,33 @@ gatk HaplotypeCaller \
         -ERC GVCF
 ```
 
-_TODO: point out output_
-_POINT OUT WHAT'S DIFFERENT COMPARED TO THE VCF IN PART 2_
+This creates the GVCF output file `reads_mother.g.vcf` in the current working directory in the container.
 
-#### 0.2.4. Repeat the process on the other two samples
+If you `cat` it to view the contents, you'll see it's much longer than the equivalent VCF we generated in Part 3. You can't even scroll up to the start of the file, and most of the lines look quite different from what we saw in the VCF in Part 3.
+
+```console title="Output" linenums="1674"
+20_10037292_10066351    14714   .       T       <NON_REF>       .       .       END=14718       GT:DP:GQ:MIN_DP:PL       0/0:37:99:37:0,99,1192
+20_10037292_10066351    14719   .       T       <NON_REF>       .       .       END=14719       GT:DP:GQ:MIN_DP:PL       0/0:36:82:36:0,82,1087
+20_10037292_10066351    14720   .       T       <NON_REF>       .       .       END=14737       GT:DP:GQ:MIN_DP:PL       0/0:42:99:37:0,100,1160
+```
+
+These represent non-variant regions where the variant caller found no evidence of variation, so it captured some statistics describing its level of confidence in the absence of variation. This makes it possible to distinguish between two very different case figures: (1) there is good quality data showing that the sample is homozygous-reference, and (2) there is not enough good data available to make a determination either way.
+
+In a GVCF, there are typically lots of such non-variant lines, with a smaller number of variant records sprinkled among them. Try running `head -176` on the GVCF to load in just the first 176 lines of the file to find an actual variant call.
+
+```console title="Output" linenums="174"
+20_10037292_10066351    3479    .       T       <NON_REF>       .       .       END=3479        GT:DP:GQ:MIN_DP:PL       0/0:34:36:34:0,36,906
+20_10037292_10066351    3480    .       C       CT,<NON_REF>    503.03  .       DP=23;ExcessHet=0.0000;MLEAC=2,0;MLEAF=1.00,0.00;RAW_MQandDP=82800,23    GT:AD:DP:GQ:PL:SB       1/1:0,18,0:18:54:517,54,0,517,54,517:0,0,7,11
+20_10037292_10066351    3481    .       T       <NON_REF>       .       .       END=3481        GT:DP:GQ:MIN_DP:PL       0/0:21:51:21:0,51,765
+```
+
+The second line shows the first variant record in the file, which corresponds to the first variant in the VCF file we looked at it Part 3.
+
+Just like the original VCF was, the output GVCF file is also accompanied by an index file, called `reads_mother.g.vcf.idx`.
+
+#### 0.2.3. Repeat the process on the other two samples
+
+In order to test the joint genotyping step, we need GVCFs for all three samples, so let's generate those manually now.
 
 ```bash
 gatk HaplotypeCaller \
@@ -149,25 +169,36 @@ gatk HaplotypeCaller \
         -ERC GVCF
 ```
 
-Once this completes, you should have three files ending in `.g.vcf` in your work directory; one per sample.
+Once this completes, you should have three files ending in `.g.vcf` in your work directory (one per sample) and their respective index files ending in `.g.vcf.idx`.
 
 ### 0.3. Run joint genotyping
 
-This is a new command that looks at the data in all the GVCFs for each genomic position and recalculates variant statistics and individual genotypes in light of the data available across all samples in the cohort.
+Now that we have all the GVCFs, we can finally try out the joint genotyping approach to generating variant calls for a cohort of samples.
+As a reminder, it's a two-step method that consists of combining the data from all the GVCFs into a data store, then running the joint genotyping analysis proper to generate the final VCF of joint-called variants.
 
 #### 0.3.1. Combine all the per-sample GVCFs
 
+This first step uses another GATK tool, called GenomicsDBImport, to combine the data from all the GVCFs into a GenomicsDB data store.
+
 ```bash
 gatk GenomicsDBImport \
-    -V /data/bam/reads_mother.vcf \
-    -V /data/bam/reads_father.vcf \
-    -V /data/bam/reads_son.vcf \
+    -V reads_mother.g.vcf \
+    -V reads_father.g.vcf \
+    -V reads_son.g.vcf \
+    -L /data/ref/intervals.bed \
     --genomicsdb-workspace-path family_trio_gdb
 ```
 
-_TODO: point out output_
+The output of this step is effectively a directory containing a set of further nested directories holding the combined variant data in the form of multiple different files.
+You can poke around it but you'll quickly see this data store format is not intended to be read directly by humans.
+
+!!! note
+
+    GATK includes tools that make it possible to inspect and extract variant call data from the data store as needed.
 
 #### 0.3.2. Run the joint genotyping analysis proper
+
+This second step uses yet another GATK tool, called GenotypeGVCFs, to recalculate variant statistics and individual genotypes in light of the data available across all samples in the cohort.
 
 ```bash
 gatk GenotypeGVCFs \
@@ -176,17 +207,30 @@ gatk GenotypeGVCFs \
     -O family_trio.vcf
 ```
 
-_TODO: point out output_
+This creates the cohort-level VCF output file `family_trio.vcf` in the current working directory in the container.
+It's another reasonably small file so you can `cat` this file to view its contents, and scroll up to find the first few variant lines.
 
-#### 0.3.3. Exit the container
+````console title="Cohort-level VCF (variant calls)" linenums="40"
+#CHROM  POS     ID      REF     ALT     QUAL    FILTER  INFO    FORMAT  reads_father    reads_mother    reads_son
+20_10037292_10066351    3480    .       C       CT      1625.89 .       AC=5;AF=0.833;AN=6;BaseQRankSum=0.220;DP=85;ExcessHet=0.0000;FS=2.476;MLEAC=5;MLEAF=0.833;MQ=60.00;MQRankSum=0.00;QD=21.68;ReadPosRankSum=-1.147e+00;SOR=0.487    GT:AD:DP:GQ:PL  0/1:15,16:31:99:367,0,375       1/1:0,18:18:54:517,54,0 1/1:0,26:26:78:756,78,0
+20_10037292_10066351    3520    .       AT      A       1678.89 .       AC=5;AF=0.833;AN=6;BaseQRankSum=1.03;DP=80;ExcessHet=0.0000;FS=2.290;MLEAC=5;MLEAF=0.833;MQ=60.00;MQRankSum=0.00;QD=22.39;ReadPosRankSum=0.701;SOR=0.730 GT:AD:DP:GQ:PL   0/1:18,13:31:99:296,0,424       1/1:0,18:18:54:623,54,0 1/1:0,26:26:78:774,78,0
+20_10037292_10066351    3529    .       T       A       154.29  .       AC=1;AF=0.167;AN=6;BaseQRankSum=-5.440e-01;DP=104;ExcessHet=0.0000;FS=1.871;MLEAC=1;MLEAF=0.167;MQ=60.00;MQRankSum=0.00;QD=7.71;ReadPosRankSum=-1.158e+00;SOR=1.034       GT:AD:DP:GQ:PL  0/0:44,0:44:99:0,112,1347       0/1:12,8:20:99:163,0,328        0/0:39,0:39:99:0,105,1194
+
+This looks more like the original VCF we generated in Part 3, except this time we have genotype-level information for all three samples. The last three columns in the file are the genotype blocks for the samples, listed in alphabetical order.
+
+If we look at the genotypes called for our test family trio for the very first variant, we see that the father is heterozygous-variant (`0/1`), and the mother and son are both homozygous-variant (`1/1`).
+
+That is ultimately the information we're looking to extract from the dataset! So let's go wrap all this into a Nextflow workflow so we can do this at scale.
+
+#### 0.3.3. Exit the GATK container
 
 ```bash
 exit
-```
+````
 
 ### Takeaway
 
-You know how to run the individual commands in the terminal.
+You know how to run the individual commands in the terminal to verify that they will produce the information you want.
 
 ### What's next?
 
@@ -196,12 +240,23 @@ Wrap these commands into an actual pipeline.
 
 ## 1. Modify the per-sample variant calling step to produce a GVCF
 
-We'll start from `hello-channels.nf`, which is a copy of the workflow that results from Part 2 of this training series.
-However, that pipeline produces VCF files, whereas now we want GVCF files in order to do the joint genotyping, so we need to switch on the GVCF variant calling mode and update the output file extension.
+The good news is that we don't need to start all over, since we already wrote a workflow that does some of this work in Part 3.
+However, that pipeline produces VCF files, whereas now we want GVCF files in order to do the joint genotyping.
+So we need to start by switching on the GVCF variant calling mode and updating the output file extension.
+
+!!! note
+
+    For convenience, we are going to work with a fresh copy of the GATK workflow as it stands at the end of Part 3, but under a different name: `hello-channels.nf`.
 
 ### 1.1. Tell HaplotypeCaller to emit a GVCF and update the output file path
 
-Add the `-ERC GVCF` parameter to the GATK HaplotypeCaller command and update the output file path to use the corresponding `.g.vcf` extension, as per GATK convention.
+Let's open the `hello-channels.nf` file in the code editor.
+It should look very familiar, but feel free to run it if you want to satisfy yourself that it runs as expected.
+
+We are going to start by making two changes:
+
+-   Add the `-ERC GVCF` parameter to the GATK HaplotypeCaller command;
+-   Update the output file path to use the corresponding `.g.vcf` extension, as per GATK convention.
 
 _Before:_
 
@@ -228,7 +283,12 @@ _After:_
     """
 ```
 
+That is all it takes to switch HaplotypeCaller to generating GVCFs instead of VCFs.
+
 ### 1.2. Run the pipeline to verify that you can generate GVCFs
+
+The Nextflow execution command is the same as before, save for the workflow file itself.
+Make sure to update that appropriately.
 
 ```bash
 nextflow run hello-channels.nf

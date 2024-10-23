@@ -59,13 +59,15 @@ The tools we need (Samtools and GATK) are not installed in the Gitpod environmen
 
 ### 0.1. Index a BAM input file with Samtools
 
-#### 0.1.1. Pull the samtools container
+We're going to pull down a Samtools container, spin it up interactively and run the `samtools index` command on one of the BAM files.
+
+#### 0.1.1. Pull the Samtools container
 
 ```bash
 docker pull community.wave.seqera.io/library/samtools:1.20--b5dfbd93de237464
 ```
 
-#### 0.1.2. Spin up the container interactively
+#### 0.1.2. Spin up the Samtools container interactively
 
 ```bash
 docker run -it -v ./data:/data community.wave.seqera.io/library/samtools:1.20--b5dfbd93de237464
@@ -83,7 +85,15 @@ samtools index /data/bam/reads_mother.bam
 
 This should complete immediately, and you should now see a file called `reads_mother.bam.bai` in the same directory as the original BAM input file.
 
-#### 0.1.4. Exit the container
+```console title="Output"
+data/bam/
+├── reads_father.bam
+├── reads_mother.bam
+├── reads_mother.bam.bai
+└── reads_son.bam
+```
+
+#### 0.1.4. Exit the Samtools container
 
 ```bash
 exit
@@ -91,13 +101,15 @@ exit
 
 ### 0.2. Call variants with GATK HaplotypeCaller
 
+We're going to pull down a GATK container, spin it up interactively and run the `gatk HaplotypeCaller` command on the BAM file we just indexed.
+
 #### 0.2.1. Pull the GATK container
 
 ```bash
 docker pull community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867
 ```
 
-#### 0.2.2. Spin up the container interactively
+#### 0.2.2. Spin up the GATK container interactively
 
 ```bash
 docker run -it -v ./data:/data community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867
@@ -120,8 +132,9 @@ gatk HaplotypeCaller \
         -L /data/ref/intervals.bed
 ```
 
-The output file `reads_mother.vcf` is a small test file, so you can `cat` it or click on it to open it and view the contents.
-If you scroll through, you'll find a header composed of many lines of metadata, followed by a list of variant calls, one per line.
+The output file `reads_mother.vcf` is created inside your working directory in the container, so you won't see it in the Gitpod file explorer unless you change the output file path.
+However, it's a small test file, so you can `cat` it to open it and view the contents.
+If you scroll all the way up to the start of the file, you'll find a header composed of many lines of metadata, followed by a list of variant calls, one per line.
 
 ```console title="VCF (variant calls)" linenums="26"
 #CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	reads_mother
@@ -132,7 +145,10 @@ If you scroll through, you'll find a header composed of many lines of metadata, 
 
 Each line describes a possible variant identified in the sample's sequencing data. For guidance on interpreting VCF format, see [this helpful article](https://www.ebi.ac.uk/training/online/courses/human-genetic-variation-introduction/variant-identification-and-analysis/understanding-vcf-format/).
 
-#### 0.2.4. Exit the container
+The output VCF file is accompanied by an index file called `reads_mother.vcf.idx` that was automatically created by GATK.
+It has the same function as the BAM index file, to allow tools to seek and retrieve subsets of data without loading in the entire file.
+
+#### 0.2.4. Exit the GATK container
 
 ```bash
 exit
