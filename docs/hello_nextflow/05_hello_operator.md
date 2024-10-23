@@ -207,14 +207,15 @@ gatk GenotypeGVCFs \
     -O family_trio.vcf
 ```
 
-This creates the cohort-level VCF output file `family_trio.vcf` in the current working directory in the container.
+This creates the VCF output file `family_trio.vcf` in the current working directory in the container.
 It's another reasonably small file so you can `cat` this file to view its contents, and scroll up to find the first few variant lines.
 
-````console title="family_trio.vcf" linenums="40"
+```console title="family_trio.vcf" linenums="40"
 #CHROM  POS     ID      REF     ALT     QUAL    FILTER  INFO    FORMAT  reads_father    reads_mother    reads_son
 20_10037292_10066351    3480    .       C       CT      1625.89 .       AC=5;AF=0.833;AN=6;BaseQRankSum=0.220;DP=85;ExcessHet=0.0000;FS=2.476;MLEAC=5;MLEAF=0.833;MQ=60.00;MQRankSum=0.00;QD=21.68;ReadPosRankSum=-1.147e+00;SOR=0.487    GT:AD:DP:GQ:PL  0/1:15,16:31:99:367,0,375       1/1:0,18:18:54:517,54,0 1/1:0,26:26:78:756,78,0
 20_10037292_10066351    3520    .       AT      A       1678.89 .       AC=5;AF=0.833;AN=6;BaseQRankSum=1.03;DP=80;ExcessHet=0.0000;FS=2.290;MLEAC=5;MLEAF=0.833;MQ=60.00;MQRankSum=0.00;QD=22.39;ReadPosRankSum=0.701;SOR=0.730 GT:AD:DP:GQ:PL   0/1:18,13:31:99:296,0,424       1/1:0,18:18:54:623,54,0 1/1:0,26:26:78:774,78,0
 20_10037292_10066351    3529    .       T       A       154.29  .       AC=1;AF=0.167;AN=6;BaseQRankSum=-5.440e-01;DP=104;ExcessHet=0.0000;FS=1.871;MLEAC=1;MLEAF=0.167;MQ=60.00;MQRankSum=0.00;QD=7.71;ReadPosRankSum=-1.158e+00;SOR=1.034       GT:AD:DP:GQ:PL  0/0:44,0:44:99:0,112,1347       0/1:12,8:20:99:163,0,328        0/0:39,0:39:99:0,105,1194
+```
 
 This looks more like the original VCF we generated in Part 3, except this time we have genotype-level information for all three samples. The last three columns in the file are the genotype blocks for the samples, listed in alphabetical order.
 
@@ -226,7 +227,7 @@ That is ultimately the information we're looking to extract from the dataset! So
 
 ```bash
 exit
-````
+```
 
 ### Takeaway
 
@@ -248,7 +249,7 @@ So we need to start by switching on the GVCF variant calling mode and updating t
 
     For convenience, we are going to work with a fresh copy of the GATK workflow as it stands at the end of Part 3, but under a different name: `hello-operator.nf`.
 
-### 1.1. Tell HaplotypeCaller to emit a GVCF and update the output file path
+### 1.1. Tell HaplotypeCaller to emit a GVCF and update the output extension
 
 Let's open the `hello-operator.nf` file in the code editor.
 It should look very familiar, but feel free to run it if you want to satisfy yourself that it runs as expected.
@@ -260,7 +261,7 @@ We're going to start by making two changes:
 
 _Before:_
 
-```groovy title="hello-operator.nf"
+```groovy title="hello-operator.nf" linenums="56"
     """
     gatk HaplotypeCaller \
         -R ${ref_fasta} \
@@ -272,7 +273,7 @@ _Before:_
 
 _After:_
 
-```groovy title="hello-operator.nf"
+```groovy title="hello-operator.nf" linenums="56"
     """
     gatk HaplotypeCaller \
         -R ${ref_fasta} \
@@ -283,7 +284,7 @@ _After:_
     """
 ```
 
-That is all it takes to switch HaplotypeCaller to generating GVCFs instead of VCFs.
+And that's all it takes to switch HaplotypeCaller to generating GVCFs instead of VCFs, right?
 
 ### 1.2. Run the pipeline to verify that you can generate GVCFs
 
@@ -294,36 +295,113 @@ Make sure to update that appropriately.
 nextflow run hello-operator.nf
 ```
 
-Should produce something like:
-
-_TODO: COPY OUTPUT_
+And the output is... all red! Oh no.
 
 ```console title="Output"
+ N E X T F L O W   ~  version 24.02.0-edge
 
+ ┃ Launching `hello-operator.nf` [nice_gates] DSL2 - revision: 43c7de9890
+
+executor >  local (6)
+[a1/0b5d00] SAMTOOLS_INDEX (3)       | 3 of 3 ✔
+[89/4d0c70] GATK_HAPLOTYPECALLER (3) | 0 of 3
+ERROR ~ Error executing process > 'GATK_HAPLOTYPECALLER (2)'
+
+Caused by:
+  Missing output file(s) `reads_mother.bam.vcf` expected by process `GATK_HAPLOTYPECALLER (2)`
+
+Command executed:
+
+  gatk HaplotypeCaller         -R ref.fasta         -I reads_mother.bam         -O reads_mother.bam.g.vcf         -L intervals.bed         -ERC GVCF
 ```
 
-If you open the file and scroll through it, you can see that GATK HaplotypeCaller produced a GVCF file, which contains additional information compared to the VCF file.
+The command that was executed is correct, so we were right that that was enough to change the GATK tool's behavior.
+But look at that line about the missing output file. Notice anything?
+
+That's right, we forgot to tell Nextflow to expect a new file name. Oops.
+
+### 1.2. Update the output file extension in the process outputs block too
+
+Because it's not enough to just change the file extension in the tool command itself, you also have to tell Nextflow that the expected output filename has changed.
+
+_Before:_
+
+```groovy title="hello-operator.nf" linenums="52"
+    output:
+        path "${input_bam}.vcf"
+        path "${input_bam}.vcf.idx"
+```
+
+_After:_
+
+```groovy title="hello-operator.nf" linenums="52"
+    output:
+        path "${input_bam}.g.vcf"
+        path "${input_bam}.g.vcf.idx"
+```
+
+### 1.3. Run the pipeline again
+
+Let's run it with `-resume` this time.
+
+```bash
+nextflow run hello-operator.nf -resume
+```
+
+Ah, this time it works.
+
+```console title="Output"
+ N E X T F L O W   ~  version 24.02.0-edge
+
+ ┃ Launching `hello-operator.nf` [elated_carlsson] DSL2 - revision: 6a5786a6fa
+
+executor >  local (3)
+[47/f7fac1] SAMTOOLS_INDEX (2)       | 3 of 3, cached: 3 ✔
+[ce/096ac6] GATK_HAPLOTYPECALLER (1) | 3 of 3 ✔
+```
+
+The Nextflow output itself doesn't look any different (compared to a successful run in normal VCF mode), but now we can find the `.g.vcf` files and their respective index files, for all three samples, in the `results_genomics` directory.
+
+```console title="Directory contents (symlinks truncated)"
+results_genomics/
+├── reads_father.bam -> */47/f7fac1*/reads_father.bam
+├── reads_father.bam.bai -> */47/f7fac1*/reads_father.bam.bai
+├── reads_father.bam.g.vcf -> */cb/ad7430*/reads_father.bam.g.vcf
+├── reads_father.bam.g.vcf.idx -> */cb/ad7430*/reads_father.bam.g.vcf.idx
+├── reads_mother.bam -> */a2/56a3a8*/reads_mother.bam
+├── reads_mother.bam.bai -> */a2/56a3a8*/reads_mother.bam.bai
+├── reads_mother.bam.g.vcf -> */ce/096ac6*/reads_mother.bam.g.vcf
+├── reads_mother.bam.g.vcf.idx -> */ce/096ac6*/reads_mother.bam.g.vcf.idx
+├── reads_son.bam -> */a1/0b5d00*/reads_son.bam
+├── reads_son.bam.bai -> */a1/0b5d00*/reads_son.bam.bai
+├── reads_son.bam.g.vcf -> */c2/6b6563*/reads_son.bam.g.vcf
+└── reads_son.bam.g.vcf.idx -> */c2/6b6563*/reads_son.bam.g.vcf.idx
+```
+
+If you open one of the GVCF files and scroll through it, you can verify that GATK HaplotypeCaller produced GVCF files as requested.
 
 ### Takeaway
 
 Okay, this one was minimal in terms of Nextflow learning...
-But hey, now you know the difference between a regular VCF and a Genomic VCF!
+But it was a nice opportunity to reiterate the importance of the process output block!
 
 ### What's next?
 
-Learn to collect the contents of a channel and pass them in as a single input.
+Learn to collect the contents of a channel and pass them on to the next process as a single input.
 
 ---
 
 ## 2. Collect and combine the GVCF data across all samples
 
-We now need to collect all the GVCF files together and bundle them together as a single input to the next process, to feed into GATK GenomicsDBImport.
+We now need to combine the data from all the per-sample GVCFs into a form that supports the joint genotyping analysis we want to do.
 
-###
+### 2.1. Define the process that will combine the GVCFs
 
-### 2.1. Write a process called GATK_GENOMICSDB
+As a reminder of what we did earlier in the warmup section, combining the GVCFs is a job for the GATK tool GenomicsDBImport, which will produce a data store in the so-called GenomicsDB format.
 
-```groovy title="hello-operator.nf"
+Let's write a new process to define how that's going to work, based on the command we used earlier in the warmup section.
+
+```groovy title="hello-operator.nf" linenums="66"
 /*
  * Combine GVCFs into GenomicsDB datastore
  */
@@ -334,8 +412,9 @@ process GATK_GENOMICSDB {
     publishDir 'results', mode: 'copy'
 
     input:
-        path gvcfs
-        path idxs
+        path all_gvcfs
+        path all_idxs
+        path interval_list
         val cohort_name
 
     output:
@@ -343,42 +422,61 @@ process GATK_GENOMICSDB {
 
     """
     gatk GenomicsDBImport \
-        -V ${gvcfs} \
+        -V ${all_gvcfs} \
+        -L ${interval_list} \
         --genomicsdb-workspace-path ${cohort_name}_gdb
     """
 }
 ```
 
-### 2.2. Add default value for the cohort name parameter up top
+What do you think, looks reasonable?
+
+Let's wire it up and see what happens.
+
+### 2.2. Add a `cohort_name` parameter with a default value
 
 We need to provide an arbitrary name for the cohort.
-Later in the series you'll learn how to use the available metadata for this, but for now we just declare a CLI parameter using `params` and give it a default value for convenience.
+Later in the training series you'll learn how to use sample metadata for this sort of thing, but for now we just declare a CLI parameter using `params` and give it a default value for convenience.
 
-```groovy title="hello-operator.nf"
+```groovy title="hello-operator.nf" linenums="16"
 // Base name for final output file
 params.cohort_name = "family_trio"
 ```
 
-### 2.3. Gather the outputs of GATK_HAPLOTYPECALLER across samples using `collect()`
+### 2.3. Gather the outputs of GATK_HAPLOTYPECALLER across samples
 
-We collect the VCFs and their index files (`.idx`) separately in order to list only the VCFs in the command we're going to construct.
-Since we'll give all of those files together to the joint genotyping process, we don't have to worry about the order of files like we did in Part 2.
+If we were to just plug the output channel from the `GATK_HAPLOTYPECALLER` process as is, Nextflow would call the process on each sample GVCF separately.
+However, we want to bundle all three GVCFs (and their index files) in such a way that Nextflow hands all of them together to a single process call.
 
-Add this to the `workflow` body, right after the call to GATK_HAPLOTYPECALLER:
+Good news: we can do that using the `collect()` operator. Let's add the following lines to the `workflow` body, right after the call to GATK_HAPLOTYPECALLER:
 
-```groovy title="hello-operator.nf"
+```groovy title="hello-operator.nf" linenums="118"
 // Collect variant calling outputs across samples
-all_gvcfs = GATK_HAPLOTYPECALLER.out[0].collect()
-all_idxs = GATK_HAPLOTYPECALLER.out[1].collect()
+all_gvcfs_ch = GATK_HAPLOTYPECALLER.out[0].collect()
+all_idxs_ch = GATK_HAPLOTYPECALLER.out[1].collect()
 ```
 
-!!! tip
+Does that seem a bit complicated? Let's break this down and translate it into plain language.
 
-    You can view the contents of the channel after performing this collect operation using `.view()`
+1. We're taking the output channel from the `GATK_HAPLOTYPECALLER`, referred to using the `.out` operator.
+2. Each 'item' coming out of the channel is a pair of files: the GVCF and its index file, in that order because that's the order they're listed in the process output block. Conveniently, we can pick out the GVCFs on one hand by adding `[0]` and the index files on the other by adding `[1]` to the `.out` call.
+3. We append the `collect()` operator to bundle all the GVCF files together into a single element in a new channel called `all_gvcfs_ch`, and do the same with the index files to form the new channel called `all_idxs_ch`.
+
+!!!tip
+
+    If you're having a hard time envisioning exactly what is happening here, remember that you can use the view() operator to inspect the contents of channels before and after applying operators.
+
+The resulting `all_gvcfs_ch` and `all_idxs_ch` channels are what we're going to plug into the `GATK_GENOMICSDB` process we just wrote.
+
+!!!note
+
+    In case you were wondering, we collect the GVCFs and their index files separately because the GATK GenomicsDBImport command only wants to see the GVCF file paths. Fortunately, since Nextflow will stage all the files together for execution, we don't have to worry about the order of files like we did for BAMs and their index in Part 3.
 
 ### 2.4. Add a call to the workflow block to run GATK_GENOMICSDB
 
-```groovy title="hello-operator.nf"
+We've got a process, and we've got input channels. We just need to add the process call.
+
+```groovy title="hello-operator.nf" linenums="122"
 // Combine GVCFs into a GenomicsDB datastore
 GATK_GENOMICSDB(
     all_gvcfs,
@@ -387,80 +485,171 @@ GATK_GENOMICSDB(
 )
 ```
 
+Ok, everything is wired up.
+
 ### 2.5. Run the workflow
+
+Let's see if this works.
 
 ```bash
 nextflow run hello-operator.nf -resume
 ```
 
-Oh no! The pipeline produces an error. When we dig into the console output, we can see the command executed isn't correct:
+It run fairly quickly, since we're running with `-resume`, but...
 
-```bash
+```console title="Output"
+ N E X T F L O W   ~  version 24.02.0-edge
+
+ ┃ Launching `hello-operator.nf` [mad_edison] DSL2 - revision: 6aea0cfded
+
+executor >  local (1)
+[a2/56a3a8] SAMTOOLS_INDEX (1)       | 3 of 3, cached: 3 ✔
+[ce/096ac6] GATK_HAPLOTYPECALLER (1) | 3 of 3, cached: 3 ✔
+[df/994a06] GATK_GENOMICSDB          | 0 of 1
+ERROR ~ Error executing process > 'GATK_GENOMICSDB'
+
+Caused by:
+  Process `GATK_GENOMICSDB` terminated with an error exit status (1)
+
 Command executed:
 
-  gatk GenomicsDBImport -V reads_mother.bam.g.vcf reads_father.bam.g.vcf reads_son.bam.g.vcf --genomicsdb-workspace-path family_trio_gdb
+  gatk GenomicsDBImport         -V reads_father.bam.g.vcf reads_son.bam.g.vcf reads_mother.bam.g.vcf         -L intervals.bed         --genomicsdb-workspace-path family_trio_gdb
 ```
 
-Can you spot the error? We gave `gatk GenomicsDBImport` multiple VCF files for a single `-V` argument, but the tool expects a separate `-V` argument for each GVCF file.
+Ah. On the bright side, we see that Nextflow has picked up the `GATK_GENOMICSDB` process, and specifically called it just once.
+That suggests that the `collect()` approach worked, to a point.
+But, and it's a big one, the process call failed.
+
+When we dig into the console output above, we can see the command executed isn't correct.
+
+Can you spot the error?
+Look at this bit: `-V reads_father.bam.g.vcf reads_son.bam.g.vcf reads_mother.bam.g.vcf`
+
+We gave `gatk GenomicsDBImport` multiple GVCF files for a single `-V` argument, but the tool expects a separate `-V` argument for each GVCF file.
 
 As a reminder, this was the command we ran in the container:
 
 ```bash
 gatk GenomicsDBImport \
-    -V /data/bam/reads_mother.vcf \
-    -V /data/bam/reads_father.vcf \
-    -V /data/bam/reads_son.vcf \
+    -V reads_mother.g.vcf \
+    -V reads_father.g.vcf \
+    -V reads_son.g.vcf \
+    -L /data/ref/intervals.bed \
     --genomicsdb-workspace-path family_trio_gdb
 ```
 
+So that means we need to somehow transform our bundle of GVCF files into a properly formatted command string.
+
 ### 2.6. Construct a command line with a separate `-V` argument for each input GVCF
 
-We add the reserved keyword `script:` to declare the start of the script section explicitly, and we use some string manipulations to construct the `${gvcfs_line}`:
+This is where Nextflow being based on Groovy comes in handy, because it's going to allow us to use some fairly straightforward string manipulations to construct the necessary command string.
+
+Specifically, using this syntax: `all_gvcfs.collect { "-V ${it}" }.join(' ')`
+
+Once again, let's break it down into its components.
+
+1. First, we take the contents of the `all_gvcfs` input channel and apply `.collect()` on it (just like earlier).
+2. That allows us to pass each individual GVCF file path in the bundle to the **closure**, `{ "-V ${it}" }`, where `${it}` refers to that GVCF, and compose a new string that appends `-V ` to the file path.
+3. Then we use `.join(' ')` to concatenate all three strings with a single space as separator.
+
+With a concrete example, it looks like this:
+
+1. We have three files: `[A.ext, B.ext, C.ext]`
+2. The closure modifies each one to create the strings: `"-V A.ext", "-V B.ext", "-V C.ext"`
+3. The `.join(' ')` operation generates the final string: `"-V A.ext -V B.ext -V C.ext"`
+
+Once we have that string, we can assign it to a local variable defined with the `def` keyword:
+
+`def gvcfs_line = gvcfs.collect { "-V ${it}" }.join(' ')`
+
+Ok, so we have our string manipulation thingy. Where do we put it?
+
+We want this to go inside the process definition somewhere, because we want to do it _after_ we've channeled the GVCF file paths into the process.
+That is because Nextflow must see them as file paths in order to stage the files themselves correctly for execution.
+
+But _where_ in the process can we add this?
+
+!!!note
+
+    Fun fact, if you add the optional reserved keyword `script:` before the `"""` that starts the bash scripting block, you can add arbitrary code in there!
+
+Great, let's add the `script:` keyword and string manipulation line there then, and update the `gatk GenomicsDBImport` command to use the concatenated string it produces.
 
 _Before:_
 
-```groovy title="hello-operator.nf"
+```groovy title="hello-operator.nf" linenums="87"
     """
     gatk GenomicsDBImport \
-        -V ${gvcfs} \
+        -V ${all_gvcfs} \
+        -L ${interval_list} \
         --genomicsdb-workspace-path ${cohort_name}_gdb
     """
 ```
 
 _After:_
 
-```groovy title="hello-operator.nf"
+```groovy title="hello-operator.nf" linenums="87"
     script:
     def gvcfs_line = gvcfs.collect { "-V ${it}" }.join(' ')
     """
     gatk GenomicsDBImport \
         ${gvcfs_line} \
+        -L ${interval_list} \
         --genomicsdb-workspace-path ${cohort_name}_gdb
     """
 ```
 
-In this new code, `gvcfs.collect { "-V ${it}" }.join(' ')` takes each GVCF path (referenced by `${it}`), adds the `-V ` prefix then joins the resulting strings into a single string formatted correctly for the GenomicsDBImport tool.
+That should be all that's needed to provide the inputs to `gatk GenomicsDBImport` correctly.
+
+!!!tip
+
+    When you update the `gatk GenomicsDBImport` command, make sure to remove the `-V ` prefix when you swap in the `${gvcfs_line}` variable.
 
 ### 2.7. Run the workflow to verify that it generates the GenomicsDB output as expected
+
+Alright, let's see if that addressed the issue.
 
 ```bash
 nextflow run hello-operator.nf -resume
 ```
 
-Now we see the additional process show up in the log output (showing the compact view):
+Aha! It seems to be working now.
 
-_TODO: Update console output_
+```console title="Output"
+ N E X T F L O W   ~  version 24.02.0-edge
 
-_TODO: check the output_
+ ┃ Launching `hello-operator.nf` [special_noyce] DSL2 - revision: 11f7a51bbe
+
+executor >  local (1)
+[6a/5dcf6a] SAMTOOLS_INDEX (3)       | 3 of 3, cached: 3 ✔
+[d6/d0d060] GATK_HAPLOTYPECALLER (3) | 3 of 3, cached: 3 ✔
+[e8/749a05] GATK_GENOMICSDB          | 1 of 1 ✔
+```
+
+The first two steps were successfully skipped, and the third step worked like a charm this time. We find our output data store in the results directory.
+
+```console title="Directory contents"
+results_genomics/family_trio_gdb
+├── 20_10037292_10066351$12912$14737
+├── 20_10037292_10066351$3277$5495
+├── 20_10037292_10066351$7536$9859
+├── callset.json
+├── __tiledb_workspace.tdb
+├── vcfheader.vcf
+└── vidmap.json
+```
+
+By the way, we didn't have to do anything special to handle the output being a directory instead of a single file.
+Isn't that nice?
 
 ### Takeaway
 
 Now you know how to collect outputs from a channel and bundle them as a single input to another process.
-You also know how to construct a command line to provide the file names to the tool with the appropriate syntax.
+You also know how to construct a command line to provide inputs to a given tool with the appropriate syntax.
 
 ### What's next?
 
-Add a second command to the same process.
+Learn how to add a second command to the same process.
 
 ---
 
