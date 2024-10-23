@@ -188,7 +188,7 @@ Have a look inside; you'll find a subdirectory named with a hash (in order to ma
 
     You should see something like this, though the exact subdirectory names will be different on your system.
 
-    ```console title="Output"
+    ```console title="Directory contents"
     work
     └── 1c
         └── 7d08e685a7aa7060b9c21667924824
@@ -904,7 +904,7 @@ For a complex workflow, or a large number of inputs, having the full list output
 
 That being said, we have another problem. If you look in the `results` directory, there are only two files: `output.txt` and `UPPER-output.txt`!
 
-```console title="Output"
+```console title="Directory contents"
 results
 ├── output.txt
 └── UPPER-output.txt
@@ -986,7 +986,7 @@ executor >  local (6)
 
 But more importantly, now we have six new files in addition to the two we already had in the `results` directory:
 
-```console title="Output"
+```console title="Directory contents"
 results
 ├── Bonjour-output.txt
 ├── Hello-output.txt
