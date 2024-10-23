@@ -260,7 +260,7 @@ We're going to start by making two changes:
 -   Add the `-ERC GVCF` parameter to the GATK HaplotypeCaller command;
 -   Update the output file path to use the corresponding `.g.vcf` extension, as per GATK convention.
 
-Make sure you add a backslash (`\`) at the end of the line before.
+Make sure you add a backslash (`\`) at the end of the previous line when you add `-ERC GVCF`.
 
 _Before:_
 
