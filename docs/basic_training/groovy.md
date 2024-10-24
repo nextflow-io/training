@@ -372,7 +372,7 @@ The `else` branch is optional. Also, the curly brackets are optional when the br
 
 ```groovy linenums="1" title="snippet.nf"
 x = 1
-if (x > 10)
+if (x < 10)
     println 'Hello'
 ```
 
