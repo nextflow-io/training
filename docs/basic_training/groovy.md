@@ -371,8 +371,8 @@ else {
 The `else` branch is optional. Also, the curly brackets are optional when the branch defines just a single statement.
 
 ```groovy linenums="1" title="snippet.nf"
-x = 1
-if (x < 10)
+x = 11
+if (x > 10)
     println 'Hello'
 ```
 
