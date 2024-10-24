@@ -4,7 +4,7 @@
  * Pipeline parameters
  */
 
-// Primary input (list of input files, one per line)
+// Primary input (file of input files, one per line)
 params.reads_bam = "${projectDir}/data/sample_bams.txt"
 
 // Accessory files
@@ -13,6 +13,9 @@ params.reference_index  = "${projectDir}/data/ref/ref.fasta.fai"
 params.reference_dict   = "${projectDir}/data/ref/ref.dict"
 params.intervals        = "${projectDir}/data/ref/intervals.bed"
 
+// Base name for final output file
+params.cohort_name = "family_trio"
+
 /*
  * Generate BAM index file
  */
@@ -20,7 +23,7 @@ process SAMTOOLS_INDEX {
 
     container 'community.wave.seqera.io/library/samtools:1.20--b5dfbd93de237464'
 
-    publishDir 'results', mode: 'copy'
+    publishDir 'results_genomics', mode: 'symlink'
 
     input:
         path input_bam
@@ -34,13 +37,13 @@ process SAMTOOLS_INDEX {
 }
 
 /*
- * Call variants with GATK HaplotypeCaller in GVCF mode
+ * Call variants with GATK HaplotypeCaller
  */
 process GATK_HAPLOTYPECALLER {
 
     container "community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"
-    
-    publishDir 'results', mode: 'copy'
+
+    publishDir 'results_genomics', mode: 'symlink'
 
     input:
         tuple path(input_bam), path(input_bam_index)
@@ -63,12 +66,40 @@ process GATK_HAPLOTYPECALLER {
     """
 }
 
+/*
+ * Combine GVCFs into GenomicsDB datastore
+ */
+process GATK_GENOMICSDB {
+
+    container "community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"
+
+    publishDir 'results_genomics', mode: 'symlink'
+
+    input:
+        path all_gvcfs
+        path all_idxs
+        path interval_list
+        val cohort_name
+
+    output:
+        path "${cohort_name}_gdb"
+
+    script:
+        def gvcfs_line = all_gvcfs.collect { gvcf -> "-V ${gvcf}" }.join(' ')
+    """
+    gatk GenomicsDBImport \
+        ${gvcfs_line} \
+        -L ${interval_list} \
+        --genomicsdb-workspace-path ${cohort_name}_gdb
+    """
+}
+
 workflow {
 
-    // Create input channel from list of input files in plain text
+    // Create input channel from a text file listing input file paths
     reads_ch = Channel.fromPath(params.reads_bam).splitText()
 
-    // Create channels for the accessory files (reference and intervals)
+    // Load the file paths for the accessory files (reference and intervals)
     ref_file        = file(params.reference)
     ref_index_file  = file(params.reference_index)
     ref_dict_file   = file(params.reference_dict)
@@ -76,7 +107,7 @@ workflow {
 
     // Create index file for input BAM file
     SAMTOOLS_INDEX(reads_ch)
-
+    
     // Call variants from the indexed BAM file
     GATK_HAPLOTYPECALLER(
         SAMTOOLS_INDEX.out,
@@ -84,5 +115,17 @@ workflow {
         ref_index_file,
         ref_dict_file,
         intervals_file
+    )
+
+    // Collect variant calling outputs across samples
+    all_gvcfs_ch = GATK_HAPLOTYPECALLER.out[0].collect()
+    all_idxs_ch = GATK_HAPLOTYPECALLER.out[1].collect()
+
+    // Combine GVCFs into a GenomicsDB datastore
+    GATK_GENOMICSDB(
+        all_gvcfs_ch,
+        all_idxs_ch,
+        intervals_file,
+        params.cohort_name
     )
 }
