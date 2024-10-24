@@ -37,7 +37,7 @@ It specifies that Nextflow should use Docker containers to execute process calls
 We're going to be playing with that shortly.
 
 We've also created a symbolic link called `data` pointing to the data directory, to avoid having to change anything to how the file paths are set up.
-Later we'll cover a better way of handling this, but this works for now.
+Later we'll cover a better way of handling this, but this will do for now.
 
 You can test that it runs properly:
 
@@ -330,9 +330,17 @@ executor >  local (7)
 
 This means we're all set to run with Conda environments if need.
 
+!!!note
+
+    Since these directives are assigned per process, it is possible 'mix and match', _i.e._ configure some of the processes in your workflow to run with Docker and others with Conda, for example, if the compute infrastructure you are using supports both.
+    In that case, you would enable both Docker and Conda in your configuration file.
+    If both are available for a given process, Nextflow will prioritize containers.
+
+    And as noted earlier, Nextflow supports multiple other software packaging technologies, so you are not limited to just those two.
+
 ### Takeaway
 
-You know how to switch software packaging systems using a configuration file.
+You know how to configure which software package each process should use, and how to switch between technologies.
 
 ### What's next?
 
@@ -346,7 +354,7 @@ Profiles are a way to customize the behavior by selecting an option at runtime, 
 
 ### 2.1. Create a profile
 
-We're still working inside the `nextflow.config` file, but we're going to restructure how we write the configuration.
+We're still working inside the `nextflow.config` file, but we're going to restructure how we write the configuration for the `docker` and `conda` directives.
 
 _Before:_
 
@@ -365,38 +373,52 @@ docker.fixOwnership = true
 profiles {
     docker {
         docker.enabled = true
+        conda.enabled = false
     }
     conda {
+        docker.enabled = false
         conda.enabled = true
     }
 }
 ```
 
-This
+This will make it possible to activate one or the other exclusively by specifying a profile in our Nextflow run command line.
 
-### 2.2. Run the pipeline with a profile
+### 2.2. Run the workflow with a profile
 
-```bash
-nextflow run seqeralabs/nf-hello-gatk -r main -profile docker
-```
-
-or
+Let's try running the workflow with Conda.
 
 ```bash
-nextflow run seqeralabs/nf-hello-gatk -r main -profile conda
+nextflow run main.nf -profile conda
 ```
 
-As demonstrated above, by creating and using profiles, we've enhanced our pipeline's flexibility and ease of use.
-We can now run our pipeline with Docker or Conda using a single command line argument by specifying the appropriate profile (`-profile docker` or `-profile conda`).
-This method of configuration management improves the portability and maintainability of our Nextflow pipeline, enabling us to accommodate various execution scenarios easily.
+It works! And from our standpoint, it looks like it works exactly the same, even though on the backend the mechanics are a bit different.
+
+```
+ N E X T F L O W   ~  version 24.02.0-edge
+
+ ┃ Launching `main.nf` [sharp_gauss] DSL2 - revision: 66cd7c255a
+
+executor >  local (7)
+[f4/ef2cb6] SAMTOOLS_INDEX (1)       [100%] 3 of 3 ✔
+[70/77152c] GATK_HAPLOTYPECALLER (1) [100%] 3 of 3 ✔
+[a6/0f72fd] GATK_JOINTGENOTYPING     [100%] 1 of 1 ✔
+```
+
+Feel free to try it out with the Conda profile too. You just have to switch `-profile conda` to `-profile docker` in the command.
+
+!!!note
+
+    Here we've set up Docker and Conda to be mutually exclusive, because many compute environments support only one, and profiles are typically used to switch between using one or the other.
+    However, it is possible to set up a hybrid profile where more than one software packaging technology is enabled.
 
 ### Takeaway
 
-You know how to use profiles to customize the configuration of your pipeline.
+You know how to use profiles to select a preset configuration at runtime with minimal hassle.
 
 ### What's next?
 
-Learn how to change the executor used by Nextflow.
+Learn how to change the executor used by Nextflow to actually do the work.
 
 ---
 
@@ -404,7 +426,7 @@ Learn how to change the executor used by Nextflow.
 
 Until now, we have been running our pipeline with the local executor.
 This runs each step on the same machine that Nextflow is running on.
-However, for large genomics pipelines, you will want to use a distributed executor.
+However, for large workloads, you will typically want to use a distributed executor such as an HPC or cloud.
 Nextflow supports several different distributed executors, including:
 
 -   HPC (SLURM, PBS, SGE)
@@ -412,8 +434,9 @@ Nextflow supports several different distributed executors, including:
 -   Google Batch
 -   Azure Batch
 -   Kubernetes
+-   GA4GH TES
 
-The executor is subject to process directive called `executor`. By default it is set to `local`, so the following configuration is implied:
+The executor is subject to a process directive called `executor`. By default it is set to `local`, so the following configuration is implied:
 
 ```groovy title="Built-in configuration"
 process {
@@ -421,35 +444,59 @@ process {
 }
 ```
 
-### 3.1. Switch to a different executor
+Let's look at what it would take to using a Slurm scheduler, assuming we had a connection to a cluster and Slurm was installed appropriately.
 
-!!! note
+!!! warning
 
-    This is for demonstration purposes but will not work since we don't have access to an external executor!
+    What follows is for demonstration purposes but **will not execute the work** since we don't have access to an external executor.
 
-TODO a common HPC executor is slurm
+### 3.1. Set up a Slurm executor
 
-```groovy title="nextflow.config" linenums="1"
+Add the following lines to the `nextflow.config` file:
+
+```groovy title="nextflow.config" linenums="14"
 process {
     executor = 'slurm'
 }
 ```
 
-Assumes slurm is installed, connection to a cluster; generates an sbatch command
+And... that's it! As noted before, this does assume that Slurm itself is already set up for you, but this is really all Nextflow itself needs to know.
 
-### 3.2. Run to generate the job submission script
+Basically we are telling Nextflow to generate a Slurm submission script and submit it using an `sbatch` command.
 
-Run it so we can see what nextflow does
+### 3.2. Launch the workflow to generate the job submission script
 
-TODO run command
+Let's try running this; even though we now it won't execute (since we don't have Slurm set up in the Gitpod environment) we'll be able to see what the submission script looks like.
 
-Generates an error which is expected since we don't have slurm
-
-```console
-Cannot run program "sbatch"
+```bash
+nextflow run main.nf -profile conda
 ```
 
-TODO but if we check inside the `.command.run` file created in the work directory, we can see that Nextflow has created a script to submit the job to Slurm.
+As expected, this fails with a fairly unambiguous error:
+
+```console title="Output"
+nextflow
+ N E X T F L O W   ~  version 24.02.0-edge
+
+ ┃ Launching `main.nf` [grave_gauss] DSL2 - revision: 66cd7c255a
+
+[-        ] SAMTOOLS_INDEX       [  0%] 0 of 3
+[eb/2962ce] SAMTOOLS_INDEX (3)   [ 33%] 1 of 3, failed: 1
+[-        ] GATK_HAPLOTYPECALLER -
+[-        ] GATK_JOINTGENOTYPING -
+ERROR ~ Error executing process > 'SAMTOOLS_INDEX (3)'
+
+Caused by:
+  java.io.IOException: Cannot run program "sbatch" (in directory "/workspace/gitpod/hello-nextflow/projectC/work/eb/2962ce167b3025a41ece6ce6d7efc2"): error=2, No such file or directory
+
+Command executed:
+
+  sbatch .command.run
+```
+
+However, it did produce what we are looking for: the `.command.run` file that Nextflow tried to submit to Slurm via the `sbatch` command.
+
+Let's take a look inside. **TODO Figure out why mt output is not the nice output Adam had**
 
 ```bash title=".command.run" linenums="1"
 #!/bin/bash
@@ -467,30 +514,34 @@ NXF_CHDIR=/home/gitpod/work/34/850fe31af0eb62a0eb1643ed77b84f
 ### ...
 ```
 
-Can control other options using other process directives such as `clusterOptions`, `cpus`, `memory`, `queue`, and `time`, these would also be included in the `.command.run` file and directly passed to the Slurm execution.
-TODO: demonstrate this later in module.
+This shows the job submission details that Nextflow is trying to hand over to Slurm.
 
-If using a different executor, values translated into equivalent options.
+!!!note
 
-This is how Nextflow creates the commands required to correctly submit a job to the sbatch cluster via a single configuration change.
+    There other options that we could additionally set using other process directives to control resource allocations, which we'll get to in a little bit.
+    These would also be included in the `.command.run` file and directly passed to the Slurm execution.
 
-### 3.3. Set the executor in a profile
+You can try using any of the other supported executors in the same way. Nextflow will translate the values submitted to the executor into the appropriate equivalent instructions.
 
-Let's combine profiles with executors. Make the following changes to your configuration file:
+Conveniently, you can also set up profiles to select which executor you want to use at runtime, just like we did for the Docker vs. Conda environments selection earlier.
 
-Remove the following lines:
+### 3.3. Set up profiles for executors too
 
-```groovy title="nextflow.config" linenums="17"
+We just have two changes to make to the configuration file.
+
+First, remove the following lines, since we're replacing them with the profiles.
+
+```groovy title="nextflow.config" linenums="14"
 process {
     executor = 'slurm'
 }
 ```
 
-Now create profiles for local and slurm executors
+Now, add profiles for local and slurm executors:
 
-Before:
+_Before:_
 
-```groovy title="nextflow.config" linenums="1"
+```groovy title="nextflow.config" linenums="14"
 profiles {
     docker {
         docker.enabled = true
@@ -503,9 +554,9 @@ profiles {
 }
 ```
 
-After:
+_After:_
 
-```groovy title="nextflow.config"
+```groovy title="nextflow.config" linenums="14"
 profiles {
     docker {
         docker.enabled = true
@@ -524,12 +575,14 @@ profiles {
 }
 ```
 
+Although it may look like these are going to be mutually exclusive, you can actually combine multiple profiles.
+
 ### 3.4. Run with a combination of profiles
 
-Now run the pipeline using two profiles, `docker` and `local`:
+Let's run the pipeline using two profiles, `docker` and `local`:
 
 ```bash
-nextflow run seqeralabs/nf-hello-gatk -profile docker,local
+nextflow run main.nf -profile docker,local
 ```
 
 We have returned to the original configuration of using Docker containers with local execution.
