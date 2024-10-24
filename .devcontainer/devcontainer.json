@@ -1,10 +1,10 @@
 {
     "name": "nfcore",
-    "image": "nfcore/gitpod:latest",
+    "image": "ghcr.io/nextflow-io/training:latest",
     "remoteUser": "gitpod",
-    "features": {
-        "ghcr.io/devcontainers/features/docker-in-docker:2": {}
-    },
+    // "features": {
+    //     "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+    // },
     // Configure tool-specific properties.
     "customizations": {
         // Configure properties specific to VS Code.
@@ -21,9 +21,12 @@
                 "python.linting.pydocstylePath": "/opt/conda/bin/pydocstyle",
                 "python.linting.pylintPath": "/opt/conda/bin/pylint"
             },
-
             // Add the IDs of extensions you want installed when the container is created.
-            "extensions": ["ms-python.python", "ms-python.vscode-pylance", "nf-core.nf-core-extensionpack"]
+            "extensions": [
+                "ms-python.python",
+                "ms-python.vscode-pylance",
+                "nf-core.nf-core-extensionpack"
+            ]
         }
     },
     "portsAttributes": {
