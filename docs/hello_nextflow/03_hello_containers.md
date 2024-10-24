@@ -2,23 +2,29 @@
 
 In Part 1, you learned how to use the basic building blocks of Nextflow to assemble a simple pipeline capable of processing some text and parallelizing execution if there were multiple inputs.
 
-However, you were limited to utilizing only basic UNIX tools that were already installed in your computing environment.
-Real-world work typically requires you to use all sorts of tools and packages that don't come standard.
-Usually you'd have to figure out how to install all of the necessary tools and their software dependencies, as well as manage any conflicts that may arise between dependencies that aren't compatible with each other.
+However, you were limited to basic UNIX tools available in your environment.
+Real-world tasks often require various tools and packages not included by default.
+Typically, you'd need to install these tools, manage their dependencies, and resolve any conflicts.
 
 That is all very tedious and annoying, so we're going to show you how to use **containers** to solve this problem much more conveniently.
 
+!!! Note
+
+    We'll be teaching this using the technology [Docker](https://www.docker.com/get-started/), but Nextflow supports [several other container technologies](https://www.nextflow.io/docs/latest/container.html#) as well.
+
 ---
 
-## 1. Use a container directly [basics]
+## 1. Use a container directly
 
 A **container** is a lightweight, standalone, executable unit of software created from a container **image** that includes everything needed to run an application including code, system libraries and settings.
 To use a container you usually download or "pull" a container image from a container registry, and then run the container image to create a container instance.
 
 ### 1.1. Pull the container image
 
+Let's pull a container image that contains the `cowsay` command so we can use it to display some text in a fun way.
+
 ```bash
-docker pull rancher/cowsay
+docker pull 'community.wave.seqera.io/library/pip_cowsay:131d6a1b707a8e65'
 ```
 
 ### 1.2 Use the container to execute a single command
@@ -27,7 +33,7 @@ The `docker run` command is used to spin up a container instance from a containe
 The `--rm` flag tells Docker to remove the container instance after the command has completed.
 
 ```bash
-docker run --rm rancher/cowsay "Hello World"
+docker run --rm 'community.wave.seqera.io/library/pip_cowsay:131d6a1b707a8e65' cowsay -t "Hello World"
 ```
 
 ```console title="Output"
@@ -44,17 +50,16 @@ docker run --rm rancher/cowsay "Hello World"
 ### 1.2. Spin up the container interactively
 
 You can also run a container interactively, which will give you a shell prompt inside the container.
-The `--entrypoint` flag allows you to specify the command that should be run when the container starts up.
 
 ```bash
-docker run --rm -it --entrypoint /bin/sh  rancher/cowsay
+docker run --rm -it 'community.wave.seqera.io/library/pip_cowsay:131d6a1b707a8e65' /bin/bash
 ```
 
-Notice that the prompt has changed to `/ #`, which indicates that you are now inside the container.
+Notice that the prompt has changed to `(base) root@b645838b3314:/tmp#`, which indicates that you are now inside the container.
 If we run:
 
 ```console title="Output"
-/ # ls
+(base) root@b645838b3314:/tmp# ls
 bin    dev    etc    home   lib    media  mnt    opt    proc   root   run    sbin   srv    sys    tmp    usr    var
 ```
 
@@ -64,28 +69,36 @@ You can see that the filesystem inside the container is different from the files
 
 Now that you are inside the container, you can run the `cowsay` command directly.
 
+!!! Tip
+
+    Us the '-c' flag to pick a different "cow" from this list:
+    `beavis`, `cheese`, `cow`, `daemon`, `dragon`, `fox`, `ghostbusters`, `kitty`, `meow`, `miki`, `milk`, `octopus`, `pig`, `stegosaurus`, `stimpy`, `trex`, `turkey`, `turtle`, `tux`
+
 ```bash
-cowsay "Hello World"
+cowsay -t "Hello World" -c tux
 ```
 
 Output:
 
 ```console title="Output"
- _____________
-< Hello World >
- -------------
-        \   ^__^
-         \  (oo)\_______
-            (__)\       )\/\
-                ||----w |
-                ||     ||
+  ___________
+| Hello World |
+  ===========
+                \
+                 \
+                  \
+                   .--.
+                  |o_o |
+                  |:_/ |
+                 //   \ \
+                (|     | )
+               /'\_   _/`\
+               \___)=(___/
 ```
-
-This should complete immediately, and you should now see a file called `<file>` in your working directory.
 
 ### 1.4. Exit the container
 
-To exit the container, you can type `exit` at the prompt.
+To exit the container, you can type `exit` at the prompt or use the ++ctrl+d++ keyboard shortcut.
 
 ```bash
 exit
@@ -93,67 +106,69 @@ exit
 
 Your prompt should now be back to what it was before you started the container.
 
-### Takeaway
-
-You know how to pull a container and run it interactively, and you know how to use that to try out commands without having to install any software on your system.
-
-### What's next?
-
-Learn how to make data from your host system available to a container.
-
-## 2. Mounting data into containers
+### 1.5. Mounting data into containers
 
 When you run a container, it is isolated from the host system by default.
 This means that the container can't access any files on the host system unless you explicitly tell it to.
 One way to do this is to **mount** a **volume** from the host system into the container.
 
-Prior to working on the next section, confirm that you are in the `hello-nextflow` directory.
+Prior to working on the next task, confirm that you are in the `hello-nextflow` directory.
 
 ```bash
 cd /workspace/gitpod/nf-training/hello-nextflow
 ```
 
-### 2.1. Launch the container interactively with a mounted volume
+Then run:
 
 ```bash
-docker run --rm -it --entrypoint /bin/sh -v $(pwd)/data:/data rancher/cowsay
+docker run --rm -it -v $(pwd)/containers/data:/data 'community.wave.seqera.io/library/pip_cowsay:131d6a1b707a8e65' /bin/bash
 ```
 
-This command mounts the `data` directory in the current working directory on the host system into the `/data` directory inside the container.
-We can explore the contents of the `/data` directory inside the container:
+Let's explore the contents of the container.
+Note that we need to navigate to the `/data` directory inside the container to see the contents of the `data` directory on the host system.
 
 ```console title="Output"
-/ # ls
-bin    data   dev    etc    home   lib    media  mnt    opt    proc   root   run    sbin   srv    sys    tmp    usr    var
-/ # ls data
-bam              greetings.csv    ref              sample_bams.txt  samplesheet.csv
+(base) root@08dd2d3efbd4:/tmp# ls
+conda.yml  environment.lock
+(base) root@08dd2d3efbd4:/tmp# cd /data
+(base) root@08dd2d3efbd4:/data# ls
+greetings.csv  pioneers.csv
 ```
 
-### 2.2. Use the mounted data
+### 1.6. Use the mounted data
 
 Now that we have mounted the `data` directory into the container, we can use the `cowsay` command to display the contents of the `greetings.csv` file.
+To do this we'll use the syntax `-t "$(cat data/greetings.csv)"` to output the contents of the file into the `cowsay` command.
 
 ```bash
-cat data/greetings.csv | cowsay
+cowsay -t "$(cat /data/greetings.csv)" -c pig
 ```
 
 Output:
 
 ```console title="Output"
- _____________________
-< Hello,Bonjour,Holà >
- ---------------------
-        \   ^__^
-         \  (oo)\_______
-            (__)\       )\/\
-                ||----w |
-                ||     ||
-/ # exit
+  __________________
+| Hello,Bonjour,Holà |
+  ==================
+                  \
+                   \
+                    \
+                     \
+                               ,.
+                              (_|,.
+                              ,' /, )_______   _
+                          __j o``-'        `.'-)'
+                          (")                 \'
+                          `-j                |
+                            `-._(           /
+                               |_\  |--^.  /
+                              /_]'|_| /_)_/
+                                  /_]'  /_]'
 ```
 
 ### Takeaway
 
-You know how to pull a container and run it interactively, and you know how to use that to try out commands without having to install any software on your system.
+You know how to pull a container and run it interactively, make your data accessible to it, which lets you try commands without having to install any software on your system.
 
 ### What's next?
 
@@ -161,114 +176,19 @@ Learn how to get a container image for any pip/conda-installable tool.
 
 ---
 
-## 2. Get a container image for a pip/conda-installable tool
+## 2. Use containers in Nextflow
 
-Some software developers provide container images for their software that are available on container registries like Docker Hub, but many do not.
-New Docker images can be created by writing a `Dockerfile` that specifies how to build the image, but this can be a lot of work.
-Instead, we can use the Seqera Containers web service to create a container image for us.
-
-### 2.1. Navigate to Seqera Containers
-
-Navigate to [Seqera Containers web service](https://www.seqera.io/containers/) and search for the `quote` pip package.
-
-![Seqera Containers](img/seqera-containers-1.png)
-
-### 2.2. Request a container image
-
-Click on "+Add" and then "Get Container" to request a container image for the `quote` pip package.
-
-![Seqera Containers](img/seqera-containers-2.png)
-
-If this is the first time a community container has been built for this package, it may take a few minutes to complete.
-Click to copy the URI (e.g. `community.wave.seqera.io/library/pip_quote:ae07804021465ee9`) of the container image that was created for you.
-
-### 2.3. Use the container image
-
-You can now use the container image to run the `quote` command and get a random saying from Grace Hopper.
-
-```bash
-docker run --rm community.wave.seqera.io/library/pip_quote:ae07804021465ee9 quote "Grace Hopper"
-```
-
-Output:
-
-```console title="Output"
-Humans are allergic to change. They love to say, 'We've always done it
-this way.' I try to fight that. That's why I have a clock on my wall
-that runs counter-clockwise.
-```
-
-### 2.4. STRETCH GOAL: Build the container image yourself
-
-Go back to the Seqera Containers website and click on the "Build Details" button.
-There you can see the details of how our container image was built.
-You can view the conda environment file and the `Dockerfile` together make up the recipe for the container image.
-
-```conda.yml
-channels:
-- conda-forge
-- bioconda
-dependencies:
-- pip
-- pip:
-  - quote==3.0.0
-```
-
-```Dockerfile
-FROM mambaorg/micromamba:1.5.10-noble
-COPY --chown=$MAMBA_USER:$MAMBA_USER conda.yml /tmp/conda.yml
-RUN micromamba install -y -n base -f /tmp/conda.yml \
-    && micromamba install -y -n base conda-forge::procps-ng \
-    && micromamba env export --name base --explicit > environment.lock \
-    && echo ">> CONDA_LOCK_START" \
-    && cat environment.lock \
-    && echo "<< CONDA_LOCK_END" \
-    && micromamba clean -a -y
-USER root
-ENV PATH="$MAMBA_ROOT_PREFIX/bin:$PATH"
-```
-
-Copy the contents of these files into the stubs located in the `containers/build` directory, then run the following command to build the container image yourself.
-
-```bash
-docker build -t quote:latest containers/build
-```
-
-After it has finished building, you can run the container image you just built.
-
-```bash
-docker run --rm quote:latest quote "Margaret Oakley Dayhoff"
-```
-
-!!! Hint
-
-    Even if Seqera Containers doesn't manage to successfully build a container image for you, the `Dockerfile` and `conda.yml` are great starting point for a manual build.
-
-It often only takes a few additional `RUN` commands added to the Dockerfile to add the missing dependencies or system libraries.
-
-### Takeaway
-
-You know how to get a find/build a container image for any pip/conda installable tool using Seqera Containers.
-
-### What's next?
-
-Learn how to use containers in Nextflow.
-
----
-
-## 3. Use containers in Nextflow
-
-Nextflow has built-in support for running processes inside containers.
+Nextflow has built-in support for running processes inside containers to let you run tools you don't have installed in your compute environment.
 This means that you can use any container image you like to run your processes, and Nextflow will take care of pulling the image, mounting the data, and running the process inside it.
 
-### 3.1. Add a container directive to your process
+### 2.1. Add a container directive to your process
 
 Edit the `hello_containers.nf` script to add a `container` directive to the `cowsay` process.
 
 _Before:_
 
 ```groovy title="hello-containers.nf"
-process COW_SAY {
+process cowSay {
 
     publishDir 'containers/results', mode: 'copy'
 ```
@@ -282,7 +202,7 @@ process cowSay {
     container 'community.wave.seqera.io/library/pip_cowsay:131d6a1b707a8e65'
 ```
 
-### 3.2. Run nextflow pipelines using containers
+### 2.2. Run nextflow pipelines using containers
 
 Run the script to see the container in action.
 
@@ -293,10 +213,9 @@ nextflow run hello_containers.nf
 !!! NOTE
 
     The `nextflow.config` in our current working directory contains `docker.enabled = true`, which tells Nextflow to use Docker to run processes.
+    Without that configuration we would have to specify the `-with-docker` flag when running the script.
 
-Without that configuration we would have to specify the `-with-docker` flag when running the script.
-
-### 3.3. Check the results
+### 2.3. Check the results
 
 You should see a new directory called `containers/results` that contains the output of the `cowsay` process.
 
@@ -313,12 +232,12 @@ You should see a new directory called `containers/results` that contains the out
               ||     ||
 ```
 
-### 3.4. Explore how Nextflow launched the containerized task
+### 2.4. Explore how Nextflow launched the containerized task
 
 Let's take a look at the task directory for one of the cowsay tasks to see how Nextflow works with containers under the hood.
 
 Check your the output form your `nextflow run` command to find the task ID for the `cowsay` process.
-Then checkout the task directory for that task.
+Then check out the task directory for that task.
 
 ```bash
 tree -a work/8c/738ac55b80e7b6170aa84a68412454
@@ -360,12 +279,117 @@ You know how to use containers in Nextflow to run processes.
 
 ### What's next?
 
-An optional exercise to fetch quotes on computer/biology pioneers using the `quote` container and output them using the `cowsay` container.
+You have everything you need to continue to the [next chapter](./04_hello_genomics.md) of this training series.
+Optionally, continue on to learn how to get container images for tools you want to use in your Nextflow pipelines.
 
-## 4. STRETCH EXERCISE: Connect the `quote` container with the `cowsay` container
+---
+
+## 3. Optional Topic: How to find or make container images
+
+Some software developers provide container images for their software that are available on container registries like Docker Hub, but many do not.
+In this optional section, we'll show you to two ways to get a container image for tools you want to use in your Nextflow pipelines: using Seqera Containers and building the container image yourself.
+
+You'll be getting/building a container image for the `quote` pip package, which will be used in the exercise at the end of this section.
+
+### 3.1. Get a container image from Seqera Containers
+
+Seqera Containers is a free service that builds container images for pip and conda (including bioconda) installable tools.
+Navigate to [Seqera Containers](https://www.seqera.io/containers/) and search for the `quote` pip package.
+
+![Seqera Containers](img/seqera-containers-1.png)
+
+Click on "+Add" and then "Get Container" to request a container image for the `quote` pip package.
+
+![Seqera Containers](img/seqera-containers-2.png)
+
+If this is the first time a community container has been built for this version of the package, it may take a few minutes to complete.
+Click to copy the URI (e.g. `community.wave.seqera.io/library/pip_cowsay:131d6a1b707a8e65`) of the container image that was created for you.
+
+You can now use the container image to run the `quote` command and get a random saying from Grace Hopper.
+
+```bash
+docker run --rm community.wave.seqera.io/library/pip_quote:ae07804021465ee9 quote "Grace Hopper"
+```
+
+Output:
+
+```console title="Output"
+Humans are allergic to change. They love to say, 'We've always done it
+this way.' I try to fight that. That's why I have a clock on my wall
+that runs counter-clockwise.
+```
+
+### 3.2. Build the container image yourself
+
+Let's use some build details from the Seqera Containers website to build the container image for the `quote` pip package ourselves.
+Return to the Seqera Containers website and click on the "Build Details" button.
+
+The first item we'll look at is the `Dockerfile`, a type of script file that contains all the commands needed to build the container image.
+We've added some explanatory comments to the Dockerfile below to help you understand what each part does.
+
+```Dockerfile title="Dockerfile"
+# Start from the micromamba base docker image
+FROM mambaorg/micromamba:1.5.10-noble
+# Copy the conda.yml file into the container
+COPY --chown=$MAMBA_USER:$MAMBA_USER conda.yml /tmp/conda.yml
+# Install various utilities for Nextflow to use and the packages in the conda.yml file
+RUN micromamba install -y -n base -f /tmp/conda.yml \
+    && micromamba install -y -n base conda-forge::procps-ng \
+    && micromamba env export --name base --explicit > environment.lock \
+    && echo ">> CONDA_LOCK_START" \
+    && cat environment.lock \
+    && echo "<< CONDA_LOCK_END" \
+    && micromamba clean -a -y
+# Run the container as the root user
+USER root
+# Set the PATH environment variable to include the micromamba installation directory
+ENV PATH="$MAMBA_ROOT_PREFIX/bin:$PATH"
+```
+
+The second item we'll look at is the `conda.yml` file, which contains the list of packages that need to be installed in the container image.
+
+```conda.yml title="conda.yml"
+channels:
+- conda-forge
+- bioconda
+dependencies:
+- pip
+- pip:
+  - quote==3.0.0 #
+```
+
+Copy the contents of these files into the stubs located in the `containers/build` directory, then run the following command to build the container image yourself.
+
+!!! Note
+
+    We use the `-t quote:latest` flag to tag the container image with the name `quote` and the tag `latest`.
+    We will be able to use this tag to refer to the container image when running it on this system.
+
+```bash
+docker build -t quote:latest containers/build
+```
+
+After it has finished building, you can run the container image you just built.
+
+```bash
+docker run --rm quote:latest quote "Margaret Oakley Dayhoff"
+```
+
+### Takeaway
+
+You've learned two different ways to get a container image for a tool you want to use in your Nextflow pipelines: using Seqera Containers and building the container image yourself.
+
+### What's next?
+
+You have everything you need to continue to the [next chapter](./04_hello_genomics.md) of this training series.
+You can also continue on with an optional exercise to fetch quotes on computer/biology pioneers using the `quote` container and output them using the `cowsay` container.
+
+---
+
+## 4. Bonus Exercise: Make the cow quote famous scientists
 
 This section contains some stretch exercises, to practice what you've learned so far.
-Doing these exercises are _not required_ to understand later parts of the training, but provide a fun way to reinforce your learnings by figuring out how to connect the `quote` container with the `cowsay` container.
+Doing these exercises is _not required_ to understand later parts of the training, but provide a fun way to reinforce your learnings by figuring out how to make the cow quote famous scientists.
 
 ```console title="cowsay-output-Grace-Hopper.txt"
   _________________________________________________
