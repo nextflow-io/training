@@ -73,7 +73,7 @@ Learn how to modify basic configuration properties to adapt to your compute envi
 
 ---
 
-## 1. Configuration basics
+## 1. Determine what software packaging technology to use
 
 In the very first part of this training course (Part 1: Hello World) we just used locally installed software in our workflow. Then from Part 2 onward, we've been using Docker containers.
 
@@ -348,13 +348,13 @@ Learn how to use profiles to make selecting an option easier.
 
 ---
 
-## 2. Profiles
+## 2. Use profiles to select preset configurations
 
-Profiles are a way to customize the behavior by selecting an option at runtime, to avoid having to edit a file every time you want to do something differently.
+Profiles are a great way to adapt your workflow configuration by selecting preset options at runtime, to avoid having to edit a file every time you want to run something differently.
 
-### 2.1. Create a profile
+### 2.1. Create profiles for switching between Docker and Conda
 
-We're still working inside the `nextflow.config` file, but we're going to restructure how we write the configuration for the `docker` and `conda` directives.
+Setting up these profiles mainly involves restructuring how we specify the `docker` and `conda` directives.
 
 _Before:_
 
@@ -373,16 +373,14 @@ docker.fixOwnership = true
 profiles {
     docker {
         docker.enabled = true
-        conda.enabled = false
     }
     conda {
-        docker.enabled = false
         conda.enabled = true
     }
 }
 ```
 
-This will make it possible to activate one or the other exclusively by specifying a profile in our Nextflow run command line.
+This makes it possible to activate one or the other by specifying a profile in our Nextflow run command line.
 
 ### 2.2. Run the workflow with a profile
 
@@ -407,11 +405,6 @@ executor >  local (7)
 
 Feel free to try it out with the Conda profile too. You just have to switch `-profile conda` to `-profile docker` in the command.
 
-!!!note
-
-    Here we've set up Docker and Conda to be mutually exclusive, because many compute environments support only one, and profiles are typically used to switch between using one or the other.
-    However, it is possible to set up a hybrid profile where more than one software packaging technology is enabled.
-
 ### Takeaway
 
 You know how to use profiles to select a preset configuration at runtime with minimal hassle.
@@ -422,7 +415,7 @@ Learn how to change the executor used by Nextflow to actually do the work.
 
 ---
 
-## 3. Executors
+## 3. Determine what executor(s) should be used to do the work
 
 Until now, we have been running our pipeline with the local executor.
 This runs each step on the same machine that Nextflow is running on.
@@ -496,7 +489,7 @@ Command executed:
 
 However, it did produce what we are looking for: the `.command.run` file that Nextflow tried to submit to Slurm via the `sbatch` command.
 
-Let's take a look inside. **TODO Figure out why mt output is not the nice output Adam had**
+Let's take a look inside. **TODO: UPDATE NEXTFLOW VERSION SO WE CAN HAVE THIS SWEET OUTPUT**
 
 ```bash title=".command.run" linenums="1"
 #!/bin/bash
@@ -529,9 +522,9 @@ Conveniently, you can also set up profiles to select which executor you want to 
 
 We just have two changes to make to the configuration file.
 
-First, remove the following lines, since we're replacing them with the profiles.
+First, remove the following lines, since we're replacing them with the profiles:
 
-```groovy title="nextflow.config" linenums="14"
+```groovy title="nextflow.config" linenums="12"
 process {
     executor = 'slurm'
 }
@@ -541,14 +534,12 @@ Now, add profiles for local and slurm executors:
 
 _Before:_
 
-```groovy title="nextflow.config" linenums="14"
+```groovy title="nextflow.config" linenums="12"
 profiles {
     docker {
         docker.enabled = true
-        conda.enabled = false
     }
     conda {
-        docker.enabled = false
         conda.enabled = true
     }
 }
@@ -556,14 +547,12 @@ profiles {
 
 _After:_
 
-```groovy title="nextflow.config" linenums="14"
+```groovy title="nextflow.config" linenums="12"
 profiles {
     docker {
         docker.enabled = true
-        conda.enabled = false
     }
     conda {
-        docker.enabled = false
         conda.enabled = true
     }
     local {
@@ -576,17 +565,19 @@ profiles {
 ```
 
 Although it may look like these are going to be mutually exclusive, you can actually combine multiple profiles.
+Let's try that now.
 
 ### 3.4. Run with a combination of profiles
 
-Let's run the pipeline using two profiles, `docker` and `local`:
+To use two profiles at the same time, simply give both to the `-profile` parameter, separated by a comma.
 
 ```bash
 nextflow run main.nf -profile docker,local
 ```
 
-We have returned to the original configuration of using Docker containers with local execution.
-However, now we can use profiles to switch to a different software packaging system (conda) or a different executor (slurm) with a single command-line option. Eg could do `-profile conda,slurm` if running on an institutional HPC.
+With that, we've returned to the original configuration of using Docker containers with local execution.
+However, we can now use profiles to switch to a different software packaging system (Conda) or a different executor (such as Slurm) with a single command-line option.
+For example, if we were back on our hypothetical HPC from earlier, we would switch to using `-profile conda,slurm` in our Nextflow command line.
 
 ### Takeaway
 
@@ -594,9 +585,11 @@ You now know how to change the executor and combine that with other environment 
 
 ### What's next?
 
-Learn how to change process resource allocations.
+Learn how to control the resources allocated for executing processes.
 
 ---
+
+TODO update this section
 
 ## 4. Allocate compute resources with process directives
 
@@ -700,6 +693,8 @@ You know how to allocate process resources, tweak based on utilization, and adap
 Configuring pipeline parameters (on the scientific side)
 
 ---
+
+TODO: fill in this section
 
 ## 5. Configure pipeline parameters
 
