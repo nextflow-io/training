@@ -371,10 +371,10 @@ _After:_
 docker.fixOwnership = true
 
 profiles {
-    docker {
+    docker_on {
         docker.enabled = true
     }
-    conda {
+    conda_on {
         conda.enabled = true
     }
 }
@@ -387,7 +387,7 @@ This makes it possible to activate one or the other by specifying a profile in o
 Let's try running the workflow with Conda.
 
 ```bash
-nextflow run main.nf -profile conda
+nextflow run main.nf -profile conda_on
 ```
 
 It works! And from our standpoint, it looks like it works exactly the same, even though on the backend the mechanics are a bit different.
@@ -462,7 +462,7 @@ Basically we are telling Nextflow to generate a Slurm submission script and subm
 Let's try running this; even though we now it won't execute (since we don't have Slurm set up in the Gitpod environment) we'll be able to see what the submission script looks like.
 
 ```bash
-nextflow run main.nf -profile conda
+nextflow run main.nf -profile conda_on
 ```
 
 As expected, this fails with a fairly unambiguous error:
@@ -536,10 +536,10 @@ _Before:_
 
 ```groovy title="nextflow.config" linenums="12"
 profiles {
-    docker {
+    docker_on {
         docker.enabled = true
     }
-    conda {
+    conda_on {
         conda.enabled = true
     }
 }
@@ -549,16 +549,16 @@ _After:_
 
 ```groovy title="nextflow.config" linenums="12"
 profiles {
-    docker {
+    docker_on {
         docker.enabled = true
     }
-    conda {
+    conda_on {
         conda.enabled = true
     }
-    local {
+    local_exec {
         process.executor = 'local'
     }
-    slurm {
+    slurm_exec {
         process.executor = 'slurm'
     }
 }
@@ -572,16 +572,89 @@ Let's try that now.
 To use two profiles at the same time, simply give both to the `-profile` parameter, separated by a comma.
 
 ```bash
-nextflow run main.nf -profile docker,local
+nextflow run main.nf -profile docker_on,local_exec
 ```
 
-With that, we've returned to the original configuration of using Docker containers with local execution.
-However, we can now use profiles to switch to a different software packaging system (Conda) or a different executor (such as Slurm) with a single command-line option.
+With that, we've returned to the original configuration of using Docker containers with local execution, not that you can tell from the console output:
+
+```console title="Output"
+ N E X T F L O W   ~  version 24.02.0-edge
+
+ ┃ Launching `main.nf` [irreverent_bassi] DSL2 - revision: 66cd7c255a
+
+executor >  local (7)
+[17/82bbc4] SAMTOOLS_INDEX (2)       [100%] 3 of 3 ✔
+[8e/93609c] GATK_HAPLOTYPECALLER (2) [100%] 3 of 3 ✔
+[e6/df6740] GATK_JOINTGENOTYPING     [100%] 1 of 1 ✔
+```
+
+The point is, we can now use profiles to switch to a different software packaging system (Conda) or a different executor (such as Slurm) with a single command-line option.
 For example, if we were back on our hypothetical HPC from earlier, we would switch to using `-profile conda,slurm` in our Nextflow command line.
+
+Feel free to test that on your own to satisfy yourself that it works as expected.
+
+Moving on, we're going to take this logic a step further, and set up dedicated profiles for groups of configuration elements that we usually want to activate together.
+
+### 3.5. Create profiles that combine several configuration elements
+
+Let's set up some dedicated profiles for the two case figures we've been envisioning: running locally with Docker, which we'll call `my_laptop`, and running on the HPC cluster with Conda, which we'll call `univ_hpc`.
+
+_Before:_
+
+```groovy title="nextflow.config" linenums="12"
+profiles {
+    docker_on {
+        docker.enabled = true
+    }
+    conda_on {
+        conda.enabled = true
+    }
+    local_exec {
+        process.executor = 'local'
+    }
+    slurm_exec {
+        process.executor = 'slurm'
+    }
+}
+```
+
+_After:_
+
+```groovy title="nextflow.config" linenums="12"
+profiles {
+    docker_on {
+        docker.enabled = true
+    }
+    conda_on {
+        conda.enabled = true
+    }
+    my_laptop {
+        process.executor = 'local'
+        docker.enabled = true
+    }
+    univ_hpc {
+        process.executor = 'slurm'
+        conda.enabled = true
+    }
+}
+```
+
+Now we have profiles for the two main case figures we've been considering.
+If in the future we find other elements of configuration that are always co-occurring with these, we can simply add them to the corresponding profile(s).
+
+Feel free to test these new profiles on your own using either `-profile my_laptop` or `-profile univ_hpc`.
+Just remember that the `univ_hpc` one won't work unless you run it in an environment that is set up appropriately to use Slurm.
+
+!!!note
+
+    You'll notice we've removed the two profiles that _only_ specified the executor, because in those cases we're always going to want to specify the software packaging technology too.
+
+    We're leaving in the Docker and Conda profiles because those ones come in handy by themselves, although there are also some dedicated command line flags for those, and it's a nice illustration of the fact that you can have the same directives set in multiple profiles.
+    Just keep in mind that if you combine profiles with conflicting settings for the same directives, you might be surprised by the results.
 
 ### Takeaway
 
-You now know how to change the executor and combine that with other environment settings.
+You now know how to change the executor and combine that with other environment settings using profiles.
 
 ### What's next?
 
