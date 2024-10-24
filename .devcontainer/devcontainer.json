@@ -2,7 +2,9 @@
     "name": "nfcore",
     "image": "nfcore/gitpod:latest",
     "remoteUser": "gitpod",
-
+    "features": {
+        "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+    },
     // Configure tool-specific properties.
     "customizations": {
         // Configure properties specific to VS Code.
