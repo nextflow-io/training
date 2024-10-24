@@ -254,9 +254,13 @@ else {
 O ramo `else` é opcional. Além disso, as chaves são opcionais quando a ramificação define apenas uma única instrução.
 
 ```groovy linenums="1"
-x = 1
+x = 11
 if (x > 10)
     println 'Olá'
+```
+
+```console title="Output"
+Olá
 ```
 
 !!! tip
