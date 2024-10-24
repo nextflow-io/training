@@ -264,6 +264,7 @@ Olá
 ```
 
 !!! tip
+
     `null`, strings vazias e coleções (mapas e listas) vazias são avaliadas como `false`.
 
     Portanto, uma declaração como:
