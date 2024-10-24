@@ -255,12 +255,15 @@ O ramo `else` é opcional. Além disso, as chaves são opcionais quando a ramifi
 
 ```groovy linenums="1"
 x = 1
-if (x > 10)
+if (x < 10)
     println 'Olá'
 ```
 
-!!! tip
+```console title="Output"
+Olá
+```
 
+!!! tip
     `null`, strings vazias e coleções (mapas e listas) vazias são avaliadas como `false`.
 
     Portanto, uma declaração como:
