@@ -3,7 +3,7 @@
     "image": "ghcr.io/nextflow-io/training:latest",
     "remoteUser": "gitpod",
     "features": {
-        "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+        "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
     },
     // Configure tool-specific properties.
     "customizations": {
