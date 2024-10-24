@@ -5,6 +5,9 @@
     "features": {
         "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
     },
+    "remoteEnv": {
+        "NXF_HOME": "/workspace/.nextflow"
+    },
     // Configure tool-specific properties.
     "customizations": {
         // Configure properties specific to VS Code.
