@@ -1,5 +1,5 @@
 ---
-title: Hello Seqera
+title: "Part 9: Hello Seqera"
 description: Get started with Seqera Platform
 ---
 
@@ -16,9 +16,17 @@ You'll learn how to use Seqera Platform within Nextflow CLI, the Seqera Platform
 
 You can use Seqera Platform via either the **CLI**, through the **online GUI** or through the **API**.
 
-## 1. Use Seqera Platform to capture and monitor Nextflow jobs launched from the CLI
+--8<-- "docs/hello_nextflow/seqera/01_run_with_cli.md"
 
---8<-- "./seqera/01_run_with_cli.md"
+--8<-- "docs/hello_nextflow/seqera/02_run_with_launchpad.md"
+
+--8<-- "docs/hello_nextflow/seqera/03_add_compute_environment.md"
+
+--8<-- "docs/hello_nextflow/seqera/04_setup_launchpad.md"
+
+!!! Warning WORK-IN-PROGRESS
+
+    Everything below this note is content that was copied from the original guide and needs to be moved or rewritten into the above subpages.
 
 ## Online GUI
 
@@ -27,27 +35,6 @@ To run using the GUI, there are three main steps:
 1. Create an account and login into Seqera Platform, available free of charge, at [cloud.seqera.io](https://cloud.seqera.io).
 2. Create and configure a new [compute environment](https://docs.seqera.io/platform/24.1/compute-envs/overview).
 3. Start [launching pipelines](https://docs.seqera.io/platform/24.1/launch/launchpad#launchpad).
-
-### Configuring your compute environment
-
-Seqera Platform uses the concept of **Compute Environments** to define the execution platform where a workflow will run.
-
-It supports the launching of workflows into a growing number of **cloud** and **on-premise** infrastructures.
-
-![Compute environments](img/compute_env_platforms.png)
-
-Each compute environment must be pre-configured to enable Seqera Platform to submit tasks. You can read more on how to set up each environment using the links below.
-
-!!! tip "The following guides describe how to configure each of these compute environments."
-
-    * [AWS Batch](https://docs.seqera.io/platform/24.1/compute-envs/aws-batch)
-    * [Azure Batch](https://docs.seqera.io/platform/24.1/compute-envs/azure-batch)
-    * [Google Batch](https://docs.seqera.io/platform/24.1/compute-envs/google-cloud-batch)
-    * [Google Life Sciences](https://docs.seqera.io/platform/24.1/compute-envs/google-cloud-lifesciences)
-    * [HPC (LSF, Slurm, Grid Engine, Altair PBS Pro)](https://docs.seqera.io/platform/24.1/compute-envs/hpc)
-    * [Amazon Kubernetes (EKS)](https://docs.seqera.io/platform/24.1/compute-envs/eks)
-    * [Google Kubernetes (GKE)](https://docs.seqera.io/platform/24.1/compute-envs/gke)
-    * [Hosted Kubernetes](https://docs.seqera.io/platform/24.1/compute-envs/k8s)
 
 ### Selecting a default compute environment
 

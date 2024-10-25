@@ -1,9 +1,12 @@
+## 1. Use Seqera Platform to capture and monitor Nextflow jobs launched from the CLI
+
 We'll start by using the Nextflow CLI to launch a pipeline and monitor it in Seqera Platform.
 Start by logging into the [Seqera Platform](https://cloud.seqera.io/).
 
 !!! info "Nextflow Tower"
-Seqera Platform was previously known as Nextflow Tower.
-You'll still see references to the previous name in environment variable and cli option names.
+
+    Seqera Platform was previously known as Nextflow Tower.
+    You'll still see references to the previous name in environment variable and cli option names.
 
 ### 1.1. Set up your Seqera Platform token by exporting it to your environment
 
@@ -11,15 +14,15 @@ Follow these steps to set up your token:
 
 1.  Create a new token by clicking on the **Settings** drop-down menu:
 
-    ![Create a token](img/usage_create_token.png)
+    ![Create a token](seqera/img/usage_create_token.png)
 
 2.  Name your token:
 
-    ![Name your token](img/usage_name_token.png)
+    ![Name your token](seqera/img/usage_name_token.png)
 
 3.  Save your token safely:
 
-    ![Save token](img/usage_token.png)
+    ![Save token](seqera/img/usage_token.png)
 
     !!! note
 
@@ -66,6 +69,94 @@ Hello world!
 Use ++ctrl+click++ or ++cmd+click++ on the link to open it in your browser.
 You'll see the Seqera Platform interface with the job finished and the logs captured.
 
-![Seqera Platform](img/run_with_tower.png)
+![Seqera Platform](seqera/img/run_with_tower.png)
 
 You will see and be able to monitor your **Nextflow jobs** in Seqera Platform.
+
+### 1.3. Set up Seqera Platform logging by default
+
+To set up Seqera Platform logging by default, we first want to store our token more securely as a [Nextflow secret](https://www.nextflow.io/docs/latest/secrets.html).
+
+```bash
+nextflow secrets set tower_access_token "eyxxxxxxxxxxxxxxxQ1ZTE="
+```
+
+You can set up Seqera Platform logging by default by adding the following line to your `nextflow.config` file.
+
+```groovy title="nextflow.config"
+tower {
+    enabled = true
+    endpoint = "https://api.cloud.seqera.io"
+    accessToken = secrets.tower_access_token
+}
+```
+
+Instead of putting this in the `nextflow.config` file of a specific project, you can also put it in the global file located at `$HOME/.nextflow/config`.
+
+```bash
+cat <<EOF >> $HOME/.nextflow/config
+tower {
+    enabled = true
+    endpoint = "https://api.cloud.seqera.io"
+    accessToken = secrets.tower_access_token
+}
+EOF
+```
+
+Run your Nextflow workflows as usual:
+
+```bash
+nextflow run nextflow-io/hello
+```
+
+You will see the following output:
+
+```console title="Output"
+ N E X T F L O W   ~  version 24.04.4
+
+Launching `https://github.com/nextflow-io/hello` [fabulous_euclid] DSL2 - revision: afff16a9b4 [master]
+
+Monitor the execution with Seqera Platform using this URL: https://cloud.seqera.io/user/kenbrewer/watch/KYjRktIlOuxrh
+executor >  local (4)
+[71/eaa915] process > sayHello (3) [100%] 4 of 4 ✔
+Ciao world!
+
+Bonjour world!
+
+Hola world!
+
+Hello world!
+```
+
+Note that we are logging to Seqera Platform even though we did not use the `-with-tower` command!
+
+### 1.4. Use Seqera Platform to explore the resolved configuration of a Nextflow pipeline
+
+Click on the link provided in the output to open the Seqera Platform for your run, then click on the `Configuration` tab.
+If you ran your pipeline from the `hello_nextflow` directory, you'll see something like this:
+
+![Seqera Platform Configuration](seqera/img/resolved_configuration.png)
+
+Notice that configuration for our pipeline run is being run pulled from three separate files:
+
+-   `/home/gitpod/.nextflow/config` - This is the global configuration file we just added.
+-   `/home/gitpod/.nextflow/assets/nextflow-io/hello/nextflow.config` - This is the `nextflow.config` file from the `nextflow-io/hello` repository.
+-   `/workspace/gitpod/nf-training/hello-nextflow/nextflow.config` - This is the `nextflow.config` file from our current working directory.
+
+Nextflow resolves these configurations at runtime with a [specific order of precedence](https://www.nextflow.io/docs/latest/config.html#configuration-file).
+The general rule, however, is that more specific configurations override less specific ones, and config/params specified on the CLI will override defaults in the config files.
+
+Helpfully, Seqera Platform shows us the final output of this configuration resolution process which can be very useful for debugging!
+
+### Takeaway
+
+You have learned how to:
+
+-   Set up your Seqera Platform token by exporting it to your environment.
+-   Run Nextflow CLI with Seqera Platform visualizing and capturing logs.
+-   Set up Seqera Platform logging by default.
+-   Use Seqera Platform to explore the resolved configuration of a Nextflow pipeline.
+
+### What's next?
+
+Learn how to launch Nextflow pipelines from Seqera Platform using the Launchpad feature.
