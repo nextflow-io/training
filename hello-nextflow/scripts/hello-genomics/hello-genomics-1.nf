@@ -14,7 +14,7 @@ process SAMTOOLS_INDEX {
 
     container 'community.wave.seqera.io/library/samtools:1.20--b5dfbd93de237464'
 
-    publishDir 'results', mode: 'copy'
+    publishDir 'results_genomics', mode: 'symlink'
 
     input:
         path input_bam
@@ -27,7 +27,6 @@ process SAMTOOLS_INDEX {
     """
 }
 
-
 workflow {
 
     // Create input channel (single file via CLI parameter)
@@ -35,5 +34,4 @@ workflow {
 
     // Create index file for input BAM file
     SAMTOOLS_INDEX(reads_ch)
-    
 }

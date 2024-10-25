@@ -4,7 +4,7 @@
  * Pipeline parameters
  */
 
-// Primary input (list of input files, one per line)
+// Primary input (file of input files, one per line)
 params.reads_bam = "${projectDir}/data/sample_bams.txt"
 
 // Accessory files
@@ -23,7 +23,7 @@ process SAMTOOLS_INDEX {
 
     container 'community.wave.seqera.io/library/samtools:1.20--b5dfbd93de237464'
 
-    publishDir 'results', mode: 'copy'
+    publishDir 'results_genomics', mode: 'symlink'
 
     input:
         path input_bam
@@ -37,13 +37,13 @@ process SAMTOOLS_INDEX {
 }
 
 /*
- * Call variants with GATK HaplotypeCaller in GVCF mode
+ * Call variants with GATK HaplotypeCaller
  */
 process GATK_HAPLOTYPECALLER {
 
     container "community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"
-    
-    publishDir 'results', mode: 'copy'
+
+    publishDir 'results_genomics', mode: 'symlink'
 
     input:
         tuple path(input_bam), path(input_bam_index)
@@ -67,49 +67,49 @@ process GATK_HAPLOTYPECALLER {
 }
 
 /*
- * Consolidate GVCFs and apply joint genotyping analysis
+ * Combine GVCFs into GenomicsDB datastore and run joint genotyping to produce cohort-level calls
  */
 process GATK_JOINTGENOTYPING {
 
     container "community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"
 
-    publishDir 'results', mode: 'copy'
-    
+    publishDir 'results_genomics', mode: 'symlink'
+
     input:
-        path vcfs
-        path idxs
+        path all_gvcfs
+        path all_idxs
+        path interval_list
         val cohort_name
         path ref_fasta
         path ref_index
         path ref_dict
-        path interval_list
 
     output:
         path "${cohort_name}.joint.vcf"
         path "${cohort_name}.joint.vcf.idx"
 
     script:
-    def vcfs_line = vcfs.collect { "-V ${it}" }.join(' ')
+        def gvcfs_line = all_gvcfs.collect { gvcf -> "-V ${gvcf}" }.join(' ')
     """
     gatk GenomicsDBImport \
-        ${vcfs_line} \
-        --genomicsdb-workspace-path ${cohort_name}_gdb \
-        -L ${interval_list}
+        ${gvcfs_line} \
+        -L ${interval_list} \
+        --genomicsdb-workspace-path ${cohort_name}_gdb
 
     gatk GenotypeGVCFs \
         -R ${ref_fasta} \
         -V gendb://${cohort_name}_gdb \
-        -O ${cohort_name}.joint.vcf \
-        -L ${interval_list}
+        -L ${interval_list} \
+        -O ${cohort_name}.joint.vcf
     """
 }
 
 workflow {
 
-    // Create input channel from list of input files in plain text
+    // Create input channel from a text file listing input file paths
     reads_ch = Channel.fromPath(params.reads_bam).splitText()
 
-    // Create channels for the accessory files (reference and intervals)
+    // Load the file paths for the accessory files (reference and intervals)
     ref_file        = file(params.reference)
     ref_index_file  = file(params.reference_index)
     ref_dict_file   = file(params.reference_dict)
@@ -117,7 +117,7 @@ workflow {
 
     // Create index file for input BAM file
     SAMTOOLS_INDEX(reads_ch)
-
+    
     // Call variants from the indexed BAM file
     GATK_HAPLOTYPECALLER(
         SAMTOOLS_INDEX.out,
@@ -128,17 +128,17 @@ workflow {
     )
 
     // Collect variant calling outputs across samples
-    all_vcfs = GATK_HAPLOTYPECALLER.out[0].collect()
-    all_tbis = GATK_HAPLOTYPECALLER.out[1].collect()
+    all_gvcfs_ch = GATK_HAPLOTYPECALLER.out[0].collect()
+    all_idxs_ch = GATK_HAPLOTYPECALLER.out[1].collect()
 
-    // Consolidate GVCFs and apply joint genotyping analysis
+    // Combine GVCFs into a GenomicsDB data store and apply joint genotyping
     GATK_JOINTGENOTYPING(
-        all_vcfs,
-        all_tbis,
+        all_gvcfs_ch,
+        all_idxs_ch,
+        intervals_file,
         params.cohort_name,
         ref_file,
         ref_index_file,
-        ref_dict_file,
-        intervals_file
+        ref_dict_file
     )
 }
