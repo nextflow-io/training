@@ -1,99 +1,24 @@
+---
+title: Hello Seqera
+description: Get started with Seqera Platform
+---
+
 # Part 9: Hello Seqera
 
----
-
-title: Seqera Platform
-description: Get started with Seqera Platform
-
----
-
-# Get started with Seqera Platform
-
-Seqera Platform, previously known as Nextflow Tower, is the centralized command post for data management and workflows. It brings monitoring, logging and observability to distributed workflows and simplifies the deployment of workflows on any cloud, cluster or laptop. In Seqera Platform terminology, a workflow is what we've been working on so far, and pipelines are pre-configured workflows that can be used by all users in a workspace. It is composed of a workflow repository, launch parameters, and a compute environment. We'll stick to these definitions in this section.
-
-Seqera core features include:
-
--   The launching of pre-configured pipelines with ease.
--   Programmatic integration to meet the needs of an organization.
--   Publishing pipelines to shared workspaces.
--   Management of the infrastructure required to run data analysis at scale.
+So far we've been running Nextflow workflows on our local machine using the command line interface.
+In this section, we'll introduce you to Seqera Platform, a powerful cloud-based platform for running, monitoring, and sharing Nextflow workflows.
 
 !!! tip
 
     [Sign up](https://cloud.seqera.io/) to try Seqera for free or request a [demo](https://seqera.io/demo/) for deployments in your own on-premise or cloud environment.
 
+You'll learn how to use Seqera Platform within Nextflow CLI, the Seqera Platform GUI, and the API.
+
 You can use Seqera Platform via either the **CLI**, through the **online GUI** or through the **API**.
 
-## CLI
+## 1. Use Seqera Platform to capture and monitor Nextflow jobs launched from the CLI
 
-You will need to set up your environment to use Seqera Platform. This is a one-time setup.
-
-Create an account and login into Seqera Platform.
-
-**1. Create a new token**
-
-You can access your tokens from the **Settings** drop-down menu:
-
-![Create a token](img/usage_create_token.png)
-
-**2. Name your token**
-
-![Name your token](img/usage_name_token.png)
-
-**3. Save your token safely**
-
-Copy and keep your new token in a safe place.
-
-![Save token](img/usage_token.png)
-
-**4. Export your token**
-
-Once your token has been created, open a terminal and type:
-
-```bash
-export TOWER_ACCESS_TOKEN=eyxxxxxxxxxxxxxxxQ1ZTE=
-```
-
-Where `eyxxxxxxxxxxxxxxxQ1ZTE=` is the token you have just created.
-
-!!! note
-
-    Check your `nextflow -version`. Bearer tokens require Nextflow version 20.10.0 or later and can be set with the second command shown above. You can change the version if necessary.
-
-To submit a pipeline to a [Workspace](https://docs.seqera.io/platform/24.1/getting-started/workspace-setup) using the Nextflow command-line tool, add the workspace ID to your environment. For example:
-
-```bash
-export TOWER_WORKSPACE_ID=000000000000000
-```
-
-The workspace ID can be found on the organization’s Workspaces overview page.
-
-**5. Run Nextflow with Seqera Platform**
-
-Run your Nextflow workflows as usual with the addition of the `-with-tower` command:
-
-```bash
-nextflow run hello.nf -with-tower
-```
-
-You will see and be able to monitor your **Nextflow jobs** in Seqera Platform.
-
-To configure and execute Nextflow jobs in **Cloud environments**, visit the [Compute environments section](https://docs.seqera.io/platform/24.1/compute-envs/overview).
-
-!!! exercise
-
-    Run the RNA-Seq `script7.nf` using the `-with-tower` flag, after correctly completing the token settings outlined above.
-
-    ??? tip
-
-        Go to <https://cloud.seqera.io/>, login, then click the run tab, and select the run that you just submitted. If you can’t find it, double check your token was entered correctly.
-
-!!! cboard-list-2 "Summary"
-
-    In this step you have learned:
-
-    1. How to create and add your token and workspace.
-    2. How to launch a pipeline with Seqera Platform.
+--8<-- "./seqera/01_run_with_cli.md"
 
 ## Online GUI
 
