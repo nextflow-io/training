@@ -20,7 +20,7 @@ projectC/
 └── nextflow.config
 ```
 
-The `main.nf` file is a copy of the workflow produced by completing Part 4 of this training course.
+The `main.nf` file is similar to the workflow produced by completing Part 4 of this training course.
 
 The `nextflow.config` file is a copy of the original `nextflow.config` file from the `hello-nextflow` directory (which we've ben using so far). It is the default configuration file that is expected by Nextflow.
 
