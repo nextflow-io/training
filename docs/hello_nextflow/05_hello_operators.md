@@ -411,7 +411,6 @@ Let's write a new process to define how that's going to work, based on the comma
 process GATK_GENOMICSDB {
 
     container "community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"
-
     publishDir 'results_genomics', mode: 'copy'
 
     input:
@@ -736,8 +735,8 @@ _Before:_
 
 ```groovy title="hello-operators.nf" linenums="78"
 input:
-    path all_gvcfs_ch
-    path all_idxs_ch
+    path all_gvcfs
+    path all_idxs
     path interval_list
     val cohort_name
 ```
@@ -746,8 +745,8 @@ _After:_
 
 ```groovy title="hello-operators.nf" linenums="78"
 input:
-    path all_gvcfs_ch
-    path all_idxs_ch
+    path all_gvcfs
+    path all_idxs
     path interval_list
     val cohort_name
     path ref_fasta
