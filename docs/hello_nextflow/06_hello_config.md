@@ -447,7 +447,7 @@ Let's look at what it would take to using a Slurm scheduler, assuming we had a c
 
 Add the following lines to the `nextflow.config` file:
 
-```groovy title="nextflow.config" linenums="14"
+```groovy title="nextflow.config" linenums="12"
 process {
     executor = 'slurm'
 }
@@ -520,21 +520,11 @@ Conveniently, you can also set up profiles to select which executor you want to 
 
 ### 3.3. Set up profiles for executors too
 
-We just have two changes to make to the configuration file.
-
-First, remove the following lines, since we're replacing them with the profiles:
-
-```groovy title="nextflow.config" linenums="12"
-process {
-    executor = 'slurm'
-}
-```
-
-Now, add profiles for local and slurm executors:
+Let's replace the process block we had added with the executor selection profiles.
 
 _Before:_
 
-```groovy title="nextflow.config" linenums="12"
+```groovy title="nextflow.config" linenums="3"
 profiles {
     docker_on {
         docker.enabled = true
@@ -543,11 +533,15 @@ profiles {
         conda.enabled = true
     }
 }
+
+process {
+    executor = 'slurm'
+}
 ```
 
 _After:_
 
-```groovy title="nextflow.config" linenums="12"
+```groovy title="nextflow.config" linenums="3"
 profiles {
     docker_on {
         docker.enabled = true
@@ -601,7 +595,7 @@ Let's set up some dedicated profiles for the two case figures we've been envisio
 
 _Before:_
 
-```groovy title="nextflow.config" linenums="12"
+```groovy title="nextflow.config" linenums="3"
 profiles {
     docker_on {
         docker.enabled = true
@@ -620,7 +614,7 @@ profiles {
 
 _After:_
 
-```groovy title="nextflow.config" linenums="12"
+```groovy title="nextflow.config" linenums="3"
 profiles {
     docker_on {
         docker.enabled = true
@@ -662,34 +656,37 @@ Learn how to control the resources allocated for executing processes.
 
 ---
 
-TODO update this section
-
 ## 4. Allocate compute resources with process directives
 
-In a previous training module, we used process directives to modify the behavior of a process when we added the `publishDir` directive to export files from the working directory.
-Let's look into directives in more detail.
+We've covered how to control what compute environment Nextflow is going to use to run the worfklow, so now the next logical question is, how do we control the resources (CPU, memory etc) that will be allocated?
 
-### 4.1. Set default process resources
+The answer may not surprise you; it's process directives again.
+
+### 4.1. Increase default process resource allocations
 
 By default, Nextflow will use a single CPU and 2GB of memory for each process.
-We can modify this behavior by setting the `cpu` and `memory` directives in the `process` block.
-Add the following to the end of your `nextflow.config` file:
+Let's say we decide to double that.
 
-```groovy title="nextflow.config" linenums="11"
+We can modify this behavior by setting the `cpu` and `memory` directives in the `process` block. Add the following to the end of your `nextflow.config` file:
+
+```groovy title="nextflow.config" linenums="20"
 process {
-    cpus = 4
-    memory = 2.GB
+    // defaults for all processes
+    cpus = 2
+    memory = 4.GB
 }
 ```
 
-Run the pipeline again with the modified configuration:
+### 4.2. Run the workflow with the increased defaults
+
+Let's try that out, bearing in mind that we need to keep `-profile my_laptop` in the command going forward.
 
 ```bash
-nextflow run seqeralabs/nf-hello-gatk -r main -profile docker
+nextflow run main.nf -profile my_laptop
 ```
 
-You may not notice any difference in terms of how quickly this runs, especially if you have a powerful machine.
-But if you have a lightweight machine and allocate high numbers, you might see process calls getting queued behind each other.
+You may not notice any real difference in how quickly this runs, since this is such a small workload.
+But if you have a machine with few CPUs and you allocate a high number per process, you might see process calls getting queued behind each other.
 This is because Nextflow will ensure we aren't using more CPUs than are available.
 
 !!! tip
@@ -697,73 +694,145 @@ This is because Nextflow will ensure we aren't using more CPUs than are availabl
     You can check the number of CPUs allocated to a given process by looking at the `.command.run` log in its work directory.
     There will be a function called `nxf_launch()` that includes the command `docker run -i --cpu-shares 1024`, where `--cpu-shares` is the number of CPUs given to the process multiplied by 1024.
 
-TODO transition: how do you know what to give/ when to tweak? first step is finding what the tools are actually using. good news: can generate a report of resource utilization
+You're probably wondering if you can set resource allocations per individual process, and the answer is of course yes, yes you can!
+We'll show you how to do that in a moment.
 
-### 4.2. Generate a report on the pipeline's resource utilization
+But first, let's talk about how you can find out how much CPU and memory your processes are likely to need.
+The classic approach is to do resource profiling, meaning you run the workflow with some default allocations, record how much each process used, and from there, estimate how to adjust the base allocations.
 
-TODO run this
+The truly excellent news on this front is that Nextflow includes built-in tools for doing this, and will happily generate a report for you on request.
+Let's try that out.
 
-nextflow run hello-config.nf -with-report report-config-1.html
+### 4.3. Run the workflow to generate a resource utilization report
 
-TODO: output is an html file; open in browser
+To have Nextflow generate the report automatically, simply add `-with-report <filename>.html` to your command line.
 
-TODO: screenshot?
+```bash
+nextflow run main.nf -profile my_laptop -with-report report-config-1.html
+```
 
-TODO: based on findings, might want to tweak resources for specific process
+The report is an html file, which you can download and open in your browser.
+Take a few minutes to look through the report and see if you can identify some opportunities for adjusting resources. There is some [documentation](https://www.nextflow.io/docs/latest/reports.html) describing all the available features.
+
+**TODO: insert images**
+
+One observation is that the `GATK_JOINTGENOTYPING` seems to be very hungry for CPU, which makes sense since it performs a lot of complex calculations.
+So we could try boosting that and see if it cuts down on runtime.
+
+However, we seem to have overshot the mark with the memory allocations; all processes are only using a fraction of what we're giving them.
+We should dial that back down and save some resources.
 
 ### 4.3. Adjust resource allocations for a specific process
 
-We can allocate the resources for a specific process using the `withName` directive.
-Add the following to the end of your `nextflow.config` file:
+We can specify resource allocations for a given process using the `withName` directive.
+The syntax looks like this when it's by itself in a process block:
 
-```groovy title="nextflow.config" linenums="11"
+```groovy title="Syntax"
 process {
-    withName: 'GATK_HAPLOTYPECALLER' {
+    withName: 'GATK_JOINTGENOTYPING' {
         cpus = 8
-        memory = 4.GB
     }
 }
 ```
 
-TODO This should do X
+Let's add that to the existing process block in the `nextflow.config` file.
+
+```groovy title="nextflow.config" linenums="11"
+process {
+    // defaults for all processes
+    cpus = 2
+    memory = 2.GB
+    // allocations for a specific process
+    withName: 'GATK_JOINTGENOTYPING' {
+        cpus = 8
+    }
+}
+```
+
+With that specified, the default settings will apply to all processes **except** the `GATK_JOINTGENOTYPING` process, which is a special snowflake that gets a lot more CPU.
+Hopefully that should have an effect.
 
 ### 4.4. Run again with the modified configuration
 
-TODO Run the pipeline again with the modified configuration and get report
+Let's run the workflow again with the modified configuration and with the reporting flag turned on, but notice we're giving the report a different name so we can differentiate them.
 
 ```bash
-nextflow
+nextflow run main.nf -profile my_laptop -with-report report-config-2.html
 ```
 
-Now, the default settings apply to everything but the GATK HaplotypeCaller process gets special treatment.
+Once again, you probably won't notice a substantial difference in runtime, because this is such a small workload and the tools spend more time in ancillary tasks than in performing the 'real' work.
 
-TODO: open the report and look at the differences.
+However, this second report shows that our resource utilization is more balanced now, and the runtime of the `GATK_JOINTGENOTYPING` process has been cut in half.
+We probably didn't need to go all the way to 8 CPUs, but since there's only one call to that process, it's not a huge drain.
 
-This is useful when your processes have different resource requirements; you can right-size your resources for each process.
+**TODO: screenshots?**
 
-### 4.5. Add a custom conf file to a profile
+As you can see, this approach is useful when your processes have different resource requirements. It empowers you to can right-size the resource allocations you set up for each process based on actual data, not guesswork.
 
-TODO: If e.g. your cluster has more generous resources, can set up a custom conf file specifying higher process allocations. Make a new profile with include statement
+!!!note
 
-TODO code (+ make a conf file)
+    This is just a tiny taster of what you can do to optimize your use of resources.
+    Nextflow itself has some really neat [dynamic retry logic](https://training.nextflow.io/basic_training/debugging/#dynamic-resources-allocation) built in to retry jobs that fail due to resource limitations.
+    Additionally, the Seqera Platform offers AI-driven tooling for optimizing your resource allocations automatically as well.
 
-### 4.6. Run with profile conda,slurm,beefy
+    We'll cover both of those approaches in an upcoming part of this training course.
 
-TODO: scenario is you have access to heavyweight nodes on HPC
+That being said, there may be some constraints on what you can (or must) allocate depending on what computing executor and compute infrastructure you're using. For example, your cluster may require you to stay within certain limits that don't apply when you're running elsewhere.
 
-TODO run with profile conda,slurm,beefy
+### 4.5. Add resource limits to an HPC profile
 
-TODO: check inside the `.command.run` file created in the work directory, look at values assigned
+You can use the `resourceLimits` directive to set the relevant limitations. The syntax looks like this when it's by itself in a process block:
 
-TODO: wrap up; this is how we can have alternate confs to override settings in various contexts
+```groovy title="Syntax"
+process {
+    resourceLimits = [
+        memory: 750.GB,
+        cpus: 200,
+        time: 30.d
+    ]
+}
+```
+
+Let's add this to the `univ_hpc` profile we set up earlier.
+
+_Before:_
+
+```groovy title="nextflow.config"
+    univ_hpc {
+        process.executor = 'slurm'
+        conda.enabled = true
+    }
+```
+
+_After:_
+
+```groovy title="nextflow.config"
+    univ_hpc {
+        process.executor = 'slurm'
+        conda.enabled = true
+        process.resourceLimits = [
+            memory: 750.GB,
+            cpus: 200,
+            time: 30.d
+        ]
+    }
+```
+
+We can't test this since we don't have a live connection to Slurm in the Gitpod environment, but you can look up the `sbatch` command in the `.command.run` script file if you'd like to see how these directives are translated into job parameters for the executor.
+
+!!!note
+
+    The nf-core project has compiled a [collection of configuration files](https://nf-co.re/configs/) shared by various institutions around the world, covering a wide range of HPC and cloud executors.
+
+    Those shared configs are valuable both for people who work there and can therefore just utilize their institution's configuration out of the box, and for people who are looking to develop a configuration for their own infrastructure.
 
 ### Takeaway
 
-You know how to allocate process resources, tweak based on utilization, and adapt based on compute environment.
+You know how to allocate process resources, tweak those allocations based on the utilization report, and adapt based on the compute environment.
 
 ### What's next?
 
-Configuring pipeline parameters (on the scientific side)
+Configuring the parameters destined for the tools and operations wrapped within processes.
 
 ---
 
