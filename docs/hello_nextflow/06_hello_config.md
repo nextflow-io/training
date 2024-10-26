@@ -55,7 +55,7 @@ projectC/
 -   **`demo-params.json`** is a parameter file intended for supplying parameter values to a workflow.
     We will use it in section 5 of this tutorial.
 
--   **intermediates/** is a directory containing the intermediate forms of the workflow and configuration files for each section of this tutorial.
+-   **`intermediates/`** is a directory containing the intermediate forms of the workflow and configuration files for each section of this tutorial.
 
 The one thing that's missing is a way to point to the original data without making a copy of it or updating the file paths wherever they're specified.
 The simplest solution is to link to the data location.
@@ -72,7 +72,7 @@ This creates a symbolic link called `data` pointing to the data directory, which
 
 ```console title="Directory contents"
 projectC/
-├── data -> ../
+├── data -> ../data
 ├── demo-params.json
 ├── intermediates
 ├── main.nf
