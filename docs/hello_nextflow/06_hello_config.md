@@ -13,40 +13,79 @@ However, we're now moving into the phase of this training series that is more fo
 As part of that, we're going to adopt a formal project structure.
 We're going to work inside a dedicated project directory called `projectC` (C for configuration), and we've renamed the workflow file `main.nf` to match the recommended Nextflow convention.
 
+### 0.1. Move into the `projectC` directory
+
+We want to launch the workflow from inside the `projectC` directory, so let's move into it now.
+
+```bash
+cd projectC
+```
+
+You'll see the following contents:
+
 ```console title="Directory contents"
 projectC/
-├── data -> ../data
+├── demo-params.json
+├── intermediates
 ├── main.nf
 └── nextflow.config
 ```
 
-The `main.nf` file is similar to the workflow produced by completing Part 4 of this training course.
+-   **`main.nf`** is a workflow based on `hello-operators.nf`, the workflow produced by completing Part 4 of this training course;
 
-The `nextflow.config` file is a copy of the original `nextflow.config` file from the `hello-nextflow` directory (which we've ben using so far). It is the default configuration file that is expected by Nextflow.
+-   **`nextflow.config`** is a copy of the original `nextflow.config` file from the `hello-nextflow` directory, one level up (where we've been working so far).
+    It is the default configuration file that is expected by Nextflow and contains the following lines:
 
-```console title="nextflow.config" linenums="1"
-docker.fixOwnership = true
-docker.enabled = true
-```
+    ```console title="nextflow.config" linenums="1"
+    docker.fixOwnership = true
+    docker.enabled = true
+    ```
 
-The `docker.fixOwnership = true` line is not really interesting.
-It's a workaround for an issue that sometimes occur with containerized tools that set the wrong permissions on the files they write (which is the case with GATK GenomicsDBImport in our workflow).
+    The `docker.fixOwnership = true` line is not really interesting.
+    It's a workaround for an issue that sometimes occur with containerized tools that set the wrong permissions on the files they write (which is the case with GATK GenomicsDBImport in our workflow).
 
-The `docker.enabled = true` line is what we care about here.
-It specifies that Nextflow should use Docker containers to execute process calls.
-We're going to be playing with that shortly.
+    The `docker.enabled = true` line is what we care about here.
+    It specifies that Nextflow should use Docker containers to execute process calls.
+    We're going to be playing with that shortly.
 
 !!!note
 
     Anything you put into the `nextflow.config` can be overriden at runtime by providing the relevant directives or parameters and values on the command line, or by importing another configuration file, according to the order of precedence described [here](https://www.nextflow.io/docs/latest/config.html).
 
-We've also created a symbolic link called `data` pointing to the data directory, to avoid having to change anything to how the file paths are set up.
-Later we'll cover a better way of handling this, but this will do for now.
+-   **`demo-params.json`** is a parameter file intended for supplying parameter values to a workflow.
+    We will use it in section 5 of this tutorial.
 
-You can test that it runs properly:
+-   **intermediates/** is a directory containing the intermediate forms of the workflow and configuration files for each section of this tutorial.
+
+The one thing that's missing is a way to point to the original data without making a copy of it or updating the file paths wherever they're specified.
+The simplest solution is to link to the data location.
+
+### 0.1. Create a symbolic link to the data
+
+Run this command from inside the `projectC` directory:
 
 ```bash
-cd projectC
+ln -s ../data data
+```
+
+This creates a symbolic link called `data` pointing to the data directory, which allows us to avoid having to change anything to how the file paths are set up.
+
+```console title="Directory contents"
+projectC/
+├── data -> ../
+├── demo-params.json
+├── intermediates
+├── main.nf
+└── nextflow.config
+```
+
+Later we'll cover a better way of handling this, but this will do for now.
+
+### 0.2. Verify that the initial workflow runs properly
+
+Now that everything is in place, we should be able to run the workflow successfully.
+
+```bash
 nextflow run main.nf
 ```
 
@@ -716,7 +755,9 @@ nextflow run main.nf -profile my_laptop -with-report report-config-1.html
 ```
 
 The report is an html file, which you can download and open in your browser.
-Take a few minutes to look through the report and see if you can identify some opportunities for adjusting resources. There is some [documentation](https://www.nextflow.io/docs/latest/reports.html) describing all the available features.
+Take a few minutes to look through the report and see if you can identify some opportunities for adjusting resources.
+Make sure to click on the tabs that show the utilization results as a percentage of what was allocated.
+There is some [documentation](https://www.nextflow.io/docs/latest/reports.html) describing all the available features.
 
 **TODO: insert images**
 
@@ -766,7 +807,7 @@ nextflow run main.nf -profile my_laptop -with-report report-config-2.html
 
 Once again, you probably won't notice a substantial difference in runtime, because this is such a small workload and the tools spend more time in ancillary tasks than in performing the 'real' work.
 
-However, this second report shows that our resource utilization is more balanced now, and the runtime of the `GATK_JOINTGENOTYPING` process has been cut in half.
+However, the second report shows that our resource utilization is more balanced now, and the runtime of the `GATK_JOINTGENOTYPING` process has been cut in half.
 We probably didn't need to go all the way to 8 CPUs, but since there's only one call to that process, it's not a huge drain.
 
 **TODO: screenshots?**
@@ -822,7 +863,7 @@ _After:_
     }
 ```
 
-We can't test this since we don't have a live connection to Slurm in the Gitpod environment, but you can look up the `sbatch` command in the `.command.run` script file if you'd like to see how these directives are translated into job parameters for the executor.
+We can't test this since we don't have a live connection to Slurm in the Gitpod environment, but you can run it and look up the `sbatch` command in the `.command.run` script file if you'd like to see how these directives are translated into job parameters for the executor.
 
 !!!note
 
@@ -832,7 +873,7 @@ We can't test this since we don't have a live connection to Slurm in the Gitpod 
 
 ### Takeaway
 
-You know how to allocate process resources, tweak those allocations based on the utilization report, and adapt based on the compute environment.
+You know how to allocate process resources, tweak those allocations based on the utilization report, and use a profile to adapt the allocations to the compute environment.
 
 ### What's next?
 
@@ -1014,7 +1055,7 @@ params {
 Now, if you run the same command again, it will still work.
 So yes, we're definitely able to pull those parameter values from the parameter file.
 
-This is great because, with the parameter file in hand, we'll now be able to provide parameter values at runtime without having to type massive command lines **and** without modifying the workflow and the default configuration.
+This is great because, with the parameter file in hand, we'll now be able to provide parameter values at runtime without having to type massive command lines **and** without modifying the workflow nor the default configuration.
 
 That being said, it was nice to be able to demo the workflow without having to keep track of filenames and such. Let's see if we can use a profile to replicate that behavior.
 
@@ -1110,7 +1151,7 @@ executor >  local (7)
 [8a/2f498f] GATK_JOINTGENOTYPING     [100%] 1 of 1 ✔
 ```
 
-Imagine what we can do with this tooling in place...
+Imagine what we can do with this tooling in place.
 For example, we could also add profiles with popular sets of reference files to save people the trouble of providing their own.
 
 ### Takeaway
