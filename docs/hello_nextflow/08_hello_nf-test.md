@@ -240,7 +240,7 @@ _After:_
 ```groovy title="modules/local/samtools/index/tests/main.nf.test" linenums="14"
 process {
     """
-    input[0] = [ [id: 'NA12882' ], file("${projectDir}/data/bam/reads_son.bam") ]
+    input[0] = file("${projectDir}/data/bam/reads_son.bam")
     """
 }
 ```
@@ -290,8 +290,17 @@ params {
 
 ### 1.6. Run the test and examine the output
 
+Finally, it's time to run our test! Let's break down the syntax.
+
+-   The basic command is `nf-test test`.
+-   To that, we add the profiles we've been using since Part 5 (Hello Config) with `--profile my_laptop,demo`.
+    Note the TWO dashes, `--`, because here it's a parameter of the `nf-test test` command, not of Nextflow itself.
+-   Then the test file that we want to run.
+
+All put together, it looks like this:
+
 ```bash
-nf-test test modules/local/samtools/index/tests/main.nf.test
+nf-test test --profile my_laptop,demo modules/local/samtools/index/tests/main.nf.test
 ```
 
 This should produce the following output:
@@ -304,7 +313,7 @@ https://www.nf-test.com
 
 Test Process SAMTOOLS_INDEX
 
-  Test [bc664c47] 'reads_son [bam]' PASSED (10.06s)
+  Test [f2eed6af] 'reads_son [bam]' PASSED (9.01s)
   Snapshots:
     1 created [reads_son [bam]]
 
@@ -312,7 +321,7 @@ Test Process SAMTOOLS_INDEX
 Snapshot Summary:
   1 created
 
-SUCCESS: Executed 1 tests in 10.068s
+SUCCESS: Executed 1 tests in 9.062s
 ```
 
 The test verified the first assertion, that the process should complete successfully.
@@ -323,11 +332,12 @@ If we re-run the test, the program will check that the new output matches the ou
 
 !!!warning
 
-    That does mean we have to be sure that the output we record in the original run is correct.
+    That means we have to be sure that the output we record in the original run is correct!
 
 If, in the course of future development, something in the code changes that causes the output to be different, the test will fail and we will have to determine whether the change is expected or not.
-If it turns out that something in the code broke, we will have to fix it, with the expectation that the fixed code will pass the test.
-If it is an expected change (e.g., the tool has been improved and the results are better) then we will need to update the snapshot to accept the new output as the reference to match, using the parameter `--update-snapshot` when we run the test command.
+
+-   If it turns out that something in the code broke, we will have to fix it, with the expectation that the fixed code will pass the test.
+-   If it is an expected change (e.g., the tool has been improved and the results are better) then we will need to update the snapshot to accept the new output as the reference to match, using the parameter `--update-snapshot` when we run the test command.
 
 ### 1.7. Add more tests to `SAMTOOLS_INDEX`
 
