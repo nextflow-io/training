@@ -1,6 +1,8 @@
 {
     "name": "nfcore",
-    "image": "ghcr.io/nextflow-io/training:latest",
+    "build": {
+        "dockerfile": "../.github/gitpod.Dockerfile"
+    },
     "remoteUser": "gitpod",
     "features": {
         "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
@@ -23,7 +25,7 @@
                 "ms-python.vscode-pylance",
                 "nf-core.nf-core-extensionpack",
                 "nextflow.nextflow",
-                "codezombiech.gitignore",
+                "codezombiech.gitignore"
             ]
         }
     },

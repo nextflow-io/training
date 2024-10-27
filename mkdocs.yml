@@ -155,6 +155,8 @@ markdown_extensions:
           preserve_tabs: true
     - pymdownx.tabbed:
           alternate_style: true
+    - pymdownx.tasklist:
+          custom_checkbox: true
     - tables
     - toc:
           title: On this page
