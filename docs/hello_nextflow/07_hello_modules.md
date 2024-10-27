@@ -59,59 +59,108 @@ This creates a symbolic link called `data` pointing to the data directory one le
 
 ### 0.3 Run the workflow using the appropriate profiles
 
-Now that everything is in place, we should be able to run the workflow successfully using the profiles we set up in Part 5.
+Now that everything is in place, we should be able to run the workflow using the profiles we set up in Part 5.
 
 ```bash
 nextflow run main.nf -profile my_laptop,demo
 ```
 
-This should run successfully:
+And so it does.
 
 ```console title="Output"
-**TODO: rerun & add updated output**
+ N E X T F L O W   ~  version 24.02.0-edge
+
+ ┃ Launching `main.nf` [special_brenner] DSL2 - revision: 5a07b4894b
+
+executor >  local (7)
+[26/60774a] SAMTOOLS_INDEX (1)       | 3 of 3 ✔
+[5a/eb40c4] GATK_HAPLOTYPECALLER (2) | 3 of 3 ✔
+[8f/94ac86] GATK_JOINTGENOTYPING     | 1 of 1 ✔
 ```
 
-There will now be a `work` directory and a `results_genomics` directory inside your project directory.
+Like previously, there will now be a `work` directory and a `results_genomics` directory inside your project directory.
 
 ---
 
-**TODO: update numbering and code snippets**
+## 1. Create a module for the `SAMTOOLS_INDEX` process
 
-## 2. Create a module for the `SAMTOOLS_INDEX` process
+From a technical standpoint, you can create a module simply by copying the process definition into its own file, and you can name that file anything you want.
+However, the Nextflow community has adopted certain conventions for code organization, influenced in large part by the [nf-core](https://nf-co.re) project (which we'll cover later in this training series).
 
-By convention, a process module should be written to a standalone file named `main.nf` and stored in a directory structure named after the tool (and optionally, toolkit) that the process invokes. For example, the module we create for the `SAMTOOLS_INDEX` process will live under `samtools/index/`.
+The convention for process modules is that the process definition should be written to a standalone file named `main.nf`, stored in a directory structure with three to four levels:
 
-Additionally, local modules are grouped under the directory structure `modules/local/`. Modules can also belong to remote repositories; we will not cover those in this training.
+```console title="Directory structure"
+modules
+└── local
+    └── (<toolkit>)
+        └── <tool>
+            └── main.nf
+```
 
-### 2.1 Create a folder to house the local module code for the `SAMTOOLS_INDEX` process
+By convention, all modules are stored in a directory named `modules`.
+Additionally, the convention distinguishes _local_ modules (which are part of your project) from _remote_ modules contained in remote repositories.
+
+The next levels down are named after the toolkit (if there is one) then the tool itself.
+If the process defined in the module invokes more than one tool, as the GATK_JOINTGENOTYPING does in our example workflow, the name of the module can be the name of the method, or something to that effect.
+
+For example, the module we create for the `SAMTOOLS_INDEX` process will live under `modules/local/samtools/index/`.
+
+```console title="Directory structure"
+modules
+└── local
+    └── samtools
+        └── index
+            └── main.nf
+```
+
+!!!note
+
+    We will cover remote modules later in this training, when we introduce the [nf-core library of modules](https://nf-co.re/modules/).
+
+So let's get started.
+
+### 2.1. Create a directory to house the local module code for the `SAMTOOLS_INDEX` process
+
+Run this command to create the appropriate directory structure:
 
 ```bash
 mkdir -p modules/local/samtools/index
 ```
 
-### 2.2 Create a file stub for the `SAMTOOLS_INDEX` process module
+The `-p` flag takes care of creating parent directories as needed.
+
+### 2.2. Create a file stub for the `SAMTOOLS_INDEX` process module
+
+Now let's create an empty `main.nf` file for the module.
 
 ```bash
 touch modules/local/samtools/index/main.nf
 ```
 
-This creates an empty file named `main.nf` under the appropriate directory structure.
+This gives us a place to put the process code.
 
-### 2.3 Move the `SAMTOOLS_INDEX` process code to the module file
+### 2.3. Move the `SAMTOOLS_INDEX` process code to the module file
 
-```groovy
+Copy the whole process definition over from the workflow's `main.nf` file to the module's `main.nf` file, making sure to copy over the `#!/usr/bin/env nextflow` shebang too.
+
+```groovy title="projectM/modules/local/samtools/index/main.nf" linenums="1"
+#!/usr/bin/env nextflow
+
 /*
  * Generate BAM index file
  */
 process SAMTOOLS_INDEX {
 
-    container 'quay.io/biocontainers/samtools:1.19.2--h50ea8bc_1'
+    container 'community.wave.seqera.io/library/samtools:1.20--b5dfbd93de237464'
+    conda "bioconda::samtools=1.20"
+
+    publishDir 'results_genomics', mode: 'symlink'
 
     input:
-        tuple val(id), path(input_bam)
+        path input_bam
 
     output:
-        tuple val(id), path(input_bam), path("${input_bam}.bai")
+        tuple path(input_bam), path("${input_bam}.bai")
 
     """
     samtools index '$input_bam'
@@ -119,28 +168,55 @@ process SAMTOOLS_INDEX {
 }
 ```
 
-### 2.4 Add an import declaration before the workflow block
+Once that is done, delete the process definition from the workflow's `main.nf` file, but make sure to leave the shebang in place.
 
+### 2.4. Add an import declaration before the workflow block
+
+The syntax for importing a local module is fairly straightforward:
+
+```groovy title="Import declaration syntax"
+include { <MODULE_NAME> } from './modules/local/<toolkit>>/<tool>/main.nf'
+```
+
+Let's insert that above the workflow block and fill it out appropriately.
+
+````groovy title="projectM/main.nf" linenums="73"
 _Before:_
 
-```groovy
+```groovy title="projectM/main.nf" linenums="73"
 workflow {
-```
+````
 
 _After:_
 
-```groovy
+```groovy title="projectM/main.nf" linenums="73"
 // Include modules
 include { SAMTOOLS_INDEX } from './modules/local/samtools/index/main.nf'
 
 workflow {
 ```
 
-### 2.5 Run the workflow to verify that it does the same thing as before
+### 2.5. Run the workflow to verify that it does the same thing as before
+
+We're running the workflow with essentially the same code and inputs as before, so let's add the `-resume` flag and see what happens.
 
 ```bash
-nextflow run hello-modules.nf
+nextflow run main.nf -profile my_laptop,demo
 ```
+
+Sure enough, Nextflow recognizes that it's still all the same work to be done, even if the code is split up into multiple files.
+
+```console title="Output"
+ N E X T F L O W   ~  version 24.02.0-edge
+
+ ┃ Launching `main.nf` [agitated_cuvier] DSL2 - revision: 0ce0cd0c04
+
+[c3/0d53a4] SAMTOOLS_INDEX (3)       | 3 of 3, cached: 3 ✔
+[c6/8c6c30] GATK_HAPLOTYPECALLER (1) | 3 of 3, cached: 3 ✔
+[38/82b2e2] GATK_JOINTGENOTYPING     | 1 of 1, cached: 1 ✔
+```
+
+So modularizing the code in the course of development does not break resumability!
 
 ### Takeaway
 
@@ -154,43 +230,58 @@ Practice making more modules.
 
 ## 3. Repeat procedure for the remaining processes
 
-### 3.1 Create folders to house the local module code
+Once you've done one, you can do a million modules...
+But let's just do two more for now.
+
+### 3.1. Create directories to house the code for the two GATK modules
+
+Since GATK_HAPLOTYPECALLER and GATK_JOINTGENOTYPING both run GATK tools, we'll house them both under a shared `gatk` directory.
 
 ```bash
 mkdir -p modules/local/gatk/haplotypecaller
 mkdir -p modules/local/gatk/jointgenotyping
 ```
 
-Here we are grouping the two modules under `gatk/` because the corresponding processes both invoke tools that belong to the GATK toolkit.
+You can imagine how it'll be useful to have that optional directory for grouping modules at the toolkit level.
 
-### 3.2 Create file stubs for the process modules
+### 3.2. Create file stubs for the process modules
+
+Now let's make the file stubs to put the code into.
 
 ```bash
 touch modules/local/gatk/haplotypecaller/main.nf
 touch modules/local/gatk/jointgenotyping/main.nf
 ```
 
-### 3.3 Move the process code to the module files
+### 3.3. Move the process code to the module files
 
-Move this code to `modules/local/gatk/haplotypecaller/main.nf`:
+And finally, move the code for each process to the corresponding `main.nf` file, making sure to copy the shebang line too each time.
 
-```groovy
+### 3.3.1. GATK_HAPLOTYPECALLER module
+
+```groovy title="projectM/modules/local/gatk/haplotypecaller/main.nf" linenums="1"
+#!/usr/bin/env nextflow
+
 /*
- * Call variants with GATK HaplotypeCaller in GVCF mode
+ * Call variants with GATK HaplotypeCaller
  */
 process GATK_HAPLOTYPECALLER {
 
-    container "docker.io/broadinstitute/gatk:4.5.0.0"
+    container "community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"
+    conda "bioconda::gatk4=4.5.0.0"
+
+    publishDir 'results_genomics', mode: 'symlink'
 
     input:
-        tuple val(id), path(input_bam), path(input_bam_index)
+        tuple path(input_bam), path(input_bam_index)
         path ref_fasta
         path ref_index
         path ref_dict
         path interval_list
 
     output:
-        tuple val(id), path("${input_bam}.g.vcf"), path("${input_bam}.g.vcf.idx")
+        path "${input_bam}.g.vcf"
+        path "${input_bam}.g.vcf.idx"
 
     """
     gatk HaplotypeCaller \
@@ -203,48 +294,58 @@ process GATK_HAPLOTYPECALLER {
 }
 ```
 
-And move this code to `modules/local/gatk/jointgenotyping/main.nf`:
+### 3.3.2. GATK_JOINTGENOTYPING module
 
-```groovy
+```groovy title="projectM/modules/local/gatk/jointgenotyping/main.nf" linenums="1"
+#!/usr/bin/env nextflow
+
 /*
- * Consolidate GVCFs and apply joint genotyping analysis
+ * Combine GVCFs into GenomicsDB datastore and run joint genotyping to produce cohort-level calls
  */
 process GATK_JOINTGENOTYPING {
 
-    container "docker.io/broadinstitute/gatk:4.5.0.0"
+    container "community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"
+    conda "bioconda::gatk4=4.5.0.0"
+
+    publishDir 'results_genomics', mode: 'symlink'
 
     input:
-        path(sample_map)
-        val(cohort_name)
+        path all_gvcfs
+        path all_idxs
+        path interval_list
+        val cohort_name
         path ref_fasta
         path ref_index
         path ref_dict
-        path interval_list
 
     output:
         path "${cohort_name}.joint.vcf"
         path "${cohort_name}.joint.vcf.idx"
 
+    script:
+        def gvcfs_line = all_gvcfs.collect { gvcf -> "-V ${gvcf}" }.join(' ')
     """
     gatk GenomicsDBImport \
-        --sample-name-map ${sample_map} \
-        --genomicsdb-workspace-path ${cohort_name}_gdb \
-        -L ${interval_list}
+        ${gvcfs_line} \
+        -L ${interval_list} \
+        --genomicsdb-workspace-path ${cohort_name}_gdb
 
     gatk GenotypeGVCFs \
         -R ${ref_fasta} \
         -V gendb://${cohort_name}_gdb \
-        -O ${cohort_name}.joint.vcf \
-        -L ${interval_list}
+        -L ${interval_list} \
+        -O ${cohort_name}.joint.vcf
     """
 }
 ```
 
-### 3.4 Add import declarations before the workflow block
+### 3.4. Add import declarations to the workflow `main.nf` file
+
+Now all that remains is to add the import statements:
 
 _Before:_
 
-```groovy
+```groovy title="projectM/main.nf" linenums="3"
 // Include modules
 include { SAMTOOLS_INDEX } from './modules/local/samtools/index/main.nf'
 
@@ -253,7 +354,7 @@ workflow {
 
 _After:_
 
-```groovy
+```groovy title="projectM/main.nf" linenums="3"
 // Include modules
 include { SAMTOOLS_INDEX } from './modules/local/samtools/index/main.nf'
 include { GATK_HAPLOTYPECALLER } from './modules/local/gatk/haplotypecaller/main.nf'
@@ -262,13 +363,28 @@ include { GATK_JOINTGENOTYPING } from './modules/local/gatk/jointgenotyping/main
 workflow {
 ```
 
-### 3.5 Run the workflow to verify that it does the same thing as before
+### 3.5. Run the workflow to verify that everything still works as expected
+
+Look at that short `main.nf` file! Let's run it once last time.
 
 ```bash
-nextflow run hello-modules.nf
+nextflow run main.nf -profile my_laptop,demo -resume
 ```
 
-This should still produce the same output. Congratulations, you've done all this work and absolutely nothing has changed to how the pipeline works! But now your code is more modular, and if you decide to write another pipeline that calls on one of those processes, you just need to type one short import statement to use the relevant module. This is better than just copy-pasting the code, because if later you decide to improve the module, all your pipelines will inherit the improvement.
+Yep, everything still works, including the resumability of the pipeline.
+
+N E X T F L O W ~ version 24.02.0-edge
+
+┃ Launching `main.nf` [tiny_blackwell] DSL2 - revision: 0ce0cd0c04
+
+[62/21cdc5] SAMTOOLS_INDEX (1) | 3 of 3, cached: 3 ✔
+[c6/8c6c30] GATK_HAPLOTYPECALLER (2) | 3 of 3, cached: 3 ✔
+[38/82b2e2] GATK_JOINTGENOTYPING | 1 of 1, cached: 1 ✔
+
+Congratulations, you've done all this work and absolutely nothing has changed to how the pipeline works!
+
+Jokes aside, now your code is more modular, and if you decide to write another pipeline that calls on one of those processes, you just need to type one short import statement to use the relevant module.
+This is better than just copy-pasting the code, because if later you decide to improve the module, all your pipelines will inherit the improvements.
 
 ### Takeaway
 
