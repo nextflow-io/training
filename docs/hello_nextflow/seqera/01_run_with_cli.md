@@ -28,7 +28,7 @@ Follow these steps to set up your token:
 
         Leave this browser tab open as we will need the token once more to store it as a Nextflow secret.
 
-4.  Export your token:
+4.  To make your token available to the Nextflow CLI, export it on the command line:
 
     Open a terminal and type:
 
@@ -46,7 +46,7 @@ Run your Nextflow workflows as usual with the addition of the `-with-tower` comm
 nextflow run nextflow-io/hello -with-tower
 ```
 
-You will see the following output:
+You will see output similar to the following:
 
 ```console title="Output"
  N E X T F L O W   ~  version 24.04.4
@@ -73,15 +73,18 @@ You'll see the Seqera Platform interface with the job finished and the logs capt
 
 You will see and be able to monitor your **Nextflow jobs** in Seqera Platform.
 
-### 1.3. Set up Seqera Platform logging by default
+### 1.3. Set up Seqera Platform in Nextflow configuration
 
-To set up Seqera Platform logging by default, we first want to store our token more securely as a [Nextflow secret](https://www.nextflow.io/docs/latest/secrets.html).
+Doing that token setup regularly can get bit tedious, but the same setup can be applied in configuration applied to Nexflow configuration so that it does not need to be set each time.
+This can be the `nextflow.config` file of a specific project, or the global file located at `$HOME/.nextflow/config`, which will apply to all your runs.
+
+Before we set the configuration, we need to permanently store the token in Nextflow using a [Nextflow secret](https://www.nextflow.io/docs/latest/secrets.html):
 
 ```bash
 nextflow secrets set tower_access_token "eyxxxxxxxxxxxxxxxQ1ZTE="
 ```
 
-You can set up Seqera Platform logging by default by adding the following line to your `nextflow.config` file.
+The following block of configuration will enable Seqera Platform logging by default:
 
 ```groovy title="nextflow.config"
 tower {
@@ -91,7 +94,9 @@ tower {
 }
 ```
 
-Instead of putting this in the `nextflow.config` file of a specific project, you can also put it in the global file located at `$HOME/.nextflow/config`.
+However, instead of enabling Seqera Platform for an individual pipeline, we want to enable it for ourselves globally.
+
+Run the following command to put the config block in your user configuration file located at `$HOME/.nextflow/config`.
 
 ```bash
 cat <<EOF >> $HOME/.nextflow/config
