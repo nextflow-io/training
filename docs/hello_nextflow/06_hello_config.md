@@ -832,7 +832,8 @@ _After:_
 ```
 
 We can't test this since we don't have a live connection to Slurm in the Gitpod environment.
-However, you can try running the workflow with resource allocations that exceed these limits, then look up the `sbatch` command in the `.command.run` script file to see what requests actually get sent to the executor.
+However, you can try running the workflow with resource allocations that exceed these limits, then look up the `sbatch` command in the `.command.run` script file.
+You should see that the requests that actually get sent to the executor are capped at the values specified by `resourceLimits`.
 
 !!!note
 
