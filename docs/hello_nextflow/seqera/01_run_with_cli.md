@@ -6,7 +6,7 @@ Start by logging into the [Seqera Platform](https://cloud.seqera.io/).
 !!! info "Nextflow Tower"
 
     Seqera Platform was previously known as Nextflow Tower.
-    You'll still see references to the previous name in environment variable and cli option names.
+    You'll still see references to the previous name in environment variables and CLI option names.
 
 ### 1.1. Set up your Seqera Platform token by exporting it to your environment
 
@@ -26,21 +26,26 @@ Follow these steps to set up your token:
 
     !!! note
 
-        Leave this browser tab open as we will need the token once more to store it as a Nextflow secret.
+        Leave the browser tab with the token open as we will need it once more to store it as a Nextflow secret.
 
 4.  To make your token available to the Nextflow CLI, export it on the command line:
 
     Open a terminal and type:
 
     ```bash
-    export TOWER_ACCESS_TOKEN=eyxxxxxxxxxxxxxxxQ1ZTE=
+     export TOWER_ACCESS_TOKEN=eyxxxxxxxxxxxxxxxQ1ZTE=
     ```
 
     Where `eyxxxxxxxxxxxxxxxQ1ZTE=` is the token you have just created.
 
-### 1.2. Run Nextflow cli with Seqera Platform visualizing and capturing logs
+    !!! Warning "Security Note"
 
-Run your Nextflow workflows as usual with the addition of the `-with-tower` command:
+        Keep your token secure and do not share it with others.
+        You can add a ++space++ before the `export` command to prevent it from being saved in your shell history.
+
+### 1.2. Run Nextflow CLI with Seqera Platform visualizing and capturing logs
+
+Run a Nextflow workflow with the addition of the `-with-tower` command:
 
 ```bash
 nextflow run nextflow-io/hello -with-tower
@@ -66,7 +71,7 @@ Hola world!
 Hello world!
 ```
 
-Use ++ctrl+click++ or ++cmd+click++ on the link to open it in your browser.
+Hold ++ctrl++ or ++cmd++ and click on the link to open it in your browser.
 You'll see the Seqera Platform interface with the job finished and the logs captured.
 
 ![Seqera Platform](seqera/img/run_with_tower.png)
@@ -75,8 +80,7 @@ You will see and be able to monitor your **Nextflow jobs** in Seqera Platform.
 
 ### 1.3. Set up Seqera Platform in Nextflow configuration
 
-Doing that token setup regularly can get bit tedious, but the same setup can be applied in configuration applied to Nexflow configuration so that it does not need to be set each time.
-This can be the `nextflow.config` file of a specific project, or the global file located at `$HOME/.nextflow/config`, which will apply to all your runs.
+Doing that token setup regularly can get a bit tedious, so let's set this configuration for all our pipeline runs with the global Nextflow configuration file located at `$HOME/.nextflow/config`.
 
 Before we set the configuration, we need to permanently store the token in Nextflow using a [Nextflow secret](https://www.nextflow.io/docs/latest/secrets.html):
 
@@ -84,31 +88,32 @@ Before we set the configuration, we need to permanently store the token in Nextf
 nextflow secrets set tower_access_token "eyxxxxxxxxxxxxxxxQ1ZTE="
 ```
 
-The following block of configuration will enable Seqera Platform logging by default:
-
-```groovy title="nextflow.config"
-tower {
-    enabled = true
-    endpoint = "https://api.cloud.seqera.io"
-    accessToken = secrets.tower_access_token
-}
-```
-
-However, instead of enabling Seqera Platform for an individual pipeline, we want to enable it for ourselves globally.
-
-Run the following command to put the config block in your user configuration file located at `$HOME/.nextflow/config`.
+Open the Nextflow configuration file located at `$HOME/.nextflow/config`:
 
 ```bash
-cat <<EOF >> $HOME/.nextflow/config
+code $HOME/.nextflow/config
+```
+
+Then add the following block of configuration:
+
+```groovy title="$HOME/.nextflow/config"
 tower {
     enabled = true
     endpoint = "https://api.cloud.seqera.io"
     accessToken = secrets.tower_access_token
+    workspaceId = secrets.tower_workspace_id
 }
-EOF
 ```
 
-Run your Nextflow workflows as usual:
+!!! hint "Workspace ID and Endpoint"
+
+    We haven't set `secrets.tower_workspace_id` yet, and so Nextflow will fill in an empty string for this value.
+    This will default to the user's workspace in Seqera Platform which is what we want for now.
+
+    The `endpoint` is the URL of the Seqera Platform API.
+    If your institution is running a private instance of Seqera Platform, you will want to change this to the appropriate URL.
+
+Run your Nextflow workflows as before, but without the `-with-tower` command:
 
 ```bash
 nextflow run nextflow-io/hello

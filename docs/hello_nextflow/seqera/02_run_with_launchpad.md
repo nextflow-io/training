@@ -33,7 +33,7 @@ Follow these steps to launch a test run of a pipeline:
 3. Change the "Workflow run name" to "<username>-rnaseq-test".
 4. Click "Next" to bring up the parameters form.
 5. Find the `trimmer` parameter and change it to `fastp`.
-6. Click to "Next" to inspect the advanced configuration.
+6. Click on "Next" to inspect the advanced configuration.
 7. Click "Launch" to start the pipeline!
 
 !!! Tip
@@ -75,10 +75,10 @@ Click on the task to see the task details:
 
 You have learned how to:
 
-    - Switch between organizations and workspaces in Seqera Platform.
-    - Launch a Nextflow pipeline that ran in the cloud using Seqera Platform.
-    - Monitor the progress of the pipeline run.
-    - Inspect the details of a task that was executed as part of the pipeline.
+-   Switch between organizations and workspaces in Seqera Platform.
+-   Launch a Nextflow pipeline that ran in the cloud using Seqera Platform.
+-   Monitor the progress of the pipeline run.
+-   Inspect the details of a task that was executed as part of the pipeline.
 
 ### Next steps
 
