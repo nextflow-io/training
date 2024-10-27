@@ -21,7 +21,7 @@ We want to launch the workflow from inside the `projectC` directory, so let's mo
 cd projectC
 ```
 
-Let's take a look at the contents. 
+Let's take a look at the contents.
 You can use the file explorer or the terminal; here we're using the output of `tree` to display the top-level directory contents.
 
 ```console title="Directory contents"
@@ -38,8 +38,8 @@ projectC
     Whenever there is a file named `nextflow.config` in the current directory, Nextflow will automatically load configuration from it. The one we have been using contains the following lines:
 
     ```console title="nextflow.config" linenums="1"
-    docker.enabled = true
     docker.fixOwnership = true
+    docker.enabled = true
     ```
 
     The `docker.fixOwnership = true` line is not really interesting.
@@ -130,15 +130,15 @@ First, we have to switch the value of `docker.enabled` to false.
 _Before:_
 
 ```console title="nextflow.config" linenums="1"
-docker.enabled = true
 docker.fixOwnership = true
+docker.enabled = true
 ```
 
 _After:_
 
 ```console title="nextflow.config" linenums="1"
-docker.enabled = false
 docker.fixOwnership = true
+docker.enabled = false
 ```
 
 Let's see what happens if we run that.
@@ -225,17 +225,17 @@ And while we're at it, let's put a blank line before those two to emphasize the 
 _Before:_
 
 ```groovy title="nextflow.config" linenums="1"
-docker.enabled = false
 docker.fixOwnership = true
+docker.enabled = false
 ```
 
 _After:_
 
 ```groovy title="nextflow.config" linenums="1"
+docker.fixOwnership = true
+
 docker.enabled = false
 conda.enabled = true
-
-docker.fixOwnership = true
 ```
 
 This should allow Nextflow to create a Conda environment with the Samtools package we provided.
@@ -407,10 +407,10 @@ Setting up these profiles mainly involves restructuring how we specify the `dock
 _Before:_
 
 ```groovy title="nextflow.config" linenums="1"
+docker.fixOwnership = true
+
 docker.enabled = false
 conda.enabled = true
-
-docker.fixOwnership = true
 ```
 
 _After:_
