@@ -11,23 +11,22 @@ So far we've been working with a very loose structure, with just one workflow co
 However, we're now moving into the phase of this training series that is more focused on code development and maintenance practices.
 
 As part of that, we're going to adopt a formal project structure.
-We're going to work inside a dedicated project directory called `projectC` (C for configuration), and we've renamed the workflow file `main.nf` to match the recommended Nextflow convention.
+We're going to work inside a dedicated project directory called `hello-config`, and we've renamed the workflow file `main.nf` to match the recommended Nextflow convention.
 
-### 0.1. Explore the `projectC` directory
+### 0.1. Explore the `hello-config` directory
 
-We want to launch the workflow from inside the `projectC` directory, so let's move into it now.
+We want to launch the workflow from inside the `hello-config` directory, so let's move into it now.
 
 ```bash
-cd projectC
+cd hello-config
 ```
 
 Let's take a look at the contents.
 You can use the file explorer or the terminal; here we're using the output of `tree` to display the top-level directory contents.
 
 ```console title="Directory contents"
-projectC
+hello-config
 ├── demo-params.json
-├── intermediates
 ├── main.nf
 └── nextflow.config
 ```
@@ -56,14 +55,12 @@ projectC
 -   **`demo-params.json`** is a parameter file intended for supplying parameter values to a workflow.
     We will use it in section 5 of this tutorial.
 
--   **`intermediates/`** is a directory containing the intermediate forms of the workflow and configuration files for each section of this tutorial.
-
 The one thing that's missing is a way to point to the original data without making a copy of it or updating the file paths wherever they're specified.
 The simplest solution is to link to the data location.
 
 ### 0.2. Create a symbolic link to the data
 
-Run this command from inside the `projectC` directory:
+Run this command from inside the `hello-config` directory:
 
 ```bash
 ln -s ../data data
@@ -72,10 +69,10 @@ ln -s ../data data
 This creates a symbolic link called `data` pointing to the data directory, which allows us to avoid having to change anything to how the file paths are set up.
 
 ```console title="Directory contents"
-projectC
+hello-config
 ├── data -> ../data
 ├── demo-params.json
-├── intermediates
+├── solutions
 ├── main.nf
 └── nextflow.config
 ```
@@ -105,7 +102,7 @@ executor >  local (7)
 [ee/2c7855] GATK_JOINTGENOTYPING     [100%] 1 of 1 ✔
 ```
 
-There will now be a `work` directory and a `results_genomics` directory inside your current `projectC` directory.
+There will now be a `work` directory and a `results_genomics` directory inside your `hello-config` directory.
 
 ### Takeaway
 
@@ -145,7 +142,7 @@ Let's see what happens if we run that.
 
 ### 1.2. Run the workflow without Docker
 
-We are now launching the `main.nf` workflow from inside the `projectC` directory.
+We are now launching the `main.nf` workflow from inside the `hello-config` directory.
 
 ```bash
 nextflow run main.nf
@@ -156,7 +153,7 @@ As expected, the run fails with an error message that looks like this:
 ```console title="Output"
  N E X T F L O W   ~  version 24.02.0-edge
 
- ┃ Launching `projectC/main.nf` [silly_ramanujan] DSL2 - revision: 9129bc4618
+ ┃ Launching `hello-config/main.nf` [silly_ramanujan] DSL2 - revision: 9129bc4618
 
 executor >  local (3)
 [93/4417d0] SAMTOOLS_INDEX (1)   [  0%] 0 of 3
@@ -319,7 +316,7 @@ This will take a bit longer than usual the first time, and you might see the con
 [-        ] SAMTOOLS_INDEX       -
 [-        ] GATK_HAPLOTYPECALLER -
 [-        ] GATK_JOINTGENOTYPING -
-Creating env using conda: bioconda::samtools=1.20 [cache /workspace/gitpod/hello-nextflow/projectC/work/conda/env-6684ea23d69ceb1742019ff36904f612]
+Creating env using conda: bioconda::samtools=1.20 [cache /workspace/gitpod/hello-nextflow/hello-config/work/conda/env-6684ea23d69ceb1742019ff36904f612]
 ```
 
 That's because Nextflow has to retrieve the Conda packages and create the environment, which takes a bit of work behind the scenes. The good news is that you don't need to deal with any of it yourself!
@@ -401,7 +398,7 @@ Let's try running the workflow with Conda.
 nextflow run main.nf -profile conda_on
 ```
 
-It works!
+It works! Convenient, isn't it?
 
 ```
  N E X T F L O W   ~  version 24.02.0-edge
@@ -491,7 +488,7 @@ nextflow
 ERROR ~ Error executing process > 'SAMTOOLS_INDEX (3)'
 
 Caused by:
-  java.io.IOException: Cannot run program "sbatch" (in directory "/workspace/gitpod/hello-nextflow/projectC/work/eb/2962ce167b3025a41ece6ce6d7efc2"): error=2, No such file or directory
+  java.io.IOException: Cannot run program "sbatch" (in directory "/workspace/gitpod/hello-nextflow/hello-config/work/eb/2962ce167b3025a41ece6ce6d7efc2"): error=2, No such file or directory
 
 Command executed:
 
@@ -500,7 +497,7 @@ Command executed:
 
 However, it did produce what we are looking for: the `.command.run` file that Nextflow tried to submit to Slurm via the `sbatch` command.
 
-Let's take a look inside. **TODO: UPDATE NEXTFLOW VERSION SO WE CAN HAVE THIS SWEET OUTPUT**
+Let's take a look inside. <!-- **TODO: UPDATE NEXTFLOW VERSION SO WE CAN HAVE THIS SWEET OUTPUT** -->
 
 ```bash title=".command.run" linenums="1"
 #!/bin/bash
@@ -723,11 +720,12 @@ nextflow run main.nf -profile my_laptop -with-report report-config-1.html
 ```
 
 The report is an html file, which you can download and open in your browser.
+
 Take a few minutes to look through the report and see if you can identify some opportunities for adjusting resources.
 Make sure to click on the tabs that show the utilization results as a percentage of what was allocated.
 There is some [documentation](https://www.nextflow.io/docs/latest/reports.html) describing all the available features.
 
-**TODO: insert images**
+<!-- TODO: insert images -->
 
 One observation is that the `GATK_JOINTGENOTYPING` seems to be very hungry for CPU, which makes sense since it performs a lot of complex calculations.
 So we could try boosting that and see if it cuts down on runtime.
@@ -735,7 +733,7 @@ So we could try boosting that and see if it cuts down on runtime.
 However, we seem to have overshot the mark with the memory allocations; all processes are only using a fraction of what we're giving them.
 We should dial that back down and save some resources.
 
-### 4.3. Adjust resource allocations for a specific process
+### 4.4. Adjust resource allocations for a specific process
 
 We can specify resource allocations for a given process using the `withName` directive.
 The syntax looks like this when it's by itself in a process block:
@@ -765,7 +763,7 @@ process {
 With that specified, the default settings will apply to all processes **except** the `GATK_JOINTGENOTYPING` process, which is a special snowflake that gets a lot more CPU.
 Hopefully that should have an effect.
 
-### 4.4. Run again with the modified configuration
+### 4.5. Run again with the modified configuration
 
 Let's run the workflow again with the modified configuration and with the reporting flag turned on, but notice we're giving the report a different name so we can differentiate them.
 
@@ -778,7 +776,7 @@ Once again, you probably won't notice a substantial difference in runtime, becau
 However, the second report shows that our resource utilization is more balanced now, and the runtime of the `GATK_JOINTGENOTYPING` process has been cut in half.
 We probably didn't need to go all the way to 8 CPUs, but since there's only one call to that process, it's not a huge drain.
 
-**TODO: screenshots?**
+<!-- **TODO: screenshots?** -->
 
 As you can see, this approach is useful when your processes have different resource requirements. It empowers you to can right-size the resource allocations you set up for each process based on actual data, not guesswork.
 
@@ -792,7 +790,7 @@ As you can see, this approach is useful when your processes have different resou
 
 That being said, there may be some constraints on what you can (or must) allocate depending on what computing executor and compute infrastructure you're using. For example, your cluster may require you to stay within certain limits that don't apply when you're running elsewhere.
 
-### 4.5. Add resource limits to an HPC profile
+### 4.6. Add resource limits to an HPC profile
 
 You can use the `resourceLimits` directive to set the relevant limitations. The syntax looks like this when it's by itself in a process block:
 
@@ -982,7 +980,7 @@ executor >  local (7)
 
 However, you may be thinking, well, did we really override the configuration? How would we know, since those were the same files?
 
-### 5.6. Remove or generalize default values from `nextflow.config`
+### 5.5. Remove or generalize default values from `nextflow.config`
 
 Let's strip out all the file paths from the `params` block in `nextflow.config`, replacing them with `null`, and replace the `cohort_name` value with something more generic.
 
@@ -1029,7 +1027,7 @@ This is great because, with the parameter file in hand, we'll now be able to pro
 
 That being said, it was nice to be able to demo the workflow without having to keep track of filenames and such. Let's see if we can use a profile to replicate that behavior.
 
-### 5.7. Create a demo profile
+### 5.6. Create a demo profile
 
 Yes we can! We just need to retrieve the default parameter declarations as they were written in the original workflow (with the `params.*` syntax) and copy them into a new profile that we'll call `demo`.
 
@@ -1100,7 +1098,7 @@ profiles {
 
 As long as we distribute the data bundle with the workflow code, this will enable anyone to quickly try out the workflow without having to supply their own inputs or pointing to the parameter file.
 
-### 5.8. Run with the demo profile
+### 5.7. Run with the demo profile
 
 Let's try that out:
 
