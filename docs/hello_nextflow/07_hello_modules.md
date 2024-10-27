@@ -1,12 +1,7 @@
 # Part 6: Hello Modules
 
-When we started developing our workflow, we put everything in one single code file.
-However, as our pipeline project matures, we are adopting certain conventions and best practices that are going to make development and maintenance of our pipeline more efficient and sustainable.
-
-In Part 5, we started turning our one-script workflow into a proper pipeline project by teasing out parameter settings and building out the configuration file(s).
-We also moved to the standard Nextflow convention of naming the workflow file `main.nf`.
-
-Now it's time to tackle **modularizing** our code.
+This section covers how to organize your workflow code to make development and maintenance of your pipeline more efficient and sustainable.
+Specifically, we are going to demonstrate how to use **modules**.
 
 In Nextflow, a **module** is a single process definition that is encapsulated by itself in a standalone code file.
 To use a module in a workflow, you just add a single-line import statement to your workflow code file; then you can integrate the process into the workflow the same way you normally would.
@@ -22,66 +17,64 @@ This makes the code more shareable, flexible and maintainable.
 
 ## 0. Warmup
 
+When we started developing our workflow, we put everything in one single code file.
+In Part 5, we started turning our one-script workflow into a proper pipeline project by teasing out parameter settings and building out the configuration file(s).
+We also moved to the standard Nextflow convention of naming the workflow file `main.nf`.
+
+Now it's time to tackle **modularizing** our code.
+
 We're going to pick up where we left off in Part 5 (Hello Config), this time working inside the project directory called `projectM` (for Modules).
+
+### 0.1. Explore the projectM directory¶
+
+Let's move into the project directory.
+If you're continuing on directly from Part 5, you'll need to move up one directory first.
+
+```bash
+cd projectM
+```
+
 The `projectM` directory has the same content and structure that you're expected to end up with on completion of Part 5.
 
-### 0.1 Run the workflow using the appropriate profiles
-
-[...]
-
-```bash
-nextflow run hello-modules.nf
+```console title="Directory contents"
+projectC/
+├── demo-params.json
+├── intermediates
+├── main.nf
+└── nextflow.config
 ```
 
-The pipeline takes in three BAM files, each one containing sequencing data for one of three samples from a human family trio (mother, father and son), and outputs a VCF file containing variant calls. For more details, see the previous section of this training.
+For a detailed description of these files, see the warmup in Part 5.
+
+### 0.2. Create a symbolic link to the data¶
+
+Run this command from inside the projectC directory:
+
+```bash
+ln -s ../data data
+```
+
+This creates a symbolic link called data pointing to the data directory, which allows us to avoid having to change anything to how the file paths are set up.
+
+### 0.3 Run the workflow using the appropriate profiles
+
+Now that everything is in place, we should be able to run the workflow successfully using the profiles we set up in Part 5.
+
+```bash
+nextflow run main.nf -profile my_laptop,demo
+```
+
+This should run successfully:
+
+```console title="Output"
+**TODO: rerun & add updated output**
+```
+
+There will now be a `work` directory and a `results_genomics` directory inside your project directory.
 
 ---
 
-## 1. Move parameter declarations from the workflow file to a config file
-
-### 1.1 Move the parameter definitions into `nextflow.config`
-
-```groovy
-/*
- * Pipeline parameters
- */
-
-// Execution environment setup
-params.projectDir = "/workspace/gitpod/hello-nextflow"
-$projectDir = params.projectDir
-
-// Primary input (samplesheet in CSV format with ID and file path, one sample per line)
-params.reads_bam = "${projectDir}/data/samplesheet.csv"
-
-// Accessory files
-params.genome_reference = "${projectDir}/data/ref/ref.fasta"
-params.genome_reference_index = "${projectDir}/data/ref/ref.fasta.fai"
-params.genome_reference_dict = "${projectDir}/data/ref/ref.dict"
-params.calling_intervals = "${projectDir}/data/ref/intervals.bed"
-
-// Base name for final output file
-params.cohort_name = "family_trio"
-```
-
-### 1.2 Run the workflow to verify that it does the same thing as before
-
-```bash
-nextflow run hello-modules.nf
-```
-
-You should see the same output as earlier.
-
-Note: Workflow parameters and other elements of configuration can be specified in several different places. When the same element is defined in more than one place, the conflict is resolved according to the order of precedence detailed in [this documentation](https://nextflow.io/docs/latest/config.html#configuration-file).
-
-### Takeaway
-
-You know how to move parameter definitions to a configuration file.
-
-### What's next?
-
-Learn how to extract processes into local modules for code reuse.
-
----
+**TODO: update numbering and code snippets**
 
 ## 2. Create a module for the `SAMTOOLS_INDEX` process
 
