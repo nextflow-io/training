@@ -356,7 +356,7 @@ test("reads_mother [bam]") {
         }
         process {
             """
-            input[0] = [ [id: 'NA12878' ], file("${projectDir}/data/bam/reads_mother.bam") ]
+            input[0] = file("${projectDir}/data/bam/reads_mother.bam")
             """
         }
     }
@@ -380,7 +380,7 @@ test("reads_father [bam]") {
         }
         process {
             """
-            input[0] = [ [id: 'NA12877' ], file("${projectDir}/data/bam/reads_father.bam") ]
+            input[0] = file("${projectDir}/data/bam/reads_father.bam")
             """
         }
     }
@@ -397,12 +397,12 @@ These simply go one after another in the test file.
 
 !!! warning
 
-    Watch those curly braces, make sure they're all paired up appropriately...
+    Watch out for those curly braces, make sure they're all paired up appropriately...
 
 ### 1.8. Run the test suite and update the snapshot
 
 ```bash
-nf-test test modules/local/samtools/index/tests/main.nf.test --update-snapshot
+nf-test test --profile my_laptop,demo modules/local/samtools/index/tests/main.nf.test --update-snapshot
 ```
 
 This should produce the following output:
@@ -430,8 +430,9 @@ Notice the warning, referring to the effect of the `--update-snapshot` parameter
 
     Here we are using test data that we used previously to demonstrate the scientific outputs of the pipeline.
     If we had been planning to operate these tests in a production environment, we would have generated smaller inputs for testing purposes.
+
     In general it's important to keep unit tests as light as possible by using the smallest pieces of data necessary and sufficient for evaluating process functionality, otherwise the total runtime can add up quite seriously.
-    A test suite that takes too long to run regularly is a test suite that's likely to get skipped in the interest of convenience.
+    A test suite that takes too long to run regularly is a test suite that's likely to get skipped in the interest of expediency.
 
 ### Takeaway
 
@@ -446,8 +447,12 @@ Learn how to write tests for chained processes, and to evaluate whether outputs 
 ## 2. Add tests to a chained process and test for contents
 
 Now that we know how to handle the simplest case, we're going to kick things up a notch with the `GATK_HAPLOTYPECALLER` process.
+
 As the second step in our pipeline, its input depends on the output of another process.
-We can deal with this in two ways: either manually generate some static test data that is suitable as intermediate input to the process, or we can use a special [setup method](https://www.nf-test.com/docs/testcases/setup/) to handle it dynamically for us.
+We can deal with this in two ways:
+
+-   Manually generate some static test data that is suitable as intermediate input to the process;
+-   Use a special [setup method](https://www.nf-test.com/docs/testcases/setup/) to handle it dynamically for us.
 
 **Spoiler:** We're going to use the setup method.
 
