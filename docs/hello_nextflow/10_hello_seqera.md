@@ -26,7 +26,7 @@ You can use Seqera Platform via either the **CLI**, through the **online GUI** o
 
 !!! Warning WORK-IN-PROGRESS
 
-    Everything below this note is content that was copied from the original guide and needs to be moved or rewritten into the above subpages.
+    Everything below this note is content that was copied from the original guide and needs to be moved or rewritten into the above sub-pages.
 
 ## Online GUI
 
@@ -126,7 +126,7 @@ Seqera Platform simplifies the development and execution of pipeline by providin
 
 Each user has a unique **workspace** where they can interact and manage all resources such as workflows, compute environments and credentials. Details of this can be found [here](https://docs.seqera.io/platform/24.1/getting-started/workspace-setup).
 
-Organisations can have multiple workspaces with customized access for specific organisation **members** and **collaborators**.
+Organizations can have multiple workspaces with customized access for specific organization **members** and **collaborators**.
 
 ### Organization resources
 
