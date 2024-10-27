@@ -4,18 +4,20 @@ In Nextflow, a module is a way to encapsulate a single process by itself in a st
 
 Putting processes into individual modules makes it possible to reuse process descriptions in multiple workflows instead of just replicating the code. This makes the code more shareable, flexible and maintainable.
 
-Note: It is also possible to encapsulate a section of a workflow as a 'subworkflow' that can be imported into a larger pipeline, but that is outside the scope of this training.
+!!!note
+
+    It is also possible to encapsulate a section of a workflow as a 'subworkflow' that can be imported into a larger pipeline, but that is outside the scope of this training.
 
 ---
 
 ## 0. Warmup
 
-We start from a base workflow called `hello-modules.nf`, which corresponds to the workflow we produced in Part 2: Hello
-GATK (equivalent to `scripts/hello-gatk-6.nf`).
+We're going to pick up where we left off in Part 5 (Hello Config), this time working inside a project directory called `projectM` (for Modules).
+The `projectM` directory has the same content and structure that you're expected to end up with on completion of Part 5.
 
-Note: This is a basic variant calling pipeline consisting of three processes. You can find a complete description of the pipeline in the previous section of this training.
+### 0.1 Run the workflow using the appropriate profiles
 
-### 0.1 Run the workflow to verify that it produces the expected outputs
+[...]
 
 ```bash
 nextflow run hello-modules.nf
