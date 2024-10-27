@@ -596,7 +596,7 @@ For example, if we were back on our hypothetical HPC from earlier, we would swit
 Feel free to test that on your own to satisfy yourself that it works as expected.
 
 !!! Note
-    It may be that you want a profile with settings that are different from nextflow defaults but you still want to set it automatically, without providing it with `-profile`. There's a special profile name for that called `standard`. You can see an example [in the Nextflow official docs](https://www.nextflow.io/docs/latest/config.html#config-profiles).
+It may be that you want a profile with settings that are different from nextflow defaults but you still want to set it automatically, without providing it with `-profile`. There's a special profile name for that called `standard`. You can see an example [in the Nextflow official docs](https://www.nextflow.io/docs/latest/config.html#config-profiles).
 
 Moving on, we're going to take this logic a step further, and set up dedicated profiles for groups of configuration elements that we usually want to activate together.
 
