@@ -815,7 +815,7 @@ Test Process GATK_HAPLOTYPECALLER
 SUCCESS: Executed 3 tests in 57.858s
 ```
 
-That completes the basic test plan for this second step in the pipeline. On to the third and last!
+That completes the basic test plan for this second step in the pipeline. On to the third and last module-level test!
 
 ### Takeaway
 
@@ -844,7 +844,7 @@ modules/local/gatk/jointgenotyping/tests/inputs/
 └── reads_son.bam.g.vcf.idx
 ```
 
-The idea here is to use these as inputs to the test.
+The idea here is to use these files as inputs to the test.
 
 ### 3.1. Generate the test file stub
 
@@ -974,6 +974,14 @@ SUCCESS: Executed 1 tests in 14.885s
 
 It works! And that's it for module-level tests for our pipeline.
 
+### Takeaway
+
+You know how to write tests for using inputs that have been previously generated and are co-located with the module code.
+
+### What's next?
+
+Learn how to write a workflow-level test.
+
 ---
 
 ## 4. Add a workflow-level test
@@ -982,7 +990,7 @@ Now all that remains is to add a test for checking that the whole pipeline runs 
 
 ### 4.1. Generate pipeline-level stub test file
 
-The command is similar to the one for module tests:
+The command is similar to the one for module tests, except it says `generate pipeline` instead of `generate process`:
 
 ```bash
 nf-test generate pipeline hello-nf-test.nf
@@ -1042,3 +1050,11 @@ SUCCESS: Executed 1 tests in 62.498s
 
 That's it! If necessary, more nuanced assertions can be added to test for the validity and content of the pipeline outputs.
 You can learn more about the different kinds of assertions you can use in the [nf-test documentation](https://www.nf-test.com/docs/assertions/assertions/).
+
+### Takeaway
+
+You know how to write and run several kinds of tests for individual modules and for the entire workflow.
+
+### What's next?
+
+Celebrate and take a big break! Next up, we delve into the cornucopia of code and tools that is the nf-core project.
