@@ -123,7 +123,7 @@ In the very first part of this training course (Part 1: Hello World) we just use
 
 Now, let's pretend we're working on an HPC cluster and the admin doesn't allow the use of Docker for security reasons.
 
-### 1.1 Disable Docker in the config file
+### 1.1. Disable Docker in the config file
 
 First, we have to switch the value of `docker.enabled` to false.
 
@@ -143,7 +143,7 @@ docker.enabled = false
 
 Let's see what happens if we run that.
 
-### 1.2 Run the workflow without Docker
+### 1.2. Run the workflow without Docker
 
 We are now launching the `main.nf` workflow from inside the `projectC` directory.
 
@@ -189,7 +189,7 @@ Command not found? Of course, we don't have Samtools installed in our environmen
 
 Let's try using Conda environments for our workflow.
 
-### 1.3 Enable Conda in the configuration file
+### 1.3. Enable Conda in the configuration file
 
 First, we need to add a directive enabling the use of Conda, right after the line that controls the use of Docker.
 And while we're at it, let's put a blank line before those two to emphasize the logical grouping.
@@ -212,7 +212,7 @@ conda.enabled = true
 
 This should allow Nextflow to create and utilize Conda environments for processes that have Conda packages specified. Which means we now need to add those to our processes!
 
-### 1.4 Specify Conda packages in the process definitions
+### 1.4. Specify Conda packages in the process definitions
 
 We know that the Bioconda project provides Conda packages for Samtools and GATK, so we just need to retrieve their URIs and add them to the corresponding process definitions using the `conda` directive.
 
@@ -831,7 +831,8 @@ _After:_
     }
 ```
 
-We can't test this since we don't have a live connection to Slurm in the Gitpod environment, but you can run it and look up the `sbatch` command in the `.command.run` script file if you'd like to see how these directives are translated into job parameters for the executor.
+We can't test this since we don't have a live connection to Slurm in the Gitpod environment.
+However, you can try running the workflow with resource allocations that exceed these limits, then look up the `sbatch` command in the `.command.run` script file to see what requests actually get sent to the executor.
 
 !!!note
 
