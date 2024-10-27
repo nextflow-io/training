@@ -18,14 +18,14 @@ This makes the code more shareable, flexible and maintainable.
 ## 0. Warmup
 
 When we started developing our workflow, we put everything in one single code file.
-In Part 5, we started turning our one-script workflow into a proper pipeline project by teasing out parameter settings and building out the configuration file(s).
-We also moved to the standard Nextflow convention of naming the workflow file `main.nf`.
+In Part 5 (Hello Config), we started turning our one-file workflow into a proper pipeline project.
+We moved to the standard Nextflow convention of naming the workflow file `main.nf`, fleshed out the configuration file, and added a parameter file.
 
-Now it's time to tackle **modularizing** our code.
+Now it's time to tackle **modularizing** our code, _i.e._ extracting the process definitions into modules.
 
-We're going to pick up where we left off in Part 5 (Hello Config), this time working inside the project directory called `projectM` (for Modules).
+We're going to be working with a clean set of project files inside the project directory called `projectM` (for Modules).
 
-### 0.1. Explore the projectM directory¶
+### 0.1. Explore the `projectM` directory
 
 Let's move into the project directory.
 If you're continuing on directly from Part 5, you'll need to move up one directory first.
@@ -34,7 +34,7 @@ If you're continuing on directly from Part 5, you'll need to move up one directo
 cd projectM
 ```
 
-The `projectM` directory has the same content and structure that you're expected to end up with on completion of Part 5.
+The `projectM` directory has the same content and structure that you're expected to end up with on completion of Part 5, except the `intermediates` correspond to the ones for this part of the training.
 
 ```console title="Directory contents"
 projectC/
@@ -44,17 +44,18 @@ projectC/
 └── nextflow.config
 ```
 
-For a detailed description of these files, see the warmup in Part 5.
+For a detailed description of these files, see the Warmup section in Part 5.
 
-### 0.2. Create a symbolic link to the data¶
+### 0.2. Create a symbolic link to the data
 
-Run this command from inside the projectC directory:
+Just like last time, we need to set up a symlink to the data.
+To do so, run this command from inside the projectC directory:
 
 ```bash
 ln -s ../data data
 ```
 
-This creates a symbolic link called data pointing to the data directory, which allows us to avoid having to change anything to how the file paths are set up.
+This creates a symbolic link called `data` pointing to the data directory one level up.
 
 ### 0.3 Run the workflow using the appropriate profiles
 
