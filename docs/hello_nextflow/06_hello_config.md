@@ -21,16 +21,19 @@ We want to launch the workflow from inside the `projectC` directory, so let's mo
 cd projectC
 ```
 
-You'll see the following contents:
+You can use `tree` to see the following contents:
 
 ```console title="Directory contents"
-projectC
+.
 ├── demo-params.json
 ├── intermediates
 │   ├── 1-nextflow.config
 │   ├── 2-nextflow.config
 │   ├── 3-nextflow.config
-│   └── 4-nextflow.config
+│   ├── 4-nextflow.config
+│   ├── 5-nextflow.config
+│   ├── report-config-1.html
+│   └── report-config-2.html
 ├── main.nf
 └── nextflow.config
 ```
@@ -41,12 +44,12 @@ projectC
     Whenever there is a file named `nextflow.config` in the current directory, Nextflow will automatically load configuration from it. The one we have been using contains the following lines:
 
     ```console title="nextflow.config" linenums="1"
-    docker.fixOwnership = true
     docker.enabled = true
+    docker.fixOwnership = true
     ```
 
     The `docker.fixOwnership = true` line is not really interesting.
-    It's a workaround for an issue that sometimes occur with containerized tools that set the wrong permissions on the files they write (which is the case with the GATK GenomicsDBImport cotainer image in our workflow).
+    It's a workaround for an issue that sometimes occur with containerized tools that set the wrong permissions on the files they write (which is the case with the GATK GenomicsDBImport container image in our workflow).
 
     The `docker.enabled = true` line is what we care about here.
     It specifies that Nextflow should use Docker to run process calls that specify a container image.
@@ -75,10 +78,17 @@ ln -s ../data data
 This creates a symbolic link called `data` pointing to the data directory, which allows us to avoid having to change anything to how the file paths are set up.
 
 ```console title="Directory contents"
-projectC/
+.
 ├── data -> ../data
 ├── demo-params.json
 ├── intermediates
+│   ├── 1-nextflow.config
+│   ├── 2-nextflow.config
+│   ├── 3-nextflow.config
+│   ├── 4-nextflow.config
+│   ├── 5-nextflow.config
+│   ├── report-config-1.html
+│   └── report-config-2.html
 ├── main.nf
 └── nextflow.config
 ```
@@ -133,15 +143,15 @@ First, we have to switch the value of `docker.enabled` to false.
 _Before:_
 
 ```console title="nextflow.config" linenums="1"
-docker.fixOwnership = true
 docker.enabled = true
+docker.fixOwnership = true
 ```
 
 _After:_
 
 ```console title="nextflow.config" linenums="1"
-docker.fixOwnership = true
 docker.enabled = false
+docker.fixOwnership = true
 ```
 
 Let's see what happens if we run that.
@@ -194,7 +204,7 @@ Let's try using Conda environments for our workflow.
 
 ### 1.3 Add a conda environment to the Samtools process definition
 
-We know that Bioconda provides a Samtools environment, so we just need to retrieve its URI and add it to the process definition using the `conda` directive.
+We know that Bioconda provides packages for Samtools, so we just need to retrieve its URI and add it to the process definition using the `conda` directive.
 
 _Before:_
 
@@ -228,20 +238,20 @@ And while we're at it, let's put a blank line before those two to emphasize the 
 _Before:_
 
 ```groovy title="nextflow.config" linenums="1"
-docker.fixOwnership = true
 docker.enabled = false
+docker.fixOwnership = true
 ```
 
 _After:_
 
 ```groovy title="nextflow.config" linenums="1"
-docker.fixOwnership = true
-
 docker.enabled = false
 conda.enabled = true
+
+docker.fixOwnership = true
 ```
 
-This should allow Nextflow to use the Conda environment we added for Samtools.
+This should allow Nextflow to create a Conda environment with the Samtools package we provided.
 
 ### 1.5 Run it to see if it works
 
@@ -302,7 +312,7 @@ But this is great!
 We see that the Samtools process calls were executed successfully.
 The overall run just fails because we haven't yet added a Conda environment for the GATK processes, so let's do that now.
 
-### 1.6 Add conda environment to GATK processes
+### 1.6 Make Nextflow create a conda environment to GATK processes
 
 There are two GATK processes that need to be updated, GATK_HAPLOTYPECALLER and GATK_JOINTGENOTYPING.
 
@@ -354,6 +364,10 @@ process GATK_JOINTGENOTYPING {
 
 Once both processes are updated, we can try it out again.
 
+!!! note
+
+    If you're curious about how to get the exact URI for the conda package you're looking for, you can use [Seqera Containers](https://seqera.io/containers/) search query and just copy paste the URI, instead of going ahead with creating a container.
+
 ### 1.7 Run the workflow again
 
 This time it should all work.
@@ -383,7 +397,7 @@ This means we're all set to run with Conda environments if needed.
     In that case, you would enable both Docker and Conda in your configuration file.
     If both are available for a given process, Nextflow will prioritize containers.
 
-    And as noted earlier, Nextflow supports multiple other software packaging technologies, so you are not limited to just those two.
+    And as noted earlier, Nextflow supports multiple other software packaging and container technologies, so you are not limited to just those two.
 
 ### Takeaway
 
@@ -406,10 +420,10 @@ Setting up these profiles mainly involves restructuring how we specify the `dock
 _Before:_
 
 ```groovy title="nextflow.config" linenums="1"
-docker.fixOwnership = true
-
 docker.enabled = false
 conda.enabled = true
+
+docker.fixOwnership = true
 ```
 
 _After:_
