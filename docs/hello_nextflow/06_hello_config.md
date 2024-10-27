@@ -38,7 +38,7 @@ projectC
 -   **`main.nf`** is a workflow based on `hello-operators.nf`, the workflow produced by completing Part 4 of this training course;
 
 -   **`nextflow.config`** is a copy of the original `nextflow.config` file from the `hello-nextflow` directory, one level up (where we've been working so far).
-    It is the default configuration file that is expected by Nextflow and contains the following lines:
+    Whenever there is a file named `nextflow.config` in the current directory, Nextflow will automatically load configuration from it. The one we have been using contains the following lines:
 
     ```console title="nextflow.config" linenums="1"
     docker.fixOwnership = true
