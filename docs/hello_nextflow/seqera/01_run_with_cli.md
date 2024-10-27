@@ -33,7 +33,7 @@ Follow these steps to set up your token:
     Open a terminal and type:
 
     ```bash
-    export TOWER_ACCESS_TOKEN=eyxxxxxxxxxxxxxxxQ1ZTE=
+     export TOWER_ACCESS_TOKEN=eyxxxxxxxxxxxxxxxQ1ZTE=
     ```
 
     Where `eyxxxxxxxxxxxxxxxQ1ZTE=` is the token you have just created.
@@ -84,29 +84,30 @@ Before we set the configuration, we need to permanently store the token in Nextf
 nextflow secrets set tower_access_token "eyxxxxxxxxxxxxxxxQ1ZTE="
 ```
 
-The following block of configuration will enable Seqera Platform logging by default:
-
-```groovy title="nextflow.config"
-tower {
-    enabled = true
-    endpoint = "https://api.cloud.seqera.io"
-    accessToken = secrets.tower_access_token
-}
-```
-
-However, instead of enabling Seqera Platform for an individual pipeline, we want to enable it for ourselves globally.
-
-Run the following command to put the config block in your user configuration file located at `$HOME/.nextflow/config`.
+We want to configure Nextflow to use Seqera Platform by default across all our pipelines, so we will open the global Nextflow configuration file (`$HOME/.nextflow/config`) for editing:
 
 ```bash
-cat <<EOF >> $HOME/.nextflow/config
+code $HOME/.nextflow/config
+```
+
+Add the following configuration to the file:
+
+```groovy title="$HOME/.nextflow/config"
 tower {
     enabled = true
-    endpoint = "https://api.cloud.seqera.io"
     accessToken = secrets.tower_access_token
+    workspaceId = secrets.tower_workspace_id
+    endpoint = "https://api.cloud.seqera.io"
 }
-EOF
 ```
+
+!!! hint "Workspace ID and Endpoint`
+
+    We haven't set `secrets.tower_workspace_id` yet, and so Nextflow will fill in an empty string for this value.
+    This will default to the user's workspace in Seqera Platform which is what we want for now.
+
+    The `endpoint` is the URL of the Seqera Platform API.
+    If your institution is running a private instance of Seqera Platform, you will want to change this to the appropriate URL.
 
 Run your Nextflow workflows as usual:
 

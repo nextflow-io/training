@@ -12,9 +12,7 @@ In this section, we'll introduce you to Seqera Platform, a powerful cloud-based 
 
     [Sign up](https://cloud.seqera.io/) to try Seqera for free or request a [demo](https://seqera.io/demo/) for deployments in your own on-premise or cloud environment.
 
-You'll learn how to use Seqera Platform within Nextflow CLI, the Seqera Platform GUI, and the API.
-
-You can use Seqera Platform via either the **CLI**, through the **online GUI** or through the **API**.
+You'll learn how to use Seqera Platform within Nextflow CLI command-line interface, the Seqera Platform GUI (Graphical User Interface), and the Seqera API (Application Program Interface).
 
 --8<-- "docs/hello_nextflow/seqera/01_run_with_cli.md"
 
