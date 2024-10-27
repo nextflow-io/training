@@ -49,7 +49,7 @@ projectC
     It's a workaround for an issue that sometimes occur with containerized tools that set the wrong permissions on the files they write (which is the case with the GATK GenomicsDBImport cotainer image in our workflow).
 
     The `docker.enabled = true` line is what we care about here.
-    It specifies that Nextflow should use Docker containers to execute process calls.
+    It specifies that Nextflow should use Docker to run process calls that specify a container image.
     We're going to be playing with that shortly.
 
 !!!note
