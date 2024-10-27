@@ -13,7 +13,7 @@ However, we're now moving into the phase of this training series that is more fo
 As part of that, we're going to adopt a formal project structure.
 We're going to work inside a dedicated project directory called `projectC` (C for configuration), and we've renamed the workflow file `main.nf` to match the recommended Nextflow convention.
 
-### 0.1. Move into the `projectC` directory
+### 0.1. Explore the `projectC` directory
 
 We want to launch the workflow from inside the `projectC` directory, so let's move into it now.
 
@@ -60,7 +60,7 @@ projectC/
 The one thing that's missing is a way to point to the original data without making a copy of it or updating the file paths wherever they're specified.
 The simplest solution is to link to the data location.
 
-### 0.1. Create a symbolic link to the data
+### 0.2. Create a symbolic link to the data
 
 Run this command from inside the `projectC` directory:
 
@@ -81,7 +81,7 @@ projectC/
 
 Later we'll cover a better way of handling this, but this will do for now.
 
-### 0.2. Verify that the initial workflow runs properly
+### 0.3. Verify that the initial workflow runs properly
 
 Now that everything is in place, we should be able to run the workflow successfully.
 
