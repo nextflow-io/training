@@ -21,27 +21,73 @@ For more background information about nf-test, we recommend you read [this blog 
 
 ## 0. Warmup
 
-We start from a base workflow called `hello-nf-test.nf`, which corresponds to the workflow we produced in Part 3: Hello modules (equivalent to `scripts/hello-modules-3.nf`).
+We're going to add a few different types of tests to the three processes in our pipeline, as well as a workflow-level test.
 
-This is a modularized pipeline; the processes are in local modules and the parameter declarations are in a configuration file. If you completed the previous parts of the training course, then you already have everything you need in the working directory. However, if you're just starting from this section, you need to copy the `nextflow.config` file and the `modules` folder from `scripts/` to the `hello-nextflow` directory.
+Similarly to we did in Part 6 (Hello Modules), we're going to be working with a clean set of project files inside the project directory called `hello-nf-test`.
 
-```
-cd /workspace/gitpod/hello-nextflow
-cp scripts/nextflow.config .
-cp -r scripts/modules .
-```
+!!!note
 
-### 0.1 Run the workflow to verify that it produces the expected outputs
+    If you haven't worked through the previous parts of this training course, you should consider doing so now to understand how the code is organized.
+    In a nutshell, this is a modularized pipeline; the processes are in local modules and the parameter declarations are in a configuration file.
+
+### 0.1. Explore the `hello-nf-test` directory
+
+Let's move into the project directory.
+If you're continuing on directly from Part 6, you'll need to move up one directory first.
 
 ```bash
-nextflow run hello-nf-test.nf
+cd hello-nf-test
 ```
 
-The pipeline takes in three BAM files, each one containing sequencing data for one of three samples from a human family trio (mother, father and son), and outputs a VCF file containing variant calls. For more details, see the previous section of this training.
+The `hello-nf-test` directory has the same content and structure that you're expected to end up with in `hello-modules` on completion of Part 6.
 
-### 0.2 Initialize nf-test
+```console title="Directory contents"
+hello-nf-test/
+├── demo-params.json
+├── main.nf
+├── modules
+└── nextflow.config
+```
 
-Run the following command in the terminal:
+For a detailed description of the files, see the Warmup section in Part 6. For details about the content of `modules`, read through all of Part 6 (it's pretty short).
+
+### 0.2. Create a symbolic link to the data
+
+Just like last time, we need to set up a symlink to the data.
+To do so, run this command from inside the `hello-nf-test` directory:
+
+```bash
+ln -s ../data data
+```
+
+This creates a symbolic link called `data` pointing to the data directory one level up.
+
+### 0.3 Run the workflow using the appropriate profiles
+
+Now that everything is in place, we should be able to run the workflow using the profiles we set up in Part 5 (Hello Config).
+
+```bash
+nextflow run main.nf -profile my_laptop,demo
+```
+
+And so it does.
+
+```console title="Output"
+ N E X T F L O W   ~  version 24.02.0-edge
+
+ ┃ Launching `main.nf` [special_brenner] DSL2 - revision: 5a07b4894b
+
+executor >  local (7)
+[26/60774a] SAMTOOLS_INDEX (1)       | 3 of 3 ✔
+[5a/eb40c4] GATK_HAPLOTYPECALLER (2) | 3 of 3 ✔
+[8f/94ac86] GATK_JOINTGENOTYPING     | 1 of 1 ✔
+```
+
+Like previously, there will now be a `work` directory and a `results_genomics` directory inside your project directory.
+
+### 0.4. Initialize `nf-test`
+
+The `nf-test` package provides an initialization command that sets up a few things in order to start the test development procees for our project.
 
 ```bash
 nf-test init
