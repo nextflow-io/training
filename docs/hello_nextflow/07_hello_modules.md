@@ -29,8 +29,6 @@ The pipeline takes in three BAM files, each one containing sequencing data for o
 
 ### 1.1 Move the parameter definitions into `nextflow.config`
 
-If you have not already done so in [hello-config](./06_hello_config.md#5-configure-workflow-parameters), move the parameters block from the workflow file to a configuration file named `nextflow.config`. To do this, remove the following code in `main.nf`:
-
 ```groovy
 /*
  * Pipeline parameters
@@ -51,28 +49,6 @@ params.calling_intervals = "${projectDir}/data/ref/intervals.bed"
 
 // Base name for final output file
 params.cohort_name = "family_trio"
-```
-
-Add the following code to `nextflow.config`:
-
-```groovy title="nextflow.config" linenums="35"
-/*
- * Pipeline parameters
- */
-
-params {
-    // Primary input (file of input files, one per line)
-    reads_bam        = "${projectDir}/data/sample_bams.txt"
-
-    // Accessory files
-    reference        = "${projectDir}/data/ref/ref.fasta"
-    reference_index  = "${projectDir}/data/ref/ref.fasta.fai"
-    reference_dict   = "${projectDir}/data/ref/ref.dict"
-    intervals        = "${projectDir}/data/ref/intervals.bed"
-
-    // Base name for final output file
-    cohort_name      = "family_trio"
-}
 ```
 
 ### 1.2 Run the workflow to verify that it does the same thing as before
