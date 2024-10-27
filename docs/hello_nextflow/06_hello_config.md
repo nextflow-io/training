@@ -13,40 +13,80 @@ However, we're now moving into the phase of this training series that is more fo
 As part of that, we're going to adopt a formal project structure.
 We're going to work inside a dedicated project directory called `projectC` (C for configuration), and we've renamed the workflow file `main.nf` to match the recommended Nextflow convention.
 
+### 0.1. Explore the `projectC` directory
+
+We want to launch the workflow from inside the `projectC` directory, so let's move into it now.
+
+```bash
+cd projectC
+```
+
+Let's take a look at the contents.
+You can use the file explorer or the terminal; here we're using the output of `tree` to display the top-level directory contents.
+
 ```console title="Directory contents"
-projectC/
-├── data -> ../data
+projectC
+├── demo-params.json
+├── intermediates
 ├── main.nf
 └── nextflow.config
 ```
 
-The `main.nf` file is similar to the workflow produced by completing Part 4 of this training course.
+-   **`main.nf`** is a workflow based on `hello-operators.nf`, the workflow produced by completing Part 4 of this training course;
 
-The `nextflow.config` file is a copy of the original `nextflow.config` file from the `hello-nextflow` directory (which we've ben using so far). It is the default configuration file that is expected by Nextflow.
+-   **`nextflow.config`** is a copy of the original `nextflow.config` file from the `hello-nextflow` directory, one level up (where we've been working so far).
+    Whenever there is a file named `nextflow.config` in the current directory, Nextflow will automatically load configuration from it. The one we have been using contains the following lines:
 
-```console title="nextflow.config" linenums="1"
-docker.fixOwnership = true
-docker.enabled = true
-```
+    ```console title="nextflow.config" linenums="1"
+    docker.fixOwnership = true
+    docker.enabled = true
+    ```
 
-The `docker.fixOwnership = true` line is not really interesting.
-It's a workaround for an issue that sometimes occur with containerized tools that set the wrong permissions on the files they write (which is the case with GATK GenomicsDBImport in our workflow).
+    The `docker.fixOwnership = true` line is not really interesting.
+    It's a workaround for an issue that sometimes occur with containerized tools that set the wrong permissions on the files they write (which is the case with GenomicsDBImport in the GATK container image in our workflow).
 
-The `docker.enabled = true` line is what we care about here.
-It specifies that Nextflow should use Docker containers to execute process calls.
-We're going to be playing with that shortly.
+    The `docker.enabled = true` line is what we care about here.
+    It specifies that Nextflow should use Docker to run process calls that specify a container image.
+    We're going to be playing with that shortly.
 
 !!!note
 
-    Anything you put into the `nextflow.config` can be overriden at runtime by providing the relevant directives or parameters and values on the command line, or by importing another configuration file, according to the order of precedence described [here](https://www.nextflow.io/docs/latest/config.html).
+    Anything you put into the `nextflow.config` can be overridden at runtime by providing the relevant process directives or parameters and values on the command line, or by importing another configuration file, according to the order of precedence described [here](https://www.nextflow.io/docs/latest/config.html).
 
-We've also created a symbolic link called `data` pointing to the data directory, to avoid having to change anything to how the file paths are set up.
-Later we'll cover a better way of handling this, but this will do for now.
+-   **`demo-params.json`** is a parameter file intended for supplying parameter values to a workflow.
+    We will use it in section 5 of this tutorial.
 
-You can test that it runs properly:
+-   **`intermediates/`** is a directory containing the intermediate forms of the workflow and configuration files for each section of this tutorial.
+
+The one thing that's missing is a way to point to the original data without making a copy of it or updating the file paths wherever they're specified.
+The simplest solution is to link to the data location.
+
+### 0.2. Create a symbolic link to the data
+
+Run this command from inside the `projectC` directory:
 
 ```bash
-cd projectC
+ln -s ../data data
+```
+
+This creates a symbolic link called `data` pointing to the data directory, which allows us to avoid having to change anything to how the file paths are set up.
+
+```console title="Directory contents"
+projectC
+├── data -> ../data
+├── demo-params.json
+├── intermediates
+├── main.nf
+└── nextflow.config
+```
+
+Later we'll cover a better way of handling this, but this will do for now.
+
+### 0.3. Verify that the initial workflow runs properly
+
+Now that everything is in place, we should be able to run the workflow successfully.
+
+```bash
 nextflow run main.nf
 ```
 
@@ -83,7 +123,7 @@ In the very first part of this training course (Part 1: Hello World) we just use
 
 Now, let's pretend we're working on an HPC cluster and the admin doesn't allow the use of Docker for security reasons.
 
-### 1.1 Disable Docker in the config file
+### 1.1. Disable Docker in the config file
 
 First, we have to switch the value of `docker.enabled` to false.
 
@@ -103,7 +143,7 @@ docker.enabled = false
 
 Let's see what happens if we run that.
 
-### 1.2 Run the workflow without Docker
+### 1.2. Run the workflow without Docker
 
 We are now launching the `main.nf` workflow from inside the `projectC` directory.
 
@@ -149,9 +189,44 @@ Command not found? Of course, we don't have Samtools installed in our environmen
 
 Let's try using Conda environments for our workflow.
 
-### 1.3 Add a conda environment to the Samtools process definition
+### 1.3. Enable Conda in the configuration file
 
-We know that Bioconda provides a Samtools environment, so we just need to retrieve its URI and add it to the process definition using the `conda` directive.
+First, we need to add a directive enabling the use of Conda, right after the line that controls the use of Docker.
+And while we're at it, let's put a blank line before those two to emphasize the logical grouping.
+
+_Before:_
+
+```groovy title="nextflow.config" linenums="1"
+docker.fixOwnership = true
+docker.enabled = false
+```
+
+_After:_
+
+```groovy title="nextflow.config" linenums="1"
+docker.fixOwnership = true
+
+docker.enabled = false
+conda.enabled = true
+```
+
+This should allow Nextflow to create and utilize Conda environments for processes that have Conda packages specified. Which means we now need to add those to our processes!
+
+### 1.4. Specify Conda packages in the process definitions
+
+We know that the Bioconda project provides Conda packages for Samtools and GATK, so we just need to retrieve their URIs and add them to the corresponding process definitions using the `conda` directive.
+
+!!! note
+
+    There are a few different ways to get the URI for a given conda package.
+    We recommend using the [Seqera Containers](https://seqera.io/containers/) search query, which will give you a URI that you can copy paste, even if you're not creating a container.
+
+For your convenience, we are providing the URIs below. Just make sure to _add_ the `conda` directive.
+To be clear, we're not _replacing_ the `docker` directive, just adding an alternative option.
+
+#### 1.4.1. Update SAMTOOLS_INDEX
+
+The URI is `"bioconda::samtools=1.20"`.
 
 _Before:_
 
@@ -174,33 +249,59 @@ process SAMTOOLS_INDEX {
     publishDir 'results_genomics', mode: 'symlink'
 ```
 
-Make sure to _add_ the conda directive.
-We're not _replacing_ the docker directive, just adding an alternative option.
+#### 1.4.2. Update GATK_HAPLOTYPECALLER
 
-### 1.4 Enable Conda in the configuration file
-
-We need to add a line enabling the conda directive.
-And while we're add it, let's put a blank line before thos two to emphasize the logical grouping.
+The URI is `"bioconda::gatk4=4.5.0.0"`.
 
 _Before:_
 
-```groovy title="nextflow.config" linenums="1"
-docker.fixOwnership = true
-docker.enabled = false
+```console title="main.nf" linenums="43"
+process GATK_HAPLOTYPECALLER {
+
+    container "community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"
+
+    publishDir 'results_genomics', mode: 'symlink'
 ```
 
 _After:_
 
-```groovy title="nextflow.config" linenums="1"
-docker.fixOwnership = true
+```console title="main.nf" linenums="43"
+process GATK_HAPLOTYPECALLER {
 
-docker.enabled = false
-conda.enabled = true
+    container "community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"
+    conda "bioconda::gatk4=4.5.0.0"
+
+    publishDir 'results_genomics', mode: 'symlink'
 ```
 
-This should allow Nextflow to use the Conda environment we added for Samtools.
+#### 1.4.3. Update GATK_JOINTGENOTYPING
 
-### 1.5 Run it to see if it works
+The URI is `"bioconda::gatk4=4.5.0.0"`.
+
+_Before:_
+
+```console title="main.nf" linenums="74"
+process GATK_JOINTGENOTYPING {
+
+    container "community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"
+
+    publishDir 'results_genomics', mode: 'symlink'
+```
+
+_After:_
+
+```console title="main.nf" linenums="74"
+process GATK_JOINTGENOTYPING {
+
+    container "community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"
+    conda "bioconda::gatk4=4.5.0.0"
+
+    publishDir 'results_genomics', mode: 'symlink'
+```
+
+Once all three processes are updated, we can try running the workflow again.
+
+### 1.5. Run the workflow to verify that it can use Conda
 
 Let's try it out.
 
@@ -218,108 +319,12 @@ This will take a bit longer than usual the first time, and you might see the con
 [-        ] SAMTOOLS_INDEX       -
 [-        ] GATK_HAPLOTYPECALLER -
 [-        ] GATK_JOINTGENOTYPING -
-Creating env using conda: bioconda::gatk4=4.5.0.0 [cache /workspace/gitpod/hello-nextflow/projectC/work/conda/env-6684ea23d69ceb1742019ff36904f612]
+Creating env using conda: bioconda::samtools=1.20 [cache /workspace/gitpod/hello-nextflow/projectC/work/conda/env-6684ea23d69ceb1742019ff36904f612]
 ```
 
-That's because Nextflow has to retrieve and spin up the Conda environment, which takes a bit of work behind the scenes.
-Then after a moment it'll spit out the rest of the output. It may look a little messy:
+That's because Nextflow has to retrieve the Conda packages and create the environment, which takes a bit of work behind the scenes. The good news is that you don't need to deal with any of it yourself!
 
-```console title="Output"
-  N E X T F L O W   ~  version 24.02.0-edge
-
- ┃ Launching `main.nf` [big_engelbart] DSL2 - revision: 63efa30da7
-
-[-        ] SAMTOOLS_INDEX       -
-executor >  local (3)
-executor >  local (6)
-[6e/78985e] SAMTOOLS_INDEX (1)       [100%] 3 of 3 ✔
-[eb/70a150] GATK_HAPLOTYPECALLER (3) [  0%] 0 of 3
-[-        ] GATK_JOINTGENOTYPING     -
-Creating env using conda: bioconda::samtools=1.20 [cache /workspace/gitpod/hello-nextflow/projectC/work/conda/env-1f9e4747cd58cb43e7ca4da34bb66eee]
-ERROR ~ Error executing process > 'GATK_HAPLOTYPECALLER (1)'
-
-Caused by:
-  Process `GATK_HAPLOTYPECALLER (1)` terminated with an error exit status (127)
-
-Command executed:
-
-  gatk HaplotypeCaller         -R ref.fasta         -I reads_son.bam         -O reads_son.bam.g.vcf         -L intervals.bed         -ERC GVCF
-
-Command exit status:
-  127
-
-Command output:
-  (empty)
-
-Command error:
-  .command.sh: line 2: gatk: command not found
-```
-
-But this is great!
-We see that the Samtools process calls were executed successfully.
-The overall run just fails because we haven't yet added a Conda environment for the GATK processes, so let's do that now.
-
-### 1.6 Add conda environment to GATK processes
-
-There are two GATK processes that need to be updated, GATK_HAPLOTYPECALLER and GATK_JOINTGENOTYPING.
-
-#### 1.6.1. Update GATK_HAPLOTYPECALLER
-
-_Before:_
-
-```console title="main.nf" linenums="43"
-process GATK_HAPLOTYPECALLER {
-
-    container "community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"
-
-    publishDir 'results_genomics', mode: 'symlink'
-```
-
-_After:_
-
-```console title="main.nf" linenums="43"
-process GATK_HAPLOTYPECALLER {
-
-    container "community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"
-    conda "bioconda::gatk4=4.5.0.0"
-
-    publishDir 'results_genomics', mode: 'symlink'
-```
-
-#### 1.6.2. Update GATK_JOINTGENOTYPING
-
-_Before:_
-
-```console title="main.nf" linenums="74"
-process GATK_JOINTGENOTYPING {
-
-    container "community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"
-
-    publishDir 'results_genomics', mode: 'symlink'
-```
-
-_After:_
-
-```console title="main.nf" linenums="74"
-process GATK_JOINTGENOTYPING {
-
-    container "community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"
-    conda "bioconda::gatk4=4.5.0.0"
-
-    publishDir 'results_genomics', mode: 'symlink'
-```
-
-Once both processes are updated, we can try it out again.
-
-### 1.7 Run the workflow again
-
-This time it should all work.
-
-```bash
-nextflow run main.nf
-```
-
-And so it does!
+After a few moments, it should spit out some more output, and eventually complete without error.
 
 ```console title="Output"
  N E X T F L O W   ~  version 24.02.0-edge
@@ -332,6 +337,8 @@ executor >  local (7)
 [2e/e6ffca] GATK_JOINTGENOTYPING     [100%] 1 of 1 ✔
 ```
 
+And from our standpoint, it looks like it works exactly the same as running with Docker, even though on the backend the mechanics are a bit different.
+
 This means we're all set to run with Conda environments if needed.
 
 !!!note
@@ -340,7 +347,7 @@ This means we're all set to run with Conda environments if needed.
     In that case, you would enable both Docker and Conda in your configuration file.
     If both are available for a given process, Nextflow will prioritize containers.
 
-    And as noted earlier, Nextflow supports multiple other software packaging technologies, so you are not limited to just those two.
+    And as noted earlier, Nextflow supports multiple other software packaging and container technologies, so you are not limited to just those two.
 
 ### Takeaway
 
@@ -394,7 +401,7 @@ Let's try running the workflow with Conda.
 nextflow run main.nf -profile conda_on
 ```
 
-It works! And from our standpoint, it looks like it works exactly the same, even though on the backend the mechanics are a bit different.
+It works! Convenient, isn't it?
 
 ```
  N E X T F L O W   ~  version 24.02.0-edge
@@ -407,7 +414,7 @@ executor >  local (7)
 [a6/0f72fd] GATK_JOINTGENOTYPING     [100%] 1 of 1 ✔
 ```
 
-Feel free to try it out with the Conda profile too. You just have to switch `-profile conda` to `-profile docker` in the command.
+Feel free to try it out with the Docker profile too. You just have to switch `-profile conda_on` to `-profile docker_on` in the command.
 
 ### Takeaway
 
@@ -493,7 +500,7 @@ Command executed:
 
 However, it did produce what we are looking for: the `.command.run` file that Nextflow tried to submit to Slurm via the `sbatch` command.
 
-Let's take a look inside. **TODO: UPDATE NEXTFLOW VERSION SO WE CAN HAVE THIS SWEET OUTPUT**
+Let's take a look inside. <!-- **TODO: UPDATE NEXTFLOW VERSION SO WE CAN HAVE THIS SWEET OUTPUT** -->
 
 ```bash title=".command.run" linenums="1"
 #!/bin/bash
@@ -662,7 +669,7 @@ Learn how to control the resources allocated for executing processes.
 
 ## 4. Allocate compute resources with process directives
 
-We've covered how to control what compute environment Nextflow is going to use to run the worfklow, so now the next logical question is, how do we control the resources (CPU, memory etc) that will be allocated?
+We've covered how to control what compute environment Nextflow is going to use to run the workflow, so now the next logical question is, how do we control the resources (CPU, memory etc) that will be allocated?
 
 The answer may not surprise you; it's process directives again.
 
@@ -716,9 +723,12 @@ nextflow run main.nf -profile my_laptop -with-report report-config-1.html
 ```
 
 The report is an html file, which you can download and open in your browser.
-Take a few minutes to look through the report and see if you can identify some opportunities for adjusting resources. There is some [documentation](https://www.nextflow.io/docs/latest/reports.html) describing all the available features.
 
-**TODO: insert images**
+Take a few minutes to look through the report and see if you can identify some opportunities for adjusting resources.
+Make sure to click on the tabs that show the utilization results as a percentage of what was allocated.
+There is some [documentation](https://www.nextflow.io/docs/latest/reports.html) describing all the available features.
+
+<!-- TODO: insert images -->
 
 One observation is that the `GATK_JOINTGENOTYPING` seems to be very hungry for CPU, which makes sense since it performs a lot of complex calculations.
 So we could try boosting that and see if it cuts down on runtime.
@@ -766,10 +776,10 @@ nextflow run main.nf -profile my_laptop -with-report report-config-2.html
 
 Once again, you probably won't notice a substantial difference in runtime, because this is such a small workload and the tools spend more time in ancillary tasks than in performing the 'real' work.
 
-However, this second report shows that our resource utilization is more balanced now, and the runtime of the `GATK_JOINTGENOTYPING` process has been cut in half.
+However, the second report shows that our resource utilization is more balanced now, and the runtime of the `GATK_JOINTGENOTYPING` process has been cut in half.
 We probably didn't need to go all the way to 8 CPUs, but since there's only one call to that process, it's not a huge drain.
 
-**TODO: screenshots?**
+<!-- **TODO: screenshots?** -->
 
 As you can see, this approach is useful when your processes have different resource requirements. It empowers you to can right-size the resource allocations you set up for each process based on actual data, not guesswork.
 
@@ -822,7 +832,9 @@ _After:_
     }
 ```
 
-We can't test this since we don't have a live connection to Slurm in the Gitpod environment, but you can look up the `sbatch` command in the `.command.run` script file if you'd like to see how these directives are translated into job parameters for the executor.
+We can't test this since we don't have a live connection to Slurm in the Gitpod environment.
+However, you can try running the workflow with resource allocations that exceed these limits, then look up the `sbatch` command in the `.command.run` script file.
+You should see that the requests that actually get sent to the executor are capped at the values specified by `resourceLimits`.
 
 !!!note
 
@@ -832,7 +844,7 @@ We can't test this since we don't have a live connection to Slurm in the Gitpod 
 
 ### Takeaway
 
-You know how to allocate process resources, tweak those allocations based on the utilization report, and adapt based on the compute environment.
+You know how to allocate process resources, tweak those allocations based on the utilization report, and use a profile to adapt the allocations to the compute environment.
 
 ### What's next?
 
@@ -1014,7 +1026,7 @@ params {
 Now, if you run the same command again, it will still work.
 So yes, we're definitely able to pull those parameter values from the parameter file.
 
-This is great because, with the parameter file in hand, we'll now be able to provide parameter values at runtime without having to type massive command lines **and** without modifying the workflow and the default configuration.
+This is great because, with the parameter file in hand, we'll now be able to provide parameter values at runtime without having to type massive command lines **and** without modifying the workflow nor the default configuration.
 
 That being said, it was nice to be able to demo the workflow without having to keep track of filenames and such. Let's see if we can use a profile to replicate that behavior.
 
@@ -1110,7 +1122,7 @@ executor >  local (7)
 [8a/2f498f] GATK_JOINTGENOTYPING     [100%] 1 of 1 ✔
 ```
 
-Imagine what we can do with this tooling in place...
+Imagine what we can do with this tooling in place.
 For example, we could also add profiles with popular sets of reference files to save people the trouble of providing their own.
 
 ### Takeaway
