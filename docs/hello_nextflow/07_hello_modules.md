@@ -1,8 +1,18 @@
 # Part 6: Hello Modules
 
-In Nextflow, a module is a way to encapsulate a single process by itself in a standalone code file. To use a module in a workflow, you just add a single-line import statement to your workflow code file; then you can integrate the process into the workflow the same way you normally would.
+When we started developing our workflow, we put everything in one single code file.
+However, as our pipeline project matures, we are adopting certain conventions and best practices that are going to make development and maintenance of our pipeline more efficient and sustainable.
 
-Putting processes into individual modules makes it possible to reuse process descriptions in multiple workflows instead of just replicating the code. This makes the code more shareable, flexible and maintainable.
+In Part 5, we started turning our one-script workflow into a proper pipeline project by teasing out parameter settings and building out the configuration file(s).
+We also moved to the standard Nextflow convention of naming the workflow file `main.nf`.
+
+Now it's time to tackle **modularizing** our code.
+
+In Nextflow, a **module** is a single process definition that is encapsulated by itself in a standalone code file.
+To use a module in a workflow, you just add a single-line import statement to your workflow code file; then you can integrate the process into the workflow the same way you normally would.
+
+Putting processes into individual modules makes it possible to reuse process definitions in multiple workflows without producing multiple copies of the code.
+This makes the code more shareable, flexible and maintainable.
 
 !!!note
 
@@ -12,7 +22,7 @@ Putting processes into individual modules makes it possible to reuse process des
 
 ## 0. Warmup
 
-We're going to pick up where we left off in Part 5 (Hello Config), this time working inside a project directory called `projectM` (for Modules).
+We're going to pick up where we left off in Part 5 (Hello Config), this time working inside the project directory called `projectM` (for Modules).
 The `projectM` directory has the same content and structure that you're expected to end up with on completion of Part 5.
 
 ### 0.1 Run the workflow using the appropriate profiles
