@@ -20,7 +20,7 @@ This directory contains all the code files, test data and accessory files you wi
 tree . -L 2
 ```
 
-You should see the following output:
+You should see the following output: **TODO: UPDATE**
 
 ```console title="Directory contents"
 /workspace/gitpod/hello-nextflow
@@ -35,7 +35,7 @@ You should see the following output:
 ├── hello-nf-test.nf
 ├── hello-world.nf
 ├── nextflow.config
-└── scripts
+└── solutions
     ├── hello-config-1.config
     ├── hello-config-2.config
     ├── hello-config-3.config
@@ -66,7 +66,7 @@ You should see the following output:
 ```
 
 **The `data` directory** contains the input data we'll use in Part 3: Hello Genomics, which uses an example from genomics to demonstrate how to build a simple analysis pipeline.
-The data are described in detail in that section of the course.
+The dataset is described in detail in that section of the course.
 
 **The file `nextflow.config`** is a configuration file that sets minimal environment properties.
 
@@ -77,4 +77,4 @@ In its initial state, it is NOT a functional workflow script.
 
 **The remaining `.nf` files** are functional workflow scripts that serve as starting points for the corresponding parts of the course.
 
-**The `scripts` directory** contains the completed workflow scripts that result from each step of the course. They are intended to be used as a reference to check your work and troubleshoot any issues. The name and number in the filename correspond to the step of the relevant part of the course. For example, the file `hello-world-4.nf` is the expected result of completing steps 1 through 4 of Part 1: Hello World.
+**The `solutions` directory** contains the completed workflow scripts and other files that you will generate in each part of the course. They are intended to be used as a reference to check your work and troubleshoot any issues. The name and number in the filename correspond to the step of the relevant part of the course. For example, the file `hello-world-4.nf` is the expected result of completing steps 1 through 4 of Part 1: Hello World.
