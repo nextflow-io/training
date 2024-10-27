@@ -372,6 +372,7 @@ nextflow run main.nf -profile my_laptop,demo -resume
 
 Yep, everything still works, including the resumability of the pipeline.
 
+```console title="Output"
 N E X T F L O W ~ version 24.02.0-edge
 
 ┃ Launching `main.nf` [tiny_blackwell] DSL2 - revision: 0ce0cd0c04
@@ -379,6 +380,7 @@ N E X T F L O W ~ version 24.02.0-edge
 [62/21cdc5] SAMTOOLS_INDEX (1) | 3 of 3, cached: 3 ✔
 [c6/8c6c30] GATK_HAPLOTYPECALLER (2) | 3 of 3, cached: 3 ✔
 [38/82b2e2] GATK_JOINTGENOTYPING | 1 of 1, cached: 1 ✔
+```
 
 Congratulations, you've done all this work and absolutely nothing has changed to how the pipeline works!
 

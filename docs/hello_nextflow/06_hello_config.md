@@ -733,7 +733,7 @@ So we could try boosting that and see if it cuts down on runtime.
 However, we seem to have overshot the mark with the memory allocations; all processes are only using a fraction of what we're giving them.
 We should dial that back down and save some resources.
 
-### 4.3. Adjust resource allocations for a specific process
+### 4.4. Adjust resource allocations for a specific process
 
 We can specify resource allocations for a given process using the `withName` directive.
 The syntax looks like this when it's by itself in a process block:
@@ -763,7 +763,7 @@ process {
 With that specified, the default settings will apply to all processes **except** the `GATK_JOINTGENOTYPING` process, which is a special snowflake that gets a lot more CPU.
 Hopefully that should have an effect.
 
-### 4.4. Run again with the modified configuration
+### 4.5. Run again with the modified configuration
 
 Let's run the workflow again with the modified configuration and with the reporting flag turned on, but notice we're giving the report a different name so we can differentiate them.
 
@@ -790,7 +790,7 @@ As you can see, this approach is useful when your processes have different resou
 
 That being said, there may be some constraints on what you can (or must) allocate depending on what computing executor and compute infrastructure you're using. For example, your cluster may require you to stay within certain limits that don't apply when you're running elsewhere.
 
-### 4.5. Add resource limits to an HPC profile
+### 4.6. Add resource limits to an HPC profile
 
 You can use the `resourceLimits` directive to set the relevant limitations. The syntax looks like this when it's by itself in a process block:
 
@@ -980,7 +980,7 @@ executor >  local (7)
 
 However, you may be thinking, well, did we really override the configuration? How would we know, since those were the same files?
 
-### 5.6. Remove or generalize default values from `nextflow.config`
+### 5.5. Remove or generalize default values from `nextflow.config`
 
 Let's strip out all the file paths from the `params` block in `nextflow.config`, replacing them with `null`, and replace the `cohort_name` value with something more generic.
 
@@ -1027,7 +1027,7 @@ This is great because, with the parameter file in hand, we'll now be able to pro
 
 That being said, it was nice to be able to demo the workflow without having to keep track of filenames and such. Let's see if we can use a profile to replicate that behavior.
 
-### 5.7. Create a demo profile
+### 5.6. Create a demo profile
 
 Yes we can! We just need to retrieve the default parameter declarations as they were written in the original workflow (with the `params.*` syntax) and copy them into a new profile that we'll call `demo`.
 
@@ -1098,7 +1098,7 @@ profiles {
 
 As long as we distribute the data bundle with the workflow code, this will enable anyone to quickly try out the workflow without having to supply their own inputs or pointing to the parameter file.
 
-### 5.8. Run with the demo profile
+### 5.7. Run with the demo profile
 
 Let's try that out:
 
