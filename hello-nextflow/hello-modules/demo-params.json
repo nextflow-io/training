@@ -1,0 +1,8 @@
+{
+    "reads_bam": "data/sample_bams.txt",
+    "reference": "data/ref/ref.fasta",
+    "reference_index": "data/ref/ref.fasta.fai",
+    "reference_dict": "data/ref/ref.dict",
+    "intervals": "data/ref/intervals.bed",
+    "cohort_name": "family_trio"
+}

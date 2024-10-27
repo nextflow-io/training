@@ -1,0 +1,3 @@
+reads_father	/workspace/gitpod/hello-nextflow/modules/local/gatk/jointgenotyping/tests/inputs/reads_father.bam.g.vcf	/workspace/gitpod/hello-nextflow/modules/local/gatk/jointgenotyping/tests/inputs/reads_father.bam.g.vcf.idx
+reads_son	/workspace/gitpod/hello-nextflow/modules/local/gatk/jointgenotyping/tests/inputs/reads_son.bam.g.vcf	/workspace/gitpod/hello-nextflow/modules/local/gatk/jointgenotyping/tests/inputs/reads_son.bam.g.vcf.idx
+reads_mother	/workspace/gitpod/hello-nextflow/modules/local/gatk/jointgenotyping/tests/inputs/reads_mother.bam.g.vcf	/workspace/gitpod/hello-nextflow/modules/local/gatk/jointgenotyping/tests/inputs/reads_mother.bam.g.vcf.idx
