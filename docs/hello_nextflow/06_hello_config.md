@@ -467,7 +467,7 @@ Basically we are telling Nextflow to generate a Slurm submission script and subm
 
 ### 3.2. Launch the workflow to generate the job submission script
 
-Let's try running this; even though we now it won't execute (since we don't have Slurm set up in the Gitpod environment) we'll be able to see what the submission script looks like.
+Let's try running this; even though we know it won't execute (since we don't have Slurm set up in the Gitpod environment) we'll be able to see what the submission script looks like.
 
 ```bash
 nextflow run main.nf -profile conda_on
@@ -591,9 +591,12 @@ executor >  local (7)
 ```
 
 The point is, we can now use profiles to switch to a different software packaging system (Conda) or a different executor (such as Slurm) with a single command-line option.
-For example, if we were back on our hypothetical HPC from earlier, we would switch to using `-profile conda,slurm` in our Nextflow command line.
+For example, if we were back on our hypothetical HPC from earlier, we would switch to using `-profile conda_on,slurm_exec` in our Nextflow command line.
 
 Feel free to test that on your own to satisfy yourself that it works as expected.
+
+!!! Note
+    It may be that you want a profile with settings that are different from nextflow defaults but you still want to set it automatically, without providing it with `-profile`. There's a special profile name for that called `standard`. You can see an example [in the Nextflow official docs](https://www.nextflow.io/docs/latest/config.html#config-profiles).
 
 Moving on, we're going to take this logic a step further, and set up dedicated profiles for groups of configuration elements that we usually want to activate together.
 
@@ -829,7 +832,7 @@ _After:_
     }
 ```
 
-We can't test this since we don't have a live connection to Slurm in the Gitpod environment.
+We can't test this since we don't have a live connection to Slurm in this Gitpod environment.
 However, you can try running the workflow with resource allocations that exceed these limits, then look up the `sbatch` command in the `.command.run` script file.
 You should see that the requests that actually get sent to the executor are capped at the values specified by `resourceLimits`.
 
