@@ -1,10 +1,14 @@
 {
     "name": "nfcore",
-    "image": "nfcore/gitpod:latest",
+    "image": "ghcr.io/nextflow-io/training:latest",
     "remoteUser": "gitpod",
-
-    "postCreateCommand": "pre-commit install --install-hooks",
-
+    "features": {
+        "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
+    },
+    "remoteEnv": {
+        "NXF_HOME": "/workspaces/.nextflow",
+        "HOST_PROJECT_PATH": "${localWorkspaceFolder}"
+    },
     // Configure tool-specific properties.
     "customizations": {
         // Configure properties specific to VS Code.
@@ -13,12 +17,13 @@
             "settings": {
                 "python.defaultInterpreterPath": "/opt/conda/bin/python"
             },
-
             // Add the IDs of extensions you want installed when the container is created.
             "extensions": [
                 "ms-python.python",
                 "ms-python.vscode-pylance",
-                "nf-core.nf-core-extensionpack"
+                "nf-core.nf-core-extensionpack",
+                "nextflow.nextflow",
+                "codezombiech.gitignore",
             ]
         }
     },
