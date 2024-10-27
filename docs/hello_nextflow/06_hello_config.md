@@ -21,19 +21,13 @@ We want to launch the workflow from inside the `projectC` directory, so let's mo
 cd projectC
 ```
 
-You can use `tree` to see the following contents:
+Let's take a look at the contents. 
+You can use the file explorer or the terminal; here we're using the output of `tree` to display the top-level directory contents.
 
 ```console title="Directory contents"
-.
+projectC
 ├── demo-params.json
 ├── intermediates
-│   ├── 1-nextflow.config
-│   ├── 2-nextflow.config
-│   ├── 3-nextflow.config
-│   ├── 4-nextflow.config
-│   ├── 5-nextflow.config
-│   ├── report-config-1.html
-│   └── report-config-2.html
 ├── main.nf
 └── nextflow.config
 ```
@@ -49,7 +43,7 @@ You can use `tree` to see the following contents:
     ```
 
     The `docker.fixOwnership = true` line is not really interesting.
-    It's a workaround for an issue that sometimes occur with containerized tools that set the wrong permissions on the files they write (which is the case with the GATK GenomicsDBImport container image in our workflow).
+    It's a workaround for an issue that sometimes occur with containerized tools that set the wrong permissions on the files they write (which is the case with GenomicsDBImport in the GATK container image in our workflow).
 
     The `docker.enabled = true` line is what we care about here.
     It specifies that Nextflow should use Docker to run process calls that specify a container image.
@@ -78,17 +72,10 @@ ln -s ../data data
 This creates a symbolic link called `data` pointing to the data directory, which allows us to avoid having to change anything to how the file paths are set up.
 
 ```console title="Directory contents"
-.
+projectC
 ├── data -> ../data
 ├── demo-params.json
 ├── intermediates
-│   ├── 1-nextflow.config
-│   ├── 2-nextflow.config
-│   ├── 3-nextflow.config
-│   ├── 4-nextflow.config
-│   ├── 5-nextflow.config
-│   ├── report-config-1.html
-│   └── report-config-2.html
 ├── main.nf
 └── nextflow.config
 ```
