@@ -23,23 +23,22 @@ We moved to the standard Nextflow convention of naming the workflow file `main.n
 
 Now it's time to tackle **modularizing** our code, _i.e._ extracting the process definitions into modules.
 
-We're going to be working with a clean set of project files inside the project directory called `projectM` (for Modules).
+We're going to be working with a clean set of project files inside the project directory called `hello-modules` (for Modules).
 
-### 0.1. Explore the `projectM` directory
+### 0.1. Explore the `hello-modules` directory
 
 Let's move into the project directory.
 If you're continuing on directly from Part 5, you'll need to move up one directory first.
 
 ```bash
-cd projectM
+cd hello-modules
 ```
 
-The `projectM` directory has the same content and structure that you're expected to end up with on completion of Part 5, except the `intermediates` correspond to the ones for this part of the training.
+The `hello-modules` directory has the same content and structure that you're expected to end up with in `hello-config` on completion of Part 5.
 
 ```console title="Directory contents"
-projectC/
+hello-modules/
 ├── demo-params.json
-├── intermediates
 ├── main.nf
 └── nextflow.config
 ```
@@ -49,7 +48,7 @@ For a detailed description of these files, see the Warmup section in Part 5.
 ### 0.2. Create a symbolic link to the data
 
 Just like last time, we need to set up a symlink to the data.
-To do so, run this command from inside the projectC directory:
+To do so, run this command from inside the `hello-modules` directory:
 
 ```bash
 ln -s ../data data
@@ -143,7 +142,7 @@ This gives us a place to put the process code.
 
 Copy the whole process definition over from the workflow's `main.nf` file to the module's `main.nf` file, making sure to copy over the `#!/usr/bin/env nextflow` shebang too.
 
-```groovy title="projectM/modules/local/samtools/index/main.nf" linenums="1"
+```groovy title="hello-modules/modules/local/samtools/index/main.nf" linenums="1"
 #!/usr/bin/env nextflow
 
 /*
@@ -180,16 +179,16 @@ include { <MODULE_NAME> } from './modules/local/<toolkit>>/<tool>/main.nf'
 
 Let's insert that above the workflow block and fill it out appropriately.
 
-````groovy title="projectM/main.nf" linenums="73"
+````groovy title="hello-modules/main.nf" linenums="73"
 _Before:_
 
-```groovy title="projectM/main.nf" linenums="73"
+```groovy title="hello-modules/main.nf" linenums="73"
 workflow {
 ````
 
 _After:_
 
-```groovy title="projectM/main.nf" linenums="73"
+```groovy title="hello-modules/main.nf" linenums="73"
 // Include modules
 include { SAMTOOLS_INDEX } from './modules/local/samtools/index/main.nf'
 
@@ -259,7 +258,7 @@ And finally, move the code for each process to the corresponding `main.nf` file,
 
 ### 3.3.1. GATK_HAPLOTYPECALLER module
 
-```groovy title="projectM/modules/local/gatk/haplotypecaller/main.nf" linenums="1"
+```groovy title="hello-modules/modules/local/gatk/haplotypecaller/main.nf" linenums="1"
 #!/usr/bin/env nextflow
 
 /*
@@ -296,7 +295,7 @@ process GATK_HAPLOTYPECALLER {
 
 ### 3.3.2. GATK_JOINTGENOTYPING module
 
-```groovy title="projectM/modules/local/gatk/jointgenotyping/main.nf" linenums="1"
+```groovy title="hello-modules/modules/local/gatk/jointgenotyping/main.nf" linenums="1"
 #!/usr/bin/env nextflow
 
 /*
@@ -345,7 +344,7 @@ Now all that remains is to add the import statements:
 
 _Before:_
 
-```groovy title="projectM/main.nf" linenums="3"
+```groovy title="hello-modules/main.nf" linenums="3"
 // Include modules
 include { SAMTOOLS_INDEX } from './modules/local/samtools/index/main.nf'
 
@@ -354,7 +353,7 @@ workflow {
 
 _After:_
 
-```groovy title="projectM/main.nf" linenums="3"
+```groovy title="hello-modules/main.nf" linenums="3"
 // Include modules
 include { SAMTOOLS_INDEX } from './modules/local/samtools/index/main.nf'
 include { GATK_HAPLOTYPECALLER } from './modules/local/gatk/haplotypecaller/main.nf'

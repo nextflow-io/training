@@ -11,23 +11,22 @@ So far we've been working with a very loose structure, with just one workflow co
 However, we're now moving into the phase of this training series that is more focused on code development and maintenance practices.
 
 As part of that, we're going to adopt a formal project structure.
-We're going to work inside a dedicated project directory called `projectC` (C for configuration), and we've renamed the workflow file `main.nf` to match the recommended Nextflow convention.
+We're going to work inside a dedicated project directory called `hello-config`, and we've renamed the workflow file `main.nf` to match the recommended Nextflow convention.
 
-### 0.1. Explore the `projectC` directory
+### 0.1. Explore the `hello-config` directory
 
-We want to launch the workflow from inside the `projectC` directory, so let's move into it now.
+We want to launch the workflow from inside the `hello-config` directory, so let's move into it now.
 
 ```bash
-cd projectC
+cd hello-config
 ```
 
 Let's take a look at the contents.
 You can use the file explorer or the terminal; here we're using the output of `tree` to display the top-level directory contents.
 
 ```console title="Directory contents"
-projectC
+hello-config
 ├── demo-params.json
-├── intermediates
 ├── main.nf
 └── nextflow.config
 ```
@@ -56,14 +55,12 @@ projectC
 -   **`demo-params.json`** is a parameter file intended for supplying parameter values to a workflow.
     We will use it in section 5 of this tutorial.
 
--   **`intermediates/`** is a directory containing the intermediate forms of the workflow and configuration files for each section of this tutorial.
-
 The one thing that's missing is a way to point to the original data without making a copy of it or updating the file paths wherever they're specified.
 The simplest solution is to link to the data location.
 
 ### 0.2. Create a symbolic link to the data
 
-Run this command from inside the `projectC` directory:
+Run this command from inside the `hello-config` directory:
 
 ```bash
 ln -s ../data data
@@ -72,10 +69,10 @@ ln -s ../data data
 This creates a symbolic link called `data` pointing to the data directory, which allows us to avoid having to change anything to how the file paths are set up.
 
 ```console title="Directory contents"
-projectC
+hello-config
 ├── data -> ../data
 ├── demo-params.json
-├── intermediates
+├── solutions
 ├── main.nf
 └── nextflow.config
 ```
@@ -105,7 +102,7 @@ executor >  local (7)
 [ee/2c7855] GATK_JOINTGENOTYPING     [100%] 1 of 1 ✔
 ```
 
-There will now be a `work` directory and a `results_genomics` directory inside your current `projectC` directory.
+There will now be a `work` directory and a `results_genomics` directory inside your `hello-config` directory.
 
 ### Takeaway
 
@@ -145,7 +142,7 @@ Let's see what happens if we run that.
 
 ### 1.2. Run the workflow without Docker
 
-We are now launching the `main.nf` workflow from inside the `projectC` directory.
+We are now launching the `main.nf` workflow from inside the `hello-config` directory.
 
 ```bash
 nextflow run main.nf
@@ -156,7 +153,7 @@ As expected, the run fails with an error message that looks like this:
 ```console title="Output"
  N E X T F L O W   ~  version 24.02.0-edge
 
- ┃ Launching `projectC/main.nf` [silly_ramanujan] DSL2 - revision: 9129bc4618
+ ┃ Launching `hello-config/main.nf` [silly_ramanujan] DSL2 - revision: 9129bc4618
 
 executor >  local (3)
 [93/4417d0] SAMTOOLS_INDEX (1)   [  0%] 0 of 3
@@ -319,7 +316,7 @@ This will take a bit longer than usual the first time, and you might see the con
 [-        ] SAMTOOLS_INDEX       -
 [-        ] GATK_HAPLOTYPECALLER -
 [-        ] GATK_JOINTGENOTYPING -
-Creating env using conda: bioconda::samtools=1.20 [cache /workspace/gitpod/hello-nextflow/projectC/work/conda/env-6684ea23d69ceb1742019ff36904f612]
+Creating env using conda: bioconda::samtools=1.20 [cache /workspace/gitpod/hello-nextflow/hello-config/work/conda/env-6684ea23d69ceb1742019ff36904f612]
 ```
 
 That's because Nextflow has to retrieve the Conda packages and create the environment, which takes a bit of work behind the scenes. The good news is that you don't need to deal with any of it yourself!
@@ -491,7 +488,7 @@ nextflow
 ERROR ~ Error executing process > 'SAMTOOLS_INDEX (3)'
 
 Caused by:
-  java.io.IOException: Cannot run program "sbatch" (in directory "/workspace/gitpod/hello-nextflow/projectC/work/eb/2962ce167b3025a41ece6ce6d7efc2"): error=2, No such file or directory
+  java.io.IOException: Cannot run program "sbatch" (in directory "/workspace/gitpod/hello-nextflow/hello-config/work/eb/2962ce167b3025a41ece6ce6d7efc2"): error=2, No such file or directory
 
 Command executed:
 
