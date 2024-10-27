@@ -189,9 +189,44 @@ Command not found? Of course, we don't have Samtools installed in our environmen
 
 Let's try using Conda environments for our workflow.
 
-### 1.3 Add a conda environment to the Samtools process definition
+### 1.3 Enable Conda in the configuration file
 
-We know that Bioconda provides packages for Samtools, so we just need to retrieve its URI and add it to the process definition using the `conda` directive.
+First, we need to add a directive enabling the use of Conda, right after the line that controls the use of Docker.
+And while we're at it, let's put a blank line before those two to emphasize the logical grouping.
+
+_Before:_
+
+```groovy title="nextflow.config" linenums="1"
+docker.fixOwnership = true
+docker.enabled = false
+```
+
+_After:_
+
+```groovy title="nextflow.config" linenums="1"
+docker.fixOwnership = true
+
+docker.enabled = false
+conda.enabled = true
+```
+
+This should allow Nextflow to create and utilize Conda environments for processes that have Conda packages specified. Which means we now need to add those to our processes!
+
+### 1.4 Specify Conda packages in the process definitions
+
+We know that the Bioconda project provides Conda packages for Samtools and GATK, so we just need to retrieve their URIs and add them to the corresponding process definitions using the `conda` directive.
+
+!!! note
+
+    There are a few different ways to get the URI for a given conda package.
+    We recommend using the [Seqera Containers](https://seqera.io/containers/) search query, which will give you a URI that you can copy paste, even if you're not creating a container.
+
+For your convenience, we are providing the URIs below. Just make sure to _add_ the `conda` directive.
+To be clear, we're not _replacing_ the `docker` directive, just adding an alternative option.
+
+#### 1.4.1. Update SAMTOOLS_INDEX
+
+The URI is `"bioconda::samtools=1.20"`.
 
 _Before:_
 
@@ -214,33 +249,59 @@ process SAMTOOLS_INDEX {
     publishDir 'results_genomics', mode: 'symlink'
 ```
 
-Make sure to _add_ the conda directive.
-We're not _replacing_ the docker directive, just adding an alternative option.
+#### 1.4.2. Update GATK_HAPLOTYPECALLER
 
-### 1.4 Enable Conda in the configuration file
-
-We need to add a line enabling the conda directive.
-And while we're at it, let's put a blank line before those two to emphasize the logical grouping.
+The URI is `"bioconda::gatk4=4.5.0.0"`.
 
 _Before:_
 
-```groovy title="nextflow.config" linenums="1"
-docker.fixOwnership = true
-docker.enabled = false
+```console title="main.nf" linenums="43"
+process GATK_HAPLOTYPECALLER {
+
+    container "community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"
+
+    publishDir 'results_genomics', mode: 'symlink'
 ```
 
 _After:_
 
-```groovy title="nextflow.config" linenums="1"
-docker.fixOwnership = true
+```console title="main.nf" linenums="43"
+process GATK_HAPLOTYPECALLER {
 
-docker.enabled = false
-conda.enabled = true
+    container "community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"
+    conda "bioconda::gatk4=4.5.0.0"
+
+    publishDir 'results_genomics', mode: 'symlink'
 ```
 
-This should allow Nextflow to create a Conda environment with the Samtools package we provided.
+#### 1.4.3. Update GATK_JOINTGENOTYPING
 
-### 1.5 Run it to see if it works
+The URI is `"bioconda::gatk4=4.5.0.0"`.
+
+_Before:_
+
+```console title="main.nf" linenums="74"
+process GATK_JOINTGENOTYPING {
+
+    container "community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"
+
+    publishDir 'results_genomics', mode: 'symlink'
+```
+
+_After:_
+
+```console title="main.nf" linenums="74"
+process GATK_JOINTGENOTYPING {
+
+    container "community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"
+    conda "bioconda::gatk4=4.5.0.0"
+
+    publishDir 'results_genomics', mode: 'symlink'
+```
+
+Once all three processes are updated, we can try running the workflow again.
+
+### 1.5. Run the workflow to verify that it can use Conda
 
 Let's try it out.
 
@@ -258,112 +319,12 @@ This will take a bit longer than usual the first time, and you might see the con
 [-        ] SAMTOOLS_INDEX       -
 [-        ] GATK_HAPLOTYPECALLER -
 [-        ] GATK_JOINTGENOTYPING -
-Creating env using conda: bioconda::gatk4=4.5.0.0 [cache /workspace/gitpod/hello-nextflow/projectC/work/conda/env-6684ea23d69ceb1742019ff36904f612]
+Creating env using conda: bioconda::samtools=1.20 [cache /workspace/gitpod/hello-nextflow/projectC/work/conda/env-6684ea23d69ceb1742019ff36904f612]
 ```
 
-That's because Nextflow has to retrieve and spin up the Conda environment, which takes a bit of work behind the scenes.
-Then after a moment it'll spit out the rest of the output. It may look a little messy:
+That's because Nextflow has to retrieve the Conda packages and create the environment, which takes a bit of work behind the scenes. The good news is that you don't need to deal with any of it yourself!
 
-```console title="Output"
-  N E X T F L O W   ~  version 24.02.0-edge
-
- ┃ Launching `main.nf` [big_engelbart] DSL2 - revision: 63efa30da7
-
-[-        ] SAMTOOLS_INDEX       -
-executor >  local (3)
-executor >  local (6)
-[6e/78985e] SAMTOOLS_INDEX (1)       [100%] 3 of 3 ✔
-[eb/70a150] GATK_HAPLOTYPECALLER (3) [  0%] 0 of 3
-[-        ] GATK_JOINTGENOTYPING     -
-Creating env using conda: bioconda::samtools=1.20 [cache /workspace/gitpod/hello-nextflow/projectC/work/conda/env-1f9e4747cd58cb43e7ca4da34bb66eee]
-ERROR ~ Error executing process > 'GATK_HAPLOTYPECALLER (1)'
-
-Caused by:
-  Process `GATK_HAPLOTYPECALLER (1)` terminated with an error exit status (127)
-
-Command executed:
-
-  gatk HaplotypeCaller         -R ref.fasta         -I reads_son.bam         -O reads_son.bam.g.vcf         -L intervals.bed         -ERC GVCF
-
-Command exit status:
-  127
-
-Command output:
-  (empty)
-
-Command error:
-  .command.sh: line 2: gatk: command not found
-```
-
-But this is great!
-We see that the Samtools process calls were executed successfully.
-The overall run just fails because we haven't yet added a Conda environment for the GATK processes, so let's do that now.
-
-### 1.6 Make Nextflow create a conda environment to GATK processes
-
-There are two GATK processes that need to be updated, GATK_HAPLOTYPECALLER and GATK_JOINTGENOTYPING.
-
-#### 1.6.1. Update GATK_HAPLOTYPECALLER
-
-_Before:_
-
-```console title="main.nf" linenums="43"
-process GATK_HAPLOTYPECALLER {
-
-    container "community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"
-
-    publishDir 'results_genomics', mode: 'symlink'
-```
-
-_After:_
-
-```console title="main.nf" linenums="43"
-process GATK_HAPLOTYPECALLER {
-
-    container "community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"
-    conda "bioconda::gatk4=4.5.0.0"
-
-    publishDir 'results_genomics', mode: 'symlink'
-```
-
-#### 1.6.2. Update GATK_JOINTGENOTYPING
-
-_Before:_
-
-```console title="main.nf" linenums="74"
-process GATK_JOINTGENOTYPING {
-
-    container "community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"
-
-    publishDir 'results_genomics', mode: 'symlink'
-```
-
-_After:_
-
-```console title="main.nf" linenums="74"
-process GATK_JOINTGENOTYPING {
-
-    container "community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"
-    conda "bioconda::gatk4=4.5.0.0"
-
-    publishDir 'results_genomics', mode: 'symlink'
-```
-
-Once both processes are updated, we can try it out again.
-
-!!! note
-
-    If you're curious about how to get the exact URI for the conda package you're looking for, you can use [Seqera Containers](https://seqera.io/containers/) search query and just copy paste the URI, instead of going ahead with creating a container.
-
-### 1.7 Run the workflow again
-
-This time it should all work.
-
-```bash
-nextflow run main.nf
-```
-
-And so it does!
+After a few moments, it should spit out some more output, and eventually complete without error.
 
 ```console title="Output"
  N E X T F L O W   ~  version 24.02.0-edge
@@ -375,6 +336,8 @@ executor >  local (7)
 [da/e1bf1d] GATK_HAPLOTYPECALLER (1) [100%] 3 of 3 ✔
 [2e/e6ffca] GATK_JOINTGENOTYPING     [100%] 1 of 1 ✔
 ```
+
+And from our standpoint, it looks like it works exactly the same as running with Docker, even though on the backend the mechanics are a bit different.
 
 This means we're all set to run with Conda environments if needed.
 
@@ -438,7 +401,7 @@ Let's try running the workflow with Conda.
 nextflow run main.nf -profile conda_on
 ```
 
-It works! And from our standpoint, it looks like it works exactly the same, even though on the backend the mechanics are a bit different.
+It works!
 
 ```
  N E X T F L O W   ~  version 24.02.0-edge
@@ -451,7 +414,7 @@ executor >  local (7)
 [a6/0f72fd] GATK_JOINTGENOTYPING     [100%] 1 of 1 ✔
 ```
 
-Feel free to try it out with the Conda profile too. You just have to switch `-profile conda` to `-profile docker` in the command.
+Feel free to try it out with the Docker profile too. You just have to switch `-profile conda_on` to `-profile docker_on` in the command.
 
 ### Takeaway
 
