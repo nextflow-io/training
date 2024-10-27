@@ -97,8 +97,8 @@ nf-test init
 This should produce the following output:
 
 ```bash
-🚀 nf-test 0.8.4
-https://code.askimed.com/nf-test
+🚀 nf-test 0.9.1
+https://www.nf-test.com
 (c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
 
 Project configured. Configuration is stored in nf-test.config
@@ -297,8 +297,8 @@ nf-test test modules/local/samtools/index/tests/main.nf.test
 This should produce the following output:
 
 ```console title="Output"
-🚀 nf-test 0.8.4
-https://code.askimed.com/nf-test
+🚀 nf-test 0.9.1
+https://www.nf-test.com
 (c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
 
 
@@ -398,8 +398,8 @@ nf-test test modules/local/samtools/index/tests/main.nf.test --update-snapshot
 This should produce the following output:
 
 ```console title="Output"
-🚀 nf-test 0.8.4
-https://code.askimed.com/nf-test
+🚀 nf-test 0.9.1
+https://www.nf-test.com
 (c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
 
 Warning: every snapshot that fails during this test run is re-record.
@@ -579,8 +579,8 @@ nf-test test modules/local/gatk/haplotypecaller/tests/main.nf.test
 This produces the following output:
 
 ```console title="Output"
-🚀 nf-test 0.8.4
-https://code.askimed.com/nf-test
+🚀 nf-test 0.9.1
+https://www.nf-test.com
 (c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
 
 
@@ -610,8 +610,8 @@ nf-test test modules/local/gatk/haplotypecaller/tests/main.nf.test
 Produces:
 
 ```console title="Output"
-🚀 nf-test 0.8.4
-https://code.askimed.com/nf-test
+🚀 nf-test 0.9.1
+https://www.nf-test.com
 (c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
 
 
@@ -695,8 +695,8 @@ nf-test test modules/local/gatk/haplotypecaller/tests/main.nf.test
 Produces:
 
 ```console title="Output"
-🚀 nf-test 0.8.4
-https://code.askimed.com/nf-test
+🚀 nf-test 0.9.1
+https://www.nf-test.com
 (c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
 
 
@@ -800,8 +800,8 @@ nf-test test modules/local/gatk/haplotypecaller/tests/main.nf.test
 Produces:
 
 ```console title="Output"
-🚀 nf-test 0.8.4
-https://code.askimed.com/nf-test
+🚀 nf-test 0.9.1
+https://www.nf-test.com
 (c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
 
 
@@ -959,8 +959,8 @@ nf-test test modules/local/gatk/jointgenotyping/tests/main.nf.test
 Produces:
 
 ```console title="Output"
-🚀 nf-test 0.8.4
-https://code.askimed.com/nf-test
+🚀 nf-test 0.9.1
+https://www.nf-test.com
 (c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
 
 
@@ -1035,8 +1035,8 @@ nf-test test tests/hello-nf-test.nf.test
 This produces:
 
 ```console title="Output"
-🚀 nf-test 0.8.4
-https://code.askimed.com/nf-test
+🚀 nf-test 0.9.1
+https://www.nf-test.com
 (c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
 
 
