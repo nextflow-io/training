@@ -24,9 +24,13 @@ cd projectC
 You'll see the following contents:
 
 ```console title="Directory contents"
-projectC/
+projectC
 ├── demo-params.json
 ├── intermediates
+│   ├── 1-nextflow.config
+│   ├── 2-nextflow.config
+│   ├── 3-nextflow.config
+│   └── 4-nextflow.config
 ├── main.nf
 └── nextflow.config
 ```
@@ -42,7 +46,7 @@ projectC/
     ```
 
     The `docker.fixOwnership = true` line is not really interesting.
-    It's a workaround for an issue that sometimes occur with containerized tools that set the wrong permissions on the files they write (which is the case with GATK GenomicsDBImport in our workflow).
+    It's a workaround for an issue that sometimes occur with containerized tools that set the wrong permissions on the files they write (which is the case with the GATK GenomicsDBImport cotainer image in our workflow).
 
     The `docker.enabled = true` line is what we care about here.
     It specifies that Nextflow should use Docker containers to execute process calls.
@@ -50,7 +54,7 @@ projectC/
 
 !!!note
 
-    Anything you put into the `nextflow.config` can be overriden at runtime by providing the relevant directives or parameters and values on the command line, or by importing another configuration file, according to the order of precedence described [here](https://www.nextflow.io/docs/latest/config.html).
+    Anything you put into the `nextflow.config` can be overridden at runtime by providing the relevant process directives or parameters and values on the command line, or by importing another configuration file, according to the order of precedence described [here](https://www.nextflow.io/docs/latest/config.html).
 
 -   **`demo-params.json`** is a parameter file intended for supplying parameter values to a workflow.
     We will use it in section 5 of this tutorial.
@@ -219,7 +223,7 @@ We're not _replacing_ the docker directive, just adding an alternative option.
 ### 1.4 Enable Conda in the configuration file
 
 We need to add a line enabling the conda directive.
-And while we're add it, let's put a blank line before thos two to emphasize the logical grouping.
+And while we're at it, let's put a blank line before those two to emphasize the logical grouping.
 
 _Before:_
 
@@ -701,7 +705,7 @@ Learn how to control the resources allocated for executing processes.
 
 ## 4. Allocate compute resources with process directives
 
-We've covered how to control what compute environment Nextflow is going to use to run the worfklow, so now the next logical question is, how do we control the resources (CPU, memory etc) that will be allocated?
+We've covered how to control what compute environment Nextflow is going to use to run the workflow, so now the next logical question is, how do we control the resources (CPU, memory etc) that will be allocated?
 
 The answer may not surprise you; it's process directives again.
 
