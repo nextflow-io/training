@@ -59,7 +59,7 @@ Notice that the prompt has changed to `(base) root@b645838b3314:/tmp#`, which in
 If we run:
 
 ```console title="Output"
-(base) root@b645838b3314:/tmp# ls
+(base) root@b645838b3314:/tmp# ls /
 bin    dev    etc    home   lib    media  mnt    opt    proc   root   run    sbin   srv    sys    tmp    usr    var
 ```
 
@@ -115,7 +115,7 @@ One way to do this is to **mount** a **volume** from the host system into the co
 Prior to working on the next task, confirm that you are in the `hello-nextflow` directory.
 
 ```bash
-cd /workspace/gitpod/nf-training/hello-nextflow
+cd /workspace/gitpod/hello-nextflow
 ```
 
 Then run:
@@ -166,6 +166,12 @@ Output:
                                   /_]'  /_]'
 ```
 
+Now exit the container once again:
+
+```bash
+exit
+```
+
 ### Takeaway
 
 You know how to pull a container and run it interactively, make your data accessible to it, which lets you try commands without having to install any software on your system.
@@ -183,7 +189,7 @@ This means that you can use any container image you like to run your processes, 
 
 ### 2.1. Add a container directive to your process
 
-Edit the `hello_containers.nf` script to add a `container` directive to the `cowsay` process.
+Edit the `hello-containers.nf` script to add a `container` directive to the `cowsay` process.
 
 _Before:_
 
@@ -207,7 +213,7 @@ process cowSay {
 Run the script to see the container in action.
 
 ```bash
-nextflow run hello_containers.nf
+nextflow run hello-containers.nf
 ```
 
 !!! NOTE
@@ -410,7 +416,7 @@ Doing these exercises is _not required_ to understand later parts of the trainin
                                                         ||     ||
 ```
 
-### 4.1. Modify the `hello_containers.nf` script to use a getQuote process
+### 4.1. Modify the `hello-containers.nf` script to use a getQuote process
 
 We have a list of computer and biology pioneers in the `containers/data/pioneers.csv` file.
 At a high level, to complete this exercise you will need to:
