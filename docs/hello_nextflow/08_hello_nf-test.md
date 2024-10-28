@@ -71,7 +71,7 @@ Now that everything is in place, we should be able to run the workflow using the
 nextflow run main.nf -profile my_laptop,demo
 ```
 
-Yay, it works.
+This should look very familiar by now if you've been working through this training course from the start.
 
 ```console title="Output"
  N E X T F L O W   ~  version 24.02.0-edge
@@ -84,7 +84,12 @@ executor >  local (7)
 [8f/94ac86] GATK_JOINTGENOTYPING     | 1 of 1 ✔
 ```
 
+As expected, it all worked.
+
 Like previously, there will now be a `work` directory and a `results_genomics` directory inside your project directory.
+However we are going to ignore them entirely, because we are no longer going to touch the pipeline itself, and we're not even going to interact directly with Nextflow as such.
+
+Instead, we are going to interact with the `nf-test` package.
 
 ### 0.4. Initialize `nf-test`
 
