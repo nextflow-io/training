@@ -293,14 +293,22 @@ params {
 Finally, it's time to run our test! Let's break down the syntax.
 
 -   The basic command is `nf-test test`.
--   To that, we add the profiles we've been using since Part 5 (Hello Config) with `--profile my_laptop,demo`.
-    Note the TWO dashes, `--`, because here it's a parameter of the `nf-test test` command, not of Nextflow itself.
+-   To that, we add `--profile docker_on` to specify that we want Nextflow to run the test with Docker enabled.
 -   Then the test file that we want to run.
+
+!!!note
+
+    The `--profile` parameter is technically optional in the sense that nf-test does not require it.
+    There is a `nextflow.config` file in the `nf-test` directory where we could write `docker.enable = on` to have Docker enabled by default.
+    However, it's good practice to test your modules explicitly (and separately) with every packaging system they support.
+    This allows you to detect issues that might arise when the module no longer works with Docker but still works with Conda, for example.
+
+    Note also the TWO dashes, `--`, because here it's a parameter of the `nf-test test` command, which passes the instruction on to Nextflow itself.
 
 All put together, it looks like this:
 
 ```bash
-nf-test test --profile my_laptop,demo modules/local/samtools/index/tests/main.nf.test
+nf-test test --profile docker_on modules/local/samtools/index/tests/main.nf.test
 ```
 
 This should produce the following output:
@@ -402,7 +410,7 @@ These simply go one after another in the test file.
 ### 1.8. Run the test suite and update the snapshot
 
 ```bash
-nf-test test --profile my_laptop,demo modules/local/samtools/index/tests/main.nf.test --update-snapshot
+nf-test test --profile docker_on modules/local/samtools/index/tests/main.nf.test --update-snapshot
 ```
 
 This should produce the following output:
@@ -592,7 +600,7 @@ But we show you the setup method too because sometimes it is useful to be able t
 ### 2.4. Run test and examine output
 
 ```bash
-nf-test test --profile my_laptop,demo modules/local/gatk/haplotypecaller/tests/main.nf.test
+nf-test test --profile docker_on modules/local/gatk/haplotypecaller/tests/main.nf.test
 ```
 
 This produces the following output:
@@ -623,7 +631,7 @@ It also produces a snapshot file like earlier.
 Interestingly, if you run the exact same command again, this time the test will fail with the following:
 
 ```bash
-nf-test test --profile my_laptop,demo modules/local/gatk/haplotypecaller/tests/main.nf.test
+nf-test test --profile docker_on modules/local/gatk/haplotypecaller/tests/main.nf.test
 ```
 
 Produces:
@@ -816,7 +824,7 @@ test("reads_father [bam]") {
 ### 2.9. Run the test command
 
 ```bash
-nf-test test --profile my_laptop,demo modules/local/gatk/haplotypecaller/tests/main.nf.test
+nf-test test --profile docker_on modules/local/gatk/haplotypecaller/tests/main.nf.test
 ```
 
 Produces:
@@ -857,7 +865,6 @@ We've included a copy of the intermediate files produced by the first part of th
 
 ```console title="Directory contents"
 modules/local/gatk/jointgenotyping/tests/inputs/
-├── family_trio_map.tsv
 ├── reads_father.bam.g.vcf
 ├── reads_father.bam.g.vcf.idx
 ├── reads_mother.bam.g.vcf
@@ -866,7 +873,7 @@ modules/local/gatk/jointgenotyping/tests/inputs/
 └── reads_son.bam.g.vcf.idx
 ```
 
-The idea here is to use these files as inputs to the test.
+The idea here is to use these files as inputs to the test we're going to write for the joint genotyping step.
 
 ### 3.1. Generate the test file stub
 
@@ -949,12 +956,21 @@ test("family_trio [vcf] [idx]") {
         }
         process {
             """
-            input[0] = file("${projectDir}/modules/local/gatk/jointgenotyping/tests/inputs/family_trio_map.tsv")
-            input[1] = "family_trio"
-            input[2] = file("${projectDir}/data/ref/ref.fasta")
-            input[3] = file("${projectDir}/data/ref/ref.fasta.fai")
-            input[4] = file("${projectDir}/data/ref/ref.dict")
-            input[5] = file("${projectDir}/data/ref/intervals.bed")
+            input[0] = [
+                file("${projectDir}/modules/local/gatk/jointgenotyping/tests/inputs/reads_father.bam.g.vcf"),
+                file("${projectDir}/modules/local/gatk/jointgenotyping/tests/inputs/reads_mother.bam.g.vcf"),
+                file("${projectDir}/modules/local/gatk/jointgenotyping/tests/inputs/reads_son.bam.g.vcf")
+            ]
+            input[1] = [
+                file("${projectDir}/modules/local/gatk/jointgenotyping/tests/inputs/reads_father.bam.g.vcf.idx"),
+                file("${projectDir}/modules/local/gatk/jointgenotyping/tests/inputs/reads_mother.bam.g.vcf.idx"),
+                file("${projectDir}/modules/local/gatk/jointgenotyping/tests/inputs/reads_son.bam.g.vcf.idx")
+            ]
+            input[2] = file("${projectDir}/data/ref/intervals.bed")
+            input[3] = "family_trio"
+            input[4] = file("${projectDir}/data/ref/ref.fasta")
+            input[5] = file("${projectDir}/data/ref/ref.fasta.fai")
+            input[6] = file("${projectDir}/data/ref/ref.dict")
             """
         }
     }
@@ -975,7 +991,7 @@ then {
 ### 3.5. Run the test
 
 ```bash
-nf-test test modules/local/gatk/jointgenotyping/tests/main.nf.test
+nf-test test --profile docker_on modules/local/gatk/jointgenotyping/tests/main.nf.test
 ```
 
 Produces:
