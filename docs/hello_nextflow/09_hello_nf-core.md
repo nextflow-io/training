@@ -32,7 +32,18 @@ You should read the pipeline documentation carefully to understand what a given 
 One really cool aspect of how Nextflow manages pipelines is that you can pull a pipeline from a GitHub repository without cloning the repository.
 This is really convenient if you just want to run a pipeline without modifying the code.
 
-So if you want to try out an nf-core pipeline with minimal effort, you can start by pulling it using the `nextflow pull` command:
+So if you want to try out an nf-core pipeline with minimal effort, you can start by pulling it using the `nextflow pull` command.
+
+!!!tip
+
+    You can run this from anywhere, but if you feel like being consistent with previous exercises, you can create a `hello-nf-core` directory under `hello-nextflow`. If you were working through Part 7 (Hello nf-test) before this, you may need to go up one level first.
+
+    ```bash
+    mkdir hello-nf-core
+    cd hello-nf-core
+    ```
+
+Whenever you're ready, run the command:
 
 ```bash
 nextflow pull nf-core/demo
@@ -117,7 +128,7 @@ However, the `outdir` parameter is not included in the `test` profile, so you ha
 
 Here, we're also going to specify `-profile docker`, which by nf-core convention enables the use of Docker.
 
-Try running it yourself:
+Lets' try it!
 
 ```bash
 nextflow run nf-core/demo -profile docker,test --outdir results
