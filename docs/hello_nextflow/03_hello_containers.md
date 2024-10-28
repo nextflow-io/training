@@ -166,6 +166,12 @@ Output:
                                   /_]'  /_]'
 ```
 
+Now exit the container once again: 
+
+```bash
+exit
+```
+
 ### Takeaway
 
 You know how to pull a container and run it interactively, make your data accessible to it, which lets you try commands without having to install any software on your system.
