@@ -23,7 +23,7 @@
                 "ms-python.vscode-pylance",
                 "nf-core.nf-core-extensionpack",
                 "nextflow.nextflow",
-                "codezombiech.gitignore",
+                "codezombiech.gitignore"
             ]
         }
     },
