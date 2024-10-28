@@ -13,10 +13,6 @@ And it also means that when you assemble a new workflow from existing modules th
 In this part of the training, we're going to show you how to use [**nf-test**](https://www.nf-test.com/), a testing framework that integrates well with Nextflow and makes it straightforward to add both module-level and workflow-level tests to your pipeline.
 For more background information about nf-test, we recommend you read [this blog post](https://nextflow.io/blog/2024/nf-test-in-nf-core.html).
 
-!!!note
-
-    This part of the training was developed in collaboration with Sateesh Peri, who implemented all the tests.
-
 ---
 
 ## 0. Warmup
@@ -979,6 +975,7 @@ test("family_trio [vcf] [idx]") {
             """
         }
     }
+}
 ```
 
 ### 3.4. Use content assertions

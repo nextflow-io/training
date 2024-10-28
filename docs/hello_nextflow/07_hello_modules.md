@@ -33,7 +33,7 @@ Let's move into the project directory.
 cd hello-modules
 ```
 
-!!! note
+!!! warning
     If you're continuing on directly from Part 5, you'll need to move up one directory first.
     ```
     cd ../hello-modules
