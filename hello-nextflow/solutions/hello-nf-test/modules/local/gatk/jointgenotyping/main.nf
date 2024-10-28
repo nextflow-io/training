@@ -1,32 +1,38 @@
 /*
- * Consolidate GVCFs and apply joint genotyping analysis
+ * Combine GVCFs into GenomicsDB datastore and run joint genotyping to produce cohort-level calls
  */
 process GATK_JOINTGENOTYPING {
 
-    container "docker.io/broadinstitute/gatk:4.5.0.0"
+    container "community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"
+    conda "bioconda::gatk4=4.5.0.0"
+
+    publishDir 'results_genomics', mode: 'symlink'
 
     input:
-        path(sample_map)
-        val(cohort_name)
+        path all_gvcfs
+        path all_idxs
+        path interval_list
+        val cohort_name
         path ref_fasta
         path ref_index
         path ref_dict
-        path interval_list
 
     output:
         path "${cohort_name}.joint.vcf"
         path "${cohort_name}.joint.vcf.idx"
 
+    script:
+        def gvcfs_line = all_gvcfs.collect { gvcf -> "-V ${gvcf}" }.join(' ')
     """
     gatk GenomicsDBImport \
-        --sample-name-map ${sample_map} \
-        --genomicsdb-workspace-path ${cohort_name}_gdb \
-        -L ${interval_list}
+        ${gvcfs_line} \
+        -L ${interval_list} \
+        --genomicsdb-workspace-path ${cohort_name}_gdb
 
     gatk GenotypeGVCFs \
         -R ${ref_fasta} \
         -V gendb://${cohort_name}_gdb \
-        -O ${cohort_name}.joint.vcf \
-        -L ${interval_list}
+        -L ${interval_list} \
+        -O ${cohort_name}.joint.vcf
     """
 }
