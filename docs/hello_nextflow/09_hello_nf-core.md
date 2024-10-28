@@ -55,7 +55,13 @@ However nf-core is the largest open collection of Nextflow pipelines.
     One detail that sometimes trips people up is that the pipelines you pull this way are stored in a hidden assets folder:
 
     ```bash
-    ls $HOME/.nextflow/assets/
+    tree $HOME/.nextflow/assets/ -L 2
+    ```
+
+     ```console title="Output"
+    /home/gitpod/.nextflow/assets/
+    └── nf-core
+        └── demo
     ```
 
     So you don't actually see them listed in your working directory.
