@@ -437,7 +437,13 @@ Learn how to add in variable inputs.
 
 So far, we've been emitting a greeting hardcoded into the process command.
 Now we're going to add some flexibility by using an input variable, so that we can easily change the greeting.
-This is going to require us to use a **channel**; more on that in a minute.
+
+This requires us to make a series of inter-related changes:
+
+1. Tell the process about expected variable inputs using the `input:` block
+2. Edit the process to use the input
+3. Create a **channel** to pass input to the process (more on that in a minute)
+4. Add the channel as input to the process call
 
 ### 5.1. Add an input definition to the process block
 
@@ -447,6 +453,8 @@ _Before:_
 
 ```groovy title="hello-world.nf" linenums="6"
 process sayHello {
+
+    publishDir 'results', mode: 'copy'
 
     output:
         path "output.txt"
@@ -570,7 +578,7 @@ Learn how to pass inputs from the command line.
 ## 6. Use CLI parameters for inputs
 
 We want to be able to specify the input from the command line, since that is the piece that will almost always be different in subsequent runs of the workflow.
-Good news: Nextflow built-in workflow parameter system called `params`, which makes it easy to declare and use CLI parameters.
+Good news: Nextflow has a built-in workflow parameter system called `params`, which makes it easy to declare and use CLI parameters.
 
 ### 6.1. Edit the input channel declaration to use a parameter
 
@@ -1002,7 +1010,7 @@ Success! Now we can add as many greetings as we like without worrying about outp
 
 !!! note
 
-    In practice, naming files based on the input data itself is almost always impractical. The better way to generate dynamic filenames is to use a samplesheet contain relevant metadata (such as unique sample IDs) and create a map of metadata (aka metamap) from which we can grab an appropriate identifier to generate the filenames.
+    In practice, naming files based on the input data itself is almost always impractical. The better way to generate dynamic filenames is to use a samplesheet contain relevant metadata (such as unique sample IDs) and create a data structure called a 'map', which we pass to processes, and from which we can grab an appropriate identifier to generate the filenames.
     We'll show you how to do that later in this training course.
 
 ### Takeaway
@@ -1018,7 +1026,7 @@ Learn how to make the workflow take a file as its source of input values.
 ## 9. Modify the workflow to take a file as its source of input values
 
 It's often the case that, when we want to run on a batch of multiple input elements, the input values are contained in a file.
-As an example, we provide you with a CSV file called `greetings.csv` in the `data/` directory, containing several greetings separated by commas.
+As an example, we have provided you with a CSV file called `greetings.csv` in the `data/` directory, containing several greetings separated by commas.
 
 ```csv title="greetings.csv"
 Hello,Bonjour,Holà
@@ -1056,6 +1064,8 @@ We're going to use that instead of the `Channel.of()` constructor we used previo
 ```groovy title="channel construction syntax"
 Channel.fromPath(input_file)
 ```
+
+Now, we are going to deploy a new concept, an 'operator' to transform that CSV file into channel content. You'll learn more about operators later, but for now just understand them as ways of transforming channels in a variety of ways. 
 
 Since our goal is to read in the contents of a `.csv` file, we're going to add the `.splitCsv()` operator to make Nextflow parse the file contents accordingly, as well as the `.flatten()` operator to turn the array element produced by `.splitCsv()` into a channel of individual elements.
 
@@ -1138,4 +1148,4 @@ Celebrate your success and take a break!
 Don't worry if the channel types and operators feel like a lot to grapple with the first time you encounter them.
 You'll get more opportunities to practice using these components in various settings as you work through this training course.
 
-When you're ready, move on to Part 2 to learn how to apply what you've learned to a more realistic data analysis use case.
+When you're ready, move on to Part 2 to learn about another important concept: provisioning the software required for each process. 

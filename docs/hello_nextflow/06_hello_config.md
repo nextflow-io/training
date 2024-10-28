@@ -468,7 +468,7 @@ Basically we are telling Nextflow to generate a Slurm submission script and subm
 
 ### 3.2. Launch the workflow to generate the job submission script
 
-Let's try running this; even though we now it won't execute (since we don't have Slurm set up in the Gitpod environment) we'll be able to see what the submission script looks like.
+Let's try running this; even though we know it won't execute (since we don't have Slurm set up in this Gitpod environment) we'll be able to see what the submission script looks like.
 
 ```bash
 nextflow run main.nf -profile conda_on
@@ -592,7 +592,7 @@ executor >  local (7)
 ```
 
 The point is, we can now use profiles to switch to a different software packaging system (Conda) or a different executor (such as Slurm) with a single command-line option.
-For example, if we were back on our hypothetical HPC from earlier, we would switch to using `-profile conda,slurm` in our Nextflow command line.
+For example, if we were back on our hypothetical HPC from earlier, we would switch to using `-profile conda_on,slurm_exec` in our Nextflow command line.
 
 Feel free to test that on your own to satisfy yourself that it works as expected.
 
@@ -701,7 +701,7 @@ This is because Nextflow will ensure we aren't using more CPUs than are availabl
 !!! tip
 
     You can check the number of CPUs allocated to a given process by looking at the `.command.run` log in its work directory.
-    There will be a function called `nxf_launch()` that includes the command `docker run -i --cpu-shares 1024`, where `--cpu-shares` is the number of CPUs given to the process multiplied by 1024.
+    There will be a function called `nxf_launch()` that includes the command `docker run—i—-CPU 1024`, where `--cpu-shares` refers to the CPU time given to this process' tasks. Setting one task's cpu_share to 512 and another to 1024 means that the second task will get double the amount of CPU time as the first.
 
 You're probably wondering if you can set resource allocations per individual process, and the answer is of course yes, yes you can!
 We'll show you how to do that in a moment.
@@ -720,7 +720,7 @@ To have Nextflow generate the report automatically, simply add `-with-report <fi
 nextflow run main.nf -profile my_laptop -with-report report-config-1.html
 ```
 
-The report is an html file, which you can download and open in your browser.
+The report is an html file, which you can download and open in your browser. You can also right click it in the file explorer on the left and click on `Show preview` in order to view it on Gitpod.
 
 Take a few minutes to look through the report and see if you can identify some opportunities for adjusting resources.
 Make sure to click on the tabs that show the utilization results as a percentage of what was allocated.
@@ -736,7 +736,7 @@ We should dial that back down and save some resources.
 
 ### 4.4. Adjust resource allocations for a specific process
 
-We can specify resource allocations for a given process using the `withName` directive.
+We can specify resource allocations for a given process using the `withName` process selector.
 The syntax looks like this when it's by itself in a process block:
 
 ```groovy title="Syntax"
@@ -779,7 +779,7 @@ We probably didn't need to go all the way to 8 CPUs, but since there's only one 
 
 <!-- **TODO: screenshots?** -->
 
-As you can see, this approach is useful when your processes have different resource requirements. It empowers you to can right-size the resource allocations you set up for each process based on actual data, not guesswork.
+As you can see, this approach is useful when your processes have different resource requirements. It empowers you to right-size the resource allocations you set up for each process based on actual data, not guesswork.
 
 !!!note
 
@@ -856,11 +856,11 @@ So far we've been exploring options for configuring how Nextflow behaves in term
 That's all well and good, but how do we manage the parameters that are meant for the workflow itself, and the tools it calls within the processes?
 That is also something we should be able to do without editing code files every time we want to run on some new data or switch to a different set of reference files.
 
-As it turns out, there's a lot of overlap between this kind of configuration and the infrastructure configuration, starting with the `nextflow.conf` file, which can also house default values for command line parameters.
+As it turns out, there's a lot of overlap between this kind of configuration and the infrastructure configuration, starting with the `nextflow.config` file, which can also house default values for command line parameters.
 
 ### 5.1. Move the default parameter declarations to the configuration file
 
-We originally stored all our default parameter values in the workflow script itself, but we can move them out into the `nextflow.conf` file if we prefer.
+We originally stored all our default parameter values in the workflow script itself, but we can move them out into the `nextflow.config` file if we prefer.
 
 So let's cut this set of params out of `main.nf`:
 
@@ -946,7 +946,7 @@ In this particular case, the best solution is to use a parameter file, which is 
 
 ### 5.4. Using a parameter file to override defaults
 
-We provide a parameter file in the project directory, called `demo-params.json`, which contains key-value pairs for all of the parameters our workflow expects.
+We provide a parameter file in the current directory, called `demo-params.json`, which contains key-value pairs for all of the parameters our workflow expects.
 The values are the same input files and reference files we've been using so far.
 
 ```json title="demo-params.json" linenums="1"
@@ -1097,7 +1097,7 @@ profiles {
 }
 ```
 
-As long as we distribute the data bundle with the workflow code, this will enable anyone to quickly try out the workflow without having to supply their own inputs or pointing to the parameter file.
+As long as we distribute the data bundle with the workflow code, this will enable anyone to quickly try out the workflow without having to supply their own inputs or pointing to the parameter file. Besides, we can provide URLs to where files are stored and Nextflow will download them automatically.
 
 ### 5.7. Run with the demo profile
 
