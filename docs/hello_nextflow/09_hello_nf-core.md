@@ -134,7 +134,7 @@ Lets' try it!
 nextflow run nf-core/demo -profile docker,test --outdir results
 ```
 
-!!! hint "Changing nextflow version"
+!!! hint "Changing Nextflow version"
 
     Depending on the nextflow version you have installed, this command might fail due to a version mismatch.
     If that happens, you can temporarily run the pipeline with a different version than you have installed by adding NXF_VER=<version> to the start of your command as shown below:

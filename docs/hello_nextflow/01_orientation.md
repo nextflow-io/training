@@ -10,7 +10,7 @@ If you have not yet done so, please follow [this link](../../envsetup/) before g
 Throughout this training course, we'll be working in the `hello-nextflow/` directory, which loads by default when you open the Gitpod workspace.
 This directory contains all the code files, test data and accessory files you will need.
 
-Feel free to explore the contents of this directory; the easiest way to do so is to use the file explorer on the left hand side of the Gitpod workspace.
+Feel free to explore the contents of this directory; the easiest way to do so is to use the file explorer on the left-hand side of the Gitpod workspace.
 Alternatively, you can use the `tree` command.
 Throughout the course, we use the output of `tree` to represent directory structure and contents in a readable form, sometimes with minor modifications for clarity.
 
