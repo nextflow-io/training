@@ -724,7 +724,7 @@ On the bright side, it can be used to test with great precision whether an analy
 Once we've modified the test in this way, we can run the test multiple times, and it will consistently pass.
 
 ```bash
-nf-test test modules/local/gatk/haplotypecaller/tests/main.nf.test
+nf-test test --profile docker_on modules/local/gatk/haplotypecaller/tests/main.nf.test
 ```
 
 Produces:
