@@ -166,7 +166,7 @@ Output:
                                   /_]'  /_]'
 ```
 
-Now exit the container once again: 
+Now exit the container once again:
 
 ```bash
 exit
