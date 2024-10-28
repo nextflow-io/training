@@ -69,7 +69,7 @@ However nf-core is the largest open collection of Nextflow pipelines.
     tree $HOME/.nextflow/assets/ -L 2
     ```
 
-     ```console title="Output"
+    ```console title="Output"
     /home/gitpod/.nextflow/assets/
     └── nf-core
         └── demo
