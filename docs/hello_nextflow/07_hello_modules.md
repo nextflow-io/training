@@ -43,7 +43,7 @@ hello-modules/
 └── nextflow.config
 ```
 
-For a detailed description of these files, see the Warmup section in Part 5.
+For a detailed description of these files, see the warmup section in Part 5.
 
 ### 0.2. Create a symbolic link to the data
 

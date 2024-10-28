@@ -208,7 +208,7 @@ process cowSay {
     container 'community.wave.seqera.io/library/pip_cowsay:131d6a1b707a8e65'
 ```
 
-### 2.2. Run nextflow pipelines using containers
+### 2.2. Run Nextflow pipelines using containers
 
 Run the script to see the container in action.
 
@@ -242,7 +242,7 @@ You should see a new directory called `containers/results` that contains the out
 
 Let's take a look at the task directory for one of the cowsay tasks to see how Nextflow works with containers under the hood.
 
-Check your the output form your `nextflow run` command to find the task ID for the `cowsay` process.
+Check the output from your `nextflow run` command to find the task ID for the `cowsay` process.
 Then check out the task directory for that task.
 
 ```bash
@@ -421,7 +421,7 @@ Doing these exercises is _not required_ to understand later parts of the trainin
 We have a list of computer and biology pioneers in the `containers/data/pioneers.csv` file.
 At a high level, to complete this exercise you will need to:
 
--   modify the default `params.input_file` to point to the `pioneers.csv` file.
+-   Modify the default `params.input_file` to point to the `pioneers.csv` file.
 -   Create a `getQuote` process that uses the `quote` container to fetch a quote for each input.
 -   Connect the output of the `getQuote` process to the `cowsay` process to display the quote.
 
@@ -441,7 +441,7 @@ For the `quote` container image, you can either use the one you built yourself i
 
 You can find a solution to this exercise in `containers/scripts/hello-containers-4.1.nf`.
 
-### 4.2. Modify your nextflow pipeline to allow it to execute in `quote` and `sayHello` modes.
+### 4.2. Modify your Nextflow pipeline to allow it to execute in `quote` and `sayHello` modes.
 
 Add some branching logic using to your pipeline to allow it to accept inputs intended for both `quote` and `sayHello`.
 Here's an example of how to use an `if` statement in a Nextflow workflow:

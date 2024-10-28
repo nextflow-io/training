@@ -49,7 +49,7 @@ hello-nf-test/
 └── nextflow.config
 ```
 
-For a detailed description of the files, see the Warmup section in Part 6.
+For a detailed description of the files, see the warmup section in Part 6.
 For details about the contents of the `modules` directory, read through all of Part 6 (it's pretty short).
 
 ### 0.2. Create a symbolic link to the data
@@ -87,7 +87,7 @@ executor >  local (7)
 As expected, it all worked.
 
 Like previously, there will now be a `work` directory and a `results_genomics` directory inside your project directory.
-However we are going to ignore them entirely, because we are no longer going to touch the pipeline itself, and we're not even going to interact directly with Nextflow as such.
+However, we are going to ignore them entirely, because we are no longer going to touch the pipeline itself, and we're not even going to interact directly with Nextflow as such.
 
 Instead, we are going to interact with the `nf-test` package.
 

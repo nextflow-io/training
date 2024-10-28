@@ -16,7 +16,7 @@ Next we want to start using Seqera Platform to launch Nextflow workflows on our 
 
 Seqera Platform has a concept of [**organizations**](https://docs.seqera.io/platform/latest/orgs-and-teams/organizations) and [**workspaces**](https://docs.seqera.io/platform/latest/orgs-and-teams/workspace-management) which are used to organize and share [pipelines](https://docs.seqera.io/platform/latest/launch/launchpad), [compute environments](https://docs.seqera.io/platform/latest/compute-envs/overview), [data](https://docs.seqera.io/platform/latest/data/data-explorer), [credentials](https://docs.seqera.io/platform/latest/credentials/overview), and more.
 The `community/showcase` workspace is a public workspace where you can see some example pipelines and compute environments.
-Each user has an alloted amount of free compute to use in this workspace.
+Each user has an allotted amount of free compute to use in this workspace.
 
 Click on your username in the top left corner of the screen to bring up the list of organizations and workspaces you have access to.
 Select the `community/showcase` workspace.
