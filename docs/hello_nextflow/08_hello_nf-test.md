@@ -1094,7 +1094,7 @@ params {
 
 When we run the test, `nf-test` will pick up this configuration file and pull in the inputs accordingly.
 
-### 4.2. Run the test
+### 4.3. Run the test
 
 Here we go!
 
