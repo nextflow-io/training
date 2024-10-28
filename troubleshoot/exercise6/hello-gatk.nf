@@ -5,7 +5,7 @@
  */
 
 // Execution environment setup
-params.baseDir = "/workspace/gitpod/troubleshoot" 
+params.baseDir = "/workspace/gitpod/troubleshoot"
 $baseDir = params.baseDir
 
 // Primary input
@@ -25,7 +25,7 @@ params.cohort_name = "family_trio"
  */
 process SAMTOOLS_INDEX {
 
-    container 'quay.io/biocontainers/samtools:1.19.2--h50ea8bc_1' 
+    container 'quay.io/biocontainers/samtools:1.19.2--h50ea8bc_1'
 
     input:
         tuple val(id), path(input_bam)
@@ -125,8 +125,8 @@ workflow {
 
     // Consolidate GVCFs and apply joint genotyping analysis
     GATK_JOINTGENOTYPING(
-        sample_map, 
-        params.cohort_name, 
+        sample_map,
+        params.cohort_name,
         params.genome_reference,
         params.genome_reference_index,
         params.genome_reference_dict,

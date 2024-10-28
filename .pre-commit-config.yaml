@@ -11,3 +11,13 @@ repos:
       hooks:
           - id: editorconfig-checker
             alias: ec
+
+    - repo: https://github.com/pre-commit/pre-commit-hooks
+      rev: v5.0.0
+      hooks:
+          - id: trailing-whitespace
+            exclude_types:
+                - svg
+          - id: end-of-file-fixer
+            exclude_types:
+                - svg

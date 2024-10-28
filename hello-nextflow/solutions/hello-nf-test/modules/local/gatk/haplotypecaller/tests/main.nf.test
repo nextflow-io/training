@@ -1,0 +1,111 @@
+nextflow_process {
+
+    name "Test Process GATK_HAPLOTYPECALLER"
+    script "../main.nf"
+    process "GATK_HAPLOTYPECALLER"
+
+    test("reads_son [bam]") {
+
+        setup {
+            run("SAMTOOLS_INDEX") {
+                script "../../../samtools/index/main.nf"
+                process {
+                    """
+                    input[0] =  file("${projectDir}/data/bam/reads_son.bam")
+                    """
+                }
+            }
+        }
+
+        when {
+            params {
+                outdir = "tests/results"
+            }
+            process {
+                """
+                input[0] = SAMTOOLS_INDEX.out
+                input[1] = file("${projectDir}/data/ref/ref.fasta")
+                input[2] = file("${projectDir}/data/ref/ref.fasta.fai")
+                input[3] = file("${projectDir}/data/ref/ref.dict")
+                input[4] = file("${projectDir}/data/ref/intervals.bed")
+                """
+            }
+        }
+
+        then {
+            assert process.success
+            assert path(process.out[0][0]).readLines().contains('#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	reads_son')
+            assert path(process.out[0][0]).readLines().contains('20_10037292_10066351	3277	.	G	<NON_REF>	.	.	END=3282	GT:DP:GQ:MIN_DP:PL	0/0:25:72:24:0,72,719')
+        }
+
+    }
+    test("reads_mother [bam]") {
+
+        setup {
+            run("SAMTOOLS_INDEX") {
+                script "../../../samtools/index/main.nf"
+                process {
+                    """
+                    input[0] =  file("${projectDir}/data/bam/reads_mother.bam")
+                    """
+                }
+            }
+        }
+
+        when {
+            params {
+                outdir = "tests/results"
+            }
+            process {
+                """
+                input[0] = SAMTOOLS_INDEX.out
+                input[1] = file("${projectDir}/data/ref/ref.fasta")
+                input[2] = file("${projectDir}/data/ref/ref.fasta.fai")
+                input[3] = file("${projectDir}/data/ref/ref.dict")
+                input[4] = file("${projectDir}/data/ref/intervals.bed")
+                """
+            }
+        }
+
+        then {
+            assert process.success
+            assert path(process.out[0][0]).readLines().contains('#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	reads_mother')
+            assert path(process.out[0][0]).readLines().contains('20_10037292_10066351	3277	.	G	<NON_REF>	.	.	END=3278	GT:DP:GQ:MIN_DP:PL	0/0:38:99:37:0,102,1530')
+        }
+    }
+    test("reads_father [bam]") {
+
+        setup {
+            run("SAMTOOLS_INDEX") {
+                script "../../../samtools/index/main.nf"
+                process {
+                    """
+                    input[0] =  file("${projectDir}/data/bam/reads_father.bam")
+                    """
+                }
+            }
+        }
+
+        when {
+            params {
+                outdir = "tests/results"
+            }
+            process {
+                """
+                input[0] = SAMTOOLS_INDEX.out
+                input[1] = file("${projectDir}/data/ref/ref.fasta")
+                input[2] = file("${projectDir}/data/ref/ref.fasta.fai")
+                input[3] = file("${projectDir}/data/ref/ref.dict")
+                input[4] = file("${projectDir}/data/ref/intervals.bed")
+                """
+            }
+        }
+
+        then {
+            assert process.success
+            assert path(process.out[0][0]).readLines().contains('#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	reads_father')
+            assert path(process.out[0][0]).readLines().contains('20_10037292_10066351	3277	.	G	<NON_REF>	.	.	END=3281	GT:DP:GQ:MIN_DP:PL	0/0:44:99:42:0,120,1800')
+        }
+    }
+
+}

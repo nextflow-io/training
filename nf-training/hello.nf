@@ -25,7 +25,7 @@ process CONVERTTOUPPER {
 
     script:
     """
-    cat $y | tr '[a-z]' '[A-Z]' 
+    cat $y | tr '[a-z]' '[A-Z]'
     """
 }
 
@@ -34,4 +34,3 @@ workflow {
     results_ch = CONVERTTOUPPER(letters_ch.flatten())
     results_ch.view{ it }
 }
-

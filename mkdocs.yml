@@ -13,10 +13,14 @@ nav:
           - hello_nextflow/index.md
           - hello_nextflow/01_orientation.md
           - hello_nextflow/02_hello_world.md
-          - hello_nextflow/03_hello_gatk.md
-          - hello_nextflow/04_hello_modules.md
-          - hello_nextflow/05_hello_nf-test.md
+          - hello_nextflow/03_hello_containers.md
+          - hello_nextflow/04_hello_genomics.md
+          - hello_nextflow/05_hello_operators.md
           - hello_nextflow/06_hello_config.md
+          - hello_nextflow/07_hello_modules.md
+          - hello_nextflow/08_hello_nf-test.md
+          - hello_nextflow/09_hello_nf-core.md
+          - hello_nextflow/10_hello_seqera.md
     - Fundamentals Training:
           - basic_training/index.md
           - basic_training/orientation.md
@@ -151,6 +155,9 @@ markdown_extensions:
           preserve_tabs: true
     - pymdownx.tabbed:
           alternate_style: true
+    - pymdownx.tasklist:
+          custom_checkbox: true
+          clickable_checkbox: true
     - tables
     - toc:
           title: On this page
