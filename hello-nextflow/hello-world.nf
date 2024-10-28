@@ -5,16 +5,16 @@
  */
 process sayHello {
 
-    output: 
+    output:
         stdout
-    
+
     """
     echo 'Hello World!'
     """
 }
 
 workflow {
-    
+
     // emit a greeting
     sayHello()
 }

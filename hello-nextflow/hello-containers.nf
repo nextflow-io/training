@@ -16,11 +16,11 @@ process sayHello {
     publishDir 'containers/results', mode: 'copy'
 
     input:
-        val greeting  
+        val greeting
 
-    output: 
+    output:
         path "output-*.txt"
-    
+
     script:
         // Replace the spaces in the greeting with hyphens for the output filename
         def safe_greeting = greeting.tokenize(' ').join('-')
@@ -35,7 +35,7 @@ process sayHello {
 process cowSay {
 
     publishDir 'containers/results', mode: 'copy'
-    
+
     input:
         path input_file
 

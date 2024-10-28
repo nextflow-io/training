@@ -8,11 +8,11 @@ process sayHello {
     publishDir 'results', mode: 'copy'
 
     input:
-        val greeting  
+        val greeting
 
-    output: 
+    output:
         path "output.txt"
-    
+
     """
     echo '$greeting' > output.txt
     """

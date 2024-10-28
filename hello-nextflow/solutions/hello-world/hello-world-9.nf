@@ -13,11 +13,11 @@ process sayHello {
     publishDir 'results', mode: 'copy'
 
     input:
-        val greeting  
+        val greeting
 
-    output: 
+    output:
         path "${greeting}-output.txt"
-    
+
     """
     echo '$greeting' > '$greeting-output.txt'
     """
@@ -29,7 +29,7 @@ process sayHello {
 process convertToUpper {
 
     publishDir 'results', mode: 'copy'
-    
+
     input:
         path input_file
 

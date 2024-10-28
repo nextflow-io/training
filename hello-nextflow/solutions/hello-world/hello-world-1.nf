@@ -2,9 +2,9 @@
 
 process sayHello {
 
-    output: 
+    output:
         stdout
-    
+
     """
     echo 'Hello World!'
     """

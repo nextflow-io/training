@@ -30,5 +30,5 @@ workflow {
     // Create input channel
 
     // Create index file for input BAM file
-    
+
 }

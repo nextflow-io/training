@@ -1065,7 +1065,7 @@ We're going to use that instead of the `Channel.of()` constructor we used previo
 Channel.fromPath(input_file)
 ```
 
-Now, we are going to deploy a new concept, an 'operator' to transform that CSV file into channel content. You'll learn more about operators later, but for now just understand them as ways of transforming channels in a variety of ways. 
+Now, we are going to deploy a new concept, an 'operator' to transform that CSV file into channel content. You'll learn more about operators later, but for now just understand them as ways of transforming channels in a variety of ways.
 
 Since our goal is to read in the contents of a `.csv` file, we're going to add the `.splitCsv()` operator to make Nextflow parse the file contents accordingly, as well as the `.flatten()` operator to turn the array element produced by `.splitCsv()` into a channel of individual elements.
 
@@ -1148,4 +1148,4 @@ Celebrate your success and take a break!
 Don't worry if the channel types and operators feel like a lot to grapple with the first time you encounter them.
 You'll get more opportunities to practice using these components in various settings as you work through this training course.
 
-When you're ready, move on to Part 2 to learn about another important concept: provisioning the software required for each process. 
+When you're ready, move on to Part 2 to learn about another important concept: provisioning the software required for each process.

@@ -7,9 +7,9 @@ process sayHello {
 
     publishDir 'results', mode: 'copy'
 
-    output: 
+    output:
         path 'output.txt'
-    
+
     """
     echo 'Hello World!' > output.txt
     """
