@@ -1,0 +1,36 @@
+{
+    "Should run without failures": {
+        "content": [
+            {
+                "0": [
+                    "reads_son.bam.g.vcf:md5,2184752e8d3281646f4622aa518e88fd"
+                ],
+                "1": [
+                    "reads_son.bam.g.vcf.idx:md5,113b4c76d6d5b749825f278c7b1821ee"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.1",
+            "nextflow": "24.02.0"
+        },
+        "timestamp": "2024-10-27T23:57:49.079801161"
+    },
+    "reads_son [bam]": {
+        "content": [
+            {
+                "0": [
+                    "reads_son.bam.g.vcf:md5,73e33550858a2cd8a602a0a9de22c1e5"
+                ],
+                "1": [
+                    "reads_son.bam.g.vcf.idx:md5,160fd200d8cd6044f3cb5da4246dc4fa"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.1",
+            "nextflow": "24.02.0"
+        },
+        "timestamp": "2024-10-27T23:59:25.191508837"
+    }
+}
