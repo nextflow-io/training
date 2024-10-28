@@ -189,7 +189,7 @@ This means that you can use any container image you like to run your processes, 
 
 ### 2.1. Add a container directive to your process
 
-Edit the `hello_containers.nf` script to add a `container` directive to the `cowsay` process.
+Edit the `hello-containers.nf` script to add a `container` directive to the `cowsay` process.
 
 _Before:_
 
@@ -213,7 +213,7 @@ process cowSay {
 Run the script to see the container in action.
 
 ```bash
-nextflow run hello_containers.nf
+nextflow run hello-containers.nf
 ```
 
 !!! NOTE
@@ -416,7 +416,7 @@ Doing these exercises is _not required_ to understand later parts of the trainin
                                                         ||     ||
 ```
 
-### 4.1. Modify the `hello_containers.nf` script to use a getQuote process
+### 4.1. Modify the `hello-containers.nf` script to use a getQuote process
 
 We have a list of computer and biology pioneers in the `containers/data/pioneers.csv` file.
 At a high level, to complete this exercise you will need to:
