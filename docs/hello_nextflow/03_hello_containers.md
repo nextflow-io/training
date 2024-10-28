@@ -59,7 +59,7 @@ Notice that the prompt has changed to `(base) root@b645838b3314:/tmp#`, which in
 If we run:
 
 ```console title="Output"
-(base) root@b645838b3314:/tmp# ls
+(base) root@b645838b3314:/tmp# ls /
 bin    dev    etc    home   lib    media  mnt    opt    proc   root   run    sbin   srv    sys    tmp    usr    var
 ```
 
