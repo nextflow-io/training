@@ -15,14 +15,17 @@ RUN apt-get update --quiet && \
         curl \
         tree \
         graphviz \
-        software-properties-common
-
+        software-properties-common && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 # Taken from: https://github.com/nf-core/tools/blob/master/nf_core/gitpod/gitpod.Dockerfile
 # Install Apptainer (Singularity)
 RUN add-apt-repository -y ppa:apptainer/ppa && \
     apt-get update --quiet && \
-    apt install -y apptainer
+    apt install -y apptainer && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 # Install Conda
 RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
@@ -34,6 +37,11 @@ ENV PATH="/opt/conda/bin:$PATH"
 # User permissions
 RUN mkdir -p /workspace/data \
     && chown -R gitpod:gitpod /opt/conda /workspace/data
+
+# Install Tower Agent
+RUN curl -fSL https://github.com/seqeralabs/tower-agent/releases/latest/download/tw-agent-linux-x86_64 > tw-agent && \
+    chmod +x tw-agent && \
+    mv tw-agent /usr/local/bin/tw-agent
 
 # Change user to gitpod
 USER gitpod

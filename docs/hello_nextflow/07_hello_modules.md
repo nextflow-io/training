@@ -79,6 +79,14 @@ executor >  local (7)
 
 Like previously, there will now be a `work` directory and a `results_genomics` directory inside your project directory.
 
+### Takeaway
+
+You're ready to start modularizing your workflow.
+
+### What's next?
+
+Learn how to create your first module following conventions inspired by the nf-core project.
+
 ---
 
 ## 1. Create a module for the `SAMTOOLS_INDEX` process

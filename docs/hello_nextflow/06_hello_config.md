@@ -5,6 +5,8 @@ This section will explore how to set up and manage the configuration of your Nex
 We're going to cover essential components of Nextflow configuration such as config files, profiles, process directives, executors, and parameter files.
 By learning to utilize these configuration options effectively, you can enhance the flexibility, scalability, and performance of your pipelines.
 
+---
+
 ## 0. Warmup: Moving to a formal project structure
 
 So far we've been working with a very loose structure, with just one workflow code file and a tiny configuration file that we've mostly ignored, because we were very focused on learning how to implement the workflow itself.
@@ -72,7 +74,6 @@ This creates a symbolic link called `data` pointing to the data directory, which
 hello-config
 ├── data -> ../data
 ├── demo-params.json
-├── solutions
 ├── main.nf
 └── nextflow.config
 ```
