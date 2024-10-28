@@ -2,7 +2,7 @@
 
 nf-core is a community effort to develop and maintain a curated set of analysis pipelines built using Nextflow.
 
-![nf-core logo](img/nf-core-logo.png)
+![nf-core logo](../nf_customize/img/nf-core-logo.png)
 
 nf-core provides a standardized set of best practices, guidelines, and templates for building and sharing scientific pipelines.
 These pipelines are designed to be modular, scalable, and portable, allowing researchers to easily adapt and execute them using their own data and compute resources.
