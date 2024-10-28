@@ -1031,16 +1031,16 @@ Now all that remains is to add a test for checking that the whole pipeline runs 
 The command is similar to the one for module tests, except it says `generate pipeline` instead of `generate process`:
 
 ```bash
-nf-test generate pipeline hello-nf-test.nf
+nf-test generate pipeline main.nf
 ```
 
 It produces a similar stub file:
 
-```groovy title="tests/hello-nf-test.nf.test" linenums="1"
+```groovy title="tests/main.nf.test" linenums="1"
 nextflow_pipeline {
 
-    name "Test Workflow hello-nf-test.nf"
-    script "hello-nf-test.nf"
+    name "Test Workflow main.nf"
+    script "main.nf"
 
     test("Should run without failures") {
 
@@ -1062,12 +1062,44 @@ nextflow_pipeline {
 
 The line `assert workflow.success` is a simple assertion testing for whether the pipeline ran successfully.
 
+!!!note
+
+    In this case the test file can stay where `nf-test` created it.
+
+### 4.2. Specify input parameters
+
+We still need to specify inputs.
+There are several ways of doing this, including by specifying a profile.
+However, a simpler way is to set up a `params {}` block in the `nextflow.config` file that `nf-test init` originally created in the `tests` directory.
+
+```groovy title="tests/nextflow.config" linenums="1"
+/*
+ * Pipeline parameters
+ */
+
+params {
+    // Primary input (file of input files, one per line)
+    reads_bam        = "${projectDir}/data/sample_bams.txt"
+
+    // Accessory files
+    reference        = "${projectDir}/data/ref/ref.fasta"
+    reference_index  = "${projectDir}/data/ref/ref.fasta.fai"
+    reference_dict   = "${projectDir}/data/ref/ref.dict"
+    intervals        = "${projectDir}/data/ref/intervals.bed"
+
+    // Base name for final output file
+    cohort_name      = "family_trio"
+}
+```
+
+When we run the test, `nf-test` will pick up this configuration file and pull in the inputs accordingly.
+
 ### 4.2. Run the test
 
-In this case the pipeline test is fully functional (because we have default inputs set up in the configuration file) and can be run directly as follows:
+Here we go!
 
 ```bash
-nf-test test tests/hello-nf-test.nf.test
+nf-test test --profile docker_on tests/main.nf.test
 ```
 
 This produces:
