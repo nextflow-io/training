@@ -49,7 +49,7 @@ hello-nf-test/
 └── nextflow.config
 ```
 
-For a detailed description of the files, see the Warmup section in Part 6.
+For a detailed description of the files, see the warmup section in Part 6.
 For details about the contents of the `modules` directory, read through all of Part 6 (it's pretty short).
 
 ### 0.2. Create a symbolic link to the data
