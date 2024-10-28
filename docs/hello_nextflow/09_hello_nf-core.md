@@ -157,7 +157,7 @@ NXF_VER=24.09.2-edge nextflow run nf-core/demo -profile docker,test --outdir res
 
 And boom, that gets us past the version mismatch without committing us to any big changes.
 
-Here's our pipeline output, by the way:
+Here's the console output from the pipeline:
 
 ```console title="Output"
  N E X T F L O W   ~  version 24.09.2-edge
@@ -215,8 +215,39 @@ Succeeded   : 7
 
 Isn't that neat?
 
-And that's all you need to know for now. Congratulations!
-You have now run your first nf-core pipeline.
+You can also explore the `results` directory produced by the pipeline.
+
+```console title="Output"
+results
+├── fastqc
+│   ├── SAMPLE1_PE
+│   ├── SAMPLE2_PE
+│   └── SAMPLE3_SE
+├── fq
+│   ├── SAMPLE1_PE
+│   ├── SAMPLE2_PE
+│   └── SAMPLE3_SE
+├── multiqc
+│   ├── multiqc_data
+│   ├── multiqc_plots
+│   └── multiqc_report.html
+└── pipeline_info
+    ├── execution_report_2024-10-28_03-23-44.html
+    ├── execution_timeline_2024-10-28_03-23-44.html
+    ├── execution_trace_2024-10-28_03-14-32.txt
+    ├── execution_trace_2024-10-28_03-19-33.txt
+    ├── execution_trace_2024-10-28_03-20-57.txt
+    ├── execution_trace_2024-10-28_03-22-39.txt
+    ├── execution_trace_2024-10-28_03-23-44.txt
+    ├── nf_core_pipeline_software_mqc_versions.yml
+    ├── params_2024-10-28_03-23-49.json
+    └── pipeline_dag_2024-10-28_03-23-44.html
+```
+
+If you're curious about what that all means, check out [the nf-core/demo pipeline documentation page](https://nf-co.re/demo/1.0.1/)!
+
+And that's all you need to know for now.
+Congratulations! You have now run your first nf-core pipeline.
 
 ### Takeaway
 
