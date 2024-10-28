@@ -115,7 +115,7 @@ One way to do this is to **mount** a **volume** from the host system into the co
 Prior to working on the next task, confirm that you are in the `hello-nextflow` directory.
 
 ```bash
-cd /workspace/gitpod/nf-training/hello-nextflow
+cd /workspace/gitpod/hello-nextflow
 ```
 
 Then run:
