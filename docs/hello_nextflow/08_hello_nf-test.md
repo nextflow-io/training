@@ -552,7 +552,7 @@ test("reads_son [bam]") {
             script "../../../samtools/index/main.nf"
             process {
                 """
-                input[0] =  [ [id: 'reads_son' ], file("${projectDir}/data/bam/reads_son.bam") ]
+                input[0] =  file("${projectDir}/data/bam/reads_son.bam")
                 """
             }
         }
@@ -582,13 +582,17 @@ Then we can refer to the output of that process in the `when` block where we spe
 
 Using the setup method is convenient, though you should consider its use carefully.
 Module-level tests are supposed to test processes in isolation in order to detect changes at the individual process level; breaking that isolation undermines that principle.
-You may find that generating intermediate test files is the right thing to do in many cases.
-But it's important to know that you can use this setup method if you need to.
+
+In many cases, it's better to use intermediate test files that you generate manually as part of the preparation.
+We'll show you how to do that in the next section.
+But we show you the setup method too because sometimes it is useful to be able to test the connection between two modules specifically.
+
+<!-- TODO: consider switching the order of types of tests, might make more sense in terms of flow -->
 
 ### 2.4. Run test and examine output
 
 ```bash
-nf-test test modules/local/gatk/haplotypecaller/tests/main.nf.test
+nf-test test --profile my_laptop,demo modules/local/gatk/haplotypecaller/tests/main.nf.test
 ```
 
 This produces the following output:
@@ -619,7 +623,7 @@ It also produces a snapshot file like earlier.
 Interestingly, if you run the exact same command again, this time the test will fail with the following:
 
 ```bash
-nf-test test modules/local/gatk/haplotypecaller/tests/main.nf.test
+nf-test test --profile my_laptop,demo modules/local/gatk/haplotypecaller/tests/main.nf.test
 ```
 
 Produces:
@@ -653,7 +657,7 @@ Test Process GATK_HAPLOTYPECALLER
 
   Nextflow stderr:
 
-  Nextflow 24.03.0-edge is available - Please consider updating your version to it
+  Nextflow 24.09.2-edge is available - Please consider updating your version to it
 
 
     Obsolete snapshots can only be checked if all tests of a file are executed successful.
@@ -664,7 +668,10 @@ FAILURE: Executed 1 tests in 23.79s (1 failed)
 
 The error message tells you there were differences between the snapshots for the two runs; specifically, the md5sum values are different for the VCF files.
 
-Why? To make a long story short, the HaplotypeCaller tool includes a timestamp in the VCF header that is different every time (by definition), so we can't just expect the files to have identical md5sums even if they have identical content in terms of the variant calls themselves.
+Why? To make a long story short, the HaplotypeCaller tool includes a timestamp in the VCF header that is different every time (by definition).
+As a result, we can't just expect the files to have identical md5sums even if they have identical content in terms of the variant calls themselves.
+
+How do we deal with that?
 
 ### 2.6. Use a content assertion method
 
@@ -688,8 +695,8 @@ _After:_
 ```console title="modules/local/gatk/haplotypecaller/tests/main.nf.test" linenums="35"
 then {
     assert process.success
-    assert path(process.out[0][0][1]).readLines().contains('#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	reads_son')
-    assert path(process.out[0][0][1]).readLines().contains('20_10037292_10066351	3277	.	G	<NON_REF>	.	.	END=3282	GT:DP:GQ:MIN_DP:PL	0/0:25:72:24:0,72,719')
+    assert path(process.out[0][0]).readLines().contains('#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	reads_son')
+    assert path(process.out[0][0]).readLines().contains('20_10037292_10066351	3277	.	G	<NON_REF>	.	.	END=3282	GT:DP:GQ:MIN_DP:PL	0/0:25:72:24:0,72,719')
 }
 ```
 
@@ -738,7 +745,7 @@ test("reads_mother [bam]") {
             script "../../../samtools/index/main.nf"
             process {
                 """
-                input[0] =  [ [id: 'reads_mother' ], file("${projectDir}/data/bam/reads_mother.bam") ]
+                input[0] =  file("${projectDir}/data/bam/reads_mother.bam")
                 """
             }
         }
@@ -761,8 +768,8 @@ test("reads_mother [bam]") {
 
     then {
         assert process.success
-        assert path(process.out[0][0][1]).readLines().contains('#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	reads_mother')
-        assert path(process.out[0][0][1]).readLines().contains('20_10037292_10066351	3277	.	G	<NON_REF>	.	.	END=3278	GT:DP:GQ:MIN_DP:PL	0/0:38:99:37:0,102,1530')
+        assert path(process.out[0][0]).readLines().contains('#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	reads_mother')
+        assert path(process.out[0][0]).readLines().contains('20_10037292_10066351	3277	.	G	<NON_REF>	.	.	END=3278	GT:DP:GQ:MIN_DP:PL	0/0:38:99:37:0,102,1530')
     }
 }
 ```
@@ -777,7 +784,7 @@ test("reads_father [bam]") {
             script "../../../samtools/index/main.nf"
             process {
                 """
-                input[0] =  [ [id: 'reads_father' ], file("${projectDir}/data/bam/reads_father.bam") ]
+                input[0] =  file("${projectDir}/data/bam/reads_father.bam")
                 """
             }
         }
@@ -800,8 +807,8 @@ test("reads_father [bam]") {
 
     then {
         assert process.success
-        assert path(process.out[0][0][1]).readLines().contains('#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	reads_father')
-        assert path(process.out[0][0][1]).readLines().contains('20_10037292_10066351	3277	.	G	<NON_REF>	.	.	END=3281	GT:DP:GQ:MIN_DP:PL	0/0:44:99:42:0,120,1800')
+        assert path(process.out[0][0]).readLines().contains('#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	reads_father')
+        assert path(process.out[0][0]).readLines().contains('20_10037292_10066351	3277	.	G	<NON_REF>	.	.	END=3281	GT:DP:GQ:MIN_DP:PL	0/0:44:99:42:0,120,1800')
     }
 }
 ```
@@ -809,7 +816,7 @@ test("reads_father [bam]") {
 ### 2.9. Run the test command
 
 ```bash
-nf-test test modules/local/gatk/haplotypecaller/tests/main.nf.test
+nf-test test --profile my_laptop,demo modules/local/gatk/haplotypecaller/tests/main.nf.test
 ```
 
 Produces:
