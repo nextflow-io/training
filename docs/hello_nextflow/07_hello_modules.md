@@ -34,10 +34,9 @@ cd hello-modules
 ```
 
 !!! warning
-    If you're continuing on directly from Part 5, you'll need to move up one directory first.
-    ```
-    cd ../hello-modules
-    ```
+If you're continuing on directly from Part 5, you'll need to move up one directory first.
+`     cd ../hello-modules
+    `
 
 The `hello-modules` directory has the same content and structure that you're expected to end up with in `hello-config` on completion of Part 5.
 
@@ -196,7 +195,7 @@ _Before:_
 
 ```groovy title="hello-modules/main.nf" linenums="73"
 workflow {
-````
+```
 
 _After:_
 
