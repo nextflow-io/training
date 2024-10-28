@@ -134,28 +134,14 @@ Lets' try it!
 nextflow run nf-core/demo -profile docker,test --outdir results
 ```
 
-Annoyingly, we get the following output:
+!!! hint "Changing nextflow version"
 
-```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+    Depending on the nextflow version you have installed, this command might fail due to a version mismatch.
+    If that happens, you can temporarily run the pipeline with a different version than you have installed by adding NXF_VER=<version> to the start of your command as shown below:
 
- ┃ Launching `https://github.com/nf-core/demo` [serene_stallman] DSL2 - revision: 04060b4644 [master]
-
-Downloading plugin nf-schema@2.1.1
-Nextflow version 24.02.0-edge does not match workflow required version: >=24.04.2
-```
-
-Apparently we are using a slightly older version of Nextflow than what the workflow requires.
-
-This is annoying because we might not want to update Nextflow without checking that the update doesn't affect our current work. However, Nextflow makes it up to us by letting us request a specific version on a one-time basis!
-
-You just have to add `NXF_VER=<version>` to the start of your command, like this:
-
-```bash
-NXF_VER=24.09.2-edge nextflow run nf-core/demo -profile docker,test --outdir results
-```
-
-And boom, that gets us past the version mismatch without committing us to any big changes.
+        ```bash
+        NXF_VER=24.09.2-edge nextflow run nf-core/demo -profile docker,test --outdir results
+        ```
 
 Here's the console output from the pipeline:
 
