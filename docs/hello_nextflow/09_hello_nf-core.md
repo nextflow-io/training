@@ -49,7 +49,7 @@ Whenever you're ready, run the command:
 nextflow pull nf-core/demo
 ```
 
-Nextflow will `pull` the pipeline's default GitHub branch
+Nextflow will `pull` the pipeline's default GitHub branch.
 For nf-core pipelines with a stable release, that will be the master branch.
 You select a specific branch with `-r`; we'll cover that later.
 
@@ -59,7 +59,7 @@ Checking nf-core/demo ...
 ```
 
 To be clear, you can do this with any Nextflow pipeline that is appropriately set up in GitHub, not just nf-core pipelines.
-However nf-core is the largest open collection of Nextflow pipelines.
+However nf-core is the largest open curated collection of Nextflow pipelines.
 
 !!!tip
 
@@ -108,14 +108,17 @@ The `test` profile for `nf-core/demo` is shown below:
 ----------------------------------------------------------------------------------------
 */
 
+process {
+    resourceLimits = [
+        cpus: 4,
+        memory: '15.GB',
+        time: '1.h'
+    ]
+}
+
 params {
     config_profile_name        = 'Test profile'
     config_profile_description = 'Minimal test dataset to check pipeline function'
-
-    // Limit resources so that this can run on GitHub Actions
-    max_cpus   = 2
-    max_memory = '6.GB'
-    max_time   = '6.h'
 
     // Input data
     input  = 'https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv'
@@ -137,11 +140,11 @@ nextflow run nf-core/demo -profile docker,test --outdir results
 !!! hint "Changing Nextflow version"
 
     Depending on the nextflow version you have installed, this command might fail due to a version mismatch.
-    If that happens, you can temporarily run the pipeline with a different version than you have installed by adding NXF_VER=<version> to the start of your command as shown below:
+    If that happens, you can temporarily run the pipeline with a different version than you have installed by adding `NXF_VER=version` to the start of your command as shown below:
 
-        ```bash
-        NXF_VER=24.09.2-edge nextflow run nf-core/demo -profile docker,test --outdir results
-        ```
+    ```bash
+    NXF_VER=24.09.2-edge nextflow run nf-core/demo -profile docker,test --outdir results
+    ```
 
 Here's the console output from the pipeline:
 

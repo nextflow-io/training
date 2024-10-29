@@ -28,11 +28,17 @@ We're going to be working with a clean set of project files inside the project d
 ### 0.1. Explore the `hello-modules` directory
 
 Let's move into the project directory.
-If you're continuing on directly from Part 5, you'll need to move up one directory first.
 
 ```bash
 cd hello-modules
 ```
+
+!!! warning
+
+    If you're continuing on directly from Part 5, you'll need to move up one directory first.
+    ```
+     cd ../hello-modules
+    ```
 
 The `hello-modules` directory has the same content and structure that you're expected to end up with in `hello-config` on completion of Part 5.
 
@@ -94,7 +100,7 @@ Learn how to create your first module following conventions inspired by the nf-c
 From a technical standpoint, you can create a module simply by copying the process definition into its own file, and you can name that file anything you want.
 However, the Nextflow community has adopted certain conventions for code organization, influenced in large part by the [nf-core](https://nf-co.re) project (which we'll cover later in this training series).
 
-The convention for process modules is that the process definition should be written to a standalone file named `main.nf`, stored in a directory structure with three to four levels:
+The convention for Nextflow modules is that the process definition should be written to a standalone file named `main.nf`, stored in a directory structure with three to four levels:
 
 ```console title="Directory structure"
 modules
@@ -187,12 +193,11 @@ include { <MODULE_NAME> } from './modules/local/<toolkit>>/<tool>/main.nf'
 
 Let's insert that above the workflow block and fill it out appropriately.
 
-````groovy title="hello-modules/main.nf" linenums="73"
 _Before:_
 
 ```groovy title="hello-modules/main.nf" linenums="73"
 workflow {
-````
+```
 
 _After:_
 
@@ -208,7 +213,7 @@ workflow {
 We're running the workflow with essentially the same code and inputs as before, so let's add the `-resume` flag and see what happens.
 
 ```bash
-nextflow run main.nf -profile my_laptop,demo
+nextflow run main.nf -profile my_laptop,demo -resume
 ```
 
 Sure enough, Nextflow recognizes that it's still all the same work to be done, even if the code is split up into multiple files.
