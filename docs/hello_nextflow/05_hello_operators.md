@@ -791,7 +791,6 @@ GATK_GENOMICSDB(
     all_gvcfs_ch,
     all_idxs_ch,
     intervals_file,
-    path interval_list,
     params.cohort_name
 )
 ```
