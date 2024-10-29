@@ -700,7 +700,7 @@ Learn how to add in a second process and chain them together.
 Most real-world workflows involve more than one step. Here we introduce a second process that converts the text to uppercase (all-caps), using the classic UNIX one-liner:
 
 ```bash
-tr '[a-z]' '[A-Z]'`
+tr '[a-z]' '[A-Z]'
 ```
 
 We're going to run the command by itself in the terminal first to verify that it works as expected without any of the workflow code getting in the way of clarity, just like we did at the start with `echo 'Hello World'`. Then we'll write a process that does the same thing, and finally we'll connect the two processes so the output of the first serves as input to the second.
