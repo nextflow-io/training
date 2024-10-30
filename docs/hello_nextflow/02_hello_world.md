@@ -501,7 +501,7 @@ This is where channels come in: Nextflow uses channels to feed inputs to process
 
 There are multiple ways to do this, but for now, we're just going to use the simplest possible channel, containing a single value.
 
-We're going to create the channel using the `Channel.of()` constructor, which sets up a simple value channel, and give it a hardcoded string to use as greeting by declaring `greeting_ch = Channel.of('Hello world!')`.
+We're going to create the channel using the `Channel.of()` factory, which sets up a simple value channel, and give it a hardcoded string to use as greeting by declaring `greeting_ch = Channel.of('Hello world!')`.
 
 _Before:_
 
@@ -840,11 +840,11 @@ Learn how to make the workflow run on a batch of input values.
 
 Workflows typically run on batches of inputs that are meant to be processed in bulk, so we want to upgrade the workflow to accept multiple input values.
 
-Conveniently, the `Channel.of()` constructor we've been using is quite happy to accept more than one value, so we don't need to modify that at all; we just have to load more values into the channel.
+Conveniently, the `Channel.of()` factory we've been using is quite happy to accept more than one value, so we don't need to modify that at all; we just have to load more values into the channel.
 
 ### 8.1. Load multiple greetings into the input channel
 
-To keep things simple, we go back to hardcoding the greetings in the constructor instead of using a parameter for the input, but we'll improve on that shortly.
+To keep things simple, we go back to hardcoding the greetings in the channel factory instead of using a parameter for the input, but we'll improve on that shortly.
 
 _Before:_
 
@@ -1058,8 +1058,8 @@ params.input_file = "data/greetings.csv"
 
 ### 9.2. Update the channel declaration to handle the input file
 
-At this point we introduce a new channel constructor, `Channel.fromPath()`, which has some built-in functionality for handling file paths.
-We're going to use that instead of the `Channel.of()` constructor we used previously; the base syntax looks like this:
+At this point we introduce a new channel factory, `Channel.fromPath()`, which has some built-in functionality for handling file paths.
+We're going to use that instead of the `Channel.of()` factory we used previously; the base syntax looks like this:
 
 ```groovy title="channel construction syntax"
 Channel.fromPath(input_file)

@@ -48,6 +48,7 @@ If you run this inside `hello-nextflow`, you should see the following output:
 ├── hello-nf-test
 │   ├── demo-params.json
 │   ├── main.nf
+│   ├── modules
 │   └── nextflow.config
 ├── hello-operators.nf
 ├── hello-world.nf

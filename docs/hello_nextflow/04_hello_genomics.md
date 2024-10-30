@@ -234,7 +234,7 @@ workflow {
 }
 ```
 
-You'll notice we're using the same `.fromPath` channel constructor as we used at the end of Part 1 (Hello World) of this training series.
+You'll notice we're using the same `.fromPath` channel factory as we used at the end of Part 1 (Hello World) of this training series.
 Indeed, we're doing something very similar.
 The difference is that this time we're telling Nextflow to load the file path itself into the channel as an input element, rather than reading in its contents.
 
@@ -466,7 +466,7 @@ params.reads_bam = [
 ]
 ```
 
-And that's actually all we need to do, because the channel constructor we use in the workflow body (`.fromPath`) is just as happy to accept multiple file paths to load into the input channel as it was to load a single one.
+And that's actually all we need to do, because the channel factory we use in the workflow body (`.fromPath`) is just as happy to accept multiple file paths to load into the input channel as it was to load a single one.
 
 !!! note
 
@@ -748,9 +748,9 @@ params.reads_bam = "${projectDir}/data/sample_bams.txt"
 
 This way we can continue to be lazy, but the list of files no longer lives in the workflow code itself, which is a big step in the right direction.
 
-### 4.3. Update the channel constructor to read lines from a file
+### 4.3. Update the channel factory to read lines from a file
 
-Currently, our input channel constructor treats any files we give it as the data inputs we want to feed to the indexing process.
+Currently, our input channel factory treats any files we give it as the data inputs we want to feed to the indexing process.
 Since we're now giving it a file that lists input file paths, we need to change its behavior to parse the file and treat the file paths it contains as the data inputs.
 
 Fortunately we can do that very simply, just by adding the [`.splitText()` operator](https://www.nextflow.io/docs/latest/reference/operator.html#operator-splittext) to the channel construction step.
