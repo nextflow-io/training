@@ -101,14 +101,10 @@ tower {
     enabled = true
     endpoint = "https://api.cloud.seqera.io"
     accessToken = secrets.tower_access_token
-    workspaceId = secrets.tower_workspace_id
 }
 ```
 
-!!! hint "Workspace ID and Endpoint"
-
-    We haven't set `secrets.tower_workspace_id` yet, and so Nextflow will fill in an empty string for this value.
-    This will default to the user's workspace in Seqera Platform which is what we want for now.
+!!! hint "Endpoint"
 
     The `endpoint` is the URL of the Seqera Platform API.
     If your institution is running a private instance of Seqera Platform, you will want to change this to the appropriate URL.
