@@ -9,7 +9,7 @@ There are three directories in a Nextflow workflow repository that have a specia
 
 ## `./bin`
 
-The `bin` directory (if it exists) is always added to the `$PATH` for all tasks. If the tasks are performed on a remote machine, the directory is copied across to the new machine before the task begins. This Nextflow feature is designed to make it easy to include accessory scripts directly in the workflow without having to commit those scripts into the container. This feature also ensures that the scripts used inside of the workflow move on the same revision schedule as the workflow itself.
+The `bin` directory (if it exists) is always added to the `$PATH` for all tasks. If the tasks are performed on a remote machine, the directory is copied across to the new machine before the task begins. This Nextflow feature is designed to make it easy to include accessory scripts directly in the workflow without having to commit those scripts into the container. This feature also ensures that the scripts used inside the workflow move on the same revision schedule as the workflow itself.
 
 It is important to know that Nextflow will take care of updating `$PATH` and ensuring the files are available wherever the task is running, but will not change the permissions of any files in that directory. If a file is called by a task as an executable, the workflow developer must ensure that the file has the correct permissions to be executed.
 
@@ -208,7 +208,7 @@ workflow {
 }
 ```
 
-Why might this be helpful? You can add extra classes to the metadata which can be computed from the existing metadata. For example, we might want want to grab the adapter prefix:
+Why might this be helpful? You can add extra classes to the metadata which can be computed from the existing metadata. For example, we might want to grab the adapter prefix:
 
 ```groovy linenums="1"
 def getAdapterStart() {
