@@ -129,7 +129,7 @@ map { id, reads ->
 
     To quickly sanity-check a groovy expression, try the [Groovy web console](https://groovyconsole.appspot.com/)
 
-We are almost there, but we still don't have the "treatment" metadata captured in our meta map. The treament is encoded in this example in the name of the parent directory relative to the reads. Inside the map object, the reads are a list of two UnixPath objects. These objects implement the [`java.nio.Path`](https://docs.oracle.com/javase/7/docs/api/java/nio/file/Path.html) interface, which provides us many useful methods, including `getParent()`.
+We are almost there, but we still don't have the "treatment" metadata captured in our meta map. The treatment is encoded in this example in the name of the parent directory relative to the reads. Inside the map object, the reads are a list of two UnixPath objects. These objects implement the [`java.nio.Path`](https://docs.oracle.com/javase/7/docs/api/java/nio/file/Path.html) interface, which provides us many useful methods, including `getParent()`.
 
 We can call the `getParent()` method on each of the paths like so:
 
