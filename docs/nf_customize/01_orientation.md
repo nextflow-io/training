@@ -25,11 +25,11 @@ In this folder you will find three pairs of zipped fastq files (`*.fastq.gz`) in
     └── samplesheet.csv
 ```
 
-Each file will be used in this training module.
+These files will be used in this training module.
 
 !!! question "Exercise"
 
-    Open the [Gitpod training environment](https://gitpod.io/#https://github.com/nextflow-io/training) and use the following command to switch to the `nf-customize` folder. View the files in this folder using the `tree` command:
+    Open the [Gitpod training environment](https://gitpod.io/#https://github.com/nextflow-io/training) and switch to the `nf-customize` folder. View the files in this folder using the `tree` command:
 
     ```bash
     cd /workspace/gitpod/nf-customize
