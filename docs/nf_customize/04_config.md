@@ -18,7 +18,7 @@ Configuration sources are reported below and listed in order of priority:
 
 While some of these files are already included in the nf-core pipeline repository (e.g., the `nextflow.config` file in the nf-core pipeline repository), some are automatically identified on your local system (e.g., the `nextflow.config` in the launch directory), and others are only included if they are specified using `run` options (e.g., `-params-file`, and `-c`).
 
-Understanding how and when these files are interpreted by Nextflow is critical for the accurate configuration of a pipelines execution.
+Understanding how and when these files are interpreted by Nextflow is critical for the accurate configuration of a pipeline execution.
 
 ## Parameters
 
@@ -181,7 +181,7 @@ alpha {
 
 Scopes allow you to quickly configure settings required to deploy a pipeline on different infrastructure using different software management.
 
-For example, the `executor` scope can be used to provide settings for the deployment of a pipeline on a HPC cluster. Similarly, the `singularity` scope controls how Singularity containers are executed by Nextflow.
+For example, the `executor` scope can be used to provide settings for the deployment of a pipeline on an HPC cluster. Similarly, the `singularity` scope controls how Singularity containers are executed by Nextflow.
 
 A common scenario is for users to write a custom configuration file specific to running a pipeline on their infrastructure.
 
@@ -259,7 +259,7 @@ process {
 
 While some tool arguments are included as a part of a module. To make nf-core modules sharable across pipelines, most tool arguments are defined in the `conf/modules.conf` file in the pipeline code under the `ext.args` entry.
 
-Importantly, having these arguments outside of the module also allows them to be customized at runtime.
+Importantly, having these arguments outside the module also allows them to be customized at runtime.
 
 For example, if you wanted to add arguments to the `MULTIQC` process in the `nf-core/demo` pipeline, you could use the process scope and the `withName` selector:
 

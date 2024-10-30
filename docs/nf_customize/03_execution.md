@@ -10,8 +10,8 @@ It was created using the full nf-core template and is designed to run and config
 
 The [`nf-core/demo`](https://nf-co.re/demo/) pipeline consists of three processes:
 
--   ([`FASTQC`](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)): Read quality control
--   ([`SEQTK_TRIM`](https://github.com/lh3/seqtk)): Trim low quality bases from FastQ files
+-   ([`FastQC`](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)): Read quality control
+-   ([`SEQTK_TRIM`](https://github.com/lh3/seqtk)): Trim low quality bases from FASTQ files
 -   ([`MULTIQC`](http://multiqc.info/)): Present quality control reports for raw reads
 
 [`nf-core/demo`](https://nf-co.re/demo/) takes a samplesheet that contains paths to FASTQ files as an input and will produce four output folders with logs and reports:
