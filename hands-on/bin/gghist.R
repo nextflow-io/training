@@ -59,7 +59,7 @@ make_option(c("-C", "--color_by"), type='numeric',
 make_option(c("-A", "--alpha_by"), type='numeric',
 	help="the column index with the factor to fill by. Leave empty for no factor."),
 
-make_option(c("-P", "--palette"), 
+make_option(c("-P", "--palette"),
     help='File with colors for the lines. Leave empty to use even color spacing'),
 
 make_option(c("--sort"), action="store_true", default=FALSE,
@@ -71,7 +71,7 @@ make_option(c("--facet_by"), type='numeric',
 make_option(c("--facet_scale"), type='character', default="fixed",
 	help="the scale of faceting: <fixed|free|free_y|free_x> [default=%default]"),
 
-make_option(c("--facet_nrow"), type="numeric", 
+make_option(c("--facet_nrow"), type="numeric",
 	help="Number of row for faceting. Leave empty for auto [default=%default]"),
 
 make_option(c("-W", "--width"), default=7,
@@ -83,7 +83,7 @@ make_option(c("-H", "--height"), default=5,
 make_option(c("-B", "--base_size"), default=20,
 	help="BAse size. [default=%default]"),
 
-make_option(c("-b", "--binwidth"), type="double", 
+make_option(c("-b", "--binwidth"), type="double",
 	help="Specify binwidth. Leave empty for default"),
 
 make_option(c("--flip"), action="store_true", default=FALSE,
@@ -95,7 +95,7 @@ make_option(c("-v", "--verbose"), action="store_true", default=FALSE,
 )
 
 parser <- OptionParser(
-	usage = "%prog [options] file", 
+	usage = "%prog [options] file",
 	option_list=option_list,
 	description = "Reads the values on the first column and outputs a histogram"
 )
@@ -105,7 +105,7 @@ if (opt$verbose) {print(opt)}
 
 #------------
 # LIBRARIES
-#------------ 
+#------------
 
 if (opt$verbose) {cat("Loading libraries... ")}
 suppressPackageStartupMessages(library(reshape2))
@@ -121,7 +121,7 @@ if (opt$verbose) {cat("DONE\n\n")}
 
 # Read data
 if (opt$input == "stdin") {input=file("stdin")} else {input=opt$input}
-m = read.table(input, sep="\t", h=opt$header, quote=NULL) 
+m = read.table(input, sep="\t", h=opt$header, quote=NULL)
 
 df = m
 
@@ -195,12 +195,12 @@ if (is.factor(df[,x_col]) | is.character(df[,x_col])) {
 	stat = "count"
 }
 
-# Stat parameters 
+# Stat parameters
 stat = ifelse(is.null(opt$y_axis), stat, "identity")
 
 
 stat_params = list(
-	right=TRUE, 
+	right=TRUE,
 	include.lowest=TRUE
 )
 
@@ -230,12 +230,12 @@ if (!is.null(opt$color_by)) {
 # specify alpha column
 if (!is.null(opt$alpha_by)) {
 	mapping <- modifyList(mapping, aes_string(alpha=A_col))
-} 
+}
 
 
 class(mapping) <- "uneval"
 
-# define histogram layer 
+# define histogram layer
 histLayer <- layer(
     geom = "bar",
     params = geom_params,

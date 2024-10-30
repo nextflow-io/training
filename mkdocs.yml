@@ -9,6 +9,18 @@ nav:
           - envsetup/index.md
           - envsetup/01_setup.md
           - envsetup/02_local.md
+    - Hello Nextflow:
+          - hello_nextflow/index.md
+          - hello_nextflow/01_orientation.md
+          - hello_nextflow/02_hello_world.md
+          - hello_nextflow/03_hello_containers.md
+          - hello_nextflow/04_hello_genomics.md
+          - hello_nextflow/05_hello_operators.md
+          - hello_nextflow/06_hello_config.md
+          - hello_nextflow/07_hello_modules.md
+          - hello_nextflow/08_hello_nf-test.md
+          - hello_nextflow/09_hello_nf-core.md
+          - hello_nextflow/10_hello_seqera.md
     - Fundamentals Training:
           - basic_training/index.md
           - basic_training/orientation.md
@@ -36,14 +48,6 @@ nav:
           - advanced/configuration.md
           - advanced/summary.md
           - advanced/support.md
-    - Hello Nextflow:
-          - hello_nextflow/index.md
-          - hello_nextflow/01_orientation.md
-          - hello_nextflow/02_hello_world.md
-          - hello_nextflow/03_hello_gatk.md
-          - hello_nextflow/04_hello_modules.md
-          - hello_nextflow/05_hello_nf-test.md
-          - hello_nextflow/06_hello_config.md
     - Configure nf-core:
           - nf_customize/index.md
           - nf_customize/01_orientation.md
@@ -57,12 +61,6 @@ nav:
           - nf_develop/1_02_create.md
           - nf_develop/1_03_pipeline.md
           - nf_develop/1_04_parameters.md
-    - Simple RNA-seq:
-          - hands_on/index.md
-          - hands_on/01_datasets.md
-          - hands_on/02_workflow.md
-          - hands_on/03_setup.md
-          - hands_on/04_implementation.md
     - Troubleshooting:
           - troubleshoot/index.md
           - troubleshoot/01_orientation.md
@@ -157,6 +155,9 @@ markdown_extensions:
           preserve_tabs: true
     - pymdownx.tabbed:
           alternate_style: true
+    - pymdownx.tasklist:
+          custom_checkbox: true
+          clickable_checkbox: true
     - tables
     - toc:
           title: On this page
@@ -165,13 +166,12 @@ plugins:
     - enumerate-headings:
           restart_increment_after:
               - envsetup/01_setup.md
+              - hello_nextflow/01_orientation.md
               - basic_training/orientation.md
               - advanced/orientation.md
-              - hello_nextflow/01_orientation.md
               - nf_customize/01_orientation.md
               - nf_develop/1_01_orientation.md
               - troubleshoot/01_orientation.md
-              - hands_on/01_datasets.md
 
           exclude:
               - index.md
