@@ -23,7 +23,7 @@ process SAMTOOLS_INDEX {
 
     container 'community.wave.seqera.io/library/samtools:1.20--b5dfbd93de237464'
 
-    publishDir 'results_genomics', mode: 'symlink'
+    publishDir params.outdir, mode: 'symlink'
 
     input:
         path input_bam
@@ -43,7 +43,7 @@ process GATK_HAPLOTYPECALLER {
 
     container "community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"
 
-    publishDir 'results_genomics', mode: 'symlink'
+    publishDir params.outdir, mode: 'symlink'
 
     input:
         tuple path(input_bam), path(input_bam_index)
@@ -73,7 +73,7 @@ process GATK_JOINTGENOTYPING {
 
     container "community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"
 
-    publishDir 'results_genomics', mode: 'symlink'
+    publishDir params.outdir, mode: 'symlink'
 
     input:
         path all_gvcfs

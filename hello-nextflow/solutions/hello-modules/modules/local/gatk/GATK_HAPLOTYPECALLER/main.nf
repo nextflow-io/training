@@ -8,7 +8,7 @@ process GATK_HAPLOTYPECALLER {
     container "community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"
     conda "bioconda::gatk4=4.5.0.0"
 
-    publishDir 'results_genomics', mode: 'symlink'
+    publishDir params.outdir, mode: 'symlink'
 
     input:
         tuple path(input_bam), path(input_bam_index)
