@@ -50,8 +50,8 @@ process GATK_HAPLOTYPECALLER {
         path interval_list
 
     output:
-        path "${input_bam}.vcf"
-        path "${input_bam}.vcf.idx"
+        path "${input_bam}.vcf"     , emit: vcf
+        path "${input_bam}.vcf.idx" , emit: idx 
 
     """
     gatk HaplotypeCaller \

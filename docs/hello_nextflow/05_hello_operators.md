@@ -454,14 +454,14 @@ Good news: we can do that using the `collect()` channel operator. Let's add the 
 
 ```groovy title="hello-operators.nf" linenums="118"
 // Collect variant calling outputs across samples
-all_gvcfs_ch = GATK_HAPLOTYPECALLER.out[0].collect()
-all_idxs_ch = GATK_HAPLOTYPECALLER.out[1].collect()
+all_gvcfs_ch = GATK_HAPLOTYPECALLER.out.vcf.collect()
+all_idxs_ch = GATK_HAPLOTYPECALLER.out.idx.collect()
 ```
 
 Does that seem a bit complicated? Let's break this down and translate it into plain language.
 
 1. We're taking the output channel from the `GATK_HAPLOTYPECALLER` process, referred to using the `.out` property.
-2. Each 'element' coming out of the channel is a pair of files: the GVCF and its index file, in that order because that's the order they're listed in the process output block. Conveniently, we can pick out the GVCFs on one hand by adding `[0]` and the index files on the other by adding `[1]` after the `.out` property.
+2. Each 'element' coming out of the channel is a pair of files: the GVCF and its index file, in that order because that's the order they're listed in the process output block. Conveniently, because in the last session we named the outputs of this process (using `emit:`), we can pick out the GVCFs on one hand by adding `.vcf` and the index files on the other by adding `.idx` after the `.out` property. If we had not named those outputs, we would have had to refer to them by `.out[0]` and `.out[1]`, respectively.
 3. We append the `collect()` channel operator to bundle all the GVCF files together into a single element in a new channel called `all_gvcfs_ch`, and do the same with the index files to form the new channel called `all_idxs_ch`.
 
 !!!tip
