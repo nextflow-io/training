@@ -331,16 +331,16 @@ _Before:_
 
 ```groovy title="hello-operators.nf" linenums="52"
     output:
-        path "${input_bam}.vcf"
-        path "${input_bam}.vcf.idx"
+        path "${input_bam}.vcf"     , emit: vcf
+        path "${input_bam}.vcf.idx" , emit: idx
 ```
 
 _After:_
 
 ```groovy title="hello-operators.nf" linenums="52"
     output:
-        path "${input_bam}.g.vcf"
-        path "${input_bam}.g.vcf.idx"
+        path "${input_bam}.g.vcf"     , emit: vcf
+        path "${input_bam}.g.vcf.idx" , emit: idx
 ```
 
 ### 1.3. Run the pipeline again
@@ -773,8 +773,8 @@ _After:_
 
 ```groovy title="hello-operators.nf" linenums="87"
 output:
-    path "${cohort_name}.joint.vcf"
-    path "${cohort_name}.joint.vcf.idx"
+    path "${cohort_name}.joint.vcf"     , emit: vcf
+    path "${cohort_name}.joint.vcf.idx" , emit: idx
 ```
 
 We're almost done!
