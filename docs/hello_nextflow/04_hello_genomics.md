@@ -310,7 +310,7 @@ process GATK_HAPLOTYPECALLER {
 
     output:
         path "${input_bam}.vcf"     , emit: vcf
-        path "${input_bam}.vcf.idx" , emit: idx 
+        path "${input_bam}.vcf.idx" , emit: idx
 
     """
     gatk HaplotypeCaller \
@@ -322,7 +322,7 @@ process GATK_HAPLOTYPECALLER {
 }
 ```
 
-You'll notice that we've introduced some new syntax here (`emit:`) to uniquely name each of our output channels, and the reasons for this will become clear soon. 
+You'll notice that we've introduced some new syntax here (`emit:`) to uniquely name each of our output channels, and the reasons for this will become clear soon.
 
 This command takes quite a few more inputs, because GATK needs more information to perform the analysis compared to a simple indexing job.
 But you'll note that there are even more inputs defined in the inputs block than are listed in the GATK command. Why is that?
