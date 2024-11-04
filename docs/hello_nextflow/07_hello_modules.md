@@ -292,8 +292,8 @@ process GATK_HAPLOTYPECALLER {
         path interval_list
 
     output:
-        path "${input_bam}.g.vcf"
-        path "${input_bam}.g.vcf.idx"
+        path "${input_bam}.g.vcf"     , emit: vcf
+        path "${input_bam}.g.vcf.idx" , emit: idx
 
     """
     gatk HaplotypeCaller \
@@ -331,8 +331,8 @@ process GATK_JOINTGENOTYPING {
         path ref_dict
 
     output:
-        path "${cohort_name}.joint.vcf"
-        path "${cohort_name}.joint.vcf.idx"
+        path "${cohort_name}.joint.vcf"     , emit: vcf
+        path "${cohort_name}.joint.vcf.idx" , emit: idx
 
     script:
         def gvcfs_line = all_gvcfs.collect { gvcf -> "-V ${gvcf}" }.join(' ')
