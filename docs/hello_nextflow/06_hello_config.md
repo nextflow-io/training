@@ -998,7 +998,7 @@ _Before:_
 params {
     // Primary input (file of input files, one per line)
     reads_bam        = "${projectDir}/data/sample_bams.txt"
-    
+
     // Output directory
     outdir           = 'results_genomics'
 
@@ -1022,7 +1022,7 @@ params {
 
     // Output directory
     outdir           = null
-    
+
     // Accessory files
     reference        = null
     reference_index  = null
@@ -1097,7 +1097,7 @@ profiles {
     demo {
         // Primary input (file of input files, one per line)
         params.reads_bam        = "data/sample_bams.txt"
-    
+
         // Output directory
         params.outdir           = 'results_genomics'
 
