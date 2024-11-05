@@ -117,11 +117,143 @@ Learn how to write basic tests that evaluate whether the process calls were succ
 
 ---
 
+## 1. Add a workflow-level test
+
+We're going to start by adding a test for the entire pipeline. This test will run the pipeline end-to-end and check that it completes successfully. It's similar to using `nextflow run` in the terminal, but with the added benefit of being able to make assertions about the results.
+
+### 1.1. Generate pipeline-level stub test file
+
+`nf-test` comes with a built-in command for generating test files. It has multiple subcommands, each of which is used for generating different types of tests, for now, we will use it to generate a basic test that runs our pipeline.
+
+```bash
+nf-test generate pipeline main.nf
+```
+
+It produces a basic nf-test file at `tests/main.nf.test`. You can navigate to the directory in the file explorer and open the file, which should contain the following code:
+
+```groovy title="tests/main.nf.test" linenums="1"
+nextflow_pipeline {
+
+    name "Test Workflow main.nf"
+    script "main.nf"
+
+    test("Should run without failures") {
+
+        when {
+            params {
+                // define parameters here. Example:
+                // outdir = "tests/results"
+            }
+        }
+
+        then {
+            assert workflow.success
+        }
+
+    }
+
+}
+```
+
+In this test file, we can see some clear blocks:
+
+-   A details block consisting of the `name`, `script`, and `test` keywords.
+
+    The details are pre-populated with sensible defaults. We can leave them as they are for this tutorial.
+
+-   A `when` block that specifies the conditions under which the test should be run.
+
+    This describes the conditions the test must be executed under. What settings and parameters should we use?
+
+-   A `then` block that specifies the assertions that should be made.
+
+    This describes the expected outcome of the test. By 'asserting' things are true, we can tell `nf-test` what to expect and if these conditions are not met, the test will fail.
+
+In plain English, the logic of the test reads as follows: "**When** these _parameters_ are provided to this _process_, **then** we expect to see these results."
+
+The expected results are formulated as `assert` statements.
+
+-   `assert workflow.success` states that we expect the workflow to run successfully and complete without any failures.
+-   `snapshot(workflow.out).match()` states that we expect the result of the run to be identical to the result obtained in a previous run (if applicable). We discuss this in more detail later.
+
+For most real-world modules (which usually require some kind of input), this is not yet a functional test.
+We need to add the inputs that will be fed to the workflow.
+
+### 1.2. Specify input parameters
+
+We still need to specify inputs.
+There are several ways of doing this, but the simplest way is to add the parameters to the `params {}` block in the `nextflow.config` file that `nf-test init` originally created in the `tests` directory.
+
+```groovy title="tests/nextflow.config" linenums="1"
+/*
+ * Pipeline parameters
+ */
+
+params {
+    // Primary input (file of input files, one per line)
+    reads_bam        = "${projectDir}/data/sample_bams.txt"
+
+    // Accessory files
+    reference        = "${projectDir}/data/ref/ref.fasta"
+    reference_index  = "${projectDir}/data/ref/ref.fasta.fai"
+    reference_dict   = "${projectDir}/data/ref/ref.dict"
+    intervals        = "${projectDir}/data/ref/intervals.bed"
+
+    // Base name for final output file
+    cohort_name      = "family_trio"
+}
+```
+
+When we run any test, `nf-test` will pick up this configuration file and pull in the inputs accordingly. This is useful for applying parameters to tests across the entire repository.
+
+### 4.3. Run the test
+
+Finally, it's time to run our test! Let's break down the syntax.
+
+-   The basic command is `nf-test test`.
+-   To that, we add `--profile docker_on` to specify that we want Nextflow to run the test with Docker enabled.
+-   Then the test file that we want to run.
+
+!!!note
+
+    The `--profile` parameter is technically optional in the sense that nf-test does not require it.
+    There is a `nextflow.config` file in the `nf-test` directory where we could write `docker.enable = on` to have Docker enabled by default. However, it's good practice to test your modules explicitly (and separately) with every packaging system they support. This allows you to detect issues that might arise when the module no longer works with Docker but still works with Conda, for example.
+
+    Note also the TWO dashes, `--`, because here it's a parameter of the `nf-test test` command, which passes the instruction on to Nextflow itself.
+
+All put together, it looks like this:
+
+```bash
+nf-test test --profile docker_on tests/main.nf.test
+```
+
+This produces:
+
+```console title="Output"
+🚀 nf-test 0.9.1
+https://www.nf-test.com
+(c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
+
+
+Test Workflow hello-nf-test.nf
+
+  Test [df3a3a8c] 'Should run without failures' PASSED (62.493s)
+
+
+SUCCESS: Executed 1 tests in 62.498s
+```
+
+That's it! If necessary, more nuanced assertions can be added to test for the validity and content of the pipeline outputs. You can learn more about the different kinds of assertions you can use in the [nf-test documentation](https://www.nf-test.com/docs/assertions/assertions/).
+
+Congratulations! You've now written your first nf-test. You can now modify the pipeline to your hearts content, safe in the knowledge that you can easily check the pipeline will exit successfully. This gives us confidence to modify the internals of our pipeline. Combined with some automation, we can even run the tests automatically on every code change, giving us a powerful safety net for developing our pipeline. This isn't covered in this tutorial however...
+
+---
+
 ## 1. Test a process for success and matching outputs
 
-We're going to start by adding a test for the `SAMTOOLS_INDEX` process.
-It's a very simple process that takes a single input file (for which we have test data on hand) and generates an index file.
-We want to test that the process runs successfully and that the file it produces is always the same for a given input.
+What if we _did_ want to test the internals of our pipeline? Let's say the pipeline started failing, how would we know where to look? Tests can help us pinpoint the exact location of the problem by raising the error at the right location. Let's add a test for the `SAMTOOLS_INDEX` process, that way, if it starts failing, we'll know that the SAMTOOLS_INDEX process is at fault. Alternatively, if SAMTOOLS_INDEX is working, we'll know that the problem is elsewhere.
+
+It's a very simple process that takes a single input file (for which we have test data on hand) and generates an index file. We want to test that the process runs successfully and that the file it produces is always the same for a given input.
 
 ### 1.1. Generate a test file stub
 
@@ -140,7 +272,7 @@ Wrote process test file '/workspace/gitpod/hello-nextflow/tests/hello-nf-test/mo
 SUCCESS: Generated 1 test files.
 ```
 
-You can navigate to the directory in the file explorer and open the file, which should contain the following code:
+Open this file and look at the code:
 
 ```groovy title="tests/modules/local/samtools/index/main.nf.test" linenums="1"
 nextflow_process {
@@ -174,17 +306,10 @@ nextflow_process {
 }
 ```
 
-In plain English, the logic of the test reads as follows:
-"**When** these _parameters_ are provided to this _process_, **then** we expect to see these results."
-
-The expected results are formulated as `assert` statements.
+The logic is much the same as for the pipeline-level test, but using `process` instead of `workflow`:
 
 -   `assert process.success` states that we expect the process to run successfully and complete without any failures.
 -   `snapshot(process.out).match()` states that we expect the result of the run to be identical to the result obtained in a previous run (if applicable).
-    We discuss this in more detail later.
-
-For most real-world modules (which usually require some kind of input), this is not yet a functional test.
-We need to add the inputs that will be fed to the process, and any parameters if applicable.
 
 ### 1.2. Move the test file and update the script path
 
@@ -291,22 +416,7 @@ params {
 
 ### 1.6. Run the test and examine the output
 
-Finally, it's time to run our test! Let's break down the syntax.
-
--   The basic command is `nf-test test`.
--   To that, we add `--profile docker_on` to specify that we want Nextflow to run the test with Docker enabled.
--   Then the test file that we want to run.
-
-!!!note
-
-    The `--profile` parameter is technically optional in the sense that nf-test does not require it.
-    There is a `nextflow.config` file in the `nf-test` directory where we could write `docker.enable = on` to have Docker enabled by default.
-    However, it's good practice to test your modules explicitly (and separately) with every packaging system they support.
-    This allows you to detect issues that might arise when the module no longer works with Docker but still works with Conda, for example.
-
-    Note also the TWO dashes, `--`, because here it's a parameter of the `nf-test test` command, which passes the instruction on to Nextflow itself.
-
-All put together, it looks like this:
+We can use the same testing syntax as before, but this time we will specifically target the test file we just created:
 
 ```bash
 nf-test test --profile docker_on modules/local/samtools/index/tests/main.nf.test
@@ -333,20 +443,31 @@ Snapshot Summary:
 SUCCESS: Executed 1 tests in 9.062s
 ```
 
-The test verified the first assertion, that the process should complete successfully.
+The test verified the first assertion, that the process should complete successfully. This means that the SAMTOOLS_INDEX process executed without any errors and exited with a success status code (0). While this is a good first check, it only tells us that the process didn't crash - it doesn't validate that the process actually produced correct output. That's where the snapshot functionality comes in, which we'll examine next.
 
-Additionally, this also produces a snapshot file called `main.nf.test.snap` that captures all the output channels and the MD5SUMs of all elements.
+Additionally, this also produces a snapshot file called `main.nf.test.snap` in the same directory as the test file. This snapshot file contains:
 
-If we re-run the test, the program will check that the new output matches the output that was originally recorded.
+1. The contents of all output channels from the process
+2. MD5 checksums of any output files that were generated
+3. Any other values that were passed to `snapshot()` in the test assertions
+
+When we re-run the test, nf-test will:
+
+1. Execute the process again with the same inputs
+2. Generate new outputs and calculate their checksums
+3. Compare these new results against the stored snapshot
+4. Fail the test if there are any differences between the new results and the snapshot
+
+This provides a way to detect if code changes have altered the behavior of the process, even in subtle ways that might not cause outright failures.
 
 !!!warning
 
     That means we have to be sure that the output we record in the original run is correct!
 
-If, in the course of future development, something in the code changes that causes the output to be different, the test will fail and we will have to determine whether the change is expected or not.
+When future code changes cause different outputs, the test will fail. At this point, we need to determine if the change is expected or not:
 
--   If it turns out that something in the code broke, we will have to fix it, with the expectation that the fixed code will pass the test.
--   If it is an expected change (e.g., the tool has been improved and the results are better) then we will need to update the snapshot to accept the new output as the reference to match, using the parameter `--update-snapshot` when we run the test command.
+-   If the code is broken, we need to fix the issue so that the test passes again with the original snapshot.
+-   If the change is expected (e.g., an improvement in the underlying tool), we can update the snapshot to use the new output as the reference by running the test with `--update-snapshot`.
 
 ### 1.7. Add more tests to `SAMTOOLS_INDEX`
 
@@ -440,8 +561,7 @@ Notice the warning, referring to the effect of the `--update-snapshot` parameter
     Here we are using test data that we used previously to demonstrate the scientific outputs of the pipeline.
     If we had been planning to operate these tests in a production environment, we would have generated smaller inputs for testing purposes.
 
-    In general it's important to keep unit tests as light as possible by using the smallest pieces of data necessary and sufficient for evaluating process functionality, otherwise the total runtime can add up quite seriously.
-    A test suite that takes too long to run regularly is a test suite that's likely to get skipped in the interest of expediency.
+    In general it's important to keep unit tests as light as possible by using the smallest pieces of data necessary and sufficient for evaluating process functionality, otherwise the total runtime can add up quite seriously. A test suite that takes too long to run regularly is a test suite that's likely to get skipped in the interest of expediency.
 
 ### Takeaway
 
@@ -593,8 +713,7 @@ Using the setup method is convenient, though you should consider its use careful
 Module-level tests are supposed to test processes in isolation in order to detect changes at the individual process level; breaking that isolation undermines that principle.
 
 In many cases, it's better to use intermediate test files that you generate manually as part of the preparation.
-We'll show you how to do that in the next section.
-But we show you the setup method too because sometimes it is useful to be able to test the connection between two modules specifically.
+We'll show you how to do that in the next section, but we show you the setup method too because sometimes it is useful to be able to test the connection between two modules specifically.
 
 <!-- TODO: consider switching the order of types of tests, might make more sense in terms of flow -->
 
@@ -677,8 +796,7 @@ FAILURE: Executed 1 tests in 23.79s (1 failed)
 
 The error message tells you there were differences between the snapshots for the two runs; specifically, the md5sum values are different for the VCF files.
 
-Why? To make a long story short, the HaplotypeCaller tool includes a timestamp in the VCF header that is different every time (by definition).
-As a result, we can't just expect the files to have identical md5sums even if they have identical content in terms of the variant calls themselves.
+Why? To make a long story short, the HaplotypeCaller tool includes a timestamp in the VCF header that is different every time (by definition). As a result, we can't just expect the files to have identical md5sums even if they have identical content in terms of the variant calls themselves.
 
 How do we deal with that?
 
@@ -1021,107 +1139,6 @@ You know how to write tests for using inputs that have been previously generated
 ### What's next?
 
 Learn how to write a workflow-level test.
-
----
-
-## 4. Add a workflow-level test
-
-Now all that remains is to add a test for checking that the whole pipeline runs to completion.
-
-### 4.1. Generate pipeline-level stub test file
-
-The command is similar to the one for module tests, except it says `generate pipeline` instead of `generate process`:
-
-```bash
-nf-test generate pipeline main.nf
-```
-
-It produces a similar stub file:
-
-```groovy title="tests/main.nf.test" linenums="1"
-nextflow_pipeline {
-
-    name "Test Workflow main.nf"
-    script "main.nf"
-
-    test("Should run without failures") {
-
-        when {
-            params {
-                // define parameters here. Example:
-                // outdir = "tests/results"
-            }
-        }
-
-        then {
-            assert workflow.success
-        }
-
-    }
-
-}
-```
-
-The line `assert workflow.success` is a simple assertion testing for whether the pipeline ran successfully.
-
-!!!note
-
-    In this case the test file can stay where `nf-test` created it.
-
-### 4.2. Specify input parameters
-
-We still need to specify inputs.
-There are several ways of doing this, including by specifying a profile.
-However, a simpler way is to set up a `params {}` block in the `nextflow.config` file that `nf-test init` originally created in the `tests` directory.
-
-```groovy title="tests/nextflow.config" linenums="1"
-/*
- * Pipeline parameters
- */
-
-params {
-    // Primary input (file of input files, one per line)
-    reads_bam        = "${projectDir}/data/sample_bams.txt"
-
-    // Accessory files
-    reference        = "${projectDir}/data/ref/ref.fasta"
-    reference_index  = "${projectDir}/data/ref/ref.fasta.fai"
-    reference_dict   = "${projectDir}/data/ref/ref.dict"
-    intervals        = "${projectDir}/data/ref/intervals.bed"
-
-    // Base name for final output file
-    cohort_name      = "family_trio"
-}
-```
-
-When we run the test, `nf-test` will pick up this configuration file and pull in the inputs accordingly.
-
-### 4.3. Run the test
-
-Here we go!
-
-```bash
-nf-test test --profile docker_on tests/main.nf.test
-```
-
-This produces:
-
-```console title="Output"
-🚀 nf-test 0.9.1
-https://www.nf-test.com
-(c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
-
-
-Test Workflow hello-nf-test.nf
-
-  Test [df3a3a8c] 'Should run without failures' PASSED (62.493s)
-
-
-SUCCESS: Executed 1 tests in 62.498s
-```
-
-That's it! If necessary, more nuanced assertions can be added to test for the validity and content of the pipeline outputs.
-You can learn more about the different kinds of assertions you can use in the [nf-test documentation](https://www.nf-test.com/docs/assertions/assertions/).
 
 ### Takeaway
 
