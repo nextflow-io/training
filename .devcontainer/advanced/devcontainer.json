@@ -2,10 +2,11 @@
     "name": "Advanced",
     "workspaceMount": "source=${localWorkspaceFolder}/nf-training-advanced,target=/workspace,type=bind",
     "workspaceFolder": "/workspace",
-    "build": {
-        "context": ".",
-        "dockerfile": "Dockerfile"
-    },
+    "image": "mcr.microsoft.com/devcontainers/universal:2",
+    // "build": {
+    //     "context": ".",
+    //     "dockerfile": "Dockerfile"
+    // },
     "features": {
         "ghcr.io/robsyme/features/nextflow:1": {}
     }
