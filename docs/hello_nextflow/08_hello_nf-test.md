@@ -230,7 +230,7 @@ When nf-test runs any test, it automatically loads this configuration file and m
 
 Note that you can still override these parameters in individual test files if needed for specific test cases.
 
-### 4.3. Run the test
+### 1.3. Run the test
 
 Now that we've set up our test file and parameters, let's run the test. The basic command structure is:
 
@@ -282,13 +282,13 @@ Congratulations! You've now written your first nf-test. You can now modify the p
 
 ---
 
-## 1. Test a process for success and matching outputs
+## 2. Test a process for success and matching outputs
 
 While testing the entire pipeline is useful, we can also test individual processes to help pinpoint issues when they occur. For example, if our pipeline fails, testing each process separately can help identify exactly where the problem lies. Let's create a test for the `SAMTOOLS_INDEX` process - if this test fails, we'll know the issue is within that process, and if it passes, we can focus our debugging efforts elsewhere.
 
 The SAMTOOLS_INDEX process is straightforward - it takes a BAM file as input and generates an index file. We'll verify that the process not only executes successfully but also consistently produces identical output files when given the same input. This kind of targeted testing helps us maintain and debug our pipeline more effectively.
 
-### 1.1. Generate a test file stub
+### 2.1. Generate a test file stub
 
 First, we use the `nf-test generate process` command to create a test file stub.
 
@@ -341,7 +341,7 @@ nextflow_process {
 
 The logic follows the same pattern as the pipeline-level test, but focuses on testing an individual process rather than a workflow. We use `assert process.success` to verify that the process completes without failures, and `snapshot(process.out).match()` to ensure the outputs remain consistent with previous test runs.
 
-### 1.2. Move the test file and update the script path
+### 2.2. Move the test file and update the script path
 
 First, let's organize our test files properly. The recommended practice is to keep test files alongside the module code they test.
 For each module's `main.nf` file, we'll create a `tests` directory in the same location. This makes it easy to find and maintain tests for specific modules:
@@ -374,7 +374,7 @@ script "../main.nf"
 process "SAMTOOLS_INDEX"
 ```
 
-### 1.3. Provide inputs to the test process
+### 2.3. Provide inputs to the test process
 
 The stub file includes a placeholder that we need to replace with an actual test input:
 
@@ -401,7 +401,7 @@ process {
 }
 ```
 
-### 1.4. Rename the test based on the primary test input
+### 2.4. Rename the test based on the primary test input
 
 The stub file gives the test a generic name referring to the assertion that it should run without failures.
 Since we added a specific input, it's good practice to rename the test accordingly.
@@ -421,7 +421,7 @@ _After:_
 test("reads_son [bam]") {
 ```
 
-### 1.5. Specify test parameters
+### 2.5. Specify test parameters
 
 The `params` block in the stub file includes a placeholder for parameters:
 
@@ -444,7 +444,7 @@ params {
 }
 ```
 
-### 1.6. Run the test and examine the output
+### 2.6. Run the test and examine the output
 
 We can use the same testing syntax as before, but this time we will specifically target the test file we just created:
 
@@ -499,7 +499,7 @@ When future code changes cause different outputs, the test will fail. At this po
 -   If the code is broken, we need to fix the issue so that the test passes again with the original snapshot.
 -   If the change is expected (e.g., an improvement in the underlying tool), we can update the snapshot to use the new output as the reference by running the test with `--update-snapshot`.
 
-### 1.7. Add more tests to `SAMTOOLS_INDEX`
+### 2.7. Add more tests to `SAMTOOLS_INDEX`
 
 To ensure our process works correctly across different scenarios, it's good practice to test it with multiple input files. This helps catch edge cases and potential issues that may only appear with certain inputs. The nf-test framework allows us to define multiple test cases within the same test file. Each test case can use different input files while sharing the same test structure. Let's add two more test cases to verify that our SAMTOOLS_INDEX process works correctly with different BAM files:
 
@@ -555,7 +555,7 @@ These simply go one after another in the test file.
 
     Watch out for those curly braces, make sure they're all paired up appropriately...
 
-### 1.8. Run the test suite and update the snapshot
+### 2.8. Run the test suite and update the snapshot
 
 ```bash
 nf-test test --profile docker_on modules/local/samtools/index/tests/main.nf.test --update-snapshot
@@ -597,7 +597,7 @@ Learn how to write tests for chained processes, and to evaluate whether outputs 
 
 ---
 
-## 2. Add tests to a chained process and test for contents
+## 3. Add tests to a chained process and test for contents
 
 Now that we know how to handle the simplest case, we're going to kick things up a notch with the `GATK_HAPLOTYPECALLER` process.
 
@@ -609,7 +609,7 @@ We can deal with this in two ways:
 
 **Spoiler:** We're going to use the setup method.
 
-### 2.1. Generate the test file stub
+### 3.1. Generate the test file stub
 
 As previously, first we generate the file stub:
 
@@ -651,7 +651,7 @@ nextflow_process {
 }
 ```
 
-### 2.2. Move the test file and update the script path
+### 3.2. Move the test file and update the script path
 
 We create a directory for the test file co-located with the module's `main.nf` file:
 
@@ -683,7 +683,7 @@ script "../main.nf"
 process "GATK_HAPLOTYPECALLER"
 ```
 
-### 2.3. Provide inputs using the setup method
+### 3.3. Provide inputs using the setup method
 
 We insert a `setup` block before the `when` block, where we can trigger a run of the `SAMTOOLS_INDEX` process on one of our original input files.
 
@@ -741,7 +741,7 @@ However, the setup method remains valuable when you specifically want to test th
 
 <!-- TODO: consider switching the order of types of tests, might make more sense in terms of flow -->
 
-### 2.4. Run test and examine output
+### 3.4. Run test and examine output
 
 ```bash
 nf-test test --profile docker_on modules/local/gatk/haplotypecaller/tests/main.nf.test
@@ -770,7 +770,7 @@ SUCCESS: Executed 1 tests in 19.09s
 
 It also produces a snapshot file like earlier.
 
-### 2.5. Run again and observe failure
+### 3.5. Run again and observe failure
 
 Interestingly, if you run the exact same command again, this time the test will fail with the following:
 
@@ -824,7 +824,7 @@ This is happening because GATK HaplotypeCaller automatically includes a timestam
 
 How do we deal with that?
 
-### 2.6. Use a content assertion method
+### 3.6. Use a content assertion method
 
 Instead of comparing file checksums, we can use content-based assertions to verify specific lines in the output. The [nf-test assertions documentation](https://nf-co.re/docs/contributing/tutorials/nf-test_assertions) provides several options for this.
 
@@ -855,7 +855,7 @@ This approach reads the full VCF file content to search for specific lines. Whil
 
 The tradeoff is that we need to carefully choose which lines serve as meaningful test signals. However, this targeted testing approach allows us to verify with high precision that an analysis tool consistently identifies important features (like rare variants) as the tool evolves. This makes it a powerful way to catch regressions in key functionality.
 
-### 2.7. Run again and observe success
+### 3.7. Run again and observe success
 
 Once we've modified the test in this way, we can run the test multiple times, and it will consistently pass.
 
@@ -879,7 +879,7 @@ Test Process GATK_HAPLOTYPECALLER
 SUCCESS: Executed 1 tests in 19.77s
 ```
 
-### 2.8. Add more test data
+### 3.8. Add more test data
 
 To practice writing these kinds of tests, you can repeat the procedure for the other two input data files provided.
 You'll need to make sure to copy lines from the corresponding output VCFs.
@@ -962,7 +962,7 @@ test("reads_father [bam]") {
 }
 ```
 
-### 2.9. Run the test command
+### 3.9. Run the test command
 
 ```bash
 nf-test test --profile docker_on modules/local/gatk/haplotypecaller/tests/main.nf.test
@@ -998,7 +998,7 @@ Learn how to write tests that use manually generated intermediate test data.
 
 ---
 
-## 3. Use locally stored inputs
+## 4. Use locally stored inputs
 
 For the third step in our pipeline we'll use manually generated intermediate test data that is co-located with the module itself.
 
@@ -1016,7 +1016,7 @@ modules/local/gatk/jointgenotyping/tests/inputs/
 
 The idea here is to use these files as inputs to the test we're going to write for the joint genotyping step.
 
-### 3.1. Generate the test file stub
+### 4.1. Generate the test file stub
 
 As previously, first we generate the file stub:
 
@@ -1058,7 +1058,7 @@ nextflow_process {
 }
 ```
 
-### 3.2. Move the test file and update the script path
+### 4.2. Move the test file and update the script path
 
 This time we already have a directory for tests co-located with the module's `main.nf` file, so we can move the test stub file there:
 
@@ -1084,7 +1084,7 @@ script "../main.nf"
 process "GATK_JOINTGENOTYPING"
 ```
 
-### 3.3. Provide inputs
+### 4.3. Provide inputs
 
 Fill in the inputs based on the process input definitions and rename the test accordingly:
 
@@ -1118,7 +1118,7 @@ test("family_trio [vcf] [idx]") {
 }
 ```
 
-### 3.4. Use content assertions
+### 4.4. Use content assertions
 
 The output of the joint genotyping step is another VCF file, so we're going to use a content assertion again.
 
@@ -1130,7 +1130,7 @@ then {
 }
 ```
 
-### 3.5. Run the test
+### 4.5. Run the test
 
 ```bash
 nf-test test --profile docker_on modules/local/gatk/jointgenotyping/tests/main.nf.test
