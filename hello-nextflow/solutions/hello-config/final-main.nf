@@ -15,7 +15,7 @@ process SAMTOOLS_INDEX {
 
     output:
         tuple path(input_bam), path("${input_bam}.bai")
-    
+
     script:
     """
     samtools index '$input_bam'
@@ -96,7 +96,8 @@ process GATK_JOINTGENOTYPING {
 workflow {
 
     // Create input channel from a text file listing input file paths
-    reads_ch = Channel.fromPath(params.reads_bam).splitText()
+    reads_ch = Channel.fromPath(params.reads_bam)
+                        .splitText() { bamFile -> file(bamFile.strip()) }
 
     // Load the file paths for the accessory files (reference and intervals)
     ref_file        = file(params.reference)

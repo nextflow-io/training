@@ -770,7 +770,8 @@ _After:_
 
 ```groovy title="hello-genomics.nf" linenums="68"
 // Create input channel from a text file listing input file paths
-reads_ch = Channel.fromPath(params.reads_bam).splitText()
+reads_ch = Channel.fromPath(params.reads_bam)
+                    .splitText() { bamFile -> file(bamFile.strip()) }
 ```
 
 !!! tip
