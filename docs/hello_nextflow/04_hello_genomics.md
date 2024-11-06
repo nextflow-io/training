@@ -55,7 +55,7 @@ The tools we need (Samtools and GATK) are not installed in the Gitpod environmen
 !!! note
 
      Make sure you're in the correct working directory:
-     `cd /workspace/gitpod/hello-nextflow`
+     `pwd` should return a path ending in `hello-nextflow`
 
 ### 0.1. Index a BAM input file with Samtools
 
@@ -561,9 +561,9 @@ This error will not reproduce consistently because it is dependent on some varia
 This is what the output of the two `.view` calls we added looks like for a failed run:
 
 ```console title="Output"
-/workspace/gitpod/hello-nextflow/data/bam/reads_mother.bam
-/workspace/gitpod/hello-nextflow/data/bam/reads_father.bam
-/workspace/gitpod/hello-nextflow/data/bam/reads_son.bam
+./data/bam/reads_mother.bam
+./data/bam/reads_father.bam
+./data/bam/reads_son.bam
 /workspace/gitpod/hello-nextflow/work/9c/53492e3518447b75363e1cd951be4b/reads_father.bam.bai
 /workspace/gitpod/hello-nextflow/work/cc/37894fffdf6cc84c3b0b47f9b536b7/reads_son.bam.bai
 /workspace/gitpod/hello-nextflow/work/4d/dff681a3d137ba7d9866e3d9307bd0/reads_mother.bam.bai
@@ -717,9 +717,9 @@ Here we are going to show you how to do the simple case.
 We already made a text file listing the input file paths, called `sample_bams.txt`, which you can find in the `data/` directory.
 
 ```txt title="sample_bams.txt"
-/workspace/gitpod/hello-nextflow/data/bam/reads_mother.bam
-/workspace/gitpod/hello-nextflow/data/bam/reads_father.bam
-/workspace/gitpod/hello-nextflow/data/bam/reads_son.bam
+/data/bam/reads_mother.bam
+/data/bam/reads_father.bam
+/data/bam/reads_son.bam
 ```
 
 As you can see, we listed one file path per line, and they are absolute paths.
@@ -770,9 +770,9 @@ _After:_
 
 ````groovy title="hello-genomics.nf" linenums="68"
 // Create input channel from a text file listing input file paths
-    reads_ch = Channel.fromPath(params.reads_bam)
-                    .splitText()
-                    .map { it.trim() }```
+reads_ch = Channel.fromPath(params.reads_bam)
+                .splitText() { bamPath -> file(bamPath.trim()) }
+```
 
 !!! tip
 
