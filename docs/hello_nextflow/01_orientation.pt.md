@@ -1,6 +1,6 @@
 # Orientação
 
-O ambiente Gitpod contém todo o software, código e dados necessários para este curso. Você não precisa instalar nada por conta própria. No entanto, é necessária uma conta (gratuita) para logar - e você deveria reservar alguns minutos para se familiarizar com a interface.
+O ambiente Gitpod contém todo o software, código e dados necessários para este curso. Você não precisa instalar nada por conta própria. No entanto, é necessária uma conta (gratuita) para logar - e recomendamos que você reserve alguns minutos para se familiarizar com a interface.
 
 Caso ainda não tenha feito isso, siga [este link](../../envsetup/) antes de prosseguir.
 
