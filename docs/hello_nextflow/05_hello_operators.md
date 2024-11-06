@@ -422,6 +422,7 @@ process GATK_GENOMICSDB {
     output:
         path "${cohort_name}_gdb"
 
+    script:
     """
     gatk GenomicsDBImport \
         -V ${all_gvcfs} \

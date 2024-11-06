@@ -18,6 +18,7 @@ process sayHello {
     output:
         path "output.txt"
 
+    script:
     """
     echo '$greeting' > "output.txt"
     """

@@ -18,6 +18,7 @@ process sayHello {
     output:
         path "${greeting}-output.txt"
 
+    script:
     """
     echo '$greeting' > '$greeting-output.txt'
     """
@@ -33,6 +34,7 @@ process convertToUpper {
     output:
         path "UPPER-${input_file}"
 
+    script:
     """
     cat '$input_file' | tr '[a-z]' '[A-Z]' > UPPER-${input_file}
     """
