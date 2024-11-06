@@ -22,6 +22,7 @@ process SAMTOOLS_INDEX {
     output:
         path "${input_bam}.bai"
 
+    script:
     """
     samtools index '$input_bam'
     """
