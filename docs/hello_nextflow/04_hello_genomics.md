@@ -768,11 +768,11 @@ reads_ch = Channel.fromPath(params.reads_bam)
 
 _After:_
 
-```groovy title="hello-genomics.nf" linenums="68"
+````groovy title="hello-genomics.nf" linenums="68"
 // Create input channel from a text file listing input file paths
-reads_ch = Channel.fromPath(params.reads_bam)
-                    .splitText() { bamFile -> file(bamFile.strip()) }
-```
+    reads_ch = Channel.fromPath(params.reads_bam)
+                    .splitText()
+                    .map { it.trim() }```
 
 !!! tip
 
@@ -784,7 +784,7 @@ Let's run the workflow one more time.
 
 ```bash
 nextflow run hello-genomics.nf -resume
-```
+````
 
 This should produce the same result as before, right?
 
