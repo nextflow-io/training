@@ -757,7 +757,7 @@ This way we can continue to be lazy, but the list of files no longer lives in th
 Currently, our input channel factory treats any files we give it as the data inputs we want to feed to the indexing process.
 Since we're now giving it a file that lists input file paths, we need to change its behavior to parse the file and treat the file paths it contains as the data inputs.
 
-Fortunately we can do that very simply, just by adding the [`.splitText()` operator](https://www.nextflow.io/docs/latest/reference/operator.html#operator-splittext) to the channel construction step.
+We are going to use the [`.splitCsv()`](https://www.nextflow.io/docs/latest/operator.html#operator-splitcsv) operator to parse the file into lines, and then use `.map()` to convert each line into a file path object. This introduces some advanced concepts that we'll explain in more detail later in this training series, but for now it's enough to understand that we can manipulate the contents of the samplesheet after we read it in but before we use it.
 
 _Before:_
 
@@ -771,7 +771,8 @@ _After:_
 ````groovy title="hello-genomics.nf" linenums="68"
 // Create input channel from a text file listing input file paths
 reads_ch = Channel.fromPath(params.reads_bam)
-                .splitText() { bamPath -> file(bamPath.trim()) }
+                .splitCsv()
+                .map { bamPath -> file(bamPath[0]) }
 ```
 
 !!! tip
