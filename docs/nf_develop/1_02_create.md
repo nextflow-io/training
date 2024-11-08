@@ -307,4 +307,4 @@ Read more about creating and modifying workflows on the [GitHub Actions document
 
 ---
 
-Congratulations! You have now created a template pipeline, pushed it to Github and learned about important template files!
+Congratulations! You have now created a template pipeline, pushed it to GitHub and learned about important template files!
