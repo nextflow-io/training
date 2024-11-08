@@ -115,11 +115,11 @@ Quando decidir começar o treinamento, clique no botão 'Abrir no Gitpod', nesta
 
 Referência rápida para alguns links úteis:
 
-| Reference                                                   |  Community                                                   |
-| ----------------------------------------------------------- | ------------------------------------------------------------ |
+| Reference                                                              |  Community                                                      |
+| ---------------------------------------------------------------------- | --------------------------------------------------------------- |
 | [Documentação do Nextflow](https://nextflow.io/docs/latest/index.html) | [Slack do Nextflow](https://www.nextflow.io/slack-invite.html)  |
-| [Página do Nextflow](https://nextflow.io/)                   | [Página do nf-core](https://nf-co.re/)                                 |
-| [Página da Seqera](https://seqera.io/)                                | [Seqera Community Forum](https://community.seqera.io)        |
+| [Página do Nextflow](https://nextflow.io/)                             | [Página do nf-core](https://nf-co.re/)                          |
+| [Página da Seqera](https://seqera.io/)                                 | [Seqera Community Forum](https://community.seqera.io)           |
 
 Não sabe para onde ir? Confira a página [Obtendo ajuda](help.md).
 
