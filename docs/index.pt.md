@@ -9,61 +9,127 @@ hide:
 
 # Treinamentos Nextflow
 
-Seja bem vindo ao portal de treinamento da comunidade do Nextflow!
+Seja bem vindo ao portal de treinamentos da comunidade do Nextflow!
 
-Esses materiais de treinamento são de código aberto e gratuitos para qualquer pessoa utilizar.
-Eles estão hospedados em um [repositório do GitHub](https://github.com/nextflow-io/training) junto a exemplos de scripts e de configurações de desenvolvimento.
+Temos vários treinamentos distintos disponíveis neste site. Role para baixo para encontrar o que se adequa a suas necessidades.
 
-Ainda que você possa consultar e estudar esse material quando bem quiser, você provavelmente irá aproveitá-lo mais ao participar de um evento de treinamento.
-Eventos online e gratuitos são regularmente organizados pela comunidade do nf-core. Veja mais na [página de eventos do nf-core](https://nf-co.re/events).
+Os treinamentos listados abaixo foram construídos de modo que você possa fazê-los de forma independente; você pode trabalhar neles sozinho a qualquer momento (veja Configuração do Ambiente para detalhes práticos). No entanto, você pode usufruir ainda mais desses materiais ao participar de um evento de treinamento em grupo.
 
-[![Abra no Gitpod](https://img.shields.io/badge/Gitpod-%20Abra%20no%20Gitpod-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/nextflow-io/training)
+-   Eventos online gratuitos são realizados regularmente pela comunidade nf-core, veja a [página de eventos nf-core](https://nf-co.re/events) para mais informações.
+-   A Seqera (a empresa que desenvolve o Nextflow) realiza uma variedade de eventos de treinamento. Veja a página [Seqera Events](https://seqera.io/events/) e procure por 'Seqera Sessions' e 'Nextflow Summit'.
+-   Nosso time de Comunidade também ministra regularmente treinamentos hospedados por outras organizações; anúncios e inscrições para eles são normalmente gerenciados por essas organizações.
 
-## Treinamentos disponíveis
+Quando decidir começar o treinamento, clique no botão 'Abrir no Gitpod', nesta página ou na página de índice do treinamento escolhido, para abrir um ambiente de treinamento dentro do seu próporio navegador (requer uma conta gratuita no GitHub).
 
-Nós temos vários treinamentos disponíveis neste site.
-Encontre o que se adequa mais ao que você está procurando:
+[![Abrir no Gitpod](https://img.shields.io/badge/Gitpod-%20Open%20in%20Gitpod-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/nextflow-io/training)
 
-!!! exercise "Treinamento Básico de Nextflow"
+## Configuração do Ambiente
 
-    !!! tip inline end ""
-
-        :material-lightbulb: Esse é o material de treinamento primário do Nextflow utilizado na maior parte dos eventos de treinamento do Nextflow e do nf-core.
-
-    Treinamento básico cobrindo um pouquinho de tudo do Nextflow. Perfeito para quem quer se familiarizar com o uso do Nextflow para executar análises e construir fluxos de trabalho.
-
-    [Comece já o treinamento do Nextflow :material-arrow-right:](basic_training/index.md){ .md-button .md-button--primary }
-
-!!! exercise "Treinamento prático"
+!!! exercise "Configuração do Ambiente"
 
     !!! quote inline end ""
 
-        :material-run-fast: Esse material é mais curto e bem prático, o que é perfeito se você quiser praticar suas habilidades com o Nextflow.
+        :material-lightbulb: Essencial para configurar seu ambiente pela primeira vez.
 
-    Um tutorial de "aprender fazendo" com menos foco na teoria, através de exercícios de complexidade cada vez maior.
+    Instruções para configurar seu ambiente para trabalhar por meio dos materiais de treinamento desse portal. Fornece uma orientação para o Gitpod, bem como instruções de instalação alternativas para trabalhar em sua própria máquina local.
 
-    [Comece o treinamento prático :material-arrow-right:](hands_on/index.md){ .md-button }
+    [Inicie o treinamento de Configuração do Ambiente :material-arrow-right:](envsetup/index.md){ .md-button .md-button--primary }
 
-## Leia mais
+## Nextflow para iniciantes
 
-De referências rápidas à links úteis:
+!!! exercise "Hello Nextflow"
 
-| Referências                                                                    |  Comunidade                                                     |
-| ------------------------------------------------------------------------------ | --------------------------------------------------------------- |
-| [Documentação oficial do Nextflow](https://nextflow.io/docs/latest/index.html) | [Slack do Nextflow](https://www.nextflow.io/slack-invite.html)  |
-| [Página ofiical do Nextflow](https://nextflow.io/)                             | [nf-core](https://nf-co.re/)                                    |
-| [Seqera](https://seqera.io/)                                                   | [Seqera Community](https://community.seqera.io)                 |
+    !!! quote inline end ""
 
-Não sabe por onde começar? Confira a página [Conseguindo ajuda](help.md).
+        :material-run-fast: Uma série de treinamento modular para começar a usar o Nextflow.
+
+    Este é um treinamento básico para aqueles que são completamente novos no Nextflow. Ele consiste em uma série de módulos de treinamento que são projetados para ajudar os alunos a desenvolver suas habilidades progressivamente. A série abrange os principais componentes da linguagem Nextflow, bem como práticas essenciais de design e desenvolvimento de pipeline e uso eficaz de recursos de terceiros.
+
+    [Inicie o treinamento Hello Nextflow :material-arrow-right:](hello_nextflow/index.md){ .md-button }
+
+## Treinamento aprofundado em Nextflow
+
+!!! exercise "Fundamentals Training"
+
+    !!! tip inline end ""
+
+        :material-lightbulb: Material de treinamento abrangente para explorar todo o escopo dos recursos do Nextflow.
+
+    O treinamento Fundamentals Training abrange tudo sobre o Nextflow. Excelente material de referência para qualquer um que queira construir fluxos de trabalho complexos com o Nextflow.
+
+    [Inicie o Fundamentals Training :material-arrow-right:](basic_training/index.md){ .md-button .md-button--primary }
+
+!!! exercise "Advanced Training"
+
+    !!! quote inline end ""
+
+        :material-lightbulb: Material de treinamento avançado para dominar o Nextflow.
+
+    Material avançado explorando os recursos mais avançados da linguagem e da ferramenta Nextflow e como usá-los para escrever fluxos de trabalho intensivos em dados, eficientes e escaláveis.
+
+    [Inicie o Advanced Training :material-arrow-right:](advanced/index.md){ .md-button .md-button--primary }
+
+## Other/Experimental
+
+!!! exercise "Configure a execução de um pipeline nf-core"
+
+    !!! quote inline end ""
+
+        :material-run-fast: Este treinamento ajudará você a entender como personalizar a execução de um pipeline nf-core.
+
+    Um tutorial "aprenda fazendo" com foco na configuração de pipelines nf-core.
+
+    [Inicie o treinamento de configuração do nf-core :material-arrow-right:](nf_customize/index.md){ .md-button }
+
+!!! exercise "Desenvolva um pipeline com o modelo nf-core"
+
+    !!! quote inline end ""
+
+        :material-run-fast: Este treinamento ajudará você a entender a estrutura do modelo de pipeline nf-core.
+
+    Um tutorial de desenvolvimento de pipeline "aprenda fazendo" com foco no desenvolvimento de um pipeline com o modelo nf-core.
+
+    [Inicie o treinamento de desenvolvimento com nf-core :material-arrow-right:](nf_develop/index.md){ .md-button }
+
+!!! exercise "Troubleshooting exercises"
+
+    !!! quote inline end ""
+
+        :material-run-fast: Este treinamento ajudará você a solucionar erros comuns em pipeline.
+
+    Um tutorial de solução de problemas "aprenda fazendo" para desenvolvedores e usuários de pipeline.
+
+    [Inicie o treinamento de solucionamento de problemas :material-arrow-right:](troubleshoot/index.md){ .md-button }
+
+## Deprecated
+
+!!! exercise "Simple RNA-seq variant calling"
+
+    !!! quote inline end ""
+
+        :material-run-fast: Um breve tutorial prático focado em um exemplo concreto de pipeline de análise.
+
+    Este curso foi desenvolvido como um tutorial "aprender fazendo", com a intenção de ser uma maneira rápida e prática de entender o Nextflow usando um exemplo de pipeline de análise muito concreto. Você ainda pode encontrar os materiais no repositório do GitHub, mas ele não está mais sendo mantido e não pode mais ser iniciado no Gitpod ou no portal de treinamento.
+
+## Recursos
+
+Referência rápida para alguns links úteis:
+
+| Reference                                                   |  Community                                                   |
+| ----------------------------------------------------------- | ------------------------------------------------------------ |
+| [Documentação do Nextflow](https://nextflow.io/docs/latest/index.html) | [Slack do Nextflow](https://www.nextflow.io/slack-invite.html)  |
+| [Página do Nextflow](https://nextflow.io/)                   | [Página do nf-core](https://nf-co.re/)                                 |
+| [Página da Seqera](https://seqera.io/)                                | [Seqera Community Forum](https://community.seqera.io)        |
+
+Não sabe para onde ir? Confira a página [Obtendo ajuda](help.md).
 
 ## Créditos e contribuições
 
 [![Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0](assets/img/cc_by-nc-nd.svg){ align=right }](https://creativecommons.org/licenses/by-nc-nd/4.0/)
 
-Todo o material de treinamento foi escrito originalmente pela [Seqera](https://seqera.io) mas foi compartilhado livremente ([CC BY-NC-ND](https://creativecommons.org/licenses/by-nc-nd/4.0/)) para a comunidade.
+Este material de treinamento é desenvolvido e mantido pela [Seqera](https://seqera.io) e lançado sob uma licença de código aberto ([CC BY-NC-ND](https://creativecommons.org/licenses/by-nc-nd/4.0/)) para o benefício da comunidade. Sinta-se à vontade para reutilizar esses materiais de acordo com os termos da licença. Se você administra seus próprios treinamentos, ensinando terceiros, adoraríamos saber como está indo e o que poderíamos fazer para facilitar.
 
-Correções e melhorias pela comunidade são bem vindas.
-Toda página tem o ícone :material-file-edit-outline: em seu topo direito, que irá te levar ao GitHub onde você poderá editá-la através de um Pull Request.
+Aceitamos correções e melhorias da comunidade. Cada página tem um ícone :material-file-edit-outline: no canto superior direito da página, que te levará ao GitHub, onde você pode propor alterações no material de treinamento por meio de uma solicitação de _pull_.
 
 <div markdown class="homepage_logos">
 
