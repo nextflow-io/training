@@ -69,7 +69,7 @@ Quando decidir começar o treinamento, clique no botão 'Abrir no Gitpod', nesta
 
     [Inicie o Advanced Training :material-arrow-right:](advanced/index.md){ .md-button .md-button--primary }
 
-## Other/Experimental
+## Outros/Em desenvolvimento
 
 !!! exercise "Configure a execução de um pipeline nf-core"
 
@@ -101,7 +101,7 @@ Quando decidir começar o treinamento, clique no botão 'Abrir no Gitpod', nesta
 
     [Inicie o treinamento de solucionamento de problemas :material-arrow-right:](troubleshoot/index.md){ .md-button }
 
-## Deprecated
+## Obsoleto
 
 !!! exercise "Simple RNA-seq variant calling"
 
