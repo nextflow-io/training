@@ -35,15 +35,15 @@ Edit this file to specify the input files as script parameters. Using this notat
  * Define the default parameters (1)
  */
 
-params.genome     = "${baseDir}/data/genome.fa" // (2)!
-params.variants   = "${baseDir}/data/known_variants.vcf.gz"
-params.blacklist  = "${baseDir}/data/blacklist.bed"
-params.reads      = "${baseDir}/data/reads/ENCSR000COQ1_{1,2}.fastq.gz" // (3)!
+params.genome     = "${projectDir}/data/genome.fa" // (2)!
+params.variants   = "${projectDir}/data/known_variants.vcf.gz"
+params.blacklist  = "${projectDir}/data/blacklist.bed"
+params.reads      = "${projectDir}/data/reads/ENCSR000COQ1_{1,2}.fastq.gz" // (3)!
 params.results    = "results" // (4)!
 ```
 
 1. The `/*`, `*` and `*/` specify comment lines which are ignored by Nextflow.
-2. The `baseDir` variable represents the main script path location.
+2. The `projectDir` variable represents the main script path location.
 3. The `reads` parameter uses a glob pattern to specify the forward (`ENCSR000COQ1_1.fq.gz`) and reverse (`ENCSR000COQ1_2.fq.gz`) reads (paired-end) of a sample.
 4. The `results` parameter is used to specify a directory called `results`.
 

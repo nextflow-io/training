@@ -252,7 +252,7 @@ branch { meta, reads ->
 }
 ```
 
-We may want to emit a slightly different element than the one passed as input. The `branch` operator can (optionally) return a _new_ element to an channel. For example, to add an extra key in the meta map of the tumor samples, we add a new line under the condition and return our new element. In this example, we modify the first element of the `List` to be a new list that is the result of merging the existing meta map with a new map containing a single key:
+We may want to emit a slightly different element than the one passed as input. The `branch` operator can (optionally) return a _new_ element to a channel. For example, to add an extra key in the meta map of the tumor samples, we add a new line under the condition and return our new element. In this example, we modify the first element of the `List` to be a new list that is the result of merging the existing meta map with a new map containing a single key:
 
 ```groovy linenums="1"
 branch { meta, reads ->
@@ -483,7 +483,7 @@ The input channel has two elements. For each element in the input channel, we re
 
 !!! exercise
 
-    The `flatten` operation only "unfolds" one layer from the retuned collection. Given this information, what do you expect the following workflow to return?
+    The `flatten` operation only "unfolds" one layer from the returned collection. Given this information, what do you expect the following workflow to return?
 
     ```
     workflow {
@@ -636,7 +636,7 @@ If the contents of the input channel is a file, its _contents_ are appended to t
 
     In the example below, we include a line of groovy to define a variable `article` which is used in the interpolated script string. This is a convenient way to avoid crowding the final string block with too much logic.
 
-    This line includes two Groovy synax features:
+    This line includes two Groovy syntax features:
 
     1. The [ternary operator](https://docs.groovy-lang.org/latest/html/documentation/core-operators.html#_ternary_operator) - a terse if/else block
     2. The [find operator](https://docs.groovy-lang.org/latest/html/documentation/core-operators.html#_find_operator) `=~`

@@ -1,10 +1,4 @@
----
-description: Overview of the Advanced Nextflow Training material
-hide:
-    - toc
----
-
-# Welcome
+# Advanced Training
 
 Welcome to our Nextflow workshop for intermediate and advanced users!
 
@@ -15,6 +9,30 @@ Please note that this is not an introductory workshop, and we will assume some b
 By the end of this workshop, you will have the skills and knowledge to create complex and powerful Nextflow pipelines for your own data analysis projects.
 
 Let's get started!
+
+[![Open in Gitpod](https://img.shields.io/badge/Gitpod-%20Open%20in%20Gitpod-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/nextflow-io/training)
+
+## Learning objectives
+
+By the end of this course you should:
+
+-   Describe commonly used and well understood operators
+-   Apply good practices for the propagation of metadata
+-   Group and split channels
+-   Apply Groovy helper classes to Nextflow scripts
+-   Sensibly structure workflows
+-   Apply layers of configuration to a workflow
+
+## Audience & prerequisites
+
+Please note that this is **not** a beginner's workshop and familiarity with Nextflow, the command line, and common file formats is assumed.
+
+**Prerequisites**
+
+-   A GitHub account
+-   Experience with command line
+-   Familiarity with Nextflow and Groovy
+-   An understanding of common file formats
 
 ## Follow the training video
 

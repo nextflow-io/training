@@ -40,4 +40,3 @@ workflow {
     results_ch = CONVERTTOUPPER(letters_ch.flatten())
     results_ch.view{ it }
 }
-

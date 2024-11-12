@@ -1,3 +1,5 @@
+#!/usr/bin/env nextflow
+
 include { FASTP } from './modules/local/fastp/main.nf'
 
 workflow {

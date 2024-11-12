@@ -1,0 +1,4 @@
+sample,fastq_1,fastq_2
+gut,/workspace/gitpod/nf-customize/data/gut_1.fq.gz,/workspace/gitpod/nf-customize/data/gut_2.fq.gz
+liver,/workspace/gitpod/nf-customize/data/liver_1.fq.gz,/workspace/gitpod/nf-customize/data/liver_2.fq.gz
+lung,/workspace/gitpod/nf-customize/data/lung_1.fq.gz,/workspace/gitpod/nf-customize/data/lung_2.fq.gz

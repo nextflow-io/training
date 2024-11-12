@@ -260,7 +260,7 @@ println '$x $y'
 
 ```console title="Output"
 The quick brown fox
-$x + $y
+$x $y
 ```
 
 !!! info
@@ -270,7 +270,7 @@ $x + $y
 
 !!! question "Exercise"
 
-    Modify the script above to print `Hello World` instead of `$x + $y`.
+    Modify the script above to print `Hello World` instead of `$x $y`.
 
     ??? Solution
 
@@ -371,7 +371,7 @@ else {
 The `else` branch is optional. Also, the curly brackets are optional when the branch defines just a single statement.
 
 ```groovy linenums="1" title="snippet.nf"
-x = 1
+x = 11
 if (x > 10)
     println 'Hello'
 ```

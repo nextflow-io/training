@@ -188,7 +188,7 @@ O script do processo também pode ser definido de maneira completamente dinâmic
 
 ```groovy linenums="1"
 params.compressor = 'gzip'
-params.arquivo_a_comprimir = "$baseDir/data/ggal/transcriptome.fa"
+params.arquivo_a_comprimir = "$projectDir/data/ggal/transcriptome.fa"
 
 process FOO {
     input:
@@ -347,7 +347,7 @@ workflow {
     ??? solution
 
         ```groovy linenums="1"
-        params.leituras = "$baseDir/data/ggal/*_1.fq"
+        params.leituras = "$projectDir/data/ggal/*_1.fq"
 
         Channel
             .fromPath(params.leituras)
@@ -484,8 +484,8 @@ Isso ocorre porque os canais de valor podem ser consumidos várias vezes e não 
     ??? solution
 
         ```groovy linenums="1"
-        params.leituras = "$baseDir/data/ggal/*_1.fq"
-        params.arquivo_transcriptoma = "$baseDir/data/ggal/transcriptome.fa"
+        params.leituras = "$projectDir/data/ggal/*_1.fq"
+        params.arquivo_transcriptoma = "$projectDir/data/ggal/transcriptome.fa"
 
         Channel
             .fromPath(params.leituras)
@@ -548,8 +548,8 @@ No exemplo acima, toda vez que um arquivo de sequências é recebido como entrad
     ??? solution
 
         ```groovy linenums="1"
-        params.leituras = "$baseDir/data/ggal/*_1.fq"
-        params.arquivo_transcriptoma = "$baseDir/data/ggal/transcriptome.fa"
+        params.leituras = "$projectDir/data/ggal/*_1.fq"
+        params.arquivo_transcriptoma = "$projectDir/data/ggal/transcriptome.fa"
         metodos= ['salmon', 'kallisto']
 
         Channel

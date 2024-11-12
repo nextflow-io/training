@@ -25,7 +25,7 @@ This gives us two complications:
 
 There may be some configuration values that you will want applied on all runs for a given system. These configuration values should be written to `~/.nextflow/config`.
 
-For example - you may have an account on a HPC system and you know that you will always want to submit jobs using the SLURM scheduler when using that machine and always use the Singularity container engine. In this case, your `~/.nextflow/config` file may include:
+For example - you may have an account on an HPC system and you know that you will always want to submit jobs using the SLURM scheduler when using that machine and always use the Singularity container engine. In this case, your `~/.nextflow/config` file may include:
 
 ```groovy
 process.executor = 'slurm'
@@ -36,10 +36,10 @@ These configuration values would be inherited by every run on that system withou
 
 ## Overriding for a run - `$PWD/nextflow.config`
 
-Move into the chapter example directory:
+Create a chapter example directory:
 
 ```
-cd configuration
+mkdir configuration && cd configuration
 ```
 
 ### Overriding Process Directives
@@ -72,7 +72,7 @@ Glob pattern matching can also be used:
 
 ```groovy
 process {
-    withLabel: '.*:INDEX' {
+    withName: '.*:INDEX' {
         cpus = 2
     }
 }

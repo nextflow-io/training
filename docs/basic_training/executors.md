@@ -274,7 +274,7 @@ aws.batch.cliPath = '/home/ec2-user/miniconda/bin/aws' // (6)!
     nextflow run script7.nf -profile amazon
     ```
 
-The complete details about AWS Batch deployment are available at [this link](https://www.nextflow.io/docs/latest/awscloud.html#aws-batch).
+The complete details about AWS Batch deployment are available at [this link](https://www.nextflow.io/docs/latest/aws.html#aws-batch).
 
 !!! cboard-list-2 "Summary"
 
@@ -409,7 +409,9 @@ Nextflow allows the use of multiple executors in the same workflow application. 
 
 To enable this feature use one or more [process selectors](https://www.nextflow.io/docs/latest/config.html#config-process-selectors) in your Nextflow configuration file.
 
-For example, apply the [AWS Batch configuration](https://www.nextflow.io/docs/latest/awscloud.html#awscloud-batch-config) only to a subset of processes in your workflow. You can try the following:
+When running a hybrid workflow, `-bucket-dir` and `-work-dir` should be used to define separate work directories for remote tasks and local tasks, respectively.
+
+For example, apply the [AWS Batch configuration](https://www.nextflow.io/docs/latest/aws.html#configuration) only to a subset of processes in your workflow. You can try the following:
 
 ```groovy linenums="1" title="nextflow.config"
 process {
@@ -435,6 +437,12 @@ aws {
 5. Set the queue for the process(es) with the `bigTask` label
 6. Set the container image to deploy for the process(es) with the `bigTask` label
 7. Define the region for Batch execution
+
+The workflow can then be executed with:
+
+```bash
+nextflow run <script> -bucket-dir 's3://my-bucket' -work-dir /path/to/scratch/dir
+```
 
 !!! cboard-list-2 "Summary"
 
