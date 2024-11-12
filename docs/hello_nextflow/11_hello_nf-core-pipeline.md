@@ -1,0 +1,521 @@
+# Part 11: Hello nf-core pipeline
+
+nf-core is a community effort to develop and maintain a curated set of analysis pipelines built using Nextflow.
+
+![nf-core logo](../nf_customize/img/nf-core-logo.png)
+
+The community provides tooling to create pipeline templates and use ready-made components that they have developed. 
+
+## Create a basic pipeline from template
+
+The nf-core pipeline template is a standardized framework designed to streamline the development of Nextflow-based bioinformatics pipelines.
+
+Creating a pipeline using the nf-core template is greatly simplified by the nf-core tooling. It will help you create a pipeline using the set framework that can be modified to suit your own purposes.
+
+Here, you will use the nf-core template to kickstart your pipeline development using the latest version of Nextflow and the nf-core tooling.
+
+### Creating your pipeline
+
+nf-core tooling has commands for pipeline users and developers.
+
+View all of the tooling using the `nf-core --help` argument.
+
+```bash
+nf-core --help
+```
+
+Here we will focus on the tooling to assist pipeline developers, starting with the `nf-core pipelines create` command.
+
+The `nf-core pipelines create` command makes a new pipeline using the nf-core base template with a pipeline name, description, and author. It is the first and most important step for creating a pipeline that will integrate with the wider Nextflow ecosystem.
+
+```bash
+nf-core pipelines create
+```
+
+Running this command will open a Text User Interface (TUI) for pipeline creation.
+
+<!-- TODO: Change this clip to what we'll do -->
+<div style="text-align: center;">
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/VwjXNXONHlY?si=d0HkFSISnKn76TeI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" data-ruffle-polyfilled=""></iframe>
+</div>
+
+Template features can be flexibly included or excluded at the time of creation:
+
+!!! question "Exercise"
+
+    Follow these steps create your first pipeline using the `nf-core pipelines create` TUI:
+
+    1. Run the `nf-core pipelines create` command
+    2. Select **Let's go!** on the welcome screen
+    3. Select **Custom** on the Choose pipeline type screen
+    4. Enter your pipeline details, replacing < YOUR NAME > with your own name, then select **Next**
+        - **GitHub organisation:** myorg
+        - **Workflow name:** myfirstpipeline
+        - **A short description of your pipeline:** My first pipeline
+        - **Name of the main author / authors:** < YOUR NAME >
+    5. On the Template features screen, turn **off**:
+        - `Use a GitHub repository`
+        - `Add Github CI tests`
+        - `Use reference genomes`
+        - `Add Github badges`
+        - `Include citations`
+        - `Include a gitpod environment`
+        - `Include GitHub Codespaces`
+        - `Use fastqc`
+        - `Add a changelog`
+        - `Support Microsoft Teams notifications`
+        - `Support Slack notifications`
+    6. Select **Finish** on the Final details screen
+    7. Wait for the pipeline to be created, then select **Continue**
+    8. Select **Finish without creating a repo** on the Create GitHub repository screen
+    9. Select **Close** on the HowTo create a GitHub repository page
+
+If run successfully, you will see a new folder in your current directory named `myorg-myfirstpipeline`.
+
+###  Testing your pipeline
+
+Let's try it:
+
+```bash
+cd /workspace/gitpod/hello-nextflow/hello-nf-core-template/nf-core-training-firstpipeline
+nextflow run . -profile docker,test --outdir results
+```
+
+The pipeline should run successfully!
+
+Here's the console output from the pipeline:
+
+```console title="Output"
+Launching `./main.nf` [evil_mestorf] DSL2 - revision: 11a3012ba7
+
+Input/output options
+input                     : https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv
+outdir                    : results
+
+Institutional config options
+config_profile_name       : Test profile
+config_profile_description: Minimal test dataset to check pipeline function
+
+Core Nextflow options
+runName                   : evil_mestorf
+containerEngine           : docker
+launchDir                 : /workspace/gitpod/hello-nextflow/hello-nf-core-template/nf-core-training-firstpipeline
+workDir                   : /workspace/gitpod/hello-nextflow/hello-nf-core-template/nf-core-training-firstpipeline/work
+projectDir                : /workspace/gitpod/hello-nextflow/hello-nf-core-template/nf-core-training-firstpipeline
+userName                  : gitpod
+profile                   : docker,test
+configFiles               : 
+
+!! Only displaying parameters that differ from the pipeline defaults !!
+------------------------------------------------------
+executor >  local (1)
+
+[89/bce167] process > NFCORETRAINING_FIRSTPIPELINE:FIRSTPIPELINE:MULTIQC [100%] 1 of 1 ✔
+
+-[nf-core-training/firstpipeline] Pipeline completed successfully-
+Completed at: 12-Nov-2024 15:53:37
+Duration    : 1m 6s
+CPU hours   : (a few seconds)
+Succeeded   : 1
+
+```
+
+Let's dissect what we are seeing:
+
+The nf-core pipeline template is a working pipeline and comes pre-configured with some modules, here we only chose MultiQC:
+
+-   [MultiQC](https://multiqc.info/): A modular tool to aggregate results from bioinformatics analyses across many samples into a single report.
+
+!!! note "The template can be granularly configured"
+
+    From nf-core tools 3.0 onwards many features can be removed during template creation. This is what we did when deselecting 
+    features earlier.
+
+You can use the `test` profile to check if your pipeline is still working during your development cycle. 
+
+The default template `test` profile leverages small test files that are stored in the nf-core [test data GitHub repository](https://github.com/nf-core/test-datasets) as inputs for the pipeline.
+
+Additionally, the template comes with profiles for the management of software dependencies (e.g., `docker`, `singularity`, and `conda`). nf-core modules come with containers/images/recipes and profiles can be used to change the way dependencies are handled when you execute your pipeline.
+
+!!! warning
+
+    If `-profile` for managing software dependencies is not specified, the pipeline will run locally and expect all software to be installed and available on `PATH`. **This is not recommended.**
+
+Additional test profiles can be created to test different parts of your pipeline.
+
+Congratulations! You have now created a template pipeline. In the next step, we will start adding new tools to it. 
+
+<!-- TODO By default, three git branches are created with the commands above.
+
+```bash
+git branch
+  TEMPLATE
+  dev
+* master
+``` 
+
+The role each of these branches have in pipeline development will be explained in subsequent sections. 
+
+-->
+
+## Template tour
+
+...
+
+Congratulations! You have now created a template pipeline, and learned about important template files! In the next step we will start changing the code and add new tools to the pipeline.
+
+## Check the input data
+
+Above, we said that the `test` profile comes with small test files that are stored in the nf-core. Let's check what type of files we are dealing with to plan our expansion. We can inspect any channel content by using the `dump` operator: 
+
+```groovy title="firstpipeline.nf" linenums="27"
+ch_samplesheet.dump(pretty: true)
+```
+
+```bash
+nextflow run . -profile docker,test --outdir results -dump-channels
+```
+
+You notice we added `-dump-channels` to the run command. This will run `dump()`. It is great for development, because a normal user will not add this flag and thus not see the channel content. 
+
+```console title="Output"
+Launching `./main.nf` [evil_mestorf] DSL2 - revision: 11a3012ba7
+
+...
+
+!! Only displaying parameters that differ from the pipeline defaults !!
+------------------------------------------------------
+executor >  local (1)
+
+[50/de1541] NFCORETRAINING_FIRSTPIPELINE:FIRSTPIPELINE:MULTIQC [100%] 1 of 1 ✔
+
+[DUMP] [
+    {
+        "id": "SAMPLE1_PE",
+        "single_end": "false"
+    },
+    [
+        "https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/illumina/amplicon/sample1_R1.fastq.gz",
+        "https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/illumina/amplicon/sample1_R2.fastq.gz"
+    ]
+]
+[DUMP] [
+    {
+        "id": "SAMPLE2_PE",
+        "single_end": "false"
+    },
+    [
+        "https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/illumina/amplicon/sample2_R1.fastq.gz",
+        "https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/illumina/amplicon/sample2_R2.fastq.gz"
+    ]
+]
+[DUMP] [
+    {
+        "id": "SAMPLE3_SE",
+        "single_end": "true"
+    },
+    [
+        "https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/illumina/amplicon/sample1_R1.fastq.gz",
+        "https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/illumina/amplicon/sample2_R1.fastq.gz"
+    ]
+]
+```
+
+We see that we have FastQ files as input and each pair of files is accompanied by some metadata: the `id` and whether or not it is single end.
+
+<!--TODO The single end data is not actually single end :facepalm: -->
+
+## Find an nf-core module
+
+nf-core provides a large library of modules and subworkflows: pre-made nextflow wrappers around tools that can be installed into nextflow pipelines. They are designed to be flexible but may require additional configuration to suit different use cases. Currently, there are more than [1300 nf-core modules](https://nf-co.re/modules) and [60 nf-core subworkflows](https://nf-co.re/subworkflows) (November 2024) available. Modules and subworkflows can be listed, installed, updated, removed, and patched using nf-core tooling. 
+
+While you could develop a module for this tool independently, you can save a lot of time and effort by leveraging nf-core modules and subworkflows.
+
+Let's see which modules are there:
+
+```console
+nf-core modules list remote
+```
+
+This command lists all currently available modules, > 1300. An easier way to find them, is to go to the nf-core website and visit the modules subpage [https://nf-co.re/modules](https://nf-co.re/modules). Here you can search for modules by name or tags, find documentation for each module and which nf-core pipeline uses it:
+
+<!-- TODO add screen grab -->
+
+
+## Install an nf-core module
+
+Now let's add another tool to the pipeline.
+
+`Seqtk` is a fast and lightweight tool for processing sequences in the FASTA or FASTQ format. Here, you will use the [`seqtk trim`](https://github.com/lh3/seqtk) command to trim FASTQ files.
+
+In your pipeline, you will add a new step that will take FASTQ files from the sample sheet as inputs and will produce trimmed fastq files that can be used as an input for other tools and version information about the seqtk tools to mix into the inputs for the MultiQC process.
+
+<!-- TODO this file is missing
+<figure class="excalidraw">
+--8<-- "docs/nf_template/img/pipeline.excalidraw.svg"
+</figure> -->
+
+The `nf-core modules install` command can be used to install the `seqtk/trim` module directly from the nf-core repository:
+
+```
+nf-core modules install
+```
+
+!!!warning
+
+    You need to be in the my-myfirstpipeline directory when executing `nf-core modules install`
+
+You can follow the prompts to find and install the module you are interested in:
+
+```console
+? Tool name: seqtk/trim
+```
+
+Once selected, the tooling will install the module in the `modules/nf-core/` folder and suggest code that you can add to your main workflow file (`workflows/mypipeline.nf`).
+
+```console
+INFO     Installing 'seqtk/trim'
+INFO     Use the following statement to include this module:
+
+include { SEQTK_TRIM } from '../modules/nf-core/seqtk/trim/main'
+```
+
+To enable reporting and reproducibility, modules and subworkflows from the nf-core repository are tracked using hashes in the `modules.json` file. When modules are installed or removed using the nf-core tooling the `modules.json` file will be automatically updated.
+
+When you open the `modules.json`, you will see an entry for each module that is currently installed from the nf-core modules repository:
+
+```console
+"nf-core": {
+    "multiqc": {
+        "branch": "master",
+        "git_sha": "cf17ca47590cc578dfb47db1c2a44ef86f89976d",
+        "installed_by": ["modules"]
+    },
+    "seqtk/trim": {
+        "branch": "master",
+        "git_sha": "666652151335353eef2fcd58880bcef5bc2928e1",
+        "installed_by": ["modules"]
+    }
+}
+```
+
+## Adding a nf-core/module to your pipeline
+
+Although the module has been installed in your local pipeline repository, it is not yet added to your pipeline.
+
+The suggested `include` statement needs to be added to your `workflows/mypipeline.nf` file and the process call (with inputs) needs to be added to the workflow block.
+
+```groovy title="workflows/firstpipeline.nf" linenums="6"
+include { FASTQC                 } from '../modules/nf-core/fastqc/main'
+include { SEQTK_TRIM             } from '../modules/nf-core/seqtk/trim/main' 
+include { MULTIQC                } from '../modules/nf-core/multiqc/main'
+```
+
+To add the `SEQTK_TRIM` module to your workflow you will need to check what inputs are required.
+
+You can view the input channels for the module by opening the `./modules/nf-core/seqtk/trim/main.nf` file.
+
+```groovy title="/modules/nf-core/seqtk/trim/main.nf" linenums="11"
+input:
+tuple val(meta), path(reads)
+```
+
+Each nf-core module also has a `meta.yml` file which describes the inputs and outputs. This meta file is rendered on the [nf-core website](https://nf-co.re/modules/seqtk_trim), or can be viewed using the `nf-core modules info` command:
+
+```console
+nf-core modules info seqtk/trim
+```
+
+```console title="Output"
+
+╭─ Module: seqtk/trim  ─────────────────────────────────────────────────────────────────────────────╮
+│ Location: modules/nf-core/seqtk/trim                                                              │
+│ 🔧 Tools: seqtk                                                                                   │
+│ 📖 Description: Trim low quality bases from FastQ files                                           │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────╯
+               ╷                                                                       ╷
+ 📥 Inputs     │Description                                                            │     Pattern
+╺━━━━━━━━━━━━━━┿━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┿━━━━━━━━━━━━╸
+ input[0]      │                                                                       │
+╶──────────────┼───────────────────────────────────────────────────────────────────────┼────────────╴
+  meta  (map)  │Groovy Map containing sample information e.g. [ id:'test',             │
+               │single_end:false ]                                                     │
+╶──────────────┼───────────────────────────────────────────────────────────────────────┼────────────╴
+  reads  (file)│List of input FastQ files                                              │*.{fastq.gz}
+               ╵                                                                       ╵
+                      ╷                                                                ╷
+ 📥 Outputs           │Description                                                     │     Pattern
+╺━━━━━━━━━━━━━━━━━━━━━┿━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┿━━━━━━━━━━━━╸
+ reads                │                                                                │
+╶─────────────────────┼────────────────────────────────────────────────────────────────┼────────────╴
+  meta  (map)         │Groovy Map containing sample information e.g. [ id:'test',      │
+                      │single_end:false ]                                              │
+╶─────────────────────┼────────────────────────────────────────────────────────────────┼────────────╴
+  *.fastq.gz  (file)  │Filtered FastQ files                                            │*.{fastq.gz}
+╶─────────────────────┼────────────────────────────────────────────────────────────────┼────────────╴
+ versions             │                                                                │
+╶─────────────────────┼────────────────────────────────────────────────────────────────┼────────────╴
+  versions.yml  (file)│File containing software versions                               │versions.yml
+                      ╵                                                                ╵
+
+ Use the following statement to include this module:
+
+ include { SEQTK_TRIM } from '../modules/nf-core/seqtk/trim/main'
+```
+
+Using this module information you can work out what inputs are required for the `SEQTK_TRIM` process:
+
+1.  `tuple val(meta), path(reads)`
+
+    -   A tuple with a meta _map_ and a list of FASTQ _files_
+    -   The channel `ch_samplesheet` used by the `FASTQC` process can be used as the reads input.
+
+As only one input channel required, and it already exists, it can be added to your `firstpipeline.nf` file without any additional channel creation or modifications.
+
+```groovy title="workflows/myfirstpipeline.nf" linenums="30"
+//
+// MODULE: Run SEQTK_TRIM
+//
+SEQTK_TRIM (
+    ch_samplesheet
+)
+```
+
+Let's test, that it works:
+
+```bash
+nextflow run . -profile docker,test --outdir results
+```
+
+```console title="Output"
+Launching `./main.nf` [grave_lagrange] DSL2 - revision: 11a3012ba7
+
+Input/output options
+  input                     : https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv
+  outdir                    : results
+
+Institutional config options
+  config_profile_name       : Test profile
+  config_profile_description: Minimal test dataset to check pipeline function
+
+Core Nextflow options
+  runName                   : grave_lagrange
+  containerEngine           : docker
+  launchDir                 : /workspace/gitpod/hello-nextflow/hello-nf-core-template/nf-core-training-firstpipeline
+  workDir                   : /workspace/gitpod/hello-nextflow/hello-nf-core-template/nf-core-training-firstpipeline/work
+  projectDir                : /workspace/gitpod/hello-nextflow/hello-nf-core-template/nf-core-training-firstpipeline
+  userName                  : gitpod
+  profile                   : docker,test
+  configFiles               : 
+
+!! Only displaying parameters that differ from the pipeline defaults !!
+------------------------------------------------------
+executor >  local (4)
+[0d/725202] process > NFCORETRAINING_FIRSTPIPELINE:FIRSTPIPELINE:SEQTK_TRIM (SAMPLE3_SE) [100%] 3 of 3 ✔
+[0a/977475] process > NFCORETRAINING_FIRSTPIPELINE:FIRSTPIPELINE:MULTIQC                 [100%] 1 of 1 ✔
+-[nf-core-training/firstpipeline] Pipeline completed successfully-
+```
+
+### Inspect results folder
+
+<!-- TODO Add results folder inspection -->
+
+### Handle modules output
+
+As with the inputs, you can view the outputs for the module by opening the `/modules/nf-core/seqtk/trim/main.nf` file and viewing the module metadata.
+
+```groovy title="/modules/nf-core/seqtk/trim/main.nf" linenums="13"
+output:
+tuple val(meta), path("*.fastq.gz"), emit: reads
+path "versions.yml"                , emit: versions
+```
+
+To help with organization and readability it is beneficial to create named output channels.
+
+For `SEQTK_TRIM`, the `reads` output could be put into a channel named `ch_trimmed`.
+
+```groovy title="workflows/mypipeline.nf"
+ch_trimmed  = SEQTK_TRIM.out.reads
+```
+
+Similarly, it is beneficial immediately mix the versions of tools into the `ch_versions` channel so they can be used as an input for the `MULTIQC` process.
+
+```groovy title="workflows/mypipeline.nf"
+ch_versions = ch_versions.mix(SEQTK_TRIM.out.versions.first())
+```
+
+!!! note
+
+    The `first` operator is used to emit the first item from `SEQTK_TRIM.out.versions` to avoid duplication.
+
+### Add a parameter to the `seqtk/trim` tool
+
+To prevent changing the nf-core modules, additional configuration options can be applied to a module using scopes within configuration files.
+
+The configuration of modules is commonly added to the `modules.conf` file in the `conf` folder. Process selectors (e.g., `withName`) are used to apply configuration to modules selectively. Process selectors must be used within the `process` scope.
+
+Extra configuration may also be applied as directives by using `args`. You can find many examples of how arguments are added to modules in nf-core pipelines, for example, the nf-core/rnaseq [modules.config](https://github.com/nf-core/rnaseq/blob/master/conf/modules.config) file.
+
+Add this snippet to your `conf/modules.config` file to call the tool with an additional argument: `-b 5` trims 5bp from the left end of each read:
+
+```console title="conf/modules.config" linenums="21"
+withName: 'SEQTK_TRIM' {
+    ext.args = "-b 5"
+}
+```
+
+Run the pipeline again and check if the new parameter is applied:
+
+```bash
+nextflow run . -profile docker,test --outdir results
+
+[fb/8a18ce] process > NFCORETRAINING_FIRSTPIPELINE:FIRSTPIPELINE:SEQTK_TRIM (SAMPLE3_SE) [100%] 3 of 3 ✔
+[e4/039743] process > NFCORETRAINING_FIRSTPIPELINE:FIRSTPIPELINE:MULTIQC                 [100%] 1 of 1 ✔
+```
+
+Copy the hash, that you see in your console output (here `fb/8a18ce`, it is different for each run). Use tab-completion to expand the complete hash.
+In this folder you will find various log files. The `.command.sh` file contains the resolved command:
+
+```bash
+less work/fb/8a18cedc5127f9a2c26eb6579c6887/.command.sh
+```
+
+```console title="Output"
+#!/usr/bin/env bash
+
+set -e # Exit if a tool returns a non-zero status/exit code
+set -u # Treat unset variables and parameters as an error
+set -o pipefail # Returns the status of the last command to exit with a non-zero status or zero if all successfully execute
+set -C # No clobber - prevent output redirection from overwriting files.
+
+printf "%s\n" sample1_R1.fastq.gz sample2_R1.fastq.gz | while read f;
+do
+    seqtk \
+        trimfq \
+        -b 5 \
+        $f \
+        | gzip --no-name > SAMPLE3_SE_$(basename $f)
+done
+
+cat <<-END_VERSIONS > versions.yml
+"NFCORETRAINING_FIRSTPIPELINE:FIRSTPIPELINE:SEQTK_TRIM":
+    seqtk: $(echo $(seqtk 2>&1) | sed 's/^.*Version: //; s/ .*$//')
+END_VERSIONS
+```
+
+We can see, that the parameter `-b 5`, that we set in the `modules.config` is applied to the task.
+
+##
+
+
+
+
+
+
+## Takeaway
+
+You know how to use the nf-core tooling to create a new pipeline, and add modules to it. 
+
+## What's next?
+
+Celebrate and take another break!

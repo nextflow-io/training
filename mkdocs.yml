@@ -21,6 +21,7 @@ nav:
           - hello_nextflow/08_hello_nf-test.md
           - hello_nextflow/09_hello_nf-core.md
           - hello_nextflow/10_hello_seqera.md
+          - hello_nextflow/11_hello_nf-core-pipeline.md
     - Fundamentals Training:
           - basic_training/index.md
           - basic_training/orientation.md
