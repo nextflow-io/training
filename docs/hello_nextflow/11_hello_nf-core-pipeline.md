@@ -41,9 +41,7 @@ Running this command will open a Text User Interface (TUI) for pipeline creation
 
 Template features can be flexibly included or excluded at the time of creation:
 
-!!! question "Exercise"
-
-    Follow these steps create your first pipeline using the `nf-core pipelines create` TUI:
+Follow these steps create your first pipeline using the `nf-core pipelines create` TUI:
 
     1. Run the `nf-core pipelines create` command
     2. Select **Let's go!** on the welcome screen
@@ -158,11 +156,20 @@ The role each of these branches have in pipeline development will be explained i
 
 -->
 
-## Template tour
+### Template tour
 
 ...
 
-Congratulations! You have now created a template pipeline, and learned about important template files! In the next step we will start changing the code and add new tools to the pipeline.
+
+### Takeaway
+
+You have now created a template pipeline, and learned about important template files
+
+### What's next?
+
+In the next step we will start changing the code and add new tools to the pipeline.
+
+---
 
 ## Check the input data
 
@@ -225,7 +232,17 @@ We see that we have FastQ files as input and each pair of files is accompanied b
 
 <!--TODO The single end data is not actually single end :facepalm: -->
 
-## Find an nf-core module
+### Takeaway
+
+You have now created a template pipeline, and learned about important template files
+
+### What's next?
+
+In the next step we will start changing the code and add new tools to the pipeline.
+
+---
+
+## Add an nf-core module
 
 nf-core provides a large library of modules and subworkflows: pre-made nextflow wrappers around tools that can be installed into nextflow pipelines. They are designed to be flexible but may require additional configuration to suit different use cases. Currently, there are more than [1300 nf-core modules](https://nf-co.re/modules) and [60 nf-core subworkflows](https://nf-co.re/subworkflows) (November 2024) available. Modules and subworkflows can be listed, installed, updated, removed, and patched using nf-core tooling. 
 
@@ -242,7 +259,7 @@ This command lists all currently available modules, > 1300. An easier way to fin
 <!-- TODO add screen grab -->
 
 
-## Install an nf-core module
+### Install an nf-core module
 
 Now let's add another tool to the pipeline.
 
@@ -299,7 +316,7 @@ When you open the `modules.json`, you will see an entry for each module that is 
 }
 ```
 
-## Adding a nf-core/module to your pipeline
+### Add the module to your pipeline
 
 Although the module has been installed in your local pipeline repository, it is not yet added to your pipeline.
 
@@ -505,12 +522,158 @@ END_VERSIONS
 
 We can see, that the parameter `-b 5`, that we set in the `modules.config` is applied to the task.
 
-##
+### Takeaway
+
+You have now added a nf-core/module to your pipeline, configured it with a particular parameter, and made the output available in the workflow.
+
+### What's next?
+
+In the next step we will add a pipeline parameter to allow users to skip the trimming step.
+
+---
+
+## Adding parameters to your pipeline
+
+Parameters that can be overridden, either using the command line or the Nextflow configuration file, and should be used for anything that a pipeline user may want to configure regularly.
+
+Here, as a simple example, you will add a new parameter to your pipeline that will skip the `SEQTK_TRIM` process.
+
+Parameters are accessible in the pipeline script.
+
+### Default values
+
+In the nf-core template the default values for parameters are set in the `nextflow.config` in the base repository.
+
+Any new parameters should be added to the `nextflow.config` with a default value within the `params` scope.
+
+Parameter names should be unique and easily identifiable.
+
+We can a new parameter `skip_trim` to your `nextflow.config` file and set it to `false`.
+
+```groovy title="nextflow.config" linenums="21"
+// Trimming
+skip_trim                   = false
+```
+
+### Adding parameters to your pipeline 
+
+Here, an `if` statement that is depended on the `skip_trim` parameter can be used to control the execution of the `SEQTK_TRIM` process. An `!` can be used to imply the logical "not".
+
+Thus, if the `skip_trim` parameter is **not** `true`, the `SEQTK_TRIM` will be be executed.
+
+```groovy title="workflows/mypipeline.nf" linenums="37"
+//
+// MODULE: Run SEQTK_TRIM
+//
+if (!params.skip_trim) {
+    SEQTK_TRIM (
+        ch_samplesheet
+    )
+    ch_trimmed  = SEQTK_TRIM.out.reads
+    ch_versions = ch_versions.mix(SEQTK_TRIM.out.versions.first())
+}
+```
+
+Now your if statement has been added to your main workflow file and has a default setting in your `nextflow.config` file, you will be able to flexibly skip the new trimming step using the `skip_trim` parameter.
+
+We can now run the pipeline with the new `skip_trim` parameter to check it is working:
+
+```console
+cd /workspace/gitpod/nf-develop/
+nextflow run myorg-myfirstpipeline -profile test,docker --outdir results --skip_trim
+```
+
+```console title="Output"
+!! Only displaying parameters that differ from the pipeline defaults !!
+------------------------------------------------------
+WARN: The following invalid input values have been detected:
+
+* --skip_trim: true
+
+executor >  local (1)
+[fe/cd373d] process > NFCORETRAINING_FIRSTPIPELINE:FIRSTPIPELINE:MULTIQC [100%] 1 of 1 ✔
+-[nf-core-training/firstpipeline] Pipeline completed successfully-
+```
+
+You should see that the `SEQTK_TRIM` process has been skipped in your execution.
+
+### Validate input parameters
+
+When we ran the pipeline, we saw a warning message:
+
+```console
+WARN: The following invalid input values have been detected:
+
+* --skip_trim: true
+```
+
+Parameters are validated through the `nextflow_schema.json` file. This file is also used by the nf-core website (for example in [nf-core/mag](https://nf-co.re/mag/3.2.1/parameters/)) to render the parameter documentation, and to print the pipeline help message (`nextflow run . --help`). If you have added parameters and they have not been documented in the `nextflow_schema.json` file then the input validation does not recognize the parameter.
+
+The `nextflow_schema.json` file can get very big and very complicated very quickly.
+
+The `nf-core pipelines schema build` command is designed to support developers write, check, validate, and propose additions to your `nextflow_schema.json` file.
+
+```console
+nf-core pipelines schema build
+```
+
+It will enable you to launch a web builder to edit this file in your web browser rather than trying to edit this file manually.
+
+```console
+INFO     [✓] Default parameters match schema validation
+INFO     [✓] Pipeline schema looks valid (found 20 params)
+✨ Found 'params.skip_trim' in the pipeline config, but not in the schema. Add to pipeline schema? [y/n]: y
+INFO     Writing schema with 21 params: 'nextflow_schema.json'
+🚀  Launch web builder for customization and editing? [y/n]: y
+```
+
+Using the web builder you can add add details about your new parameters.
+
+The parameters that you have added to your pipeline will be added to the bottom of the `nf-core schema build` file. Some information about these parameters will be automatically filled based on the default value from your `nextflow.config`. You will be able to categorize your new parameters into a group, add icons, and add descriptions for each.
+
+![Pipeline parameters](img/schemabuild.png)
+
+!!!note
+
+    Ungrouped parameters in schema will cause a warning.
+
+Once you have made your edits you can click `Finished` and all changes will be automatically added to your `nextflow_schema.json` file.
+
+If you rerun the previous command, the warning should disappear:
+
+```console
+cd /workspace/gitpod/nf-develop/
+nextflow run myorg-myfirstpipeline -profile test,docker --outdir results --skip_trim
+```
+
+!!!note
+
+    You can always list all parameters 
 
 
+### Takeaway
 
+You have added a new parameter to the pipeline.
 
+### What's next?
 
+In the next step we will start 
+
+---
+
+## Samplesheet (Extra content)
+
+nf-core pipelines typically use samplesheets as inputs to the pipelines. This allows us to:
+
+    - validate each entry
+    - attach information to each input file
+    - track which datasets are processed 
+
+## Create a custom module for your pipeline (Extra content)
+
+nf-core offers a comprehensive set of modules that have been created and curated by the community. However, as a developer, you may be interested in bespoke pieces of software that are not apart of the nf-core repository or customizing a module that already exists.
+
+Local modules
 
 ## Takeaway
 
