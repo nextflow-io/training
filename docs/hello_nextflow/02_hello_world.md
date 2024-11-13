@@ -78,6 +78,7 @@ process sayHello {
     output:
         stdout
 
+    script:
     """
     echo 'Hello World!'
     """
@@ -112,6 +113,7 @@ process sayHello {
     output:
         stdout
 
+    script:
     """
     echo 'Hello World!'
     """
@@ -749,6 +751,7 @@ process convertToUpper {
     output:
         path "UPPER-${input_file}"
 
+    script:
     """
     cat '$input_file' | tr '[a-z]' '[A-Z]' > UPPER-${input_file}
     """
@@ -945,6 +948,7 @@ process sayHello {
     output:
         path "output.txt"
 
+    script:
     """
     echo '$greeting' > "output.txt"
     """
@@ -964,6 +968,7 @@ process sayHello {
     output:
         path "${greeting}-output.txt"
 
+    script:
     """
     echo '$greeting' > '$greeting-output.txt'
     """
@@ -1044,7 +1049,7 @@ _Before:_
 /*
  * Pipeline parameters
  */
-params.greeting = "Bonjour le monde!"
+params.greeting = "Holà mundo!"
 ```
 
 _After:_

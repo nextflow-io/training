@@ -28,6 +28,7 @@ process SAMTOOLS_INDEX {
     output:
         tuple path(input_bam), path("${input_bam}.bai")
 
+    script:
     """
     samtools index '$input_bam'
     """
@@ -50,9 +51,10 @@ process GATK_HAPLOTYPECALLER {
         path interval_list
 
     output:
-        path "${input_bam}.vcf"
-        path "${input_bam}.vcf.idx"
+        path "${input_bam}.vcf"     , emit: vcf
+        path "${input_bam}.vcf.idx" , emit: idx
 
+    script:
     """
     gatk HaplotypeCaller \
         -R ${ref_fasta} \

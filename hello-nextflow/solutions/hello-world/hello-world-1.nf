@@ -5,6 +5,7 @@ process sayHello {
     output:
         stdout
 
+    script:
     """
     echo 'Hello World!'
     """
