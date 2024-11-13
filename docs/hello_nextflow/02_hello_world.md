@@ -1049,7 +1049,7 @@ _Before:_
 /*
  * Pipeline parameters
  */
-params.greeting = "Bonjour le monde!"
+params.greeting = "Holà mundo!"
 ```
 
 _After:_
