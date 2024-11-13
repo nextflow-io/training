@@ -646,11 +646,6 @@ cd /workspace/gitpod/nf-develop/
 nextflow run myorg-myfirstpipeline -profile test,docker --outdir results --skip_trim
 ```
 
-!!!note
-
-    You can always list all parameters 
-
-
 ### Takeaway
 
 You have added a new parameter to the pipeline.
@@ -661,23 +656,239 @@ In the next step we will start
 
 ---
 
-## Samplesheet (Extra content)
-
-nf-core pipelines typically use samplesheets as inputs to the pipelines. This allows us to:
-
-    - validate each entry
-    - attach information to each input file
-    - track which datasets are processed 
+## Meta maps 
 
 ## Create a custom module for your pipeline (Extra content)
 
 nf-core offers a comprehensive set of modules that have been created and curated by the community. However, as a developer, you may be interested in bespoke pieces of software that are not apart of the nf-core repository or customizing a module that already exists.
 
-Local modules
+In this instance, we will write a local module for the QC Tool [FastQE](https://fastqe.com/), which computes stats for FASTQ files and print those stats as emoji.
+
+This section should feel familiar to the `hello_modules` section.
+
+Start by using the nf-core tooling to create a sceleton local module. It will prompt you to type in the tool name `fastqe`, for the remaining fields press `enter` to accpet the default: 
+
+```console
+nf-core modules create
+```
+
+```console title="Output"
+INFO     Repository type: pipeline                                                                                                               
+INFO     Press enter to use default values (shown in brackets) or type your own responses. ctrl+click underlined text to open links.             
+Name of tool/subtool: fastqe
+INFO     Using Bioconda package: 'bioconda::fastqe=0.3.3'                                                                                        
+INFO     Using Docker container: 'biocontainers/fastqe:0.3.3--pyhdfd78af_0'                                                                      
+INFO     Using Singularity container: 'https://depot.galaxyproject.org/singularity/fastqe:0.3.3--pyhdfd78af_0'                                   
+GitHub Username: (@FriederikeHanssen): 
+INFO     Provide an appropriate resource label for the process, taken from the nf-core pipeline template.                                        
+         For example: process_single, process_low, process_medium, process_high, process_long, process_high_memory                               
+? Process resource label: process_single
+INFO     Where applicable all sample-specific information e.g. 'id', 'single_end', 'read_group' MUST be provided as an input via a Groovy Map    
+         called 'meta'. This information may not be required in some instances, for example indexing reference genome files.                     
+Will the module require a meta map of sample information? [y/n] (y): 
+INFO     Created component template: 'fastqe'                                                                                                    
+INFO     Created following files:                                                                                                                
+           modules/local/fastqe.nf     
+```
+
+This will create a new file in `modules/local/fastqe.nf` that already contains the container and conda definitions, the general structure of the process, and a number of TODO statements to guide you through the adaptation. 
+
+You will notice, that it still calls `samtools` and the input are `bam`.
+
+From our sample sheet, we know we have fastq files instead, so let's change the input definition accordingly:
+
+```groovy title="fastqe.nf" linenums="38"
+tuple val(meta), path(reads)
+```
+
+The output of this tool is a tsv file with the emoji annotation, let's adapt the output as well:
+
+```groovy title="fastqe.nf" linenums="42"
+tuple val(meta), path("*.tsv"), emit: tsv
+```
+
+The script section still calls `samtools`. Let's change this to the proper call of the tool:
+
+```groovy title="fastqe.nf" linenums="62"
+    fastqe \\
+        $args \\
+        $reads \\
+        --output ${prefix}.tsv
+```
+
+And at last, we need to adapt the version retrieval. This tool does not have a version command, so we will add the release number manualy:
+
+```groovy title="fastqe.nf" linenums="52"
+    def VERSION = '0.3.3'
+```
+
+and write it to a file in the script section:
+
+```groovy title="fastqe.nf" linenums="68"
+    cat <<-END_VERSIONS > versions.yml
+    "${task.process}":
+        fastqe: $VERSION
+    END_VERSIONS
+```
+
+<!--TODO stubs are not explained anywhere before :(  -->
+
+
+
+<!-- ## Patch a module (extra content) -->
+
+## Simple Samplesheet adaptations
+
+<!-- TODO : this feels a bit orphaned we are not really doing anything with the new information in the pipeline -->
+
+nf-core pipelines typically use samplesheets as inputs to the pipelines. This allows us to:
+
+    - validate each entry and print specific error messages
+    - attach information to each input file
+    - track which datasets are processed 
+
+Samplesheets are comma-separated text files with a header row specifying the column names, followed by one entry per row. For example, the samplesheet that we have been using during this session looks like this:
+
+```console "samplesheet_test_illumina_amplicon.csv"
+sample,fastq_1,fastq_2
+SAMPLE1_PE,https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/illumina/amplicon/sample1_R1.fastq.gz,https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/illumina/amplicon/sample1_R2.fastq.gz
+SAMPLE2_PE,https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/illumina/amplicon/sample2_R1.fastq.gz,https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/illumina/amplicon/sample2_R2.fastq.gz
+SAMPLE3_SE,https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/illumina/amplicon/sample1_R1.fastq.gz,
+SAMPLE3_SE,https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/illumina/amplicon/sample2_R1.fastq.gz,
+```
+
+The structure of the samplesheet is specified in its own schema file in `assets/schema_input.json`. Each column has its own entry together with information about the column:
+
+```console title="schema_input.json"
+"properties": {
+    "sample": {
+        "type": "string",
+        "pattern": "^\\S+$",
+        "errorMessage": "Sample name must be provided and cannot contain spaces",
+        "meta": ["id"]
+    },
+    "fastq_1": {
+        "type": "string",
+        "format": "file-path",
+        "exists": true,
+        "pattern": "^\\S+\\.f(ast)?q\\.gz$",
+        "errorMessage": "FastQ file for reads 1 must be provided, cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'"
+    },
+    "fastq_2": {
+        "type": "string",
+        "format": "file-path",
+        "exists": true,
+        "pattern": "^\\S+\\.f(ast)?q\\.gz$",
+        "errorMessage": "FastQ file for reads 2 cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'"
+    }
+},
+"required": ["sample", "fastq_1"]
+```
+
+This validates that the samplesheet has at least two columns: `sample` and `fastq1` (`"required": ["sample", "fastq_1"]`). It also checks that `fastq1` and `fastq2` are files, and that the file endings match a particular pattern. 
+Lastly, `sample` is information about the files that we want to attach and pass along the pipeline. nf-core uses `meta` maps for this: objects that have a key and a value. We can indicate this in the schema file directly by using the meta field:
+
+```console 
+    "sample": {
+        "type": "string",
+        "pattern": "^\\S+$",
+        "errorMessage": "Sample name must be provided and cannot contain spaces",
+        "meta": ["id"]
+    },
+```
+
+This sets the key name as `id` and the value that is in the `sample` column, for example `SAMPLE1_PE`:
+
+```console title=meta
+[id: SAMPLE1_PE] 
+```
+
+By adding a new entry into the json schema, we can attach additional meta information that we want to track. This will automtically validate it for us and add it to the meta map.
+
+Let's add some new meta information, like the `machineid` as an optional column:
+
+```console title="schema_input.json"
+"properties": {
+    "sample": {
+        "type": "string",
+        "pattern": "^\\S+$",
+        "errorMessage": "Sample name must be provided and cannot contain spaces",
+        "meta": ["id"]
+    },
+    "machineid": {
+        "type": "string",
+        "pattern": "^\\S+$",
+        "meta": ["machineid"]
+    },
+    "fastq_1": {
+        "type": "string",
+        "format": "file-path",
+        "exists": true,
+        "pattern": "^\\S+\\.f(ast)?q\\.gz$",
+        "errorMessage": "FastQ file for reads 1 must be provided, cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'"
+    },
+    "fastq_2": {
+        "type": "string",
+        "format": "file-path",
+        "exists": true,
+        "pattern": "^\\S+\\.f(ast)?q\\.gz$",
+        "errorMessage": "FastQ file for reads 2 cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'"
+    }
+},
+"required": ["sample", "fastq_1"]
+```
+
+We can now run our normal tests with the old samplesheet. Let's add `-dump-channels` again to inspect the channel content:
+
+```console
+nextflow run . -profile docker,test --outdir results -dump-channels
+```
+
+```console title="Output"
+[DUMP] [
+    {
+        "id": "SAMPLE1_PE",
+        "machineid": [
+            
+        ],
+        "single_end": "false"
+    },
+    [
+        "https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/illumina/amplicon/sample1_R1.fastq.gz",
+        "https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/illumina/amplicon/sample1_R2.fastq.gz"
+    ]
+```
+
+We have also prepared a new samplesheet, that has the `machineid` column. You can overwrite the existing input with this command:
+
+```console
+nextflow run . -profile docker,test --outdir results --input -dump-channels
+```
+
+```console
+[DUMP] [
+    {
+        "id": "SAMPLE3_SE",
+        "machineid": "myfavorite_machine",
+        "single_end": "true"
+    },
+    [
+        "https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/illumina/amplicon/sample1_R1.fastq.gz",
+        "https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/illumina/amplicon/sample2_R1.fastq.gz"
+    ]
+```
+
+We can now access the meta information in the pipeline
+
+### Takeaway
+
+You know how to adapt the samplesheet with a new piece of meta information.
+
+---
 
 ## Takeaway
 
-You know how to use the nf-core tooling to create a new pipeline, and add modules to it. 
+You know how to use the nf-core tooling to create a new pipeline, add a module to it, apply tool and pipeline parameters, and adapt the samplesheet. 
 
 ## What's next?
 
