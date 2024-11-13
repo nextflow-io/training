@@ -24,10 +24,6 @@ Follow these steps to set up your token:
 
     ![Save token](seqera/img/usage_token.png)
 
-    !!! note
-
-        Leave the browser tab with the token open as we will need it once more to store it as a Nextflow secret.
-
 4.  To make your token available to the Nextflow CLI, export it on the command line:
 
     Open a terminal and type:
@@ -41,7 +37,7 @@ Follow these steps to set up your token:
     !!! Warning "Security Note"
 
         Keep your token secure and do not share it with others.
-        You can add a ++space++ before the `export` command to prevent it from being saved in your shell history.
+        Add a ++space++ before the `export` command above to prevent your token from being saved in your shell history.
 
 ### 1.2. Run Nextflow CLI with Seqera Platform visualizing and capturing logs
 
@@ -80,15 +76,21 @@ You will see and be able to monitor your **Nextflow jobs** in Seqera Platform.
 
 ### 1.3. Set up Seqera Platform in Nextflow configuration
 
-Doing that token setup regularly can get a bit tedious, so let's set this configuration for all our pipeline runs with the global Nextflow configuration file located at `$HOME/.nextflow/config`.
+Doing that token setup regularly can become tedious, so let's set this configuration for all our pipeline runs with the global Nextflow configuration file located at `$HOME/.nextflow/config`.
 
-Before we set the configuration, we need to permanently store the token in Nextflow using a [Nextflow secret](https://www.nextflow.io/docs/latest/secrets.html):
+Before we set the configuration, we need to permanently store the token from our environment in Nextflow using a [Nextflow secret](https://www.nextflow.io/docs/latest/secrets.html):
 
 ```bash
-nextflow secrets set tower_access_token "eyxxxxxxxxxxxxxxxQ1ZTE="
+nextflow secrets set tower_access_token "$TOWER_ACCESS_TOKEN"
 ```
 
-Open the Nextflow configuration file located at `$HOME/.nextflow/config`:
+Make sure your token was saved using:
+
+```bash
+nextflow secrets get tower_access_token
+```
+
+Next, open the Nextflow configuration file located at `$HOME/.nextflow/config`:
 
 ```bash
 code $HOME/.nextflow/config
@@ -107,7 +109,7 @@ tower {
 !!! hint "Endpoint"
 
     The `endpoint` is the URL of the Seqera Platform API.
-    If your institution is running a private instance of Seqera Platform, you will want to change this to the appropriate URL.
+    If your institution is running a private instance of Seqera Platform, you should change this to the appropriate URL.
 
 Run your Nextflow workflows as before, but without the `-with-tower` command:
 
