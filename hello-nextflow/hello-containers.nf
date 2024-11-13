@@ -42,6 +42,7 @@ process cowSay {
     output:
         path "cowsay-*"
 
+    script:
     """
     cowsay -c "$params.character" -t "\$(cat $input_file)" > cowsay-${input_file}
     """

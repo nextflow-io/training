@@ -10,6 +10,7 @@ process sayHello {
     output:
         path 'output.txt'
 
+    script:
     """
     echo 'Hello World!' > output.txt
     """

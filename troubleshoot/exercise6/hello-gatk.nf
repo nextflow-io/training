@@ -33,6 +33,7 @@ process SAMTOOLS_INDEX {
     output:
         tuple val(id), path(input_bam), path("${input_bam}.bai")
 
+    script:
     """
     samtools index '$input_bam'
 
@@ -56,6 +57,7 @@ process GATK_HAPLOTYPECALLER {
     output:
         tuple val(id), path("${input_bam}.g.vcf"), path("${input_bam}.g.vcf.idx")
 
+    script:
     """
     gatk HaplotypeCaller \
         -R ${ref_fasta} \
@@ -85,6 +87,7 @@ process GATK_JOINTGENOTYPING {
         path "${cohort_name}.joint.vcf"
         path "${cohort_name}.joint.vcf.idx"
 
+    script:
     """
     gatk GenomicsDBImport \
         --sample-name-map ${sample_map} \

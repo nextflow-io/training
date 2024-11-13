@@ -21,6 +21,7 @@ process GATK_HAPLOTYPECALLER {
         path "${input_bam}.g.vcf"     , emit: vcf
         path "${input_bam}.g.vcf.idx" , emit: idx 
 
+    script:
     """
     gatk HaplotypeCaller \
         -R ${ref_fasta} \
