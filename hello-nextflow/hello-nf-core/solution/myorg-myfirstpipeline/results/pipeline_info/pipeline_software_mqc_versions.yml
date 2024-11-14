@@ -1,0 +1,7 @@
+FASTQE:
+  fastqe: 0.3.3
+SEQTK_TRIM:
+  seqtk: 1.4-r122
+Workflow:
+    myorg/myfirstpipeline: v1.0.0dev
+    Nextflow: 24.10.0

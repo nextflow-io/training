@@ -1,0 +1,4 @@
+Sample	fastqe	seqtk	myorg/myfirstpipeline	Nextflow
+FASTQE	0.3.3			
+SEQTK_TRIM		1.4-r122		
+Workflow			v1.0.0dev	24.10.0
