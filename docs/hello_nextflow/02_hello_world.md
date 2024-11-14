@@ -1100,6 +1100,36 @@ greeting_ch = Channel.fromPath(params.input_file)
                      .flatten()
 ```
 
+If you want to see the impact of `.flatten()`, we can make use of `.view()`, another operator, to demonstrate. Edit that section of code so it looks like:
+
+```groovy title="flatten usage"
+// create a channel for inputs from a CSV file
+greeting_ch = Channel.fromPath(params.input_file)
+                     .splitCsv()
+                     .view{ "After splitCsv: $it" }
+                     .flatten()
+                     .view{ "After flatten: $it" }
+```
+
+When you run this updated workflow, you'll see the difference:
+
+```console title="view output with and without flatten"
+After splitCsv: [Hello, Bonjour, Holà]
+After flatten: Hello
+After flatten: Bonjour
+After flatten: Holà
+[d3/1a6e23] Submitted process > sayHello (3)
+[8f/d9e431] Submitted process > sayHello (1)
+[e7/a088af] Submitted process > sayHello (2)
+[1a/776e2e] Submitted process > convertToUpper (1)
+[83/fb8eba] Submitted process > convertToUpper (2)
+[ee/280f93] Submitted process > convertToUpper (3)
+```
+
+As you can see, the flatten() operator has transformed the channel from containing arrays to containing individual elements. This can be useful when you want to process each item separately in your workflow.
+
+Remove the `.view()` operations before you continue.
+
 ### 9.3. Run the workflow (one last time!)
 
 ```bash
