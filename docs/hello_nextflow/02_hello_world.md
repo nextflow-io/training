@@ -1114,15 +1114,16 @@ greeting_ch = Channel.fromPath(params.input_file)
 When you run this updated workflow, you'll see the difference:
 
 ```console title="view output with and without flatten"
-After splitCsv: [Hello, World]
-After splitCsv: [Bonjour, Monde]
-After splitCsv: [Holà, Mundo]
+After splitCsv: [Hello, Bonjour, Holà]
 After flatten: Hello
-After flatten: World
 After flatten: Bonjour
-After flatten: Monde
 After flatten: Holà
-After flatten: Mundo
+[d3/1a6e23] Submitted process > sayHello (3)
+[8f/d9e431] Submitted process > sayHello (1)
+[e7/a088af] Submitted process > sayHello (2)
+[1a/776e2e] Submitted process > convertToUpper (1)
+[83/fb8eba] Submitted process > convertToUpper (2)
+[ee/280f93] Submitted process > convertToUpper (3)
 ```
 
 As you can see, the flatten() operator has transformed the channel from containing arrays to containing individual elements. This can be useful when you want to process each item separately in your workflow.
