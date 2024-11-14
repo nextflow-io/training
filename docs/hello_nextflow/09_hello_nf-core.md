@@ -274,7 +274,6 @@ nf-core pipelines create
 
 Running this command will open a Text User Interface (TUI) for pipeline creation.
 
-<!-- TODO: Change this clip to what we'll do -->
 <div style="text-align: center;">
     <iframe width="560" height="315" src="https://www.youtube.com/embed/VwjXNXONHlY?si=d0HkFSISnKn76TeI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" data-ruffle-polyfilled=""></iframe>
 </div>
@@ -315,7 +314,7 @@ If run successfully, you will see a new folder in your current directory named `
 Let's try it:
 
 ```bash
-cd /workspace/gitpod/hello-nextflow/hello-nf-core-template/nf-core-training-firstpipeline
+cd /workspace/gitpod/hello-nextflow/hello-nf-core/myorg-myfirstpipeline
 nextflow run . -profile docker,test --outdir results
 ```
 
@@ -324,38 +323,31 @@ The pipeline should run successfully!
 Here's the console output from the pipeline:
 
 ```console title="Output"
-Launching `./main.nf` [evil_mestorf] DSL2 - revision: 11a3012ba7
+Launching `./main.nf` [marvelous_saha] DSL2 - revision: a633aedb88
 
 Input/output options
-input                     : https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv
-outdir                    : results
+  input                     : https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv
+  outdir                    : results
 
 Institutional config options
-config_profile_name       : Test profile
-config_profile_description: Minimal test dataset to check pipeline function
+  config_profile_name       : Test profile
+  config_profile_description: Minimal test dataset to check pipeline function
 
 Core Nextflow options
-runName                   : evil_mestorf
-containerEngine           : docker
-launchDir                 : /workspace/gitpod/hello-nextflow/hello-nf-core-template/nf-core-training-firstpipeline
-workDir                   : /workspace/gitpod/hello-nextflow/hello-nf-core-template/nf-core-training-firstpipeline/work
-projectDir                : /workspace/gitpod/hello-nextflow/hello-nf-core-template/nf-core-training-firstpipeline
-userName                  : gitpod
-profile                   : docker,test
-configFiles               : 
+  runName                   : marvelous_saha
+  containerEngine           : docker
+  launchDir                 : /workspace/gitpod/hello-nextflow/hello-nf-core/myorg-myfirstpipeline
+  workDir                   : /workspace/gitpod/hello-nextflow/hello-nf-core/myorg-myfirstpipeline/work
+  projectDir                : /workspace/gitpod/hello-nextflow/hello-nf-core/myorg-myfirstpipeline
+  userName                  : gitpod
+  profile                   : docker,test
+  configFiles               : 
 
 !! Only displaying parameters that differ from the pipeline defaults !!
 ------------------------------------------------------
 executor >  local (1)
-
-[89/bce167] process > NFCORETRAINING_FIRSTPIPELINE:FIRSTPIPELINE:MULTIQC [100%] 1 of 1 ✔
-
--[nf-core-training/firstpipeline] Pipeline completed successfully-
-Completed at: 12-Nov-2024 15:53:37
-Duration    : 1m 6s
-CPU hours   : (a few seconds)
-Succeeded   : 1
-
+[ba/579181] process > MYORG_MYFIRSTPIPELINE:MYFIRSTPIPELINE:MULTIQC [100%] 1 of 1 ✔
+-[myorg/myfirstpipeline] Pipeline completed successfully-
 ```
 
 Let's dissect what we are seeing:
@@ -389,7 +381,7 @@ The nf-core pipeline template comes packed with a lot of files and folders.
 
 Here, we selected a subset (what we did in step 5 during the template creation).
 
-While the template may feel overwhelming, a complete understanding isn't required to start developing your pipeline. Let's look at the important places that we need to get touch during pipeline development.
+While the template may feel overwhelming, a complete understanding isn't required to start developing your pipeline. Let's look at the important places that we need to touch during pipeline development.
 
 #### Workflows, subworkflows, and modules
 
@@ -449,7 +441,7 @@ Modules from nf-core follow a similar same structure and contain a small number 
 
 #### Configuration files
 
-The nf-core pipeline template utilizes Nextflows flexible customization options and has a series of configuration files throughout the template.
+The nf-core pipeline template utilizes Nextflow's flexible customization options and has a series of configuration files throughout the template.
 
 In the template, the `nextflow.config` file is a central configuration file and is used to set default values for parameters and other configuration options. The majority of these configuration options are applied by default while others (e.g., software dependency profiles) are included as optional profiles.
 
@@ -478,8 +470,8 @@ Congratulations! You have now created a template pipeline. In the next step, we 
 
 Above, we said that the `test` profile comes with small test files that are stored in the nf-core. Let's check what type of files we are dealing with to plan our expansion. We can inspect any channel content by using the `dump` operator: 
 
-```groovy title="firstpipeline.nf" linenums="27"
-ch_samplesheet.dump(pretty: true)
+```groovy title="workflows/myfirstpipeline.nf" linenums="27"
+ch_samplesheet.dump()
 ```
 
 We can then run the pipeline with the additional argument `-dump-channels`. This will run `dump()`. It is great for development, because a normal user will not add this flag and thus not see the channel content:
@@ -487,49 +479,37 @@ We can then run the pipeline with the additional argument `-dump-channels`. This
 nextflow run . -profile docker,test --outdir results -dump-channels
 ```
 
-The output should look like this: We see that we have FastQ files as input and each pair of files is accompanied by some metadata: the `id` and whether or not it is single end:
+The output should look like this: We see that we have FastQ files as input and each set of files is accompanied by some metadata: the `id` and whether or not they are single end:
 
 ```console title="Output"
-Launching `./main.nf` [evil_mestorf] DSL2 - revision: 11a3012ba7
+Launching `./main.nf` [focused_laplace] DSL2 - revision: a633aedb88
 
-...
+Input/output options
+  input                     : https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv
+  outdir                    : results
+
+Institutional config options
+  config_profile_name       : Test profile
+  config_profile_description: Minimal test dataset to check pipeline function
+
+Core Nextflow options
+  runName                   : focused_laplace
+  containerEngine           : docker
+  launchDir                 : /workspace/gitpod/hello-nextflow/hello-nf-core/myorg-myfirstpipeline
+  workDir                   : /workspace/gitpod/hello-nextflow/hello-nf-core/myorg-myfirstpipeline/work
+  projectDir                : /workspace/gitpod/hello-nextflow/hello-nf-core/myorg-myfirstpipeline
+  userName                  : gitpod
+  profile                   : docker,test
+  configFiles               : 
 
 !! Only displaying parameters that differ from the pipeline defaults !!
 ------------------------------------------------------
 executor >  local (1)
-
-[50/de1541] NFCORETRAINING_FIRSTPIPELINE:FIRSTPIPELINE:MULTIQC [100%] 1 of 1 ✔
-
-[DUMP] [
-    {
-        "id": "SAMPLE1_PE",
-        "single_end": "false"
-    },
-    [
-        "https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/illumina/amplicon/sample1_R1.fastq.gz",
-        "https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/illumina/amplicon/sample1_R2.fastq.gz"
-    ]
-]
-[DUMP] [
-    {
-        "id": "SAMPLE2_PE",
-        "single_end": "false"
-    },
-    [
-        "https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/illumina/amplicon/sample2_R1.fastq.gz",
-        "https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/illumina/amplicon/sample2_R2.fastq.gz"
-    ]
-]
-[DUMP] [
-    {
-        "id": "SAMPLE3_SE",
-        "single_end": "true"
-    },
-    [
-        "https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/illumina/amplicon/sample1_R1.fastq.gz",
-        "https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/illumina/amplicon/sample2_R1.fastq.gz"
-    ]
-]
+[36/084021] process > MYORG_MYFIRSTPIPELINE:MYFIRSTPIPELINE:MULTIQC [100%] 1 of 1 ✔
+[DUMP] [['id':'SAMPLE1_PE', 'single_end':false], [/nf-core/test-datasets/viralrecon/illumina/amplicon/sample1_R1.fastq.gz, /nf-core/test-datasets/viralrecon/illumina/amplicon/sample1_R2.fastq.gz]]
+[DUMP] [['id':'SAMPLE2_PE', 'single_end':false], [/nf-core/test-datasets/viralrecon/illumina/amplicon/sample2_R1.fastq.gz, /nf-core/test-datasets/viralrecon/illumina/amplicon/sample2_R2.fastq.gz]]
+[DUMP] [['id':'SAMPLE3_SE', 'single_end':true], [/nf-core/test-datasets/viralrecon/illumina/amplicon/sample1_R1.fastq.gz, /nf-core/test-datasets/viralrecon/illumina/amplicon/sample2_R1.fastq.gz]]
+-[myorg/myfirstpipeline] Pipeline completed successfully-
 ```
 
 ### Takeaway
@@ -556,7 +536,7 @@ nf-core modules list remote
 
 This command lists all currently available modules, > 1300. An easier way to find them, is to go to the nf-core website and visit the modules subpage [https://nf-co.re/modules](https://nf-co.re/modules). Here you can search for modules by name or tags, find documentation for each module and which nf-core pipeline uses it:
 
-<!-- TODO add screen grab -->
+![nf-core/modules](img/nf-core-modules.png)
 
 ### Install an nf-core module
 
@@ -567,7 +547,7 @@ Now let's add another tool to the pipeline.
 In your pipeline, you will add a new step that will take FASTQ files from the sample sheet as inputs and will produce trimmed fastq files that can be used as an input for other tools and version information about the seqtk tools to mix into the inputs for the MultiQC process.
 
 <!-- <figure class="excalidraw">
---8<-- "docs/nf_template/img/pipeline.excalidraw.svg"
+    --8<-- "docs/nf_template/img/pipeline.excalidraw.svg"
 </figure> -->
 
 The `nf-core modules install` command can be used to install the `seqtk/trim` module directly from the nf-core repository:
@@ -586,7 +566,7 @@ You can follow the prompts to find and install the module you are interested in:
 ? Tool name: seqtk/trim
 ```
 
-Once selected, the tooling will install the module in the `modules/nf-core/` folder and suggest code that you can add to your main workflow file (`workflows/mypipeline.nf`).
+Once selected, the tooling will install the module in the `modules/nf-core/` folder and suggest code that you can add to your main workflow file (`workflows/myfirstpipeline.nf`).
 
 ```console
 INFO     Installing 'seqtk/trim'
@@ -618,10 +598,9 @@ When you open the `modules.json`, you will see an entry for each module that is 
 
 Although the module has been installed in your local pipeline repository, it is not yet added to your pipeline.
 
-The suggested `include` statement needs to be added to your `workflows/mypipeline.nf` file and the process call (with inputs) needs to be added to the workflow block.
+The suggested `include` statement needs to be added to your `workflows/myfirstpipeline.nf` file and the process call (with inputs) needs to be added to the workflow block.
 
-```groovy title="workflows/firstpipeline.nf" linenums="6"
-include { FASTQC                 } from '../modules/nf-core/fastqc/main'
+```groovy title="workflows/myfirstpipeline.nf" linenums="6"
 include { SEQTK_TRIM             } from '../modules/nf-core/seqtk/trim/main' 
 include { MULTIQC                } from '../modules/nf-core/multiqc/main'
 ```
@@ -630,7 +609,7 @@ To add the `SEQTK_TRIM` module to your workflow you will need to check what inpu
 
 You can view the input channels for the module by opening the `./modules/nf-core/seqtk/trim/main.nf` file.
 
-```groovy title="/modules/nf-core/seqtk/trim/main.nf" linenums="11"
+```groovy title="modules/nf-core/seqtk/trim/main.nf" linenums="11"
 input:
 tuple val(meta), path(reads)
 ```
@@ -689,7 +668,7 @@ Using this module information you can work out what inputs are required for the 
 
 As only one input channel required, and it already exists, it can be added to your `firstpipeline.nf` file without any additional channel creation or modifications.
 
-```groovy title="workflows/myfirstpipeline.nf" linenums="30"
+```groovy title="workflows/myfirstpipeline.nf" linenums="29"
 //
 // MODULE: Run SEQTK_TRIM
 //
@@ -705,7 +684,7 @@ nextflow run . -profile docker,test --outdir results
 ```
 
 ```console title="Output"
-Launching `./main.nf` [grave_lagrange] DSL2 - revision: 11a3012ba7
+Launching `./main.nf` [drunk_waddington] DSL2 - revision: a633aedb88
 
 Input/output options
   input                     : https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv
@@ -716,11 +695,11 @@ Institutional config options
   config_profile_description: Minimal test dataset to check pipeline function
 
 Core Nextflow options
-  runName                   : grave_lagrange
+  runName                   : drunk_waddington
   containerEngine           : docker
-  launchDir                 : /workspace/gitpod/hello-nextflow/hello-nf-core-template/nf-core-training-firstpipeline
-  workDir                   : /workspace/gitpod/hello-nextflow/hello-nf-core-template/nf-core-training-firstpipeline/work
-  projectDir                : /workspace/gitpod/hello-nextflow/hello-nf-core-template/nf-core-training-firstpipeline
+  launchDir                 : /workspace/gitpod/hello-nextflow/hello-nf-core/myorg-myfirstpipeline
+  workDir                   : /workspace/gitpod/hello-nextflow/hello-nf-core/myorg-myfirstpipeline/work
+  projectDir                : /workspace/gitpod/hello-nextflow/hello-nf-core/myorg-myfirstpipeline
   userName                  : gitpod
   profile                   : docker,test
   configFiles               : 
@@ -728,9 +707,9 @@ Core Nextflow options
 !! Only displaying parameters that differ from the pipeline defaults !!
 ------------------------------------------------------
 executor >  local (4)
-[0d/725202] process > NFCORETRAINING_FIRSTPIPELINE:FIRSTPIPELINE:SEQTK_TRIM (SAMPLE3_SE) [100%] 3 of 3 ✔
-[0a/977475] process > NFCORETRAINING_FIRSTPIPELINE:FIRSTPIPELINE:MULTIQC                 [100%] 1 of 1 ✔
--[nf-core-training/firstpipeline] Pipeline completed successfully-
+[74/9b2e7b] process > MYORG_MYFIRSTPIPELINE:MYFIRSTPIPELINE:SEQTK_TRIM (SAMPLE2_PE) [100%] 3 of 3 ✔
+[ea/5ca001] process > MYORG_MYFIRSTPIPELINE:MYFIRSTPIPELINE:MULTIQC                 [100%] 1 of 1 ✔
+-[myorg/myfirstpipeline] Pipeline completed successfully-
 ```
 
 ### Inspect results folder
@@ -744,11 +723,26 @@ results
 │   ├── multiqc_data
 │   └── multiqc_report.html
 ├── pipeline_info
-│   ├── execution_report_2024-11-14_10-31-26.html
-│   ├── execution_timeline_2024-11-14_10-31-26.html
-│   ├── execution_trace_2024-11-14_10-31-26.txt
-│   ├── params_2024-11-14_10-31-27.json
-│   ├── pipeline_dag_2024-11-14_10-31-26.html
+│   ├── execution_report_2024-11-14_12-07-43.html
+│   ├── execution_report_2024-11-14_12-12-42.html
+│   ├── execution_report_2024-11-14_12-13-58.html
+│   ├── execution_report_2024-11-14_12-28-59.html
+│   ├── execution_timeline_2024-11-14_12-07-43.html
+│   ├── execution_timeline_2024-11-14_12-12-42.html
+│   ├── execution_timeline_2024-11-14_12-13-58.html
+│   ├── execution_timeline_2024-11-14_12-28-59.html
+│   ├── execution_trace_2024-11-14_12-07-43.txt
+│   ├── execution_trace_2024-11-14_12-12-42.txt
+│   ├── execution_trace_2024-11-14_12-13-58.txt
+│   ├── execution_trace_2024-11-14_12-28-59.txt
+│   ├── params_2024-11-14_12-07-44.json
+│   ├── params_2024-11-14_12-12-43.json
+│   ├── params_2024-11-14_12-13-59.json
+│   ├── params_2024-11-14_12-29-00.json
+│   ├── pipeline_dag_2024-11-14_12-07-43.html
+│   ├── pipeline_dag_2024-11-14_12-12-42.html
+│   ├── pipeline_dag_2024-11-14_12-13-58.html
+│   ├── pipeline_dag_2024-11-14_12-28-59.html
 │   └── pipeline_software_mqc_versions.yml
 └── seqtk
     ├── SAMPLE1_PE_sample1_R1.fastq.gz
@@ -765,7 +759,7 @@ The resulting files of `multiqc` and `seqtk` are published respective subdirecto
 
 As with the inputs, you can view the outputs for the module by opening the `/modules/nf-core/seqtk/trim/main.nf` file and viewing the module metadata.
 
-```groovy title="/modules/nf-core/seqtk/trim/main.nf" linenums="13"
+```groovy title="modules/nf-core/seqtk/trim/main.nf" linenums="13"
 output:
 tuple val(meta), path("*.fastq.gz"), emit: reads
 path "versions.yml"                , emit: versions
@@ -775,13 +769,13 @@ To help with organization and readability it is beneficial to create named outpu
 
 For `SEQTK_TRIM`, the `reads` output could be put into a channel named `ch_trimmed`.
 
-```groovy title="workflows/mypipeline.nf"
+```groovy title="workflows/myfirstpipeline.nf" linenums="35"
 ch_trimmed  = SEQTK_TRIM.out.reads
 ```
 
 Similarly, it is beneficial immediately mix the versions of tools into the `ch_versions` channel so they can be used as an input for the `MULTIQC` process.
 
-```groovy title="workflows/mypipeline.nf"
+```groovy title="workflows/myfirstpipeline.nf" linenums="35"
 ch_versions = ch_versions.mix(SEQTK_TRIM.out.versions.first())
 ```
 
@@ -810,15 +804,15 @@ Run the pipeline again and check if the new parameter is applied:
 ```bash
 nextflow run . -profile docker,test --outdir results
 
-[fb/8a18ce] process > NFCORETRAINING_FIRSTPIPELINE:FIRSTPIPELINE:SEQTK_TRIM (SAMPLE3_SE) [100%] 3 of 3 ✔
-[e4/039743] process > NFCORETRAINING_FIRSTPIPELINE:FIRSTPIPELINE:MULTIQC                 [100%] 1 of 1 ✔
+[66/c12aa9] process > MYORG_MYFIRSTPIPELINE:MYFIRSTPIPELINE:SEQTK_TRIM (SAMPLE1_PE) [100%] 3 of 3 ✔
+[27/397ccf] process > MYORG_MYFIRSTPIPELINE:MYFIRSTPIPELINE:MULTIQC                 [100%] 1 of 1 ✔
 ```
 
-Copy the hash, that you see in your console output (here `fb/8a18ce`, it is different for each run). Use tab-completion to expand the complete hash.
+Copy the hash, that you see in your console output (here `66/c12aa9`, it is different for _each_ run). Use tab-completion to expand the complete hash.
 In this folder you will find various log files. The `.command.sh` file contains the resolved command:
 
 ```bash
-less work/fb/8a18cedc5127f9a2c26eb6579c6887/.command.sh
+less work/66/c12aa9/.command.sh
 ```
 
 We can see, that the parameter `-b 5`, that we set in the `modules.config` is applied to the task:
@@ -831,17 +825,17 @@ set -u # Treat unset variables and parameters as an error
 set -o pipefail # Returns the status of the last command to exit with a non-zero status or zero if all successfully execute
 set -C # No clobber - prevent output redirection from overwriting files.
 
-printf "%s\n" sample1_R1.fastq.gz sample2_R1.fastq.gz | while read f;
+printf "%s\n" sample1_R1.fastq.gz sample1_R2.fastq.gz | while read f;
 do
     seqtk \
         trimfq \
         -b 5 \
         $f \
-        | gzip --no-name > SAMPLE3_SE_$(basename $f)
+        | gzip --no-name > SAMPLE1_PE_$(basename $f)
 done
 
 cat <<-END_VERSIONS > versions.yml
-"NFCORETRAINING_FIRSTPIPELINE:FIRSTPIPELINE:SEQTK_TRIM":
+"MYORG_MYFIRSTPIPELINE:MYFIRSTPIPELINE:SEQTK_TRIM":
     seqtk: $(echo $(seqtk 2>&1) | sed 's/^.*Version: //; s/ .*$//')
 END_VERSIONS
 ```
@@ -874,7 +868,7 @@ Parameter names should be unique and easily identifiable.
 
 We can a new parameter `skip_trim` to your `nextflow.config` file and set it to `false`.
 
-```groovy title="nextflow.config" linenums="21"
+```groovy title="nextflow.config" linenums="16"
 // Trimming
 skip_trim                   = false
 ```
@@ -885,7 +879,7 @@ Here, an `if` statement that is depended on the `skip_trim` parameter can be use
 
 Thus, if the `skip_trim` parameter is **not** `true`, the `SEQTK_TRIM` will be be executed.
 
-```groovy title="workflows/mypipeline.nf" linenums="37"
+```groovy title="workflows/myfirstpipeline.nf" linenums="29"
 //
 // MODULE: Run SEQTK_TRIM
 //
@@ -903,9 +897,10 @@ Now your if statement has been added to your main workflow file and has a defaul
 We can now run the pipeline with the new `skip_trim` parameter to check it is working:
 
 ```console
-cd /workspace/gitpod/nf-develop/
-nextflow run myorg-myfirstpipeline -profile test,docker --outdir results --skip_trim
+nextflow run . -profile test,docker --outdir results --skip_trim
 ```
+
+You should see that the `SEQTK_TRIM` process has been skipped in your execution:
 
 ```console title="Output"
 !! Only displaying parameters that differ from the pipeline defaults !!
@@ -914,12 +909,11 @@ WARN: The following invalid input values have been detected:
 
 * --skip_trim: true
 
-executor >  local (1)
-[fe/cd373d] process > NFCORETRAINING_FIRSTPIPELINE:FIRSTPIPELINE:MULTIQC [100%] 1 of 1 ✔
--[nf-core-training/firstpipeline] Pipeline completed successfully-
-```
 
-You should see that the `SEQTK_TRIM` process has been skipped in your execution.
+executor >  local (1)
+[7b/8b60a0] process > MYORG_MYFIRSTPIPELINE:MYFIRSTPIPELINE:MULTIQC [100%] 1 of 1 ✔
+-[myorg/myfirstpipeline] Pipeline completed successfully-
+```
 
 ### Validate input parameters
 
@@ -955,7 +949,7 @@ Using the web builder you can add add details about your new parameters.
 
 The parameters that you have added to your pipeline will be added to the bottom of the `nf-core schema build` file. Some information about these parameters will be automatically filled based on the default value from your `nextflow.config`. You will be able to categorize your new parameters into a group, add icons, and add descriptions for each.
 
-![Pipeline parameters](img/schemabuild.png)
+![Pipeline parameters](img/pipeline_schema.png)
 
 !!!note
 
@@ -966,8 +960,14 @@ Once you have made your edits you can click `Finished` and all changes will be a
 If you rerun the previous command, the warning should disappear:
 
 ```console
-cd /workspace/gitpod/nf-develop/
-nextflow run myorg-myfirstpipeline -profile test,docker --outdir results --skip_trim
+nextflow run . -profile test,docker --outdir results --skip_trim
+
+
+!! Only displaying parameters that differ from the pipeline defaults !!
+------------------------------------------------------
+executor >  local (1)
+[6c/c78d0c] process > MYORG_MYFIRSTPIPELINE:MYFIRSTPIPELINE:MULTIQC [100%] 1 of 1 ✔
+-[myorg/myfirstpipeline] Pipeline completed successfully-
 ```
 
 ### Takeaway
@@ -986,7 +986,7 @@ Datasets often have additional information that is relevant for the analysis, su
 
 nf-core tracks this type of information in `meta` maps. These are `key`-`value` pairs that are passed into modules together with the files. We already saw this briefly, when inspecting the `input` for `seqtk`:
 
-```groovy title="/modules/nf-core/seqtk/trim/main.nf" linenums="11"
+```groovy title="modules/nf-core/seqtk/trim/main.nf" linenums="11"
 input:
 tuple val(meta), path(reads)
 ```
@@ -994,10 +994,10 @@ tuple val(meta), path(reads)
 If we run the pipeline again with `-dump-channels`, we can take a look at the current content of the `meta` maps:
 
 ```console
-    {
+    [
         "id": "SAMPLE1_PE",
         "single_end": "false"
-    },
+     ] ,
 ```
 
 You can add any field, that you like to the `meta` map. By default, nf-core modules expect an `id` field. 
@@ -1080,7 +1080,7 @@ By adding a new entry into the json schema, we can attach additional meta inform
 
 Let's add some new meta information, like the `machineid` as an optional column:
 
-```console title="schema_input.json"
+```json title="assets/schema_input.json"
 "properties": {
     "sample": {
         "type": "string",
@@ -1120,39 +1120,23 @@ nextflow run . -profile docker,test --outdir results -dump-channels
 The meta map now has a new key `machineid`, that is empty because we did not specify a value yet:
 
 ```console title="Output"
-[DUMP] [
-    {
-        "id": "SAMPLE1_PE",
-        "machineid": [
-            
-        ],
-        "single_end": "false"
-    },
-    [
-        "https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/illumina/amplicon/sample1_R1.fastq.gz",
-        "https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/illumina/amplicon/sample1_R2.fastq.gz"
-    ]
+[DUMP] [['id':'SAMPLE1_PE', 'machineid':[], 'single_end':false], [/nf-core/test-datasets/viralrecon/illumina/amplicon/sample1_R1.fastq.gz, /nf-core/test-datasets/viralrecon/illumina/amplicon/sample1_R2.fastq.gz]]
+[DUMP] [['id':'SAMPLE2_PE', 'machineid':[], 'single_end':false], [/nf-core/test-datasets/viralrecon/illumina/amplicon/sample2_R1.fastq.gz, /nf-core/test-datasets/viralrecon/illumina/amplicon/sample2_R2.fastq.gz]]
+[DUMP] [['id':'SAMPLE3_SE', 'machineid':[], 'single_end':true], [/nf-core/test-datasets/viralrecon/illumina/amplicon/sample1_R1.fastq.gz, /nf-core/test-datasets/viralrecon/illumina/amplicon/sample2_R1.fastq.gz]]
 ```
 
 We have also prepared a new samplesheet, that has the `machineid` column. You can overwrite the existing input with this command:
 
 ```console
-nextflow run . -profile docker,test --outdir results --input -dump-channels
+nextflow run . -profile docker,test --outdir results -dump-channels --input ../data/machineid_samplesheet.csv 
 ```
 
 This populates the `machineid` and we could access it in the pipeline:
 
 ```console
-[DUMP] [
-    {
-        "id": "SAMPLE3_SE",
-        "machineid": "myfavorite_machine",
-        "single_end": "true"
-    },
-    [
-        "https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/illumina/amplicon/sample1_R1.fastq.gz",
-        "https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/illumina/amplicon/sample2_R1.fastq.gz"
-    ]
+[DUMP] [['id':'SAMPLE1_PE', 'machineid':'myfavorite_machine', 'single_end':false], [/nf-core/test-datasets/viralrecon/illumina/amplicon/sample1_R1.fastq.gz, /nf-core/test-datasets/viralrecon/illumina/amplicon/sample1_R2.fastq.gz]]
+[DUMP] [['id':'SAMPLE2_PE', 'machineid':'worst_machine', 'single_end':false], [/nf-core/test-datasets/viralrecon/illumina/amplicon/sample2_R1.fastq.gz, /nf-core/test-datasets/viralrecon/illumina/amplicon/sample2_R2.fastq.gz]]
+[DUMP] [['id':'SAMPLE3_SE', 'machineid':'myfavorite_machine', 'single_end':true], [/nf-core/test-datasets/viralrecon/illumina/amplicon/sample1_R1.fastq.gz, /nf-core/test-datasets/viralrecon/illumina/amplicon/sample2_R1.fastq.gz]]
 ```
 
 ### Use the new meta key in the pipeline
@@ -1210,19 +1194,19 @@ You will notice, that it still calls `samtools` and the input are `bam`.
 
 From our sample sheet, we know we have fastq files instead, so let's change the input definition accordingly:
 
-```groovy title="fastqe.nf" linenums="38"
+```groovy title="modules/local/fastqe.nf" linenums="38"
 tuple val(meta), path(reads)
 ```
 
 The output of this tool is a tsv file with the emoji annotation, let's adapt the output as well:
 
-```groovy title="fastqe.nf" linenums="42"
+```groovy title="modules/local/fastqe.nf" linenums="42"
 tuple val(meta), path("*.tsv"), emit: tsv
 ```
 
 The script section still calls `samtools`. Let's change this to the proper call of the tool:
 
-```groovy title="fastqe.nf" linenums="62"
+```groovy title="modules/local/fastqe.nf" linenums="62"
     fastqe \\
         $args \\
         $reads \\
@@ -1231,22 +1215,19 @@ The script section still calls `samtools`. Let's change this to the proper call 
 
 And at last, we need to adapt the version retrieval. This tool does not have a version command, so we will add the release number manualy:
 
-```groovy title="fastqe.nf" linenums="52"
+```groovy title="modules/local/fastqe.nf" linenums="52"
     def VERSION = '0.3.3'
 ```
 
 and write it to a file in the script section:
 
-```groovy title="fastqe.nf" linenums="68"
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
+```groovy title="modules/local/fastqe.nf" linenums="70"
         fastqe: $VERSION
-    END_VERSIONS
 ```
 
 We will not cover `stubs` in this training, but look at them at a later point. They are not necessary to run a module, so let's remove them for now and delete:
 
-```groovy title="fastqe.nf" linenums="74"
+```groovy title="modules/local/fastqe.nf" linenums="74"
 stub:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
@@ -1268,13 +1249,13 @@ stub:
 
 The module is now ready in your `modules/local` folder, but not yet included into the pipeline. Similar to `seqtk/trim` we need to add it to `workflows/myfirstpipeline.nf`:
 
-```groovy title="myfirstpipeline.nf" linenums="6"
+```groovy title="workflows/myfirstpipeline.nf" linenums="6"
     include { FASTQE                 } from '../modules/local/fastqe'
 ```
 
 and call it on our input data:
 
-```groovy title="myfirstpipeline.nf" linenums="42"
+```groovy title="workflows/myfirstpipeline.nf" linenums="41"
     FASTQE(ch_samplesheet)
     ch_versions = ch_versions.mix(FASTQE.out.versions.first())
 ```
@@ -1285,7 +1266,7 @@ Let's run the pipeline again:
 nextflow run . -profile docker,test --outdir results
 ```
 
-In the results folder, you should see a new subdirectory `fastqe/`, with the mean read qualities:
+In the results folder, you should now see a new subdirectory `fastqe/`, with the mean read qualities:
 
 ```console title="SAMPLE1_PE.tsv"
 Filename	Statistic	Qualities
@@ -1299,7 +1280,7 @@ You know how to add a new module that is not yet available in nf-core.
 
 !!! note "New module contributions are always welcome!"
 
-    If you have a module that you would like to contribute back to the commmunity, reach out on the nf-core slack or just open a pull request to the modules repository.
+    If you have a module that you would like to contribute back to the commmunity, reach out on the nf-core slack or open a pull request to the modules repository.
 
 ---
 
