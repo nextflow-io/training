@@ -242,11 +242,12 @@ Above, we said that the `test` profile comes with small test files that are stor
 ch_samplesheet.dump(pretty: true)
 ```
 
+We can then run the pipeline with the additional argument `-dump-channels`. This will run `dump()`. It is great for development, because a normal user will not add this flag and thus not see the channel content:
 ```bash
 nextflow run . -profile docker,test --outdir results -dump-channels
 ```
 
-You notice we added `-dump-channels` to the run command. This will run `dump()`. It is great for development, because a normal user will not add this flag and thus not see the channel content. 
+The output should look like this: We see that we have FastQ files as input and each pair of files is accompanied by some metadata: the `id` and whether or not it is single end:
 
 ```console title="Output"
 Launching `./main.nf` [evil_mestorf] DSL2 - revision: 11a3012ba7
@@ -291,10 +292,6 @@ executor >  local (1)
 ]
 ```
 
-We see that we have FastQ files as input and each pair of files is accompanied by some metadata: the `id` and whether or not it is single end.
-
-<!--TODO The single end data is not actually single end :facepalm: -->
-
 ### Takeaway
 
 You have now created a template pipeline, and learned about important template files
@@ -321,7 +318,6 @@ This command lists all currently available modules, > 1300. An easier way to fin
 
 <!-- TODO add screen grab -->
 
-
 ### Install an nf-core module
 
 Now let's add another tool to the pipeline.
@@ -330,8 +326,7 @@ Now let's add another tool to the pipeline.
 
 In your pipeline, you will add a new step that will take FASTQ files from the sample sheet as inputs and will produce trimmed fastq files that can be used as an input for other tools and version information about the seqtk tools to mix into the inputs for the MultiQC process.
 
-<!-- TODO this file is missing
-<figure class="excalidraw">
+<!-- <figure class="excalidraw">
 --8<-- "docs/nf_template/img/pipeline.excalidraw.svg"
 </figure> -->
 
@@ -343,7 +338,7 @@ nf-core modules install
 
 !!!warning
 
-    You need to be in the my-myfirstpipeline directory when executing `nf-core modules install`
+    You need to be in the myorg-myfirstpipeline directory when executing `nf-core modules install`
 
 You can follow the prompts to find and install the module you are interested in:
 
@@ -405,6 +400,8 @@ Each nf-core module also has a `meta.yml` file which describes the inputs and ou
 ```console
 nf-core modules info seqtk/trim
 ```
+
+It outputs a table with all defined inputs and outputs of the module: 
 
 ```console title="Output"
 
@@ -498,7 +495,31 @@ executor >  local (4)
 
 ### Inspect results folder
 
-<!-- TODO Add results folder inspection -->
+nf-core by default, publishes the output of each process into the `<outdir>/<TOOL>`. After running the previous command, you 
+should have a `results` folder that looks like this:
+
+```console
+results
+├── multiqc
+│   ├── multiqc_data
+│   └── multiqc_report.html
+├── pipeline_info
+│   ├── execution_report_2024-11-14_10-31-26.html
+│   ├── execution_timeline_2024-11-14_10-31-26.html
+│   ├── execution_trace_2024-11-14_10-31-26.txt
+│   ├── params_2024-11-14_10-31-27.json
+│   ├── pipeline_dag_2024-11-14_10-31-26.html
+│   └── pipeline_software_mqc_versions.yml
+└── seqtk
+    ├── SAMPLE1_PE_sample1_R1.fastq.gz
+    ├── SAMPLE1_PE_sample1_R2.fastq.gz
+    ├── SAMPLE2_PE_sample2_R1.fastq.gz
+    ├── SAMPLE2_PE_sample2_R2.fastq.gz
+    ├── SAMPLE3_SE_sample1_R1.fastq.gz
+    └── SAMPLE3_SE_sample2_R1.fastq.gz
+```
+
+The resulting files of `multiqc` and `seqtk` are published respective subdirectories. In addition, `nf-core` pipelines by default have all sorts of reporting switched on. These files are stored in the `pipeline_info` subdirectory and time-stamped so that multiple runs don't overwrite them.
 
 ### Handle modules output
 
@@ -560,6 +581,8 @@ In this folder you will find various log files. The `.command.sh` file contains 
 less work/fb/8a18cedc5127f9a2c26eb6579c6887/.command.sh
 ```
 
+We can see, that the parameter `-b 5`, that we set in the `modules.config` is applied to the task:
+
 ```console title="Output"
 #!/usr/bin/env bash
 
@@ -582,8 +605,6 @@ cat <<-END_VERSIONS > versions.yml
     seqtk: $(echo $(seqtk 2>&1) | sed 's/^.*Version: //; s/ .*$//')
 END_VERSIONS
 ```
-
-We can see, that the parameter `-b 5`, that we set in the `modules.config` is applied to the task.
 
 ### Takeaway
 
@@ -715,21 +736,43 @@ You have added a new parameter to the pipeline.
 
 ### What's next?
 
-In the next step we will start 
+In the next step we will take a look at how we track additional information to an input file.
 
 ---
 
 ## Meta maps 
 
-This sets the key name as `id` and the value that is in the `sample` column, for example `SAMPLE1_PE`:
+Datasets often have additional information that is relevant for the analysis, such as a sample name, information about sequencing protocols, or other conditions that are needed in the pipeline to process certain samples together, determine their output name, or adjust parameters.
 
-```console title=meta
-[id: SAMPLE1_PE] 
+nf-core tracks this type of information in `meta` maps. These are `key`-`value` pairs that are passed into modules together with the files. We already saw this briefly, when inspecting the `input` for `seqtk`:
+
+```groovy title="/modules/nf-core/seqtk/trim/main.nf" linenums="11"
+input:
+tuple val(meta), path(reads)
 ```
 
-## Simple Samplesheet adaptations
+If we run the pipeline again with `-dump-channels`, we can take a look at the current content of the `meta` maps:
 
-<!-- TODO : this feels a bit orphaned we are not really doing anything with the new information in the pipeline -->
+```console
+    {
+        "id": "SAMPLE1_PE",
+        "single_end": "false"
+    },
+```
+
+You can add any field, that you like to the `meta` map. By default, nf-core modules expect an `id` field. 
+
+### Takeaway
+
+You know that a `meta` map is used to pass along additional information for a sample. 
+
+### What's next?
+
+In the next step we will take a look how we can add a new key to the `meta` map using the samplesheet.
+
+---
+
+## Simple Samplesheet adaptations
 
 nf-core pipelines typically use samplesheets as inputs to the pipelines. This allows us to:
 
@@ -834,6 +877,8 @@ We can now run our normal tests with the old samplesheet. Let's add `-dump-chann
 nextflow run . -profile docker,test --outdir results -dump-channels
 ```
 
+The meta map now has a new key `machineid`, that is empty because we did not specify a value yet:
+
 ```console title="Output"
 [DUMP] [
     {
@@ -855,6 +900,8 @@ We have also prepared a new samplesheet, that has the `machineid` column. You ca
 nextflow run . -profile docker,test --outdir results --input -dump-channels
 ```
 
+This populates the `machineid` and we could access it in the pipeline:
+
 ```console
 [DUMP] [
     {
@@ -868,16 +915,29 @@ nextflow run . -profile docker,test --outdir results --input -dump-channels
     ]
 ```
 
-We can now access the meta information in the pipeline
+### Use the new meta key in the pipeline
 
+<!-- TODO No good idea yet on what to do here -->
 
-## Create a custom module for your pipeline (Extra content)
+### Takeaway
+
+You know how to adapt the samplesheet to add new meta information to your files. 
+
+### What's next?
+
+In the next step we will add a module that is not yet in nf-core.
+
+---
+
+## Create a custom module for your pipeline
 
 nf-core offers a comprehensive set of modules that have been created and curated by the community. However, as a developer, you may be interested in bespoke pieces of software that are not apart of the nf-core repository or customizing a module that already exists.
 
 In this instance, we will write a local module for the QC Tool [FastQE](https://fastqe.com/), which computes stats for FASTQ files and print those stats as emoji.
 
 This section should feel familiar to the `hello_modules` section.
+
+### Create the module
 
 Start by using the nf-core tooling to create a sceleton local module. It will prompt you to type in the tool name `fastqe`, for the remaining fields press `enter` to accpet the default: 
 
@@ -892,7 +952,7 @@ Name of tool/subtool: fastqe
 INFO     Using Bioconda package: 'bioconda::fastqe=0.3.3'                                                                                        
 INFO     Using Docker container: 'biocontainers/fastqe:0.3.3--pyhdfd78af_0'                                                                      
 INFO     Using Singularity container: 'https://depot.galaxyproject.org/singularity/fastqe:0.3.3--pyhdfd78af_0'                                   
-GitHub Username: (@FriederikeHanssen): 
+GitHub Username: (@<your-name>): 
 INFO     Provide an appropriate resource label for the process, taken from the nf-core pipeline template.                                        
          For example: process_single, process_low, process_medium, process_high, process_long, process_high_memory                               
 ? Process resource label: process_single
@@ -944,19 +1004,68 @@ and write it to a file in the script section:
     END_VERSIONS
 ```
 
-<!--TODO stubs are not explained anywhere before :(  -->
+We will not cover `stubs` in this training, but look at them at a later point. They are not necessary to run a module, so let's remove them for now and delete:
 
-<!-- ## Patch a module (extra content) -->
+```groovy title="fastqe.nf" linenums="74"
+stub:
+    def args = task.ext.args ?: ''
+    def prefix = task.ext.prefix ?: "${meta.id}"
+    // TODO nf-core: A stub section should mimic the execution of the original module as best as possible
+    //               Have a look at the following examples:
+    //               Simple example: https://github.com/nf-core/modules/blob/818474a292b4860ae8ff88e149fbcda68814114d/modules/nf-core/bcftools/annotate/main.nf#L47-L63
+    //               Complex example: https://github.com/nf-core/modules/blob/818474a292b4860ae8ff88e149fbcda68814114d/modules/nf-core/bedtools/split/main.nf#L38-L54
+    """
+    touch ${prefix}.bam
+
+    cat <<-END_VERSIONS > versions.yml
+    "${task.process}":
+        fastqe: \$(samtools --version |& sed '1!d ; s/samtools //')
+    END_VERSIONS
+    """
+```
+
+### Include the module into the pipeline
+
+The module is now ready in your `modules/local` folder, but not yet included into the pipeline. Similar to `seqtk/trim` we need to add it to `workflows/myfirstpipeline.nf`:
+
+```groovy title="myfirstpipeline.nf" linenums="6"
+    include { FASTQE                 } from '../modules/local/fastqe'
+```
+
+and call it on our input data:
+
+```groovy title="myfirstpipeline.nf" linenums="42"
+    FASTQE(ch_samplesheet)
+    ch_versions = ch_versions.mix(FASTQE.out.versions.first())
+```
+
+Let's run the pipeline again:
+
+```console
+nextflow run . -profile docker,test --outdir results
+```
+
+In the results folder, you should see a new subdirectory `fastqe/`, with the mean read qualities:
+
+```console title="SAMPLE1_PE.tsv"
+Filename	Statistic	Qualities
+sample1_R1.fastq.gz	mean	😝 😝 😝 😝 😝 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😉 😉 😜 😜 😜 😉 😉 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😁 😉 😛 😜 😉 😉 😉 😉 😜 😜 😉 😉 😉 😉 😉 😁 😁 😁 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😜 😉 😉 😉 😉 😉 😜 😜 😜 😜 😜 😜 😜 😜 😜 😜 😜 😜 😜 😜 😛 😜 😜 😛 😛 😛 😚
+sample1_R2.fastq.gz	mean	😌 😌 😌 😝 😝 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😜 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😉 😜 😉 😉 😜 😜 😉 😜 😜 😜 😜 😜 😜 😜 😜 😜 😜 😜 😜 😛 😜 😜 😜 😛 😜 😜 😜 😜 😛 😜 😛 😛 😛 😛 😛 😛 😛 😛 😛 😛 😛 😛 😝 😛 😝 😝 😝 😝 😝 😝 😝 😝 😝 😝 😝 😝 😝 😝 😌 😌 😌 😌 😌 😌 😌 😌 😌 😌 😌 😌 😌 😌 😌 😌 😌 😌 😌 😋 😋 😋 😋 😋 😋 😋 😋 😀
+```
 
 ### Takeaway
 
-You know how to adapt the samplesheet with a new piece of meta information.
+You know how to add a new module that is not yet available in nf-core.
+
+!!! note "New module contributions are always welcome!"
+
+    If you have a module that you would like to contribute back to the commmunity, reach out on the nf-core slack or just open a pull request to the modules repository.
 
 ---
 
 ## Takeaway
 
-You know how to use the nf-core tooling to create a new pipeline, add a module to it, apply tool and pipeline parameters, and adapt the samplesheet. 
+You know how to use the nf-core tooling to create a new pipeline, add modulea to it, apply tool and pipeline parameters, and adapt the samplesheet. 
 
 ## What's next?
 
