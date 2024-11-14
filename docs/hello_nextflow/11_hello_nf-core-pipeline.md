@@ -26,7 +26,7 @@ nf-core --help
 
 Here we will focus on the tooling to assist pipeline developers, starting with the `nf-core pipelines create` command.
 
-The `nf-core pipelines create` command makes a new pipeline using the nf-core base template with a pipeline name, description, and author. It is the first and most important step for creating a pipeline that will integrate with the wider Nextflow ecosystem.
+The `nf-core pipelines create` command creates a new pipeline using the nf-core base template with a pipeline name, description, and author. It is the first and most important step for creating a pipeline that will integrate with the wider Nextflow ecosystem.
 
 ```bash
 nf-core pipelines create
@@ -129,6 +129,8 @@ The nf-core pipeline template is a working pipeline and comes pre-configured wit
     From nf-core tools 3.0 onwards many features can be removed during template creation. This is what we did when deselecting 
     features earlier.
 
+At the top you see, all parameters displayed that differ from the pipeline defaults. These were configured with the `test` profile.
+
 You can use the `test` profile to check if your pipeline is still working during your development cycle. 
 
 The default template `test` profile leverages small test files that are stored in the nf-core [test data GitHub repository](https://github.com/nf-core/test-datasets) as inputs for the pipeline.
@@ -141,25 +143,86 @@ Additionally, the template comes with profiles for the management of software de
 
 Additional test profiles can be created to test different parts of your pipeline.
 
-Congratulations! You have now created a template pipeline. In the next step, we will start adding new tools to it. 
-
-<!-- TODO By default, three git branches are created with the commands above.
-
-```bash
-git branch
-  TEMPLATE
-  dev
-* master
-``` 
-
-The role each of these branches have in pipeline development will be explained in subsequent sections. 
-
--->
-
 ### Template tour
 
-...
+The nf-core pipeline template comes packed with a lot of files and folders.
 
+Here, we selected a subset (what we did in step 5 during the template creation).
+
+While the template may feel overwhelming, a complete understanding isn't required to start developing your pipeline. Let's look at the important places that we need to get touch during pipeline development.
+
+#### Workflows, subworkflows, and modules
+
+The nf-core pipeline template has a `main.nf` script that calls `myfirstpipeline.nf` from the `workflows` folder. The `myfirstpipeline.nf` file inside the workflows folder is the central pipeline file that is used to bring everything else together.
+
+Instead of having one large monolithic pipeline script, it's broken up into smaller script components, namely, modules and subworkflows:
+
+-   **Modules:** Wrappers around a single process
+-   **Subworkflows:** Two or more modules that are packaged together as a mini workflow
+
+<figure class="excalidraw">
+--8<-- "docs/nf_develop/img/nested.excalidraw.svg"
+</figure>
+
+Within your pipeline repository, `modules` and `subworkflows` are stored within `local` and `nf-core` folders. The `nf-core` folder is for components that have come from the nf-core GitHub repository while the `local` folder is for components that have been developed independently:
+
+```console
+modules/
+├── local
+│   └── <toolname>.nf
+│   .
+│
+└── nf-core
+    ├── <tool name>
+    │   ├── environment.yml
+    │   ├── main.nf
+    │   ├── meta.yml
+    │   └── tests
+    │       ├── main.nf.test
+    │       ├── main.nf.test.snap
+    │       └── tags.yml
+    .
+```
+
+Modules from nf-core follow a similar same structure and contain a small number of additional files that are used for testing using [nf-test](https://www.nf-test.com/) and documentation about the module.
+
+!!!note
+
+    Some nf-core modules are also split into command specific directories:
+
+    ```console
+    │
+    └── <tool name>
+        └── <command>
+            ├── environment.yml
+            ├── main.nf
+            ├── meta.yml
+            └── tests
+                ├── main.nf.test
+                ├── main.nf.test.snap
+                └── tags.yml
+    ```
+
+!!!note
+
+    The nf-core template does not come with a local modules folder by default.
+
+#### Configuration files
+
+The nf-core pipeline template utilizes Nextflows flexible customization options and has a series of configuration files throughout the template.
+
+In the template, the `nextflow.config` file is a central configuration file and is used to set default values for parameters and other configuration options. The majority of these configuration options are applied by default while others (e.g., software dependency profiles) are included as optional profiles.
+
+There are several configuration files that are stored in the `conf` folder and are added to the configuration by default or optionally as profiles:
+
+-   `base.config`: A 'blank slate' config file, appropriate for general use on most high performance compute environments.
+-   `modules.config`: Additional module directives and arguments.
+-   `test.config`: A profile to run the pipeline with minimal test data.
+-   `test_full.config`: A profile to run the pipeline with a full-sized test dataset.
+
+#### `nextflow_schema.json`
+
+The `nextflow_schema.json` is a file used to store parameter related information including type, description and help text in a machine readable format. The schema is used for various purposes, including automated parameter validation, help text generation, and interactive parameter form rendering in UI interfaces.
 
 ### Takeaway
 
@@ -167,7 +230,7 @@ You have now created a template pipeline, and learned about important template f
 
 ### What's next?
 
-In the next step we will start changing the code and add new tools to the pipeline.
+Congratulations! You have now created a template pipeline. In the next step, we will start adding new tools to it. 
 
 ---
 
@@ -658,84 +721,11 @@ In the next step we will start
 
 ## Meta maps 
 
-## Create a custom module for your pipeline (Extra content)
+This sets the key name as `id` and the value that is in the `sample` column, for example `SAMPLE1_PE`:
 
-nf-core offers a comprehensive set of modules that have been created and curated by the community. However, as a developer, you may be interested in bespoke pieces of software that are not apart of the nf-core repository or customizing a module that already exists.
-
-In this instance, we will write a local module for the QC Tool [FastQE](https://fastqe.com/), which computes stats for FASTQ files and print those stats as emoji.
-
-This section should feel familiar to the `hello_modules` section.
-
-Start by using the nf-core tooling to create a sceleton local module. It will prompt you to type in the tool name `fastqe`, for the remaining fields press `enter` to accpet the default: 
-
-```console
-nf-core modules create
+```console title=meta
+[id: SAMPLE1_PE] 
 ```
-
-```console title="Output"
-INFO     Repository type: pipeline                                                                                                               
-INFO     Press enter to use default values (shown in brackets) or type your own responses. ctrl+click underlined text to open links.             
-Name of tool/subtool: fastqe
-INFO     Using Bioconda package: 'bioconda::fastqe=0.3.3'                                                                                        
-INFO     Using Docker container: 'biocontainers/fastqe:0.3.3--pyhdfd78af_0'                                                                      
-INFO     Using Singularity container: 'https://depot.galaxyproject.org/singularity/fastqe:0.3.3--pyhdfd78af_0'                                   
-GitHub Username: (@FriederikeHanssen): 
-INFO     Provide an appropriate resource label for the process, taken from the nf-core pipeline template.                                        
-         For example: process_single, process_low, process_medium, process_high, process_long, process_high_memory                               
-? Process resource label: process_single
-INFO     Where applicable all sample-specific information e.g. 'id', 'single_end', 'read_group' MUST be provided as an input via a Groovy Map    
-         called 'meta'. This information may not be required in some instances, for example indexing reference genome files.                     
-Will the module require a meta map of sample information? [y/n] (y): 
-INFO     Created component template: 'fastqe'                                                                                                    
-INFO     Created following files:                                                                                                                
-           modules/local/fastqe.nf     
-```
-
-This will create a new file in `modules/local/fastqe.nf` that already contains the container and conda definitions, the general structure of the process, and a number of TODO statements to guide you through the adaptation. 
-
-You will notice, that it still calls `samtools` and the input are `bam`.
-
-From our sample sheet, we know we have fastq files instead, so let's change the input definition accordingly:
-
-```groovy title="fastqe.nf" linenums="38"
-tuple val(meta), path(reads)
-```
-
-The output of this tool is a tsv file with the emoji annotation, let's adapt the output as well:
-
-```groovy title="fastqe.nf" linenums="42"
-tuple val(meta), path("*.tsv"), emit: tsv
-```
-
-The script section still calls `samtools`. Let's change this to the proper call of the tool:
-
-```groovy title="fastqe.nf" linenums="62"
-    fastqe \\
-        $args \\
-        $reads \\
-        --output ${prefix}.tsv
-```
-
-And at last, we need to adapt the version retrieval. This tool does not have a version command, so we will add the release number manualy:
-
-```groovy title="fastqe.nf" linenums="52"
-    def VERSION = '0.3.3'
-```
-
-and write it to a file in the script section:
-
-```groovy title="fastqe.nf" linenums="68"
-    cat <<-END_VERSIONS > versions.yml
-    "${task.process}":
-        fastqe: $VERSION
-    END_VERSIONS
-```
-
-<!--TODO stubs are not explained anywhere before :(  -->
-
-
-
-<!-- ## Patch a module (extra content) -->
 
 ## Simple Samplesheet adaptations
 
@@ -879,6 +869,84 @@ nextflow run . -profile docker,test --outdir results --input -dump-channels
 ```
 
 We can now access the meta information in the pipeline
+
+
+## Create a custom module for your pipeline (Extra content)
+
+nf-core offers a comprehensive set of modules that have been created and curated by the community. However, as a developer, you may be interested in bespoke pieces of software that are not apart of the nf-core repository or customizing a module that already exists.
+
+In this instance, we will write a local module for the QC Tool [FastQE](https://fastqe.com/), which computes stats for FASTQ files and print those stats as emoji.
+
+This section should feel familiar to the `hello_modules` section.
+
+Start by using the nf-core tooling to create a sceleton local module. It will prompt you to type in the tool name `fastqe`, for the remaining fields press `enter` to accpet the default: 
+
+```console
+nf-core modules create
+```
+
+```console title="Output"
+INFO     Repository type: pipeline                                                                                                               
+INFO     Press enter to use default values (shown in brackets) or type your own responses. ctrl+click underlined text to open links.             
+Name of tool/subtool: fastqe
+INFO     Using Bioconda package: 'bioconda::fastqe=0.3.3'                                                                                        
+INFO     Using Docker container: 'biocontainers/fastqe:0.3.3--pyhdfd78af_0'                                                                      
+INFO     Using Singularity container: 'https://depot.galaxyproject.org/singularity/fastqe:0.3.3--pyhdfd78af_0'                                   
+GitHub Username: (@FriederikeHanssen): 
+INFO     Provide an appropriate resource label for the process, taken from the nf-core pipeline template.                                        
+         For example: process_single, process_low, process_medium, process_high, process_long, process_high_memory                               
+? Process resource label: process_single
+INFO     Where applicable all sample-specific information e.g. 'id', 'single_end', 'read_group' MUST be provided as an input via a Groovy Map    
+         called 'meta'. This information may not be required in some instances, for example indexing reference genome files.                     
+Will the module require a meta map of sample information? [y/n] (y): 
+INFO     Created component template: 'fastqe'                                                                                                    
+INFO     Created following files:                                                                                                                
+           modules/local/fastqe.nf     
+```
+
+This will create a new file in `modules/local/fastqe.nf` that already contains the container and conda definitions, the general structure of the process, and a number of TODO statements to guide you through the adaptation. 
+
+You will notice, that it still calls `samtools` and the input are `bam`.
+
+From our sample sheet, we know we have fastq files instead, so let's change the input definition accordingly:
+
+```groovy title="fastqe.nf" linenums="38"
+tuple val(meta), path(reads)
+```
+
+The output of this tool is a tsv file with the emoji annotation, let's adapt the output as well:
+
+```groovy title="fastqe.nf" linenums="42"
+tuple val(meta), path("*.tsv"), emit: tsv
+```
+
+The script section still calls `samtools`. Let's change this to the proper call of the tool:
+
+```groovy title="fastqe.nf" linenums="62"
+    fastqe \\
+        $args \\
+        $reads \\
+        --output ${prefix}.tsv
+```
+
+And at last, we need to adapt the version retrieval. This tool does not have a version command, so we will add the release number manualy:
+
+```groovy title="fastqe.nf" linenums="52"
+    def VERSION = '0.3.3'
+```
+
+and write it to a file in the script section:
+
+```groovy title="fastqe.nf" linenums="68"
+    cat <<-END_VERSIONS > versions.yml
+    "${task.process}":
+        fastqe: $VERSION
+    END_VERSIONS
+```
+
+<!--TODO stubs are not explained anywhere before :(  -->
+
+<!-- ## Patch a module (extra content) -->
 
 ### Takeaway
 
