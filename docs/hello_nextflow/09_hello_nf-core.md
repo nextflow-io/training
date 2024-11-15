@@ -248,15 +248,8 @@ Celebrate and take another break! Next, we'll show you how to use nf-core toolin
 
 ## Create a basic pipeline from template
 
-The nf-core pipeline template is a standardized framework designed to streamline the development of Nextflow-based bioinformatics pipelines.
-
-Creating a pipeline using the nf-core template is greatly simplified by the nf-core tooling. It will help you create a pipeline using the set framework that can be modified to suit your own purposes.
-
-Here, you will use the nf-core template to kickstart your pipeline development using the latest version of Nextflow and the nf-core tooling.
-
-### Creating your pipeline
-
-nf-core tooling has commands for pipeline users and developers.
+We will now start developing our own nf-core style pipeline. The nf-core community provides a command line tool [nf-core tools](https://nf-co.re/docs/nf-core-tools) with helper functions to use and develop pipelines. 
+We have pre-installed it and will use it to create a new pipeline and expand it in this training. 
 
 View all of the tooling using the `nf-core --help` argument.
 
@@ -264,7 +257,11 @@ View all of the tooling using the `nf-core --help` argument.
 nf-core --help
 ```
 
-Here we will focus on the tooling to assist pipeline developers, starting with the `nf-core pipelines create` command.
+### Creating your pipeline
+
+Let's start by creating a new pipeline with the `nf-core pipelines create` command:
+
+All nf-core pipelines are based on a common template, a standardized pipeline skeleton to streamline development and share efforts on shared features.
 
 The `nf-core pipelines create` command creates a new pipeline using the nf-core base template with a pipeline name, description, and author. It is the first and most important step for creating a pipeline that will integrate with the wider Nextflow ecosystem.
 
@@ -1141,7 +1138,8 @@ This populates the `machineid` and we could access it in the pipeline:
 
 ### Use the new meta key in the pipeline
 
-<!-- TODO No good idea yet on what to do here -->
+We can access this new meta value in the pipeline and use to for example only apply the left read trimming for the `worst_machine`:
+
 
 ### Takeaway
 
@@ -1162,6 +1160,10 @@ In this instance, we will write a local module for the QC Tool [FastQE](https://
 This section should feel familiar to the `hello_modules` section.
 
 ### Create the module
+
+!!! note "New module contributions are always welcome and encouraged!"
+
+    If you have a module that you would like to contribute back to the commmunity, reach out on the nf-core slack or open a pull request to the modules repository.
 
 Start by using the nf-core tooling to create a sceleton local module. It will prompt you to type in the tool name `fastqe`, for the remaining fields press `enter` to accpet the default: 
 
@@ -1276,11 +1278,7 @@ sample1_R2.fastq.gz	mean	😌 😌 😌 😝 😝 😉 😉 😉 😉 😉 😉 
 
 ### Takeaway
 
-You know how to add a new module that is not yet available in nf-core.
-
-!!! note "New module contributions are always welcome!"
-
-    If you have a module that you would like to contribute back to the commmunity, reach out on the nf-core slack or open a pull request to the modules repository.
+You know how to add a local module. 
 
 ---
 
