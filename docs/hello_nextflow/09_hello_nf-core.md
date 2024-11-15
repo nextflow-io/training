@@ -459,7 +459,7 @@ You have now created a template pipeline, and learned about important template f
 
 ### What's next?
 
-Congratulations! You have now created a template pipeline. In the next step, we will start adding new tools to it. 
+Congratulations! You have now created an example pipeline from the template. In the next step, we will check the example input data.
 
 ---
 
