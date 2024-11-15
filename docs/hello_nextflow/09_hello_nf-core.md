@@ -965,7 +965,7 @@ tuple val(meta), path(reads)
 If we uncomment our earlier `view` statement and run the pipeline again, we can take a look at the current content of the `meta` maps:
 
 ```console
-[[id:SAMPLE1_PE, machineid:[], single_end:false], ....]
+[[id:SAMPLE1_PE, sequencer:[], single_end:false], ....]
 ```
 
 You can add any field, that you like to the `meta` map. By default, nf-core modules expect an `id` field. 
@@ -1046,7 +1046,7 @@ This sets the key name as `id` and the value that is in the `sample` column, for
 
 By adding a new entry into the json schema, we can attach additional meta information that we want to track. This will automtically validate it for us and add it to the meta map.
 
-Let's add some new meta information, like the `machineid` as an optional column:
+Let's add some new meta information, like the `sequencer` as an optional column:
 
 ```json title="assets/schema_input.json"
 "properties": {
@@ -1056,10 +1056,10 @@ Let's add some new meta information, like the `machineid` as an optional column:
         "errorMessage": "Sample name must be provided and cannot contain spaces",
         "meta": ["id"]
     },
-    "machineid": {
+    "sequencer": {
         "type": "string",
         "pattern": "^\\S+$",
-        "meta": ["machineid"]
+        "meta": ["sequencer"]
     },
     "fastq_1": {
         "type": "string",
@@ -1085,40 +1085,41 @@ We can now run our normal tests with the old samplesheet:
 nextflow run . -profile docker,test --outdir results
 ```
 
-The meta map now has a new key `machineid`, that is empty because we did not specify a value yet:
+The meta map now has a new key `sequencer`, that is empty because we did not specify a value yet:
 
 ```console title="Output"
-[['id':'SAMPLE1_PE', 'machineid':[], 'single_end':false], ... ]
-[['id':'SAMPLE2_PE', 'machineid':[], 'single_end':false], ... ]
-[['id':'SAMPLE3_SE', 'machineid':[], 'single_end':true], ... ]
+[['id':'SAMPLE1_PE', 'sequencer':[], 'single_end':false], ... ]
+[['id':'SAMPLE2_PE', 'sequencer':[], 'single_end':false], ... ]
+[['id':'SAMPLE3_SE', 'sequencer':[], 'single_end':true], ... ]
 ```
 
-We have also prepared a new samplesheet, that has the `machineid` column. You can overwrite the existing input with this command:
+We have also prepared a new samplesheet, that has the `sequencer` column. You can overwrite the existing input with this command:
 
 ```console
-nextflow run . -profile docker,test --outdir results --input ../data/machineid_samplesheet.csv 
+nextflow run . -profile docker,test --outdir results --input ../data/sequencer_samplesheet.csv 
 ```
 
-This populates the `machineid` and we could access it in the pipeline:
+This populates the `sequencer` and we could access it in the pipeline:
 
 ```console
-[['id':'SAMPLE1_PE', 'machineid':'myfavorite_machine', 'single_end':false], ... ]
-[['id':'SAMPLE2_PE', 'machineid':'worst_machine', 'single_end':false], ... ]
-[['id':'SAMPLE3_SE', 'machineid':'myfavorite_machine', 'single_end':true], ... ]
+[['id':'SAMPLE1_PE', 'sequencer':'sequencer1', 'single_end':false], ... ]
+[['id':'SAMPLE2_PE', 'sequencer':'sequencer2', 'single_end':false], ... ]
+[['id':'SAMPLE3_SE', 'sequencer':'sequencer3', 'single_end':true], ... ]
 ```
 
 We can comment the `ch_samplesheet.view()` line or remove it. We are not going to use it anymore in this training section. 
 
 ### Use the new meta key in the pipeline
 
-We can access this new meta value in the pipeline and use to for example only enable trimming for samples from a particular machine type. The [branch operator](https://www.nextflow.io/docs/stable/reference/operator.html#branch) let's us split 
+We can access this new meta value in the pipeline and use to for example only enable trimming for samples from a particular sequencer. The [branch operator](https://www.nextflow.io/docs/stable/reference/operator.html#branch) let's us split 
 an input channel into several new output channels based on a selection critera:
 
 ```groovy title="workflows/myfirstpipeline.nf" linenums="35"
 ch_seqtk_in = ch_samplesheet.branch { meta, reads ->
-    to_trim: meta["machineid"] == "worst_machine"
+    to_trim: meta["sequencer"] == "sequencer2"
     other: true
 }
+
 SEQTK_TRIM (
     ch_seqtk_in.to_trim
 )
@@ -1134,10 +1135,10 @@ nextflow run . -profile docker,test --outdir results
 [5a/f580bc] process > MYORG_MYFIRSTPIPELINE:MYFIRSTPIPELINE:MULTIQC             [100%] 1 of 1 ✔
 ```
 
-If we use the samplesheet with the `machineid` set, only one sample will be trimmed:
+If we use the samplesheet with the `sequencer` set, only one sample will be trimmed:
 
 ```console
-nextflow run . -profile docker,test --outdir results --input ../data/machineid_samplesheet.csv -resume
+nextflow run . -profile docker,test --outdir results --input ../data/sequencer_samplesheet.csv -resume
 
 [47/fdf9de] process > MYORG_MYFIRSTPIPELINE:MYFIRSTPIPELINE:SEQTK_TRIM (SAMPLE2_PE) [100%] 1 of 1 ✔
 [f1/e8d6fa] process > MYORG_MYFIRSTPIPELINE:MYFIRSTPIPELINE:FASTQE (SAMPLE1_PE)     [100%] 3 of 3 ✔

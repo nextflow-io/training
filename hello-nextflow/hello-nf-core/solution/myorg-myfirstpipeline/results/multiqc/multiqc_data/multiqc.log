@@ -1,5 +1,0 @@
-[2024-11-14 11:56:00,206] multiqc.config                                     [INFO   ]  Loading config settings from: multiqc_config.yml
-[2024-11-14 11:56:00,527] multiqc.core.file_search                           [INFO   ]  Search path: /Users/friederike.hanssen/Projects/training/hello-nextflow/hello-nf-core/solution/myorg-myfirstpipeline/work/e9/09b70fcdd56a78053a0860dc76abcf
-[2024-11-14 11:56:00,938] multiqc.modules.custom_content.custom_content      [WARNING]  HTML plot type found with more than one dataset in myorg-myfirstpipeline-summary
-[2024-11-14 11:56:00,938] multiqc.modules.custom_content.custom_content      [INFO   ]  myorg-myfirstpipeline-summary: Found 1 sample (html)
-[2024-11-14 11:56:00,952] multiqc.core.write_results                         [INFO   ]  Rendering plots. Export plots to formats png, svg, pdf is requested, so it might take a while. To disable plot export, set `export_plots: false` in config, or remove the `--export-plots` command line flag

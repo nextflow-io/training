@@ -33,7 +33,7 @@ workflow MYFIRSTPIPELINE {
     if (!params.skip_trim) {
 
         ch_seqtk_in = ch_samplesheet.branch { meta, reads ->
-            to_trim: meta["machineid"] == "worst_machine"
+            to_trim: meta["sequencer"] == "sequencer2"
             other: true
         }
 

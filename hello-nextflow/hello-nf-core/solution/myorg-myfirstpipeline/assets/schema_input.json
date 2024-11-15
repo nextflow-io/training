@@ -13,10 +13,10 @@
                 "errorMessage": "Sample name must be provided and cannot contain spaces",
                 "meta": ["id"]
             },
-            "machineid": {
+            "sequencer": {
                 "type": "string",
                 "pattern": "^\\S+$",
-                "meta": ["machineid"]
+                "meta": ["sequencer"]
             },
             "fastq_1": {
                 "type": "string",
