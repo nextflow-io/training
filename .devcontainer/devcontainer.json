@@ -10,7 +10,6 @@
         "HOST_PROJECT_PATH": "${localWorkspaceFolder}"
     },
     "workspaceFolder": "/workspaces/training",
-    "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
     // Configure tool-specific properties.
     "customizations": {
         // Configure properties specific to VS Code.
