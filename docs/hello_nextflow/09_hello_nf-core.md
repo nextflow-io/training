@@ -949,7 +949,7 @@ You have added a new parameter to the pipeline.
 
 ### What's next?
 
-In the next step we will take a look at how we track additional information related to an input file.
+In the next step we will take a look at how we track metadata related to an input file.
 
 ---
 
