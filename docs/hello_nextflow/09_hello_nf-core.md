@@ -1111,8 +1111,38 @@ We can comment the `ch_samplesheet.view()` line or remove it. We are not going t
 
 ### Use the new meta key in the pipeline
 
-We can access this new meta value in the pipeline and use to for example only apply the left read trimming for the `worst_machine`:
+We can access this new meta value in the pipeline and use to for example only enable trimming for samples from a particular machine type. The [branch operator](https://www.nextflow.io/docs/stable/reference/operator.html#branch) let's us split 
+an input channel into several new output channels based on a selection critera:
 
+```groovy title="workflows/myfirstpipeline.nf" linenums="35"
+ch_seqtk_in = ch_samplesheet.branch { meta, reads ->
+    to_trim: meta["machineid"] == "worst_machine"
+    other: true
+}
+SEQTK_TRIM (
+    ch_seqtk_in.to_trim
+)
+```
+
+If we now rerun our default test, no reads are being trimmed (even though we did not specify `--skip_trim`):
+
+```console
+nextflow run . -profile docker,test --outdir results
+
+[-        ] process > MYORG_MYFIRSTPIPELINE:MYFIRSTPIPELINE:SEQTK_TRIM          -
+[52/7ac3d2] process > MYORG_MYFIRSTPIPELINE:MYFIRSTPIPELINE:FASTQE (SAMPLE1_PE) [100%] 3 of 3 ✔
+[5a/f580bc] process > MYORG_MYFIRSTPIPELINE:MYFIRSTPIPELINE:MULTIQC             [100%] 1 of 1 ✔
+```
+
+If we use the samplesheet with the `machineid` set, only one sample will be trimmed:
+
+```console
+nextflow run . -profile docker,test --outdir results --input ../data/machineid_samplesheet.csv -resume
+
+[47/fdf9de] process > MYORG_MYFIRSTPIPELINE:MYFIRSTPIPELINE:SEQTK_TRIM (SAMPLE2_PE) [100%] 1 of 1 ✔
+[f1/e8d6fa] process > MYORG_MYFIRSTPIPELINE:MYFIRSTPIPELINE:FASTQE (SAMPLE1_PE)     [100%] 3 of 3 ✔
+[2a/a742ae] process > MYORG_MYFIRSTPIPELINE:MYFIRSTPIPELINE:MULTIQC                 [100%] 1 of 1 ✔
+```
 
 ### Takeaway
 

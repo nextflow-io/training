@@ -31,8 +31,14 @@ workflow MYFIRSTPIPELINE {
     // MODULE: Run SEQTK_TRIM
     //
     if (!params.skip_trim) {
+
+        ch_seqtk_in = ch_samplesheet.branch { meta, reads ->
+            to_trim: meta["machineid"] == "worst_machine"
+            other: true
+        }
+
         SEQTK_TRIM (
-            ch_samplesheet
+            ch_seqtk_in.to_trim
         )
         ch_trimmed  = SEQTK_TRIM.out.reads
         ch_versions = ch_versions.mix(SEQTK_TRIM.out.versions.first())
