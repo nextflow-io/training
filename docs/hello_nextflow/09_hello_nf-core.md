@@ -687,7 +687,7 @@ executor >  local (4)
 
 ### Inspect results folder
 
-nf-core by default, publishes the output of each process into the `<outdir>/<TOOL>`. After running the previous command, you 
+Default nf-core configuration directs the output of each process into the `<outdir>/<TOOL>`. After running the previous command, you 
 should have a `results` folder that looks like this:
 
 ```console
