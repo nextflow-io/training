@@ -477,7 +477,7 @@ and adding `-dump-channels` to the run command:
 nextflow run . -profile docker,test --outdir results -dump-channels
 ```
 
-The output should look like this: We see that we have FastQ files as input and each set of files is accompanied by some metadata: the `id` and whether or not they are single end:
+The output should look like the below. We see that we have FastQ files as input and each set of files is accompanied by some metadata: the `id` and whether or not they are single end:
 
 ```console title="Output"
 [DUMP] [['id':'SAMPLE1_PE', 'single_end':false], [/nf-core/test-datasets/viralrecon/illumina/amplicon/sample1_R1.fastq.gz, /nf-core/test-datasets/viralrecon/illumina/amplicon/sample1_R2.fastq.gz]]
