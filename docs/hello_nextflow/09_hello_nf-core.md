@@ -775,15 +775,15 @@ Run the pipeline again and check if the new parameter is applied:
 ```bash
 nextflow run . -profile docker,test --outdir results
 
-[66/c12aa9] process > MYORG_MYFIRSTPIPELINE:MYFIRSTPIPELINE:SEQTK_TRIM (SAMPLE1_PE) [100%] 3 of 3 ✔
+[6c/34e549] process > MYORG_MYFIRSTPIPELINE:MYFIRSTPIPELINE:SEQTK_TRIM (SAMPLE1_PE) [100%] 3 of 3 ✔
 [27/397ccf] process > MYORG_MYFIRSTPIPELINE:MYFIRSTPIPELINE:MULTIQC                 [100%] 1 of 1 ✔
 ```
 
-Copy the hash, that you see in your console output (here `66/c12aa9`, it is different for _each_ run). You can `ls` using tab-completion in your `work` directory to expand the complete hash.
+Copy the hash, that you see in your console output (here `6c/34e549`, it is different for _each_ run). You can `ls` using tab-completion in your `work` directory to expand the complete hash.
 In this folder you will find various log files. The `.command.sh` file contains the resolved command:
 
 ```bash
-less work/66/c12aa9/.command.sh
+less work/6c/34e549912696b6757f551603d135bb/.command.sh
 ```
 
 We can see, that the parameter `-b 5`, that we set in the `modules.config` is applied to the task:
