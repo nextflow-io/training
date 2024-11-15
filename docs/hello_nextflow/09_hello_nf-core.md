@@ -550,7 +550,7 @@ include { SEQTK_TRIM } from '../modules/nf-core/seqtk/trim/main'
 
 To enable reporting and reproducibility, modules and subworkflows from the nf-core repository are tracked using hashes in the `modules.json` file. When modules are installed or removed using the nf-core tooling the `modules.json` file will be automatically updated.
 
-When you open the `modules.json`, you will see an entry for each module that is currently installed from the nf-core modules repository. You can open the file with the VSCOde user interface by clicking on it in `myorg-myfirstpipeline/modules.json`:
+When you open the `modules.json`, you will see an entry for each module that is currently installed from the nf-core modules repository. You can open the file with the VSCode user interface by clicking on it in `myorg-myfirstpipeline/modules.json`:
 
 ```console
 "nf-core": {
