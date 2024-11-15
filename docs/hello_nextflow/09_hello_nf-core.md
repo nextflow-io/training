@@ -275,9 +275,7 @@ Running this command will open a Text User Interface (TUI) for pipeline creation
     <iframe width="560" height="315" src="https://www.youtube.com/embed/VwjXNXONHlY?si=d0HkFSISnKn76TeI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" data-ruffle-polyfilled=""></iframe>
 </div>
 
-Template features can be flexibly included or excluded at the time of creation:
-
-Follow these steps create your first pipeline using the `nf-core pipelines create` TUI:
+Template features can be flexibly included or excluded at the time of creation, follow these steps create your first pipeline using the `nf-core pipelines create` TUI:
 
     1. Run the `nf-core pipelines create` command
     2. Select **Let's go!** on the welcome screen
@@ -393,7 +391,7 @@ Instead of having one large monolithic pipeline script, it's broken up into smal
 --8<-- "docs/nf_develop/img/nested.excalidraw.svg"
 </figure>
 
-Within your pipeline repository, `modules` and `subworkflows` are stored within `local` and `nf-core` folders. The `nf-core` folder is for components that have come from the nf-core GitHub repository while the `local` folder is for components that have been developed independently:
+Within your pipeline repository, `modules` and `subworkflows` are stored within `local` and `nf-core` folders. The `nf-core` folder is for components that have come from the nf-core GitHub repository while the `local` folder is for components that have been developed independently (usually things very specific to a pipeline):
 
 ```console
 modules/
@@ -444,7 +442,7 @@ In the template, the `nextflow.config` file is a central configuration file and 
 
 There are several configuration files that are stored in the `conf` folder and are added to the configuration by default or optionally as profiles:
 
--   `base.config`: A 'blank slate' config file, appropriate for general use on most high performance compute environments.
+-   `base.config`: A 'blank slate' config file, appropriate for general use on most high performance compute environments. This defines broad bins of resource usage, for example, which are convenient to apply to modules.
 -   `modules.config`: Additional module directives and arguments.
 -   `test.config`: A profile to run the pipeline with minimal test data.
 -   `test_full.config`: A profile to run the pipeline with a full-sized test dataset.
@@ -477,7 +475,7 @@ and the run command:
 nextflow run . -profile docker,test --outdir results
 ```
 
-The output should look like this: We see that we have FastQ files as input and each set of files is accompanied by some metadata: the `id` and whether or not they are single end:
+The output should look like the below. We see that we have FastQ files as input and each set of files is accompanied by some metadata: the `id` and whether or not they are single end:
 
 ```console title="Output"
 [['id':'SAMPLE1_PE', 'single_end':false], [/nf-core/test-datasets/viralrecon/illumina/amplicon/sample1_R1.fastq.gz, /nf-core/test-datasets/viralrecon/illumina/amplicon/sample1_R2.fastq.gz]]
@@ -489,7 +487,7 @@ You can comment the `view` statement for now. We will use later during this trai
 
 ### Takeaway
 
-You inspected the input sample sheet channel and can use it for the next steps in the training.
+You have learned how input data is supplied via a samplesheet.
 
 ### What's next?
 
@@ -552,7 +550,7 @@ include { SEQTK_TRIM } from '../modules/nf-core/seqtk/trim/main'
 
 To enable reporting and reproducibility, modules and subworkflows from the nf-core repository are tracked using hashes in the `modules.json` file. When modules are installed or removed using the nf-core tooling the `modules.json` file will be automatically updated.
 
-When you open the `modules.json`, you will see an entry for each module that is currently installed from the nf-core modules repository. You can open the file with the VSCOde user interface by clicking on it in `myorg-myfirstpipeline/modules.json`:
+When you open the `modules.json`, you will see an entry for each module that is currently installed from the nf-core modules repository. You can open the file with the VSCode user interface by clicking on it in `myorg-myfirstpipeline/modules.json`:
 
 ```console
 "nf-core": {
@@ -689,7 +687,7 @@ executor >  local (4)
 
 ### Inspect results folder
 
-nf-core by default, publishes the output of each process into the `<outdir>/<TOOL>`. After running the previous command, you 
+Default nf-core configuration directs the output of each process into the `<outdir>/<TOOL>`. After running the previous command, you 
 should have a `results` folder that looks like this:
 
 ```console
@@ -766,7 +764,7 @@ The configuration of modules is commonly added to the `modules.conf` file in the
 
 Extra configuration may also be applied as directives by using `args`. You can find many examples of how arguments are added to modules in nf-core pipelines, for example, the nf-core/rnaseq [modules.config](https://github.com/nf-core/rnaseq/blob/master/conf/modules.config) file.
 
-Add this snippet to your `conf/modules.config` file to call the tool with an additional argument: `-b 5` trims 5bp from the left end of each read:
+Add this snippet to your `conf/modules.config` file (making sure to use the `params` scope) to call the tool with an additional argument: `-b 5` trims 5bp from the left end of each read:
 
 ```console title="conf/modules.config" linenums="21"
 withName: 'SEQTK_TRIM' {
@@ -783,7 +781,7 @@ nextflow run . -profile docker,test --outdir results
 [27/397ccf] process > MYORG_MYFIRSTPIPELINE:MYFIRSTPIPELINE:MULTIQC                 [100%] 1 of 1 ✔
 ```
 
-Copy the hash, that you see in your console output (here `66/c12aa9`, it is different for _each_ run). Use tab-completion to expand the complete hash.
+Copy the hash, that you see in your console output (here `66/c12aa9`, it is different for _each_ run). You can `ls` using tab-completion in your `work` directory to expand the complete hash.
 In this folder you will find various log files. The `.command.sh` file contains the resolved command:
 
 ```bash
@@ -827,7 +825,7 @@ In the next step we will add a pipeline parameter to allow users to skip the tri
 
 ## Adding parameters to your pipeline
 
-Parameters that can be overridden, either using the command line or the Nextflow configuration file, and should be used for anything that a pipeline user may want to configure regularly.
+Parameters that can be overridden, either using the command line or the Nextflow configuration file, and should be used for anything that a pipeline user may want to configure regularly. nf-core defines some standards on how parameters are provided.
 
 Here, as a simple example, you will add a new parameter to your pipeline that will skip the `SEQTK_TRIM` process.
 
@@ -947,11 +945,11 @@ executor >  local (1)
 
 ### Takeaway
 
-You have added a new parameter to the pipeline.
+You have added a new parameter to the pipeline, and learned how to use nf-core tools to describe it in the pipeline schema.
 
 ### What's next?
 
-In the next step we will take a look at how we track additional information related to an input file.
+In the next step we will take a look at how we track metadata related to an input file.
 
 ---
 
