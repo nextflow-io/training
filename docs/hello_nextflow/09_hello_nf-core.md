@@ -781,7 +781,7 @@ nextflow run . -profile docker,test --outdir results
 [27/397ccf] process > MYORG_MYFIRSTPIPELINE:MYFIRSTPIPELINE:MULTIQC                 [100%] 1 of 1 ✔
 ```
 
-Copy the hash, that you see in your console output (here `66/c12aa9`, it is different for _each_ run). Use tab-completion to expand the complete hash.
+Copy the hash, that you see in your console output (here `66/c12aa9`, it is different for _each_ run). You can `ls` using tab-completion in your `work` directory to expand the complete hash.
 In this folder you will find various log files. The `.command.sh` file contains the resolved command:
 
 ```bash
