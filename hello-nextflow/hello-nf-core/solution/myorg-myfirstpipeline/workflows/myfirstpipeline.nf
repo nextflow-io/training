@@ -25,7 +25,7 @@ workflow MYFIRSTPIPELINE {
 
     ch_versions = Channel.empty()
     ch_multiqc_files = Channel.empty()
-    ch_samplesheet.dump()
+    ch_samplesheet.view()
 
     //
     // MODULE: Run SEQTK_TRIM

@@ -465,25 +465,27 @@ Congratulations! In the next step, we will check the input data.
 
 ## Check the input data
 
-Above, we said that the `test` profile comes with small test files that are stored in the nf-core. Let's check what type of files we are dealing with to plan our expansion. Remember that we can inspect any channel content by using the `dump` operator: 
+Above, we said that the `test` profile comes with small test files that are stored in the nf-core. Let's check what type of files we are dealing with to plan our expansion. Remember that we can inspect any channel content by using the `views` operator: 
 
 ```groovy title="workflows/myfirstpipeline.nf" linenums="27"
-ch_samplesheet.dump()
+ch_samplesheet.view()
 ```
 
-and adding `-dump-channels` to the run command:
+and the run command:
 
 ```bash
-nextflow run . -profile docker,test --outdir results -dump-channels
+nextflow run . -profile docker,test --outdir results
 ```
 
 The output should look like this: We see that we have FastQ files as input and each set of files is accompanied by some metadata: the `id` and whether or not they are single end:
 
 ```console title="Output"
-[DUMP] [['id':'SAMPLE1_PE', 'single_end':false], [/nf-core/test-datasets/viralrecon/illumina/amplicon/sample1_R1.fastq.gz, /nf-core/test-datasets/viralrecon/illumina/amplicon/sample1_R2.fastq.gz]]
-[DUMP] [['id':'SAMPLE2_PE', 'single_end':false], [/nf-core/test-datasets/viralrecon/illumina/amplicon/sample2_R1.fastq.gz, /nf-core/test-datasets/viralrecon/illumina/amplicon/sample2_R2.fastq.gz]]
-[DUMP] [['id':'SAMPLE3_SE', 'single_end':true], [/nf-core/test-datasets/viralrecon/illumina/amplicon/sample1_R1.fastq.gz, /nf-core/test-datasets/viralrecon/illumina/amplicon/sample2_R1.fastq.gz]]
+[['id':'SAMPLE1_PE', 'single_end':false], [/nf-core/test-datasets/viralrecon/illumina/amplicon/sample1_R1.fastq.gz, /nf-core/test-datasets/viralrecon/illumina/amplicon/sample1_R2.fastq.gz]]
+[['id':'SAMPLE2_PE', 'single_end':false], [/nf-core/test-datasets/viralrecon/illumina/amplicon/sample2_R1.fastq.gz, /nf-core/test-datasets/viralrecon/illumina/amplicon/sample2_R2.fastq.gz]]
+[['id':'SAMPLE3_SE', 'single_end':true], [/nf-core/test-datasets/viralrecon/illumina/amplicon/sample1_R1.fastq.gz, /nf-core/test-datasets/viralrecon/illumina/amplicon/sample2_R1.fastq.gz]]
 ```
+
+You can comment the `view` statement for now. We will use later during this training to inspect the channel content again. 
 
 ### Takeaway
 
@@ -964,13 +966,10 @@ input:
 tuple val(meta), path(reads)
 ```
 
-If we run the pipeline again with `-dump-channels`, we can take a look at the current content of the `meta` maps:
+If we uncomment our earlier `view` statement and run the pipeline again, we can take a look at the current content of the `meta` maps:
 
 ```console
-    [
-        "id": "SAMPLE1_PE",
-        "single_end": "false"
-     ] ,
+[[id:SAMPLE1_PE, machineid:[], single_end:false], ....]
 ```
 
 You can add any field, that you like to the `meta` map. By default, nf-core modules expect an `id` field. 
@@ -1084,33 +1083,35 @@ Let's add some new meta information, like the `machineid` as an optional column:
 "required": ["sample", "fastq_1"]
 ```
 
-We can now run our normal tests with the old samplesheet. Let's add `-dump-channels` again to inspect the channel content:
+We can now run our normal tests with the old samplesheet:
 
 ```console
-nextflow run . -profile docker,test --outdir results -dump-channels
+nextflow run . -profile docker,test --outdir results
 ```
 
 The meta map now has a new key `machineid`, that is empty because we did not specify a value yet:
 
 ```console title="Output"
-[DUMP] [['id':'SAMPLE1_PE', 'machineid':[], 'single_end':false], [/nf-core/test-datasets/viralrecon/illumina/amplicon/sample1_R1.fastq.gz, /nf-core/test-datasets/viralrecon/illumina/amplicon/sample1_R2.fastq.gz]]
-[DUMP] [['id':'SAMPLE2_PE', 'machineid':[], 'single_end':false], [/nf-core/test-datasets/viralrecon/illumina/amplicon/sample2_R1.fastq.gz, /nf-core/test-datasets/viralrecon/illumina/amplicon/sample2_R2.fastq.gz]]
-[DUMP] [['id':'SAMPLE3_SE', 'machineid':[], 'single_end':true], [/nf-core/test-datasets/viralrecon/illumina/amplicon/sample1_R1.fastq.gz, /nf-core/test-datasets/viralrecon/illumina/amplicon/sample2_R1.fastq.gz]]
+[['id':'SAMPLE1_PE', 'machineid':[], 'single_end':false], ... ]
+[['id':'SAMPLE2_PE', 'machineid':[], 'single_end':false], ... ]
+[['id':'SAMPLE3_SE', 'machineid':[], 'single_end':true], ... ]
 ```
 
 We have also prepared a new samplesheet, that has the `machineid` column. You can overwrite the existing input with this command:
 
 ```console
-nextflow run . -profile docker,test --outdir results -dump-channels --input ../data/machineid_samplesheet.csv 
+nextflow run . -profile docker,test --outdir results --input ../data/machineid_samplesheet.csv 
 ```
 
 This populates the `machineid` and we could access it in the pipeline:
 
 ```console
-[DUMP] [['id':'SAMPLE1_PE', 'machineid':'myfavorite_machine', 'single_end':false], [/nf-core/test-datasets/viralrecon/illumina/amplicon/sample1_R1.fastq.gz, /nf-core/test-datasets/viralrecon/illumina/amplicon/sample1_R2.fastq.gz]]
-[DUMP] [['id':'SAMPLE2_PE', 'machineid':'worst_machine', 'single_end':false], [/nf-core/test-datasets/viralrecon/illumina/amplicon/sample2_R1.fastq.gz, /nf-core/test-datasets/viralrecon/illumina/amplicon/sample2_R2.fastq.gz]]
-[DUMP] [['id':'SAMPLE3_SE', 'machineid':'myfavorite_machine', 'single_end':true], [/nf-core/test-datasets/viralrecon/illumina/amplicon/sample1_R1.fastq.gz, /nf-core/test-datasets/viralrecon/illumina/amplicon/sample2_R1.fastq.gz]]
+[['id':'SAMPLE1_PE', 'machineid':'myfavorite_machine', 'single_end':false], ... ]
+[['id':'SAMPLE2_PE', 'machineid':'worst_machine', 'single_end':false], ... ]
+[['id':'SAMPLE3_SE', 'machineid':'myfavorite_machine', 'single_end':true], ... ]
 ```
+
+We can comment the `ch_samplesheet.view()` line or remove it. We are not going to use it anymore in this training section. 
 
 ### Use the new meta key in the pipeline
 
