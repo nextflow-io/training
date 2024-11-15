@@ -1165,7 +1165,7 @@ This section should feel familiar to the `hello_modules` section.
 
     If you have a module that you would like to contribute back to the commmunity, reach out on the nf-core slack or open a pull request to the modules repository.
 
-Start by using the nf-core tooling to create a sceleton local module. It will prompt you to type in the tool name `fastqe`, for the remaining fields press `enter` to accpet the default: 
+Start by using the nf-core tooling to create a kceleton local module. It will prompt you to type in the tool name `fastqe`, for the remaining fields press `enter` to accept the default: 
 
 ```console
 nf-core modules create
