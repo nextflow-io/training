@@ -758,11 +758,9 @@ ch_versions = ch_versions.mix(SEQTK_TRIM.out.versions.first())
 
 ### Add a parameter to the `seqtk/trim` tool
 
-To prevent changing the nf-core modules, additional configuration options can be applied to a module using scopes within configuration files.
+mf-core modules should be flexible and usable across many different pipelines. Therefore, tool parameters are typically not set in an nf-core/module. Instead  additional configuration options on how to run the tool like its parameters, or filename can be applied to a module using the `conf/modules.config` file on the pipeline level. Process selectors (e.g., `withName`) are used to apply configuration to modules selectively. Process selectors must be used within the `process` scope.
 
-The configuration of modules is commonly added to the `modules.conf` file in the `conf` folder. Process selectors (e.g., `withName`) are used to apply configuration to modules selectively. Process selectors must be used within the `process` scope.
-
-Extra configuration may also be applied as directives by using `args`. You can find many examples of how arguments are added to modules in nf-core pipelines, for example, the nf-core/rnaseq [modules.config](https://github.com/nf-core/rnaseq/blob/master/conf/modules.config) file.
+The parameters or arguments of a tool can be changed using the directive `args`. You can find many examples of how arguments are added to modules in nf-core pipelines, for example, the nf-core/demo [modules.config](https://github.com/nf-core/demo/blob/master/conf/modules.config) file.
 
 Add this snippet to your `conf/modules.config` file (making sure to use the `params` scope) to call the tool with an additional argument: `-b 5` trims 5bp from the left end of each read:
 
