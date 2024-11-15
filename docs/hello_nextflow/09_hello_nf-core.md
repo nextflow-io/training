@@ -444,7 +444,7 @@ In the template, the `nextflow.config` file is a central configuration file and 
 
 There are several configuration files that are stored in the `conf` folder and are added to the configuration by default or optionally as profiles:
 
--   `base.config`: A 'blank slate' config file, appropriate for general use on most high performance compute environments.
+-   `base.config`: A 'blank slate' config file, appropriate for general use on most high performance compute environments. This defines broad bins of resource usage, for example, which are convenient to apply to modules.
 -   `modules.config`: Additional module directives and arguments.
 -   `test.config`: A profile to run the pipeline with minimal test data.
 -   `test_full.config`: A profile to run the pipeline with a full-sized test dataset.
