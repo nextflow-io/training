@@ -455,11 +455,11 @@ The `nextflow_schema.json` is a file used to store parameter related information
 
 ### Takeaway
 
-You have now created a template pipeline, and learned about important template files
+You have an example pipeline, and learned about important files that the template comes with. 
 
 ### What's next?
 
-Congratulations! You have now created an example pipeline from the template. In the next step, we will check the input data.
+Congratulations! In the next step, we will check the input data.
 
 ---
 
@@ -511,7 +511,7 @@ executor >  local (1)
 
 ### Takeaway
 
-You have now created a template pipeline, and learned about important template files
+You inspected the input sample sheet channel and can use it for the next steps in the training.
 
 ### What's next?
 
