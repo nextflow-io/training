@@ -9,7 +9,6 @@
         "NXF_HOME": "/workspaces/training/.nextflow",
         "HOST_PROJECT_PATH": "${localWorkspaceFolder}"
     },
-    "workspaceFolder": "/workspaces/training",
     // Configure tool-specific properties.
     "customizations": {
         // Configure properties specific to VS Code.
