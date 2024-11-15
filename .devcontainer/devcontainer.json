@@ -9,8 +9,8 @@
         "NXF_HOME": "/workspaces/training/.nextflow",
         "HOST_PROJECT_PATH": "${localWorkspaceFolder}"
     },
-    "workspaceFolder": "/workspaces",
-    "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces,type=bind",
+    "workspaceFolder": "/workspace",
+    "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
     // Configure tool-specific properties.
     "customizations": {
         // Configure properties specific to VS Code.
