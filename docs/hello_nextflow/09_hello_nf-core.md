@@ -825,7 +825,7 @@ In the next step we will add a pipeline parameter to allow users to skip the tri
 
 ## Adding parameters to your pipeline
 
-Parameters that can be overridden, either using the command line or the Nextflow configuration file, and should be used for anything that a pipeline user may want to configure regularly.
+Parameters that can be overridden, either using the command line or the Nextflow configuration file, and should be used for anything that a pipeline user may want to configure regularly. nf-core defines some standards on how parameters are provided.
 
 Here, as a simple example, you will add a new parameter to your pipeline that will skip the `SEQTK_TRIM` process.
 
