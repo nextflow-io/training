@@ -275,9 +275,7 @@ Running this command will open a Text User Interface (TUI) for pipeline creation
     <iframe width="560" height="315" src="https://www.youtube.com/embed/VwjXNXONHlY?si=d0HkFSISnKn76TeI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" data-ruffle-polyfilled=""></iframe>
 </div>
 
-Template features can be flexibly included or excluded at the time of creation:
-
-Follow these steps create your first pipeline using the `nf-core pipelines create` TUI:
+Template features can be flexibly included or excluded at the time of creation, follow these steps create your first pipeline using the `nf-core pipelines create` TUI:
 
     1. Run the `nf-core pipelines create` command
     2. Select **Let's go!** on the welcome screen
