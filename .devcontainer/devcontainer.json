@@ -9,7 +9,7 @@
         "NXF_HOME": "/workspaces/training/.nextflow",
         "HOST_PROJECT_PATH": "${localWorkspaceFolder}"
     },
-    "workspaceFolder": "/workspace",
+    "workspaceFolder": "/workspaces/training",
     "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
     // Configure tool-specific properties.
     "customizations": {
