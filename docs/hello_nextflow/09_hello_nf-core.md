@@ -574,7 +574,7 @@ include { SEQTK_TRIM } from '../modules/nf-core/seqtk/trim/main'
 
 To enable reporting and reproducibility, modules and subworkflows from the nf-core repository are tracked using hashes in the `modules.json` file. When modules are installed or removed using the nf-core tooling the `modules.json` file will be automatically updated.
 
-When you open the `modules.json`, you will see an entry for each module that is currently installed from the nf-core modules repository:
+When you open the `modules.json`, you will see an entry for each module that is currently installed from the nf-core modules repository. You can open the file with the VSCOde user interface by clicking on it in `myorg-myfirstpipeline/modules.json`:
 
 ```console
 "nf-core": {
@@ -770,7 +770,7 @@ For `SEQTK_TRIM`, the `reads` output could be put into a channel named `ch_trimm
 ch_trimmed  = SEQTK_TRIM.out.reads
 ```
 
-Similarly, it is beneficial immediately mix the versions of tools into the `ch_versions` channel so they can be used as an input for the `MULTIQC` process.
+Similarly, it is beneficial to immediately mix the versions of tools into the `ch_versions` channel so they can be used as an input for the `MULTIQC` process and passed to the final report, so that users can track the versions used.
 
 ```groovy title="workflows/myfirstpipeline.nf" linenums="35"
 ch_versions = ch_versions.mix(SEQTK_TRIM.out.versions.first())
