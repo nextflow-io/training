@@ -945,7 +945,7 @@ executor >  local (1)
 
 ### Takeaway
 
-You have added a new parameter to the pipeline.
+You have added a new parameter to the pipeline, and learned how to use nf-core tools to describe it in the pipeline schema.
 
 ### What's next?
 
