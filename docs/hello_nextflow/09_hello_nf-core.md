@@ -465,13 +465,14 @@ Congratulations! In the next step, we will check the input data.
 
 ## Check the input data
 
-Above, we said that the `test` profile comes with small test files that are stored in the nf-core. Let's check what type of files we are dealing with to plan our expansion. We can inspect any channel content by using the `dump` operator: 
+Above, we said that the `test` profile comes with small test files that are stored in the nf-core. Let's check what type of files we are dealing with to plan our expansion. Remember that we can inspect any channel content by using the `dump` operator: 
 
 ```groovy title="workflows/myfirstpipeline.nf" linenums="27"
 ch_samplesheet.dump()
 ```
 
-We can then run the pipeline with the additional argument `-dump-channels`. This will run `dump()`. It is great for development, because a normal user will not add this flag and thus not see the channel content:
+and adding `-dump-channels` to the run command:
+
 ```bash
 nextflow run . -profile docker,test --outdir results -dump-channels
 ```
@@ -479,34 +480,9 @@ nextflow run . -profile docker,test --outdir results -dump-channels
 The output should look like this: We see that we have FastQ files as input and each set of files is accompanied by some metadata: the `id` and whether or not they are single end:
 
 ```console title="Output"
-Launching `./main.nf` [focused_laplace] DSL2 - revision: a633aedb88
-
-Input/output options
-  input                     : https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv
-  outdir                    : results
-
-Institutional config options
-  config_profile_name       : Test profile
-  config_profile_description: Minimal test dataset to check pipeline function
-
-Core Nextflow options
-  runName                   : focused_laplace
-  containerEngine           : docker
-  launchDir                 : /workspace/gitpod/hello-nextflow/hello-nf-core/myorg-myfirstpipeline
-  workDir                   : /workspace/gitpod/hello-nextflow/hello-nf-core/myorg-myfirstpipeline/work
-  projectDir                : /workspace/gitpod/hello-nextflow/hello-nf-core/myorg-myfirstpipeline
-  userName                  : gitpod
-  profile                   : docker,test
-  configFiles               : 
-
-!! Only displaying parameters that differ from the pipeline defaults !!
-------------------------------------------------------
-executor >  local (1)
-[36/084021] process > MYORG_MYFIRSTPIPELINE:MYFIRSTPIPELINE:MULTIQC [100%] 1 of 1 ✔
 [DUMP] [['id':'SAMPLE1_PE', 'single_end':false], [/nf-core/test-datasets/viralrecon/illumina/amplicon/sample1_R1.fastq.gz, /nf-core/test-datasets/viralrecon/illumina/amplicon/sample1_R2.fastq.gz]]
 [DUMP] [['id':'SAMPLE2_PE', 'single_end':false], [/nf-core/test-datasets/viralrecon/illumina/amplicon/sample2_R1.fastq.gz, /nf-core/test-datasets/viralrecon/illumina/amplicon/sample2_R2.fastq.gz]]
 [DUMP] [['id':'SAMPLE3_SE', 'single_end':true], [/nf-core/test-datasets/viralrecon/illumina/amplicon/sample1_R1.fastq.gz, /nf-core/test-datasets/viralrecon/illumina/amplicon/sample2_R1.fastq.gz]]
--[myorg/myfirstpipeline] Pipeline completed successfully-
 ```
 
 ### Takeaway
