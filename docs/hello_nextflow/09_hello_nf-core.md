@@ -973,7 +973,7 @@ You have added a new parameter to the pipeline.
 
 ### What's next?
 
-In the next step we will take a look at how we track additional information to an input file.
+In the next step we will take a look at how we track additional information related to an input file.
 
 ---
 
@@ -981,7 +981,7 @@ In the next step we will take a look at how we track additional information to a
 
 Datasets often have additional information that is relevant for the analysis, such as a sample name, information about sequencing protocols, or other conditions that are needed in the pipeline to process certain samples together, determine their output name, or adjust parameters.
 
-nf-core tracks this type of information in `meta` maps. These are `key`-`value` pairs that are passed into modules together with the files. We already saw this briefly, when inspecting the `input` for `seqtk`:
+By convention, nf-core tracks this type of information in `meta` maps. These are `key`-`value` pairs that are passed into modules together with the files. We already saw this briefly, when inspecting the `input` for `seqtk`:
 
 ```groovy title="modules/nf-core/seqtk/trim/main.nf" linenums="11"
 input:
@@ -1227,7 +1227,7 @@ and write it to a file in the script section:
         fastqe: $VERSION
 ```
 
-We will not cover `stubs` in this training, but look at them at a later point. They are not necessary to run a module, so let's remove them for now and delete:
+We will not cover [`stubs`](https://www.nextflow.io/docs/latest/process.html#stub) in this training, but look at them at a later point. They are not necessary to run a module, so let's remove them for now and delete:
 
 ```groovy title="modules/local/fastqe.nf" linenums="74"
 stub:
