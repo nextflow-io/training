@@ -487,7 +487,7 @@ The output should look like this: We see that we have FastQ files as input and e
 
 ### Takeaway
 
-You inspected the input sample sheet channel and can use it for the next steps in the training.
+You have learned how input data is supplied via a samplesheet.
 
 ### What's next?
 
