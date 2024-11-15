@@ -764,7 +764,7 @@ The configuration of modules is commonly added to the `modules.conf` file in the
 
 Extra configuration may also be applied as directives by using `args`. You can find many examples of how arguments are added to modules in nf-core pipelines, for example, the nf-core/rnaseq [modules.config](https://github.com/nf-core/rnaseq/blob/master/conf/modules.config) file.
 
-Add this snippet to your `conf/modules.config` file to call the tool with an additional argument: `-b 5` trims 5bp from the left end of each read:
+Add this snippet to your `conf/modules.config` file (making sure to use the `params` scope) to call the tool with an additional argument: `-b 5` trims 5bp from the left end of each read:
 
 ```console title="conf/modules.config" linenums="21"
 withName: 'SEQTK_TRIM' {
