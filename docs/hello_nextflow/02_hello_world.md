@@ -1067,7 +1067,7 @@ At this point we introduce a new channel factory, `Channel.fromPath()`, which ha
 We're going to use that instead of the `Channel.of()` factory we used previously; the base syntax looks like this:
 
 ```groovy title="channel construction syntax"
-Channel.fromPath(input_file)
+Channel.fromPath(params.input_file)
 ```
 
 Now, we are going to deploy a new concept, an 'operator' to transform that CSV file into channel content. You'll learn more about operators later, but for now just understand them as ways of transforming channels in a variety of ways.
@@ -1077,7 +1077,7 @@ Since our goal is to read in the contents of a `.csv` file, we're going to add t
 So the channel construction instruction becomes:
 
 ```groovy title="channel construction syntax"
-Channel.fromPath(input_file)
+Channel.fromPath(params.input_file)
        .splitCsv()
        .flatten()
 ```
