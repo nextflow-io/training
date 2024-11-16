@@ -1130,26 +1130,6 @@ As you can see, the flatten() operator has transformed the channel from containi
 
 Remove the `.view()` operations before you continue.
 
-### 9.3. Run the workflow (one last time!)
-
-```bash
-nextflow run hello-world.nf
-```
-
-Once again we see each process get executed three times:
-
-```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
-
- ┃ Launching `hello-world.nf` [angry_spence] DSL2 - revision: d171cc0193
-
-executor >  local (6)
-[0e/ceb175] sayHello (2)       [100%] 3 of 3 ✔
-[01/046714] convertToUpper (3) [100%] 3 of 3 ✔
-```
-
-Looking at the outputs, we see each greeting was correctly extracted and processed through the workflow. We've achieved the same result as the previous step, but now we have a lot more flexibility to add more elements to the channel of greetings we want to process.
-
 !!! tip
 
     While you're developing your pipeline, you can inspect the contents of any channel by adding the `.view()` operator to the name of the channel.
@@ -1169,6 +1149,26 @@ Looking at the outputs, we see each greeting was correctly extracted and process
     Bonjour
     Holà
     ```
+
+### 9.3. Run the workflow (one last time!)
+
+```bash
+nextflow run hello-world.nf
+```
+
+Once again we see each process get executed three times:
+
+```console title="Output"
+ N E X T F L O W   ~  version 24.02.0-edge
+
+ ┃ Launching `hello-world.nf` [angry_spence] DSL2 - revision: d171cc0193
+
+executor >  local (6)
+[0e/ceb175] sayHello (2)       [100%] 3 of 3 ✔
+[01/046714] convertToUpper (3) [100%] 3 of 3 ✔
+```
+
+Looking at the outputs, we see each greeting was correctly extracted and processed through the workflow. We've achieved the same result as the previous step, but now we have a lot more flexibility to add more elements to the channel of greetings we want to process.
 
 ### Takeaway
 
