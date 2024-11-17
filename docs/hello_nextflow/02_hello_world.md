@@ -503,7 +503,7 @@ This is where channels come in: Nextflow uses channels to feed inputs to process
 
 There are multiple ways to do this, but for now, we're just going to use the simplest possible channel, containing a single value.
 
-We're going to create the channel using the `Channel.of()` factory, which sets up a simple value channel, and give it a hardcoded string to use as greeting by declaring `greeting_ch = Channel.of('Hello world!')`.
+We're going to create the channel using the `of()` channel factory, which sets up a simple value channel, and give it a hardcoded string to use as greeting by declaring `greeting_ch = Channel.of('Hello world!')`.
 
 _Before:_
 
@@ -843,7 +843,7 @@ Learn how to make the workflow run on a batch of input values.
 
 Workflows typically run on batches of inputs that are meant to be processed in bulk, so we want to upgrade the workflow to accept multiple input values.
 
-Conveniently, the `Channel.of()` factory we've been using is quite happy to accept more than one value, so we don't need to modify that at all; we just have to load more values into the channel.
+Conveniently, the `of()` channel factory we've been using is quite happy to accept more than one value, so we don't need to modify that at all; we just have to load more values into the channel.
 
 ### 8.1. Load multiple greetings into the input channel
 
@@ -1063,8 +1063,8 @@ params.input_file = "data/greetings.csv"
 
 ### 9.2. Update the channel declaration to handle the input file
 
-At this point we introduce a new channel factory, `Channel.fromPath()`, which has some built-in functionality for handling file paths.
-We're going to use that instead of the `Channel.of()` factory we used previously; the base syntax looks like this:
+At this point we introduce a new channel factory, `fromPath()`, which has some built-in functionality for handling file paths.
+We're going to use that instead of the `of()` channel factory we used previously; the base syntax looks like this:
 
 ```groovy title="channel construction syntax"
 Channel.fromPath(params.input_file)
@@ -1126,7 +1126,7 @@ After flatten: Holà
 [ee/280f93] Submitted process > convertToUpper (3)
 ```
 
-As you can see, the flatten() operator has transformed the channel from containing arrays to containing individual elements. This can be useful when you want to process each item separately in your workflow.
+As you can see, the `flatten()` operator has transformed the channel from containing arrays to containing individual elements. This can be useful when you want to process each item separately in your workflow.
 
 Remove the `.view()` operations before you continue.
 
