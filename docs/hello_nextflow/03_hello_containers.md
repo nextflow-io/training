@@ -309,7 +309,7 @@ Click on "+Add" and then "Get Container" to request a container image for the `q
 ![Seqera Containers](img/seqera-containers-2.png)
 
 If this is the first time a community container has been built for this version of the package, it may take a few minutes to complete.
-Click to copy the URI (e.g. `community.wave.seqera.io/library/pip_cowsay:131d6a1b707a8e65`) of the container image that was created for you.
+Click to copy the URI (e.g. `community.wave.seqera.io/library/pip_quote:ae07804021465ee9`) of the container image that was created for you.
 
 You can now use the container image to run the `quote` command and get a random saying from Grace Hopper.
 
