@@ -233,7 +233,7 @@ process SAMTOOLS_INDEX {
 
     container 'community.wave.seqera.io/library/samtools:1.20--b5dfbd93de237464'
 
-    publishDir 'results_genomics', mode: 'symlink'
+    publishDir params.outdir, mode: 'symlink'
 ```
 
 _After:_
@@ -244,7 +244,7 @@ process SAMTOOLS_INDEX {
     container "community.wave.seqera.io/library/samtools:1.20--b5dfbd93de237464"
     conda "bioconda::samtools=1.20"
 
-    publishDir 'results_genomics', mode: 'symlink'
+    publishDir params.outdir, mode: 'symlink'
 ```
 
 #### 1.4.2. Update GATK_HAPLOTYPECALLER
@@ -258,7 +258,7 @@ process GATK_HAPLOTYPECALLER {
 
     container "community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"
 
-    publishDir 'results_genomics', mode: 'symlink'
+    publishDir params.outdir, mode: 'symlink'
 ```
 
 _After:_
@@ -269,7 +269,7 @@ process GATK_HAPLOTYPECALLER {
     container "community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"
     conda "bioconda::gatk4=4.5.0.0"
 
-    publishDir 'results_genomics', mode: 'symlink'
+    publishDir params.outdir, mode: 'symlink'
 ```
 
 #### 1.4.3. Update GATK_JOINTGENOTYPING
@@ -283,7 +283,7 @@ process GATK_JOINTGENOTYPING {
 
     container "community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"
 
-    publishDir 'results_genomics', mode: 'symlink'
+    publishDir params.outdir, mode: 'symlink'
 ```
 
 _After:_
@@ -294,7 +294,7 @@ process GATK_JOINTGENOTYPING {
     container "community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"
     conda "bioconda::gatk4=4.5.0.0"
 
-    publishDir 'results_genomics', mode: 'symlink'
+    publishDir params.outdir, mode: 'symlink'
 ```
 
 Once all three processes are updated, we can try running the workflow again.
@@ -872,6 +872,9 @@ So let's cut this set of params out of `main.nf`:
 // Primary input (file of input files, one per line)
 params.reads_bam = "${projectDir}/data/sample_bams.txt"
 
+// Output directory
+params.outdir    = 'results_genomics'
+
 // Accessory files
 params.reference        = "${projectDir}/data/ref/ref.fasta"
 params.reference_index  = "${projectDir}/data/ref/ref.fasta.fai"
@@ -924,6 +927,9 @@ params {
     // Primary input (file of input files, one per line)
     reads_bam        = "${projectDir}/data/sample_bams.txt"
 
+    // Output directory
+    params.outdir    = 'results_genomics'
+
     // Accessory files
     reference        = "${projectDir}/data/ref/ref.fasta"
     reference_index  = "${projectDir}/data/ref/ref.fasta.fai"
@@ -952,6 +958,7 @@ The values are the same input files and reference files we've been using so far.
 ```json title="demo-params.json" linenums="1"
 {
     "reads_bam": "data/sample_bams.txt",
+    "outdir": "results_genomics",
     "reference": "data/ref/ref.fasta",
     "reference_index": "data/ref/ref.fasta.fai",
     "reference_dict": "data/ref/ref.dict",
@@ -992,6 +999,9 @@ params {
     // Primary input (file of input files, one per line)
     reads_bam        = "${projectDir}/data/sample_bams.txt"
 
+    // Output directory
+    outdir           = 'results_genomics'
+
     // Accessory files
     reference        = "${projectDir}/data/ref/ref.fasta"
     reference_index  = "${projectDir}/data/ref/ref.fasta.fai"
@@ -1009,6 +1019,9 @@ _After:_
 params {
     // Primary input (file of input files, one per line)
     reads_bam        = null
+
+    // Output directory
+    outdir           = null
 
     // Accessory files
     reference        = null
@@ -1084,6 +1097,9 @@ profiles {
     demo {
         // Primary input (file of input files, one per line)
         params.reads_bam        = "data/sample_bams.txt"
+
+        // Output directory
+        params.outdir           = 'results_genomics'
 
         // Accessory files
         params.reference        = "data/ref/ref.fasta"
