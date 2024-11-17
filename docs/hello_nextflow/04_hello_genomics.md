@@ -221,6 +221,12 @@ params.outdir    = "results_genomics"
 
 Now we have a process ready, as well as a parameter to give it an input to run on, so let's wire those things up together.
 
+!!! note
+
+    `${projectDir}` is a built-in Nextflow variable that points to the directory where the current Nextflow workflow script (`hello-genomics.nf`) is located.
+
+    This makes it easy to reference files, data directories, and other resources included in the workflow repository without hardcoding absolute paths.
+
 ### 1.3. Add workflow block to run SAMTOOLS_INDEX
 
 In the `workflow` block, we need to set up a **channel** to feed the input to the `SAMTOOLS_INDEX` process; then we can call the process itself to run on the contents of that channel.
