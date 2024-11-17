@@ -441,7 +441,7 @@ For the `quote` container image, you can either use the one you built yourself i
             """
         ```
 
-You can find a solution to this exercise in `containers/scripts/hello-containers-4.1.nf`.
+You can find a solution to this exercise in `containers/solutions/hello-containers-4.1.nf`.
 
 ### 4.2. Modify your Nextflow pipeline to allow it to execute in `quote` and `sayHello` modes.
 
@@ -464,7 +464,7 @@ workflow {
 
     You can use `new_ch = processName.out` to assign a name to the output channel of a process.
 
-You can find a solution to this exercise in `containers/scripts/hello-containers-4.2.nf`.
+You can find a solution to this exercise in `containers/solutions/hello-containers-4.2.nf`.
 
 ### Takeaway
 

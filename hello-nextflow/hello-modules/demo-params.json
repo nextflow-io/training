@@ -1,5 +1,6 @@
 {
     "reads_bam": "data/sample_bams.txt",
+    "outdir": "results_genomics",
     "reference": "data/ref/ref.fasta",
     "reference_index": "data/ref/ref.fasta.fai",
     "reference_dict": "data/ref/ref.dict",
