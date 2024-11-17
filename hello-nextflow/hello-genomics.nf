@@ -19,6 +19,7 @@ process SAMTOOLS_INDEX {
 
     output:
 
+    script:
     """
 
     """

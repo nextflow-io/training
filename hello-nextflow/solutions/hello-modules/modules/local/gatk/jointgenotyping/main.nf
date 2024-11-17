@@ -18,8 +18,8 @@ process GATK_JOINTGENOTYPING {
         path ref_dict
 
     output:
-        path "${cohort_name}.joint.vcf"
-        path "${cohort_name}.joint.vcf.idx"
+        path "${cohort_name}.joint.vcf"    , emit: vcf
+        path "${cohort_name}.joint.vcf.idx", emit: idx
 
     script:
         def gvcfs_line = all_gvcfs.collect { gvcf -> "-V ${gvcf}" }.join(' ')
