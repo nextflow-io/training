@@ -159,7 +159,7 @@ nextflow run hello-world.nf
 You console output should look something like this:
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `hello-world.nf` [reverent_carson] DSL2 - revision: 463b611a35
 
@@ -307,7 +307,7 @@ nextflow run hello-world.nf
 The log output should be very similar to the first time your ran the workflow:
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `hello-world.nf` [cranky_sinoussi] DSL2 - revision: 30b437bb96
 
@@ -369,7 +369,7 @@ nextflow run hello-world.nf
 The log output should start looking very familiar:
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `hello-world.nf` [mighty_lovelace] DSL2 - revision: 6654bc1327
 
@@ -412,7 +412,7 @@ nextflow run hello-world.nf -resume
 The console output should look similar.
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `hello-world.nf` [thirsty_gautier] DSL2 - revision: 6654bc1327
 
@@ -557,7 +557,7 @@ nextflow run hello-world.nf
 If you made all four edits correctly, you should get another successful execution:
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `hello-world.nf` [prickly_avogadro] DSL2 - revision: b58b6ab94b
 
@@ -613,7 +613,7 @@ nextflow run hello-world.nf --greeting 'Bonjour le monde!'
 Running this should feel extremely familiar by now.
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `hello-world.nf` [cheesy_engelbart] DSL2 - revision: b58b6ab94b
 
@@ -652,7 +652,7 @@ nextflow run hello-world.nf
 The output should look the same.
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `hello-world.nf` [wise_waddington] DSL2 - revision: 988fc779cf
 
@@ -671,7 +671,7 @@ nextflow run hello-world.nf --greeting 'Konnichiwa!'
 Nextflow's not complaining, that's a good sign:
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `hello-world.nf` [prickly_miescher] DSL2 - revision: 988fc779cf
 
@@ -806,7 +806,7 @@ nextflow run hello-world.nf --greeting 'Hello World!'
 Oh, how exciting! There is now an extra line in the log output, which corresponds to the new process we just added:
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `hello-world.nf` [magical_brenner] DSL2 - revision: 0e18f34798
 
@@ -876,7 +876,7 @@ nextflow run hello-world.nf
 Well, it certainly seems to run just fine.
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `hello-world.nf` [lonely_pare] DSL2 - revision: b9f1d96905
 
@@ -988,7 +988,7 @@ nextflow run hello-world.nf
 Reverting back to the summary view, the output looks like this again:
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `hello-world.nf` [jovial_mccarthy] DSL2 - revision: 53f20aeb70
 
@@ -1159,7 +1159,7 @@ nextflow run hello-world.nf
 Once again we see each process get executed three times:
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `hello-world.nf` [angry_spence] DSL2 - revision: d171cc0193
 
