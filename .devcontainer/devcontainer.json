@@ -5,8 +5,10 @@
     "features": {
         "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
     },
+    "workspaceFolder": "${localWorkspaceFolder}",
+    "workspaceMount": "source=${localWorkspaceFolder},target=${localWorkspaceFolder},type=bind",
     "remoteEnv": {
-        "NXF_HOME": "/workspaces/training/.nextflow",
+        "NXF_HOME": "/workspaces/.nextflow",
         "HOST_PROJECT_PATH": "${localWorkspaceFolder}"
     },
     // Configure tool-specific properties.
@@ -32,5 +34,6 @@
             "label": "Application",
             "onAutoForward": "openPreview"
         }
-    }
+    },
+    "postCreateCommand": "mkdir -p /workspace && ln -s /workspaces /workspace/gitpod"
 }

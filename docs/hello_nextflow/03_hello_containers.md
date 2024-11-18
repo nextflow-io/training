@@ -112,11 +112,7 @@ When you run a container, it is isolated from the host system by default.
 This means that the container can't access any files on the host system unless you explicitly tell it to.
 One way to do this is to **mount** a **volume** from the host system into the container.
 
-Prior to working on the next task, confirm that you are in the `hello-nextflow` directory.
-
-```bash
-cd /workspace/gitpod/hello-nextflow
-```
+Prior to working on the next task, confirm that you are in the `hello-nextflow` directory. The last part of the path shown when you type `pwd` should be `hello-nextflow`.
 
 Then run:
 
@@ -309,7 +305,7 @@ Click on "+Add" and then "Get Container" to request a container image for the `q
 ![Seqera Containers](img/seqera-containers-2.png)
 
 If this is the first time a community container has been built for this version of the package, it may take a few minutes to complete.
-Click to copy the URI (e.g. `community.wave.seqera.io/library/pip_cowsay:131d6a1b707a8e65`) of the container image that was created for you.
+Click to copy the URI (e.g. `community.wave.seqera.io/library/pip_quote:ae07804021465ee9`) of the container image that was created for you.
 
 You can now use the container image to run the `quote` command and get a random saying from Grace Hopper.
 
@@ -439,7 +435,7 @@ For the `quote` container image, you can either use the one you built yourself i
             """
         ```
 
-You can find a solution to this exercise in `containers/scripts/hello-containers-4.1.nf`.
+You can find a solution to this exercise in `containers/solutions/hello-containers-4.1.nf`.
 
 ### 4.2. Modify your Nextflow pipeline to allow it to execute in `quote` and `sayHello` modes.
 
@@ -462,7 +458,7 @@ workflow {
 
     You can use `new_ch = processName.out` to assign a name to the output channel of a process.
 
-You can find a solution to this exercise in `containers/scripts/hello-containers-4.2.nf`.
+You can find a solution to this exercise in `containers/solutions/hello-containers-4.2.nf`.
 
 ### Takeaway
 
