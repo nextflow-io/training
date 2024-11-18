@@ -139,7 +139,7 @@ nextflow run nf-core/demo -profile docker,test --outdir results
 
 !!! hint "Changing Nextflow version"
 
-    Depending on the nextflow version you have installed, this command might fail due to a version mismatch.
+    Depending on the Nextflow version you have installed, this command might fail due to a version mismatch.
     If that happens, you can temporarily run the pipeline with a different version than you have installed by adding `NXF_VER=version` to the start of your command as shown below:
 
     ```bash
@@ -362,7 +362,7 @@ You can use the `test` profile to check if your pipeline is still working during
 
 The default template `test` profile leverages small test files that are stored in the nf-core [test data GitHub repository](https://github.com/nf-core/test-datasets) as inputs for the pipeline.
 
-Additionally, the template comes with profiles for the management of software dependencies (e.g., `docker`, `singularity`, and `conda`). nf-core modules come with containers/images/recipes and profiles can be used to change the way dependencies are handled when you execute your pipeline.
+Additionally, the template comes with profiles for managing software dependencies (e.g., `docker`, `singularity`, and `conda`). nf-core modules come with containers/images/recipes, and profiles can be used to change how dependencies are handled when you execute your pipeline.
 
 !!! warning
 
@@ -507,7 +507,7 @@ Let's see which modules are there:
 nf-core modules list remote
 ```
 
-This command lists all currently available modules, > 1300. An easier way to find them, is to go to the nf-core website and visit the modules subpage [https://nf-co.re/modules](https://nf-co.re/modules). Here you can search for modules by name or tags, find documentation for each module and which nf-core pipeline uses it:
+This command lists all currently available modules, > 1300. An easier way to find them is to go to the nf-core website and visit the modules subpage [https://nf-co.re/modules](https://nf-co.re/modules). Here you can search for modules by name or tags, find documentation for each module and which nf-core pipeline uses it:
 
 ![nf-core/modules](img/nf-core-modules.png)
 
@@ -639,7 +639,7 @@ Using this module information you can work out what inputs are required for the 
     -   A tuple with a meta _map_ and a list of FASTQ _files_
     -   The channel `ch_samplesheet` used by the `FASTQC` process can be used as the reads input.
 
-As only one input channel required, and it already exists, it can be added to your `firstpipeline.nf` file without any additional channel creation or modifications.
+Only one input channel is required, and it already exists, so it can be added to your `firstpipeline.nf` file without any additional channel creation or modifications.
 
 ```groovy title="workflows/myfirstpipeline.nf" linenums="29"
 //
@@ -758,7 +758,7 @@ ch_versions = ch_versions.mix(SEQTK_TRIM.out.versions.first())
 
 ### Add a parameter to the `seqtk/trim` tool
 
-mf-core modules should be flexible and usable across many different pipelines. Therefore, tool parameters are typically not set in an nf-core/module. Instead additional configuration options on how to run the tool like its parameters, or filename can be applied to a module using the `conf/modules.config` file on the pipeline level. Process selectors (e.g., `withName`) are used to apply configuration to modules selectively. Process selectors must be used within the `process` scope.
+nf-core modules should be flexible and usable across many different pipelines. Therefore, tool parameters are typically not set in an nf-core/module. Instead, additional configuration options on how to run the tool like its parameters, or filename can be applied to a module using the `conf/modules.config` file on the pipeline level. Process selectors (e.g., `withName`) are used to apply configuration to modules selectively. Process selectors must be used within the `process` scope.
 
 The parameters or arguments of a tool can be changed using the directive `args`. You can find many examples of how arguments are added to modules in nf-core pipelines, for example, the nf-core/demo [modules.config](https://github.com/nf-core/demo/blob/master/conf/modules.config) file.
 
@@ -779,7 +779,7 @@ nextflow run . -profile docker,test --outdir results
 [27/397ccf] process > MYORG_MYFIRSTPIPELINE:MYFIRSTPIPELINE:MULTIQC                 [100%] 1 of 1 ✔
 ```
 
-Copy the hash, that you see in your console output (here `6c/34e549`, it is different for _each_ run). You can `ls` using tab-completion in your `work` directory to expand the complete hash.
+Copy the hash you see in your console output (here `6c/34e549`; it is different for _each_ run). You can `ls` using tab-completion in your `work` directory to expand the complete hash.
 In this folder you will find various log files. The `.command.sh` file contains the resolved command:
 
 ```bash
@@ -896,7 +896,7 @@ WARN: The following invalid input values have been detected:
 * --skip_trim: true
 ```
 
-Parameters are validated through the `nextflow_schema.json` file. This file is also used by the nf-core website (for example in [nf-core/mag](https://nf-co.re/mag/3.2.1/parameters/)) to render the parameter documentation, and to print the pipeline help message (`nextflow run . --help`). If you have added parameters and they have not been documented in the `nextflow_schema.json` file then the input validation does not recognize the parameter.
+Parameters are validated through the `nextflow_schema.json` file. This file is also used by the nf-core website (for example, in [nf-core/mag](https://nf-co.re/mag/3.2.1/parameters/)) to render the parameter documentation and print the pipeline help message (`nextflow run . --help`). If you have added parameters and they have not been documented in the `nextflow_schema.json` file, then the input validation does not recognize the parameter.
 
 The `nextflow_schema.json` file can get very big and very complicated very quickly.
 
@@ -918,7 +918,7 @@ INFO     Writing schema with 21 params: 'nextflow_schema.json'
 
 Using the web builder you can add add details about your new parameters.
 
-The parameters that you have added to your pipeline will be added to the bottom of the `nf-core schema build` file. Some information about these parameters will be automatically filled based on the default value from your `nextflow.config`. You will be able to categorize your new parameters into a group, add icons, and add descriptions for each.
+The parameters that you have added to your pipeline will be added to the bottom of the `nf-core pipelines schema build` file. Some information about these parameters will be automatically filled based on the default value from your `nextflow.config`. You will be able to categorize your new parameters into a group, add icons, and add descriptions for each.
 
 ![Pipeline parameters](img/pipeline_schema.png)
 
@@ -953,7 +953,7 @@ In the next step we will take a look at how we track metadata related to an inpu
 
 ## Meta maps
 
-Datasets often have additional information that is relevant for the analysis, such as a sample name, information about sequencing protocols, or other conditions that are needed in the pipeline to process certain samples together, determine their output name, or adjust parameters.
+Datasets often contain additional information relevant to the analysis, such as a sample name, information about sequencing protocols, or other conditions needed in the pipeline to process certain samples together, determine their output name, or adjust parameters.
 
 By convention, nf-core tracks this type of information in `meta` maps. These are `key`-`value` pairs that are passed into modules together with the files. We already saw this briefly, when inspecting the `input` for `seqtk`:
 
@@ -1044,7 +1044,7 @@ This sets the key name as `id` and the value that is in the `sample` column, for
 [id: SAMPLE1_PE]
 ```
 
-By adding a new entry into the json schema, we can attach additional meta information that we want to track. This will automtically validate it for us and add it to the meta map.
+By adding a new entry into the JSON schema, we can attach additional meta information that we want to track. This will automatically validate it for us and add it to the meta map.
 
 Let's add some new meta information, like the `sequencer` as an optional column:
 
@@ -1111,7 +1111,7 @@ We can comment the `ch_samplesheet.view()` line or remove it. We are not going t
 
 ### Use the new meta key in the pipeline
 
-We can access this new meta value in the pipeline and use to for example only enable trimming for samples from a particular sequencer. The [branch operator](https://www.nextflow.io/docs/stable/reference/operator.html#branch) let's us split
+We can access this new meta value in the pipeline and use it to, for example, only enable trimming for samples from a particular sequencer. The [branch operator](https://www.nextflow.io/docs/stable/reference/operator.html#branch) let's us split
 an input channel into several new output channels based on a selection critera:
 
 ```groovy title="workflows/myfirstpipeline.nf" linenums="35"

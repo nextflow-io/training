@@ -503,7 +503,7 @@ This is where channels come in: Nextflow uses channels to feed inputs to process
 
 There are multiple ways to do this, but for now, we're just going to use the simplest possible channel, containing a single value.
 
-We're going to create the channel using the `Channel.of()` factory, which sets up a simple value channel, and give it a hardcoded string to use as greeting by declaring `greeting_ch = Channel.of('Hello world!')`.
+We're going to create the channel using the `of()` channel factory, which sets up a simple value channel, and give it a hardcoded string to use as greeting by declaring `greeting_ch = Channel.of('Hello world!')`.
 
 _Before:_
 
@@ -843,7 +843,7 @@ Learn how to make the workflow run on a batch of input values.
 
 Workflows typically run on batches of inputs that are meant to be processed in bulk, so we want to upgrade the workflow to accept multiple input values.
 
-Conveniently, the `Channel.of()` factory we've been using is quite happy to accept more than one value, so we don't need to modify that at all; we just have to load more values into the channel.
+Conveniently, the `of()` channel factory we've been using is quite happy to accept more than one value, so we don't need to modify that at all; we just have to load more values into the channel.
 
 ### 8.1. Load multiple greetings into the input channel
 
@@ -1049,7 +1049,7 @@ _Before:_
 /*
  * Pipeline parameters
  */
-params.greeting = "Bonjour le monde!"
+params.greeting = "Holà mundo!"
 ```
 
 _After:_
@@ -1063,11 +1063,11 @@ params.input_file = "data/greetings.csv"
 
 ### 9.2. Update the channel declaration to handle the input file
 
-At this point we introduce a new channel factory, `Channel.fromPath()`, which has some built-in functionality for handling file paths.
-We're going to use that instead of the `Channel.of()` factory we used previously; the base syntax looks like this:
+At this point we introduce a new channel factory, `fromPath()`, which has some built-in functionality for handling file paths.
+We're going to use that instead of the `of()` channel factory we used previously; the base syntax looks like this:
 
 ```groovy title="channel construction syntax"
-Channel.fromPath(input_file)
+Channel.fromPath(params.input_file)
 ```
 
 Now, we are going to deploy a new concept, an 'operator' to transform that CSV file into channel content. You'll learn more about operators later, but for now just understand them as ways of transforming channels in a variety of ways.
@@ -1077,7 +1077,7 @@ Since our goal is to read in the contents of a `.csv` file, we're going to add t
 So the channel construction instruction becomes:
 
 ```groovy title="channel construction syntax"
-Channel.fromPath(input_file)
+Channel.fromPath(params.input_file)
        .splitCsv()
        .flatten()
 ```
@@ -1100,25 +1100,35 @@ greeting_ch = Channel.fromPath(params.input_file)
                      .flatten()
 ```
 
-### 9.3. Run the workflow (one last time!)
+If you want to see the impact of `.flatten()`, we can make use of `.view()`, another operator, to demonstrate. Edit that section of code so it looks like:
 
-```bash
-nextflow run hello-world.nf
+```groovy title="flatten usage"
+// create a channel for inputs from a CSV file
+greeting_ch = Channel.fromPath(params.input_file)
+                     .splitCsv()
+                     .view{ "After splitCsv: $it" }
+                     .flatten()
+                     .view{ "After flatten: $it" }
 ```
 
-Once again we see each process get executed three times:
+When you run this updated workflow, you'll see the difference:
 
-```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
-
- ┃ Launching `hello-world.nf` [angry_spence] DSL2 - revision: d171cc0193
-
-executor >  local (6)
-[0e/ceb175] sayHello (2)       [100%] 3 of 3 ✔
-[01/046714] convertToUpper (3) [100%] 3 of 3 ✔
+```console title="view output with and without flatten"
+After splitCsv: [Hello, Bonjour, Holà]
+After flatten: Hello
+After flatten: Bonjour
+After flatten: Holà
+[d3/1a6e23] Submitted process > sayHello (3)
+[8f/d9e431] Submitted process > sayHello (1)
+[e7/a088af] Submitted process > sayHello (2)
+[1a/776e2e] Submitted process > convertToUpper (1)
+[83/fb8eba] Submitted process > convertToUpper (2)
+[ee/280f93] Submitted process > convertToUpper (3)
 ```
 
-Looking at the outputs, we see each greeting was correctly extracted and processed through the workflow. We've achieved the same result as the previous step, but now we have a lot more flexibility to add more elements to the channel of greetings we want to process.
+As you can see, the `flatten()` operator has transformed the channel from containing arrays to containing individual elements. This can be useful when you want to process each item separately in your workflow.
+
+Remove the `.view()` operations before you continue.
 
 !!! tip
 
@@ -1139,6 +1149,26 @@ Looking at the outputs, we see each greeting was correctly extracted and process
     Bonjour
     Holà
     ```
+
+### 9.3. Run the workflow (one last time!)
+
+```bash
+nextflow run hello-world.nf
+```
+
+Once again we see each process get executed three times:
+
+```console title="Output"
+ N E X T F L O W   ~  version 24.02.0-edge
+
+ ┃ Launching `hello-world.nf` [angry_spence] DSL2 - revision: d171cc0193
+
+executor >  local (6)
+[0e/ceb175] sayHello (2)       [100%] 3 of 3 ✔
+[01/046714] convertToUpper (3) [100%] 3 of 3 ✔
+```
+
+Looking at the outputs, we see each greeting was correctly extracted and processed through the workflow. We've achieved the same result as the previous step, but now we have a lot more flexibility to add more elements to the channel of greetings we want to process.
 
 ### Takeaway
 

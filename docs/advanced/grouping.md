@@ -256,9 +256,9 @@ process GenotypeOnInterval {
     tuple val(meta), path(bam), path(bed)
 
     output:
-    tuple val(meta), path("genotyped.bam")
+    tuple val(meta), path("genotyped.vcf")
 
-    "cat $bam $bed > genotyped.bam"
+    "cat $bam $bed > genotyped.vcf"
 }
 ```
 
@@ -282,12 +282,12 @@ Finally, we can combine these genotyped bams back using `groupTuple` and another
 ```groovy linenums="1"
 process MergeGenotyped {
     input:
-    tuple val(meta), path("input/in_*_.bam")
+    tuple val(meta), path("input/in_*_.vcf")
 
     output:
-    tuple val(meta), path("merged.genotyped.bam")
+    tuple val(meta), path("merged.genotyped.vcf")
 
-    "cat input/*.bam > merged.genotyped.bam"
+    "cat input/*.vcf > merged.genotyped.vcf"
 }
 ```
 
@@ -331,12 +331,12 @@ MapReads( samples, reference )
 This will return us six bam files - a tumor and normal pair for each of the three samples:
 
 ```output title="Final channel output"
-[[id:sampleB, type:normal], merged.genotyped.bam]
-[[id:sampleB, type:tumor], merged.genotyped.bam]
-[[id:sampleA, type:normal], merged.genotyped.bam]
-[[id:sampleA, type:tumor], merged.genotyped.bam]
-[[id:sampleC, type:normal], merged.genotyped.bam]
-[[id:sampleC, type:tumor], merged.genotyped.bam]
+[[id:sampleB, type:normal], merged.genotyped.vcf]
+[[id:sampleB, type:tumor], merged.genotyped.vcf]
+[[id:sampleA, type:normal], merged.genotyped.vcf]
+[[id:sampleA, type:tumor], merged.genotyped.vcf]
+[[id:sampleC, type:normal], merged.genotyped.vcf]
+[[id:sampleC, type:tumor], merged.genotyped.vcf]
 ```
 
 If we would like to save the output of our `MergeGenotyped` process, we can "publish" the outputs of a process using the `publishDir` directive. We will cover this in more detail on day 2, but try modifying the `MergeGenotyped` process to include the directive:
@@ -346,23 +346,25 @@ process MergeGenotyped {
     publishDir 'results/genotyped'
 
     input:
-    tuple val(meta), path("input/in_*_.bam")
+    tuple val(meta), path("input/in_*_.vcf")
 
     output:
-    tuple val(meta), path("merged.genotyped.bam")
+    tuple val(meta), path("merged.genotyped.vcf")
 
-    "cat input/*.bam > merged.genotyped.bam"
+    "cat input/*.vcf > merged.genotyped.vcf"
 }
 ```
 
 This will publish all of the files in the `output` block of this process to the `results/genotyped` directory.
 
 !!! exercise
-Inspect the contents of the `results` directory. Does this match what you were expecting? What is missing here?
+
+    Inspect the contents of the `results` directory. Does this match what you were expecting? What is missing here?
 
     Can you modify the `MergeGenotyped` process to ensure we are capturing all of the expected output files?
 
     ??? solution
+
         One solution might be to modify the `script` block to ensure that each file has a unique name:
 
         ```groovy
@@ -370,12 +372,12 @@ Inspect the contents of the `results` directory. Does this match what you were e
             publishDir 'results/genotyped'
 
             input:
-            tuple val(meta), path("input/in_*_.bam")
+            tuple val(meta), path("input/in_*_.vcf")
 
             output:
-            tuple val(meta), path("*.bam")
+            tuple val(meta), path("*.vcf")
 
-            "cat input/*.bam > ${meta.id}.${meta.type}.genotyped.bam"
+            "cat input/*.vcf > ${meta.id}.${meta.type}.genotyped.vcf"
         }
         ```
 
@@ -383,15 +385,15 @@ Inspect the contents of the `results` directory. Does this match what you were e
 
         ```groovy
         process MergeGenotyped {
-            publishDir 'results/genotyped', saveAs: { "${meta.id}.${meta.type}.genotyped.bam" }
+            publishDir 'results/genotyped', saveAs: { "${meta.id}.${meta.type}.genotyped.vcf" }
 
             input:
-            tuple val(meta), path("input/in_*_.bam")
+            tuple val(meta), path("input/in_*_.vcf")
 
             output:
-            tuple val(meta), path("merged.genotyped.bam")
+            tuple val(meta), path("merged.genotyped.vcf")
 
-            "cat input/*.bam > merged.genotyped.bam"
+            "cat input/*.vcf > merged.genotyped.vcf"
         }
         ```
 

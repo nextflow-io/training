@@ -54,8 +54,7 @@ The tools we need (Samtools and GATK) are not installed in the Gitpod environmen
 
 !!! note
 
-     Make sure you're in the correct working directory:
-     `cd /workspace/gitpod/hello-nextflow`
+     Make sure you're in the `hello-nextflow` directory so that the last part of the path shown when you type `pwd` is `hello-nextflow`.
 
 ### 0.1. Index a BAM input file with Samtools
 
@@ -181,7 +180,7 @@ process SAMTOOLS_INDEX {
 
     container 'community.wave.seqera.io/library/samtools:1.20--b5dfbd93de237464'
 
-    publishDir 'results_genomics', mode: 'symlink'
+    publishDir params.outdir, mode: 'symlink'
 
     input:
         path input_bam
@@ -196,7 +195,7 @@ process SAMTOOLS_INDEX {
 }
 ```
 
-You should recognize all the pieces from what you learned in Part 1 & Part 2 of this training series; the only notable change is that this time we're using `mode: symlink` for the `publishDir` directive.
+You should recognize all the pieces from what you learned in Part 1 & Part 2 of this training series; the only notable change is that this time we're using `mode: symlink` for the `publishDir` directive, and we're using a parameter to define the `publishDir`.
 
 !!! note
 
@@ -204,10 +203,10 @@ You should recognize all the pieces from what you learned in Part 1 & Part 2 of 
 
 This process is going to require us to pass in a file path via the `input_bam` input, so let's set that up next.
 
-### 1.2. Add an input parameter declaration
+### 1.2. Add an input and output parameter declaration
 
 At the top of the file, under the `Pipeline parameters` section, we declare a CLI parameter called `reads_bam` and give it a default value.
-That way, we can be lazy and not specify the input when we type the command to launch the pipeline (for development purposes).
+That way, we can be lazy and not specify the input when we type the command to launch the pipeline (for development purposes). We're also going to set `params.outdir` with a default value for the output directory.
 
 ```groovy title="hello-genomics.nf" linenums="3"
 /*
@@ -216,9 +215,16 @@ That way, we can be lazy and not specify the input when we type the command to l
 
 // Primary input
 params.reads_bam = "${projectDir}/data/bam/reads_mother.bam"
+params.outdir    = "results_genomics"
 ```
 
 Now we have a process ready, as well as a parameter to give it an input to run on, so let's wire those things up together.
+
+!!! note
+
+    `${projectDir}` is a built-in Nextflow variable that points to the directory where the current Nextflow workflow script (`hello-genomics.nf`) is located.
+
+    This makes it easy to reference files, data directories, and other resources included in the workflow repository without hardcoding absolute paths.
 
 ### 1.3. Add workflow block to run SAMTOOLS_INDEX
 
@@ -299,7 +305,7 @@ process GATK_HAPLOTYPECALLER {
 
     container "community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"
 
-    publishDir 'results_genomics', mode: 'symlink'
+    publishDir params.outdir, mode: 'symlink'
 
     input:
         path input_bam
