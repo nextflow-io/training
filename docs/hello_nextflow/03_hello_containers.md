@@ -112,11 +112,7 @@ When you run a container, it is isolated from the host system by default.
 This means that the container can't access any files on the host system unless you explicitly tell it to.
 One way to do this is to **mount** a **volume** from the host system into the container.
 
-Prior to working on the next task, confirm that you are in the `hello-nextflow` directory.
-
-```bash
-cd /workspace/gitpod/hello-nextflow
-```
+Prior to working on the next task, confirm that you are in the `hello-nextflow` directory. The last part of the path shown when you type `pwd` should be `hello-nextflow`.
 
 Then run:
 

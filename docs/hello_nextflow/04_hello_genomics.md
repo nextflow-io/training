@@ -54,8 +54,7 @@ The tools we need (Samtools and GATK) are not installed in the Gitpod environmen
 
 !!! note
 
-     Make sure you're in the correct working directory:
-     `cd /workspace/gitpod/hello-nextflow`
+     Make sure you're in the `hello-nextflow` directory so that the last part of the path shown when you type `pwd` is `hello-nextflow`.
 
 ### 0.1. Index a BAM input file with Samtools
 
