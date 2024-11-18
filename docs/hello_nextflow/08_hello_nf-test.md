@@ -70,7 +70,7 @@ nextflow run main.nf -profile my_laptop,demo
 This should look very familiar by now if you've been working through this training course from the start.
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `main.nf` [special_brenner] DSL2 - revision: 5a07b4894b
 

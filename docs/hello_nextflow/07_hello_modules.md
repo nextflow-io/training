@@ -73,7 +73,7 @@ nextflow run main.nf -profile my_laptop,demo
 And so it does.
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `main.nf` [special_brenner] DSL2 - revision: 5a07b4894b
 
@@ -220,7 +220,7 @@ nextflow run main.nf -profile my_laptop,demo -resume
 Sure enough, Nextflow recognizes that it's still all the same work to be done, even if the code is split up into multiple files.
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `main.nf` [agitated_cuvier] DSL2 - revision: 0ce0cd0c04
 
