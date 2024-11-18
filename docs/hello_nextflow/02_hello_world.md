@@ -159,7 +159,7 @@ nextflow run hello-world.nf
 You console output should look something like this:
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `hello-world.nf` [reverent_carson] DSL2 - revision: 463b611a35
 
@@ -307,7 +307,7 @@ nextflow run hello-world.nf
 The log output should be very similar to the first time your ran the workflow:
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `hello-world.nf` [cranky_sinoussi] DSL2 - revision: 30b437bb96
 
@@ -369,7 +369,7 @@ nextflow run hello-world.nf
 The log output should start looking very familiar:
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `hello-world.nf` [mighty_lovelace] DSL2 - revision: 6654bc1327
 
@@ -412,7 +412,7 @@ nextflow run hello-world.nf -resume
 The console output should look similar.
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `hello-world.nf` [thirsty_gautier] DSL2 - revision: 6654bc1327
 
@@ -503,7 +503,7 @@ This is where channels come in: Nextflow uses channels to feed inputs to process
 
 There are multiple ways to do this, but for now, we're just going to use the simplest possible channel, containing a single value.
 
-We're going to create the channel using the `Channel.of()` factory, which sets up a simple value channel, and give it a hardcoded string to use as greeting by declaring `greeting_ch = Channel.of('Hello world!')`.
+We're going to create the channel using the `of()` channel factory, which sets up a simple value channel, and give it a hardcoded string to use as greeting by declaring `greeting_ch = Channel.of('Hello world!')`.
 
 _Before:_
 
@@ -557,7 +557,7 @@ nextflow run hello-world.nf
 If you made all four edits correctly, you should get another successful execution:
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `hello-world.nf` [prickly_avogadro] DSL2 - revision: b58b6ab94b
 
@@ -613,7 +613,7 @@ nextflow run hello-world.nf --greeting 'Bonjour le monde!'
 Running this should feel extremely familiar by now.
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `hello-world.nf` [cheesy_engelbart] DSL2 - revision: b58b6ab94b
 
@@ -652,7 +652,7 @@ nextflow run hello-world.nf
 The output should look the same.
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `hello-world.nf` [wise_waddington] DSL2 - revision: 988fc779cf
 
@@ -671,7 +671,7 @@ nextflow run hello-world.nf --greeting 'Konnichiwa!'
 Nextflow's not complaining, that's a good sign:
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `hello-world.nf` [prickly_miescher] DSL2 - revision: 988fc779cf
 
@@ -806,7 +806,7 @@ nextflow run hello-world.nf --greeting 'Hello World!'
 Oh, how exciting! There is now an extra line in the log output, which corresponds to the new process we just added:
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `hello-world.nf` [magical_brenner] DSL2 - revision: 0e18f34798
 
@@ -843,7 +843,7 @@ Learn how to make the workflow run on a batch of input values.
 
 Workflows typically run on batches of inputs that are meant to be processed in bulk, so we want to upgrade the workflow to accept multiple input values.
 
-Conveniently, the `Channel.of()` factory we've been using is quite happy to accept more than one value, so we don't need to modify that at all; we just have to load more values into the channel.
+Conveniently, the `of()` channel factory we've been using is quite happy to accept more than one value, so we don't need to modify that at all; we just have to load more values into the channel.
 
 ### 8.1. Load multiple greetings into the input channel
 
@@ -876,7 +876,7 @@ nextflow run hello-world.nf
 Well, it certainly seems to run just fine.
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `hello-world.nf` [lonely_pare] DSL2 - revision: b9f1d96905
 
@@ -988,7 +988,7 @@ nextflow run hello-world.nf
 Reverting back to the summary view, the output looks like this again:
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `hello-world.nf` [jovial_mccarthy] DSL2 - revision: 53f20aeb70
 
@@ -1063,11 +1063,11 @@ params.input_file = "data/greetings.csv"
 
 ### 9.2. Update the channel declaration to handle the input file
 
-At this point we introduce a new channel factory, `Channel.fromPath()`, which has some built-in functionality for handling file paths.
-We're going to use that instead of the `Channel.of()` factory we used previously; the base syntax looks like this:
+At this point we introduce a new channel factory, `fromPath()`, which has some built-in functionality for handling file paths.
+We're going to use that instead of the `of()` channel factory we used previously; the base syntax looks like this:
 
 ```groovy title="channel construction syntax"
-Channel.fromPath(input_file)
+Channel.fromPath(params.input_file)
 ```
 
 Now, we are going to deploy a new concept, an 'operator' to transform that CSV file into channel content. You'll learn more about operators later, but for now just understand them as ways of transforming channels in a variety of ways.
@@ -1077,7 +1077,7 @@ Since our goal is to read in the contents of a `.csv` file, we're going to add t
 So the channel construction instruction becomes:
 
 ```groovy title="channel construction syntax"
-Channel.fromPath(input_file)
+Channel.fromPath(params.input_file)
        .splitCsv()
        .flatten()
 ```
@@ -1126,29 +1126,9 @@ After flatten: Holà
 [ee/280f93] Submitted process > convertToUpper (3)
 ```
 
-As you can see, the flatten() operator has transformed the channel from containing arrays to containing individual elements. This can be useful when you want to process each item separately in your workflow.
+As you can see, the `flatten()` operator has transformed the channel from containing arrays to containing individual elements. This can be useful when you want to process each item separately in your workflow.
 
 Remove the `.view()` operations before you continue.
-
-### 9.3. Run the workflow (one last time!)
-
-```bash
-nextflow run hello-world.nf
-```
-
-Once again we see each process get executed three times:
-
-```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
-
- ┃ Launching `hello-world.nf` [angry_spence] DSL2 - revision: d171cc0193
-
-executor >  local (6)
-[0e/ceb175] sayHello (2)       [100%] 3 of 3 ✔
-[01/046714] convertToUpper (3) [100%] 3 of 3 ✔
-```
-
-Looking at the outputs, we see each greeting was correctly extracted and processed through the workflow. We've achieved the same result as the previous step, but now we have a lot more flexibility to add more elements to the channel of greetings we want to process.
 
 !!! tip
 
@@ -1169,6 +1149,26 @@ Looking at the outputs, we see each greeting was correctly extracted and process
     Bonjour
     Holà
     ```
+
+### 9.3. Run the workflow (one last time!)
+
+```bash
+nextflow run hello-world.nf
+```
+
+Once again we see each process get executed three times:
+
+```console title="Output"
+ N E X T F L O W   ~  version 24.10.0
+
+ ┃ Launching `hello-world.nf` [angry_spence] DSL2 - revision: d171cc0193
+
+executor >  local (6)
+[0e/ceb175] sayHello (2)       [100%] 3 of 3 ✔
+[01/046714] convertToUpper (3) [100%] 3 of 3 ✔
+```
+
+Looking at the outputs, we see each greeting was correctly extracted and processed through the workflow. We've achieved the same result as the previous step, but now we have a lot more flexibility to add more elements to the channel of greetings we want to process.
 
 ### Takeaway
 

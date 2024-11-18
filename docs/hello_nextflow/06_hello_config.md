@@ -93,7 +93,7 @@ This should run successfully:
 ```console title="Output"
 Nextflow 24.09.2-edge is available - Please consider updating your version to it
 
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `main.nf` [tender_brahmagupta] DSL2 - revision: 848ff2f9b5
 
@@ -152,7 +152,7 @@ nextflow run main.nf
 As expected, the run fails with an error message that looks like this:
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `hello-config/main.nf` [silly_ramanujan] DSL2 - revision: 9129bc4618
 
@@ -233,7 +233,7 @@ process SAMTOOLS_INDEX {
 
     container 'community.wave.seqera.io/library/samtools:1.20--b5dfbd93de237464'
 
-    publishDir 'results_genomics', mode: 'symlink'
+    publishDir params.outdir, mode: 'symlink'
 ```
 
 _After:_
@@ -244,7 +244,7 @@ process SAMTOOLS_INDEX {
     container "community.wave.seqera.io/library/samtools:1.20--b5dfbd93de237464"
     conda "bioconda::samtools=1.20"
 
-    publishDir 'results_genomics', mode: 'symlink'
+    publishDir params.outdir, mode: 'symlink'
 ```
 
 #### 1.4.2. Update GATK_HAPLOTYPECALLER
@@ -258,7 +258,7 @@ process GATK_HAPLOTYPECALLER {
 
     container "community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"
 
-    publishDir 'results_genomics', mode: 'symlink'
+    publishDir params.outdir, mode: 'symlink'
 ```
 
 _After:_
@@ -269,7 +269,7 @@ process GATK_HAPLOTYPECALLER {
     container "community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"
     conda "bioconda::gatk4=4.5.0.0"
 
-    publishDir 'results_genomics', mode: 'symlink'
+    publishDir params.outdir, mode: 'symlink'
 ```
 
 #### 1.4.3. Update GATK_JOINTGENOTYPING
@@ -283,7 +283,7 @@ process GATK_JOINTGENOTYPING {
 
     container "community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"
 
-    publishDir 'results_genomics', mode: 'symlink'
+    publishDir params.outdir, mode: 'symlink'
 ```
 
 _After:_
@@ -294,7 +294,7 @@ process GATK_JOINTGENOTYPING {
     container "community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"
     conda "bioconda::gatk4=4.5.0.0"
 
-    publishDir 'results_genomics', mode: 'symlink'
+    publishDir params.outdir, mode: 'symlink'
 ```
 
 Once all three processes are updated, we can try running the workflow again.
@@ -310,7 +310,7 @@ nextflow run main.nf
 This will take a bit longer than usual the first time, and you might see the console output stay 'stuck' at this stage for a minute or so:
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `main.nf` [extravagant_thompson] DSL2 - revision: 848ff2f9b5
 
@@ -325,7 +325,7 @@ That's because Nextflow has to retrieve the Conda packages and create the enviro
 After a few moments, it should spit out some more output, and eventually complete without error.
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `main.nf` [silly_goldstine] DSL2 - revision: a60f9fd6af
 
@@ -402,7 +402,7 @@ nextflow run main.nf -profile conda_on
 It works! Convenient, isn't it?
 
 ```
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `main.nf` [sharp_gauss] DSL2 - revision: 66cd7c255a
 
@@ -478,7 +478,7 @@ As expected, this fails with a fairly unambiguous error:
 
 ```console title="Output"
 nextflow
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `main.nf` [grave_gauss] DSL2 - revision: 66cd7c255a
 
@@ -581,7 +581,7 @@ nextflow run main.nf -profile docker_on,local_exec
 With that, we've returned to the original configuration of using Docker containers with local execution, not that you can tell from the console output:
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `main.nf` [irreverent_bassi] DSL2 - revision: 66cd7c255a
 
@@ -872,6 +872,9 @@ So let's cut this set of params out of `main.nf`:
 // Primary input (file of input files, one per line)
 params.reads_bam = "${projectDir}/data/sample_bams.txt"
 
+// Output directory
+params.outdir    = 'results_genomics'
+
 // Accessory files
 params.reference        = "${projectDir}/data/ref/ref.fasta"
 params.reference_index  = "${projectDir}/data/ref/ref.fasta.fai"
@@ -900,7 +903,7 @@ nextflow run main.nf -profile my_laptop -resume
 Not only does everything work, but all of the process calls are recognized as having been run previously.
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `main.nf` [modest_kay] DSL2 - revision: 328869237b
 
@@ -923,6 +926,9 @@ Now that our default parameter declarations are in `nextflow.config`, we can swi
 params {
     // Primary input (file of input files, one per line)
     reads_bam        = "${projectDir}/data/sample_bams.txt"
+
+    // Output directory
+    params.outdir    = 'results_genomics'
 
     // Accessory files
     reference        = "${projectDir}/data/ref/ref.fasta"
@@ -952,6 +958,7 @@ The values are the same input files and reference files we've been using so far.
 ```json title="demo-params.json" linenums="1"
 {
     "reads_bam": "data/sample_bams.txt",
+    "outdir": "results_genomics",
     "reference": "data/ref/ref.fasta",
     "reference_index": "data/ref/ref.fasta.fai",
     "reference_dict": "data/ref/ref.dict",
@@ -969,7 +976,7 @@ nextflow run main.nf -profile my_laptop -params-file demo-params.json
 It works! And as expected, this produces the same outputs as previously.
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `main.nf` [marvelous_mandelbrot] DSL2 - revision: 328869237b
 
@@ -992,6 +999,9 @@ params {
     // Primary input (file of input files, one per line)
     reads_bam        = "${projectDir}/data/sample_bams.txt"
 
+    // Output directory
+    outdir           = 'results_genomics'
+
     // Accessory files
     reference        = "${projectDir}/data/ref/ref.fasta"
     reference_index  = "${projectDir}/data/ref/ref.fasta.fai"
@@ -1009,6 +1019,9 @@ _After:_
 params {
     // Primary input (file of input files, one per line)
     reads_bam        = null
+
+    // Output directory
+    outdir           = null
 
     // Accessory files
     reference        = null
@@ -1085,6 +1098,9 @@ profiles {
         // Primary input (file of input files, one per line)
         params.reads_bam        = "data/sample_bams.txt"
 
+        // Output directory
+        params.outdir           = 'results_genomics'
+
         // Accessory files
         params.reference        = "data/ref/ref.fasta"
         params.reference_index  = "data/ref/ref.fasta.fai"
@@ -1110,7 +1126,7 @@ nextflow run main.nf -profile my_laptop,demo
 And it works perfectly!
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `main.nf` [cheesy_shaw] DSL2 - revision: 328869237b
 
