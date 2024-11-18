@@ -256,7 +256,7 @@ nextflow run hello-genomics.nf
 The command should produce something like this:
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `hello-genomics.nf` [reverent_sinoussi] DSL2 - revision: 41d43ad7fe
 
@@ -406,7 +406,7 @@ nextflow run hello-genomics.nf -resume
 Now if we look at the console output, we see the two processes listed:
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `hello-genomics.nf` [grave_volta] DSL2 - revision: 4790abc96a
 
@@ -495,7 +495,7 @@ Funny thing: this _might work_, OR it _might fail_.
 If your workflow run succeeded, run it again until you get an error like this:
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `hello-genomics.nf` [loving_pasteur] DSL2 - revision: d2a8e63076
 
@@ -676,7 +676,7 @@ nextflow run hello-genomics.nf
 This time (and every time) everything should run correctly:
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `hello-genomics.nf` [special_goldstine] DSL2 - revision: 4cbbf6ea3e
 
@@ -794,7 +794,7 @@ nextflow run hello-genomics.nf -resume
 This should produce the same result as before, right?
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `hello-genomics.nf` [sick_albattani] DSL2 - revision: 46d84642f6
 

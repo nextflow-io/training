@@ -93,7 +93,7 @@ This should run successfully:
 ```console title="Output"
 Nextflow 24.09.2-edge is available - Please consider updating your version to it
 
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `main.nf` [tender_brahmagupta] DSL2 - revision: 848ff2f9b5
 
@@ -152,7 +152,7 @@ nextflow run main.nf
 As expected, the run fails with an error message that looks like this:
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `hello-config/main.nf` [silly_ramanujan] DSL2 - revision: 9129bc4618
 
@@ -310,7 +310,7 @@ nextflow run main.nf
 This will take a bit longer than usual the first time, and you might see the console output stay 'stuck' at this stage for a minute or so:
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `main.nf` [extravagant_thompson] DSL2 - revision: 848ff2f9b5
 
@@ -325,7 +325,7 @@ That's because Nextflow has to retrieve the Conda packages and create the enviro
 After a few moments, it should spit out some more output, and eventually complete without error.
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `main.nf` [silly_goldstine] DSL2 - revision: a60f9fd6af
 
@@ -402,7 +402,7 @@ nextflow run main.nf -profile conda_on
 It works! Convenient, isn't it?
 
 ```
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `main.nf` [sharp_gauss] DSL2 - revision: 66cd7c255a
 
@@ -478,7 +478,7 @@ As expected, this fails with a fairly unambiguous error:
 
 ```console title="Output"
 nextflow
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `main.nf` [grave_gauss] DSL2 - revision: 66cd7c255a
 
@@ -581,7 +581,7 @@ nextflow run main.nf -profile docker_on,local_exec
 With that, we've returned to the original configuration of using Docker containers with local execution, not that you can tell from the console output:
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `main.nf` [irreverent_bassi] DSL2 - revision: 66cd7c255a
 
@@ -903,7 +903,7 @@ nextflow run main.nf -profile my_laptop -resume
 Not only does everything work, but all of the process calls are recognized as having been run previously.
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `main.nf` [modest_kay] DSL2 - revision: 328869237b
 
@@ -976,7 +976,7 @@ nextflow run main.nf -profile my_laptop -params-file demo-params.json
 It works! And as expected, this produces the same outputs as previously.
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `main.nf` [marvelous_mandelbrot] DSL2 - revision: 328869237b
 
@@ -1126,7 +1126,7 @@ nextflow run main.nf -profile my_laptop,demo
 And it works perfectly!
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `main.nf` [cheesy_shaw] DSL2 - revision: 328869237b
 

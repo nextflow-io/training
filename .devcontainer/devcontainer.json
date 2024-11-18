@@ -1,6 +1,9 @@
 {
     "name": "nfcore",
-    "image": "ghcr.io/nextflow-io/training:latest",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "context": ".."
+    },
     "remoteUser": "gitpod",
     "features": {
         "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}

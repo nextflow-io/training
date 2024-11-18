@@ -301,7 +301,7 @@ nextflow run hello-operators.nf
 And the output is... all red! Oh no.
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `hello-operators.nf` [nice_gates] DSL2 - revision: 43c7de9890
 
@@ -354,7 +354,7 @@ nextflow run hello-operators.nf -resume
 Ah, this time it works.
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `hello-operators.nf` [elated_carlsson] DSL2 - revision: 6a5786a6fa
 
@@ -502,7 +502,7 @@ nextflow run hello-operators.nf -resume
 It run fairly quickly, since we're running with `-resume`, but...
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `hello-operators.nf` [mad_edison] DSL2 - revision: 6aea0cfded
 
@@ -627,7 +627,7 @@ nextflow run hello-operators.nf -resume
 Aha! It seems to be working now.
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `hello-operators.nf` [special_noyce] DSL2 - revision: 11f7a51bbe
 
@@ -824,7 +824,7 @@ nextflow run hello-operators.nf -resume
 And it works!
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `hello-operators.nf` [modest_gilbert] DSL2 - revision: 4f49922223
 
