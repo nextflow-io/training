@@ -33,18 +33,18 @@ process sayHello {
  * Use a cow (or other character) to say some text
  */
 process cowSay {
-
     publishDir 'containers/results', mode: 'copy'
+    container 'community.wave.seqera.io/library/pip_cowsay:131d6a1b707a8e65'
 
     input:
-        path input_file
+    path input_file
 
     output:
-        path "cowsay-*"
+    path "cowsay-*.txt"
 
     script:
     """
-    cowsay -c "$params.character" -t "\$(cat $input_file)" > cowsay-${input_file}
+    cowsay -c "$params.character" -t "\$(cat $input_file)" > cowsay-output-\$(basename $input_file .txt).txt
     """
 }
 
