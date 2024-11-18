@@ -199,7 +199,7 @@ You should recognize all the pieces from what you learned in Part 1 & Part 2 of 
 
 !!! note
 
-    Even though the data files we're using here are very small, in genomics they can get very large, so we should get into the habit of using symbolic links rather than making actual copies of these files, unless there's a compelling reason to do so.
+    Even though the data files we're using here are very small, in genomics they can get very large. For the purposes of demonstration in the teaching environment, we're using the 'symlink' publishing mode to avoid unnecessary file copies. You shouldn't do this in your final workflows, since you'll lose results when you clean up your `work` directory.
 
 This process is going to require us to pass in a file path via the `input_bam` input, so let's set that up next.
 
