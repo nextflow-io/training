@@ -244,12 +244,12 @@ You have a general idea of what nf-core offers and you know how to run an nf-cor
 
 ### What's next?
 
-Celebrate and take another break! Next, we'll show you how to use nf-core tooling to build your own pipeline. 
+Celebrate and take another break! Next, we'll show you how to use nf-core tooling to build your own pipeline.
 
 ## Create a basic pipeline from template
 
-We will now start developing our own nf-core style pipeline. The nf-core community provides a command line tool [nf-core tools](https://nf-co.re/docs/nf-core-tools) with helper functions to use and develop pipelines. 
-We have pre-installed it and will use it to create a new pipeline and expand it in this training. 
+We will now start developing our own nf-core style pipeline. The nf-core community provides a command line tool [nf-core tools](https://nf-co.re/docs/nf-core-tools) with helper functions to use and develop pipelines.
+We have pre-installed it and will use it to create a new pipeline and expand it in this training.
 
 View all of the tooling using the `nf-core --help` argument.
 
@@ -304,7 +304,7 @@ Template features can be flexibly included or excluded at the time of creation, 
 
 If run successfully, you will see a new folder in your current directory named `myorg-myfirstpipeline`.
 
-###  Testing your pipeline
+### Testing your pipeline
 
 Let's try it:
 
@@ -336,7 +336,7 @@ Core Nextflow options
   projectDir                : /workspace/gitpod/hello-nextflow/hello-nf-core/myorg-myfirstpipeline
   userName                  : gitpod
   profile                   : docker,test
-  configFiles               : 
+  configFiles               :
 
 !! Only displaying parameters that differ from the pipeline defaults !!
 ------------------------------------------------------
@@ -353,12 +353,12 @@ The nf-core pipeline template is a working pipeline and comes pre-configured wit
 
 !!! note "The template can be granularly configured"
 
-    From nf-core tools 3.0 onwards many features can be removed during template creation. This is what we did when deselecting 
+    From nf-core tools 3.0 onwards many features can be removed during template creation. This is what we did when deselecting
     features earlier.
 
 At the top you see, all parameters displayed that differ from the pipeline defaults. These were configured with the `test` profile.
 
-You can use the `test` profile to check if your pipeline is still working during your development cycle. 
+You can use the `test` profile to check if your pipeline is still working during your development cycle.
 
 The default template `test` profile leverages small test files that are stored in the nf-core [test data GitHub repository](https://github.com/nf-core/test-datasets) as inputs for the pipeline.
 
@@ -453,7 +453,7 @@ The `nextflow_schema.json` is a file used to store parameter related information
 
 ### Takeaway
 
-You have an example pipeline, and learned about important files that the template comes with. 
+You have an example pipeline, and learned about important files that the template comes with.
 
 ### What's next?
 
@@ -463,7 +463,7 @@ Congratulations! In the next step, we will check the input data.
 
 ## Check the input data
 
-Above, we said that the `test` profile comes with small test files that are stored in the nf-core. Let's check what type of files we are dealing with to plan our expansion. Remember that we can inspect any channel content by using the `views` operator: 
+Above, we said that the `test` profile comes with small test files that are stored in the nf-core. Let's check what type of files we are dealing with to plan our expansion. Remember that we can inspect any channel content by using the `views` operator:
 
 ```groovy title="workflows/myfirstpipeline.nf" linenums="27"
 ch_samplesheet.view()
@@ -483,7 +483,7 @@ The output should look like the below. We see that we have FastQ files as input 
 [['id':'SAMPLE3_SE', 'single_end':true], [/nf-core/test-datasets/viralrecon/illumina/amplicon/sample1_R1.fastq.gz, /nf-core/test-datasets/viralrecon/illumina/amplicon/sample2_R1.fastq.gz]]
 ```
 
-You can comment the `view` statement for now. We will use later during this training to inspect the channel content again. 
+You can comment the `view` statement for now. We will use later during this training to inspect the channel content again.
 
 ### Takeaway
 
@@ -497,7 +497,7 @@ In the next step we will start changing the code and add new tools to the pipeli
 
 ## Add an nf-core module
 
-nf-core provides a large library of modules and subworkflows: pre-made nextflow wrappers around tools that can be installed into nextflow pipelines. They are designed to be flexible but may require additional configuration to suit different use cases. Currently, there are more than [1300 nf-core modules](https://nf-co.re/modules) and [60 nf-core subworkflows](https://nf-co.re/subworkflows) (November 2024) available. Modules and subworkflows can be listed, installed, updated, removed, and patched using nf-core tooling. 
+nf-core provides a large library of modules and subworkflows: pre-made nextflow wrappers around tools that can be installed into nextflow pipelines. They are designed to be flexible but may require additional configuration to suit different use cases. Currently, there are more than [1300 nf-core modules](https://nf-co.re/modules) and [60 nf-core subworkflows](https://nf-co.re/subworkflows) (November 2024) available. Modules and subworkflows can be listed, installed, updated, removed, and patched using nf-core tooling.
 
 While you could develop a module for this tool independently, you can save a lot of time and effort by leveraging nf-core modules and subworkflows.
 
@@ -574,7 +574,7 @@ Although the module has been installed in your local pipeline repository, it is 
 The suggested `include` statement needs to be added to your `workflows/myfirstpipeline.nf` file and the process call (with inputs) needs to be added to the workflow block.
 
 ```groovy title="workflows/myfirstpipeline.nf" linenums="6"
-include { SEQTK_TRIM             } from '../modules/nf-core/seqtk/trim/main' 
+include { SEQTK_TRIM             } from '../modules/nf-core/seqtk/trim/main'
 include { MULTIQC                } from '../modules/nf-core/multiqc/main'
 ```
 
@@ -593,7 +593,7 @@ Each nf-core module also has a `meta.yml` file which describes the inputs and ou
 nf-core modules info seqtk/trim
 ```
 
-It outputs a table with all defined inputs and outputs of the module: 
+It outputs a table with all defined inputs and outputs of the module:
 
 ```console title="Output"
 
@@ -675,7 +675,7 @@ Core Nextflow options
   projectDir                : /workspace/gitpod/hello-nextflow/hello-nf-core/myorg-myfirstpipeline
   userName                  : gitpod
   profile                   : docker,test
-  configFiles               : 
+  configFiles               :
 
 !! Only displaying parameters that differ from the pipeline defaults !!
 ------------------------------------------------------
@@ -687,7 +687,7 @@ executor >  local (4)
 
 ### Inspect results folder
 
-Default nf-core configuration directs the output of each process into the `<outdir>/<TOOL>`. After running the previous command, you 
+Default nf-core configuration directs the output of each process into the `<outdir>/<TOOL>`. After running the previous command, you
 should have a `results` folder that looks like this:
 
 ```console
@@ -758,7 +758,7 @@ ch_versions = ch_versions.mix(SEQTK_TRIM.out.versions.first())
 
 ### Add a parameter to the `seqtk/trim` tool
 
-mf-core modules should be flexible and usable across many different pipelines. Therefore, tool parameters are typically not set in an nf-core/module. Instead  additional configuration options on how to run the tool like its parameters, or filename can be applied to a module using the `conf/modules.config` file on the pipeline level. Process selectors (e.g., `withName`) are used to apply configuration to modules selectively. Process selectors must be used within the `process` scope.
+mf-core modules should be flexible and usable across many different pipelines. Therefore, tool parameters are typically not set in an nf-core/module. Instead additional configuration options on how to run the tool like its parameters, or filename can be applied to a module using the `conf/modules.config` file on the pipeline level. Process selectors (e.g., `withName`) are used to apply configuration to modules selectively. Process selectors must be used within the `process` scope.
 
 The parameters or arguments of a tool can be changed using the directive `args`. You can find many examples of how arguments are added to modules in nf-core pipelines, for example, the nf-core/demo [modules.config](https://github.com/nf-core/demo/blob/master/conf/modules.config) file.
 
@@ -844,7 +844,7 @@ We can a new parameter `skip_trim` to your `nextflow.config` file and set it to 
 skip_trim                   = false
 ```
 
-### Adding parameters to your pipeline 
+### Adding parameters to your pipeline
 
 Here, an `if` statement that is depended on the `skip_trim` parameter can be used to control the execution of the `SEQTK_TRIM` process. An `!` can be used to imply the logical "not".
 
@@ -951,7 +951,7 @@ In the next step we will take a look at how we track metadata related to an inpu
 
 ---
 
-## Meta maps 
+## Meta maps
 
 Datasets often have additional information that is relevant for the analysis, such as a sample name, information about sequencing protocols, or other conditions that are needed in the pipeline to process certain samples together, determine their output name, or adjust parameters.
 
@@ -968,11 +968,11 @@ If we uncomment our earlier `view` statement and run the pipeline again, we can 
 [[id:SAMPLE1_PE, sequencer:[], single_end:false], ....]
 ```
 
-You can add any field, that you like to the `meta` map. By default, nf-core modules expect an `id` field. 
+You can add any field, that you like to the `meta` map. By default, nf-core modules expect an `id` field.
 
 ### Takeaway
 
-You know that a `meta` map is used to pass along additional information for a sample. 
+You know that a `meta` map is used to pass along additional information for a sample.
 
 ### What's next?
 
@@ -986,7 +986,7 @@ nf-core pipelines typically use samplesheets as inputs to the pipelines. This al
 
     - validate each entry and print specific error messages
     - attach information to each input file
-    - track which datasets are processed 
+    - track which datasets are processed
 
 Samplesheets are comma-separated text files with a header row specifying the column names, followed by one entry per row. For example, the samplesheet that we have been using during this session looks like this:
 
@@ -1026,10 +1026,10 @@ The structure of the samplesheet is specified in its own schema file in `assets/
 "required": ["sample", "fastq_1"]
 ```
 
-This validates that the samplesheet has at least two columns: `sample` and `fastq1` (`"required": ["sample", "fastq_1"]`). It also checks that `fastq1` and `fastq2` are files, and that the file endings match a particular pattern. 
+This validates that the samplesheet has at least two columns: `sample` and `fastq1` (`"required": ["sample", "fastq_1"]`). It also checks that `fastq1` and `fastq2` are files, and that the file endings match a particular pattern.
 Lastly, `sample` is information about the files that we want to attach and pass along the pipeline. nf-core uses `meta` maps for this: objects that have a key and a value. We can indicate this in the schema file directly by using the meta field:
 
-```console 
+```console
     "sample": {
         "type": "string",
         "pattern": "^\\S+$",
@@ -1041,7 +1041,7 @@ Lastly, `sample` is information about the files that we want to attach and pass 
 This sets the key name as `id` and the value that is in the `sample` column, for example `SAMPLE1_PE`:
 
 ```console title=meta
-[id: SAMPLE1_PE] 
+[id: SAMPLE1_PE]
 ```
 
 By adding a new entry into the json schema, we can attach additional meta information that we want to track. This will automtically validate it for us and add it to the meta map.
@@ -1096,7 +1096,7 @@ The meta map now has a new key `sequencer`, that is empty because we did not spe
 We have also prepared a new samplesheet, that has the `sequencer` column. You can overwrite the existing input with this command:
 
 ```console
-nextflow run . -profile docker,test --outdir results --input ../data/sequencer_samplesheet.csv 
+nextflow run . -profile docker,test --outdir results --input ../data/sequencer_samplesheet.csv
 ```
 
 This populates the `sequencer` and we could access it in the pipeline:
@@ -1107,11 +1107,11 @@ This populates the `sequencer` and we could access it in the pipeline:
 [['id':'SAMPLE3_SE', 'sequencer':'sequencer3', 'single_end':true], ... ]
 ```
 
-We can comment the `ch_samplesheet.view()` line or remove it. We are not going to use it anymore in this training section. 
+We can comment the `ch_samplesheet.view()` line or remove it. We are not going to use it anymore in this training section.
 
 ### Use the new meta key in the pipeline
 
-We can access this new meta value in the pipeline and use to for example only enable trimming for samples from a particular sequencer. The [branch operator](https://www.nextflow.io/docs/stable/reference/operator.html#branch) let's us split 
+We can access this new meta value in the pipeline and use to for example only enable trimming for samples from a particular sequencer. The [branch operator](https://www.nextflow.io/docs/stable/reference/operator.html#branch) let's us split
 an input channel into several new output channels based on a selection critera:
 
 ```groovy title="workflows/myfirstpipeline.nf" linenums="35"
@@ -1147,7 +1147,7 @@ nextflow run . -profile docker,test --outdir results --input ../data/sequencer_s
 
 ### Takeaway
 
-You know how to adapt the samplesheet to add new meta information to your files. 
+You know how to adapt the samplesheet to add new meta information to your files.
 
 ### What's next?
 
@@ -1169,32 +1169,32 @@ This section should feel familiar to the `hello_modules` section.
 
     If you have a module that you would like to contribute back to the commmunity, reach out on the nf-core slack or open a pull request to the modules repository.
 
-Start by using the nf-core tooling to create a kceleton local module. It will prompt you to type in the tool name `fastqe`, for the remaining fields press `enter` to accept the default: 
+Start by using the nf-core tooling to create a kceleton local module. It will prompt you to type in the tool name `fastqe`, for the remaining fields press `enter` to accept the default:
 
 ```console
 nf-core modules create
 ```
 
 ```console title="Output"
-INFO     Repository type: pipeline                                                                                                               
-INFO     Press enter to use default values (shown in brackets) or type your own responses. ctrl+click underlined text to open links.             
+INFO     Repository type: pipeline
+INFO     Press enter to use default values (shown in brackets) or type your own responses. ctrl+click underlined text to open links.
 Name of tool/subtool: fastqe
-INFO     Using Bioconda package: 'bioconda::fastqe=0.3.3'                                                                                        
-INFO     Using Docker container: 'biocontainers/fastqe:0.3.3--pyhdfd78af_0'                                                                      
-INFO     Using Singularity container: 'https://depot.galaxyproject.org/singularity/fastqe:0.3.3--pyhdfd78af_0'                                   
-GitHub Username: (@<your-name>): 
-INFO     Provide an appropriate resource label for the process, taken from the nf-core pipeline template.                                        
-         For example: process_single, process_low, process_medium, process_high, process_long, process_high_memory                               
+INFO     Using Bioconda package: 'bioconda::fastqe=0.3.3'
+INFO     Using Docker container: 'biocontainers/fastqe:0.3.3--pyhdfd78af_0'
+INFO     Using Singularity container: 'https://depot.galaxyproject.org/singularity/fastqe:0.3.3--pyhdfd78af_0'
+GitHub Username: (@<your-name>):
+INFO     Provide an appropriate resource label for the process, taken from the nf-core pipeline template.
+         For example: process_single, process_low, process_medium, process_high, process_long, process_high_memory
 ? Process resource label: process_single
-INFO     Where applicable all sample-specific information e.g. 'id', 'single_end', 'read_group' MUST be provided as an input via a Groovy Map    
-         called 'meta'. This information may not be required in some instances, for example indexing reference genome files.                     
-Will the module require a meta map of sample information? [y/n] (y): 
-INFO     Created component template: 'fastqe'                                                                                                    
-INFO     Created following files:                                                                                                                
-           modules/local/fastqe.nf     
+INFO     Where applicable all sample-specific information e.g. 'id', 'single_end', 'read_group' MUST be provided as an input via a Groovy Map
+         called 'meta'. This information may not be required in some instances, for example indexing reference genome files.
+Will the module require a meta map of sample information? [y/n] (y):
+INFO     Created component template: 'fastqe'
+INFO     Created following files:
+           modules/local/fastqe.nf
 ```
 
-This will create a new file in `modules/local/fastqe.nf` that already contains the container and conda definitions, the general structure of the process, and a number of TODO statements to guide you through the adaptation. 
+This will create a new file in `modules/local/fastqe.nf` that already contains the container and conda definitions, the general structure of the process, and a number of TODO statements to guide you through the adaptation.
 
 You will notice, that it still calls `samtools` and the input are `bam`.
 
@@ -1282,13 +1282,13 @@ sample1_R2.fastq.gz	mean	😌 😌 😌 😝 😝 😉 😉 😉 😉 😉 😉 
 
 ### Takeaway
 
-You know how to add a local module. 
+You know how to add a local module.
 
 ---
 
 ## Takeaway
 
-You know how to use the nf-core tooling to create a new pipeline, add modulea to it, apply tool and pipeline parameters, and adapt the samplesheet. 
+You know how to use the nf-core tooling to create a new pipeline, add modulea to it, apply tool and pipeline parameters, and adapt the samplesheet.
 
 ## What's next?
 
