@@ -989,9 +989,9 @@ In the next step we will take a look how we can add a new key to the `meta` map 
 
 nf-core pipelines typically use samplesheets as inputs to the pipelines. This allows us to:
 
-    - validate each entry and print specific error messages.
-    - attach information to each input file.
-    - track which datasets are processed.
+- validate each entry and print specific error messages.
+- attach information to each input file.
+- track which datasets are processed.
 
 Samplesheets are comma-separated text files with a header row specifying the column names, followed by one entry per row. For example, the samplesheet that we have been using during this teaching module looks like this:
 
