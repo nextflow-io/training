@@ -582,14 +582,15 @@ That is because Nextflow must see them as file paths in order to stage the files
 
 But _where_ in the process can we add this?
 
-Fun fact, if you add the optional reserved keyword `script:` before the `"""` that starts the bash scripting block, you can add arbitrary code in there!
+Fun fact: you can add arbitrary code after `script:` and before the `"""` !
 
-Great, let's add the `script:` keyword and string manipulation line there then, and update the `gatk GenomicsDBImport` command to use the concatenated string it produces.
+Great, let's add our string manipulation line there then, and update the `gatk GenomicsDBImport` command to use the concatenated string it produces.
 
 _Before:_
 
 ```groovy title="hello-operators.nf" linenums="87"
     """
+    script:
     gatk GenomicsDBImport \
         -V ${all_gvcfs} \
         -L ${interval_list} \
