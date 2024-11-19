@@ -358,7 +358,7 @@ params.intervals        = "${projectDir}/data/ref/intervals.bed"
 
 ### 2.3. Create variables to hold the accessory file paths
 
-Accessory files like reference genomes, index files, and interval files are typically static inputs that remain constant throughout execution. Unlike main data inputs, which are streamed dynamically through channels, accessory files can be handled more simply by using the `file()` function to convert file paths into managed file objects without the need for channels.
+While main data inputs are streamed dynamically through channels, there are two approaches for handling accessory files. The recommended approach is to create explicit channels, which makes data flow clearer and more consistent. Alternatively, the file() function to create variables can be used for simpler cases, particularly when you need to reference the same file in multiple processes - though be aware this still creates channels implicitly.
 
 Add this to the workflow block (after the `reads_ch` creation):
 
