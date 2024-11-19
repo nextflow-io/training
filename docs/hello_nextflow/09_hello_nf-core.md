@@ -390,9 +390,9 @@ Instead of having one large monolithic pipeline script, it's broken up into smal
 -   **Modules:** Wrappers around a single process
 -   **Subworkflows:** Two or more modules that are packaged together as a mini workflow
 
-<!-- <figure class="excalidraw">
---8<-- "docs/nf_develop/img/nested.excalidraw.svg"
-</figure> -->
+<figure class="excalidraw">
+    --8<-- "docs/nf_develop/img/nested.excalidraw.svg"
+</figure>
 
 Within your pipeline repository, `modules` and `subworkflows` are stored within `local` and `nf-core` folders. The `nf-core` folder is for components that have come from the nf-core GitHub repository while the `local` folder is for components that have been developed independently (usually things very specific to a pipeline):
 
