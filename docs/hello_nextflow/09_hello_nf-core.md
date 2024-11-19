@@ -1045,7 +1045,7 @@ Lastly, `sample` is information about the files that we want to attach and pass 
 
 This sets the key name as `id` and the value that is in the `sample` column, for example `SAMPLE1_PE`:
 
-```console title=meta
+```console title="meta"
 [id: SAMPLE1_PE]
 ```
 
@@ -1092,7 +1092,7 @@ nextflow run . -profile docker,test --outdir results
 
 The meta map now has a new key `sequencer`, that is empty because we did not specify a value yet:
 
-```console title="Output"
+```console title="output"
 [['id':'SAMPLE1_PE', 'sequencer':[], 'single_end':false], ... ]
 [['id':'SAMPLE2_PE', 'sequencer':[], 'single_end':false], ... ]
 [['id':'SAMPLE3_SE', 'sequencer':[], 'single_end':true], ... ]
@@ -1104,9 +1104,9 @@ We have also prepared a new samplesheet, that has the `sequencer` column. You ca
 nextflow run . -profile docker,test --outdir results --input ../data/sequencer_samplesheet.csv
 ```
 
-This populates the `sequencer` and we could access it in the pipeline:
+This populates the `sequencer` and we can see it in the pipeline, when `view`ing the samplesheet channel:
 
-```console
+```console title="output"
 [['id':'SAMPLE1_PE', 'sequencer':'sequencer1', 'single_end':false], ... ]
 [['id':'SAMPLE2_PE', 'sequencer':'sequencer2', 'single_end':false], ... ]
 [['id':'SAMPLE3_SE', 'sequencer':'sequencer3', 'single_end':true], ... ]
