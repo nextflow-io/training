@@ -1174,7 +1174,7 @@ This section should feel familiar to the `hello_modules` section.
 
     If you have a module that you would like to contribute back to the commmunity, reach out on the nf-core slack or open a pull request to the modules repository.
 
-Start by using the nf-core tooling to create a kceleton local module. It will prompt you to type in the tool name `fastqe`, for the remaining fields press `enter` to accept the default:
+Start by using the nf-core tooling to create a sceleton local module. It will prompt you to type in the tool name `fastqe`, for the remaining fields press `enter` to accept the default:
 
 ```console
 nf-core modules create
@@ -1200,6 +1200,16 @@ INFO     Created following files:
 ```
 
 This will create a new file in `modules/local/fastqe.nf` that already contains the container and conda definitions, the general structure of the process, and a number of TODO statements to guide you through the adaptation.
+
+!!! warning
+    
+    If the module already exists locally, the command will fail to prevent you from accidentally overwriting existing work:
+
+    ```console
+    INFO     Repository type: pipeline                                                                                                                                                                                                                                                                     
+    INFO     Press enter to use default values (shown in brackets) or type your own responses. ctrl+click underlined text to open links.                                                                                                                                                                   
+    CRITICAL Module file exists already: 'modules/local/fastqe.nf'. Use '--force' to overwrite  
+    ```
 
 You will notice, that it still calls `samtools` and the input are `bam`.
 
