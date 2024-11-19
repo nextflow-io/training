@@ -248,8 +248,8 @@ Celebrate and take another break! Next, we'll show you how to use nf-core toolin
 
 ## Create a basic pipeline from template
 
-We will now start developing our own nf-core style pipeline. The nf-core community provides a command line tool [nf-core tools](https://nf-co.re/docs/nf-core-tools) with helper functions to use and develop pipelines.
-We have pre-installed it and will use it to create a new pipeline and expand it in this training.
+We will now start developing our own nf-core style pipeline. The nf-core community provides a [command line tool](https://nf-co.re/docs/nf-core-tools) with helper functions to use and develop pipelines.
+We have pre-installed nf-core tools, and here, we will use them to create and develop a new pipeline.
 
 View all of the tooling using the `nf-core --help` argument.
 
@@ -261,7 +261,7 @@ nf-core --help
 
 Let's start by creating a new pipeline with the `nf-core pipelines create` command:
 
-All nf-core pipelines are based on a common template, a standardized pipeline skeleton to streamline development and share efforts on shared features.
+All nf-core pipelines are based on a common template, a standardized pipeline skeleton that can be used to streamline development with shared features and components.
 
 The `nf-core pipelines create` command creates a new pipeline using the nf-core base template with a pipeline name, description, and author. It is the first and most important step for creating a pipeline that will integrate with the wider Nextflow ecosystem.
 
@@ -277,36 +277,36 @@ Running this command will open a Text User Interface (TUI) for pipeline creation
 
 Template features can be flexibly included or excluded at the time of creation, follow these steps create your first pipeline using the `nf-core pipelines create` TUI:
 
-    1. Run the `nf-core pipelines create` command
-    2. Select **Let's go!** on the welcome screen
-    3. Select **Custom** on the Choose pipeline type screen
-    4. Enter your pipeline details, replacing < YOUR NAME > with your own name, then select **Next**
-        - **GitHub organisation:** myorg
-        - **Workflow name:** myfirstpipeline
-        - **A short description of your pipeline:** My first pipeline
-        - **Name of the main author / authors:** < YOUR NAME >
-    5. On the Template features screen, turn **off**:
-        - `Use a GitHub repository`
-        - `Add Github CI tests`
-        - `Use reference genomes`
-        - `Add Github badges`
-        - `Include citations`
-        - `Include a gitpod environment`
-        - `Include GitHub Codespaces`
-        - `Use fastqc`
-        - `Add a changelog`
-        - `Support Microsoft Teams notifications`
-        - `Support Slack notifications`
-    6. Select **Finish** on the Final details screen
-    7. Wait for the pipeline to be created, then select **Continue**
-    8. Select **Finish without creating a repo** on the Create GitHub repository screen
-    9. Select **Close** on the HowTo create a GitHub repository page
+1. Run the `nf-core pipelines create` command
+2. Select **Let's go!** on the welcome screen
+3. Select **Custom** on the Choose pipeline type screen
+4. Enter your pipeline details, replacing < YOUR NAME > with your own name, then select **Next**
+  - **GitHub organisation:** myorg
+  - **Workflow name:** myfirstpipeline
+  - **A short description of your pipeline:** My first pipeline
+  - **Name of the main author / authors:** < YOUR NAME >
+5. On the Template features screen, turn **off**:
+  - `Use a GitHub repository`
+  - `Add Github CI tests`
+  - `Use reference genomes`
+  - `Add Github badges`
+  - `Include citations`
+  - `Include a gitpod environment`
+  - `Include GitHub Codespaces`
+  - `Use fastqc`
+  - `Add a changelog`
+  - `Support Microsoft Teams notifications`
+  - `Support Slack notifications`
+6. Select **Finish** on the Final details screen
+7. Wait for the pipeline to be created, then select **Continue**
+8. Select **Finish without creating a repo** on the Create GitHub repository screen
+9. Select **Close** on the HowTo create a GitHub repository page
 
 If run successfully, you will see a new folder in your current directory named `myorg-myfirstpipeline`.
 
 ### Testing your pipeline
 
-Let's try it:
+Let's try to run our new pipeline:
 
 ```bash
 cd /workspace/gitpod/hello-nextflow/hello-nf-core/myorg-myfirstpipeline
@@ -345,18 +345,17 @@ executor >  local (1)
 -[myorg/myfirstpipeline] Pipeline completed successfully-
 ```
 
-Let's dissect what we are seeing:
+Let's dissect what we are seeing.
 
-The nf-core pipeline template is a working pipeline and comes pre-configured with some modules, here we only chose MultiQC:
+The nf-core pipeline template is a working pipeline and comes preconfigured with some modules. Here, we only chose MultiQC:
 
 -   [MultiQC](https://multiqc.info/): A modular tool to aggregate results from bioinformatics analyses across many samples into a single report.
 
 !!! note "The template can be granularly configured"
 
-    From nf-core tools 3.0 onwards many features can be removed during template creation. This is what we did when deselecting
-    features earlier.
+    From nf-core tools 3.0 onwards many features can be removed during template creation. This is what we did when deselecting features earlier.
 
-At the top you see, all parameters displayed that differ from the pipeline defaults. These were configured with the `test` profile.
+At the top, you see all parameters displayed that differ from the pipeline defaults. These were configured with the `test` profile.
 
 You can use the `test` profile to check if your pipeline is still working during your development cycle.
 
@@ -374,7 +373,7 @@ Additional test profiles can be created to test different parts of your pipeline
 
 The nf-core pipeline template comes packed with a lot of files and folders.
 
-Here, we selected a subset (what we did in step 5 during the template creation).
+Above, we selected a subset during the template creation.
 
 While the template may feel overwhelming, a complete understanding isn't required to start developing your pipeline. Let's look at the important places that we need to touch during pipeline development.
 
@@ -411,7 +410,7 @@ modules/
     .
 ```
 
-Modules from nf-core follow a similar same structure and contain a small number of additional files that are used for testing using [nf-test](https://www.nf-test.com/) and documentation about the module.
+Modules from nf-core follow a similar structure and contain a small number of additional files for testing using [nf-test](https://www.nf-test.com/) and documentation about the module.
 
 !!!note
 
@@ -442,7 +441,7 @@ In the template, the `nextflow.config` file is a central configuration file and 
 
 There are several configuration files that are stored in the `conf` folder and are added to the configuration by default or optionally as profiles:
 
--   `base.config`: A 'blank slate' config file, appropriate for general use on most high performance compute environments. This defines broad bins of resource usage, for example, which are convenient to apply to modules.
+-   `base.config`: A 'blank slate' config file, appropriate for general use on most high-performance computing environments. This defines broad bins of resource usage, for example, which are convenient to apply to modules.
 -   `modules.config`: Additional module directives and arguments.
 -   `test.config`: A profile to run the pipeline with minimal test data.
 -   `test_full.config`: A profile to run the pipeline with a full-sized test dataset.
@@ -453,7 +452,7 @@ The `nextflow_schema.json` is a file used to store parameter related information
 
 ### Takeaway
 
-You have an example pipeline, and learned about important files that the template comes with.
+You have an example pipeline, and learned about important template files.
 
 ### What's next?
 
@@ -463,7 +462,7 @@ Congratulations! In the next step, we will check the input data.
 
 ## Check the input data
 
-Above, we said that the `test` profile comes with small test files that are stored in the nf-core. Let's check what type of files we are dealing with to plan our expansion. Remember that we can inspect any channel content by using the `views` operator:
+Above, we said that the `test` profile comes with small test files that are stored in the nf-core. Let's check what type of files we are dealing with to plan our expansion. Remember that we can inspect any channel content using the `view` operator:
 
 ```groovy title="workflows/myfirstpipeline.nf" linenums="27"
 ch_samplesheet.view()
@@ -475,7 +474,7 @@ and the run command:
 nextflow run . -profile docker,test --outdir results
 ```
 
-The output should look like the below. We see that we have FastQ files as input and each set of files is accompanied by some metadata: the `id` and whether or not they are single end:
+The output should look like the below. We see that we have FASTQ files as input and each set of files is accompanied by some metadata: the `id` and whether or not they are single end:
 
 ```console title="Output"
 [['id':'SAMPLE1_PE', 'single_end':false], [/nf-core/test-datasets/viralrecon/illumina/amplicon/sample1_R1.fastq.gz, /nf-core/test-datasets/viralrecon/illumina/amplicon/sample1_R2.fastq.gz]]
@@ -497,17 +496,19 @@ In the next step we will start changing the code and add new tools to the pipeli
 
 ## Add an nf-core module
 
-nf-core provides a large library of modules and subworkflows: pre-made nextflow wrappers around tools that can be installed into nextflow pipelines. They are designed to be flexible but may require additional configuration to suit different use cases. Currently, there are more than [1300 nf-core modules](https://nf-co.re/modules) and [60 nf-core subworkflows](https://nf-co.re/subworkflows) (November 2024) available. Modules and subworkflows can be listed, installed, updated, removed, and patched using nf-core tooling.
+nf-core provides a large library of modules and subworkflows: pre-made nextflow wrappers around tools that can be installed into nextflow pipelines. They are designed to be flexible but may require additional configuration to suit different use cases.
+
+Currently, there are more than [1300 nf-core modules](https://nf-co.re/modules) and [60 nf-core subworkflows](https://nf-co.re/subworkflows) (November 2024) available. Modules and subworkflows can be listed, installed, updated, removed, and patched using nf-core tooling.
 
 While you could develop a module for this tool independently, you can save a lot of time and effort by leveraging nf-core modules and subworkflows.
 
-Let's see which modules are there:
+Let's see which modules are available:
 
 ```console
 nf-core modules list remote
 ```
 
-This command lists all currently available modules, > 1300. An easier way to find them is to go to the nf-core website and visit the modules subpage [https://nf-co.re/modules](https://nf-co.re/modules). Here you can search for modules by name or tags, find documentation for each module and which nf-core pipeline uses it:
+This command lists all currently available modules, > 1300. An easier way to find them is to go to the nf-core website and visit the modules subpage [https://nf-co.re/modules](https://nf-co.re/modules). Here you can search for modules by name or tags, find documentation for each module, and see which nf-core pipeline are using the module:
 
 ![nf-core/modules](img/nf-core-modules.png)
 
@@ -550,7 +551,7 @@ include { SEQTK_TRIM } from '../modules/nf-core/seqtk/trim/main'
 
 To enable reporting and reproducibility, modules and subworkflows from the nf-core repository are tracked using hashes in the `modules.json` file. When modules are installed or removed using the nf-core tooling the `modules.json` file will be automatically updated.
 
-When you open the `modules.json`, you will see an entry for each module that is currently installed from the nf-core modules repository. You can open the file with the VSCode user interface by clicking on it in `myorg-myfirstpipeline/modules.json`:
+When you open the `modules.json`, you will see an entry for each module that is currently installed from the nf-core modules repository. You can open the file with the VS Code user interface by clicking on it in `myorg-myfirstpipeline/modules.json`:
 
 ```console
 "nf-core": {
@@ -650,7 +651,7 @@ SEQTK_TRIM (
 )
 ```
 
-Let's test, that it works:
+Let's test it:
 
 ```bash
 nextflow run . -profile docker,test --outdir results
@@ -688,7 +689,7 @@ executor >  local (4)
 ### Inspect results folder
 
 Default nf-core configuration directs the output of each process into the `<outdir>/<TOOL>`. After running the previous command, you
-should have a `results` folder that looks like this:
+should have a `results` folder that looks something like this:
 
 ```console
 results
@@ -726,7 +727,7 @@ results
     └── SAMPLE3_SE_sample2_R1.fastq.gz
 ```
 
-The resulting files of `multiqc` and `seqtk` are published respective subdirectories. In addition, `nf-core` pipelines by default have all sorts of reporting switched on. These files are stored in the `pipeline_info` subdirectory and time-stamped so that multiple runs don't overwrite them.
+The outputs from the `multiqc` and `seqtk` modules are published in their respective subdirectories. In addition, by default,` nf-core' pipelines generate a set of reports. These files are stored in the `pipeline_info` subdirectory and time-stamped so that runs don't overwrite each other.
 
 ### Handle modules output
 
@@ -746,7 +747,7 @@ For `SEQTK_TRIM`, the `reads` output could be put into a channel named `ch_trimm
 ch_trimmed  = SEQTK_TRIM.out.reads
 ```
 
-Similarly, it is beneficial to immediately mix the versions of tools into the `ch_versions` channel so they can be used as an input for the `MULTIQC` process and passed to the final report, so that users can track the versions used.
+Similarly, it is beneficial to immediately mix the tool versions into the `ch_versions` channel so they can be used as input for the `MULTIQC` process and passed to the final report.
 
 ```groovy title="workflows/myfirstpipeline.nf" linenums="35"
 ch_versions = ch_versions.mix(SEQTK_TRIM.out.versions.first())
@@ -758,11 +759,11 @@ ch_versions = ch_versions.mix(SEQTK_TRIM.out.versions.first())
 
 ### Add a parameter to the `seqtk/trim` tool
 
-nf-core modules should be flexible and usable across many different pipelines. Therefore, tool parameters are typically not set in an nf-core/module. Instead, additional configuration options on how to run the tool like its parameters, or filename can be applied to a module using the `conf/modules.config` file on the pipeline level. Process selectors (e.g., `withName`) are used to apply configuration to modules selectively. Process selectors must be used within the `process` scope.
+nf-core modules should be flexible and usable across many different pipelines. Therefore, tool parameters are typically not set in an nf-core/module. Instead, additional configuration options on how to run the tool, like its parameters or filename, can be applied to a module using the `conf/modules.config` file on the pipeline level. Process selectors (e.g., `withName`) are used to apply configuration options to modules selectively. Process selectors must be used within the `process` scope.
 
 The parameters or arguments of a tool can be changed using the directive `args`. You can find many examples of how arguments are added to modules in nf-core pipelines, for example, the nf-core/demo [modules.config](https://github.com/nf-core/demo/blob/master/conf/modules.config) file.
 
-Add this snippet to your `conf/modules.config` file (making sure to use the `params` scope) to call the tool with an additional argument: `-b 5` trims 5bp from the left end of each read:
+Add this snippet to your `conf/modules.config` file (using the `params` scope) to call the `seqtk/trim` tool with the argument `-b 5` to trim 5 bp from the left end of each read:
 
 ```console title="conf/modules.config" linenums="21"
 withName: 'SEQTK_TRIM' {
@@ -823,7 +824,7 @@ In the next step we will add a pipeline parameter to allow users to skip the tri
 
 ## Adding parameters to your pipeline
 
-Parameters that can be overridden, either using the command line or the Nextflow configuration file, and should be used for anything that a pipeline user may want to configure regularly. nf-core defines some standards on how parameters are provided.
+Anything that a pipeline user may want to configure regularly should be made into a parameter so it can easily be overridden. nf-core defines some standards for providing parameters.
 
 Here, as a simple example, you will add a new parameter to your pipeline that will skip the `SEQTK_TRIM` process.
 
@@ -955,20 +956,20 @@ In the next step we will take a look at how we track metadata related to an inpu
 
 Datasets often contain additional information relevant to the analysis, such as a sample name, information about sequencing protocols, or other conditions needed in the pipeline to process certain samples together, determine their output name, or adjust parameters.
 
-By convention, nf-core tracks this type of information in `meta` maps. These are `key`-`value` pairs that are passed into modules together with the files. We already saw this briefly, when inspecting the `input` for `seqtk`:
+By convention, nf-core tracks this information as `meta` maps. These are `key`-`value` pairs that are passed into modules together with the files. We already saw this briefly when inspecting the `input` for `seqtk`:
 
 ```groovy title="modules/nf-core/seqtk/trim/main.nf" linenums="11"
 input:
 tuple val(meta), path(reads)
 ```
 
-If we uncomment our earlier `view` statement and run the pipeline again, we can take a look at the current content of the `meta` maps:
+If we uncomment our earlier `view` statement and run the pipeline again, we can see the current content of the `meta` maps:
 
 ```console
 [[id:SAMPLE1_PE, sequencer:[], single_end:false], ....]
 ```
 
-You can add any field, that you like to the `meta` map. By default, nf-core modules expect an `id` field.
+You can add any field that you require to the `meta` map. By default, nf-core modules expect an `id` field.
 
 ### Takeaway
 
@@ -984,11 +985,11 @@ In the next step we will take a look how we can add a new key to the `meta` map 
 
 nf-core pipelines typically use samplesheets as inputs to the pipelines. This allows us to:
 
-    - validate each entry and print specific error messages
-    - attach information to each input file
-    - track which datasets are processed
+    - validate each entry and print specific error messages.
+    - attach information to each input file.
+    - track which datasets are processed.
 
-Samplesheets are comma-separated text files with a header row specifying the column names, followed by one entry per row. For example, the samplesheet that we have been using during this session looks like this:
+Samplesheets are comma-separated text files with a header row specifying the column names, followed by one entry per row. For example, the samplesheet that we have been using during this teaching module looks like this:
 
 ```console "samplesheet_test_illumina_amplicon.csv"
 sample,fastq_1,fastq_2
@@ -1231,7 +1232,7 @@ and write it to a file in the script section:
         fastqe: $VERSION
 ```
 
-We will not cover [`stubs`](https://www.nextflow.io/docs/latest/process.html#stub) in this training, but look at them at a later point. They are not necessary to run a module, so let's remove them for now and delete:
+We will not cover [`stubs`](https://www.nextflow.io/docs/latest/process.html#stub) in this training. They are not necessary to run a module, so let's remove them for now:
 
 ```groovy title="modules/local/fastqe.nf" linenums="74"
 stub:
@@ -1253,7 +1254,7 @@ stub:
 
 ### Include the module into the pipeline
 
-The module is now ready in your `modules/local` folder, but not yet included into the pipeline. Similar to `seqtk/trim` we need to add it to `workflows/myfirstpipeline.nf`:
+The module is now ready in your `modules/local` folder, but not yet included in your pipeline. Similar to `seqtk/trim` we need to add it to `workflows/myfirstpipeline.nf`:
 
 ```groovy title="workflows/myfirstpipeline.nf" linenums="6"
     include { FASTQE                 } from '../modules/local/fastqe'
