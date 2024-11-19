@@ -281,22 +281,26 @@ Template features can be flexibly included or excluded at the time of creation, 
 2. Select **Let's go!** on the welcome screen
 3. Select **Custom** on the Choose pipeline type screen
 4. Enter your pipeline details, replacing < YOUR NAME > with your own name, then select **Next**
-  - **GitHub organisation:** myorg
-  - **Workflow name:** myfirstpipeline
-  - **A short description of your pipeline:** My first pipeline
-  - **Name of the main author / authors:** < YOUR NAME >
+
+-   **GitHub organisation:** myorg
+-   **Workflow name:** myfirstpipeline
+-   **A short description of your pipeline:** My first pipeline
+-   **Name of the main author / authors:** < YOUR NAME >
+
 5. On the Template features screen, turn **off**:
-  - `Use a GitHub repository`
-  - `Add Github CI tests`
-  - `Use reference genomes`
-  - `Add Github badges`
-  - `Include citations`
-  - `Include a gitpod environment`
-  - `Include GitHub Codespaces`
-  - `Use fastqc`
-  - `Add a changelog`
-  - `Support Microsoft Teams notifications`
-  - `Support Slack notifications`
+
+-   `Use a GitHub repository`
+-   `Add Github CI tests`
+-   `Use reference genomes`
+-   `Add Github badges`
+-   `Include citations`
+-   `Include a gitpod environment`
+-   `Include GitHub Codespaces`
+-   `Use fastqc`
+-   `Add a changelog`
+-   `Support Microsoft Teams notifications`
+-   `Support Slack notifications`
+
 6. Select **Finish** on the Final details screen
 7. Wait for the pipeline to be created, then select **Continue**
 8. Select **Finish without creating a repo** on the Create GitHub repository screen
@@ -386,9 +390,9 @@ Instead of having one large monolithic pipeline script, it's broken up into smal
 -   **Modules:** Wrappers around a single process
 -   **Subworkflows:** Two or more modules that are packaged together as a mini workflow
 
-<figure class="excalidraw">
+<!-- <figure class="excalidraw">
 --8<-- "docs/nf_develop/img/nested.excalidraw.svg"
-</figure>
+</figure> -->
 
 Within your pipeline repository, `modules` and `subworkflows` are stored within `local` and `nf-core` folders. The `nf-core` folder is for components that have come from the nf-core GitHub repository while the `local` folder is for components that have been developed independently (usually things very specific to a pipeline):
 
@@ -520,9 +524,9 @@ Now let's add another tool to the pipeline.
 
 In your pipeline, you will add a new step that will take FASTQ files from the sample sheet as inputs and will produce trimmed fastq files that can be used as an input for other tools and version information about the seqtk tools to mix into the inputs for the MultiQC process.
 
-<!-- <figure class="excalidraw">
-    --8<-- "docs/nf_template/img/pipeline.excalidraw.svg"
-</figure> -->
+<figure class="excalidraw">
+    --8<-- "docs/nf_develop/img/pipeline.excalidraw.svg"
+</figure>
 
 The `nf-core modules install` command can be used to install the `seqtk/trim` module directly from the nf-core repository:
 
@@ -727,7 +731,7 @@ results
     └── SAMPLE3_SE_sample2_R1.fastq.gz
 ```
 
-The outputs from the `multiqc` and `seqtk` modules are published in their respective subdirectories. In addition, by default,` nf-core' pipelines generate a set of reports. These files are stored in the `pipeline_info` subdirectory and time-stamped so that runs don't overwrite each other.
+The outputs from the `multiqc` and `seqtk` modules are published in their respective subdirectories. In addition, by default,`nf-core' pipelines generate a set of reports. These files are stored in the`pipeline_info` subdirectory and time-stamped so that runs don't overwrite each other.
 
 ### Handle modules output
 
@@ -966,7 +970,7 @@ tuple val(meta), path(reads)
 If we uncomment our earlier `view` statement and run the pipeline again, we can see the current content of the `meta` maps:
 
 ```console
-[[id:SAMPLE1_PE, sequencer:[], single_end:false], ....]
+[[id:SAMPLE1_PE, single_end:false], ....]
 ```
 
 You can add any field that you require to the `meta` map. By default, nf-core modules expect an `id` field.
