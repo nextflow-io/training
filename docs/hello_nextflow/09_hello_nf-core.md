@@ -525,7 +525,7 @@ Now let's add another tool to the pipeline.
 In your pipeline, you will add a new step that will take FASTQ files from the sample sheet as inputs and will produce trimmed fastq files that can be used as an input for other tools and version information about the seqtk tools to mix into the inputs for the MultiQC process.
 
 <figure class="excalidraw">
-    --8<-- "docs/img/pipeline.excalidraw.svg"
+    --8<-- "docs/hello_nextflow/img/pipeline.excalidraw.svg"
 </figure>
 
 The `nf-core modules install` command can be used to install the `seqtk/trim` module directly from the nf-core repository:
@@ -969,7 +969,7 @@ tuple val(meta), path(reads)
 
 If we uncomment our earlier `view` statement and run the pipeline again, we can see the current content of the `meta` maps:
 
-```console
+```console title="meta map"
 [[id:SAMPLE1_PE, single_end:false], ....]
 ```
 
@@ -995,7 +995,7 @@ nf-core pipelines typically use samplesheets as inputs to the pipelines. This al
 
 Samplesheets are comma-separated text files with a header row specifying the column names, followed by one entry per row. For example, the samplesheet that we have been using during this teaching module looks like this:
 
-```console title="samplesheet_test_illumina_amplicon.csv"
+```csv title="samplesheet_test_illumina_amplicon.csv"
 sample,fastq_1,fastq_2
 SAMPLE1_PE,https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/illumina/amplicon/sample1_R1.fastq.gz,https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/illumina/amplicon/sample1_R2.fastq.gz
 SAMPLE2_PE,https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/illumina/amplicon/sample2_R1.fastq.gz,https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/illumina/amplicon/sample2_R2.fastq.gz
@@ -1005,7 +1005,7 @@ SAMPLE3_SE,https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/il
 
 The structure of the samplesheet is specified in its own schema file in `assets/schema_input.json`. Each column has its own entry together with information about the column:
 
-```console title="schema_input.json"
+```json title="schema_input.json"
 "properties": {
     "sample": {
         "type": "string",
@@ -1034,7 +1034,7 @@ The structure of the samplesheet is specified in its own schema file in `assets/
 This validates that the samplesheet has at least two columns: `sample` and `fastq1` (`"required": ["sample", "fastq_1"]`). It also checks that `fastq1` and `fastq2` are files, and that the file endings match a particular pattern.
 Lastly, `sample` is information about the files that we want to attach and pass along the pipeline. nf-core uses `meta` maps for this: objects that have a key and a value. We can indicate this in the schema file directly by using the meta field:
 
-```console
+```json title="Sample column"
     "sample": {
         "type": "string",
         "pattern": "^\\S+$",
