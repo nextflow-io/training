@@ -358,7 +358,7 @@ params.intervals        = "${projectDir}/data/ref/intervals.bed"
 
 ### 2.3. Create variables to hold the accessory file paths
 
-Unlike the main data inputs, which must be fed to processes through channels, the accessory files can be handled a bit more simply: we can use the `file()` function to create variables to hold those file paths.
+While main data inputs are streamed dynamically through channels, there are two approaches for handling accessory files. The recommended approach is to create explicit channels, which makes data flow clearer and more consistent. Alternatively, the file() function to create variables can be used for simpler cases, particularly when you need to reference the same file in multiple processes - though be aware this still creates channels implicitly.
 
 Add this to the workflow block (after the `reads_ch` creation):
 
@@ -527,7 +527,7 @@ Well, that's weird, considering we explicitly indexed the BAM files in the first
 
 #### 3.2.1. Check the work directories for the relevant calls
 
-Let's take a look inside the work directory listed in the console output.
+Let's take a look inside the work directory for the failed `GATK_HAPLOTYPECALLER` process call listed in the console output.
 
 ```console title="Directory contents"
 work/a5/fa9fd0994b6beede5fb9ea073596c2
@@ -564,7 +564,7 @@ nextflow run hello-genomics.nf
 You may need to run it several times for it to fail again.
 This error will not reproduce consistently because it is dependent on some variability in the execution times of the individual process calls.
 
-This is what the output of the two `.view` calls we added looks like for a failed run:
+This is what the output of the two `.view()` calls we added looks like for a failed run:
 
 ```console title="Output"
 /workspace/gitpod/hello-nextflow/data/bam/reads_mother.bam
@@ -599,7 +599,7 @@ The simplest way to ensure a BAM file and its index stay closely associated is t
 
 !!! note
 
-    A **tuple** is a finite, ordered list of elements that is commonly used for returning multiple values from a function.
+    A **tuple** is a finite, ordered list of elements that is commonly used for returning multiple values from a function. Tuples are particularly useful for passing multiple inputs or outputs between processes while preserving their association and order.
 
 First, let's change the output of the `SAMTOOLS_INDEX` process to include the BAM file in its output declaration.
 
