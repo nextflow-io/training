@@ -589,8 +589,8 @@ Great, let's add our string manipulation line there then, and update the `gatk G
 _Before:_
 
 ```groovy title="hello-operators.nf" linenums="87"
-    """
     script:
+    """
     gatk GenomicsDBImport \
         -V ${all_gvcfs} \
         -L ${interval_list} \
