@@ -525,7 +525,7 @@ Now let's add another tool to the pipeline.
 In your pipeline, you will add a new step that will take FASTQ files from the sample sheet as inputs and will produce trimmed fastq files that can be used as an input for other tools and version information about the seqtk tools to mix into the inputs for the MultiQC process.
 
 <figure class="excalidraw">
-    --8<-- "docs/nf_develop/img/pipeline.excalidraw.svg"
+    --8<-- "docs/img/pipeline.excalidraw.svg"
 </figure>
 
 The `nf-core modules install` command can be used to install the `seqtk/trim` module directly from the nf-core repository:
@@ -995,7 +995,7 @@ nf-core pipelines typically use samplesheets as inputs to the pipelines. This al
 
 Samplesheets are comma-separated text files with a header row specifying the column names, followed by one entry per row. For example, the samplesheet that we have been using during this teaching module looks like this:
 
-```console "samplesheet_test_illumina_amplicon.csv"
+```console title="samplesheet_test_illumina_amplicon.csv"
 sample,fastq_1,fastq_2
 SAMPLE1_PE,https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/illumina/amplicon/sample1_R1.fastq.gz,https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/illumina/amplicon/sample1_R2.fastq.gz
 SAMPLE2_PE,https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/illumina/amplicon/sample2_R1.fastq.gz,https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/illumina/amplicon/sample2_R2.fastq.gz
