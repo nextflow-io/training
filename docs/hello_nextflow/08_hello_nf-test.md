@@ -1083,6 +1083,9 @@ params {
     // Primary input (file of input files, one per line)
     reads_bam        = "${projectDir}/data/sample_bams.txt"
 
+    // Output directory
+    params.outdir = "results_genomics"
+
     // Accessory files
     reference        = "${projectDir}/data/ref/ref.fasta"
     reference_index  = "${projectDir}/data/ref/ref.fasta.fai"
