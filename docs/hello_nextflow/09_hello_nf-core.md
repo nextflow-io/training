@@ -646,6 +646,15 @@ Using this module information you can work out what inputs are required for the 
 
 Only one input channel is required, and it already exists, so it can be added to your `firstpipeline.nf` file without any additional channel creation or modifications.
 
+_Before:_
+```groovy title="workflows/myfirstpipeline.nf" linenums="30"
+//
+// Collate and save software versions
+//
+```
+
+_After:_
+
 ```groovy title="workflows/myfirstpipeline.nf" linenums="29"
 //
 // MODULE: Run SEQTK_TRIM
@@ -653,6 +662,9 @@ Only one input channel is required, and it already exists, so it can be added to
 SEQTK_TRIM (
     ch_samplesheet
 )
+//
+// Collate and save software versions
+//
 ```
 
 Let's test it:
@@ -967,7 +979,13 @@ input:
 tuple val(meta), path(reads)
 ```
 
-If we uncomment our earlier `view` statement and run the pipeline again, we can see the current content of the `meta` maps:
+If we uncomment our earlier `view` statement:
+
+```groovy title="workflows/myfirstpipeline.nf" linenums="27"
+ch_samplesheet.view()
+```
+
+and run the pipeline again, we can see the current content of the `meta` maps:
 
 ```console title="meta map"
 [[id:SAMPLE1_PE, single_end:false], ....]
@@ -1174,30 +1192,17 @@ This section should feel familiar to the `hello_modules` section.
 
     If you have a module that you would like to contribute back to the commmunity, reach out on the nf-core slack or open a pull request to the modules repository.
 
-Start by using the nf-core tooling to create a sceleton local module. It will prompt you to type in the tool name `fastqe`, for the remaining fields press `enter` to accept the default:
+Start by using the nf-core tooling to create a sceleton local module: 
 
 ```console
 nf-core modules create
 ```
 
-```console title="Output"
-INFO     Repository type: pipeline
-INFO     Press enter to use default values (shown in brackets) or type your own responses. ctrl+click underlined text to open links.
-Name of tool/subtool: fastqe
-INFO     Using Bioconda package: 'bioconda::fastqe=0.3.3'
-INFO     Using Docker container: 'biocontainers/fastqe:0.3.3--pyhdfd78af_0'
-INFO     Using Singularity container: 'https://depot.galaxyproject.org/singularity/fastqe:0.3.3--pyhdfd78af_0'
-GitHub Username: (@<your-name>):
-INFO     Provide an appropriate resource label for the process, taken from the nf-core pipeline template.
-         For example: process_single, process_low, process_medium, process_high, process_long, process_high_memory
-? Process resource label: process_single
-INFO     Where applicable all sample-specific information e.g. 'id', 'single_end', 'read_group' MUST be provided as an input via a Groovy Map
-         called 'meta'. This information may not be required in some instances, for example indexing reference genome files.
-Will the module require a meta map of sample information? [y/n] (y):
-INFO     Created component template: 'fastqe'
-INFO     Created following files:
-           modules/local/fastqe.nf
-```
+It will ask you to enter the tool name and some configurations for the module. We will use the defaults here:
+
+    - Specify the tool name: `Name of tool/subtool: fastqe`
+    - Add the author name: `GitHub Username: (@<your-name>):`
+    - Accept the defaults for the remaining prompts by typing `enter`
 
 This will create a new file in `modules/local/fastqe.nf` that already contains the container and conda definitions, the general structure of the process, and a number of TODO statements to guide you through the adaptation.
 
@@ -1266,12 +1271,73 @@ stub:
     """
 ```
 
+If you think this looks a bit messy and just want to add a complete final version, here's one we made earlier and we've removed all the commented out instructions:
+
+```groovy title="modules/local/fastqe.nf" linenums="1"
+process FASTQE {
+    tag "$meta.id"
+    label 'process_single'
+
+    conda "${moduleDir}/environment.yml"
+    container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
+        'https://depot.galaxyproject.org/singularity/fastqe:0.3.3--pyhdfd78af_0':
+        'biocontainers/fastqe:0.3.3--pyhdfd78af_0' }"
+
+    input:
+    tuple val(meta), path(reads)
+
+    output:
+    tuple val(meta), path("*.tsv"), emit: tsv
+    path "versions.yml"           , emit: versions
+
+    when:
+    task.ext.when == null || task.ext.when
+
+    script:
+    def args = task.ext.args ?: ''
+    def prefix = task.ext.prefix ?: "${meta.id}"
+    def VERSION = '0.3.3'
+    """
+    fastqe \\
+        $args \\
+        $reads \\
+        --output ${prefix}.tsv
+
+    cat <<-END_VERSIONS > versions.yml
+    "${task.process}":
+        fastqe: $VERSION
+    END_VERSIONS
+    """
+}
+```
+
 ### Include the module into the pipeline
 
 The module is now ready in your `modules/local` folder, but not yet included in your pipeline. Similar to `seqtk/trim` we need to add it to `workflows/myfirstpipeline.nf`:
 
-```groovy title="workflows/myfirstpipeline.nf" linenums="6"
-    include { FASTQE                 } from '../modules/local/fastqe'
+_Before:_
+
+```groovy title="workflows/myfirstpipeline.nf" linenums="1"
+/*
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*/
+include { SEQTK_TRIM             } from '../modules/nf-core/seqtk/trim/main'
+include { MULTIQC                } from '../modules/nf-core/multiqc/main'
+```
+
+_After:_
+
+```groovy title="workflows/myfirstpipeline.nf" linenums="1"
+/*
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*/
+include { FASTQE                 } from '../modules/local/fastqe'
+include { SEQTK_TRIM             } from '../modules/nf-core/seqtk/trim/main'
+include { MULTIQC                } from '../modules/nf-core/multiqc/main'
 ```
 
 and call it on our input data:
