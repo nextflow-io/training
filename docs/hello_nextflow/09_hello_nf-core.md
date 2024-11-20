@@ -313,7 +313,7 @@ If run successfully, you will see a new folder in your current directory named `
 Let's try to run our new pipeline:
 
 ```bash
-cd /workspace/gitpod/hello-nextflow/hello-nf-core/myorg-myfirstpipeline
+cd myorg-myfirstpipeline
 nextflow run . -profile docker,test --outdir results
 ```
 
@@ -351,33 +351,16 @@ executor >  local (1)
 
 Let's dissect what we are seeing.
 
-The nf-core pipeline template is a working pipeline and comes preconfigured with some modules. Here, we only chose MultiQC:
+The nf-core pipeline template is a working pipeline and comes preconfigured with some modules. Here, we only run [MultiQC](https://multiqc.info/)
 
--   [MultiQC](https://multiqc.info/): A modular tool to aggregate results from bioinformatics analyses across many samples into a single report.
 
-!!! note "The template can be granularly configured"
+At the top, you see all parameters displayed that differ from the pipeline defaults. Most of these are default or were set by applying the `test` profile.
 
-    From nf-core tools 3.0 onwards many features can be removed during template creation. This is what we did when deselecting features earlier.
-
-At the top, you see all parameters displayed that differ from the pipeline defaults. These were configured with the `test` profile.
-
-You can use the `test` profile to check if your pipeline is still working during your development cycle.
-
-The default template `test` profile leverages small test files that are stored in the nf-core [test data GitHub repository](https://github.com/nf-core/test-datasets) as inputs for the pipeline.
-
-Additionally, the template comes with profiles for managing software dependencies (e.g., `docker`, `singularity`, and `conda`). nf-core modules come with containers/images/recipes, and profiles can be used to change how dependencies are handled when you execute your pipeline.
-
-!!! warning
-
-    If `-profile` for managing software dependencies is not specified, the pipeline will run locally and expect all software to be installed and available on `PATH`. **This is not recommended.**
-
-Additional test profiles can be created to test different parts of your pipeline.
+Additionally we used the `docker` profile to use docker for software packaging. nf-core provides this as a profile for convenience to enable the docker feature but we could do it with configuration as we did with the earlier module.
 
 ### Template tour
 
-The nf-core pipeline template comes packed with a lot of files and folders.
-
-Above, we selected a subset during the template creation.
+The nf-core pipeline template comes packed with a lot of files and folders. While creating the pipeline, we selected a subset of the nf-core features. The features we selected are now included as files and directories in our repository.
 
 While the template may feel overwhelming, a complete understanding isn't required to start developing your pipeline. Let's look at the important places that we need to touch during pipeline development.
 
@@ -1154,7 +1137,6 @@ If we now rerun our default test, no reads are being trimmed (even though we did
 nextflow run . -profile docker,test --outdir results
 
 [-        ] process > MYORG_MYFIRSTPIPELINE:MYFIRSTPIPELINE:SEQTK_TRIM          -
-[52/7ac3d2] process > MYORG_MYFIRSTPIPELINE:MYFIRSTPIPELINE:FASTQE (SAMPLE1_PE) [100%] 3 of 3 ✔
 [5a/f580bc] process > MYORG_MYFIRSTPIPELINE:MYFIRSTPIPELINE:MULTIQC             [100%] 1 of 1 ✔
 ```
 
@@ -1164,7 +1146,6 @@ If we use the samplesheet with the `sequencer` set, only one sample will be trim
 nextflow run . -profile docker,test --outdir results --input ../data/sequencer_samplesheet.csv -resume
 
 [47/fdf9de] process > MYORG_MYFIRSTPIPELINE:MYFIRSTPIPELINE:SEQTK_TRIM (SAMPLE2_PE) [100%] 1 of 1 ✔
-[f1/e8d6fa] process > MYORG_MYFIRSTPIPELINE:MYFIRSTPIPELINE:FASTQE (SAMPLE1_PE)     [100%] 3 of 3 ✔
 [2a/a742ae] process > MYORG_MYFIRSTPIPELINE:MYFIRSTPIPELINE:MULTIQC                 [100%] 1 of 1 ✔
 ```
 
@@ -1364,6 +1345,8 @@ sample1_R2.fastq.gz	mean	😌 😌 😌 😝 😝 😉 😉 😉 😉 😉 😉 
 ### Takeaway
 
 You know how to add a local module.
+
+And summarise your sequencing data as emojis.
 
 ---
 
