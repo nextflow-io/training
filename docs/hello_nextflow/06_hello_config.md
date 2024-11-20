@@ -742,7 +742,7 @@ The syntax looks like this when it's by itself in a process block:
 ```groovy title="Syntax"
 process {
     withName: 'GATK_JOINTGENOTYPING' {
-        cpus = 8
+        cpus = 4
     }
 }
 ```
@@ -756,7 +756,7 @@ process {
     memory = 2.GB
     // allocations for a specific process
     withName: 'GATK_JOINTGENOTYPING' {
-        cpus = 8
+        cpus = 4
     }
 }
 ```
@@ -774,8 +774,7 @@ nextflow run main.nf -profile my_laptop -with-report report-config-2.html
 
 Once again, you probably won't notice a substantial difference in runtime, because this is such a small workload and the tools spend more time in ancillary tasks than in performing the 'real' work.
 
-However, the second report shows that our resource utilization is more balanced now, and the runtime of the `GATK_JOINTGENOTYPING` process has been cut in half.
-We probably didn't need to go all the way to 8 CPUs, but since there's only one call to that process, it's not a huge drain.
+However, the second report shows that our resource utilization is more balanced now.
 
 <!-- **TODO: screenshots?** -->
 
