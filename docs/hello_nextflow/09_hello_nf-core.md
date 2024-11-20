@@ -353,7 +353,6 @@ Let's dissect what we are seeing.
 
 The nf-core pipeline template is a working pipeline and comes preconfigured with some modules. Here, we only run [MultiQC](https://multiqc.info/)
 
-
 At the top, you see all parameters displayed that differ from the pipeline defaults. Most of these are default or were set by applying the `test` profile.
 
 Additionally we used the `docker` profile to use docker for software packaging. nf-core provides this as a profile for convenience to enable the docker feature but we could do it with configuration as we did with the earlier module.
@@ -630,6 +629,7 @@ Using this module information you can work out what inputs are required for the 
 Only one input channel is required, and it already exists, so it can be added to your `firstpipeline.nf` file without any additional channel creation or modifications.
 
 _Before:_
+
 ```groovy title="workflows/myfirstpipeline.nf" linenums="30"
 //
 // Collate and save software versions
@@ -990,9 +990,9 @@ In the next step we will take a look how we can add a new key to the `meta` map 
 
 nf-core pipelines typically use samplesheets as inputs to the pipelines. This allows us to:
 
-- validate each entry and print specific error messages.
-- attach information to each input file.
-- track which datasets are processed.
+-   validate each entry and print specific error messages.
+-   attach information to each input file.
+-   track which datasets are processed.
 
 Samplesheets are comma-separated text files with a header row specifying the column names, followed by one entry per row. For example, the samplesheet that we have been using during this teaching module looks like this:
 
@@ -1173,7 +1173,7 @@ This section should feel familiar to the `hello_modules` section.
 
     If you have a module that you would like to contribute back to the commmunity, reach out on the nf-core slack or open a pull request to the modules repository.
 
-Start by using the nf-core tooling to create a sceleton local module: 
+Start by using the nf-core tooling to create a sceleton local module:
 
 ```console
 nf-core modules create
