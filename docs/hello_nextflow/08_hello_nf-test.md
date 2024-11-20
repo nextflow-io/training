@@ -975,7 +975,6 @@ test("family_trio [vcf] [idx]") {
             """
         }
     }
-}
 ```
 
 ### 3.4. Use content assertions
