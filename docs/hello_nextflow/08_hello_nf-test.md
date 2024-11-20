@@ -1123,6 +1123,78 @@ SUCCESS: Executed 1 tests in 62.498s
 That's it! If necessary, more nuanced assertions can be added to test for the validity and content of the pipeline outputs.
 You can learn more about the different kinds of assertions you can use in the [nf-test documentation](https://www.nf-test.com/docs/assertions/assertions/).
 
+### 4.3. Run ALL the tests!
+
+nf-test has one more trick up it's sleeve. We can run all the tests at once! Modify the `nf-test.config` file so that nf-test looks in every directory for nf-test files. You can do this by modifying the `testsDir` parameter:
+
+_Before:_
+
+```groovy title="tests/nf-test.config" linenums="1"
+config {
+
+    testsDir "tests"
+    workDir ".nf-test"
+    configFile "tests/nextflow.config"
+    profile ""
+
+}
+```
+
+_After:_
+
+```groovy title="tests/nf-test.config" linenums="1"
+config {
+
+    testsDir "."
+    workDir ".nf-test"
+    configFile "tests/nextflow.config"
+    profile ""
+
+}
+```
+
+Now, we can simply run nf-test and it will run _every single test_ in our repository:
+
+```bash
+nf-test test --profile docker_on
+```
+
+```console title="Output"
+gitpod /workspaces/hello-nextflow/hello-nf-test (master) $ nf-test test --profile docker_on
+
+🚀 nf-test 0.9.2
+https://www.nf-test.com
+(c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
+
+
+Test Process GATK_HAPLOTYPECALLER
+
+  Test [91903020] 'reads_son [bam]' PASSED (9.392s)
+  Test [6dd10adf] 'reads_mother [bam]' PASSED (9.508s)
+  Test [2d01c506] 'reads_father [bam]' PASSED (9.209s)
+
+Test Process GATK_JOINTGENOTYPING
+
+  Test [fd98ae7b] 'family_trio [vcf] [idx]' PASSED (10.537s)
+
+Test Process SAMTOOLS_INDEX
+
+  Test [e8dbf1c1] 'reads_son [bam]' PASSED (4.504s)
+  Test [5e05ca64] 'reads_mother [bam]' PASSED (4.37s)
+  Test [254f67ac] 'reads_father [bam]' PASSED (4.717s)
+
+Test Workflow main.nf
+
+  Test [6fa6c90c] 'Should run without failures' PASSED (23.872s)
+
+
+SUCCESS: Executed 8 tests in 76.154s
+```
+
+7 tests in 1 command! We spent a long time configuring lots and lots of tests, but when it came to running them it was very quick and easy. You can see how useful this is when maintaining a large pipeline, which could include hundreds of different elements. We spend time writing tests once so we can save time running them many times.
+
+Furthermore, we can automate this! imagine tests running every time you or a colleague tries to add new code. This is how we ensure our pipelines maintain a high standard.
+
 ### Takeaway
 
 You know how to write and run several kinds of tests for individual modules and for the entire workflow.
