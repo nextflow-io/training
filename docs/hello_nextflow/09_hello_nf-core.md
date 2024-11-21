@@ -268,7 +268,7 @@ cd hello-nf-core
 
 !!! hint "Open a new window in VSCode"
 
-    If you are working with VSCode (for example running the training on GitPod), you can open a new window to reduce visual clutter:
+    If you are working with VS Code you can open a new window to reduce visual clutter:
 
     ```bash
     code .
