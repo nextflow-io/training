@@ -36,11 +36,12 @@ So if you want to try out an nf-core pipeline with minimal effort, you can start
 
 !!!tip
 
-    You can run this from anywhere, but if you feel like being consistent with previous exercises, you can create a `hello-nf-core` directory under `hello-nextflow`. If you were working through Part 7 (Hello nf-test) before this, you may need to go up one level first.
+    You can run this from anywhere, but if you feel like being consistent with previous exercises, you can create a `nf-core-demo` directory under `hello-nextflow/hello-nf-core`. If you were working through Part 7 (Hello nf-test) before this, you may need to go up one level first.
 
     ```bash
-    mkdir hello-nf-core
     cd hello-nf-core
+    mkdir nf-core-demo
+    cd nf-core-demo
     ```
 
 Whenever you're ready, run the command:
@@ -373,7 +374,7 @@ Instead of having one large monolithic pipeline script, it's broken up into smal
 -   **Subworkflows:** Two or more modules that are packaged together as a mini workflow
 
 <figure class="excalidraw">
-    --8<-- "docs/nf_develop/img/nested.excalidraw.svg"
+    --8<-- "docs/hello_nextflow/img/nested.excalidraw.svg"
 </figure>
 
 Within your pipeline repository, `modules` and `subworkflows` are stored within `local` and `nf-core` folders. The `nf-core` folder is for components that have come from the nf-core GitHub repository while the `local` folder is for components that have been developed independently (usually things very specific to a pipeline):
@@ -435,6 +436,10 @@ There are several configuration files that are stored in the `conf` folder and a
 #### `nextflow_schema.json`
 
 The `nextflow_schema.json` is a file used to store parameter related information including type, description and help text in a machine readable format. The schema is used for various purposes, including automated parameter validation, help text generation, and interactive parameter form rendering in UI interfaces.
+
+#### `assets/schema_input.json`
+
+The `schema_input.json` is a file used to define the input samplesheet structure. Each column can have a type, pattern, description and help text in a machine readable format. The schema is used for various purposes, including automated validation, and providing helpful error messages. 
 
 ### Takeaway
 
@@ -1149,6 +1154,8 @@ nextflow run . -profile docker,test --outdir results --input ../data/sequencer_s
 [2a/a742ae] process > MYORG_MYFIRSTPIPELINE:MYFIRSTPIPELINE:MULTIQC                 [100%] 1 of 1 ✔
 ```
 
+If you want to learn more about how to fine tune and expand the samplesheet schema further, visit [nf-schema](https://nextflow-io.github.io/nf-schema/2.2/nextflow_schema/sample_sheet_schema_specification/).
+
 ### Takeaway
 
 You know how to adapt the samplesheet to add new meta information to your files.
@@ -1323,7 +1330,7 @@ include { MULTIQC                } from '../modules/nf-core/multiqc/main'
 
 and call it on our input data:
 
-```groovy title="workflows/myfirstpipeline.nf" linenums="41"
+```groovy title="workflows/myfirstpipeline.nf" linenums="47"
     FASTQE(ch_samplesheet)
     ch_versions = ch_versions.mix(FASTQE.out.versions.first())
 ```
