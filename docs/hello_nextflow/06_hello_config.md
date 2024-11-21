@@ -927,7 +927,7 @@ params {
     reads_bam        = "${projectDir}/data/sample_bams.txt"
 
     // Output directory
-    outdir.          = 'results_genomics'
+    outdir           = 'results_genomics'
 
     // Accessory files
     reference        = "${projectDir}/data/ref/ref.fasta"
