@@ -36,10 +36,9 @@ So if you want to try out an nf-core pipeline with minimal effort, you can start
 
 !!!tip
 
-    You can run this from anywhere, but if you feel like being consistent with previous exercises, you can create a `nf-core-demo` directory under `hello-nextflow/hello-nf-core`. If you were working through Part 7 (Hello nf-test) before this, you may need to go up one level first.
+    You can run this from anywhere, but if you feel like being consistent with previous exercises, you can create a `nf-core-demo` directory under `hello-nextflow`. If you were working through Part 7 (Hello nf-test) before this, you may need to go up one level first.
 
     ```bash
-    cd hello-nf-core
     mkdir nf-core-demo
     cd nf-core-demo
     ```
@@ -259,6 +258,22 @@ nf-core --help
 ```
 
 ### Creating your pipeline
+
+Before we start, let's navigate into the `hello-nf-core` directory:
+
+```
+cd ..
+cd hello-nf-core
+```
+
+!!! hint "Open a new window in VSCode"
+
+    If you are working with VSCode (for example running the training on GitPod), you can open a new window to reduce visual clutter:
+
+    ```bash
+    code .
+    ```
+
 
 Let's start by creating a new pipeline with the `nf-core pipelines create` command:
 
