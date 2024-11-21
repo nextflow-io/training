@@ -273,8 +273,6 @@ cd hello-nf-core
     ```bash
     code .
     ```
-
-
 Let's start by creating a new pipeline with the `nf-core pipelines create` command:
 
 All nf-core pipelines are based on a common template, a standardized pipeline skeleton that can be used to streamline development with shared features and components.
