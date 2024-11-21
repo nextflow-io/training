@@ -1169,7 +1169,7 @@ nextflow run . -profile docker,test --outdir results --input ../data/sequencer_s
 [2a/a742ae] process > MYORG_MYFIRSTPIPELINE:MYFIRSTPIPELINE:MULTIQC                 [100%] 1 of 1 ✔
 ```
 
-If you want to learn more about how to fine tune and expand the samplesheet schema further, visit [nf-schema](https://nextflow-io.github.io/nf-schema/2.2/nextflow_schema/sample_sheet_schema_specification/).
+If you want to learn more about how to fine tune and develop the samplesheet schema further, visit [nf-schema](https://nextflow-io.github.io/nf-schema/2.2/nextflow_schema/sample_sheet_schema_specification/).
 
 ### Takeaway
 
