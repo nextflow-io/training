@@ -273,6 +273,7 @@ cd hello-nf-core
     ```bash
     code .
     ```
+
 Let's start by creating a new pipeline with the `nf-core pipelines create` command:
 
 All nf-core pipelines are based on a common template, a standardized pipeline skeleton that can be used to streamline development with shared features and components.
@@ -452,7 +453,7 @@ The `nextflow_schema.json` is a file used to store parameter related information
 
 #### `assets/schema_input.json`
 
-The `schema_input.json` is a file used to define the input samplesheet structure. Each column can have a type, pattern, description and help text in a machine readable format. The schema is used for various purposes, including automated validation, and providing helpful error messages. 
+The `schema_input.json` is a file used to define the input samplesheet structure. Each column can have a type, pattern, description and help text in a machine readable format. The schema is used for various purposes, including automated validation, and providing helpful error messages.
 
 ### Takeaway
 
