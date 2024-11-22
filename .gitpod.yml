@@ -30,7 +30,7 @@ tasks:
 
     - name: Start Nextflow Tutorial
       env:
-          NXF_HOME: "/home/gitpod/.nextflow"
+          NXF_HOME: "/workspace/gitpod/.nextflow"
       command: |
           cd hello-nextflow
           source $HOME/.bashrc
