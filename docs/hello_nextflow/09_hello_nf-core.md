@@ -63,10 +63,10 @@ However nf-core is the largest open curated collection of Nextflow pipelines.
 
 !!!tip
 
-    One detail that sometimes trips people up is that the pipelines you pull this way are stored in a hidden assets folder:
+    Pulled pipelines are stored in a hidden assets folder. By default, this folder is `$HOME/.nextflow/assets`, but in this training environment the folder has been set to `$NXF_HOME/assets`:
 
     ```bash
-    tree $HOME/.nextflow/assets/ -L 2
+    tree $NXF_HOME/assets/ -L 2
     ```
 
     ```console title="Output"

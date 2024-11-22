@@ -29,6 +29,8 @@ tasks:
       command: docker pull -q nextflow/rnaseq-nf
 
     - name: Start Nextflow Tutorial
+      env:
+          NXF_HOME: "/workspace/gitpod/.nextflow"
       command: |
           cd hello-nextflow
           source $HOME/.bashrc
