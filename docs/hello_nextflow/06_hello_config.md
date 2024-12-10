@@ -33,10 +33,10 @@ hello-config
 └── nextflow.config
 ```
 
--   **`main.nf`** is a workflow based on `hello-operators.nf`, the workflow produced by completing Part 4 of this training course;
+- **`main.nf`** is a workflow based on `hello-operators.nf`, the workflow produced by completing Part 4 of this training course;
 
--   **`nextflow.config`** is a copy of the original `nextflow.config` file from the `hello-nextflow` directory, one level up (where we've been working so far).
-    Whenever there is a file named `nextflow.config` in the current directory, Nextflow will automatically load configuration from it. The one we have been using contains the following lines:
+- **`nextflow.config`** is a copy of the original `nextflow.config` file from the `hello-nextflow` directory, one level up (where we've been working so far).
+  Whenever there is a file named `nextflow.config` in the current directory, Nextflow will automatically load configuration from it. The one we have been using contains the following lines:
 
     ```console title="nextflow.config" linenums="1"
     docker.fixOwnership = true
@@ -54,8 +54,8 @@ hello-config
 
     Anything you put into the `nextflow.config` can be overridden at runtime by providing the relevant process directives or parameters and values on the command line, or by importing another configuration file, according to the order of precedence described [here](https://www.nextflow.io/docs/latest/config.html).
 
--   **`demo-params.json`** is a parameter file intended for supplying parameter values to a workflow.
-    We will use it in section 5 of this tutorial.
+- **`demo-params.json`** is a parameter file intended for supplying parameter values to a workflow.
+  We will use it in section 5 of this tutorial.
 
 The one thing that's missing is a way to point to the original data without making a copy of it or updating the file paths wherever they're specified.
 The simplest solution is to link to the data location.
@@ -431,12 +431,12 @@ This runs each step on the same machine that Nextflow is running on.
 However, for large workloads, you will typically want to use a distributed executor such as an HPC or cloud.
 Nextflow supports several different distributed executors, including:
 
--   HPC (SLURM, PBS, SGE)
--   AWS Batch
--   Google Batch
--   Azure Batch
--   Kubernetes
--   GA4GH TES
+- HPC (SLURM, PBS, SGE)
+- AWS Batch
+- Google Batch
+- Azure Batch
+- Kubernetes
+- GA4GH TES
 
 The executor is subject to a process directive called `executor`. By default it is set to `local`, so the following configuration is implied:
 

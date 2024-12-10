@@ -147,9 +147,9 @@ If you ran your pipeline from the `hello_nextflow` directory, you'll see somethi
 
 Notice that configuration for our pipeline run is being run pulled from three separate files:
 
--   `/home/gitpod/.nextflow/config` - This is the global configuration file we just added.
--   `/home/gitpod/.nextflow/assets/nextflow-io/hello/nextflow.config` - This is the `nextflow.config` file from the `nextflow-io/hello` repository.
--   `/workspace/gitpod/nf-training/hello-nextflow/nextflow.config` - This is the `nextflow.config` file from our current working directory.
+- `/home/gitpod/.nextflow/config` - This is the global configuration file we just added.
+- `/home/gitpod/.nextflow/assets/nextflow-io/hello/nextflow.config` - This is the `nextflow.config` file from the `nextflow-io/hello` repository.
+- `/workspace/gitpod/nf-training/hello-nextflow/nextflow.config` - This is the `nextflow.config` file from our current working directory.
 
 Nextflow resolves these configurations at runtime with a [specific order of precedence](https://www.nextflow.io/docs/latest/config.html#configuration-file).
 The general rule, however, is that more specific configurations override less specific ones, and config/params specified on the CLI will override defaults in the config files.
@@ -160,10 +160,10 @@ Helpfully, Seqera Platform shows us the final output of this configuration resol
 
 You have learned how to:
 
--   Set up your Seqera Platform token by exporting it to your environment.
--   Run Nextflow CLI with Seqera Platform visualizing and capturing logs.
--   Set up Seqera Platform logging by default.
--   Use Seqera Platform to explore the resolved configuration of a Nextflow pipeline.
+- Set up your Seqera Platform token by exporting it to your environment.
+- Run Nextflow CLI with Seqera Platform visualizing and capturing logs.
+- Set up Seqera Platform logging by default.
+- Use Seqera Platform to explore the resolved configuration of a Nextflow pipeline.
 
 ### What's next?
 

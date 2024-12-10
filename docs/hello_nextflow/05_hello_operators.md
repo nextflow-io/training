@@ -39,10 +39,10 @@ So to recap, we're going to develop a workflow that does the following:
 
 ### Dataset
 
--   **A reference genome** consisting of a small region of the human chromosome 20 (from hg19/b37) and its accessory files (index and sequence dictionary).
--   **Three whole genome sequencing samples** corresponding to a family trio (mother, father and son), which have been subset to a small portion on chromosome 20 to keep the file sizes small.
-    The sequencing data is in [BAM](https://samtools.github.io/hts-specs/SAMv1.pdf) (Binary Alignment Map) format, _i.e._ genome sequencing reads that have already been mapped to the reference genome.
--   **A list of genomic intervals**, _i.e._ coordinates on the genome where our samples have data suitable for calling variants, provided in BED format.
+- **A reference genome** consisting of a small region of the human chromosome 20 (from hg19/b37) and its accessory files (index and sequence dictionary).
+- **Three whole genome sequencing samples** corresponding to a family trio (mother, father and son), which have been subset to a small portion on chromosome 20 to keep the file sizes small.
+  The sequencing data is in [BAM](https://samtools.github.io/hts-specs/SAMv1.pdf) (Binary Alignment Map) format, _i.e._ genome sequencing reads that have already been mapped to the reference genome.
+- **A list of genomic intervals**, _i.e._ coordinates on the genome where our samples have data suitable for calling variants, provided in BED format.
 
 ---
 
@@ -257,8 +257,8 @@ It should look very familiar, but feel free to run it if you want to satisfy you
 
 We're going to start by making two changes:
 
--   Add the `-ERC GVCF` parameter to the GATK HaplotypeCaller command;
--   Update the output file path to use the corresponding `.g.vcf` extension, as per GATK convention.
+- Add the `-ERC GVCF` parameter to the GATK HaplotypeCaller command;
+- Update the output file path to use the corresponding `.g.vcf` extension, as per GATK convention.
 
 Make sure you add a backslash (`\`) at the end of the previous line when you add `-ERC GVCF`.
 

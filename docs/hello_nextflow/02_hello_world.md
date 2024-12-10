@@ -218,12 +218,12 @@ This tells you what is the subdirectory path for that specific process call (som
 
 If we look inside the subdirectory, we find the following log files:
 
--   **`.command.begin`**: Metadata related to the beginning of the execution of the process task
--   **`.command.err`**: Error messages (stderr) emitted by the process task
--   **`.command.log`**: Complete log output emitted by the process task
--   **`.command.out`**: Regular output (stdout) by the process task
--   **`.command.sh`**: The command that was run by the process task call
--   **`.exitcode`**: The exit code resulting from the command
+- **`.command.begin`**: Metadata related to the beginning of the execution of the process task
+- **`.command.err`**: Error messages (stderr) emitted by the process task
+- **`.command.log`**: Complete log output emitted by the process task
+- **`.command.out`**: Regular output (stdout) by the process task
+- **`.command.sh`**: The command that was run by the process task call
+- **`.exitcode`**: The exit code resulting from the command
 
 In this case, you can look for your output in the `.command.out` file, since that's where stdout output is captured.
 If you open it, you'll find the `Hello World!` greeting, which was the expected result of our minimalist workflow.
@@ -400,8 +400,8 @@ Using this mode means Nextflow will only run processes that are either new, have
 
 There are two key advantages to doing this:
 
--   If you're in the middle of developing your pipeline, you can iterate more rapidly since you only effectively have to run the process(es) you're actively working on in order to test your changes.
--   If you're running a pipeline in production and something goes wrong, in many cases you can fix the issue and relaunch the pipeline, and it will resume running from the point of failure, which can save you a lot of time and compute.
+- If you're in the middle of developing your pipeline, you can iterate more rapidly since you only effectively have to run the process(es) you're actively working on in order to test your changes.
+- If you're running a pipeline in production and something goes wrong, in many cases you can fix the issue and relaunch the pipeline, and it will resume running from the point of failure, which can save you a lot of time and compute.
 
 ### 4.1. Run the workflow again with `-resume`
 
