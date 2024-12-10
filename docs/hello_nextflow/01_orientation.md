@@ -45,6 +45,9 @@ If you run this inside `hello-nextflow`, you should see the following output:
 │   ├── demo-params.json
 │   ├── main.nf
 │   └── nextflow.config
+├── hello-nf-core
+│   ├── data
+│   └── solution
 ├── hello-nf-test
 │   ├── demo-params.json
 │   ├── main.nf

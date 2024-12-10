@@ -41,6 +41,9 @@ Se você executar isso dentro do diretório `hello-nextflow`, verá a seguinte s
 │   ├── demo-params.json
 │   ├── main.nf
 │   └── nextflow.config
+├── hello-nf-core
+│   ├── data
+│   └── solution
 ├── hello-nf-test
 │   ├── demo-params.json
 │   ├── main.nf
