@@ -1137,7 +1137,7 @@ We can comment the `ch_samplesheet.view()` line or remove it. We are not going t
 ### Use the new meta key in the pipeline
 
 We can access this new meta value in the pipeline and use it to, for example, only enable trimming for samples from a particular sequencer. The [branch operator](https://www.nextflow.io/docs/stable/reference/operator.html#branch) let's us split
-an input channel into several new output channels based on a selection critera:
+an input channel into several new output channels based on a selection criteria:
 
 ```groovy title="workflows/myfirstpipeline.nf" linenums="35"
 ch_seqtk_in = ch_samplesheet.branch { meta, reads ->
@@ -1192,7 +1192,7 @@ This section should feel familiar to the `hello_modules` section.
 
 !!! note "New module contributions are always welcome and encouraged!"
 
-    If you have a module that you would like to contribute back to the commmunity, reach out on the nf-core slack or open a pull request to the modules repository.
+    If you have a module that you would like to contribute back to the community, reach out on the nf-core slack or open a pull request to the modules repository.
 
 Start by using the nf-core tooling to create a sceleton local module:
 
@@ -1241,7 +1241,7 @@ The script section still calls `samtools`. Let's change this to the proper call 
         --output ${prefix}.tsv
 ```
 
-And at last, we need to adapt the version retrieval. This tool does not have a version command, so we will add the release number manualy:
+And at last, we need to adapt the version retrieval. This tool does not have a version command, so we will add the release number manually:
 
 ```groovy title="modules/local/fastqe.nf" linenums="52"
     def VERSION = '0.3.3'
