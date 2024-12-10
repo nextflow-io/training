@@ -75,10 +75,10 @@ Click on the task to see the task details:
 
 You have learned how to:
 
--   Switch between organizations and workspaces in Seqera Platform.
--   Launch a Nextflow pipeline that ran in the cloud using Seqera Platform.
--   Monitor the progress of the pipeline run.
--   Inspect the details of a task that was executed as part of the pipeline.
+- Switch between organizations and workspaces in Seqera Platform.
+- Launch a Nextflow pipeline that ran in the cloud using Seqera Platform.
+- Monitor the progress of the pipeline run.
+- Inspect the details of a task that was executed as part of the pipeline.
 
 ### Next steps
 

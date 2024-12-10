@@ -18,12 +18,12 @@ The nf-core collection currently offers [over 100 pipelines](https://nf-co.re/pi
 
 Each released pipeline has a dedicated page that includes 6 documentation sections:
 
--   **Introduction:** An introduction and overview of the pipeline
--   **Usage:** Descriptions of how to execute the pipeline
--   **Parameters:** Grouped pipeline parameters with descriptions
--   **Output:** Descriptions and examples of the expected output files
--   **Results:** Example output files generated from the full test dataset
--   **Releases & Statistics:** Pipeline version history and statistics
+- **Introduction:** An introduction and overview of the pipeline
+- **Usage:** Descriptions of how to execute the pipeline
+- **Parameters:** Grouped pipeline parameters with descriptions
+- **Output:** Descriptions and examples of the expected output files
+- **Results:** Example output files generated from the full test dataset
+- **Releases & Statistics:** Pipeline version history and statistics
 
 You should read the pipeline documentation carefully to understand what a given pipeline does and how it can be configured before attempting to run it.
 
@@ -384,8 +384,8 @@ The nf-core pipeline template has a `main.nf` script that calls `myfirstpipeline
 
 Instead of having one large monolithic pipeline script, it's broken up into smaller script components, namely, modules and subworkflows:
 
--   **Modules:** Wrappers around a single process
--   **Subworkflows:** Two or more modules that are packaged together as a mini workflow
+- **Modules:** Wrappers around a single process
+- **Subworkflows:** Two or more modules that are packaged together as a mini workflow
 
 <figure class="excalidraw">
     --8<-- "docs/hello_nextflow/img/nested.excalidraw.svg"
@@ -442,10 +442,10 @@ In the template, the `nextflow.config` file is a central configuration file and 
 
 There are several configuration files that are stored in the `conf` folder and are added to the configuration by default or optionally as profiles:
 
--   `base.config`: A 'blank slate' config file, appropriate for general use on most high-performance computing environments. This defines broad bins of resource usage, for example, which are convenient to apply to modules.
--   `modules.config`: Additional module directives and arguments.
--   `test.config`: A profile to run the pipeline with minimal test data.
--   `test_full.config`: A profile to run the pipeline with a full-sized test dataset.
+- `base.config`: A 'blank slate' config file, appropriate for general use on most high-performance computing environments. This defines broad bins of resource usage, for example, which are convenient to apply to modules.
+- `modules.config`: Additional module directives and arguments.
+- `test.config`: A profile to run the pipeline with minimal test data.
+- `test_full.config`: A profile to run the pipeline with a full-sized test dataset.
 
 #### `nextflow_schema.json`
 
@@ -642,8 +642,8 @@ Using this module information you can work out what inputs are required for the 
 
 1.  `tuple val(meta), path(reads)`
 
-    -   A tuple with a meta _map_ and a list of FASTQ _files_
-    -   The channel `ch_samplesheet` used by the `FASTQC` process can be used as the reads input.
+    - A tuple with a meta _map_ and a list of FASTQ _files_
+    - The channel `ch_samplesheet` used by the `FASTQC` process can be used as the reads input.
 
 Only one input channel is required, and it already exists, so it can be added to your `firstpipeline.nf` file without any additional channel creation or modifications.
 
@@ -1009,9 +1009,9 @@ In the next step we will take a look how we can add a new key to the `meta` map 
 
 nf-core pipelines typically use samplesheets as inputs to the pipelines. This allows us to:
 
--   validate each entry and print specific error messages.
--   attach information to each input file.
--   track which datasets are processed.
+- validate each entry and print specific error messages.
+- attach information to each input file.
+- track which datasets are processed.
 
 Samplesheets are comma-separated text files with a header row specifying the column names, followed by one entry per row. For example, the samplesheet that we have been using during this teaching module looks like this:
 
@@ -1137,7 +1137,7 @@ We can comment the `ch_samplesheet.view()` line or remove it. We are not going t
 ### Use the new meta key in the pipeline
 
 We can access this new meta value in the pipeline and use it to, for example, only enable trimming for samples from a particular sequencer. The [branch operator](https://www.nextflow.io/docs/stable/reference/operator.html#branch) let's us split
-an input channel into several new output channels based on a selection critera:
+an input channel into several new output channels based on a selection criteria:
 
 ```groovy title="workflows/myfirstpipeline.nf" linenums="35"
 ch_seqtk_in = ch_samplesheet.branch { meta, reads ->
@@ -1192,7 +1192,7 @@ This section should feel familiar to the `hello_modules` section.
 
 !!! note "New module contributions are always welcome and encouraged!"
 
-    If you have a module that you would like to contribute back to the commmunity, reach out on the nf-core slack or open a pull request to the modules repository.
+    If you have a module that you would like to contribute back to the community, reach out on the nf-core slack or open a pull request to the modules repository.
 
 Start by using the nf-core tooling to create a sceleton local module:
 
@@ -1241,7 +1241,7 @@ The script section still calls `samtools`. Let's change this to the proper call 
         --output ${prefix}.tsv
 ```
 
-And at last, we need to adapt the version retrieval. This tool does not have a version command, so we will add the release number manualy:
+And at last, we need to adapt the version retrieval. This tool does not have a version command, so we will add the release number manually:
 
 ```groovy title="modules/local/fastqe.nf" linenums="52"
     def VERSION = '0.3.3'

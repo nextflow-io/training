@@ -1,6 +1,6 @@
 # Part 1: Hello World
 
-A "Hello, World!" is a minimalist example that is meant to demonstrate the basic syntax and structure of a programming language or software framework. The example typically consists of printing the phrase "Hello, World!" to the output device, such as the console or terminal, or writing it to a file.
+A "Hello World!" is a minimalist example that is meant to demonstrate the basic syntax and structure of a programming language or software framework. The example typically consists of printing the phrase "Hello, World!" to the output device, such as the console or terminal, or writing it to a file.
 
 In this first part of the Hello Nextflow training course, we ease into the topic with a very simple domain-agnostic Hello World example, which we'll progressively build up to demonstrate the usage of foundational Nextflow logic and components.
 
@@ -65,7 +65,7 @@ Let's open the `hello-world.nf` script in the editor pane.
 !!! note
 
     The file is in the `hello-nextflow` directory, which should be your current working directory.
-    You can either double-click on the file in the file explorer, or type `ls` in the terminal and Cmd+Click (MacOS) or Ctrl+Click (PC) on the file to open it.
+    You can either click on the file in the file explorer, or type `ls` in the terminal and Cmd+Click (MacOS) or Ctrl+Click (PC) on the file to open it.
 
 ```groovy title="hello-world.nf" linenums="1"
 #!/usr/bin/env nextflow
@@ -218,12 +218,12 @@ This tells you what is the subdirectory path for that specific process call (som
 
 If we look inside the subdirectory, we find the following log files:
 
--   **`.command.begin`**: Metadata related to the beginning of the execution of the process task
--   **`.command.err`**: Error messages (stderr) emitted by the process task
--   **`.command.log`**: Complete log output emitted by the process task
--   **`.command.out`**: Regular output (stdout) by the process task
--   **`.command.sh`**: The command that was run by the process task call
--   **`.exitcode`**: The exit code resulting from the command
+- **`.command.begin`**: Metadata related to the beginning of the execution of the process task
+- **`.command.err`**: Error messages (stderr) emitted by the process task
+- **`.command.log`**: Complete log output emitted by the process task
+- **`.command.out`**: Regular output (stdout) by the process task
+- **`.command.sh`**: The command that was run by the process task call
+- **`.exitcode`**: The exit code resulting from the command
 
 In this case, you can look for your output in the `.command.out` file, since that's where stdout output is captured.
 If you open it, you'll find the `Hello World!` greeting, which was the expected result of our minimalist workflow.
@@ -400,8 +400,8 @@ Using this mode means Nextflow will only run processes that are either new, have
 
 There are two key advantages to doing this:
 
--   If you're in the middle of developing your pipeline, you can iterate more rapidly since you only effectively have to run the process(es) you're actively working on in order to test your changes.
--   If you're running a pipeline in production and something goes wrong, in many cases you can fix the issue and relaunch the pipeline, and it will resume running from the point of failure, which can save you a lot of time and compute.
+- If you're in the middle of developing your pipeline, you can iterate more rapidly since you only effectively have to run the process(es) you're actively working on in order to test your changes.
+- If you're running a pipeline in production and something goes wrong, in many cases you can fix the issue and relaunch the pipeline, and it will resume running from the point of failure, which can save you a lot of time and compute.
 
 ### 4.1. Run the workflow again with `-resume`
 
