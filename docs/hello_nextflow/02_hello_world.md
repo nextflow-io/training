@@ -65,7 +65,7 @@ Let's open the `hello-world.nf` script in the editor pane.
 !!! note
 
     The file is in the `hello-nextflow` directory, which should be your current working directory.
-    You can either double-click on the file in the file explorer, or type `ls` in the terminal and Cmd+Click (MacOS) or Ctrl+Click (PC) on the file to open it.
+    You can either click on the file in the file explorer, or type `ls` in the terminal and Cmd+Click (MacOS) or Ctrl+Click (PC) on the file to open it.
 
 ```groovy title="hello-world.nf" linenums="1"
 #!/usr/bin/env nextflow
