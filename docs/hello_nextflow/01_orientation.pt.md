@@ -41,6 +41,9 @@ Se você executar isso dentro do diretório `hello-nextflow`, verá a seguinte s
 │   ├── demo-params.json
 │   ├── main.nf
 │   └── nextflow.config
+├── hello-nf-core
+│   ├── data
+│   └── solution
 ├── hello-nf-test
 │   ├── demo-params.json
 │   ├── main.nf
@@ -66,15 +69,15 @@ Se você executar isso dentro do diretório `hello-nextflow`, verá a seguinte s
 
 **Aqui está um resumo do que você deveria saber para começar:**
 
--   **Os arquivos `.nf`** são _scripts_ de fluxo de trabalho nomeados com base na parte do curso em que são utilizados.
+- **Os arquivos `.nf`** são _scripts_ de fluxo de trabalho nomeados com base na parte do curso em que são utilizados.
 
--   **Os diretórios `hello-*`** são usados nas partes posteriores do curso, onde trabalhamos com mais de um arquivo de fluxo de trabalho.
+- **Os diretórios `hello-*`** são usados nas partes posteriores do curso, onde trabalhamos com mais de um arquivo de fluxo de trabalho.
 
--   **O arquivo `nextflow.config`** é um arquivo de configuração que define propriedades mínimas do ambiente. Você pode ignorá-lo por enquanto.
+- **O arquivo `nextflow.config`** é um arquivo de configuração que define propriedades mínimas do ambiente. Você pode ignorá-lo por enquanto.
 
--   **O diretório `data`** contém os dados de entrada que usaremos na maior parte do curso. O conjunto de dados é descrito em detalhe na Parte 3, quando o introduzimos pela primeira vez.
+- **O diretório `data`** contém os dados de entrada que usaremos na maior parte do curso. O conjunto de dados é descrito em detalhe na Parte 3, quando o introduzimos pela primeira vez.
 
--   **O diretório `solutions`** contém os _scripts_ de fluxo de trabalho completos resultantes de cada etapa do curso. Eles servem como referência para verificar seu trabalho e solucionar quaisquer problemas. As informações de nome e o número presentes no nome do arquivo correspondem à etapa da parte relevante do curso. Por exemplo, o arquivo `hello-world-4.nf` é o resultado esperado ao completar as etapas 1 a 4 da Parte 1: Hello World.
+- **O diretório `solutions`** contém os _scripts_ de fluxo de trabalho completos resultantes de cada etapa do curso. Eles servem como referência para verificar seu trabalho e solucionar quaisquer problemas. As informações de nome e o número presentes no nome do arquivo correspondem à etapa da parte relevante do curso. Por exemplo, o arquivo `hello-world-4.nf` é o resultado esperado ao completar as etapas 1 a 4 da Parte 1: Hello World.
 
 !!!dica
 

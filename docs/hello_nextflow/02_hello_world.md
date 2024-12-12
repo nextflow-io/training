@@ -1,6 +1,6 @@
 # Part 1: Hello World
 
-A "Hello, World!" is a minimalist example that is meant to demonstrate the basic syntax and structure of a programming language or software framework. The example typically consists of printing the phrase "Hello, World!" to the output device, such as the console or terminal, or writing it to a file.
+A "Hello World!" is a minimalist example that is meant to demonstrate the basic syntax and structure of a programming language or software framework. The example typically consists of printing the phrase "Hello, World!" to the output device, such as the console or terminal, or writing it to a file.
 
 In this first part of the Hello Nextflow training course, we ease into the topic with a very simple domain-agnostic Hello World example, which we'll progressively build up to demonstrate the usage of foundational Nextflow logic and components.
 
@@ -65,7 +65,7 @@ Let's open the `hello-world.nf` script in the editor pane.
 !!! note
 
     The file is in the `hello-nextflow` directory, which should be your current working directory.
-    You can either double-click on the file in the file explorer, or type `ls` in the terminal and Cmd+Click (MacOS) or Ctrl+Click (PC) on the file to open it.
+    You can either click on the file in the file explorer, or type `ls` in the terminal and Cmd+Click (MacOS) or Ctrl+Click (PC) on the file to open it.
 
 ```groovy title="hello-world.nf" linenums="1"
 #!/usr/bin/env nextflow
@@ -159,7 +159,7 @@ nextflow run hello-world.nf
 You console output should look something like this:
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `hello-world.nf` [reverent_carson] DSL2 - revision: 463b611a35
 
@@ -218,12 +218,12 @@ This tells you what is the subdirectory path for that specific process call (som
 
 If we look inside the subdirectory, we find the following log files:
 
--   **`.command.begin`**: Metadata related to the beginning of the execution of the process task
--   **`.command.err`**: Error messages (stderr) emitted by the process task
--   **`.command.log`**: Complete log output emitted by the process task
--   **`.command.out`**: Regular output (stdout) by the process task
--   **`.command.sh`**: The command that was run by the process task call
--   **`.exitcode`**: The exit code resulting from the command
+- **`.command.begin`**: Metadata related to the beginning of the execution of the process task
+- **`.command.err`**: Error messages (stderr) emitted by the process task
+- **`.command.log`**: Complete log output emitted by the process task
+- **`.command.out`**: Regular output (stdout) by the process task
+- **`.command.sh`**: The command that was run by the process task call
+- **`.exitcode`**: The exit code resulting from the command
 
 In this case, you can look for your output in the `.command.out` file, since that's where stdout output is captured.
 If you open it, you'll find the `Hello World!` greeting, which was the expected result of our minimalist workflow.
@@ -307,7 +307,7 @@ nextflow run hello-world.nf
 The log output should be very similar to the first time your ran the workflow:
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `hello-world.nf` [cranky_sinoussi] DSL2 - revision: 30b437bb96
 
@@ -369,7 +369,7 @@ nextflow run hello-world.nf
 The log output should start looking very familiar:
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `hello-world.nf` [mighty_lovelace] DSL2 - revision: 6654bc1327
 
@@ -400,8 +400,8 @@ Using this mode means Nextflow will only run processes that are either new, have
 
 There are two key advantages to doing this:
 
--   If you're in the middle of developing your pipeline, you can iterate more rapidly since you only effectively have to run the process(es) you're actively working on in order to test your changes.
--   If you're running a pipeline in production and something goes wrong, in many cases you can fix the issue and relaunch the pipeline, and it will resume running from the point of failure, which can save you a lot of time and compute.
+- If you're in the middle of developing your pipeline, you can iterate more rapidly since you only effectively have to run the process(es) you're actively working on in order to test your changes.
+- If you're running a pipeline in production and something goes wrong, in many cases you can fix the issue and relaunch the pipeline, and it will resume running from the point of failure, which can save you a lot of time and compute.
 
 ### 4.1. Run the workflow again with `-resume`
 
@@ -412,7 +412,7 @@ nextflow run hello-world.nf -resume
 The console output should look similar.
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `hello-world.nf` [thirsty_gautier] DSL2 - revision: 6654bc1327
 
@@ -503,7 +503,7 @@ This is where channels come in: Nextflow uses channels to feed inputs to process
 
 There are multiple ways to do this, but for now, we're just going to use the simplest possible channel, containing a single value.
 
-We're going to create the channel using the `Channel.of()` factory, which sets up a simple value channel, and give it a hardcoded string to use as greeting by declaring `greeting_ch = Channel.of('Hello world!')`.
+We're going to create the channel using the `of()` channel factory, which sets up a simple value channel, and give it a hardcoded string to use as greeting by declaring `greeting_ch = Channel.of('Hello world!')`.
 
 _Before:_
 
@@ -557,7 +557,7 @@ nextflow run hello-world.nf
 If you made all four edits correctly, you should get another successful execution:
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `hello-world.nf` [prickly_avogadro] DSL2 - revision: b58b6ab94b
 
@@ -613,7 +613,7 @@ nextflow run hello-world.nf --greeting 'Bonjour le monde!'
 Running this should feel extremely familiar by now.
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `hello-world.nf` [cheesy_engelbart] DSL2 - revision: b58b6ab94b
 
@@ -652,7 +652,7 @@ nextflow run hello-world.nf
 The output should look the same.
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `hello-world.nf` [wise_waddington] DSL2 - revision: 988fc779cf
 
@@ -671,7 +671,7 @@ nextflow run hello-world.nf --greeting 'Konnichiwa!'
 Nextflow's not complaining, that's a good sign:
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `hello-world.nf` [prickly_miescher] DSL2 - revision: 988fc779cf
 
@@ -806,7 +806,7 @@ nextflow run hello-world.nf --greeting 'Hello World!'
 Oh, how exciting! There is now an extra line in the log output, which corresponds to the new process we just added:
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `hello-world.nf` [magical_brenner] DSL2 - revision: 0e18f34798
 
@@ -843,7 +843,7 @@ Learn how to make the workflow run on a batch of input values.
 
 Workflows typically run on batches of inputs that are meant to be processed in bulk, so we want to upgrade the workflow to accept multiple input values.
 
-Conveniently, the `Channel.of()` factory we've been using is quite happy to accept more than one value, so we don't need to modify that at all; we just have to load more values into the channel.
+Conveniently, the `of()` channel factory we've been using is quite happy to accept more than one value, so we don't need to modify that at all; we just have to load more values into the channel.
 
 ### 8.1. Load multiple greetings into the input channel
 
@@ -876,7 +876,7 @@ nextflow run hello-world.nf
 Well, it certainly seems to run just fine.
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `hello-world.nf` [lonely_pare] DSL2 - revision: b9f1d96905
 
@@ -988,7 +988,7 @@ nextflow run hello-world.nf
 Reverting back to the summary view, the output looks like this again:
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `hello-world.nf` [jovial_mccarthy] DSL2 - revision: 53f20aeb70
 
@@ -1063,11 +1063,11 @@ params.input_file = "data/greetings.csv"
 
 ### 9.2. Update the channel declaration to handle the input file
 
-At this point we introduce a new channel factory, `Channel.fromPath()`, which has some built-in functionality for handling file paths.
-We're going to use that instead of the `Channel.of()` factory we used previously; the base syntax looks like this:
+At this point we introduce a new channel factory, `fromPath()`, which has some built-in functionality for handling file paths.
+We're going to use that instead of the `of()` channel factory we used previously; the base syntax looks like this:
 
 ```groovy title="channel construction syntax"
-Channel.fromPath(input_file)
+Channel.fromPath(params.input_file)
 ```
 
 Now, we are going to deploy a new concept, an 'operator' to transform that CSV file into channel content. You'll learn more about operators later, but for now just understand them as ways of transforming channels in a variety of ways.
@@ -1077,7 +1077,7 @@ Since our goal is to read in the contents of a `.csv` file, we're going to add t
 So the channel construction instruction becomes:
 
 ```groovy title="channel construction syntax"
-Channel.fromPath(input_file)
+Channel.fromPath(params.input_file)
        .splitCsv()
        .flatten()
 ```
@@ -1100,25 +1100,35 @@ greeting_ch = Channel.fromPath(params.input_file)
                      .flatten()
 ```
 
-### 9.3. Run the workflow (one last time!)
+If you want to see the impact of `.flatten()`, we can make use of `.view()`, another operator, to demonstrate. Edit that section of code so it looks like:
 
-```bash
-nextflow run hello-world.nf
+```groovy title="flatten usage"
+// create a channel for inputs from a CSV file
+greeting_ch = Channel.fromPath(params.input_file)
+                     .splitCsv()
+                     .view{ "After splitCsv: $it" }
+                     .flatten()
+                     .view{ "After flatten: $it" }
 ```
 
-Once again we see each process get executed three times:
+When you run this updated workflow, you'll see the difference:
 
-```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
-
- ┃ Launching `hello-world.nf` [angry_spence] DSL2 - revision: d171cc0193
-
-executor >  local (6)
-[0e/ceb175] sayHello (2)       [100%] 3 of 3 ✔
-[01/046714] convertToUpper (3) [100%] 3 of 3 ✔
+```console title="view output with and without flatten"
+After splitCsv: [Hello, Bonjour, Holà]
+After flatten: Hello
+After flatten: Bonjour
+After flatten: Holà
+[d3/1a6e23] Submitted process > sayHello (3)
+[8f/d9e431] Submitted process > sayHello (1)
+[e7/a088af] Submitted process > sayHello (2)
+[1a/776e2e] Submitted process > convertToUpper (1)
+[83/fb8eba] Submitted process > convertToUpper (2)
+[ee/280f93] Submitted process > convertToUpper (3)
 ```
 
-Looking at the outputs, we see each greeting was correctly extracted and processed through the workflow. We've achieved the same result as the previous step, but now we have a lot more flexibility to add more elements to the channel of greetings we want to process.
+As you can see, the `flatten()` operator has transformed the channel from containing arrays to containing individual elements. This can be useful when you want to process each item separately in your workflow.
+
+Remove the `.view()` operations before you continue.
 
 !!! tip
 
@@ -1139,6 +1149,26 @@ Looking at the outputs, we see each greeting was correctly extracted and process
     Bonjour
     Holà
     ```
+
+### 9.3. Run the workflow (one last time!)
+
+```bash
+nextflow run hello-world.nf
+```
+
+Once again we see each process get executed three times:
+
+```console title="Output"
+ N E X T F L O W   ~  version 24.10.0
+
+ ┃ Launching `hello-world.nf` [angry_spence] DSL2 - revision: d171cc0193
+
+executor >  local (6)
+[0e/ceb175] sayHello (2)       [100%] 3 of 3 ✔
+[01/046714] convertToUpper (3) [100%] 3 of 3 ✔
+```
+
+Looking at the outputs, we see each greeting was correctly extracted and processed through the workflow. We've achieved the same result as the previous step, but now we have a lot more flexibility to add more elements to the channel of greetings we want to process.
 
 ### Takeaway
 

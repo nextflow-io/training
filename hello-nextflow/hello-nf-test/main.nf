@@ -27,10 +27,10 @@ workflow {
         ref_dict_file,
         intervals_file
     )
-
+    
     // Collect variant calling outputs across samples
-    all_gvcfs_ch = GATK_HAPLOTYPECALLER.out[0].collect()
-    all_idxs_ch = GATK_HAPLOTYPECALLER.out[1].collect()
+    all_gvcfs_ch = GATK_HAPLOTYPECALLER.out.vcf.collect()
+    all_idxs_ch = GATK_HAPLOTYPECALLER.out.idx.collect()
 
     // Combine GVCFs into a GenomicsDB data store and apply joint genotyping
     GATK_JOINTGENOTYPING(
