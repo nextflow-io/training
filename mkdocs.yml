@@ -59,28 +59,6 @@ nav:
           - advanced/configuration.md
           - advanced/summary.md
           - advanced/support.md
-    - Configure nf-core:
-          - nf_customize/index.md
-          - nf_customize/01_orientation.md
-          - nf_customize/02_nf-core.md
-          - nf_customize/03_execution.md
-          - nf_customize/04_config.md
-          - nf_customize/05_tools.md
-    - Develop nf-core:
-          - nf_develop/index.md
-          - nf_develop/1_01_orientation.md
-          - nf_develop/1_02_create.md
-          - nf_develop/1_03_pipeline.md
-          - nf_develop/1_04_parameters.md
-    - Troubleshooting:
-          - troubleshoot/index.md
-          - troubleshoot/01_orientation.md
-          - troubleshoot/01_exercise.md
-          - troubleshoot/02_exercise.md
-          - troubleshoot/03_exercise.md
-          - troubleshoot/04_exercise.md
-          - troubleshoot/05_exercise.md
-          - troubleshoot/06_exercise.md
 
 theme:
     name: material
