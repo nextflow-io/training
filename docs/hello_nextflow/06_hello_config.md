@@ -867,51 +867,42 @@ As it turns out, there's a lot of overlap between this kind of configuration and
 
 [TODO] NO JUST STICK IT STRAIGHT INTO A PARAMS JSON
 
-### 5.4. Using a parameter file
+### 5.1. Using a parameter file
 
 [TODO] UPDATE CODE
 
-We provide a parameter file in the current directory, called `demo-params.json`, which contains key-value pairs for all of the parameters our workflow expects.
-The values are the same input files and reference files we've been using so far.
+Another convenient way to provide parameter values without having to modify the source code or putting a lot in the command line (which is error prone) is to use a parameter file.
+
+We provide an example parameter file in the current directory, called `demo-params.json`, which contains a key-value pair for the input our workflow expects.
 
 ```json title="demo-params.json" linenums="1"
 {
-    "reads_bam": "data/sample_bams.txt",
-    "outdir": "results_genomics",
-    "reference": "data/ref/ref.fasta",
-    "reference_index": "data/ref/ref.fasta.fai",
-    "reference_dict": "data/ref/ref.dict",
-    "intervals": "data/ref/intervals.bed",
-    "cohort_name": "family_trio"
+    "greeting": "Dobrý den"
 }
 ```
 
 To run the workflow with this parameter file, simply add `-params-file demo-params.json` to the base command.
 
 ```bash
-nextflow run main.nf -profile my_laptop -params-file demo-params.json
+nextflow run hello-world.nf -params-file demo-params.json
 ```
 
 It works! And as expected, this produces the same outputs as previously.
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.10.0
-
- ┃ Launching `main.nf` [marvelous_mandelbrot] DSL2 - revision: 328869237b
-
-executor >  local (7)
-[63/23a827] SAMTOOLS_INDEX (1)       [100%] 3 of 3 ✔
-[aa/60aa4a] GATK_HAPLOTYPECALLER (2) [100%] 3 of 3 ✔
-[35/bda5eb] GATK_JOINTGENOTYPING     [100%] 1 of 1 ✔
+[TODO]
 ```
 
-This is great because, with the parameter file in hand, we'll now be able to provide parameter values at runtime without having to type massive command lines **and** without modifying the workflow nor the default configuration.
+[TODO] CONCLUDE
+
+This may seem like overkill when you only have a single parameter to specify, but some pipelines expect dozens of parameters.
+In those cases, using a parameter file will allow us to provide parameter values at runtime without having to type massive command lines and without modifying the workflow.
 
 That being said, it was nice to be able to demo the workflow without having to keep track of filenames and such. Let's see if we can use a profile to replicate that behavior.
 
-### 5.6. Create a demo profile
+### 5.2. Create a demo profile
 
-[TODO] DECIDE IF WE KEEP THIS; IF SO UPDATE TEXT
+[TODO] DECIDE IF WE KEEP THIS; IF SO UPDATE TEXT ;; BUT MAYBE PUT THIS FIRST
 
 Yes we can! We just need to retrieve the default parameter declarations as they were written in the original workflow (with the `params.*` syntax) and copy them into a new profile that we'll call `demo`.
 

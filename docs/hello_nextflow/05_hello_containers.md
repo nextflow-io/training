@@ -1,6 +1,6 @@
-# Part 2: Hello Containers
+# Part 5: Hello Containers
 
-In Part 1, you learned how to use the basic building blocks of Nextflow to assemble a simple pipeline capable of processing some text and parallelizing execution if there were multiple inputs.
+In Parts X-Y, you learned how to use the basic building blocks of Nextflow to assemble a simple pipeline capable of processing some text and parallelizing execution if there were multiple inputs.
 
 However, you were limited to basic UNIX tools available in your environment.
 Real-world tasks often require various tools and packages not included by default.
@@ -14,12 +14,10 @@ That is all very tedious and annoying, so we're going to show you how to use **c
 
 ---
 
-## 1. Use a container directly
+## 0. Warmup: Pull the container image
 
 A **container** is a lightweight, standalone, executable unit of software created from a container **image** that includes everything needed to run an application including code, system libraries and settings.
 To use a container you usually download or "pull" a container image from a container registry, and then run the container image to create a container instance.
-
-### 1.1. Pull the container image
 
 Let's pull a container image that contains the `cowsay` command so we can use it to display some text in a fun way.
 
@@ -27,7 +25,15 @@ Let's pull a container image that contains the `cowsay` command so we can use it
 docker pull 'community.wave.seqera.io/library/pip_cowsay:131d6a1b707a8e65'
 ```
 
-### 1.2 Use the container to execute a single command
+[TODO] SEGUE
+
+---
+
+## 1. Use a container directly (one-off)
+
+[TODO] EXPLAIN USE CASE
+
+### 1.1 Use the container to execute a single command
 
 The `docker run` command is used to spin up a container instance from a container image and execute a command in it.
 The `--rm` flag tells Docker to remove the container instance after the command has completed.
@@ -47,9 +53,25 @@ docker run --rm 'community.wave.seqera.io/library/pip_cowsay:131d6a1b707a8e65' c
                 ||     ||
 ```
 
-### 1.2. Spin up the container interactively
+[TODO] EXPLAIN WHAT HAPPENED
+
+### Takeaway
+
+You know how to pull a container and run it directly in the terminal as a one-off execution.
+
+### What's next?
+
+[TODO] UPDATE LEARN TO RUN INTERACTIVELY
+
+---
+
+## 2. Use a container interactively
 
 You can also run a container interactively, which will give you a shell prompt inside the container.
+
+### 2.1. Spin up the container
+
+[TODO] INSTRUCTION
 
 ```bash
 docker run --rm -it 'community.wave.seqera.io/library/pip_cowsay:131d6a1b707a8e65' /bin/bash
@@ -65,7 +87,7 @@ bin    dev    etc    home   lib    media  mnt    opt    proc   root   run    sbi
 
 You can see that the filesystem inside the container is different from the filesystem on your host system.
 
-### 1.3. Run the command
+### 2.2. Run the desired tool command
 
 Now that you are inside the container, you can run the `cowsay` command directly.
 
@@ -96,7 +118,7 @@ Output:
                \___)=(___/
 ```
 
-### 1.4. Exit the container
+### 2.3. Exit the container
 
 To exit the container, you can type `exit` at the prompt or use the ++ctrl+d++ keyboard shortcut.
 
@@ -106,7 +128,7 @@ exit
 
 Your prompt should now be back to what it was before you started the container.
 
-### 1.5. Mounting data into containers
+### 2.4. Mounting data into containers
 
 When you run a container, it is isolated from the host system by default.
 This means that the container can't access any files on the host system unless you explicitly tell it to.
@@ -131,7 +153,7 @@ conda.yml  environment.lock
 greetings.csv  pioneers.csv
 ```
 
-### 1.6. Use the mounted data
+### 2.5. Use the mounted data
 
 Now that we have mounted the `data` directory into the container, we can use the `cowsay` command to display the contents of the `greetings.csv` file.
 To do this we'll use the syntax `-t "$(cat data/greetings.csv)"` to output the contents of the file into the `cowsay` command.
@@ -174,20 +196,22 @@ You know how to pull a container and run it interactively, make your data access
 
 ### What's next?
 
-[TODO] update text (was wrong one)
+[TODO] UPDATE USE CONTAINERS IN NF WORKFLOW
 
 ---
 
-## 2. Use containers in Nextflow
+## 3. Use containers in Nextflow
 
 Nextflow has built-in support for running processes inside containers to let you run tools you don't have installed in your compute environment.
 This means that you can use any container image you like to run your processes, and Nextflow will take care of pulling the image, mounting the data, and running the process inside it.
 
 [TODO] [Update this to add a cowsay step to the hello-world pipeline (just add it after the uppercase step) -- include passing in the character as a parameter]
 
-### 2.1. Add a container directive to your process
+### 3.1. Write a `cowsay` module [TODO] UPDATE
 
-Edit the `hello-containers.nf` script to add a `container` directive to the `cowsay` process.
+[TODO] UPDATE TO GRAFT THIS ONTO THE MODULARIZED HELLO WORKFLOW
+
+Edit the `hello-containers.nf` script to add the `cowsay` module.
 
 _Before:_
 
@@ -206,7 +230,15 @@ process cowSay {
     container 'community.wave.seqera.io/library/pip_cowsay:131d6a1b707a8e65'
 ```
 
-### 2.2. Run Nextflow pipelines using containers
+### 3.2. Import the `cowsay` module into the workflow [TODO] UPDATE
+
+[TODO]
+
+### 3.3. Connect the `cowsay` process to the workflow [TODO] UPDATE
+
+[TODO]
+
+### 3.4. Run the workflow
 
 Run the script to see the container in action.
 
@@ -214,12 +246,10 @@ Run the script to see the container in action.
 nextflow run hello-containers.nf
 ```
 
-!!! NOTE
+!!! NOTE [TODO] MAYBE CHANGE THIS TO USE `-with-docker` AND INTRODUCE CONFIG IN NEXT SECTION
 
     The `nextflow.config` in our current working directory contains `docker.enabled = true`, which tells Nextflow to use Docker to run processes.
     Without that configuration we would have to specify the `-with-docker` flag when running the script.
-
-### 2.3. Check the results
 
 You should see a new directory called `containers/results` that contains the output of the `cowsay` process.
 
@@ -236,7 +266,7 @@ You should see a new directory called `containers/results` that contains the out
               ||     ||
 ```
 
-### 2.4. Explore how Nextflow launched the containerized task
+### 3.5. Inspect how Nextflow launched the containerized task
 
 Let's take a look at the task directory for one of the cowsay tasks to see how Nextflow works with containers under the hood.
 
@@ -283,4 +313,4 @@ You know how to use containers in Nextflow to run processes.
 
 ### What's next?
 
-[TODO]
+[TODO] CONFIGURE STUFF

@@ -281,6 +281,10 @@ process sayHello {
 }
 ```
 
+!!! tip
+
+    You MUST use double quotes around the output filename expression (NOT single quotes), otherwise it will fail.
+
 This should produce a unique output file name for every call of each process.
 
 ### 2.5. Run the workflow and look at the results directory
@@ -330,7 +334,220 @@ Learn how to make the workflow take a file as its source of input values.
 
 ---
 
-## 3. Modify the workflow to take a file as its source of input values
+## 3. Use CLI parameters to supply input values
+
+We want to be able to specify the input from the command line, since that is the piece that will almost always be different in subsequent runs of the workflow.
+Good news: Nextflow has a built-in workflow parameter system called `params`, which makes it easy to declare and use CLI parameters.
+
+### 3.1. Edit the input channel declaration to use a parameter
+
+Here we replace the hardcoded input strings with `params.greeting` in the channel creation line.
+
+_Before:_
+
+```groovy title="hello-world.nf" linenums="23"
+// create a channel for inputs
+greeting_ch = Channel.of('Hello','Bonjour','Holà')
+```
+
+_After:_
+
+```groovy title="hello-world.nf" linenums="23"
+// create a channel for inputs
+greeting_ch = Channel.of(params.greeting)
+```
+
+This automatically creates a parameter called `greeting` that you can use to provide a value in the command line.
+
+### 3.2. Run the workflow again with the `--greeting` parameter
+
+To provide a value for this parameter, simply add `--greeting <value>` to your command line. Let's start with using a single value.
+
+```bash
+nextflow run hello-world.nf --greeting 'Bonjour le monde!'
+```
+
+Running this should feel extremely familiar by now.
+
+```console title="Output"
+ N E X T F L O W   ~  version 24.10.0
+
+ ┃ Launching `hello-world.nf` [cheesy_engelbart] DSL2 - revision: b58b6ab94b
+
+executor >  local (1)
+[1c/9b6dc9] sayHello (1) [100%] 1 of 1 ✔
+```
+
+Be sure to open up the output file to check that you now have the new version of the greeting. Voilà!
+
+!!! tip
+
+    It's helpful to distinguish Nextflow-level parameters from pipeline-level parameters.
+    For parameters that apply to a pipeline, we use a double hyphen (`--`), whereas we use a single hyphen (`-`) for parameters that modify a specific Nextflow setting, _e.g._ the `-resume` feature we used earlier.
+
+### 3.3. Set a default value for a command line parameter
+
+In many cases, it makes sense to supply a default value for a given parameter so that you don't have to specify it for every run.
+
+Let's initialize the `greeting` parameter with a default value by adding the parameter declaration before the workflow definition (with a comment block as a free bonus).
+
+```groovy title="hello-world.nf" linenums="3"
+/*
+ * Pipeline parameters
+ */
+params.greeting = 'Holà mundo!'
+```
+
+!!! tip
+
+    You can put the parameter declaration inside the workflow block if you prefer. Whatever you choose, try to group similar things in the same place so you don't end up with declarations all over the place.
+
+### 3.4. Run the workflow again without specifying the parameter
+
+Now that you have a default value set, you can run the workflow again without having to specify a value in the command line.
+
+```bash
+nextflow run hello-world.nf
+```
+
+The console output should look the same.
+
+```console title="Output"
+ N E X T F L O W   ~  version 24.10.0
+
+ ┃ Launching `hello-world.nf` [wise_waddington] DSL2 - revision: 988fc779cf
+
+executor >  local (1)
+[c0/8b8332] sayHello (1) [100%] 1 of 1 ✔
+```
+
+Check the output in the results directory, and... Tadaa! It works!
+Nextflow used the default value to name the output.
+
+!!! note
+
+    If you provide the parameter on the command line, the CLI value will override the default value. Feel free to test this out.
+
+    ```bash
+    nextflow run hello-world.nf --greeting 'Konnichiwa!'
+    ```
+
+    In Nextflow, there are multiple places where you can specify values for parameters.
+    If the same parameter is set to different values in multiple places, Nexflow will determine what value to use based on the order of precedence that is described [here](https://www.nextflow.io/docs/latest/config.html).
+
+### Takeaway
+
+You know how to use CLI parameters to feed inputs to the workflow.
+
+### What's next?
+
+Learn how to make the workflow take a file as its source of input values.
+
+---
+
+## 4. Supply a batch of multiple values via the `params` system
+
+We sneakily reverted to running on just one value there.
+What if we want to run on a batch again, like we did earlier?
+
+Common sense suggests we should be able to simply pass in an array of values instead of a single value. Right?
+
+### 4.1. Switch the `params.greeting` value to an array of values
+
+[TODO]
+
+_Before:_
+
+```groovy title="hello-world.nf" linenums="23"
+/*
+ * Pipeline parameters
+ */
+params.greeting = 'Holà mundo'
+```
+
+_After:_
+
+```groovy title="hello-world.nf" linenums="23"
+/*
+ * Pipeline parameters
+ */
+params.greeting = ['Holà mundo','Konnichiwa,','Dobrý den']
+```
+
+### 4.2. Run the workflow
+
+[TODO] OH NO IT DOES NOT WORK. SHOW ERROR. JUST RUNS ONCE, TRIES TO USE THE WHOLE ARRAY AS A SINGLE INPUT. NEED TO TRANSFORM HOW CONTENTS ARE ORGANIZED/PACKAGED IN THE CHANNEL
+
+### 4.3. Use the `flatten()` operator
+
+[TODO] INTRODUCE CONCEPT OF OPERATORS. "You can think of them as ways of transforming the contents of a channel in a variety of ways."
+
+[TODO] LOOK AT DOCS, FIND FLATTEN. ADD TO CHANNEL CONSTRUCTION LIKE THIS
+
+_Before:_
+
+```groovy title="hello-world.nf" linenums="46"
+// create a channel for inputs
+greeting_ch = Channel.of(params.greeting)
+```
+
+_After:_
+
+```groovy title="hello-world.nf" linenums="46"
+// create a channel for inputs
+greeting_ch = Channel.of(params.greeting)
+                     .flatten()
+```
+
+### 4.4. Add `view()` to inspect channel contents [TODO]
+
+We can inspect how each operator changes how the contents of a channel are organized using the `.view()` operator:
+
+_Before:_
+
+```groovy title="hello-world.nf" linenums="46"
+// create a channel for inputs
+greeting_ch = Channel.of(params.greeting)
+                     .flatten()
+```
+
+_After:_
+
+```groovy title="hello-world.nf" linenums="46"
+// create a channel for inputs
+greeting_ch = Channel.of(params.greeting)
+                     .view{ "Before flatten: $it" }
+                     .flatten()
+                     .view{ "After flatten: $it" }
+```
+
+### 4.5. Run the workflow [TODO]
+
+[TODO] YAY IT WORKS AND ALSO THE VIEW STATEMENTS SHOW US WHAT'S HAPPENING
+
+As you can see from the view() statements, the `flatten()` operator has transformed the channel from containing arrays to containing individual elements. This can be useful when you want to process each item separately in your workflow.
+
+!!! tip
+
+    You can delete or comment out the `view()` statements before moving on.
+
+    ```groovy title="hello-world.nf" linenums="46"
+    // create a channel for inputs
+    greeting_ch = Channel.of(params.greeting)
+                         .flatten()
+    ```
+
+### Takeaway
+
+You know how to use the flatten() operator to handle a batch of values passed in through the CLI parameter system, and use the view() directive to inspect channel contents before and after applying the operators.
+
+### What's next?
+
+Learn how to make the workflow take a file as its source of input values.
+
+---
+
+## 5. Modify the workflow to take a file as its source of input values
 
 It's often the case that, when we want to run on a batch of multiple input elements, the input values are contained in a file.
 As an example, we have provided you with a CSV file called `greetings.csv` in the `data/` directory, containing several greetings separated by commas.
@@ -339,9 +556,29 @@ As an example, we have provided you with a CSV file called `greetings.csv` in th
 Hello,Bonjour,Holà
 ```
 
-So we just need to modify our workflow to read in the values from a file like that.
+So we need to modify our workflow to read in the values from a file like that.
 
-### 3.1. Update the channel declaration to use the input file
+### 5.1. Switch the `params.greeting` to the CSV file
+
+_Before:_
+
+```groovy title="hello-world.nf" linenums="23"
+/*
+ * Pipeline parameters
+ */
+params.greeting = ['Holà mundo','Konnichiwa,','Dobrý den']
+```
+
+_After:_
+
+```groovy title="hello-world.nf" linenums="23"
+/*
+ * Pipeline parameters
+ */
+params.greeting = 'data/greetings.csv'
+```
+
+### 5.1. Update the channel declaration to use the input file
 
 Since we now want to use a file instead of a simple value as the input, we can't use the `of()` channel factory from before.
 We need to switch to using a new channel factory, `fromPath()`, which has some built-in functionality for handling file paths.
@@ -350,73 +587,51 @@ _Before:_
 
 ```groovy title="hello-world.nf" linenums="46"
 // create a channel for inputs
-greeting_ch = Channel.of('Hello','Bonjour','Holà')
+greeting_ch = Channel.of(params.greeting)
+                     .flatten()
 ```
 
 _After:_
 
 ```groovy title="hello-world.nf" linenums="46"
 // create a channel for inputs from a CSV file
-greeting_ch = Channel.fromPath('data/greetings.csv')
+greeting_ch = Channel.fromPath(params.greeting)
 ```
 
-### 3.2. Run it [TODO]
+### 5.2. Run it [TODO]
 
-[TODO] BREAKS. SHOW ERROR. JUST RUNS ONCE, TRIES TO USE THE PATH ITSELF AS GREETING. NOT WHAT WE WANT. WE WANT TO READ IN THE CONTENTS OF THE FILE.
+[TODO] OH NO IT BREAKS. SHOW ERROR. JUST RUNS ONCE, TRIES TO USE THE PATH ITSELF AS GREETING. NOT WHAT WE WANT. WE WANT TO READ IN THE CONTENTS OF THE FILE. SOUNDS LIKE WE NEED ANOTHER OPERATOR!
 
-### 3.3. Add `splitCsv()` operator [TODO]
+### 5.3. Add `splitCsv()` operator [TODO]
 
-[TODO] INTRODUCE CONCEPT OF OPERATORS. "You can think of them as ways of transforming the contents of a channel in a variety of ways." LOOK AT OPERATOR DOCS, FIND SPLITCSV: "an 'operator' to transform that CSV file into channel contents".
+[TODO] LOOK AT OPERATOR DOCS, FIND SPLITCSV: "an 'operator' to transform that CSV file into channel contents".
 
-To apply the operator, add it to the channel construction instruction:
+To apply the operator, add it to the channel construction instruction like previously; and we're also going to include view statements while we're at it.
 
 _Before:_
 
 ```groovy title="hello-world.nf" linenums="46"
 // create a channel for inputs from a CSV file
-greeting_ch = Channel.fromPath('data/greetings.csv')
+greeting_ch = Channel.fromPath(params.greeting)
 ```
 
 _After:_
 
 ```groovy title="hello-world.nf" linenums="46"
 // create a channel for inputs from a CSV file
-greeting_ch = Channel.fromPath('data/greetings.csv')
-                     .splitCsv()
-```
-
-### 3.2. Run it [TODO]
-
-[TODO] BREAKS AGAIN. SHOW ERROR. COULD DIG AROUND WORK DIRECTORY BUT SCREW IT WE NEED TO GET SOME CLARITY ON WHAT THE CHANNEL CONTENTS LOOK LIKE.
-
-### 3.3. Use `view()` to inspect channel contents [TODO]
-
-We can inspect how each operator changes how the contents of a channel are organized using the `.view()` operator:
-
-_Before:_
-
-```groovy title="hello-world.nf" linenums="46"
-// create a channel for inputs from a CSV file
-greeting_ch = Channel.fromPath('data/greetings.csv')
-                     .splitCsv()
-```
-
-_After:_
-
-```groovy title="hello-world.nf" linenums="46"
-// create a channel for inputs from a CSV file
-greeting_ch = Channel.fromPath('data/greetings.csv')
+greeting_ch = Channel.fromPath(params.greeting)
+                     .view{ "Before splitCsv: $it" }
                      .splitCsv()
                      .view{ "After splitCsv: $it" }
 ```
 
-### 3.4. Run again [TODO]
+### 5.4. Run it [TODO]
 
-[TODO] SHOW OUPUT, POINT OUT VIEW OUTPUT. CONFIRMS IT PASSED ALL THE ITEMS TOGETHER AS ONE ARRAY ELEMENT (INDICATED BY BRACKETS). BRACKETS IN THE OUTPUT FILE BREAK THE ECHO COMMAND. ANYWAY THIS IS STILL NOT WHAT WE WANT. WE WANT TO BREAK UP THE PACKAGE FOR THE GREETINGS TO BE USED AS SEPARATE INPUT ITEMS.
+[TODO] OH COME ON IT BREAKS AGAIN. SHOW ERROR. CAN PROBABLY ALREADY GUESS WHAT THE PROBLEM IS BUT HEY LET'S CHECK THOSE VIEW STATEMENTS. OH SEE, BRACKETS. CONFIRMS IT PASSED ALL THE ITEMS TOGETHER AS ONE ARRAY ELEMENT (INDICATED BY BRACKETS). BRACKETS IN THE OUTPUT FILE BREAK THE ECHO COMMAND. EVEN IF IT DIDN'T, THIS IS STILL NOT WHAT WE WANT. WE WANT TO BREAK UP THE PACKAGE FOR THE GREETINGS TO BE USED AS SEPARATE INPUT ITEMS.
 
-### 3.5. Add `flatten()` operator [TODO]
+### 5.5. Add `flatten()` operator [TODO]
 
-[TODO] DOCS SAY THE FLATTEN OPERATOR DOES X
+[TODO] REMEMBER FLATTEN? WE LOVE FLATTEN
 
 To apply the operator, add it to the channel construction instruction. Include another view() call.
 
@@ -424,61 +639,52 @@ _Before:_
 
 ```groovy title="hello-world.nf" linenums="46"
 // create a channel for inputs from a CSV file
-greeting_ch = Channel.fromPath('data/greetings.csv')
+greeting_ch = Channel.fromPath(params.greeting)
+                     .view{ "Before splitCsv: $it" }
                      .splitCsv()
+                     .view{ "After splitCsv: $it" }
 ```
 
 _After:_
 
 ```groovy title="hello-world.nf" linenums="46"
 // create a channel for inputs from a CSV file
-greeting_ch = Channel.fromPath('data/greetings.csv')
+greeting_ch = Channel.fromPath(params.greeting)
+                     .view{ "Before splitCsv: $it" }
                      .splitCsv()
                      .view{ "After splitCsv: $it" }
                      .flatten()
                      .view{ "After flatten: $it" }
 ```
 
-### 3.6. Run it [TODO]
+### 5.6. Run it [TODO]
 
 [TODO] THIS TIME IT WORKS, YAY
-
-[TODO]
-As you can see, the `flatten()` operator has transformed the channel from containing arrays to containing individual elements. This can be useful when you want to process each item separately in your workflow.
 
 Looking at the outputs, we see each greeting was correctly extracted and processed through the workflow. We've achieved the same result as previously, but now we have a lot more flexibility to add more elements to the channel of greetings we want to process without modifying any code.
 
 [TODO] NOTE THAT IF YOU ADD MORE LINES TO THE CSV EVERYTHING GETS PARSED AS INDIVIDUAL ITEMS. THAT'S WHAT FLATTEN IS DOING. LEARN MORE ABOUT PLUMBING LATER.
 
-Remove the `.view()` operations before you continue.
+!!! note
 
-_Before:_
+    Be sure to remove the `.view()` operations before you continue.
 
-```groovy title="hello-world.nf" linenums="46"
-// create a channel for inputs from a CSV file
-greeting_ch = Channel.fromPath('data/greetings.csv')
-                     .splitCsv()
-                     .flatten()
-```
-
-_After:_
-
-```groovy title="hello-world.nf" linenums="46"
-// create a channel for inputs from a CSV file
-greeting_ch = Channel.fromPath('data/greetings.csv')
-                     .splitCsv()
-                     .view{ "After splitCsv: $it" }
-                     .flatten()
-                     .view{ "After flatten: $it" }
-```
+    ```groovy title="hello-world.nf" linenums="46"
+    // create a channel for inputs from a CSV file
+    greeting_ch = Channel.fromPath('data/greetings.csv')
+                         .splitCsv()
+                         .flatten()
+    ```
 
 ### Takeaway
 
-[TODO]
+You know how to use the splitCsv() and flatten() operators to handle a batch of values passed in through a file.
+
+More generally, [TODO]
 
 ### What's next?
 
-Celebrate your success and take a break!
+Take a break!
 
 Don't worry if the channel factories and operators feel like a lot to grapple with the first time you encounter them.
 You'll get more opportunities to practice using these components in various settings as you work through this training course.

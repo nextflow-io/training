@@ -328,12 +328,6 @@ Nextflow is in control of this directory and we are not supposed to interact wit
 
 Let's look at how to use the `publishDir` directive for managing this more conveniently.
 
-!!! note
-
-    A newer syntax option had been proposed to make it possible to declare and publish workflow-level outputs, documented [here](https://www.nextflow.io/docs/latest/workflow.html#publishing-outputs).
-    This will eventually make using `publishDir` at the process level redundant for completed pipelines.
-    However, we expect that `publishDir` will still remain very useful during pipeline development.
-
 ### 4.1. Add a `publishDir` directive to the process
 
 To make the output file more accessible, we can utilize the `publishDir` directive.
@@ -382,11 +376,15 @@ Our `output.txt` file is in this directory.
 If you check the contents it should match the output in our work/task directory.
 This is how we move results files outside of the working directories.
 
+It is also possible to set the `publishDir` directive to make a symbolic link to the file instead of actually copying it.
+This is useful when you're dealing with very large files.
+However, if you delete the work directory as part of a cleanup operation, you will lost access to the file, so always make sure you have actual copies of everything you care about before deleting anything.
+
 !!! note
 
-    It is also possible to set the `publishDir` directive to make a symbolic link to the file instead of actually copying it.
-    This is useful when you're dealing with very large files.
-    However, if you delete the work directory as part of a cleanup operation, you will lost access to the file, so always make sure you have actual copies of everything you care about before deleting anything.
+    A newer syntax option had been proposed to make it possible to declare and publish workflow-level outputs, documented [here](https://www.nextflow.io/docs/latest/workflow.html#publishing-outputs).
+    This will eventually make using `publishDir` at the process level redundant for completed pipelines.
+    However, we expect that `publishDir` will still remain very useful during pipeline development.
 
 ### Takeaway
 
@@ -396,4 +394,14 @@ More generally, you know how to interpret a simple Nextflow workflow, manage its
 
 ### What's next?
 
-[TODO] LEARN HOW TO USE CHANNELS TO PROVIDE INPUTS TO A PROCESS
+[TODO]
+
+More generally, you've learned how to use the essential components of Nextflow and you have a basic grasp of the logic of how to build a workflow and retrieve the desired outputs.
+
+### What's next?
+
+Take a break!
+
+[TODO]
+
+When you're ready, move on to Part X to learn about [TODO].
