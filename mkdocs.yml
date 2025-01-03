@@ -24,11 +24,6 @@ nav:
           - run_nextflow/02_run_basics.md
           - run_nextflow/03_run_nf-core.md
           - run_nextflow/04_run_seqera.md
-    - Side Quests:
-          - side_quests/index.md
-          - side_quests/orientation.md
-          - side_quests/containers.md
-          - side_quests/if_else.md
     - Nextflow for Genomics:
           - nf4_genomics/index.md
           - nf4_genomics/01_orientation.md
@@ -36,6 +31,11 @@ nav:
           - nf4_genomics/03_collect.md
           - nf4_genomics/04_config.md
           - nf4_genomics/05_testing.md
+    - Side Quests:
+          - side_quests/index.md
+          - side_quests/orientation.md
+          - side_quests/containers.md
+          - side_quests/if_else.md
     - Fundamentals Training:
           - basic_training/index.md
           - basic_training/orientation.md
