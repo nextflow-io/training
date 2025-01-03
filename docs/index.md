@@ -47,7 +47,7 @@ These are foundational, domain-agnostic courses intended for those who are compl
 
     This is a course for newcomers who wish to learn how to develop their own pipelines. The course covers the core components of the Nextflow language in enough detail to enable developing simple but fully functional pipelines. It also covers key elements of pipeline design, development and configuration practices.
 
-    [Launch the Hello Nextflow training :material-arrow-right:](hello_nextflow/index.md){ .md-button }
+    [Launch the Hello Nextflow training :material-arrow-right:](hello_nextflow/index.md){ .md-button .md-button--primary }
 
 !!! exercise "Run Nextflow"
 
@@ -57,7 +57,7 @@ These are foundational, domain-agnostic courses intended for those who are compl
 
     This is a course for newcomers who wish to learn how to run existing pipelines. The course covers the bare essentials of the Nextflow language in order to enable interpretation of existing pipelines, as well as the mechanics for configuring and running Nextflow pipelines from a command-line environment. It also covers important components of the Nextflow ecosystem, including the nf-core project, which offers a large number of community-curated pipelines, and the Seqera platform for managing pipeline execution at scale (operated by the creators of Nextflow).
 
-    [Launch the Run Nextflow training :material-arrow-right:](run_nextflow/index.md){ .md-button }
+    [Launch the Run Nextflow training :material-arrow-right:](run_nextflow/index.md){ .md-button .md-button--primary }
 
 ## Nextflow for Science
 
@@ -71,7 +71,7 @@ These are courses that demonstrate how to apply the concepts and components pres
 
     This is a course for researchers who wish to learn how to develop their own genomics pipelines. The course uses a variant calling use case to demonstrate how to develop a simple but functional genomics pipeline.
 
-    [Launch the Nextflow for Genomics training :material-arrow-right:](nf4_genomics/index.md){ .md-button }
+    [Launch the Nextflow for Genomics training :material-arrow-right:](nf4_genomics/index.md){ .md-button .md-button--primary }
 
 ## In-depth Nextflow Training
 
@@ -85,7 +85,7 @@ These are courses that demonstrate how to use Nextflow features in more detail o
 
     This is a course for Nextflow developers who wish to widen their range and/or deepen their skills. Although the modules are presented linearly, learners are welcome to pick and choose topics in any order. Any dependencies on components/skills that go beyond the scope of the 'Hello Nextflow' course are indicated in the corresponding module overview.
 
-    [Launch the Side Quests training :material-arrow-right:](side_quests/index.md){ .md-button }
+    [Launch the Side Quests training :material-arrow-right:](side_quests/index.md){ .md-button .md-button--primary }
 
 !!! exercise "Fundamentals Training"
 
