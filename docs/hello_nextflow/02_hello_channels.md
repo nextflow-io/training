@@ -841,11 +841,14 @@ After flatten: Bonjour
 After flatten: Holà
 ```
 
-You see that we get a single `Before splitCsv:` statement; at that point the channel contains one item, the original file path.
-Next, we get a single `After splitCsv:` statement; at that point the channel still contains only one item, an array containing the three values.
-Then we get three separate `After flatten:` statements, one for each greeting, which are now individual items in the channel.
+Looking at the output of the `view()` statements, we see the following:
 
-Looking at the outputs, we see that each greeting was correctly extracted and processed through the workflow.
+-   A single `Before splitCsv:` statement: at that point the channel contains one item, the original file path.
+-   A single `After splitCsv:` statement: at that point the channel still contains only one item, an array containing the three values.
+-   Three separate `After flatten:` statements: one for each greeting, which are now individual items in the channel.
+
+We can also look at the output files, which show that each greeting was correctly extracted and processed through the workflow.
+
 We've achieved the same result as previously, but now we have a lot more flexibility to add more elements to the channel of greetings we want to process by modifying an input file, without modifying any code.
 
 !!! note
@@ -862,4 +865,4 @@ More generally, you have a basic understanding of how Nextflow uses channels to 
 ### What's next?
 
 Take a break!
-When you're ready, move on to Part 3 to learn how to add more steps to your workflow.
+When you're ready, move on to Part 3 to learn how to add more steps to your workflow and do some slightly more interesting plumbing.

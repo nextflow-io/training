@@ -2,14 +2,14 @@
 
 Most real-world workflows involve more than one step.
 In this training module, you'll learn how to connect processes together in a multi-step workflow.
-You will learn basic plumbing logic for making data flow from one process to the next, collecting outputs from multiple process calls, passing more than one input through a channel, emitting multiple outputs, and using simple conditionals.
+You will learn basic plumbing logic for making data flow from one process to the next, collecting outputs from multiple process calls, passing more than one input through a channel and handling multiple outputs.
 
 Building on the domain-agnostic Hello World example from earlier in the course, we're going to make the following changes to our workflow:
 
 -   Add a second step that converts the greeting to uppercase, using the classic UNIX text replacement command `tr '[a-z]' '[A-Z]'`;
 -   Add a third step that collects all the transformed greetings together back into a single file;
 -   Refine the third step to handle processing subsequent batches without overwriting results;
--   Log some simple statistics about the batches that we process.
+-   Output some simple statistics about the greetings that we process.
 
 ---
 
@@ -394,8 +394,6 @@ Yes, once again the answer to our problem is an operator, the aptly-named [`coll
 This time it's going to look a bit different because we're not adding it in the context of a channel factory.
 Instead, we append it to `convertToUpper.out`, which becomes `convertToUpper.out.collect()`, in the process call.
 
-We'll also include a couple of `view()` statements to visualize the before and after states of the channel contents.
-
 In the workflow block, make the following code changes:
 
 _Before:_
@@ -418,7 +416,7 @@ _After:_
 }
 ```
 
-The `view()` statements can go anywhere you want.
+Notice that we also included a couple of `view()` statements to visualize the before and after states of the channel contents. The `view()` statements can go anywhere you want; we put them after the call for readability.
 
 ### 2.7. Run the workflow again with `-resume`
 
@@ -441,8 +439,10 @@ Before collect: /workspace/gitpod/hello-nextflow/work/89/b627e818957935446948652
 After collect: [/workspace/gitpod/hello-nextflow/work/5e/59bb64da77666f94fb25fb64f7ce10/UPPER-Holà-output.txt, /workspace/gitpod/hello-nextflow/work/06/dc3c59e025d435209e9aa55f90094b/UPPER-Hello-output.txt, /workspace/gitpod/hello-nextflow/work/89/b627e818957935446948652e8727e6/UPPER-Bonjour-output.txt]
 ```
 
-You see that we get three `Before collect:` statements, one for each greeting; at that point the file paths are individual items in the channel.
-Then we get a single `After collect:` statement; the three file paths are packaged into a single item.
+Looking at the output of the `view()` statements, we see the following:
+
+-   Three `Before collect:` statements, one for each greeting: at that point the file paths are individual items in the channel.
+-   A single `After collect:` statement: the three file paths are now packaged into a single item.
 
 Have a look at the contents of the final output file too:
 
@@ -591,7 +591,7 @@ Let's try running this with a batch name on the command line.
 nextflow run hello-plumbing.nf -resume --batch trio
 ```
 
-It runs successfully and produces the desired output!
+It runs successfully and produces the desired output:
 
 ```console title="bash"
 cat results/COLLECTED-trio-output.txt
@@ -627,6 +627,7 @@ Since our workflow is very simple, we're going to contrive an example of a secon
 
 First we need to get that count.
 Conveniently, Nextflow lets us add arbitrary code in the `script:` block of the process definition, which comes in really handy for doing things like this.
+
 In this case, we can use the built-in `size()` function to get the number of files in the `input_files` array.
 
 In the process block, make the following code change:
