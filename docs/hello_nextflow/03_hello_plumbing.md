@@ -392,7 +392,8 @@ We need to do something to tell Nextflow explicitly that we want that third step
 Yes, once again the answer to our problem is an operator, the aptly-named [`collect()`](https://www.nextflow.io/docs/latest/reference/operator.html#collect).
 
 This time it's going to look a bit different because we're not adding it in the context of a channel factory.
-We can simply append it to `convertToUpper.out`, which becomes `convertToUpper.out.collect()`, in the process call
+Instead, we append it to `convertToUpper.out`, which becomes `convertToUpper.out.collect()`, in the process call.
+
 We'll also include a couple of `view()` statements to visualize the before and after states of the channel contents.
 
 In the workflow block, make the following code changes:
@@ -528,7 +529,7 @@ _After:_
 
 This sets up the process to use the `batch_id` value to generate a specific filename for the final output of the workflow.
 
-### 3.3. Add a `batch_id` command-line parameter
+### 3.3. Add a `batch` command-line parameter
 
 Now we need a way to supply the value for `batch_id`.
 
@@ -560,7 +561,7 @@ Remember you can override that default value by specifying a value with `--batch
 
 ### 3.4. Pass the `batch` parameter to the process
 
-To provide the value of the parameter to the process, we just need to add it in the process call.
+To provide the value of the parameter to the process, we need to add it in the process call.
 
 In the workflow block, make the following code change:
 
