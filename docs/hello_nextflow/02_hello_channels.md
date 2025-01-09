@@ -4,7 +4,7 @@
 
 ---
 
-## 0. Warmup: Run hello-channels.nf
+## 0. Warmup: Run `hello-channels.nf`
 
 We're going to use the workflow script `hello-channels.nf` as a starting point.
 It is equivalent to the script produced by working through Part 1 of this training course.
@@ -15,7 +15,14 @@ Just to make sure everything is working, run the script once before making any c
 nextflow run hello-channels.nf
 ```
 
-[TODO] ADD CONSOLE OUTPUT
+```console title="Output"
+ N E X T F L O W   ~  version 24.10.0
+
+Launching `hello-channels.nf` [silly_moriondo] DSL2 - revision: a0dfbc86fe
+
+executor >  local (1)
+[03/b321a3] sayHello [100%] 1 of 1 ✔
+```
 
 ---
 
