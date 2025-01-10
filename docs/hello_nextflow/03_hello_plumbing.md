@@ -2,14 +2,21 @@
 
 Most real-world workflows involve more than one step.
 In this training module, you'll learn how to connect processes together in a multi-step workflow.
-You will learn basic plumbing logic for making data flow from one process to the next, collecting outputs from multiple process calls, passing more than one input through a channel and handling multiple outputs.
 
-Building on the domain-agnostic Hello World example from earlier in the course, we're going to make the following changes to our workflow:
+This will teach you the Nextflow way of achieving the following:
 
--   Add a second step that converts the greeting to uppercase, using the classic UNIX text replacement command `tr '[a-z]' '[A-Z]'`;
--   Add a third step that collects all the transformed greetings together back into a single file;
--   Refine the third step to handle processing subsequent batches without overwriting results;
--   Output some simple statistics about the greetings that we process.
+1. Making data flow from one process to the next
+2. Collecting outputs from multiple process calls into a single process call
+3. Passing more than one input through a channel
+4. Handling multiple outputs coming out of a process
+
+To demonstrate, we will continue building on the domain-agnostic Hello World example from Parts 1 and 2.
+This time, we're going to make the following changes to our workflow:
+
+1. Add a second step that converts the greeting to uppercase;
+2. Add a third step that collects all the transformed greetings and writes them into a single file;
+3. Add a parameter to name the final output file and pass that as a secondary input to the collection step;
+4. Make the collection step also output a simple statistic about what was processed.
 
 ---
 
@@ -37,7 +44,9 @@ executor >  local (3)
 
 ---
 
-## 1. Add the second step to the workflow
+## 1. Add a second step to the workflow
+
+We want to add a second step to convert the greeting to uppercase, using the classic UNIX text replacement command `tr '[a-z]' '[A-Z]'`.
 
 First, we need to write a new process that wraps the `tr '[a-z]' '[A-Z]'` command.
 Then we'll need to add it to the workflow, setting it up to take the output of the `sayHello()` process as input.
@@ -208,7 +217,7 @@ Learn how to collect outputs from batched process calls and feed them into a sin
 
 ---
 
-## 2. Add a step to collect all the greetings
+## 2. Add a third step to collect all the greetings
 
 When we apply a transformation to a batch of inputs, like we're doing here to the multiple greetings, we'll often want to collect the transformed outputs and feed them into a single step that performs some kind of analysis or summation.
 
@@ -469,18 +478,18 @@ Learn how to pass more than one input through a channel.
 
 ---
 
-## 3. Add a batch identifier to make the final output file distinct
+## 3. Add a parameter to name the final output file
 
-We'll want to be able to process subsequent batches of greetings without overwriting the final results.
+We want to be able to name the final output file something specific in order to process subsequent batches of greetings without overwriting the final results.
 
-To that end, we're going to make the following refinements:
+To that end, we're going to make the following refinements to the workflow:
 
--   Modify the collector process to use a batch identifier in the final file name
--   Add a command-line parameter to assign a batch identifier and pass it to the process
+-   Modify the collector process to accept a user-defined name for the output file
+-   Add a command-line parameter to the workflow and pass it to the collector process
 
-### 3.1. Add the batch identifier to the expected inputs
+### 3.1. Add an input declaration in the process inputs
 
-Good news: we can declare as many expected inputs as we want.
+Good news: we can declare as many input variables as we want. Let's call this one `batch_name`.
 
 In the process block, make the following code change:
 
@@ -496,10 +505,10 @@ _After:_
 ```groovy title="hello-plumbing.nf" linenums="48"
     input:
         path input_files
-        val batch_id
+        val batch_name
 ```
 
-### 3.2. Use the `batch_id` variable in the output file name
+### 3.2. Use the `batch_name` variable in the output file name
 
 In the process block, make the following code change:
 
@@ -519,22 +528,22 @@ _After:_
 
 ```groovy title="hello-plumbing.nf" linenums="52"
     output:
-        path "COLLECTED-${batch_id}-output.txt"
+        path "COLLECTED-${batch_name}-output.txt"
 
     script:
     """
-    cat ${input_files} > 'COLLECTED-${batch_id}-output.txt'
+    cat ${input_files} > 'COLLECTED-${batch_name}-output.txt'
     """
 ```
 
-This sets up the process to use the `batch_id` value to generate a specific filename for the final output of the workflow.
+This sets up the process to use the `batch_name` value to generate a specific filename for the final output of the workflow.
 
 ### 3.3. Add a `batch` command-line parameter
 
-Now we need a way to supply the value for `batch_id`.
+Now we need a way to supply the value for `batch_name`.
 
 You already know how to use the `params` system to declare CLI parameters.
-Let's use that to declare a `batch` parameter with a default value (because we are lazy).
+Let's use that to declare a `batch` parameter (with a default value because we are lazy).
 
 In the pipeline parameters section, make the following code changes:
 
@@ -613,7 +622,7 @@ Learn how to emit multiple outputs and handle them conveniently.
 
 ---
 
-## 4. Add the count of greetings as an extra output to the collection step
+## 4. Add an output to the collector step
 
 When a process produces only one output, it's easy to access it (in the workflow block) using the `<process>.out` syntax.
 When there are two or more outputs, the default way to select a specific output is to use the corresponding (zero-based) index; for example, you would use `<process>.out[0]` to get the first output.
@@ -621,14 +630,19 @@ This is not super convenient.
 
 Let's have a look at how we can select and use a specific output of a process when there are more than one.
 
-Since our workflow is very simple, we're going to contrive an example of a second output by pretending that we want to track the number of greetings that are being collected for a given batch of inputs.
+For demonstration purposes, let's say we want to count and report the number of greetings that are being collected for a given batch of inputs.
+
+To that end, we're going to make the following refinements to the workflow:
+
+-   Count the number of greetings collected (inside the process block)
+-   Add the count to the outputs (inside the process block)
+-   Once the process has run, select the count and report it using `view` (in the workflow block)
 
 ### 4.1. Count the number of greetings collected
 
-First we need to get that count.
 Conveniently, Nextflow lets us add arbitrary code in the `script:` block of the process definition, which comes in really handy for doing things like this.
 
-In this case, we can use the built-in `size()` function to get the number of files in the `input_files` array.
+That means we can use the built-in `size()` function to get the number of files in the `input_files` array.
 
 In the process block, make the following code change:
 
@@ -645,15 +659,19 @@ _After:_
 
 ```groovy title="hello-plumbing.nf" linenums="56"
     script:
-        size = input_files.size()
+        count_greetings = input_files.size()
     """
     cat ${input_files} > 'COLLECTED-${batch_id}-output.txt'
     """
 ```
+
+The `count_greetings` variable will be computed at runtime.
 
 ### 4.2. Emit the count as a named output
 
-Next, we're going to add the `size` variable we just created to the `output:` block.
+In principle all we need to do is to add the `count_greetings` variable to the `output:` block.
+
+However, while we're at it, we're also going to add some `emit:` tags to our output declarations. These will enable us to select the outputs by name instead of having to use positional indices.
 
 In the process block, make the following code change:
 
@@ -668,13 +686,20 @@ _After:_
 
 ```groovy title="hello-plumbing.nf" linenums="52"
     output:
-        path "COLLECTED-${batch_id}-output.txt"
-        val size , emit: count
+        path "COLLECTED-${batch_id}-output.txt" , emit: outfile
+        val count_greetings , emit: count
 ```
 
-Notice that we added `, emit: count` to the `val size` output declaration. This is going to allow us to access that output by the name `count` from the workflow block.
+The `emit:` tags are optional, and we could have added a tag to only one of the outputs. But as the saying goes, why not both?
 
-### 4.3. Use `view()` to access the output
+### 4.3. Report the output at the end of the workflow
+
+Now that we have two outputs coming out of the `collectGreetings` process, the `collectGreetings.out` output channel contains two 'tracks':
+
+-   `collectGreetings.out.outfile` contains the final output file
+-   `collectGreetings.out.count` contains the count of greetings
+
+We could send either or both of these to another process for further work. However, in the interest of wrapping this up, we're just going to use `view()` to demonstrate that we can access and report the count of greetings.
 
 In the workflow block, make the following code change:
 
@@ -695,6 +720,8 @@ _After:_
     collectGreetings.out.count.view{ "There were $it greetings in this batch" }
 ```
 
+Here we are using `$it` in the same way we did earlier, as an implicit variable to access the contents of the channel.
+
 ### 4.4. Run the workflow
 
 Let's try running this with the current batch of greetings.
@@ -714,7 +741,7 @@ There were 3 greetings in this batch
 ```
 
 The last line shows that we correctly retrieved the count of greetings processed.
-Feel free to add more to the CSV and see what happens.
+Feel free to add more greetings to the CSV and see what happens.
 
 ### Takeaway
 
