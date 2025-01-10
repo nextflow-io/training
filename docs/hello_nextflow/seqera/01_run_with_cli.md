@@ -113,20 +113,14 @@ nextflow run nextflow-io/hello
 You will see the following output:
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.04.4
+ N E X T F L O W   ~  version 24.10.2
 
-Launching `https://github.com/nextflow-io/hello` [fabulous_euclid] DSL2 - revision: afff16a9b4 [master]
+Launching `https://github.com/seqeralabs/nf-hello-world` [scruffy_banach] DSL2 - revision: 8274d3d10c [master]
 
-Monitor the execution with Seqera Platform using this URL: https://cloud.seqera.io/user/kenbrewer/watch/KYjRktIlOuxrh
-executor >  local (4)
-[71/eaa915] process > sayHello (3) [100%] 4 of 4 ✔
-Ciao world!
-
-Bonjour world!
-
-Hola world!
-
-Hello world!
+Monitor the execution with Seqera Platform using this URL: https://cloud.seqera.io/user/jonathan-manning2/watch/1Z3Jl1AXYRqXNx
+executor >  local (6)
+[47/93f584] process > sayHello (2)       [100%] 3 of 3 ✔
+[2a/0dc4a3] process > convertToUpper (3) [100%] 3 of 3 ✔
 ```
 
 Note that we are logging to Seqera Platform even though we did not use the `-with-tower` command!
