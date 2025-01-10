@@ -41,30 +41,23 @@ Follow these steps to set up your token:
 
 ### 1.2. Run Nextflow CLI with Seqera Platform visualizing and capturing logs
 
-Run a Nextflow workflow with the addition of the `-with-tower` command:
+Run the 'nf-hello-world' workflow you may have encountered in earlier sessions, with the addition of the `-with-tower` command:
 
 ```bash
-nextflow run nextflow-io/hello -with-tower
+nextflow run seqeralabs/nf-hello-world -profile demo --outdir hello -with-tower
 ```
 
 You will see output similar to the following:
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.04.4
+ N E X T F L O W   ~  version 24.10.2
 
-Launching `https://github.com/nextflow-io/hello` [evil_engelbart] DSL2 - revision: afff16a9b4 [master]
+Launching `https://github.com/seqeralabs/nf-hello-world` [thirsty_hoover] DSL2 - revision: 8274d3d10c [master]
 
-Downloading plugin nf-tower@1.9.1
-Monitor the execution with Seqera Platform using this URL: https://cloud.seqera.io/user/kenbrewer/watch/5Gs0qqV9Y9rguE
-executor >  local (4)
-[80/810411] process > sayHello (1) [100%] 4 of 4 ✔
-Ciao world!
-
-Bonjour world!
-
-Hola world!
-
-Hello world!
+Monitor the execution with Seqera Platform using this URL: https://cloud.seqera.io/user/jonathan-manning2/watch/3kLeKzzjHBzB7D
+executor >  local (6)
+[40/c954b7] process > sayHello (2)       [100%] 3 of 3 ✔
+[2f/8162ff] process > convertToUpper (3) [100%] 3 of 3 ✔
 ```
 
 Hold ++ctrl++ or ++cmd++ and click on the link to open it in your browser.
