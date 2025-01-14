@@ -38,10 +38,10 @@ Após o carregamento concluir, você poderá ver algo semelhante a isso:
 
 ![Gitpod welcome](img/gitpod.welcome.png)
 
--   **A barra lateral** permite que você customize seu ambiente Gitpod e realize tarefas básicas (copiar, colar, abrir arquivos, buscar, git, etc.). Você pode clicar no explorador para ver que arquivos estão presentes em seu repositório.
--   **O terminal** permite que você execute todos os programas no repositório. Por exemplo, `nextflow` e `docker` estão instalados e podem ser executados.
--   **O explorador de arquivos** permite que você visualize e edite arquivos. Clicar em um arquivo no explorador irá abri-lo na janela principal.
--   **O navegador** permite que você visualize o material de treinamento (<https://training.nextflow.io/>). Caso o feche acidentalmente, você pode iniciar o navegador novamente executando o seguinte comando no terminal: `gp preview https://training.nextflow.io`.
+- **A barra lateral** permite que você customize seu ambiente Gitpod e realize tarefas básicas (copiar, colar, abrir arquivos, buscar, git, etc.). Você pode clicar no explorador para ver que arquivos estão presentes em seu repositório.
+- **O terminal** permite que você execute todos os programas no repositório. Por exemplo, `nextflow` e `docker` estão instalados e podem ser executados.
+- **O explorador de arquivos** permite que você visualize e edite arquivos. Clicar em um arquivo no explorador irá abri-lo na janela principal.
+- **O navegador** permite que você visualize o material de treinamento (<https://training.nextflow.io/>). Caso o feche acidentalmente, você pode iniciar o navegador novamente executando o seguinte comando no terminal: `gp preview https://training.nextflow.io`.
 
 ### Recursos do Gitpod
 
