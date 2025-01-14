@@ -9,7 +9,7 @@ O ambiente do Gitpod contem dados de teste que serão utilizados nesse treinamen
 
 !!! note
 
-    Vá [para este link](../envsetup/index.md) se você ainda não configurou seu ambiente no Gitpod.
+    Vá [para este link](../envsetup/index.pt.md) se você ainda não configurou seu ambiente no Gitpod.
 
 ## Começando
 
