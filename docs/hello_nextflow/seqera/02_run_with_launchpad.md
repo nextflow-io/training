@@ -32,7 +32,7 @@ Follow these steps to launch a test run of a pipeline:
 2. Click on the `Launch` button to bring up the launch form.
 3. Change the "Workflow run name" to "<username>-hellogenomics-test".
 4. Click "Next" to bring up the parameters form.
-5. Take a look at the options. Feel free to take a moment to understand them, referring to [Hello Genomics](../06_hello_config.md) as needed. 
+5. Take a look at the options. Feel free to take a moment to understand them, referring to [Hello Genomics](../06_hello_config.md) as needed.
 6. Click on "Next" to inspect the advanced configuration.
 7. Click "Launch" to start the pipeline!
 
