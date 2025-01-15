@@ -11,11 +11,11 @@ This will teach you the Nextflow way of achieving the following:
 4. Handling multiple outputs coming out of a process
 
 To demonstrate, we will continue building on the domain-agnostic Hello World example from Parts 1 and 2.
-This time, we're going to make the following changes to our workflow:
+This time, we're going to make the following changes to our workflow to better reflect how people build actual workflows:
 
-1. Add a second step that converts the greeting to uppercase;
-2. Add a third step that collects all the transformed greetings and writes them into a single file;
-3. Add a parameter to name the final output file and pass that as a secondary input to the collection step;
+1. Add a second step that converts the greeting to uppercase.
+2. Add a third step that collects all the transformed greetings and writes them into a single file.
+3. Add a parameter to name the final output file and pass that as a secondary input to the collection step.
 4. Make the collection step also output a simple statistic about what was processed.
 
 ---
@@ -46,7 +46,9 @@ executor >  local (3)
 
 ## 1. Add a second step to the workflow
 
-We want to add a second step to convert the greeting to uppercase, using the classic UNIX text replacement command `tr '[a-z]' '[A-Z]'`.
+Real workflows have more than one process! So it's time to start adding some more.
+
+We'll add a second step to convert the greeting to uppercase, using the classic UNIX text replacement command `tr '[a-z]' '[A-Z]'`.
 
 First, we need to write a new process that wraps the `tr '[a-z]' '[A-Z]'` command.
 Then we'll need to add it to the workflow, setting it up to take the output of the `sayHello()` process as input.
@@ -186,6 +188,7 @@ Have a look inside the work directory of one of the calls to the second process.
 ```bash
 tree -a work/ae/4579ab5b4f2c1d986d3a955e31f2b7/
 ```
+(you'll need to adapt this tree command to the actual directory name you see in the output from your workflow run)
 
 You should find two output files listed: the output of the first process, and the output of the second.
 
@@ -197,7 +200,7 @@ work/ae/4579ab5b4f2c1d986d3a955e31f2b7/
 
 The output of the first process is in there because Nextflow staged it there in order to have everything needed for execution within the same subdirectory.
 However, it is actually a symbolic link pointing to the the original file in the subdirectory of the first process call.
-By default, Nextflow uses symbolic links rather than copies to stage input and intermediate files.
+By default, when running on a single machine as we're doing here, Nextflow uses symbolic links rather than copies to stage input and intermediate files.
 
 You'll also find the final outputs in the `results` directory since we used the `publishDir` directive in the second process too.
 
@@ -219,9 +222,9 @@ Learn how to collect outputs from batched process calls and feed them into a sin
 
 ## 2. Add a third step to collect all the greetings
 
-When we apply a transformation to a batch of inputs, like we're doing here to the multiple greetings, we'll often want to collect the transformed outputs and feed them into a single step that performs some kind of analysis or summation.
+When we use a process to apply a transformation to each of the elements in a channel, like we're doing here to the multiple greetings, we sometimes want to collect elements from the output channel of that process, and feed them into another process that performs some kind of analysis or summation.
 
-Here we're simply going to write them all out to a single file, using the UNIX `cat` command.
+In the next step we're simply going to write all the elements of a channel to a single file, using the UNIX `cat` command.
 
 ### 2.0. Run the collection command in the terminal
 
