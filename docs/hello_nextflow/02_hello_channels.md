@@ -26,7 +26,7 @@ executor >  local (1)
 
 ---
 
-## 1. Add variable inputs using a channel
+## 1. Use a channel to pass variable inputs
 
 In its current state, our workflow uses a greeting hardcoded into the process command.
 We want to add some flexibility by using an input variable, so that we can more easily change the greeting.
@@ -73,7 +73,7 @@ The `greeting` variable is prefixed by `val` to tell Nextflow it's a value (not 
 
 ### 1.2. Edit the process command to use the input variable
 
-Now we swap the original hardcoded value for the input variable.
+Now we swap the original hardcoded value for the input variable we received from the channel.
 
 In the process block, make the following code change:
 
@@ -97,9 +97,8 @@ Make sure to prepend the `$` symbol to tell Nextflow this is a variable name tha
 
 ### 1.3. Create an input channel
 
-Now that our process expects an input, we need to set up that input in the workflow body.
+Now that our process expects an input from a channel, we need to create that channel in the workflow body.
 
-We are going to do this using a channel.
 And to keep things simple for now, we are going to use the simplest possible channel, containing a single value.
 
 This is the line of code to do it:
@@ -134,7 +133,7 @@ workflow {
 ```
 
 We are still hardcoding the value of the greeting, but now it's one level up, in the workflow body instead of being in the process definition.
-This is progress.
+This is progress- we could use that same process in another workflow without changing its code. 
 
 ### 1.4. Add the channel as input to the process call
 
@@ -186,7 +185,7 @@ You know how to use a simple channel to provide an input to a process.
 
 ### What's next?
 
-Learn how to make the workflow run on a batch of multiple input values.
+Learn how to use channels to make the workflow iterate over multiple input values.
 
 ---
 
@@ -236,7 +235,7 @@ executor >  local (3)
 [3d/1fe62c] sayHello (2)       [100%] 3 of 3 ✔
 ```
 
-However... This seems to indicate that '3 of 3' calls were made for the process, which is encouraging, but this only give us one subdirectory path. What's going on?
+However... This seems to indicate that '3 of 3' calls were made for the process, which is encouraging, but this only shows us a single run of the process, with one subdirectory path (`3d/1fe62c...`). What's going on?
 
 By default, the ANSI logging system writes the logging from multiple calls to the same process on the same line. Fortunately, we can disable that behavior.
 
@@ -248,7 +247,7 @@ To expand the logging to display one line per process call, add `-ansi-log false
 nextflow run hello-channels.nf -ansi-log false
 ```
 
-This time we see all six work subdirectories listed in the output:
+This time we see all three process runs and their associated work subdirectories listed in the output:
 
 ```console title="Output"
 N E X T F L O W  ~  version 24.02.0-edge
@@ -259,7 +258,7 @@ Launching `hello-channels.nf` [big_woese] DSL2 - revision: 53f20aeb70
 ```
 
 That's much better; at least for a simple workflow.
-For a complex workflow, or a large number of inputs, having the full list output to the terminal might get a bit overwhelming.
+For a complex workflow, or a large number of inputs, having the full list output to the terminal might get a bit overwhelming, so you might not choose to use `-ansi-log false` in those cases.
 
 That being said, we have another problem. If you look in the `results` directory, there is only one file: `output.txt`!
 
@@ -283,7 +282,7 @@ But when the `publishDir` directive copies each of them to the same `results` di
 We can continue publishing all the outputs to the same results directory, but we need to ensure they will have unique names.
 Specifically, we need to modify the first process to generate a file name dynamically so that the final file names will be unique.
 
-So how do we make the file names unique? A common way to do that is to use some unique piece of metadata as part of the file name.
+So how do we make the file names unique? A common way to do that is to use some unique piece of metadata from the inputs (received from the input channel) as part of the output file name.
 Here, for convenience, we'll just use the greeting itself since it's just a short string, and prepend it to the base output filename.
 
 In the process block, make the following code changes:
@@ -334,7 +333,7 @@ Make sure to replace `output.txt` in both the output definition and in the `scri
 
     In the output definition, you MUST use double quotes around the output filename expression (NOT single quotes), otherwise it will fail.
 
-This should produce a unique output file name every time the process is called.
+This should produce a unique output file name every time the process is called, so that it can be distinguished from the outputs from other iterations of the same process in the output directory.
 
 ### 2.5. Run the workflow and look at the results directory
 
@@ -370,13 +369,12 @@ Success! Now we can add as many greetings as we like without worrying about outp
 !!! note
 
     In practice, naming files based on the input data itself is almost always impractical.
-    The better way to generate dynamic filenames is to use a samplesheet contain relevant metadata (such as unique sample IDs) and create a data structure called a 'map'.
-    We can then pass the map to the processes, which can be set up to select an appropriate identifier to generate the filenames.
+    The better way to generate dynamic filenames is to pass metatdata to a process along with the input files. We can derive that metadata from a sample sheet as we're reading the input files. 
     You'll learn how to do that later in your Nextflow training.
 
 ### Takeaway
 
-You know how to feed a batch of multiple input elements through a channel.
+You know how to feed multiple input elements through a channel.
 
 ### What's next?
 
@@ -386,7 +384,7 @@ Learn how to make the workflow take a file as its source of input values.
 
 ## 3. Use CLI parameters to supply input values
 
-We want to be able to specify the input from the command line, since that is the piece that will almost always be different in subsequent runs of the workflow.
+When we're actually using our workflow, we want to be able to control its inputs from the command line. 
 Good news: Nextflow has a built-in workflow parameter system called `params`, which makes it easy to declare and use CLI parameters.
 
 ### 3.1. Edit the input channel declaration to use a parameter

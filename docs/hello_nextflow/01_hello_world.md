@@ -328,7 +328,7 @@ If you check the contents it should match the output in the work subdirectory.
 This is how we move results files outside of the working directories conveniently.
 
 It is also possible to set the `publishDir` directive to make a symbolic link to the file instead of actually copying it.
-This is preferable when you're dealing with very large files.
+This is preferable when you're dealing with very large files you don't need to retain longer term.
 However, if you delete the work directory as part of a cleanup operation, you will lost access to the file, so always make sure you have actual copies of everything you care about before deleting anything.
 
 !!! note
