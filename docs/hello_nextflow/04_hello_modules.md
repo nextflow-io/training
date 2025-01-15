@@ -256,14 +256,14 @@ nextflow run hello-modules.nf -resume
 
 This should still produce the same output as previously.
 
+### Takeaway
+
+You know how to modularize multiple processes in a workflow.
+
 Congratulations, you've done all this work and absolutely nothing has changed to how the pipeline works!
 
 Jokes aside, now your code is more modular, and if you decide to write another pipeline that calls on one of those processes, you just need to type one short import statement to use the relevant module.
 This is better than just copy-pasting the code, because if later you decide to improve the module, all your pipelines will inherit the improvements.
-
-### Takeaway
-
-You know how to modularize multiple processes in a workflow.
 
 ### What's next?
 

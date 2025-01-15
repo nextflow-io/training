@@ -1,4 +1,4 @@
-# Part 5: Hello Config
+# Part 6: Hello Config
 
 [TODO] SIMPLIFY / STREAMLINE THIS
 
