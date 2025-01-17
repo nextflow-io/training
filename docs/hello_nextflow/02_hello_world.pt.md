@@ -36,7 +36,7 @@ cat output.txt
 
 !!! dica
 
-    No ambiente Gitpod, você também pode encontrar o arquivo de saída no explorador de arquivos e visualizar seu conteúdo clicando nele. Alternativamente, pode usar o comando `code` para abrir o arquivo para visualização.  
+    No ambiente Gitpod, você também pode encontrar o arquivo de saída no explorador de arquivos e visualizar seu conteúdo clicando nele. Alternativamente, pode usar o comando `code` para abrir o arquivo para visualização.
 
 
     ```bash
@@ -115,15 +115,17 @@ processo sayHello {
     """
 }
 ```
+
 Essa é uma definição mínima de processo que contém apenas uma definição de saída e o próprio script.
 Em um pipeline do mundo real, um processo geralmente contém blocos adicionais, como diretivas, entradas e cláusulas condicionais, que apresentaremos mais adiante neste curso de treinamento.
 
 !!! nota
-    A definição de saída não _determina_ qual saída será criada.
-    Ela simplesmente _declara_ qual é a saída esperada, de modo que o Nextflow possa procurá-la quando a execução estiver concluída.
-    Isso é necessário para verificar se o comando foi executado com êxito e para passar a saída para processos posteriores, se necessário.
+A definição de saída não _determina_ qual saída será criada.
+Ela simplesmente _declara_ qual é a saída esperada, de modo que o Nextflow possa procurá-la quando a execução estiver concluída.
+Isso é necessário para verificar se o comando foi executado com êxito e para passar a saída para processos posteriores, se necessário.
 
 #### 1.1.2 A definição `workflow`
+
 O segundo bloco de código descreve o **fluxo de trabalho** em si.
 A definição do fluxo de trabalho começa com a palavra-chave `workflow`, seguida de um nome opcional e, em seguida, o corpo do fluxo de trabalho delimitado por chaves.
 Aqui temos um **fluxo de trabalho** que consiste em uma chamada para o processo `sayHello`.
@@ -140,11 +142,13 @@ Em um pipeline do mundo real, o fluxo de trabalho normalmente contém várias ch
 Você aprenderá como adicionar mais processos e conectá-los por canais daqui a pouco.
 
 ### 1.2. Executando o fluxo de trabalho
+
 Olhar para o código não é tão divertido quanto executá-lo, portanto, vamos testar isso na prática.
 
 ```bash
 nextflow run hello-world.nf
 ```
+
 A saída do console deve ser semelhante a esta:
 
 ```console title="Output"
@@ -170,8 +174,8 @@ Quando você executa o Nextflow pela primeira vez em um determinado diretório, 
 Dê uma olhada lá dentro; você encontrará um subdiretório nomeado com um hash (para torná-lo exclusivo; discutiremos o motivo daqui a pouco), aninhado em dois níveis de profundidade e contendo alguns arquivos de log.
 
 !!! dica
-    Se você procurar o conteúdo do subdiretório de tarefas no explorador de arquivos VSCode do Gitpod, verá todos esses arquivos imediatamente.
-    No entanto, esses arquivos estão configurados para serem ocultados no terminal. Portanto, se quiser usar o `ls` ou o `tree` para visualizá-los, será necessário definir a opção relevante para exibir arquivos ocultados.
+Se você procurar o conteúdo do subdiretório de tarefas no explorador de arquivos VSCode do Gitpod, verá todos esses arquivos imediatamente.
+No entanto, esses arquivos estão configurados para serem ocultados no terminal. Portanto, se quiser usar o `ls` ou o `tree` para visualizá-los, será necessário definir a opção relevante para exibir arquivos ocultados.
 
     ```bash
     tree -a work
@@ -201,17 +205,17 @@ Você deve ter notado que os nomes dos subdiretórios apareceram (de forma trunc
 Isso informa qual é o caminho do subdiretório para essa chamada de processo específica (às vezes chamada de tarefa).
 
 !!! nota
-    O Nextflow cria um subdiretório exclusivo e separado para cada chamada de processo.
-    Ele prepara os arquivos de entrada relevantes, o script e outros arquivos auxiliares lá, e grava todos os arquivos de saída e registros lá também.
+O Nextflow cria um subdiretório exclusivo e separado para cada chamada de processo.
+Ele prepara os arquivos de entrada relevantes, o script e outros arquivos auxiliares lá, e grava todos os arquivos de saída e registros lá também.
 
 Se olharmos dentro do subdiretório, encontraremos os seguintes arquivos de log:
 
-- **`.command.begin`**: Metadados relacionados ao início da execução da tarefa do processo.
-- **`.command.err`**: Mensagens de erro (stderr) emitidas pela tarefa de processo.
-- **`.command.log`**: Saída de registro completa emitida pela tarefa de processo.
-- **`.command.out`**: Saída regular (stdout) pela tarefa de processo.
-- **`.command.sh`**: O comando que foi executado pela chamada da tarefa de processo
-- **`.exitcode`**: O código de saída resultante do comando.
+-   **`.command.begin`**: Metadados relacionados ao início da execução da tarefa do processo.
+-   **`.command.err`**: Mensagens de erro (stderr) emitidas pela tarefa de processo.
+-   **`.command.log`**: Saída de registro completa emitida pela tarefa de processo.
+-   **`.command.out`**: Saída regular (stdout) pela tarefa de processo.
+-   **`.command.sh`**: O comando que foi executado pela chamada da tarefa de processo
+-   **`.exitcode`**: O código de saída resultante do comando.
 
 Nesse caso, você pode procurar sua saída no arquivo `.command.out`, pois é nele que a saída stdout é capturada.
 Se você abri-lo, encontrará a saudação `Hello World!`, que era o resultado esperado de nosso fluxo de trabalho minimalista.
@@ -219,9 +223,11 @@ Se você abri-lo, encontrará a saudação `Hello World!`, que era o resultado e
 Também vale a pena dar uma olhada no arquivo `.command.sh`, que informa qual comando o Nextflow realmente executou. Nesse caso, é muito simples, mas mais adiante no curso você verá comandos que envolvem alguma interpolação de variáveis. Quando estiver lidando com isso, você precisará ser capaz de verificar exatamente o que foi executado, especialmente ao solucionar um problema.
 
 ### Conclusão
+
 Você agora sabe como decifrar um script simples do Nextflow, executá-lo e encontrar a saída e os logs no diretório de trabalho.
 
 ### O que vem a seguir?
+
 Saiba como fazer com que o script produza um arquivo nomeado.
 
 ---
@@ -233,6 +239,7 @@ Em vez de imprimir "Hello World!" na saída padrão, seria melhor salvar essa sa
 Para obter esse resultado, o script e os blocos de definição de saída precisam ser atualizados.
 
 ### 3.1. Alterando o comando `process` para gerar um arquivo nomeado
+
 Essa é a mesma alteração que fizemos quando executamos o comando diretamente no terminal anteriormente.
 
 _Antes:_
@@ -270,15 +277,15 @@ output:
 ```
 
 !!! nota
-    As entradas e saídas nos blocos de processo normalmente exigem um qualificador e um nome de variável:
-    
+As entradas e saídas nos blocos de processo normalmente exigem um qualificador e um nome de variável:
+
     ```
     <qualificador de entrada/saída> <nome da entrada/saída>
     ```
 
     O qualificador define o tipo de dados a serem recebidos.
     Essas informações são usadas pelo Nextflow para aplicar as regras semânticas associadas a cada qualificador e tratá-las adequadamente.
-    
+
     Os qualificadores comuns incluem `val` e `path`.
 
     No exemplo acima, `stdout` é uma exceção, pois não está associado a um nome.
@@ -288,6 +295,7 @@ output:
 ```bash
 nextflow run hello-world.nf
 ```
+
 A saída do log deve ser muito semelhante à primeira vez que você executou o fluxo de trabalho:
 
 ```console title="Output"
@@ -303,9 +311,9 @@ Como fez anteriormente, localize o diretório `work` no explorador de arquivos.
 Lá, localize o arquivo de saída `output.txt`, clique nele para abri-lo e verifique se ele contém a saudação conforme esperado.
 
 !!! aviso
-    Este exemplo é frágil porque codificamos o nome do arquivo de saída em dois lugares diferentes (nos blocos `script` e `output`).
-    Se alterarmos um, mas não o outro, o script será interrompido.
-    Mais tarde, você aprenderá a usar variáveis para evitar esse problema.
+Este exemplo é frágil porque codificamos o nome do arquivo de saída em dois lugares diferentes (nos blocos `script` e `output`).
+Se alterarmos um, mas não o outro, o script será interrompido.
+Mais tarde, você aprenderá a usar variáveis para evitar esse problema.
 
 ### 3.4. Adicionando uma diretiva `publishDir` ao processo
 
@@ -337,16 +345,17 @@ process sayHello {
 ```
 
 !!! nota
-    Há uma nova opção de sintaxe que possibilita declarar e publicar saídas no nível do fluxo de trabalho, documentada [aqui] (https://www.nextflow.io/docs/latest/workflow.html#publishing-outputs), o que torna redundante o uso do `publishDir` no nível do processo quando o pipeline estiver totalmente operacional.
-    No entanto, o `publishDir` ainda é muito útil durante o desenvolvimento do pipeline; é por isso que o incluímos nesta série de treinamento.
-    Isso também garantirá que você possa ler e entender o grande número de pipelines que já foram escritos com o `publishDir`.
-    Você aprenderá a usar a sintaxe de saídas em nível de fluxo de trabalho mais adiante nesta série de treinamento.
+Há uma nova opção de sintaxe que possibilita declarar e publicar saídas no nível do fluxo de trabalho, documentada [aqui] (https://www.nextflow.io/docs/latest/workflow.html#publishing-outputs), o que torna redundante o uso do `publishDir` no nível do processo quando o pipeline estiver totalmente operacional.
+No entanto, o `publishDir` ainda é muito útil durante o desenvolvimento do pipeline; é por isso que o incluímos nesta série de treinamento.
+Isso também garantirá que você possa ler e entender o grande número de pipelines que já foram escritos com o `publishDir`.
+Você aprenderá a usar a sintaxe de saídas em nível de fluxo de trabalho mais adiante nesta série de treinamento.
 
 ### 3.5. Executando o fluxo de trabalho novamente
 
 ```bash
 nextflow run hello-world.nf
 ```
+
 A saída do log deve começar a parecer muito familiar:
 
 ```console title="Output"
@@ -364,9 +373,11 @@ Se você verificar o conteúdo, ele deverá corresponder à saída em nosso dire
 É assim que movemos os arquivos de resultados para fora dos diretórios de trabalho.
 
 ### Conclusão
+
 Você agora já sabe como enviar resultados para um arquivo nomeado específico e usar a diretiva `publishDir` para mover arquivos para fora do diretório de trabalho do Nextflow.
 
 ### O que vem a seguir?
+
 Saiba como fazer com que o Nextflow retome a execução de um pipeline usando resultados em cache de uma execução anterior para ignorar quaisquer etapas que já tenham sido concluídas com êxito.
 
 ---
@@ -379,15 +390,16 @@ Usar esse modo significa que o Nextflow só executará processos novos, que tenh
 
 Há duas vantagens principais em fazer isso:
 
-- Se você estiver no meio do desenvolvimento do pipeline, poderá iterar mais rapidamente, pois só precisará executar efetivamente o(s) processo(s) em que estiver trabalhando ativamente para testar as alterações.
+-   Se você estiver no meio do desenvolvimento do pipeline, poderá iterar mais rapidamente, pois só precisará executar efetivamente o(s) processo(s) em que estiver trabalhando ativamente para testar as alterações.
 
-- Se estiver executando um pipeline em produção e algo der errado, em muitos casos, você poderá corrigir o problema e reiniciar o pipeline, e ele voltará a ser executado a partir do ponto de falha, o que pode economizar muito tempo e computação.
+-   Se estiver executando um pipeline em produção e algo der errado, em muitos casos, você poderá corrigir o problema e reiniciar o pipeline, e ele voltará a ser executado a partir do ponto de falha, o que pode economizar muito tempo e computação.
 
 ### 4.1. Executando o fluxo de trabalho novamente com `-resume`
 
 ```bash
 nextflow run hello-world.nf -resume
 ```
+
 A saída do console deve ser semelhante.
 
 ```console title="Output"
@@ -401,12 +413,14 @@ A saída do console deve ser semelhante.
 Observe o bit adicional `cached:` na linha de status do processo, o que significa que o Nextflow reconheceu que já havia feito esse trabalho e simplesmente reutilizou o resultado da última execução.
 
 !!! nota
-    Quando você executa novamente um pipeline com `resume`, o Nextflow não sobrescreve nenhum arquivo gravado em um diretório publishDir por qualquer chamada de processo que tenha sido executada com sucesso anteriormente.
+Quando você executa novamente um pipeline com `resume`, o Nextflow não sobrescreve nenhum arquivo gravado em um diretório publishDir por qualquer chamada de processo que tenha sido executada com sucesso anteriormente.
 
 ### Conclusão
+
 Agora você sabe como reiniciar um pipeline sem repetir etapas que já foram executadas de maneira idêntica.
 
 ### O que vem a seguir?
+
 Saiba como adicionar entradas variáveis.
 
 ---
@@ -472,7 +486,6 @@ echo '$greeting' > output.txt
 """
 ```
 
-
 ### 5.3. Criando um canal de entrada
 
 Agora que o nosso processo espera uma entrada, precisamos configurar essa entrada no corpo do fluxo de trabalho.
@@ -524,6 +537,7 @@ sayHello(greeting_ch)
 ```
 
 ### 5.5. Executando o comando do fluxo de trabalho novamente
+
 Vamos executá-lo!
 
 ```bash
@@ -544,9 +558,11 @@ executor >  local (1)
 Sinta-se à vontade para verificar o diretório de resultados para se certificar de que o resultado ainda é o mesmo de antes; até agora, estamos apenas ajustando progressivamente o encanamento interno para aumentar a flexibilidade do nosso fluxo de trabalho e, ao mesmo tempo, obter o mesmo resultado final.
 
 ### Conclusão
+
 Você agora sabe como usar um canal simples para fornecer uma entrada a um processo.
 
 ### O que vem a seguir?
+
 Saiba como passar entradas da linha de comando.
 
 ---
@@ -578,6 +594,7 @@ greeting_ch = Channel.of(params.greeting)
 Isso cria automaticamente um parâmetro chamado `greeting` que você pode usar para fornecer um valor na linha de comando.
 
 ### 6.2. Executar o fluxo de trabalho novamente com o parâmetro `--greeting`
+
 Para fornecer um valor para esse parâmetro, basta adicionar `--greeting <value>` à sua linha de comando.
 
 ```bash
@@ -598,8 +615,8 @@ executor >  local (1)
 Não se esqueça de abrir o arquivo de saída para verificar se agora você tem a nova versão da saudação. Pronto!
 
 !!! dica
-    É útil distinguir os parâmetros em nível de Nextflow dos parâmetros em nível de pipeline.
-    Para parâmetros que se aplicam a um pipeline, usamos um hífen duplo (`--`), enquanto usamos um único hífen (`-`) para parâmetros que modificam uma configuração específica do Nextflow, por exemplo, o recurso `-resume` que usamos anteriormente.
+É útil distinguir os parâmetros em nível de Nextflow dos parâmetros em nível de pipeline.
+Para parâmetros que se aplicam a um pipeline, usamos um hífen duplo (`--`), enquanto usamos um único hífen (`-`) para parâmetros que modificam uma configuração específica do Nextflow, por exemplo, o recurso `-resume` que usamos anteriormente.
 
 ### 6.3. Definindo um valor padrão para um parâmetro de linha de comando
 
@@ -631,6 +648,7 @@ A saída deve ser a mesma.
 executor >  local (1)
 [c0/8b8332] sayHello (1) [100%] 1 of 1 ✔
 ```
+
 Verifique a saída no diretório de resultados e... Tcharam! Funciona! O Nextflow usou o valor padrão para nomear a saída. Mas espere aí, o que acontece agora se fornecermos o parâmetro na linha de comando?
 
 ### 6.5. Executando o fluxo de trabalho novamente com o parâmetro `--greeting` na linha de comando usando uma saudação diferente
@@ -654,12 +672,14 @@ Verifique o diretório de resultados e veja o conteúdo de `output.txt`. Tcharam
 O valor do parâmetro que passamos na linha de comando substituiu o valor que demos à variável no script. De fato, os parâmetros podem ser definidos de várias maneiras diferentes; se o mesmo parâmetro for definido em vários locais, seu valor será determinado com base na ordem de precedência descrita [aqui](https://www.nextflow.io/docs/latest/config.html).
 
 !!! dica
-    Você pode colocar a declaração do parâmetro dentro do bloco de fluxo de trabalho, se preferir. Seja qual for a sua escolha, tente agrupar coisas semelhantes no mesmo lugar para não acabar com declarações espalhadas por toda parte.
+Você pode colocar a declaração do parâmetro dentro do bloco de fluxo de trabalho, se preferir. Seja qual for a sua escolha, tente agrupar coisas semelhantes no mesmo lugar para não acabar com declarações espalhadas por toda parte.
 
 ### Conclusão
+
 Até agora você já sabe como configurar uma variável de entrada para um processo e fornecer um valor na linha de comando.
 
 ### O que vem a seguir?
+
 Saiba como adicionar um segundo processo e encadeá-los.
 
 ---
@@ -671,6 +691,7 @@ A maioria dos fluxos de trabalho do mundo real envolve mais de uma etapa. Aqui a
 ```bash
 tr '[a-z]' '[A-Z]'
 ```
+
 Primeiro, vamos executar o comando sozinho no terminal para verificar se ele funciona conforme o esperado, sem que nenhum código de fluxo de trabalho atrapalhe a clareza, assim como fizemos no início com `echo 'Hello World'`. Em seguida, escreveremos um processo que faz a mesma coisa e, finalmente, conectaremos os dois processos para que a saída do primeiro sirva de entrada para o segundo.
 
 ### 7.1. Executando o comando no terminal por si só
@@ -678,6 +699,7 @@ Primeiro, vamos executar o comando sozinho no terminal para verificar se ele fun
 ```bash
 echo 'Hello World' | tr '[a-z]' '[A-Z]'
 ```
+
 A saída é simplesmente a versão em maiúsculas da string de texto:
 
 ```console title="Output"
@@ -685,7 +707,7 @@ HELLO WORLD
 ```
 
 !!! nota
-    Esse é um one-liner de substituição de texto muito ingênuo que não leva em conta as letras acentuadas, portanto, por exemplo, 'olá' se tornará 'OLà'. Isso é esperado.
+Esse é um one-liner de substituição de texto muito ingênuo que não leva em conta as letras acentuadas, portanto, por exemplo, 'olá' se tornará 'OLà'. Isso é esperado.
 
 ### 7.2. Fazendo com que o comando receba um arquivo como entrada e grave a saída em um arquivo
 
@@ -725,7 +747,7 @@ process convertToUpper {
 Como um pequeno bônus, aqui compomos o segundo nome de arquivo de saída com base no primeiro.
 
 !!! dica
-    É muito importante lembrar: é necessário usar aspas duplas ao redor da expressão do nome do arquivo de saída (NÃO aspas simples) ou haverá falha.
+É muito importante lembrar: é necessário usar aspas duplas ao redor da expressão do nome do arquivo de saída (NÃO aspas simples) ou haverá falha.
 
 ### 7.4. Adicionando uma chamada ao novo processo no corpo do fluxo de trabalho
 
@@ -756,11 +778,13 @@ convertToUpper(sayHello.out)
 Para um caso simples como esse, isso é tudo o que precisamos fazer para conectar dois processos!
 
 ### 7.6. Executar o mesmo comando de fluxo de trabalho anterior
+
 Vamos nos certificar de que isso funcione:
 
 ```bash
 nextflow run hello-world.nf --greeting 'Hello World!'
 ```
+
 Que emocionante! Agora há uma linha extra na saída de registro, que corresponde ao novo processo que acabamos de adicionar:
 
 ```console title="Output"
@@ -779,16 +803,18 @@ Ele aponta para o local onde esse arquivo está no diretório de trabalho do pri
 Por padrão, o Nextflow usa links simbólicos para encenar arquivos de entrada sempre que possível, para evitar fazer cópias duplicadas.
 
 !!! nota
-    Tudo o que fizemos foi conectar a saída do `sayHello` à entrada do `convertToUpper` e os dois processos puderam ser executados em série.
-    O Nextflow fez o trabalho pesado de manipular os arquivos de entrada e saída e passá-los entre os dois comandos para nós.
-    Esse é o poder dos canais no Nextflow, fazendo o trabalho pesado de conectar as etapas do nosso pipeline.
-    Além disso, o Nextflow determinará automaticamente qual chamada precisa ser executada primeiro com base em como elas estão conectadas, de modo que a ordem em que estão escritas no corpo do fluxo de trabalho não importa.
-    No entanto, recomendamos que você seja gentil com seus colaboradores e com seu futuro eu, e tente escrevê-las em uma ordem lógica!
+Tudo o que fizemos foi conectar a saída do `sayHello` à entrada do `convertToUpper` e os dois processos puderam ser executados em série.
+O Nextflow fez o trabalho pesado de manipular os arquivos de entrada e saída e passá-los entre os dois comandos para nós.
+Esse é o poder dos canais no Nextflow, fazendo o trabalho pesado de conectar as etapas do nosso pipeline.
+Além disso, o Nextflow determinará automaticamente qual chamada precisa ser executada primeiro com base em como elas estão conectadas, de modo que a ordem em que estão escritas no corpo do fluxo de trabalho não importa.
+No entanto, recomendamos que você seja gentil com seus colaboradores e com seu futuro eu, e tente escrevê-las em uma ordem lógica!
 
 ### Conclusão
+
 Você já sabe como adicionar uma segunda etapa que usa a saída da primeira etapa como entrada.
 
 ### O que vem a seguir?
+
 Saiba como fazer com que o fluxo de trabalho seja executado em um lote de valores de entrada.
 
 ---
@@ -815,6 +841,7 @@ _Depois:_
 // criar um canal para entradas
 greeting_ch = Channel.of('Hello','Bonjour','Holà')
 ```
+
 A documentação nos diz que isso deve funcionar. Será que realmente pode ser tão simples?
 
 ### 8.2. Executando o comando e vendo a saída do registro
@@ -824,6 +851,7 @@ Vamos tentar.
 ```bash
 nextflow run hello-world.nf
 ```
+
 Bem, ele parece estar funcionando bem.
 
 ```console title="Output"
@@ -841,11 +869,13 @@ No entanto... Isso parece indicar que foram feitas “3 de 3” chamadas para ca
 Por padrão, o sistema de registro ANSI grava o registro de várias chamadas para o mesmo processo na mesma linha. Felizmente, podemos desativar esse comportamento.
 
 ### 8.3. Execute o comando novamente com a opção `-ansi-log false`
+
 Para expandir o registro em log para exibir uma linha por chamada de processo, basta adicionar `-ansi-log false` ao comando.
 
 ```bash
 nextflow run hello-world.nf -ansi-log false
 ```
+
 Desta vez, vemos todos os seis subdiretórios de trabalho listados na saída:
 
 ```console title="Output"
@@ -858,6 +888,7 @@ Launching `hello-world.nf` [big_woese] DSL2 - revision: 53f20aeb70
 [73/e6e746] Submitted process > convertToUpper (2)
 [c5/4fedda] Submitted process > convertToUpper (3)
 ```
+
 Isso é muito melhor, pelo menos para esse número de processos.
 No caso de um fluxo de trabalho complexo ou de um grande número de entradas, ter a lista completa de saída para o terminal pode ser um pouco cansativo.
 
@@ -942,6 +973,7 @@ executor >  local (6)
 [03/f007f2] sayHello (1)       [100%] 3 of 3 ✔
 [e5/dd2890] convertToUpper (3) [100%] 3 of 3 ✔
 ```
+
 Mas o mais importante é que agora temos seis novos arquivos, além dos dois que já tínhamos no diretório `results`:
 
 ```console title="Directory contents"
@@ -959,13 +991,15 @@ results
 Sucesso! Agora podemos adicionar quantas saudações quisermos sem nos preocuparmos com o fato de os arquivos de saída serem sobrescritos.
 
 !!! nota
-    Na prática, nomear arquivos com base nos próprios dados de entrada é quase sempre impraticável. A melhor maneira de gerar nomes de arquivos dinâmicos é usar uma planilha de amostras que contenha metadados relevantes (como IDs de amostra exclusivos) e criar uma estrutura de dados chamada “mapa”, que passamos para os processos e da qual podemos obter um identificador apropriado para gerar os nomes de arquivos.
-    Mostraremos a você como fazer isso mais adiante neste curso de treinamento.
+Na prática, nomear arquivos com base nos próprios dados de entrada é quase sempre impraticável. A melhor maneira de gerar nomes de arquivos dinâmicos é usar uma planilha de amostras que contenha metadados relevantes (como IDs de amostra exclusivos) e criar uma estrutura de dados chamada “mapa”, que passamos para os processos e da qual podemos obter um identificador apropriado para gerar os nomes de arquivos.
+Mostraremos a você como fazer isso mais adiante neste curso de treinamento.
 
 ### Conclusão
+
 Você já sabe como alimentar um lote de vários elementos de entrada por meio de um canal.
 
 ### O que vem a seguir?
+
 Saiba como fazer com que o fluxo de trabalho use um arquivo como sua fonte de valores de entrada.
 
 ---
@@ -979,6 +1013,7 @@ Como exemplo, fornecemos a você um arquivo CSV chamado `greetings.csv` no diret
 ```csv title="greetings.csv"
 Hello,Bonjour,Holà
 ```
+
 Portanto, só precisamos modificar nosso fluxo de trabalho para ler os valores de um arquivo como esse.
 
 ### 9.1. Configurando um parâmetro da CLI com um valor padrão apontando para um arquivo de entrada
@@ -1002,6 +1037,7 @@ _Depois:_
  */
 params.input_file = "data/greetings.csv"
 ```
+
 ### 9.2. Atualizando a declaração do canal para lidar com o arquivo de entrada
 
 Neste ponto, apresentamos uma nova fábrica de canais, `Channel.fromPath()`, que tem algumas funcionalidades integradas para lidar com caminhos de arquivos.
@@ -1031,6 +1067,7 @@ _Antes:_
 // criar um canal para entradas
 greeting_ch = Channel.of('Hello','Bonjour','Holà')
 ```
+
 _Depois:_
 
 ```groovy title="hello-world.nf" linenums="46"
@@ -1039,6 +1076,7 @@ greeting_ch = Channel.fromPath(params.input_file)
                      .splitCsv()
                      .flatten()
 ```
+
 ### 9.3. Executando o fluxo de trabalho (uma última vez!)
 
 ```bash
@@ -1060,12 +1098,12 @@ executor >  local (6)
 Observando os resultados, vemos que cada saudação foi extraída e processada corretamente pelo fluxo de trabalho. Obtivemos o mesmo resultado da etapa anterior, mas agora temos muito mais flexibilidade para adicionar mais elementos ao canal de saudações que queremos processar.
 
 !!! dica
-    Durante o desenvolvimento do pipeline, você pode inspecionar o conteúdo de qualquer canal adicionando o operador `.view()` ao nome do canal.
-    Por exemplo, se você adicionar `greeting_ch.view()` em qualquer lugar do corpo do fluxo de trabalho, ao executar o script, o Nextflow imprimirá o conteúdo do canal na saída padrão.
-    Você também pode usar isso para inspecionar o efeito dos operadores.
-    
+Durante o desenvolvimento do pipeline, você pode inspecionar o conteúdo de qualquer canal adicionando o operador `.view()` ao nome do canal.
+Por exemplo, se você adicionar `greeting_ch.view()` em qualquer lugar do corpo do fluxo de trabalho, ao executar o script, o Nextflow imprimirá o conteúdo do canal na saída padrão.
+Você também pode usar isso para inspecionar o efeito dos operadores.
+
     Por exemplo, a saída de `Channel.fromPath(params.input_file).splitCsv().view()` terá a seguinte aparência:
-    
+
     ```console title="Output"
     [Hello, Bonjour, Holà]
     ```
