@@ -210,12 +210,12 @@ Ele prepara os arquivos de entrada relevantes, o script e outros arquivos auxili
 
 Se olharmos dentro do subdiretório, encontraremos os seguintes arquivos de log:
 
--   **`.command.begin`**: Metadados relacionados ao início da execução da tarefa do processo.
--   **`.command.err`**: Mensagens de erro (stderr) emitidas pela tarefa de processo.
--   **`.command.log`**: Saída de registro completa emitida pela tarefa de processo.
--   **`.command.out`**: Saída regular (stdout) pela tarefa de processo.
--   **`.command.sh`**: O comando que foi executado pela chamada da tarefa de processo
--   **`.exitcode`**: O código de saída resultante do comando.
+- **`.command.begin`**: Metadados relacionados ao início da execução da tarefa do processo.
+- **`.command.err`**: Mensagens de erro (stderr) emitidas pela tarefa de processo.
+- **`.command.log`**: Saída de registro completa emitida pela tarefa de processo.
+- **`.command.out`**: Saída regular (stdout) pela tarefa de processo.
+- **`.command.sh`**: O comando que foi executado pela chamada da tarefa de processo
+- **`.exitcode`**: O código de saída resultante do comando.
 
 Nesse caso, você pode procurar sua saída no arquivo `.command.out`, pois é nele que a saída stdout é capturada.
 Se você abri-lo, encontrará a saudação `Hello World!`, que era o resultado esperado de nosso fluxo de trabalho minimalista.
@@ -390,9 +390,9 @@ Usar esse modo significa que o Nextflow só executará processos novos, que tenh
 
 Há duas vantagens principais em fazer isso:
 
--   Se você estiver no meio do desenvolvimento do pipeline, poderá iterar mais rapidamente, pois só precisará executar efetivamente o(s) processo(s) em que estiver trabalhando ativamente para testar as alterações.
+- Se você estiver no meio do desenvolvimento do pipeline, poderá iterar mais rapidamente, pois só precisará executar efetivamente o(s) processo(s) em que estiver trabalhando ativamente para testar as alterações.
 
--   Se estiver executando um pipeline em produção e algo der errado, em muitos casos, você poderá corrigir o problema e reiniciar o pipeline, e ele voltará a ser executado a partir do ponto de falha, o que pode economizar muito tempo e computação.
+- Se estiver executando um pipeline em produção e algo der errado, em muitos casos, você poderá corrigir o problema e reiniciar o pipeline, e ele voltará a ser executado a partir do ponto de falha, o que pode economizar muito tempo e computação.
 
 ### 4.1. Executando o fluxo de trabalho novamente com `-resume`
 
