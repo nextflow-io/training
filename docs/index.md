@@ -13,13 +13,13 @@ Welcome to the Nextflow community training portal!
 
 We have several distinct training courses available on this website. Scroll down to find the one that's right for you!
 
-The training courses listed below are designed to be useable as a self-service resource; you can work through them on your own at any time (see Training Environment Setup for practical details). However, you may get even more out of them by joining a group training event.
+The training courses listed below are designed to be useable as a self-service resource; you can work through them on your own at any time (see Environment Setup for practical details). However, you may get even more out of them by joining a group training event.
 
--   Free online events are run regularly by the nf-core community, see the [nf-core events page](https://nf-co.re/events) for more.
--   Seqera (the company that develops Nextflow) runs a variety of training events, see the [Seqera Events](https://seqera.io/events/) page and look for 'Seqera Sessions' and 'Nextflow Summit'.
--   Our Community team also regularly teaches trainings hosted by third party organizations; announcements and signups for those are typically managed by the third-party hosts.
+- Free online events are run regularly by the nf-core community, see the [nf-core events page](https://nf-co.re/events) for more.
+- Seqera (the company that develops Nextflow) runs a variety of training events, see the [Seqera Events](https://seqera.io/events/) page and look for 'Seqera Sessions' and 'Nextflow Summit'.
+- Our Community team also regularly teaches trainings hosted by third party organizations; announcements and signups for those are typically managed by the third-party hosts.
 
-When you're ready to get down to work, click on the 'Open in Gitpod' button, either on this page or on the index page of the course you chose, to open a web-based training environment (requires a free Github account).
+When you're ready to get down to work, click on the 'Open in Gitpod' button, either on this page or on the index page of the course you chose, to open a web-based training environment (requires a free GitHub account).
 
 [![Open in Gitpod](https://img.shields.io/badge/Gitpod-%20Open%20in%20Gitpod-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/nextflow-io/training)
 
@@ -33,7 +33,7 @@ When you're ready to get down to work, click on the 'Open in Gitpod' button, eit
 
     Instructions for setting up your environment to work through training materials (all courses). Provides an orientation to Gitpod as well as alternate installation instructions for working on your own local machine.
 
-    [Launch the environment setup training :material-arrow-right:](envsetup/index.md){ .md-button .md-button--primary }
+    [Launch the Environment Setup training :material-arrow-right:](envsetup/index.md){ .md-button .md-button--primary }
 
 ## Nextflow for Newcomers
 
@@ -57,7 +57,7 @@ When you're ready to get down to work, click on the 'Open in Gitpod' button, eit
 
     The fundamentals training material covers all things Nextflow. Excellent reference material for anyone looking to build complex workflows with Nextflow.
 
-    [Launch the fundamentals training :material-arrow-right:](basic_training/index.md){ .md-button .md-button--primary }
+    [Launch the Fundamentals Training :material-arrow-right:](basic_training/index.md){ .md-button .md-button--primary }
 
 !!! exercise "Advanced Training"
 
@@ -67,7 +67,7 @@ When you're ready to get down to work, click on the 'Open in Gitpod' button, eit
 
     Advanced material exploring the more advanced features of the Nextflow language and runtime, and how to use them to write efficient and scalable data-intensive workflows.
 
-    [Launch the advanced training :material-arrow-right:](advanced/index.md){ .md-button .md-button--primary }
+    [Launch the Advanced Training :material-arrow-right:](advanced/index.md){ .md-button .md-button--primary }
 
 ## Other/Experimental
 
@@ -99,7 +99,7 @@ When you're ready to get down to work, click on the 'Open in Gitpod' button, eit
 
     A "learn by doing" troubleshooting tutorial for pipeline developers and users.
 
-    [Launch the troubleshooting training :material-arrow-right:](troubleshoot/index.md){ .md-button }
+    [Launch the Troubleshooting training :material-arrow-right:](troubleshoot/index.md){ .md-button }
 
 ## Deprecated
 
@@ -109,7 +109,7 @@ When you're ready to get down to work, click on the 'Open in Gitpod' button, eit
 
         :material-run-fast: A short hands-on tutorial focused on a concrete analysis pipeline example.
 
-    This course was developed as a "learn by doing" tutorial intended as a fast, hands-on way to get to grips with Nextflow using a very concrete analysis pipeline example. You can still find the materials in the Github repository, but it is no longer being maintained and can no longer be launched in Gitpod or in the training portal.
+    This course was developed as a "learn by doing" tutorial intended as a fast, hands-on way to get to grips with Nextflow using a very concrete analysis pipeline example. You can still find the materials in the GitHub repository, but it is no longer being maintained and can no longer be launched in Gitpod or in the training portal.
 
 ## Resources
 

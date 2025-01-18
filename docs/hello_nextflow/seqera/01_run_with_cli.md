@@ -24,10 +24,6 @@ Follow these steps to set up your token:
 
     ![Save token](seqera/img/usage_token.png)
 
-    !!! note
-
-        Leave the browser tab with the token open as we will need it once more to store it as a Nextflow secret.
-
 4.  To make your token available to the Nextflow CLI, export it on the command line:
 
     Open a terminal and type:
@@ -41,7 +37,7 @@ Follow these steps to set up your token:
     !!! Warning "Security Note"
 
         Keep your token secure and do not share it with others.
-        You can add a ++space++ before the `export` command to prevent it from being saved in your shell history.
+        Add a ++space++ before the `export` command above to prevent your token from being saved in your shell history.
 
 ### 1.2. Run Nextflow CLI with Seqera Platform visualizing and capturing logs
 
@@ -80,15 +76,21 @@ You will see and be able to monitor your **Nextflow jobs** in Seqera Platform.
 
 ### 1.3. Set up Seqera Platform in Nextflow configuration
 
-Doing that token setup regularly can get a bit tedious, so let's set this configuration for all our pipeline runs with the global Nextflow configuration file located at `$HOME/.nextflow/config`.
+Doing that token setup regularly can become tedious, so let's set this configuration for all our pipeline runs with the global Nextflow configuration file located at `$HOME/.nextflow/config`.
 
-Before we set the configuration, we need to permanently store the token in Nextflow using a [Nextflow secret](https://www.nextflow.io/docs/latest/secrets.html):
+Before we set the configuration, we need to permanently store the token from our environment in Nextflow using a [Nextflow secret](https://www.nextflow.io/docs/latest/secrets.html):
 
 ```bash
-nextflow secrets set tower_access_token "eyxxxxxxxxxxxxxxxQ1ZTE="
+nextflow secrets set tower_access_token "$TOWER_ACCESS_TOKEN"
 ```
 
-Open the Nextflow configuration file located at `$HOME/.nextflow/config`:
+Make sure your token was saved using:
+
+```bash
+nextflow secrets get tower_access_token
+```
+
+Next, open the Nextflow configuration file located at `$HOME/.nextflow/config`:
 
 ```bash
 code $HOME/.nextflow/config
@@ -107,7 +109,7 @@ tower {
 !!! hint "Endpoint"
 
     The `endpoint` is the URL of the Seqera Platform API.
-    If your institution is running a private instance of Seqera Platform, you will want to change this to the appropriate URL.
+    If your institution is running a private instance of Seqera Platform, you should change this to the appropriate URL.
 
 Run your Nextflow workflows as before, but without the `-with-tower` command:
 
@@ -145,9 +147,9 @@ If you ran your pipeline from the `hello_nextflow` directory, you'll see somethi
 
 Notice that configuration for our pipeline run is being run pulled from three separate files:
 
--   `/home/gitpod/.nextflow/config` - This is the global configuration file we just added.
--   `/home/gitpod/.nextflow/assets/nextflow-io/hello/nextflow.config` - This is the `nextflow.config` file from the `nextflow-io/hello` repository.
--   `/workspace/gitpod/nf-training/hello-nextflow/nextflow.config` - This is the `nextflow.config` file from our current working directory.
+- `/home/gitpod/.nextflow/config` - This is the global configuration file we just added.
+- `/home/gitpod/.nextflow/assets/nextflow-io/hello/nextflow.config` - This is the `nextflow.config` file from the `nextflow-io/hello` repository.
+- `/workspace/gitpod/nf-training/hello-nextflow/nextflow.config` - This is the `nextflow.config` file from our current working directory.
 
 Nextflow resolves these configurations at runtime with a [specific order of precedence](https://www.nextflow.io/docs/latest/config.html#configuration-file).
 The general rule, however, is that more specific configurations override less specific ones, and config/params specified on the CLI will override defaults in the config files.
@@ -158,10 +160,10 @@ Helpfully, Seqera Platform shows us the final output of this configuration resol
 
 You have learned how to:
 
--   Set up your Seqera Platform token by exporting it to your environment.
--   Run Nextflow CLI with Seqera Platform visualizing and capturing logs.
--   Set up Seqera Platform logging by default.
--   Use Seqera Platform to explore the resolved configuration of a Nextflow pipeline.
+- Set up your Seqera Platform token by exporting it to your environment.
+- Run Nextflow CLI with Seqera Platform visualizing and capturing logs.
+- Set up Seqera Platform logging by default.
+- Use Seqera Platform to explore the resolved configuration of a Nextflow pipeline.
 
 ### What's next?
 

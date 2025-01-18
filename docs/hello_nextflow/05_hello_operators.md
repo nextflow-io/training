@@ -14,7 +14,7 @@ Specifically, we show you how to implement joint variant calling with GATK, buil
 
 The GATK variant calling method we used in Part 3 simply generated variant calls per sample.
 That's fine if you only want to look at the variants from each sample in isolation, but that yields limited information.
-It's often more interesting to look at variant calls differ across multiple samples, and to do so, GATK offers an alternative method called joint variant calling, which we demonstrate here.
+It's often more interesting to look at how variant calls differ across multiple samples, and to do so, GATK offers an alternative method called joint variant calling, which we demonstrate here.
 
 Joint variant calling involves generating a special kind of variant output called GVCF (for Genomic VCF) for each sample, then combining the GVCF data from all the samples and finally, running a 'joint genotyping' statistical analysis.
 
@@ -39,10 +39,10 @@ So to recap, we're going to develop a workflow that does the following:
 
 ### Dataset
 
--   **A reference genome** consisting of a small region of the human chromosome 20 (from hg19/b37) and its accessory files (index and sequence dictionary).
--   **Three whole genome sequencing samples** corresponding to a family trio (mother, father and son), which have been subset to a small portion on chromosome 20 to keep the file sizes small.
-    The sequencing data is in [BAM](https://samtools.github.io/hts-specs/SAMv1.pdf) (Binary Alignment Map) format, _i.e._ genome sequencing reads that have already been mapped to the reference genome.
--   **A list of genomic intervals**, _i.e._ coordinates on the genome where our samples have data suitable for calling variants, provided in BED format.
+- **A reference genome** consisting of a small region of the human chromosome 20 (from hg19/b37) and its accessory files (index and sequence dictionary).
+- **Three whole genome sequencing samples** corresponding to a family trio (mother, father and son), which have been subset to a small portion on chromosome 20 to keep the file sizes small.
+  The sequencing data is in [BAM](https://samtools.github.io/hts-specs/SAMv1.pdf) (Binary Alignment Map) format, _i.e._ genome sequencing reads that have already been mapped to the reference genome.
+- **A list of genomic intervals**, _i.e._ coordinates on the genome where our samples have data suitable for calling variants, provided in BED format.
 
 ---
 
@@ -257,8 +257,8 @@ It should look very familiar, but feel free to run it if you want to satisfy you
 
 We're going to start by making two changes:
 
--   Add the `-ERC GVCF` parameter to the GATK HaplotypeCaller command;
--   Update the output file path to use the corresponding `.g.vcf` extension, as per GATK convention.
+- Add the `-ERC GVCF` parameter to the GATK HaplotypeCaller command;
+- Update the output file path to use the corresponding `.g.vcf` extension, as per GATK convention.
 
 Make sure you add a backslash (`\`) at the end of the previous line when you add `-ERC GVCF`.
 
@@ -301,7 +301,7 @@ nextflow run hello-operators.nf
 And the output is... all red! Oh no.
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `hello-operators.nf` [nice_gates] DSL2 - revision: 43c7de9890
 
@@ -354,7 +354,7 @@ nextflow run hello-operators.nf -resume
 Ah, this time it works.
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `hello-operators.nf` [elated_carlsson] DSL2 - revision: 6a5786a6fa
 
@@ -411,7 +411,7 @@ Let's write a new process to define how that's going to work, based on the comma
 process GATK_GENOMICSDB {
 
     container "community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"
-    publishDir 'results_genomics', mode: 'copy'
+    publishDir params.outdir, mode: 'copy'
 
     input:
         path all_gvcfs
@@ -502,7 +502,7 @@ nextflow run hello-operators.nf -resume
 It run fairly quickly, since we're running with `-resume`, but...
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `hello-operators.nf` [mad_edison] DSL2 - revision: 6aea0cfded
 
@@ -582,13 +582,14 @@ That is because Nextflow must see them as file paths in order to stage the files
 
 But _where_ in the process can we add this?
 
-Fun fact, if you add the optional reserved keyword `script:` before the `"""` that starts the bash scripting block, you can add arbitrary code in there!
+Fun fact: you can add arbitrary code after `script:` and before the `"""` !
 
-Great, let's add the `script:` keyword and string manipulation line there then, and update the `gatk GenomicsDBImport` command to use the concatenated string it produces.
+Great, let's add our string manipulation line there then, and update the `gatk GenomicsDBImport` command to use the concatenated string it produces.
 
 _Before:_
 
 ```groovy title="hello-operators.nf" linenums="87"
+    script:
     """
     gatk GenomicsDBImport \
         -V ${all_gvcfs} \
@@ -627,7 +628,7 @@ nextflow run hello-operators.nf -resume
 Aha! It seems to be working now.
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `hello-operators.nf` [special_noyce] DSL2 - revision: 11f7a51bbe
 
@@ -824,7 +825,7 @@ nextflow run hello-operators.nf -resume
 And it works!
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `hello-operators.nf` [modest_gilbert] DSL2 - revision: 4f49922223
 

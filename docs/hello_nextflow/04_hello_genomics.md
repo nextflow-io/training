@@ -40,10 +40,10 @@ So to recap, we're going to develop a workflow that does the following:
 
 ### Dataset
 
--   **A reference genome** consisting of a small region of the human chromosome 20 (from hg19/b37) and its accessory files (index and sequence dictionary).
--   **Three whole genome sequencing samples** corresponding to a family trio (mother, father and son), which have been subset to a small slice of data on chromosome 20 to keep the file sizes small.
-    The sequencing data is in (Binary Alignment Map) format, i.e. genome sequencing reads that have already been mapped to the reference genome.
--   **A list of genomic intervals**, i.e. coordinates on the genome where our samples have data suitable for calling variants, provided in BED format.
+- **A reference genome** consisting of a small region of the human chromosome 20 (from hg19/b37) and its accessory files (index and sequence dictionary).
+- **Three whole genome sequencing samples** corresponding to a family trio (mother, father and son), which have been subset to a small slice of data on chromosome 20 to keep the file sizes small.
+  The sequencing data is in (Binary Alignment Map) format, i.e. genome sequencing reads that have already been mapped to the reference genome.
+- **A list of genomic intervals**, i.e. coordinates on the genome where our samples have data suitable for calling variants, provided in BED format.
 
 ---
 
@@ -54,8 +54,7 @@ The tools we need (Samtools and GATK) are not installed in the Gitpod environmen
 
 !!! note
 
-     Make sure you're in the correct working directory:
-     `cd /workspace/gitpod/hello-nextflow`
+     Make sure you're in the `hello-nextflow` directory so that the last part of the path shown when you type `pwd` is `hello-nextflow`.
 
 ### 0.1. Index a BAM input file with Samtools
 
@@ -181,7 +180,7 @@ process SAMTOOLS_INDEX {
 
     container 'community.wave.seqera.io/library/samtools:1.20--b5dfbd93de237464'
 
-    publishDir 'results_genomics', mode: 'symlink'
+    publishDir params.outdir, mode: 'symlink'
 
     input:
         path input_bam
@@ -196,18 +195,18 @@ process SAMTOOLS_INDEX {
 }
 ```
 
-You should recognize all the pieces from what you learned in Part 1 & Part 2 of this training series; the only notable change is that this time we're using `mode: symlink` for the `publishDir` directive.
+You should recognize all the pieces from what you learned in Part 1 & Part 2 of this training series; the only notable change is that this time we're using `mode: symlink` for the `publishDir` directive, and we're using a parameter to define the `publishDir`.
 
 !!! note
 
-    Even though the data files we're using here are very small, in genomics they can get very large, so we should get into the habit of using symbolic links rather than making actual copies of these files, unless there's a compelling reason to do so.
+    Even though the data files we're using here are very small, in genomics they can get very large. For the purposes of demonstration in the teaching environment, we're using the 'symlink' publishing mode to avoid unnecessary file copies. You shouldn't do this in your final workflows, since you'll lose results when you clean up your `work` directory.
 
 This process is going to require us to pass in a file path via the `input_bam` input, so let's set that up next.
 
-### 1.2. Add an input parameter declaration
+### 1.2. Add an input and output parameter declaration
 
 At the top of the file, under the `Pipeline parameters` section, we declare a CLI parameter called `reads_bam` and give it a default value.
-That way, we can be lazy and not specify the input when we type the command to launch the pipeline (for development purposes).
+That way, we can be lazy and not specify the input when we type the command to launch the pipeline (for development purposes). We're also going to set `params.outdir` with a default value for the output directory.
 
 ```groovy title="hello-genomics.nf" linenums="3"
 /*
@@ -216,9 +215,16 @@ That way, we can be lazy and not specify the input when we type the command to l
 
 // Primary input
 params.reads_bam = "${projectDir}/data/bam/reads_mother.bam"
+params.outdir    = "results_genomics"
 ```
 
 Now we have a process ready, as well as a parameter to give it an input to run on, so let's wire those things up together.
+
+!!! note
+
+    `${projectDir}` is a built-in Nextflow variable that points to the directory where the current Nextflow workflow script (`hello-genomics.nf`) is located.
+
+    This makes it easy to reference files, data directories, and other resources included in the workflow repository without hardcoding absolute paths.
 
 ### 1.3. Add workflow block to run SAMTOOLS_INDEX
 
@@ -250,7 +256,7 @@ nextflow run hello-genomics.nf
 The command should produce something like this:
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `hello-genomics.nf` [reverent_sinoussi] DSL2 - revision: 41d43ad7fe
 
@@ -299,7 +305,7 @@ process GATK_HAPLOTYPECALLER {
 
     container "community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"
 
-    publishDir 'results_genomics', mode: 'symlink'
+    publishDir params.outdir, mode: 'symlink'
 
     input:
         path input_bam
@@ -352,7 +358,7 @@ params.intervals        = "${projectDir}/data/ref/intervals.bed"
 
 ### 2.3. Create variables to hold the accessory file paths
 
-Unlike the main data inputs, which must be fed to processes through channels, the accessory files can be handled a bit more simply: we can use the `file()` function to create variables to hold those file paths.
+While main data inputs are streamed dynamically through channels, there are two approaches for handling accessory files. The recommended approach is to create explicit channels, which makes data flow clearer and more consistent. Alternatively, the file() function to create variables can be used for simpler cases, particularly when you need to reference the same file in multiple processes - though be aware this still creates channels implicitly.
 
 Add this to the workflow block (after the `reads_ch` creation):
 
@@ -400,7 +406,7 @@ nextflow run hello-genomics.nf -resume
 Now if we look at the console output, we see the two processes listed:
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `hello-genomics.nf` [grave_volta] DSL2 - revision: 4790abc96a
 
@@ -489,7 +495,7 @@ Funny thing: this _might work_, OR it _might fail_.
 If your workflow run succeeded, run it again until you get an error like this:
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `hello-genomics.nf` [loving_pasteur] DSL2 - revision: d2a8e63076
 
@@ -521,7 +527,7 @@ Well, that's weird, considering we explicitly indexed the BAM files in the first
 
 #### 3.2.1. Check the work directories for the relevant calls
 
-Let's take a look inside the work directory listed in the console output.
+Let's take a look inside the work directory for the failed `GATK_HAPLOTYPECALLER` process call listed in the console output.
 
 ```console title="Directory contents"
 work/a5/fa9fd0994b6beede5fb9ea073596c2
@@ -558,7 +564,7 @@ nextflow run hello-genomics.nf
 You may need to run it several times for it to fail again.
 This error will not reproduce consistently because it is dependent on some variability in the execution times of the individual process calls.
 
-This is what the output of the two `.view` calls we added looks like for a failed run:
+This is what the output of the two `.view()` calls we added looks like for a failed run:
 
 ```console title="Output"
 /workspace/gitpod/hello-nextflow/data/bam/reads_mother.bam
@@ -593,7 +599,7 @@ The simplest way to ensure a BAM file and its index stay closely associated is t
 
 !!! note
 
-    A **tuple** is a finite, ordered list of elements that is commonly used for returning multiple values from a function.
+    A **tuple** is a finite, ordered list of elements that is commonly used for returning multiple values from a function. Tuples are particularly useful for passing multiple inputs or outputs between processes while preserving their association and order.
 
 First, let's change the output of the `SAMTOOLS_INDEX` process to include the BAM file in its output declaration.
 
@@ -670,7 +676,7 @@ nextflow run hello-genomics.nf
 This time (and every time) everything should run correctly:
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `hello-genomics.nf` [special_goldstine] DSL2 - revision: 4cbbf6ea3e
 
@@ -788,7 +794,7 @@ nextflow run hello-genomics.nf -resume
 This should produce the same result as before, right?
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `hello-genomics.nf` [sick_albattani] DSL2 - revision: 46d84642f6
 

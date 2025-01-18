@@ -70,7 +70,7 @@ nextflow run main.nf -profile my_laptop,demo
 This should look very familiar by now if you've been working through this training course from the start.
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.02.0-edge
+ N E X T F L O W   ~  version 24.10.0
 
  ┃ Launching `main.nf` [special_brenner] DSL2 - revision: 5a07b4894b
 
@@ -179,9 +179,9 @@ In plain English, the logic of the test reads as follows:
 
 The expected results are formulated as `assert` statements.
 
--   `assert process.success` states that we expect the process to run successfully and complete without any failures.
--   `snapshot(process.out).match()` states that we expect the result of the run to be identical to the result obtained in a previous run (if applicable).
-    We discuss this in more detail later.
+- `assert process.success` states that we expect the process to run successfully and complete without any failures.
+- `snapshot(process.out).match()` states that we expect the result of the run to be identical to the result obtained in a previous run (if applicable).
+  We discuss this in more detail later.
 
 For most real-world modules (which usually require some kind of input), this is not yet a functional test.
 We need to add the inputs that will be fed to the process, and any parameters if applicable.
@@ -293,9 +293,9 @@ params {
 
 Finally, it's time to run our test! Let's break down the syntax.
 
--   The basic command is `nf-test test`.
--   To that, we add `--profile docker_on` to specify that we want Nextflow to run the test with Docker enabled.
--   Then the test file that we want to run.
+- The basic command is `nf-test test`.
+- To that, we add `--profile docker_on` to specify that we want Nextflow to run the test with Docker enabled.
+- Then the test file that we want to run.
 
 !!!note
 
@@ -345,8 +345,8 @@ If we re-run the test, the program will check that the new output matches the ou
 
 If, in the course of future development, something in the code changes that causes the output to be different, the test will fail and we will have to determine whether the change is expected or not.
 
--   If it turns out that something in the code broke, we will have to fix it, with the expectation that the fixed code will pass the test.
--   If it is an expected change (e.g., the tool has been improved and the results are better) then we will need to update the snapshot to accept the new output as the reference to match, using the parameter `--update-snapshot` when we run the test command.
+- If it turns out that something in the code broke, we will have to fix it, with the expectation that the fixed code will pass the test.
+- If it is an expected change (e.g., the tool has been improved and the results are better) then we will need to update the snapshot to accept the new output as the reference to match, using the parameter `--update-snapshot` when we run the test command.
 
 ### 1.7. Add more tests to `SAMTOOLS_INDEX`
 
@@ -460,8 +460,8 @@ Now that we know how to handle the simplest case, we're going to kick things up 
 As the second step in our pipeline, its input depends on the output of another process.
 We can deal with this in two ways:
 
--   Manually generate some static test data that is suitable as intermediate input to the process;
--   Use a special [setup method](https://www.nf-test.com/docs/testcases/setup/) to handle it dynamically for us.
+- Manually generate some static test data that is suitable as intermediate input to the process;
+- Use a special [setup method](https://www.nf-test.com/docs/testcases/setup/) to handle it dynamically for us.
 
 **Spoiler:** We're going to use the setup method.
 
@@ -975,7 +975,6 @@ test("family_trio [vcf] [idx]") {
             """
         }
     }
-}
 ```
 
 ### 3.4. Use content assertions
@@ -1083,6 +1082,9 @@ params {
     // Primary input (file of input files, one per line)
     reads_bam        = "${projectDir}/data/sample_bams.txt"
 
+    // Output directory
+    params.outdir = "results_genomics"
+
     // Accessory files
     reference        = "${projectDir}/data/ref/ref.fasta"
     reference_index  = "${projectDir}/data/ref/ref.fasta.fai"
@@ -1122,6 +1124,78 @@ SUCCESS: Executed 1 tests in 62.498s
 
 That's it! If necessary, more nuanced assertions can be added to test for the validity and content of the pipeline outputs.
 You can learn more about the different kinds of assertions you can use in the [nf-test documentation](https://www.nf-test.com/docs/assertions/assertions/).
+
+### 4.3. Run ALL the tests!
+
+nf-test has one more trick up it's sleeve. We can run all the tests at once! Modify the `nf-test.config` file so that nf-test looks in every directory for nf-test files. You can do this by modifying the `testsDir` parameter:
+
+_Before:_
+
+```groovy title="tests/nf-test.config" linenums="1"
+config {
+
+    testsDir "tests"
+    workDir ".nf-test"
+    configFile "tests/nextflow.config"
+    profile ""
+
+}
+```
+
+_After:_
+
+```groovy title="tests/nf-test.config" linenums="1"
+config {
+
+    testsDir "."
+    workDir ".nf-test"
+    configFile "tests/nextflow.config"
+    profile ""
+
+}
+```
+
+Now, we can simply run nf-test and it will run _every single test_ in our repository:
+
+```bash
+nf-test test --profile docker_on
+```
+
+```console title="Output"
+gitpod /workspaces/hello-nextflow/hello-nf-test (master) $ nf-test test --profile docker_on
+
+🚀 nf-test 0.9.2
+https://www.nf-test.com
+(c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
+
+
+Test Process GATK_HAPLOTYPECALLER
+
+  Test [91903020] 'reads_son [bam]' PASSED (9.392s)
+  Test [6dd10adf] 'reads_mother [bam]' PASSED (9.508s)
+  Test [2d01c506] 'reads_father [bam]' PASSED (9.209s)
+
+Test Process GATK_JOINTGENOTYPING
+
+  Test [fd98ae7b] 'family_trio [vcf] [idx]' PASSED (10.537s)
+
+Test Process SAMTOOLS_INDEX
+
+  Test [e8dbf1c1] 'reads_son [bam]' PASSED (4.504s)
+  Test [5e05ca64] 'reads_mother [bam]' PASSED (4.37s)
+  Test [254f67ac] 'reads_father [bam]' PASSED (4.717s)
+
+Test Workflow main.nf
+
+  Test [6fa6c90c] 'Should run without failures' PASSED (23.872s)
+
+
+SUCCESS: Executed 8 tests in 76.154s
+```
+
+7 tests in 1 command! We spent a long time configuring lots and lots of tests, but when it came to running them it was very quick and easy. You can see how useful this is when maintaining a large pipeline, which could include hundreds of different elements. We spend time writing tests once so we can save time running them many times.
+
+Furthermore, we can automate this! imagine tests running every time you or a colleague tries to add new code. This is how we ensure our pipelines maintain a high standard.
 
 ### Takeaway
 
