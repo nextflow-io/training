@@ -1,4 +1,4 @@
-# Part 3: Hello Plumbing
+# Part 3: Hello Workflow
 
 Most real-world workflows involve more than one step.
 In this training module, you'll learn how to connect processes together in a multi-step workflow.
@@ -20,15 +20,15 @@ This time, we're going to make the following changes to our workflow to better r
 
 ---
 
-## 0. Warmup: Run `hello-plumbing.nf`
+## 0. Warmup: Run `hello-workflow.nf`
 
-We're going to use the workflow script `hello-plumbing.nf` as a starting point.
+We're going to use the workflow script `hello-workflow.nf` as a starting point.
 It is equivalent to the script produced by working through Part 2 of this training course.
 
 Just to make sure everything is working, run the script once before making any changes:
 
 ```bash
-nextflow run hello-plumbing.nf
+nextflow run hello-workflow.nf
 ```
 
 This should produce the following output:
@@ -36,7 +36,7 @@ This should produce the following output:
 ```console title="Output"
  N E X T F L O W   ~  version 24.10.0
 
-Launching `hello-plumbing.nf` [tender_becquerel] DSL2 - revision: f7fbe8e223
+Launching `hello-workflow.nf` [tender_becquerel] DSL2 - revision: f7fbe8e223
 
 executor >  local (3)
 [74/e135b2] sayHello (3)       [100%] 3 of 3 ✔
@@ -81,7 +81,7 @@ We can model our new process on the first one, since we want to use all the same
 
 Add the following process definition to the workflow script.
 
-```groovy title="hello-plumbing.nf" linenums="22"
+```groovy title="hello-workflow.nf" linenums="22"
 /*
  * Use a text replace utility to convert the greeting to uppercase
  */
@@ -117,7 +117,7 @@ In the workflow block, make the following code change:
 
 _Before:_
 
-```groovy title="hello-plumbing.nf" linenums="53"
+```groovy title="hello-workflow.nf" linenums="53"
     // emit a greeting
     sayHello(greeting_ch)
 }
@@ -125,7 +125,7 @@ _Before:_
 
 _After:_
 
-```groovy title="hello-plumbing.nf" linenums="53"
+```groovy title="hello-workflow.nf" linenums="53"
     // emit a greeting
     sayHello(greeting_ch)
 
@@ -147,7 +147,7 @@ In the workflow block, make the following code change:
 
 _Before:_
 
-```groovy title="hello-plumbing.nf" linenums="56"
+```groovy title="hello-workflow.nf" linenums="56"
     // convert the greeting to uppercase
     convertToUpper()
 }
@@ -155,7 +155,7 @@ _Before:_
 
 _After:_
 
-```groovy title="hello-plumbing.nf" linenums="56"
+```groovy title="hello-workflow.nf" linenums="56"
     // convert the greeting to uppercase
     convertToUpper(sayHello.out)
 }
@@ -168,7 +168,7 @@ For a simple case like this (one output to one input), that's all we need to do 
 Let's run this using the `-resume` flag, since we've already run the first step of the workflow successfully.
 
 ```bash
-nextflow run hello-plumbing.nf -resume
+nextflow run hello-workflow.nf -resume
 ```
 
 There is now an extra line in the console output, which corresponds to the new process we just added:
@@ -176,7 +176,7 @@ There is now an extra line in the console output, which corresponds to the new p
 ```console title="Output"
  N E X T F L O W   ~  version 24.10.0
 
-Launching `hello-plumbing.nf` [cheeky_hamilton] DSL2 - revision: f7fbe8e223
+Launching `hello-workflow.nf` [cheeky_hamilton] DSL2 - revision: f7fbe8e223
 
 executor >  local (3)
 [45/eb4757] sayHello (2)       [100%] 3 of 3, cached: 3 ✔
@@ -188,6 +188,7 @@ Have a look inside the work directory of one of the calls to the second process.
 ```bash
 tree -a work/ae/4579ab5b4f2c1d986d3a955e31f2b7/
 ```
+
 (you'll need to adapt this tree command to the actual directory name you see in the output from your workflow run)
 
 You should find two output files listed: the output of the first process, and the output of the second.
@@ -257,7 +258,7 @@ We can write an outline for our new process based on the previous one, leaving o
 
 Add the following process definition to the workflow script:
 
-```groovy title="hello-plumbing.nf" linenums="41"
+```groovy title="hello-workflow.nf" linenums="41"
 /*
  * Collect uppercase greetings into a single output file
  */
@@ -294,14 +295,14 @@ In the process block, make the following code change:
 
 _Before:_
 
-```groovy title="hello-plumbing.nf" linenums="48"
+```groovy title="hello-workflow.nf" linenums="48"
         input:
             ???
 ```
 
 _After:_
 
-```groovy title="hello-plumbing.nf" linenums="48"
+```groovy title="hello-workflow.nf" linenums="48"
         input:
             path input_files
 ```
@@ -321,7 +322,7 @@ In the process block, make the following code change:
 
 _Before:_
 
-```groovy title="hello-plumbing.nf" linenums="54"
+```groovy title="hello-workflow.nf" linenums="54"
     script:
     """
     ??? > 'COLLECTED-output.txt'
@@ -330,7 +331,7 @@ _Before:_
 
 _After:_
 
-```groovy title="hello-plumbing.nf" linenums="54"
+```groovy title="hello-workflow.nf" linenums="54"
     script:
     """
     cat ${input_files} > 'COLLECTED-output.txt'
@@ -353,7 +354,7 @@ In the workflow block, make the following code change:
 
 _Before:_
 
-```groovy title="hello-plumbing.nf" linenums="75"
+```groovy title="hello-workflow.nf" linenums="75"
     // convert the greeting to uppercase
     convertToUpper(sayHello.out)
 }
@@ -361,7 +362,7 @@ _Before:_
 
 _After:_
 
-```groovy title="hello-plumbing.nf" linenums="75"
+```groovy title="hello-workflow.nf" linenums="75"
     // convert the greeting to uppercase
     convertToUpper(sayHello.out)
 
@@ -377,7 +378,7 @@ Following the same logic as previously, this should work, right?
 Let's try it.
 
 ```bash
-nextflow run hello-plumbing.nf -resume
+nextflow run hello-workflow.nf -resume
 ```
 
 It runs successfully, including the third step, but look at the number of calls:
@@ -410,7 +411,7 @@ In the workflow block, make the following code changes:
 
 _Before:_
 
-```groovy title="hello-plumbing.nf" linenums="78"
+```groovy title="hello-workflow.nf" linenums="78"
     // collect all the greetings into one file
     collectGreetings(convertToUpper.out)
 }
@@ -418,7 +419,7 @@ _Before:_
 
 _After:_
 
-```groovy title="hello-plumbing.nf" linenums="78"
+```groovy title="hello-workflow.nf" linenums="78"
     // collect all the greetings into one file
     collectGreetings(convertToUpper.out.collect())
 
@@ -435,7 +436,7 @@ Notice that we also included a couple of `view()` statements to visualize the be
 Let's try it again.
 
 ```bash
-nextflow run hello-plumbing.nf -resume
+nextflow run hello-workflow.nf -resume
 ```
 
 It runs successfully, and this time the third step is only called once!
@@ -477,11 +478,11 @@ You know how to collect outputs from a batch of process calls and feed them into
 
 ### What's next?
 
-Learn how to pass more than one input through a channel.
+Learn how to pass more than one input to a process.
 
 ---
 
-## 3. Add a parameter to name the final output file
+## 3. Pass more than one input to a process in order to name the final output file uniquely
 
 We want to be able to name the final output file something specific in order to process subsequent batches of greetings without overwriting the final results.
 
@@ -498,14 +499,14 @@ In the process block, make the following code change:
 
 _Before:_
 
-```groovy title="hello-plumbing.nf" linenums="48"
+```groovy title="hello-workflow.nf" linenums="48"
     input:
         path input_files
 ```
 
 _After:_
 
-```groovy title="hello-plumbing.nf" linenums="48"
+```groovy title="hello-workflow.nf" linenums="48"
     input:
         path input_files
         val batch_name
@@ -517,7 +518,7 @@ In the process block, make the following code change:
 
 _Before:_
 
-```groovy title="hello-plumbing.nf" linenums="52"
+```groovy title="hello-workflow.nf" linenums="52"
     output:
         path "COLLECTED-output.txt"
 
@@ -529,7 +530,7 @@ _Before:_
 
 _After:_
 
-```groovy title="hello-plumbing.nf" linenums="52"
+```groovy title="hello-workflow.nf" linenums="52"
     output:
         path "COLLECTED-${batch_name}-output.txt"
 
@@ -552,7 +553,7 @@ In the pipeline parameters section, make the following code changes:
 
 _Before:_
 
-```groovy title="hello-plumbing.nf" linenums="61"
+```groovy title="hello-workflow.nf" linenums="61"
 /*
  * Pipeline parameters
  */
@@ -561,7 +562,7 @@ params.greeting = 'data/greetings.csv'
 
 _After:_
 
-```groovy title="hello-plumbing.nf" linenums="61"
+```groovy title="hello-workflow.nf" linenums="61"
 /*
  * Pipeline parameters
  */
@@ -579,14 +580,14 @@ In the workflow block, make the following code change:
 
 _Before:_
 
-```groovy title="hello-plumbing.nf" linenums="80"
+```groovy title="hello-workflow.nf" linenums="80"
     // collect all the greetings into one file
     collectGreetings(convertToUpper.out.collect())
 ```
 
 _After:_
 
-```groovy title="hello-plumbing.nf" linenums="80"
+```groovy title="hello-workflow.nf" linenums="80"
     // collect all the greetings into one file
     collectGreetings(convertToUpper.out.collect(), params.batch)
 ```
@@ -600,7 +601,7 @@ _After:_
 Let's try running this with a batch name on the command line.
 
 ```bash
-nextflow run hello-plumbing.nf -resume --batch trio
+nextflow run hello-workflow.nf -resume --batch trio
 ```
 
 It runs successfully and produces the desired output:
@@ -651,7 +652,7 @@ In the process block, make the following code change:
 
 _Before:_
 
-```groovy title="hello-plumbing.nf" linenums="56"
+```groovy title="hello-workflow.nf" linenums="56"
     script:
     """
     cat ${input_files} > 'COLLECTED-${batch_id}-output.txt'
@@ -660,7 +661,7 @@ _Before:_
 
 _After:_
 
-```groovy title="hello-plumbing.nf" linenums="56"
+```groovy title="hello-workflow.nf" linenums="56"
     script:
         count_greetings = input_files.size()
     """
@@ -680,14 +681,14 @@ In the process block, make the following code change:
 
 _Before:_
 
-```groovy title="hello-plumbing.nf" linenums="52"
+```groovy title="hello-workflow.nf" linenums="52"
     output:
         path "COLLECTED-${batch_id}-output.txt"
 ```
 
 _After:_
 
-```groovy title="hello-plumbing.nf" linenums="52"
+```groovy title="hello-workflow.nf" linenums="52"
     output:
         path "COLLECTED-${batch_id}-output.txt" , emit: outfile
         val count_greetings , emit: count
@@ -708,14 +709,14 @@ In the workflow block, make the following code change:
 
 _Before:_
 
-```groovy title="hello-plumbing.nf" linenums="82"
+```groovy title="hello-workflow.nf" linenums="82"
     // collect all the greetings into one file
     collectGreetings(convertToUpper.out.collect(), params.batch)
 ```
 
 _After:_
 
-```groovy title="hello-plumbing.nf" linenums="82"
+```groovy title="hello-workflow.nf" linenums="82"
     // collect all the greetings into one file
     collectGreetings(convertToUpper.out.collect(), params.batch)
 
@@ -730,7 +731,7 @@ Here we are using `$it` in the same way we did earlier, as an implicit variable 
 Let's try running this with the current batch of greetings.
 
 ```bash
-nextflow run hello-plumbing.nf -resume --batch trio
+nextflow run hello-workflow.nf -resume --batch trio
 ```
 
 This runs successfully:
