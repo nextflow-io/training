@@ -42,11 +42,10 @@ If everything works, you're ready to learn how to modify basic configuration pro
 
 ## 1. Determine what software packaging technology to use
 
-[TODO] SIMPLIFY ALL THIS TO JUST USE THE COWSAY PACKAGE
+The first step toward adapting your workflow configuration to your compute environment is specifying where the software packages that will get run in each step are going to be coming from.
+Are they already installed in the local compute environment? Do we need to retrieve images and run them via a container system? Or do we need to retrieve Conda packages and build a local Conda environment?
 
-[TODO] Learn how to modify basic configuration properties to adapt to your compute environment's requirements.
-
-[TODO] In the very first part of this training course (Parts 1-4) we just used locally installed software in our workflow.
+In the very first part of this training course (Parts 1-4) we just used locally installed software in our workflow.
 Then in Part 5, we introduced Docker containers, using the `-with-docker` command-line argument.
 
 Now let's look at how we can configure Nextflow to use Docker or other container systems without having to specify that every time, using a `nextflow.config` file.
@@ -65,9 +64,15 @@ This instruction specifies that Nextflow should use Docker to run process calls 
 
 ### 1.2. Run the workflow without the Docker CLI argument
 
-[TODO]
+```bash
+nextflow run hello-config.nf
+```
 
-[It works which shows that Nextflow now ran with Docker thanks to the config change]
+This should produce the following output:
+
+TODO add updated output
+
+This shows how you can get Nextflow to use Docker for any processes that specify a container with stating so everytime on the command line.
 
 ### 1.3. Disable Docker and enable Conda in the config file
 
@@ -144,7 +149,7 @@ This may take a bit longer than usual the first time, and you might see the cons
 
  ┃ Launching `hello-config.nf` [extravagant_thompson] DSL2 - revision: 848ff2f9b5
 
-[UPDATE]]
+TODO [UPDATE]
 ```
 
 That's because Nextflow has to retrieve the Conda packages and create the environment, which takes a bit of work behind the scenes.
@@ -210,7 +215,7 @@ Let's look at what it would take to using a Slurm scheduler, assuming we had a c
 
     What follows is for demonstration purposes but **will not execute the work** since we don't have access to an external executor.
 
-### 3.1. Set up a Slurm executor
+### 2.1. Set up a Slurm executor
 
 Add the following lines to the `nextflow.config` file:
 
@@ -224,7 +229,7 @@ And... that's it! As noted before, this does assume that Slurm itself is already
 
 Basically we are telling Nextflow to generate a Slurm submission script and submit it using an `sbatch` command.
 
-### 3.2. Launch the workflow to generate the job submission script
+### 2.2. Launch the workflow to generate the job submission script
 
 TODO: THIS WAS CONFUSING — EXPLAIN BETTER OR CUT
 
@@ -279,7 +284,7 @@ Learn how to control the resources allocated for executing processes.
 
 ---
 
-## 4. Allocate compute resources with process directives
+## 3. Allocate compute resources with process directives
 
 Most high-performance computing platforms allow (and sometimes require) that you specify certain resource allocation parameters such as number of CPUs and memory.
 
@@ -298,7 +303,7 @@ Nextflow will translate them into the appropriate instructions for the chosen ex
 
 But how do you know what values to use?
 
-### 4.4. Run the workflow to generate a resource utilization report
+### 3.1. Run the workflow to generate a resource utilization report
 
 If you don't know up front how much CPU and memory your processes are likely to need, you can do some resource profiling, meaning you run the workflow with some default allocations, record how much each process used, and from there, estimate how to adjust the base allocations.
 
@@ -318,7 +323,7 @@ There is some [documentation](https://www.nextflow.io/docs/latest/reports.html) 
 
 <!-- TODO: insert images -->
 
-### 4.2. Set resource allocations for all processes
+### 3.2. Set resource allocations for all processes
 
 The profiling shows that the processes in our training workflow are very lightweight, so let's reduce the default memory allocation to 1GB per process.
 
@@ -330,7 +335,7 @@ process {
 }
 ```
 
-### 4.3. Set resource allocations for an individual process
+### 3.3. Set resource allocations for an individual process
 
 At the same time, we're going to pretend that the `cowSay` process requires more resources than the others, just so we can demonstrate how to adjust allocations for an individual process.
 
@@ -361,7 +366,7 @@ With this configuration, all processes will request 1GB of memory and a single C
     If you have a machine with few CPUs and you allocate a high number per process, you might see process calls getting queued behind each other.
     This is because Nextflow ensures we don't request more CPUs than are available.
 
-### 4.3. Run the workflow with the modified configuration
+### 3.4. Run the workflow with the modified configuration
 
 Let's try that out, supplying a different filename for the profiling report so we can compare performance before and after the configuration changes.
 
@@ -381,7 +386,7 @@ It is very useful when your processes have different resource requirements. It e
 
     We'll cover both of those approaches in an upcoming part of this training course.
 
-### 4.4. Add resource limits for running on HPC
+### 3.5. Add resource limits for running on HPC
 
 Depending on what computing executor and compute infrastructure you're using, there may be some constraints on what you can (or must) allocate.
 For example, your cluster may require you to stay within certain limits.
@@ -419,13 +424,13 @@ Learn how to use profiles to conveniently switch between alternative configurati
 
 ---
 
-## 2. Use profiles to select preset configurations
+## 4. Use profiles to select preset configurations
 
 You may want to switch between alternative settings depending on what computing infrastructure you're using. For example, you might want to develop and run small-scale tests locally on your laptop, then run full-scale workloads on HPC or cloud.
 
 Nextflow lets you set up profiles that describe different configurations, which you can then select at runtime using a command-line argument, rather than having to modify the configuration file itself.
 
-### 2.1. Create profiles for switching between local development and execution on HPC
+### 4.1. Create profiles for switching between local development and execution on HPC
 
 Let's set up two alternative profiles; one for running small scale loads on a regular computer, where we'll use Docker containers, and one for running on a university HPC with a Slurm scheduler, where we'll use Conda packages.
 
@@ -451,7 +456,7 @@ profiles {
 
 You see that for the university HPC, we're also specifying resource limitations.
 
-### 2.2. Run the workflow with a profile
+### 4.2. Run the workflow with a profile
 
 To specify a profile in our Nextflow command line, we use the `-profile` argument.
 
@@ -476,7 +481,7 @@ As you can see, this allows us to toggle between configurations very convenientl
 If in the future we find other elements of configuration that are always co-occurring with these, we can simply add them to the corresponding profile(s).
 We can also create additional profiles if there are other elements of configuration that we want to group together.
 
-### 2.3. Create a demo profile
+### 4.3. Create a demo profile
 
 Profiles are not only for infrastructure configuration.
 We can also use them to set default values for workflow parameters, to make it easier for others to try out the workflow without having to gather appropriate input values themselves.
@@ -523,7 +528,7 @@ TODO: UPDATE
 
 This way the workflow script no longer has any code that might need to be modified depending on circumstances.
 
-### 2.5. Run the workflow locally with the demo profile
+### 4.5. Run the workflow locally with the demo profile
 
 Conveniently, profiles are not mutually exclusive, so we can specify multiple profiles in our command line using the following syntax `-profile <profile1>,<profile2>` (for any number of profiles).
 
@@ -557,48 +562,42 @@ You know how to use profiles to select a preset configuration at runtime with mi
 
 ### What's next?
 
-Learn to use a parameter file.
+Learn to use a parameter file to store workflow parameters.
 
 ---
 
-## 5. Use a parameter file to configure workflow parameters [TODO]
-
-INTRODUCE THE PARAMS JSON
-
-### 5.1. Using a parameter file
-
-[TODO] UPDATE CODE
+## 5. Use a parameter file to store workflow parameters
 
 Another convenient way to provide parameter values without having to modify the source code or putting a lot in the command line (which is error prone) is to use a parameter file.
 
-We provide an example parameter file in the current directory, called `demo-params.json`, which contains a key-value pair for the input our workflow expects.
+We provide an example parameter file in the current directory, called `demo-params.json`:
 
 ```json title="demo-params.json" linenums="1"
 {
-    "greeting": "Dobrý den"
+    "greet": "Dobrý den",
+    "batch": "Trio",
+    "character": "pig"
 }
 ```
+
+The parameter file contains a key-value pair for each of the inputs our workflow expects.
+
+### 5.1. Run the workflow using a parameter file
 
 To run the workflow with this parameter file, simply add `-params-file demo-params.json` to the base command.
 
 ```bash
-nextflow run hello-world.nf -params-file demo-params.json
+nextflow run hello-config.nf -params-file demo-params.json
 ```
 
 It works! And as expected, this produces the same outputs as previously.
 
 ```console title="Output"
-[TODO]
+TODO: UPDATE OUTPUT
 ```
-
-[TODO] CONCLUDE
 
 This may seem like overkill when you only have a single parameter to specify, but some pipelines expect dozens of parameters.
 In those cases, using a parameter file will allow us to provide parameter values at runtime without having to type massive command lines and without modifying the workflow.
-
-That being said, it was nice to be able to demo the workflow without having to keep track of filenames and such. Let's see if we can use a profile to replicate that behavior.
-
-### 5.2.
 
 ### Takeaway
 
@@ -606,4 +605,4 @@ You know how to manage parameter defaults, override them at runtime using a para
 
 ### What's next?
 
-Celebrate and relax. Then we'll move on to learning how to modularize the workflow code for optimal maintainability and reuse.
+Celebrate and give yourself a big pat on the back! You have completed your very first NExtflow developer course.

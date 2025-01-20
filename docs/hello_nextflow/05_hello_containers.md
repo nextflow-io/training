@@ -1,6 +1,6 @@
 # Part 5: Hello Containers
 
-In Parts 1-4 of this training course, you learned how to use the basic building blocks of Nextflow to assemble a simple pipeline capable of processing some text, parallelizing execution if there were multiple inputs and collecting the results for further processing.
+In Parts 1-4 of this training course, you learned how to use the basic building blocks of Nextflow to assemble a simple workflow capable of processing some text, parallelizing execution if there were multiple inputs and collecting the results for further processing.
 
 However, you were limited to basic UNIX tools available in your environment.
 Real-world tasks often require various tools and packages not included by default.
@@ -12,7 +12,7 @@ A **container** is a lightweight, standalone, executable unit of software create
 
 !!! Note
 
-    We'll be teaching this using the technology [Docker](https://www.docker.com/get-started/), but Nextflow supports [several other container technologies](https://www.nextflow.io/docs/latest/container.html#) as well.
+We'll be teaching this using the technology [Docker](https://www.docker.com/get-started/), but Nextflow supports [several other container technologies](https://www.nextflow.io/docs/latest/container.html#) as well.
 
 ---
 
@@ -448,7 +448,7 @@ TODO UPDATE FILENAME AND CONTENT
 
 You see that the character is saying all the greetings.
 
-TODO do we want to note that future course modules (either advanced or side quest) will show how to use a conditional to skip the collect step if we want to emit the cowsay'ed greetings individually, and how to use metadata management to assign a specific character to each greeting?
+<!-- consider a side quest where we show how to use a conditional to skip the collect step if we want to emit the cowsay'ed greetings individually, and how to use metadata management to assign a specific character to each greeting -->
 
 ### 2.7. Inspect how Nextflow launched the containerized task
 

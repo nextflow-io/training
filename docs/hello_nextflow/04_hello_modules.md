@@ -13,7 +13,7 @@ This makes the code more shareable, flexible and maintainable.
 
 !!!note
 
-    It is also possible to encapsulate a section of a workflow as a 'subworkflow' that can be imported into a larger pipeline, but that is outside the scope of this training.
+    It is also possible to encapsulate a section of a workflow as a 'subworkflow' that can be imported into a larger pipeline, but that is outside the scope of this course.
 
 ---
 

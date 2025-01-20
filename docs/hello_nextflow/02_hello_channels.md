@@ -156,7 +156,7 @@ Learn how to use channels to make the workflow iterate over multiple input value
 
 ---
 
-## 2. Modify the workflow to run on a batch of input values
+## 2. Modify the workflow to run on multiple input values
 
 Workflows typically run on batches of inputs that are meant to be processed in bulk, so we want to upgrade the workflow to accept multiple input values.
 
@@ -439,6 +439,11 @@ This is where **operators** come in.
 
 If you skim through the [list of operators](https://www.nextflow.io/docs/latest/reference/operator.html) in the Nextflow documentation, you'll find [`flatten()`](https://www.nextflow.io/docs/latest/reference/operator.html#flatten), which does exactly what we need: unpack the contents of an array and emits them as individual items.
 
+!!! note
+
+    It is technically possible to achieve the same results by using a different channel factory, [`Channel.fromList`](https://nextflow.io/docs/latest/reference/channel.html#fromlist), which includes an implicit mapping step in its operation.
+    Here we chose not to use that in order to demonstrate the use of an operator on a fairly simple use case.
+
 #### 3.2.1. Add the `flatten()` operator
 
 To apply the `flatten()` operator to our input channel, we simply append it to the channel factory declaration.
@@ -529,7 +534,7 @@ Importantly, this means each item can now be processed separately by the workflo
 
 ### Takeaway
 
-You know how to use the `flatten()` operator to handle a batch of values passed in through the CLI parameter system, and how to use the `view()` directive to inspect channel contents before and after applying an operator.
+You know how to use an operator like `flatten()` to transform the contents of a channel, and how to use the `view()` directive to inspect channel contents before and after applying an operator.
 
 ### What's next?
 
@@ -747,4 +752,4 @@ More generally, you have a basic understanding of how Nextflow uses **channels**
 ### What's next?
 
 Take a break!
-When you're ready, move on to Part 3 to learn how to add more steps to your workflow and do some slightly more interesting plumbing.
+When you're ready, move on to Part 3 to learn how to add more steps and connect them together into a proper workflow.
