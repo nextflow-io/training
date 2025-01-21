@@ -10,21 +10,27 @@ Whenever there is a file named `nextflow.config` in the current directory, Nextf
     Anything you put into the `nextflow.config` can be overridden at runtime by providing the relevant process directives or parameters and values on the command line, or by importing another configuration file, according to the order of precedence described [here](https://www.nextflow.io/docs/latest/config.html).
 
 In this part of the training, we're going to use the `nextflow.config` file to demonstrate essential components of Nextflow configuration such as process directives, executors, profiles, and parameter files.
+
 By learning to utilize these configuration options effectively, you can enhance the flexibility, scalability, and performance of your pipelines.
 
 ---
 
-## 0. Warmup: Run the Hello Config workflow
+## 0. Warmup: Check that Docker is enabled and run the Hello Config workflow
 
-[TODO] [usual run workflow to check everything works]
+First, a quick check. There is a `nextflow.config` file in the current directory that contains the line `docker.enabled = <setting>`, where `<setting>` is either `true` or `false` depending on whether or not you've worked through Part 5 of this course in the same environment.
 
-Verify that the initial workflow runs properly:
+If it is set to `true`, you don't need to do anything.
+If it is set to `false`, switch it to `true` now.
+
+```console title="nextflow.config" linenums="1"
+docker.enabled = true
+```
+
+Once you've done that, verify that the initial workflow runs properly:
 
 ```bash
 nextflow run hello-config.nf
 ```
-
-This should run successfully:
 
 ```console title="Output"
 Nextflow 24.09.2-edge is available - Please consider updating your version to it
@@ -46,39 +52,17 @@ The first step toward adapting your workflow configuration to your compute envir
 Are they already installed in the local compute environment? Do we need to retrieve images and run them via a container system? Or do we need to retrieve Conda packages and build a local Conda environment?
 
 In the very first part of this training course (Parts 1-4) we just used locally installed software in our workflow.
-Then in Part 5, we introduced Docker containers, using the `-with-docker` command-line argument.
+Then in Part 5, we introduced Docker containers and the `nextflow.config` file, which we used to enable the use of Docker containers.
 
-Now let's look at how we can configure Nextflow to use Docker or other container systems without having to specify that every time, using a `nextflow.config` file.
+In the warmup to this section, you checked that Docker was enabled in `nextflow.config` file and ran the workflow, which used a Docker container to execute the `cowSay()` process.
 
-### 1.1. Enable Docker in the config file
+_If that doesn't sound familiar, you should probably go back and work through Part 5 before continuing._
 
-There is a `nextflow.config` file in the current directory but it's a stub; there's nothing in it.
+Now let's see what other software packaging options we can configure via the `nextflow.config` file.
 
-Let's add the line `docker.enabled = true` to the file.
+### 1.1. Disable Docker and enable Conda in the config file
 
-```console title="nextflow.config" linenums="1"
-docker.enabled = true
-```
-
-This instruction specifies that Nextflow should use Docker to run process calls that specify a Docker container image.
-
-### 1.2. Run the workflow without the Docker CLI argument
-
-```bash
-nextflow run hello-config.nf
-```
-
-This should produce the following output:
-
-```console title="Output"
-TODO add updated output
-```
-
-This shows how you can get Nextflow to use Docker for any processes that specify a container with stating so everytime on the command line.
-
-### 1.3. Disable Docker and enable Conda in the config file
-
-Now, let's pretend we're working on an HPC cluster and the admin doesn't allow the use of Docker for security reasons.
+Let's pretend we're working on an HPC cluster and the admin doesn't allow the use of Docker for security reasons.
 
 Fortunately for us, Nextflow supports multiple other container technologies such as including Singularity (which is more widely used on HPC), and software package managers such as Conda.
 
@@ -100,7 +84,7 @@ conda.enabled = true
 
 This should allow Nextflow to create and utilize Conda environments for processes that have Conda packages specified. Which means we now need to add one to our `cowSay` process!
 
-### 1.4. Specify a Conda package in the process definition
+### 1.2. Specify a Conda package in the process definition
 
 We've already retrieved the URI for a Conda package containing the `cowsay` tool:
 
@@ -136,7 +120,7 @@ process cowSay {
 
 To be clear, we're not _replacing_ the `docker` directive, we're _adding_ an alternative option.
 
-### 1.5. Run the workflow to verify that it can use Conda
+### 1.3. Run the workflow to verify that it can use Conda
 
 Let's try it out.
 
@@ -378,10 +362,11 @@ You know how to manage parameter defaults and override them at runtime using a p
 Learn how to use profiles to conveniently switch between alternative configurations.
 
 ---
+
 ## 3. Determine what executor(s) should be used to do the work
 
 Until now, we have been running our pipeline with the local executor.
-This executes each task on the machine that Nextflow is running on. When Nextflow begins, it looks at the available CPUs and memory. If the resources of the tasks ready to run exceed the avialable resources, Nextflow will hold the last tasks back from execution until one or more of the earlier tasks have finished, freeing up the necessary resources. 
+This executes each task on the machine that Nextflow is running on. When Nextflow begins, it looks at the available CPUs and memory. If the resources of the tasks ready to run exceed the avialable resources, Nextflow will hold the last tasks back from execution until one or more of the earlier tasks have finished, freeing up the necessary resources.
 
 For very large workloads, you may discover that your local machine is a bottleneck, either because you have a single task that requires more resources than you have available, or because you have so many tasks that waiting for a single machine to run them would take too long. The local executor is convenient and efficient, but is limited to that single machine. Nextflow support [many different execution backends](https://www.nextflow.io/docs/latest/executor.html), including HPC schedulers (Slurm, LSF, SGE, PBS, Moab, OAR, Bridge, HTCondor and others) as well as cloud execution backends such (AWS Batch, Google Cloud Batch, Azure Batch, Kubernetes and more).
 
@@ -396,6 +381,7 @@ Each of these systems use different technologies, synaxes and configurations for
 ```
 
 If I wanted to make the workflow available to a colleague running on PBS, I'd need to remember to use a different submission program `qsub` and I'd need to change the my scripts to use a new sytax for resouces:
+
 ```bash
 #PBS -o /path/to/my/task/directory/my-task-1.log
 #PBS -j oe
@@ -405,6 +391,7 @@ If I wanted to make the workflow available to a colleague running on PBS, I'd ne
 ```
 
 If I wanted to use SGE, the configuration would be slightly different again
+
 ```bash
 #$ -o /path/to/my/task/directory/my-task-1.log
 #$ -j y
@@ -448,7 +435,6 @@ You now know how to change the executor to use different kinds of computing infr
 Learn how to control the resources allocated for executing processes.
 
 ---
-
 
 ## 4. Use profiles to select preset configurations
 

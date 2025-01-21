@@ -1,6 +1,6 @@
 # Part 5: Hello Containers
 
-In Parts 1-4 of this training course, you learned how to use the basic building blocks of Nextflow to assemble a simple workflow capable of processing some text, parallelizing execution if there were multiple inputs and collecting the results for further processing.
+In Parts 1-4 of this training course, you learned how to use the basic building blocks of Nextflow to assemble a simple workflow capable of processing some text, parallelizing execution if there were multiple inputs, and collecting the results for further processing.
 
 However, you were limited to basic UNIX tools available in your environment.
 Real-world tasks often require various tools and packages not included by default.
@@ -40,12 +40,34 @@ executor >  local (7)
 [7d/f7961c] collectGreetings     [100%] 1 of 1 ✔
 ```
 
-Our goal will be to add a step to this workflow that will use a container for execution.
-However, we are first going to go over some basic concepts and operations to solidify your understanding of what containers are before we start using them in Nextflow.
+As previously, you will find the output files in the `results` directory (specified by the `publishDir` directive).
+
+```console title="Directory contents"
+results
+├── Bonjour-output.txt
+├── COLLECTED-output.txt
+├── COLLECTED-test-batch-output.txt
+├── COLLECTED-trio-output.txt
+├── Hello-output.txt
+├── Holà-output.txt
+├── UPPER-Bonjour-output.txt
+├── UPPER-Hello-output.txt
+└── UPPER-Holà-output.txt
+```
+
+!!! note
+
+    There may also be a file named `output.txt` left over if you worked through Part 2 in the same environment.
+
+If that worked for you, you're ready to learn how to use containers.
 
 ---
 
 ## 1. Use a container 'manually'
+
+What we want to do is add a step to our workflow that will use a container for execution.
+
+However, we are first going to go over some basic concepts and operations to solidify your understanding of what containers are before we start using them in Nextflow.
 
 ### 1.1. Pull the container image
 
@@ -53,7 +75,7 @@ To use a container, you usually download or "pull" a container image from a cont
 
 The general syntax is as follows:
 
-```bash
+```bash title="Syntax"
 docker pull '<container>'
 ```
 
@@ -66,15 +88,33 @@ As an example, let's pull a container image that contains the [`cowsay` tool](ht
 There are various repositories where you can find published containers.
 We looked in the [Seqera Containers](https://seqera.io/containers/) repository and found this `cowsay` container: `'community.wave.seqera.io/library/pip_cowsay:131d6a1b707a8e65'`.
 
-The pull command becomes:
+Run the complete pull command:
 
 ```bash
 docker pull 'community.wave.seqera.io/library/pip_cowsay:131d6a1b707a8e65'
 ```
 
-Running this gives you the following console output as the system downloads the image:
+This gives you the following console output as the system downloads the image:
 
-TODO OUTPUT
+```console title="Output"
+131d6a1b707a8e65: Pulling from library/pip_cowsay
+dafa2b0c44d2: Pull complete
+dec6b097362e: Pull complete
+f88da01cff0b: Pull complete
+4f4fb700ef54: Pull complete
+92dc97a3ef36: Pull complete
+403f74b0f85e: Pull complete
+10b8c00c10a5: Pull complete
+17dc7ea432cc: Pull complete
+bb36d6c3110d: Pull complete
+0ea1a16bbe82: Pull complete
+030a47592a0a: Pull complete
+622dd7f15040: Pull complete
+895fb5d0f4df: Pull complete
+Digest: sha256:fa50498b32534d83e0a89bb21fec0c47cc03933ac95c6b6587df82aaa9d68db3
+Status: Downloaded newer image for community.wave.seqera.io/library/pip_cowsay:131d6a1b707a8e65
+community.wave.seqera.io/library/pip_cowsay:131d6a1b707a8e65
+```
 
 Once the download is complete, you have a local copy of the container image.
 
@@ -85,7 +125,7 @@ This is great for running one-off commands.
 
 The general syntax is as follows:
 
-```bash
+```bash title="Syntax"
 docker run --rm '<container>' [tool command]
 ```
 
@@ -98,20 +138,22 @@ Here we will use `cowsay -t "Hello World"`.
 Fully assembled, the container execution command looks like this:
 
 ```bash
-docker run --rm 'community.wave.seqera.io/library/pip_cowsay:131d6a1b707a8e65' cowsay -t "Hello World"
+docker run --rm 'community.wave.seqera.io/library/pip_cowsay:131d6a1b707a8e65' cowsay -t "Hello Containers"
 ```
 
 Run it to produce the following output:
 
 ```console title="Output"
- _____________
-< Hello World >
- -------------
-        \   ^__^
-         \  (oo)\_______
-            (__)\       )\/\
-                ||----w |
-                ||     ||
+  ________________
+| Hello Containers |
+  ================
+                \
+                 \
+                   ^__^
+                   (oo)\_______
+                   (__)\       )\/\
+                       ||----w |
+                       ||     ||
 ```
 
 The system spun up the container, ran the `cowsay` command with the parameters we specified, sent the output to the console and finally, shut down the container instance.
@@ -129,45 +171,51 @@ Optionally, we can specify the shell we want to use inside the container by appe
 docker run --rm -it 'community.wave.seqera.io/library/pip_cowsay:131d6a1b707a8e65' /bin/bash
 ```
 
-Notice that the prompt has changed to `(base) root@b645838b3314:/tmp#`, which indicates that you are now inside the container.
+Notice that your prompt changes to something like `(base) root@b645838b3314:/tmp#`, which indicates that you are now inside the container.
 
 You can verify this by running `ls` to list directory contents:
 
 ```bash
-ls
+ls /
 ```
-
-You can see that the filesystem inside the container is different from the filesystem on your host system:
 
 ```console title="Output"
-(base) root@b645838b3314:/tmp# ls /
 bin    dev    etc    home   lib    media  mnt    opt    proc   root   run    sbin   srv    sys    tmp    usr    var
 ```
+
+You can see that the filesystem inside the container is different from the filesystem on your host system.
+
+!!! note
+
+When you run a container, it is isolated from the host system by default.
+This means that the container can't access any files on the host system unless you explicitly allow it to do so.
+
+You will learn how to do that in a minute.
 
 #### 1.3.2. Run the desired tool command(s)
 
 Now that you are inside the container, you can run the `cowsay` command directly.
 
 ```bash
-cowsay -t "Hello World" -c tux
+cowsay -t "Hello Containers" -c tux
 ```
 
 Now the output shows the Linux penguin, Tux, instead of the default cow, because we specified the `-c` parameter.
 
 ```console title="Output"
-  ___________
-| Hello World |
-  ===========
-                \
-                 \
-                  \
-                   .--.
-                  |o_o |
-                  |:_/ |
-                 //   \ \
-                (|     | )
-               /'\_   _/`\
-               \___)=(___/
+  ________________
+| Hello Containers |
+  ================
+                     \
+                      \
+                       \
+                        .--.
+                       |o_o |
+                       |:_/ |
+                      //   \ \
+                     (|     | )
+                    /'\_   _/`\
+                    \___)=(___/
 ```
 
 Because you're inside the container, you can run the cowsay command as many times as you like, varying the input parameters, without having to bother with docker commands.
@@ -176,6 +224,11 @@ Because you're inside the container, you can run the cowsay command as many time
 
     Use the '-c' flag to pick a different character from this list:
     `beavis`, `cheese`, `cow`, `daemon`, `dragon`, `fox`, `ghostbusters`, `kitty`, `meow`, `miki`, `milk`, `octopus`, `pig`, `stegosaurus`, `stimpy`, `trex`, `turkey`, `turtle`, `tux`
+
+This is neat. What would be even neater is if we could feed our `greetings.csv` as input into this.
+But since we don't have access to the filesystem, we can't.
+
+Let's fix that.
 
 #### 1.3.3. Exit the container
 
@@ -187,19 +240,26 @@ exit
 
 Your prompt should now be back to what it was before you started the container.
 
-#### 1.3.4. Mounting data into containers
+#### 1.3.4. Mount data into the container
 
 When you run a container, it is isolated from the host system by default.
-This means that the container can't access any files on the host system unless you explicitly tell it to.
-One way to do this is to **mount** a **volume** from the host system into the container.
+This means that the container can't access any files on the host system unless you explicitly allow it to do so.
 
-To mount a volume, we add `-v <outside_path>:<inside_path>` to the `docker run command as follows:
+One way to do this is to **mount** a **volume** from the host system into the container using the following syntax:
 
-```bash
-docker run --rm -it -v data:/data 'community.wave.seqera.io/library/pip_cowsay:131d6a1b707a8e65' /bin/bash
+```bash title="Syntax"
+-v <outside_path>:<inside_path>
 ```
 
-This mounts the `data` directory (in the current working directory) as a volume that will be found under `/data` inside the container.
+In our case `<outside_path>` will be the current working directory, so we can just use a dot (`.`), and `<outside_path>` is just a name we make up; let's call it `/data`.
+
+To mount a volume, we replace the paths and add the volume mounting argument to the docker run command as follows:
+
+```bash
+docker run --rm -it -v .:/data 'community.wave.seqera.io/library/pip_cowsay:131d6a1b707a8e65' /bin/bash
+```
+
+This mounts the current working directory as a volume that will be accessible under `/data` inside the container.
 
 You can check that it works by listing the contents of `/data`:
 
@@ -207,11 +267,12 @@ You can check that it works by listing the contents of `/data`:
 ls /data
 ```
 
-You should now be able to see the contents of the `data` directory from inside the container:
-
 ```console title="Output"
-greetings.csv
+demo-params.json  hello-channels.nf  hello-workflow.nf  modules          results
+greetings.csv     hello-modules.nf   hello-world.nf     nextflow.config  work
 ```
+
+You can now see the contents of the `data` directory from inside the container, including the `greetings.csv` file.
 
 This effectively established a tunnel through the container wall that you can use to access that part of your filesystem.
 
@@ -219,7 +280,7 @@ This effectively established a tunnel through the container wall that you can us
 
 Now that we have mounted the `data` directory into the container, we can use the `cowsay` command to display the contents of the `greetings.csv` file.
 
-To do this, we'll use the syntax `-t "$(cat data/greetings.csv)"` to output the contents of the file into the `cowsay` command.
+To do this, we'll use `-t "$(cat data/greetings.csv)"` to load the contents of the CSV file into the `cowsay` command.
 
 ```bash
 cowsay -t "$(cat /data/greetings.csv)" -c pig
@@ -228,23 +289,27 @@ cowsay -t "$(cat /data/greetings.csv)" -c pig
 This produces the desired ASCII art of the pig rattling off our example greetings:
 
 ```console title="Output"
-  __________________
-| Hello,Bonjour,Holà |
-  ==================
-                  \
-                   \
-                    \
-                     \
-                               ,.
-                              (_|,.
-                              ,' /, )_______   _
-                          __j o``-'        `.'-)'
-                          (")                 \'
-                          `-j                |
-                            `-._(           /
-                               |_\  |--^.  /
-                              /_]'|_| /_)_/
-                                  /_]'  /_]'
+  _______
+ /       \
+| Hello   |
+| Bonjour |
+| Holà    |
+ \       /
+  =======
+       \
+        \
+         \
+          \
+                    ,.
+                   (_|,.
+                   ,' /, )_______   _
+               __j o``-'        `.'-)'
+               (")                 \'
+               `-j                |
+                 `-._(           /
+                    |_\  |--^.  /
+                   /_]'|_| /_)_/
+                       /_]'  /_]'
 ```
 
 Feel free to play around with this command.
@@ -258,7 +323,7 @@ You will find yourself back in your normal shell.
 
 ### Takeaway
 
-You know how to pull a container and run it either as a one-off or interactively. You also know how to make your data accessible from within your container, which lets you try any tool you're interested in without having to install any software on your system.
+You know how to pull a container and run it either as a one-off or interactively. You also know how to make your data accessible from within your container, which lets you try any tool you're interested in on real data without having to install any software on your system.
 
 ### What's next?
 
@@ -280,14 +345,14 @@ To demonstrate this, we are going to add a `cowsay` step to the pipeline we've b
 Create an empty file for the module called `cowSay.nf`.
 
 ```bash
-touch modules/cowsay.nf
+touch modules/cowSay.nf
 ```
 
 This gives us a place to put the process code.
 
 #### 2.1.2. Copy the `cowSay` process code in the module file
 
-We can model our `cowSay` process off of the processes we've written previously.
+We can model our `cowSay` process on the other processes we've written previously.
 
 ```groovy title="modules/cowSay.nf" linenums="1"
 #!/usr/bin/env nextflow
@@ -314,13 +379,17 @@ process cowSay {
 
 The output will be a new text file containing the ASCII art generated by the `cowsay` tool.
 
-### 2.2. Import the `cowSay` process into `hello-containers.nf`
+### 2.2. Add cowSay to the workflow
+
+Now we need to import the module and call the process.
+
+#### 2.2.1. Import the `cowSay` process into `hello-containers.nf`
 
 Insert the import declaration above the workflow block and fill it out appropriately.
 
 _Before:_
 
-```groovy title="hello-containers.nf" linenums="73"
+```groovy title="hello-containers.nf" linenums="9"
 // Include modules
 include { sayHello } from './modules/sayHello.nf'
 include { convertToUpper } from './modules/convertToUpper.nf'
@@ -331,7 +400,7 @@ workflow {
 
 _After:_
 
-```groovy title="hello-containers.nf" linenums="73"
+```groovy title="hello-containers.nf" linenums="9"
 // Include modules
 include { sayHello } from './modules/sayHello.nf'
 include { convertToUpper } from './modules/convertToUpper.nf'
@@ -341,7 +410,7 @@ include { cowSay } from './modules/cowSay.nf'
 workflow {
 ```
 
-### 2.3 Add a call to the `cowSay` process in the workflow
+#### 2.2.2. Add a call to the `cowSay` process in the workflow
 
 Let's connect the `cowSay()` process to the output of the `collectGreetings()` process, which as you may recall produces two outputs:
 
@@ -352,7 +421,7 @@ In the workflow block, make the following code change:
 
 _Before:_
 
-```groovy title="hello-containers.nf" linenums="82"
+```groovy title="hello-containers.nf" linenums="28"
     // collect all the greetings into one file
     collectGreetings(convertToUpper.out.collect(), params.batch)
 
@@ -362,7 +431,7 @@ _Before:_
 
 _After:_
 
-```groovy title="hello-containers.nf" linenums="82"
+```groovy title="hello-containers.nf" linenums="28"
     // collect all the greetings into one file
     collectGreetings(convertToUpper.out.collect(), params.batch)
 
@@ -375,7 +444,34 @@ _After:_
 
 Notice that we include a new CLI parameter, `params.character`, in order to specify which character we want to have say the greetings.
 
-### 2.4. Run the workflow to verify that it works
+#### 2.2.3. Set a default value for `params.character`
+
+We like to be lazy and skip typing parameters in our command lines.
+
+_Before:_
+
+```groovy title="hello-containers.nf" linenums="3"
+/*
+ * Pipeline parameters
+ */
+params.greeting = 'greetings.csv'
+params.batch = 'test-batch'
+```
+
+_After:_
+
+```groovy title="hello-containers.nf" linenums="3"
+/*
+ * Pipeline parameters
+ */
+params.greeting = 'greetings.csv'
+params.batch = 'test-batch'
+params.character = 'pig'
+```
+
+That should be all we need to make this work.
+
+#### 2.2.4. Run the workflow to verify that it works
 
 Run this with the `-resume` flag.
 
@@ -386,18 +482,37 @@ nextflow run hello-containers.nf -resume
 Oh no, there's an error!
 
 ```console title="Output"
-TODO
+ N E X T F L O W   ~  version 24.10.0
+
+Launching `hello-containers.nf` [special_lovelace] DSL2 - revision: 028a841db1
+
+executor >  local (1)
+[f6/cc0107] sayHello (1)       | 3 of 3, cached: 3 ✔
+[2c/67a06b] convertToUpper (3) | 3 of 3, cached: 3 ✔
+[1a/bc5901] collectGreetings   | 1 of 1, cached: 1 ✔
+[b2/488871] cowSay             | 0 of 1
+There were 3 greetings in this batch
+ERROR ~ Error executing process > 'cowSay'
+
+Caused by:
+  Process `cowSay` terminated with an error exit status (127)
 ```
 
-Of course, we're calling the `cowsay` tool but we haven't actually specified a container.
+This error code, `error exit status (127)` means the executable we asked for was not found.
 
-### 2.5. Specify a container for the process to use
+Of course, since we're calling the `cowsay` tool but we haven't actually specified a container yet.
 
-Edit the `cowSay.nf` module to add the `container` directive as follows:
+### 2.3. Use a container to run it
+
+We need to specify a container and tell Nextflow to use it for the `cowSay()` process.
+
+#### 2.3.1. Specify a container for the `cowSay` process to use
+
+Edit the `cowSay.nf` module to add the `container` directive to the process definition as follows:
 
 _Before:_
 
-```groovy title="modules/cowSay.nf"
+```groovy title="modules/cowSay.nf" linenums="4"
 process cowSay {
 
     publishDir 'containers/results', mode: 'copy'
@@ -405,52 +520,97 @@ process cowSay {
 
 _After:_
 
-```groovy title="modules/cowSay.nf"
+```groovy title="modules/cowSay.nf" linenums="4"
 process cowSay {
 
     publishDir 'containers/results', mode: 'copy'
+
     container 'community.wave.seqera.io/library/pip_cowsay:131d6a1b707a8e65'
 ```
 
-This tells Nextflow that if Docker is available, it should use the container image specified here to execute the process.
+This tells Nextflow that if the use of Docker is enabled, it should use the container image specified here to execute the process.
 
-### 2.6. Run the workflow again to verify that it works this time
+#### 2.3.2. Enable use of Docker via the `nextflow.config` file
 
-Run this with the `-resume` flag and with `-with-docker`, which enables Docker execution on a per-command basis.
-We will cover persistent configuration in the next section of this course.
+Here we are going to slightly anticipate the topic of the next and last part of this course (Part 6), which covers configuration.
+
+One of the main ways Nextflow offers for configuring workflow execution is to use a `nextflow.config` file. When such a file is present in the current directory, Nextflow will automatically load it in and apply any configuration it contains.
+
+We provided a `nextflow.config` file with a single line of code that disables Docker: `docker.enabled = false`.
+
+Now, let's switch that to `true` to enable Docker:
+
+_Before:_
+
+```console title="nextflow.config" linenums="1"
+docker.enabled = false
+```
+
+_After:_
+
+```console title="nextflow.config" linenums="1"
+docker.enabled = true
+```
+
+!!! note
+
+It is possible to enable Docker execution from the command-line, on a per-run basis, using the `-with-docker <container>` parameter.
+However that only allows us to specify one container for the entire workflow, whereas the approach we just showed you allows us to specify a different container per process, which is better for modularity, code maintenance and reproducibility.
+
+#### 2.3.3. Run the workflow with Docker enabled
+
+Run the workflow with the `-resume` flag:
 
 ```bash
-nextflow run hello-containers.nf -resume -with-docker
+nextflow run hello-containers.nf -resume
 ```
 
-This time it does indeed work!
+This time it does indeed work.
 
-```console title="Output"
-TODO
+```console title="Output" linenums="1"
+ N E X T F L O W   ~  version 24.10.0
+
+Launching `hello-containers.nf` [elegant_brattain] DSL2 - revision: 028a841db1
+
+executor >  local (1)
+[95/fa0bac] sayHello (3)       | 3 of 3, cached: 3 ✔
+[92/32533f] convertToUpper (3) | 3 of 3, cached: 3 ✔
+[aa/e697a2] collectGreetings   | 1 of 1, cached: 1 ✔
+[7f/caf718] cowSay             | 1 of 1 ✔
+There were 3 greetings in this batch
 ```
 
-You should find the cowsay'ed output in the `results` directory.
+You can find the cowsay'ed output in the `results` directory.
 
-TODO UPDATE FILENAME AND CONTENT
-
-```console title="results/cowsay-output-Bonjour.txt"
+```console title="results/cowsay-COLLECTED-test-batch-output.txt"
   _______
-| Bonjour |
+ /       \
+| HELLO   |
+| HOLà    |
+| BONJOUR |
+ \       /
   =======
        \
         \
-          ^__^
-          (oo)\_______
-          (__)\       )\/\
-              ||----w |
-              ||     ||
+         \
+          \
+                    ,.
+                   (_|,.
+                   ,' /, )_______   _
+               __j o``-'        `.'-)'
+               (")                 \'
+               `-j                |
+                 `-._(           /
+                    |_\  |--^.  /
+                   /_]'|_| /_)_/
+                       /_]'  /_]'
 ```
 
-You see that the character is saying all the greetings.
+You see that the character is saying all the greetings, just as it did when we ran the `cowsay` command on the `greetings.csv` file from inside the container.
 
-<!-- consider a side quest where we show how to use a conditional to skip the collect step if we want to emit the cowsay'ed greetings individually, and how to use metadata management to assign a specific character to each greeting -->
+<!-- considering a side quest where we show how to use a conditional to skip the collect step if we want to emit the cowsay'ed greetings individually, and how to use metadata management to assign a specific character to each greeting, maybe do some cross products etc -->
 
-### 2.7. Inspect how Nextflow launched the containerized task
+#### 2.3.4. Inspect how Nextflow launched the containerized task
 
 Let's take a look at the work subdirectory for one of the `cowSay` process calls to get a bit more insight on how Nextflow works with containers under the hood.
 
@@ -462,13 +622,14 @@ Open the `.command.run` file and search for `nxf_launch`; you should see somethi
 
 ```bash
 nxf_launch() {
-    docker run -i --cpu-shares 1024 -e "NXF_TASK_WORKDIR" -v /workspace/gitpod/nf-training/hello-nextflow/work:/workspace/gitpod/nf-training/hello-nextflow/work -w "$NXF_TASK_WORKDIR" --name $NXF_BOXID community.wave.seqera.io/library/pip_cowsay:131d6a1b707a8e65 /bin/bash -ue /workspace/gitpod/nf-training/hello-nextflow/work/8c/738ac55b80e7b6170aa84a68412454/.command.sh
+    docker run -i --cpu-shares 1024 -e "NXF_TASK_WORKDIR" -v /workspace/gitpod/hello-nextflow/work:/workspace/gitpod/hello-nextflow/work -w "$NXF_TASK_WORKDIR" --name $NXF_BOXID community.wave.seqera.io/library/pip_cowsay:131d6a1b707a8e65 /bin/bash -ue /workspace/gitpod/hello-nextflow/work/7f/caf7189fca6c56ba627b75749edcb3/.command.sh
 }
 ```
 
 As you can see, Nextflow is using the `docker run` command to launch the process call.
 It also mounts the corresponding work subdirectory into the container, sets the working directory inside the container accordingly, and runs our templated bash script in the `.command.sh` file.
-All the hard work we learned about in the previous sections is done for us by Nextflow!
+
+All the hard work we had to do manually in the previous section is done for us by Nextflow!
 
 ### Takeaway
 
@@ -478,3 +639,4 @@ You know how to use containers in Nextflow to run processes.
 
 Take a break!
 When you're ready, move on to Part 6 to learn how to configure the execution of your pipeline to fit your infrastructure as well as manage configuration of inputs and parameters.
+It's the very last part and then you're done!
