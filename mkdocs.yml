@@ -14,16 +14,16 @@ nav:
           - hello_nextflow/00_orientation.md
           - hello_nextflow/01_hello_world.md
           - hello_nextflow/02_hello_channels.md
-          - hello_nextflow/03_hello_plumbing.md
+          - hello_nextflow/03_hello_workflow.md
           - hello_nextflow/04_hello_modules.md
           - hello_nextflow/05_hello_containers.md
           - hello_nextflow/06_hello_config.md
-    - Run Nextflow:
-          - run_nextflow/index.md
-          - run_nextflow/01_orientation.md
-          - run_nextflow/02_run_basics.md
-          - run_nextflow/03_run_nf-core.md
-          - run_nextflow/04_run_seqera.md
+    - Nextflow Run:
+          - nextflow_run/index.md
+          - nextflow_run/01_orientation.md
+          - nextflow_run/02_run_basics.md
+          - nextflow_run/03_run_nf-core.md
+          - nextflow_run/04_run_seqera.md
     - Nextflow for Genomics:
           - nf4_genomics/index.md
           - nf4_genomics/01_orientation.md
