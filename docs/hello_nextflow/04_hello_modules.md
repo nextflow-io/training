@@ -28,24 +28,45 @@ Just to make sure everything is working, run the script once before making any c
 nextflow run hello-modules.nf
 ```
 
-This should produce the following output:
-
 ```console title="Output"
  N E X T F L O W   ~  version 24.10.0
 
-Launching `hello-modules.nf` [tender_becquerel] DSL2 - revision: f7cat8e223
+Launching `hello-modules.nf` [festering_nobel] DSL2 - revision: eeca64cdb1
 
 executor >  local (7)
-[bd/4bb541] sayHello (1)         [100%] 3 of 3 ✔
-[85/b627e8] convertToUpper (3)   [100%] 3 of 3 ✔
-[7d/f7961c] collectGreetings     [100%] 1 of 1 ✔
+[25/648bdd] sayHello (2)       | 3 of 3 ✔
+[60/bc6831] convertToUpper (1) | 3 of 3 ✔
+[1a/bc5901] collectGreetings   | 1 of 1 ✔
+There were 3 greetings in this batch
 ```
+
+As previously, you will find the output files in the `results` directory (specified by the `publishDir` directive).
+
+```console title="Directory contents"
+results
+├── Bonjour-output.txt
+├── COLLECTED-output.txt
+├── COLLECTED-test-batch-output.txt
+├── COLLECTED-trio-output.txt
+├── Hello-output.txt
+├── Holà-output.txt
+├── UPPER-Bonjour-output.txt
+├── UPPER-Hello-output.txt
+└── UPPER-Holà-output.txt
+```
+
+!!! note
+
+    There may also be a file named `output.txt` left over if you worked through Part 2 in the same environment.
+
+If that worked for you, you're ready to learn how to modularize your workflow code.
 
 ---
 
 ## 1. Create a directory to store modules
 
-It is best practice to store your modules in a specific directory. You can call that directory anything you want, but the convention is to call it `modules/`.
+It is best practice to store your modules in a specific directory.
+You can call that directory anything you want, but the convention is to call it `modules/`.
 
 ```bash
 mkdir modules
@@ -57,13 +78,14 @@ mkdir modules
 
 ---
 
-## 2. Modularize the `sayHello()` process
+## 2. Create a module for `sayHello()`
 
-Turning an existing process into a module is little more than a copy-paste operation. We're going to create a file stub for the module, copy the relevant code over then delete it from the main workflow file.
+In its simplest form, turning an existing process into a module is little more than a copy-paste operation.
+We're going to create a file stub for the module, copy the relevant code over then delete it from the main workflow file.
 
-Then all we need to do is add an import statement so that Nextflow will know to pull in the relevant code at runtime.
+Then all we'll need to do is add an import statement so that Nextflow will know to pull in the relevant code at runtime.
 
-### 2.1. Create a file stub for the new module
+### 2.1.1. Create a file stub for the new module
 
 Let's create an empty file for the module called `sayHello.nf`.
 
@@ -80,7 +102,24 @@ Copy the whole process definition over from the workflow file to the module file
 ```groovy title="modules/sayHello.nf" linenums="1"
 #!/usr/bin/env nextflow
 
-[TODO]
+/*
+ * Use echo to print 'Hello World!' to a file
+ */
+process sayHello {
+
+    publishDir 'results', mode: 'copy'
+
+    input:
+        val greeting
+
+    output:
+        path "${greeting}-output.txt"
+
+    script:
+    """
+    echo '$greeting' > '$greeting-output.txt'
+    """
+}
 ```
 
 Once that is done, delete the process definition from the workflow file, but make sure to leave the shebang in place.
@@ -89,7 +128,7 @@ Once that is done, delete the process definition from the workflow file, but mak
 
 The syntax for importing a local module is fairly straightforward:
 
-```groovy title="Import declaration syntax"
+```groovy title="Syntax: Import declaration"
 include { <MODULE_NAME> } from '<path_to_module>'
 ```
 
@@ -97,13 +136,13 @@ Let's insert that above the workflow block and fill it out appropriately.
 
 _Before:_
 
-```groovy title="hello-modules.nf" linenums="73"
+```groovy title="hello-modules.nf" linenums="50"
 workflow {
 ```
 
 _After:_
 
-```groovy title="hello-modules.nf" linenums="73"
+```groovy title="hello-modules.nf" linenums="50"
 // Include modules
 include { sayHello } from './modules/sayHello.nf'
 
@@ -118,17 +157,24 @@ We're running the workflow with essentially the same code and inputs as before, 
 nextflow run hello-modules.nf -resume
 ```
 
-Sure enough, Nextflow recognizes that it's still all the same work to be done, even if the code is split up into multiple files.
+This runs quickly very quickly because everything is cached.
 
-```console title="Output"
-[TODO]
+```console title="Output" linenums="1"
+ N E X T F L O W   ~  version 24.10.0
+
+Launching `hello-modules.nf` [romantic_poisson] DSL2 - revision: 96edfa9ad3
+
+[f6/cc0107] sayHello (1)       | 3 of 3, cached: 3 ✔
+[3c/4058ba] convertToUpper (2) | 3 of 3, cached: 3 ✔
+[1a/bc5901] collectGreetings   | 1 of 1, cached: 1 ✔
+There were 3 greetings in this batch
 ```
 
-So modularizing the code in the course of development does not break resumability!
+Nextflow recognized that it's still all the same work to be done, even if the code is split up into multiple files.
 
 ### Takeaway
 
-You know how to extract a process into a local module.
+You know how to extract a process into a local module and you know doing this doesn't break the resumability of the workflow.
 
 ### What's next?
 
@@ -148,8 +194,6 @@ Create an empty file for the module called `convertToUpper.nf`.
 touch modules/convertToUpper.nf
 ```
 
-This gives us a place to put the process code.
-
 ### 3.2. Move the `convertToUpper` process code to the module file
 
 Copy the whole process definition over from the workflow file to the module file, making sure to copy over the `#!/usr/bin/env nextflow` shebang too.
@@ -157,7 +201,24 @@ Copy the whole process definition over from the workflow file to the module file
 ```groovy title="modules/convertToUpper.nf" linenums="1"
 #!/usr/bin/env nextflow
 
-[TODO]
+/*
+ * Use a text replacement tool to convert the greeting to uppercase
+ */
+process convertToUpper {
+
+    publishDir 'results', mode: 'copy'
+
+    input:
+        path input_file
+
+    output:
+        path "UPPER-${input_file}"
+
+    script:
+    """
+    cat '$input_file' | tr '[a-z]' '[A-Z]' > 'UPPER-${input_file}'
+    """
+}
 ```
 
 Once that is done, delete the process definition from the workflow file, but make sure to leave the shebang in place.
@@ -168,7 +229,7 @@ Insert the import declaration above the workflow block and fill it out appropria
 
 _Before:_
 
-```groovy title="hello-modules.nf" linenums="73"
+```groovy title="hello-modules.nf" linenums="31"
 // Include modules
 include { sayHello } from './modules/sayHello.nf'
 
@@ -177,7 +238,7 @@ workflow {
 
 _After:_
 
-```groovy title="hello-modules.nf" linenums="73"
+```groovy title="hello-modules.nf" linenums="31"
 // Include modules
 include { sayHello } from './modules/sayHello.nf'
 include { convertToUpper } from './modules/convertToUpper.nf'
@@ -195,6 +256,19 @@ nextflow run hello-modules.nf -resume
 
 This should still produce the same output as previously.
 
+```console title="Output" linenums="1"
+ N E X T F L O W   ~  version 24.10.0
+
+Launching `hello-modules.nf` [nauseous_heisenberg] DSL2 - revision: a04a9f2da0
+
+[c9/763d42] sayHello (3)       | 3 of 3, cached: 3 ✔
+[60/bc6831] convertToUpper (3) | 3 of 3, cached: 3 ✔
+[1a/bc5901] collectGreetings   | 1 of 1, cached: 1 ✔
+There were 3 greetings in this batch
+```
+
+Two done, one more to go!
+
 ---
 
 ## 4. Modularize the `collectGreetings()` process
@@ -207,8 +281,6 @@ Create an empty file for the module called `collectGreetings.nf`.
 touch modules/collectGreetings.nf
 ```
 
-This gives us a place to put the process code.
-
 ### 4.2. Move the `collectGreetings` process code to the module file
 
 Copy the whole process definition over from the workflow file to the module file, making sure to copy over the `#!/usr/bin/env nextflow` shebang too.
@@ -216,7 +288,27 @@ Copy the whole process definition over from the workflow file to the module file
 ```groovy title="modules/collectGreetings.nf" linenums="1"
 #!/usr/bin/env nextflow
 
-[TODO]
+/*
+ * Collect uppercase greetings into a single output file
+ */
+process collectGreetings {
+
+    publishDir 'results', mode: 'copy'
+
+    input:
+        path input_files
+        val batch_name
+
+    output:
+        path "COLLECTED-${batch_name}-output.txt" , emit: outfile
+        val count_greetings , emit: count
+
+    script:
+        count_greetings = input_files.size()
+    """
+    cat ${input_files} > 'COLLECTED-${batch_name}-output.txt'
+    """
+}
 ```
 
 Once that is done, delete the process definition from the workflow file, but make sure to leave the shebang in place.
@@ -227,7 +319,7 @@ Insert the import declaration above the workflow block and fill it out appropria
 
 _Before:_
 
-```groovy title="hello-modules.nf" linenums="73"
+```groovy title="hello-modules.nf" linenums="9"
 // Include modules
 include { sayHello } from './modules/sayHello.nf'
 include { convertToUpper } from './modules/convertToUpper.nf'
@@ -237,7 +329,7 @@ workflow {
 
 _After:_
 
-```groovy title="hello-modules.nf" linenums="73"
+```groovy title="hello-modules.nf" linenums="9"
 // Include modules
 include { sayHello } from './modules/sayHello.nf'
 include { convertToUpper } from './modules/convertToUpper.nf'
@@ -256,6 +348,17 @@ nextflow run hello-modules.nf -resume
 
 This should still produce the same output as previously.
 
+```console title="Output" linenums="1"
+ N E X T F L O W   ~  version 24.10.0
+
+Launching `hello-modules.nf` [friendly_coulomb] DSL2 - revision: 7aa2b9bc0f
+
+[f6/cc0107] sayHello (1)       | 3 of 3, cached: 3 ✔
+[3c/4058ba] convertToUpper (2) | 3 of 3, cached: 3 ✔
+[1a/bc5901] collectGreetings   | 1 of 1, cached: 1 ✔
+There were 3 greetings in this batch
+```
+
 ### Takeaway
 
 You know how to modularize multiple processes in a workflow.
@@ -268,4 +371,4 @@ This is better than just copy-pasting the code, because if later you decide to i
 ### What's next?
 
 Take a short break if you feel like it.
-When you're ready, move on to Part 5 to learn how to manage inputs and parameters with more flexibility and convenience.
+When you're ready, move on to Part 5 to learn how to use containers to manage software dependencies more conveniently and reproducibly.
