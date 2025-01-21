@@ -487,9 +487,9 @@ _After:_
 ```groovy title="hello-channels.nf" linenums="29"
 // create a channel for inputs
 greeting_ch = Channel.of(params.greeting)
-                     .view{ "Before flatten: $it" }
+                     .view { "Before flatten: $it" }
                      .flatten()
-                     .view{ "After flatten: $it" }
+                     .view { "After flatten: $it" }
 ```
 
 Here `$it` is an implicit variable that represents each individual item loaded in a channel.
@@ -647,9 +647,9 @@ _After:_
 ```groovy title="hello-channels.nf" linenums="46"
 // create a channel for inputs from a CSV file
 greeting_ch = Channel.fromPath(params.greeting)
-                     .view{ "Before splitCsv: $it" }
+                     .view { "Before splitCsv: $it" }
                      .splitCsv()
-                     .view{ "After splitCsv: $it" }
+                     .view { "After splitCsv: $it" }
 ```
 
 ### 4.5. Run the workflow again
@@ -690,9 +690,9 @@ _Before:_
 ```groovy title="hello-channels.nf" linenums="29"
 // create a channel for inputs from a CSV file
 greeting_ch = Channel.fromPath(params.greeting)
-                     .view{ "Before splitCsv: $it" }
+                     .view { "Before splitCsv: $it" }
                      .splitCsv()
-                     .view{ "After splitCsv: $it" }
+                     .view { "After splitCsv: $it" }
 ```
 
 _After:_
@@ -700,11 +700,11 @@ _After:_
 ```groovy title="hello-channels.nf" linenums="29"
 // create a channel for inputs from a CSV file
 greeting_ch = Channel.fromPath(params.greeting)
-                     .view{ "Before splitCsv: $it" }
+                     .view { "Before splitCsv: $it" }
                      .splitCsv()
-                     .view{ "After splitCsv: $it" }
+                     .view { "After splitCsv: $it" }
                      .flatten()
-                     .view{ "After flatten: $it" }
+                     .view { "After flatten: $it" }
 ```
 
 ### 4.7. Run the workflow one more time

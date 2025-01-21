@@ -18,19 +18,17 @@ Let's demonstrate this with a simple command that we run directly in the termina
 echo 'Hello World!'
 ```
 
+```console title="Output"
+Hello World!
+```
+
 ### 0.2. Now make it write the text output to a file
 
 ```bash
 echo 'Hello World!' > output.txt
 ```
 
-### 0.3. Verify that the output file is there using the `ls` command
-
-```bash
-ls
-```
-
-### 0.4. Show the file contents
+### 0.3. Show the file contents
 
 ```bash
 cat output.txt
@@ -157,8 +155,9 @@ workflow {
 ```
 
 This a very minimal **workflow** definition.
-In a real-world pipeline, the workflow typically contains multiple calls to **processes** connected by **channels**.
-You'll learn how to add more processes and connect them by channels in Part 3 of this course.
+In a real-world pipeline, the workflow typically contains multiple calls to **processes** connected by **channels**, and the processes expect one or more variable **input(s)**.
+
+You'll learn how to add variable inputs later in this training module; and you'll learn how to add more processes and connect them by channels in Part 3 of this course.
 
 ### Takeaway
 

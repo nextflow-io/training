@@ -289,7 +289,11 @@ It is very useful when your processes have different resource requirements. It e
 
     We'll cover both of those approaches in an upcoming part of this training course.
 
+<<<<<<< HEAD
 ### 2.5. Add resource limits for running on HPC
+=======
+### 3.5. Add resource limits
+>>>>>>> refs/remotes/origin/gvda-streamline-hello-nextflow
 
 Depending on what computing executor and compute infrastructure you're using, there may be some constraints on what you can (or must) allocate.
 For example, your cluster may require you to stay within certain limits.
