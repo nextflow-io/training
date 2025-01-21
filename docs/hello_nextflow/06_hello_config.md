@@ -20,6 +20,7 @@ By learning to utilize these configuration options effectively, you can enhance 
 First, a quick check. There is a `nextflow.config` file in the current directory that contains the line `docker.enabled = <setting>`, where `<setting>` is either `true` or `false` depending on whether or not you've worked through Part 5 of this course in the same environment.
 
 If it is set to `true`, you don't need to do anything.
+
 If it is set to `false`, switch it to `true` now.
 
 ```console title="nextflow.config" linenums="1"
@@ -33,13 +34,16 @@ nextflow run hello-config.nf
 ```
 
 ```console title="Output"
-Nextflow 24.09.2-edge is available - Please consider updating your version to it
-
  N E X T F L O W   ~  version 24.10.0
 
- ┃ Launching `main.nf` [tender_brahmagupta] DSL2 - revision: 848ff2f9b5
+Launching `hello-config.nf` [reverent_heisenberg] DSL2 - revision: 028a841db1
 
-[TODO] [UPDATE]
+executor >  local (8)
+[7f/0da515] sayHello (1)       | 3 of 3 ✔
+[f3/42f5a5] convertToUpper (3) | 3 of 3 ✔
+[04/fe90e4] collectGreetings   | 1 of 1 ✔
+[81/4f5fa9] cowpy             | 1 of 1 ✔
+There were 3 greetings in this batch
 ```
 
 If everything works, you're ready to learn how to modify basic configuration properties to adapt to your compute environment's requirements.
@@ -54,11 +58,11 @@ Are they already installed in the local compute environment? Do we need to retri
 In the very first part of this training course (Parts 1-4) we just used locally installed software in our workflow.
 Then in Part 5, we introduced Docker containers and the `nextflow.config` file, which we used to enable the use of Docker containers.
 
-In the warmup to this section, you checked that Docker was enabled in `nextflow.config` file and ran the workflow, which used a Docker container to execute the `cowSay()` process.
+In the warmup to this section, you checked that Docker was enabled in `nextflow.config` file and ran the workflow, which used a Docker container to execute the `cowpy()` process.
 
 _If that doesn't sound familiar, you should probably go back and work through Part 5 before continuing._
 
-Now let's see what other software packaging options we can configure via the `nextflow.config` file.
+Now let's see how we can configure an alternative software packaging option via the `nextflow.config` file.
 
 ### 1.1. Disable Docker and enable Conda in the config file
 
@@ -82,38 +86,37 @@ docker.enabled = false
 conda.enabled = true
 ```
 
-This should allow Nextflow to create and utilize Conda environments for processes that have Conda packages specified. Which means we now need to add one to our `cowSay` process!
+This will allow Nextflow to create and utilize Conda environments for processes that have Conda packages specified.
+Which means we now need to add one of those to our `cowpy` process!
 
 ### 1.2. Specify a Conda package in the process definition
 
-We've already retrieved the URI for a Conda package containing the `cowsay` tool:
-
-`bioconda::cowsay==6.1`
+We've already retrieved the URI for a Conda package containing the `cowpy` tool: `bioconda::cowpy==6.1`
 
 !!! note
 
     There are a few different ways to get the URI for a given conda package.
     We recommend using the [Seqera Containers](https://seqera.io/containers/) search query, which will give you a URI that you can copy and paste, even if you're not planning to create a container from it.
 
-Now we add the URI to the `cowSay` process definition using the `conda` directive:
+Now we add the URI to the `cowpy` process definition using the `conda` directive:
 
 _Before:_
 
-```console title="hello-config.nf" linenums="22"
-process cowSay {
+```console title="modules/cowpy.nf" linenums="4"
+process cowpy {
 
-    container 'community.wave.seqera.io/library/pip_cowsay:131d6a1b707a8e65'
+    container 'community.wave.seqera.io/library/pip_cowpy:131d6a1b707a8e65'
 
     publishDir 'results', mode: 'copy'
 ```
 
 _After:_
 
-```console title="hello-config.nf" linenums="22"
-process cowSay {
+```console title="modules/cowpy.nf" linenums="4"
+process cowpy {
 
-    container 'community.wave.seqera.io/library/pip_cowsay:131d6a1b707a8e65'
-    conda 'bioconda::cowsay==6.1'
+    container 'community.wave.seqera.io/library/pip_cowpy:131d6a1b707a8e65'
+    conda 'bioconda::cowpy==6.1'
 
     publishDir 'results', mode: 'copy'
 ```
@@ -128,28 +131,27 @@ Let's try it out.
 nextflow run hello-config.nf
 ```
 
-This may take a bit longer than usual the first time, and you might see the console output stay 'stuck' at this stage for a minute or so:
+This should work without issue.
 
 ```console title="Output"
  N E X T F L O W   ~  version 24.10.0
 
- ┃ Launching `hello-config.nf` [extravagant_thompson] DSL2 - revision: 848ff2f9b5
+Launching `hello-config.nf` [trusting_lovelace] DSL2 - revision: 028a841db1
 
-TODO [UPDATE]
+executor >  local (8)
+[ee/4ca1f2] sayHello (3)       | 3 of 3 ✔
+[20/2596a7] convertToUpper (1) | 3 of 3 ✔
+[b3/e15de5] collectGreetings   | 1 of 1 ✔
+[c5/af5f88] cowpy             | 1 of 1 ✔
+There were 3 greetings in this batch
 ```
 
-That's because Nextflow has to retrieve the Conda packages and create the environment, which takes a bit of work behind the scenes.
-The good news is that you don't need to deal with any of it yourself!
+Behind the scenes, Nextflow has retrieved the Conda packages and created the environment, which normally takes a bit of work; so it's nice that we don't have to do any of that ourselves!
 
-After a few moments, it should spit out some more output, and eventually complete without error.
+!!! note
 
-```console title="Output"
- N E X T F L O W   ~  version 24.10.0
-
- ┃ Launching `hello-config.nf` [silly_goldstine] DSL2 - revision: a60f9fd6af
-
-[UPDATE]
-```
+    This runs quickly because the `cowpy` package is quite small, but if you're working with large packages, it may take a bit longer than usual the first time, and you might see the console output stay 'stuck' for a minute or so before completing.
+    This is normal and is due to the extra work Nextflow does the first time you use a new package.
 
 From our standpoint, it looks like it works exactly the same as running with Docker, even though on the backend the mechanics are a bit different.
 
@@ -180,7 +182,7 @@ Most high-performance computing platforms allow (and sometimes require) that you
 By default, Nextflow will use a single CPU and 2GB of memory for each process.
 The corresponding process directives are called `cpus` and `memory`, so the following configuration is implied:
 
-```groovy title="Built-in configuration"
+```groovy title="Built-in configuration" linenums="1"
 process {
     cpus = 1
     memory = 2.GB
@@ -218,7 +220,7 @@ The profiling shows that the processes in our training workflow are very lightwe
 
 Add the following to your `nextflow.config` file:
 
-```groovy title="nextflow.config" linenums="20"
+```groovy title="nextflow.config" linenums="4"
 process {
     memory = 1.GB
 }
@@ -226,11 +228,11 @@ process {
 
 ### 2.3. Set resource allocations for an individual process
 
-At the same time, we're going to pretend that the `cowSay` process requires more resources than the others, just so we can demonstrate how to adjust allocations for an individual process.
+At the same time, we're going to pretend that the `cowpy` process requires more resources than the others, just so we can demonstrate how to adjust allocations for an individual process.
 
 _Before:_
 
-```groovy title="nextflow.config" linenums="1"
+```groovy title="nextflow.config" linenums="14"
 process {
     memory = 1.GB
 }
@@ -238,17 +240,17 @@ process {
 
 _After:_
 
-```groovy title="nextflow.config" linenums="1"
+```groovy title="nextflow.config" linenums="4"
 process {
     memory = 1.GB
-    withName: 'cowSay' {
+    withName: 'cowpy' {
         memory = 2.GB
         cpus = 2
     }
 }
 ```
 
-With this configuration, all processes will request 1GB of memory and a single CPU (the implied default), except the `cowSay` process, which will request 2GB and 2 CPUs.
+With this configuration, all processes will request 1GB of memory and a single CPU (the implied default), except the `cowpy` process, which will request 2GB and 2 CPUs.
 
 !!! note
 
@@ -328,9 +330,9 @@ We provide an example parameter file in the current directory, called `test-para
 
 ```json title="test-params.json" linenums="1"
 {
-    "greet": "Dobrý den",
+    "greeting": "greetings.csv",
     "batch": "Trio",
-    "character": "pig"
+    "character": "turkey"
 }
 ```
 
