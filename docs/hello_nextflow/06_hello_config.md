@@ -70,7 +70,9 @@ nextflow run hello-config.nf
 
 This should produce the following output:
 
+```console title="Output"
 TODO add updated output
+```
 
 This shows how you can get Nextflow to use Docker for any processes that specify a container with stating so everytime on the command line.
 
@@ -289,11 +291,7 @@ It is very useful when your processes have different resource requirements. It e
 
     We'll cover both of those approaches in an upcoming part of this training course.
 
-<<<<<<< HEAD
-### 2.5. Add resource limits for running on HPC
-=======
-### 3.5. Add resource limits
->>>>>>> refs/remotes/origin/gvda-streamline-hello-nextflow
+### 2.5. Add resource limits
 
 Depending on what computing executor and compute infrastructure you're using, there may be some constraints on what you can (or must) allocate.
 For example, your cluster may require you to stay within certain limits.
@@ -324,6 +322,56 @@ However, if you were to try running the workflow with resource allocations that 
 ### Takeaway
 
 You know how to generate a profiling report to assess resource utilization and how to modify resource allocations for all processes and/or for individual processes, as well as set resource limitations for running on HPC.
+
+### What's next?
+
+Learn to use a parameter file to store workflow parameters.
+
+---
+
+## 3. Use a parameter file to store workflow parameters
+
+So far we've been looking at configuration from the technical point of view of the compute infrastructure.
+Now let's consider another aspect of workflow configuration that is very important for reproducibility: the configuration of the workflow parameters.
+
+Currently, our workflow is set up to accept several parameter values via the command-line, with default values set in the workflow script itself.
+This is fine for a simple workflow with very few parameters that need to be set for a given run.
+However, many real-world workflows will have many more parameters that may be run-specific, and putting all of them in the commend line would be tedious and error-prone.
+
+Nextflow allows us to specify parameters via a parameter file in JSON format, which makes it very convenient to manage and distribute alternative sets of default values, for example, as well as run-specific parameter values.
+
+We provide an example parameter file in the current directory, called `test-params.json`:
+
+```json title="test-params.json" linenums="1"
+{
+    "greet": "Dobrý den",
+    "batch": "Trio",
+    "character": "pig"
+}
+```
+
+This parameter file contains a key-value pair for each of the inputs our workflow expects.
+
+### 3.1. Run the workflow using a parameter file
+
+To run the workflow with this parameter file, simply add `-params-file <filename>` to the base command.
+
+```bash
+nextflow run hello-config.nf -params-file test-params.json
+```
+
+It works! And as expected, this produces the same outputs as previously.
+
+```console title="Output"
+TODO: UPDATE OUTPUT
+```
+
+This may seem like overkill when you only have a few parameter to specify, but some pipelines expect dozens of parameters.
+In those cases, using a parameter file will allow us to provide parameter values at runtime without having to type massive command lines and without modifying the workflow script.
+
+### Takeaway
+
+You know how to manage parameter defaults and override them at runtime using a parameter file.
 
 ### What's next?
 
@@ -459,22 +507,23 @@ As you can see, this allows us to toggle between configurations very convenientl
 If in the future we find other elements of configuration that are always co-occurring with these, we can simply add them to the corresponding profile(s).
 We can also create additional profiles if there are other elements of configuration that we want to group together.
 
-### 4.3. Create a demo profile
+### 4.3. Create a test profile
 
 Profiles are not only for infrastructure configuration.
 We can also use them to set default values for workflow parameters, to make it easier for others to try out the workflow without having to gather appropriate input values themselves.
+This is intended as an alternative to using a parameter file.
 
-The syntax for expressing default values is the same as when writing them into the workflow file itself, except we wrap them in a `demo` block:
+The syntax for expressing default values is the same as when writing them into the workflow file itself, except we wrap them in a block named `test`:
 
 ```groovy title="Syntax example"
-    demo {
+    test {
         params.<parameter1>
         params.<parameter2>
         ...
     }
 ```
 
-If we add a demo profile for our workflow, the `profiles` block becomes:
+If we add a test profile for our workflow, the `profiles` block becomes:
 
 ```groovy title="nextflow.config" linenums="3"
 profiles {
@@ -491,22 +540,16 @@ profiles {
             time: 30.d
         ]
     }
-    demo { TODO UPDATE THIS
+    test { TODO UPDATE THIS
         params.greetings    = "greetings.csv"
         params.thing        = "thing.txt"
     }
 }
 ```
 
-Now that we have these defaults set up in the configuration file, we can actually delete them from the workflow script itself.
+Just like for technical configuration profiles, you can set up multiple different profiles specifying parameters under any arbitrary name you like.
 
-Delete these lines from `hello-config.nf`:
-
-TODO: UPDATE
-
-This way the workflow script no longer has any code that might need to be modified depending on circumstances.
-
-### 4.5. Run the workflow locally with the demo profile
+### 4.4. Run the workflow locally with the test profile
 
 Conveniently, profiles are not mutually exclusive, so we can specify multiple profiles in our command line using the following syntax `-profile <profile1>,<profile2>` (for any number of profiles).
 
@@ -515,10 +558,10 @@ Conveniently, profiles are not mutually exclusive, so we can specify multiple pr
     If you combine profiles that set values for the same elements of configuration and are described in the same configuration file, Nextflow will resolve the conflict by using whichever value it read in last (_i.e._ whatever comes later in the file).
     If the conflicting settings are set in different configuration sources, the default [order of precedence](https://www.nextflow.io/docs/latest/config.html) applies.
 
-Let's try adding the demo profile to our previous command:
+Let's try adding the test profile to our previous command:
 
 ```bash
-nextflow run hello-config.nf -profile my_laptop,demo
+nextflow run hello-config.nf -profile my_laptop,test
 ```
 
 This should produce the following:
@@ -536,51 +579,9 @@ This means that as long as we distribute any test data files with the workflow c
 
 ### Takeaway
 
-You know how to use profiles to select a preset configuration at runtime with minimal hassle.
+You know how to use profiles to select a preset configuration at runtime with minimal hassle. More generally, you know how to configure your workflow executions to suit different compute platforms and enhance the reproducibility of your analyses.
 
 ### What's next?
 
-Learn to use a parameter file to store workflow parameters.
-
----
-
-## 5. Use a parameter file to store workflow parameters
-
-Another convenient way to provide parameter values without having to modify the source code or putting a lot in the command line (which is error prone) is to use a parameter file.
-
-We provide an example parameter file in the current directory, called `demo-params.json`:
-
-```json title="demo-params.json" linenums="1"
-{
-    "greet": "Dobrý den",
-    "batch": "Trio",
-    "character": "pig"
-}
-```
-
-The parameter file contains a key-value pair for each of the inputs our workflow expects.
-
-### 5.1. Run the workflow using a parameter file
-
-To run the workflow with this parameter file, simply add `-params-file demo-params.json` to the base command.
-
-```bash
-nextflow run hello-config.nf -params-file demo-params.json
-```
-
-It works! And as expected, this produces the same outputs as previously.
-
-```console title="Output"
-TODO: UPDATE OUTPUT
-```
-
-This may seem like overkill when you only have a single parameter to specify, but some pipelines expect dozens of parameters.
-In those cases, using a parameter file will allow us to provide parameter values at runtime without having to type massive command lines and without modifying the workflow.
-
-### Takeaway
-
-You know how to manage parameter defaults, override them at runtime using a parameter file, and set up profiles.
-
-### What's next?
-
-Celebrate and give yourself a big pat on the back! You have completed your very first NExtflow developer course.
+Celebrate and give yourself a big pat on the back! You have completed your very first Nextflow developer course.
+Then check out the training portal homepage for more training content that may be of interest.
