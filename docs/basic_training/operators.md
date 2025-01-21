@@ -170,7 +170,7 @@ z
 
 !!! warning
 
-    The items in the resulting channel have the same order as in the respective original channels. However, there is no guarantee that the element of the second channel are appended after the elements of the first. Indeed, in the example above, the element `a` has been printed before `3`.
+    The items in the resulting channel have the same order as in the respective original channels. However, there is no guarantee that the elements of the second channel are appended after the elements of the first. Indeed, in the example above, the element `a` has been printed before `3`.
 
 ### `flatten()`
 
@@ -390,7 +390,7 @@ The `splitCsv` operator allows you to parse text items emitted by a channel, tha
 
 It then splits them into records or groups them as a list of records with a specified length.
 
-In the simplest case, just apply the `splitCsv` operator to a channel emitting a CSV formatted text files or text entries. For example, to view only the first and fourth columns:
+In the simplest case, just apply the `splitCsv` operator to a channel emitting a CSV formatted text file or text entries. For example, to view only the first and fourth columns:
 
 ```groovy linenums="1" title="snippet.nf"
 Channel
