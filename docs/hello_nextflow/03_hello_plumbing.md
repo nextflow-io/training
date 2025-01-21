@@ -424,8 +424,8 @@ _After:_
     collectGreetings(convertToUpper.out.collect())
 
     // optional view statements
-    convertToUpper.out.view{ "Before collect: $it" }
-    convertToUpper.out.collect().view{ "After collect: $it" }
+    convertToUpper.out.view { "Before collect: $it" }
+    convertToUpper.out.collect().view { "After collect: $it" }
 }
 ```
 
@@ -721,7 +721,7 @@ _After:_
     collectGreetings(convertToUpper.out.collect(), params.batch)
 
     // emit a message about the size of the batch
-    collectGreetings.out.count.view{ "There were $it greetings in this batch" }
+    collectGreetings.out.count.view { "There were $it greetings in this batch" }
 ```
 
 Here we are using `$it` in the same way we did earlier, as an implicit variable to access the contents of the channel.
