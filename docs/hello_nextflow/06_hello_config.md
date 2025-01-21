@@ -42,7 +42,7 @@ executor >  local (8)
 [7f/0da515] sayHello (1)       | 3 of 3 ✔
 [f3/42f5a5] convertToUpper (3) | 3 of 3 ✔
 [04/fe90e4] collectGreetings   | 1 of 1 ✔
-[81/4f5fa9] cowpy             | 1 of 1 ✔
+[81/4f5fa9] cowpy              | 1 of 1 ✔
 There were 3 greetings in this batch
 ```
 
@@ -60,7 +60,9 @@ Then in Part 5, we introduced Docker containers and the `nextflow.config` file, 
 
 In the warmup to this section, you checked that Docker was enabled in `nextflow.config` file and ran the workflow, which used a Docker container to execute the `cowpy()` process.
 
-_If that doesn't sound familiar, you should probably go back and work through Part 5 before continuing._
+!!! note
+
+    If that doesn't sound familiar, you should probably go back and work through Part 5 before continuing.
 
 Now let's see how we can configure an alternative software packaging option via the `nextflow.config` file.
 
@@ -91,7 +93,7 @@ Which means we now need to add one of those to our `cowpy` process!
 
 ### 1.2. Specify a Conda package in the process definition
 
-We've already retrieved the URI for a Conda package containing the `cowpy` tool: `bioconda::cowpy==6.1`
+We've already retrieved the URI for a Conda package containing the `cowpy` tool: `conda-forge::cowpy==1.1.5`
 
 !!! note
 
@@ -105,7 +107,7 @@ _Before:_
 ```console title="modules/cowpy.nf" linenums="4"
 process cowpy {
 
-    container 'community.wave.seqera.io/library/pip_cowpy:131d6a1b707a8e65'
+    container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
 
     publishDir 'results', mode: 'copy'
 ```
@@ -115,8 +117,8 @@ _After:_
 ```console title="modules/cowpy.nf" linenums="4"
 process cowpy {
 
-    container 'community.wave.seqera.io/library/pip_cowpy:131d6a1b707a8e65'
-    conda 'bioconda::cowpy==6.1'
+    container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
+    conda 'conda-forge::cowpy==1.1.5'
 
     publishDir 'results', mode: 'copy'
 ```
@@ -142,7 +144,7 @@ executor >  local (8)
 [ee/4ca1f2] sayHello (3)       | 3 of 3 ✔
 [20/2596a7] convertToUpper (1) | 3 of 3 ✔
 [b3/e15de5] collectGreetings   | 1 of 1 ✔
-[c5/af5f88] cowpy             | 1 of 1 ✔
+[c5/af5f88] cowpy              | 1 of 1 ✔
 There were 3 greetings in this batch
 ```
 
@@ -349,10 +351,19 @@ nextflow run hello-config.nf -params-file test-params.json
 It works! And as expected, this produces the same outputs as previously.
 
 ```console title="Output"
-TODO: UPDATE OUTPUT
+ N E X T F L O W   ~  version 24.10.0
+
+Launching `hello-config.nf` [disturbed_sammet] DSL2 - revision: ede9037d02
+
+executor >  local (8)
+[f0/35723c] sayHello (2)       | 3 of 3 ✔
+[40/3efd1a] convertToUpper (3) | 3 of 3 ✔
+[17/e97d32] collectGreetings   | 1 of 1 ✔
+[98/c6b57b] cowpy              | 1 of 1 ✔
+There were 3 greetings in this batch
 ```
 
-This may seem like overkill when you only have a few parameter to specify, but some pipelines expect dozens of parameters.
+This may seem like overkill when you only have a few parameters to specify, but some pipelines expect dozens of parameters.
 In those cases, using a parameter file will allow us to provide parameter values at runtime without having to type massive command lines and without modifying the workflow script.
 
 ### Takeaway
@@ -368,11 +379,15 @@ Learn how to use profiles to conveniently switch between alternative configurati
 ## 3. Determine what executor(s) should be used to do the work
 
 Until now, we have been running our pipeline with the local executor.
-This executes each task on the machine that Nextflow is running on. When Nextflow begins, it looks at the available CPUs and memory. If the resources of the tasks ready to run exceed the avialable resources, Nextflow will hold the last tasks back from execution until one or more of the earlier tasks have finished, freeing up the necessary resources.
+This executes each task on the machine that Nextflow is running on.
+When Nextflow begins, it looks at the available CPUs and memory.
+If the resources of the tasks ready to run exceed the available resources, Nextflow will hold the last tasks back from execution until one or more of the earlier tasks have finished, freeing up the necessary resources.
 
-For very large workloads, you may discover that your local machine is a bottleneck, either because you have a single task that requires more resources than you have available, or because you have so many tasks that waiting for a single machine to run them would take too long. The local executor is convenient and efficient, but is limited to that single machine. Nextflow support [many different execution backends](https://www.nextflow.io/docs/latest/executor.html), including HPC schedulers (Slurm, LSF, SGE, PBS, Moab, OAR, Bridge, HTCondor and others) as well as cloud execution backends such (AWS Batch, Google Cloud Batch, Azure Batch, Kubernetes and more).
+For very large workloads, you may discover that your local machine is a bottleneck, either because you have a single task that requires more resources than you have available, or because you have so many tasks that waiting for a single machine to run them would take too long.
+The local executor is convenient and efficient, but is limited to that single machine.
+Nextflow supports [many different execution backends](https://www.nextflow.io/docs/latest/executor.html), including HPC schedulers (Slurm, LSF, SGE, PBS, Moab, OAR, Bridge, HTCondor and others) as well as cloud execution backends such (AWS Batch, Google Cloud Batch, Azure Batch, Kubernetes and more).
 
-Each of these systems use different technologies, synaxes and configurations for defining how a jobs should be defined. For example, /if we didn't have Nextflow/, a job requring 8 CPUs and 4GB of ram to be executed on the queue "my-science-work" would need to include the following configuration on SLURM and submit the job using `sbatch`:
+Each of these systems uses different technologies, syntaxes and configurations for defining how a job should be defined. For example, /if we didn't have Nextflow/, a job requiring 8 CPUs and 4GB of RAM to be executed on the queue "my-science-work" would need to include the following configuration on SLURM and submit the job using `sbatch`:
 
 ```bash
 #SBATCH -o /path/to/my/task/directory/my-task-1.log
@@ -382,7 +397,7 @@ Each of these systems use different technologies, synaxes and configurations for
 #SBATCH -p my-science-work
 ```
 
-If I wanted to make the workflow available to a colleague running on PBS, I'd need to remember to use a different submission program `qsub` and I'd need to change the my scripts to use a new sytax for resouces:
+If I wanted to make the workflow available to a colleague running on PBS, I'd need to remember to use a different submission program `qsub` and I'd need to change my scripts to use a new syntax for resources:
 
 ```bash
 #PBS -o /path/to/my/task/directory/my-task-1.log
@@ -392,7 +407,7 @@ If I wanted to make the workflow available to a colleague running on PBS, I'd ne
 #PBS -l mem=4gb
 ```
 
-If I wanted to use SGE, the configuration would be slightly different again
+If I wanted to use SGE, the configuration would be slightly different again:
 
 ```bash
 #$ -o /path/to/my/task/directory/my-task-1.log
@@ -406,7 +421,9 @@ If I wanted to use SGE, the configuration would be slightly different again
 
 Running on a single cloud execution engine would require a new approach again, likely using an SDK that uses the cloud platform's APIs.
 
-Nextflow makes it easy to write a single workflow that can be run on each of these different infrastructures and systems, without having to modify the workflow. The executor is subject to a process directive called `executor`. By default it is set to `local`, so the following configuration is implied:
+Nextflow makes it easy to write a single workflow that can be run on each of these different infrastructures and systems, without having to modify the workflow.
+The executor is subject to a process directive called `executor`.
+By default it is set to `local`, so the following configuration is implied:
 
 ```groovy title="Built-in configuration"
 process {
@@ -414,11 +431,11 @@ process {
 }
 ```
 
-### 3.1. Targetting a different backend
+### 3.1. Targeting a different backend
 
 By default, this training environment does not include a running HPC schedulder, but if you were running on a system with SLURM installed, for example, you can have Nextflow convert the `cpus`, `memory`, `queue` and other process directives into the correct syntax at runtime by adding following lines to the `nextflow.config` file:
 
-```groovy title="nextflow.config" linenums="12"
+```groovy title="nextflow.config"
 process {
     executor = 'slurm'
 }
@@ -480,10 +497,19 @@ Let's try running the workflow with the `my_laptop` configuration.
 nextflow run hello-config.nf -profile my_laptop
 ```
 
-This should produce the following output:
+This still produces the following output:
 
 ```
-TODO UPDATE
+ N E X T F L O W   ~  version 24.10.0
+
+Launching `hello-config.nf` [gigantic_brazil] DSL2 - revision: ede9037d02
+
+executor >  local (8)
+[58/da9437] sayHello (3)       | 3 of 3 ✔
+[35/9cbe77] convertToUpper (2) | 3 of 3 ✔
+[67/857d05] collectGreetings   | 1 of 1 ✔
+[37/7b51b5] cowpy              | 1 of 1 ✔
+There were 3 greetings in this batch
 ```
 
 As you can see, this allows us to toggle between configurations very conveniently at runtime.
@@ -513,7 +539,7 @@ The syntax for expressing default values is the same as when writing them into t
 
 If we add a test profile for our workflow, the `profiles` block becomes:
 
-```groovy title="nextflow.config" linenums="3"
+```groovy title="nextflow.config" linenums="4"
 profiles {
     my_laptop {
         process.executor = 'local'
@@ -528,9 +554,10 @@ profiles {
             time: 30.d
         ]
     }
-    test { TODO UPDATE THIS
-        params.greetings    = "greetings.csv"
-        params.thing        = "thing.txt"
+    test {
+        params.greeting = 'greetings.csv'
+        params.batch = 'test-batch'
+        params.character = 'turkey'
     }
 }
 ```
@@ -555,8 +582,19 @@ nextflow run hello-config.nf -profile my_laptop,test
 This should produce the following:
 
 ```console title="Output"
-TODO: UPDATE
+ N E X T F L O W   ~  version 24.10.0
+
+Launching `hello-config.nf` [gigantic_brazil] DSL2 - revision: ede9037d02
+
+executor >  local (8)
+[58/da9437] sayHello (3)       | 3 of 3 ✔
+[35/9cbe77] convertToUpper (2) | 3 of 3 ✔
+[67/857d05] collectGreetings   | 1 of 1 ✔
+[37/7b51b5] cowpy              | 1 of 1 ✔
+There were 3 greetings in this batch
 ```
+
+<!-- improve by showing and varying the outputs for all these maybe -->
 
 This means that as long as we distribute any test data files with the workflow code, anyone can quickly try out the workflow without having to supply their own inputs via the command line or a parameter file.
 

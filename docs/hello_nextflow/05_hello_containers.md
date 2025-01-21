@@ -531,7 +531,7 @@ process cowpy {
 
     publishDir 'containers/results', mode: 'copy'
 
-    container 'community.wave.seqera.io/library/pip_cowpy:131d6a1b707a8e65'
+    container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
 ```
 
 This tells Nextflow that if the use of Docker is enabled, it should use the container image specified here to execute the process.
