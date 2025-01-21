@@ -189,104 +189,7 @@ Learn how to change the executor used by Nextflow to actually do the work.
 
 ---
 
-## 2. Determine what executor(s) should be used to do the work
-
-Until now, we have been running our pipeline with the local executor.
-This runs each step on the same machine that Nextflow is running on.
-However, for large workloads, you will typically want to use a distributed executor such as an HPC or cloud.
-Nextflow supports several different distributed executors, including:
-
--   HPC (SLURM, PBS, SGE)
--   AWS Batch
--   Google Batch
--   Azure Batch
--   Kubernetes
--   GA4GH TES
-
-The executor is subject to a process directive called `executor`. By default it is set to `local`, so the following configuration is implied:
-
-```groovy title="Built-in configuration"
-process {
-    executor = 'local'
-}
-```
-
-Let's look at what it would take to using a Slurm scheduler, assuming we had a connection to a cluster and Slurm was installed appropriately.
-
-!!! warning
-
-    What follows is for demonstration purposes but **will not execute the work** since we don't have access to an external executor.
-
-### 2.1. Set up a Slurm executor
-
-Add the following lines to the `nextflow.config` file:
-
-```groovy title="nextflow.config" linenums="12"
-process {
-    executor = 'slurm'
-}
-```
-
-And... that's it! As noted before, this does assume that Slurm itself is already set up for you, but this is really all Nextflow itself needs to know.
-
-Basically we are telling Nextflow to generate a Slurm submission script and submit it using an `sbatch` command.
-
-### 2.2. Launch the workflow to generate the job submission script
-
-TODO: THIS WAS CONFUSING — EXPLAIN BETTER OR CUT
-
-Let's try running this; even though we know it won't execute in the training environment, we'll be able to see what the submission script looks like.
-
-```bash
-nextflow run main.nf -profile conda_on
-```
-
-As expected, this fails with a fairly unambiguous error:
-
-```console title="Output"
-nextflow
- N E X T F L O W   ~  version 24.10.0
-
- ┃ Launching `hello-config.nf` [grave_gauss] DSL2 - revision: 66cd7c255a
-
-[UPDATE]
-Caused by:
-  java.io.IOException: Cannot run program "sbatch" (in directory "/workspace/gitpod/hello-nextflow/hello-config/work/eb/2962ce167b3025a41ece6ce6d7efc2"): error=2, No such file or directory
-
-Command executed:
-
-  sbatch .command.run
-```
-
-However, it did produce what we are looking for: the `.command.run` file that Nextflow tried to submit to Slurm via the `sbatch` command.
-
-Let's take a look inside. <!-- **TODO: UPDATE NEXTFLOW VERSION SO WE CAN HAVE THIS SWEET OUTPUT** -->
-
-```bash title=".command.run" linenums="1"
-#!/bin/bash
-TODO: UPDATE
-```
-
-This shows the job submission details that Nextflow is trying to hand over to Slurm.
-
-You can try using any of the other supported executors in the same way. Nextflow will translate the values submitted to the executor into the appropriate equivalent instructions.
-
-!!! warning
-
-    Before continuing the training, either delete the line `executor = 'slurm'` or change it to `executor = 'local'` in your configuration file.
-    You will not be able to run subsequent commands otherwise.
-
-### Takeaway
-
-You now know how to change the executor to use different kinds of computing infrastructure.
-
-### What's next?
-
-Learn how to control the resources allocated for executing processes.
-
----
-
-## 3. Allocate compute resources with process directives
+## 2. Allocate compute resources with process directives
 
 Most high-performance computing platforms allow (and sometimes require) that you specify certain resource allocation parameters such as number of CPUs and memory.
 
@@ -305,7 +208,7 @@ Nextflow will translate them into the appropriate instructions for the chosen ex
 
 But how do you know what values to use?
 
-### 3.1. Run the workflow to generate a resource utilization report
+### 2.1. Run the workflow to generate a resource utilization report
 
 If you don't know up front how much CPU and memory your processes are likely to need, you can do some resource profiling, meaning you run the workflow with some default allocations, record how much each process used, and from there, estimate how to adjust the base allocations.
 
@@ -325,7 +228,7 @@ There is some [documentation](https://www.nextflow.io/docs/latest/reports.html) 
 
 <!-- TODO: insert images -->
 
-### 3.2. Set resource allocations for all processes
+### 2.2. Set resource allocations for all processes
 
 The profiling shows that the processes in our training workflow are very lightweight, so let's reduce the default memory allocation to 1GB per process.
 
@@ -337,7 +240,7 @@ process {
 }
 ```
 
-### 3.3. Set resource allocations for an individual process
+### 2.3. Set resource allocations for an individual process
 
 At the same time, we're going to pretend that the `cowSay` process requires more resources than the others, just so we can demonstrate how to adjust allocations for an individual process.
 
@@ -368,7 +271,7 @@ With this configuration, all processes will request 1GB of memory and a single C
     If you have a machine with few CPUs and you allocate a high number per process, you might see process calls getting queued behind each other.
     This is because Nextflow ensures we don't request more CPUs than are available.
 
-### 3.4. Run the workflow with the modified configuration
+### 2.4. Run the workflow with the modified configuration
 
 Let's try that out, supplying a different filename for the profiling report so we can compare performance before and after the configuration changes.
 
@@ -388,7 +291,7 @@ It is very useful when your processes have different resource requirements. It e
 
     We'll cover both of those approaches in an upcoming part of this training course.
 
-### 3.5. Add resource limits
+### 2.5. Add resource limits
 
 Depending on what computing executor and compute infrastructure you're using, there may be some constraints on what you can (or must) allocate.
 For example, your cluster may require you to stay within certain limits.
@@ -426,7 +329,7 @@ Learn to use a parameter file to store workflow parameters.
 
 ---
 
-## 4. Use a parameter file to store workflow parameters
+## 3. Use a parameter file to store workflow parameters
 
 So far we've been looking at configuration from the technical point of view of the compute infrastructure.
 Now let's consider another aspect of workflow configuration that is very important for reproducibility: the configuration of the workflow parameters.
@@ -449,7 +352,7 @@ We provide an example parameter file in the current directory, called `test-para
 
 This parameter file contains a key-value pair for each of the inputs our workflow expects.
 
-### 4.1. Run the workflow using a parameter file
+### 3.1. Run the workflow using a parameter file
 
 To run the workflow with this parameter file, simply add `-params-file <filename>` to the base command.
 
@@ -475,14 +378,85 @@ You know how to manage parameter defaults and override them at runtime using a p
 Learn how to use profiles to conveniently switch between alternative configurations.
 
 ---
+## 3. Determine what executor(s) should be used to do the work
 
-## 5. Use profiles to select preset configurations
+Until now, we have been running our pipeline with the local executor.
+This executes each task on the machine that Nextflow is running on. When Nextflow begins, it looks at the available CPUs and memory. If the resources of the tasks ready to run exceed the avialable resources, Nextflow will hold the last tasks back from execution until one or more of the earlier tasks have finished, freeing up the necessary resources. 
+
+For very large workloads, you may discover that your local machine is a bottleneck, either because you have a single task that requires more resources than you have available, or because you have so many tasks that waiting for a single machine to run them would take too long. The local executor is convenient and efficient, but is limited to that single machine. Nextflow support [many different execution backends](https://www.nextflow.io/docs/latest/executor.html), including HPC schedulers (Slurm, LSF, SGE, PBS, Moab, OAR, Bridge, HTCondor and others) as well as cloud execution backends such (AWS Batch, Google Cloud Batch, Azure Batch, Kubernetes and more).
+
+Each of these systems use different technologies, synaxes and configurations for defining how a jobs should be defined. For example, /if we didn't have Nextflow/, a job requring 8 CPUs and 4GB of ram to be executed on the queue "my-science-work" would need to include the following configuration on SLURM and submit the job using `sbatch`:
+
+```bash
+#SBATCH -o /path/to/my/task/directory/my-task-1.log
+#SBATCH --no-requeue
+#SBATCH -c 8
+#SBATCH --mem 4096M
+#SBATCH -p my-science-work
+```
+
+If I wanted to make the workflow available to a colleague running on PBS, I'd need to remember to use a different submission program `qsub` and I'd need to change the my scripts to use a new sytax for resouces:
+```bash
+#PBS -o /path/to/my/task/directory/my-task-1.log
+#PBS -j oe
+#PBS -q my-science-work
+#PBS -l nodes=1:ppn=5
+#PBS -l mem=4gb
+```
+
+If I wanted to use SGE, the configuration would be slightly different again
+```bash
+#$ -o /path/to/my/task/directory/my-task-1.log
+#$ -j y
+#$ -terse
+#$ -notify
+#$ -q my-science-work
+#$ -l slots=5
+#$ -l h_rss=4096M,mem_free=4096M
+```
+
+Running on a single cloud execution engine would require a new approach again, likely using an SDK that uses the cloud platform's APIs.
+
+Nextflow makes it easy to write a single workflow that can be run on each of these different infrastructures and systems, without having to modify the workflow. The executor is subject to a process directive called `executor`. By default it is set to `local`, so the following configuration is implied:
+
+```groovy title="Built-in configuration"
+process {
+    executor = 'local'
+}
+```
+
+### 3.1. Targetting a different backend
+
+By default, this training environment does not include a running HPC schedulder, but if you were running on a system with SLURM installed, for example, you can have Nextflow convert the `cpus`, `memory`, `queue` and other process directives into the correct syntax at runtime by adding following lines to the `nextflow.config` file:
+
+```groovy title="nextflow.config" linenums="12"
+process {
+    executor = 'slurm'
+}
+```
+
+And... that's it! As noted before, this does assume that Slurm itself is already set up for you, but this is really all Nextflow itself needs to know.
+
+Basically we are telling Nextflow to generate a Slurm submission script and submit it using an `sbatch` command.
+
+### Takeaway
+
+You now know how to change the executor to use different kinds of computing infrastructure.
+
+### What's next?
+
+Learn how to control the resources allocated for executing processes.
+
+---
+
+
+## 4. Use profiles to select preset configurations
 
 You may want to switch between alternative settings depending on what computing infrastructure you're using. For example, you might want to develop and run small-scale tests locally on your laptop, then run full-scale workloads on HPC or cloud.
 
 Nextflow lets you set up profiles that describe different configurations, which you can then select at runtime using a command-line argument, rather than having to modify the configuration file itself.
 
-### 5.1. Create profiles for switching between local development and execution on HPC
+### 4.1. Create profiles for switching between local development and execution on HPC
 
 Let's set up two alternative profiles; one for running small scale loads on a regular computer, where we'll use Docker containers, and one for running on a university HPC with a Slurm scheduler, where we'll use Conda packages.
 
@@ -508,7 +482,7 @@ profiles {
 
 You see that for the university HPC, we're also specifying resource limitations.
 
-### 5.2. Run the workflow with a profile
+### 4.2. Run the workflow with a profile
 
 To specify a profile in our Nextflow command line, we use the `-profile` argument.
 
@@ -533,7 +507,7 @@ As you can see, this allows us to toggle between configurations very convenientl
 If in the future we find other elements of configuration that are always co-occurring with these, we can simply add them to the corresponding profile(s).
 We can also create additional profiles if there are other elements of configuration that we want to group together.
 
-### 5.3. Create a test profile
+### 4.3. Create a test profile
 
 Profiles are not only for infrastructure configuration.
 We can also use them to set default values for workflow parameters, to make it easier for others to try out the workflow without having to gather appropriate input values themselves.
@@ -575,7 +549,7 @@ profiles {
 
 Just like for technical configuration profiles, you can set up multiple different profiles specifying parameters under any arbitrary name you like.
 
-### 5.4. Run the workflow locally with the test profile
+### 4.4. Run the workflow locally with the test profile
 
 Conveniently, profiles are not mutually exclusive, so we can specify multiple profiles in our command line using the following syntax `-profile <profile1>,<profile2>` (for any number of profiles).
 
