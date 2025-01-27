@@ -649,7 +649,7 @@ If you provide the parameter on the command line, the CLI value will override th
 Try it out:
 
 ```bash
-nextflow run hello-world.nf --greet 'Konnichiwa!'
+nextflow run hello-world.nf --greeting 'Konnichiwa!'
 ```
 
 The console output should look the same.

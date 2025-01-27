@@ -533,7 +533,7 @@ HOLà
 
 This time we have all three greetings in the final output file. Success!
 
-!!! Note
+!!! note
 
     If you run this several times without `-resume`, you will see that the order of the greetings changes from one run to the next.
     This shows you that the order in which items flow through the pipeline is not guaranteed to be consistent.

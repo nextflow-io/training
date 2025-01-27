@@ -10,9 +10,9 @@ That is all very tedious and annoying, so we're going to show you how to use **c
 
 A **container** is a lightweight, standalone, executable unit of software created from a container **image** that includes everything needed to run an application including code, system libraries and settings.
 
-!!! Note
+!!! note
 
-We'll be teaching this using the technology [Docker](https://www.docker.com/get-started/), but Nextflow supports [several other container technologies](https://www.nextflow.io/docs/latest/container.html#) as well.
+    We'll be teaching this using the technology [Docker](https://www.docker.com/get-started/), but Nextflow supports [several other container technologies](https://www.nextflow.io/docs/latest/container.html#) as well.
 
 ---
 
@@ -186,8 +186,8 @@ You can see that the filesystem inside the container is different from the files
 
 !!! note
 
-When you run a container, it is isolated from the host system by default.
-This means that the container can't access any files on the host system unless you explicitly allow it to do so.
+    When you run a container, it is isolated from the host system by default.
+    This means that the container can't access any files on the host system unless you explicitly allow it to do so.
 
 You will learn how to do that in a minute.
 
@@ -560,8 +560,9 @@ docker.enabled = true
 
 !!! note
 
-It is possible to enable Docker execution from the command-line, on a per-run basis, using the `-with-docker <container>` parameter.
-However that only allows us to specify one container for the entire workflow, whereas the approach we just showed you allows us to specify a different container per process, which is better for modularity, code maintenance and reproducibility.
+    It is possible to enable Docker execution from the command-line, on a per-run basis, using the `-with-docker <container>` parameter.
+    However, that only allows us to specify one container for the entire workflow, whereas the approach we just showed you allows us to specify a different container per process.
+    This is better for modularity, code maintenance and reproducibility.
 
 #### 2.3.3. Run the workflow with Docker enabled
 
