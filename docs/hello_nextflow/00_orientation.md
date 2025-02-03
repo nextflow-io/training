@@ -44,16 +44,9 @@ If you run this inside `hello-nextflow`, you should see the following output:
 7 directories, 9 files
 ```
 
-!!!note
-
-    Don't worry if this seems like a lot; we'll go through the relevant pieces at each step of the course.
-    This is just meant to give you an overview.
-
 **Here's a summary of what you should know to get started:**
 
 -   **The `.nf` files** are workflow scripts that are named based on what part of the course they're used in.
-
--   **The `hello-*` directories** are directories used in the later Parts of the course where we are working with more than just one workflow file.
 
 -   **The file `nextflow.config`** is a configuration file that sets minimal environment properties.
     You can ignore it for now.
