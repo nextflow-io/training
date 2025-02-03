@@ -12,7 +12,7 @@ The rise of big data has made it increasingly necessary to be able to analyze an
 
 During this training, you will be introduced to Nextflow in a series of complementary hands-on workshops.
 
-Let's get started!
+Let's get started! Click on the "Open in Gitpod" button below.
 
 [![Open in Gitpod](https://img.shields.io/badge/Gitpod-%20Open%20in%20Gitpod-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/nextflow-io/training)
 
@@ -34,5 +34,5 @@ This is a workshop for those who are completely new to Nextflow. Some basic fami
 
 **Prerequisites**
 
--   A GitHub account
+-   A GitHub account and Gitpod login OR a local installation as described [here](envsetup/02_local.md).
 -   Experience with command line
