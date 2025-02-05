@@ -1,4 +1,4 @@
-# Part 3: Hello Genomics
+# Part 1: Per-sample variant calling
 
 In Part 1, you learned how to use the basic building blocks of Nextflow to assemble a simple pipeline capable of processing some text and parallelizing execution if there were multiple inputs.
 Then in Part 2, you learned how to use containers to pull in command line tools to test them and integrate them into your pipelines without having to deal with software dependency issues.

@@ -1,4 +1,4 @@
-# Part 4: Hello Operators
+# Part 2: Joint calling on a cohort
 
 In Part 3, you built a pipeline that was completely linear and processed each sample's data independently of the others.
 However, in real pipelines, you may need to combine data from multiple samples, or combine different kinds of data.
