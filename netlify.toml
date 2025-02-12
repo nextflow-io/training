@@ -1,5 +1,0 @@
-[[redirects]]
-  from = "https://training.seqera.io/*"
-  to = "https://training.nextflow.io/:splat"
-  status = 301
-  force = true
