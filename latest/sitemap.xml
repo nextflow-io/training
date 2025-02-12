@@ -1,0 +1,2681 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+    <url>
+        <loc>https://training.nextflow.io/2.0/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/help/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/help/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/help/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/help/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/help/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/advanced/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/advanced/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/advanced/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/advanced/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/advanced/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/advanced/configuration/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/advanced/configuration/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/advanced/configuration/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/advanced/configuration/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/advanced/configuration/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/advanced/groovy/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/advanced/groovy/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/advanced/groovy/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/advanced/groovy/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/advanced/groovy/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/advanced/grouping/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/advanced/grouping/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/advanced/grouping/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/advanced/grouping/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/advanced/grouping/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/advanced/introduction/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/advanced/introduction/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/advanced/introduction/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/advanced/introduction/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/advanced/introduction/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/advanced/metadata/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/advanced/metadata/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/advanced/metadata/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/advanced/metadata/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/advanced/metadata/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/advanced/operators/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/advanced/operators/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/advanced/operators/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/advanced/operators/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/advanced/operators/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/advanced/orientation/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/advanced/orientation/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/advanced/orientation/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/advanced/orientation/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/advanced/orientation/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/advanced/references/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/advanced/references/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/advanced/references/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/advanced/references/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/advanced/references/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/advanced/structure/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/advanced/structure/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/advanced/structure/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/advanced/structure/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/advanced/structure/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/advanced/summary/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/advanced/summary/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/advanced/summary/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/advanced/summary/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/advanced/summary/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/advanced/support/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/advanced/support/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/advanced/support/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/advanced/support/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/advanced/support/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/advanced/testing/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/advanced/testing/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/advanced/testing/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/advanced/testing/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/advanced/testing/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/basic_training/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/basic_training/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/basic_training/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/basic_training/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/basic_training/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/basic_training/cache_and_resume/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/basic_training/cache_and_resume/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/basic_training/cache_and_resume/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/basic_training/cache_and_resume/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/basic_training/cache_and_resume/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/basic_training/channels/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/basic_training/channels/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/basic_training/channels/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/basic_training/channels/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/basic_training/channels/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/basic_training/config/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/basic_training/config/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/basic_training/config/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/basic_training/config/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/basic_training/config/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/basic_training/containers/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/basic_training/containers/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/basic_training/containers/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/basic_training/containers/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/basic_training/containers/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/basic_training/debugging/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/basic_training/debugging/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/basic_training/debugging/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/basic_training/debugging/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/basic_training/debugging/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/basic_training/executors/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/basic_training/executors/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/basic_training/executors/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/basic_training/executors/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/basic_training/executors/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/basic_training/groovy/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/basic_training/groovy/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/basic_training/groovy/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/basic_training/groovy/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/basic_training/groovy/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/basic_training/intro/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/basic_training/intro/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/basic_training/intro/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/basic_training/intro/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/basic_training/intro/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/basic_training/modules/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/basic_training/modules/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/basic_training/modules/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/basic_training/modules/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/basic_training/modules/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/basic_training/operators/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/basic_training/operators/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/basic_training/operators/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/basic_training/operators/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/basic_training/operators/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/basic_training/orientation/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/basic_training/orientation/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/basic_training/orientation/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/basic_training/orientation/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/basic_training/orientation/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/basic_training/processes/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/basic_training/processes/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/basic_training/processes/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/basic_training/processes/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/basic_training/processes/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/basic_training/rnaseq_pipeline/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/basic_training/rnaseq_pipeline/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/basic_training/rnaseq_pipeline/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/basic_training/rnaseq_pipeline/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/basic_training/rnaseq_pipeline/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/basic_training/seqera_platform/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/basic_training/seqera_platform/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/basic_training/seqera_platform/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/basic_training/seqera_platform/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/basic_training/seqera_platform/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/envsetup/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/envsetup/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/envsetup/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/envsetup/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/envsetup/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/envsetup/01_setup/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/envsetup/01_setup/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/envsetup/01_setup/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/envsetup/01_setup/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/envsetup/01_setup/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/envsetup/02_local/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/envsetup/02_local/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/envsetup/02_local/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/envsetup/02_local/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/envsetup/02_local/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/hands_on/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/hands_on/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/hands_on/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/hands_on/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/hands_on/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/hands_on/01_datasets/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/hands_on/01_datasets/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/hands_on/01_datasets/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/hands_on/01_datasets/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/hands_on/01_datasets/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/hands_on/02_workflow/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/hands_on/02_workflow/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/hands_on/02_workflow/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/hands_on/02_workflow/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/hands_on/02_workflow/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/hands_on/03_setup/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/hands_on/03_setup/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/hands_on/03_setup/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/hands_on/03_setup/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/hands_on/03_setup/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/hands_on/04_implementation/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/hands_on/04_implementation/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/hands_on/04_implementation/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/hands_on/04_implementation/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/hands_on/04_implementation/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/hello_nextflow/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/hello_nextflow/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/hello_nextflow/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/hello_nextflow/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/hello_nextflow/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/hello_nextflow/01_orientation/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/hello_nextflow/01_orientation/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/hello_nextflow/01_orientation/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/hello_nextflow/01_orientation/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/hello_nextflow/01_orientation/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/hello_nextflow/02_hello_world/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/hello_nextflow/02_hello_world/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/hello_nextflow/02_hello_world/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/hello_nextflow/02_hello_world/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/hello_nextflow/02_hello_world/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/hello_nextflow/03_hello_containers/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/hello_nextflow/03_hello_containers/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/hello_nextflow/03_hello_containers/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/hello_nextflow/03_hello_containers/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/hello_nextflow/03_hello_containers/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/hello_nextflow/04_hello_genomics/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/hello_nextflow/04_hello_genomics/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/hello_nextflow/04_hello_genomics/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/hello_nextflow/04_hello_genomics/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/hello_nextflow/04_hello_genomics/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/hello_nextflow/05_hello_operators/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/hello_nextflow/05_hello_operators/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/hello_nextflow/05_hello_operators/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/hello_nextflow/05_hello_operators/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/hello_nextflow/05_hello_operators/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/hello_nextflow/06_hello_config/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/hello_nextflow/06_hello_config/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/hello_nextflow/06_hello_config/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/hello_nextflow/06_hello_config/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/hello_nextflow/06_hello_config/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/hello_nextflow/07_hello_modules/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/hello_nextflow/07_hello_modules/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/hello_nextflow/07_hello_modules/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/hello_nextflow/07_hello_modules/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/hello_nextflow/07_hello_modules/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/hello_nextflow/08_hello_nf-test/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/hello_nextflow/08_hello_nf-test/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/hello_nextflow/08_hello_nf-test/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/hello_nextflow/08_hello_nf-test/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/hello_nextflow/08_hello_nf-test/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/hello_nextflow/09_hello_nf-core/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/hello_nextflow/09_hello_nf-core/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/hello_nextflow/09_hello_nf-core/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/hello_nextflow/09_hello_nf-core/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/hello_nextflow/09_hello_nf-core/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/hello_nextflow/10_hello_seqera/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/hello_nextflow/10_hello_seqera/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/hello_nextflow/10_hello_seqera/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/hello_nextflow/10_hello_seqera/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/hello_nextflow/10_hello_seqera/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/hello_nextflow/seqera/01_run_with_cli/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/hello_nextflow/seqera/01_run_with_cli/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/hello_nextflow/seqera/01_run_with_cli/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/hello_nextflow/seqera/01_run_with_cli/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/hello_nextflow/seqera/01_run_with_cli/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/hello_nextflow/seqera/02_run_with_launchpad/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/hello_nextflow/seqera/02_run_with_launchpad/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/hello_nextflow/seqera/02_run_with_launchpad/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/hello_nextflow/seqera/02_run_with_launchpad/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/hello_nextflow/seqera/02_run_with_launchpad/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/nf_customize/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/nf_customize/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/nf_customize/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/nf_customize/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/nf_customize/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/nf_customize/01_orientation/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/nf_customize/01_orientation/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/nf_customize/01_orientation/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/nf_customize/01_orientation/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/nf_customize/01_orientation/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/nf_customize/02_nf-core/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/nf_customize/02_nf-core/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/nf_customize/02_nf-core/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/nf_customize/02_nf-core/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/nf_customize/02_nf-core/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/nf_customize/03_execution/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/nf_customize/03_execution/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/nf_customize/03_execution/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/nf_customize/03_execution/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/nf_customize/03_execution/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/nf_customize/04_config/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/nf_customize/04_config/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/nf_customize/04_config/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/nf_customize/04_config/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/nf_customize/04_config/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/nf_customize/05_tools/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/nf_customize/05_tools/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/nf_customize/05_tools/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/nf_customize/05_tools/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/nf_customize/05_tools/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/nf_develop/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/nf_develop/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/nf_develop/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/nf_develop/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/nf_develop/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/nf_develop/1_01_orientation/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/nf_develop/1_01_orientation/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/nf_develop/1_01_orientation/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/nf_develop/1_01_orientation/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/nf_develop/1_01_orientation/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/nf_develop/1_02_create/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/nf_develop/1_02_create/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/nf_develop/1_02_create/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/nf_develop/1_02_create/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/nf_develop/1_02_create/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/nf_develop/1_03_pipeline/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/nf_develop/1_03_pipeline/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/nf_develop/1_03_pipeline/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/nf_develop/1_03_pipeline/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/nf_develop/1_03_pipeline/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/nf_develop/1_04_parameters/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/nf_develop/1_04_parameters/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/nf_develop/1_04_parameters/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/nf_develop/1_04_parameters/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/nf_develop/1_04_parameters/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/nf_develop/2_00_introduction/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/nf_develop/2_00_introduction/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/nf_develop/2_00_introduction/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/nf_develop/2_00_introduction/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/nf_develop/2_00_introduction/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/nf_develop/2_01_orientation/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/nf_develop/2_01_orientation/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/nf_develop/2_01_orientation/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/nf_develop/2_01_orientation/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/nf_develop/2_01_orientation/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/nf_develop/2_02_custom/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/nf_develop/2_02_custom/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/nf_develop/2_02_custom/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/nf_develop/2_02_custom/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/nf_develop/2_02_custom/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/nf_develop/extra/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/nf_develop/extra/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/nf_develop/extra/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/nf_develop/extra/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/nf_develop/extra/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/troubleshoot/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/troubleshoot/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/troubleshoot/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/troubleshoot/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/troubleshoot/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/troubleshoot/01_exercise/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/troubleshoot/01_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/troubleshoot/01_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/troubleshoot/01_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/troubleshoot/01_exercise/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/troubleshoot/01_orientation/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/troubleshoot/01_orientation/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/troubleshoot/01_orientation/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/troubleshoot/01_orientation/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/troubleshoot/01_orientation/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/troubleshoot/02_exercise/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/troubleshoot/02_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/troubleshoot/02_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/troubleshoot/02_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/troubleshoot/02_exercise/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/troubleshoot/03_exercise/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/troubleshoot/03_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/troubleshoot/03_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/troubleshoot/03_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/troubleshoot/03_exercise/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/troubleshoot/04_exercise/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/troubleshoot/04_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/troubleshoot/04_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/troubleshoot/04_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/troubleshoot/04_exercise/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/troubleshoot/05_exercise/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/troubleshoot/05_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/troubleshoot/05_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/troubleshoot/05_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/troubleshoot/05_exercise/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/troubleshoot/06_exercise/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0/troubleshoot/06_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/troubleshoot/06_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/troubleshoot/06_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/troubleshoot/06_exercise/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/help/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/help/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0help/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/help/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/help/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/advanced/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/advanced/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0advanced/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/advanced/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/advanced/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/advanced/configuration/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/advanced/configuration/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0advanced/configuration/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/advanced/configuration/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/advanced/configuration/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/advanced/groovy/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/advanced/groovy/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0advanced/groovy/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/advanced/groovy/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/advanced/groovy/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/advanced/grouping/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/advanced/grouping/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0advanced/grouping/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/advanced/grouping/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/advanced/grouping/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/advanced/introduction/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/advanced/introduction/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0advanced/introduction/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/advanced/introduction/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/advanced/introduction/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/advanced/metadata/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/advanced/metadata/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0advanced/metadata/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/advanced/metadata/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/advanced/metadata/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/advanced/operators/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/advanced/operators/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0advanced/operators/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/advanced/operators/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/advanced/operators/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/advanced/orientation/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/advanced/orientation/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0advanced/orientation/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/advanced/orientation/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/advanced/orientation/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/advanced/references/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/advanced/references/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0advanced/references/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/advanced/references/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/advanced/references/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/advanced/structure/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/advanced/structure/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0advanced/structure/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/advanced/structure/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/advanced/structure/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/advanced/summary/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/advanced/summary/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0advanced/summary/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/advanced/summary/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/advanced/summary/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/advanced/support/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/advanced/support/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0advanced/support/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/advanced/support/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/advanced/support/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/advanced/testing/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/advanced/testing/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0advanced/testing/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/advanced/testing/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/advanced/testing/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/basic_training/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/basic_training/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0basic_training/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/basic_training/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/basic_training/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/basic_training/cache_and_resume/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/basic_training/cache_and_resume/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0basic_training/cache_and_resume/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/basic_training/cache_and_resume/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/basic_training/cache_and_resume/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/basic_training/channels/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/basic_training/channels/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0basic_training/channels/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/basic_training/channels/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/basic_training/channels/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/basic_training/config/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/basic_training/config/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0basic_training/config/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/basic_training/config/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/basic_training/config/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/basic_training/containers/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/basic_training/containers/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0basic_training/containers/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/basic_training/containers/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/basic_training/containers/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/basic_training/debugging/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/basic_training/debugging/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0basic_training/debugging/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/basic_training/debugging/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/basic_training/debugging/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/basic_training/executors/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/basic_training/executors/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0basic_training/executors/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/basic_training/executors/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/basic_training/executors/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/basic_training/groovy/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/basic_training/groovy/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0basic_training/groovy/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/basic_training/groovy/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/basic_training/groovy/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/basic_training/intro/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/basic_training/intro/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0basic_training/intro/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/basic_training/intro/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/basic_training/intro/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/basic_training/modules/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/basic_training/modules/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0basic_training/modules/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/basic_training/modules/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/basic_training/modules/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/basic_training/operators/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/basic_training/operators/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0basic_training/operators/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/basic_training/operators/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/basic_training/operators/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/basic_training/orientation/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/basic_training/orientation/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0basic_training/orientation/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/basic_training/orientation/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/basic_training/orientation/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/basic_training/processes/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/basic_training/processes/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0basic_training/processes/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/basic_training/processes/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/basic_training/processes/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/basic_training/rnaseq_pipeline/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/basic_training/rnaseq_pipeline/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0basic_training/rnaseq_pipeline/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/basic_training/rnaseq_pipeline/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/basic_training/rnaseq_pipeline/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/basic_training/seqera_platform/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/basic_training/seqera_platform/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0basic_training/seqera_platform/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/basic_training/seqera_platform/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/basic_training/seqera_platform/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/basic_training/setup/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/basic_training/setup/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/basic_training/setup/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/envsetup/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/envsetup/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0envsetup/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/envsetup/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/envsetup/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/envsetup/01_setup/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/envsetup/01_setup/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0envsetup/01_setup/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/envsetup/01_setup/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/envsetup/01_setup/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/envsetup/02_local/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/envsetup/02_local/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0envsetup/02_local/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/envsetup/02_local/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/envsetup/02_local/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/hands_on/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/hands_on/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0hands_on/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/hands_on/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/hands_on/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/hands_on/01_datasets/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/hands_on/01_datasets/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0hands_on/01_datasets/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/hands_on/01_datasets/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/hands_on/01_datasets/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/hands_on/02_workflow/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/hands_on/02_workflow/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0hands_on/02_workflow/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/hands_on/02_workflow/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/hands_on/02_workflow/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/hands_on/03_setup/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/hands_on/03_setup/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0hands_on/03_setup/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/hands_on/03_setup/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/hands_on/03_setup/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/hands_on/04_implementation/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/hands_on/04_implementation/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0hands_on/04_implementation/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/hands_on/04_implementation/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/hands_on/04_implementation/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/hello_nextflow/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/hello_nextflow/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0hello_nextflow/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/hello_nextflow/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/hello_nextflow/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/hello_nextflow/01_orientation/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/hello_nextflow/01_orientation/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0hello_nextflow/01_orientation/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/hello_nextflow/01_orientation/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/hello_nextflow/01_orientation/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/hello_nextflow/02_hello_world/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/hello_nextflow/02_hello_world/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0hello_nextflow/02_hello_world/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/hello_nextflow/02_hello_world/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/hello_nextflow/02_hello_world/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/hello_nextflow/03_hello_containers/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/hello_nextflow/03_hello_containers/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0hello_nextflow/03_hello_containers/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/hello_nextflow/03_hello_containers/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/hello_nextflow/03_hello_containers/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/hello_nextflow/04_hello_genomics/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/hello_nextflow/04_hello_genomics/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0hello_nextflow/04_hello_genomics/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/hello_nextflow/04_hello_genomics/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/hello_nextflow/04_hello_genomics/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/hello_nextflow/05_hello_operators/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/hello_nextflow/05_hello_operators/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0hello_nextflow/05_hello_operators/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/hello_nextflow/05_hello_operators/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/hello_nextflow/05_hello_operators/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/hello_nextflow/06_hello_config/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/hello_nextflow/06_hello_config/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0hello_nextflow/06_hello_config/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/hello_nextflow/06_hello_config/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/hello_nextflow/06_hello_config/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/hello_nextflow/07_hello_modules/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/hello_nextflow/07_hello_modules/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0hello_nextflow/07_hello_modules/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/hello_nextflow/07_hello_modules/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/hello_nextflow/07_hello_modules/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/hello_nextflow/08_hello_nf-test/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/hello_nextflow/08_hello_nf-test/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0hello_nextflow/08_hello_nf-test/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/hello_nextflow/08_hello_nf-test/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/hello_nextflow/08_hello_nf-test/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/hello_nextflow/09_hello_nf-core/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/hello_nextflow/09_hello_nf-core/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0hello_nextflow/09_hello_nf-core/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/hello_nextflow/09_hello_nf-core/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/hello_nextflow/09_hello_nf-core/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/hello_nextflow/10_hello_seqera/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/hello_nextflow/10_hello_seqera/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0hello_nextflow/10_hello_seqera/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/hello_nextflow/10_hello_seqera/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/hello_nextflow/10_hello_seqera/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/hello_nextflow/seqera/01_run_with_cli/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/hello_nextflow/seqera/01_run_with_cli/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0hello_nextflow/seqera/01_run_with_cli/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/hello_nextflow/seqera/01_run_with_cli/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/hello_nextflow/seqera/01_run_with_cli/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/hello_nextflow/seqera/02_run_with_launchpad/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/hello_nextflow/seqera/02_run_with_launchpad/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0hello_nextflow/seqera/02_run_with_launchpad/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/hello_nextflow/seqera/02_run_with_launchpad/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/hello_nextflow/seqera/02_run_with_launchpad/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/nf_customize/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/nf_customize/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0nf_customize/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/nf_customize/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/nf_customize/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/nf_customize/01_orientation/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/nf_customize/01_orientation/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0nf_customize/01_orientation/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/nf_customize/01_orientation/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/nf_customize/01_orientation/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/nf_customize/02_nf-core/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/nf_customize/02_nf-core/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0nf_customize/02_nf-core/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/nf_customize/02_nf-core/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/nf_customize/02_nf-core/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/nf_customize/03_execution/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/nf_customize/03_execution/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0nf_customize/03_execution/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/nf_customize/03_execution/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/nf_customize/03_execution/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/nf_customize/04_config/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/nf_customize/04_config/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0nf_customize/04_config/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/nf_customize/04_config/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/nf_customize/04_config/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/nf_customize/05_tools/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/nf_customize/05_tools/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0nf_customize/05_tools/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/nf_customize/05_tools/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/nf_customize/05_tools/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/nf_develop/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/nf_develop/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0nf_develop/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/nf_develop/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/nf_develop/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/nf_develop/1_01_orientation/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/nf_develop/1_01_orientation/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0nf_develop/1_01_orientation/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/nf_develop/1_01_orientation/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/nf_develop/1_01_orientation/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/nf_develop/1_02_create/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/nf_develop/1_02_create/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0nf_develop/1_02_create/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/nf_develop/1_02_create/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/nf_develop/1_02_create/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/nf_develop/1_03_pipeline/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/nf_develop/1_03_pipeline/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0nf_develop/1_03_pipeline/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/nf_develop/1_03_pipeline/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/nf_develop/1_03_pipeline/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/nf_develop/1_04_parameters/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/nf_develop/1_04_parameters/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0nf_develop/1_04_parameters/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/nf_develop/1_04_parameters/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/nf_develop/1_04_parameters/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/nf_develop/2_00_introduction/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/nf_develop/2_00_introduction/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0nf_develop/2_00_introduction/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/nf_develop/2_00_introduction/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/nf_develop/2_00_introduction/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/nf_develop/2_01_orientation/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/nf_develop/2_01_orientation/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0nf_develop/2_01_orientation/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/nf_develop/2_01_orientation/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/nf_develop/2_01_orientation/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/nf_develop/2_02_custom/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/nf_develop/2_02_custom/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0nf_develop/2_02_custom/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/nf_develop/2_02_custom/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/nf_develop/2_02_custom/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/nf_develop/extra/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/nf_develop/extra/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0nf_develop/extra/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/nf_develop/extra/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/nf_develop/extra/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/troubleshoot/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/troubleshoot/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0troubleshoot/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/troubleshoot/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/troubleshoot/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/troubleshoot/01_exercise/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/troubleshoot/01_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0troubleshoot/01_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/troubleshoot/01_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/troubleshoot/01_exercise/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/troubleshoot/01_orientation/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/troubleshoot/01_orientation/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0troubleshoot/01_orientation/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/troubleshoot/01_orientation/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/troubleshoot/01_orientation/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/troubleshoot/02_exercise/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/troubleshoot/02_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0troubleshoot/02_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/troubleshoot/02_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/troubleshoot/02_exercise/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/troubleshoot/03_exercise/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/troubleshoot/03_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0troubleshoot/03_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/troubleshoot/03_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/troubleshoot/03_exercise/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/troubleshoot/04_exercise/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/troubleshoot/04_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0troubleshoot/04_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/troubleshoot/04_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/troubleshoot/04_exercise/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/troubleshoot/05_exercise/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/troubleshoot/05_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0troubleshoot/05_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/troubleshoot/05_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/troubleshoot/05_exercise/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/pt/troubleshoot/06_exercise/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0/pt/troubleshoot/06_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0troubleshoot/06_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/troubleshoot/06_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/troubleshoot/06_exercise/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/help/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/help/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0help/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/help/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/help/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/advanced/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/advanced/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0advanced/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/advanced/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/advanced/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/advanced/configuration/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/advanced/configuration/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0advanced/configuration/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/advanced/configuration/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/advanced/configuration/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/advanced/groovy/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/advanced/groovy/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0advanced/groovy/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/advanced/groovy/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/advanced/groovy/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/advanced/grouping/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/advanced/grouping/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0advanced/grouping/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/advanced/grouping/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/advanced/grouping/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/advanced/introduction/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/advanced/introduction/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0advanced/introduction/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/advanced/introduction/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/advanced/introduction/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/advanced/metadata/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/advanced/metadata/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0advanced/metadata/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/advanced/metadata/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/advanced/metadata/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/advanced/operators/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/advanced/operators/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0advanced/operators/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/advanced/operators/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/advanced/operators/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/advanced/orientation/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/advanced/orientation/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0advanced/orientation/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/advanced/orientation/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/advanced/orientation/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/advanced/references/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/advanced/references/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0advanced/references/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/advanced/references/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/advanced/references/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/advanced/structure/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/advanced/structure/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0advanced/structure/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/advanced/structure/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/advanced/structure/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/advanced/summary/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/advanced/summary/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0advanced/summary/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/advanced/summary/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/advanced/summary/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/advanced/support/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/advanced/support/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0advanced/support/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/advanced/support/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/advanced/support/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/advanced/testing/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/advanced/testing/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0advanced/testing/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/advanced/testing/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/advanced/testing/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/basic_training/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/basic_training/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0basic_training/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/basic_training/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/basic_training/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/basic_training/cache_and_resume/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/basic_training/cache_and_resume/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0basic_training/cache_and_resume/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/basic_training/cache_and_resume/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/basic_training/cache_and_resume/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/basic_training/channels/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/basic_training/channels/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0basic_training/channels/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/basic_training/channels/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/basic_training/channels/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/basic_training/config/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/basic_training/config/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0basic_training/config/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/basic_training/config/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/basic_training/config/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/basic_training/containers/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/basic_training/containers/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0basic_training/containers/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/basic_training/containers/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/basic_training/containers/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/basic_training/debugging/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/basic_training/debugging/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0basic_training/debugging/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/basic_training/debugging/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/basic_training/debugging/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/basic_training/executors/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/basic_training/executors/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0basic_training/executors/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/basic_training/executors/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/basic_training/executors/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/basic_training/groovy/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/basic_training/groovy/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0basic_training/groovy/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/basic_training/groovy/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/basic_training/groovy/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/basic_training/intro/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/basic_training/intro/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0basic_training/intro/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/basic_training/intro/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/basic_training/intro/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/basic_training/modules/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/basic_training/modules/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0basic_training/modules/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/basic_training/modules/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/basic_training/modules/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/basic_training/operators/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/basic_training/operators/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0basic_training/operators/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/basic_training/operators/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/basic_training/operators/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/basic_training/orientation/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/basic_training/orientation/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0basic_training/orientation/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/basic_training/orientation/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/basic_training/orientation/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/basic_training/processes/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/basic_training/processes/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0basic_training/processes/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/basic_training/processes/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/basic_training/processes/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/basic_training/rnaseq_pipeline/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/basic_training/rnaseq_pipeline/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0basic_training/rnaseq_pipeline/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/basic_training/rnaseq_pipeline/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/basic_training/rnaseq_pipeline/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/basic_training/seqera_platform/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/basic_training/seqera_platform/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0basic_training/seqera_platform/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/basic_training/seqera_platform/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/basic_training/seqera_platform/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/envsetup/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/envsetup/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0envsetup/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/envsetup/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/envsetup/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/envsetup/01_setup/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/envsetup/01_setup/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0envsetup/01_setup/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/envsetup/01_setup/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/envsetup/01_setup/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/envsetup/02_local/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/envsetup/02_local/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0envsetup/02_local/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/envsetup/02_local/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/envsetup/02_local/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/hands_on/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/hands_on/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0hands_on/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/hands_on/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/hands_on/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/hands_on/01_datasets/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/hands_on/01_datasets/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0hands_on/01_datasets/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/hands_on/01_datasets/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/hands_on/01_datasets/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/hands_on/02_workflow/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/hands_on/02_workflow/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0hands_on/02_workflow/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/hands_on/02_workflow/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/hands_on/02_workflow/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/hands_on/03_setup/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/hands_on/03_setup/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0hands_on/03_setup/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/hands_on/03_setup/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/hands_on/03_setup/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/hands_on/04_implementation/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/hands_on/04_implementation/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0hands_on/04_implementation/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/hands_on/04_implementation/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/hands_on/04_implementation/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/hello_nextflow/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/hello_nextflow/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0hello_nextflow/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/hello_nextflow/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/hello_nextflow/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/hello_nextflow/01_orientation/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/hello_nextflow/01_orientation/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0hello_nextflow/01_orientation/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/hello_nextflow/01_orientation/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/hello_nextflow/01_orientation/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/hello_nextflow/02_hello_world/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/hello_nextflow/02_hello_world/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0hello_nextflow/02_hello_world/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/hello_nextflow/02_hello_world/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/hello_nextflow/02_hello_world/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/hello_nextflow/03_hello_containers/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/hello_nextflow/03_hello_containers/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0hello_nextflow/03_hello_containers/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/hello_nextflow/03_hello_containers/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/hello_nextflow/03_hello_containers/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/hello_nextflow/04_hello_genomics/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/hello_nextflow/04_hello_genomics/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0hello_nextflow/04_hello_genomics/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/hello_nextflow/04_hello_genomics/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/hello_nextflow/04_hello_genomics/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/hello_nextflow/05_hello_operators/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/hello_nextflow/05_hello_operators/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0hello_nextflow/05_hello_operators/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/hello_nextflow/05_hello_operators/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/hello_nextflow/05_hello_operators/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/hello_nextflow/06_hello_config/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/hello_nextflow/06_hello_config/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0hello_nextflow/06_hello_config/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/hello_nextflow/06_hello_config/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/hello_nextflow/06_hello_config/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/hello_nextflow/07_hello_modules/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/hello_nextflow/07_hello_modules/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0hello_nextflow/07_hello_modules/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/hello_nextflow/07_hello_modules/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/hello_nextflow/07_hello_modules/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/hello_nextflow/08_hello_nf-test/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/hello_nextflow/08_hello_nf-test/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0hello_nextflow/08_hello_nf-test/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/hello_nextflow/08_hello_nf-test/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/hello_nextflow/08_hello_nf-test/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/hello_nextflow/09_hello_nf-core/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/hello_nextflow/09_hello_nf-core/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0hello_nextflow/09_hello_nf-core/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/hello_nextflow/09_hello_nf-core/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/hello_nextflow/09_hello_nf-core/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/hello_nextflow/10_hello_seqera/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/hello_nextflow/10_hello_seqera/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0hello_nextflow/10_hello_seqera/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/hello_nextflow/10_hello_seqera/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/hello_nextflow/10_hello_seqera/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/hello_nextflow/seqera/01_run_with_cli/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/hello_nextflow/seqera/01_run_with_cli/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0hello_nextflow/seqera/01_run_with_cli/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/hello_nextflow/seqera/01_run_with_cli/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/hello_nextflow/seqera/01_run_with_cli/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/hello_nextflow/seqera/02_run_with_launchpad/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/hello_nextflow/seqera/02_run_with_launchpad/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0hello_nextflow/seqera/02_run_with_launchpad/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/hello_nextflow/seqera/02_run_with_launchpad/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/hello_nextflow/seqera/02_run_with_launchpad/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/nf_customize/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/nf_customize/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0nf_customize/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/nf_customize/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/nf_customize/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/nf_customize/01_orientation/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/nf_customize/01_orientation/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0nf_customize/01_orientation/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/nf_customize/01_orientation/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/nf_customize/01_orientation/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/nf_customize/02_nf-core/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/nf_customize/02_nf-core/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0nf_customize/02_nf-core/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/nf_customize/02_nf-core/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/nf_customize/02_nf-core/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/nf_customize/03_execution/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/nf_customize/03_execution/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0nf_customize/03_execution/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/nf_customize/03_execution/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/nf_customize/03_execution/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/nf_customize/04_config/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/nf_customize/04_config/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0nf_customize/04_config/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/nf_customize/04_config/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/nf_customize/04_config/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/nf_customize/05_tools/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/nf_customize/05_tools/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0nf_customize/05_tools/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/nf_customize/05_tools/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/nf_customize/05_tools/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/nf_develop/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/nf_develop/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0nf_develop/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/nf_develop/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/nf_develop/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/nf_develop/1_01_orientation/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/nf_develop/1_01_orientation/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0nf_develop/1_01_orientation/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/nf_develop/1_01_orientation/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/nf_develop/1_01_orientation/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/nf_develop/1_02_create/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/nf_develop/1_02_create/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0nf_develop/1_02_create/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/nf_develop/1_02_create/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/nf_develop/1_02_create/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/nf_develop/1_03_pipeline/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/nf_develop/1_03_pipeline/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0nf_develop/1_03_pipeline/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/nf_develop/1_03_pipeline/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/nf_develop/1_03_pipeline/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/nf_develop/1_04_parameters/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/nf_develop/1_04_parameters/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0nf_develop/1_04_parameters/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/nf_develop/1_04_parameters/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/nf_develop/1_04_parameters/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/nf_develop/2_00_introduction/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/nf_develop/2_00_introduction/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0nf_develop/2_00_introduction/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/nf_develop/2_00_introduction/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/nf_develop/2_00_introduction/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/nf_develop/2_01_orientation/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/nf_develop/2_01_orientation/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0nf_develop/2_01_orientation/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/nf_develop/2_01_orientation/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/nf_develop/2_01_orientation/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/nf_develop/2_02_custom/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/nf_develop/2_02_custom/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0nf_develop/2_02_custom/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/nf_develop/2_02_custom/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/nf_develop/2_02_custom/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/nf_develop/extra/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/nf_develop/extra/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0nf_develop/extra/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/nf_develop/extra/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/nf_develop/extra/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/troubleshoot/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/troubleshoot/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0troubleshoot/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/troubleshoot/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/troubleshoot/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/troubleshoot/01_exercise/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/troubleshoot/01_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0troubleshoot/01_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/troubleshoot/01_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/troubleshoot/01_exercise/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/troubleshoot/01_orientation/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/troubleshoot/01_orientation/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0troubleshoot/01_orientation/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/troubleshoot/01_orientation/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/troubleshoot/01_orientation/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/troubleshoot/02_exercise/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/troubleshoot/02_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0troubleshoot/02_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/troubleshoot/02_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/troubleshoot/02_exercise/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/troubleshoot/03_exercise/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/troubleshoot/03_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0troubleshoot/03_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/troubleshoot/03_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/troubleshoot/03_exercise/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/troubleshoot/04_exercise/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/troubleshoot/04_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0troubleshoot/04_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/troubleshoot/04_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/troubleshoot/04_exercise/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/troubleshoot/05_exercise/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/troubleshoot/05_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0troubleshoot/05_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/troubleshoot/05_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/troubleshoot/05_exercise/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/es/troubleshoot/06_exercise/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0/es/troubleshoot/06_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0troubleshoot/06_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0fr/troubleshoot/06_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/troubleshoot/06_exercise/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/help/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/help/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0help/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/help/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/help/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/advanced/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/advanced/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0advanced/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/advanced/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/advanced/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/advanced/configuration/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/advanced/configuration/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0advanced/configuration/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/advanced/configuration/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/advanced/configuration/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/advanced/groovy/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/advanced/groovy/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0advanced/groovy/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/advanced/groovy/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/advanced/groovy/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/advanced/grouping/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/advanced/grouping/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0advanced/grouping/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/advanced/grouping/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/advanced/grouping/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/advanced/introduction/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/advanced/introduction/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0advanced/introduction/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/advanced/introduction/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/advanced/introduction/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/advanced/metadata/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/advanced/metadata/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0advanced/metadata/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/advanced/metadata/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/advanced/metadata/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/advanced/operators/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/advanced/operators/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0advanced/operators/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/advanced/operators/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/advanced/operators/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/advanced/orientation/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/advanced/orientation/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0advanced/orientation/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/advanced/orientation/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/advanced/orientation/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/advanced/references/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/advanced/references/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0advanced/references/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/advanced/references/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/advanced/references/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/advanced/structure/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/advanced/structure/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0advanced/structure/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/advanced/structure/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/advanced/structure/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/advanced/summary/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/advanced/summary/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0advanced/summary/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/advanced/summary/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/advanced/summary/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/advanced/support/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/advanced/support/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0advanced/support/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/advanced/support/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/advanced/support/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/advanced/testing/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/advanced/testing/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0advanced/testing/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/advanced/testing/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/advanced/testing/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/basic_training/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/basic_training/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0basic_training/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/basic_training/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/basic_training/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/basic_training/cache_and_resume/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/basic_training/cache_and_resume/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0basic_training/cache_and_resume/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/basic_training/cache_and_resume/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/basic_training/cache_and_resume/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/basic_training/channels/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/basic_training/channels/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0basic_training/channels/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/basic_training/channels/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/basic_training/channels/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/basic_training/config/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/basic_training/config/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0basic_training/config/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/basic_training/config/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/basic_training/config/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/basic_training/containers/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/basic_training/containers/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0basic_training/containers/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/basic_training/containers/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/basic_training/containers/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/basic_training/debugging/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/basic_training/debugging/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0basic_training/debugging/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/basic_training/debugging/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/basic_training/debugging/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/basic_training/executors/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/basic_training/executors/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0basic_training/executors/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/basic_training/executors/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/basic_training/executors/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/basic_training/groovy/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/basic_training/groovy/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0basic_training/groovy/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/basic_training/groovy/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/basic_training/groovy/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/basic_training/intro/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/basic_training/intro/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0basic_training/intro/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/basic_training/intro/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/basic_training/intro/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/basic_training/modules/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/basic_training/modules/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0basic_training/modules/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/basic_training/modules/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/basic_training/modules/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/basic_training/operators/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/basic_training/operators/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0basic_training/operators/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/basic_training/operators/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/basic_training/operators/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/basic_training/orientation/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/basic_training/orientation/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0basic_training/orientation/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/basic_training/orientation/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/basic_training/orientation/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/basic_training/processes/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/basic_training/processes/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0basic_training/processes/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/basic_training/processes/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/basic_training/processes/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/basic_training/rnaseq_pipeline/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/basic_training/rnaseq_pipeline/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0basic_training/rnaseq_pipeline/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/basic_training/rnaseq_pipeline/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/basic_training/rnaseq_pipeline/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/basic_training/seqera_platform/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/basic_training/seqera_platform/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0basic_training/seqera_platform/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/basic_training/seqera_platform/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/basic_training/seqera_platform/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/basic_training/setup/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/basic_training/setup/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/basic_training/setup/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/envsetup/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/envsetup/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0envsetup/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/envsetup/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/envsetup/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/envsetup/01_setup/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/envsetup/01_setup/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0envsetup/01_setup/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/envsetup/01_setup/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/envsetup/01_setup/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/envsetup/02_local/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/envsetup/02_local/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0envsetup/02_local/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/envsetup/02_local/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/envsetup/02_local/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/hands_on/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/hands_on/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0hands_on/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/hands_on/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/hands_on/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/hands_on/01_datasets/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/hands_on/01_datasets/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0hands_on/01_datasets/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/hands_on/01_datasets/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/hands_on/01_datasets/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/hands_on/02_workflow/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/hands_on/02_workflow/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0hands_on/02_workflow/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/hands_on/02_workflow/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/hands_on/02_workflow/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/hands_on/03_setup/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/hands_on/03_setup/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0hands_on/03_setup/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/hands_on/03_setup/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/hands_on/03_setup/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/hands_on/04_implementation/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/hands_on/04_implementation/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0hands_on/04_implementation/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/hands_on/04_implementation/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/hands_on/04_implementation/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/hello_nextflow/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/hello_nextflow/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0hello_nextflow/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/hello_nextflow/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/hello_nextflow/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/hello_nextflow/01_orientation/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/hello_nextflow/01_orientation/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0hello_nextflow/01_orientation/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/hello_nextflow/01_orientation/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/hello_nextflow/01_orientation/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/hello_nextflow/02_hello_world/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/hello_nextflow/02_hello_world/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0hello_nextflow/02_hello_world/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/hello_nextflow/02_hello_world/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/hello_nextflow/02_hello_world/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/hello_nextflow/03_hello_containers/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/hello_nextflow/03_hello_containers/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0hello_nextflow/03_hello_containers/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/hello_nextflow/03_hello_containers/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/hello_nextflow/03_hello_containers/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/hello_nextflow/04_hello_genomics/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/hello_nextflow/04_hello_genomics/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0hello_nextflow/04_hello_genomics/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/hello_nextflow/04_hello_genomics/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/hello_nextflow/04_hello_genomics/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/hello_nextflow/05_hello_operators/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/hello_nextflow/05_hello_operators/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0hello_nextflow/05_hello_operators/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/hello_nextflow/05_hello_operators/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/hello_nextflow/05_hello_operators/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/hello_nextflow/06_hello_config/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/hello_nextflow/06_hello_config/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0hello_nextflow/06_hello_config/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/hello_nextflow/06_hello_config/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/hello_nextflow/06_hello_config/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/hello_nextflow/07_hello_modules/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/hello_nextflow/07_hello_modules/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0hello_nextflow/07_hello_modules/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/hello_nextflow/07_hello_modules/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/hello_nextflow/07_hello_modules/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/hello_nextflow/08_hello_nf-test/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/hello_nextflow/08_hello_nf-test/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0hello_nextflow/08_hello_nf-test/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/hello_nextflow/08_hello_nf-test/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/hello_nextflow/08_hello_nf-test/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/hello_nextflow/09_hello_nf-core/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/hello_nextflow/09_hello_nf-core/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0hello_nextflow/09_hello_nf-core/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/hello_nextflow/09_hello_nf-core/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/hello_nextflow/09_hello_nf-core/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/hello_nextflow/10_hello_seqera/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/hello_nextflow/10_hello_seqera/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0hello_nextflow/10_hello_seqera/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/hello_nextflow/10_hello_seqera/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/hello_nextflow/10_hello_seqera/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/hello_nextflow/seqera/01_run_with_cli/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/hello_nextflow/seqera/01_run_with_cli/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0hello_nextflow/seqera/01_run_with_cli/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/hello_nextflow/seqera/01_run_with_cli/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/hello_nextflow/seqera/01_run_with_cli/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/hello_nextflow/seqera/02_run_with_launchpad/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/hello_nextflow/seqera/02_run_with_launchpad/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0hello_nextflow/seqera/02_run_with_launchpad/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/hello_nextflow/seqera/02_run_with_launchpad/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/hello_nextflow/seqera/02_run_with_launchpad/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/nf_customize/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/nf_customize/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0nf_customize/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/nf_customize/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/nf_customize/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/nf_customize/01_orientation/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/nf_customize/01_orientation/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0nf_customize/01_orientation/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/nf_customize/01_orientation/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/nf_customize/01_orientation/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/nf_customize/02_nf-core/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/nf_customize/02_nf-core/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0nf_customize/02_nf-core/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/nf_customize/02_nf-core/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/nf_customize/02_nf-core/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/nf_customize/03_execution/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/nf_customize/03_execution/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0nf_customize/03_execution/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/nf_customize/03_execution/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/nf_customize/03_execution/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/nf_customize/04_config/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/nf_customize/04_config/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0nf_customize/04_config/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/nf_customize/04_config/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/nf_customize/04_config/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/nf_customize/05_tools/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/nf_customize/05_tools/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0nf_customize/05_tools/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/nf_customize/05_tools/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/nf_customize/05_tools/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/nf_develop/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/nf_develop/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0nf_develop/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/nf_develop/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/nf_develop/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/nf_develop/1_01_orientation/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/nf_develop/1_01_orientation/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0nf_develop/1_01_orientation/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/nf_develop/1_01_orientation/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/nf_develop/1_01_orientation/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/nf_develop/1_02_create/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/nf_develop/1_02_create/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0nf_develop/1_02_create/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/nf_develop/1_02_create/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/nf_develop/1_02_create/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/nf_develop/1_03_pipeline/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/nf_develop/1_03_pipeline/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0nf_develop/1_03_pipeline/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/nf_develop/1_03_pipeline/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/nf_develop/1_03_pipeline/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/nf_develop/1_04_parameters/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/nf_develop/1_04_parameters/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0nf_develop/1_04_parameters/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/nf_develop/1_04_parameters/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/nf_develop/1_04_parameters/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/nf_develop/2_00_introduction/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/nf_develop/2_00_introduction/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0nf_develop/2_00_introduction/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/nf_develop/2_00_introduction/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/nf_develop/2_00_introduction/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/nf_develop/2_01_orientation/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/nf_develop/2_01_orientation/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0nf_develop/2_01_orientation/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/nf_develop/2_01_orientation/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/nf_develop/2_01_orientation/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/nf_develop/2_02_custom/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/nf_develop/2_02_custom/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0nf_develop/2_02_custom/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/nf_develop/2_02_custom/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/nf_develop/2_02_custom/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/nf_develop/extra/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/nf_develop/extra/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0nf_develop/extra/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/nf_develop/extra/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/nf_develop/extra/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/troubleshoot/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/troubleshoot/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0troubleshoot/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/troubleshoot/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/troubleshoot/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/troubleshoot/01_exercise/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/troubleshoot/01_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0troubleshoot/01_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/troubleshoot/01_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/troubleshoot/01_exercise/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/troubleshoot/01_orientation/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/troubleshoot/01_orientation/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0troubleshoot/01_orientation/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/troubleshoot/01_orientation/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/troubleshoot/01_orientation/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/troubleshoot/02_exercise/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/troubleshoot/02_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0troubleshoot/02_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/troubleshoot/02_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/troubleshoot/02_exercise/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/troubleshoot/03_exercise/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/troubleshoot/03_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0troubleshoot/03_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/troubleshoot/03_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/troubleshoot/03_exercise/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/troubleshoot/04_exercise/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/troubleshoot/04_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0troubleshoot/04_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/troubleshoot/04_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/troubleshoot/04_exercise/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/troubleshoot/05_exercise/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/troubleshoot/05_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0troubleshoot/05_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/troubleshoot/05_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/troubleshoot/05_exercise/"/>
+    </url>
+    <url>
+        <loc>https://training.nextflow.io/2.0/fr/troubleshoot/06_exercise/</loc>
+        <lastmod>2025-02-12</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://training.nextflow.io/2.0/fr/troubleshoot/06_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://training.nextflow.io/2.0troubleshoot/06_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://training.nextflow.io/2.0es/troubleshoot/06_exercise/"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://training.nextflow.io/2.0pt/troubleshoot/06_exercise/"/>
+    </url>
+</urlset>
