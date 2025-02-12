@@ -138,6 +138,7 @@ extra:
           name: Nextflow on twitter
     version:
         provider: mike
+        alias: true
 markdown_extensions:
     - admonition
     - attr_list
