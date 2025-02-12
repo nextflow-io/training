@@ -1,0 +1,14 @@
+# Redirect old URLs from before we had versioning
+/advanced/*           /latest/advanced/:splat         301
+/assets/*             /latest/assets/:splat           301
+/basic_training/*     /latest/basic_training/:splat   301
+/envsetup/*           /latest/envsetup/:splat         301
+/es/*                 /latest/es/:splat               301
+/fr/*                 /latest/fr/:splat               301
+/hands_on/*           /latest/hands_on/:splat         301
+/hello_nextflow/*     /latest/hello_nextflow/:splat   301
+/help/*               /latest/help/:splat             301
+/nf_customize/*       /latest/nf_customize/:splat     301
+/nf_develop/*         /latest/nf_develop/:splat       301
+/pt/*                 /latest/pt/:splat               301
+/troubleshoot/*       /latest/troubleshoot/:splat     301
