@@ -136,6 +136,8 @@ extra:
         - icon: fontawesome/brands/twitter
           link: https://twitter.com/nextflowio
           name: Nextflow on twitter
+    version:
+        provider: mike
 markdown_extensions:
     - admonition
     - attr_list
