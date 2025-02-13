@@ -331,7 +331,7 @@ It will produce an output similar to the following:
 
 !!! warning
 
-    The glob pattern _must_ contain at least a star wildcard character (`*`).
+    The glob pattern _must_ contain at least an asterisk wildcard character (`*`).
 
 The `fromFilePairs` channel factory also has options to help you control its behaviour:
 
@@ -431,7 +431,7 @@ Channel
 
     Read pairs are implicitly managed and are returned as a list of files.
 
-It’s straightforward to use this channel as an input using the usual Nextflow syntax
+It’s straightforward to use this channel as an input using the usual Nextflow syntax.
 
 The code below creates a channel containing two samples from a public SRA study and runs `FASTQC` on the resulting files. See:
 

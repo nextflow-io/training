@@ -197,7 +197,7 @@ Your expected output will look something like this:
 The current directory is /workspace/gitpod/nf-training/work/7a/4b050a6cdef4b6c1333ce29f7059a0
 ```
 
-However, this using the single quotes (`'`) will block the usage of Nextflow variables in the command script.
+However, using the single quotes (`'`) will block the usage of Nextflow variables in the command script.
 
 Another alternative is to use a `shell` statement instead of `script` and use a different syntax for Nextflow variables, e.g., `!{..}`. This allows the use of both Nextflow and Bash variables in the same script.
 
@@ -540,7 +540,7 @@ workflow {
 3 and a
 ```
 
-As `ch2` is now a _value_ channel, it can be consumed multiple times and do not affect process termination.
+As `ch2` is now a _value_ channel, it can be consumed multiple times and does not affect process termination.
 
 !!! question "Exercise"
 
@@ -758,9 +758,10 @@ Prints the following:
 
 Some caveats on glob pattern behavior:
 
--   Input files are not included in the list of possible matches
--   Glob pattern matches both files and directory paths
--   When a two stars pattern `**` is used to recourse across directories, only file paths are matched i.e., directories are not included in the result list.
+- Input files are not included in the list of possible matches
+- Glob pattern matches both files and directory paths
+- When a two asterisks pattern `**` is used to recourse across directories, only file paths are matched i.e., directories are not included in the result list.
+
 
 !!! question "Exercise"
 
@@ -1141,7 +1142,7 @@ workflow {
 }
 ```
 
-The above example will copy all blast script files created by the `BLASTSEQ` process into the directory path `results`.
+The above example will copy all BAM files created by the `FOO` process into the directory path `results`.
 
 !!! tip
 
