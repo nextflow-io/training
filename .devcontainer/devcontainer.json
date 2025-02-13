@@ -9,7 +9,7 @@
         "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
     },
     "workspaceFolder": "/workspaces/training/hello-nextflow/",
-    "workspaceMount": "source=/workspaces/training/hello-nextflow/,target=/workspaces/training/hello-nextflow/,type=bind",
+    "workspaceMount": "source=${localWorkspaceFolder},target=${localWorkspaceFolder},type=bind",
     "remoteEnv": {
         "NXF_HOME": "/workspaces/.nextflow",
         "HOST_PROJECT_PATH": "${localWorkspaceFolder}"
