@@ -1,0 +1,1 @@
+This directory contains older training courses that are not actively maintained and that we may repurpose elsewhere or delete in the near future. The corresponding materials are not available within the training environment. You can still find the materials in the GitHub repository and download them for local use.

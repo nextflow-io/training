@@ -8,7 +8,7 @@ Specifically, we show you how to implement a simple variant calling pipeline wit
 
 !!! note
 
-    Don't worry if you're not familiar with GATK or genomics in general.
+    Don't worry if you're not familiar with GATK specifically.
     We'll summarize the necessary concepts as we go, and the workflow implementation principles we demonstrate here apply broadly to any command line tool that takes in some input files and produce some output files.
 
 ### Method overview

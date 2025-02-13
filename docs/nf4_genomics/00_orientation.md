@@ -10,7 +10,7 @@ If you have not yet done so, please follow [this link](../../envsetup/) before g
 Throughout this training course, we'll be working in the `nf4-genomics/` directory, which you need to move into when you open the training workspace.
 This directory contains all the code files, test data and accessory files you will need.
 
-Feel free to explore the contents of this directory; the easiest way to do so is to use the file explorer on the left-hand side of the training workspace.
+Feel free to explore the contents of this directory; the easiest way to do so is to use the file explorer on the left-hand side of the training workspace in the VSCode interface.
 Alternatively, you can use the `tree` command.
 Throughout the course, we use the output of `tree` to represent directory structure and contents in a readable form, sometimes with minor modifications for clarity.
 

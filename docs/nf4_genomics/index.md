@@ -7,7 +7,7 @@ hide:
 # Nextflow for Genomics
 
 This training course is intended for researchers in genomics and related fields who are interested in developing or customizing data analysis pipelines.
-It builds on the [Hello Nextflow](TODO) beginner training and demonstrates how to use Nextflow in the specific context of the genomics domain.
+It builds on the [Hello Nextflow](../hello_nextflow/index.md) beginner training and demonstrates how to use Nextflow in the specific context of the genomics domain.
 
 ## Learning objectives
 
