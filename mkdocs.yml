@@ -18,13 +18,6 @@ nav:
           - hello_nextflow/04_hello_modules.md
           - hello_nextflow/05_hello_containers.md
           - hello_nextflow/06_hello_config.md
-    # COMMENTED OUT UNTIL READY
-    #     - Nextflow Run:
-    #           - nextflow_run/index.md
-    #           - nextflow_run/01_orientation.md
-    #           - nextflow_run/02_run_basics.md
-    #           - nextflow_run/03_run_nf-core.md
-    #           - nextflow_run/04_run_seqera.md
     - Nextflow for Genomics:
           - nf4_genomics/index.md
           - nf4_genomics/00_orientation.md
@@ -32,12 +25,6 @@ nav:
           - nf4_genomics/02_joint_calling.md
           - nf4_genomics/03_configuration.md
           - nf4_genomics/04_testing.md
-    # COMMENTED OUT UNTIL READY
-    #     - Side Quests:
-    #           - side_quests/index.md
-    #           - side_quests/orientation.md
-    #           - side_quests/containers.md
-    #           - side_quests/if_else.md
     - Fundamentals Training:
           - basic_training/index.md
           - basic_training/orientation.md
@@ -163,9 +150,6 @@ plugins:
               - envsetup/01_setup.md
               - hello_nextflow/00_orientation.md
               - nf4_genomics/00_orientation.md
-              # COMMENTED OUT UNTIL READY
-              #   - nextflow_run/00_orientation.md
-              #   - side_quests/00_orientation.md
               - basic_training/orientation.md
               - advanced/orientation.md
 
@@ -175,9 +159,6 @@ plugins:
               - envsetup/index.md
               - hello_nextflow/*.md
               - nf4_genomics/*.md
-              # COMMENTED OUT UNTIL READY
-              #   - nextflow_run/*.md
-              #   - side_quests/*.md
               - basic_training/index.md
               - basic_training/orientation.md
               - advanced/index.md
@@ -185,8 +166,7 @@ plugins:
     - i18n:
           docs_structure: suffix
           fallback_to_default: true
-          languages: # turned off all language support for now because the translations are too far out of date
-              # will turn them on incrementally when we get new versions done
+          languages:
               - build: true
                 default: true
                 locale: en
