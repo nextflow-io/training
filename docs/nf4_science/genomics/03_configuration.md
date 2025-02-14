@@ -1,6 +1,6 @@
 # Part 3: Resource profiling and optimization
 
-[TODO] THIS IS A PLACEHOLDER
+THIS IS A PLACEHOLDER
 
 !!!note
 
@@ -8,7 +8,7 @@
 
 ---
 
-[TODO]
+TODO
 
 ### 4.3. Run the workflow to generate a resource utilization report
 

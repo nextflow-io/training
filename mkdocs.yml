@@ -23,8 +23,6 @@ nav:
       - nf4_science/genomics/00_orientation.md
       - nf4_science/genomics/01_per_sample_variant_calling.md
       - nf4_science/genomics/02_joint_calling.md
-      - nf4_science/genomics/03_configuration.md
-      - nf4_science/genomics/04_testing.md
   - Fundamentals Training:
       - basic_training/index.md
       - basic_training/orientation.md
