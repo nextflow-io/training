@@ -332,9 +332,9 @@ We provide an example parameter file in the current directory, called `test-para
 
 ```json title="test-params.json" linenums="1"
 {
-    "greeting": "greetings.csv",
-    "batch": "Trio",
-    "character": "turkey"
+  "greeting": "greetings.csv",
+  "batch": "Trio",
+  "character": "turkey"
 }
 ```
 

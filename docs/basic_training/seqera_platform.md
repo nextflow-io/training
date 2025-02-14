@@ -9,10 +9,10 @@ Seqera Platform, previously known as Nextflow Tower, is the centralized command 
 
 Seqera core features include:
 
--   The launching of pre-configured pipelines with ease.
--   Programmatic integration to meet the needs of an organization.
--   Publishing pipelines to shared workspaces.
--   Management of the infrastructure required to run data analysis at scale.
+- The launching of pre-configured pipelines with ease.
+- Programmatic integration to meet the needs of an organization.
+- Publishing pipelines to shared workspaces.
+- Management of the infrastructure required to run data analysis at scale.
 
 !!! tip
 
@@ -165,10 +165,10 @@ In brief, these are the steps you need to follow to set up a pipeline.
 6. Enter the name(s) of each of the Nextflow **Config profiles** followed by the `Enter` key. See the Nextflow [Config profiles](https://www.nextflow.io/docs/latest/config.html#config-profiles) documentation for more details.
 7. Enter any workflow parameters in YAML or JSON format. YAML example:
 
-    ```yaml
-    reads: "s3://nf-bucket/exome-data/ERR013140_{1,2}.fastq.bz2"
-    paired_end: true
-    ```
+   ```yaml
+   reads: "s3://nf-bucket/exome-data/ERR013140_{1,2}.fastq.bz2"
+   paired_end: true
+   ```
 
 8. Select Launch to begin the pipeline execution.
 

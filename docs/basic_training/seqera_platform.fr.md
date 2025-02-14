@@ -11,10 +11,10 @@ Seqera Platform, anciennement connu sous le nom Nextflow Tower, est le poste de 
 
 Les principales caractéristiques de Seqera Platform sont les suivantes
 
--   Le lancement de pipelines préconfigurés en toute simplicité.
--   L'intégration programmatique pour répondre aux besoins d'une organisation.
--   La publication de pipelines dans des espaces de travail partagés.
--   La gestion de l'infrastructure nécessaire à l'exécution d'analyses de données à grande échelle.
+- Le lancement de pipelines préconfigurés en toute simplicité.
+- L'intégration programmatique pour répondre aux besoins d'une organisation.
+- La publication de pipelines dans des espaces de travail partagés.
+- La gestion de l'infrastructure nécessaire à l'exécution d'analyses de données à grande échelle.
 
 !!! conseil
 
@@ -163,10 +163,10 @@ En bref, voici les étapes à suivre pour mettre en place une filière.
 6. Entrez le(s) nom(s) de chacun des **profils de configuration** de Nextflow suivi de la touche `Enter`. Voir la documentation Nextflow [Configuration des profiles](https://www.nextflow.io/docs/latest/config.html#config-profiles) pour plus de détails.
 7. Saisissez les paramètres du workflow au format YAML ou JSON. Exemple YAML :
 
-    ```yaml
-    reads: "s3://nf-bucket/exome-data/ERR013140_{1,2}.fastq.bz2"
-    paired_end: true
-    ```
+   ```yaml
+   reads: "s3://nf-bucket/exome-data/ERR013140_{1,2}.fastq.bz2"
+   paired_end: true
+   ```
 
 8. Sélectionnez Launch (Lancer) pour commencer l'exécution du pipeline.
 
