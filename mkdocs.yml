@@ -78,7 +78,6 @@ theme:
     - content.code.annotate
     - content.code.copy
     - navigation.footer
-    - navigation.tabs
     - navigation.top
     - navigation.tracking
     - search.share
