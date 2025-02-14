@@ -30,9 +30,9 @@ workflow {
 
     // create a channel for inputs
     greeting_ch = Channel.of(greetings_array)
-                     .view { "Before flatten: $it" }
-                     .flatten()
-                     .view { "After flatten: $it" }
+                    .view { "Before flatten: $it" }
+                    .flatten()
+                    .view { "After flatten: $it" }
 
     // emit a greeting
     sayHello(greeting_ch)
