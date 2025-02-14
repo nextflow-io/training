@@ -133,33 +133,25 @@ You can still find the materials in the GitHub repository and download them for 
 
     !!! quote inline end ""
 
-        :material-run-fast: This course will help you to understand how to customize the execution of an nf-core pipeline.
+        :material-run-fast: Learn how to customize the execution of an nf-core pipeline.
 
     A "learn by doing" tutorial focusing on the configuration of nf-core pipelines.
-
-    [Launch the nf-core configuration training :material-arrow-right:](nf_customize/index.md){ .md-button }
 
 !!! exercise "Develop a pipeline with the nf-core template"
 
     !!! quote inline end ""
 
-        :material-run-fast: This course will help you to understand the structure of the nf-core pipeline template.
+        :material-run-fast: Learn the structure of the nf-core pipeline template.
 
     A "learn by doing" pipeline development tutorial focusing on developing a pipeline with the nf-core template.
-
-    [Launch the nf-core template training :material-arrow-right:](nf_develop/index.md){ .md-button }
 
 !!! exercise "Troubleshooting exercises"
 
     !!! quote inline end ""
 
-        :material-run-fast: This course will help you troubleshooting common pipeline errors.
+        :material-run-fast: Learn to troubleshoot common pipeline errors.
 
     A "learn by doing" troubleshooting tutorial for pipeline developers and users.
-
-    [Launch the Troubleshooting training :material-arrow-right:](troubleshoot/index.md){ .md-button }
-
-## Deprecated
 
 !!! exercise "Simple RNA-seq variant calling"
 
