@@ -26,7 +26,7 @@ Combining the GVCFs is done with GATK GenomicsDBImport, which combines the per-s
 So to recap, in this part of the course, we're going to develop a workflow that does the following:
 
 <figure class="excalidraw">
---8<-- "img/hello-gatk-2.svg"
+--8<-- "docs/nf4_science/genomics/img/hello-gatk-2.svg"
 </figure>
 
 1. Generate an index file for each BAM input file using Samtools

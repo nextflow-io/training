@@ -29,7 +29,7 @@ In this part of the course, we're going to develop a workflow that does the foll
 2. Run the GATK HaplotypeCaller on each BAM input file to generate per-sample variant calls in VCF (Variant Call Format)
 
 <figure class="excalidraw">
---8<-- "img/hello-gatk-1.svg"
+--8<-- "docs/nf4_science/genomics/img/hello-gatk-1.svg"
 </figure>
 
 !!! note
