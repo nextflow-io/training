@@ -46,19 +46,19 @@ If you run this inside `hello-nextflow`, you should see the following output:
 
 **Here's a summary of what you should know to get started:**
 
--   **The `.nf` files** are workflow scripts that are named based on what part of the course they're used in.
+- **The `.nf` files** are workflow scripts that are named based on what part of the course they're used in.
 
--   **The file `nextflow.config`** is a configuration file that sets minimal environment properties.
-    You can ignore it for now.
+- **The file `nextflow.config`** is a configuration file that sets minimal environment properties.
+  You can ignore it for now.
 
--   **The file `greetings.csv`** contains input data we'll use in most of the course. It is described in Part 1, when we introduce it for the first time.
+- **The file `greetings.csv`** contains input data we'll use in most of the course. It is described in Part 1, when we introduce it for the first time.
 
--   **The file `test-params.json`** is a file we'll use in Part 6. You can ignore it for now.
+- **The file `test-params.json`** is a file we'll use in Part 6. You can ignore it for now.
 
--   **The `solutions` directory** contains the completed workflow scripts that result from each step of the course.
-    They are intended to be used as a reference to check your work and troubleshoot any issues.
-    The name and number in the filename correspond to the step of the relevant part of the course.
-    For example, the file `hello-world-4.nf` is the expected result of completing steps 1 through 4 of Part 1: Hello World.
+- **The `solutions` directory** contains the completed workflow scripts that result from each step of the course.
+  They are intended to be used as a reference to check your work and troubleshoot any issues.
+  The name and number in the filename correspond to the step of the relevant part of the course.
+  For example, the file `hello-world-4.nf` is the expected result of completing steps 1 through 4 of Part 1: Hello World.
 
 !!!tip
 

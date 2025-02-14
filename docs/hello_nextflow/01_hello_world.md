@@ -258,13 +258,13 @@ work
 
 These are the helper and log files:
 
--   **`.command.begin`**: Metadata related to the beginning of the execution of the process call
--   **`.command.err`**: Error messages (`stderr`) emitted by the process call
--   **`.command.log`**: Complete log output emitted by the process call
--   **`.command.out`**: Regular output (`stdout`) by the process call
--   **`.command.run`**: Full script run by Nextflow to execute the process call
--   **`.command.sh`**: The command that was run by the process call call
--   **`.exitcode`**: The exit code resulting from the command
+- **`.command.begin`**: Metadata related to the beginning of the execution of the process call
+- **`.command.err`**: Error messages (`stderr`) emitted by the process call
+- **`.command.log`**: Complete log output emitted by the process call
+- **`.command.out`**: Regular output (`stdout`) by the process call
+- **`.command.run`**: Full script run by Nextflow to execute the process call
+- **`.command.sh`**: The command that was run by the process call call
+- **`.exitcode`**: The exit code resulting from the command
 
 The `.command.sh` file is especially useful because it tells you what command Nextflow actually executed.
 In this case it's very straightforward, but later in the course you'll see commands that involve some interpolation of variables.
@@ -372,8 +372,8 @@ This means Nextflow will only run processes that you've added or modified since 
 
 There are two key advantages to doing this:
 
--   If you're in the middle of developing your pipeline, you can iterate more rapidly since you only have to run the process(es) you're actively working on in order to test your changes.
--   If you're running a pipeline in production and something goes wrong, in many cases you can fix the issue and relaunch the pipeline, and it will resume running from the point of failure, which can save you a lot of time and compute.
+- If you're in the middle of developing your pipeline, you can iterate more rapidly since you only have to run the process(es) you're actively working on in order to test your changes.
+- If you're running a pipeline in production and something goes wrong, in many cases you can fix the issue and relaunch the pipeline, and it will resume running from the point of failure, which can save you a lot of time and compute.
 
 To use it, simply add `-resume` to your command and run it:
 

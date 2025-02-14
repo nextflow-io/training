@@ -135,9 +135,9 @@ Doing these exercises is _not required_ to understand later parts of the trainin
 We have a list of computer and biology pioneers in the `containers/data/pioneers.csv` file.
 At a high level, to complete this exercise you will need to:
 
--   Modify the default `params.input_file` to point to the `pioneers.csv` file.
--   Create a `getQuote` process that uses the `quote` container to fetch a quote for each input.
--   Connect the output of the `getQuote` process to the `cowsay` process to display the quote.
+- Modify the default `params.input_file` to point to the `pioneers.csv` file.
+- Create a `getQuote` process that uses the `quote` container to fetch a quote for each input.
+- Connect the output of the `getQuote` process to the `cowsay` process to display the quote.
 
 For the `quote` container image, you can either use the one you built yourself in the previous stretch exercise or use the one you got from Seqera Containers .
 

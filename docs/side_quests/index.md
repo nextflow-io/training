@@ -1,7 +1,7 @@
 ---
 title: Side Quests
 hide:
-    - toc
+  - toc
 ---
 
 # Side Quests
@@ -22,6 +22,6 @@ The learning objectives are specific to each section. [TODO]
 
 **Prerequisites**
 
--   A GitHub account
--   Experience with command line
-    [TODO]
+- A GitHub account
+- Experience with command line
+  [TODO]

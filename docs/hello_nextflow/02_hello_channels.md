@@ -614,8 +614,8 @@ So now we need to modify our workflow to read in the values from a file like tha
 
 To get started, we're going to need to make two key changes to the script:
 
--   Switch the input parameter to point to the CSV file
--   Switch to a channel factory designed to handle a file
+- Switch the input parameter to point to the CSV file
+- Switch to a channel factory designed to handle a file
 
 #### 4.1.1. Switch the input parameter to point to the CSV file
 
@@ -845,9 +845,9 @@ After map: Holà
 
 Looking at the output of the `view()` statements, we see the following:
 
--   A single `Before splitCsv:` statement: at that point the channel contains one item, the original file path.
--   Three separate `After splitCsv:` statements: one for each greeting, but each is contained within an array that corresponds to that line in the file.
--   Three separate `After map:` statements: one for each greeting, which are now individual items in the channel.
+- A single `Before splitCsv:` statement: at that point the channel contains one item, the original file path.
+- Three separate `After splitCsv:` statements: one for each greeting, but each is contained within an array that corresponds to that line in the file.
+- Three separate `After map:` statements: one for each greeting, which are now individual items in the channel.
 
 You can also look at the output files to verify that each greeting was correctly extracted and processed through the workflow.
 

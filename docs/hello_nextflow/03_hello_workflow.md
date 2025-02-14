@@ -62,9 +62,9 @@ If that worked for you, you're ready to learn how to assemble a multi-step workf
 We're going to add a step to convert the greeting to uppercase.
 To that end, we need to do three things:
 
--   Define the command we'lre going to use to do the uppercase conversion.
--   Write a new process that wraps the uppercasing command.
--   Add the new process to the workflow and set it up to take the output of the `sayHello()` process as input.
+- Define the command we'lre going to use to do the uppercase conversion.
+- Write a new process that wraps the uppercasing command.
+- Add the new process to the workflow and set it up to take the output of the `sayHello()` process as input.
 
 ### 1.1. Define the uppercasing command and test it in the terminal
 
@@ -520,8 +520,8 @@ This time the third step was only called once!
 
 Looking at the output of the `view()` statements, we see the following:
 
--   Three `Before collect:` statements, one for each greeting: at that point the file paths are individual items in the channel.
--   A single `After collect:` statement: the three file paths are now packaged into a single item.
+- Three `Before collect:` statements, one for each greeting: at that point the file paths are individual items in the channel.
+- A single `After collect:` statement: the three file paths are now packaged into a single item.
 
 Have a look at the contents of the final output file too:
 
@@ -554,8 +554,8 @@ We want to be able to name the final output file something specific in order to 
 
 To that end, we're going to make the following refinements to the workflow:
 
--   Modify the collector process to accept a user-defined name for the output file
--   Add a command-line parameter to the workflow and pass it to the collector process
+- Modify the collector process to accept a user-defined name for the output file
+- Add a command-line parameter to the workflow and pass it to the collector process
 
 ### 3.1. Modify the collector process to accept a user-defined name for the output file
 
@@ -729,8 +729,8 @@ For demonstration purposes, let's say we want to count and report the number of 
 
 To that end, we're going to make the following refinements to the workflow:
 
--   Modify the process to count and output the number of greetings
--   Once the process has run, select the count and report it using `view` (in the workflow block)
+- Modify the process to count and output the number of greetings
+- Once the process has run, select the count and report it using `view` (in the workflow block)
 
 ### 4.1. Modify the process to count and output the number of greetings
 
@@ -795,8 +795,8 @@ But as the saying goes, why not both?
 
 Now that we have two outputs coming out of the `collectGreetings` process, the `collectGreetings.out` output channel contains two 'tracks':
 
--   `collectGreetings.out.outfile` contains the final output file
--   `collectGreetings.out.count` contains the count of greetings
+- `collectGreetings.out.outfile` contains the final output file
+- `collectGreetings.out.count` contains the count of greetings
 
 We could send either or both of these to another process for further work. However, in the interest of wrapping this up, we're just going to use `view()` to demonstrate that we can access and report the count of greetings.
 

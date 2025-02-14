@@ -183,9 +183,9 @@ In plain English, the logic of the test reads as follows:
 
 The expected results are formulated as `assert` statements.
 
--   `assert process.success` states that we expect the process to run successfully and complete without any failures.
--   `snapshot(process.out).match()` states that we expect the result of the run to be identical to the result obtained in a previous run (if applicable).
-    We discuss this in more detail later.
+- `assert process.success` states that we expect the process to run successfully and complete without any failures.
+- `snapshot(process.out).match()` states that we expect the result of the run to be identical to the result obtained in a previous run (if applicable).
+  We discuss this in more detail later.
 
 For most real-world modules (which usually require some kind of input), this is not yet a functional test.
 We need to add the inputs that will be fed to the process, and any parameters if applicable.
@@ -297,9 +297,9 @@ params {
 
 Finally, it's time to run our test! Let's break down the syntax.
 
--   The basic command is `nf-test test`.
--   To that, we add `--profile docker_on` to specify that we want Nextflow to run the test with Docker enabled.
--   Then the test file that we want to run.
+- The basic command is `nf-test test`.
+- To that, we add `--profile docker_on` to specify that we want Nextflow to run the test with Docker enabled.
+- Then the test file that we want to run.
 
 !!!note
 
@@ -349,8 +349,8 @@ If we re-run the test, the program will check that the new output matches the ou
 
 If, in the course of future development, something in the code changes that causes the output to be different, the test will fail and we will have to determine whether the change is expected or not.
 
--   If it turns out that something in the code broke, we will have to fix it, with the expectation that the fixed code will pass the test.
--   If it is an expected change (e.g., the tool has been improved and the results are better) then we will need to update the snapshot to accept the new output as the reference to match, using the parameter `--update-snapshot` when we run the test command.
+- If it turns out that something in the code broke, we will have to fix it, with the expectation that the fixed code will pass the test.
+- If it is an expected change (e.g., the tool has been improved and the results are better) then we will need to update the snapshot to accept the new output as the reference to match, using the parameter `--update-snapshot` when we run the test command.
 
 ### 1.7. Add more tests to `SAMTOOLS_INDEX`
 
@@ -464,8 +464,8 @@ Now that we know how to handle the simplest case, we're going to kick things up 
 As the second step in our pipeline, its input depends on the output of another process.
 We can deal with this in two ways:
 
--   Manually generate some static test data that is suitable as intermediate input to the process;
--   Use a special [setup method](https://www.nf-test.com/docs/testcases/setup/) to handle it dynamically for us.
+- Manually generate some static test data that is suitable as intermediate input to the process;
+- Use a special [setup method](https://www.nf-test.com/docs/testcases/setup/) to handle it dynamically for us.
 
 **Spoiler:** We're going to use the setup method.
 

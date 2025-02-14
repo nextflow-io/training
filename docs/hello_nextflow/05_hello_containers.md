@@ -420,8 +420,8 @@ workflow {
 
 Let's connect the `cowpy()` process to the output of the `collectGreetings()` process, which as you may recall produces two outputs:
 
--   `collectGreetings.out.outfile` contains the output file
--   `collectGreetings.out.count` contains the count of greetings per batch
+- `collectGreetings.out.outfile` contains the output file
+- `collectGreetings.out.count` contains the count of greetings per batch
 
 In the workflow block, make the following code change:
 

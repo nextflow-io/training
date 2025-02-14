@@ -35,17 +35,17 @@ TODO
 
 **Here's a summary of what you should know to get started:**
 
--   **The `.nf` files** are workflow scripts that are named based on what part of the course they're used in.
+- **The `.nf` files** are workflow scripts that are named based on what part of the course they're used in.
 
--   **The file `nextflow.config`** is a configuration file that sets minimal environment properties.
-    You can ignore it for now.
+- **The file `nextflow.config`** is a configuration file that sets minimal environment properties.
+  You can ignore it for now.
 
--   TODO: input data description
+- TODO: input data description
 
--   **The `solutions` directory** contains the completed workflow scripts that result from each step of the course.
-    They are intended to be used as a reference to check your work and troubleshoot any issues.
-    The name and number in the filename correspond to the step of the relevant part of the course.
-    For example, the file `TODO.nf` is the expected result of completing steps X through Y of Part 1: TODO.
+- **The `solutions` directory** contains the completed workflow scripts that result from each step of the course.
+  They are intended to be used as a reference to check your work and troubleshoot any issues.
+  The name and number in the filename correspond to the step of the relevant part of the course.
+  For example, the file `TODO.nf` is the expected result of completing steps X through Y of Part 1: TODO.
 
 !!!tip
 

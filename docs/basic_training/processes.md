@@ -762,7 +762,6 @@ Some caveats on glob pattern behavior:
 - Glob pattern matches both files and directory paths
 - When a two asterisks pattern `**` is used to recourse across directories, only file paths are matched i.e., directories are not included in the result list.
 
-
 !!! question "Exercise"
 
     Add the `flatMap` operator and see out the output changes. The documentation for the `flatMap` operator is available at [this link](https://www.nextflow.io/docs/latest/operator.html#flatmap).
