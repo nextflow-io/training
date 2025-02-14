@@ -49,6 +49,8 @@ These are foundational, domain-agnostic courses intended for those who are compl
 
     [Launch the Hello Nextflow training :material-arrow-right:](hello_nextflow/index.md){ .md-button .md-button--primary }
 
+**Coming soon:** "Nextflow Run" (Learn to run Nextflow pipelines)
+
 <!-- COMMENTED OUT UNTIL THIS IS READY
 !!! exercise "Nextflow Run"
 
@@ -74,6 +76,8 @@ These are courses that demonstrate how to apply the concepts and components pres
     This is a course for researchers who wish to learn how to develop their own genomics pipelines. The course uses a variant calling use case to demonstrate how to develop a simple but functional genomics pipeline.
 
     [Launch the Nextflow for Genomics training :material-arrow-right:](nf4_genomics/index.md){ .md-button .md-button--primary }
+
+**Coming soon:** "Nextflow for RNAseq" (Learn to develop a pipeline for bulk RNAseq analysis in Nextflow)
 
 <!-- COMMENTED OUT UNTIL THIS IS READY
 !!! exercise "Nextflow for RNAseq"
@@ -129,37 +133,17 @@ These are training courses that are not being actively taught/maintained and tha
 The corresponding materials are not available within the training environment.
 You can still find the materials in the GitHub repository and download them for local use.
 
-!!! exercise "Configure the execution of an nf-core pipeline"
+- **nf-customize**
+  Configuring nf-core pipelines ([docs](other/nf_customize) / [code](../other/nf-customize))
 
-    !!! quote inline end ""
+- **nf-develop**
+  Developing a pipeline with the nf-core template ([docs](other/nf_develop) / [code](../other/nf-develop))
 
-        :material-run-fast: Learn how to customize the execution of an nf-core pipeline.
+- **troubleshoot**
+  Troubleshooting exercises ([docs](other/troubleshoot) / [code](../other/troubleshoot))
 
-    A "learn by doing" tutorial focusing on the configuration of nf-core pipelines.
-
-!!! exercise "Develop a pipeline with the nf-core template"
-
-    !!! quote inline end ""
-
-        :material-run-fast: Learn the structure of the nf-core pipeline template.
-
-    A "learn by doing" pipeline development tutorial focusing on developing a pipeline with the nf-core template.
-
-!!! exercise "Troubleshooting exercises"
-
-    !!! quote inline end ""
-
-        :material-run-fast: Learn to troubleshoot common pipeline errors.
-
-    A "learn by doing" troubleshooting tutorial for pipeline developers and users.
-
-!!! exercise "Simple RNA-seq variant calling"
-
-    !!! quote inline end ""
-
-        :material-run-fast: A short hands-on tutorial focused on a concrete analysis pipeline example.
-
-    This course was developed as a "learn by doing" tutorial intended as a fast, hands-on way to get to grips with Nextflow using a very concrete analysis pipeline example.
+- **hands-on (rnaseq)**
+  Developing a pipeline for bulk RNAseq (deprecated) ([docs](other/hands_on) / [code](../other/hands-on))
 
 ## Resources
 
