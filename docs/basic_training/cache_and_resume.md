@@ -181,18 +181,18 @@ Finally, the `-t` option enables the creation of a basic custom provenance repor
 
 ```html
 <div>
-    <h2>${name}</h2>
-    <div>
-        Script:
-        <pre>${script}</pre>
-    </div>
+  <h2>${name}</h2>
+  <div>
+    Script:
+    <pre>${script}</pre>
+  </div>
 
-    <ul>
-        <li>Exit: ${exit}</li>
-        <li>Status: ${status}</li>
-        <li>Work dir: ${workdir}</li>
-        <li>Container: ${container}</li>
-    </ul>
+  <ul>
+    <li>Exit: ${exit}</li>
+    <li>Status: ${status}</li>
+    <li>Work dir: ${workdir}</li>
+    <li>Container: ${container}</li>
+  </ul>
 </div>
 ```
 

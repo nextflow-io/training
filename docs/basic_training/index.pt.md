@@ -1,7 +1,7 @@
 ---
 description: Visão geral do material de treinamento básico do Nextflow
 hide:
-    - toc
+  - toc
 ---
 
 # Bem vindo ao treinamento básico do Nextflow

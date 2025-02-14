@@ -84,8 +84,8 @@ However, if you wish to remove or modify this file you would need to ignore this
 ```yml title=".nf-core.yml"
 repository_type: pipeline
 lint:
-    files_unchanged:
-        - CODE_OF_CONDUCT.md
+  files_unchanged:
+    - CODE_OF_CONDUCT.md
 ```
 
 If you run `nf-core lint` again, you would see that the test is now ignored and there are no more failed tests.

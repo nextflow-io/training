@@ -53,7 +53,7 @@ process GATK_HAPLOTYPECALLER {
 
     output:
         path "${input_bam}.vcf"     , emit: vcf
-        path "${input_bam}.vcf.idx" , emit: idx 
+        path "${input_bam}.vcf.idx" , emit: idx
 
     script:
     """

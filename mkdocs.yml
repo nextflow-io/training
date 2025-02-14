@@ -4,211 +4,211 @@ repo_url: https://github.com/nextflow-io/training
 repo_name: nextflow-io/training
 
 nav:
-    - Home: index.md
-    - Environment setup:
-          - envsetup/index.md
-          - envsetup/01_setup.md
-          - envsetup/02_local.md
-    - Hello Nextflow:
-          - hello_nextflow/index.md
-          - hello_nextflow/01_orientation.md
-          - hello_nextflow/02_hello_world.md
-          - hello_nextflow/03_hello_containers.md
-          - hello_nextflow/04_hello_genomics.md
-          - hello_nextflow/05_hello_operators.md
-          - hello_nextflow/06_hello_config.md
-          - hello_nextflow/07_hello_modules.md
-          - hello_nextflow/08_hello_nf-test.md
-          - hello_nextflow/09_hello_nf-core.md
-          - hello_nextflow/10_hello_seqera.md
-    - Fundamentals Training:
-          - basic_training/index.md
-          - basic_training/orientation.md
-          - basic_training/intro.md
-          - basic_training/rnaseq_pipeline.md
-          - basic_training/containers.md
-          - basic_training/channels.md
-          - basic_training/processes.md
-          - basic_training/operators.md
-          - basic_training/groovy.md
-          - basic_training/modules.md
-          - basic_training/config.md
-          - basic_training/executors.md
-          - basic_training/seqera_platform.md
-          - basic_training/cache_and_resume.md
-          - basic_training/debugging.md
-    - Advanced Training:
-          - advanced/index.md
-          - advanced/orientation.md
-          - advanced/operators.md
-          - advanced/metadata.md
-          - advanced/grouping.md
-          - advanced/groovy.md
-          - advanced/structure.md
-          - advanced/configuration.md
-          - advanced/summary.md
-          - advanced/support.md
-    - Configure nf-core:
-          - nf_customize/index.md
-          - nf_customize/01_orientation.md
-          - nf_customize/02_nf-core.md
-          - nf_customize/03_execution.md
-          - nf_customize/04_config.md
-          - nf_customize/05_tools.md
-    - Develop nf-core:
-          - nf_develop/index.md
-          - nf_develop/1_01_orientation.md
-          - nf_develop/1_02_create.md
-          - nf_develop/1_03_pipeline.md
-          - nf_develop/1_04_parameters.md
-    - Troubleshooting:
-          - troubleshoot/index.md
-          - troubleshoot/01_orientation.md
-          - troubleshoot/01_exercise.md
-          - troubleshoot/02_exercise.md
-          - troubleshoot/03_exercise.md
-          - troubleshoot/04_exercise.md
-          - troubleshoot/05_exercise.md
-          - troubleshoot/06_exercise.md
+  - Home: index.md
+  - Environment setup:
+      - envsetup/index.md
+      - envsetup/01_setup.md
+      - envsetup/02_local.md
+  - Hello Nextflow:
+      - hello_nextflow/index.md
+      - hello_nextflow/01_orientation.md
+      - hello_nextflow/02_hello_world.md
+      - hello_nextflow/03_hello_containers.md
+      - hello_nextflow/04_hello_genomics.md
+      - hello_nextflow/05_hello_operators.md
+      - hello_nextflow/06_hello_config.md
+      - hello_nextflow/07_hello_modules.md
+      - hello_nextflow/08_hello_nf-test.md
+      - hello_nextflow/09_hello_nf-core.md
+      - hello_nextflow/10_hello_seqera.md
+  - Fundamentals Training:
+      - basic_training/index.md
+      - basic_training/orientation.md
+      - basic_training/intro.md
+      - basic_training/rnaseq_pipeline.md
+      - basic_training/containers.md
+      - basic_training/channels.md
+      - basic_training/processes.md
+      - basic_training/operators.md
+      - basic_training/groovy.md
+      - basic_training/modules.md
+      - basic_training/config.md
+      - basic_training/executors.md
+      - basic_training/seqera_platform.md
+      - basic_training/cache_and_resume.md
+      - basic_training/debugging.md
+  - Advanced Training:
+      - advanced/index.md
+      - advanced/orientation.md
+      - advanced/operators.md
+      - advanced/metadata.md
+      - advanced/grouping.md
+      - advanced/groovy.md
+      - advanced/structure.md
+      - advanced/configuration.md
+      - advanced/summary.md
+      - advanced/support.md
+  - Configure nf-core:
+      - nf_customize/index.md
+      - nf_customize/01_orientation.md
+      - nf_customize/02_nf-core.md
+      - nf_customize/03_execution.md
+      - nf_customize/04_config.md
+      - nf_customize/05_tools.md
+  - Develop nf-core:
+      - nf_develop/index.md
+      - nf_develop/1_01_orientation.md
+      - nf_develop/1_02_create.md
+      - nf_develop/1_03_pipeline.md
+      - nf_develop/1_04_parameters.md
+  - Troubleshooting:
+      - troubleshoot/index.md
+      - troubleshoot/01_orientation.md
+      - troubleshoot/01_exercise.md
+      - troubleshoot/02_exercise.md
+      - troubleshoot/03_exercise.md
+      - troubleshoot/04_exercise.md
+      - troubleshoot/05_exercise.md
+      - troubleshoot/06_exercise.md
 
 theme:
-    name: material
-    custom_dir: docs/assets/overrides
-    language: en
-    logo: assets/img/nextflow-logo-white.png
-    favicon: assets/img/nextflow-icon.png
-    palette:
-        # Palette toggle for dark mode
-        - media: "(prefers-color-scheme: dark)"
-          scheme: slate
-          toggle:
-              icon: material/weather-night
-              name: Switch to light mode
-        # Palette toggle for light mode
-        - media: "(prefers-color-scheme: light)"
-          scheme: default
-          toggle:
-              icon: material/weather-sunny
-              name: Switch to dark mode
-    font:
-        text: Inter
-        code: Roboto Mono
-    features:
-        - content.action.edit
-        - content.code.annotate
-        - content.code.copy
-        - navigation.footer
-        - navigation.tabs
-        - navigation.top
-        - navigation.tracking
-        - search.share
-        - toc.follow
-    icon:
-        repo: fontawesome/brands/github
+  name: material
+  custom_dir: docs/assets/overrides
+  language: en
+  logo: assets/img/nextflow-logo-white.png
+  favicon: assets/img/nextflow-icon.png
+  palette:
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      toggle:
+        icon: material/weather-night
+        name: Switch to light mode
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to dark mode
+  font:
+    text: Inter
+    code: Roboto Mono
+  features:
+    - content.action.edit
+    - content.code.annotate
+    - content.code.copy
+    - navigation.footer
+    - navigation.tabs
+    - navigation.top
+    - navigation.tracking
+    - search.share
+    - toc.follow
+  icon:
+    repo: fontawesome/brands/github
 extra_css:
-    - assets/stylesheets/fonts.css
-    - assets/stylesheets/extra.css
+  - assets/stylesheets/fonts.css
+  - assets/stylesheets/extra.css
 
 # Set in docs/assets/overrides/partials/copyright.html
 # so that we can have links and stuff
 # copyright: Seqera
 
 extra:
-    # Announcement banner for upcoming training
-    announcement:
-        active: false
-        date_text: March 5-6, 2024
-        register_url: https://nf-co.re/events/2024/training-foundational-march
-    # Analytics
-    analytics:
-        provider: google
-        property: G-244N3GEN75
-    consent:
-        title: Cookie consent
-        description: >-
-            We use cookies to recognize your repeated visits and preferences, as well
-            as to measure the effectiveness of our documentation and whether users
-            find what they're searching for. With your consent, you're helping us to
-            make our documentation better.
-    # Overridden in docs/assets/overrides/partials/social.html
-    # Still needs to be set to something here so that the partial is used
-    social:
-        - icon: fontawesome/brands/twitter
-          link: https://twitter.com/nextflowio
-          name: Nextflow on twitter
-    version:
-        provider: mike
-        alias: true
+  # Announcement banner for upcoming training
+  announcement:
+    active: false
+    date_text: March 5-6, 2024
+    register_url: https://nf-co.re/events/2024/training-foundational-march
+  # Analytics
+  analytics:
+    provider: google
+    property: G-244N3GEN75
+  consent:
+    title: Cookie consent
+    description: >-
+      We use cookies to recognize your repeated visits and preferences, as well
+      as to measure the effectiveness of our documentation and whether users
+      find what they're searching for. With your consent, you're helping us to
+      make our documentation better.
+  # Overridden in docs/assets/overrides/partials/social.html
+  # Still needs to be set to something here so that the partial is used
+  social:
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/nextflowio
+      name: Nextflow on twitter
+  version:
+    provider: mike
+    alias: true
 markdown_extensions:
-    - admonition
-    - attr_list
-    - md_in_html
-    - pymdownx.details
-    - pymdownx.emoji:
-          emoji_index: !!python/name:material.extensions.emoji.twemoji
-          emoji_generator: !!python/name:material.extensions.emoji.to_svg
-    - pymdownx.highlight:
-          anchor_linenums: true
-    - pymdownx.inlinehilite
-    - pymdownx.keys
-    - pymdownx.snippets:
-          base_path: ["."]
-    - pymdownx.snippets
-    - pymdownx.superfences:
-          preserve_tabs: true
-    - pymdownx.tabbed:
-          alternate_style: true
-    - pymdownx.tasklist:
-          custom_checkbox: true
-          clickable_checkbox: true
-    - tables
-    - toc:
-          title: On this page
-          permalink: true
+  - admonition
+  - attr_list
+  - md_in_html
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.snippets:
+      base_path: ["."]
+  - pymdownx.snippets
+  - pymdownx.superfences:
+      preserve_tabs: true
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+      clickable_checkbox: true
+  - tables
+  - toc:
+      title: On this page
+      permalink: true
 plugins:
-    - enumerate-headings:
-          restart_increment_after:
-              - envsetup/01_setup.md
-              - hello_nextflow/01_orientation.md
-              - basic_training/orientation.md
-              - advanced/orientation.md
-              - nf_customize/01_orientation.md
-              - nf_develop/1_01_orientation.md
-              - troubleshoot/01_orientation.md
+  - enumerate-headings:
+      restart_increment_after:
+        - envsetup/01_setup.md
+        - hello_nextflow/01_orientation.md
+        - basic_training/orientation.md
+        - advanced/orientation.md
+        - nf_customize/01_orientation.md
+        - nf_develop/1_01_orientation.md
+        - troubleshoot/01_orientation.md
 
-          exclude:
-              - index.md
-              - help.md
-              - envsetup/index.md
-              - basic_training/index.md
-              - advanced/index.md
-              - hello_nextflow/index.md
-              - nf_customize/index.md
-              - nf_develop/index.md
-              - troubleshoot/index.md
-              - hands_on/index.md
-              - hands_on/solutions/*md
-              - hello_nextflow/*.md
-    - i18n:
-          docs_structure: suffix
-          fallback_to_default: true
-          languages:
-              - build: true
-                default: true
-                locale: en
-                name: English
-              - build: true
-                default: false
-                locale: pt
-                name: Português
-              - build: true
-                default: false
-                locale: es
-                name: Español
-              - build: true
-                default: false
-                locale: fr
-                name: Français
-          reconfigure_material: true
-          reconfigure_search: true
-    - search
+      exclude:
+        - index.md
+        - help.md
+        - envsetup/index.md
+        - basic_training/index.md
+        - advanced/index.md
+        - hello_nextflow/index.md
+        - nf_customize/index.md
+        - nf_develop/index.md
+        - troubleshoot/index.md
+        - hands_on/index.md
+        - hands_on/solutions/*md
+        - hello_nextflow/*.md
+  - i18n:
+      docs_structure: suffix
+      fallback_to_default: true
+      languages:
+        - build: true
+          default: true
+          locale: en
+          name: English
+        - build: true
+          default: false
+          locale: pt
+          name: Português
+        - build: true
+          default: false
+          locale: es
+          name: Español
+        - build: true
+          default: false
+          locale: fr
+          name: Français
+      reconfigure_material: true
+      reconfigure_search: true
+  - search

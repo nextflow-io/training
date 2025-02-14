@@ -2,20 +2,20 @@
 
 Table of contents:
 
--   [Contributing](#contributing)
-    -   [Contribution model](#contribution-model)
-    -   [Installation](#installation)
-        -   [Docker](#docker)
-        -   [Python](#python)
-        -   [Social cards](#social-cards)
-    -   [Figures \& diagrams](#figures--diagrams)
-    -   [Content style and formatting](#content-style-and-formatting)
-        -   [Formatting / linting](#formatting--linting)
-        -   [Admonitions](#admonitions)
-    -   [Known limitations](#known-limitations)
-        -   [Code annotations](#code-annotations)
-        -   [Word highlighting](#word-highlighting)
-    -   [TODO / FIXME](#todo--fixme)
+- [Contributing](#contributing)
+  - [Contribution model](#contribution-model)
+  - [Installation](#installation)
+    - [Docker](#docker)
+    - [Python](#python)
+    - [Social cards](#social-cards)
+  - [Figures \& diagrams](#figures--diagrams)
+  - [Content style and formatting](#content-style-and-formatting)
+    - [Formatting / linting](#formatting--linting)
+    - [Admonitions](#admonitions)
+  - [Known limitations](#known-limitations)
+    - [Code annotations](#code-annotations)
+    - [Word highlighting](#word-highlighting)
+  - [TODO / FIXME](#todo--fixme)
 
 ## Contribution model
 
@@ -92,11 +92,11 @@ If there is an announcement banner, you can enable and customise it using the fo
 
 ```yaml
 extra:
-    # Announcement banner for upcoming training
-    announcement:
-        active: false
-        date_text: March 5-6, 2024
-        register_url: https://nf-co.re/events/2024/training-foundational-march
+  # Announcement banner for upcoming training
+  announcement:
+    active: false
+    date_text: March 5-6, 2024
+    register_url: https://nf-co.re/events/2024/training-foundational-march
 ```
 
 If you need more customisation, edit `docs/assets/overrides/main.html`
@@ -136,9 +136,9 @@ There is a GitHub action that checks pull-requests for valid formatting.
 We use admonitions extensively to make certain pieces of content stand out.
 Please see the [official docs](https://squidfunk.github.io/mkdocs-material/reference/admonitions/) for an explanation.
 
--   Note that we have two custom admonitions: `exercise` and `result` (alias `solution`).
--   `!!!` does a regular admonition, `???` makes it collapsed (click to expand).
--   Intendation is important! Make sure you check the rendered site, as it's easy to make a mistake.
+- Note that we have two custom admonitions: `exercise` and `result` (alias `solution`).
+- `!!!` does a regular admonition, `???` makes it collapsed (click to expand).
+- Intendation is important! Make sure you check the rendered site, as it's easy to make a mistake.
 
 ## Known limitations
 
@@ -168,4 +168,4 @@ I recommend the [Todo Tree VSCode extension](https://marketplace.visualstudio.co
 
 A list of key ones also included here:
 
--   Remove plugin install from Phil's GitHub fork in `requirements.txt` and `.github/mkdocs.Dockerfile` when [this PR](https://github.com/timvink/mkdocs-enumerate-headings-plugin/pull/33) is merged
+- Remove plugin install from Phil's GitHub fork in `requirements.txt` and `.github/mkdocs.Dockerfile` when [this PR](https://github.com/timvink/mkdocs-enumerate-headings-plugin/pull/33) is merged

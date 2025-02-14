@@ -229,42 +229,42 @@ The `.nf-core.yml` file is used to specify the repository type and manage lintin
 ```yml title=".nf-core.yml" linenums="1"
 bump_version: null
 lint:
-    files_exist:
-        - CODE_OF_CONDUCT.md
-        - assets/nf-core-myfirstpipeline_logo_light.png
-        - docs/images/nf-core-myfirstpipeline_logo_light.png
-        - docs/images/nf-core-myfirstpipeline_logo_dark.png
-        - .github/ISSUE_TEMPLATE/config.yml
-        - .github/workflows/awstest.yml
-        - .github/workflows/awsfulltest.yml
-    files_unchanged:
-        - CODE_OF_CONDUCT.md
-        - assets/nf-core-myfirstpipeline_logo_light.png
-        - docs/images/nf-core-myfirstpipeline_logo_light.png
-        - docs/images/nf-core-myfirstpipeline_logo_dark.png
-        - .github/ISSUE_TEMPLATE/bug_report.yml
-    multiqc_config:
-        - report_comment
-    nextflow_config:
-        - manifest.name
-        - manifest.homePage
-        - validation.help.beforeText
-        - validation.help.afterText
-        - validation.summary.beforeText
-        - validation.summary.afterText
+  files_exist:
+    - CODE_OF_CONDUCT.md
+    - assets/nf-core-myfirstpipeline_logo_light.png
+    - docs/images/nf-core-myfirstpipeline_logo_light.png
+    - docs/images/nf-core-myfirstpipeline_logo_dark.png
+    - .github/ISSUE_TEMPLATE/config.yml
+    - .github/workflows/awstest.yml
+    - .github/workflows/awsfulltest.yml
+  files_unchanged:
+    - CODE_OF_CONDUCT.md
+    - assets/nf-core-myfirstpipeline_logo_light.png
+    - docs/images/nf-core-myfirstpipeline_logo_light.png
+    - docs/images/nf-core-myfirstpipeline_logo_dark.png
+    - .github/ISSUE_TEMPLATE/bug_report.yml
+  multiqc_config:
+    - report_comment
+  nextflow_config:
+    - manifest.name
+    - manifest.homePage
+    - validation.help.beforeText
+    - validation.help.afterText
+    - validation.summary.beforeText
+    - validation.summary.afterText
 nf_core_version: 3.0.1
 org_path: null
 repository_type: pipeline
 template:
-    author: Chris
-    description: My first pipeline
-    force: true
-    is_nfcore: false
-    name: myfirstpipeline
-    org: myorg
-    outdir: .
-    skip_features: []
-    version: 1.0.0dev
+  author: Chris
+  description: My first pipeline
+  force: true
+  is_nfcore: false
+  name: myfirstpipeline
+  org: myorg
+  outdir: .
+  skip_features: []
+  version: 1.0.0dev
 update: null
 ```
 

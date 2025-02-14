@@ -2,51 +2,51 @@ workspaceLocation: gitpod/gitpod-ws.code-workspace
 checkoutLocation: gitpod
 
 github:
-    prebuilds:
-        # enable for the master/default branch (defaults to true)
-        master: true
-        # enable for all branches in this repo (defaults to false)
-        branches: false
-        # enable for pull requests coming from this repo (defaults to true)
-        pullRequests: true
-        # enable for pull requests coming from forks (defaults to false)
-        pullRequestsFromForks: true
-        # add a "Review in Gitpod" button as a comment to pull requests (defaults to true)
-        addComment: true
-        # add a "Review in Gitpod" button to pull requests (defaults to false)
-        addBadge: false
+  prebuilds:
+    # enable for the master/default branch (defaults to true)
+    master: true
+    # enable for all branches in this repo (defaults to false)
+    branches: false
+    # enable for pull requests coming from this repo (defaults to true)
+    pullRequests: true
+    # enable for pull requests coming from forks (defaults to false)
+    pullRequestsFromForks: true
+    # add a "Review in Gitpod" button as a comment to pull requests (defaults to true)
+    addComment: true
+    # add a "Review in Gitpod" button to pull requests (defaults to false)
+    addBadge: false
 
 # See .github/Dockerfile
 image: ghcr.io/nextflow-io/training:latest
 
 tasks:
-    - before: printf 'unset JAVA_TOOL_OPTIONS\n' >> $HOME/.bashrc && exit
+  - before: printf 'unset JAVA_TOOL_OPTIONS\n' >> $HOME/.bashrc && exit
 
-    - name: Start web server
-      command: gp ports await 23000 && gp preview https://training.nextflow.io/hello_nextflow
+  - name: Start web server
+    command: gp ports await 23000 && gp preview https://training.nextflow.io/hello_nextflow
 
-    - name: Load Nextflow Tutorial
-      command: docker pull -q nextflow/rnaseq-nf
+  - name: Load Nextflow Tutorial
+    command: docker pull -q nextflow/rnaseq-nf
 
-    - name: Start Nextflow Tutorial
-      env:
-          NXF_HOME: "/workspace/gitpod/.nextflow"
-      command: |
-          cd hello-nextflow
-          source $HOME/.bashrc
-          export PS1='\[\e[3;36m\]${PWD/*\//} ->\[\e[0m\] '
-          unset JAVA_TOOL_OPTIONS
-          clear
+  - name: Start Nextflow Tutorial
+    env:
+      NXF_HOME: "/workspace/gitpod/.nextflow"
+    command: |
+      cd hello-nextflow
+      source $HOME/.bashrc
+      export PS1='\[\e[3;36m\]${PWD/*\//} ->\[\e[0m\] '
+      unset JAVA_TOOL_OPTIONS
+      clear
 
 vscode:
-    extensions: # based on nf-core.nf-core-extensionpack
-        - codezombiech.gitignore # Language support for .gitignore files
-        - cssho.vscode-svgviewer # SVG viewer
-        - esbenp.prettier-vscode # Markdown/CommonMark linting and style checking for Visual Studio Code
-        - EditorConfig.EditorConfig # override user/workspace settings with settings found in .editorconfig files
-        - Gruntfuggly.todo-tree # Display TODO and FIXME in a tree view in the activity bar
-        # - mechatroner.rainbow-csv # Highlight columns in csv files in different colors
-        - nextflow.nextflow # Nextflow syntax highlighting
-        # - oderwat.indent-rainbow # Highlight indentation level
-        - streetsidesoftware.code-spell-checker # Spelling checker for source code
-        - ms-vscode.live-server
+  extensions: # based on nf-core.nf-core-extensionpack
+    - codezombiech.gitignore # Language support for .gitignore files
+    - cssho.vscode-svgviewer # SVG viewer
+    - esbenp.prettier-vscode # Markdown/CommonMark linting and style checking for Visual Studio Code
+    - EditorConfig.EditorConfig # override user/workspace settings with settings found in .editorconfig files
+    - Gruntfuggly.todo-tree # Display TODO and FIXME in a tree view in the activity bar
+    # - mechatroner.rainbow-csv # Highlight columns in csv files in different colors
+    - nextflow.nextflow # Nextflow syntax highlighting
+    # - oderwat.indent-rainbow # Highlight indentation level
+    - streetsidesoftware.code-spell-checker # Spelling checker for source code
+    - ms-vscode.live-server

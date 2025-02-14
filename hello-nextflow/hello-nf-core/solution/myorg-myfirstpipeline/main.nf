@@ -77,7 +77,7 @@ workflow {
         params.plaintext_email,
         params.outdir,
         params.monochrome_logs,
-        
+
         MYORG_MYFIRSTPIPELINE.out.multiqc_report
     )
 }

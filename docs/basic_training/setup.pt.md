@@ -94,7 +94,7 @@ Um ambiente de desenvolvimento Nextflow pré-configurado está disponível no Gi
 Para executar o Gitpod:
 
 - Clique na URL a seguir: <https://gitpod.io/#https://github.com/nextflow-io/training>
-    - Essa URL é o link do repositório do treinamento no GitHub, prefixado com `https://gitpod.io/#`
+  - Essa URL é o link do repositório do treinamento no GitHub, prefixado com `https://gitpod.io/#`
 - Faça login na sua conta do GitHub (e permita a autorização).
 
 Depois de fazer login, o Gitpod deve carregar (pule a pré-compilação, se solicitado).
