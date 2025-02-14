@@ -24,7 +24,17 @@ If you run this inside `nf4-science/genomics`, you should see the following outp
 
 ```console title="Directory contents"
 
-TODO
+.
+├── data
+│   ├── bam
+│   ├── ref
+│   ├── sample_bams.txt
+│   └── samplesheet.csv
+├── genomics-1.nf
+├── genomics-2.nf
+└── solutions
+
+4 directories, 2 files
 
 ```
 
@@ -40,7 +50,7 @@ TODO
 - **The file `nextflow.config`** is a configuration file that sets minimal environment properties.
   You can ignore it for now.
 
-- TODO: input data description
+- \*\*The `data` directory contains input data and related resources, described later in the course.
 
 - **The `solutions` directory** contains the completed workflow scripts that result from each step of the course.
   They are intended to be used as a reference to check your work and troubleshoot any issues.

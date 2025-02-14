@@ -1,18 +1,13 @@
 # Part 2: Joint calling on a cohort
 
-In Part 3, you built a pipeline that was completely linear and processed each sample's data independently of the others.
-However, in real pipelines, you may need to combine data from multiple samples, or combine different kinds of data.
-Here we show you how to use channels and channel operators to implement a pipeline with more interesting plumbing.
+In the first part of this course, you built a variant calling pipeline that was completely linear and processed each sample's data independently of the others.
+However, in a real genomics use case, you'll typically need to look at the variant calls of multiple samples together.
 
-Specifically, we show you how to implement joint variant calling with GATK, building on the pipeline from Part 2.
-
-!!! note
-
-    Don't worry if you're not familiar with GATK or genomics in general. We'll summarize the necessary concepts as we go, and the workflow implementation principles we demonstrate here apply broadly to any use case that follows a similar pattern.
+In this second part, we show you how to use channels and channel operators to implement joint variant calling with GATK, building on the pipeline from Part 1.
 
 ### Method overview
 
-The GATK variant calling method we used in Part 3 simply generated variant calls per sample.
+The GATK variant calling method we used in first part of this course simply generated variant calls per sample.
 That's fine if you only want to look at the variants from each sample in isolation, but that yields limited information.
 It's often more interesting to look at how variant calls differ across multiple samples, and to do so, GATK offers an alternative method called joint variant calling, which we demonstrate here.
 
@@ -23,13 +18,15 @@ Joint variant calling involves generating a special kind of variant output calle
 What's special about a sample's GVCF is that it contains records summarizing sequence data statistics about all positions in the targeted area of the genome, not just the positions where the program found evidence of variation.
 This is critical for the joint genotyping calculation ([further reading](https://gatk.broadinstitute.org/hc/en-us/articles/360035890431-The-logic-of-joint-calling-for-germline-short-variants)).
 
-The GVCF is produced by GATK HaplotypeCaller, the same tool we used in Part 3, with an additional parameter (`-ERC GVCF`).
+The GVCF is produced by GATK HaplotypeCaller, the same tool we used in Part 1, with an additional parameter (`-ERC GVCF`).
 Combining the GVCFs is done with GATK GenomicsDBImport, which combines the per-sample calls into a data store (analogous to a database), then the actual 'joint genotyping' analysis is done with GATK GenotypeGVCFs.
 
-So to recap, we're going to develop a workflow that does the following:
+### Workflow
+
+So to recap, in this part of the course, we're going to develop a workflow that does the following:
 
 <figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello-gatk-2.svg"
+--8<-- "img/hello-gatk-2.svg"
 </figure>
 
 1. Generate an index file for each BAM input file using Samtools
@@ -37,12 +34,7 @@ So to recap, we're going to develop a workflow that does the following:
 3. Collect all the GVCFs and combine them into a GenomicsDB data store
 4. Run joint genotyping on the combined GVCF data store to produce a cohort-level VCF
 
-### Dataset
-
-- **A reference genome** consisting of a small region of the human chromosome 20 (from hg19/b37) and its accessory files (index and sequence dictionary).
-- **Three whole genome sequencing samples** corresponding to a family trio (mother, father and son), which have been subset to a small portion on chromosome 20 to keep the file sizes small.
-  The sequencing data is in [BAM](https://samtools.github.io/hts-specs/SAMv1.pdf) (Binary Alignment Map) format, _i.e._ genome sequencing reads that have already been mapped to the reference genome.
-- **A list of genomic intervals**, _i.e._ coordinates on the genome where our samples have data suitable for calling variants, provided in BED format.
+We'll apply this to the same dataset as in Part 1.
 
 ---
 
@@ -53,11 +45,11 @@ Just like previously, we want to try out the commands manually before we attempt
 !!! note
 
      Make sure you're in the correct working directory:
-     `cd /workspace/gitpod/hello-nextflow`
+     `cd /workspace/gitpod/nf4-science/genomics`
 
 ### 0.1. Index a BAM input file with Samtools
 
-This first step is the same as in Part 3: Hello Genomics, so it should feel very familiar, but this time we need to do it for all three samples.
+This first step is the same as in Part 1, so it should feel very familiar, but this time we need to do it for all three samples.
 
 !!! note
 
@@ -99,7 +91,7 @@ exit
 
 ### 0.2. Call variants with GATK HaplotypeCaller in GVCF mode
 
-This second step is very similar to what we did Part 3: Hello Genomics, but we are now going to run GATK in 'GVCF mode'.
+This second step is very similar to what we did Part 1: Hello Genomics, but we are now going to run GATK in 'GVCF mode'.
 
 #### 0.2.1. Spin up the GATK container interactively
 
@@ -125,7 +117,7 @@ gatk HaplotypeCaller \
 
 This creates the GVCF output file `reads_mother.g.vcf` in the current working directory in the container.
 
-If you `cat` it to view the contents, you'll see it's much longer than the equivalent VCF we generated in Part 3. You can't even scroll up to the start of the file, and most of the lines look quite different from what we saw in the VCF in Part 3.
+If you `cat` it to view the contents, you'll see it's much longer than the equivalent VCF we generated in Part 1. You can't even scroll up to the start of the file, and most of the lines look quite different from what we saw in the VCF in Part 1.
 
 ```console title="Output" linenums="1674"
 20_10037292_10066351    14714   .       T       <NON_REF>       .       .       END=14718       GT:DP:GQ:MIN_DP:PL       0/0:37:99:37:0,99,1192
@@ -143,7 +135,7 @@ In a GVCF, there are typically lots of such non-variant lines, with a smaller nu
 20_10037292_10066351    3481    .       T       <NON_REF>       .       .       END=3481        GT:DP:GQ:MIN_DP:PL       0/0:21:51:21:0,51,765
 ```
 
-The second line shows the first variant record in the file, which corresponds to the first variant in the VCF file we looked at in Part 3.
+The second line shows the first variant record in the file, which corresponds to the first variant in the VCF file we looked at in Part 1.
 
 Just like the original VCF was, the output GVCF file is also accompanied by an index file, called `reads_mother.g.vcf.idx`.
 
@@ -217,7 +209,7 @@ It's another reasonably small file so you can `cat` this file to view its conten
 20_10037292_10066351    3529    .       T       A       154.29  .       AC=1;AF=0.167;AN=6;BaseQRankSum=-5.440e-01;DP=104;ExcessHet=0.0000;FS=1.871;MLEAC=1;MLEAF=0.167;MQ=60.00;MQRankSum=0.00;QD=7.71;ReadPosRankSum=-1.158e+00;SOR=1.034       GT:AD:DP:GQ:PL  0/0:44,0:44:99:0,112,1347       0/1:12,8:20:99:163,0,328        0/0:39,0:39:99:0,105,1194
 ```
 
-This looks more like the original VCF we generated in Part 3, except this time we have genotype-level information for all three samples.
+This looks more like the original VCF we generated in Part 1, except this time we have genotype-level information for all three samples.
 The last three columns in the file are the genotype blocks for the samples, listed in alphabetical order.
 
 If we look at the genotypes called for our test family trio for the very first variant, we see that the father is heterozygous-variant (`0/1`), and the mother and son are both homozygous-variant (`1/1`).
@@ -232,7 +224,7 @@ exit
 
 ### Takeaway
 
-You know how to run the individual commands in the terminal to verify that they will produce the information you want.
+You know how to run the individual commands involved in joint variant calling in the terminal to verify that they will produce the information you want.
 
 ### What's next?
 
@@ -242,13 +234,13 @@ Wrap these commands into an actual pipeline.
 
 ## 1. Modify the per-sample variant calling step to produce a GVCF
 
-The good news is that we don't need to start all over, since we already wrote a workflow that does some of this work in Part 3.
+The good news is that we don't need to start all over, since we already wrote a workflow that does some of this work in Part 1.
 However, that pipeline produces VCF files, whereas now we want GVCF files in order to do the joint genotyping.
 So we need to start by switching on the GVCF variant calling mode and updating the output file extension.
 
 !!! note
 
-    For convenience, we are going to work with a fresh copy of the GATK workflow as it stands at the end of Part 3, but under a different name: `hello-operators.nf`.
+    For convenience, we are going to work with a fresh copy of the GATK workflow as it stands at the end of Part 1, but under a different name: `hello-operators.nf`.
 
 ### 1.1. Tell HaplotypeCaller to emit a GVCF and update the output extension
 
@@ -473,7 +465,7 @@ The resulting `all_gvcfs_ch` and `all_idxs_ch` channels are what we're going to 
 
 !!!note
 
-    In case you were wondering, we collect the GVCFs and their index files separately because the GATK GenomicsDBImport command only wants to see the GVCF file paths. Fortunately, since Nextflow will stage all the files together for execution, we don't have to worry about the order of files like we did for BAMs and their index in Part 3.
+    In case you were wondering, we collect the GVCFs and their index files separately because the GATK GenomicsDBImport command only wants to see the GVCF file paths. Fortunately, since Nextflow will stage all the files together for execution, we don't have to worry about the order of files like we did for BAMs and their index in Part 1.
 
 ### 2.4. Add a call to the workflow block to run GATK_GENOMICSDB
 
@@ -844,7 +836,7 @@ You'll find the final output file, `family_trio.joint.vcf` (and its file index),
 20_10037292_10066351	3529	.	T	A	154.29	.	AC=1;AF=0.167;AN=6;BaseQRankSum=-5.440e-01;DP=104;ExcessHet=0.0000;FS=1.871;MLEAC=1;MLEAF=0.167;MQ=60.00;MQRankSum=0.00;QD=7.71;ReadPosRankSum=-1.158e+00;SOR=1.034	GT:AD:DP:GQ:PL	0/0:44,0:44:99:0,112,1347	0/1:12,8:20:99:163,0,328	0/0:39,0:39:99:0,105,1194
 ```
 
-You now have an automated, fully reproducible variant calling workflow!
+You now have an automated, fully reproducible joint variant calling workflow!
 
 !!!note
 
@@ -860,6 +852,6 @@ You know how to use some common operators as well as Groovy closures to control 
 
 Celebrate your success and take an extra super mega long break! This was tough and you deserve it.
 
-In the next training, you'll learn how to leverage commonly used workflow configuration options.
+When you're ready to move on, have a look at our training portal to browse available training courses and select your next step.
 
 **Good luck!**

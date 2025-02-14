@@ -1,15 +1,6 @@
 # Part 1: Per-sample variant calling
 
-In Part 1, you learned how to use the basic building blocks of Nextflow to assemble a simple pipeline capable of processing some text and parallelizing execution if there were multiple inputs.
-Then in Part 2, you learned how to use containers to pull in command line tools to test them and integrate them into your pipelines without having to deal with software dependency issues.
-
-Now, we show you how to use the same components and principles to build a pipeline that does something a bit more interesting, and hopefully a bit more relatable to your work.
-Specifically, we show you how to implement a simple variant calling pipeline with [GATK](https://gatk.broadinstitute.org/) (Genome Analysis Toolkit), a widely used software package for analyzing high-throughput sequencing data.
-
-!!! note
-
-    Don't worry if you're not familiar with GATK specifically.
-    We'll summarize the necessary concepts as we go, and the workflow implementation principles we demonstrate here apply broadly to any command line tool that takes in some input files and produce some output files.
+In the first part of this course, we show you how to build a simple variant calling pipeline that applies GATK variant calling to individual sequencing samples.
 
 ### Method overview
 
@@ -18,43 +9,44 @@ Here we are going to use tools and methods designed for calling short variants, 
 
 ![GATK pipeline](img/gatk-pipeline.png)
 
-A full variant calling pipeline typically involves a lot of steps, including mapping to the reference and variant filtering and prioritization.
-For simplicity, we are going to focus on the core variant calling step, which takes as its main input a file of short-read sequencing data in [BAM](https://samtools.github.io/hts-specs/SAMv1.pdf) format (Binary Alignment Map, a compressed version of SAM, Sequence Alignment Map), as well as a reference genome and a list of genomic intervals to analyze.
+A full variant calling pipeline typically involves a lot of steps, including mapping to the reference (sometime referred to as genome alignment) and variant filtering and prioritization.
+For simplicity, in this part of the course we are going to focus on just the variant calling part.
 
-For this exercise, we provide you with three samples in BAM format (see Dataset below).
-However, GATK requires an index file for each BAM file, which we did not provide (on purpose), so the workflow will have to create one as a preliminary step.
+### Dataset
+
+We provide the following data and related resources:
+
+- **A reference genome** consisting of a small region of the human chromosome 20 (from hg19/b37) and its accessory files (index and sequence dictionary).
+- **Three whole genome sequencing samples** corresponding to a family trio (mother, father and son), which have been subset to a small slice of data on chromosome 20 to keep the file sizes small.
+  This is Illumina short-read sequencing data that have already been mapped to the reference genome, provided in [BAM](https://samtools.github.io/hts-specs/SAMv1.pdf) format (Binary Alignment Map, a compressed version of SAM, Sequence Alignment Map).
+- **A list of genomic intervals**, i.e. coordinates on the genome where our samples have data suitable for calling variants, provided in BED format.
+
+### Workflow
+
+In this part of the course, we're going to develop a workflow that does the following:
+
+1. Generate an index file for each BAM input file using [Samtools](https://www.htslib.org/)
+2. Run the GATK HaplotypeCaller on each BAM input file to generate per-sample variant calls in VCF (Variant Call Format)
+
+<figure class="excalidraw">
+--8<-- "img/hello-gatk-1.svg"
+</figure>
 
 !!! note
 
     Index files are a common feature of bioinformatics file formats; they contain information about the structure of the main file that allows tools like GATK to access a subset of the data without having to read through the whole file.
     This is important because of how big these files can get.
 
-So to recap, we're going to develop a workflow that does the following:
-
-1. Generate an index file for each BAM input file using [Samtools](https://www.htslib.org/)
-2. Run the GATK HaplotypeCaller on each BAM input file to generate per-sample variant calls in VCF (Variant Call Format)
-
-<figure class="excalidraw">
---8<-- "docs/hello_nextflow/img/hello-gatk-1.svg"
-</figure>
-
-### Dataset
-
-- **A reference genome** consisting of a small region of the human chromosome 20 (from hg19/b37) and its accessory files (index and sequence dictionary).
-- **Three whole genome sequencing samples** corresponding to a family trio (mother, father and son), which have been subset to a small slice of data on chromosome 20 to keep the file sizes small.
-  The sequencing data is in (Binary Alignment Map) format, i.e. genome sequencing reads that have already been mapped to the reference genome.
-- **A list of genomic intervals**, i.e. coordinates on the genome where our samples have data suitable for calling variants, provided in BED format.
-
 ---
 
 ## 0. Warmup: Test the Samtools and GATK commands interactively
 
-Just like in the Hello World example, we want to try out the commands manually before we attempt to wrap them in a workflow.
-The tools we need (Samtools and GATK) are not installed in the Gitpod environment, but that's not a problem since you learned how to work with containers in Part 2 of this training series (Hello Containers).
+First we want to try out the commands manually before we attempt to wrap them in a workflow.
+The tools we need (Samtools and GATK) are not installed in the Gitpod environment, so we'll use them via containers (see [Hello Containers](../../hello_nextflow/05_hello_containers.md)).
 
 !!! note
 
-     Make sure you're in the `hello-nextflow` directory so that the last part of the path shown when you type `pwd` is `hello-nextflow`.
+     Make sure you're in the `nf4-science/genomics` directory so that the last part of the path shown when you type `pwd` is `genomics`.
 
 ### 0.1. Index a BAM input file with Samtools
 
@@ -165,14 +157,14 @@ Learn how to wrap those same commands into a two-step workflow that uses contain
 
 ## 1. Write a single-stage workflow that runs Samtools index on a BAM file
 
-We provide you with a workflow file, `hello-genomics.nf`, that outlines the main parts of the workflow.
+We provide you with a workflow file, `genomics-1.nf`, that outlines the main parts of the workflow.
 It's not functional; its purpose is just to serve as a skeleton that you'll use to write the actual workflow.
 
 ### 1.1. Define the indexing process
 
 Let's start by writing a process, which we'll call `SAMTOOLS_INDEX`, describing the indexing operation.
 
-```groovy title="hello-genomics.nf" linenums="9"
+```groovy title="genomics-1.nf" linenums="9"
 /*
  * Generate BAM index file
  */
@@ -208,7 +200,7 @@ This process is going to require us to pass in a file path via the `input_bam` i
 At the top of the file, under the `Pipeline parameters` section, we declare a CLI parameter called `reads_bam` and give it a default value.
 That way, we can be lazy and not specify the input when we type the command to launch the pipeline (for development purposes). We're also going to set `params.outdir` with a default value for the output directory.
 
-```groovy title="hello-genomics.nf" linenums="3"
+```groovy title="genomics-1.nf" linenums="3"
 /*
  * Pipeline parameters
  */
@@ -220,9 +212,11 @@ params.outdir    = "results_genomics"
 
 Now we have a process ready, as well as a parameter to give it an input to run on, so let's wire those things up together.
 
+<!-- TODO get rid of projectDir -->
+
 !!! note
 
-    `${projectDir}` is a built-in Nextflow variable that points to the directory where the current Nextflow workflow script (`hello-genomics.nf`) is located.
+    `${projectDir}` is a built-in Nextflow variable that points to the directory where the current Nextflow workflow script (`genomics-1.nf`) is located.
 
     This makes it easy to reference files, data directories, and other resources included in the workflow repository without hardcoding absolute paths.
 
@@ -230,7 +224,7 @@ Now we have a process ready, as well as a parameter to give it an input to run o
 
 In the `workflow` block, we need to set up a **channel** to feed the input to the `SAMTOOLS_INDEX` process; then we can call the process itself to run on the contents of that channel.
 
-```groovy title="hello-genomics.nf" linenums="30"
+```groovy title="genomics-1.nf" linenums="30"
 workflow {
 
     // Create input channel (single file via CLI parameter)
@@ -241,16 +235,16 @@ workflow {
 }
 ```
 
-You'll notice we're using the same `.fromPath` channel factory as we used at the end of Part 1 (Hello World) of this training series.
+You'll notice we're using the same `.fromPath` channel factory as we used in [Hello Channels](../../hello_nextflow/02_hello_channels.md).
 Indeed, we're doing something very similar.
-The difference is that this time we're telling Nextflow to load the file path itself into the channel as an input element, rather than reading in its contents.
+The difference is that we're telling Nextflow to just load the file path itself into the channel as an input element, rather than reading in its contents.
 
 ### 1.4. Run the workflow to verify that the indexing step works
 
 Let's run the workflow! As a reminder, we don't need to specify an input in the command line because we set up a default value for the input when we declared the input parameter.
 
 ```bash
-nextflow run hello-genomics.nf
+nextflow run genomics-1.nf
 ```
 
 The command should produce something like this:
@@ -258,7 +252,7 @@ The command should produce something like this:
 ```console title="Output"
  N E X T F L O W   ~  version 24.10.0
 
- ┃ Launching `hello-genomics.nf` [reverent_sinoussi] DSL2 - revision: 41d43ad7fe
+ ┃ Launching `genomics-1.nf` [reverent_sinoussi] DSL2 - revision: 41d43ad7fe
 
 executor >  local (1)
 [2a/e69536] SAMTOOLS_INDEX (1) | 1 of 1 ✔
@@ -268,7 +262,7 @@ You can check that the index file has been generated correctly by looking in the
 
 ```console title="Directory contents"
 work/2a/e695367b2f60df09cf826b07192dc3
-├── reads_mother.bam -> /workspace/gitpod/hello-nextflow/data/bam/reads_mother.bam
+├── reads_mother.bam -> /workspace/gitpod/nf4-science/genomics/data/bam/reads_mother.bam
 └── reads_mother.bam.bai
 ```
 
@@ -281,7 +275,7 @@ There it is!
 
 ### Takeaway
 
-You know how to wrap a real bioinformatics tool in a single-step Nextflow workflow and have it run using a container.
+You know how to wrap a genomics tool in a single-step Nextflow workflow and have it run using a container.
 
 ### What's next?
 
@@ -297,7 +291,7 @@ Now that we have an index for our input file, we can move on to setting up the v
 
 Let's write a process, which we'll call `GATK_HAPLOTYPECALLER`, describing the variant calling operation.
 
-```groovy title="hello-genomics.nf" linenums="30"
+```groovy title="genomics-1.nf" linenums="30"
 /*
  * Call variants with GATK HaplotypeCaller
  */
@@ -348,7 +342,7 @@ Similarly, we have to list the output VCF's index file (the `"${input_bam}.vcf.i
 
 Since our new process expects a handful of additional files to be provided, we set up some CLI parameters for them under the `Pipeline parameters` section, along with some default values (same reasons as before).
 
-```groovy title="hello-genomics.nf" linenums="10"
+```groovy title="genomics-1.nf" linenums="10"
 // Accessory files
 params.reference        = "${projectDir}/data/ref/ref.fasta"
 params.reference_index  = "${projectDir}/data/ref/ref.fasta.fai"
@@ -362,7 +356,7 @@ While main data inputs are streamed dynamically through channels, there are two 
 
 Add this to the workflow block (after the `reads_ch` creation):
 
-```groovy title="hello-genomics.nf" linenums="71"
+```groovy title="genomics-1.nf" linenums="71"
 // Load the file paths for the accessory files (reference and intervals)
 ref_file        = file(params.reference)
 ref_index_file  = file(params.reference_index)
@@ -376,7 +370,7 @@ This will make the accessory file paths available for providing as input to any 
 
 Now that we've got our second process set up and all the inputs and accessory files are ready and available, we can add a call to the `GATK_HAPLOTYPECALLER` process in the workflow body.
 
-```groovy title="hello-genomics.nf" linenums="80"
+```groovy title="genomics-1.nf" linenums="80"
 // Call variants from the indexed BAM file
 GATK_HAPLOTYPECALLER(
     reads_ch,
@@ -400,7 +394,7 @@ You should recognize the `*.out` syntax from Part 1 of this training series; we 
 Let's run the expanded workflow with `-resume` so that we don't have to run the indexing step again.
 
 ```bash
-nextflow run hello-genomics.nf -resume
+nextflow run genomics-1.nf -resume
 ```
 
 Now if we look at the console output, we see the two processes listed:
@@ -408,7 +402,7 @@ Now if we look at the console output, we see the two processes listed:
 ```console title="Output"
  N E X T F L O W   ~  version 24.10.0
 
- ┃ Launching `hello-genomics.nf` [grave_volta] DSL2 - revision: 4790abc96a
+ ┃ Launching `genomics-1.nf` [grave_volta] DSL2 - revision: 4790abc96a
 
 executor >  local (1)
 [2a/e69536] SAMTOOLS_INDEX (1)       | 1 of 1, cached: 1 ✔
@@ -422,8 +416,8 @@ You'll find the output file `reads_mother.bam.vcf` in the results directory, as 
 ```console title="Directory contents"
 results_genomics/
 ├── reads_mother.bam.bai
-├── reads_mother.bam.vcf -> /workspace/gitpod/hello-nextflow/work/53/e18e987d56c47f59b7dd268649ec01/reads_mother.bam.vcf
-└── reads_mother.bam.vcf.idx -> /workspace/gitpod/hello-nextflow/work/53/e18e987d56c47f59b7dd268649ec01/reads_mother.bam.vcf.idx
+├── reads_mother.bam.vcf -> /workspace/gitpod/nf4-science/genomics/work/53/e18e987d56c47f59b7dd268649ec01/reads_mother.bam.vcf
+└── reads_mother.bam.vcf.idx -> /workspace/gitpod/nf4-science/genomics/work/53/e18e987d56c47f59b7dd268649ec01/reads_mother.bam.vcf.idx
 ```
 
 If you open the VCF file, you should see the same contents as in the file you generated by running the GATK command directly in the container.
@@ -439,7 +433,7 @@ This is the output we care about generating for each sample in our study.
 
 ### Takeaway
 
-You know how to make a very basic two-step workflow that does real analysis work and is capable of dealing with bioinformatics idiosyncrasies like the accessory files.
+You know how to make a very basic two-step workflow that does real analysis work and is capable of dealing with genomics file format idiosyncrasies like the accessory files.
 
 ### What's next?
 
@@ -460,14 +454,14 @@ Let's turn that default file path in the input BAM file declaration into an arra
 
 _Before:_
 
-```groovy title="hello-genomics.nf" linenums="7"
+```groovy title="genomics-1.nf" linenums="7"
 // Primary input
 params.reads_bam = "${projectDir}/data/bam/reads_mother.bam"
 ```
 
 _After:_
 
-```groovy title="hello-genomics.nf" linenums="7"
+```groovy title="genomics-1.nf" linenums="7"
 // Primary input (array of three samples)
 params.reads_bam = [
     "${projectDir}/data/bam/reads_mother.bam",
@@ -488,7 +482,7 @@ And that's actually all we need to do, because the channel factory we use in the
 Let's try running the workflow now that the plumbing is set up to run on all three test samples.
 
 ```bash
-nextflow run hello-genomics.nf -resume
+nextflow run genomics-1.nf -resume
 ```
 
 Funny thing: this _might work_, OR it _might fail_.
@@ -497,7 +491,7 @@ If your workflow run succeeded, run it again until you get an error like this:
 ```console title="Output"
  N E X T F L O W   ~  version 24.10.0
 
- ┃ Launching `hello-genomics.nf` [loving_pasteur] DSL2 - revision: d2a8e63076
+ ┃ Launching `genomics-1.nf` [loving_pasteur] DSL2 - revision: d2a8e63076
 
 executor >  local (4)
 [01/eea165] SAMTOOLS_INDEX (2)       | 3 of 3, cached: 1 ✔
@@ -531,14 +525,14 @@ Let's take a look inside the work directory for the failed `GATK_HAPLOTYPECALLER
 
 ```console title="Directory contents"
 work/a5/fa9fd0994b6beede5fb9ea073596c2
-├── intervals.bed -> /workspace/gitpod/hello-nextflow/data/ref/intervals.bed
-├── reads_father.bam.bai -> /workspace/gitpod/hello-nextflow/work/01/eea16597bd6e810fb4cf89e60f8c2d/reads_father.bam.bai
-├── reads_son.bam -> /workspace/gitpod/hello-nextflow/data/bam/reads_son.bam
+├── intervals.bed -> /workspace/gitpod/nf4-science/genomics/data/ref/intervals.bed
+├── reads_father.bam.bai -> /workspace/gitpod/nf4-science/genomics/work/01/eea16597bd6e810fb4cf89e60f8c2d/reads_father.bam.bai
+├── reads_son.bam -> /workspace/gitpod/nf4-science/genomics/data/bam/reads_son.bam
 ├── reads_son.bam.vcf
 ├── reads_son.bam.vcf.idx
-├── ref.dict -> /workspace/gitpod/hello-nextflow/data/ref/ref.dict
-├── ref.fasta -> /workspace/gitpod/hello-nextflow/data/ref/ref.fasta
-└── ref.fasta.fai -> /workspace/gitpod/hello-nextflow/data/ref/ref.fasta.fai
+├── ref.dict -> /workspace/gitpod/nf4-science/genomics/data/ref/ref.dict
+├── ref.fasta -> /workspace/gitpod/nf4-science/genomics/data/ref/ref.fasta
+└── ref.fasta.fai -> /workspace/gitpod/nf4-science/genomics/data/ref/ref.fasta.fai
 ```
 
 Pay particular attention to the names of the BAM file and the BAM index that are listed in this directory: `reads_son.bam` and `reads_father.bam.bai`.
@@ -549,7 +543,7 @@ What the heck? Nextflow has staged an index file in this process call's work dir
 
 Add these two lines in the workflow body before the `GATK_HAPLOTYPER` process call:
 
-```groovy title="hello-genomics.nf" linenums="84"
+```groovy title="genomics-1.nf" linenums="84"
     // temporary diagnostics
     reads_ch.view()
     SAMTOOLS_INDEX.out.view()
@@ -558,7 +552,7 @@ Add these two lines in the workflow body before the `GATK_HAPLOTYPER` process ca
 Then run the workflow command again.
 
 ```bash
-nextflow run hello-genomics.nf
+nextflow run genomics-1.nf
 ```
 
 You may need to run it several times for it to fail again.
@@ -567,12 +561,12 @@ This error will not reproduce consistently because it is dependent on some varia
 This is what the output of the two `.view()` calls we added looks like for a failed run:
 
 ```console title="Output"
-/workspace/gitpod/hello-nextflow/data/bam/reads_mother.bam
-/workspace/gitpod/hello-nextflow/data/bam/reads_father.bam
-/workspace/gitpod/hello-nextflow/data/bam/reads_son.bam
-/workspace/gitpod/hello-nextflow/work/9c/53492e3518447b75363e1cd951be4b/reads_father.bam.bai
-/workspace/gitpod/hello-nextflow/work/cc/37894fffdf6cc84c3b0b47f9b536b7/reads_son.bam.bai
-/workspace/gitpod/hello-nextflow/work/4d/dff681a3d137ba7d9866e3d9307bd0/reads_mother.bam.bai
+/workspace/gitpod/nf4-science/genomics/data/bam/reads_mother.bam
+/workspace/gitpod/nf4-science/genomics/data/bam/reads_father.bam
+/workspace/gitpod/nf4-science/genomics/data/bam/reads_son.bam
+/workspace/gitpod/nf4-science/genomics/work/9c/53492e3518447b75363e1cd951be4b/reads_father.bam.bai
+/workspace/gitpod/nf4-science/genomics/work/cc/37894fffdf6cc84c3b0b47f9b536b7/reads_son.bam.bai
+/workspace/gitpod/nf4-science/genomics/work/4d/dff681a3d137ba7d9866e3d9307bd0/reads_mother.bam.bai
 ```
 
 The first three lines correspond to the input channel and the second, to the output channel.
@@ -605,14 +599,14 @@ First, let's change the output of the `SAMTOOLS_INDEX` process to include the BA
 
 _Before:_
 
-```groovy title="hello-genomics.nf" linenums="32"
+```groovy title="genomics-1.nf" linenums="32"
 output:
     path "${input_bam}.bai"
 ```
 
 _After:_
 
-```groovy title="hello-genomics.nf" linenums="32"
+```groovy title="genomics-1.nf" linenums="32"
 output:
     tuple path(input_bam), path("${input_bam}.bai")
 ```
@@ -627,7 +621,7 @@ Specifically, where we previously declared two separate input paths in the input
 
 _Before:_
 
-```groovy title="hello-genomics.nf" linenums="49"
+```groovy title="genomics-1.nf" linenums="49"
 input:
     path input_bam
     path input_bam_index
@@ -635,7 +629,7 @@ input:
 
 _After:_
 
-```groovy title="hello-genomics.nf" linenums="49"
+```groovy title="genomics-1.nf" linenums="49"
 input:
     tuple path(input_bam), path(input_bam_index)
 ```
@@ -650,7 +644,7 @@ As a result, we can simply delete that line.
 
 _Before:_
 
-```groovy title="hello-genomics.nf" linenums="84"
+```groovy title="genomics-1.nf" linenums="84"
 GATK_HAPLOTYPECALLER(
     reads_ch,
     SAMTOOLS_INDEX.out,
@@ -658,7 +652,7 @@ GATK_HAPLOTYPECALLER(
 
 _After:_
 
-```groovy title="hello-genomics.nf" linenums="84"
+```groovy title="genomics-1.nf" linenums="84"
 GATK_HAPLOTYPECALLER(
     SAMTOOLS_INDEX.out,
 ```
@@ -670,7 +664,7 @@ That is all the re-wiring that is necessary to solve the index mismatch problem.
 Of course, the proof is in the pudding, so let's run the workflow again a few times to make sure this will work reliably going forward.
 
 ```bash
-nextflow run hello-genomics.nf
+nextflow run genomics-1.nf
 ```
 
 This time (and every time) everything should run correctly:
@@ -678,7 +672,7 @@ This time (and every time) everything should run correctly:
 ```console title="Output"
  N E X T F L O W   ~  version 24.10.0
 
- ┃ Launching `hello-genomics.nf` [special_goldstine] DSL2 - revision: 4cbbf6ea3e
+ ┃ Launching `genomics-1.nf` [special_goldstine] DSL2 - revision: 4cbbf6ea3e
 
 executor >  local (6)
 [d6/10c2c4] SAMTOOLS_INDEX (1)       | 3 of 3 ✔
@@ -687,7 +681,7 @@ executor >  local (6)
 
 If you'd like, you can use `.view()` again to peek at what the contents of the `SAMTOOLS_INDEX` output channel looks like:
 
-```groovy title="hello-genomics.nf" linenums="92"
+```groovy title="genomics-1.nf" linenums="92"
 SAMTOOLS_INDEX.out.view()
 ```
 
@@ -723,9 +717,9 @@ Here we are going to show you how to do the simple case.
 We already made a text file listing the input file paths, called `sample_bams.txt`, which you can find in the `data/` directory.
 
 ```txt title="sample_bams.txt"
-/workspace/gitpod/hello-nextflow/data/bam/reads_mother.bam
-/workspace/gitpod/hello-nextflow/data/bam/reads_father.bam
-/workspace/gitpod/hello-nextflow/data/bam/reads_son.bam
+/workspace/gitpod/nf4-science/genomics/data/bam/reads_mother.bam
+/workspace/gitpod/nf4-science/genomics/data/bam/reads_father.bam
+/workspace/gitpod/nf4-science/genomics/data/bam/reads_son.bam
 ```
 
 As you can see, we listed one file path per line, and they are absolute paths.
@@ -740,7 +734,7 @@ Let's switch the default value for our `reads_bam` input parameter to point to t
 
 _Before:_
 
-```groovy title="hello-genomics.nf" linenums="7"
+```groovy title="genomics-1.nf" linenums="7"
 // Primary input
 params.reads_bam = [
     "${projectDir}/data/bam/reads_mother.bam",
@@ -751,7 +745,7 @@ params.reads_bam = [
 
 _After:_
 
-```groovy title="hello-genomics.nf" linenums="7"
+```groovy title="genomics-1.nf" linenums="7"
 // Primary input (file of input files, one per line)
 params.reads_bam = "${projectDir}/data/sample_bams.txt"
 ```
@@ -767,14 +761,14 @@ Fortunately we can do that very simply, just by adding the [`.splitText()` opera
 
 _Before:_
 
-```groovy title="hello-genomics.nf" linenums="68"
+```groovy title="genomics-1.nf" linenums="68"
 // Create input channel (single file via CLI parameter)
 reads_ch = Channel.fromPath(params.reads_bam)
 ```
 
 _After:_
 
-```groovy title="hello-genomics.nf" linenums="68"
+```groovy title="genomics-1.nf" linenums="68"
 // Create input channel from a text file listing input file paths
 reads_ch = Channel.fromPath(params.reads_bam).splitText()
 ```
@@ -788,7 +782,7 @@ reads_ch = Channel.fromPath(params.reads_bam).splitText()
 Let's run the workflow one more time.
 
 ```bash
-nextflow run hello-genomics.nf -resume
+nextflow run genomics-1.nf -resume
 ```
 
 This should produce the same result as before, right?
@@ -796,7 +790,7 @@ This should produce the same result as before, right?
 ```console title="Output"
  N E X T F L O W   ~  version 24.10.0
 
- ┃ Launching `hello-genomics.nf` [sick_albattani] DSL2 - revision: 46d84642f6
+ ┃ Launching `genomics-1.nf` [sick_albattani] DSL2 - revision: 46d84642f6
 
 [18/23b4bb] SAMTOOLS_INDEX (1)       | 3 of 3, cached: 3 ✔
 [12/f727bb] GATK_HAPLOTYPECALLER (3) | 3 of 3, cached: 3 ✔
@@ -808,12 +802,12 @@ And that's it! Our simple variant calling workflow has all the basic features we
 
 ### Takeaway
 
-You know how to make a multi-step linear workflow handle a file containing input file paths.
+You know how to make a multi-step linear workflow to index a BAM file and apply per-sample variant calling using GATK.
 
-More generally, you've learned how to use essential Nextflow components and logic to build a pipeline that does real work, taking into account the idiosyncrasies of bioinformatics file formats and tool requirements.
+More generally, you've learned how to use essential Nextflow components and logic to build a simple genomics pipeline that does real work, taking into account the idiosyncrasies of genomics file formats and tool requirements.
 
 ### What's next?
 
 Celebrate your success and take an extra long break!
 
-In the next training module, you'll learn how to use a few additional Nextflow features (including more channel operators) to develop pipelines with more complex plumbing.
+In the next part of this course, you'll learn how to use a few additional Nextflow features (including more channel operators) to apply joint variant calling to the data.

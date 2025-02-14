@@ -1,6 +1,10 @@
 # Part 3: Resource profiling and optimization
 
-[TODO]
+[TODO] THIS IS A PLACEHOLDER
+
+!!!note
+
+    This training module is under redevelopment.
 
 ---
 

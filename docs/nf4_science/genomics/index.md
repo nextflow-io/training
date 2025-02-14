@@ -9,6 +9,13 @@ hide:
 This training course is intended for researchers in genomics and related fields who are interested in developing or customizing data analysis pipelines.
 It builds on the [Hello Nextflow](../hello_nextflow/) beginner training and demonstrates how to use Nextflow in the specific context of the genomics domain.
 
+Specifically, this course demonstrates how to implement a simple variant calling pipeline with [GATK](https://gatk.broadinstitute.org/) (Genome Analysis Toolkit), a widely used software package for analyzing high-throughput sequencing data.
+
+!!! note
+
+    Don't worry if you're not familiar with GATK specifically.
+    We'll summarize the necessary concepts as we go, and the workflow implementation principles we demonstrate here apply broadly to any command line tool that processes genomics data.
+
 ## Learning objectives
 
 By working through this course, you will learn how to apply foundational Nextflow concepts and tooling to a typical genomics use case.
