@@ -7,7 +7,7 @@ If you have not yet done so, please follow [this link](../../envsetup/) before g
 
 ## Materials provided
 
-Throughout this training course, we'll be working in the `nf4-genomics/` directory, which you need to move into when you open the training workspace.
+Throughout this training course, we'll be working in the `nf4-science/genomics/` directory, which you need to move into when you open the training workspace.
 This directory contains all the code files, test data and accessory files you will need.
 
 Feel free to explore the contents of this directory; the easiest way to do so is to use the file explorer on the left-hand side of the training workspace in the VSCode interface.
@@ -20,7 +20,7 @@ Here we generate a table of contents to the second level down:
 tree . -L 2
 ```
 
-If you run this inside `nf4-genomics`, you should see the following output:
+If you run this inside `nf4-science/genomics`, you should see the following output:
 
 ```console title="Directory contents"
 
@@ -52,7 +52,7 @@ TODO
     If for whatever reason you move out of this directory, you can always run this command to return to it:
 
     ```bash
-    cd /workspace/gitpod/nf4-genomics
+    cd /workspace/gitpod/nf4-science/genomics
     ```
 
 Now, to begin the course, click on the arrow in the bottom right corner of this page.

@@ -75,7 +75,7 @@ These are courses that demonstrate how to apply the concepts and components pres
 
     This is a course for researchers who wish to learn how to develop their own genomics pipelines. The course uses a variant calling use case to demonstrate how to develop a simple but functional genomics pipeline.
 
-    [Launch the Nextflow for Genomics training :material-arrow-right:](nf4_genomics/index.md){ .md-button .md-button--primary }
+    [Launch the Nextflow for Genomics training :material-arrow-right:](nf4_science/genomics/){ .md-button .md-button--primary }
 
 **Coming soon:** "Nextflow for RNAseq" — Learn to develop a pipeline for bulk RNAseq analysis in Nextflow
 
@@ -88,7 +88,7 @@ These are courses that demonstrate how to apply the concepts and components pres
 
     This is a course for researchers who wish to learn how to develop their own RNAseq pipelines. The course uses a bulk RNAseq processing use case to demonstrate how to develop a simple but functional RNAseq pipeline.
 
-    [Launch the Nextflow for RNAseq training :material-arrow-right:](nf4_rnaseq/index.md){ .md-button .md-button--primary }
+    [Launch the Nextflow for RNAseq training :material-arrow-right:]((nf4_science/rnaseq/){ .md-button .md-button--primary }
 -->
 
 ## In-depth Nextflow Training
