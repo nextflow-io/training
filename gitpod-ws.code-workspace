@@ -1,7 +1,7 @@
 {
     "folders": [
         { "path": "./hello-nextflow" },
-        { "path": "./nf4-genomics" },
+        { "path": "./nf4-science" },
         { "path": "./nf-training" },
         { "path": "./nf-training-advanced" },
     ],

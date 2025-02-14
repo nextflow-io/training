@@ -19,12 +19,12 @@ nav:
       - hello_nextflow/05_hello_containers.md
       - hello_nextflow/06_hello_config.md
   - Nextflow for Genomics:
-      - nf4_genomics/index.md
-      - nf4_genomics/00_orientation.md
-      - nf4_genomics/01_per_sample_variant_calling.md
-      - nf4_genomics/02_joint_calling.md
-      - nf4_genomics/03_configuration.md
-      - nf4_genomics/04_testing.md
+      - nf4_science/genomics/index.md
+      - nf4_science/genomics/00_orientation.md
+      - nf4_science/genomics/01_per_sample_variant_calling.md
+      - nf4_science/genomics/02_joint_calling.md
+      - nf4_science/genomics/03_configuration.md
+      - nf4_science/genomics/04_testing.md
   - Fundamentals Training:
       - basic_training/index.md
       - basic_training/orientation.md
@@ -152,7 +152,7 @@ plugins:
       restart_increment_after:
         - envsetup/01_setup.md
         - hello_nextflow/00_orientation.md
-        - nf4_genomics/00_orientation.md
+        - nf4_science/genomics/00_orientation.md
         - basic_training/orientation.md
         - advanced/orientation.md
 
@@ -161,7 +161,7 @@ plugins:
         - help.md
         - envsetup/index.md
         - hello_nextflow/*.md
-        - nf4_genomics/*.md
+        - nf4_science/genomics/*.md
         - basic_training/index.md
         - basic_training/orientation.md
         - advanced/index.md
