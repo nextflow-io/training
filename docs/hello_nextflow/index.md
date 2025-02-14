@@ -34,5 +34,5 @@ This is a workshop for those who are completely new to Nextflow. Some basic fami
 
 **Prerequisites**
 
-- A GitHub account and Gitpod login OR a local installation as described [here](envsetup/02_local.md).
-- Experience with command line
+- A GitHub account and Gitpod login OR a local installation as described [here](envsetup/02_local).
+- Experience with command line and basic scripting

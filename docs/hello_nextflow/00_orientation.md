@@ -62,7 +62,7 @@ If you run this inside `hello-nextflow`, you should see the following output:
 
 !!!tip
 
-    If for whatever reason you move out of this directory, you can always run this command to return to it:
+    If for whatever reason you move out of this directory, you can always run this command to return to it (within the training environment):
 
     ```bash
     cd /workspace/gitpod/hello-nextflow

@@ -10,7 +10,7 @@ You can create a free [Gitpod](https://gitpod.io/) account from the [Gitpod logi
 You will be prompted to choose between 'Gitpod Flex' and 'Gitpod Classic'.
 Select 'Gitpod Classic' and click 'Continue'.
 
-![Select 'Gitpod Classic'](select_gitpod_classic)
+![Select 'Gitpod Classic'](img/select_gitpod_classic.png)
 
 Next, log in using your GitHub account.
 
