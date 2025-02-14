@@ -1,7 +1,7 @@
 ---
 title: Introduction
 hide:
-    - toc
+  - toc
 ---
 
 # Nextflow course - Hands-on

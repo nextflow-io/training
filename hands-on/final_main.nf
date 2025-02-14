@@ -66,9 +66,9 @@ process prepare_star_genome_index {
     mkdir -p genome_dir
 
     STAR --runMode genomeGenerate \
-         --genomeDir genome_dir \
-         --genomeFastaFiles ${genome} \
-         --runThreadN ${task.cpus}
+        --genomeDir genome_dir \
+        --genomeFastaFiles ${genome} \
+        --runThreadN ${task.cpus}
     """
 }
 
@@ -85,14 +85,14 @@ process prepare_vcf_file {
 
     output:
     tuple path("${variantsFile.baseName}.filtered.recode.vcf.gz"),
-          path("${variantsFile.baseName}.filtered.recode.vcf.gz.tbi")
+        path("${variantsFile.baseName}.filtered.recode.vcf.gz.tbi")
 
     script:
     """
     vcftools --gzvcf ${variantsFile} -c \
-             --exclude-bed ${blacklisted} \
-             --recode | bgzip -c \
-             > ${variantsFile.baseName}.filtered.recode.vcf.gz
+            --exclude-bed ${blacklisted} \
+            --recode | bgzip -c \
+            > ${variantsFile.baseName}.filtered.recode.vcf.gz
 
     tabix ${variantsFile.baseName}.filtered.recode.vcf.gz
     """
@@ -112,42 +112,42 @@ process rnaseq_mapping_star {
 
     output:
     tuple val(replicateId),
-          path('Aligned.sortedByCoord.out.bam'),
-          path('Aligned.sortedByCoord.out.bam.bai')
+        path('Aligned.sortedByCoord.out.bam'),
+        path('Aligned.sortedByCoord.out.bam.bai')
 
     script:
     """
     # ngs-nf-dev Align reads to genome
     STAR --genomeDir ${genomeDir} \
-         --readFilesIn ${reads} \
-         --runThreadN ${task.cpus} \
-         --readFilesCommand zcat \
-         --outFilterType BySJout \
-         --alignSJoverhangMin 8 \
-         --alignSJDBoverhangMin 1 \
-         --outFilterMismatchNmax 999
+        --readFilesIn ${reads} \
+        --runThreadN ${task.cpus} \
+        --readFilesCommand zcat \
+        --outFilterType BySJout \
+        --alignSJoverhangMin 8 \
+        --alignSJDBoverhangMin 1 \
+        --outFilterMismatchNmax 999
 
     # 2nd pass (improve alignments using table of splice
     # junctions and create a new index)
     mkdir -p genomeDir
     STAR --runMode genomeGenerate \
-         --genomeDir genomeDir \
-         --genomeFastaFiles ${genome} \
-         --sjdbFileChrStartEnd SJ.out.tab \
-         --sjdbOverhang 75 \
-         --runThreadN ${task.cpus}
+        --genomeDir genomeDir \
+        --genomeFastaFiles ${genome} \
+        --sjdbFileChrStartEnd SJ.out.tab \
+        --sjdbOverhang 75 \
+        --runThreadN ${task.cpus}
 
     # Final read alignments
     STAR --genomeDir genomeDir \
-         --readFilesIn ${reads} \
-         --runThreadN ${task.cpus} \
-         --readFilesCommand zcat \
-         --outFilterType BySJout \
-         --alignSJoverhangMin 8 \
-         --alignSJDBoverhangMin 1 \
-         --outFilterMismatchNmax 999 \
-         --outSAMtype BAM SortedByCoordinate \
-         --outSAMattrRGline ID:${replicateId} LB:library PL:illumina \
+        --readFilesIn ${reads} \
+        --runThreadN ${task.cpus} \
+        --readFilesCommand zcat \
+        --outFilterType BySJout \
+        --alignSJoverhangMin 8 \
+        --alignSJDBoverhangMin 1 \
+        --outFilterMismatchNmax 999 \
+        --outSAMtype BAM SortedByCoordinate \
+        --outSAMattrRGline ID:${replicateId} LB:library PL:illumina \
                             PU:machine SM:GM12878
 
     # Index the BAM file
@@ -168,8 +168,8 @@ process rnaseq_gatk_splitNcigar {
     path index
     path genome_dict
     tuple val(replicateId),
-          path(bam),
-          path(bai)
+        path(bam),
+        path(bai)
 
     output:
     tuple val(replicateId), path('split.bam'), path('split.bai')
@@ -178,12 +178,12 @@ process rnaseq_gatk_splitNcigar {
     """
     # SplitNCigarReads and reassign mapping qualities
     java -jar /usr/gitc/GATK35.jar -T SplitNCigarReads \
-                                   -R ${genome} -I ${bam} \
-                                   -o split.bam \
-                                   -rf ReassignOneMappingQuality \
-                                   -RMQF 255 -RMQT 60 \
-                                   -U ALLOW_N_CIGAR_READS \
-                                   --fix_misencoded_quality_scores
+                                -R ${genome} -I ${bam} \
+                                -o split.bam \
+                                -rf ReassignOneMappingQuality \
+                                -RMQF 255 -RMQT 60 \
+                                -U ALLOW_N_CIGAR_READS \
+                                --fix_misencoded_quality_scores
 
     """
 }
@@ -205,30 +205,30 @@ process rnaseq_gatk_recalibrate {
 
     output:
     tuple val(sampleId),
-          path("${replicateId}.final.uniq.bam"),
-          path("${replicateId}.final.uniq.bam.bai")
+        path("${replicateId}.final.uniq.bam"),
+        path("${replicateId}.final.uniq.bam.bai")
 
     script:
     sampleId = replicateId.replaceAll(/[12]$/,'')
     """
     # Indel Realignment and Base Recalibration
     gatk3 -T BaseRecalibrator \
-          --default_platform illumina \
-          -cov ReadGroupCovariate \
-          -cov QualityScoreCovariate \
-          -cov CycleCovariate \
-          -knownSites ${prepared_variants_file} \
-          -cov ContextCovariate \
-          -R ${genome} -I ${bam} \
-          --downsampling_type NONE \
-          -nct ${task.cpus} \
-          -o final.rnaseq.grp
+        --default_platform illumina \
+        -cov ReadGroupCovariate \
+        -cov QualityScoreCovariate \
+        -cov CycleCovariate \
+        -knownSites ${prepared_variants_file} \
+        -cov ContextCovariate \
+        -R ${genome} -I ${bam} \
+        --downsampling_type NONE \
+        -nct ${task.cpus} \
+        -o final.rnaseq.grp
 
     gatk3 -T PrintReads \
-          -R ${genome} -I ${bam} \
-          -BQSR final.rnaseq.grp \
-          -nct ${task.cpus} \
-          -o final.bam
+        -R ${genome} -I ${bam} \
+        -BQSR final.rnaseq.grp \
+        -nct ${task.cpus} \
+        -o final.bam
 
     # Select only unique alignments, no multimaps
     (samtools view -H final.bam; samtools view final.bam | \
@@ -240,9 +240,9 @@ process rnaseq_gatk_recalibrate {
 }
 
 
- /*
-  * Process 5: GATK Variant Calling
-  */
+/*
+* Process 5: GATK Variant Calling
+*/
 
 process rnaseq_call_variants {
     container 'quay.io/broadinstitute/gotc-prod-gatk:1.0.0-4.1.8.0-1626439571'
@@ -270,11 +270,11 @@ process rnaseq_call_variants {
 
     # Variant filtering
     java -jar /usr/gitc/GATK35.jar -T VariantFiltration \
-                                   -R ${genome} -V output.gatk.vcf.gz \
-                                   -window 35 -cluster 3 \
-                                   -filterName FS -filter "FS > 30.0" \
-                                   -filterName QD -filter "QD < 2.0" \
-                                   -o final.vcf
+                                -R ${genome} -V output.gatk.vcf.gz \
+                                -window 35 -cluster 3 \
+                                -filterName FS -filter "FS > 30.0" \
+                                -filterName QD -filter "QD < 2.0" \
+                                -o final.vcf
     """
 }
 
@@ -290,12 +290,12 @@ process post_process_vcf {
     input:
     tuple val(sampleId), path('final.vcf')
     tuple path('filtered.recode.vcf.gz'),
-          path('filtered.recode.vcf.gz.tbi')
+        path('filtered.recode.vcf.gz.tbi')
 
     output:
     tuple val(sampleId),
-          path('final.vcf'),
-          path('commonSNPs.diff.sites_in_files')
+        path('final.vcf'),
+        path('commonSNPs.diff.sites_in_files')
 
     script:
     '''
@@ -304,7 +304,7 @@ process post_process_vcf {
                             if($dp>=8){print $_."\\n"};' > result.DP8.vcf
 
     vcftools --vcf result.DP8.vcf --gzdiff filtered.recode.vcf.gz  --diff-site \
-             --out commonSNPs
+            --out commonSNPs
     '''
 }
 
@@ -315,8 +315,8 @@ process prepare_vcf_for_ase {
 
     input:
     tuple val(sampleId),
-          path('final.vcf'),
-          path('commonSNPs.diff.sites_in_files')
+        path('final.vcf'),
+        path('commonSNPs.diff.sites_in_files')
 
     output:
     tuple val(sampleId), path('known_snps.vcf'), emit: vcf_for_ASE
@@ -327,7 +327,7 @@ process prepare_vcf_for_ase {
     awk 'BEGIN{OFS="\t"} $4~/B/{print $1,$2,$3}' commonSNPs.diff.sites_in_files  > test.bed
 
     vcftools --vcf final.vcf --bed test.bed --recode --keep-INFO-all \
-             --stdout > known_snps.vcf
+            --stdout > known_snps.vcf
 
     grep -v '#' known_snps.vcf | awk -F '\\t' '{print $10}' \
                 | awk -F ':' '{print $2}' | perl -ne 'chomp($_); \
@@ -362,10 +362,10 @@ process ASE_knownSNPs {
     echo "${bam.join('\n')}" > bam.list
 
     java -jar /usr/gitc/GATK35.jar -R ${genome} \
-                                   -T ASEReadCounter \
-                                   -o ASE.tsv \
-                                   -I bam.list \
-                                   -sites ${vcf}
+                                -T ASEReadCounter \
+                                -o ASE.tsv \
+                                -I bam.list \
+                                -sites ${vcf}
     """
 }
 
@@ -385,11 +385,11 @@ workflow {
                             prepare_genome_picard.out,
                             rnaseq_mapping_star.out)
 
-   rnaseq_gatk_recalibrate(params.genome,
-                           prepare_genome_samtools.out,
-                           prepare_genome_picard.out,
-                           rnaseq_gatk_splitNcigar.out,
-                           prepare_vcf_file.out)
+    rnaseq_gatk_recalibrate(params.genome,
+                        prepare_genome_samtools.out,
+                        prepare_genome_picard.out,
+                        rnaseq_gatk_splitNcigar.out,
+                        prepare_vcf_file.out)
 
     // New channel to aggregate bam from different replicates into sample level.
     rnaseq_gatk_recalibrate.out
@@ -397,9 +397,9 @@ workflow {
         | set { recalibrated_samples }
 
     rnaseq_call_variants(params.genome,
-                         prepare_genome_samtools.out,
-                         prepare_genome_picard.out,
-                         recalibrated_samples)
+                        prepare_genome_samtools.out,
+                        prepare_genome_picard.out,
+                        recalibrated_samples)
 
     post_process_vcf(rnaseq_call_variants.out,
                         prepare_vcf_file.out)
@@ -412,7 +412,7 @@ workflow {
         .set { grouped_vcf_bam_bai_ch }
 
     ASE_knownSNPs(params.genome,
-                  prepare_genome_samtools.out,
-                  prepare_genome_picard.out,
-                  grouped_vcf_bam_bai_ch)
+                prepare_genome_samtools.out,
+                prepare_genome_picard.out,
+                grouped_vcf_bam_bai_ch)
 }

@@ -173,18 +173,18 @@ Finalmente, a opção `-t` permite a criação de um relatório básico e custom
 
 ```html
 <div>
-    <h2>${name}</h2>
-    <div>
-        Script:
-        <pre>${script}</pre>
-    </div>
+  <h2>${name}</h2>
+  <div>
+    Script:
+    <pre>${script}</pre>
+  </div>
 
-    <ul>
-        <li>Exit: ${exit}</li>
-        <li>Status: ${status}</li>
-        <li>Work dir: ${workdir}</li>
-        <li>Contêiner: ${container}</li>
-    </ul>
+  <ul>
+    <li>Exit: ${exit}</li>
+    <li>Status: ${status}</li>
+    <li>Work dir: ${workdir}</li>
+    <li>Contêiner: ${container}</li>
+  </ul>
 </div>
 ```
 

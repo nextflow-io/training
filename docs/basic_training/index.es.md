@@ -1,7 +1,7 @@
 ---
 description: Descripción general del material de formación básico de Nextflow
 hide:
-    - toc
+  - toc
 ---
 
 # Bienvenido

@@ -62,10 +62,10 @@ Click on the task to see the task details:
 
 1. Find the following details on the "About" page for the the task you're inspecting:
 
-    - [ ] How long did the task script run (not including scheduling time)?
-    - [ ] How many CPUs were allocated to the task?
-    - [ ] What was the virtual machine type that the task ran on?
-    - [ ] What was the estimated cost of the task?
+   - [ ] How long did the task script run (not including scheduling time)?
+   - [ ] How many CPUs were allocated to the task?
+   - [ ] What was the virtual machine type that the task ran on?
+   - [ ] What was the estimated cost of the task?
 
 2. Explore the Execution Log tab. What information is available here?
 

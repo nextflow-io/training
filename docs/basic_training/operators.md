@@ -638,8 +638,8 @@ You can also parse JSON files directly:
 
 ```json title="file.json"
 [
-    { "name": "Bob", "height": 180, "champion": false },
-    { "name": "Alice", "height": 170, "champion": false }
+  { "name": "Bob", "height": 180, "champion": false },
+  { "name": "Alice", "height": 170, "champion": false }
 ]
 ```
 

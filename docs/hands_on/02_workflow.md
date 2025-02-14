@@ -15,12 +15,12 @@ Documentation for all software used in the workflow can be found at the followin
 - [STAR](http://labshare.cshl.edu/shares/gingeraslab/www-data/dobin/STAR/STAR.posix/doc/STARmanual.pdf)
 - [vcftools](https://vcftools.github.io/man_latest.html)
 - [GATK tools](https://software.broadinstitute.org/gatk/gatkdocs/3.6-0/index)
-    - [`SplitNCigarReads`](https://software.broadinstitute.org/gatk/gatkdocs/3.6-0/org_broadinstitute_gatk_tools_walkers_rnaseq_SplitNCigarReads.php)
-    - [`BaseRecalibrator`](https://software.broadinstitute.org/gatk/gatkdocs/3.6-0/org_broadinstitute_gatk_tools_walkers_bqsr_BaseRecalibrator.php)
-    - [`PrintReads`](https://software.broadinstitute.org/gatk/gatkdocs/3.6-0/org_broadinstitute_gatk_tools_walkers_readutils_PrintReads.php)
-    - [`HaplotypeCaller`](https://software.broadinstitute.org/gatk/gatkdocs/3.6-0/org_broadinstitute_gatk_tools_walkers_haplotypecaller_HaplotypeCaller.php)
-    - [`VariantFiltration`](https://software.broadinstitute.org/gatk/gatkdocs/3.6-0/org_broadinstitute_gatk_tools_walkers_filters_VariantFiltration.php)
-    - [`ASEReadCounter`](https://software.broadinstitute.org/gatk/gatkdocs/3.6-0/org_broadinstitute_gatk_tools_walkers_rnaseq_ASEReadCounter.php)
+  - [`SplitNCigarReads`](https://software.broadinstitute.org/gatk/gatkdocs/3.6-0/org_broadinstitute_gatk_tools_walkers_rnaseq_SplitNCigarReads.php)
+  - [`BaseRecalibrator`](https://software.broadinstitute.org/gatk/gatkdocs/3.6-0/org_broadinstitute_gatk_tools_walkers_bqsr_BaseRecalibrator.php)
+  - [`PrintReads`](https://software.broadinstitute.org/gatk/gatkdocs/3.6-0/org_broadinstitute_gatk_tools_walkers_readutils_PrintReads.php)
+  - [`HaplotypeCaller`](https://software.broadinstitute.org/gatk/gatkdocs/3.6-0/org_broadinstitute_gatk_tools_walkers_haplotypecaller_HaplotypeCaller.php)
+  - [`VariantFiltration`](https://software.broadinstitute.org/gatk/gatkdocs/3.6-0/org_broadinstitute_gatk_tools_walkers_filters_VariantFiltration.php)
+  - [`ASEReadCounter`](https://software.broadinstitute.org/gatk/gatkdocs/3.6-0/org_broadinstitute_gatk_tools_walkers_rnaseq_ASEReadCounter.php)
 
 ## Pipeline steps
 

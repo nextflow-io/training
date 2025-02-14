@@ -2,9 +2,9 @@
 title: Nextflow Training
 description: Welcome to the Nextflow community training portal!
 hide:
-    - navigation
-    - toc
-    - footer
+  - navigation
+  - toc
+  - footer
 ---
 
 # Nextflow Training

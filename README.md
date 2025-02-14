@@ -7,11 +7,11 @@
 Welcome to the Nextflow training repository!
 We are excited to have you on the path to writing reproducible and scalable scientific workflows using Nextflow.
 
--   👉🏻 Written training material: <https://training.nextflow.io>
+- 👉🏻 Written training material: <https://training.nextflow.io>
 
--   👩🏻‍💻 Instructions on loading this repository within a GitPod environment: <https://training.nextflow.io/envsetup/>
+- 👩🏻‍💻 Instructions on loading this repository within a GitPod environment: <https://training.nextflow.io/envsetup/>
 
--   📚 Nextflow documentation: <https://www.nextflow.io/docs/latest/>
+- 📚 Nextflow documentation: <https://www.nextflow.io/docs/latest/>
 
 ## Contributions
 

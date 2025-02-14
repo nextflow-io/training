@@ -164,10 +164,10 @@ Em resumo, essas são as etapas que você precisa seguir para configurar um pipe
 6. Digite o(s) nome(s) de cada um dos **perfis de configuração** do Nextflow seguido da tecla `enter`. Veja mais [na documentação oficial](https://www.nextflow.io/docs/latest/config.html#config-profiles) sobre a configuração de perfis.
 7. Insira quaisquer parâmetros do fluxo de trabalho no formato YAML ou JSON. Exemplo com YAML:
 
-    ```yaml
-    leituras: "s3://nf-bucket/exome-data/ERR013140_{1,2}.fastq.bz2"
-    pares_de_leituras: true
-    ```
+   ```yaml
+   leituras: "s3://nf-bucket/exome-data/ERR013140_{1,2}.fastq.bz2"
+   pares_de_leituras: true
+   ```
 
 8. Selecione Launch para iniciar a execução do pipeline.
 

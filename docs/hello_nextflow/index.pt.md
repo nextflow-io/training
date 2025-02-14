@@ -1,7 +1,7 @@
 ---
 title: Hello Nextflow
 hide:
-    - toc
+  - toc
 ---
 
 # Hello Nextflow

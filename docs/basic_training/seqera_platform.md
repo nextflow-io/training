@@ -165,10 +165,10 @@ In brief, these are the steps you need to follow to set up a pipeline.
 6. Enter the name(s) of each of the Nextflow **Config profiles** followed by the `Enter` key. See the Nextflow [Config profiles](https://www.nextflow.io/docs/latest/config.html#config-profiles) documentation for more details.
 7. Enter any workflow parameters in YAML or JSON format. YAML example:
 
-    ```yaml
-    reads: "s3://nf-bucket/exome-data/ERR013140_{1,2}.fastq.bz2"
-    paired_end: true
-    ```
+   ```yaml
+   reads: "s3://nf-bucket/exome-data/ERR013140_{1,2}.fastq.bz2"
+   paired_end: true
+   ```
 
 8. Select Launch to begin the pipeline execution.
 
