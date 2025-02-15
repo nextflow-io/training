@@ -324,7 +324,7 @@ Now let's consider another aspect of workflow configuration that is very importa
 
 Currently, our workflow is set up to accept several parameter values via the command-line, with default values set in the workflow script itself.
 This is fine for a simple workflow with very few parameters that need to be set for a given run.
-However, many real-world workflows will have many more parameters that may be run-specific, and putting all of them in the commend line would be tedious and error-prone.
+However, many real-world workflows will have many more parameters that may be run-specific, and putting all of them in the command line would be tedious and error-prone.
 
 Nextflow allows us to specify parameters via a parameter file in JSON format, which makes it very convenient to manage and distribute alternative sets of default values, for example, as well as run-specific parameter values.
 

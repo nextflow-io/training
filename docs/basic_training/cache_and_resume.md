@@ -349,7 +349,7 @@ So D is matched with 'a' here, which was not the intention. That order will like
 
     ??? solution
 
-        You should see that while FOO and BAR reliably re-use their cache, FOOBAR will re-run at least a subset of its tasks due to differences in the combinations of inputs it recieves.
+        You should see that while FOO and BAR reliably re-use their cache, FOOBAR will re-run at least a subset of its tasks due to differences in the combinations of inputs it receives.
 
         The output will look like this:
 

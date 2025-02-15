@@ -1194,7 +1194,7 @@ This section should feel familiar to the `hello_modules` section.
 
     If you have a module that you would like to contribute back to the community, reach out on the nf-core slack or open a pull request to the modules repository.
 
-Start by using the nf-core tooling to create a sceleton local module:
+Start by using the nf-core tooling to create a skeleton local module:
 
 ```console
 nf-core modules create
