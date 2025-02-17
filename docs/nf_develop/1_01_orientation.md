@@ -14,7 +14,7 @@ This is an empty directory where you will create an launch your pipeline.
 
 !!! question "Exercise"
 
-    Open the [Gitpod training environment](https://gitpod.io/#https://github.com/nextflow-io/training) and use the following command to switch to the empty `nf-develop` folder:
+    Open the GitHub Codespaces environment use the following command to switch to the empty `nf-develop` folder:
 
     ```bash
     cd /workspace/gitpod/nf-develop

@@ -169,7 +169,7 @@ Fortunately, nf-core pipelines come packed with directives for containers and en
 -profile singularity
 ```
 
-In Gitpod, you can add the `singularity` profile to your execution command and Nextflow will download and enable Singularity software images to run each process.
+In GitHub Codespaces, you can add the `singularity` profile to your execution command and Nextflow will download and enable Singularity software images to run each process.
 
 The singularity profile is defined in the nextflow.config file in the main pipeline repository.
 

@@ -1,6 +1,6 @@
 # Local installation
 
-If you **can not** access Gitpod you can also install everything locally.
+If you **cannot** use GitHub Codespaces session for any reason, you have the option of installing everything locally instead.
 
 Some requirements may be different depending on your local machine.
 

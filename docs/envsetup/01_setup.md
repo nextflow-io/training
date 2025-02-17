@@ -2,7 +2,7 @@
 
 GitHub Codespaces is a cloud development environment for teams to efficiently and securely develop software. It can improve your developer experience by coding in a cloud development environment.
 
-## Creating a Gitpod account
+## Creating a GitHub account
 
 You can create a free GitHub account from the [GitHub home page](https://github.com/).
 
@@ -46,7 +46,7 @@ You can reopen an environment from <https://github.com/codespaces/>. Previous en
 
 ![List GitHub Codespace sessions](img/codespaces_list.png)
 
-If you have saved the URL for your previous Gitpod environment, you can simply open it in your browser.
+If you have saved the URL for your previous GitHub Codespaces environment, you can simply open it in your browser.
 
 Alternatively, click the same button that you used to create it in the first place:
 
