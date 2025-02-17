@@ -179,15 +179,14 @@ plugins:
       exclude:
         - index.md
         - help.md
-        - envsetup/index.md
         - basic_training/index.md
         - advanced/index.md
-        - hello_nextflow/index.md
         - nf_customize/index.md
         - nf_develop/index.md
         - troubleshoot/index.md
         - hands_on/index.md
         - hands_on/solutions/*md
+        - envsetup/*.md
         - hello_nextflow/*.md
   - i18n:
       docs_structure: suffix

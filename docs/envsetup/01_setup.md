@@ -68,6 +68,6 @@ GitHub Codespaces will time out after 30 minutes of inactivity and will save you
 More information can be found in the GitHub docs:
 [About billing for GitHub Codespaces](https://docs.github.com/en/billing/managing-billing-for-your-products/managing-billing-for-github-codespaces/about-billing-for-github-codespaces)
 
-### Saving files from GitHub Codespaces to your local machine
+## Saving files from GitHub Codespaces to your local machine
 
 To save any file from the explorer panel, right-click the file and select `Download`.
