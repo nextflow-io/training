@@ -18,7 +18,7 @@ To have Nextflow generate the report automatically, simply add `-with-report <fi
 nextflow run main.nf -profile my_laptop -with-report report-config-1.html
 ```
 
-The report is an html file, which you can download and open in your browser. You can also right click it in the file explorer on the left and click on `Show preview` in order to view it on Gitpod.
+The report is an html file, which you can download and open in your browser. You can also right click it in the file explorer on the left and click on `Show preview` in order to view it in VS Code.
 
 Take a few minutes to look through the report and see if you can identify some opportunities for adjusting resources.
 Make sure to click on the tabs that show the utilization results as a percentage of what was allocated.

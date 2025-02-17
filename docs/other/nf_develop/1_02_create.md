@@ -110,7 +110,7 @@ git push --all origin
 
 !!! warning "https vs ssh"
 
-    When using Gitpod you must use **https** not **ssh** when adding your remote:
+    When using GitHub Codespaces you must use **https** not **ssh** when adding your remote:
 
     For example, you should use:
 
