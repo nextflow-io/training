@@ -28,7 +28,7 @@ If you run this inside `hello-nextflow`, you should see the following output:
 │   ├── build
 │   ├── data
 │   ├── results
-│   └── scripts
+│   └── solutions
 ├── data
 │   ├── bam
 │   ├── greetings.csv
@@ -64,7 +64,7 @@ If you run this inside `hello-nextflow`, you should see the following output:
     ├── hello-operators
     └── hello-world
 
-18 directories, 17 files
+22 directories, 17 files
 ```
 
 !!!note
