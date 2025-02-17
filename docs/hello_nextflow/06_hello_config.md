@@ -468,7 +468,7 @@ Basically we are telling Nextflow to generate a Slurm submission script and subm
 
 ### 3.2. Launch the workflow to generate the job submission script
 
-Let's try running this; even though we know it won't execute (since we don't have Slurm set up in this Gitpod environment) we'll be able to see what the submission script looks like.
+Let's try running this; even though we know it won't execute (since we don't have Slurm set up in this GitHub Codespaces environment) we'll be able to see what the submission script looks like.
 
 ```bash
 nextflow run main.nf -profile conda_on
@@ -720,7 +720,7 @@ To have Nextflow generate the report automatically, simply add `-with-report <fi
 nextflow run main.nf -profile my_laptop -with-report report-config-1.html
 ```
 
-The report is an html file, which you can download and open in your browser. You can also right click it in the file explorer on the left and click on `Show preview` in order to view it on Gitpod.
+The report is an html file, which you can download and open in your browser. You can also right click it in the file explorer on the left and click on `Show preview` in order to view it in GitHub Codespaces.
 
 Take a few minutes to look through the report and see if you can identify some opportunities for adjusting resources.
 Make sure to click on the tabs that show the utilization results as a percentage of what was allocated.
@@ -829,7 +829,7 @@ _After:_
     }
 ```
 
-We can't test this since we don't have a live connection to Slurm in the Gitpod environment.
+We can't test this since we don't have a live connection to Slurm in the GitHub Codespaces environment.
 However, you can try running the workflow with resource allocations that exceed these limits, then look up the `sbatch` command in the `.command.run` script file.
 You should see that the requests that actually get sent to the executor are capped at the values specified by `resourceLimits`.
 

@@ -131,7 +131,7 @@ gatk HaplotypeCaller \
         -L /data/ref/intervals.bed
 ```
 
-The output file `reads_mother.vcf` is created inside your working directory in the container, so you won't see it in the Gitpod file explorer unless you change the output file path.
+The output file `reads_mother.vcf` is created inside your working directory in the container, so you won't see it in the VS Code file explorer unless you change the output file path.
 However, it's a small test file, so you can `cat` it to open it and view the contents.
 If you scroll all the way up to the start of the file, you'll find a header composed of many lines of metadata, followed by a list of variant calls, one per line.
 
@@ -732,7 +732,7 @@ As you can see, we listed one file path per line, and they are absolute paths.
 
 !!! note
 
-    The files we are using here are just on your Gitpod's local filesystem, but we could also point to files in cloud storage.
+    The files we are using here are just on your GitHub Codespaces's local filesystem, but we could also point to files in cloud storage.
 
 ### 4.2. Update the parameter default
 

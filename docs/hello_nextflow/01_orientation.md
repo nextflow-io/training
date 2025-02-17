@@ -1,16 +1,16 @@
 # Orientation
 
-The Gitpod environment contains all the software, code and data necessary to work through this training course, so you don't need to install anything yourself.
+The GitHub Codespaces environment contains all the software, code and data necessary to work through this training course, so you don't need to install anything yourself.
 However, you do need a (free) account to log in, and you should take a few minutes to familiarize yourself with the interface.
 
 If you have not yet done so, please follow [this link](../../envsetup/) before going any further.
 
 ## Materials provided
 
-Throughout this training course, we'll be working in the `hello-nextflow/` directory, which loads by default when you open the Gitpod workspace.
+Throughout this training course, we'll be working in the `hello-nextflow/` directory, which loads by default when you open the GitHub Codespaces workspace.
 This directory contains all the code files, test data and accessory files you will need.
 
-Feel free to explore the contents of this directory; the easiest way to do so is to use the file explorer on the left-hand side of the Gitpod workspace.
+Feel free to explore the contents of this directory; the easiest way to do so is to use the file explorer on the left-hand side of the GitHub Codespaces workspace.
 Alternatively, you can use the `tree` command.
 Throughout the course, we use the output of `tree` to represent directory structure and contents in a readable form, sometimes with minor modifications for clarity.
 

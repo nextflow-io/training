@@ -43,7 +43,7 @@ When you're ready to get down to work, click on the 'Open in GitHub Codespaces' 
 
         :material-lightbulb: Essential for setting up your environment for the first time.
 
-    Instructions for setting up your environment to work through training materials (all courses). Provides an orientation to Gitpod as well as alternate installation instructions for working on your own local machine.
+    Instructions for setting up your environment to work through training materials (all courses). Provides an orientation to GitHub Codespaces as well as alternate installation instructions for working on your own local machine.
 
     [Launch the Environment Setup training :material-arrow-right:](envsetup/index.md){ .md-button .md-button--primary }
 
@@ -121,7 +121,7 @@ When you're ready to get down to work, click on the 'Open in GitHub Codespaces' 
 
         :material-run-fast: A short hands-on tutorial focused on a concrete analysis pipeline example.
 
-    This course was developed as a "learn by doing" tutorial intended as a fast, hands-on way to get to grips with Nextflow using a very concrete analysis pipeline example. You can still find the materials in the GitHub repository, but it is no longer being maintained and can no longer be launched in Gitpod or in the training portal.
+    This course was developed as a "learn by doing" tutorial intended as a fast, hands-on way to get to grips with Nextflow using a very concrete analysis pipeline example. You can still find the materials in the GitHub repository, but it is no longer being maintained and can no longer be launched in GitHub Codespaces or in the training portal.
 
 ## Resources
 
