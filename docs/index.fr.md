@@ -2,7 +2,6 @@
 title: Formation Nextflow
 description: Bienvenue sur le portail de formation de la communauté Nextflow !
 hide:
-  - navigation
   - toc
   - footer
 ---

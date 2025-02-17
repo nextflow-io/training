@@ -2,7 +2,6 @@
 title: Nextflow Training
 description: ¡Bienvenido al portal de capacitación de la comunidad Nextflow!
 hide:
-  - navigation
   - toc
   - footer
 ---
