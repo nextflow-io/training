@@ -1028,7 +1028,7 @@ The `when` declaration allows you to define a condition that must be verified in
 
 !!! warning
 
-    Deprecated since version 24.10.0: Use conditional logic (e.g. `if` statement, ![filter](https://www.nextflow.io/docs/latest/reference/operator.html#operator-filter) operator) in the calling workflow instead.
+    Deprecated since version 24.10.0: Use conditional logic (e.g. `if` statement, [filter](https://www.nextflow.io/docs/latest/reference/operator.html#operator-filter) operator) in the calling workflow instead.
 
 It is useful to enable/disable the process execution depending on the state of various inputs and parameters. For example:
 
