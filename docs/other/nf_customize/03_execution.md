@@ -155,7 +155,7 @@ nextflow run nf-core/demo -profile test --outdir results
 
     !!! warning "This execution is expected to fail!"
 
-As the software required to run each process (e.g., seqtk) is not available in the Gitpod environment the exercise above is expected to fail:
+As the software required to run each process (e.g., seqtk) is not available in the GitHub Codespaces environment the exercise above is expected to fail:
 
 ```console
 Caused by:
@@ -235,7 +235,7 @@ The nf-core/demo pipeline will auto-detect whether a sample is single- or paired
 
 You can use you new samplesheet with the `--input` parameter in your execution command.
 
-In this case, the other parameters in the test profile (e.g., `config_profile_name`) can be ignored as they are not explicitly required by the pipeline or in this Gitpod environment.
+In this case, the other parameters in the test profile (e.g., `config_profile_name`) can be ignored as they are not explicitly required by the pipeline or in this GitHub Codespaces environment.
 
 !!! question "Exercise"
 

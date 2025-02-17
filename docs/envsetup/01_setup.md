@@ -1,70 +1,74 @@
-# Gitpod
+# GitHub Codespaces
 
-Gitpod is a cloud-based development environment for teams to efficiently and securely develop software.
+GitHub Codespaces is a cloud-based development environment for teams to efficiently and securely develop software.
 We use it to provide a consistent training environment for everyone.
 
 ## Creating a Gitpod account
 
-You can create a free [Gitpod](https://gitpod.io/) account from the [Gitpod login page](https://gitpod.io/login/).
+You can create a free GitHub account from the [GitHub home page](https://github.com/).
 
-You will be prompted to choose between 'Gitpod Flex' and 'Gitpod Classic'.
-Select 'Gitpod Classic' and click 'Continue'.
+## Running GitHub Codespaces
 
-![Select 'Gitpod Classic'](img/select_gitpod_classic.png)
-
-Next, log in using your GitHub account.
-
-![Gitpod log in](img/login.png)
-
-You may need to fill out an additional form or two.
-When prompted to connect a LinkedIn account, we recommend doing so if you have one, to receive the extra 50 hours usage allocation.
-Don't worry too much if you don't have one; the basic allocation is more than enough to work through the introductory training course.
-
-If you are prompted to select your preferred editor, we strongly recommend choosing the VSCode editor, as that is what we use for Nextflow development in general and for trainings in particular.
-
-## Running Gitpod
-
-Once you are logged in to Gitpod, open this link in your browser to open the training environment: <https://gitpod.io/#https://github.com/nextflow-io/training>
-
-This URL is the address to the Nextflow training repository prefixed with `https://gitpod.io/#`.
+Once you are logged in to GitHub, open this link in your browser to open the training environment: <https://codespaces.new/nextflow-io/training?quickstart=1&ref=master>
 
 Alternatively, you can click on the button shown below from the many pages in the training portal where it is displayed.
 
-[![Open Gitpod](https://img.shields.io/badge/Gitpod-%20Open%20in%20Gitpod-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/nextflow-io/training)
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
-If you are already logged in, your Gitpod environment will start to load.
+You should be presented with a page where you can create a new GitHub Codespace:
 
-### Explore your Gitpod IDE
+![Create a GitHub Codespace](img/codespaces_create.png)
 
-After Gitpod has loaded, you should see something similar to the following (which may in light mode depending on your account preferences):
+If you wish, you can click "Change options" to configure the machine used, though the defaults should be fine.
 
-![Gitpod welcome](img/gitpod.welcome.png)
+!!! warning
+
+    Opening a new GitHub Codespaces environment for the first time can take several minutes.
+    It's worth grabbing a cup of tea and checking your emails.
+
+## Explore your GitHub Codespaces IDE
+
+After GitHub Codespaces has loaded, you should see something similar to the following (which may in light mode depending on your account preferences):
+
+![GitHub Codespaces welcome](img/codespaces_welcome.png)
 
 This is the interface of the VSCode IDE, a popular code development application that we recommend using for Nextflow development.
 
-- **The sidebar** allows you to customize your Gitpod environment and perform basic tasks (copy, paste, open files, search, git, etc.). You can click the explorer button to see which files are in this repository.
+- **The sidebar** allows you to customize your GitHub Codespaces environment and perform basic tasks (copy, paste, open files, search, git, etc.). You can click the explorer button to see which files are in this repository.
 - **The terminal** allows you to run all the programs in the repository. For example, both `nextflow` and `docker` are installed and can be executed.
 - **The file explorer** allows you to view and edit files. Clicking on a file in the explorer will open it within the main window.
-- **The Simple Browser** lets you view the training instructions in a web browser (<https://training.nextflow.io/>). If you close it by accident, you can load the simple browser again by typing the following in the terminal: `gp preview https://training.nextflow.io`.
+- **The main editor** showing you a preview of the `README.md` file.
 
-### Gitpod resources
+## Reopening a GitHub Codespaces session
 
-Gitpod gives you up to 500 free credits per month, which is equivalent to 50 hours of free environment runtime using the standard workspace (up to 4 cores, 8 GB RAM, and 30 GB storage).
+Once you have created an envionrment, you can easily resume or restart it and continue from where you left off.
 
-There is also a large workspace option that gives you up to 8 cores, 16GB RAM, and 50GB storage. However, the large workspace will use your free credits quicker and you will have fewer hours of access to this space.
+You can reopen an environment from <https://github.com/codespaces/>. Previous environments will be listed. Click a session to resume it.
 
-Gitpod will time out after 30 minutes of inactivity and will save your changes for up to 2 weeks.
-
-More information about Gitpod is available at [gitpod.io](https://www.gitpod.io).
-
-### Reopening a Gitpod session
-
-You can reopen an environment from <https://gitpod.io/workspaces>. Previous environments will be listed. You can select the ellipsis (three dots icon) and then select `Open` to reopen a previous environment.
+![List GitHub Codespace sessions](img/codespaces_list.png)
 
 If you have saved the URL for your previous Gitpod environment, you can simply open it in your browser.
 
-Alternatively, you can open a new training workspace by following the Gitpod URL: <https://gitpod.io/#https://github.com/nextflow-io/training>
+Alternatively, click the same button that you used to create it in the first place:
 
-### Saving files from Gitpod to your local machine
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
+
+You should see the previous session, the default option is to resume it:
+
+![Resume a GitHub Codespace](img/codespaces_resume.png)
+
+## GitHub Codespaces billing
+
+GitHub Codespaces gives you up to 15 GB-month storage per month, and 120 core-hours per month.
+This is equivalent to around 60 hours of free environment runtime using the standard workspace (up to 2 cores, 8 GB RAM, and 32 GB storage).
+
+GitHub Codespaces environments are configurable. You can create them with more resources, but this will use your free usage quicker and you will have fewer hours of access to this space.
+
+GitHub Codespaces will time out after 30 minutes of inactivity and will save your changes for up to 2 weeks.
+
+More information can be found in the GitHub docs:
+[About billing for GitHub Codespaces](https://docs.github.com/en/billing/managing-billing-for-your-products/managing-billing-for-github-codespaces/about-billing-for-github-codespaces)
+
+### Saving files from GitHub Codespaces to your local machine
 
 To save any file from the explorer panel, right-click the file and select `Download`.

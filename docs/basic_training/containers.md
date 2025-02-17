@@ -429,7 +429,7 @@ In the same way that you can push Docker images to Docker Hub, you can upload Si
 
 Conda is a popular package and environment manager. The built-in support for Conda allows Nextflow workflows to automatically create and activate the Conda environment(s), given the dependencies specified by each process.
 
-In this Gitpod environment, conda is already installed.
+In this GitHub Codespaces environment, conda is already installed.
 
 ### Using conda
 

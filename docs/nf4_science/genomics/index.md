@@ -43,6 +43,6 @@ For technical requirements and environment setup, see the [Environment Setup](..
 
 ## Get started
 
-To get started, open the training environment by clicking the 'Open in Gitpod' button below.
+To get started, open the training environment by clicking the 'Open in GitHub Codespaces' button below.
 
-[![Open in Gitpod](https://img.shields.io/badge/Gitpod-%20Open%20in%20Gitpod-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/nextflow-io/training)
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)

@@ -1,6 +1,8 @@
 # Orientation
 
-This workshop should be completed using the [Nextflow Training Gitpod Environment](https://gitpod.io/#https://github.com/nextflow-io/training).
+This workshop should be completed using the Nextflow Training GitHub Codespaces Environment:
+
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
 ## Getting started
 

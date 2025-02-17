@@ -42,7 +42,7 @@ In this part of the course, we're going to develop a workflow that does the foll
 ## 0. Warmup: Test the Samtools and GATK commands interactively
 
 First we want to try out the commands manually before we attempt to wrap them in a workflow.
-The tools we need (Samtools and GATK) are not installed in the Gitpod environment, so we'll use them via containers (see [Hello Containers](../../hello_nextflow/05_hello_containers.md)).
+The tools we need (Samtools and GATK) are not installed in the GitHub Codespaces environment, so we'll use them via containers (see [Hello Containers](../../hello_nextflow/05_hello_containers.md)).
 
 !!! note
 
