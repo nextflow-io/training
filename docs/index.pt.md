@@ -19,9 +19,9 @@ Os treinamentos listados abaixo foram construídos de modo que você possa fazê
 - A Seqera (a empresa que desenvolve o Nextflow) realiza uma variedade de eventos de treinamento. Veja a página [Seqera Events](https://seqera.io/events/) e procure por 'Seqera Sessions' e 'Nextflow Summit'.
 - Nosso time de Comunidade também ministra regularmente treinamentos hospedados por outras organizações; anúncios e inscrições para eles são normalmente gerenciados por essas organizações.
 
-Quando decidir começar o treinamento, clique no botão 'Abrir no Gitpod', nesta página ou na página de índice do treinamento escolhido, para abrir um ambiente de treinamento dentro do seu próporio navegador (requer uma conta gratuita no GitHub).
+Quando decidir começar o treinamento, clique no botão 'Open in GitHub Codespaces', nesta página ou na página de índice do treinamento escolhido, para abrir um ambiente de treinamento dentro do seu próporio navegador (requer uma conta gratuita no GitHub).
 
-[![Abrir no Gitpod](https://img.shields.io/badge/Gitpod-%20Open%20in%20Gitpod-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/nextflow-io/training)
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
 ## Configuração do Ambiente
 

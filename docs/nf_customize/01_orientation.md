@@ -1,10 +1,10 @@
 # Orientation
 
-The Gitpod environment contains some test data that will be used in this workshop.
+The GitHub Codespaces environment contains some test data that will be used in this workshop.
 
 !!! note
 
-    Follow [this link](../envsetup/index.md) if you have not yet setup your Gitpod environment.
+    Follow [this link](../envsetup/index.md) if you have not yet setup your GitHub Codespaces environment.
 
 ## Getting started
 

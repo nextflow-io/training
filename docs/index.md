@@ -19,9 +19,21 @@ The training courses listed below are designed to be useable as a self-service r
 - Seqera (the company that develops Nextflow) runs a variety of training events, see the [Seqera Events](https://seqera.io/events/) page and look for 'Seqera Sessions' and 'Nextflow Summit'.
 - Our Community team also regularly teaches trainings hosted by third party organizations; announcements and signups for those are typically managed by the third-party hosts.
 
-When you're ready to get down to work, click on the 'Open in Gitpod' button, either on this page or on the index page of the course you chose, to open a web-based training environment (requires a free GitHub account).
+When you're ready to get down to work, click on the 'Open in GitHub Codespaces' button, either on this page or on the index page of the course you chose, to open a web-based training environment (requires a free GitHub account).
 
-[![Open in Gitpod](https://img.shields.io/badge/Gitpod-%20Open%20in%20Gitpod-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/nextflow-io/training)
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
+
+!!! note
+
+    The Nextflow Training used to use [Gitpod](https://gitpod.io) until Feb 2025,
+    however that free functionality has been retired in favour of their new
+    [Gitpod Flex](https://www.gitpod.io/blog/introducing-gitpod-flex) system.
+    As such, we have changed to GitHub Codespaces, which still offer a one-click
+    developer environment with no prior setup.
+
+    Depending on when you signed up to GitPod and when exactly they retire the service,
+    you may still be able to launch the training in their old cloud IDE:
+    [Open in Gitpod](https://gitpod.io/#https://github.com/nextflow-io/training).
 
 ## Training Environment Setup
 

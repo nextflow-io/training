@@ -28,7 +28,7 @@ Essa URL é o repositório de treinamento do Nextflow prefixado com `https://git
 
 Você também pode acessar o material clicando no botão abaixo.
 
-[![Open Gitpod](https://img.shields.io/badge/Gitpod-%20Open%20in%20Gitpod-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/nextflow-io/training)
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
 Se você já estiver logado, seu ambiente no Gitpod começará a carregar.
 
