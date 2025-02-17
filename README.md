@@ -13,13 +13,6 @@ We are excited to have you on the path to writing reproducible and scalable scie
 
 - 📚 Nextflow documentation: <https://www.nextflow.io/docs/latest/>
 
-!!! warning
-
-    Some of the translations on the training portal are out of date.
-    The translated material may be incomplete or incorrect.
-    We plan to update the translations later this year.
-    In the meantime, please try to work through the English-language material if you can.
-
 ## Contributions
 
 We welcome fixes and improvements from the community. Please fork the repository and create pull-requests with any improvements you'd like to suggest to the docs.
