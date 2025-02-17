@@ -2,9 +2,9 @@
 title: Portal de Treinamento Nextflow
 description: Seja bem vindo ao portal de treinamento da comunidade do Nextflow!
 hide:
-    - navigation
-    - toc
-    - footer
+  - navigation
+  - toc
+  - footer
 ---
 
 # Treinamentos Nextflow

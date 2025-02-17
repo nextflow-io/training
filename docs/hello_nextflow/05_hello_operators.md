@@ -561,15 +561,15 @@ With a concrete example, it looks like this:
 
 1. We have three files:
 
-    `[A.ext, B.ext, C.ext]`
+   `[A.ext, B.ext, C.ext]`
 
 2. The closure modifies each one to create the strings:
 
-    `"-V A.ext", "-V B.ext", "-V C.ext"`
+   `"-V A.ext", "-V B.ext", "-V C.ext"`
 
 3. The `.join(' ')` operation generates the final string:
 
-    `"-V A.ext -V B.ext -V C.ext"`
+   `"-V A.ext -V B.ext -V C.ext"`
 
 Once we have that string, we can assign it to a local variable, `gvcfs_line`, defined with the `def` keyword:
 

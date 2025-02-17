@@ -38,17 +38,17 @@ hello-config
 - **`nextflow.config`** is a copy of the original `nextflow.config` file from the `hello-nextflow` directory, one level up (where we've been working so far).
   Whenever there is a file named `nextflow.config` in the current directory, Nextflow will automatically load configuration from it. The one we have been using contains the following lines:
 
-    ```console title="nextflow.config" linenums="1"
-    docker.fixOwnership = true
-    docker.enabled = true
-    ```
+  ```console title="nextflow.config" linenums="1"
+  docker.fixOwnership = true
+  docker.enabled = true
+  ```
 
-    The `docker.fixOwnership = true` line is not really interesting.
-    It's a workaround for an issue that sometimes occur with containerized tools that set the wrong permissions on the files they write (which is the case with GenomicsDBImport in the GATK container image in our workflow).
+  The `docker.fixOwnership = true` line is not really interesting.
+  It's a workaround for an issue that sometimes occur with containerized tools that set the wrong permissions on the files they write (which is the case with GenomicsDBImport in the GATK container image in our workflow).
 
-    The `docker.enabled = true` line is what we care about here.
-    It specifies that Nextflow should use Docker to run process calls that specify a container image.
-    We're going to be playing with that shortly.
+  The `docker.enabled = true` line is what we care about here.
+  It specifies that Nextflow should use Docker to run process calls that specify a container image.
+  We're going to be playing with that shortly.
 
 !!!note
 
@@ -956,13 +956,13 @@ The values are the same input files and reference files we've been using so far.
 
 ```json title="demo-params.json" linenums="1"
 {
-    "reads_bam": "data/sample_bams.txt",
-    "outdir": "results_genomics",
-    "reference": "data/ref/ref.fasta",
-    "reference_index": "data/ref/ref.fasta.fai",
-    "reference_dict": "data/ref/ref.dict",
-    "intervals": "data/ref/intervals.bed",
-    "cohort_name": "family_trio"
+  "reads_bam": "data/sample_bams.txt",
+  "outdir": "results_genomics",
+  "reference": "data/ref/ref.fasta",
+  "reference_index": "data/ref/ref.fasta.fai",
+  "reference_dict": "data/ref/ref.dict",
+  "intervals": "data/ref/intervals.bed",
+  "cohort_name": "family_trio"
 }
 ```
 

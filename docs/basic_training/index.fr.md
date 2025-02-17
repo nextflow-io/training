@@ -1,7 +1,7 @@
 ---
 description: Aperçu du matériel de formation Nextflow de base
 hide:
-    - toc
+  - toc
 ---
 
 # Bienvenue

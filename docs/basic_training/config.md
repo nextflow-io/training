@@ -41,7 +41,7 @@ Instead of including each parameter on the command line, parameters can also be 
 
 ```json linenums="1" title="params.json"
 {
-    "greeting": "Bonjour le monde!"
+  "greeting": "Bonjour le monde!"
 }
 ```
 
