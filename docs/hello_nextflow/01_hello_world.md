@@ -151,7 +151,7 @@ Another common qualifier is `val`.
     If we change one but not the other, the script will break.
     Later, you'll learn how to use variables to avoid this problem.
 
-In a real-world pipeline, a process usually contains additional blocks such as directives, inputs, and conditional clauses, which we'll introduce later in this training course.
+In a real-world pipeline, a process usually contains additional blocks such as directives and inputs, which we'll introduce in a little bit.
 
 ### 1.3 The `workflow` definition
 
@@ -227,7 +227,7 @@ Within the `work` directory, Nextflow organizes outputs and logs per process cal
 For each process call, Nextflow creates a nested subdirectory, named with a hash in order to make it unique, where it will stage all necessary inputs (using symlinks by default), write helper files, and write out logs and any outputs of the process.
 
 The path to that subdirectory is shown in truncated form in square brackets in the console output.
-Looking at what we got for the run shown above, the console log line for the sayHello process starts with `[a3/7be2fa]`. That corresponds to the following directory path: `work/`**`a3/7be2fa`**`7be2fad5e71e5f49998f795677fd68`
+Looking at what we got for the run shown above, the console log line for the sayHello process starts with `[a3/7be2fa]`. That corresponds to the following directory path: `work/a3/7be2fa7be2fad5e71e5f49998f795677fd68`
 
 Let's take a look at what's in there.
 
