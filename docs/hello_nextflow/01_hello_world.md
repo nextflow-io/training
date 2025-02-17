@@ -143,7 +143,7 @@ Another common qualifier is `val`.
 
     The output definition does not _determine_ what output will be created.
     It simply _declares_ what is the expected output, so that Nextflow can look for it once execution is complete.
-    This is necessary for verifying that the command was executed successfully and for passing the output to downstream processes if needed.
+    This is necessary for verifying that the command was executed successfully and for passing the output to downstream processes if needed. Output produced that doesn't match what is declared in the output block will not be passed to downstream processes.
 
 !!! warning
 
@@ -263,7 +263,7 @@ These are the helper and log files:
 - **`.command.log`**: Complete log output emitted by the process call
 - **`.command.out`**: Regular output (`stdout`) by the process call
 - **`.command.run`**: Full script run by Nextflow to execute the process call
-- **`.command.sh`**: The command that was run by the process call call
+- **`.command.sh`**: The command that was actually run by the process call
 - **`.exitcode`**: The exit code resulting from the command
 
 The `.command.sh` file is especially useful because it tells you what command Nextflow actually executed.
@@ -291,7 +291,7 @@ Learn how to manage your workflow executions conveniently.
 
 Knowing how to launch workflows and retrieve outputs is great, but you'll quickly find there are a few other aspects of workflow management that will make your life easier, especially if you're developing your own workflows.
 
-Here we show you how to use the `publishDir` directive to TODO, the `resume` feature for when you need to re-launch the same workflow, and how to delete older work directories with `nextflow clean`.
+Here we show you how to use the `publishDir` directive to store in an output folder all the main results from your pipeline run, the `resume` feature for when you need to re-launch the same workflow, and how to delete older work directories with `nextflow clean`.
 
 ### 3.1. Publish outputs
 
@@ -301,7 +301,7 @@ This is done on purpose; Nextflow is in control of this directory and we are not
 However, that makes it inconvenient to retrieve outputs that we care about.
 
 Fortunately, Nextflow provides a way to manage this more conveniently, called the `publishDir` directive, which acts at the process level.
-This directive tells Nextflow to copy the output(s) of the process to a designated output directory.
+This directive tells Nextflow to publish the output(s) of the process to a designated output directory. By default, the outputs are published as symbolic links from the `work` directory.
 It allows us to retrieve the desired output file without having to dig down into the work directory.
 
 #### 3.1.1. Add a `publishDir` directive to the `sayHello` process
@@ -350,15 +350,14 @@ executor >  local (1)
 This time, Nextflow has created a new directory called `results/`.
 Our `output.txt` file is in this directory.
 If you check the contents it should match the output in the work subdirectory.
-This is how we move results files outside of the working directories conveniently.
+This is how we publish results files outside of the working directories conveniently.
 
-It is also possible to set the `publishDir` directive to make a symbolic link to the file instead of actually copying it.
-This is preferable when you're dealing with very large files you don't need to retain longer term.
-However, if you delete the work directory as part of a cleanup operation, you will lost access to the file, so always make sure you have actual copies of everything you care about before deleting anything.
+When you're dealing with very large files that you don't need to retain for long, you may prefer to set the `publishDir` directive to make a symbolic link to the file instead of copying it.
+However, if you delete the work directory as part of a cleanup operation, you will lose access to the file, so always make sure you have actual copies of everything you care about before deleting anything.
 
 !!! note
 
-    A newer syntax option had been proposed to make it possible to declare and publish workflow-level outputs, documented [here](https://www.nextflow.io/docs/latest/workflow.html#publishing-outputs).
+    A newer syntax option documented [here](https://www.nextflow.io/docs/latest/workflow.html#publishing-outputs) has been proposed to make it possible to declare and publish workflow-level outputs.
     This will eventually make using `publishDir` at the process level redundant for completed pipelines.
     However, we expect that `publishDir` will still remain very useful during pipeline development.
 
@@ -391,7 +390,7 @@ Launching `hello-world.nf` [golden_cantor] DSL2 - revision: 35bd3425e5
 [62/49a1f8] sayHello | 1 of 1, cached: 1 ✔
 ```
 
-Look for the `cached:` bit that has been added in the process status line (line 6), which means that Nextflow has recognized that it has already done this work and simply re-used the result from the previous successful run.
+Look for the `cached:` bit that has been added in the process status line (line 5), which means that Nextflow has recognized that it has already done this work and simply re-used the result from the previous successful run.
 
 You can also see that the work subdirectory hash is the same as in the previous run.
 Nextflow is literally pointing you to the previous execution and saying "I already did that over there."
@@ -405,7 +404,7 @@ Nextflow is literally pointing you to the previous execution and saying "I alrea
 During the development process, you'll typically run your draft pipelines a large number of times, which can lead to an accumulation of very many files across many subdirectories.
 Since the subdirectories are named randomly, it is difficult to tell from their names what are older vs. more recent runs.
 
-Nextflow includes a convenient `-clean` command that can automatically delete the work subdirectories for past runs that you no longer care about, with several [options](https://www.nextflow.io/docs/latest/reference/cli.html#clean) to control what will be deleted.
+Nextflow includes a convenient `clean` subcommand that can automatically delete the work subdirectories for past runs that you no longer care about, with several [options](https://www.nextflow.io/docs/latest/reference/cli.html#clean) to control what will be deleted.
 
 Here we show you an example that deletes all subdirectories from runs before a given run, specified using its run name.
 The run name is the machine-generated two-part string shown in square brackets in the `Launching (...)` console output line.
@@ -583,7 +582,7 @@ executor >  local (1)
 
 Be sure to open up the output file to check that you now have the new version of the greeting.
 
-```console title="output.txt" linenums="1"
+```console title="results/output.txt" linenums="1"
 Bonjour le monde!
 ```
 
@@ -636,7 +635,7 @@ executor >  local (1)
 
 Check the output in the results directory:
 
-```console title="output.txt" linenums="1"
+```console title="results/output.txt" linenums="1"
 Holà mundo!
 ```
 
@@ -665,7 +664,7 @@ executor >  local (1)
 
 Now you will have the corresponding new output in your results directory.
 
-```console title="output.txt" linenums="1"
+```console title="results/output.txt" linenums="1"
 Konnichiwa!
 ```
 
