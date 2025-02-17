@@ -42,7 +42,7 @@ nextflow run script1.nf
 Tente especificar um parâmetro de entrada diferente no seu comando de execução, por exemplo:
 
 ```bash
-nextflow run script1.nf --reads '/workspace/gitpod/nf-training/data/ggal/lung_{1,2}.fq'
+nextflow run script1.nf --reads '/workspaces/training/nf-training/data/ggal/lung_{1,2}.fq'
 ```
 
 ### :material-progress-question: Exercícios
@@ -226,7 +226,7 @@ docker.enabled = true
         │       │   ├── refseq.bin
         │       │   ├── seq.bin
         │       │   └── versionInfo.json
-        │       └── transcriptome.fa -> /workspace/Gitpod_test/data/ggal/transcriptome.fa
+        │       └── transcriptome.fa -> /workspaces/training/data/ggal/transcriptome.fa
         ├── 7f
         ```
 

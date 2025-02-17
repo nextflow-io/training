@@ -248,7 +248,7 @@ docker run --volume $PWD:$PWD --workdir $PWD my-image \
 Or set a folder you want to mount as an environmental variable, called `DATA`:
 
 ```bash
-DATA=/workspace/gitpod/nf-training/data
+DATA=/workspaces/training/nf-training/data
 docker run --volume $DATA:$DATA --workdir $PWD my-image \
     salmon index -t $PWD/data/ggal/transcriptome.fa -i transcript-index
 ```

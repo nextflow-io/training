@@ -252,7 +252,7 @@ work/8c/738ac55b80e7b6170aa84a68412454
 ├── .command.sh
 ├── .exitcode
 ├── cowsay-output-Bonjour.txt
-└── output-Bonjour.txt -> /workspace/gitpod/nf-training/hello-nextflow/work/0e/e96c123cb7ae9ff7b7bed1c5444009/output-Bonjour.txt
+└── output-Bonjour.txt -> /workspaces/training/nf-training/hello-nextflow/work/0e/e96c123cb7ae9ff7b7bed1c5444009/output-Bonjour.txt
 
 1 directory, 9 files
 ```
@@ -267,7 +267,7 @@ Search for `nxf_launch` and you should see something like this:
 
 ```bash
 nxf_launch() {
-    docker run -i --cpu-shares 1024 -e "NXF_TASK_WORKDIR" -v /workspace/gitpod/nf-training/hello-nextflow/work:/workspace/gitpod/nf-training/hello-nextflow/work -w "$NXF_TASK_WORKDIR" --name $NXF_BOXID community.wave.seqera.io/library/pip_cowsay:131d6a1b707a8e65 /bin/bash -ue /workspace/gitpod/nf-training/hello-nextflow/work/8c/738ac55b80e7b6170aa84a68412454/.command.sh
+    docker run -i --cpu-shares 1024 -e "NXF_TASK_WORKDIR" -v /workspaces/training/nf-training/hello-nextflow/work:/workspaces/training/nf-training/hello-nextflow/work -w "$NXF_TASK_WORKDIR" --name $NXF_BOXID community.wave.seqera.io/library/pip_cowsay:131d6a1b707a8e65 /bin/bash -ue /workspaces/training/nf-training/hello-nextflow/work/8c/738ac55b80e7b6170aa84a68412454/.command.sh
 }
 ```
 

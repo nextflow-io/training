@@ -317,7 +317,7 @@ This will take a bit longer than usual the first time, and you might see the con
 [-        ] SAMTOOLS_INDEX       -
 [-        ] GATK_HAPLOTYPECALLER -
 [-        ] GATK_JOINTGENOTYPING -
-Creating env using conda: bioconda::samtools=1.20 [cache /workspace/gitpod/hello-nextflow/hello-config/work/conda/env-6684ea23d69ceb1742019ff36904f612]
+Creating env using conda: bioconda::samtools=1.20 [cache /workspaces/training/hello-nextflow/hello-config/work/conda/env-6684ea23d69ceb1742019ff36904f612]
 ```
 
 That's because Nextflow has to retrieve the Conda packages and create the environment, which takes a bit of work behind the scenes. The good news is that you don't need to deal with any of it yourself!
@@ -489,7 +489,7 @@ nextflow
 ERROR ~ Error executing process > 'SAMTOOLS_INDEX (3)'
 
 Caused by:
-  java.io.IOException: Cannot run program "sbatch" (in directory "/workspace/gitpod/hello-nextflow/hello-config/work/eb/2962ce167b3025a41ece6ce6d7efc2"): error=2, No such file or directory
+  java.io.IOException: Cannot run program "sbatch" (in directory "/workspaces/training/hello-nextflow/hello-config/work/eb/2962ce167b3025a41ece6ce6d7efc2"): error=2, No such file or directory
 
 Command executed:
 

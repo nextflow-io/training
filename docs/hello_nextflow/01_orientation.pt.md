@@ -84,7 +84,7 @@ Se você executar isso dentro do diretório `hello-nextflow`, verá a seguinte s
     Se, por algum motivo, você sair deste diretório, sempre poderá executar este comando para retornar:
 
     ```bash
-    cd /workspace/gitpod/hello-nextflow
+    cd /workspaces/training/hello-nextflow
     ```
 
 Agora, para iniciar o curso, clique na seta no canto inferior direito desta página.

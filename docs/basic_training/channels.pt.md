@@ -229,9 +229,9 @@ Channel
 Ele produzirá uma saída semelhante à seguinte:
 
 ```groovy
-[liver, [/workspace/gitpod/nf-training/data/ggal/liver_1.fq, /workspace/gitpod/nf-training/data/ggal/liver_2.fq]]
-[gut, [/workspace/gitpod/nf-training/data/ggal/gut_1.fq, /workspace/gitpod/nf-training/data/ggal/gut_2.fq]]
-[lung, [/workspace/gitpod/nf-training/data/ggal/lung_1.fq, /workspace/gitpod/nf-training/data/ggal/lung_2.fq]]
+[liver, [/workspaces/training/nf-training/data/ggal/liver_1.fq, /workspaces/training/nf-training/data/ggal/liver_2.fq]]
+[gut, [/workspaces/training/nf-training/data/ggal/gut_1.fq, /workspaces/training/nf-training/data/ggal/gut_2.fq]]
+[lung, [/workspaces/training/nf-training/data/ggal/lung_1.fq, /workspaces/training/nf-training/data/ggal/lung_2.fq]]
 ```
 
 !!! warning
@@ -487,7 +487,7 @@ for (List linha : linhas) {
         Adicione um arquivo de texto CSV contendo o seguinte, como uma entrada de exemplo com o nome "fastq.csv":
 
         ```csv
-        gut,/workspace/gitpod/nf-training/data/ggal/gut_1.fq,/workspace/gitpod/nf-training/data/ggal/gut_2.fq
+        gut,/workspaces/training/nf-training/data/ggal/gut_1.fq,/workspaces/training/nf-training/data/ggal/gut_2.fq
         ```
 
         Em seguida, substitua o canal de entrada para as leituras em `script7.nf`, alterando as seguintes linhas:

@@ -68,7 +68,7 @@ export NXF_VER=23.10.1
     Abra o [ambiente de treinamento no Gitpod](https://gitpod.io/#https://github.com/nextflow-io/training) e use o seguinte comando para ir até a pasta `nf-customize`. Visualize os arquivos nessa pasta utilizando o comando `tree`:
 
     ```bash
-    cd /workspace/gitpod/nf-training
+    cd /workspaces/training/nf-training
     tree .
     ```
 

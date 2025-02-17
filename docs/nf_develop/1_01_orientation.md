@@ -17,7 +17,7 @@ This is an empty directory where you will create an launch your pipeline.
     Open the GitHub Codespaces environment use the following command to switch to the empty `nf-develop` folder:
 
     ```bash
-    cd /workspace/gitpod/nf-develop
+    cd /workspaces/training/nf-develop
     ```
 
 ---

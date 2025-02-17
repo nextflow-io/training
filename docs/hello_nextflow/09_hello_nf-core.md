@@ -174,8 +174,8 @@ Core Nextflow options
   revision                  : master
   runName                   : naughty_bell
   containerEngine           : docker
-  launchDir                 : /workspace/gitpod/hello-nextflow
-  workDir                   : /workspace/gitpod/hello-nextflow/work
+  launchDir                 : /workspaces/training/hello-nextflow
+  workDir                   : /workspaces/training/hello-nextflow/work
   projectDir                : /home/gitpod/.nextflow/assets/nf-core/demo
   userName                  : gitpod
   profile                   : docker,test
@@ -350,9 +350,9 @@ Institutional config options
 Core Nextflow options
   runName                   : marvelous_saha
   containerEngine           : docker
-  launchDir                 : /workspace/gitpod/hello-nextflow/hello-nf-core/myorg-myfirstpipeline
-  workDir                   : /workspace/gitpod/hello-nextflow/hello-nf-core/myorg-myfirstpipeline/work
-  projectDir                : /workspace/gitpod/hello-nextflow/hello-nf-core/myorg-myfirstpipeline
+  launchDir                 : /workspaces/training/hello-nextflow/hello-nf-core/myorg-myfirstpipeline
+  workDir                   : /workspaces/training/hello-nextflow/hello-nf-core/myorg-myfirstpipeline/work
+  projectDir                : /workspaces/training/hello-nextflow/hello-nf-core/myorg-myfirstpipeline
   userName                  : gitpod
   profile                   : docker,test
   configFiles               :
@@ -689,9 +689,9 @@ Institutional config options
 Core Nextflow options
   runName                   : drunk_waddington
   containerEngine           : docker
-  launchDir                 : /workspace/gitpod/hello-nextflow/hello-nf-core/myorg-myfirstpipeline
-  workDir                   : /workspace/gitpod/hello-nextflow/hello-nf-core/myorg-myfirstpipeline/work
-  projectDir                : /workspace/gitpod/hello-nextflow/hello-nf-core/myorg-myfirstpipeline
+  launchDir                 : /workspaces/training/hello-nextflow/hello-nf-core/myorg-myfirstpipeline
+  workDir                   : /workspaces/training/hello-nextflow/hello-nf-core/myorg-myfirstpipeline/work
+  projectDir                : /workspaces/training/hello-nextflow/hello-nf-core/myorg-myfirstpipeline
   userName                  : gitpod
   profile                   : docker,test
   configFiles               :

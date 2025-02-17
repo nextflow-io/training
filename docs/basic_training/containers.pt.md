@@ -181,7 +181,7 @@ docker run --volume $PWD:$PWD --workdir $PWD minha-imagem \
 Ou definir uma pasta que você queira montar como uma variável de ambiente, chamada `DATA`:
 
 ```bash
-DATA=/workspace/gitpod/nf-training/data
+DATA=/workspaces/training/nf-training/data
 docker run --volume $DATA:$DATA --workdir $PWD minha-imagem \
     salmon index -t $PWD/data/ggal/transcriptome.fa -i transcript-index
 ```

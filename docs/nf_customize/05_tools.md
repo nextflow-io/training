@@ -72,7 +72,7 @@ The command line wizard will conclude by asking if you want to launch the pipeli
 
     ```json title="nf-params.json" linenums="1"
     {
-        "input": "/workspace/gitpod/nf-customize/samplesheet.csv",
+        "input": "/workspaces/training/nf-customize/samplesheet.csv",
         "outdir": "results"
     }
     ```
@@ -126,7 +126,7 @@ Alternatively, you could build your own execution command with the command line 
       Pipeline revision: 'main'
       Use containers: 'singularity'
       Container library: 'quay.io'
-      Using $NXF_SINGULARITY_CACHEDIR': /workspace/gitpod/nf-customize/singularity'
+      Using $NXF_SINGULARITY_CACHEDIR': /workspaces/training/nf-customize/singularity'
       Output directory: 'nf-core-demo_main'
       Include default institutional configuration: 'False'
     ```

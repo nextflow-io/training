@@ -15,8 +15,8 @@ You will need to copy and unzip the data required for this training.
     Use the following command to switch to the empty `troubleshoot` folder:
 
     ```bash
-    cd /workspace/gitpod/troubleshoot
-    cp -r /workspace/gitpod/hello-nextflow/data/ .
+    cd /workspaces/training/troubleshoot
+    cp -r /workspaces/training/hello-nextflow/data/ .
     tar -zxvf data/ref.tar.gz -C data/
     ```
 
