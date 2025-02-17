@@ -23,6 +23,13 @@ Quando decidir começar o treinamento, clique no botão 'Open in GitHub Codespac
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
+!!! warning
+
+    Some of the translations on the training portal are out of date.
+    The translated material may be incomplete or incorrect.
+    We plan to update the translations later this year.
+    In the meantime, please try to work through the English-language material if you can.
+
 ## Configuração do Ambiente
 
 !!! exercise "Configuração do Ambiente"

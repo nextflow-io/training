@@ -2,6 +2,13 @@
 description: Material de treinamento básico do Nextflow
 ---
 
+!!! warning
+
+    Some of the translations on the training portal are out of date.
+    The translated material may be incomplete or incorrect.
+    We plan to update the translations later this year.
+    In the meantime, please try to work through the English-language material if you can.
+
 # Fluxo de trabalho simples de RNA-Seq
 
 Para demonstrar um cenário biomédico da vida real, nós iremos implementar uma prova de conceito de fluxo de trabalho RNA-Seq que:

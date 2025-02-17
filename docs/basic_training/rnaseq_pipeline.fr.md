@@ -2,6 +2,13 @@
 description: Atelier de formation de base sur Nextflow
 ---
 
+!!! warning
+
+    Some of the translations on the training portal are out of date.
+    The translated material may be incomplete or incorrect.
+    We plan to update the translations later this year.
+    In the meantime, please try to work through the English-language material if you can.
+
 # Workflow simple de RNA-Seq
 
 Pour démontrer un scénario biomédical réel, nous mettrons en œuvre une preuve de concept de flux de travail RNA-Seq qui :

@@ -19,6 +19,13 @@ La comunidad de nf-core organiza regularmente eventos online gratuitos; consulta
 
 [![Abrir en GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
+!!! warning
+
+    Some of the translations on the training portal are out of date.
+    The translated material may be incomplete or incorrect.
+    We plan to update the translations later this year.
+    In the meantime, please try to work through the English-language material if you can.
+
 ## Talleres disponibles
 
 Tenemos varios talleres disponibles en este sitio web.
