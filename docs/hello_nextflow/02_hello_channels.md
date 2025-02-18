@@ -37,7 +37,7 @@ executor >  local (1)
 
 As previously, you will find the output file named `output.txt` in the `results` directory (specified by the `publishDir` directive).
 
-```console title="output.txt" linenums="1"
+```console title="results/output.txt" linenums="1"
 Hello Channels!
 ```
 
@@ -61,7 +61,7 @@ This is the line of code we're going to use:
 greeting_ch = Channel.of('Hello Channels!')
 ```
 
-This creates a channel called `greeting_ch` using the `Channel.of()` channel factory, which sets up a simple value channel, and loads the string `'Hello Channels!'` to use as the greeting value.
+This creates a channel called `greeting_ch` using the `Channel.of()` channel factory, which sets up a simple queue channel, and loads the string `'Hello Channels!'` to use as the greeting value.
 
 !!! note
 
@@ -151,7 +151,7 @@ executor >  local (1)
 
 You can check the results directory to satisfy yourself that the outcome is still the same as previously.
 
-```console title="output.txt" linenums="1"
+```console title="results/output.txt" linenums="1"
 Hello Channels!
 ```
 
