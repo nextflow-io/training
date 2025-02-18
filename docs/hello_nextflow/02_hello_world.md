@@ -36,7 +36,7 @@ cat output.txt
 
 !!! tip
 
-    In the Gitpod environment, you can also find the output file in the file explorer, and view its contents by clicking on it. Alternatively, you can use the `code` command to open the file for viewing.
+    In the GitHub Codespaces environment, you can also find the output file in the file explorer, and view its contents by clicking on it. Alternatively, you can use the `code` command to open the file for viewing.
 
     ```bash
     code output.txt
@@ -181,7 +181,7 @@ Have a look inside; you'll find a subdirectory named with a hash (in order to ma
 
 !!! tip
 
-    If you browse the contents of the task subdirectory in the Gitpod's VSCode file explorer, you'll see all these files right away.
+    If you browse the contents of the task subdirectory in the VSCode file explorer, you'll see all these files right away.
     However, these files are set to be invisible in the terminal, so if you want to use `ls` or `tree` to view them, you'll need to set the relevant option for displaying invisible files.
 
     ```bash

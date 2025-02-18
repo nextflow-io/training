@@ -17,7 +17,14 @@ Están alojados en un [repositorio de GitHub](https://github.com/nextflow-io/tra
 Si bien puedes aprender con estos materiales en cualquier momento, probablemente los aproveches al máximo al participar en una sesión de entrenamiento.
 La comunidad de nf-core organiza regularmente eventos online gratuitos; consulta la [página de eventos de nf-core](https://nf-co.re/events) para obtener más información.
 
-[![Abrir en Gitpod](https://img.shields.io/badge/Gitpod-%20Abrir%20en%20Gitpod-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/nextflow-io/training)
+[![Abrir en GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
+
+!!! warning
+
+    Some of the translations on the training portal are out of date.
+    The translated material may be incomplete or incorrect.
+    We plan to update the translations later this year.
+    In the meantime, please try to work through the English-language material if you can.
 
 ## Talleres disponibles
 

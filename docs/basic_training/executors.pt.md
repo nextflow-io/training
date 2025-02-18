@@ -2,6 +2,13 @@
 description: Material de treinamento básico do Nextflow
 ---
 
+!!! warning
+
+    Some of the translations on the training portal are out of date.
+    The translated material may be incomplete or incorrect.
+    We plan to update the translations later this year.
+    In the meantime, please try to work through the English-language material if you can.
+
 # Cenários de implantação
 
 Aplicações genômicas do mundo real podem gerar milhares de tarefas sendo executadas. Nesse cenário, um escalonador de lote (batch scheduler) é comumente usado para implantar um fluxo de trabalho em um cluster de computação, permitindo a execução de muitos trabalhos em paralelo em muitos nós de computação.

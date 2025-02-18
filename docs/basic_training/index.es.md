@@ -4,6 +4,13 @@ hide:
   - toc
 ---
 
+!!! warning
+
+    Some of the translations on the training portal are out of date.
+    The translated material may be incomplete or incorrect.
+    We plan to update the translations later this year.
+    In the meantime, please try to work through the English-language material if you can.
+
 # Bienvenido
 
 Nos complace acompañarlo en el camino para escribir flujos de trabajo científicos reproducibles y escalables usando Nextflow. Esta guía complementa la documentación completa de Nextflow; si alguna vez tienes alguna duda, diríjete a los documentos que se encuentran en el siguiente [enlace](https://www.nextflow.io/docs/latest).

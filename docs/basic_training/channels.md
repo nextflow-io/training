@@ -324,9 +324,9 @@ Channel
 It will produce an output similar to the following:
 
 ```console title="Output"
-[liver, [/workspace/gitpod/nf-training/data/ggal/liver_1.fq, /workspace/gitpod/nf-training/data/ggal/liver_2.fq]]
-[gut, [/workspace/gitpod/nf-training/data/ggal/gut_1.fq, /workspace/gitpod/nf-training/data/ggal/gut_2.fq]]
-[lung, [/workspace/gitpod/nf-training/data/ggal/lung_1.fq, /workspace/gitpod/nf-training/data/ggal/lung_2.fq]]
+[liver, [/workspaces/training/nf-training/data/ggal/liver_1.fq, /workspaces/training/nf-training/data/ggal/liver_2.fq]]
+[gut, [/workspaces/training/nf-training/data/ggal/gut_1.fq, /workspaces/training/nf-training/data/ggal/gut_2.fq]]
+[lung, [/workspaces/training/nf-training/data/ggal/lung_1.fq, /workspaces/training/nf-training/data/ggal/lung_2.fq]]
 ```
 
 !!! warning

@@ -5,11 +5,11 @@ description: How to set up a development environment to run Nextflow
 
 # Orientation
 
-The Gitpod environment contains some test data that will be used in this workshop.
+The GitHub Codespaces environment contains some test data that will be used in this workshop.
 
 !!! note
 
-    Follow [this link](../envsetup/index.md) if you have not yet setup your Gitpod environment.
+    Follow [this link](../envsetup/index.md) if you have not yet setup your GitHub Codespaces environment.
 
 ## Getting started
 
@@ -65,10 +65,10 @@ export NXF_VER=23.10.1
 
 !!! question "Exercise"
 
-    Open the [Gitpod training environment](https://gitpod.io/#https://github.com/nextflow-io/training) and use the following command to switch to the `nf-customize` folder. View the files in this folder using the `tree` command:
+    Open the GitHub Codespaces training environment and use the following command to switch to the `nf-customize` folder. View the files in this folder using the `tree` command:
 
     ```bash
-    cd /workspace/gitpod/nf-training
+    cd /workspaces/training/nf-training
     tree .
     ```
 

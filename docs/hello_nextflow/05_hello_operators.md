@@ -53,7 +53,7 @@ Just like previously, we want to try out the commands manually before we attempt
 !!! note
 
      Make sure you're in the correct working directory:
-     `cd /workspace/gitpod/hello-nextflow`
+     `cd /workspaces/training/hello-nextflow`
 
 ### 0.1. Index a BAM input file with Samtools
 

@@ -14,7 +14,7 @@ Durante este treinamento, você será apresentado ao Nextflow em uma série de w
 
 Vamos começar!
 
-[![Abra no Gitpod](https://img.shields.io/badge/Gitpod-%20Open%20in%20Gitpod-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/nextflow-io/training)
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
 ## Objetivos de aprendizagem
 

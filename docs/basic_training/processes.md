@@ -171,7 +171,7 @@ workflow {
 Your expected output will look something like this:
 
 ```console title="Output"
-The current directory is /workspace/gitpod/nf-training/work/7a/4b050a6cdef4b6c1333ce29f7059a0
+The current directory is /workspaces/training/nf-training/work/7a/4b050a6cdef4b6c1333ce29f7059a0
 ```
 
 It can be tricky to write a script that uses many Bash variables. One possible alternative is to use a `script` string delimited by single-quote characters (`'`).
@@ -194,7 +194,7 @@ workflow {
 Your expected output will look something like this:
 
 ```console title="Output"
-The current directory is /workspace/gitpod/nf-training/work/7a/4b050a6cdef4b6c1333ce29f7059a0
+The current directory is /workspaces/training/nf-training/work/7a/4b050a6cdef4b6c1333ce29f7059a0
 ```
 
 However, using the single quotes (`'`) will block the usage of Nextflow variables in the command script.
@@ -753,7 +753,7 @@ workflow {
 Prints the following:
 
 ```console title="Output"
-[/workspace/gitpod/nf-training/work/ca/baf931d379aa7fa37c570617cb06d1/chunk_aa, /workspace/gitpod/nf-training/work/ca/baf931d379aa7fa37c570617cb06d1/chunk_ab, /workspace/gitpod/nf-training/work/ca/baf931d379aa7fa37c570617cb06d1/chunk_ac, /workspace/gitpod/nf-training/work/ca/baf931d379aa7fa37c570617cb06d1/chunk_ad]
+[/workspaces/training/nf-training/work/ca/baf931d379aa7fa37c570617cb06d1/chunk_aa, /workspaces/training/nf-training/work/ca/baf931d379aa7fa37c570617cb06d1/chunk_ab, /workspaces/training/nf-training/work/ca/baf931d379aa7fa37c570617cb06d1/chunk_ac, /workspaces/training/nf-training/work/ca/baf931d379aa7fa37c570617cb06d1/chunk_ad]
 ```
 
 Some caveats on glob pattern behavior:
@@ -790,10 +790,10 @@ Some caveats on glob pattern behavior:
         Your output will look something like this:
 
         ```console title="Output"
-        /workspace/gitpod/nf-training/work/54/9d79f9149f15085e00dde2d8ead150/chunk_aa
-        /workspace/gitpod/nf-training/work/54/9d79f9149f15085e00dde2d8ead150/chunk_ab
-        /workspace/gitpod/nf-training/work/54/9d79f9149f15085e00dde2d8ead150/chunk_ac
-        /workspace/gitpod/nf-training/work/54/9d79f9149f15085e00dde2d8ead150/chunk_ad
+        /workspaces/training/nf-training/work/54/9d79f9149f15085e00dde2d8ead150/chunk_aa
+        /workspaces/training/nf-training/work/54/9d79f9149f15085e00dde2d8ead150/chunk_ab
+        /workspaces/training/nf-training/work/54/9d79f9149f15085e00dde2d8ead150/chunk_ac
+        /workspaces/training/nf-training/work/54/9d79f9149f15085e00dde2d8ead150/chunk_ad
         ```
 
 ### Dynamic output file names
@@ -861,9 +861,9 @@ workflow {
 The output will looks something like this:
 
 ```console title="Output"
-[lung, /workspace/gitpod/nf-training/work/23/fe268295bab990a40b95b7091530b6/sample.bam]
-[liver, /workspace/gitpod/nf-training/work/32/656b96a01a460f27fa207e85995ead/sample.bam]
-[gut, /workspace/gitpod/nf-training/work/ae/3cfc7cf0748a598c5e2da750b6bac6/sample.bam]
+[lung, /workspaces/training/nf-training/work/23/fe268295bab990a40b95b7091530b6/sample.bam]
+[liver, /workspaces/training/nf-training/work/32/656b96a01a460f27fa207e85995ead/sample.bam]
+[gut, /workspaces/training/nf-training/work/ae/3cfc7cf0748a598c5e2da750b6bac6/sample.bam]
 ```
 
 !!! question "Exercise"

@@ -155,7 +155,7 @@ nextflow run nf-core/demo -profile test --outdir results
 
     !!! warning "This execution is expected to fail!"
 
-As the software required to run each process (e.g., seqtk) is not available in the Gitpod environment the exercise above is expected to fail:
+As the software required to run each process (e.g., seqtk) is not available in the GitHub Codespaces environment the exercise above is expected to fail:
 
 ```console
 Caused by:
@@ -169,7 +169,7 @@ Fortunately, nf-core pipelines come packed with directives for containers and en
 -profile singularity
 ```
 
-In Gitpod, you can add the `singularity` profile to your execution command and Nextflow will download and enable Singularity software images to run each process.
+In GitHub Codespaces, you can add the `singularity` profile to your execution command and Nextflow will download and enable Singularity software images to run each process.
 
 The singularity profile is defined in the nextflow.config file in the main pipeline repository.
 
@@ -226,16 +226,16 @@ The nf-core/demo pipeline will auto-detect whether a sample is single- or paired
 
     ```csv title="samplesheet.csv" linenums="1"
     sample,fastq_1,fastq_2
-    gut,/workspace/gitpod/nf-customize/data/gut_1.fastq.gz,/workspace/gitpod/nf-customize/data/gut_2.fastq.gz
-    liver,/workspace/gitpod/nf-customize/data/liver_1.fastq.gz,/workspace/gitpod/nf-customize/data/liver_2.fastq.gz
-    lung,/workspace/gitpod/nf-customize/data/lung_1.fastq.gz,/workspace/gitpod/nf-customize/data/lung_2.fastq.gz
+    gut,/workspaces/training/nf-customize/data/gut_1.fastq.gz,/workspaces/training/nf-customize/data/gut_2.fastq.gz
+    liver,/workspaces/training/nf-customize/data/liver_1.fastq.gz,/workspaces/training/nf-customize/data/liver_2.fastq.gz
+    lung,/workspaces/training/nf-customize/data/lung_1.fastq.gz,/workspaces/training/nf-customize/data/lung_2.fastq.gz
     ```
 
-    !!! warning "Make sure you save this file in your working directory (`/workspace/gitpod/nf-customize/`)"
+    !!! warning "Make sure you save this file in your working directory (`/workspaces/training/nf-customize/`)"
 
 You can use you new samplesheet with the `--input` parameter in your execution command.
 
-In this case, the other parameters in the test profile (e.g., `config_profile_name`) can be ignored as they are not explicitly required by the pipeline or in this Gitpod environment.
+In this case, the other parameters in the test profile (e.g., `config_profile_name`) can be ignored as they are not explicitly required by the pipeline or in this GitHub Codespaces environment.
 
 !!! question "Exercise"
 

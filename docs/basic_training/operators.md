@@ -135,12 +135,12 @@ Channel
         Your output should look like this:
 
         ```console title="Output"
-        [gut_1.fq, /workspace/gitpod/nf-training/data/ggal/gut_1.fq]
-        [gut_2.fq, /workspace/gitpod/nf-training/data/ggal/gut_2.fq]
-        [liver_1.fq, /workspace/gitpod/nf-training/data/ggal/liver_1.fq]
-        [liver_2.fq, /workspace/gitpod/nf-training/data/ggal/liver_2.fq]
-        [lung_1.fq, /workspace/gitpod/nf-training/data/ggal/lung_1.fq]
-        [lung_2.fq, /workspace/gitpod/nf-training/data/ggal/lung_2.fq]
+        [gut_1.fq, /workspaces/training/nf-training/data/ggal/gut_1.fq]
+        [gut_2.fq, /workspaces/training/nf-training/data/ggal/gut_2.fq]
+        [liver_1.fq, /workspaces/training/nf-training/data/ggal/liver_1.fq]
+        [liver_2.fq, /workspaces/training/nf-training/data/ggal/liver_2.fq]
+        [lung_1.fq, /workspaces/training/nf-training/data/ggal/lung_1.fq]
+        [lung_2.fq, /workspaces/training/nf-training/data/ggal/lung_2.fq]
         ```
 
 ### `mix()`
@@ -248,11 +248,11 @@ This operator is especially useful to process a group together with all the elem
         ```
 
         ```console title="Output"
-        [patients_1, [/workspace/gitpod/nf-training/data/meta/patients_1.csv]]
-        [patients_2, [/workspace/gitpod/nf-training/data/meta/patients_2.csv]]
-        [random, [/workspace/gitpod/nf-training/data/meta/random.txt]]
-        [regions, [/workspace/gitpod/nf-training/data/meta/regions.json, /workspace/gitpod/nf-training/data/meta/regions.tsv, /workspace/gitpod/nf-training/data/meta/regions.yml]]
-        [regions2, [/workspace/gitpod/nf-training/data/meta/regions2.json]]
+        [patients_1, [/workspaces/training/nf-training/data/meta/patients_1.csv]]
+        [patients_2, [/workspaces/training/nf-training/data/meta/patients_2.csv]]
+        [random, [/workspaces/training/nf-training/data/meta/random.txt]]
+        [regions, [/workspaces/training/nf-training/data/meta/regions.json, /workspaces/training/nf-training/data/meta/regions.tsv, /workspaces/training/nf-training/data/meta/regions.yml]]
+        [regions2, [/workspaces/training/nf-training/data/meta/regions2.json]]
         ```
 
 ### `join()`
@@ -493,7 +493,7 @@ for (List row : lines) {
         Add a CSV text file containing the following, as an example input with the name "fastq.csv":
 
         ```csv title="fastq.csv"
-        gut,/workspace/gitpod/nf-training/data/ggal/gut_1.fq,/workspace/gitpod/nf-training/data/ggal/gut_2.fq
+        gut,/workspaces/training/nf-training/data/ggal/gut_1.fq,/workspaces/training/nf-training/data/ggal/gut_2.fq
         ```
 
         Then replace the input channel for the reads in `script7.nf`. Changing the following lines:

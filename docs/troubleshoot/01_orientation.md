@@ -1,6 +1,8 @@
 # Orientation
 
-This workshop should be completed using the [Nextflow Training Gitpod Environment](https://gitpod.io/#https://github.com/nextflow-io/training).
+This workshop should be completed using the Nextflow Training GitHub Codespaces Environment:
+
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
 ## Getting started
 
@@ -13,8 +15,8 @@ You will need to copy and unzip the data required for this training.
     Use the following command to switch to the empty `troubleshoot` folder:
 
     ```bash
-    cd /workspace/gitpod/troubleshoot
-    cp -r /workspace/gitpod/hello-nextflow/data/ .
+    cd /workspaces/training/troubleshoot
+    cp -r /workspaces/training/hello-nextflow/data/ .
     tar -zxvf data/ref.tar.gz -C data/
     ```
 

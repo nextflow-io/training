@@ -1,10 +1,10 @@
 # Orientation
 
-The Gitpod environment contains some test data that will be used in this workshop.
+The GitHub Codespaces environment contains some test data that will be used in this workshop.
 
 !!! note
 
-    Follow [this link](../envsetup/index.md) if you have not yet setup your Gitpod environment.
+    Follow [this link](../envsetup/index.md) if you have not yet setup your GitHub Codespaces environment.
 
 ## Getting started
 
@@ -29,10 +29,10 @@ These files will be used in this training module.
 
 !!! question "Exercise"
 
-    Open the [Gitpod training environment](https://gitpod.io/#https://github.com/nextflow-io/training) and switch to the `nf-customize` folder. View the files in this folder using the `tree` command:
+    Open the GitHub Codespaces environment switch to the `nf-customize` folder. View the files in this folder using the `tree` command:
 
     ```bash
-    cd /workspace/gitpod/nf-customize
+    cd /workspaces/training/nf-customize
     tree .
     ```
 
