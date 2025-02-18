@@ -138,7 +138,7 @@ Please see the [official docs](https://squidfunk.github.io/mkdocs-material/refer
 
 - Note that we have two custom admonitions: `exercise` and `result` (alias `solution`).
 - `!!!` does a regular admonition, `???` makes it collapsed (click to expand).
-- Intendation is important! Make sure you check the rendered site, as it's easy to make a mistake.
+- Indentation is important! Make sure you check the rendered site, as it's easy to make a mistake.
 
 ## Known limitations
 

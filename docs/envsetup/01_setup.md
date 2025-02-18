@@ -11,7 +11,7 @@ You can create a free GitHub account from the [GitHub home page](https://github.
 
 Once you are logged in to GitHub, open this link in your browser to open the training environment: <https://codespaces.new/nextflow-io/training?quickstart=1&ref=master>
 
-Alternatively, you can click on the button below.
+Alternatively, you can click on the button shown below from the many pages in the training portal where it is displayed.
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
@@ -34,7 +34,7 @@ The free Github plan includes 120 core-hours of Codespaces compute per month, wh
 
 ## Explore your GitHub Codespaces IDE
 
-After GitHub Codespaces has loaded, you should see something similar to the following (which may in light mode depending on your account preferences):
+After GitHub Codespaces has loaded, you should see something similar to the following (which may open in light mode depending on your account preferences):
 
 ![GitHub Codespaces welcome](img/codespaces_welcome.png)
 
@@ -65,6 +65,10 @@ You should see the previous session, the default option is to resume it:
 
 ![Resume a GitHub Codespace](img/codespaces_resume.png)
 
+## Saving files from GitHub Codespaces to your local machine
+
+To save any file from the explorer panel, right-click the file and select `Download`.
+
 ## GitHub Codespaces quotas
 
 GitHub Codespaces gives you up to 15 GB-month storage per month, and 120 core-hours per month.
@@ -76,7 +80,3 @@ Optionally, you can purchase access to more resources.
 
 More information can be found in the GitHub docs:
 [About billing for GitHub Codespaces](https://docs.github.com/en/billing/managing-billing-for-your-products/managing-billing-for-github-codespaces/about-billing-for-github-codespaces)
-
-## Saving files from GitHub Codespaces to your local machine
-
-To save any file from the explorer panel, right-click the file and select `Download`.

@@ -59,7 +59,7 @@ To download the material, execute this command:
 git clone https://github.com/nextflow-io/training.git
 ```
 
-Then `cd` into the `nf-training` directory.
+Then `cd` into the relevant directory. By default, that is `hello-nextflow`.
 
 ## Checking your installation
 
@@ -79,7 +79,7 @@ This should print the current version, system, and runtime.
     nextflow info
     ```
 
-    This should come up with the Nextflow version and runtime information:
+    This should come up with the Nextflow version and runtime information (actual versions may differ):
 
     ```console
     Version: 23.10.1 build 5891

@@ -1,6 +1,7 @@
 # Fundamentals Training
 
-You are now on the path to writing reproducible and scalable scientific workflows using Nextflow. This guide complements the full [Nextflow documentation](https://www.nextflow.io/docs/latest) - if you ever have any doubts, please refer to that.
+You are now on the path to writing reproducible and scalable scientific workflows using Nextflow.
+This guide complements the full [Nextflow documentation](https://www.nextflow.io/docs/latest) - if you ever have any doubts, please refer to that.
 
 Let's get started!
 
@@ -18,7 +19,10 @@ By the end of this course you should:
 
 ## Audience & prerequisites
 
-Please note that this is **not** a beginner's workshop and familiarity with Nextflow, the command line, and common file formats is assumed.
+Please note that this is **not** a beginner's workshop.
+Familiarity with Nextflow, the command line, and common file formats is assumed.
+
+For a beginner's introduction to Nextflow, please see the [Hello Nextflow](../hello_nextflow/) course.
 
 **Prerequisites**
 
@@ -26,9 +30,10 @@ Please note that this is **not** a beginner's workshop and familiarity with Next
 - Experience with command line
 - An understanding of common file formats
 
-## Follow the training videos
+## Follow the training videos and get help
 
-Free online training events for this course are run approximately every six months. Videos are streamed to YouTube and questions are handled in the nf-core Slack community.
+Video recordings are available for this course.
+You can ask questions in the [Seqera community forum](https://community.seqera.io/).
 
 You can watch the recording of the most recent training ([March, 2024](https://nf-co.re/events/2024/training-foundational-march)) in the [YouTube playlist](https://youtu.be/dbOKB3VRpuE?si=MYBy4-gjRfEYkVRM) below:
 
@@ -38,7 +43,7 @@ You can watch the recording of the most recent training ([March, 2024](https://n
 
 !!! warning
 
-    Please note that the training material is updated regularly and that the videos may be out of date.
+    Please note that the training material is updated regularly and that the videos linked below may be out of date.
 
 If English is not your preferred language, you may find it useful to follow the training from the [March 2023 event](https://nf-co.re/events/2023/training-march-2023), which is available in multiple languages.
 

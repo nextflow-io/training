@@ -1,341 +1,161 @@
-# Part 5: Hello Config
+# Part 6: Hello Config
 
 This section will explore how to set up and manage the configuration of your Nextflow pipeline so that you'll be able to customize its behavior, adapt it to different environments, and optimize resource usage _without altering a single line of the workflow code itself_.
 
-We're going to cover essential components of Nextflow configuration such as config files, profiles, process directives, executors, and parameter files.
-By learning to utilize these configuration options effectively, you can enhance the flexibility, scalability, and performance of your pipelines.
-
----
-
-## 0. Warmup: Moving to a formal project structure
-
-So far we've been working with a very loose structure, with just one workflow code file and a tiny configuration file that we've mostly ignored, because we were very focused on learning how to implement the workflow itself.
-However, we're now moving into the phase of this training series that is more focused on code development and maintenance practices.
-
-As part of that, we're going to adopt a formal project structure.
-We're going to work inside a dedicated project directory called `hello-config`, and we've renamed the workflow file `main.nf` to match the recommended Nextflow convention.
-
-### 0.1. Explore the `hello-config` directory
-
-We want to launch the workflow from inside the `hello-config` directory, so let's move into it now.
-
-```bash
-cd hello-config
-```
-
-Let's take a look at the contents.
-You can use the file explorer or the terminal; here we're using the output of `tree` to display the top-level directory contents.
-
-```console title="Directory contents"
-hello-config
-├── demo-params.json
-├── main.nf
-└── nextflow.config
-```
-
-- **`main.nf`** is a workflow based on `hello-operators.nf`, the workflow produced by completing Part 4 of this training course;
-
-- **`nextflow.config`** is a copy of the original `nextflow.config` file from the `hello-nextflow` directory, one level up (where we've been working so far).
-  Whenever there is a file named `nextflow.config` in the current directory, Nextflow will automatically load configuration from it. The one we have been using contains the following lines:
-
-  ```console title="nextflow.config" linenums="1"
-  docker.fixOwnership = true
-  docker.enabled = true
-  ```
-
-  The `docker.fixOwnership = true` line is not really interesting.
-  It's a workaround for an issue that sometimes occur with containerized tools that set the wrong permissions on the files they write (which is the case with GenomicsDBImport in the GATK container image in our workflow).
-
-  The `docker.enabled = true` line is what we care about here.
-  It specifies that Nextflow should use Docker to run process calls that specify a container image.
-  We're going to be playing with that shortly.
+There are multiple ways to do this; here we are going to use the simplest and most common configuration file mechanism, the `nextflow.config` file.
+Whenever there is a file named `nextflow.config` in the current directory, Nextflow will automatically load configuration from it.
 
 !!!note
 
     Anything you put into the `nextflow.config` can be overridden at runtime by providing the relevant process directives or parameters and values on the command line, or by importing another configuration file, according to the order of precedence described [here](https://www.nextflow.io/docs/latest/config.html).
 
-- **`demo-params.json`** is a parameter file intended for supplying parameter values to a workflow.
-  We will use it in section 5 of this tutorial.
+In this part of the training, we're going to use the `nextflow.config` file to demonstrate essential components of Nextflow configuration such as process directives, executors, profiles, and parameter files.
 
-The one thing that's missing is a way to point to the original data without making a copy of it or updating the file paths wherever they're specified.
-The simplest solution is to link to the data location.
+By learning to utilize these configuration options effectively, you can enhance the flexibility, scalability, and performance of your pipelines.
 
-### 0.2. Create a symbolic link to the data
+---
 
-Run this command from inside the `hello-config` directory:
+## 0. Warmup: Check that Docker is enabled and run the Hello Config workflow
+
+First, a quick check. There is a `nextflow.config` file in the current directory that contains the line `docker.enabled = <setting>`, where `<setting>` is either `true` or `false` depending on whether or not you've worked through Part 5 of this course in the same environment.
+
+If it is set to `true`, you don't need to do anything.
+
+If it is set to `false`, switch it to `true` now.
+
+```console title="nextflow.config" linenums="1"
+docker.enabled = true
+```
+
+Once you've done that, verify that the initial workflow runs properly:
 
 ```bash
-ln -s ../data data
+nextflow run hello-config.nf
 ```
-
-This creates a symbolic link called `data` pointing to the data directory, which allows us to avoid having to change anything to how the file paths are set up.
-
-```console title="Directory contents"
-hello-config
-├── data -> ../data
-├── demo-params.json
-├── main.nf
-└── nextflow.config
-```
-
-Later we'll cover a better way of handling this, but this will do for now.
-
-### 0.3. Verify that the initial workflow runs properly
-
-Now that everything is in place, we should be able to run the workflow successfully.
-
-```bash
-nextflow run main.nf
-```
-
-This should run successfully:
 
 ```console title="Output"
-Nextflow 24.09.2-edge is available - Please consider updating your version to it
-
  N E X T F L O W   ~  version 24.10.0
 
- ┃ Launching `main.nf` [tender_brahmagupta] DSL2 - revision: 848ff2f9b5
+Launching `hello-config.nf` [reverent_heisenberg] DSL2 - revision: 028a841db1
 
-executor >  local (7)
-[fb/f755b1] SAMTOOLS_INDEX (1)       [100%] 3 of 3 ✔
-[d8/467767] GATK_HAPLOTYPECALLER (1) [100%] 3 of 3 ✔
-[ee/2c7855] GATK_JOINTGENOTYPING     [100%] 1 of 1 ✔
+executor >  local (8)
+[7f/0da515] sayHello (1)       | 3 of 3 ✔
+[f3/42f5a5] convertToUpper (3) | 3 of 3 ✔
+[04/fe90e4] collectGreetings   | 1 of 1 ✔
+[81/4f5fa9] cowpy              | 1 of 1 ✔
+There were 3 greetings in this batch
 ```
 
-There will now be a `work` directory and a `results_genomics` directory inside your `hello-config` directory.
-
-### Takeaway
-
-You know what are the two most important files in a Nextflow project: `main.nf` and its `nextflow.config`.
-
-### What's next?
-
-Learn how to modify basic configuration properties to adapt to your compute environment's requirements.
+If everything works, you're ready to learn how to modify basic configuration properties to adapt to your compute environment's requirements.
 
 ---
 
 ## 1. Determine what software packaging technology to use
 
-In the very first part of this training course (Part 1: Hello World) we just used locally installed software in our workflow. Then from Part 2 onward, we've been using Docker containers.
+The first step toward adapting your workflow configuration to your compute environment is specifying where the software packages that will get run in each step are going to be coming from.
+Are they already installed in the local compute environment? Do we need to retrieve images and run them via a container system? Or do we need to retrieve Conda packages and build a local Conda environment?
 
-Now, let's pretend we're working on an HPC cluster and the admin doesn't allow the use of Docker for security reasons.
+In the very first part of this training course (Parts 1-4) we just used locally installed software in our workflow.
+Then in Part 5, we introduced Docker containers and the `nextflow.config` file, which we used to enable the use of Docker containers.
 
-### 1.1. Disable Docker in the config file
+In the warmup to this section, you checked that Docker was enabled in `nextflow.config` file and ran the workflow, which used a Docker container to execute the `cowpy()` process.
 
-First, we have to switch the value of `docker.enabled` to false.
+!!! note
+
+    If that doesn't sound familiar, you should probably go back and work through Part 5 before continuing.
+
+Now let's see how we can configure an alternative software packaging option via the `nextflow.config` file.
+
+### 1.1. Disable Docker and enable Conda in the config file
+
+Let's pretend we're working on an HPC cluster and the admin doesn't allow the use of Docker for security reasons.
+
+Fortunately for us, Nextflow supports multiple other container technologies such as including Singularity (which is more widely used on HPC), and software package managers such as Conda.
+
+We can change our configuration file to use Conda instead of Docker.
+To do so, we switch the value of `docker.enabled` to `false`, and add a directive enabling the use of Conda:
 
 _Before:_
 
-```console title="nextflow.config" linenums="1"
-docker.fixOwnership = true
+```groovy title="nextflow.config" linenums="1"
 docker.enabled = true
 ```
 
 _After:_
 
-```console title="nextflow.config" linenums="1"
-docker.fixOwnership = true
-docker.enabled = false
-```
-
-Let's see what happens if we run that.
-
-### 1.2. Run the workflow without Docker
-
-We are now launching the `main.nf` workflow from inside the `hello-config` directory.
-
-```bash
-nextflow run main.nf
-```
-
-As expected, the run fails with an error message that looks like this:
-
-```console title="Output"
- N E X T F L O W   ~  version 24.10.0
-
- ┃ Launching `hello-config/main.nf` [silly_ramanujan] DSL2 - revision: 9129bc4618
-
-executor >  local (3)
-[93/4417d0] SAMTOOLS_INDEX (1)   [  0%] 0 of 3
-[-        ] GATK_HAPLOTYPECALLER -
-[-        ] GATK_JOINTGENOTYPING -
-ERROR ~ Error executing process > 'SAMTOOLS_INDEX (2)'
-
-Caused by:
-  Process `SAMTOOLS_INDEX (2)` terminated with an error exit status (127)
-
-Command executed:
-
-  samtools index 'reads_father.bam'
-
-Command exit status:
-  127
-
-Command output:
-  (empty)
-
-Command error:
-  .command.sh: line 2: samtools: command not found
-```
-
-Command not found? Of course, we don't have Samtools installed in our environment, and we can no longer use the Docker container. What to do?
-
-!!!note
-
-    Nextflow supports multiple other container technologies such as including Singularity (which is more widely used on HPC), and software package managers such as Conda.
-
-Let's try using Conda environments for our workflow.
-
-### 1.3. Enable Conda in the configuration file
-
-First, we need to add a directive enabling the use of Conda, right after the line that controls the use of Docker.
-And while we're at it, let's put a blank line before those two to emphasize the logical grouping.
-
-_Before:_
-
 ```groovy title="nextflow.config" linenums="1"
-docker.fixOwnership = true
-docker.enabled = false
-```
-
-_After:_
-
-```groovy title="nextflow.config" linenums="1"
-docker.fixOwnership = true
-
 docker.enabled = false
 conda.enabled = true
 ```
 
-This should allow Nextflow to create and utilize Conda environments for processes that have Conda packages specified. Which means we now need to add those to our processes!
+This will allow Nextflow to create and utilize Conda environments for processes that have Conda packages specified.
+Which means we now need to add one of those to our `cowpy` process!
 
-### 1.4. Specify Conda packages in the process definitions
+### 1.2. Specify a Conda package in the process definition
 
-We know that the Bioconda project provides Conda packages for Samtools and GATK, so we just need to retrieve their URIs and add them to the corresponding process definitions using the `conda` directive.
+We've already retrieved the URI for a Conda package containing the `cowpy` tool: `conda-forge::cowpy==1.1.5`
 
 !!! note
 
     There are a few different ways to get the URI for a given conda package.
-    We recommend using the [Seqera Containers](https://seqera.io/containers/) search query, which will give you a URI that you can copy paste, even if you're not creating a container.
+    We recommend using the [Seqera Containers](https://seqera.io/containers/) search query, which will give you a URI that you can copy and paste, even if you're not planning to create a container from it.
 
-For your convenience, we are providing the URIs below. Just make sure to _add_ the `conda` directive.
-To be clear, we're not _replacing_ the `docker` directive, just adding an alternative option.
-
-#### 1.4.1. Update SAMTOOLS_INDEX
-
-The URI is `"bioconda::samtools=1.20"`.
+Now we add the URI to the `cowpy` process definition using the `conda` directive:
 
 _Before:_
 
-```console title="main.nf" linenums="22"
-process SAMTOOLS_INDEX {
+```console title="modules/cowpy.nf" linenums="4"
+process cowpy {
 
-    container 'community.wave.seqera.io/library/samtools:1.20--b5dfbd93de237464'
+    container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
 
-    publishDir params.outdir, mode: 'symlink'
+    publishDir 'results', mode: 'copy'
 ```
 
 _After:_
 
-```console title="main.nf" linenums="22"
-process SAMTOOLS_INDEX {
+```console title="modules/cowpy.nf" linenums="4"
+process cowpy {
 
-    container "community.wave.seqera.io/library/samtools:1.20--b5dfbd93de237464"
-    conda "bioconda::samtools=1.20"
+    container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
+    conda 'conda-forge::cowpy==1.1.5'
 
-    publishDir params.outdir, mode: 'symlink'
+    publishDir 'results', mode: 'copy'
 ```
 
-#### 1.4.2. Update GATK_HAPLOTYPECALLER
+To be clear, we're not _replacing_ the `docker` directive, we're _adding_ an alternative option.
 
-The URI is `"bioconda::gatk4=4.5.0.0"`.
-
-_Before:_
-
-```console title="main.nf" linenums="43"
-process GATK_HAPLOTYPECALLER {
-
-    container "community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"
-
-    publishDir params.outdir, mode: 'symlink'
-```
-
-_After:_
-
-```console title="main.nf" linenums="43"
-process GATK_HAPLOTYPECALLER {
-
-    container "community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"
-    conda "bioconda::gatk4=4.5.0.0"
-
-    publishDir params.outdir, mode: 'symlink'
-```
-
-#### 1.4.3. Update GATK_JOINTGENOTYPING
-
-The URI is `"bioconda::gatk4=4.5.0.0"`.
-
-_Before:_
-
-```console title="main.nf" linenums="74"
-process GATK_JOINTGENOTYPING {
-
-    container "community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"
-
-    publishDir params.outdir, mode: 'symlink'
-```
-
-_After:_
-
-```console title="main.nf" linenums="74"
-process GATK_JOINTGENOTYPING {
-
-    container "community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"
-    conda "bioconda::gatk4=4.5.0.0"
-
-    publishDir params.outdir, mode: 'symlink'
-```
-
-Once all three processes are updated, we can try running the workflow again.
-
-### 1.5. Run the workflow to verify that it can use Conda
+### 1.3. Run the workflow to verify that it can use Conda
 
 Let's try it out.
 
 ```bash
-nextflow run main.nf
+nextflow run hello-config.nf
 ```
 
-This will take a bit longer than usual the first time, and you might see the console output stay 'stuck' at this stage for a minute or so:
+This should work without issue.
 
 ```console title="Output"
  N E X T F L O W   ~  version 24.10.0
 
- ┃ Launching `main.nf` [extravagant_thompson] DSL2 - revision: 848ff2f9b5
+Launching `hello-config.nf` [trusting_lovelace] DSL2 - revision: 028a841db1
 
-[-        ] SAMTOOLS_INDEX       -
-[-        ] GATK_HAPLOTYPECALLER -
-[-        ] GATK_JOINTGENOTYPING -
-Creating env using conda: bioconda::samtools=1.20 [cache /workspaces/training/hello-nextflow/hello-config/work/conda/env-6684ea23d69ceb1742019ff36904f612]
+executor >  local (8)
+[ee/4ca1f2] sayHello (3)       | 3 of 3 ✔
+[20/2596a7] convertToUpper (1) | 3 of 3 ✔
+[b3/e15de5] collectGreetings   | 1 of 1 ✔
+[c5/af5f88] cowpy              | 1 of 1 ✔
+There were 3 greetings in this batch
 ```
 
-That's because Nextflow has to retrieve the Conda packages and create the environment, which takes a bit of work behind the scenes. The good news is that you don't need to deal with any of it yourself!
+Behind the scenes, Nextflow has retrieved the Conda packages and created the environment, which normally takes a bit of work; so it's nice that we don't have to do any of that ourselves!
 
-After a few moments, it should spit out some more output, and eventually complete without error.
+!!! note
 
-```console title="Output"
- N E X T F L O W   ~  version 24.10.0
+    This runs quickly because the `cowpy` package is quite small, but if you're working with large packages, it may take a bit longer than usual the first time, and you might see the console output stay 'stuck' for a minute or so before completing.
+    This is normal and is due to the extra work Nextflow does the first time you use a new package.
 
- ┃ Launching `main.nf` [silly_goldstine] DSL2 - revision: a60f9fd6af
-
-executor >  local (7)
-[23/b59106] SAMTOOLS_INDEX (1)       [100%] 3 of 3 ✔
-[da/e1bf1d] GATK_HAPLOTYPECALLER (1) [100%] 3 of 3 ✔
-[2e/e6ffca] GATK_JOINTGENOTYPING     [100%] 1 of 1 ✔
-```
-
-And from our standpoint, it looks like it works exactly the same as running with Docker, even though on the backend the mechanics are a bit different.
+From our standpoint, it looks like it works exactly the same as running with Docker, even though on the backend the mechanics are a bit different.
 
 This means we're all set to run with Conda environments if needed.
 
@@ -353,374 +173,42 @@ You know how to configure which software package each process should use, and ho
 
 ### What's next?
 
-Learn how to use profiles to make selecting an option easier.
-
----
-
-## 2. Use profiles to select preset configurations
-
-Profiles are a great way to adapt your workflow configuration by selecting preset options at runtime, to avoid having to edit a file every time you want to run something differently.
-
-### 2.1. Create profiles for switching between Docker and Conda
-
-Setting up these profiles mainly involves restructuring how we specify the `docker` and `conda` directives.
-
-_Before:_
-
-```groovy title="nextflow.config" linenums="1"
-docker.fixOwnership = true
-
-docker.enabled = false
-conda.enabled = true
-```
-
-_After:_
-
-```groovy title="nextflow.config" linenums="1"
-docker.fixOwnership = true
-
-profiles {
-    docker_on {
-        docker.enabled = true
-    }
-    conda_on {
-        conda.enabled = true
-    }
-}
-```
-
-This makes it possible to activate one or the other by specifying a profile in our Nextflow run command line.
-
-### 2.2. Run the workflow with a profile
-
-Let's try running the workflow with Conda.
-
-```bash
-nextflow run main.nf -profile conda_on
-```
-
-It works! Convenient, isn't it?
-
-```
- N E X T F L O W   ~  version 24.10.0
-
- ┃ Launching `main.nf` [sharp_gauss] DSL2 - revision: 66cd7c255a
-
-executor >  local (7)
-[f4/ef2cb6] SAMTOOLS_INDEX (1)       [100%] 3 of 3 ✔
-[70/77152c] GATK_HAPLOTYPECALLER (1) [100%] 3 of 3 ✔
-[a6/0f72fd] GATK_JOINTGENOTYPING     [100%] 1 of 1 ✔
-```
-
-Feel free to try it out with the Docker profile too. You just have to switch `-profile conda_on` to `-profile docker_on` in the command.
-
-### Takeaway
-
-You know how to use profiles to select a preset configuration at runtime with minimal hassle.
-
-### What's next?
-
 Learn how to change the executor used by Nextflow to actually do the work.
 
 ---
 
-## 3. Determine what executor(s) should be used to do the work
+## 2. Allocate compute resources with process directives
 
-Until now, we have been running our pipeline with the local executor.
-This runs each step on the same machine that Nextflow is running on.
-However, for large workloads, you will typically want to use a distributed executor such as an HPC or cloud.
-Nextflow supports several different distributed executors, including:
-
-- HPC (SLURM, PBS, SGE)
-- AWS Batch
-- Google Batch
-- Azure Batch
-- Kubernetes
-- GA4GH TES
-
-The executor is subject to a process directive called `executor`. By default it is set to `local`, so the following configuration is implied:
-
-```groovy title="Built-in configuration"
-process {
-    executor = 'local'
-}
-```
-
-Let's look at what it would take to using a Slurm scheduler, assuming we had a connection to a cluster and Slurm was installed appropriately.
-
-!!! warning
-
-    What follows is for demonstration purposes but **will not execute the work** since we don't have access to an external executor.
-
-### 3.1. Set up a Slurm executor
-
-Add the following lines to the `nextflow.config` file:
-
-```groovy title="nextflow.config" linenums="12"
-process {
-    executor = 'slurm'
-}
-```
-
-And... that's it! As noted before, this does assume that Slurm itself is already set up for you, but this is really all Nextflow itself needs to know.
-
-Basically we are telling Nextflow to generate a Slurm submission script and submit it using an `sbatch` command.
-
-### 3.2. Launch the workflow to generate the job submission script
-
-Let's try running this; even though we know it won't execute (since we don't have Slurm set up in this GitHub Codespaces environment) we'll be able to see what the submission script looks like.
-
-```bash
-nextflow run main.nf -profile conda_on
-```
-
-As expected, this fails with a fairly unambiguous error:
-
-```console title="Output"
-nextflow
- N E X T F L O W   ~  version 24.10.0
-
- ┃ Launching `main.nf` [grave_gauss] DSL2 - revision: 66cd7c255a
-
-[-        ] SAMTOOLS_INDEX       [  0%] 0 of 3
-[eb/2962ce] SAMTOOLS_INDEX (3)   [ 33%] 1 of 3, failed: 1
-[-        ] GATK_HAPLOTYPECALLER -
-[-        ] GATK_JOINTGENOTYPING -
-ERROR ~ Error executing process > 'SAMTOOLS_INDEX (3)'
-
-Caused by:
-  java.io.IOException: Cannot run program "sbatch" (in directory "/workspaces/training/hello-nextflow/hello-config/work/eb/2962ce167b3025a41ece6ce6d7efc2"): error=2, No such file or directory
-
-Command executed:
-
-  sbatch .command.run
-```
-
-However, it did produce what we are looking for: the `.command.run` file that Nextflow tried to submit to Slurm via the `sbatch` command.
-
-Let's take a look inside. <!-- **TODO: UPDATE NEXTFLOW VERSION SO WE CAN HAVE THIS SWEET OUTPUT** -->
-
-```bash title=".command.run" linenums="1"
-#!/bin/bash
-#SBATCH -J nf-SAMTOOLS_INDEX_(1)
-#SBATCH -o /home/gitpod/work/34/850fe31af0eb62a0eb1643ed77b84f/.command.log
-#SBATCH --no-requeue
-#SBATCH --signal B:USR2@30
-NXF_CHDIR=/home/gitpod/work/34/850fe31af0eb62a0eb1643ed77b84f
-### ---
-### name: 'SAMTOOLS_INDEX (1)'
-### container: 'community.wave.seqera.io/library/samtools:1.20--b5dfbd93de237464'
-### outputs:
-### - 'reads_father.bam'
-### - 'reads_father.bam.bai'
-### ...
-```
-
-This shows the job submission details that Nextflow is trying to hand over to Slurm.
-
-!!!note
-
-    There other options that we could additionally set using other process directives to control resource allocations, which we'll get to in a little bit.
-    These would also be included in the `.command.run` file and directly passed to the Slurm execution.
-
-You can try using any of the other supported executors in the same way. Nextflow will translate the values submitted to the executor into the appropriate equivalent instructions.
-
-Conveniently, you can also set up profiles to select which executor you want to use at runtime, just like we did for the Docker vs. Conda environments selection earlier.
-
-### 3.3. Set up profiles for executors too
-
-Let's replace the process block we had added with the executor selection profiles.
-
-_Before:_
-
-```groovy title="nextflow.config" linenums="3"
-profiles {
-    docker_on {
-        docker.enabled = true
-    }
-    conda_on {
-        conda.enabled = true
-    }
-}
-
-process {
-    executor = 'slurm'
-}
-```
-
-_After:_
-
-```groovy title="nextflow.config" linenums="3"
-profiles {
-    docker_on {
-        docker.enabled = true
-    }
-    conda_on {
-        conda.enabled = true
-    }
-    local_exec {
-        process.executor = 'local'
-    }
-    slurm_exec {
-        process.executor = 'slurm'
-    }
-}
-```
-
-Although it may look like these are going to be mutually exclusive, you can actually combine multiple profiles.
-Let's try that now.
-
-### 3.4. Run with a combination of profiles
-
-To use two profiles at the same time, simply give both to the `-profile` parameter, separated by a comma.
-
-```bash
-nextflow run main.nf -profile docker_on,local_exec
-```
-
-With that, we've returned to the original configuration of using Docker containers with local execution, not that you can tell from the console output:
-
-```console title="Output"
- N E X T F L O W   ~  version 24.10.0
-
- ┃ Launching `main.nf` [irreverent_bassi] DSL2 - revision: 66cd7c255a
-
-executor >  local (7)
-[17/82bbc4] SAMTOOLS_INDEX (2)       [100%] 3 of 3 ✔
-[8e/93609c] GATK_HAPLOTYPECALLER (2) [100%] 3 of 3 ✔
-[e6/df6740] GATK_JOINTGENOTYPING     [100%] 1 of 1 ✔
-```
-
-The point is, we can now use profiles to switch to a different software packaging system (Conda) or a different executor (such as Slurm) with a single command-line option.
-For example, if we were back on our hypothetical HPC from earlier, we would switch to using `-profile conda_on,slurm_exec` in our Nextflow command line.
-
-Feel free to test that on your own to satisfy yourself that it works as expected.
-
-Moving on, we're going to take this logic a step further, and set up dedicated profiles for groups of configuration elements that we usually want to activate together.
-
-### 3.5. Create profiles that combine several configuration elements
-
-Let's set up some dedicated profiles for the two case figures we've been envisioning: running locally with Docker, which we'll call `my_laptop`, and running on the HPC cluster with Conda, which we'll call `univ_hpc`.
-
-_Before:_
-
-```groovy title="nextflow.config" linenums="3"
-profiles {
-    docker_on {
-        docker.enabled = true
-    }
-    conda_on {
-        conda.enabled = true
-    }
-    local_exec {
-        process.executor = 'local'
-    }
-    slurm_exec {
-        process.executor = 'slurm'
-    }
-}
-```
-
-_After:_
-
-```groovy title="nextflow.config" linenums="3"
-profiles {
-    docker_on {
-        docker.enabled = true
-    }
-    conda_on {
-        conda.enabled = true
-    }
-    my_laptop {
-        process.executor = 'local'
-        docker.enabled = true
-    }
-    univ_hpc {
-        process.executor = 'slurm'
-        conda.enabled = true
-    }
-}
-```
-
-Now we have profiles for the two main case figures we've been considering.
-If in the future we find other elements of configuration that are always co-occurring with these, we can simply add them to the corresponding profile(s).
-
-Feel free to test these new profiles on your own using either `-profile my_laptop` or `-profile univ_hpc`.
-Just remember that the `univ_hpc` one won't work unless you run it in an environment that is set up appropriately to use Slurm.
-
-!!!note
-
-    You'll notice we've removed the two profiles that _only_ specified the executor, because in those cases we're always going to want to specify the software packaging technology too.
-
-    We're leaving in the Docker and Conda profiles because those ones come in handy by themselves, although there are also some dedicated command line flags for those, and it's a nice illustration of the fact that you can have the same directives set in multiple profiles.
-    Just keep in mind that if you combine profiles with conflicting settings for the same directives, you might be surprised by the results.
-
-### Takeaway
-
-You now know how to change the executor and combine that with other environment settings using profiles.
-
-### What's next?
-
-Learn how to control the resources allocated for executing processes.
-
----
-
-## 4. Allocate compute resources with process directives
-
-We've covered how to control what compute environment Nextflow is going to use to run the workflow, so now the next logical question is, how do we control the resources (CPU, memory etc) that will be allocated?
-
-The answer may not surprise you; it's process directives again.
-
-### 4.1. Increase default process resource allocations
+Most high-performance computing platforms allow (and sometimes require) that you specify certain resource allocation parameters such as number of CPUs and memory.
 
 By default, Nextflow will use a single CPU and 2GB of memory for each process.
-Let's say we decide to double that.
+The corresponding process directives are called `cpus` and `memory`, so the following configuration is implied:
 
-We can modify this behavior by setting the `cpu` and `memory` directives in the `process` block. Add the following to the end of your `nextflow.config` file:
-
-```groovy title="nextflow.config" linenums="20"
+```groovy title="Built-in configuration" linenums="1"
 process {
-    // defaults for all processes
-    cpus = 2
-    memory = 4.GB
+    cpus = 1
+    memory = 2.GB
 }
 ```
 
-### 4.2. Run the workflow with the increased defaults
+You can modify these values, either for all processes or for specific named processes, using additional process directives in your configuration file.
+Nextflow will translate them into the appropriate instructions for the chosen executor.
 
-Let's try that out, bearing in mind that we need to keep `-profile my_laptop` in the command going forward.
+But how do you know what values to use?
 
-```bash
-nextflow run main.nf -profile my_laptop
-```
+### 2.1. Run the workflow to generate a resource utilization report
 
-You may not notice any real difference in how quickly this runs, since this is such a small workload.
-But if you have a machine with few CPUs and you allocate a high number per process, you might see process calls getting queued behind each other.
-This is because Nextflow will ensure we aren't using more CPUs than are available.
+If you don't know up front how much CPU and memory your processes are likely to need, you can do some resource profiling, meaning you run the workflow with some default allocations, record how much each process used, and from there, estimate how to adjust the base allocations.
 
-!!! tip
+Conveniently, Nextflow includes built-in tools for doing this, and will happily generate a report for you on request.
 
-    You can check the number of CPUs allocated to a given process by looking at the `.command.run` log in its work directory.
-    There will be a function called `nxf_launch()` that includes the command `docker run—i—-CPU 1024`, where `--cpu-shares` refers to the CPU time given to this process' tasks. Setting one task's cpu_share to 512 and another to 1024 means that the second task will get double the amount of CPU time as the first.
-
-You're probably wondering if you can set resource allocations per individual process, and the answer is of course yes, yes you can!
-We'll show you how to do that in a moment.
-
-But first, let's talk about how you can find out how much CPU and memory your processes are likely to need.
-The classic approach is to do resource profiling, meaning you run the workflow with some default allocations, record how much each process used, and from there, estimate how to adjust the base allocations.
-
-The truly excellent news on this front is that Nextflow includes built-in tools for doing this, and will happily generate a report for you on request.
-Let's try that out.
-
-### 4.3. Run the workflow to generate a resource utilization report
-
-To have Nextflow generate the report automatically, simply add `-with-report <filename>.html` to your command line.
+To do so, add `-with-report <filename>.html` to your command line.
 
 ```bash
-nextflow run main.nf -profile my_laptop -with-report report-config-1.html
+nextflow run hello-config.nf -with-report report-config-1.html
 ```
 
-The report is an html file, which you can download and open in your browser. You can also right click it in the file explorer on the left and click on `Show preview` in order to view it in GitHub Codespaces.
+The report is an html file, which you can download and open in your browser. You can also right click it in the file explorer on the left and click on `Show preview` in order to view it in the training environment.
 
 Take a few minutes to look through the report and see if you can identify some opportunities for adjusting resources.
 Make sure to click on the tabs that show the utilization results as a percentage of what was allocated.
@@ -728,57 +216,60 @@ There is some [documentation](https://www.nextflow.io/docs/latest/reports.html) 
 
 <!-- TODO: insert images -->
 
-One observation is that the `GATK_JOINTGENOTYPING` seems to be very hungry for CPU, which makes sense since it performs a lot of complex calculations.
-So we could try boosting that and see if it cuts down on runtime.
+### 2.2. Set resource allocations for all processes
 
-However, we seem to have overshot the mark with the memory allocations; all processes are only using a fraction of what we're giving them.
-We should dial that back down and save some resources.
+The profiling shows that the processes in our training workflow are very lightweight, so let's reduce the default memory allocation to 1GB per process.
 
-### 4.4. Adjust resource allocations for a specific process
+Add the following to your `nextflow.config` file:
 
-We can specify resource allocations for a given process using the `withName` process selector.
-The syntax looks like this when it's by itself in a process block:
-
-```groovy title="Syntax"
+```groovy title="nextflow.config" linenums="4"
 process {
-    withName: 'GATK_JOINTGENOTYPING' {
-        cpus = 4
+    memory = 1.GB
+}
+```
+
+### 2.3. Set resource allocations for an individual process
+
+At the same time, we're going to pretend that the `cowpy` process requires more resources than the others, just so we can demonstrate how to adjust allocations for an individual process.
+
+_Before:_
+
+```groovy title="nextflow.config" linenums="14"
+process {
+    memory = 1.GB
+}
+```
+
+_After:_
+
+```groovy title="nextflow.config" linenums="4"
+process {
+    memory = 1.GB
+    withName: 'cowpy' {
+        memory = 2.GB
+        cpus = 2
     }
 }
 ```
 
-Let's add that to the existing process block in the `nextflow.config` file.
+With this configuration, all processes will request 1GB of memory and a single CPU (the implied default), except the `cowpy` process, which will request 2GB and 2 CPUs.
 
-```groovy title="nextflow.config" linenums="11"
-process {
-    // defaults for all processes
-    cpus = 2
-    memory = 2.GB
-    // allocations for a specific process
-    withName: 'GATK_JOINTGENOTYPING' {
-        cpus = 4
-    }
-}
-```
+!!! note
 
-With that specified, the default settings will apply to all processes **except** the `GATK_JOINTGENOTYPING` process, which is a special snowflake that gets a lot more CPU.
-Hopefully that should have an effect.
+    If you have a machine with few CPUs and you allocate a high number per process, you might see process calls getting queued behind each other.
+    This is because Nextflow ensures we don't request more CPUs than are available.
 
-### 4.5. Run again with the modified configuration
+### 2.4. Run the workflow with the modified configuration
 
-Let's run the workflow again with the modified configuration and with the reporting flag turned on, but notice we're giving the report a different name so we can differentiate them.
+Let's try that out, supplying a different filename for the profiling report so we can compare performance before and after the configuration changes.
 
 ```bash
-nextflow run main.nf -profile my_laptop -with-report report-config-2.html
+nextflow run hello-config.nf -with-report report-config-2.html
 ```
 
-Once again, you probably won't notice a substantial difference in runtime, because this is such a small workload and the tools spend more time in ancillary tasks than in performing the 'real' work.
+You will probably not notice any real difference since this is such a small workload, but this is the approach you would use to analyze the performance and resource requirements of a real-world workflow.
 
-However, the second report shows that our resource utilization is more balanced now.
-
-<!-- **TODO: screenshots?** -->
-
-As you can see, this approach is useful when your processes have different resource requirements. It empowers you to right-size the resource allocations you set up for each process based on actual data, not guesswork.
+It is very useful when your processes have different resource requirements. It empowers you to right-size the resource allocations you set up for each process based on actual data, not guesswork.
 
 !!!note
 
@@ -788,13 +279,14 @@ As you can see, this approach is useful when your processes have different resou
 
     We'll cover both of those approaches in an upcoming part of this training course.
 
-That being said, there may be some constraints on what you can (or must) allocate depending on what computing executor and compute infrastructure you're using. For example, your cluster may require you to stay within certain limits that don't apply when you're running elsewhere.
+### 2.5. Add resource limits
 
-### 4.6. Add resource limits to an HPC profile
+Depending on what computing executor and compute infrastructure you're using, there may be some constraints on what you can (or must) allocate.
+For example, your cluster may require you to stay within certain limits.
 
 You can use the `resourceLimits` directive to set the relevant limitations. The syntax looks like this when it's by itself in a process block:
 
-```groovy title="Syntax"
+```groovy title="Syntax example"
 process {
     resourceLimits = [
         memory: 750.GB,
@@ -804,172 +296,56 @@ process {
 }
 ```
 
-Let's add this to the `univ_hpc` profile we set up earlier.
+Nextflow will translate these values into the appropriate instructions depending on the executor that you specified.
 
-_Before:_
-
-```groovy title="nextflow.config"
-    univ_hpc {
-        process.executor = 'slurm'
-        conda.enabled = true
-    }
-```
-
-_After:_
-
-```groovy title="nextflow.config"
-    univ_hpc {
-        process.executor = 'slurm'
-        conda.enabled = true
-        process.resourceLimits = [
-            memory: 750.GB,
-            cpus: 200,
-            time: 30.d
-        ]
-    }
-```
-
-We can't test this since we don't have a live connection to Slurm in the GitHub Codespaces environment.
-However, you can try running the workflow with resource allocations that exceed these limits, then look up the `sbatch` command in the `.command.run` script file.
-You should see that the requests that actually get sent to the executor are capped at the values specified by `resourceLimits`.
+We're not going to run this, since we don't have access to relevant infrastructure in the training environment.
+However, if you were to try running the workflow with resource allocations that exceed these limits, then look up the `sbatch` command in the `.command.run` script file, you would see that the requests that actually get sent to the executor are capped at the values specified by `resourceLimits`.
 
 !!!note
 
     The nf-core project has compiled a [collection of configuration files](https://nf-co.re/configs/) shared by various institutions around the world, covering a wide range of HPC and cloud executors.
 
-    Those shared configs are valuable both for people who work there and can therefore just utilize their institution's configuration out of the box, and for people who are looking to develop a configuration for their own infrastructure.
+    Those shared configs are valuable both for people who work there and can therefore just utilize their institution's configuration out of the box, and as a model for people who are looking to develop a configuration for their own infrastructure.
 
 ### Takeaway
 
-You know how to allocate process resources, tweak those allocations based on the utilization report, and use a profile to adapt the allocations to the compute environment.
+You know how to generate a profiling report to assess resource utilization and how to modify resource allocations for all processes and/or for individual processes, as well as set resource limitations for running on HPC.
 
 ### What's next?
 
-Configuring the parameters destined for the tools and operations wrapped within processes.
+Learn to use a parameter file to store workflow parameters.
 
 ---
 
-## 5. Configure workflow parameters
+## 3. Use a parameter file to store workflow parameters
 
-So far we've been exploring options for configuring how Nextflow behaves in terms of executing the work.
-That's all well and good, but how do we manage the parameters that are meant for the workflow itself, and the tools it calls within the processes?
-That is also something we should be able to do without editing code files every time we want to run on some new data or switch to a different set of reference files.
+So far we've been looking at configuration from the technical point of view of the compute infrastructure.
+Now let's consider another aspect of workflow configuration that is very important for reproducibility: the configuration of the workflow parameters.
 
-As it turns out, there's a lot of overlap between this kind of configuration and the infrastructure configuration, starting with the `nextflow.config` file, which can also house default values for command line parameters.
+Currently, our workflow is set up to accept several parameter values via the command-line, with default values set in the workflow script itself.
+This is fine for a simple workflow with very few parameters that need to be set for a given run.
+However, many real-world workflows will have many more parameters that may be run-specific, and putting all of them in the command line would be tedious and error-prone.
 
-### 5.1. Move the default parameter declarations to the configuration file
+Nextflow allows us to specify parameters via a parameter file in JSON format, which makes it very convenient to manage and distribute alternative sets of default values, for example, as well as run-specific parameter values.
 
-We originally stored all our default parameter values in the workflow script itself, but we can move them out into the `nextflow.config` file if we prefer.
+We provide an example parameter file in the current directory, called `test-params.json`:
 
-So let's cut this set of params out of `main.nf`:
-
-```groovy title="main.nf" linenums="3"
-/*
- * Pipeline parameters
- */
-
-// Primary input (file of input files, one per line)
-params.reads_bam = "${projectDir}/data/sample_bams.txt"
-
-// Output directory
-params.outdir    = 'results_genomics'
-
-// Accessory files
-params.reference        = "${projectDir}/data/ref/ref.fasta"
-params.reference_index  = "${projectDir}/data/ref/ref.fasta.fai"
-params.reference_dict   = "${projectDir}/data/ref/ref.dict"
-params.intervals        = "${projectDir}/data/ref/intervals.bed"
-
-// Base name for final output file
-params.cohort_name = "family_trio"
-```
-
-And let's stick it into the `nextflow.config` file.
-
-!!!note
-
-    It doesn't really matter where we put it into the file, as long as we keep the params together and avoid mixing them in with the infrastructure configuration, for the sake of readability.
-    So putting it at the end will do just fine.
-
-### 5.2. Run the workflow with `-resume` to verify that it still works
-
-Let's check that we haven't broken anything, and let's include the `-resume` flag.
-
-```bash
-nextflow run main.nf -profile my_laptop -resume
-```
-
-Not only does everything work, but all of the process calls are recognized as having been run previously.
-
-```console title="Output"
- N E X T F L O W   ~  version 24.10.0
-
- ┃ Launching `main.nf` [modest_kay] DSL2 - revision: 328869237b
-
-[d6/353bb0] SAMTOOLS_INDEX (3)       [100%] 3 of 3, cached: 3 ✔
-[dc/2a9e3f] GATK_HAPLOTYPECALLER (2) [100%] 3 of 3, cached: 3 ✔
-[fe/a940b2] GATK_JOINTGENOTYPING     [100%] 1 of 1, cached: 1 ✔
-```
-
-Indeed, having moved the parameter values to a different file changes nothing to the command submission that Nextflow generates. The resumability of the pipeline is preserved.
-
-### 5.3. Streamline the syntax of the parameter defaults
-
-Now that our default parameter declarations are in `nextflow.config`, we can switch to using a more structured syntax using a `params` block. That allows us to remove the repeated `params.`.
-
-```groovy title="nextflow.config" linenums="35"
-/*
- * Pipeline parameters
- */
-
-params {
-    // Primary input (file of input files, one per line)
-    reads_bam        = "${projectDir}/data/sample_bams.txt"
-
-    // Output directory
-    outdir           = 'results_genomics'
-
-    // Accessory files
-    reference        = "${projectDir}/data/ref/ref.fasta"
-    reference_index  = "${projectDir}/data/ref/ref.fasta.fai"
-    reference_dict   = "${projectDir}/data/ref/ref.dict"
-    intervals        = "${projectDir}/data/ref/intervals.bed"
-
-    // Base name for final output file
-    cohort_name      = "family_trio"
-}
-```
-
-Feel free to re-run this with the same command as above to verify that it works and still preserves the resumability of the pipeline.
-
-At this point, you may be wondering how to provide actual data and reference files to run this workflow for real, since what we've put in here is just a tiny test set.
-
-There are several options.
-As we mentioned earlier (see note at the start of this page), you can override the defaults specified in the `nextflow.config` file by providing directives or parameter values on the command line, or by importing other configuration files.
-
-In this particular case, the best solution is to use a parameter file, which is a JSON file containing key-value pairs for all of the parameters you want to supply values for.
-
-### 5.4. Using a parameter file to override defaults
-
-We provide a parameter file in the current directory, called `demo-params.json`, which contains key-value pairs for all of the parameters our workflow expects.
-The values are the same input files and reference files we've been using so far.
-
-```json title="demo-params.json" linenums="1"
+```json title="test-params.json" linenums="1"
 {
-  "reads_bam": "data/sample_bams.txt",
-  "outdir": "results_genomics",
-  "reference": "data/ref/ref.fasta",
-  "reference_index": "data/ref/ref.fasta.fai",
-  "reference_dict": "data/ref/ref.dict",
-  "intervals": "data/ref/intervals.bed",
-  "cohort_name": "family_trio"
+  "greeting": "greetings.csv",
+  "batch": "Trio",
+  "character": "turkey"
 }
 ```
 
-To run the workflow with this parameter file, simply add `-params-file demo-params.json` to the base command.
+This parameter file contains a key-value pair for each of the inputs our workflow expects.
+
+### 3.1. Run the workflow using a parameter file
+
+To run the workflow with this parameter file, simply add `-params-file <filename>` to the base command.
 
 ```bash
-nextflow run main.nf -profile my_laptop -params-file demo-params.json
+nextflow run hello-config.nf -params-file test-params.json
 ```
 
 It works! And as expected, this produces the same outputs as previously.
@@ -977,171 +353,261 @@ It works! And as expected, this produces the same outputs as previously.
 ```console title="Output"
  N E X T F L O W   ~  version 24.10.0
 
- ┃ Launching `main.nf` [marvelous_mandelbrot] DSL2 - revision: 328869237b
+Launching `hello-config.nf` [disturbed_sammet] DSL2 - revision: ede9037d02
 
-executor >  local (7)
-[63/23a827] SAMTOOLS_INDEX (1)       [100%] 3 of 3 ✔
-[aa/60aa4a] GATK_HAPLOTYPECALLER (2) [100%] 3 of 3 ✔
-[35/bda5eb] GATK_JOINTGENOTYPING     [100%] 1 of 1 ✔
+executor >  local (8)
+[f0/35723c] sayHello (2)       | 3 of 3 ✔
+[40/3efd1a] convertToUpper (3) | 3 of 3 ✔
+[17/e97d32] collectGreetings   | 1 of 1 ✔
+[98/c6b57b] cowpy              | 1 of 1 ✔
+There were 3 greetings in this batch
 ```
 
-However, you may be thinking, well, did we really override the configuration? How would we know, since those were the same files?
+This may seem like overkill when you only have a few parameters to specify, but some pipelines expect dozens of parameters.
+In those cases, using a parameter file will allow us to provide parameter values at runtime without having to type massive command lines and without modifying the workflow script.
 
-### 5.5. Remove or generalize default values from `nextflow.config`
+### Takeaway
 
-Let's strip out all the file paths from the `params` block in `nextflow.config`, replacing them with `null`, and replace the `cohort_name` value with something more generic.
+You know how to manage parameter defaults and override them at runtime using a parameter file.
 
-_Before:_
+### What's next?
 
-```groovy title="nextflow.config" linenums="39"
-params {
-    // Primary input (file of input files, one per line)
-    reads_bam        = "${projectDir}/data/sample_bams.txt"
+Learn how to use profiles to conveniently switch between alternative configurations.
 
-    // Output directory
-    outdir           = 'results_genomics'
+---
 
-    // Accessory files
-    reference        = "${projectDir}/data/ref/ref.fasta"
-    reference_index  = "${projectDir}/data/ref/ref.fasta.fai"
-    reference_dict   = "${projectDir}/data/ref/ref.dict"
-    intervals        = "${projectDir}/data/ref/intervals.bed"
+## 3. Determine what executor(s) should be used to do the work
 
-    // Base name for final output file
-    cohort_name      = "family_trio"
-}
-```
+Until now, we have been running our pipeline with the local executor.
+This executes each task on the machine that Nextflow is running on.
+When Nextflow begins, it looks at the available CPUs and memory.
+If the resources of the tasks ready to run exceed the available resources, Nextflow will hold the last tasks back from execution until one or more of the earlier tasks have finished, freeing up the necessary resources.
 
-_After:_
+For very large workloads, you may discover that your local machine is a bottleneck, either because you have a single task that requires more resources than you have available, or because you have so many tasks that waiting for a single machine to run them would take too long.
+The local executor is convenient and efficient, but is limited to that single machine.
+Nextflow supports [many different execution backends](https://www.nextflow.io/docs/latest/executor.html), including HPC schedulers (Slurm, LSF, SGE, PBS, Moab, OAR, Bridge, HTCondor and others) as well as cloud execution backends such (AWS Batch, Google Cloud Batch, Azure Batch, Kubernetes and more).
 
-```groovy title="nextflow.config" linenums="39"
-params {
-    // Primary input (file of input files, one per line)
-    reads_bam        = null
-
-    // Output directory
-    outdir           = null
-
-    // Accessory files
-    reference        = null
-    reference_index  = null
-    reference_dict   = null
-    intervals        = null
-
-    // Base name for final output file
-    cohort_name      = "my_cohort"
-}
-```
-
-Now, if you run the same command again, it will still work.
-So yes, we're definitely able to pull those parameter values from the parameter file.
-
-This is great because, with the parameter file in hand, we'll now be able to provide parameter values at runtime without having to type massive command lines **and** without modifying the workflow nor the default configuration.
-
-That being said, it was nice to be able to demo the workflow without having to keep track of filenames and such. Let's see if we can use a profile to replicate that behavior.
-
-### 5.6. Create a demo profile
-
-Yes we can! We just need to retrieve the default parameter declarations as they were written in the original workflow (with the `params.*` syntax) and copy them into a new profile that we'll call `demo`.
-
-_Before:_
-
-```groovy title="nextflow.config" linenums="3"
-profiles {
-    docker_on {
-        docker.enabled = true
-    }
-    conda_on {
-        conda.enabled = true
-    }
-    my_laptop {
-        process.executor = 'local'
-        docker.enabled = true
-    }
-    univ_hpc {
-        process.executor = 'slurm'
-        conda.enabled = true
-        process.resourceLimits = [
-            memory: 750.GB,
-            cpus: 200,
-            time: 30.d
-        ]
-    }
-}
-```
-
-_After:_
-
-```groovy title="nextflow.config" linenums="3"
-profiles {
-    docker_on {
-        docker.enabled = true
-    }
-    conda_on {
-        conda.enabled = true
-    }
-    my_laptop {
-        process.executor = 'local'
-        docker.enabled = true
-    }
-    univ_hpc {
-        process.executor = 'slurm'
-        conda.enabled = true
-        process.resourceLimits = [
-            memory: 750.GB,
-            cpus: 200,
-            time: 30.d
-        ]
-    }
-    demo {
-        // Primary input (file of input files, one per line)
-        params.reads_bam        = "data/sample_bams.txt"
-
-        // Output directory
-        params.outdir           = 'results_genomics'
-
-        // Accessory files
-        params.reference        = "data/ref/ref.fasta"
-        params.reference_index  = "data/ref/ref.fasta.fai"
-        params.reference_dict   = "data/ref/ref.dict"
-        params.intervals        = "data/ref/intervals.bed"
-
-        // Base name for final output file
-        params.cohort_name      = "family_trio"
-    }
-}
-```
-
-As long as we distribute the data bundle with the workflow code, this will enable anyone to quickly try out the workflow without having to supply their own inputs or pointing to the parameter file. Besides, we can provide URLs to where files are stored and Nextflow will download them automatically.
-
-### 5.7. Run with the demo profile
-
-Let's try that out:
+Each of these systems uses different technologies, syntaxes and configurations for defining how a job should be defined. For example, /if we didn't have Nextflow/, a job requiring 8 CPUs and 4GB of RAM to be executed on the queue "my-science-work" would need to include the following configuration on SLURM and submit the job using `sbatch`:
 
 ```bash
-nextflow run main.nf -profile my_laptop,demo
+#SBATCH -o /path/to/my/task/directory/my-task-1.log
+#SBATCH --no-requeue
+#SBATCH -c 8
+#SBATCH --mem 4096M
+#SBATCH -p my-science-work
 ```
 
-And it works perfectly!
+If I wanted to make the workflow available to a colleague running on PBS, I'd need to remember to use a different submission program `qsub` and I'd need to change my scripts to use a new syntax for resources:
+
+```bash
+#PBS -o /path/to/my/task/directory/my-task-1.log
+#PBS -j oe
+#PBS -q my-science-work
+#PBS -l nodes=1:ppn=5
+#PBS -l mem=4gb
+```
+
+If I wanted to use SGE, the configuration would be slightly different again:
+
+```bash
+#$ -o /path/to/my/task/directory/my-task-1.log
+#$ -j y
+#$ -terse
+#$ -notify
+#$ -q my-science-work
+#$ -l slots=5
+#$ -l h_rss=4096M,mem_free=4096M
+```
+
+Running on a single cloud execution engine would require a new approach again, likely using an SDK that uses the cloud platform's APIs.
+
+Nextflow makes it easy to write a single workflow that can be run on each of these different infrastructures and systems, without having to modify the workflow.
+The executor is subject to a process directive called `executor`.
+By default it is set to `local`, so the following configuration is implied:
+
+```groovy title="Built-in configuration"
+process {
+    executor = 'local'
+}
+```
+
+### 3.1. Targeting a different backend
+
+By default, this training environment does not include a running HPC schedulder, but if you were running on a system with SLURM installed, for example, you can have Nextflow convert the `cpus`, `memory`, `queue` and other process directives into the correct syntax at runtime by adding following lines to the `nextflow.config` file:
+
+```groovy title="nextflow.config"
+process {
+    executor = 'slurm'
+}
+```
+
+And... that's it! As noted before, this does assume that Slurm itself is already set up for you, but this is really all Nextflow itself needs to know.
+
+Basically we are telling Nextflow to generate a Slurm submission script and submit it using an `sbatch` command.
+
+### Takeaway
+
+You now know how to change the executor to use different kinds of computing infrastructure.
+
+### What's next?
+
+Learn how to control the resources allocated for executing processes.
+
+---
+
+## 4. Use profiles to select preset configurations
+
+You may want to switch between alternative settings depending on what computing infrastructure you're using. For example, you might want to develop and run small-scale tests locally on your laptop, then run full-scale workloads on HPC or cloud.
+
+Nextflow lets you set up profiles that describe different configurations, which you can then select at runtime using a command-line argument, rather than having to modify the configuration file itself.
+
+### 4.1. Create profiles for switching between local development and execution on HPC
+
+Let's set up two alternative profiles; one for running small scale loads on a regular computer, where we'll use Docker containers, and one for running on a university HPC with a Slurm scheduler, where we'll use Conda packages.
+
+Add the following to your `nextflow.config` file:
+
+```groovy title="nextflow.config" linenums="3"
+profiles {
+    my_laptop {
+        process.executor = 'local'
+        docker.enabled = true
+    }
+    univ_hpc {
+        process.executor = 'slurm'
+        conda.enabled = true
+        process.resourceLimits = [
+            memory: 750.GB,
+            cpus: 200,
+            time: 30.d
+        ]
+    }
+}
+```
+
+You see that for the university HPC, we're also specifying resource limitations.
+
+### 4.2. Run the workflow with a profile
+
+To specify a profile in our Nextflow command line, we use the `-profile` argument.
+
+Let's try running the workflow with the `my_laptop` configuration.
+
+```bash
+nextflow run hello-config.nf -profile my_laptop
+```
+
+This still produces the following output:
+
+```
+ N E X T F L O W   ~  version 24.10.0
+
+Launching `hello-config.nf` [gigantic_brazil] DSL2 - revision: ede9037d02
+
+executor >  local (8)
+[58/da9437] sayHello (3)       | 3 of 3 ✔
+[35/9cbe77] convertToUpper (2) | 3 of 3 ✔
+[67/857d05] collectGreetings   | 1 of 1 ✔
+[37/7b51b5] cowpy              | 1 of 1 ✔
+There were 3 greetings in this batch
+```
+
+As you can see, this allows us to toggle between configurations very conveniently at runtime.
+
+!!! warning
+
+    The `univ_hpc` profile will not run properly in the training environment since we do not have access to a Slurm scheduler.
+
+If in the future we find other elements of configuration that are always co-occurring with these, we can simply add them to the corresponding profile(s).
+We can also create additional profiles if there are other elements of configuration that we want to group together.
+
+### 4.3. Create a test profile
+
+Profiles are not only for infrastructure configuration.
+We can also use them to set default values for workflow parameters, to make it easier for others to try out the workflow without having to gather appropriate input values themselves.
+This is intended as an alternative to using a parameter file.
+
+The syntax for expressing default values is the same as when writing them into the workflow file itself, except we wrap them in a block named `test`:
+
+```groovy title="Syntax example"
+    test {
+        params.<parameter1>
+        params.<parameter2>
+        ...
+    }
+```
+
+If we add a test profile for our workflow, the `profiles` block becomes:
+
+```groovy title="nextflow.config" linenums="4"
+profiles {
+    my_laptop {
+        process.executor = 'local'
+        docker.enabled = true
+    }
+    univ_hpc {
+        process.executor = 'slurm'
+        conda.enabled = true
+        process.resourceLimits = [
+            memory: 750.GB,
+            cpus: 200,
+            time: 30.d
+        ]
+    }
+    test {
+        params.greeting = 'greetings.csv'
+        params.batch = 'test-batch'
+        params.character = 'turkey'
+    }
+}
+```
+
+Just like for technical configuration profiles, you can set up multiple different profiles specifying parameters under any arbitrary name you like.
+
+### 4.4. Run the workflow locally with the test profile
+
+Conveniently, profiles are not mutually exclusive, so we can specify multiple profiles in our command line using the following syntax `-profile <profile1>,<profile2>` (for any number of profiles).
+
+!!! note
+
+    If you combine profiles that set values for the same elements of configuration and are described in the same configuration file, Nextflow will resolve the conflict by using whichever value it read in last (_i.e._ whatever comes later in the file).
+    If the conflicting settings are set in different configuration sources, the default [order of precedence](https://www.nextflow.io/docs/latest/config.html) applies.
+
+Let's try adding the test profile to our previous command:
+
+```bash
+nextflow run hello-config.nf -profile my_laptop,test
+```
+
+This should produce the following:
 
 ```console title="Output"
  N E X T F L O W   ~  version 24.10.0
 
- ┃ Launching `main.nf` [cheesy_shaw] DSL2 - revision: 328869237b
+Launching `hello-config.nf` [gigantic_brazil] DSL2 - revision: ede9037d02
 
-executor >  local (7)
-[4f/5ea14f] SAMTOOLS_INDEX (1)       [100%] 3 of 3 ✔
-[fc/761e86] GATK_HAPLOTYPECALLER (3) [100%] 3 of 3 ✔
-[8a/2f498f] GATK_JOINTGENOTYPING     [100%] 1 of 1 ✔
+executor >  local (8)
+[58/da9437] sayHello (3)       | 3 of 3 ✔
+[35/9cbe77] convertToUpper (2) | 3 of 3 ✔
+[67/857d05] collectGreetings   | 1 of 1 ✔
+[37/7b51b5] cowpy              | 1 of 1 ✔
+There were 3 greetings in this batch
 ```
 
-Imagine what we can do with this tooling in place.
-For example, we could also add profiles with popular sets of reference files to save people the trouble of providing their own.
+<!-- improve by showing and varying the outputs for all these maybe -->
+
+This means that as long as we distribute any test data files with the workflow code, anyone can quickly try out the workflow without having to supply their own inputs via the command line or a parameter file.
+
+!!! note
+
+    We can even point to URLs for larger files that are stored externally.
+    Nextflow will download them automatically as long as there is an open connection.
 
 ### Takeaway
 
-You know how to manage parameter defaults, override them at runtime using a parameter file, and set up profiles.
+You know how to use profiles to select a preset configuration at runtime with minimal hassle. More generally, you know how to configure your workflow executions to suit different compute platforms and enhance the reproducibility of your analyses.
 
 ### What's next?
 
-Celebrate and relax. Then we'll move on to learning how to modularize the workflow code for optimal maintainability and reuse.
+Celebrate and give yourself a big pat on the back! You have completed your very first Nextflow developer course.
+Then check out the training portal homepage for more training content that may be of interest.

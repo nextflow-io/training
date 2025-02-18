@@ -11,16 +11,18 @@ nav:
       - envsetup/02_local.md
   - Hello Nextflow:
       - hello_nextflow/index.md
-      - hello_nextflow/01_orientation.md
-      - hello_nextflow/02_hello_world.md
-      - hello_nextflow/03_hello_containers.md
-      - hello_nextflow/04_hello_genomics.md
-      - hello_nextflow/05_hello_operators.md
+      - hello_nextflow/00_orientation.md
+      - hello_nextflow/01_hello_world.md
+      - hello_nextflow/02_hello_channels.md
+      - hello_nextflow/03_hello_workflow.md
+      - hello_nextflow/04_hello_modules.md
+      - hello_nextflow/05_hello_containers.md
       - hello_nextflow/06_hello_config.md
-      - hello_nextflow/07_hello_modules.md
-      - hello_nextflow/08_hello_nf-test.md
-      - hello_nextflow/09_hello_nf-core.md
-      - hello_nextflow/10_hello_seqera.md
+  - Nextflow for Genomics:
+      - nf4_science/genomics/index.md
+      - nf4_science/genomics/00_orientation.md
+      - nf4_science/genomics/01_per_sample_variant_calling.md
+      - nf4_science/genomics/02_joint_calling.md
   - Fundamentals Training:
       - basic_training/index.md
       - basic_training/orientation.md
@@ -48,28 +50,6 @@ nav:
       - advanced/configuration.md
       - advanced/summary.md
       - advanced/support.md
-  - Configure nf-core:
-      - nf_customize/index.md
-      - nf_customize/01_orientation.md
-      - nf_customize/02_nf-core.md
-      - nf_customize/03_execution.md
-      - nf_customize/04_config.md
-      - nf_customize/05_tools.md
-  - Develop nf-core:
-      - nf_develop/index.md
-      - nf_develop/1_01_orientation.md
-      - nf_develop/1_02_create.md
-      - nf_develop/1_03_pipeline.md
-      - nf_develop/1_04_parameters.md
-  - Troubleshooting:
-      - troubleshoot/index.md
-      - troubleshoot/01_orientation.md
-      - troubleshoot/01_exercise.md
-      - troubleshoot/02_exercise.md
-      - troubleshoot/03_exercise.md
-      - troubleshoot/04_exercise.md
-      - troubleshoot/05_exercise.md
-      - troubleshoot/06_exercise.md
 
 theme:
   name: material
@@ -98,7 +78,7 @@ theme:
     - content.code.annotate
     - content.code.copy
     - navigation.footer
-    - navigation.tabs
+    - navigation.instant
     - navigation.top
     - navigation.tracking
     - search.share
@@ -129,7 +109,7 @@ extra:
       We use cookies to recognize your repeated visits and preferences, as well
       as to measure the effectiveness of our documentation and whether users
       find what they're searching for. With your consent, you're helping us to
-      make our documentation better.
+      make our training materials better.
   # Overridden in docs/assets/overrides/partials/social.html
   # Still needs to be set to something here so that the partial is used
   social:
@@ -169,12 +149,10 @@ plugins:
   - enumerate-headings:
       restart_increment_after:
         - envsetup/01_setup.md
-        - hello_nextflow/01_orientation.md
+        - hello_nextflow/00_orientation.md
+        - nf4_science/genomics/00_orientation.md
         - basic_training/orientation.md
         - advanced/orientation.md
-        - nf_customize/01_orientation.md
-        - nf_develop/1_01_orientation.md
-        - troubleshoot/01_orientation.md
 
       exclude:
         - index.md
@@ -188,6 +166,11 @@ plugins:
         - hands_on/solutions/*md
         - envsetup/*.md
         - hello_nextflow/*.md
+        - nf4_science/genomics/*.md
+        - basic_training/index.md
+        - basic_training/orientation.md
+        - advanced/index.md
+        - advanced/orientation.md
   - i18n:
       docs_structure: suffix
       fallback_to_default: true
