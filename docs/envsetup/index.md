@@ -13,7 +13,7 @@ Let's get started!
 For more detailed instructions for GitHub Codespaces, see the [GitHub Codespaces env-setup docs](01_setup.md).
 If you cannot use GitHub Codespaces and wish to use a local development environment, see the [documentation for local installation](02_local.md).
 
-!!! note
+!!! info "Deprecation of GitPod"
 
     Nextflow Training used to use [Gitpod](https://gitpod.io) until February 2025.
     However, the makers of Gitpod have decided to retire the free functionality in favor of their new [Gitpod Flex](https://www.gitpod.io/blog/introducing-gitpod-flex) system.

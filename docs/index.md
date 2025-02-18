@@ -26,7 +26,7 @@ When you're ready to get down to work, click on the 'Open in GitHub Codespaces' 
 
 !!! exercise "Environment Setup"
 
-    !!! quote inline end ""
+    !!! tip inline end ""
 
         :material-lightbulb: Set up your environment for the first time.
 
@@ -40,7 +40,7 @@ These are foundational, domain-agnostic courses intended for those who are compl
 
 !!! exercise "Hello Nextflow"
 
-    !!! quote inline end ""
+    !!! tip inline end ""
 
         :material-run-fast: Learn to develop pipelines in Nextflow.
 
@@ -48,12 +48,14 @@ These are foundational, domain-agnostic courses intended for those who are compl
 
     [Launch the Hello Nextflow training :material-arrow-right:](hello_nextflow/index.md){ .md-button .md-button--primary }
 
-**Coming soon:** "Nextflow Run" — Learn to run Nextflow pipelines (run only, no code development)
+!!! info ""
+
+    **Coming soon:** "Nextflow Run" — Learn to run Nextflow pipelines (run only, no code development)
 
 <!-- COMMENTED OUT UNTIL THIS IS READY
 !!! exercise "Nextflow Run"
 
-    !!! quote inline end ""
+    !!! tip inline end ""
 
         :material-run-fast: Learn to run Nextflow pipelines.
 
@@ -68,7 +70,7 @@ These are courses that demonstrate how to apply the concepts and components pres
 
 !!! exercise "Nextflow for Genomics"
 
-    !!! quote inline end ""
+    !!! tip inline end ""
 
         :material-run-fast: Learn to develop a pipeline for genomics in Nextflow.
 
@@ -76,12 +78,14 @@ These are courses that demonstrate how to apply the concepts and components pres
 
     [Launch the Nextflow for Genomics training :material-arrow-right:](nf4_science/genomics/){ .md-button .md-button--primary }
 
-**Coming soon:** "Nextflow for RNAseq" — Learn to develop a pipeline for bulk RNAseq analysis in Nextflow
+!!! info ""
+
+    **Coming soon:** "Nextflow for RNAseq" — Learn to develop a pipeline for bulk RNAseq analysis in Nextflow
 
 <!-- COMMENTED OUT UNTIL THIS IS READY
 !!! exercise "Nextflow for RNAseq"
 
-    !!! quote inline end ""
+    !!! tip inline end ""
 
         :material-run-fast: Learn to develop a pipeline for bulk RNAseq analysis in Nextflow.
 
@@ -97,7 +101,7 @@ These are courses that demonstrate how to use Nextflow features in more detail o
 <!-- COMMENTED OUT UNTIL THE FIRST ONE IS READY
 !!! exercise "Side Quests"
 
-    !!! quote inline end ""
+    !!! tip inline end ""
 
         :material-run-fast: Training modules for a variety of topics of interest.
 
@@ -108,7 +112,7 @@ These are courses that demonstrate how to use Nextflow features in more detail o
 
 !!! exercise "Fundamentals Training"
 
-    !!! tip inline end ""
+    !!! quote inline end ""
 
         :material-lightbulb: Comprehensive training material for exploring the full scope of Nextflow's capabilities.
 
