@@ -1,6 +1,6 @@
-# Nextflow Training [![gitlocalized ](https://gitlocalize.com/repo/8431/pt/badge.svg)](#)[![gitlocalized ](https://gitlocalize.com/repo/8431/fr/badge.svg)](#)[![gitlocalized ](https://gitlocalize.com/repo/8431/es/badge.svg)](#)
+# Nextflow Training
 
-## » <https://training.nextflow.io> «
+## <https://training.nextflow.io>
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
