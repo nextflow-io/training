@@ -1,6 +1,4 @@
-FROM gitpod/workspace-base
-
-USER root
+FROM mcr.microsoft.com/devcontainers/universal:linux
 
 # Install util tools.
 # software-properties-common is needed to add ppa support for Apptainer installation
@@ -27,31 +25,17 @@ RUN add-apt-repository -y ppa:apptainer/ppa && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-# Install Conda
-RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
-    bash Miniconda3-latest-Linux-x86_64.sh -b -p /opt/conda && \
-    rm Miniconda3-latest-Linux-x86_64.sh
-
-ENV PATH="/opt/conda/bin:$PATH"
-
-# User permissions
-RUN mkdir -p /workspace/data \
-    && chown -R gitpod:gitpod /opt/conda /workspace/data
-
-# Install Tower Agent
+# Install Seqera Platform "Tower Agent"
 RUN curl -fSL https://github.com/seqeralabs/tower-agent/releases/latest/download/tw-agent-linux-x86_64 > tw-agent && \
     chmod +x tw-agent && \
     mv tw-agent /usr/local/bin/tw-agent
-
-# Change user to gitpod
-USER gitpod
 
 # Uncomment if we need to pin the Nextflow version
 ENV NXF_EDGE=0
 ENV NXF_VER=24.10.0
 
 # Install nextflow, nf-core, Mamba, and pytest-workflow
-RUN conda config --add channels defaults && \
+RUN conda config --remove channels defaults && \
     conda config --add channels bioconda && \
     conda config --add channels conda-forge && \
     conda config --set channel_priority strict && \
