@@ -31,7 +31,7 @@ jobs:
         uses: docker/build-push-action@v5
         if: github.event_name != 'release'
         with:
-          file: .github/gitpod.Dockerfile
+          file: .devcontainer/Dockerfile
           push: ${{ github.event_name == 'push' }}
           tags: ghcr.io/nextflow-io/training:latest
 
@@ -39,6 +39,6 @@ jobs:
         uses: docker/build-push-action@v5
         if: github.event_name == 'release'
         with:
-          file: .github/gitpod.Dockerfile
+          file: .devcontainer/Dockerfile
           push: true
           tags: ghcr.io/nextflow-io/training:${{ github.event.release.tag_name }}
