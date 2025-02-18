@@ -1,18 +1,21 @@
 {
-    "name": "nfcore",
-    "build": {
-        "dockerfile": "Dockerfile",
-        "context": ".."
-    },
-    "remoteUser": "gitpod",
+    "name": "nextflow-training",
+
+    // Comment this and uncomment "build" if testing Dockerfile
+    // "image": "ghcr.io/nextflow-io/training:latest",
+
+    // Comment this and uncomment "image" before release
+    "build": { "dockerfile": "Dockerfile", "context": ".." },
+
     "features": {
-        "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
+        "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {
+            "version": "latest"
+        },
+        "ghcr.io/devcontainers/features/common-utils:2": { "version": "latest" }
     },
-    "workspaceFolder": "/workspaces/training/",
-    "workspaceMount": "source=${localWorkspaceFolder},target=${localWorkspaceFolder},type=bind",
     "remoteEnv": {
         "NXF_HOME": "/workspaces/.nextflow",
-        "HOST_PROJECT_PATH": "${localWorkspaceFolder}"
+        "HOST_PROJECT_PATH": "/workspaces/training/"
     },
     // Configure tool-specific properties.
     "customizations": {
@@ -26,17 +29,11 @@
             "extensions": [
                 "ms-python.python",
                 "ms-python.vscode-pylance",
-                "nf-core.nf-core-extensionpack",
-                "nextflow.nextflow",
-                "codezombiech.gitignore"
+                "nf-core.nf-core-extensionpack", // nf-core recommended extensions
+                "nextflow.nextflow", // Nextflow VS Code extension
+                "codezombiech.gitignore", // Language support for .gitignore files
+                "cssho.vscode-svgviewer" // SVG viewer
             ]
         }
-    },
-    "portsAttributes": {
-        "3000": {
-            "label": "Application",
-            "onAutoForward": "openPreview"
-        }
-    },
-    "postCreateCommand": "mkdir -p /workspace && ln -s /workspaces /workspace/gitpod"
+    }
 }
