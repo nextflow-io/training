@@ -1,10 +1,12 @@
 {
     "name": "nextflow-training",
+
+    // Comment this and uncomment "build" if testing Dockerfile
     // "image": "ghcr.io/nextflow-io/training:latest",
-    "build": {
-        "dockerfile": "Dockerfile",
-        "context": ".."
-    },
+
+    // Comment this and uncomment "image" before release
+    "build": { "dockerfile": "Dockerfile", "context": ".." },
+
     "features": {
         "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {
             "version": "latest"
