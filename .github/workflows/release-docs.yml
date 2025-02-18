@@ -12,6 +12,7 @@ on:
 
 permissions:
   contents: write
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -46,4 +47,4 @@ jobs:
           git add .
           git status
           git commit -m "[automated] Pin GitHub Codespaces link versions"
-          git push
+          git push --set-upstream origin gh-pages
