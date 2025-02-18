@@ -1,5 +1,6 @@
 {
-    "name": "nfcore",
+    "name": "nextflow-training",
+    // "image": "ghcr.io/nextflow-io/training:latest",
     "build": {
         "dockerfile": "Dockerfile",
         "context": ".."
@@ -8,8 +9,6 @@
     "features": {
         "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
     },
-    "workspaceFolder": "/workspaces/training/",
-    "workspaceMount": "source=/workspaces/training/,target=/workspaces/training/,type=bind",
     "remoteEnv": {
         "NXF_HOME": "/workspaces/.nextflow",
         "HOST_PROJECT_PATH": "/workspaces/training/"
@@ -32,12 +31,5 @@
                 "cssho.vscode-svgviewer" // SVG viewer
             ]
         }
-    },
-    "portsAttributes": {
-        "3000": {
-            "label": "Application",
-            "onAutoForward": "openPreview"
-        }
-    },
-    "postCreateCommand": "cd hello-nextflow && printf 'unset JAVA_TOOL_OPTIONS\n' >> $HOME/.bashrc && source $HOME/.bashrc && export PS1='\\[\\e[3;36m\\]${PWD/*//} ->\\[\\e[0m\\] ' && clear"
+    }
 }

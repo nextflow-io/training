@@ -30,9 +30,14 @@ RUN curl -fSL https://github.com/seqeralabs/tower-agent/releases/latest/download
     chmod +x tw-agent && \
     mv tw-agent /usr/local/bin/tw-agent
 
+# Set up directories
+RUN mkdir -p /workspaces/.nextflow && \
+    /workspaces/training/
+
 # Uncomment if we need to pin the Nextflow version
 ENV NXF_EDGE=0
 ENV NXF_VER=24.10.0
+ENV NXF_HOME=/workspaces/.nextflow
 
 # Install nextflow, nf-core, Mamba, and pytest-workflow
 RUN conda config --remove channels defaults && \
@@ -52,9 +57,13 @@ RUN conda config --remove channels defaults && \
         pytest-workflow && \
     conda clean --all --force-pkgs-dirs --yes
 
+# Cleanup
+RUN printf 'unset JAVA_TOOL_OPTIONS\n' >> $HOME/.bashrc
+
 # Update Nextflow
 RUN nextflow self-update && nextflow -version
 
 RUN unset JAVA_TOOL_OPTIONS
 
-RUN export PS1='\t -> '
+# RUN export PS1='\t -> '
+RUN export PS1='\[\e[3;36m\]${PWD/*//} ->\[\e[0m\] '
