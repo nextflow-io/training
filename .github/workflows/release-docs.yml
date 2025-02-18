@@ -21,6 +21,11 @@ jobs:
       - name: Install Dependencies
         run: pip install -r requirements.txt
 
+      - name: Configure git
+        run: |
+          git config user.name "Seqera Commmunity Team"
+          git config user.email "community@seqera.io"
+
       - name: Build Docs Website
         run: mike deploy --alias-type copy --update-aliases ${{ github.event.release.tag_name }} latest
 
@@ -29,5 +34,7 @@ jobs:
           git checkout gh-pages
           find ${{ github.event.release.tag_name }} -type f -exec sed -i 's|ref=master|ref=${{ github.event.release.tag_name }}|g' {} +
           find latest -type f -exec sed -i 's|ref=master|ref=${{ github.event.release.tag_name }}|g' {} +
-          git commit -am "Pin GitHub Codespaces link versions"
+          git add .
+          git status
+          git commit -m "[automated] Pin GitHub Codespaces link versions"
           git push
