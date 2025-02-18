@@ -3,6 +3,12 @@ name: Publish docs [release]
 on:
   release:
     types: [published]
+  workflow_dispatch:
+    inputs:
+      version:
+        type: string
+        description: Docs version
+        required: true
 
 permissions:
   contents: write
@@ -10,6 +16,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+      - name: Set version variable
+        run: echo "VERSION=${{ github.event.release.tag_name || github.event.inputs.version }}" >> $GITHUB_ENV
+
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
@@ -27,13 +36,13 @@ jobs:
           git config user.email "community@seqera.io"
 
       - name: Build Docs Website
-        run: mike deploy --alias-type copy --update-aliases ${{ github.event.release.tag_name }} latest
+        run: mike deploy --alias-type copy --update-aliases $VERSION latest
 
       - name: Pin GitHub Codespaces version
         run: |
           git checkout gh-pages
-          find ${{ github.event.release.tag_name }} -type f -exec sed -i 's|ref=master|ref=${{ github.event.release.tag_name }}|g' {} +
-          find latest -type f -exec sed -i 's|ref=master|ref=${{ github.event.release.tag_name }}|g' {} +
+          find "$VERSION" -type f -exec sed -i "s|ref=master|ref=$VERSION|g" {} +
+          find latest -type f -exec sed -i "s|ref=master|ref=$VERSION|g" {} +
           git add .
           git status
           git commit -m "[automated] Pin GitHub Codespaces link versions"
