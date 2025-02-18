@@ -3,6 +3,7 @@ FROM mcr.microsoft.com/devcontainers/universal:linux
 # Install util tools.
 # software-properties-common is needed to add ppa support for Apptainer installation
 RUN apt-get update --quiet && \
+    export DEBIAN_FRONTEND=noninteractive && \
     apt-get install --quiet --yes \
         apt-transport-https \
         apt-utils \
@@ -32,7 +33,7 @@ RUN curl -fSL https://github.com/seqeralabs/tower-agent/releases/latest/download
 
 # Set up directories
 RUN mkdir -p /workspaces/.nextflow && \
-    /workspaces/training/
+    mkdir -p /workspaces/training/
 
 # Uncomment if we need to pin the Nextflow version
 ENV NXF_EDGE=0
