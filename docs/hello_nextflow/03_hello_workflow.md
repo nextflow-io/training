@@ -204,7 +204,7 @@ Let's have a look inside the work directory of one of the calls to the second pr
 
 ```console title="Directory contents"
 work/b3/d52708edba8b864024589285cb3445/
-├── Bonjour-output.txt -> /workspace/gitpod/hello-nextflow/work/79/33b2f0af8438486258d200045bd9e8/Bonjour-output.txt
+├── Bonjour-output.txt -> /workspaces/training/hello-nextflow/work/79/33b2f0af8438486258d200045bd9e8/Bonjour-output.txt
 └── UPPER-Bonjour-output.txt
 ```
 
@@ -510,10 +510,10 @@ Launching `hello-workflow.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726
 [d6/cdf466] sayHello (1)       | 3 of 3, cached: 3 ✔
 [99/79394f] convertToUpper (2) | 3 of 3, cached: 3 ✔
 [1e/83586c] collectGreetings   | 1 of 1 ✔
-Before collect: /workspace/gitpod/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt
-Before collect: /workspace/gitpod/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt
-Before collect: /workspace/gitpod/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Holà-output.txt
-After collect: [/workspace/gitpod/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt, /workspace/gitpod/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt, /workspace/gitpod/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Holà-output.txt]
+Before collect: /workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt
+Before collect: /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt
+Before collect: /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Holà-output.txt
+After collect: [/workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt, /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt, /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Holà-output.txt]
 ```
 
 This time the third step was only called once!

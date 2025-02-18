@@ -32,7 +32,7 @@ These files will be used in this training module.
     Open the GitHub Codespaces environment switch to the `nf-customize` folder. View the files in this folder using the `tree` command:
 
     ```bash
-    cd /workspace/gitpod/nf-customize
+    cd /workspaces/training/nf-customize
     tree .
     ```
 

@@ -589,7 +589,7 @@ Importantly, this means each item can now be processed separately by the workflo
 
 ### Takeaway
 
-You know how to use an operator like `flatten()` to transform the contents of a channel, and how to use the `view()` directive to inspect channel contents before and after applying an operator.
+You know how to use an operator like `flatten()` to transform the contents of a channel, and how to use the `view()` operator to inspect channel contents before and after applying an operator.
 
 ### What's next?
 
@@ -619,7 +619,7 @@ To get started, we're going to need to make two key changes to the script:
 
 #### 4.1.1. Switch the input parameter to point to the CSV file
 
-Remember the `params.greeting` parameter we set up in Part1?
+Remember the `params.greeting` parameter we set up in Part 1?
 We're going to update it to point to the CSV file containing our greetings.
 
 In the workflow block, make the following code change:
@@ -644,7 +644,7 @@ params.greeting = 'greetings.csv'
 
 #### 4.1.2. Switch to a channel factory designed to handle a file
 
-Since we now want to use a file instead of simple values as the input, we can't use the `Channel.of()` channel factory from before.
+Since we now want to use a file instead of simple strings as the input, we can't use the `Channel.of()` channel factory from before.
 We need to switch to using a new channel factory, [`Channel.fromPath()`](https://www.nextflow.io/docs/latest/reference/channel.html#channel-path), which has some built-in functionality for handling file paths.
 
 In the workflow block, make the following code change:
@@ -683,12 +683,12 @@ Launching `hello-channels.nf` [adoring_bhabha] DSL2 - revision: 8ce25edc39
 ERROR ~ Error executing process > 'sayHello (1)'
 
 Caused by:
-  File `/workspace/gitpod/hello-nextflow/data/greetings.csv-output.txt` is outside the scope of the process work directory: /workspace/gitpod/hello-nextflow/work/e3/c459b3c8f4029094cc778c89a4393d
+  File `/workspaces/training/hello-nextflow/data/greetings.csv-output.txt` is outside the scope of the process work directory: /workspaces/training/hello-nextflow/work/e3/c459b3c8f4029094cc778c89a4393d
 
 
 Command executed:
 
-  echo '/workspace/gitpod/hello-nextflow/data/greetings.csv' > '/workspace/gitpod/hello-nextflow/data/greetings.
+  echo '/workspaces/training/hello-nextflow/data/greetings.csv' > '/workspaces/training/hello-nextflow/data/greetings.
 ```
 
 The `Command executed:` bit (lines 13-15) is especially helpful here.
@@ -747,7 +747,7 @@ Launching `hello-channels.nf` [stoic_ride] DSL2 - revision: a0e5de507e
 
 executor >  local (3)
 [42/8fea64] sayHello (1) | 0 of 3
-Before splitCsv: /workspace/gitpod/hello-nextflow/greetings.csv
+Before splitCsv: /workspaces/training/hello-nextflow/greetings.csv
 After splitCsv: [Hello]
 After splitCsv: [Bonjour]
 After splitCsv: [Holà]
@@ -785,7 +785,7 @@ This is what the syntax looks like:
 .map { item -> item[0] }
 ```
 
-This means 'for each item in the channel, take the first of any elements it contains'.
+This means 'for each element in the channel, take the first of any items it contains'.
 
 So let's apply that to our CVS parsing.
 
@@ -834,7 +834,7 @@ Launching `hello-channels.nf` [tiny_heisenberg] DSL2 - revision: 845b471427
 
 executor >  local (3)
 [1a/1d19ab] sayHello (2) | 3 of 3 ✔
-Before splitCsv: /workspace/gitpod/hello-nextflow/greetings.csv
+Before splitCsv: /workspaces/training/hello-nextflow/greetings.csv
 After splitCsv: [Hello]
 After splitCsv: [Bonjour]
 After splitCsv: [Holà]
@@ -847,7 +847,7 @@ Looking at the output of the `view()` statements, we see the following:
 
 - A single `Before splitCsv:` statement: at that point the channel contains one item, the original file path.
 - Three separate `After splitCsv:` statements: one for each greeting, but each is contained within an array that corresponds to that line in the file.
-- Three separate `After map:` statements: one for each greeting, which are now individual items in the channel.
+- Three separate `After map:` statements: one for each greeting, which are now individual elements in the channel.
 
 You can also look at the output files to verify that each greeting was correctly extracted and processed through the workflow.
 

@@ -92,7 +92,7 @@ You'll notice a `nxf_container_env` bash function that appends our bin directory
 ```bash
 nxf_container_env() {
 cat << EOF
-export PATH="\$PATH:/workspace/gitpod/nf-training/advanced/structure/bin"
+export PATH="\$PATH:/workspaces/training/nf-training-advanced/structure/bin"
 EOF
 }
 ```

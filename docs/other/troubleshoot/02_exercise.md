@@ -3,7 +3,7 @@
 Move into the exercise 2 directory and execute the `hello-gatk.nf` script.
 
 ```bash
-cd /workspace/gitpod/troubleshoot/exercise2
+cd /workspaces/training/troubleshoot/exercise2
 nextflow run hello-gatk.nf
 ```
 

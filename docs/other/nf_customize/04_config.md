@@ -140,7 +140,7 @@ nextflow run nf-core/demo -profile singularity -param-file <path/to/params.json>
 
     ```json title="mycustomparams.json" linenums="1"
     {
-    "input": "/workspace/gitpod/nf-customize/samplesheet.csv",
+    "input": "/workspaces/training/nf-customize/samplesheet.csv",
     "outdir": "results_mycustomparams"
     }
     ```

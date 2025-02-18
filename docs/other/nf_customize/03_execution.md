@@ -226,12 +226,12 @@ The nf-core/demo pipeline will auto-detect whether a sample is single- or paired
 
     ```csv title="samplesheet.csv" linenums="1"
     sample,fastq_1,fastq_2
-    gut,/workspace/gitpod/nf-customize/data/gut_1.fastq.gz,/workspace/gitpod/nf-customize/data/gut_2.fastq.gz
-    liver,/workspace/gitpod/nf-customize/data/liver_1.fastq.gz,/workspace/gitpod/nf-customize/data/liver_2.fastq.gz
-    lung,/workspace/gitpod/nf-customize/data/lung_1.fastq.gz,/workspace/gitpod/nf-customize/data/lung_2.fastq.gz
+    gut,/workspaces/training/nf-customize/data/gut_1.fastq.gz,/workspaces/training/nf-customize/data/gut_2.fastq.gz
+    liver,/workspaces/training/nf-customize/data/liver_1.fastq.gz,/workspaces/training/nf-customize/data/liver_2.fastq.gz
+    lung,/workspaces/training/nf-customize/data/lung_1.fastq.gz,/workspaces/training/nf-customize/data/lung_2.fastq.gz
     ```
 
-    !!! warning "Make sure you save this file in your working directory (`/workspace/gitpod/nf-customize/`)"
+    !!! warning "Make sure you save this file in your working directory (`/workspaces/training/nf-customize/`)"
 
 You can use you new samplesheet with the `--input` parameter in your execution command.
 

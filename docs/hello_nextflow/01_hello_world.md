@@ -418,7 +418,7 @@ nextflow clean -before golden_cantor -n
 The output should look like this:
 
 ```console title="Output"
-Would remove /workspace/gitpod/hello-nextflow/work/a3/7be2fad5e71e5f49998f795677fd68
+Would remove /workspaces/training/hello-nextflow/work/a3/7be2fad5e71e5f49998f795677fd68
 ```
 
 If you don't see any lines output, you either did not provide a valid run name or there are no past runs to delete.
@@ -432,7 +432,7 @@ nextflow clean -before golden_cantor -f
 You should now see the following:
 
 ```console title="Output"
-Removed /workspace/gitpod/hello-nextflow/work/a3/7be2fad5e71e5f49998f795677fd68
+Removed /workspaces/training/hello-nextflow/work/a3/7be2fad5e71e5f49998f795677fd68
 ```
 
 !!! Warning

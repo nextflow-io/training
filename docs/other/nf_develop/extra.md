@@ -158,7 +158,7 @@ nf-core sync
 The tooling merges updates suggesting a git command
 
 ```bash
-cd /workspace/gitpod/nf-develop/nf-core-myfirstpipeline
+cd /workspaces/training/nf-develop/nf-core-myfirstpipeline
 git merge TEMPLATE
 ```
 

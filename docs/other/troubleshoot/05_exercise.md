@@ -3,7 +3,7 @@
 Move into the exercise 5 directory and execute the `hello-gatk.nf` script.
 
 ```bash
-cd /workspace/gitpod/troubleshoot/exercise5
+cd /workspaces/training/troubleshoot/exercise5
 nextflow run hello-gatk.nf
 ```
 
@@ -58,7 +58,7 @@ nextflow run hello-gatk.nf
     Sample        File
     or:
     Sample        File    Index
-    but found line: "NA12877/t/workspace/gitpod/troubleshoot/exercise5/work/db/0d4c6d0c8bad080cec4a1e09217159/reads_father.bam.g.vcf/t/workspace/gitpod/troubleshoot/exercise5/work/db/0d4c6d0c8bad080cec4a1e09217159/reads_father.bam.g.vcf.idx/nNA12882/t/workspace/gitpod/troubleshoot/exercise5/work/a7/84fe9e9038bed36bdbf620847b47c2/reads_son.bam.g.vcf/t/workspace/gitpod/troubleshoot/exercise5/work/a7/84fe9e9038bed36bdbf620847b47c2/reads_son.bam.g.vcf.idx/nNA12878/t/workspace/gitpod/troubleshoot/exercise5/work/59/a653a3855cf6f6c70bc7b42aff0a0d/reads_mother.bam.g.vcf/t/workspace/gitpod/troubleshoot/exercise5/work/59/a653a3855cf6f6c70bc7b42aff0a0d/reads_mother.bam.g.vcf.idx/n" with 1 fields
+    but found line: "NA12877/t/workspaces/training/troubleshoot/exercise5/work/db/0d4c6d0c8bad080cec4a1e09217159/reads_father.bam.g.vcf/t/workspaces/training/troubleshoot/exercise5/work/db/0d4c6d0c8bad080cec4a1e09217159/reads_father.bam.g.vcf.idx/nNA12882/t/workspaces/training/troubleshoot/exercise5/work/a7/84fe9e9038bed36bdbf620847b47c2/reads_son.bam.g.vcf/t/workspaces/training/troubleshoot/exercise5/work/a7/84fe9e9038bed36bdbf620847b47c2/reads_son.bam.g.vcf.idx/nNA12878/t/workspaces/training/troubleshoot/exercise5/work/59/a653a3855cf6f6c70bc7b42aff0a0d/reads_mother.bam.g.vcf/t/workspaces/training/troubleshoot/exercise5/work/59/a653a3855cf6f6c70bc7b42aff0a0d/reads_mother.bam.g.vcf.idx/n" with 1 fields
 
     ***********************************************************************
     Set the system property GATK_STACKTRACE_ON_USER_EXCEPTION (--java-options '-DGATK_STACKTRACE_ON_USER_EXCEPTION=true') to print the stack trace.
@@ -67,7 +67,7 @@ nextflow run hello-gatk.nf
         java -Dsamjdk.use_async_io_read_samtools=false -Dsamjdk.use_async_io_write_samtools=true -Dsamjdk.use_async_io_write_tribble=false -Dsamjdk.compression_level=2 -jar /gatk/gatk-package-4.5.0.0-local.jar GenomicsDBImport --sample-name-map family_trio_map.tsv --genomicsdb-workspace-path family_trio_gdb -L intervals.list
 
     Work dir:
-    /workspace/gitpod/troubleshoot/exercise5/work/a3/fa7fab1e9d1a1e0ec2d65e87b9cebf
+    /workspaces/training/troubleshoot/exercise5/work/a3/fa7fab1e9d1a1e0ec2d65e87b9cebf
 
     Tip: view the complete command output by changing to the process work dir and entering the command `cat .command.out`
 

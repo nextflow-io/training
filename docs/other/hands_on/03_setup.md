@@ -11,7 +11,7 @@ To start, click on the button below.
 In the GitHub Codespaces window, you'll see a terminal. Type the following command to switch to the folder of this training material:
 
 ```bash
-cd /workspace/gitpod/hands-on
+cd /workspaces/training/hands-on
 ```
 
 ## Pipeline data and scripts
@@ -21,7 +21,7 @@ This includes all input data (in the `data` directory) and the scripts
 required by the workflow (in the `bin` directory; see [documentation](https://nextflow.io/docs/latest/sharing.html#bundling-executables-in-the-workflow)).
 
 ```bash
-tree /workspace/gitpod/hands-on
+tree /workspaces/training/hands-on
 ```
 
 ```bash
@@ -57,7 +57,7 @@ hands-on
 Make sure the following R script has execute permissions:
 
 ```bash
-chmod +x /workspace/gitpod/hands-on/bin/gghist.R
+chmod +x /workspaces/training/hands-on/bin/gghist.R
 ```
 
 ## Pulling the Docker image

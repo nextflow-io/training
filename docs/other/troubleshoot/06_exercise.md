@@ -3,14 +3,14 @@
 Move into the exercise 6 directory and execute the `hello-gatk.nf` script.
 
 ```bash
-cd /workspace/gitpod/troubleshoot/exercise6
+cd /workspaces/training/troubleshoot/exercise6
 nextflow run hello-gatk.nf
 ```
 
 !!! warning "Error message"
 
     ```
-    ERROR ~ No such file or directory: /workspace/gitpod/troubleshoot/exercise6/data/samplesheet.csv
+    ERROR ~ No such file or directory: /workspaces/training/troubleshoot/exercise6/data/samplesheet.csv
 
     -- Check '.nextflow.log' file for details
     ```
@@ -19,15 +19,15 @@ nextflow run hello-gatk.nf
 
     The error message suggests that the path to the `samplesheet.csv` is incorrect.
 
-    Searching the file directory, indeed, `/workspace/gitpod/troubleshoot/exercise6/data/samplesheet.csv` does not exist.
+    Searching the file directory, indeed, `/workspaces/training/troubleshoot/exercise6/data/samplesheet.csv` does not exist.
 
-    The complete path should be `/workspace/gitpod/troubleshoot/data/samplesheet.csv`.
+    The complete path should be `/workspaces/training/troubleshoot/data/samplesheet.csv`.
 
     By examining how the path to `samplesheet.csv` is derived it can be seen that there is no obvious path error.
 
     ```console title="hello-gatk.nf" linenums="5"
     // Execution environment setup
-    params.baseDir = "/workspace/gitpod/troubleshoot"
+    params.baseDir = "/workspaces/training/troubleshoot"
     $baseDir = params.baseDir
 
     // Primary input

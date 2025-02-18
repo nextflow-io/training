@@ -24,14 +24,11 @@ When you're ready to get down to work, click on the 'Open in GitHub Codespaces' 
 
 !!! note
 
-    The Nextflow Training used to use [Gitpod](https://gitpod.io) until Feb 2025,
-    however that free functionality has been retired in favour of their new
-    [Gitpod Flex](https://www.gitpod.io/blog/introducing-gitpod-flex) system.
-    As such, we have changed to GitHub Codespaces, which still offer a one-click
-    developer environment with no prior setup.
+    Nextflow Training used to use [Gitpod](https://gitpod.io) until February 2025.
+    However, the makers of Gitpod have decided to retire the free functionality in favor of their new [Gitpod Flex](https://www.gitpod.io/blog/introducing-gitpod-flex) system.
+    For that reason, we have switched to using GitHub Codespaces, which also offer a one-click developer environment with no prior setup.
 
-    Depending on when you signed up to GitPod and when exactly they retire the service,
-    you may still be able to launch the training in their old cloud IDE:
+    Depending on when you signed up to GitPod and when exactly they retire the service, you may still be able to launch the training in their old cloud IDE, though we cannot guarantee reliable access going forward:
     [Open in Gitpod](https://gitpod.io/#https://github.com/nextflow-io/training).
 
 ## Training Environment Setup
@@ -42,7 +39,7 @@ When you're ready to get down to work, click on the 'Open in GitHub Codespaces' 
 
         :material-lightbulb: Set up your environment for the first time.
 
-    Instructions for setting up your environment to work through training materials (all courses). Provides an orientation to the training platform as well as alternate installation instructions for working on your own local machine.
+    Instructions for setting up your environment to work through training materials (all courses). Provides an orientation to GitHub Codespaces as well as alternate installation instructions for working on your own local machine.
 
     [Launch the Environment Setup training :material-arrow-right:](envsetup/index.md){ .md-button .md-button--primary }
 
