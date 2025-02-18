@@ -166,7 +166,7 @@ Now copy the above example into your favorite text editor and save it to a file 
 
 !!! warning
 
-    For the Gitpod tutorial, make sure you are in the folder called `nf-training`
+    For the GitHub Codespaces tutorial, make sure you are in the folder called `nf-training`
 
 Execute the script by entering the following command in your terminal:
 

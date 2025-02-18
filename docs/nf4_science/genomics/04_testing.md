@@ -140,8 +140,8 @@ nf-test generate process modules/local/samtools/index/main.nf
 This creates a file in the same directory as `main.nf`, summarized in the terminal output as follows:
 
 ```console title="Output"
-Load source file '/workspace/gitpod/hello-nextflow/hello-nf-test/modules/local/samtools/index/main.nf'
-Wrote process test file '/workspace/gitpod/hello-nextflow/tests/hello-nf-test/modules/local/samtools/index/main.nf.test
+Load source file '/workspaces/training/hello-nextflow/hello-nf-test/modules/local/samtools/index/main.nf'
+Wrote process test file '/workspaces/training/hello-nextflow/tests/hello-nf-test/modules/local/samtools/index/main.nf.test
 
 SUCCESS: Generated 1 test files.
 ```

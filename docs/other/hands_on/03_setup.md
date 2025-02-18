@@ -1,15 +1,17 @@
 # Environment Setup
 
-## Gitpod
+## GitHub Codespaces
 
-This material intends to be a quick hands-on tutorial on Nextflow, so we prepared a Gitpod environment with everything you need to follow it. Gitpod offers a virtual machine with everything already set up for you, accessible from your web browser or built into your code editor (eg. VSCode). To start, click on the button below.
+This material intends to be a quick hands-on tutorial on Nextflow, so we prepared a GitHub Codespaces environment with everything you need to follow it.
+GitHub Codespaces offers a virtual machine with everything already set up for you, accessible from your web browser or built into your code editor (eg. VSCode).
+To start, click on the button below.
 
-[![Open in Gitpod](https://img.shields.io/badge/Gitpod-%20Open%20in%20Gitpod-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/nextflow-io/training)
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
-In the gitpod window, you'll see a terminal. Type the following command to switch to the folder of this training material:
+In the GitHub Codespaces window, you'll see a terminal. Type the following command to switch to the folder of this training material:
 
 ```bash
-cd /workspace/gitpod/hands-on
+cd /workspaces/training/hands-on
 ```
 
 ## Pipeline data and scripts
@@ -19,7 +21,7 @@ This includes all input data (in the `data` directory) and the scripts
 required by the workflow (in the `bin` directory; see [documentation](https://nextflow.io/docs/latest/sharing.html#bundling-executables-in-the-workflow)).
 
 ```bash
-tree /workspace/gitpod/hands-on
+tree /workspaces/training/hands-on
 ```
 
 ```bash
@@ -55,7 +57,7 @@ hands-on
 Make sure the following R script has execute permissions:
 
 ```bash
-chmod +x /workspace/gitpod/hands-on/bin/gghist.R
+chmod +x /workspaces/training/hands-on/bin/gghist.R
 ```
 
 ## Pulling the Docker image

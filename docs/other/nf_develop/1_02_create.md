@@ -103,14 +103,14 @@ When you are logged into GitHub, you can use the green `New` repository button i
 Once you have created the repository you can use `git` to push your template to GitHub.
 
 ```bash
-cd /workspace/gitpod/nf-develop/myorg-mypipeline
+cd /workspaces/training/nf-develop/myorg-mypipeline
 git remote add origin https://github.com/<USERNAME>/<REPO>.git
 git push --all origin
 ```
 
 !!! warning "https vs ssh"
 
-    When using Gitpod you must use **https** not **ssh** when adding your remote:
+    When using GitHub Codespaces you must use **https** not **ssh** when adding your remote:
 
     For example, you should use:
 

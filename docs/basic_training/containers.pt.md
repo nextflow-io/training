@@ -2,6 +2,13 @@
 description: Material de treinamento básico do Nextflow
 ---
 
+!!! warning
+
+    Some of the translations on the training portal are out of date.
+    The translated material may be incomplete or incorrect.
+    We plan to update the translations later this year.
+    In the meantime, please try to work through the English-language material if you can.
+
 # Gerencie dependências e contêineres
 
 Fluxos de trabalhos computacionais são raramente compostos de um só script ou ferramenta. Muitas vezes, eles dependem de dúzias de componentes de softwares ou bibliotecas.
@@ -181,7 +188,7 @@ docker run --volume $PWD:$PWD --workdir $PWD minha-imagem \
 Ou definir uma pasta que você queira montar como uma variável de ambiente, chamada `DATA`:
 
 ```bash
-DATA=/workspace/gitpod/nf-training/data
+DATA=/workspaces/training/nf-training/data
 docker run --volume $DATA:$DATA --workdir $PWD minha-imagem \
     salmon index -t $PWD/data/ggal/transcriptome.fa -i transcript-index
 ```

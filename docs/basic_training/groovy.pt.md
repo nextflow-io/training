@@ -3,6 +3,13 @@ title: Introdução ao Groovy
 description: Uma introdução rápida às estruturas básicas e expressões do Groovy
 ---
 
+!!! warning
+
+    Some of the translations on the training portal are out of date.
+    The translated material may be incomplete or incorrect.
+    We plan to update the translations later this year.
+    In the meantime, please try to work through the English-language material if you can.
+
 # Estruturas básicas e expressões do Groovy
 
 Nextflow é uma linguagem específica de domínio (DSL) implementada sobre a linguagem de programação Groovy, que por sua vez é um superconjunto da linguagem de programação Java. Isso significa que o Nextflow pode executar qualquer código Groovy ou Java.

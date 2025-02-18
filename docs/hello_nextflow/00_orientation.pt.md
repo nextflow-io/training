@@ -1,6 +1,6 @@
 # Orientação
 
-O ambiente Gitpod contém todo o software, código e dados necessários para este curso. Você não precisa instalar nada por conta própria. No entanto, é necessária uma conta (gratuita) para logar - e recomendamos que você reserve alguns minutos para se familiarizar com a interface.
+O ambiente Github Codespaces contém todo o software, código e dados necessários para este curso. Você não precisa instalar nada por conta própria. No entanto, é necessária uma conta (gratuita) para logar - e recomendamos que você reserve alguns minutos para se familiarizar com a interface.
 
 Caso ainda não tenha feito isso, siga [este link](../../envsetup/) antes de prosseguir.
 
@@ -20,47 +20,24 @@ Se você executar isso dentro do diretório `hello-nextflow`, verá a seguinte s
 
 ```console title="Directory contents"
 .
-├── containers
-│   ├── build
-│   ├── data
-│   ├── results
-│   └── scripts
-├── data
-│   ├── bam
-│   ├── greetings.csv
-│   ├── ref
-│   ├── sample_bams.txt
-│   └── samplesheet.csv
-├── hello-config
-│   ├── demo-params.json
-│   ├── main.nf
-│   └── nextflow.config
+├── greetings.csv
+├── hello-channels.nf
+├── hello-config.nf
 ├── hello-containers.nf
-├── hello-genomics.nf
-├── hello-modules
-│   ├── demo-params.json
-│   ├── main.nf
-│   └── nextflow.config
-├── hello-nf-core
-│   ├── data
-│   └── solution
-├── hello-nf-test
-│   ├── demo-params.json
-│   ├── main.nf
-│   ├── modules
-│   └── nextflow.config
-├── hello-operators.nf
+├── hello-modules.nf
+├── hello-workflow.nf
 ├── hello-world.nf
 ├── nextflow.config
-└── solutions
-    ├── hello-config
-    ├── hello-genomics
-    ├── hello-modules
-    ├── hello-nf-test
-    ├── hello-operators
-    └── hello-world
+├── solutions
+│   ├── 1-hello-world
+│   ├── 2-hello-channels
+│   ├── 3-hello-workflow
+│   ├── 4-hello-modules
+│   ├── 5-hello-containers
+│   └── 6-hello-config
+└── test-params.json
 
-18 directories, 17 files
+7 directories, 9 files
 ```
 
 !!!nota
@@ -71,11 +48,11 @@ Se você executar isso dentro do diretório `hello-nextflow`, verá a seguinte s
 
 - **Os arquivos `.nf`** são _scripts_ de fluxo de trabalho nomeados com base na parte do curso em que são utilizados.
 
-- **Os diretórios `hello-*`** são usados nas partes posteriores do curso, onde trabalhamos com mais de um arquivo de fluxo de trabalho.
-
 - **O arquivo `nextflow.config`** é um arquivo de configuração que define propriedades mínimas do ambiente. Você pode ignorá-lo por enquanto.
 
-- **O diretório `data`** contém os dados de entrada que usaremos na maior parte do curso. O conjunto de dados é descrito em detalhe na Parte 3, quando o introduzimos pela primeira vez.
+- **The file `greetings.csv`** contains input data we'll use in most of the course. It is described in Part 1, when we introduce it for the first time.
+
+- **The file `test-params.json`** is a file we'll use in Part 6. You can ignore it for now.
 
 - **O diretório `solutions`** contém os _scripts_ de fluxo de trabalho completos resultantes de cada etapa do curso. Eles servem como referência para verificar seu trabalho e solucionar quaisquer problemas. As informações de nome e o número presentes no nome do arquivo correspondem à etapa da parte relevante do curso. Por exemplo, o arquivo `hello-world-4.nf` é o resultado esperado ao completar as etapas 1 a 4 da Parte 1: Hello World.
 
@@ -84,7 +61,7 @@ Se você executar isso dentro do diretório `hello-nextflow`, verá a seguinte s
     Se, por algum motivo, você sair deste diretório, sempre poderá executar este comando para retornar:
 
     ```bash
-    cd /workspace/gitpod/hello-nextflow
+    cd /workspaces/training/hello-nextflow
     ```
 
 Agora, para iniciar o curso, clique na seta no canto inferior direito desta página.

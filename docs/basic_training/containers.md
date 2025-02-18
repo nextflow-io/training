@@ -126,7 +126,7 @@ docker images
 
     ??? Solution
 
-        Use your favorite editor (e.g., `vim` or `nano`) to create a file named `Dockerfile`. Alternatively, run `code Dockerfile` to create a a file named `Dockerfile` in Gitpod. Copy the following content:
+        Use your favorite editor (e.g., `vim` or `nano`) to create a file named `Dockerfile`. Alternatively, run `code Dockerfile` to create a a file named `Dockerfile`. Copy the following content:
 
         ```dockerfile linenums="1" title="Dockerfile"
         FROM debian:bullseye-slim
@@ -248,7 +248,7 @@ docker run --volume $PWD:$PWD --workdir $PWD my-image \
 Or set a folder you want to mount as an environmental variable, called `DATA`:
 
 ```bash
-DATA=/workspace/gitpod/nf-training/data
+DATA=/workspaces/training/nf-training/data
 docker run --volume $DATA:$DATA --workdir $PWD my-image \
     salmon index -t $PWD/data/ggal/transcriptome.fa -i transcript-index
 ```
@@ -429,7 +429,7 @@ In the same way that you can push Docker images to Docker Hub, you can upload Si
 
 Conda is a popular package and environment manager. The built-in support for Conda allows Nextflow workflows to automatically create and activate the Conda environment(s), given the dependencies specified by each process.
 
-In this Gitpod environment, conda is already installed.
+In this GitHub Codespaces environment, conda is already installed.
 
 ### Using conda
 
@@ -624,7 +624,7 @@ mulled-search --destination quay singularity --channel bioconda --search bowtie 
 
 !!! question "Exercise"
 
-    During the earlier RNA-Seq tutorial (script2.nf), you created an index with the salmon tool. Given you do not have salmon installed locally in the machine provided by Gitpod, you had to either run it with `-with-conda` or `-with-docker`. Your task now is to run it again `-with-docker`, but without creating your own container image. Instead, use the BioContainers image for salmon 1.7.0.
+    During the earlier RNA-Seq tutorial (script2.nf), you created an index with the salmon tool. Given you do not have salmon installed locally in the machine provided by GitHub Codespaces, you had to either run it with `-with-conda` or `-with-docker`. Your task now is to run it again `-with-docker`, but without creating your own container image. Instead, use the BioContainers image for salmon 1.7.0.
 
 
     ??? Solution

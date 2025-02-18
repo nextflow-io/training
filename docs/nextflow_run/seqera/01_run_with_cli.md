@@ -149,7 +149,7 @@ Notice that configuration for our pipeline run is being run pulled from three se
 
 - `/home/gitpod/.nextflow/config` - This is the global configuration file we just added.
 - `/home/gitpod/.nextflow/assets/nextflow-io/hello/nextflow.config` - This is the `nextflow.config` file from the `nextflow-io/hello` repository.
-- `/workspace/gitpod/nf-training/hello-nextflow/nextflow.config` - This is the `nextflow.config` file from our current working directory.
+- `/workspaces/training/nf-training/hello-nextflow/nextflow.config` - This is the `nextflow.config` file from our current working directory.
 
 Nextflow resolves these configurations at runtime with a [specific order of precedence](https://www.nextflow.io/docs/latest/config.html#configuration-file).
 The general rule, however, is that more specific configurations override less specific ones, and config/params specified on the CLI will override defaults in the config files.

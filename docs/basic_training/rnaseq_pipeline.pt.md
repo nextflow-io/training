@@ -2,6 +2,13 @@
 description: Material de treinamento básico do Nextflow
 ---
 
+!!! warning
+
+    Some of the translations on the training portal are out of date.
+    The translated material may be incomplete or incorrect.
+    We plan to update the translations later this year.
+    In the meantime, please try to work through the English-language material if you can.
+
 # Fluxo de trabalho simples de RNA-Seq
 
 Para demonstrar um cenário biomédico da vida real, nós iremos implementar uma prova de conceito de fluxo de trabalho RNA-Seq que:
@@ -42,7 +49,7 @@ nextflow run script1.nf
 Tente especificar um parâmetro de entrada diferente no seu comando de execução, por exemplo:
 
 ```bash
-nextflow run script1.nf --reads '/workspace/gitpod/nf-training/data/ggal/lung_{1,2}.fq'
+nextflow run script1.nf --reads '/workspaces/training/nf-training/data/ggal/lung_{1,2}.fq'
 ```
 
 ### :material-progress-question: Exercícios
@@ -226,7 +233,7 @@ docker.enabled = true
         │       │   ├── refseq.bin
         │       │   ├── seq.bin
         │       │   └── versionInfo.json
-        │       └── transcriptome.fa -> /workspace/Gitpod_test/data/ggal/transcriptome.fa
+        │       └── transcriptome.fa -> /workspaces/training/data/ggal/transcriptome.fa
         ├── 7f
         ```
 

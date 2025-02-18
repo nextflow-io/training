@@ -2,6 +2,13 @@
 description: Démarrer avec Nextflow
 ---
 
+!!! warning
+
+    Some of the translations on the training portal are out of date.
+    The translated material may be incomplete or incorrect.
+    We plan to update the translations later this year.
+    In the meantime, please try to work through the English-language material if you can.
+
 # Introduction
 
 ## Concepts de base

@@ -53,7 +53,7 @@ Now your if statement has been added to your main workflow file and has a defaul
     Run your pipeline with your new `skip_trim` parameter to check it is working:
 
     ```console
-    cd /workspace/gitpod/nf-develop/
+    cd /workspaces/training/nf-develop/
     nextflow run myorg-myfirstpipeline -profile test,singularity --outdir results --skip_trim
     ```
 
@@ -83,7 +83,7 @@ Executing the `nf-core pipelines lint` command from within your pipeline reposit
     Lint your pipeline:
 
     ```bash
-    cd /workspace/gitpod/nf-develop/myorg-mypipeline
+    cd /workspaces/training/nf-develop/myorg-mypipeline
     nf-core pipelines lint
     ```
 
@@ -134,7 +134,7 @@ Once you have made your edits you can click `Finished` and all changes will be a
     Execute the `nf-core pipelines schema build` command to update your schema.
 
     ```console
-    cd /workspace/gitpod/nf-develop/myorg-mypipeline
+    cd /workspaces/training/nf-develop/myorg-mypipeline
     nf-core pipelines schema build
     ```
 

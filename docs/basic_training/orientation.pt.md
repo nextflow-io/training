@@ -3,6 +3,13 @@ title: Orientação
 description: Como configurar um ambiente de desenvolvimento para executar Nextflow
 ---
 
+!!! warning
+
+    Some of the translations on the training portal are out of date.
+    The translated material may be incomplete or incorrect.
+    We plan to update the translations later this year.
+    In the meantime, please try to work through the English-language material if you can.
+
 # Orientação
 
 O ambiente do Gitpod contem dados de teste que serão utilizados nesse treinamento.
@@ -68,7 +75,7 @@ export NXF_VER=23.10.1
     Abra o [ambiente de treinamento no Gitpod](https://gitpod.io/#https://github.com/nextflow-io/training) e use o seguinte comando para ir até a pasta `nf-customize`. Visualize os arquivos nessa pasta utilizando o comando `tree`:
 
     ```bash
-    cd /workspace/gitpod/nf-training
+    cd /workspaces/training/nf-training
     tree .
     ```
 

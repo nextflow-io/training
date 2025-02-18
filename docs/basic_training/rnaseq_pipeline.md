@@ -43,7 +43,7 @@ nextflow run script1.nf
 Parameters are special in Nextflow as they can be modified at the time you execute your command, for example:
 
 ```bash
-nextflow run script1.nf --reads '/workspace/gitpod/nf-training/data/ggal/lung_{1,2}.fq'
+nextflow run script1.nf --reads '/workspaces/training/nf-training/data/ggal/lung_{1,2}.fq'
 ```
 
 Your output will look something like this:
@@ -51,7 +51,7 @@ Your output will look something like this:
 ```console title="Output"
 N E X T F L O W  ~  version 23.10.1
 Launching `script1.nf` [big_baekeland] DSL2 - revision: 86d466d737
-reads: /workspace/gitpod/nf-training/data/ggal/lung_{1,2}.fq
+reads: /workspaces/training/nf-training/data/ggal/lung_{1,2}.fq
 ```
 
 !!! question "Exercise"
@@ -261,7 +261,7 @@ work
 │       │   ├── refseq.bin
 │       │   ├── seq.bin
 │       │   └── versionInfo.json
-│       └── transcriptome.fa -> /workspace/Gitpod_test/data/ggal/transcriptome.fa
+│       └── transcriptome.fa -> /workspaces/training/data/ggal/transcriptome.fa
 ├── 7f
 ```
 

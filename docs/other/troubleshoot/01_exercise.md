@@ -3,7 +3,7 @@
 Move into the exercise 1 directory and execute the `hello-gatk.nf` script.
 
 ```bash
-cd /workspace/gitpod/troubleshoot/exercise1
+cd /workspaces/training/troubleshoot/exercise1
 nextflow run hello-gatk.nf
 ```
 
@@ -31,7 +31,7 @@ nextflow run hello-gatk.nf
       .command.sh: line 2: samtools: command not found
 
     Work dir:
-      /workspace/gitpod/troubleshoot/exercise1/work/46/e01f274e2ef1735164061d62c51169
+      /workspaces/training/troubleshoot/exercise1/work/46/e01f274e2ef1735164061d62c51169
 
     Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
 

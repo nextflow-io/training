@@ -1,6 +1,6 @@
 # Orientation
 
-The training environment contains all the software, code and data necessary to work through this training course, so you don't need to install anything yourself.
+The GitHub Codespaces environment contains all the software, code and data necessary to work through this training course, so you don't need to install anything yourself.
 However, you do need a (free) account to log in, and you should take a few minutes to familiarize yourself with the interface.
 
 If you have not yet done so, please follow [this link](../../envsetup/) before going any further.
@@ -65,7 +65,7 @@ If you run this inside `hello-nextflow`, you should see the following output:
     If for whatever reason you move out of this directory, you can always run this command to return to it (within the training environment):
 
     ```bash
-    cd /workspace/gitpod/hello-nextflow
+    cd /workspaces/training/hello-nextflow
     ```
 
 Now, to begin the course, click on the arrow in the bottom right corner of this page.

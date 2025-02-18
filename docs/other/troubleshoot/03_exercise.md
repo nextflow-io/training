@@ -3,14 +3,14 @@
 Move into the exercise 3 directory and execute the `hello-gatk.nf` script.
 
 ```bash
-cd /workspace/gitpod/troubleshoot/exercise3
+cd /workspaces/training/troubleshoot/exercise3
 nextflow run hello-gatk.nf
 ```
 
 !!! warning "Error message"
 
     ```console
-    WARN: Input tuple does not match tuple declaration in process `GATK_HAPLOTYPECALLER` -- offending value: [NA12878, /workspace/gitpod/troubleshoot/exercise3/work/aa/e0741cf287ce3a0c23f4dc12604b8c/reads_mother.bam, /workspace/gitpod/troubleshoot/exercise3/work/aa/e0741cf287ce3a0c23f4dc12604b8c/reads_mother.bam.bai]
+    WARN: Input tuple does not match tuple declaration in process `GATK_HAPLOTYPECALLER` -- offending value: [NA12878, /workspaces/training/troubleshoot/exercise3/work/aa/e0741cf287ce3a0c23f4dc12604b8c/reads_mother.bam, /workspaces/training/troubleshoot/exercise3/work/aa/e0741cf287ce3a0c23f4dc12604b8c/reads_mother.bam.bai]
     ERROR ~ Error executing process > 'GATK_HAPLOTYPECALLER (1)'
 
     Caused by:
@@ -26,7 +26,7 @@ nextflow run hello-gatk.nf
 
     This warning can be broken down to help identify the cause:
 
-    You can immediately see that the `GATK_HAPLOTYPECALLER` has an offending value `[NA12878, /workspace/gitpod/troubleshoot/exercise3/work/aa/e0741cf287ce3a0c23f4dc12604b8c/reads_mother.bam, /workspace/gitpod/troubleshoot/exercise3/work/aa/e0741cf287ce3a0c23f4dc12604b8c/reads_mother.bam.bai]`.
+    You can immediately see that the `GATK_HAPLOTYPECALLER` has an offending value `[NA12878, /workspaces/training/troubleshoot/exercise3/work/aa/e0741cf287ce3a0c23f4dc12604b8c/reads_mother.bam, /workspaces/training/troubleshoot/exercise3/work/aa/e0741cf287ce3a0c23f4dc12604b8c/reads_mother.bam.bai]`.
 
     _Your offending value may be NA12878, NA12877, or NA12882_
 

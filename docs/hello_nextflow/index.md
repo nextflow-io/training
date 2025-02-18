@@ -12,9 +12,9 @@ The rise of big data has made it increasingly necessary to be able to analyze an
 
 During this training, you will be introduced to Nextflow in a series of complementary hands-on workshops.
 
-Let's get started! Click on the "Open in Gitpod" button below.
+Let's get started! Click on the "Open in GitHub Codespaces" button below.
 
-[![Open in Gitpod](https://img.shields.io/badge/Gitpod-%20Open%20in%20Gitpod-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/nextflow-io/training)
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
 ## Learning objectives
 

@@ -3,6 +3,13 @@ titre: Cache et reprise
 description: Atelier de formation de base Nextflow
 ---
 
+!!! warning
+
+    Some of the translations on the training portal are out of date.
+    The translated material may be incomplete or incorrect.
+    We plan to update the translations later this year.
+    In the meantime, please try to work through the English-language material if you can.
+
 # Cache d'exécution et reprise
 
 Le mécanisme de mise en cache de Nextflow fonctionne en attribuant un identifiant unique à chaque tâche qui est utilisé pour créer un répertoire d'exécution distinct où les tâches sont exécutées et les résultats stockés.

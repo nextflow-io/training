@@ -2,6 +2,13 @@
 description: Como configurar um ambiente de desenvolvimento para executar o Nextflow
 ---
 
+!!! warning
+
+    Some of the translations on the training portal are out of date.
+    The translated material may be incomplete or incorrect.
+    We plan to update the translations later this year.
+    In the meantime, please try to work through the English-language material if you can.
+
 # Configuração do ambiente
 
 Existem duas principais maneiras de começar este treinamento da Comunidade do Nextflow.
@@ -10,7 +17,7 @@ A primeira é instalar os requisitos [localmente](#instalacao-local), o que é m
 
 A segunda é usar o [Gitpod](#gitpod), o que é melhor para iniciantes, pois esta plataforma contém todos os programas e dados necessários. Basta clicar no link abaixo e fazer login usando sua conta do GitHub para iniciar o tutorial:
 
-[![Abra no Gitpod](https://img.shields.io/badge/Gitpod-%20Abra%20no%20Gitpod-908a85?logo=gitpod)](https://gitpod.io/#https://github.com/nextflow-io/training)
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
 ## Instalação local
 

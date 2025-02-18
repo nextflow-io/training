@@ -683,12 +683,12 @@ Launching `hello-channels.nf` [adoring_bhabha] DSL2 - revision: 8ce25edc39
 ERROR ~ Error executing process > 'sayHello (1)'
 
 Caused by:
-  File `/workspace/gitpod/hello-nextflow/data/greetings.csv-output.txt` is outside the scope of the process work directory: /workspace/gitpod/hello-nextflow/work/e3/c459b3c8f4029094cc778c89a4393d
+  File `/workspaces/training/hello-nextflow/data/greetings.csv-output.txt` is outside the scope of the process work directory: /workspaces/training/hello-nextflow/work/e3/c459b3c8f4029094cc778c89a4393d
 
 
 Command executed:
 
-  echo '/workspace/gitpod/hello-nextflow/data/greetings.csv' > '/workspace/gitpod/hello-nextflow/data/greetings.
+  echo '/workspaces/training/hello-nextflow/data/greetings.csv' > '/workspaces/training/hello-nextflow/data/greetings.
 ```
 
 The `Command executed:` bit (lines 13-15) is especially helpful here.
@@ -747,7 +747,7 @@ Launching `hello-channels.nf` [stoic_ride] DSL2 - revision: a0e5de507e
 
 executor >  local (3)
 [42/8fea64] sayHello (1) | 0 of 3
-Before splitCsv: /workspace/gitpod/hello-nextflow/greetings.csv
+Before splitCsv: /workspaces/training/hello-nextflow/greetings.csv
 After splitCsv: [Hello]
 After splitCsv: [Bonjour]
 After splitCsv: [Holà]
@@ -834,7 +834,7 @@ Launching `hello-channels.nf` [tiny_heisenberg] DSL2 - revision: 845b471427
 
 executor >  local (3)
 [1a/1d19ab] sayHello (2) | 3 of 3 ✔
-Before splitCsv: /workspace/gitpod/hello-nextflow/greetings.csv
+Before splitCsv: /workspaces/training/hello-nextflow/greetings.csv
 After splitCsv: [Hello]
 After splitCsv: [Bonjour]
 After splitCsv: [Holà]

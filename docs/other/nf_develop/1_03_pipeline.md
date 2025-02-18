@@ -28,7 +28,7 @@ Additional test profiles can be created to test different parts of your pipeline
     Run your pipeline with the `test` and `singularity` profile:
 
     ```bash
-    cd /workspace/gitpod/nf-develop
+    cd /workspaces/training/nf-develop
     nextflow run myorg-myfirstpipeline -profile test,singularity --outdir results
     ```
 
@@ -271,7 +271,7 @@ The `test` profile is perfect for this use case.
     Test your profile to see if the `SEQTK_TRIM` process is working:
 
     ```console
-    cd /workspace/gitpod/nf-develop
+    cd /workspaces/training/nf-develop
     nextflow run myorg-myfirstpipeline -profile test,singularity --outdir results
     ```
 
