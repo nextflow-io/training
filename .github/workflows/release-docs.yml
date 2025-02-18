@@ -32,8 +32,8 @@ jobs:
 
       - name: Configure git
         run: |
-          git config user.name "Seqera Commmunity Team"
-          git config user.email "community@seqera.io"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
       - name: Build Docs Website
         run: mike deploy --alias-type copy --update-aliases $VERSION latest
