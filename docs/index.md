@@ -22,15 +22,6 @@ When you're ready to get down to work, click on the 'Open in GitHub Codespaces' 
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
-!!! note
-
-    Nextflow Training used to use [Gitpod](https://gitpod.io) until February 2025.
-    However, the makers of Gitpod have decided to retire the free functionality in favor of their new [Gitpod Flex](https://www.gitpod.io/blog/introducing-gitpod-flex) system.
-    For that reason, we have switched to using GitHub Codespaces, which also offer a one-click developer environment with no prior setup.
-
-    Depending on when you signed up to GitPod and when exactly they retire the service, you may still be able to launch the training in their old cloud IDE, though we cannot guarantee reliable access going forward:
-    [Open in Gitpod](https://gitpod.io/#https://github.com/nextflow-io/training).
-
 ## Training Environment Setup
 
 !!! exercise "Environment Setup"
