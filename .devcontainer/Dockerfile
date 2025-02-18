@@ -18,7 +18,6 @@ RUN apt-get update --quiet && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-# Taken from: https://github.com/nf-core/tools/blob/master/nf_core/gitpod/gitpod.Dockerfile
 # Install Apptainer (Singularity)
 RUN add-apt-repository -y ppa:apptainer/ppa && \
     apt-get update --quiet && \

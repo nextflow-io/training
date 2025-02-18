@@ -5,9 +5,11 @@
         "dockerfile": "Dockerfile",
         "context": ".."
     },
-    "remoteUser": "gitpod",
     "features": {
-        "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
+        "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {
+            "version": "latest"
+        },
+        "ghcr.io/devcontainers/features/common-utils:2": { "version": "latest" }
     },
     "remoteEnv": {
         "NXF_HOME": "/workspaces/.nextflow",
