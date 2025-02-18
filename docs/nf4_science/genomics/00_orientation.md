@@ -65,7 +65,7 @@ _Completed workflows (solutions) will be added in the near future._
     If for whatever reason you move out of this directory, you can always run this command to return to it:
 
     ```bash
-    cd /workspace/gitpod/nf4-science/genomics
+    cd /workspaces/training/nf4-science/genomics
     ```
 
 Now, to begin the course, click on the arrow in the bottom right corner of this page.
