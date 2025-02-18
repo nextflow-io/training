@@ -40,7 +40,7 @@ If you run this inside `tapas`, you should see the following output: [TODO]
     If for whatever reason you move out of this directory, you can always run this command to return to it:
 
     ```bash
-    cd /workspace/gitpod/tapas
+    cd /workspaces/training/tapas
     ```
 
 Now, to begin the course, click on the arrow in the bottom right corner of this page.
