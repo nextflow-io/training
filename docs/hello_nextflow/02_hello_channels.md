@@ -53,7 +53,7 @@ We are going to create a **channel** to pass the variable input to the `sayHello
 
 There are a variety of **channel factories** that we can use to set up a channel.
 To keep things simple for now, we are going to use the most basic channel factory, called `Channel.of`, which will create a channel containing a single value.
-Functionally this will be exactly equivalent to how we had it set up before, but explicit instead of implicit.
+Functionally this will be similar to how we had it set up before, but instead of having Nextflow create a channel implicitly, we are doing this explicitly now.
 
 This is the line of code we're going to use:
 
