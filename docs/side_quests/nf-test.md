@@ -188,7 +188,7 @@ https://www.nf-test.com
 
 Test Workflow main.nf
 
-  Test [1d4aaf12] 'Should run without failures' FAILED (1.325s)
+  Test [693ba951] 'Should run without failures' FAILED (4.652s)
 
   Assertion failed:
 
@@ -198,10 +198,17 @@ Test Workflow main.nf
 
   Nextflow stdout:
 
-  ERROR ~ No such file or directory: /workspace/gitpod/hello-nextflow/hello-nf-test-part1/.nf-test/tests/1d4aaf120a1c8314a4310f6a54a0c243/greetings.csv
+  ERROR ~ No such file or directory: /workspaces/training/side-quests/nf-test/.nf-test/tests/693ba951a20fec36a5a9292ed1cc8a9f/greetings.csv
 
-   -- Check '/workspace/gitpod/hello-nextflow/hello-nf-test-part1/.nf-test/tests/1d4aaf120a1c8314a4310f6a54a0c243/meta/nextflow.log' file for details
+   -- Check '/workspaces/training/side-quests/nf-test/.nf-test/tests/693ba951a20fec36a5a9292ed1cc8a9f/meta/nextflow.log' file for details
   Nextflow stderr:
+
+  Nextflow 24.10.4 is available - Please consider updating your version to it
+
+
+
+
+FAILURE: Executed 1 tests in 4.679s (1 failed)
 ```
 
 The test fails! What happened?
@@ -228,7 +235,7 @@ then {
 Note how nf-test has reported the pipeline failed and provided the error message from Nextflow:
 
 ```console title="Error"
-ERROR ~ No such file or directory: /workspace/gitpod/hello-nextflow/hello-nf-test-part1/.nf-test/tests/1d4aaf120a1c8314a4310f6a54a0c243/greetings.csv
+ERROR ~ No such file or directory: /workspaces/training/side-quests/nf-test/.nf-test/tests/693ba951a20fec36a5a9292ed1cc8a9f/greetings.csv
 ```
 
 So what was the issue? Remember the pipeline has a greetings.csv file in the project directory. When nf-test runs the pipeline, it will look for this file, but it can't find it. The file is there, what's happening? Well, if we look at the path we can see the test is occurring in the path `./nf-test/tests/longHashString/`. Just like Nextflow, nf-test creates a new directory for each test to keep everything isolated. The data file is not located in there so we must correct the path to the file in the original test.
