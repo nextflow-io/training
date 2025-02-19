@@ -13,10 +13,10 @@ As you develop your pipeline, it will quickly become so complex that manually te
 
 Testing allows you to systematically check that every part of your pipeline is working as expected. The benefits to a developer are huge:
 
--   **Confidence**: Because the tests cover the entire pipeline, you can be be confident changing something doesn't affect anything else
--   **Trust**: When multiple developers work on the pipeline, they know the other developers haven't broken the pipeline and every component.
--   **Transparency**: The tests show where a pipeline is failing and make it easier to track down the problem. They also function as a form of documentation, showing how to run a process or workflow.
--   **Speed**: Because the tests are automated, they can be run very quickly and repeatedly. You can iterate quickly with less fear of introducing new bugs.
+- **Confidence**: Because the tests cover the entire pipeline, you can be be confident changing something doesn't affect anything else
+- **Trust**: When multiple developers work on the pipeline, they know the other developers haven't broken the pipeline and every component.
+- **Transparency**: The tests show where a pipeline is failing and make it easier to track down the problem. They also function as a form of documentation, showing how to run a process or workflow.
+- **Speed**: Because the tests are automated, they can be run very quickly and repeatedly. You can iterate quickly with less fear of introducing new bugs.
 
 There are lots of different types of tests we can write:
 
@@ -157,13 +157,13 @@ We'll take a second to understand the structure of the test file.
 
 The `nextflow_pipeline` block is the entry point for all pipeline level tests. It contains the following:
 
--   `name`: The name of the test.
--   `script`: The path to the pipeline script.
+- `name`: The name of the test.
+- `script`: The path to the pipeline script.
 
 The `test` block is the actual test. It contains the following:
 
--   `when`: The conditions under which the test should be run. This includes the parameters that will be used to run the pipeline.
--   `then`: The assertions that should be made. This includes the expected outcomes of the pipeline.
+- `when`: The conditions under which the test should be run. This includes the parameters that will be used to run the pipeline.
+- `then`: The assertions that should be made. This includes the expected outcomes of the pipeline.
 
 In plain English, the logic of the test reads as follows:
 "**When** these _parameters_ are provided to this _pipeline_, **then** we expect to see these results."
@@ -573,8 +573,8 @@ This represents the outputs created by the `sayHello` process, which we are test
 
 If, in the course of future development, something in the code changes that causes the output to be different, the test will fail and we will have to determine whether the change is expected or not.
 
--   If it turns out that something in the code broke, we will have to fix it, with the expectation that the fixed code will pass the test.
--   If it is an expected change (e.g., the tool has been improved and the results are better) then we will need to update the snapshot to accept the new output as the reference to match. nf-test has a parameter `--update-snapshot` for this purpose.
+- If it turns out that something in the code broke, we will have to fix it, with the expectation that the fixed code will pass the test.
+- If it is an expected change (e.g., the tool has been improved and the results are better) then we will need to update the snapshot to accept the new output as the reference to match. nf-test has a parameter `--update-snapshot` for this purpose.
 
 For now though, we can run the test again and see the test should pass:
 
@@ -636,9 +636,9 @@ This is a similar test to the `sayHello` process, but it's testing the `convertT
 
 We now need to supply a single input file to the convertToUpper process, which includes some text that we want to convert to uppercase. There are lots of ways we could do this:
 
--   We could create a dedicated file to test
--   We could re-use the existing data/greetings.csv file
--   We could create it on the fly within the test
+- We could create a dedicated file to test
+- We could re-use the existing data/greetings.csv file
+- We could create it on the fly within the test
 
 For now, let's re-use the existing data/greetings.csv file using the example we used with the pipeline level test.
 
@@ -775,6 +775,7 @@ In this side quest, we've learned:
 5. How to run all tests in a repository with a single command
 
 Testing is a critical part of pipeline development that helps ensure:
+
 - Your code works as expected
 - Changes don't break existing functionality
 - Other developers can contribute with confidence
@@ -783,6 +784,7 @@ Testing is a critical part of pipeline development that helps ensure:
 ### What's next?
 
 Check out the [nf-test documentation](https://www.nf-test.com/) for more advanced testing features and best practices. You might want to:
+
 - Add more comprehensive assertions to your tests
 - Write tests for edge cases and error conditions
 - Set up continuous integration to run tests automatically
