@@ -93,7 +93,7 @@ nf-test init
 This should produce the following output:
 
 ```bash
-🚀 nf-test 0.9.1
+🚀 nf-test 0.9.2
 https://www.nf-test.com
 (c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
 
