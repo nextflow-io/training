@@ -305,9 +305,9 @@ Template features can be flexibly included or excluded at the time of creation, 
 5. On the Template features screen, turn **off**:
 
    - `Use a GitHub repository`
-   - `Add Github CI tests`
+   - `Add GitHub CI tests`
    - `Use reference genomes`
-   - `Add Github badges`
+   - `Add GitHub badges`
    - `Include citations`
    - `Include a gitpod environment`
    - `Include GitHub Codespaces`
