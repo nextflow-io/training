@@ -289,6 +289,37 @@ SUCCESS: Executed 1 tests in 1.626s
 
 Success! The pipeline runs successfully and the test passes. Run it as many times as you like and you will always get the same result!
 
+By default, the Nextflow output is hidden, but to convince yourself that nf-test is definitely running the workflow, you can use the `--verbose` flag:
+
+```bash
+nf-test test tests/main.nf.test --verbose
+```
+```console title="Pipeline runs all processes"
+> nf-test test tests/main.nf.test
+
+🚀 nf-test 0.9.2
+https://www.nf-test.com
+(c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
+
+
+Test Workflow main.nf
+
+  Test [693ba951] 'Should run without failures'
+    > Nextflow 24.10.4 is available - Please consider updating your version to it
+    > N E X T F L O W  ~  version 24.10.0
+    > Launching `/workspaces/training/side-quests/nf-test/main.nf` [zen_ampere] DSL2 - revision: bbf79d5c31
+    > [2b/61e453] Submitted process > sayHello (2)
+    > [31/4e1606] Submitted process > sayHello (1)
+    > [bb/5209ee] Submitted process > sayHello (3)
+    > [83/83db6f] Submitted process > convertToUpper (2)
+    > [9b/3428b1] Submitted process > convertToUpper (1)
+    > [ca/0ba51b] Submitted process > convertToUpper (3)
+    PASSED (5.206s)
+
+
+SUCCESS: Executed 1 tests in 5.239s
+```
+
 ## 1.3. Add assertions
 
 A simple check is to ensure our pipeline is running all the processes we expect and not skipping any silently. Remember our pipeline runs 6 processes, one called `sayHello` and one called `convertToUpper` for each of the 3 greetings.
