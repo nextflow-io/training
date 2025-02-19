@@ -750,20 +750,6 @@ Test Process convertToUpper
 
   Test [c59b6044] 'Should run without failures' PASSED (1.798s)
 
-
-SUCCESS: Executed 1 tests in 1.811s
-
-> nf-test test .
-
-🚀 nf-test 0.9.2
-https://www.nf-test.com
-(c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
-
-
-Test Process convertToUpper
-
-  Test [c59b6044] 'Should run without failures' PASSED (1.663s)
-
 Test Workflow main.nf
 
   Test [1d4aaf12] 'Should run without failures' PASSED (1.652s)
@@ -778,6 +764,28 @@ SUCCESS: Executed 3 tests in 5.007s
 
 Check that out! We ran 3 tests, 1 for each process and 1 for the whole pipeline with a single command. Imagine how powerful this is on a large codebase!
 
-### Takeaway
+## 4.0. Summary
 
-You know how to run tests for the entire repo with a single command.
+In this side quest, we've learned:
+
+1. How to initialize nf-test in a Nextflow project
+2. How to write and run pipeline-level tests
+3. How to write and run process-level tests
+4. How to use snapshots to verify process outputs
+5. How to run all tests in a repository with a single command
+
+Testing is a critical part of pipeline development that helps ensure:
+- Your code works as expected
+- Changes don't break existing functionality
+- Other developers can contribute with confidence
+- Problems can be identified and fixed quickly
+
+### What's next?
+
+Check out the [nf-test documentation](https://www.nf-test.com/) for more advanced testing features and best practices. You might want to:
+- Add more comprehensive assertions to your tests
+- Write tests for edge cases and error conditions
+- Set up continuous integration to run tests automatically
+- Learn about other types of tests like workflow and module tests
+
+Remember: Tests are living documentation of how your code should behave. The more tests you write, the more confident you can be in your pipeline's reliability.
