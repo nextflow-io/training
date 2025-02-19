@@ -1,0 +1,16 @@
+{
+    "Should run without failures": {
+        "content": [
+            {
+                "0": [
+                    "UPPER-greetings.csv:md5,f36624b0e040fa880e61fb1304b4b6b9"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.0"
+        },
+        "timestamp": "2025-02-19T11:57:20.215132756"
+    }
+}
