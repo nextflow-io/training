@@ -1,8 +1,8 @@
-# Build and push the Docker image for GitPod
+# Build and push the Docker image for Gitpod
 # - Only pushes if push or release
 # - Builds without push for PRs to check the Dockerfile
 
-name: Build GitPod Docker image
+name: Build Gitpod Docker image
 
 on:
   pull_request:
