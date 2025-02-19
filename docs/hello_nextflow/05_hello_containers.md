@@ -265,6 +265,7 @@ You can check that it works by listing the contents of `/data`:
 ```bash
 ls /data
 ```
+
 Depending on what part of this training you've done before, the output below my look slightly different.
 
 ```console title="Output"
@@ -291,11 +292,11 @@ cat /data/greetings.csv | cowpy -c turkey
 This produces the desired ASCII art of a turkey rattling off our example greetings:
 
 ```console title="Output"
- _________ 
+ _________
 / Hello   \
 | Bonjour |
 \ Holà    /
- --------- 
+ ---------
   \                                  ,+*^^*+___+++_
    \                           ,*^^^^              )
     \                       _+*                     ^**+_
@@ -605,11 +606,11 @@ There were 3 greetings in this batch
 You can find the cowpy'ed output in the `results` directory.
 
 ```console title="results/cowpy-COLLECTED-test-batch-output.txt"
- _________ 
+ _________
 / HOLà    \
 | HELLO   |
 \ BONJOUR /
- --------- 
+ ---------
   \                                  ,+*^^*+___+++_
    \                           ,*^^^^              )
     \                       _+*                     ^**+_
