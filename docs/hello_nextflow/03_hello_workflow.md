@@ -521,7 +521,7 @@ This time the third step was only called once!
 Looking at the output of the `view()` statements, we see the following:
 
 - Three `Before collect:` statements, one for each greeting: at that point the file paths are individual items in the channel.
-- A single `After collect:` statement: the three file paths are now packaged into a singl element.
+- A single `After collect:` statement: the three file paths are now packaged into a single element.
 
 Have a look at the contents of the final output file too:
 
