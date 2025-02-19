@@ -113,8 +113,8 @@ nf-test generate pipeline main.nf
 ```console title="Output"
 > nf-test generate pipeline main.nf
 
-Load source file '/workspace/gitpod/hello-nextflow/hello-nf-test-part1/main.nf'
-Wrote pipeline test file '/workspace/gitpod/hello-nextflow/hello-nf-test-part1/tests/main.nf.test
+Load source file '/workspaces/training/side-quests/nf-test/main.nf'
+Wrote pipeline test file '/workspaces/training/side-quests/nf-test/tests/main.nf.test
 
 SUCCESS: Generated 1 test files.
 ```
@@ -348,12 +348,12 @@ then {
 then {
     assert workflow.success
     assert workflow.trace.tasks().size() == 6
-    assert file("${params.outdir}/Bonjour-output.txt").exists()
-    assert file("results/Hello-output.txt").exists()
-    assert file("results/Holà-output.txt").exists()
-    assert file("results/UPPER-Bonjour-output.txt").exists()
-    assert file("results/UPPER-Hello-output.txt").exists()
-    assert file("results/UPPER-Holà-output.txt").exists()
+    assert file("$launchDir/results/Bonjour-output.txt").exists()
+    assert file("$launchDir/results/Hello-output.txt").exists()
+    assert file("$launchDir/results/Holà-output.txt").exists()
+    assert file("$launchDir/results/UPPER-Bonjour-output.txt").exists()
+    assert file("$launchDir/results/UPPER-Hello-output.txt").exists()
+    assert file("$launchDir/results/UPPER-Holà-output.txt").exists()
 }
 ```
 
@@ -410,14 +410,14 @@ nf-test generate process main.nf
 ```console title="Output"
 > nf-test generate process main.nf
 
-Load source file '/workspace/gitpod/hello-nextflow/hello-nf-test-part1/main.nf'
-Wrote process test file '/workspace/gitpod/hello-nextflow/hello-nf-test-part1/tests/main.sayhello.nf.test
-Wrote process test file '/workspace/gitpod/hello-nextflow/hello-nf-test-part1/tests/main.converttoupper.nf.test
+Load source file '/workspaces/training/side-quests/nf-test/main.nf'
+Wrote process test file '/workspaces/training/side-quests/nf-test/tests/main.sayhello.nf.test
+Wrote process test file '/workspaces/training/side-quests/nf-test/tests/main.converttoupper.nf.test
 
 SUCCESS: Generated 2 test files.
 ```
 
-Note we have created a test for the `converttoupper` process as well. We can ignore that for now and focus on the `sayhello` process in the `main.sayhello.nf.test` file.
+Let's focus for now and focus on the `sayhello` process in the `main.sayhello.nf.test` file.
 
 Let's open the file and take a look at the contents.
 
@@ -471,7 +471,7 @@ https://www.nf-test.com
 
 Test Process sayHello
 
-  Test [f91a1bcd] 'Should run without failures' FAILED (1.347s)
+  Test [1eaad118] 'Should run without failures' FAILED (4.876s)
 
   Assertion failed:
 
@@ -484,10 +484,15 @@ Test Process sayHello
 
   Process `sayHello` declares 1 input channel but 0 were specified
 
-   -- Check script '/workspace/gitpod/hello-nextflow/hello-nf-test-part1/.nf-test-f91a1bcdafbf4c8bbd32858acdd8afd2.nf' at line: 38 or see '/workspace/gitpod/hello-nextflow/hello-nf-test-part1/.nf-test/tests/f91a1bcdafbf4c8bbd32858acdd8afd2/meta/nextflow.log' file for more details
+   -- Check script '/workspaces/training/side-quests/nf-test/.nf-test-1eaad118145a1fd798cb07e7dd75d087.nf' at line: 38 or see '/workspaces/training/side-quests/nf-test/.nf-test/tests/1eaad118145a1fd798cb07e7dd75d087/meta/nextflow.log' file for more details
   Nextflow stderr:
 
-FAILURE: Executed 1 tests in 1.35s (1 failed)
+  Nextflow 24.10.4 is available - Please consider updating your version to it
+
+
+
+
+FAILURE: Executed 1 tests in 4.884s (1 failed)
 ```
 
 The test fails because the `sayHello` process declares 1 input channel but 0 were specified. Let's fix that by adding an input to the process. Remember from part 1, our `sayHello` process takes a single value input.
@@ -546,7 +551,7 @@ If we look at the `tests/main.sayhello.nf.test` file, we can see it uses a metho
 assert snapshot(process.out).match()
 ```
 
-This is a snapshot of the output of the `sayHello` process. Let's take a look at the contents of the snapshot file.
+This is telling nf-test to create a snapshot of the output of the `sayHello` process. Let's take a look at the contents of the snapshot file.
 
 ```console title="Snapshot file contents"
 code tests/main.sayhello.nf.test.snap
@@ -560,7 +565,7 @@ We won't print it here, but you should see a JSON file containing details of the
 ]
 ```
 
-This represents the outputs created by the `sayHello` process, which we are testing explicitly. If we re-run the test, the program will check that the new output matches the output that was originally recorded. This is a quick, simple way of testing process outputs which is why nf-test provides it as a default.
+This represents the outputs created by the `sayHello` process, which we are testing explicitly. If we re-run the test, the program will check that the new output matches the output that was originally recorded. This is a quick, simple way of testing that process outputs don't change, which is why nf-test provides it as a default.
 
 !!!warning
 
@@ -569,7 +574,7 @@ This represents the outputs created by the `sayHello` process, which we are test
 If, in the course of future development, something in the code changes that causes the output to be different, the test will fail and we will have to determine whether the change is expected or not.
 
 -   If it turns out that something in the code broke, we will have to fix it, with the expectation that the fixed code will pass the test.
--   If it is an expected change (e.g., the tool has been improved and the results are better) then we will need to update the snapshot to accept the new output as the reference to match, using the parameter `--update-snapshot` when we run the test command.
+-   If it is an expected change (e.g., the tool has been improved and the results are better) then we will need to update the snapshot to accept the new output as the reference to match. nf-test has a parameter `--update-snapshot` for this purpose.
 
 For now though, we can run the test again and see the test should pass:
 
@@ -776,11 +781,3 @@ Check that out! We ran 3 tests, 1 for each process and 1 for the whole pipeline 
 ### Takeaway
 
 You know how to run tests for the entire repo with a single command.
-
-### What's next?
-
-This is a lot to learn, so celebrate and take a big break!
-
-If you already know about Nextflow and wish to learn more about nf-test, skip to nf-test part 2 which uses more real world examples.
-
-If you are still at the beginning of your Nextflow journey, you can continue to learn about containers.
