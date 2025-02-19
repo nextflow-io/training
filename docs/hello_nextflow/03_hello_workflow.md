@@ -368,7 +368,7 @@ In theory this should handle any arbitrary number of input files.
 
     Some command-line tools require providing an argument (like `-input`) for each input file.
     In that case, we would have to do a little bit of extra work to compose the command.
-    You can see an example of this in the [Nextflow for Genomics](../nf4_science/genomics/) training course.
+    You can see an example of this in the [Nextflow for Genomics](../../nf4_science/genomics/) training course.
 
 <!--[ADD LINK to note above] -->
 
@@ -536,7 +536,7 @@ This time we have all three greetings in the final output file. Success! Remove 
 !!! note
 
     If you run this several times without `-resume`, you will see that the order of the greetings changes from one run to the next.
-    This shows you that the order in which elements flow through process calls is not guaranteed to be consistent, unless you make use of fair threading (check the [fair](https://www.nextflow.io/docs/latest/reference/process.html#fair) directive).
+    This shows you that the order in which elements flow through process calls is not guaranteed to be consistent.
 
 ### Takeaway
 
@@ -793,7 +793,7 @@ But as the saying goes, why not both?
 
 ### 4.2. Report the output at the end of the workflow
 
-Now that we have two outputs coming out of the `collectGreetings` process, the `collectGreetings.out` output multi-channel contains two channels:
+Now that we have two outputs coming out of the `collectGreetings` process, the `collectGreetings.out` output contains two channels:
 
 - `collectGreetings.out.outfile` contains the final output file
 - `collectGreetings.out.count` contains the count of greetings
