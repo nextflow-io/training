@@ -294,6 +294,7 @@ By default, the Nextflow output is hidden, but to convince yourself that nf-test
 ```bash
 nf-test test tests/main.nf.test --verbose
 ```
+
 ```console title="Pipeline runs all processes"
 > nf-test test tests/main.nf.test
 
