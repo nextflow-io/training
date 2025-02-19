@@ -759,7 +759,7 @@ You know how to write tests for a Nextflow process and run them.
 
 Learn how to run tests for everything at once!
 
-## 3. Run tests for the entire repo
+## 3. Run tests for the entire repository
 
 Running nf-test on each component is fine, but laborious and error prone. Can't we just test a test on everything at once?
 
