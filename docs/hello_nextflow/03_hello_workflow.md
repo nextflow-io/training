@@ -62,13 +62,13 @@ If that worked for you, you're ready to learn how to assemble a multi-step workf
 We're going to add a step to convert the greeting to uppercase.
 To that end, we need to do three things:
 
-- Define the command we'lre going to use to do the uppercase conversion.
+- Define the command we're going to use to do the uppercase conversion.
 - Write a new process that wraps the uppercasing command.
-- Add the new process to the workflow and set it up to take the output of the `sayHello()` process as input.
+- Call the new process in the workflow block and set it up to take the output of the `sayHello()` process as input.
 
 ### 1.1. Define the uppercasing command and test it in the terminal
 
-To do the conversion of the greetings to uppercase, we're going to a classic UNIX tool called `tr` for 'text replacement', with the following syntax:
+To do the conversion of the greetings to uppercase, we're going to use a classic UNIX tool called `tr` for 'text replacement', with the following syntax:
 
 ```bash title="Syntax"
 tr '[a-z]' '[A-Z]'
@@ -338,7 +338,7 @@ Nextflow doesn't mind, so it doesn't matter.
 This is where things could get a little tricky, because we need to be able to handle an arbitrary number of input files.
 Specifically, we can't write the command up front, so we need to tell Nextflow how to compose it at runtime based on what inputs flow into the process.
 
-In other words, if we have an input channel containing the item `[file1.txt, file2.txt, file3.txt]`, we need Nextflow to turn that into `cat file1.txt file2.txt file3.txt`.
+In other words, if we have an input channel containing the element `[file1.txt, file2.txt, file3.txt]`, we need Nextflow to turn that into `cat file1.txt file2.txt file3.txt`.
 
 Fortunately, Nextflow is quite happy to do that for us if we simply write `cat ${input_files}` in the script command.
 
@@ -368,7 +368,7 @@ In theory this should handle any arbitrary number of input files.
 
     Some command-line tools require providing an argument (like `-input`) for each input file.
     In that case, we would have to do a little bit of extra work to compose the command.
-    You can see an example of this in the 'Nextflow for Genomics' training course.
+    You can see an example of this in the [Nextflow for Genomics](https://training.nextflow.io/latest/nf4_science/genomics/) training course.
 
 <!--[ADD LINK to note above] -->
 
@@ -427,13 +427,13 @@ We were only expecting one, but there are three.
 
 And have a look at the contents of the final output file too:
 
-```console title="COLLECTED-output.txt"
+```console title="results/COLLECTED-output.txt"
 Holà
 ```
 
 Oh no. The collection step was run individually on each greeting, which is NOT what we wanted.
 
-We need to do something to tell Nextflow explicitly that we want that third step to run on all the items in the channel output by `convertToUpper()`.
+We need to do something to tell Nextflow explicitly that we want that third step to run on all the elements in the channel output by `convertToUpper()`.
 
 ### 2.3. Use an operator to collect the greetings into a single input
 
@@ -521,22 +521,22 @@ This time the third step was only called once!
 Looking at the output of the `view()` statements, we see the following:
 
 - Three `Before collect:` statements, one for each greeting: at that point the file paths are individual items in the channel.
-- A single `After collect:` statement: the three file paths are now packaged into a single item.
+- A single `After collect:` statement: the three file paths are now packaged into a singl element.
 
 Have a look at the contents of the final output file too:
 
-```console title="COLLECTED-output.txt"
+```console title="results/COLLECTED-output.txt"
 BONJOUR
 HELLO
 HOLà
 ```
 
-This time we have all three greetings in the final output file. Success!
+This time we have all three greetings in the final output file. Success! Remove the optional view calls to make the next outputs less verbose.
 
 !!! note
 
     If you run this several times without `-resume`, you will see that the order of the greetings changes from one run to the next.
-    This shows you that the order in which items flow through the pipeline is not guaranteed to be consistent.
+    This shows you that the order in which elements flow through process calls is not guaranteed to be consistent, unless you make use of fair threading (check the [fair](https://www.nextflow.io/docs/latest/reference/process.html#fair) directive).
 
 ### Takeaway
 
@@ -742,14 +742,14 @@ Conveniently, Nextflow lets us add arbitrary code in the `script:` block of the 
 
 That means we can use the built-in `size()` function to get the number of files in the `input_files` array.
 
-In the process block, make the following code change:
+In the `collectGreetings` process block, make the following code change:
 
 _Before:_
 
 ```groovy title="hello-workflow.nf" linenums="55"
     script:
     """
-    cat ${input_files} > 'COLLECTED-${batch_id}-output.txt'
+    cat ${input_files} > 'COLLECTED-${batch_name}-output.txt'
     """
 ```
 
@@ -759,7 +759,7 @@ _After:_
     script:
         count_greetings = input_files.size()
     """
-    cat ${input_files} > 'COLLECTED-${batch_id}-output.txt'
+    cat ${input_files} > 'COLLECTED-${batch_name}-output.txt'
     """
 ```
 
@@ -777,14 +777,14 @@ _Before:_
 
 ```groovy title="hello-workflow.nf" linenums="52"
     output:
-        path "COLLECTED-${batch_id}-output.txt"
+        path "COLLECTED-${batch_name}-output.txt"
 ```
 
 _After:_
 
 ```groovy title="hello-workflow.nf" linenums="52"
     output:
-        path "COLLECTED-${batch_id}-output.txt" , emit: outfile
+        path "COLLECTED-${batch_name}-output.txt" , emit: outfile
         val count_greetings , emit: count
 ```
 
@@ -793,7 +793,7 @@ But as the saying goes, why not both?
 
 ### 4.2. Report the output at the end of the workflow
 
-Now that we have two outputs coming out of the `collectGreetings` process, the `collectGreetings.out` output channel contains two 'tracks':
+Now that we have two outputs coming out of the `collectGreetings` process, the `collectGreetings.out` output multi-channel contains two channels:
 
 - `collectGreetings.out.outfile` contains the final output file
 - `collectGreetings.out.count` contains the count of greetings
