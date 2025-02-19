@@ -7,7 +7,8 @@ If you have not yet done so, please follow [this link](../../envsetup/) before g
 
 ## Materials provided
 
-Throughout this training course, we'll be working in the `hello-nextflow/` directory, which loads by default when you open the training workspace.
+Throughout this training course, we'll be working in the `hello-nextflow/` directory, which you can load by typing `code hello-nextflow/` in the terminal when you open the training workspace.
+Otherwise you can change directory and go into this folder with `cd hello-nextflow/`.
 This directory contains all the code files, test data and accessory files you will need.
 
 Feel free to explore the contents of this directory; the easiest way to do so is to use the file explorer on the left-hand side of the training workspace.
