@@ -22,12 +22,12 @@ In the meantime, feel free to browse the [Fundamentals Training](../basic_traini
 ### 3. Learn how to use nf-core resources and the Seqera Platform
 
 The [nf-core project](https://nf-co.re/) is a worldwide collaborative effort to develop standardized open-source pipelines for a wide range of scientific research applications.
-It includes [over 100 pipelines](https://nf-co.re/pipelines/) that are available for use out of the box and and [well over 1400 process modules](https://nf-co.re/modules/) that can be integrated into your own projects, as well as a rich set of developer tools.
+It includes [over 100 pipelines](https://nf-co.re/pipelines/) that are available for use out of the box and [well over 1400 process modules](https://nf-co.re/modules/) that can be integrated into your own projects, as well as a rich set of developer tools.
 
 [Seqera Platform](https://seqera.io/) is the best way to run Nextflow in practice.
 It is a cloud-based platform that you can connect to your own compute infrastructure to make it much easier to launch and manage your workflows.
 The Free Tier is available for free use by everyone (with usage quotas).
-Qualifying academics can get free Pro-level access (no usage limitations)through the [Academic Program](https://seqera.typeform.com/to/SRB8Ci3n).
+Qualifying academics can get free Pro-level access (no usage limitations) through the [Academic Program](https://seqera.typeform.com/to/SRB8Ci3n).
 
 We are currently developing a short training course demonstrating how to use both of these resources (either independently or in combination).
 In the meantime, check out the [nf-core docs](https://nf-co.re/docs/) and the [Seqera Platform tutorials](https://docs.seqera.io/platform/latest/getting-started/quickstart-demo/comm-showcase)
