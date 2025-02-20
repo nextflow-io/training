@@ -610,4 +610,5 @@ You know how to use profiles to select a preset configuration at runtime with mi
 ### What's next?
 
 Celebrate and give yourself a big pat on the back! You have completed your very first Nextflow developer course.
-Then check out the training portal homepage for more training content that may be of interest.
+
+Then check out the next page for links to further training, helpful resources and a very short survey about your experience with this training course.
