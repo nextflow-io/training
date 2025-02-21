@@ -12,6 +12,10 @@ In this first part of the Hello Nextflow training course, we ease into the topic
 
 Let's demonstrate this with a simple command that we run directly in the terminal, to show what it does before we wrap it in Nextflow.
 
+!!! tip
+
+    Remember that you should now be inside the `hello-nextflow/` directory as described in the Orientation.
+
 ### 0.1. Make the terminal say hello
 
 ```bash
