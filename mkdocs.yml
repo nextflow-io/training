@@ -18,6 +18,8 @@ nav:
       - hello_nextflow/04_hello_modules.md
       - hello_nextflow/05_hello_containers.md
       - hello_nextflow/06_hello_config.md
+      - hello_nextflow/survey.md
+      - hello_nextflow/next_steps.md
   - Nextflow for Genomics:
       - nf4_science/genomics/index.md
       - nf4_science/genomics/00_orientation.md
