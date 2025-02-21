@@ -1,9 +1,9 @@
 # Orientation
 
 The GitHub Codespaces environment contains all the software, code and data necessary to work through this training course, so you don't need to install anything yourself.
-However, you do need a (free) account to log in, and you should take a few minutes to familiarize yourself with the interface.
+However, you do need a (free) GitHub account to log in, and you should take a few minutes to familiarize yourself with the interface.
 
-If you have not yet done so, please follow [this link](../../envsetup/) before going any further.
+If you have not yet done so, please go through the [Environment Setup](../../envsetup/) mini-course before going any further.
 
 ## Working directory
 
