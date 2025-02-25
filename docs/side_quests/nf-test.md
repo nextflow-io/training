@@ -165,6 +165,22 @@ The `test` block is the actual test. It contains the following:
 - `when`: The conditions under which the test should be run. This includes the parameters that will be used to run the pipeline.
 - `then`: The assertions that should be made. This includes the expected outcomes of the pipeline.
 
+### A Note on Test Names
+
+In the example above, we used the name "Should run without failures" which is appropriate for a basic test that just checks if the pipeline runs successfully. However, as we add more specific test cases, we should use more descriptive names that indicate what we're actually testing. For example:
+
+- "Should convert input to uppercase" - when testing specific functionality
+- "Should handle empty input gracefully" - when testing edge cases
+- "Should respect max memory parameter" - when testing resource constraints
+- "Should create expected output files" - when testing file generation
+
+Good test names should:
+1. Start with "Should" to make it clear what the expected behavior is
+2. Describe the specific functionality or scenario being tested
+3. Be clear enough that if the test fails, you know what functionality is broken
+
+As we add more assertions and specific test cases later, we'll use these more descriptive names to make it clear what each test is verifying.
+
 In plain English, the logic of the test reads as follows:
 "**When** these _parameters_ are provided to this _pipeline_, **then** we expect to see these results."
 
@@ -325,26 +341,46 @@ SUCCESS: Executed 1 tests in 5.239s
 
 A simple check is to ensure our pipeline is running all the processes we expect and not skipping any silently. Remember our pipeline runs 6 processes, one called `sayHello` and one called `convertToUpper` for each of the 3 greetings.
 
-Let's add an assertion to our test to check the pipeline runs the expected number of processes.
+Let's add an assertion to our test to check the pipeline runs the expected number of processes. We'll also update our test name to better reflect what we're testing.
 
 **Before:**
 
 ```groovy title="tests/main.nf.test"
-then {
-    assert workflow.success
-}
+    test("Should run without failures") {
+
+        when {
+            params {
+                input_file = "${projectDir}/greetings.csv"
+            }
+        }
+
+        then {
+            assert workflow.success
+        }
+
+    }
 ```
 
 **After:**
 
 ```groovy title="tests/main.nf.test"
-then {
-    assert workflow.success
-    assert workflow.trace.tasks().size() == 6
-}
+    test("Should run successfully with correct number of processes") {
+
+        when {
+            params {
+                input_file = "${projectDir}/greetings.csv"
+            }
+        }
+
+        then {
+            assert workflow.success
+            assert workflow.trace.tasks().size() == 6
+        }
+
+    }
 ```
 
-The `workflow.trace` object includes information about the pipeline which we can check. In this case, we're checking the number of tasks is correct.
+The test name now better reflects what we're actually verifying - not just that the pipeline runs without failing, but that it runs the expected number of processes.
 
 Let's run the test again to see if it works.
 
@@ -360,40 +396,60 @@ https://www.nf-test.com
 
 Test Workflow main.nf
 
-  Test [1d4aaf12] 'Should run without failures' PASSED (1.567s)
+  Test [1d4aaf12] 'Should run successfully with correct number of processes' PASSED (1.567s)
 
 
 SUCCESS: Executed 1 tests in 1.588s
 ```
 
-Success! The pipeline runs successfully and the test passes. Now we have began to test the details of the pipeline. as well as the overall status.
+Success! The pipeline runs successfully and the test passes. Now we have began to test the details of the pipeline, as well as the overall status.
 
 ## 1.4. Test the output
 
-Let's add an assertion to our test to check the output file was created.
+Let's add an assertion to our test to check the output file was created. We'll also update the test name again to reflect that we're now checking both process execution and output files.
 
 **Before:**
 
 ```groovy title="tests/main.nf.test"
-then {
-    assert workflow.success
-    assert workflow.trace.tasks().size() == 6
-}
+    test("Should run successfully with correct number of processes") {
+
+        when {
+            params {
+                input_file = "${projectDir}/greetings.csv"
+            }
+        }
+
+        then {
+            assert workflow.success
+            assert workflow.trace.tasks().size() == 6
+        }
+
+    }
 ```
 
 **After:**
 
 ```groovy title="tests/main.nf.test"
-then {
-    assert workflow.success
-    assert workflow.trace.tasks().size() == 6
-    assert file("$launchDir/results/Bonjour-output.txt").exists()
-    assert file("$launchDir/results/Hello-output.txt").exists()
-    assert file("$launchDir/results/Holà-output.txt").exists()
-    assert file("$launchDir/results/UPPER-Bonjour-output.txt").exists()
-    assert file("$launchDir/results/UPPER-Hello-output.txt").exists()
-    assert file("$launchDir/results/UPPER-Holà-output.txt").exists()
-}
+    test("Should run successfully with correct processes and output files") {
+
+        when {
+            params {
+                input_file = "${projectDir}/greetings.csv"
+            }
+        }
+
+        then {
+            assert workflow.success
+            assert workflow.trace.tasks().size() == 6
+            assert file("$launchDir/results/Bonjour-output.txt").exists()
+            assert file("$launchDir/results/Hello-output.txt").exists()
+            assert file("$launchDir/results/Holà-output.txt").exists()
+            assert file("$launchDir/results/UPPER-Bonjour-output.txt").exists()
+            assert file("$launchDir/results/UPPER-Hello-output.txt").exists()
+            assert file("$launchDir/results/UPPER-Holà-output.txt").exists()
+        }
+
+    }
 ```
 
 Run the test again to see if it works.
@@ -412,7 +468,7 @@ https://www.nf-test.com
 
 Test Workflow main.nf
 
-  Test [1d4aaf12] 'Should run without failures' PASSED (1.591s)
+  Test [1d4aaf12] 'Should run successfully with correct processes and output files' PASSED (1.591s)
 
 
 SUCCESS: Executed 1 tests in 1.612s
@@ -534,15 +590,34 @@ Test Process sayHello
 FAILURE: Executed 1 tests in 4.884s (1 failed)
 ```
 
-The test fails because the `sayHello` process declares 1 input channel but 0 were specified. Let's fix that by adding an input to the process. Remember from part 1, our `sayHello` process takes a single value input.
+The test fails because the `sayHello` process declares 1 input channel but 0 were specified. Let's fix that by adding an input to the process. Remember from part 1, our `sayHello` process takes a single value input. We should also fix the test name to better reflect what we're testing.
 
 **Before:**
 
 ```groovy title="tests/main.sayhello.nf.test"
 process {
     """
-    // define inputs of the process here. Example:
-    // input[0] = file("test-file.txt")
+    test("Should run without failures") {
+
+        when {
+            params {
+                // define parameters here. Example:
+                // outdir = "tests/results"
+            }
+            process {
+                """
+                // define inputs of the process here. Example:
+                // input[0] = file("test-file.txt")
+                """
+            }
+        }
+
+        then {
+            assert process.success
+            assert snapshot(process.out).match()
+        }
+
+    }
     """
 }
 ```
@@ -552,7 +627,27 @@ process {
 ```groovy title="tests/main.sayhello.nf.test"
 process {
     """
-    input[0] = "hello"
+        test("Should run without failures and produce correct output") {
+
+        when {
+            params {
+                // define parameters here. Example:
+                // outdir = "tests/results"
+            }
+            process {
+                """
+                input[0] = "hello"
+                """
+            }
+        }
+
+        then {
+            assert process.success
+            assert snapshot(process.out).match()
+        }
+
+    }
+
     """
 }
 ```
@@ -569,9 +664,9 @@ https://www.nf-test.com
 
 Test Process sayHello
 
-  Test [f91a1bcd] 'Should run without failures' PASSED (1.604s)
+  Test [f91a1bcd] 'Should run without failures and produce correct output' PASSED (1.604s)
   Snapshots:
-    1 created [Should run without failures]
+    1 created [Should run without failures and produce correct output]
 
 
 Snapshot Summary:
@@ -627,7 +722,7 @@ https://www.nf-test.com
 
 Test Process sayHello
 
-  Test [f91a1bcd] 'Should run without failures' PASSED (1.675s)
+  Test [f91a1bcd] 'Should run without failures and produce correct output' PASSED (1.675s)
 
 
 SUCCESS: Executed 1 tests in 1.685s
@@ -679,17 +774,32 @@ We now need to supply a single input file to the convertToUpper process, which i
 - We could re-use the existing data/greetings.csv file
 - We could create it on the fly within the test
 
-For now, let's re-use the existing data/greetings.csv file using the example we used with the pipeline level test.
+For now, let's re-use the existing data/greetings.csv file using the example we used with the pipeline level test. As before, we can name the test to better reflect what we're testing.
 
 **Before:**
 
 ```groovy title="tests/main.converttoupper.nf.test"
-process {
-    """
-    // define inputs of the process here. Example:
-    // input[0] = file("test-file.txt")
-    """
-}
+    test("Should run without failures") {
+
+        when {
+            params {
+                // define parameters here. Example:
+                // outdir = "tests/results"
+            }
+            process {
+                """
+                // define inputs of the process here. Example:
+                // input[0] = file("test-file.txt")
+                """
+            }
+        }
+
+        then {
+            assert process.success
+            assert snapshot(process.out).match()
+        }
+
+    }
 ```
 
 **After:**
@@ -697,7 +807,26 @@ process {
 ```groovy title="tests/main.converttoupper.nf.test"
 process {
     """
-    input[0] = "${projectDir}/greetings.csv"
+        test("Should run without failures and produce correct output") {
+
+        when {
+            params {
+                // define parameters here. Example:
+                // outdir = "tests/results"
+            }
+            process {
+                """
+                input[0] = "${projectDir}/greetings.csv"
+                """
+            }
+        }
+
+        then {
+            assert process.success
+            assert snapshot(process.out).match()
+        }
+
+    }
     """
 }
 ```
@@ -718,9 +847,9 @@ https://www.nf-test.com
 
 Test Process convertToUpper
 
-  Test [c59b6044] 'Should run without failures' PASSED (1.755s)
+  Test [c59b6044] 'Should run without failures and produce correct output' PASSED (1.755s)
   Snapshots:
-    1 created [Should run without failures]
+    1 created [Should run without failures and produce correct output]
 
 
 Snapshot Summary:
@@ -745,7 +874,7 @@ https://www.nf-test.com
 
 Test Process convertToUpper
 
-  Test [c59b6044] 'Should run without failures' PASSED (1.798s)
+  Test [c59b6044] 'Should run without failures and produce correct output' PASSED (1.798s)
 
 
 SUCCESS: Executed 1 tests in 1.811s
@@ -787,15 +916,15 @@ https://www.nf-test.com
 
 Test Process convertToUpper
 
-  Test [c59b6044] 'Should run without failures' PASSED (1.798s)
+  Test [c59b6044] 'Should run without failures and produce correct output' PASSED (1.798s)
 
 Test Workflow main.nf
 
-  Test [1d4aaf12] 'Should run without failures' PASSED (1.652s)
+  Test [1d4aaf12] 'Should run successfully with correct processes and output files' PASSED (1.652s)
 
 Test Process sayHello
 
-  Test [f91a1bcd] 'Should run without failures' PASSED (1.664s)
+  Test [f91a1bcd] 'Should run without failures and produce correct output' PASSED (1.664s)
 
 
 SUCCESS: Executed 3 tests in 5.007s
