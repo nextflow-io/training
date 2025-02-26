@@ -31,7 +31,7 @@ In this part of the training, we're going to show you how to use nf-test to writ
 
 ---
 
-## Warmup
+## 0. Warmup
 
 Let's move into the project directory.
 
@@ -110,7 +110,7 @@ workflow {
 
 We're going to assume an understanding of this workflow, but if you're not sure, you can refer back to [Hello Workflow](../hello_nextflow/03_hello_workflow.md).
 
-### Run the workflow
+### 0.1. Run the workflow
 
 Let's run the workflow to make sure it's working as expected.
 
@@ -150,7 +150,7 @@ Initialize `nf-test`.
 
 ---
 
-## Initialize `nf-test`
+## 1.0. Initialize `nf-test`
 
 The `nf-test` package provides an initialization command that sets up a few things in order for us to start developing tests for our project.
 
@@ -170,7 +170,7 @@ Project configured. Configuration is stored in nf-test.config
 
 It also creates a `tests` directory containing a configuration file stub.
 
-## Generate an nf-test
+## 1.1. Generate an nf-test
 
 `nf-test` comes with a set of tools for building nf-test files, saving us the majority of the work. These come under the subcommand `generate`. Let's generate a test for the pipeline:
 
@@ -255,7 +255,7 @@ Good test names should:
 
 As we add more assertions and specific test cases later, we'll use these more descriptive names to make it clear what each test is verifying.
 
-## Run the test
+## 1.2. Run the test
 
 Let's run the test to see what happens.
 
@@ -401,7 +401,7 @@ Test Workflow main.nf
 SUCCESS: Executed 1 tests in 5.239s
 ```
 
-## Add assertions
+## 1.3. Add assertions
 
 A simple check is to ensure our pipeline is running all the processes we expect and not skipping any silently. Remember our pipeline runs 6 processes, one called `sayHello` and one called `convertToUpper` for each of the 3 greetings.
 
@@ -468,7 +468,7 @@ SUCCESS: Executed 1 tests in 1.588s
 
 Success! The pipeline runs successfully and the test passes. Now we have began to test the details of the pipeline, as well as the overall status.
 
-## Test the output
+## 1.4. Test the output
 
 Let's add an assertion to our test to check the output file was created. We'll add it as a separate test, with an informative name, to make the results easier to interpret.
 
@@ -566,11 +566,11 @@ Learn how to test a Nextflow process.
 
 ---
 
-## Test a Nextflow process
+## 2 Test a Nextflow process
 
 We don't have to write tests for every part of the pipeline, but the more tests we have the more comprehensive we can be about the pipeline and the more confident we can be that it's working as expected. In this section we're going to test both processes in the pipeline as individual units.
 
-### Test the `sayHello` process
+### 2.1. Test the `sayHello` process
 
 Let's start with the `sayHello` process.
 
@@ -741,7 +741,7 @@ SUCCESS: Executed 1 tests in 1.611s
 
 Success! The test passes because the `sayHello` process ran successfully and the output was created.
 
-### Check out the snapshot created by the test
+### 2.2. Check out the snapshot created by the test
 
 If we look at the `tests/main.sayhello.nf.test` file, we can see it uses a method `snapshot()` in the assertion block:
 
@@ -794,7 +794,7 @@ SUCCESS: Executed 1 tests in 1.685s
 
 Success! The test passes because the `sayHello` process ran successfully and the output matched the snapshot.
 
-### Alternative to Snapshots: Direct Content Assertions
+### 2.3 Alternative to Snapshots: Direct Content Assertions
 
 While snapshots are great for catching any changes in output, sometimes you want to verify specific content without being so strict about the entire file matching. For example:
 
@@ -888,7 +888,7 @@ Test Process sayHello
 SUCCESS: Executed 1 tests in 7.208s
 ```
 
-### Test the `convertToUpper` process
+### 2.4. Test the `convertToUpper` process
 
 Let's open the `tests/main.converttoupper.nf.test` file and take a look at the contents:
 
@@ -1042,7 +1042,7 @@ You know how to write tests for a Nextflow process and run them.
 
 Learn how to run tests for everything at once!
 
-## Run tests for the entire repository
+## 3. Run tests for the entire repository
 
 Running nf-test on each component is fine, but laborious and error prone. Can't we just test a test on everything at once?
 
@@ -1050,7 +1050,7 @@ Yes we can!
 
 Let's run nf-test on the entire repo.
 
-### Run nf-test on the entire repo
+### 3.1. Run nf-test on the entire repo
 
 We can run nf-test on the entire repo by running the `nf-test test` command.
 
@@ -1087,7 +1087,7 @@ SUCCESS: Executed 3 tests in 5.007s
 
 Check that out! We ran 3 tests, 1 for each process and 1 for the whole pipeline with a single command. Imagine how powerful this is on a large codebase!
 
-## Summary
+## 4.0. Summary
 
 In this side quest, we've learned:
 
