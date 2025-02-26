@@ -432,7 +432,7 @@ We can also add it as a separate test, with an informative name.
 **After:**
 
 ```groovy title="tests/main.nf.test"
-    test("Should run successfully with correct processes and output files") {
+    test("Should run successfully with correct number of processes") {
 
         when {
             params {
@@ -483,7 +483,7 @@ https://www.nf-test.com
 
 Test Workflow main.nf
 
-  Test [f0e08a68] 'Should run without failures' PASSED (8.144s)
+  Test [f0e08a68] 'Should run successfully with correct number of processes' PASSED (8.144s)
   Test [d7e32a32] 'Should produce correct output files' PASSED (6.994s)
 
 
@@ -1030,7 +1030,7 @@ Test Process convertToUpper
 
 Test Workflow main.nf
 
-  Test [f0e08a68] 'Should run without failures' PASSED (8.144s)
+  Test [f0e08a68] 'Should run successfully with correct number of processes' PASSED (8.144s)
   Test [d7e32a32] 'Should produce correct output files' PASSED (6.994s)
 
 Test Process sayHello
