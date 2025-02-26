@@ -68,7 +68,7 @@ Good question!
 
 Let's break down what just happened.
 
-You ran the workflow with the default parameters, you confirmed it worked and you're happy with the results. This is the essence of testing. As you go through this course you will notice we always run the workflow at the start to confirm everything is set up correctly. This gives us the confidence to continue with the training, knowing the code started in a working state.
+You ran the workflow with the default parameters, you confirmed it worked and you're happy with the results. This is the essence of testing. If you worked through the Hello Nextflow training course, you'll have noticed we always started every section by running the workflow we were using as a starting point, to confirm everything is set up correctly.
 
 Testing software essentially does this process for us. Let's replace our simple `nextflow run main.nf` with a standardised test provided by nf-test.
 
