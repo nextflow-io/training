@@ -20,6 +20,8 @@ nav:
       - hello_nextflow/06_hello_config.md
   - Side Quests:
       - side_quests/nf-test.md
+      - hello_nextflow/survey.md
+      - hello_nextflow/next_steps.md
   - Nextflow for Genomics:
       - nf4_science/genomics/index.md
       - nf4_science/genomics/00_orientation.md
