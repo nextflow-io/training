@@ -496,7 +496,7 @@ We don't have to write tests for every part of the pipeline, but the more tests 
 
 Let's start with the `sayHello` process.
 
-Let's use the `nf-test generate` command again to generate tests for the entire pipeline.
+Let's use the `nf-test generate` command again to generate tests for the process.
 
 ```bash
 nf-test generate process main.nf
@@ -710,7 +710,7 @@ If, in the course of future development, something in the code changes that caus
 - If it turns out that something in the code broke, we will have to fix it, with the expectation that the fixed code will pass the test.
 - If it is an expected change (e.g., the tool has been improved and the results are better) then we will need to update the snapshot to accept the new output as the reference to match. nf-test has a parameter `--update-snapshot` for this purpose.
 
-For now though, we can run the test again and see the test should pass:
+We can run the test again and see the test should pass:
 
 ```console title="nf-test process pass with snapshot"
 > nf-test test tests/main.sayhello.nf.test
@@ -730,7 +730,101 @@ SUCCESS: Executed 1 tests in 1.685s
 
 Success! The test passes because the `sayHello` process ran successfully and the output matched the snapshot.
 
-### 2.3. Test the `convertToUpper` process
+### 2.3 Alternative to Snapshots: Direct Content Assertions
+
+While snapshots are great for catching any changes in output, sometimes you want to verify specific content without being so strict about the entire file matching. For example:
+
+- When parts of the output might change (timestamps, random IDs, etc.) but certain key content must be present
+- When you want to check for specific patterns or values in the output
+- When you want to make the test more explicit about what constitutes success
+
+Here's how we could modify our test to check specific content:
+
+**Before:**
+
+```groovy title="tests/main.sayhello.nf.test"
+process {
+    """
+        test("Should run without failures and produce correct output") {
+
+        when {
+            params {
+                // define parameters here. Example:
+                // outdir = "tests/results"
+            }
+            process {
+                """
+                input[0] = "hello"
+                """
+            }
+        }
+
+        then {
+            assert process.success
+            assert snapshot(process.out).match()
+        }
+
+    }
+
+    """
+}
+```
+
+
+**After:**
+
+```groovy title="tests/main.sayhello.nf.test"
+     test("Should run without failures and contain expected greeting") {
+        when {
+            params {
+                // define parameters here
+            }
+            process {
+                """
+                input[0] = "hello"
+                """
+            }
+        }
+
+        then {
+            assert process.success
+            assert path(process.out[0][0]).readLines().contains('hello')
+            assert !path(process.out[0][0]).readLines().contains('HELLO')
+        }
+    }
+```
+
+Note that nf-test sees the process outputs as a list of lists, so `process.out[0][0]` is fetching the first part of the first channel item (or 'emission') from this process.
+
+This approach:
+- Makes it clear exactly what we expect in the output
+- Is more resilient to irrelevant changes in the output
+- Provides better error messages when tests fail
+- Allows for more complex validations (regex patterns, numerical comparisons, etc.)
+
+Let's run the test to see if it works.
+
+```bash title="nf-test pipeline pass"
+nf-test test tests/main.sayhello.nf.test
+```
+
+```console title="Process test fails"
+> nf-test test tests/main.sayhello.nf.test
+
+🚀 nf-test 0.9.2
+https://www.nf-test.com
+(c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
+
+
+Test Process sayHello
+
+  Test [58df4e4b] 'Should run without failures and contain expected greeting' PASSED (7.196s)
+
+
+SUCCESS: Executed 1 tests in 7.208s
+```
+
+### 2.4. Test the `convertToUpper` process
 
 Let's open the `tests/main.converttoupper.nf.test` file and take a look at the contents:
 
@@ -774,7 +868,7 @@ We now need to supply a single input file to the convertToUpper process, which i
 - We could re-use the existing data/greetings.csv file
 - We could create it on the fly within the test
 
-For now, let's re-use the existing data/greetings.csv file using the example we used with the pipeline level test. As before, we can name the test to better reflect what we're testing.
+For now, let's re-use the existing data/greetings.csv file using the example we used with the pipeline level test. As before, we can name the test to better reflect what we're testing, but this time let's leave it to 'snapshot' the content rather than checking for specific strings (as we did in the other process).
 
 **Before:**
 
