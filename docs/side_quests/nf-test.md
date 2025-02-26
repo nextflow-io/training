@@ -1,6 +1,7 @@
 # Side Quest: nf-test
 
 Testing is a fundamental aspect of software development, and pipeline development is no exception. Being able to systematically verify that every component of your workflow behaves as intended is critical for:
+
 - Ensuring reproducibility
 - Supporting long-term maintenance
 - Accelerating the development process
@@ -8,6 +9,7 @@ Testing is a fundamental aspect of software development, and pipeline developmen
 Let's explore why testing is so important in pipeline development.
 
 Imagine you're building a new workflow. You start by gathering some test data that you know should produce valid results. As you develop, you:
+
 1. Add the first process to your pipeline
 2. Connect it to your input data
 3. Run it to verify it works
@@ -15,11 +17,13 @@ Imagine you're building a new workflow. You start by gathering some test data th
 5. Repeat until the pipeline is complete
 
 This manual testing approach works initially, but quickly becomes challenging. For example, when you add a simple parameter like `--skip_process`, you now need to:
+
 - Run the pipeline twice (once with and without the parameter)
 - Manually inspect outputs or log files to verify the process was actually skipped
 - Remember to repeat this verification every time you make changes
 
 As your pipeline grows more complex, this manual testing becomes:
+
 - Time-consuming
 - Error-prone
 - Difficult to track
