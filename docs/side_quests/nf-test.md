@@ -1,15 +1,31 @@
 # Side Quest: nf-test
 
-Being able to systematically test that every part of your workflow is doing what it's supposed to do is critical for reproducibility and long-term maintenance.
-And it's also helpful during the development process!
+Testing is a fundamental aspect of software development, and pipeline development is no exception. Being able to systematically verify that every component of your workflow behaves as intended is critical for:
+- Ensuring reproducibility
+- Supporting long-term maintenance
+- Accelerating the development process
 
-This is (hopefully) not controversial, but let's take a minute to talk about why testing is so important.
+Let's explore why testing is so important in pipeline development.
 
-Let's imagine you're developing a workflow. One of the first things you will do is grab some test data that you know is valid and should produce a result. You add the first process to the pipeline and wire it up to your inputs to make it work. Then, to check it's all working, you run it on the test data. Assuming it works, you move on to the next process and run the test data again. You repeat this process until you have a pipeline that you're happy with.
+Imagine you're building a new workflow. You start by gathering some test data that you know should produce valid results. As you develop, you:
+1. Add the first process to your pipeline
+2. Connect it to your input data
+3. Run it to verify it works
+4. Move on to the next process
+5. Repeat until the pipeline is complete
 
-Maybe you add a simple true or false parameter such as `--skip_process`, now you must run the pipeline twice, once with each parameter to make sure it works as expected. But wait, how do we check if the `--skip_process` actually skips the process? We have to dig into the outputs or check the log files! This is a pain and prone to error.
+This manual testing approach works initially, but quickly becomes challenging. For example, when you add a simple parameter like `--skip_process`, you now need to:
+- Run the pipeline twice (once with and without the parameter)
+- Manually inspect outputs or log files to verify the process was actually skipped
+- Remember to repeat this verification every time you make changes
 
-As you develop your pipeline, it will quickly become so complex that manually testing every iteration is slow and error prone. Furthermore, if you do find an error it will be very difficult to pin down exactly where in your pipeline the error is coming from. This is where testing comes in.
+As your pipeline grows more complex, this manual testing becomes:
+- Time-consuming
+- Error-prone
+- Difficult to track
+- Hard to debug when things go wrong
+
+This is where systematic testing comes in.
 
 Testing allows you to systematically check that every part of your pipeline is working as expected. The benefits to a developer are huge:
 
@@ -27,7 +43,7 @@ There are lots of different types of tests we can write:
 5. **Performance tests**: For the speed and efficiency of the pipeline
 6. **Stress tests**: To identify the limits of the pipeline
 
-[**nf-test**](https://www.nf-test.com/) is a tool that allows you to write module, workflow and pipeline level test. In short, it allows you to systematically check every individual part of the pipeline is working as expected, _in isolation_.
+[**nf-test**](https://www.nf-test.com/) is a tool that allows you to write module, workflow and pipeline level tests. In short, it allows you to systematically check every individual part of the pipeline is working as expected, _in isolation_.
 
 In this part of the training, we're going to show you how to use nf-test to write module-level tests for the three processes in our pipeline.
 
