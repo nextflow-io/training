@@ -86,7 +86,7 @@ The `'<container>'` part is the URI address of the container image.
 As an example, let's pull a container image that contains [cowpy](https://github.com/jeffbuttars/cowpy), a python implementation of a tool called `cowsay` that generates ASCII art to display arbitrary text inputs in a fun way.
 
 There are various repositories where you can find published containers.
-We used the [Seqera Containers](https://seqera.io/containers/) service to generate this Docker container from the `cowpy` Conda package: `'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'`.
+We used the [Seqera Containers](https://seqera.io/containers/) service to generate this Docker container image from the `cowpy` Conda package: `'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'`.
 
 Run the complete pull command:
 
@@ -163,7 +163,7 @@ You can also run a container interactively, which gives you a shell prompt insid
 
 #### 1.3.1. Spin up the container
 
-To run interactively, we just add `-it` to the `docker pull` command.
+To run interactively, we just add `-it` to the `docker run` command.
 Optionally, we can specify the shell we want to use inside the container by appending _e.g._ `/bin/bash` to the command.
 
 ```bash
@@ -200,7 +200,7 @@ For example, the tool documentation says we can change the character ('cowacter'
 cowpy "Hello Containers" -c tux
 ```
 
-Now the output shows the Linux penguin, Tux, instead of the default cow, because we specified `-c tux` parameter.
+Now the output shows the Linux penguin, Tux, instead of the default cow, because we specified the `-c tux` parameter.
 
 ```console title="Output"
  __________________
@@ -250,7 +250,7 @@ One way to do this is to **mount** a **volume** from the host system into the co
 -v <outside_path>:<inside_path>
 ```
 
-In our case `<outside_path>` will be the current working directory, so we can just use a dot (`.`), and `<outside_path>` is just a name we make up; let's call it `/data`.
+In our case `<outside_path>` will be the current working directory, so we can just use a dot (`.`), and `<inside_path>` is just a name we make up; let's call it `/data`.
 
 To mount a volume, we replace the paths and add the volume mounting argument to the docker run command as follows:
 
@@ -265,6 +265,8 @@ You can check that it works by listing the contents of `/data`:
 ```bash
 ls /data
 ```
+
+Depending on what part of this training you've done before, the output below my look slightly different.
 
 ```console title="Output"
 demo-params.json  hello-channels.nf  hello-workflow.nf  modules          results
@@ -291,9 +293,9 @@ This produces the desired ASCII art of a turkey rattling off our example greetin
 
 ```console title="Output"
  _________
-/ HOLà    \
-| HELLO   |
-\ BONJOUR /
+/ Hello   \
+| Bonjour |
+\ Holà    /
  ---------
   \                                  ,+*^^*+___+++_
    \                           ,*^^^^              )
@@ -502,6 +504,21 @@ ERROR ~ Error executing process > 'cowpy'
 
 Caused by:
   Process `cowpy` terminated with an error exit status (127)
+
+Command executed:
+
+  cat COLLECTED-test-batch-output.txt | cowpy -c "turkey" > cowpy-COLLECTED-test-batch-output.txt
+
+Command exit status:
+  127
+
+Command output:
+  (empty)
+
+Command error:
+  .command.sh: line 2: cowpy: command not found
+
+(trimmed output)
 ```
 
 This error code, `error exit status (127)` means the executable we asked for was not found.
@@ -530,7 +547,6 @@ _After:_
 process cowpy {
 
     publishDir 'containers/results', mode: 'copy'
-
     container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
 ```
 
@@ -590,27 +606,32 @@ There were 3 greetings in this batch
 You can find the cowpy'ed output in the `results` directory.
 
 ```console title="results/cowpy-COLLECTED-test-batch-output.txt"
-  _______
- /       \
+ _________
+/ HOLà    \
 | HELLO   |
-| HOLà    |
-| BONJOUR |
- \       /
-  =======
-       \
-        \
-         \
-          \
-                    ,.
-                   (_|,.
-                   ,' /, )_______   _
-               __j o``-'        `.'-)'
-               (")                 \'
-               `-j                |
-                 `-._(           /
-                    |_\  |--^.  /
-                   /_]'|_| /_)_/
-                       /_]'  /_]'
+\ BONJOUR /
+ ---------
+  \                                  ,+*^^*+___+++_
+   \                           ,*^^^^              )
+    \                       _+*                     ^**+_
+     \                    +^       _ _++*+_+++_,         )
+              _+^^*+_    (     ,+*^ ^          \+_        )
+             {       )  (    ,(    ,_+--+--,      ^)      ^\
+            { (\@)    } f   ,(  ,+-^ __*_*_  ^^\_   ^\       )
+           {:;-/    (_+*-+^^^^^+*+*<_ _++_)_    )    )      /
+          ( /  (    (        ,___    ^*+_+* )   <    <      \
+           U _/     )    *--<  ) ^\-----++__)   )    )       )
+            (      )  _(^)^^))  )  )\^^^^^))^*+/    /       /
+          (      /  (_))_^)) )  )  ))^^^^^))^^^)__/     +^^
+         (     ,/    (^))^))  )  ) ))^^^^^^^))^^)       _)
+          *+__+*       (_))^)  ) ) ))^^^^^^))^^^^^)____*^
+          \             \_)^)_)) ))^^^^^^^^^^))^^^^)
+           (_             ^\__^^^^^^^^^^^^))^^^^^^^)
+             ^\___            ^\__^^^^^^))^^^^^^^^)\\
+                  ^^^^^\uuu/^^\uuu/^^^^\^\^\^\^\^\^\^\
+                     ___) >____) >___   ^\_\_\_\_\_\_\)
+                    ^^^//\\_^^//\\_^       ^(\_\_\_\)
+                      ^^^ ^^ ^^^ ^
 ```
 
 You see that the character is saying all the greetings, just as it did when we ran the `cowpy` command on the `greetings.csv` file from inside the container.
