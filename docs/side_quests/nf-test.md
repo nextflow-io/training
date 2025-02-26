@@ -288,11 +288,6 @@ Test Workflow main.nf
    -- Check '/workspaces/training/side-quests/nf-test/.nf-test/tests/693ba951a20fec36a5a9292ed1cc8a9f/meta/nextflow.log' file for details
   Nextflow stderr:
 
-  Nextflow 24.10.4 is available - Please consider updating your version to it
-
-
-
-
 FAILURE: Executed 1 tests in 4.679s (1 failed)
 ```
 
@@ -595,7 +590,7 @@ Wrote process test file '/workspaces/training/side-quests/nf-test/tests/main.con
 SUCCESS: Generated 2 test files.
 ```
 
-Let's focus for now and focus on the `sayhello` process in the `main.sayhello.nf.test` file.
+Let's focus for now on the `sayhello` process in the `main.sayhello.nf.test` file.
 
 Let's open the file and take a look at the contents.
 
@@ -664,11 +659,6 @@ Test Process sayHello
 
    -- Check script '/workspaces/training/side-quests/nf-test/.nf-test-1eaad118145a1fd798cb07e7dd75d087.nf' at line: 38 or see '/workspaces/training/side-quests/nf-test/.nf-test/tests/1eaad118145a1fd798cb07e7dd75d087/meta/nextflow.log' file for more details
   Nextflow stderr:
-
-  Nextflow 24.10.4 is available - Please consider updating your version to it
-
-
-
 
 FAILURE: Executed 1 tests in 4.884s (1 failed)
 ```
