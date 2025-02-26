@@ -175,6 +175,7 @@ In the example above, we used the name "Should run without failures" which is ap
 - "Should create expected output files" - when testing file generation
 
 Good test names should:
+
 1. Start with "Should" to make it clear what the expected behavior is
 2. Describe the specific functionality or scenario being tested
 3. Be clear enough that if the test fails, you know what functionality is broken
@@ -786,7 +787,6 @@ process {
 }
 ```
 
-
 **After:**
 
 ```groovy title="tests/main.sayhello.nf.test"
@@ -813,6 +813,7 @@ process {
 Note that nf-test sees the process outputs as a list of lists, so `process.out[0][0]` is fetching the first part of the first channel item (or 'emission') from this process.
 
 This approach:
+
 - Makes it clear exactly what we expect in the output
 - Is more resilient to irrelevant changes in the output
 - Provides better error messages when tests fail
