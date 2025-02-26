@@ -23,7 +23,7 @@ There are lots of different types of tests we can write:
 4. **Performance tests**: For the speed and efficiency of the pipeline
 5. **Stress tests**: To identify the limits of the pipeline
 
-Testing individual processes is analagous to unit tests in other languages. Testing the workflow or the entire pipeline is analagous to what's called integration tests in other languages, where we test the interactions of the components.
+Testing individual processes is analogous to unit tests in other languages. Testing the workflow or the entire pipeline is analogous to what's called integration tests in other languages, where we test the interactions of the components.
 
 [**nf-test**](https://www.nf-test.com/) is a tool that allows you to write module, workflow and pipeline level test. In short, it allows you to systematically check every individual part of the pipeline is working as expected, _in isolation_.
 
