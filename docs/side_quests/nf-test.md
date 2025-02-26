@@ -1044,7 +1044,7 @@ Learn how to run tests for everything at once!
 
 ## 3. Run tests for the entire repository
 
-Running nf-test on each component is fine, but laborious and error prone. Can't we just test a test on everything at once?
+Running nf-test on each component is fine, but laborious and error prone. Can't we just test everything at once?
 
 Yes we can!
 
