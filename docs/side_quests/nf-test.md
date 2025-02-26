@@ -590,7 +590,7 @@ Wrote process test file '/workspaces/training/side-quests/nf-test/tests/main.con
 SUCCESS: Generated 2 test files.
 ```
 
-Let's focus for now and focus on the `sayhello` process in the `main.sayhello.nf.test` file.
+Let's focus for now on the `sayhello` process in the `main.sayhello.nf.test` file.
 
 Let's open the file and take a look at the contents.
 
