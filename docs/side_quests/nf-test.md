@@ -288,11 +288,6 @@ Test Workflow main.nf
    -- Check '/workspaces/training/side-quests/nf-test/.nf-test/tests/693ba951a20fec36a5a9292ed1cc8a9f/meta/nextflow.log' file for details
   Nextflow stderr:
 
-  Nextflow 24.10.4 is available - Please consider updating your version to it
-
-
-
-
 FAILURE: Executed 1 tests in 4.679s (1 failed)
 ```
 
