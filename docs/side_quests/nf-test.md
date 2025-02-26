@@ -31,7 +31,7 @@ In this part of the training, we're going to show you how to use nf-test to writ
 
 ---
 
-## Warmup
+# Warmup
 
 Let's move into the project directory.
 
@@ -110,7 +110,7 @@ workflow {
 
 We're going to assume an understanding of this workflow, but if you're not sure, you can refer back to [Hello Workflow](../hello_nextflow/03_hello_workflow.md).
 
-### Run the workflow
+## Run the workflow
 
 Let's run the workflow to make sure it's working as expected.
 
@@ -140,17 +140,17 @@ You ran the workflow with the default parameters, you confirmed it worked and yo
 
 Testing software essentially does this process for us. Let's replace our simple `nextflow run main.nf` with a standardised test provided by nf-test.
 
-### Takeaway
+## Takeaway
 
 You should be able to 'test' a pipeline by manually running it.
 
-### What's next?
+## What's next?
 
 Initialize `nf-test`.
 
 ---
 
-## Initialize `nf-test`
+# Initialize `nf-test`
 
 The `nf-test` package provides an initialization command that sets up a few things in order for us to start developing tests for our project.
 
@@ -170,7 +170,7 @@ Project configured. Configuration is stored in nf-test.config
 
 It also creates a `tests` directory containing a configuration file stub.
 
-## Generate an nf-test
+# Generate a pipeline-level nf-test
 
 `nf-test` comes with a set of tools for building nf-test files, saving us the majority of the work. These come under the subcommand `generate`. Let's generate a test for the pipeline:
 
@@ -238,7 +238,7 @@ In plain English, the logic of the test reads as follows:
 
 This isn't a functional test, we will demonstrate how to turn it into one in the next section.
 
-### A Note on Test Names
+## A Note on Test Names
 
 In the example above, we used the default name "Should run without failures" which is appropriate for a basic test that just checks if the pipeline runs successfully. However, as we add more specific test cases, we should use more descriptive names that indicate what we're actually testing. For example:
 
@@ -556,21 +556,21 @@ Success! The tests pass because the pipeline completed successfully, the correct
 
 This is just the surface, we can keep writing assertions to check the details of the pipeline, but for now let's move on to testing the internals of the pipeline.
 
-### Takeaway
+## Takeaway
 
 You know how to write an nf-test for a pipeline.
 
-### What's next?
+## What's next?
 
 Learn how to test a Nextflow process.
 
 ---
 
-## Test a Nextflow process
+# Test a Nextflow process
 
 We don't have to write tests for every part of the pipeline, but the more tests we have the more comprehensive we can be about the pipeline and the more confident we can be that it's working as expected. In this section we're going to test both processes in the pipeline as individual units.
 
-### Test the `sayHello` process
+## Test the `sayHello` process
 
 Let's start with the `sayHello` process.
 
@@ -888,7 +888,7 @@ Test Process sayHello
 SUCCESS: Executed 1 tests in 7.208s
 ```
 
-### Test the `convertToUpper` process
+## Test the `convertToUpper` process
 
 Let's open the `tests/main.converttoupper.nf.test` file and take a look at the contents:
 
@@ -1034,15 +1034,15 @@ Test Process convertToUpper
 SUCCESS: Executed 1 tests in 1.811s
 ```
 
-### Takeaway
+## Takeaway
 
 You know how to write tests for a Nextflow process and run them.
 
-### What's next?
+## What's next?
 
 Learn how to run tests for everything at once!
 
-## Run tests for the entire repository
+# Run tests for the entire repository
 
 Running nf-test on each component is fine, but laborious and error prone. Can't we just test a test on everything at once?
 
@@ -1050,7 +1050,7 @@ Yes we can!
 
 Let's run nf-test on the entire repo.
 
-### Run nf-test on the entire repo
+## Run nf-test on the entire repo
 
 We can run nf-test on the entire repo by running the `nf-test test` command.
 
@@ -1087,7 +1087,7 @@ SUCCESS: Executed 3 tests in 5.007s
 
 Check that out! We ran 3 tests, 1 for each process and 1 for the whole pipeline with a single command. Imagine how powerful this is on a large codebase!
 
-## Summary
+# Summary
 
 In this side quest, we've learned:
 
@@ -1111,7 +1111,7 @@ Testing is a critical part of pipeline development that helps ensure:
 - Problems can be identified and fixed quickly
 - Output content matches expectations
 
-### What's next?
+## What's next?
 
 Check out the [nf-test documentation](https://www.nf-test.com/) for more advanced testing features and best practices. You might want to:
 
