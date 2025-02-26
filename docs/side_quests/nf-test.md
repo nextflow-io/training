@@ -660,11 +660,6 @@ Test Process sayHello
    -- Check script '/workspaces/training/side-quests/nf-test/.nf-test-1eaad118145a1fd798cb07e7dd75d087.nf' at line: 38 or see '/workspaces/training/side-quests/nf-test/.nf-test/tests/1eaad118145a1fd798cb07e7dd75d087/meta/nextflow.log' file for more details
   Nextflow stderr:
 
-  Nextflow 24.10.4 is available - Please consider updating your version to it
-
-
-
-
 FAILURE: Executed 1 tests in 4.884s (1 failed)
 ```
 
