@@ -21,7 +21,7 @@ There are lots of different types of tests we can write:
 2. **Workflow-level tests**: For a single workflow
 3. **Pipeline-level tests**: For the pipeline as a whole
 4. **Performance tests**: For the speed and efficiency of the pipeline
-5. **Stress tests**: To identify the limits of the pipeline
+5. **Stress tests**: Assessing the pipeline's performance under extreme conditions to determine its limits
 
 Testing individual processes is analogous to unit tests in other languages. Testing the workflow or the entire pipeline is analogous to what's called integration tests in other languages, where we test the interactions of the components.
 
@@ -127,7 +127,7 @@ Wrote pipeline test file '/workspaces/training/side-quests/nf-test/tests/main.nf
 SUCCESS: Generated 1 test files.
 ```
 
-This will create a `tests` directory with a `main.nf.test` and a `nextflow.config` file. This is our pipeline level test file. If you run `tree tests/` you should see something like this:
+This will create a `main.nf.test` file within the `tests` directory. This is our pipeline level test file. If you run `tree tests/` you should see something like this:
 
 ```console title="Test directory contents"
 tests/
