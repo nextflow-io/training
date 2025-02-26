@@ -9,7 +9,7 @@ Let's imagine you're developing a workflow. One of the first things you will do 
 
 Maybe you add a simple true or false parameter such as `--skip_process`, now you must run the pipeline twice, once with each parameter to make sure it works as expected. But wait, how do we check if the `--skip_process` actually skips the process? We have to dig into the outputs or check the log files! This is a pain and prone to error.
 
-As you develop your pipeline, it will quickly become so complex that manually testing every iteration is slow and error prone. Furthermore, if you do find an error it will be very difficult to pin down exactly where in your pipeline the error is coming from. This is where unit testing comes in.
+As you develop your pipeline, it will quickly become so complex that manually testing every iteration is slow and error prone. Furthermore, if you do find an error it will be very difficult to pin down exactly where in your pipeline the error is coming from. This is where testing comes in.
 
 Testing allows you to systematically check that every part of your pipeline is working as expected. The benefits to a developer are huge:
 
@@ -60,17 +60,17 @@ Let's run the workflow to make sure it's working as expected.
 nextflow run main.nf
 ```
 
-CONGRATULATIONS! You just ran a unit test!
+CONGRATULATIONS! You just ran a test!
 
-"Wait, what? I just ran the workflow and it worked! How is that a unit test?"
+"Wait, what? I just ran the workflow and it worked! How is that a test?"
 
 Good question!
 
 Let's break down what just happened.
 
-You ran the workflow with the default parameters, you confirmed it worked and you're happy with the results. This is the essence of unit testing. As you go through this course you will notice we always run the workflow at the start to confirm everything is set up correctly. This gives us the confidence to continue with the training, knowing the code started in a working state.
+You ran the workflow with the default parameters, you confirmed it worked and you're happy with the results. This is the essence of testing. As you go through this course you will notice we always run the workflow at the start to confirm everything is set up correctly. This gives us the confidence to continue with the training, knowing the code started in a working state.
 
-Unit testing software essentially does this process for us. Let's replace our simple `nextflow run main.nf` with a standardised test provided by nf-test.
+Testing software essentially does this process for us. Let's replace our simple `nextflow run main.nf` with a standardised test provided by nf-test.
 
 ### Takeaway
 
