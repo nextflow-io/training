@@ -1,17 +1,14 @@
 # Side Quest: nf-test
 
-Being able to systematically test that every part of your workflow is doing what it's supposed to do is critical for reproducibility and long-term maintenance.
-And it's also helpful during the development process!
+Being able to systematically test that every part of your workflow is doing what it's supposed to do is critical for reproducibility and long-term maintenance, and can be a huge help during the development process.
 
-This is (hopefully) not controversial, but let's take a minute to talk about why testing is so important.
+Let's take a minute to talk about why testing is so important. If you're developing a workflow, one of the first things you will do is grab some test data that you know is valid and should produce a result. You add the first process to the pipeline and wire it up to your inputs to make it work. Then, to check it's all working, so you run it on the test data. Assuming that works, you move on to the next process and run the test data again. You repeat this process until you have a pipeline that you're happy with.
 
-Let's imagine you're developing a workflow. One of the first things you will do is grab some test data that you know is valid and should produce a result. You add the first process to the pipeline and wire it up to your inputs to make it work. Then, to check it's all working, you run it on the test data. Assuming it works, you move on to the next process and run the test data again. You repeat this process until you have a pipeline that you're happy with.
-
-Maybe you add a simple true or false parameter such as `--skip_process`, now you must run the pipeline twice, once with each parameter to make sure it works as expected. But wait, how do we check if the `--skip_process` actually skips the process? We have to dig into the outputs or check the log files! This is a pain and prone to error.
+Then, maybe you add a simple true or false parameter such as `--skip_process`. Now you must run the pipeline twice, once with each parameter to make sure it works as expected. But wait, how do we check if the `--skip_process` actually skips the process? We have to dig into the outputs or check the log files! This is a pain and prone to error.
 
 As you develop your pipeline, it will quickly become so complex that manually testing every iteration is slow and error prone. Furthermore, if you do find an error it will be very difficult to pin down exactly where in your pipeline the error is coming from. This is where testing comes in.
 
-Testing allows you to systematically check that every part of your pipeline is working as expected. The benefits to a developer are huge:
+Testing allows you to systematically check that every part of your pipeline is working as expected. The benefits to a developer of well written tests are huge:
 
 - **Confidence**: Because the tests cover the entire pipeline, you can be be confident changing something doesn't affect anything else
 - **Trust**: When multiple developers work on the pipeline, they know the other developers haven't broken the pipeline and every component.
@@ -23,9 +20,10 @@ There are lots of different types of tests we can write:
 1. **Module-level tests**: For individual processes
 2. **Workflow-level tests**: For a single workflow
 3. **Pipeline-level tests**: For the pipeline as a whole
-4. **Integration tests**: For the interaction of the pipeline with other systems
-5. **Performance tests**: For the speed and efficiency of the pipeline
-6. **Stress tests**: To identify the limits of the pipeline
+4. **Performance tests**: For the speed and efficiency of the pipeline
+5. **Stress tests**: To identify the limits of the pipeline
+
+Testing individual processes is analagous to unit tests in other languages. Testing the workflow or the entire pipeline is analagous to what's called integration tests in other languages, where we test the interactions of the components.
 
 [**nf-test**](https://www.nf-test.com/) is a tool that allows you to write module, workflow and pipeline level test. In short, it allows you to systematically check every individual part of the pipeline is working as expected, _in isolation_.
 
@@ -58,6 +56,16 @@ Let's run the workflow to make sure it's working as expected.
 
 ```bash
 nextflow run main.nf
+```
+
+```console title="Result of running the workflow"
+ N E X T F L O W   ~  version 24.10.2
+
+Launching `main.nf` [soggy_linnaeus] DSL2 - revision: bbf79d5c31
+
+executor >  local (6)
+[f7/c3be66] sayHello (3)       | 3 of 3 ✔
+[cd/e15303] convertToUpper (3) | 3 of 3 ✔
 ```
 
 CONGRATULATIONS! You just ran a test!
@@ -165,9 +173,14 @@ The `test` block is the actual test. It contains the following:
 - `when`: The conditions under which the test should be run. This includes the parameters that will be used to run the pipeline.
 - `then`: The assertions that should be made. This includes the expected outcomes of the pipeline.
 
+In plain English, the logic of the test reads as follows:
+"**When** these _parameters_ are provided to this _pipeline_, **then** we expect to see these results."
+
+This isn't a functional test, we will demonstrate how to turn it into one in the next section.
+
 ### A Note on Test Names
 
-In the example above, we used the name "Should run without failures" which is appropriate for a basic test that just checks if the pipeline runs successfully. However, as we add more specific test cases, we should use more descriptive names that indicate what we're actually testing. For example:
+In the example above, we used the default name "Should run without failures" which is appropriate for a basic test that just checks if the pipeline runs successfully. However, as we add more specific test cases, we should use more descriptive names that indicate what we're actually testing. For example:
 
 - "Should convert input to uppercase" - when testing specific functionality
 - "Should handle empty input gracefully" - when testing edge cases
@@ -181,11 +194,6 @@ Good test names should:
 3. Be clear enough that if the test fails, you know what functionality is broken
 
 As we add more assertions and specific test cases later, we'll use these more descriptive names to make it clear what each test is verifying.
-
-In plain English, the logic of the test reads as follows:
-"**When** these _parameters_ are provided to this _pipeline_, **then** we expect to see these results."
-
-This isn't a functional test, we will demonstrate how to turn it into one in the next section.
 
 ## 1.2. Run the test
 
@@ -407,9 +415,7 @@ Success! The pipeline runs successfully and the test passes. Now we have began t
 
 ## 1.4. Test the output
 
-Let's add an assertion to our test to check the output file was created.
-
-We can also add it as a separate test, with an informative name.
+Let's add an assertion to our test to check the output file was created. We'll add it as a separate test, with an informative name, to make the results easier to interpret.
 
 **Before:**
 
@@ -491,7 +497,7 @@ Test Workflow main.nf
 SUCCESS: Executed 2 tests in 15.165s
 ```
 
-Success! The test passes because the pipeline completed successfully, the correct number of processes ran and the output files were created. This should also show you how useful it is to provide those informative names for your tests.
+Success! The tests pass because the pipeline completed successfully, the correct number of processes ran and the output files were created. This should also show you how useful it is to provide those informative names for your tests.
 
 This is just the surface, we can keep writing assertions to check the details of the pipeline, but for now let's move on to testing the internals of the pipeline.
 
@@ -507,7 +513,7 @@ Learn how to test a Nextflow process.
 
 ## 2 Test a Nextflow process
 
-We don't have to write tests for every part of the pipeline, but the more tests we have the more comprehensive we can be about the pipeline and the more confident we can be that it's working as expected. In this section we're going to test both processes in the pipeline.
+We don't have to write tests for every part of the pipeline, but the more tests we have the more comprehensive we can be about the pipeline and the more confident we can be that it's working as expected. In this section we're going to test both processes in the pipeline as individual units.
 
 ### 2.1. Test the `sayHello` process
 
@@ -612,8 +618,6 @@ The test fails because the `sayHello` process declares 1 input channel but 0 wer
 **Before:**
 
 ```groovy title="tests/main.sayhello.nf.test"
-process {
-    """
     test("Should run without failures") {
 
         when {
@@ -635,16 +639,12 @@ process {
         }
 
     }
-    """
-}
 ```
 
 **After:**
 
 ```groovy title="tests/main.sayhello.nf.test"
-process {
-    """
-        test("Should run without failures and produce correct output") {
+    test("Should run without failures and produce correct output") {
 
         when {
             params {
@@ -664,9 +664,6 @@ process {
         }
 
     }
-
-    """
-}
 ```
 
 Let's run the test again to see if it works.
@@ -916,9 +913,7 @@ For now, let's re-use the existing data/greetings.csv file using the example we 
 **After:**
 
 ```groovy title="tests/main.converttoupper.nf.test"
-process {
-    """
-        test("Should run without failures and produce correct output") {
+    test("Should run without failures and produce correct output") {
 
         when {
             params {
@@ -938,8 +933,6 @@ process {
         }
 
     }
-    """
-}
 ```
 
 And run the test!
