@@ -406,7 +406,9 @@ Success! The pipeline runs successfully and the test passes. Now we have began t
 
 ## 1.4. Test the output
 
-Let's add an assertion to our test to check the output file was created. We'll also update the test name again to reflect that we're now checking both process execution and output files.
+Let's add an assertion to our test to check the output file was created.
+
+We can also add it as a separate test, with an informative name.
 
 **Before:**
 
@@ -441,6 +443,19 @@ Let's add an assertion to our test to check the output file was created. We'll a
         then {
             assert workflow.success
             assert workflow.trace.tasks().size() == 6
+        }
+
+    }
+
+    test("Should produce correct output files") {
+
+        when {
+            params {
+                input_file = "${projectDir}/greetings.csv"
+            }
+        }
+
+        then {
             assert file("$launchDir/results/Bonjour-output.txt").exists()
             assert file("$launchDir/results/Hello-output.txt").exists()
             assert file("$launchDir/results/Holà-output.txt").exists()
@@ -468,13 +483,14 @@ https://www.nf-test.com
 
 Test Workflow main.nf
 
-  Test [1d4aaf12] 'Should run successfully with correct processes and output files' PASSED (1.591s)
+  Test [f0e08a68] 'Should run without failures' PASSED (8.144s)
+  Test [d7e32a32] 'Should produce correct output files' PASSED (6.994s)
 
 
-SUCCESS: Executed 1 tests in 1.612s
+SUCCESS: Executed 2 tests in 15.165s
 ```
 
-Success! The test passes because the pipeline completed successfully, the correct number of processes ran and the output files were created.
+Success! The test passes because the pipeline completed successfully, the correct number of processes ran and the output files were created. This should also show you how useful it is to provide those informative names for your tests.
 
 This is just the surface, we can keep writing assertions to check the details of the pipeline, but for now let's move on to testing the internals of the pipeline.
 
@@ -1014,11 +1030,12 @@ Test Process convertToUpper
 
 Test Workflow main.nf
 
-  Test [1d4aaf12] 'Should run successfully with correct processes and output files' PASSED (1.652s)
+  Test [f0e08a68] 'Should run without failures' PASSED (8.144s)
+  Test [d7e32a32] 'Should produce correct output files' PASSED (6.994s)
 
 Test Process sayHello
 
-  Test [f91a1bcd] 'Should run without failures and produce correct output' PASSED (1.664s)
+  Test [f91a1bcd] 'Should run without failures and contain expected greeting' PASSED (1.664s)
 
 
 SUCCESS: Executed 3 tests in 5.007s
@@ -1031,10 +1048,16 @@ Check that out! We ran 3 tests, 1 for each process and 1 for the whole pipeline 
 In this side quest, we've learned:
 
 1. How to initialize nf-test in a Nextflow project
-2. How to write and run pipeline-level tests
+2. How to write and run pipeline-level tests:
+   - Basic success testing
+   - Process count verification
+   - Output file existence checks
 3. How to write and run process-level tests
-4. How to use snapshots to verify process outputs
-5. How to run all tests in a repository with a single command
+4. Two approaches to output validation:
+   - Using snapshots for complete output verification
+   - Using direct content assertions for specific content checks
+5. Best practices for test naming and organization
+6. How to run all tests in a repository with a single command
 
 Testing is a critical part of pipeline development that helps ensure:
 
@@ -1042,6 +1065,7 @@ Testing is a critical part of pipeline development that helps ensure:
 - Changes don't break existing functionality
 - Other developers can contribute with confidence
 - Problems can be identified and fixed quickly
+- Output content matches expectations
 
 ### What's next?
 
@@ -1051,5 +1075,6 @@ Check out the [nf-test documentation](https://www.nf-test.com/) for more advance
 - Write tests for edge cases and error conditions
 - Set up continuous integration to run tests automatically
 - Learn about other types of tests like workflow and module tests
+- Explore more advanced content validation techniques
 
-Remember: Tests are living documentation of how your code should behave. The more tests you write, the more confident you can be in your pipeline's reliability.
+Remember: Tests are living documentation of how your code should behave. The more tests you write, and the more specific your assertions are, the more confident you can be in your pipeline's reliability.

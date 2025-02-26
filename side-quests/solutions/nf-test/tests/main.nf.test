@@ -14,6 +14,19 @@ nextflow_pipeline {
         then {
             assert workflow.success
             assert workflow.trace.tasks().size() == 6
+        }
+
+    }
+
+    test("Should produce correct output files") {
+
+        when {
+            params {
+                input_file = "${projectDir}/greetings.csv"
+            }
+        }
+
+        then {
             assert file("$launchDir/results/Bonjour-output.txt").exists()
             assert file("$launchDir/results/Hello-output.txt").exists()
             assert file("$launchDir/results/Holà-output.txt").exists()
@@ -23,5 +36,4 @@ nextflow_pipeline {
         }
 
     }
-
 }
