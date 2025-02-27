@@ -6,7 +6,7 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <meta content="Atelier de formation de base sur Nextflow" name="description"/>
-<link href="https://training.nextflow.io/2.0.1/fr/basic_training/executors/" rel="canonical"/>
+<link href="https://training.nextflow.io/2.1/fr/basic_training/executors/" rel="canonical"/>
 <link href="../config/" rel="prev"/>
 <link href="../seqera_platform/" rel="next"/>
 <link href="../../../assets/img/nextflow-icon.png" rel="icon"/>
@@ -61,7 +61,7 @@
 </div>
 <div data-md-color-scheme="default" data-md-component="outdated" hidden="">
 </div>
-<header class="md-header" data-md-component="header">
+<header class="md-header md-header--shadow" data-md-component="header">
 <nav aria-label="En-tête" class="md-header__inner md-grid">
 <a aria-label="training.nextflow.io" class="md-header__button md-logo" data-md-component="logo" href="../../" title="training.nextflow.io">
 <img alt="logo" src="../../../assets/img/nextflow-logo-white.png"/>
@@ -173,84 +173,12 @@
 </nav>
 </header>
 <div class="md-container" data-md-component="container">
-<nav aria-label="Onglets" class="md-tabs" data-md-component="tabs">
-<div class="md-grid">
-<ul class="md-tabs__list">
-<li class="md-tabs__item">
-<a class="md-tabs__link" href="../../">
-        
-  
-    
-  
-  Home
-
-      </a>
-</li>
-<li class="md-tabs__item">
-<a class="md-tabs__link" href="../../envsetup/">
-          
-  
-  Environment setup
-
-        </a>
-</li>
-<li class="md-tabs__item">
-<a class="md-tabs__link" href="../../hello_nextflow/">
-          
-  
-  Hello Nextflow
-
-        </a>
-</li>
-<li class="md-tabs__item md-tabs__item--active">
-<a class="md-tabs__link" href="../">
-          
-  
-  Fundamentals Training
-
-        </a>
-</li>
-<li class="md-tabs__item">
-<a class="md-tabs__link" href="../../advanced/">
-          
-  
-  Advanced Training
-
-        </a>
-</li>
-<li class="md-tabs__item">
-<a class="md-tabs__link" href="../../nf_customize/">
-          
-  
-  Configure nf-core
-
-        </a>
-</li>
-<li class="md-tabs__item">
-<a class="md-tabs__link" href="../../nf_develop/">
-          
-  
-  Develop nf-core
-
-        </a>
-</li>
-<li class="md-tabs__item">
-<a class="md-tabs__link" href="../../troubleshoot/">
-          
-  
-  Troubleshooting
-
-        </a>
-</li>
-</ul>
-</div>
-</nav>
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
 <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
 <div class="md-sidebar__scrollwrap">
 <div class="md-sidebar__inner">
-<nav aria-label="Navigation" class="md-nav md-nav--primary md-nav--lifted" data-md-level="0">
+<nav aria-label="Navigation" class="md-nav md-nav--primary" data-md-level="0">
 <label class="md-nav__title" for="__drawer">
 <a aria-label="training.nextflow.io" class="md-nav__button md-logo" data-md-component="logo" href="../../" title="training.nextflow.io">
 <img alt="logo" src="../../../assets/img/nextflow-logo-white.png"/>
@@ -342,7 +270,7 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../../hello_nextflow/01_orientation/">
+<a class="md-nav__link" href="../../hello_nextflow/00_orientation/">
 <span class="md-ellipsis">
     Orientation
     
@@ -350,7 +278,7 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../../hello_nextflow/02_hello_world/">
+<a class="md-nav__link" href="../../hello_nextflow/01_hello_world/">
 <span class="md-ellipsis">
     Part 1: Hello World
     
@@ -358,25 +286,33 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../../hello_nextflow/03_hello_containers/">
+<a class="md-nav__link" href="../../hello_nextflow/02_hello_channels/">
 <span class="md-ellipsis">
-    Part 2: Hello Containers
+    Part 2: Hello Channels
     
   </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../../hello_nextflow/04_hello_genomics/">
+<a class="md-nav__link" href="../../hello_nextflow/03_hello_workflow/">
 <span class="md-ellipsis">
-    Part 3: Hello Genomics
+    Part 3: Hello Workflow
     
   </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../../hello_nextflow/05_hello_operators/">
+<a class="md-nav__link" href="../../hello_nextflow/04_hello_modules/">
 <span class="md-ellipsis">
-    Part 4: Hello Operators
+    Part 4: Hello Modules
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../hello_nextflow/05_hello_containers/">
+<span class="md-ellipsis">
+    Part 5: Hello Containers
     
   </span>
 </a>
@@ -384,39 +320,7 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../hello_nextflow/06_hello_config/">
 <span class="md-ellipsis">
-    Part 5: Hello Config
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../hello_nextflow/07_hello_modules/">
-<span class="md-ellipsis">
-    Part 6: Hello Modules
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../hello_nextflow/08_hello_nf-test/">
-<span class="md-ellipsis">
-    Part 7: Hello nf-test
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../hello_nextflow/09_hello_nf-core/">
-<span class="md-ellipsis">
-    Part 8: Hello nf-core
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../hello_nextflow/10_hello_seqera/">
-<span class="md-ellipsis">
-    Part 9: Hello Seqera
+    Part 6: Hello Config
     
   </span>
 </a>
@@ -424,17 +328,67 @@
 </ul>
 </nav>
 </li>
-<li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
-<input checked="" class="md-nav__toggle md-toggle" id="__nav_4" type="checkbox"/>
-<label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+<span class="md-ellipsis">
+    Nextflow for Genomics
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_4_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_4">
+<span class="md-nav__icon md-icon"></span>
+            Nextflow for Genomics
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../nf4_science/genomics/">
+<span class="md-ellipsis">
+    Nextflow for Genomics
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../nf4_science/genomics/00_orientation/">
+<span class="md-ellipsis">
+    Orientation
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../nf4_science/genomics/01_per_sample_variant_calling/">
+<span class="md-ellipsis">
+    Part 1: Per-sample variant calling
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../nf4_science/genomics/02_joint_calling/">
+<span class="md-ellipsis">
+    Part 2: Joint calling on a cohort
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_5" type="checkbox"/>
+<label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
 <span class="md-ellipsis">
     Fundamentals Training
     
   </span>
 <span class="md-nav__icon md-icon"></span>
 </label>
-<nav aria-expanded="true" aria-labelledby="__nav_4_label" class="md-nav" data-md-level="1">
-<label class="md-nav__title" for="__nav_4">
+<nav aria-expanded="true" aria-labelledby="__nav_5_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_5">
 <span class="md-nav__icon md-icon"></span>
             Fundamentals Training
           </label>
@@ -803,16 +757,16 @@
 </nav>
 </li>
 <li class="md-nav__item md-nav__item--nested">
-<input class="md-nav__toggle md-toggle" id="__nav_5" type="checkbox"/>
-<label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+<input class="md-nav__toggle md-toggle" id="__nav_6" type="checkbox"/>
+<label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
 <span class="md-ellipsis">
     Advanced Training
     
   </span>
 <span class="md-nav__icon md-icon"></span>
 </label>
-<nav aria-expanded="false" aria-labelledby="__nav_5_label" class="md-nav" data-md-level="1">
-<label class="md-nav__title" for="__nav_5">
+<nav aria-expanded="false" aria-labelledby="__nav_6_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_6">
 <span class="md-nav__icon md-icon"></span>
             Advanced Training
           </label>
@@ -893,212 +847,6 @@
 <a class="md-nav__link" href="../../advanced/support/">
 <span class="md-ellipsis">
     Support
-    
-  </span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item md-nav__item--nested">
-<input class="md-nav__toggle md-toggle" id="__nav_6" type="checkbox"/>
-<label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
-<span class="md-ellipsis">
-    Configure nf-core
-    
-  </span>
-<span class="md-nav__icon md-icon"></span>
-</label>
-<nav aria-expanded="false" aria-labelledby="__nav_6_label" class="md-nav" data-md-level="1">
-<label class="md-nav__title" for="__nav_6">
-<span class="md-nav__icon md-icon"></span>
-            Configure nf-core
-          </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../nf_customize/">
-<span class="md-ellipsis">
-    Configure nf-core
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../nf_customize/01_orientation/">
-<span class="md-ellipsis">
-    Orientation
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../nf_customize/02_nf-core/">
-<span class="md-ellipsis">
-    What is nf-core?
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../nf_customize/03_execution/">
-<span class="md-ellipsis">
-    nf-core/demo
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../nf_customize/04_config/">
-<span class="md-ellipsis">
-    Configuration options
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../nf_customize/05_tools/">
-<span class="md-ellipsis">
-    Tools for users
-    
-  </span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item md-nav__item--nested">
-<input class="md-nav__toggle md-toggle" id="__nav_7" type="checkbox"/>
-<label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
-<span class="md-ellipsis">
-    Develop nf-core
-    
-  </span>
-<span class="md-nav__icon md-icon"></span>
-</label>
-<nav aria-expanded="false" aria-labelledby="__nav_7_label" class="md-nav" data-md-level="1">
-<label class="md-nav__title" for="__nav_7">
-<span class="md-nav__icon md-icon"></span>
-            Develop nf-core
-          </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../nf_develop/">
-<span class="md-ellipsis">
-    Develop nf-core
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../nf_develop/1_01_orientation/">
-<span class="md-ellipsis">
-    Orientation
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../nf_develop/1_02_create/">
-<span class="md-ellipsis">
-    Getting started
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../nf_develop/1_03_pipeline/">
-<span class="md-ellipsis">
-    Adding modules
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../nf_develop/1_04_parameters/">
-<span class="md-ellipsis">
-    Adding parameters
-    
-  </span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item md-nav__item--nested">
-<input class="md-nav__toggle md-toggle" id="__nav_8" type="checkbox"/>
-<label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
-<span class="md-ellipsis">
-    Troubleshooting
-    
-  </span>
-<span class="md-nav__icon md-icon"></span>
-</label>
-<nav aria-expanded="false" aria-labelledby="__nav_8_label" class="md-nav" data-md-level="1">
-<label class="md-nav__title" for="__nav_8">
-<span class="md-nav__icon md-icon"></span>
-            Troubleshooting
-          </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../troubleshoot/">
-<span class="md-ellipsis">
-    Troubleshooting
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../troubleshoot/01_orientation/">
-<span class="md-ellipsis">
-    Orientation
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../troubleshoot/01_exercise/">
-<span class="md-ellipsis">
-    Exercise 1
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../troubleshoot/02_exercise/">
-<span class="md-ellipsis">
-    Exercise 2
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../troubleshoot/03_exercise/">
-<span class="md-ellipsis">
-    Exercise 3
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../troubleshoot/04_exercise/">
-<span class="md-ellipsis">
-    Exercise 4
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../troubleshoot/05_exercise/">
-<span class="md-ellipsis">
-    Exercise 5
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../troubleshoot/06_exercise/">
-<span class="md-ellipsis">
-    Exercise 6
     
   </span>
 </a>
@@ -1361,16 +1109,16 @@ The translated material may be incomplete or incorrect.
 We plan to update the translations later this year.
 In the meantime, please try to work through the English-language material if you can.</p>
 </div>
-<h1 id="scenarios-de-deploiement"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.</span> Scénarios de déploiement<a class="headerlink" href="#scenarios-de-deploiement" title="Permanent link">¶</a></h1>
+<h1 id="scenarios-de-deploiement"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.</span> Scénarios de déploiement<a class="headerlink" href="#scenarios-de-deploiement" title="Permanent link">¶</a></h1>
 <p>Les applications génomiques du monde réel peuvent engendrer l'exécution de milliers de tâches. Dans ce scénario, un planificateur de lots est généralement utilisé pour déployer un workflow dans un cluster informatique, permettant l'exécution de nombreuses tâches en parallèle sur de nombreux nœuds informatiques.</p>
 <p>Nextflow a un support intégré pour les plannificateurs batch les plus couramment utilisés, tels que Univa Grid Engine, <a href="https://slurm.schedmd.com/">SLURM</a> et IBM LSF. Consultez la documentation de Nextflow pour obtenir la liste complète des prises en charge <a href="https://www.nextflow.io/docs/latest/executor.html">plates-formes d'exécution</a>.</p>
-<h2 id="deploiement-du-cluster"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.1</span> Déploiement du cluster<a class="headerlink" href="#deploiement-du-cluster" title="Permanent link">¶</a></h2>
+<h2 id="deploiement-du-cluster"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.1</span> Déploiement du cluster<a class="headerlink" href="#deploiement-du-cluster" title="Permanent link">¶</a></h2>
 <p>L'une des principales caractéristiques de Nextflow est la capacité de découpler la mise en œuvre du workflow de la plate-forme d'exécution proprement dite. La mise en œuvre d'une couche d'abstraction permet de déployer le workflow résultant sur n'importe quelle plate-forme d'exécution prise en charge par le cadre.</p>
 <p><img alt="Executeurs Nextflow" src="../../../basic_training/img/nf-executors.png"/></p>
 <p>Pour exécuter votre workflow avec un planificateur batch, modifiez le fichier <code>nextflow.config</code> en spécifiant l'exécuteur cible et les ressources informatiques requises si nécessaire. Par exemple, le fichier <code>nextflow.config</code> peut être modifié :</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="n">process</span><span class="o">.</span><span class="na">executor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'slurm'</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="gestion-des-ressources-du-cluster"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.2</span> Gestion des ressources du cluster<a class="headerlink" href="#gestion-des-ressources-du-cluster" title="Permanent link">¶</a></h2>
+<h2 id="gestion-des-ressources-du-cluster"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.2</span> Gestion des ressources du cluster<a class="headerlink" href="#gestion-des-ressources-du-cluster" title="Permanent link">¶</a></h2>
 <p>Lors de l'utilisation d'un planificateur batch, il est souvent nécessaire de spécifier le nombre de ressources (cpus, mémoire, temps d'exécution, etc.) requises par chaque tâche.</p>
 <p>Pour ce faire, il convient d'utiliser les directives de processus suivantes :</p>
 <table>
@@ -1403,7 +1151,7 @@ In the meantime, please try to work through the English-language material if you
 </tr>
 </tbody>
 </table>
-<h3 id="ressources-a-lechelle-du-workflow"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.2.1</span> Ressources à l'échelle du workflow<a class="headerlink" href="#ressources-a-lechelle-du-workflow" title="Permanent link">¶</a></h3>
+<h3 id="ressources-a-lechelle-du-workflow"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.2.1</span> Ressources à l'échelle du workflow<a class="headerlink" href="#ressources-a-lechelle-du-workflow" title="Permanent link">¶</a></h3>
 <p>Utilisez le champ d'application <code>process</code> pour définir les besoins en ressources de tous les processus de vos applications de workflow. Par exemple :</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span>
 <span class="normal"><a href="#__codelineno-1-2">2</a></span>
@@ -1419,7 +1167,7 @@ In the meantime, please try to work through the English-language material if you
 <a id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="w">    </span><span class="n">cpus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span>
 <a id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="soumettre-nextflow-en-tant-que-tache"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.2.2</span> Soumettre Nextflow en tant que tache<a class="headerlink" href="#soumettre-nextflow-en-tant-que-tache" title="Permanent link">¶</a></h3>
+<h3 id="soumettre-nextflow-en-tant-que-tache"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.2.2</span> Soumettre Nextflow en tant que tache<a class="headerlink" href="#soumettre-nextflow-en-tant-que-tache" title="Permanent link">¶</a></h3>
 <p>Bien que la commande principale de Nextflow puisse être lancée sur le nœud de connexion / tête d'un cluster, il faut savoir que le nœud doit être configuré pour des commandes qui s'exécutent pendant une longue période, même si les ressources informatiques utilisées sont négligeables. Une autre option est de soumettre le processus Nextflow principal en tant que tache sur le cluster.</p>
 <div class="admonition remarque">
 <p class="admonition-title">Remarque</p>
@@ -1463,7 +1211,7 @@ Vous trouverez d'autres conseils pour l'exécution de Nextflow sur HPC dans les 
 <li><a href="https://www.nextflow.io/blog/2021/5_tips_for_hpc_users.html">5 astuces Nextflow pour les utilisateurs HPC</a></li>
 <li><a href="https://www.nextflow.io/blog/2021/5-more-tips-for-nextflow-user-on-hpc.html">Cinq astuces supplémentaires pour les utilisateurs de Nextflow sur le HPC</a></li>
 </ul>
-<h3 id="configurer-le-processus-par-nom"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.2.3</span> Configurer le processus par nom<a class="headerlink" href="#configurer-le-processus-par-nom" title="Permanent link">¶</a></h3>
+<h3 id="configurer-le-processus-par-nom"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.2.3</span> Configurer le processus par nom<a class="headerlink" href="#configurer-le-processus-par-nom" title="Permanent link">¶</a></h3>
 <p>Dans les applications réelles, des tâches différentes nécessitent des ressources informatiques différentes. Il est possible de définir les ressources pour une tâche spécifique en utilisant la commande <code>withName:</code> suivie du nom du processus :</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-4-2"> 2</a></span>
@@ -1517,7 +1265,7 @@ Vous trouverez d'autres conseils pour l'exécution de Nextflow sur HPC dans les 
 </code></pre></div>
 </details>
 </div>
-<h3 id="configurer-le-processus-par-etiquettes"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.2.4</span> Configurer le processus par étiquettes<a class="headerlink" href="#configurer-le-processus-par-etiquettes" title="Permanent link">¶</a></h3>
+<h3 id="configurer-le-processus-par-etiquettes"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.2.4</span> Configurer le processus par étiquettes<a class="headerlink" href="#configurer-le-processus-par-etiquettes" title="Permanent link">¶</a></h3>
 <p>Lorsqu'une application de workflow est composée de nombreux processus, il peut être difficile de dresser la liste de tous les noms de processus et de choisir des ressources pour chacun d'entre eux dans le fichier de configuration.</p>
 <p>Une meilleure stratégie consiste à annoter les processus avec une directive <a href="https://www.nextflow.io/docs/latest/process.html#label">label</a>. Spécifiez ensuite les ressources dans le fichier de configuration utilisé pour tous les processus ayant le même label.</p>
 <p>Le script du workflow :</p>
@@ -1586,7 +1334,7 @@ Vous trouverez d'autres conseils pour l'exécution de Nextflow sur HPC dans les 
 <a id="__codelineno-7-14" name="__codelineno-7-14"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-7-15" name="__codelineno-7-15"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="configurer-plusieurs-containers"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.2.5</span> Configurer plusieurs containers<a class="headerlink" href="#configurer-plusieurs-containers" title="Permanent link">¶</a></h3>
+<h3 id="configurer-plusieurs-containers"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.2.5</span> Configurer plusieurs containers<a class="headerlink" href="#configurer-plusieurs-containers" title="Permanent link">¶</a></h3>
 <p>Les containers peuvent être définis pour chaque processus de votre flux de travail. Vous pouvez définir leurs conteneurs dans un fichier de configuration, comme indiqué ci-dessous :</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-8-2"> 2</a></span>
@@ -1613,7 +1361,7 @@ Vous trouverez d'autres conseils pour l'exécution de Nextflow sur HPC dans les 
 <p>Dois-je utiliser un seul container <em>fat</em> ou plusieurs containers <em>slim</em> ? Les deux approches ont des avantages et des inconvénients. Un container unique est plus simple à construire et à maintenir, mais lorsque vous utilisez de nombreux outils, l'image peut devenir très volumineuse et les outils peuvent créer des conflits entre eux. L'utilisation d'un container pour chaque processus peut donner lieu à de nombreuses images différentes à construire et à maintenir, en particulier lorsque les processus de votre workflow utilisent des outils différents pour chaque tâche.</p>
 </div>
 <p>Pour en savoir plus sur les sélecteurs de processus de configuration, consultez <a href="https://www.nextflow.io/docs/latest/config.html#process-selectors">ce lien</a>.</p>
-<h2 id="configuration-des-profils"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.3</span> Configuration des profils<a class="headerlink" href="#configuration-des-profils" title="Permanent link">¶</a></h2>
+<h2 id="configuration-des-profils"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.3</span> Configuration des profils<a class="headerlink" href="#configuration-des-profils" title="Permanent link">¶</a></h2>
 <p>Les fichiers de configuration peuvent contenir la définition d'un ou plusieurs <em>profils</em>. Un profil est un ensemble d'attributs de configuration qui peuvent être activés/choisis lors du lancement de l'exécution d'un workflow en utilisant l'option de ligne de commande <code>-profile</code>.</p>
 <p>Les profils de configuration sont définis en utilisant la portée spéciale <code>profiles</code> qui regroupe les attributs appartenant au même profil en utilisant un préfixe commun. Par exemple :</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1"> 1</a></span>
@@ -1670,7 +1418,7 @@ Vous trouverez d'autres conseils pour l'exécution de Nextflow sur HPC dans les 
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-11-1" id="__codelineno-11-1" name="__codelineno-11-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>&lt;your<span class="w"> </span>script&gt;<span class="w"> </span>-profile<span class="w"> </span>standard,cloud
 </code></pre></div>
 </div>
-<h2 id="deploiement-dans-le-cloud"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.4</span> Déploiement dans le cloud<a class="headerlink" href="#deploiement-dans-le-cloud" title="Permanent link">¶</a></h2>
+<h2 id="deploiement-dans-le-cloud"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.4</span> Déploiement dans le cloud<a class="headerlink" href="#deploiement-dans-le-cloud" title="Permanent link">¶</a></h2>
 <p><a href="https://aws.amazon.com/batch/">AWS Batch</a> est un service informatique géré qui permet l'exécution de charges de travail containérisées dans l'infrastructure cloud d'Amazon.</p>
 <p>Nextflow fournit un support intégré pour AWS Batch qui permet le déploiement transparent d'un workflow Nextflow dans le cloud, en déchargeant les exécutions de processus en tant que tâches Batch.</p>
 <p>Une fois que l'environnement Batch est configuré, spécifiez les types d'instances à utiliser et le nombre maximum de CPU à allouer, vous devez créer un fichier de configuration Nextflow comme celui présenté ci-dessous :</p>
@@ -1704,7 +1452,7 @@ Vous trouverez d'autres conseils pour l'exécution de Nextflow sur HPC dans les 
 </code></pre></div>
 </div>
 <p>Les détails complets sur le déploiement par lots d'AWS sont disponibles sur <a href="https://www.nextflow.io/docs/latest/aws.html#aws-batch">ce lien</a>.</p>
-<h2 id="montages-des-volumes"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.5</span> Montages des volumes<a class="headerlink" href="#montages-des-volumes" title="Permanent link">¶</a></h2>
+<h2 id="montages-des-volumes"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.5</span> Montages des volumes<a class="headerlink" href="#montages-des-volumes" title="Permanent link">¶</a></h2>
 <p>Les volumes Elastic Block Storage (EBS) (ou tout autre type de stockage pris en charge) peuvent être montés dans le Container de tâches à l'aide de l'extrait de configuration suivant :</p>
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-14-1" id="__codelineno-14-1" name="__codelineno-14-1"></a><span class="n">aws</span><span class="w"> </span><span class="o">{</span>
 <a href="#__codelineno-14-2" id="__codelineno-14-2" name="__codelineno-14-2"></a><span class="w">    </span><span class="n">batch</span><span class="w"> </span><span class="o">{</span>
@@ -1728,7 +1476,7 @@ Vous trouverez d'autres conseils pour l'exécution de Nextflow sur HPC dans les 
 <p class="admonition-title">Avertissement</p>
 <p>Nextflow s'attend à ce que les chemins d'accès soient disponibles. Il ne gère pas la mise à disposition de volumes EBS ou d'un autre type de stockage.</p>
 </div>
-<h2 id="definition-des-taches-personnalisees"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.6</span> Définition des tâches personnalisées<a class="headerlink" href="#definition-des-taches-personnalisees" title="Permanent link">¶</a></h2>
+<h2 id="definition-des-taches-personnalisees"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.6</span> Définition des tâches personnalisées<a class="headerlink" href="#definition-des-taches-personnalisees" title="Permanent link">¶</a></h2>
 <p>Nextflow crée automatiquement les Batch <a href="https://docs.aws.amazon.com/batch/latest/userguide/job_definitions.html">definitions de taches</a> nécessaires à l'exécution de vos processus de workflow. Il n'est donc pas nécessaire de les définir avant d'exécuter votre workflow.</p>
 <p>Cependant, vous pouvez toujours avoir besoin de spécifier une définition de travail personnalisée pour permettre un contrôle fin des paramètres de configuration d'un travail spécifique (par exemple, pour définir des chemins de montage personnalisés ou d'autres paramètres spéciaux d'un batch de taches).</p>
 <p>Pour utiliser votre propre définition de travail dans un workflow Nextflow, utilisez-la à la place du nom de l'image du conteneur, en la préfixant avec la chaîne <code>job-definition://</code>. Par exemple :</p>
@@ -1736,7 +1484,7 @@ Vous trouverez d'autres conseils pour l'exécution de Nextflow sur HPC dans les 
 <a href="#__codelineno-16-2" id="__codelineno-16-2" name="__codelineno-16-2"></a><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'job-definition://your-job-definition-name'</span>
 <a href="#__codelineno-16-3" id="__codelineno-16-3" name="__codelineno-16-3"></a><span class="o">}</span>
 </code></pre></div>
-<h2 id="image-personnalisee"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.7</span> Image personnalisée<a class="headerlink" href="#image-personnalisee" title="Permanent link">¶</a></h2>
+<h2 id="image-personnalisee"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.7</span> Image personnalisée<a class="headerlink" href="#image-personnalisee" title="Permanent link">¶</a></h2>
 <p>Comme Nextflow exige que l'outil AWS CLI soit accessible dans l'environnement informatique, une solution courante consiste à créer une Amazon Machine Image (AMI) personnalisée et à l'installer de manière autonome (par exemple à l'aide du gestionnaire de paquets Conda).</p>
 <div class="admonition avertissement">
 <p class="admonition-title">Avertissement</p>
@@ -1760,7 +1508,7 @@ Vous trouverez d'autres conseils pour l'exécution de Nextflow sur HPC dans les 
 <p>Enfin, spécifiez le chemin complet <code>aws</code> dans le fichier de configuration de Nextflow comme indiqué ci-dessous :</p>
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-18-1" id="__codelineno-18-1" name="__codelineno-18-1"></a><span class="n">aws</span><span class="o">.</span><span class="na">batch</span><span class="o">.</span><span class="na">cliPath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'/home/ec2-user/miniconda/bin/aws'</span>
 </code></pre></div>
-<h2 id="lancer-le-modele"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.8</span> Lancer le modèle<a class="headerlink" href="#lancer-le-modele" title="Permanent link">¶</a></h2>
+<h2 id="lancer-le-modele"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.8</span> Lancer le modèle<a class="headerlink" href="#lancer-le-modele" title="Permanent link">¶</a></h2>
 <p>Une autre approche consiste à créer une AMI personnalisée à l'aide d'un <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html">modèle de lancement</a> qui installe l'outil AWS CLI lors du démarrage de l'instance via des données utilisateur personnalisées.</p>
 <p>Dans le tableau de bord EC2, créez un modèle de lancement en spécifiant le champ de données de l'utilisateur :</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-19-1"> 1</a></span>
@@ -1808,7 +1556,7 @@ Vous trouverez d'autres conseils pour l'exécution de Nextflow sur HPC dans les 
 <a id="__codelineno-19-22" name="__codelineno-19-22"></a>--//--
 </code></pre></div></td></tr></table></div>
 <p>Créez ensuite un nouvel environnement informatique dans le tableau de bord Batch et indiquez le modèle de lancement nouvellement créé dans le champ correspondant.</p>
-<h2 id="deploiements-hybrides"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.9</span> Déploiements hybrides<a class="headerlink" href="#deploiements-hybrides" title="Permanent link">¶</a></h2>
+<h2 id="deploiements-hybrides"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.9</span> Déploiements hybrides<a class="headerlink" href="#deploiements-hybrides" title="Permanent link">¶</a></h2>
 <p>Nextflow permet l'utilisation de plusieurs exécuteurs dans la même application de workflow. Cette fonctionnalité permet de déployer des charges de travail hybrides dans lesquelles certains travaux sont exécutés sur l'ordinateur local ou le cluster de calcul local, et d'autres travaux sont déchargés sur le service AWS Batch.</p>
 <p>Pour activer cette fonctionnalité, utilisez un ou plusieurs <a href="https://www.nextflow.io/docs/latest/config.html#config-process-selectors">selecteur de processes</a> dans votre fichier de configuration Nextflow.</p>
 <p>Par exemple, appliquez la <a href="https://www.nextflow.io/docs/latest/aws.html#configuration">configuration AWS Batch</a> uniquement à un sous-ensemble de processus dans votre flux de travail. Vous pouvez essayer ce qui suit :</p>
@@ -1923,8 +1671,8 @@ Vous trouverez d'autres conseils pour l'exécution de Nextflow sur HPC dans les 
 <div class="md-consent__overlay"></div>
 <aside class="md-consent__inner">
 <form class="md-consent__form md-grid md-typeset" name="consent">
-<h4><span class="enumerate-headings-plugin enumerate-heading-plugin">11.9.0.1</span> Cookie consent</h4>
-<p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our documentation better.</p>
+<h4><span class="enumerate-headings-plugin enumerate-heading-plugin">12.9.0.1</span> Cookie consent</h4>
+<p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our training materials better.</p>
 <input class="md-toggle" id="__settings" type="checkbox"/>
 <div class="md-consent__settings">
 <ul class="task-list">
@@ -1952,7 +1700,7 @@ Vous trouverez d'autres conseils pour l'exécution de Nextflow sur HPC dans les 
 </aside>
 </div>
 <script>var consent=__md_get("__consent");if(consent)for(var input of document.forms.consent.elements)input.name&&(input.checked=consent[input.name]||!1);else"file:"!==location.protocol&&setTimeout((function(){document.querySelector("[data-md-component=consent]").hidden=!1}),250);var form=document.forms.consent;for(var action of["submit","reset"])form.addEventListener(action,(function(e){if(e.preventDefault(),"reset"===e.type)for(var n of document.forms.consent.elements)n.name&&(n.checked=!1);__md_set("__consent",Object.fromEntries(Array.from(new FormData(form).keys()).map((function(e){return[e,!0]})))),location.hash="",location.reload()}))</script>
-<script id="__config" type="application/json">{"base": "../../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.tabs", "navigation.top", "navigation.tracking", "search.share", "toc.follow"], "search": "../../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}, "version": {"alias": true, "provider": "mike"}}</script>
+<script id="__config" type="application/json">{"base": "../../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.instant", "navigation.top", "navigation.tracking", "search.share", "toc.follow"], "search": "../../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}, "version": {"alias": true, "provider": "mike"}}</script>
 <script src="../../../assets/javascripts/bundle.f1b6f286.min.js"></script>
 </body>
 </html>
