@@ -40,7 +40,9 @@ TODO
 - **The file `nextflow.config`** is a configuration file that sets minimal environment properties.
   You can ignore it for now.
 
-- \*\*The `data` directory contains input data and related resources, described later in the course.
+- **The `data` directory** contains input data and related resources:
+  - _A reference genome_ consisting of a small region of the human chromosome 20 (from hg19/b37) and its accessory files (index and known splice sites).
+  - _RNAseq data_ corresponding to **[contents]**, which have been subset to a **[region?]** to keep the file sizes small.
 
 _Completed workflows (solutions) will be added in the near future._
 

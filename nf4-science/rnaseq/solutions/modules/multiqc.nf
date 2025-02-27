@@ -1,5 +1,7 @@
+#!/usr/bin/env nextflow
+
 process MULTIQC {
-    publishDir "${params.outdir}/multiqc", mode: 'copy'
+    publishDir "results/multiqc", mode: 'copy'
 
     input:
     path '*'

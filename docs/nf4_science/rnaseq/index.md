@@ -9,12 +9,7 @@ hide:
 This training course is intended for researchers in transcriptomics and related fields who are interested in developing or customizing data analysis pipelines.
 It builds on the [Hello Nextflow](../hello_nextflow/) beginner training and demonstrates how to use Nextflow in the specific context of bulk RNAseq analysis.
 
-Specifically, this course demonstrates how to implement a simple bulk RNAseq analysis pipeline with **[tools involved]**.
-
-!!! note
-
-    Don't worry if you're not familiar with **[tools involved]** specifically.
-    We'll summarize the necessary concepts as we go, and the workflow implementation principles we demonstrate here apply broadly to any command line tool that processes RNAseq data.
+Specifically, this course demonstrates how to implement a simple bulk RNAseq processing pipeline to trim adapter sequences, align the reads to a genome reference and performs quality control (QC) at several stages.
 
 ## Learning objectives
 
@@ -22,9 +17,10 @@ By working through this course, you will learn how to apply foundational Nextflo
 
 By the end of this workshop you will be able to:
 
-- Write a linear workflow to apply **[basic processing step one]**
-- Handle domain-specific files such as **[file types]** resources appropriately
-- Leverage Nextflow's dataflow paradigm to parallelize per-sample RNAseq analysis
+- Write a linear workflow to apply basic RNAseq processing and QC methods
+- Handle domain-specific files such as FastQ and reference genome resources appropriately
+- Handle single-end and paired-end sequencing data
+- Leverage Nextflow's dataflow paradigm to parallelize per-sample RNAseq processing
 <!-- TODO
 - Implement **[quality control aggregation??]** using relevant channel operators
 - Configure pipeline execution and manage and optimize resource allocations
