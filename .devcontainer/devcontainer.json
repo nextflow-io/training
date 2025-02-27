@@ -9,7 +9,7 @@
         "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
     },
     "workspaceFolder": "/workspaces/training",
-    "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/training,type=bind", //This line will work in local devcontainers, but not in codespaces.
+    "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/training,type=bind", // Used for local devcontainers, ignored in Codespaces.
     "remoteEnv": {
         "NXF_HOME": "/workspaces/.nextflow",
         "HOST_PROJECT_PATH": "/workspaces/training" //Codespaces and local devcontainers will both work with this.
