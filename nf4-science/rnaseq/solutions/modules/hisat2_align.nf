@@ -1,12 +1,13 @@
 #!/usr/bin/env nextflow
 
 process HISAT2_ALIGN {
+
+    container "community.wave.seqera.io/library/hisat2_samtools:5e49f68a37dc010e"
     publishDir "results/align", mode: 'copy'
 
     input:
     path reads
-    path index
-    path splice_sites
+    path index_zip
 
     output:
     path "${reads.simpleName}.bam", emit: bam
@@ -14,7 +15,8 @@ process HISAT2_ALIGN {
 
     script:
     """
-    hisat2 -x ${index.simpleName} -U $reads --known-splicesite-infile $splice_sites --new-summary --summary-file ${reads.simpleName}.hisat2.log | \
+    tar -xzvf $index_zip
+    hisat2 -x ${index_zip.simpleName} -U $reads --new-summary --summary-file ${reads.simpleName}.hisat2.log | \
     samtools view -bS - > ${reads.simpleName}.bam
     """
 }

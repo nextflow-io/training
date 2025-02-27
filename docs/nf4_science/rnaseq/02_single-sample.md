@@ -26,6 +26,8 @@ Let's start by writing a process, which we'll call `FASTQC`, describing the `fas
 #!/usr/bin/env nextflow
 
 process FASTQC {
+
+    container "community.wave.seqera.io/library/trim-galore:0.6.10--1bf8ca4e1967cd18"
     publishDir "results/fastqc", mode: 'copy'
 
     input:
@@ -78,6 +80,8 @@ Let's write a process, which we'll call `TRIM_GALORE`, that trims adapter sequen
 #!/usr/bin/env nextflow
 
 process TRIM_GALORE {
+
+    container "community.wave.seqera.io/library/trim-galore:0.6.10--1bf8ca4e1967cd18"
     publishDir "results/trimming", mode: 'copy'
 
     input:
@@ -85,7 +89,7 @@ process TRIM_GALORE {
 
     output:
     path "${reads.simpleName}_trimmed.fq.gz", emit: trimmed_reads
-    path "${reads.simpleName}_trimming_report.txt", emit: trimming_reports
+    path "${reads}_trimming_report.txt", emit: trimming_reports
     path "${reads.simpleName}_trimmed_fastqc.{zip,html}", emit: fastqc_reports
 
     script:
@@ -123,12 +127,13 @@ Let's write a process, which we'll call `HISAT2_ALIGN`, that aligns the trimmed 
 #!/usr/bin/env nextflow
 
 process HISAT2_ALIGN {
+
+    container "community.wave.seqera.io/library/hisat2_samtools:5e49f68a37dc010e"
     publishDir "results/align", mode: 'copy'
 
     input:
     path reads
     path index
-    path splice_sites
 
     output:
     path "${reads.simpleName}.bam", emit: bam
@@ -136,8 +141,8 @@ process HISAT2_ALIGN {
 
     script:
     """
-    hisat2 -x ${index.simpleName} -U $reads --known-splicesite-infile $splice_sites --new-summary --summary-file ${reads.simpleName}.hisat2.log | \
-    samtools view -bS - > ${reads.simpleName}.bam
+    hisat2 -x ${index.simpleName} -U $reads --new-summary --summary-file ${reads.simpleName}.hisat2.log | \
+    samtools view -bS -o ${reads.simpleName}.bam
     """
 }
 ```
@@ -170,6 +175,8 @@ Let's write a process, which we'll call `MULTIQC`, that collect QC metrics with 
 #!/usr/bin/env nextflow
 
 process MULTIQC {
+
+    container "community.wave.seqera.io/library/pip_multiqc:ad8f247edb55897c"
     publishDir "results/multiqc", mode: 'copy'
 
     input:

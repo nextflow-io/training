@@ -1,16 +1,14 @@
 #!/usr/bin/env nextflow
 
 // Module INCLUDE statements
-include { FASTQC } from './modules/fastqc'
+include { FASTQC } from './modules/fastqc.nf'
 
 /*
  * Pipeline parameters
  */
-params.hisat2_index = "path/to/hisat2/index"
-params.splice_sites = "path/to/splice_sites.txt"
 
 // Primary input
-params.reads = "path/to/reads/*.fastq.gz"
+params.reads = "data/reads/ENCSR000COQ1_1.fastq.gz"
 
 workflow {
 
