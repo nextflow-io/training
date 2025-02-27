@@ -1,6 +1,6 @@
 # Build and push the Docker image for building the site (mkdocs material)
 
-name: MkDocs Docker image
+name: MkDocs image
 
 on:
   pull_request:

@@ -2,7 +2,7 @@
 # - Only pushes if push or release
 # - Builds without push for PRs to check the Dockerfile
 
-name: Training Docker image
+name: Docker image
 
 on:
   pull_request: # Build, don't push
@@ -18,6 +18,9 @@ on:
 jobs:
   build_push:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     steps:
       - name: Set tag variable
         run: |
@@ -28,7 +31,6 @@ jobs:
           else
             echo "IMAGE_TAG=latest" >> $GITHUB_ENV
           fi
-          echo $IMAGE_TAG
 
       - name: Check out the repo
         uses: actions/checkout@v4
