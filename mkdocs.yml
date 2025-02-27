@@ -18,6 +18,10 @@ nav:
       - hello_nextflow/04_hello_modules.md
       - hello_nextflow/05_hello_containers.md
       - hello_nextflow/06_hello_config.md
+  - Side Quests:
+      - side_quests/nf-test.md
+      - hello_nextflow/survey.md
+      - hello_nextflow/next_steps.md
   - Nextflow for Genomics:
       - nf4_science/genomics/index.md
       - nf4_science/genomics/00_orientation.md
@@ -171,6 +175,7 @@ plugins:
         - basic_training/orientation.md
         - advanced/index.md
         - advanced/orientation.md
+        - side_quests/nf-test.md
   - i18n:
       docs_structure: suffix
       fallback_to_default: true

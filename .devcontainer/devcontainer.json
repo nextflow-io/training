@@ -13,10 +13,13 @@
         },
         "ghcr.io/devcontainers/features/common-utils:2": { "version": "latest" }
     },
+    "workspaceFolder": "/workspaces/training",
+    "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/training,type=bind", // Used for local devcontainers, ignored in Codespaces.
     "remoteEnv": {
         "NXF_HOME": "/workspaces/.nextflow",
-        "HOST_PROJECT_PATH": "/workspaces/training/"
+        "HOST_PROJECT_PATH": "/workspaces/training" //Codespaces and local devcontainers will both work with this.
     },
+    "postCreateCommand": "if [ -z \"$CODESPACES\" ]; then echo \"Local Development\"; else echo \"Codespaces Development\"; fi",
     // Configure tool-specific properties.
     "customizations": {
         // Configure properties specific to VS Code.
