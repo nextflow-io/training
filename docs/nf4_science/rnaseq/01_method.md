@@ -1,4 +1,4 @@
-# Part 1: RNAseq processing method overview
+# Part 1: Method overview and manual testing
 
 There are multiple valid methods for processing and analyzing bulk RNAseq data.
 For this course, we are following the method described [here](https://www.bioinformatics.babraham.ac.uk/training/RNASeq_Course/Analysing%20RNA-Seq%20data%20Exercise.pdf) by Drs. Simon Andrews and Laura Biggins at the [Babraham Institute](https://www.babraham.ac.uk/).
