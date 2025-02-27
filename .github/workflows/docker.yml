@@ -2,7 +2,7 @@
 # - Only pushes if push or release
 # - Builds without push for PRs to check the Dockerfile
 
-name: Build dev Docker image
+name: Training Docker image
 
 on:
   pull_request: # Build, don't push
@@ -16,7 +16,7 @@ on:
         required: true
 
 jobs:
-  docker:
+  build_push:
     runs-on: ubuntu-latest
     steps:
       - name: Set tag variable
@@ -45,4 +45,4 @@ jobs:
         with:
           file: .devcontainer/Dockerfile
           push: ${{ github.event_name != 'pull_request' }}
-          tags: "ghcr.io/${{ github.repository }}:$IMAGE_TAG"
+          tags: ghcr.io/${{ github.repository }}:${{ env.IMAGE_TAG }}
