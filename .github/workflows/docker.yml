@@ -43,8 +43,10 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build / push image
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           file: .devcontainer/Dockerfile
           push: ${{ github.event_name != 'pull_request' }}
           tags: ghcr.io/${{ github.repository }}:${{ env.IMAGE_TAG }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
