@@ -5,7 +5,6 @@ TODO: short blurb
 - Write a single-stage workflow that runs the initial QC
 - Add adapter trimming and post-trimming QC
 - Add alignment to the reference genome
-- Add comprehensive QC report generation
 
 ---
 
@@ -158,53 +157,6 @@ TODO
 TODO
 
 ### 3.4. Run the workflow to test that it works
-
-TODO
-
----
-
-## 4. Aggregate pre-processing QC metrics into a single MultiQC report
-
-TODO
-
-### 4.1. Describe the MultiQC process
-
-Let's write a process, which we'll call `MULTIQC`, that collect QC metrics with MultiQC in a generic way.
-
-```groovy title="modules/trim_galore.nf" linenums="1"
-#!/usr/bin/env nextflow
-
-process MULTIQC {
-
-    container "community.wave.seqera.io/library/pip_multiqc:ad8f247edb55897c"
-    publishDir "results/multiqc", mode: 'copy'
-
-    input:
-    path '*'
-    val output_name
-
-    output:
-    path "${output_name}.html", emit: report
-    path "${output_name}_data", emit: data
-
-    script:
-    """
-    multiqc . -n ${output_name}.html
-    """
-}
-```
-
-<!-- TODO Add a note about assuming single-end reads -->
-
-### 4.2. Import the module into the workflow file
-
-TODO
-
-### 4.3. Call the process on the outputs of the previous QC steps
-
-TODO
-
-### 4.4. Run the workflow to test that it works
 
 TODO
 

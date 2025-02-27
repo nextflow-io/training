@@ -13,7 +13,7 @@ params.hisat2_index_zip = "data/genome_index.tar.gz"
 params.report_id = "test_batch"
 
 // Primary input
-params.input_csv = "path/to/reads/*.csv"
+params.input_csv = "data/single-end.csv"
 
 workflow {
     // Create input channel from the contents of a CSV file
