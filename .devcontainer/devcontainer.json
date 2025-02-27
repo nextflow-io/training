@@ -9,8 +9,7 @@
     "features": {
         "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {
             "version": "latest"
-        },
-        "ghcr.io/devcontainers/features/common-utils:2": { "version": "latest" }
+        }
     },
     "workspaceFolder": "/workspaces/training",
     "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/training,type=bind", // Used for local devcontainers, ignored in Codespaces.
