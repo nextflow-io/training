@@ -36,7 +36,7 @@ RUN mkdir -p /workspaces/.nextflow && \
 
 # Uncomment if we need to pin the Nextflow version
 ENV NXF_EDGE=0
-ENV NXF_VER=24.10.0
+ENV NXF_VER=24.10.4
 ENV NXF_HOME=/workspaces/.nextflow
 
 # Install nextflow, nf-core, Mamba, and pytest-workflow
