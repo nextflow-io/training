@@ -8,13 +8,17 @@
       
       
       
-        <link rel="canonical" href="https://training.nextflow.io/2.1/pt/hello_nextflow/02_hello_world/">
+        <link rel="canonical" href="https://training.nextflow.io/2.0.1/pt/hello_nextflow/02_hello_world/">
       
       
+        <link rel="prev" href="../01_orientation/">
+      
+      
+        <link rel="next" href="../03_hello_containers/">
       
       
       <link rel="icon" href="../../../assets/img/nextflow-icon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.4">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.5">
     
     
       
@@ -139,9 +143,7 @@
     
       
 
-  
-
-<header class="md-header md-header--shadow" data-md-component="header">
+<header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
     <a href="../../" title="training.nextflow.io" class="md-header__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
       
@@ -209,7 +211,7 @@
       <ul class="md-select__list">
         
           <li class="md-select__item">
-            <a href="/2.1/" hreflang="en" class="md-select__link">
+            <a href="../../../hello_nextflow/02_hello_world/" hreflang="en" class="md-select__link">
               English
             </a>
           </li>
@@ -221,13 +223,13 @@
           </li>
         
           <li class="md-select__item">
-            <a href="/2.1/es/" hreflang="es" class="md-select__link">
+            <a href="../../../es/hello_nextflow/02_hello_world/" hreflang="es" class="md-select__link">
               Español
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="/2.1/fr/" hreflang="fr" class="md-select__link">
+            <a href="../../../fr/hello_nextflow/02_hello_world/" hreflang="fr" class="md-select__link">
               Français
             </a>
           </li>
@@ -302,6 +304,160 @@
       
         
           
+            
+<nav class="md-tabs" aria-label="Abas" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../" class="md-tabs__link">
+        
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../envsetup/" class="md-tabs__link">
+          
+  
+  Environment setup
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  Hello Nextflow
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../basic_training/" class="md-tabs__link">
+          
+  
+  Fundamentals Training
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../advanced/" class="md-tabs__link">
+          
+  
+  Advanced Training
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../nf_customize/" class="md-tabs__link">
+          
+  
+  Configure nf-core
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../nf_develop/" class="md-tabs__link">
+          
+  
+  Develop nf-core
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../troubleshoot/" class="md-tabs__link">
+          
+  
+  Troubleshooting
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
         
       
       <main class="md-main" data-md-component="main">
@@ -315,8 +471,10 @@
                     
 
 
+  
 
-<nav class="md-nav md-nav--primary" aria-label="Navegação" data-md-level="0">
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegação" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
     <a href="../../" title="training.nextflow.io" class="md-nav__button md-logo" aria-label="training.nextflow.io" data-md-component="logo">
       
@@ -369,6 +527,9 @@
   
     
     
+    
+      
+      
     
     
     <li class="md-nav__item md-nav__item--nested">
@@ -474,20 +635,28 @@
       
   
   
+    
   
   
+  
     
     
     
-    
-    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
             
   
   <span class="md-ellipsis">
@@ -499,7 +668,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             Hello Nextflow
@@ -535,7 +704,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../00_orientation/" class="md-nav__link">
+      <a href="../01_orientation/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -554,10 +723,31 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../01_hello_world/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Part 1: Hello World
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -567,6 +757,852 @@
   
 
       </a>
+      
+          
+
+<nav class="md-nav md-nav--secondary" aria-label="On this page">
+       
+  <label class="md-nav__title" for="__toc">
+    <span class="md-nav__icon md-icon"></span>
+    On this page
+  </label>
+  <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+     <li class="md-nav__item">
+  <a href="#0-aquecimento-execute-hello-world-diretamente" class="md-nav__link">
+    <span class="md-ellipsis">
+      0. Aquecimento: Execute Hello World diretamente
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="0. Aquecimento: Execute Hello World diretamente">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#01-faca-o-terminal-dizer-hello" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.1. Faça o terminal dizer hello
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#02-agora-faca-o-escrever-a-saida-em-um-arquivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.2. Agora faça-o escrever a saída em um arquivo
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#03-verifique-se-o-arquivo-de-saida-esta-presente-usando-o-comando-ls" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.3. Verifique se o arquivo de saída está presente usando o comando ls
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#04-exiba-o-conteudo-do-arquivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.4. Exiba o conteúdo do arquivo
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conclusao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusão
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#o-que-vem-a-seguir" class="md-nav__link">
+    <span class="md-ellipsis">
+      O que vem a seguir?
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>  <li class="md-nav__item">
+  <a href="#1-experimente-o-script-inicial-do-workflow-hello-world" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Experimente o script inicial do workflow Hello World
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. Experimente o script inicial do workflow Hello World">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-decifrando-a-estrutura-do-codigo" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1. Decifrando a estrutura do código
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.1. Decifrando a estrutura do código">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#111-a-definicao-process" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1.1 A definição process
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#112-a-definicao-workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1.2 A definição workflow
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-executando-o-fluxo-de-trabalho" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2. Executando o fluxo de trabalho
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-localizando-a-saida-e-os-logs-no-diretorio-work" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3. Localizando a saída e os logs no diretório work
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conclusao_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusão
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#o-que-vem-a-seguir_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      O que vem a seguir?
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>  <li class="md-nav__item">
+  <a href="#3-enviando-a-saida-para-um-arquivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Enviando a saída para um arquivo
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Enviando a saída para um arquivo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-alterando-o-comando-process-para-gerar-um-arquivo-nomeado" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1. Alterando o comando process para gerar um arquivo nomeado
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-alterando-a-declaracao-de-saida-no-processo-sayhello" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2. Alterando a declaração de saída no processo sayHello
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-executando-o-fluxo-de-trabalho-novamente" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3. Executando o fluxo de trabalho novamente
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-adicionando-uma-diretiva-publishdir-ao-processo" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.4. Adicionando uma diretiva publishDir ao processo
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#35-executando-o-fluxo-de-trabalho-novamente" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.5. Executando o fluxo de trabalho novamente
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conclusao_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusão
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#o-que-vem-a-seguir_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      O que vem a seguir?
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>  <li class="md-nav__item">
+  <a href="#4-usando-o-recurso-resume-do-nextflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Usando o recurso resume do Nextflow
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Usando o recurso resume do Nextflow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-executando-o-fluxo-de-trabalho-novamente-com-resume" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1. Executando o fluxo de trabalho novamente com -resume
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conclusao_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusão
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#o-que-vem-a-seguir_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      O que vem a seguir?
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>  <li class="md-nav__item">
+  <a href="#5-adicionando-entradas-variaveis-usando-um-canal" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Adicionando entradas variáveis usando um canal
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Adicionando entradas variáveis usando um canal">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-adicionando-uma-definicao-de-input-ao-bloco-do-processo" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.1. Adicionando uma definição de input ao bloco do processo
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-editando-o-comando-do-processo-para-usar-a-variavel-de-entrada" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.2. Editando o comando do processo para usar a variável de entrada
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-criando-um-canal-de-entrada" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.3. Criando um canal de entrada
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54-adicionando-o-canal-como-entrada-a-chamada-de-processo" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.4. Adicionando o canal como entrada à chamada de processo
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#55-executando-o-comando-do-fluxo-de-trabalho-novamente" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.5. Executando o comando do fluxo de trabalho novamente
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conclusao_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusão
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#o-que-vem-a-seguir_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      O que vem a seguir?
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>  <li class="md-nav__item">
+  <a href="#6-usando-parametros-da-cli-para-entradas" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Usando parâmetros da CLI para entradas
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Usando parâmetros da CLI para entradas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-editando-a-declaracao-do-canal-de-entrada-para-usar-um-parametro" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.1. Editando a declaração do canal de entrada para usar um parâmetro
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-executar-o-fluxo-de-trabalho-novamente-com-o-parametro-greeting" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.2. Executar o fluxo de trabalho novamente com o parâmetro --greeting
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-definindo-um-valor-padrao-para-um-parametro-de-linha-de-comando" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.3. Definindo um valor padrão para um parâmetro de linha de comando
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#64-executando-o-fluxo-de-trabalho-novamente-sem-especificar-o-parametro" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.4. Executando o fluxo de trabalho novamente sem especificar o parâmetro
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#65-executando-o-fluxo-de-trabalho-novamente-com-o-parametro-greeting-na-linha-de-comando-usando-uma-saudacao-diferente" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.5. Executando o fluxo de trabalho novamente com o parâmetro --greeting na linha de comando usando uma saudação diferente
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conclusao_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusão
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#o-que-vem-a-seguir_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      O que vem a seguir?
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>  <li class="md-nav__item">
+  <a href="#7-adicionando-uma-segunda-etapa-ao-fluxo-de-trabalho" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Adicionando uma segunda etapa ao fluxo de trabalho
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Adicionando uma segunda etapa ao fluxo de trabalho">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-executando-o-comando-no-terminal-por-si-so" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.1. Executando o comando no terminal por si só
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-fazendo-com-que-o-comando-receba-um-arquivo-como-entrada-e-grave-a-saida-em-um-arquivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.2. Fazendo com que o comando receba um arquivo como entrada e grave a saída em um arquivo
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-envolvendo-o-comando-em-uma-nova-definicao-de-processo-do-nextflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.3. Envolvendo o comando em uma nova definição de processo do Nextflow
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#74-adicionando-uma-chamada-ao-novo-processo-no-corpo-do-fluxo-de-trabalho" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.4. Adicionando uma chamada ao novo processo no corpo do fluxo de trabalho
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#75-passando-a-saida-do-primeiro-processo-para-o-segundo-processo" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.5. Passando a saída do primeiro processo para o segundo processo
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#76-executar-o-mesmo-comando-de-fluxo-de-trabalho-anterior" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.6. Executar o mesmo comando de fluxo de trabalho anterior
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conclusao_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusão
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#o-que-vem-a-seguir_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      O que vem a seguir?
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>  <li class="md-nav__item">
+  <a href="#8-modificando-o-fluxo-de-trabalho-para-ser-executado-em-um-lote-de-valores-de-entrada" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Modificando o fluxo de trabalho para ser executado em um lote de valores de entrada
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Modificando o fluxo de trabalho para ser executado em um lote de valores de entrada">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#81-carregando-varias-saudacoes-no-canal-de-entrada" class="md-nav__link">
+    <span class="md-ellipsis">
+      8.1. Carregando várias saudações no canal de entrada
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#82-executando-o-comando-e-vendo-a-saida-do-registro" class="md-nav__link">
+    <span class="md-ellipsis">
+      8.2. Executando o comando e vendo a saída do registro
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#83-execute-o-comando-novamente-com-a-opcao-ansi-log-false" class="md-nav__link">
+    <span class="md-ellipsis">
+      8.3. Execute o comando novamente com a opção -ansi-log false
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#85-execute-o-fluxo-de-trabalho-e-veja-o-diretorio-de-resultados" class="md-nav__link">
+    <span class="md-ellipsis">
+      8.5. Execute o fluxo de trabalho e veja o diretório de resultados
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conclusao_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusão
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#o-que-vem-a-seguir_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      O que vem a seguir?
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>  <li class="md-nav__item">
+  <a href="#9-modificando-o-fluxo-de-trabalho-para-usar-um-arquivo-como-fonte-de-valores-de-entrada" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. Modificando o fluxo de trabalho para usar um arquivo como fonte de valores de entrada
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Modificando o fluxo de trabalho para usar um arquivo como fonte de valores de entrada">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-configurando-um-parametro-da-cli-com-um-valor-padrao-apontando-para-um-arquivo-de-entrada" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.1. Configurando um parâmetro da CLI com um valor padrão apontando para um arquivo de entrada
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-atualizando-a-declaracao-do-canal-para-lidar-com-o-arquivo-de-entrada" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.2. Atualizando a declaração do canal para lidar com o arquivo de entrada
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93-executando-o-fluxo-de-trabalho-uma-ultima-vez" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.3. Executando o fluxo de trabalho (uma última vez!)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conclusao_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusão
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#o-que-vem-a-seguir_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      O que vem a seguir?
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li> 
+  </ul>
+  
+</nav>
+<nav class="md-nav md-nav--secondary sidebar_resources" aria-label="Resources">
+  <label class="md-nav__title">Resources</label>
+  <ul class="md-nav__list">
+    <li class="md-nav__item">
+      <a
+        href="https://nextflow.io/docs/latest/index.html"
+        target="_blank"
+        rel="noopener"
+        class="md-nav__link"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path
+            d="M17.5 14.33c.79 0 1.63.08 2.5.24v1.5c-.62-.16-1.46-.24-2.5-.24-1.9 0-3.39.33-4.5.99v-1.69c1.17-.53 2.67-.8 4.5-.8M13 12.46c1.29-.53 2.79-.79 4.5-.79.79 0 1.63.07 2.5.23v1.5c-.62-.16-1.46-.24-2.5-.24-1.9 0-3.39.34-4.5.99m4.5-3.65c-1.9 0-3.39.32-4.5 1V9.84c1.23-.56 2.73-.84 4.5-.84.79 0 1.63.08 2.5.23v1.55c-.74-.19-1.59-.28-2.5-.28m3.5 8V7c-1.04-.33-2.21-.5-3.5-.5-2.05 0-3.88.5-5.5 1.5v11.5c1.62-1 3.45-1.5 5.5-1.5 1.19 0 2.36.16 3.5.5m-3.5-14c2.35 0 4.19.5 5.5 1.5v14.56c0 .12-.05.24-.16.35-.11.09-.23.17-.34.17-.11 0-.19-.02-.25-.05-1.28-.69-2.87-1.03-4.75-1.03-2.05 0-3.88.5-5.5 1.5-1.34-1-3.17-1.5-5.5-1.5-1.66 0-3.25.36-4.75 1.07-.03.01-.07.01-.12.03-.04.01-.08.02-.13.02-.11 0-.23-.04-.34-.12a.475.475 0 0 1-.16-.35V6c1.34-1 3.18-1.5 5.5-1.5 2.33 0 4.16.5 5.5 1.5 1.34-1 3.17-1.5 5.5-1.5Z"
+          ></path>
+        </svg>
+        Nextflow Docs
+      </a>
+    </li>
+    <li class="md-nav__item">
+      <a
+        href="https://www.nextflow.io/slack-invite.html"
+        target="_blank"
+        rel="noopener"
+        class="md-nav__link"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path
+            d="M6 15a2 2 0 0 1-2 2 2 2 0 0 1-2-2 2 2 0 0 1 2-2h2v2m1 0a2 2 0 0 1 2-2 2 2 0 0 1 2 2v5a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-5m2-8a2 2 0 0 1-2-2 2 2 0 0 1 2-2 2 2 0 0 1 2 2v2H9m0 1a2 2 0 0 1 2 2 2 2 0 0 1-2 2H4a2 2 0 0 1-2-2 2 2 0 0 1 2-2h5m8 2a2 2 0 0 1 2-2 2 2 0 0 1 2 2 2 2 0 0 1-2 2h-2v-2m-1 0a2 2 0 0 1-2 2 2 2 0 0 1-2-2V5a2 2 0 0 1 2-2 2 2 0 0 1 2 2v5m-2 8a2 2 0 0 1 2 2 2 2 0 0 1-2 2 2 2 0 0 1-2-2v-2h2m0-1a2 2 0 0 1-2-2 2 2 0 0 1 2-2h5a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-5Z"
+          ></path>
+        </svg>
+        Nextflow Slack
+      </a>
+    </li>
+    <li class="md-nav__item">
+      <a
+        href="https://nextflow.io/"
+        target="_blank"
+        rel="noopener"
+        class="md-nav__link"
+      >
+        <svg
+          version="1.1"
+          id="Layer_1"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="80 50 350 350"
+        >
+          <style type="text/css">
+            .st0 {
+              fill: "gray";
+            }
+          </style>
+          <path
+            class="st0"
+            d="M124.5,171.5c39.4,2.6,71.1,34.3,73.5,73.8h46.1c-2.6-65-54.7-117.2-119.6-119.9V171.5z"
+          />
+          <path
+            class="st0"
+            d="M198.3,255.8c-2.6,39.5-34.3,71.1-73.8,73.5v46.1c65-2.6,117.2-54.7,119.9-119.6H198.3z"
+          />
+          <path
+            class="st0"
+            d="M300.7,245c2.6-39.5,34.3-71.1,73.8-73.5v-46.1c-65,2.6-117.2,54.7-119.9,119.6H300.7z"
+          />
+          <path
+            class="st0"
+            d="M374.5,329.3c-39.4-2.6-71.1-34.3-73.5-73.8h-46.1c2.6,65,54.7,117.2,119.6,119.9V329.3z"
+          />
+        </svg>
+        Nextflow Homepage
+      </a>
+    </li>
+    <li class="md-nav__item">
+      <a
+        href="https://seqera.io/"
+        target="_blank"
+        rel="noopener"
+        class="md-nav__link"
+      >
+        <?xml version="1.0" encoding="utf-8"?>
+        <!-- Generator: Adobe Illustrator 28.3.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+        <svg
+          version="1.1"
+          id="Layer_1"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          x="0px"
+          y="0px"
+          viewBox="80 50 350 350"
+          style="enable-background: new 0 0 500 500"
+          xml:space="preserve"
+        >
+          <style type="text/css">
+            .st0 {
+              clip-path: url(#SVGID_00000006699037935518914080000000086571810102047141_);
+            }
+            .st1 {
+              fill: "gray";
+            }
+          </style>
+          <g>
+            <defs>
+              <rect id="SVGID_1_" x="125" y="125" width="250" height="250" />
+            </defs>
+            <clipPath
+              id="SVGID_00000183214694142566821210000012389151436317298101_"
+            >
+              <use xlink:href="#SVGID_1_" style="overflow: visible" />
+            </clipPath>
+            <g
+              style="
+                clip-path: url(#SVGID_00000183214694142566821210000012389151436317298101_);
+              "
+            >
+              <path
+                class="st1"
+                d="M375,333l-0.1-0.9l-0.1-0.8l-0.1-0.9l-0.1-0.9l-0.1-0.8l-0.1-0.9l-0.1-0.8l-0.2-0.9l-0.2-0.8l-0.2-0.8
+                      l-0.2-0.8l-0.2-0.8l-0.2-0.8l-0.3-0.8l-0.3-0.8l-0.3-0.8l-0.3-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8
+                      l-0.4-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7L365,308l-0.6-0.6l-0.6-0.6l-0.6-0.6l-0.6-0.6L362,305
+                      l-0.6-0.6l-0.7-0.6l-0.6-0.5l-1.2,0.7l-0.8,0.5l-0.8,0.4l-0.8,0.4l-0.8,0.4l-0.8,0.4l-0.9,0.4l-0.9,0.4l-0.9,0.3l-0.9,0.3
+                      l-0.9,0.3l-0.9,0.3l-0.9,0.3l-0.9,0.3l-0.9,0.2l-0.9,0.2l-0.9,0.2l-0.9,0.2l-0.9,0.2l-0.9,0.1l-0.9,0.1l-0.9,0.1l-0.9,0.1
+                      l-0.9,0.1l-0.9,0.1l-0.9,0.1l-0.9,0l-0.9,0h-57.5l59.7,16.4l0.4,0.1l0.4,0.1l0.4,0.1l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.2
+                      l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.1,0.3l0.1,0.3l0.1,0.4l0.1,0.4
+                      l0.1,0.4l0.1,0.4l0,0.4l0,0.4l0,0.4l0,0.4l0,0.4l0,0.4l-0.1,0.4l-0.1,0.4l-0.1,0.4l-0.1,0.3l-0.1,0.4l-0.1,0.3l-0.2,0.3l-0.2,0.3
+                      l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.3,0.3l-0.3,0.3l-0.3,0.2l-0.3,0.2l-0.3,0.2l-0.3,0.2l-0.3,0.2l-0.3,0.2
+                      l-0.3,0.1l-0.4,0.2l-0.4,0.1l-0.3,0.1l-0.4,0.1l-0.4,0.1l-0.4,0.1l-0.4,0l-0.4,0l-0.4,0H125V375h209.7l0.9,0l0.9,0l0.9,0l0.8-0.1
+                      l0.9-0.1l0.8-0.1l0.9-0.1l0.8-0.1l0.8-0.1l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.3l0.8-0.3l0.8-0.3l0.8-0.3l0.8-0.3
+                      l0.8-0.4l0.8-0.4l0.8-0.4l0.8-0.4l0.8-0.4l0.7-0.4l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5
+                      l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.4-0.7
+                      l0.4-0.8l0.4-0.8l0.4-0.8l0.4-0.8l0.4-0.8l0.4-0.8l0.3-0.8l0.3-0.8l0.3-0.8l0.3-0.8l0.2-0.8l0.2-0.8l0.2-0.8l0.2-0.8l0.2-0.8
+                      l0.2-0.8l0.1-0.8l0.1-0.9l0.1-0.9l0.1-0.8l0.1-0.9l0.1-0.9l0.1-0.8l0-0.9l0-0.9l0-0.8L375,333z"
+              />
+              <path
+                class="st1"
+                d="M375,260.4l-0.1-0.9l-0.1-0.9l-0.1-0.8l-0.1-0.9l-0.1-0.8l-0.1-0.8l-0.1-0.8l-0.2-0.8l-0.2-0.8l-0.2-0.8
+                      l-0.2-0.8l-0.2-0.8l-0.2-0.8l-0.3-0.8l-0.3-0.8l-0.3-0.8l-0.3-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.7
+                      l-0.4-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.2-0.2h0h-89.8l59.7,16.4l0.4,0.1l0.4,0.1l0.4,0.1l0.3,0.2l0.3,0.2l0.3,0.2
+                      l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.1,0.4l0.1,0.3
+                      l0.1,0.4l0.1,0.4l0.1,0.4l0.1,0.4l0,0.4l0,0.4l0,0.4l0,0.4l0,0.4l0,0.4l-0.1,0.4l-0.1,0.4l-0.1,0.4l-0.1,0.4l-0.1,0.3l-0.1,0.4
+                      l-0.2,0.4l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.3,0.3l-0.3,0.3l-0.3,0.2l-0.3,0.2l-0.3,0.2l-0.3,0.2
+                      l-0.3,0.2l-0.3,0.2l-0.3,0.2l-0.4,0.2l-0.4,0.1l-0.3,0.1l-0.4,0.1l-0.4,0.1l-0.4,0.1l-0.4,0l-0.4,0l-0.4,0h-82.5h-111H125v32.2
+                      h122.8h86.9h0.9l0.9,0l0.9-0.1l0.8-0.1l0.9-0.1l0.8-0.1l0.9-0.1l0.8-0.1l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.3
+                      l0.8-0.3l0.8-0.3l0.8-0.3l0.8-0.3l0.8-0.4l0.8-0.4l0.2-0.1l0.6-0.3l0.8-0.4l0.8-0.4l0.7-0.4l0.7-0.4l0.7-0.5l0.7-0.5l0.7-0.5
+                      l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.5-0.7l0.5-0.7l0.5-0.7
+                      l0.5-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.4-0.7l0.4-0.7l0.4-0.8l0.4-0.8l0.4-0.8l0.4-0.8l0.4-0.8l0.3-0.8l0.3-0.8l0.3-0.8l0.3-0.8
+                      l0.2-0.8l0.2-0.8l0.2-0.8l0.2-0.8l0.2-0.8l0.2-0.8l0.1-0.8l0.1-0.9l0.1-0.8l0.1-0.9l0.1-0.8l0.1-0.9l0.1-0.9l0-0.8l0-0.9l0-0.9
+                      L375,260.4z"
+              />
+              <path
+                class="st1"
+                d="M165.3,197.6l-0.9,0l-0.8,0l-0.9,0l-0.9,0.1l-0.8,0.1l-0.9,0.1l-0.8,0.1l-0.8,0.1l-0.8,0.2l-0.8,0.2l-0.8,0.2
+                      l-0.8,0.2l-0.8,0.2l-0.8,0.2l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.4l-0.8,0.4l-0.2,0.1l-0.6,0.3l-0.8,0.4
+                      l-0.8,0.4l-0.8,0.4l-0.7,0.4l-0.7,0.5l-0.7,0.5L142,205l-0.7,0.5l-0.7,0.5l-0.7,0.5l-0.7,0.5l-0.7,0.6l-0.6,0.6l-0.6,0.6l-0.6,0.6
+                      l-0.6,0.6l-0.6,0.6l-0.6,0.6l-0.6,0.6l-0.5,0.6l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.4,0.7l-0.5,0.7l-0.4,0.7
+                      l-0.4,0.8l-0.4,0.8l-0.4,0.8l-0.4,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.2,0.8l-0.2,0.8l-0.2,0.8
+                      l-0.2,0.8l-0.2,0.8l-0.2,0.8l-0.1,0.9l-0.1,0.9l-0.1,0.8l-0.1,0.9l-0.1,0.9l0,0.9l0,0.9v0.9v0.9l0,0.8l0,0.9l0.1,0.8l0.1,0.8
+                      l0.1,0.9l0.1,0.9l0.1,0.8l0.2,0.9l0.2,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8
+                      l0.4,0.8l0.4,0.8l0.4,0.8l0.4,0.8l0.4,0.7l0.5,0.7l0.4,0.7l0.5,0.7l0.5,0.7l0.5,0.7l0.2,0.2h89.8l-59.7-16.4l-0.4-0.1l-0.3-0.1
+                      l-0.4-0.1l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3
+                      l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.1-0.4l-0.1-0.4l-0.1-0.3l-0.1-0.4l-0.1-0.4l-0.1-0.4l0-0.4l0-0.4l0-0.4l0-0.4l0-0.4
+                      l0-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3
+                      l0.3-0.3l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.4-0.2l0.3-0.1l0.4-0.1l0.4-0.1l0.4-0.1l0.4-0.1l0.4,0l0.4,0
+                      h0.4h82.5h111H375v-32.3H252.2H165.3z"
+              />
+              <path
+                class="st1"
+                d="M165.3,125l-0.9,0l-0.8,0l-0.9,0.1l-0.9,0.1l-0.8,0.1l-0.9,0.1l-0.8,0.1l-0.8,0.1l-0.8,0.2l-0.8,0.2l-0.8,0.2
+                      l-0.8,0.2l-0.8,0.2l-0.8,0.2l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.4l-0.8,0.4l-0.8,0.4l-0.8,0.4
+                      l-0.8,0.4l-0.7,0.5l-0.7,0.4l-0.7,0.5l-0.7,0.5l-0.7,0.5l-0.7,0.5l-0.7,0.5l-0.7,0.6l-0.7,0.6l-0.6,0.6l-0.6,0.6l-0.6,0.6
+                      l-0.6,0.6l-0.6,0.6l-0.6,0.6l-0.6,0.6l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.4,0.7l-0.5,0.7l-0.4,0.7
+                      l-0.4,0.8l-0.4,0.8l-0.4,0.8l-0.4,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.2,0.8l-0.2,0.8l-0.2,0.8
+                      l-0.2,0.8l-0.2,0.8l-0.2,0.8l-0.1,0.9l-0.1,0.8l-0.1,0.9l-0.1,0.8l-0.1,0.9l0,0.9l0,0.9v0.9v0.9l0,0.9l0,0.8l0.1,0.9l0.1,0.9
+                      l0.1,0.8l0.1,0.8l0.1,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8
+                      l0.4,0.8l0.4,0.8l0.4,0.8l0.4,0.8l0.4,0.7l0.5,0.7l0.4,0.7l0.5,0.7l0.5,0.7l0.5,0.7l0.5,0.7l0.5,0.7l0.5,0.7l0.6,0.6l0.6,0.6
+                      l0.6,0.6l0.6,0.6l0.6,0.6l0.6,0.6l0.6,0.6l0.7,0.6l0.6,0.5h0l1.1-0.7l0.8-0.5l0.8-0.5l0.8-0.4l0.8-0.4l0.9-0.4l0.9-0.4l0.9-0.4
+                      l0.9-0.3l0.9-0.3l0.9-0.3l0.9-0.3l0.9-0.3l0.9-0.3l0.9-0.2l0.9-0.2l0.9-0.2l0.9-0.2l0.9-0.2l0.9-0.1l0.9-0.1l0.9-0.1l0.9-0.1
+                      l0.9-0.1l0.9-0.1l0.9,0l0.9,0l0.9,0h57.5l-59.7-16.4l-0.4-0.1l-0.3-0.1l-0.4-0.1l-0.3-0.1l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2
+                      l-0.3-0.2l-0.3-0.2l-0.3-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.1-0.3l-0.1-0.4
+                      l-0.1-0.3l-0.1-0.4l-0.1-0.4l-0.1-0.4l0-0.4l0-0.4l0-0.4l0-0.4l0-0.4l0-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.3
+                      l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2
+                      l0.3-0.2l0.4-0.1l0.3-0.1l0.4-0.1l0.4-0.1l0.4-0.1l0.4-0.1l0.4,0l0.4,0l0.4,0H375V125H165.3z"
+              />
+            </g>
+          </g>
+        </svg>
+        Seqera
+      </a>
+    </li>
+    <li class="md-nav__item">
+      <a
+        href="https://github.com/nextflow-io/training"
+        target="_blank"
+        rel="noopener"
+        class="md-nav__link"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path
+            d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z"
+          ></path>
+        </svg>
+        Training on GitHub
+      </a>
+    </li>
+  </ul>
+</nav>
+      
     </li>
   
 
@@ -579,11 +1615,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../02_hello_channels/" class="md-nav__link">
+      <a href="../03_hello_containers/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Part 2: Hello Channels
+    Part 2: Hello Containers
     
   </span>
   
@@ -601,11 +1637,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../03_hello_workflow/" class="md-nav__link">
+      <a href="../04_hello_genomics/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Part 3: Hello Workflow
+    Part 3: Hello Genomics
     
   </span>
   
@@ -623,33 +1659,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../04_hello_modules/" class="md-nav__link">
+      <a href="../05_hello_operators/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Part 4: Hello Modules
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../05_hello_containers/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Part 5: Hello Containers
+    Part 4: Hello Operators
     
   </span>
   
@@ -671,7 +1685,95 @@
         
   
   <span class="md-ellipsis">
-    Part 6: Hello Config
+    Part 5: Hello Config
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07_hello_modules/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Part 6: Hello Modules
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08_hello_nf-test/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Part 7: Hello nf-test
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09_hello_nf-core/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Part 8: Hello nf-core
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10_hello_seqera/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Part 9: Hello Seqera
     
   </span>
   
@@ -697,6 +1799,9 @@
   
     
     
+    
+      
+      
     
     
     <li class="md-nav__item md-nav__item--nested">
@@ -710,7 +1815,7 @@
             
   
   <span class="md-ellipsis">
-    Nextflow for Genomics
+    Fundamentals Training
     
   </span>
   
@@ -720,137 +1825,6 @@
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
-            <span class="md-nav__icon md-icon"></span>
-            Nextflow for Genomics
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../nf4_science/genomics/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Nextflow for Genomics
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../nf4_science/genomics/00_orientation/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Orientation
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../nf4_science/genomics/01_per_sample_variant_calling/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Part 1: Per-sample variant calling
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../nf4_science/genomics/02_joint_calling/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Part 2: Joint calling on a cohort
-    
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    
-    
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
-        
-          
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
-            
-  
-  <span class="md-ellipsis">
-    Fundamentals Training
-    
-  </span>
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             Fundamentals Training
           </label>
@@ -1202,15 +2176,18 @@
     
     
     
+      
+      
+    
     
     <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
         
           
-          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
             
   
   <span class="md-ellipsis">
@@ -1222,8 +2199,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_6">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             Advanced Training
           </label>
@@ -1439,6 +2416,562 @@
   
   <span class="md-ellipsis">
     Support
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Configure nf-core
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Configure nf-core
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nf_customize/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Configure nf-core
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nf_customize/01_orientation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Orientation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nf_customize/02_nf-core/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    What is nf-core?
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nf_customize/03_execution/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    nf-core/demo
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nf_customize/04_config/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Configuration options
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nf_customize/05_tools/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tools for users
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Develop nf-core
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Develop nf-core
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nf_develop/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Develop nf-core
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nf_develop/1_01_orientation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Orientation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nf_develop/1_02_create/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Getting started
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nf_develop/1_03_pipeline/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Adding modules
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../nf_develop/1_04_parameters/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Adding parameters
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Troubleshooting
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Troubleshooting
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../troubleshoot/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Troubleshooting
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../troubleshoot/01_orientation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Orientation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../troubleshoot/01_exercise/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Exercise 1
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../troubleshoot/02_exercise/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Exercise 2
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../troubleshoot/03_exercise/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Exercise 3
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../troubleshoot/04_exercise/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Exercise 4
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../troubleshoot/05_exercise/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Exercise 5
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../troubleshoot/06_exercise/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Exercise 6
     
   </span>
   
@@ -3286,6 +4819,44 @@ Quando estiver pronto, vá para a Parte 2 para aprender sobre outro conceito imp
         <footer class="md-footer">
   
     
+      
+      <nav class="md-footer__inner md-grid" aria-label="Rodapé" >
+        
+          
+          <a href="../01_orientation/" class="md-footer__link md-footer__link--prev" aria-label="Anterior: Orientação">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Anterior
+              </span>
+              <div class="md-ellipsis">
+                Orientação
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../03_hello_containers/" class="md-footer__link md-footer__link--next" aria-label="Próximo: Part 2: Hello Containers">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Próximo
+              </span>
+              <div class="md-ellipsis">
+                Part 2: Hello Containers
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -3363,7 +4934,7 @@ Quando estiver pronto, vá para a Parte 2 para aprender sobre outro conceito imp
 
 
 <h4>Cookie consent</h4>
-<p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our training materials better.</p>
+<p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our documentation better.</p>
 <input class="md-toggle" type="checkbox" id="__settings" >
 <div class="md-consent__settings">
   <ul class="task-list">
@@ -3416,7 +4987,7 @@ Quando estiver pronto, vá para a Parte 2 para aprender sobre outro conceito imp
       </div>
       <script>var consent=__md_get("__consent");if(consent)for(var input of document.forms.consent.elements)input.name&&(input.checked=consent[input.name]||!1);else"file:"!==location.protocol&&setTimeout((function(){document.querySelector("[data-md-component=consent]").hidden=!1}),250);var form=document.forms.consent;for(var action of["submit","reset"])form.addEventListener(action,(function(e){if(e.preventDefault(),"reset"===e.type)for(var n of document.forms.consent.elements)n.name&&(n.checked=!1);__md_set("__consent",Object.fromEntries(Array.from(new FormData(form).keys()).map((function(e){return[e,!0]})))),location.hash="",location.reload()}))</script>
     
-    <script id="__config" type="application/json">{"base": "../../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.instant", "navigation.top", "navigation.tracking", "search.share", "toc.follow"], "search": "../../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "Mais 1 nesta p\u00e1gina", "search.result.more.other": "Mais # nesta p\u00e1gina", "search.result.none": "Nenhum resultado encontrado", "search.result.one": "1 resultado encontrado", "search.result.other": "# resultados encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": {"alias": true, "provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.tabs", "navigation.top", "navigation.tracking", "search.share", "toc.follow"], "search": "../../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "Mais 1 nesta p\u00e1gina", "search.result.more.other": "Mais # nesta p\u00e1gina", "search.result.none": "Nenhum resultado encontrado", "search.result.one": "1 resultado encontrado", "search.result.other": "# resultados encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": {"alias": true, "provider": "mike"}}</script>
     
     
       <script src="../../../assets/javascripts/bundle.f1b6f286.min.js"></script>

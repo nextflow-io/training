@@ -6,11 +6,11 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <meta content="Fundamentals Nextflow Training Workshop" name="description"/>
-<link href="https://training.nextflow.io/2.1/fr/basic_training/modules/" rel="canonical"/>
+<link href="https://training.nextflow.io/2.0.1/fr/basic_training/modules/" rel="canonical"/>
 <link href="../groovy/" rel="prev"/>
 <link href="../config/" rel="next"/>
 <link href="../../../assets/img/nextflow-icon.png" rel="icon"/>
-<meta content="mkdocs-1.6.1, mkdocs-material-9.6.4" name="generator"/>
+<meta content="mkdocs-1.6.1, mkdocs-material-9.6.5" name="generator"/>
 <title>Modularization - training.nextflow.io</title>
 <link href="../../../assets/stylesheets/main.8608ea7d.min.css" rel="stylesheet"/>
 <link href="../../../assets/stylesheets/palette.06af60db.min.css" rel="stylesheet"/>
@@ -61,7 +61,7 @@
 </div>
 <div data-md-color-scheme="default" data-md-component="outdated" hidden="">
 </div>
-<header class="md-header md-header--shadow" data-md-component="header">
+<header class="md-header" data-md-component="header">
 <nav aria-label="En-tête" class="md-header__inner md-grid">
 <a aria-label="training.nextflow.io" class="md-header__button md-logo" data-md-component="logo" href="../../" title="training.nextflow.io">
 <img alt="logo" src="../../../assets/img/nextflow-logo-white.png"/>
@@ -173,12 +173,84 @@
 </nav>
 </header>
 <div class="md-container" data-md-component="container">
+<nav aria-label="Onglets" class="md-tabs" data-md-component="tabs">
+<div class="md-grid">
+<ul class="md-tabs__list">
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../">
+        
+  
+    
+  
+  Home
+
+      </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../envsetup/">
+          
+  
+  Environment setup
+
+        </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../hello_nextflow/">
+          
+  
+  Hello Nextflow
+
+        </a>
+</li>
+<li class="md-tabs__item md-tabs__item--active">
+<a class="md-tabs__link" href="../">
+          
+  
+  Fundamentals Training
+
+        </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../advanced/">
+          
+  
+  Advanced Training
+
+        </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../nf_customize/">
+          
+  
+  Configure nf-core
+
+        </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../nf_develop/">
+          
+  
+  Develop nf-core
+
+        </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../troubleshoot/">
+          
+  
+  Troubleshooting
+
+        </a>
+</li>
+</ul>
+</div>
+</nav>
 <main class="md-main" data-md-component="main">
 <div class="md-main__inner md-grid">
 <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
 <div class="md-sidebar__scrollwrap">
 <div class="md-sidebar__inner">
-<nav aria-label="Navigation" class="md-nav md-nav--primary" data-md-level="0">
+<nav aria-label="Navigation" class="md-nav md-nav--primary md-nav--lifted" data-md-level="0">
 <label class="md-nav__title" for="__drawer">
 <a aria-label="training.nextflow.io" class="md-nav__button md-logo" data-md-component="logo" href="../../" title="training.nextflow.io">
 <img alt="logo" src="../../../assets/img/nextflow-logo-white.png"/>
@@ -270,7 +342,7 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../../hello_nextflow/00_orientation/">
+<a class="md-nav__link" href="../../hello_nextflow/01_orientation/">
 <span class="md-ellipsis">
     Orientation
     
@@ -278,7 +350,7 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../../hello_nextflow/01_hello_world/">
+<a class="md-nav__link" href="../../hello_nextflow/02_hello_world/">
 <span class="md-ellipsis">
     Part 1: Hello World
     
@@ -286,33 +358,25 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../../hello_nextflow/02_hello_channels/">
+<a class="md-nav__link" href="../../hello_nextflow/03_hello_containers/">
 <span class="md-ellipsis">
-    Part 2: Hello Channels
+    Part 2: Hello Containers
     
   </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../../hello_nextflow/03_hello_workflow/">
+<a class="md-nav__link" href="../../hello_nextflow/04_hello_genomics/">
 <span class="md-ellipsis">
-    Part 3: Hello Workflow
+    Part 3: Hello Genomics
     
   </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../../hello_nextflow/04_hello_modules/">
+<a class="md-nav__link" href="../../hello_nextflow/05_hello_operators/">
 <span class="md-ellipsis">
-    Part 4: Hello Modules
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../hello_nextflow/05_hello_containers/">
-<span class="md-ellipsis">
-    Part 5: Hello Containers
+    Part 4: Hello Operators
     
   </span>
 </a>
@@ -320,7 +384,39 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../../hello_nextflow/06_hello_config/">
 <span class="md-ellipsis">
-    Part 6: Hello Config
+    Part 5: Hello Config
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../hello_nextflow/07_hello_modules/">
+<span class="md-ellipsis">
+    Part 6: Hello Modules
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../hello_nextflow/08_hello_nf-test/">
+<span class="md-ellipsis">
+    Part 7: Hello nf-test
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../hello_nextflow/09_hello_nf-core/">
+<span class="md-ellipsis">
+    Part 8: Hello nf-core
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../hello_nextflow/10_hello_seqera/">
+<span class="md-ellipsis">
+    Part 9: Hello Seqera
     
   </span>
 </a>
@@ -328,67 +424,17 @@
 </ul>
 </nav>
 </li>
-<li class="md-nav__item md-nav__item--nested">
-<input class="md-nav__toggle md-toggle" id="__nav_4" type="checkbox"/>
-<label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
-<span class="md-ellipsis">
-    Nextflow for Genomics
-    
-  </span>
-<span class="md-nav__icon md-icon"></span>
-</label>
-<nav aria-expanded="false" aria-labelledby="__nav_4_label" class="md-nav" data-md-level="1">
-<label class="md-nav__title" for="__nav_4">
-<span class="md-nav__icon md-icon"></span>
-            Nextflow for Genomics
-          </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../nf4_science/genomics/">
-<span class="md-ellipsis">
-    Nextflow for Genomics
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../nf4_science/genomics/00_orientation/">
-<span class="md-ellipsis">
-    Orientation
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../nf4_science/genomics/01_per_sample_variant_calling/">
-<span class="md-ellipsis">
-    Part 1: Per-sample variant calling
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../../nf4_science/genomics/02_joint_calling/">
-<span class="md-ellipsis">
-    Part 2: Joint calling on a cohort
-    
-  </span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item md-nav__item--active md-nav__item--nested">
-<input checked="" class="md-nav__toggle md-toggle" id="__nav_5" type="checkbox"/>
-<label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+<li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
 <span class="md-ellipsis">
     Fundamentals Training
     
   </span>
 <span class="md-nav__icon md-icon"></span>
 </label>
-<nav aria-expanded="true" aria-labelledby="__nav_5_label" class="md-nav" data-md-level="1">
-<label class="md-nav__title" for="__nav_5">
+<nav aria-expanded="true" aria-labelledby="__nav_4_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_4">
 <span class="md-nav__icon md-icon"></span>
             Fundamentals Training
           </label>
@@ -746,16 +792,16 @@
 </nav>
 </li>
 <li class="md-nav__item md-nav__item--nested">
-<input class="md-nav__toggle md-toggle" id="__nav_6" type="checkbox"/>
-<label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+<input class="md-nav__toggle md-toggle" id="__nav_5" type="checkbox"/>
+<label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
 <span class="md-ellipsis">
     Advanced Training
     
   </span>
 <span class="md-nav__icon md-icon"></span>
 </label>
-<nav aria-expanded="false" aria-labelledby="__nav_6_label" class="md-nav" data-md-level="1">
-<label class="md-nav__title" for="__nav_6">
+<nav aria-expanded="false" aria-labelledby="__nav_5_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_5">
 <span class="md-nav__icon md-icon"></span>
             Advanced Training
           </label>
@@ -836,6 +882,212 @@
 <a class="md-nav__link" href="../../advanced/support/">
 <span class="md-ellipsis">
     Support
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_6" type="checkbox"/>
+<label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+<span class="md-ellipsis">
+    Configure nf-core
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_6_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_6">
+<span class="md-nav__icon md-icon"></span>
+            Configure nf-core
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../nf_customize/">
+<span class="md-ellipsis">
+    Configure nf-core
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../nf_customize/01_orientation/">
+<span class="md-ellipsis">
+    Orientation
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../nf_customize/02_nf-core/">
+<span class="md-ellipsis">
+    What is nf-core?
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../nf_customize/03_execution/">
+<span class="md-ellipsis">
+    nf-core/demo
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../nf_customize/04_config/">
+<span class="md-ellipsis">
+    Configuration options
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../nf_customize/05_tools/">
+<span class="md-ellipsis">
+    Tools for users
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_7" type="checkbox"/>
+<label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+<span class="md-ellipsis">
+    Develop nf-core
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_7_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_7">
+<span class="md-nav__icon md-icon"></span>
+            Develop nf-core
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../nf_develop/">
+<span class="md-ellipsis">
+    Develop nf-core
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../nf_develop/1_01_orientation/">
+<span class="md-ellipsis">
+    Orientation
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../nf_develop/1_02_create/">
+<span class="md-ellipsis">
+    Getting started
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../nf_develop/1_03_pipeline/">
+<span class="md-ellipsis">
+    Adding modules
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../nf_develop/1_04_parameters/">
+<span class="md-ellipsis">
+    Adding parameters
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_8" type="checkbox"/>
+<label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+<span class="md-ellipsis">
+    Troubleshooting
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_8_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_8">
+<span class="md-nav__icon md-icon"></span>
+            Troubleshooting
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../troubleshoot/">
+<span class="md-ellipsis">
+    Troubleshooting
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../troubleshoot/01_orientation/">
+<span class="md-ellipsis">
+    Orientation
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../troubleshoot/01_exercise/">
+<span class="md-ellipsis">
+    Exercise 1
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../troubleshoot/02_exercise/">
+<span class="md-ellipsis">
+    Exercise 2
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../troubleshoot/03_exercise/">
+<span class="md-ellipsis">
+    Exercise 3
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../troubleshoot/04_exercise/">
+<span class="md-ellipsis">
+    Exercise 4
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../troubleshoot/05_exercise/">
+<span class="md-ellipsis">
+    Exercise 5
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../troubleshoot/06_exercise/">
+<span class="md-ellipsis">
+    Exercise 6
     
   </span>
 </a>
@@ -1080,12 +1332,12 @@
 <a class="md-content__button md-icon" href="https://github.com/nextflow-io/training/edit/master/docs/basic_training/modules.md" title="Editer cette page">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"></path></svg>
 </a>
-<h1 id="modularization"><span class="enumerate-headings-plugin enumerate-heading-plugin">10.</span> Modularization<a class="headerlink" href="#modularization" title="Permanent link">¶</a></h1>
+<h1 id="modularization"><span class="enumerate-headings-plugin enumerate-heading-plugin">9.</span> Modularization<a class="headerlink" href="#modularization" title="Permanent link">¶</a></h1>
 <p>The definition of module libraries simplifies the writing of complex data analysis workflows and makes re-use of processes much easier.</p>
 <p>Using the <code>hello.nf</code> example from earlier, you can convert the workflow’s processes into modules, then call them within the workflow scope.</p>
-<h2 id="modules"><span class="enumerate-headings-plugin enumerate-heading-plugin">10.1</span> Modules<a class="headerlink" href="#modules" title="Permanent link">¶</a></h2>
+<h2 id="modules"><span class="enumerate-headings-plugin enumerate-heading-plugin">9.1</span> Modules<a class="headerlink" href="#modules" title="Permanent link">¶</a></h2>
 <p>Nextflow DSL2 allows for the definition of stand-alone module scripts that can be included and shared across multiple workflows. Each module can contain its own <code>process</code> or <code>workflow</code> definition.</p>
-<h3 id="importing-modules"><span class="enumerate-headings-plugin enumerate-heading-plugin">10.1.1</span> Importing modules<a class="headerlink" href="#importing-modules" title="Permanent link">¶</a></h3>
+<h3 id="importing-modules"><span class="enumerate-headings-plugin enumerate-heading-plugin">9.1.1</span> Importing modules<a class="headerlink" href="#importing-modules" title="Permanent link">¶</a></h3>
 <p>Components defined in the module script can be imported into other Nextflow scripts using the <code>include</code> statement. This allows you to store these components in one or more file(s) that they can be re-used in multiple workflows.</p>
 <p>Using the <code>hello.nf</code> example, you can achieve this by:</p>
 <ul>
@@ -1187,7 +1439,7 @@
 </code></pre></div></td></tr></table></div>
 </details>
 </div>
-<h3 id="multiple-imports"><span class="enumerate-headings-plugin enumerate-heading-plugin">10.1.2</span> Multiple imports<a class="headerlink" href="#multiple-imports" title="Permanent link">¶</a></h3>
+<h3 id="multiple-imports"><span class="enumerate-headings-plugin enumerate-heading-plugin">9.1.2</span> Multiple imports<a class="headerlink" href="#multiple-imports" title="Permanent link">¶</a></h3>
 <p>If a Nextflow module script contains multiple <code>process</code> definitions they can also be imported using a single <code>include</code> statement as shown in the example below:</p>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">hello.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-3-2"> 2</a></span>
@@ -1213,7 +1465,7 @@
 <a id="__codelineno-3-11" name="__codelineno-3-11"></a><span class="w">    </span><span class="n">results_ch</span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-3-12" name="__codelineno-3-12"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="module-aliases"><span class="enumerate-headings-plugin enumerate-heading-plugin">10.1.3</span> Module aliases<a class="headerlink" href="#module-aliases" title="Permanent link">¶</a></h3>
+<h3 id="module-aliases"><span class="enumerate-headings-plugin enumerate-heading-plugin">9.1.3</span> Module aliases<a class="headerlink" href="#module-aliases" title="Permanent link">¶</a></h3>
 <p>When including a module component it is possible to specify a name alias using the <code>as</code> declaration. This allows the inclusion and the invocation of the same component multiple times using different names:</p>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">hello.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-4-2"> 2</a></span>
@@ -1273,7 +1525,7 @@
 <p>You can store each process in separate files within separate sub-folders or combined in one big file (both are valid).
 You can find examples of this on public repos such as the <a href="https://github.com/seqeralabs/rnaseq-nf/tree/master/modules">Seqera RNA-Seq tutorial</a> or within nf-core workflows, such as <a href="https://github.com/nf-core/rnaseq/tree/master/modules/nf-core">nf-core/rnaseq</a>.</p>
 </div>
-<h3 id="output-definition"><span class="enumerate-headings-plugin enumerate-heading-plugin">10.1.4</span> Output definition<a class="headerlink" href="#output-definition" title="Permanent link">¶</a></h3>
+<h3 id="output-definition"><span class="enumerate-headings-plugin enumerate-heading-plugin">9.1.4</span> Output definition<a class="headerlink" href="#output-definition" title="Permanent link">¶</a></h3>
 <p>Nextflow allows the use of alternative output definitions within workflows to simplify your code.</p>
 <p>In the previous example (<code>hello.nf</code>), you defined the channel names to specify the input to the next process:</p>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">hello.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1">1</a></span>
@@ -1380,7 +1632,7 @@ You can find examples of this on public repos such as the <a href="https://githu
 <a id="__codelineno-9-31" name="__codelineno-9-31"></a><span class="w">    </span><span class="n">CONVERTTOUPPER</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">upper</span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-9-32" name="__codelineno-9-32"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="using-piped-outputs"><span class="enumerate-headings-plugin enumerate-heading-plugin">10.1.5</span> Using piped outputs<a class="headerlink" href="#using-piped-outputs" title="Permanent link">¶</a></h3>
+<h3 id="using-piped-outputs"><span class="enumerate-headings-plugin enumerate-heading-plugin">9.1.5</span> Using piped outputs<a class="headerlink" href="#using-piped-outputs" title="Permanent link">¶</a></h3>
 <p>Another way to deal with outputs in the workflow scope is to use pipes <code>|</code>.</p>
 <div class="admonition exercise">
 <p class="admonition-title">Exercise</p>
@@ -1404,7 +1656,7 @@ You can find examples of this on public repos such as the <a href="https://githu
 <li>How to use piped outputs</li>
 </ol>
 </div>
-<h2 id="workflow-definition"><span class="enumerate-headings-plugin enumerate-heading-plugin">10.2</span> Workflow definition<a class="headerlink" href="#workflow-definition" title="Permanent link">¶</a></h2>
+<h2 id="workflow-definition"><span class="enumerate-headings-plugin enumerate-heading-plugin">9.2</span> Workflow definition<a class="headerlink" href="#workflow-definition" title="Permanent link">¶</a></h2>
 <p>The <code>workflow</code> scope allows the definition of components that define the invocation of one or more processes or operators:</p>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">hello.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-11-2"> 2</a></span>
@@ -1451,7 +1703,7 @@ You can find examples of this on public repos such as the <a href="https://githu
 <p class="admonition-title">Warning</p>
 <p>A workflow component can access any variable or parameter defined in the outer scope. In the running example, you can also access <code>params.greeting</code> directly within the <code>workflow</code> definition.</p>
 </div>
-<h3 id="workflow-inputs"><span class="enumerate-headings-plugin enumerate-heading-plugin">10.2.1</span> Workflow inputs<a class="headerlink" href="#workflow-inputs" title="Permanent link">¶</a></h3>
+<h3 id="workflow-inputs"><span class="enumerate-headings-plugin enumerate-heading-plugin">9.2.1</span> Workflow inputs<a class="headerlink" href="#workflow-inputs" title="Permanent link">¶</a></h3>
 <p>A <code>workflow</code> component can declare one or more input channels using the <code>take</code> statement. For example:</p>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">hello.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-12-2"> 2</a></span>
@@ -1496,7 +1748,7 @@ You can find examples of this on public repos such as the <a href="https://githu
 <a id="__codelineno-13-2" name="__codelineno-13-2"></a><span class="w">    </span><span class="n">my_workflow</span><span class="o">(</span><span class="n">Channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">greeting</span><span class="o">))</span>
 <a id="__codelineno-13-3" name="__codelineno-13-3"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="workflow-outputs"><span class="enumerate-headings-plugin enumerate-heading-plugin">10.2.2</span> Workflow outputs<a class="headerlink" href="#workflow-outputs" title="Permanent link">¶</a></h3>
+<h3 id="workflow-outputs"><span class="enumerate-headings-plugin enumerate-heading-plugin">9.2.2</span> Workflow outputs<a class="headerlink" href="#workflow-outputs" title="Permanent link">¶</a></h3>
 <p>A <code>workflow</code> can declare one or more output channels using the <code>emit</code> statement. For example:</p>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">hello.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-14-2"> 2</a></span>
@@ -1681,7 +1933,7 @@ You can find examples of this on public repos such as the <a href="https://githu
 <a id="__codelineno-15-45" name="__codelineno-15-45"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>The result of the above snippet can then be accessed using <code>my_workflow.out.my_data</code>.</p>
-<h3 id="calling-named-workflows"><span class="enumerate-headings-plugin enumerate-heading-plugin">10.2.3</span> Calling named workflows<a class="headerlink" href="#calling-named-workflows" title="Permanent link">¶</a></h3>
+<h3 id="calling-named-workflows"><span class="enumerate-headings-plugin enumerate-heading-plugin">9.2.3</span> Calling named workflows<a class="headerlink" href="#calling-named-workflows" title="Permanent link">¶</a></h3>
 <p>Within a <code>main.nf</code> script (called <code>hello.nf</code> in our example) you can also have multiple workflows. In which case you may want to call a specific workflow when running the code. For this you could use the entrypoint call <code>-entry &lt;workflow_name&gt;</code>.</p>
 <p>The following snippet has two named workflows (<code>my_workflow_one</code> and <code>my_workflow_two</code>):</p>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">hello2.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-16-1"> 1</a></span>
@@ -1750,7 +2002,7 @@ You can find examples of this on public repos such as the <a href="https://githu
 <li>How to use named workflows</li>
 </ol>
 </div>
-<h2 id="dsl2-migration-notes"><span class="enumerate-headings-plugin enumerate-heading-plugin">10.3</span> DSL2 migration notes<a class="headerlink" href="#dsl2-migration-notes" title="Permanent link">¶</a></h2>
+<h2 id="dsl2-migration-notes"><span class="enumerate-headings-plugin enumerate-heading-plugin">9.3</span> DSL2 migration notes<a class="headerlink" href="#dsl2-migration-notes" title="Permanent link">¶</a></h2>
 <p>To view a summary of the changes introduced when Nextflow migrated from DSL1 to DSL2 please refer to the <a href="https://www.nextflow.io/docs/latest/dsl2.html#dsl2-migration-notes">DSL2 migration notes</a> in the official Nextflow documentation.</p>
 </article>
 </div>
@@ -1826,8 +2078,8 @@ You can find examples of this on public repos such as the <a href="https://githu
 <div class="md-consent__overlay"></div>
 <aside class="md-consent__inner">
 <form class="md-consent__form md-grid md-typeset" name="consent">
-<h4><span class="enumerate-headings-plugin enumerate-heading-plugin">10.3.0.1</span> Cookie consent</h4>
-<p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our training materials better.</p>
+<h4><span class="enumerate-headings-plugin enumerate-heading-plugin">9.3.0.1</span> Cookie consent</h4>
+<p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our documentation better.</p>
 <input class="md-toggle" id="__settings" type="checkbox"/>
 <div class="md-consent__settings">
 <ul class="task-list">
@@ -1855,7 +2107,7 @@ You can find examples of this on public repos such as the <a href="https://githu
 </aside>
 </div>
 <script>var consent=__md_get("__consent");if(consent)for(var input of document.forms.consent.elements)input.name&&(input.checked=consent[input.name]||!1);else"file:"!==location.protocol&&setTimeout((function(){document.querySelector("[data-md-component=consent]").hidden=!1}),250);var form=document.forms.consent;for(var action of["submit","reset"])form.addEventListener(action,(function(e){if(e.preventDefault(),"reset"===e.type)for(var n of document.forms.consent.elements)n.name&&(n.checked=!1);__md_set("__consent",Object.fromEntries(Array.from(new FormData(form).keys()).map((function(e){return[e,!0]})))),location.hash="",location.reload()}))</script>
-<script id="__config" type="application/json">{"base": "../../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.instant", "navigation.top", "navigation.tracking", "search.share", "toc.follow"], "search": "../../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}, "version": {"alias": true, "provider": "mike"}}</script>
+<script id="__config" type="application/json">{"base": "../../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.tabs", "navigation.top", "navigation.tracking", "search.share", "toc.follow"], "search": "../../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}, "version": {"alias": true, "provider": "mike"}}</script>
 <script src="../../../assets/javascripts/bundle.f1b6f286.min.js"></script>
 </body>
 </html>
