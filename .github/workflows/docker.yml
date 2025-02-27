@@ -5,11 +5,16 @@
 name: Build dev Docker image
 
 on:
-  pull_request:
-  push:
-    branches: [master]
-  release:
-    types: [published]
+  pull_request: # Build, don't push
+  push: { branches: [master] } # Build + push ('latest' tag)
+  release: { types: [published] } # Build + push (release tag)
+  workflow_dispatch:
+    inputs:
+      tag_name:
+        description: "Docker image tag name"
+        default: "warning"
+        type: string
+        required: true
 
 jobs:
   push_to_registry:
@@ -42,3 +47,11 @@ jobs:
           file: .devcontainer/Dockerfile
           push: true
           tags: ghcr.io/nextflow-io/training:${{ github.event.release.tag_name }}
+
+      - name: Push custom image tag
+        uses: docker/build-push-action@v5
+        if: github.event_name == 'workflow_dispatch'
+        with:
+          file: .devcontainer/Dockerfile
+          push: true
+          tags: ghcr.io/nextflow-io/training:${{ inputs.tag_name }}
