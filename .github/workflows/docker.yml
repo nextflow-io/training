@@ -12,15 +12,24 @@ on:
     inputs:
       tag_name:
         description: "Docker image tag name"
-        default: "warning"
         type: string
         required: true
 
 jobs:
-  push_to_registry:
-    name: Build + Push dev Docker image
+  docker:
     runs-on: ubuntu-latest
     steps:
+      - name: Set tag variable
+        run: |
+          if [[ '${{ github.event_name }}' == 'release' ]]; then
+            echo "IMAGE_TAG=${{ github.event.release.tag_name }}" >> $GITHUB_ENV
+          elif [[ '${{ github.event_name }}' == 'workflow_dispatch' ]]; then
+            echo "IMAGE_TAG=${{ inputs.tag_name }}" >> $GITHUB_ENV
+          else
+            echo "IMAGE_TAG=latest" >> $GITHUB_ENV
+          fi
+          echo $IMAGE_TAG
+
       - name: Check out the repo
         uses: actions/checkout@v4
 
@@ -31,26 +40,9 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build / push 'latest' image
+      - name: Build / push image
         uses: docker/build-push-action@v5
-        if: github.repository == 'nextflow-io/training' && github.event_name == 'push'
         with:
           file: .devcontainer/Dockerfile
-          push: ${{ github.event_name == 'push' }}
-          tags: ghcr.io/nextflow-io/training:latest
-
-      - name: Push release image
-        uses: docker/build-push-action@v5
-        if: github.repository == 'nextflow-io/training' && github.event_name == 'release'
-        with:
-          file: .devcontainer/Dockerfile
-          push: true
-          tags: ghcr.io/nextflow-io/training:${{ github.event.release.tag_name }}
-
-      - name: Push custom image tag
-        uses: docker/build-push-action@v5
-        if: github.event_name == 'workflow_dispatch'
-        with:
-          file: .devcontainer/Dockerfile
-          push: true
-          tags: ghcr.io/nextflow-io/training:${{ inputs.tag_name }}
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: "ghcr.io/${{ github.repository }}:$IMAGE_TAG"
