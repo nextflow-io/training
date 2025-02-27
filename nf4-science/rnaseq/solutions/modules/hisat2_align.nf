@@ -16,7 +16,8 @@ process HISAT2_ALIGN {
     script:
     """
     tar -xzvf $index_zip
-    hisat2 -x ${index_zip.simpleName} -U $reads --new-summary --summary-file ${reads.simpleName}.hisat2.log | \
-    samtools view -bS - > ${reads.simpleName}.bam
+    hisat2 -x ${index_zip.simpleName} -U $reads \
+        --new-summary --summary-file ${reads.simpleName}.hisat2.log | \
+        samtools view -bS - > ${reads.simpleName}.bam
     """
 }
