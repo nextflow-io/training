@@ -37,5 +37,6 @@
                 "cssho.vscode-svgviewer" // SVG viewer
             ]
         }
-    }
+    },
+    "remoteUser": "root"
 }

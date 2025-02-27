@@ -1,5 +1,7 @@
 FROM mcr.microsoft.com/devcontainers/universal:linux
 
+USER root
+
 # Install util tools.
 # software-properties-common is needed to add ppa support for Apptainer installation
 RUN apt-get update --quiet && \
