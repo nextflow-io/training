@@ -10,7 +10,7 @@ include { MULTIQC } from './modules/multiqc.nf'
  * Pipeline parameters
  */
 params.hisat2_index_zip = "data/genome_index.tar.gz"
-params.report_id = "test_batch"
+params.report_id = "all_single-end"
 
 // Primary input
 params.input_csv = "data/single-end.csv"
