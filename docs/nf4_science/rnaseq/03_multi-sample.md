@@ -89,11 +89,15 @@ TODO
 
 TODO
 
-## 3.4. Adapt the HISAT2 process to expect paired-end reads
+## 3.4. Update the call to the MULTIQC process to expect two reports from TRIM_GALORE
 
 TODO
 
-## 3.5. Run the workflow to test that it works
+## 3.5. Adapt the HISAT2 process to expect paired-end reads
+
+TODO
+
+## 3.6. Run the workflow to test that it works
 
 TODO
 
