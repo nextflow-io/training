@@ -175,6 +175,7 @@ plugins:
         - basic_training/orientation.md
         - advanced/index.md
         - advanced/orientation.md
+        - side_quests/nf-test.md
   - i18n:
       docs_structure: suffix
       fallback_to_default: true
