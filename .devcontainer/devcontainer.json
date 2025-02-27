@@ -17,7 +17,7 @@
         "NXF_HOME": "/workspaces/.nextflow",
         "HOST_PROJECT_PATH": "/workspaces/training" // Codespaces and local devcontainers will both work with this.
     },
-    "postCreateCommand": "if [ -z \"$CODESPACES\" ]; then echo \"Devcontainers Development\"; else echo \"Codespaces Development\";  fi",
+    "postCreateCommand": "nextflow -version; if [ -z \"$CODESPACES\" ]; then echo \"Devcontainers Development\"; else echo \"Codespaces Development\";  fi",
     // Configure tool-specific properties.
     "customizations": {
         // Configure properties specific to VS Code.
