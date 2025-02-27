@@ -326,7 +326,7 @@ You may be wondering how we're going to point to the root of the pipeline in the
 
 _Before:_
 
-```groovy title="tests/main.nf.test"
+```groovy title="tests/main.nf.test" linenums="1" hl_lines="3 4"
 when {
     params {
         // define parameters here. Example:
@@ -337,7 +337,7 @@ when {
 
 _After:_
 
-```groovy title="tests/main.nf.test"
+```groovy title="tests/main.nf.test" linenums="1" hl_lines="3"
 when {
     params {
         input_file = "${projectDir}/greetings.csv"
@@ -409,7 +409,7 @@ Let's add an assertion to our test to check the pipeline runs the expected numbe
 
 **Before:**
 
-```groovy title="tests/main.nf.test"
+```groovy title="tests/main.nf.test" linenums="1" hl_lines="1 11"
     test("Should run without failures") {
 
         when {
@@ -427,7 +427,7 @@ Let's add an assertion to our test to check the pipeline runs the expected numbe
 
 **After:**
 
-```groovy title="tests/main.nf.test"
+```groovy title="tests/main.nf.test" linenums="1" hl_lines="1 11"
     test("Should run successfully with correct number of processes") {
 
         when {
@@ -474,7 +474,7 @@ Let's add an assertion to our test to check the output file was created. We'll a
 
 **Before:**
 
-```groovy title="tests/main.nf.test"
+```groovy title="tests/main.nf.test" linenums="1" hl_lines="14"
     test("Should run successfully with correct number of processes") {
 
         when {
@@ -493,7 +493,7 @@ Let's add an assertion to our test to check the output file was created. We'll a
 
 **After:**
 
-```groovy title="tests/main.nf.test"
+```groovy title="tests/main.nf.test" linenums="1" hl_lines="14-33"
     test("Should run successfully with correct number of processes") {
 
         when {
@@ -667,7 +667,7 @@ The test fails because the `sayHello` process declares 1 input channel but 0 wer
 
 **Before:**
 
-```groovy title="tests/main.sayhello.nf.test"
+```groovy title="tests/main.sayhello.nf.test" linenums="1" hl_lines="1 10 11"
     test("Should run without failures") {
 
         when {
@@ -693,7 +693,7 @@ The test fails because the `sayHello` process declares 1 input channel but 0 wer
 
 **After:**
 
-```groovy title="tests/main.sayhello.nf.test"
+```groovy title="tests/main.sayhello.nf.test" linenums="1" hl_lines="1 10"
     test("Should run without failures and produce correct output") {
 
         when {
@@ -806,10 +806,8 @@ Here's how we could modify our test to check specific content:
 
 **Before:**
 
-```groovy title="tests/main.sayhello.nf.test"
-process {
-    """
-        test("Should run without failures and produce correct output") {
+```groovy title="tests/main.sayhello.nf.test" linenums="1" hl_lines="1 5 6 17"
+    test("Should run without failures and produce correct output") {
 
         when {
             params {
@@ -829,15 +827,13 @@ process {
         }
 
     }
-
-    """
-}
 ```
 
 **After:**
 
-```groovy title="tests/main.sayhello.nf.test"
+```groovy title="tests/main.sayhello.nf.test" linenums="1" hl_lines="1 5 16 17"
      test("Should run without failures and contain expected greeting") {
+
         when {
             params {
                 // define parameters here
@@ -854,6 +850,7 @@ process {
             assert path(process.out[0][0]).readLines().contains('hello')
             assert !path(process.out[0][0]).readLines().contains('HELLO')
         }
+
     }
 ```
 
@@ -936,7 +933,7 @@ For now, let's re-use the existing data/greetings.csv file using the example we 
 
 **Before:**
 
-```groovy title="tests/main.converttoupper.nf.test"
+```groovy title="tests/main.converttoupper.nf.test" linenums="1" hl_lines="1 10 11"
     test("Should run without failures") {
 
         when {
@@ -962,7 +959,7 @@ For now, let's re-use the existing data/greetings.csv file using the example we 
 
 **After:**
 
-```groovy title="tests/main.converttoupper.nf.test"
+```groovy title="tests/main.converttoupper.nf.test" linenums="1" hl_lines="1 10"
     test("Should run without failures and produce correct output") {
 
         when {
