@@ -212,29 +212,43 @@ docker run -it -v ./data:/data community.wave.seqera.io/library/hisat2_samtools:
 
 The command is the same as before, with the relevant container URI swapped in.
 
-### 2.3. Unpack the Hisat2 genome index files
+### 2.3. Create the Hisat2 genome index files
 
-We generated the index files ahead of time based on the appropriate reference genome FASTA file.
-They're in a tarball named `data/genome_index.tar.gz` that we have to unpcak before we can run `hisat2`.
+Hisat2 requires the genome reference to be provided in a very specific format, and can't just consume the `genome.fa` FASTA file that we provide, so we're going to take this opportunity to create the relevant resources.
 
 ```bash
-tar -xzvf /data/genome_index.tar.gz
+hisat2-build /data/genome.fa genome_index
+```
+
+The output is very verbose so the following is abbreviated:
+
+```console title="Output"
+Settings:
+  Output files: "genome_index.*.ht2"
+<...>
+Total time for call to driver() for forward index: 00:00:16
+```
+
+This creates multiple genome index files, which you can find in the working directory.
+
+```bash
+ls genome_index.*
 ```
 
 ```console title="Output"
-genome_index.1.ht2
-genome_index.2.ht2
-genome_index.3.ht2
-genome_index.4.ht2
-genome_index.5.ht2
-genome_index.6.ht2
-genome_index.7.ht2
-genome_index.8.ht2
+genome_index.1.ht2  genome_index.3.ht2  genome_index.5.ht2  genome_index.7.ht2
+genome_index.2.ht2  genome_index.4.ht2  genome_index.6.ht2  genome_index.8.ht2
 ```
 
-The output files are located in the working directory.
+We'll use these in a moment, but first let's generate a gzipped tarball with these genome index files; we'll need them later and generating these is not typically something we want to do as part of a workflow.
 
-### 2.4. Run the `hisat2` command
+```bash
+tar -czvf /data/genome_index.tar.gz genome_index.*
+```
+
+This stores a `genome_index.tar.gz` tarball containing the genome index files in the `data/` directory on our filesystem, which wil come in handy in Part 2 of this course.
+
+### 2.5. Run the `hisat2` command
 
 Now we can run the alignment command, which performs the alignment step with `hisat2` then pipes the output to `samtools` to write the output out as a BAM file.
 
@@ -243,7 +257,7 @@ The read data input is the `/data/trimmed/ENCSR000COQ1_1_trimmed.fq.gz` file we 
 ```bash
 hisat2 -x genome_index -U /data/trimmed/ENCSR000COQ1_1_trimmed.fq.gz \
     --new-summary --summary-file ENCSR000COQ1_1_trimmed.hisat2.log | \
-    samtools view -bS - > ENCSR000COQ1_1_trimmed.bam
+    samtools view -bS -o ENCSR000COQ1_1_trimmed.bam
 ```
 
 This runs almost instantly because it's a very small test file.
@@ -268,14 +282,14 @@ ls ENCSR000COQ1_1*
 ENCSR000COQ1_1_trimmed.bam  ENCSR000COQ1_1_trimmed.hisat2.log
 ```
 
-### 2.5. Move the output files to the filesystem outside the container
+### 2.6. Move the output files to the filesystem outside the container
 
 ```bash
 mkdir /data/aligned
 mv ENCSR000COQ1_1* /data/aligned
 ```
 
-### 2.6. Exit the container
+### 2.7. Exit the container
 
 ```bash
 exit
