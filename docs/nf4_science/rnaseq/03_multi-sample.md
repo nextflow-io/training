@@ -160,7 +160,8 @@ So the syntax example becomes:
         )
 ```
 
-To this, we need to append the `collect()` operator in order to pull the reports for all the samples into a single call to `MULTIQC`, and also give it the `report_id` parameter:
+Before we can use the files in the channel we need to use the `collect()` operator in order to pull the reports for all the samples into a single call to `MULTIQC`.
+We also need to give it the `report_id` parameter:
 
 ```groovy title="The completed MULTIQC call" linenums="33"
     // Comprehensive QC report generation

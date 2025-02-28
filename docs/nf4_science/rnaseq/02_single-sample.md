@@ -235,6 +235,7 @@ Launching `rnaseq.nf` [fabulous_snyder] DSL2 - revision: 3394c725ee
 
 executor >  local (1)
 [d6/d94c3a] FASTQC (1) [100%] 1 of 1 ✔
+[c2/e4a9bb] TRIM_GALORE (1)  [100%] 1 of 1 ✔
 ```
 
 You can find the outputs under `results/trimming` as specified in the `TRIM_GALORE` process by the `publishDir` directive.
@@ -372,7 +373,7 @@ _We'll add MultiQC report aggregation in Part 2, after we've made the workflow a
 
 ### Takeaway
 
-You know how to wrap all the core steps to process single-end RNAseq samples indivudally.
+You know how to wrap all the core steps to process single-end RNAseq samples individually.
 
 ### What's next?
 
