@@ -1,22 +1,37 @@
-# Build and push the Docker image for Gitpod
+# Build and push the Docker image for GitHub Codespaces
 # - Only pushes if push or release
 # - Builds without push for PRs to check the Dockerfile
 
-name: Build Gitpod Docker image
+name: Docker image
 
 on:
-  pull_request:
-  push:
-    branches: [master]
-  release:
-    types: [published]
+  pull_request: # Build, don't push
+  push: { branches: [master] } # Build + push ('latest' tag)
+  release: { types: [published] } # Build + push (release tag)
+  workflow_dispatch: # Build + push (custom tag)
+    inputs:
+      tag_name:
+        description: "Docker image tag name"
+        type: string
+        required: true
 
 jobs:
-  push_to_registry:
-    if: github.repository == 'nextflow-io/training'
-    name: Build + Push Gitpod Docker image
+  build_push:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     steps:
+      - name: Set tag variable
+        run: |
+          if [[ '${{ github.event_name }}' == 'release' ]]; then
+            echo "IMAGE_TAG=${{ github.event.release.tag_name }}" >> $GITHUB_ENV
+          elif [[ '${{ github.event_name }}' == 'workflow_dispatch' ]]; then
+            echo "IMAGE_TAG=${{ inputs.tag_name }}" >> $GITHUB_ENV
+          else
+            echo "IMAGE_TAG=latest" >> $GITHUB_ENV
+          fi
+
       - name: Check out the repo
         uses: actions/checkout@v4
 
@@ -27,18 +42,14 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build / push latest image
-        uses: docker/build-push-action@v5
-        if: github.event_name != 'release'
-        with:
-          file: .github/gitpod.Dockerfile
-          push: ${{ github.event_name == 'push' }}
-          tags: ghcr.io/nextflow-io/training:latest
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
 
-      - name: Push release image
-        uses: docker/build-push-action@v5
-        if: github.event_name == 'release'
+      - name: Build / push image
+        uses: docker/build-push-action@v6
         with:
-          file: .github/gitpod.Dockerfile
-          push: true
-          tags: ghcr.io/nextflow-io/training:${{ github.event.release.tag_name }}
+          file: .devcontainer/Dockerfile
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ghcr.io/${{ github.repository }}:${{ env.IMAGE_TAG }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
