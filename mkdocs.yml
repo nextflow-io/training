@@ -158,6 +158,7 @@ markdown_extensions:
       title: On this page
       permalink: true
 plugins:
+  - include-markdown
   - enumerate-headings:
       restart_increment_after:
         - envsetup/01_setup.md
