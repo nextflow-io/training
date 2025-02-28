@@ -12,7 +12,7 @@ The rise of big data has made it increasingly necessary to be able to analyze an
 
 During this training, you will be introduced to Nextflow in a series of complementary hands-on workshops.
 
-Let's get started! Click on the "Open in GitHub Codespaces" button below.
+Let's get started! Click on the "Open in GitHub Codespaces" button below to launch the training environment (preferably in a separate tab), then read on while it loads.
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 

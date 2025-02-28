@@ -11,10 +11,9 @@ It builds on the [Hello Nextflow](../../hello_nextflow/) beginner training and d
 
 Specifically, this course demonstrates how to implement a simple variant calling pipeline with [GATK](https://gatk.broadinstitute.org/) (Genome Analysis Toolkit), a widely used software package for analyzing high-throughput sequencing data.
 
-!!! note
+Let's get started! Click on the "Open in GitHub Codespaces" button below to launch the training environment (preferably in a separate tab), then read on while it loads.
 
-    Don't worry if you're not familiar with GATK specifically.
-    We'll summarize the necessary concepts as we go, and the workflow implementation principles we demonstrate here apply broadly to any command line tool that processes genomics data.
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
 ## Learning objectives
 
@@ -40,9 +39,3 @@ The course assumes some minimal familiarity with the following:
 - Foundational Nextflow concepts and tooling covered in the [Hello Nextflow](../../hello_nextflow/) beginner training.
 
 For technical requirements and environment setup, see the [Environment Setup](../../envsetup/) mini-course.
-
-## Get started
-
-To get started, open the training environment by clicking the 'Open in GitHub Codespaces' button below.
-
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
