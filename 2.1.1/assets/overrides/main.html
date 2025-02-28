@@ -1,0 +1,32 @@
+{% extends "base.html" %} {% block announce %}
+<div style="text-align: center">
+  <span>Next community training</span>:
+  <strong>{{ config.extra.announcement.date_text }}</strong> on YouTube, with
+  support on Slack
+  <span class="twemoji" style="margin-left: 0.5em">
+    {% include ".icons/fontawesome/brands/youtube.svg" %}
+  </span>
+  <span class="twemoji" style="margin-right: 0.5em">
+    {% include ".icons/fontawesome/brands/slack.svg" %}
+  </span>
+  <a
+    class="md-button"
+    href="{{ config.extra.announcement.register_url }}"
+    target="_blank"
+  >
+    Register here
+    <span class="twemoji"
+      ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path
+          d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"
+        ></path></svg
+    ></span>
+  </a>
+</div>
+{% if not config.extra.announcement.active %}
+<style type="text/css">
+  .md-banner {
+    display: none;
+  }
+</style>
+{% endif %} {% endblock %}
