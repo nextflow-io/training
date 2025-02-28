@@ -25,7 +25,7 @@ The tools we need are not installed in the GitHub Codespaces environment, so we'
 
 ## 1. Initial QC and adapter trimming
 
-We're going to pull down a container that has both `fastqc` and `trim_galore` installed, spin it up interactively and run the trimming and QC commands on one of the example data files.
+We're going to pull a container image that has both `fastqc` and `trim_galore` installed, spin it up interactively and run the trimming and QC commands on one of the example data files.
 
 ### 1.1. Pull the container
 
@@ -130,7 +130,7 @@ trim_galore --fastqc /data/reads/ENCSR000COQ1_1.fastq.gz
 
 The `--fastqc` flag causes the command to automatically run a QC collection step after trimming is complete.
 
-The output is very verbose:
+_The output is very verbose so what follows is abbreviated._
 
 ```console title="Output"
 Multicore support not enabled. Proceeding with single-core trimming.
@@ -141,122 +141,8 @@ single-core operation.
 igzip command line interface 2.31.0
 igzip detected. Using igzip for decompressing
 
-No quality encoding type selected. Assuming that the data provided uses Sanger encoded Phred scores (default)
+<...>
 
-
-
-AUTO-DETECTING ADAPTER TYPE
-===========================
-Attempting to auto-detect adapter type from the first 1 million sequences of the first file (>> /data/reads/ENCSR000COQ1_1.fastq.gz <<)
-
-Found perfect matches for the following adapter sequences:
-Adapter type    Count   Sequence        Sequences analysed      Percentage
-Illumina        9       AGATCGGAAGAGC   27816   0.03
-Nextera 0       CTGTCTCTTATA    27816   0.00
-smallRNA        0       TGGAATTCTCGG    27816   0.00
-Using Illumina adapter for trimming (count: 9). Second best hit was Nextera (count: 0)
-
-Writing report to 'ENCSR000COQ1_1.fastq.gz_trimming_report.txt'
-
-SUMMARISING RUN PARAMETERS
-==========================
-Input filename: /data/reads/ENCSR000COQ1_1.fastq.gz
-Trimming mode: single-end
-Trim Galore version: 0.6.10
-Cutadapt version: 4.9
-Number of cores used for trimming: 1
-Quality Phred score cutoff: 20
-Quality encoding type selected: ASCII+33
-Adapter sequence: 'AGATCGGAAGAGC' (Illumina TruSeq, Sanger iPCR; auto-detected)
-Maximum trimming error rate: 0.1 (default)
-Minimum required adapter overlap (stringency): 1 bp
-Minimum required sequence length before a sequence gets removed: 20 bp
-Running FastQC on the data once trimming has completed
-Output file(s) will be GZIP compressed
-
-Cutadapt seems to be fairly up-to-date (version 4.9). Setting -j 1
-Writing final adapter and quality trimmed output to ENCSR000COQ1_1_trimmed.fq.gz
-
-
-  >>> Now performing quality (cutoff '-q 20') and adapter trimming in a single pass for the adapter sequence: 'AGATCGGAAGAGC' from file /data/reads/ENCSR000COQ1_1.fastq.gz <<<
-This is cutadapt 4.9 with Python 3.12.7
-Command line parameters: -j 1 -e 0.1 -q 20 -O 1 -a AGATCGGAAGAGC /data/reads/ENCSR000COQ1_1.fastq.gz
-Processing single-end reads on 1 core ...
-Finished in 0.501 s (18.010 µs/read; 3.33 M reads/minute).
-
-=== Summary ===
-
-Total reads processed:                  27,816
-Reads with adapters:                     9,173 (33.0%)
-Reads written (passing filters):        27,816 (100.0%)
-
-Total basepairs processed:     2,114,016 bp
-Quality-trimmed:                       0 bp (0.0%)
-Total written (filtered):      2,100,697 bp (99.4%)
-
-=== Adapter 1 ===
-
-Sequence: AGATCGGAAGAGC; Type: regular 3'; Length: 13; Trimmed: 9173 times
-
-Minimum overlap: 1
-No. of allowed errors:
-1-9 bp: 0; 10-13 bp: 1
-
-Bases preceding removed adapters:
-  A: 27.4%
-  C: 37.4%
-  G: 20.9%
-  T: 14.3%
-  none/other: 0.0%
-
-Overview of removed sequences
-length  count   expect  max.err error counts
-1       6229    6954.0  0       6229
-2       2221    1738.5  0       2221
-3       581     434.6   0       581
-4       88      108.7   0       88
-5       33      27.2    0       33
-6       2       6.8     0       2
-7       1       1.7     0       1
-9       1       0.1     0       1
-10      2       0.0     1       2
-12      1       0.0     1       0 1
-14      4       0.0     1       3 1
-16      1       0.0     1       1
-19      1       0.0     1       1
-22      1       0.0     1       1
-29      4       0.0     1       0 4
-33      3       0.0     1       3
-
-RUN STATISTICS FOR INPUT FILE: /data/reads/ENCSR000COQ1_1.fastq.gz
-=============================================
-27816 sequences processed in total
-Sequences removed because they became shorter than the length cutoff of 20 bp:  0 (0.0%)
-
-
-  >>> Now running FastQC on the data <<<
-
-application/gzip
-Started analysis of ENCSR000COQ1_1_trimmed.fq.gz
-Approx 5% complete for ENCSR000COQ1_1_trimmed.fq.gz
-Approx 10% complete for ENCSR000COQ1_1_trimmed.fq.gz
-Approx 15% complete for ENCSR000COQ1_1_trimmed.fq.gz
-Approx 20% complete for ENCSR000COQ1_1_trimmed.fq.gz
-Approx 25% complete for ENCSR000COQ1_1_trimmed.fq.gz
-Approx 30% complete for ENCSR000COQ1_1_trimmed.fq.gz
-Approx 35% complete for ENCSR000COQ1_1_trimmed.fq.gz
-Approx 40% complete for ENCSR000COQ1_1_trimmed.fq.gz
-Approx 45% complete for ENCSR000COQ1_1_trimmed.fq.gz
-Approx 50% complete for ENCSR000COQ1_1_trimmed.fq.gz
-Approx 55% complete for ENCSR000COQ1_1_trimmed.fq.gz
-Approx 60% complete for ENCSR000COQ1_1_trimmed.fq.gz
-Approx 65% complete for ENCSR000COQ1_1_trimmed.fq.gz
-Approx 70% complete for ENCSR000COQ1_1_trimmed.fq.gz
-Approx 75% complete for ENCSR000COQ1_1_trimmed.fq.gz
-Approx 80% complete for ENCSR000COQ1_1_trimmed.fq.gz
-Approx 85% complete for ENCSR000COQ1_1_trimmed.fq.gz
-Approx 90% complete for ENCSR000COQ1_1_trimmed.fq.gz
-Approx 95% complete for ENCSR000COQ1_1_trimmed.fq.gz
 Analysis complete for ENCSR000COQ1_1_trimmed.fq.gz
 ```
 
@@ -290,7 +176,7 @@ exit
 
 ## 2. Align the reads to the reference genome
 
-We're going to pull down a container that has `hisat2` installed, spin it up interactively and run the alignment command to align the RNAseq data to a reference genome.
+We're going to pull a container image that has `hisat2` installed, spin it up interactively and run the alignment command to align the RNAseq data to a reference genome.
 
 ### 2.1. Pull the `hisat2` container
 
@@ -399,7 +285,7 @@ exit
 
 ## 3. Generate a comprehensive QC report
 
-We're going to pull down a container that has `multiqc` installed, spin it up interactively and run a report generation command on the before/after FastQC report files.
+We're going to pull a container image that has `multiqc` installed, spin it up interactively and run a report generation command on the before/after FastQC report files.
 
 ### 3.1. Pull the `multiqc` container
 
