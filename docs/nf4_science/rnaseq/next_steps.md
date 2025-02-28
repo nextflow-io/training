@@ -6,7 +6,7 @@ Congrats again on completing the Nextflow For RNAseq training course and thank y
 
 ### 1. See how what you just learned applies to another scientific analysis use case
 
-**Check out the [Nextflow for Science](../nf4_science/index.md) page** for a list of short standalone courses that demonstrate how to apply the basic concepts and mechanisms presented in Hello Nextflow to common scientific analysis use cases.
+**Check out the [Nextflow for Science](../index.md) page** for a list of short standalone courses that demonstrate how to apply the basic concepts and mechanisms presented in Hello Nextflow to common scientific analysis use cases.
 
 If you don't see your domain represented by a relatable use case, let us know in the [Community forum](https://community.seqera.io/) so we can add it to our development list.
 
@@ -17,7 +17,7 @@ As you move forward with your work, you're going to want to learn how to use the
 
 To that end, we are currently working on a collection of Side Quests, which are meant to be short standalone courses that go deep into specific topics like testing, metadata handling, using conditional statements and the differences between working on HPC _vs._ cloud.
 
-In the meantime, feel free to **browse the [Fundamentals Training](../basic_training/index.md) and [Advanced Training](../advanced/index.md)** to find training exercises about the topics that interest you.
+In the meantime, feel free to **browse the [Fundamentals Training](../../basic_training/index.md) and [Advanced Training](../../advanced/index.md)** to find training exercises about the topics that interest you.
 
 ### 3. Learn how to use nf-core resources and the Seqera Platform
 

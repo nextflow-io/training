@@ -17,14 +17,47 @@ Throughout the course, we use the output of `tree` to represent directory struct
 Here we generate a table of contents to the second level down:
 
 ```bash
-tree . -L 2
+tree . -L 3
 ```
 
 If you run this inside `nf4-science/rnaseq`, you should see the following output:
 
 ```console title="Directory contents"
-
-TODO
+.
+├── data
+│   ├── genome.fa
+│   ├── paired-end.csv
+│   ├── reads
+│   │   ├── ENCSR000COQ1_1.fastq.gz
+│   │   ├── ENCSR000COQ1_2.fastq.gz
+│   │   ├── ENCSR000COQ2_1.fastq.gz
+│   │   ├── ENCSR000COQ2_2.fastq.gz
+│   │   ├── ENCSR000COR1_1.fastq.gz
+│   │   ├── ENCSR000COR1_2.fastq.gz
+│   │   ├── ENCSR000COR2_1.fastq.gz
+│   │   ├── ENCSR000COR2_2.fastq.gz
+│   │   ├── ENCSR000CPO1_1.fastq.gz
+│   │   ├── ENCSR000CPO1_2.fastq.gz
+│   │   ├── ENCSR000CPO2_1.fastq.gz
+│   │   └── ENCSR000CPO2_2.fastq.gz
+│   └── single-end.csv
+├── nextflow.config
+├── rnaseq.nf
+└── solutions
+    ├── modules
+    │   ├── fastqc.nf
+    │   ├── fastqc_pe.nf
+    │   ├── hisat2_align.nf
+    │   ├── hisat2_align_pe.nf
+    │   ├── multiqc.nf
+    │   ├── trim_galore.nf
+    │   └── trim_galore_pe.nf
+    ├── rnaseq-2.1.nf
+    ├── rnaseq-2.2.nf
+    ├── rnaseq-2.3.nf
+    ├── rnaseq-3.1.nf
+    ├── rnaseq-3.2.nf
+    └── rnaseq_pe-3.3.nf
 
 ```
 
@@ -35,23 +68,19 @@ TODO
 
 **Here's a summary of what you should know to get started:**
 
-- **The `.nf` files** are workflow scripts that are named based on what part of the course they're used in.
+- **The `rnaseq.nf` file** is the outline if the workflow script we will work to develop.
 
-- **The file `nextflow.config`** is a configuration file that sets minimal environment properties.
-  You can ignore it for now.
+- **The file `nextflow.config`** is a configuration file that sets minimal environment properties. You can ignore it for now.
 
 - **The `data` directory** contains input data and related resources:
-  - _A reference genome_ consisting of a small region of the human chromosome 20 (from hg19/b37) and its accessory files (index and known splice sites).
-  - _RNAseq data_ corresponding to **[contents]**, which have been subset to a **[region?]** to keep the file sizes small.
 
-_Completed workflows (solutions) will be added in the near future._
+  - _A reference genome_ called `genome.fa` consisting of a small region of the human chromosome 20 (from hg19/b37).
+  - _RNAseq data_ that has been subset to a small region to keep the file sizes down, in the `reads/` directory.
+  - _CSV files_ listing the IDs and paths of the example data files, for processing in batches.
 
-<!-- COMMENTED OUT UNTIL SOLUTIONS ARE READY (need to redo them)
-- **The `solutions` directory** contains the completed workflow scripts that result from each step of the course.
+- **The `solutions` directory** contains the completed workflow scripts and modules that result from each step of the course.
   They are intended to be used as a reference to check your work and troubleshoot any issues.
-  The name and number in the filename correspond to the step of the relevant part of the course.
-  For example, the file `genomics-1-4.nf` is the expected result of completing steps 1 through 4 of _Part 1: Per-sample variant calling_ using the `genomics-1.nf` workflow.
--->
+  The number in the filename corresponds to the step of the relevant part of the course.
 
 !!!tip
 
