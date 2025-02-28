@@ -138,7 +138,7 @@ process sayHello {
 }
 ```
 
-This a very minimal process definition that just contains an `output` definition and the `script` to execute.
+This is a very minimal process definition that just contains an `output` definition and the `script` to execute.
 
 The `output` definition includes the `path` qualifier, which tells Nextflow this should be handled as a path (includes both directory paths and files).
 Another common qualifier is `val`.
@@ -172,7 +172,7 @@ workflow {
 }
 ```
 
-This a very minimal **workflow** definition.
+This is a very minimal **workflow** definition.
 In a real-world pipeline, the workflow typically contains multiple calls to **processes** connected by **channels**, and the processes expect one or more variable **input(s)**.
 
 You'll learn how to add variable inputs later in this training module; and you'll learn how to add more processes and connect them by channels in Part 3 of this course.
@@ -479,7 +479,7 @@ In the process block, make the following code change:
 
 _Before:_
 
-```groovy title="hello-channels.nf" linenums="6" hl_lines="4"
+```groovy title="hello-world.nf" linenums="6" hl_lines="4"
 process sayHello {
 
     publishDir 'results', mode: 'copy'
@@ -490,7 +490,7 @@ process sayHello {
 
 _After:_
 
-```groovy title="hello-channels.nf" linenums="6" hl_lines="4 5 6 7"
+```groovy title="hello-world.nf" linenums="6" hl_lines="4 5 6 7"
 process sayHello {
 
     publishDir 'results', mode: 'copy'
