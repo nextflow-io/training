@@ -285,7 +285,7 @@ process HISAT2_ALIGN {
     tar -xzvf $index_zip
     hisat2 -x ${index_zip.simpleName} -U $reads \
         --new-summary --summary-file ${reads.simpleName}.hisat2.log | \
-        samtools view -bS - > ${reads.simpleName}.bam
+        samtools view -bS -o ${reads.simpleName}.bam
     """
 }
 ```
