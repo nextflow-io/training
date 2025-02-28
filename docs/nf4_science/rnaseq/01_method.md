@@ -9,7 +9,7 @@ Our goal is to develop a workflow that implements the following processing steps
 --8<-- "docs/nf4_science/rnaseq/img/preprocess.svg"
 </figure>
 
-- **FASTQC_RAW:** Perform QC on the read data before trimming using FastQC
+- **FASTQC:** Perform QC on the read data before trimming using FastQC
 - **TRIM_GALORE:** Trim adapter sequences and perform QC after trimming using Trim Galore (bundles Cutadapt and FastQC)
 - **HISAT2_ALIGN:** Align reads to the reference genome using Hisat2
 - **MULTIQC:** Generate a comprehensive QC report using MultiQC
