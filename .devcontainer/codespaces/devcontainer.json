@@ -1,5 +1,5 @@
 {
-    "name": "nfcore",
+    "name": "codespaces",
     "build": {
         "dockerfile": "Dockerfile",
         "context": ".."
