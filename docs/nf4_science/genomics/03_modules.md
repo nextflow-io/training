@@ -4,7 +4,7 @@ In the first part of this course, you built a variant calling pipeline that was 
 
 In the second part, we showed you how to use channels and channel operators to implement joint variant calling with GATK, building on the pipeline from Part 1.
 
-In this part, we'll show you how to convert the code in that workflow into modules. To follow this part of the training, you should have completed Part 1 and Part 2, as well as the [Hello Modules](../../hello_nextflow/hello_modules.md), which covers the basics of modules.
+In this part, we'll show you how to convert the code in that workflow into modules. To follow this part of the training, you should have completed Part 1 and Part 2, as well as [Hello Modules](../../../hello_nextflow/hello_modules.md), which covers the basics of modules.
 
 ---
 
@@ -53,7 +53,7 @@ Move the Genomics workflow's processes into modules.
 
 ## 1. Move processes into modules
 
-As you learned in [Hello Modules](../../hello_nextflow/hello_modules.md), you can create a module simply by copying the process definition into its own file, in any directory, and you can name that file anything you want.
+As you learned in [Hello Modules](../../../hello_nextflow/hello_modules.md), you can create a module simply by copying the process definition into its own file, in any directory, and you can name that file anything you want.
 
 For reasons that will become clear later (in particular when we come to testing), in this training we'll follow the convention of naming the file `main.nf`, and placing it in a directory structure named after the tool kit and the command.
 
@@ -93,7 +93,7 @@ process SAMTOOLS_INDEX {
 }
 ```
 
-Then, remove the `SAMTOOLS_INDEX` process definition from the workflow's `main.nf` file, and add an import declaration for the module before the next process definition, like this:
+Then, remove the `SAMTOOLS_INDEX` process definition from `genomics-3.nf`, and add an import declaration for the module before the next process definition, like this:
 
 _Before:_
 
@@ -205,4 +205,4 @@ You've practiced modularizing a workflow, and you've seen that it still works th
 
 ## 3. Summary
 
-So, once again (assuming you followed [Hello Modules](../../hello_nextflow/hello_modules.md)), you've done all this work and absolutely nothing has changed to how the pipeline works! This is a good thing, because it means that you've modularized your workflow without impacting its function. Importantly, you've laid a foundation for doing things that will make your code more modular and easier to maintain- for example, you can now add tests to your pipeline using the nf-test framework. This is what we'll be looking at in the next part of this course.
+So, once again (assuming you followed [Hello Modules](../../../hello_nextflow/hello_modules.md)), you've done all this work and absolutely nothing has changed to how the pipeline works! This is a good thing, because it means that you've modularised your workflow without impacting its function. Importantly, you've laid a foundation for doing things that will make your code more modular and easier to maintain- for example, you can now add tests to your pipeline using the nf-test framework. This is what we'll be looking at in the next part of this course.
