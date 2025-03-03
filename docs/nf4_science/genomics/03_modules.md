@@ -154,7 +154,7 @@ modules/
 5 directories, 3 files
 ```
 
- You should also have something like this in the main workflow file, after the parameters section:
+You should also have something like this in the main workflow file, after the parameters section:
 
 ```
 include { SAMTOOLS_INDEX } from './modules/samtools/index/main.nf'
