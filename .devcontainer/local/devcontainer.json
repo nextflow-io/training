@@ -11,17 +11,20 @@
     "workspaceFolder": "${localWorkspaceFolder}",
     "workspaceMount": "source=${localWorkspaceFolder},target=${localWorkspaceFolder},type=bind",
     "remoteEnv": {
-        "NXF_HOME": "/workspaces/.nextflow",
-        "HOST_PROJECT_PATH": "${localWorkspaceFolder}"
+        "NXF_HOME": "/workspaces/training/.nextflow",
+        "HOST_PROJECT_PATH": "/workspaces/training"
     },
-    "postCreateCommand": "if [ -z \"$CODESPACES\" ]; then echo \"Local Development\"; else echo \"Codespaces Development\"; fi",
+    "postCreateCommand": "sudo mkdir -p /workspaces && sudo ln -s ${localWorkspaceFolder} /workspaces/training && if [ -z \"$CODESPACES\" ]; then echo \"Local Development\"; else echo \"Codespaces Development\"; fi",
+    "postAttachCommand": "cd /workspaces/training",
     // Configure tool-specific properties.
     "customizations": {
         // Configure properties specific to VS Code.
         "vscode": {
             // Set *default* container specific settings.json values on container create.
             "settings": {
-                "python.defaultInterpreterPath": "/opt/conda/bin/python"
+                "python.defaultInterpreterPath": "/opt/conda/bin/python",
+                "terminal.integrated.cwd": "/workspaces/training",
+                "terminal.integrated.defaultLocation": "workspace"
             },
             // Add the IDs of extensions you want installed when the container is created.
             "extensions": [
@@ -38,6 +41,5 @@
             "label": "Application",
             "onAutoForward": "openPreview"
         }
-    },
-    "postCreateCommand": "mkdir -p /workspace && ln -s /workspaces /workspace/gitpod"
+    }
 }

@@ -38,6 +38,5 @@
             "label": "Application",
             "onAutoForward": "openPreview"
         }
-    },
-    "postCreateCommand": "mkdir -p /workspace && ln -s /workspaces /workspace/gitpod"
+    }
 }
