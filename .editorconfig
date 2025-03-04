@@ -14,3 +14,5 @@ indent_size = 2
 # ignore python and markdown
 [*.{py,md}]
 indent_style = unset
+
+[{side-quests/solutions/nf-core/}*]
