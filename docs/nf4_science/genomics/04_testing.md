@@ -115,7 +115,7 @@ SUCCESS: Generated 1 test files.
 
 You can navigate to the directory in the file explorer and open the file, which should contain the following code:
 
-```groovy title="tests/modules/local/samtools/index/main.nf.test" linenums="1"
+```groovy title="tests/modules/samtools/index/main.nf.test" linenums="1"
 nextflow_process {
 
     name "Test Process SAMTOOLS_INDEX"
@@ -168,7 +168,7 @@ Now we can simplify the `script` section of the test file to a relative path:
 
 _Before:_
 
-```groovy title="modules/local/samtools/index/tests/main.nf.test" linenums="3"
+```groovy title="modules/samtools/index/tests/main.nf.test" linenums="3"
 name "Test Process SAMTOOLS_INDEX"
 script "modules/samtools/index/main.nf"
 process "SAMTOOLS_INDEX"
@@ -176,7 +176,7 @@ process "SAMTOOLS_INDEX"
 
 _After:_
 
-```groovy title="modules/local/samtools/index/tests/main.nf.test" linenums="3"
+```groovy title="modules/samtools/index/tests/main.nf.test" linenums="3"
 name "Test Process SAMTOOLS_INDEX"
 script "../main.nf"
 process "SAMTOOLS_INDEX"
@@ -215,7 +215,7 @@ As we learned before, it's good practice to rename the test to something that ma
 
 _Before:_
 
-```groovy title="modules/local/samtools/index/tests/main.nf.test" linenums="7"
+```groovy title="modules/samtools/index/tests/main.nf.test" linenums="7"
 test("Should run without failures") {
 ```
 
@@ -234,7 +234,7 @@ The `params` block in the stub file includes a placeholder for parameters:
 
 _Before:_
 
-```groovy title="modules/local/samtools/index/tests/main.nf.test" linenums="11"
+```groovy title="modules/samtools/index/tests/main.nf.test" linenums="11"
 params {
     // define parameters here. Example:
     // outdir = "tests/results"
@@ -245,7 +245,7 @@ We use it to specify a location for the results to be output, using the default 
 
 _After:_
 
-```groovy title="modules/local/samtools/index/tests/main.nf.test" linenums="11"
+```groovy title="modules/samtools/index/tests/main.nf.test" linenums="11"
 params {
     outdir = "tests/results"
 }
@@ -489,7 +489,7 @@ _After:_
 
 Then we can refer to the output of that process in the `when` block where we specify the test inputs:
 
-```groovy title="modules/local/gatk/haplotypecaller/tests/main.nf.test" linenums="20"
+```groovy title="modules/gatk/haplotypecaller/tests/main.nf.test" linenums="20"
         when {
             params {
                 outdir = "tests/results"
@@ -601,7 +601,7 @@ In practice, we replace the second assertion in the `then` block as follows:
 
 _Before:_
 
-```groovy title="modules/local/gatk/haplotypecaller/tests/main.nf.test" linenums="35"
+```groovy title="modules/gatk/haplotypecaller/tests/main.nf.test" linenums="35"
 then {
     assert process.success
     assert snapshot(process.out).match()
@@ -610,7 +610,7 @@ then {
 
 _After:_
 
-```console title="modules/local/gatk/haplotypecaller/tests/main.nf.test" linenums="35"
+```console title="modules/gatk/haplotypecaller/tests/main.nf.test" linenums="35"
         then {
             assert process.success
             assert path(process.out[0][0]).readLines().contains('#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	reads_son')
@@ -655,7 +655,7 @@ You'll need to make sure to copy lines from the corresponding output VCFs.
 
 Test for the 'mother' sample:
 
-```groovy title="modules/local/gatk/haplotypecaller/tests/main.nf.test" linenums="43"
+```groovy title="modules/gatk/haplotypecaller/tests/main.nf.test" linenums="43"
     test("reads_mother [bam]") {
 
         setup {
@@ -694,7 +694,7 @@ Test for the 'mother' sample:
 
 Test for the 'father' sample:
 
-```groovy title="modules/local/gatk/haplotypecaller/tests/main.nf.test" linenums="78"
+```groovy title="modules/gatk/haplotypecaller/tests/main.nf.test" linenums="78"
     test("Should call father's halotype correctly") {
 
         setup {
@@ -820,7 +820,7 @@ nf-test generate process modules/gatk/jointgenotyping/main.nf
 
 This produces the following test stub:
 
-```groovy title="tests/modules/local/gatk/jointgenotyping/main.nf.test" linenums="1"
+```groovy title="tests/modules/gatk/jointgenotyping/main.nf.test" linenums="1"
 nextflow_process {
 
     name "Test Process GATK_JOINTGENOTYPING"
@@ -864,15 +864,15 @@ And don't forget to update the script path:
 
 _Before:_
 
-```groovy title="modules/local/gatk/jointgenotyping/tests/main.nf.test" linenums="3"
+```groovy title="modules/gatk/jointgenotyping/tests/main.nf.test" linenums="3"
 name "Test Process GATK_JOINTGENOTYPING"
-script "modules/local/gatk/jointgenotyping/main.nf"
+script "modules/gatk/jointgenotyping/main.nf"
 process "GATK_JOINTGENOTYPING"
 ```
 
 _After:_
 
-```groovy title="modules/local/gatk/jointgenotyping/tests/main.nf.test" linenums="3"
+```groovy title="modules/gatk/jointgenotyping/tests/main.nf.test" linenums="3"
 name "Test Process GATK_JOINTGENOTYPING"
 script "../main.nf"
 process "GATK_JOINTGENOTYPING"
@@ -882,7 +882,7 @@ process "GATK_JOINTGENOTYPING"
 
 Fill in the inputs based on the process input definitions and rename the test accordingly:
 
-```groovy title="modules/local/gatk/jointgenotyping/tests/main.nf.test" linenums="7"
+```groovy title="modules/gatk/jointgenotyping/tests/main.nf.test" linenums="7"
     test("Should call trio's joint genotype correctly") {
 
         when {
