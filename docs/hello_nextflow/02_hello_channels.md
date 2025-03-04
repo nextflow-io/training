@@ -522,7 +522,7 @@ Here we added the operator on the next line for readability, but you can add ope
 
 #### 3.2.2. Add `view()` to inspect channel contents
 
-We could run this right away to test if it works, but while we're at it, we're also going to add a couple of [`view()`](https://www.nextflow.io/docs/latest/reference/operator.html#view) directives, which allow us to inspect the contents of a channel.
+We could run this right away to test if it works, but while we're at it, we're also going to add a couple of [`view()`](https://www.nextflow.io/docs/latest/reference/operator.html#view) operators, which allow us to inspect the contents of a channel.
 You can think of `view()` as a debugging tool, like a `print()` statement in Python, or its equivalent in other languages.
 
 In the workflow block, make the following code change:
@@ -787,7 +787,7 @@ This is what the syntax looks like:
 
 This means 'for each element in the channel, take the first of any items it contains'.
 
-So let's apply that to our CVS parsing.
+So let's apply that to our CSV parsing.
 
 #### 4.3.1. Apply `map()` to the channel
 
