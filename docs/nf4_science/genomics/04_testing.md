@@ -8,7 +8,6 @@ In the third part, we modularized the pipeline.
 
 In this part of the training, we're going to show you how to use [**nf-test**](https://www.nf-test.com/), a testing framework that integrates well with Nextflow and makes it straightforward to add both module-level and workflow-level tests to your pipeline. To follow this part of the training, you should have completed Part 1, Part 2, and Part 3, as well as the [nf-test side quest](../../side_quests/nf-test.md), which covers the basics of nf-test, and why testing is important.
 
-
 ---
 
 ## 0. Warmup
@@ -33,7 +32,6 @@ modules/
 ```
 
 This modules directory can be found in the `solutions` directory if you need it.
-
 
 We're going to start with the same workflow as in Part 3, which we've provided for you in the file `genomics-4.nf`. Exactly as for the [nf-test side quest](../../side_quests/nf-test.md), we're going to add a few different types of tests to the three processes in this pipeline, as well as a workflow-level test.
 
@@ -192,7 +190,6 @@ The stub file includes a placeholder that we need to replace with an actual test
 
 _Before:_
 
-
 ```groovy title="modules/samtools/index/tests/main.nf.test" linenums="14"
 process {
     """
@@ -201,6 +198,7 @@ process {
     """
 }
 ```
+
 _After:_
 
 ```groovy title="modules/samtools/index/tests/main.nf.test" linenums="14"
@@ -292,23 +290,23 @@ As we learned previously, this verified the basic assertion about the success of
 
 ```json title="tests/modules/samtools/index/tests/main.nf.test.snap" linenums="1"
 {
-    "Should index reads_son.bam correctly": {
-        "content": [
-            {
-                "0": [
-                    [
-                        "reads_son.bam:md5,af5956d9388ba017944bef276b71d809",
-                        "reads_son.bam.bai:md5,a2ca7b84998218ee77eff14af8eb8ca2"
-                    ]
-                ]
-            }
-        ],
-        "meta": {
-            "nf-test": "0.9.2",
-            "nextflow": "24.10.0"
-        },
-        "timestamp": "2025-03-03T16:59:54.195992321"
-    }
+  "Should index reads_son.bam correctly": {
+    "content": [
+      {
+        "0": [
+          [
+            "reads_son.bam:md5,af5956d9388ba017944bef276b71d809",
+            "reads_son.bam.bai:md5,a2ca7b84998218ee77eff14af8eb8ca2"
+          ]
+        ]
+      }
+    ],
+    "meta": {
+      "nf-test": "0.9.2",
+      "nextflow": "24.10.0"
+    },
+    "timestamp": "2025-03-03T16:59:54.195992321"
+  }
 }
 ```
 
@@ -331,7 +329,6 @@ Test Process SAMTOOLS_INDEX
 
 SUCCESS: Executed 1 tests in 11.947s
 ```
-
 
 ### 1.7. Add more tests to `SAMTOOLS_INDEX`
 
@@ -1141,11 +1138,13 @@ Furthermore, we can automate this! imagine tests running every time you or a col
 You now know how to write and run several kinds of tests for your genomics pipeline using nf-test. This testing framework helps ensure your variant calling workflow produces consistent, reliable results across different environments and as you make code changes.
 
 You've learned to test critical components like:
+
 - The `SAMTOOLS_INDEX` process that prepares BAM files for variant calling
 - The `GATK_HAPLOTYPECALLER` process that identifies variants in individual samples
 - The `GATK_JOINTGENOTYPING` process that combines variant calls across a cohort
 
 You've also implemented different testing strategies specific to genomics data:
+
 - Verifying that VCF files contain expected variant calls despite non-deterministic elements like timestamps
 - Testing with a family trio dataset to ensure proper variant identification across related samples
 - Checking for specific genomic coordinates and variant information in your output files
