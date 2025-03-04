@@ -760,6 +760,7 @@ That completes the basic test plan for this second step in the pipeline. On to t
 ### Takeaway
 
 You've learned how to:
+
 1. Test processes that depend on outputs from other processes
 2. Verify specific genomic variants in VCF output files
 3. Handle non-deterministic outputs by checking specific content
@@ -964,6 +965,7 @@ SUCCESS: Executed 1 tests in 21.622s
 ```
 
 The test passes, verifying that our joint genotyping process correctly:
+
 1. Combines individual sample VCFs
 2. Performs joint variant calling
 3. Produces a multi-sample VCF with consistent genotype calls across runs
@@ -1078,6 +1080,7 @@ SUCCESS: Executed 1 tests in 48.486s
 ```
 
 The test passes, confirming that our complete variant calling pipeline:
+
 1. Successfully processes all samples
 2. Correctly chains together all steps
 
