@@ -42,7 +42,7 @@ Before we start adding tests, let's make sure the workflow runs as expected.
 Let's try running that now.
 
 ```bash
-nextflow run genomics-3.nf -resume
+nextflow run genomics-4.nf -resume
 ```
 
 This should look very familiar by now if you've been working through this training course from the start.
@@ -50,7 +50,7 @@ This should look very familiar by now if you've been working through this traini
 ```console title="Output"
  N E X T F L O W   ~  version 24.10.0
 
-Launching `genomics-3.nf` [gloomy_poincare] DSL2 - revision: 43203316e0
+Launching `genomics-4.nf` [gloomy_poincare] DSL2 - revision: 43203316e0
 
 executor >  local (7)
 [18/89dfa4] SAMTOOLS_INDEX (1)       | 3 of 3 ✔
@@ -71,7 +71,7 @@ nf-test init
 This should produce the following output:
 
 ```bash
-🚀 nf-test 0.9.1
+🚀 nf-test 0.9.2
 https://www.nf-test.com
 (c) 2021 - 2024 Lukas Forer and Sebastian Schoenherr
 
