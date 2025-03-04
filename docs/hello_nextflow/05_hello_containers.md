@@ -434,7 +434,7 @@ _Before:_
     collectGreetings(convertToUpper.out.collect(), params.batch)
 
     // emit a message about the size of the batch
-    collectGreetings.out.count.view{ "There were $it greetings in this batch" }
+    collectGreetings.out.count.view{ num_greetings -> "There were $num_greetings greetings in this batch" }
 ```
 
 _After:_
@@ -444,7 +444,7 @@ _After:_
     collectGreetings(convertToUpper.out.collect(), params.batch)
 
     // emit a message about the size of the batch
-    collectGreetings.out.count.view{ "There were $it greetings in this batch" }
+    collectGreetings.out.count.view{ num_greetings -> "There were $num_greetings greetings in this batch" }
 
     // generate ASCII art of the greetings with cowpy
     cowpy(collectGreetings.out.outfile, params.character)
