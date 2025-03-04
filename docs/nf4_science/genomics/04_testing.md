@@ -92,13 +92,15 @@ Write basic tests that evaluate whether the process calls were successful and pr
 
 ## 1. Test a process for success and matching outputs
 
-We're going to start by adding a test for the `SAMTOOLS_INDEX` process.
-It's a very simple process that takes a single input file (for which we have test data on hand) and generates an index file.
-We want to test that the process runs successfully and that the file it produces is always the same for a given input.
+We'll start by testing the `SAMTOOLS_INDEX` process, which creates index files for BAM files to enable efficient random access. This is a good first test case because:
+
+1. It has a single, well-defined input (a BAM file)
+2. It produces a predictable output (a BAI index file)
+3. The output should be identical for identical inputs
 
 ### 1.1. Generate a test file stub
 
-First, we use the `nf-test generate process` command to create a test file stub.
+First, generate a test file stub:
 
 ```bash
 nf-test generate process modules/samtools/index/main.nf
@@ -209,7 +211,7 @@ process {
 }
 ```
 
-### 1.4. Rename the test based on the primary test input
+### 1.4. Name the test based on functionality
 
 As we learned before, it's good practice to rename the test to something that makes sense in the context of the test.
 
@@ -253,19 +255,13 @@ params {
 
 ### 1.6. Run the test and examine the output
 
-Finally, it's time to run our test! Let's break down the syntax.
-
-- The basic command is `nf-test test`.
-- To that, we add `--profile docker_on` to specify that we want Nextflow to run the test with Docker enabled.
-- Then the test file that we want to run.
-
-All put together, it looks like this:
+Run the test:
 
 ```bash
 nf-test test modules/samtools/index/tests/main.nf.test
 ```
 
-This should produce the following output:
+This should produce:
 
 ```console title="Output"
 🚀 nf-test 0.9.2
@@ -315,6 +311,8 @@ We can also run the test again and see that it passes, because the output is ide
 ```bash
 nf-test test modules/samtools/index/tests/main.nf.test
 ```
+
+This produces:
 
 ```console title="Output"
 🚀 nf-test 0.9.2
@@ -368,11 +366,16 @@ Notice the warning, referring to the effect of the `--update-snapshot` parameter
 
 ### Takeaway
 
-You've now written tests for a real world process from the genomics pipeline you've been working on. You've learned that it's useful to run a test with different inputs to ensure that the process works for a range of potential issues.
+You've written your first module test for a genomics process, verifying that `SAMTOOLS_INDEX` correctly creates index files for different BAM files. The test suite ensures that:
+
+1. The process runs successfully
+2. Index files are created
+3. The outputs are consistent across runs
+4. The process works for all sample BAM files
 
 ### What's next?
 
-Learn how to write tests for other processes in our genomics workflow, using the setup method to handle chained processes. Evaluate whether outputs, specifically our VCF files, contain specific lines.
+Learn how to write tests for other processes in our genomics workflow, using the setup method to handle chained processes. We'll also evaluate whether outputs, specifically our VCF files, contain expected variant calls.
 
 ---
 
@@ -382,7 +385,7 @@ To test `GATK_HAPLOTYPECALLER`, we need to provide the process with the `SAMTOOL
 
 With the setup method, we can trigger the `SAMTOOLS_INDEX` process as part of the test setup, and then use its output as an input for `GATK_HAPLOTYPECALLER`. This has a cost - we're going to have to run the `SAMTOOLS_INDEX` process every time we run the test for `GATK_HAPLOTYPECALLER`- but maybe we're still developing the workflow and don't want to pre-generate test data we might have to change later. `SAMTOOLS_INDEX` process is also very quick, so maybe the benefits of pre-generating and storing its outputs are negligible. Let's see the setup method works.
 
-### 2.1. Generate the test file stub
+### 2.1. Generate and place the test file
 
 As previously, first we generate the file stub:
 
@@ -506,7 +509,7 @@ Then we can refer to the output of that process in the `when` block where we spe
         }
 ```
 
-### 2.4. Run test and examine output
+### 2.4. Test for specific variant calls
 
 ```bash
 nf-test test modules/gatk/haplotypecaller/tests/main.nf.test
@@ -632,7 +635,7 @@ Once we've modified the test in this way, we can run the test multiple times, an
 nf-test test modules/gatk/haplotypecaller/tests/main.nf.test
 ```
 
-Produces:
+This produces:
 
 ```console title="Output"
 🚀 nf-test 0.9.2
@@ -650,10 +653,7 @@ SUCCESS: Executed 1 tests in 19.382s
 
 ### 2.8. Add more test data
 
-To practice writing these kinds of tests, you can repeat the procedure for the other two input data files provided.
-You'll need to make sure to copy lines from the corresponding output VCFs.
-
-Test for the 'mother' sample:
+Add similar tests for the mother and father samples:
 
 ```groovy title="modules/gatk/haplotypecaller/tests/main.nf.test" linenums="43"
     test("reads_mother [bam]") {
@@ -737,7 +737,7 @@ Test for the 'father' sample:
 nf-test test modules/gatk/haplotypecaller/tests/main.nf.test
 ```
 
-Produces:
+This produces:
 
 ```console title="Output"
 🚀 nf-test 0.9.2
@@ -759,21 +759,28 @@ That completes the basic test plan for this second step in the pipeline. On to t
 
 ### Takeaway
 
-You know how to write tests for chained processes, and evaluate whether outputs contain specific lines.
+You've learned how to:
+1. Test processes that depend on outputs from other processes
+2. Verify specific genomic variants in VCF output files
+3. Handle non-deterministic outputs by checking specific content
+4. Test variant calling across multiple samples
 
 ### What's next?
 
-Learn how to write tests that use manually generated intermediate test data.
+Learn how to write tests that use pre-generated test data for the joint genotyping step.
 
 ---
 
-## 3. Use locally stored inputs
+## 3. Use pre-generated test data
 
-As we discussed at the start of section 2, in many cases it's better to use pre-generated test data and supply it as inputs to the test. This ensures that the test is repeatable and doesn't require the user to have access to the same data as the developer. It also prevents the need to re-run the upstream processes to generate the test data.
+For the joint genotyping step, we'll use a different approach - using pre-generated test data. This is often preferable for:
 
-For the third step in our pipeline we'll use manually generated intermediate test data that is co-located with the module itself, based on results we generated using our test runs.
+1. Complex processes with multiple dependencies
+2. Processes that take a long time to run
+3. Processes where the input generation is non-deterministic
+4. Processes that are part of a stable, production pipeline
 
-Let's inspect the results we have:
+Let's inspect the results we generated at the start of this section:
 
 ```bash
 tree results_genomics/
@@ -923,13 +930,24 @@ The output of the joint genotyping step is another VCF file, so we're going to u
     }
 ```
 
+By checking the content of a specific variant in the output file, this test verifies that:
+
+1. The joint genotyping process runs successfully
+2. The output VCF contains all three samples in the correct order
+3. A specific variant is called correctly with:
+   - Accurate genotypes for each sample (0/1 for father, 1/1 for mother and son)
+   - Correct read depths and genotype qualities
+   - Population-level statistics like allele frequency (AF=0.833)
+
+We haven't snapshotted the whole file, but by checking a specific variant, we can be confident that the joint genotyping process is working as expected.
+
 ### 3.5. Run the test
 
 ```bash
 nf-test test modules/gatk/jointgenotyping/tests/main.nf.test
 ```
 
-Produces:
+This produces:
 
 ```console title="Output"
 🚀 nf-test 0.9.2
@@ -945,7 +963,10 @@ Test Process GATK_JOINTGENOTYPING
 SUCCESS: Executed 1 tests in 21.622s
 ```
 
-It works! And that's it for module-level tests for our pipeline.
+The test passes, verifying that our joint genotyping process correctly:
+1. Combines individual sample VCFs
+2. Performs joint variant calling
+3. Produces a multi-sample VCF with consistent genotype calls across runs
 
 ### Takeaway
 
@@ -953,23 +974,27 @@ You know how to write tests for using inputs that have been previously generated
 
 ### What's next?
 
-Learn how to write a workflow-level test.
+Add a workflow-level test to verify the entire variant calling pipeline works end-to-end.
 
 ---
 
 ## 4. Add a workflow-level test
 
-Now all that remains is to add a test for checking that the whole pipeline runs to completion.
+Now we'll test the complete variant calling pipeline, from BAM files to joint genotypes. This verifies that:
 
-### 4.1. Generate pipeline-level stub test file
+1. All processes work together correctly
+2. Data flows properly between steps
+3. Final variant calls are consistent
 
-The command is similar to the one for module tests, except it says `generate pipeline` instead of `generate process`:
+### 4.1. Generate the workflow test
+
+Generate a test file for the complete pipeline:
 
 ```bash
 nf-test generate pipeline genomics-4.nf
 ```
 
-It produces a similar stub file:
+This creates a basic test stub:
 
 ```groovy title="tests/genomics-4.nf.test" linenums="1"
 nextflow_pipeline {
@@ -993,10 +1018,7 @@ nextflow_pipeline {
     }
 
 }
-
 ```
-
-The line `assert workflow.success` is a simple assertion testing for whether the pipeline ran successfully.
 
 !!!note
 
@@ -1018,9 +1040,9 @@ params {
     reads_bam        = "${projectDir}/data/sample_bams.txt"
 
     // Output directory
-    params.outdir = "results_genomics"
+    outdir = "results_genomics"
 
-    // Accessory files
+    // Reference genome and intervals
     reference        = "${projectDir}/data/ref/ref.fasta"
     reference_index  = "${projectDir}/data/ref/ref.fasta.fai"
     reference_dict   = "${projectDir}/data/ref/ref.dict"
@@ -1033,9 +1055,7 @@ params {
 
 When we run the test, `nf-test` will pick up this configuration file and pull in the inputs accordingly.
 
-### 4.3. Run the test
-
-Here we go!
+### 4.3. Run the workflow test
 
 ```bash
 nf-test test tests/genomics-4.nf.test
@@ -1057,10 +1077,11 @@ Test Workflow genomics-4.nf
 SUCCESS: Executed 1 tests in 48.486s
 ```
 
-That's it! If necessary, more nuanced assertions can be added to test for the validity and content of the pipeline outputs.
-You can learn more about the different kinds of assertions you can use in the [nf-test documentation](https://www.nf-test.com/docs/assertions/assertions/).
+The test passes, confirming that our complete variant calling pipeline:
+1. Successfully processes all samples
+2. Correctly chains together all steps
 
-### 4.3. Run ALL the tests!
+### 4.4. Run ALL tests
 
 nf-test has one more trick up it's sleeve. We can run all the tests at once! Modify the `nf-test.config` file so that nf-test looks in every directory for nf-test files. You can do this by modifying the `testsDir` parameter:
 
@@ -1095,6 +1116,8 @@ Now, we can simply run nf-test and it will run _every single test_ in our reposi
 ```bash
 nf-test test
 ```
+
+This produces:
 
 ```console title="Output"
 
@@ -1131,9 +1154,7 @@ SUCCESS: Executed 8 tests in 167.772s
 
 Furthermore, we can automate this! imagine tests running every time you or a colleague tries to add new code. This is how we ensure our pipelines maintain a high standard.
 
-### Takeaway
-
-## Expanded Takeaway
+## Takeaway
 
 You now know how to write and run several kinds of tests for your genomics pipeline using nf-test. This testing framework helps ensure your variant calling workflow produces consistent, reliable results across different environments and as you make code changes.
 
