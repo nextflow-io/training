@@ -7,7 +7,7 @@ nextflow_pipeline {
 
         when {
             params {
-                // define parameters here. Example: 
+                // define parameters here. Example:
                 // outdir = "tests/results"
             }
         }
