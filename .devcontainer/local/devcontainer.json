@@ -1,0 +1,42 @@
+{
+    "name": "nextflow-training (local)",
+
+    // Update this to pin the release tag before release
+    "image": "ghcr.io/nextflow-io/training:latest",
+    // Uncomment this and comment "image" when testing Dockerfile changes
+    // "build": { "dockerfile": "Dockerfile", "context": ".." },
+
+    "features": {
+        "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {
+            "version": "latest"
+        }
+    },
+    "workspaceFolder": "${localWorkspaceFolder}",
+    "workspaceMount": "source=${localWorkspaceFolder},target=${localWorkspaceFolder},type=bind",
+    "remoteEnv": {
+        "NXF_HOME": "/workspaces/training/.nextflow",
+        "HOST_PROJECT_PATH": "/workspaces/training"
+    },
+    "postCreateCommand": "sudo mkdir -p /workspaces && sudo ln -s ${localWorkspaceFolder} /workspaces/training && if [ -z \"$CODESPACES\" ]; then echo \"Local Development\"; else echo \"Codespaces Development\"; fi",
+    "customizations": {
+        // Configure properties specific to VS Code.
+        "vscode": {
+            // Set *default* container specific settings.json values on container create.
+            "settings": {
+                "python.defaultInterpreterPath": "/opt/conda/bin/python",
+                "terminal.integrated.cwd": "/workspaces/training",
+                "terminal.integrated.defaultLocation": "workspace"
+            },
+            // Add the IDs of extensions you want installed when the container is created.
+            "extensions": [
+                "ms-python.python",
+                "ms-python.vscode-pylance",
+                "nf-core.nf-core-extensionpack", // nf-core recommended extensions
+                "nextflow.nextflow", // Nextflow VS Code extension
+                "codezombiech.gitignore", // Language support for .gitignore files
+                "cssho.vscode-svgviewer" // SVG viewer
+            ]
+        }
+    },
+    "remoteUser": "root"
+}
