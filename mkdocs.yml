@@ -28,6 +28,8 @@ nav:
       - nf4_science/genomics/00_orientation.md
       - nf4_science/genomics/01_per_sample_variant_calling.md
       - nf4_science/genomics/02_joint_calling.md
+      - nf4_science/genomics/03_modules.md
+
   - Nextflow for RNAseq:
       - nf4_science/rnaseq/index.md
       - nf4_science/rnaseq/00_orientation.md
@@ -188,6 +190,7 @@ plugins:
         - advanced/orientation.md
         - side_quests/nf-test.md
         - side_quests/nf-core.md
+        - nf4_science/genomics/03_modules.md
   - i18n:
       docs_structure: suffix
       fallback_to_default: true
