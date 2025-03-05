@@ -15,4 +15,6 @@ indent_size = 2
 [*.{py,md}]
 indent_style = unset
 
-[{side-quests/solutions/nf-core/}*]
+# ignore nf-core files
+[side-quests/solutions/nf-core/**]
+indent_style = unset
