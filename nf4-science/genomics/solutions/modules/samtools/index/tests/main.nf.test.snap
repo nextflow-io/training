@@ -1,0 +1,53 @@
+{
+    "Should index reads_son.bam correctly": {
+        "content": [
+            {
+                "0": [
+                    [
+                        "reads_son.bam:md5,af5956d9388ba017944bef276b71d809",
+                        "reads_son.bam.bai:md5,a2ca7b84998218ee77eff14af8eb8ca2"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.0"
+        },
+        "timestamp": "2025-03-03T16:59:54.195992321"
+    },
+    "Should index reads_father.bam correctly": {
+        "content": [
+            {
+                "0": [
+                    [
+                        "reads_father.bam:md5,57f3b977b0eee8278924e38894d02a57",
+                        "reads_father.bam.bai:md5,49cb8454781a279a8b33f47209e76fe5"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.0"
+        },
+        "timestamp": "2025-03-03T17:08:49.843522701"
+    },
+    "Should index reads_mother.bam correctly": {
+        "content": [
+            {
+                "0": [
+                    [
+                        "reads_mother.bam:md5,04b918c3707c24d8f3a7e88bb68e2d32",
+                        "reads_mother.bam.bai:md5,1b17cbcc9392e7e787cc83a9081deb31"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.0"
+        },
+        "timestamp": "2025-03-03T17:08:39.054495804"
+    }
+}
