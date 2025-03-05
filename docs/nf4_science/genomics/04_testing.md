@@ -1,4 +1,4 @@
-# Part 4: Adding tests
+# Part 4: adding tests
 
 In the first part of this course, you built a variant calling pipeline that was completely linear and processed each sample's data independently of the others.
 
@@ -58,7 +58,7 @@ executor >  local (7)
 [a8/d2c189] GATK_JOINTGENOTYPING     | 1 of 1 ✔
 ```
 
-Like previously, there will now be a `work` directory and a `results_genomics` directory inside your project directory. But from now on we're going to be using the `nf-test` package to test the pipeline.
+Like previously, there will now be a `work` directory and a `results_genomics` directory inside your project directory. We'll actually make use of these results later on in our testing. But from now on we're going to be using the `nf-test` package to test the pipeline.
 
 ### 0.2. Initialize `nf-test`
 
@@ -332,6 +332,56 @@ SUCCESS: Executed 1 tests in 11.947s
 
 Sometimes it's useful to test a range of different input files to ensure we're testing for a variety of potential issues. Let's also test for the mother and father's bam files in the trio from our test data. Add the following tests to the test file:
 
+```
+    test("Should index reads_mother.bam correctly") {
+
+        when {
+            params {
+                outdir = "tests/results"
+            }
+            process {
+                """
+                input[0] = file("${projectDir}/data/bam/reads_mother.bam")
+                """
+            }
+        }
+
+        then {
+            assert process.success
+            assert snapshot(process.out).match()
+        }
+
+    }
+
+    test("Should index reads_father.bam correctly") {
+
+        when {
+            params {
+                outdir = "tests/results"
+            }
+            process {
+                """
+                input[0] = file("${projectDir}/data/bam/reads_father.bam")
+                """
+            }
+        }
+
+        then {
+            assert process.success
+            assert snapshot(process.out).match()
+        }
+
+    }
+```
+
+Then you can run the test again:
+
+```bash
+nf-test test modules/samtools/index/tests/main.nf.test
+```
+
+This produces:
+
 ```groovy title="modules/samtools/index/tests/main.nf.test" linenums="27"
 🚀 nf-test 0.9.2
 https://www.nf-test.com
@@ -509,7 +559,7 @@ Then we can refer to the output of that process in the `when` block where we spe
         }
 ```
 
-### 2.4. Test for specific variant calls
+Make that change and run the test again:
 
 ```bash
 nf-test test modules/gatk/haplotypecaller/tests/main.nf.test
@@ -538,7 +588,7 @@ SUCCESS: Executed 1 tests in 20.027s
 
 It also produces a snapshot file like earlier.
 
-### 2.5. Run again and observe failure
+### 2.4. Run again and observe failure
 
 Interestingly, if you run the exact same command again, this time the test will fail. This command:
 
@@ -594,7 +644,7 @@ As a result, we can't just expect the files to have identical md5sums even if th
 
 How do we deal with that?
 
-### 2.6. Use a content assertion method
+### 2.5. Use a content assertion method to check a specific variant
 
 One way to solve the problem is to use a [different kind of assertion](https://nf-co.re/docs/contributing/tutorials/nf-test_assertions).
 In this case, we're going to check for specific content instead of asserting identity.
@@ -627,7 +677,7 @@ You might instead choose to read in specific lines.
 This approach does require choosing more carefully what we want to use as the 'signal' to test for.
 On the bright side, it can be used to test with great precision whether an analysis tool can consistently identify 'difficult' features (such as rare variants) as it undergoes further development.
 
-### 2.7. Run again and observe success
+### 2.6. Run again and observe success
 
 Once we've modified the test in this way, we can run the test multiple times, and it will consistently pass.
 
@@ -651,7 +701,7 @@ Test Process GATK_HAPLOTYPECALLER
 SUCCESS: Executed 1 tests in 19.382s
 ```
 
-### 2.8. Add more test data
+### 2.7. Add more test data
 
 Add similar tests for the mother and father samples:
 
@@ -690,11 +740,7 @@ Add similar tests for the mother and father samples:
             assert path(process.out[0][0]).readLines().contains('20_10037292_10066351	3277	.	G	<NON_REF>	.	.	END=3278	GT:DP:GQ:MIN_DP:PL	0/0:38:99:37:0,102,1530')
         }
     }
-```
 
-Test for the 'father' sample:
-
-```groovy title="modules/gatk/haplotypecaller/tests/main.nf.test" linenums="78"
     test("Should call father's halotype correctly") {
 
         setup {
@@ -731,7 +777,7 @@ Test for the 'father' sample:
     }
 ```
 
-### 2.9. Run the test command
+### 2.8. Run the test command
 
 ```bash
 nf-test test modules/gatk/haplotypecaller/tests/main.nf.test
@@ -778,8 +824,9 @@ For the joint genotyping step, we'll use a different approach - using pre-genera
 
 1. Complex processes with multiple dependencies
 2. Processes that take a long time to run
-3. Processes where the input generation is non-deterministic
-4. Processes that are part of a stable, production pipeline
+3. Processes that are part of a stable, production pipeline
+
+### 3.1. Generate test data
 
 Let's inspect the results we generated at the start of this section:
 
@@ -818,7 +865,7 @@ cp -rL results_genomics/*.g.vcf results_genomics/*.g.vcf.idx modules/gatk/jointg
 
 Now we can use these files as inputs to the test we're going to write for the joint genotyping step.
 
-### 3.1. Generate the test file stub
+### 3.2. Generate the test file stub
 
 As previously, first we generate the file stub:
 
@@ -860,7 +907,7 @@ nextflow_process {
 }
 ```
 
-### 3.2. Move the test file and update the script path
+### 3.3. Move the test file and update the script path
 
 This time we already have a directory for tests co-located with the module's `main.nf` file, so we can move the test stub file there:
 
@@ -886,7 +933,7 @@ script "../main.nf"
 process "GATK_JOINTGENOTYPING"
 ```
 
-### 3.3. Provide inputs
+### 3.4. Provide inputs
 
 Fill in the inputs based on the process input definitions and rename the test accordingly:
 
@@ -919,7 +966,7 @@ Fill in the inputs based on the process input definitions and rename the test ac
         }
 ```
 
-### 3.4. Use content assertions
+### 3.5. Use content assertions
 
 The output of the joint genotyping step is another VCF file, so we're going to use a content assertion again.
 
@@ -942,7 +989,7 @@ By checking the content of a specific variant in the output file, this test veri
 
 We haven't snapshotted the whole file, but by checking a specific variant, we can be confident that the joint genotyping process is working as expected.
 
-### 3.5. Run the test
+### 3.6. Run the test
 
 ```bash
 nf-test test modules/gatk/jointgenotyping/tests/main.nf.test
@@ -972,7 +1019,10 @@ The test passes, verifying that our joint genotyping process correctly:
 
 ### Takeaway
 
-You know how to write tests for using inputs that have been previously generated and are co-located with the module code.
+You know how to:
+
+- Use previously generated results as inputs for tests
+- Write tests using pre-generated test data
 
 ### What's next?
 
@@ -1028,7 +1078,7 @@ nextflow_pipeline {
 
 ### 4.2. Specify input parameters
 
-We still need to specify inputs.
+We still need to specify inputs, which is done slightly different at the workflow level compared to module-level tests.
 There are several ways of doing this, including by specifying a profile.
 However, a simpler way is to set up a `params {}` block in the `nextflow.config` file that `nf-test init` originally created in the `tests` directory.
 
