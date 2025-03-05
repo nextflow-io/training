@@ -12,6 +12,9 @@ This helps to increase the reliability and reproducibility of scientific analyse
 
 nf-core is published in Nature Biotechnology: [Nat Biotechnol 38, 276–278 (2020). Nature Biotechnology](https://www.nature.com/articles/s41587-020-0439-x). An updated preprint is available at [bioRxiv](https://www.biorxiv.org/content/10.1101/2024.05.10.592912v1).
 
+<!-- ## Prerequisites: TODO: Link to workflow-of-workflows side quest -->
+
+
 ## nf-core pipelines and other components
 
 The nf-core collection currently offers [over 100 pipelines](https://nf-co.re/pipelines/) in various stages of development, [72 subworkflows](https://nf-co.re/subworkflows/) and [over 1300 modules](https://nf-co.re/modules/) that you can use to build your own pipelines.
@@ -27,6 +30,22 @@ Each released pipeline has a dedicated page that includes 6 documentation sectio
 
 You should read the pipeline documentation carefully to understand what a given pipeline does and how it can be configured before attempting to run it.
 
+## 0. Warmup
+
+Let's move into the project directory.
+
+```bash
+cd side-quests/nf-core
+```
+
+The `nf-core` directory has the file content like:
+
+```console title="Directory contents"
+nf-core
+└── data
+  └── sequencer_samplesheet.csv
+```
+
 ### Pulling an nf-core pipeline
 
 One really cool aspect of how Nextflow manages pipelines is that you can pull a pipeline from a GitHub repository without cloning the repository.
@@ -36,7 +55,7 @@ So if you want to try out an nf-core pipeline with minimal effort, you can start
 
 !!!tip
 
-    You can run this from anywhere, but if you feel like being consistent with previous exercises, you can create a `nf-core-demo` directory under `hello-nextflow`. If you were working through Part 7 (Hello nf-test) before this, you may need to go up one level first.
+    You can run this from anywhere, but if you feel like being consistent with previous exercises, you can create a `nf-core-demo` directory under `nf-core`.
 
     ```bash
     mkdir nf-core-demo
@@ -70,9 +89,9 @@ However nf-core is the largest open curated collection of Nextflow pipelines.
     ```
 
     ```console title="Output"
-    /home/gitpod/.nextflow/assets/
+    /workspaces/.nextflow/assets/
     └── nf-core
-        └── demo
+      └── demo
     ```
 
     So you don't actually see them listed in your working directory.
@@ -137,21 +156,21 @@ Lets' try it!
 nextflow run nf-core/demo -profile docker,test --outdir results
 ```
 
-!!! hint "Changing Nextflow version"
+<!-- TODO Possibly leave a hint about machine types !!! hint "Changing the machine tye version"
 
     Depending on the Nextflow version you have installed, this command might fail due to a version mismatch.
     If that happens, you can temporarily run the pipeline with a different version than you have installed by adding `NXF_VER=version` to the start of your command as shown below:
 
     ```bash
     NXF_VER=24.09.2-edge nextflow run nf-core/demo -profile docker,test --outdir results
-    ```
+    ``` -->
 
 Here's the console output from the pipeline:
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.09.2-edge
+ N E X T F L O W   ~  version 24.10.0
 
-Launching `https://github.com/nf-core/demo` [naughty_bell] DSL2 - revision: 04060b4644 [master]
+Launching `https://github.com/nf-core/demo` [maniac_jones] DSL2 - revision: 04060b4644 [master]
 
 
 ------------------------------------------------------
@@ -172,11 +191,11 @@ Institutional config options
 
 Core Nextflow options
   revision                  : master
-  runName                   : naughty_bell
+  runName                   : maniac_jones
   containerEngine           : docker
-  launchDir                 : /workspace/gitpod/hello-nextflow
-  workDir                   : /workspace/gitpod/hello-nextflow/work
-  projectDir                : /home/gitpod/.nextflow/assets/nf-core/demo
+  launchDir                 : /workspaces/training/side-quests/nf-core/nf-core-demo
+  workDir                   : /workspaces/training/side-quests/nf-core/nf-core-demo/work
+  projectDir                : /workspaces/.nextflow/assets/nf-core/demo
   userName                  : gitpod
   profile                   : docker,test
   configFiles               :
@@ -192,12 +211,12 @@ Core Nextflow options
     https://github.com/nf-core/demo/blob/master/CITATIONS.md
 
 executor >  local (7)
-[0a/e694d8] NFCORE_DEMO:DEMO:FASTQC (SAMPLE3_SE)     [100%] 3 of 3 ✔
-[85/4198c1] NFCORE_DEMO:DEMO:SEQTK_TRIM (SAMPLE1_PE) [100%] 3 of 3 ✔
-[d8/fe153e] NFCORE_DEMO:DEMO:MULTIQC                 [100%] 1 of 1 ✔
+[3c/a00024] NFC…_DEMO:DEMO:FASTQC (SAMPLE2_PE) | 3 of 3 ✔
+[94/d1d602] NFC…O:DEMO:SEQTK_TRIM (SAMPLE2_PE) | 3 of 3 ✔
+[ab/460670] NFCORE_DEMO:DEMO:MULTIQC           | 1 of 1 ✔
 -[nf-core/demo] Pipeline completed successfully-
-Completed at: 28-Oct-2024 03:24:58
-Duration    : 1m 13s
+Completed at: 05-Mar-2025 09:46:21
+Duration    : 1m 54s
 CPU hours   : (a few seconds)
 Succeeded   : 7
 ```
@@ -207,7 +226,7 @@ Isn't that neat?
 You can also explore the `results` directory produced by the pipeline.
 
 ```console title="Output"
-results
+results/
 ├── fastqc
 │   ├── SAMPLE1_PE
 │   ├── SAMPLE2_PE
@@ -221,16 +240,12 @@ results
 │   ├── multiqc_plots
 │   └── multiqc_report.html
 └── pipeline_info
-    ├── execution_report_2024-10-28_03-23-44.html
-    ├── execution_timeline_2024-10-28_03-23-44.html
-    ├── execution_trace_2024-10-28_03-14-32.txt
-    ├── execution_trace_2024-10-28_03-19-33.txt
-    ├── execution_trace_2024-10-28_03-20-57.txt
-    ├── execution_trace_2024-10-28_03-22-39.txt
-    ├── execution_trace_2024-10-28_03-23-44.txt
+    ├── execution_report_2025-03-05_09-44-26.html
+    ├── execution_timeline_2025-03-05_09-44-26.html
+    ├── execution_trace_2025-03-05_09-44-26.txt
     ├── nf_core_pipeline_software_mqc_versions.yml
-    ├── params_2024-10-28_03-23-49.json
-    └── pipeline_dag_2024-10-28_03-23-44.html
+    ├── params_2025-03-05_09-44-29.json
+    └── pipeline_dag_2025-03-05_09-44-26.html
 ```
 
 If you're curious about what that all means, check out [the nf-core/demo pipeline documentation page](https://nf-co.re/demo/1.0.1/)!
