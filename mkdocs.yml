@@ -27,6 +27,14 @@ nav:
       - nf4_science/genomics/00_orientation.md
       - nf4_science/genomics/01_per_sample_variant_calling.md
       - nf4_science/genomics/02_joint_calling.md
+  - Nextflow for RNAseq:
+      - nf4_science/rnaseq/index.md
+      - nf4_science/rnaseq/00_orientation.md
+      - nf4_science/rnaseq/01_method.md
+      - nf4_science/rnaseq/02_single-sample.md
+      - nf4_science/rnaseq/03_multi-sample.md
+      - nf4_science/rnaseq/survey.md
+      - nf4_science/rnaseq/next_steps.md
   - Fundamentals Training:
       - basic_training/index.md
       - basic_training/orientation.md
@@ -155,6 +163,7 @@ plugins:
         - envsetup/01_setup.md
         - hello_nextflow/00_orientation.md
         - nf4_science/genomics/00_orientation.md
+        - nf4_science/rnaseq/00_orientation.md
         - basic_training/orientation.md
         - advanced/orientation.md
 
@@ -171,6 +180,7 @@ plugins:
         - envsetup/*.md
         - hello_nextflow/*.md
         - nf4_science/genomics/*.md
+        - nf4_science/rnaseq/*.md
         - basic_training/index.md
         - basic_training/orientation.md
         - advanced/index.md
