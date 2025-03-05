@@ -189,7 +189,7 @@ You can see that the filesystem inside the container is different from the files
     When you run a container, it is isolated from the host system by default.
     This means that the container can't access any files on the host system unless you explicitly allow it to do so.
 
-You will learn how to do that in a minute.
+    You will learn how to do that in a minute.
 
 #### 1.3.2. Run the desired tool command(s)
 
