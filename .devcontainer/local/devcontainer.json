@@ -17,7 +17,7 @@
         "NXF_HOME": "/workspaces/training/.nextflow",
         "HOST_PROJECT_PATH": "/workspaces/training"
     },
-    "postCreateCommand": "sudo mkdir -p /workspaces && sudo ln -s ${localWorkspaceFolder} /workspaces/training && if [ -z \"$CODESPACES\" ]; then echo \"Local Development\"; else echo \"Codespaces Development\"; fi",
+"postCreateCommand": "sudo mkdir -p /workspaces && sudo rm -rf /workspaces/training && sudo ln -s ${localWorkspaceFolder} /workspaces/training && if [ -z \"$CODESPACES\" ]; then echo \"Local Development\"; else echo \"Codespaces Development\"; fi"
     "customizations": {
         // Configure properties specific to VS Code.
         "vscode": {
