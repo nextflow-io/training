@@ -950,9 +950,9 @@ It will enable you to launch a web builder to edit this file in your web browser
 
 ```console
 INFO     [✓] Default parameters match schema validation
-INFO     [✓] Pipeline schema looks valid (found 20 params)
+INFO     [✓] Pipeline schema looks valid (found 18 params)
 ✨ Found 'params.skip_trim' in the pipeline config, but not in the schema. Add to pipeline schema? [y/n]: y
-INFO     Writing schema with 21 params: 'nextflow_schema.json'
+INFO     Writing schema with 19 params: 'nextflow_schema.json'
 🚀  Launch web builder for customization and editing? [y/n]: y
 ```
 
@@ -960,7 +960,7 @@ Using the web builder you can add add details about your new parameters.
 
 The parameters that you have added to your pipeline will be added to the bottom of the `nf-core pipelines schema build` file. Some information about these parameters will be automatically filled based on the default value from your `nextflow.config`. You will be able to categorize your new parameters into a group, add icons, and add descriptions for each.
 
-![Pipeline parameters](img/pipeline_schema.png)
+![Pipeline parameters](./img/nf-core/pipeline_schema.png)
 
 !!!note
 
@@ -1004,7 +1004,7 @@ tuple val(meta), path(reads)
 
 If we uncomment our earlier `view` statement:
 
-```groovy title="workflows/myfirstpipeline.nf" linenums="27"
+```groovy title="workflows/myfirstpipeline.nf" linenums="28"
 ch_samplesheet.view()
 ```
 
@@ -1034,7 +1034,7 @@ nf-core pipelines typically use samplesheets as inputs to the pipelines. This al
 - attach information to each input file.
 - track which datasets are processed.
 
-Samplesheets are comma-separated text files with a header row specifying the column names, followed by one entry per row. For example, the samplesheet that we have been using during this teaching module looks like this:
+Samplesheets are comma-separated text files with a header row specifying the column names, followed by one entry per row. For example, the samplesheet ([link](https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv)) that we have been using during this teaching module looks like this:
 
 ```csv title="samplesheet_test_illumina_amplicon.csv"
 sample,fastq_1,fastq_2
@@ -1046,7 +1046,7 @@ SAMPLE3_SE,https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/il
 
 The structure of the samplesheet is specified in its own schema file in `assets/schema_input.json`. Each column has its own entry together with information about the column:
 
-```json title="schema_input.json"
+```json title="assets/schema_input.json"
 "properties": {
     "sample": {
         "type": "string",
@@ -1142,7 +1142,7 @@ The meta map now has a new key `sequencer`, that is empty because we did not spe
 We have also prepared a new samplesheet, that has the `sequencer` column. You can overwrite the existing input with this command:
 
 ```console
-nextflow run . -profile docker,test --outdir results --input ../data/sequencer_samplesheet.csv
+nextflow run . -profile docker,test --outdir results --input ../../data/sequencer_samplesheet.csv
 ```
 
 This populates the `sequencer` and we can see it in the pipeline, when `view`ing the samplesheet channel:
@@ -1160,7 +1160,7 @@ We can comment the `ch_samplesheet.view()` line or remove it. We are not going t
 We can access this new meta value in the pipeline and use it to, for example, only enable trimming for samples from a particular sequencer. The [branch operator](https://www.nextflow.io/docs/stable/reference/operator.html#branch) let's us split
 an input channel into several new output channels based on a selection criteria:
 
-```groovy title="workflows/myfirstpipeline.nf" linenums="35"
+```groovy title="workflows/myfirstpipeline.nf" linenums="31"
 ch_seqtk_in = ch_samplesheet.branch { meta, reads ->
     to_trim: meta["sequencer"] == "sequencer2"
     other: true
@@ -1183,7 +1183,7 @@ nextflow run . -profile docker,test --outdir results
 If we use the samplesheet with the `sequencer` set, only one sample will be trimmed:
 
 ```console
-nextflow run . -profile docker,test --outdir results --input ../data/sequencer_samplesheet.csv -resume
+nextflow run . -profile docker,test --outdir results --input ../../data/sequencer_samplesheet.csv -resume
 
 [47/fdf9de] process > MYORG_MYFIRSTPIPELINE:MYFIRSTPIPELINE:SEQTK_TRIM (SAMPLE2_PE) [100%] 1 of 1 ✔
 [2a/a742ae] process > MYORG_MYFIRSTPIPELINE:MYFIRSTPIPELINE:MULTIQC                 [100%] 1 of 1 ✔
@@ -1238,6 +1238,8 @@ This will create a new file in `modules/local/fastqe.nf` that already contains t
     INFO     Press enter to use default values (shown in brackets) or type your own responses. ctrl+click underlined text to open links.
     CRITICAL Module file exists already: 'modules/local/fastqe.nf'. Use '--force' to overwrite
     ```
+
+Let's open the modules file: `modules/local/fastq.nf`.
 
 You will notice, that it still calls `samtools` and the input are `bam`.
 
@@ -1365,7 +1367,7 @@ include { MULTIQC                } from '../modules/nf-core/multiqc/main'
 
 and call it on our input data:
 
-```groovy title="workflows/myfirstpipeline.nf" linenums="47"
+```groovy title="workflows/myfirstpipeline.nf" linenums="45"
     FASTQE(ch_samplesheet)
     ch_versions = ch_versions.mix(FASTQE.out.versions.first())
 ```
