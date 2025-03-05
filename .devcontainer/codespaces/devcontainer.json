@@ -12,7 +12,6 @@
         }
     },
     "workspaceFolder": "/workspaces/training",
-    "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/training,type=bind", // Used for local devcontainers, ignored in Codespaces.
     "remoteEnv": {
         "NXF_HOME": "/workspaces/.nextflow",
         "HOST_PROJECT_PATH": "/workspaces/training" // Codespaces and local devcontainers will both work with this.
