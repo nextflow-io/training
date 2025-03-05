@@ -701,7 +701,7 @@ Test Process GATK_HAPLOTYPECALLER
 SUCCESS: Executed 1 tests in 19.382s
 ```
 
-### 2.7. Add more test data
+### 2.7. Add more tests
 
 Add similar tests for the mother and father samples:
 
