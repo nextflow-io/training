@@ -4,4 +4,4 @@ channels:
   - conda-forge
   - bioconda
 dependencies:
-  - bioconda::seqtk=1.4
+  - "bioconda::fastqe=0.3.3"

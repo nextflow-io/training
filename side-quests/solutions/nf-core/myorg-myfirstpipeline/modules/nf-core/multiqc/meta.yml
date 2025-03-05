@@ -1,5 +1,6 @@
 name: multiqc
-description: Aggregate results from bioinformatics analyses across many samples into
+description:
+  Aggregate results from bioinformatics analyses across many samples into
   a single report
 keywords:
   - QC
@@ -25,7 +26,8 @@ input:
         pattern: "*.{yml,yaml}"
   - - extra_multiqc_config:
         type: file
-        description: Second optional config yml for MultiQC. Will override common sections
+        description:
+          Second optional config yml for MultiQC. Will override common sections
           in multiqc_config.
         pattern: "*.{yml,yaml}"
   - - multiqc_logo:

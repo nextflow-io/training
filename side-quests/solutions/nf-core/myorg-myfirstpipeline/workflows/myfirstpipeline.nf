@@ -25,11 +25,9 @@ workflow MYFIRSTPIPELINE {
 
     ch_versions = Channel.empty()
     ch_multiqc_files = Channel.empty()
+
     ch_samplesheet.view()
 
-    //
-    // MODULE: Run SEQTK_TRIM
-    //
     if (!params.skip_trim) {
 
         ch_seqtk_in = ch_samplesheet.branch { meta, reads ->
@@ -45,7 +43,7 @@ workflow MYFIRSTPIPELINE {
     }
 
     FASTQE(ch_samplesheet)
-    ch_versions = ch_versions.mix(FASTQE.out.versions.first())
+    ch_versions = ch_versions.mix(FASTQE.out.versions.first())//
 
     //
     // Collate and save software versions
@@ -53,7 +51,7 @@ workflow MYFIRSTPIPELINE {
     softwareVersionsToYAML(ch_versions)
         .collectFile(
             storeDir: "${params.outdir}/pipeline_info",
-            name:  ''  + 'pipeline_software_' +  'mqc_'  + 'versions.yml',
+            name:  'myfirstpipeline_software_'  + 'mqc_'  + 'versions.yml',
             sort: true,
             newLine: true
         ).set { ch_collated_versions }

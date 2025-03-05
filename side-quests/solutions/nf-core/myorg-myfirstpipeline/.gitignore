@@ -1,4 +1,3 @@
-email_template.html
 .nextflow*
 work/
 data/
@@ -7,4 +6,4 @@ results/
 testing/
 testing*
 *.pyc
-bin/
+null/
