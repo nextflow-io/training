@@ -545,7 +545,7 @@ _After:_
                          .view { greeting -> "After flatten: $greeting" }
 ```
 
-We are using an operator _closure_ here - the squiggly brackets.
+We are using an operator _closure_ here - the curly brackets.
 This code executes for each item in the channel.
 We define a temporary variable for the inner value, here called `greeting` (it could be anything).
 This variable is only used within the scope of that closure.
