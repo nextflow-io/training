@@ -14,17 +14,13 @@
     "workspaceFolder": "/workspaces/training",
     "remoteEnv": {
         "NXF_HOME": "/workspaces/.nextflow",
-        "HOST_PROJECT_PATH": "/workspaces/training" // Codespaces and local devcontainers will both work with this.
+        "HOST_PROJECT_PATH": "/workspaces/training"
     },
-    // Configure tool-specific properties.
     "customizations": {
-        // Configure properties specific to VS Code.
         "vscode": {
-            // Set *default* container specific settings.json values on container create.
             "settings": {
                 "python.defaultInterpreterPath": "/opt/conda/bin/python"
             },
-            // Add the IDs of extensions you want installed when the container is created.
             "extensions": [
                 "ms-python.python",
                 "ms-python.vscode-pylance",

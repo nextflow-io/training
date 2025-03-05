@@ -19,15 +19,12 @@
     },
     "postCreateCommand": "sudo mkdir -p /workspaces && sudo rm -rf /workspaces/training && sudo ln -s ${localWorkspaceFolder} /workspaces/training",
     "customizations": {
-        // Configure properties specific to VS Code.
         "vscode": {
-            // Set *default* container specific settings.json values on container create.
             "settings": {
                 "python.defaultInterpreterPath": "/opt/conda/bin/python",
                 "terminal.integrated.cwd": "/workspaces/training",
                 "terminal.integrated.defaultLocation": "workspace"
             },
-            // Add the IDs of extensions you want installed when the container is created.
             "extensions": [
                 "ms-python.python",
                 "ms-python.vscode-pylance",
