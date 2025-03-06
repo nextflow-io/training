@@ -28,45 +28,48 @@ If this command fails, you'll need to install the buildx extension before procee
 
 Follow these steps to set up your local environment using VS Code devcontainers:
 
-1. Install the "Dev Containers" extension in VS Code
-   - Open VS Code
-   - Go to Extensions (Ctrl+Shift+X or Cmd+Shift+X on macOS)
-   - Search for "Dev Containers"
-   - Click "Install"
+### Install the "Dev Containers" extension in VS Code
+- Open VS Code
+ - Go to Extensions (Ctrl+Shift+X or Cmd+Shift+X on macOS)
+ - Search for "Dev Containers"
+ - Click "Install"
 
 ![Installing Dev Containers extension in VS Code](img/install_extension.png)
 
-2. Clone the repository:
+### Clone the repository:
 
-   ```bash
-   git clone https://github.com/nextflow-io/training.git
-   cd training
-   ```
+  ```bash
+  git clone https://github.com/nextflow-io/training.git
+  cd training
+  ```
 
-3. Open the repository in VS Code:
+### Open the repository in VS Code:
 
-   - Launch VS Code
-   - Select **File -> Open Folder** from the menu
-   - Navigate to and select the training repository folder you just cloned
-   - Click **Open**
+ - Launch VS Code
+ - Select **File -> Open Folder** from the menu
+ - Navigate to and select the training repository folder you just cloned
+ - Click **Open**
 
-4. When prompted by VS Code to "Reopen in Container", click on it. Alternatively:
-   - Press F1 (or Ctrl+Shift+P / Cmd+Shift+P on macOS)
-   - Type "Dev Containers: Reopen in Container"
-   - **Important**: When prompted to select a configuration, choose the **local** devcontainer configuration
+#### Reopen in Container
+
+When prompted by VS Code to "Reopen in Container", click on it. Alternatively:
+
+ - Press F1 (or Ctrl+Shift+P / Cmd+Shift+P on macOS)
+ - Type "Dev Containers: Reopen in Container"
+ - **Important**: When prompted to select a configuration, choose the **local** devcontainer configuration
 
 ![Reopen in Container prompt](img/reopen_prompt.png)
 
 ![Selecting local configuration](img/devcontainer/select_local_config.png)
 
-5. Wait for the container to build. This may take a few minutes the first time as it downloads and sets up all the necessary components.
+Wait for the container to build. This may take a few minutes the first time as it downloads and sets up all the necessary components.
 
-6. Once the container is built and running, you'll have a fully configured environment with all the necessary tools installed, including:
-   - Java
-   - Nextflow
-   - Docker
-   - Git
-   - And all other dependencies required for the training
+Once the container is built and running, you'll have a fully configured environment with all the necessary tools installed, including:
+ - Java
+ - Nextflow
+ - Docker
+ - Git
+ - And all other dependencies required for the training
 
 ![VS Code with devcontainer running](img/devcontainer/running_container.png)
 
