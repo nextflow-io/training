@@ -20,6 +20,6 @@ indent_style = unset
 charset = unset
 end_of_line = unset
 insert_final_newline = unset
-trim_trailing_whitespace = unset
+trim_trailing_whitespace = false
 indent_style = unset
 indent_size = unset
