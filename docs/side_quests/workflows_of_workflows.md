@@ -5,6 +5,7 @@ One of the most powerful features of Nextflow is its ability to compose complex 
 Let's explore why workflow composition is so important. When you're developing a pipeline, you often find yourself creating similar sequences of processes for different data types or analysis steps. Without workflow composition, you might end up copying and pasting these process sequences, leading to duplicated code that's hard to maintain. Or you might create one massive workflow that's difficult to understand and modify.
 
 With workflow composition, you can:
+
 - Break down complex pipelines into logical, reusable units
 - Test each workflow module independently
 - Mix and match workflows to create new pipelines
@@ -12,11 +13,13 @@ With workflow composition, you can:
 - Make your code more maintainable and easier to understand
 
 In this side quest, we'll create a pipeline that demonstrates these benefits by:
+
 1. Creating independent workflow modules that can be tested and used separately
 2. Composing these modules into a larger pipeline
 3. Using Nextflow's workflow composition features to manage data flow between modules
 
 ---
+
 ## 0. Warmup
 
 ### 0.1 Prerequisites
@@ -107,6 +110,7 @@ workflow {
 ```
 
 Run this and see the output:
+
 ```bash title="Run the workflow"
 nextflow run main.nf
 ```
@@ -129,6 +133,7 @@ Timestamped: /workspaces/training/side_quests/workflows_of_workflows/work/ea/342
 ### Takeaway
 
 You should now have a working greeting workflow that:
+
 - Takes a channel of names as input
 - Validates each name
 - Creates a greeting for each valid name
@@ -193,6 +198,7 @@ workflow TRANSFORM_WORKFLOW {
 ```
 
 Run the complete pipeline:
+
 ```bash title="Run the workflow"
 nextflow run main.nf
 ```
@@ -217,16 +223,17 @@ Reversed: /workspaces/training/side_quests/workflows_of_workflows/work/f0/74ba4a
 
 If you take a look at one of those reversed files, you'll see that it's the uppercase version of the greeting reversed:
 
-```bash title="Check a final output file"
+````bash title="Check a final output file"
 cat /workspaces/training/side_quests/workflows_of_workflows/work/f0/74ba4a10d9ef5c82f829d1c154d0f6/REVERSED-UPPER-timestamped_Alice-output.txt```
 
 ```console title="Reversed file content"
 !ECILA ,OLLEH ]04:50:71 60-30-5202[
-```
+````
 
 ### Takeaway
 
 You should now have a complete pipeline that:
+
 - Processes names through the greeting workflow
 - Feeds the timestamped greetings into the transform workflow
 - Produces both uppercase and reversed versions of the greetings
@@ -236,6 +243,7 @@ You should now have a complete pipeline that:
 In this side quest, we've explored the powerful concept of workflow composition in Nextflow, which allows us to build complex pipelines from smaller, reusable components. Here's what we've accomplished:
 
 1. **Created Modular Workflows**: We built two independent workflow modules:
+
    - A `GREETING_WORKFLOW` that validates names, creates greetings, and adds timestamps
    - A `TRANSFORM_WORKFLOW` that converts text to uppercase and reverses it
 
@@ -248,6 +256,7 @@ In this side quest, we've explored the powerful concept of workflow composition 
 5. **Practiced Modular Design**: We experienced firsthand how breaking a pipeline into logical components makes the code more maintainable and easier to understand.
 
 This modular approach offers several advantages over monolithic pipelines:
+
 - Each workflow can be developed, tested, and debugged independently
 - Workflows can be reused across different pipelines
 - The overall pipeline structure becomes more readable and maintainable
@@ -260,6 +269,7 @@ By mastering workflow composition, you're now equipped to build more sophisticat
 ### Key Concepts
 
 1. **Workflow Inclusion**
+
    ```nextflow
    // Include a single workflow
    include { WORKFLOW_NAME } from './path/to/workflow'
@@ -272,6 +282,7 @@ By mastering workflow composition, you're now equipped to build more sophisticat
    ```
 
 2. **Workflow Inputs and Outputs**
+
    ```nextflow
    workflow EXAMPLE {
        take:
