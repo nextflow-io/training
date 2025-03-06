@@ -4,9 +4,7 @@
     "build": {
         "dockerfile": "../Dockerfile",
         "context": "..",
-        "options": [
-            "--platform=linux/amd64"
-        ]
+        "options": ["--platform=linux/amd64"]
     },
 
     "features": {
