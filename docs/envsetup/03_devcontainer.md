@@ -29,34 +29,35 @@ If this command fails, you'll need to install the buildx extension before procee
 Follow these steps to set up your local environment using VS Code devcontainers:
 
 ### Install the "Dev Containers" extension in VS Code
+
 - Open VS Code
- - Go to Extensions (Ctrl+Shift+X or Cmd+Shift+X on macOS)
- - Search for "Dev Containers"
- - Click "Install"
+- Go to Extensions (Ctrl+Shift+X or Cmd+Shift+X on macOS)
+- Search for "Dev Containers"
+- Click "Install"
 
 ![Installing Dev Containers extension in VS Code](img/install_extension.png)
 
 ### Clone the repository:
 
-  ```bash
-  git clone https://github.com/nextflow-io/training.git
-  cd training
-  ```
+```bash
+git clone https://github.com/nextflow-io/training.git
+cd training
+```
 
 ### Open the repository in VS Code:
 
- - Launch VS Code
- - Select **File -> Open Folder** from the menu
- - Navigate to and select the training repository folder you just cloned
- - Click **Open**
+- Launch VS Code
+- Select **File -> Open Folder** from the menu
+- Navigate to and select the training repository folder you just cloned
+- Click **Open**
 
 ### Reopen in Container
 
 When prompted by VS Code to "Reopen in Container", click on it. Alternatively:
 
- - Press F1 (or Ctrl+Shift+P / Cmd+Shift+P on macOS)
- - Type "Dev Containers: Reopen in Container"
- - **Important**: When prompted to select a configuration, choose the **local** devcontainer configuration
+- Press F1 (or Ctrl+Shift+P / Cmd+Shift+P on macOS)
+- Type "Dev Containers: Reopen in Container"
+- **Important**: When prompted to select a configuration, choose the **local** devcontainer configuration
 
 ![Reopen in Container prompt](img/reopen_prompt.png)
 
@@ -65,11 +66,12 @@ When prompted by VS Code to "Reopen in Container", click on it. Alternatively:
 Wait for the container to build. This may take a few minutes the first time as it downloads and sets up all the necessary components.
 
 Once the container is built and running, you'll have a fully configured environment with all the necessary tools installed, including:
- - Java
- - Nextflow
- - Docker
- - Git
- - And all other dependencies required for the training
+
+- Java
+- Nextflow
+- Docker
+- Git
+- And all other dependencies required for the training
 
 ![VS Code with devcontainer running](img/running_container.png)
 
