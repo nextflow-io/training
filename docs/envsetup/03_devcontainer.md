@@ -17,6 +17,7 @@ To use the devcontainer setup, you'll need:
 Your Docker installation must be running before you attempt to open the devcontainer.
 
 To verify that Docker buildx is available, run:
+
 ```bash
 docker buildx version
 ```
@@ -36,12 +37,14 @@ Follow these steps to set up your local environment using VS Code devcontainers:
 ![Installing Dev Containers extension in VS Code](img/install_extension.png)
 
 2. Clone the repository:
+
    ```bash
    git clone https://github.com/nextflow-io/training.git
    cd training
    ```
 
 3. Open the repository in VS Code:
+
    - Launch VS Code
    - Select **File -> Open Folder** from the menu
    - Navigate to and select the training repository folder you just cloned
