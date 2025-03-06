@@ -50,7 +50,7 @@ Follow these steps to set up your local environment using VS Code devcontainers:
  - Navigate to and select the training repository folder you just cloned
  - Click **Open**
 
-#### Reopen in Container
+### Reopen in Container
 
 When prompted by VS Code to "Reopen in Container", click on it. Alternatively:
 
@@ -60,7 +60,7 @@ When prompted by VS Code to "Reopen in Container", click on it. Alternatively:
 
 ![Reopen in Container prompt](img/reopen_prompt.png)
 
-![Selecting local configuration](img/devcontainer/select_local_config.png)
+![Selecting local configuration](img/select_local_config.png)
 
 Wait for the container to build. This may take a few minutes the first time as it downloads and sets up all the necessary components.
 
