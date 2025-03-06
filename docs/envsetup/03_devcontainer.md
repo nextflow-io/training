@@ -71,7 +71,7 @@ Once the container is built and running, you'll have a fully configured environm
  - Git
  - And all other dependencies required for the training
 
-![VS Code with devcontainer running](img/devcontainer/running_container.png)
+![VS Code with devcontainer running](img/running_container.png)
 
 ## Benefits of Using Devcontainers
 
