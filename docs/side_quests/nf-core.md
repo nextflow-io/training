@@ -14,6 +14,21 @@ nf-core is published in Nature Biotechnology: [Nat Biotechnol 38, 276–278 (202
 
 <!-- ## Prerequisites: TODO: Link to workflow-of-workflows side quest -->
 
+## nf-core pipelines and other components
+
+The nf-core collection currently offers [over 100 pipelines](https://nf-co.re/pipelines/) in various stages of development, [72 subworkflows](https://nf-co.re/subworkflows/) and [over 1300 modules](https://nf-co.re/modules/) that you can use to build your own pipelines.
+
+Each released pipeline has a dedicated page that includes 6 documentation sections:
+
+- **Introduction:** An introduction and overview of the pipeline
+- **Usage:** Descriptions of how to execute the pipeline
+- **Parameters:** Grouped pipeline parameters with descriptions
+- **Output:** Descriptions and examples of the expected output files
+- **Results:** Example output files generated from the full test dataset
+- **Releases & Statistics:** Pipeline version history and statistics
+
+You should read the pipeline documentation carefully to understand what a given pipeline does and how it can be configured before attempting to run it.
+
 ## Warmup
 
 Let's move into the project directory.
@@ -32,27 +47,7 @@ nf-core
 
 We will first run a pipeline in this directory and then build our own. We need the `sequencer_samplesheet.csv` for part 2. For now you can ignore it.
 
-## nf-core pipelines and other components
-
-The nf-core collection currently offers [over 100 pipelines](https://nf-co.re/pipelines/) in various stages of development, [72 subworkflows](https://nf-co.re/subworkflows/) and [over 1300 modules](https://nf-co.re/modules/) that you can use to build your own pipelines.
-
-Each released pipeline has a dedicated page that includes 6 documentation sections:
-
-- **Introduction:** An introduction and overview of the pipeline
-- **Usage:** Descriptions of how to execute the pipeline
-- **Parameters:** Grouped pipeline parameters with descriptions
-- **Output:** Descriptions and examples of the expected output files
-- **Results:** Example output files generated from the full test dataset
-- **Releases & Statistics:** Pipeline version history and statistics
-
-You should read the pipeline documentation carefully to understand what a given pipeline does and how it can be configured before attempting to run it.
-
-### Pulling an nf-core pipeline
-
-One really cool aspect of how Nextflow manages pipelines is that you can pull a pipeline from a GitHub repository without cloning the repository.
-This is really convenient if you just want to run a pipeline without modifying the code.
-
-So if you want to try out an nf-core pipeline with minimal effort, you can start by pulling it using the `nextflow pull` command.
+## Pulling an nf-core pipeline
 
 Let's start by creating a new subdirectory to run the pipeline in:
 
@@ -71,9 +66,7 @@ Whenever you're ready, run the command:
 nextflow pull nf-core/demo
 ```
 
-Nextflow will `pull` the pipeline's default GitHub branch.
-For nf-core pipelines with a stable release, that will be the master branch.
-You select a specific branch with `-r`; we'll cover that later.
+Nextflow will `pull` the pipeline code.
 
 ```console title="Output"
 Checking nf-core/demo ...
@@ -82,31 +75,6 @@ Checking nf-core/demo ...
 
 To be clear, you can do this with any Nextflow pipeline that is appropriately set up in GitHub, not just nf-core pipelines.
 However nf-core is the largest open curated collection of Nextflow pipelines.
-
-!!!tip
-
-    Pulled pipelines are stored in a hidden assets folder. By default, this folder is `$HOME/.nextflow/assets`, but in this training environment the folder has been set to `$NXF_HOME/assets`:
-
-    ```bash
-    tree $NXF_HOME/assets/ -L 2
-    ```
-
-    ```console title="Output"
-    /workspaces/.nextflow/assets/
-    └── nf-core
-      └── demo
-    ```
-
-    So you don't actually see them listed in your working directory.
-    However, you can view a list of your cached pipelines using the `nextflow list` command:
-
-    ```bash
-    nextflow list
-    ```
-
-    ```console title="Output"
-    nf-core/demo
-    ```
 
 Now that we've got the pipeline pulled, we can try running it!
 
