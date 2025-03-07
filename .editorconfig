@@ -14,3 +14,12 @@ indent_size = 2
 # ignore python and markdown
 [*.{py,md}]
 indent_style = unset
+
+# ignore nf-core files
+[side-quests/solutions/nf-core/**]
+charset = unset
+end_of_line = unset
+insert_final_newline = unset
+trim_trailing_whitespace = false
+indent_style = unset
+indent_size = unset
