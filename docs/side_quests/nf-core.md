@@ -12,22 +12,12 @@ This helps to increase the reliability and reproducibility of scientific analyse
 
 nf-core is published in Nature Biotechnology: [Nat Biotechnol 38, 276–278 (2020). Nature Biotechnology](https://www.nature.com/articles/s41587-020-0439-x). An updated preprint is available at [bioRxiv](https://www.biorxiv.org/content/10.1101/2024.05.10.592912v1).
 
-<!-- ## Prerequisites: TODO: Link to workflow-of-workflows side quest -->
+In this tutorial you will explore using and writing nf-core pipelines:
 
-## nf-core pipelines and other components
-
-The nf-core collection currently offers [over 100 pipelines](https://nf-co.re/pipelines/) in various stages of development, [72 subworkflows](https://nf-co.re/subworkflows/) and [over 1300 modules](https://nf-co.re/modules/) that you can use to build your own pipelines.
-
-Each released pipeline has a dedicated page that includes 6 documentation sections:
-
-- **Introduction:** An introduction and overview of the pipeline
-- **Usage:** Descriptions of how to execute the pipeline
-- **Parameters:** Grouped pipeline parameters with descriptions
-- **Output:** Descriptions and examples of the expected output files
-- **Results:** Example output files generated from the full test dataset
-- **Releases & Statistics:** Pipeline version history and statistics
-
-You should read the pipeline documentation carefully to understand what a given pipeline does and how it can be configured before attempting to run it.
+- Part I: Run nf-core pipeline
+  In Part I, you will learn where you can find information about a particular nf-core pipeline and how to run one with provided test data.
+- Part II: Develop an nf-core-like pipeline
+  In Part II, you will use a simplified version of the nf-core template to write a nf-core-style pipeline. The pipeline contains of two modules to process FastQ data: fastqe, seqtk. It uses an input from a sample sheet, validates it, and produces a multiqc output.
 
 ## Warmup
 
@@ -47,7 +37,40 @@ nf-core
 
 We will first run a pipeline in this directory and then build our own. We need the `sequencer_samplesheet.csv` for part 2. For now you can ignore it.
 
-## Pulling an nf-core pipeline
+## Part I: Run nf-core pipelines
+
+nf-core uses their website [nf-co.re](https://nf-co.re) to centrally display all information such as: general documentation and help articles, documentation for each of its pipelines, blog posts, event annoucenments, etc..
+
+### nf-core website
+
+Each released pipeline has a dedicated page that includes 6 documentation sections:
+
+- **Introduction:** An introduction and overview of the pipeline
+- **Usage:** Descriptions of how to execute the pipeline
+- **Parameters:** Grouped pipeline parameters with descriptions
+- **Output:** Descriptions and examples of the expected output files
+- **Results:** Example output files generated from the full test dataset
+- **Releases & Statistics:** Pipeline version history and statistics
+
+You should read the pipeline documentation carefully to understand what a given pipeline does and how it can be configured before attempting to run it.
+
+Go to the nf-core website and find the documentation for the [nf-core/demo pipeline](https://nf-co.re/demo/).
+
+Find out:
+
+- which tools the pipeline will run (Check the tab: `Introduction`)
+- which parameters the pipeline has (Check the tab: `Parameters`)
+- what the output files (Check the tab: `Output`)
+
+#### Takeaway
+
+You know where to find information about a particular nf-core pipeline: where to find general information, where the parameters are described, and where you can find a description on the output that the pipelines produce.
+
+#### What's next?
+
+Next, we'll show you how to run your first nf-core pipeline.
+
+### Running an nf-core pipeline
 
 Let's start by creating a new subdirectory to run the pipeline in:
 
@@ -78,7 +101,7 @@ However nf-core is the largest open curated collection of Nextflow pipelines.
 
 Now that we've got the pipeline pulled, we can try running it!
 
-### Trying out an nf-core pipeline with the test profile
+#### Trying out an nf-core pipeline with the test profile
 
 Conveniently, every nf-core pipeline comes with a `test` profile.
 This is a minimal set of configuration settings for the pipeline to run using a small test dataset that is hosted on the [nf-core/test-datasets](https://github.com/nf-core/test-datasets) repository. It's a great way to try out a pipeline at small scale.
@@ -215,17 +238,21 @@ If you're curious about what that all means, check out [the nf-core/demo pipelin
 And that's all you need to know for now.
 Congratulations! You have now run your first nf-core pipeline.
 
-### Takeaway
+#### Takeaway
 
-You have a general idea of what nf-core offers and you know how to run an nf-core pipeline using its built-in test profile.
+You know how to run an nf-core pipeline using its built-in test profile.
 
-### What's next?
+#### What's next?
 
 Celebrate and take another break! Next, we'll show you how to use nf-core tooling to build your own pipeline.
 
-## Create a basic pipeline from template
+## Part II: Create a basic pipeline from template
 
-We will now start developing our own nf-core style pipeline. The nf-core community provides a [command line tool](https://nf-co.re/docs/nf-core-tools) with helper functions to use and develop pipelines.
+We will now start developing our own nf-core style pipeline.
+The nf-core collection currently offers, [72 subworkflows](https://nf-co.re/subworkflows/) and [over 1300 modules](https://nf-co.re/modules/) that you can use to build your own pipelines.
+
+The nf-core community provides a [command line tool](https://nf-co.re/docs/nf-core-tools) with helper functions to use and develop pipelines.
+
 We have pre-installed nf-core tools, and here, we will use them to create and develop a new pipeline.
 
 View all of the tooling using the `nf-core --help` argument.
@@ -366,7 +393,7 @@ Instead of having one large monolithic pipeline script, it's broken up into smal
 - **Subworkflows:** Two or more modules that are packaged together as a mini workflow
 
 <figure class="excalidraw">
-    --8<-- "./img/nf-core/nested.excalidraw.svg"
+    --8<-- "img/nf-core/nested.excalidraw.svg"
 </figure>
 
 Within your pipeline repository, `modules` and `subworkflows` are stored within `local` and `nf-core` folders. The `nf-core` folder is for components that have come from the nf-core GitHub repository while the `local` folder is for components that have been developed independently (usually things very specific to a pipeline):
@@ -509,7 +536,7 @@ Now let's add another tool to the pipeline.
 In your pipeline, you will add a new step that will take FASTQ files from the sample sheet as inputs and will produce trimmed fastq files that can be used as an input for other tools and version information about the seqtk tools to mix into the inputs for the MultiQC process.
 
 <figure class="excalidraw">
-    --8<-- "./img/nf-core/pipeline.excalidraw.svg"
+    --8<-- "img/nf-core/pipeline.excalidraw.svg"
 </figure>
 
 The `nf-core modules install` command can be used to install the `seqtk/trim` module directly from the nf-core repository:
