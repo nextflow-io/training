@@ -393,7 +393,7 @@ Instead of having one large monolithic pipeline script, it's broken up into smal
 - **Subworkflows:** Two or more modules that are packaged together as a mini workflow
 
 <figure class="excalidraw">
-    --8<-- "img/nf-core/nested.excalidraw.svg"
+    --8<-- "docs/side_quests/img/nf-core/nested.excalidraw.svg"
 </figure>
 
 Within your pipeline repository, `modules` and `subworkflows` are stored within `local` and `nf-core` folders. The `nf-core` folder is for components that have come from the nf-core GitHub repository while the `local` folder is for components that have been developed independently (usually things very specific to a pipeline):
@@ -536,7 +536,7 @@ Now let's add another tool to the pipeline.
 In your pipeline, you will add a new step that will take FASTQ files from the sample sheet as inputs and will produce trimmed fastq files that can be used as an input for other tools and version information about the seqtk tools to mix into the inputs for the MultiQC process.
 
 <figure class="excalidraw">
-    --8<-- "img/nf-core/pipeline.excalidraw.svg"
+    --8<-- "docs/side_quests/img/nf-core/pipeline.excalidraw.svg"
 </figure>
 
 The `nf-core modules install` command can be used to install the `seqtk/trim` module directly from the nf-core repository:
