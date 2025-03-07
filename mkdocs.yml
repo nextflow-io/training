@@ -20,6 +20,7 @@ nav:
       - hello_nextflow/06_hello_config.md
   - Side Quests:
       - side_quests/nf-test.md
+      - side_quests/workflows_of_workflows.md
       - hello_nextflow/survey.md
       - hello_nextflow/next_steps.md
   - Nextflow for Genomics:
@@ -189,6 +190,7 @@ plugins:
         - advanced/index.md
         - advanced/orientation.md
         - side_quests/nf-test.md
+        - side_quests/workflows_of_workflows.md
         - nf4_science/genomics/03_modules.md
         - nf4_science/genomics/04_testing.md
 
