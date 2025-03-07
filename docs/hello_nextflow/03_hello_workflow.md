@@ -306,7 +306,7 @@ This is what we can write with confidence based on what you've learned so far.
 But this is not functional!
 It leaves out the input definition(s) and the first half of the script command because we need to figure out how to write that.
 
-### 2.1.2. Define inputs to `collectGreetings()`
+#### 2.1.2. Define inputs to `collectGreetings()`
 
 We need to collect the greetings from all the calls to the `convertToUpper()` process.
 What do we know we can get from the previous step in the workflow?
