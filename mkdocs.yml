@@ -21,6 +21,7 @@ nav:
   - Side Quests:
       - side_quests/nf-test.md
       - side_quests/nf-core.md
+      - side_quests/workflows_of_workflows.md
       - hello_nextflow/survey.md
       - hello_nextflow/next_steps.md
   - Nextflow for Genomics:
@@ -29,6 +30,7 @@ nav:
       - nf4_science/genomics/01_per_sample_variant_calling.md
       - nf4_science/genomics/02_joint_calling.md
       - nf4_science/genomics/03_modules.md
+      - nf4_science/genomics/04_testing.md
 
   - Nextflow for RNAseq:
       - nf4_science/rnaseq/index.md
@@ -191,6 +193,9 @@ plugins:
         - side_quests/nf-test.md
         - side_quests/nf-core.md
         - nf4_science/genomics/03_modules.md
+        - side_quests/workflows_of_workflows.md
+        - nf4_science/genomics/03_modules.md
+        - nf4_science/genomics/04_testing.md
   - i18n:
       docs_structure: suffix
       fallback_to_default: true
