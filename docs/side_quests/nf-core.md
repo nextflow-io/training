@@ -296,29 +296,29 @@ Running this command will open a Text User Interface (TUI) for pipeline creation
 
 Template features can be flexibly included or excluded at the time of creation, follow these steps create your first pipeline using the `nf-core pipelines create` TUI:
 
-  1. Run the `nf-core pipelines create` command
-  2. Select **Let's go!** on the welcome screen
-  3. Select **Custom** on the Choose pipeline type screen
-  4. Enter your pipeline details, replacing < YOUR NAME > with your own name, then select **Next**
+1. Run the `nf-core pipelines create` command
+2. Select **Let's go!** on the welcome screen
+3. Select **Custom** on the Choose pipeline type screen
+4. Enter your pipeline details, replacing < YOUR NAME > with your own name, then select **Next**
 
-    - **GitHub organisation:** myorg
-    - **Workflow name:** myfirstpipeline
-    - **A short description of your pipeline:** My first pipeline
-    - **Name of the main author / authors:** < YOUR NAME >
+  - **GitHub organisation:** myorg
+  - **Workflow name:** myfirstpipeline
+  - **A short description of your pipeline:** My first pipeline
+  - **Name of the main author / authors:** < YOUR NAME >
 
-  5. On the Template features screen, set "Toggle all features" to **off**, then **enable**:
+5. On the Template features screen, set "Toggle all features" to **off**, then **enable**:
 
-    - `Add configuration files`
-    - `Use multiqc`
-    - `Use nf-core components`
-    - `Use nf-schema`
-    - `Add documentation`
-    - `Add testing profiles`
+  - `Add configuration files`
+  - `Use multiqc`
+  - `Use nf-core components`
+  - `Use nf-schema`
+  - `Add documentation`
+  - `Add testing profiles`
 
-  6. Select **Finish** on the Final details screen
-  7. Wait for the pipeline to be created, then select **Continue**
-  8. Select **Finish without creating a repo** on the Create GitHub repository screen
-  9. Select **Close** on the HowTo create a GitHub repository page
+6. Select **Finish** on the Final details screen
+7. Wait for the pipeline to be created, then select **Continue**
+8. Select **Finish without creating a repo** on the Create GitHub repository screen
+9. Select **Close** on the HowTo create a GitHub repository page
 
 If run successfully, you will see a new folder in your current directory named `myorg-myfirstpipeline`.
 
