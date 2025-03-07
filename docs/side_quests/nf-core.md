@@ -159,15 +159,6 @@ Lets' try it!
 nextflow run nf-core/demo -profile docker,test --outdir results
 ```
 
-<!-- TODO Possibly leave a hint about machine types !!! hint "Changing the machine tye version"
-
-    Depending on the Nextflow version you have installed, this command might fail due to a version mismatch.
-    If that happens, you can temporarily run the pipeline with a different version than you have installed by adding `NXF_VER=version` to the start of your command as shown below:
-
-    ```bash
-    NXF_VER=24.09.2-edge nextflow run nf-core/demo -profile docker,test --outdir results
-    ``` -->
-
 Here's the console output from the pipeline:
 
 ```console title="Output"
