@@ -29,6 +29,7 @@ nav:
       - nf4_science/genomics/01_per_sample_variant_calling.md
       - nf4_science/genomics/02_joint_calling.md
       - nf4_science/genomics/03_modules.md
+      - nf4_science/genomics/04_testing.md
 
   - Nextflow for RNAseq:
       - nf4_science/rnaseq/index.md
@@ -191,6 +192,7 @@ plugins:
         - side_quests/nf-test.md
         - side_quests/workflows_of_workflows.md
         - nf4_science/genomics/03_modules.md
+        - nf4_science/genomics/04_testing.md
 
   - i18n:
       docs_structure: suffix

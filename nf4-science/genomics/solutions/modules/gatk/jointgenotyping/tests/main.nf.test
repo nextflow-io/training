@@ -1,0 +1,42 @@
+nextflow_process {
+
+    name "Test Process GATK_JOINTGENOTYPING"
+    script "../main.nf"
+    process "GATK_JOINTGENOTYPING"
+
+    test("Should call trio's joint genotype correctly") {
+
+        when {
+            params {
+                outdir = "tests/results"
+            }
+            process {
+                """
+                input[0] = [
+                    file("${projectDir}/modules/gatk/jointgenotyping/tests/inputs/reads_father.bam.g.vcf"),
+                    file("${projectDir}/modules/gatk/jointgenotyping/tests/inputs/reads_mother.bam.g.vcf"),
+                    file("${projectDir}/modules/gatk/jointgenotyping/tests/inputs/reads_son.bam.g.vcf")
+                ]
+                input[1] = [
+                    file("${projectDir}/modules/gatk/jointgenotyping/tests/inputs/reads_father.bam.g.vcf.idx"),
+                    file("${projectDir}/modules/gatk/jointgenotyping/tests/inputs/reads_mother.bam.g.vcf.idx"),
+                    file("${projectDir}/modules/gatk/jointgenotyping/tests/inputs/reads_son.bam.g.vcf.idx")
+                ]
+                input[2] = file("${projectDir}/data/ref/intervals.bed")
+                input[3] = "family_trio"
+                input[4] = file("${projectDir}/data/ref/ref.fasta")
+                input[5] = file("${projectDir}/data/ref/ref.fasta.fai")
+                input[6] = file("${projectDir}/data/ref/ref.dict")
+                """
+            }
+        }
+
+    then {
+        assert process.success
+        assert path(process.out[0][0]).readLines().contains('#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	reads_father	reads_mother	reads_son')
+        assert path(process.out[0][0]).readLines().contains('20_10037292_10066351	3480	.	C	CT	1625.89	.	AC=5;AF=0.833;AN=6;BaseQRankSum=0.220;DP=85;ExcessHet=0.0000;FS=2.476;MLEAC=5;MLEAF=0.833;MQ=60.00;MQRankSum=0.00;QD=21.68;ReadPosRankSum=-1.147e+00;SOR=0.487	GT:AD:DP:GQ:PL	0/1:15,16:31:99:367,0,375	1/1:0,18:18:54:517,54,0	1/1:0,26:26:78:756,78,0')
+    }
+
+    }
+
+}
