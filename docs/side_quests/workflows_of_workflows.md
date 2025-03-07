@@ -111,7 +111,7 @@ Composable workflows have some differences from the ones you saw in the 'Hello N
 
 Let's update the greeting workflow to match this structure. Change the code to the following:
 
-```groovy title="workflows/greeting.nf" linenums="1"
+```groovy title="workflows/greeting.nf" linenums="1" hl_lines="6 7 9 15 16 17"
 include { VALIDATE_NAME } from '../modules/validate_name'
 include { SAY_HELLO } from '../modules/say_hello'
 include { TIMESTAMP_GREETING } from '../modules/timestamp_greeting'
