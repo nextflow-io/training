@@ -301,19 +301,19 @@ Template features can be flexibly included or excluded at the time of creation, 
 3. Select **Custom** on the Choose pipeline type screen
 4. Enter your pipeline details, replacing < YOUR NAME > with your own name, then select **Next**
 
-  - **GitHub organisation:** myorg
-  - **Workflow name:** myfirstpipeline
-  - **A short description of your pipeline:** My first pipeline
-  - **Name of the main author / authors:** < YOUR NAME >
+- **GitHub organisation:** myorg
+- **Workflow name:** myfirstpipeline
+- **A short description of your pipeline:** My first pipeline
+- **Name of the main author / authors:** < YOUR NAME >
 
 5. On the Template features screen, set "Toggle all features" to **off**, then **enable**:
 
-  - `Add configuration files`
-  - `Use multiqc`
-  - `Use nf-core components`
-  - `Use nf-schema`
-  - `Add documentation`
-  - `Add testing profiles`
+- `Add configuration files`
+- `Use multiqc`
+- `Use nf-core components`
+- `Use nf-schema`
+- `Add documentation`
+- `Add testing profiles`
 
 6. Select **Finish** on the Final details screen
 7. Wait for the pipeline to be created, then select **Continue**
