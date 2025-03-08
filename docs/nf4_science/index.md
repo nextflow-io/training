@@ -10,7 +10,7 @@ These are courses that demonstrate how to apply the concepts and components pres
 
 !!! exercise "Nextflow for Genomics"
 
-    !!! quote inline end ""
+    !!! tip inline end ""
 
         :material-run-fast: Learn to develop a pipeline for genomics in Nextflow.
 
@@ -20,7 +20,7 @@ These are courses that demonstrate how to apply the concepts and components pres
 
 !!! exercise "Nextflow for RNAseq"
 
-    !!! quote inline end ""
+    !!! tip inline end ""
 
         :material-run-fast: Learn to develop a pipeline for RNAseq data processing in Nextflow.
 
