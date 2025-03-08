@@ -30,8 +30,6 @@
                 "ms-python.python",
                 "ms-python.vscode-pylance",
                 "nf-core.nf-core-extensionpack", // nf-core recommended extensions
-                "nextflow.nextflow", // Nextflow VS Code extension
-                "codezombiech.gitignore" // Language support for .gitignore files
             ]
         }
     },
