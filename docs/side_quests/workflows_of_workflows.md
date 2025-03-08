@@ -1,4 +1,4 @@
-# Side Quest: Workflows of Workflows
+# Workflows of Workflows
 
 One of the most powerful features of Nextflow is its ability to compose complex pipelines from smaller, reusable workflow modules. This modular approach makes pipelines easier to develop, test, and maintain.
 
