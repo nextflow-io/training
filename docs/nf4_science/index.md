@@ -18,16 +18,14 @@ These are courses that demonstrate how to apply the concepts and components pres
 
     [Launch the Nextflow for Genomics training :material-arrow-right:](genomics/){ .md-button .md-button--primary }
 
-**Coming soon:** "Nextflow for RNAseq" — Learn to develop a pipeline for bulk RNAseq analysis in Nextflow
-
-<!-- COMMENTED OUT UNTIL THIS IS READY
 !!! exercise "Nextflow for RNAseq"
 
     !!! quote inline end ""
 
-        :material-run-fast: Learn to develop a pipeline for bulk RNAseq analysis in Nextflow.
+        :material-run-fast: Learn to develop a pipeline for RNAseq data processing in Nextflow.
 
     This is a course for researchers who wish to learn how to develop their own RNAseq pipelines. The course uses a bulk RNAseq processing use case to demonstrate how to develop a simple but functional RNAseq pipeline.
 
     [Launch the Nextflow for RNAseq training :material-arrow-right:](rnaseq/){ .md-button .md-button--primary }
--->
+
+Let us know what other domains and use cases you'd like to see covered here by posting in the [Training section](https://community.seqera.io/c/training/) of the community forum.
