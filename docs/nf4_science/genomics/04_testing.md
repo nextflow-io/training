@@ -524,7 +524,7 @@ test("Should run without failures") {
 _After:_
 
 ```groovy title="modules/gatk/haplotypecaller/tests/main.nf.test" linenums="7"
-    test("Should call son's halotype correctly") {
+    test("Should call son's haplotype correctly") {
 
         setup {
             run("SAMTOOLS_INDEX") {
@@ -575,9 +575,9 @@ https://www.nf-test.com
 
 Test Process GATK_HAPLOTYPECALLER
 
-  Test [30247349] 'Should call son's halotype correctly' PASSED (20.002s)
+  Test [30247349] 'Should call son's haplotype correctly' PASSED (20.002s)
   Snapshots:
-    1 created [Should call son's halotype correctly]
+    1 created [Should call son's haplotype correctly]
 
 
 Snapshot Summary:
@@ -606,7 +606,7 @@ https://www.nf-test.com
 
 Test Process GATK_HAPLOTYPECALLER
 
-  Test [c847bfae] 'Should call son's halotype correctly' FAILED (19.979s)
+  Test [c847bfae] 'Should call son's haplotype correctly' FAILED (19.979s)
 
   java.lang.RuntimeException: Different Snapshot:
   [                                                                                           [
@@ -695,7 +695,7 @@ https://www.nf-test.com
 
 Test Process GATK_HAPLOTYPECALLER
 
-  Test [c847bfae] 'Should call son's halotype correctly' PASSED (19.33s)
+  Test [c847bfae] 'Should call son's haplotype correctly' PASSED (19.33s)
 
 
 SUCCESS: Executed 1 tests in 19.382s
@@ -741,7 +741,7 @@ Add similar tests for the mother and father samples:
         }
     }
 
-    test("Should call father's halotype correctly") {
+    test("Should call father's haplotype correctly") {
 
         setup {
             run("SAMTOOLS_INDEX") {
@@ -793,9 +793,9 @@ https://www.nf-test.com
 
 Test Process GATK_HAPLOTYPECALLER
 
-  Test [c847bfae] 'Should call son's halotype correctly' PASSED (19.91s)
-  Test [44494e9c] 'Should call mother's halotype correctly' PASSED (18.606s)
-  Test [eb0d1a07] 'Should call father's halotype correctly' PASSED (18.773s)
+  Test [c847bfae] 'Should call son's haplotype correctly' PASSED (19.91s)
+  Test [44494e9c] 'Should call mother's haplotype correctly' PASSED (18.606s)
+  Test [eb0d1a07] 'Should call father's haplotype correctly' PASSED (18.773s)
 
 
 SUCCESS: Executed 3 tests in 57.348s
@@ -1181,9 +1181,9 @@ https://www.nf-test.com
 
 Test Process GATK_HAPLOTYPECALLER
 
-  Test [c847bfae] 'Should call son's halotype correctly' PASSED (20.951s)
-  Test [44494e9c] 'Should call mother's halotype correctly' PASSED (19.155s)
-  Test [eb0d1a07] 'Should call father's halotype correctly' PASSED (21.843s)
+  Test [c847bfae] 'Should call son's haplotype correctly' PASSED (20.951s)
+  Test [44494e9c] 'Should call mother's haplotype correctly' PASSED (19.155s)
+  Test [eb0d1a07] 'Should call father's haplotype correctly' PASSED (21.843s)
 
 Test Process GATK_JOINTGENOTYPING
 
