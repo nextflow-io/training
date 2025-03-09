@@ -1,0 +1,73 @@
+
+SUMMARISING RUN PARAMETERS
+==========================
+Input filename: ENCSR000COQ1_1.fastq.gz
+Trimming mode: single-end
+Trim Galore version: 0.6.10
+Cutadapt version: 4.9
+Number of cores used for trimming: 1
+Quality Phred score cutoff: 20
+Quality encoding type selected: ASCII+33
+Using Illumina adapter for trimming (count: 9). Second best hit was Nextera (count: 0)
+Adapter sequence: 'AGATCGGAAGAGC' (Illumina TruSeq, Sanger iPCR; auto-detected)
+Maximum trimming error rate: 0.1 (default)
+Minimum required adapter overlap (stringency): 1 bp
+Minimum required sequence length before a sequence gets removed: 20 bp
+Running FastQC on the data once trimming has completed
+Output file will be GZIP compressed
+
+
+This is cutadapt 4.9 with Python 3.12.7
+Command line parameters: -j 1 -e 0.1 -q 20 -O 1 -a AGATCGGAAGAGC ENCSR000COQ1_1.fastq.gz
+Processing single-end reads on 1 core ...
+Finished in 0.850 s (30.548 µs/read; 1.96 M reads/minute).
+
+=== Summary ===
+
+Total reads processed:                  27,816
+Reads with adapters:                     9,173 (33.0%)
+Reads written (passing filters):        27,816 (100.0%)
+
+Total basepairs processed:     2,114,016 bp
+Quality-trimmed:                       0 bp (0.0%)
+Total written (filtered):      2,100,697 bp (99.4%)
+
+=== Adapter 1 ===
+
+Sequence: AGATCGGAAGAGC; Type: regular 3'; Length: 13; Trimmed: 9173 times
+
+Minimum overlap: 1
+No. of allowed errors:
+1-9 bp: 0; 10-13 bp: 1
+
+Bases preceding removed adapters:
+  A: 27.4%
+  C: 37.4%
+  G: 20.9%
+  T: 14.3%
+  none/other: 0.0%
+
+Overview of removed sequences
+length	count	expect	max.err	error counts
+1	6229	6954.0	0	6229
+2	2221	1738.5	0	2221
+3	581	434.6	0	581
+4	88	108.7	0	88
+5	33	27.2	0	33
+6	2	6.8	0	2
+7	1	1.7	0	1
+9	1	0.1	0	1
+10	2	0.0	1	2
+12	1	0.0	1	0 1
+14	4	0.0	1	3 1
+16	1	0.0	1	1
+19	1	0.0	1	1
+22	1	0.0	1	1
+29	4	0.0	1	0 4
+33	3	0.0	1	3
+
+RUN STATISTICS FOR INPUT FILE: ENCSR000COQ1_1.fastq.gz
+=============================================
+27816 sequences processed in total
+Sequences removed because they became shorter than the length cutoff of 20 bp:	0 (0.0%)
+
