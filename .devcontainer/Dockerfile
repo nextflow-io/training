@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/devcontainers/universal:linux
+FROM mcr.microsoft.com/devcontainers/base:jammy
 
 USER root
 
@@ -41,9 +41,15 @@ ENV NXF_EDGE=0
 ENV NXF_VER=24.10.4
 ENV NXF_HOME=/workspaces/.nextflow
 
+# Install Conda
+RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
+    bash Miniconda3-latest-Linux-x86_64.sh -b -p /opt/conda && \
+    rm Miniconda3-latest-Linux-x86_64.sh
+
+ENV PATH="/opt/conda/bin:$PATH"
+
 # Install nextflow, nf-core, Mamba, and pytest-workflow
-RUN conda config --remove channels defaults && \
-    conda config --add channels bioconda && \
+RUN conda config --add channels bioconda && \
     conda config --add channels conda-forge && \
     conda config --set channel_priority strict && \
     conda update --quiet --yes --all && \
