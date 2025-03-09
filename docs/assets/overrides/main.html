@@ -1,20 +1,13 @@
 {% extends "base.html" %} {% block announce %}
 <div style="text-align: center">
-  <span>Next community training</span>:
-  <strong>{{ config.extra.announcement.date_text }}</strong> on YouTube, with
-  support on Slack
-  <span class="twemoji" style="margin-left: 0.5em">
-    {% include ".icons/fontawesome/brands/youtube.svg" %}
-  </span>
-  <span class="twemoji" style="margin-right: 0.5em">
-    {% include ".icons/fontawesome/brands/slack.svg" %}
-  </span>
+  {{ config.extra.announcement.text }}
+  <strong>{{ config.extra.announcement.text_bold }}</strong>
   <a
     class="md-button"
-    href="{{ config.extra.announcement.register_url }}"
+    href="{{ config.extra.announcement.url }}"
     target="_blank"
   >
-    Register here
+    {{ config.extra.announcement.url_text }}
     <span class="twemoji"
       ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
         <path

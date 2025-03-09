@@ -112,9 +112,11 @@ extra_css:
 extra:
   # Announcement banner for upcoming training
   announcement:
-    active: false
-    date_text: March 5-6, 2024
-    register_url: https://nf-co.re/events/2024/training-foundational-march
+    active: true
+    text: "Nextflow Training Week (2025-Q1):"
+    text_bold: March 10-14, 2025
+    url: https://community.seqera.io/t/nextflow-training-week-2025-q1/1775/6
+    url_text: More info
   # Analytics
   analytics:
     provider: google
