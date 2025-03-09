@@ -1,7 +1,7 @@
 mkdocs
 mkdocs-material
 mkdocs-static-i18n
-pymdown-extensions
+pymdown-extensions>=10.12
 pillow
 cairosvg
 mkdocs-enumerate-headings-plugin>=0.6.0

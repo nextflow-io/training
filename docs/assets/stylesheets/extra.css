@@ -240,3 +240,28 @@ h3 .enumerate-headings-plugin {
 .md-typeset table:not([class]) {
   font-size: 0.8rem;
 }
+
+/* YouTube video embeds */
+.md-typeset figure:has(.video-wrapper) {
+  width: 100%;
+}
+.video-wrapper {
+  position: relative;
+  display: block;
+  height: 0;
+  padding: 0;
+  overflow: hidden;
+  padding-bottom: 56.25%;
+}
+.video-wrapper > iframe {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.youtube {
+  color: #ee0f0f;
+}
