@@ -431,7 +431,7 @@ Learn how to write tests for other processes in our genomics workflow, using the
 
 ## 2. Add tests to a chained process and test for contents
 
-To test `GATK_HAPLOTYPECALLER`, we need to provide the process with the `SAMTOOLS_INDEX` output as an input. We could do that by running the `SAMTOOLS_INDEX`, retrieving its outputs, and storing with the test data for the workflow. That's actually the recommended approach for a polished pipeline, but nf-test provides an alternative approach, using the `setup` method.
+To test `GATK_HAPLOTYPECALLER`, we need to provide the process with the `SAMTOOLS_INDEX` output as an input. We could do that by running `SAMTOOLS_INDEX`, retrieving its outputs, and storing them with the test data for the workflow. That's actually the recommended approach for a polished pipeline, but nf-test provides an alternative approach, using the `setup` method.
 
 With the setup method, we can trigger the `SAMTOOLS_INDEX` process as part of the test setup, and then use its output as an input for `GATK_HAPLOTYPECALLER`. This has a cost - we're going to have to run the `SAMTOOLS_INDEX` process every time we run the test for `GATK_HAPLOTYPECALLER`- but maybe we're still developing the workflow and don't want to pre-generate test data we might have to change later. `SAMTOOLS_INDEX` process is also very quick, so maybe the benefits of pre-generating and storing its outputs are negligible. Let's see the setup method works.
 
