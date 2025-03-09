@@ -16,10 +16,36 @@
     ></span>
   </a>
 </div>
-{% if not config.extra.announcement.active %}
 <style type="text/css">
   .md-banner {
     display: none;
   }
 </style>
+{% if config.extra.announcement.active %}
+<script>
+  (function () {
+    function hideAnnouncement() {
+      var announcementDate = new Date(
+        "{{ config.extra.announcement.hide_after }}T00:00:00Z",
+      );
+      var currentDate = new Date();
+      var banner = document.querySelector(".md-banner");
+      if (banner && currentDate <= announcementDate) {
+        banner.style.display = "block";
+      }
+    }
+
+    // Run on initial load
+    hideAnnouncement();
+
+    // Hook into XHR to run after each page update
+    var originalOpen = XMLHttpRequest.prototype.open;
+    XMLHttpRequest.prototype.open = function () {
+      this.addEventListener("load", function () {
+        setTimeout(hideAnnouncement, 0); // Ensure it runs after the request completes
+      });
+      return originalOpen.apply(this, arguments);
+    };
+  })();
+</script>
 {% endif %} {% endblock %}
