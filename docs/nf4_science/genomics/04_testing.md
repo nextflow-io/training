@@ -1205,7 +1205,7 @@ SUCCESS: Executed 8 tests in 167.772s
 
 7 tests in 1 command! We spent a long time configuring lots and lots of tests, but when it came to running them it was very quick and easy. You can see how useful this is when maintaining a large pipeline, which could include hundreds of different elements. We spend time writing tests once so we can save time running them many times.
 
-Furthermore, we can automate this! imagine tests running every time you or a colleague tries to add new code. This is how we ensure our pipelines maintain a high standard.
+Furthermore, we can automate this! Imagine tests running every time you or a colleague tries to add new code. This is how we ensure our pipelines maintain a high standard.
 
 ## Takeaway
 
