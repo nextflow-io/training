@@ -1387,25 +1387,25 @@ In this side-quest you got an introduction to nf-core. You've learned:
 - Part 2: How to create an nf-core pipelines:
   1. About nf-core tooling
   2. About the nf-core template:
-    - How to create a basic nf-core pipeline
-    - What files are in the temaplte
+  - How to create a basic nf-core pipeline
+  - What files are in the temaplte
   3. About nf-core/modules:
-    - How to find one
-    - How to install it
-    - How to configure it in the `modules.config`
+  - How to find one
+  - How to install it
+  - How to configure it in the `modules.config`
   4. About parameters:
-    - Where to add it in the workflow code
-    - How to set a default in the `nextflow.config`
-    - How to validated the parameter using the `nextflow_schema.json`
+  - Where to add it in the workflow code
+  - How to set a default in the `nextflow.config`
+  - How to validated the parameter using the `nextflow_schema.json`
   5. About `meta` maps:
-    - What a `meta` map is
-    - How to access information from it
-    - How to add new fields in the `assets/schema_input.json`
-    - How to add a column in the samplesheet to track additional `meta` information
+  - What a `meta` map is
+  - How to access information from it
+  - How to add new fields in the `assets/schema_input.json`
+  - How to add a column in the samplesheet to track additional `meta` information
   6. About developping a local module:
-    - How to create a module sceleton file using nf-core tooling
-    - How to adapt the sceleton file
-    - How to include the module in the pipeline
+  - How to create a module sceleton file using nf-core tooling
+  - How to adapt the sceleton file
+  - How to include the module in the pipeline
 
 ## What's next?
 
@@ -1415,4 +1415,3 @@ Check out the [nf-core documentation](https://nf-co.re) to learn more. You can j
 - Contribute nf-core components
 - Contribute a pipeline to nf-core (before you do, check their [guidelines](https://nf-co.re/docs/guidelines/pipelines/overview#ask-the-community))
 - Start developping your own nf-core style pipeline
-
