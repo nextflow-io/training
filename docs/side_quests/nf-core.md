@@ -14,10 +14,10 @@ nf-core is published in Nature Biotechnology: [Nat Biotechnol 38, 276–278 (202
 
 In this tutorial you will explore using and writing nf-core pipelines:
 
-- Part I: Run nf-core pipeline
-  In Part I, you will learn where you can find information about a particular nf-core pipeline and how to run one with provided test data.
-- Part II: Develop an nf-core-like pipeline
-  In Part II, you will use a simplified version of the nf-core template to write a nf-core-style pipeline. The pipeline consists of two modules to process FastQ data: `fastqe` and `seqtk`. It uses an input from a sample sheet, validates it, and produces a multiqc report.
+- Section 1: Run nf-core pipeline
+  In the first section, you will learn where you can find information about a particular nf-core pipeline and how to run one with provided test data.
+- Section 2: Develop an nf-core-like pipeline
+  In second section, you will use a simplified version of the nf-core template to write a nf-core-style pipeline. The pipeline consists of two modules to process FastQ data: `fastqe` and `seqtk`. It uses an input from a sample sheet, validates it, and produces a multiqc report.
 
 ## 0. Warmup
 
@@ -37,7 +37,7 @@ nf-core
 
 We will first run a pipeline in this directory and then build our own. We need the `sequencer_samplesheet.csv` for part 2. For now you can ignore it.
 
-## 1. Part I: Run nf-core pipelines
+## 1. Run nf-core pipelines
 
 nf-core uses their website [nf-co.re](https://nf-co.re) to centrally display all information such as: general documentation and help articles, documentation for each of its pipelines, blog posts, event annoucenments, etc..
 
@@ -246,7 +246,7 @@ You know how to run an nf-core pipeline using its built-in test profile.
 
 Celebrate and take a break! Next, we'll show you how to use nf-core tooling to build your own pipeline.
 
-## 2. Part II: Create a basic pipeline from template
+## 2. Create a basic pipeline from template
 
 We will now start developing our own nf-core style pipeline.
 The nf-core collection currently offers, [72 subworkflows](https://nf-co.re/subworkflows/) and [over 1300 modules](https://nf-co.re/modules/) that you can use to build your own pipelines. Subworkflows are 'composable' workflows, such as those you may have encountered in the [Workflows of workflows side quest](./workflows_of_workflows.md), providing ready-made chunks of logic you can you can use in your own worklfows.
@@ -1381,10 +1381,10 @@ You added a new local module to the pipeline. We touched on how the module templ
 
 In this side-quest you got an introduction to nf-core. You've learned:
 
-- Part 1: How to run nf-core pipelines
+- Section 1: How to run nf-core pipelines
   1. Where to find information about nf-core pipelines
   2. How to run a nf-core pipelines
-- Part 2: How to create an nf-core pipelines:
+- Section 2: How to create an nf-core pipelines:
   1. About nf-core tooling
   2. About the nf-core template:
   - How to create a basic nf-core pipeline
