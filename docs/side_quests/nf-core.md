@@ -1162,7 +1162,6 @@ if (!params.skip_trim) {
     ch_trimmed  = SEQTK_TRIM.out.reads
     ch_versions = ch_versions.mix(SEQTK_TRIM.out.versions.first())
 }
-
 ```
 
 If we now rerun our default test, no reads are being trimmed (even though we did not specify `--skip_trim`):
