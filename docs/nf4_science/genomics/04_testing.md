@@ -109,8 +109,8 @@ nf-test generate process modules/samtools/index/main.nf
 This creates a file in the same directory as `main.nf`, summarized in the terminal output as follows:
 
 ```console title="Output"
-Load source file '/workspaces/training/hello-nextflow/hello-nf-test/modules/samtools/index/main.nf'
-Wrote process test file '/workspaces/training/hello-nextflow/tests/hello-nf-test/modules/samtools/index/main.nf.test
+Load source file '/workspaces/training/nf4-science/genomics/modules/samtools/index/main.nf'
+Wrote process test file '/workspaces/training/nf4-science/genomics/tests/modules/samtools/index/main.nf.test
 
 SUCCESS: Generated 1 test files.
 ```
@@ -431,7 +431,7 @@ Learn how to write tests for other processes in our genomics workflow, using the
 
 ## 2. Add tests to a chained process and test for contents
 
-To test `GATK_HAPLOTYPECALLER`, we need to provide the process with the `SAMTOOLS_INDEX` output as an input. We could do that by running the `SAMTOOLS_INDEX`, retrieving its outputs, and storing with the test data for the workflow. That's actually the recommended approach for a polished pipeline, but nf-test provides an alternative approach, using the `setup` method.
+To test `GATK_HAPLOTYPECALLER`, we need to provide the process with the `SAMTOOLS_INDEX` output as an input. We could do that by running `SAMTOOLS_INDEX`, retrieving its outputs, and storing them with the test data for the workflow. That's actually the recommended approach for a polished pipeline, but nf-test provides an alternative approach, using the `setup` method.
 
 With the setup method, we can trigger the `SAMTOOLS_INDEX` process as part of the test setup, and then use its output as an input for `GATK_HAPLOTYPECALLER`. This has a cost - we're going to have to run the `SAMTOOLS_INDEX` process every time we run the test for `GATK_HAPLOTYPECALLER`- but maybe we're still developing the workflow and don't want to pre-generate test data we might have to change later. `SAMTOOLS_INDEX` process is also very quick, so maybe the benefits of pre-generating and storing its outputs are negligible. Let's see the setup method works.
 
@@ -524,7 +524,7 @@ test("Should run without failures") {
 _After:_
 
 ```groovy title="modules/gatk/haplotypecaller/tests/main.nf.test" linenums="7"
-    test("Should call son's halotype correctly") {
+    test("Should call son's haplotype correctly") {
 
         setup {
             run("SAMTOOLS_INDEX") {
@@ -575,9 +575,9 @@ https://www.nf-test.com
 
 Test Process GATK_HAPLOTYPECALLER
 
-  Test [30247349] 'Should call son's halotype correctly' PASSED (20.002s)
+  Test [30247349] 'Should call son's haplotype correctly' PASSED (20.002s)
   Snapshots:
-    1 created [Should call son's halotype correctly]
+    1 created [Should call son's haplotype correctly]
 
 
 Snapshot Summary:
@@ -606,7 +606,7 @@ https://www.nf-test.com
 
 Test Process GATK_HAPLOTYPECALLER
 
-  Test [c847bfae] 'Should call son's halotype correctly' FAILED (19.979s)
+  Test [c847bfae] 'Should call son's haplotype correctly' FAILED (19.979s)
 
   java.lang.RuntimeException: Different Snapshot:
   [                                                                                           [
@@ -695,7 +695,7 @@ https://www.nf-test.com
 
 Test Process GATK_HAPLOTYPECALLER
 
-  Test [c847bfae] 'Should call son's halotype correctly' PASSED (19.33s)
+  Test [c847bfae] 'Should call son's haplotype correctly' PASSED (19.33s)
 
 
 SUCCESS: Executed 1 tests in 19.382s
@@ -741,7 +741,7 @@ Add similar tests for the mother and father samples:
         }
     }
 
-    test("Should call father's halotype correctly") {
+    test("Should call father's haplotype correctly") {
 
         setup {
             run("SAMTOOLS_INDEX") {
@@ -793,9 +793,9 @@ https://www.nf-test.com
 
 Test Process GATK_HAPLOTYPECALLER
 
-  Test [c847bfae] 'Should call son's halotype correctly' PASSED (19.91s)
-  Test [44494e9c] 'Should call mother's halotype correctly' PASSED (18.606s)
-  Test [eb0d1a07] 'Should call father's halotype correctly' PASSED (18.773s)
+  Test [c847bfae] 'Should call son's haplotype correctly' PASSED (19.91s)
+  Test [44494e9c] 'Should call mother's haplotype correctly' PASSED (18.606s)
+  Test [eb0d1a07] 'Should call father's haplotype correctly' PASSED (18.773s)
 
 
 SUCCESS: Executed 3 tests in 57.348s
@@ -1181,9 +1181,9 @@ https://www.nf-test.com
 
 Test Process GATK_HAPLOTYPECALLER
 
-  Test [c847bfae] 'Should call son's halotype correctly' PASSED (20.951s)
-  Test [44494e9c] 'Should call mother's halotype correctly' PASSED (19.155s)
-  Test [eb0d1a07] 'Should call father's halotype correctly' PASSED (21.843s)
+  Test [c847bfae] 'Should call son's haplotype correctly' PASSED (20.951s)
+  Test [44494e9c] 'Should call mother's haplotype correctly' PASSED (19.155s)
+  Test [eb0d1a07] 'Should call father's haplotype correctly' PASSED (21.843s)
 
 Test Process GATK_JOINTGENOTYPING
 
@@ -1205,7 +1205,7 @@ SUCCESS: Executed 8 tests in 167.772s
 
 7 tests in 1 command! We spent a long time configuring lots and lots of tests, but when it came to running them it was very quick and easy. You can see how useful this is when maintaining a large pipeline, which could include hundreds of different elements. We spend time writing tests once so we can save time running them many times.
 
-Furthermore, we can automate this! imagine tests running every time you or a colleague tries to add new code. This is how we ensure our pipelines maintain a high standard.
+Furthermore, we can automate this! Imagine tests running every time you or a colleague tries to add new code. This is how we ensure our pipelines maintain a high standard.
 
 ## Takeaway
 
