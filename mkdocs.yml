@@ -22,6 +22,7 @@ nav:
       - hello_nextflow/next_steps.md
   - Side Quests:
       - side_quests/nf-test.md
+      - side_quests/nf-core.md
       - side_quests/workflows_of_workflows.md
   - Nextflow for Genomics:
       - nf4_science/genomics/index.md
@@ -194,10 +195,11 @@ plugins:
         - advanced/index.md
         - advanced/orientation.md
         - side_quests/nf-test.md
+        - nf4_science/genomics/03_modules.md
         - side_quests/workflows_of_workflows.md
+        - side_quests/nf-core.md
         - nf4_science/genomics/03_modules.md
         - nf4_science/genomics/04_testing.md
-
   - i18n:
       docs_structure: suffix
       fallback_to_default: true
