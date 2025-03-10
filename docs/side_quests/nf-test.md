@@ -1,4 +1,4 @@
-# Side Quest: nf-test
+# Testing with nf-test
 
 Being able to systematically test that every part of your workflow is doing what it's supposed to do is critical for reproducibility and long-term maintenance, and can be a huge help during the development process.
 

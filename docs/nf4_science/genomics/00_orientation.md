@@ -3,7 +3,7 @@
 The training environment contains all the software, code and data necessary to work through this training course, so you don't need to install anything yourself.
 However, you do need a (free) account to log in, and you should take a few minutes to familiarize yourself with the interface.
 
-If you have not yet done so, please follow [this link](../../envsetup/) before going any further.
+If you have not yet done so, please follow [this link](../../../envsetup/) before going any further.
 
 ## Materials provided
 
@@ -31,9 +31,16 @@ If you run this inside `nf4-science/genomics`, you should see the following outp
 │   ├── sample_bams.txt
 │   └── samplesheet.csv
 ├── genomics-1.nf
-└── genomics-2.nf
+├── genomics-2.nf
+├── genomics-3.nf
+├── genomics-4.nf
+├── nextflow.config
+└── solutions
+    ├── modules
+    ├── nf-test.config
+    └── tests
 
-3 directories, 2 files
+6 directories, 8 files
 
 ```
 
@@ -49,7 +56,7 @@ If you run this inside `nf4-science/genomics`, you should see the following outp
 - **The file `nextflow.config`** is a configuration file that sets minimal environment properties.
   You can ignore it for now.
 
-- \*\*The `data` directory contains input data and related resources, described later in the course.
+- **The `data` directory** contains input data and related resources, described later in the course.
 
 _Completed workflows (solutions) will be added in the near future._
 

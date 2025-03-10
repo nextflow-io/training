@@ -1,20 +1,13 @@
 {% extends "base.html" %} {% block announce %}
 <div style="text-align: center">
-  <span>Next community training</span>:
-  <strong>{{ config.extra.announcement.date_text }}</strong> on YouTube, with
-  support on Slack
-  <span class="twemoji" style="margin-left: 0.5em">
-    {% include ".icons/fontawesome/brands/youtube.svg" %}
-  </span>
-  <span class="twemoji" style="margin-right: 0.5em">
-    {% include ".icons/fontawesome/brands/slack.svg" %}
-  </span>
+  {{ config.extra.announcement.text }}
+  <strong>{{ config.extra.announcement.text_bold }}</strong>
   <a
     class="md-button"
-    href="{{ config.extra.announcement.register_url }}"
+    href="{{ config.extra.announcement.url }}"
     target="_blank"
   >
-    Register here
+    {{ config.extra.announcement.url_text }}
     <span class="twemoji"
       ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
         <path
@@ -23,10 +16,36 @@
     ></span>
   </a>
 </div>
-{% if not config.extra.announcement.active %}
 <style type="text/css">
   .md-banner {
     display: none;
   }
 </style>
+{% if config.extra.announcement.active %}
+<script>
+  (function () {
+    function hideAnnouncement() {
+      var announcementDate = new Date(
+        "{{ config.extra.announcement.hide_after }}T00:00:00Z",
+      );
+      var currentDate = new Date();
+      var banner = document.querySelector(".md-banner");
+      if (banner && currentDate <= announcementDate) {
+        banner.style.display = "block";
+      }
+    }
+
+    // Run on initial load
+    hideAnnouncement();
+
+    // Hook into XHR to run after each page update
+    var originalOpen = XMLHttpRequest.prototype.open;
+    XMLHttpRequest.prototype.open = function () {
+      this.addEventListener("load", function () {
+        setTimeout(hideAnnouncement, 0); // Ensure it runs after the request completes
+      });
+      return originalOpen.apply(this, arguments);
+    };
+  })();
+</script>
 {% endif %} {% endblock %}

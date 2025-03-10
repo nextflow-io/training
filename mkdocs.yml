@@ -18,12 +18,12 @@ nav:
       - hello_nextflow/04_hello_modules.md
       - hello_nextflow/05_hello_containers.md
       - hello_nextflow/06_hello_config.md
+      - hello_nextflow/survey.md
+      - hello_nextflow/next_steps.md
   - Side Quests:
       - side_quests/nf-test.md
       - side_quests/nf-core.md
       - side_quests/workflows_of_workflows.md
-      - hello_nextflow/survey.md
-      - hello_nextflow/next_steps.md
   - Nextflow for Genomics:
       - nf4_science/genomics/index.md
       - nf4_science/genomics/00_orientation.md
@@ -113,9 +113,12 @@ extra_css:
 extra:
   # Announcement banner for upcoming training
   announcement:
-    active: false
-    date_text: March 5-6, 2024
-    register_url: https://nf-co.re/events/2024/training-foundational-march
+    active: true
+    text: "Nextflow Training Week (2025-Q1):"
+    text_bold: March 10-14, 2025
+    url: https://community.seqera.io/t/nextflow-training-week-2025-q1/1775/6
+    url_text: More info
+    hide_after: 2025-03-15
   # Analytics
   analytics:
     provider: google
@@ -141,6 +144,7 @@ markdown_extensions:
   - attr_list
   - md_in_html
   - pymdownx.details
+  - pymdownx.blocks.caption
   - pymdownx.emoji:
       emoji_index: !!python/name:material.extensions.emoji.twemoji
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
