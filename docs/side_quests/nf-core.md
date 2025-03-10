@@ -852,7 +852,7 @@ In the next step we will add a pipeline parameter to allow users to skip the tri
 Any option that a pipeline user may want to configure regularly, whether in the specific modules used or the options passed to them, should be made into a pipeline-level parameter so it can easily be overridden. nf-core defines some standards for providing parameters.
 
 Here, as a simple example, you will add a new parameter to your pipeline that will skip the `SEQTK_TRIM` process.
-That parameter will be accessible in the pipeline script, and we can use it to control how the pipeline runs. .
+That parameter will be accessible in the pipeline script, and we can use it to control how the pipeline runs.
 
 #### 2.4.1 Default values
 
