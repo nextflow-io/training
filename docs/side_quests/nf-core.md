@@ -1,4 +1,4 @@
-# Side Quest: nf-core
+# nf-core
 
 nf-core is a community effort to develop and maintain a curated set of analysis pipelines built using Nextflow.
 
@@ -1377,12 +1377,51 @@ You added a new local module to the pipeline. We touched on how the module templ
 
 ---
 
-## Takeaway
+## Summary
 
-In this side-quest you got an introduction to nf-core. At first, you explored the nf-core website to find information about a pipeline and then ran it.
+In this side-quest you got an introduction to nf-core. You've learned:
 
-In the second part, you created your own pipeline using nf-core tooling. You used a subset of the template features to explore the general code structure of nf-core. It uses a complex workflow structure: all the workflow code you changed was placed in `workflows/myfirstpipeline.nf`. You added an nf-core/module and customised it in `modules.config`. You also added a parameter that allowed you to skip this tool. You then explored the samplesheet structure and glimpsed into samplesheet validation. You added new columns to the samplesheet that allowed you to track new information of each sample in the meta maps. Lastly, you developped your own local module and called it in the pipeline.
+- Part 1: How to run nf-core pipelines
+  1. Where to find information about nf-core pipelines
+  2. How to run a nf-core pipelines
+- Part 2: How to create an nf-core pipelines:
+  1. About nf-core tooling
+  2. About the nf-core template:
+    - How to create a basic nf-core pipeline
+    - What files are in the temaplte
+  3. About nf-core/modules:
+    - How to find one
+    - How to install it
+    - How to configure it in the `modules.config`
+  4. About parameters:
+    - Where to add it in the workflow code
+    - How to set a default in the `nextflow.config`
+    - How to validated the parameter using the `nextflow_schema.json`
+  5. About `meta` maps:
+    - What a `meta` map is
+    - How to access information from it
+    - How to add new fields in the `assets/schema_input.json`
+    - How to add a column in the samplesheet to track additional `meta` information
+  6. About developping a local module:
+    - How to create a module sceleton file using nf-core tooling
+    - How to adapt the sceleton file
+    - How to include the module in the pipeline
 
-## What's next?
 
-Celebrate and take another break!
+Testing is a critical part of pipeline development that helps ensure:
+
+- Your code works as expected
+- Changes don't break existing functionality
+- Other developers can contribute with confidence
+- Problems can be identified and fixed quickly
+- Output content matches expectations
+
+### What's next?
+
+Check out the [nf-core documentation](https://nf-co.re) to learn more. You can join the [nf-core community slack](https://nf-co.re/join#slack) where most of the exchange happens. You might want to:
+
+- Get involved in the development of an nf-core pipeline
+- Contribute nf-core components
+- Contribute a pipeline to nf-core (before you do, check their [guidelines](https://nf-co.re/docs/guidelines/pipelines/overview#ask-the-community))
+- Start developping your own nf-core style pipeline
+
