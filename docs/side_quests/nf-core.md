@@ -101,7 +101,7 @@ However nf-core is the largest open curated collection of Nextflow pipelines.
 
 Now that we've got the pipeline pulled, we can try running it!
 
-#### 1.2.1Trying out an nf-core pipeline with the test profile
+#### 1.2.1 Trying out an nf-core pipeline with the test profile
 
 Conveniently, every nf-core pipeline comes with a `test` profile.
 This is a minimal set of configuration settings for the pipeline to run using a small test dataset that is hosted on the [nf-core/test-datasets](https://github.com/nf-core/test-datasets) repository. It's a great way to try out a pipeline at small scale.
@@ -378,7 +378,7 @@ At the top, you see all parameters displayed that differ from the pipeline defau
 
 Additionally we used the `docker` profile to use docker for software packaging. nf-core provides this as a profile for convenience to enable the docker feature but we could do it with configuration as we did with the earlier module.
 
-#### 2.1.2Template tour
+#### 2.1.2 Template tour
 
 The nf-core pipeline template comes packed with a lot of files and folders. While creating the pipeline, we selected a subset of the nf-core features. The features we selected are now included as files and directories in our repository.
 
