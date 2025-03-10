@@ -322,7 +322,7 @@ In the workflow script file `hello-world.nf`, make the following code modificati
 
 _Before:_
 
-```groovy title="hello-world.nf" linenums="6"
+```groovy title="hello-world.nf" linenums="6" hl_lines="2"
 process sayHello {
 
     output:
@@ -331,7 +331,7 @@ process sayHello {
 
 _After:_
 
-```groovy title="hello-world.nf" linenums="6"
+```groovy title="hello-world.nf" linenums="6" hl_lines="2 3 4"
 process sayHello {
 
     publishDir 'results', mode: 'copy'
@@ -487,7 +487,7 @@ In the process block, make the following code change:
 
 _Before:_
 
-```groovy title="hello-world.nf" linenums="6"
+```groovy title="hello-world.nf" linenums="6" hl_lines="4"
 process sayHello {
 
     publishDir 'results', mode: 'copy'
@@ -498,7 +498,7 @@ process sayHello {
 
 _After:_
 
-```groovy title="hello-world.nf" linenums="6"
+```groovy title="hello-world.nf" linenums="6" hl_lines="4 5 6 7"
 process sayHello {
 
     publishDir 'results', mode: 'copy'
@@ -520,7 +520,7 @@ In the process block, make the following code change:
 
 _Before:_
 
-```groovy title="hello-channels.nf" linenums="16"
+```groovy title="hello-channels.nf" linenums="16" hl_lines="3"
 script:
 """
 echo 'Hello World!' > output.txt
@@ -529,7 +529,7 @@ echo 'Hello World!' > output.txt
 
 _After:_
 
-```groovy title="hello-channels.nf" linenums="16"
+```groovy title="hello-channels.nf" linenums="16" hl_lines="3"
 script:
 """
 echo '$greeting' > output.txt
@@ -559,14 +559,14 @@ In the workflow block, make the following code change:
 
 _Before:_
 
-```groovy title="hello-world.nf" linenums="24"
+```groovy title="hello-world.nf" linenums="24" hl_lines="2"
 // emit a greeting
 sayHello()
 ```
 
 _After:_
 
-```groovy title="hello-world.nf" linenums="24"
+```groovy title="hello-world.nf" linenums="24" hl_lines="2"
 // emit a greeting
 sayHello(params.greeting)
 ```
