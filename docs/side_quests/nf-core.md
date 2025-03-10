@@ -1146,17 +1146,23 @@ We can comment the `ch_samplesheet.view()` line or remove it. We are not going t
 #### 2.6.1 Use the new meta key in the pipeline
 
 We can access this new meta value in the pipeline and use it to, for example, only enable trimming for samples from a particular sequencer. The [branch operator](https://www.nextflow.io/docs/stable/reference/operator.html#branch) let's us split
-an input channel into several new output channels based on a selection criteria:
+an input channel into several new output channels based on a selection criteria. Let's add this within the `if` block:
 
 ```groovy title="workflows/myfirstpipeline.nf" linenums="31"
-ch_seqtk_in = ch_samplesheet.branch { meta, reads ->
-    to_trim: meta["sequencer"] == "sequencer2"
-    other: true
+if (!params.skip_trim) {
+
+    ch_seqtk_in = ch_samplesheet.branch { meta, reads ->
+        to_trim: meta["sequencer"] == "sequencer2"
+        other: true
+    }
+
+    SEQTK_TRIM (
+        ch_seqtk_in.to_trim
+    )
+    ch_trimmed  = SEQTK_TRIM.out.reads
+    ch_versions = ch_versions.mix(SEQTK_TRIM.out.versions.first())
 }
 
-SEQTK_TRIM (
-    ch_seqtk_in.to_trim
-)
 ```
 
 If we now rerun our default test, no reads are being trimmed (even though we did not specify `--skip_trim`):
