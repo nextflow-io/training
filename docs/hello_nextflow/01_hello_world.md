@@ -122,7 +122,7 @@ Each **process** describes what operation(s) the corresponding step in the pipel
 
 Let's take a closer look at the **process** block first, then we'll look at the **workflow** block.
 
-### 1.2 The `process` definition
+### 1.2. The `process` definition
 
 The first block of code describes a **process**.
 The process definition starts with the keyword `process`, followed by the process name and finally the process body delimited by curly braces.
@@ -165,7 +165,7 @@ Another common qualifier is `val`.
 
 In a real-world pipeline, a process usually contains additional blocks such as directives and inputs, which we'll introduce in a little bit.
 
-### 1.3 The `workflow` definition
+### 1.3. The `workflow` definition
 
 The second block of code describes the **workflow** itself.
 The workflow definition starts with the keyword `workflow`, followed by an optional name, then the workflow body delimited by curly braces.
