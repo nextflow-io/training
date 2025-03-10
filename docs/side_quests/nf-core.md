@@ -862,20 +862,16 @@ Any new parameters should be added to the `nextflow.config` with a default value
 
 Parameter names should be unique and easily identifiable.
 
-We can a new parameter `skip_trim` to your `nextflow.config` file and set it to `false`.
+We can add a new parameter `skip_trim` to your `nextflow.config` file and set it to `false`.
 
 ```groovy title="nextflow.config" linenums="15"
 // Trimming
 skip_trim                   = false
 ```
 
-#### Adding parameters to your pipeline
-
 #### Using the parameter
 
-Here, an `if` statement that is depended on the `skip_trim` parameter can be used to control the execution of the `SEQTK_TRIM` process. An `!` can be used to imply the logical "not".
-
-Thus, if the `skip_trim` parameter is **not** `true`, the `SEQTK_TRIM` will be be executed.
+Let's add an `if` statement that is depended on the `skip_trim` parameter to control the execution of the `SEQTK_TRIM` process:
 
 ```groovy title="workflows/myfirstpipeline.nf" linenums="29"
 //
@@ -889,6 +885,10 @@ if (!params.skip_trim) {
     ch_versions = ch_versions.mix(SEQTK_TRIM.out.versions.first())
 }
 ```
+
+Here, an `if` statement that is depended on the `skip_trim` parameter is used to control the execution of the `SEQTK_TRIM` process. An `!` can be used to imply the logical "not".
+
+Thus, if the `skip_trim` parameter is **not** `true`, the `SEQTK_TRIM` will be be executed.
 
 Now your if statement has been added to your main workflow file and has a default setting in your `nextflow.config` file, you will be able to flexibly skip the new trimming step using the `skip_trim` parameter.
 
