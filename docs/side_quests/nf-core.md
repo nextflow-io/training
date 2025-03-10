@@ -74,10 +74,10 @@ Next, we'll show you how to run your first nf-core pipeline.
 
 Let's start by creating a new subdirectory to run the pipeline in:
 
-    ```bash
-    mkdir nf-core-demo
-    cd nf-core-demo
-    ```
+```bash
+mkdir nf-core-demo
+cd nf-core-demo
+```
 
 !!!tip
 
