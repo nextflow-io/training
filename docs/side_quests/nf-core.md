@@ -806,7 +806,9 @@ Run the pipeline again and check if the new parameter is applied:
 
 ```bash
 nextflow run . -profile docker,test --outdir results
+```
 
+```bash
 [67/cc3d2f] process > MYORG_MYFIRSTPIPELINE:MYFIRSTPIPELINE:SEQTK_TRIM (SAMPLE1_PE) [100%] 3 of 3 ✔
 [b4/a1b41b] process > MYORG_MYFIRSTPIPELINE:MYFIRSTPIPELINE:MULTIQC                 [100%] 1 of 1 ✔
 ```
@@ -957,8 +959,9 @@ If you rerun the previous command, the warning should disappear:
 
 ```console
 nextflow run . -profile test,docker --outdir results --skip_trim
+```
 
-
+```console
 !! Only displaying parameters that differ from the pipeline defaults !!
 ------------------------------------------------------
 executor >  local (1)
