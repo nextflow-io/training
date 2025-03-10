@@ -175,7 +175,6 @@ plugins:
         - nf4_science/rnaseq/00_orientation.md
         - basic_training/orientation.md
         - advanced/orientation.md
-        - side_quests/nf-core.md
 
       exclude:
         - index.md
@@ -198,6 +197,7 @@ plugins:
         - side_quests/nf-test.md
         - nf4_science/genomics/03_modules.md
         - side_quests/workflows_of_workflows.md
+        - side_quests/nf-core.md
         - nf4_science/genomics/03_modules.md
         - nf4_science/genomics/04_testing.md
   - i18n:
