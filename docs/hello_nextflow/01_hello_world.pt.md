@@ -1,5 +1,13 @@
 # Part 1: Hello World
 
+<div class="video-wrapper">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/8X2hHI-9vms?si=F0t9LFYLjAWoyRXj&amp;list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</div>
+
+/// caption
+:fontawesome-brands-youtube:{ .youtube } Veja a [playlist completa no canal de YouTube do Nextflow](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik).
+///
+
 Um exemplo "Hello World!" é um modelo minimalista projetado para demonstrar a sintaxe básica e a estrutura de uma linguagem de programação ou framework de software. Esse exemplo normalmente consiste em exibir a frase "Hello, World!" no dispositivo de saída, como o console ou terminal, ou gravá-la em um arquivo.
 
 Nesta primeira parte do curso de treinamento Hello Nextflow, introduzimos o tópico com um exemplo Hello World muito simples e independente de domínio, que será gradualmente expandido para demonstrar o uso dos componentes e da lógica fundamental do Nextflow.

@@ -1,5 +1,13 @@
 # Part 5: Hello Containers
 
+<div class="video-wrapper">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/5PyOWjKnNmg?si=QinuAnFwFj-Z8CrO&amp;list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</div>
+
+/// caption
+:fontawesome-brands-youtube:{ .youtube } See the [whole playlist on the Nextflow YouTube channel](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik).
+///
+
 In Parts 1-4 of this training course, you learned how to use the basic building blocks of Nextflow to assemble a simple workflow capable of processing some text, parallelizing execution if there were multiple inputs, and collecting the results for further processing.
 
 However, you were limited to basic UNIX tools available in your environment.
@@ -189,7 +197,7 @@ You can see that the filesystem inside the container is different from the files
     When you run a container, it is isolated from the host system by default.
     This means that the container can't access any files on the host system unless you explicitly allow it to do so.
 
-You will learn how to do that in a minute.
+    You will learn how to do that in a minute.
 
 #### 1.3.2. Run the desired tool command(s)
 
@@ -434,7 +442,7 @@ _Before:_
     collectGreetings(convertToUpper.out.collect(), params.batch)
 
     // emit a message about the size of the batch
-    collectGreetings.out.count.view{ "There were $it greetings in this batch" }
+    collectGreetings.out.count.view{ num_greetings -> "There were $num_greetings greetings in this batch" }
 ```
 
 _After:_
@@ -444,7 +452,7 @@ _After:_
     collectGreetings(convertToUpper.out.collect(), params.batch)
 
     // emit a message about the size of the batch
-    collectGreetings.out.count.view{ "There were $it greetings in this batch" }
+    collectGreetings.out.count.view{ num_greetings -> "There were $num_greetings greetings in this batch" }
 
     // generate ASCII art of the greetings with cowpy
     cowpy(collectGreetings.out.outfile, params.character)

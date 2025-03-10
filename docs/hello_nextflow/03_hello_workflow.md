@@ -1,5 +1,13 @@
 # Part 3: Hello Workflow
 
+<div class="video-wrapper">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/zJP7cUYPEbA?si=Irl9nAQniDyICp2b&amp;list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</div>
+
+/// caption
+:fontawesome-brands-youtube:{ .youtube } See the [whole playlist on the Nextflow YouTube channel](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik).
+///
+
 Most real-world workflows involve more than one step.
 In this training module, you'll learn how to connect processes together in a multi-step workflow.
 
@@ -272,12 +280,12 @@ HOLà
 
 That is the result we want to achieve with our workflow.
 
-### 2.1. Create a new process to do the collection step
+### 2.2. Create a new process to do the collection step
 
 Let's create a new process and call it `collectGreetings()`.
 We can start writing it based on the previous one.
 
-#### 2.1.1. Write the 'obvious' parts of the process
+#### 2.2.1. Write the 'obvious' parts of the process
 
 Add the following process definition to the workflow script:
 
@@ -306,7 +314,7 @@ This is what we can write with confidence based on what you've learned so far.
 But this is not functional!
 It leaves out the input definition(s) and the first half of the script command because we need to figure out how to write that.
 
-### 2.1.2. Define inputs to `collectGreetings()`
+#### 2.2.2. Define inputs to `collectGreetings()`
 
 We need to collect the greetings from all the calls to the `convertToUpper()` process.
 What do we know we can get from the previous step in the workflow?
@@ -333,7 +341,7 @@ _After:_
 Notice we use the `path` prefix even though we expect this to contain multiple files.
 Nextflow doesn't mind, so it doesn't matter.
 
-#### 2.1.3. Compose the concatenation command
+#### 2.2.3. Compose the concatenation command
 
 This is where things could get a little tricky, because we need to be able to handle an arbitrary number of input files.
 Specifically, we can't write the command up front, so we need to tell Nextflow how to compose it at runtime based on what inputs flow into the process.
@@ -372,11 +380,11 @@ In theory this should handle any arbitrary number of input files.
 
 <!--[ADD LINK to note above] -->
 
-### 2.2. Add the collection step to the workflow
+### 2.3. Add the collection step to the workflow
 
 Now we should just need to call the collection process on the output of the uppercasing step.
 
-#### 2.2.1. Connect the process calls
+#### 2.3.1. Connect the process calls
 
 In the workflow block, make the following code change:
 
@@ -401,7 +409,7 @@ _After:_
 
 This connects the output of `convertToUpper()` to the input of `collectGreetings()`.
 
-#### 2.2.2. Run the workflow with `-resume`
+#### 2.3.2. Run the workflow with `-resume`
 
 Let's try it.
 
@@ -435,13 +443,13 @@ Oh no. The collection step was run individually on each greeting, which is NOT w
 
 We need to do something to tell Nextflow explicitly that we want that third step to run on all the elements in the channel output by `convertToUpper()`.
 
-### 2.3. Use an operator to collect the greetings into a single input
+### 2.4. Use an operator to collect the greetings into a single input
 
 Yes, once again the answer to our problem is an operator.
 
 Specifically, we are going to use the aptly-named [`collect()`](https://www.nextflow.io/docs/latest/reference/operator.html#collect) operator.
 
-#### 2.3.1. Add the `collect()` operator
+#### 2.4.1. Add the `collect()` operator
 
 This time it's going to look a bit different because we're not adding the operator in the context of a channel factory, but to an output channel.
 
@@ -466,7 +474,7 @@ _After:_
 }
 ```
 
-#### 2.3.2. Add some `view()` statements
+#### 2.4.2. Add some `view()` statements
 
 Let's also include a couple of `view()` statements to visualize the before and after states of the channel contents.
 
@@ -485,14 +493,14 @@ _After:_
     collectGreetings(convertToUpper.out.collect())
 
     // optional view statements
-    convertToUpper.out.view { "Before collect: $it" }
-    convertToUpper.out.collect().view { "After collect: $it" }
+    convertToUpper.out.view { greeting -> "Before collect: $greeting" }
+    convertToUpper.out.collect().view { greeting -> "After collect: $greeting" }
 }
 ```
 
 The `view()` statements can go anywhere you want; we put them after the call for readability.
 
-#### 2.3.3. Run the workflow again with `-resume`
+#### 2.4.3. Run the workflow again with `-resume`
 
 Let's try it:
 
@@ -816,10 +824,8 @@ _After:_
     collectGreetings(convertToUpper.out.collect(), params.batch)
 
     // emit a message about the size of the batch
-    collectGreetings.out.count.view { "There were $it greetings in this batch" }
+    collectGreetings.out.count.view { num_greetings -> "There were $num_greetings greetings in this batch" }
 ```
-
-Here we are using `$it` in the same way we did earlier, as an implicit variable to access the contents of the channel.
 
 !!! note
 

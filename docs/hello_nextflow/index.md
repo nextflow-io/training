@@ -12,9 +12,25 @@ The rise of big data has made it increasingly necessary to be able to analyze an
 
 During this training, you will be introduced to Nextflow in a series of complementary hands-on workshops.
 
-Let's get started! Click on the "Open in GitHub Codespaces" button below.
+Let's get started! Click on the "Open in GitHub Codespaces" button below to launch the training environment (preferably in a separate tab), then read on while it loads.
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
+
+<h2>
+  <div style="float:right;">
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?si=9bz6-59u_0XFmHB0&amp;list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  </div>
+
+Follow the videos
+
+</h2>
+
+The Hello Nextflow training has a video for each chapter, embedded at the top of each page.
+
+You can also find [the whole playlist on the Nextflow YouTube channel](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik).
+
+<!-- Clearfix for float -->
+<div style="content: ''; clear: both; display: table;"></div>
 
 ## Learning objectives
 

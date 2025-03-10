@@ -1,5 +1,13 @@
 # Part 2: Hello Channels
 
+<div class="video-wrapper">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/lJ41WMMm44M?si=xCItHLiOQWqoqBB9&amp;list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</div>
+
+/// caption
+:fontawesome-brands-youtube:{ .youtube } See the [whole playlist on the Nextflow YouTube channel](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik).
+///
+
 In Part 1 of this course (Hello World), we showed you how to provide a variable input to a process by providing the input in the process call directly: `sayHello(params.greet)`.
 That was a deliberately simplified approach.
 In practice, that approach has major limitations; namely that it only works for very simple cases where we only want to run the process once, on a single value.
@@ -522,7 +530,7 @@ Here we added the operator on the next line for readability, but you can add ope
 
 #### 3.2.2. Add `view()` to inspect channel contents
 
-We could run this right away to test if it works, but while we're at it, we're also going to add a couple of [`view()`](https://www.nextflow.io/docs/latest/reference/operator.html#view) directives, which allow us to inspect the contents of a channel.
+We could run this right away to test if it works, but while we're at it, we're also going to add a couple of [`view()`](https://www.nextflow.io/docs/latest/reference/operator.html#view) operators, which allow us to inspect the contents of a channel.
 You can think of `view()` as a debugging tool, like a `print()` statement in Python, or its equivalent in other languages.
 
 In the workflow block, make the following code change:
@@ -540,12 +548,25 @@ _After:_
 ```groovy title="hello-channels.nf" linenums="31"
     // create a channel for inputs
     greeting_ch = Channel.of(greetings_array)
-                         .view { "Before flatten: $it" }
+                         .view { greeting -> "Before flatten: $greeting" }
                          .flatten()
-                         .view { "After flatten: $it" }
+                         .view { greeting -> "After flatten: $greeting" }
 ```
 
-Here `$it` is an implicit variable that represents each individual item loaded in a channel.
+We are using an operator _closure_ here - the curly brackets.
+This code executes for each item in the channel.
+We define a temporary variable for the inner value, here called `greeting` (it could be anything).
+This variable is only used within the scope of that closure.
+
+In this example, `$greeting` represents each individual item loaded in a channel.
+
+!!! note "Note on `$it`"
+
+    In some pipelines you may see a special variable called `$it` used inside operator closures.
+    This is an _implicit_ variable that allows a short-hand access to the inner variable,
+    without needing to define it with a `->`.
+
+    We prefer to be explicit to aid code clarity, as such the `$it` syntax is discouraged and will slowly be phased out of the Nextflow language.
 
 #### 3.2.3. Run the workflow
 
@@ -723,9 +744,9 @@ _After:_
 ```groovy title="hello-channels.nf" linenums="31"
 // create a channel for inputs from a CSV file
 greeting_ch = Channel.fromPath(params.greeting)
-                     .view { "Before splitCsv: $it" }
+                     .view { csv -> "Before splitCsv: $csv" }
                      .splitCsv()
-                     .view { "After splitCsv: $it" }
+                     .view { csv -> "After splitCsv: $csv" }
 ```
 
 As you can see, we also include before/after view statements while we're at it.
@@ -787,7 +808,7 @@ This is what the syntax looks like:
 
 This means 'for each element in the channel, take the first of any items it contains'.
 
-So let's apply that to our CVS parsing.
+So let's apply that to our CSV parsing.
 
 #### 4.3.1. Apply `map()` to the channel
 
@@ -798,9 +819,9 @@ _Before:_
 ```groovy title="hello-channels.nf" linenums="31"
 // create a channel for inputs from a CSV file
 greeting_ch = Channel.fromPath(params.greeting)
-                     .view { "Before splitCsv: $it" }
+                     .view { csv -> "Before splitCsv: $csv" }
                      .splitCsv()
-                     .view { "After splitCsv: $it" }
+                     .view { csv -> "After splitCsv: $csv" }
 ```
 
 _After:_
@@ -808,11 +829,11 @@ _After:_
 ```groovy title="hello-channels.nf" linenums="31"
 // create a channel for inputs from a CSV file
 greeting_ch = Channel.fromPath(params.greeting)
-                     .view { "Before splitCsv: $it" }
+                     .view { csv -> "Before splitCsv: $csv" }
                      .splitCsv()
-                     .view { "After splitCsv: $it" }
+                     .view { csv -> "After splitCsv: $csv" }
                      .map { item -> item[0] }
-                     .view { "After map: $it" }
+                     .view { csv -> "After map: $csv" }
 ```
 
 Once again we include another `view()` call to confirm that the operator does what we expect.
