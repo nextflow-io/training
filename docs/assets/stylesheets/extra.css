@@ -80,6 +80,7 @@ h3 .enumerate-headings-plugin {
 
 /* Homepage Seqera-style buttons */
 *:is(.md-typeset .md-button, .md-banner .md-button) {
+  color: #000000;
   border-radius: 2rem;
   transition: padding 0.2s;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
