@@ -1227,7 +1227,7 @@ This will create a new file in `modules/local/fastqe.nf` that already contains t
     CRITICAL Module file exists already: 'modules/local/fastqe.nf'. Use '--force' to overwrite
     ```
 
-Let's open the modules file: `modules/local/fastq.nf`.
+Let's open the modules file: `modules/local/fastqe.nf`.
 
 You will notice, that it still calls `samtools` and the input are `bam`.
 
