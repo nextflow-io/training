@@ -17,7 +17,7 @@ In this tutorial you will explore using and writing nf-core pipelines:
 - Part I: Run nf-core pipeline
   In Part I, you will learn where you can find information about a particular nf-core pipeline and how to run one with provided test data.
 - Part II: Develop an nf-core-like pipeline
-  In Part II, you will use a simplified version of the nf-core template to write a nf-core-style pipeline. The pipeline contains of two modules to process FastQ data: fastqe, seqtk. It uses an input from a sample sheet, validates it, and produces a multiqc output.
+  In Part II, you will use a simplified version of the nf-core template to write a nf-core-style pipeline. The pipeline consists of two modules to process FastQ data: `fastqe` and `seqtk`. It uses an input from a sample sheet, validates it, and produces a multiqc report.
 
 # Warmup
 
@@ -108,7 +108,7 @@ This is a minimal set of configuration settings for the pipeline to run using a 
 
 The `test` profile for `nf-core/demo` is shown below:
 
-```groovy title="conf/test.config" linenums="1"
+```groovy title="conf/test.config" linenums="1" hl_lines="26"
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     Nextflow config file for running minimal tests
@@ -249,9 +249,9 @@ Celebrate and take a break! Next, we'll show you how to use nf-core tooling to b
 # Part II: Create a basic pipeline from template
 
 We will now start developing our own nf-core style pipeline.
-The nf-core collection currently offers, [72 subworkflows](https://nf-co.re/subworkflows/) and [over 1300 modules](https://nf-co.re/modules/) that you can use to build your own pipelines.
+The nf-core collection currently offers, [72 subworkflows](https://nf-co.re/subworkflows/) and [over 1300 modules](https://nf-co.re/modules/) that you can use to build your own pipelines. Subworkflows are 'composable' workflows, such as those you may have encountered in the [Workflows of workflows side quest](./workflows_of_workflows.md), providing ready-made chunks of logic you can you can use in your own worklfows.
 
-The nf-core community provides a [command line tool](https://nf-co.re/docs/nf-core-tools) with helper functions to use and develop pipelines.
+The nf-core community provides a [command line tool](https://nf-co.re/docs/nf-core-tools) with helper functions to use and develop pipelines, including to install those components.
 
 We have pre-installed nf-core tools, and here, we will use them to create and develop a new pipeline.
 
@@ -267,6 +267,7 @@ Before we start, let's create a new subfolder in the current `nf-core` directory
 
 ```
 cd ..
+mkdir nf-core-pipeline
 cd nf-core-pipeline
 ```
 
@@ -652,7 +653,7 @@ Using this module information you can work out what inputs are required for the 
 
 1.  `tuple val(meta), path(reads)`
 
-    - A tuple with a meta _map_ (we will talk about meta maps more in the next section) and a list of FASTQ _files_
+    - A tuple (basically a fixed-length list) with a meta _map_ (we will talk about meta maps more in the next section) and a list of FASTQ _files_
     - The channel `ch_samplesheet` used by the `FASTQC` process can be used as the reads input.
 
 Only one input channel is required, and it already exists, so it can be added to your `firstpipeline.nf` file without any additional channel creation or modifications.
@@ -789,7 +790,7 @@ ch_versions = ch_versions.mix(SEQTK_TRIM.out.versions.first())
 
 ### Add a parameter to the `seqtk/trim` tool
 
-nf-core modules should be flexible and usable across many different pipelines. Therefore, tool parameters are typically not set in an nf-core/module. Instead, additional configuration options on how to run the tool, like its parameters or filename, can be applied to a module using the `conf/modules.config` file on the pipeline level. Process selectors (e.g., `withName`) are used to apply configuration options to modules selectively. Process selectors must be used within the `process` scope.
+nf-core modules should be flexible and usable across many different pipelines. Therefore, optional tool parameters are typically not set in an nf-core/module. Instead, additional configuration options on how to run the tool, like its parameters or filename, can be applied to a module using the `conf/modules.config` file on the pipeline level. Process selectors (e.g., `withName`) are used to apply configuration options to modules selectively. Process selectors must be used within the `process` scope.
 
 The parameters or arguments of a tool can be changed using the directive `args`. You can find many examples of how arguments are added to modules in nf-core pipelines, for example, the nf-core/demo [modules.config](https://github.com/nf-core/demo/blob/master/conf/modules.config) file.
 
@@ -848,11 +849,10 @@ In the next step we will add a pipeline parameter to allow users to skip the tri
 
 ## Adding parameters to your pipeline
 
-Anything that a pipeline user may want to configure regularly should be made into a parameter so it can easily be overridden. nf-core defines some standards for providing parameters.
+Any option that a pipeline user may want to configure regularly, whether in the specific modules used or the options passed to them, should be made into a pipeline-level parameter so it can easily be overridden. nf-core defines some standards for providing parameters.
 
 Here, as a simple example, you will add a new parameter to your pipeline that will skip the `SEQTK_TRIM` process.
-
-Parameters are accessible in the pipeline script.
+That parameter will be accessible in the pipeline script, and we can use it to control how the pipeline runs. .
 
 ### Default values
 
@@ -870,6 +870,8 @@ skip_trim                   = false
 ```
 
 ### Adding parameters to your pipeline
+
+#### Using the parameter
 
 Here, an `if` statement that is depended on the `skip_trim` parameter can be used to control the execution of the `SEQTK_TRIM` process. An `!` can be used to imply the logical "not".
 
@@ -923,15 +925,13 @@ WARN: The following invalid input values have been detected:
 
 Parameters are validated through the `nextflow_schema.json` file. This file is also used by the nf-core website (for example, in [nf-core/mag](https://nf-co.re/mag/3.2.1/parameters/)) to render the parameter documentation and print the pipeline help message (`nextflow run . --help`). If you have added parameters and they have not been documented in the `nextflow_schema.json` file, then the input validation does not recognize the parameter.
 
-The `nextflow_schema.json` file can get very big and very complicated very quickly.
-
-The `nf-core pipelines schema build` command is designed to support developers write, check, validate, and propose additions to your `nextflow_schema.json` file.
+The `nextflow_schema.json` file can get very big and very complicated very quickly, and is hard to manually edit. Fortunately, the `nf-core pipelines schema build` command is designed to support developers write, check, validate, and propose additions to your `nextflow_schema.json` file.
 
 ```console
 nf-core pipelines schema build
 ```
 
-It will enable you to launch a web builder to edit this file in your web browser rather than trying to edit this file manually.
+This will enable you to launch a web builder to edit this file in your web browser rather than trying to edit this file manually.
 
 ```console
 INFO     [✓] Default parameters match schema validation
