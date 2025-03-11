@@ -876,16 +876,16 @@ skip_trim                   = false
 Let's add an `if` statement that is depended on the `skip_trim` parameter to control the execution of the `SEQTK_TRIM` process:
 
 ```groovy title="workflows/myfirstpipeline.nf" linenums="29"
-//
-// MODULE: Run SEQTK_TRIM
-//
-if (!params.skip_trim) {
-    SEQTK_TRIM (
-        ch_samplesheet
-    )
-    ch_trimmed  = SEQTK_TRIM.out.reads
-    ch_versions = ch_versions.mix(SEQTK_TRIM.out.versions.first())
-}
+    //
+    // MODULE: Run SEQTK_TRIM
+    //
+    if (!params.skip_trim) {
+        SEQTK_TRIM (
+            ch_samplesheet
+        )
+        ch_trimmed  = SEQTK_TRIM.out.reads
+        ch_versions = ch_versions.mix(SEQTK_TRIM.out.versions.first())
+    }
 ```
 
 Here, an `if` statement that is depended on the `skip_trim` parameter is used to control the execution of the `SEQTK_TRIM` process. An `!` can be used to imply the logical "not".
@@ -1392,8 +1392,10 @@ You added a new local module to the pipeline. We touched on how the module templ
 In this side-quest you got an introduction to nf-core. You've learned:
 
 - Section 1: How to run nf-core pipelines
+
   1. Where to find information about nf-core pipelines
   2. How to run a nf-core pipelines
+
 - Section 2: How to create an nf-core pipelines:
 
   1. About nf-core tooling
