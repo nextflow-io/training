@@ -1216,9 +1216,9 @@ nf-core modules create
 
 It will ask you to enter the tool name and some configurations for the module. We will use the defaults here:
 
-    - Specify the tool name: `Name of tool/subtool: fastqe`
-    - Add the author name: `GitHub Username: (@<your-name>):`
-    - Accept the defaults for the remaining prompts by typing `enter`
+  - Specify the tool name: `Name of tool/subtool: fastqe`
+  - Add the author name: `GitHub Username: (@<your-name>):`
+  - Accept the defaults for the remaining prompts by typing `enter`
 
 This will create a new file in `modules/local/fastqe.nf` that already contains the container and conda definitions, the general structure of the process, and a number of TODO statements to guide you through the adaptation.
 
