@@ -1177,7 +1177,9 @@ If we use the samplesheet with the `sequencer` set, only one sample will be trim
 
 ```console
 nextflow run . -profile docker,test --outdir results --input ../../data/sequencer_samplesheet.csv -resume
+```
 
+```console
 [47/fdf9de] process > MYORG_MYFIRSTPIPELINE:MYFIRSTPIPELINE:SEQTK_TRIM (SAMPLE2_PE) [100%] 1 of 1 ✔
 [2a/a742ae] process > MYORG_MYFIRSTPIPELINE:MYFIRSTPIPELINE:MULTIQC                 [100%] 1 of 1 ✔
 ```
@@ -1216,9 +1218,9 @@ nf-core modules create
 
 It will ask you to enter the tool name and some configurations for the module. We will use the defaults here:
 
-  - Specify the tool name: `Name of tool/subtool: fastqe`
-  - Add the author name: `GitHub Username: (@<your-name>):`
-  - Accept the defaults for the remaining prompts by typing `enter`
+- Specify the tool name: `Name of tool/subtool: fastqe`
+- Add the author name: `GitHub Username: (@<your-name>):`
+- Accept the defaults for the remaining prompts by typing `enter`
 
 This will create a new file in `modules/local/fastqe.nf` that already contains the container and conda definitions, the general structure of the process, and a number of TODO statements to guide you through the adaptation.
 
