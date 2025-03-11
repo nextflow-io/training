@@ -4,7 +4,7 @@ nextflow_process {
     script "../main.nf"
     process "GATK_HAPLOTYPECALLER"
 
-    test("Should call son's halotype correctly") {
+    test("Should call son's haplotype correctly") {
 
         setup {
             run("SAMTOOLS_INDEX") {
@@ -39,7 +39,7 @@ nextflow_process {
 
     }
 
-    test("Should call mother's halotype correctly") {
+    test("Should call mother's haplotype correctly") {
 
         setup {
             run("SAMTOOLS_INDEX") {
@@ -74,7 +74,7 @@ nextflow_process {
         }
     }
 
-    test("Should call father's halotype correctly") {
+    test("Should call father's haplotype correctly") {
 
         setup {
             run("SAMTOOLS_INDEX") {
