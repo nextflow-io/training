@@ -22,7 +22,7 @@ You should be presented with a page where you can create a new GitHub Codespace:
 You can click "Change options" to configure the machine used.
 Using a machine with more cores allows you to take greater advantage of Nextflow's ability to parallelize workflow execution.
 
-**For our Hello Nextflow and Nextflow For Science training courses, we recommend using a 4-core machine.**
+**For our Hello Nextflow, Nextflow For Science, and nf-core training courses, we recommend using a 4-core machine.**
 
 The free GitHub plan includes 120 core-hours of Codespaces compute per month, which amounts to 30 hours of a 4-core machine.
 (See below for more information about quotas.)

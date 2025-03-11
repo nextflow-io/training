@@ -1,0 +1,7 @@
+# Ignore all files in side-quests/solutions
+side-quests/solutions/nf-core/**/*.js
+side-quests/solutions/nf-core/**/*.md
+side-quests/solutions/nf-core/**/*.yaml
+side-quests/solutions/nf-core/**/*.json
+side-quests/solutions/nf-core/**/*.html
+side-quests/solutions/nf-core/**/*.yml
