@@ -808,7 +808,7 @@ Run the pipeline again and check if the new parameter is applied:
 nextflow run . -profile docker,test --outdir results
 ```
 
-```bash
+```console title="Output"
 [67/cc3d2f] process > MYORG_MYFIRSTPIPELINE:MYFIRSTPIPELINE:SEQTK_TRIM (SAMPLE1_PE) [100%] 3 of 3 ✔
 [b4/a1b41b] process > MYORG_MYFIRSTPIPELINE:MYFIRSTPIPELINE:MULTIQC                 [100%] 1 of 1 ✔
 ```
@@ -961,7 +961,7 @@ If you rerun the previous command, the warning should disappear:
 nextflow run . -profile test,docker --outdir results --skip_trim
 ```
 
-```console
+```console title="Output"
 !! Only displaying parameters that differ from the pipeline defaults !!
 ------------------------------------------------------
 executor >  local (1)
@@ -1074,7 +1074,7 @@ Lastly, `sample` is information about the files that we want to attach and pass 
 
 This sets the key name as `id` and the value that is in the `sample` column, for example `SAMPLE1_PE`:
 
-```console title="meta"
+```console title="meta map"
 [id: SAMPLE1_PE]
 ```
 
@@ -1149,24 +1149,24 @@ We can access this new meta value in the pipeline and use it to, for example, on
 an input channel into several new output channels based on a selection criteria. Let's add this within the `if` block:
 
 ```groovy title="workflows/myfirstpipeline.nf" linenums="31"
-if (!params.skip_trim) {
+    if (!params.skip_trim) {
 
-    ch_seqtk_in = ch_samplesheet.branch { meta, reads ->
-        to_trim: meta["sequencer"] == "sequencer2"
-        other: true
+        ch_seqtk_in = ch_samplesheet.branch { meta, reads ->
+            to_trim: meta["sequencer"] == "sequencer2"
+            other: true
+        }
+
+        SEQTK_TRIM (
+            ch_seqtk_in.to_trim
+        )
+        ch_trimmed  = SEQTK_TRIM.out.reads
+        ch_versions = ch_versions.mix(SEQTK_TRIM.out.versions.first())
     }
-
-    SEQTK_TRIM (
-        ch_seqtk_in.to_trim
-    )
-    ch_trimmed  = SEQTK_TRIM.out.reads
-    ch_versions = ch_versions.mix(SEQTK_TRIM.out.versions.first())
-}
 ```
 
 If we now rerun our default test, no reads are being trimmed (even though we did not specify `--skip_trim`):
 
-```console
+```console title="Output"
 nextflow run . -profile docker,test --outdir results
 
 [-        ] process > MYORG_MYFIRSTPIPELINE:MYFIRSTPIPELINE:SEQTK_TRIM          -
@@ -1179,7 +1179,7 @@ If we use the samplesheet with the `sequencer` set, only one sample will be trim
 nextflow run . -profile docker,test --outdir results --input ../../data/sequencer_samplesheet.csv -resume
 ```
 
-```console
+```console title="Output"
 [47/fdf9de] process > MYORG_MYFIRSTPIPELINE:MYFIRSTPIPELINE:SEQTK_TRIM (SAMPLE2_PE) [100%] 1 of 1 ✔
 [2a/a742ae] process > MYORG_MYFIRSTPIPELINE:MYFIRSTPIPELINE:MULTIQC                 [100%] 1 of 1 ✔
 ```
