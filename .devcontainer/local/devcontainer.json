@@ -1,0 +1,37 @@
+{
+    "name": "nextflow-training (local)",
+
+    "build": {
+        "dockerfile": "../Dockerfile",
+        "context": "..",
+        "options": ["--platform=linux/amd64"]
+    },
+
+    "features": {
+        "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {
+            "version": "latest"
+        }
+    },
+    "workspaceFolder": "${localWorkspaceFolder}",
+    "workspaceMount": "source=${localWorkspaceFolder},target=${localWorkspaceFolder},type=bind",
+    "remoteEnv": {
+        "NXF_HOME": "/workspaces/training/.nextflow",
+        "HOST_PROJECT_PATH": "/workspaces/training"
+    },
+    "postCreateCommand": "sudo mkdir -p /workspaces && sudo rm -rf /workspaces/training && sudo ln -s ${localWorkspaceFolder} /workspaces/training",
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "python.defaultInterpreterPath": "/opt/conda/bin/python",
+                "terminal.integrated.cwd": "/workspaces/training",
+                "terminal.integrated.defaultLocation": "workspace"
+            },
+            "extensions": [
+                "ms-python.python",
+                "ms-python.vscode-pylance",
+                "nf-core.nf-core-extensionpack" // nf-core recommended extensions
+            ]
+        }
+    },
+    "remoteUser": "root"
+}
