@@ -22,7 +22,7 @@ Nevertheless, they all assume some minimal familiarity with the following:
 
 For technical requirements and environment setup, see the [Environment Setup](../../envsetup/) mini-course.
 
-**If this is the first time you delve into the Side Quests, make sure to check out the Orientation page first!**
+**If this is the first time you delve into the Side Quests, make sure to check out the [Orientation](./orientation.md) page first!**
 
 Otherwise, select a side quest from the menu below.
 
