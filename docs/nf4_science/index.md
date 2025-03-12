@@ -16,7 +16,7 @@ These are courses that demonstrate how to apply the concepts and components pres
 
     This is a course for researchers who wish to learn how to develop their own genomics pipelines. The course uses a variant calling use case to demonstrate how to develop a simple but functional genomics pipeline.
 
-    [Launch the Nextflow for Genomics training :material-arrow-right:](genomics/){ .md-button .md-button--primary }
+    [Start the Nextflow for Genomics training :material-arrow-right:](genomics/){ .md-button .md-button--primary }
 
 !!! exercise "Nextflow for RNAseq"
 
@@ -26,6 +26,6 @@ These are courses that demonstrate how to apply the concepts and components pres
 
     This is a course for researchers who wish to learn how to develop their own RNAseq pipelines. The course uses a bulk RNAseq processing use case to demonstrate how to develop a simple but functional RNAseq pipeline.
 
-    [Launch the Nextflow for RNAseq training :material-arrow-right:](rnaseq/){ .md-button .md-button--primary }
+    [Start the Nextflow for RNAseq training :material-arrow-right:](rnaseq/){ .md-button .md-button--primary }
 
 Let us know what other domains and use cases you'd like to see covered here by posting in the [Training section](https://community.seqera.io/c/training/) of the community forum.
