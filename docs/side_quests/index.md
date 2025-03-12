@@ -21,3 +21,15 @@ Nevertheless, they all assume some minimal familiarity with the following:
 - Foundational Nextflow concepts and tooling covered in the [Hello Nextflow](../../hello_nextflow/) beginner training course.
 
 For technical requirements and environment setup, see the [Environment Setup](../../envsetup/) mini-course.
+
+**If this is the first time you delve into the Side Quests, make sure to check out the Orientation page first!**
+
+Otherwise, select a side quest from the menu below.
+
+## Menu of Side Quests
+
+- [Introduction to nf-core](./nf-core.md)
+- [Testing with nf-test](./nf-test.md)
+- [Workflows of workflows](./workflows_of_workflows.md)
+
+Let us know what other domains and use cases you'd like to see covered here by posting in the [Training section](https://community.seqera.io/c/training/) of the community forum.
