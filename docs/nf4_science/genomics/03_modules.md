@@ -1,4 +1,4 @@
-# Part 3: moving code into modules
+# Part 3: Moving code into modules
 
 In the first part of this course, you built a variant calling pipeline that was completely linear and processed each sample's data independently of the others.
 

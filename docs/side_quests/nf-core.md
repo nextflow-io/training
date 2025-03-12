@@ -1,4 +1,4 @@
-# nf-core
+# Introduction to nf-core
 
 nf-core is a community effort to develop and maintain a curated set of analysis pipelines built using Nextflow. It was created by several core facilities wanting to consolidate their analysis development and is governed by community members from academia and industry. It is an open community that anyone can join and contribute to.
 
@@ -18,6 +18,8 @@ In this tutorial you will explore using and writing nf-core pipelines:
   In the first section, you will learn where you can find information about a particular nf-core pipeline and how to run one with provided test data.
 - Section 2: Develop an nf-core-like pipeline
   In second section, you will use a simplified version of the nf-core template to write a nf-core-style pipeline. The pipeline consists of two modules to process FastQ data: `fastqe` and `seqtk`. It uses an input from a sample sheet, validates it, and produces a multiqc report.
+
+---
 
 ## 0. Warmup
 

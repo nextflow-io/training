@@ -1,4 +1,4 @@
-# Part 5: Resource profiling and optimization
+# Part 3: Resource profiling and optimization
 
 THIS IS A PLACEHOLDER
 

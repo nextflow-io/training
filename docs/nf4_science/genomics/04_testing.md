@@ -1,4 +1,4 @@
-# Part 4: adding tests
+# Part 4: Adding tests
 
 In the first part of this course, you built a variant calling pipeline that was completely linear and processed each sample's data independently of the others.
 
