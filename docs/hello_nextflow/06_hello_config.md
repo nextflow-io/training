@@ -384,7 +384,7 @@ Learn how to use profiles to conveniently switch between alternative configurati
 
 ---
 
-## 3. Determine what executor(s) should be used to do the work
+## 4. Determine what executor(s) should be used to do the work
 
 Until now, we have been running our pipeline with the local executor.
 This executes each task on the machine that Nextflow is running on.
@@ -439,7 +439,7 @@ process {
 }
 ```
 
-### 3.1. Targeting a different backend
+### 4.1. Targeting a different backend
 
 By default, this training environment does not include a running HPC schedulder, but if you were running on a system with SLURM installed, for example, you can have Nextflow convert the `cpus`, `memory`, `queue` and other process directives into the correct syntax at runtime by adding following lines to the `nextflow.config` file:
 
@@ -463,13 +463,13 @@ Learn how to control the resources allocated for executing processes.
 
 ---
 
-## 4. Use profiles to select preset configurations
+## 5. Use profiles to select preset configurations
 
 You may want to switch between alternative settings depending on what computing infrastructure you're using. For example, you might want to develop and run small-scale tests locally on your laptop, then run full-scale workloads on HPC or cloud.
 
 Nextflow lets you set up profiles that describe different configurations, which you can then select at runtime using a command-line argument, rather than having to modify the configuration file itself.
 
-### 4.1. Create profiles for switching between local development and execution on HPC
+### 5.1. Create profiles for switching between local development and execution on HPC
 
 Let's set up two alternative profiles; one for running small scale loads on a regular computer, where we'll use Docker containers, and one for running on a university HPC with a Slurm scheduler, where we'll use Conda packages.
 
@@ -495,7 +495,7 @@ profiles {
 
 You see that for the university HPC, we're also specifying resource limitations.
 
-### 4.2. Run the workflow with a profile
+### 5.2. Run the workflow with a profile
 
 To specify a profile in our Nextflow command line, we use the `-profile` argument.
 
@@ -529,7 +529,7 @@ As you can see, this allows us to toggle between configurations very convenientl
 If in the future we find other elements of configuration that are always co-occurring with these, we can simply add them to the corresponding profile(s).
 We can also create additional profiles if there are other elements of configuration that we want to group together.
 
-### 4.3. Create a test profile
+### 5.3. Create a test profile
 
 Profiles are not only for infrastructure configuration.
 We can also use them to set default values for workflow parameters, to make it easier for others to try out the workflow without having to gather appropriate input values themselves.
@@ -572,7 +572,7 @@ profiles {
 
 Just like for technical configuration profiles, you can set up multiple different profiles specifying parameters under any arbitrary name you like.
 
-### 4.4. Run the workflow locally with the test profile
+### 5.4. Run the workflow locally with the test profile
 
 Conveniently, profiles are not mutually exclusive, so we can specify multiple profiles in our command line using the following syntax `-profile <profile1>,<profile2>` (for any number of profiles).
 
