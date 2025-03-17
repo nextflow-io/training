@@ -651,7 +651,7 @@ _Before:_
 /*
  * Pipeline parameters
  */
-params.greeting = ['Hello','Bonjour','Holà']
+params.greeting = 'Holà mundo!'
 ```
 
 _After:_
