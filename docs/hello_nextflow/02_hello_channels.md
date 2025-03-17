@@ -673,6 +673,9 @@ In the workflow block, make the following code change:
 _Before:_
 
 ```groovy title="hello-channels.nf" linenums="31"
+    // declare an array of input greetings
+    greetings_array = ['Hello','Bonjour','Holà']
+
     // create a channel for inputs
     greeting_ch = Channel.of(greetings_array)
                          .flatten()
