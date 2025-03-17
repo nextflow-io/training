@@ -651,7 +651,7 @@ Check the output in the results directory:
 Holà mundo!
 ```
 
-Nextflow used the default value to name the output.
+Nextflow used the default value of the greeting parameter to create the output.
 
 #### 4.2.3. Run the workflow again with the parameter to override the default value
 
