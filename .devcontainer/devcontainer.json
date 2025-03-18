@@ -2,9 +2,9 @@
     "name": "nextflow-training",
 
     // Update this to pin the release tag before release
-    "image": "ghcr.io/nextflow-io/training:latest",
+    // "image": "ghcr.io/nextflow-io/training:latest",
     // Uncomment this and comment "image" when testing Dockerfile changes
-    // "build": { "dockerfile": "Dockerfile", "context": ".." },
+    "build": { "dockerfile": "Dockerfile", "context": ".." },
 
     "features": {
         "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {
