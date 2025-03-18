@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/devcontainers/universal:linux
+FROM mcr.microsoft.com/vscode/devcontainers/java:21
 
 USER root
 
@@ -9,13 +9,14 @@ RUN apt-get update --quiet && \
     apt-get install --quiet --yes \
         apt-transport-https \
         apt-utils \
-        sudo \
-        git \
-        less \
-        wget \
         curl \
-        tree \
+        git \
         graphviz \
+        less \
+        python3 \
+        sudo \
+        tree \
+        wget \
         software-properties-common && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
@@ -40,6 +41,12 @@ RUN mkdir -p /workspaces/.nextflow && \
 ENV NXF_EDGE=0
 ENV NXF_VER=24.10.4
 ENV NXF_HOME=/workspaces/.nextflow
+
+# Install Conda
+RUN wget -O Miniforge3.sh "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh" && \
+    bash Miniforge3.sh -b -p "${HOME}/conda" && \
+    source "${HOME}/conda/etc/profile.d/conda.sh" && \
+    conda activate
 
 # Install nextflow, nf-core, Mamba, and pytest-workflow
 RUN conda config --remove channels defaults && \
