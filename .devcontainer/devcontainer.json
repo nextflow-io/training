@@ -18,12 +18,14 @@
         "HOST_PROJECT_PATH": "/workspaces/training", // Codespaces and local devcontainers will both work with this.
         "SHELL": "/bin/bash" // Ush bash
     },
-	"onCreateCommand": "bash .devcontainer/setup.sh",
+    "onCreateCommand": "bash .devcontainer/setup.sh",
     "customizations": {
         "vscode": {
             "extensions": ["nf-core.nf-core-extensionpack"],
             // Use Python from conda
-            "settings": {"python.defaultInterpreterPath": "/opt/conda/bin/python"},
+            "settings": {
+                "python.defaultInterpreterPath": "/opt/conda/bin/python"
+            },
             // Use bash
             "terminal.integrated.defaultProfile.linux": "bash"
         }

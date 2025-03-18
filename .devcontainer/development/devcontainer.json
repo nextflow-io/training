@@ -9,12 +9,16 @@
 
     "features": {
         "./local-features/init": {},
-        "ghcr.io/devcontainers/features/docker-outside-of-docker:1": { "version": "latest" },
+        "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {
+            "version": "latest"
+        },
         "ghcr.io/devcontainers/features/java:1": { "version": "latest" },
-        "ghcr.io/rocker-org/devcontainer-features/miniforge:2": { "version": "latest" },
-		"./local-features/apptainer": {},
-		"./local-features/tower-agent": {},
-		"./local-features/conda-packages": {}
+        "ghcr.io/rocker-org/devcontainer-features/miniforge:2": {
+            "version": "latest"
+        },
+        "./local-features/apptainer": {},
+        "./local-features/tower-agent": {},
+        "./local-features/conda-packages": {}
     },
     "workspaceFolder": "/workspaces/training",
     "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/training,type=bind", // Used for local devcontainers, ignored in Codespaces.
@@ -33,7 +37,9 @@
         "vscode": {
             "extensions": ["nf-core.nf-core-extensionpack"],
             // Use Python from conda
-            "settings": {"python.defaultInterpreterPath": "/opt/conda/bin/python"},
+            "settings": {
+                "python.defaultInterpreterPath": "/opt/conda/bin/python"
+            },
             // Use bash
             "terminal.integrated.defaultProfile.linux": "bash"
         }
