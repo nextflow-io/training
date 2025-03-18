@@ -1,0 +1,3 @@
+nf-core
+ruff
+pre-commit
