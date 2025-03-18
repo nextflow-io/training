@@ -2,11 +2,16 @@
     "name": "nextflow-training",
 
     // Update this to pin the release tag before release
-    "image": "ghcr.io/nextflow-io/training:latest",
+    "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
     // Uncomment this and comment "image" when testing Dockerfile changes
-    // "build": { "dockerfile": "Dockerfile", "context": ".." },
+    //"build": { "dockerfile": "Dockerfile", "context": ".." },
 
     "features": {
+        "ghcr.io/devcontainers/features/java:1": {
+                "version": "17"
+            },
+        "ghcr.io/robsyme/features/nextflow": {},
+        "ghcr.io/rocker-org/devcontainer-features/miniforge:2": {},
         "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {
             "version": "latest"
         }
@@ -15,9 +20,11 @@
     "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/training,type=bind", // Used for local devcontainers, ignored in Codespaces.
     "remoteEnv": {
         "NXF_HOME": "/workspaces/.nextflow",
-        "HOST_PROJECT_PATH": "/workspaces/training" // Codespaces and local devcontainers will both work with this.
+        "HOST_PROJECT_PATH": "/workspaces/training", // Codespaces and local devcontainers will both work with this.
+        "NXF_EDGE": "0",
+        "NXF_VER": "24.10.4"
     },
-    "postCreateCommand": "nextflow -version; if [ -z \"$CODESPACES\" ]; then echo \"Devcontainers Development\"; else echo \"Codespaces Development\";  fi",
+    "postCreateCommand": "bash .devcontainer/postCreateCommand.sh",
     // Configure tool-specific properties.
     "customizations": {
         // Configure properties specific to VS Code.
