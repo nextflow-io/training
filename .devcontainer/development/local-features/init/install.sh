@@ -7,4 +7,4 @@ mkdir -p /workspaces/.nextflow
 mkdir -p /workspaces/training/
 
 # Copy over the welcome message
-cp .github/.devcontainer/local-features/init/welcome-message.txt /usr/local/etc/vscode-dev-containers/first-run-notice.txt
+cp welcome-message.txt /usr/local/etc/vscode-dev-containers/first-run-notice.txt

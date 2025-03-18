@@ -4,7 +4,7 @@
 // See .devcontainer/devcontainer.json for production config
 //
 {
-    "name": "nextflow-training-dev",
+    "name": "devcontainers-development",
     "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
 
     "features": {
