@@ -28,8 +28,7 @@
         "HOST_PROJECT_PATH": "/workspaces/training", // Codespaces and local devcontainers will both work with this.
         "SHELL": "/bin/bash" // Ush bash
     },
-    // Debug statements post-create
-    "postCreateCommand": "nextflow -version; if [ -z \"$CODESPACES\" ]; then echo \"Devcontainers Development\"; else echo \"Codespaces Development\";  fi",
+    "onCreateCommand": "bash .devcontainer/setup.sh",
     "customizations": {
         "vscode": {
             "extensions": ["nf-core.nf-core-extensionpack"],

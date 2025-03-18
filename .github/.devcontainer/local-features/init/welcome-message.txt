@@ -2,3 +2,4 @@
      Works in GitHub Codespaces, VS Code, or in Docker using the devcontainer CLI
 
 See https://training.nextflow.io for documentation and training materials.
+
