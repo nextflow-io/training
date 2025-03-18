@@ -1,11 +1,21 @@
 //
-// MAIN PRODUCTION DEVCONTAINER CONFIG
-// Uses image that is pre-built and pushed to GitHub
-// See .github/.devcontainer/devcontainer.json for build
+// DEVELOPMENT DEVCONTAINER CONFIG
+// Base configuration that is pre-built and pushed to GitHub
+// See .devcontainer/devcontainer.json for production config
 //
 {
-    "name": "nextflow-training",
-    "image": "ewels/nextflow-training:codespaces-no-dockerfile",
+    "name": "nextflow-training-dev",
+    "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+
+    "features": {
+        "./local-features/init": {},
+        "ghcr.io/devcontainers/features/docker-outside-of-docker:1": { "version": "latest" },
+        "ghcr.io/devcontainers/features/java:1": { "version": "latest" },
+        "ghcr.io/rocker-org/devcontainer-features/miniforge:2": { "version": "latest" },
+		"./local-features/apptainer": {},
+		"./local-features/tower-agent": {},
+		"./local-features/conda-packages": {}
+    },
     "workspaceFolder": "/workspaces/training",
     "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/training,type=bind", // Used for local devcontainers, ignored in Codespaces.
     "remoteUser": "root",
@@ -18,7 +28,8 @@
         "HOST_PROJECT_PATH": "/workspaces/training", // Codespaces and local devcontainers will both work with this.
         "SHELL": "/bin/bash" // Ush bash
     },
-	"onCreateCommand": "bash .devcontainer/setup.sh",
+    // Debug statements post-create
+    "postCreateCommand": "nextflow -version; if [ -z \"$CODESPACES\" ]; then echo \"Devcontainers Development\"; else echo \"Codespaces Development\";  fi",
     "customizations": {
         "vscode": {
             "extensions": ["nf-core.nf-core-extensionpack"],
