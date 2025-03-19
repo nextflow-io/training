@@ -86,7 +86,7 @@ Here you should see the following directory structure:
 
 - **`main.nf`** is the file we are going to invoke with the worldwide famous `nextflow run` command.
 - **`workflow.nf`** is where all the magic happens, it stores the order of execution of tasks and how data should be handled.
-- **`nextflow.config`**, you should know what this file does right?
+- **`nextflow.config`**, you should know what this file does right? JK, with it we can manage different directives for workflow execution.
 - **`modules`**, this is a really important folder since here we found dedicated files per each process of the pipeline.
 - **`bin`**, in this directory we store customized scripts that can be run within a given process.
 - **`data`** contains input data and related resources:
