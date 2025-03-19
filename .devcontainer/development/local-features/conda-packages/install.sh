@@ -8,12 +8,9 @@ conda config --set channel_priority strict
 conda update --quiet --yes --all
 
 conda install --quiet --yes --name base \
-    mamba \
     nextflow \
     nf-core \
     nf-test \
-    black \
-    prettier \
     pre-commit \
     linkify-it-py \
     pytest-workflow
