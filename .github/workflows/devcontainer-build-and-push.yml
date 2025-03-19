@@ -6,6 +6,9 @@ name: Docker image
 
 on:
   pull_request: # Build, don't push
+    paths:
+      - ".devcontainer/**"
+      - ".github/workflows/devcontainer-build-and-push.yml"
   push: { branches: [master] } # Build + push ('latest' tag)
   release: { types: [published] } # Build + push (release tag)
   workflow_dispatch: # Build + push (custom tag)
