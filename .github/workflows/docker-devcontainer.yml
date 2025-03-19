@@ -2,7 +2,7 @@
 # - Only pushes if push or release
 # - Builds without push for PRs to check the Dockerfile
 
-name: Docker image
+name: Build Docker [devcontainers]
 
 on:
   pull_request: # Build, don't push
