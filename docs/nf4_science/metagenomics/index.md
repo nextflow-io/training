@@ -6,7 +6,7 @@ hide:
 
 # Nextflow for Metagenomics
 
-This training course is designed for researchers focused metagenomics (WGS/shotgun) data analysis who are interested in developing or customizing taxonomic annotation pipelines.
+This training course is designed for researchers on focused metagenomics (WGS/shotgun) data analysis who are interested in developing or customizing taxonomic annotation pipelines.
 It builds on the [Hello Nextflow](../../hello_nextflow/) and [Nextflow for RNAseq](../rnaseq/) beginner training and demonstrates how to use Nextflow in the specific context of metagenomics data analysis.
 
 Specifically, this course demonstrates how to implement a simple read taxonomic annotation starting from removing host sequences, passing through estimating read abundance with Bayesian statistics, until generating complete reports.
@@ -25,7 +25,7 @@ Concretely, you will be able to:
 - Handle domain-specific files such as Kraken2 and Bracken reports resources appropriately
 - Run analysis for a single sample or leverage on Nextflow's dataflow paradigm to parallelize multi-sample analysis
 - Separate the processes and workflow in a more structured manner attempting to a first step in following [nf-core](https://nf-co.re/) guidelines
-- Use conditionals and operators to customize the analysis and a final report
+- Use conditionals and operators to customize the analysis and generate a final report
 
 ## Prerequisites
 
