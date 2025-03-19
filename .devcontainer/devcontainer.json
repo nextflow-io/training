@@ -7,7 +7,6 @@
     "name": "nextflow-training",
     "image": "ghcr.io/nextflow-io/training:latest",
     "workspaceFolder": "/workspaces/training",
-    "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/training,type=bind", // Used for local devcontainers, ignored in Codespaces.
     "remoteUser": "root",
     "remoteEnv": {
         // Nextflow installation version
@@ -15,7 +14,7 @@
         "NXF_EDGE": "0",
         "NXF_VER": "24.10.4",
         // Other env vars
-        "HOST_PROJECT_PATH": "/workspaces/training", // Codespaces and local devcontainers will both work with this.
+        "HOST_PROJECT_PATH": "/workspaces/training",
         "SHELL": "/bin/bash" // Ush bash
     },
     "onCreateCommand": "bash .devcontainer/setup.sh",

@@ -12,10 +12,4 @@ export PS1='\[\e[3;36m\]${PWD#/workspaces/} ->\[\e[0m\] '
 nextflow self-update
 nextflow -version
 
-# Debug message showing where we're running
-if [ -z \"$CODESPACES\" ]
-then
-    echo " 🖥️ Running on: Devcontainers Development"
-else
-    echo " 🌐 Running on: Codespaces Development"
-fi
+cat /usr/local/etc/vscode-dev-containers/first-run-notice.txt
