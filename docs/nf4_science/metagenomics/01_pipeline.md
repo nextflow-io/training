@@ -66,7 +66,7 @@ Let's take a moment to break down what we are seeing here:
 
 ### Kraken2
 
-Now, let's create the module for our taxonomic classifier. Following the Bowtie2 process, we are going to create `kraken2.nf` file inside the **modules** to write this code:
+Now, let's create the module for our taxonomic classifier. Following the Bowtie2 process, we are going to create `kraken2.nf` file inside the **modules** folder to write this code:
 
 ```groovy title="modules/kraken2.nf" linenums="1"
 process KRAKEN2 {
@@ -96,6 +96,33 @@ process KRAKEN2 {
 
 At a first glimpse, you can see that it follows the same structure as the previous process. The directives `tag`, `publishDir` and `container` play the same role as in Bowtie2, the `input` in this case is a tuple containing the `sample id`, the cleaned reads and the `*.sam` file (this one is declared just to maintain the correspondence between the output from Bowtie2 and the Kraken2 input). Also, the path to the kraken database is declared; more about this when writing the `main.nf` file. The output from this process will be a tuple containing the `sample id`, the path to the `.k2report` file, as well as the path to the `.kraken2` file. 
 
-The `script` statement will run the Kraken2 command along with a series of flags that include the path to the database, the number of threads to use, the path to the reports Kraken2 generates, the minimum number of 'hit groups' needed to make a classification call, the flag to report the minimizers and distinct minimizer count, the parameters that indicate that the received reads are paired-end and compressed in a _.gz_ format. You are strongly encouraged to check both the [protocol](https://www.nature.com/articles/s41596-022-00738-y) that documents this methodology, as well as the [source publication](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-019-1891-0) to understand how Kraken2 works and the type of files it generates; this [article](https://homolog.us/blogs/bioinfo/2017/10/25/intro-minimizer/) about minimimzers is also useful.    
+The `script` statement will run the Kraken2 command along with a series of flags that include the path to the database, the number of threads to use, the path to the reports Kraken2 generates, the minimum number of 'hit groups' needed to make a classification call, the flag to report the minimizers and distinct minimizer count, the parameters that indicate that the received reads are paired-end and compressed in a _.gz_ format. You are strongly encouraged to check both the [protocol](https://www.nature.com/articles/s41596-022-00738-y) that documents this methodology, as well as the [source publication](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-019-1891-0) to understand how Kraken2 works and the type of files it generates; this [article](https://homolog.us/blogs/bioinfo/2017/10/25/intro-minimizer/) about minimimzers is also useful.
 
+
+### Bracken
+
+Following the same procedure as with the two previous processes, let's create the file 'bracken.nf' inside **modules**:
+
+```groovy title="modules/bracken.nf" linenums="1"
+process BRACKEN {
+	tag "${sample_id}"
+	publishDir "$params.outdir/${sample_id}", mode:'copy'
+	container "community.wave.seqera.io/library/bracken:3.1--22a4e66ce04c5e01"
+
+	input:
+	tuple val(sample_id), path(k2report), path(kraken2)
+	path kraken2_db
+
+	output:
+	tuple val("${sample_id}"), path("${sample_id}.breport"), path("${sample_id}.bracken")
+
+	script:
+	"""
+	bracken -d $kraken2_db \
+	-i ${k2report} -r 250 -l S -t 10 \
+	-o ${sample_id}.bracken \
+	-w ${sample_id}.breport
+	"""
+}
+```
 
