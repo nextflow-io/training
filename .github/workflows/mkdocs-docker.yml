@@ -4,6 +4,9 @@ name: MkDocs image
 
 on:
   pull_request:
+    paths:
+      - ".github/mkdocs.Dockerfile"
+      - "requirements.txt"
   push:
     branches: [master]
 
