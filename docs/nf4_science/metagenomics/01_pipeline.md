@@ -64,7 +64,7 @@ Let's take a moment to break down what we are seeing here:
 - This process will produce a tuple containing the `sample id`, the path to the cleaned `reads` and the path to the `*.sam` file. This former file contains basically the overall information about the alignment of the sequences against the reference indexed genome; to learn more about this format, please check this [material](https://samtools.github.io/hts-specs/SAMv1.pdf).
 - Finally, the `script` statement contains two commands: _i)_ an environment variable is exported pointing to the directory where the indexed genome is stored (this is required by Bowtie2 for some reason, don't worry about it, just keep in mind if you plan to use another reference genome though); and _ii)_ the Bowtie2 command that includes again the path to the indexed genome, `-1` and `-2` capture the path to forward and reverse reads, respectively, `-S` provides the information about the desired format output, and `--un-conc-gz` is used to write the paired-end that fail to align concordantly to the reference genome (if this former parameter does not make sense to you, don't worry it took me a week to understand what it means, just check the [Bowtie2](https://bowtie-bio.sourceforge.net/bowtie2/manual.shtml) manual 😉).
 
-### Kraken2
+### 2.2 Kraken2
 
 Now, let's create the module for our taxonomic classifier. Following the Bowtie2 process, we are going to create `kraken2.nf` file inside the **modules** folder to write this code:
 
@@ -99,7 +99,7 @@ At a first glimpse, you can see that it follows the same structure as the previo
 The `script` statement will run the Kraken2 command along with a series of flags that include the path to the database, the number of threads to use, the path to the reports Kraken2 generates, the minimum number of 'hit groups' needed to make a classification call, the flag to report the minimizers and distinct minimizer count, the parameters that indicate that the received reads are paired-end and compressed in a _.gz_ format. You are strongly encouraged to check both the [protocol](https://www.nature.com/articles/s41596-022-00738-y) that documents this methodology, as well as the [source publication](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-019-1891-0) to understand how Kraken2 works and the type of files it generates; this [article](https://homolog.us/blogs/bioinfo/2017/10/25/intro-minimizer/) about minimimzers is also useful.
 
 
-### Bracken
+### 2.3 Bracken
 
 Following the same procedure as with the two previous processes, let's create the file `bracken.nf` inside **modules**:
 
