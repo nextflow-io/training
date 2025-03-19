@@ -33,7 +33,7 @@ Once we have a clear overview of what we want to achieve, we can start developin
 
 As previously, the objective with this module is to align the reads against a reference genome. Let's create then the `bowtie2.nf` file inside the **modules** folder to write the following code:
 
-```groovy title="bowtie2.nf" linenums="1"
+```groovy title="modules/bowtie2.nf" linenums="1"
 process BOWTIE2 {
 	  tag "${sample_id}"
 	  publishDir "$params.outdir/${sample_id}", pattern: "*.sam", mode:'copy'
@@ -50,6 +50,11 @@ process BOWTIE2 {
     """
     export BOWTIE2_INDEXES=/workspaces/training/nf4-science/metagenomics/data/oryza
     bowtie2 -x $bowtie2_index -1 ${reads[0]} -2 ${reads[1]} -p 2 -S ${sample_id}.sam --un-conc-gz ${sample_id}
- 	"""
+ 	  """
 }
 ```
+Let's take a moment to break down what we are seeing here:
+- The process name is `BOWTIE2`, this is important when creating the workflow file.
+- The `tag` directive is used to indicate which sample is being processed at a determined moment. This will be useful when running the pipeline.
+- `publishDir` points out to the directory where the ouput is stored. In this case we are taking the path from the parameters, and within it subfolders with the sample namse will be created to store each _.sam_ file, creating a copy of such files.
+- `container` indicates the docker container on which the process will be run. More information about this can be found in the part 1 of the [RNASeq course](../rnaseq). 
