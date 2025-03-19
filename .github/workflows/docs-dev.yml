@@ -30,4 +30,4 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
       - name: Build Docs Website
-        run: mike deploy --alias-type copy development
+        run: mike deploy --push --alias-type copy development
