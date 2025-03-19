@@ -50,7 +50,7 @@ process BOWTIE2 {
     """
     export BOWTIE2_INDEXES=/workspaces/training/nf4-science/metagenomics/data/oryza
     bowtie2 -x $bowtie2_index -1 ${reads[0]} -2 ${reads[1]} -p 2 -S ${sample_id}.sam --un-conc-gz ${sample_id}
- 	  """
+"""
 }
 ```
 
@@ -94,6 +94,8 @@ process KRAKEN2 {
 }
 ```
 
-At a first glimpse, you can see that it follows the same structure as the previous process. The directives `tag`, `publishDir` and `container` play the same role as in Bowtie2, the `input` in this case is a tuple containing the `sample id`, the cleaned reads and the _*.sam_ file (this one is declared just to maintain the correspondence between the output from Bowtie2 and the Kraken2 input). Also, the path to the kraken database is declared; more about this when writing the `main.nf` file. The output from this process will be a tuple containing the `sample id`, the path to the `.k2report` file, as well as the path to the `.kraken2` file. The `script` statement will run the Kraken2 command along with a series of flags that include the path to the database, the number of threads to use, the path to the reports Kraken2 generates, the minimum number of 'hit groups' needed to make a classification call, the flag to report the minimizers and distinct minimizer count, the parameters that indicate that the received reads are paired-end and compressed in a _.gz_ format. You are strongly encouraged to check both the [protocol](https://www.nature.com/articles/s41596-022-00738-y) that documents this methodology, as well as the [source publication](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-019-1891-0) to understand how Kraken2 works and the type of files it generates; this [article](https://homolog.us/blogs/bioinfo/2017/10/25/intro-minimizer/) about minimimzers is also useful.    
+At a first glimpse, you can see that it follows the same structure as the previous process. The directives `tag`, `publishDir` and `container` play the same role as in Bowtie2, the `input` in this case is a tuple containing the `sample id`, the cleaned reads and the `*.sam` file (this one is declared just to maintain the correspondence between the output from Bowtie2 and the Kraken2 input). Also, the path to the kraken database is declared; more about this when writing the `main.nf` file. The output from this process will be a tuple containing the `sample id`, the path to the `.k2report` file, as well as the path to the `.kraken2` file. 
+
+The `script` statement will run the Kraken2 command along with a series of flags that include the path to the database, the number of threads to use, the path to the reports Kraken2 generates, the minimum number of 'hit groups' needed to make a classification call, the flag to report the minimizers and distinct minimizer count, the parameters that indicate that the received reads are paired-end and compressed in a _.gz_ format. You are strongly encouraged to check both the [protocol](https://www.nature.com/articles/s41596-022-00738-y) that documents this methodology, as well as the [source publication](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-019-1891-0) to understand how Kraken2 works and the type of files it generates; this [article](https://homolog.us/blogs/bioinfo/2017/10/25/intro-minimizer/) about minimimzers is also useful.    
 
 
