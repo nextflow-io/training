@@ -90,9 +90,9 @@ Here you should see the following directory structure:
 - **`modules`**, this is a really important folder since here we found dedicated files per each process of the pipeline.
 - **`bin`**, in this directory we store customized scripts that can be run within a given process.
 - **`data`** contains input data and related resources:
-  - _An indexed genome_ within the `oryza` folder representing the host genome to which we want to map the reads for contamination removal.
-  - _viral_db_ is directory that contains Kraken2 database necessary for both taxonomic annotation and species abundance re-estimation.
-  - _samplesheet.csv_ listing the IDs and paths of the example data files, for processing in batches.
+  - An indexed genome within the `oryza` folder representing the host genome to which we want to map the reads for contamination removal.
+  - _viral_db_ is a directory that contains Kraken2 database necessary for both taxonomic annotation and species abundance re-estimation.
+  - _samplesheet.csv_ lists the IDs and paths of the example data files, for processing in batches.
   - _samples_ directory is where the raw sequences are stored. The names correspond to accession numbers that you can search on the [Sequence Read Archive](https://www.ncbi.nlm.nih.gov/sra)
 
 Now, to begin the course, click on the arrow in the bottom right corner of this page.
