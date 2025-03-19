@@ -24,3 +24,32 @@ As you can see from the picture, the pipeline will undergo as follows:
 !!!tip
 
     If you feel a bit overwhelmed by the theoretical background of the methodology, we strongly encourage you to check this [Carpentries](https://carpentries-lab.github.io/metagenomics-analysis/) lesson first, where each step will be explained step by step using interesting examples.
+
+## 2. Modules
+
+Once we have a clear overview of what we want to achieve, we can start developing the modules that are going to perform each task; you can think of them as building blocks that we can stack up to construct a big tower (this is valid for this pipeline as it is linear).
+
+### 2.1 Bowtie2
+
+As previously, the objective with this module is to align the reads against a reference genome. Let's create then the `bowtie2.nf` file inside the **modules** folder to write the following code:
+
+```groovy title="bowtie2.nf" linenums="1"
+process BOWTIE2 {
+	  tag "${sample_id}"
+	  publishDir "$params.outdir/${sample_id}", pattern: "*.sam", mode:'copy'
+    container "community.wave.seqera.io/library/bowtie2:2.5.4--d51920539234bea7"
+
+    input:
+	  tuple val(sample_id), path(reads)
+	  path bowtie2_index
+
+    output:
+    tuple val("${sample_id}"), path("${sample_id}.1"), path("${sample_id}.2"), path("${sample_id}.sam")
+
+    script:
+    """
+    export BOWTIE2_INDEXES=/workspaces/training/nf4-science/metagenomics/data/oryza
+    bowtie2 -x $bowtie2_index -1 ${reads[0]} -2 ${reads[1]} -p 2 -S ${sample_id}.sam --un-conc-gz ${sample_id}
+ 	"""
+}
+```
