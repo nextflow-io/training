@@ -40,8 +40,8 @@ process BOWTIE2 {
     container "community.wave.seqera.io/library/bowtie2:2.5.4--d51920539234bea7"
 
     input:
-	  tuple val(sample_id), path(reads)
-	  path bowtie2_index
+    tuple val(sample_id), path(reads)
+    path bowtie2_index
 
     output:
     tuple val("${sample_id}"), path("${sample_id}.1"), path("${sample_id}.2"), path("${sample_id}.sam")
