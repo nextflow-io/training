@@ -2,6 +2,9 @@
 
 In the field of metagenomics data analysis, there is an endless universe of pipelines or methodologies you can follow to explore and characterize your samples. 
 For this course, we propose to wrap with Nextflow the methodology published by [Jennifer Lu et al. (2022)](https://www.nature.com/articles/s41596-022-00738-y). 
+
+## 1. Workflow
+
 The workflow is designed as follows:
 
 <p align="center">
@@ -9,6 +12,7 @@ The workflow is designed as follows:
 </p>
 
 As you can see from the picture, the pipeline will undergo as follows:
+
 1. The input is **FASTQ** files from one or multiple samples. For this course, we will be using only paired-end reads recovered from an oligotrophic, phosphorus-deficient pond in Cuatro Ciénegas, Mexico [(Okie et al.,2020)](https://elifesciences.org/articles/49816); the BioProject accesion number is [PRJEB22811](https://www.ncbi.nlm.nih.gov/bioproject/PRJEB22811).
 2. **Host removal** with [**Bowtie2**](https://bowtie-bio.sourceforge.net/bowtie2/manual.shtml) by aligning the reads against an indexed reference genome. In this case we are using the index of _O. zativa_ given the storage limitations we have in this codespace, although you can use any organism of your interest by building your own index or downloading a [precomputed](https://benlangmead.github.io/aws-indexes/bowtie) one.
 3. **Taxonomic classification** with [**Kraken2**](https://ccb.jhu.edu/software/kraken2/). This tools relies on a indexed database that can be [downloaded](https://benlangmead.github.io/aws-indexes/k2) or you can build your customized version following specific [instructions](https://avilpage.com/2024/07/mastering-kraken2-build-custom-db.html). We will be using the Viral database given the storage limitations (I know, it's a bit annoying), therefore this methodology is pointing at "viral metagenomics"; however, by just switching to any other database you can analyze your samples to annotate bacteria, archaea and more.
