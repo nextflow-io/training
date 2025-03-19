@@ -31,7 +31,7 @@ Once we have a clear overview of what we want to achieve, we can start developin
 
 ### 2.1 Bowtie2
 
-As previously, the objective with this module is to align the reads against a reference genome. Let's create then the `bowtie2.nf` file inside the **modules** folder to write the following code:
+As previously, the objective with this module is to clean the reads by aligning them against a reference genome. Let's create then the `bowtie2.nf` file inside the **modules** folder to write the following code:
 
 ```groovy title="modules/bowtie2.nf" linenums="1"
 process BOWTIE2 {
@@ -53,8 +53,47 @@ process BOWTIE2 {
  	  """
 }
 ```
+
 Let's take a moment to break down what we are seeing here:
+
 - The process name is `BOWTIE2`, this is important when creating the workflow file.
 - The `tag` directive is used to indicate which sample is being processed at a determined moment. This will be useful when running the pipeline.
 - `publishDir` points out to the directory where the ouput is stored. In this case we are taking the path from the parameters, and within it subfolders with the sample namse will be created to store each _.sam_ file, creating a copy of such files.
-- `container` indicates the docker container on which the process will be run. More information about this can be found in the part 1 of the [RNASeq course](../rnaseq). 
+- `container` indicates the docker container on which the process will be run. More information about this can be found in the part 1 of the [RNASeq course](../rnaseq).
+- The `input` for this process will be the paired-end reads as well as the path to the bowtie index. More about this when creating the `main.nf` file.
+- This process will produce a tuple containing the `sample name`, the path to the cleaned `reads` and the path to the _*.sam_ file. This former file contains basically the overall information about the alignment of the sequences against the reference indexed genome; to learn more about this format, please check this [material](https://samtools.github.io/hts-specs/SAMv1.pdf).
+- Finally, the `script` statement contains two commands: _i)_ an environment variable is exported pointing to the directory where the indexed genome is stored (this is required by Bowtie2 for some reason, don't worry about it, just keep in mind if you plan to use another reference genome though); and _ii)_ the bowtie2 command that includes again the path to the indexed genome, `-1` and `-2` capture the path to forward and reverse reads, respectively, `-S` provides the information about the desired format output, and `--un-conc-gz` is used to write the paired-end that fail to align concordantly to the reference genome (if this former parameter does not make sense to you, don't worry it took me a week to understand what it means, just check the [Bowtie2](https://bowtie-bio.sourceforge.net/bowtie2/manual.shtml) manual 😉).
+
+### Kraken2
+
+Now, let's create the module for our taxonomic classifier. Following the Bowtie2 process, we are going to create `kraken2.nf` file inside the **modules** to write this code:
+
+```groovy title="modules/kraken2.nf" linenums="1"
+process KRAKEN2 {
+	tag "${sample_id}"
+	publishDir "$params.outdir/${sample_id}", mode:'copy'
+	container "community.wave.seqera.io/library/kraken2:2.14--83aa57048e304f01"
+
+	input:
+	tuple val(sample_id), path(reads_1), path(reads_2), path(sam)
+	path kraken2_db
+
+	output:
+	tuple val("${sample_id}"), path("${sample_id}.k2report"), path("${sample_id}.kraken2")
+
+	script:
+	"""
+	kraken2 --db $kraken2_db --threads 2 \
+	--report ${sample_id}.k2report \
+	--report-minimizer-data \
+	--minimum-hit-groups 2 \
+	--gzip-compressed \
+	--paired \
+	${reads_1} ${reads_2} > ${sample_id}.kraken2
+	"""
+}
+```
+
+At a first glimpse, you can see that it follows the same structure as the previous process. The directives `tag`, `publishDir` and `container` play the same role as in Bowtie2, the `input` in this case is a tuple containing the sample name, the cleaned reads and the _*.sam_ file (this one is declared just to maintain the correspondence between the output from Bowtie2 and the Kraken2 input). Also, the path to the kraken database is declared; more about this when writing the `main.nf` file. The output from this process will be a tuple containing the `sample name`, the path to the `.k2report` file, as well as the path to the `.kraken2` file. The `script` statement  
+
+
