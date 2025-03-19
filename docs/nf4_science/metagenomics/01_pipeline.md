@@ -35,8 +35,8 @@ As previously, the objective with this module is to clean the reads by aligning 
 
 ```groovy title="modules/bowtie2.nf" linenums="1"
 process BOWTIE2 {
-	  tag "${sample_id}"
-	  publishDir "$params.outdir/${sample_id}", pattern: "*.sam", mode:'copy'
+    tag "${sample_id}"
+    publishDir "$params.outdir/${sample_id}", pattern: "*.sam", mode:'copy'
     container "community.wave.seqera.io/library/bowtie2:2.5.4--d51920539234bea7"
 
     input:
