@@ -84,12 +84,12 @@ Here you should see the following directory structure:
 
 **This a summarized description of the files and directories found:**
 
-- **`main.nf` file** is the file we are going to invoke with the worldwide famous `nextflow run` command.
-- **`workflow.nf` file** is where all the magic happens, it stores the order of execution of tasks and how data should be handled.
+- **`main.nf`** is the file we are going to invoke with the worldwide famous `nextflow run` command.
+- **`workflow.nf`** is where all the magic happens, it stores the order of execution of tasks and how data should be handled.
 - **`nextflow.config`**, you should know what this file does right?
-- **`modules` directory**, this is a really important folder since here we found dedicated files per each process of the pipeline.
-- **`bin` directory**, in this directory we store customized scripts that can be run within a given process.
-- **`data` directory** contains input data and related resources:
+- **`modules`**, this is a really important folder since here we found dedicated files per each process of the pipeline.
+- **`bin`**, in this directory we store customized scripts that can be run within a given process.
+- **`data`** contains input data and related resources:
   - _An indexed genome_ within the `oryza` folder representing the host genome to which we want to map the reads for contamination removal.
   - _viral_db_ is directory that contains Kraken2 database necessary for both taxonomic annotation and species abundance re-estimation.
   - _samplesheet.csv_ listing the IDs and paths of the example data files, for processing in batches.
