@@ -129,4 +129,96 @@ For this and the following process, we will focused only on the features that di
 
 ### 2.4 Krona
 
-To generate the Krona plots (this interactive pie charts especially common in the metagenomics field), we will need 2 processes. The first one is 
+To generate the Krona plots (this interactive pie charts especially common in the metagenomics field), we will need 2 processes. The first one is going to execute the script `kreport2krona.py`, provided as part of [KrakenTools](https://github.com/jenniferlu717/KrakenTools), using the Bracken report as input to produce a plain text file that contains the species abundance information. Let's create the file `kReport2Krona.nf` inside **modules**, and introduce the following code:
+
+```groovy title="modules/kReport2Krona.nf" linenums="1"
+process K_REPORT_TO_KRONA {
+	tag "${sample_id}"
+	publishDir "$params.outdir/${sample_id}", mode:'copy'
+	container "community.wave.seqera.io/library/krakentools:1.2--db94e0b19cfa397b"
+
+	input:
+	tuple val(sample_id), path(b_report), path(bracken)
+
+	output:
+	tuple val("${sample_id}"), path("${sample_id}.b.krona.txt")
+
+	script:
+	"""
+	kreport2krona.py -r ${b_report} \
+	-o ${sample_id}.b.krona.txt \
+	--no-intermediate-ranks
+	"""
+}
+```
+
+As seen before, this process is taking as input the exact output from Bracken in a tuple form, and it is going to generate another tuple containing `sample id` and the `*.txt` file with the abundance numbers. Within the `script` execution an additional flag that indicates leaving out non-traditional ranks.
+
+Now, the following process will use the plain `*.txt` to render the Krona plot in a self-contained `*.html` file. I guess that by this point you already what is coming: let's create the file `ktImportText.nf` inside **modules**, and write the code:
+
+```groovy title="modules/ktImportText.nf" linenums="1"
+process KT_IMPORT_TEXT {
+	tag "${sample_id}"
+	publishDir "$params.outdir/${sample_id}", mode:'copy'
+	container "community.wave.seqera.io/library/krona:2.8.1--2f750080982f027e"
+
+	input:
+	tuple val(sample_id), path(krona_txt)
+
+	output:
+	path "${sample_id}.krona.html"
+
+	script:
+	"""
+	ktImportText ${krona_txt} \
+	-o ${sample_id}.krona.html
+	"""
+}
+```
+
+The only output from this process will be the Krona plot that can be directly opened using a regular modern browser, just like the one you are using to follow this tutorial. With this process, the execution of the pipeline for a single sample is finished, we can proceed then to create the files that control the execution of the pipeline.
+
+## 3. Workflow.nf
+
+Now it is time to explicitly write where the processes files can be found, as well as the order of execution of the processes. For this we are going to create the file `workflow.nf` (no, this time it does not go inside the **modules** directory) to import the required process:
+
+```groovy title="workflow.nf" linenums="1"
+/*
+ * required tasks
+ */
+include { BOWTIE2 		        } 	from './modules/bowtie2.nf'
+include { KRAKEN2 		        }	  from './modules/kraken2.nf'
+include { BRACKEN 		        } 	from './modules/bracken.nf'
+include { K_REPORT_TO_KRONA 	} 	from './modules/kReport2Krona.nf'
+include { KT_IMPORT_TEXT 	    } 	from './modules/ktImportText.nf'
+```
+
+This way of importing process is composed by two parts, the first one invokes the name of the process inside the curly brackets (please not that they should match exactly with given names in the corresponding files), and the second one points out to the relative path where the files are located. Now, let's write what are the primary input for the workflow and the order of execution of the processes:
+
+```groovy title="workflow.nf" linenums="10"
+/*
+ * workflow
+ */
+
+workflow kraken2Flow {
+	// required inputs
+	take:
+		bowtie2_index
+		kraken2_db
+		reads_ch
+	// workflow implementation
+	main:
+		BOWTIE2(reads_ch, bowtie2_index)
+		KRAKEN2(BOWTIE2.out, kraken2_db)
+		BRACKEN(KRAKEN2.out, kraken2_db)
+		K_REPORT_TO_KRONA(BRACKEN.out)
+		KT_IMPORT_TEXT(K_REPORT_TO_KRONA.out)
+```
+
+In this declaration you see that we need three primary inputs for the pipeline: the indexed reference genome for Bowtie2, the indexed database for Kraken2 and Bracken, and the paths to the reads; when creating the `main.nf`, you will see how to specify these paths. In the block `main`, you see the names of the processes with one or more parameters inside the parenthesis depicting the exact data flow:
+
+1. BOWTIE2(reads_ch, bowtie2_index) will be the first executed process using the reads and the indexed genome; the other processes must wait until this one is finished.
+2. Once BOWTIE2 has completed the task, KRAKEN2 will take the output, along with the database path to perform the specified task; the remaining process are on hold until Kraken2 is finished.
+3. BRACKEN, in turn, will take KRAKEN2 output to run the abundance re-estimation using the same database; K_REPORT_TO_KRONA and KT_IMPORT_TEXT can not be run until BRACKEN is finished with its task.
+4. Finally, K_REPORT_TO_KRONA, and subsequently KT_IMPORT_TEXT, will be run to generate our final goal file which is the Krona plot.
+
