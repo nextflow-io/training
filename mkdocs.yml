@@ -73,7 +73,7 @@ theme:
   name: material
   custom_dir: docs/assets/overrides
   language: en
-  logo: assets/img/nextflow-logo-white.png
+  logo: assets/img/nextflow_logo_dark.png
   favicon: assets/img/nextflow-icon.png
   palette:
     # Palette toggle for dark mode
