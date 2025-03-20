@@ -20,24 +20,28 @@
         "../local-features/tower-agent": {},
         "../local-features/conda-packages": {}
     },
-    "workspaceFolder": "/workspaces/training",
+    "workspaceFolder": "${localWorkspaceFolder}",
+    "workspaceMount": "source=${localWorkspaceFolder},target=${localWorkspaceFolder},type=bind",
     "remoteUser": "root",
     "remoteEnv": {
         // Nextflow installation version
-        "NXF_HOME": "/workspaces/.nextflow",
+        "NXF_HOME": "/workspaces/training/.nextflow",
         "NXF_EDGE": "0",
         "NXF_VER": "24.10.4",
         // Other env vars
         "HOST_PROJECT_PATH": "/workspaces/training",
         "SHELL": "/bin/bash" // Ush bash
     },
-    "onCreateCommand": "bash .devcontainer/setup.sh",
+    "onCreateCommand": "bash ${localWorkspaceFolder}/.devcontainer/setup.sh",
+    "postCreateCommand": "mkdir -p /workspaces && rm -rf /workspaces/training && ln -s ${localWorkspaceFolder} /workspaces/training",
     "customizations": {
         "vscode": {
             "extensions": ["nf-core.nf-core-extensionpack"],
             // Use Python from conda
             "settings": {
-                "python.defaultInterpreterPath": "/opt/conda/bin/python"
+                "python.defaultInterpreterPath": "/opt/conda/bin/python",
+                "terminal.integrated.cwd": "/workspaces/training",
+                "terminal.integrated.defaultLocation": "workspace"
             },
             // Use bash
             "terminal.integrated.defaultProfile.linux": "bash"
