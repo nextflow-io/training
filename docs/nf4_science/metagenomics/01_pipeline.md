@@ -334,7 +334,7 @@ output/
     └── ERR2143758.sam
 ```
 
-Feel free to explore each of the files to understand each process and how data were handled. The file in which we are more interested is the `*.html` since this is the Krona plot, you can either download or install the [preview](https://marketplace.visualstudio.com/items?itemName=ms-vscode.live-server) extension for Visual Studio.
+Feel free to explore each of the files to understand each process and how data were handled. The file in which we are more interested is the `*.html` since this is the Krona plot, you can either download or install the [preview](https://marketplace.visualstudio.com/items?itemName=ms-vscode.live-server) extension for Visual Studio. Keep in mind that we used the viral database, therefore you will be seeing information only about the viruses contained in the samples, to perform the analysis with bacteria and beyond you have to download a different database or build your own.
 
 ### Takeaway
 
