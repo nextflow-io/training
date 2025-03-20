@@ -78,6 +78,18 @@ Here you should see the following directory structure:
 
 ```
 
+However, there are some files that we need to download since they are quite large to be permanently stored within the GitHub repository. The file (or set of files) that we are going to download is the required database by Kraken2 and Bracken. Run the following commands in the exact order and wait until all of them are finished:
+
+```bash
+mkdir -p data/viral_db && cd "$_"
+wget --no-check-certificate --no-proxy 'https://genome-idx.s3.amazonaws.com/kraken/k2_viral_20241228.tar.gz'
+tar -xvzf k2_viral_20241228.tar.gz
+rm -r k2_viral_20241228.tar.gz
+cd -
+```
+
+You should be back at the `nf4-science/metagenomics/` directory.
+
 !!!note
 
     Don't panic. This is just a glipmse of the material, and we are going to dig into each necessary file for the analysis.
@@ -90,7 +102,7 @@ Here you should see the following directory structure:
 - **`modules`**, this is a really important folder since here we find dedicated files per each process of the pipeline.
 - **`bin`**, in this directory we store customized scripts that can be run within a given process.
 - **`data`** contains input data and related resources:
-  - An indexed genome within the `oryza` folder representing the host genome to which we want to map the reads for contamination removal.
+  - An indexed genome within the `yeast` folder representing the host genome to which we want to map the reads for contamination removal.
   - _viral_db_ is a directory that contains Kraken2 database necessary for both taxonomic annotation and species abundance re-estimation.
   - _samplesheet.csv_ lists the IDs and paths of the example data files, for processing in batches.
   - _samples_ directory is where the raw sequences are stored. The names correspond to accession numbers that you can search on the [Sequence Read Archive](https://www.ncbi.nlm.nih.gov/sra)
