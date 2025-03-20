@@ -178,7 +178,7 @@ process KT_IMPORT_TEXT {
 
 The only output from this process will be the Krona plot that can be directly opened using a regular modern browser, just like the one you are using to follow this tutorial. With this process, the execution of the pipeline for a single sample is finished, we can proceed then to create the files that control the execution of the pipeline.
 
-## 3. Workflow.nf
+## 3. workflow.nf
 
 Now it is time to explicitly write where the processes files can be found, as well as the order of execution of the processes. For this we are going to create the file `workflow.nf` (no, this time it does not go inside the **modules** directory) to import the required process:
 
@@ -215,10 +215,77 @@ workflow kraken2Flow {
 		KT_IMPORT_TEXT(K_REPORT_TO_KRONA.out)
 ```
 
-In this declaration you see that we need three primary inputs for the pipeline: the indexed reference genome for Bowtie2, the indexed database for Kraken2 and Bracken, and the paths to the reads; when creating the `main.nf`, you will see how to specify these paths. In the block `main`, you see the names of the processes with one or more parameters inside the parenthesis depicting the exact data flow:
+In this declaration you see that we need three primary inputs for the pipeline: the indexed reference genome for Bowtie2, the indexed database for Kraken2 and Bracken, and the paths to the reads; when creating the `nextflow.config`, you will see how to specify these paths. In the block `main`, you see the names of the processes with one or more parameters inside the parenthesis depicting the exact data flow:
 
 1. BOWTIE2(reads_ch, bowtie2_index) will be the first executed process using the reads and the indexed genome; the other processes must wait until this one is finished.
 2. Once BOWTIE2 has completed the task, KRAKEN2 will take the output, along with the database path to perform the specified task; the remaining process are on hold until Kraken2 is finished.
 3. BRACKEN, in turn, will take KRAKEN2 output to run the abundance re-estimation using the same database; K_REPORT_TO_KRONA and KT_IMPORT_TEXT can not be run until BRACKEN is finished with its task.
 4. Finally, K_REPORT_TO_KRONA, and subsequently KT_IMPORT_TEXT, will be run to generate our final goal file which is the Krona plot.
+
+## 4. main.nf
+
+We are getting closer to run the pipeline, let's create the `main.nf` file. The within this file, we create banner with the pipeline name (you should have learnt how to do this during the [Hello Nextflow](../../hello_nextflow) right?) to be shown when the execution starts.
+
+```groovy title="main.nf" linenums="1"
+#!/usr/bin/env nextflow
+
+log.info """\
+	__________________________________________________________________________________________________________________________________________________
+	__________________________________________________________________________________________________________________________________________________
+	>=>   >=>                       >=>                                         >=> >=>>=>                                >=>
+	>=>  >=>                        >=>                           >=>>=>       >=>  >>   >=>                              >=>
+	>=> >=>     >> >==>    >=> >=>  >=>  >=>   >==>    >==>>==>  >>   >=>     >=>   >>    >=> >> >==>    >=> >=>     >==> >=>  >=>   >==>    >==>>==>
+	>>=>>        >=>     >=>   >=>  >=> >=>  >>   >=>   >=>  >=>     >=>     >=>    >==>>=>    >=>     >=>   >=>   >=>    >=> >=>  >>   >=>   >=>  >=>
+	>=>  >=>     >=>    >=>    >=>  >=>=>    >>===>>=>  >=>  >=>    >=>     >=>     >>    >=>  >=>    >=>    >=>  >=>     >=>=>    >>===>>=>  >=>  >=>
+	>=>   >=>    >=>     >=>   >=>  >=> >=>  >>         >=>  >=>  >=>      >=>      >>     >>  >=>     >=>   >=>   >=>    >=> >=>  >>         >=>  >=>
+	>=>     >=> >==>      >==>>>==> >=>  >=>  >====>   >==>  >=> >======> >=>       >===>>=>  >==>      >==>>>==>    >==> >=>  >=>  >====>   >==>  >=>
+	__________________________________________________________________________________________________________________________________________________
+	__________________________________________________________________________________________________________________________________________________
+"""
+.stripIndent()
+```
+
+The other part of this `main.nf` file is to invoke the workflow from the './workflow.nf' file, and then stating the order of the execution:
+
+1. Creating a channel for the paired-end reads using the channel factory [`fromFilePairs`](https://nextflow.io/docs/latest/reference/channel.html#fromfilepairs).
+2. Running the workflow using the reference indexed genome, the Kraken2 database and the channel created for the reads. 
+
+```groovy title="main.nf" linenums="17"
+include { kraken2Flow } from './workflow.nf'
+
+workflow {
+
+	reads_ch = Channel .fromFilePairs( params.reads, checkIfExists:true )
+	kraken2Flow( params.bowtie2_index, params.kraken2_db, reads_ch )
+}
+```
+
+## 5. nextflow.config
+
+Finally, we create the file `nextflow.config` where we indicate the input parameters of the pipeline and enable its execution using docker to pull the containers required by each process:
+
+```groovy title="nextflow.config" linenums="1"
+/*
+ * pipeline input parameters
+ */
+
+params {
+    reads                                 = null
+    outdir                                = "/workspaces/training/nf4-science/metagenomics/output"
+    bowtie2_index                         = "/workspaces/training/nf4-science/metagenomics/data/oryza/oryza"
+    kraken2_db                            = "/workspaces/training/nf4-science/metagenomics/data/viral_db"
+}
+
+// Enable using docker as the container engine to run the pipeline
+docker.enabled = true
+```
+
+## 6. Execution
+
+That's it, we are all set to run the pipeline, let's just use one of the samples provided, you can choose any of them and the run the following command:
+
+ERR2143758
+
+
+
 
