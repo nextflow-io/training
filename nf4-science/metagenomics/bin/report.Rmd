@@ -1,0 +1,67 @@
+---
+title: "Kraken2/Bracken data visualization from Nextflow metagenomics training material"
+author: "User"
+date: "2025"
+output:
+    rmdformats::downcute:
+      self_contained: true
+      thumbnails: false
+      lightbox: true
+      gallery: true
+      toc_depth: 2
+      highlight: tango
+params:
+    args: ''
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(warning = FALSE, message = FALSE)
+args <- params$args
+file <- args[1]
+```
+
+# Absolute abundance
+
+```{r abundance_plot, echo=FALSE}
+library(phyloseq)
+library(ggplot2)
+
+data_biom <- import_biom(file)
+colnames(data_biom@tax_table@.Data)<- c("Kingdom", "Phylum", "Class", "Order", "Family", "Genus", "Species")
+plot_bar(data_biom, fill = "Genus")+
+  guides(fill = guide_legend(ncol = 2))
+```
+
+# α-Diversity
+
+```{r alpha_plot, echo=FALSE}
+plot_richness(data_biom, measures=c("Chao1", "Shannon"))
+```
+
+# β-Diversity
+
+## Heatmap
+
+```{r heatmap, echo=FALSE}
+plot_heatmap(data_biom, method = "PCoA", distance = "(A+B-2*J)/(A+B-J)",
+             taxa.label = "Genus", taxa.order = "Genus",
+             trans=NULL, low="beige", high="red", na.value="beige")
+```
+
+## Ordination
+
+```{r pcoa_plot, echo=FALSE}
+data.ord <- ordinate(data_biom, "PCoA", "bray")
+plot_ordination(data_biom, data.ord, type="split", color="Genus",
+                title="biplot")+
+  geom_point(size=3)
+```
+
+# Network Analysis
+
+```{r network, echo=FALSE}
+plot_net(data_biom, distance = "(A+B-2*J)/(A+B)", type = "taxa",
+         maxdist = 0.8, color="Genus")+
+  guides(color = guide_legend(ncol = 2))
+```
