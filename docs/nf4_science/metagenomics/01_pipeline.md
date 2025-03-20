@@ -189,8 +189,8 @@ Now it is time to explicitly write where the processes files can be found, as we
 include { BOWTIE2 		        } 	from './modules/bowtie2.nf'
 include { KRAKEN2 		        }	from './modules/kraken2.nf'
 include { BRACKEN 		        } 	from './modules/bracken.nf'
-include { K_REPORT_TO_KRONA 	    } 	from './modules/kReport2Krona.nf'
-include { KT_IMPORT_TEXT 	            } 	from './modules/ktImportText.nf'
+include { K_REPORT_TO_KRONA 	     } 	from './modules/kReport2Krona.nf'
+include { KT_IMPORT_TEXT 	           } 	from './modules/ktImportText.nf'
 ```
 
 This way of importing process is composed by two parts, the first one invokes the name of the process inside the curly brackets (please not that they should match exactly with given names in the corresponding files), and the second one points out to the relative path where the files are located. Now, let's write what are the primary input for the workflow and the order of execution of the processes:
