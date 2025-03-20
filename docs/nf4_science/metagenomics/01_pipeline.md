@@ -285,7 +285,7 @@ docker.enabled = true
 That's it, we are all set to run the pipeline, let's just use one of the samples provided, you can choose any of them and the run the following command:
 
 ```bash
-nextflow run main.nf --reads 'data/samples/ERR2143758/ERR2143758_{1,2}.fastq'
+nextflow run main.nf --reads 'data/samples/ERR2143758/ERR2143768_{1,2}.fastq'
 ```
 On the output of the command line, you will see:
 
@@ -324,13 +324,13 @@ And you will see the following:
 ```console title="Output contents"
 output/
 └── ERR2143758
-    ├── ERR2143758.b.krona.txt
-    ├── ERR2143758.bracken
-    ├── ERR2143758.breport
-    ├── ERR2143758.k2report
-    ├── ERR2143758.kraken2
-    ├── ERR2143758.krona.html
-    └── ERR2143758.sam
+    ├── ERR2143768.b.krona.txt
+    ├── ERR2143768.bracken
+    ├── ERR2143768.breport
+    ├── ERR2143768.k2report
+    ├── ERR2143768.kraken2
+    ├── ERR2143768.krona.html
+    └── ERR2143768.sam
 ```
 
 Feel free to explore each of the files to understand each process and how data were handled. The file in which we are more interested is the `*.html` since this is the Krona plot, you can either download or install the [preview](https://marketplace.visualstudio.com/items?itemName=ms-vscode.live-server) extension for Visual Studio. Keep in mind that we used the viral database, therefore you will be seeing information only about the viruses contained in the samples, to perform the analysis with bacteria and beyond you have to download a different database or build your own.
