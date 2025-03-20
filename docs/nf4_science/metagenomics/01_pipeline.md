@@ -315,12 +315,14 @@ executor >  local (5)
 
 ```
 
-Congratulations! you just have performed a whole taxonomic annotation and abundance estimation of your sample. Now, it's your time to analyze the results, you can find all the ouput files in the **output** directory:
+Now, it's your time to analyze the results, you can find all the ouput files in the **output** directory, run the `tree` command:
 
 ```bash
 tree output
 ```
+And you will see the following:
 
+```console title="Output contents"
 output/
 └── ERR2143758
     ├── ERR2143758.b.krona.txt
@@ -330,7 +332,14 @@ output/
     ├── ERR2143758.kraken2
     ├── ERR2143758.krona.html
     └── ERR2143758.sam
+```
 
+Feel free to explore each of the files to understand each process and how data were handled. The file in which we are more interested is the `*.html` since this is the Krona plot, you can either download or install the [preview](https://marketplace.visualstudio.com/items?itemName=ms-vscode.live-server) extension for Visual Studio.
 
+### Takeaway
 
+Congratulations! you just have performed a whole taxonomic annotation and abundance estimation of your metagenomics sample.
 
+### What's next?
+
+Learn how to modify the workflow to process multiple samples in parallel, create a report with different diversity measurements, execute customized scripts, and use Nextflow operators and conditionals to control the workflow.
