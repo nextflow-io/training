@@ -250,7 +250,7 @@ The other part of this `main.nf` file is to invoke the workflow from the './work
 1. Creating a channel for the paired-end reads using the channel factory [`fromFilePairs`](https://nextflow.io/docs/latest/reference/channel.html#fromfilepairs).
 2. Running the workflow using the reference indexed genome, the Kraken2 database and the channel created for the reads. 
 
-```groovy title="main.nf" linenums="17"
+```groovy title="main.nf" linenums="18"
 include { kraken2Flow } from './workflow.nf'
 
 workflow {
@@ -284,7 +284,13 @@ docker.enabled = true
 
 That's it, we are all set to run the pipeline, let's just use one of the samples provided, you can choose any of them and the run the following command:
 
-ERR2143758
+```bash
+nextflow run main.nf --reads 'data/samples/ERR2143758/ERR2143758_{1,2}.fastq'
+```
+On the output of the command line, you will see:
+
+
+
 
 
 
