@@ -2,13 +2,13 @@
 # - Only pushes if push or release
 # - Builds without push for PRs to check the Dockerfile
 
-name: Docker image
+name: Build Docker [devcontainers]
 
 on:
   pull_request: # Build, don't push
     paths:
       - ".devcontainer/**"
-      - ".github/workflows/devcontainer-build-and-push.yml"
+      - ".github/workflows/docker-devcontainer.yml"
   push: { branches: [master] } # Build + push ('latest' tag)
   release: { types: [published] } # Build + push (release tag)
   workflow_dispatch: # Build + push (custom tag)
