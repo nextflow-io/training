@@ -12,7 +12,7 @@ process BOWTIE2 {
 
     script:
     """
-    export BOWTIE2_INDEXES=/workspaces/training/nf4-science/metagenomics/data/oryza
+    export BOWTIE2_INDEXES=/workspaces/training/nf4-science/metagenomics/data/yeast
     bowtie2 -x $bowtie2_index -1 ${reads[0]} -2 ${reads[1]} -p 2 -S ${sample_id}.sam --un-conc-gz ${sample_id}
  	"""
 }
