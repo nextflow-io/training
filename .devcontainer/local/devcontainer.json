@@ -33,7 +33,7 @@
         "SHELL": "/bin/bash" // Ush bash
     },
     "onCreateCommand": "bash ${localWorkspaceFolder}/.devcontainer/setup.sh",
-    "postCreateCommand": "sudo mkdir -p /workspaces && sudo rm -rf /workspaces/training && sudo ln -s ${localWorkspaceFolder} /workspaces/training",
+    "postCreateCommand": "mkdir -p /workspaces && rm -rf /workspaces/training && ln -s ${localWorkspaceFolder} /workspaces/training",
     "customizations": {
         "vscode": {
             "extensions": ["nf-core.nf-core-extensionpack"],
