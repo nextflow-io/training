@@ -292,7 +292,7 @@ On the output of the command line, you will see:
 ```console title="Output"
  N E X T F L O W   ~  version 24.10.4
 
-Launching `main.nf` [chaotic_goldstine] DSL2 - revision: 8f65b983e6
+Launching `main.nf` [determined_lorenz] DSL2 - revision: 8f65b983e6
 
         __________________________________________________________________________________________________________________________________________________
         __________________________________________________________________________________________________________________________________________________
@@ -307,12 +307,11 @@ Launching `main.nf` [chaotic_goldstine] DSL2 - revision: 8f65b983e6
         __________________________________________________________________________________________________________________________________________________
 
 executor >  local (5)
-[f6/7c791a] kraken2Flow:BOWTIE2 (ERR2143758)           [100%] 1 of 1 ✔
-[16/053660] kraken2Flow:KRAKEN2 (ERR2143758)           [100%] 1 of 1 ✔
-[6d/48c138] kraken2Flow:BRACKEN (ERR2143758)           [100%] 1 of 1 ✔
-[3d/155595] kraken2Flow:K_REPORT_TO_KRONA (ERR2143758) [100%] 1 of 1 ✔
-[00/27e60c] kraken2Flow:KT_IMPORT_TEXT (ERR2143758)    [100%] 1 of 1 ✔
-
+[fe/4b8409] process > kraken2Flow:BOWTIE2 (ERR2143768)           [100%] 1 of 1 ✔
+[14/c3d787] process > kraken2Flow:KRAKEN2 (ERR2143768)           [100%] 1 of 1 ✔
+[4c/5d2db3] process > kraken2Flow:BRACKEN (ERR2143768)           [100%] 1 of 1 ✔
+[e4/c305af] process > kraken2Flow:K_REPORT_TO_KRONA (ERR2143768) [100%] 1 of 1 ✔
+[39/08b32c] process > kraken2Flow:KT_IMPORT_TEXT (ERR2143768)    [100%] 1 of 1 ✔
 ```
 
 Now, it's your time to analyze the results, you can find all the ouput files in the **output** directory, run the `tree` command:
