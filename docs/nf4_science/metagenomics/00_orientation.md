@@ -26,43 +26,27 @@ Here you should see the following directory structure:
 ├── bin
 │   └── report.Rmd
 ├── data
-│   ├── oryza
-│   │   ├── oryza.1.bt2
-│   │   ├── oryza.2.bt2
-│   │   ├── oryza.3.bt2
-│   │   ├── oryza.4.bt2
-│   │   ├── oryza.rev.1.bt2
-│   │   └── oryza.rev.2.bt2
 │   ├── samples
-│   │   ├── ERR2143758
-│   │   │   ├── ERR2143758_1.fastq
-│   │   │   └── ERR2143758_2.fastq
-│   │   ├── ERR2143763
-│   │   │   ├── ERR2143763_1.fastq
-│   │   │   └── ERR2143763_2.fastq
-│   │   ├── ERR2143774
-│   │   │   ├── ERR2143774_1.fastq
-│   │   │   └── ERR2143774_2.fastq
-│   │   └── ERR2143791
-│   │       ├── ERR2143791_1.fastq
-│   │       └── ERR2143791_2.fastq
-│   └── viral_db
-│       ├── database100mers.kmer_distrib
-│       ├── database150mers.kmer_distrib
-│       ├── database200mers.kmer_distrib
-│       ├── database250mers.kmer_distrib
-│       ├── database300mers.kmer_distrib
-│       ├── database50mers.kmer_distrib
-│       ├── database75mers.kmer_distrib
-│       ├── hash.k2d
-│       ├── inspect.txt
-│       ├── ktaxonomy.tsv
-│       ├── library_report.tsv
-│       ├── names.dmp
-│       ├── nodes.dmp
-│       ├── opts.k2d
-│       ├── seqid2taxid.map
-│       └── taxo.k2d
+│   │   ├── ERR2143768
+│   │   │   ├── ERR2143768_1.fastq
+│   │   │   └── ERR2143768_2.fastq
+│   │   ├── ERR2143769
+│   │   │   ├── ERR2143769_1.fastq
+│   │   │   └── ERR2143769_2.fastq
+│   │   ├── ERR2143770
+│   │   │   ├── ERR2143770_1.fastq
+│   │   │   └── ERR2143770_2.fastq
+│   │   └── ERR2143774
+│   │       ├── ERR2143774_1.fastq
+│   │       └── ERR2143774_2.fastq
+│   ├── samplesheet.csv
+│   └── yeast
+│       ├── yeast.1.bt2
+│       ├── yeast.2.bt2
+│       ├── yeast.3.bt2
+│       ├── yeast.4.bt2
+│       ├── yeast.rev.1.bt2
+│       └── yeast.rev.2.bt2
 ├── main.nf
 ├── modules
 │   ├── bowtie2.nf
@@ -73,9 +57,7 @@ Here you should see the following directory structure:
 │   ├── kraken_biom.nf
 │   └── ktImportText.nf
 ├── nextflow.config
-├── samplesheet.csv
 └── workflow.nf
-
 ```
 
 However, there are some files that we need to download since they are quite large to be permanently stored within the GitHub repository. The file (or set of files) that we are going to download is the required database by Kraken2 and Bracken. Run the following commands in the exact order and wait until all of them are finished:
