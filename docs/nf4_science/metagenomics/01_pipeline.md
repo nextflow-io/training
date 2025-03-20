@@ -48,7 +48,7 @@ process BOWTIE2 {
 
     script:
     """
-    export BOWTIE2_INDEXES=/workspaces/training/nf4-science/metagenomics/data/oryza
+    export BOWTIE2_INDEXES=/workspaces/training/nf4-science/metagenomics/data/yeast
     bowtie2 -x $bowtie2_index -1 ${reads[0]} -2 ${reads[1]} -p 2 -S ${sample_id}.sam --un-conc-gz ${sample_id}
     """
 }
@@ -272,7 +272,7 @@ Finally, we create the file `nextflow.config` where we indicate the input parame
 params {
     reads                                 = null
     outdir                                = "/workspaces/training/nf4-science/metagenomics/output"
-    bowtie2_index                         = "/workspaces/training/nf4-science/metagenomics/data/oryza/oryza"
+    bowtie2_index                         = "/workspaces/training/nf4-science/metagenomics/data/yeast/yeast"
     kraken2_db                            = "/workspaces/training/nf4-science/metagenomics/data/viral_db"
 }
 
