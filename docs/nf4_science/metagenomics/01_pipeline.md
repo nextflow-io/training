@@ -280,6 +280,10 @@ params {
 docker.enabled = true
 ```
 
+!!!tip
+
+    Please note that we are using absolute paths for the parameters. Even though relative paths are preferred for system-independendance of the pipelines, often some tools or scripts will fail if parameters are not provided as absolute paths.
+
 ## 6. Execution
 
 That's it, we are all set to run the pipeline, let's just use one of the samples provided, you can choose any of them and the run the following command:
