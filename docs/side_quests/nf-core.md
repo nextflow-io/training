@@ -796,7 +796,7 @@ nf-core modules should be flexible and usable across many different pipelines. T
 
 The parameters or arguments of a tool can be changed using the directive `args`. You can find many examples of how arguments are added to modules in nf-core pipelines, for example, the nf-core/demo [modules.config](https://github.com/nf-core/demo/blob/master/conf/modules.config) file.
 
-Add this snippet to your `conf/modules.config` file (using the `params` scope) to call the `seqtk/trim` tool with the argument `-b 5` to trim 5 bp from the left end of each read:
+Add this snippet to your `conf/modules.config` file (using the `process` scope) to call the `seqtk/trim` tool with the argument `-b 5` to trim 5 bp from the left end of each read:
 
 ```console title="conf/modules.config" linenums="21"
 withName: 'SEQTK_TRIM' {
