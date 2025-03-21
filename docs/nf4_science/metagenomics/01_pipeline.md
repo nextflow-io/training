@@ -3,6 +3,8 @@
 In the field of metagenomics data analysis, there is an endless universe of pipelines or methodologies you can follow to explore and characterize your samples. 
 For this course, we propose to wrap with Nextflow the protocol published by [Jennifer Lu et al. (2022)](https://www.nature.com/articles/s41596-022-00738-y). 
 
+---
+
 ## 1. Workflow
 
 The workflow is designed as follows:
@@ -24,6 +26,8 @@ As you can see from the picture, the pipeline will undergo as follows:
 !!!tip
 
     If you feel a bit overwhelmed by the theoretical background of the methodology, we strongly encourage you to check this [Carpentries](https://carpentries-lab.github.io/metagenomics-analysis/) lesson first, where each step will be explained step by step using interesting examples.
+
+---
 
 ## 2. Modules
 
@@ -178,6 +182,8 @@ process KT_IMPORT_TEXT {
 
 The only output from this process will be the Krona plot that can be directly opened using a regular modern browser, just like the one you are using to follow this tutorial. With this process, the execution of the pipeline for a single sample is finished, we can proceed then to create the files that control the execution of the pipeline.
 
+---
+
 ## 3. workflow.nf
 
 Now it is time to explicitly write where the processes files can be found, as well as the order of execution of the processes. For this we are going to create the file `workflow.nf` (no, this time it does not go inside the **modules** directory) to import the required process:
@@ -222,6 +228,8 @@ In this declaration you see that we need three primary inputs for the pipeline: 
 3. BRACKEN, in turn, will take KRAKEN2 output to run the abundance re-estimation using the same database; K_REPORT_TO_KRONA and KT_IMPORT_TEXT can not be run until BRACKEN is finished with its task.
 4. Finally, K_REPORT_TO_KRONA, and subsequently KT_IMPORT_TEXT, will be run to generate our final goal file which is the Krona plot.
 
+---
+
 ## 4. main.nf
 
 We are getting closer to run the pipeline, let's create the `main.nf` file. The within this file, we create banner with the pipeline name (you should have learnt how to do this during the [Hello Nextflow](../../hello_nextflow) right?) to be shown when the execution starts.
@@ -260,7 +268,9 @@ workflow {
 }
 ```
 
-## 5. nextflow.config
+---
+
+## 5. `nextflow.config`
 
 Finally, we create the file `nextflow.config` where we indicate the input parameters of the pipeline and enable its execution using docker to pull the containers required by each process:
 
@@ -283,6 +293,8 @@ docker.enabled = true
 !!!tip
 
     Please note that we are using absolute paths for the parameters. Even though relative paths are preferred for system-independendance of the pipelines, often some tools or scripts will fail if parameters are not provided as absolute paths.
+
+---
 
 ## 6. Execution
 
@@ -338,6 +350,8 @@ output/
 ```
 
 Feel free to explore each of the files to understand each process and how data were handled. The file in which we are more interested is the `*.html` since this is the Krona plot, you can either download or install the [preview](https://marketplace.visualstudio.com/items?itemName=ms-vscode.live-server) extension for Visual Studio. Keep in mind that we used the viral database, therefore you will be seeing information only about the viruses contained in the samples, to perform the analysis with bacteria and beyond you have to download a different database or build your own.
+
+---
 
 ### Takeaway
 
