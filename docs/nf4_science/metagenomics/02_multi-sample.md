@@ -191,14 +191,14 @@ executor >  local (22)
 
 Keep in mind that since the execution is in parallel, the order in which the samples are processed is random and the order in which `sample ids` appear will differ among executions. Also, during while the pipeline is running you will see that `KRAKEN_BIOM`, and hence `KNIT_PHYLOSEQ`, will not be triggered until all the samples are processed by the previous processes.
 
-Finally, inside the **output** directory, you will see multiple folders with the exact `sample ids`, and within these all the output files, including the files to visualize the Krona plots. Likewise, in the **output** folder you will see the file `report.html` which is ready to be opened and explored. It's your turn this time to analyze it!
+Finally, inside the **output** directory, you will see multiple folders with the exact `sample ids`, and within these all the output files, including the files to visualize the Krona plots. Likewise, in the **output** folder you will see the file `report.html` which is ready to be opened and explored. It's your time to analyze it!
 
 ---
 
 ### Takeaway
 
-You know how to adapt a single-sample workflow to parallelize processing of multiple samples, generate a comprehensive QC report and adapt the workflow to use paired-end read data if needed.
+You just learnt how control workflow execution by including conditionals and operators, process multiple samples simultaneously and running a customized script to perform a metagenomics data analysis at read level. 
 
 ### What's next?
 
-Congratulations, you've completed the Nextflow For RNAseq mini-course! Celebrate your success and take a well deserved break!
+Great! You are well equipped now to start developing your ownn pipelines.
