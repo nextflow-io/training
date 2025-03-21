@@ -1224,7 +1224,7 @@ It will ask you to enter the tool name and some configurations for the module. W
 - Add the author name: `GitHub Username: (@<your-name>):`
 - Accept the defaults for the remaining prompts by typing `enter`
 
-This will create a new file in `modules/local/fastqe.nf` that already contains the container and conda definitions, the general structure of the process, and a number of TODO statements to guide you through the adaptation.
+This will create a new file in `modules/local/fastqe/main.nf` that already contains the container and conda definitions, the general structure of the process, and a number of TODO statements to guide you through the adaptation.
 
 !!! warning
 
@@ -1233,28 +1233,28 @@ This will create a new file in `modules/local/fastqe.nf` that already contains t
     ```console
     INFO     Repository type: pipeline
     INFO     Press enter to use default values (shown in brackets) or type your own responses. ctrl+click underlined text to open links.
-    CRITICAL Module file exists already: 'modules/local/fastqe.nf'. Use '--force' to overwrite
+    CRITICAL Module directory exists: 'modules/local/fastqe'. Use '--force' to overwrite
     ```
 
-Let's open the modules file: `modules/local/fastqe.nf`.
+Let's open the modules file: `modules/local/fastqe/main.nf`.
 
 You will notice, that it still calls `samtools` and the input are `bam`.
 
 From our sample sheet, we know we have fastq files instead, so let's change the input definition accordingly:
 
-```groovy title="modules/local/fastqe.nf" linenums="38"
+```groovy title="modules/local/fastqe/main.nf" linenums="38"
 tuple val(meta), path(reads)
 ```
 
 The output of this tool is a tsv file with the emoji annotation, let's adapt the output as well:
 
-```groovy title="modules/local/fastqe.nf" linenums="42"
+```groovy title="modules/local/fastqe/main.nf" linenums="42"
 tuple val(meta), path("*.tsv"), emit: tsv
 ```
 
 The script section still calls `samtools`. Let's change this to the proper call of the tool:
 
-```groovy title="modules/local/fastqe.nf" linenums="62"
+```groovy title="modules/local/fastqe/main.nf" linenums="62"
     fastqe \\
         $args \\
         $reads \\
@@ -1263,19 +1263,19 @@ The script section still calls `samtools`. Let's change this to the proper call 
 
 And at last, we need to adapt the version retrieval. This tool does not have a version command, so we will add the release number manually:
 
-```groovy title="modules/local/fastqe.nf" linenums="52"
+```groovy title="modules/local/fastqe/main.nf" linenums="52"
     def VERSION = '0.3.3'
 ```
 
 and write it to a file in the script section:
 
-```groovy title="modules/local/fastqe.nf" linenums="70"
+```groovy title="modules/local/fastqe/main.nf" linenums="70"
         fastqe: $VERSION
 ```
 
 We will not cover [`stubs`](https://www.nextflow.io/docs/latest/process.html#stub) in this training. They are not necessary to run a module, so let's remove them for now:
 
-```groovy title="modules/local/fastqe.nf" linenums="74"
+```groovy title="modules/local/fastqe/main.nf" linenums="74"
 stub:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta.id}"
@@ -1295,7 +1295,7 @@ stub:
 
 If you think this looks a bit messy and just want to add a complete final version, here's one we made earlier and we've removed all the commented out instructions:
 
-```groovy title="modules/local/fastqe.nf" linenums="1"
+```groovy title="modules/local/fastqe/main.nf" linenums="1"
 process FASTQE {
     tag "$meta.id"
     label 'process_single'
