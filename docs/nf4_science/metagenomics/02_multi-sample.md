@@ -1,6 +1,6 @@
 # Part 2: Process parallelization, operators, conditional execution and custom scripts
 
-In this part, we are going to rely on same pipeline structure we built in Part 1 to extend for: 
+In this part, we are going to rely on same pipeline structure we built in Part 1 to extend it for: 
 
 1. Multi-sample analysis
 2. Use of a Nextflow operator 
