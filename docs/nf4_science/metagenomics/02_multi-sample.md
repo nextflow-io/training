@@ -83,7 +83,7 @@ This process will _collect_ each output from the Bracken files to build a single
 
 ## 2.2 Phyloseq: including a customized script
 
-We are at the last step of the pipeline execution, and now we need to process the *.biom` file by transforming it into a Phyloseq object, which is easier to use, more intuitive to understand, and is equipped with multiple tools and methods to plot. Another amazing feature by Nextflow is the possibility to run the so-called _Scripts à la carte_, which means that a process does not necessarily requires an external tool to execute, and hence you can develop your own analysis with customized scripts, i.e., R or Python. Here, we will run an R script inside the module `knit_phyloseq.nf` to create and process the Phyloseq object taking as input the ouput from `kraken_biom.nf`:
+We are at the last step of the pipeline execution, and now we need to process the `*.biom` file by transforming it into a Phyloseq object, which is easier to use, more intuitive to understand, and is equipped with multiple tools and methods to plot. Another amazing feature by Nextflow is the possibility to run the so-called _Scripts à la carte_, which means that a process does not necessarily requires an external tool to execute, and hence you can develop your own analysis with customized scripts, i.e., R or Python. Here, we will run an R script inside the module `knit_phyloseq.nf` to create and process the Phyloseq object taking as input the ouput from `kraken_biom.nf`:
 
 ```groovy title="modules/kraken_biom.nf" linenums="1"
 process KNIT_PHYLOSEQ {
