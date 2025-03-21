@@ -81,13 +81,23 @@ process KRAKEN_BIOM {
 
 This process will _collect_ each output from the Bracken files to build a single `*.biom` file that contains the abundance species data of all the samples. In the `script` statement we find three tasks to execute, the first two lines are for variable manipulation required to handle the type of input this process receives (more about this when modifying `workflow.nf` below), and the second line executes the kraken-biom command that is available thanks to specified container.
 
-### 2.2.1 Operator _Collect()_
+### 2.2.1 Operator _collect()_ and conditional execution
 
-Nextflow provides a high number of operators that smooth data handling and orchestrates the workflow to do exactly what we want. In this case, the process `KRAKEN_BIOM` requires all the files produced by Bracken belonging to each sample, which means that `KRAKEN_BIOM` can not be triggered until all Bracken processes are finished. For this task, the operator _Collect()_ comes really handy, and therefore let's include it in our `workflow.nf`... but wait! Let's recall that `KRAKEN_BIOM` and the following `KNIT_PHYLOSEQ` are only triggered if the execution is aiming at processing more than one sample. Being so, we will include that conditional statement as well in the `workflow.nf`:
+Nextflow provides a high number of operators that smooth data handling and orchestrates the workflow to do exactly what we want. In this case, the process `KRAKEN_BIOM` requires all the files produced by Bracken belonging to each sample, which means that `KRAKEN_BIOM` can not be triggered until all Bracken processes are finished. For this task, the operator _collect()_ comes really handy, and therefore let's include it in our `workflow.nf`... but wait! Let's recall that `KRAKEN_BIOM` and the following `KNIT_PHYLOSEQ` are only triggered if the execution is aiming at processing more than one sample. Being so, we will include these processes and modify the workflow execution to add the conditional statement in the `workflow.nf`:
 
+```groovy title="workflow.nf" linenums="9"
+include { KRAKEN_BIOM               }   from './modules/kraken_biom.nf'
+include { KNIT_PHYLOSEQ             }   from './modules/knit_phyloseq.nf'
+```
 
+```groovy title="workflow.nf" linenums="29"
+        if(params.sheet_csv){
+		    KRAKEN_BIOM(BRACKEN.out.collect())
+        KNIT_PHYLOSEQ(KRAKEN_BIOM.out.map { it })
+		}
+```
 
-
+Here, you can see that we have added the operator _collect()_ to capture all the files from 
 
 
 ## 2.2 Phyloseq
