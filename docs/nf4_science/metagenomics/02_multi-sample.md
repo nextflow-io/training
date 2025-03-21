@@ -1,10 +1,11 @@
-# Part 2: Process parallelization, operator and conditional execution
+# Part 2: Process parallelization, operators, conditional execution and custom scripts
 
 In this part, we are going to rely on same pipeline structure we built in Part 1 to extend for: 
 
 1. Multi-sample analysis
 2. Use of a Nextflow operator 
 3. Control the execution of the workflow according to the input
+4. Include a process that runs a customized script
 
 ## 1. Multi-sample input
 
@@ -26,3 +27,7 @@ ERR2143769,/workspaces/training/nf4-science/metagenomics/data/samples/ERR2143769
 ERR2143770,/workspaces/training/nf4-science/metagenomics/data/samples/ERR2143770/ERR2143770_1.fastq,/workspaces/training/nf4-science/metagenomics/data/samples/ERR2143770/ERR2143770_2.fastq
 ERR2143774,/workspaces/training/nf4-science/metagenomics/data/samples/ERR2143774/ERR2143774_1.fastq,/workspaces/training/nf4-science/metagenomics/data/samples/ERR2143774/ERR2143774_2.fastq
 ```
+
+Here, we have provided the `sample id` and the absolute paths to both forward and reverse reads per sample. Please notice that the files are not required to be stored in the directory; however, it is recommend to maintain a consistent folder structure.
+
+Now, we can not use this file as input in the current state of the pipeline given that it expects only a path to create a paire-end channel. Let's include then an additional parameter in the `sample id
