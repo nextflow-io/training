@@ -35,7 +35,7 @@ Once we have a clear overview of what we want to achieve, we can start developin
 
 ### 2.1 Bowtie2
 
-As previously, the objective with this module is to clean the reads by aligning them against a reference genome. Let's create then the `bowtie2.nf` file inside the **modules** folder to write the following code:
+As previously mentioned, the objective with this module is to clean the reads by aligning them against a reference genome to remove the ones that map with it. Let's create then the `bowtie2.nf` file inside the **modules** folder to write the following code:
 
 ```groovy title="modules/bowtie2.nf" linenums="1"
 process BOWTIE2 {
