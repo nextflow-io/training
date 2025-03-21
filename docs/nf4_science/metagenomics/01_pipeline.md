@@ -25,7 +25,7 @@ As you can see from the picture, the pipeline will undergo as follows:
 
 !!!tip
 
-    If you feel a bit overwhelmed by the theoretical background of the methodology, we strongly encourage you to check this [Carpentries](https://carpentries-lab.github.io/metagenomics-analysis/) lesson first, where each step will be explained step by step using interesting examples.
+    If you feel a bit overwhelmed by the theoretical background of the methodology, we strongly encourage you to check this [Carpentries](https://carpentries-lab.github.io/metagenomics-analysis/) lesson first, where the concepts are explained step by step using interesting examples.
 
 ---
 
