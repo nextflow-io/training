@@ -93,13 +93,12 @@ include { KNIT_PHYLOSEQ             }   from './modules/knit_phyloseq.nf'
 ```groovy title="workflow.nf" linenums="29"
         if(params.sheet_csv){
 		    KRAKEN_BIOM(BRACKEN.out.collect())
-        KNIT_PHYLOSEQ(KRAKEN_BIOM.out.map { it })
 		}
 ```
 
-Here, you can see that we have added the operator _collect()_ to capture all the files from 
+Here, you can see that we have added the operator _collect()_ to capture all the output files from `BRACKEN`, and this is happening only if we are using as input `--sheet_csv`. This operator is going to create a list   
 
-
+List
 ## 2.2 Phyloseq
 
 ### 2.2.1 Including a customized script
@@ -137,3 +136,39 @@ As you can see, we are declaring some variables both in Nextflow and bash to abl
 
 In addition, please notice the `container` used for the `KNIT_PHYLOSEQ`, which is combination of multiple packages required to render the `*.html` report. This is possible thanks to an awesome tool called [Seqera Containers](https://seqera.io/containers/), which is able to build almost any container (for docker or singularity!) by just "merging" different PyPI or Conda packages; please give it a try and be amazed by Seqera Containers.
 
+```groovy title="workflow.nf" linenums="9"
+include { KRAKEN_BIOM               }   from './modules/kraken_biom.nf'
+include { KNIT_PHYLOSEQ             }   from './modules/knit_phyloseq.nf'
+```
+
+```groovy title="workflow.nf" linenums="29"
+        if(params.sheet_csv){
+		    KRAKEN_BIOM(BRACKEN.out.collect())
+        KNIT_PHYLOSEQ(KRAKEN_BIOM.out)
+		}
+```
+
+ N E X T F L O W   ~  version 24.10.4
+
+Launching `main.nf` [stoic_miescher] DSL2 - revision: 8f65b983e6
+
+        __________________________________________________________________________________________________________________________________________________
+        __________________________________________________________________________________________________________________________________________________
+        >=>   >=>                       >=>                                         >=> >=>>=>                                >=>
+        >=>  >=>                        >=>                           >=>>=>       >=>  >>   >=>                              >=>
+        >=> >=>     >> >==>    >=> >=>  >=>  >=>   >==>    >==>>==>  >>   >=>     >=>   >>    >=> >> >==>    >=> >=>     >==> >=>  >=>   >==>    >==>>==>
+        >>=>>        >=>     >=>   >=>  >=> >=>  >>   >=>   >=>  >=>     >=>     >=>    >==>>=>    >=>     >=>   >=>   >=>    >=> >=>  >>   >=>   >=>  >=>
+        >=>  >=>     >=>    >=>    >=>  >=>=>    >>===>>=>  >=>  >=>    >=>     >=>     >>    >=>  >=>    >=>    >=>  >=>     >=>=>    >>===>>=>  >=>  >=>
+        >=>   >=>    >=>     >=>   >=>  >=> >=>  >>         >=>  >=>  >=>      >=>      >>     >>  >=>     >=>   >=>   >=>    >=> >=>  >>         >=>  >=>
+        >=>     >=> >==>      >==>>>==> >=>  >=>  >====>   >==>  >=> >======> >=>       >===>>=>  >==>      >==>>>==>    >==> >=>  >=>  >====>   >==>  >=>
+        __________________________________________________________________________________________________________________________________________________
+        __________________________________________________________________________________________________________________________________________________
+
+executor >  local (22)
+[4e/914152] kraken2Flow:BOWTIE2 (ERR2143774)           [100%] 4 of 4 ✔
+[bf/7fcac7] kraken2Flow:KRAKEN2 (ERR2143774)           [100%] 4 of 4 ✔
+[f5/aa12aa] kraken2Flow:BRACKEN (ERR2143774)           [100%] 4 of 4 ✔
+[e9/84eb9d] kraken2Flow:K_REPORT_TO_KRONA (ERR2143774) [100%] 4 of 4 ✔
+[59/456551] kraken2Flow:KT_IMPORT_TEXT (ERR2143768)    [100%] 4 of 4 ✔
+[da/7b9f45] kraken2Flow:KRAKEN_BIOM (merge_samples)    [100%] 1 of 1 ✔
+[d0/deccc9] kraken2Flow:KNIT_PHYLOSEQ (knit_phyloseq)  [100%] 1 of 1 ✔
