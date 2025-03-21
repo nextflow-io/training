@@ -32,7 +32,7 @@ ERR2143774,/workspaces/training/nf4-science/metagenomics/data/samples/ERR2143774
 
 Here, we have provided the `sample id` and the absolute paths to both forward and reverse reads per sample. Please notice that the files are not required to be stored in the directory; however, it is recommend to maintain a consistent folder structure.
 
-Now, we can not use this file as input in the current state of the pipeline given that it expects only a path to create a paire-end channel. Let's include then an additional parameter in the `nextflow.config` file (notice that it would go inside the parameter block, keeping the same structure):
+Now, we can not use this file as input in the current state of the pipeline given that it expects only a path to create a paire-end channel. Let's include then an additional parameter (we can use any name, feel creative!) in the `nextflow.config` file (notice that it would go inside the parameter block, keeping the same structure):
 
 ```groovy title="nextflow.config" linenums="10"
     sheet_csv                             = null
