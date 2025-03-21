@@ -25,7 +25,8 @@ Concretely, you will be able to:
 - Handle domain-specific files such as Kraken2 and Bracken reports resources appropriately
 - Run analysis for a single sample or leverage on Nextflow's dataflow paradigm to parallelize multi-sample analysis
 - Separate the processes and workflow in a more structured manner attempting to a first step in following [nf-core](https://nf-co.re/) guidelines
-- Use conditionals and operators to customize the analysis and generate a final report
+- Use conditionals and operators to control workflow execution
+- Include custom scripts to be run within a given process
 
 ## Prerequisites
 
