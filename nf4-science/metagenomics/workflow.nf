@@ -28,6 +28,6 @@ workflow kraken2Flow {
 		KT_IMPORT_TEXT(K_REPORT_TO_KRONA.out)
         if(params.sheet_csv){
 		    KRAKEN_BIOM(BRACKEN.out.collect())
-            KNIT_PHYLOSEQ(KRAKEN_BIOM.out.map { it })
+            KNIT_PHYLOSEQ(KRAKEN_BIOM.out)
 		}
 }
