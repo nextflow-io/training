@@ -36,7 +36,20 @@ Now, we can not use this file as input in the current state of the pipeline give
     sheet_csv                             = null
 ```
 
-We initialize this parameter as `null` since it can be used or not. Now, we need to modify the `main.nf` file to state how the input should be handled depending of the type of input;
+We initialize this parameter as `null` since it can be used or not. Now, we need to modify the `main.nf` file to state how the input should be handled depending of the type of input:
+
+```groovy title="main.nf" linenums="22"
+	    if(params.reads){
+		    reads_ch = Channel .fromFilePairs( params.reads, checkIfExists:true )
+		} else {
+		    reads_ch = Channel.fromPath( params.sheet_csv )
+				   .splitCsv(header:true)
+				   .map { row-> tuple(row.sample_id, [file(row.fastq_1), file(row.fastq_2)]) }
+		}
+```
+
+This modified declaration states that if we use the parameter `--reads` when we invoke the `nextflow run main.nf`, the _reads_ channel will be created using only the path to paired-end files. Otherwise, we must include the parameter `--sheet_csv` with the corresponding file containing the sample information. Being so, it is necessary to use one of the two forms of input; if we use both at the same time, the `--reads` will predominate or if none of them is indicated, the pipeline will fail. Do not worry now for the way in which channel is created using the `.csv` file, this declaration is quite stantard and you can just copy and paste for other pipelines in which you would like to use it; however, you can learn more about this [here](https://nextflow-io.github.io/patterns/process-per-csv-record/).
+
 
 
 
