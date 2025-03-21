@@ -7,6 +7,8 @@ In this part, we are going to rely on same pipeline structure we built in Part 1
 3. Control the execution of the workflow according to the input
 4. Include a process that runs a customized script
 
+---
+
 ## 1. Multi-sample input
 
 With our shining brand-new pipeline, we are at this moment able to analyze each sample individually by running the workflow multiple times. Nonetheless, one of the most powerful capabilities by Nextflow is its native parallel execution according to the available resources the executor finds. You can think of this as a sort of "integrated _for_ loop" that will process all the samples in parallel in a single run without the need of re-running the pipeline.
@@ -52,6 +54,8 @@ This modified declaration states that if we use the parameter `--reads` when we 
 
 Now, we would be ready to re-run the pipeline to process all the samples in a single call. Notwithstanding, the inclusion of additional samples has the advantage that we can expand the analysis to estimate β-diversity and compare them to extract important insights. 
 
+---
+
 # 2. Additional processes
 
 ## 2.1 Kraken-biom
@@ -81,13 +85,12 @@ process KRAKEN_BIOM {
 
 This process will _collect_ each output from the Bracken files to build a single `*.biom` file that contains the abundance species data of all the samples. In the `script` statement we find three tasks to execute, the first two lines are for variable manipulation required to handle the type of input this process receives (more about this when modifying `workflow.nf` below), and the second line executes the kraken-biom command that is available thanks to specified container.
 
-### 2.2.1 Operator _collect()_ and conditional execution
+### 2.1.1 Operator _collect()_ and conditional execution
 
 Nextflow provides a high number of operators that smooth data handling and orchestrates the workflow to do exactly what we want. In this case, the process `KRAKEN_BIOM` requires all the files produced by Bracken belonging to each sample, which means that `KRAKEN_BIOM` can not be triggered until all Bracken processes are finished. For this task, the operator _collect()_ comes really handy, and therefore let's include it in our `workflow.nf`... but wait! Let's recall that `KRAKEN_BIOM` and the following `KNIT_PHYLOSEQ` are only triggered if the execution is aiming at processing more than one sample. Being so, we will include these processes and modify the workflow execution to add the conditional statement in the `workflow.nf`:
 
 ```groovy title="workflow.nf" linenums="9"
 include { KRAKEN_BIOM               }   from './modules/kraken_biom.nf'
-include { KNIT_PHYLOSEQ             }   from './modules/knit_phyloseq.nf'
 ```
 
 ```groovy title="workflow.nf" linenums="29"
@@ -96,9 +99,8 @@ include { KNIT_PHYLOSEQ             }   from './modules/knit_phyloseq.nf'
 		}
 ```
 
-Here, you can see that we have added the operator _collect()_ to capture all the output files from `BRACKEN`, and this is happening only if we are using as input `--sheet_csv`. This operator is going to create a list   
+Here, you can see that we have added the operator _collect()_ to capture all the output files from `BRACKEN`, and this is happening only if we are using as input `--sheet_csv`. This operator is going to return a list of the elements specified in the output of the process (`BRACKEN`), and, for instance, we are interested in each "second" (indices 1,4,7...) element of the list to run the _kraken-biom_ command; this is the reason why within the `script` statement in `kraken_biom.nf` we have incluced two codelines to obtain the paths to these files. If this is not entirely clear, please check the [Nextflow documentation](https://www.nextflow.io/docs/latest/reference/operator.html#collect).    
 
-List
 ## 2.2 Phyloseq
 
 ### 2.2.1 Including a customized script
@@ -136,18 +138,31 @@ As you can see, we are declaring some variables both in Nextflow and bash to abl
 
 In addition, please notice the `container` used for the `KNIT_PHYLOSEQ`, which is combination of multiple packages required to render the `*.html` report. This is possible thanks to an awesome tool called [Seqera Containers](https://seqera.io/containers/), which is able to build almost any container (for docker or singularity!) by just "merging" different PyPI or Conda packages; please give it a try and be amazed by Seqera Containers.
 
-```groovy title="workflow.nf" linenums="9"
-include { KRAKEN_BIOM               }   from './modules/kraken_biom.nf'
+Also, we have to include this new process within `workflow.nf`:
+
+```groovy title="workflow.nf" linenums="10"
 include { KNIT_PHYLOSEQ             }   from './modules/knit_phyloseq.nf'
 ```
 
-```groovy title="workflow.nf" linenums="29"
-        if(params.sheet_csv){
-		    KRAKEN_BIOM(BRACKEN.out.collect())
+We need to call it as well inside the conditional execution if multi-sample is being handled:
+
+```groovy title="workflow.nf" linenums="31"
         KNIT_PHYLOSEQ(KRAKEN_BIOM.out)
-		}
 ```
 
+---
+
+## 3. Execution
+
+Now, we are completely set to run the analysis for as many samples as we would like, and we will obtain a final report depicting different metrics regarding taxonomic abundance, network analysis, and α and β-diversity. Let's execute:
+
+```bash
+nextflow run main.nf --sheet_csv 'data/samplesheet.csv'
+```
+
+On the output of the command line, you will see:
+
+```console title="Output"
  N E X T F L O W   ~  version 24.10.4
 
 Launching `main.nf` [stoic_miescher] DSL2 - revision: 8f65b983e6
@@ -172,3 +187,18 @@ executor >  local (22)
 [59/456551] kraken2Flow:KT_IMPORT_TEXT (ERR2143768)    [100%] 4 of 4 ✔
 [da/7b9f45] kraken2Flow:KRAKEN_BIOM (merge_samples)    [100%] 1 of 1 ✔
 [d0/deccc9] kraken2Flow:KNIT_PHYLOSEQ (knit_phyloseq)  [100%] 1 of 1 ✔
+```
+
+Keep in mind that since the execution is in parallel, the order in which the samples are processed is random and the order in which `sample ids` appear will differ among executions. Also, during while the pipeline is running you will see that `KRAKEN_BIOM`, and hence `KNIT_PHYLOSEQ`, will not be triggered until all the samples are processed by the previous processes.
+
+Finally, inside the **output** directory, you will see multiple folders with the exact `sample ids`, and within these all the output files, including the files to visualize the Krona plots. Likewise, in the **output** folder you will see the file `report.html` which is ready to be opened and explored. It's your turn this time to analyze it!
+
+---
+
+### Takeaway
+
+You know how to adapt a single-sample workflow to parallelize processing of multiple samples, generate a comprehensive QC report and adapt the workflow to use paired-end read data if needed.
+
+### What's next?
+
+Congratulations, you've completed the Nextflow For RNAseq mini-course! Celebrate your success and take a well deserved break!
