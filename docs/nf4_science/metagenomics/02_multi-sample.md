@@ -32,7 +32,7 @@ Here, we have provided the `sample id` and the absolute paths to both forward an
 
 Now, we can not use this file as input in the current state of the pipeline given that it expects only a path to create a paire-end channel. Let's include then an additional parameter in the `nextflow.config` file (notice that it would go inside the parameter block, keeping the same structure):
 
-```groovy title="nextflow.config" linenums="9"
+```groovy title="nextflow.config" linenums="10"
     sheet_csv                             = null
 ```
 
@@ -81,7 +81,18 @@ process KRAKEN_BIOM {
 
 This process will _collect_ each output from the Bracken files to build a single `*.biom` file that contains the abundance species data of all the samples. In the `script` statement we find three tasks to execute, the first two lines are for variable manipulation required to handle the type of input this process receives (more about this when modifying `workflow.nf` below), and the second line executes the kraken-biom command that is available thanks to specified container.
 
-## 2.2 Phyloseq: including a customized script
+### 2.2.1 Operator _Collect()_
+
+Nextflow provides a high number of operators that smooth data handling and orchestrates the workflow to do exactly what we want. In this case, the process `KRAKEN_BIOM` requires all the files produced by Bracken belonging to each sample, which means that `KRAKEN_BIOM` can not be triggered until all Bracken processes are finished. For this task, the operator _Collect()_ comes really handy, and therefore let's include it in our `workflow.nf`... but wait! Let's recall that `KRAKEN_BIOM` and the following `KNIT_PHYLOSEQ` are only triggered if the execution is aiming at processing more than one sample. Being so, we will include that conditional statement as well in the `workflow.nf`:
+
+
+
+
+
+
+## 2.2 Phyloseq
+
+### 2.2.1 Including a customized script
 
 We are at the last step of the pipeline execution, and now we need to process the `*.biom` file by transforming it into a Phyloseq object, which is easier to use, more intuitive to understand, and is equipped with multiple tools and methods to plot. Another amazing feature by Nextflow is the possibility to run the so-called _Scripts à la carte_, which means that a process does not necessarily requires an external tool to execute, and hence you can develop your own analysis with customized scripts, i.e., R or Python. Here, we will run an R script inside the module `knit_phyloseq.nf` to create and process the Phyloseq object taking as input the ouput from `kraken_biom.nf`:
 
@@ -108,10 +119,11 @@ process KNIT_PHYLOSEQ {
 }
 ```
 
-As you can see, we are declaring some variables both in Nextflow and bash to able to call the script. This is a special case since this type of scripts can be stored in the **bin** directory for Nextflow to find them directly. Nevertheless, as we are not "running the script" directly but we are calling `Rscript` to create a final `*.html` report, Nextflow is not able to automatically find the customized script nor detect when report is rendered. As a result the ouput from this process is just a standard/command-line ouput, and we have to include an additional parameter in the `nextflow.config` file:
+As you can see, we are declaring some variables both in Nextflow and bash to able to call the script. This is a special case since this type of scripts can be stored in the **bin** directory for Nextflow to find them directly. Nevertheless, as we are not "running the script" directly but we are calling `Rscript` to render a final `*.html` report, Nextflow is not able to automatically find the customized script nor detect when report is rendered. As a result the ouput from this process is just a standard/command-line ouput, and we have to include an additional parameter in the `nextflow.config` file:
 
-```groovy title="nextflow.config" linenums="9"
-    sheet_csv                             = null
+```groovy title="nextflow.config" linenums="11"
+    report                             = "/workspaces/training/nf4-science/metagenomics/bin/report.Rmd"
 ```
 
-special container
+In addition, please notice the `container` used for the `KNIT_PHYLOSEQ`, which is combination of multiple packages required to render the `*.html` report. This is possible thanks to an awesome tool called [Seqera Containers](https://seqera.io/containers/), which is able to build almost any container (for docker or singularity!) by just "merging" different PyPI or Conda packages; please give it a try and be amazed by Seqera Containers.
+
