@@ -184,7 +184,7 @@ The only output from this process will be the Krona plot that can be directly op
 
 ---
 
-## 3. workflow.nf
+## 3. `workflow.nf`
 
 Now it is time to explicitly write where the processes files can be found, as well as the order of execution of the processes. For this we are going to create the file `workflow.nf` (no, this time it does not go inside the **modules** directory) to import the required process:
 
@@ -230,7 +230,7 @@ In this declaration you see that we need three primary inputs for the pipeline: 
 
 ---
 
-## 4. main.nf
+## 4. `main.nf`
 
 We are getting closer to run the pipeline, let's create the `main.nf` file. The within this file, we create banner with the pipeline name (you should have learnt how to do this during the [Hello Nextflow](../../hello_nextflow) right?) to be shown when the execution starts.
 
