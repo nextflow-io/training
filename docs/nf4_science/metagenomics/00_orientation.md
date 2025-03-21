@@ -13,6 +13,16 @@ For the purpose of the course, we'll be working in the `nf4-science/metagenomics
 cd nf4-science/metagenomics/
 ```
 
+There are some files that we need to download since they are quite large to be permanently stored within the GitHub repository. The file (or set of files) that we are going to download is the required database by Kraken2 and Bracken. Run the following commands in the exact order and wait until all of them are finished:
+
+```bash
+mkdir -p data/viral_db && cd "$_"
+wget --no-check-certificate --no-proxy 'https://genome-idx.s3.amazonaws.com/kraken/k2_viral_20241228.tar.gz'
+tar -xvzf k2_viral_20241228.tar.gz
+rm -r k2_viral_20241228.tar.gz
+cd -
+```
+
 Now, let's take a look of the files contained in the directory with the command:
 
 ```bash
@@ -58,16 +68,6 @@ Here you should see the following directory structure:
 │   └── ktImportText.nf
 ├── nextflow.config
 └── workflow.nf
-```
-
-However, there are some files that we need to download since they are quite large to be permanently stored within the GitHub repository. The file (or set of files) that we are going to download is the required database by Kraken2 and Bracken. Run the following commands in the exact order and wait until all of them are finished:
-
-```bash
-mkdir -p data/viral_db && cd "$_"
-wget --no-check-certificate --no-proxy 'https://genome-idx.s3.amazonaws.com/kraken/k2_viral_20241228.tar.gz'
-tar -xvzf k2_viral_20241228.tar.gz
-rm -r k2_viral_20241228.tar.gz
-cd -
 ```
 
 You should be back at the `nf4-science/metagenomics/` directory.
