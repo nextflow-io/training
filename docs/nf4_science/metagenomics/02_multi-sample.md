@@ -1,4 +1,4 @@
-# Part 2: Process parallelization, operators, conditional execution and custom scripts
+# Part 2: Process parallelization
 
 In this part, we are going to rely on same pipeline structure we built in Part 1 to extend it for: 
 
