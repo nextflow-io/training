@@ -10,9 +10,9 @@ For this course, we propose to wrap with Nextflow the protocol published by [Jen
 The workflow is designed as follows:
 
 <div markdown class="metagenomics_pipeline">
-  <p align="center">
-    <img src="../../assets/img/workflow_kraken.png" alt="workflow" width="100%">
-  </p>
+
+![Metagenomics](assets/img/workflow_kraken.png)
+
 </div>
 
 As you can see from the picture, the pipeline will undergo as follows:
