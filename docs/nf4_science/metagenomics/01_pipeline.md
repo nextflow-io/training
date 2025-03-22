@@ -9,7 +9,11 @@ For this course, we propose to wrap with Nextflow the protocol published by [Jen
 
 The workflow is designed as follows:
 
-[workflow](../../assets/img/workflow_kraken.png)
+<p align="center">
+  <picture>
+    <img src="../../assets/img/workflow_kraken.png" alt="workflow" width="100%">
+  </picture>
+</p>
 
 As you can see from the picture, the pipeline will undergo as follows:
 
