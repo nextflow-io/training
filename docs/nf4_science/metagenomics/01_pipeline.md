@@ -11,7 +11,7 @@ The workflow is designed as follows:
 
 <div markdown class="metagenomics_pipeline">
   <p align="center">
-    <img src="../../assets/img/workflow_kraken.png" alt="workflow" width="500">
+    <img src="../../assets/img/workflow_kraken.png" alt="workflow" width="100%">
   </p>
 </div>
 
