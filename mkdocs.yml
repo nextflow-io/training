@@ -179,6 +179,7 @@ plugins:
         - hello_nextflow/00_orientation.md
         - nf4_science/genomics/00_orientation.md
         - nf4_science/rnaseq/00_orientation.md
+        - nf4_science/metagenomics/00_orientation.md
         - side_quests/orientation.md
         - basic_training/orientation.md
         - advanced/orientation.md
@@ -190,6 +191,7 @@ plugins:
         - hello_nextflow/*.md
         - nf4_science/genomics/*.md
         - nf4_science/rnaseq/*.md
+        - nf4_science/metagenomics/*.md
         - side_quests/*.md
         - basic_training/index.md
         - basic_training/orientation.md
