@@ -56,9 +56,9 @@ Now, we would be ready to re-run the pipeline to process all the samples in a si
 
 ---
 
-# 2. Additional processes
+## 2. Additional processes
 
-## 2.1 Kraken-biom
+### 2.1 Kraken-biom
 
 Let's create a new module that is going to handle the Bracken output to produce a Biological Observation Matrix (BIOM) file that concatenates the species abundance in each sample. The `kraken_biom.nf` file will be located in the **modules** directory:
 
