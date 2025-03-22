@@ -11,7 +11,7 @@ The workflow is designed as follows:
 
 <div markdown class="metagenomics">
 
-![Sequera](assets/img/seqera_logo.png#only-light)
+![Seqera](assets/img/seqera_logo.png#only-light)
 
 </div>
 
