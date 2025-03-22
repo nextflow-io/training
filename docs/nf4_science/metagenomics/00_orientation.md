@@ -74,7 +74,7 @@ You should be back at the `nf4-science/metagenomics/` directory.
 
 !!!note
 
-    Don't panic. This is just a glipmse of the material, and we are going to dig into each necessary file for the analysis.
+    Don't panic. This is just a glimpse of the material, and we are going to dig into each necessary file for the analysis.
 
 **This a summarized description of the files and directories found:**
 
