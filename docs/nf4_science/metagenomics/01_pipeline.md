@@ -10,7 +10,7 @@ For this course, we propose to wrap with Nextflow the protocol published by [Jen
 The workflow is designed as follows:
 
 <p align="center">
-    <img src="workflow_kraken.png" alt="MAGFlow" width="100%">
+    <img src="docs/assets/img/workflow_kraken.png" alt="MAGFlow" width="100%">
 </p>
 
 As you can see from the picture, the pipeline will undergo as follows:
