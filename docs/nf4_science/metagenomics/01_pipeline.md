@@ -227,10 +227,10 @@ workflow kraken2Flow {
 
 In this declaration you see that we need three primary inputs for the pipeline: the indexed reference genome for Bowtie2, the indexed database for Kraken2 and Bracken, and the paths to the reads; when creating the `nextflow.config`, you will see how to specify these paths. In the block `main`, you see the names of the processes with one or more parameters inside the parenthesis depicting the exact data flow:
 
-1. BOWTIE2(reads_ch, bowtie2_index) will be the first executed process using the reads and the indexed genome; the other processes must wait until this one is finished.
-2. Once BOWTIE2 has completed the task, KRAKEN2 will take the output, along with the database path to perform the specified task; the remaining process are on hold until Kraken2 is finished.
-3. BRACKEN, in turn, will take KRAKEN2 output to run the abundance re-estimation using the same database; K_REPORT_TO_KRONA and KT_IMPORT_TEXT can not be run until BRACKEN is finished with its task.
-4. Finally, K_REPORT_TO_KRONA, and subsequently KT_IMPORT_TEXT, will be run to generate our final goal file which is the Krona plot.
+1. `BOWTIE2(reads_ch, bowtie2_index)` will be the first executed process using the reads and the indexed genome; the other processes must wait until this one is finished.
+2. Once `BOWTIE2` has completed the task, `KRAKEN2` will take the output, along with the database path to perform the specified task; the remaining process are on hold until Kraken2 is finished.
+3. `BRACKEN`, in turn, will take `KRAKEN2` output to run the abundance re-estimation using the same database; `K_REPORT_TO_KRONA` and `KT_IMPORT_TEXT` can not be run until `BRACKEN` is finished with its task.
+4. Finally, `K_REPORT_TO_KRONA`, and subsequently `KT_IMPORT_TEXT`, will be run to generate our final goal file which is the Krona plot.
 
 ---
 
