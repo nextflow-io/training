@@ -9,11 +9,12 @@ For this course, we propose to wrap with Nextflow the protocol published by [Jen
 
 The workflow is designed as follows:
 
-<div markdown class="metagenomics_pipeline">
+<div markdown class="metagenomics">
 
-![Metagenomics](assets/img/workflow_kraken.png)
+![Metagenomics](assets/img/seqera_logo.png#only-light)
 
 </div>
+
 
 As you can see from the picture, the pipeline will undergo as follows:
 
