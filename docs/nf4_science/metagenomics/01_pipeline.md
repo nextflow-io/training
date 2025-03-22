@@ -234,7 +234,7 @@ In this declaration you see that we need three primary inputs for the pipeline: 
 
 ## 4. `main.nf`
 
-We are getting closer to run the pipeline, let's create the `main.nf` file. The within this file, we create banner with the pipeline name (you should have learnt how to do this during the [Hello Nextflow](../../hello_nextflow) right?) to be shown when the execution starts.
+We are getting closer to run the pipeline, let's create the `main.nf` file. Within this file, we create banner with the pipeline name to be shown when the execution starts.
 
 ```groovy title="main.nf" linenums="1"
 #!/usr/bin/env nextflow
