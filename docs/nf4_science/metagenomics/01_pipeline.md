@@ -11,7 +11,8 @@ The workflow is designed as follows:
 
 <p align="center">
   <picture>
-    <img src="../../assets/img/workflow_kraken.png" alt="workflow" width="100%">
+    <source width="500" srcset="../../assets/img/workflow_kraken.png">
+    <img src="../../assets/img/workflow_kraken.png" alt="workflow" width="500">
   </picture>
 </p>
 
