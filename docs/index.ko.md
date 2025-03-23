@@ -8,157 +8,152 @@ hide:
 
 # Nextflow Training
 
-Welcome to the Nextflow community training portal!
+Nextflow 커뮤니티 교육 포털에 오신 것을 환영합니다!
 
-We have several distinct training courses available on this website. Scroll down to find the one that's right for you!
+이 웹사이트에는 여러 가지 다양한 교육 과정이 준비되어 있습니다. 아래로 스크롤하여 여러분에게 맞는 과정을 찾아보세요!
 
-The training courses listed below are designed to be usable as a self-service resource; you can work through them on your own at any time (see Environment Setup for practical details). However, you may get even more out of them by joining a group training event.
+아래 나열된 교육 과정들은 셀프 서비스 리소스로 활용할 수 있도록 설계되었으며, 언제든지 혼자서 학습을 진행할 수 있습니다 (자세한 내용은 Environment Setup을 참고하세요). 하지만 그룹 교육 행사에 참여하면 더욱 효과적으로 학습할 수 있습니다.
 
-- Free online events are run regularly by the nf-core community, see the [nf-core events page](https://nf-co.re/events) for more.
-- Seqera (the company that develops Nextflow) runs a variety of training events, see the [Seqera Events](https://seqera.io/events/) page and look for 'Seqera Sessions' and 'Nextflow Summit'.
-- Our Community team also regularly teaches trainings hosted by third party organizations; announcements and signups for those are typically managed by the third-party hosts.
+- nf-core 커뮤니티에서 정기적으로 무료 온라인 행사를 진행합니다. 자세한 내용은 [nf-core 행사 페이지](https://nf-co.re/events)를 확인하세요.
+- Nextflow를 개발한 회사인 Seqera에서는 다양한 교육 행사를 운영하고 있습니다. [Seqera 행사 페이지](https://seqera.io/events/)를 방문하여 'Seqera Sessions' 및 'Nextflow Summit'을 확인해보세요.
+- 저희 커뮤니티 팀은 제3자 기관이 주최하는 교육도 정기적으로 진행하고 있습니다. 해당 교육은 일반적으로 주최 측에서 공지 및 신청을 관리합니다.
 
-When you're ready to get down to work, click on the 'Open in GitHub Codespaces' button, either on this page or on the index page of the course you chose, to open a web-based training environment (requires a free GitHub account).
+준비가 되셨다면, 이 페이지나 선택한 과정의 인덱스 페이지에서 'Open in GitHub Codespaces' 버튼을 클릭하세요. 웹 기반의 교육 환경이 열립니다 (GitHub 무료 계정 필요).
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
 
-## Training Environment Setup
+## 교육 환경 설정
 
-!!! exercise "Environment Setup"
+!!! exercise "환경 설정"
 
     !!! tip inline end ""
 
-        :material-laptop:{.nextflow-primary} Set up your environment for the first time.
+        :material-laptop:{.nextflow-primary} 처음 환경을 설정해보세요.
 
-    Instructions for setting up your environment to work through training materials (all courses). Provides an orientation to GitHub Codespaces as well as alternate installation instructions for working on your own local machine.
+    모든 교육 과정에서 사용할 수 있도록 학습 환경을 설정하는 방법에 대한 안내입니다. GitHub Codespaces에 대한 기본 소개와 로컬 컴퓨터에서 직접 작업할 수 있는 대체 설치 방법도 포함되어 있습니다.
 
-    [Start the Environment Setup training :material-arrow-right:](envsetup/index.md){ .md-button .md-button--primary }
+    [환경 설정 교육 시작하기 :material-arrow-right:](envsetup/index.md){ .md-button .md-button--primary }
 
-## Nextflow for Newcomers
+## Nextflow 입문자를 위한 과정
 
-These are foundational, domain-agnostic courses intended for those who are completely new to Nextflow. Each course consists of a series of training modules that are designed to help learners build up their skills progressively.
+이 과정들은 Nextflow를 완전히 처음 접하는 분들을 위한 기초 수업으로, 특정 분야의 전문 지식 없이도 학습할 수 있도록 구성되어 있습니다. 각 과정은 단계별로 실력을 쌓을 수 있도록 여러 개의 교육 모듈로 이루어져 있습니다.
 
 !!! exercise "Hello Nextflow"
 
     !!! tip inline end ""
 
-        :material-run-fast:{.nextflow-primary} Learn to develop pipelines in Nextflow.
+        :material-run-fast:{.nextflow-primary} Nextflow로 파이프라인 개발 배우기
 
-        :fontawesome-brands-youtube:{.youtube} Video material available.
+        :fontawesome-brands-youtube:{.youtube} 동영상 자료 제공
 
-    This is a course for newcomers who wish to learn how to develop their own pipelines. The course covers the core components of the Nextflow language in enough detail to enable developing simple but fully functional pipelines. It also covers key elements of pipeline design, development and configuration practices.
+    이 과정은 자신만의 파이프라인을 개발하고자 하는 입문자를 위한 교육입니다. Nextflow 언어의 핵심 구성 요소들을 충분히 상세하게 다루며, 단순하지만 완전한 기능을 갖춘 파이프라인을 개발할 수 있도록 도와줍니다. 또한 파이프라인 설계, 개발, 설정에 필요한 주요 개념들도 함께 다룹니다.
 
-    [Start the Hello Nextflow training :material-arrow-right:](hello_nextflow/index.md){ .md-button .md-button--primary }
+    [Hello Nextflow 교육 시작하기 :material-arrow-right:](hello_nextflow/index.md){ .md-button .md-button--primary }
 
 !!! info ""
 
-    **Coming soon:** "Nextflow Run" — Learn to run Nextflow pipelines (run only, no code development)
+    **곧 출시 예정:** "Nextflow Run" — Nextflow 파이프라인 실행 배우기 (코드 개발 없이 실행만 다룸)
 
 <!-- COMMENTED OUT UNTIL THIS IS READY
 !!! exercise "Nextflow Run"
 
     !!! tip inline end ""
 
-        :material-run-fast:{.nextflow-primary} Learn to run Nextflow pipelines.
+        :material-run-fast:{.nextflow-primary} Nextflow 파이프라인 실행 방법 배우기
 
-    This is a course for newcomers who wish to learn how to run existing pipelines. The course covers the bare essentials of the Nextflow language in order to enable interpretation of existing pipelines, as well as the mechanics for configuring and running Nextflow pipelines from a command-line environment. It also covers important components of the Nextflow ecosystem, including the nf-core project, which offers a large number of community-curated pipelines, and the Seqera platform for managing pipeline execution at scale (operated by the creators of Nextflow).
+    이 과정은 기존 파이프라인을 실행하는 방법을 배우고자 하는 입문자를 위한 교육입니다. 기존 파이프라인을 이해하고 실행할 수 있도록 Nextflow 언어의 필수 개념만을 간단히 다루며, 명령줄 환경에서 Nextflow 파이프라인을 설정하고 실행하는 방법을 설명합니다. 또한, 커뮤니티에서 큐레이션한 다양한 파이프라인을 제공하는 nf-core 프로젝트와, 대규모 파이프라인 실행을 관리할 수 있도록 Seqera(Nextflow 개발사)에서 운영하는 플랫폼 등 Nextflow 생태계의 중요한 구성 요소들도 함께 소개합니다.
 
-    [Start the Nextflow Run training :material-arrow-right:](nextflow_run/index.md){ .md-button .md-button--primary }
+    [Nextflow Run 교육 시작하기 :material-arrow-right:](nextflow_run/index.md){ .md-button .md-button--primary }
 -->
 
-## Nextflow for Science
+## 과학 분야를 위한 Nextflow
 
-These are courses that demonstrate how to apply the concepts and components presented in 'Hello Nextflow' (see above) to specific scientific use cases. Each course consists of a series of training modules that are designed to help learners build up their skills progressively.
+이 과정들은 위의 'Hello Nextflow'에서 소개한 개념과 구성 요소들을 실제 과학 분야의 활용 사례에 적용하는 방법을 보여줍니다. 각 과정은 단계적으로 실력을 쌓아갈 수 있도록 여러 개의 교육 모듈로 구성되어 있습니다.
 
-!!! exercise "Nextflow for Genomics"
-
-    !!! tip inline end ""
-
-        :material-dna:{.nextflow-primary} Learn to develop a pipeline for genomics in Nextflow.
-
-    This is a course for researchers who wish to learn how to develop their own genomics pipelines. The course uses a variant calling use case to demonstrate how to develop a simple but functional genomics pipeline.
-
-    [Start the Nextflow for Genomics training :material-arrow-right:](nf4_science/genomics/){ .md-button .md-button--primary }
-
-!!! exercise "Nextflow for RNAseq"
+!!! exercise "유전체학을 위한 Nextflow"
 
     !!! tip inline end ""
 
-        :material-flask:{.nextflow-primary} Learn to develop a pipeline for RNAseq data processing in Nextflow.
+        :material-dna:{.nextflow-primary} Nextflow로 유전체학 파이프라인 개발 배우기
 
-    This is a course for researchers who wish to learn how to develop their own RNAseq pipelines. The course uses a bulk RNAseq processing use case to demonstrate how to develop a simple but functional RNAseq pipeline.
+    이 과정은 자신만의 유전체학 파이프라인을 개발하고자 하는 연구자를 위한 교육입니다. 변이 분석(variant calling) 사례를 통해 간단하면서도 기능적인 유전체학 파이프라인을 개발하는 방법을 보여줍니다.
 
-    [Start the Nextflow for RNAseq training :material-arrow-right:](nf4_science/rnaseq/){ .md-button .md-button--primary }
+    [유전체학 교육 시작하기 :material-arrow-right:](nf4_science/genomics/){ .md-button .md-button--primary }
 
-Let us know what other domains and use cases you'd like to see covered here by posting in the [Training section](https://community.seqera.io/c/training/) of the community forum.
-
-## In-depth Nextflow Training
-
-These are courses that demonstrate how to use Nextflow features in more detail or at a more advanced level. Each course consists of one or more training modules that are designed to help learners hone their skills on the corresponding topics.
-
-!!! exercise "Side Quests"
+!!! exercise "RNAseq를 위한 Nextflow"
 
     !!! tip inline end ""
 
-        :material-compass:{.nextflow-primary} Training modules for a variety of topics of interest.
+        :material-flask:{.nextflow-primary} Nextflow로 RNAseq 데이터 처리 파이프라인 개발 배우기
 
-    This is a course for Nextflow developers who wish to widen their range and/or deepen their skills. Although the modules are presented linearly, learners are welcome to pick and choose topics in any order. Any dependencies on components/skills that go beyond the scope of the 'Hello Nextflow' course are indicated in the corresponding module overview.
+    이 과정은 자신만의 RNAseq 파이프라인을 개발하고자 하는 연구자를 위한 교육입니다. 벌크 RNAseq 처리 사례를 통해 간단하면서도 기능적인 RNAseq 파이프라인을 개발하는 방법을 소개합니다.
 
-    [Start the Side Quests training :material-arrow-right:](side_quests/){ .md-button .md-button--primary }
+    [RNAseq 교육 시작하기 :material-arrow-right:](nf4_science/rnaseq/){ .md-button .md-button--primary }
 
-!!! exercise "Fundamentals Training"
+어떤 분야나 사용 사례가 추가되었으면 하는지 [커뮤니티 포럼의 교육 섹션](https://community.seqera.io/c/training/)에 글을 남겨 알려주세요.
+
+## Nextflow 심화 교육
+
+이 과정들은 Nextflow의 기능을 더 자세히, 또는 더 고급 수준에서 활용하는 방법을 보여줍니다. 각 과정은 관련 주제에 대한 실력을 더욱 깊이 있게 다듬을 수 있도록 하나 이상의 교육 모듈로 구성되어 있습니다
+
+!!! exercise "사이드 퀘스트"
+
+    !!! tip inline end ""
+
+        :material-compass:{.nextflow-primary} 다양한 주제를 다루는 교육 모듈
+
+    이 과정은 Nextflow 개발자가 기술의 폭을 넓히거나 깊이를 더하고자 할 때 적합합니다. 모듈은 순서대로 제공되지만, 학습자는 자유롭게 원하는 주제부터 선택하여 학습할 수 있습니다. ‘Hello Nextflow’ 과정을 넘어서는 내용이 필요한 경우, 각 모듈 개요에 그에 대한 의존성이 명시되어 있습니다.
+
+    [사이드 퀘스트 교육 시작하기 :material-arrow-right:](side_quests/){ .md-button .md-button--primary }
+
+!!! exercise "기초 교육"
 
     !!! quote inline end ""
 
-        :octicons-mortar-board-16:{.nextflow-primary} Comprehensive training material for exploring the full scope of Nextflow's capabilities.
+        :octicons-mortar-board-16:{.nextflow-primary} Nextflow의 모든 기능을 아우르는 포괄적인 교육 자료
 
-    The fundamentals training material covers all things Nextflow. Intended as a reference material for anyone looking to build complex workflows with Nextflow.
+    이 기초 교육 자료는 Nextflow의 전반적인 내용을 다루며, 복잡한 워크플로우를 구축하려는 분들을 위한 참고 자료로 활용될 수 있습니다.
 
-    [Start the Fundamentals Training :material-arrow-right:](basic_training/index.md){ .md-button .md-button--primary }
+    [기초 교육 시작하기 :material-arrow-right:](basic_training/index.md){ .md-button .md-button--primary }
 
-!!! exercise "Advanced Training"
+!!! exercise "고급 교육"
 
     !!! quote inline end ""
 
-        :fontawesome-solid-hat-wizard:{.nextflow-primary} Advanced training material for mastering Nextflow.
+        :fontawesome-solid-hat-wizard:{.nextflow-primary} Nextflow 마스터를 위한 고급 교육 자료
 
-    Advanced material exploring the more advanced features of the Nextflow language and runtime, and how to use them to write efficient and scalable data-intensive workflows.
+    Nextflow 언어와 런타임의 고급 기능을 탐색하며, 이를 통해 데이터 집약적인 워크플로우를 효율적이고 확장 가능하게 작성하는 방법을 배울 수 있습니다.
 
-    [Start the Advanced Training :material-arrow-right:](advanced/index.md){ .md-button .md-button--primary }
+    [고급 교육 시작하기 :material-arrow-right:](advanced/index.md){ .md-button .md-button--primary }
 
-## Other/Experimental
+## 기타 / 실험적 과정
 
-These are training courses that are not being actively taught/maintained and that we may repurpose elsewhere or delete in the near future.
-The corresponding materials are not available within the training environment.
-You can still find the materials in the GitHub repository and download them for local use.
+이 교육 과정들은 현재 적극적으로 유지되거나 진행되지 않고 있으며, 향후 다른 용도로 재구성되거나 삭제될 수 있습니다. 해당 자료들은 교육 환경에서는 제공되지 않으며, GitHub 저장소에서 직접 다운로드하여 로컬에서 사용할 수 있습니다.
 
-- **nf-customize** — Configuring nf-core pipelines ([docs](other/nf_customize) / [code](../other/nf-customize))
+- **nf-customize** — nf-core 파이프라인 설정 ([문서](other/nf_customize) / [코드](../other/nf-customize))
+- **nf-develop** — nf-core 템플릿으로 파이프라인 개발 ([문서](other/nf_develop) / [코드](../other/nf-develop))
+- **troubleshoot** — 문제 해결 연습 ([문서](other/troubleshoot) / [코드](../other/troubleshoot))
+- **hands-on (rnaseq)** — 벌크 RNAseq 파이프라인 개발 (사용 중단됨) ([문서](other/hands_on) / [코드](../other/hands-on))
 
-- **nf-develop** — Developing a pipeline with the nf-core template ([docs](other/nf_develop) / [code](../other/nf-develop))
+## 자료 모음
 
-- **troubleshoot** — Troubleshooting exercises ([docs](other/troubleshoot) / [code](../other/troubleshoot))
+유용한 참고 링크들을 빠르게 확인해보세요:
 
-- **hands-on (rnaseq)** — Developing a pipeline for bulk RNAseq (deprecated) ([docs](other/hands_on) / [code](../other/hands-on))
-
-## Resources
-
-Quick reference to some handy links:
-
-| Reference                                                   |  Community                                                   |
+| 참고 자료                                                    | 커뮤니티                                                    |
 | ----------------------------------------------------------- | ------------------------------------------------------------ |
-| [Nextflow Docs](https://nextflow.io/docs/latest/index.html) | [Nextflow Slack](https://www.nextflow.io/slack-invite.html)  |
-| [Nextflow Homepage](https://nextflow.io/)                   | [nf-core](https://nf-co.re/)                                 |
-| [Seqera](https://seqera.io/)                                | [Seqera Community Forum](https://community.seqera.io)        |
+| [Nextflow 문서](https://nextflow.io/docs/latest/index.html) | [Nextflow Slack](https://www.nextflow.io/slack-invite.html)  |
+| [Nextflow 홈페이지](https://nextflow.io/)                   | [nf-core](https://nf-co.re/)                                 |
+| [Seqera](https://seqera.io/)                                | [Seqera 커뮤니티 포럼](https://community.seqera.io)          |
 
-Not sure where to go? Check out the [Getting help](help.md) page.
+어디서부터 시작할지 모르겠다면 [도움 받기](help.md) 페이지를 참고하세요.
 
-## Credits and contributions
+## 크레딧 및 기여
 
-[![Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0](assets/img/cc_by-nc-nd.svg){ align=right }](https://creativecommons.org/licenses/by-nc-nd/4.0/)
+[![크리에이티브 커먼즈 라이선스: CC BY-NC-SA 4.0](assets/img/cc_by-nc-nd.svg){ align=right }](https://creativecommons.org/licenses/by-nc-nd/4.0/)
 
-This training material is developed and maintained by [Seqera](https://seqera.io) and released under an open-source license ([CC BY-NC-ND](https://creativecommons.org/licenses/by-nc-nd/4.0/)) for the benefit of the community. You are welcome to reuse these materials according to the terms of the license. If you are an instructor running your own trainings, we'd love to hear about how it goes and what we could do to make it easier.
+이 교육 자료는 [Seqera](https://seqera.io)에서 개발 및 유지 관리하고 있으며, 커뮤니티의 이익을 위해 오픈소스 라이선스([CC BY-NC-ND](https://creativecommons.org/licenses/by-nc-nd/4.0/)) 하에 배포됩니다. 라이선스 조건에 따라 자유롭게 재사용하실 수 있습니다. 교육을 진행하는 강사분이라면, 사용 경험과 개선점을 저희에게 알려주시면 감사하겠습니다.
 
-We welcome fixes and improvements from the community. Every page has a :material-file-edit-outline: icon in the top right of the page, which will take you to GitHub where you can propose changes to the training source material via a pull request.
+커뮤니티의 수정 및 개선 제안을 언제든지 환영합니다. 각 페이지 오른쪽 상단의 :material-file-edit-outline: 아이콘을 클릭하면 GitHub에서 Pull Request를 통해 제안할 수 있습니다.
 
 <div markdown class="homepage_logos">
 
