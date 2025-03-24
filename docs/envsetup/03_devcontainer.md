@@ -57,7 +57,7 @@ When prompted by VS Code to "Reopen in Container", click on it. Alternatively:
 
 - Press F1 (or Ctrl+Shift+P / Cmd+Shift+P on macOS)
 - Type "Dev Containers: Reopen in Container"
-- **Important**: When prompted to select a configuration, choose the **local** devcontainer configuration
+- **Important**: When prompted to select a configuration, choose the **local-dev** devcontainer configuration
 
 ![Reopen in Container prompt](img/reopen_prompt.png)
 
@@ -100,7 +100,7 @@ This should display the Nextflow version and runtime information, confirming tha
 If you encounter issues with the devcontainer setup:
 
 1. Ensure your Docker installation (Docker Desktop, Colima, Docker Engine, etc.) is running before opening the devcontainer
-2. Check that you've selected the **local** configuration when prompted
+2. Check that you've selected the **local-dev** configuration when prompted
 3. Verify that Docker buildx is installed and working by running `docker buildx version`
 4. If the container fails to build, try rebuilding it by running the "Dev Containers: Rebuild Container" command
 5. For persistent issues, refer to the [VS Code Dev Containers troubleshooting guide](https://code.visualstudio.com/docs/devcontainers/troubleshooting)
