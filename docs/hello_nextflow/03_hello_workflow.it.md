@@ -249,6 +249,320 @@ Impara come raccogliere gli output da chiamate di processo in batch e passarli a
 
 ---
 
+## 2. Aggiungi un terzo passo per raccogliere tutti i saluti
+
+Quando utilizziamo un processo per applicare una trasformazione a ciascuno degli elementi di un canale, come stiamo facendo qui con i saluti multipli, a volte vogliamo raccogliere gli elementi dal canale di output di quel processo e passarli a un altro processo che esegue una sorta di analisi o somma.
+
+Nel prossimo passo scriveremo semplicemente tutti gli elementi di un canale in un singolo file, utilizzando il comando UNIX 'cat'.
+
+### 2.1. Definisci il comando di raccolta e testalo nel terminale
+
+Il passo di raccolta che vogliamo aggiungere al nostro flusso di lavoro utilizzerà il comando 'cat' per concatenare i saluti in maiuscolo in un unico file.
+
+Eseguiamo il comando da solo nel terminale per verificare che funzioni come previsto, proprio come abbiamo fatto in precedenza.
+
+Esegui il seguente comando nel tuo terminale:
+
+```bash
+echo 'Hello' | tr '[a-z]' '[A-Z]' > UPPER-Hello-output.txt
+echo 'Bonjour' | tr '[a-z]' '[A-Z]' > UPPER-Bonjour-output.txt
+echo 'Holà' | tr '[a-z]' '[A-Z]' > UPPER-Holà-output.txt
+cat UPPER-Hello-output.txt UPPER-Bonjour-output.txt UPPER-Holà-output.txt > COLLECTED-output.txt
+```
+
+L'output è un file di testo chiamato `COLLECTED-output.txt` che contiene le versioni in maiuscolo dei saluti originali.
+
+```console title="COLLECTED-output.txt"
+HELLO
+BONJOUR
+HOLà
+```
+
+Questo è il risultato che vogliamo ottenere con il nostro flusso di lavoro.
+
+### 2.2. Crea un nuovo processo per eseguire il passo di raccolta
+
+Creiamo un nuovo processo e chiamamolo `collectGreetings()`.
+Possiamo iniziare a scriverlo basandoci su quello precedente.
+
+#### 2.2.1. Scrivi le parti 'ovvie' del processo
+
+Aggiungi la seguente definizione del processo allo script del flusso di lavoro:
+
+```groovy title="hello-workflow.nf" linenums="41"
+/*
+ * Collect uppercase greetings into a single output file
+ */
+process collectGreetings {
+
+    publishDir 'results', mode: 'copy'
+
+    input:
+        ???
+
+    output:
+        path "COLLECTED-output.txt"
+
+    script:
+    """
+    ??? > 'COLLECTED-output.txt'
+    """
+}
+```
+
+Questo è ciò che possiamo scrivere con sicurezza in base a quanto appreso finora.
+Ma non è funzionale!
+Manca la definizione dell'input e la prima metà del comando dello script perché dobbiamo capire come scrivere quella parte.
+
+#### 2.2.2. Definire gli input per `collectGreetings()`
+
+Dobbiamo raccogliere i saluti da tutte le chiamate al processo `convertToUpper()`.
+Cosa sappiamo che possiamo ottenere dal passo precedente nel flusso di lavoro?
+
+Il canale di output di `convertToUpper()` conterrà i percorsi dei singoli file che contengono i saluti in maiuscolo.
+Questo corrisponde a uno slot di input; chiamiamolo `input_files` per semplicità.
+
+Nel blocco del processo, apporta la seguente modifica al codice:
+
+_Prima:_ 
+
+```groovy title="hello-workflow.nf" linenums="48"
+        input:
+            ???
+```
+
+_Dopo:_ 
+
+```groovy title="hello-workflow.nf" linenums="48"
+        input:
+            path input_files
+```
+
+Nota che usiamo il prefisso `path` anche se ci aspettiamo che questo contenga più file.
+Nextflow non ha problemi con questo, quindi non importa.
+
+#### 2.2.3. Comporre il comando di concatenazione
+
+Qui le cose potrebbero diventare un po' complicate, perché dobbiamo essere in grado di gestire un numero arbitrario di file di input.
+In particolare, non possiamo scrivere il comando in anticipo, quindi dobbiamo dire a Nextflow come comporlo in fase di esecuzione in base agli input che fluiscono nel processo.
+
+In altre parole, se abbiamo un canale di input che contiene l'elemento `[file1.txt, file2.txt, file3.txt]`, dobbiamo fare in modo che Nextflow lo trasformi in `cat file1.txt file2.txt file3.txt`.
+
+Fortunatamente, Nextflow è abbastanza felice di farlo per noi se scriviamo semplicemente `cat ${input_files}` nel comando dello script.
+
+Nel blocco del processo, apporta la seguente modifica al codice:
+
+_Prima:_
+
+```groovy title="hello-workflow.nf" linenums="54"
+    script:
+    """
+    ??? > 'COLLECTED-output.txt'
+    """
+```
+
+_Dopo:_
+
+```groovy title="hello-workflow.nf" linenums="54"
+    script:
+    """
+    cat ${input_files} > 'COLLECTED-output.txt'
+    """
+```
+
+In teoria, questo dovrebbe gestire qualsiasi numero arbitrario di file di input.
+
+!!! suggerimento
+
+    Alcuni strumenti da riga di comando richiedono di fornire un argomento (come `-input`) per ogni file di input.
+    In tal caso, dovremmo fare un po' di lavoro extra per comporre il comando.
+    Puoi vedere un esempio di questo nel corso di formazione [Nextflow for Genomics](../../nf4_science/genomics/).
+
+<!--[AGGIUNGI LINK alla nota sopra] -->
+
+### 2.3. Aggiungi il passo di raccolta al flusso di lavoro
+
+Ora dovremmo semplicemente chiamare il processo di raccolta sull'output del passo di trasformazione in maiuscolo.
+
+#### 2.3.1. Collega le chiamate ai processi
+
+Nel blocco del flusso di lavoro, apporta la seguente modifica al codice:
+
+_Prima:_
+
+```groovy title="hello-workflow.nf" linenums="75"
+    // convert the greeting to uppercase
+    convertToUpper(sayHello.out)
+}
+```
+
+_Dopo:_ 
+
+```groovy title="hello-workflow.nf" linenums="75"
+    // convert the greeting to uppercase
+    convertToUpper(sayHello.out)
+
+    // collect all the greetings into one file
+    collectGreetings(convertToUpper.out)
+}
+```
+
+Questo collega l'output di `convertToUpper()` all'input di `collectGreetings()`.
+
+#### 2.3.2. Esegui il flusso di lavoro con `-resume`
+
+Proviamolo.
+
+```bash
+nextflow run hello-workflow.nf -resume
+```
+
+Viene eseguito con successo, compreso il terzo passo:
+
+```console title="Output" linenums="1"
+ N E X T F L O W   ~  version 24.10.0
+
+Launching `hello-workflow.nf` [mad_gilbert] DSL2 - revision: 6acfd5e28d
+
+executor >  local (3)
+[79/33b2f0] sayHello (2)         | 3 of 3, cached: 3 ✔
+[99/79394f] convertToUpper (3)   | 3 of 3, cached: 3 ✔
+[47/50fe4a] collectGreetings (1) | 3 of 3 ✔
+```
+
+Tuttavia, guarda il numero di chiamate per collectGreetings() alla riga 8. 
+Ce ne  aspettavamo solo una, ma ce ne sono tre.
+
+E dai un'occhiata anche ai contenuti del file di output finale:
+
+```console title="results/COLLECTED-output.txt"
+Holà
+```
+
+Oh no. Il passo di raccolta è stato eseguito singolarmente su ogni saluto, il che NON è quello che volevamo.
+
+Dobbiamo fare qualcosa per dire esplicitamente a Nextflow che vogliamo che quel terzo passo venga eseguito su tutti gli elementi nel canale di output di 'convertToUpper()'.
+
+### 2.4. Usa un operatore per raccogliere i saluti in un unico input
+
+Sì, ancora una volta la risposta al nostro problema è un operatore.
+
+In particolare, utilizzeremo l'operatore opportunamente chiamato ['collect()'] (https://www.nextflow.io/docs/latest/reference/operator.html#collect).
+
+#### 2.4.1. Aggiungi l'operatore 'collect()'
+
+Questa volta sarà un po' diverso perché non stiamo aggiungendo l'operatore nel contesto di una fabbrica di canali, ma a un canale di output.
+
+Prendiamo 'convertToUpper.out' e aggiungiamo l'operatore 'collect()', che diventa 'convertToUpper.out.collect()'. 
+Possiamo collegarlo direttamente alla chiamata del processo 'collectGreetings()'.
+
+Nel blocco del flusso di lavoro, apporta la seguente modifica al codice:
+
+_Prima:_ 
+
+```groovy title="hello-workflow.nf" linenums="78"
+    // collect all the greetings into one file
+    collectGreetings(convertToUpper.out)
+}
+```
+
+_Dopo:_
+
+```groovy title="hello-workflow.nf" linenums="78"
+    // collect all the greetings into one file
+    collectGreetings(convertToUpper.out.collect())
+}
+```
+
+#### 2.4.2. Aggiungi alcune dichiarazioni `view()`
+
+Includiamo anche un paio di dichiarazioni `view()` per visualizzare lo stato prima e dopo dei contenuti del canale.
+
+_Prima:_
+
+```groovy title="hello-workflow.nf" linenums="78"
+    // collect all the greetings into one file
+    collectGreetings(convertToUpper.out.collect())
+}
+```
+
+_Dopo:_
+
+```groovy title="hello-workflow.nf" linenums="78"
+    // collect all the greetings into one file
+    collectGreetings(convertToUpper.out.collect())
+
+    // optional view statements
+    convertToUpper.out.view { greeting -> "Before collect: $greeting" }
+    convertToUpper.out.collect().view { greeting -> "After collect: $greeting" }
+}
+```
+
+Le dichiarazioni `view()` possono essere posizionate dove vuoi; noi le abbiamo messe dopo la chiamata per migliorare la leggibilità.
+
+#### 2.4.3. Esegui di nuovo il flusso di lavoro con `-resume`
+
+Proviamolo:
+
+```bash
+nextflow run hello-workflow.nf -resume
+```
+
+Viene eseguito con successo, anche se l'output del log potrebbe sembrare un po' più disordinato di così (l'abbiamo ripulito per migliorare la leggibilità).
+
+```console title="Output" linenums="1"
+ N E X T F L O W   ~  version 24.10.0
+
+Launching `hello-workflow.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726
+
+[d6/cdf466] sayHello (1)       | 3 of 3, cached: 3 ✔
+[99/79394f] convertToUpper (2) | 3 of 3, cached: 3 ✔
+[1e/83586c] collectGreetings   | 1 of 1 ✔
+Before collect: /workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt
+Before collect: /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt
+Before collect: /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Holà-output.txt
+After collect: [/workspaces/training/hello-nextflow/work/b3/d52708edba8b864024589285cb3445/UPPER-Bonjour-output.txt, /workspaces/training/hello-nextflow/work/99/79394f549e3040dfc2440f69ede1fc/UPPER-Hello-output.txt, /workspaces/training/hello-nextflow/work/aa/56bfe7cf00239dc5badc1d04b60ac4/UPPER-Holà-output.txt]
+```
+
+Questa volta il terzo passo è stato chiamato solo una volta!
+
+Guardando l'output delle dichiarazioni `view()`, vediamo quanto segue:
+
+- Tre dichiarazioni `Before collect:`, una per ciascun saluto: a quel punto i percorsi dei file sono elementi individuali nel canale.
+- Una sola dichiarazione `After collect:`: i tre percorsi dei file sono ora raggruppati in un singolo elemento.
+
+Dai un'occhiata anche ai contenuti del file di output finale:
+
+```console title="results/COLLECTED-output.txt"
+BONJOUR
+HELLO
+HOLà
+```
+
+Questa volta abbiamo tutti e tre i saluti nel file di output finale. Successo! Rimuovi le chiamate `view` opzionali per rendere gli output successivi meno verbosi.
+
+!!! nota
+
+    Se esegui questo processo più volte senza `-resume`, vedrai che l'ordine dei saluti cambia da un'esecuzione all'altra.
+    Questo ti mostra che l'ordine in cui gli elementi fluiscono attraverso le chiamate ai processi non è garantito essere consistente.
+
+### Conclusione
+
+Ora sai come raccogliere gli output da un gruppo di chiamate ai processi e passarli a un passo di analisi o somma congiunta.
+
+### Cosa c'è dopo?
+
+Impara come passare più di un input a un processo.
+
+---
+
+
+
+
+
+
+
+
 
 
 
