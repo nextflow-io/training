@@ -243,7 +243,7 @@ At the same time, we're going to pretend that the `cowpy` process requires more 
 
 === "After"
 
-    ```groovy title="nextflow.config" linenums="4" hl_lines="2-5"
+    ```groovy title="nextflow.config" linenums="4" hl_lines="3-6"
     process {
         memory = 1.GB
         withName: 'cowpy' {
@@ -255,9 +255,10 @@ At the same time, we're going to pretend that the `cowpy` process requires more 
 
 === "Before"
 
-    ```groovy title="nextflow.config" linenums="14" hl_lines="2"
+    ```groovy title="nextflow.config" linenums="14" hl_lines="3"
     process {
         memory = 1.GB
+
     }
     ```
 

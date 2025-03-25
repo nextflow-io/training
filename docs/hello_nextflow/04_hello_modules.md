@@ -153,8 +153,7 @@ Let's insert that above the workflow block and fill it out appropriately.
 
 === "Before"
 
-    ```groovy title="hello-modules.nf" linenums="50" hl_lines="1"
-
+    ```groovy title="hello-modules.nf" linenums="50"
     workflow {
     ```
 
