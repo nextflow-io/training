@@ -1,0 +1,9 @@
+task_id	hash	native_id	name	status	exit	submit	duration	realtime	%cpu	peak_rss	peak_vmem	rchar	wchar
+3	5f/b20b59	38310	FASTQC (FASTQC on gut)	CACHED	0	2025-03-18 18:29:46.331	6.9s	6.9s	-	-	-	-	-
+2	01/cbee01	38365	FASTQC (FASTQC on lung)	CACHED	0	2025-03-18 18:29:46.397	6.9s	6.8s	-	-	-	-	-
+4	be/14da85	38318	FASTQC (FASTQC on liver)	CACHED	0	2025-03-18 18:29:46.347	6.9s	6.8s	-	-	-	-	-
+1	95/6ca72b	14948	INDEX	CACHED	0	2025-03-18 17:42:29.195	56.2s	56.2s	-	-	-	-	-
+5	2a/bafcc4	28722	QUANTIFICATION (1)	CACHED	0	2025-03-18 18:10:48.641	623ms	615ms	-	-	-	-	-
+7	4d/e879a4	30037	QUANTIFICATION (3)	CACHED	0	2025-03-18 18:12:37.796	1.2s	1.1s	-	-	-	-	-
+6	97/149699	30060	QUANTIFICATION (2)	CACHED	0	2025-03-18 18:12:37.822	1.4s	1.4s	-	-	-	-	-
+8	eb/0c7c17	9367	MULTIQC	CACHED	0	2025-03-18 19:10:28.009	3.2s	3.2s	-	-	-	-	-

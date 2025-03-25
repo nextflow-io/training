@@ -35,6 +35,9 @@ process INDEX {
 }
 
 process QUANTIFICATION {
+    tag "$sample_id"
+    publishDir params.outdir, mode: 'copy'
+
     input:
     path salmon_index
     tuple val(sample_id), path(reads)

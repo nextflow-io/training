@@ -22,6 +22,7 @@ log.info """\
  * given the transcriptome file
  */
 process INDEX {
+
     input:
     path transcriptome
 
@@ -36,4 +37,5 @@ process INDEX {
 
 workflow {
     index_ch = INDEX(params.transcriptome_file)
+    index_ch.view{ it }
 }

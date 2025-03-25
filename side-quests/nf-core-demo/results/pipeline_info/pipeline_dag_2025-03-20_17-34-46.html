@@ -1,0 +1,82 @@
+<!--
+  ~ Copyright 2013-2024, Seqera Labs
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+<html>
+<head>
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+</head>
+<body>
+<pre class="mermaid" style="text-align: center;">
+flowchart TB
+    subgraph " "
+    v2["Channel.fromList"]
+    v22["Channel.of"]
+    v25["Channel.fromPath"]
+    v28["ch_workflow_summary"]
+    v32["ch_methods_description"]
+    v39["replace_names"]
+    v40["sample_names"]
+    end
+    subgraph NFCORE_DEMO
+    subgraph DEMO
+    v9([FASTQC])
+    v15([SEQTK_TRIM])
+    v41([MULTIQC])
+    v3(( ))
+    v11(( ))
+    v36(( ))
+    v37(( ))
+    v38(( ))
+    v45(( ))
+    end
+    end
+    subgraph " "
+    v10[" "]
+    v16["ch_trimmed"]
+    v42[" "]
+    v43[" "]
+    v44[" "]
+    v46["multiqc_report"]
+    end
+    v2 --> v3
+    v3 --> v9
+    v9 --> v10
+    v9 --> v11
+    v3 --> v15
+    v15 --> v16
+    v15 --> v11
+    v22 --> v11
+    v25 --> v36
+    v28 --> v11
+    v32 --> v11
+    v39 --> v41
+    v40 --> v41
+    v11 --> v41
+    v36 --> v41
+    v37 --> v41
+    v38 --> v41
+    v41 --> v44
+    v41 --> v43
+    v41 --> v42
+    v41 --> v45
+    v45 --> v46
+
+</pre>
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({ startOnLoad: true, maxTextSize: Number.MAX_SAFE_INTEGER, maxEdges: Number.MAX_SAFE_INTEGER });
+</script>
+</body>
+</html>

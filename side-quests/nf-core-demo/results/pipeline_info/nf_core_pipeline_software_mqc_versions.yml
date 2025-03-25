@@ -1,0 +1,7 @@
+FASTQC:
+  fastqc: 0.12.1
+SEQTK_TRIM:
+  seqtk: 1.4-r122
+Workflow:
+    nf-core/demo: v1.0.1-g04060b4
+    Nextflow: 24.10.4
