@@ -459,21 +459,21 @@ Ora sai come modificare l'esecutore per utilizzare diversi tipi di infrastruttur
 
 ### Prossimi passi?
 
-Learn how to control the resources allocated for executing processes.
+Scopri come controllare le risorse assegnate per l'esecuzione dei processi.
 
 ---
 
-## 5. Use profiles to select preset configurations
+## 5. Utilizza i profili per selezionare configurazioni preimpostate
 
-You may want to switch between alternative settings depending on what computing infrastructure you're using. For example, you might want to develop and run small-scale tests locally on your laptop, then run full-scale workloads on HPC or cloud.
+Potresti voler passare da un'impostazione alternativa all'altra a seconda dell'infrastruttura informatica che stai utilizzando. Ad esempio, potresti voler sviluppare ed eseguire test su piccola scala localmente sul tuo laptop, quindi eseguire carichi di lavoro su larga scala su HPC o cloud.
 
-Nextflow lets you set up profiles that describe different configurations, which you can then select at runtime using a command-line argument, rather than having to modify the configuration file itself.
+Nextflow ti consente di impostare profili che descrivono diverse configurazioni, che puoi quindi selezionare in fase di esecuzione utilizzando un argomento della riga di comando, anziché dover modificare il file di configurazione stesso.
 
-### 5.1. Create profiles for switching between local development and execution on HPC
+### 5.1. Creare profili per passare dallo sviluppo locale all'esecuzione su HPC
 
-Let's set up two alternative profiles; one for running small scale loads on a regular computer, where we'll use Docker containers, and one for running on a university HPC with a Slurm scheduler, where we'll use Conda packages.
+Impostiamo due profili alternativi: uno per l'esecuzione di carichi su piccola scala su un computer normale, dove utilizzeremo contenitori Docker, e uno per l'esecuzione su un HPC universitario con uno scheduler Slurm, dove utilizzeremo pacchetti Conda.
 
-Add the following to your `nextflow.config` file:
+Aggiungere quanto segue al file `nextflow.config`:
 
 ```groovy title="nextflow.config" linenums="3"
 profiles {
@@ -493,49 +493,49 @@ profiles {
 }
 ```
 
-You see that for the university HPC, we're also specifying resource limitations.
+Come puoi vedere, per l'HPC universitario stiamo anche specificando le limitazioni delle risorse.
 
-### 5.2. Run the workflow with a profile
+### 5.2. Esegui workflow con un profilo.
 
-To specify a profile in our Nextflow command line, we use the `-profile` argument.
+Per specificare un profilo nella nostra riga di comando Nextflow, utilizziamo l'argomento `-profile`.
 
-Let's try running the workflow with the `my_laptop` configuration.
+Proviamo a eseguire il flusso di lavoro con la configurazione `my_laptop`.
 
 ```bash
 nextflow run hello-config.nf -profile my_laptop
 ```
 
-This still produces the following output:
+Questo produce ancora il seguente output:
 
 ```
- N E X T F L O W   ~  version 24.10.0
+ N E X T F L O W   ~  versione 24.10.0
 
-Launching `hello-config.nf` [gigantic_brazil] DSL2 - revision: ede9037d02
+Lancio `hello-config.nf` [gigantic_brazil] DSL2 - revisione: ede9037d02
 
-executor >  local (8)
+executor >  locale (8)
 [58/da9437] sayHello (3)       | 3 of 3 ✔
 [35/9cbe77] convertToUpper (2) | 3 of 3 ✔
 [67/857d05] collectGreetings   | 1 of 1 ✔
 [37/7b51b5] cowpy              | 1 of 1 ✔
-There were 3 greetings in this batch
+Ci sono tre saluti in questo batch
 ```
 
-As you can see, this allows us to toggle between configurations very conveniently at runtime.
+Come potete vedere, questo ci consente di passare da una configurazione all'altra in modo molto pratico durante l'esecuzione.
 
-!!! warning
+!!! Attenzione
 
-    The `univ_hpc` profile will not run properly in the training environment since we do not have access to a Slurm scheduler.
+    Il profilo `univ_hpc` non verrà eseguito correttamente nell'ambiente di training poiché non abbiamo accesso a uno scheduler Slurm.
 
-If in the future we find other elements of configuration that are always co-occurring with these, we can simply add them to the corresponding profile(s).
-We can also create additional profiles if there are other elements of configuration that we want to group together.
+Se in futuro dovessimo trovare altri elementi di configurazione che si verificano sempre contemporaneamente a questi, potremmo semplicemente aggiungerli al profilo/i corrispondente/i.
+Possiamo anche creare profili aggiuntivi se ci sono altri elementi di configurazione che vogliamo raggruppare.
 
-### 5.3. Create a test profile
+### 5.3. Crea un profilo di prova
 
-Profiles are not only for infrastructure configuration.
-We can also use them to set default values for workflow parameters, to make it easier for others to try out the workflow without having to gather appropriate input values themselves.
-This is intended as an alternative to using a parameter file.
+I profili non servono solo per la configurazione dell'infrastruttura.
+Possiamo anche usarli per impostare valori predefiniti per i parametri del flusso di lavoro, per rendere più facile per altri provare il workflow senza dover raccogliere autonomamente i valori di input appropriati.
+Questo è inteso come alternativa all'uso di un file di parametri.
 
-The syntax for expressing default values is the same as when writing them into the workflow file itself, except we wrap them in a block named `test`:
+La sintassi per esprimere i valori predefiniti è la stessa di quando li scriviamo nel file del workflow stesso, tranne per il fatto che li racchiudiamo in un blocco denominato `test`:
 
 ```groovy title="Syntax example"
     test {
@@ -545,7 +545,7 @@ The syntax for expressing default values is the same as when writing them into t
     }
 ```
 
-If we add a test profile for our workflow, the `profiles` block becomes:
+Se aggiungiamo un profilo di prova per il nostro flusso di lavoro, il blocco `profili` diventa:
 
 ```groovy title="nextflow.config" linenums="4"
 profiles {
@@ -570,53 +570,53 @@ profiles {
 }
 ```
 
-Just like for technical configuration profiles, you can set up multiple different profiles specifying parameters under any arbitrary name you like.
+Proprio come per i profili di configurazione tecnica, è possibile impostare più profili diversi specificando i parametri con qualsiasi nome arbitrario si desideri.
 
-### 5.4. Run the workflow locally with the test profile
+### 5.4. Esegui il workflow localmente con il profilo di prova
 
-Conveniently, profiles are not mutually exclusive, so we can specify multiple profiles in our command line using the following syntax `-profile <profile1>,<profile2>` (for any number of profiles).
+Per comodità, i profili non si escludono a vicenda, quindi possiamo specificare più profili nella nostra riga di comando utilizzando la seguente sintassi `-profile <profile1>,<profile2>` (per qualsiasi numero di profili).
 
-!!! note
+!!! nota
 
-    If you combine profiles that set values for the same elements of configuration and are described in the same configuration file, Nextflow will resolve the conflict by using whichever value it read in last (_i.e._ whatever comes later in the file).
-    If the conflicting settings are set in different configuration sources, the default [order of precedence](https://www.nextflow.io/docs/latest/config.html) applies.
+   Se si combinano profili che impostano valori per gli stessi elementi di configurazione e sono descritti nello stesso file di configurazione, Nextflow risolverà il conflitto utilizzando il valore letto per ultimo (ovvero, qualsiasi cosa si trovi dopo nel file).
+   Se le impostazioni in conflitto sono impostate in diverse origini di configurazione, si applica l'[ordine di precedenza](https://www.nextflow.io/docs/latest/config.html) predefinito.
 
-Let's try adding the test profile to our previous command:
+Proviamo ad aggiungere il profilo di prova al nostro comando precedente:
 
 ```bash
 nextflow run hello-config.nf -profile my_laptop,test
 ```
 
-This should produce the following:
+Ciò dovrebbe produrre quanto segue:
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.10.0
+ N E X T F L O W   ~  versione 24.10.0
 
-Launching `hello-config.nf` [gigantic_brazil] DSL2 - revision: ede9037d02
+Lancio `hello-config.nf` [gigantic_brazil] DSL2 - revisione: ede9037d02
 
-executor >  local (8)
+executor >  locale (8)
 [58/da9437] sayHello (3)       | 3 of 3 ✔
 [35/9cbe77] convertToUpper (2) | 3 of 3 ✔
 [67/857d05] collectGreetings   | 1 of 1 ✔
 [37/7b51b5] cowpy              | 1 of 1 ✔
-There were 3 greetings in this batch
+Ci sono tre saluti in questo batch
 ```
 
-<!-- improve by showing and varying the outputs for all these maybe -->
+<!-- migliorare mostrando e variando gli output per tutti questi forse -->
 
-This means that as long as we distribute any test data files with the workflow code, anyone can quickly try out the workflow without having to supply their own inputs via the command line or a parameter file.
+Ciò significa che finché distribuiamo file di dati di prova con il codice del workflow, chiunque può provare rapidamente il workflow senza dover fornire i propri input tramite la riga di comando o un file di parametri.
 
-!!! note
+!!! nota
 
-    We can even point to URLs for larger files that are stored externally.
-    Nextflow will download them automatically as long as there is an open connection.
+   Possiamo anche puntare agli URL per file più grandi che sono archiviati esternamente. 
+   Nextflow li scaricherà automaticamente finché c'è una connessione aperta.
+   
+### Conclusione
 
-### Takeaway
+Sai come usare i profili per selezionare una configurazione preimpostata in fase di esecuzione con il minimo sforzo. Più in generale, sai come configurare le esecuzioni del tuo workflow per adattarle a diverse piattaforme di elaborazione e migliorare la riproducibilità delle tue analisi.
 
-You know how to use profiles to select a preset configuration at runtime with minimal hassle. More generally, you know how to configure your workflow executions to suit different compute platforms and enhance the reproducibility of your analyses.
+### Prossimi passi
 
-### What's next?
+Festeggia e datti una bella pacca sulla spalla! Hai completato il tuo primo corso per sviluppatori Nextflow.
 
-Celebrate and give yourself a big pat on the back! You have completed your very first Nextflow developer course.
-
-Next, we ask you to complete a very short survey about your experience with this training course, then we'll take you to a page with links to further training resources and helpful links.
+Successivamente, ti chiederemo di compilare un brevissimo sondaggio sulla tua esperienza con questo corso di formazione, dopodiché ti indirizzeremo a una pagina con link ad ulteriori risorse di formazione e link utili.
