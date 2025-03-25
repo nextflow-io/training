@@ -77,28 +77,28 @@ This creates a channel called `greeting_ch` using the `Channel.of()` channel fac
 
 In the workflow block, add the channel factory code:
 
-_Before:_
+=== "After"
 
-```groovy title="hello-channels.nf" linenums="27"
-workflow {
+    ```groovy title="hello-channels.nf" linenums="27" hl_lines="2-5"
+    workflow {
 
-    // emit a greeting
-    sayHello(params.greeting)
-}
-```
+        // create a channel for inputs
+        greeting_ch = Channel.of('Hello Channels!')
 
-_After:_
+        // emit a greeting
+        sayHello(params.greeting)
+    }
+    ```
 
-```groovy title="hello-channels.nf" linenums="27"
-workflow {
+=== "Before"
 
-    // create a channel for inputs
-    greeting_ch = Channel.of('Hello Channels!')
+    ```groovy title="hello-channels.nf" linenums="27" hl_lines="2"
+    workflow {
 
-    // emit a greeting
-    sayHello(params.greeting)
-}
-```
+        // emit a greeting
+        sayHello(params.greeting)
+    }
+    ```
 
 This is not yet functional since we haven't yet switched the input to the process call.
 
@@ -108,31 +108,31 @@ Now we need to actually plug our newly created channel into the `sayHello()` pro
 
 In the workflow block, make the following code change:
 
-_Before:_
+=== "After"
 
-```groovy title="hello-channels.nf" linenums="27"
-workflow {
+    ```groovy title="hello-channels.nf" linenums="27" hl_lines="7"
+    workflow {
 
-    // create a channel for inputs
-    greeting_ch = Channel.of('Hello Channels!')
+        // create a channel for inputs
+        greeting_ch = Channel.of('Hello Channels!')
 
-    // emit a greeting
-    sayHello(params.greeting)
-}
-```
+        // emit a greeting
+        sayHello(greeting_ch)
+    }
+    ```
 
-_After:_
+=== "Before"
 
-```groovy title="hello-channels.nf" linenums="27"
-workflow {
+    ```groovy title="hello-channels.nf" linenums="27" hl_lines="7"
+    workflow {
 
-    // create a channel for inputs
-    greeting_ch = Channel.of('Hello Channels!')
+        // create a channel for inputs
+        greeting_ch = Channel.of('Hello Channels!')
 
-    // emit a greeting
-    sayHello(greeting_ch)
-}
-```
+        // emit a greeting
+        sayHello(params.greeting)
+    }
+    ```
 
 This tells Nextflow to run the `sayHello` process on the contents of the `greeting_ch` channel.
 
@@ -192,19 +192,19 @@ We just have to load more values into the channel.
 
 In the workflow block, make the following code change:
 
-_Before:_
+=== "After"
 
-```groovy title="hello-channels.nf" linenums="29"
-// create a channel for inputs
-greeting_ch = Channel.of('Hello Channels')
-```
+    ```groovy title="hello-channels.nf" linenums="29" hl_lines="2"
+    // create a channel for inputs
+    greeting_ch = Channel.of('Hello','Bonjour','Holà')
+    ```
 
-_After:_
+=== "Before"
 
-```groovy title="hello-channels.nf" linenums="29"
-// create a channel for inputs
-greeting_ch = Channel.of('Hello','Bonjour','Holà')
-```
+    ```groovy title="hello-channels.nf" linenums="29" hl_lines="2"
+    // create a channel for inputs
+    greeting_ch = Channel.of('Hello Channels')
+    ```
 
 The documentation tells us this should work. Can it really be so simple?
 
@@ -295,45 +295,45 @@ Here, for convenience, we'll just use the greeting itself since it's just a shor
 
 In the process block, make the following code changes:
 
-_Before:_
+=== "After"
 
-```groovy title="hello-channels.nf" linenums="6"
-process sayHello {
+    ```groovy title="hello-channels.nf" linenums="6" hl_lines="9 13"
+    process sayHello {
 
-    publishDir 'results', mode: 'copy'
+        publishDir 'results', mode: 'copy'
 
-    input:
-        val greeting
+        input:
+            val greeting
 
-    output:
-        path 'output.txt'
+        output:
+            path "${greeting}-output.txt"
 
-    script:
-    """
-    echo '$greeting' > output.txt
-    """
-}
-```
+        script:
+        """
+        echo '$greeting' > '$greeting-output.txt'
+        """
+    }
+    ```
 
-_After:_
+=== "Before"
 
-```groovy title="hello-channels.nf" linenums="6"
-process sayHello {
+    ```groovy title="hello-channels.nf" linenums="6" hl_lines="9 13"
+    process sayHello {
 
-    publishDir 'results', mode: 'copy'
+        publishDir 'results', mode: 'copy'
 
-    input:
-        val greeting
+        input:
+            val greeting
 
-    output:
-        path "${greeting}-output.txt"
+        output:
+            path 'output.txt'
 
-    script:
-    """
-    echo '$greeting' > '$greeting-output.txt'
-    """
-}
-```
+        script:
+        """
+        echo '$greeting' > output.txt
+        """
+    }
+    ```
 
 Make sure to replace `output.txt` in both the output definition and in the `script:` command block.
 
@@ -426,26 +426,26 @@ Common sense suggests we should be able to simply pass in an array of values ins
 
 Let's take the `greetings_array` variable we just imagined and make it a reality by adding it to the workflow block:
 
-_Before:_
+=== "After"
 
-```groovy title="hello-channels.nf" linenums="27"
-workflow {
+    ```groovy title="hello-channels.nf" linenums="27" hl_lines="2-5"
+    workflow {
 
-    // create a channel for inputs
-    greeting_ch = Channel.of('Hello','Bonjour','Holà')
-```
+        // declare an array of input greetings
+        greetings_array = ['Hello','Bonjour','Holà']
 
-_After:_
+        // create a channel for inputs
+        greeting_ch = Channel.of('Hello','Bonjour','Holà')
+    ```
 
-```groovy title="hello-channels.nf" linenums="27"
-workflow {
+=== "Before"
 
-    // declare an array of input greetings
-    greetings_array = ['Hello','Bonjour','Holà']
+    ```groovy title="hello-channels.nf" linenums="27" hl_lines="2"
+    workflow {
 
-    // create a channel for inputs
-    greeting_ch = Channel.of('Hello','Bonjour','Holà')
-```
+        // create a channel for inputs
+        greeting_ch = Channel.of('Hello','Bonjour','Holà')
+    ```
 
 #### 3.1.2. Set array of greetings as the input to the channel factory
 
@@ -453,19 +453,19 @@ We're going to replace the values `'Hello','Bonjour','Holà'` currently hardcode
 
 In the workflow block, make the following change:
 
-_Before:_
+=== "After"
 
-```groovy title="hello-channels.nf" linenums="32"
-    // create a channel for inputs
-    greeting_ch = Channel.of('Hello','Bonjour','Holà')
-```
+    ```groovy title="hello-channels.nf" linenums="32" hl_lines="2"
+        // create a channel for inputs
+        greeting_ch = Channel.of(greetings_array)
+    ```
 
-_After:_
+=== "Before"
 
-```groovy title="hello-channels.nf" linenums="32"
-    // create a channel for inputs
-    greeting_ch = Channel.of(greetings_array)
-```
+    ```groovy title="hello-channels.nf" linenums="32" hl_lines="2"
+        // create a channel for inputs
+        greeting_ch = Channel.of('Hello','Bonjour','Holà')
+    ```
 
 #### 3.1.3. Run the workflow
 
@@ -511,20 +511,21 @@ To apply the `flatten()` operator to our input channel, we append it to the chan
 
 In the workflow block, make the following code change:
 
-_Before:_
+=== "After"
 
-```groovy title="hello-channels.nf" linenums="31"
-    // create a channel for inputs
-    greeting_ch = Channel.of(greetings_array)
-```
+    ```groovy title="hello-channels.nf" linenums="31" hl_lines="3"
+        // create a channel for inputs
+        greeting_ch = Channel.of(greetings_array)
+                             .flatten()
+    ```
 
-_After:_
+=== "Before"
 
-```groovy title="hello-channels.nf" linenums="31"
-    // create a channel for inputs
-    greeting_ch = Channel.of(greetings_array)
-                         .flatten()
-```
+    ```groovy title="hello-channels.nf" linenums="31" hl_lines="3"
+        // create a channel for inputs
+        greeting_ch = Channel.of(greetings_array)
+
+    ```
 
 Here we added the operator on the next line for readability, but you can add operators on the same line as the channel factory if you prefer, like this: `greeting_ch = Channel.of(greetings_array).flatten()`
 
@@ -535,23 +536,23 @@ You can think of `view()` as a debugging tool, like a `print()` statement in Pyt
 
 In the workflow block, make the following code change:
 
-_Before:_
+=== "After"
 
-```groovy title="hello-channels.nf" linenums="31"
-    // create a channel for inputs
-    greeting_ch = Channel.of(greetings_array)
-                         .flatten()
-```
+    ```groovy title="hello-channels.nf" linenums="31" hl_lines="3-5"
+        // create a channel for inputs
+        greeting_ch = Channel.of(greetings_array)
+                             .view { greeting -> "Before flatten: $greeting" }
+                             .flatten()
+                             .view { greeting -> "After flatten: $greeting" }
+    ```
 
-_After:_
+=== "Before"
 
-```groovy title="hello-channels.nf" linenums="31"
-    // create a channel for inputs
-    greeting_ch = Channel.of(greetings_array)
-                         .view { greeting -> "Before flatten: $greeting" }
-                         .flatten()
-                         .view { greeting -> "After flatten: $greeting" }
-```
+    ```groovy title="hello-channels.nf" linenums="31" hl_lines="3"
+        // create a channel for inputs
+        greeting_ch = Channel.of(greetings_array)
+                             .flatten()
+    ```
 
 We are using an operator _closure_ here - the curly brackets.
 This code executes for each item in the channel.
@@ -645,23 +646,23 @@ We're going to update it to point to the CSV file containing our greetings.
 
 In the workflow block, make the following code change:
 
-_Before:_
+=== "After"
 
-```groovy title="hello-channels.nf" linenums="25"
-/*
- * Pipeline parameters
- */
-params.greeting = ['Hello','Bonjour','Holà']
-```
+    ```groovy title="hello-channels.nf" linenums="25" hl_lines="4"
+    /*
+     * Pipeline parameters
+     */
+    params.greeting = 'greetings.csv'
+    ```
 
-_After:_
+=== "Before"
 
-```groovy title="hello-channels.nf" linenums="25"
-/*
- * Pipeline parameters
- */
-params.greeting = 'greetings.csv'
-```
+    ```groovy title="hello-channels.nf" linenums="25" hl_lines="4"
+    /*
+     * Pipeline parameters
+     */
+    params.greeting = ['Hello','Bonjour','Holà']
+    ```
 
 #### 4.1.2. Switch to a channel factory designed to handle a file
 
@@ -670,20 +671,20 @@ We need to switch to using a new channel factory, [`Channel.fromPath()`](https:/
 
 In the workflow block, make the following code change:
 
-_Before:_
+=== "After"
 
-```groovy title="hello-channels.nf" linenums="31"
-    // create a channel for inputs
-    greeting_ch = Channel.of(greetings_array)
-                         .flatten()
-```
+    ```groovy title="hello-channels.nf" linenums="31" hl_lines="1-2"
+        // create a channel for inputs from a CSV file
+        greeting_ch = Channel.fromPath(params.greeting)
+    ```
 
-_After:_
+=== "Before"
 
-```groovy title="hello-channels.nf" linenums="31"
-    // create a channel for inputs from a CSV file
-    greeting_ch = Channel.fromPath(params.greeting)
-```
+    ```groovy title="hello-channels.nf" linenums="31" hl_lines="1-3"
+        // create a channel for inputs
+        greeting_ch = Channel.of(greetings_array)
+                             .flatten()
+    ```
 
 #### 4.1.3. Run the workflow
 
@@ -732,22 +733,23 @@ To apply the operator, we append it to the channel factory line like previously.
 
 In the workflow block, make the following code change:
 
-_Before:_
+=== "After"
 
-```groovy title="hello-channels.nf" linenums="31"
-// create a channel for inputs from a CSV file
-greeting_ch = Channel.fromPath(params.greeting)
-```
+    ```groovy title="hello-channels.nf" linenums="31" hl_lines="3-5"
+    // create a channel for inputs from a CSV file
+    greeting_ch = Channel.fromPath(params.greeting)
+                         .view { csv -> "Before splitCsv: $csv" }
+                         .splitCsv()
+                         .view { csv -> "After splitCsv: $csv" }
+    ```
 
-_After:_
+=== "Before"
 
-```groovy title="hello-channels.nf" linenums="31"
-// create a channel for inputs from a CSV file
-greeting_ch = Channel.fromPath(params.greeting)
-                     .view { csv -> "Before splitCsv: $csv" }
-                     .splitCsv()
-                     .view { csv -> "After splitCsv: $csv" }
-```
+    ```groovy title="hello-channels.nf" linenums="31" hl_lines="3"
+    // create a channel for inputs from a CSV file
+    greeting_ch = Channel.fromPath(params.greeting)
+
+    ```
 
 As you can see, we also include before/after view statements while we're at it.
 
@@ -814,27 +816,28 @@ So let's apply that to our CSV parsing.
 
 In the workflow block, make the following code change:
 
-_Before:_
+=== "After"
 
-```groovy title="hello-channels.nf" linenums="31"
-// create a channel for inputs from a CSV file
-greeting_ch = Channel.fromPath(params.greeting)
-                     .view { csv -> "Before splitCsv: $csv" }
-                     .splitCsv()
-                     .view { csv -> "After splitCsv: $csv" }
-```
+    ```groovy title="hello-channels.nf" linenums="31" hl_lines="6-8"
+    // create a channel for inputs from a CSV file
+    greeting_ch = Channel.fromPath(params.greeting)
+                         .view { csv -> "Before splitCsv: $csv" }
+                         .splitCsv()
+                         .view { csv -> "After splitCsv: $csv" }
+                         .map { item -> item[0] }
+                         .view { csv -> "After map: $csv" }
+    ```
 
-_After:_
+=== "Before"
 
-```groovy title="hello-channels.nf" linenums="31"
-// create a channel for inputs from a CSV file
-greeting_ch = Channel.fromPath(params.greeting)
-                     .view { csv -> "Before splitCsv: $csv" }
-                     .splitCsv()
-                     .view { csv -> "After splitCsv: $csv" }
-                     .map { item -> item[0] }
-                     .view { csv -> "After map: $csv" }
-```
+    ```groovy title="hello-channels.nf" linenums="31" hl_lines="6"
+    // create a channel for inputs from a CSV file
+    greeting_ch = Channel.fromPath(params.greeting)
+                         .view { csv -> "Before splitCsv: $csv" }
+                         .splitCsv()
+                         .view { csv -> "After splitCsv: $csv" }
+
+    ```
 
 Once again we include another `view()` call to confirm that the operator does what we expect.
 
