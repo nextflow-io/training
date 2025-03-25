@@ -1,0 +1,46 @@
+//
+// DEVELOPMENT DEVCONTAINER CONFIG
+// Base configuration that is pre-built and pushed to GitHub
+// See .devcontainer/devcontainer.json for production config
+//
+{
+    "name": "devcontainers-development",
+    "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+
+    "features": {
+        "./local-features/init": {},
+        "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {
+            "version": "latest"
+        },
+        "ghcr.io/devcontainers/features/java:1": { "version": "latest" },
+        "ghcr.io/rocker-org/devcontainer-features/miniforge:2": {
+            "version": "latest"
+        },
+        "./local-features/apptainer": {},
+        "./local-features/tower-agent": {},
+        "./local-features/conda-packages": {}
+    },
+    "workspaceFolder": "/workspaces/training",
+    "remoteUser": "root",
+    "remoteEnv": {
+        // Nextflow installation version
+        "NXF_HOME": "/workspaces/.nextflow",
+        "NXF_EDGE": "0",
+        "NXF_VER": "24.10.4",
+        // Other env vars
+        "HOST_PROJECT_PATH": "/workspaces/training",
+        "SHELL": "/bin/bash" // Ush bash
+    },
+    "onCreateCommand": "bash .devcontainer/setup.sh",
+    "customizations": {
+        "vscode": {
+            "extensions": ["nf-core.nf-core-extensionpack"],
+            // Use Python from conda
+            "settings": {
+                "python.defaultInterpreterPath": "/opt/conda/bin/python"
+            },
+            // Use bash
+            "terminal.integrated.defaultProfile.linux": "bash"
+        }
+    }
+}

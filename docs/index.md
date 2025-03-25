@@ -32,7 +32,7 @@ When you're ready to get down to work, click on the 'Open in GitHub Codespaces' 
 
     Instructions for setting up your environment to work through training materials (all courses). Provides an orientation to GitHub Codespaces as well as alternate installation instructions for working on your own local machine.
 
-    [Launch the Environment Setup training :material-arrow-right:](envsetup/index.md){ .md-button .md-button--primary }
+    [Start the Environment Setup training :material-arrow-right:](envsetup/index.md){ .md-button .md-button--primary }
 
 ## Nextflow for Newcomers
 
@@ -48,7 +48,7 @@ These are foundational, domain-agnostic courses intended for those who are compl
 
     This is a course for newcomers who wish to learn how to develop their own pipelines. The course covers the core components of the Nextflow language in enough detail to enable developing simple but fully functional pipelines. It also covers key elements of pipeline design, development and configuration practices.
 
-    [Launch the Hello Nextflow training :material-arrow-right:](hello_nextflow/index.md){ .md-button .md-button--primary }
+    [Start the Hello Nextflow training :material-arrow-right:](hello_nextflow/index.md){ .md-button .md-button--primary }
 
 !!! info ""
 
@@ -63,7 +63,7 @@ These are foundational, domain-agnostic courses intended for those who are compl
 
     This is a course for newcomers who wish to learn how to run existing pipelines. The course covers the bare essentials of the Nextflow language in order to enable interpretation of existing pipelines, as well as the mechanics for configuring and running Nextflow pipelines from a command-line environment. It also covers important components of the Nextflow ecosystem, including the nf-core project, which offers a large number of community-curated pipelines, and the Seqera platform for managing pipeline execution at scale (operated by the creators of Nextflow).
 
-    [Launch the Nextflow Run training :material-arrow-right:](nextflow_run/index.md){ .md-button .md-button--primary }
+    [Start the Nextflow Run training :material-arrow-right:](nextflow_run/index.md){ .md-button .md-button--primary }
 -->
 
 ## Nextflow for Science
@@ -78,7 +78,7 @@ These are courses that demonstrate how to apply the concepts and components pres
 
     This is a course for researchers who wish to learn how to develop their own genomics pipelines. The course uses a variant calling use case to demonstrate how to develop a simple but functional genomics pipeline.
 
-    [Launch the Nextflow for Genomics training :material-arrow-right:](nf4_science/genomics/){ .md-button .md-button--primary }
+    [Start the Nextflow for Genomics training :material-arrow-right:](nf4_science/genomics/){ .md-button .md-button--primary }
 
 !!! exercise "Nextflow for RNAseq"
 
@@ -88,7 +88,7 @@ These are courses that demonstrate how to apply the concepts and components pres
 
     This is a course for researchers who wish to learn how to develop their own RNAseq pipelines. The course uses a bulk RNAseq processing use case to demonstrate how to develop a simple but functional RNAseq pipeline.
 
-    [Launch the Nextflow for RNAseq training :material-arrow-right:](nf4_science/rnaseq/){ .md-button .md-button--primary }
+    [Start the Nextflow for RNAseq training :material-arrow-right:](nf4_science/rnaseq/){ .md-button .md-button--primary }
 
 Let us know what other domains and use cases you'd like to see covered here by posting in the [Training section](https://community.seqera.io/c/training/) of the community forum.
 
@@ -104,7 +104,7 @@ These are courses that demonstrate how to use Nextflow features in more detail o
 
     This is a course for Nextflow developers who wish to widen their range and/or deepen their skills. Although the modules are presented linearly, learners are welcome to pick and choose topics in any order. Any dependencies on components/skills that go beyond the scope of the 'Hello Nextflow' course are indicated in the corresponding module overview.
 
-    [Launch the Side Quests training :material-arrow-right:](side_quests/){ .md-button .md-button--primary }
+    [Start the Side Quests training :material-arrow-right:](side_quests/){ .md-button .md-button--primary }
 
 !!! exercise "Fundamentals Training"
 
@@ -114,7 +114,7 @@ These are courses that demonstrate how to use Nextflow features in more detail o
 
     The fundamentals training material covers all things Nextflow. Intended as a reference material for anyone looking to build complex workflows with Nextflow.
 
-    [Launch the Fundamentals Training :material-arrow-right:](basic_training/index.md){ .md-button .md-button--primary }
+    [Start the Fundamentals Training :material-arrow-right:](basic_training/index.md){ .md-button .md-button--primary }
 
 !!! exercise "Advanced Training"
 
@@ -124,7 +124,7 @@ These are courses that demonstrate how to use Nextflow features in more detail o
 
     Advanced material exploring the more advanced features of the Nextflow language and runtime, and how to use them to write efficient and scalable data-intensive workflows.
 
-    [Launch the Advanced Training :material-arrow-right:](advanced/index.md){ .md-button .md-button--primary }
+    [Start the Advanced Training :material-arrow-right:](advanced/index.md){ .md-button .md-button--primary }
 
 ## Other/Experimental
 

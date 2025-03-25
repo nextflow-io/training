@@ -1,0 +1,13 @@
+{
+    "id": "init",
+    "name": "Nextflow Training: Init",
+    "description": "Initial commands to run before everything else",
+    "options": {
+        "version": {
+            "type": "string",
+            "proposals": ["latest"],
+            "default": "latest",
+            "description": "Select or enter a version."
+        }
+    }
+}

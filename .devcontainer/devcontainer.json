@@ -1,41 +1,32 @@
+//
+// MAIN PRODUCTION DEVCONTAINER CONFIG
+// Uses image that is pre-built and pushed to GitHub
+// See .github/.devcontainer/devcontainer.json for build
+//
 {
     "name": "nextflow-training",
-
-    // Update this to pin the release tag before release
     "image": "ghcr.io/nextflow-io/training:latest",
-    // Uncomment this and comment "image" when testing Dockerfile changes
-    // "build": { "dockerfile": "Dockerfile", "context": ".." },
-
-    "features": {
-        "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {
-            "version": "latest"
-        }
-    },
     "workspaceFolder": "/workspaces/training",
-    "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/training,type=bind", // Used for local devcontainers, ignored in Codespaces.
+    "remoteUser": "root",
     "remoteEnv": {
+        // Nextflow installation version
         "NXF_HOME": "/workspaces/.nextflow",
-        "HOST_PROJECT_PATH": "/workspaces/training" // Codespaces and local devcontainers will both work with this.
+        "NXF_EDGE": "0",
+        "NXF_VER": "24.10.4",
+        // Other env vars
+        "HOST_PROJECT_PATH": "/workspaces/training",
+        "SHELL": "/bin/bash" // Ush bash
     },
-    "postCreateCommand": "nextflow -version; if [ -z \"$CODESPACES\" ]; then echo \"Devcontainers Development\"; else echo \"Codespaces Development\";  fi",
-    // Configure tool-specific properties.
+    "onCreateCommand": "bash .devcontainer/setup.sh",
     "customizations": {
-        // Configure properties specific to VS Code.
         "vscode": {
-            // Set *default* container specific settings.json values on container create.
+            "extensions": ["nf-core.nf-core-extensionpack"],
+            // Use Python from conda
             "settings": {
                 "python.defaultInterpreterPath": "/opt/conda/bin/python"
             },
-            // Add the IDs of extensions you want installed when the container is created.
-            "extensions": [
-                "ms-python.python",
-                "ms-python.vscode-pylance",
-                "nf-core.nf-core-extensionpack", // nf-core recommended extensions
-                "nextflow.nextflow", // Nextflow VS Code extension
-                "codezombiech.gitignore", // Language support for .gitignore files
-                "cssho.vscode-svgviewer" // SVG viewer
-            ]
+            // Use bash
+            "terminal.integrated.defaultProfile.linux": "bash"
         }
-    },
-    "remoteUser": "root"
+    }
 }

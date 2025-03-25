@@ -1,4 +1,4 @@
-# Part 3: moving code into modules
+# Part 3: Moving code into modules
 
 In the first part of this course, you built a variant calling pipeline that was completely linear and processed each sample's data independently of the others.
 
@@ -116,7 +116,7 @@ include { SAMTOOLS_INDEX } from './modules/samtools/index/main.nf'
 process GATK_HAPLOTYPECALLER {
 ```
 
-You can now run the workflow again, and it should still work the same way as before. If you supply the `-resume` flag, no new should even need to be done:
+You can now run the workflow again, and it should still work the same way as before. If you supply the `-resume` flag, no new tasks should even need to be run:
 
 ```bash
 nextflow run genomics-3.nf -resume

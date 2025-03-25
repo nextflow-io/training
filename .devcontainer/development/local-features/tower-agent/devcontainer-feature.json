@@ -1,0 +1,13 @@
+{
+    "id": "tower-agent",
+    "name": "Install Tower Agent",
+    "description": "Install the Tower Agent, for Seqera Platform",
+    "options": {
+        "version": {
+            "type": "string",
+            "proposals": ["latest"],
+            "default": "latest",
+            "description": "Select or enter a version."
+        }
+    }
+}
