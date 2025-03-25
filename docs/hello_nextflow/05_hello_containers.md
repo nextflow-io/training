@@ -403,28 +403,28 @@ Now we need to import the module and call the process.
 
 Insert the import declaration above the workflow block and fill it out appropriately.
 
-_Before:_
+=== "After"
 
-```groovy title="hello-containers.nf" linenums="9"
-// Include modules
-include { sayHello } from './modules/sayHello.nf'
-include { convertToUpper } from './modules/convertToUpper.nf'
-include { collectGreetings } from './modules/collectGreetings.nf'
+    ```groovy title="hello-containers.nf" linenums="9" hl_lines="5"
+    // Include modules
+    include { sayHello } from './modules/sayHello.nf'
+    include { convertToUpper } from './modules/convertToUpper.nf'
+    include { collectGreetings } from './modules/collectGreetings.nf'
+    include { cowpy } from './modules/cowpy.nf'
 
-workflow {
-```
+    workflow {
+    ```
 
-_After:_
+=== "Before"
 
-```groovy title="hello-containers.nf" linenums="9"
-// Include modules
-include { sayHello } from './modules/sayHello.nf'
-include { convertToUpper } from './modules/convertToUpper.nf'
-include { collectGreetings } from './modules/collectGreetings.nf'
-include { cowpy } from './modules/cowpy.nf'
+    ```groovy title="hello-containers.nf" linenums="9" hl_lines="5"
+    // Include modules
+    include { sayHello } from './modules/sayHello.nf'
+    include { convertToUpper } from './modules/convertToUpper.nf'
+    include { collectGreetings } from './modules/collectGreetings.nf'
 
-workflow {
-```
+    workflow {
+    ```
 
 #### 2.2.2. Add a call to the `cowpy` process in the workflow
 
@@ -435,28 +435,29 @@ Let's connect the `cowpy()` process to the output of the `collectGreetings()` pr
 
 In the workflow block, make the following code change:
 
-_Before:_
+=== "After"
 
-```groovy title="hello-containers.nf" linenums="28"
-    // collect all the greetings into one file
-    collectGreetings(convertToUpper.out.collect(), params.batch)
+    ```groovy title="hello-containers.nf" linenums="28" hl_lines="6-8"
+        // collect all the greetings into one file
+        collectGreetings(convertToUpper.out.collect(), params.batch)
 
-    // emit a message about the size of the batch
-    collectGreetings.out.count.view{ num_greetings -> "There were $num_greetings greetings in this batch" }
-```
+        // emit a message about the size of the batch
+        collectGreetings.out.count.view{ num_greetings -> "There were $num_greetings greetings in this batch" }
 
-_After:_
+        // generate ASCII art of the greetings with cowpy
+        cowpy(collectGreetings.out.outfile, params.character)
+    ```
 
-```groovy title="hello-containers.nf" linenums="28"
-    // collect all the greetings into one file
-    collectGreetings(convertToUpper.out.collect(), params.batch)
+=== "Before"
 
-    // emit a message about the size of the batch
-    collectGreetings.out.count.view{ num_greetings -> "There were $num_greetings greetings in this batch" }
+    ```groovy title="hello-containers.nf" linenums="28" hl_lines="6"
+        // collect all the greetings into one file
+        collectGreetings(convertToUpper.out.collect(), params.batch)
 
-    // generate ASCII art of the greetings with cowpy
-    cowpy(collectGreetings.out.outfile, params.character)
-```
+        // emit a message about the size of the batch
+        collectGreetings.out.count.view{ num_greetings -> "There were $num_greetings greetings in this batch" }
+
+    ```
 
 Notice that we include a new CLI parameter, `params.character`, in order to specify which character we want to have say the greetings.
 
@@ -464,26 +465,27 @@ Notice that we include a new CLI parameter, `params.character`, in order to spec
 
 We like to be lazy and skip typing parameters in our command lines.
 
-_Before:_
+=== "After"
 
-```groovy title="hello-containers.nf" linenums="3"
-/*
- * Pipeline parameters
- */
-params.greeting = 'greetings.csv'
-params.batch = 'test-batch'
-```
+    ```groovy title="hello-containers.nf" linenums="3" hl_lines="6"
+    /*
+     * Pipeline parameters
+     */
+    params.greeting = 'greetings.csv'
+    params.batch = 'test-batch'
+    params.character = 'turkey'
+    ```
 
-_After:_
+=== "Before"
 
-```groovy title="hello-containers.nf" linenums="3"
-/*
- * Pipeline parameters
- */
-params.greeting = 'greetings.csv'
-params.batch = 'test-batch'
-params.character = 'turkey'
-```
+    ```groovy title="hello-containers.nf" linenums="3" hl_lines="6"
+    /*
+     * Pipeline parameters
+     */
+    params.greeting = 'greetings.csv'
+    params.batch = 'test-batch'
+
+    ```
 
 That should be all we need to make this work.
 
@@ -541,22 +543,23 @@ We need to specify a container and tell Nextflow to use it for the `cowpy()` pro
 
 Edit the `cowpy.nf` module to add the `container` directive to the process definition as follows:
 
-_Before:_
+=== "After"
 
-```groovy title="modules/cowpy.nf" linenums="4"
-process cowpy {
+    ```groovy title="modules/cowpy.nf" linenums="4" hl_lines="4"
+    process cowpy {
 
-    publishDir 'containers/results', mode: 'copy'
-```
+        publishDir 'containers/results', mode: 'copy'
+        container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
+    ```
 
-_After:_
+=== "Before"
 
-```groovy title="modules/cowpy.nf" linenums="4"
-process cowpy {
+    ```groovy title="modules/cowpy.nf" linenums="4" hl_lines="4"
+    process cowpy {
 
-    publishDir 'containers/results', mode: 'copy'
-    container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
-```
+        publishDir 'containers/results', mode: 'copy'
+
+    ```
 
 This tells Nextflow that if the use of Docker is enabled, it should use the container image specified here to execute the process.
 
@@ -570,17 +573,17 @@ We provided a `nextflow.config` file with a single line of code that disables Do
 
 Now, let's switch that to `true` to enable Docker:
 
-_Before:_
+=== "After"
 
-```console title="nextflow.config" linenums="1"
-docker.enabled = false
-```
+    ```console title="nextflow.config" linenums="1" hl_lines="1"
+    docker.enabled = true
+    ```
 
-_After:_
+=== "Before"
 
-```console title="nextflow.config" linenums="1"
-docker.enabled = true
-```
+    ```console title="nextflow.config" linenums="1" hl_lines="1"
+    docker.enabled = false
+    ```
 
 !!! note
 
