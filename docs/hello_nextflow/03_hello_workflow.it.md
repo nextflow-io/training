@@ -865,8 +865,3 @@ Più in generale, comprendi i principi chiave per connettere i processi in modi 
 
 Fai una lunga pausa, te la sei guadagnata.  
 Quando sei pronto, passa alla Parte 4 per imparare a modularizzare il tuo codice per una migliore manutenibilità e efficienza del codice.
-
-
-
-
-
