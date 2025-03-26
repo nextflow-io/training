@@ -8,26 +8,26 @@
 :fontawesome-brands-youtube:{ .youtube } See the [whole playlist on the Nextflow YouTube channel](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik).
 ///
 
-Questa sezione spiega come organizzare il codice del flusso di lavoro per rendere più efficiente e sostenibile lo sviluppo e la manutenzione della pipeline. 
+Questa sezione spiega come organizzare il codice del workflow per rendere più efficiente e sostenibile lo sviluppo e la manutenzione della pipeline. 
 In particolare, dimostreremo come utilizzare i **moduli**.
 
 In Nextflow, un **modulo** è una singola definizione di processo incapsulata in un file di codice indipendente. 
-Per utilizzare un modulo in un flusso di lavoro, basta aggiungere una singola riga di dichiarazione di importazione al file di codice del flusso di lavoro; quindi è possibile integrare il processo nel flusso di lavoro come si farebbe normalmente.
+Per utilizzare un modulo in un workflow, basta aggiungere una singola riga di dichiarazione di importazione al file di codice del workflow; quindi è possibile integrare il processo nel workflow come si farebbe normalmente.
 
-Quando abbiamo iniziato a sviluppare il nostro flusso di lavoro, abbiamo inserito tutto in un unico file di codice.
+Quando abbiamo iniziato a sviluppare il nostro workflow, abbiamo inserito tutto in un unico file di codice.
 
-La suddivisione dei processi in singoli moduli consente di riutilizzare le definizioni dei processi in più flussi di lavoro senza produrre più copie del codice. 
+La suddivisione dei processi in singoli moduli consente di riutilizzare le definizioni dei processi in più workflow senza produrre più copie del codice. 
 Questo rende il codice più condivisibile, flessibile e manutenibile.
 
 !!!Nota
 
-    È anche possibile incapsulare una sezione di un flusso di lavoro come un "sottoflusso" che può essere importato in una pipeline più ampia, ma ciò esula dallo scopo di questo corso.
+    È anche possibile incapsulare una sezione di un workflow come un "sottoflusso" che può essere importato in una pipeline più ampia, ma ciò esula dallo scopo di questo corso.
 
 ---
 
 ## 0. Riscaldamento: Eseguire `hello-modules.nf`
 
-Utilizzeremo lo script del flusso di lavoro `hello-modules.nf` come punto di partenza.
+Utilizzeremo lo script del workflow `hello-modules.nf` come punto di partenza.
 È equivalente allo script prodotto lavorando alla Parte 3 di questo corso di formazione.
 
 Per assicurarsi che tutto funzioni, eseguire lo script una volta prima di apportare qualsiasi modifica:
@@ -67,7 +67,7 @@ results
 
     Potrebbe anche essere rimasto un file chiamato `output.txt` se si è lavorato alla Parte 2 nello stesso ambiente.
     
-Se questo ha funzionato, siete pronti per imparare a modularizzare il codice del flusso di lavoro.
+Se questo ha funzionato, siete pronti per imparare a modularizzare il codice del workflow.
 
 ---
 
@@ -82,14 +82,14 @@ mkdir modules
 
 !!! nota
 
-    Qui mostriamo come usare i moduli locali, cioè i moduli memorizzati localmente nello stesso repository del resto del codice del flusso di lavoro, in contrasto con i moduli remoti, che sono memorizzati in altri repository (remoti). Per maggiori informazioni sui moduli remoti, si veda la [documentazione](https://www.nextflow.io/docs/latest/module.html).
+    Qui mostriamo come usare i moduli locali, cioè i moduli memorizzati localmente nello stesso repository del resto del codice del workflow, in contrasto con i moduli remoti, che sono memorizzati in altri repository (remoti). Per maggiori informazioni sui moduli remoti, si veda la [documentazione](https://www.nextflow.io/docs/latest/module.html).
     
 ---
 
 ## 2. Creare un modulo per `sayHello()`
 
 Nella sua forma più semplice, trasformare un processo esistente in un modulo è poco più di un'operazione di copia-incolla.
-Creeremo un file stub per il modulo, copieremo il codice pertinente e lo cancelleremo dal file principale del flusso di lavoro.
+Creeremo un file stub per il modulo, copieremo il codice pertinente e lo cancelleremo dal file principale del workflow.
 
 A questo punto, basterà aggiungere una dichiarazione di importazione, in modo che Nextflow sappia che deve inserire il codice in questione in fase di esecuzione.
 
@@ -105,7 +105,7 @@ Questo ci dà un posto dove mettere il codice del processo.
 
 ### 2.2. Spostare il codice del processo `sayHello' nel file del modulo
 
-Copiare l'intera definizione del processo dal file del flusso di lavoro al file del modulo, assicurandosi di copiare anche lo shebang `#!/usr/bin/env nextflow`.
+Copiare l'intera definizione del processo dal file del workflow al file del modulo, assicurandosi di copiare anche lo shebang `#!/usr/bin/env nextflow`.
 
 ```groovy title="modules/sayHello.nf" linenums="1"
 #!/usr/bin/env nextflow
@@ -130,9 +130,9 @@ process sayHello {
 }
 ```
 
-Una volta fatto ciò, eliminate la definizione del processo dal file del flusso di lavoro, ma assicuratevi di lasciare lo shebang al suo posto.
+Una volta fatto ciò, eliminate la definizione del processo dal file del workflow, ma assicuratevi di lasciare lo shebang al suo posto.
 
-### 2.3. Aggiungere una dichiarazione di importazione prima del blocco del flusso di lavoro
+### 2.3. Aggiungere una dichiarazione di importazione prima del blocco del workflow
 
 La sintassi per importare un modulo locale è abbastanza semplice:
 
@@ -140,7 +140,7 @@ La sintassi per importare un modulo locale è abbastanza semplice:
 include { <MODULE_NAME> } from '<path_to_module>'
 ```
 
-Inseriamo questo blocco sopra il blocco del flusso di lavoro e compiliamolo in modo appropriato.
+Inseriamo questo blocco sopra il blocco del workflow e compiliamolo in modo appropriato.
 
 _Prima:_
 
@@ -158,9 +158,9 @@ include { sayHello } from './modules/sayHello.nf'
 workflow {
 ```
 
-### 2.4. Eseguite il flusso di lavoro per verificare che faccia la stessa cosa di prima
+### 2.4. Eseguite il workflow per verificare che faccia la stessa cosa di prima
 
-Stiamo eseguendo il flusso di lavoro essenzialmente con lo stesso codice e gli stessi input di prima, quindi eseguiamolo con il flag `resume` e vediamo cosa succede.
+Stiamo eseguendo il workflow essenzialmente con lo stesso codice e gli stessi input di prima, quindi eseguiamolo con il flag `resume` e vediamo cosa succede.
 
 ```bash
 nextflow run hello-modules.nf -resume
@@ -183,7 +183,7 @@ Nextflow ha riconosciuto che il lavoro da fare è sempre lo stesso, anche se il 
 
 ### Conclusione
 
-Sapete come estrarre un processo in un modulo locale e sapete che questo non rompe la riprendibilità del flusso di lavoro.
+Sapete come estrarre un processo in un modulo locale e sapete che questo non rompe la riprendibilità del workflow.
 
 ### Cosa c'è dopo?
 
@@ -205,7 +205,7 @@ touch modules/convertToUpper.nf
 
 ### 3.2. Spostare il codice del processo `convertToUpper` nel file del modulo
 
-Copiare l'intera definizione del processo dal file del flusso di lavoro al file del modulo, assicurandosi di copiare anche lo shebang `#!/usr/bin/env nextflow`.
+Copiare l'intera definizione del processo dal file del workflow al file del modulo, assicurandosi di copiare anche lo shebang `#!/usr/bin/env nextflow`.
 
 ```groovy title="modules/convertToUpper.nf" linenums="1"
 #!/usr/bin/env nextflow
@@ -230,11 +230,11 @@ process convertToUpper {
 }
 ```
 
-Una volta fatto ciò, eliminate la definizione del processo dal file del flusso di lavoro, ma assicuratevi di lasciare lo shebang al suo posto.
+Una volta fatto ciò, eliminate la definizione del processo dal file del workflow, ma assicuratevi di lasciare lo shebang al suo posto.
 
-### 3.3. Aggiungere una dichiarazione di importazione prima del blocco del flusso di lavoro
+### 3.3. Aggiungere una dichiarazione di importazione prima del blocco del workflow
 
-Inserite la dichiarazione di importazione sopra il blocco del flusso di lavoro e compilatela in modo appropriato.
+Inserite la dichiarazione di importazione sopra il blocco del workflow e compilatela in modo appropriato.
 
 _Prima:_
 
@@ -257,7 +257,7 @@ include { convertToUpper } from './modules/convertToUpper.nf'
 workflow {
 ```
 
-### 3.4. Eseguite il flusso di lavoro per verificare che faccia la stessa cosa di prima
+### 3.4. Eseguite il workflow per verificare che faccia la stessa cosa di prima
 
 Eseguire questa operazione con il flag `-resume`.
 
@@ -294,7 +294,7 @@ touch modules/collectGreetings.nf
 
 ### 4.2. Spostare il codice del processo `collectGreetings` nel file del modulo###
 
-Copiare l'intera definizione del processo dal file del flusso di lavoro al file del modulo, assicurandosi di copiare anche lo shebang `#!/usr/bin/env nextflow`.
+Copiare l'intera definizione del processo dal file del workflow al file del modulo, assicurandosi di copiare anche lo shebang `#!/usr/bin/env nextflow`.
 
 ```groovy title="modules/collectGreetings.nf" linenums="1"
 #!/usr/bin/env nextflow
@@ -322,11 +322,11 @@ process collectGreetings {
 }
 ```
 
-Una volta fatto ciò, eliminate la definizione del processo dal file del flusso di lavoro, ma assicuratevi di lasciare lo shebang al suo posto.
+Una volta fatto ciò, eliminate la definizione del processo dal file del workflow, ma assicuratevi di lasciare lo shebang al suo posto.
 
-### 4.3. Aggiungere una dichiarazione di importazione prima del blocco del flusso di lavoro###
+### 4.3. Aggiungere una dichiarazione di importazione prima del blocco del workflow###
 
-Inserite la dichiarazione di importazione sopra il blocco del flusso di lavoro e compilatela in modo appropriato.
+Inserite la dichiarazione di importazione sopra il blocco del workflow e compilatela in modo appropriato.
 
 _Prima:_
 
@@ -351,7 +351,7 @@ include { collectGreetings } from './modules/collectGreetings.nf'
 workflow {
 ```
 
-### 4.4. Eseguite il flusso di lavoro per verificare che faccia la stessa cosa di prima
+### 4.4. Eseguite il workflow per verificare che faccia la stessa cosa di prima
 
 Eseguire questa operazione con il flag `-resume`.
 
@@ -374,7 +374,7 @@ There were 3 greetings in this batch
 
 ### Conclusione
 
-Sapete come modulare più processi in un flusso di lavoro.
+Sapete come modulare più processi in un workflow.
 
 Congratulazioni, avete fatto tutto questo lavoro e non è cambiato assolutamente nulla nel funzionamento della pipeline!
 
