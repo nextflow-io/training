@@ -106,7 +106,7 @@ Aggiungi la seguente definizione del processo allo script del workflow:
 
 ```groovy title="hello-workflow.nf" linenums="22"
 /*
- * Use a text replacement tool to convert the greeting to uppercase
+ * Usa uno strumento di sostituzione del testo per convertire il saluto in maiuscolo.
  */
 process convertToUpper {
 
@@ -141,7 +141,7 @@ Nel blocco del workflow, apporta la seguente modifica al codice:
 _Prima:_
 
 ```groovy title="hello-workflow.nf" linenums="53"
-    // emit a greeting
+    // Emetti un saluto.
     sayHello(greeting_ch)
 }
 ```
@@ -149,10 +149,10 @@ _Prima:_
 _Dopo:_
 
 ```groovy title="hello-workflow.nf" linenums="53"
-    // emit a greeting
+    // Emetti un saluto.
     sayHello(greeting_ch)
 
-    // convert the greeting to uppercase
+    // Raccogli i saluti in maiuscolo in un unico file di output.
     convertToUpper()
 }
 ```
@@ -171,7 +171,7 @@ Nel blocco del workflow, apporta la seguente modifica al codice:
 _Prima:_
 
 ```groovy title="hello-workflow.nf" linenums="56"
-    // convert the greeting to uppercase
+    // Converti il saluto in maiuscolo.
     convertToUpper()
 }
 ```
@@ -179,7 +179,7 @@ _Prima:_
 _Dopo:_
 
 ```groovy title="hello-workflow.nf" linenums="56"
-    // convert the greeting to uppercase
+    // Converti il saluto in maiuscolo.
     convertToUpper(sayHello.out)
 }
 ```
@@ -291,7 +291,7 @@ Aggiungi la seguente definizione del processo allo script del workflow:
 
 ```groovy title="hello-workflow.nf" linenums="41"
 /*
- * Collect uppercase greetings into a single output file
+ * Raccogli i saluti in maiuscolo in un unico file di output.
  */
 process collectGreetings {
 
@@ -391,7 +391,7 @@ Nel blocco del workflow, apporta la seguente modifica al codice:
 _Prima:_
 
 ```groovy title="hello-workflow.nf" linenums="75"
-    // convert the greeting to uppercase
+    // Converti il saluto in maiuscolo.
     convertToUpper(sayHello.out)
 }
 ```
@@ -399,10 +399,10 @@ _Prima:_
 _Dopo:_ 
 
 ```groovy title="hello-workflow.nf" linenums="75"
-    // convert the greeting to uppercase
+    // Converti il saluto in maiuscolo.
     convertToUpper(sayHello.out)
 
-    // collect all the greetings into one file
+    // Raccogli tutti i saluti in un unico file.
     collectGreetings(convertToUpper.out)
 }
 ```
@@ -461,7 +461,7 @@ Nel blocco del workflow, apporta la seguente modifica al codice:
 _Prima:_ 
 
 ```groovy title="hello-workflow.nf" linenums="78"
-    // collect all the greetings into one file
+    // Raccogli tutti i saluti in un unico file.
     collectGreetings(convertToUpper.out)
 }
 ```
@@ -469,7 +469,7 @@ _Prima:_
 _Dopo:_
 
 ```groovy title="hello-workflow.nf" linenums="78"
-    // collect all the greetings into one file
+    // Raccogli tutti i saluti in un unico file.
     collectGreetings(convertToUpper.out.collect())
 }
 ```
@@ -481,7 +481,7 @@ Includiamo anche un paio di dichiarazioni `view()` per visualizzare lo stato pri
 _Prima:_
 
 ```groovy title="hello-workflow.nf" linenums="78"
-    // collect all the greetings into one file
+    // Raccogli tutti i saluti in un unico file.
     collectGreetings(convertToUpper.out.collect())
 }
 ```
@@ -489,10 +489,10 @@ _Prima:_
 _Dopo:_
 
 ```groovy title="hello-workflow.nf" linenums="78"
-    // collect all the greetings into one file
+    // Raccogli tutti i saluti in un unico file.
     collectGreetings(convertToUpper.out.collect())
 
-    // optional view statements
+    // Dichiarazioni opzionali di visualizzazione.
     convertToUpper.out.view { greeting -> "Before collect: $greeting" }
     convertToUpper.out.collect().view { greeting -> "After collect: $greeting" }
 }
@@ -639,7 +639,7 @@ _Prima:_
 
 ```groovy title="hello-workflow.nf" linenums="61"
 /*
- * Pipeline parameters
+ * Parametri della pipeline 
  */
 params.greeting = 'greetings.csv'
 ```
@@ -648,7 +648,7 @@ _Dopo:_
 
 ```groovy title="hello-workflow.nf" linenums="61"
 /*
- * Pipeline parameters
+ * Parametri della pipeline 
  */
 params.greeting = 'greetings.csv'
 params.batch = 'test-batch'
@@ -665,14 +665,14 @@ Nel blocco del workflow, apporta la seguente modifica al codice:
 _Prima:_ 
 
 ```groovy title="hello-workflow.nf" linenums="80"
-    // collect all the greetings into one file
+    // Raccogli tutti i saluti in un unico file.
     collectGreetings(convertToUpper.out.collect())
 ```
 
 _Dopo:_
 
 ```groovy title="hello-workflow.nf" linenums="80"
-    // collect all the greetings into one file
+    // Raccogli tutti i saluti in un unico file.
     collectGreetings(convertToUpper.out.collect(), params.batch)
 ```
 
@@ -813,17 +813,17 @@ Nel blocco del workflow, apporta la seguente modifica al codice:
 _Prima:_ 
 
 ```groovy title="hello-workflow.nf" linenums="82"
-    // collect all the greetings into one file
+    // Raccogli tutti i saluti in un unico file.
     collectGreetings(convertToUpper.out.collect(), params.batch)
 ```
 
 _Dopo:_
 
 ```groovy title="hello-workflow.nf" linenums="82"
-    // collect all the greetings into one file
+    // Raccogli tutti i saluti in un unico file.
     collectGreetings(convertToUpper.out.collect(), params.batch)
 
-    // emit a message about the size of the batch
+    // Emetti un messaggio sulla dimensione del lotto.
     collectGreetings.out.count.view { num_greetings -> "There were $num_greetings greetings in this batch" }
 ```
 
