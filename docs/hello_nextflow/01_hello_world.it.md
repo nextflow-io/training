@@ -112,7 +112,7 @@ process sayHello {
 
 workflow {
 
-    // emit a greeting
+    // emette un saluto
     sayHello()
 }
 ```
@@ -275,10 +275,10 @@ Questi sono i file di aiuto e di registro:
 - **`.command.log`**: Output di log completo emesso dalla chiamata al processo
 - **`.command.out`**: Output regolare (`stdout`) emesso dalla chiamata al processo
 - **`.command.run`**: Script completo eseguito da Nextflow per eseguire la chiamata al processo
-- **`.command.sh**: Il comando che è stato effettivamente eseguito dalla chiamata di processo
+- **`.command.sh`**: Il comando che è stato effettivamente eseguito dalla chiamata di processo
 - **`.exitcode`**: Il codice di uscita risultante dal comando
 
-Il file `.command.sh' è particolarmente utile perché dice quale comando Nextflow ha effettivamente eseguito.
+Il file `.command.sh` è particolarmente utile perché dice quale comando Nextflow ha effettivamente eseguito.
 In questo caso è molto semplice, ma più avanti nel corso si vedranno comandi che comportano un'interpolazione di variabili.
 Quando si ha a che fare con questi comandi, è necessario essere in grado di controllare esattamente cosa è stato eseguito, soprattutto quando si risolve un problema.
 
@@ -316,7 +316,7 @@ Fortunatamente, Nextflow offre un modo per gestire più comodamente questo aspet
 Questa direttiva indica a Nextflow di pubblicare gli output del processo in una directory di output designata. Per impostazione predefinita, gli output sono pubblicati come collegamenti simbolici dalla directory `work`.
 Permette di recuperare il file di output desiderato senza dover scavare nella directory di lavoro.
 
-#### 3.1.1. Aggiungere una direttiva `publishDir' al processo `sayHello`
+#### 3.1.1. Aggiungere una direttiva `publishDir` al processo `sayHello`
 
 Nel file di script del flusso di lavoro `hello-world.nf`, apportare la seguente modifica al codice:
 
@@ -369,7 +369,7 @@ Tuttavia, se si elimina la directory di lavoro come parte di un'operazione di pu
 
 !!! note
 
-    È stata proposta una nuova opzione di sintassi documentata [qui] (https://www.nextflow.io/docs/latest/workflow.html#publishing-outputs) per rendere possibile la dichiarazione e la pubblicazione di output a livello di flusso di lavoro.
+    È stata proposta una nuova opzione di sintassi documentata [qui](https://www.nextflow.io/docs/latest/workflow.html#publishing-outputs) per rendere possibile la dichiarazione e la pubblicazione di output a livello di flusso di lavoro.
     Questo renderà l'uso di `publishDir`, a livello del processo, ridondante per le pipeline completate.
     Tuttavia, ci aspettiamo che `publishDir` rimanga molto utile durante lo sviluppo della pipeline.
 
@@ -485,7 +485,7 @@ Per prima cosa dobbiamo adattare la definizione del processo in modo che accetti
 
 Nel blocco del processo, apportare la seguente modifica al codice:
 
-_Before:_
+_Prima:_
 
 ```groovy title="hello-world.nf" linenums="6"
 process sayHello {
@@ -496,7 +496,7 @@ process sayHello {
         path 'output.txt'
 ```
 
-_After:_
+_Dopo:_
 
 ```groovy title="hello-world.nf" linenums="6"
 process sayHello {
@@ -518,7 +518,7 @@ Ora scambiamo il valore originale codificato con il valore della variabile di in
 
 Nel blocco del processo, apportare la seguente modifica al codice:
 
-_Before:_
+_Prima:_
 
 ```groovy title="hello-channels.nf" linenums="16"
 script:
@@ -527,7 +527,7 @@ echo 'Hello World!' > output.txt
 """
 ```
 
-_After:_
+_Dopo:_
 
 ```groovy title="hello-channels.nf" linenums="16"
 script:
@@ -557,17 +557,17 @@ In linea di principio, possiamo scriverla ovunque; ma poiché vogliamo darla all
 
 Nel blocco del flusso di lavoro, apportare la seguente modifica al codice:
 
-_Before:_
+_Prima:_
 
 ```groovy title="hello-world.nf" linenums="24"
-// emit a greeting
+// emette un saluto
 sayHello()
 ```
 
-_After:_
+_Dopo:_
 
 ```groovy title="hello-world.nf" linenums="24"
-// emit a greeting
+// emette un saluto
 sayHello(params.greeting)
 ```
 
@@ -683,7 +683,7 @@ Konnichiwa!
 !!! note
 
     In Nextflow sono presenti più punti in cui è possibile specificare i valori dei parametri.
-    Se lo stesso parametro è impostato su valori diversi in più punti, Nexflow determinerà quale valore utilizzare in base all'ordine di precedenza descritto [qui] (https://www.nextflow.io/docs/latest/config.html).
+    Se lo stesso parametro è impostato su valori diversi in più punti, Nexflow determinerà quale valore utilizzare in base all'ordine di precedenza descritto [qui](https://www.nextflow.io/docs/latest/config.html).
     
 ### Takeaway
 
