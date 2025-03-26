@@ -5,7 +5,7 @@
 </div>
 
 /// caption
-:fontawesome-brands-youtube:{ .youtube } See the [whole playlist on the Nextflow YouTube channel](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik).
+:fontawesome-brands-youtube:{ .youtube } Guarda [tutta la playlist sul canale Youtube Nextflow](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik).
 ///
 
 In questa prima parte del corso di formazione Hello Nextflow, ci addentriamo nell'argomento con un esempio di Hello World molto elementare e indipendente dal dominio, che svilupperemo progressivamente per dimostrare l'uso della logica e dei componenti fondamentali di Nextflow.
@@ -97,7 +97,7 @@ Apriamo lo script `hello-world.nf` nel pannello dell'editor.
 #!/usr/bin/env nextflow
 
 /*
- * Use echo to print 'Hello World!' to a file
+ * Usa echo per stampare 'Hello World!' in un file
  */
 process sayHello {
 
@@ -132,7 +132,7 @@ Qui abbiamo un **process** chiamato `sayHello` che produce un **output** in un f
 
 ```groovy title="hello-world.nf" linenums="3"
 /*
- * Use echo to print 'Hello World!' to a file
+ * Usa echo per stampare 'Hello World!' in un file
  */
 process sayHello {
 
@@ -175,7 +175,7 @@ Qui abbiamo un **workflow** che consiste in una chiamata al processo `sayHello`.
 ```groovy title="hello-world.nf" linenums="17"
 workflow {
 
-    // emit a greeting
+    // emette un saluto
     sayHello()
 }
 ```
@@ -316,11 +316,11 @@ Fortunatamente, Nextflow offre un modo per gestire più comodamente questo aspet
 Questa direttiva indica a Nextflow di pubblicare gli output del processo in una directory di output designata. Per impostazione predefinita, gli output sono pubblicati come collegamenti simbolici dalla directory `work`.
 Permette di recuperare il file di output desiderato senza dover scavare nella directory di lavoro.
 
-#### 3.1.1. Aggiungere una direttiva `publishDir' al processo `sayHello
+#### 3.1.1. Aggiungere una direttiva `publishDir' al processo `sayHello`
 
 Nel file di script del flusso di lavoro `hello-world.nf`, apportare la seguente modifica al codice:
 
-_Before:_
+_Prima:_
 
 ```groovy title="hello-world.nf" linenums="6"
 process sayHello {
@@ -329,7 +329,7 @@ process sayHello {
         path 'output.txt'
 ```
 
-_After:_
+_Dopo:_
 
 ```groovy title="hello-world.nf" linenums="6"
 process sayHello {
