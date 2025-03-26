@@ -42,11 +42,11 @@ nextflow run hello-config.nf
 ```
 
 ```console title="Output"
- N E X T F L O W   ~  versione 24.10.0
+ N E X T F L O W   ~  version 24.10.0
 
-Lancio `hello-config.nf` [reverent_heisenberg] DSL2 - revisione: 028a841db1
+Launching `hello-config.nf` [reverent_heisenberg] DSL2 - revision: 028a841db1
 
-executor >  locale (8)
+executor >  local (8)
 [7f/0da515] sayHello (1)       | 3 of 3 ✔
 [f3/42f5a5] convertToUpper (3) | 3 of 3 ✔
 [04/fe90e4] collectGreetings   | 1 of 1 ✔
@@ -148,7 +148,7 @@ Dovrebbe funzionare senza problemi.
 
 Launching `hello-config.nf` [trusting_lovelace] DSL2 - revision: 028a841db1
 
-executor >  locale (8)
+executor >  local (8)
 [ee/4ca1f2] sayHello (3)       | 3 of 3 ✔
 [20/2596a7] convertToUpper (1) | 3 of 3 ✔
 [b3/e15de5] collectGreetings   | 1 of 1 ✔
@@ -163,13 +163,13 @@ Dietro le quinte, Nextflow ha recuperato i pacchetti Conda e creato l'ambiente, 
 Questa operazione è veloce perchè il pacchetto `cowpy` è piuttosto piccolo. Tuttavia,se si lavora con pacchetti di grandi dimensioni, il processo potrebbe richiedere più tempo al primo utilizzo, perchè si potrebbe vedere l'output della console rimanere "bloccato" per circa un minuto prima di completarsi.
 Ciò è normale ed è dovuto al lavoro extra che Nextflow esegue la prima volta che si utilizza un nuovo pacchetto.
 
-From our standpoint, it looks like it works exactly the same as running with Docker, even though on the backend the mechanics are a bit different.
-
 Dal nostro punto di vista, sembra che funzioni esattamente come con Docker, anche se nel backend i meccanismi sono leggermente diversi.
+
+Ciò significa che siamo pronti per l'esecuzione con gli ambienti Conda, se necessario.
 
 !!!nota
 
-  Poiché queste direttive vengono assegnate per processo, è possibile "mescolare e abbinare", ovvero configurare alcuni processi nel flusso di lavoro in modo che vengano eseguiti con Docker e altri con Conda, ad esempio se l'infrastruttura di elaborazione utilizzata supporta entrambi.
+  Poiché queste direttive vengono assegnate per processo, è possibile "mescolare e abbinare", ovvero configurare alcuni processi nel workflow in modo che vengano eseguiti con Docker e altri con Conda, ad esempio se l'infrastruttura di elaborazione utilizzata supporta entrambi.
  In tal caso, dovresti abilitare sia Docker che Conda nel tuo file di configurazione.
 Se entrambi sono disponibili per un dato processo, Nextflow darà priorità ai container.   
 
@@ -204,9 +204,9 @@ Nextflow le tradurrà nelle istruzioni appropriate per l'esecutore scelto.
 
 Ma come fai a sapere quali valori utilizzare?
 
-### 2.1. Eseguire il flusso di lavoro per generare un report sull'utilizzo delle risorse
+### 2.1. Eseguire il workflow per generare un report sull'utilizzo delle risorse
 
-Se non si sa in anticipo quanta CPU e memoria saranno probabilmente necessarie ai propri processi, è possibile effettuare una profilazione delle risorse, ovvero eseguire il flusso di lavoro con alcune allocazioni predefinite, registrare la quantità utilizzata da ciascun processo e, da lì, stimare come modificare le allocazioni di base.
+Se non si sa in anticipo quanta CPU e memoria saranno probabilmente necessarie ai propri processi, è possibile effettuare una profilazione delle risorse, ovvero eseguire il workflow con alcune allocazioni predefinite, registrare la quantità utilizzata da ciascun processo e, da lì, stimare come modificare le allocazioni di base.
 
 Nextflow include strumenti integrati per fare questo e sarà felice di generare un report per te su richiesta.
 
@@ -226,7 +226,7 @@ C'è della [documentazione](https://www.nextflow.io/docs/latest/reports.html) ch
 
 ### 2.2. Imposta le allocazioni delle risorse per tutti i processi
 
-La profilazione mostra che i processi nel nostro flusso di lavoro di formazione sono molto leggeri, quindi riduciamo l'allocazione di memoria predefinita a 1 GB per processo.
+La profilazione mostra che i processi nel nostro workflow di formazione sono molto leggeri, quindi riduciamo l'allocazione di memoria predefinita a 1 GB per processo.
 
 Aggiungere quanto segue al file `nextflow.config`:
 
@@ -307,7 +307,7 @@ process {
 Nextflow tradurrà questi valori nelle istruzioni appropriate a seconda dell'esecutore specificato.
 
 Non lo eseguiremo, poiché non abbiamo accesso all'infrastruttura pertinente nell'ambiente di formazione.
-Tuttavia, se provassi a eseguire il flusso di lavoro con allocazioni di risorse che superano questi limiti, quindi cercassi il comando `sbatch` nel file di script `.command.run`, vedresti che le richieste che vengono effettivamente inviate all'esecutore sono limitate ai valori specificati da `resourceLimits`.
+Tuttavia, se provassi a eseguire il workflow con allocazioni di risorse che superano questi limiti, quindi cercassi il comando `sbatch` nel file di script `.command.run`, vedresti che le richieste che vengono effettivamente inviate all'esecutore sono limitate ai valori specificati da `resourceLimits`.
 
 !!!nota
 
@@ -321,11 +321,11 @@ Sai come generare un report di profilazione per valutare l'utilizzo delle risors
 
 ### Prossimi passi
 
-Impara a usare un file di parametri per memorizzare i parametri del flusso di lavoro.
+Impara a usare un file di parametri per memorizzare i parametri del workflow.
 
 ---
 
-## 3. Utilizzare un file di parametri per memorizzare i parametri del flusso di lavoro
+## 3. Utilizzare un file di parametri per memorizzare i parametri del workflow
 
 Finora abbiamo esaminato la configurazione dal punto di vista tecnico dell'infrastruttura di elaborazione.
 Ora prendiamo in considerazione un altro aspetto della configurazione del workflow che è molto importante per la riproducibilità: la configurazione dei parametri del workflow.
@@ -346,11 +346,11 @@ Forniamo un file di parametri di esempio nella directory corrente, denominato `t
 }
 ```
 
-Questo file di parametri contiene una coppia chiave-valore per ciascuno degli input previsti dal nostro flusso di lavoro.
+Questo file di parametri contiene una coppia chiave-valore per ciascuno degli input previsti dal nostro workflow.
 
-### 3.1. Eseguire il flusso di lavoro utilizzando un file di parametri
+### 3.1. Eseguire il workflow utilizzando un file di parametri
 
-Per eseguire il flusso di lavoro con questo file di parametri, è sufficiente aggiungere `-params-file <nomefile>` al comando di base.
+Per eseguire il workflow con questo file di parametri, è sufficiente aggiungere `-params-file <nomefile>` al comando di base.
 
 ```bash
 nextflow run hello-config.nf -params-file test-params.json
@@ -363,7 +363,7 @@ Funziona! E come previsto, produce gli stessi output di prima.
 
 Launching `hello-config.nf` [disturbed_sammet] DSL2 - revision: ede9037d02
 
-executor >  locale (8)
+executor >  local (8)
 [f0/35723c] sayHello (2)       | 3 of 3 ✔
 [40/3efd1a] convertToUpper (3) | 3 of 3 ✔
 [17/e97d32] collectGreetings   | 1 of 1 ✔
@@ -372,7 +372,7 @@ Ci sono tre saluti in questa batch
 ```
 
 Questo potrebbe sembrare eccessivo quando hai solo pochi parametri da specificare, ma alcune pipeline si aspettano decine di parametri. 
-In quei casi, usare un file di parametri ci consentirà di fornire valori di parametri in fase di esecuzione senza dover digitare lunghe righe di comando e senza modificare lo script del flusso di lavoro.
+In quei casi, usare un file di parametri ci consentirà di fornire valori di parametri in fase di esecuzione senza dover digitare lunghe righe di comando e senza modificare lo script del workflow.
 
 ### Conclusione
 
@@ -499,7 +499,7 @@ Come puoi vedere, per l'HPC universitario stiamo anche specificando le limitazio
 
 Per specificare un profilo nella nostra riga di comando Nextflow, utilizziamo l'argomento `-profile`.
 
-Proviamo a eseguire il flusso di lavoro con la configurazione `my_laptop`.
+Proviamo a eseguire il workflow con la configurazione `my_laptop`.
 
 ```bash
 nextflow run hello-config.nf -profile my_laptop
@@ -508,9 +508,9 @@ nextflow run hello-config.nf -profile my_laptop
 Questo produce ancora il seguente output:
 
 ```
- N E X T F L O W   ~  versione 24.10.0
+ N E X T F L O W   ~  version 24.10.0
 
-Lancio `hello-config.nf` [gigantic_brazil] DSL2 - revisione: ede9037d02
+Launching `hello-config.nf` [gigantic_brazil] DSL2 - revision: ede9037d02
 
 executor >  locale (8)
 [58/da9437] sayHello (3)       | 3 of 3 ✔
@@ -532,7 +532,7 @@ Possiamo anche creare profili aggiuntivi se ci sono altri elementi di configuraz
 ### 5.3. Crea un profilo di prova
 
 I profili non servono solo per la configurazione dell'infrastruttura.
-Possiamo anche usarli per impostare valori predefiniti per i parametri del flusso di lavoro, per rendere più facile per altri provare il workflow senza dover raccogliere autonomamente i valori di input appropriati.
+Possiamo anche usarli per impostare valori predefiniti per i parametri del workflow, per rendere più facile per altri provare il workflow senza dover raccogliere autonomamente i valori di input appropriati.
 Questo è inteso come alternativa all'uso di un file di parametri.
 
 La sintassi per esprimere i valori predefiniti è la stessa di quando li scriviamo nel file del workflow stesso, tranne per il fatto che li racchiudiamo in un blocco denominato `test`:
@@ -545,7 +545,7 @@ La sintassi per esprimere i valori predefiniti è la stessa di quando li scrivia
     }
 ```
 
-Se aggiungiamo un profilo di prova per il nostro flusso di lavoro, il blocco `profili` diventa:
+Se aggiungiamo un profilo di prova per il nostro workflow, il blocco `profili` diventa:
 
 ```groovy title="nextflow.config" linenums="4"
 profiles {
@@ -590,11 +590,11 @@ nextflow run hello-config.nf -profile my_laptop,test
 Ciò dovrebbe produrre quanto segue:
 
 ```console title="Output"
- N E X T F L O W   ~  versione 24.10.0
+ N E X T F L O W   ~  version 24.10.0
 
-Lancio `hello-config.nf` [gigantic_brazil] DSL2 - revisione: ede9037d02
+Launching `hello-config.nf` [gigantic_brazil] DSL2 - revision: ede9037d02
 
-executor >  locale (8)
+executor >  local (8)
 [58/da9437] sayHello (3)       | 3 of 3 ✔
 [35/9cbe77] convertToUpper (2) | 3 of 3 ✔
 [67/857d05] collectGreetings   | 1 of 1 ✔
