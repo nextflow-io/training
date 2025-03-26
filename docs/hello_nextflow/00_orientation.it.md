@@ -25,9 +25,9 @@ Cambia directory ora eseguendo questo comando nel terminale:
 cd hello-nextflow/
 ```
 
-!!!Suggerimento
+!!!tip
 
-Se per qualsiasi motivo esci da questa directory, puoi sempre utilizzare il percorso completo per tornarci, supponendo che tu stia eseguendo questo comando nell'ambiente di formazione Github Codespaces:
+    Se per qualsiasi motivo esci da questa directory, puoi sempre utilizzare il percorso completo per tornarci, supponendo che tu stia eseguendo questo comando nell'ambiente di formazione Github Codespaces:
 
     ```bash
     cd /workspaces/training/hello-nextflow
@@ -76,13 +76,13 @@ Se esegui questo comando all'interno di `hello-nextflow`, dovresti vedere il seg
 
 - **I file `.nf`** sono script di workflow denominati in base alla parte del corso in cui vengono utilizzati.
 
--**Il file `nextflow.config`** è un file di configurazione che imposta le proprietà minime dell'ambiente.
+- **Il file `nextflow.config`** è un file di configurazione che imposta le proprietà minime dell'ambiente.
 Per ora puoi ignorarlo.
 
--**Il file `greetings.csv`** contiene i dati di input che utilizzeremo nella maggior parte del corso. È descritto nella Parte 1, quando lo introduciamo per la prima volta.
+- **Il file `greetings.csv`** contiene i dati di input che utilizzeremo nella maggior parte del corso. È descritto nella Parte 1, quando lo introduciamo per la prima volta.
 
 - **Il file `test-params.json`** è un file che utilizzeremo nella Parte 6. Per ora puoi ignorarlo.
-- 
+
 - **La directory `solutions`** contiene gli script del workflow completati che risultano da ogni passaggio del corso.
 Sono pensati per essere utilizzati come riferimento per controllare il tuo lavoro e risolvere eventuali problemi.
 Il nome e il numero nel nome del file corrispondono al passaggio della parte pertinente del corso.
