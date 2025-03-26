@@ -66,7 +66,7 @@ Sono già installati nell'ambiente di calcolo locale? Dobbiamo recuperare le imm
 Nella primissima parte di questo corso di formazione (Parti 1-4) abbiamo utilizzato solo il software installato localmente nel nostro workflow.
 Nella Parte 5 abbiamo poi introdotto i container Docker e il file `nextflow.config`, che abbiamo utilizzato per abilitare l'uso dei container Docker.
 
-Nel wormup di questa sezione, hai verificato che Docker fosse abilitato nel file `nextflow.config` ed eseguito il workflow, che ha utilizzato un container Docker per eseguire il processo `cowpy()`.
+Nel warmup di questa sezione, hai verificato che Docker fosse abilitato nel file `nextflow.config` ed eseguito il workflow, che ha utilizzato un container Docker per eseguire il processo `cowpy()`.
 
 !!! nota
 
