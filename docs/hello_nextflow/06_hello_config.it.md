@@ -51,7 +51,7 @@ executor >  local (8)
 [f3/42f5a5] convertToUpper (3) | 3 of 3 ✔
 [04/fe90e4] collectGreetings   | 1 of 1 ✔
 [81/4f5fa9] cowpy              | 1 of 1 ✔
-ci sono stati tre saluti in questo batch
+There were 3 greetings in this batch
 ```
 
 Se tutto funziona, sei pronto per imparare come modificare le proprietà di configurazione di base per adattarle ai requisiti del tuo ambiente di elaborazione.
@@ -153,7 +153,7 @@ executor >  local (8)
 [20/2596a7] convertToUpper (1) | 3 of 3 ✔
 [b3/e15de5] collectGreetings   | 1 of 1 ✔
 [c5/af5f88] cowpy              | 1 of 1 ✔
-ci sono stati tre saluti in questo batch
+There were 3 greetings in this batch
 ```
 
 Dietro le quinte, Nextflow ha recuperato i pacchetti Conda e creato l'ambiente, il che normalmente richiede un po' di lavoro; è bello quindi che non dobbiamo farlo manualmente!
@@ -368,7 +368,7 @@ executor >  local (8)
 [40/3efd1a] convertToUpper (3) | 3 of 3 ✔
 [17/e97d32] collectGreetings   | 1 of 1 ✔
 [98/c6b57b] cowpy              | 1 of 1 ✔
-Ci sono tre saluti in questa batch
+There were 3 greetings in this batch
 ```
 
 Questo potrebbe sembrare eccessivo quando hai solo pochi parametri da specificare, ma alcune pipeline si aspettano decine di parametri. 
@@ -512,12 +512,12 @@ Questo produce ancora il seguente output:
 
 Launching `hello-config.nf` [gigantic_brazil] DSL2 - revision: ede9037d02
 
-executor >  locale (8)
+executor >  local (8)
 [58/da9437] sayHello (3)       | 3 of 3 ✔
 [35/9cbe77] convertToUpper (2) | 3 of 3 ✔
 [67/857d05] collectGreetings   | 1 of 1 ✔
 [37/7b51b5] cowpy              | 1 of 1 ✔
-Ci sono tre saluti in questo batch
+There were 3 greetings in this batch
 ```
 
 Come potete vedere, questo ci consente di passare da una configurazione all'altra in modo molto pratico durante l'esecuzione.
@@ -599,7 +599,7 @@ executor >  local (8)
 [35/9cbe77] convertToUpper (2) | 3 of 3 ✔
 [67/857d05] collectGreetings   | 1 of 1 ✔
 [37/7b51b5] cowpy              | 1 of 1 ✔
-Ci sono tre saluti in questo batch
+There were 3 greetings in this batch
 ```
 
 <!-- migliorare mostrando e variando gli output per tutti questi forse -->
