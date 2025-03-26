@@ -9,9 +9,9 @@
 ///
 
 Questa sezione spiega come organizzare il codice del flusso di lavoro per rendere più efficiente e sostenibile lo sviluppo e la manutenzione della pipeline. 
-In particolare, dimostreremo come utilizzare i moduli.
+In particolare, dimostreremo come utilizzare i **moduli**.
 
-In Nextflow, un modulo è una singola definizione di processo incapsulata in un file di codice indipendente. 
+In Nextflow, un **modulo** è una singola definizione di processo incapsulata in un file di codice indipendente. 
 Per utilizzare un modulo in un flusso di lavoro, basta aggiungere una singola riga di dichiarazione di importazione al file di codice del flusso di lavoro; quindi è possibile integrare il processo nel flusso di lavoro come si farebbe normalmente.
 
 Quando abbiamo iniziato a sviluppare il nostro flusso di lavoro, abbiamo inserito tutto in un unico file di codice.
@@ -111,7 +111,7 @@ Copiare l'intera definizione del processo dal file del flusso di lavoro al file 
 #!/usr/bin/env nextflow
 
 /*
- * use echo to print 'Hello World!' to a file.
+ * Usa echo per stampare 'Hello World!' A un file.
  */
 process sayHello {
 
@@ -151,7 +151,8 @@ workflow {
 _Dopo:_
 
 ```groovy title="hello-modules.nf" linenums="50"
-// Include modules
+// Include moduli
+
 include { sayHello } from './modules/sayHello.nf'
 
 workflow {
@@ -238,7 +239,8 @@ Inserite la dichiarazione di importazione sopra il blocco del flusso di lavoro e
 _Prima:_
 
 ```groovy title="hello-modules.nf" linenums="31"
-// Include modules
+// Include moduli
+
 include { sayHello } from './modules/sayHello.nf'
 
 workflow {
@@ -247,7 +249,8 @@ workflow {
 _Dopo:_
 
 ```groovy title="hello-modules.nf" linenums="31"
-// Include modules
+// Include moduli
+
 include { sayHello } from './modules/sayHello.nf'
 include { convertToUpper } from './modules/convertToUpper.nf'
 
@@ -297,7 +300,7 @@ Copiare l'intera definizione del processo dal file del flusso di lavoro al file 
 #!/usr/bin/env nextflow
 
 /*
- * Collect uppercase greetings into a single output file
+ * Raccogli i saluti maiuscoli in un singolo file di output
  */
 process collectGreetings {
 
@@ -328,7 +331,8 @@ Inserite la dichiarazione di importazione sopra il blocco del flusso di lavoro e
 _Prima:_
 
 ```groovy title="hello-modules.nf" linenums="9"
-// Include modules
+// Include moduli
+
 include { sayHello } from './modules/sayHello.nf'
 include { convertToUpper } from './modules/convertToUpper.nf'
 
@@ -338,7 +342,8 @@ workflow {
 _Dopo:_
 
 ```groovy title="hello-modules.nf" linenums="9"
-// Include modules
+// Include moduli
+
 include { sayHello } from './modules/sayHello.nf'
 include { convertToUpper } from './modules/convertToUpper.nf'
 include { collectGreetings } from './modules/collectGreetings.nf'
