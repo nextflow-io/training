@@ -92,7 +92,7 @@ To do so, we switch the value of `docker.enabled` to `false`, and add a directiv
 
 === "Before"
 
-    ```groovy title="nextflow.config" linenums="1" hl_lines="1"
+    ```groovy title="nextflow.config" linenums="1"
 
     docker.enabled = true
     ```
@@ -124,7 +124,7 @@ Now we add the URI to the `cowpy` process definition using the `conda` directive
 
 === "Before"
 
-    ```console title="modules/cowpy.nf" linenums="4" hl_lines="4"
+    ```console title="modules/cowpy.nf" linenums="4"
     process cowpy {
 
         container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
@@ -255,10 +255,9 @@ At the same time, we're going to pretend that the `cowpy` process requires more 
 
 === "Before"
 
-    ```groovy title="nextflow.config" linenums="14" hl_lines="3"
+    ```groovy title="nextflow.config" linenums="14"
     process {
         memory = 1.GB
-
     }
     ```
 

@@ -417,7 +417,7 @@ Insert the import declaration above the workflow block and fill it out appropria
 
 === "Before"
 
-    ```groovy title="hello-containers.nf" linenums="9" hl_lines="5"
+    ```groovy title="hello-containers.nf" linenums="9"
     // Include modules
     include { sayHello } from './modules/sayHello.nf'
     include { convertToUpper } from './modules/convertToUpper.nf'
@@ -450,13 +450,12 @@ In the workflow block, make the following code change:
 
 === "Before"
 
-    ```groovy title="hello-containers.nf" linenums="28" hl_lines="6"
+    ```groovy title="hello-containers.nf" linenums="28"
         // collect all the greetings into one file
         collectGreetings(convertToUpper.out.collect(), params.batch)
 
         // emit a message about the size of the batch
         collectGreetings.out.count.view{ num_greetings -> "There were $num_greetings greetings in this batch" }
-
     ```
 
 Notice that we include a new CLI parameter, `params.character`, in order to specify which character we want to have say the greetings.
@@ -478,13 +477,12 @@ We like to be lazy and skip typing parameters in our command lines.
 
 === "Before"
 
-    ```groovy title="hello-containers.nf" linenums="3" hl_lines="6"
+    ```groovy title="hello-containers.nf" linenums="3"
     /*
      * Pipeline parameters
      */
     params.greeting = 'greetings.csv'
     params.batch = 'test-batch'
-
     ```
 
 That should be all we need to make this work.
@@ -554,11 +552,10 @@ Edit the `cowpy.nf` module to add the `container` directive to the process defin
 
 === "Before"
 
-    ```groovy title="modules/cowpy.nf" linenums="4" hl_lines="4"
+    ```groovy title="modules/cowpy.nf" linenums="4"
     process cowpy {
 
         publishDir 'containers/results', mode: 'copy'
-
     ```
 
 This tells Nextflow that if the use of Docker is enabled, it should use the container image specified here to execute the process.
@@ -581,7 +578,7 @@ Now, let's switch that to `true` to enable Docker:
 
 === "Before"
 
-    ```console title="nextflow.config" linenums="1" hl_lines="1"
+    ```console title="nextflow.config" linenums="1"
     docker.enabled = false
     ```
 

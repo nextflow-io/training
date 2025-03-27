@@ -247,7 +247,7 @@ Insert the import declaration above the workflow block and fill it out appropria
 
 === "Before"
 
-    ```groovy title="hello-modules.nf" linenums="31" hl_lines="3"
+    ```groovy title="hello-modules.nf" linenums="31"
     // Include modules
     include { sayHello } from './modules/sayHello.nf'
 
@@ -338,7 +338,7 @@ Insert the import declaration above the workflow block and fill it out appropria
 
 === "Before"
 
-    ```groovy title="hello-modules.nf" linenums="9" hl_lines="4"
+    ```groovy title="hello-modules.nf" linenums="9"
     // Include modules
     include { sayHello } from './modules/sayHello.nf'
     include { convertToUpper } from './modules/convertToUpper.nf'

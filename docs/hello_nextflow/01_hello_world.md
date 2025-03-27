@@ -333,7 +333,7 @@ In the workflow script file `hello-world.nf`, make the following code modificati
 
 === "Before"
 
-    ```groovy title="hello-world.nf" linenums="6" hl_lines="2"
+    ```groovy title="hello-world.nf" linenums="6"
     process sayHello {
 
         output:
@@ -501,7 +501,7 @@ In the process block, make the following code change:
 
 === "Before"
 
-    ```groovy title="hello-world.nf" linenums="6" hl_lines="4"
+    ```groovy title="hello-world.nf" linenums="6"
     process sayHello {
 
         publishDir 'results', mode: 'copy'
@@ -529,7 +529,7 @@ In the process block, make the following code change:
 
 === "Before"
 
-    ```groovy title="hello-channels.nf" linenums="16" hl_lines="3"
+    ```groovy title="hello-channels.nf" linenums="16"
     script:
     """
     echo 'Hello World!' > output.txt
@@ -566,7 +566,7 @@ In the workflow block, make the following code change:
 
 === "Before"
 
-    ```groovy title="hello-world.nf" linenums="24" hl_lines="2"
+    ```groovy title="hello-world.nf" linenums="24"
     // emit a greeting
     sayHello()
     ```

@@ -151,10 +151,9 @@ In the workflow block, make the following code change:
 
 === "Before"
 
-    ```groovy title="hello-workflow.nf" linenums="53" hl_lines="3"
+    ```groovy title="hello-workflow.nf" linenums="53"
         // emit a greeting
         sayHello(greeting_ch)
-
     }
     ```
 
@@ -179,7 +178,7 @@ In the workflow block, make the following code change:
 
 === "Before"
 
-    ```groovy title="hello-workflow.nf" linenums="56" hl_lines="2"
+    ```groovy title="hello-workflow.nf" linenums="56"
         // convert the greeting to uppercase
         convertToUpper()
     }
@@ -334,7 +333,7 @@ In the process block, make the following code change:
 
 === "Before"
 
-    ```groovy title="hello-workflow.nf" linenums="48" hl_lines="2"
+    ```groovy title="hello-workflow.nf" linenums="48"
             input:
                 ???
     ```
@@ -364,7 +363,7 @@ In the process block, make the following code change:
 
 === "Before"
 
-    ```groovy title="hello-workflow.nf" linenums="54" hl_lines="3"
+    ```groovy title="hello-workflow.nf" linenums="54"
         script:
         """
         ??? > 'COLLECTED-output.txt'
@@ -402,10 +401,9 @@ In the workflow block, make the following code change:
 
 === "Before"
 
-    ```groovy title="hello-workflow.nf" linenums="75" hl_lines="3"
+    ```groovy title="hello-workflow.nf" linenums="75"
         // convert the greeting to uppercase
         convertToUpper(sayHello.out)
-
     }
     ```
 
@@ -470,7 +468,7 @@ In the workflow block, make the following code change:
 
 === "Before"
 
-    ```groovy title="hello-workflow.nf" linenums="78" hl_lines="2"
+    ```groovy title="hello-workflow.nf" linenums="78"
         // collect all the greetings into one file
         collectGreetings(convertToUpper.out)
     }
@@ -494,10 +492,9 @@ Let's also include a couple of `view()` statements to visualize the before and a
 
 === "Before"
 
-    ```groovy title="hello-workflow.nf" linenums="78" hl_lines="3"
+    ```groovy title="hello-workflow.nf" linenums="78"
         // collect all the greetings into one file
         collectGreetings(convertToUpper.out.collect())
-
     }
     ```
 
@@ -589,7 +586,7 @@ In the process block, make the following code change:
 
 === "Before"
 
-    ```groovy title="hello-workflow.nf" linenums="48" hl_lines="3"
+    ```groovy title="hello-workflow.nf" linenums="48"
         input:
             path input_files
     ```
@@ -615,7 +612,7 @@ In the process block, make the following code change:
 
 === "Before"
 
-    ```groovy title="hello-workflow.nf" linenums="52" hl_lines="2 6"
+    ```groovy title="hello-workflow.nf" linenums="52"
         output:
             path "COLLECTED-output.txt"
 
@@ -650,12 +647,11 @@ In the pipeline parameters section, make the following code changes:
 
 === "Before"
 
-    ```groovy title="hello-workflow.nf" linenums="61" hl_lines="5"
+    ```groovy title="hello-workflow.nf" linenums="61"
     /*
      * Pipeline parameters
      */
     params.greeting = 'greetings.csv'
-
     ```
 
 Remember you can override that default value by specifying a value with `--batch` on the command line.
@@ -675,7 +671,7 @@ In the workflow block, make the following code change:
 
 === "Before"
 
-    ```groovy title="hello-workflow.nf" linenums="80" hl_lines="2"
+    ```groovy title="hello-workflow.nf" linenums="80"
         // collect all the greetings into one file
         collectGreetings(convertToUpper.out.collect())
     ```
@@ -768,9 +764,8 @@ In the `collectGreetings` process block, make the following code change:
 
 === "Before"
 
-    ```groovy title="hello-workflow.nf" linenums="55" hl_lines="2"
+    ```groovy title="hello-workflow.nf" linenums="55"
         script:
-
         """
         cat ${input_files} > 'COLLECTED-${batch_name}-output.txt'
         """
@@ -796,10 +791,9 @@ In the process block, make the following code change:
 
 === "Before"
 
-    ```groovy title="hello-workflow.nf" linenums="52" hl_lines="3"
+    ```groovy title="hello-workflow.nf" linenums="52"
         output:
             path "COLLECTED-${batch_name}-output.txt"
-
     ```
 
 The `emit:` tags are optional, and we could have added a tag to only one of the outputs.
@@ -828,10 +822,9 @@ In the workflow block, make the following code change:
 
 === "Before"
 
-    ```groovy title="hello-workflow.nf" linenums="82" hl_lines="3"
+    ```groovy title="hello-workflow.nf" linenums="82"
         // collect all the greetings into one file
         collectGreetings(convertToUpper.out.collect(), params.batch)
-
     ```
 
 !!! note

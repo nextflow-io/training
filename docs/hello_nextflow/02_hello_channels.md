@@ -92,7 +92,7 @@ In the workflow block, add the channel factory code:
 
 === "Before"
 
-    ```groovy title="hello-channels.nf" linenums="27" hl_lines="2"
+    ```groovy title="hello-channels.nf" linenums="27"
     workflow {
 
         // emit a greeting
@@ -123,7 +123,7 @@ In the workflow block, make the following code change:
 
 === "Before"
 
-    ```groovy title="hello-channels.nf" linenums="27" hl_lines="7"
+    ```groovy title="hello-channels.nf" linenums="27"
     workflow {
 
         // create a channel for inputs
@@ -201,7 +201,7 @@ In the workflow block, make the following code change:
 
 === "Before"
 
-    ```groovy title="hello-channels.nf" linenums="29" hl_lines="2"
+    ```groovy title="hello-channels.nf" linenums="29"
     // create a channel for inputs
     greeting_ch = Channel.of('Hello Channels')
     ```
@@ -317,7 +317,7 @@ In the process block, make the following code changes:
 
 === "Before"
 
-    ```groovy title="hello-channels.nf" linenums="6" hl_lines="9 13"
+    ```groovy title="hello-channels.nf" linenums="6"
     process sayHello {
 
         publishDir 'results', mode: 'copy'
@@ -440,7 +440,7 @@ Let's take the `greetings_array` variable we just imagined and make it a reality
 
 === "Before"
 
-    ```groovy title="hello-channels.nf" linenums="27" hl_lines="2"
+    ```groovy title="hello-channels.nf" linenums="27"
     workflow {
 
         // create a channel for inputs
@@ -462,7 +462,7 @@ In the workflow block, make the following change:
 
 === "Before"
 
-    ```groovy title="hello-channels.nf" linenums="32" hl_lines="2"
+    ```groovy title="hello-channels.nf" linenums="32"
         // create a channel for inputs
         greeting_ch = Channel.of('Hello','Bonjour','Holà')
     ```
@@ -521,7 +521,7 @@ In the workflow block, make the following code change:
 
 === "Before"
 
-    ```groovy title="hello-channels.nf" linenums="31" hl_lines="3"
+    ```groovy title="hello-channels.nf" linenums="31"
         // create a channel for inputs
         greeting_ch = Channel.of(greetings_array)
 
@@ -548,7 +548,7 @@ In the workflow block, make the following code change:
 
 === "Before"
 
-    ```groovy title="hello-channels.nf" linenums="31" hl_lines="3"
+    ```groovy title="hello-channels.nf" linenums="31"
         // create a channel for inputs
         greeting_ch = Channel.of(greetings_array)
                              .flatten()
@@ -657,7 +657,7 @@ In the workflow block, make the following code change:
 
 === "Before"
 
-    ```groovy title="hello-channels.nf" linenums="25" hl_lines="4"
+    ```groovy title="hello-channels.nf" linenums="25"
     /*
      * Pipeline parameters
      */
@@ -673,14 +673,15 @@ In the workflow block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-channels.nf" linenums="31" hl_lines="1-2"
+    ```groovy title="hello-channels.nf" linenums="31" hl_lines="2-3"
         // create a channel for inputs from a CSV file
         greeting_ch = Channel.fromPath(params.greeting)
+
     ```
 
 === "Before"
 
-    ```groovy title="hello-channels.nf" linenums="31" hl_lines="1-3"
+    ```groovy title="hello-channels.nf" linenums="31"
         // create a channel for inputs
         greeting_ch = Channel.of(greetings_array)
                              .flatten()
@@ -745,7 +746,7 @@ In the workflow block, make the following code change:
 
 === "Before"
 
-    ```groovy title="hello-channels.nf" linenums="31" hl_lines="3"
+    ```groovy title="hello-channels.nf" linenums="31"
     // create a channel for inputs from a CSV file
     greeting_ch = Channel.fromPath(params.greeting)
 
@@ -830,7 +831,7 @@ In the workflow block, make the following code change:
 
 === "Before"
 
-    ```groovy title="hello-channels.nf" linenums="31" hl_lines="6"
+    ```groovy title="hello-channels.nf" linenums="31"
     // create a channel for inputs from a CSV file
     greeting_ch = Channel.fromPath(params.greeting)
                          .view { csv -> "Before splitCsv: $csv" }
