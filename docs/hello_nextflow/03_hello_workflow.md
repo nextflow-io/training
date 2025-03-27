@@ -140,7 +140,7 @@ In the workflow block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-workflow.nf" linenums="53" hl_lines="3-5"
+    ```groovy title="hello-workflow.nf" linenums="53" hl_lines="4 5"
         // emit a greeting
         sayHello(greeting_ch)
 
@@ -390,7 +390,7 @@ In the workflow block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-workflow.nf" linenums="75" hl_lines="3-5"
+    ```groovy title="hello-workflow.nf" linenums="75" hl_lines="4 5"
         // convert the greeting to uppercase
         convertToUpper(sayHello.out)
 
@@ -480,7 +480,7 @@ Let's also include a couple of `view()` statements to visualize the before and a
 
 === "After"
 
-    ```groovy title="hello-workflow.nf" linenums="78" hl_lines="3-6"
+    ```groovy title="hello-workflow.nf" linenums="78" hl_lines="4 6"
         // collect all the greetings into one file
         collectGreetings(convertToUpper.out.collect())
 
@@ -812,7 +812,7 @@ In the workflow block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-workflow.nf" linenums="82" hl_lines="3-5"
+    ```groovy title="hello-workflow.nf" linenums="82" hl_lines="4 5"
         // collect all the greetings into one file
         collectGreetings(convertToUpper.out.collect(), params.batch)
 

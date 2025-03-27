@@ -79,7 +79,7 @@ In the workflow block, add the channel factory code:
 
 === "After"
 
-    ```groovy title="hello-channels.nf" linenums="27" hl_lines="2-5"
+    ```groovy title="hello-channels.nf" linenums="27" hl_lines="3 4"
     workflow {
 
         // create a channel for inputs
@@ -428,7 +428,7 @@ Let's take the `greetings_array` variable we just imagined and make it a reality
 
 === "After"
 
-    ```groovy title="hello-channels.nf" linenums="27" hl_lines="2-5"
+    ```groovy title="hello-channels.nf" linenums="27" hl_lines="3 4"
     workflow {
 
         // declare an array of input greetings
@@ -673,7 +673,7 @@ In the workflow block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-channels.nf" linenums="31" hl_lines="2-3"
+    ```groovy title="hello-channels.nf" linenums="31" hl_lines="1 2"
         // create a channel for inputs from a CSV file
         greeting_ch = Channel.fromPath(params.greeting)
 

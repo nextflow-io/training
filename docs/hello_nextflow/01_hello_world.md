@@ -322,7 +322,7 @@ In the workflow script file `hello-world.nf`, make the following code modificati
 
 === "After"
 
-    ```groovy title="hello-world.nf" linenums="6" hl_lines="2 3 4"
+    ```groovy title="hello-world.nf" linenums="6" hl_lines="3"
     process sayHello {
 
         publishDir 'results', mode: 'copy'
@@ -487,7 +487,7 @@ In the process block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-world.nf" linenums="6" hl_lines="4 5 6 7"
+    ```groovy title="hello-world.nf" linenums="6" hl_lines="5 6"
     process sayHello {
 
         publishDir 'results', mode: 'copy'

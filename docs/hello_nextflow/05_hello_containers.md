@@ -437,7 +437,7 @@ In the workflow block, make the following code change:
 
 === "After"
 
-    ```groovy title="hello-containers.nf" linenums="28" hl_lines="6-8"
+    ```groovy title="hello-containers.nf" linenums="28" hl_lines="7 8"
         // collect all the greetings into one file
         collectGreetings(convertToUpper.out.collect(), params.batch)
 
