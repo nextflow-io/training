@@ -8,7 +8,7 @@
 :fontawesome-brands-youtube:{ .youtube } See the [whole playlist on the Nextflow YouTube channel](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik).
 ///
 
-In Part 1 of this course (Hello World), we showed you how to provide a variable input to a process by providing the input in the process call directly: `sayHello(params.greet)`.
+In Part 1 of this course (Hello World), we showed you how to provide a variable input to a process by providing the input in the process call directly: `sayHello(params.greeting)`.
 That was a deliberately simplified approach.
 In practice, that approach has major limitations; namely that it only works for very simple cases where we only want to run the process once, on a single value.
 In most realistic workflow use cases, we want to process multiple values (experimental data for multiple samples, for example), so we need a more sophisticated way to handle inputs.
@@ -651,7 +651,7 @@ _Before:_
 /*
  * Pipeline parameters
  */
-params.greeting = ['Hello','Bonjour','Holà']
+params.greeting = 'Holà mundo!'
 ```
 
 _After:_
@@ -673,6 +673,9 @@ In the workflow block, make the following code change:
 _Before:_
 
 ```groovy title="hello-channels.nf" linenums="31"
+    // declare an array of input greetings
+    greetings_array = ['Hello','Bonjour','Holà']
+
     // create a channel for inputs
     greeting_ch = Channel.of(greetings_array)
                          .flatten()
