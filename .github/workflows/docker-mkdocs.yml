@@ -1,9 +1,13 @@
 # Build and push the Docker image for building the site (mkdocs material)
 
-name: MkDocs image
+name: Build Docker [MkDocs]
 
 on:
   pull_request:
+    paths:
+      - ".github/mkdocs.Dockerfile"
+      - ".github/workflows/docker-mkdocs.yml"
+      - "requirements.txt"
   push:
     branches: [master]
 
