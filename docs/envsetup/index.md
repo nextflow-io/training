@@ -12,6 +12,7 @@ Let's get started!
 
 For more detailed instructions for GitHub Codespaces, see the [GitHub Codespaces env-setup docs](01_setup.md).
 If you cannot use GitHub Codespaces and wish to use a local development environment, see the [documentation for local installation](02_local.md).
+If you prefer using VS Code with a pre-configured environment, see the [VS Code Devcontainers setup guide](03_devcontainer.md).
 
 !!! info "Deprecation of Gitpod"
 

@@ -56,7 +56,7 @@ jobs:
       - name: Pre-build dev container image
         uses: devcontainers/ci@v0.3
         with:
-          configFile: .devcontainer/development/devcontainer.json
+          configFile: .devcontainer/codespaces-dev/devcontainer.json
           imageName: ghcr.io/${{ github.repository }}
           imageTag: ${{ env.IMAGE_TAG }}
           cacheFrom: ghcr.io/${{ github.repository }}
