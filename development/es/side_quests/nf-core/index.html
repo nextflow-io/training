@@ -18,7 +18,7 @@
       
       
       <link rel="icon" href="../../../assets/img/nextflow-icon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.10">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.11">
     
     
       
@@ -261,11 +261,13 @@
 </div>
     
     
-      <label class="md-header__button md-icon" for="__search">
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
-      </label>
-      <div class="md-search" data-md-component="search" role="dialog">
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
@@ -302,6 +304,7 @@
     </div>
   </div>
 </div>
+      
     
     
       <div class="md-header__source">
@@ -4190,7 +4193,7 @@ should have a <code>results</code> folder that looks something like this:</p>
 <h4 id="236-add-a-parameter-to-the-seqtktrim-tool">2.3.6 Add a parameter to the <code>seqtk/trim</code> tool<a class="headerlink" href="#236-add-a-parameter-to-the-seqtktrim-tool" title="Permanent link">&para;</a></h4>
 <p>nf-core modules should be flexible and usable across many different pipelines. Therefore, optional tool parameters are typically not set in an nf-core/module. Instead, additional configuration options on how to run the tool, like its parameters or filename, can be applied to a module using the <code>conf/modules.config</code> file on the pipeline level. Process selectors (e.g., <code>withName</code>) are used to apply configuration options to modules selectively. Process selectors must be used within the <code>process</code> scope.</p>
 <p>The parameters or arguments of a tool can be changed using the directive <code>args</code>. You can find many examples of how arguments are added to modules in nf-core pipelines, for example, the nf-core/demo <a href="https://github.com/nf-core/demo/blob/master/conf/modules.config">modules.config</a> file.</p>
-<p>Add this snippet to your <code>conf/modules.config</code> file (using the <code>params</code> scope) to call the <code>seqtk/trim</code> tool with the argument <code>-b 5</code> to trim 5 bp from the left end of each read:</p>
+<p>Add this snippet to your <code>conf/modules.config</code> file (using the <code>process</code> scope) to call the <code>seqtk/trim</code> tool with the argument <code>-b 5</code> to trim 5 bp from the left end of each read:</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">conf/modules.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-37-21">21</a></span>
 <span class="normal"><a href="#__codelineno-37-22">22</a></span>
 <span class="normal"><a href="#__codelineno-37-23">23</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-37-21" name="__codelineno-37-21"></a><span class="go">withName: &#39;SEQTK_TRIM&#39; {</span>
@@ -4503,25 +4506,25 @@ an input channel into several new output channels based on a selection criteria.
 <li>Add the author name: <code>GitHub Username: (@&lt;your-name&gt;):</code></li>
 <li>Accept the defaults for the remaining prompts by typing <code>enter</code></li>
 </ul>
-<p>This will create a new file in <code>modules/local/fastqe.nf</code> that already contains the container and conda definitions, the general structure of the process, and a number of TODO statements to guide you through the adaptation.</p>
+<p>This will create a new file in <code>modules/local/fastqe/main.nf</code> that already contains the container and conda definitions, the general structure of the process, and a number of TODO statements to guide you through the adaptation.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>If the module already exists locally, the command will fail to prevent you from accidentally overwriting existing work:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-68-1" name="__codelineno-68-1" href="#__codelineno-68-1"></a><span class="go">INFO     Repository type: pipeline</span>
 <a id="__codelineno-68-2" name="__codelineno-68-2" href="#__codelineno-68-2"></a><span class="go">INFO     Press enter to use default values (shown in brackets) or type your own responses. ctrl+click underlined text to open links.</span>
-<a id="__codelineno-68-3" name="__codelineno-68-3" href="#__codelineno-68-3"></a><span class="go">CRITICAL Module file exists already: &#39;modules/local/fastqe.nf&#39;. Use &#39;--force&#39; to overwrite</span>
+<a id="__codelineno-68-3" name="__codelineno-68-3" href="#__codelineno-68-3"></a><span class="go">CRITICAL Module directory exists: &#39;modules/local/fastqe&#39;. Use &#39;--force&#39; to overwrite</span>
 </code></pre></div>
 </div>
-<p>Let's open the modules file: <code>modules/local/fastqe.nf</code>.</p>
+<p>Let's open the modules file: <code>modules/local/fastqe/main.nf</code>.</p>
 <p>You will notice, that it still calls <code>samtools</code> and the input are <code>bam</code>.</p>
 <p>From our sample sheet, we know we have fastq files instead, so let's change the input definition accordingly:</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/local/fastqe.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-69-38">38</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-69-38" name="__codelineno-69-38"></a><span class="n">tuple</span><span class="w"> </span><span class="nf">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">reads</span><span class="o">)</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/local/fastqe/main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-69-38">38</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-69-38" name="__codelineno-69-38"></a><span class="n">tuple</span><span class="w"> </span><span class="nf">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">reads</span><span class="o">)</span>
 </code></pre></div></td></tr></table></div>
 <p>The output of this tool is a tsv file with the emoji annotation, let's adapt the output as well:</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/local/fastqe.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-70-42">42</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-70-42" name="__codelineno-70-42"></a><span class="n">tuple</span><span class="w"> </span><span class="nf">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">&quot;*.tsv&quot;</span><span class="o">),</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">tsv</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/local/fastqe/main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-70-42">42</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-70-42" name="__codelineno-70-42"></a><span class="n">tuple</span><span class="w"> </span><span class="nf">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">&quot;*.tsv&quot;</span><span class="o">),</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">tsv</span>
 </code></pre></div></td></tr></table></div>
 <p>The script section still calls <code>samtools</code>. Let's change this to the proper call of the tool:</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/local/fastqe.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-71-62">62</a></span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/local/fastqe/main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-71-62">62</a></span>
 <span class="normal"><a href="#__codelineno-71-63">63</a></span>
 <span class="normal"><a href="#__codelineno-71-64">64</a></span>
 <span class="normal"><a href="#__codelineno-71-65">65</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-71-62" name="__codelineno-71-62"></a><span class="w">    </span><span class="n">fastqe</span><span class="w"> </span><span class="err">\\</span>
@@ -4530,13 +4533,13 @@ an input channel into several new output channels based on a selection criteria.
 <a id="__codelineno-71-65" name="__codelineno-71-65"></a><span class="w">        </span><span class="o">--</span><span class="n">output</span><span class="w"> </span><span class="n">$</span><span class="o">{</span><span class="n">prefix</span><span class="o">}.</span><span class="na">tsv</span>
 </code></pre></div></td></tr></table></div>
 <p>And at last, we need to adapt the version retrieval. This tool does not have a version command, so we will add the release number manually:</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/local/fastqe.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-72-52">52</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-72-52" name="__codelineno-72-52"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">VERSION</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;0.3.3&#39;</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/local/fastqe/main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-72-52">52</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-72-52" name="__codelineno-72-52"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">VERSION</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;0.3.3&#39;</span>
 </code></pre></div></td></tr></table></div>
 <p>and write it to a file in the script section:</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/local/fastqe.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-73-70">70</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-73-70" name="__codelineno-73-70"></a><span class="w">        </span><span class="nl">fastqe:</span><span class="w"> </span><span class="n">$VERSION</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/local/fastqe/main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-73-70">70</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-73-70" name="__codelineno-73-70"></a><span class="w">        </span><span class="nl">fastqe:</span><span class="w"> </span><span class="n">$VERSION</span>
 </code></pre></div></td></tr></table></div>
 <p>We will not cover <a href="https://www.nextflow.io/docs/latest/process.html#stub"><code>stubs</code></a> in this training. They are not necessary to run a module, so let's remove them for now:</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/local/fastqe.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-74-74">74</a></span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/local/fastqe/main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-74-74">74</a></span>
 <span class="normal"><a href="#__codelineno-74-75">75</a></span>
 <span class="normal"><a href="#__codelineno-74-76">76</a></span>
 <span class="normal"><a href="#__codelineno-74-77">77</a></span>
@@ -4567,7 +4570,7 @@ an input channel into several new output channels based on a selection criteria.
 <a id="__codelineno-74-88" name="__codelineno-74-88"></a><span class="s2">    &quot;&quot;&quot;</span>
 </code></pre></div></td></tr></table></div>
 <p>If you think this looks a bit messy and just want to add a complete final version, here's one we made earlier and we've removed all the commented out instructions:</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/local/fastqe.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-75-1"> 1</a></span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/local/fastqe/main.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-75-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-75-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-75-3"> 3</a></span>
 <span class="normal"><a href="#__codelineno-75-4"> 4</a></span>
