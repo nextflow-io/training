@@ -1178,55 +1178,230 @@ In this section, you've learned:
 
 You now have a workflow that can split a samplesheet, filter the normal and tumor samples, join them together by sample ID and replicate number, then dump the results.
 
-This is a common pattern in bioinformatics workflows where you need to match up samples after processing independently, so it is a useful skill. Next, we will look at aggregating samples by fields.
+This is a common pattern in bioinformatics workflows where you need to match up samples after processing independently, so it is a useful skill. Next, we will look at repeating a sample multiple times.
 
-### 4. Aggregating samples
+## 4. Spread samples over intervals
 
-In the previous section, we learned how to split a samplesheet and filter the normal and tumor samples. But this only covers a single type of joining. What if we want to group samples by a specific attribute? For example, instead of joining matched normal-tumor pairs, we might want to process all samples from "sampleA" together regardless of their type. This pattern is common in bioinformatics workflows where you may want to process related samples separately for efficiency reasons before comparing or combining the results at the end.
+Spreading samples over different conditions is a common pattern in bioinformatics workflows. For example, it is used to spread variant calling over a range of intervals. This can help distribute work across multiple cores or nodes and make the pipelines more efficient and be turned around faster.
 
-Nextflow includes built in methods to do this, the main one we will look at is `groupTuple`.
+In the next section, we will demonstrate how to take our existing samples and repeat each one for every interval. In this way, we will have a single sample for each input interval. We will also multiply our number of samples by the number of intervals, so get ready for a busy terminal!
 
-### 4.1. Grouping samples using `groupTuple`
+### 4.1. Spread samples over intervals using `combine`
 
-Let's start by grouping the samples by our `id` field. We can do this by using the `groupTuple` operator.
-
-As a reminder, what we are trying to achieve it to take all of the samples with the same `id` and group them together. We had 3 samples in the starting samplesheet (A, B and C) so we should end up with 3 grouped samples at the end of this step.
-
-The first step is similar to what we did in the previous section. We must isolate our grouping variable as the first element of the tuple. Remember, our first element is currently a map of `id` and `repeat` fields:
-
-```groovy title="main.nf" linenums="1"
-{
-  "id": "sampleA",
-  "repeat": "1"
-}
-```
-
-We can reuse the `subMap` method from before to isolate our `id` field after joining. Like before, we will use `map` to apply the `subMap` method to the first element of the tuple for each sample.
+Let's start by creating a channel of intervals. To keep life simple, we will just use 3 intervals we will manually define. In a real workflow, you could read these in from a file input or even create a channel with lots of interval files.
 
 _Before:_
 
-```groovy title="main.nf" linenums="13"
-    joined_samples = normal_samples
-                        .join(tumor_samples)
+```groovy title="main.nf" linenums="15"
                         .dump(tag: 'joined', pretty: true)
 }
 ```
 
 _After:_
 
-```groovy title="main.nf" linenums="13"
-    joined_samples = normal_samples
-                        .join(tumor_samples)
+```groovy title="main.nf" linenums="24"
                         .dump(tag: 'joined', pretty: true)
+    intervals = Channel.of('chr1', 'chr2', 'chr3')
+                    .dump(tag: "intervals")
+}
+```
 
-    joined_samples.map { samples, normal, tumor ->
-                        [
-                            samples.subMap('id'),
-                            normal,
-                            tumor
-                        ]
-                    }
-                    .dump(tag: 'grouped')
+Now remember, we want to repeat each sample for each interval. This is sometimes referred to as the Cartesian product of the samples and intervals. We can achieve this by using the [`combine` operator](https://www.nextflow.io/docs/latest/operator.html#combine). This will take every item from channel 1 and repeat it for each item in channel 2. Let's add a combine operator to our workflow:
+
+_Before:_
+
+```groovy title="main.nf" linenums="26"
+    intervals = Channel.of('chr1', 'chr2', 'chr3')
+                    .dump(tag: "intervals")
+}
+```
+
+_After:_
+
+```groovy title="main.nf" linenums="26"
+    intervals = Channel.of('chr1', 'chr2', 'chr3')
+                    .dump(tag: "intervals")
+
+    combined_samples = joined_samples.combine(intervals)
+                        .dump(tag: 'combined')
+}
+```
+
+Now let's run it and see what happens:
+
+```bash title="View combined samples"
+nextflow run main.nf -dump-channels combined
+```
+
+```console title="View combined samples"
+ N E X T F L O W   ~  version 24.10.5
+
+Launching `main.nf` [extravagant_maxwell] DSL2 - revision: 459bde3584
+
+[DUMP: combined] [['id':'sampleA', 'repeat':'1'], ['id':'sampleA', 'repeat':'1', 'type':'normal', 'fastq1':'sampleA_rep1_normal_R1.fastq.gz', 'fastq2':'sampleA_rep1_normal_R2.fastq.gz'], ['id':'sampleA', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleA_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleA_rep1_tumor_R2.fastq.gz'], 'chr1']
+[DUMP: combined] [['id':'sampleA', 'repeat':'1'], ['id':'sampleA', 'repeat':'1', 'type':'normal', 'fastq1':'sampleA_rep1_normal_R1.fastq.gz', 'fastq2':'sampleA_rep1_normal_R2.fastq.gz'], ['id':'sampleA', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleA_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleA_rep1_tumor_R2.fastq.gz'], 'chr2']
+[DUMP: combined] [['id':'sampleA', 'repeat':'1'], ['id':'sampleA', 'repeat':'1', 'type':'normal', 'fastq1':'sampleA_rep1_normal_R1.fastq.gz', 'fastq2':'sampleA_rep1_normal_R2.fastq.gz'], ['id':'sampleA', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleA_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleA_rep1_tumor_R2.fastq.gz'], 'chr3']
+[DUMP: combined] [['id':'sampleA', 'repeat':'2'], ['id':'sampleA', 'repeat':'2', 'type':'normal', 'fastq1':'sampleA_rep2_normal_R1.fastq.gz', 'fastq2':'sampleA_rep2_normal_R2.fastq.gz'], ['id':'sampleA', 'repeat':'2', 'type':'tumor', 'fastq1':'sampleA_rep2_tumor_R1.fastq.gz', 'fastq2':'sampleA_rep2_tumor_R2.fastq.gz'], 'chr1']
+[DUMP: combined] [['id':'sampleA', 'repeat':'2'], ['id':'sampleA', 'repeat':'2', 'type':'normal', 'fastq1':'sampleA_rep2_normal_R1.fastq.gz', 'fastq2':'sampleA_rep2_normal_R2.fastq.gz'], ['id':'sampleA', 'repeat':'2', 'type':'tumor', 'fastq1':'sampleA_rep2_tumor_R1.fastq.gz', 'fastq2':'sampleA_rep2_tumor_R2.fastq.gz'], 'chr2']
+[DUMP: combined] [['id':'sampleA', 'repeat':'2'], ['id':'sampleA', 'repeat':'2', 'type':'normal', 'fastq1':'sampleA_rep2_normal_R1.fastq.gz', 'fastq2':'sampleA_rep2_normal_R2.fastq.gz'], ['id':'sampleA', 'repeat':'2', 'type':'tumor', 'fastq1':'sampleA_rep2_tumor_R1.fastq.gz', 'fastq2':'sampleA_rep2_tumor_R2.fastq.gz'], 'chr3']
+[DUMP: combined] [['id':'sampleB', 'repeat':'1'], ['id':'sampleB', 'repeat':'1', 'type':'normal', 'fastq1':'sampleB_rep1_normal_R1.fastq.gz', 'fastq2':'sampleB_rep1_normal_R2.fastq.gz'], ['id':'sampleB', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleB_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleB_rep1_tumor_R2.fastq.gz'], 'chr1']
+[DUMP: combined] [['id':'sampleB', 'repeat':'1'], ['id':'sampleB', 'repeat':'1', 'type':'normal', 'fastq1':'sampleB_rep1_normal_R1.fastq.gz', 'fastq2':'sampleB_rep1_normal_R2.fastq.gz'], ['id':'sampleB', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleB_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleB_rep1_tumor_R2.fastq.gz'], 'chr2']
+[DUMP: combined] [['id':'sampleB', 'repeat':'1'], ['id':'sampleB', 'repeat':'1', 'type':'normal', 'fastq1':'sampleB_rep1_normal_R1.fastq.gz', 'fastq2':'sampleB_rep1_normal_R2.fastq.gz'], ['id':'sampleB', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleB_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleB_rep1_tumor_R2.fastq.gz'], 'chr3']
+[DUMP: combined] [['id':'sampleC', 'repeat':'1'], ['id':'sampleC', 'repeat':'1', 'type':'normal', 'fastq1':'sampleC_rep1_normal_R1.fastq.gz', 'fastq2':'sampleC_rep1_normal_R2.fastq.gz'], ['id':'sampleC', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleC_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleC_rep1_tumor_R2.fastq.gz'], 'chr1']
+[DUMP: combined] [['id':'sampleC', 'repeat':'1'], ['id':'sampleC', 'repeat':'1', 'type':'normal', 'fastq1':'sampleC_rep1_normal_R1.fastq.gz', 'fastq2':'sampleC_rep1_normal_R2.fastq.gz'], ['id':'sampleC', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleC_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleC_rep1_tumor_R2.fastq.gz'], 'chr2']
+[DUMP: combined] [['id':'sampleC', 'repeat':'1'], ['id':'sampleC', 'repeat':'1', 'type':'normal', 'fastq1':'sampleC_rep1_normal_R1.fastq.gz', 'fastq2':'sampleC_rep1_normal_R2.fastq.gz'], ['id':'sampleC', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleC_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleC_rep1_tumor_R2.fastq.gz'], 'chr3']
+```
+
+Success! We have repeated every sample for every single interval in our 3 interval list. We've effectively tripled the number of items in our channel. It's a little hard to read though, so in the next section we will tidy it up.
+
+### 4.2. Organise the channel
+
+We can use the `map` operator to tidy and refactor our sample data so it's easier to understand. Let's move the intervals string to the joining map at the first element.
+
+_Before:_
+
+```groovy title="main.nf" linenums="19"
+    combined_samples = joined_samples.combine(intervals)
+                        .dump(tag: 'combined')
+}
+```
+
+_After:_
+
+```groovy title="main.nf" linenums="19"
+    combined_samples = joined_samples.combine(intervals)
+                        .map { grouping_key, normal, tumor, interval ->
+                            [
+                                grouping_key + [interval: interval],
+                                normal,
+                                tumor
+                            ]
+
+                        }
+                        .dump(tag: 'combined')
+}
+```
+
+Wait? What did we do here? Let's go over it piece by piece.
+
+First, we use a map operator to iterate over every item in the channel. By using the names `grouping_key`, `normal`, `tumor` and `interval`, we can refer to the elements in the tuple by name instead of by index. This makes the code more readable and easier to understand.
+
+```groovy
+.map { grouping_key, normal, tumor, interval ->
+```
+
+Next, create a new map by combining the `grouping_key` with the `interval` field. Remember, the `grouping_key` is the first element of the tuple, which is a map of `id` and `repeat` fields. The `interval` is just a string, but we make it into a new map with the key `interval` and value the string. By 'adding' them (`+`), Groovy will merge them together to produce the union of the two maps.
+
+```groovy
+grouping_key + [interval: interval],
+```
+
+Finally, we return all of this as one tuple of the 3 elements, the new map, the normal sample data and the tumor sample data.
+
+```groovy
+[
+    grouping_key + [interval: interval],
+    normal,
+    tumor
+]
+```
+
+Let's run it again and check the channel contents:
+
+```bash title="View combined samples"
+nextflow run main.nf -dump-channels combined
+```
+
+```console title="View combined samples"
+ N E X T F L O W   ~  version 24.10.5
+
+Launching `main.nf` [focused_curie] DSL2 - revision: 9953685fec
+
+[DUMP: combined] [['id':'sampleA', 'repeat':'1', 'interval':'chr1'], ['id':'sampleA', 'repeat':'1', 'type':'normal', 'fastq1':'sampleA_rep1_normal_R1.fastq.gz', 'fastq2':'sampleA_rep1_normal_R2.fastq.gz'], ['id':'sampleA', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleA_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleA_rep1_tumor_R2.fastq.gz']]
+[DUMP: combined] [['id':'sampleA', 'repeat':'1', 'interval':'chr2'], ['id':'sampleA', 'repeat':'1', 'type':'normal', 'fastq1':'sampleA_rep1_normal_R1.fastq.gz', 'fastq2':'sampleA_rep1_normal_R2.fastq.gz'], ['id':'sampleA', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleA_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleA_rep1_tumor_R2.fastq.gz']]
+[DUMP: combined] [['id':'sampleA', 'repeat':'1', 'interval':'chr3'], ['id':'sampleA', 'repeat':'1', 'type':'normal', 'fastq1':'sampleA_rep1_normal_R1.fastq.gz', 'fastq2':'sampleA_rep1_normal_R2.fastq.gz'], ['id':'sampleA', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleA_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleA_rep1_tumor_R2.fastq.gz']]
+[DUMP: combined] [['id':'sampleA', 'repeat':'2', 'interval':'chr1'], ['id':'sampleA', 'repeat':'2', 'type':'normal', 'fastq1':'sampleA_rep2_normal_R1.fastq.gz', 'fastq2':'sampleA_rep2_normal_R2.fastq.gz'], ['id':'sampleA', 'repeat':'2', 'type':'tumor', 'fastq1':'sampleA_rep2_tumor_R1.fastq.gz', 'fastq2':'sampleA_rep2_tumor_R2.fastq.gz']]
+[DUMP: combined] [['id':'sampleA', 'repeat':'2', 'interval':'chr2'], ['id':'sampleA', 'repeat':'2', 'type':'normal', 'fastq1':'sampleA_rep2_normal_R1.fastq.gz', 'fastq2':'sampleA_rep2_normal_R2.fastq.gz'], ['id':'sampleA', 'repeat':'2', 'type':'tumor', 'fastq1':'sampleA_rep2_tumor_R1.fastq.gz', 'fastq2':'sampleA_rep2_tumor_R2.fastq.gz']]
+[DUMP: combined] [['id':'sampleA', 'repeat':'2', 'interval':'chr3'], ['id':'sampleA', 'repeat':'2', 'type':'normal', 'fastq1':'sampleA_rep2_normal_R1.fastq.gz', 'fastq2':'sampleA_rep2_normal_R2.fastq.gz'], ['id':'sampleA', 'repeat':'2', 'type':'tumor', 'fastq1':'sampleA_rep2_tumor_R1.fastq.gz', 'fastq2':'sampleA_rep2_tumor_R2.fastq.gz']]
+[DUMP: combined] [['id':'sampleB', 'repeat':'1', 'interval':'chr1'], ['id':'sampleB', 'repeat':'1', 'type':'normal', 'fastq1':'sampleB_rep1_normal_R1.fastq.gz', 'fastq2':'sampleB_rep1_normal_R2.fastq.gz'], ['id':'sampleB', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleB_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleB_rep1_tumor_R2.fastq.gz']]
+[DUMP: combined] [['id':'sampleB', 'repeat':'1', 'interval':'chr2'], ['id':'sampleB', 'repeat':'1', 'type':'normal', 'fastq1':'sampleB_rep1_normal_R1.fastq.gz', 'fastq2':'sampleB_rep1_normal_R2.fastq.gz'], ['id':'sampleB', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleB_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleB_rep1_tumor_R2.fastq.gz']]
+[DUMP: combined] [['id':'sampleB', 'repeat':'1', 'interval':'chr3'], ['id':'sampleB', 'repeat':'1', 'type':'normal', 'fastq1':'sampleB_rep1_normal_R1.fastq.gz', 'fastq2':'sampleB_rep1_normal_R2.fastq.gz'], ['id':'sampleB', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleB_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleB_rep1_tumor_R2.fastq.gz']]
+[DUMP: combined] [['id':'sampleC', 'repeat':'1', 'interval':'chr1'], ['id':'sampleC', 'repeat':'1', 'type':'normal', 'fastq1':'sampleC_rep1_normal_R1.fastq.gz', 'fastq2':'sampleC_rep1_normal_R2.fastq.gz'], ['id':'sampleC', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleC_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleC_rep1_tumor_R2.fastq.gz']]
+[DUMP: combined] [['id':'sampleC', 'repeat':'1', 'interval':'chr2'], ['id':'sampleC', 'repeat':'1', 'type':'normal', 'fastq1':'sampleC_rep1_normal_R1.fastq.gz', 'fastq2':'sampleC_rep1_normal_R2.fastq.gz'], ['id':'sampleC', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleC_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleC_rep1_tumor_R2.fastq.gz']]
+[DUMP: combined] [['id':'sampleC', 'repeat':'1', 'interval':'chr3'], ['id':'sampleC', 'repeat':'1', 'type':'normal', 'fastq1':'sampleC_rep1_normal_R1.fastq.gz', 'fastq2':'sampleC_rep1_normal_R2.fastq.gz'], ['id':'sampleC', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleC_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleC_rep1_tumor_R2.fastq.gz']]
+```
+
+Using `map` to coerce your data into the correct structure can be tricky, but it's crucial to correctly splitting and grouping effectively.
+
+### Takeaway
+
+In this section, you've learned:
+
+- **Spreading samples over intervals**: How to use `combine` to repeat samples over intervals
+
+### 5. Aggregating samples
+
+In the previous section, we learned how to split a samplesheet and filter the normal and tumor samples. But this only covers a single type of joining. What if we want to group samples by a specific attribute? For example, instead of joining matched normal-tumor pairs, we might want to process all samples from "sampleA" together regardless of their type. This pattern is common in bioinformatics workflows where you may want to process related samples separately for efficiency reasons before comparing or combining the results at the end.
+
+Nextflow includes built in methods to do this, the main one we will look at is `groupTuple`.
+
+### 5.1. Grouping samples using `groupTuple`
+
+Let's start by grouping all of our samples that have the same `id` and `interval` fields, this would be typical of an analysis where we wanted to group technical replicates but keep meaningfully different samples separated.
+
+To do this, we should separate out our grouping variables so we can use them in isolation.
+
+The first step is similar to what we did in the previous section. We must isolate our grouping variable as the first element of the tuple. Remember, our first element is currently a map of `id`, `repeat` and `interval` fields:
+
+```groovy title="main.nf" linenums="1"
+{
+  "id": "sampleA",
+  "repeat": "1",
+  "interval": "chr1"
+}
+```
+
+We can reuse the `subMap` method from before to isolate our `id` and `interval` fields from the map. Like before, we will use `map` operator to apply the `subMap` method to the first element of the tuple for each sample.
+
+_Before:_
+
+```groovy title="main.nf" linenums="19"
+    combined_samples = joined_samples.combine(intervals)
+                        .map { grouping_key, normal, tumor, interval ->
+                            [
+                                grouping_key + [interval: interval],
+                                normal,
+                                tumor
+                            ]
+
+                        }
+                        .dump(tag: 'combined')
+}
+```
+
+_After:_
+
+```groovy title="main.nf" linenums="19"
+    combined_samples = joined_samples.combine(intervals)
+                        .map { grouping_key, normal, tumor, interval ->
+                            [
+                                grouping_key + [interval: interval],
+                                normal,
+                                tumor
+                            ]
+
+                        }
+                        .dump(tag: 'combined')
+
+    grouped_samples = combined_samples.map { grouping_key, normal, tumor ->
+                            [
+                                grouping_key.subMap('id', 'interval'),
+                                normal,
+                                tumor
+                            ]
+
+                        }
+                      .dump(tag: 'grouped')
 }
 ```
 
@@ -1239,44 +1414,55 @@ nextflow run main.nf -dump-channels grouped
 ```console title="View grouped samples"
  N E X T F L O W   ~  version 24.10.5
 
-Launching `main.nf` [amazing_euler] DSL2 - revision: 765de536ee
+Launching `main.nf` [fabulous_baekeland] DSL2 - revision: 5d2d687351
 
-[DUMP: grouped] [['id':'sampleA'], ['id':'sampleA', 'repeat':'1', 'type':'normal', 'fastq1':'sampleA_rep1_normal_R1.fastq.gz', 'fastq2':'sampleA_rep1_normal_R2.fastq.gz'], ['id':'sampleA', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleA_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleA_rep1_tumor_R2.fastq.gz']]
-[DUMP: grouped] [['id':'sampleA'], ['id':'sampleA', 'repeat':'2', 'type':'normal', 'fastq1':'sampleA_rep2_normal_R1.fastq.gz', 'fastq2':'sampleA_rep2_normal_R2.fastq.gz'], ['id':'sampleA', 'repeat':'2', 'type':'tumor', 'fastq1':'sampleA_rep2_tumor_R1.fastq.gz', 'fastq2':'sampleA_rep2_tumor_R2.fastq.gz']]
-[DUMP: grouped] [['id':'sampleB'], ['id':'sampleB', 'repeat':'1', 'type':'normal', 'fastq1':'sampleB_rep1_normal_R1.fastq.gz', 'fastq2':'sampleB_rep1_normal_R2.fastq.gz'], ['id':'sampleB', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleB_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleB_rep1_tumor_R2.fastq.gz']]
-[DUMP: grouped] [['id':'sampleC'], ['id':'sampleC', 'repeat':'1', 'type':'normal', 'fastq1':'sampleC_rep1_normal_R1.fastq.gz', 'fastq2':'sampleC_rep1_normal_R2.fastq.gz'], ['id':'sampleC', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleC_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleC_rep1_tumor_R2.fastq.gz']]
+[DUMP: grouped] [['id':'sampleA', 'interval':'chr1'], ['id':'sampleA', 'repeat':'1', 'type':'normal', 'fastq1':'sampleA_rep1_normal_R1.fastq.gz', 'fastq2':'sampleA_rep1_normal_R2.fastq.gz'], ['id':'sampleA', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleA_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleA_rep1_tumor_R2.fastq.gz']]
+[DUMP: grouped] [['id':'sampleA', 'interval':'chr2'], ['id':'sampleA', 'repeat':'1', 'type':'normal', 'fastq1':'sampleA_rep1_normal_R1.fastq.gz', 'fastq2':'sampleA_rep1_normal_R2.fastq.gz'], ['id':'sampleA', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleA_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleA_rep1_tumor_R2.fastq.gz']]
+[DUMP: grouped] [['id':'sampleA', 'interval':'chr3'], ['id':'sampleA', 'repeat':'1', 'type':'normal', 'fastq1':'sampleA_rep1_normal_R1.fastq.gz', 'fastq2':'sampleA_rep1_normal_R2.fastq.gz'], ['id':'sampleA', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleA_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleA_rep1_tumor_R2.fastq.gz']]
+[DUMP: grouped] [['id':'sampleA', 'interval':'chr1'], ['id':'sampleA', 'repeat':'2', 'type':'normal', 'fastq1':'sampleA_rep2_normal_R1.fastq.gz', 'fastq2':'sampleA_rep2_normal_R2.fastq.gz'], ['id':'sampleA', 'repeat':'2', 'type':'tumor', 'fastq1':'sampleA_rep2_tumor_R1.fastq.gz', 'fastq2':'sampleA_rep2_tumor_R2.fastq.gz']]
+[DUMP: grouped] [['id':'sampleA', 'interval':'chr2'], ['id':'sampleA', 'repeat':'2', 'type':'normal', 'fastq1':'sampleA_rep2_normal_R1.fastq.gz', 'fastq2':'sampleA_rep2_normal_R2.fastq.gz'], ['id':'sampleA', 'repeat':'2', 'type':'tumor', 'fastq1':'sampleA_rep2_tumor_R1.fastq.gz', 'fastq2':'sampleA_rep2_tumor_R2.fastq.gz']]
+[DUMP: grouped] [['id':'sampleA', 'interval':'chr3'], ['id':'sampleA', 'repeat':'2', 'type':'normal', 'fastq1':'sampleA_rep2_normal_R1.fastq.gz', 'fastq2':'sampleA_rep2_normal_R2.fastq.gz'], ['id':'sampleA', 'repeat':'2', 'type':'tumor', 'fastq1':'sampleA_rep2_tumor_R1.fastq.gz', 'fastq2':'sampleA_rep2_tumor_R2.fastq.gz']]
+[DUMP: grouped] [['id':'sampleB', 'interval':'chr1'], ['id':'sampleB', 'repeat':'1', 'type':'normal', 'fastq1':'sampleB_rep1_normal_R1.fastq.gz', 'fastq2':'sampleB_rep1_normal_R2.fastq.gz'], ['id':'sampleB', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleB_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleB_rep1_tumor_R2.fastq.gz']]
+[DUMP: grouped] [['id':'sampleB', 'interval':'chr2'], ['id':'sampleB', 'repeat':'1', 'type':'normal', 'fastq1':'sampleB_rep1_normal_R1.fastq.gz', 'fastq2':'sampleB_rep1_normal_R2.fastq.gz'], ['id':'sampleB', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleB_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleB_rep1_tumor_R2.fastq.gz']]
+[DUMP: grouped] [['id':'sampleB', 'interval':'chr3'], ['id':'sampleB', 'repeat':'1', 'type':'normal', 'fastq1':'sampleB_rep1_normal_R1.fastq.gz', 'fastq2':'sampleB_rep1_normal_R2.fastq.gz'], ['id':'sampleB', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleB_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleB_rep1_tumor_R2.fastq.gz']]
+[DUMP: grouped] [['id':'sampleC', 'interval':'chr1'], ['id':'sampleC', 'repeat':'1', 'type':'normal', 'fastq1':'sampleC_rep1_normal_R1.fastq.gz', 'fastq2':'sampleC_rep1_normal_R2.fastq.gz'], ['id':'sampleC', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleC_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleC_rep1_tumor_R2.fastq.gz']]
+[DUMP: grouped] [['id':'sampleC', 'interval':'chr2'], ['id':'sampleC', 'repeat':'1', 'type':'normal', 'fastq1':'sampleC_rep1_normal_R1.fastq.gz', 'fastq2':'sampleC_rep1_normal_R2.fastq.gz'], ['id':'sampleC', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleC_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleC_rep1_tumor_R2.fastq.gz']]
+[DUMP: grouped] [['id':'sampleC', 'interval':'chr3'], ['id':'sampleC', 'repeat':'1', 'type':'normal', 'fastq1':'sampleC_rep1_normal_R1.fastq.gz', 'fastq2':'sampleC_rep1_normal_R2.fastq.gz'], ['id':'sampleC', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleC_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleC_rep1_tumor_R2.fastq.gz']]
 ```
 
-We can see that we have successfully isolated the `id` field, but not grouped the samples yet.
+We can see that we have successfully isolated the `id` and `interval` fields, but not grouped the samples yet.
 
-Let's now group the samples by the `id` field, using the [`groupTuple` operator](https://www.nextflow.io/docs/latest/operator.html#grouptuple).
+Let's now group the samples by this new grouping element, using the [`groupTuple` operator](https://www.nextflow.io/docs/latest/operator.html#grouptuple).
 
 _Before:_
 
-```groovy title="main.nf" linenums="21"
-    joined_samples.map { samples, normal, tumor ->
-                        [
-                            samples.subMap('id'),
-                            normal,
-                            tumor
-                        ]
-                    }
-                    .dump(tag: 'grouped')
+```groovy title="main.nf" linenums="30"
+    grouped_samples = combined_samples.map { grouping_key, normal, tumor ->
+                            [
+                                grouping_key.subMap('id', 'interval'),
+                                grouping_key,
+                                normal,
+                                tumor
+                            ]
+
+                        }
+                        .dump(tag: 'grouped')
 }
 ```
 
 _After:_
 
-```groovy title="main.nf" linenums="21"
-    grouped_samples = joined_samples.map { samples, normal, tumor ->
-                        [
-                            samples.subMap('id'),
-                            normal,
-                            tumor
-                        ]
-                    }
-                    .groupTuple()
-                    .dump(tag: 'grouped')
+```groovy title="main.nf" linenums="29"
+    grouped_samples = combined_samples.map { grouping_key, normal, tumor ->
+                            [
+                                grouping_key.subMap('id', 'interval'),
+                                normal,
+                                tumor
+                            ]
+
+                        }
+                        .groupTuple()
+                        .dump(tag: 'grouped')
 }
 ```
 
@@ -1289,39 +1475,46 @@ nextflow run main.nf -dump-channels grouped
 ```console title="View grouped samples"
  N E X T F L O W   ~  version 24.10.5
 
-Launching `main.nf` [condescending_baekeland] DSL2 - revision: 73b96e0f01
+Launching `main.nf` [reverent_nightingale] DSL2 - revision: 72c6664d6f
 
-[DUMP: grouped] [['id':'sampleA'], [['id':'sampleA', 'repeat':'1', 'type':'normal', 'fastq1':'sampleA_rep1_normal_R1.fastq.gz', 'fastq2':'sampleA_rep1_normal_R2.fastq.gz'], ['id':'sampleA', 'repeat':'2', 'type':'normal', 'fastq1':'sampleA_rep2_normal_R1.fastq.gz', 'fastq2':'sampleA_rep2_normal_R2.fastq.gz']], [['id':'sampleA', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleA_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleA_rep1_tumor_R2.fastq.gz'], ['id':'sampleA', 'repeat':'2', 'type':'tumor', 'fastq1':'sampleA_rep2_tumor_R1.fastq.gz', 'fastq2':'sampleA_rep2_tumor_R2.fastq.gz']]]
-[DUMP: grouped] [['id':'sampleB'], [['id':'sampleB', 'repeat':'1', 'type':'normal', 'fastq1':'sampleB_rep1_normal_R1.fastq.gz', 'fastq2':'sampleB_rep1_normal_R2.fastq.gz']], [['id':'sampleB', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleB_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleB_rep1_tumor_R2.fastq.gz']]]
-[DUMP: grouped] [['id':'sampleC'], [['id':'sampleC', 'repeat':'1', 'type':'normal', 'fastq1':'sampleC_rep1_normal_R1.fastq.gz', 'fastq2':'sampleC_rep1_normal_R2.fastq.gz']], [['id':'sampleC', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleC_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleC_rep1_tumor_R2.fastq.gz']]]
+[DUMP: grouped] [['id':'sampleA', 'interval':'chr1'], [['id':'sampleA', 'repeat':'1', 'type':'normal', 'fastq1':'sampleA_rep1_normal_R1.fastq.gz', 'fastq2':'sampleA_rep1_normal_R2.fastq.gz'], ['id':'sampleA', 'repeat':'2', 'type':'normal', 'fastq1':'sampleA_rep2_normal_R1.fastq.gz', 'fastq2':'sampleA_rep2_normal_R2.fastq.gz']], [['id':'sampleA', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleA_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleA_rep1_tumor_R2.fastq.gz'], ['id':'sampleA', 'repeat':'2', 'type':'tumor', 'fastq1':'sampleA_rep2_tumor_R1.fastq.gz', 'fastq2':'sampleA_rep2_tumor_R2.fastq.gz']]]
+[DUMP: grouped] [['id':'sampleA', 'interval':'chr2'], [['id':'sampleA', 'repeat':'1', 'type':'normal', 'fastq1':'sampleA_rep1_normal_R1.fastq.gz', 'fastq2':'sampleA_rep1_normal_R2.fastq.gz'], ['id':'sampleA', 'repeat':'2', 'type':'normal', 'fastq1':'sampleA_rep2_normal_R1.fastq.gz', 'fastq2':'sampleA_rep2_normal_R2.fastq.gz']], [['id':'sampleA', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleA_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleA_rep1_tumor_R2.fastq.gz'], ['id':'sampleA', 'repeat':'2', 'type':'tumor', 'fastq1':'sampleA_rep2_tumor_R1.fastq.gz', 'fastq2':'sampleA_rep2_tumor_R2.fastq.gz']]]
+[DUMP: grouped] [['id':'sampleA', 'interval':'chr3'], [['id':'sampleA', 'repeat':'1', 'type':'normal', 'fastq1':'sampleA_rep1_normal_R1.fastq.gz', 'fastq2':'sampleA_rep1_normal_R2.fastq.gz'], ['id':'sampleA', 'repeat':'2', 'type':'normal', 'fastq1':'sampleA_rep2_normal_R1.fastq.gz', 'fastq2':'sampleA_rep2_normal_R2.fastq.gz']], [['id':'sampleA', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleA_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleA_rep1_tumor_R2.fastq.gz'], ['id':'sampleA', 'repeat':'2', 'type':'tumor', 'fastq1':'sampleA_rep2_tumor_R1.fastq.gz', 'fastq2':'sampleA_rep2_tumor_R2.fastq.gz']]]
+[DUMP: grouped] [['id':'sampleB', 'interval':'chr1'], [['id':'sampleB', 'repeat':'1', 'type':'normal', 'fastq1':'sampleB_rep1_normal_R1.fastq.gz', 'fastq2':'sampleB_rep1_normal_R2.fastq.gz']], [['id':'sampleB', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleB_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleB_rep1_tumor_R2.fastq.gz']]]
+[DUMP: grouped] [['id':'sampleB', 'interval':'chr2'], [['id':'sampleB', 'repeat':'1', 'type':'normal', 'fastq1':'sampleB_rep1_normal_R1.fastq.gz', 'fastq2':'sampleB_rep1_normal_R2.fastq.gz']], [['id':'sampleB', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleB_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleB_rep1_tumor_R2.fastq.gz']]]
+[DUMP: grouped] [['id':'sampleB', 'interval':'chr3'], [['id':'sampleB', 'repeat':'1', 'type':'normal', 'fastq1':'sampleB_rep1_normal_R1.fastq.gz', 'fastq2':'sampleB_rep1_normal_R2.fastq.gz']], [['id':'sampleB', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleB_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleB_rep1_tumor_R2.fastq.gz']]]
+[DUMP: grouped] [['id':'sampleC', 'interval':'chr1'], [['id':'sampleC', 'repeat':'1', 'type':'normal', 'fastq1':'sampleC_rep1_normal_R1.fastq.gz', 'fastq2':'sampleC_rep1_normal_R2.fastq.gz']], [['id':'sampleC', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleC_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleC_rep1_tumor_R2.fastq.gz']]]
+[DUMP: grouped] [['id':'sampleC', 'interval':'chr2'], [['id':'sampleC', 'repeat':'1', 'type':'normal', 'fastq1':'sampleC_rep1_normal_R1.fastq.gz', 'fastq2':'sampleC_rep1_normal_R2.fastq.gz']], [['id':'sampleC', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleC_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleC_rep1_tumor_R2.fastq.gz']]]
+[DUMP: grouped] [['id':'sampleC', 'interval':'chr3'], [['id':'sampleC', 'repeat':'1', 'type':'normal', 'fastq1':'sampleC_rep1_normal_R1.fastq.gz', 'fastq2':'sampleC_rep1_normal_R2.fastq.gz']], [['id':'sampleC', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleC_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleC_rep1_tumor_R2.fastq.gz']]]
 ```
 
-It's a little awkward to read, but you should see there are 3 groups of samples, one for each `id` field. `sampleA` has 2 normal and 2 tumor samples, `sampleB` has 1 normal and 1 tumor sample, and `sampleC` has 1 normal and 1 tumor sample.
-
-If you're having trouble visualizing it, you can use the `pretty` flag of `dump` to make it easier to read:
+It's a little awkward to read! If you're having trouble visualizing it, you can use the `pretty` flag of `dump` to make it easier to read:
 
 _Before:_
 
-```groovy title="main.nf" linenums="24"
+```groovy title="main.nf" linenums="40"
                     .dump(tag: 'grouped')
 }
 ```
 
 _After:_
 
-```groovy title="main.nf" linenums="24"
+```groovy title="main.nf" linenums="40"
                     .dump(tag: 'grouped', pretty: true)
 }
 ```
 
+Note, we only include the first sample to keep this concise!
+
 ```console title="View grouped samples"
  N E X T F L O W   ~  version 24.10.5
 
-Launching `main.nf` [nice_poisson] DSL2 - revision: a102e91428
+Launching `main.nf` [dreamy_lichterman] DSL2 - revision: 953a5dd264
 
 [DUMP: grouped] [
     {
-        "id": "sampleA"
+        "id": "sampleA",
+        "interval": "chr1"
     },
     [
         {
@@ -1356,32 +1549,25 @@ Launching `main.nf` [nice_poisson] DSL2 - revision: a102e91428
         }
     ]
 ]
-[DUMP: grouped] [
+...
+```
+
+Note our data has changed structure. What was previously a list of tuples is now a list of lists of tuples. This is because when we use `groupTuple`, Nextflow creates a new list for each group. This is important to remember when trying to handle the data downstream.
+
+It's possible to use a simpler data structure than this, by separating our the sample information from the sequencing data. We generally refer to this as a `metamap`, but this will be covered in a later side quest. For now, you should just understand that we can group up samples using the `groupTuple` operator and that the data structure will change as a result.
+
+!!! note
+[`transpose`](https://www.nextflow.io/docs/latest/reference/operator.html#transpose) is the opposite of groupTuple. It unpacks the items in a channel and flattens them. Try and add `transpose` and undo the grouping we performed above!
+
+# 5.2. Reduce duplication of data
+
+We have a lot of duplicated data in our workflow. Each item in the grouped sample repeats the `id` and `interval` fields. Since this information is available in the metamap, let's just save it once. As a reminder, our data is structured like this:
+
+```groovy
+[
     {
-        "id": "sampleB"
-    },
-    [
-        {
-            "id": "sampleB",
-            "repeat": "1",
-            "type": "normal",
-            "fastq1": "sampleB_rep1_normal_R1.fastq.gz",
-            "fastq2": "sampleB_rep1_normal_R2.fastq.gz"
-        }
-    ],
-    [
-        {
-            "id": "sampleB",
-            "repeat": "1",
-            "type": "tumor",
-            "fastq1": "sampleB_rep1_tumor_R1.fastq.gz",
-            "fastq2": "sampleB_rep1_tumor_R2.fastq.gz"
-        }
-    ]
-]
-[DUMP: grouped] [
-    {
-        "id": "sampleC"
+        "id": "sampleC",
+        "interval": "chr3"
     },
     [
         {
@@ -1404,12 +1590,81 @@ Launching `main.nf` [nice_poisson] DSL2 - revision: a102e91428
 ]
 ```
 
-Note our data has changed structure. What was previously a list of tuples is now a list of lists of tuples. This is because when we use `groupTuple`, Nextflow creates a new list for each group. This is important when trying to handle the data downstream.
+We could parse the data after grouping to remove the duplication, but this requires us to handle all of the outputs. Instead, we can parse the data before grouping, which will mean the results are never included in the first place.
 
-It's possible to use a simpler data structure than this, by separating our the sample information from the sequencing data. We generally refer to this as a `metamap`, but this will be covered in a later side quest. For now, you should just understand that we can group up samples using the `groupTuple` operator and that the data structure will change as a result.
+In the same `map` operator where we isolate the `id` and `interval` fields, we can also grab the `fastq1` and `fastq2` fields for our sample data and _not_ include the `id` and `interval` fields.
 
-!!! note
-[`transpose`](https://www.nextflow.io/docs/latest/reference/operator.html#transpose) is the opposite of groupTuple. It unpacks the items in a channel and flattens them. Try and add `transpose` and undo the grouping we performed above!
+_Before:_
+
+```groovy title="main.nf" linenums="30"
+    grouped_samples = combined_samples.map { grouping_key, normal, tumor ->
+                            [
+                                grouping_key.subMap('id', 'interval'),
+                                normal,
+                                tumor
+                            ]
+
+                        }
+                        .groupTuple()
+                        .dump(tag: 'grouped', pretty: true)
+}
+```
+
+_After:_
+
+```groovy title="main.nf" linenums="30"
+    grouped_samples = combined_samples.map { grouping_key, normal, tumor ->
+                            [
+                                grouping_key.subMap('id', 'interval'),
+                                normal.subMap("fastq1", "fastq2"),
+                                tumor.subMap("fastq1", "fastq2")
+                            ]
+
+                        }
+                        .groupTuple()
+                        .dump(tag: 'grouped', pretty: true)
+}
+```
+
+```bash title="View grouped samples"
+nextflow run main.nf -dump-channels grouped
+```
+
+```console title="View grouped samples"
+ N E X T F L O W   ~  version 24.10.5
+
+Launching `main.nf` [modest_stallman] DSL2 - revision: 5be827a6e8
+
+[DUMP: grouped] [
+    {
+        "id": "sampleA",
+        "interval": "chr1"
+    },
+    [
+        {
+            "fastq1": "sampleA_rep1_normal_R1.fastq.gz",
+            "fastq2": "sampleA_rep1_normal_R2.fastq.gz"
+        },
+        {
+            "fastq1": "sampleA_rep2_normal_R1.fastq.gz",
+            "fastq2": "sampleA_rep2_normal_R2.fastq.gz"
+        }
+    ],
+    [
+        {
+            "fastq1": "sampleA_rep1_tumor_R1.fastq.gz",
+            "fastq2": "sampleA_rep1_tumor_R2.fastq.gz"
+        },
+        {
+            "fastq1": "sampleA_rep2_tumor_R1.fastq.gz",
+            "fastq2": "sampleA_rep2_tumor_R2.fastq.gz"
+        }
+    ]
+]
+...
+```
+
+Now we have a much cleaner output. We can see that the `id` and `interval` fields are only included once, and the `fastq1` and `fastq2` fields are included in the sample data
 
 ### Takeaway
 
@@ -1419,103 +1674,94 @@ In this section, you've learned:
 
 You now have a workflow that can split a samplesheet, filter the normal and tumor samples, join them together by sample ID and replicate number, then group them by `id`.
 
-## 5. Spread samples over intervals
-
-!!! AUTHORS NOTE !!! SWAP SPREADING AND GROUPTUPLE
-
-Spreading samples over different conditions is a common pattern in bioinformatics workflows. For example, it is used to spread variant calling over a range of intervals. This can help distribute work across multiple cores or nodes and make the pipelines more efficient and be turned around faster.
-
-In the next section, we will demonstrate how to take our existing samples and repeat each one for every interval. In this way, we will have a single sample for each input interval. We will also multiply our number of samples by the number of intervals, so get ready for a busy terminal!
-
-### 5.1. Spread samples over intervals using `combine`
-
-Let's start by creating a channel of intervals. To keep life simple, we will just use 3 intervals we will manually define. In a real workflow, you could read these in from a file input or even create a channel with lots of interval files.
-
-_Before:_
-
-```groovy title="main.nf" linenums="24"
-                    .dump(tag: 'grouped', pretty: true)
-}
-```
-
-_After:_
-
-```groovy title="main.nf" linenums="24"
-                    .dump(tag: 'grouped', pretty: true)
-
-    intervals = Channel.of('chr1', 'chr2', 'chr3')
-                    .dump(tag: "intervals")
-}
-```
-
-Now remember, we want to repeat each sample for each interval. This is sometimes referred to as the Cartesian product of the samples and intervals. We can achieve this by using the [`combine` operator](https://www.nextflow.io/docs/latest/operator.html#combine). This will take every item from channel 1 and repeat it for each item in channel 2. Let's add a combine operator to our workflow:
-
-_Before:_
-
-```groovy title="main.nf" linenums="26"
-    intervals = Channel.of('chr1', 'chr2', 'chr3')
-                    .dump(tag: "intervals")
-}
-```
-
-_After:_
-
-```groovy title="main.nf" linenums="26"
-    intervals = Channel.of('chr1', 'chr2', 'chr3')
-                    .dump(tag: "intervals")
-
-    grouped_samples.combine(intervals)
-                        .dump(tag: 'combined', pretty: true)
-}
-```
-
-Now let's run it and see what happens:
-
-```bash title="View combined samples"
-nextflow run main.nf -dump-channels combined
-```
-
-```console title="View combined samples"
- N E X T F L O W   ~  version 24.10.5
-
-Launching `main.nf` [dreamy_carlsson] DSL2 - revision: 0abb4c9e41
-
-[DUMP: combined] [['id':'sampleA'], [['id':'sampleA', 'repeat':'1', 'type':'normal', 'fastq1':'sampleA_rep1_normal_R1.fastq.gz', 'fastq2':'sampleA_rep1_normal_R2.fastq.gz'], ['id':'sampleA', 'repeat':'2', 'type':'normal', 'fastq1':'sampleA_rep2_normal_R1.fastq.gz', 'fastq2':'sampleA_rep2_normal_R2.fastq.gz']], [['id':'sampleA', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleA_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleA_rep1_tumor_R2.fastq.gz'], ['id':'sampleA', 'repeat':'2', 'type':'tumor', 'fastq1':'sampleA_rep2_tumor_R1.fastq.gz', 'fastq2':'sampleA_rep2_tumor_R2.fastq.gz']], 'chr1']
-[DUMP: combined] [['id':'sampleA'], [['id':'sampleA', 'repeat':'1', 'type':'normal', 'fastq1':'sampleA_rep1_normal_R1.fastq.gz', 'fastq2':'sampleA_rep1_normal_R2.fastq.gz'], ['id':'sampleA', 'repeat':'2', 'type':'normal', 'fastq1':'sampleA_rep2_normal_R1.fastq.gz', 'fastq2':'sampleA_rep2_normal_R2.fastq.gz']], [['id':'sampleA', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleA_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleA_rep1_tumor_R2.fastq.gz'], ['id':'sampleA', 'repeat':'2', 'type':'tumor', 'fastq1':'sampleA_rep2_tumor_R1.fastq.gz', 'fastq2':'sampleA_rep2_tumor_R2.fastq.gz']], 'chr2']
-[DUMP: combined] [['id':'sampleA'], [['id':'sampleA', 'repeat':'1', 'type':'normal', 'fastq1':'sampleA_rep1_normal_R1.fastq.gz', 'fastq2':'sampleA_rep1_normal_R2.fastq.gz'], ['id':'sampleA', 'repeat':'2', 'type':'normal', 'fastq1':'sampleA_rep2_normal_R1.fastq.gz', 'fastq2':'sampleA_rep2_normal_R2.fastq.gz']], [['id':'sampleA', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleA_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleA_rep1_tumor_R2.fastq.gz'], ['id':'sampleA', 'repeat':'2', 'type':'tumor', 'fastq1':'sampleA_rep2_tumor_R1.fastq.gz', 'fastq2':'sampleA_rep2_tumor_R2.fastq.gz']], 'chr3']
-[DUMP: combined] [['id':'sampleB'], [['id':'sampleB', 'repeat':'1', 'type':'normal', 'fastq1':'sampleB_rep1_normal_R1.fastq.gz', 'fastq2':'sampleB_rep1_normal_R2.fastq.gz']], [['id':'sampleB', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleB_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleB_rep1_tumor_R2.fastq.gz']], 'chr1']
-[DUMP: combined] [['id':'sampleB'], [['id':'sampleB', 'repeat':'1', 'type':'normal', 'fastq1':'sampleB_rep1_normal_R1.fastq.gz', 'fastq2':'sampleB_rep1_normal_R2.fastq.gz']], [['id':'sampleB', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleB_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleB_rep1_tumor_R2.fastq.gz']], 'chr2']
-[DUMP: combined] [['id':'sampleB'], [['id':'sampleB', 'repeat':'1', 'type':'normal', 'fastq1':'sampleB_rep1_normal_R1.fastq.gz', 'fastq2':'sampleB_rep1_normal_R2.fastq.gz']], [['id':'sampleB', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleB_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleB_rep1_tumor_R2.fastq.gz']], 'chr3']
-[DUMP: combined] [['id':'sampleC'], [['id':'sampleC', 'repeat':'1', 'type':'normal', 'fastq1':'sampleC_rep1_normal_R1.fastq.gz', 'fastq2':'sampleC_rep1_normal_R2.fastq.gz']], [['id':'sampleC', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleC_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleC_rep1_tumor_R2.fastq.gz']], 'chr1']
-[DUMP: combined] [['id':'sampleC'], [['id':'sampleC', 'repeat':'1', 'type':'normal', 'fastq1':'sampleC_rep1_normal_R1.fastq.gz', 'fastq2':'sampleC_rep1_normal_R2.fastq.gz']], [['id':'sampleC', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleC_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleC_rep1_tumor_R2.fastq.gz']], 'chr2']
-[DUMP: combined] [['id':'sampleC'], [['id':'sampleC', 'repeat':'1', 'type':'normal', 'fastq1':'sampleC_rep1_normal_R1.fastq.gz', 'fastq2':'sampleC_rep1_normal_R2.fastq.gz']], [['id':'sampleC', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleC_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleC_rep1_tumor_R2.fastq.gz']], 'chr3']
-```
-
-Success! We have repeated every sample for every single interval in our 3 interval list. We've effectively tripled the number of items in our channel.
-
-### Takeaway
-
-In this section, you've learned:
-
-- **Spreading samples over intervals**: How to use `combine` to repeat samples over intervals
-
 ## Summary
 
-You've now seen how to split a samplesheet, filter the normal and tumor samples, join them together by sample ID and replicate number, then group them by `id`. You've also seen how to spread samples over intervals using the `combine` operator.
+In this side quest, you've learned how to split and group data using channels. By modifying the data as it flows through the pipeline, you can construct a pipeline that handles as many samples as possible with no loops or while statements. It gracefully scales to large numbers of samples. Here's what we achieved:
 
-## Contents
-
-1. Read in samplesheet with splitCsv
+1. **Read in samplesheet with splitCsv**
 
 - Samplesheet details here
 - Show with view, then show with dump (is prettier!)
 
-2. Use filter (and/or map) to manipulate into 2 separate channels
+2. **Use filter (and/or map) to manipulate into 2 separate channels**
 
 - Use named closure in map here?
 - Show that elements can be in two channels by filtering twice
 
-3. Join on ID
-4. Use groupTuple to group up samples by ID
-5. Combine by intervals
-6. Group after intervals
+3. **Join on ID**
+
+- Show that elements can be in two channels by filtering twice
+
+4. **Use groupTuple to group up samples by ID**
+
+- Show that elements can be in two channels by filtering twice
+
+5. **Combine by intervals**
+
+- Show that elements can be in two channels by filtering twice
+
+6. **Group after intervals**
+
+- Show that elements can be in two channels by filtering twice
+
+This approach offers several advantages over writing a pipeline as more standard code, such as using for and while loops:
+
+- We can scale to as many or as few samples as we want with no additional code
+- We focus on handling the flow of data through the pipeline, instead of iterating over samples
+- We can be as complex or simple as required
+- The pipeline becomes more declarative, focusing on what should happen rather than how it should happen
+- Nextflow will optimize execution for us by running independent operations in parallel
+
+By mastering these channel operations, you can build flexible, scalable pipelines that handle complex data relationships without resorting to loops or iterative programming. This declarative approach allows Nextflow to optimize execution and parallelize independent operations automatically.
+
+### Key Concepts
+
+1. **Reading Samplesheets**
+
+   ```nextflow
+   // Read CSV with header
+   Channel.fromPath('samplesheet.csv')
+       .splitCsv(header: true)
+   ```
+
+2. **Filtering**
+
+   ```nextflow
+   // Filter channel based on condition
+   channel.filter { it.type == 'tumor' }
+   ```
+
+3. **Joining Channels**
+
+   ```nextflow
+   // Join two channels by key
+   tumor_ch.join(normal_ch)
+
+   // Extract a key and join by this value
+   tumor_ch.map { [it.patient_id, it] }
+       .join(
+          normal_ch.map { [it.patient_id, it] }
+        )
+   ```
+
+4. **Grouping Data**
+
+   ```nextflow
+   // Group by the first element in each tuple
+   channel.groupTuple()
+   ```
+
+5. **Combining Channels**
+
+   ```nextflow
+   // Combine with Cartesian product
+   samples_ch.combine(intervals_ch)
+   ```
+
+## Resources
+
+- [filter](https://www.nextflow.io/docs/latest/operator.html#filter)
+- [map](https://www.nextflow.io/docs/latest/operator.html#map)
+- [join](https://www.nextflow.io/docs/latest/operator.html#join)
+- [groupTuple](https://www.nextflow.io/docs/latest/operator.html#grouptuple)
+- [combine](https://www.nextflow.io/docs/latest/operator.html#combine)
