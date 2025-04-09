@@ -1,0 +1,28 @@
+name: Check Markdown Headings
+
+on:
+  pull_request:
+    paths:
+      - "**.md"
+
+jobs:
+  check-headings:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Fetch all history for all branches and tags
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Get changed markdown files
+        id: changed-files
+        uses: tj-actions/changed-files@v42
+        with:
+          files: "**.md"
+
+      - name: Run check_headings.py
+        run: python check_headings.py ${{ steps.changed-files.outputs.all_changed_files }}
