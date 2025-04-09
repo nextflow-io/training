@@ -1191,9 +1191,9 @@ This is a common pattern in bioinformatics workflows where you need to match up 
 
 ## 4. Spread samples over intervals
 
-Spreading samples over different conditions is a common pattern in bioinformatics workflows. For example, it is used to spread variant calling over a range of intervals. This can help distribute work across multiple cores or nodes and make the pipelines more efficient and be turned around faster.
+A key pattern in bioinformatics workflows is distributing analysis across genomic regions. For instance, variant calling can be parallelized by dividing the genome into intervals (like chromosomes or smaller regions). This parallelization strategy significantly improves pipeline efficiency by distributing computational load across multiple cores or nodes, reducing overall execution time.
 
-In the next section, we will demonstrate how to take our existing samples and repeat each one for every interval. In this way, we will have a single sample for each input interval. We will also multiply our number of samples by the number of intervals, so get ready for a busy terminal!
+In the following section, we'll demonstrate how to distribute our sample data across multiple genomic intervals. We'll pair each sample with every interval, allowing parallel processing of different genomic regions. This will multiply our dataset size by the number of intervals, creating multiple independent analysis units that can be brought back together later.
 
 ### 4.1. Spread samples over intervals using `combine`
 
