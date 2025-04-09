@@ -460,7 +460,7 @@ We've now separated out the normal and tumor samples into two different channels
 
 In the previous section, we separated out the normal and tumor samples into two different channels. These could be processed independently using specific processes or workflows based on their type. But what happens when we want to compare the normal and tumor samples from the same patient? At this point, we need to join them back together making sure to match the samples based on their `id` field.
 
-Nextflow includes many methods for combing channels, but in this case the most appropriate operator is [`join`](https://www.nextflow.io/docs/latest/operator.html#join). This acts like a SQL `JOIN` operation, where we specify the key to join on and the type of join to perform.
+Nextflow includes many methods for combining channels, but in this case the most appropriate operator is [`join`](https://www.nextflow.io/docs/latest/operator.html#join). This acts like a SQL `JOIN` operation, where we specify the key to join on and the type of join to perform.
 
 ### 3.1. Use `map` and `join` to combine based on sample ID
 
