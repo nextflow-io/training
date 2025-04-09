@@ -71,9 +71,12 @@ Let's start by reading in the samplesheet with `splitCsv`. In the main workflow 
 
 ```groovy title="main.nf" linenums="1"
 workflow {
-    samplesheet = Channel.fromPath("./data/samplesheet.csv")
+    ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
 }
 ```
+
+!!! note
+Throughout this tutorial, we'll use the `ch_` prefix for all channel variables to clearly indicate they are Nextflow channels.
 
 We can use the [`splitCsv` operator](https://www.nextflow.io/docs/latest/operator.html#splitcsv) to split the samplesheet into a channel of maps, where each map represents a row from the CSV file.
 
@@ -81,7 +84,7 @@ _Before:_
 
 ```groovy title="main.nf" linenums="1"
 workflow {
-    samplesheet = Channel.fromPath("./data/samplesheet.csv")
+    ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
                         .splitCsv(header: true)
 }
 ```
@@ -92,7 +95,7 @@ _After:_
 
 ```groovy title="main.nf" linenums="1"
 workflow {
-    samplesheet = Channel.fromPath("./data/samplesheet.csv")
+    ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
                         .splitCsv(header: true)
                         .view()
 }
@@ -137,7 +140,7 @@ For a prettier output format, we can use the [`dump` operator](https://www.nextf
 
 ```groovy title="main.nf" linenums="1"
 workflow {
-    samplesheet = Channel.fromPath("./data/samplesheet.csv")
+    ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
                         .splitCsv(header: true)
                         .dump(tag: 'samples', pretty: true)
 }
@@ -251,7 +254,7 @@ _Before:_
 
 ```groovy title="main.nf" linenums="1"
 workflow {
-    samplesheet = Channel.fromPath("./data/samplesheet.csv")
+    ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
                         .splitCsv(header: true)
                         .dump(tag: 'samples', pretty: true)
 }
@@ -261,7 +264,7 @@ _After:_
 
 ```groovy title="main.nf" linenums="1"
 workflow {
-    samplesheet = Channel.fromPath("./data/samplesheet.csv")
+    ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
                         .splitCsv(header: true)
                         .filter { sample -> sample.type == 'normal' }
                         .dump(tag: 'samples')
@@ -302,7 +305,7 @@ _Before:_
 
 ```groovy title="main.nf" linenums="1"
 workflow {
-    samplesheet = Channel.fromPath("./data/samplesheet.csv")
+    ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
                         .splitCsv(header: true)
                         .filter { sample -> sample.type == 'normal' }
                         .dump(tag: 'samples')
@@ -313,9 +316,9 @@ _After:_
 
 ```groovy title="main.nf" linenums="1"
 workflow {
-    samplesheet = Channel.fromPath("./data/samplesheet.csv")
+    ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
                         .splitCsv(header: true)
-    normal_samples = samplesheet
+    ch_normal_samples = ch_samplesheet
                         .filter { sample -> sample.type == 'normal' }
                         .view()
 }
@@ -344,9 +347,9 @@ _Before:_
 
 ```groovy title="main.nf" linenums="1"
 workflow {
-    samplesheet = Channel.fromPath("./data/samplesheet.csv")
+    ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
                          .splitCsv(header: true)
-    normal_samples = samplesheet
+    ch_normal_samples = ch_samplesheet
                          .filter { sample -> sample.type == 'normal' }
                          .view()
 }
@@ -356,12 +359,12 @@ _After:_
 
 ```groovy title="main.nf" linenums="1"
 workflow {
-    samplesheet = Channel.fromPath("./data/samplesheet.csv")
+    ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
                         .splitCsv(header: true)
-    normal_samples = samplesheet
+    ch_normal_samples = ch_samplesheet
                         .filter { sample -> sample.type == 'normal' }
                         .view()
-    tumor_samples = samplesheet
+    ch_tumor_samples = ch_samplesheet
                         .filter { sample -> sample.type == 'tumor' }
                         .view()
 }
@@ -392,12 +395,12 @@ _Before:_
 
 ```groovy title="main.nf" linenums="1"
 workflow {
-    samplesheet = Channel.fromPath("./data/samplesheet.csv")
+    ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
                         .splitCsv(header: true)
-    normal_samples = samplesheet
+    ch_normal_samples = ch_samplesheet
                         .filter { sample -> sample.type == 'normal' }
                         .view()
-    tumor_samples = samplesheet
+    ch_tumor_samples = ch_samplesheet
                         .filter { sample -> sample.type == 'tumor' }
                         .view()
 }
@@ -407,12 +410,12 @@ _After:_
 
 ```groovy title="main.nf" linenums="1"
 workflow {
-    samplesheet = Channel.fromPath("./data/samplesheet.csv")
+    ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
                         .splitCsv(header: true)
-    normal_samples = samplesheet
+    ch_normal_samples = ch_samplesheet
                         .filter { sample -> sample.type == 'normal' }
                         .dump(tag: 'normal')
-    tumor_samples = samplesheet
+    ch_tumor_samples = ch_samplesheet
                         .filter { sample -> sample.type == "tumor" }
                         .dump(tag: 'tumor')
 }
@@ -488,12 +491,12 @@ _Before:_
 
 ```groovy title="main.nf" linenums="1"
 workflow {
-    samplesheet = Channel.fromPath("./data/samplesheet.csv")
+    ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
                         .splitCsv(header: true)
-    normal_samples = samplesheet
+    ch_normal_samples = ch_samplesheet
                         .filter { sample -> sample.type == 'normal' }
                         .dump(tag: 'normal')
-    tumor_samples = samplesheet
+    ch_tumor_samples = ch_samplesheet
                         .filter { sample -> sample.type == "tumor" }
                         .dump(tag: 'tumor')
 }
@@ -503,13 +506,13 @@ _After:_
 
 ```groovy title="main.nf" linenums="1"
 workflow {
-    samplesheet = Channel.fromPath("./data/samplesheet.csv")
+    ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
                         .splitCsv(header: true)
-    normal_samples = samplesheet
+    ch_normal_samples = ch_samplesheet
                         .filter { sample -> sample.type == 'normal' }
                         .map { sample -> [sample.id, sample] }
                         .dump(tag: 'normal')
-    tumor_samples = samplesheet
+    ch_tumor_samples = ch_samplesheet
                         .filter { sample -> sample.type == "tumor" }
                         .map { sample -> [sample.id, sample] }
                         .dump(tag: 'tumor')
@@ -545,11 +548,11 @@ _Before:_
 workflow {
     samplesheet = Channel.fromPath("./data/samplesheet.csv")
                         .splitCsv(header: true)
-    normal_samples = samplesheet
+    ch_normal_samples = ch_samplesheet
                         .filter { sample -> sample.type == 'normal' }
                         .map { sample -> [sample.id, sample] }
                         .dump(tag: 'normal')
-    tumor_samples = samplesheet
+    ch_tumor_samples = ch_samplesheet
                         .filter { sample -> sample.type == "tumor" }
                         .map { sample -> [sample.id, sample] }
                         .dump(tag: 'tumor')
@@ -562,16 +565,16 @@ _After:_
 workflow {
     samplesheet = Channel.fromPath("./data/samplesheet.csv")
                         .splitCsv(header: true)
-    normal_samples = samplesheet
+    ch_normal_samples = ch_samplesheet
                         .filter { sample -> sample.type == 'normal' }
                         .map { sample -> [sample.id, sample] }
                         .dump(tag: 'normal')
-    tumor_samples = samplesheet
+    ch_tumor_samples = ch_samplesheet
                         .filter { sample -> sample.type == "tumor" }
                         .map { sample -> [sample.id, sample] }
                         .dump(tag: 'tumor')
-    joined_samples = normal_samples
-                        .join(tumor_samples)
+    joined_samples = ch_normal_samples
+                        .join(ch_tumor_samples)
                         .dump(tag: 'joined')
 }
 ```
@@ -603,18 +606,18 @@ _After:_
 
 ```groovy title="main.nf" linenums="1"
 workflow {
-    samplesheet = Channel.fromPath("./data/samplesheet.csv")
+    ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
                         .splitCsv(header: true)
-    normal_samples = samplesheet
+    ch_normal_samples = ch_samplesheet
                         .filter { sample -> sample.type == 'normal' }
                         .map { sample -> [sample.id, sample] }
                         .dump(tag: 'normal')
-    tumor_samples = samplesheet
+    ch_tumor_samples = ch_samplesheet
                         .filter { sample -> sample.type == "tumor" }
                         .map { sample -> [sample.id, sample] }
                         .dump(tag: 'tumor')
-    joined_samples = normal_samples
-                        .join(tumor_samples)
+    joined_samples = ch_normal_samples
+                        .join(ch_tumor_samples)
                         .dump(tag: 'joined', pretty: true)
 }
 ```
@@ -722,18 +725,18 @@ _Before:_
 
 ```groovy title="main.nf" linenums="1"
 workflow {
-    samplesheet = Channel.fromPath("./data/samplesheet.csv")
+    ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
                         .splitCsv(header: true)
-    normal_samples = samplesheet
+    ch_normal_samples = ch_samplesheet
                         .filter { sample -> sample.type == 'normal' }
                         .map { sample -> [sample.id, sample] }
                         .dump(tag: 'normal')
-    tumor_samples = samplesheet
+    ch_tumor_samples = ch_samplesheet
                         .filter { sample -> sample.type == "tumor" }
                         .map { sample -> [sample.id, sample] }
                         .dump(tag: 'tumor')
-    joined_samples = normal_samples
-                        .join(tumor_samples)
+    ch_joined_samples = ch_normal_samples
+                        .join(ch_tumor_samples)
                         .dump(tag: 'joined', pretty: true)
 }
 ```
@@ -742,9 +745,9 @@ _After:_
 
 ```groovy title="main.nf" linenums="1"
 workflow {
-    samplesheet = Channel.fromPath("./data/samplesheet.csv")
+    ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
                         .splitCsv(header: true)
-    normal_samples = samplesheet
+    ch_normal_samples = ch_samplesheet
                         .filter { sample -> sample.type == 'normal' }
                         .map { sample -> [
                                 [sample.id, sample.repeat],
@@ -752,7 +755,7 @@ workflow {
                             ]
                         }
                         .dump(tag: 'normal')
-    tumor_samples = samplesheet
+    ch_tumor_samples = ch_samplesheet
                         .filter { sample -> sample.type == "tumor" }
                         .map { sample -> [
                                 [sample.id, sample.repeat],
@@ -760,8 +763,8 @@ workflow {
                             ]
                         }
                         .dump(tag: 'tumor')
-    joined_samples = normal_samples
-                        .join(tumor_samples)
+    ch_joined_samples = ch_normal_samples
+                        .join(ch_tumor_samples)
                         .dump(tag: 'joined', pretty: true)
 }
 ```
@@ -871,9 +874,9 @@ _Before:_
 
 ```groovy title="main.nf" linenums="1"
 workflow {
-    samplesheet = Channel.fromPath("./data/samplesheet.csv")
+    ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
                         .splitCsv(header: true)
-    normal_samples = samplesheet
+    ch_normal_samples = ch_samplesheet
                         .filter { sample -> sample.type == 'normal' }
                         .map { sample -> [
                                 [sample.id, sample.repeat],
@@ -881,7 +884,7 @@ workflow {
                             ]
                         }
                         .dump(tag: 'normal')
-    tumor_samples = samplesheet
+    ch_tumor_samples = ch_samplesheet
                         .filter { sample -> sample.type == "tumor" }
                         .map { sample -> [
                                 [sample.id, sample.repeat],
@@ -889,8 +892,8 @@ workflow {
                             ]
                         }
                         .dump(tag: 'tumor')
-    joined_samples = normal_samples
-                        .join(tumor_samples)
+    ch_joined_samples = ch_normal_samples
+                        .join(ch_tumor_samples)
                         .dump(tag: 'joined', pretty: true)
 }
 ```
@@ -899,9 +902,9 @@ _After:_
 
 ```groovy title="main.nf" linenums="1"
 workflow {
-    samplesheet = Channel.fromPath("./data/samplesheet.csv")
+    ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
                         .splitCsv(header: true)
-    normal_samples = samplesheet
+    ch_normal_samples = ch_samplesheet
                         .filter { sample -> sample.type == 'normal' }
                         .map { sample -> [
                                 sample.subMap(['id', 'repeat']),
@@ -909,7 +912,7 @@ workflow {
                             ]
                         }
                         .dump(tag: 'normal')
-    tumor_samples = samplesheet
+    ch_tumor_samples = ch_samplesheet
                         .filter { sample -> sample.type == "tumor" }
                         .map { sample -> [
                                 sample.subMap(['id', 'repeat']),
@@ -917,8 +920,8 @@ workflow {
                             ]
                         }
                         .dump(tag: 'tumor')
-    joined_samples = normal_samples
-                        .join(tumor_samples)
+    ch_joined_samples = ch_normal_samples
+                        .join(ch_tumor_samples)
                         .dump(tag: 'joined', pretty: true)
 }
 ```
@@ -1044,7 +1047,7 @@ We have taken the map we used previously and defined it as a named variable we c
 _Before:_
 
 ```groovy title="main.nf" linenums="5"
-    normal_samples = samplesheet
+    ch_normal_samples = ch_samplesheet
                         .filter { sample -> sample.type == 'normal' }
                         .map { sample -> [
                             sample.subMap(['id', 'repeat']),
@@ -1052,7 +1055,7 @@ _Before:_
                           ]
                         }
                         .dump(tag: 'normal')
-    tumor_samples = samplesheet
+    ch_tumor_samples = ch_samplesheet
                         .filter { sample -> sample.type == "tumor" }
                         .map { sample -> [
                             sample.subMap(['id', 'repeat']),
@@ -1065,11 +1068,11 @@ _Before:_
 _After:_
 
 ```groovy title="main.nf" linenums="5"
-    normal_samples = samplesheet
+    ch_normal_samples = ch_samplesheet
                         .filter { sample -> sample.type == 'normal' }
                         .map ( getSampleIdAndReplicate )
                         .dump(tag: 'normal')
-    tumor_samples = samplesheet
+    ch_tumor_samples = ch_samplesheet
                         .filter { sample -> sample.type == "tumor" }
                         .map ( getSampleIdAndReplicate )
                         .dump(tag: 'tumor')
@@ -1205,7 +1208,7 @@ _After:_
 
 ```groovy title="main.nf" linenums="24"
                         .dump(tag: 'joined', pretty: true)
-    intervals = Channel.of('chr1', 'chr2', 'chr3')
+    ch_intervals = Channel.of('chr1', 'chr2', 'chr3')
                     .dump(tag: "intervals")
 }
 ```
@@ -1215,7 +1218,7 @@ Now remember, we want to repeat each sample for each interval. This is sometimes
 _Before:_
 
 ```groovy title="main.nf" linenums="26"
-    intervals = Channel.of('chr1', 'chr2', 'chr3')
+    ch_intervals = Channel.of('chr1', 'chr2', 'chr3')
                     .dump(tag: "intervals")
 }
 ```
@@ -1223,10 +1226,10 @@ _Before:_
 _After:_
 
 ```groovy title="main.nf" linenums="26"
-    intervals = Channel.of('chr1', 'chr2', 'chr3')
+    ch_intervals = Channel.of('chr1', 'chr2', 'chr3')
                     .dump(tag: "intervals")
 
-    combined_samples = joined_samples.combine(intervals)
+    ch_combined_samples = ch_joined_samples.combine(ch_intervals)
                         .dump(tag: 'combined')
 }
 ```
@@ -1265,7 +1268,7 @@ We can use the `map` operator to tidy and refactor our sample data so it's easie
 _Before:_
 
 ```groovy title="main.nf" linenums="19"
-    combined_samples = joined_samples.combine(intervals)
+    ch_combined_samples = joined_samples.combine(ch_intervals)
                         .dump(tag: 'combined')
 }
 ```
@@ -1273,7 +1276,7 @@ _Before:_
 _After:_
 
 ```groovy title="main.nf" linenums="19"
-    combined_samples = joined_samples.combine(intervals)
+    ch_combined_samples = ch_joined_samples.combine(ch_intervals)
                         .map { grouping_key, normal, tumor, interval ->
                             [
                                 grouping_key + [interval: interval],
@@ -1370,7 +1373,7 @@ We can reuse the `subMap` method from before to isolate our `id` and `interval` 
 _Before:_
 
 ```groovy title="main.nf" linenums="19"
-    combined_samples = joined_samples.combine(intervals)
+    ch_combined_samples = ch_joined_samples.combine(ch_intervals)
                         .map { grouping_key, normal, tumor, interval ->
                             [
                                 grouping_key + [interval: interval],
@@ -1386,7 +1389,7 @@ _Before:_
 _After:_
 
 ```groovy title="main.nf" linenums="19"
-    combined_samples = joined_samples.combine(intervals)
+    ch_combined_samples = ch_joined_samples.combine(ch_intervals)
                         .map { grouping_key, normal, tumor, interval ->
                             [
                                 grouping_key + [interval: interval],
@@ -1397,7 +1400,7 @@ _After:_
                         }
                         .dump(tag: 'combined')
 
-    grouped_samples = combined_samples.map { grouping_key, normal, tumor ->
+    ch_grouped_samples = ch_combined_samples.map { grouping_key, normal, tumor ->
                             [
                                 grouping_key.subMap('id', 'interval'),
                                 normal,
@@ -1441,7 +1444,7 @@ Let's now group the samples by this new grouping element, using the [`groupTuple
 _Before:_
 
 ```groovy title="main.nf" linenums="30"
-    grouped_samples = combined_samples.map { grouping_key, normal, tumor ->
+    ch_grouped_samples = ch_combined_samples.map { grouping_key, normal, tumor ->
                             [
                                 grouping_key.subMap('id', 'interval'),
                                 grouping_key,
@@ -1457,7 +1460,7 @@ _Before:_
 _After:_
 
 ```groovy title="main.nf" linenums="29"
-    grouped_samples = combined_samples.map { grouping_key, normal, tumor ->
+    ch_grouped_samples = ch_combined_samples.map { grouping_key, normal, tumor ->
                             [
                                 grouping_key.subMap('id', 'interval'),
                                 normal,
@@ -1601,7 +1604,7 @@ In the same `map` operator where we isolate the `id` and `interval` fields, we c
 _Before:_
 
 ```groovy title="main.nf" linenums="30"
-    grouped_samples = combined_samples.map { grouping_key, normal, tumor ->
+    ch_grouped_samples = ch_combined_samples.map { grouping_key, normal, tumor ->
                             [
                                 grouping_key.subMap('id', 'interval'),
                                 normal,
@@ -1617,7 +1620,7 @@ _Before:_
 _After:_
 
 ```groovy title="main.nf" linenums="30"
-    grouped_samples = combined_samples.map { grouping_key, normal, tumor ->
+    ch_grouped_samples = ch_combined_samples.map { grouping_key, normal, tumor ->
                             [
                                 grouping_key.subMap('id', 'interval'),
                                 normal.subMap("fastq1", "fastq2"),
