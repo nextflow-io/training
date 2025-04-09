@@ -3,6 +3,7 @@
 # dependencies = ["typer","rich"]
 # ///
 
+import os
 import re
 import sys
 from pathlib import Path
@@ -14,7 +15,7 @@ from rich.panel import Panel
 from rich.table import Table
 
 app = typer.Typer()
-console = Console()
+console = Console(force_terminal=True if os.getenv("GITHUB_ACTIONS") else False)
 
 
 def is_heading(line: str) -> bool:
