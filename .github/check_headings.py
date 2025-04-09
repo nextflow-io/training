@@ -1,5 +1,7 @@
 #!/usr/bin/env python
-# uv: typer, rich
+# /// script
+# dependencies = ["typer","rich"]
+# ///
 
 import re
 import sys
