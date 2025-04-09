@@ -8,6 +8,8 @@ Nextflow's channel system is at the heart of this flexibility. Channels connect 
 
 In this side quest, we'll explore how to split and group data using Nextflow's powerful channel operators. We'll start with a samplesheet containing information about different samples and their associated data. By the end of this side quest, you'll be able to manipulate and combine data streams effectively, making your workflows more efficient and easier to understand.
 
+You will:
+
 - Read data from files using `splitCsv`
 - Filter and transform data with `filter` and `map`
 - Combine related data using `join` and `groupTuple`
