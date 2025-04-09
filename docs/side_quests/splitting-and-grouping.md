@@ -140,6 +140,18 @@ This means we have successfully read in the samplesheet and have access to the d
 
 For a prettier output format, we can use the [`dump` operator](https://www.nextflow.io/docs/latest/operator.html#dump) instead of `view`:
 
+_Before:_
+
+```groovy title="main.nf" linenums="1"
+workflow {
+    ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
+                        .splitCsv(header: true)
+                        .view()
+}
+```
+
+_After:_
+
 ```groovy title="main.nf" linenums="1"
 workflow {
     ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
