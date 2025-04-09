@@ -3,7 +3,7 @@
 import re
 import sys
 from pathlib import Path
-from typing import List
+from typing import List, Tuple
 
 import typer
 from rich.console import Console
@@ -13,111 +13,138 @@ from rich.table import Table
 app = typer.Typer()
 console = Console()
 
-def extract_headings(content: str) -> List[tuple]:
-    """Extract all markdown headings with their level and text."""
-    heading_pattern = r'^(#{1,6})\s+(.*?)$'
-    return [(len(match.group(1)), match.group(2).strip()) for match in re.finditer(heading_pattern, content, re.MULTILINE)]
 
-def is_numbered_heading(heading_text: str) -> bool:
-    """Check if heading starts with a number pattern like 1., 1.1., etc."""
-    return bool(re.match(r'^\d+(\.\d+)*', heading_text))
+def is_heading(line: str) -> bool:
+    """
+    Check if a line is a numeric markdown heading.
+    """
+    return bool(re.match(r"^#+\s+\d+(\.\d+)*\.?\s+", line))
+
 
 def has_trailing_period(heading_text: str) -> bool:
     """Check if heading ends with a period."""
-    return bool(re.match(r'^\d+(\.\d+)*\. ', heading_text))
+    return bool(re.match(r"^#+\s+\d+(\.\d+)*\.\s+", heading_text))
+
 
 def extract_heading_number(heading_text: str) -> str:
     """Extract the number part from a heading."""
-    match = re.match(r'^(\d+(\.\d+)*)', heading_text)
+    match = re.match(r"^#+\s+(\d+(\.\d+)*)", heading_text)
     return match.group(1) if match else ""
 
-def check_heading_numbering(headings: List[tuple]) -> List[tuple]:
+
+def extract_heading_level(heading_text: str) -> int:
+    """Extract the number part from a heading."""
+    match = re.match(r"^(#+)\s+\d+(\.\d+)*", heading_text)
+    return len(match.group(1)) if match else 0
+
+
+def check_heading_numbering(content: str, fix: bool = False) -> Tuple[List[tuple], str]:
     """
-    Check if headings follow proper numbering conventions.
-    Returns a list of tuples (heading_text, error_type, error_details).
+    Check if headings follow proper numbering conventions and optionally fix issues.
+
+    Args:
+        content: The markdown content
+        fix: Whether to fix issues
+
+    Returns:
+        A tuple of (errors, fixed_content)
     """
     errors = []
-    current_numbers = {}  # Track the current number at each level
+    lines = content.split("\n")
+    fixed_lines = []
+    last_depth_nums = {}
+    last_level_depth = 0
 
-    for heading_level, heading_text in headings:
-        if not is_numbered_heading(heading_text):
-            # Check if it's a numbered heading but missing the trailing period
-            if re.match(r'^\d+(\.\d+)*\s', heading_text):
-                errors.append((
-                    heading_text,
-                    "Missing trailing period",
-                    "Number part should end with a period"
-                ))
+    for i, line in enumerate(lines):
+        if not is_heading(line):
+            fixed_lines.append(line)
             continue
 
-        if not has_trailing_period(heading_text):
-            errors.append((
-                heading_text,
-                "Missing trailing period",
-                "Heading number should end with a period"
-            ))
-
-        number_part = extract_heading_number(heading_text)
-        number_sections = number_part.split('.')
+        number_part = extract_heading_number(line)
+        heading_level = extract_heading_level(line)
+        number_sections = number_part.split(".")
         level_depth = len(number_sections)
+
+        # Check for trailing period
+        if not has_trailing_period(line):
+            errors.append(
+                (
+                    line,
+                    "Missing trailing period",
+                    "Heading number should end with a period",
+                )
+            )
+            if fix:
+                line = line.replace(number_part, f"{number_part}.")
 
         # Check if heading level matches numbering level
         # Top level headings (1.) should be h2 (##), so expected level is depth + 1
         expected_level = level_depth + 1
         if heading_level != expected_level:
-            errors.append((
-                heading_text,
-                "Heading level mismatch",
-                f"Numbering suggests h{expected_level} but found {heading_level}"
-            ))
+            errors.append(
+                (
+                    line,
+                    "Heading level mismatch",
+                    f"Numbering suggests h{expected_level} but found {heading_level}",
+                )
+            )
+            if fix:
+                line = ("#" * expected_level) + line.lstrip("#")
+
+        # Check sections start at 0 or 1
+        if (
+            level_depth not in last_depth_nums
+            and int(number_sections[-1]) != 0
+            and int(number_sections[-1]) != 1
+        ):
+            errors.append(
+                (
+                    line,
+                    "Numbering must start at 0 or 1",
+                    f"Expected 0 or 1, but got {number_sections[-1]}.",
+                )
+            )
+            if fix:
+                fixed_numbers = number_sections[:-1] + ["1"]
+                line = line.replace(number_part, ".".join(fixed_numbers))
+
+        # Going back down a level, reset
+        if int(last_level_depth) > int(level_depth):
+            for i in range(level_depth + 1, 5):
+                last_depth_nums[i] = 0
 
         # Check sequential numbering
-        parent_key = '.'.join(number_sections[:-1])
-        current_level = int(number_sections[-1])
+        if (
+            level_depth in last_depth_nums
+            and int(number_sections[-1]) != int(last_depth_nums[level_depth]) + 1
+        ):
+            errors.append(
+                (
+                    line,
+                    "Non-sequential heading",
+                    f"Expected {'.'.join(number_sections[:-1])}.{last_depth_nums[level_depth] + 1}. but got {'.'.join(number_sections[:-1])}.{number_sections[-1]}.",
+                )
+            )
+            if fix:
+                fixed_numbers = number_sections[:-1] + [
+                    str(last_depth_nums[level_depth] + 1)
+                ]
+                line = line.replace(number_part, ".".join(fixed_numbers))
 
-        # For sub-levels, we don't need to verify parent level exists
-        # as it might come later in the document
-        if level_depth > 1:
-            # Initialize parent level if not seen yet
-            if parent_key not in current_numbers:
-                current_numbers[parent_key] = 0
+        last_level_depth = level_depth
+        last_depth_nums[level_depth] = int(number_sections[-1])
 
-        # Check if numbering is sequential
-        expected = current_numbers.get(parent_key, 0) + 1
-        if current_level != expected:
-            # Special case: allow starting with 0
-            if level_depth == 1 and current_level == 0 and expected == 1:
-                # This is the first heading and it starts with 0, which is valid
-                pass
-            else:
-                if level_depth == 1:
-                    errors.append((
-                        heading_text,
-                        "Non-sequential top-level heading",
-                        f"Expected {expected}. but got {current_level}."
-                    ))
-                else:
-                    errors.append((
-                        heading_text,
-                        "Non-sequential heading",
-                        f"Expected {parent_key}.{expected}. but got {number_part}"
-                    ))
+        fixed_lines.append(line)
 
-        # Update the current number for this level
-        current_numbers[parent_key] = current_level
+    fixed_content = "\n".join(fixed_lines)
+    return errors, fixed_content
 
-        # Reset all deeper levels when encountering a new parent
-        deeper_levels = [
-            k for k in current_numbers
-            if k.startswith(f"{parent_key}.") or (parent_key == "" and '.' in k)
-        ]
-        for k in deeper_levels:
-            del current_numbers[k]
-
-    return errors
 
 @app.command()
-def check(markdown_files: List[Path]):
+def check(
+    markdown_files: List[Path],
+    fix: bool = typer.Option(False, "--fix", help="Automatically fix detected issues"),
+):
     """
     Check markdown files for proper heading numbering.
 
@@ -125,15 +152,17 @@ def check(markdown_files: List[Path]):
     - Sequential numbering at each level
     - Trailing period after numbers
     - Heading level matches number level (## for 1., ### for 1.1., etc.)
+
+    With --fix flag, automatically corrects issues in the files.
     """
     has_errors = False
     all_error_messages = []
     total_errors = 0
+    fixed_files = 0
 
     for file_path in markdown_files:
         content = file_path.read_text(encoding="utf-8")
-        headings = extract_headings(content)
-        errors = check_heading_numbering(headings)
+        errors, fixed_content = check_heading_numbering(content, fix)
 
         if errors:
             has_errors = True
@@ -153,17 +182,38 @@ def check(markdown_files: List[Path]):
                 table,
                 title=f"[bold red]{file_path}[/bold red]",
                 border_style="red",
-                title_align="left"
+                title_align="left",
             )
             all_error_messages.append(panel)
+
+            # Write fixed content if needed
+            if fix and fixed_content != content:
+                file_path.write_text(fixed_content, encoding="utf-8")
+                fixed_files += 1
 
     if has_errors:
         for panel in all_error_messages:
             console.print(panel)
-        console.print(f":x: Checked {len(markdown_files)} files and found {total_errors} errors")
-        sys.exit(1)
+
+        if fix:
+            msg = f":wrench: [green bold]Checked {len(markdown_files)} files, found {total_errors} errors, "
+            msg += f"fixed {fixed_files} files"
+            console.print(msg)
+        else:
+            console.print(
+                f":x: [red]Checked {len(markdown_files)} files and found {total_errors} errors"
+            )
+
+        if not fix:
+            sys.exit(1)
+        elif fixed_files < len(all_error_messages):
+            # Some files couldn't be fully fixed
+            sys.exit(1)
     else:
-        console.print(f":white_check_mark: Checked {len(markdown_files)} files and found {total_errors} errors")
+        console.print(
+            f":white_check_mark: [green]Checked {len(markdown_files)} files and found {total_errors} errors"
+        )
+
 
 if __name__ == "__main__":
     app()
