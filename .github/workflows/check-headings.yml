@@ -25,4 +25,4 @@ jobs:
           files: "**.md"
 
       - name: Run check_headings.py
-        run: python check_headings.py ${{ steps.changed-files.outputs.all_changed_files }}
+        run: python .github/check_headings.py ${{ steps.changed-files.outputs.all_changed_files }}
