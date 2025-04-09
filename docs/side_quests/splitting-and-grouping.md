@@ -77,6 +77,8 @@ workflow {
 
 We can use the [`splitCsv` operator](https://www.nextflow.io/docs/latest/operator.html#splitcsv) to split the samplesheet into a channel of maps, where each map represents a row from the CSV file.
 
+_Before:_
+
 ```groovy title="main.nf" linenums="1"
 workflow {
     samplesheet = Channel.fromPath("./data/samplesheet.csv")
@@ -85,6 +87,8 @@ workflow {
 ```
 
 The `header: true` option tells Nextflow to use the first row of the CSV file as the header row, which will be used as keys for the values. Let's see what Nextflow can see after reading with splitCsv. To do this, we can use the `view` operator.
+
+_After:_
 
 ```groovy title="main.nf" linenums="1"
 workflow {
