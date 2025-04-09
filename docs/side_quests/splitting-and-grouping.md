@@ -45,18 +45,18 @@ You'll find a `data` directory containing a samplesheet and a main workflow file
 └── main.nf
 ```
 
-The samplesheet contains information about different samples and their associated data. In particular, it contains information about the sample's ID, repeat number, type (normal or tumor), and the paths to the fastq files.
+The samplesheet contains information about different samples and their associated data. In particular, it contains information about the sample's ID, repeat number, type (normal or tumor), and the paths to the BAM files (which don't actually exist, but we will pretend they do).
 
 ```console title="samplesheet.csv"
-id,repeat,type,fastq1,fastq2
-sampleA,1,normal,sampleA_rep1_normal_R1.fastq.gz,sampleA_rep1_normal_R2.fastq.gz
-sampleA,1,tumor,sampleA_rep1_tumor_R1.fastq.gz,sampleA_rep1_tumor_R2.fastq.gz
-sampleA,2,normal,sampleA_rep2_normal_R1.fastq.gz,sampleA_rep2_normal_R2.fastq.gz
-sampleA,2,tumor,sampleA_rep2_tumor_R1.fastq.gz,sampleA_rep2_tumor_R2.fastq.gz
-sampleB,1,normal,sampleB_rep1_normal_R1.fastq.gz,sampleB_rep1_normal_R2.fastq.gz
-sampleB,1,tumor,sampleB_rep1_tumor_R1.fastq.gz,sampleB_rep1_tumor_R2.fastq.gz
-sampleC,1,normal,sampleC_rep1_normal_R1.fastq.gz,sampleC_rep1_normal_R2.fastq.gz
-sampleC,1,tumor,sampleC_rep1_tumor_R1.fastq.gz,sampleC_rep1_tumor_R2.fastq.gz
+id,repeat,type,bam
+sampleA,1,normal,sampleA_r1_normal.bam
+sampleA,1,tumor,sampleA_rep1_tumor.bam
+sampleB,1,normal,sampleB_rep1_normal.bam
+sampleB,1,tumor,sampleB_rep1_tumor.bam
+sampleC,1,normal,sampleC_rep1_normal.bam
+sampleC,1,tumor,sampleC_rep1_tumor.bam
+sampleD,1,normal,sampleD_rep1_normal.bam
+sampleD,1,tumor,sampleD_rep1_tumor.bam
 ```
 
 Note there are 8 samples in total, 4 normal and 4 tumor. sampleA has 2 repeats, while sampleB and sampleC only have 1.
@@ -110,16 +110,16 @@ nextflow run main.nf
 ```console title="Read samplesheet with splitCsv"
  N E X T F L O W   ~  version 24.10.5
 
-Launching `main.nf` [berserk_cray] DSL2 - revision: 8f31622c03
+Launching `main.nf` [elated_fermat] DSL2 - revision: bd6b0224e9
 
-[id:sampleA, repeat:1, type:normal, fastq1:sampleA_rep1_normal_R1.fastq.gz, fastq2:sampleA_rep1_normal_R2.fastq.gz]
-[id:sampleA, repeat:1, type:tumor, fastq1:sampleA_rep1_tumor_R1.fastq.gz, fastq2:sampleA_rep1_tumor_R2.fastq.gz]
-[id:sampleA, repeat:2, type:normal, fastq1:sampleA_rep2_normal_R1.fastq.gz, fastq2:sampleA_rep2_normal_R2.fastq.gz]
-[id:sampleA, repeat:2, type:tumor, fastq1:sampleA_rep2_tumor_R1.fastq.gz, fastq2:sampleA_rep2_tumor_R2.fastq.gz]
-[id:sampleB, repeat:1, type:normal, fastq1:sampleB_rep1_normal_R1.fastq.gz, fastq2:sampleB_rep1_normal_R2.fastq.gz]
-[id:sampleB, repeat:1, type:tumor, fastq1:sampleB_rep1_tumor_R1.fastq.gz, fastq2:sampleB_rep1_tumor_R2.fastq.gz]
-[id:sampleC, repeat:1, type:normal, fastq1:sampleC_rep1_normal_R1.fastq.gz, fastq2:sampleC_rep1_normal_R2.fastq.gz]
-[id:sampleC, repeat:1, type:tumor, fastq1:sampleC_rep1_tumor_R1.fastq.gz, fastq2:sampleC_rep1_tumor_R2.fastq.gz]
+[id:sampleA, repeat:1, type:normal, bam:sampleA_r1_normal.bam]
+[id:sampleA, repeat:1, type:tumor, bam:sampleA_rep1_tumor.bam]
+[id:sampleB, repeat:1, type:normal, bam:sampleB_rep1_normal.bam]
+[id:sampleB, repeat:1, type:tumor, bam:sampleB_rep1_tumor.bam]
+[id:sampleC, repeat:1, type:normal, bam:sampleC_rep1_normal.bam]
+[id:sampleC, repeat:1, type:tumor, bam:sampleC_rep1_tumor.bam]
+[id:sampleD, repeat:1, type:normal, bam:sampleD_rep1_normal.bam]
+[id:sampleD, repeat:1, type:tumor, bam:sampleD_rep1_tumor.bam]
 ```
 
 We can see that each row from the CSV file has been converted into a map with keys matching the header row. A map is a key-value data structure similar to dictionaries in Python, objects in JavaScript, or hashes in Ruby.
@@ -129,10 +129,9 @@ Each map contains:
 - `id`: The sample identifier (sampleA, sampleB, sampleC)
 - `repeat`: The replicate number (1 or 2)
 - `type`: The sample type (normal or tumor)
-- `fastq1`: Path to the first FASTQ file
-- `fastq2`: Path to the second FASTQ file
+- `bam`: Path to the BAM file
 
-This format makes it easy to access specific fields from each sample. For example, we could access the sample ID with `row.id` or the FASTQ paths with `row.fastq1` and `row.fastq2`.
+This format makes it easy to access specific fields from each sample. For example, we could access the sample ID with `row.id` or the BAM path with `row.bam`.
 
 This means we have successfully read in the samplesheet and have access to the data in each row. We can start to implement this in our pipeline.
 
@@ -179,63 +178,55 @@ nextflow run main.nf -dump-channels samples
 ```console title="Read samplesheet with dump"
  N E X T F L O W   ~  version 24.10.5
 
-Launching `main.nf` [wise_kirch] DSL2 - revision: 7f194f2473
+Launching `main.nf` [cheesy_celsius] DSL2 - revision: 0e9d501bcc
 
 [DUMP: samples] {
     "id": "sampleA",
     "repeat": "1",
     "type": "normal",
-    "fastq1": "sampleA_rep1_normal_R1.fastq.gz",
-    "fastq2": "sampleA_rep1_normal_R2.fastq.gz"
+    "bam": "sampleA_r1_normal.bam"
 }
 [DUMP: samples] {
     "id": "sampleA",
     "repeat": "1",
     "type": "tumor",
-    "fastq1": "sampleA_rep1_tumor_R1.fastq.gz",
-    "fastq2": "sampleA_rep1_tumor_R2.fastq.gz"
-}
-[DUMP: samples] {
-    "id": "sampleA",
-    "repeat": "2",
-    "type": "normal",
-    "fastq1": "sampleA_rep2_normal_R1.fastq.gz",
-    "fastq2": "sampleA_rep2_normal_R2.fastq.gz"
-}
-[DUMP: samples] {
-    "id": "sampleA",
-    "repeat": "2",
-    "type": "tumor",
-    "fastq1": "sampleA_rep2_tumor_R1.fastq.gz",
-    "fastq2": "sampleA_rep2_tumor_R2.fastq.gz"
+    "bam": "sampleA_rep1_tumor.bam"
 }
 [DUMP: samples] {
     "id": "sampleB",
     "repeat": "1",
     "type": "normal",
-    "fastq1": "sampleB_rep1_normal_R1.fastq.gz",
-    "fastq2": "sampleB_rep1_normal_R2.fastq.gz"
+    "bam": "sampleB_rep1_normal.bam"
 }
 [DUMP: samples] {
     "id": "sampleB",
     "repeat": "1",
     "type": "tumor",
-    "fastq1": "sampleB_rep1_tumor_R1.fastq.gz",
-    "fastq2": "sampleB_rep1_tumor_R2.fastq.gz"
+    "bam": "sampleB_rep1_tumor.bam"
 }
 [DUMP: samples] {
     "id": "sampleC",
     "repeat": "1",
     "type": "normal",
-    "fastq1": "sampleC_rep1_normal_R1.fastq.gz",
-    "fastq2": "sampleC_rep1_normal_R2.fastq.gz"
+    "bam": "sampleC_rep1_normal.bam"
 }
 [DUMP: samples] {
     "id": "sampleC",
     "repeat": "1",
     "type": "tumor",
-    "fastq1": "sampleC_rep1_tumor_R1.fastq.gz",
-    "fastq2": "sampleC_rep1_tumor_R2.fastq.gz"
+    "bam": "sampleC_rep1_tumor.bam"
+}
+[DUMP: samples] {
+    "id": "sampleD",
+    "repeat": "1",
+    "type": "normal",
+    "bam": "sampleD_rep1_normal.bam"
+}
+[DUMP: samples] {
+    "id": "sampleD",
+    "repeat": "1",
+    "type": "tumor",
+    "bam": "sampleD_rep1_tumor.bam"
 }
 ```
 
@@ -262,7 +253,7 @@ We now have a channel of maps, each representing a row from the samplesheet. Nex
 
 ### 2.1. Filter data with `filter`
 
-We can use the [`filter` operator](https://www.nextflow.io/docs/latest/operator.html#filter) to filter the data based on a condition. Let's say we only want to process normal samples. We can do this by filtering the data based on the `type` field. Let's insert this before the `dump` operator.
+We can use the [`filter` operator](https://www.nextflow.io/docs/latest/operator.html#filter) to filter the data based on a condition. Let's say we only want to process normal samples. We can do this by filtering the data based on the `type` field. Let's insert this before the `view` operator.
 
 _Before:_
 
@@ -281,7 +272,7 @@ workflow {
     ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
                         .splitCsv(header: true)
                         .filter { sample -> sample.type == 'normal' }
-                        .dump(tag: 'samples')
+                        .view()
 }
 ```
 
@@ -295,12 +286,12 @@ nextflow run main.nf
 ```console title="View normal samples"
  N E X T F L O W   ~  version 24.10.5
 
-Launching `main.nf` [stupefied_pike] DSL2 - revision: 8761d1b103
+Launching `main.nf` [adoring_cori] DSL2 - revision: 194d61704d
 
-[DUMP: samples] ['id':'sampleA', 'repeat':'1', 'type':'normal', 'fastq1':'sampleA_rep1_normal_R1.fastq.gz', 'fastq2':'sampleA_rep1_normal_R2.fastq.gz']
-[DUMP: samples] ['id':'sampleA', 'repeat':'2', 'type':'normal', 'fastq1':'sampleA_rep2_normal_R1.fastq.gz', 'fastq2':'sampleA_rep2_normal_R2.fastq.gz']
-[DUMP: samples] ['id':'sampleB', 'repeat':'1', 'type':'normal', 'fastq1':'sampleB_rep1_normal_R1.fastq.gz', 'fastq2':'sampleB_rep1_normal_R2.fastq.gz']
-[DUMP: samples] ['id':'sampleC', 'repeat':'1', 'type':'normal', 'fastq1':'sampleC_rep1_normal_R1.fastq.gz', 'fastq2':'sampleC_rep1_normal_R2.fastq.gz']
+[id:sampleA, repeat:1, type:normal, bam:sampleA_r1_normal.bam]
+[id:sampleB, repeat:1, type:normal, bam:sampleB_rep1_normal.bam]
+[id:sampleC, repeat:1, type:normal, bam:sampleC_rep1_normal.bam]
+[id:sampleD, repeat:1, type:normal, bam:sampleD_rep1_normal.bam]
 ```
 
 We have successfully filtered the data to only include normal samples. Let's recap how this works. The `filter` operator takes a closure that is applied to each element in the channel. If the closure returns `true`, the element is included in the output channel. If the closure returns `false`, the element is excluded from the output channel.
@@ -313,6 +304,8 @@ In this case, we want to keep only the samples where `sample.type == 'normal'`. 
 
 ### 2.2. Save results of filter to a new channel
 
+#TODO: Move this later after making the tumor only channel, put it at the end in one section!
+
 While useful, we are discarding the tumor samples. Instead, let's rewrite our pipeline to save all the samples to one channel called `samplesheet`, then filter that channel to just the normal samples and save the results to a new channel called `normal_samples`.
 
 _Before:_
@@ -322,7 +315,7 @@ workflow {
     ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
                         .splitCsv(header: true)
                         .filter { sample -> sample.type == 'normal' }
-                        .dump(tag: 'samples')
+                        .view()
 }
 ```
 
@@ -347,15 +340,15 @@ nextflow run main.nf
 ```console title="View normal samples"
  N E X T F L O W   ~  version 24.10.5
 
-Launching `main.nf` [lonely_miescher] DSL2 - revision: 7e26f19fd3
+Launching `main.nf` [astonishing_noether] DSL2 - revision: 8e49cf6956
 
-[id:sampleA, repeat:1, type:normal, fastq1:sampleA_rep1_normal_R1.fastq.gz, fastq2:sampleA_rep1_normal_R2.fastq.gz]
-[id:sampleA, repeat:2, type:normal, fastq1:sampleA_rep2_normal_R1.fastq.gz, fastq2:sampleA_rep2_normal_R2.fastq.gz]
-[id:sampleB, repeat:1, type:normal, fastq1:sampleB_rep1_normal_R1.fastq.gz, fastq2:sampleB_rep1_normal_R2.fastq.gz]
-[id:sampleC, repeat:1, type:normal, fastq1:sampleC_rep1_normal_R1.fastq.gz, fastq2:sampleC_rep1_normal_R2.fastq.gz]
+[id:sampleA, repeat:1, type:normal, bam:sampleA_r1_normal.bam]
+[id:sampleB, repeat:1, type:normal, bam:sampleB_rep1_normal.bam]
+[id:sampleC, repeat:1, type:normal, bam:sampleC_rep1_normal.bam]
+[id:sampleD, repeat:1, type:normal, bam:sampleD_rep1_normal.bam]
 ```
 
-Success! We have filtered the data to only include normal samples. If we wanted, we still have access to the tumor samples within the `samplesheet` channel. Since we managed it for the normal samples, let's do it for the tumor samples as well:
+Success! We have filtered the data to only include normal samples. Note that we can use view and save the new channel. If we wanted, we still have access to the tumor samples within the `samplesheet` channel. Since we managed it for the normal samples, let's do it for the tumor samples as well:
 
 _Before:_
 
@@ -391,19 +384,21 @@ nextflow run main.nf
 ```console title="View tumor samples"
  N E X T F L O W   ~  version 24.10.5
 
-Launching `main.nf` [focused_kirch] DSL2 - revision: 87d6672658
+Launching `main.nf` [gloomy_roentgen] DSL2 - revision: e6b3917a8e
 
-[id:sampleA, repeat:1, type:normal, fastq1:sampleA_rep1_normal_R1.fastq.gz, fastq2:sampleA_rep1_normal_R2.fastq.gz]
-[id:sampleA, repeat:1, type:tumor, fastq1:sampleA_rep1_tumor_R1.fastq.gz, fastq2:sampleA_rep1_tumor_R2.fastq.gz]
-[id:sampleA, repeat:2, type:normal, fastq1:sampleA_rep2_normal_R1.fastq.gz, fastq2:sampleA_rep2_normal_R2.fastq.gz]
-[id:sampleA, repeat:2, type:tumor, fastq1:sampleA_rep2_tumor_R1.fastq.gz, fastq2:sampleA_rep2_tumor_R2.fastq.gz]
-[id:sampleB, repeat:1, type:normal, fastq1:sampleB_rep1_normal_R1.fastq.gz, fastq2:sampleB_rep1_normal_R2.fastq.gz]
-[id:sampleB, repeat:1, type:tumor, fastq1:sampleB_rep1_tumor_R1.fastq.gz, fastq2:sampleB_rep1_tumor_R2.fastq.gz]
-[id:sampleC, repeat:1, type:normal, fastq1:sampleC_rep1_normal_R1.fastq.gz, fastq2:sampleC_rep1_normal_R2.fastq.gz]
-[id:sampleC, repeat:1, type:tumor, fastq1:sampleC_rep1_tumor_R1.fastq.gz, fastq2:sampleC_rep1_tumor_R2.fastq.gz]
+[id:sampleA, repeat:1, type:tumor, bam:sampleA_rep1_tumor.bam]
+[id:sampleA, repeat:1, type:normal, bam:sampleA_r1_normal.bam]
+[id:sampleB, repeat:1, type:tumor, bam:sampleB_rep1_tumor.bam]
+[id:sampleB, repeat:1, type:normal, bam:sampleB_rep1_normal.bam]
+[id:sampleC, repeat:1, type:tumor, bam:sampleC_rep1_tumor.bam]
+[id:sampleC, repeat:1, type:normal, bam:sampleC_rep1_normal.bam]
+[id:sampleD, repeat:1, type:tumor, bam:sampleD_rep1_tumor.bam]
+[id:sampleD, repeat:1, type:normal, bam:sampleD_rep1_normal.bam]
 ```
 
 We've managed to separate out the normal and tumor samples into two different channels but they're mixed up when we `view` them in the console! Here's where dump could be useful, because it can label the different channels with a tag.
+
+#TODO: remove this bit
 
 _Before:_
 
@@ -442,16 +437,16 @@ nextflow run main.nf -dump-channels normal,tumor
 ```console title="View normal and tumor samples"
  N E X T F L O W   ~  version 24.10.5
 
-Launching `main.nf` [spontaneous_jones] DSL2 - revision: 0e794240ef
+Launching `main.nf` [sharp_carlsson] DSL2 - revision: 61e1be6afd
 
-[DUMP: tumor] ['id':'sampleA', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleA_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleA_rep1_tumor_R2.fastq.gz']
-[DUMP: normal] ['id':'sampleA', 'repeat':'1', 'type':'normal', 'fastq1':'sampleA_rep1_normal_R1.fastq.gz', 'fastq2':'sampleA_rep1_normal_R2.fastq.gz']
-[DUMP: tumor] ['id':'sampleA', 'repeat':'2', 'type':'tumor', 'fastq1':'sampleA_rep2_tumor_R1.fastq.gz', 'fastq2':'sampleA_rep2_tumor_R2.fastq.gz']
-[DUMP: normal] ['id':'sampleA', 'repeat':'2', 'type':'normal', 'fastq1':'sampleA_rep2_normal_R1.fastq.gz', 'fastq2':'sampleA_rep2_normal_R2.fastq.gz']
-[DUMP: tumor] ['id':'sampleB', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleB_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleB_rep1_tumor_R2.fastq.gz']
-[DUMP: normal] ['id':'sampleB', 'repeat':'1', 'type':'normal', 'fastq1':'sampleB_rep1_normal_R1.fastq.gz', 'fastq2':'sampleB_rep1_normal_R2.fastq.gz']
-[DUMP: tumor] ['id':'sampleC', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleC_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleC_rep1_tumor_R2.fastq.gz']
-[DUMP: normal] ['id':'sampleC', 'repeat':'1', 'type':'normal', 'fastq1':'sampleC_rep1_normal_R1.fastq.gz', 'fastq2':'sampleC_rep1_normal_R2.fastq.gz']
+[DUMP: tumor] ['id':'sampleA', 'repeat':'1', 'type':'tumor', 'bam':'sampleA_rep1_tumor.bam']
+[DUMP: normal] ['id':'sampleA', 'repeat':'1', 'type':'normal', 'bam':'sampleA_r1_normal.bam']
+[DUMP: tumor] ['id':'sampleB', 'repeat':'1', 'type':'tumor', 'bam':'sampleB_rep1_tumor.bam']
+[DUMP: normal] ['id':'sampleB', 'repeat':'1', 'type':'normal', 'bam':'sampleB_rep1_normal.bam']
+[DUMP: tumor] ['id':'sampleC', 'repeat':'1', 'type':'tumor', 'bam':'sampleC_rep1_tumor.bam']
+[DUMP: normal] ['id':'sampleC', 'repeat':'1', 'type':'normal', 'bam':'sampleC_rep1_normal.bam']
+[DUMP: tumor] ['id':'sampleD', 'repeat':'1', 'type':'tumor', 'bam':'sampleD_rep1_tumor.bam']
+[DUMP: normal] ['id':'sampleD', 'repeat':'1', 'type':'normal', 'bam':'sampleD_rep1_normal.bam']
 ```
 
 Note how the `normal` and `tumor` tags are used to label the different channels. This is useful for debugging and for understanding the data flow in our pipeline.
@@ -485,16 +480,16 @@ nextflow run main.nf -dump-channels normal,tumor
 ```console title="View normal and tumor samples"
  N E X T F L O W   ~  version 24.10.5
 
-Launching `main.nf` [spontaneous_jones] DSL2 - revision: 0e794240ef
+Launching `main.nf` [sharp_carlsson] DSL2 - revision: 61e1be6afd
 
-[DUMP: tumor] ['id':'sampleA', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleA_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleA_rep1_tumor_R2.fastq.gz']
-[DUMP: normal] ['id':'sampleA', 'repeat':'1', 'type':'normal', 'fastq1':'sampleA_rep1_normal_R1.fastq.gz', 'fastq2':'sampleA_rep1_normal_R2.fastq.gz']
-[DUMP: tumor] ['id':'sampleA', 'repeat':'2', 'type':'tumor', 'fastq1':'sampleA_rep2_tumor_R1.fastq.gz', 'fastq2':'sampleA_rep2_tumor_R2.fastq.gz']
-[DUMP: normal] ['id':'sampleA', 'repeat':'2', 'type':'normal', 'fastq1':'sampleA_rep2_normal_R1.fastq.gz', 'fastq2':'sampleA_rep2_normal_R2.fastq.gz']
-[DUMP: tumor] ['id':'sampleB', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleB_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleB_rep1_tumor_R2.fastq.gz']
-[DUMP: normal] ['id':'sampleB', 'repeat':'1', 'type':'normal', 'fastq1':'sampleB_rep1_normal_R1.fastq.gz', 'fastq2':'sampleB_rep1_normal_R2.fastq.gz']
-[DUMP: tumor] ['id':'sampleC', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleC_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleC_rep1_tumor_R2.fastq.gz']
-[DUMP: normal] ['id':'sampleC', 'repeat':'1', 'type':'normal', 'fastq1':'sampleC_rep1_normal_R1.fastq.gz', 'fastq2':'sampleC_rep1_normal_R2.fastq.gz']
+[DUMP: tumor] ['id':'sampleA', 'repeat':'1', 'type':'tumor', 'bam':'sampleA_rep1_tumor.bam']
+[DUMP: normal] ['id':'sampleA', 'repeat':'1', 'type':'normal', 'bam':'sampleA_r1_normal.bam']
+[DUMP: tumor] ['id':'sampleB', 'repeat':'1', 'type':'tumor', 'bam':'sampleB_rep1_tumor.bam']
+[DUMP: normal] ['id':'sampleB', 'repeat':'1', 'type':'normal', 'bam':'sampleB_rep1_normal.bam']
+[DUMP: tumor] ['id':'sampleC', 'repeat':'1', 'type':'tumor', 'bam':'sampleC_rep1_tumor.bam']
+[DUMP: normal] ['id':'sampleC', 'repeat':'1', 'type':'normal', 'bam':'sampleC_rep1_normal.bam']
+[DUMP: tumor] ['id':'sampleD', 'repeat':'1', 'type':'tumor', 'bam':'sampleD_rep1_tumor.bam']
+[DUMP: normal] ['id':'sampleD', 'repeat':'1', 'type':'normal', 'bam':'sampleD_rep1_normal.bam']
 ```
 
 We can see that the `id` field is the first element in each map. For `join` to work, we should isolate the `id` field in each tuple. After that, we can simply use the `join` operator to combine the two channels.
@@ -540,16 +535,16 @@ nextflow run main.nf -dump-channels normal,tumor
 ```console title="View normal and tumor samples with ID as element 0"
  N E X T F L O W   ~  version 24.10.5
 
-Launching `main.nf` [sick_jones] DSL2 - revision: 9b183fbc7c
+Launching `main.nf` [peaceful_morse] DSL2 - revision: 34daafdfb3
 
-[DUMP: tumor] ['sampleA', ['id':'sampleA', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleA_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleA_rep1_tumor_R2.fastq.gz']]
-[DUMP: normal] ['sampleA', ['id':'sampleA', 'repeat':'1', 'type':'normal', 'fastq1':'sampleA_rep1_normal_R1.fastq.gz', 'fastq2':'sampleA_rep1_normal_R2.fastq.gz']]
-[DUMP: tumor] ['sampleA', ['id':'sampleA', 'repeat':'2', 'type':'tumor', 'fastq1':'sampleA_rep2_tumor_R1.fastq.gz', 'fastq2':'sampleA_rep2_tumor_R2.fastq.gz']]
-[DUMP: normal] ['sampleA', ['id':'sampleA', 'repeat':'2', 'type':'normal', 'fastq1':'sampleA_rep2_normal_R1.fastq.gz', 'fastq2':'sampleA_rep2_normal_R2.fastq.gz']]
-[DUMP: tumor] ['sampleB', ['id':'sampleB', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleB_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleB_rep1_tumor_R2.fastq.gz']]
-[DUMP: normal] ['sampleB', ['id':'sampleB', 'repeat':'1', 'type':'normal', 'fastq1':'sampleB_rep1_normal_R1.fastq.gz', 'fastq2':'sampleB_rep1_normal_R2.fastq.gz']]
-[DUMP: tumor] ['sampleC', ['id':'sampleC', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleC_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleC_rep1_tumor_R2.fastq.gz']]
-[DUMP: normal] ['sampleC', ['id':'sampleC', 'repeat':'1', 'type':'normal', 'fastq1':'sampleC_rep1_normal_R1.fastq.gz', 'fastq2':'sampleC_rep1_normal_R2.fastq.gz']]
+[DUMP: normal] ['sampleA', ['id':'sampleA', 'repeat':'1', 'type':'normal', 'bam':'sampleA_r1_normal.bam']]
+[DUMP: tumor] ['sampleA', ['id':'sampleA', 'repeat':'1', 'type':'tumor', 'bam':'sampleA_rep1_tumor.bam']]
+[DUMP: normal] ['sampleB', ['id':'sampleB', 'repeat':'1', 'type':'normal', 'bam':'sampleB_rep1_normal.bam']]
+[DUMP: tumor] ['sampleB', ['id':'sampleB', 'repeat':'1', 'type':'tumor', 'bam':'sampleB_rep1_tumor.bam']]
+[DUMP: normal] ['sampleC', ['id':'sampleC', 'repeat':'1', 'type':'normal', 'bam':'sampleC_rep1_normal.bam']]
+[DUMP: tumor] ['sampleC', ['id':'sampleC', 'repeat':'1', 'type':'tumor', 'bam':'sampleC_rep1_tumor.bam']]
+[DUMP: normal] ['sampleD', ['id':'sampleD', 'repeat':'1', 'type':'normal', 'bam':'sampleD_rep1_normal.bam']]
+[DUMP: tumor] ['sampleD', ['id':'sampleD', 'repeat':'1', 'type':'tumor', 'bam':'sampleD_rep1_tumor.bam']]
 ```
 
 It might be subtle, but you should be able to see the first element in each tuple is the `id` field. Now we can use the `join` operator to combine the two channels based on the `id` field.
@@ -577,7 +572,7 @@ _After:_
 
 ```groovy title="main.nf" linenums="1"
 workflow {
-    samplesheet = Channel.fromPath("./data/samplesheet.csv")
+    ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
                         .splitCsv(header: true)
     ch_normal_samples = ch_samplesheet
                         .filter { sample -> sample.type == 'normal' }
@@ -600,19 +595,19 @@ nextflow run main.nf -dump-channels joined
 ```console title="View joined normal and tumor samples"
  N E X T F L O W   ~  version 24.10.5
 
-Launching `main.nf` [thirsty_poitras] DSL2 - revision: 95a2b8902b
+Launching `main.nf` [hopeful_agnesi] DSL2 - revision: 78b21768c2
 
-[DUMP: joined] ['sampleA', ['id':'sampleA', 'repeat':'1', 'type':'normal', 'fastq1':'sampleA_rep1_normal_R1.fastq.gz', 'fastq2':'sampleA_rep1_normal_R2.fastq.gz'], ['id':'sampleA', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleA_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleA_rep1_tumor_R2.fastq.gz']]
-[DUMP: joined] ['sampleA', ['id':'sampleA', 'repeat':'2', 'type':'normal', 'fastq1':'sampleA_rep2_normal_R1.fastq.gz', 'fastq2':'sampleA_rep2_normal_R2.fastq.gz'], ['id':'sampleA', 'repeat':'2', 'type':'tumor', 'fastq1':'sampleA_rep2_tumor_R1.fastq.gz', 'fastq2':'sampleA_rep2_tumor_R2.fastq.gz']]
-[DUMP: joined] ['sampleB', ['id':'sampleB', 'repeat':'1', 'type':'normal', 'fastq1':'sampleB_rep1_normal_R1.fastq.gz', 'fastq2':'sampleB_rep1_normal_R2.fastq.gz'], ['id':'sampleB', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleB_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleB_rep1_tumor_R2.fastq.gz']]
-[DUMP: joined] ['sampleC', ['id':'sampleC', 'repeat':'1', 'type':'normal', 'fastq1':'sampleC_rep1_normal_R1.fastq.gz', 'fastq2':'sampleC_rep1_normal_R2.fastq.gz'], ['id':'sampleC', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleC_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleC_rep1_tumor_R2.fastq.gz']]
+[DUMP: joined] ['sampleA', ['id':'sampleA', 'repeat':'1', 'type':'normal', 'bam':'sampleA_r1_normal.bam'], ['id':'sampleA', 'repeat':'1', 'type':'tumor', 'bam':'sampleA_rep1_tumor.bam']]
+[DUMP: joined] ['sampleB', ['id':'sampleB', 'repeat':'1', 'type':'normal', 'bam':'sampleB_rep1_normal.bam'], ['id':'sampleB', 'repeat':'1', 'type':'tumor', 'bam':'sampleB_rep1_tumor.bam']]
+[DUMP: joined] ['sampleC', ['id':'sampleC', 'repeat':'1', 'type':'normal', 'bam':'sampleC_rep1_normal.bam'], ['id':'sampleC', 'repeat':'1', 'type':'tumor', 'bam':'sampleC_rep1_tumor.bam']]
+[DUMP: joined] ['sampleD', ['id':'sampleD', 'repeat':'1', 'type':'normal', 'bam':'sampleD_rep1_normal.bam'], ['id':'sampleD', 'repeat':'1', 'type':'tumor', 'bam':'sampleD_rep1_tumor.bam']]
 ```
 
 It's a little hard to tell because it's so wide, but you should be able to see the samples have been joined by the `id` field. Each tuple now has the format:
 
 - `id`: The sample ID
-- `normal_sample`: The normal sample including type, replicate and path to fastq files
-- `tumor_sample`: The tumor sample including type, replicate and path to fastq files
+- `normal_sample`: The normal sample including type, replicate and path to bam file
+- `tumor_sample`: The tumor sample including type, replicate and path to bam file
 
 If you want you can use the `pretty` parameter of `dump` to make it easier to read:
 
@@ -643,7 +638,7 @@ nextflow run main.nf -dump-channels joined
 ```console title="View normal and tumor samples"
  N E X T F L O W   ~  version 24.10.5
 
-Launching `main.nf` [tender_feynman] DSL2 - revision: 3505c6a732
+Launching `main.nf` [desperate_einstein] DSL2 - revision: 2dce0e5352
 
 [DUMP: joined] [
     "sampleA",
@@ -651,32 +646,13 @@ Launching `main.nf` [tender_feynman] DSL2 - revision: 3505c6a732
         "id": "sampleA",
         "repeat": "1",
         "type": "normal",
-        "fastq1": "sampleA_rep1_normal_R1.fastq.gz",
-        "fastq2": "sampleA_rep1_normal_R2.fastq.gz"
+        "bam": "sampleA_r1_normal.bam"
     },
     {
         "id": "sampleA",
         "repeat": "1",
         "type": "tumor",
-        "fastq1": "sampleA_rep1_tumor_R1.fastq.gz",
-        "fastq2": "sampleA_rep1_tumor_R2.fastq.gz"
-    }
-]
-[DUMP: joined] [
-    "sampleA",
-    {
-        "id": "sampleA",
-        "repeat": "2",
-        "type": "normal",
-        "fastq1": "sampleA_rep2_normal_R1.fastq.gz",
-        "fastq2": "sampleA_rep2_normal_R2.fastq.gz"
-    },
-    {
-        "id": "sampleA",
-        "repeat": "2",
-        "type": "tumor",
-        "fastq1": "sampleA_rep2_tumor_R1.fastq.gz",
-        "fastq2": "sampleA_rep2_tumor_R2.fastq.gz"
+        "bam": "sampleA_rep1_tumor.bam"
     }
 ]
 [DUMP: joined] [
@@ -685,15 +661,13 @@ Launching `main.nf` [tender_feynman] DSL2 - revision: 3505c6a732
         "id": "sampleB",
         "repeat": "1",
         "type": "normal",
-        "fastq1": "sampleB_rep1_normal_R1.fastq.gz",
-        "fastq2": "sampleB_rep1_normal_R2.fastq.gz"
+        "bam": "sampleB_rep1_normal.bam"
     },
     {
         "id": "sampleB",
         "repeat": "1",
         "type": "tumor",
-        "fastq1": "sampleB_rep1_tumor_R1.fastq.gz",
-        "fastq2": "sampleB_rep1_tumor_R2.fastq.gz"
+        "bam": "sampleB_rep1_tumor.bam"
     }
 ]
 [DUMP: joined] [
@@ -702,15 +676,28 @@ Launching `main.nf` [tender_feynman] DSL2 - revision: 3505c6a732
         "id": "sampleC",
         "repeat": "1",
         "type": "normal",
-        "fastq1": "sampleC_rep1_normal_R1.fastq.gz",
-        "fastq2": "sampleC_rep1_normal_R2.fastq.gz"
+        "bam": "sampleC_rep1_normal.bam"
     },
     {
         "id": "sampleC",
         "repeat": "1",
         "type": "tumor",
-        "fastq1": "sampleC_rep1_tumor_R1.fastq.gz",
-        "fastq2": "sampleC_rep1_tumor_R2.fastq.gz"
+        "bam": "sampleC_rep1_tumor.bam"
+    }
+]
+[DUMP: joined] [
+    "sampleD",
+    {
+        "id": "sampleD",
+        "repeat": "1",
+        "type": "normal",
+        "bam": "sampleD_rep1_normal.bam"
+    },
+    {
+        "id": "sampleD",
+        "repeat": "1",
+        "type": "tumor",
+        "bam": "sampleD_rep1_tumor.bam"
     }
 ]
 ```
@@ -749,7 +736,7 @@ workflow {
                         .filter { sample -> sample.type == "tumor" }
                         .map { sample -> [sample.id, sample] }
                         .dump(tag: 'tumor')
-    ch_joined_samples = ch_normal_samples
+    joined_samples = ch_normal_samples
                         .join(ch_tumor_samples)
                         .dump(tag: 'joined', pretty: true)
 }
@@ -792,7 +779,7 @@ nextflow run main.nf -dump-channels joined
 ```console title="View normal and tumor samples"
  N E X T F L O W   ~  version 24.10.5
 
-Launching `main.nf` [cranky_lorenz] DSL2 - revision: 2be25de1df
+Launching `main.nf` [infallible_torricelli] DSL2 - revision: c02356ebe1
 
 [DUMP: joined] [
     [
@@ -803,35 +790,13 @@ Launching `main.nf` [cranky_lorenz] DSL2 - revision: 2be25de1df
         "id": "sampleA",
         "repeat": "1",
         "type": "normal",
-        "fastq1": "sampleA_rep1_normal_R1.fastq.gz",
-        "fastq2": "sampleA_rep1_normal_R2.fastq.gz"
+        "bam": "sampleA_r1_normal.bam"
     },
     {
         "id": "sampleA",
         "repeat": "1",
         "type": "tumor",
-        "fastq1": "sampleA_rep1_tumor_R1.fastq.gz",
-        "fastq2": "sampleA_rep1_tumor_R2.fastq.gz"
-    }
-]
-[DUMP: joined] [
-    [
-        "sampleA",
-        "2"
-    ],
-    {
-        "id": "sampleA",
-        "repeat": "2",
-        "type": "normal",
-        "fastq1": "sampleA_rep2_normal_R1.fastq.gz",
-        "fastq2": "sampleA_rep2_normal_R2.fastq.gz"
-    },
-    {
-        "id": "sampleA",
-        "repeat": "2",
-        "type": "tumor",
-        "fastq1": "sampleA_rep2_tumor_R1.fastq.gz",
-        "fastq2": "sampleA_rep2_tumor_R2.fastq.gz"
+        "bam": "sampleA_rep1_tumor.bam"
     }
 ]
 [DUMP: joined] [
@@ -843,15 +808,13 @@ Launching `main.nf` [cranky_lorenz] DSL2 - revision: 2be25de1df
         "id": "sampleB",
         "repeat": "1",
         "type": "normal",
-        "fastq1": "sampleB_rep1_normal_R1.fastq.gz",
-        "fastq2": "sampleB_rep1_normal_R2.fastq.gz"
+        "bam": "sampleB_rep1_normal.bam"
     },
     {
         "id": "sampleB",
         "repeat": "1",
         "type": "tumor",
-        "fastq1": "sampleB_rep1_tumor_R1.fastq.gz",
-        "fastq2": "sampleB_rep1_tumor_R2.fastq.gz"
+        "bam": "sampleB_rep1_tumor.bam"
     }
 ]
 [DUMP: joined] [
@@ -863,15 +826,31 @@ Launching `main.nf` [cranky_lorenz] DSL2 - revision: 2be25de1df
         "id": "sampleC",
         "repeat": "1",
         "type": "normal",
-        "fastq1": "sampleC_rep1_normal_R1.fastq.gz",
-        "fastq2": "sampleC_rep1_normal_R2.fastq.gz"
+        "bam": "sampleC_rep1_normal.bam"
     },
     {
         "id": "sampleC",
         "repeat": "1",
         "type": "tumor",
-        "fastq1": "sampleC_rep1_tumor_R1.fastq.gz",
-        "fastq2": "sampleC_rep1_tumor_R2.fastq.gz"
+        "bam": "sampleC_rep1_tumor.bam"
+    }
+]
+[DUMP: joined] [
+    [
+        "sampleD",
+        "1"
+    ],
+    {
+        "id": "sampleD",
+        "repeat": "1",
+        "type": "normal",
+        "bam": "sampleD_rep1_normal.bam"
+    },
+    {
+        "id": "sampleD",
+        "repeat": "1",
+        "type": "tumor",
+        "bam": "sampleD_rep1_tumor.bam"
     }
 ]
 ```
@@ -947,86 +926,78 @@ nextflow run main.nf -dump-channels joined
 ```console title="View normal and tumor samples"
  N E X T F L O W   ~  version 24.10.5
 
-Launching `main.nf` [insane_gautier] DSL2 - revision: bf5b9a6d37
+Launching `main.nf` [sharp_waddington] DSL2 - revision: c02356ebe1
 
 [DUMP: joined] [
-    {
-        "id": "sampleA",
-        "repeat": "1"
-    },
+    [
+        "sampleA",
+        "1"
+    ],
     {
         "id": "sampleA",
         "repeat": "1",
         "type": "normal",
-        "fastq1": "sampleA_rep1_normal_R1.fastq.gz",
-        "fastq2": "sampleA_rep1_normal_R2.fastq.gz"
+        "bam": "sampleA_r1_normal.bam"
     },
     {
         "id": "sampleA",
         "repeat": "1",
         "type": "tumor",
-        "fastq1": "sampleA_rep1_tumor_R1.fastq.gz",
-        "fastq2": "sampleA_rep1_tumor_R2.fastq.gz"
+        "bam": "sampleA_rep1_tumor.bam"
     }
 ]
 [DUMP: joined] [
-    {
-        "id": "sampleA",
-        "repeat": "2"
-    },
-    {
-        "id": "sampleA",
-        "repeat": "2",
-        "type": "normal",
-        "fastq1": "sampleA_rep2_normal_R1.fastq.gz",
-        "fastq2": "sampleA_rep2_normal_R2.fastq.gz"
-    },
-    {
-        "id": "sampleA",
-        "repeat": "2",
-        "type": "tumor",
-        "fastq1": "sampleA_rep2_tumor_R1.fastq.gz",
-        "fastq2": "sampleA_rep2_tumor_R2.fastq.gz"
-    }
-]
-[DUMP: joined] [
-    {
-        "id": "sampleB",
-        "repeat": "1"
-    },
+    [
+        "sampleB",
+        "1"
+    ],
     {
         "id": "sampleB",
         "repeat": "1",
         "type": "normal",
-        "fastq1": "sampleB_rep1_normal_R1.fastq.gz",
-        "fastq2": "sampleB_rep1_normal_R2.fastq.gz"
+        "bam": "sampleB_rep1_normal.bam"
     },
     {
         "id": "sampleB",
         "repeat": "1",
         "type": "tumor",
-        "fastq1": "sampleB_rep1_tumor_R1.fastq.gz",
-        "fastq2": "sampleB_rep1_tumor_R2.fastq.gz"
+        "bam": "sampleB_rep1_tumor.bam"
     }
 ]
 [DUMP: joined] [
-    {
-        "id": "sampleC",
-        "repeat": "1"
-    },
+    [
+        "sampleC",
+        "1"
+    ],
     {
         "id": "sampleC",
         "repeat": "1",
         "type": "normal",
-        "fastq1": "sampleC_rep1_normal_R1.fastq.gz",
-        "fastq2": "sampleC_rep1_normal_R2.fastq.gz"
+        "bam": "sampleC_rep1_normal.bam"
     },
     {
         "id": "sampleC",
         "repeat": "1",
         "type": "tumor",
-        "fastq1": "sampleC_rep1_tumor_R1.fastq.gz",
-        "fastq2": "sampleC_rep1_tumor_R2.fastq.gz"
+        "bam": "sampleC_rep1_tumor.bam"
+    }
+]
+[DUMP: joined] [
+    [
+        "sampleD",
+        "1"
+    ],
+    {
+        "id": "sampleD",
+        "repeat": "1",
+        "type": "normal",
+        "bam": "sampleD_rep1_normal.bam"
+    },
+    {
+        "id": "sampleD",
+        "repeat": "1",
+        "type": "tumor",
+        "bam": "sampleD_rep1_tumor.bam"
     }
 ]
 ```
@@ -1043,7 +1014,7 @@ _Before:_
 
 ```groovy title="main.nf" linenums="1"
 workflow {
-    samplesheet = Channel.fromPath("./data/samplesheet.csv")
+    ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
                         .splitCsv(header: true)
 ```
 
@@ -1052,7 +1023,7 @@ _After:_
 ```groovy title="main.nf" linenums="1"
 workflow {
     getSampleIdAndReplicate = { sample -> [ sample.subMap(['id', 'repeat']), sample ] }
-    samplesheet = Channel.fromPath("./data/samplesheet.csv")
+    ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
                         .splitCsv(header: true)
 ```
 
@@ -1102,7 +1073,7 @@ nextflow run main.nf -dump-channels joined
 ```console title="View normal and tumor samples"
  N E X T F L O W   ~  version 24.10.5
 
-Launching `main.nf` [trusting_boltzmann] DSL2 - revision: 0b1cd77e3b
+Launching `main.nf` [silly_lalande] DSL2 - revision: 76bcb0b16b
 
 [DUMP: joined] [
     {
@@ -1113,35 +1084,13 @@ Launching `main.nf` [trusting_boltzmann] DSL2 - revision: 0b1cd77e3b
         "id": "sampleA",
         "repeat": "1",
         "type": "normal",
-        "fastq1": "sampleA_rep1_normal_R1.fastq.gz",
-        "fastq2": "sampleA_rep1_normal_R2.fastq.gz"
+        "bam": "sampleA_r1_normal.bam"
     },
     {
         "id": "sampleA",
         "repeat": "1",
         "type": "tumor",
-        "fastq1": "sampleA_rep1_tumor_R1.fastq.gz",
-        "fastq2": "sampleA_rep1_tumor_R2.fastq.gz"
-    }
-]
-[DUMP: joined] [
-    {
-        "id": "sampleA",
-        "repeat": "2"
-    },
-    {
-        "id": "sampleA",
-        "repeat": "2",
-        "type": "normal",
-        "fastq1": "sampleA_rep2_normal_R1.fastq.gz",
-        "fastq2": "sampleA_rep2_normal_R2.fastq.gz"
-    },
-    {
-        "id": "sampleA",
-        "repeat": "2",
-        "type": "tumor",
-        "fastq1": "sampleA_rep2_tumor_R1.fastq.gz",
-        "fastq2": "sampleA_rep2_tumor_R2.fastq.gz"
+        "bam": "sampleA_rep1_tumor.bam"
     }
 ]
 [DUMP: joined] [
@@ -1153,15 +1102,13 @@ Launching `main.nf` [trusting_boltzmann] DSL2 - revision: 0b1cd77e3b
         "id": "sampleB",
         "repeat": "1",
         "type": "normal",
-        "fastq1": "sampleB_rep1_normal_R1.fastq.gz",
-        "fastq2": "sampleB_rep1_normal_R2.fastq.gz"
+        "bam": "sampleB_rep1_normal.bam"
     },
     {
         "id": "sampleB",
         "repeat": "1",
         "type": "tumor",
-        "fastq1": "sampleB_rep1_tumor_R1.fastq.gz",
-        "fastq2": "sampleB_rep1_tumor_R2.fastq.gz"
+        "bam": "sampleB_rep1_tumor.bam"
     }
 ]
 [DUMP: joined] [
@@ -1173,15 +1120,31 @@ Launching `main.nf` [trusting_boltzmann] DSL2 - revision: 0b1cd77e3b
         "id": "sampleC",
         "repeat": "1",
         "type": "normal",
-        "fastq1": "sampleC_rep1_normal_R1.fastq.gz",
-        "fastq2": "sampleC_rep1_normal_R2.fastq.gz"
+        "bam": "sampleC_rep1_normal.bam"
     },
     {
         "id": "sampleC",
         "repeat": "1",
         "type": "tumor",
-        "fastq1": "sampleC_rep1_tumor_R1.fastq.gz",
-        "fastq2": "sampleC_rep1_tumor_R2.fastq.gz"
+        "bam": "sampleC_rep1_tumor.bam"
+    }
+]
+[DUMP: joined] [
+    {
+        "id": "sampleD",
+        "repeat": "1"
+    },
+    {
+        "id": "sampleD",
+        "repeat": "1",
+        "type": "normal",
+        "bam": "sampleD_rep1_normal.bam"
+    },
+    {
+        "id": "sampleD",
+        "repeat": "1",
+        "type": "tumor",
+        "bam": "sampleD_rep1_tumor.bam"
     }
 ]
 ```
@@ -1257,20 +1220,20 @@ nextflow run main.nf -dump-channels combined
 ```console title="View combined samples"
  N E X T F L O W   ~  version 24.10.5
 
-Launching `main.nf` [extravagant_maxwell] DSL2 - revision: 459bde3584
+Launching `main.nf` [festering_davinci] DSL2 - revision: 0ec9c8b25a
 
-[DUMP: combined] [['id':'sampleA', 'repeat':'1'], ['id':'sampleA', 'repeat':'1', 'type':'normal', 'fastq1':'sampleA_rep1_normal_R1.fastq.gz', 'fastq2':'sampleA_rep1_normal_R2.fastq.gz'], ['id':'sampleA', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleA_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleA_rep1_tumor_R2.fastq.gz'], 'chr1']
-[DUMP: combined] [['id':'sampleA', 'repeat':'1'], ['id':'sampleA', 'repeat':'1', 'type':'normal', 'fastq1':'sampleA_rep1_normal_R1.fastq.gz', 'fastq2':'sampleA_rep1_normal_R2.fastq.gz'], ['id':'sampleA', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleA_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleA_rep1_tumor_R2.fastq.gz'], 'chr2']
-[DUMP: combined] [['id':'sampleA', 'repeat':'1'], ['id':'sampleA', 'repeat':'1', 'type':'normal', 'fastq1':'sampleA_rep1_normal_R1.fastq.gz', 'fastq2':'sampleA_rep1_normal_R2.fastq.gz'], ['id':'sampleA', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleA_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleA_rep1_tumor_R2.fastq.gz'], 'chr3']
-[DUMP: combined] [['id':'sampleA', 'repeat':'2'], ['id':'sampleA', 'repeat':'2', 'type':'normal', 'fastq1':'sampleA_rep2_normal_R1.fastq.gz', 'fastq2':'sampleA_rep2_normal_R2.fastq.gz'], ['id':'sampleA', 'repeat':'2', 'type':'tumor', 'fastq1':'sampleA_rep2_tumor_R1.fastq.gz', 'fastq2':'sampleA_rep2_tumor_R2.fastq.gz'], 'chr1']
-[DUMP: combined] [['id':'sampleA', 'repeat':'2'], ['id':'sampleA', 'repeat':'2', 'type':'normal', 'fastq1':'sampleA_rep2_normal_R1.fastq.gz', 'fastq2':'sampleA_rep2_normal_R2.fastq.gz'], ['id':'sampleA', 'repeat':'2', 'type':'tumor', 'fastq1':'sampleA_rep2_tumor_R1.fastq.gz', 'fastq2':'sampleA_rep2_tumor_R2.fastq.gz'], 'chr2']
-[DUMP: combined] [['id':'sampleA', 'repeat':'2'], ['id':'sampleA', 'repeat':'2', 'type':'normal', 'fastq1':'sampleA_rep2_normal_R1.fastq.gz', 'fastq2':'sampleA_rep2_normal_R2.fastq.gz'], ['id':'sampleA', 'repeat':'2', 'type':'tumor', 'fastq1':'sampleA_rep2_tumor_R1.fastq.gz', 'fastq2':'sampleA_rep2_tumor_R2.fastq.gz'], 'chr3']
-[DUMP: combined] [['id':'sampleB', 'repeat':'1'], ['id':'sampleB', 'repeat':'1', 'type':'normal', 'fastq1':'sampleB_rep1_normal_R1.fastq.gz', 'fastq2':'sampleB_rep1_normal_R2.fastq.gz'], ['id':'sampleB', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleB_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleB_rep1_tumor_R2.fastq.gz'], 'chr1']
-[DUMP: combined] [['id':'sampleB', 'repeat':'1'], ['id':'sampleB', 'repeat':'1', 'type':'normal', 'fastq1':'sampleB_rep1_normal_R1.fastq.gz', 'fastq2':'sampleB_rep1_normal_R2.fastq.gz'], ['id':'sampleB', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleB_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleB_rep1_tumor_R2.fastq.gz'], 'chr2']
-[DUMP: combined] [['id':'sampleB', 'repeat':'1'], ['id':'sampleB', 'repeat':'1', 'type':'normal', 'fastq1':'sampleB_rep1_normal_R1.fastq.gz', 'fastq2':'sampleB_rep1_normal_R2.fastq.gz'], ['id':'sampleB', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleB_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleB_rep1_tumor_R2.fastq.gz'], 'chr3']
-[DUMP: combined] [['id':'sampleC', 'repeat':'1'], ['id':'sampleC', 'repeat':'1', 'type':'normal', 'fastq1':'sampleC_rep1_normal_R1.fastq.gz', 'fastq2':'sampleC_rep1_normal_R2.fastq.gz'], ['id':'sampleC', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleC_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleC_rep1_tumor_R2.fastq.gz'], 'chr1']
-[DUMP: combined] [['id':'sampleC', 'repeat':'1'], ['id':'sampleC', 'repeat':'1', 'type':'normal', 'fastq1':'sampleC_rep1_normal_R1.fastq.gz', 'fastq2':'sampleC_rep1_normal_R2.fastq.gz'], ['id':'sampleC', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleC_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleC_rep1_tumor_R2.fastq.gz'], 'chr2']
-[DUMP: combined] [['id':'sampleC', 'repeat':'1'], ['id':'sampleC', 'repeat':'1', 'type':'normal', 'fastq1':'sampleC_rep1_normal_R1.fastq.gz', 'fastq2':'sampleC_rep1_normal_R2.fastq.gz'], ['id':'sampleC', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleC_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleC_rep1_tumor_R2.fastq.gz'], 'chr3']
+[DUMP: combined] [['id':'sampleA', 'repeat':'1'], ['id':'sampleA', 'repeat':'1', 'type':'normal', 'bam':'sampleA_r1_normal.bam'], ['id':'sampleA', 'repeat':'1', 'type':'tumor', 'bam':'sampleA_rep1_tumor.bam'], 'chr1']
+[DUMP: combined] [['id':'sampleA', 'repeat':'1'], ['id':'sampleA', 'repeat':'1', 'type':'normal', 'bam':'sampleA_r1_normal.bam'], ['id':'sampleA', 'repeat':'1', 'type':'tumor', 'bam':'sampleA_rep1_tumor.bam'], 'chr2']
+[DUMP: combined] [['id':'sampleA', 'repeat':'1'], ['id':'sampleA', 'repeat':'1', 'type':'normal', 'bam':'sampleA_r1_normal.bam'], ['id':'sampleA', 'repeat':'1', 'type':'tumor', 'bam':'sampleA_rep1_tumor.bam'], 'chr3']
+[DUMP: combined] [['id':'sampleB', 'repeat':'1'], ['id':'sampleB', 'repeat':'1', 'type':'normal', 'bam':'sampleB_rep1_normal.bam'], ['id':'sampleB', 'repeat':'1', 'type':'tumor', 'bam':'sampleB_rep1_tumor.bam'], 'chr1']
+[DUMP: combined] [['id':'sampleB', 'repeat':'1'], ['id':'sampleB', 'repeat':'1', 'type':'normal', 'bam':'sampleB_rep1_normal.bam'], ['id':'sampleB', 'repeat':'1', 'type':'tumor', 'bam':'sampleB_rep1_tumor.bam'], 'chr2']
+[DUMP: combined] [['id':'sampleB', 'repeat':'1'], ['id':'sampleB', 'repeat':'1', 'type':'normal', 'bam':'sampleB_rep1_normal.bam'], ['id':'sampleB', 'repeat':'1', 'type':'tumor', 'bam':'sampleB_rep1_tumor.bam'], 'chr3']
+[DUMP: combined] [['id':'sampleC', 'repeat':'1'], ['id':'sampleC', 'repeat':'1', 'type':'normal', 'bam':'sampleC_rep1_normal.bam'], ['id':'sampleC', 'repeat':'1', 'type':'tumor', 'bam':'sampleC_rep1_tumor.bam'], 'chr1']
+[DUMP: combined] [['id':'sampleC', 'repeat':'1'], ['id':'sampleC', 'repeat':'1', 'type':'normal', 'bam':'sampleC_rep1_normal.bam'], ['id':'sampleC', 'repeat':'1', 'type':'tumor', 'bam':'sampleC_rep1_tumor.bam'], 'chr2']
+[DUMP: combined] [['id':'sampleC', 'repeat':'1'], ['id':'sampleC', 'repeat':'1', 'type':'normal', 'bam':'sampleC_rep1_normal.bam'], ['id':'sampleC', 'repeat':'1', 'type':'tumor', 'bam':'sampleC_rep1_tumor.bam'], 'chr3']
+[DUMP: combined] [['id':'sampleD', 'repeat':'1'], ['id':'sampleD', 'repeat':'1', 'type':'normal', 'bam':'sampleD_rep1_normal.bam'], ['id':'sampleD', 'repeat':'1', 'type':'tumor', 'bam':'sampleD_rep1_tumor.bam'], 'chr1']
+[DUMP: combined] [['id':'sampleD', 'repeat':'1'], ['id':'sampleD', 'repeat':'1', 'type':'normal', 'bam':'sampleD_rep1_normal.bam'], ['id':'sampleD', 'repeat':'1', 'type':'tumor', 'bam':'sampleD_rep1_tumor.bam'], 'chr2']
+[DUMP: combined] [['id':'sampleD', 'repeat':'1'], ['id':'sampleD', 'repeat':'1', 'type':'normal', 'bam':'sampleD_rep1_normal.bam'], ['id':'sampleD', 'repeat':'1', 'type':'tumor', 'bam':'sampleD_rep1_tumor.bam'], 'chr3']
 ```
 
 Success! We have repeated every sample for every single interval in our 3 interval list. We've effectively tripled the number of items in our channel. It's a little hard to read though, so in the next section we will tidy it up.
@@ -1336,20 +1299,20 @@ nextflow run main.nf -dump-channels combined
 ```console title="View combined samples"
  N E X T F L O W   ~  version 24.10.5
 
-Launching `main.nf` [focused_curie] DSL2 - revision: 9953685fec
+Launching `main.nf` [thirsty_turing] DSL2 - revision: 7e1d6928c6
 
-[DUMP: combined] [['id':'sampleA', 'repeat':'1', 'interval':'chr1'], ['id':'sampleA', 'repeat':'1', 'type':'normal', 'fastq1':'sampleA_rep1_normal_R1.fastq.gz', 'fastq2':'sampleA_rep1_normal_R2.fastq.gz'], ['id':'sampleA', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleA_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleA_rep1_tumor_R2.fastq.gz']]
-[DUMP: combined] [['id':'sampleA', 'repeat':'1', 'interval':'chr2'], ['id':'sampleA', 'repeat':'1', 'type':'normal', 'fastq1':'sampleA_rep1_normal_R1.fastq.gz', 'fastq2':'sampleA_rep1_normal_R2.fastq.gz'], ['id':'sampleA', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleA_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleA_rep1_tumor_R2.fastq.gz']]
-[DUMP: combined] [['id':'sampleA', 'repeat':'1', 'interval':'chr3'], ['id':'sampleA', 'repeat':'1', 'type':'normal', 'fastq1':'sampleA_rep1_normal_R1.fastq.gz', 'fastq2':'sampleA_rep1_normal_R2.fastq.gz'], ['id':'sampleA', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleA_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleA_rep1_tumor_R2.fastq.gz']]
-[DUMP: combined] [['id':'sampleA', 'repeat':'2', 'interval':'chr1'], ['id':'sampleA', 'repeat':'2', 'type':'normal', 'fastq1':'sampleA_rep2_normal_R1.fastq.gz', 'fastq2':'sampleA_rep2_normal_R2.fastq.gz'], ['id':'sampleA', 'repeat':'2', 'type':'tumor', 'fastq1':'sampleA_rep2_tumor_R1.fastq.gz', 'fastq2':'sampleA_rep2_tumor_R2.fastq.gz']]
-[DUMP: combined] [['id':'sampleA', 'repeat':'2', 'interval':'chr2'], ['id':'sampleA', 'repeat':'2', 'type':'normal', 'fastq1':'sampleA_rep2_normal_R1.fastq.gz', 'fastq2':'sampleA_rep2_normal_R2.fastq.gz'], ['id':'sampleA', 'repeat':'2', 'type':'tumor', 'fastq1':'sampleA_rep2_tumor_R1.fastq.gz', 'fastq2':'sampleA_rep2_tumor_R2.fastq.gz']]
-[DUMP: combined] [['id':'sampleA', 'repeat':'2', 'interval':'chr3'], ['id':'sampleA', 'repeat':'2', 'type':'normal', 'fastq1':'sampleA_rep2_normal_R1.fastq.gz', 'fastq2':'sampleA_rep2_normal_R2.fastq.gz'], ['id':'sampleA', 'repeat':'2', 'type':'tumor', 'fastq1':'sampleA_rep2_tumor_R1.fastq.gz', 'fastq2':'sampleA_rep2_tumor_R2.fastq.gz']]
-[DUMP: combined] [['id':'sampleB', 'repeat':'1', 'interval':'chr1'], ['id':'sampleB', 'repeat':'1', 'type':'normal', 'fastq1':'sampleB_rep1_normal_R1.fastq.gz', 'fastq2':'sampleB_rep1_normal_R2.fastq.gz'], ['id':'sampleB', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleB_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleB_rep1_tumor_R2.fastq.gz']]
-[DUMP: combined] [['id':'sampleB', 'repeat':'1', 'interval':'chr2'], ['id':'sampleB', 'repeat':'1', 'type':'normal', 'fastq1':'sampleB_rep1_normal_R1.fastq.gz', 'fastq2':'sampleB_rep1_normal_R2.fastq.gz'], ['id':'sampleB', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleB_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleB_rep1_tumor_R2.fastq.gz']]
-[DUMP: combined] [['id':'sampleB', 'repeat':'1', 'interval':'chr3'], ['id':'sampleB', 'repeat':'1', 'type':'normal', 'fastq1':'sampleB_rep1_normal_R1.fastq.gz', 'fastq2':'sampleB_rep1_normal_R2.fastq.gz'], ['id':'sampleB', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleB_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleB_rep1_tumor_R2.fastq.gz']]
-[DUMP: combined] [['id':'sampleC', 'repeat':'1', 'interval':'chr1'], ['id':'sampleC', 'repeat':'1', 'type':'normal', 'fastq1':'sampleC_rep1_normal_R1.fastq.gz', 'fastq2':'sampleC_rep1_normal_R2.fastq.gz'], ['id':'sampleC', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleC_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleC_rep1_tumor_R2.fastq.gz']]
-[DUMP: combined] [['id':'sampleC', 'repeat':'1', 'interval':'chr2'], ['id':'sampleC', 'repeat':'1', 'type':'normal', 'fastq1':'sampleC_rep1_normal_R1.fastq.gz', 'fastq2':'sampleC_rep1_normal_R2.fastq.gz'], ['id':'sampleC', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleC_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleC_rep1_tumor_R2.fastq.gz']]
-[DUMP: combined] [['id':'sampleC', 'repeat':'1', 'interval':'chr3'], ['id':'sampleC', 'repeat':'1', 'type':'normal', 'fastq1':'sampleC_rep1_normal_R1.fastq.gz', 'fastq2':'sampleC_rep1_normal_R2.fastq.gz'], ['id':'sampleC', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleC_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleC_rep1_tumor_R2.fastq.gz']]
+[DUMP: combined] [['id':'sampleA', 'repeat':'1', 'interval':'chr1'], ['id':'sampleA', 'repeat':'1', 'type':'normal', 'bam':'sampleA_r1_normal.bam'], ['id':'sampleA', 'repeat':'1', 'type':'tumor', 'bam':'sampleA_rep1_tumor.bam']]
+[DUMP: combined] [['id':'sampleA', 'repeat':'1', 'interval':'chr2'], ['id':'sampleA', 'repeat':'1', 'type':'normal', 'bam':'sampleA_r1_normal.bam'], ['id':'sampleA', 'repeat':'1', 'type':'tumor', 'bam':'sampleA_rep1_tumor.bam']]
+[DUMP: combined] [['id':'sampleA', 'repeat':'1', 'interval':'chr3'], ['id':'sampleA', 'repeat':'1', 'type':'normal', 'bam':'sampleA_r1_normal.bam'], ['id':'sampleA', 'repeat':'1', 'type':'tumor', 'bam':'sampleA_rep1_tumor.bam']]
+[DUMP: combined] [['id':'sampleB', 'repeat':'1', 'interval':'chr1'], ['id':'sampleB', 'repeat':'1', 'type':'normal', 'bam':'sampleB_rep1_normal.bam'], ['id':'sampleB', 'repeat':'1', 'type':'tumor', 'bam':'sampleB_rep1_tumor.bam']]
+[DUMP: combined] [['id':'sampleB', 'repeat':'1', 'interval':'chr2'], ['id':'sampleB', 'repeat':'1', 'type':'normal', 'bam':'sampleB_rep1_normal.bam'], ['id':'sampleB', 'repeat':'1', 'type':'tumor', 'bam':'sampleB_rep1_tumor.bam']]
+[DUMP: combined] [['id':'sampleB', 'repeat':'1', 'interval':'chr3'], ['id':'sampleB', 'repeat':'1', 'type':'normal', 'bam':'sampleB_rep1_normal.bam'], ['id':'sampleB', 'repeat':'1', 'type':'tumor', 'bam':'sampleB_rep1_tumor.bam']]
+[DUMP: combined] [['id':'sampleC', 'repeat':'1', 'interval':'chr1'], ['id':'sampleC', 'repeat':'1', 'type':'normal', 'bam':'sampleC_rep1_normal.bam'], ['id':'sampleC', 'repeat':'1', 'type':'tumor', 'bam':'sampleC_rep1_tumor.bam']]
+[DUMP: combined] [['id':'sampleC', 'repeat':'1', 'interval':'chr2'], ['id':'sampleC', 'repeat':'1', 'type':'normal', 'bam':'sampleC_rep1_normal.bam'], ['id':'sampleC', 'repeat':'1', 'type':'tumor', 'bam':'sampleC_rep1_tumor.bam']]
+[DUMP: combined] [['id':'sampleC', 'repeat':'1', 'interval':'chr3'], ['id':'sampleC', 'repeat':'1', 'type':'normal', 'bam':'sampleC_rep1_normal.bam'], ['id':'sampleC', 'repeat':'1', 'type':'tumor', 'bam':'sampleC_rep1_tumor.bam']]
+[DUMP: combined] [['id':'sampleD', 'repeat':'1', 'interval':'chr1'], ['id':'sampleD', 'repeat':'1', 'type':'normal', 'bam':'sampleD_rep1_normal.bam'], ['id':'sampleD', 'repeat':'1', 'type':'tumor', 'bam':'sampleD_rep1_tumor.bam']]
+[DUMP: combined] [['id':'sampleD', 'repeat':'1', 'interval':'chr2'], ['id':'sampleD', 'repeat':'1', 'type':'normal', 'bam':'sampleD_rep1_normal.bam'], ['id':'sampleD', 'repeat':'1', 'type':'tumor', 'bam':'sampleD_rep1_tumor.bam']]
+[DUMP: combined] [['id':'sampleD', 'repeat':'1', 'interval':'chr3'], ['id':'sampleD', 'repeat':'1', 'type':'normal', 'bam':'sampleD_rep1_normal.bam'], ['id':'sampleD', 'repeat':'1', 'type':'tumor', 'bam':'sampleD_rep1_tumor.bam']]
 ```
 
 Using `map` to coerce your data into the correct structure can be tricky, but it's crucial to correctly splitting and grouping effectively.
@@ -1359,6 +1322,8 @@ Using `map` to coerce your data into the correct structure can be tricky, but it
 In this section, you've learned:
 
 - **Spreading samples over intervals**: How to use `combine` to repeat samples over intervals
+
+#TODO: Suggestion, tidy up data here instead of at the end? (i.e. section 5.2)
 
 ### 5. Aggregating samples
 
@@ -1435,20 +1400,20 @@ nextflow run main.nf -dump-channels grouped
 ```console title="View grouped samples"
  N E X T F L O W   ~  version 24.10.5
 
-Launching `main.nf` [fabulous_baekeland] DSL2 - revision: 5d2d687351
+Launching `main.nf` [grave_lagrange] DSL2 - revision: ed7032f1d7
 
-[DUMP: grouped] [['id':'sampleA', 'interval':'chr1'], ['id':'sampleA', 'repeat':'1', 'type':'normal', 'fastq1':'sampleA_rep1_normal_R1.fastq.gz', 'fastq2':'sampleA_rep1_normal_R2.fastq.gz'], ['id':'sampleA', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleA_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleA_rep1_tumor_R2.fastq.gz']]
-[DUMP: grouped] [['id':'sampleA', 'interval':'chr2'], ['id':'sampleA', 'repeat':'1', 'type':'normal', 'fastq1':'sampleA_rep1_normal_R1.fastq.gz', 'fastq2':'sampleA_rep1_normal_R2.fastq.gz'], ['id':'sampleA', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleA_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleA_rep1_tumor_R2.fastq.gz']]
-[DUMP: grouped] [['id':'sampleA', 'interval':'chr3'], ['id':'sampleA', 'repeat':'1', 'type':'normal', 'fastq1':'sampleA_rep1_normal_R1.fastq.gz', 'fastq2':'sampleA_rep1_normal_R2.fastq.gz'], ['id':'sampleA', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleA_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleA_rep1_tumor_R2.fastq.gz']]
-[DUMP: grouped] [['id':'sampleA', 'interval':'chr1'], ['id':'sampleA', 'repeat':'2', 'type':'normal', 'fastq1':'sampleA_rep2_normal_R1.fastq.gz', 'fastq2':'sampleA_rep2_normal_R2.fastq.gz'], ['id':'sampleA', 'repeat':'2', 'type':'tumor', 'fastq1':'sampleA_rep2_tumor_R1.fastq.gz', 'fastq2':'sampleA_rep2_tumor_R2.fastq.gz']]
-[DUMP: grouped] [['id':'sampleA', 'interval':'chr2'], ['id':'sampleA', 'repeat':'2', 'type':'normal', 'fastq1':'sampleA_rep2_normal_R1.fastq.gz', 'fastq2':'sampleA_rep2_normal_R2.fastq.gz'], ['id':'sampleA', 'repeat':'2', 'type':'tumor', 'fastq1':'sampleA_rep2_tumor_R1.fastq.gz', 'fastq2':'sampleA_rep2_tumor_R2.fastq.gz']]
-[DUMP: grouped] [['id':'sampleA', 'interval':'chr3'], ['id':'sampleA', 'repeat':'2', 'type':'normal', 'fastq1':'sampleA_rep2_normal_R1.fastq.gz', 'fastq2':'sampleA_rep2_normal_R2.fastq.gz'], ['id':'sampleA', 'repeat':'2', 'type':'tumor', 'fastq1':'sampleA_rep2_tumor_R1.fastq.gz', 'fastq2':'sampleA_rep2_tumor_R2.fastq.gz']]
-[DUMP: grouped] [['id':'sampleB', 'interval':'chr1'], ['id':'sampleB', 'repeat':'1', 'type':'normal', 'fastq1':'sampleB_rep1_normal_R1.fastq.gz', 'fastq2':'sampleB_rep1_normal_R2.fastq.gz'], ['id':'sampleB', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleB_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleB_rep1_tumor_R2.fastq.gz']]
-[DUMP: grouped] [['id':'sampleB', 'interval':'chr2'], ['id':'sampleB', 'repeat':'1', 'type':'normal', 'fastq1':'sampleB_rep1_normal_R1.fastq.gz', 'fastq2':'sampleB_rep1_normal_R2.fastq.gz'], ['id':'sampleB', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleB_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleB_rep1_tumor_R2.fastq.gz']]
-[DUMP: grouped] [['id':'sampleB', 'interval':'chr3'], ['id':'sampleB', 'repeat':'1', 'type':'normal', 'fastq1':'sampleB_rep1_normal_R1.fastq.gz', 'fastq2':'sampleB_rep1_normal_R2.fastq.gz'], ['id':'sampleB', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleB_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleB_rep1_tumor_R2.fastq.gz']]
-[DUMP: grouped] [['id':'sampleC', 'interval':'chr1'], ['id':'sampleC', 'repeat':'1', 'type':'normal', 'fastq1':'sampleC_rep1_normal_R1.fastq.gz', 'fastq2':'sampleC_rep1_normal_R2.fastq.gz'], ['id':'sampleC', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleC_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleC_rep1_tumor_R2.fastq.gz']]
-[DUMP: grouped] [['id':'sampleC', 'interval':'chr2'], ['id':'sampleC', 'repeat':'1', 'type':'normal', 'fastq1':'sampleC_rep1_normal_R1.fastq.gz', 'fastq2':'sampleC_rep1_normal_R2.fastq.gz'], ['id':'sampleC', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleC_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleC_rep1_tumor_R2.fastq.gz']]
-[DUMP: grouped] [['id':'sampleC', 'interval':'chr3'], ['id':'sampleC', 'repeat':'1', 'type':'normal', 'fastq1':'sampleC_rep1_normal_R1.fastq.gz', 'fastq2':'sampleC_rep1_normal_R2.fastq.gz'], ['id':'sampleC', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleC_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleC_rep1_tumor_R2.fastq.gz']]
+[DUMP: grouped] [['id':'sampleA', 'interval':'chr1'], ['id':'sampleA', 'repeat':'1', 'type':'normal', 'bam':'sampleA_r1_normal.bam'], ['id':'sampleA', 'repeat':'1', 'type':'tumor', 'bam':'sampleA_rep1_tumor.bam']]
+[DUMP: grouped] [['id':'sampleA', 'interval':'chr2'], ['id':'sampleA', 'repeat':'1', 'type':'normal', 'bam':'sampleA_r1_normal.bam'], ['id':'sampleA', 'repeat':'1', 'type':'tumor', 'bam':'sampleA_rep1_tumor.bam']]
+[DUMP: grouped] [['id':'sampleA', 'interval':'chr3'], ['id':'sampleA', 'repeat':'1', 'type':'normal', 'bam':'sampleA_r1_normal.bam'], ['id':'sampleA', 'repeat':'1', 'type':'tumor', 'bam':'sampleA_rep1_tumor.bam']]
+[DUMP: grouped] [['id':'sampleB', 'interval':'chr1'], ['id':'sampleB', 'repeat':'1', 'type':'normal', 'bam':'sampleB_rep1_normal.bam'], ['id':'sampleB', 'repeat':'1', 'type':'tumor', 'bam':'sampleB_rep1_tumor.bam']]
+[DUMP: grouped] [['id':'sampleB', 'interval':'chr2'], ['id':'sampleB', 'repeat':'1', 'type':'normal', 'bam':'sampleB_rep1_normal.bam'], ['id':'sampleB', 'repeat':'1', 'type':'tumor', 'bam':'sampleB_rep1_tumor.bam']]
+[DUMP: grouped] [['id':'sampleB', 'interval':'chr3'], ['id':'sampleB', 'repeat':'1', 'type':'normal', 'bam':'sampleB_rep1_normal.bam'], ['id':'sampleB', 'repeat':'1', 'type':'tumor', 'bam':'sampleB_rep1_tumor.bam']]
+[DUMP: grouped] [['id':'sampleC', 'interval':'chr1'], ['id':'sampleC', 'repeat':'1', 'type':'normal', 'bam':'sampleC_rep1_normal.bam'], ['id':'sampleC', 'repeat':'1', 'type':'tumor', 'bam':'sampleC_rep1_tumor.bam']]
+[DUMP: grouped] [['id':'sampleC', 'interval':'chr2'], ['id':'sampleC', 'repeat':'1', 'type':'normal', 'bam':'sampleC_rep1_normal.bam'], ['id':'sampleC', 'repeat':'1', 'type':'tumor', 'bam':'sampleC_rep1_tumor.bam']]
+[DUMP: grouped] [['id':'sampleC', 'interval':'chr3'], ['id':'sampleC', 'repeat':'1', 'type':'normal', 'bam':'sampleC_rep1_normal.bam'], ['id':'sampleC', 'repeat':'1', 'type':'tumor', 'bam':'sampleC_rep1_tumor.bam']]
+[DUMP: grouped] [['id':'sampleD', 'interval':'chr1'], ['id':'sampleD', 'repeat':'1', 'type':'normal', 'bam':'sampleD_rep1_normal.bam'], ['id':'sampleD', 'repeat':'1', 'type':'tumor', 'bam':'sampleD_rep1_tumor.bam']]
+[DUMP: grouped] [['id':'sampleD', 'interval':'chr2'], ['id':'sampleD', 'repeat':'1', 'type':'normal', 'bam':'sampleD_rep1_normal.bam'], ['id':'sampleD', 'repeat':'1', 'type':'tumor', 'bam':'sampleD_rep1_tumor.bam']]
+[DUMP: grouped] [['id':'sampleD', 'interval':'chr3'], ['id':'sampleD', 'repeat':'1', 'type':'normal', 'bam':'sampleD_rep1_normal.bam'], ['id':'sampleD', 'repeat':'1', 'type':'tumor', 'bam':'sampleD_rep1_tumor.bam']]
 ```
 
 We can see that we have successfully isolated the `id` and `interval` fields, but not grouped the samples yet.
@@ -1461,7 +1426,6 @@ _Before:_
     ch_grouped_samples = ch_combined_samples.map { grouping_key, normal, tumor ->
                             [
                                 grouping_key.subMap('id', 'interval'),
-                                grouping_key,
                                 normal,
                                 tumor
                             ]
@@ -1496,17 +1460,20 @@ nextflow run main.nf -dump-channels grouped
 ```console title="View grouped samples"
  N E X T F L O W   ~  version 24.10.5
 
-Launching `main.nf` [reverent_nightingale] DSL2 - revision: 72c6664d6f
+Launching `main.nf` [agitated_gates] DSL2 - revision: 024454556c
 
-[DUMP: grouped] [['id':'sampleA', 'interval':'chr1'], [['id':'sampleA', 'repeat':'1', 'type':'normal', 'fastq1':'sampleA_rep1_normal_R1.fastq.gz', 'fastq2':'sampleA_rep1_normal_R2.fastq.gz'], ['id':'sampleA', 'repeat':'2', 'type':'normal', 'fastq1':'sampleA_rep2_normal_R1.fastq.gz', 'fastq2':'sampleA_rep2_normal_R2.fastq.gz']], [['id':'sampleA', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleA_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleA_rep1_tumor_R2.fastq.gz'], ['id':'sampleA', 'repeat':'2', 'type':'tumor', 'fastq1':'sampleA_rep2_tumor_R1.fastq.gz', 'fastq2':'sampleA_rep2_tumor_R2.fastq.gz']]]
-[DUMP: grouped] [['id':'sampleA', 'interval':'chr2'], [['id':'sampleA', 'repeat':'1', 'type':'normal', 'fastq1':'sampleA_rep1_normal_R1.fastq.gz', 'fastq2':'sampleA_rep1_normal_R2.fastq.gz'], ['id':'sampleA', 'repeat':'2', 'type':'normal', 'fastq1':'sampleA_rep2_normal_R1.fastq.gz', 'fastq2':'sampleA_rep2_normal_R2.fastq.gz']], [['id':'sampleA', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleA_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleA_rep1_tumor_R2.fastq.gz'], ['id':'sampleA', 'repeat':'2', 'type':'tumor', 'fastq1':'sampleA_rep2_tumor_R1.fastq.gz', 'fastq2':'sampleA_rep2_tumor_R2.fastq.gz']]]
-[DUMP: grouped] [['id':'sampleA', 'interval':'chr3'], [['id':'sampleA', 'repeat':'1', 'type':'normal', 'fastq1':'sampleA_rep1_normal_R1.fastq.gz', 'fastq2':'sampleA_rep1_normal_R2.fastq.gz'], ['id':'sampleA', 'repeat':'2', 'type':'normal', 'fastq1':'sampleA_rep2_normal_R1.fastq.gz', 'fastq2':'sampleA_rep2_normal_R2.fastq.gz']], [['id':'sampleA', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleA_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleA_rep1_tumor_R2.fastq.gz'], ['id':'sampleA', 'repeat':'2', 'type':'tumor', 'fastq1':'sampleA_rep2_tumor_R1.fastq.gz', 'fastq2':'sampleA_rep2_tumor_R2.fastq.gz']]]
-[DUMP: grouped] [['id':'sampleB', 'interval':'chr1'], [['id':'sampleB', 'repeat':'1', 'type':'normal', 'fastq1':'sampleB_rep1_normal_R1.fastq.gz', 'fastq2':'sampleB_rep1_normal_R2.fastq.gz']], [['id':'sampleB', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleB_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleB_rep1_tumor_R2.fastq.gz']]]
-[DUMP: grouped] [['id':'sampleB', 'interval':'chr2'], [['id':'sampleB', 'repeat':'1', 'type':'normal', 'fastq1':'sampleB_rep1_normal_R1.fastq.gz', 'fastq2':'sampleB_rep1_normal_R2.fastq.gz']], [['id':'sampleB', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleB_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleB_rep1_tumor_R2.fastq.gz']]]
-[DUMP: grouped] [['id':'sampleB', 'interval':'chr3'], [['id':'sampleB', 'repeat':'1', 'type':'normal', 'fastq1':'sampleB_rep1_normal_R1.fastq.gz', 'fastq2':'sampleB_rep1_normal_R2.fastq.gz']], [['id':'sampleB', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleB_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleB_rep1_tumor_R2.fastq.gz']]]
-[DUMP: grouped] [['id':'sampleC', 'interval':'chr1'], [['id':'sampleC', 'repeat':'1', 'type':'normal', 'fastq1':'sampleC_rep1_normal_R1.fastq.gz', 'fastq2':'sampleC_rep1_normal_R2.fastq.gz']], [['id':'sampleC', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleC_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleC_rep1_tumor_R2.fastq.gz']]]
-[DUMP: grouped] [['id':'sampleC', 'interval':'chr2'], [['id':'sampleC', 'repeat':'1', 'type':'normal', 'fastq1':'sampleC_rep1_normal_R1.fastq.gz', 'fastq2':'sampleC_rep1_normal_R2.fastq.gz']], [['id':'sampleC', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleC_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleC_rep1_tumor_R2.fastq.gz']]]
-[DUMP: grouped] [['id':'sampleC', 'interval':'chr3'], [['id':'sampleC', 'repeat':'1', 'type':'normal', 'fastq1':'sampleC_rep1_normal_R1.fastq.gz', 'fastq2':'sampleC_rep1_normal_R2.fastq.gz']], [['id':'sampleC', 'repeat':'1', 'type':'tumor', 'fastq1':'sampleC_rep1_tumor_R1.fastq.gz', 'fastq2':'sampleC_rep1_tumor_R2.fastq.gz']]]
+[DUMP: grouped] [['id':'sampleA', 'interval':'chr1'], [['id':'sampleA', 'repeat':'1', 'type':'normal', 'bam':'sampleA_r1_normal.bam']], [['id':'sampleA', 'repeat':'1', 'type':'tumor', 'bam':'sampleA_rep1_tumor.bam']]]
+[DUMP: grouped] [['id':'sampleA', 'interval':'chr2'], [['id':'sampleA', 'repeat':'1', 'type':'normal', 'bam':'sampleA_r1_normal.bam']], [['id':'sampleA', 'repeat':'1', 'type':'tumor', 'bam':'sampleA_rep1_tumor.bam']]]
+[DUMP: grouped] [['id':'sampleA', 'interval':'chr3'], [['id':'sampleA', 'repeat':'1', 'type':'normal', 'bam':'sampleA_r1_normal.bam']], [['id':'sampleA', 'repeat':'1', 'type':'tumor', 'bam':'sampleA_rep1_tumor.bam']]]
+[DUMP: grouped] [['id':'sampleB', 'interval':'chr1'], [['id':'sampleB', 'repeat':'1', 'type':'normal', 'bam':'sampleB_rep1_normal.bam']], [['id':'sampleB', 'repeat':'1', 'type':'tumor', 'bam':'sampleB_rep1_tumor.bam']]]
+[DUMP: grouped] [['id':'sampleB', 'interval':'chr2'], [['id':'sampleB', 'repeat':'1', 'type':'normal', 'bam':'sampleB_rep1_normal.bam']], [['id':'sampleB', 'repeat':'1', 'type':'tumor', 'bam':'sampleB_rep1_tumor.bam']]]
+[DUMP: grouped] [['id':'sampleB', 'interval':'chr3'], [['id':'sampleB', 'repeat':'1', 'type':'normal', 'bam':'sampleB_rep1_normal.bam']], [['id':'sampleB', 'repeat':'1', 'type':'tumor', 'bam':'sampleB_rep1_tumor.bam']]]
+[DUMP: grouped] [['id':'sampleC', 'interval':'chr1'], [['id':'sampleC', 'repeat':'1', 'type':'normal', 'bam':'sampleC_rep1_normal.bam']], [['id':'sampleC', 'repeat':'1', 'type':'tumor', 'bam':'sampleC_rep1_tumor.bam']]]
+[DUMP: grouped] [['id':'sampleC', 'interval':'chr2'], [['id':'sampleC', 'repeat':'1', 'type':'normal', 'bam':'sampleC_rep1_normal.bam']], [['id':'sampleC', 'repeat':'1', 'type':'tumor', 'bam':'sampleC_rep1_tumor.bam']]]
+[DUMP: grouped] [['id':'sampleC', 'interval':'chr3'], [['id':'sampleC', 'repeat':'1', 'type':'normal', 'bam':'sampleC_rep1_normal.bam']], [['id':'sampleC', 'repeat':'1', 'type':'tumor', 'bam':'sampleC_rep1_tumor.bam']]]
+[DUMP: grouped] [['id':'sampleD', 'interval':'chr1'], [['id':'sampleD', 'repeat':'1', 'type':'normal', 'bam':'sampleD_rep1_normal.bam']], [['id':'sampleD', 'repeat':'1', 'type':'tumor', 'bam':'sampleD_rep1_tumor.bam']]]
+[DUMP: grouped] [['id':'sampleD', 'interval':'chr2'], [['id':'sampleD', 'repeat':'1', 'type':'normal', 'bam':'sampleD_rep1_normal.bam']], [['id':'sampleD', 'repeat':'1', 'type':'tumor', 'bam':'sampleD_rep1_tumor.bam']]]
+[DUMP: grouped] [['id':'sampleD', 'interval':'chr3'], [['id':'sampleD', 'repeat':'1', 'type':'normal', 'bam':'sampleD_rep1_normal.bam']], [['id':'sampleD', 'repeat':'1', 'type':'tumor', 'bam':'sampleD_rep1_tumor.bam']]]
 ```
 
 It's a little awkward to read! If you're having trouble visualizing it, you can use the `pretty` flag of `dump` to make it easier to read:
@@ -1521,7 +1488,7 @@ _Before:_
 _After:_
 
 ```groovy title="main.nf" linenums="40"
-                    .dump(tag: 'grouped', pretty: true)
+                        .dump(tag: 'grouped', pretty: true)
 }
 ```
 
@@ -1530,7 +1497,7 @@ Note, we only include the first sample to keep this concise!
 ```console title="View grouped samples"
  N E X T F L O W   ~  version 24.10.5
 
-Launching `main.nf` [dreamy_lichterman] DSL2 - revision: 953a5dd264
+Launching `main.nf` [big_golick] DSL2 - revision: 61ae66acee
 
 [DUMP: grouped] [
     {
@@ -1542,15 +1509,7 @@ Launching `main.nf` [dreamy_lichterman] DSL2 - revision: 953a5dd264
             "id": "sampleA",
             "repeat": "1",
             "type": "normal",
-            "fastq1": "sampleA_rep1_normal_R1.fastq.gz",
-            "fastq2": "sampleA_rep1_normal_R2.fastq.gz"
-        },
-        {
-            "id": "sampleA",
-            "repeat": "2",
-            "type": "normal",
-            "fastq1": "sampleA_rep2_normal_R1.fastq.gz",
-            "fastq2": "sampleA_rep2_normal_R2.fastq.gz"
+            "bam": "sampleA_r1_normal.bam"
         }
     ],
     [
@@ -1558,15 +1517,7 @@ Launching `main.nf` [dreamy_lichterman] DSL2 - revision: 953a5dd264
             "id": "sampleA",
             "repeat": "1",
             "type": "tumor",
-            "fastq1": "sampleA_rep1_tumor_R1.fastq.gz",
-            "fastq2": "sampleA_rep1_tumor_R2.fastq.gz"
-        },
-        {
-            "id": "sampleA",
-            "repeat": "2",
-            "type": "tumor",
-            "fastq1": "sampleA_rep2_tumor_R1.fastq.gz",
-            "fastq2": "sampleA_rep2_tumor_R2.fastq.gz"
+            "bam": "sampleA_rep1_tumor.bam"
         }
     ]
 ]
@@ -1595,8 +1546,7 @@ We have a lot of duplicated data in our workflow. Each item in the grouped sampl
             "id": "sampleC",
             "repeat": "1",
             "type": "normal",
-            "fastq1": "sampleC_rep1_normal_R1.fastq.gz",
-            "fastq2": "sampleC_rep1_normal_R2.fastq.gz"
+            "bam": "sampleC_rep1_normal.bam"
         }
     ],
     [
@@ -1604,8 +1554,7 @@ We have a lot of duplicated data in our workflow. Each item in the grouped sampl
             "id": "sampleC",
             "repeat": "1",
             "type": "tumor",
-            "fastq1": "sampleC_rep1_tumor_R1.fastq.gz",
-            "fastq2": "sampleC_rep1_tumor_R2.fastq.gz"
+            "bam": "sampleC_rep1_tumor.bam"
         }
     ]
 ]
@@ -1613,7 +1562,7 @@ We have a lot of duplicated data in our workflow. Each item in the grouped sampl
 
 We could parse the data after grouping to remove the duplication, but this requires us to handle all of the outputs. Instead, we can parse the data before grouping, which will mean the results are never included in the first place.
 
-In the same `map` operator where we isolate the `id` and `interval` fields, we can also grab the `fastq1` and `fastq2` fields for our sample data and _not_ include the `id` and `interval` fields.
+In the same `map` operator where we isolate the `id` and `interval` fields, we can also grab the `bam` field for our sample data and _not_ include the `id` and `interval` fields.
 
 _Before:_
 
@@ -1637,8 +1586,7 @@ _After:_
     ch_grouped_samples = ch_combined_samples.map { grouping_key, normal, tumor ->
                             [
                                 grouping_key.subMap('id', 'interval'),
-                                normal.subMap("fastq1", "fastq2"),
-                                tumor.subMap("fastq1", "fastq2")
+                                normal.subMap("bam")
                             ]
 
                         }
@@ -1654,7 +1602,7 @@ nextflow run main.nf -dump-channels grouped
 ```console title="View grouped samples"
  N E X T F L O W   ~  version 24.10.5
 
-Launching `main.nf` [modest_stallman] DSL2 - revision: 5be827a6e8
+Launching `main.nf` [drunk_baekeland] DSL2 - revision: b46fad3c6c
 
 [DUMP: grouped] [
     {
@@ -1663,29 +1611,25 @@ Launching `main.nf` [modest_stallman] DSL2 - revision: 5be827a6e8
     },
     [
         {
-            "fastq1": "sampleA_rep1_normal_R1.fastq.gz",
-            "fastq2": "sampleA_rep1_normal_R2.fastq.gz"
-        },
-        {
-            "fastq1": "sampleA_rep2_normal_R1.fastq.gz",
-            "fastq2": "sampleA_rep2_normal_R2.fastq.gz"
+            "bam": "sampleA_r1_normal.bam"
         }
-    ],
+    ]
+]
+[DUMP: grouped] [
+    {
+        "id": "sampleA",
+        "interval": "chr2"
+    },
     [
         {
-            "fastq1": "sampleA_rep1_tumor_R1.fastq.gz",
-            "fastq2": "sampleA_rep1_tumor_R2.fastq.gz"
-        },
-        {
-            "fastq1": "sampleA_rep2_tumor_R1.fastq.gz",
-            "fastq2": "sampleA_rep2_tumor_R2.fastq.gz"
+            "bam": "sampleA_r1_normal.bam"
         }
     ]
 ]
 ...
 ```
 
-Now we have a much cleaner output. We can see that the `id` and `interval` fields are only included once, and the `fastq1` and `fastq2` fields are included in the sample data
+Now we have a much cleaner output. We can see that the `id` and `interval` fields are only included once, and the `bam` field is included in the sample data.
 
 ### Takeaway
 
