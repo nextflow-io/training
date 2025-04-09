@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# uv: typer, rich
 
 import re
 import sys
