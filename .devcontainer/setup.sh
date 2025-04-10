@@ -9,7 +9,7 @@ printf "export PS1='\\[\\e[3;36m\\]\${PWD#/workspaces/} ->\\[\\e[0m\\] '\n" >> $
 export PS1='\[\e[3;36m\]${PWD#/workspaces/} ->\[\e[0m\] '
 
 # Update Nextflow
-nextflow self-update
+#nextflow self-update
 nextflow -version
 
 cat /usr/local/etc/vscode-dev-containers/first-run-notice.txt
