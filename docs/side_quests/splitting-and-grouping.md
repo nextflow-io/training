@@ -1,6 +1,6 @@
 # Splitting and Grouping
 
-Nextflow helps you work with your data in flexible ways. One of the most useful things you can do is split your data into different streams and then group related items back together.
+Nextflow helps you work with your data in flexible ways. One of the most useful things you can do is split your data into different streams and then group related items back together. This capability is particularly valuable in bioinformatics workflows where you often need to process different sample types separately before combining results for comparison or joint analysis.
 
 Think of it like sorting mail: you might first separate letters by their destination, process each pile differently, and then recombine items going to the same person. In Nextflow, we use special operators to do this with our scientific data.
 
@@ -1137,7 +1137,7 @@ It's possible to use a simpler data structure than this, by separating our the s
 
     [`transpose`](https://www.nextflow.io/docs/latest/reference/operator.html#transpose) is the opposite of groupTuple. It unpacks the items in a channel and flattens them. Try and add `transpose` and undo the grouping we performed above!
 
-# 5.2. Reorganise data into more efficient structure
+# 5.2. Reorganise the data
 
 Let's consider the inputs to a typical Nextflow process. Generally, inputs can be in the form of values or files. In this example, we have a set of values for sample information (`id` and `interval`) and a set of files for sequencing data (`normal` and `tumor`). The `input` block of a process might look like this:
 
@@ -1227,61 +1227,82 @@ Note how the channel is now structured as a 3-part tuple:
 
 `groupTuple` is a powerful operator but can generate complex data structures. It's important to understand how the data structure changes as it flows through the pipeline so you can manipulate it as needed. Using a `map` at the end of a pipeline helps refine the output into a structure that fits our processes pipeline.
 
-!!! exercise
+## 5.3. Simplify the data
 
-    Can you manipulate the data earlier in the pipeline to avoid the need for the final `map`?
+One issue we have faced in this pipeline is that we have a moderately complicated data structure which we have had to coerce throughout the pipeline. What if we could simplify it at the start? Then we would only handle the relevant fields in the pipeline and avoid the need for the final `map` operator.
 
-    ??? solution
-        If we parse the data right at the start of our pipeline to _only_ include the `bam` field, we can avoid passing the `type` field through the pipeline which makes our entire pipeline cleaner while retaining the same functionality:
+If we parse the data right at the start of our pipeline to _only_ include the `bam` field, we can avoid passing the `type` field through the pipeline which makes our entire pipeline cleaner while retaining the same functionality:
 
-        _Before:_
+_Before:_
 
-        ```groovy title="main.nf" linenums="1"
-        workflow {
-        getSampleIdAndReplicate = { sample ->
-                                      [
-                                        sample.subMap(['id', 'repeat']),
-                                        sample.subMap(['id', 'bam'])
-                                      ]
-                                  }
-        ```
+```groovy title="main.nf" linenums="1"
+workflow {
+    getSampleIdAndReplicate = { sample ->
+                                  [
+                                    sample.subMap(['id', 'repeat']),
+                                    sample.subMap(['type', 'bam'])
+                                  ]
+                              }
+```
 
-        _After:_
+_After:_
 
-        ```groovy title="main.nf" linenums="1"
-        workflow {
-        getSampleIdAndReplicate = { sample ->
-                                      [
-                                        sample.subMap(['id', 'repeat']),
-                                        sample.bam
-                                      ]
-                                  }
-        ```
+```groovy title="main.nf" linenums="1"
+workflow {
+    getSampleIdAndReplicate = { sample ->
+                                  [
+                                    sample.subMap(['id', 'repeat']),
+                                    sample.bam
+                                  ]
+                              }
+```
 
-        Once we have done this we can remove the `map` operator from the end of the pipeline:
+A reminder, this will select only the BAM files once we have separated the channels into normal and tumor. We are losing the `type` field, but we know which samples are normal and tumor because they have been filtered and the channel should only contain one type per sample. Once we have done this we can remove the `map` operator from the end of the pipeline:
 
-        _Before:_
+_Before:_
 
-        ```groovy title="main.nf" linenums="38"
-        .groupTuple()
-        .map { sample_info, normal, tumor ->
-            [
-                sample_info,
-                normal.collect { bam_data -> bam_data.bam },
-                tumor.collect { bam_data -> bam_data.bam }
-            ]
-        }
-        .view()
-        ```
+```groovy title="main.nf" linenums="38"
+                        .groupTuple()
+                        .map { sample_info, normal, tumor ->
+                            [
+                                sample_info,
+                                normal.collect { bam_data -> bam_data.bam },
+                                tumor.collect { bam_data -> bam_data.bam }
+                            ]
+                        }
+                        .view()
+}
+```
 
-        _After:_
+_After:_
 
-        ```groovy title="main.nf" linenums="38"
-        .groupTuple()
-        .view()
-        ```
+```groovy title="main.nf" linenums="38"
+                        .groupTuple()
+                        .view()
+}
+```
 
-        Sometimes parsing data earlier in the pipeline is the right choice to avoid complicated code. In this tutorial, we wanted to take you step-by-step which meant we had to do things the long way.
+Sometimes parsing data earlier in the pipeline is the right choice to avoid complicated code.
+
+```bash title="View flattened samples"
+nextflow run main.nf
+```
+
+```console title="View flattened samples"
+ N E X T F L O W   ~  version 24.10.5
+
+Launching `main.nf` [reverent_angela] DSL2 - revision: 656a31b305
+
+[[id:sampleA, interval:chr1], [sampleA_rep1_normal.bam, sampleB_rep1_normal.bam], [sampleA_rep1_tumor.bam, sampleB_rep1_tumor.bam]]
+[[id:sampleA, interval:chr2], [sampleA_rep1_normal.bam, sampleB_rep1_normal.bam], [sampleA_rep1_tumor.bam, sampleB_rep1_tumor.bam]]
+[[id:sampleA, interval:chr3], [sampleA_rep1_normal.bam, sampleB_rep1_normal.bam], [sampleA_rep1_tumor.bam, sampleB_rep1_tumor.bam]]
+[[id:sampleB, interval:chr1], [sampleC_rep1_normal.bam], [sampleC_rep1_tumor.bam]]
+[[id:sampleB, interval:chr2], [sampleC_rep1_normal.bam], [sampleC_rep1_tumor.bam]]
+[[id:sampleB, interval:chr3], [sampleC_rep1_normal.bam], [sampleC_rep1_tumor.bam]]
+[[id:sampleC, interval:chr1], [sampleD_rep1_normal.bam], [sampleD_rep1_tumor.bam]]
+[[id:sampleC, interval:chr2], [sampleD_rep1_normal.bam], [sampleD_rep1_tumor.bam]]
+[[id:sampleC, interval:chr3], [sampleD_rep1_normal.bam], [sampleD_rep1_tumor.bam]]
+```
 
 ### Takeaway
 
