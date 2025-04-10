@@ -78,7 +78,8 @@ workflow {
 ```
 
 !!! note
-Throughout this tutorial, we'll use the `ch_` prefix for all channel variables to clearly indicate they are Nextflow channels.
+
+    Throughout this tutorial, we'll use the `ch_` prefix for all channel variables to clearly indicate they are Nextflow channels.
 
 We can use the [`splitCsv` operator](https://www.nextflow.io/docs/latest/operator.html#splitcsv) to split the samplesheet into a channel of maps, where each map represents a row from the CSV file.
 
@@ -486,7 +487,8 @@ It's a little hard to tell because it's so wide, but you should be able to see t
 - `tumor_sample`: The tumor sample including type, replicate and path to bam file
 
 !!! warning
-The `join` operator will discard any un-matched tuples. In this example, we made sure all samples were matched for tumor and normal but if this is not true you must use the parameter `remainder: true` to keep the unmatched tuples. Check the [documentation](https://www.nextflow.io/docs/latest/operator.html#join) for more details.
+
+    The `join` operator will discard any un-matched tuples. In this example, we made sure all samples were matched for tumor and normal but if this is not true you must use the parameter `remainder: true` to keep the unmatched tuples. Check the [documentation](https://www.nextflow.io/docs/latest/operator.html#join) for more details.
 
 ### Takeaway
 
@@ -699,7 +701,8 @@ _After:_
 ```
 
 !!! note
-The `map` operator has switched from using `{ }` to using `( )` to pass the closure as an argument. This is because the `map` operator expects a closure as an argument and `{ }` is used to define an anonymous closure. When calling a named closure, use the `( )` syntax.
+
+    The `map` operator has switched from using `{ }` to using `( )` to pass the closure as an argument. This is because the `map` operator expects a closure as an argument and `{ }` is used to define an anonymous closure. When calling a named closure, use the `( )` syntax.
 
 ```bash title="View normal and tumor samples"
 nextflow run main.nf
@@ -1068,7 +1071,8 @@ Launching `main.nf` [loving_escher] DSL2 - revision: 3adccba898
 We can see that we have successfully isolated the `id` and `interval` fields, but not grouped the samples yet.
 
 !!! note
-We are discarding the `replicate` field here. This is because we don't need it for further downstream processing. After completing this tutorial, see if you can include it without affecting the later grouping!
+
+    We are discarding the `replicate` field here. This is because we don't need it for further downstream processing. After completing this tutorial, see if you can include it without affecting the later grouping!
 
 Let's now group the samples by this new grouping element, using the [`groupTuple` operator](https://www.nextflow.io/docs/latest/operator.html#grouptuple).
 
@@ -1130,7 +1134,8 @@ Note our data has changed structure. What was previously a list of tuples is now
 It's possible to use a simpler data structure than this, by separating our the sample information from the sequencing data. We generally refer to this as a `metamap`, but this will be covered in a later side quest. For now, you should just understand that we can group up samples using the `groupTuple` operator and that the data structure will change as a result.
 
 !!! note
-[`transpose`](https://www.nextflow.io/docs/latest/reference/operator.html#transpose) is the opposite of groupTuple. It unpacks the items in a channel and flattens them. Try and add `transpose` and undo the grouping we performed above!
+
+    [`transpose`](https://www.nextflow.io/docs/latest/reference/operator.html#transpose) is the opposite of groupTuple. It unpacks the items in a channel and flattens them. Try and add `transpose` and undo the grouping we performed above!
 
 # 5.2. Reorganise data into more efficient structure
 
