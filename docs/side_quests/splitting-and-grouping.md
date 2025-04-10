@@ -718,6 +718,95 @@ Launching `main.nf` [angry_meninsky] DSL2 - revision: 2edc226b1d
 
 Using a named closure in the map allows us to reuse the same map in multiple places which reduces our risk of introducing errors. It also makes the code more readable and easier to maintain.
 
+### 3.5. Reduce duplication of data
+
+We have a lot of duplicated data in our workflow. Each item in the joined samples repeats the `id` and `repeat` fields. Since this information is already available in the grouping key, we can avoid this redundancy. As a reminder, our current data structure looks like this:
+
+```groovy
+[
+  [
+    "id": "sampleC",
+    "repeat": "1",
+  ],
+  [
+    "id": "sampleC",
+    "repeat": "1",
+    "type": "normal",
+    "bam": "sampleC_rep1_normal.bam"
+  ],
+  [
+    "id": "sampleC",
+    "repeat": "1",
+    "type": "tumor",
+    "bam": "sampleC_rep1_tumor.bam"
+  ]
+]
+```
+
+Since the `id` and `repeat` fields are available in the grouping key, let's remove them from the sample data to avoid duplication. We can do this by using the `subMap` method to create a new map with only the `type` and `bam` fields. This approach allows us to maintain all necessary information while eliminating redundancy in our data structure.
+
+_Before:_
+
+```groovy title="main.nf" linenums="15"
+workflow {
+    getSampleIdAndReplicate = { sample -> [ sample.subMap(['id', 'repeat']), sample ] }
+    ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
+                        .splitCsv(header: true)
+    ch_normal_samples = ch_samplesheet
+                        .filter { sample -> sample.type == 'normal' }
+                        .map ( getSampleIdAndReplicate )
+    ch_tumor_samples = ch_samplesheet
+                        .filter { sample -> sample.type == "tumor" }
+                        .map ( getSampleIdAndReplicate )
+    ch_joined_samples = ch_normal_samples
+                        .join(ch_tumor_samples)
+    ch_joined_samples.view()
+}
+```
+
+_After:_
+
+```groovy title="main.nf" linenums="15"
+workflow {
+    getSampleIdAndReplicate = { sample ->
+                                  [
+                                    sample.subMap(['id', 'repeat']),
+                                    sample.subMap(['type', 'bam'])
+                                  ]
+                              }
+    ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
+                        .splitCsv(header: true)
+    ch_normal_samples = ch_samplesheet
+                        .filter { sample -> sample.type == 'normal' }
+                        .map ( getSampleIdAndReplicate )
+    ch_tumor_samples = ch_samplesheet
+                        .filter { sample -> sample.type == "tumor" }
+                        .map ( getSampleIdAndReplicate )
+    ch_joined_samples = ch_normal_samples
+                        .join(ch_tumor_samples)
+    ch_joined_samples.view()
+}
+```
+
+Now, when the closure returns the tuple, the first element is the `id` and `repeat` fields and the second element is the `type` and `bam` fields. We have effectively removed the `id` and `repeat` fields from the sample data and uniquely store them in the grouping key. This approach eliminates redundancy while maintaining all necessary information.
+
+```bash title="View deduplicated data"
+nextflow run main.nf
+```
+
+```console title="View deduplicated data"
+ N E X T F L O W   ~  version 24.10.5
+
+Launching `main.nf` [trusting_pike] DSL2 - revision: 09d3c7a81b
+
+[[id:sampleA, repeat:1], [type:normal, bam:sampleA_rep1_normal.bam], [type:tumor, bam:sampleA_rep1_tumor.bam]]
+[[id:sampleA, repeat:2], [type:normal, bam:sampleB_rep1_normal.bam], [type:tumor, bam:sampleB_rep1_tumor.bam]]
+[[id:sampleB, repeat:1], [type:normal, bam:sampleC_rep1_normal.bam], [type:tumor, bam:sampleC_rep1_tumor.bam]]
+[[id:sampleC, repeat:1], [type:normal, bam:sampleD_rep1_normal.bam], [type:tumor, bam:sampleD_rep1_tumor.bam]]
+```
+
+We can see we only state the `id` and `repeat` fields once in the grouping key and we have the `type` and `bam` fields in the sample data. We haven't lost any information but we managed to make our channel contents more succinct.
+
 ### Takeaway
 
 In this section, you've learned:
@@ -726,8 +815,8 @@ In this section, you've learned:
 - **Joining Tuples**: How to use `join` to combine tuples based on the first field
 - **Creating Joining Keys**: How to use `subMap` to create a new joining key
 - **Named Closures**: How to use a named closure in map
-
-You now have a workflow that can split a samplesheet, filter the normal and tumor samples, join them together by sample ID and replicate number, then print the results.
+- **Deduplicating Data**: How to remove duplicate data from the channel
+  You now have a workflow that can split a samplesheet, filter the normal and tumor samples, join them together by sample ID and replicate number, then print the results.
 
 This is a common pattern in bioinformatics workflows where you need to match up samples after processing independently, so it is a useful skill. Next, we will look at repeating a sample multiple times.
 
@@ -783,20 +872,20 @@ nextflow run main.nf
 ```console title="View combined samples"
  N E X T F L O W   ~  version 24.10.5
 
-Launching `main.nf` [nasty_albattani] DSL2 - revision: 040e367b95
+Launching `main.nf` [soggy_fourier] DSL2 - revision: fa8f5edb22
 
-[[id:sampleA, repeat:1], [id:sampleA, repeat:1, type:normal, bam:sampleA_rep1_normal.bam], [id:sampleA, repeat:1, type:tumor, bam:sampleA_rep1_tumor.bam], chr1]
-[[id:sampleA, repeat:1], [id:sampleA, repeat:1, type:normal, bam:sampleA_rep1_normal.bam], [id:sampleA, repeat:1, type:tumor, bam:sampleA_rep1_tumor.bam], chr2]
-[[id:sampleA, repeat:1], [id:sampleA, repeat:1, type:normal, bam:sampleA_rep1_normal.bam], [id:sampleA, repeat:1, type:tumor, bam:sampleA_rep1_tumor.bam], chr3]
-[[id:sampleA, repeat:2], [id:sampleA, repeat:2, type:normal, bam:sampleB_rep1_normal.bam], [id:sampleA, repeat:2, type:tumor, bam:sampleB_rep1_tumor.bam], chr1]
-[[id:sampleA, repeat:2], [id:sampleA, repeat:2, type:normal, bam:sampleB_rep1_normal.bam], [id:sampleA, repeat:2, type:tumor, bam:sampleB_rep1_tumor.bam], chr2]
-[[id:sampleA, repeat:2], [id:sampleA, repeat:2, type:normal, bam:sampleB_rep1_normal.bam], [id:sampleA, repeat:2, type:tumor, bam:sampleB_rep1_tumor.bam], chr3]
-[[id:sampleB, repeat:1], [id:sampleB, repeat:1, type:normal, bam:sampleC_rep1_normal.bam], [id:sampleB, repeat:1, type:tumor, bam:sampleC_rep1_tumor.bam], chr1]
-[[id:sampleB, repeat:1], [id:sampleB, repeat:1, type:normal, bam:sampleC_rep1_normal.bam], [id:sampleB, repeat:1, type:tumor, bam:sampleC_rep1_tumor.bam], chr2]
-[[id:sampleB, repeat:1], [id:sampleB, repeat:1, type:normal, bam:sampleC_rep1_normal.bam], [id:sampleB, repeat:1, type:tumor, bam:sampleC_rep1_tumor.bam], chr3]
-[[id:sampleC, repeat:1], [id:sampleC, repeat:1, type:normal, bam:sampleD_rep1_normal.bam], [id:sampleC, repeat:1, type:tumor, bam:sampleD_rep1_tumor.bam], chr1]
-[[id:sampleC, repeat:1], [id:sampleC, repeat:1, type:normal, bam:sampleD_rep1_normal.bam], [id:sampleC, repeat:1, type:tumor, bam:sampleD_rep1_tumor.bam], chr2]
-[[id:sampleC, repeat:1], [id:sampleC, repeat:1, type:normal, bam:sampleD_rep1_normal.bam], [id:sampleC, repeat:1, type:tumor, bam:sampleD_rep1_tumor.bam], chr3]
+[[id:sampleA, repeat:1], [type:normal, bam:sampleA_rep1_normal.bam], [type:tumor, bam:sampleA_rep1_tumor.bam], chr1]
+[[id:sampleA, repeat:1], [type:normal, bam:sampleA_rep1_normal.bam], [type:tumor, bam:sampleA_rep1_tumor.bam], chr2]
+[[id:sampleA, repeat:1], [type:normal, bam:sampleA_rep1_normal.bam], [type:tumor, bam:sampleA_rep1_tumor.bam], chr3]
+[[id:sampleA, repeat:2], [type:normal, bam:sampleB_rep1_normal.bam], [type:tumor, bam:sampleB_rep1_tumor.bam], chr1]
+[[id:sampleA, repeat:2], [type:normal, bam:sampleB_rep1_normal.bam], [type:tumor, bam:sampleB_rep1_tumor.bam], chr2]
+[[id:sampleA, repeat:2], [type:normal, bam:sampleB_rep1_normal.bam], [type:tumor, bam:sampleB_rep1_tumor.bam], chr3]
+[[id:sampleB, repeat:1], [type:normal, bam:sampleC_rep1_normal.bam], [type:tumor, bam:sampleC_rep1_tumor.bam], chr1]
+[[id:sampleB, repeat:1], [type:normal, bam:sampleC_rep1_normal.bam], [type:tumor, bam:sampleC_rep1_tumor.bam], chr2]
+[[id:sampleB, repeat:1], [type:normal, bam:sampleC_rep1_normal.bam], [type:tumor, bam:sampleC_rep1_tumor.bam], chr3]
+[[id:sampleC, repeat:1], [type:normal, bam:sampleD_rep1_normal.bam], [type:tumor, bam:sampleD_rep1_tumor.bam], chr1]
+[[id:sampleC, repeat:1], [type:normal, bam:sampleD_rep1_normal.bam], [type:tumor, bam:sampleD_rep1_tumor.bam], chr2]
+[[id:sampleC, repeat:1], [type:normal, bam:sampleD_rep1_normal.bam], [type:tumor, bam:sampleD_rep1_tumor.bam], chr3]
 ```
 
 Success! We have repeated every sample for every single interval in our 3 interval list. We've effectively tripled the number of items in our channel. It's a little hard to read though, so in the next section we will tidy it up.
@@ -862,20 +951,20 @@ nextflow run main.nf
 ```console title="View combined samples"
  N E X T F L O W   ~  version 24.10.5
 
-Launching `main.nf` [sick_moriondo] DSL2 - revision: 583df36829
+Launching `main.nf` [sad_hawking] DSL2 - revision: 1f6f6250cd
 
-[[id:sampleA, repeat:1, interval:chr1], [id:sampleA, repeat:1, type:normal, bam:sampleA_rep1_normal.bam], [id:sampleA, repeat:1, type:tumor, bam:sampleA_rep1_tumor.bam]]
-[[id:sampleA, repeat:1, interval:chr2], [id:sampleA, repeat:1, type:normal, bam:sampleA_rep1_normal.bam], [id:sampleA, repeat:1, type:tumor, bam:sampleA_rep1_tumor.bam]]
-[[id:sampleA, repeat:1, interval:chr3], [id:sampleA, repeat:1, type:normal, bam:sampleA_rep1_normal.bam], [id:sampleA, repeat:1, type:tumor, bam:sampleA_rep1_tumor.bam]]
-[[id:sampleA, repeat:2, interval:chr1], [id:sampleA, repeat:2, type:normal, bam:sampleB_rep1_normal.bam], [id:sampleA, repeat:2, type:tumor, bam:sampleB_rep1_tumor.bam]]
-[[id:sampleA, repeat:2, interval:chr2], [id:sampleA, repeat:2, type:normal, bam:sampleB_rep1_normal.bam], [id:sampleA, repeat:2, type:tumor, bam:sampleB_rep1_tumor.bam]]
-[[id:sampleA, repeat:2, interval:chr3], [id:sampleA, repeat:2, type:normal, bam:sampleB_rep1_normal.bam], [id:sampleA, repeat:2, type:tumor, bam:sampleB_rep1_tumor.bam]]
-[[id:sampleB, repeat:1, interval:chr1], [id:sampleB, repeat:1, type:normal, bam:sampleC_rep1_normal.bam], [id:sampleB, repeat:1, type:tumor, bam:sampleC_rep1_tumor.bam]]
-[[id:sampleB, repeat:1, interval:chr2], [id:sampleB, repeat:1, type:normal, bam:sampleC_rep1_normal.bam], [id:sampleB, repeat:1, type:tumor, bam:sampleC_rep1_tumor.bam]]
-[[id:sampleB, repeat:1, interval:chr3], [id:sampleB, repeat:1, type:normal, bam:sampleC_rep1_normal.bam], [id:sampleB, repeat:1, type:tumor, bam:sampleC_rep1_tumor.bam]]
-[[id:sampleC, repeat:1, interval:chr1], [id:sampleC, repeat:1, type:normal, bam:sampleD_rep1_normal.bam], [id:sampleC, repeat:1, type:tumor, bam:sampleD_rep1_tumor.bam]]
-[[id:sampleC, repeat:1, interval:chr2], [id:sampleC, repeat:1, type:normal, bam:sampleD_rep1_normal.bam], [id:sampleC, repeat:1, type:tumor, bam:sampleD_rep1_tumor.bam]]
-[[id:sampleC, repeat:1, interval:chr3], [id:sampleC, repeat:1, type:normal, bam:sampleD_rep1_normal.bam], [id:sampleC, repeat:1, type:tumor, bam:sampleD_rep1_tumor.bam]]
+[[id:sampleA, repeat:1, interval:chr1], [type:normal, bam:sampleA_rep1_normal.bam], [type:tumor, bam:sampleA_rep1_tumor.bam]]
+[[id:sampleA, repeat:1, interval:chr2], [type:normal, bam:sampleA_rep1_normal.bam], [type:tumor, bam:sampleA_rep1_tumor.bam]]
+[[id:sampleA, repeat:1, interval:chr3], [type:normal, bam:sampleA_rep1_normal.bam], [type:tumor, bam:sampleA_rep1_tumor.bam]]
+[[id:sampleA, repeat:2, interval:chr1], [type:normal, bam:sampleB_rep1_normal.bam], [type:tumor, bam:sampleB_rep1_tumor.bam]]
+[[id:sampleA, repeat:2, interval:chr2], [type:normal, bam:sampleB_rep1_normal.bam], [type:tumor, bam:sampleB_rep1_tumor.bam]]
+[[id:sampleA, repeat:2, interval:chr3], [type:normal, bam:sampleB_rep1_normal.bam], [type:tumor, bam:sampleB_rep1_tumor.bam]]
+[[id:sampleB, repeat:1, interval:chr1], [type:normal, bam:sampleC_rep1_normal.bam], [type:tumor, bam:sampleC_rep1_tumor.bam]]
+[[id:sampleB, repeat:1, interval:chr2], [type:normal, bam:sampleC_rep1_normal.bam], [type:tumor, bam:sampleC_rep1_tumor.bam]]
+[[id:sampleB, repeat:1, interval:chr3], [type:normal, bam:sampleC_rep1_normal.bam], [type:tumor, bam:sampleC_rep1_tumor.bam]]
+[[id:sampleC, repeat:1, interval:chr1], [type:normal, bam:sampleD_rep1_normal.bam], [type:tumor, bam:sampleD_rep1_tumor.bam]]
+[[id:sampleC, repeat:1, interval:chr2], [type:normal, bam:sampleD_rep1_normal.bam], [type:tumor, bam:sampleD_rep1_tumor.bam]]
+[[id:sampleC, repeat:1, interval:chr3], [type:normal, bam:sampleD_rep1_normal.bam], [type:tumor, bam:sampleD_rep1_tumor.bam]]
 ```
 
 Using `map` to coerce your data into the correct structure can be tricky, but it's crucial to correctly splitting and grouping effectively.
@@ -885,8 +974,6 @@ Using `map` to coerce your data into the correct structure can be tricky, but it
 In this section, you've learned:
 
 - **Spreading samples over intervals**: How to use `combine` to repeat samples over intervals
-
-#TODO: Suggestion, tidy up data here instead of at the end? (i.e. section 5.2)
 
 ### 5. Aggregating samples
 
@@ -962,23 +1049,26 @@ nextflow run main.nf
 ```console title="View grouped samples"
  N E X T F L O W   ~  version 24.10.5
 
-Launching `main.nf` [suspicious_cantor] DSL2 - revision: bb6b28c9d4
+Launching `main.nf` [loving_escher] DSL2 - revision: 3adccba898
 
-[[id:sampleA, interval:chr1], [id:sampleA, repeat:1, type:normal, bam:sampleA_rep1_normal.bam], [id:sampleA, repeat:1, type:tumor, bam:sampleA_rep1_tumor.bam]]
-[[id:sampleA, interval:chr2], [id:sampleA, repeat:1, type:normal, bam:sampleA_rep1_normal.bam], [id:sampleA, repeat:1, type:tumor, bam:sampleA_rep1_tumor.bam]]
-[[id:sampleA, interval:chr3], [id:sampleA, repeat:1, type:normal, bam:sampleA_rep1_normal.bam], [id:sampleA, repeat:1, type:tumor, bam:sampleA_rep1_tumor.bam]]
-[[id:sampleA, interval:chr1], [id:sampleA, repeat:2, type:normal, bam:sampleB_rep1_normal.bam], [id:sampleA, repeat:2, type:tumor, bam:sampleB_rep1_tumor.bam]]
-[[id:sampleA, interval:chr2], [id:sampleA, repeat:2, type:normal, bam:sampleB_rep1_normal.bam], [id:sampleA, repeat:2, type:tumor, bam:sampleB_rep1_tumor.bam]]
-[[id:sampleA, interval:chr3], [id:sampleA, repeat:2, type:normal, bam:sampleB_rep1_normal.bam], [id:sampleA, repeat:2, type:tumor, bam:sampleB_rep1_tumor.bam]]
-[[id:sampleB, interval:chr1], [id:sampleB, repeat:1, type:normal, bam:sampleC_rep1_normal.bam], [id:sampleB, repeat:1, type:tumor, bam:sampleC_rep1_tumor.bam]]
-[[id:sampleB, interval:chr2], [id:sampleB, repeat:1, type:normal, bam:sampleC_rep1_normal.bam], [id:sampleB, repeat:1, type:tumor, bam:sampleC_rep1_tumor.bam]]
-[[id:sampleB, interval:chr3], [id:sampleB, repeat:1, type:normal, bam:sampleC_rep1_normal.bam], [id:sampleB, repeat:1, type:tumor, bam:sampleC_rep1_tumor.bam]]
-[[id:sampleC, interval:chr1], [id:sampleC, repeat:1, type:normal, bam:sampleD_rep1_normal.bam], [id:sampleC, repeat:1, type:tumor, bam:sampleD_rep1_tumor.bam]]
-[[id:sampleC, interval:chr2], [id:sampleC, repeat:1, type:normal, bam:sampleD_rep1_normal.bam], [id:sampleC, repeat:1, type:tumor, bam:sampleD_rep1_tumor.bam]]
-[[id:sampleC, interval:chr3], [id:sampleC, repeat:1, type:normal, bam:sampleD_rep1_normal.bam], [id:sampleC, repeat:1, type:tumor, bam:sampleD_rep1_tumor.bam]]
+[[id:sampleA, interval:chr1], [type:normal, bam:sampleA_rep1_normal.bam], [type:tumor, bam:sampleA_rep1_tumor.bam]]
+[[id:sampleA, interval:chr2], [type:normal, bam:sampleA_rep1_normal.bam], [type:tumor, bam:sampleA_rep1_tumor.bam]]
+[[id:sampleA, interval:chr3], [type:normal, bam:sampleA_rep1_normal.bam], [type:tumor, bam:sampleA_rep1_tumor.bam]]
+[[id:sampleA, interval:chr1], [type:normal, bam:sampleB_rep1_normal.bam], [type:tumor, bam:sampleB_rep1_tumor.bam]]
+[[id:sampleA, interval:chr2], [type:normal, bam:sampleB_rep1_normal.bam], [type:tumor, bam:sampleB_rep1_tumor.bam]]
+[[id:sampleA, interval:chr3], [type:normal, bam:sampleB_rep1_normal.bam], [type:tumor, bam:sampleB_rep1_tumor.bam]]
+[[id:sampleB, interval:chr1], [type:normal, bam:sampleC_rep1_normal.bam], [type:tumor, bam:sampleC_rep1_tumor.bam]]
+[[id:sampleB, interval:chr2], [type:normal, bam:sampleC_rep1_normal.bam], [type:tumor, bam:sampleC_rep1_tumor.bam]]
+[[id:sampleB, interval:chr3], [type:normal, bam:sampleC_rep1_normal.bam], [type:tumor, bam:sampleC_rep1_tumor.bam]]
+[[id:sampleC, interval:chr1], [type:normal, bam:sampleD_rep1_normal.bam], [type:tumor, bam:sampleD_rep1_tumor.bam]]
+[[id:sampleC, interval:chr2], [type:normal, bam:sampleD_rep1_normal.bam], [type:tumor, bam:sampleD_rep1_tumor.bam]]
+[[id:sampleC, interval:chr3], [type:normal, bam:sampleD_rep1_normal.bam], [type:tumor, bam:sampleD_rep1_tumor.bam]]
 ```
 
 We can see that we have successfully isolated the `id` and `interval` fields, but not grouped the samples yet.
+
+!!! note
+We are discarding the `replicate` field here. This is because we don't need it for further downstream processing. After completing this tutorial, see if you can include it without affecting the later grouping!
 
 Let's now group the samples by this new grouping element, using the [`groupTuple` operator](https://www.nextflow.io/docs/latest/operator.html#grouptuple).
 
@@ -1022,17 +1112,17 @@ nextflow run main.nf
 ```console title="View grouped samples"
  N E X T F L O W   ~  version 24.10.5
 
-Launching `main.nf` [desperate_fourier] DSL2 - revision: 3b18d673f3
+Launching `main.nf` [festering_almeida] DSL2 - revision: 78988949e3
 
-[[id:sampleA, interval:chr1], [[id:sampleA, repeat:1, type:normal, bam:sampleA_rep1_normal.bam], [id:sampleA, repeat:2, type:normal, bam:sampleB_rep1_normal.bam]], [[id:sampleA, repeat:1, type:tumor, bam:sampleA_rep1_tumor.bam], [id:sampleA, repeat:2, type:tumor, bam:sampleB_rep1_tumor.bam]]]
-[[id:sampleA, interval:chr2], [[id:sampleA, repeat:1, type:normal, bam:sampleA_rep1_normal.bam], [id:sampleA, repeat:2, type:normal, bam:sampleB_rep1_normal.bam]], [[id:sampleA, repeat:1, type:tumor, bam:sampleA_rep1_tumor.bam], [id:sampleA, repeat:2, type:tumor, bam:sampleB_rep1_tumor.bam]]]
-[[id:sampleA, interval:chr3], [[id:sampleA, repeat:1, type:normal, bam:sampleA_rep1_normal.bam], [id:sampleA, repeat:2, type:normal, bam:sampleB_rep1_normal.bam]], [[id:sampleA, repeat:1, type:tumor, bam:sampleA_rep1_tumor.bam], [id:sampleA, repeat:2, type:tumor, bam:sampleB_rep1_tumor.bam]]]
-[[id:sampleB, interval:chr1], [[id:sampleB, repeat:1, type:normal, bam:sampleC_rep1_normal.bam]], [[id:sampleB, repeat:1, type:tumor, bam:sampleC_rep1_tumor.bam]]]
-[[id:sampleB, interval:chr2], [[id:sampleB, repeat:1, type:normal, bam:sampleC_rep1_normal.bam]], [[id:sampleB, repeat:1, type:tumor, bam:sampleC_rep1_tumor.bam]]]
-[[id:sampleB, interval:chr3], [[id:sampleB, repeat:1, type:normal, bam:sampleC_rep1_normal.bam]], [[id:sampleB, repeat:1, type:tumor, bam:sampleC_rep1_tumor.bam]]]
-[[id:sampleC, interval:chr1], [[id:sampleC, repeat:1, type:normal, bam:sampleD_rep1_normal.bam]], [[id:sampleC, repeat:1, type:tumor, bam:sampleD_rep1_tumor.bam]]]
-[[id:sampleC, interval:chr2], [[id:sampleC, repeat:1, type:normal, bam:sampleD_rep1_normal.bam]], [[id:sampleC, repeat:1, type:tumor, bam:sampleD_rep1_tumor.bam]]]
-[[id:sampleC, interval:chr3], [[id:sampleC, repeat:1, type:normal, bam:sampleD_rep1_normal.bam]], [[id:sampleC, repeat:1, type:tumor, bam:sampleD_rep1_tumor.bam]]]
+[[id:sampleA, interval:chr1], [[type:normal, bam:sampleA_rep1_normal.bam], [type:normal, bam:sampleB_rep1_normal.bam]], [[type:tumor, bam:sampleA_rep1_tumor.bam], [type:tumor, bam:sampleB_rep1_tumor.bam]]]
+[[id:sampleA, interval:chr2], [[type:normal, bam:sampleA_rep1_normal.bam], [type:normal, bam:sampleB_rep1_normal.bam]], [[type:tumor, bam:sampleA_rep1_tumor.bam], [type:tumor, bam:sampleB_rep1_tumor.bam]]]
+[[id:sampleA, interval:chr3], [[type:normal, bam:sampleA_rep1_normal.bam], [type:normal, bam:sampleB_rep1_normal.bam]], [[type:tumor, bam:sampleA_rep1_tumor.bam], [type:tumor, bam:sampleB_rep1_tumor.bam]]]
+[[id:sampleB, interval:chr1], [[type:normal, bam:sampleC_rep1_normal.bam]], [[type:tumor, bam:sampleC_rep1_tumor.bam]]]
+[[id:sampleB, interval:chr2], [[type:normal, bam:sampleC_rep1_normal.bam]], [[type:tumor, bam:sampleC_rep1_tumor.bam]]]
+[[id:sampleB, interval:chr3], [[type:normal, bam:sampleC_rep1_normal.bam]], [[type:tumor, bam:sampleC_rep1_tumor.bam]]]
+[[id:sampleC, interval:chr1], [[type:normal, bam:sampleD_rep1_normal.bam]], [[type:tumor, bam:sampleD_rep1_tumor.bam]]]
+[[id:sampleC, interval:chr2], [[type:normal, bam:sampleD_rep1_normal.bam]], [[type:tumor, bam:sampleD_rep1_tumor.bam]]]
+[[id:sampleC, interval:chr3], [[type:normal, bam:sampleD_rep1_normal.bam]], [[type:tumor, bam:sampleD_rep1_tumor.bam]]]
 ```
 
 Note our data has changed structure. What was previously a list of tuples is now a list of lists of tuples. This is because when we use `groupTuple`, Nextflow creates a new list for each group. This is important to remember when trying to handle the data downstream.
@@ -1042,50 +1132,47 @@ It's possible to use a simpler data structure than this, by separating our the s
 !!! note
 [`transpose`](https://www.nextflow.io/docs/latest/reference/operator.html#transpose) is the opposite of groupTuple. It unpacks the items in a channel and flattens them. Try and add `transpose` and undo the grouping we performed above!
 
-# 5.2. Reduce duplication of data
+# 5.2. Reorganise data into more efficient structure
 
-We have a lot of duplicated data in our workflow. Each item in the grouped sample repeats the `id` and `interval` fields. Since this information is available in the metamap, let's just save it once. As a reminder, our data is structured like this:
+Let's consider the inputs to a typical Nextflow process. Generally, inputs can be in the form of values or files. In this example, we have a set of values for sample information (`id` and `interval`) and a set of files for sequencing data (`normal` and `tumor`). The `input` block of a process might look like this:
+
+```groovy title="main.nf"
+    input:
+      tuple val(sampleInfo), path(normalBam), path(tumorBam)
+```
+
+Currently, our data structure isn't optimal for this. We have a tuple where the first element is a map and the second and third elements are lists of maps. Here is the current data structure:
 
 ```groovy
 [
-    {
-        "id": "sampleC",
-        "interval": "chr3"
-    },
-    [
-        {
-            "id": "sampleC",
-            "repeat": "1",
-            "type": "normal",
-            "bam": "sampleC_rep1_normal.bam"
-        }
-    ],
-    [
-        {
-            "id": "sampleC",
-            "repeat": "1",
-            "type": "tumor",
-            "bam": "sampleC_rep1_tumor.bam"
-        }
-    ]
+    [id:sampleA, interval:chr1],
+    [[type:normal, bam:sampleA_rep1_normal.bam], [type:normal, bam:sampleB_rep1_normal.bam]],
+    [[type:tumor, bam:sampleA_rep1_tumor.bam], [type:tumor, bam:sampleB_rep1_tumor.bam]]
+],
+[
+    [id:sampleA, interval:chr1],
+    [[type:normal, bam:sampleA_rep1_normal.bam]]
+    [[type:tumor, bam:sampleA_rep1_tumor.bam]]
 ]
 ```
 
-We could parse the data after grouping to remove the duplication, but this requires us to handle all of the outputs. Instead, we can parse the data before grouping, which will mean the results are never included in the first place.
+What we need is to flatten the data structure so that the second and third elements are lists of BAM files - essentially removing the `type` field and simplifying the structure.
 
-In the same `map` operator where we isolate the `id` and `interval` fields, we can also grab the `bam` field for our sample data and _not_ include the `id` and `interval` fields.
+Once again, we'll employ the `map` operator to manipulate our data structure as it flows through the channel. This time, we'll take the lists of data associated with each BAM file and specifically extract the `bam` field, dropping the `type` field in the process.
+
+To operate on a list of maps, we can use the [`collect` method](<https://docs.groovy-lang.org/2.4.3/html/groovy-jdk/java/util/Collection.html#collect(groovy.lang.Closure)>), a built-in method in Groovy which iterates over each element in the list and applies the closure to it. You can see examples in the Nextflow documentation [here](https://www.nextflow.io/docs/latest/script.html#closures). In our case, we'll extract the `bam` field from each map and return a list of just BAM file paths. Our closure will look like this:
+
+```groovy
+{ bam_data -> bam_data.bam }
+```
+
+Note this is conceptually similar but distinct to the Nextflow [`collect` operator](https://www.nextflow.io/docs/latest/reference/operator.html#collect). This method takes a closure that will be applied to each element in the list. In this case, we want to extract the `bam` field from each map.
+
+Let's append our map to the end of our pipeline and show the resulting data structure:
 
 _Before:_
 
-```groovy title="main.nf" linenums="27"
-    ch_grouped_samples = ch_combined_samples.map { grouping_key, normal, tumor ->
-                            [
-                                grouping_key.subMap('id', 'interval'),
-                                normal,
-                                tumor
-                            ]
-
-                        }
+```groovy title="main.nf" linenums="38"
                         .groupTuple()
                         .view()
 }
@@ -1093,49 +1180,111 @@ _Before:_
 
 _After:_
 
-```groovy title="main.nf" linenums="27"
-    ch_grouped_samples = ch_combined_samples.map { grouping_key, normal, tumor ->
-                            [
-                                grouping_key.subMap('id', 'interval'),
-                                normal.subMap("bam"),
-                                tumor.subMap("bam")
-                            ]
-
-                        }
+```groovy title="main.nf" linenums="38"
                         .groupTuple()
+                        .map { sample_info, normal, tumor ->
+                            [
+                                sample_info,
+                                normal.collect { bam_data -> bam_data.bam },
+                                tumor.collect { bam_data -> bam_data.bam }
+                            ]
+                        }
                         .view()
 }
 ```
 
-```bash title="View grouped samples"
+```bash title="View flattened samples"
 nextflow run main.nf
 ```
 
-```console title="View grouped samples"
+```console title=""
+
  N E X T F L O W   ~  version 24.10.5
 
-Launching `main.nf` [deadly_dubinsky] DSL2 - revision: 9ca3088b35
+Launching `main.nf` [compassionate_moriondo] DSL2 - revision: 71a8c35ed9
 
-[[id:sampleA, interval:chr1], [[bam:sampleA_rep1_normal.bam], [bam:sampleB_rep1_normal.bam]], [[bam:sampleA_rep1_tumor.bam], [bam:sampleB_rep1_tumor.bam]]]
-[[id:sampleA, interval:chr2], [[bam:sampleA_rep1_normal.bam], [bam:sampleB_rep1_normal.bam]], [[bam:sampleA_rep1_tumor.bam], [bam:sampleB_rep1_tumor.bam]]]
-[[id:sampleA, interval:chr3], [[bam:sampleA_rep1_normal.bam], [bam:sampleB_rep1_normal.bam]], [[bam:sampleA_rep1_tumor.bam], [bam:sampleB_rep1_tumor.bam]]]
-[[id:sampleB, interval:chr1], [[bam:sampleC_rep1_normal.bam]], [[bam:sampleC_rep1_tumor.bam]]]
-[[id:sampleB, interval:chr2], [[bam:sampleC_rep1_normal.bam]], [[bam:sampleC_rep1_tumor.bam]]]
-[[id:sampleB, interval:chr3], [[bam:sampleC_rep1_normal.bam]], [[bam:sampleC_rep1_tumor.bam]]]
-[[id:sampleC, interval:chr1], [[bam:sampleD_rep1_normal.bam]], [[bam:sampleD_rep1_tumor.bam]]]
-[[id:sampleC, interval:chr2], [[bam:sampleD_rep1_normal.bam]], [[bam:sampleD_rep1_tumor.bam]]]
-[[id:sampleC, interval:chr3], [[bam:sampleD_rep1_normal.bam]], [[bam:sampleD_rep1_tumor.bam]]]
+[[id:sampleA, interval:chr1], [sampleA_rep1_normal.bam, sampleB_rep1_normal.bam], [sampleA_rep1_tumor.bam, sampleB_rep1_tumor.bam]]
+[[id:sampleA, interval:chr2], [sampleA_rep1_normal.bam, sampleB_rep1_normal.bam], [sampleA_rep1_tumor.bam, sampleB_rep1_tumor.bam]]
+[[id:sampleA, interval:chr3], [sampleA_rep1_normal.bam, sampleB_rep1_normal.bam], [sampleA_rep1_tumor.bam, sampleB_rep1_tumor.bam]]
+[[id:sampleB, interval:chr1], [sampleC_rep1_normal.bam], [sampleC_rep1_tumor.bam]]
+[[id:sampleB, interval:chr2], [sampleC_rep1_normal.bam], [sampleC_rep1_tumor.bam]]
+[[id:sampleB, interval:chr3], [sampleC_rep1_normal.bam], [sampleC_rep1_tumor.bam]]
+[[id:sampleC, interval:chr1], [sampleD_rep1_normal.bam], [sampleD_rep1_tumor.bam]]
+[[id:sampleC, interval:chr2], [sampleD_rep1_normal.bam], [sampleD_rep1_tumor.bam]]
+[[id:sampleC, interval:chr3], [sampleD_rep1_normal.bam], [sampleD_rep1_tumor.bam]]
 ```
 
-Now we have a much cleaner output. We can see that the `id` and `interval` fields are only included once, and the `bam` field is included in the sample data.
+Note how the channel is now structured as a 3-part tuple:
+
+- `sample_info` is a map of sample information
+- `normal` is a list of BAM file paths
+- `tumor` is a list of BAM file paths
+
+`groupTuple` is a powerful operator but can generate complex data structures. It's important to understand how the data structure changes as it flows through the pipeline so you can manipulate it as needed. Using a `map` at the end of a pipeline helps refine the output into a structure that fits our processes pipeline.
+
+!!! exercise
+
+    Can you manipulate the data earlier in the pipeline to avoid the need for the final `map`?
+
+    ??? solution
+        If we parse the data right at the start of our pipeline to _only_ include the `bam` field, we can avoid passing the `type` field through the pipeline which makes our entire pipeline cleaner while retaining the same functionality:
+
+        _Before:_
+
+        ```groovy title="main.nf" linenums="1"
+        workflow {
+        getSampleIdAndReplicate = { sample ->
+                                      [
+                                        sample.subMap(['id', 'repeat']),
+                                        sample.subMap(['id', 'bam'])
+                                      ]
+                                  }
+        ```
+
+        _After:_
+
+        ```groovy title="main.nf" linenums="1"
+        workflow {
+        getSampleIdAndReplicate = { sample ->
+                                      [
+                                        sample.subMap(['id', 'repeat']),
+                                        sample.bam
+                                      ]
+                                  }
+        ```
+
+        Once we have done this we can remove the `map` operator from the end of the pipeline:
+
+        _Before:_
+
+        ```groovy title="main.nf" linenums="38"
+        .groupTuple()
+        .map { sample_info, normal, tumor ->
+            [
+                sample_info,
+                normal.collect { bam_data -> bam_data.bam },
+                tumor.collect { bam_data -> bam_data.bam }
+            ]
+        }
+        .view()
+        ```
+
+        _After:_
+
+        ```groovy title="main.nf" linenums="38"
+        .groupTuple()
+        .view()
+        ```
+
+        Sometimes parsing data earlier in the pipeline is the right choice to avoid complicated code. In this tutorial, we wanted to take you step-by-step which meant we had to do things the long way.
 
 ### Takeaway
 
 In this section, you've learned:
 
 - **Grouping samples**: How to use `groupTuple` to group samples by a specific attribute
-
-You now have a workflow that can split a samplesheet, filter the normal and tumor samples, join them together by sample ID and replicate number, then group them by `id`.
+- **Flattening data structure**: How to use `map` to flatten the data structure
+  You now have a workflow that can split a samplesheet, filter the normal and tumor samples, join them together by sample ID and replicate number, then group them by `id`.
 
 ## Summary
 
