@@ -196,8 +196,6 @@ In this case, we want to keep only the samples where `sample.type == 'normal'`. 
 
 ### 2.2. Filter to just the tumor samples
 
-#TODO: Move this later after making the tumor only channel, put it at the end in one section!
-
 While useful, we are discarding the tumor samples. Instead, let's rewrite our pipeline to save all the samples to one channel called `ch_samplesheet`, then filter that channel to just the normal samples and save the results to a new channel called `ch_normal_samples`.
 
 _Before:_
