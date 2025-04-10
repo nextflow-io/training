@@ -1,3 +1,0 @@
-chr1
-chr2
-chr3
