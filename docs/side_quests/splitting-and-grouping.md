@@ -110,16 +110,16 @@ nextflow run main.nf
 ```console title="Read samplesheet with splitCsv"
  N E X T F L O W   ~  version 24.10.5
 
-Launching `main.nf` [elated_fermat] DSL2 - revision: bd6b0224e9
+Launching `main.nf` [deadly_mercator] DSL2 - revision: bd6b0224e9
 
-[id:sampleA, repeat:1, type:normal, bam:sampleA_r1_normal.bam]
+[id:sampleA, repeat:1, type:normal, bam:sampleA_rep1_normal.bam]
 [id:sampleA, repeat:1, type:tumor, bam:sampleA_rep1_tumor.bam]
-[id:sampleB, repeat:1, type:normal, bam:sampleB_rep1_normal.bam]
-[id:sampleB, repeat:1, type:tumor, bam:sampleB_rep1_tumor.bam]
-[id:sampleC, repeat:1, type:normal, bam:sampleC_rep1_normal.bam]
-[id:sampleC, repeat:1, type:tumor, bam:sampleC_rep1_tumor.bam]
-[id:sampleD, repeat:1, type:normal, bam:sampleD_rep1_normal.bam]
-[id:sampleD, repeat:1, type:tumor, bam:sampleD_rep1_tumor.bam]
+[id:sampleA, repeat:2, type:normal, bam:sampleB_rep1_normal.bam]
+[id:sampleA, repeat:2, type:tumor, bam:sampleB_rep1_tumor.bam]
+[id:sampleB, repeat:1, type:normal, bam:sampleC_rep1_normal.bam]
+[id:sampleB, repeat:1, type:tumor, bam:sampleC_rep1_tumor.bam]
+[id:sampleC, repeat:1, type:normal, bam:sampleD_rep1_normal.bam]
+[id:sampleC, repeat:1, type:tumor, bam:sampleD_rep1_tumor.bam]
 ```
 
 We can see that each row from the CSV file has been converted into a map with keys matching the header row. A map is a key-value data structure similar to dictionaries in Python, objects in JavaScript, or hashes in Ruby.
@@ -178,12 +178,12 @@ nextflow run main.nf
 ```console title="View normal samples"
  N E X T F L O W   ~  version 24.10.5
 
-Launching `main.nf` [adoring_cori] DSL2 - revision: 194d61704d
+Launching `main.nf` [admiring_brown] DSL2 - revision: 194d61704d
 
-[id:sampleA, repeat:1, type:normal, bam:sampleA_r1_normal.bam]
-[id:sampleB, repeat:1, type:normal, bam:sampleB_rep1_normal.bam]
-[id:sampleC, repeat:1, type:normal, bam:sampleC_rep1_normal.bam]
-[id:sampleD, repeat:1, type:normal, bam:sampleD_rep1_normal.bam]
+[id:sampleA, repeat:1, type:normal, bam:sampleA_rep1_normal.bam]
+[id:sampleA, repeat:2, type:normal, bam:sampleB_rep1_normal.bam]
+[id:sampleB, repeat:1, type:normal, bam:sampleC_rep1_normal.bam]
+[id:sampleC, repeat:1, type:normal, bam:sampleD_rep1_normal.bam]
 ```
 
 We have successfully filtered the data to only include normal samples. Let's recap how this works. The `filter` operator takes a closure that is applied to each element in the channel. If the closure returns `true`, the element is included in the output channel. If the closure returns `false`, the element is excluded from the output channel.
@@ -198,7 +198,7 @@ In this case, we want to keep only the samples where `sample.type == 'normal'`. 
 
 #TODO: Move this later after making the tumor only channel, put it at the end in one section!
 
-While useful, we are discarding the tumor samples. Instead, let's rewrite our pipeline to save all the samples to one channel called `samplesheet`, then filter that channel to just the normal samples and save the results to a new channel called `normal_samples`.
+While useful, we are discarding the tumor samples. Instead, let's rewrite our pipeline to save all the samples to one channel called `ch_samplesheet`, then filter that channel to just the normal samples and save the results to a new channel called `ch_normal_samples`.
 
 _Before:_
 
@@ -232,12 +232,12 @@ nextflow run main.nf
 ```console title="View normal samples"
  N E X T F L O W   ~  version 24.10.5
 
-Launching `main.nf` [astonishing_noether] DSL2 - revision: 8e49cf6956
+Launching `main.nf` [trusting_poisson] DSL2 - revision: 639186ee74
 
-[id:sampleA, repeat:1, type:normal, bam:sampleA_r1_normal.bam]
-[id:sampleB, repeat:1, type:normal, bam:sampleB_rep1_normal.bam]
-[id:sampleC, repeat:1, type:normal, bam:sampleC_rep1_normal.bam]
-[id:sampleD, repeat:1, type:normal, bam:sampleD_rep1_normal.bam]
+[id:sampleA, repeat:1, type:normal, bam:sampleA_rep1_normal.bam]
+[id:sampleA, repeat:2, type:normal, bam:sampleB_rep1_normal.bam]
+[id:sampleB, repeat:1, type:normal, bam:sampleC_rep1_normal.bam]
+[id:sampleC, repeat:1, type:normal, bam:sampleD_rep1_normal.bam]
 ```
 
 Success! We have filtered the data to only include normal samples. Note that we can use view and save the new channel. If we wanted, we still have access to the tumor samples within the `ch_samplesheet` channel. Since we managed it for the normal samples, let's do it for the tumor samples as well:
@@ -276,16 +276,16 @@ nextflow run main.nf
 ```console title="View tumor samples"
  N E X T F L O W   ~  version 24.10.5
 
-Launching `main.nf` [gloomy_roentgen] DSL2 - revision: e6b3917a8e
+Launching `main.nf` [big_bernard] DSL2 - revision: 897c9e44cc
 
+[id:sampleA, repeat:1, type:normal, bam:sampleA_rep1_normal.bam]
 [id:sampleA, repeat:1, type:tumor, bam:sampleA_rep1_tumor.bam]
-[id:sampleA, repeat:1, type:normal, bam:sampleA_r1_normal.bam]
-[id:sampleB, repeat:1, type:tumor, bam:sampleB_rep1_tumor.bam]
-[id:sampleB, repeat:1, type:normal, bam:sampleB_rep1_normal.bam]
-[id:sampleC, repeat:1, type:tumor, bam:sampleC_rep1_tumor.bam]
-[id:sampleC, repeat:1, type:normal, bam:sampleC_rep1_normal.bam]
-[id:sampleD, repeat:1, type:tumor, bam:sampleD_rep1_tumor.bam]
-[id:sampleD, repeat:1, type:normal, bam:sampleD_rep1_normal.bam]
+[id:sampleA, repeat:2, type:normal, bam:sampleB_rep1_normal.bam]
+[id:sampleA, repeat:2, type:tumor, bam:sampleB_rep1_tumor.bam]
+[id:sampleB, repeat:1, type:normal, bam:sampleC_rep1_normal.bam]
+[id:sampleB, repeat:1, type:tumor, bam:sampleC_rep1_tumor.bam]
+[id:sampleC, repeat:1, type:normal, bam:sampleD_rep1_normal.bam]
+[id:sampleC, repeat:1, type:tumor, bam:sampleD_rep1_tumor.bam]
 ```
 
 We've managed to separate out the normal and tumor samples into two different channels but they're mixed up when we `view` them in the console! If we want, we can remove one of the `view` operators to see the data in each channel separately. Let's remove the `view` operator for the normal samples:
@@ -326,12 +326,12 @@ nextflow run main.nf
 ```console title="View normal and tumor samples"
  N E X T F L O W   ~  version 24.10.5
 
-Launching `main.nf` [pensive_moriondo] DSL2 - revision: 012d38e59f
+Launching `main.nf` [loving_bardeen] DSL2 - revision: 012d38e59f
 
 [id:sampleA, repeat:1, type:tumor, bam:sampleA_rep1_tumor.bam]
-[id:sampleB, repeat:1, type:tumor, bam:sampleB_rep1_tumor.bam]
-[id:sampleC, repeat:1, type:tumor, bam:sampleC_rep1_tumor.bam]
-[id:sampleD, repeat:1, type:tumor, bam:sampleD_rep1_tumor.bam]
+[id:sampleA, repeat:2, type:tumor, bam:sampleB_rep1_tumor.bam]
+[id:sampleB, repeat:1, type:tumor, bam:sampleC_rep1_tumor.bam]
+[id:sampleC, repeat:1, type:tumor, bam:sampleD_rep1_tumor.bam]
 ```
 
 Note how we can only see the tumor samples in the output. This is because we removed the `view` operator for the normal samples.
@@ -348,7 +348,7 @@ We've now separated out the normal and tumor samples into two different channels
 
 ---
 
-## 3. Join on ID
+## 3. Join on sample ID
 
 In the previous section, we separated out the normal and tumor samples into two different channels. These could be processed independently using specific processes or workflows based on their type. But what happens when we want to compare the normal and tumor samples from the same patient? At this point, we need to join them back together making sure to match the samples based on their `id` field.
 
@@ -365,12 +365,12 @@ nextflow run main.nf
 ```console title="View normal and tumor samples"
  N E X T F L O W   ~  version 24.10.5
 
-Launching `main.nf` [sleepy_lichterman] DSL2 - revision: 012d38e59f
+Launching `main.nf` [loving_bardeen] DSL2 - revision: 012d38e59f
 
 [id:sampleA, repeat:1, type:tumor, bam:sampleA_rep1_tumor.bam]
-[id:sampleB, repeat:1, type:tumor, bam:sampleB_rep1_tumor.bam]
-[id:sampleC, repeat:1, type:tumor, bam:sampleC_rep1_tumor.bam]
-[id:sampleD, repeat:1, type:tumor, bam:sampleD_rep1_tumor.bam]
+[id:sampleA, repeat:2, type:tumor, bam:sampleB_rep1_tumor.bam]
+[id:sampleB, repeat:1, type:tumor, bam:sampleC_rep1_tumor.bam]
+[id:sampleC, repeat:1, type:tumor, bam:sampleD_rep1_tumor.bam]
 ```
 
 We can see that the `id` field is the first element in each map. For `join` to work, we should isolate the `id` field in each tuple. After that, we can simply use the `join` operator to combine the two channels.
@@ -415,16 +415,16 @@ nextflow run main.nf
 ```console title="View normal and tumor samples with ID as element 0"
  N E X T F L O W   ~  version 24.10.5
 
-Launching `main.nf` [trusting_ptolemy] DSL2 - revision: 882ae9add4
+Launching `main.nf` [dreamy_sax] DSL2 - revision: 882ae9add4
 
 [sampleA, [id:sampleA, repeat:1, type:normal, bam:sampleA_rep1_normal.bam]]
 [sampleA, [id:sampleA, repeat:1, type:tumor, bam:sampleA_rep1_tumor.bam]]
-[sampleB, [id:sampleB, repeat:1, type:normal, bam:sampleB_rep1_normal.bam]]
-[sampleB, [id:sampleB, repeat:1, type:tumor, bam:sampleB_rep1_tumor.bam]]
-[sampleC, [id:sampleC, repeat:1, type:normal, bam:sampleC_rep1_normal.bam]]
-[sampleC, [id:sampleC, repeat:1, type:tumor, bam:sampleC_rep1_tumor.bam]]
-[sampleD, [id:sampleD, repeat:1, type:normal, bam:sampleD_rep1_normal.bam]]
-[sampleD, [id:sampleD, repeat:1, type:tumor, bam:sampleD_rep1_tumor.bam]]
+[sampleA, [id:sampleA, repeat:2, type:normal, bam:sampleB_rep1_normal.bam]]
+[sampleA, [id:sampleA, repeat:2, type:tumor, bam:sampleB_rep1_tumor.bam]]
+[sampleB, [id:sampleB, repeat:1, type:normal, bam:sampleC_rep1_normal.bam]]
+[sampleB, [id:sampleB, repeat:1, type:tumor, bam:sampleC_rep1_tumor.bam]]
+[sampleC, [id:sampleC, repeat:1, type:normal, bam:sampleD_rep1_normal.bam]]
+[sampleC, [id:sampleC, repeat:1, type:tumor, bam:sampleD_rep1_tumor.bam]]
 ```
 
 It might be subtle, but you should be able to see the first element in each tuple is the `id` field. Now we can use the `join` operator to combine the two channels based on the `id` field.
@@ -473,12 +473,12 @@ nextflow run main.nf
 ```console title="View joined normal and tumor samples"
  N E X T F L O W   ~  version 24.10.5
 
-Launching `main.nf` [astonishing_heyrovsky] DSL2 - revision: 49857f9ecc
+Launching `main.nf` [elegant_waddington] DSL2 - revision: c552f22069
 
 [sampleA, [id:sampleA, repeat:1, type:normal, bam:sampleA_rep1_normal.bam], [id:sampleA, repeat:1, type:tumor, bam:sampleA_rep1_tumor.bam]]
-[sampleB, [id:sampleB, repeat:1, type:normal, bam:sampleB_rep1_normal.bam], [id:sampleB, repeat:1, type:tumor, bam:sampleB_rep1_tumor.bam]]
-[sampleC, [id:sampleC, repeat:1, type:normal, bam:sampleC_rep1_normal.bam], [id:sampleC, repeat:1, type:tumor, bam:sampleC_rep1_tumor.bam]]
-[sampleD, [id:sampleD, repeat:1, type:normal, bam:sampleD_rep1_normal.bam], [id:sampleD, repeat:1, type:tumor, bam:sampleD_rep1_tumor.bam]]
+[sampleA, [id:sampleA, repeat:2, type:normal, bam:sampleB_rep1_normal.bam], [id:sampleA, repeat:2, type:tumor, bam:sampleB_rep1_tumor.bam]]
+[sampleB, [id:sampleB, repeat:1, type:normal, bam:sampleC_rep1_normal.bam], [id:sampleB, repeat:1, type:tumor, bam:sampleC_rep1_tumor.bam]]
+[sampleC, [id:sampleC, repeat:1, type:normal, bam:sampleD_rep1_normal.bam], [id:sampleC, repeat:1, type:tumor, bam:sampleD_rep1_tumor.bam]]
 ```
 
 It's a little hard to tell because it's so wide, but you should be able to see the samples have been joined by the `id` field. Each tuple now has the format:
@@ -560,12 +560,12 @@ nextflow run main.nf
 ```console title="View normal and tumor samples"
  N E X T F L O W   ~  version 24.10.5
 
-Launching `main.nf` [extravagant_varahamihira] DSL2 - revision: 8c61f8cc77
+Launching `main.nf` [prickly_wing] DSL2 - revision: 3bebf22dee
 
 [[sampleA, 1], [id:sampleA, repeat:1, type:normal, bam:sampleA_rep1_normal.bam], [id:sampleA, repeat:1, type:tumor, bam:sampleA_rep1_tumor.bam]]
-[[sampleB, 1], [id:sampleB, repeat:1, type:normal, bam:sampleB_rep1_normal.bam], [id:sampleB, repeat:1, type:tumor, bam:sampleB_rep1_tumor.bam]]
-[[sampleC, 1], [id:sampleC, repeat:1, type:normal, bam:sampleC_rep1_normal.bam], [id:sampleC, repeat:1, type:tumor, bam:sampleC_rep1_tumor.bam]]
-[[sampleD, 1], [id:sampleD, repeat:1, type:normal, bam:sampleD_rep1_normal.bam], [id:sampleD, repeat:1, type:tumor, bam:sampleD_rep1_tumor.bam]]
+[[sampleA, 2], [id:sampleA, repeat:2, type:normal, bam:sampleB_rep1_normal.bam], [id:sampleA, repeat:2, type:tumor, bam:sampleB_rep1_tumor.bam]]
+[[sampleB, 1], [id:sampleB, repeat:1, type:normal, bam:sampleC_rep1_normal.bam], [id:sampleB, repeat:1, type:tumor, bam:sampleC_rep1_tumor.bam]]
+[[sampleC, 1], [id:sampleC, repeat:1, type:normal, bam:sampleD_rep1_normal.bam], [id:sampleC, repeat:1, type:tumor, bam:sampleD_rep1_tumor.bam]]
 ```
 
 Note how we have a tuple of two elements (`id` and `repeat` fields) as the first element of each joined result. This demonstrates how complex items can be used as a joining key, enabling fairly intricate matching between samples from the same conditions.
@@ -635,12 +635,12 @@ nextflow run main.nf
 ```console title="View normal and tumor samples"
  N E X T F L O W   ~  version 24.10.5
 
-Launching `main.nf` [irreverent_shaw] DSL2 - revision: 83d2d53944
+Launching `main.nf` [curious_hopper] DSL2 - revision: 90283e523d
 
 [[id:sampleA, repeat:1], [id:sampleA, repeat:1, type:normal, bam:sampleA_rep1_normal.bam], [id:sampleA, repeat:1, type:tumor, bam:sampleA_rep1_tumor.bam]]
-[[id:sampleB, repeat:1], [id:sampleB, repeat:1, type:normal, bam:sampleB_rep1_normal.bam], [id:sampleB, repeat:1, type:tumor, bam:sampleB_rep1_tumor.bam]]
-[[id:sampleC, repeat:1], [id:sampleC, repeat:1, type:normal, bam:sampleC_rep1_normal.bam], [id:sampleC, repeat:1, type:tumor, bam:sampleC_rep1_tumor.bam]]
-[[id:sampleD, repeat:1], [id:sampleD, repeat:1, type:normal, bam:sampleD_rep1_normal.bam], [id:sampleD, repeat:1, type:tumor, bam:sampleD_rep1_tumor.bam]]
+[[id:sampleA, repeat:2], [id:sampleA, repeat:2, type:normal, bam:sampleB_rep1_normal.bam], [id:sampleA, repeat:2, type:tumor, bam:sampleB_rep1_tumor.bam]]
+[[id:sampleB, repeat:1], [id:sampleB, repeat:1, type:normal, bam:sampleC_rep1_normal.bam], [id:sampleB, repeat:1, type:tumor, bam:sampleC_rep1_tumor.bam]]
+[[id:sampleC, repeat:1], [id:sampleC, repeat:1, type:normal, bam:sampleD_rep1_normal.bam], [id:sampleC, repeat:1, type:tumor, bam:sampleD_rep1_tumor.bam]]
 ```
 
 Now we have a new joining key that not only includes the `id` and `repeat` fields but also retains the field names so we can access them later by name, e.g. `sample.id` and `sample.repeat`.
@@ -710,12 +710,12 @@ nextflow run main.nf
 ```console title="View normal and tumor samples"
  N E X T F L O W   ~  version 24.10.5
 
-Launching `main.nf` [modest_roentgen] DSL2 - revision: ec9412b708
+Launching `main.nf` [angry_meninsky] DSL2 - revision: 2edc226b1d
 
 [[id:sampleA, repeat:1], [id:sampleA, repeat:1, type:normal, bam:sampleA_rep1_normal.bam], [id:sampleA, repeat:1, type:tumor, bam:sampleA_rep1_tumor.bam]]
-[[id:sampleB, repeat:1], [id:sampleB, repeat:1, type:normal, bam:sampleB_rep1_normal.bam], [id:sampleB, repeat:1, type:tumor, bam:sampleB_rep1_tumor.bam]]
-[[id:sampleC, repeat:1], [id:sampleC, repeat:1, type:normal, bam:sampleC_rep1_normal.bam], [id:sampleC, repeat:1, type:tumor, bam:sampleC_rep1_tumor.bam]]
-[[id:sampleD, repeat:1], [id:sampleD, repeat:1, type:normal, bam:sampleD_rep1_normal.bam], [id:sampleD, repeat:1, type:tumor, bam:sampleD_rep1_tumor.bam]]
+[[id:sampleA, repeat:2], [id:sampleA, repeat:2, type:normal, bam:sampleB_rep1_normal.bam], [id:sampleA, repeat:2, type:tumor, bam:sampleB_rep1_tumor.bam]]
+[[id:sampleB, repeat:1], [id:sampleB, repeat:1, type:normal, bam:sampleC_rep1_normal.bam], [id:sampleB, repeat:1, type:tumor, bam:sampleC_rep1_tumor.bam]]
+[[id:sampleC, repeat:1], [id:sampleC, repeat:1, type:normal, bam:sampleD_rep1_normal.bam], [id:sampleC, repeat:1, type:tumor, bam:sampleD_rep1_tumor.bam]]
 ```
 
 Using a named closure in the map allows us to reuse the same map in multiple places which reduces our risk of introducing errors. It also makes the code more readable and easier to maintain.
@@ -785,20 +785,20 @@ nextflow run main.nf
 ```console title="View combined samples"
  N E X T F L O W   ~  version 24.10.5
 
-Launching `main.nf` [stupefied_brattain] DSL2 - revision: 6a4891d696
+Launching `main.nf` [nasty_albattani] DSL2 - revision: 040e367b95
 
 [[id:sampleA, repeat:1], [id:sampleA, repeat:1, type:normal, bam:sampleA_rep1_normal.bam], [id:sampleA, repeat:1, type:tumor, bam:sampleA_rep1_tumor.bam], chr1]
 [[id:sampleA, repeat:1], [id:sampleA, repeat:1, type:normal, bam:sampleA_rep1_normal.bam], [id:sampleA, repeat:1, type:tumor, bam:sampleA_rep1_tumor.bam], chr2]
 [[id:sampleA, repeat:1], [id:sampleA, repeat:1, type:normal, bam:sampleA_rep1_normal.bam], [id:sampleA, repeat:1, type:tumor, bam:sampleA_rep1_tumor.bam], chr3]
-[[id:sampleB, repeat:1], [id:sampleB, repeat:1, type:normal, bam:sampleB_rep1_normal.bam], [id:sampleB, repeat:1, type:tumor, bam:sampleB_rep1_tumor.bam], chr1]
-[[id:sampleB, repeat:1], [id:sampleB, repeat:1, type:normal, bam:sampleB_rep1_normal.bam], [id:sampleB, repeat:1, type:tumor, bam:sampleB_rep1_tumor.bam], chr2]
-[[id:sampleB, repeat:1], [id:sampleB, repeat:1, type:normal, bam:sampleB_rep1_normal.bam], [id:sampleB, repeat:1, type:tumor, bam:sampleB_rep1_tumor.bam], chr3]
-[[id:sampleC, repeat:1], [id:sampleC, repeat:1, type:normal, bam:sampleC_rep1_normal.bam], [id:sampleC, repeat:1, type:tumor, bam:sampleC_rep1_tumor.bam], chr1]
-[[id:sampleC, repeat:1], [id:sampleC, repeat:1, type:normal, bam:sampleC_rep1_normal.bam], [id:sampleC, repeat:1, type:tumor, bam:sampleC_rep1_tumor.bam], chr2]
-[[id:sampleC, repeat:1], [id:sampleC, repeat:1, type:normal, bam:sampleC_rep1_normal.bam], [id:sampleC, repeat:1, type:tumor, bam:sampleC_rep1_tumor.bam], chr3]
-[[id:sampleD, repeat:1], [id:sampleD, repeat:1, type:normal, bam:sampleD_rep1_normal.bam], [id:sampleD, repeat:1, type:tumor, bam:sampleD_rep1_tumor.bam], chr1]
-[[id:sampleD, repeat:1], [id:sampleD, repeat:1, type:normal, bam:sampleD_rep1_normal.bam], [id:sampleD, repeat:1, type:tumor, bam:sampleD_rep1_tumor.bam], chr2]
-[[id:sampleD, repeat:1], [id:sampleD, repeat:1, type:normal, bam:sampleD_rep1_normal.bam], [id:sampleD, repeat:1, type:tumor, bam:sampleD_rep1_tumor.bam], chr3
+[[id:sampleA, repeat:2], [id:sampleA, repeat:2, type:normal, bam:sampleB_rep1_normal.bam], [id:sampleA, repeat:2, type:tumor, bam:sampleB_rep1_tumor.bam], chr1]
+[[id:sampleA, repeat:2], [id:sampleA, repeat:2, type:normal, bam:sampleB_rep1_normal.bam], [id:sampleA, repeat:2, type:tumor, bam:sampleB_rep1_tumor.bam], chr2]
+[[id:sampleA, repeat:2], [id:sampleA, repeat:2, type:normal, bam:sampleB_rep1_normal.bam], [id:sampleA, repeat:2, type:tumor, bam:sampleB_rep1_tumor.bam], chr3]
+[[id:sampleB, repeat:1], [id:sampleB, repeat:1, type:normal, bam:sampleC_rep1_normal.bam], [id:sampleB, repeat:1, type:tumor, bam:sampleC_rep1_tumor.bam], chr1]
+[[id:sampleB, repeat:1], [id:sampleB, repeat:1, type:normal, bam:sampleC_rep1_normal.bam], [id:sampleB, repeat:1, type:tumor, bam:sampleC_rep1_tumor.bam], chr2]
+[[id:sampleB, repeat:1], [id:sampleB, repeat:1, type:normal, bam:sampleC_rep1_normal.bam], [id:sampleB, repeat:1, type:tumor, bam:sampleC_rep1_tumor.bam], chr3]
+[[id:sampleC, repeat:1], [id:sampleC, repeat:1, type:normal, bam:sampleD_rep1_normal.bam], [id:sampleC, repeat:1, type:tumor, bam:sampleD_rep1_tumor.bam], chr1]
+[[id:sampleC, repeat:1], [id:sampleC, repeat:1, type:normal, bam:sampleD_rep1_normal.bam], [id:sampleC, repeat:1, type:tumor, bam:sampleD_rep1_tumor.bam], chr2]
+[[id:sampleC, repeat:1], [id:sampleC, repeat:1, type:normal, bam:sampleD_rep1_normal.bam], [id:sampleC, repeat:1, type:tumor, bam:sampleD_rep1_tumor.bam], chr3]
 ```
 
 Success! We have repeated every sample for every single interval in our 3 interval list. We've effectively tripled the number of items in our channel. It's a little hard to read though, so in the next section we will tidy it up.
@@ -864,20 +864,20 @@ nextflow run main.nf
 ```console title="View combined samples"
  N E X T F L O W   ~  version 24.10.5
 
-Launching `main.nf` [stupefied_kare] DSL2 - revision: 7d98ee6805
+Launching `main.nf` [sick_moriondo] DSL2 - revision: 583df36829
 
 [[id:sampleA, repeat:1, interval:chr1], [id:sampleA, repeat:1, type:normal, bam:sampleA_rep1_normal.bam], [id:sampleA, repeat:1, type:tumor, bam:sampleA_rep1_tumor.bam]]
 [[id:sampleA, repeat:1, interval:chr2], [id:sampleA, repeat:1, type:normal, bam:sampleA_rep1_normal.bam], [id:sampleA, repeat:1, type:tumor, bam:sampleA_rep1_tumor.bam]]
 [[id:sampleA, repeat:1, interval:chr3], [id:sampleA, repeat:1, type:normal, bam:sampleA_rep1_normal.bam], [id:sampleA, repeat:1, type:tumor, bam:sampleA_rep1_tumor.bam]]
-[[id:sampleB, repeat:1, interval:chr1], [id:sampleB, repeat:1, type:normal, bam:sampleB_rep1_normal.bam], [id:sampleB, repeat:1, type:tumor, bam:sampleB_rep1_tumor.bam]]
-[[id:sampleB, repeat:1, interval:chr2], [id:sampleB, repeat:1, type:normal, bam:sampleB_rep1_normal.bam], [id:sampleB, repeat:1, type:tumor, bam:sampleB_rep1_tumor.bam]]
-[[id:sampleB, repeat:1, interval:chr3], [id:sampleB, repeat:1, type:normal, bam:sampleB_rep1_normal.bam], [id:sampleB, repeat:1, type:tumor, bam:sampleB_rep1_tumor.bam]]
-[[id:sampleC, repeat:1, interval:chr1], [id:sampleC, repeat:1, type:normal, bam:sampleC_rep1_normal.bam], [id:sampleC, repeat:1, type:tumor, bam:sampleC_rep1_tumor.bam]]
-[[id:sampleC, repeat:1, interval:chr2], [id:sampleC, repeat:1, type:normal, bam:sampleC_rep1_normal.bam], [id:sampleC, repeat:1, type:tumor, bam:sampleC_rep1_tumor.bam]]
-[[id:sampleC, repeat:1, interval:chr3], [id:sampleC, repeat:1, type:normal, bam:sampleC_rep1_normal.bam], [id:sampleC, repeat:1, type:tumor, bam:sampleC_rep1_tumor.bam]]
-[[id:sampleD, repeat:1, interval:chr1], [id:sampleD, repeat:1, type:normal, bam:sampleD_rep1_normal.bam], [id:sampleD, repeat:1, type:tumor, bam:sampleD_rep1_tumor.bam]]
-[[id:sampleD, repeat:1, interval:chr2], [id:sampleD, repeat:1, type:normal, bam:sampleD_rep1_normal.bam], [id:sampleD, repeat:1, type:tumor, bam:sampleD_rep1_tumor.bam]]
-[[id:sampleD, repeat:1, interval:chr3], [id:sampleD, repeat:1, type:normal, bam:sampleD_rep1_normal.bam], [id:sampleD, repeat:1, type:tumor, bam:sampleD_rep1_tumor.bam]]
+[[id:sampleA, repeat:2, interval:chr1], [id:sampleA, repeat:2, type:normal, bam:sampleB_rep1_normal.bam], [id:sampleA, repeat:2, type:tumor, bam:sampleB_rep1_tumor.bam]]
+[[id:sampleA, repeat:2, interval:chr2], [id:sampleA, repeat:2, type:normal, bam:sampleB_rep1_normal.bam], [id:sampleA, repeat:2, type:tumor, bam:sampleB_rep1_tumor.bam]]
+[[id:sampleA, repeat:2, interval:chr3], [id:sampleA, repeat:2, type:normal, bam:sampleB_rep1_normal.bam], [id:sampleA, repeat:2, type:tumor, bam:sampleB_rep1_tumor.bam]]
+[[id:sampleB, repeat:1, interval:chr1], [id:sampleB, repeat:1, type:normal, bam:sampleC_rep1_normal.bam], [id:sampleB, repeat:1, type:tumor, bam:sampleC_rep1_tumor.bam]]
+[[id:sampleB, repeat:1, interval:chr2], [id:sampleB, repeat:1, type:normal, bam:sampleC_rep1_normal.bam], [id:sampleB, repeat:1, type:tumor, bam:sampleC_rep1_tumor.bam]]
+[[id:sampleB, repeat:1, interval:chr3], [id:sampleB, repeat:1, type:normal, bam:sampleC_rep1_normal.bam], [id:sampleB, repeat:1, type:tumor, bam:sampleC_rep1_tumor.bam]]
+[[id:sampleC, repeat:1, interval:chr1], [id:sampleC, repeat:1, type:normal, bam:sampleD_rep1_normal.bam], [id:sampleC, repeat:1, type:tumor, bam:sampleD_rep1_tumor.bam]]
+[[id:sampleC, repeat:1, interval:chr2], [id:sampleC, repeat:1, type:normal, bam:sampleD_rep1_normal.bam], [id:sampleC, repeat:1, type:tumor, bam:sampleD_rep1_tumor.bam]]
+[[id:sampleC, repeat:1, interval:chr3], [id:sampleC, repeat:1, type:normal, bam:sampleD_rep1_normal.bam], [id:sampleC, repeat:1, type:tumor, bam:sampleD_rep1_tumor.bam]]
 ```
 
 Using `map` to coerce your data into the correct structure can be tricky, but it's crucial to correctly splitting and grouping effectively.
@@ -964,20 +964,20 @@ nextflow run main.nf
 ```console title="View grouped samples"
  N E X T F L O W   ~  version 24.10.5
 
-Launching `main.nf` [silly_leibniz] DSL2 - revision: 1db0b1e3de
+Launching `main.nf` [suspicious_cantor] DSL2 - revision: bb6b28c9d4
 
 [[id:sampleA, interval:chr1], [id:sampleA, repeat:1, type:normal, bam:sampleA_rep1_normal.bam], [id:sampleA, repeat:1, type:tumor, bam:sampleA_rep1_tumor.bam]]
 [[id:sampleA, interval:chr2], [id:sampleA, repeat:1, type:normal, bam:sampleA_rep1_normal.bam], [id:sampleA, repeat:1, type:tumor, bam:sampleA_rep1_tumor.bam]]
 [[id:sampleA, interval:chr3], [id:sampleA, repeat:1, type:normal, bam:sampleA_rep1_normal.bam], [id:sampleA, repeat:1, type:tumor, bam:sampleA_rep1_tumor.bam]]
-[[id:sampleB, interval:chr1], [id:sampleB, repeat:1, type:normal, bam:sampleB_rep1_normal.bam], [id:sampleB, repeat:1, type:tumor, bam:sampleB_rep1_tumor.bam]]
-[[id:sampleB, interval:chr2], [id:sampleB, repeat:1, type:normal, bam:sampleB_rep1_normal.bam], [id:sampleB, repeat:1, type:tumor, bam:sampleB_rep1_tumor.bam]]
-[[id:sampleB, interval:chr3], [id:sampleB, repeat:1, type:normal, bam:sampleB_rep1_normal.bam], [id:sampleB, repeat:1, type:tumor, bam:sampleB_rep1_tumor.bam]]
-[[id:sampleC, interval:chr1], [id:sampleC, repeat:1, type:normal, bam:sampleC_rep1_normal.bam], [id:sampleC, repeat:1, type:tumor, bam:sampleC_rep1_tumor.bam]]
-[[id:sampleC, interval:chr2], [id:sampleC, repeat:1, type:normal, bam:sampleC_rep1_normal.bam], [id:sampleC, repeat:1, type:tumor, bam:sampleC_rep1_tumor.bam]]
-[[id:sampleC, interval:chr3], [id:sampleC, repeat:1, type:normal, bam:sampleC_rep1_normal.bam], [id:sampleC, repeat:1, type:tumor, bam:sampleC_rep1_tumor.bam]]
-[[id:sampleD, interval:chr1], [id:sampleD, repeat:1, type:normal, bam:sampleD_rep1_normal.bam], [id:sampleD, repeat:1, type:tumor, bam:sampleD_rep1_tumor.bam]]
-[[id:sampleD, interval:chr2], [id:sampleD, repeat:1, type:normal, bam:sampleD_rep1_normal.bam], [id:sampleD, repeat:1, type:tumor, bam:sampleD_rep1_tumor.bam]]
-[[id:sampleD, interval:chr3], [id:sampleD, repeat:1, type:normal, bam:sampleD_rep1_normal.bam], [id:sampleD, repeat:1, type:tumor, bam:sampleD_rep1_tumor.bam]]
+[[id:sampleA, interval:chr1], [id:sampleA, repeat:2, type:normal, bam:sampleB_rep1_normal.bam], [id:sampleA, repeat:2, type:tumor, bam:sampleB_rep1_tumor.bam]]
+[[id:sampleA, interval:chr2], [id:sampleA, repeat:2, type:normal, bam:sampleB_rep1_normal.bam], [id:sampleA, repeat:2, type:tumor, bam:sampleB_rep1_tumor.bam]]
+[[id:sampleA, interval:chr3], [id:sampleA, repeat:2, type:normal, bam:sampleB_rep1_normal.bam], [id:sampleA, repeat:2, type:tumor, bam:sampleB_rep1_tumor.bam]]
+[[id:sampleB, interval:chr1], [id:sampleB, repeat:1, type:normal, bam:sampleC_rep1_normal.bam], [id:sampleB, repeat:1, type:tumor, bam:sampleC_rep1_tumor.bam]]
+[[id:sampleB, interval:chr2], [id:sampleB, repeat:1, type:normal, bam:sampleC_rep1_normal.bam], [id:sampleB, repeat:1, type:tumor, bam:sampleC_rep1_tumor.bam]]
+[[id:sampleB, interval:chr3], [id:sampleB, repeat:1, type:normal, bam:sampleC_rep1_normal.bam], [id:sampleB, repeat:1, type:tumor, bam:sampleC_rep1_tumor.bam]]
+[[id:sampleC, interval:chr1], [id:sampleC, repeat:1, type:normal, bam:sampleD_rep1_normal.bam], [id:sampleC, repeat:1, type:tumor, bam:sampleD_rep1_tumor.bam]]
+[[id:sampleC, interval:chr2], [id:sampleC, repeat:1, type:normal, bam:sampleD_rep1_normal.bam], [id:sampleC, repeat:1, type:tumor, bam:sampleD_rep1_tumor.bam]]
+[[id:sampleC, interval:chr3], [id:sampleC, repeat:1, type:normal, bam:sampleD_rep1_normal.bam], [id:sampleC, repeat:1, type:tumor, bam:sampleD_rep1_tumor.bam]]
 ```
 
 We can see that we have successfully isolated the `id` and `interval` fields, but not grouped the samples yet.
@@ -1017,8 +1017,6 @@ _After:_
 
 Simple, huh? We just added a single line of code. Let's see what happens when we run it:
 
-#TODO: AUTHORS NOTE WE CHANGED THE SAMPLE SHEET DURING DEV HERE. GO BACK AND FIX IT
-
 ```bash title="View grouped samples"
 nextflow run main.nf
 ```
@@ -1026,7 +1024,7 @@ nextflow run main.nf
 ```console title="View grouped samples"
  N E X T F L O W   ~  version 24.10.5
 
-Launching `main.nf` [irreverent_mestorf] DSL2 - revision: 5cb6b8c8da
+Launching `main.nf` [desperate_fourier] DSL2 - revision: 3b18d673f3
 
 [[id:sampleA, interval:chr1], [[id:sampleA, repeat:1, type:normal, bam:sampleA_rep1_normal.bam], [id:sampleA, repeat:2, type:normal, bam:sampleB_rep1_normal.bam]], [[id:sampleA, repeat:1, type:tumor, bam:sampleA_rep1_tumor.bam], [id:sampleA, repeat:2, type:tumor, bam:sampleB_rep1_tumor.bam]]]
 [[id:sampleA, interval:chr2], [[id:sampleA, repeat:1, type:normal, bam:sampleA_rep1_normal.bam], [id:sampleA, repeat:2, type:normal, bam:sampleB_rep1_normal.bam]], [[id:sampleA, repeat:1, type:tumor, bam:sampleA_rep1_tumor.bam], [id:sampleA, repeat:2, type:tumor, bam:sampleB_rep1_tumor.bam]]]
@@ -1118,7 +1116,7 @@ nextflow run main.nf
 ```console title="View grouped samples"
  N E X T F L O W   ~  version 24.10.5
 
-Launching `main.nf` [boring_hopper] DSL2 - revision: 23cdd7ec26
+Launching `main.nf` [deadly_dubinsky] DSL2 - revision: 9ca3088b35
 
 [[id:sampleA, interval:chr1], [[bam:sampleA_rep1_normal.bam], [bam:sampleB_rep1_normal.bam]], [[bam:sampleA_rep1_tumor.bam], [bam:sampleB_rep1_tumor.bam]]]
 [[id:sampleA, interval:chr2], [[bam:sampleA_rep1_normal.bam], [bam:sampleB_rep1_normal.bam]], [[bam:sampleA_rep1_tumor.bam], [bam:sampleB_rep1_tumor.bam]]]
@@ -1129,7 +1127,6 @@ Launching `main.nf` [boring_hopper] DSL2 - revision: 23cdd7ec26
 [[id:sampleC, interval:chr1], [[bam:sampleD_rep1_normal.bam]], [[bam:sampleD_rep1_tumor.bam]]]
 [[id:sampleC, interval:chr2], [[bam:sampleD_rep1_normal.bam]], [[bam:sampleD_rep1_tumor.bam]]]
 [[id:sampleC, interval:chr3], [[bam:sampleD_rep1_normal.bam]], [[bam:sampleD_rep1_tumor.bam]]]
-...
 ```
 
 Now we have a much cleaner output. We can see that the `id` and `interval` fields are only included once, and the `bam` field is included in the sample data.
