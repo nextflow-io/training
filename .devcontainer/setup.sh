@@ -3,6 +3,8 @@
 # Fix for Java options
 printf 'unset JAVA_TOOL_OPTIONS\n' >> $HOME/.bashrc
 unset JAVA_TOOL_OPTIONS
+unset JAVA_CMD
+unset JAVA_HOME
 
 # Customise the terminal command prompt
 printf "export PS1='\\[\\e[3;36m\\]\${PWD#/workspaces/} ->\\[\\e[0m\\] '\n" >> $HOME/.bashrc
