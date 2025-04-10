@@ -17,7 +17,6 @@
         "HOST_PROJECT_PATH": "/workspaces/training",
         "SHELL": "/bin/bash" // Ush bash
     },
-    "onCreateCommand": "bash .devcontainer/setup.sh",
     "customizations": {
         "vscode": {
             "extensions": ["nf-core.nf-core-extensionpack"],
