@@ -37,11 +37,11 @@ nav:
       - nf4_science/rnaseq/next_steps.md
   - Side Quests:
       - side_quests/index.md
+      - side_quests/workflows_of_workflows.md
+      - side_quests/splitting-and-grouping.md
       - side_quests/orientation.md
       - side_quests/nf-core.md
       - side_quests/nf-test.md
-      - side_quests/workflows_of_workflows.md
-      - side_quests/splitting-and-grouping.md
   - Fundamentals Training:
       - basic_training/index.md
       - basic_training/orientation.md
