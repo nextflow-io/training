@@ -98,22 +98,18 @@ Edit the `main.nf` file to include the following:
 
 _Before_:
 
-```groovy title="main.nf" linenums="1"
-workflow {
-    // Create a file object from a string path
-    myFile = 'data/sampleA_rep1_normal_R1_001.fastq.gz'
-    println "${myFile}"
-}
+```groovy title="main.nf" linenums="2"
+// Create a file object from a string path
+myFile = 'data/sampleA_rep1_normal_R1_001.fastq.gz'
+println "${myFile}"
 ```
 
 _After_:
 
-```groovy title="main.nf" linenums="1"
-workflow {
-    // Create a file object from a string path
-    myFile = file('data/sampleA_rep1_normal_R1_001.fastq.gz')
-    println "${myFile}"
-}
+```groovy title="main.nf" linenums="2"
+// Create a file object from a string path
+myFile = file('data/sampleA_rep1_normal_R1_001.fastq.gz')
+println "${myFile}"
 ```
 
 ```bash
@@ -138,27 +134,23 @@ Let's update our workflow to print out the file attributes:
 
 _Before_:
 
-```groovy title="main.nf" linenums="1"
-workflow {
-    // Create a file object from a string path
-    myFile = file('data/sampleA_rep1_normal_R1_001.fastq.gz')
-    println "${myFile}"
-}
+```groovy title="main.nf" linenums="2"
+// Create a file object from a string path
+myFile = file('data/sampleA_rep1_normal_R1_001.fastq.gz')
+println "${myFile}"
 ```
 
 _After_:
 
-```groovy title="main.nf" linenums="1"
-workflow {
-    // Create a file object from a string path
-    myFile = file('data/sampleA_rep1_normal_R1_001.fastq.gz')
+```groovy title="main.nf" linenums="2"
+// Create a file object from a string path
+myFile = file('data/sampleA_rep1_normal_R1_001.fastq.gz')
 
-    // Print file attributes
-    println "File name: ${myFile.name}"
-    println "Simple name: ${myFile.simpleName}"
-    println "Extension: ${myFile.extension}"
-    println "Parent directory: ${myFile.parent}"
-}
+// Print file attributes
+println "File name: ${myFile.name}"
+println "Simple name: ${myFile.simpleName}"
+println "Extension: ${myFile.extension}"
+println "Parent directory: ${myFile.parent}"
 ```
 
 Run the workflow:
@@ -197,34 +189,30 @@ Update your `main.nf` file:
 
 _Before_:
 
-```groovy title="main.nf" linenums="1"
-workflow {
-    // Create a file object from a string path
-    myFile = file('data/sampleA_rep1_normal_R1_001.fastq.gz')
+```groovy title="main.nf" linenums="2"
+// Create a file object from a string path
+myFile = file('data/sampleA_rep1_normal_R1_001.fastq.gz')
 
-    // Print file attributes
-    println "File name: ${myFile.name}"
-    println "Simple name: ${myFile.simpleName}"
-    println "Extension: ${myFile.extension}"
-    println "Parent directory: ${myFile.parent}"
-}
+// Print file attributes
+println "File name: ${myFile.name}"
+println "Simple name: ${myFile.simpleName}"
+println "Extension: ${myFile.extension}"
+println "Parent directory: ${myFile.parent}"
 ```
 
 _After_:
 
-```groovy title="main.nf" linenums="1"
-workflow {
-    // Reading files with Channel.fromPath
-    ch_fastq = Channel.fromPath('data/sampleA_rep1_normal_R1_001.fastq.gz')
-    ch_fastq.view { "Found file: $it" }
+```groovy title="main.nf" linenums="2"
+// Reading files with Channel.fromPath
+ch_fastq = Channel.fromPath('data/sampleA_rep1_normal_R1_001.fastq.gz')
+ch_fastq.view { "Found file: $it" }
 
-    // // Print file attributes
-    // Comment these out for now, we'll come back to them!
-    // println "File name: ${myFile.name}"
-    // println "Simple name: ${myFile.simpleName}"
-    // println "Extension: ${myFile.extension}"
-    // println "Parent directory: ${myFile.parent}"
-}
+// // Print file attributes
+// Comment these out for now, we'll come back to them!
+// println "File name: ${myFile.name}"
+// println "Simple name: ${myFile.simpleName}"
+// println "Extension: ${myFile.extension}"
+// println "Parent directory: ${myFile.parent}"
 ```
 
 Run the workflow:
@@ -251,33 +239,29 @@ In our first version, we use `.view()` to print the file name. Let's update our 
 
 _Before_:
 
-```groovy title="main.nf" linenums="1"
-workflow {
-    // Reading files with Channel.fromPath
-    ch_fastq = Channel.fromPath('data/sampleA_rep1_normal_R1_001.fastq.gz')
-    ch_fastq.view { myFile -> "Found file: $myFile" }
+```groovy title="main.nf" linenums="2"
+// Reading files with Channel.fromPath
+ch_fastq = Channel.fromPath('data/sampleA_rep1_normal_R1_001.fastq.gz')
+ch_fastq.view { myFile -> "Found file: $myFile" }
 
-    // // Print file attributes
-    // Comment these out for now, we'll come back to them!
-    // println "File name: ${myFile.name}"
-    // println "Simple name: ${myFile.simpleName}"
-    // println "Extension: ${myFile.extension}"
-    // println "Parent directory: ${myFile.parent}"
-}
+// // Print file attributes
+// Comment these out for now, we'll come back to them!
+// println "File name: ${myFile.name}"
+// println "Simple name: ${myFile.simpleName}"
+// println "Extension: ${myFile.extension}"
+// println "Parent directory: ${myFile.parent}"
 ```
 
 _After_:
 
-```groovy title="main.nf" linenums="1"
-workflow {
-    // Reading files with Channel.fromPath
-    ch_fastq = Channel.fromPath('data/sampleA_rep1_normal_R1_001.fastq.gz')
-    ch_fastq.view { myFile ->
-        println "File name: ${myFile.name}"
-        println "Simple name: ${myFile.simpleName}"
-        println "Extension: ${myFile.extension}"
-        println "Parent directory: ${myFile.parent}"
-    }
+```groovy title="main.nf" linenums="2"
+// Reading files with Channel.fromPath
+ch_fastq = Channel.fromPath('data/sampleA_rep1_normal_R1_001.fastq.gz')
+ch_fastq.view { myFile ->
+    println "File name: ${myFile.name}"
+    println "Simple name: ${myFile.simpleName}"
+    println "Extension: ${myFile.extension}"
+    println "Parent directory: ${myFile.parent}"
 }
 ```
 
@@ -363,30 +347,22 @@ First we will grab the simpleName of the file, which includes the metadata. Then
 
 _Before_:
 
-```groovy title="main.nf" linenums="1"
-workflow {
-    // Reading files with Channel.fromPath
-    ch_fastq = Channel.fromPath('data/sampleA_rep1_normal_R*_001.fastq.gz')
-    ch_fastq.view {
-        println "File name: ${it.name}"
-        println "Simple name: ${it.simpleName}"
-        println "Extension: ${it.extension}"
-        println "Parent directory: ${it.parent}"
-    }
+```groovy title="main.nf" linenums="4"
+ch_fastq.view {
+    println "File name: ${it.name}"
+    println "Simple name: ${it.simpleName}"
+    println "Extension: ${it.extension}"
+    println "Parent directory: ${it.parent}"
 }
 ```
 
 _After_:
 
-```groovy title="main.nf" linenums="1"
-workflow {
-    // Reading files with Channel.fromPath
-    ch_fastq = Channel.fromPath('data/sampleA_rep1_normal_R*_001.fastq.gz')
-    ch_fastq.map { myFile ->
-        [ myFile.simpleName, myFile ]
-    }
-    .view()
+```groovy title="main.nf" linenums="4"
+ch_fastq.map { myFile ->
+    [ myFile.simpleName, myFile ]
 }
+.view()
 ```
 
 ```bash
@@ -412,27 +388,17 @@ Nextflow includes a method called `tokenize()` which is perfect for this task.
 
 _Before_:
 
-```groovy title="main.nf" linenums="1"
-workflow {
-    // Reading files with Channel.fromPath
-    ch_fastq = Channel.fromPath('data/sampleA_rep1_normal_R*_001.fastq.gz')
-    ch_fastq.map { myFile ->
-        [ myFile.simpleName, myFile ]
-    }
-    .view()
+```groovy title="main.nf" linenums="4"
+ch_fastq.map { myFile ->
+    [ myFile.simpleName, myFile ]
 }
 ```
 
 _After_:
 
-```groovy title="main.nf" linenums="1"
-workflow {
-    // Reading files with Channel.fromPath
-    ch_fastq = Channel.fromPath('data/sampleA_rep1_normal_R*_001.fastq.gz')
-    ch_fastq.map { myFile ->
-        [ myFile.simpleName.tokenize('_'), myFile ]
-    }
-    .view()
+```groovy title="main.nf" linenums="4"
+ch_fastq.map { myFile ->
+    [ myFile.simpleName.tokenize('_'), myFile ]
 }
 ```
 
@@ -463,28 +429,18 @@ The line `def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_
 
 _Before_:
 
-```groovy title="main.nf" linenums="1"
-workflow {
-    // Reading files with Channel.fromPath
-    ch_fastq = Channel.fromPath('data/sampleA_rep1_normal_R*_001.fastq.gz')
-    ch_fastq.map { myFile ->
-        [ myFile.simpleName.tokenize('_'), myFile ]
-    }
-    .view()
+```groovy title="main.nf" linenums="4"
+ch_fastq.map { myFile ->
+    [ myFile.simpleName.tokenize('_'), myFile ]
 }
 ```
 
 _After_:
 
-```groovy title="main.nf" linenums="1"
-workflow {
-    // Reading files with Channel.fromPath
-    ch_fastq = Channel.fromPath('data/sampleA_rep1_normal_R*_001.fastq.gz')
-    ch_fastq.map { myFile ->
-        def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
-        [ sample, replicate, type, readNum, myFile ]
-    }
-    .view()
+```groovy title="main.nf" linenums="4"
+ch_fastq.map { myFile ->
+    def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
+    [ sample, replicate, type, readNum, myFile ]
 }
 ```
 
@@ -511,29 +467,20 @@ We can do this by using `.replace()` on the replicate string to remove the "rep"
 
 _Before_:
 
-```groovy title="main.nf" linenums="1"
-workflow {
-    // Reading files with Channel.fromPath
-    ch_fastq = Channel.fromPath('data/sampleA_rep1_normal_R*_001.fastq.gz')
-    ch_fastq.map { myFile ->
-        def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
-        [ sample, replicate, type, readNum, myFile ]
-    }
-    .view()
+```groovy title="main.nf" linenums="4"
+ch_fastq.map { myFile ->
+    def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
+    [ sample, replicate, type, readNum, myFile ]
 }
+.view()
 ```
 
 _After_:
 
-```groovy title="main.nf" linenums="1"
-workflow {
-    // Reading files with Channel.fromPath
-    ch_fastq = Channel.fromPath('data/sampleA_rep1_normal_R*_001.fastq.gz')
-    ch_fastq.map { myFile ->
-        def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
-        [ sample, replicate.replace('rep', ''), type, readNum, myFile ]
-    }
-    .view()
+```groovy title="main.nf" linenums="4"
+ch_fastq.map { myFile ->
+    def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
+    [ sample, replicate.replace('rep', ''), type, readNum, myFile ]
 }
 ```
 
@@ -572,32 +519,26 @@ Complete your `main.nf` file with the following:
 
 _Before_:
 
-```groovy title="main.nf" linenums="1"
-workflow {
-    // Reading files with Channel.fromPath
-    ch_fastq = Channel.fromPath('data/sampleA_rep1_normal_R*_001.fastq.gz')
-    ch_fastq.map { myFile ->
-        def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
-        [ sample, replicate.replace('rep', ''), type, readNum, myFile ]
-    }
-    .view()
+```groovy title="main.nf" linenums="3"
+ch_fastq = Channel.fromPath('data/sampleA_rep1_normal_R*_001.fastq.gz')
+ch_fastq.map { myFile ->
+    def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
+    [ sample, replicate.replace('rep', ''), type, readNum, myFile ]
 }
+.view()
 ```
 
 We will comment out the map operation for now.
 
 _After_:
 
-```groovy title="main.nf" linenums="1"
-workflow {
-    // Reading files with Channel.fromPath
-    ch_fastq = Channel.fromFilePairs('data/sampleA_rep1_normal_R{1,2}_001.fastq.gz')
-    // ch_fastq.map { myFile ->
-    //     def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
-    //     [ sample, replicate.replace('rep', ''), type, readNum, myFile ]
-    // }
-    .view()
-}
+```groovy title="main.nf" linenums="3"
+ch_fastq = Channel.fromFilePairs('data/sampleA_rep1_normal_R{1,2}_001.fastq.gz')
+// ch_fastq.map { myFile ->
+//     def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
+//     [ sample, replicate.replace('rep', ''), type, readNum, myFile ]
+// }
+.view()
 ```
 
 Run the workflow:
@@ -624,29 +565,19 @@ We still need the metadata. Our `map` operation from before won't work because i
 
 _Before_:
 
-```groovy title="main.nf" linenums="1"
-workflow {
-    // Reading files with Channel.fromPath
-    ch_fastq = Channel.fromFilePairs('data/sampleA_rep1_normal_R{1,2}_001.fastq.gz')
-    // ch_fastq.map { myFile ->
-    //     def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
-    //     [ sample, replicate.replace('rep', ''), type, readNum, myFile ]
-    // }
-    .view()
-}
+```groovy title="main.nf" linenums="4"
+// ch_fastq.map { myFile ->
+//     def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
+//     [ sample, replicate.replace('rep', ''), type, readNum, myFile ]
+// }
 ```
 
 _After_:
 
-```groovy title="main.nf" linenums="1"
-workflow {
-    // Reading files with Channel.fromPath
-    ch_fastq = Channel.fromFilePairs('data/sampleA_rep1_normal_R{1,2}_001.fastq.gz')
-    ch_fastq.map { id, fastqs ->
-        def (sample, replicate, type, readNum) = id.tokenize('_')
-        [ sample, replicate.replace('rep', ''), type, fastqs ]
-    }
-    .view()
+```groovy title="main.nf" linenums="3"
+ch_fastq.map { id, fastqs ->
+    def (sample, replicate, type, readNum) = id.tokenize('_')
+    [ sample, replicate.replace('rep', ''), type, fastqs ]
 }
 ```
 
@@ -741,8 +672,6 @@ _After_:
     ANALYZE_READS(ch_samples)
 }
 ```
-
-#TODO: We can tidy this up by assigning everything to ch_fastq then using view every time. Then we just add it to ANALYZE_SAMPLES
 
 ```bash
 nextflow run main.nf
