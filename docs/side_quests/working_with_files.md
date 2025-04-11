@@ -1,4 +1,4 @@
-# Working with Files in Nextflow
+# Working with Files
 
 Bioinformatics workflows often involve processing large numbers of files. Nextflow provides powerful tools to handle files efficiently, helping you organize and process your data with minimal code.
 
@@ -28,7 +28,7 @@ Before taking on this side quest you should:
 Let's move into the project directory:
 
 ```bash
-cd side-quests/files
+cd side-quests/working_with_files
 ```
 
 You'll find a simple workflow file (`main.nf`) and a data directory containing some example files.
@@ -79,9 +79,10 @@ nextflow run main.nf
 ```
 
 ```console title="Starting Output"
-> nextflow run .
-N E X T F L O W  ~  version 24.10.5
-Launching `./main.nf` [distraught_fermi] DSL2 - revision: fd287f2c8c
+ N E X T F L O W   ~  version 24.10.4
+
+Launching `main.nf` [romantic_chandrasekhar] DSL2 - revision: 5a4a89bc3a
+
 data/sampleA_rep1_normal_R1_001.fastq.gz
 ```
 
@@ -111,7 +112,7 @@ _After_:
 workflow {
     // Create a file object from a string path
     myFile = file('data/sampleA_rep1_normal_R1_001.fastq.gz')
-    println "File name: ${myFile.name}"
+    println "${myFile}"
 }
 ```
 
@@ -119,14 +120,15 @@ workflow {
 nextflow run main.nf
 ```
 
-```console title="Starting Output"
-> nextflow run .
-N E X T F L O W  ~  version 24.10.5
-Launching `./main.nf` [friendly_joliot] DSL2 - revision: 9fae8a8fca
-/Users/adam.talbot/training/side-quests/files/data/sampleA_rep1_normal_R1_001.fastq.gz
+```console title="File object output"
+ N E X T F L O W   ~  version 24.10.4
+
+Launching `main.nf` [kickass_coulomb] DSL2 - revision: 5af44b1b59
+
+/workspaces/training/side-quests/working_with_files/data/sampleA_rep1_normal_R1_001.fastq.gz
 ```
 
-You should only see a single difference, the file path will now be absolute. Note that the full path will change based on where you are doing this training, but it is likely to be something like `/Users/your-username/training/side-quests/files/data/sampleA_rep1_normal_R1_001.fastq.gz`.
+You should only see a single difference, the file path will now be absolute. Note that the full path will change based on where you are doing this training, but it is likely to be something like `/workspaces/training/side-quests/working_with_files/data/sampleA_rep1_normal_R1_001.fastq.gz`.
 
 ### 1.2 File Attributes
 
@@ -168,14 +170,14 @@ nextflow run main.nf
 You'll see various file attributes printed to the console:
 
 ```console title="File Attributes Output"
- N E X T F L O W   ~  version 24.10.5
+ N E X T F L O W   ~  version 24.10.4
 
-Launching `./main.nf` [goofy_edison] DSL2 - revision: b7a2a01d5e
+Launching `main.nf` [ecstatic_ampere] DSL2 - revision: f3fa3dcb48
 
 File name: sampleA_rep1_normal_R1_001.fastq.gz
 Simple name: sampleA_rep1_normal_R1_001
 Extension: gz
-Parent directory: /Users/adam.talbot/training/side-quests/files/data
+Parent directory: /workspaces/training/side-quests/working_with_files/data
 ```
 
 ### Takeaway
@@ -234,11 +236,11 @@ nextflow run main.nf
 You'll see each file path being emitted as a separate element in the channel:
 
 ```console title="Channel.fromPath Output"
- N E X T F L O W   ~  version 24.10.5
+ N E X T F L O W   ~  version 24.10.4
 
-Launching `./main.nf` [drunk_volta] DSL2 - revision: 03cb5a728b
+Launching `main.nf` [grave_meucci] DSL2 - revision: b09964a583
 
-Found file: /Users/adam.talbot/training/side-quests/files/data/sampleA_rep1_normal_R2_001.fastq.gz
+Found file: /workspaces/training/side-quests/working_with_files/data/sampleA_rep1_normal_R1_001.fastq.gz
 ```
 
 Note how Nextflow has grabbed all the files in the `data` directory that match the pattern `*.fastq.gz` and turned them into `file` objects. Channel.fromPath() is a convenient way of creating a new channel populated by a list of files.
@@ -286,14 +288,14 @@ nextflow run main.nf
 ```
 
 ```console title="Channel.fromPath Output"
- N E X T F L O W   ~  version 24.10.5
+ N E X T F L O W   ~  version 24.10.4
 
-Launching `./main.nf` [insane_albattani] DSL2 - revision: cb3c742b82
+Launching `main.nf` [furious_swanson] DSL2 - revision: c35c34950d
 
 File name: sampleA_rep1_normal_R1_001.fastq.gz
 Simple name: sampleA_rep1_normal_R1_001
 Extension: gz
-Parent directory: /Users/adam.talbot/training/side-quests/files/data
+Parent directory: /workspaces/training/side-quests/working_with_files/data
 ```
 
 ### 2.3. Using a glob to match multiple files
@@ -321,18 +323,18 @@ nextflow run main.nf
 ```
 
 ```console title="Channel.fromPath Glob Output"
- N E X T F L O W   ~  version 24.10.5
+ N E X T F L O W   ~  version 24.10.4
 
-Launching `./main.nf` [clever_jang] DSL2 - revision: f2a1db75ac
+Launching `main.nf` [boring_sammet] DSL2 - revision: d2aa789c9a
 
-File name: sampleA_rep1_normal_R2_001.fastq.gz
-Simple name: sampleA_rep1_normal_R2_001
-Extension: gz
-Parent directory: /Users/adam.talbot/training/side-quests/files/data
 File name: sampleA_rep1_normal_R1_001.fastq.gz
 Simple name: sampleA_rep1_normal_R1_001
 Extension: gz
-Parent directory: /Users/adam.talbot/training/side-quests/files/data
+Parent directory: /workspaces/training/side-quests/working_with_files/data
+File name: sampleA_rep1_normal_R2_001.fastq.gz
+Simple name: sampleA_rep1_normal_R2_001
+Extension: gz
+Parent directory: /workspaces/training/side-quests/working_with_files/data
 ```
 
 Using this method, we could grab as many or as few files as we want just by changing the glob pattern. If we made it more generous, we could grab all the files in the `data` directory, but we'll come back to that later.
@@ -392,12 +394,12 @@ nextflow run main.nf
 ```
 
 ```console title="Sample Metadata Output"
- N E X T F L O W   ~  version 24.10.5
+ N E X T F L O W   ~  version 24.10.4
 
-Launching `./main.nf` [curious_brahmagupta] DSL2 - revision: 079f7ab16c
+Launching `main.nf` [furious_liskov] DSL2 - revision: dde7b5315e
 
-[sampleA_rep1_normal_R2_001, /Users/adam.talbot/training/side-quests/files/data/sampleA_rep1_normal_R2_001.fastq.gz]
-[sampleA_rep1_normal_R1_001, /Users/adam.talbot/training/side-quests/files/data/sampleA_rep1_normal_R1_001.fastq.gz]
+[sampleA_rep1_normal_R1_001, /workspaces/training/side-quests/working_with_files/data/sampleA_rep1_normal_R1_001.fastq.gz]
+[sampleA_rep1_normal_R2_001, /workspaces/training/side-quests/working_with_files/data/sampleA_rep1_normal_R2_001.fastq.gz]
 ```
 
 Note how we have separated the sample `simpleName`, which includes the metadata, from the `file` object. This is useful if we want to use the sample metadata in a later process.
@@ -441,12 +443,12 @@ nextflow run main.nf
 ```
 
 ```console title="Sample Tokenize Output"
- N E X T F L O W   ~  version 24.10.5
+ N E X T F L O W   ~  version 24.10.4
 
-Launching `./main.nf` [nice_goldwasser] DSL2 - revision: c5006709b8
+Launching `main.nf` [gigantic_gauss] DSL2 - revision: a39baabb57
 
-[[sampleA, rep1, normal, R2, 001], /Users/adam.talbot/training/side-quests/files/data/sampleA_rep1_normal_R2_001.fastq.gz]
-[[sampleA, rep1, normal, R1, 001], /Users/adam.talbot/training/side-quests/files/data/sampleA_rep1_normal_R1_001.fastq.gz]
+[[sampleA, rep1, normal, R1, 001], /workspaces/training/side-quests/working_with_files/data/sampleA_rep1_normal_R1_001.fastq.gz]
+[[sampleA, rep1, normal, R2, 001], /workspaces/training/side-quests/working_with_files/data/sampleA_rep1_normal_R2_001.fastq.gz]
 ```
 
 Success! Let's break our metadata down into a tuple of values.
@@ -491,12 +493,12 @@ nextflow run main.nf
 ```
 
 ```console title="Flattened Metadata Output"
- N E X T F L O W   ~  version 24.10.5
+ N E X T F L O W   ~  version 24.10.4
 
-Launching `./main.nf` [extravagant_descartes] DSL2 - revision: 194da9f5a9
+Launching `main.nf` [extravagant_laplace] DSL2 - revision: 297959a496
 
-[sampleA, rep1, normal, R2, /Users/adam.talbot/training/side-quests/files/data/sampleA_rep1_normal_R2_001.fastq.gz]
-[sampleA, rep1, normal, R1, /Users/adam.talbot/training/side-quests/files/data/sampleA_rep1_normal_R1_001.fastq.gz]
+[sampleA, rep1, normal, R1, /workspaces/training/side-quests/working_with_files/data/sampleA_rep1_normal_R1_001.fastq.gz]
+[sampleA, rep1, normal, R2, /workspaces/training/side-quests/working_with_files/data/sampleA_rep1_normal_R2_001.fastq.gz]
 ```
 
 Success! We've now flattened the metadata into a single list of values.
@@ -540,12 +542,12 @@ nextflow run main.nf
 ```
 
 ```console title="Simplified Metadata Output"
- N E X T F L O W   ~  version 24.10.5
+ N E X T F L O W   ~  version 24.10.4
 
-Launching `./main.nf` [cheesy_cajal] DSL2 - revision: f4aa35d1bb
+Launching `main.nf` [reverent_volta] DSL2 - revision: b3aac71fea
 
-[sampleA, 1, normal, R2, /Users/adam.talbot/training/side-quests/files/data/sampleA_rep1_normal_R2_001.fastq.gz]
-[sampleA, 1, normal, R1, /Users/adam.talbot/training/side-quests/files/data/sampleA_rep1_normal_R1_001.fastq.gz]
+[sampleA, 1, normal, R1, /workspaces/training/side-quests/working_with_files/data/sampleA_rep1_normal_R1_001.fastq.gz]
+[sampleA, 1, normal, R2, /workspaces/training/side-quests/working_with_files/data/sampleA_rep1_normal_R2_001.fastq.gz]
 ```
 
 Nice! we have removed the "rep" from the replicate string.
@@ -607,11 +609,11 @@ nextflow run main.nf
 The output will show the paired files grouped together:
 
 ```console title="Channel.fromFilePairs Output"
- N E X T F L O W   ~  version 24.10.5
+ N E X T F L O W   ~  version 24.10.4
 
-Launching `./main.nf` [reverent_kowalevski] DSL2 - revision: abe59642b7
+Launching `main.nf` [chaotic_cuvier] DSL2 - revision: 472265a440
 
-[sampleA_rep1_normal_R, [/Users/adam.talbot/training/side-quests/files/data/sampleA_rep1_normal_R1_001.fastq.gz, /Users/adam.talbot/training/side-quests/files/data/sampleA_rep1_normal_R2_001.fastq.gz]]
+[sampleA_rep1_normal_R, [/workspaces/training/side-quests/working_with_files/data/sampleA_rep1_normal_R1_001.fastq.gz, /workspaces/training/side-quests/working_with_files/data/sampleA_rep1_normal_R2_001.fastq.gz]]
 ```
 
 Note the difference in data structure. Rather than being a list of results, we have a single result in the format `id, [ fastq1, fastq2 ]`. Nextflow has done the hard work of extracting the sample name by examining the shared prefix and using it as a sample id.
@@ -722,18 +724,14 @@ Then implement the process in the workflow:
 
 _Before_:
 
-```groovy title="main.nf" linenums="25"
-    ch_fastq.map { id, fastqs ->
-        def (sample, replicate, type, readNum) = id.tokenize('_')
-        [ sample, replicate.replace('rep', ''), type, fastqs ]
-    }
+```groovy title="main.nf" linenums="31"
     .view()
 }
 ```
 
 _After_:
 
-```groovy title="main.nf" linenums="29"
+```groovy title="main.nf" linenums="31"
     ch_samples = ch_fastq.map { id, fastqs ->
         def (sample, replicate, type, readNum) = id.tokenize('_')
         [ sample, replicate.replace('rep', ''), type, fastqs ]
@@ -854,7 +852,7 @@ Check the results directory now:
 
 ```console title="Results Directory"
 > tree results
-results
+results/
 ├── normal
 │   ├── sampleA
 │   │   ├── 1
