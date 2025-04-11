@@ -711,7 +711,8 @@ process ANALYZE_READS {
     echo "Read 1: ${fastqs[0]}" >> ${id}_stats.txt
     echo "Read 2: ${fastqs[1]}" >> ${id}_stats.txt
     echo "File sizes:" >> ${id}_stats.txt
-    ls -lh ${fastqs[0]} ${fastqs[1]} >> ${id}_stats.txt
+    echo "Read 1 size: \$(wc -l < ${fastqs[0]} | awk '{print \$1/4}') reads" >> ${id}_stats.txt
+    echo "Read 2 size: \$(wc -l < ${fastqs[1]} | awk '{print \$1/4}') reads" >> ${id}_stats.txt
     """
 }
 
