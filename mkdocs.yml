@@ -38,6 +38,7 @@ nav:
   - Side Quests:
       - side_quests/index.md
       - side_quests/orientation.md
+      - side_quests/working_with_files.md
       - side_quests/nf-core.md
       - side_quests/nf-test.md
       - side_quests/workflows_of_workflows.md
