@@ -320,25 +320,25 @@ It allows us to retrieve the desired output file without having to dig down into
 
 In the workflow script file `hello-world.nf`, make the following code modification:
 
-_Before:_
+=== "After"
 
-```groovy title="hello-world.nf" linenums="6"
-process sayHello {
+    ```groovy title="hello-world.nf" linenums="6" hl_lines="3"
+    process sayHello {
 
-    output:
-        path 'output.txt'
-```
+        publishDir 'results', mode: 'copy'
 
-_After:_
+        output:
+            path 'output.txt'
+    ```
 
-```groovy title="hello-world.nf" linenums="6"
-process sayHello {
+=== "Before"
 
-    publishDir 'results', mode: 'copy'
+    ```groovy title="hello-world.nf" linenums="6"
+    process sayHello {
 
-    output:
-        path 'output.txt'
-```
+        output:
+            path 'output.txt'
+    ```
 
 #### 3.1.2. Run the workflow again
 
@@ -485,30 +485,30 @@ First we need to adapt the process definition to accept an input called `greetin
 
 In the process block, make the following code change:
 
-_Before:_
+=== "After"
 
-```groovy title="hello-world.nf" linenums="6"
-process sayHello {
+    ```groovy title="hello-world.nf" linenums="6" hl_lines="5 6"
+    process sayHello {
 
-    publishDir 'results', mode: 'copy'
+        publishDir 'results', mode: 'copy'
 
-    output:
-        path 'output.txt'
-```
+        input:
+            val greeting
 
-_After:_
+        output:
+            path 'output.txt'
+    ```
 
-```groovy title="hello-world.nf" linenums="6"
-process sayHello {
+=== "Before"
 
-    publishDir 'results', mode: 'copy'
+    ```groovy title="hello-world.nf" linenums="6"
+    process sayHello {
 
-    input:
-        val greeting
+        publishDir 'results', mode: 'copy'
 
-    output:
-        path 'output.txt'
-```
+        output:
+            path 'output.txt'
+    ```
 
 The `greeting` variable is prefixed by `val` to tell Nextflow it's a value (not a path).
 
@@ -518,23 +518,23 @@ Now we swap the original hardcoded value for the value of the input variable we 
 
 In the process block, make the following code change:
 
-_Before:_
+=== "After"
 
-```groovy title="hello-channels.nf" linenums="16"
-script:
-"""
-echo 'Hello World!' > output.txt
-"""
-```
+    ```groovy title="hello-channels.nf" linenums="16" hl_lines="3"
+    script:
+    """
+    echo '$greeting' > output.txt
+    """
+    ```
 
-_After:_
+=== "Before"
 
-```groovy title="hello-channels.nf" linenums="16"
-script:
-"""
-echo '$greeting' > output.txt
-"""
-```
+    ```groovy title="hello-channels.nf" linenums="16"
+    script:
+    """
+    echo 'Hello World!' > output.txt
+    """
+    ```
 
 Make sure to prepend the `$` symbol to tell Nextflow this is a variable name that needs to be replaced with the actual value (=interpolated).
 
@@ -557,19 +557,19 @@ In principle we can write it anywhere; but since we're going to want to give it 
 
 In the workflow block, make the following code change:
 
-_Before:_
+=== "After"
 
-```groovy title="hello-world.nf" linenums="24"
-// emit a greeting
-sayHello()
-```
+    ```groovy title="hello-world.nf" linenums="24" hl_lines="2"
+    // emit a greeting
+    sayHello(params.greeting)
+    ```
 
-_After:_
+=== "Before"
 
-```groovy title="hello-world.nf" linenums="24"
-// emit a greeting
-sayHello(params.greeting)
-```
+    ```groovy title="hello-world.nf" linenums="24"
+    // emit a greeting
+    sayHello()
+    ```
 
 This tells Nextflow to run the `sayHello` process on the value provided through the `--greeting` parameter.
 
