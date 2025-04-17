@@ -8,15 +8,15 @@
 :fontawesome-brands-youtube:{ .youtube } See the [whole playlist on the Nextflow YouTube channel](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik).
 ///
 
-Questa sezione spiega come organizzare il codice del workflow per rendere più efficiente e sostenibile lo sviluppo e la manutenzione della pipeline. 
+Questa sezione spiega come organizzare il codice del workflow per rendere più efficiente e sostenibile lo sviluppo e la manutenzione della pipeline.
 In particolare, dimostreremo come utilizzare i **moduli**.
 
-In Nextflow, un **modulo** è una singola definizione di processo incapsulata in un file di codice indipendente. 
+In Nextflow, un **modulo** è una singola definizione di processo incapsulata in un file di codice indipendente.
 Per utilizzare un modulo in un workflow, basta aggiungere una singola riga di dichiarazione di importazione al file di codice del workflow; quindi è possibile integrare il processo nel workflow come si farebbe normalmente.
 
 Quando abbiamo iniziato a sviluppare il nostro workflow, abbiamo inserito tutto in un unico file di codice.
 
-La suddivisione dei processi in singoli moduli consente di riutilizzare le definizioni dei processi in più workflow senza produrre più copie del codice. 
+La suddivisione dei processi in singoli moduli consente di riutilizzare le definizioni dei processi in più workflow senza produrre più copie del codice.
 Questo rende il codice più condivisibile, flessibile e manutenibile.
 
 !!! note
@@ -66,7 +66,7 @@ results
 !!! note
 
     Potrebbe anche essere rimasto un file chiamato `output.txt` se si è lavorato alla Parte 2 nello stesso ambiente.
-    
+
 Se questo ha funzionato, siete pronti per imparare a modularizzare il codice del workflow.
 
 ---
@@ -83,7 +83,7 @@ mkdir modules
 !!! note
 
     Qui mostriamo come usare i moduli locali, cioè i moduli memorizzati localmente nello stesso repository del resto del codice del workflow, in contrasto con i moduli remoti, che sono memorizzati in altri repository (remoti). Per maggiori informazioni sui moduli remoti, si veda la [documentazione](https://www.nextflow.io/docs/latest/module.html).
-    
+
 ---
 
 ## 2. Creare un modulo per `sayHello()`

@@ -11,7 +11,7 @@
 In questa prima parte del corso di formazione Hello Nextflow, ci addentriamo nell'argomento con un esempio di Hello World molto elementare e indipendente dal dominio, che svilupperemo progressivamente per dimostrare l'uso della logica e dei componenti fondamentali di Nextflow.
 
 !!! note
-    
+
       Un “Hello World!” è un esempio minimalista che ha lo scopo di dimostrare la sintassi e la struttura di base di un linguaggio di programmazione o di un framework software. L'esempio consiste tipicamente nello stampare la frase “Hello, World!” su un dispositivo di output, come la console o il terminale, o nello scriverla su un file.
 
 ---
@@ -36,7 +36,7 @@ Questo testo viene inviato al terminale con la scritta 'Hello World'.
 Hello World!
 ```
 
-### 0.2.  Ora fate in modo che scriva il testo output in un file
+### 0.2. Ora fate in modo che scriva il testo output in un file
 
 ```bash
 echo 'Hello World!' > output.txt
@@ -54,7 +54,7 @@ Questo non produce alcun output nel terminale.
 cat output.txt
 ```
 
-Adesso, il testo 'Hello World' si trova nel file output che abbiamo specificato. 
+Adesso, il testo 'Hello World' si trova nel file output che abbiamo specificato.
 
 ```console title="output.txt" linenums="1"
 Hello World!
@@ -71,14 +71,14 @@ Hello World!
 ### Takeaway
 
 Ora sapete come eseguire un semplice comando nel terminale che produce un testo e, facoltativamente, come far scrivere l'output in un file.
+
 ### Cosa c'è dopo?
 
 Scoprire come potrebbe essere scritto un flusso di lavoro Nextflow.
 
 ---
 
-
-## 1.  Esaminare lo script di avvio del flusso di lavoro Hello World
+## 1. Esaminare lo script di avvio del flusso di lavoro Hello World
 
 Come accennato nella guida, vi forniamo uno script di flusso di lavoro completamente funzionale, anche se minimalista, chiamato `hello-world.nf` che fa la stessa cosa di prima (scrivere “Hello World!”) ma con Nextflow.
 
@@ -122,13 +122,12 @@ Ogni **process** descrive le operazioni che il passo corrispondente della pipeli
 
 Vediamo prima il blocco **process** e poi il blocco **workflow**.
 
-### 1.2. Definzione di `process` 
+### 1.2. Definzione di `process`
 
 Il primo blocco di codice descrive un **process**.
 La definizione del process inizia con la parola chiave `process`, seguita dal nome del processo e infine dal corpo del processo delimitato da parentesi graffe.
 Il corpo del processo deve contenere un blocco di script che specifica il comando da eseguire, che può essere qualsiasi cosa si possa eseguire in un terminale a riga di comando.
 Qui abbiamo un **process** chiamato `sayHello` che produce un **output** in un file chiamato `output.txt`.
-
 
 ```groovy title="hello-world.nf" linenums="3"
 /*
@@ -158,7 +157,7 @@ Un altro qualificatore comune è `val`.
     Questo è necessario per verificare che il comando sia stato eseguito correttamente e per passare l'output ai processi a valle, se necessario. L'output prodotto che non corrisponde a quanto dichiarato nel blocco di output non verrà passato ai processi a valle.
 
 !!! warning
-     
+
     Questo esempio è fragile perché abbiamo codificato il nome del file di output in due punti separati (lo script e i blocchi di output).
     Se ne cambiamo uno ma non l'altro, lo script si rompe.
     Più avanti, si imparerà a usare le variabili per evitare questo problema.
@@ -385,7 +384,7 @@ Ci sono due vantaggi principali nel fare ciò:
 
 - Se siete nel bel mezzo dello sviluppo della vostra pipeline, potete iterare più rapidamente, poiché dovete eseguire solo i processi su cui state lavorando attivamente per testare le vostre modifiche.
 - Se si sta eseguendo una pipeline in produzione e qualcosa va storto, in molti casi è possibile risolvere il problema e rilanciare la pipeline, che riprenderà a funzionare dal punto di guasto, con un notevole risparmio di tempo e di calcolo.
-  
+
 Per usarlo, aggiungete semplicemente `-resume` al vostro comando ed eseguitelo:
 
 ```bash
@@ -451,7 +450,7 @@ Removed /workspaces/training/hello-nextflow/work/a3/7be2fad5e71e5f49998f795677fd
 
     L'eliminazione delle sottodirectory di lavoro delle esecuzioni precedenti le rimuove dalla cache di Nextflow e cancella tutti gli output memorizzati in tali directory.
     Ciò significa che interrompe la capacità di Nextflow di riprendere l'esecuzione senza rieseguire i processi corrispondenti.
-    
+
     L'utente è responsabile del salvataggio di tutti gli output a cui tiene o su cui intende fare affidamento! Se si usa la direttiva `publishDir` a tale scopo, assicurarsi di usare la modalità `copy`, non la modalità `symlink`.
 
 ### Takeaway
@@ -684,7 +683,7 @@ Konnichiwa!
 
     In Nextflow sono presenti più punti in cui è possibile specificare i valori dei parametri.
     Se lo stesso parametro è impostato su valori diversi in più punti, Nexflow determinerà quale valore utilizzare in base all'ordine di precedenza descritto [qui](https://www.nextflow.io/docs/latest/config.html).
-    
+
 ### Takeaway
 
 Sapete come utilizzare una semplice variabile di input fornita in fase di esecuzione tramite un parametro della riga di comando, nonché come impostare, utilizzare e sovrascrivere i valori predefiniti.

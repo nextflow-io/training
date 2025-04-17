@@ -1,4 +1,3 @@
-
 # Parte 5: Hello Containers
 
 <div class="video-wrapper">
@@ -9,15 +8,13 @@
 :fontawesome-brands-youtube:{ .youtube } Guarda l [intera playlist sul canale YouTube Nextflow](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik).
 ///
 
-Nella parte 1-4 del corso di training, hai imparato come usare gli elementi di base di Nextflow per assemblare un semplice workflow capace di processare alcuni testi, a fare esecuzioni parallele se ci sono più input e collezionare i risultati per esecuzioni future. 
+Nella parte 1-4 del corso di training, hai imparato come usare gli elementi di base di Nextflow per assemblare un semplice workflow capace di processare alcuni testi, a fare esecuzioni parallele se ci sono più input e collezionare i risultati per esecuzioni future.
 
-Tuttavia, si era limitati agli strumenti unix di base disponibili nel proprio ambiente. 
-Le attività del mondo reale spesso richiedono vari strumenti e pacchetti non inclusi default. 
-In genere, è necessario installare questi strumenti, gestire le loro dipendenze e risolvere eventuali conflitti. 
+Tuttavia, si era limitati agli strumenti unix di base disponibili nel proprio ambiente.
+Le attività del mondo reale spesso richiedono vari strumenti e pacchetti non inclusi default.
+In genere, è necessario installare questi strumenti, gestire le loro dipendenze e risolvere eventuali conflitti.
 
-
-Tutto ciò è molto noiso e fastidioso, quindi  vi mostreremo come usare i container per risolvere questo problema in modo molto più comodo. 
-
+Tutto ciò è molto noiso e fastidioso, quindi vi mostreremo come usare i container per risolvere questo problema in modo molto più comodo.
 
 Un container è un'unità di software leggera, autonoma ed eseguibile creata da un'immagine di container che incluede tutto ciò che serve per eseguitre un'applicazione, compresi codici librerie di sistema e impostazioni.
 
@@ -32,13 +29,13 @@ Un container è un'unità di software leggera, autonoma ed eseguibile creata da 
 Utilizzeremo lo script del workflow hello-containers.nf come punto di paretnza per la seconda sezione.
 
 Just to make sure everything is working, run the script once before making any changes:
-È equivalente allo script prodotto lavorando alla Parte 4  di questo corso di formazione.
+È equivalente allo script prodotto lavorando alla Parte 4 di questo corso di formazione.
 
 ```bash
 nextflow run hello-containers.nf
 ```
 
-Questo dovrebbe produrre il seguente risultato: 
+Questo dovrebbe produrre il seguente risultato:
 
 ```console title="Output"
  N E X T F L O W   ~  version 24.10.0
@@ -51,7 +48,7 @@ executor >  local (7)
 [7d/f7961c] collectGreetings     [100%] 1 of 1 ✔
 ```
 
-Come in precendenza, i file output si trovano nella directory `results`  (specificata dalla direttiva `publishDir`).
+Come in precendenza, i file output si trovano nella directory `results` (specificata dalla direttiva `publishDir`).
 
 ```console title="Directory contents"
 results
@@ -70,8 +67,7 @@ results
 
     There may also be a file named `output.txt` left over if you worked through Part 2 in the same environment.
 
-Se questo ha funzionato, siete pronti per imparare a usare i container. 
-
+Se questo ha funzionato, siete pronti per imparare a usare i container.
 
 ---
 
@@ -81,7 +77,7 @@ Quello che vogliamo fare è aggiungere un passo al nostro workflow che utilizzer
 
 Tuttavia, prima di iniziare a usarli in Nextflow, esamineremo alcuni concetti e operazioni di base, per consolidare la comprensione di cosa sono i container.
 
-### 1.1. Estrarre l'immagine del container 
+### 1.1. Estrarre l'immagine del container
 
 Per utilizzare un container, di solito si scarica o si 'pull' un'immagine del container da un reggistro dei container e poi si eseguel'immagien del container per creare un'istanza del container.
 
@@ -93,12 +89,12 @@ docker pull '<container>'
 
 La parte `docker pull` è l'istruzione al sistema di container di prelevare un'immagine di container da un repository.
 
-La parte  `'<container>'` è l'indirizzo URI dell'imagine del conatiner.
+La parte `'<container>'` è l'indirizzo URI dell'imagine del conatiner.
 
-a titolo d'esempio estraiamo un'immagine ocntainer che contenga [cowpy](https://github.com/jeffbuttars/cowpy), un'implementazione di Python di uno strumento chiamato cowsay che genera arte ASCII per visualizzare in modo divertente input di testo arbitrari. 
+a titolo d'esempio estraiamo un'immagine ocntainer che contenga [cowpy](https://github.com/jeffbuttars/cowpy), un'implementazione di Python di uno strumento chiamato cowsay che genera arte ASCII per visualizzare in modo divertente input di testo arbitrari.
 
 Esistono vari repository dove è possibile trovare i container pubblicati.
-Noi abbiamo utilizzato il servizio di  [Seqera Containers](https://seqera.io/containers/) per generare quest'immagine Docker  container dal pacchetto cowpy Conda: `'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'`.
+Noi abbiamo utilizzato il servizio di [Seqera Containers](https://seqera.io/containers/) per generare quest'immagine Docker container dal pacchetto cowpy Conda: `'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'`.
 
 Eseguire il comando di pull richiesto:
 
@@ -129,23 +125,23 @@ Status: Downloaded newer image for community.wave.seqera.io/library/cowpy:1.1.5-
 community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273
 ```
 
- Una volta completato il download, si ha una copia locale dell'immagine del container.
+Una volta completato il download, si ha una copia locale dell'immagine del container.
 
-### 1.2. utilizzare il container per eseguire cowpy come comando singolo. 
+### 1.2. utilizzare il container per eseguire cowpy come comando singolo.
 
-Un modo molto comune di utilizzare i container è quello di eseguirli direttamente, cioè in modo non interattivo. 
-Questo è ottimo per eseguire comandi una tantum. 
+Un modo molto comune di utilizzare i container è quello di eseguirli direttamente, cioè in modo non interattivo.
+Questo è ottimo per eseguire comandi una tantum.
 
-La sintassi generale è la seguente: 
+La sintassi generale è la seguente:
 
 ```bash title="Syntax"
 docker run --rm '<container>' [tool command]
 ```
 
-La parte `docker run --rm '<container>'` è l'istruzione al sistema di container di creare un'istanza da un'immagine di container ed eseguire un comando in essa. 
-Il flag  `--rm`  indica al sistema di chiudere l'istanza del container al termine del comando. 
+La parte `docker run --rm '<container>'` è l'istruzione al sistema di container di creare un'istanza da un'immagine di container ed eseguire un comando in essa.
+Il flag `--rm` indica al sistema di chiudere l'istanza del container al termine del comando.
 
-La sintassi di  `[tool command]` dipende dallo strumento che si sta usando e da come è impostato il conatiner. 
+La sintassi di `[tool command]` dipende dallo strumento che si sta usando e da come è impostato il conatiner.
 Cominciamo con `cowpy`.
 
 Completamente assemblato, il comadno di esecuzione del container si presenta come segue:
@@ -167,16 +163,16 @@ Esegui per produrre il seguente output:
            ||     ||
 ```
 
-Il sistema avvia il container, esegue il comando cowpy con i suoi parametri, invia l'output alla console e infine chiude l'istanza del container. 
+Il sistema avvia il container, esegue il comando cowpy con i suoi parametri, invia l'output alla console e infine chiude l'istanza del container.
 
 ### 1.3.Ustilizzare il conatienr per eseguire cowpu in modo interattivo
 
-E anche possibile eseguire un conatiner in modo interattivo, in modo da avere un prompt di shell all'interno del container e poter giocare con i comandi. 
+E anche possibile eseguire un conatiner in modo interattivo, in modo da avere un prompt di shell all'interno del container e poter giocare con i comandi.
 
 #### 1.3.1. Avviare il container
 
 Per eseguire il container in modo interattivo, basta aggiungere `-it` al comando `docker run'.
-Facoltativamente, possiamo specificare la shell che vogliamo usare all'inetrno del conatiner, aggiungendo ad esempio `/bin/bash` al comando. 
+Facoltativamente, possiamo specificare la shell che vogliamo usare all'inetrno del conatiner, aggiungendo ad esempio `/bin/bash` al comando.
 
 ```bash
 docker run --rm -it 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273' /bin/bash
@@ -184,7 +180,8 @@ docker run --rm -it 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a
 
 Notate che il prompt cambia in qualcosa di simile a`(base) root@b645838b3314:/tmp#`, che indica che ora siete all'interno del conatienr.
 
-E' possibile verificarlo eseguendo 'ls'per elencare il contenuto della directory: 
+E' possibile verificarlo eseguendo 'ls'per elencare il contenuto della directory:
+
 ```bash
 ls /
 ```
@@ -232,7 +229,7 @@ Ora l'output mostra il pinguino di Linux, Tux, invece della mucca predefinita, p
 Poiché ti trovi all'interno del container, puoi eseguire il comando cowpy tutte le volte che vuoi, variando i parametri di input, senza dover utilizzare i comandi Docker.
 
 !!! Tip
-    
+
     Utilizzare il flag '-c' per selezionare un carattere diverso, incluso:
     `beavis`, `cheese`, `daemon`, `dragonandcow`, `ghostbusters`, `kitty`, `moose`, `milk`, `stegosaurus`, `turkey`, `turtle`, `tux`
 
@@ -295,7 +292,6 @@ Questo ha effettivamente creato un tunnel attraverso il muro del container che p
 
 Ora che abbiamo montato la directory `data` nel container, possiamo usare il comando `cowpy` per visualizzare il contenuto del file `greetings.csv`.
 
-
 Per fare questo, useremo`cat /data/greetings.csv | ` per inviare il contenuto del file CSV al comando `cowpy`.
 
 ```bash
@@ -344,9 +340,7 @@ Ti ritroverai nel tuo guscio normale.
 
 ### Takeaway
 
-
 Sai come estrarre uncontainer ed eseguirlo singolarmente o in modo interattivo. Sai anche come rendere accessibili i tuoi dati dall'interno del container, il che ti consente di provare qualsiasi strumento a cui sei interessato su dati reali senza dover installare alcun software sul tuo sistema.
-
 
 ### Prossimo passo?
 
@@ -354,7 +348,7 @@ Scopri come utilizzare i contenitori per l'esecuzione dei processi Nextflow.
 
 ---
 
-## 2. Utilizzare i container in Nextflow 
+## 2. Utilizzare i container in Nextflow
 
 Nextflow ha un supporto integrato per l'esecuzione di processi all'interno di contenitori per consentirti di eseguire strumenti che non hai installato nel tuo ambiente di elaborazione.
 Ciò significa che puoi utilizzare qualsiasi immagine di container desideri per eseguire i tuoi processi e Nextflow si occuperà di estrarre l'immagine, montare i dati ed eseguire il processo al suo interno.
@@ -364,7 +358,6 @@ Per dimostrarlo, aggiungeremo un passaggio `cowpy` alla pipeline che stiamo svil
 ### 2.1.Scrivi un modulo `cowpy`
 
 #### 2.1.1. Crea uno stub di file per il nuovo modulo
-
 
 Crea un file vuoto per il modulo chiamato `cowpy.nf`.
 
@@ -405,7 +398,6 @@ L'output sarà un nuovo file di testo contenente l'ASCII art generata dallo stru
 
 ### 2.2. Aggiungi cowpy al flusso di lavoro
 
-
 Ora dobbiamo importare il modulo e chiamare il processo.
 
 #### 2.2.1. Importa il processo `cowpy` in `hello-containers.nf`
@@ -441,7 +433,6 @@ Colleghiamo il processo `cowpy()` all'output del processo `collectGreetings()`, 
 
 - `collectGreetings.out.outfile` contiene gli otput dei file
 - `collectGreetings.out.count`contiene il conteggio dei saluti per batch
-
 
 Nel blocco del flusso di lavoro, apportare la seguente modifica al codice:
 
@@ -542,7 +533,6 @@ Command error:
 Questo codice di errore, `error exit status (127)`, significa che l'eseguibile richiesto non è stato trovato.
 Naturalmente, dato che stiamo chiamando lo strumento `cowpy` ma non abbiamo ancora specificato un container.
 
-
 ### 2.3.Utilizzare un container per l'esecuzione
 
 Dobbiamo specificare un container e dire a Nextflow di usarlo per il processo `cowpy()`.
@@ -551,7 +541,7 @@ Dobbiamo specificare un container e dire a Nextflow di usarlo per il processo `c
 
 Modificare il modulo `cowpy.nf` per aggiungere la direttiva `container` alla definizione del processo come segue:
 
-Prima:_
+Prima:\_
 
 ```groovy title="modules/cowpy.nf" linenums="4"
 process cowpy {
@@ -559,7 +549,7 @@ process cowpy {
     publishDir 'containers/results', mode: 'copy'
 ```
 
-Dopo:_
+Dopo:\_
 
 ```groovy title="modules/cowpy.nf" linenums="4"
 process cowpy {
@@ -578,13 +568,13 @@ Uno dei modi principali che Nextflow offre per configurare l'esecuzione del work
 Abbiamo fornito un file `nextflow.config` con una singola riga di codice che disabilita Docker: `docker.enabled = false`.
 
 Ora, passiamo a `true` per abilitare Docker:
-Prima:_
+Prima:\_
 
 ```console title="nextflow.config" linenums="1"
 docker.enabled = false
 ```
 
-Dopo:_
+Dopo:\_
 
 ```console title="nextflow.config" linenums="1"
 docker.enabled = true
@@ -658,9 +648,9 @@ Si vede che il personaggio sta pronunciando tutti i saluti, proprio come ha fatt
 
 Diamo un'occhiata alla sottodirectory di lavoro di una delle chiamate al processo cowpy per capire meglio come Nextflow lavora con i container.
 
-Controllare l'output del comando nextflow run per trovare l'ID della chiamata al processo cowpy. 
+Controllare l'output del comando nextflow run per trovare l'ID della chiamata al processo cowpy.
 Quindi navigare nella sottodirectory work.
- Al suo interno si trova il file .command.run che contiene tutti i comandi eseguiti da Nextflow per conto dell'utente durante l'esecuzione della pipeline.
+Al suo interno si trova il file .command.run che contiene tutti i comandi eseguiti da Nextflow per conto dell'utente durante l'esecuzione della pipeline.
 Aprite il file .command.run e cercate nxf_launch; dovreste vedere qualcosa di simile:
 
 ```bash
@@ -678,6 +668,7 @@ Tutto il duro lavoro che abbiamo dovuto fare manualmente nella sezione precedent
 Sapete come usare i container in Nextflow per eseguire i processi.
 
 ### E ora?
-Fate una pausa! 
-Quando sarete pronti, passate alla Parte 6 per imparare a configurare l'esecuzione della pipeline in base alla vostra infrastruttura e a gestire la configurazione di input e parametri. 
+
+Fate una pausa!
+Quando sarete pronti, passate alla Parte 6 per imparare a configurare l'esecuzione della pipeline in base alla vostra infrastruttura e a gestire la configurazione di input e parametri.
 È l'ultima parte e il gioco è fatto!

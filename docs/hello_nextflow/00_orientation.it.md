@@ -37,7 +37,7 @@ Diamo ora un'occhiata al contenuto di questa directory.
 
 ## Materiali forniti
 
-Puoi esplorare il contenuto di questa directory utilizzando l'esploratore di file sul lato sinistro dell'area di lavoro di training. 
+Puoi esplorare il contenuto di questa directory utilizzando l'esploratore di file sul lato sinistro dell'area di lavoro di training.
 In alternativa, puoi utilizzare il comando `tree`.
 
 Durante il corso, utilizziamo l'output `tree` per rappresentare la struttura e il contenuto delle directory in un formato leggibile, a volte con piccole modifiche per chiarezza.
@@ -77,15 +77,15 @@ Se esegui questo comando all'interno di `hello-nextflow`, dovresti vedere il seg
 - **I file `.nf`** sono script di workflow denominati in base alla parte del corso in cui vengono utilizzati.
 
 - **Il file `nextflow.config`** è un file di configurazione che imposta le proprietà minime dell'ambiente.
-Per ora puoi ignorarlo.
+  Per ora puoi ignorarlo.
 
 - **Il file `greetings.csv`** contiene i dati di input che utilizzeremo nella maggior parte del corso. È descritto nella Parte 1, quando lo introduciamo per la prima volta.
 
 - **Il file `test-params.json`** è un file che utilizzeremo nella Parte 6. Per ora puoi ignorarlo.
 
 - **La directory `solutions`** contiene gli script del workflow completati che risultano da ogni passaggio del corso.
-Sono pensati per essere utilizzati come riferimento per controllare il tuo lavoro e risolvere eventuali problemi.
-Il nome e il numero nel nome del file corrispondono al passaggio della parte pertinente del corso.
-Ad esempio, il file `hello-world-4.nf` è il risultato previsto del completamento dei passaggi da 1 a 4 della Parte 1: Hello World.
+  Sono pensati per essere utilizzati come riferimento per controllare il tuo lavoro e risolvere eventuali problemi.
+  Il nome e il numero nel nome del file corrispondono al passaggio della parte pertinente del corso.
+  Ad esempio, il file `hello-world-4.nf` è il risultato previsto del completamento dei passaggi da 1 a 4 della Parte 1: Hello World.
 
 **Ora, per iniziare il corso, clicca sulla freccia nell'angolo in basso a destra di questa pagina.**

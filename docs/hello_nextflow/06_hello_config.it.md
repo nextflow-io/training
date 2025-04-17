@@ -10,7 +10,7 @@
 
 Questa sezione esplorerà come impostare e gestire la configurazione della pipeline Nextflow in modo da poterne personalizzare il comportamento, adattarla a diversi ambienti e ottimizzare l'utilizzo delle risorse _senza modificare una sola riga del codice del flusso di lavoro stesso_.
 
-Ci sono diversi modi per farlo; qui useremo il meccanismo di file di configurazione più semplice e comune, il file `nextflow.config`. 
+Ci sono diversi modi per farlo; qui useremo il meccanismo di file di configurazione più semplice e comune, il file `nextflow.config`.
 Ogni volta che c'è un file chiamato `nextflow.config` nella directory corrente, Nextflow caricherà automaticamente la configurazione da esso.
 
 !!! note
@@ -70,7 +70,7 @@ Nel warmup di questa sezione, hai verificato che Docker fosse abilitato nel file
 
 !!! note
 
-   Se questo non ti suona familiare, probabilmente dovresti tornare indietro e completare la Parte 5 prima di continuare.
+Se questo non ti suona familiare, probabilmente dovresti tornare indietro e completare la Parte 5 prima di continuare.
 
 Vediamo ora come possiamo configurare un'opzione alternativa di software packaging tramite il file `nextflow.config`.
 
@@ -80,7 +80,7 @@ Supponiamo di lavorare su un cluster HPC e che l'amministratore non consenta l'u
 
 Fortunatamente per noi, Nextflow supporta molte altre tecnologie di container, tra cui Singularity (più ampiamente utilizzata su HPC) e gestori di pacchetti software come Conda.
 
-Possiamo modificare il nostro file di configurazione per usare Conda invece di Docker. 
+Possiamo modificare il nostro file di configurazione per usare Conda invece di Docker.
 Per farlo, cambiamo il valore di `docker.enabled` in `false` e ​​aggiungiamo una direttiva che abilita l'uso di Conda:
 
 _Prima:_
@@ -106,7 +106,7 @@ Abbiamo già recuperato l'URI per un pacchetto Conda contenente lo strumento `co
 !!! note
 
 Esistono diversi modi per ottenere l'URI per un determinato pacchetto conda.
-Consigliamo di usare la ricerca su [Seqera Containers](https://seqera.io/containers/), che ti fornirà un URI che puoi copiare e incollare, anche se non hai intenzione di creare un container da esso.  
+Consigliamo di usare la ricerca su [Seqera Containers](https://seqera.io/containers/), che ti fornirà un URI che puoi copiare e incollare, anche se non hai intenzione di creare un container da esso.
 
 Ora aggiungiamo l'URI alla definizione del processo `cowpy` utilizzando la direttiva `conda`:
 
@@ -135,7 +135,7 @@ Per essere chiari, non stiamo _sostituendo_ la direttiva `docker`, stiamo _aggiu
 
 ### 1.3. Eseguire il workflow per verificare l'uso di Conda
 
-Proviamolo. 
+Proviamolo.
 
 ```bash
 nextflow run hello-config.nf
@@ -171,9 +171,9 @@ Ciò significa che siamo pronti per l'esecuzione con gli ambienti Conda, se nece
 
     Poiché queste direttive vengono assegnate per processo, è possibile "mescolare e abbinare", ovvero configurare alcuni processi nel workflow in modo che vengano eseguiti con Docker e altri con Conda, ad esempio se l'infrastruttura di elaborazione utilizzata supporta entrambi.
     In tal caso, dovresti abilitare sia Docker che Conda nel tuo file di configurazione.
-    Se entrambi sono disponibili per un dato processo, Nextflow darà priorità ai container.   
+    Se entrambi sono disponibili per un dato processo, Nextflow darà priorità ai container.
 
-   Come accennato in precedenza, Nextflow supporta molte altre tecnologie di packaging e container software, quindi non sei limitato solo a queste due.
+Come accennato in precedenza, Nextflow supporta molte altre tecnologie di packaging e container software, quindi non sei limitato solo a queste due.
 
 ### Conclusione
 
@@ -314,7 +314,7 @@ Tuttavia, se provassi a eseguire il workflow con allocazioni di risorse che supe
     Il progetto nf-core ha compilato una [raccolta di file di configurazione](https://nf-co.re/configs/) condivisa da varie istituzioni in tutto il mondo, che copre un'ampia gamma di esecutori HPC e cloud.
 
     Tali configurazioni condivise sono preziose sia per le persone che lavorano lì e che possono quindi utilizzare la configurazione della propria istituzione così com'è, sia come modello per coloro che desiderano sviluppare una configurazione per la propria infrastruttura.
-  
+
 ### Conclusione
 
 Sai come generare un report di profilazione per valutare l'utilizzo delle risorse e come modificare le allocazioni delle risorse per tutti i processi e/o per singoli processi, nonché come impostare limitazioni delle risorse per l'esecuzione su HPC.
@@ -371,7 +371,7 @@ executor >  local (8)
 There were 3 greetings in this batch
 ```
 
-Questo potrebbe sembrare eccessivo quando hai solo pochi parametri da specificare, ma alcune pipeline si aspettano decine di parametri. 
+Questo potrebbe sembrare eccessivo quando hai solo pochi parametri da specificare, ma alcune pipeline si aspettano decine di parametri.
 In quei casi, usare un file di parametri ci consentirà di fornire valori di parametri in fase di esecuzione senza dover digitare lunghe righe di comando e senza modificare lo script del workflow.
 
 ### Conclusione
@@ -578,8 +578,8 @@ Per comodità, i profili non si escludono a vicenda, quindi possiamo specificare
 
 !!! note
 
-   Se si combinano profili che impostano valori per gli stessi elementi di configurazione e sono descritti nello stesso file di configurazione, Nextflow risolverà il conflitto utilizzando il valore letto per ultimo (ovvero, qualsiasi cosa si trovi dopo nel file).
-   Se le impostazioni in conflitto sono impostate in diverse origini di configurazione, si applica l'[ordine di precedenza](https://www.nextflow.io/docs/latest/config.html) predefinito.
+Se si combinano profili che impostano valori per gli stessi elementi di configurazione e sono descritti nello stesso file di configurazione, Nextflow risolverà il conflitto utilizzando il valore letto per ultimo (ovvero, qualsiasi cosa si trovi dopo nel file).
+Se le impostazioni in conflitto sono impostate in diverse origini di configurazione, si applica l'[ordine di precedenza](https://www.nextflow.io/docs/latest/config.html) predefinito.
 
 Proviamo ad aggiungere il profilo di prova al nostro comando precedente:
 
@@ -608,9 +608,9 @@ Ciò significa che finché distribuiamo file di dati di prova con il codice del 
 
 !!! note
 
-   Possiamo anche puntare agli URL per file più grandi che sono archiviati esternamente. 
-   Nextflow li scaricherà automaticamente finché c'è una connessione aperta.
-   
+Possiamo anche puntare agli URL per file più grandi che sono archiviati esternamente.
+Nextflow li scaricherà automaticamente finché c'è una connessione aperta.
+
 ### Conclusione
 
 Sai come usare i profili per selezionare una configurazione preimpostata in fase di esecuzione con il minimo sforzo. Più in generale, sai come configurare le esecuzioni del tuo workflow per adattarle a diverse piattaforme di elaborazione e migliorare la riproducibilità delle tue analisi.

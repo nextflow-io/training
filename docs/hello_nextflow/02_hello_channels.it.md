@@ -44,6 +44,7 @@ executor >  local (1)
 ```
 
 Come in precedenza, troverai il file di output denominato `output.txt` nella directory `results` (specificata dalla direttiva `publishDir`).
+
 ```console title="results/output.txt" linenums="1"
 Hello Channels!
 ```
@@ -68,7 +69,6 @@ Questa è la riga di codice che useremo:
 greeting_ch = Channel.of('Hello Channels!')
 ```
 
-
 Questo crea un canale chiamato `greeting_ch` usando la fabbrica del canale `Channel.of()`, che imposta un semplice canale di coda e carica la stringa `'Hello Channels!' ` da usare come valore di saluto.
 
 !!! note
@@ -87,7 +87,7 @@ workflow {
 }
 ```
 
-_Dopo:_ 
+_Dopo:_
 
 ```groovy title="hello-channels.nf" linenums="27"
 workflow {
@@ -108,7 +108,7 @@ Ora dobbiamo effettivamente collegare il nostro canale appena creato alla chiama
 
 Nel blocco del workflow, apportare la seguente modifica del codice:
 
-_Prima:_ 
+_Prima:_
 
 ```groovy title="hello-channels.nf" linenums="27"
 workflow {
@@ -121,7 +121,7 @@ workflow {
 }
 ```
 
-_Dopo:_ 
+_Dopo:_
 
 ```groovy title="hello-channels.nf" linenums="27"
 workflow {
@@ -193,14 +193,15 @@ Dobbiamo solo caricare più valori nel canale.
 
 Nel blocco del workflow, apportare la seguente modifica del codice:
 
-_Prima:_ 
+_Prima:_
 
 ```groovy title="hello-channels.nf" linenums="29"
 // create a channel for inputs
 greeting_ch = Channel.of('Hello Channels')
 ```
 
-_Dopo:_ 
+_Dopo:_
+
 ```groovy title="hello-channels.nf" linenums="29"
 // crea un canale per gli input
 greeting_ch = Channel.of('Hello','Bonjour','Holà')
@@ -295,7 +296,7 @@ Qui, per comodità, useremo solo il saluto stesso poiché è solo una stringa br
 
 Nel blocco di processo, apporta le seguenti modifiche al codice:
 
-_Prima:_ 
+_Prima:_
 
 ```groovy title="hello-channels.nf" linenums="6"
 process sayHello {
@@ -315,7 +316,7 @@ process sayHello {
 }
 ```
 
-_Dopo:_ 
+_Dopo:_
 
 ```groovy title="hello-channels.nf" linenums="6"
 process sayHello {
@@ -453,14 +454,14 @@ Sostituiremo i valori `'Hello','Bonjour', 'Holà'` attualmente codificati nella 
 
 Nel blocco del workflow, apportare la seguente modifica:
 
-_Prima:_ 
+_Prima:_
 
 ```groovy title="hello-channels.nf" linenums="32"
     // crea un canale per gli input
     greeting_ch = Channel.of('Hello','Bonjour','Holà')
 ```
 
-_Dopo:_ 
+_Dopo:_
 
 ```groovy title="hello-channels.nf" linenums="32"
     // crea un canale per gli input
@@ -518,7 +519,7 @@ _Prima:_
     greeting_ch = Channel.of(greetings_array)
 ```
 
-_Dopo:_ 
+_Dopo:_
 
 ```groovy title="hello-channels.nf" linenums="31"
     // crea un canale per gli input
@@ -543,7 +544,7 @@ _Prima:_
                          .flatten()
 ```
 
-_Dopo:_ 
+_Dopo:_
 
 ```groovy title="hello-channels.nf" linenums="31"
     // crea un canale per gli input
@@ -565,7 +566,7 @@ In questo esempio, `$greeting` rappresenta ogni singolo elemento caricato in un 
     In alcune pipeline potresti vedere una variabile speciale chiamata `$it` utilizzata all'interno delle chiusure dell'operatore.
     Questa è una variabile _implicita_ che consente un accesso abbreviato alla variabile interna,
     Senza bisogno di definirlo con un `->`.
-    
+
     Preferiamo essere espliciti per aiutare la chiarezza del codice, in quanto tale la sintassi `$it` è scoraggiata e verrà lentamente eliminata dal linguaggio Nextflow.
 
 #### 3.2.3. Esegui il workflow
@@ -607,7 +608,7 @@ Quindi otteniamo tre istruzioni separate `Dopo appiattire:`, una per ogni saluto
     ```
 
     Li abbiamo lasciati nel file di soluzione `hello-channels-3.nf` a scopo di riferimento.
-    
+
 ### Conclusioni
 
 Sai come usare un operatore come `flatten()` per trasformare il contenuto di un canale e come usare l'operatore `view()` per ispezionare il contenuto del canale prima e dopo aver applicato un operatore.
@@ -645,7 +646,7 @@ Lo aggiorneremo per puntare al file CSV contenente i nostri saluti.
 
 Nel blocco del workflow, apportare la seguente modifica del codice:
 
-_Prima:_ 
+_Prima:_
 
 ```groovy title="hello-channels.nf" linenums="25"
 /*
@@ -654,7 +655,7 @@ _Prima:_
 params.greeting = ['Hello','Bonjour','Holà']
 ```
 
-_Dopo:_ 
+_Dopo:_
 
 ```groovy title="hello-channels.nf" linenums="25"
 /*
@@ -678,7 +679,7 @@ _Prima:_
                          .flatten()
 ```
 
-_Dopo:_ 
+_Dopo:_
 
 ```groovy title="hello-channels.nf" linenums="31"
     // crea un canale per gli input da un file CSV
@@ -739,7 +740,7 @@ _Prima:_
 greeting_ch = Channel.fromPath(params.greeting)
 ```
 
-_Dopo:_ 
+_Dopo:_
 
 ```groovy title="hello-channels.nf" linenums="31"
 // crea un canale per gli input da un file CSV
@@ -814,7 +815,7 @@ Quindi applichiamolo al nostro parsing CSV.
 
 Nel blocco del workflow, apportare la seguente modifica del codice:
 
-_Prima:_ 
+_Prima:_
 
 ```groovy title="hello-channels.nf" linenums="31"
 // crea un canale per gli input da un file CSV
@@ -824,7 +825,7 @@ greeting_ch = Channel.fromPath(params.greeting)
                      .view { csv -> "After splitCsv: $csv" }
 ```
 
-_Dopo:_ 
+_Dopo:_
 
 ```groovy title="hello-channels.nf" linenums="31"
 // crea un canale per gli input da un file CSV
@@ -886,9 +887,9 @@ Abbiamo ottenuto lo stesso risultato di prima, ma ora abbiamo molta più flessib
     ```
 
     Puoi anche provare a sostituire `.map { item -> item[0] }` con `.flatten()` e vedere cosa succede a seconda di quante righe e colonne hai nel file di input.
-    
+
     Imparerai approcci più avanzati per gestire input complessi in una formazione successiva.
-    
+
 ### Conclusioni
 
 Sai come usare gli operatori `splitCsv()` e `map()` per leggere in un file di valori di input e gestirli in modo appropriato.
