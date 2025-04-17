@@ -230,10 +230,10 @@ Ora l'output mostra il pinguino di Linux, Tux, invece della mucca predefinita, p
 ```
 
 Poiché ti trovi all'interno del container, puoi eseguire il comando cowpy tutte le volte che vuoi, variando i parametri di input, senza dover utilizzare i comandi Docker.
-!!! Tip
 
+!!! Tip
     
-Utilizzare il flag '-c' per selezionare un carattere diverso, incluso:
+    Utilizzare il flag '-c' per selezionare un carattere diverso, incluso:
     `beavis`, `cheese`, `daemon`, `dragonandcow`, `ghostbusters`, `kitty`, `moose`, `milk`, `stegosaurus`, `turkey`, `turtle`, `tux`
 
 Questo è carino. Sarebbe ancora più carino se potessimo alimentare il nostro `greetings.csv` come input in questo.
