@@ -68,7 +68,7 @@ Nella Parte 5 abbiamo poi introdotto i container Docker e il file `nextflow.conf
 
 Nel warmup di questa sezione, hai verificato che Docker fosse abilitato nel file `nextflow.config` ed eseguito il workflow, che ha utilizzato un container Docker per eseguire il processo `cowpy()`.
 
-!!! nota
+!!! note
 
    Se questo non ti suona familiare, probabilmente dovresti tornare indietro e completare la Parte 5 prima di continuare.
 
@@ -103,7 +103,7 @@ Ciò significa che ora dobbiamo aggiungerne uno al nostro processo `cowpy`!
 
 Abbiamo già recuperato l'URI per un pacchetto Conda contenente lo strumento `cowpy`: `conda-forge::cowpy==1.1.5`
 
-!!! nota
+!!! note
 
 Esistono diversi modi per ottenere l'URI per un determinato pacchetto conda.
 Consigliamo di usare la ricerca su [Seqera Containers](https://seqera.io/containers/), che ti fornirà un URI che puoi copiare e incollare, anche se non hai intenzione di creare un container da esso.  
@@ -158,7 +158,7 @@ There were 3 greetings in this batch
 
 Dietro le quinte, Nextflow ha recuperato i pacchetti Conda e creato l'ambiente, il che normalmente richiede un po' di lavoro; è bello quindi che non dobbiamo farlo manualmente!
 
-!!! nota
+!!! note
 
     Questa operazione è veloce perchè il pacchetto `cowpy` è piuttosto piccolo. Tuttavia,se si lavora con pacchetti di grandi dimensioni, il processo potrebbe richiedere più tempo al primo utilizzo, perchè si potrebbe vedere l'output della console rimanere "bloccato" per circa un minuto prima di completarsi.
     Ciò è normale ed è dovuto al lavoro extra che Nextflow esegue la prima volta che si utilizza un nuovo pacchetto.
@@ -167,7 +167,7 @@ Dal nostro punto di vista, sembra che funzioni esattamente come con Docker, anch
 
 Ciò significa che siamo pronti per l'esecuzione con gli ambienti Conda, se necessario.
 
-!!!nota
+!!!note
 
     Poiché queste direttive vengono assegnate per processo, è possibile "mescolare e abbinare", ovvero configurare alcuni processi nel workflow in modo che vengano eseguiti con Docker e altri con Conda, ad esempio se l'infrastruttura di elaborazione utilizzata supporta entrambi.
     In tal caso, dovresti abilitare sia Docker che Conda nel tuo file di configurazione.
@@ -262,7 +262,7 @@ process {
 
 Con questa configurazione, tutti i processi richiederanno 1 GB di memoria e una singola CPU (impostazione predefinita), tranne il processo `cowpy`, che richiederà 2 GB e 2 CPU.
 
-!!! nota
+!!! note
 
 Se hai una macchina con poche CPU e ne assegni un numero elevato per processo, potresti vedere le chiamate di processo accodarsi una dietro l'altra.
 Questo perché Nextflow assicura che non richiediamo più CPU di quelle disponibili.
@@ -279,7 +279,7 @@ Probabilmente non noterai alcuna differenza reale, poiché si tratta di un caric
 
 È molto utile quando i tuoi processi hanno requisiti di risorse diversi. Ti consente di dimensionare correttamente le allocazioni di risorse che imposti per ogni processo in base a dati effettivi, non a supposizioni.
 
-!!!nota
+!!!note
 
     Questo è solo un piccolo assaggio di ciò che puoi fare per ottimizzare l'uso delle risorse.
     Nextflow stesso ha una [logica di retry dinamica](https://training.nextflow.io/basic_training/debugging/#dynamic-resources-allocation) davvero interessante, utilizzata per riprovare i lavori che falliscono a causa di limitazioni di risorse.
@@ -309,7 +309,7 @@ Nextflow tradurrà questi valori nelle istruzioni appropriate a seconda dell'ese
 Non lo eseguiremo, poiché non abbiamo accesso all'infrastruttura pertinente nell'ambiente di formazione.
 Tuttavia, se provassi a eseguire il workflow con allocazioni di risorse che superano questi limiti, quindi cercassi il comando `sbatch` nel file di script `.command.run`, vedresti che le richieste che vengono effettivamente inviate all'esecutore sono limitate ai valori specificati da `resourceLimits`.
 
-!!!nota
+!!!note
 
     Il progetto nf-core ha compilato una [raccolta di file di configurazione](https://nf-co.re/configs/) condivisa da varie istituzioni in tutto il mondo, che copre un'ampia gamma di esecutori HPC e cloud.
 
@@ -576,7 +576,7 @@ Proprio come per i profili di configurazione tecnica, è possibile impostare pi�
 
 Per comodità, i profili non si escludono a vicenda, quindi possiamo specificare più profili nella nostra riga di comando utilizzando la seguente sintassi `-profile <profile1>,<profile2>` (per qualsiasi numero di profili).
 
-!!! nota
+!!! note
 
    Se si combinano profili che impostano valori per gli stessi elementi di configurazione e sono descritti nello stesso file di configurazione, Nextflow risolverà il conflitto utilizzando il valore letto per ultimo (ovvero, qualsiasi cosa si trovi dopo nel file).
    Se le impostazioni in conflitto sono impostate in diverse origini di configurazione, si applica l'[ordine di precedenza](https://www.nextflow.io/docs/latest/config.html) predefinito.
@@ -606,7 +606,7 @@ There were 3 greetings in this batch
 
 Ciò significa che finché distribuiamo file di dati di prova con il codice del workflow, chiunque può provare rapidamente il workflow senza dover fornire i propri input tramite la riga di comando o un file di parametri.
 
-!!! nota
+!!! note
 
    Possiamo anche puntare agli URL per file più grandi che sono archiviati esternamente. 
    Nextflow li scaricherà automaticamente finché c'è una connessione aperta.

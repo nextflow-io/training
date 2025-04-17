@@ -165,7 +165,7 @@ Hello Channels!
 
 Finora stiamo solo modificando progressivamente il codice per aumentare la flessibilità del nostro workflow ottenendo allo stesso tempo lo stesso risultato finale.
 
-!!! nota
+!!! note
 
 Può sembrare che stiamo scrivendo più codice senza alcun beneficio tangibile, ma il valore diventerà chiaro non appena inizieremo a gestire più input.
 
