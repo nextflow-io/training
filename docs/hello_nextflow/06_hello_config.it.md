@@ -70,7 +70,7 @@ Nel warmup di questa sezione, hai verificato che Docker fosse abilitato nel file
 
 !!! note
 
-Se questo non ti suona familiare, probabilmente dovresti tornare indietro e completare la Parte 5 prima di continuare.
+    Se questo non ti suona familiare, probabilmente dovresti tornare indietro e completare la Parte 5 prima di continuare.
 
 Vediamo ora come possiamo configurare un'opzione alternativa di software packaging tramite il file `nextflow.config`.
 
@@ -106,8 +106,8 @@ Abbiamo già recuperato l'URI per un pacchetto Conda contenente lo strumento `co
 
 !!! note
 
-Esistono diversi modi per ottenere l'URI per un determinato pacchetto conda.
-Consigliamo di usare la ricerca su [Seqera Containers](https://seqera.io/containers/), che ti fornirà un URI che puoi copiare e incollare, anche se non hai intenzione di creare un container da esso.
+    Esistono diversi modi per ottenere l'URI per un determinato pacchetto conda.
+    Consigliamo di usare la ricerca su [Seqera Containers](https://seqera.io/containers/), che ti fornirà un URI che puoi copiare e incollare, anche se non hai intenzione di creare un container da esso.
 
 Ora aggiungiamo l'URI alla definizione del processo `cowpy` utilizzando la direttiva `conda`:
 
@@ -174,7 +174,7 @@ Ciò significa che siamo pronti per l'esecuzione con gli ambienti Conda, se nece
     In tal caso, dovresti abilitare sia Docker che Conda nel tuo file di configurazione.
     Se entrambi sono disponibili per un dato processo, Nextflow darà priorità ai container.
 
-Come accennato in precedenza, Nextflow supporta molte altre tecnologie di packaging e container software, quindi non sei limitato solo a queste due.
+    Come accennato in precedenza, Nextflow supporta molte altre tecnologie di packaging e container software, quindi non sei limitato solo a queste due.
 
 ### Conclusione
 
@@ -265,8 +265,8 @@ Con questa configurazione, tutti i processi richiederanno 1 GB di memoria e una 
 
 !!! note
 
-Se hai una macchina con poche CPU e ne assegni un numero elevato per processo, potresti vedere le chiamate di processo accodarsi una dietro l'altra.
-Questo perché Nextflow assicura che non richiediamo più CPU di quelle disponibili.
+    Se hai una macchina con poche CPU e ne assegni un numero elevato per processo, potresti vedere le chiamate di processo accodarsi una dietro l'altra.
+    Questo perché Nextflow assicura che non richiediamo più CPU di quelle disponibili.
 
 ### 2.4. Esegui il workflow con la configurazione modificata
 
@@ -579,8 +579,8 @@ Per comodità, i profili non si escludono a vicenda, quindi possiamo specificare
 
 !!! note
 
-Se si combinano profili che impostano valori per gli stessi elementi di configurazione e sono descritti nello stesso file di configurazione, Nextflow risolverà il conflitto utilizzando il valore letto per ultimo (ovvero, qualsiasi cosa si trovi dopo nel file).
-Se le impostazioni in conflitto sono impostate in diverse origini di configurazione, si applica l'[ordine di precedenza](https://www.nextflow.io/docs/latest/config.html) predefinito.
+    Se si combinano profili che impostano valori per gli stessi elementi di configurazione e sono descritti nello stesso file di configurazione, Nextflow risolverà il conflitto utilizzando il valore letto per ultimo (ovvero, qualsiasi cosa si trovi dopo nel file).
+    Se le impostazioni in conflitto sono impostate in diverse origini di configurazione, si applica l'[ordine di precedenza](https://www.nextflow.io/docs/latest/config.html) predefinito.
 
 Proviamo ad aggiungere il profilo di prova al nostro comando precedente:
 
@@ -609,8 +609,8 @@ Ciò significa che finché distribuiamo file di dati di prova con il codice del 
 
 !!! note
 
-Possiamo anche puntare agli URL per file più grandi che sono archiviati esternamente.
-Nextflow li scaricherà automaticamente finché c'è una connessione aperta.
+    Possiamo anche puntare agli URL per file più grandi che sono archiviati esternamente.
+    Nextflow li scaricherà automaticamente finché c'è una connessione aperta.
 
 ### Conclusione
 
