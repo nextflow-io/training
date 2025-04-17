@@ -13,9 +13,9 @@ Questa sezione esplorerà come impostare e gestire la configurazione della pipel
 Ci sono diversi modi per farlo; qui useremo il meccanismo di file di configurazione più semplice e comune, il file `nextflow.config`. 
 Ogni volta che c'è un file chiamato `nextflow.config` nella directory corrente, Nextflow caricherà automaticamente la configurazione da esso.
 
-!!!nota
+!!! note
 
- Tutto ciò che inserisci in `nextflow.config` può essere sovrascritto in fase di esecuzione fornendo le direttive di processo o i parametri e i valori pertinenti sulla riga di comando, oppure importando un altro file di configurazione, secondo l'ordine di precedenza descritto [qui](https://www.nextflow.io/docs/latest/config.html).
+    Tutto ciò che inserisci in `nextflow.config` può essere sovrascritto in fase di esecuzione fornendo le direttive di processo o i parametri e i valori pertinenti sulla riga di comando, oppure importando un altro file di configurazione, secondo l'ordine di precedenza descritto [qui](https://www.nextflow.io/docs/latest/config.html).
 
 In questa parte della formazione, utilizzeremo il file `nextflow.config` per illustrare i componenti essenziali della configurazione di Nextflow, quali direttive di processo, esecutori, profili e file di parametri.
 
@@ -160,8 +160,8 @@ Dietro le quinte, Nextflow ha recuperato i pacchetti Conda e creato l'ambiente, 
 
 !!! nota
 
-Questa operazione è veloce perchè il pacchetto `cowpy` è piuttosto piccolo. Tuttavia,se si lavora con pacchetti di grandi dimensioni, il processo potrebbe richiedere più tempo al primo utilizzo, perchè si potrebbe vedere l'output della console rimanere "bloccato" per circa un minuto prima di completarsi.
-Ciò è normale ed è dovuto al lavoro extra che Nextflow esegue la prima volta che si utilizza un nuovo pacchetto.
+    Questa operazione è veloce perchè il pacchetto `cowpy` è piuttosto piccolo. Tuttavia,se si lavora con pacchetti di grandi dimensioni, il processo potrebbe richiedere più tempo al primo utilizzo, perchè si potrebbe vedere l'output della console rimanere "bloccato" per circa un minuto prima di completarsi.
+    Ciò è normale ed è dovuto al lavoro extra che Nextflow esegue la prima volta che si utilizza un nuovo pacchetto.
 
 Dal nostro punto di vista, sembra che funzioni esattamente come con Docker, anche se nel backend i meccanismi sono leggermente diversi.
 
@@ -169,9 +169,9 @@ Ciò significa che siamo pronti per l'esecuzione con gli ambienti Conda, se nece
 
 !!!nota
 
-  Poiché queste direttive vengono assegnate per processo, è possibile "mescolare e abbinare", ovvero configurare alcuni processi nel workflow in modo che vengano eseguiti con Docker e altri con Conda, ad esempio se l'infrastruttura di elaborazione utilizzata supporta entrambi.
- In tal caso, dovresti abilitare sia Docker che Conda nel tuo file di configurazione.
-Se entrambi sono disponibili per un dato processo, Nextflow darà priorità ai container.   
+    Poiché queste direttive vengono assegnate per processo, è possibile "mescolare e abbinare", ovvero configurare alcuni processi nel workflow in modo che vengano eseguiti con Docker e altri con Conda, ad esempio se l'infrastruttura di elaborazione utilizzata supporta entrambi.
+    In tal caso, dovresti abilitare sia Docker che Conda nel tuo file di configurazione.
+    Se entrambi sono disponibili per un dato processo, Nextflow darà priorità ai container.   
 
    Come accennato in precedenza, Nextflow supporta molte altre tecnologie di packaging e container software, quindi non sei limitato solo a queste due.
 
@@ -282,8 +282,8 @@ Probabilmente non noterai alcuna differenza reale, poiché si tratta di un caric
 !!!nota
 
     Questo è solo un piccolo assaggio di ciò che puoi fare per ottimizzare l'uso delle risorse.
-Nextflow stesso ha una [logica di retry dinamica](https://training.nextflow.io/basic_training/debugging/#dynamic-resources-allocation) davvero interessante, utilizzata per riprovare i lavori che falliscono a causa di limitazioni di risorse.
-Inoltre, la piattaforma Seqera offre anche strumenti basati sull'intelligenza artificiale per ottimizzare automaticamente le allocazioni delle risorse.
+    Nextflow stesso ha una [logica di retry dinamica](https://training.nextflow.io/basic_training/debugging/#dynamic-resources-allocation) davvero interessante, utilizzata per riprovare i lavori che falliscono a causa di limitazioni di risorse.
+    Inoltre, la piattaforma Seqera offre anche strumenti basati sull'intelligenza artificiale per ottimizzare automaticamente le allocazioni delle risorse.
 
     Parleremo di entrambi gli approcci in una prossima parte di questo corso di formazione.
 
@@ -313,7 +313,7 @@ Tuttavia, se provassi a eseguire il workflow con allocazioni di risorse che supe
 
     Il progetto nf-core ha compilato una [raccolta di file di configurazione](https://nf-co.re/configs/) condivisa da varie istituzioni in tutto il mondo, che copre un'ampia gamma di esecutori HPC e cloud.
 
-  Tali configurazioni condivise sono preziose sia per le persone che lavorano lì e che possono quindi utilizzare la configurazione della propria istituzione così com'è, sia come modello per coloro che desiderano sviluppare una configurazione per la propria infrastruttura.
+    Tali configurazioni condivise sono preziose sia per le persone che lavorano lì e che possono quindi utilizzare la configurazione della propria istituzione così com'è, sia come modello per coloro che desiderano sviluppare una configurazione per la propria infrastruttura.
   
 ### Conclusione
 
@@ -522,7 +522,7 @@ There were 3 greetings in this batch
 
 Come potete vedere, questo ci consente di passare da una configurazione all'altra in modo molto pratico durante l'esecuzione.
 
-!!! Attenzione
+!!! warning
 
     Il profilo `univ_hpc` non verrà eseguito correttamente nell'ambiente di training poiché non abbiamo accesso a uno scheduler Slurm.
 
