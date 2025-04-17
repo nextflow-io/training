@@ -466,7 +466,6 @@ Nel blocco del workflow, apportare la seguente modifica:
     ```groovy title="hello-channels.nf" linenums="32"
         // create a channel for inputs
 
-
 #### 3.1.3. Esegui il workflow
 
 Proviamo a eseguire questo:
