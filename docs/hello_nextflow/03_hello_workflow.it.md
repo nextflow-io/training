@@ -28,9 +28,9 @@ Questa volta, apporteremo le seguenti modifiche al nostro workflow per rifletter
 
 ---
 
-## 0. Warmup: Run 'hello-workflow.nf'
+## 0. Warmup: Run `hello-workflow.nf`
 
-Useremo lo script del workflow 'hello-workflow.nf' come punto di partenza.
+Useremo lo script del workflow `hello-workflow.nf` come punto di partenza.
 Esso è equivalente allo script prodotto lavorando attraverso la Parte 2 di questo corso di formazione.
 
 Per essere sicuri che tutto funzioni, esegui lo script una volta prima di apportare qualsiasi modifica
@@ -48,7 +48,7 @@ executor >  local (3)
 [2a/324ce6] sayHello (3) | 3 of 3 ✔
 ```
 
-Come in precedenza, troverai i file di output nella directory 'results' (specificata dalla direttiva 'publishDir').
+Come in precedenza, troverai i file di output nella directory `results` (specificata dalla direttiva `publishDir`).
 
 
 ```console title="Directory contents"
@@ -58,9 +58,9 @@ results
 └── Holà-output.txt
 ```
 
-!!! nota
+!!! note
 
-    Potrebbe esserci anche un file chiamato 'output.txt' se hai lavorato attraverso la Parte 2 nello stesso ambiente.
+    Potrebbe esserci anche un file chiamato `output.txt` se hai lavorato attraverso la Parte 2 nello stesso ambiente.
 
 Se tutto ha funzionato, sei pronto per imparare come assemblare un workflow a più fasi.
 
@@ -70,13 +70,13 @@ Se tutto ha funzionato, sei pronto per imparare come assemblare un workflow a pi
 Aggiungeremo un passaggio per convertire il saluto in maiuscolo.
 A tal fine, dobbiamo fare tre cose:
 
--Definire il comando che useremo per eseguire la conversione in maiuscolo.
--Scrivere un nuovo processo che racchiuda il comando per la conversione in maiuscolo.
--Chiamare il nuovo processo nel blocco del workflow e configurarlo per prendere l'output del processo 'sayHello()' come input.
+- Definire il comando che useremo per eseguire la conversione in maiuscolo.
+- Scrivere un nuovo processo che racchiuda il comando per la conversione in maiuscolo.
+- Chiamare il nuovo processo nel blocco del workflow e configurarlo per prendere l'output del processo `sayHello()` come input.
 
 ## 1.1 Definire il comando per la conversione in maiuscolo e testarlo nel terminale
 
-Per eseguire la conversione dei saluti in maiuscolo, useremo uno strumento UNIX classico chiamato 'tr' per 'text replacement' (sostituzione del testo), con la seguente sintassi:
+Per eseguire la conversione dei saluti in maiuscolo, useremo uno strumento UNIX classico chiamato `tr` per 'text replacement' (sostituzione del testo), con la seguente sintassi:
 
 ```bash title="Syntax"
 tr '[a-z]' '[A-Z]'
@@ -84,13 +84,13 @@ tr '[a-z]' '[A-Z]'
 
 Questa è una sostituzione di testo molto semplice che non tiene conto delle lettere accentate, quindi ad esempio 'Holà' diventerà 'HOLà', ma andrà bene lo stesso per dimostrare i concetti di Nextflow, e questo è ciò che conta.
 
-Per testarlo, possiamo eseguire il comando 'echo 'Hello World'' e passare il suo output al comando 'tr':
+Per testarlo, possiamo eseguire il comando `echo 'Hello World'` e passare il suo output al comando `tr`:
 
 ```bash
 echo 'Hello World' | tr '[a-z]' '[A-Z]' > UPPER-output.txt
 ```
 
-Il risultato è un file di testo chiamato 'UPPER-output.txt' che contiene la versione in maiuscolo della stringa 'Hello World':
+Il risultato è un file di testo chiamato `UPPER-output.txt` che contiene la versione in maiuscolo della stringa `Hello World`:
 
 ```console title="UPPER-output.txt"
 HELLO WORLD
@@ -127,7 +127,7 @@ process convertToUpper {
 
 Qui, componiamo il secondo nome del file di output in base al nome del file di input, in modo simile a quanto abbiamo fatto inizialmente per l'output del primo processo.
 
-!!!nota 
+!!! note 
 
    Nextflow determinerà l'ordine delle operazioni in base alla concatenazione degli input e degli output, quindi l'ordine delle definizioni dei processi nello script del flusso di lavoro non è importante.
    Tuttavia, ti consigliamo di essere gentile con i tuoi collaboratori e con il futuro te stesso, e cercare di scriverle in un ordine logico per motivi di leggibilità."
@@ -157,14 +157,14 @@ _Dopo:_
 }
 ```
 
-Questo non è ancora funzionante perché non abbiamo specificato cosa deve essere l'input per il processo 'convertToUpper()'.
+Questo non è ancora funzionante perché non abbiamo specificato cosa deve essere l'input per il processo `convertToUpper()`.
 
 ### 1.3 Passare l'output del primo processo al secondo processo
 
-Ora dobbiamo fare in modo che l'output del processo 'sayHello()' fluisca nel processo 'convertToUpper()'.
+Ora dobbiamo fare in modo che l'output del processo `sayHello()` fluisca nel processo `convertToUpper()`.
 
-Comodamente, Nextflow impacchetta automaticamente l'output di un processo in un canale chiamato '<process>.out'.
-Quindi, l'output del processo 'sayHello' è un canale chiamato 'sayHello.out', che possiamo collegare direttamente alla chiamata a 'convertToUpper()'.
+Comodamente, Nextflow impacchetta automaticamente l'output di un processo in un canale chiamato `<process>.out`.
+Quindi, l'output del processo `sayHello` è un canale chiamato `sayHello.out`, che possiamo collegare direttamente alla chiamata a `convertToUpper()`.
 
 Nel blocco del workflow, apporta la seguente modifica al codice:
 
@@ -188,7 +188,7 @@ Per un caso semplice come questo (un output a un input), è tutto ciò che dobbi
 
 ### 1.4 Esegui di nuovo il flusso di lavoro con -resume
 
-Eseguiamo di nuovo il flusso di lavoro utilizzando il flag '-resume', poiché abbiamo già eseguito con successo il primo passaggio del workflow.
+Eseguiamo di nuovo il flusso di lavoro utilizzando il flag `-resume`, poiché abbiamo già eseguito con successo il primo passaggio del workflow.
 
 ```bash
 nextflow run hello-workflow.nf -resume
@@ -222,7 +222,7 @@ L'output del primo processo è lì perché Nextflow lo ha messo in quella direct
 Tuttavia, in realtà si tratta di un collegamento simbolico che punta al file originale nella sottodirectory della prima chiamata al processo.
 Per impostazione predefinita, quando si esegue su una singola macchina, come stiamo facendo qui, Nextflow utilizza collegamenti simbolici anziché copie per mettere in scena i file di input e i file intermedi.
 
-Troverai anche i file di output finali nella directory 'results', poiché abbiamo usato la direttiva 'publishDir' anche nel secondo processo.
+Troverai anche i file di output finali nella directory `results`, poiché abbiamo usato la direttiva `publishDir` anche nel secondo processo.
 
 ```console title="Directory contents"
 results
@@ -234,7 +234,7 @@ results
 └── UPPER-Holà-output.txt
 ```
 
-Pensiamo a come tutto ciò che abbiamo fatto è stato connettere l'output di 'sayHello' all'input di 'convertToUpper' e i due processi potrebbero essere eseguiti in serie.
+Pensiamo a come tutto ciò che abbiamo fatto è stato connettere l'output di `sayHello` all'input di `convertToUpper` e i due processi potrebbero essere eseguiti in serie.
 Nextflow ha fatto il lavoro difficile di gestire i singoli file di input e output e passarli tra i due comandi per noi.
 
 Questa è una delle ragioni per cui i canali di Nextflow sono così potenti: si occupano del lavoro noioso coinvolto nel connettere i passaggi del workflow.
@@ -253,11 +253,11 @@ Impara come raccogliere gli output da chiamate di processo in batch e passarli a
 
 Quando utilizziamo un processo per applicare una trasformazione a ciascuno degli elementi di un canale, come stiamo facendo qui con i saluti multipli, a volte vogliamo raccogliere gli elementi dal canale di output di quel processo e passarli a un altro processo che esegue una sorta di analisi o somma.
 
-Nel prossimo passo scriveremo semplicemente tutti gli elementi di un canale in un singolo file, utilizzando il comando UNIX 'cat'.
+Nel prossimo passo scriveremo semplicemente tutti gli elementi di un canale in un singolo file, utilizzando il comando UNIX `cat`.
 
 ### 2.1. Definisci il comando di raccolta e testalo nel terminale
 
-Il passo di raccolta che vogliamo aggiungere al nostro flusso di lavoro utilizzerà il comando 'cat' per concatenare i saluti in maiuscolo in un unico file.
+Il passo di raccolta che vogliamo aggiungere al nostro flusso di lavoro utilizzerà il comando `cat` per concatenare i saluti in maiuscolo in un unico file.
 
 Eseguiamo il comando da solo nel terminale per verificare che funzioni come previsto, proprio come abbiamo fatto in precedenza.
 
@@ -372,7 +372,7 @@ _Dopo:_
 
 In teoria, questo dovrebbe gestire qualsiasi numero arbitrario di file di input.
 
-!!! suggerimento
+!!! tip
 
     Alcuni strumenti da riga di comando richiedono di fornire un argomento (come `-input`) per ogni file di input.
     In tal caso, dovremmo fare un po' di lavoro extra per comporre il comando.
@@ -441,20 +441,20 @@ Holà
 
 Oh no. Il passo di raccolta è stato eseguito singolarmente su ogni saluto, il che NON è quello che volevamo.
 
-Dobbiamo fare qualcosa per dire esplicitamente a Nextflow che vogliamo che quel terzo passo venga eseguito su tutti gli elementi nel canale di output di 'convertToUpper()'.
+Dobbiamo fare qualcosa per dire esplicitamente a Nextflow che vogliamo che quel terzo passo venga eseguito su tutti gli elementi nel canale di output di `convertToUpper()`.
 
 ### 2.4. Usa un operatore per raccogliere i saluti in un unico input
 
 Sì, ancora una volta la risposta al nostro problema è un operatore.
 
-In particolare, utilizzeremo l'operatore opportunamente chiamato ['collect()'] (https://www.nextflow.io/docs/latest/reference/operator.html#collect).
+In particolare, utilizzeremo l'operatore opportunamente chiamato [`collect()`] (https://www.nextflow.io/docs/latest/reference/operator.html#collect).
 
-#### 2.4.1. Aggiungi l'operatore 'collect()'
+#### 2.4.1. Aggiungi l'operatore `collect()`
 
 Questa volta sarà un po' diverso perché non stiamo aggiungendo l'operatore nel contesto di una fabbrica di canali, ma a un canale di output.
 
-Prendiamo 'convertToUpper.out' e aggiungiamo l'operatore 'collect()', che diventa 'convertToUpper.out.collect()'. 
-Possiamo collegarlo direttamente alla chiamata del processo 'collectGreetings()'.
+Prendiamo `convertToUpper.out` e aggiungiamo l'operatore `collect()`, che diventa `convertToUpper.out.collect()`. 
+Possiamo collegarlo direttamente alla chiamata del processo `collectGreetings()`.
 
 Nel blocco del workflow, apporta la seguente modifica al codice:
 
@@ -541,7 +541,7 @@ HOLà
 
 Questa volta abbiamo tutti e tre i saluti nel file di output finale. Successo! Rimuovi le chiamate `view` opzionali per rendere gli output successivi meno verbosi.
 
-!!! nota
+!!! note
 
     Se esegui questo processo più volte senza `-resume`, vedrai che l'ordine dei saluti cambia da un'esecuzione all'altra.
     Questo ti mostra che l'ordine in cui gli elementi fluiscono attraverso le chiamate ai processi non è garantito essere consistente.
@@ -572,7 +572,7 @@ Dobbiamo dichiarare l'input aggiuntivo e integrarlo nel nome del file di output.
 #### 3.1.1. Dichiarare l'input aggiuntivo nella definizione del processo
 
 Buone notizie: possiamo dichiarare tutte le variabili di input che vogliamo. 
-Chiamiamo questa 'batch_name'.
+Chiamiamo questa `batch_name`.
 
 Nel blocco del processo, apportiamo la seguente modifica al codice:
 
@@ -676,7 +676,7 @@ _Dopo:_
     collectGreetings(convertToUpper.out.collect(), params.batch)
 ```
 
-!!! avviso
+!!! warning
 
     Devi fornire gli input a un processo NELLO STESSO ORDINE ESATTO in cui sono elencati nel blocco di definizione degli input del processo.
 
@@ -827,7 +827,7 @@ _Dopo:_
     collectGreetings.out.count.view { num_greetings -> "There were $num_greetings greetings in this batch" }
 ```
 
-!!! nota
+!!! note
 
     Esistono altri modi per ottenere un risultato simile, inclusi alcuni più eleganti, come l'operatore `count()`, ma questo ci permette di mostrare come gestire più output, che è ciò che ci interessa.
 
