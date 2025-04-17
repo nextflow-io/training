@@ -19,7 +19,7 @@ Quando abbiamo iniziato a sviluppare il nostro workflow, abbiamo inserito tutto 
 La suddivisione dei processi in singoli moduli consente di riutilizzare le definizioni dei processi in più workflow senza produrre più copie del codice. 
 Questo rende il codice più condivisibile, flessibile e manutenibile.
 
-!!!Nota
+!!! note
 
     È anche possibile incapsulare una sezione di un workflow come un "sottoflusso" che può essere importato in una pipeline più ampia, ma ciò esula dallo scopo di questo corso.
 
@@ -63,7 +63,7 @@ results
 └── UPPER-Holà-output.txt
 ```
 
-!!! nota
+!!! note
 
     Potrebbe anche essere rimasto un file chiamato `output.txt` se si è lavorato alla Parte 2 nello stesso ambiente.
     
@@ -80,7 +80,7 @@ Si può chiamare questa cartella come si vuole, ma la convenzione è di chiamarl
 mkdir modules
 ```
 
-!!! nota
+!!! note
 
     Qui mostriamo come usare i moduli locali, cioè i moduli memorizzati localmente nello stesso repository del resto del codice del workflow, in contrasto con i moduli remoti, che sono memorizzati in altri repository (remoti). Per maggiori informazioni sui moduli remoti, si veda la [documentazione](https://www.nextflow.io/docs/latest/module.html).
     
