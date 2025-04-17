@@ -1,0 +1,2094 @@
+
+<!DOCTYPE html>
+
+<html class="no-js" lang="it">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="Fundamentals Nextflow Training Workshop" name="description"/>
+<link href="https://training.nextflow.io/0.dev/it/basic_training/operators/" rel="canonical"/>
+<link href="../processes/" rel="prev"/>
+<link href="../groovy/" rel="next"/>
+<link href="../../../assets/img/nextflow-icon.png" rel="icon"/>
+<meta content="mkdocs-1.6.1, mkdocs-material-9.6.12" name="generator"/>
+<title>Operators - training.nextflow.io</title>
+<link href="../../../assets/stylesheets/main.2afb09e1.min.css" rel="stylesheet"/>
+<link href="../../../assets/stylesheets/palette.06af60db.min.css" rel="stylesheet"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
+<style>:root{--md-text-font:"Inter";--md-code-font:"Roboto Mono"}</style>
+<link href="../../../assets/stylesheets/fonts.css" rel="stylesheet"/>
+<link href="../../../assets/stylesheets/extra.css" rel="stylesheet"/>
+<script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-244N3GEN75"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-244N3GEN75",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-244N3GEN75",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+<script>if("undefined"!=typeof __md_analytics){var consent=__md_get("__consent");consent&&consent.analytics&&__md_analytics()}</script>
+</head>
+<body data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="slate" dir="ltr">
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="#operators">
+          Vai al contenuto
+        </a>
+</div>
+<div data-md-component="announce">
+<aside class="md-banner">
+<div class="md-banner__inner md-grid md-typeset">
+<div style="text-align: center">
+  Nextflow Training Week (2025-Q1):
+  <strong>March 10-14, 2025</strong>
+<a class="md-button" href="https://community.seqera.io/t/nextflow-training-week-2025-q1/1775/6" target="_blank">
+    More info
+    <span class="twemoji"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"></path></svg></span>
+</a>
+</div>
+<style type="text/css">
+  .md-banner {
+    display: none;
+  }
+</style>
+<script>
+  (function () {
+    function hideAnnouncement() {
+      var announcementDate = new Date(
+        "2025-03-15T00:00:00Z",
+      );
+      var currentDate = new Date();
+      var banner = document.querySelector(".md-banner");
+      if (banner && currentDate <= announcementDate) {
+        banner.style.display = "block";
+      }
+    }
+
+    // Run on initial load
+    hideAnnouncement();
+
+    // Hook into XHR to run after each page update
+    var originalOpen = XMLHttpRequest.prototype.open;
+    XMLHttpRequest.prototype.open = function () {
+      this.addEventListener("load", function () {
+        setTimeout(hideAnnouncement, 0); // Ensure it runs after the request completes
+      });
+      return originalOpen.apply(this, arguments);
+    };
+  })();
+</script>
+</div>
+</aside>
+</div>
+<div data-md-color-scheme="default" data-md-component="outdated" hidden="">
+</div>
+<header class="md-header md-header--shadow" data-md-component="header">
+<nav aria-label="Intestazione" class="md-header__inner md-grid">
+<a aria-label="training.nextflow.io" class="md-header__button md-logo" data-md-component="logo" href="../../" title="training.nextflow.io">
+<img alt="logo" src="../../../assets/img/nextflow_logo_dark.png"/>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis">
+            training.nextflow.io
+          </span>
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis">
+            
+              Operators
+            
+          </span>
+</div>
+</div>
+</div>
+<form class="md-header__option" data-md-component="palette">
+<input aria-label="Switch to light mode" class="md-option" data-md-color-accent="indigo" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-primary="indigo" data-md-color-scheme="slate" id="__palette_0" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_1" hidden="" title="Switch to light mode">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"></path></svg>
+</label>
+<input aria-label="Switch to dark mode" class="md-option" data-md-color-accent="indigo" data-md-color-media="(prefers-color-scheme: light)" data-md-color-primary="indigo" data-md-color-scheme="default" id="__palette_1" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_0" hidden="" title="Switch to dark mode">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"></path></svg>
+</label>
+</form>
+<script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+<div class="md-header__option">
+<div class="md-select">
+<button aria-label="Seleziona la lingua" class="md-header__button md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"></path></svg>
+</button>
+<div class="md-select__inner">
+<ul class="md-select__list">
+<li class="md-select__item">
+<a class="md-select__link" href="../../../basic_training/operators/" hreflang="en">
+              English
+            </a>
+</li>
+<li class="md-select__item">
+<a class="md-select__link" href="../../../pt/basic_training/operators/" hreflang="pt">
+              Português
+            </a>
+</li>
+<li class="md-select__item">
+<a class="md-select__link" href="../../../es/basic_training/operators/" hreflang="es">
+              Español
+            </a>
+</li>
+<li class="md-select__item">
+<a class="md-select__link" href="../../../fr/basic_training/operators/" hreflang="fr">
+              Français
+            </a>
+</li>
+<li class="md-select__item">
+<a class="md-select__link" href="./" hreflang="it">
+              Italiano
+            </a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<label class="md-header__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="Cerca" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="Cerca" required="" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+</label>
+<nav aria-label="Cerca" class="md-search__options">
+<a aria-label="Condividi" class="md-search__icon md-icon" data-clipboard="" data-clipboard-text="" data-md-component="search-share" href="javascript:void(0)" tabindex="-1" title="Condividi">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"></path></svg>
+</a>
+<button aria-label="Cancella" class="md-search__icon md-icon" tabindex="-1" title="Cancella" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+</button>
+</nav>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="" tabindex="0">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta">
+            Inizializza la ricerca
+          </div>
+<ol class="md-search-result__list" role="presentation"></ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="md-header__source">
+<a class="md-source" data-md-component="source" href="https://github.com/nextflow-io/training" title="Apri repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"></path></svg>
+</div>
+<div class="md-source__repository">
+    nextflow-io/training
+  </div>
+</a>
+</div>
+</nav>
+</header>
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Navigazione" class="md-nav md-nav--primary" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="training.nextflow.io" class="md-nav__button md-logo" data-md-component="logo" href="../../" title="training.nextflow.io">
+<img alt="logo" src="../../../assets/img/nextflow_logo_dark.png"/>
+</a>
+    training.nextflow.io
+  </label>
+<div class="md-nav__source">
+<a class="md-source" data-md-component="source" href="https://github.com/nextflow-io/training" title="Apri repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"></path></svg>
+</div>
+<div class="md-source__repository">
+    nextflow-io/training
+  </div>
+</a>
+</div>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../">
+<span class="md-ellipsis">
+    Home
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+<span class="md-ellipsis">
+    Environment setup
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_2">
+<span class="md-nav__icon md-icon"></span>
+            Environment setup
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../envsetup/">
+<span class="md-ellipsis">
+    Environment Setup
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../envsetup/01_setup/">
+<span class="md-ellipsis">
+    GitHub Codespaces
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../envsetup/02_local/">
+<span class="md-ellipsis">
+    Local installation
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+<span class="md-ellipsis">
+    Hello Nextflow
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_3">
+<span class="md-nav__icon md-icon"></span>
+            Hello Nextflow
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../hello_nextflow/">
+<span class="md-ellipsis">
+    Hello Nextflow
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../hello_nextflow/00_orientation/">
+<span class="md-ellipsis">
+    Orientation
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../hello_nextflow/01_hello_world/">
+<span class="md-ellipsis">
+    Parte 1: Hello World
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../hello_nextflow/02_hello_channels/">
+<span class="md-ellipsis">
+    Parte 2: Hello Channels
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../hello_nextflow/03_hello_workflow/">
+<span class="md-ellipsis">
+    Parte 3: Hello Workflow
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../hello_nextflow/04_hello_modules/">
+<span class="md-ellipsis">
+    Parte 4: Hello Modules
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../hello_nextflow/05_hello_containers/">
+<span class="md-ellipsis">
+    Parte 5: Hello Containers
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../hello_nextflow/06_hello_config/">
+<span class="md-ellipsis">
+    Parte 6: Hello Config
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../hello_nextflow/survey/">
+<span class="md-ellipsis">
+    Feedback survey
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../hello_nextflow/next_steps/">
+<span class="md-ellipsis">
+    Next Steps
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+<span class="md-ellipsis">
+    Nextflow for Genomics
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_4_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_4">
+<span class="md-nav__icon md-icon"></span>
+            Nextflow for Genomics
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../nf4_science/genomics/">
+<span class="md-ellipsis">
+    Nextflow for Genomics
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../nf4_science/genomics/00_orientation/">
+<span class="md-ellipsis">
+    Orientation
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../nf4_science/genomics/01_per_sample_variant_calling/">
+<span class="md-ellipsis">
+    Part 1: Per-sample variant calling
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../nf4_science/genomics/02_joint_calling/">
+<span class="md-ellipsis">
+    Part 2: Joint calling on a cohort
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../nf4_science/genomics/03_modules/">
+<span class="md-ellipsis">
+    Part 3: Moving code into modules
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../nf4_science/genomics/04_testing/">
+<span class="md-ellipsis">
+    Part 4: Adding tests
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_5" type="checkbox"/>
+<label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+<span class="md-ellipsis">
+    Nextflow for RNAseq
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_5_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_5">
+<span class="md-nav__icon md-icon"></span>
+            Nextflow for RNAseq
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../nf4_science/rnaseq/">
+<span class="md-ellipsis">
+    Nextflow for RNAseq
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../nf4_science/rnaseq/00_orientation/">
+<span class="md-ellipsis">
+    Orientation
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../nf4_science/rnaseq/01_method/">
+<span class="md-ellipsis">
+    Part 1: Method overview and manual testing
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../nf4_science/rnaseq/02_single-sample/">
+<span class="md-ellipsis">
+    Part 2: Single-sample implementation
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../nf4_science/rnaseq/03_multi-sample/">
+<span class="md-ellipsis">
+    Part 3: Multi-sample paired-end implementation
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../nf4_science/rnaseq/survey/">
+<span class="md-ellipsis">
+    Feedback survey
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../nf4_science/rnaseq/next_steps/">
+<span class="md-ellipsis">
+    Next Steps
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_6" type="checkbox"/>
+<label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+<span class="md-ellipsis">
+    Side Quests
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_6_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_6">
+<span class="md-nav__icon md-icon"></span>
+            Side Quests
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../side_quests/">
+<span class="md-ellipsis">
+    Side Quests
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../side_quests/orientation/">
+<span class="md-ellipsis">
+    Orientation
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../side_quests/nf-core/">
+<span class="md-ellipsis">
+    Introduction to nf-core
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../side_quests/nf-test/">
+<span class="md-ellipsis">
+    Testing with nf-test
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../side_quests/workflows_of_workflows/">
+<span class="md-ellipsis">
+    Workflows of Workflows
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_7" type="checkbox"/>
+<label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+<span class="md-ellipsis">
+    Fundamentals Training
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="true" aria-labelledby="__nav_7_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_7">
+<span class="md-nav__icon md-icon"></span>
+            Fundamentals Training
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../">
+<span class="md-ellipsis">
+    Fundamentals Training
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../orientation/">
+<span class="md-ellipsis">
+    Orientation
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../intro/">
+<span class="md-ellipsis">
+    Basic concepts
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../rnaseq_pipeline/">
+<span class="md-ellipsis">
+    Simple RNA-Seq workflow
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../containers/">
+<span class="md-ellipsis">
+    Dependencies and containers
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../channels/">
+<span class="md-ellipsis">
+    Channels
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../processes/">
+<span class="md-ellipsis">
+    Processes
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+<span class="md-ellipsis">
+    Operators
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="./">
+<span class="md-ellipsis">
+    Operators
+    
+  </span>
+</a>
+<nav aria-label="On this page" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+    On this page
+  </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#basic-example">
+<span class="md-ellipsis">
+      Basic example
+    </span>
+</a>
+</li> <li class="md-nav__item">
+<a class="md-nav__link" href="#commonly-used-operators">
+<span class="md-ellipsis">
+      Commonly used operators
+    </span>
+</a>
+<nav aria-label="Commonly used operators" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#view">
+<span class="md-ellipsis">
+      view()
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#map">
+<span class="md-ellipsis">
+      map()
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#mix">
+<span class="md-ellipsis">
+      mix()
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#flatten">
+<span class="md-ellipsis">
+      flatten()
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#collect">
+<span class="md-ellipsis">
+      collect()
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#grouptuple">
+<span class="md-ellipsis">
+      groupTuple()
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#join">
+<span class="md-ellipsis">
+      join()
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#branch">
+<span class="md-ellipsis">
+      branch()
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li> <li class="md-nav__item">
+<a class="md-nav__link" href="#text-files">
+<span class="md-ellipsis">
+      Text files
+    </span>
+</a>
+<nav aria-label="Text files" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#splittext">
+<span class="md-ellipsis">
+      splitText()
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#splitcsv">
+<span class="md-ellipsis">
+      splitCsv()
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#tab-separated-values-tsv">
+<span class="md-ellipsis">
+      Tab separated values (.tsv)
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#splitjson">
+<span class="md-ellipsis">
+      splitJson()
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li> <li class="md-nav__item">
+<a class="md-nav__link" href="#more-resources">
+<span class="md-ellipsis">
+      More resources
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+<nav aria-label="Resources" class="md-nav md-nav--secondary sidebar_resources">
+<label class="md-nav__title">Resources</label>
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="https://nextflow.io/docs/latest/index.html" rel="noopener" target="_blank">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M17.5 14.33c.79 0 1.63.08 2.5.24v1.5c-.62-.16-1.46-.24-2.5-.24-1.9 0-3.39.33-4.5.99v-1.69c1.17-.53 2.67-.8 4.5-.8M13 12.46c1.29-.53 2.79-.79 4.5-.79.79 0 1.63.07 2.5.23v1.5c-.62-.16-1.46-.24-2.5-.24-1.9 0-3.39.34-4.5.99m4.5-3.65c-1.9 0-3.39.32-4.5 1V9.84c1.23-.56 2.73-.84 4.5-.84.79 0 1.63.08 2.5.23v1.55c-.74-.19-1.59-.28-2.5-.28m3.5 8V7c-1.04-.33-2.21-.5-3.5-.5-2.05 0-3.88.5-5.5 1.5v11.5c1.62-1 3.45-1.5 5.5-1.5 1.19 0 2.36.16 3.5.5m-3.5-14c2.35 0 4.19.5 5.5 1.5v14.56c0 .12-.05.24-.16.35-.11.09-.23.17-.34.17-.11 0-.19-.02-.25-.05-1.28-.69-2.87-1.03-4.75-1.03-2.05 0-3.88.5-5.5 1.5-1.34-1-3.17-1.5-5.5-1.5-1.66 0-3.25.36-4.75 1.07-.03.01-.07.01-.12.03-.04.01-.08.02-.13.02-.11 0-.23-.04-.34-.12a.475.475 0 0 1-.16-.35V6c1.34-1 3.18-1.5 5.5-1.5 2.33 0 4.16.5 5.5 1.5 1.34-1 3.17-1.5 5.5-1.5Z"></path>
+</svg>
+        Nextflow Docs
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="https://www.nextflow.io/slack-invite.html" rel="noopener" target="_blank">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M6 15a2 2 0 0 1-2 2 2 2 0 0 1-2-2 2 2 0 0 1 2-2h2v2m1 0a2 2 0 0 1 2-2 2 2 0 0 1 2 2v5a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-5m2-8a2 2 0 0 1-2-2 2 2 0 0 1 2-2 2 2 0 0 1 2 2v2H9m0 1a2 2 0 0 1 2 2 2 2 0 0 1-2 2H4a2 2 0 0 1-2-2 2 2 0 0 1 2-2h5m8 2a2 2 0 0 1 2-2 2 2 0 0 1 2 2 2 2 0 0 1-2 2h-2v-2m-1 0a2 2 0 0 1-2 2 2 2 0 0 1-2-2V5a2 2 0 0 1 2-2 2 2 0 0 1 2 2v5m-2 8a2 2 0 0 1 2 2 2 2 0 0 1-2 2 2 2 0 0 1-2-2v-2h2m0-1a2 2 0 0 1-2-2 2 2 0 0 1 2-2h5a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-5Z"></path>
+</svg>
+        Nextflow Slack
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="https://nextflow.io/" rel="noopener" target="_blank">
+<svg id="Layer_1" version="1.1" viewbox="80 50 350 350" xmlns="http://www.w3.org/2000/svg">
+<style type="text/css">
+            .st0 {
+              fill: "gray";
+            }
+          </style>
+<path class="st0" d="M124.5,171.5c39.4,2.6,71.1,34.3,73.5,73.8h46.1c-2.6-65-54.7-117.2-119.6-119.9V171.5z"></path>
+<path class="st0" d="M198.3,255.8c-2.6,39.5-34.3,71.1-73.8,73.5v46.1c65-2.6,117.2-54.7,119.9-119.6H198.3z"></path>
+<path class="st0" d="M300.7,245c2.6-39.5,34.3-71.1,73.8-73.5v-46.1c-65,2.6-117.2,54.7-119.9,119.6H300.7z"></path>
+<path class="st0" d="M374.5,329.3c-39.4-2.6-71.1-34.3-73.5-73.8h-46.1c2.6,65,54.7,117.2,119.6,119.9V329.3z"></path>
+</svg>
+        Nextflow Homepage
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="https://seqera.io/" rel="noopener" target="_blank">
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 28.3.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg id="Layer_1" style="enable-background: new 0 0 500 500" version="1.1" viewbox="80 50 350 350" x="0px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" y="0px">
+<style type="text/css">
+            .st0 {
+              clip-path: url(#SVGID_00000006699037935518914080000000086571810102047141_);
+            }
+            .st1 {
+              fill: "gray";
+            }
+          </style>
+<g>
+<defs>
+<rect height="250" id="SVGID_1_" width="250" x="125" y="125"></rect>
+</defs>
+<clippath id="SVGID_00000183214694142566821210000012389151436317298101_">
+<use style="overflow: visible" xlink:href="#SVGID_1_"></use>
+</clippath>
+<g style="
+                clip-path: url(#SVGID_00000183214694142566821210000012389151436317298101_);
+              ">
+<path class="st1" d="M375,333l-0.1-0.9l-0.1-0.8l-0.1-0.9l-0.1-0.9l-0.1-0.8l-0.1-0.9l-0.1-0.8l-0.2-0.9l-0.2-0.8l-0.2-0.8
+                      l-0.2-0.8l-0.2-0.8l-0.2-0.8l-0.3-0.8l-0.3-0.8l-0.3-0.8l-0.3-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8
+                      l-0.4-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7L365,308l-0.6-0.6l-0.6-0.6l-0.6-0.6l-0.6-0.6L362,305
+                      l-0.6-0.6l-0.7-0.6l-0.6-0.5l-1.2,0.7l-0.8,0.5l-0.8,0.4l-0.8,0.4l-0.8,0.4l-0.8,0.4l-0.9,0.4l-0.9,0.4l-0.9,0.3l-0.9,0.3
+                      l-0.9,0.3l-0.9,0.3l-0.9,0.3l-0.9,0.3l-0.9,0.2l-0.9,0.2l-0.9,0.2l-0.9,0.2l-0.9,0.2l-0.9,0.1l-0.9,0.1l-0.9,0.1l-0.9,0.1
+                      l-0.9,0.1l-0.9,0.1l-0.9,0.1l-0.9,0l-0.9,0h-57.5l59.7,16.4l0.4,0.1l0.4,0.1l0.4,0.1l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.2
+                      l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.1,0.3l0.1,0.3l0.1,0.4l0.1,0.4
+                      l0.1,0.4l0.1,0.4l0,0.4l0,0.4l0,0.4l0,0.4l0,0.4l0,0.4l-0.1,0.4l-0.1,0.4l-0.1,0.4l-0.1,0.3l-0.1,0.4l-0.1,0.3l-0.2,0.3l-0.2,0.3
+                      l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.3,0.3l-0.3,0.3l-0.3,0.2l-0.3,0.2l-0.3,0.2l-0.3,0.2l-0.3,0.2l-0.3,0.2
+                      l-0.3,0.1l-0.4,0.2l-0.4,0.1l-0.3,0.1l-0.4,0.1l-0.4,0.1l-0.4,0.1l-0.4,0l-0.4,0l-0.4,0H125V375h209.7l0.9,0l0.9,0l0.9,0l0.8-0.1
+                      l0.9-0.1l0.8-0.1l0.9-0.1l0.8-0.1l0.8-0.1l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.3l0.8-0.3l0.8-0.3l0.8-0.3l0.8-0.3
+                      l0.8-0.4l0.8-0.4l0.8-0.4l0.8-0.4l0.8-0.4l0.7-0.4l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5
+                      l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.4-0.7
+                      l0.4-0.8l0.4-0.8l0.4-0.8l0.4-0.8l0.4-0.8l0.4-0.8l0.3-0.8l0.3-0.8l0.3-0.8l0.3-0.8l0.2-0.8l0.2-0.8l0.2-0.8l0.2-0.8l0.2-0.8
+                      l0.2-0.8l0.1-0.8l0.1-0.9l0.1-0.9l0.1-0.8l0.1-0.9l0.1-0.9l0.1-0.8l0-0.9l0-0.9l0-0.8L375,333z"></path>
+<path class="st1" d="M375,260.4l-0.1-0.9l-0.1-0.9l-0.1-0.8l-0.1-0.9l-0.1-0.8l-0.1-0.8l-0.1-0.8l-0.2-0.8l-0.2-0.8l-0.2-0.8
+                      l-0.2-0.8l-0.2-0.8l-0.2-0.8l-0.3-0.8l-0.3-0.8l-0.3-0.8l-0.3-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.7
+                      l-0.4-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.2-0.2h0h-89.8l59.7,16.4l0.4,0.1l0.4,0.1l0.4,0.1l0.3,0.2l0.3,0.2l0.3,0.2
+                      l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.1,0.4l0.1,0.3
+                      l0.1,0.4l0.1,0.4l0.1,0.4l0.1,0.4l0,0.4l0,0.4l0,0.4l0,0.4l0,0.4l0,0.4l-0.1,0.4l-0.1,0.4l-0.1,0.4l-0.1,0.4l-0.1,0.3l-0.1,0.4
+                      l-0.2,0.4l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.3,0.3l-0.3,0.3l-0.3,0.2l-0.3,0.2l-0.3,0.2l-0.3,0.2
+                      l-0.3,0.2l-0.3,0.2l-0.3,0.2l-0.4,0.2l-0.4,0.1l-0.3,0.1l-0.4,0.1l-0.4,0.1l-0.4,0.1l-0.4,0l-0.4,0l-0.4,0h-82.5h-111H125v32.2
+                      h122.8h86.9h0.9l0.9,0l0.9-0.1l0.8-0.1l0.9-0.1l0.8-0.1l0.9-0.1l0.8-0.1l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.3
+                      l0.8-0.3l0.8-0.3l0.8-0.3l0.8-0.3l0.8-0.4l0.8-0.4l0.2-0.1l0.6-0.3l0.8-0.4l0.8-0.4l0.7-0.4l0.7-0.4l0.7-0.5l0.7-0.5l0.7-0.5
+                      l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.5-0.7l0.5-0.7l0.5-0.7
+                      l0.5-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.4-0.7l0.4-0.7l0.4-0.8l0.4-0.8l0.4-0.8l0.4-0.8l0.4-0.8l0.3-0.8l0.3-0.8l0.3-0.8l0.3-0.8
+                      l0.2-0.8l0.2-0.8l0.2-0.8l0.2-0.8l0.2-0.8l0.2-0.8l0.1-0.8l0.1-0.9l0.1-0.8l0.1-0.9l0.1-0.8l0.1-0.9l0.1-0.9l0-0.8l0-0.9l0-0.9
+                      L375,260.4z"></path>
+<path class="st1" d="M165.3,197.6l-0.9,0l-0.8,0l-0.9,0l-0.9,0.1l-0.8,0.1l-0.9,0.1l-0.8,0.1l-0.8,0.1l-0.8,0.2l-0.8,0.2l-0.8,0.2
+                      l-0.8,0.2l-0.8,0.2l-0.8,0.2l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.4l-0.8,0.4l-0.2,0.1l-0.6,0.3l-0.8,0.4
+                      l-0.8,0.4l-0.8,0.4l-0.7,0.4l-0.7,0.5l-0.7,0.5L142,205l-0.7,0.5l-0.7,0.5l-0.7,0.5l-0.7,0.5l-0.7,0.6l-0.6,0.6l-0.6,0.6l-0.6,0.6
+                      l-0.6,0.6l-0.6,0.6l-0.6,0.6l-0.6,0.6l-0.5,0.6l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.4,0.7l-0.5,0.7l-0.4,0.7
+                      l-0.4,0.8l-0.4,0.8l-0.4,0.8l-0.4,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.2,0.8l-0.2,0.8l-0.2,0.8
+                      l-0.2,0.8l-0.2,0.8l-0.2,0.8l-0.1,0.9l-0.1,0.9l-0.1,0.8l-0.1,0.9l-0.1,0.9l0,0.9l0,0.9v0.9v0.9l0,0.8l0,0.9l0.1,0.8l0.1,0.8
+                      l0.1,0.9l0.1,0.9l0.1,0.8l0.2,0.9l0.2,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8
+                      l0.4,0.8l0.4,0.8l0.4,0.8l0.4,0.8l0.4,0.7l0.5,0.7l0.4,0.7l0.5,0.7l0.5,0.7l0.5,0.7l0.2,0.2h89.8l-59.7-16.4l-0.4-0.1l-0.3-0.1
+                      l-0.4-0.1l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3
+                      l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.1-0.4l-0.1-0.4l-0.1-0.3l-0.1-0.4l-0.1-0.4l-0.1-0.4l0-0.4l0-0.4l0-0.4l0-0.4l0-0.4
+                      l0-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3
+                      l0.3-0.3l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.4-0.2l0.3-0.1l0.4-0.1l0.4-0.1l0.4-0.1l0.4-0.1l0.4,0l0.4,0
+                      h0.4h82.5h111H375v-32.3H252.2H165.3z"></path>
+<path class="st1" d="M165.3,125l-0.9,0l-0.8,0l-0.9,0.1l-0.9,0.1l-0.8,0.1l-0.9,0.1l-0.8,0.1l-0.8,0.1l-0.8,0.2l-0.8,0.2l-0.8,0.2
+                      l-0.8,0.2l-0.8,0.2l-0.8,0.2l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.4l-0.8,0.4l-0.8,0.4l-0.8,0.4
+                      l-0.8,0.4l-0.7,0.5l-0.7,0.4l-0.7,0.5l-0.7,0.5l-0.7,0.5l-0.7,0.5l-0.7,0.5l-0.7,0.6l-0.7,0.6l-0.6,0.6l-0.6,0.6l-0.6,0.6
+                      l-0.6,0.6l-0.6,0.6l-0.6,0.6l-0.6,0.6l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.4,0.7l-0.5,0.7l-0.4,0.7
+                      l-0.4,0.8l-0.4,0.8l-0.4,0.8l-0.4,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.2,0.8l-0.2,0.8l-0.2,0.8
+                      l-0.2,0.8l-0.2,0.8l-0.2,0.8l-0.1,0.9l-0.1,0.8l-0.1,0.9l-0.1,0.8l-0.1,0.9l0,0.9l0,0.9v0.9v0.9l0,0.9l0,0.8l0.1,0.9l0.1,0.9
+                      l0.1,0.8l0.1,0.8l0.1,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8
+                      l0.4,0.8l0.4,0.8l0.4,0.8l0.4,0.8l0.4,0.7l0.5,0.7l0.4,0.7l0.5,0.7l0.5,0.7l0.5,0.7l0.5,0.7l0.5,0.7l0.5,0.7l0.6,0.6l0.6,0.6
+                      l0.6,0.6l0.6,0.6l0.6,0.6l0.6,0.6l0.6,0.6l0.7,0.6l0.6,0.5h0l1.1-0.7l0.8-0.5l0.8-0.5l0.8-0.4l0.8-0.4l0.9-0.4l0.9-0.4l0.9-0.4
+                      l0.9-0.3l0.9-0.3l0.9-0.3l0.9-0.3l0.9-0.3l0.9-0.3l0.9-0.2l0.9-0.2l0.9-0.2l0.9-0.2l0.9-0.2l0.9-0.1l0.9-0.1l0.9-0.1l0.9-0.1
+                      l0.9-0.1l0.9-0.1l0.9,0l0.9,0l0.9,0h57.5l-59.7-16.4l-0.4-0.1l-0.3-0.1l-0.4-0.1l-0.3-0.1l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2
+                      l-0.3-0.2l-0.3-0.2l-0.3-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.1-0.3l-0.1-0.4
+                      l-0.1-0.3l-0.1-0.4l-0.1-0.4l-0.1-0.4l0-0.4l0-0.4l0-0.4l0-0.4l0-0.4l0-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.3
+                      l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2
+                      l0.3-0.2l0.4-0.1l0.3-0.1l0.4-0.1l0.4-0.1l0.4-0.1l0.4-0.1l0.4,0l0.4,0l0.4,0H375V125H165.3z"></path>
+</g>
+</g>
+</svg>
+        Seqera
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="https://github.com/nextflow-io/training" rel="noopener" target="_blank">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z"></path>
+</svg>
+        Training on GitHub
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../groovy/">
+<span class="md-ellipsis">
+    Groovy introduction
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../modules/">
+<span class="md-ellipsis">
+    Modularization
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../config/">
+<span class="md-ellipsis">
+    Configuration
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../executors/">
+<span class="md-ellipsis">
+    Deployment scenarios
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../seqera_platform/">
+<span class="md-ellipsis">
+    Seqera Platform
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../cache_and_resume/">
+<span class="md-ellipsis">
+    Cache and resume
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../debugging/">
+<span class="md-ellipsis">
+    Troubleshooting
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_8" type="checkbox"/>
+<label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+<span class="md-ellipsis">
+    Advanced Training
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_8_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_8">
+<span class="md-nav__icon md-icon"></span>
+            Advanced Training
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../advanced/">
+<span class="md-ellipsis">
+    Advanced Training
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../advanced/orientation/">
+<span class="md-ellipsis">
+    Orientation
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../advanced/operators/">
+<span class="md-ellipsis">
+    Operator Tour
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../advanced/metadata/">
+<span class="md-ellipsis">
+    Metadata Propagation
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../advanced/grouping/">
+<span class="md-ellipsis">
+    Grouping and Splitting
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../advanced/groovy/">
+<span class="md-ellipsis">
+    Groovy Imports
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../advanced/structure/">
+<span class="md-ellipsis">
+    Workflow Structure
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../advanced/configuration/">
+<span class="md-ellipsis">
+    Configuration
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../advanced/summary/">
+<span class="md-ellipsis">
+    Summary
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../advanced/support/">
+<span class="md-ellipsis">
+    Support
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="On this page" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+    On this page
+  </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#basic-example">
+<span class="md-ellipsis">
+      Basic example
+    </span>
+</a>
+</li> <li class="md-nav__item">
+<a class="md-nav__link" href="#commonly-used-operators">
+<span class="md-ellipsis">
+      Commonly used operators
+    </span>
+</a>
+<nav aria-label="Commonly used operators" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#view">
+<span class="md-ellipsis">
+      view()
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#map">
+<span class="md-ellipsis">
+      map()
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#mix">
+<span class="md-ellipsis">
+      mix()
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#flatten">
+<span class="md-ellipsis">
+      flatten()
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#collect">
+<span class="md-ellipsis">
+      collect()
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#grouptuple">
+<span class="md-ellipsis">
+      groupTuple()
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#join">
+<span class="md-ellipsis">
+      join()
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#branch">
+<span class="md-ellipsis">
+      branch()
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li> <li class="md-nav__item">
+<a class="md-nav__link" href="#text-files">
+<span class="md-ellipsis">
+      Text files
+    </span>
+</a>
+<nav aria-label="Text files" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#splittext">
+<span class="md-ellipsis">
+      splitText()
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#splitcsv">
+<span class="md-ellipsis">
+      splitCsv()
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#tab-separated-values-tsv">
+<span class="md-ellipsis">
+      Tab separated values (.tsv)
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#splitjson">
+<span class="md-ellipsis">
+      splitJson()
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li> <li class="md-nav__item">
+<a class="md-nav__link" href="#more-resources">
+<span class="md-ellipsis">
+      More resources
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+<nav aria-label="Resources" class="md-nav md-nav--secondary sidebar_resources">
+<label class="md-nav__title">Resources</label>
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="https://nextflow.io/docs/latest/index.html" rel="noopener" target="_blank">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M17.5 14.33c.79 0 1.63.08 2.5.24v1.5c-.62-.16-1.46-.24-2.5-.24-1.9 0-3.39.33-4.5.99v-1.69c1.17-.53 2.67-.8 4.5-.8M13 12.46c1.29-.53 2.79-.79 4.5-.79.79 0 1.63.07 2.5.23v1.5c-.62-.16-1.46-.24-2.5-.24-1.9 0-3.39.34-4.5.99m4.5-3.65c-1.9 0-3.39.32-4.5 1V9.84c1.23-.56 2.73-.84 4.5-.84.79 0 1.63.08 2.5.23v1.55c-.74-.19-1.59-.28-2.5-.28m3.5 8V7c-1.04-.33-2.21-.5-3.5-.5-2.05 0-3.88.5-5.5 1.5v11.5c1.62-1 3.45-1.5 5.5-1.5 1.19 0 2.36.16 3.5.5m-3.5-14c2.35 0 4.19.5 5.5 1.5v14.56c0 .12-.05.24-.16.35-.11.09-.23.17-.34.17-.11 0-.19-.02-.25-.05-1.28-.69-2.87-1.03-4.75-1.03-2.05 0-3.88.5-5.5 1.5-1.34-1-3.17-1.5-5.5-1.5-1.66 0-3.25.36-4.75 1.07-.03.01-.07.01-.12.03-.04.01-.08.02-.13.02-.11 0-.23-.04-.34-.12a.475.475 0 0 1-.16-.35V6c1.34-1 3.18-1.5 5.5-1.5 2.33 0 4.16.5 5.5 1.5 1.34-1 3.17-1.5 5.5-1.5Z"></path>
+</svg>
+        Nextflow Docs
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="https://www.nextflow.io/slack-invite.html" rel="noopener" target="_blank">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M6 15a2 2 0 0 1-2 2 2 2 0 0 1-2-2 2 2 0 0 1 2-2h2v2m1 0a2 2 0 0 1 2-2 2 2 0 0 1 2 2v5a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-5m2-8a2 2 0 0 1-2-2 2 2 0 0 1 2-2 2 2 0 0 1 2 2v2H9m0 1a2 2 0 0 1 2 2 2 2 0 0 1-2 2H4a2 2 0 0 1-2-2 2 2 0 0 1 2-2h5m8 2a2 2 0 0 1 2-2 2 2 0 0 1 2 2 2 2 0 0 1-2 2h-2v-2m-1 0a2 2 0 0 1-2 2 2 2 0 0 1-2-2V5a2 2 0 0 1 2-2 2 2 0 0 1 2 2v5m-2 8a2 2 0 0 1 2 2 2 2 0 0 1-2 2 2 2 0 0 1-2-2v-2h2m0-1a2 2 0 0 1-2-2 2 2 0 0 1 2-2h5a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-5Z"></path>
+</svg>
+        Nextflow Slack
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="https://nextflow.io/" rel="noopener" target="_blank">
+<svg id="Layer_1" version="1.1" viewbox="80 50 350 350" xmlns="http://www.w3.org/2000/svg">
+<style type="text/css">
+            .st0 {
+              fill: "gray";
+            }
+          </style>
+<path class="st0" d="M124.5,171.5c39.4,2.6,71.1,34.3,73.5,73.8h46.1c-2.6-65-54.7-117.2-119.6-119.9V171.5z"></path>
+<path class="st0" d="M198.3,255.8c-2.6,39.5-34.3,71.1-73.8,73.5v46.1c65-2.6,117.2-54.7,119.9-119.6H198.3z"></path>
+<path class="st0" d="M300.7,245c2.6-39.5,34.3-71.1,73.8-73.5v-46.1c-65,2.6-117.2,54.7-119.9,119.6H300.7z"></path>
+<path class="st0" d="M374.5,329.3c-39.4-2.6-71.1-34.3-73.5-73.8h-46.1c2.6,65,54.7,117.2,119.6,119.9V329.3z"></path>
+</svg>
+        Nextflow Homepage
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="https://seqera.io/" rel="noopener" target="_blank">
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 28.3.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg id="Layer_1" style="enable-background: new 0 0 500 500" version="1.1" viewbox="80 50 350 350" x="0px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" y="0px">
+<style type="text/css">
+            .st0 {
+              clip-path: url(#SVGID_00000006699037935518914080000000086571810102047141_);
+            }
+            .st1 {
+              fill: "gray";
+            }
+          </style>
+<g>
+<defs>
+<rect height="250" id="SVGID_1_" width="250" x="125" y="125"></rect>
+</defs>
+<clippath id="SVGID_00000183214694142566821210000012389151436317298101_">
+<use style="overflow: visible" xlink:href="#SVGID_1_"></use>
+</clippath>
+<g style="
+                clip-path: url(#SVGID_00000183214694142566821210000012389151436317298101_);
+              ">
+<path class="st1" d="M375,333l-0.1-0.9l-0.1-0.8l-0.1-0.9l-0.1-0.9l-0.1-0.8l-0.1-0.9l-0.1-0.8l-0.2-0.9l-0.2-0.8l-0.2-0.8
+                      l-0.2-0.8l-0.2-0.8l-0.2-0.8l-0.3-0.8l-0.3-0.8l-0.3-0.8l-0.3-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8
+                      l-0.4-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7L365,308l-0.6-0.6l-0.6-0.6l-0.6-0.6l-0.6-0.6L362,305
+                      l-0.6-0.6l-0.7-0.6l-0.6-0.5l-1.2,0.7l-0.8,0.5l-0.8,0.4l-0.8,0.4l-0.8,0.4l-0.8,0.4l-0.9,0.4l-0.9,0.4l-0.9,0.3l-0.9,0.3
+                      l-0.9,0.3l-0.9,0.3l-0.9,0.3l-0.9,0.3l-0.9,0.2l-0.9,0.2l-0.9,0.2l-0.9,0.2l-0.9,0.2l-0.9,0.1l-0.9,0.1l-0.9,0.1l-0.9,0.1
+                      l-0.9,0.1l-0.9,0.1l-0.9,0.1l-0.9,0l-0.9,0h-57.5l59.7,16.4l0.4,0.1l0.4,0.1l0.4,0.1l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.2
+                      l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.1,0.3l0.1,0.3l0.1,0.4l0.1,0.4
+                      l0.1,0.4l0.1,0.4l0,0.4l0,0.4l0,0.4l0,0.4l0,0.4l0,0.4l-0.1,0.4l-0.1,0.4l-0.1,0.4l-0.1,0.3l-0.1,0.4l-0.1,0.3l-0.2,0.3l-0.2,0.3
+                      l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.3,0.3l-0.3,0.3l-0.3,0.2l-0.3,0.2l-0.3,0.2l-0.3,0.2l-0.3,0.2l-0.3,0.2
+                      l-0.3,0.1l-0.4,0.2l-0.4,0.1l-0.3,0.1l-0.4,0.1l-0.4,0.1l-0.4,0.1l-0.4,0l-0.4,0l-0.4,0H125V375h209.7l0.9,0l0.9,0l0.9,0l0.8-0.1
+                      l0.9-0.1l0.8-0.1l0.9-0.1l0.8-0.1l0.8-0.1l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.3l0.8-0.3l0.8-0.3l0.8-0.3l0.8-0.3
+                      l0.8-0.4l0.8-0.4l0.8-0.4l0.8-0.4l0.8-0.4l0.7-0.4l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5
+                      l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.4-0.7
+                      l0.4-0.8l0.4-0.8l0.4-0.8l0.4-0.8l0.4-0.8l0.4-0.8l0.3-0.8l0.3-0.8l0.3-0.8l0.3-0.8l0.2-0.8l0.2-0.8l0.2-0.8l0.2-0.8l0.2-0.8
+                      l0.2-0.8l0.1-0.8l0.1-0.9l0.1-0.9l0.1-0.8l0.1-0.9l0.1-0.9l0.1-0.8l0-0.9l0-0.9l0-0.8L375,333z"></path>
+<path class="st1" d="M375,260.4l-0.1-0.9l-0.1-0.9l-0.1-0.8l-0.1-0.9l-0.1-0.8l-0.1-0.8l-0.1-0.8l-0.2-0.8l-0.2-0.8l-0.2-0.8
+                      l-0.2-0.8l-0.2-0.8l-0.2-0.8l-0.3-0.8l-0.3-0.8l-0.3-0.8l-0.3-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.7
+                      l-0.4-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.2-0.2h0h-89.8l59.7,16.4l0.4,0.1l0.4,0.1l0.4,0.1l0.3,0.2l0.3,0.2l0.3,0.2
+                      l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.1,0.4l0.1,0.3
+                      l0.1,0.4l0.1,0.4l0.1,0.4l0.1,0.4l0,0.4l0,0.4l0,0.4l0,0.4l0,0.4l0,0.4l-0.1,0.4l-0.1,0.4l-0.1,0.4l-0.1,0.4l-0.1,0.3l-0.1,0.4
+                      l-0.2,0.4l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.3,0.3l-0.3,0.3l-0.3,0.2l-0.3,0.2l-0.3,0.2l-0.3,0.2
+                      l-0.3,0.2l-0.3,0.2l-0.3,0.2l-0.4,0.2l-0.4,0.1l-0.3,0.1l-0.4,0.1l-0.4,0.1l-0.4,0.1l-0.4,0l-0.4,0l-0.4,0h-82.5h-111H125v32.2
+                      h122.8h86.9h0.9l0.9,0l0.9-0.1l0.8-0.1l0.9-0.1l0.8-0.1l0.9-0.1l0.8-0.1l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.3
+                      l0.8-0.3l0.8-0.3l0.8-0.3l0.8-0.3l0.8-0.4l0.8-0.4l0.2-0.1l0.6-0.3l0.8-0.4l0.8-0.4l0.7-0.4l0.7-0.4l0.7-0.5l0.7-0.5l0.7-0.5
+                      l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.5-0.7l0.5-0.7l0.5-0.7
+                      l0.5-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.4-0.7l0.4-0.7l0.4-0.8l0.4-0.8l0.4-0.8l0.4-0.8l0.4-0.8l0.3-0.8l0.3-0.8l0.3-0.8l0.3-0.8
+                      l0.2-0.8l0.2-0.8l0.2-0.8l0.2-0.8l0.2-0.8l0.2-0.8l0.1-0.8l0.1-0.9l0.1-0.8l0.1-0.9l0.1-0.8l0.1-0.9l0.1-0.9l0-0.8l0-0.9l0-0.9
+                      L375,260.4z"></path>
+<path class="st1" d="M165.3,197.6l-0.9,0l-0.8,0l-0.9,0l-0.9,0.1l-0.8,0.1l-0.9,0.1l-0.8,0.1l-0.8,0.1l-0.8,0.2l-0.8,0.2l-0.8,0.2
+                      l-0.8,0.2l-0.8,0.2l-0.8,0.2l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.4l-0.8,0.4l-0.2,0.1l-0.6,0.3l-0.8,0.4
+                      l-0.8,0.4l-0.8,0.4l-0.7,0.4l-0.7,0.5l-0.7,0.5L142,205l-0.7,0.5l-0.7,0.5l-0.7,0.5l-0.7,0.5l-0.7,0.6l-0.6,0.6l-0.6,0.6l-0.6,0.6
+                      l-0.6,0.6l-0.6,0.6l-0.6,0.6l-0.6,0.6l-0.5,0.6l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.4,0.7l-0.5,0.7l-0.4,0.7
+                      l-0.4,0.8l-0.4,0.8l-0.4,0.8l-0.4,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.2,0.8l-0.2,0.8l-0.2,0.8
+                      l-0.2,0.8l-0.2,0.8l-0.2,0.8l-0.1,0.9l-0.1,0.9l-0.1,0.8l-0.1,0.9l-0.1,0.9l0,0.9l0,0.9v0.9v0.9l0,0.8l0,0.9l0.1,0.8l0.1,0.8
+                      l0.1,0.9l0.1,0.9l0.1,0.8l0.2,0.9l0.2,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8
+                      l0.4,0.8l0.4,0.8l0.4,0.8l0.4,0.8l0.4,0.7l0.5,0.7l0.4,0.7l0.5,0.7l0.5,0.7l0.5,0.7l0.2,0.2h89.8l-59.7-16.4l-0.4-0.1l-0.3-0.1
+                      l-0.4-0.1l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3
+                      l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.1-0.4l-0.1-0.4l-0.1-0.3l-0.1-0.4l-0.1-0.4l-0.1-0.4l0-0.4l0-0.4l0-0.4l0-0.4l0-0.4
+                      l0-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3
+                      l0.3-0.3l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.4-0.2l0.3-0.1l0.4-0.1l0.4-0.1l0.4-0.1l0.4-0.1l0.4,0l0.4,0
+                      h0.4h82.5h111H375v-32.3H252.2H165.3z"></path>
+<path class="st1" d="M165.3,125l-0.9,0l-0.8,0l-0.9,0.1l-0.9,0.1l-0.8,0.1l-0.9,0.1l-0.8,0.1l-0.8,0.1l-0.8,0.2l-0.8,0.2l-0.8,0.2
+                      l-0.8,0.2l-0.8,0.2l-0.8,0.2l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.4l-0.8,0.4l-0.8,0.4l-0.8,0.4
+                      l-0.8,0.4l-0.7,0.5l-0.7,0.4l-0.7,0.5l-0.7,0.5l-0.7,0.5l-0.7,0.5l-0.7,0.5l-0.7,0.6l-0.7,0.6l-0.6,0.6l-0.6,0.6l-0.6,0.6
+                      l-0.6,0.6l-0.6,0.6l-0.6,0.6l-0.6,0.6l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.4,0.7l-0.5,0.7l-0.4,0.7
+                      l-0.4,0.8l-0.4,0.8l-0.4,0.8l-0.4,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.2,0.8l-0.2,0.8l-0.2,0.8
+                      l-0.2,0.8l-0.2,0.8l-0.2,0.8l-0.1,0.9l-0.1,0.8l-0.1,0.9l-0.1,0.8l-0.1,0.9l0,0.9l0,0.9v0.9v0.9l0,0.9l0,0.8l0.1,0.9l0.1,0.9
+                      l0.1,0.8l0.1,0.8l0.1,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8
+                      l0.4,0.8l0.4,0.8l0.4,0.8l0.4,0.8l0.4,0.7l0.5,0.7l0.4,0.7l0.5,0.7l0.5,0.7l0.5,0.7l0.5,0.7l0.5,0.7l0.5,0.7l0.6,0.6l0.6,0.6
+                      l0.6,0.6l0.6,0.6l0.6,0.6l0.6,0.6l0.6,0.6l0.7,0.6l0.6,0.5h0l1.1-0.7l0.8-0.5l0.8-0.5l0.8-0.4l0.8-0.4l0.9-0.4l0.9-0.4l0.9-0.4
+                      l0.9-0.3l0.9-0.3l0.9-0.3l0.9-0.3l0.9-0.3l0.9-0.3l0.9-0.2l0.9-0.2l0.9-0.2l0.9-0.2l0.9-0.2l0.9-0.1l0.9-0.1l0.9-0.1l0.9-0.1
+                      l0.9-0.1l0.9-0.1l0.9,0l0.9,0l0.9,0h57.5l-59.7-16.4l-0.4-0.1l-0.3-0.1l-0.4-0.1l-0.3-0.1l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2
+                      l-0.3-0.2l-0.3-0.2l-0.3-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.1-0.3l-0.1-0.4
+                      l-0.1-0.3l-0.1-0.4l-0.1-0.4l-0.1-0.4l0-0.4l0-0.4l0-0.4l0-0.4l0-0.4l0-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.3
+                      l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2
+                      l0.3-0.2l0.4-0.1l0.3-0.1l0.4-0.1l0.4-0.1l0.4-0.1l0.4-0.1l0.4,0l0.4,0l0.4,0H375V125H165.3z"></path>
+</g>
+</g>
+</svg>
+        Seqera
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="https://github.com/nextflow-io/training" rel="noopener" target="_blank">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z"></path>
+</svg>
+        Training on GitHub
+      </a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<a class="md-content__button md-icon" href="https://github.com/nextflow-io/training/edit/master/docs/basic_training/operators.md" title="Modifica">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"></path></svg>
+</a>
+<h1 id="operators"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.</span> Operators<a class="headerlink" href="#operators" title="Permanent link">¶</a></h1>
+<p>Nextflow operators are methods that allow you to manipulate channels. Every operator, with the exception of <code>set</code> and <code>subscribe</code>, produces one or more new channels, allowing you to chain operators to fit your needs.</p>
+<p>There are seven main groups of operators are described in greater detail within the Nextflow Reference Documentation, linked below:</p>
+<ol>
+<li><a href="https://www.nextflow.io/docs/latest/operator.html#filtering-operators">Filtering operators</a></li>
+<li><a href="https://www.nextflow.io/docs/latest/operator.html#transforming-operators">Transforming operators</a></li>
+<li><a href="https://www.nextflow.io/docs/latest/operator.html#splitting-operators">Splitting operators</a></li>
+<li><a href="https://www.nextflow.io/docs/latest/operator.html#combining-operators">Combining operators</a></li>
+<li><a href="https://www.nextflow.io/docs/latest/operator.html#forking-operators">Forking operators</a></li>
+<li><a href="https://www.nextflow.io/docs/latest/operator.html#maths-operators">Maths operators</a></li>
+<li><a href="https://www.nextflow.io/docs/latest/operator.html#other-operators">Other operators</a></li>
+</ol>
+<h2 id="basic-example"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.1</span> Basic example<a class="headerlink" href="#basic-example" title="Permanent link">¶</a></h2>
+<p>The <code>map</code> operator applies a function of your choosing to every item emitted by a channel, and returns the items so obtained as a new channel. The function applied is called the mapping function and is expressed with a closure as shown in the example below:</p>
+<div class="admonition info">
+<p>Click the <span class="twemoji"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17 13h-4v4h-2v-4H7v-2h4V7h2v4h4m-5-9A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2"></path></svg></span> icons in the code for explanations.</p>
+</div>
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span>
+<span class="normal"><a href="#__codelineno-0-2">2</a></span>
+<span class="normal"><a href="#__codelineno-0-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="n">nums</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="w"> </span><span class="mi">2</span><span class="o">,</span><span class="w"> </span><span class="mi">3</span><span class="o">,</span><span class="w"> </span><span class="mi">4</span><span class="o">)</span><span class="w"> </span><span class="c1">// (1)!</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="n">square</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nums</span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="c1">// (2)!</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="n">square</span><span class="o">.</span><span class="na">view</span><span class="o">()</span><span class="w"> </span><span class="c1">// (3)!</span>
+</code></pre></div></td></tr></table></div>
+<ol>
+<li>Creates a queue channel emitting four values</li>
+<li>Creates a new channel, transforming each number into its square</li>
+<li>Prints the channel content</li>
+</ol>
+<figure class="excalidraw">
+<svg height="281.1882746254343" version="1.1" viewbox="0 0 677.7383966383621 281.1882746254343" width="677.7383966383621" xmlns="http://www.w3.org/2000/svg">
+<!-- svg-source:excalidraw -->
+<!-- payload-type:application/vnd.excalidraw+json --><!-- payload-version:2 --><!-- payload-start -->eyJ2ZXJzaW9uIjoiMSIsImVuY29kaW5nIjoiYnN0cmluZyIsImNvbXByZXNzZWQiOnRydWUsImVuY29kZWQiOiJ4nO1dWVPbyFx1MDAxNn7Pr6CY10HT2+llqm7dwixcdJtZjIFwayolbNlcdTAwMTbYkpFlXHUwMDEzmMp/v6dcdTAwMDVY8lwisFx1MDAxOVxiXCJjPVx1MDAxMGhJraPu831n6T7K35+Wlpbj2663/OfSsve95rb9euTeLP9u21x1MDAwN17U88NcdTAwMDBPseTvXtiPasmVrTju9v7844+OXHUwMDFiXXlxt+3WPGfg9/puu1x1MDAxN/frfujUws5cdTAwMWZ+7HV6/7U/y27H+0837NTjyElcdTAwMWay4tX9OIzun+W1vY5cdTAwMTfEPez9f/j30tLfyc+MdG5cdTAwMTSF94IlzalwnMvx1nJcdTAwMTgkgjLOmOFkeNrvreODYq+O51x1MDAxYSisl56xTcvB56vGYXN/rU7Ob1dcdTAwMDdcdTAwMTdcdTAwMDeVb5dRP31mw2+3K/Ft+35cZtxaq1x1MDAxZnnp2V5cdTAwMWOFV96pX49beF6MtVx1MDAwZu/rhfj66V1R2G+2XHUwMDAyr2ffnFx1MDAwZVvDrlvz41vbRlLx3aCZ9JG2fMe/gHBcdTAwMDdAS0WlXHUwMDEyhIOG4WnbXHUwMDAxV9IhSipJXHRTXFxIMybYWtjGSUDBflx1MDAxM1x1MDAwNlxiqFS0XHUwMDBit3bVRPmC+vCaOHKDXteNcKrS625cdTAwMWVeWWmHXHUwMDEzo1x1MDAxNFx1MDAwNcap1Gp4Qcvzm63YXG7uXHUwMDEwo7WkQJVcdTAwMDHDObCMNF4yLZRJil2gKMMzVobuVj3Rjb+yXHUwMDAzXHUwMDE31Fx1MDAxZlx1MDAwNu5RWVJ1YVx1MDAwZi0/0rex129k1Cztqt+tu/dKgUNcYkJqjYrDU9HafnCFJ4N+u522hbWrKXrUi90oLvlB3Vx1MDAwZprjt3hBPT2TXHUwMDEx+UH3t1x1MDAxMlx1MDAxNbz7etTYuGyuXGZ6tXO2tnLa0r04XHUwMDFka6uEYa1v5V/BwaRCXHUwMDEyqUEzRoQxKnNV0+3a16GOXHUwMDFka5xcZq5cdTAwMDVcdTAwMDCO98SwtN1evFx1MDAxNnY6fowjcFx1MDAxMPpBPC528kqrXHUwMDE2fS3PrU95qey5cZh2bY8pqu2R/raUanLyx/D3v36fenWegtljZYpupf19yv778PJcdTAwMTNcZuO12363503jXHUwMDE4VMo8jlx1MDAxMVxiLFwiOE9cdTAwMDH/XHUwMDFjyzw9xXOxXGZcdTAwMWRrf0OWMVx1MDAxY/VNg1x1MDAxMVJcdTAwMWEqWfq6XHTJXGLuXGJUR0U4XHUwMDA1XHRSqDHBUpYhyfFylmHC0VxmXHUwMDFmw1KaXHUwMDFi8otcdTAwMTSo7zJz5oFUsElxrVKZ34hShvf8ndHMmWzLiFwi3mNoeObHo/a+XCJhPVx0XHUwMDA0vH06XG6ozkOBQSpcdTAwMTKoI3pmXHUwMDE0nFxcr630Yrj+XFzyeoPzs1x1MDAxMHrHm2HRUSCJclxik4Igp05DgXCEokoz/dYo4JI53HCqpNT4SJLR7dTaTthWKnCaXHUwMDE43jNcdTAwMDdcdTAwMTBGlKhgRnS0s9e1ZCPnXtWM5c/d2O0zWa08sHKaa7JcdTAwMTQoXHUwMDA13GTU4Dmwnp93LytUbfLr1Xp1R+83XHUwMDE02W5cdTAwMTZcdTAwMWas0lx1MDAwMZFcdTAwMTA/0UKnqmhvR1xiO0BcZlx1MDAwNVBcdTAwMDBcdTAwMTgljIv1mlCVXHUwMDBlNUZcdTAwMWHsXHUwMDA1qVx1MDAwMfgsSFx1MDAwNUnRqdNzecH/XGKpXCJ90lx1MDAwMqmPR+7Ujd39j4BKiVx1MDAxMePNj0ilklx1MDAxMIZcdTAwMGaH2WNY//g8im51XHUwMDEwuer2XCLod+7qh1eHhYeqIY40klx1MDAxYcWUssHMmF1FIFx1MDAxM5BcdTAwMWH9OIZw5WNyvVx1MDAxZVYxYDLMaIq+XGZojSHVlCBcdTAwMTaMg45cdTAwMTDjXHUwMDEy7b+0WjFcdTAwMGVeoYyhRM9jZN9cIoBdIHrK1cqRkjFOXHUwMDE4JZIzmeZcdTAwMWbsQdEuS4s3prQkVDHxXFx3+fpiXHUwMDBmZlx1MDAxY6UkVVxcUSaE4fBsd8RB02zDdZRPafwt253A7qgwUiEhcUpAP9dcdTAwMWRGQ4bjWyhcZk9cciOoXHUwMDFh2e4m9Pi1+IxcdTAwMTkz3jxcZpZxUHFs51xiXHUwMDEzWNQ6i1x1MDAwZjf3O1H9a3vr4lbCgVxcLzqdXHUwMDE5RTBcdTAwMWMmXHUwMDFjlGBcdTAwMTQyTPDIZpxLdDy41Fx1MDAwNDJ5m2LSXHUwMDE5XHUwMDA1Q1B/lGRcdTAwMGJCW1x1MDAxMNq/kdCoyV1hoOikI0Q5mT2Wql6KWK3Tg2a063X8i63VTXFW+MSHVsYhXHUwMDE0XGKG9IhFmvLII6NJZqdcdTAwMDRcdTAwMWRmJTVcdTAwMWJcdTAwMTOraIRGXHJDX1KIhYe2ILRfmdBi73s8NY+bWVwinEhcclx1MDAxOabss2ams7vjjfWgSlb8Vml9db/UuJMl96TodCaBOOjQXHUwMDE4ZC3ClSBjeVxcyVx1MDAxZGFXkeDNVzPolGxQJqv8wFio7VZcdTAwMTI+z1x1MDAwMsY7ZINcdTAwMWFhXHUwMDEwV/y7hFx1MDAxY8lI66bb8dvJ0Fx1MDAwZZtcdTAwMTPlxOFcdTAwMTHZwet5iVx1MDAxMVx1MDAxZbnfXrja9ptBYqO9xqhKx37NbVx1MDAwZk93/Hq9ndGvXHUwMDFhPtvFXHUwMDFlo61cdNJcbiO/6Vx1MDAwN277eCjHy7CU71x1MDAxYjBikKxcdTAwMTSF2ZdcdTAwMDbP/Xr5W4Pv7t2Uqrds56zi71x1MDAxZF5cdTAwMTZcdTAwMWRMXHUwMDE45DjKaJtM5URlXHUwMDA3pJhgQrui7E6HX1x1MDAxMU28IGjiL0NTdlx1MDAxOX1cdTAwMDJNSlx1MDAxOW6AzG6aWuebq63P5S2xu9lsld3dQet6p1xcdDRpLlx1MDAxZKNcdTAwMDE9XHUwMDFmTTlToIuNJoqekDCC8oKvVLxcYk2sIGhiL0NcdTAwMTNkpnBiYcFo1CEzR9x6tHW6e3b4ef/usn1W5lxyftC93iu8bVx1MDAxMlx1MDAxODEoRJFUXGZcclx1MDAxM77yKJpcdTAwMDBcdTAwMWMmpVxyXHUwMDBiQGHYXHUwMDAx47v2Xlx1MDAwZk1yXG6aMlx1MDAxYlx1MDAxN1x1MDAxZtEkXHUwMDE0hqaa0lx1MDAwZoQmPVx1MDAxZE10XHUwMDAyTUG/05tcdTAwMGUoeFx1MDAxMaDisPtcIjQlcjxcdKj81HZmIW7S29NCSDWHfTraXHUwMDFh1N2bvZPg7Fx1MDAwNtxcclx1MDAxY+lB7YJcdTAwMTZcdTAwMWRRSoMjtFx1MDAwNFxuXHUwMDE0KUSPh042uU0oxpCMUEPI21x1MDAwMep1UkHCMGFcdTAwMTdcdTAwMWX1XHUwMDFjeFukglx1MDAxNqmgpV8kXHUwMDE1JEguoVFJmd3YqmZfrFx1MDAxM4RcdTAwMDfejl7pbuNvoTn4slx1MDAwZau3RSc0w1x0ulxiTI5sXHUwMDFjLaSvzVFlJVx1MDAxMD5cdTAwMGZZfVx1MDAxNFebXHUwMDE2xNWmT3tcdTAwMDa5VShcIn9cdTAwMTOPVmCooDBcdTAwMDeOXHUwMDBlK1x1MDAwN1v9jVxunLngVb9cdTAwMDZfoFx1MDAxNK1cdTAwMTS9XHUwMDBlxWjkayqlXHUwMDAxu7RccmqyXGZFWlpDxkbCXHUwMDE0kIulf1qGXCKZQ9FcdTAwMTdDQVx1MDAwNJNi2jbxie12gkrQKNxihbuYhVx1MDAxZnlTOnbzTJYwXHUwMDFmwZC7KkJcdTAwMDFcdTAwMWZcZugyzJ7Jbai7OKxuXHUwMDFib1Dud1x1MDAxYScrX26vu+2iQ1x1MDAxOFxiulx1MDAxOVpgXHUwMDAwakvJNPBR51x1MDAxZVx1MDAxNHpQmlx0bdDdouJcdOe+XHUwMDE4pWSCXHUwMDE5wZn6xX37vEqyqL5cdTAwMWbpdrTRXHUwMDFmiGD/aq9/VDmuVWaoJFx1MDAwM0KozmxJXHUwMDFmqSVcdTAwMTOKcnSUXGK6qHJiYD5cdTAwMTKlvF8tXHUwMDE5V7nb4yg3XHUwMDE4XHUwMDAzcDZcdTAwMDfPPD3LXHUwMDA1dbnBaEdcdKGJLSZjlI5u91x1MDAwNW5wblx1MDAxNDVcdTAwMWGV8lx0R+E9KsmoRVx1MDAwN+X0XUvJnrYtI3r4slKyuVx1MDAxOOtJXHUwMDFj5Fan8FxcY1x1MDAwYoQyXGaqZ4dApSXarWZ592A9+Hrw/ahP1dVa4aNOaVx1MDAxM9Ngi53pNFxiXGLicKVcdTAwMDC9njeFwIvKyFx1MDAxOGFaWXPx08rIPrBf/NHLyFx1MDAwNMut+aSSXHUwMDAweop8jjoyf/dk86zc7J3e3urB5Vx1MDAwZW1tlb7tflx1MDAwNKgyjGjNvU88tp1bXHUwMDEy7lxiij4zt1VCjMkxud63kCwp9VO66OtJvzxUf0ZcdTAwMWRcdTAwMTnLr/i0XHUwMDFiJ5iWbHak7lbc89LFVbDfb1e/uHB0KlvHp4VHqpGOYKiDSVx1MDAxOVx1MDAxOYix8FUwRKqtgeZcdTAwMDb1VesxuYq2NqU0KEAv4M19zVx1MDAwNaTtsVibKlrdhaD5dVx1MDAxN4Lh+Cs6x0bltfPS9srn65OdnePPcOPtXHUwMDBm1na8XHUwMDBmUEmGlsOuTdlKMslh1PewjMaQ8DRcdTAwMDDFXHUwMDFm/O1cdTAwMDKF12E0bDaCzLWNeUFoXHUwMDBiQlv6VVxijT+xIVx1MDAwZsM5kHSeXHJ5g29nartEettu465yXHUwMDE53tT2yvXCV15oLVx1MDAxYyVw1pNCMiknXHRccpihjFx1MDAwMLXfwCh6aayQgmrx9tnAXHUwMDA1odljQWhF2z2UX+lvh4FgXHUwMDEwNsfXN8vsrnRM1Jq5pFx1MDAwMVvxXHUwMDFhXHUwMDE33vpFteh8ZivJjLArYlx1MDAwMNmVnYTNcNw5umWMv/VCxiR3Tds9JJJNzlx1MDAwNc/avmz3kCzK9iH5sq36guauh6BTYOuq59g+dFu/oXvq6vrr5emuavZZtcrK34tcdTAwMGUkJTSafsFJUkWmMlx1MDAxZuR6hFx1MDAxMpOacnjbXHUwMDA1kdk24oFcdTAwMDLNXHL8kvWYpiBIMi9cdTAwMDRcdTAwMTKwPCBxgaaP6jk87P5cdTAwMDbZObq42lxy482t3Y04XHUwMDE0ldPaatGBpG05JrWVJFxiXHUwMDE3nl0m+Jk2acbqMSFcctNGXHUwMDE2/Tt3/8bKZilyg1X0S1x1MDAxOVdcXM6efKtcdTAwMWScf1x1MDAwZlx1MDAwZlx1MDAwN1V1urPf2vau3dtKJIqOJG60XbbRilx1MDAxOGVcdTAwMTSfMEnUwcBBMmVcYlx1MDAxM/B2635mttIxpu1cdTAwMTelOJlnXHUwMDEz60cpXHUwMDFk61333axGvF/x2IMkT1wiKj//I1VcdTAwMWWkqOZcXFx1MDAwYpX9bOBzmDprxP2Nz1x1MDAxYl9cdTAwMWLVtvLYoMPL5dJm0TGFjlx1MDAxZMaiTDFAZJHsp+KGXHRtouxcdTAwMDfV7dYwnv+fXHUwMDE1XHUwMDE0JP9j0Fx1MDAxZJVSLDaOL1x1MDAxMkD/xlx1MDAwNFx1MDAxMNBcXEJjXHUwMDA0fVx1MDAwNEHM7GHr2c16XFzfvYmuvfXqxt31Xa23XHKFL4c1XFw6Qmhtq8eRtsZcbsxcdTAwMGLmbXM7IdQs6seKVz8m8zfvoPaA0ITOsSO2Wz1hrYiu7VXuLi74dSdUXHUwMDFibtGLT4zhXHUwMDBlXHUwMDE3zFx1MDAxMFs/JsjoJ1x1MDAwNkHZhSEpXGJcdTAwMGWDJkTnf679XHUwMDFkyseo5EagO1x1MDAwM+++XHUwMDBlRF+Ct0K4XHUwMDAxXHUwMDFmv36MitzMXHUwMDEz6ixcdTAwMTBcdTAwMDMwx3ePy/XmZqe/pVqDw7PVu6sv29HpefDKxrBcdTAwMWXauXvtj0NcdTAwMTiDrsZY9adg2kGIXGIyUlLxykYwXHUwMDE1ZVxiVa1cdTAwMWShXHUwMDA1V1x1MDAxM547unxcXHCm391xXyD2+auHs/hKXqvO34Wh0XpI9JFmX7Wkd9fAeTXYKvnmbLXhtfZBXHUwMDFmXHUwMDE1XHUwMDFlqJpIR/FcdTAwMTFkJDhcdTAwMDXi2KqsLH5f/UtIaYZjiFMxkc4yilDr9fy8bNaLkJjxVTMpuWeyWVx1MDAxZLc71VvlbOTSt05lWTHu8fPpXHUwMDAxh8tut1uJcWyGbIej7tdcdTAwMWZeMO1seeB7N6XJef+tkVx1MDAxY7bXXHUwMDA0k1b7vYQ6f3z68X/hLNZyIn0=<!-- payload-end -->
+<defs>
+<style class="style-fonts">
+      @font-face {
+        font-family: "Virgil";
+        src: url("https://unpkg.com/@excalidraw/excalidraw@0.14.1/dist/excalidraw-assets/Virgil.woff2");
+      }
+      @font-face {
+        font-family: "Cascadia";
+        src: url("https://unpkg.com/@excalidraw/excalidraw@0.14.1/dist/excalidraw-assets/Cascadia.woff2");
+      }
+    </style>
+</defs>
+<rect fill="#ffffff" height="281.1882746254343" width="677.7383966383621" x="0" y="0"></rect><g stroke-linecap="round"><g transform="translate(115.35880069429675 42.67529071169042) rotate(0 39.15488576158435 -0.049430758979667644)"><path d="M0.54 -1.15 C13.88 -1.15, 66.07 -0.32, 78.89 0.03 M-0.63 0.87 C12.7 1.07, 64.83 1.91, 78.24 1.64" fill="none" stroke="#495057" stroke-width="4"></path></g><g transform="translate(115.35880069429675 42.67529071169042) rotate(0 39.15488576158435 -0.049430758979667644)"><path d="M48.14 12.85 C56.06 8.17, 63.49 8.96, 78.99 3.6 M50.47 11.67 C55.03 8.65, 62.23 7, 78.02 1.16" fill="none" stroke="#495057" stroke-width="4"></path></g><g transform="translate(115.35880069429675 42.67529071169042) rotate(0 39.15488576158435 -0.049430758979667644)"><path d="M48.15 -7.67 C56.09 -8.13, 63.51 -3.12, 78.99 3.6 M50.48 -8.85 C55.22 -7.46, 62.43 -4.71, 78.02 1.16" fill="none" stroke="#495057" stroke-width="4"></path></g></g><mask></mask><g stroke-linecap="round" transform="translate(204.81872368942334 10) rotate(0 12.41015625 32.078125)"><path d="M13.8 0.42 C16.62 0.08, 19.91 3.14, 21.88 7.83 C23.85 12.52, 25.41 21.63, 25.63 28.56 C25.86 35.49, 24.99 43.87, 23.22 49.41 C21.45 54.96, 17.61 59.87, 15.02 61.83 C12.43 63.79, 10.01 63.79, 7.7 61.17 C5.38 58.54, 2.24 52.13, 1.12 46.08 C-0.01 40.03, 0.17 31.42, 0.93 24.86 C1.69 18.3, 3.43 10.87, 5.68 6.72 C7.92 2.57, 12.69 0.8, 14.4 -0.04 C16.11 -0.88, 15.97 0.97, 15.94 1.7 M17.41 2.69 C19.86 5.53, 23.55 15.05, 24.68 21.51 C25.81 27.96, 25.39 34.95, 24.2 41.42 C23 47.89, 19.89 56.75, 17.51 60.32 C15.12 63.88, 12.13 63.75, 9.91 62.79 C7.7 61.83, 5.92 59.34, 4.21 54.56 C2.5 49.78, -0.17 41.19, -0.33 34.13 C-0.49 27.06, 1.74 17.56, 3.27 12.15 C4.8 6.75, 6.14 2.84, 8.85 1.67 C11.55 0.5, 18.1 4.95, 19.5 5.15 C20.9 5.36, 17.49 2.62, 17.25 2.88" fill="none" stroke="#000000" stroke-width="1"></path></g><g stroke-linecap="round"><g transform="translate(218.82653618942334 11.0703125) rotate(0 181.19658834235537 0)"><path d="M0.14 -0.93 C126.33 -0.21, 250.81 0.13, 361.32 1.14 M-0.62 -0.6 C119.52 0.25, 238.69 0.2, 362.77 0.06" fill="none" stroke="#000000" stroke-width="1"></path></g></g><mask></mask><g stroke-linecap="round"><g transform="translate(218.34751642874994 74.1076854395726) rotate(0 183.09984500391266 0)"><path d="M-0.92 1.15 C75.76 0.21, 150.97 -1.31, 367.32 0.37 M-0.59 0.11 C124.95 2.11, 250.11 2.62, 366.26 0.44" fill="none" stroke="#000000" stroke-width="1"></path></g></g><mask></mask><g stroke-linecap="round"><g transform="translate(302.49632629746577 13.104215937098843) rotate(0 5.9649082279449885 29.60911808133912)"><path d="M-0.89 1.11 C0.43 3.22, 6.18 8.2, 8.51 12.81 C10.84 17.41, 12.58 22.54, 13.1 28.75 C13.63 34.96, 13.06 45.04, 11.66 50.07 C10.26 55.1, 6.14 57.62, 4.7 58.95 M0.85 0.64 C2.03 2.38, 5.99 6.1, 8.01 10.92 C10.03 15.73, 12.82 22.79, 12.95 29.53 C13.09 36.27, 10.39 46.41, 8.82 51.36 C7.24 56.3, 4.32 57.75, 3.49 59.21" fill="none" stroke="#000000" stroke-width="1"></path></g></g><mask></mask><g stroke-linecap="round"><g transform="translate(582.2004864418469 12.935087052403503) rotate(0 5.9649082279449885 29.60911808133912)"><path d="M1.11 0.85 C2.44 3.25, 6.47 8.53, 8.11 13.53 C9.74 18.54, 10.44 24.75, 10.91 30.86 C11.38 36.97, 12.09 45.69, 10.93 50.22 C9.77 54.75, 5.24 56.5, 3.93 58.04 M0.23 0.25 C1.43 2.43, 5.22 7.22, 7.39 12.03 C9.57 16.83, 12.6 23.1, 13.26 29.08 C13.93 35.07, 12.58 43.14, 11.36 47.93 C10.15 52.71, 7.23 56.05, 5.98 57.81" fill="none" stroke="#000000" stroke-width="1"></path></g></g><mask></mask><g stroke-linecap="round"><g transform="translate(490.81516140847793 13.221922051111733) rotate(0 5.9649082279449885 29.60911808133912)"><path d="M0.85 0.45 C2.47 2.15, 6.81 6.39, 8.84 11.34 C10.86 16.28, 12.64 23.78, 13.01 30.13 C13.39 36.48, 12.75 44.79, 11.08 49.45 C9.41 54.11, 4.13 56.53, 3.01 58.08 M-0.17 -0.37 C1.48 1.97, 6.34 7.61, 8.5 12.34 C10.67 17.06, 12.3 21.63, 12.82 27.97 C13.33 34.32, 12.96 45.43, 11.59 50.42 C10.22 55.4, 5.53 56.7, 4.58 57.87" fill="none" stroke="#000000" stroke-width="1"></path></g></g><mask></mask><g transform="translate(262.56309132400133 30.078125) rotate(0 6.5 12)"><text direction="ltr" fill="#000000" font-family="Cascadia, Segoe UI Emoji" font-size="20px" style="white-space: pre;" text-anchor="start" x="0" y="20">4</text></g><g transform="translate(354.5982205509905 30.078125) rotate(0 6.5 12)"><text direction="ltr" fill="#000000" font-family="Cascadia, Segoe UI Emoji" font-size="20px" style="white-space: pre;" text-anchor="start" x="0" y="20">3</text></g><g transform="translate(448.78539183353666 30.078125) rotate(0 6.5 12)"><text direction="ltr" fill="#000000" font-family="Cascadia, Segoe UI Emoji" font-size="20px" style="white-space: pre;" text-anchor="start" x="0" y="20">2</text></g><g transform="translate(24.527696249950395 21.865429442006075) rotate(0 31.5 18)"><text direction="ltr" fill="#000000" font-family="Virgil, Segoe UI Emoji" font-size="28px" style="white-space: pre;" text-anchor="start" x="0" y="25">nums</text></g><g stroke-linecap="round"><g transform="translate(397.28664421924134 12.89980588624394) rotate(0 5.9649082279449885 29.60911808133912)"><path d="M0.88 0.2 C1.96 2.28, 4.97 6.77, 6.77 11.6 C8.58 16.43, 11.06 22.83, 11.7 29.2 C12.33 35.57, 11.89 44.86, 10.58 49.8 C9.28 54.75, 5 57.15, 3.86 58.88 M-0.12 -0.74 C1.3 1.56, 7.2 7.58, 9.02 12.74 C10.84 17.9, 10.51 23.85, 10.81 30.21 C11.11 36.58, 11.66 46.14, 10.84 50.95 C10.01 55.77, 6.86 57.64, 5.87 59.09" fill="none" stroke="#000000" stroke-width="1"></path></g></g><mask></mask><g transform="translate(542.5227852702609 30.078125) rotate(0 6.5 12)"><text direction="ltr" fill="#000000" font-family="Cascadia, Segoe UI Emoji" font-size="20px" style="white-space: pre;" text-anchor="start" x="0" y="20">1</text></g><g stroke-linecap="round"><g transform="translate(599.4168245776184 43.21920168755804) rotate(0 31.05493347132125 0)"><path d="M-0.79 0.44 C9.22 0.19, 50.56 -0.71, 61.02 -0.75 M1 -0.38 C11.28 -0.54, 53.13 0.06, 63.16 0.39" fill="none" stroke="#495057" stroke-width="4"></path></g><g transform="translate(599.4168245776184 43.21920168755804) rotate(0 31.05493347132125 0)"><path d="M35.48 8.23 C44.27 6.37, 56.69 3.24, 62.76 -1.01 M33.89 9.16 C43.73 6.77, 54.55 3.2, 63.16 0.22" fill="none" stroke="#495057" stroke-width="4"></path></g><g transform="translate(599.4168245776184 43.21920168755804) rotate(0 31.05493347132125 0)"><path d="M35.93 -12.29 C44.67 -6.33, 56.92 -1.64, 62.76 -1.01 M34.34 -11.36 C44.03 -6.89, 54.71 -3.6, 63.16 0.22" fill="none" stroke="#495057" stroke-width="4"></path></g></g><mask></mask><g stroke-linecap="round"><g transform="translate(121.08501069434624 238.58101885648392) rotate(0 39.15488576158435 -0.049430758979667644)"><path d="M-0.35 0.8 C12.69 0.43, 64.27 -0.89, 77.25 -1.14 M1.66 0.17 C15.16 0.43, 66.34 -0.18, 79.41 -0.14" fill="none" stroke="#495057" stroke-width="4"></path></g><g transform="translate(121.08501069434624 238.58101885648392) rotate(0 39.15488576158435 -0.049430758979667644)"><path d="M52.6 8.5 C55.47 6.85, 62.29 6.63, 79.8 0.65 M50.34 9.78 C57.2 8.3, 62.62 5.21, 79.43 -0.47" fill="none" stroke="#495057" stroke-width="4"></path></g><g transform="translate(121.08501069434624 238.58101885648392) rotate(0 39.15488576158435 -0.049430758979667644)"><path d="M52.49 -12.02 C55.57 -9.28, 62.41 -5.11, 79.8 0.65 M50.24 -10.74 C57.23 -7.86, 62.66 -6.59, 79.43 -0.47" fill="none" stroke="#495057" stroke-width="4"></path></g></g><mask></mask><g stroke-linecap="round" transform="translate(210.54493368947283 205.9057281447935) rotate(0 12.41015625 32.078125)"><path d="M7.58 3.14 C9.98 -0.03, 13.48 -1.61, 16.07 0.26 C18.66 2.12, 21.84 8.64, 23.13 14.35 C24.43 20.06, 24.17 27.72, 23.84 34.54 C23.51 41.35, 22.98 50.43, 21.16 55.27 C19.33 60.11, 15.53 63.13, 12.88 63.57 C10.23 64.02, 7.45 61.72, 5.27 57.94 C3.08 54.16, 0.36 47.51, -0.23 40.91 C-0.82 34.32, 0.31 24.94, 1.72 18.37 C3.13 11.81, 7.07 4.06, 8.24 1.51 C9.42 -1.05, 8.77 2.39, 8.79 3.03 M16.34 4.09 C18.3 6.58, 21.36 11.99, 22.8 18.25 C24.23 24.5, 25.37 35.1, 24.96 41.61 C24.56 48.12, 22.84 53.39, 20.38 57.29 C17.91 61.18, 12.76 65.27, 10.18 64.97 C7.61 64.67, 6.7 60.71, 4.92 55.51 C3.15 50.31, -0.07 40.66, -0.46 33.76 C-0.84 26.87, 0.97 19.45, 2.6 14.14 C4.22 8.84, 6.75 3.57, 9.3 1.93 C11.85 0.29, 16.61 3.93, 17.88 4.28 C19.16 4.63, 17.06 3.95, 16.95 4.05" fill="none" stroke="#000000" stroke-width="1"></path></g><g stroke-linecap="round"><g transform="translate(224.55274618947283 206.9760406447935) rotate(0 181.19658834235537 0)"><path d="M-1.09 -0.8 C97.47 2.47, 196.36 2.51, 361.29 0.66 M0.01 0.25 C128.43 0.8, 257.57 0.89, 361.99 0.42" fill="none" stroke="#000000" stroke-width="1"></path></g></g><mask></mask><g stroke-linecap="round"><g transform="translate(224.07372642879955 270.0134135843661) rotate(0 183.09984500391266 0)"><path d="M-0.79 -0.58 C134.6 2.22, 268.78 0.88, 366.86 0.69 M0.25 -0.35 C75.51 -0.01, 151.4 -0.42, 366.62 0.33" fill="none" stroke="#000000" stroke-width="1"></path></g></g><mask></mask><g stroke-linecap="round"><g transform="translate(308.22253629751526 209.00994408189234) rotate(0 5.9649082279449885 29.609118081339147)"><path d="M-0.76 -0.56 C0.77 1.72, 5.91 7.72, 8.1 12.6 C10.3 17.48, 11.89 22.43, 12.41 28.73 C12.92 35.02, 12.76 45.39, 11.21 50.38 C9.65 55.36, 4.24 57.08, 3.08 58.64 M1.04 1.77 C2.54 3.74, 5.58 5.98, 7.39 10.6 C9.2 15.22, 11.16 23.23, 11.89 29.49 C12.62 35.75, 12.99 43.3, 11.79 48.17 C10.59 53.04, 5.71 56.93, 4.68 58.73" fill="none" stroke="#000000" stroke-width="1"></path></g></g><mask></mask><g stroke-linecap="round"><g transform="translate(587.9266964418965 208.84081519719706) rotate(0 5.9649082279449885 29.609118081339147)"><path d="M-0.56 0.44 C0.93 2.71, 5.99 7.84, 7.9 12.84 C9.81 17.83, 10.32 24.45, 10.88 30.41 C11.44 36.37, 12.45 43.8, 11.24 48.6 C10.03 53.4, 4.71 57.57, 3.61 59.23 M1.35 -0.37 C2.79 1.6, 5.1 6.17, 7.08 10.96 C9.05 15.76, 12.43 22.04, 13.22 28.4 C14.02 34.76, 13.12 43.91, 11.84 49.12 C10.55 54.32, 7.02 57.68, 5.5 59.63" fill="none" stroke="#000000" stroke-width="1"></path></g></g><mask></mask><g stroke-linecap="round"><g transform="translate(496.54137140852754 209.12765019590523) rotate(0 5.9649082279449885 29.609118081339147)"><path d="M0.44 0.24 C1.92 2.21, 6.12 6.28, 8.14 11.31 C10.16 16.34, 12.34 24.14, 12.56 30.44 C12.78 36.74, 10.85 44.26, 9.46 49.14 C8.07 54.01, 5.2 58.12, 4.21 59.7 M-0.78 -0.68 C0.65 1.45, 5.29 7.44, 7.44 12.29 C9.59 17.15, 11.85 22.17, 12.13 28.45 C12.41 34.72, 10.69 44.62, 9.12 49.94 C7.56 55.25, 3.5 58.51, 2.74 60.35" fill="none" stroke="#000000" stroke-width="1"></path></g></g><mask></mask><g transform="translate(262.74633257405094 225.9838531447935) rotate(0 12 12)"><text direction="ltr" fill="#000000" font-family="Cascadia, Segoe UI Emoji" font-size="20px" style="white-space: pre;" text-anchor="start" x="0" y="20">16</text></g><g transform="translate(360.32443055104 225.8666656447935) rotate(0 6.5 12)"><text direction="ltr" fill="#000000" font-family="Cascadia, Segoe UI Emoji" font-size="20px" style="white-space: pre;" text-anchor="start" x="0" y="20">9</text></g><g transform="translate(454.51160183358616 225.9838531447935) rotate(0 6.5 12)"><text direction="ltr" fill="#000000" font-family="Cascadia, Segoe UI Emoji" font-size="20px" style="white-space: pre;" text-anchor="start" x="0" y="20">4</text></g><g transform="translate(10 217.77115758679957) rotate(0 46.5 18)"><text direction="ltr" fill="#000000" font-family="Virgil, Segoe UI Emoji" font-size="28px" style="white-space: pre;" text-anchor="start" x="0" y="25">square</text></g><g stroke-linecap="round"><g transform="translate(403.01285421929083 208.80553403103744) rotate(0 5.9649082279449885 29.609118081339147)"><path d="M0.66 -1.12 C2.02 0.84, 5.12 7.34, 7.08 12.37 C9.04 17.41, 11.93 22.88, 12.42 29.11 C12.9 35.34, 11.44 44.85, 10.01 49.74 C8.57 54.63, 4.63 56.77, 3.8 58.45 M-0.45 0.91 C1.4 3.02, 7.43 9.06, 9.49 13.92 C11.55 18.78, 11.83 23.92, 11.9 30.08 C11.98 36.24, 10.98 46.13, 9.95 50.85 C8.93 55.58, 6.91 57.06, 5.78 58.44" fill="none" stroke="#000000" stroke-width="1"></path></g></g><mask></mask><g transform="translate(548.2489952703104 225.9838531447935) rotate(0 6.5 12)"><text direction="ltr" fill="#000000" font-family="Cascadia, Segoe UI Emoji" font-size="20px" style="white-space: pre;" text-anchor="start" x="0" y="20">1</text></g><g stroke-linecap="round"><g transform="translate(605.1430345776679 239.1249298323516) rotate(0 31.054933471321192 0)"><path d="M-0.58 0.01 C9.74 0.09, 52.24 -0.67, 62.6 -0.67 M1.32 -1.03 C11.47 -0.71, 52.04 0.13, 61.9 0.52" fill="none" stroke="#495057" stroke-width="4"></path></g><g transform="translate(605.1430345776679 239.1249298323516) rotate(0 31.054933471321192 0)"><path d="M33.45 10.77 C42.52 5.8, 53.79 2.73, 60.63 1.87 M32.64 10.27 C44.19 6.59, 53.65 4.07, 62.81 0" fill="none" stroke="#495057" stroke-width="4"></path></g><g transform="translate(605.1430345776679 239.1249298323516) rotate(0 31.054933471321192 0)"><path d="M34.04 -9.74 C42.72 -7.43, 53.77 -3.21, 60.63 1.87 M33.23 -10.24 C44.57 -6.67, 53.82 -1.95, 62.81 0" fill="none" stroke="#495057" stroke-width="4"></path></g></g><mask></mask><g stroke-linecap="round"><g transform="translate(397.7923165202609 95.53993593434353) rotate(0 0 44.2421875)"><path d="M1.16 0.71 C0.84 15.38, -0.76 73.77, -0.87 88.58" fill="none" stroke="#000000" stroke-dasharray="1.5 7" stroke-width="1.5"></path></g><g transform="translate(397.7923165202609 95.53993593434353) rotate(0 0 44.2421875)"><path d="M-9.41 58.75 C-6.5 72.04, -1.01 82.77, -2.2 89.26" fill="none" stroke="#000000" stroke-dasharray="1.5 5" stroke-width="1.5"></path></g><g transform="translate(397.7923165202609 95.53993593434353) rotate(0 0 44.2421875)"><path d="M11.1 59.13 C5.99 72.47, 3.46 83.05, -2.2 89.26" fill="none" stroke="#000000" stroke-dasharray="1.5 5" stroke-width="1.5"></path></g></g><mask></mask><g transform="translate(418.5345040202609 117.40321718434353) rotate(0 33 23)"><text direction="ltr" fill="#000000" font-family="Virgil, Segoe UI Emoji" font-size="36px" style="white-space: pre;" text-anchor="start" x="0" y="32">map</text></g></svg>
+</figure>
+<p>Operators can also be chained to implement custom behaviors, so the previous snippet can also be written as:</p>
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span>
+<span class="normal"><a href="#__codelineno-1-2">2</a></span>
+<span class="normal"><a href="#__codelineno-1-3">3</a></span>
+<span class="normal"><a href="#__codelineno-1-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="n">Channel</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="w">    </span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="w"> </span><span class="mi">2</span><span class="o">,</span><span class="w"> </span><span class="mi">3</span><span class="o">,</span><span class="w"> </span><span class="mi">4</span><span class="o">)</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="w">    </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="w">    </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
+</code></pre></div></td></tr></table></div>
+<div class="admonition cboard-list-2">
+<p class="admonition-title">Summary</p>
+<p>In this step you have learned:</p>
+<ol>
+<li>The basic features of an operator</li>
+</ol>
+</div>
+<h2 id="commonly-used-operators"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.2</span> Commonly used operators<a class="headerlink" href="#commonly-used-operators" title="Permanent link">¶</a></h2>
+<p>Here you will explore some of the most commonly used operators.</p>
+<h3 id="view"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.2.1</span> <code>view()</code><a class="headerlink" href="#view" title="Permanent link">¶</a></h3>
+<p>The <code>view</code> operator prints the items emitted by a channel to the console standard output, appending a <em>new line</em> character to each item. For example:</p>
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span>
+<span class="normal"><a href="#__codelineno-2-2">2</a></span>
+<span class="normal"><a href="#__codelineno-2-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="n">Channel</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="w">    </span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">'foo'</span><span class="o">,</span><span class="w"> </span><span class="s1">'bar'</span><span class="o">,</span><span class="w"> </span><span class="s1">'baz'</span><span class="o">)</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="w">    </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="go">foo</span>
+<a href="#__codelineno-3-2" id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="go">bar</span>
+<a href="#__codelineno-3-3" id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="go">baz</span>
+</code></pre></div>
+<p>An optional <em>closure</em> parameter can be specified to customize how items are printed. For example:</p>
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span>
+<span class="normal"><a href="#__codelineno-4-2">2</a></span>
+<span class="normal"><a href="#__codelineno-4-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="n">Channel</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="w">    </span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">'foo'</span><span class="o">,</span><span class="w"> </span><span class="s1">'bar'</span><span class="o">,</span><span class="w"> </span><span class="s1">'baz'</span><span class="o">)</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="w">    </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="s2">"- $it"</span><span class="w"> </span><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="go">- foo</span>
+<a href="#__codelineno-5-2" id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="go">- bar</span>
+<a href="#__codelineno-5-3" id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="go">- baz</span>
+</code></pre></div>
+<h3 id="map"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.2.2</span> <code>map()</code><a class="headerlink" href="#map" title="Permanent link">¶</a></h3>
+<p>The <code>map</code> operator applies a function of your choosing to every item emitted by a channel and returns the items obtained as a new channel. The function applied is called the <em>mapping</em> function and is expressed with a <em>closure</em>. In the example below the groovy <code>reverse</code> method has been used to reverse the order of the characters in each string emitted by the channel.</p>
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1">1</a></span>
+<span class="normal"><a href="#__codelineno-6-2">2</a></span>
+<span class="normal"><a href="#__codelineno-6-3">3</a></span>
+<span class="normal"><a href="#__codelineno-6-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="n">Channel</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2"></a><span class="w">    </span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">'hello'</span><span class="o">,</span><span class="w"> </span><span class="s1">'world'</span><span class="o">)</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3"></a><span class="w">    </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">it</span><span class="o">.</span><span class="na">reverse</span><span class="o">()</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4"></a><span class="w">    </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
+</code></pre></div></td></tr></table></div>
+<p>A <code>map</code> can associate a generic <em>tuple</em> to each element and can contain any data. In the example below the groovy <code>size</code> method is used to return the length of each string emitted by the channel.</p>
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1">1</a></span>
+<span class="normal"><a href="#__codelineno-7-2">2</a></span>
+<span class="normal"><a href="#__codelineno-7-3">3</a></span>
+<span class="normal"><a href="#__codelineno-7-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="n">Channel</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2"></a><span class="w">    </span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">'hello'</span><span class="o">,</span><span class="w"> </span><span class="s1">'world'</span><span class="o">)</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3"></a><span class="w">    </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">word</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="o">[</span><span class="n">word</span><span class="o">,</span><span class="w"> </span><span class="n">word</span><span class="o">.</span><span class="na">size</span><span class="o">()]</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4"></a><span class="w">    </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a href="#__codelineno-8-1" id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="go">[hello, 5]</span>
+<a href="#__codelineno-8-2" id="__codelineno-8-2" name="__codelineno-8-2"></a><span class="go">[world, 5]</span>
+</code></pre></div>
+<div class="admonition question">
+<p class="admonition-title">Exercise</p>
+<p>Use <code>fromPath</code> to create a channel emitting the <em>fastq</em> files matching the pattern <code>data/ggal/*.fq</code>, then use <code>map</code> to return a pair containing the file name and the file path. Finally, use <code>view</code> to print the resulting channel.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>You can use the <code>name</code> method to get the file name.</p>
+</div>
+<details class="solution">
+<summary>Solution</summary>
+<p>Here is one possible solution:</p>
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1">1</a></span>
+<span class="normal"><a href="#__codelineno-9-2">2</a></span>
+<span class="normal"><a href="#__codelineno-9-3">3</a></span>
+<span class="normal"><a href="#__codelineno-9-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="n">Channel</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2"></a><span class="w">    </span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">'data/ggal/*.fq'</span><span class="o">)</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3"></a><span class="w">    </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="o">[</span><span class="n">file</span><span class="o">.</span><span class="na">name</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4"></a><span class="w">    </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
+</code></pre></div></td></tr></table></div>
+<p>Your output should look like this:</p>
+<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a href="#__codelineno-10-1" id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="go">[gut_1.fq, /workspaces/training/nf-training/data/ggal/gut_1.fq]</span>
+<a href="#__codelineno-10-2" id="__codelineno-10-2" name="__codelineno-10-2"></a><span class="go">[gut_2.fq, /workspaces/training/nf-training/data/ggal/gut_2.fq]</span>
+<a href="#__codelineno-10-3" id="__codelineno-10-3" name="__codelineno-10-3"></a><span class="go">[liver_1.fq, /workspaces/training/nf-training/data/ggal/liver_1.fq]</span>
+<a href="#__codelineno-10-4" id="__codelineno-10-4" name="__codelineno-10-4"></a><span class="go">[liver_2.fq, /workspaces/training/nf-training/data/ggal/liver_2.fq]</span>
+<a href="#__codelineno-10-5" id="__codelineno-10-5" name="__codelineno-10-5"></a><span class="go">[lung_1.fq, /workspaces/training/nf-training/data/ggal/lung_1.fq]</span>
+<a href="#__codelineno-10-6" id="__codelineno-10-6" name="__codelineno-10-6"></a><span class="go">[lung_2.fq, /workspaces/training/nf-training/data/ggal/lung_2.fq]</span>
+</code></pre></div>
+</details>
+</div>
+<h3 id="mix"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.2.3</span> <code>mix()</code><a class="headerlink" href="#mix" title="Permanent link">¶</a></h3>
+<p>The <code>mix</code> operator combines the items emitted by two (or more) channels.</p>
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1">1</a></span>
+<span class="normal"><a href="#__codelineno-11-2">2</a></span>
+<span class="normal"><a href="#__codelineno-11-3">3</a></span>
+<span class="normal"><a href="#__codelineno-11-4">4</a></span>
+<span class="normal"><a href="#__codelineno-11-5">5</a></span>
+<span class="normal"><a href="#__codelineno-11-6">6</a></span>
+<span class="normal"><a href="#__codelineno-11-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="n">my_channel_1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="w"> </span><span class="mi">2</span><span class="o">,</span><span class="w"> </span><span class="mi">3</span><span class="o">)</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2"></a><span class="n">my_channel_2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">'a'</span><span class="o">,</span><span class="w"> </span><span class="s1">'b'</span><span class="o">)</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3"></a><span class="n">my_channel_3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">'z'</span><span class="o">)</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4"></a>
+<a id="__codelineno-11-5" name="__codelineno-11-5"></a><span class="n">my_channel_1</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6"></a><span class="w">    </span><span class="o">.</span><span class="na">mix</span><span class="o">(</span><span class="n">my_channel_2</span><span class="o">,</span><span class="w"> </span><span class="n">my_channel_3</span><span class="o">)</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7"></a><span class="w">    </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
+</code></pre></div></td></tr></table></div>
+<p>It prints a single channel containing all the items emitted by the three channels:</p>
+<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a href="#__codelineno-12-1" id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="go">1</span>
+<a href="#__codelineno-12-2" id="__codelineno-12-2" name="__codelineno-12-2"></a><span class="go">2</span>
+<a href="#__codelineno-12-3" id="__codelineno-12-3" name="__codelineno-12-3"></a><span class="go">a</span>
+<a href="#__codelineno-12-4" id="__codelineno-12-4" name="__codelineno-12-4"></a><span class="go">3</span>
+<a href="#__codelineno-12-5" id="__codelineno-12-5" name="__codelineno-12-5"></a><span class="go">b</span>
+<a href="#__codelineno-12-6" id="__codelineno-12-6" name="__codelineno-12-6"></a><span class="go">z</span>
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The items in the resulting channel have the same order as in the respective original channels. However, there is no guarantee that the elements of the second channel are appended after the elements of the first. Indeed, in the example above, the element <code>a</code> has been printed before <code>3</code>.</p>
+</div>
+<h3 id="flatten"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.2.4</span> <code>flatten()</code><a class="headerlink" href="#flatten" title="Permanent link">¶</a></h3>
+<p>The <code>flatten</code> operator transforms a channel in such a way that every <em>tuple</em> is flattened so that each entry is emitted as a sole element by the resulting channel.</p>
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1">1</a></span>
+<span class="normal"><a href="#__codelineno-13-2">2</a></span>
+<span class="normal"><a href="#__codelineno-13-3">3</a></span>
+<span class="normal"><a href="#__codelineno-13-4">4</a></span>
+<span class="normal"><a href="#__codelineno-13-5">5</a></span>
+<span class="normal"><a href="#__codelineno-13-6">6</a></span>
+<span class="normal"><a href="#__codelineno-13-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1"></a><span class="n">foo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="mi">1</span><span class="o">,</span><span class="w"> </span><span class="mi">2</span><span class="o">,</span><span class="w"> </span><span class="mi">3</span><span class="o">]</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2"></a><span class="n">bar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="mi">4</span><span class="o">,</span><span class="w"> </span><span class="mi">5</span><span class="o">,</span><span class="w"> </span><span class="mi">6</span><span class="o">]</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3"></a>
+<a id="__codelineno-13-4" name="__codelineno-13-4"></a><span class="n">Channel</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5"></a><span class="w">    </span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">foo</span><span class="o">,</span><span class="w"> </span><span class="n">bar</span><span class="o">)</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6"></a><span class="w">    </span><span class="o">.</span><span class="na">flatten</span><span class="o">()</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7"></a><span class="w">    </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a href="#__codelineno-14-1" id="__codelineno-14-1" name="__codelineno-14-1"></a><span class="go">1</span>
+<a href="#__codelineno-14-2" id="__codelineno-14-2" name="__codelineno-14-2"></a><span class="go">2</span>
+<a href="#__codelineno-14-3" id="__codelineno-14-3" name="__codelineno-14-3"></a><span class="go">3</span>
+<a href="#__codelineno-14-4" id="__codelineno-14-4" name="__codelineno-14-4"></a><span class="go">4</span>
+<a href="#__codelineno-14-5" id="__codelineno-14-5" name="__codelineno-14-5"></a><span class="go">5</span>
+<a href="#__codelineno-14-6" id="__codelineno-14-6" name="__codelineno-14-6"></a><span class="go">6</span>
+</code></pre></div>
+<h3 id="collect"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.2.5</span> <code>collect()</code><a class="headerlink" href="#collect" title="Permanent link">¶</a></h3>
+<p>The <code>collect</code> operator collects all of the items emitted by a channel in a list and returns the object as a sole emission.</p>
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1">1</a></span>
+<span class="normal"><a href="#__codelineno-15-2">2</a></span>
+<span class="normal"><a href="#__codelineno-15-3">3</a></span>
+<span class="normal"><a href="#__codelineno-15-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1"></a><span class="n">Channel</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2"></a><span class="w">    </span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="w"> </span><span class="mi">2</span><span class="o">,</span><span class="w"> </span><span class="mi">3</span><span class="o">,</span><span class="w"> </span><span class="mi">4</span><span class="o">)</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3"></a><span class="w">    </span><span class="o">.</span><span class="na">collect</span><span class="o">()</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4"></a><span class="w">    </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a href="#__codelineno-16-1" id="__codelineno-16-1" name="__codelineno-16-1"></a><span class="go">[1, 2, 3, 4]</span>
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>The result of the <code>collect</code> operator is a <strong>value</strong> channel.</p>
+</div>
+<h3 id="grouptuple"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.2.6</span> <code>groupTuple()</code><a class="headerlink" href="#grouptuple" title="Permanent link">¶</a></h3>
+<p>The <code>groupTuple</code> operator collects tuples (or lists) of values emitted by the source channel, grouping the elements that share the same key. Finally, it emits a new tuple object for each distinct key collected.</p>
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-1">1</a></span>
+<span class="normal"><a href="#__codelineno-17-2">2</a></span>
+<span class="normal"><a href="#__codelineno-17-3">3</a></span>
+<span class="normal"><a href="#__codelineno-17-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1"></a><span class="n">Channel</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2"></a><span class="w">    </span><span class="o">.</span><span class="na">of</span><span class="o">([</span><span class="mi">1</span><span class="o">,</span><span class="w"> </span><span class="s1">'A'</span><span class="o">],</span><span class="w"> </span><span class="o">[</span><span class="mi">1</span><span class="o">,</span><span class="w"> </span><span class="s1">'B'</span><span class="o">],</span><span class="w"> </span><span class="o">[</span><span class="mi">2</span><span class="o">,</span><span class="w"> </span><span class="s1">'C'</span><span class="o">],</span><span class="w"> </span><span class="o">[</span><span class="mi">3</span><span class="o">,</span><span class="w"> </span><span class="s1">'B'</span><span class="o">],</span><span class="w"> </span><span class="o">[</span><span class="mi">1</span><span class="o">,</span><span class="w"> </span><span class="s1">'C'</span><span class="o">],</span><span class="w"> </span><span class="o">[</span><span class="mi">2</span><span class="o">,</span><span class="w"> </span><span class="s1">'A'</span><span class="o">],</span><span class="w"> </span><span class="o">[</span><span class="mi">3</span><span class="o">,</span><span class="w"> </span><span class="s1">'D'</span><span class="o">])</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3"></a><span class="w">    </span><span class="o">.</span><span class="na">groupTuple</span><span class="o">()</span>
+<a id="__codelineno-17-4" name="__codelineno-17-4"></a><span class="w">    </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a href="#__codelineno-18-1" id="__codelineno-18-1" name="__codelineno-18-1"></a><span class="go">[1, [A, B, C]]</span>
+<a href="#__codelineno-18-2" id="__codelineno-18-2" name="__codelineno-18-2"></a><span class="go">[2, [C, A]]</span>
+<a href="#__codelineno-18-3" id="__codelineno-18-3" name="__codelineno-18-3"></a><span class="go">[3, [B, D]]</span>
+</code></pre></div>
+<p>This operator is especially useful to process a group together with all the elements that share a common property or grouping key.</p>
+<div class="admonition question">
+<p class="admonition-title">Exercise</p>
+<p>Use <code>fromPath</code> to create a channel emitting all of the files in the folder <code>data/meta/</code>, then use a <code>map</code> to associate the <code>baseName</code> method to each file. Finally, group all files that have the same common prefix.</p>
+<details class="solution">
+<summary>Solution</summary>
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-19-1">1</a></span>
+<span class="normal"><a href="#__codelineno-19-2">2</a></span>
+<span class="normal"><a href="#__codelineno-19-3">3</a></span>
+<span class="normal"><a href="#__codelineno-19-4">4</a></span>
+<span class="normal"><a href="#__codelineno-19-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1"></a><span class="n">Channel</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2"></a><span class="w">    </span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">'data/meta/*'</span><span class="o">)</span>
+<a id="__codelineno-19-3" name="__codelineno-19-3"></a><span class="w">    </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">tuple</span><span class="o">(</span><span class="n">file</span><span class="o">.</span><span class="na">baseName</span><span class="o">,</span><span class="w"> </span><span class="n">file</span><span class="o">)</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-19-4" name="__codelineno-19-4"></a><span class="w">    </span><span class="o">.</span><span class="na">groupTuple</span><span class="o">()</span>
+<a id="__codelineno-19-5" name="__codelineno-19-5"></a><span class="w">    </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a href="#__codelineno-20-1" id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="go">[patients_1, [/workspaces/training/nf-training/data/meta/patients_1.csv]]</span>
+<a href="#__codelineno-20-2" id="__codelineno-20-2" name="__codelineno-20-2"></a><span class="go">[patients_2, [/workspaces/training/nf-training/data/meta/patients_2.csv]]</span>
+<a href="#__codelineno-20-3" id="__codelineno-20-3" name="__codelineno-20-3"></a><span class="go">[random, [/workspaces/training/nf-training/data/meta/random.txt]]</span>
+<a href="#__codelineno-20-4" id="__codelineno-20-4" name="__codelineno-20-4"></a><span class="go">[regions, [/workspaces/training/nf-training/data/meta/regions.json, /workspaces/training/nf-training/data/meta/regions.tsv, /workspaces/training/nf-training/data/meta/regions.yml]]</span>
+<a href="#__codelineno-20-5" id="__codelineno-20-5" name="__codelineno-20-5"></a><span class="go">[regions2, [/workspaces/training/nf-training/data/meta/regions2.json]]</span>
+</code></pre></div>
+</details>
+</div>
+<h3 id="join"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.2.7</span> <code>join()</code><a class="headerlink" href="#join" title="Permanent link">¶</a></h3>
+<p>The <code>join</code> operator creates a channel that joins together the items emitted by two channels with a matching key. The key is defined, by default, as the first element in each item emitted.</p>
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-1">1</a></span>
+<span class="normal"><a href="#__codelineno-21-2">2</a></span>
+<span class="normal"><a href="#__codelineno-21-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1"></a><span class="n">left</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">of</span><span class="o">([</span><span class="s1">'X'</span><span class="o">,</span><span class="w"> </span><span class="mi">1</span><span class="o">],</span><span class="w"> </span><span class="o">[</span><span class="s1">'Y'</span><span class="o">,</span><span class="w"> </span><span class="mi">2</span><span class="o">],</span><span class="w"> </span><span class="o">[</span><span class="s1">'Z'</span><span class="o">,</span><span class="w"> </span><span class="mi">3</span><span class="o">],</span><span class="w"> </span><span class="o">[</span><span class="s1">'P'</span><span class="o">,</span><span class="w"> </span><span class="mi">7</span><span class="o">])</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2"></a><span class="n">right</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">of</span><span class="o">([</span><span class="s1">'Z'</span><span class="o">,</span><span class="w"> </span><span class="mi">6</span><span class="o">],</span><span class="w"> </span><span class="o">[</span><span class="s1">'Y'</span><span class="o">,</span><span class="w"> </span><span class="mi">5</span><span class="o">],</span><span class="w"> </span><span class="o">[</span><span class="s1">'X'</span><span class="o">,</span><span class="w"> </span><span class="mi">4</span><span class="o">])</span>
+<a id="__codelineno-21-3" name="__codelineno-21-3"></a><span class="n">left</span><span class="o">.</span><span class="na">join</span><span class="o">(</span><span class="n">right</span><span class="o">).</span><span class="na">view</span><span class="o">()</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a href="#__codelineno-22-1" id="__codelineno-22-1" name="__codelineno-22-1"></a><span class="go">[Z, 3, 6]</span>
+<a href="#__codelineno-22-2" id="__codelineno-22-2" name="__codelineno-22-2"></a><span class="go">[Y, 2, 5]</span>
+<a href="#__codelineno-22-3" id="__codelineno-22-3" name="__codelineno-22-3"></a><span class="go">[X, 1, 4]</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Notice <em>P</em> is missing in the final result.</p>
+</div>
+<h3 id="branch"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.2.8</span> <code>branch()</code><a class="headerlink" href="#branch" title="Permanent link">¶</a></h3>
+<p>The <code>branch</code> operator allows you to forward the items emitted by a source channel to one or more output channels.</p>
+<p>The selection criterion is defined by specifying a closure that provides one or more boolean expressions, each of which is identified by a unique label. For the first expression that evaluates to a true value, the item is bound to a named channel as the label identifier.</p>
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-23-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-23-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-23-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-23-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-23-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-23-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-23-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-23-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-23-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1"></a><span class="n">Channel</span>
+<a id="__codelineno-23-2" name="__codelineno-23-2"></a><span class="w">    </span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="w"> </span><span class="mi">2</span><span class="o">,</span><span class="w"> </span><span class="mi">3</span><span class="o">,</span><span class="w"> </span><span class="mi">40</span><span class="o">,</span><span class="w"> </span><span class="mi">50</span><span class="o">)</span>
+<a id="__codelineno-23-3" name="__codelineno-23-3"></a><span class="w">    </span><span class="o">.</span><span class="na">branch</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-23-4" name="__codelineno-23-4"></a><span class="w">        </span><span class="nl">small:</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">10</span>
+<a id="__codelineno-23-5" name="__codelineno-23-5"></a><span class="w">        </span><span class="nl">large:</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">10</span>
+<a id="__codelineno-23-6" name="__codelineno-23-6"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-23-7" name="__codelineno-23-7"></a><span class="w">    </span><span class="o">.</span><span class="na">set</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-23-8" name="__codelineno-23-8"></a>
+<a id="__codelineno-23-9" name="__codelineno-23-9"></a><span class="n">result</span><span class="o">.</span><span class="na">small</span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="s2">"$it is small"</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-23-10" name="__codelineno-23-10"></a><span class="n">result</span><span class="o">.</span><span class="na">large</span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="s2">"$it is large"</span><span class="w"> </span><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a href="#__codelineno-24-1" id="__codelineno-24-1" name="__codelineno-24-1"></a><span class="go">1 is small</span>
+<a href="#__codelineno-24-2" id="__codelineno-24-2" name="__codelineno-24-2"></a><span class="go">40 is large</span>
+<a href="#__codelineno-24-3" id="__codelineno-24-3" name="__codelineno-24-3"></a><span class="go">2 is small</span>
+<a href="#__codelineno-24-4" id="__codelineno-24-4" name="__codelineno-24-4"></a><span class="go">3 is small</span>
+<a href="#__codelineno-24-5" id="__codelineno-24-5" name="__codelineno-24-5"></a><span class="go">50 is large</span>
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>The <code>branch</code> operator returns a multi-channel object (i.e., a variable that holds more than one channel object).</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In the above example, what would happen to a value of 10? To deal with this, you can also use <code>&gt;=</code>.</p>
+</div>
+<div class="admonition cboard-list-2">
+<p class="admonition-title">Summary</p>
+<p>In this step you have learned:</p>
+<ol>
+<li>How to use the <code>view</code> operator to print the content of a channel</li>
+<li>How to use the <code>map</code> operator to transform the content of a channel</li>
+<li>How to use the <code>mix</code> operator to combine the content of two or more channels</li>
+<li>How to use the <code>flatten</code> operator to flatten the content of a channel</li>
+<li>How to use the <code>collect</code> operator to collect the content of a channel</li>
+<li>How to use the <code>groupTuple</code> operator to group the content of a channel</li>
+<li>How to use the <code>join</code> operator to join the content of two channels</li>
+<li>How to use the <code>branch</code> operator to split the content of a channel</li>
+</ol>
+</div>
+<h2 id="text-files"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.3</span> Text files<a class="headerlink" href="#text-files" title="Permanent link">¶</a></h2>
+<h3 id="splittext"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.3.1</span> <code>splitText()</code><a class="headerlink" href="#splittext" title="Permanent link">¶</a></h3>
+<p>The <code>splitText</code> operator allows you to split multi-line strings or text file items, emitted by a source channel into chunks containing <em>n</em> lines, which will be emitted by the resulting channel.</p>
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-25-1">1</a></span>
+<span class="normal"><a href="#__codelineno-25-2">2</a></span>
+<span class="normal"><a href="#__codelineno-25-3">3</a></span>
+<span class="normal"><a href="#__codelineno-25-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1"></a><span class="n">Channel</span>
+<a id="__codelineno-25-2" name="__codelineno-25-2"></a><span class="w">    </span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">'data/meta/random.txt'</span><span class="o">)</span><span class="w"> </span><span class="c1">// (1)!</span>
+<a id="__codelineno-25-3" name="__codelineno-25-3"></a><span class="w">    </span><span class="o">.</span><span class="na">splitText</span><span class="o">()</span><span class="w"> </span><span class="c1">// (2)!</span>
+<a id="__codelineno-25-4" name="__codelineno-25-4"></a><span class="w">    </span><span class="o">.</span><span class="na">view</span><span class="o">()</span><span class="w"> </span><span class="c1">// (3)!</span>
+</code></pre></div></td></tr></table></div>
+<ol>
+<li>Instructs Nextflow to make a channel from the path <code>data/meta/random.txt</code></li>
+<li>The <code>splitText</code> operator splits each item into chunks of one line by default.</li>
+<li>View contents of the channel.</li>
+</ol>
+<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a href="#__codelineno-26-1" id="__codelineno-26-1" name="__codelineno-26-1"></a><span class="go">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</span>
+<a href="#__codelineno-26-2" id="__codelineno-26-2" name="__codelineno-26-2"></a><span class="go">Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</span>
+<a href="#__codelineno-26-3" id="__codelineno-26-3" name="__codelineno-26-3"></a><span class="go">when an unknown printer took a galley of type and scrambled it to make a type specimen book.</span>
+<a href="#__codelineno-26-4" id="__codelineno-26-4" name="__codelineno-26-4"></a><span class="go">It has survived not only five centuries, but also the leap into electronic typesetting,</span>
+<a href="#__codelineno-26-5" id="__codelineno-26-5" name="__codelineno-26-5"></a><span class="go">...</span>
+</code></pre></div>
+<p>You can define the number of lines in each chunk by using the parameter <code>by</code>, as shown in the following example:</p>
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-27-1">1</a></span>
+<span class="normal"><a href="#__codelineno-27-2">2</a></span>
+<span class="normal"><a href="#__codelineno-27-3">3</a></span>
+<span class="normal"><a href="#__codelineno-27-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1"></a><span class="n">Channel</span>
+<a id="__codelineno-27-2" name="__codelineno-27-2"></a><span class="w">    </span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">'data/meta/random.txt'</span><span class="o">)</span>
+<a id="__codelineno-27-3" name="__codelineno-27-3"></a><span class="w">    </span><span class="o">.</span><span class="na">splitText</span><span class="o">(</span><span class="nl">by:</span><span class="w"> </span><span class="mi">2</span><span class="o">)</span>
+<a id="__codelineno-27-4" name="__codelineno-27-4"></a><span class="w">    </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a href="#__codelineno-28-1" id="__codelineno-28-1" name="__codelineno-28-1"></a><span class="go">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</span>
+<a href="#__codelineno-28-2" id="__codelineno-28-2" name="__codelineno-28-2"></a><span class="go">Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</span>
+<a href="#__codelineno-28-3" id="__codelineno-28-3" name="__codelineno-28-3"></a>
+<a href="#__codelineno-28-4" id="__codelineno-28-4" name="__codelineno-28-4"></a><span class="go">when an unknown printer took a galley of type and scrambled it to make a type specimen book.</span>
+<a href="#__codelineno-28-5" id="__codelineno-28-5" name="__codelineno-28-5"></a><span class="go">It has survived not only five centuries, but also the leap into electronic typesetting,</span>
+<a href="#__codelineno-28-6" id="__codelineno-28-6" name="__codelineno-28-6"></a><span class="go">...</span>
+</code></pre></div>
+<p>An optional closure can also be specified in order to transform the text chunks produced by the operator. The following example shows how to split text files into chunks of 2 lines and transform them into capital letters:</p>
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-29-1">1</a></span>
+<span class="normal"><a href="#__codelineno-29-2">2</a></span>
+<span class="normal"><a href="#__codelineno-29-3">3</a></span>
+<span class="normal"><a href="#__codelineno-29-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1"></a><span class="n">Channel</span>
+<a id="__codelineno-29-2" name="__codelineno-29-2"></a><span class="w">    </span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">'data/meta/random.txt'</span><span class="o">)</span>
+<a id="__codelineno-29-3" name="__codelineno-29-3"></a><span class="w">    </span><span class="o">.</span><span class="na">splitText</span><span class="o">(</span><span class="nl">by:</span><span class="w"> </span><span class="mi">2</span><span class="o">)</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">it</span><span class="o">.</span><span class="na">toUpperCase</span><span class="o">()</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-29-4" name="__codelineno-29-4"></a><span class="w">    </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a href="#__codelineno-30-1" id="__codelineno-30-1" name="__codelineno-30-1"></a><span class="go">LOREM IPSUM IS SIMPLY DUMMY TEXT OF THE PRINTING AND TYPESETTING INDUSTRY.</span>
+<a href="#__codelineno-30-2" id="__codelineno-30-2" name="__codelineno-30-2"></a><span class="go">LOREM IPSUM HAS BEEN THE INDUSTRY'S STANDARD DUMMY TEXT EVER SINCE THE 1500S,</span>
+<a href="#__codelineno-30-3" id="__codelineno-30-3" name="__codelineno-30-3"></a>
+<a href="#__codelineno-30-4" id="__codelineno-30-4" name="__codelineno-30-4"></a><span class="go">WHEN AN UNKNOWN PRINTER TOOK A GALLEY OF TYPE AND SCRAMBLED IT TO MAKE A TYPE SPECIMEN BOOK.</span>
+<a href="#__codelineno-30-5" id="__codelineno-30-5" name="__codelineno-30-5"></a><span class="go">IT HAS SURVIVED NOT ONLY FIVE CENTURIES, BUT ALSO THE LEAP INTO ELECTRONIC TYPESETTING,</span>
+<a href="#__codelineno-30-6" id="__codelineno-30-6" name="__codelineno-30-6"></a><span class="go">...</span>
+</code></pre></div>
+<h3 id="splitcsv"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.3.2</span> <code>splitCsv()</code><a class="headerlink" href="#splitcsv" title="Permanent link">¶</a></h3>
+<p>The <code>splitCsv</code> operator allows you to parse text items emitted by a channel, that are CSV formatted.</p>
+<p>It then splits them into records or groups them as a list of records with a specified length.</p>
+<p>In the simplest case, just apply the <code>splitCsv</code> operator to a channel emitting a CSV formatted text file or text entries. For example, to view only the first and fourth columns:</p>
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-31-1">1</a></span>
+<span class="normal"><a href="#__codelineno-31-2">2</a></span>
+<span class="normal"><a href="#__codelineno-31-3">3</a></span>
+<span class="normal"><a href="#__codelineno-31-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1"></a><span class="n">Channel</span>
+<a id="__codelineno-31-2" name="__codelineno-31-2"></a><span class="w">    </span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">"data/meta/patients_1.csv"</span><span class="o">)</span>
+<a id="__codelineno-31-3" name="__codelineno-31-3"></a><span class="w">    </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">()</span>
+<a id="__codelineno-31-4" name="__codelineno-31-4"></a><span class="w">    </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">"${row[0]}, ${row[3]}"</span><span class="w"> </span><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a href="#__codelineno-32-1" id="__codelineno-32-1" name="__codelineno-32-1"></a><span class="go">patient_id, num_samples</span>
+<a href="#__codelineno-32-2" id="__codelineno-32-2" name="__codelineno-32-2"></a><span class="go">ATX-TBL-001-GB-02-117, 3</span>
+<a href="#__codelineno-32-3" id="__codelineno-32-3" name="__codelineno-32-3"></a><span class="go">ATX-TBL-001-GB-01-110, 3</span>
+<a href="#__codelineno-32-4" id="__codelineno-32-4" name="__codelineno-32-4"></a><span class="go">ATX-TBL-001-GB-03-101, 3</span>
+<a href="#__codelineno-32-5" id="__codelineno-32-5" name="__codelineno-32-5"></a><span class="go">ATX-TBL-001-GB-04-201, 3</span>
+<a href="#__codelineno-32-6" id="__codelineno-32-6" name="__codelineno-32-6"></a><span class="go">ATX-TBL-001-GB-02-120, 3</span>
+<a href="#__codelineno-32-7" id="__codelineno-32-7" name="__codelineno-32-7"></a><span class="go">ATX-TBL-001-GB-04-102, 3</span>
+<a href="#__codelineno-32-8" id="__codelineno-32-8" name="__codelineno-32-8"></a><span class="go">ATX-TBL-001-GB-03-104, 3</span>
+<a href="#__codelineno-32-9" id="__codelineno-32-9" name="__codelineno-32-9"></a><span class="go">ATX-TBL-001-GB-03-103, 3</span>
+</code></pre></div>
+<p>When the CSV begins with a header line defining the column names, you can specify the parameter <code>header: true</code> which allows you to reference each value by its column name, as shown in the following example:</p>
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-33-1">1</a></span>
+<span class="normal"><a href="#__codelineno-33-2">2</a></span>
+<span class="normal"><a href="#__codelineno-33-3">3</a></span>
+<span class="normal"><a href="#__codelineno-33-4">4</a></span>
+<span class="normal"><a href="#__codelineno-33-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1"></a><span class="n">Channel</span>
+<a id="__codelineno-33-2" name="__codelineno-33-2"></a><span class="w">    </span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">"data/meta/patients_1.csv"</span><span class="o">)</span>
+<a id="__codelineno-33-3" name="__codelineno-33-3"></a><span class="w">    </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">(</span><span class="nl">header:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
+<a id="__codelineno-33-4" name="__codelineno-33-4"></a><span class="w">    </span><span class="c1">// row is a list object</span>
+<a id="__codelineno-33-5" name="__codelineno-33-5"></a><span class="w">    </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">"${row.patient_id}, ${row.num_samples}"</span><span class="w"> </span><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
+<p>Alternatively, you can provide custom header names by specifying a list of strings in the header parameter as shown below:</p>
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-34-1">1</a></span>
+<span class="normal"><a href="#__codelineno-34-2">2</a></span>
+<span class="normal"><a href="#__codelineno-34-3">3</a></span>
+<span class="normal"><a href="#__codelineno-34-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1"></a><span class="n">Channel</span>
+<a id="__codelineno-34-2" name="__codelineno-34-2"></a><span class="w">    </span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">"data/meta/patients_1.csv"</span><span class="o">)</span>
+<a id="__codelineno-34-3" name="__codelineno-34-3"></a><span class="w">    </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">(</span><span class="nl">header:</span><span class="w"> </span><span class="o">[</span><span class="s1">'col1'</span><span class="o">,</span><span class="w"> </span><span class="s1">'col2'</span><span class="o">,</span><span class="w"> </span><span class="s1">'col3'</span><span class="o">,</span><span class="w"> </span><span class="s1">'col4'</span><span class="o">,</span><span class="w"> </span><span class="s1">'col5'</span><span class="o">])</span>
+<a id="__codelineno-34-4" name="__codelineno-34-4"></a><span class="w">    </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">"${row.col1}, ${row.col4}"</span><span class="w"> </span><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a href="#__codelineno-35-1" id="__codelineno-35-1" name="__codelineno-35-1"></a><span class="go">patient_id, num_samples</span>
+<a href="#__codelineno-35-2" id="__codelineno-35-2" name="__codelineno-35-2"></a><span class="go">ATX-TBL-001-GB-02-117, 3</span>
+<a href="#__codelineno-35-3" id="__codelineno-35-3" name="__codelineno-35-3"></a><span class="go">ATX-TBL-001-GB-01-110, 3</span>
+<a href="#__codelineno-35-4" id="__codelineno-35-4" name="__codelineno-35-4"></a><span class="go">ATX-TBL-001-GB-03-101, 3</span>
+<a href="#__codelineno-35-5" id="__codelineno-35-5" name="__codelineno-35-5"></a><span class="go">ATX-TBL-001-GB-04-201, 3</span>
+<a href="#__codelineno-35-6" id="__codelineno-35-6" name="__codelineno-35-6"></a><span class="go">ATX-TBL-001-GB-02-120, 3</span>
+<a href="#__codelineno-35-7" id="__codelineno-35-7" name="__codelineno-35-7"></a><span class="go">ATX-TBL-001-GB-04-102, 3</span>
+<a href="#__codelineno-35-8" id="__codelineno-35-8" name="__codelineno-35-8"></a><span class="go">ATX-TBL-001-GB-03-104, 3</span>
+<a href="#__codelineno-35-9" id="__codelineno-35-9" name="__codelineno-35-9"></a><span class="go">ATX-TBL-001-GB-03-103, 3</span>
+</code></pre></div>
+<p>You can also process multiple CSV files at the same time:</p>
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-36-1">1</a></span>
+<span class="normal"><a href="#__codelineno-36-2">2</a></span>
+<span class="normal"><a href="#__codelineno-36-3">3</a></span>
+<span class="normal"><a href="#__codelineno-36-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1"></a><span class="n">Channel</span>
+<a id="__codelineno-36-2" name="__codelineno-36-2"></a><span class="w">    </span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">"data/meta/patients_*.csv"</span><span class="o">)</span><span class="w"> </span><span class="c1">// &lt;-- just use a pattern</span>
+<a id="__codelineno-36-3" name="__codelineno-36-3"></a><span class="w">    </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">(</span><span class="nl">header:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
+<a id="__codelineno-36-4" name="__codelineno-36-4"></a><span class="w">    </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">"${row.patient_id}\t${row.num_samples}"</span><span class="w"> </span><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a href="#__codelineno-37-1" id="__codelineno-37-1" name="__codelineno-37-1"></a><span class="go">ATX-TBL-001-GB-02-117   3</span>
+<a href="#__codelineno-37-2" id="__codelineno-37-2" name="__codelineno-37-2"></a><span class="go">ATX-TBL-001-GB-01-110   3</span>
+<a href="#__codelineno-37-3" id="__codelineno-37-3" name="__codelineno-37-3"></a><span class="go">ATX-TBL-001-GB-03-101   3</span>
+<a href="#__codelineno-37-4" id="__codelineno-37-4" name="__codelineno-37-4"></a><span class="go">ATX-TBL-001-GB-04-201   3</span>
+<a href="#__codelineno-37-5" id="__codelineno-37-5" name="__codelineno-37-5"></a><span class="go">ATX-TBL-001-GB-02-120   3</span>
+<a href="#__codelineno-37-6" id="__codelineno-37-6" name="__codelineno-37-6"></a><span class="go">ATX-TBL-001-GB-04-102   3</span>
+<a href="#__codelineno-37-7" id="__codelineno-37-7" name="__codelineno-37-7"></a><span class="go">ATX-TBL-001-GB-03-104   3</span>
+<a href="#__codelineno-37-8" id="__codelineno-37-8" name="__codelineno-37-8"></a><span class="go">ATX-TBL-001-GB-03-103   3</span>
+<a href="#__codelineno-37-9" id="__codelineno-37-9" name="__codelineno-37-9"></a><span class="go">ATX-TBL-001-GB-01-111   2</span>
+<a href="#__codelineno-37-10" id="__codelineno-37-10" name="__codelineno-37-10"></a><span class="go">ATX-TBL-001-GB-01-112   3</span>
+<a href="#__codelineno-37-11" id="__codelineno-37-11" name="__codelineno-37-11"></a><span class="go">ATX-TBL-001-GB-04-202   3</span>
+<a href="#__codelineno-37-12" id="__codelineno-37-12" name="__codelineno-37-12"></a><span class="go">ATX-TBL-001-GB-02-124   3</span>
+<a href="#__codelineno-37-13" id="__codelineno-37-13" name="__codelineno-37-13"></a><span class="go">ATX-TBL-001-GB-02-107   3</span>
+<a href="#__codelineno-37-14" id="__codelineno-37-14" name="__codelineno-37-14"></a><span class="go">ATX-TBL-001-GB-01-105   3</span>
+<a href="#__codelineno-37-15" id="__codelineno-37-15" name="__codelineno-37-15"></a><span class="go">ATX-TBL-001-GB-02-108   3</span>
+<a href="#__codelineno-37-16" id="__codelineno-37-16" name="__codelineno-37-16"></a><span class="go">ATX-TBL-001-GB-01-113   3</span>
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Notice that you can change the output format simply by adding a different delimiter.</p>
+</div>
+<p>Finally, you can also operate on CSV files outside the channel context:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-38-1">1</a></span>
+<span class="normal"><a href="#__codelineno-38-2">2</a></span>
+<span class="normal"><a href="#__codelineno-38-3">3</a></span>
+<span class="normal"><a href="#__codelineno-38-4">4</a></span>
+<span class="normal"><a href="#__codelineno-38-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1"></a><span class="kt">def</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="s1">'data/meta/patients_1.csv'</span><span class="o">)</span>
+<a id="__codelineno-38-2" name="__codelineno-38-2"></a><span class="kt">def</span><span class="w"> </span><span class="n">lines</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">f</span><span class="o">.</span><span class="na">splitCsv</span><span class="o">()</span>
+<a id="__codelineno-38-3" name="__codelineno-38-3"></a><span class="k">for</span><span class="w"> </span><span class="o">(</span><span class="n">List</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">lines</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-38-4" name="__codelineno-38-4"></a><span class="w">    </span><span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="w"> </span><span class="s2">"${row[0]} -- ${row[2]}"</span>
+<a id="__codelineno-38-5" name="__codelineno-38-5"></a><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
+<div class="admonition question">
+<p class="admonition-title">Exercise</p>
+<p>Create a CSV file and use it as input for <code>script7.nf</code>, part of the <a href="https://training.nextflow.io/basic_training/rnaseq_pipeline/">Simple RNA-Seq workflow tutorial</a>.</p>
+<details class="solution">
+<summary>Solution</summary>
+<p>Add a CSV text file containing the following, as an example input with the name "fastq.csv":</p>
+<div class="highlight"><span class="filename">fastq.csv</span><pre><span></span><code><a href="#__codelineno-39-1" id="__codelineno-39-1" name="__codelineno-39-1"></a>gut,/workspaces/training/nf-training/data/ggal/gut_1.fq,/workspaces/training/nf-training/data/ggal/gut_2.fq
+</code></pre></div>
+<p>Then replace the input channel for the reads in <code>script7.nf</code>. Changing the following lines:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-40-1">1</a></span>
+<span class="normal"><a href="#__codelineno-40-2">2</a></span>
+<span class="normal"><a href="#__codelineno-40-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1"></a><span class="n">Channel</span>
+<a id="__codelineno-40-2" name="__codelineno-40-2"></a><span class="w">    </span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">reads</span><span class="o">,</span><span class="w"> </span><span class="nl">checkIfExists:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
+<a id="__codelineno-40-3" name="__codelineno-40-3"></a><span class="w">    </span><span class="o">.</span><span class="na">set</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">read_pairs_ch</span><span class="w"> </span><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
+<p>To a splitCsv channel factory input:</p>
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">script7.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-41-1">1</a></span>
+<span class="normal"><a href="#__codelineno-41-2">2</a></span>
+<span class="normal"><a href="#__codelineno-41-3">3</a></span>
+<span class="normal"><a href="#__codelineno-41-4">4</a></span>
+<span class="normal"><a href="#__codelineno-41-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1"></a><span class="n">Channel</span>
+<a id="__codelineno-41-2" name="__codelineno-41-2"></a><span class="w">    </span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">"fastq.csv"</span><span class="o">)</span>
+<a id="__codelineno-41-3" name="__codelineno-41-3"></a><span class="w">    </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">()</span>
+<a id="__codelineno-41-4" name="__codelineno-41-4"></a><span class="w">    </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">"${row[0]}, ${row[1]}, ${row[2]}"</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-41-5" name="__codelineno-41-5"></a><span class="w">    </span><span class="o">.</span><span class="na">set</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">read_pairs_ch</span><span class="w"> </span><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
+<p>Finally, change the cardinality of the processes that use the input data:</p>
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">script7.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-42-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-42-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-42-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-42-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-42-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-42-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-42-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-42-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-42-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-42-10">10</a></span>
+<span class="normal"><a href="#__codelineno-42-11">11</a></span>
+<span class="normal"><a href="#__codelineno-42-12">12</a></span>
+<span class="normal"><a href="#__codelineno-42-13">13</a></span>
+<span class="normal"><a href="#__codelineno-42-14">14</a></span>
+<span class="normal"><a href="#__codelineno-42-15">15</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1"></a><span class="n">process</span><span class="w"> </span><span class="n">QUANTIFICATION</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-42-2" name="__codelineno-42-2"></a><span class="w">    </span><span class="n">tag</span><span class="w"> </span><span class="s2">"$sample_id"</span>
+<a id="__codelineno-42-3" name="__codelineno-42-3"></a>
+<a id="__codelineno-42-4" name="__codelineno-42-4"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-42-5" name="__codelineno-42-5"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="n">salmon_index</span>
+<a id="__codelineno-42-6" name="__codelineno-42-6"></a><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">sample_id</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">reads1</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">reads2</span><span class="o">)</span>
+<a id="__codelineno-42-7" name="__codelineno-42-7"></a>
+<a id="__codelineno-42-8" name="__codelineno-42-8"></a><span class="w">    </span><span class="nl">output:</span>
+<a id="__codelineno-42-9" name="__codelineno-42-9"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="n">sample_id</span><span class="o">,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">quant_ch</span>
+<a id="__codelineno-42-10" name="__codelineno-42-10"></a>
+<a id="__codelineno-42-11" name="__codelineno-42-11"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-42-12" name="__codelineno-42-12"></a><span class="w">    </span><span class="s2">"""</span>
+<a id="__codelineno-42-13" name="__codelineno-42-13"></a><span class="s2">    salmon quant --threads $task.cpus --libType=U -i $salmon_index -1 ${reads1} -2 ${reads2} -o $sample_id</span>
+<a id="__codelineno-42-14" name="__codelineno-42-14"></a><span class="s2">    """</span>
+<a id="__codelineno-42-15" name="__codelineno-42-15"></a><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
+<p>Repeat the above for the fastqc step.</p>
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">script7.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-43-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-43-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-43-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-43-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-43-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-43-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-43-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-43-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-43-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-43-10">10</a></span>
+<span class="normal"><a href="#__codelineno-43-11">11</a></span>
+<span class="normal"><a href="#__codelineno-43-12">12</a></span>
+<span class="normal"><a href="#__codelineno-43-13">13</a></span>
+<span class="normal"><a href="#__codelineno-43-14">14</a></span>
+<span class="normal"><a href="#__codelineno-43-15">15</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1"></a><span class="n">process</span><span class="w"> </span><span class="n">FASTQC</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-43-2" name="__codelineno-43-2"></a><span class="w">    </span><span class="n">tag</span><span class="w"> </span><span class="s2">"FASTQC on $sample_id"</span>
+<a id="__codelineno-43-3" name="__codelineno-43-3"></a>
+<a id="__codelineno-43-4" name="__codelineno-43-4"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-43-5" name="__codelineno-43-5"></a><span class="hll"><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">sample_id</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">reads1</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">reads2</span><span class="o">)</span>
+</span><a id="__codelineno-43-6" name="__codelineno-43-6"></a>
+<a id="__codelineno-43-7" name="__codelineno-43-7"></a><span class="w">    </span><span class="nl">output:</span>
+<a id="__codelineno-43-8" name="__codelineno-43-8"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s2">"fastqc_${sample_id}_logs"</span>
+<a id="__codelineno-43-9" name="__codelineno-43-9"></a>
+<a id="__codelineno-43-10" name="__codelineno-43-10"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-43-11" name="__codelineno-43-11"></a><span class="w">    </span><span class="s2">"""</span>
+<a id="__codelineno-43-12" name="__codelineno-43-12"></a><span class="s2">    mkdir fastqc_${sample_id}_logs</span>
+<a id="__codelineno-43-13" name="__codelineno-43-13"></a><span class="hll"><span class="s2">    fastqc -o fastqc_${sample_id}_logs -f fastq -q ${reads1} ${reads2}</span>
+</span><a id="__codelineno-43-14" name="__codelineno-43-14"></a><span class="s2">    """</span>
+<a id="__codelineno-43-15" name="__codelineno-43-15"></a><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
+<p>Now the workflow should run from a CSV file.</p>
+</details>
+</div>
+<h3 id="tab-separated-values-tsv"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.3.3</span> Tab separated values (.tsv)<a class="headerlink" href="#tab-separated-values-tsv" title="Permanent link">¶</a></h3>
+<p>Parsing TSV files works in a similar way. Simply add the <code>sep: '\t'</code> option in the <code>splitCsv</code> context:</p>
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-44-1">1</a></span>
+<span class="normal"><a href="#__codelineno-44-2">2</a></span>
+<span class="normal"><a href="#__codelineno-44-3">3</a></span>
+<span class="normal"><a href="#__codelineno-44-4">4</a></span>
+<span class="normal"><a href="#__codelineno-44-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1"></a><span class="n">Channel</span>
+<a id="__codelineno-44-2" name="__codelineno-44-2"></a><span class="w">    </span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">"data/meta/regions.tsv"</span><span class="o">,</span><span class="w"> </span><span class="nl">checkIfExists:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
+<a id="__codelineno-44-3" name="__codelineno-44-3"></a><span class="w">    </span><span class="c1">// use `sep` option to parse TAB separated files</span>
+<a id="__codelineno-44-4" name="__codelineno-44-4"></a><span class="w">    </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">(</span><span class="nl">sep:</span><span class="w"> </span><span class="s1">'\t'</span><span class="o">)</span>
+<a id="__codelineno-44-5" name="__codelineno-44-5"></a><span class="w">    </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
+</code></pre></div></td></tr></table></div>
+<div class="admonition question">
+<p class="admonition-title">Exercise</p>
+<p>Use the tab separation technique on the file <code>data/meta/regions.tsv</code>, but print just the first column, and remove the header.</p>
+<details class="solution">
+<summary>Solution</summary>
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-45-1">1</a></span>
+<span class="normal"><a href="#__codelineno-45-2">2</a></span>
+<span class="normal"><a href="#__codelineno-45-3">3</a></span>
+<span class="normal"><a href="#__codelineno-45-4">4</a></span>
+<span class="normal"><a href="#__codelineno-45-5">5</a></span>
+<span class="normal"><a href="#__codelineno-45-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1"></a><span class="n">Channel</span>
+<a id="__codelineno-45-2" name="__codelineno-45-2"></a><span class="w">    </span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">"data/meta/regions.tsv"</span><span class="o">,</span><span class="w"> </span><span class="nl">checkIfExists:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
+<a id="__codelineno-45-3" name="__codelineno-45-3"></a><span class="w">    </span><span class="c1">// use `sep` option to parse TAB separated files</span>
+<a id="__codelineno-45-4" name="__codelineno-45-4"></a><span class="w">    </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">(</span><span class="nl">sep:</span><span class="w"> </span><span class="s1">'\t'</span><span class="o">,</span><span class="w"> </span><span class="nl">header:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
+<a id="__codelineno-45-5" name="__codelineno-45-5"></a><span class="w">    </span><span class="c1">// row is a list object</span>
+<a id="__codelineno-45-6" name="__codelineno-45-6"></a><span class="w">    </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">"${row.patient_id}"</span><span class="w"> </span><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
+</details>
+</div>
+<h3 id="splitjson"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.3.4</span> <code>splitJson()</code><a class="headerlink" href="#splitjson" title="Permanent link">¶</a></h3>
+<p>You can parse the JSON file format using the <code>splitJson</code> channel operator.</p>
+<p>The <code>splitJson</code> operator supports JSON arrays:</p>
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-46-1">1</a></span>
+<span class="normal"><a href="#__codelineno-46-2">2</a></span>
+<span class="normal"><a href="#__codelineno-46-3">3</a></span>
+<span class="normal"><a href="#__codelineno-46-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1"></a><span class="n">Channel</span>
+<a id="__codelineno-46-2" name="__codelineno-46-2"></a><span class="w">    </span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">'["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]'</span><span class="o">)</span>
+<a id="__codelineno-46-3" name="__codelineno-46-3"></a><span class="w">    </span><span class="o">.</span><span class="na">splitJson</span><span class="o">()</span>
+<a id="__codelineno-46-4" name="__codelineno-46-4"></a><span class="w">    </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a href="#__codelineno-47-1" id="__codelineno-47-1" name="__codelineno-47-1"></a><span class="go">Sunday</span>
+<a href="#__codelineno-47-2" id="__codelineno-47-2" name="__codelineno-47-2"></a><span class="go">Monday</span>
+<a href="#__codelineno-47-3" id="__codelineno-47-3" name="__codelineno-47-3"></a><span class="go">Tuesday</span>
+<a href="#__codelineno-47-4" id="__codelineno-47-4" name="__codelineno-47-4"></a><span class="go">Wednesday</span>
+<a href="#__codelineno-47-5" id="__codelineno-47-5" name="__codelineno-47-5"></a><span class="go">Thursday</span>
+<a href="#__codelineno-47-6" id="__codelineno-47-6" name="__codelineno-47-6"></a><span class="go">Friday</span>
+<a href="#__codelineno-47-7" id="__codelineno-47-7" name="__codelineno-47-7"></a><span class="go">Saturday</span>
+</code></pre></div>
+<p>As well as JSON arrays in objects:</p>
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-48-1">1</a></span>
+<span class="normal"><a href="#__codelineno-48-2">2</a></span>
+<span class="normal"><a href="#__codelineno-48-3">3</a></span>
+<span class="normal"><a href="#__codelineno-48-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-48-1" name="__codelineno-48-1"></a><span class="n">Channel</span>
+<a id="__codelineno-48-2" name="__codelineno-48-2"></a><span class="w">    </span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">'{"player": {"name": "Bob", "height": 180, "champion": false}}'</span><span class="o">)</span>
+<a id="__codelineno-48-3" name="__codelineno-48-3"></a><span class="w">    </span><span class="o">.</span><span class="na">splitJson</span><span class="o">()</span>
+<a id="__codelineno-48-4" name="__codelineno-48-4"></a><span class="w">    </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a href="#__codelineno-49-1" id="__codelineno-49-1" name="__codelineno-49-1"></a><span class="go">[value:[name:Bob, height:180, champion:false], key:player]</span>
+</code></pre></div>
+<p>And even a JSON array of JSON objects:</p>
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-50-1">1</a></span>
+<span class="normal"><a href="#__codelineno-50-2">2</a></span>
+<span class="normal"><a href="#__codelineno-50-3">3</a></span>
+<span class="normal"><a href="#__codelineno-50-4">4</a></span>
+<span class="normal"><a href="#__codelineno-50-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1"></a><span class="n">Channel</span>
+<a id="__codelineno-50-2" name="__codelineno-50-2"></a><span class="w">    </span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s1">'[{"name": "Bob", "height": 180, "champion": false}, \</span>
+<a id="__codelineno-50-3" name="__codelineno-50-3"></a><span class="s1">          {"name": "Alice", "height": 170, "champion": false}]'</span><span class="o">)</span>
+<a id="__codelineno-50-4" name="__codelineno-50-4"></a><span class="w">    </span><span class="o">.</span><span class="na">splitJson</span><span class="o">()</span>
+<a id="__codelineno-50-5" name="__codelineno-50-5"></a><span class="w">    </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a href="#__codelineno-51-1" id="__codelineno-51-1" name="__codelineno-51-1"></a><span class="go">[name:Bob, height:180, champion:false]</span>
+<a href="#__codelineno-51-2" id="__codelineno-51-2" name="__codelineno-51-2"></a><span class="go">[name:Alice, height:170, champion:false]</span>
+</code></pre></div>
+<p>You can also parse JSON files directly:</p>
+<div class="highlight"><span class="filename">file.json</span><pre><span></span><code><a href="#__codelineno-52-1" id="__codelineno-52-1" name="__codelineno-52-1"></a><span class="p">[</span>
+<a href="#__codelineno-52-2" id="__codelineno-52-2" name="__codelineno-52-2"></a><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bob"</span><span class="p">,</span><span class="w"> </span><span class="nt">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">180</span><span class="p">,</span><span class="w"> </span><span class="nt">"champion"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w"> </span><span class="p">},</span>
+<a href="#__codelineno-52-3" id="__codelineno-52-3" name="__codelineno-52-3"></a><span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Alice"</span><span class="p">,</span><span class="w"> </span><span class="nt">"height"</span><span class="p">:</span><span class="w"> </span><span class="mi">170</span><span class="p">,</span><span class="w"> </span><span class="nt">"champion"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w"> </span><span class="p">}</span>
+<a href="#__codelineno-52-4" id="__codelineno-52-4" name="__codelineno-52-4"></a><span class="p">]</span>
+</code></pre></div>
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-53-1">1</a></span>
+<span class="normal"><a href="#__codelineno-53-2">2</a></span>
+<span class="normal"><a href="#__codelineno-53-3">3</a></span>
+<span class="normal"><a href="#__codelineno-53-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-53-1" name="__codelineno-53-1"></a><span class="n">Channel</span>
+<a id="__codelineno-53-2" name="__codelineno-53-2"></a><span class="w">    </span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">'file.json'</span><span class="o">)</span>
+<a id="__codelineno-53-3" name="__codelineno-53-3"></a><span class="w">    </span><span class="o">.</span><span class="na">splitJson</span><span class="o">()</span>
+<a id="__codelineno-53-4" name="__codelineno-53-4"></a><span class="w">    </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a href="#__codelineno-54-1" id="__codelineno-54-1" name="__codelineno-54-1"></a><span class="go">[name:Bob, height:180, champion:false]</span>
+<a href="#__codelineno-54-2" id="__codelineno-54-2" name="__codelineno-54-2"></a><span class="go">[name:Alice, height:170, champion:false]</span>
+</code></pre></div>
+<div class="admonition cboard-list-2">
+<p class="admonition-title">Summary</p>
+<p>In this step you have learned:</p>
+<ol>
+<li>How to use the <code>splitText</code> operator to split text files of various formats</li>
+<li>How to use the <code>splitJson</code> operator to split JSON files of various formats</li>
+</ol>
+</div>
+<h2 id="more-resources"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.4</span> More resources<a class="headerlink" href="#more-resources" title="Permanent link">¶</a></h2>
+<p>Check the <a href="https://www.nextflow.io/docs/latest/operator.html">operators documentation</a> on Nextflow web site.</p>
+</article>
+</div>
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+</div>
+<button class="md-top md-icon" data-md-component="top" hidden="" type="button">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"></path></svg>
+  Torna su
+</button>
+</main>
+<footer class="md-footer">
+<nav aria-label="Piede" class="md-footer__inner md-grid">
+<a aria-label="Precedente: Processes" class="md-footer__link md-footer__link--prev" href="../processes/">
+<div class="md-footer__button md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+</div>
+<div class="md-footer__title">
+<span class="md-footer__direction">
+                Precedente
+              </span>
+<div class="md-ellipsis">
+                Processes
+              </div>
+</div>
+</a>
+<a aria-label="Successivo: Groovy introduction" class="md-footer__link md-footer__link--next" href="../groovy/">
+<div class="md-footer__title">
+<span class="md-footer__direction">
+                Successivo
+              </span>
+<div class="md-ellipsis">
+                Groovy introduction
+              </div>
+</div>
+<div class="md-footer__button md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"></path></svg>
+</div>
+</a>
+</nav>
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-copyright">
+<div>
+    Copyright © 2020-2023,
+    <a href="https://seqera.io" rel="noopener" target="_blank">Seqera</a>.
+  </div>
+<div class="footer_cc_link">
+<svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg">
+<!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.-->
+<path d="m245.83 214.87-33.22 17.28c-9.43-19.58-25.24-19.93-27.46-19.93-22.13 0-33.22 14.61-33.22 43.84 0 23.57 9.21 43.84 33.22 43.84 14.47 0 24.65-7.09 30.57-21.26l30.55 15.5c-6.17 11.51-25.69 38.98-65.1 38.98-22.6 0-73.96-10.32-73.96-77.05 0-58.69 43-77.06 72.63-77.06 30.72-.01 52.7 11.95 65.99 35.86zm143.05 0-32.78 17.28c-9.5-19.77-25.72-19.93-27.9-19.93-22.14 0-33.22 14.61-33.22 43.84 0 23.55 9.23 43.84 33.22 43.84 14.45 0 24.65-7.09 30.54-21.26l31 15.5c-2.1 3.75-21.39 38.98-65.09 38.98-22.69 0-73.96-9.87-73.96-77.05 0-58.67 42.97-77.06 72.63-77.06 30.71-.01 52.58 11.95 65.56 35.86zM247.56 8.05C104.74 8.05 0 123.11 0 256.05c0 138.49 113.6 248 247.56 248 129.93 0 248.44-100.87 248.44-248 0-137.87-106.62-248-248.44-248zm.87 450.81c-112.54 0-203.7-93.04-203.7-202.81 0-105.42 85.43-203.27 203.72-203.27 112.53 0 202.82 89.46 202.82 203.26-.01 121.69-99.68 202.82-202.84 202.82z"></path>
+</svg>
+<a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" rel="noopener" target="_blank" title="Creative Commons CC BY-NC-ND 4.0">
+      Creative Commons BY-NC-ND 4.0</a>.
+  </div>
+   Made with
+  <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
+    Material for MkDocs
+  </a>
+</div>
+<div class="md-social">
+<a class="footer_seqera_logo" href="https://seqera.io" rel="noopener" target="_blank">
+<img src="/assets/img/seqera_logo_white.png">
+</img></a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+<div class="md-consent" data-md-component="consent" hidden="" id="__consent">
+<div class="md-consent__overlay"></div>
+<aside class="md-consent__inner">
+<form class="md-consent__form md-grid md-typeset" name="consent">
+<h4><span class="enumerate-headings-plugin enumerate-heading-plugin">6.4.0.1</span> Cookie consent</h4>
+<p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our training materials better.</p>
+<input class="md-toggle" id="__settings" type="checkbox"/>
+<div class="md-consent__settings">
+<ul class="task-list">
+<li class="task-list-item">
+<label class="task-list-control">
+<input checked="" name="analytics" type="checkbox"/>
+<span class="task-list-indicator"></span>
+      Google Analytics
+    </label>
+</li>
+<li class="task-list-item">
+<label class="task-list-control">
+<input checked="" name="github" type="checkbox"/>
+<span class="task-list-indicator"></span>
+      GitHub
+    </label>
+</li>
+</ul>
+</div>
+<div class="md-consent__controls">
+<button class="md-button md-button--primary">Accetta</button>
+<label class="md-button" for="__settings">Gestisci le opzioni</label>
+</div>
+</form>
+</aside>
+</div>
+<script>var consent=__md_get("__consent");if(consent)for(var input of document.forms.consent.elements)input.name&&(input.checked=consent[input.name]||!1);else"file:"!==location.protocol&&setTimeout((function(){document.querySelector("[data-md-component=consent]").hidden=!1}),250);var form=document.forms.consent;for(var action of["submit","reset"])form.addEventListener(action,(function(e){if(e.preventDefault(),"reset"===e.type)for(var n of document.forms.consent.elements)n.name&&(n.checked=!1);__md_set("__consent",Object.fromEntries(Array.from(new FormData(form).keys()).map((function(e){return[e,!0]})))),location.hash="",location.reload()}))</script>
+<script id="__config" type="application/json">{"base": "../../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.instant", "navigation.top", "navigation.tracking", "search.share", "toc.follow"], "search": "../../../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copiato", "clipboard.copy": "Copia", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.term.missing": "Non presente", "select.version": "Seleziona la versione"}, "version": {"alias": true, "provider": "mike"}}</script>
+<script src="../../../assets/javascripts/bundle.c8b220af.min.js"></script>
+</body>
+</html>

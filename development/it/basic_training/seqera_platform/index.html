@@ -1,0 +1,1588 @@
+
+<!DOCTYPE html>
+
+<html class="no-js" lang="it">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="Get started with Seqera Platform" name="description"/>
+<link href="https://training.nextflow.io/0.dev/it/basic_training/seqera_platform/" rel="canonical"/>
+<link href="../executors/" rel="prev"/>
+<link href="../cache_and_resume/" rel="next"/>
+<link href="../../../assets/img/nextflow-icon.png" rel="icon"/>
+<meta content="mkdocs-1.6.1, mkdocs-material-9.6.12" name="generator"/>
+<title>Seqera Platform - training.nextflow.io</title>
+<link href="../../../assets/stylesheets/main.2afb09e1.min.css" rel="stylesheet"/>
+<link href="../../../assets/stylesheets/palette.06af60db.min.css" rel="stylesheet"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
+<style>:root{--md-text-font:"Inter";--md-code-font:"Roboto Mono"}</style>
+<link href="../../../assets/stylesheets/fonts.css" rel="stylesheet"/>
+<link href="../../../assets/stylesheets/extra.css" rel="stylesheet"/>
+<script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-244N3GEN75"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-244N3GEN75",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-244N3GEN75",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+<script>if("undefined"!=typeof __md_analytics){var consent=__md_get("__consent");consent&&consent.analytics&&__md_analytics()}</script>
+</head>
+<body data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="slate" dir="ltr">
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="#get-started-with-seqera-platform">
+          Vai al contenuto
+        </a>
+</div>
+<div data-md-component="announce">
+<aside class="md-banner">
+<div class="md-banner__inner md-grid md-typeset">
+<div style="text-align: center">
+  Nextflow Training Week (2025-Q1):
+  <strong>March 10-14, 2025</strong>
+<a class="md-button" href="https://community.seqera.io/t/nextflow-training-week-2025-q1/1775/6" target="_blank">
+    More info
+    <span class="twemoji"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"></path></svg></span>
+</a>
+</div>
+<style type="text/css">
+  .md-banner {
+    display: none;
+  }
+</style>
+<script>
+  (function () {
+    function hideAnnouncement() {
+      var announcementDate = new Date(
+        "2025-03-15T00:00:00Z",
+      );
+      var currentDate = new Date();
+      var banner = document.querySelector(".md-banner");
+      if (banner && currentDate <= announcementDate) {
+        banner.style.display = "block";
+      }
+    }
+
+    // Run on initial load
+    hideAnnouncement();
+
+    // Hook into XHR to run after each page update
+    var originalOpen = XMLHttpRequest.prototype.open;
+    XMLHttpRequest.prototype.open = function () {
+      this.addEventListener("load", function () {
+        setTimeout(hideAnnouncement, 0); // Ensure it runs after the request completes
+      });
+      return originalOpen.apply(this, arguments);
+    };
+  })();
+</script>
+</div>
+</aside>
+</div>
+<div data-md-color-scheme="default" data-md-component="outdated" hidden="">
+</div>
+<header class="md-header md-header--shadow" data-md-component="header">
+<nav aria-label="Intestazione" class="md-header__inner md-grid">
+<a aria-label="training.nextflow.io" class="md-header__button md-logo" data-md-component="logo" href="../../" title="training.nextflow.io">
+<img alt="logo" src="../../../assets/img/nextflow_logo_dark.png"/>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis">
+            training.nextflow.io
+          </span>
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis">
+            
+              Seqera Platform
+            
+          </span>
+</div>
+</div>
+</div>
+<form class="md-header__option" data-md-component="palette">
+<input aria-label="Switch to light mode" class="md-option" data-md-color-accent="indigo" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-primary="indigo" data-md-color-scheme="slate" id="__palette_0" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_1" hidden="" title="Switch to light mode">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"></path></svg>
+</label>
+<input aria-label="Switch to dark mode" class="md-option" data-md-color-accent="indigo" data-md-color-media="(prefers-color-scheme: light)" data-md-color-primary="indigo" data-md-color-scheme="default" id="__palette_1" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_0" hidden="" title="Switch to dark mode">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"></path></svg>
+</label>
+</form>
+<script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+<div class="md-header__option">
+<div class="md-select">
+<button aria-label="Seleziona la lingua" class="md-header__button md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"></path></svg>
+</button>
+<div class="md-select__inner">
+<ul class="md-select__list">
+<li class="md-select__item">
+<a class="md-select__link" href="../../../basic_training/seqera_platform/" hreflang="en">
+              English
+            </a>
+</li>
+<li class="md-select__item">
+<a class="md-select__link" href="../../../pt/basic_training/seqera_platform/" hreflang="pt">
+              Português
+            </a>
+</li>
+<li class="md-select__item">
+<a class="md-select__link" href="../../../es/basic_training/seqera_platform/" hreflang="es">
+              Español
+            </a>
+</li>
+<li class="md-select__item">
+<a class="md-select__link" href="../../../fr/basic_training/seqera_platform/" hreflang="fr">
+              Français
+            </a>
+</li>
+<li class="md-select__item">
+<a class="md-select__link" href="./" hreflang="it">
+              Italiano
+            </a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<label class="md-header__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="Cerca" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="Cerca" required="" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+</label>
+<nav aria-label="Cerca" class="md-search__options">
+<a aria-label="Condividi" class="md-search__icon md-icon" data-clipboard="" data-clipboard-text="" data-md-component="search-share" href="javascript:void(0)" tabindex="-1" title="Condividi">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"></path></svg>
+</a>
+<button aria-label="Cancella" class="md-search__icon md-icon" tabindex="-1" title="Cancella" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+</button>
+</nav>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="" tabindex="0">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta">
+            Inizializza la ricerca
+          </div>
+<ol class="md-search-result__list" role="presentation"></ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="md-header__source">
+<a class="md-source" data-md-component="source" href="https://github.com/nextflow-io/training" title="Apri repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"></path></svg>
+</div>
+<div class="md-source__repository">
+    nextflow-io/training
+  </div>
+</a>
+</div>
+</nav>
+</header>
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Navigazione" class="md-nav md-nav--primary" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="training.nextflow.io" class="md-nav__button md-logo" data-md-component="logo" href="../../" title="training.nextflow.io">
+<img alt="logo" src="../../../assets/img/nextflow_logo_dark.png"/>
+</a>
+    training.nextflow.io
+  </label>
+<div class="md-nav__source">
+<a class="md-source" data-md-component="source" href="https://github.com/nextflow-io/training" title="Apri repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"></path></svg>
+</div>
+<div class="md-source__repository">
+    nextflow-io/training
+  </div>
+</a>
+</div>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../">
+<span class="md-ellipsis">
+    Home
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+<span class="md-ellipsis">
+    Environment setup
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_2">
+<span class="md-nav__icon md-icon"></span>
+            Environment setup
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../envsetup/">
+<span class="md-ellipsis">
+    Environment Setup
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../envsetup/01_setup/">
+<span class="md-ellipsis">
+    GitHub Codespaces
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../envsetup/02_local/">
+<span class="md-ellipsis">
+    Local installation
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+<span class="md-ellipsis">
+    Hello Nextflow
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_3">
+<span class="md-nav__icon md-icon"></span>
+            Hello Nextflow
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../hello_nextflow/">
+<span class="md-ellipsis">
+    Hello Nextflow
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../hello_nextflow/00_orientation/">
+<span class="md-ellipsis">
+    Orientation
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../hello_nextflow/01_hello_world/">
+<span class="md-ellipsis">
+    Parte 1: Hello World
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../hello_nextflow/02_hello_channels/">
+<span class="md-ellipsis">
+    Parte 2: Hello Channels
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../hello_nextflow/03_hello_workflow/">
+<span class="md-ellipsis">
+    Parte 3: Hello Workflow
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../hello_nextflow/04_hello_modules/">
+<span class="md-ellipsis">
+    Parte 4: Hello Modules
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../hello_nextflow/05_hello_containers/">
+<span class="md-ellipsis">
+    Parte 5: Hello Containers
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../hello_nextflow/06_hello_config/">
+<span class="md-ellipsis">
+    Parte 6: Hello Config
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../hello_nextflow/survey/">
+<span class="md-ellipsis">
+    Feedback survey
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../hello_nextflow/next_steps/">
+<span class="md-ellipsis">
+    Next Steps
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+<span class="md-ellipsis">
+    Nextflow for Genomics
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_4_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_4">
+<span class="md-nav__icon md-icon"></span>
+            Nextflow for Genomics
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../nf4_science/genomics/">
+<span class="md-ellipsis">
+    Nextflow for Genomics
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../nf4_science/genomics/00_orientation/">
+<span class="md-ellipsis">
+    Orientation
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../nf4_science/genomics/01_per_sample_variant_calling/">
+<span class="md-ellipsis">
+    Part 1: Per-sample variant calling
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../nf4_science/genomics/02_joint_calling/">
+<span class="md-ellipsis">
+    Part 2: Joint calling on a cohort
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../nf4_science/genomics/03_modules/">
+<span class="md-ellipsis">
+    Part 3: Moving code into modules
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../nf4_science/genomics/04_testing/">
+<span class="md-ellipsis">
+    Part 4: Adding tests
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_5" type="checkbox"/>
+<label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+<span class="md-ellipsis">
+    Nextflow for RNAseq
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_5_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_5">
+<span class="md-nav__icon md-icon"></span>
+            Nextflow for RNAseq
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../nf4_science/rnaseq/">
+<span class="md-ellipsis">
+    Nextflow for RNAseq
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../nf4_science/rnaseq/00_orientation/">
+<span class="md-ellipsis">
+    Orientation
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../nf4_science/rnaseq/01_method/">
+<span class="md-ellipsis">
+    Part 1: Method overview and manual testing
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../nf4_science/rnaseq/02_single-sample/">
+<span class="md-ellipsis">
+    Part 2: Single-sample implementation
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../nf4_science/rnaseq/03_multi-sample/">
+<span class="md-ellipsis">
+    Part 3: Multi-sample paired-end implementation
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../nf4_science/rnaseq/survey/">
+<span class="md-ellipsis">
+    Feedback survey
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../nf4_science/rnaseq/next_steps/">
+<span class="md-ellipsis">
+    Next Steps
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_6" type="checkbox"/>
+<label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+<span class="md-ellipsis">
+    Side Quests
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_6_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_6">
+<span class="md-nav__icon md-icon"></span>
+            Side Quests
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../side_quests/">
+<span class="md-ellipsis">
+    Side Quests
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../side_quests/orientation/">
+<span class="md-ellipsis">
+    Orientation
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../side_quests/nf-core/">
+<span class="md-ellipsis">
+    Introduction to nf-core
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../side_quests/nf-test/">
+<span class="md-ellipsis">
+    Testing with nf-test
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../side_quests/workflows_of_workflows/">
+<span class="md-ellipsis">
+    Workflows of Workflows
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_7" type="checkbox"/>
+<label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+<span class="md-ellipsis">
+    Fundamentals Training
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="true" aria-labelledby="__nav_7_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_7">
+<span class="md-nav__icon md-icon"></span>
+            Fundamentals Training
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../">
+<span class="md-ellipsis">
+    Fundamentals Training
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../orientation/">
+<span class="md-ellipsis">
+    Orientation
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../intro/">
+<span class="md-ellipsis">
+    Basic concepts
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../rnaseq_pipeline/">
+<span class="md-ellipsis">
+    Simple RNA-Seq workflow
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../containers/">
+<span class="md-ellipsis">
+    Dependencies and containers
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../channels/">
+<span class="md-ellipsis">
+    Channels
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../processes/">
+<span class="md-ellipsis">
+    Processes
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../operators/">
+<span class="md-ellipsis">
+    Operators
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../groovy/">
+<span class="md-ellipsis">
+    Groovy introduction
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../modules/">
+<span class="md-ellipsis">
+    Modularization
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../config/">
+<span class="md-ellipsis">
+    Configuration
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../executors/">
+<span class="md-ellipsis">
+    Deployment scenarios
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+<span class="md-ellipsis">
+    Seqera Platform
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="./">
+<span class="md-ellipsis">
+    Seqera Platform
+    
+  </span>
+</a>
+<nav aria-label="On this page" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+    On this page
+  </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#cli">
+<span class="md-ellipsis">
+      CLI
+    </span>
+</a>
+</li> <li class="md-nav__item">
+<a class="md-nav__link" href="#online-gui">
+<span class="md-ellipsis">
+      Online GUI
+    </span>
+</a>
+<nav aria-label="Online GUI" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#configuring-your-compute-environment">
+<span class="md-ellipsis">
+      Configuring your compute environment
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#selecting-a-default-compute-environment">
+<span class="md-ellipsis">
+      Selecting a default compute environment
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#launchpad">
+<span class="md-ellipsis">
+      Launchpad
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pipeline-parameters-form">
+<span class="md-ellipsis">
+      Pipeline Parameters Form
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#adding-a-new-pipeline">
+<span class="md-ellipsis">
+      Adding a new pipeline
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li> <li class="md-nav__item">
+<a class="md-nav__link" href="#api">
+<span class="md-ellipsis">
+      API
+    </span>
+</a>
+</li> <li class="md-nav__item">
+<a class="md-nav__link" href="#workspaces-and-organizations">
+<span class="md-ellipsis">
+      Workspaces and Organizations
+    </span>
+</a>
+<nav aria-label="Workspaces and Organizations" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#organization-resources">
+<span class="md-ellipsis">
+      Organization resources
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#organization-users">
+<span class="md-ellipsis">
+      Organization users
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#setting-up-a-new-organization">
+<span class="md-ellipsis">
+      Setting up a new organization
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+<nav aria-label="Resources" class="md-nav md-nav--secondary sidebar_resources">
+<label class="md-nav__title">Resources</label>
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="https://nextflow.io/docs/latest/index.html" rel="noopener" target="_blank">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M17.5 14.33c.79 0 1.63.08 2.5.24v1.5c-.62-.16-1.46-.24-2.5-.24-1.9 0-3.39.33-4.5.99v-1.69c1.17-.53 2.67-.8 4.5-.8M13 12.46c1.29-.53 2.79-.79 4.5-.79.79 0 1.63.07 2.5.23v1.5c-.62-.16-1.46-.24-2.5-.24-1.9 0-3.39.34-4.5.99m4.5-3.65c-1.9 0-3.39.32-4.5 1V9.84c1.23-.56 2.73-.84 4.5-.84.79 0 1.63.08 2.5.23v1.55c-.74-.19-1.59-.28-2.5-.28m3.5 8V7c-1.04-.33-2.21-.5-3.5-.5-2.05 0-3.88.5-5.5 1.5v11.5c1.62-1 3.45-1.5 5.5-1.5 1.19 0 2.36.16 3.5.5m-3.5-14c2.35 0 4.19.5 5.5 1.5v14.56c0 .12-.05.24-.16.35-.11.09-.23.17-.34.17-.11 0-.19-.02-.25-.05-1.28-.69-2.87-1.03-4.75-1.03-2.05 0-3.88.5-5.5 1.5-1.34-1-3.17-1.5-5.5-1.5-1.66 0-3.25.36-4.75 1.07-.03.01-.07.01-.12.03-.04.01-.08.02-.13.02-.11 0-.23-.04-.34-.12a.475.475 0 0 1-.16-.35V6c1.34-1 3.18-1.5 5.5-1.5 2.33 0 4.16.5 5.5 1.5 1.34-1 3.17-1.5 5.5-1.5Z"></path>
+</svg>
+        Nextflow Docs
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="https://www.nextflow.io/slack-invite.html" rel="noopener" target="_blank">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M6 15a2 2 0 0 1-2 2 2 2 0 0 1-2-2 2 2 0 0 1 2-2h2v2m1 0a2 2 0 0 1 2-2 2 2 0 0 1 2 2v5a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-5m2-8a2 2 0 0 1-2-2 2 2 0 0 1 2-2 2 2 0 0 1 2 2v2H9m0 1a2 2 0 0 1 2 2 2 2 0 0 1-2 2H4a2 2 0 0 1-2-2 2 2 0 0 1 2-2h5m8 2a2 2 0 0 1 2-2 2 2 0 0 1 2 2 2 2 0 0 1-2 2h-2v-2m-1 0a2 2 0 0 1-2 2 2 2 0 0 1-2-2V5a2 2 0 0 1 2-2 2 2 0 0 1 2 2v5m-2 8a2 2 0 0 1 2 2 2 2 0 0 1-2 2 2 2 0 0 1-2-2v-2h2m0-1a2 2 0 0 1-2-2 2 2 0 0 1 2-2h5a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-5Z"></path>
+</svg>
+        Nextflow Slack
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="https://nextflow.io/" rel="noopener" target="_blank">
+<svg id="Layer_1" version="1.1" viewbox="80 50 350 350" xmlns="http://www.w3.org/2000/svg">
+<style type="text/css">
+            .st0 {
+              fill: "gray";
+            }
+          </style>
+<path class="st0" d="M124.5,171.5c39.4,2.6,71.1,34.3,73.5,73.8h46.1c-2.6-65-54.7-117.2-119.6-119.9V171.5z"></path>
+<path class="st0" d="M198.3,255.8c-2.6,39.5-34.3,71.1-73.8,73.5v46.1c65-2.6,117.2-54.7,119.9-119.6H198.3z"></path>
+<path class="st0" d="M300.7,245c2.6-39.5,34.3-71.1,73.8-73.5v-46.1c-65,2.6-117.2,54.7-119.9,119.6H300.7z"></path>
+<path class="st0" d="M374.5,329.3c-39.4-2.6-71.1-34.3-73.5-73.8h-46.1c2.6,65,54.7,117.2,119.6,119.9V329.3z"></path>
+</svg>
+        Nextflow Homepage
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="https://seqera.io/" rel="noopener" target="_blank">
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 28.3.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg id="Layer_1" style="enable-background: new 0 0 500 500" version="1.1" viewbox="80 50 350 350" x="0px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" y="0px">
+<style type="text/css">
+            .st0 {
+              clip-path: url(#SVGID_00000006699037935518914080000000086571810102047141_);
+            }
+            .st1 {
+              fill: "gray";
+            }
+          </style>
+<g>
+<defs>
+<rect height="250" id="SVGID_1_" width="250" x="125" y="125"></rect>
+</defs>
+<clippath id="SVGID_00000183214694142566821210000012389151436317298101_">
+<use style="overflow: visible" xlink:href="#SVGID_1_"></use>
+</clippath>
+<g style="
+                clip-path: url(#SVGID_00000183214694142566821210000012389151436317298101_);
+              ">
+<path class="st1" d="M375,333l-0.1-0.9l-0.1-0.8l-0.1-0.9l-0.1-0.9l-0.1-0.8l-0.1-0.9l-0.1-0.8l-0.2-0.9l-0.2-0.8l-0.2-0.8
+                      l-0.2-0.8l-0.2-0.8l-0.2-0.8l-0.3-0.8l-0.3-0.8l-0.3-0.8l-0.3-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8
+                      l-0.4-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7L365,308l-0.6-0.6l-0.6-0.6l-0.6-0.6l-0.6-0.6L362,305
+                      l-0.6-0.6l-0.7-0.6l-0.6-0.5l-1.2,0.7l-0.8,0.5l-0.8,0.4l-0.8,0.4l-0.8,0.4l-0.8,0.4l-0.9,0.4l-0.9,0.4l-0.9,0.3l-0.9,0.3
+                      l-0.9,0.3l-0.9,0.3l-0.9,0.3l-0.9,0.3l-0.9,0.2l-0.9,0.2l-0.9,0.2l-0.9,0.2l-0.9,0.2l-0.9,0.1l-0.9,0.1l-0.9,0.1l-0.9,0.1
+                      l-0.9,0.1l-0.9,0.1l-0.9,0.1l-0.9,0l-0.9,0h-57.5l59.7,16.4l0.4,0.1l0.4,0.1l0.4,0.1l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.2
+                      l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.1,0.3l0.1,0.3l0.1,0.4l0.1,0.4
+                      l0.1,0.4l0.1,0.4l0,0.4l0,0.4l0,0.4l0,0.4l0,0.4l0,0.4l-0.1,0.4l-0.1,0.4l-0.1,0.4l-0.1,0.3l-0.1,0.4l-0.1,0.3l-0.2,0.3l-0.2,0.3
+                      l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.3,0.3l-0.3,0.3l-0.3,0.2l-0.3,0.2l-0.3,0.2l-0.3,0.2l-0.3,0.2l-0.3,0.2
+                      l-0.3,0.1l-0.4,0.2l-0.4,0.1l-0.3,0.1l-0.4,0.1l-0.4,0.1l-0.4,0.1l-0.4,0l-0.4,0l-0.4,0H125V375h209.7l0.9,0l0.9,0l0.9,0l0.8-0.1
+                      l0.9-0.1l0.8-0.1l0.9-0.1l0.8-0.1l0.8-0.1l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.3l0.8-0.3l0.8-0.3l0.8-0.3l0.8-0.3
+                      l0.8-0.4l0.8-0.4l0.8-0.4l0.8-0.4l0.8-0.4l0.7-0.4l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5
+                      l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.4-0.7
+                      l0.4-0.8l0.4-0.8l0.4-0.8l0.4-0.8l0.4-0.8l0.4-0.8l0.3-0.8l0.3-0.8l0.3-0.8l0.3-0.8l0.2-0.8l0.2-0.8l0.2-0.8l0.2-0.8l0.2-0.8
+                      l0.2-0.8l0.1-0.8l0.1-0.9l0.1-0.9l0.1-0.8l0.1-0.9l0.1-0.9l0.1-0.8l0-0.9l0-0.9l0-0.8L375,333z"></path>
+<path class="st1" d="M375,260.4l-0.1-0.9l-0.1-0.9l-0.1-0.8l-0.1-0.9l-0.1-0.8l-0.1-0.8l-0.1-0.8l-0.2-0.8l-0.2-0.8l-0.2-0.8
+                      l-0.2-0.8l-0.2-0.8l-0.2-0.8l-0.3-0.8l-0.3-0.8l-0.3-0.8l-0.3-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.7
+                      l-0.4-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.2-0.2h0h-89.8l59.7,16.4l0.4,0.1l0.4,0.1l0.4,0.1l0.3,0.2l0.3,0.2l0.3,0.2
+                      l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.1,0.4l0.1,0.3
+                      l0.1,0.4l0.1,0.4l0.1,0.4l0.1,0.4l0,0.4l0,0.4l0,0.4l0,0.4l0,0.4l0,0.4l-0.1,0.4l-0.1,0.4l-0.1,0.4l-0.1,0.4l-0.1,0.3l-0.1,0.4
+                      l-0.2,0.4l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.3,0.3l-0.3,0.3l-0.3,0.2l-0.3,0.2l-0.3,0.2l-0.3,0.2
+                      l-0.3,0.2l-0.3,0.2l-0.3,0.2l-0.4,0.2l-0.4,0.1l-0.3,0.1l-0.4,0.1l-0.4,0.1l-0.4,0.1l-0.4,0l-0.4,0l-0.4,0h-82.5h-111H125v32.2
+                      h122.8h86.9h0.9l0.9,0l0.9-0.1l0.8-0.1l0.9-0.1l0.8-0.1l0.9-0.1l0.8-0.1l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.3
+                      l0.8-0.3l0.8-0.3l0.8-0.3l0.8-0.3l0.8-0.4l0.8-0.4l0.2-0.1l0.6-0.3l0.8-0.4l0.8-0.4l0.7-0.4l0.7-0.4l0.7-0.5l0.7-0.5l0.7-0.5
+                      l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.5-0.7l0.5-0.7l0.5-0.7
+                      l0.5-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.4-0.7l0.4-0.7l0.4-0.8l0.4-0.8l0.4-0.8l0.4-0.8l0.4-0.8l0.3-0.8l0.3-0.8l0.3-0.8l0.3-0.8
+                      l0.2-0.8l0.2-0.8l0.2-0.8l0.2-0.8l0.2-0.8l0.2-0.8l0.1-0.8l0.1-0.9l0.1-0.8l0.1-0.9l0.1-0.8l0.1-0.9l0.1-0.9l0-0.8l0-0.9l0-0.9
+                      L375,260.4z"></path>
+<path class="st1" d="M165.3,197.6l-0.9,0l-0.8,0l-0.9,0l-0.9,0.1l-0.8,0.1l-0.9,0.1l-0.8,0.1l-0.8,0.1l-0.8,0.2l-0.8,0.2l-0.8,0.2
+                      l-0.8,0.2l-0.8,0.2l-0.8,0.2l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.4l-0.8,0.4l-0.2,0.1l-0.6,0.3l-0.8,0.4
+                      l-0.8,0.4l-0.8,0.4l-0.7,0.4l-0.7,0.5l-0.7,0.5L142,205l-0.7,0.5l-0.7,0.5l-0.7,0.5l-0.7,0.5l-0.7,0.6l-0.6,0.6l-0.6,0.6l-0.6,0.6
+                      l-0.6,0.6l-0.6,0.6l-0.6,0.6l-0.6,0.6l-0.5,0.6l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.4,0.7l-0.5,0.7l-0.4,0.7
+                      l-0.4,0.8l-0.4,0.8l-0.4,0.8l-0.4,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.2,0.8l-0.2,0.8l-0.2,0.8
+                      l-0.2,0.8l-0.2,0.8l-0.2,0.8l-0.1,0.9l-0.1,0.9l-0.1,0.8l-0.1,0.9l-0.1,0.9l0,0.9l0,0.9v0.9v0.9l0,0.8l0,0.9l0.1,0.8l0.1,0.8
+                      l0.1,0.9l0.1,0.9l0.1,0.8l0.2,0.9l0.2,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8
+                      l0.4,0.8l0.4,0.8l0.4,0.8l0.4,0.8l0.4,0.7l0.5,0.7l0.4,0.7l0.5,0.7l0.5,0.7l0.5,0.7l0.2,0.2h89.8l-59.7-16.4l-0.4-0.1l-0.3-0.1
+                      l-0.4-0.1l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3
+                      l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.1-0.4l-0.1-0.4l-0.1-0.3l-0.1-0.4l-0.1-0.4l-0.1-0.4l0-0.4l0-0.4l0-0.4l0-0.4l0-0.4
+                      l0-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3
+                      l0.3-0.3l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.4-0.2l0.3-0.1l0.4-0.1l0.4-0.1l0.4-0.1l0.4-0.1l0.4,0l0.4,0
+                      h0.4h82.5h111H375v-32.3H252.2H165.3z"></path>
+<path class="st1" d="M165.3,125l-0.9,0l-0.8,0l-0.9,0.1l-0.9,0.1l-0.8,0.1l-0.9,0.1l-0.8,0.1l-0.8,0.1l-0.8,0.2l-0.8,0.2l-0.8,0.2
+                      l-0.8,0.2l-0.8,0.2l-0.8,0.2l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.4l-0.8,0.4l-0.8,0.4l-0.8,0.4
+                      l-0.8,0.4l-0.7,0.5l-0.7,0.4l-0.7,0.5l-0.7,0.5l-0.7,0.5l-0.7,0.5l-0.7,0.5l-0.7,0.6l-0.7,0.6l-0.6,0.6l-0.6,0.6l-0.6,0.6
+                      l-0.6,0.6l-0.6,0.6l-0.6,0.6l-0.6,0.6l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.4,0.7l-0.5,0.7l-0.4,0.7
+                      l-0.4,0.8l-0.4,0.8l-0.4,0.8l-0.4,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.2,0.8l-0.2,0.8l-0.2,0.8
+                      l-0.2,0.8l-0.2,0.8l-0.2,0.8l-0.1,0.9l-0.1,0.8l-0.1,0.9l-0.1,0.8l-0.1,0.9l0,0.9l0,0.9v0.9v0.9l0,0.9l0,0.8l0.1,0.9l0.1,0.9
+                      l0.1,0.8l0.1,0.8l0.1,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8
+                      l0.4,0.8l0.4,0.8l0.4,0.8l0.4,0.8l0.4,0.7l0.5,0.7l0.4,0.7l0.5,0.7l0.5,0.7l0.5,0.7l0.5,0.7l0.5,0.7l0.5,0.7l0.6,0.6l0.6,0.6
+                      l0.6,0.6l0.6,0.6l0.6,0.6l0.6,0.6l0.6,0.6l0.7,0.6l0.6,0.5h0l1.1-0.7l0.8-0.5l0.8-0.5l0.8-0.4l0.8-0.4l0.9-0.4l0.9-0.4l0.9-0.4
+                      l0.9-0.3l0.9-0.3l0.9-0.3l0.9-0.3l0.9-0.3l0.9-0.3l0.9-0.2l0.9-0.2l0.9-0.2l0.9-0.2l0.9-0.2l0.9-0.1l0.9-0.1l0.9-0.1l0.9-0.1
+                      l0.9-0.1l0.9-0.1l0.9,0l0.9,0l0.9,0h57.5l-59.7-16.4l-0.4-0.1l-0.3-0.1l-0.4-0.1l-0.3-0.1l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2
+                      l-0.3-0.2l-0.3-0.2l-0.3-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.1-0.3l-0.1-0.4
+                      l-0.1-0.3l-0.1-0.4l-0.1-0.4l-0.1-0.4l0-0.4l0-0.4l0-0.4l0-0.4l0-0.4l0-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.3
+                      l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2
+                      l0.3-0.2l0.4-0.1l0.3-0.1l0.4-0.1l0.4-0.1l0.4-0.1l0.4-0.1l0.4,0l0.4,0l0.4,0H375V125H165.3z"></path>
+</g>
+</g>
+</svg>
+        Seqera
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="https://github.com/nextflow-io/training" rel="noopener" target="_blank">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z"></path>
+</svg>
+        Training on GitHub
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../cache_and_resume/">
+<span class="md-ellipsis">
+    Cache and resume
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../debugging/">
+<span class="md-ellipsis">
+    Troubleshooting
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_8" type="checkbox"/>
+<label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+<span class="md-ellipsis">
+    Advanced Training
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_8_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_8">
+<span class="md-nav__icon md-icon"></span>
+            Advanced Training
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../advanced/">
+<span class="md-ellipsis">
+    Advanced Training
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../advanced/orientation/">
+<span class="md-ellipsis">
+    Orientation
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../advanced/operators/">
+<span class="md-ellipsis">
+    Operator Tour
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../advanced/metadata/">
+<span class="md-ellipsis">
+    Metadata Propagation
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../advanced/grouping/">
+<span class="md-ellipsis">
+    Grouping and Splitting
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../advanced/groovy/">
+<span class="md-ellipsis">
+    Groovy Imports
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../advanced/structure/">
+<span class="md-ellipsis">
+    Workflow Structure
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../advanced/configuration/">
+<span class="md-ellipsis">
+    Configuration
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../advanced/summary/">
+<span class="md-ellipsis">
+    Summary
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../advanced/support/">
+<span class="md-ellipsis">
+    Support
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="On this page" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+    On this page
+  </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#cli">
+<span class="md-ellipsis">
+      CLI
+    </span>
+</a>
+</li> <li class="md-nav__item">
+<a class="md-nav__link" href="#online-gui">
+<span class="md-ellipsis">
+      Online GUI
+    </span>
+</a>
+<nav aria-label="Online GUI" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#configuring-your-compute-environment">
+<span class="md-ellipsis">
+      Configuring your compute environment
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#selecting-a-default-compute-environment">
+<span class="md-ellipsis">
+      Selecting a default compute environment
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#launchpad">
+<span class="md-ellipsis">
+      Launchpad
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#pipeline-parameters-form">
+<span class="md-ellipsis">
+      Pipeline Parameters Form
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#adding-a-new-pipeline">
+<span class="md-ellipsis">
+      Adding a new pipeline
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li> <li class="md-nav__item">
+<a class="md-nav__link" href="#api">
+<span class="md-ellipsis">
+      API
+    </span>
+</a>
+</li> <li class="md-nav__item">
+<a class="md-nav__link" href="#workspaces-and-organizations">
+<span class="md-ellipsis">
+      Workspaces and Organizations
+    </span>
+</a>
+<nav aria-label="Workspaces and Organizations" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#organization-resources">
+<span class="md-ellipsis">
+      Organization resources
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#organization-users">
+<span class="md-ellipsis">
+      Organization users
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#setting-up-a-new-organization">
+<span class="md-ellipsis">
+      Setting up a new organization
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+<nav aria-label="Resources" class="md-nav md-nav--secondary sidebar_resources">
+<label class="md-nav__title">Resources</label>
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="https://nextflow.io/docs/latest/index.html" rel="noopener" target="_blank">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M17.5 14.33c.79 0 1.63.08 2.5.24v1.5c-.62-.16-1.46-.24-2.5-.24-1.9 0-3.39.33-4.5.99v-1.69c1.17-.53 2.67-.8 4.5-.8M13 12.46c1.29-.53 2.79-.79 4.5-.79.79 0 1.63.07 2.5.23v1.5c-.62-.16-1.46-.24-2.5-.24-1.9 0-3.39.34-4.5.99m4.5-3.65c-1.9 0-3.39.32-4.5 1V9.84c1.23-.56 2.73-.84 4.5-.84.79 0 1.63.08 2.5.23v1.55c-.74-.19-1.59-.28-2.5-.28m3.5 8V7c-1.04-.33-2.21-.5-3.5-.5-2.05 0-3.88.5-5.5 1.5v11.5c1.62-1 3.45-1.5 5.5-1.5 1.19 0 2.36.16 3.5.5m-3.5-14c2.35 0 4.19.5 5.5 1.5v14.56c0 .12-.05.24-.16.35-.11.09-.23.17-.34.17-.11 0-.19-.02-.25-.05-1.28-.69-2.87-1.03-4.75-1.03-2.05 0-3.88.5-5.5 1.5-1.34-1-3.17-1.5-5.5-1.5-1.66 0-3.25.36-4.75 1.07-.03.01-.07.01-.12.03-.04.01-.08.02-.13.02-.11 0-.23-.04-.34-.12a.475.475 0 0 1-.16-.35V6c1.34-1 3.18-1.5 5.5-1.5 2.33 0 4.16.5 5.5 1.5 1.34-1 3.17-1.5 5.5-1.5Z"></path>
+</svg>
+        Nextflow Docs
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="https://www.nextflow.io/slack-invite.html" rel="noopener" target="_blank">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M6 15a2 2 0 0 1-2 2 2 2 0 0 1-2-2 2 2 0 0 1 2-2h2v2m1 0a2 2 0 0 1 2-2 2 2 0 0 1 2 2v5a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-5m2-8a2 2 0 0 1-2-2 2 2 0 0 1 2-2 2 2 0 0 1 2 2v2H9m0 1a2 2 0 0 1 2 2 2 2 0 0 1-2 2H4a2 2 0 0 1-2-2 2 2 0 0 1 2-2h5m8 2a2 2 0 0 1 2-2 2 2 0 0 1 2 2 2 2 0 0 1-2 2h-2v-2m-1 0a2 2 0 0 1-2 2 2 2 0 0 1-2-2V5a2 2 0 0 1 2-2 2 2 0 0 1 2 2v5m-2 8a2 2 0 0 1 2 2 2 2 0 0 1-2 2 2 2 0 0 1-2-2v-2h2m0-1a2 2 0 0 1-2-2 2 2 0 0 1 2-2h5a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-5Z"></path>
+</svg>
+        Nextflow Slack
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="https://nextflow.io/" rel="noopener" target="_blank">
+<svg id="Layer_1" version="1.1" viewbox="80 50 350 350" xmlns="http://www.w3.org/2000/svg">
+<style type="text/css">
+            .st0 {
+              fill: "gray";
+            }
+          </style>
+<path class="st0" d="M124.5,171.5c39.4,2.6,71.1,34.3,73.5,73.8h46.1c-2.6-65-54.7-117.2-119.6-119.9V171.5z"></path>
+<path class="st0" d="M198.3,255.8c-2.6,39.5-34.3,71.1-73.8,73.5v46.1c65-2.6,117.2-54.7,119.9-119.6H198.3z"></path>
+<path class="st0" d="M300.7,245c2.6-39.5,34.3-71.1,73.8-73.5v-46.1c-65,2.6-117.2,54.7-119.9,119.6H300.7z"></path>
+<path class="st0" d="M374.5,329.3c-39.4-2.6-71.1-34.3-73.5-73.8h-46.1c2.6,65,54.7,117.2,119.6,119.9V329.3z"></path>
+</svg>
+        Nextflow Homepage
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="https://seqera.io/" rel="noopener" target="_blank">
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 28.3.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg id="Layer_1" style="enable-background: new 0 0 500 500" version="1.1" viewbox="80 50 350 350" x="0px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" y="0px">
+<style type="text/css">
+            .st0 {
+              clip-path: url(#SVGID_00000006699037935518914080000000086571810102047141_);
+            }
+            .st1 {
+              fill: "gray";
+            }
+          </style>
+<g>
+<defs>
+<rect height="250" id="SVGID_1_" width="250" x="125" y="125"></rect>
+</defs>
+<clippath id="SVGID_00000183214694142566821210000012389151436317298101_">
+<use style="overflow: visible" xlink:href="#SVGID_1_"></use>
+</clippath>
+<g style="
+                clip-path: url(#SVGID_00000183214694142566821210000012389151436317298101_);
+              ">
+<path class="st1" d="M375,333l-0.1-0.9l-0.1-0.8l-0.1-0.9l-0.1-0.9l-0.1-0.8l-0.1-0.9l-0.1-0.8l-0.2-0.9l-0.2-0.8l-0.2-0.8
+                      l-0.2-0.8l-0.2-0.8l-0.2-0.8l-0.3-0.8l-0.3-0.8l-0.3-0.8l-0.3-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8
+                      l-0.4-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7L365,308l-0.6-0.6l-0.6-0.6l-0.6-0.6l-0.6-0.6L362,305
+                      l-0.6-0.6l-0.7-0.6l-0.6-0.5l-1.2,0.7l-0.8,0.5l-0.8,0.4l-0.8,0.4l-0.8,0.4l-0.8,0.4l-0.9,0.4l-0.9,0.4l-0.9,0.3l-0.9,0.3
+                      l-0.9,0.3l-0.9,0.3l-0.9,0.3l-0.9,0.3l-0.9,0.2l-0.9,0.2l-0.9,0.2l-0.9,0.2l-0.9,0.2l-0.9,0.1l-0.9,0.1l-0.9,0.1l-0.9,0.1
+                      l-0.9,0.1l-0.9,0.1l-0.9,0.1l-0.9,0l-0.9,0h-57.5l59.7,16.4l0.4,0.1l0.4,0.1l0.4,0.1l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.2
+                      l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.1,0.3l0.1,0.3l0.1,0.4l0.1,0.4
+                      l0.1,0.4l0.1,0.4l0,0.4l0,0.4l0,0.4l0,0.4l0,0.4l0,0.4l-0.1,0.4l-0.1,0.4l-0.1,0.4l-0.1,0.3l-0.1,0.4l-0.1,0.3l-0.2,0.3l-0.2,0.3
+                      l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.3,0.3l-0.3,0.3l-0.3,0.2l-0.3,0.2l-0.3,0.2l-0.3,0.2l-0.3,0.2l-0.3,0.2
+                      l-0.3,0.1l-0.4,0.2l-0.4,0.1l-0.3,0.1l-0.4,0.1l-0.4,0.1l-0.4,0.1l-0.4,0l-0.4,0l-0.4,0H125V375h209.7l0.9,0l0.9,0l0.9,0l0.8-0.1
+                      l0.9-0.1l0.8-0.1l0.9-0.1l0.8-0.1l0.8-0.1l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.3l0.8-0.3l0.8-0.3l0.8-0.3l0.8-0.3
+                      l0.8-0.4l0.8-0.4l0.8-0.4l0.8-0.4l0.8-0.4l0.7-0.4l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5
+                      l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.4-0.7
+                      l0.4-0.8l0.4-0.8l0.4-0.8l0.4-0.8l0.4-0.8l0.4-0.8l0.3-0.8l0.3-0.8l0.3-0.8l0.3-0.8l0.2-0.8l0.2-0.8l0.2-0.8l0.2-0.8l0.2-0.8
+                      l0.2-0.8l0.1-0.8l0.1-0.9l0.1-0.9l0.1-0.8l0.1-0.9l0.1-0.9l0.1-0.8l0-0.9l0-0.9l0-0.8L375,333z"></path>
+<path class="st1" d="M375,260.4l-0.1-0.9l-0.1-0.9l-0.1-0.8l-0.1-0.9l-0.1-0.8l-0.1-0.8l-0.1-0.8l-0.2-0.8l-0.2-0.8l-0.2-0.8
+                      l-0.2-0.8l-0.2-0.8l-0.2-0.8l-0.3-0.8l-0.3-0.8l-0.3-0.8l-0.3-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.7
+                      l-0.4-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.2-0.2h0h-89.8l59.7,16.4l0.4,0.1l0.4,0.1l0.4,0.1l0.3,0.2l0.3,0.2l0.3,0.2
+                      l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.1,0.4l0.1,0.3
+                      l0.1,0.4l0.1,0.4l0.1,0.4l0.1,0.4l0,0.4l0,0.4l0,0.4l0,0.4l0,0.4l0,0.4l-0.1,0.4l-0.1,0.4l-0.1,0.4l-0.1,0.4l-0.1,0.3l-0.1,0.4
+                      l-0.2,0.4l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.3,0.3l-0.3,0.3l-0.3,0.2l-0.3,0.2l-0.3,0.2l-0.3,0.2
+                      l-0.3,0.2l-0.3,0.2l-0.3,0.2l-0.4,0.2l-0.4,0.1l-0.3,0.1l-0.4,0.1l-0.4,0.1l-0.4,0.1l-0.4,0l-0.4,0l-0.4,0h-82.5h-111H125v32.2
+                      h122.8h86.9h0.9l0.9,0l0.9-0.1l0.8-0.1l0.9-0.1l0.8-0.1l0.9-0.1l0.8-0.1l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.3
+                      l0.8-0.3l0.8-0.3l0.8-0.3l0.8-0.3l0.8-0.4l0.8-0.4l0.2-0.1l0.6-0.3l0.8-0.4l0.8-0.4l0.7-0.4l0.7-0.4l0.7-0.5l0.7-0.5l0.7-0.5
+                      l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.5-0.7l0.5-0.7l0.5-0.7
+                      l0.5-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.4-0.7l0.4-0.7l0.4-0.8l0.4-0.8l0.4-0.8l0.4-0.8l0.4-0.8l0.3-0.8l0.3-0.8l0.3-0.8l0.3-0.8
+                      l0.2-0.8l0.2-0.8l0.2-0.8l0.2-0.8l0.2-0.8l0.2-0.8l0.1-0.8l0.1-0.9l0.1-0.8l0.1-0.9l0.1-0.8l0.1-0.9l0.1-0.9l0-0.8l0-0.9l0-0.9
+                      L375,260.4z"></path>
+<path class="st1" d="M165.3,197.6l-0.9,0l-0.8,0l-0.9,0l-0.9,0.1l-0.8,0.1l-0.9,0.1l-0.8,0.1l-0.8,0.1l-0.8,0.2l-0.8,0.2l-0.8,0.2
+                      l-0.8,0.2l-0.8,0.2l-0.8,0.2l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.4l-0.8,0.4l-0.2,0.1l-0.6,0.3l-0.8,0.4
+                      l-0.8,0.4l-0.8,0.4l-0.7,0.4l-0.7,0.5l-0.7,0.5L142,205l-0.7,0.5l-0.7,0.5l-0.7,0.5l-0.7,0.5l-0.7,0.6l-0.6,0.6l-0.6,0.6l-0.6,0.6
+                      l-0.6,0.6l-0.6,0.6l-0.6,0.6l-0.6,0.6l-0.5,0.6l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.4,0.7l-0.5,0.7l-0.4,0.7
+                      l-0.4,0.8l-0.4,0.8l-0.4,0.8l-0.4,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.2,0.8l-0.2,0.8l-0.2,0.8
+                      l-0.2,0.8l-0.2,0.8l-0.2,0.8l-0.1,0.9l-0.1,0.9l-0.1,0.8l-0.1,0.9l-0.1,0.9l0,0.9l0,0.9v0.9v0.9l0,0.8l0,0.9l0.1,0.8l0.1,0.8
+                      l0.1,0.9l0.1,0.9l0.1,0.8l0.2,0.9l0.2,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8
+                      l0.4,0.8l0.4,0.8l0.4,0.8l0.4,0.8l0.4,0.7l0.5,0.7l0.4,0.7l0.5,0.7l0.5,0.7l0.5,0.7l0.2,0.2h89.8l-59.7-16.4l-0.4-0.1l-0.3-0.1
+                      l-0.4-0.1l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3
+                      l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.1-0.4l-0.1-0.4l-0.1-0.3l-0.1-0.4l-0.1-0.4l-0.1-0.4l0-0.4l0-0.4l0-0.4l0-0.4l0-0.4
+                      l0-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3
+                      l0.3-0.3l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.4-0.2l0.3-0.1l0.4-0.1l0.4-0.1l0.4-0.1l0.4-0.1l0.4,0l0.4,0
+                      h0.4h82.5h111H375v-32.3H252.2H165.3z"></path>
+<path class="st1" d="M165.3,125l-0.9,0l-0.8,0l-0.9,0.1l-0.9,0.1l-0.8,0.1l-0.9,0.1l-0.8,0.1l-0.8,0.1l-0.8,0.2l-0.8,0.2l-0.8,0.2
+                      l-0.8,0.2l-0.8,0.2l-0.8,0.2l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.4l-0.8,0.4l-0.8,0.4l-0.8,0.4
+                      l-0.8,0.4l-0.7,0.5l-0.7,0.4l-0.7,0.5l-0.7,0.5l-0.7,0.5l-0.7,0.5l-0.7,0.5l-0.7,0.6l-0.7,0.6l-0.6,0.6l-0.6,0.6l-0.6,0.6
+                      l-0.6,0.6l-0.6,0.6l-0.6,0.6l-0.6,0.6l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.4,0.7l-0.5,0.7l-0.4,0.7
+                      l-0.4,0.8l-0.4,0.8l-0.4,0.8l-0.4,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.2,0.8l-0.2,0.8l-0.2,0.8
+                      l-0.2,0.8l-0.2,0.8l-0.2,0.8l-0.1,0.9l-0.1,0.8l-0.1,0.9l-0.1,0.8l-0.1,0.9l0,0.9l0,0.9v0.9v0.9l0,0.9l0,0.8l0.1,0.9l0.1,0.9
+                      l0.1,0.8l0.1,0.8l0.1,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8
+                      l0.4,0.8l0.4,0.8l0.4,0.8l0.4,0.8l0.4,0.7l0.5,0.7l0.4,0.7l0.5,0.7l0.5,0.7l0.5,0.7l0.5,0.7l0.5,0.7l0.5,0.7l0.6,0.6l0.6,0.6
+                      l0.6,0.6l0.6,0.6l0.6,0.6l0.6,0.6l0.6,0.6l0.7,0.6l0.6,0.5h0l1.1-0.7l0.8-0.5l0.8-0.5l0.8-0.4l0.8-0.4l0.9-0.4l0.9-0.4l0.9-0.4
+                      l0.9-0.3l0.9-0.3l0.9-0.3l0.9-0.3l0.9-0.3l0.9-0.3l0.9-0.2l0.9-0.2l0.9-0.2l0.9-0.2l0.9-0.2l0.9-0.1l0.9-0.1l0.9-0.1l0.9-0.1
+                      l0.9-0.1l0.9-0.1l0.9,0l0.9,0l0.9,0h57.5l-59.7-16.4l-0.4-0.1l-0.3-0.1l-0.4-0.1l-0.3-0.1l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2
+                      l-0.3-0.2l-0.3-0.2l-0.3-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.1-0.3l-0.1-0.4
+                      l-0.1-0.3l-0.1-0.4l-0.1-0.4l-0.1-0.4l0-0.4l0-0.4l0-0.4l0-0.4l0-0.4l0-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.3
+                      l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2
+                      l0.3-0.2l0.4-0.1l0.3-0.1l0.4-0.1l0.4-0.1l0.4-0.1l0.4-0.1l0.4,0l0.4,0l0.4,0H375V125H165.3z"></path>
+</g>
+</g>
+</svg>
+        Seqera
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="https://github.com/nextflow-io/training" rel="noopener" target="_blank">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z"></path>
+</svg>
+        Training on GitHub
+      </a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<a class="md-content__button md-icon" href="https://github.com/nextflow-io/training/edit/master/docs/basic_training/seqera_platform.md" title="Modifica">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"></path></svg>
+</a>
+<h1 id="get-started-with-seqera-platform"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.</span> Get started with Seqera Platform<a class="headerlink" href="#get-started-with-seqera-platform" title="Permanent link">¶</a></h1>
+<p>Seqera Platform, previously known as Nextflow Tower, is the centralized command post for data management and workflows. It brings monitoring, logging and observability to distributed workflows and simplifies the deployment of workflows on any cloud, cluster or laptop. In Seqera Platform terminology, a workflow is what we've been working on so far, and pipelines are pre-configured workflows that can be used by all users in a workspace. It is composed of a workflow repository, launch parameters, and a compute environment. We'll stick to these definitions in this section.</p>
+<p>Seqera core features include:</p>
+<ul>
+<li>The launching of pre-configured pipelines with ease.</li>
+<li>Programmatic integration to meet the needs of an organization.</li>
+<li>Publishing pipelines to shared workspaces.</li>
+<li>Management of the infrastructure required to run data analysis at scale.</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><a href="https://cloud.seqera.io/">Sign up</a> to try Seqera for free or request a <a href="https://seqera.io/demo/">demo</a> for deployments in your own on-premise or cloud environment.</p>
+</div>
+<p>You can use Seqera Platform via either the <strong>CLI</strong>, through the <strong>online GUI</strong> or through the <strong>API</strong>.</p>
+<h2 id="cli"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.1</span> CLI<a class="headerlink" href="#cli" title="Permanent link">¶</a></h2>
+<p>You will need to set up your environment to use Seqera Platform. This is a one-time setup.</p>
+<p>Create an account and login into Seqera Platform.</p>
+<p><strong>1. Create a new token</strong></p>
+<p>You can access your tokens from the <strong>Settings</strong> drop-down menu:</p>
+<p><img alt="Create a token" src="../../../basic_training/img/usage_create_token.png"/></p>
+<p><strong>2. Name your token</strong></p>
+<p><img alt="Name your token" src="../../../basic_training/img/usage_name_token.png"/></p>
+<p><strong>3. Save your token safely</strong></p>
+<p>Copy and keep your new token in a safe place.</p>
+<p><img alt="Save token" src="../../../basic_training/img/usage_token.png"/></p>
+<p><strong>4. Export your token</strong></p>
+<p>Once your token has been created, open a terminal and type:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">TOWER_ACCESS_TOKEN</span><span class="o">=</span><span class="nv">eyxxxxxxxxxxxxxxxQ1ZTE</span><span class="o">=</span>
+</code></pre></div>
+<p>Where <code>eyxxxxxxxxxxxxxxxQ1ZTE=</code> is the token you have just created.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Check your <code>nextflow -version</code>. Bearer tokens require Nextflow version 20.10.0 or later and can be set with the second command shown above. You can change the version if necessary.</p>
+</div>
+<p>To submit a pipeline to a <a href="https://docs.seqera.io/platform/24.1/getting-started/workspace-setup">Workspace</a> using the Nextflow command-line tool, add the workspace ID to your environment. For example:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">TOWER_WORKSPACE_ID</span><span class="o">=</span><span class="m">000000000000000</span>
+</code></pre></div>
+<p>The workspace ID can be found on the organization’s Workspaces overview page.</p>
+<p><strong>5. Run Nextflow with Seqera Platform</strong></p>
+<p>Run your Nextflow workflows as usual with the addition of the <code>-with-tower</code> command:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello.nf<span class="w"> </span>-with-tower
+</code></pre></div>
+<p>You will see and be able to monitor your <strong>Nextflow jobs</strong> in Seqera Platform.</p>
+<p>To configure and execute Nextflow jobs in <strong>Cloud environments</strong>, visit the <a href="https://docs.seqera.io/platform/24.1/compute-envs/overview">Compute environments section</a>.</p>
+<div class="admonition exercise">
+<p class="admonition-title">Exercise</p>
+<p>Run the RNA-Seq <code>script7.nf</code> using the <code>-with-tower</code> flag, after correctly completing the token settings outlined above.</p>
+<details class="tip">
+<summary>Tip</summary>
+<p>Go to <a href="https://cloud.seqera.io/">https://cloud.seqera.io/</a>, login, then click the run tab, and select the run that you just submitted. If you can’t find it, double check your token was entered correctly.</p>
+</details>
+</div>
+<div class="admonition cboard-list-2">
+<p class="admonition-title">Summary</p>
+<p>In this step you have learned:</p>
+<ol>
+<li>How to create and add your token and workspace.</li>
+<li>How to launch a pipeline with Seqera Platform.</li>
+</ol>
+</div>
+<h2 id="online-gui"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.2</span> Online GUI<a class="headerlink" href="#online-gui" title="Permanent link">¶</a></h2>
+<p>To run using the GUI, there are three main steps:</p>
+<ol>
+<li>Create an account and login into Seqera Platform, available free of charge, at <a href="https://cloud.seqera.io">cloud.seqera.io</a>.</li>
+<li>Create and configure a new <a href="https://docs.seqera.io/platform/24.1/compute-envs/overview">compute environment</a>.</li>
+<li>Start <a href="https://docs.seqera.io/platform/24.1/launch/launchpad#launchpad">launching pipelines</a>.</li>
+</ol>
+<h3 id="configuring-your-compute-environment"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.2.1</span> Configuring your compute environment<a class="headerlink" href="#configuring-your-compute-environment" title="Permanent link">¶</a></h3>
+<p>Seqera Platform uses the concept of <strong>Compute Environments</strong> to define the execution platform where a workflow will run.</p>
+<p>It supports the launching of workflows into a growing number of <strong>cloud</strong> and <strong>on-premise</strong> infrastructures.</p>
+<p><img alt="Compute environments" src="../../../basic_training/img/compute_env_platforms.png"/></p>
+<p>Each compute environment must be pre-configured to enable Seqera Platform to submit tasks. You can read more on how to set up each environment using the links below.</p>
+<div class="admonition tip">
+<p class="admonition-title">The following guides describe how to configure each of these compute environments.</p>
+<ul>
+<li><a href="https://docs.seqera.io/platform/24.1/compute-envs/aws-batch">AWS Batch</a></li>
+<li><a href="https://docs.seqera.io/platform/24.1/compute-envs/azure-batch">Azure Batch</a></li>
+<li><a href="https://docs.seqera.io/platform/24.1/compute-envs/google-cloud-batch">Google Batch</a></li>
+<li><a href="https://docs.seqera.io/platform/24.1/compute-envs/google-cloud-lifesciences">Google Life Sciences</a></li>
+<li><a href="https://docs.seqera.io/platform/24.1/compute-envs/hpc">HPC (LSF, Slurm, Grid Engine, Altair PBS Pro)</a></li>
+<li><a href="https://docs.seqera.io/platform/24.1/compute-envs/eks">Amazon Kubernetes (EKS)</a></li>
+<li><a href="https://docs.seqera.io/platform/24.1/compute-envs/gke">Google Kubernetes (GKE)</a></li>
+<li><a href="https://docs.seqera.io/platform/24.1/compute-envs/k8s">Hosted Kubernetes</a></li>
+</ul>
+</div>
+<h3 id="selecting-a-default-compute-environment"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.2.2</span> Selecting a default compute environment<a class="headerlink" href="#selecting-a-default-compute-environment" title="Permanent link">¶</a></h3>
+<p>If you have more than one <strong>Compute Environment</strong>, you can select which one will be used by default when launching a pipeline.</p>
+<ol>
+<li>Navigate to your <a href="https://docs.seqera.io/platform/24.1/compute-envs/overview">compute environments</a>.</li>
+<li>Choose your default environment by selecting the <strong>Make primary</strong> button.</li>
+</ol>
+<p><strong>Congratulations!</strong></p>
+<p>You are now ready to launch workflows with your primary compute environment.</p>
+<h3 id="launchpad"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.2.3</span> Launchpad<a class="headerlink" href="#launchpad" title="Permanent link">¶</a></h3>
+<p>Launchpad makes it easy for any workspace user to launch a pre-configured pipeline.</p>
+<p><img alt="Launchpad" src="../../../basic_training/img/overview_launch.png"/></p>
+<p>A pipeline is a repository containing a Nextflow workflow, a compute environment and workflow parameters.</p>
+<h3 id="pipeline-parameters-form"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.2.4</span> Pipeline Parameters Form<a class="headerlink" href="#pipeline-parameters-form" title="Permanent link">¶</a></h3>
+<p>Launchpad automatically detects the presence of a <code>nextflow_schema.json</code> in the root of the repository and dynamically creates a form where users can easily update the parameters.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>The parameter forms view will appear if the pipeline has a Nextflow schema file for the parameters. Please refer to the <a href="https://docs.seqera.io/platform/24.1/pipeline-schema/overview">Nextflow Schema guide</a> to learn more about the schema file use-cases and how to create them.</p>
+</div>
+<p>This makes it trivial for users without any expertise in Nextflow to enter their workflow parameters and launch.</p>
+<p><img alt="Pipeline parameters" src="../../../basic_training/img/launch_rnaseq_nextflow_schema.png"/></p>
+<h3 id="adding-a-new-pipeline"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.2.5</span> Adding a new pipeline<a class="headerlink" href="#adding-a-new-pipeline" title="Permanent link">¶</a></h3>
+<p>Adding a pipeline to the pre-saved workspace launchpad is detailed in full on the <a href="https://docs.seqera.io/platform/24.1/launch/launchpad#add-new-pipeline">Seqera webpage docs</a>.</p>
+<p>In brief, these are the steps you need to follow to set up a pipeline.</p>
+<ol>
+<li>Select the Launchpad button in the navigation bar. This will open the <strong>Launch Form</strong>.</li>
+<li>Select a <a href="https://docs.seqera.io/platform/24.1/compute-envs/overview">compute environment</a>.</li>
+<li>Enter the repository of the workflow you want to launch. e.g. <a href="https://github.com/nf-core/rnaseq.git">https://github.com/nf-core/rnaseq.git</a></li>
+<li>Select a workflow <strong>Revision number</strong>. The Git default branch (main/master) or <code>manifest.defaultBranch</code> in the Nextflow configuration will be used by default.</li>
+<li>Set the <strong>Work directory</strong> location of the Nextflow work directory. The location associated with the compute environment will be selected by default.</li>
+<li>Enter the name(s) of each of the Nextflow <strong>Config profiles</strong> followed by the <code>Enter</code> key. See the Nextflow <a href="https://www.nextflow.io/docs/latest/config.html#config-profiles">Config profiles</a> documentation for more details.</li>
+<li>Enter any workflow parameters in YAML or JSON format. YAML example:</li>
+</ol>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="nt">reads</span><span class="p">:</span><span class="w"> </span><span class="s">"s3://nf-bucket/exome-data/ERR013140_{1,2}.fastq.bz2"</span>
+<a href="#__codelineno-3-2" id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="nt">paired_end</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</code></pre></div>
+<ol>
+<li>Select Launch to begin the pipeline execution.</li>
+</ol>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Nextflow workflows are simply Git repositories and can be changed to any public or private Git-hosting platform. See <a href="https://docs.seqera.io/platform/24.1/git/overview">Git Integration</a> in the Seqera Platform docs and <a href="https://www.nextflow.io/docs/latest/sharing.html">Pipeline Sharing</a> in the Nextflow docs for more details.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The credentials associated with the compute environment must be able to access the work directory.</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>In the configuration, the full path to a bucket must be specified with single quotes around strings and no quotes around booleans or numbers.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>To create your own customized Nextflow Schema for your workflow, see the examples from the <code>nf-core</code> workflows that have adopted this approach. For example, <a href="https://github.com/nf-core/eager/blob/2.3.3/nextflow_schema.json">eager</a> and <a href="https://github.com/nf-core/rnaseq/blob/3.0/nextflow_schema.json">rnaseq</a>.</p>
+</div>
+<p>For advanced settings options check out this <a href="https://docs.seqera.io/platform/24.1/launch/launchpad#advanced-settings">page</a>.</p>
+<p>There is also community support available if you get into trouble, join the Nextflow Slack by following this <a href="https://www.nextflow.io/slack-invite.html">link</a>.</p>
+<div class="admonition cboard-list-2">
+<p class="admonition-title">Summary</p>
+<p>In this step you have learned:</p>
+<ol>
+<li>How to create an account and login into Seqera Platform</li>
+<li>How to configure your compute environment.</li>
+<li>How to add, customize, and launch a pipeline with Seqera Platform.</li>
+</ol>
+</div>
+<h2 id="api"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.3</span> API<a class="headerlink" href="#api" title="Permanent link">¶</a></h2>
+<p>To learn more about using the Seqera Platform API, visit the <a href="https://docs.seqera.io/platform/24.1/api/overview">API section</a> in the documentation.</p>
+<h2 id="workspaces-and-organizations"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.4</span> Workspaces and Organizations<a class="headerlink" href="#workspaces-and-organizations" title="Permanent link">¶</a></h2>
+<p>Seqera Platform simplifies the development and execution of pipeline by providing a centralized interface for users and organizations.</p>
+<p>Each user has a unique <strong>workspace</strong> where they can interact and manage all resources such as workflows, compute environments and credentials. Details of this can be found <a href="https://docs.seqera.io/platform/24.1/getting-started/workspace-setup">here</a>.</p>
+<p>Organisations can have multiple workspaces with customized access for specific organisation <strong>members</strong> and <strong>collaborators</strong>.</p>
+<h3 id="organization-resources"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.4.1</span> Organization resources<a class="headerlink" href="#organization-resources" title="Permanent link">¶</a></h3>
+<p>You can create your own organization and participant workspace by following the docs at <a href="https://docs.seqera.io/platform/24.1/orgs-and-teams/workspace-management">Seqera</a>.</p>
+<p>Seqera Platform allows the creation of multiple organizations, each of which can contain multiple workspaces with shared users and resources. This allows any organization to customize and organize the usage of resources while maintaining an access control layer for users associated with a workspace.</p>
+<h3 id="organization-users"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.4.2</span> Organization users<a class="headerlink" href="#organization-users" title="Permanent link">¶</a></h3>
+<p>Any user can be added or removed from a particular organization or a workspace and can be allocated a specific access role within that workspace.</p>
+<p>The Teams feature provides a way for organizations to group various users and participants together into teams. For example, <code>workflow-developers</code> or <code>analysts</code>, and apply access control to all the users within this team collectively.</p>
+<p>For further information, please refer to the <a href="https://docs.seqera.io/platform/24.1/orgs-and-teams/organizations">User Management</a> section.</p>
+<h3 id="setting-up-a-new-organization"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.4.3</span> Setting up a new organization<a class="headerlink" href="#setting-up-a-new-organization" title="Permanent link">¶</a></h3>
+<p>Organizations are the top-level structure and contain Workspaces, Members, Teams and Collaborators.</p>
+<p>To create a new Organization:</p>
+<ol>
+<li>Click on the dropdown next to your name and select New organization to open the creation dialog.</li>
+<li>
+<p>On the dialog, fill in the fields as per your organization. The Name and Full name fields are compulsory.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A valid name for the organization must follow a specific pattern. Please refer to the UI for further instructions.</p>
+</div>
+</li>
+<li>
+<p>The rest of the fields such as Description, Location, Website URL and Logo Url are optional.</p>
+</li>
+<li>
+<p>Once the details are filled in, you can access the newly created organization using the organization’s page, which lists all of your organizations.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It is possible to change the values of the optional fields either using the Edit option on the organization’s page or by using the Settings tab within the organization page, provided that you are the Owner of the organization.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>A list of all the included Members, Teams and Collaborators can be found on the organization page.</p>
+</div>
+</li>
+</ol>
+<div class="admonition cboard-list-2">
+<p class="admonition-title">Summary</p>
+<p>In this step you have learned:</p>
+<ol>
+<li>How to create a new organization</li>
+<li>How to access the newly created organization</li>
+<li>How to change organization settings</li>
+</ol>
+</div>
+</article>
+</div>
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+</div>
+<button class="md-top md-icon" data-md-component="top" hidden="" type="button">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"></path></svg>
+  Torna su
+</button>
+</main>
+<footer class="md-footer">
+<nav aria-label="Piede" class="md-footer__inner md-grid">
+<a aria-label="Precedente: Deployment scenarios" class="md-footer__link md-footer__link--prev" href="../executors/">
+<div class="md-footer__button md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+</div>
+<div class="md-footer__title">
+<span class="md-footer__direction">
+                Precedente
+              </span>
+<div class="md-ellipsis">
+                Deployment scenarios
+              </div>
+</div>
+</a>
+<a aria-label="Successivo: Cache and resume" class="md-footer__link md-footer__link--next" href="../cache_and_resume/">
+<div class="md-footer__title">
+<span class="md-footer__direction">
+                Successivo
+              </span>
+<div class="md-ellipsis">
+                Cache and resume
+              </div>
+</div>
+<div class="md-footer__button md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"></path></svg>
+</div>
+</a>
+</nav>
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-copyright">
+<div>
+    Copyright © 2020-2023,
+    <a href="https://seqera.io" rel="noopener" target="_blank">Seqera</a>.
+  </div>
+<div class="footer_cc_link">
+<svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg">
+<!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.-->
+<path d="m245.83 214.87-33.22 17.28c-9.43-19.58-25.24-19.93-27.46-19.93-22.13 0-33.22 14.61-33.22 43.84 0 23.57 9.21 43.84 33.22 43.84 14.47 0 24.65-7.09 30.57-21.26l30.55 15.5c-6.17 11.51-25.69 38.98-65.1 38.98-22.6 0-73.96-10.32-73.96-77.05 0-58.69 43-77.06 72.63-77.06 30.72-.01 52.7 11.95 65.99 35.86zm143.05 0-32.78 17.28c-9.5-19.77-25.72-19.93-27.9-19.93-22.14 0-33.22 14.61-33.22 43.84 0 23.55 9.23 43.84 33.22 43.84 14.45 0 24.65-7.09 30.54-21.26l31 15.5c-2.1 3.75-21.39 38.98-65.09 38.98-22.69 0-73.96-9.87-73.96-77.05 0-58.67 42.97-77.06 72.63-77.06 30.71-.01 52.58 11.95 65.56 35.86zM247.56 8.05C104.74 8.05 0 123.11 0 256.05c0 138.49 113.6 248 247.56 248 129.93 0 248.44-100.87 248.44-248 0-137.87-106.62-248-248.44-248zm.87 450.81c-112.54 0-203.7-93.04-203.7-202.81 0-105.42 85.43-203.27 203.72-203.27 112.53 0 202.82 89.46 202.82 203.26-.01 121.69-99.68 202.82-202.84 202.82z"></path>
+</svg>
+<a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" rel="noopener" target="_blank" title="Creative Commons CC BY-NC-ND 4.0">
+      Creative Commons BY-NC-ND 4.0</a>.
+  </div>
+   Made with
+  <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
+    Material for MkDocs
+  </a>
+</div>
+<div class="md-social">
+<a class="footer_seqera_logo" href="https://seqera.io" rel="noopener" target="_blank">
+<img src="/assets/img/seqera_logo_white.png"/>
+</a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+<div class="md-consent" data-md-component="consent" hidden="" id="__consent">
+<div class="md-consent__overlay"></div>
+<aside class="md-consent__inner">
+<form class="md-consent__form md-grid md-typeset" name="consent">
+<h4><span class="enumerate-headings-plugin enumerate-heading-plugin">11.4.3.1</span> Cookie consent</h4>
+<p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our training materials better.</p>
+<input class="md-toggle" id="__settings" type="checkbox"/>
+<div class="md-consent__settings">
+<ul class="task-list">
+<li class="task-list-item">
+<label class="task-list-control">
+<input checked="" name="analytics" type="checkbox"/>
+<span class="task-list-indicator"></span>
+      Google Analytics
+    </label>
+</li>
+<li class="task-list-item">
+<label class="task-list-control">
+<input checked="" name="github" type="checkbox"/>
+<span class="task-list-indicator"></span>
+      GitHub
+    </label>
+</li>
+</ul>
+</div>
+<div class="md-consent__controls">
+<button class="md-button md-button--primary">Accetta</button>
+<label class="md-button" for="__settings">Gestisci le opzioni</label>
+</div>
+</form>
+</aside>
+</div>
+<script>var consent=__md_get("__consent");if(consent)for(var input of document.forms.consent.elements)input.name&&(input.checked=consent[input.name]||!1);else"file:"!==location.protocol&&setTimeout((function(){document.querySelector("[data-md-component=consent]").hidden=!1}),250);var form=document.forms.consent;for(var action of["submit","reset"])form.addEventListener(action,(function(e){if(e.preventDefault(),"reset"===e.type)for(var n of document.forms.consent.elements)n.name&&(n.checked=!1);__md_set("__consent",Object.fromEntries(Array.from(new FormData(form).keys()).map((function(e){return[e,!0]})))),location.hash="",location.reload()}))</script>
+<script id="__config" type="application/json">{"base": "../../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.instant", "navigation.top", "navigation.tracking", "search.share", "toc.follow"], "search": "../../../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copiato", "clipboard.copy": "Copia", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.term.missing": "Non presente", "select.version": "Seleziona la versione"}, "version": {"alias": true, "provider": "mike"}}</script>
+<script src="../../../assets/javascripts/bundle.c8b220af.min.js"></script>
+</body>
+</html>

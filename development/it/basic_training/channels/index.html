@@ -1,0 +1,1929 @@
+
+<!DOCTYPE html>
+
+<html class="no-js" lang="it">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="Fundamentals Nextflow Training Workshop" name="description"/>
+<link href="https://training.nextflow.io/0.dev/it/basic_training/channels/" rel="canonical"/>
+<link href="../containers/" rel="prev"/>
+<link href="../processes/" rel="next"/>
+<link href="../../../assets/img/nextflow-icon.png" rel="icon"/>
+<meta content="mkdocs-1.6.1, mkdocs-material-9.6.12" name="generator"/>
+<title>Channels - training.nextflow.io</title>
+<link href="../../../assets/stylesheets/main.2afb09e1.min.css" rel="stylesheet"/>
+<link href="../../../assets/stylesheets/palette.06af60db.min.css" rel="stylesheet"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
+<style>:root{--md-text-font:"Inter";--md-code-font:"Roboto Mono"}</style>
+<link href="../../../assets/stylesheets/fonts.css" rel="stylesheet"/>
+<link href="../../../assets/stylesheets/extra.css" rel="stylesheet"/>
+<script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-244N3GEN75"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-244N3GEN75",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-244N3GEN75",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+<script>if("undefined"!=typeof __md_analytics){var consent=__md_get("__consent");consent&&consent.analytics&&__md_analytics()}</script>
+</head>
+<body data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="slate" dir="ltr">
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="#channels">
+          Vai al contenuto
+        </a>
+</div>
+<div data-md-component="announce">
+<aside class="md-banner">
+<div class="md-banner__inner md-grid md-typeset">
+<div style="text-align: center">
+  Nextflow Training Week (2025-Q1):
+  <strong>March 10-14, 2025</strong>
+<a class="md-button" href="https://community.seqera.io/t/nextflow-training-week-2025-q1/1775/6" target="_blank">
+    More info
+    <span class="twemoji"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"></path></svg></span>
+</a>
+</div>
+<style type="text/css">
+  .md-banner {
+    display: none;
+  }
+</style>
+<script>
+  (function () {
+    function hideAnnouncement() {
+      var announcementDate = new Date(
+        "2025-03-15T00:00:00Z",
+      );
+      var currentDate = new Date();
+      var banner = document.querySelector(".md-banner");
+      if (banner && currentDate <= announcementDate) {
+        banner.style.display = "block";
+      }
+    }
+
+    // Run on initial load
+    hideAnnouncement();
+
+    // Hook into XHR to run after each page update
+    var originalOpen = XMLHttpRequest.prototype.open;
+    XMLHttpRequest.prototype.open = function () {
+      this.addEventListener("load", function () {
+        setTimeout(hideAnnouncement, 0); // Ensure it runs after the request completes
+      });
+      return originalOpen.apply(this, arguments);
+    };
+  })();
+</script>
+</div>
+</aside>
+</div>
+<div data-md-color-scheme="default" data-md-component="outdated" hidden="">
+</div>
+<header class="md-header md-header--shadow" data-md-component="header">
+<nav aria-label="Intestazione" class="md-header__inner md-grid">
+<a aria-label="training.nextflow.io" class="md-header__button md-logo" data-md-component="logo" href="../../" title="training.nextflow.io">
+<img alt="logo" src="../../../assets/img/nextflow_logo_dark.png"/>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis">
+            training.nextflow.io
+          </span>
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis">
+            
+              Channels
+            
+          </span>
+</div>
+</div>
+</div>
+<form class="md-header__option" data-md-component="palette">
+<input aria-label="Switch to light mode" class="md-option" data-md-color-accent="indigo" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-primary="indigo" data-md-color-scheme="slate" id="__palette_0" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_1" hidden="" title="Switch to light mode">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"></path></svg>
+</label>
+<input aria-label="Switch to dark mode" class="md-option" data-md-color-accent="indigo" data-md-color-media="(prefers-color-scheme: light)" data-md-color-primary="indigo" data-md-color-scheme="default" id="__palette_1" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_0" hidden="" title="Switch to dark mode">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"></path></svg>
+</label>
+</form>
+<script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+<div class="md-header__option">
+<div class="md-select">
+<button aria-label="Seleziona la lingua" class="md-header__button md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"></path></svg>
+</button>
+<div class="md-select__inner">
+<ul class="md-select__list">
+<li class="md-select__item">
+<a class="md-select__link" href="../../../basic_training/channels/" hreflang="en">
+              English
+            </a>
+</li>
+<li class="md-select__item">
+<a class="md-select__link" href="../../../pt/basic_training/channels/" hreflang="pt">
+              Português
+            </a>
+</li>
+<li class="md-select__item">
+<a class="md-select__link" href="../../../es/basic_training/channels/" hreflang="es">
+              Español
+            </a>
+</li>
+<li class="md-select__item">
+<a class="md-select__link" href="../../../fr/basic_training/channels/" hreflang="fr">
+              Français
+            </a>
+</li>
+<li class="md-select__item">
+<a class="md-select__link" href="./" hreflang="it">
+              Italiano
+            </a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<label class="md-header__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="Cerca" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="Cerca" required="" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+</label>
+<nav aria-label="Cerca" class="md-search__options">
+<a aria-label="Condividi" class="md-search__icon md-icon" data-clipboard="" data-clipboard-text="" data-md-component="search-share" href="javascript:void(0)" tabindex="-1" title="Condividi">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"></path></svg>
+</a>
+<button aria-label="Cancella" class="md-search__icon md-icon" tabindex="-1" title="Cancella" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+</button>
+</nav>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="" tabindex="0">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta">
+            Inizializza la ricerca
+          </div>
+<ol class="md-search-result__list" role="presentation"></ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="md-header__source">
+<a class="md-source" data-md-component="source" href="https://github.com/nextflow-io/training" title="Apri repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"></path></svg>
+</div>
+<div class="md-source__repository">
+    nextflow-io/training
+  </div>
+</a>
+</div>
+</nav>
+</header>
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Navigazione" class="md-nav md-nav--primary" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="training.nextflow.io" class="md-nav__button md-logo" data-md-component="logo" href="../../" title="training.nextflow.io">
+<img alt="logo" src="../../../assets/img/nextflow_logo_dark.png"/>
+</a>
+    training.nextflow.io
+  </label>
+<div class="md-nav__source">
+<a class="md-source" data-md-component="source" href="https://github.com/nextflow-io/training" title="Apri repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"></path></svg>
+</div>
+<div class="md-source__repository">
+    nextflow-io/training
+  </div>
+</a>
+</div>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../">
+<span class="md-ellipsis">
+    Home
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+<span class="md-ellipsis">
+    Environment setup
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_2">
+<span class="md-nav__icon md-icon"></span>
+            Environment setup
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../envsetup/">
+<span class="md-ellipsis">
+    Environment Setup
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../envsetup/01_setup/">
+<span class="md-ellipsis">
+    GitHub Codespaces
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../envsetup/02_local/">
+<span class="md-ellipsis">
+    Local installation
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+<span class="md-ellipsis">
+    Hello Nextflow
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_3">
+<span class="md-nav__icon md-icon"></span>
+            Hello Nextflow
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../hello_nextflow/">
+<span class="md-ellipsis">
+    Hello Nextflow
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../hello_nextflow/00_orientation/">
+<span class="md-ellipsis">
+    Orientation
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../hello_nextflow/01_hello_world/">
+<span class="md-ellipsis">
+    Parte 1: Hello World
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../hello_nextflow/02_hello_channels/">
+<span class="md-ellipsis">
+    Parte 2: Hello Channels
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../hello_nextflow/03_hello_workflow/">
+<span class="md-ellipsis">
+    Parte 3: Hello Workflow
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../hello_nextflow/04_hello_modules/">
+<span class="md-ellipsis">
+    Parte 4: Hello Modules
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../hello_nextflow/05_hello_containers/">
+<span class="md-ellipsis">
+    Parte 5: Hello Containers
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../hello_nextflow/06_hello_config/">
+<span class="md-ellipsis">
+    Parte 6: Hello Config
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../hello_nextflow/survey/">
+<span class="md-ellipsis">
+    Feedback survey
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../hello_nextflow/next_steps/">
+<span class="md-ellipsis">
+    Next Steps
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+<span class="md-ellipsis">
+    Nextflow for Genomics
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_4_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_4">
+<span class="md-nav__icon md-icon"></span>
+            Nextflow for Genomics
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../nf4_science/genomics/">
+<span class="md-ellipsis">
+    Nextflow for Genomics
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../nf4_science/genomics/00_orientation/">
+<span class="md-ellipsis">
+    Orientation
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../nf4_science/genomics/01_per_sample_variant_calling/">
+<span class="md-ellipsis">
+    Part 1: Per-sample variant calling
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../nf4_science/genomics/02_joint_calling/">
+<span class="md-ellipsis">
+    Part 2: Joint calling on a cohort
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../nf4_science/genomics/03_modules/">
+<span class="md-ellipsis">
+    Part 3: Moving code into modules
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../nf4_science/genomics/04_testing/">
+<span class="md-ellipsis">
+    Part 4: Adding tests
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_5" type="checkbox"/>
+<label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+<span class="md-ellipsis">
+    Nextflow for RNAseq
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_5_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_5">
+<span class="md-nav__icon md-icon"></span>
+            Nextflow for RNAseq
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../nf4_science/rnaseq/">
+<span class="md-ellipsis">
+    Nextflow for RNAseq
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../nf4_science/rnaseq/00_orientation/">
+<span class="md-ellipsis">
+    Orientation
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../nf4_science/rnaseq/01_method/">
+<span class="md-ellipsis">
+    Part 1: Method overview and manual testing
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../nf4_science/rnaseq/02_single-sample/">
+<span class="md-ellipsis">
+    Part 2: Single-sample implementation
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../nf4_science/rnaseq/03_multi-sample/">
+<span class="md-ellipsis">
+    Part 3: Multi-sample paired-end implementation
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../nf4_science/rnaseq/survey/">
+<span class="md-ellipsis">
+    Feedback survey
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../nf4_science/rnaseq/next_steps/">
+<span class="md-ellipsis">
+    Next Steps
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_6" type="checkbox"/>
+<label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+<span class="md-ellipsis">
+    Side Quests
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_6_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_6">
+<span class="md-nav__icon md-icon"></span>
+            Side Quests
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../side_quests/">
+<span class="md-ellipsis">
+    Side Quests
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../side_quests/orientation/">
+<span class="md-ellipsis">
+    Orientation
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../side_quests/nf-core/">
+<span class="md-ellipsis">
+    Introduction to nf-core
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../side_quests/nf-test/">
+<span class="md-ellipsis">
+    Testing with nf-test
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../side_quests/workflows_of_workflows/">
+<span class="md-ellipsis">
+    Workflows of Workflows
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_7" type="checkbox"/>
+<label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+<span class="md-ellipsis">
+    Fundamentals Training
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="true" aria-labelledby="__nav_7_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_7">
+<span class="md-nav__icon md-icon"></span>
+            Fundamentals Training
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../">
+<span class="md-ellipsis">
+    Fundamentals Training
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../orientation/">
+<span class="md-ellipsis">
+    Orientation
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../intro/">
+<span class="md-ellipsis">
+    Basic concepts
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../rnaseq_pipeline/">
+<span class="md-ellipsis">
+    Simple RNA-Seq workflow
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../containers/">
+<span class="md-ellipsis">
+    Dependencies and containers
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+<span class="md-ellipsis">
+    Channels
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="./">
+<span class="md-ellipsis">
+    Channels
+    
+  </span>
+</a>
+<nav aria-label="On this page" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+    On this page
+  </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#channel-types">
+<span class="md-ellipsis">
+      Channel types
+    </span>
+</a>
+<nav aria-label="Channel types" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#queue-channel">
+<span class="md-ellipsis">
+      Queue channel
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#value-channels">
+<span class="md-ellipsis">
+      Value channels
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li> <li class="md-nav__item">
+<a class="md-nav__link" href="#channel-factories">
+<span class="md-ellipsis">
+      Channel factories
+    </span>
+</a>
+<nav aria-label="Channel factories" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#value">
+<span class="md-ellipsis">
+      value()
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#of">
+<span class="md-ellipsis">
+      of()
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#fromlist">
+<span class="md-ellipsis">
+      fromList()
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#frompath">
+<span class="md-ellipsis">
+      fromPath()
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#fromfilepairs">
+<span class="md-ellipsis">
+      fromFilePairs()
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#fromsra">
+<span class="md-ellipsis">
+      fromSRA()
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+<nav aria-label="Resources" class="md-nav md-nav--secondary sidebar_resources">
+<label class="md-nav__title">Resources</label>
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="https://nextflow.io/docs/latest/index.html" rel="noopener" target="_blank">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M17.5 14.33c.79 0 1.63.08 2.5.24v1.5c-.62-.16-1.46-.24-2.5-.24-1.9 0-3.39.33-4.5.99v-1.69c1.17-.53 2.67-.8 4.5-.8M13 12.46c1.29-.53 2.79-.79 4.5-.79.79 0 1.63.07 2.5.23v1.5c-.62-.16-1.46-.24-2.5-.24-1.9 0-3.39.34-4.5.99m4.5-3.65c-1.9 0-3.39.32-4.5 1V9.84c1.23-.56 2.73-.84 4.5-.84.79 0 1.63.08 2.5.23v1.55c-.74-.19-1.59-.28-2.5-.28m3.5 8V7c-1.04-.33-2.21-.5-3.5-.5-2.05 0-3.88.5-5.5 1.5v11.5c1.62-1 3.45-1.5 5.5-1.5 1.19 0 2.36.16 3.5.5m-3.5-14c2.35 0 4.19.5 5.5 1.5v14.56c0 .12-.05.24-.16.35-.11.09-.23.17-.34.17-.11 0-.19-.02-.25-.05-1.28-.69-2.87-1.03-4.75-1.03-2.05 0-3.88.5-5.5 1.5-1.34-1-3.17-1.5-5.5-1.5-1.66 0-3.25.36-4.75 1.07-.03.01-.07.01-.12.03-.04.01-.08.02-.13.02-.11 0-.23-.04-.34-.12a.475.475 0 0 1-.16-.35V6c1.34-1 3.18-1.5 5.5-1.5 2.33 0 4.16.5 5.5 1.5 1.34-1 3.17-1.5 5.5-1.5Z"></path>
+</svg>
+        Nextflow Docs
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="https://www.nextflow.io/slack-invite.html" rel="noopener" target="_blank">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M6 15a2 2 0 0 1-2 2 2 2 0 0 1-2-2 2 2 0 0 1 2-2h2v2m1 0a2 2 0 0 1 2-2 2 2 0 0 1 2 2v5a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-5m2-8a2 2 0 0 1-2-2 2 2 0 0 1 2-2 2 2 0 0 1 2 2v2H9m0 1a2 2 0 0 1 2 2 2 2 0 0 1-2 2H4a2 2 0 0 1-2-2 2 2 0 0 1 2-2h5m8 2a2 2 0 0 1 2-2 2 2 0 0 1 2 2 2 2 0 0 1-2 2h-2v-2m-1 0a2 2 0 0 1-2 2 2 2 0 0 1-2-2V5a2 2 0 0 1 2-2 2 2 0 0 1 2 2v5m-2 8a2 2 0 0 1 2 2 2 2 0 0 1-2 2 2 2 0 0 1-2-2v-2h2m0-1a2 2 0 0 1-2-2 2 2 0 0 1 2-2h5a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-5Z"></path>
+</svg>
+        Nextflow Slack
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="https://nextflow.io/" rel="noopener" target="_blank">
+<svg id="Layer_1" version="1.1" viewbox="80 50 350 350" xmlns="http://www.w3.org/2000/svg">
+<style type="text/css">
+            .st0 {
+              fill: "gray";
+            }
+          </style>
+<path class="st0" d="M124.5,171.5c39.4,2.6,71.1,34.3,73.5,73.8h46.1c-2.6-65-54.7-117.2-119.6-119.9V171.5z"></path>
+<path class="st0" d="M198.3,255.8c-2.6,39.5-34.3,71.1-73.8,73.5v46.1c65-2.6,117.2-54.7,119.9-119.6H198.3z"></path>
+<path class="st0" d="M300.7,245c2.6-39.5,34.3-71.1,73.8-73.5v-46.1c-65,2.6-117.2,54.7-119.9,119.6H300.7z"></path>
+<path class="st0" d="M374.5,329.3c-39.4-2.6-71.1-34.3-73.5-73.8h-46.1c2.6,65,54.7,117.2,119.6,119.9V329.3z"></path>
+</svg>
+        Nextflow Homepage
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="https://seqera.io/" rel="noopener" target="_blank">
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 28.3.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg id="Layer_1" style="enable-background: new 0 0 500 500" version="1.1" viewbox="80 50 350 350" x="0px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" y="0px">
+<style type="text/css">
+            .st0 {
+              clip-path: url(#SVGID_00000006699037935518914080000000086571810102047141_);
+            }
+            .st1 {
+              fill: "gray";
+            }
+          </style>
+<g>
+<defs>
+<rect height="250" id="SVGID_1_" width="250" x="125" y="125"></rect>
+</defs>
+<clippath id="SVGID_00000183214694142566821210000012389151436317298101_">
+<use style="overflow: visible" xlink:href="#SVGID_1_"></use>
+</clippath>
+<g style="
+                clip-path: url(#SVGID_00000183214694142566821210000012389151436317298101_);
+              ">
+<path class="st1" d="M375,333l-0.1-0.9l-0.1-0.8l-0.1-0.9l-0.1-0.9l-0.1-0.8l-0.1-0.9l-0.1-0.8l-0.2-0.9l-0.2-0.8l-0.2-0.8
+                      l-0.2-0.8l-0.2-0.8l-0.2-0.8l-0.3-0.8l-0.3-0.8l-0.3-0.8l-0.3-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8
+                      l-0.4-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7L365,308l-0.6-0.6l-0.6-0.6l-0.6-0.6l-0.6-0.6L362,305
+                      l-0.6-0.6l-0.7-0.6l-0.6-0.5l-1.2,0.7l-0.8,0.5l-0.8,0.4l-0.8,0.4l-0.8,0.4l-0.8,0.4l-0.9,0.4l-0.9,0.4l-0.9,0.3l-0.9,0.3
+                      l-0.9,0.3l-0.9,0.3l-0.9,0.3l-0.9,0.3l-0.9,0.2l-0.9,0.2l-0.9,0.2l-0.9,0.2l-0.9,0.2l-0.9,0.1l-0.9,0.1l-0.9,0.1l-0.9,0.1
+                      l-0.9,0.1l-0.9,0.1l-0.9,0.1l-0.9,0l-0.9,0h-57.5l59.7,16.4l0.4,0.1l0.4,0.1l0.4,0.1l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.2
+                      l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.1,0.3l0.1,0.3l0.1,0.4l0.1,0.4
+                      l0.1,0.4l0.1,0.4l0,0.4l0,0.4l0,0.4l0,0.4l0,0.4l0,0.4l-0.1,0.4l-0.1,0.4l-0.1,0.4l-0.1,0.3l-0.1,0.4l-0.1,0.3l-0.2,0.3l-0.2,0.3
+                      l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.3,0.3l-0.3,0.3l-0.3,0.2l-0.3,0.2l-0.3,0.2l-0.3,0.2l-0.3,0.2l-0.3,0.2
+                      l-0.3,0.1l-0.4,0.2l-0.4,0.1l-0.3,0.1l-0.4,0.1l-0.4,0.1l-0.4,0.1l-0.4,0l-0.4,0l-0.4,0H125V375h209.7l0.9,0l0.9,0l0.9,0l0.8-0.1
+                      l0.9-0.1l0.8-0.1l0.9-0.1l0.8-0.1l0.8-0.1l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.3l0.8-0.3l0.8-0.3l0.8-0.3l0.8-0.3
+                      l0.8-0.4l0.8-0.4l0.8-0.4l0.8-0.4l0.8-0.4l0.7-0.4l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5
+                      l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.4-0.7
+                      l0.4-0.8l0.4-0.8l0.4-0.8l0.4-0.8l0.4-0.8l0.4-0.8l0.3-0.8l0.3-0.8l0.3-0.8l0.3-0.8l0.2-0.8l0.2-0.8l0.2-0.8l0.2-0.8l0.2-0.8
+                      l0.2-0.8l0.1-0.8l0.1-0.9l0.1-0.9l0.1-0.8l0.1-0.9l0.1-0.9l0.1-0.8l0-0.9l0-0.9l0-0.8L375,333z"></path>
+<path class="st1" d="M375,260.4l-0.1-0.9l-0.1-0.9l-0.1-0.8l-0.1-0.9l-0.1-0.8l-0.1-0.8l-0.1-0.8l-0.2-0.8l-0.2-0.8l-0.2-0.8
+                      l-0.2-0.8l-0.2-0.8l-0.2-0.8l-0.3-0.8l-0.3-0.8l-0.3-0.8l-0.3-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.7
+                      l-0.4-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.2-0.2h0h-89.8l59.7,16.4l0.4,0.1l0.4,0.1l0.4,0.1l0.3,0.2l0.3,0.2l0.3,0.2
+                      l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.1,0.4l0.1,0.3
+                      l0.1,0.4l0.1,0.4l0.1,0.4l0.1,0.4l0,0.4l0,0.4l0,0.4l0,0.4l0,0.4l0,0.4l-0.1,0.4l-0.1,0.4l-0.1,0.4l-0.1,0.4l-0.1,0.3l-0.1,0.4
+                      l-0.2,0.4l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.3,0.3l-0.3,0.3l-0.3,0.2l-0.3,0.2l-0.3,0.2l-0.3,0.2
+                      l-0.3,0.2l-0.3,0.2l-0.3,0.2l-0.4,0.2l-0.4,0.1l-0.3,0.1l-0.4,0.1l-0.4,0.1l-0.4,0.1l-0.4,0l-0.4,0l-0.4,0h-82.5h-111H125v32.2
+                      h122.8h86.9h0.9l0.9,0l0.9-0.1l0.8-0.1l0.9-0.1l0.8-0.1l0.9-0.1l0.8-0.1l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.3
+                      l0.8-0.3l0.8-0.3l0.8-0.3l0.8-0.3l0.8-0.4l0.8-0.4l0.2-0.1l0.6-0.3l0.8-0.4l0.8-0.4l0.7-0.4l0.7-0.4l0.7-0.5l0.7-0.5l0.7-0.5
+                      l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.5-0.7l0.5-0.7l0.5-0.7
+                      l0.5-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.4-0.7l0.4-0.7l0.4-0.8l0.4-0.8l0.4-0.8l0.4-0.8l0.4-0.8l0.3-0.8l0.3-0.8l0.3-0.8l0.3-0.8
+                      l0.2-0.8l0.2-0.8l0.2-0.8l0.2-0.8l0.2-0.8l0.2-0.8l0.1-0.8l0.1-0.9l0.1-0.8l0.1-0.9l0.1-0.8l0.1-0.9l0.1-0.9l0-0.8l0-0.9l0-0.9
+                      L375,260.4z"></path>
+<path class="st1" d="M165.3,197.6l-0.9,0l-0.8,0l-0.9,0l-0.9,0.1l-0.8,0.1l-0.9,0.1l-0.8,0.1l-0.8,0.1l-0.8,0.2l-0.8,0.2l-0.8,0.2
+                      l-0.8,0.2l-0.8,0.2l-0.8,0.2l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.4l-0.8,0.4l-0.2,0.1l-0.6,0.3l-0.8,0.4
+                      l-0.8,0.4l-0.8,0.4l-0.7,0.4l-0.7,0.5l-0.7,0.5L142,205l-0.7,0.5l-0.7,0.5l-0.7,0.5l-0.7,0.5l-0.7,0.6l-0.6,0.6l-0.6,0.6l-0.6,0.6
+                      l-0.6,0.6l-0.6,0.6l-0.6,0.6l-0.6,0.6l-0.5,0.6l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.4,0.7l-0.5,0.7l-0.4,0.7
+                      l-0.4,0.8l-0.4,0.8l-0.4,0.8l-0.4,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.2,0.8l-0.2,0.8l-0.2,0.8
+                      l-0.2,0.8l-0.2,0.8l-0.2,0.8l-0.1,0.9l-0.1,0.9l-0.1,0.8l-0.1,0.9l-0.1,0.9l0,0.9l0,0.9v0.9v0.9l0,0.8l0,0.9l0.1,0.8l0.1,0.8
+                      l0.1,0.9l0.1,0.9l0.1,0.8l0.2,0.9l0.2,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8
+                      l0.4,0.8l0.4,0.8l0.4,0.8l0.4,0.8l0.4,0.7l0.5,0.7l0.4,0.7l0.5,0.7l0.5,0.7l0.5,0.7l0.2,0.2h89.8l-59.7-16.4l-0.4-0.1l-0.3-0.1
+                      l-0.4-0.1l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3
+                      l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.1-0.4l-0.1-0.4l-0.1-0.3l-0.1-0.4l-0.1-0.4l-0.1-0.4l0-0.4l0-0.4l0-0.4l0-0.4l0-0.4
+                      l0-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3
+                      l0.3-0.3l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.4-0.2l0.3-0.1l0.4-0.1l0.4-0.1l0.4-0.1l0.4-0.1l0.4,0l0.4,0
+                      h0.4h82.5h111H375v-32.3H252.2H165.3z"></path>
+<path class="st1" d="M165.3,125l-0.9,0l-0.8,0l-0.9,0.1l-0.9,0.1l-0.8,0.1l-0.9,0.1l-0.8,0.1l-0.8,0.1l-0.8,0.2l-0.8,0.2l-0.8,0.2
+                      l-0.8,0.2l-0.8,0.2l-0.8,0.2l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.4l-0.8,0.4l-0.8,0.4l-0.8,0.4
+                      l-0.8,0.4l-0.7,0.5l-0.7,0.4l-0.7,0.5l-0.7,0.5l-0.7,0.5l-0.7,0.5l-0.7,0.5l-0.7,0.6l-0.7,0.6l-0.6,0.6l-0.6,0.6l-0.6,0.6
+                      l-0.6,0.6l-0.6,0.6l-0.6,0.6l-0.6,0.6l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.4,0.7l-0.5,0.7l-0.4,0.7
+                      l-0.4,0.8l-0.4,0.8l-0.4,0.8l-0.4,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.2,0.8l-0.2,0.8l-0.2,0.8
+                      l-0.2,0.8l-0.2,0.8l-0.2,0.8l-0.1,0.9l-0.1,0.8l-0.1,0.9l-0.1,0.8l-0.1,0.9l0,0.9l0,0.9v0.9v0.9l0,0.9l0,0.8l0.1,0.9l0.1,0.9
+                      l0.1,0.8l0.1,0.8l0.1,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8
+                      l0.4,0.8l0.4,0.8l0.4,0.8l0.4,0.8l0.4,0.7l0.5,0.7l0.4,0.7l0.5,0.7l0.5,0.7l0.5,0.7l0.5,0.7l0.5,0.7l0.5,0.7l0.6,0.6l0.6,0.6
+                      l0.6,0.6l0.6,0.6l0.6,0.6l0.6,0.6l0.6,0.6l0.7,0.6l0.6,0.5h0l1.1-0.7l0.8-0.5l0.8-0.5l0.8-0.4l0.8-0.4l0.9-0.4l0.9-0.4l0.9-0.4
+                      l0.9-0.3l0.9-0.3l0.9-0.3l0.9-0.3l0.9-0.3l0.9-0.3l0.9-0.2l0.9-0.2l0.9-0.2l0.9-0.2l0.9-0.2l0.9-0.1l0.9-0.1l0.9-0.1l0.9-0.1
+                      l0.9-0.1l0.9-0.1l0.9,0l0.9,0l0.9,0h57.5l-59.7-16.4l-0.4-0.1l-0.3-0.1l-0.4-0.1l-0.3-0.1l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2
+                      l-0.3-0.2l-0.3-0.2l-0.3-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.1-0.3l-0.1-0.4
+                      l-0.1-0.3l-0.1-0.4l-0.1-0.4l-0.1-0.4l0-0.4l0-0.4l0-0.4l0-0.4l0-0.4l0-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.3
+                      l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2
+                      l0.3-0.2l0.4-0.1l0.3-0.1l0.4-0.1l0.4-0.1l0.4-0.1l0.4-0.1l0.4,0l0.4,0l0.4,0H375V125H165.3z"></path>
+</g>
+</g>
+</svg>
+        Seqera
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="https://github.com/nextflow-io/training" rel="noopener" target="_blank">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z"></path>
+</svg>
+        Training on GitHub
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../processes/">
+<span class="md-ellipsis">
+    Processes
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../operators/">
+<span class="md-ellipsis">
+    Operators
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../groovy/">
+<span class="md-ellipsis">
+    Groovy introduction
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../modules/">
+<span class="md-ellipsis">
+    Modularization
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../config/">
+<span class="md-ellipsis">
+    Configuration
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../executors/">
+<span class="md-ellipsis">
+    Deployment scenarios
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../seqera_platform/">
+<span class="md-ellipsis">
+    Seqera Platform
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../cache_and_resume/">
+<span class="md-ellipsis">
+    Cache and resume
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../debugging/">
+<span class="md-ellipsis">
+    Troubleshooting
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_8" type="checkbox"/>
+<label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+<span class="md-ellipsis">
+    Advanced Training
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_8_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_8">
+<span class="md-nav__icon md-icon"></span>
+            Advanced Training
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../advanced/">
+<span class="md-ellipsis">
+    Advanced Training
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../advanced/orientation/">
+<span class="md-ellipsis">
+    Orientation
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../advanced/operators/">
+<span class="md-ellipsis">
+    Operator Tour
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../advanced/metadata/">
+<span class="md-ellipsis">
+    Metadata Propagation
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../advanced/grouping/">
+<span class="md-ellipsis">
+    Grouping and Splitting
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../advanced/groovy/">
+<span class="md-ellipsis">
+    Groovy Imports
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../advanced/structure/">
+<span class="md-ellipsis">
+    Workflow Structure
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../advanced/configuration/">
+<span class="md-ellipsis">
+    Configuration
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../advanced/summary/">
+<span class="md-ellipsis">
+    Summary
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../advanced/support/">
+<span class="md-ellipsis">
+    Support
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="On this page" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+    On this page
+  </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#channel-types">
+<span class="md-ellipsis">
+      Channel types
+    </span>
+</a>
+<nav aria-label="Channel types" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#queue-channel">
+<span class="md-ellipsis">
+      Queue channel
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#value-channels">
+<span class="md-ellipsis">
+      Value channels
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li> <li class="md-nav__item">
+<a class="md-nav__link" href="#channel-factories">
+<span class="md-ellipsis">
+      Channel factories
+    </span>
+</a>
+<nav aria-label="Channel factories" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#value">
+<span class="md-ellipsis">
+      value()
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#of">
+<span class="md-ellipsis">
+      of()
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#fromlist">
+<span class="md-ellipsis">
+      fromList()
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#frompath">
+<span class="md-ellipsis">
+      fromPath()
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#fromfilepairs">
+<span class="md-ellipsis">
+      fromFilePairs()
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#fromsra">
+<span class="md-ellipsis">
+      fromSRA()
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+<nav aria-label="Resources" class="md-nav md-nav--secondary sidebar_resources">
+<label class="md-nav__title">Resources</label>
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="https://nextflow.io/docs/latest/index.html" rel="noopener" target="_blank">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M17.5 14.33c.79 0 1.63.08 2.5.24v1.5c-.62-.16-1.46-.24-2.5-.24-1.9 0-3.39.33-4.5.99v-1.69c1.17-.53 2.67-.8 4.5-.8M13 12.46c1.29-.53 2.79-.79 4.5-.79.79 0 1.63.07 2.5.23v1.5c-.62-.16-1.46-.24-2.5-.24-1.9 0-3.39.34-4.5.99m4.5-3.65c-1.9 0-3.39.32-4.5 1V9.84c1.23-.56 2.73-.84 4.5-.84.79 0 1.63.08 2.5.23v1.55c-.74-.19-1.59-.28-2.5-.28m3.5 8V7c-1.04-.33-2.21-.5-3.5-.5-2.05 0-3.88.5-5.5 1.5v11.5c1.62-1 3.45-1.5 5.5-1.5 1.19 0 2.36.16 3.5.5m-3.5-14c2.35 0 4.19.5 5.5 1.5v14.56c0 .12-.05.24-.16.35-.11.09-.23.17-.34.17-.11 0-.19-.02-.25-.05-1.28-.69-2.87-1.03-4.75-1.03-2.05 0-3.88.5-5.5 1.5-1.34-1-3.17-1.5-5.5-1.5-1.66 0-3.25.36-4.75 1.07-.03.01-.07.01-.12.03-.04.01-.08.02-.13.02-.11 0-.23-.04-.34-.12a.475.475 0 0 1-.16-.35V6c1.34-1 3.18-1.5 5.5-1.5 2.33 0 4.16.5 5.5 1.5 1.34-1 3.17-1.5 5.5-1.5Z"></path>
+</svg>
+        Nextflow Docs
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="https://www.nextflow.io/slack-invite.html" rel="noopener" target="_blank">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M6 15a2 2 0 0 1-2 2 2 2 0 0 1-2-2 2 2 0 0 1 2-2h2v2m1 0a2 2 0 0 1 2-2 2 2 0 0 1 2 2v5a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-5m2-8a2 2 0 0 1-2-2 2 2 0 0 1 2-2 2 2 0 0 1 2 2v2H9m0 1a2 2 0 0 1 2 2 2 2 0 0 1-2 2H4a2 2 0 0 1-2-2 2 2 0 0 1 2-2h5m8 2a2 2 0 0 1 2-2 2 2 0 0 1 2 2 2 2 0 0 1-2 2h-2v-2m-1 0a2 2 0 0 1-2 2 2 2 0 0 1-2-2V5a2 2 0 0 1 2-2 2 2 0 0 1 2 2v5m-2 8a2 2 0 0 1 2 2 2 2 0 0 1-2 2 2 2 0 0 1-2-2v-2h2m0-1a2 2 0 0 1-2-2 2 2 0 0 1 2-2h5a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-5Z"></path>
+</svg>
+        Nextflow Slack
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="https://nextflow.io/" rel="noopener" target="_blank">
+<svg id="Layer_1" version="1.1" viewbox="80 50 350 350" xmlns="http://www.w3.org/2000/svg">
+<style type="text/css">
+            .st0 {
+              fill: "gray";
+            }
+          </style>
+<path class="st0" d="M124.5,171.5c39.4,2.6,71.1,34.3,73.5,73.8h46.1c-2.6-65-54.7-117.2-119.6-119.9V171.5z"></path>
+<path class="st0" d="M198.3,255.8c-2.6,39.5-34.3,71.1-73.8,73.5v46.1c65-2.6,117.2-54.7,119.9-119.6H198.3z"></path>
+<path class="st0" d="M300.7,245c2.6-39.5,34.3-71.1,73.8-73.5v-46.1c-65,2.6-117.2,54.7-119.9,119.6H300.7z"></path>
+<path class="st0" d="M374.5,329.3c-39.4-2.6-71.1-34.3-73.5-73.8h-46.1c2.6,65,54.7,117.2,119.6,119.9V329.3z"></path>
+</svg>
+        Nextflow Homepage
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="https://seqera.io/" rel="noopener" target="_blank">
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 28.3.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg id="Layer_1" style="enable-background: new 0 0 500 500" version="1.1" viewbox="80 50 350 350" x="0px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" y="0px">
+<style type="text/css">
+            .st0 {
+              clip-path: url(#SVGID_00000006699037935518914080000000086571810102047141_);
+            }
+            .st1 {
+              fill: "gray";
+            }
+          </style>
+<g>
+<defs>
+<rect height="250" id="SVGID_1_" width="250" x="125" y="125"></rect>
+</defs>
+<clippath id="SVGID_00000183214694142566821210000012389151436317298101_">
+<use style="overflow: visible" xlink:href="#SVGID_1_"></use>
+</clippath>
+<g style="
+                clip-path: url(#SVGID_00000183214694142566821210000012389151436317298101_);
+              ">
+<path class="st1" d="M375,333l-0.1-0.9l-0.1-0.8l-0.1-0.9l-0.1-0.9l-0.1-0.8l-0.1-0.9l-0.1-0.8l-0.2-0.9l-0.2-0.8l-0.2-0.8
+                      l-0.2-0.8l-0.2-0.8l-0.2-0.8l-0.3-0.8l-0.3-0.8l-0.3-0.8l-0.3-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8
+                      l-0.4-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7L365,308l-0.6-0.6l-0.6-0.6l-0.6-0.6l-0.6-0.6L362,305
+                      l-0.6-0.6l-0.7-0.6l-0.6-0.5l-1.2,0.7l-0.8,0.5l-0.8,0.4l-0.8,0.4l-0.8,0.4l-0.8,0.4l-0.9,0.4l-0.9,0.4l-0.9,0.3l-0.9,0.3
+                      l-0.9,0.3l-0.9,0.3l-0.9,0.3l-0.9,0.3l-0.9,0.2l-0.9,0.2l-0.9,0.2l-0.9,0.2l-0.9,0.2l-0.9,0.1l-0.9,0.1l-0.9,0.1l-0.9,0.1
+                      l-0.9,0.1l-0.9,0.1l-0.9,0.1l-0.9,0l-0.9,0h-57.5l59.7,16.4l0.4,0.1l0.4,0.1l0.4,0.1l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.2
+                      l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.1,0.3l0.1,0.3l0.1,0.4l0.1,0.4
+                      l0.1,0.4l0.1,0.4l0,0.4l0,0.4l0,0.4l0,0.4l0,0.4l0,0.4l-0.1,0.4l-0.1,0.4l-0.1,0.4l-0.1,0.3l-0.1,0.4l-0.1,0.3l-0.2,0.3l-0.2,0.3
+                      l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.3,0.3l-0.3,0.3l-0.3,0.2l-0.3,0.2l-0.3,0.2l-0.3,0.2l-0.3,0.2l-0.3,0.2
+                      l-0.3,0.1l-0.4,0.2l-0.4,0.1l-0.3,0.1l-0.4,0.1l-0.4,0.1l-0.4,0.1l-0.4,0l-0.4,0l-0.4,0H125V375h209.7l0.9,0l0.9,0l0.9,0l0.8-0.1
+                      l0.9-0.1l0.8-0.1l0.9-0.1l0.8-0.1l0.8-0.1l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.3l0.8-0.3l0.8-0.3l0.8-0.3l0.8-0.3
+                      l0.8-0.4l0.8-0.4l0.8-0.4l0.8-0.4l0.8-0.4l0.7-0.4l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5
+                      l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.4-0.7
+                      l0.4-0.8l0.4-0.8l0.4-0.8l0.4-0.8l0.4-0.8l0.4-0.8l0.3-0.8l0.3-0.8l0.3-0.8l0.3-0.8l0.2-0.8l0.2-0.8l0.2-0.8l0.2-0.8l0.2-0.8
+                      l0.2-0.8l0.1-0.8l0.1-0.9l0.1-0.9l0.1-0.8l0.1-0.9l0.1-0.9l0.1-0.8l0-0.9l0-0.9l0-0.8L375,333z"></path>
+<path class="st1" d="M375,260.4l-0.1-0.9l-0.1-0.9l-0.1-0.8l-0.1-0.9l-0.1-0.8l-0.1-0.8l-0.1-0.8l-0.2-0.8l-0.2-0.8l-0.2-0.8
+                      l-0.2-0.8l-0.2-0.8l-0.2-0.8l-0.3-0.8l-0.3-0.8l-0.3-0.8l-0.3-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.7
+                      l-0.4-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.2-0.2h0h-89.8l59.7,16.4l0.4,0.1l0.4,0.1l0.4,0.1l0.3,0.2l0.3,0.2l0.3,0.2
+                      l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.1,0.4l0.1,0.3
+                      l0.1,0.4l0.1,0.4l0.1,0.4l0.1,0.4l0,0.4l0,0.4l0,0.4l0,0.4l0,0.4l0,0.4l-0.1,0.4l-0.1,0.4l-0.1,0.4l-0.1,0.4l-0.1,0.3l-0.1,0.4
+                      l-0.2,0.4l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.3,0.3l-0.3,0.3l-0.3,0.2l-0.3,0.2l-0.3,0.2l-0.3,0.2
+                      l-0.3,0.2l-0.3,0.2l-0.3,0.2l-0.4,0.2l-0.4,0.1l-0.3,0.1l-0.4,0.1l-0.4,0.1l-0.4,0.1l-0.4,0l-0.4,0l-0.4,0h-82.5h-111H125v32.2
+                      h122.8h86.9h0.9l0.9,0l0.9-0.1l0.8-0.1l0.9-0.1l0.8-0.1l0.9-0.1l0.8-0.1l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.3
+                      l0.8-0.3l0.8-0.3l0.8-0.3l0.8-0.3l0.8-0.4l0.8-0.4l0.2-0.1l0.6-0.3l0.8-0.4l0.8-0.4l0.7-0.4l0.7-0.4l0.7-0.5l0.7-0.5l0.7-0.5
+                      l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.5-0.7l0.5-0.7l0.5-0.7
+                      l0.5-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.4-0.7l0.4-0.7l0.4-0.8l0.4-0.8l0.4-0.8l0.4-0.8l0.4-0.8l0.3-0.8l0.3-0.8l0.3-0.8l0.3-0.8
+                      l0.2-0.8l0.2-0.8l0.2-0.8l0.2-0.8l0.2-0.8l0.2-0.8l0.1-0.8l0.1-0.9l0.1-0.8l0.1-0.9l0.1-0.8l0.1-0.9l0.1-0.9l0-0.8l0-0.9l0-0.9
+                      L375,260.4z"></path>
+<path class="st1" d="M165.3,197.6l-0.9,0l-0.8,0l-0.9,0l-0.9,0.1l-0.8,0.1l-0.9,0.1l-0.8,0.1l-0.8,0.1l-0.8,0.2l-0.8,0.2l-0.8,0.2
+                      l-0.8,0.2l-0.8,0.2l-0.8,0.2l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.4l-0.8,0.4l-0.2,0.1l-0.6,0.3l-0.8,0.4
+                      l-0.8,0.4l-0.8,0.4l-0.7,0.4l-0.7,0.5l-0.7,0.5L142,205l-0.7,0.5l-0.7,0.5l-0.7,0.5l-0.7,0.5l-0.7,0.6l-0.6,0.6l-0.6,0.6l-0.6,0.6
+                      l-0.6,0.6l-0.6,0.6l-0.6,0.6l-0.6,0.6l-0.5,0.6l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.4,0.7l-0.5,0.7l-0.4,0.7
+                      l-0.4,0.8l-0.4,0.8l-0.4,0.8l-0.4,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.2,0.8l-0.2,0.8l-0.2,0.8
+                      l-0.2,0.8l-0.2,0.8l-0.2,0.8l-0.1,0.9l-0.1,0.9l-0.1,0.8l-0.1,0.9l-0.1,0.9l0,0.9l0,0.9v0.9v0.9l0,0.8l0,0.9l0.1,0.8l0.1,0.8
+                      l0.1,0.9l0.1,0.9l0.1,0.8l0.2,0.9l0.2,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8
+                      l0.4,0.8l0.4,0.8l0.4,0.8l0.4,0.8l0.4,0.7l0.5,0.7l0.4,0.7l0.5,0.7l0.5,0.7l0.5,0.7l0.2,0.2h89.8l-59.7-16.4l-0.4-0.1l-0.3-0.1
+                      l-0.4-0.1l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3
+                      l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.1-0.4l-0.1-0.4l-0.1-0.3l-0.1-0.4l-0.1-0.4l-0.1-0.4l0-0.4l0-0.4l0-0.4l0-0.4l0-0.4
+                      l0-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3
+                      l0.3-0.3l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.4-0.2l0.3-0.1l0.4-0.1l0.4-0.1l0.4-0.1l0.4-0.1l0.4,0l0.4,0
+                      h0.4h82.5h111H375v-32.3H252.2H165.3z"></path>
+<path class="st1" d="M165.3,125l-0.9,0l-0.8,0l-0.9,0.1l-0.9,0.1l-0.8,0.1l-0.9,0.1l-0.8,0.1l-0.8,0.1l-0.8,0.2l-0.8,0.2l-0.8,0.2
+                      l-0.8,0.2l-0.8,0.2l-0.8,0.2l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.4l-0.8,0.4l-0.8,0.4l-0.8,0.4
+                      l-0.8,0.4l-0.7,0.5l-0.7,0.4l-0.7,0.5l-0.7,0.5l-0.7,0.5l-0.7,0.5l-0.7,0.5l-0.7,0.6l-0.7,0.6l-0.6,0.6l-0.6,0.6l-0.6,0.6
+                      l-0.6,0.6l-0.6,0.6l-0.6,0.6l-0.6,0.6l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.4,0.7l-0.5,0.7l-0.4,0.7
+                      l-0.4,0.8l-0.4,0.8l-0.4,0.8l-0.4,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.2,0.8l-0.2,0.8l-0.2,0.8
+                      l-0.2,0.8l-0.2,0.8l-0.2,0.8l-0.1,0.9l-0.1,0.8l-0.1,0.9l-0.1,0.8l-0.1,0.9l0,0.9l0,0.9v0.9v0.9l0,0.9l0,0.8l0.1,0.9l0.1,0.9
+                      l0.1,0.8l0.1,0.8l0.1,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8
+                      l0.4,0.8l0.4,0.8l0.4,0.8l0.4,0.8l0.4,0.7l0.5,0.7l0.4,0.7l0.5,0.7l0.5,0.7l0.5,0.7l0.5,0.7l0.5,0.7l0.5,0.7l0.6,0.6l0.6,0.6
+                      l0.6,0.6l0.6,0.6l0.6,0.6l0.6,0.6l0.6,0.6l0.7,0.6l0.6,0.5h0l1.1-0.7l0.8-0.5l0.8-0.5l0.8-0.4l0.8-0.4l0.9-0.4l0.9-0.4l0.9-0.4
+                      l0.9-0.3l0.9-0.3l0.9-0.3l0.9-0.3l0.9-0.3l0.9-0.3l0.9-0.2l0.9-0.2l0.9-0.2l0.9-0.2l0.9-0.2l0.9-0.1l0.9-0.1l0.9-0.1l0.9-0.1
+                      l0.9-0.1l0.9-0.1l0.9,0l0.9,0l0.9,0h57.5l-59.7-16.4l-0.4-0.1l-0.3-0.1l-0.4-0.1l-0.3-0.1l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2
+                      l-0.3-0.2l-0.3-0.2l-0.3-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.1-0.3l-0.1-0.4
+                      l-0.1-0.3l-0.1-0.4l-0.1-0.4l-0.1-0.4l0-0.4l0-0.4l0-0.4l0-0.4l0-0.4l0-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.3
+                      l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2
+                      l0.3-0.2l0.4-0.1l0.3-0.1l0.4-0.1l0.4-0.1l0.4-0.1l0.4-0.1l0.4,0l0.4,0l0.4,0H375V125H165.3z"></path>
+</g>
+</g>
+</svg>
+        Seqera
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="https://github.com/nextflow-io/training" rel="noopener" target="_blank">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z"></path>
+</svg>
+        Training on GitHub
+      </a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<a class="md-content__button md-icon" href="https://github.com/nextflow-io/training/edit/master/docs/basic_training/channels.md" title="Modifica">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"></path></svg>
+</a>
+<h1 id="channels"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.</span> Channels<a class="headerlink" href="#channels" title="Permanent link">¶</a></h1>
+<p>Channels are a key data structure of Nextflow that allows the implementation of reactive-functional oriented computational workflows based on the <a href="https://en.wikipedia.org/wiki/Dataflow_programming">Dataflow</a> programming paradigm.</p>
+<p>They are used to logically connect tasks to each other or to implement functional style data transformations.</p>
+<figure class="excalidraw">
+<svg height="147.5833879846749" version="1.1" viewbox="0 0 944.9300952968119 147.5833879846749" width="944.9300952968119" xmlns="http://www.w3.org/2000/svg">
+<!-- svg-source:excalidraw -->
+<!-- payload-type:application/vnd.excalidraw+json --><!-- payload-version:2 --><!-- payload-start -->eyJ2ZXJzaW9uIjoiMSIsImVuY29kaW5nIjoiYnN0cmluZyIsImNvbXByZXNzZWQiOnRydWUsImVuY29kZWQiOiJ4nO1b61LbSlx1MDAxMv7PU1Ccv0GZ7rmnamsr4EA4iXPjnq1TlLCFLZAtY8lgcipcdTAwMGa150H2mbYlgyXLXHUwMDE2vnCJzy5OXHUwMDE1sTWaUU9Pf91fa3r+XFxZXV2Lbzre2pvVNa9fc1x1MDAwM7/eda/XXiXXr7xu5IdtasL0d1x1MDAxNPa6tfTOZlx1MDAxY3eiN69ft9zuhVx1MDAxN3dcdTAwMDK35jlXftRzgyju1f3QqYWt137staJ/Jn8/uS3vXHUwMDFmnbBVj7tO9pB1r+7HYXfwLC/wWl47jmj0f9Hv1dU/07856bpeLXbbjcBLO6RNOVx1MDAwMVx1MDAxMYpXP4XtVFjLtLKg2bDdjyr0tNirU+NcdTAwMTlJ7GUtyaW19fN+/3ynf1mtoCtcdTAwMGZcdTAwMDJ1c35ROclcdTAwMWV65lx1MDAwN8FufFx1MDAxM1xmXHUwMDE04daavW5OpCjuhlx1MDAxN96hX4+b1Fx1MDAwZYXrw35RSDrIenXDXqPZ9qJopE/YcWt+fJNcXGOZ+Fx1MDAwM1x1MDAxZLxZza706ZeU4GhcdTAwMTTIXGaXKCTHYWvSXHUwMDFmXHUwMDE1OkxcdCVcZlhkTFx1MDAxNcTaXGZcdTAwMDNaXHUwMDA3XHUwMDEyK+667ajjdmklMuFO3dpFgyRs14f3/XbmnjIms3uubyfMjXVI24IplMPGpuc3mjG1KuEgMMu1ZOmHZ3J46XKARiDpbU7C5MmdnXpqXHUwMDE4f+RcdTAwMTXWrt8q7M5SMlvht1d+ZnNI7n9XtLG8neVcZuCz5u3KQaR3T8Lf97+0XHUwMDBlwr2DsDec64hRut1ueL02bPl5+y1cdTAwMTO016m7XHUwMDAzU1x1MDAwM6WlUEYqVCZbncBvX1Bju1x1MDAxN1x1MDAwNNm1sHaRWedKbibzgVx1MDAwMmwpKDhcdTAwMDMpJUM1MyraXHUwMDFhT7Y3t65cdTAwMDFbJz/MydUx25Z7i6FcdTAwMDKfXHJcdTAwMTVoXHUwMDE5mSOS4oVcdTAwMTRM6Fx1MDAwMiq4daRAqbRApVxmXHUwMDE5Zlx1MDAxOS5+XHUwMDFi2Ou9mJiInTtcXJD/cVxmMlx1MDAwZZNgXHUwMDAxTDpacjtcdTAwMDKaO0RYaTlcdK5/XHIg7uws9vrxKFx1MDAwMlx1MDAwNlZxXHUwMDE4729cIlx1MDAwZipH3dZOdFx0jbPD3umXXHUwMDFjXHUwMDFlXk1cdTAwMWV20Plcbi9Pq/FW/9MnXHUwMDFlrW9cdTAwMDXqqt88Pn0snFx0pTSYx8LZyPxzXHUwMDEwXHUwMDEzulxmYUBIZ1KANDNDbLIylzzwcNRcdTAwMGUwtMA0m1x1MDAwMDEtXHUwMDFjQTaMjFx1MDAwMtTTQsyacWRxVcSTQqOZNsLOgadcdTAwMTGjXHUwMDE5XHUwMDAzzn02qEFcdTAwMGI5h1xyZmtcdTAwMWS2413/R6JuNCNXt9yWXHUwMDFm3IwsV2qciXrc6GL1P//OqzDy6KHpKHLk9reB30jsd61G0/C6I6ZcdTAwMWT7xNCGN7T8ej1cdTAwMWZeaiSDS2N2d2ZcdFx1MDAwYmHXb/htN9griHgv2Fx1MDAwNmCfxPKUKYWbllx1MDAwNriBOVwi2v3uZy64iWeDm1Cc4KaYJawpba1Qo3izwkmMT1xunbCsnPMpwk1YataLw01cdTAwMWKHoqZcdTAwMDYuJGig546jjznMXHUwMDFhS1x1MDAxMZYjcXCOXFyYXCJcdTAwMWPBXHUwMDEwXHUwMDE0KfAxmFx1MDAwM4/j8Vxyp8e3aaHCLlx1MDAwMtModrvxht+u++3GqGC3+cwsIEmBXetFXHUwMDAzjXFJa1x1MDAwYlx0XHUwMDE1sFx1MDAxYa3RubtcdTAwMWFuJ1x1MDAxMdohRsBQs4TXICqpxibvtevTharsXHUwMDFlfLMs/Fx1MDAxNuuTxv5cdTAwMDZ0XHUwMDFhzd0v55OEWiepQChG3NUgMkFyZfw8XHUwMDEzXHUwMDBiXHUwMDFjkGBcdTAwMTVypjRHOU45XHUwMDAyN4o3w1bLj0n7X0K/XHUwMDFkXHUwMDE3tZyq822C/qbn1outNKt8W9FNdJJcdTAwMTFHqUz2bTWDUfpj+P2PV1x1MDAxM+8ute7ksz7BsLNcdTAwMDFX8v+XuTgvXGL8TlTC2ss5XHUwMDA1N4Yr8nKZM5/m5O5f5SXlXHUwMDE0UqKjXGYpl1g7JawqXHUwMDFiZZDMgiMsgtGyINHjkVx0XHUwMDE05XSdsliQXHUwMDEzqLqQ5E1cdTAwMTBcdTAwMWXG1GfwZL+MUiNXVmd+/oGUOiUmk+xfqlL7T9aciCbame3/Ovx6oJpcdTAwMWZcdTAwMWGbh5+s+ai/7n/2vveX3v6VSt6iMMpcdTAwMWEn2j86o/b3yMbP6Vx1MDAwMdxy0CqlsExPiu1jkVx1MDAxY7gkqVx1MDAxOPI57H9hZj23KZaF7GKEKWl55Ng10vaogat87Vxu3WdcblNlXHUwMDE4xVxc/lTEqLLKUORcdTAwMTSZXHUwMDFkTMOoODpq7KPY/H6JjbjDqzsnXHUwMDA3x+7fXHUwMDAxo1xiYIlcclHWIXMvaG7SrFhcdTAwMTJNI/qGllupn1x1MDAxNKzKISmUpVG0Id41XHUwMDAzVpHWiFJcdTAwMDc7T6h6gerjQ7Vk5VxuvVx1MDAxZoRUa7F4dYhUiVJqylx1MDAxM2dcdTAwMDYqr1Yu6lx1MDAxYlx1MDAxZqOzk72tVnP7pva2elVZdqCq5Fx1MDAxZLDUZIhAqSYlMYVgKlxiqEowLjilVJSOPlx1MDAxOVIpQ7KU0YFcdTAwMTJSXHUwMDFhQ44jU/xcdTAwMTCq0pJTSSBcdTAwMDOK0lx1MDAwZjOJZHJKPXKTeP50+Vx1MDAwNdBlSaOjXHUwMDE0Uv6LlL5zYmk231x1MDAxYiguK4aMMnejiNmhmDZcXLm9JFx1MDAxZrSO1lxuXGK+gEJYLqdcdTAwMGXHXHUwMDFjQjskeVx1MDAxNdFcdTAwMDJD3/LDXHRcdTAwMWGO8KE0+SNcdTAwMGVMmmnDUVx1MDAxMmQ5zUJcdTAwMGLOLVLOL/PDjdnxI7kzQF6aXHUwMDFkXHUwMDEw7Un2XHUwMDE2+ezJMXyrvN1tfF2vVFx1MDAwZSN5vnHdqlx1MDAxZJr9ZfdnNMtkL5eWXG6t4PkgPvRnzFxuLVx1MDAxNVx1MDAxOFx1MDAwNlDca1syd6aT7i/+7MWf/b/6M2ZK9+hJt1ZJmtzsXHUwMDBlLTw5fL+3vq+OLt2rba968H776MfGsjs0XHUwMDAz2tG0lOTQXHUwMDE0MTBWdGjc4VIyXHRcdTAwMTa40U+5R/9cdTAwMThcdTAwMGVcclx1MDAxOJJcdTAwMGK2/MWjvXi0/2mPVlZcdTAwMTFcdTAwMDHle7RJrY0kyTPLnObP9urvsHpx2jjfW2/gVmX7+PfGvlp2f0a241iyXHUwMDA3RNBKMlF4e2vAUYxcYpzmxFVcctqnezWksydcdTAwMGZcdTAwMWRcdTAwMTjm8ttbjyVcdTAwMTiZlFAwj8davCRCMZr1XCKuKV9cdTAwMTLBRq5cdTAwMGVLXCKy2HBXXHUwMDEyQVx1MDAxNuKt/phcXFx1MDAxMcFG7lx1MDAxZVx1MDAxNjxcdTAwMDTe2ahhz1NcdTAwMGYxMpFi8cOtMIvBypbmPZopxcHK2StcXGNcdTAwMDZn/db+SaPxPYKjvVx1MDAwZa9C72jZYaXRkD9N6oyUpLSH8zFYXHUwMDE5aVxy51JcdTAwMTjB8enynllRRU6fXHSu5ilseFx1MDAwMKqQONLzoupmmVB1s1x1MDAxOKpcdTAwMTDK9zHAgDSK4tXMsHpvd6y2XHUwMDA39aOb9/X167hdv17/uPTRylx1MDAxMK+QXGZcdTAwMDSXQKyH5+p4llx1MDAxMlZE3DSRXHUwMDE2+UzBSlxiwZ5cdTAwMTdW/WWCVX/BQj0yplJcXFlcdTAwMGJoZP5cdTAwMTDCNFxc3V+Pv6SFelagIyxoiZTiW1vYdbDaQWJcXGC0sUS9bCmsXHUwMDFlWqZnlIPSMElcdTAwMWOPXHUwMDFiJXJPypXpXHUwMDAxyKTYRUjOKI1Ralx1MDAxY3aW+iquf2VSK1GDnufgRE6nM1Xp3X/uZzWrvyNcdTAwMDZcdTAwMDJcXFx1MDAwYm2lgNzr5tWROj7DKe1cIvLPpWKUcy5YpFx1MDAxN4iNj82b7cpcdTAwMDehv+7tVC/E18aH3lx1MDAwNJmUw0g/yVx1MDAxZdbgaI2eINR6utCGXHUwMDFinpyHUoCIZkyqv1ORXqltp73HrTpcdTAwMWJvJf//QmdrXHUwMDA0Z8Wrd1x1MDAxZY7yP2KnWs2+r3r/Ki/p2Vx1MDAxYWBCOIah5Fx1MDAxYSUjklDIc7kh/6dcZuGWMj5cdTAwMGVFRrNcdTAwMDRna6xMnGs+Vi3V2Zr6XHUwMDExVuv221V7a/eydcBiXGI63eNZz9Y86Vx1MDAxObbHLVx1MDAwNCwl5+UpL+fWMqPs7Nx8sjKXnJtcdTAwMDMz6CCgspzc+jjENHeSd0j0j+OTQiy3XHUwMDEy95ytXHUwMDAxyWjNXGKOz0PO6Y9YqGr/XHUwMDAxh2v+etbDNVPiwuTDNX8t+IKJlb63RUhKm5nls8Pt27tcdTAwMGaf8dj/cH2hXCJxfFxu/NhWl35nXSridlIht4pNOEOdbFNcdTAwMDFxXHSp0jPU7Fx0t9Zzot6DN6tcdTAwMDRalj/y9IRwkyw5fPBscNtsuu22XHUwMDE3zFx1MDAwNbcpyXBcdTAwMWN2XHUwMDE2yoTvRFx1MDAxOcBq5TYyrrmdzm5MOlx1MDAxYZJcdTAwMDLSvl+/nWg24NqV711vTDpCn36SUVOoplx0d8owfq78/C9/l9JcdTAwMDIifQ==<!-- payload-end -->
+<defs>
+<style class="style-fonts">
+      @font-face {
+        font-family: "Virgil";
+        src: url("https://unpkg.com/@excalidraw/excalidraw@0.14.1/dist/excalidraw-assets/Virgil.woff2");
+      }
+      @font-face {
+        font-family: "Cascadia";
+        src: url("https://unpkg.com/@excalidraw/excalidraw@0.14.1/dist/excalidraw-assets/Cascadia.woff2");
+      }
+    </style>
+</defs>
+<rect fill="#ffffff" height="147.5833879846749" width="944.9300952968119" x="0" y="0"></rect><g stroke-linecap="round" transform="translate(271.03145389840597 54.3515625) rotate(0 194.845703125 32.10546875000003)"><path d="M4.27 3.71 C4.27 3.71, 4.27 3.71, 4.27 3.71 M4.27 3.71 C4.27 3.71, 4.27 3.71, 4.27 3.71 M3.36 10.87 C6.25 9.02, 7.09 6.41, 10.57 2.57 M3.36 10.87 C6.71 7.19, 9.4 3.88, 10.57 2.57 M2.44 18.02 C6.48 11.18, 12.56 6.83, 17.53 0.66 M2.44 18.02 C6.04 13.86, 11.26 8.62, 17.53 0.66 M2.83 23.66 C8.85 16.38, 18.34 5.05, 22.51 1.02 M2.83 23.66 C7.84 16.96, 15.37 9.57, 22.51 1.02 M2.57 30.06 C8.82 24.61, 12.03 18.9, 27.5 1.38 M2.57 30.06 C11.91 18.51, 21.8 7.25, 27.5 1.38 M2.97 35.7 C10.3 23.6, 20.79 15.71, 33.14 0.99 M2.97 35.7 C12.18 24.07, 22.08 12.82, 33.14 0.99 M2.7 42.1 C13.62 31.12, 25.76 15.92, 38.13 1.35 M2.7 42.1 C12.4 32.06, 20.62 20.79, 38.13 1.35 M3.1 47.74 C13.63 33.31, 28.18 19.77, 43.77 0.95 M3.1 47.74 C17.73 29.07, 34.63 10.9, 43.77 0.95 M1.53 55.65 C14 40.02, 26.29 24.77, 48.76 1.31 M1.53 55.65 C15.17 39.82, 29.87 24.7, 48.76 1.31 M3.89 59.03 C21.99 36.77, 41.34 14.04, 54.4 0.92 M3.89 59.03 C23.76 36.79, 43.29 14.64, 54.4 0.92 M6.25 62.41 C24.03 42.85, 42.98 19.9, 59.39 1.28 M6.25 62.41 C21.21 43.46, 37.4 27.21, 59.39 1.28 M10.58 63.52 C22.2 50.09, 36.18 35.59, 65.03 0.88 M10.58 63.52 C25.58 45.3, 42.67 25.7, 65.03 0.88 M14.26 65.39 C26.13 50.28, 40.13 35.89, 70.02 1.24 M14.26 65.39 C31.67 46.61, 48.25 26, 70.02 1.24 M19.24 65.75 C37.01 46.94, 50.83 30.68, 75.66 0.85 M19.24 65.75 C33.79 49.22, 47.79 31.29, 75.66 0.85 M24.89 65.36 C39.98 49.68, 53.35 33.12, 80.65 1.21 M24.89 65.36 C46.54 42.26, 66.94 17.21, 80.65 1.21 M29.87 65.72 C46.9 45.92, 62.38 26.81, 86.29 0.81 M29.87 65.72 C49 45.49, 66.02 25.31, 86.29 0.81 M35.52 65.32 C54.13 45.12, 69.37 25.4, 91.28 1.17 M35.52 65.32 C46.87 52.45, 59.89 38.24, 91.28 1.17 M40.5 65.68 C58.33 46.28, 77.62 25.76, 96.92 0.78 M40.5 65.68 C54.5 50.61, 69.16 33.76, 96.92 0.78 M46.15 65.29 C70.37 39.28, 90.44 14.83, 101.91 1.14 M46.15 65.29 C64.81 43.53, 83.02 23.54, 101.91 1.14 M51.13 65.65 C70.69 44.4, 89.41 21.99, 107.55 0.75 M51.13 65.65 C72.11 41.45, 93.75 16.42, 107.55 0.75 M56.78 65.26 C71.01 47.15, 87.45 29.2, 112.54 1.11 M56.78 65.26 C72.09 47.1, 88.67 30.17, 112.54 1.11 M61.76 65.62 C77.21 46.29, 98.06 26.67, 118.19 0.71 M61.76 65.62 C81.26 43.87, 101.04 22.66, 118.19 0.71 M67.41 65.22 C85.91 45.36, 103.46 24.06, 123.17 1.07 M67.41 65.22 C79.86 49.83, 92.58 36.92, 123.17 1.07 M72.39 65.58 C84.34 49.67, 97.83 36.96, 128.16 1.43 M72.39 65.58 C88.31 46.52, 105.82 29.59, 128.16 1.43 M77.38 65.94 C98.92 39.18, 121.58 14.4, 133.8 1.04 M77.38 65.94 C98.77 40.8, 120.85 13.96, 133.8 1.04 M83.02 65.55 C98.82 49.06, 112.54 32.39, 138.79 1.4 M83.02 65.55 C102.27 44.38, 118.99 23.66, 138.79 1.4 M88.01 65.91 C105.07 46.91, 126.49 25.79, 144.43 1 M88.01 65.91 C111.91 39.11, 134.35 14, 144.43 1 M93.65 65.51 C109.65 46.66, 126.22 28.7, 149.42 1.36 M93.65 65.51 C108.33 48.8, 122.88 30.89, 149.42 1.36 M98.64 65.87 C120.42 40.74, 138.36 19.5, 155.06 0.97 M98.64 65.87 C116.11 45.41, 133.28 26.04, 155.06 0.97 M104.28 65.48 C121.94 46.31, 139.99 25.22, 160.05 1.33 M104.28 65.48 C119.65 46.75, 135.27 30.6, 160.05 1.33 M109.27 65.84 C121.85 50.71, 131.36 38.46, 165.69 0.93 M109.27 65.84 C120.61 51.51, 134.66 37.59, 165.69 0.93 M114.91 65.44 C126.85 48.93, 142.64 33.36, 170.68 1.29 M114.91 65.44 C125.66 53.09, 138.07 38.47, 170.68 1.29 M119.9 65.8 C138.93 43.55, 160.73 18.9, 176.32 0.9 M119.9 65.8 C133.97 50.06, 147.43 34.19, 176.32 0.9 M125.54 65.41 C144.95 42.23, 168.38 16.68, 181.31 1.26 M125.54 65.41 C141.39 46.31, 158.07 27.73, 181.31 1.26 M130.53 65.77 C152.49 42.95, 171.77 19.54, 186.95 0.86 M130.53 65.77 C147.57 44.7, 164.66 24.49, 186.95 0.86 M136.17 65.37 C145.73 54.63, 156.45 40.95, 191.94 1.22 M136.17 65.37 C151.12 49.86, 164.01 33.84, 191.94 1.22 M141.16 65.73 C159.48 41.13, 182.98 17.24, 197.58 0.83 M141.16 65.73 C152.04 51.77, 165.96 38.03, 197.58 0.83 M146.8 65.34 C160.14 49.71, 177.01 33.95, 202.57 1.19 M146.8 65.34 C165.88 43.1, 185.83 21.32, 202.57 1.19 M151.79 65.7 C171.81 46.13, 187.81 22.25, 208.21 0.79 M151.79 65.7 C171.24 43.28, 190.61 20.23, 208.21 0.79 M157.43 65.31 C177.29 44.21, 194.55 22.16, 213.2 1.15 M157.43 65.31 C177.83 41.89, 199.27 16.43, 213.2 1.15 M162.42 65.67 C178.19 48.01, 191.52 31.6, 218.19 1.52 M162.42 65.67 C182.32 43.42, 202.42 20.06, 218.19 1.52 M167.41 66.03 C189.48 42.54, 209.79 17.57, 223.83 1.12 M167.41 66.03 C181.77 49.57, 197.05 33.51, 223.83 1.12 M173.05 65.63 C193.35 42.16, 216.37 18.79, 228.82 1.48 M173.05 65.63 C188.4 48.41, 205.04 30.89, 228.82 1.48 M178.04 65.99 C191.02 51.04, 202.27 34.13, 234.46 1.09 M178.04 65.99 C191.14 51.86, 205.28 35.84, 234.46 1.09 M183.68 65.6 C200.12 44.44, 217.87 25.54, 239.45 1.45 M183.68 65.6 C206.36 40.31, 226.84 15.18, 239.45 1.45 M188.67 65.96 C202.65 50.52, 218.12 31.52, 245.09 1.05 M188.67 65.96 C203.52 46.67, 220.65 28.64, 245.09 1.05 M194.31 65.56 C213.3 42.29, 232.37 23.05, 250.08 1.41 M194.31 65.56 C207.16 51.12, 220.45 35.57, 250.08 1.41 M199.3 65.92 C211.09 53.94, 220.98 39.86, 255.72 1.02 M199.3 65.92 C217.46 47.46, 233.53 26.64, 255.72 1.02 M204.94 65.53 C225.03 42.55, 242.49 24.15, 260.71 1.38 M204.94 65.53 C223.65 42.42, 242.71 21.35, 260.71 1.38 M209.93 65.89 C225.49 50.09, 236.32 33.24, 266.35 0.98 M209.93 65.89 C229 45.12, 245.96 22.69, 266.35 0.98 M215.57 65.49 C236.86 39.33, 258.63 12.72, 271.34 1.34 M215.57 65.49 C231.51 47.96, 246.14 29.33, 271.34 1.34 M220.56 65.85 C240.36 44.12, 257.34 22.14, 276.98 0.95 M220.56 65.85 C238.72 45.72, 257.53 24.47, 276.98 0.95 M226.2 65.46 C242.12 50.09, 255.87 30.26, 281.97 1.31 M226.2 65.46 C239.86 49.65, 254.66 33.14, 281.97 1.31 M231.19 65.82 C248.21 44.59, 264.79 23.53, 287.61 0.91 M231.19 65.82 C251.28 41.86, 272.07 16.89, 287.61 0.91 M236.83 65.42 C254.14 45.96, 270.01 30.01, 292.6 1.27 M236.83 65.42 C251.28 48.21, 267.11 31.3, 292.6 1.27 M241.82 65.78 C253.39 53.31, 264.14 37.71, 298.24 0.88 M241.82 65.78 C258.6 47.19, 274.4 28.54, 298.24 0.88 M247.46 65.39 C260.19 50.23, 272.48 36.5, 303.23 1.24 M247.46 65.39 C259.85 51.84, 271.25 39.82, 303.23 1.24 M252.45 65.75 C268.88 47.78, 285.69 29.8, 308.87 0.84 M252.45 65.75 C264.67 52.04, 276.86 38.4, 308.87 0.84 M258.09 65.35 C272.22 45.77, 288.97 28.75, 313.86 1.2 M258.09 65.35 C278.62 43.07, 296.64 22.55, 313.86 1.2 M263.08 65.72 C276.86 52.61, 288.47 38.18, 318.84 1.56 M263.08 65.72 C275.29 52.7, 286.46 39.24, 318.84 1.56 M268.07 66.08 C281.48 50.29, 297.56 34.67, 324.49 1.17 M268.07 66.08 C290.1 42.29, 311.72 16.62, 324.49 1.17 M273.71 65.68 C293.78 45.08, 308.92 24.66, 329.47 1.53 M273.71 65.68 C290.59 44.82, 307.79 26.45, 329.47 1.53 M278.7 66.04 C291.62 51.08, 302.52 40.18, 335.12 1.14 M278.7 66.04 C292.35 48.35, 307.32 32.94, 335.12 1.14 M284.34 65.65 C299.89 47.41, 314.8 30.21, 340.1 1.5 M284.34 65.65 C297.32 50.16, 309.6 36.36, 340.1 1.5 M289.33 66.01 C311.6 40.07, 332.56 14.73, 345.75 1.1 M289.33 66.01 C309.45 43.54, 328.23 20.18, 345.75 1.1 M294.97 65.61 C309.82 45.8, 327.58 28.09, 350.73 1.46 M294.97 65.61 C316.42 39.86, 338.52 14.81, 350.73 1.46 M299.96 65.97 C316.12 50.34, 332.02 33.68, 356.38 1.07 M299.96 65.97 C314.13 50.41, 329.14 32.65, 356.38 1.07 M305.6 65.58 C322.39 49.49, 335.35 30.43, 361.37 1.43 M305.6 65.58 C318.32 51.57, 331.93 35.94, 361.37 1.43 M310.59 65.94 C330.52 43.8, 351.56 20.86, 367.01 1.03 M310.59 65.94 C332.94 41.09, 354.24 15.48, 367.01 1.03 M316.23 65.54 C328.28 48.45, 342.91 32.28, 372 1.39 M316.23 65.54 C329.25 52.19, 340.9 37.74, 372 1.39 M321.22 65.9 C341.31 41.75, 361.09 16, 377.64 1 M321.22 65.9 C333.96 52.84, 345.43 39, 377.64 1 M326.86 65.51 C348.4 40.08, 369.79 14.6, 381.97 2.11 M326.86 65.51 C339.11 50.52, 351.57 36.39, 381.97 2.11 M331.85 65.87 C345.14 47.62, 358.5 33.36, 385.64 3.98 M331.85 65.87 C351.35 42.82, 372.01 17.88, 385.64 3.98 M337.49 65.47 C358.38 43.27, 376.62 21.68, 388.01 7.36 M337.49 65.47 C357.5 41.67, 377.57 18.07, 388.01 7.36 M342.48 65.83 C353.37 55.97, 359.91 44.75, 390.37 10.74 M342.48 65.83 C354.75 53.44, 364.38 41.72, 390.37 10.74 M348.12 65.44 C357.74 52.35, 367.41 42.44, 390.76 16.38 M348.12 65.44 C359.16 53.83, 369.42 41.22, 390.76 16.38 M353.11 65.8 C365.53 48.96, 380.46 31.25, 390.5 22.78 M353.11 65.8 C362.77 54.26, 374.63 40.69, 390.5 22.78 M358.09 66.16 C364.88 55.52, 372.21 46.57, 390.9 28.42 M358.09 66.16 C371.04 50.83, 383.79 35.83, 390.9 28.42 M363.74 65.76 C370.49 58.69, 373.96 54.81, 390.64 34.82 M363.74 65.76 C372.68 56.22, 379.72 45.96, 390.64 34.82 M368.72 66.12 C375.48 58.79, 380.57 50.95, 391.03 40.46 M368.72 66.12 C377.01 55.86, 385.31 45.33, 391.03 40.46 M375.02 64.98 C380.69 57.08, 383.33 53.13, 391.43 46.11 M375.02 64.98 C379.24 59.46, 384.96 53.24, 391.43 46.11 M381.32 63.83 C384.7 60.82, 386.37 56.3, 390.51 53.26 M381.32 63.83 C383.98 60.96, 387.77 56.49, 390.51 53.26" fill="none" stroke="#fab005" stroke-width="0.5"></path><path d="M16.05 0 M16.05 0 C140.5 2.14, 263.35 0.54, 373.64 0 M16.05 0 C109.46 0.89, 201.29 1.08, 373.64 0 M373.64 0 C383.12 0.27, 390.68 4.63, 389.69 16.05 M373.64 0 C383.5 -1.18, 391.69 7.35, 389.69 16.05 M389.69 16.05 C388.01 29.78, 391.32 42.98, 389.69 48.16 M389.69 16.05 C390.48 26.14, 390.4 37.59, 389.69 48.16 M389.69 48.16 C388.17 58.51, 385.86 65.63, 373.64 64.21 M389.69 48.16 C389.35 57.56, 383.28 66.28, 373.64 64.21 M373.64 64.21 C243.54 61.82, 112.01 62.06, 16.05 64.21 M373.64 64.21 C264.3 66.13, 155.32 66.53, 16.05 64.21 M16.05 64.21 C7.23 66.18, 1.35 58.87, 0 48.16 M16.05 64.21 C4.03 65.79, 0.54 57.83, 0 48.16 M0 48.16 C0.25 41.27, -1.18 32.7, 0 16.05 M0 48.16 C-0.74 34.91, -0.31 22.48, 0 16.05 M0 16.05 C0.6 7.25, 4.21 1.77, 16.05 0 M0 16.05 C1.4 5.19, 5.27 0.4, 16.05 0" fill="none" stroke="transparent" stroke-width="1"></path></g><g stroke-linecap="round" transform="translate(10 31.829481734674914) rotate(0 85.41015625 52.876953125)"><path d="M26.44 0 M26.44 0 C54.54 0.42, 85.27 -1.59, 144.38 0 M26.44 0 C60.49 0.22, 92.27 -0.68, 144.38 0 M144.38 0 C161.93 0.42, 170.87 9.96, 170.82 26.44 M144.38 0 C159.82 0.93, 172.23 10.26, 170.82 26.44 M170.82 26.44 C169.2 35.97, 169.07 48.33, 170.82 79.32 M170.82 26.44 C169.79 38.12, 170.16 49.32, 170.82 79.32 M170.82 79.32 C172.4 96.93, 160.94 105.6, 144.38 105.75 M170.82 79.32 C170.76 97.62, 161.52 104.81, 144.38 105.75 M144.38 105.75 C120.57 102.98, 98.13 106.65, 26.44 105.75 M144.38 105.75 C106.02 104.96, 65.41 104.78, 26.44 105.75 M26.44 105.75 C7.79 105.32, 0.49 98.91, 0 79.32 M26.44 105.75 C9.28 106.36, 1.59 95.01, 0 79.32 M0 79.32 C0.02 59.09, -0.2 42.08, 0 26.44 M0 79.32 C-0.57 64.72, 1.11 51.33, 0 26.44 M0 26.44 C1.11 9.47, 8.08 1.57, 26.44 0 M0 26.44 C1.06 7.49, 6.88 -1.39, 26.44 0" fill="none" stroke="#000000" stroke-width="2"></path></g><g transform="translate(46.41015625 66.70643485967491) rotate(0 49 18)"><text direction="ltr" fill="#000000" font-family="Virgil, Segoe UI Emoji" font-size="28px" style="white-space: pre;" text-anchor="middle" x="49" y="25">task α</text></g><g stroke-linecap="round"><g transform="translate(182.41333959275227 86.45446904549976) rotate(0 39.21335672585647 -0.04947711603816174)"><path d="M-0.41 0.92 C12.76 0.86, 66.41 -0.18, 79.54 -0.4 M1.57 0.35 C14.65 0.49, 66.51 0.91, 79.17 0.98" fill="none" stroke="#495057" stroke-width="4"></path></g><g transform="translate(182.41333959275227 86.45446904549976) rotate(0 39.21335672585647 -0.04947711603816174)"><path d="M52.44 12.89 C60.01 7.58, 69.61 4.88, 78.64 -0.5 M51.08 11.95 C58.89 9.43, 65.73 5.25, 80.04 0.55" fill="none" stroke="#495057" stroke-width="4"></path></g><g transform="translate(182.41333959275227 86.45446904549976) rotate(0 39.21335672585647 -0.04947711603816174)"><path d="M52.58 -7.63 C60.09 -5.97, 69.65 -1.71, 78.64 -0.5 M51.22 -8.57 C59.12 -5.98, 65.92 -5.04, 80.04 0.55" fill="none" stroke="#495057" stroke-width="4"></path></g></g><mask></mask><g stroke-linecap="round" transform="translate(271.9904500878789 53.77910180799398) rotate(0 12.41015625 32.078125)"><path d="M10.72 0.33 C13.52 -0.73, 17.88 1.21, 20.13 5.07 C22.38 8.93, 23.53 17.05, 24.22 23.5 C24.91 29.94, 25.28 37.71, 24.28 43.74 C23.27 49.78, 20.73 56.56, 18.19 59.7 C15.65 62.85, 11.81 63.84, 9.03 62.6 C6.25 61.37, 2.87 57.62, 1.5 52.28 C0.14 46.93, 0.6 37.53, 0.85 30.53 C1.09 23.54, 0.78 15.4, 2.98 10.31 C5.17 5.21, 11.48 0.99, 14.01 -0.02 C16.54 -1.03, 18.09 3.59, 18.16 4.25 M10.77 0.03 C13.21 -0.79, 18.36 0.88, 20.43 5.1 C22.5 9.31, 22.66 18.28, 23.19 25.33 C23.72 32.38, 24.67 41.5, 23.61 47.42 C22.54 53.34, 19.25 58.13, 16.8 60.87 C14.35 63.61, 11.39 65.48, 8.92 63.87 C6.45 62.25, 3.36 57.22, 2.01 51.2 C0.65 45.18, 0.56 34.9, 0.79 27.73 C1.02 20.55, 1.43 12.53, 3.37 8.14 C5.3 3.75, 11.14 2.64, 12.4 1.39 C13.66 0.14, 10.89 0.38, 10.95 0.64" fill="none" stroke="#000000" stroke-width="1"></path></g><g stroke-linecap="round"><g transform="translate(285.9982625878789 54.84941430799398) rotate(0 181.19658834235537 0)"><path d="M-0.67 0.25 C79.65 0.56, 158.47 -0.64, 361.39 0.53 M0.5 -0.21 C110.27 1.7, 219.63 2.71, 361.84 0.06" fill="none" stroke="#000000" stroke-width="1"></path></g></g><mask></mask><g stroke-linecap="round"><g transform="translate(285.5192428272055 117.88678724756647) rotate(0 183.09984500391266 0)"><path d="M0.4 0.83 C93.44 0.27, 189.42 0.5, 366.4 -0.21 M-0.07 -0.16 C106.69 -1.7, 213.16 -1.41, 366.73 0.24" fill="none" stroke="#000000" stroke-width="1"></path></g></g><mask></mask><g stroke-linecap="round"><g transform="translate(409.96492769592135 56.883317745092825) rotate(0 5.9649082279449885 29.60911808133912)"><path d="M0.38 -0.96 C1.75 1.05, 6.37 7.66, 8.15 12.93 C9.93 18.2, 10.85 24.5, 11.07 30.64 C11.29 36.78, 10.47 45.17, 9.48 49.77 C8.49 54.37, 6.22 56.82, 5.15 58.23 M-0.88 1.15 C0.38 2.73, 5.06 6.51, 7.46 11.11 C9.86 15.71, 13.24 22.12, 13.52 28.76 C13.8 35.39, 10.71 46.01, 9.15 50.9 C7.59 55.8, 5.06 56.53, 4.18 58.1" fill="none" stroke="#000000" stroke-width="1"></path></g></g><mask></mask><g stroke-linecap="round"><g transform="translate(649.3722128403025 56.79638992600519) rotate(0 5.9649082279449885 29.60911808133912)"><path d="M-0.46 -0.22 C1 1.69, 6.73 7.27, 8.81 12.33 C10.88 17.39, 11.61 23.74, 11.99 30.16 C12.37 36.58, 12.4 45.88, 11.08 50.85 C9.77 55.82, 5.15 58.67, 4.1 59.96 M1.49 -1.39 C2.89 0.66, 6.83 8.95, 8.46 13.85 C10.09 18.75, 10.73 22.18, 11.25 28.02 C11.78 33.86, 13.04 43.44, 11.6 48.89 C10.15 54.35, 4.04 58.74, 2.59 60.75" fill="none" stroke="#000000" stroke-width="1"></path></g></g><mask></mask><g stroke-linecap="round"><g transform="translate(537.0650128069335 55.641966221873304) rotate(0 5.9649082279449885 29.60911808133912)"><path d="M-0.47 0.95 C0.96 3.17, 5.31 8.1, 7.52 12.8 C9.72 17.5, 12.39 22.94, 12.75 29.15 C13.11 35.36, 11.1 45.11, 9.7 50.06 C8.3 55.01, 5.11 57.31, 4.36 58.84 M1.48 0.41 C2.84 2.3, 4.67 5.96, 6.49 10.91 C8.32 15.87, 11.92 23.4, 12.42 30.14 C12.91 36.88, 11.06 46.53, 9.49 51.35 C7.91 56.16, 3.98 57.89, 2.97 59.03" fill="none" stroke="#000000" stroke-width="1"></path></g></g><mask></mask><g transform="translate(321.2660677224569 73.88756164537693) rotate(0 35.5 12)"><text direction="ltr" fill="#000000" font-family="Cascadia, Segoe UI Emoji" font-size="20px" style="white-space: pre;" text-anchor="start" x="0" y="20">file z</text></g><g transform="translate(448.0863531994461 74.1467478564262) rotate(0 35.5 12)"><text direction="ltr" fill="#000000" font-family="Cascadia, Segoe UI Emoji" font-size="20px" style="white-space: pre;" text-anchor="start" x="0" y="20">file y</text></g><g transform="translate(568.8086807319922 74.1467478564262) rotate(0 35.5 12)"><text direction="ltr" fill="#000000" font-family="Cascadia, Segoe UI Emoji" font-size="20px" style="white-space: pre;" text-anchor="start" x="0" y="20">file x</text></g><g stroke-linecap="round"><g transform="translate(661.7989976279478 89.54843309745587) rotate(0 43.12902539693209 0.05760157265444832)"><path d="M-0.48 0.19 C14.17 -0.07, 72.79 -1.21, 87.07 -1.08 M1.47 -0.76 C16.1 -0.95, 72.21 -0.14, 86.56 -0.17" fill="none" stroke="#495057" stroke-width="4"></path></g><g transform="translate(661.7989976279478 89.54843309745587) rotate(0 43.12902539693209 0.05760157265444832)"><path d="M58.6 11.26 C62.83 5.92, 72.76 4.55, 84.82 1.17 M57.58 10.4 C67.9 5.72, 76.8 2.77, 86.4 0.12" fill="none" stroke="#495057" stroke-width="4"></path></g><g transform="translate(661.7989976279478 89.54843309745587) rotate(0 43.12902539693209 0.05760157265444832)"><path d="M58.74 -9.26 C63.01 -9.84, 72.91 -6.45, 84.82 1.17 M57.72 -10.12 C67.88 -8.33, 76.73 -4.81, 86.4 0.12" fill="none" stroke="#495057" stroke-width="4"></path></g></g><mask></mask><g stroke-linecap="round" transform="translate(764.1097827968119 30.783799515325086) rotate(0 85.41015625 52.876953125)"><path d="M26.44 0 M26.44 0 C67.84 -0.13, 105.69 -1.35, 144.38 0 M26.44 0 C60.83 -0.49, 94.04 -0.81, 144.38 0 M144.38 0 C160.2 -1.69, 171.71 7.17, 170.82 26.44 M144.38 0 C162.57 -1.37, 172 10.67, 170.82 26.44 M170.82 26.44 C172.1 44.15, 172.38 64.06, 170.82 79.32 M170.82 26.44 C170.68 43.3, 170.19 60.85, 170.82 79.32 M170.82 79.32 C169.52 97.23, 161.41 107.16, 144.38 105.75 M170.82 79.32 C172.98 94.76, 160.04 106.94, 144.38 105.75 M144.38 105.75 C112.7 105.46, 84.02 105.86, 26.44 105.75 M144.38 105.75 C104.08 106.2, 62.3 106.45, 26.44 105.75 M26.44 105.75 C9.51 107.6, 1.21 94.99, 0 79.32 M26.44 105.75 C10.52 105.92, 2.01 95.3, 0 79.32 M0 79.32 C-0.93 66.84, -0.4 54.38, 0 26.44 M0 79.32 C-0.08 66.91, 1.04 55.1, 0 26.44 M0 26.44 C-0.37 8.68, 9.51 -1.71, 26.44 0 M0 26.44 C2.26 8.54, 10.73 -0.48, 26.44 0" fill="none" stroke="#000000" stroke-width="2"></path></g><g transform="translate(801.5199390468119 65.66075264032509) rotate(0 48 18)"><text direction="ltr" fill="#000000" font-family="Virgil, Segoe UI Emoji" font-size="28px" style="white-space: pre;" text-anchor="middle" x="48" y="25">task β</text></g><g transform="translate(280.36348514840597 10) rotate(0 50 18)"><text direction="ltr" fill="#000000" font-family="Virgil, Segoe UI Emoji" font-size="28px" style="white-space: pre;" text-anchor="start" x="0" y="25">Channel</text></g></svg>
+</figure>
+<h2 id="channel-types"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.1</span> Channel types<a class="headerlink" href="#channel-types" title="Permanent link">¶</a></h2>
+<p>Nextflow distinguishes two different kinds of channels: <strong>queue</strong> channels and <strong>value</strong> channels.</p>
+<h3 id="queue-channel"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.1.1</span> Queue channel<a class="headerlink" href="#queue-channel" title="Permanent link">¶</a></h3>
+<p>A <strong>queue</strong> channel is an <em>asynchronous</em> unidirectional <em>FIFO</em> queue that connects two processes or operators.</p>
+<ul>
+<li><em>asynchronous</em> means that operations are non-blocking.</li>
+<li><em>unidirectional</em> means that data flows from a producer to a consumer.</li>
+<li><em>FIFO</em> means that the data is guaranteed to be delivered in the same order as it is produced. First In, First Out.</li>
+</ul>
+<p>A queue channel is implicitly created by process output definitions or using channel factories such as <a href="https://www.nextflow.io/docs/latest/channel.html#of">Channel.of</a> or <a href="https://www.nextflow.io/docs/latest/channel.html#frompath">Channel.fromPath</a>.</p>
+<p>Try the following snippets:</p>
+<div class="admonition info">
+<p>Click the <span class="twemoji"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17 13h-4v4h-2v-4H7v-2h4V7h2v4h4m-5-9A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2"></path></svg></span> icons in the code for explanations.</p>
+</div>
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span>
+<span class="normal"><a href="#__codelineno-0-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="n">ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="w"> </span><span class="mi">2</span><span class="o">,</span><span class="w"> </span><span class="mi">3</span><span class="o">)</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="n">ch</span><span class="o">.</span><span class="na">view</span><span class="o">()</span><span class="w"> </span><span class="c1">// (1)!</span>
+</code></pre></div></td></tr></table></div>
+<ol>
+<li>Applying the <code>view</code> channel operator to the <code>ch</code> channel prints each item emitted by the channels</li>
+</ol>
+<div class="admonition question">
+<p class="admonition-title">Exercise</p>
+<p>The script <code>snippet.nf</code> contains the code from above. Execute it with Nextflow and view the output.</p>
+<details class="solution">
+<summary>Solution</summary>
+<p>Run the following command:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>snippet.nf
+</code></pre></div>
+<p>The output should be:</p>
+<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="go">1</span>
+<a href="#__codelineno-2-2" id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="go">2</span>
+<a href="#__codelineno-2-3" id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="go">3</span>
+</code></pre></div>
+</details>
+</div>
+<h3 id="value-channels"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.1.2</span> Value channels<a class="headerlink" href="#value-channels" title="Permanent link">¶</a></h3>
+<p>A <strong>value</strong> channel (a.k.a. a singleton channel) is bound to a single value and it can be read unlimited times without consuming its contents. A <code>value</code> channel is created using the <a href="https://www.nextflow.io/docs/latest/channel.html#value">value</a> channel factory or by operators returning a single value, such as <a href="https://www.nextflow.io/docs/latest/operator.html#first">first</a>, <a href="https://www.nextflow.io/docs/latest/operator.html#last">last</a>, <a href="https://www.nextflow.io/docs/latest/operator.html#operator-collect">collect</a>, <a href="https://www.nextflow.io/docs/latest/operator.html#operator-count">count</a>, <a href="https://www.nextflow.io/docs/latest/operator.html#operator-min">min</a>, <a href="https://www.nextflow.io/docs/latest/operator.html#operator-max">max</a>, <a href="https://www.nextflow.io/docs/latest/operator.html#operator-reduce">reduce</a>, and <a href="https://www.nextflow.io/docs/latest/operator.html#operator-sum">sum</a>.</p>
+<p>To see the difference between value and queue channels, you can modify <code>snippet.nf</code> to the following:</p>
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-3-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-3-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-3-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-3-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-3-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-3-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-3-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-3-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-3-10">10</a></span>
+<span class="normal"><a href="#__codelineno-3-11">11</a></span>
+<span class="normal"><a href="#__codelineno-3-12">12</a></span>
+<span class="normal"><a href="#__codelineno-3-13">13</a></span>
+<span class="normal"><a href="#__codelineno-3-14">14</a></span>
+<span class="normal"><a href="#__codelineno-3-15">15</a></span>
+<span class="normal"><a href="#__codelineno-3-16">16</a></span>
+<span class="normal"><a href="#__codelineno-3-17">17</a></span>
+<span class="normal"><a href="#__codelineno-3-18">18</a></span>
+<span class="normal"><a href="#__codelineno-3-19">19</a></span>
+<span class="normal"><a href="#__codelineno-3-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="n">ch1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="w"> </span><span class="mi">2</span><span class="o">,</span><span class="w"> </span><span class="mi">3</span><span class="o">)</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="n">ch2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3"></a>
+<a id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="n">process</span><span class="w"> </span><span class="n">SUM</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6"></a><span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="n">x</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7"></a><span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="n">y</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8"></a>
+<a id="__codelineno-3-9" name="__codelineno-3-9"></a><span class="w">    </span><span class="nl">output:</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10"></a><span class="w">    </span><span class="n">stdout</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11"></a>
+<a id="__codelineno-3-12" name="__codelineno-3-12"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13"></a><span class="w">    </span><span class="s2">"""</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14"></a><span class="s2">    echo \$(($x+$y))</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15"></a><span class="s2">    """</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16"></a><span class="o">}</span>
+<a id="__codelineno-3-17" name="__codelineno-3-17"></a>
+<a id="__codelineno-3-18" name="__codelineno-3-18"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-3-19" name="__codelineno-3-19"></a><span class="w">    </span><span class="n">SUM</span><span class="o">(</span><span class="n">ch1</span><span class="o">,</span><span class="w"> </span><span class="n">ch2</span><span class="o">).</span><span class="na">view</span><span class="o">()</span>
+<a id="__codelineno-3-20" name="__codelineno-3-20"></a><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
+<p>This workflow creates two channels, <code>ch1</code> and <code>ch2</code>, and then uses them as inputs to the <code>SUM</code> process. The <code>SUM</code> process sums the two inputs and prints the result to the standard output.</p>
+<p>When you run this script, it only prints <code>2</code>, as you can see below:</p>
+<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="go">2</span>
+</code></pre></div>
+<p>A process will only instantiate a task when there are elements to be consumed from <em>all</em> the channels provided as input to it. Because <code>ch1</code> and <code>ch2</code> are queue channels, and the single element of <code>ch2</code> has been consumed, no new process instances will be launched, even if there are other elements to be consumed in <code>ch1</code>.</p>
+<p>To use the single element in <code>ch2</code> multiple times, you can either use the <code>Channel.value</code> channel factory, or use a channel operator that returns a single element, such as <code>first()</code>:</p>
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-5-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-5-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-5-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-5-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-5-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-5-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-5-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-5-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-5-10">10</a></span>
+<span class="normal"><a href="#__codelineno-5-11">11</a></span>
+<span class="normal"><a href="#__codelineno-5-12">12</a></span>
+<span class="normal"><a href="#__codelineno-5-13">13</a></span>
+<span class="normal"><a href="#__codelineno-5-14">14</a></span>
+<span class="normal"><a href="#__codelineno-5-15">15</a></span>
+<span class="normal"><a href="#__codelineno-5-16">16</a></span>
+<span class="normal"><a href="#__codelineno-5-17">17</a></span>
+<span class="normal"><a href="#__codelineno-5-18">18</a></span>
+<span class="normal"><a href="#__codelineno-5-19">19</a></span>
+<span class="normal"><a href="#__codelineno-5-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="n">ch1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="w"> </span><span class="mi">2</span><span class="o">,</span><span class="w"> </span><span class="mi">3</span><span class="o">)</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="n">ch2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">value</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3"></a>
+<a id="__codelineno-5-4" name="__codelineno-5-4"></a><span class="n">process</span><span class="w"> </span><span class="n">SUM</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6"></a><span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="n">x</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7"></a><span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="n">y</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8"></a>
+<a id="__codelineno-5-9" name="__codelineno-5-9"></a><span class="w">    </span><span class="nl">output:</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10"></a><span class="w">    </span><span class="n">stdout</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11"></a>
+<a id="__codelineno-5-12" name="__codelineno-5-12"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-5-13" name="__codelineno-5-13"></a><span class="w">    </span><span class="s2">"""</span>
+<a id="__codelineno-5-14" name="__codelineno-5-14"></a><span class="s2">    echo \$(($x+$y))</span>
+<a id="__codelineno-5-15" name="__codelineno-5-15"></a><span class="s2">    """</span>
+<a id="__codelineno-5-16" name="__codelineno-5-16"></a><span class="o">}</span>
+<a id="__codelineno-5-17" name="__codelineno-5-17"></a>
+<a id="__codelineno-5-18" name="__codelineno-5-18"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-5-19" name="__codelineno-5-19"></a><span class="w">    </span><span class="n">SUM</span><span class="o">(</span><span class="n">ch1</span><span class="o">,</span><span class="w"> </span><span class="n">ch2</span><span class="o">).</span><span class="na">view</span><span class="o">()</span>
+<a id="__codelineno-5-20" name="__codelineno-5-20"></a><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a href="#__codelineno-6-1" id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="go">2</span>
+<a href="#__codelineno-6-2" id="__codelineno-6-2" name="__codelineno-6-2"></a><span class="go">3</span>
+<a href="#__codelineno-6-3" id="__codelineno-6-3" name="__codelineno-6-3"></a><span class="go">4</span>
+</code></pre></div>
+<p>In many situations, Nextflow will implicitly convert variables to value channels when they are used in a process invocation.</p>
+<p>For example, when you invoke a process with a workflow parameter (<code>params.ch2</code>) which has a string value, it is automatically cast into a value channel:</p>
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-7-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-7-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-7-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-7-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-7-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-7-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-7-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-7-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-7-10">10</a></span>
+<span class="normal"><a href="#__codelineno-7-11">11</a></span>
+<span class="normal"><a href="#__codelineno-7-12">12</a></span>
+<span class="normal"><a href="#__codelineno-7-13">13</a></span>
+<span class="normal"><a href="#__codelineno-7-14">14</a></span>
+<span class="normal"><a href="#__codelineno-7-15">15</a></span>
+<span class="normal"><a href="#__codelineno-7-16">16</a></span>
+<span class="normal"><a href="#__codelineno-7-17">17</a></span>
+<span class="normal"><a href="#__codelineno-7-18">18</a></span>
+<span class="normal"><a href="#__codelineno-7-19">19</a></span>
+<span class="normal"><a href="#__codelineno-7-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="n">ch1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="w"> </span><span class="mi">2</span><span class="o">,</span><span class="w"> </span><span class="mi">3</span><span class="o">)</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2"></a><span class="n">params</span><span class="o">.</span><span class="na">ch2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"1"</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3"></a>
+<a id="__codelineno-7-4" name="__codelineno-7-4"></a><span class="n">process</span><span class="w"> </span><span class="n">SUM</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6"></a><span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="n">x</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7"></a><span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="n">y</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8"></a>
+<a id="__codelineno-7-9" name="__codelineno-7-9"></a><span class="w">    </span><span class="nl">output:</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10"></a><span class="w">    </span><span class="n">stdout</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11"></a>
+<a id="__codelineno-7-12" name="__codelineno-7-12"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-7-13" name="__codelineno-7-13"></a><span class="w">    </span><span class="s2">"""</span>
+<a id="__codelineno-7-14" name="__codelineno-7-14"></a><span class="s2">    echo \$(($x+$y))</span>
+<a id="__codelineno-7-15" name="__codelineno-7-15"></a><span class="s2">    """</span>
+<a id="__codelineno-7-16" name="__codelineno-7-16"></a><span class="o">}</span>
+<a id="__codelineno-7-17" name="__codelineno-7-17"></a>
+<a id="__codelineno-7-18" name="__codelineno-7-18"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-7-19" name="__codelineno-7-19"></a><span class="w">    </span><span class="n">SUM</span><span class="o">(</span><span class="n">ch1</span><span class="o">,</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">ch2</span><span class="o">).</span><span class="na">view</span><span class="o">()</span>
+<a id="__codelineno-7-20" name="__codelineno-7-20"></a><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
+<p>As you can see, the output is the same as the previous example when the <code>first()</code> operator was used:</p>
+<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a href="#__codelineno-8-1" id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="go">2</span>
+<a href="#__codelineno-8-2" id="__codelineno-8-2" name="__codelineno-8-2"></a><span class="go">3</span>
+<a href="#__codelineno-8-3" id="__codelineno-8-3" name="__codelineno-8-3"></a><span class="go">4</span>
+</code></pre></div>
+<div class="admonition question">
+<p class="admonition-title">Exercise</p>
+<p>Use the <code>.first()</code> operator to create a value channel from <code>ch2</code> so that all 3 elements of <code>ch1</code> are consumed.</p>
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-9-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-9-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-9-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-9-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-9-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-9-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-9-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-9-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-9-10">10</a></span>
+<span class="normal"><a href="#__codelineno-9-11">11</a></span>
+<span class="normal"><a href="#__codelineno-9-12">12</a></span>
+<span class="normal"><a href="#__codelineno-9-13">13</a></span>
+<span class="normal"><a href="#__codelineno-9-14">14</a></span>
+<span class="normal"><a href="#__codelineno-9-15">15</a></span>
+<span class="normal"><a href="#__codelineno-9-16">16</a></span>
+<span class="normal"><a href="#__codelineno-9-17">17</a></span>
+<span class="normal"><a href="#__codelineno-9-18">18</a></span>
+<span class="normal"><a href="#__codelineno-9-19">19</a></span>
+<span class="normal"><a href="#__codelineno-9-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="n">ch1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="w"> </span><span class="mi">2</span><span class="o">,</span><span class="w"> </span><span class="mi">3</span><span class="o">)</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2"></a><span class="n">ch2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3"></a>
+<a id="__codelineno-9-4" name="__codelineno-9-4"></a><span class="n">process</span><span class="w"> </span><span class="n">SUM</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6"></a><span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="n">x</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7"></a><span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="n">y</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8"></a>
+<a id="__codelineno-9-9" name="__codelineno-9-9"></a><span class="w">    </span><span class="nl">output:</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10"></a><span class="w">    </span><span class="n">stdout</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11"></a>
+<a id="__codelineno-9-12" name="__codelineno-9-12"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-9-13" name="__codelineno-9-13"></a><span class="w">    </span><span class="s2">"""</span>
+<a id="__codelineno-9-14" name="__codelineno-9-14"></a><span class="s2">    echo \$(($x+$y))</span>
+<a id="__codelineno-9-15" name="__codelineno-9-15"></a><span class="s2">    """</span>
+<a id="__codelineno-9-16" name="__codelineno-9-16"></a><span class="o">}</span>
+<a id="__codelineno-9-17" name="__codelineno-9-17"></a>
+<a id="__codelineno-9-18" name="__codelineno-9-18"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-9-19" name="__codelineno-9-19"></a><span class="w">    </span><span class="n">SUM</span><span class="o">(</span><span class="n">ch1</span><span class="o">,</span><span class="w"> </span><span class="n">ch2</span><span class="o">).</span><span class="na">view</span><span class="o">()</span>
+<a id="__codelineno-9-20" name="__codelineno-9-20"></a><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
+<details class="solution">
+<summary>Solution</summary>
+<p>Modify the <code>workflow</code> section to the following:</p>
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">1</a></span>
+<span class="normal"><a href="#__codelineno-10-2">2</a></span>
+<span class="normal"><a href="#__codelineno-10-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2"></a><span class="w">    </span><span class="n">SUM</span><span class="o">(</span><span class="n">ch1</span><span class="o">,</span><span class="w"> </span><span class="n">ch2</span><span class="o">.</span><span class="na">first</span><span class="o">()).</span><span class="na">view</span><span class="o">()</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3"></a><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
+</details>
+</div>
+<div class="admonition cboard-list-2">
+<p class="admonition-title">Summary</p>
+<p>In this step you have learned:</p>
+<ol>
+<li>The features of a value and queue channels</li>
+<li>Strategies to change channel types</li>
+</ol>
+</div>
+<h2 id="channel-factories"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.2</span> Channel factories<a class="headerlink" href="#channel-factories" title="Permanent link">¶</a></h2>
+<p>Channel factories are Nextflow commands for creating channels that have implicit expected inputs and functions. There are several different Channel factories which are useful for different situations. The following sections will cover the most common channel factories.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>New in version 20.07.0: channel was introduced as an alias of Channel, allowing factory methods to be specified as <code>channel.of()</code> or <code>Channel.of()</code>, and so on.</p>
+</div>
+<h3 id="value"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.2.1</span> <code>value()</code><a class="headerlink" href="#value" title="Permanent link">¶</a></h3>
+<p>The <code>value</code> channel factory is used to create a <em>value</em> channel. An optional not <code>null</code> argument can be specified to bind the channel to a specific value. For example:</p>
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1">1</a></span>
+<span class="normal"><a href="#__codelineno-11-2">2</a></span>
+<span class="normal"><a href="#__codelineno-11-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="n">ch1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">value</span><span class="o">()</span><span class="w"> </span><span class="c1">// (1)!</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2"></a><span class="n">ch2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">value</span><span class="o">(</span><span class="s1">'Hello there'</span><span class="o">)</span><span class="w"> </span><span class="c1">// (2)!</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3"></a><span class="n">ch3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">value</span><span class="o">([</span><span class="mi">1</span><span class="o">,</span><span class="w"> </span><span class="mi">2</span><span class="o">,</span><span class="w"> </span><span class="mi">3</span><span class="o">,</span><span class="w"> </span><span class="mi">4</span><span class="o">,</span><span class="w"> </span><span class="mi">5</span><span class="o">])</span><span class="w"> </span><span class="c1">// (3)!</span>
+</code></pre></div></td></tr></table></div>
+<ol>
+<li>Creates an <em>empty</em> value channel</li>
+<li>Creates a value channel and binds a string to it</li>
+<li>Creates a value channel and binds a list object to it that will be emitted as a sole emission</li>
+</ol>
+<h3 id="of"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.2.2</span> <code>of()</code><a class="headerlink" href="#of" title="Permanent link">¶</a></h3>
+<p>The factory <code>Channel.of</code> allows the creation of a queue channel with the values specified as arguments.</p>
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1">1</a></span>
+<span class="normal"><a href="#__codelineno-12-2">2</a></span>
+<span class="normal"><a href="#__codelineno-12-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="n">Channel</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2"></a><span class="w">    </span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="w"> </span><span class="mi">3</span><span class="o">,</span><span class="w"> </span><span class="mi">5</span><span class="o">,</span><span class="w"> </span><span class="mi">7</span><span class="o">)</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3"></a><span class="w">    </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
+</code></pre></div></td></tr></table></div>
+<p>This example creates a channel that emits the values specified as a parameter in the <code>of</code> channel factory. It will print the following:</p>
+<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a href="#__codelineno-13-1" id="__codelineno-13-1" name="__codelineno-13-1"></a><span class="go">1</span>
+<a href="#__codelineno-13-2" id="__codelineno-13-2" name="__codelineno-13-2"></a><span class="go">3</span>
+<a href="#__codelineno-13-3" id="__codelineno-13-3" name="__codelineno-13-3"></a><span class="go">5</span>
+<a href="#__codelineno-13-4" id="__codelineno-13-4" name="__codelineno-13-4"></a><span class="go">7</span>
+</code></pre></div>
+<p>The <code>Channel.of</code> channel factory works in a similar manner to <code>Channel.from</code> (which is now <a href="https://www.nextflow.io/docs/latest/channel.html#of">deprecated</a>), fixing some inconsistent behaviors of the latter and providing better handling when specifying a range of values. For example, the following works with a range from 1 to 23:</p>
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1">1</a></span>
+<span class="normal"><a href="#__codelineno-14-2">2</a></span>
+<span class="normal"><a href="#__codelineno-14-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1"></a><span class="n">Channel</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2"></a><span class="w">    </span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">1</span><span class="o">..</span><span class="mi">23</span><span class="o">,</span><span class="w"> </span><span class="s1">'X'</span><span class="o">,</span><span class="w"> </span><span class="s1">'Y'</span><span class="o">)</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3"></a><span class="w">    </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="fromlist"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.2.3</span> <code>fromList()</code><a class="headerlink" href="#fromlist" title="Permanent link">¶</a></h3>
+<p>The <code>Channel.fromList</code> channel factory creates a channel emitting the elements provided by a list object specified as an argument:</p>
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1">1</a></span>
+<span class="normal"><a href="#__codelineno-15-2">2</a></span>
+<span class="normal"><a href="#__codelineno-15-3">3</a></span>
+<span class="normal"><a href="#__codelineno-15-4">4</a></span>
+<span class="normal"><a href="#__codelineno-15-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1"></a><span class="n">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">'hello'</span><span class="o">,</span><span class="w"> </span><span class="s1">'world'</span><span class="o">]</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2"></a>
+<a id="__codelineno-15-3" name="__codelineno-15-3"></a><span class="n">Channel</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4"></a><span class="w">    </span><span class="o">.</span><span class="na">fromList</span><span class="o">(</span><span class="n">list</span><span class="o">)</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5"></a><span class="w">    </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="frompath"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.2.4</span> <code>fromPath()</code><a class="headerlink" href="#frompath" title="Permanent link">¶</a></h3>
+<p>The <code>fromPath</code> channel factory creates a queue channel emitting one or more files matching the specified glob pattern.</p>
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-16-1">1</a></span>
+<span class="normal"><a href="#__codelineno-16-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1"></a><span class="n">Channel</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2"></a><span class="w">    </span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">'./data/meta/*.csv'</span><span class="o">)</span>
+</code></pre></div></td></tr></table></div>
+<p>This example creates a channel and emits as many items as there are files with a <code>csv</code> extension in the <code>./data/meta</code> folder. Each element is a file object implementing the <a href="https://docs.oracle.com/javase/8/docs/api/java/nio/file/Paths.html">Path</a> interface.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Two asterisks, i.e. <code>**</code>, works like <code>*</code> but cross directory boundaries. This syntax is generally used for matching complete paths. Curly brackets specify a collection of sub-patterns.</p>
+</div>
+<p>Some channel factories also have options to help you control their behaviour. For example, the <code>fromPath</code> channel factory has the following options:</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>glob</td>
+<td>When <code>true</code> interprets characters <code>*</code>, <code>?</code>, <code>[]</code> and <code>{}</code> as glob wildcards, otherwise handles them as normal characters (default: <code>true</code>)</td>
+</tr>
+<tr>
+<td>type</td>
+<td>Type of path returned, either <code>file</code>, <code>dir</code> or <code>any</code> (default: <code>file</code>)</td>
+</tr>
+<tr>
+<td>hidden</td>
+<td>When <code>true</code> includes hidden files in the resulting paths (default: <code>false</code>)</td>
+</tr>
+<tr>
+<td>maxDepth</td>
+<td>Maximum number of directory levels to visit (default: <code>no limit</code>)</td>
+</tr>
+<tr>
+<td>followLinks</td>
+<td>When <code>true</code> symbolic links are followed during directory tree traversal, otherwise they are managed as files (default: <code>true</code>)</td>
+</tr>
+<tr>
+<td>relative</td>
+<td>When <code>true</code> return paths are relative to the top-most common directory (default: <code>false</code>)</td>
+</tr>
+<tr>
+<td>checkIfExists</td>
+<td>When <code>true</code> throws an exception when the specified path does not exist in the file system (default: <code>false</code>)</td>
+</tr>
+</tbody>
+</table>
+<p>Learn more about the glob patterns syntax at <a href="https://docs.oracle.com/javase/tutorial/essential/io/fileOps.html#glob">this link</a>.</p>
+<div class="admonition question">
+<p class="admonition-title">Exercise</p>
+<p>Use the <code>Channel.fromPath</code> channel factory to create a channel emitting all files with the suffix <code>.fq</code> in the <code>data/ggal/</code> directory and any subdirectory. Include any hidden files and print the file names with the <code>view</code> operator.</p>
+<details class="solution">
+<summary>Solution</summary>
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-1">1</a></span>
+<span class="normal"><a href="#__codelineno-17-2">2</a></span>
+<span class="normal"><a href="#__codelineno-17-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1"></a><span class="n">Channel</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2"></a><span class="w">    </span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s1">'./data/ggal/**.fq'</span><span class="o">,</span><span class="w"> </span><span class="nl">hidden:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3"></a><span class="w">    </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
+</code></pre></div></td></tr></table></div>
+</details>
+</div>
+<h3 id="fromfilepairs"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.2.5</span> <code>fromFilePairs()</code><a class="headerlink" href="#fromfilepairs" title="Permanent link">¶</a></h3>
+<p>The <code>fromFilePairs</code> channel factory creates a channel emitting the file pairs matching a glob pattern provided by the user. The matching files are emitted as tuples, in which the first element is the grouping key of the matching pair and the second element is the list of files (sorted in lexicographical order).</p>
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-1">1</a></span>
+<span class="normal"><a href="#__codelineno-18-2">2</a></span>
+<span class="normal"><a href="#__codelineno-18-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1"></a><span class="n">Channel</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2"></a><span class="w">    </span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="s1">'./data/ggal/*_{1,2}.fq'</span><span class="o">)</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3"></a><span class="w">    </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
+</code></pre></div></td></tr></table></div>
+<p>It will produce an output similar to the following:</p>
+<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a href="#__codelineno-19-1" id="__codelineno-19-1" name="__codelineno-19-1"></a><span class="go">[liver, [/workspaces/training/nf-training/data/ggal/liver_1.fq, /workspaces/training/nf-training/data/ggal/liver_2.fq]]</span>
+<a href="#__codelineno-19-2" id="__codelineno-19-2" name="__codelineno-19-2"></a><span class="go">[gut, [/workspaces/training/nf-training/data/ggal/gut_1.fq, /workspaces/training/nf-training/data/ggal/gut_2.fq]]</span>
+<a href="#__codelineno-19-3" id="__codelineno-19-3" name="__codelineno-19-3"></a><span class="go">[lung, [/workspaces/training/nf-training/data/ggal/lung_1.fq, /workspaces/training/nf-training/data/ggal/lung_2.fq]]</span>
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The glob pattern <em>must</em> contain at least an asterisk wildcard character (<code>*</code>).</p>
+</div>
+<p>The <code>fromFilePairs</code> channel factory also has options to help you control its behaviour:</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>type</td>
+<td>Type of paths returned, either <code>file</code>, <code>dir</code> or <code>any</code> (default: <code>file</code>)</td>
+</tr>
+<tr>
+<td>hidden</td>
+<td>When <code>true</code> includes hidden files in the resulting paths (default: <code>false</code>)</td>
+</tr>
+<tr>
+<td>maxDepth</td>
+<td>Maximum number of directory levels to visit (default: <code>no limit</code>)</td>
+</tr>
+<tr>
+<td>followLinks</td>
+<td>When <code>true</code> symbolic links are followed during directory tree traversal, otherwise they are managed as files (default: <code>true</code>)</td>
+</tr>
+<tr>
+<td>size</td>
+<td>Defines the number of files each emitted item is expected to hold (default: <code>2</code>). Set to <code>-1</code> for any</td>
+</tr>
+<tr>
+<td>flat</td>
+<td>When <code>true</code> the matching files are produced as sole elements in the emitted tuples (default: <code>false</code>)</td>
+</tr>
+<tr>
+<td>checkIfExists</td>
+<td>When <code>true</code>, it throws an exception of the specified path that does not exist in the file system (default: <code>false</code>)</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition question">
+<p class="admonition-title">Exercise</p>
+<p>Use the <code>fromFilePairs</code> channel factory to create a channel emitting all pairs of fastq reads in the <code>data/ggal/</code> directory. Execute this script twice, once with the option <code>flat: true</code> and once with <code>flat: false</code>. What is the difference?</p>
+<details class="solution">
+<summary>Solution</summary>
+<p>Use the following with the <code>flat</code> option equaling true:</p>
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-1">1</a></span>
+<span class="normal"><a href="#__codelineno-20-2">2</a></span>
+<span class="normal"><a href="#__codelineno-20-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="n">Channel</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2"></a><span class="w">    </span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="s1">'./data/ggal/*_{1,2}.fq'</span><span class="o">,</span><span class="w"> </span><span class="nl">flat:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
+<a id="__codelineno-20-3" name="__codelineno-20-3"></a><span class="w">    </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
+</code></pre></div></td></tr></table></div>
+<p>And false:</p>
+<p><div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-1">1</a></span>
+<span class="normal"><a href="#__codelineno-21-2">2</a></span>
+<span class="normal"><a href="#__codelineno-21-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1"></a><span class="n">Channel</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2"></a><span class="w">    </span><span class="o">.</span><span class="na">fromFilePairs</span><span class="o">(</span><span class="s1">'./data/ggal/*_{1,2}.fq'</span><span class="o">,</span><span class="w"> </span><span class="nl">flat:</span><span class="w"> </span><span class="kc">false</span><span class="o">)</span>
+<a id="__codelineno-21-3" name="__codelineno-21-3"></a><span class="w">    </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
+</code></pre></div></td></tr></table></div>
+Check the square brackets around the file names, to see the difference with <code>flat</code>.</p>
+</details>
+</div>
+<h3 id="fromsra"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.2.6</span> <code>fromSRA()</code><a class="headerlink" href="#fromsra" title="Permanent link">¶</a></h3>
+<p>The <code>Channel.fromSRA</code> channel factory makes it possible to query the <a href="https://www.ncbi.nlm.nih.gov/sra">NCBI SRA</a> archive and returns a channel emitting the FASTQ files matching the specified selection criteria.</p>
+<p>The query can be project ID(s) or accession number(s) supported by the <a href="https://www.ncbi.nlm.nih.gov/books/NBK25499/#chapter4.ESearch">NCBI ESearch API</a>.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>This function now requires an API key you can only get by logging into your NCBI account.</p>
+</div>
+<details class="example">
+<summary>Instructions for NCBI login and key acquisition</summary>
+<ol>
+<li>Go to: <a href="https://www.ncbi.nlm.nih.gov/">https://www.ncbi.nlm.nih.gov/</a></li>
+<li>Click the top right "Log in" button to sign into NCBI. Follow their instructions.</li>
+<li>Once into your account, click the button at the top right, usually your ID.</li>
+<li>Go to Account settings</li>
+<li>Scroll down to the API Key Management section.</li>
+<li>Click on "Create an API Key".</li>
+<li>The page will refresh and the key will be displayed where the button was. Copy your key.</li>
+</ol>
+</details>
+<p>The following snippet will print the contents of an NCBI project ID:</p>
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-22-1">1</a></span>
+<span class="normal"><a href="#__codelineno-22-2">2</a></span>
+<span class="normal"><a href="#__codelineno-22-3">3</a></span>
+<span class="normal"><a href="#__codelineno-22-4">4</a></span>
+<span class="normal"><a href="#__codelineno-22-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1"></a><span class="n">params</span><span class="o">.</span><span class="na">ncbi_api_key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'&lt;Your API key here&gt;'</span>
+<a id="__codelineno-22-2" name="__codelineno-22-2"></a>
+<a id="__codelineno-22-3" name="__codelineno-22-3"></a><span class="n">Channel</span>
+<a id="__codelineno-22-4" name="__codelineno-22-4"></a><span class="w">    </span><span class="o">.</span><span class="na">fromSRA</span><span class="o">([</span><span class="s1">'SRP073307'</span><span class="o">],</span><span class="w"> </span><span class="nl">apiKey:</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">ncbi_api_key</span><span class="o">)</span>
+<a id="__codelineno-22-5" name="__codelineno-22-5"></a><span class="w">    </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
+</code></pre></div></td></tr></table></div>
+<div class="admonition info">
+<p><span class="twemoji"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7M9 21a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1H9z"></path></svg></span> Replace <code>&lt;Your API key here&gt;</code> with your API key.</p>
+</div>
+<p>This should print:</p>
+<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a href="#__codelineno-23-1" id="__codelineno-23-1" name="__codelineno-23-1"></a><span class="go">[SRR3383346, [/vol1/fastq/SRR338/006/SRR3383346/SRR3383346_1.fastq.gz, /vol1/fastq/SRR338/006/SRR3383346/SRR3383346_2.fastq.gz]]</span>
+<a href="#__codelineno-23-2" id="__codelineno-23-2" name="__codelineno-23-2"></a><span class="go">[SRR3383347, [/vol1/fastq/SRR338/007/SRR3383347/SRR3383347_1.fastq.gz, /vol1/fastq/SRR338/007/SRR3383347/SRR3383347_2.fastq.gz]]</span>
+<a href="#__codelineno-23-3" id="__codelineno-23-3" name="__codelineno-23-3"></a><span class="go">[SRR3383344, [/vol1/fastq/SRR338/004/SRR3383344/SRR3383344_1.fastq.gz, /vol1/fastq/SRR338/004/SRR3383344/SRR3383344_2.fastq.gz]]</span>
+<a href="#__codelineno-23-4" id="__codelineno-23-4" name="__codelineno-23-4"></a><span class="go">[SRR3383345, [/vol1/fastq/SRR338/005/SRR3383345/SRR3383345_1.fastq.gz, /vol1/fastq/SRR338/005/SRR3383345/SRR3383345_2.fastq.gz]]</span>
+<a href="#__codelineno-23-5" id="__codelineno-23-5" name="__codelineno-23-5"></a><span class="go">// (remaining omitted)</span>
+</code></pre></div>
+<p>Multiple accession IDs can be specified using a list object:</p>
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-24-1">1</a></span>
+<span class="normal"><a href="#__codelineno-24-2">2</a></span>
+<span class="normal"><a href="#__codelineno-24-3">3</a></span>
+<span class="normal"><a href="#__codelineno-24-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1"></a><span class="n">ids</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">'ERR908507'</span><span class="o">,</span><span class="w"> </span><span class="s1">'ERR908506'</span><span class="o">,</span><span class="w"> </span><span class="s1">'ERR908505'</span><span class="o">]</span>
+<a id="__codelineno-24-2" name="__codelineno-24-2"></a><span class="n">Channel</span>
+<a id="__codelineno-24-3" name="__codelineno-24-3"></a><span class="w">    </span><span class="o">.</span><span class="na">fromSRA</span><span class="o">(</span><span class="n">ids</span><span class="o">,</span><span class="w"> </span><span class="nl">apiKey:</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">ncbi_api_key</span><span class="o">)</span>
+<a id="__codelineno-24-4" name="__codelineno-24-4"></a><span class="w">    </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a href="#__codelineno-25-1" id="__codelineno-25-1" name="__codelineno-25-1"></a><span class="go">[ERR908507, [/vol1/fastq/ERR908/ERR908507/ERR908507_1.fastq.gz, /vol1/fastq/ERR908/ERR908507/ERR908507_2.fastq.gz]]</span>
+<a href="#__codelineno-25-2" id="__codelineno-25-2" name="__codelineno-25-2"></a><span class="go">[ERR908506, [/vol1/fastq/ERR908/ERR908506/ERR908506_1.fastq.gz, /vol1/fastq/ERR908/ERR908506/ERR908506_2.fastq.gz]]</span>
+<a href="#__codelineno-25-3" id="__codelineno-25-3" name="__codelineno-25-3"></a><span class="go">[ERR908505, [/vol1/fastq/ERR908/ERR908505/ERR908505_1.fastq.gz, /vol1/fastq/ERR908/ERR908505/ERR908505_2.fastq.gz]]</span>
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Read pairs are implicitly managed and are returned as a list of files.</p>
+</div>
+<p>It’s straightforward to use this channel as an input using the usual Nextflow syntax.</p>
+<p>The code below creates a channel containing two samples from a public SRA study and runs <code>FASTQC</code> on the resulting files. See:</p>
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-26-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-26-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-26-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-26-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-26-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-26-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-26-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-26-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-26-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-26-10">10</a></span>
+<span class="normal"><a href="#__codelineno-26-11">11</a></span>
+<span class="normal"><a href="#__codelineno-26-12">12</a></span>
+<span class="normal"><a href="#__codelineno-26-13">13</a></span>
+<span class="normal"><a href="#__codelineno-26-14">14</a></span>
+<span class="normal"><a href="#__codelineno-26-15">15</a></span>
+<span class="normal"><a href="#__codelineno-26-16">16</a></span>
+<span class="normal"><a href="#__codelineno-26-17">17</a></span>
+<span class="normal"><a href="#__codelineno-26-18">18</a></span>
+<span class="normal"><a href="#__codelineno-26-19">19</a></span>
+<span class="normal"><a href="#__codelineno-26-20">20</a></span>
+<span class="normal"><a href="#__codelineno-26-21">21</a></span>
+<span class="normal"><a href="#__codelineno-26-22">22</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1"></a><span class="n">params</span><span class="o">.</span><span class="na">ncbi_api_key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'&lt;Your API key here&gt;'</span>
+<a id="__codelineno-26-2" name="__codelineno-26-2"></a>
+<a id="__codelineno-26-3" name="__codelineno-26-3"></a><span class="n">params</span><span class="o">.</span><span class="na">accession</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">'ERR908507'</span><span class="o">,</span><span class="w"> </span><span class="s1">'ERR908506'</span><span class="o">]</span>
+<a id="__codelineno-26-4" name="__codelineno-26-4"></a>
+<a id="__codelineno-26-5" name="__codelineno-26-5"></a><span class="n">process</span><span class="w"> </span><span class="n">FASTQC</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-26-6" name="__codelineno-26-6"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-26-7" name="__codelineno-26-7"></a><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">sample_id</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">reads_file</span><span class="o">)</span>
+<a id="__codelineno-26-8" name="__codelineno-26-8"></a>
+<a id="__codelineno-26-9" name="__codelineno-26-9"></a><span class="w">    </span><span class="nl">output:</span>
+<a id="__codelineno-26-10" name="__codelineno-26-10"></a><span class="w">    </span><span class="n">path</span><span class="o">(</span><span class="s2">"fastqc_${sample_id}_logs"</span><span class="o">)</span>
+<a id="__codelineno-26-11" name="__codelineno-26-11"></a>
+<a id="__codelineno-26-12" name="__codelineno-26-12"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-26-13" name="__codelineno-26-13"></a><span class="w">    </span><span class="s2">"""</span>
+<a id="__codelineno-26-14" name="__codelineno-26-14"></a><span class="s2">    mkdir fastqc_${sample_id}_logs</span>
+<a id="__codelineno-26-15" name="__codelineno-26-15"></a><span class="s2">    fastqc -o fastqc_${sample_id}_logs -f fastq -q ${reads_file}</span>
+<a id="__codelineno-26-16" name="__codelineno-26-16"></a><span class="s2">    """</span>
+<a id="__codelineno-26-17" name="__codelineno-26-17"></a><span class="o">}</span>
+<a id="__codelineno-26-18" name="__codelineno-26-18"></a>
+<a id="__codelineno-26-19" name="__codelineno-26-19"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-26-20" name="__codelineno-26-20"></a><span class="w">    </span><span class="n">reads</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromSRA</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">accession</span><span class="o">,</span><span class="w"> </span><span class="nl">apiKey:</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">ncbi_api_key</span><span class="o">)</span>
+<a id="__codelineno-26-21" name="__codelineno-26-21"></a><span class="w">    </span><span class="n">FASTQC</span><span class="o">(</span><span class="n">reads</span><span class="o">)</span>
+<a id="__codelineno-26-22" name="__codelineno-26-22"></a><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
+<div class="admonition cboard-list-2">
+<p class="admonition-title">Summary</p>
+<p>In this step you have learned:</p>
+<ol>
+<li>How to use common channel factories</li>
+<li>How to use the <code>fromSRA</code> channel factory to query the NCBI SRA archive</li>
+</ol>
+</div>
+</article>
+</div>
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+</div>
+<button class="md-top md-icon" data-md-component="top" hidden="" type="button">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"></path></svg>
+  Torna su
+</button>
+</main>
+<footer class="md-footer">
+<nav aria-label="Piede" class="md-footer__inner md-grid">
+<a aria-label="Precedente: Dependencies and containers" class="md-footer__link md-footer__link--prev" href="../containers/">
+<div class="md-footer__button md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+</div>
+<div class="md-footer__title">
+<span class="md-footer__direction">
+                Precedente
+              </span>
+<div class="md-ellipsis">
+                Dependencies and containers
+              </div>
+</div>
+</a>
+<a aria-label="Successivo: Processes" class="md-footer__link md-footer__link--next" href="../processes/">
+<div class="md-footer__title">
+<span class="md-footer__direction">
+                Successivo
+              </span>
+<div class="md-ellipsis">
+                Processes
+              </div>
+</div>
+<div class="md-footer__button md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"></path></svg>
+</div>
+</a>
+</nav>
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-copyright">
+<div>
+    Copyright © 2020-2023,
+    <a href="https://seqera.io" rel="noopener" target="_blank">Seqera</a>.
+  </div>
+<div class="footer_cc_link">
+<svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg">
+<!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.-->
+<path d="m245.83 214.87-33.22 17.28c-9.43-19.58-25.24-19.93-27.46-19.93-22.13 0-33.22 14.61-33.22 43.84 0 23.57 9.21 43.84 33.22 43.84 14.47 0 24.65-7.09 30.57-21.26l30.55 15.5c-6.17 11.51-25.69 38.98-65.1 38.98-22.6 0-73.96-10.32-73.96-77.05 0-58.69 43-77.06 72.63-77.06 30.72-.01 52.7 11.95 65.99 35.86zm143.05 0-32.78 17.28c-9.5-19.77-25.72-19.93-27.9-19.93-22.14 0-33.22 14.61-33.22 43.84 0 23.55 9.23 43.84 33.22 43.84 14.45 0 24.65-7.09 30.54-21.26l31 15.5c-2.1 3.75-21.39 38.98-65.09 38.98-22.69 0-73.96-9.87-73.96-77.05 0-58.67 42.97-77.06 72.63-77.06 30.71-.01 52.58 11.95 65.56 35.86zM247.56 8.05C104.74 8.05 0 123.11 0 256.05c0 138.49 113.6 248 247.56 248 129.93 0 248.44-100.87 248.44-248 0-137.87-106.62-248-248.44-248zm.87 450.81c-112.54 0-203.7-93.04-203.7-202.81 0-105.42 85.43-203.27 203.72-203.27 112.53 0 202.82 89.46 202.82 203.26-.01 121.69-99.68 202.82-202.84 202.82z"></path>
+</svg>
+<a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" rel="noopener" target="_blank" title="Creative Commons CC BY-NC-ND 4.0">
+      Creative Commons BY-NC-ND 4.0</a>.
+  </div>
+   Made with
+  <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
+    Material for MkDocs
+  </a>
+</div>
+<div class="md-social">
+<a class="footer_seqera_logo" href="https://seqera.io" rel="noopener" target="_blank">
+<img src="/assets/img/seqera_logo_white.png">
+</img></a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+<div class="md-consent" data-md-component="consent" hidden="" id="__consent">
+<div class="md-consent__overlay"></div>
+<aside class="md-consent__inner">
+<form class="md-consent__form md-grid md-typeset" name="consent">
+<h4><span class="enumerate-headings-plugin enumerate-heading-plugin">4.2.6.1</span> Cookie consent</h4>
+<p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our training materials better.</p>
+<input class="md-toggle" id="__settings" type="checkbox"/>
+<div class="md-consent__settings">
+<ul class="task-list">
+<li class="task-list-item">
+<label class="task-list-control">
+<input checked="" name="analytics" type="checkbox"/>
+<span class="task-list-indicator"></span>
+      Google Analytics
+    </label>
+</li>
+<li class="task-list-item">
+<label class="task-list-control">
+<input checked="" name="github" type="checkbox"/>
+<span class="task-list-indicator"></span>
+      GitHub
+    </label>
+</li>
+</ul>
+</div>
+<div class="md-consent__controls">
+<button class="md-button md-button--primary">Accetta</button>
+<label class="md-button" for="__settings">Gestisci le opzioni</label>
+</div>
+</form>
+</aside>
+</div>
+<script>var consent=__md_get("__consent");if(consent)for(var input of document.forms.consent.elements)input.name&&(input.checked=consent[input.name]||!1);else"file:"!==location.protocol&&setTimeout((function(){document.querySelector("[data-md-component=consent]").hidden=!1}),250);var form=document.forms.consent;for(var action of["submit","reset"])form.addEventListener(action,(function(e){if(e.preventDefault(),"reset"===e.type)for(var n of document.forms.consent.elements)n.name&&(n.checked=!1);__md_set("__consent",Object.fromEntries(Array.from(new FormData(form).keys()).map((function(e){return[e,!0]})))),location.hash="",location.reload()}))</script>
+<script id="__config" type="application/json">{"base": "../../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.instant", "navigation.top", "navigation.tracking", "search.share", "toc.follow"], "search": "../../../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copiato", "clipboard.copy": "Copia", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.term.missing": "Non presente", "select.version": "Seleziona la versione"}, "version": {"alias": true, "provider": "mike"}}</script>
+<script src="../../../assets/javascripts/bundle.c8b220af.min.js"></script>
+</body>
+</html>

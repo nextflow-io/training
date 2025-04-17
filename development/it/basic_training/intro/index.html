@@ -1,0 +1,1705 @@
+
+<!DOCTYPE html>
+
+<html class="no-js" lang="it">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="Getting started with Nextflow" name="description"/>
+<link href="https://training.nextflow.io/0.dev/it/basic_training/intro/" rel="canonical"/>
+<link href="../orientation/" rel="prev"/>
+<link href="../rnaseq_pipeline/" rel="next"/>
+<link href="../../../assets/img/nextflow-icon.png" rel="icon"/>
+<meta content="mkdocs-1.6.1, mkdocs-material-9.6.12" name="generator"/>
+<title>Basic concepts - training.nextflow.io</title>
+<link href="../../../assets/stylesheets/main.2afb09e1.min.css" rel="stylesheet"/>
+<link href="../../../assets/stylesheets/palette.06af60db.min.css" rel="stylesheet"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
+<style>:root{--md-text-font:"Inter";--md-code-font:"Roboto Mono"}</style>
+<link href="../../../assets/stylesheets/fonts.css" rel="stylesheet"/>
+<link href="../../../assets/stylesheets/extra.css" rel="stylesheet"/>
+<script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-244N3GEN75"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-244N3GEN75",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-244N3GEN75",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+<script>if("undefined"!=typeof __md_analytics){var consent=__md_get("__consent");consent&&consent.analytics&&__md_analytics()}</script>
+</head>
+<body data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="slate" dir="ltr">
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="#basic-concepts">
+          Vai al contenuto
+        </a>
+</div>
+<div data-md-component="announce">
+<aside class="md-banner">
+<div class="md-banner__inner md-grid md-typeset">
+<div style="text-align: center">
+  Nextflow Training Week (2025-Q1):
+  <strong>March 10-14, 2025</strong>
+<a class="md-button" href="https://community.seqera.io/t/nextflow-training-week-2025-q1/1775/6" target="_blank">
+    More info
+    <span class="twemoji"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"></path></svg></span>
+</a>
+</div>
+<style type="text/css">
+  .md-banner {
+    display: none;
+  }
+</style>
+<script>
+  (function () {
+    function hideAnnouncement() {
+      var announcementDate = new Date(
+        "2025-03-15T00:00:00Z",
+      );
+      var currentDate = new Date();
+      var banner = document.querySelector(".md-banner");
+      if (banner && currentDate <= announcementDate) {
+        banner.style.display = "block";
+      }
+    }
+
+    // Run on initial load
+    hideAnnouncement();
+
+    // Hook into XHR to run after each page update
+    var originalOpen = XMLHttpRequest.prototype.open;
+    XMLHttpRequest.prototype.open = function () {
+      this.addEventListener("load", function () {
+        setTimeout(hideAnnouncement, 0); // Ensure it runs after the request completes
+      });
+      return originalOpen.apply(this, arguments);
+    };
+  })();
+</script>
+</div>
+</aside>
+</div>
+<div data-md-color-scheme="default" data-md-component="outdated" hidden="">
+</div>
+<header class="md-header md-header--shadow" data-md-component="header">
+<nav aria-label="Intestazione" class="md-header__inner md-grid">
+<a aria-label="training.nextflow.io" class="md-header__button md-logo" data-md-component="logo" href="../../" title="training.nextflow.io">
+<img alt="logo" src="../../../assets/img/nextflow_logo_dark.png"/>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis">
+            training.nextflow.io
+          </span>
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis">
+            
+              Basic concepts
+            
+          </span>
+</div>
+</div>
+</div>
+<form class="md-header__option" data-md-component="palette">
+<input aria-label="Switch to light mode" class="md-option" data-md-color-accent="indigo" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-primary="indigo" data-md-color-scheme="slate" id="__palette_0" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_1" hidden="" title="Switch to light mode">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"></path></svg>
+</label>
+<input aria-label="Switch to dark mode" class="md-option" data-md-color-accent="indigo" data-md-color-media="(prefers-color-scheme: light)" data-md-color-primary="indigo" data-md-color-scheme="default" id="__palette_1" name="__palette" type="radio"/>
+<label class="md-header__button md-icon" for="__palette_0" hidden="" title="Switch to dark mode">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"></path></svg>
+</label>
+</form>
+<script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+<div class="md-header__option">
+<div class="md-select">
+<button aria-label="Seleziona la lingua" class="md-header__button md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"></path></svg>
+</button>
+<div class="md-select__inner">
+<ul class="md-select__list">
+<li class="md-select__item">
+<a class="md-select__link" href="../../../basic_training/intro/" hreflang="en">
+              English
+            </a>
+</li>
+<li class="md-select__item">
+<a class="md-select__link" href="../../../pt/basic_training/intro/" hreflang="pt">
+              Português
+            </a>
+</li>
+<li class="md-select__item">
+<a class="md-select__link" href="../../../es/basic_training/intro/" hreflang="es">
+              Español
+            </a>
+</li>
+<li class="md-select__item">
+<a class="md-select__link" href="../../../fr/basic_training/intro/" hreflang="fr">
+              Français
+            </a>
+</li>
+<li class="md-select__item">
+<a class="md-select__link" href="./" hreflang="it">
+              Italiano
+            </a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<label class="md-header__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="Cerca" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="Cerca" required="" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+</label>
+<nav aria-label="Cerca" class="md-search__options">
+<a aria-label="Condividi" class="md-search__icon md-icon" data-clipboard="" data-clipboard-text="" data-md-component="search-share" href="javascript:void(0)" tabindex="-1" title="Condividi">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"></path></svg>
+</a>
+<button aria-label="Cancella" class="md-search__icon md-icon" tabindex="-1" title="Cancella" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+</button>
+</nav>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="" tabindex="0">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta">
+            Inizializza la ricerca
+          </div>
+<ol class="md-search-result__list" role="presentation"></ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="md-header__source">
+<a class="md-source" data-md-component="source" href="https://github.com/nextflow-io/training" title="Apri repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"></path></svg>
+</div>
+<div class="md-source__repository">
+    nextflow-io/training
+  </div>
+</a>
+</div>
+</nav>
+</header>
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Navigazione" class="md-nav md-nav--primary" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="training.nextflow.io" class="md-nav__button md-logo" data-md-component="logo" href="../../" title="training.nextflow.io">
+<img alt="logo" src="../../../assets/img/nextflow_logo_dark.png"/>
+</a>
+    training.nextflow.io
+  </label>
+<div class="md-nav__source">
+<a class="md-source" data-md-component="source" href="https://github.com/nextflow-io/training" title="Apri repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"></path></svg>
+</div>
+<div class="md-source__repository">
+    nextflow-io/training
+  </div>
+</a>
+</div>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../">
+<span class="md-ellipsis">
+    Home
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+<span class="md-ellipsis">
+    Environment setup
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_2">
+<span class="md-nav__icon md-icon"></span>
+            Environment setup
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../envsetup/">
+<span class="md-ellipsis">
+    Environment Setup
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../envsetup/01_setup/">
+<span class="md-ellipsis">
+    GitHub Codespaces
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../envsetup/02_local/">
+<span class="md-ellipsis">
+    Local installation
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_3" type="checkbox"/>
+<label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+<span class="md-ellipsis">
+    Hello Nextflow
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_3_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_3">
+<span class="md-nav__icon md-icon"></span>
+            Hello Nextflow
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../hello_nextflow/">
+<span class="md-ellipsis">
+    Hello Nextflow
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../hello_nextflow/00_orientation/">
+<span class="md-ellipsis">
+    Orientation
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../hello_nextflow/01_hello_world/">
+<span class="md-ellipsis">
+    Parte 1: Hello World
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../hello_nextflow/02_hello_channels/">
+<span class="md-ellipsis">
+    Parte 2: Hello Channels
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../hello_nextflow/03_hello_workflow/">
+<span class="md-ellipsis">
+    Parte 3: Hello Workflow
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../hello_nextflow/04_hello_modules/">
+<span class="md-ellipsis">
+    Parte 4: Hello Modules
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../hello_nextflow/05_hello_containers/">
+<span class="md-ellipsis">
+    Parte 5: Hello Containers
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../hello_nextflow/06_hello_config/">
+<span class="md-ellipsis">
+    Parte 6: Hello Config
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../hello_nextflow/survey/">
+<span class="md-ellipsis">
+    Feedback survey
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../hello_nextflow/next_steps/">
+<span class="md-ellipsis">
+    Next Steps
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_4" type="checkbox"/>
+<label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+<span class="md-ellipsis">
+    Nextflow for Genomics
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_4_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_4">
+<span class="md-nav__icon md-icon"></span>
+            Nextflow for Genomics
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../nf4_science/genomics/">
+<span class="md-ellipsis">
+    Nextflow for Genomics
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../nf4_science/genomics/00_orientation/">
+<span class="md-ellipsis">
+    Orientation
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../nf4_science/genomics/01_per_sample_variant_calling/">
+<span class="md-ellipsis">
+    Part 1: Per-sample variant calling
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../nf4_science/genomics/02_joint_calling/">
+<span class="md-ellipsis">
+    Part 2: Joint calling on a cohort
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../nf4_science/genomics/03_modules/">
+<span class="md-ellipsis">
+    Part 3: Moving code into modules
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../nf4_science/genomics/04_testing/">
+<span class="md-ellipsis">
+    Part 4: Adding tests
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_5" type="checkbox"/>
+<label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+<span class="md-ellipsis">
+    Nextflow for RNAseq
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_5_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_5">
+<span class="md-nav__icon md-icon"></span>
+            Nextflow for RNAseq
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../nf4_science/rnaseq/">
+<span class="md-ellipsis">
+    Nextflow for RNAseq
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../nf4_science/rnaseq/00_orientation/">
+<span class="md-ellipsis">
+    Orientation
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../nf4_science/rnaseq/01_method/">
+<span class="md-ellipsis">
+    Part 1: Method overview and manual testing
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../nf4_science/rnaseq/02_single-sample/">
+<span class="md-ellipsis">
+    Part 2: Single-sample implementation
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../nf4_science/rnaseq/03_multi-sample/">
+<span class="md-ellipsis">
+    Part 3: Multi-sample paired-end implementation
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../nf4_science/rnaseq/survey/">
+<span class="md-ellipsis">
+    Feedback survey
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../nf4_science/rnaseq/next_steps/">
+<span class="md-ellipsis">
+    Next Steps
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_6" type="checkbox"/>
+<label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+<span class="md-ellipsis">
+    Side Quests
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_6_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_6">
+<span class="md-nav__icon md-icon"></span>
+            Side Quests
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../side_quests/">
+<span class="md-ellipsis">
+    Side Quests
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../side_quests/orientation/">
+<span class="md-ellipsis">
+    Orientation
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../side_quests/nf-core/">
+<span class="md-ellipsis">
+    Introduction to nf-core
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../side_quests/nf-test/">
+<span class="md-ellipsis">
+    Testing with nf-test
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../side_quests/workflows_of_workflows/">
+<span class="md-ellipsis">
+    Workflows of Workflows
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_7" type="checkbox"/>
+<label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+<span class="md-ellipsis">
+    Fundamentals Training
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="true" aria-labelledby="__nav_7_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_7">
+<span class="md-nav__icon md-icon"></span>
+            Fundamentals Training
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../">
+<span class="md-ellipsis">
+    Fundamentals Training
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../orientation/">
+<span class="md-ellipsis">
+    Orientation
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+<span class="md-ellipsis">
+    Basic concepts
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="./">
+<span class="md-ellipsis">
+    Basic concepts
+    
+  </span>
+</a>
+<nav aria-label="On this page" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+    On this page
+  </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#processes-and-channels">
+<span class="md-ellipsis">
+      Processes and Channels
+    </span>
+</a>
+</li> <li class="md-nav__item">
+<a class="md-nav__link" href="#execution-abstraction">
+<span class="md-ellipsis">
+      Execution abstraction
+    </span>
+</a>
+</li> <li class="md-nav__item">
+<a class="md-nav__link" href="#scripting-language">
+<span class="md-ellipsis">
+      Scripting language
+    </span>
+</a>
+</li> <li class="md-nav__item">
+<a class="md-nav__link" href="#your-first-script">
+<span class="md-ellipsis">
+      Your first script
+    </span>
+</a>
+<nav aria-label="Your first script" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#nextflow-code">
+<span class="md-ellipsis">
+      Nextflow code
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#python-instead-of-bash">
+<span class="md-ellipsis">
+      Python instead of bash
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#in-practice">
+<span class="md-ellipsis">
+      In practice
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li> <li class="md-nav__item">
+<a class="md-nav__link" href="#modify-and-resume">
+<span class="md-ellipsis">
+      Modify and resume
+    </span>
+</a>
+</li> <li class="md-nav__item">
+<a class="md-nav__link" href="#workflow-parameters">
+<span class="md-ellipsis">
+      Workflow parameters
+    </span>
+</a>
+</li> <li class="md-nav__item">
+<a class="md-nav__link" href="#in-dag-like-format">
+<span class="md-ellipsis">
+      In DAG-like format
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+<nav aria-label="Resources" class="md-nav md-nav--secondary sidebar_resources">
+<label class="md-nav__title">Resources</label>
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="https://nextflow.io/docs/latest/index.html" rel="noopener" target="_blank">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M17.5 14.33c.79 0 1.63.08 2.5.24v1.5c-.62-.16-1.46-.24-2.5-.24-1.9 0-3.39.33-4.5.99v-1.69c1.17-.53 2.67-.8 4.5-.8M13 12.46c1.29-.53 2.79-.79 4.5-.79.79 0 1.63.07 2.5.23v1.5c-.62-.16-1.46-.24-2.5-.24-1.9 0-3.39.34-4.5.99m4.5-3.65c-1.9 0-3.39.32-4.5 1V9.84c1.23-.56 2.73-.84 4.5-.84.79 0 1.63.08 2.5.23v1.55c-.74-.19-1.59-.28-2.5-.28m3.5 8V7c-1.04-.33-2.21-.5-3.5-.5-2.05 0-3.88.5-5.5 1.5v11.5c1.62-1 3.45-1.5 5.5-1.5 1.19 0 2.36.16 3.5.5m-3.5-14c2.35 0 4.19.5 5.5 1.5v14.56c0 .12-.05.24-.16.35-.11.09-.23.17-.34.17-.11 0-.19-.02-.25-.05-1.28-.69-2.87-1.03-4.75-1.03-2.05 0-3.88.5-5.5 1.5-1.34-1-3.17-1.5-5.5-1.5-1.66 0-3.25.36-4.75 1.07-.03.01-.07.01-.12.03-.04.01-.08.02-.13.02-.11 0-.23-.04-.34-.12a.475.475 0 0 1-.16-.35V6c1.34-1 3.18-1.5 5.5-1.5 2.33 0 4.16.5 5.5 1.5 1.34-1 3.17-1.5 5.5-1.5Z"></path>
+</svg>
+        Nextflow Docs
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="https://www.nextflow.io/slack-invite.html" rel="noopener" target="_blank">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M6 15a2 2 0 0 1-2 2 2 2 0 0 1-2-2 2 2 0 0 1 2-2h2v2m1 0a2 2 0 0 1 2-2 2 2 0 0 1 2 2v5a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-5m2-8a2 2 0 0 1-2-2 2 2 0 0 1 2-2 2 2 0 0 1 2 2v2H9m0 1a2 2 0 0 1 2 2 2 2 0 0 1-2 2H4a2 2 0 0 1-2-2 2 2 0 0 1 2-2h5m8 2a2 2 0 0 1 2-2 2 2 0 0 1 2 2 2 2 0 0 1-2 2h-2v-2m-1 0a2 2 0 0 1-2 2 2 2 0 0 1-2-2V5a2 2 0 0 1 2-2 2 2 0 0 1 2 2v5m-2 8a2 2 0 0 1 2 2 2 2 0 0 1-2 2 2 2 0 0 1-2-2v-2h2m0-1a2 2 0 0 1-2-2 2 2 0 0 1 2-2h5a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-5Z"></path>
+</svg>
+        Nextflow Slack
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="https://nextflow.io/" rel="noopener" target="_blank">
+<svg id="Layer_1" version="1.1" viewbox="80 50 350 350" xmlns="http://www.w3.org/2000/svg">
+<style type="text/css">
+            .st0 {
+              fill: "gray";
+            }
+          </style>
+<path class="st0" d="M124.5,171.5c39.4,2.6,71.1,34.3,73.5,73.8h46.1c-2.6-65-54.7-117.2-119.6-119.9V171.5z"></path>
+<path class="st0" d="M198.3,255.8c-2.6,39.5-34.3,71.1-73.8,73.5v46.1c65-2.6,117.2-54.7,119.9-119.6H198.3z"></path>
+<path class="st0" d="M300.7,245c2.6-39.5,34.3-71.1,73.8-73.5v-46.1c-65,2.6-117.2,54.7-119.9,119.6H300.7z"></path>
+<path class="st0" d="M374.5,329.3c-39.4-2.6-71.1-34.3-73.5-73.8h-46.1c2.6,65,54.7,117.2,119.6,119.9V329.3z"></path>
+</svg>
+        Nextflow Homepage
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="https://seqera.io/" rel="noopener" target="_blank">
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 28.3.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg id="Layer_1" style="enable-background: new 0 0 500 500" version="1.1" viewbox="80 50 350 350" x="0px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" y="0px">
+<style type="text/css">
+            .st0 {
+              clip-path: url(#SVGID_00000006699037935518914080000000086571810102047141_);
+            }
+            .st1 {
+              fill: "gray";
+            }
+          </style>
+<g>
+<defs>
+<rect height="250" id="SVGID_1_" width="250" x="125" y="125"></rect>
+</defs>
+<clippath id="SVGID_00000183214694142566821210000012389151436317298101_">
+<use style="overflow: visible" xlink:href="#SVGID_1_"></use>
+</clippath>
+<g style="
+                clip-path: url(#SVGID_00000183214694142566821210000012389151436317298101_);
+              ">
+<path class="st1" d="M375,333l-0.1-0.9l-0.1-0.8l-0.1-0.9l-0.1-0.9l-0.1-0.8l-0.1-0.9l-0.1-0.8l-0.2-0.9l-0.2-0.8l-0.2-0.8
+                      l-0.2-0.8l-0.2-0.8l-0.2-0.8l-0.3-0.8l-0.3-0.8l-0.3-0.8l-0.3-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8
+                      l-0.4-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7L365,308l-0.6-0.6l-0.6-0.6l-0.6-0.6l-0.6-0.6L362,305
+                      l-0.6-0.6l-0.7-0.6l-0.6-0.5l-1.2,0.7l-0.8,0.5l-0.8,0.4l-0.8,0.4l-0.8,0.4l-0.8,0.4l-0.9,0.4l-0.9,0.4l-0.9,0.3l-0.9,0.3
+                      l-0.9,0.3l-0.9,0.3l-0.9,0.3l-0.9,0.3l-0.9,0.2l-0.9,0.2l-0.9,0.2l-0.9,0.2l-0.9,0.2l-0.9,0.1l-0.9,0.1l-0.9,0.1l-0.9,0.1
+                      l-0.9,0.1l-0.9,0.1l-0.9,0.1l-0.9,0l-0.9,0h-57.5l59.7,16.4l0.4,0.1l0.4,0.1l0.4,0.1l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.2
+                      l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.1,0.3l0.1,0.3l0.1,0.4l0.1,0.4
+                      l0.1,0.4l0.1,0.4l0,0.4l0,0.4l0,0.4l0,0.4l0,0.4l0,0.4l-0.1,0.4l-0.1,0.4l-0.1,0.4l-0.1,0.3l-0.1,0.4l-0.1,0.3l-0.2,0.3l-0.2,0.3
+                      l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.3,0.3l-0.3,0.3l-0.3,0.2l-0.3,0.2l-0.3,0.2l-0.3,0.2l-0.3,0.2l-0.3,0.2
+                      l-0.3,0.1l-0.4,0.2l-0.4,0.1l-0.3,0.1l-0.4,0.1l-0.4,0.1l-0.4,0.1l-0.4,0l-0.4,0l-0.4,0H125V375h209.7l0.9,0l0.9,0l0.9,0l0.8-0.1
+                      l0.9-0.1l0.8-0.1l0.9-0.1l0.8-0.1l0.8-0.1l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.3l0.8-0.3l0.8-0.3l0.8-0.3l0.8-0.3
+                      l0.8-0.4l0.8-0.4l0.8-0.4l0.8-0.4l0.8-0.4l0.7-0.4l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5
+                      l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.4-0.7
+                      l0.4-0.8l0.4-0.8l0.4-0.8l0.4-0.8l0.4-0.8l0.4-0.8l0.3-0.8l0.3-0.8l0.3-0.8l0.3-0.8l0.2-0.8l0.2-0.8l0.2-0.8l0.2-0.8l0.2-0.8
+                      l0.2-0.8l0.1-0.8l0.1-0.9l0.1-0.9l0.1-0.8l0.1-0.9l0.1-0.9l0.1-0.8l0-0.9l0-0.9l0-0.8L375,333z"></path>
+<path class="st1" d="M375,260.4l-0.1-0.9l-0.1-0.9l-0.1-0.8l-0.1-0.9l-0.1-0.8l-0.1-0.8l-0.1-0.8l-0.2-0.8l-0.2-0.8l-0.2-0.8
+                      l-0.2-0.8l-0.2-0.8l-0.2-0.8l-0.3-0.8l-0.3-0.8l-0.3-0.8l-0.3-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.7
+                      l-0.4-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.2-0.2h0h-89.8l59.7,16.4l0.4,0.1l0.4,0.1l0.4,0.1l0.3,0.2l0.3,0.2l0.3,0.2
+                      l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.1,0.4l0.1,0.3
+                      l0.1,0.4l0.1,0.4l0.1,0.4l0.1,0.4l0,0.4l0,0.4l0,0.4l0,0.4l0,0.4l0,0.4l-0.1,0.4l-0.1,0.4l-0.1,0.4l-0.1,0.4l-0.1,0.3l-0.1,0.4
+                      l-0.2,0.4l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.3,0.3l-0.3,0.3l-0.3,0.2l-0.3,0.2l-0.3,0.2l-0.3,0.2
+                      l-0.3,0.2l-0.3,0.2l-0.3,0.2l-0.4,0.2l-0.4,0.1l-0.3,0.1l-0.4,0.1l-0.4,0.1l-0.4,0.1l-0.4,0l-0.4,0l-0.4,0h-82.5h-111H125v32.2
+                      h122.8h86.9h0.9l0.9,0l0.9-0.1l0.8-0.1l0.9-0.1l0.8-0.1l0.9-0.1l0.8-0.1l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.3
+                      l0.8-0.3l0.8-0.3l0.8-0.3l0.8-0.3l0.8-0.4l0.8-0.4l0.2-0.1l0.6-0.3l0.8-0.4l0.8-0.4l0.7-0.4l0.7-0.4l0.7-0.5l0.7-0.5l0.7-0.5
+                      l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.5-0.7l0.5-0.7l0.5-0.7
+                      l0.5-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.4-0.7l0.4-0.7l0.4-0.8l0.4-0.8l0.4-0.8l0.4-0.8l0.4-0.8l0.3-0.8l0.3-0.8l0.3-0.8l0.3-0.8
+                      l0.2-0.8l0.2-0.8l0.2-0.8l0.2-0.8l0.2-0.8l0.2-0.8l0.1-0.8l0.1-0.9l0.1-0.8l0.1-0.9l0.1-0.8l0.1-0.9l0.1-0.9l0-0.8l0-0.9l0-0.9
+                      L375,260.4z"></path>
+<path class="st1" d="M165.3,197.6l-0.9,0l-0.8,0l-0.9,0l-0.9,0.1l-0.8,0.1l-0.9,0.1l-0.8,0.1l-0.8,0.1l-0.8,0.2l-0.8,0.2l-0.8,0.2
+                      l-0.8,0.2l-0.8,0.2l-0.8,0.2l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.4l-0.8,0.4l-0.2,0.1l-0.6,0.3l-0.8,0.4
+                      l-0.8,0.4l-0.8,0.4l-0.7,0.4l-0.7,0.5l-0.7,0.5L142,205l-0.7,0.5l-0.7,0.5l-0.7,0.5l-0.7,0.5l-0.7,0.6l-0.6,0.6l-0.6,0.6l-0.6,0.6
+                      l-0.6,0.6l-0.6,0.6l-0.6,0.6l-0.6,0.6l-0.5,0.6l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.4,0.7l-0.5,0.7l-0.4,0.7
+                      l-0.4,0.8l-0.4,0.8l-0.4,0.8l-0.4,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.2,0.8l-0.2,0.8l-0.2,0.8
+                      l-0.2,0.8l-0.2,0.8l-0.2,0.8l-0.1,0.9l-0.1,0.9l-0.1,0.8l-0.1,0.9l-0.1,0.9l0,0.9l0,0.9v0.9v0.9l0,0.8l0,0.9l0.1,0.8l0.1,0.8
+                      l0.1,0.9l0.1,0.9l0.1,0.8l0.2,0.9l0.2,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8
+                      l0.4,0.8l0.4,0.8l0.4,0.8l0.4,0.8l0.4,0.7l0.5,0.7l0.4,0.7l0.5,0.7l0.5,0.7l0.5,0.7l0.2,0.2h89.8l-59.7-16.4l-0.4-0.1l-0.3-0.1
+                      l-0.4-0.1l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3
+                      l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.1-0.4l-0.1-0.4l-0.1-0.3l-0.1-0.4l-0.1-0.4l-0.1-0.4l0-0.4l0-0.4l0-0.4l0-0.4l0-0.4
+                      l0-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3
+                      l0.3-0.3l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.4-0.2l0.3-0.1l0.4-0.1l0.4-0.1l0.4-0.1l0.4-0.1l0.4,0l0.4,0
+                      h0.4h82.5h111H375v-32.3H252.2H165.3z"></path>
+<path class="st1" d="M165.3,125l-0.9,0l-0.8,0l-0.9,0.1l-0.9,0.1l-0.8,0.1l-0.9,0.1l-0.8,0.1l-0.8,0.1l-0.8,0.2l-0.8,0.2l-0.8,0.2
+                      l-0.8,0.2l-0.8,0.2l-0.8,0.2l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.4l-0.8,0.4l-0.8,0.4l-0.8,0.4
+                      l-0.8,0.4l-0.7,0.5l-0.7,0.4l-0.7,0.5l-0.7,0.5l-0.7,0.5l-0.7,0.5l-0.7,0.5l-0.7,0.6l-0.7,0.6l-0.6,0.6l-0.6,0.6l-0.6,0.6
+                      l-0.6,0.6l-0.6,0.6l-0.6,0.6l-0.6,0.6l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.4,0.7l-0.5,0.7l-0.4,0.7
+                      l-0.4,0.8l-0.4,0.8l-0.4,0.8l-0.4,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.2,0.8l-0.2,0.8l-0.2,0.8
+                      l-0.2,0.8l-0.2,0.8l-0.2,0.8l-0.1,0.9l-0.1,0.8l-0.1,0.9l-0.1,0.8l-0.1,0.9l0,0.9l0,0.9v0.9v0.9l0,0.9l0,0.8l0.1,0.9l0.1,0.9
+                      l0.1,0.8l0.1,0.8l0.1,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8
+                      l0.4,0.8l0.4,0.8l0.4,0.8l0.4,0.8l0.4,0.7l0.5,0.7l0.4,0.7l0.5,0.7l0.5,0.7l0.5,0.7l0.5,0.7l0.5,0.7l0.5,0.7l0.6,0.6l0.6,0.6
+                      l0.6,0.6l0.6,0.6l0.6,0.6l0.6,0.6l0.6,0.6l0.7,0.6l0.6,0.5h0l1.1-0.7l0.8-0.5l0.8-0.5l0.8-0.4l0.8-0.4l0.9-0.4l0.9-0.4l0.9-0.4
+                      l0.9-0.3l0.9-0.3l0.9-0.3l0.9-0.3l0.9-0.3l0.9-0.3l0.9-0.2l0.9-0.2l0.9-0.2l0.9-0.2l0.9-0.2l0.9-0.1l0.9-0.1l0.9-0.1l0.9-0.1
+                      l0.9-0.1l0.9-0.1l0.9,0l0.9,0l0.9,0h57.5l-59.7-16.4l-0.4-0.1l-0.3-0.1l-0.4-0.1l-0.3-0.1l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2
+                      l-0.3-0.2l-0.3-0.2l-0.3-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.1-0.3l-0.1-0.4
+                      l-0.1-0.3l-0.1-0.4l-0.1-0.4l-0.1-0.4l0-0.4l0-0.4l0-0.4l0-0.4l0-0.4l0-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.3
+                      l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2
+                      l0.3-0.2l0.4-0.1l0.3-0.1l0.4-0.1l0.4-0.1l0.4-0.1l0.4-0.1l0.4,0l0.4,0l0.4,0H375V125H165.3z"></path>
+</g>
+</g>
+</svg>
+        Seqera
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="https://github.com/nextflow-io/training" rel="noopener" target="_blank">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z"></path>
+</svg>
+        Training on GitHub
+      </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../rnaseq_pipeline/">
+<span class="md-ellipsis">
+    Simple RNA-Seq workflow
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../containers/">
+<span class="md-ellipsis">
+    Dependencies and containers
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../channels/">
+<span class="md-ellipsis">
+    Channels
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../processes/">
+<span class="md-ellipsis">
+    Processes
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../operators/">
+<span class="md-ellipsis">
+    Operators
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../groovy/">
+<span class="md-ellipsis">
+    Groovy introduction
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../modules/">
+<span class="md-ellipsis">
+    Modularization
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../config/">
+<span class="md-ellipsis">
+    Configuration
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../executors/">
+<span class="md-ellipsis">
+    Deployment scenarios
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../seqera_platform/">
+<span class="md-ellipsis">
+    Seqera Platform
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../cache_and_resume/">
+<span class="md-ellipsis">
+    Cache and resume
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../debugging/">
+<span class="md-ellipsis">
+    Troubleshooting
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle" id="__nav_8" type="checkbox"/>
+<label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+<span class="md-ellipsis">
+    Advanced Training
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_8_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_8">
+<span class="md-nav__icon md-icon"></span>
+            Advanced Training
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../advanced/">
+<span class="md-ellipsis">
+    Advanced Training
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../advanced/orientation/">
+<span class="md-ellipsis">
+    Orientation
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../advanced/operators/">
+<span class="md-ellipsis">
+    Operator Tour
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../advanced/metadata/">
+<span class="md-ellipsis">
+    Metadata Propagation
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../advanced/grouping/">
+<span class="md-ellipsis">
+    Grouping and Splitting
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../advanced/groovy/">
+<span class="md-ellipsis">
+    Groovy Imports
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../advanced/structure/">
+<span class="md-ellipsis">
+    Workflow Structure
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../advanced/configuration/">
+<span class="md-ellipsis">
+    Configuration
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../advanced/summary/">
+<span class="md-ellipsis">
+    Summary
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../advanced/support/">
+<span class="md-ellipsis">
+    Support
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="On this page" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+    On this page
+  </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#processes-and-channels">
+<span class="md-ellipsis">
+      Processes and Channels
+    </span>
+</a>
+</li> <li class="md-nav__item">
+<a class="md-nav__link" href="#execution-abstraction">
+<span class="md-ellipsis">
+      Execution abstraction
+    </span>
+</a>
+</li> <li class="md-nav__item">
+<a class="md-nav__link" href="#scripting-language">
+<span class="md-ellipsis">
+      Scripting language
+    </span>
+</a>
+</li> <li class="md-nav__item">
+<a class="md-nav__link" href="#your-first-script">
+<span class="md-ellipsis">
+      Your first script
+    </span>
+</a>
+<nav aria-label="Your first script" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#nextflow-code">
+<span class="md-ellipsis">
+      Nextflow code
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#python-instead-of-bash">
+<span class="md-ellipsis">
+      Python instead of bash
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#in-practice">
+<span class="md-ellipsis">
+      In practice
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li> <li class="md-nav__item">
+<a class="md-nav__link" href="#modify-and-resume">
+<span class="md-ellipsis">
+      Modify and resume
+    </span>
+</a>
+</li> <li class="md-nav__item">
+<a class="md-nav__link" href="#workflow-parameters">
+<span class="md-ellipsis">
+      Workflow parameters
+    </span>
+</a>
+</li> <li class="md-nav__item">
+<a class="md-nav__link" href="#in-dag-like-format">
+<span class="md-ellipsis">
+      In DAG-like format
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+<nav aria-label="Resources" class="md-nav md-nav--secondary sidebar_resources">
+<label class="md-nav__title">Resources</label>
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="https://nextflow.io/docs/latest/index.html" rel="noopener" target="_blank">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M17.5 14.33c.79 0 1.63.08 2.5.24v1.5c-.62-.16-1.46-.24-2.5-.24-1.9 0-3.39.33-4.5.99v-1.69c1.17-.53 2.67-.8 4.5-.8M13 12.46c1.29-.53 2.79-.79 4.5-.79.79 0 1.63.07 2.5.23v1.5c-.62-.16-1.46-.24-2.5-.24-1.9 0-3.39.34-4.5.99m4.5-3.65c-1.9 0-3.39.32-4.5 1V9.84c1.23-.56 2.73-.84 4.5-.84.79 0 1.63.08 2.5.23v1.55c-.74-.19-1.59-.28-2.5-.28m3.5 8V7c-1.04-.33-2.21-.5-3.5-.5-2.05 0-3.88.5-5.5 1.5v11.5c1.62-1 3.45-1.5 5.5-1.5 1.19 0 2.36.16 3.5.5m-3.5-14c2.35 0 4.19.5 5.5 1.5v14.56c0 .12-.05.24-.16.35-.11.09-.23.17-.34.17-.11 0-.19-.02-.25-.05-1.28-.69-2.87-1.03-4.75-1.03-2.05 0-3.88.5-5.5 1.5-1.34-1-3.17-1.5-5.5-1.5-1.66 0-3.25.36-4.75 1.07-.03.01-.07.01-.12.03-.04.01-.08.02-.13.02-.11 0-.23-.04-.34-.12a.475.475 0 0 1-.16-.35V6c1.34-1 3.18-1.5 5.5-1.5 2.33 0 4.16.5 5.5 1.5 1.34-1 3.17-1.5 5.5-1.5Z"></path>
+</svg>
+        Nextflow Docs
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="https://www.nextflow.io/slack-invite.html" rel="noopener" target="_blank">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M6 15a2 2 0 0 1-2 2 2 2 0 0 1-2-2 2 2 0 0 1 2-2h2v2m1 0a2 2 0 0 1 2-2 2 2 0 0 1 2 2v5a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-5m2-8a2 2 0 0 1-2-2 2 2 0 0 1 2-2 2 2 0 0 1 2 2v2H9m0 1a2 2 0 0 1 2 2 2 2 0 0 1-2 2H4a2 2 0 0 1-2-2 2 2 0 0 1 2-2h5m8 2a2 2 0 0 1 2-2 2 2 0 0 1 2 2 2 2 0 0 1-2 2h-2v-2m-1 0a2 2 0 0 1-2 2 2 2 0 0 1-2-2V5a2 2 0 0 1 2-2 2 2 0 0 1 2 2v5m-2 8a2 2 0 0 1 2 2 2 2 0 0 1-2 2 2 2 0 0 1-2-2v-2h2m0-1a2 2 0 0 1-2-2 2 2 0 0 1 2-2h5a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-5Z"></path>
+</svg>
+        Nextflow Slack
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="https://nextflow.io/" rel="noopener" target="_blank">
+<svg id="Layer_1" version="1.1" viewbox="80 50 350 350" xmlns="http://www.w3.org/2000/svg">
+<style type="text/css">
+            .st0 {
+              fill: "gray";
+            }
+          </style>
+<path class="st0" d="M124.5,171.5c39.4,2.6,71.1,34.3,73.5,73.8h46.1c-2.6-65-54.7-117.2-119.6-119.9V171.5z"></path>
+<path class="st0" d="M198.3,255.8c-2.6,39.5-34.3,71.1-73.8,73.5v46.1c65-2.6,117.2-54.7,119.9-119.6H198.3z"></path>
+<path class="st0" d="M300.7,245c2.6-39.5,34.3-71.1,73.8-73.5v-46.1c-65,2.6-117.2,54.7-119.9,119.6H300.7z"></path>
+<path class="st0" d="M374.5,329.3c-39.4-2.6-71.1-34.3-73.5-73.8h-46.1c2.6,65,54.7,117.2,119.6,119.9V329.3z"></path>
+</svg>
+        Nextflow Homepage
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="https://seqera.io/" rel="noopener" target="_blank">
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 28.3.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg id="Layer_1" style="enable-background: new 0 0 500 500" version="1.1" viewbox="80 50 350 350" x="0px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" y="0px">
+<style type="text/css">
+            .st0 {
+              clip-path: url(#SVGID_00000006699037935518914080000000086571810102047141_);
+            }
+            .st1 {
+              fill: "gray";
+            }
+          </style>
+<g>
+<defs>
+<rect height="250" id="SVGID_1_" width="250" x="125" y="125"></rect>
+</defs>
+<clippath id="SVGID_00000183214694142566821210000012389151436317298101_">
+<use style="overflow: visible" xlink:href="#SVGID_1_"></use>
+</clippath>
+<g style="
+                clip-path: url(#SVGID_00000183214694142566821210000012389151436317298101_);
+              ">
+<path class="st1" d="M375,333l-0.1-0.9l-0.1-0.8l-0.1-0.9l-0.1-0.9l-0.1-0.8l-0.1-0.9l-0.1-0.8l-0.2-0.9l-0.2-0.8l-0.2-0.8
+                      l-0.2-0.8l-0.2-0.8l-0.2-0.8l-0.3-0.8l-0.3-0.8l-0.3-0.8l-0.3-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8
+                      l-0.4-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7L365,308l-0.6-0.6l-0.6-0.6l-0.6-0.6l-0.6-0.6L362,305
+                      l-0.6-0.6l-0.7-0.6l-0.6-0.5l-1.2,0.7l-0.8,0.5l-0.8,0.4l-0.8,0.4l-0.8,0.4l-0.8,0.4l-0.9,0.4l-0.9,0.4l-0.9,0.3l-0.9,0.3
+                      l-0.9,0.3l-0.9,0.3l-0.9,0.3l-0.9,0.3l-0.9,0.2l-0.9,0.2l-0.9,0.2l-0.9,0.2l-0.9,0.2l-0.9,0.1l-0.9,0.1l-0.9,0.1l-0.9,0.1
+                      l-0.9,0.1l-0.9,0.1l-0.9,0.1l-0.9,0l-0.9,0h-57.5l59.7,16.4l0.4,0.1l0.4,0.1l0.4,0.1l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.2
+                      l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.1,0.3l0.1,0.3l0.1,0.4l0.1,0.4
+                      l0.1,0.4l0.1,0.4l0,0.4l0,0.4l0,0.4l0,0.4l0,0.4l0,0.4l-0.1,0.4l-0.1,0.4l-0.1,0.4l-0.1,0.3l-0.1,0.4l-0.1,0.3l-0.2,0.3l-0.2,0.3
+                      l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.3,0.3l-0.3,0.3l-0.3,0.2l-0.3,0.2l-0.3,0.2l-0.3,0.2l-0.3,0.2l-0.3,0.2
+                      l-0.3,0.1l-0.4,0.2l-0.4,0.1l-0.3,0.1l-0.4,0.1l-0.4,0.1l-0.4,0.1l-0.4,0l-0.4,0l-0.4,0H125V375h209.7l0.9,0l0.9,0l0.9,0l0.8-0.1
+                      l0.9-0.1l0.8-0.1l0.9-0.1l0.8-0.1l0.8-0.1l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.3l0.8-0.3l0.8-0.3l0.8-0.3l0.8-0.3
+                      l0.8-0.4l0.8-0.4l0.8-0.4l0.8-0.4l0.8-0.4l0.7-0.4l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5
+                      l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.4-0.7
+                      l0.4-0.8l0.4-0.8l0.4-0.8l0.4-0.8l0.4-0.8l0.4-0.8l0.3-0.8l0.3-0.8l0.3-0.8l0.3-0.8l0.2-0.8l0.2-0.8l0.2-0.8l0.2-0.8l0.2-0.8
+                      l0.2-0.8l0.1-0.8l0.1-0.9l0.1-0.9l0.1-0.8l0.1-0.9l0.1-0.9l0.1-0.8l0-0.9l0-0.9l0-0.8L375,333z"></path>
+<path class="st1" d="M375,260.4l-0.1-0.9l-0.1-0.9l-0.1-0.8l-0.1-0.9l-0.1-0.8l-0.1-0.8l-0.1-0.8l-0.2-0.8l-0.2-0.8l-0.2-0.8
+                      l-0.2-0.8l-0.2-0.8l-0.2-0.8l-0.3-0.8l-0.3-0.8l-0.3-0.8l-0.3-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.8l-0.4-0.7
+                      l-0.4-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.5-0.7l-0.2-0.2h0h-89.8l59.7,16.4l0.4,0.1l0.4,0.1l0.4,0.1l0.3,0.2l0.3,0.2l0.3,0.2
+                      l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.2l0.3,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.2,0.3l0.1,0.4l0.1,0.3
+                      l0.1,0.4l0.1,0.4l0.1,0.4l0.1,0.4l0,0.4l0,0.4l0,0.4l0,0.4l0,0.4l0,0.4l-0.1,0.4l-0.1,0.4l-0.1,0.4l-0.1,0.4l-0.1,0.3l-0.1,0.4
+                      l-0.2,0.4l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.2,0.3l-0.3,0.3l-0.3,0.3l-0.3,0.2l-0.3,0.2l-0.3,0.2l-0.3,0.2
+                      l-0.3,0.2l-0.3,0.2l-0.3,0.2l-0.4,0.2l-0.4,0.1l-0.3,0.1l-0.4,0.1l-0.4,0.1l-0.4,0.1l-0.4,0l-0.4,0l-0.4,0h-82.5h-111H125v32.2
+                      h122.8h86.9h0.9l0.9,0l0.9-0.1l0.8-0.1l0.9-0.1l0.8-0.1l0.9-0.1l0.8-0.1l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.2l0.8-0.3
+                      l0.8-0.3l0.8-0.3l0.8-0.3l0.8-0.3l0.8-0.4l0.8-0.4l0.2-0.1l0.6-0.3l0.8-0.4l0.8-0.4l0.7-0.4l0.7-0.4l0.7-0.5l0.7-0.5l0.7-0.5
+                      l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.5l0.7-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.6-0.6l0.5-0.7l0.5-0.7l0.5-0.7
+                      l0.5-0.7l0.5-0.7l0.5-0.7l0.5-0.7l0.4-0.7l0.4-0.7l0.4-0.8l0.4-0.8l0.4-0.8l0.4-0.8l0.4-0.8l0.3-0.8l0.3-0.8l0.3-0.8l0.3-0.8
+                      l0.2-0.8l0.2-0.8l0.2-0.8l0.2-0.8l0.2-0.8l0.2-0.8l0.1-0.8l0.1-0.9l0.1-0.8l0.1-0.9l0.1-0.8l0.1-0.9l0.1-0.9l0-0.8l0-0.9l0-0.9
+                      L375,260.4z"></path>
+<path class="st1" d="M165.3,197.6l-0.9,0l-0.8,0l-0.9,0l-0.9,0.1l-0.8,0.1l-0.9,0.1l-0.8,0.1l-0.8,0.1l-0.8,0.2l-0.8,0.2l-0.8,0.2
+                      l-0.8,0.2l-0.8,0.2l-0.8,0.2l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.4l-0.8,0.4l-0.2,0.1l-0.6,0.3l-0.8,0.4
+                      l-0.8,0.4l-0.8,0.4l-0.7,0.4l-0.7,0.5l-0.7,0.5L142,205l-0.7,0.5l-0.7,0.5l-0.7,0.5l-0.7,0.5l-0.7,0.6l-0.6,0.6l-0.6,0.6l-0.6,0.6
+                      l-0.6,0.6l-0.6,0.6l-0.6,0.6l-0.6,0.6l-0.5,0.6l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.4,0.7l-0.5,0.7l-0.4,0.7
+                      l-0.4,0.8l-0.4,0.8l-0.4,0.8l-0.4,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.2,0.8l-0.2,0.8l-0.2,0.8
+                      l-0.2,0.8l-0.2,0.8l-0.2,0.8l-0.1,0.9l-0.1,0.9l-0.1,0.8l-0.1,0.9l-0.1,0.9l0,0.9l0,0.9v0.9v0.9l0,0.8l0,0.9l0.1,0.8l0.1,0.8
+                      l0.1,0.9l0.1,0.9l0.1,0.8l0.2,0.9l0.2,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8
+                      l0.4,0.8l0.4,0.8l0.4,0.8l0.4,0.8l0.4,0.7l0.5,0.7l0.4,0.7l0.5,0.7l0.5,0.7l0.5,0.7l0.2,0.2h89.8l-59.7-16.4l-0.4-0.1l-0.3-0.1
+                      l-0.4-0.1l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3
+                      l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.1-0.4l-0.1-0.4l-0.1-0.3l-0.1-0.4l-0.1-0.4l-0.1-0.4l0-0.4l0-0.4l0-0.4l0-0.4l0-0.4
+                      l0-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3
+                      l0.3-0.3l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.4-0.2l0.3-0.1l0.4-0.1l0.4-0.1l0.4-0.1l0.4-0.1l0.4,0l0.4,0
+                      h0.4h82.5h111H375v-32.3H252.2H165.3z"></path>
+<path class="st1" d="M165.3,125l-0.9,0l-0.8,0l-0.9,0.1l-0.9,0.1l-0.8,0.1l-0.9,0.1l-0.8,0.1l-0.8,0.1l-0.8,0.2l-0.8,0.2l-0.8,0.2
+                      l-0.8,0.2l-0.8,0.2l-0.8,0.2l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.3l-0.8,0.4l-0.8,0.4l-0.8,0.4l-0.8,0.4
+                      l-0.8,0.4l-0.7,0.5l-0.7,0.4l-0.7,0.5l-0.7,0.5l-0.7,0.5l-0.7,0.5l-0.7,0.5l-0.7,0.6l-0.7,0.6l-0.6,0.6l-0.6,0.6l-0.6,0.6
+                      l-0.6,0.6l-0.6,0.6l-0.6,0.6l-0.6,0.6l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.5,0.7l-0.4,0.7l-0.5,0.7l-0.4,0.7
+                      l-0.4,0.8l-0.4,0.8l-0.4,0.8l-0.4,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.3,0.8l-0.2,0.8l-0.2,0.8l-0.2,0.8
+                      l-0.2,0.8l-0.2,0.8l-0.2,0.8l-0.1,0.9l-0.1,0.8l-0.1,0.9l-0.1,0.8l-0.1,0.9l0,0.9l0,0.9v0.9v0.9l0,0.9l0,0.8l0.1,0.9l0.1,0.9
+                      l0.1,0.8l0.1,0.8l0.1,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.2,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8l0.3,0.8
+                      l0.4,0.8l0.4,0.8l0.4,0.8l0.4,0.8l0.4,0.7l0.5,0.7l0.4,0.7l0.5,0.7l0.5,0.7l0.5,0.7l0.5,0.7l0.5,0.7l0.5,0.7l0.6,0.6l0.6,0.6
+                      l0.6,0.6l0.6,0.6l0.6,0.6l0.6,0.6l0.6,0.6l0.7,0.6l0.6,0.5h0l1.1-0.7l0.8-0.5l0.8-0.5l0.8-0.4l0.8-0.4l0.9-0.4l0.9-0.4l0.9-0.4
+                      l0.9-0.3l0.9-0.3l0.9-0.3l0.9-0.3l0.9-0.3l0.9-0.3l0.9-0.2l0.9-0.2l0.9-0.2l0.9-0.2l0.9-0.2l0.9-0.1l0.9-0.1l0.9-0.1l0.9-0.1
+                      l0.9-0.1l0.9-0.1l0.9,0l0.9,0l0.9,0h57.5l-59.7-16.4l-0.4-0.1l-0.3-0.1l-0.4-0.1l-0.3-0.1l-0.3-0.2l-0.3-0.2l-0.3-0.2l-0.3-0.2
+                      l-0.3-0.2l-0.3-0.2l-0.3-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.2-0.3l-0.1-0.3l-0.1-0.4
+                      l-0.1-0.3l-0.1-0.4l-0.1-0.4l-0.1-0.4l0-0.4l0-0.4l0-0.4l0-0.4l0-0.4l0-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.4l0.1-0.3
+                      l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.2-0.3l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2l0.3-0.2
+                      l0.3-0.2l0.4-0.1l0.3-0.1l0.4-0.1l0.4-0.1l0.4-0.1l0.4-0.1l0.4,0l0.4,0l0.4,0H375V125H165.3z"></path>
+</g>
+</g>
+</svg>
+        Seqera
+      </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="https://github.com/nextflow-io/training" rel="noopener" target="_blank">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z"></path>
+</svg>
+        Training on GitHub
+      </a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<a class="md-content__button md-icon" href="https://github.com/nextflow-io/training/edit/master/docs/basic_training/intro.md" title="Modifica">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"></path></svg>
+</a>
+<h1 id="basic-concepts"><span class="enumerate-headings-plugin enumerate-heading-plugin">1.</span> Basic concepts<a class="headerlink" href="#basic-concepts" title="Permanent link">¶</a></h1>
+<p>Nextflow is a workflow orchestration engine and domain-specific language (DSL) that makes it easy to write data-intensive computational workflows.</p>
+<p>It is designed around the idea that the Linux platform is the <em>lingua franca</em> of data science. Linux provides many simple but powerful command-line and scripting tools that, when chained together, facilitate complex data manipulations.</p>
+<p>Nextflow extends this approach, adding the ability to define complex program interactions and a high-level parallel computational environment, based on the dataflow programming model. Nextflow’s core features are:</p>
+<ul>
+<li>Workflow portability and reproducibility</li>
+<li>Scalability of parallelization and deployment</li>
+<li>Integration of existing tools, systems, and industry standards</li>
+</ul>
+<h2 id="processes-and-channels"><span class="enumerate-headings-plugin enumerate-heading-plugin">1.1</span> Processes and Channels<a class="headerlink" href="#processes-and-channels" title="Permanent link">¶</a></h2>
+<p>In practice, a Nextflow workflow is made by joining together different processes. Each process can be written in any scripting language that can be executed by the Linux platform (Bash, Perl, Ruby, Python, etc.).</p>
+<p>Processes are executed independently and are isolated from each other, i.e., they do not share a common (writable) state. The only way they can communicate is via asynchronous first-in, first-out (FIFO) queues, called <code>channels</code>. In other words, every input and output of a process is represented as a channel. The interaction between these processes, and ultimately the workflow execution flow itself, is implicitly defined by these <code>input</code> and <code>output</code> declarations.</p>
+<figure class="excalidraw">
+<svg height="537.103515625" version="1.1" viewbox="0 0 1033.4194907706317 537.103515625" width="1033.4194907706317" xmlns="http://www.w3.org/2000/svg">
+<!-- svg-source:excalidraw -->
+<!-- payload-type:application/vnd.excalidraw+json --><!-- payload-version:2 --><!-- payload-start -->eyJ2ZXJzaW9uIjoiMSIsImVuY29kaW5nIjoiYnN0cmluZyIsImNvbXByZXNzZWQiOnRydWUsImVuY29kZWQiOiJ4nO1daVNcIslcdTAwMTb93r/CcL6ONbkvXHUwMDEz8eJcdTAwMDWotKjYbrTii1x0o4BCSpZCKESc6P/+bqJSXHUwMDA1VLGjpdHMRKu1ZGVl3nPuuTdcdTAwMTf+/ba1te33W87231vbzlPJrrvltt3b/tNcdTAwMWN/dNpcdTAwMWTXa8IpMvi743XbpcGVVd9vdf7+66+G3a45fqtul1x1MDAxY+vR7XTtesfvll3PKnmNv1xc32l0/mv+PbFcdTAwMWLOf1peo+y3reAhO07Z9b32y7OcutNwmn5cdTAwMDdK/1x1MDAxZvy9tfXv4N9Q7ex223up2OBwUDmO1fjRXHUwMDEzrzmoKJOaUi4lXHUwMDFlXuB29uBRvlOGs1x1MDAxNaiuXHUwMDEznDGHtq/9Vv7azaRcdTAwMWZaT9+ru9fnd1x1MDAxOFeywVMrbr1+4ffrL61gl6rdtlx1MDAxM5zt+G2v5lxcuWW/alx1MDAxZT52fHhfx4NcdTAwMDZcYu5qe927atPpmHdcdTAwMGYq6rXskuv3zTGEhkft5t2gjODIk+lcdTAwMWWiLY2pQlxiY8TgjenwtCmAIWppLVx1MDAxOVeUaim0XHUwMDFlq9iuV4dugIr9wTRHXFxcdTAwMDZVK9ql2lx1MDAxZNSvWVx1MDAxZV7jt+1mp2W3obOC63qvryyVRTRVUFx1MDAxNyo5XHUwMDExjFxmr6g67l3VNzW3kKZcdTAwMDL+Z0xQwjVjoXZyXHUwMDA2/YIloVx1MDAxOEtBgtYwlWhly1x1MDAwM/P4J9xyzfJry73ZS2Ax5PXIr+B1zPX7IUtcdTAwMGKK6rbK9otVYCE5XHUwMDEziiGJRNDMdbdZg5PNbr1cdTAwMWVcdTAwMWPzSrVcYkPq+HbbT7vNstu8XHUwMDFiv8VploMzoSq/mn92YIP7JOs37eec+717dn5fdi55bjfoXHUwMDE0Y4VeqWvqv1x1MDAwM42JmUBCcUVcYmLQuUHXm1azW+aFsIU5llhRuFSZXHUwMDFmXHUwMDEzXHJTtzv+rtdouD60wannNv3xilx1MDAwZl4qZSBYdexyxGuFz41jtWVKXGagbT7Bb1uBMVx1MDAwZv5cdTAwMTj+/s+fkVfH2pj57ESYV1Dgt/DP17ef4Fx1MDAxOaded1tcdTAwMWQnimmoXHUwMDE0cUyDXHUwMDExUVgqqNfcVDO9m1x1MDAxN6JcdTAwMWE8dnxzVEOxtihXSCuMOFx1MDAxN4hcdTAwMDQt0lx1MDAxZrRcdTAwMTC2KFFKMaJcdDfXxHJcclx1MDAxYXyW51x1MDAxYcIsRVx1MDAxMMUkeMSQZFx1MDAwNFx1MDAwM5NcdTAwMTehM6/MQiSDftI8OLEhYlx1MDAxOd7zb8g453IxI7b4gqPhmV9vXHUwMDA2vEbamopcdTAwMDW4PVx1MDAxYVxilMVcdTAwMDFBXCLGXHUwMDAwlXp+l3vVPtM/2q1cdTAwMWK1+8x2z/3bhj6zfyRcdTAwMWVcdTAwMDeUWlRwjaG1I3FALKo11kJuXHUwMDFhXHUwMDA3VJhHUfCX0PtcdTAwMTIjySbxgMaBgInWSisp6Vx1MDAwMkhcdTAwMTixooT50tHC1uvORs6t1ZfF993Y7XN5rji0MlwiY91cdTAwMTbmSDBB5vdaondzW7HtvYKXrfTb/cL3g/x1I/loJZZSQmmkXHUwMDE4M7+MopVRbjFAs9CSXHUwMDEyzClcdTAwMWaX7utEq7Cw1kJDKVKRkFKPXHUwMDA3q1JcdTAwMWFIRi6ihn9Ddf1Qjem4sbtXQipEPWj88Fx1MDAxYlRB8WpNJJ3fseb6vStW+X7vX+5cdTAwMTae7GNkp1jaSTpUXHUwMDE5l1x1MDAxNsCVSzB4XG5+NaCuXHUwMDE3v8pcdTAwMDCpXHUwMDE0ioGYXHUwMDE3fGt8KLsqUCFq0lx1MDAwNFSuYJxcdTAwMDNcdTAwMDC1XGYqMkQq11x1MDAxNsGKUIFcdTAwMDVcdTAwMTHGKCbcLNVGXCKEo4IvXHUwMDE5yX5OSEtLXGJCKFwiIOIoXHQ5QfPB4JnB/MDQpFx1MDAxMlxiS8JmXHUwMDE1XHUwMDE3bzHmQ7QlpcBcdTAwMTJcIiTCmKZ8ZnHIMpkrocAlXHUwMDAx48Bv4eJcdTAwMThcdTAwMTSHmYFcdTAwMDBcdTAwMDS7IC/VrOIgXCLSoEqZXHUwMDA0+GiCwDTCxU1Y8rpcYo3h2EiBmmxcdTAwMTSXaH5CO053XHUwMDFh6rJWuHJTp0LtOKXr3Ekv6YQmtLAk1WBEikutaJCsfCM0yoSxL+hFTehYvVx1MDAxMkZohs9cdTAwMDTDZJGw4Tef/eazra/CZ4Tr8cPDWEphiOQglpg/lmqre13id72rQuGkg09w8Vx1MDAwN/aSzmdcXFx1MDAxOVx0Rlx1MDAwNPBcdTAwMTlcdTAwMDHiYuNcdTAwMDKNQsdAMyhpXHUwMDAyS8RcdTAwMTJOaFpqsDtMf1x1MDAxM9pvQvvKhOY7T35kJlx1MDAxN8XnhqhUXGKqouYnNHrmfL/t1S6bXVxiVr/jg0e7ktdJJzRcdTAwMTPZU5NcdTAwMTjCXHUwMDA0xChVQSlcdTAwMDNC09gyY8hgNlx1MDAwNML/zWWGQvmdIX2RibFRXHUwMDAyjMpcdTAwMTFcdTAwMGV7mURmgype079wn1x1MDAwN+SIRo5m7IZbXHUwMDFmtOzw8MA4oX3g6fbWc7hcdDvOwFx1MDAxM49cdTAwMTRirk7V3bvmwFE7lVG79t2SXVx1MDAxZp5uuOVyPWRjJaiAXHIltrNcdTAwMTPM5bXdO7dp1y9HK7NcdTAwMWOqWGzUY1x1MDAwNlxuKdGLyIRsMX14cnCGVC3VaWqPXHUwMDFjK7uQeJnAtFx1MDAwMj5lXHUwMDE0WFx1MDAwNFx1MDAwM6OGRiXeUFx1MDAwNdFcdTAwMTBlREHcXHUwMDEzdr9cdTAwMWZcdTAwMDMrYGpMXHUwMDA1pyjhSdblYdVPXHUwMDEyrPpLwkrEOyvOzZxcdTAwMTEwpblhlU7t3V5Xfj572XxKcsIumWzVklx1MDAwZSuBuVx1MDAwNWJDgFBcdTAwMDBvJEMskkhYSSa5XHUwMDE2XHUwMDE0f1lv9ZQkWD0tXHQrOiWm5Vx1MDAxMmSnYvPDaicnd3f2XG7n9Sd6WPLat/lWQ54nXHUwMDFkVpQyS1x1MDAxMDMwyCCiYEiPwlxuXCJcdTAwMDdcYjFGZ5SsO5pcctVxiCgqJlx1MDAxMYVcdTAwMDVcdTAwMDBfLDKg8MGAUtGAwlx1MDAxM4DardrNplOPRlx1MDAxNH9vRL3VZiqk2k7Jf7GoXGJcXLFQpSdiK6Ew2JueXHUwMDFmV0dN1cxcdTAwMTVcdTAwMGZ4zW92/cPeXrH7fHe1XHUwMDFjrshcdTAwMTK4XCJL4UpKcFdcYlxiRFxuXHUwMDE0Rk//xcgsKoXmI3O41j7gTpVcdTAwMDWWrCFcdTAwMTRcdTAwMTdcdTAwMDIqoiOyRExMjtwppakyczNcdTAwMTZcdTAwMDDaZGKIvlx1MDAxZVkhMYRcdTAwMTfA31L0T0KPXHUwMDE4N1PJodUkW0BV9dK5LL9OZ4/zvYr/47abvW09nCSd/qXiXHUwMDE2RqbJ5ZiNgtxcIpIyKjfJ/Fx1MDAxMSZcdTAwMTnB/EgrLSBQeTfmX8TyVmP+07ZXMjVOXHUwMDA287/VZiqaYpcjUFx1MDAxMlx1MDAxYvtDjELNpIX5Q/9C7oFcdTAwMTR3s4eMXHUwMDFlVqvlw7NcdTAwMDfhPq97jnDZ7lSd9cJcdGtLXHUwMDFha1VmuVx1MDAwMdWjQ1x1MDAwNFxmMThLXHUwMDE4Q4hcdTAwMDJwqN4gtDCypKCEgGpcdTAwMDL5hqOmW2FcIixMoVNcdTAwMDQoKzODm04gXHUwMDBmqklcdTAwMTDDXHUwMDFmvlx1MDAxY2EpQK68XHUwMDFj4dTOXFyKokJcdTAwMDdcdTAwMGbVZ0FPczc/MuVm1HJcdTAwMDRkQTW5lsCkklOBUCiD/bpcdTAwMTZBWlpcdTAwMTOsJFx1MDAwNK/wUUpMNMpnWopcdTAwMTBvXuazM2lZQYHfwj+XUpcyPmgjhClJXHUwMDE0mX9mxfQ+XHUwMDFl5Zkx7/tRPlx1MDAxYtrT4pxBq1xuqjjCo2l7wrFcdTAwMDWaXHUwMDBmISnIwNpW4Zg/MLftYiWCX5i0gMBGpG0w9kgtqtmYun1hXHUwMDE0SZVCXCLMfFx1MDAxYlx1MDAxMpfDe0bWIUQqwpA1nFdZyj09l/gpL9ntzb3q1+7Dy1x1MDAxMP6MLnZcdTAwMWWXNfL88eVcclPLLaZP9jNcdTAwMTepvCw+XaTZkU2encf8WpdNbF5pxy5UxFx1MDAxNFx1MDAxOIRcdTAwMDFtzi9ccqI7KeFCXHUwMDFi4kCLS6oxUypcdTAwMDK0XHUwMDEwXHUwMDExYlx1MDAwNoClhJNVQbt4+nLC8UO8XGJcdTAwMWFGvONY28qSe1x1MDAxZNlLrEeuXHUwMDFlSupcdTAwMTK8hdNeWnPPcjLLpDTjXHUwMDE3XHUwMDA189iJ1Fx1MDAwMlx1MDAwNFxuXHUwMDAy45NzQ2069SRVhWvNLCqwXHUwMDFjXHUwMDA0tlxiYTKKNVx1MDAwNe6JcVx1MDAwMSjDXG7zXHJiXHLEiMVcdTAwMTkjlHOulWBcdTAwMTHQm1xcn1x1MDAwNJrJTKVCXHUwMDFmPnF6XHUwMDFkmntccspcdTAwMWFLs8aMY2g+qFx1MDAxNeiKXHRprUCKKlwiIKySXHUwMDFj+ovziXd/t1x1MDAxOUFcdTAwMWJcdTAwMTXdseY0dvfqXG6byvjEmEZmQlI4dTaLREpPj376x5X/WFx1MDAxMo1y515mLm5cdTAwMGX3ki2xzcpcdTAwMDWLUVxiXTRHQFx1MDAxNmx02Vx1MDAxNOFcdTAwMTDfYPDlaMWBkT8qdlx1MDAxMSx2ffpcdTAwMWHoQ1x1MDAxYSSEVo8kSmDfXHUwMDE3z3L0MOPenFT2XHUwMDFhmcu6WzrbTSdQsNKQJlx1MDAxYV+OJJngXFwsMDBcdTAwMTj90lx0XHUwMDE3rFx1MDAxOFx0ZoEwp1x1MDAxMmg1XHUwMDAyXHUwMDAyZr07kPKqXGKY6kB1hPFPilWjU1x0xLrvN4Pl/cSq1/VbXf+d5epcZsJcdTAwMWWXq8M6LidYmYqd26LNrlx1MDAwNZTL+aHW8J+v8jdcdTAwMTdPe6Xuz/ZZQZ5cdTAwMWT3cuteUr+BtDFBXHUwMDE2ldrkXHUwMDBlseJMjU5cdTAwMTljiJt1NPBcdTAwMWZcdTAwMDNpqLnYbNpcdTAwMTgrXHUwMDAyXCKDY605iVx1MDAxOJ9cdTAwMTlklyThIMtcdTAwMTBcdTAwMDU5XHUwMDEy6r3hXHUwMDEye1xmhFx1MDAwMbX+8KnlXHUwMDFmkza+f+xcdTAwMWV0XG43pL9XuSZXdPdcblx1MDAxNY6PosUtXCJArmZ1K9hcYlJcdTAwMTSzSXX7ljieVLWfSbvGXHUwMDFh1uDkhEmtU8xcdTAwMTJcdTAwMTTvyplGRC+wSdb0rk2klJ2eLYbDXHUwMDE2wlx1MDAxY9qeXHTQk2S8Xlx1MDAxZpstXHUwMDA2hc2UmX2eTDHby1Vyl1wi9fSjl1x1MDAxNsfPrKpvKlx1MDAxN3TerO50TzXy/IWyxXamkleZ3uGhzVx1MDAwZUlVPGevj9o3nytbjHls+Fx01MExkXz+XHUwMDE0VnQnJVxcfE/PXHUwMDE2U60sXHUwMDAycCFcdTAwMTQptSpo15AtNrlcdTAwMTlpKOZcdTAwMTPN0FjHXHUwMDFj8k3p71x1MDAxOV5mmYnlsepbTJlZjrHZ1o2J+cE2nXySKr9NvphcdTAwMTPEmUSaXHUwMDAwv4xtXCKJ4SxcdTAwMDP3JEz+UW1OfIM6siQhXG7ozyx3XHUwMDBiT2KPz1x1MDAxN3OIz5kmcrVcdTAwMDHVhGjtNShqrFx1MDAxMERKXHUwMDFhdJ2AXHUwMDFmUqjQVW/pYmguMFxuXHJNZ1x1MDAxNpThiXf/KuniOHNcdTAwMWG7fXWJXHJcdTAwMDZcdTAwMThLXCJKmGBwgaWUqJlLnVSOOnXl+163WGyJhnxKtsaekS6mSoLElUaCK2TW9a60lnL9OWNBXHUwMDExOG+OXHUwMDEzmjPuNHo51D88yPiV1M8uxjftXFw9k0DZylj8rHdcctWQXHUwMDE04fm3m4t+64Tr1lx1MDAxOUljhojFQVAwTVx1MDAxMV9cdTAwMTlcYmtIXHUwMDFkY41cdTAwMDW4/HCK4Oso19e87Ptq11x1MDAxOexcdTAwMWSTO15WvYbXrI9vslx1MDAwNEpO6lx1MDAwNVLH6oE9Vr3bXFxqJ7+j3MN9IVxuR+tcdTAwMDbcJlLH1Fx1MDAwMqWjXHUwMDA2XHUwMDBijrlcdTAwMTCjkaLRrlhKqZFWVDK2yV3jqCU5XHUwMDE3kkipzLKTyFx0x9wy+1x0SIbMllx1MDAwM1x1MDAxMNpO4NHsMchcdTAwMTThi4zlJFbOLp467udSfbvaK/bc63Yh11JlnVx1MDAxMTxK6O4gaG1QVYZizY8gQzDUuWbzc1x1MDAwNZJcdTAwMDOuIFx1MDAxY6FPP+M4zr5cdTAwMDZnJyxrnfJcdTAwMTZPWSdkJvtrpeanmeldnEh5Oz2FzIFjXHUwMDEwRFx1MDAxOUhcdTAwMTJDQ6vte7T2XHUwMDE0Mlx1MDAxNsRse6NXnE+1MXF7e9M4TD3VhPT287VuSu1cdTAwMWWV+1x1MDAwZvPmeqe7rJHnL5RDVrXe7cO+aNzcZ5o3V9f8PJty2SfLIcdv76OJokxBuDY3ZqM7KeFafHpcdTAwMGWZXHUwMDEzbVx1MDAwMVFKXHUwMDAwLaGronZccjlkoFx1MDAxN5DhSC/i+D+LXHUwMDEwn7K7z6Zk+FxmL7PMlj/xKWRcdTAwMWVcdTAwMWL3Slx1MDAxMKRYi5DtzVThU6knqSpcdTAwMWOuwFx1MDAxNqeUK1x1MDAxZTXlXHUwMDE4jllcYmQtsI400/M2hjXCXHUwMDEwhN9CYsaVXHUwMDA0b1x1MDAxZPk9RFx1MDAxMaJcdTAwMWJwgbj6XHUwMDEyontlaY0sXGZhI2hIpszmOCi0NCXQ1tzSXGZhXHUwMDEwXHUwMDFkX37OcZxBjd2+uspmLH4kSmhMoSpcdTAwMGKs68Npr8uz+WbJa93ca/dcdTAwMWNd1k7LyZbZM7LIXHUwMDFjK1x1MDAwYrBidkGkgoRbK1x1MDAxMUlkXHUwMDA0YaZCcvPbRiyns7v3dydcdTAwMGZcdTAwMDJ38qyQ2T8p1P1uXHUwMDFml1x1MDAxMqhbWchMJjbQw2aNcWh/zJkoiH7rhFx1MDAwYtdcdTAwMTlJZHCzllnkq82o1qo4WENcdTAwMGXZbHVcbuREXHUwMDE3XHUwMDE5PfksyvU1Pfu+2nVcdTAwMDZ1x6SQl9ywXHUwMDEy49jV5Fx1MDAwNFFidkXV81x1MDAwN4q12vlZqrrvelx1MDAxN7xCXHUwMDFh9Z8/z45zcVuALed11q9dXHUwMDE1laB4OPhcdTAwMTSEmWZj21pDXHUwMDBiWGZ3XHUwMDE4rYX5lk222vyH2PSOiFx1MDAxMKpcdTAwMTGrxyGKxZzhzz/PaHInXHUwMDE43+7UtnA00FQ00GZsXHUwMDA043utOIxN3Vx1MDAwNea1JsvBKX5AhoOgplxmLbBuRudcdTAwMWaubHRRqd2dsd1cIjvUd7dkvTNcdTAwMDHeXHUwMDFiTeDNLPNlXHUwMDE3ilx1MDAxMFx1MDAwMVx1MDAwZU6tNlx1MDAxMSBcdTAwMGVMoa9Smlx1MDAwMibA8mD/93fc+fWd0URcdTAwMTKDJrJcdTAwMWOaXGKaMq+GY7CyhfbRy+5cdTAwMDCQLk6L+1x1MDAwNd5vXHUwMDExXa3cnVx1MDAxY3xcdTAwMDI4ISo4MTYk9Fx1MDAxOJyY1JY03+NHJOVmg/BcdTAwMGbFXHUwMDEzRtp87cNcdTAwMTdYh1x1MDAxNoMnmlx1MDAxODy9zrI3UdugjbbtVuvCh1x1MDAxNtp+XHUwMDBiKqHt3fLra1x1MDAwNuVtP7pOL1x1MDAxZFx1MDAxNVx1MDAwZVx1MDAwZj6m1Fx1MDAwMUZcclx1MDAxOJxBhPrr26//XHUwMDAzdpOZKyJ9<!-- payload-end -->
+<defs>
+<style class="style-fonts">
+      @font-face {
+        font-family: "Virgil";
+        src: url("https://unpkg.com/@excalidraw/excalidraw@0.14.1/dist/excalidraw-assets/Virgil.woff2");
+      }
+      @font-face {
+        font-family: "Cascadia";
+        src: url("https://unpkg.com/@excalidraw/excalidraw@0.14.1/dist/excalidraw-assets/Cascadia.woff2");
+      }
+    </style>
+</defs>
+<rect fill="#ffffff" height="537.103515625" width="1033.4194907706317" x="0" y="0"></rect><g stroke-linecap="round"><g transform="translate(11.100578814372426 298.7240208397699) rotate(0 39.14694566876322 -0.04684682231629722)"><path d="M-1.1 0.36 C11.97 0.28, 64.12 -0.2, 77.54 -0.2 M0.52 -0.5 C14.06 -0.4, 66.74 1.49, 79.85 1.28" fill="none" stroke="#495057" stroke-width="4"></path></g><g transform="translate(11.100578814372426 298.7240208397699) rotate(0 39.14694566876322 -0.04684682231629722)"><path d="M52.12 9.9 C57.72 11, 65.06 8.22, 79.28 2.87 M51.43 10.73 C60.05 7.67, 67.21 4.87, 79.99 2.04" fill="none" stroke="#495057" stroke-width="4"></path></g><g transform="translate(11.100578814372426 298.7240208397699) rotate(0 39.14694566876322 -0.04684682231629722)"><path d="M52.4 -10.62 C57.97 -4.89, 65.25 -3.05, 79.28 2.87 M51.71 -9.79 C60.06 -6.96, 67.15 -3.87, 79.99 2.04" fill="none" stroke="#495057" stroke-width="4"></path></g></g><mask></mask><g stroke-linecap="round" transform="translate(100.54487680949916 266.05544679258105) rotate(0 12.41015625 32.078125)"><path d="M12.49 -0.25 C14.99 -1.03, 18.9 2.41, 20.75 6.5 C22.61 10.59, 23.2 17.63, 23.63 24.29 C24.06 30.95, 24.36 40.37, 23.33 46.46 C22.3 52.55, 20.02 58.26, 17.47 60.82 C14.91 63.38, 10.58 63.61, 8.02 61.82 C5.45 60.03, 3.55 55.72, 2.08 50.08 C0.61 44.44, -1.12 34.81, -0.81 27.97 C-0.49 21.14, 1.85 13.61, 3.98 9.06 C6.1 4.52, 10.37 2.14, 11.93 0.7 C13.48 -0.74, 13.14 0.15, 13.31 0.42 M12.74 1.5 C15.25 1.17, 18.17 2.76, 19.9 6.79 C21.64 10.81, 22.8 18.97, 23.16 25.65 C23.53 32.33, 22.93 41, 22.1 46.87 C21.27 52.74, 20.37 58.14, 18.21 60.89 C16.04 63.63, 11.95 65.25, 9.09 63.31 C6.24 61.37, 2.79 55.29, 1.08 49.25 C-0.63 43.21, -1.48 34.18, -1.16 27.06 C-0.83 19.95, 0.6 11.24, 3.03 6.56 C5.46 1.88, 11.94 0.02, 13.41 -1.01 C14.88 -2.04, 11.87 -0.15, 11.83 0.37" fill="none" stroke="#000000" stroke-width="1"></path></g><g stroke-linecap="round"><g transform="translate(114.55268930949916 267.12575929258105) rotate(0 181.1965883423554 0)"><path d="M-0.11 1.14 C75.97 2.23, 150.61 2.44, 362.23 -1.12 M0.19 -0.56 C77.86 0.44, 156.63 1.46, 361.82 0.05" fill="none" stroke="#000000" stroke-width="1"></path></g></g><mask></mask><g stroke-linecap="round"><g transform="translate(114.07366954882576 330.16313223215354) rotate(0 183.09984500391263 0)"><path d="M1.13 0.48 C121.63 -0.15, 242.68 0.04, 365.09 -1.05 M-0.55 -0.41 C105.97 -0.61, 213.48 -1.26, 366.25 -0.03" fill="none" stroke="#000000" stroke-width="1"></path></g></g><mask></mask><g stroke-linecap="round"><g transform="translate(238.5193544175416 269.1596627296799) rotate(0 5.9649082279449885 29.60911808133912)"><path d="M1.08 0.47 C2.61 2.49, 6.45 7.16, 8.42 12.02 C10.38 16.88, 12.7 23.51, 12.88 29.62 C13.06 35.74, 10.97 43.86, 9.51 48.71 C8.04 53.55, 4.91 57.13, 4.08 58.7 M0.19 -0.33 C1.7 1.87, 5.79 8.18, 7.86 13.38 C9.93 18.58, 12.39 24.87, 12.61 30.86 C12.83 36.84, 10.87 44.62, 9.19 49.28 C7.51 53.94, 3.67 57, 2.55 58.82" fill="none" stroke="#000000" stroke-width="1"></path></g></g><mask></mask><g stroke-linecap="round"><g transform="translate(477.9266395619227 269.0727349105923) rotate(0 5.9649082279449885 29.60911808133912)"><path d="M0.47 0.75 C1.7 2.79, 5.44 8.65, 7.32 13.31 C9.21 17.97, 11.4 22.66, 11.77 28.7 C12.15 34.75, 10.92 44.46, 9.57 49.6 C8.22 54.75, 4.75 58.11, 3.68 59.58 M-0.75 0.1 C0.31 2.33, 4.25 6.79, 6.19 11.69 C8.14 16.58, 10.41 22.97, 10.93 29.46 C11.44 35.95, 10.17 45.53, 9.29 50.65 C8.4 55.77, 6.48 58.5, 5.6 60.17" fill="none" stroke="#000000" stroke-width="1"></path></g></g><mask></mask><g stroke-linecap="round"><g transform="translate(365.6194395285536 267.91831120646043) rotate(0 5.9649082279449885 29.60911808133912)"><path d="M0.75 -0.34 C2.01 1.62, 6.93 7.35, 8.61 12.2 C10.3 17.06, 10.55 22.6, 10.86 28.77 C11.17 34.93, 11.52 44.3, 10.47 49.2 C9.42 54.1, 5.74 56.65, 4.56 58.15 M-0.31 -1.56 C0.77 0.54, 5.91 8.47, 8.16 13.66 C10.41 18.85, 12.77 23.49, 13.19 29.56 C13.61 35.62, 12.31 45.3, 10.66 50.03 C9 54.77, 4.32 56.27, 3.28 57.98" fill="none" stroke="#000000" stroke-width="1"></path></g></g><mask></mask><g transform="translate(147.49521997407697 286.062344129964) rotate(0 35.5 12)"><text direction="ltr" fill="#000000" font-family="Cascadia, Segoe UI Emoji" font-size="20px" style="white-space: pre;" text-anchor="start" x="0" y="20">data z</text></g><g transform="translate(279.9610924210663 286.3059053410133) rotate(0 35.49999999999997 12)"><text direction="ltr" fill="#000000" font-family="Cascadia, Segoe UI Emoji" font-size="20px" style="white-space: pre;" text-anchor="start" x="0" y="20">data y</text></g><g transform="translate(396.26545120361243 286.3059053410133) rotate(0 35.5 12)"><text direction="ltr" fill="#000000" font-family="Cascadia, Segoe UI Emoji" font-size="20px" style="white-space: pre;" text-anchor="start" x="0" y="20">data x</text></g><g transform="translate(115.81546512397978 206.328125) rotate(0 50 18)"><text direction="ltr" fill="#000000" font-family="Virgil, Segoe UI Emoji" font-size="28px" style="white-space: pre;" text-anchor="start" x="0" y="25">Channel</text></g><g stroke-linecap="round" transform="translate(556.1950663101888 62.103515625) rotate(0 169.34247483341449 232.5)"><path d="M32 0 M32 0 C109.78 1.45, 190.56 -2.49, 306.68 0 M32 0 C106.7 0.32, 177.18 -1.88, 306.68 0 M306.68 0 C329.18 -0.35, 334.83 14.43, 338.68 32 M306.68 0 C331.68 -2.37, 334.56 11.27, 338.68 32 M338.68 32 C340.24 151.58, 338.54 267.93, 338.68 433 M338.68 32 C337.4 120.65, 338.41 211.31, 338.68 433 M338.68 433 C336.14 453.2, 330.66 461.82, 306.68 465 M338.68 433 C342.17 453.1, 324.05 469.27, 306.68 465 M306.68 465 C234.75 463.96, 165.39 464.68, 32 465 M306.68 465 C201.19 464.43, 98.16 463.23, 32 465 M32 465 C8.69 461.82, -0.5 453.2, 0 433 M32 465 C6.94 468.5, -2.43 453.95, 0 433 M0 433 C0.69 324.06, 0.85 211.14, 0 32 M0 433 C-2.5 307.68, -1.89 181.65, 0 32 M0 32 C0.13 12.78, 8.96 -3.38, 32 0 M0 32 C0.43 14.13, 9.48 3.45, 32 0" fill="none" stroke="#000000" stroke-width="2"></path></g><g transform="translate(566.2922474539389 10) rotate(0 53.5 18)"><text direction="ltr" fill="#000000" font-family="Virgil, Segoe UI Emoji" font-size="28px" style="white-space: pre;" text-anchor="start" x="0" y="25">Process</text></g><g stroke-linecap="round"><g transform="translate(500.9857476808786 299.51900253000395) rotate(0 55.381613580780765 -63.069978084891915)"><path d="M0.71 1.08 C19.32 -20.07, 93.46 -104.78, 111.93 -125.89" fill="none" stroke="#000000" stroke-dasharray="8 9" stroke-width="1.5"></path></g><g transform="translate(500.9857476808786 299.51900253000395) rotate(0 55.381613580780765 -63.069978084891915)"><path d="M102.9 -95.97 C104.71 -105.64, 108.65 -117.16, 112.52 -126.62" fill="none" stroke="#000000" stroke-width="1.5"></path></g><g transform="translate(500.9857476808786 299.51900253000395) rotate(0 55.381613580780765 -63.069978084891915)"><path d="M87.45 -109.49 C94.3 -114.94, 103.14 -122.17, 112.52 -126.62" fill="none" stroke="#000000" stroke-width="1.5"></path></g></g><mask></mask><g stroke-linecap="round" transform="translate(619.74116234244 146.6755701274999) rotate(0 73.51953125 26.697265625)"><path d="M14.72 1.35 L139.51 2.21 L145.07 1.49 L147.97 9.33 L144.95 46.62 L140.01 50.39 L132.37 54.45 L6.89 53.36 L1.36 51.98 L-0.15 44.04 L-0.53 9.21 L0.44 6.12 L5.78 0.64 L11.7 -1.42" fill="#15aabf" stroke="none" stroke-width="0"></path><path d="M13.35 0 M13.35 0 C61.26 -2.92, 104.95 -2.37, 133.69 0 M13.35 0 C53.23 0.96, 94.62 -0.8, 133.69 0 M133.69 0 C142.51 1.44, 146.26 4.81, 147.04 13.35 M133.69 0 C140.93 -1.38, 145.7 4.36, 147.04 13.35 M147.04 13.35 C146.38 19.16, 146.25 29.35, 147.04 40.05 M147.04 13.35 C148.14 20.44, 147.72 27.76, 147.04 40.05 M147.04 40.05 C147.73 47.6, 141.46 53.37, 133.69 53.39 M147.04 40.05 C147.55 48.96, 144.11 52.13, 133.69 53.39 M133.69 53.39 C101.16 53.47, 69.6 54.12, 13.35 53.39 M133.69 53.39 C105.02 52.41, 76.6 53.4, 13.35 53.39 M13.35 53.39 C3.01 52.01, -1.91 48.28, 0 40.05 M13.35 53.39 C3.82 55.18, -1.41 49.13, 0 40.05 M0 40.05 C-1.2 31.58, 0.37 25.05, 0 13.35 M0 40.05 C-0.16 31.49, 0.75 24.87, 0 13.35 M0 13.35 C-1.54 4.2, 3.54 1.81, 13.35 0 M0 13.35 C-2.12 6.37, 3.47 0.89, 13.35 0" fill="none" stroke="#000000" stroke-width="1"></path></g><g transform="translate(657.76069359244 161.8728357524999) rotate(0 35.5 11.5)"><text direction="ltr" fill="#000000" font-family="Cascadia, Segoe UI Emoji" font-size="20px" style="white-space: pre;" text-anchor="middle" x="35.5" y="19">data x</text></g><g stroke-linecap="round"><g transform="translate(775.5484892499401 178.07226241815988) rotate(0 124.27211777993205 0)"><path d="M-0.82 0.58 C40.39 0.62, 206.24 0.99, 247.87 0.72" fill="none" stroke="#000000" stroke-dasharray="8 9" stroke-width="1.5"></path></g><g transform="translate(775.5484892499401 178.07226241815988) rotate(0 124.27211777993205 0)"><path d="M220.67 9.9 C230.83 8.24, 237.88 5.92, 248.29 0.99" fill="none" stroke="#000000" stroke-width="1.5"></path></g><g transform="translate(775.5484892499401 178.07226241815988) rotate(0 124.27211777993205 0)"><path d="M220.64 -10.62 C230.9 -5.02, 237.96 -0.07, 248.29 0.99" fill="none" stroke="#000000" stroke-width="1.5"></path></g></g><mask></mask><g stroke-linecap="round" transform="translate(819.6246182073935 150.845703125) rotate(0 73.51953125 26.697265625)"><path d="M12.96 -1.16 L138.02 0.21 L141.83 3.34 L148.46 8.64 L146.61 46.75 L140.79 51.97 L135.19 54.88 L8.16 54.3 L3.46 50.87 L-0.33 41.57 L0.86 8.83 L2.75 5.56 L4.33 3.39 L14.31 1.41" fill="#fab005" stroke="none" stroke-width="0"></path><path d="M13.35 0 M13.35 0 C57.85 -0.08, 99.27 -1.36, 133.69 0 M13.35 0 C44.82 0.57, 76.38 0.22, 133.69 0 M133.69 0 C141.98 -1.01, 148.4 3.7, 147.04 13.35 M133.69 0 C142.05 1.09, 147.93 3.3, 147.04 13.35 M147.04 13.35 C149.05 19.58, 148.5 24.52, 147.04 40.05 M147.04 13.35 C147.47 22.25, 147.81 31.53, 147.04 40.05 M147.04 40.05 C145.63 49.48, 143.4 54.25, 133.69 53.39 M147.04 40.05 C146.93 48.63, 141.76 52.88, 133.69 53.39 M133.69 53.39 C92.17 52.42, 52.05 52.28, 13.35 53.39 M133.69 53.39 C97.34 54.24, 61.97 53.77, 13.35 53.39 M13.35 53.39 C2.9 54.67, 0.49 50.24, 0 40.05 M13.35 53.39 C4.08 53.48, 1.29 50.4, 0 40.05 M0 40.05 C-0.04 28.41, 1.78 18.03, 0 13.35 M0 40.05 C-0.82 31.01, -1.03 20.53, 0 13.35 M0 13.35 C-0.39 5.64, 4.29 -0.01, 13.35 0 M0 13.35 C0.15 3.03, 2.71 -2.03, 13.35 0" fill="none" stroke="#000000" stroke-width="1"></path></g><g transform="translate(845.6441494573935 166.04296875) rotate(0 47.5 11.5)"><text direction="ltr" fill="#000000" font-family="Cascadia, Segoe UI Emoji" font-size="20px" style="white-space: pre;" text-anchor="middle" x="47.5" y="19">output x</text></g><g stroke-linecap="round"><g transform="translate(501.5665323224873 300.46595591749565) rotate(0 55.09122125997635 0.9748628800177244)"><path d="M-0.6 0.62 C17.95 0.82, 92.55 1.58, 111.12 1.84" fill="none" stroke="#000000" stroke-dasharray="8 9" stroke-width="1.5"></path></g><g transform="translate(501.5665323224873 300.46595591749565) rotate(0 55.09122125997635 0.9748628800177244)"><path d="M83.85 13.34 C90.65 10.16, 99.28 7, 112.84 1.5" fill="none" stroke="#000000" stroke-width="1.5"></path></g><g transform="translate(501.5665323224873 300.46595591749565) rotate(0 55.09122125997635 0.9748628800177244)"><path d="M84.09 -7.18 C90.94 -4.51, 99.49 -1.82, 112.84 1.5" fill="none" stroke="#000000" stroke-width="1.5"></path></g></g><mask></mask><g stroke-linecap="round" transform="translate(619.74116234244 277.7418199631221) rotate(0 73.51953125 26.697265625)"><path d="M14.41 -1 L140.57 2.4 L143.52 4.42 L147.2 10.97 L147.92 45.55 L143.41 52.59 L134.83 52.14 L7.14 53.8 L2.47 48.26 L-0.64 43.93 L1.6 9.94 L2.28 7.21 L5.49 2.71 L14.68 0.18" fill="#15aabf" stroke="none" stroke-width="0"></path><path d="M13.35 0 M13.35 0 C55.66 -1.08, 94.51 -1.47, 133.69 0 M13.35 0 C52.29 -0.95, 89.95 -1.18, 133.69 0 M133.69 0 C141.08 0.12, 145.59 3.94, 147.04 13.35 M133.69 0 C143.51 0.85, 148.7 6.58, 147.04 13.35 M147.04 13.35 C145.18 24.07, 147.85 33.84, 147.04 40.05 M147.04 13.35 C146.13 22.61, 147.17 31.83, 147.04 40.05 M147.04 40.05 C148.42 50.56, 141.37 53.36, 133.69 53.39 M147.04 40.05 C147.51 50.58, 142.07 53.27, 133.69 53.39 M133.69 53.39 C101.52 53.28, 67.39 52.46, 13.35 53.39 M133.69 53.39 C99.4 52.87, 64.03 52.37, 13.35 53.39 M13.35 53.39 C4.88 54.15, -1.38 49.96, 0 40.05 M13.35 53.39 C3.13 52.83, -1.52 51.05, 0 40.05 M0 40.05 C-0.84 31.74, 1.27 22.12, 0 13.35 M0 40.05 C0.14 31.23, -1.04 24.87, 0 13.35 M0 13.35 C-0.83 2.82, 4.89 -0.15, 13.35 0 M0 13.35 C-1.83 5.03, 4.53 -0.62, 13.35 0" fill="none" stroke="#000000" stroke-width="1"></path></g><g transform="translate(657.76069359244 292.9390855881221) rotate(0 35.5 11.5)"><text direction="ltr" fill="#000000" font-family="Cascadia, Segoe UI Emoji" font-size="20px" style="white-space: pre;" text-anchor="middle" x="35.5" y="19">data y</text></g><g stroke-linecap="round"><g transform="translate(775.7073257961902 309.269688570385) rotate(0 122.36140756180566 0)"><path d="M-0.11 0.65 C40.61 0.57, 203.97 0.59, 244.95 0.45" fill="none" stroke="#000000" stroke-dasharray="8 9" stroke-width="1.5"></path></g><g transform="translate(775.7073257961902 309.269688570385) rotate(0 122.36140756180566 0)"><path d="M217.85 11.12 C227.35 8.87, 236.18 5.11, 246.02 1.59" fill="none" stroke="#000000" stroke-width="1.5"></path></g><g transform="translate(775.7073257961902 309.269688570385) rotate(0 122.36140756180566 0)"><path d="M217.82 -9.4 C227.49 -4.43, 236.33 -0.97, 246.02 1.59" fill="none" stroke="#000000" stroke-width="1.5"></path></g></g><mask></mask><g stroke-linecap="round" transform="translate(819.6246182073935 282.12394618062234) rotate(0 73.51953125 26.697265625)"><path d="M14.92 -0.18 L140.61 1.21 L144.45 5.05 L146.49 11.8 L147.28 47.02 L140.57 51.15 L134.93 52.52 L5.71 51.71 L4.09 51.45 L-0.07 43.58 L2.2 10.5 L2.71 6.55 L5.39 2.68 L14.29 -0.47" fill="#fab005" stroke="none" stroke-width="0"></path><path d="M13.35 0 M13.35 0 C55.88 0.88, 100.04 1.32, 133.69 0 M13.35 0 C51.08 0.33, 90.17 0.36, 133.69 0 M133.69 0 C142.08 0.8, 147.77 5.89, 147.04 13.35 M133.69 0 C144.72 1.35, 146.22 6.57, 147.04 13.35 M147.04 13.35 C148.53 19.92, 147.09 24.19, 147.04 40.05 M147.04 13.35 C147.05 19.66, 147.85 23.99, 147.04 40.05 M147.04 40.05 C147 49.35, 144.01 52.94, 133.69 53.39 M147.04 40.05 C146.91 48.41, 141.6 53.86, 133.69 53.39 M133.69 53.39 C89.64 53.42, 48.24 51.77, 13.35 53.39 M133.69 53.39 C86.22 54.61, 39.02 53.7, 13.35 53.39 M13.35 53.39 C5.47 52.25, -0.49 47.63, 0 40.05 M13.35 53.39 C6.56 54.84, 1.05 48.96, 0 40.05 M0 40.05 C1.26 32.93, 0.45 26.11, 0 13.35 M0 40.05 C0.91 31.02, -0.58 23.05, 0 13.35 M0 13.35 C-0.15 2.85, 4.96 0.07, 13.35 0 M0 13.35 C-0.62 3.99, 2.82 1.16, 13.35 0" fill="none" stroke="#000000" stroke-width="1"></path></g><g transform="translate(845.6441494573935 297.32121180562234) rotate(0 47.5 11.5)"><text direction="ltr" fill="#000000" font-family="Cascadia, Segoe UI Emoji" font-size="20px" style="white-space: pre;" text-anchor="middle" x="47.5" y="19">output y</text></g><g stroke-linecap="round"><g transform="translate(504.826653017505 308.9043534837449) rotate(0 56.87783638934246 62.78908702063944)"><path d="M-0.08 -0.03 C18.67 21.01, 94.16 104.82, 113.11 125.63" fill="none" stroke="#000000" stroke-dasharray="8 9" stroke-width="1.5"></path></g><g transform="translate(504.826653017505 308.9043534837449) rotate(0 56.87783638934246 62.78908702063944)"><path d="M86.54 110.53 C95.91 116.29, 103.88 123, 112.6 125.49" fill="none" stroke="#000000" stroke-width="1.5"></path></g><g transform="translate(504.826653017505 308.9043534837449) rotate(0 56.87783638934246 62.78908702063944)"><path d="M101.76 96.76 C105.72 107.34, 108.34 118.89, 112.6 125.49" fill="none" stroke="#000000" stroke-width="1.5"></path></g></g><mask></mask><g stroke-linecap="round" transform="translate(619.74116234244 408.8080697987443) rotate(0 73.51953125 26.697265625)"><path d="M12.36 -0.13 L139.48 -0.24 L143.78 3.08 L145.57 11.76 L145.7 45.75 L140.3 50.85 L132.36 53.68 L5.75 52.02 L4.2 50.77 L0.19 42.87 L1.39 8.76 L0.35 3.73 L5.79 0.65 L12.66 1" fill="#15aabf" stroke="none" stroke-width="0"></path><path d="M13.35 0 M13.35 0 C49.42 1, 84.52 0.2, 133.69 0 M13.35 0 C42.26 -0.95, 70.46 -0.45, 133.69 0 M133.69 0 C140.86 -1.14, 148.93 4.62, 147.04 13.35 M133.69 0 C141.16 1.5, 145.75 5.91, 147.04 13.35 M147.04 13.35 C145.65 20.76, 147.5 27.39, 147.04 40.05 M147.04 13.35 C147.28 23.31, 146.14 34.18, 147.04 40.05 M147.04 40.05 C145.4 47.61, 141.99 52.33, 133.69 53.39 M147.04 40.05 C146.38 50.19, 143.11 54.12, 133.69 53.39 M133.69 53.39 C103.57 53.32, 76.85 56.06, 13.35 53.39 M133.69 53.39 C108.32 54.45, 83.79 54.62, 13.35 53.39 M13.35 53.39 C3.35 53.93, 0.63 47.41, 0 40.05 M13.35 53.39 C2.54 53.3, 2.16 46.77, 0 40.05 M0 40.05 C0.15 32.01, -1.47 20.56, 0 13.35 M0 40.05 C0.1 34.04, 0.32 28.87, 0 13.35 M0 13.35 C0 3.94, 5.64 0.56, 13.35 0 M0 13.35 C-1.67 6.11, 3.94 0.3, 13.35 0" fill="none" stroke="#000000" stroke-width="1"></path></g><g transform="translate(657.76069359244 424.0053354237443) rotate(0 35.5 11.5)"><text direction="ltr" fill="#000000" font-family="Cascadia, Segoe UI Emoji" font-size="20px" style="white-space: pre;" text-anchor="middle" x="35.5" y="19">data z</text></g><g stroke-linecap="round"><g transform="translate(782.7203642499401 440.77481097764405) rotate(0 120.22835729368171 0)"><path d="M0.05 -0.15 C40 0.11, 199.68 0.91, 239.7 0.92" fill="none" stroke="#000000" stroke-dasharray="8 9" stroke-width="1.5"></path></g><g transform="translate(782.7203642499401 440.77481097764405) rotate(0 120.22835729368171 0)"><path d="M211.22 9.83 C221.46 7.55, 228.18 3.5, 239.03 -0.41" fill="none" stroke="#000000" stroke-width="1.5"></path></g><g transform="translate(782.7203642499401 440.77481097764405) rotate(0 120.22835729368171 0)"><path d="M211.28 -10.69 C221.39 -6.87, 228.1 -4.81, 239.03 -0.41" fill="none" stroke="#000000" stroke-width="1.5"></path></g></g><mask></mask><g stroke-linecap="round" transform="translate(819.6246182073935 413.4021892362447) rotate(0 73.51953125 26.697265625)"><path d="M12.27 0.08 L139.28 -0.43 L145.24 2.83 L146.69 8.69 L145.54 44.55 L142.11 49.76 L133.15 54.26 L8.22 52.54 L3.04 51.24 L-1.26 41.64 L-1.28 10.8 L0.65 4.53 L6.22 1.72 L13.46 0.99" fill="#fab005" stroke="none" stroke-width="0"></path><path d="M13.35 0 M13.35 0 C55.89 -1.81, 97.17 0.58, 133.69 0 M13.35 0 C55.05 -1.1, 95.74 0.72, 133.69 0 M133.69 0 C142.76 -1.24, 148.35 3.33, 147.04 13.35 M133.69 0 C144.05 -1.09, 149.18 5.83, 147.04 13.35 M147.04 13.35 C147.68 20.89, 147.11 23.72, 147.04 40.05 M147.04 13.35 C147.15 21.17, 146.28 30.34, 147.04 40.05 M147.04 40.05 C145.97 48.37, 143.67 53.85, 133.69 53.39 M147.04 40.05 C147.76 47.51, 141.96 54.69, 133.69 53.39 M133.69 53.39 C108.81 51.68, 81.64 55.52, 13.35 53.39 M133.69 53.39 C106.72 52.04, 79.88 52.91, 13.35 53.39 M13.35 53.39 C2.91 51.73, -0.09 50.82, 0 40.05 M13.35 53.39 C2.27 54.28, -2.08 47.26, 0 40.05 M0 40.05 C-1.55 30.52, -1.46 24.06, 0 13.35 M0 40.05 C0.51 32.23, -0.2 25.02, 0 13.35 M0 13.35 C0.56 2.99, 5.89 -0.44, 13.35 0 M0 13.35 C0.3 3.11, 2.84 -1.82, 13.35 0" fill="none" stroke="#000000" stroke-width="1"></path></g><g transform="translate(845.6441494573935 428.5994548612447) rotate(0 47.5 11.5)"><text direction="ltr" fill="#000000" font-family="Cascadia, Segoe UI Emoji" font-size="20px" style="white-space: pre;" text-anchor="middle" x="47.5" y="19">output z</text></g><g transform="translate(618.3821407188836 108.19536218001485) rotate(0 31 12.5)"><text direction="ltr" fill="#000000" font-family="Virgil, Segoe UI Emoji" font-size="20px" style="white-space: pre;" text-anchor="start" x="0" y="18">task 1</text></g><g transform="translate(618.3821407188836 239.78584476573837) rotate(0 35 12.5)"><text direction="ltr" fill="#000000" font-family="Virgil, Segoe UI Emoji" font-size="20px" style="white-space: pre;" text-anchor="start" x="0" y="18">task 2</text></g><g transform="translate(618.2233041726336 374.47720523520434) rotate(0 35 12.5)"><text direction="ltr" fill="#000000" font-family="Virgil, Segoe UI Emoji" font-size="20px" style="white-space: pre;" text-anchor="start" x="0" y="18">task 3</text></g></svg>
+</figure>
+<h2 id="execution-abstraction"><span class="enumerate-headings-plugin enumerate-heading-plugin">1.2</span> Execution abstraction<a class="headerlink" href="#execution-abstraction" title="Permanent link">¶</a></h2>
+<p>While a process defines <em>what</em> command or <code>script</code> has to be executed, the executor determines <em>how</em> that <code>script</code> is run in the target platform.</p>
+<p>If not otherwise specified, processes are executed on the local computer. The local executor is very useful for workflow development and testing purposes, however, for real-world computational workflows a high-performance computing (HPC) or cloud platform is often required.</p>
+<p>In other words, Nextflow provides an abstraction between the workflow’s functional logic and the underlying execution system (or runtime). Thus, it is possible to write a workflow that runs seamlessly on your computer, a cluster, or the cloud, without being modified. You simply define the target execution platform in the configuration file.</p>
+<figure>
+<p><img alt="Execution abstraction" src="../../../basic_training/img/execution_abstraction.png"/></p>
+</figure>
+<h2 id="scripting-language"><span class="enumerate-headings-plugin enumerate-heading-plugin">1.3</span> Scripting language<a class="headerlink" href="#scripting-language" title="Permanent link">¶</a></h2>
+<p>Nextflow implements a declarative DSL that simplifies the writing of complex data analysis workflows as an extension of a general-purpose programming language.</p>
+<p>This approach makes Nextflow flexible — it provides the benefits of a concise DSL for the handling of recurrent use cases with ease <strong>and</strong> the flexibility and power of a general-purpose programming language to handle corner cases in the same computing environment. This would be difficult to implement using a purely declarative approach.</p>
+<p>In practical terms, Nextflow scripting is an extension of the <a href="https://groovy-lang.org/">Groovy programming language</a> which, in turn, is a super-set of the Java programming language. Groovy can be thought of as "Python for Java", in that it simplifies the writing of code and is more approachable.</p>
+<h2 id="your-first-script"><span class="enumerate-headings-plugin enumerate-heading-plugin">1.4</span> Your first script<a class="headerlink" href="#your-first-script" title="Permanent link">¶</a></h2>
+<p>Here you will execute your first Nextflow script (<code>hello.nf</code>), which we will go through line-by-line.</p>
+<p>In this toy example, the script takes an input string (provided with a parameter called <code>params.greeting</code>) and splits it into chunks of six characters in the first process. The second process then converts the characters to upper case. The result is finally displayed on-screen.</p>
+<h3 id="nextflow-code"><span class="enumerate-headings-plugin enumerate-heading-plugin">1.4.1</span> Nextflow code<a class="headerlink" href="#nextflow-code" title="Permanent link">¶</a></h3>
+<!-- NOTE: (Phil, Jan 2023)
+We can dynamically include external files using mkdocs, as follows:
+
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">nf-training/hello.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-0-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-0-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-0-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-0-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-0-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-0-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-0-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-0-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-0-10">10</a></span>
+<span class="normal"><a href="#__codelineno-0-11">11</a></span>
+<span class="normal"><a href="#__codelineno-0-12">12</a></span>
+<span class="normal"><a href="#__codelineno-0-13">13</a></span>
+<span class="normal"><a href="#__codelineno-0-14">14</a></span>
+<span class="normal"><a href="#__codelineno-0-15">15</a></span>
+<span class="normal"><a href="#__codelineno-0-16">16</a></span>
+<span class="normal"><a href="#__codelineno-0-17">17</a></span>
+<span class="normal"><a href="#__codelineno-0-18">18</a></span>
+<span class="normal"><a href="#__codelineno-0-19">19</a></span>
+<span class="normal"><a href="#__codelineno-0-20">20</a></span>
+<span class="normal"><a href="#__codelineno-0-21">21</a></span>
+<span class="normal"><a href="#__codelineno-0-22">22</a></span>
+<span class="normal"><a href="#__codelineno-0-23">23</a></span>
+<span class="normal"><a href="#__codelineno-0-24">24</a></span>
+<span class="normal"><a href="#__codelineno-0-25">25</a></span>
+<span class="normal"><a href="#__codelineno-0-26">26</a></span>
+<span class="normal"><a href="#__codelineno-0-27">27</a></span>
+<span class="normal"><a href="#__codelineno-0-28">28</a></span>
+<span class="normal"><a href="#__codelineno-0-29">29</a></span>
+<span class="normal"><a href="#__codelineno-0-30">30</a></span>
+<span class="normal"><a href="#__codelineno-0-31">31</a></span>
+<span class="normal"><a href="#__codelineno-0-32">32</a></span>
+<span class="normal"><a href="#__codelineno-0-33">33</a></span>
+<span class="normal"><a href="#__codelineno-0-34">34</a></span>
+<span class="normal"><a href="#__codelineno-0-35">35</a></span>
+<span class="normal"><a href="#__codelineno-0-36">36</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="cp">#!/usr/bin/env nextflow</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="n">params</span><span class="o">.</span><span class="na">greeting</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Hello world!&#39;</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">greeting</span><span class="o">)</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5"></a>
+<a id="__codelineno-0-6" name="__codelineno-0-6"></a><span class="n">process</span><span class="w"> </span><span class="n">SPLITLETTERS</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8"></a><span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="n">x</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9"></a>
+<a id="__codelineno-0-10" name="__codelineno-0-10"></a><span class="w">    </span><span class="nl">output:</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s1">&#39;chunk_*&#39;</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12"></a>
+<a id="__codelineno-0-13" name="__codelineno-0-13"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15"></a><span class="s2">    printf &#39;$x&#39; | split -b 6 - chunk_</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17"></a><span class="o">}</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18"></a>
+<a id="__codelineno-0-19" name="__codelineno-0-19"></a><span class="n">process</span><span class="w"> </span><span class="n">CONVERTTOUPPER</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-0-20" name="__codelineno-0-20"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-0-21" name="__codelineno-0-21"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="n">y</span>
+<a id="__codelineno-0-22" name="__codelineno-0-22"></a>
+<a id="__codelineno-0-23" name="__codelineno-0-23"></a><span class="w">    </span><span class="nl">output:</span>
+<a id="__codelineno-0-24" name="__codelineno-0-24"></a><span class="w">    </span><span class="n">stdout</span>
+<a id="__codelineno-0-25" name="__codelineno-0-25"></a>
+<a id="__codelineno-0-26" name="__codelineno-0-26"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-0-27" name="__codelineno-0-27"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-28" name="__codelineno-0-28"></a><span class="s2">    cat $y | tr &#39;[a-z]&#39; &#39;[A-Z]&#39;</span>
+<a id="__codelineno-0-29" name="__codelineno-0-29"></a><span class="s2">    &quot;&quot;&quot;</span>
+<a id="__codelineno-0-30" name="__codelineno-0-30"></a><span class="o">}</span>
+<a id="__codelineno-0-31" name="__codelineno-0-31"></a>
+<a id="__codelineno-0-32" name="__codelineno-0-32"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-0-33" name="__codelineno-0-33"></a><span class="w">    </span><span class="n">letters_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SPLITLETTERS</span><span class="o">(</span><span class="n">greeting_ch</span><span class="o">)</span>
+<a id="__codelineno-0-34" name="__codelineno-0-34"></a><span class="w">    </span><span class="n">results_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CONVERTTOUPPER</span><span class="o">(</span><span class="n">letters_ch</span><span class="o">.</span><span class="na">flatten</span><span class="o">())</span>
+<a id="__codelineno-0-35" name="__codelineno-0-35"></a><span class="w">    </span><span class="n">results_ch</span><span class="o">.</span><span class="na">view</span><span class="o">{</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-0-36" name="__codelineno-0-36"></a><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
+
+This inserts a code snippet identical to the one below, and we don't have to worry about keeping the two in sync.
+
+HOWEVER - currently the line annotations cannot be added for external files. So for now, we still need to copy the scripts.
+
+TODO: Maybe either:
+    - Rewrite docs to not use loads of annotations
+    - Wait for future versions to allow annotations with external files
+-->
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>Click the <span class="twemoji"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17 13h-4v4h-2v-4H7v-2h4V7h2v4h4m-5-9A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2"></path></svg></span> icons in the code for explanations.</p>
+</div>
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">nf-training/hello.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-1-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-1-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-1-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-1-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-1-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-1-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-1-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-1-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-1-10">10</a></span>
+<span class="normal"><a href="#__codelineno-1-11">11</a></span>
+<span class="normal"><a href="#__codelineno-1-12">12</a></span>
+<span class="normal"><a href="#__codelineno-1-13">13</a></span>
+<span class="normal"><a href="#__codelineno-1-14">14</a></span>
+<span class="normal"><a href="#__codelineno-1-15">15</a></span>
+<span class="normal"><a href="#__codelineno-1-16">16</a></span>
+<span class="normal"><a href="#__codelineno-1-17">17</a></span>
+<span class="normal"><a href="#__codelineno-1-18">18</a></span>
+<span class="normal"><a href="#__codelineno-1-19">19</a></span>
+<span class="normal"><a href="#__codelineno-1-20">20</a></span>
+<span class="normal"><a href="#__codelineno-1-21">21</a></span>
+<span class="normal"><a href="#__codelineno-1-22">22</a></span>
+<span class="normal"><a href="#__codelineno-1-23">23</a></span>
+<span class="normal"><a href="#__codelineno-1-24">24</a></span>
+<span class="normal"><a href="#__codelineno-1-25">25</a></span>
+<span class="normal"><a href="#__codelineno-1-26">26</a></span>
+<span class="normal"><a href="#__codelineno-1-27">27</a></span>
+<span class="normal"><a href="#__codelineno-1-28">28</a></span>
+<span class="normal"><a href="#__codelineno-1-29">29</a></span>
+<span class="normal"><a href="#__codelineno-1-30">30</a></span>
+<span class="normal"><a href="#__codelineno-1-31">31</a></span>
+<span class="normal"><a href="#__codelineno-1-32">32</a></span>
+<span class="normal"><a href="#__codelineno-1-33">33</a></span>
+<span class="normal"><a href="#__codelineno-1-34">34</a></span>
+<span class="normal"><a href="#__codelineno-1-35">35</a></span>
+<span class="normal"><a href="#__codelineno-1-36">36</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="cp">#!/usr/bin/env nextflow</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="c1">// (1)!</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="n">params</span><span class="o">.</span><span class="na">greeting</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'Hello world!'</span><span class="w"> </span><span class="c1">// (2)!</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="n">greeting_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">greeting</span><span class="o">)</span><span class="w"> </span><span class="c1">// (3)!</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5"></a>
+<a id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="n">process</span><span class="w"> </span><span class="n">SPLITLETTERS</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="c1">// (4)!</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="w">    </span><span class="nl">input:</span><span class="w"> </span><span class="c1">// (5)!</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8"></a><span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="c1">// (6)!</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9"></a>
+<a id="__codelineno-1-10" name="__codelineno-1-10"></a><span class="w">    </span><span class="nl">output:</span><span class="w"> </span><span class="c1">// (7)!</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="s1">'chunk_*'</span><span class="w"> </span><span class="c1">// (8)!</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12"></a>
+<a id="__codelineno-1-13" name="__codelineno-1-13"></a><span class="w">    </span><span class="nl">script:</span><span class="w"> </span><span class="c1">// (9)!</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14"></a><span class="w">    </span><span class="s2">"""</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15"></a><span class="s2">    printf '$x' | split -b 6 - chunk_</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16"></a><span class="s2">    """</span>
+<a id="__codelineno-1-17" name="__codelineno-1-17"></a><span class="o">}</span><span class="w"> </span><span class="c1">// (10)!</span>
+<a id="__codelineno-1-18" name="__codelineno-1-18"></a>
+<a id="__codelineno-1-19" name="__codelineno-1-19"></a><span class="n">process</span><span class="w"> </span><span class="n">CONVERTTOUPPER</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="c1">// (11)!</span>
+<a id="__codelineno-1-20" name="__codelineno-1-20"></a><span class="w">    </span><span class="nl">input:</span><span class="w"> </span><span class="c1">// (12)!</span>
+<a id="__codelineno-1-21" name="__codelineno-1-21"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="c1">// (13)!</span>
+<a id="__codelineno-1-22" name="__codelineno-1-22"></a>
+<a id="__codelineno-1-23" name="__codelineno-1-23"></a><span class="w">    </span><span class="nl">output:</span><span class="w"> </span><span class="c1">// (14)!</span>
+<a id="__codelineno-1-24" name="__codelineno-1-24"></a><span class="w">    </span><span class="n">stdout</span><span class="w"> </span><span class="c1">// (15)!</span>
+<a id="__codelineno-1-25" name="__codelineno-1-25"></a>
+<a id="__codelineno-1-26" name="__codelineno-1-26"></a><span class="w">    </span><span class="nl">script:</span><span class="w"> </span><span class="c1">// (16)!</span>
+<a id="__codelineno-1-27" name="__codelineno-1-27"></a><span class="w">    </span><span class="s2">"""</span>
+<a id="__codelineno-1-28" name="__codelineno-1-28"></a><span class="s2">    cat $y | tr '[a-z]' '[A-Z]'</span>
+<a id="__codelineno-1-29" name="__codelineno-1-29"></a><span class="s2">    """</span>
+<a id="__codelineno-1-30" name="__codelineno-1-30"></a><span class="o">}</span><span class="w"> </span><span class="c1">// (17)!</span>
+<a id="__codelineno-1-31" name="__codelineno-1-31"></a>
+<a id="__codelineno-1-32" name="__codelineno-1-32"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="c1">// (18)!</span>
+<a id="__codelineno-1-33" name="__codelineno-1-33"></a><span class="w">    </span><span class="n">letters_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SPLITLETTERS</span><span class="o">(</span><span class="n">greeting_ch</span><span class="o">)</span><span class="w"> </span><span class="c1">// (19)!</span>
+<a id="__codelineno-1-34" name="__codelineno-1-34"></a><span class="w">    </span><span class="n">results_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CONVERTTOUPPER</span><span class="o">(</span><span class="n">letters_ch</span><span class="o">.</span><span class="na">flatten</span><span class="o">())</span><span class="w"> </span><span class="c1">// (20)!</span>
+<a id="__codelineno-1-35" name="__codelineno-1-35"></a><span class="w">    </span><span class="n">results_ch</span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="c1">// (21)!</span>
+<a id="__codelineno-1-36" name="__codelineno-1-36"></a><span class="o">}</span><span class="w"> </span><span class="c1">// (22)!</span>
+</code></pre></div></td></tr></table></div>
+<ol>
+<li>The code begins with a shebang, which declares Nextflow as the interpreter. This is optional, but recommended.</li>
+<li>Declares a parameter <code>greeting</code> that is initialized with the value 'Hello world!'.</li>
+<li>Initializes a <code>channel</code> labeled <code>greeting_ch</code>, which contains the value from <code>params.greeting</code>. Channels are the input type for processes in Nextflow.</li>
+<li>Begins the first process block, defined as <code>SPLITLETTERS</code>.</li>
+<li>Input declaration for the <code>SPLITLETTERS</code> process. Inputs can be values (<code>val</code>), files or paths (<code>path</code>), or other qualifiers (<a href="https://www.nextflow.io/docs/latest/process.html#inputs">see here</a>).</li>
+<li>Tells the process to expect an input value (<code>val</code>), that we assign to the variable 'x'.</li>
+<li>Output declaration for the <code>SPLITLETTERS</code> process.</li>
+<li>Tells the process to expect an output file(s) (<code>path</code>), with a filename starting with 'chunk_', as output from the script. The process sends the output as a channel.</li>
+<li>Three double quotes start and end the code block to execute this process.
+   Inside is the code to execute — printing the <code>input</code> value 'x' (called using the dollar symbol [$] prefix), splitting the string into chunks with a length of 6 characters ("Hello " and "world!"), and saving each to a separate file (chunk_aa and chunk_ab).</li>
+<li>End of the first process block.</li>
+<li>Beginning of the second process block, defined as <code>CONVERTTOUPPER</code>.</li>
+<li>Input declaration for the <code>CONVERTTOUPPER</code> process.</li>
+<li>Tells the process to expect an <code>input</code> file (<code>path</code>; e.g. chunk_aa), that we assign to the variable 'y'.</li>
+<li>Output declaration for the <code>CONVERTTOUPPER</code> process.</li>
+<li>Tells the process to expect output as standard output (<code>stdout</code>) and sends this output as a channel.</li>
+<li>Three double quotes start and end the code block to execute this process.
+    Within the block there is a script to read files (cat) using the '$y' input variable, then pipe to uppercase conversion, outputting to standard output.</li>
+<li>End of second process block.</li>
+<li>Start of the workflow scope where each process can be called.</li>
+<li>Execute the process <code>SPLITLETTERS</code> on the <code>greeting_ch</code> (aka greeting channel), and store the output in the channel <code>letters_ch</code>.</li>
+<li>Execute the process <code>CONVERTTOUPPER</code> on the letters channel <code>letters_ch</code>, which is flattened using the operator <code>.flatten()</code>. This transforms the input channel in such a way that every item is a separate element. We store the output in the channel <code>results_ch</code>.</li>
+<li>The final output (in the <code>results_ch</code> channel) is printed to screen using the <code>view</code> operator (appended onto the channel name).</li>
+<li>End of the workflow scope.</li>
+</ol>
+<p>This pipeline takes <code>params.greeting</code>, which defaults to the string <code>Hello world!</code>, and splits it into individual words in the <code>SPLITLETTERS</code> process. Each word is written to a separate file, named <code>chunk_aa</code>, <code>chunk_ab</code>, <code>chunk_ac</code>and so on. These files are picked up as the process <code>output</code>.</p>
+<p>The second process <code>CONVERTTOUPPER</code> takes the output channel from the first process as its input.
+The use of the operator <code>.flatten()</code> here is to split the <code>SPLITLETTERS</code> output channel element that contains two files into two separate elements to be put through the <code>CONVERTTOUPPER</code>process, else they would be treated as a single element.
+The <code>CONVERTTOUPPER</code> process thus launches two tasks, one for each element. The bash script uses <code>cat</code> to print the file contents and <code>tr</code> to convert to upper-case. It takes the resulting standard-out as the process output channel.</p>
+<h3 id="python-instead-of-bash"><span class="enumerate-headings-plugin enumerate-heading-plugin">1.4.2</span> Python instead of bash<a class="headerlink" href="#python-instead-of-bash" title="Permanent link">¶</a></h3>
+<p>If you're not completely comfortable with the bash code used in the example, don't worry! You can use whatever programming language you like within Nextflow <code>script</code> blocks.
+For example, the <code>hello_py.nf</code> file contains the same example but using Python code:</p>
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">nf-training/hello_py.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-14">14</a></span>
+<span class="normal"><a href="#__codelineno-2-15">15</a></span>
+<span class="normal"><a href="#__codelineno-2-16">16</a></span>
+<span class="normal"><a href="#__codelineno-2-17">17</a></span>
+<span class="normal"><a href="#__codelineno-2-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-14" name="__codelineno-2-14"></a>    <span class="s2">"""</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15"></a><span class="s2">    #!/usr/bin/env python</span>
+<a id="__codelineno-2-16" name="__codelineno-2-16"></a><span class="s2">    x="$x"</span>
+<a id="__codelineno-2-17" name="__codelineno-2-17"></a><span class="s2">    for i, word in enumerate(x.split()):</span>
+<a id="__codelineno-2-18" name="__codelineno-2-18"></a><span class="s2">        with open(f"chunk_</span><span class="si">{i}</span><span class="s2">", "w") as f:</span>
+</code></pre></div></td></tr></table></div>
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">nf-training/hello_py.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-30">30</a></span>
+<span class="normal"><a href="#__codelineno-3-31">31</a></span>
+<span class="normal"><a href="#__codelineno-3-32">32</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-30" name="__codelineno-3-30"></a>    <span class="n">script</span><span class="p">:</span>
+<a id="__codelineno-3-31" name="__codelineno-3-31"></a>    <span class="s2">"""</span>
+<a id="__codelineno-3-32" name="__codelineno-3-32"></a><span class="s2">    #!/usr/bin/env python</span>
+</code></pre></div></td></tr></table></div>
+<p>Note that the <code>$x</code> and <code>$y</code> variables are interpolated by Nextflow, so the resulting Python scripts will have fixed strings here (<code class="highlight"><span class="n">x</span><span class="o">=</span><span class="s2">"Hello world!"</span></code>). Check the <code>hello_py.nf</code> file for the full workflow script code.</p>
+<h3 id="in-practice"><span class="enumerate-headings-plugin enumerate-heading-plugin">1.4.3</span> In practice<a class="headerlink" href="#in-practice" title="Permanent link">¶</a></h3>
+<p>Now copy the above example into your favorite text editor and save it to a file named <code>hello.nf</code>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>For the GitHub Codespaces tutorial, make sure you are in the folder called <code>nf-training</code></p>
+</div>
+<p>Execute the script by entering the following command in your terminal:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello.nf
+</code></pre></div>
+<p>The output will look similar to the text shown below:</p>
+<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="go">N E X T F L O W  ~  version 23.10.1</span>
+<a href="#__codelineno-5-2" id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="go">Launching hello.nf [cheeky_keller] DSL2 - revision: 197a0e289a</span>
+<a href="#__codelineno-5-3" id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="go">executor &gt;  local (3)</span>
+<a href="#__codelineno-5-4" id="__codelineno-5-4" name="__codelineno-5-4"></a><span class="go">[31/52c31e] process &gt; SPLITLETTERS (1)   [100%] 1 of 1 ✔</span>
+<a href="#__codelineno-5-5" id="__codelineno-5-5" name="__codelineno-5-5"></a><span class="go">[37/b9332f] process &gt; CONVERTTOUPPER (2) [100%] 2 of 2 ✔</span>
+<a href="#__codelineno-5-6" id="__codelineno-5-6" name="__codelineno-5-6"></a><span class="go">HELLO</span>
+<a href="#__codelineno-5-7" id="__codelineno-5-7" name="__codelineno-5-7"></a><span class="go">WORLD!</span>
+</code></pre></div>
+<ol>
+<li>The version of Nextflow that was executed.</li>
+<li>The script and version names.</li>
+<li>The executor used (in the above case: local).</li>
+<li>The first process is executed once, which means there is one task. The line starts with a unique hexadecimal value (see TIP below), and ends with the percentage and other task completion information.</li>
+<li>The second process is executed twice (once for <code>chunk_aa</code> and once for <code>chunk_ab</code>), which means two tasks.</li>
+<li>The result string from <code>stdout</code> is printed.</li>
+</ol>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>The hexadecimal numbers, like <code>31/52c31e</code>, identify the unique process execution, that we call a task. These numbers are also the prefix of the directories where each task is executed. You can inspect the files produced by changing to the directory <code>$PWD/work</code> and using these numbers to find the task-specific execution path.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>The second process runs twice, executing in two different work directories for each input file. The <a href="https://en.wikipedia.org/wiki/ANSI_escape_code">ANSI</a> log output from Nextflow dynamically refreshes as the workflow runs; in the previous example the work directory <code>[37/b9332f]</code> is the second of the two directories that were processed (overwriting the log with the first). To print all the relevant paths to the screen, disable the ANSI log output using the <code>-ansi-log</code> flag (e.g., <code>nextflow run hello.nf -ansi-log false</code>).</p>
+</div>
+<p>It’s worth noting that the process <code>CONVERTTOUPPER</code> is executed in parallel, so there’s no guarantee that the instance processing the first split (the chunk <em>Hello </em>) will be executed before the one processing the second split (the chunk <em>world!</em>).</p>
+<p>Thus, it could be that your final result will be printed out in a different order:</p>
+<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a href="#__codelineno-6-1" id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="go">WORLD!</span>
+<a href="#__codelineno-6-2" id="__codelineno-6-2" name="__codelineno-6-2"></a><span class="go">HELLO</span>
+</code></pre></div>
+<h2 id="modify-and-resume"><span class="enumerate-headings-plugin enumerate-heading-plugin">1.5</span> Modify and resume<a class="headerlink" href="#modify-and-resume" title="Permanent link">¶</a></h2>
+<p>Nextflow keeps track of all the processes executed in your workflow. If you modify some parts of your script, only the processes that are changed will be re-executed. The execution of the processes that are not changed will be skipped and the cached result will be used instead.</p>
+<p>This allows for testing or modifying part of your workflow without having to re-execute it from scratch.</p>
+<p>For the sake of this tutorial, modify the <code>CONVERTTOUPPER</code> process in the previous example, replacing the process script with the string <code>rev $y</code>, so that the process looks like this:</p>
+<div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">nf-training/hello.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-18">18</a></span>
+<span class="normal"><a href="#__codelineno-7-19">19</a></span>
+<span class="normal"><a href="#__codelineno-7-20">20</a></span>
+<span class="normal"><a href="#__codelineno-7-21">21</a></span>
+<span class="normal"><a href="#__codelineno-7-22">22</a></span>
+<span class="normal"><a href="#__codelineno-7-23">23</a></span>
+<span class="normal"><a href="#__codelineno-7-24">24</a></span>
+<span class="normal"><a href="#__codelineno-7-25">25</a></span>
+<span class="normal"><a href="#__codelineno-7-26">26</a></span>
+<span class="normal"><a href="#__codelineno-7-27">27</a></span>
+<span class="normal"><a href="#__codelineno-7-28">28</a></span>
+<span class="normal"><a href="#__codelineno-7-29">29</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-18" name="__codelineno-7-18"></a><span class="n">process</span><span class="w"> </span><span class="n">CONVERTTOUPPER</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-7-19" name="__codelineno-7-19"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-7-20" name="__codelineno-7-20"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="n">y</span>
+<a id="__codelineno-7-21" name="__codelineno-7-21"></a>
+<a id="__codelineno-7-22" name="__codelineno-7-22"></a><span class="w">    </span><span class="nl">output:</span>
+<a id="__codelineno-7-23" name="__codelineno-7-23"></a><span class="w">    </span><span class="n">stdout</span>
+<a id="__codelineno-7-24" name="__codelineno-7-24"></a>
+<a id="__codelineno-7-25" name="__codelineno-7-25"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-7-26" name="__codelineno-7-26"></a><span class="w">    </span><span class="s2">"""</span>
+<a id="__codelineno-7-27" name="__codelineno-7-27"></a><span class="s2">    rev $y</span>
+<a id="__codelineno-7-28" name="__codelineno-7-28"></a><span class="s2">    """</span>
+<a id="__codelineno-7-29" name="__codelineno-7-29"></a><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
+<p>Then save the file with the same name, and execute it by adding the <code>-resume</code> option to the command line:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-8-1" id="__codelineno-8-1" name="__codelineno-8-1"></a>$<span class="w"> </span>nextflow<span class="w"> </span>run<span class="w"> </span>hello.nf<span class="w"> </span>-resume
+</code></pre></div>
+<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a href="#__codelineno-9-1" id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="go">N E X T F L O W  ~  version 23.10.1</span>
+<a href="#__codelineno-9-2" id="__codelineno-9-2" name="__codelineno-9-2"></a><span class="go">Launching `hello.nf` [zen_colden] DSL2 - revision: 0676c711e8</span>
+<a href="#__codelineno-9-3" id="__codelineno-9-3" name="__codelineno-9-3"></a><span class="go">executor &gt;  local (2)</span>
+<a href="#__codelineno-9-4" id="__codelineno-9-4" name="__codelineno-9-4"></a><span class="go">[31/52c31e] process &gt; SPLITLETTERS (1)   [100%] 1 of 1, cached: 1 ✔</span>
+<a href="#__codelineno-9-5" id="__codelineno-9-5" name="__codelineno-9-5"></a><span class="go">[0f/8175a7] process &gt; CONVERTTOUPPER (1) [100%] 2 of 2 ✔</span>
+<a href="#__codelineno-9-6" id="__codelineno-9-6" name="__codelineno-9-6"></a><span class="go">!dlrow</span>
+<a href="#__codelineno-9-7" id="__codelineno-9-7" name="__codelineno-9-7"></a><span class="go"> olleH</span>
+</code></pre></div>
+<p>You will see that the execution of the process <code>SPLITLETTERS</code> is skipped (the task ID is the same as in the first output) — its results are retrieved from the cache. The second process is executed as expected, printing the reversed strings.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>The workflow results are cached by default in the directory <code>$PWD/work</code>. Depending on your script, this folder can take up a lot of disk space. If you are sure you won’t need to resume your workflow execution, clean this folder periodically.</p>
+</div>
+<h2 id="workflow-parameters"><span class="enumerate-headings-plugin enumerate-heading-plugin">1.6</span> Workflow parameters<a class="headerlink" href="#workflow-parameters" title="Permanent link">¶</a></h2>
+<p>Workflow parameters are simply declared by prepending the prefix <code>params</code> to a variable name, separated by a dot character. Their value can be specified on the command line by prefixing the parameter name with a double dash character, i.e. <code>--paramName</code>.</p>
+<p>Now, let’s try to execute the previous example specifying a different input string parameter, as shown below:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-10-1" id="__codelineno-10-1" name="__codelineno-10-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello.nf<span class="w"> </span>--greeting<span class="w"> </span><span class="s1">'Bonjour le monde!'</span>
+</code></pre></div>
+<p>The string specified on the command line will override the default value of the parameter. The output will look like this:</p>
+<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a href="#__codelineno-11-1" id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="go">N E X T F L O W  ~  version 23.10.1</span>
+<a href="#__codelineno-11-2" id="__codelineno-11-2" name="__codelineno-11-2"></a><span class="go">Launching `hello.nf` [goofy_kare] DSL2 - revision: 0676c711e8</span>
+<a href="#__codelineno-11-3" id="__codelineno-11-3" name="__codelineno-11-3"></a><span class="go">executor &gt;  local (4)</span>
+<a href="#__codelineno-11-4" id="__codelineno-11-4" name="__codelineno-11-4"></a><span class="go">[8b/7c7d13] process &gt; SPLITLETTERS (1)   [100%] 1 of 1 ✔</span>
+<a href="#__codelineno-11-5" id="__codelineno-11-5" name="__codelineno-11-5"></a><span class="go">[58/3b2df0] process &gt; CONVERTTOUPPER (3) [100%] 3 of 3 ✔</span>
+<a href="#__codelineno-11-6" id="__codelineno-11-6" name="__codelineno-11-6"></a><span class="go">uojnoB</span>
+<a href="#__codelineno-11-7" id="__codelineno-11-7" name="__codelineno-11-7"></a><span class="go">m el r</span>
+<a href="#__codelineno-11-8" id="__codelineno-11-8" name="__codelineno-11-8"></a><span class="go">!edno</span>
+</code></pre></div>
+<h2 id="in-dag-like-format"><span class="enumerate-headings-plugin enumerate-heading-plugin">1.7</span> In DAG-like format<a class="headerlink" href="#in-dag-like-format" title="Permanent link">¶</a></h2>
+<p>To better understand how Nextflow is dealing with the data in this workflow, below is a DAG-like figure to visualize all the inputs, outputs, channels and processes:</p>
+<figure>
+<p><img alt="Hello world diagram" src="../../../basic_training/img/helloworlddiagram.png"/></p>
+</figure>
+</article>
+</div>
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+</div>
+<button class="md-top md-icon" data-md-component="top" hidden="" type="button">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"></path></svg>
+  Torna su
+</button>
+</main>
+<footer class="md-footer">
+<nav aria-label="Piede" class="md-footer__inner md-grid">
+<a aria-label="Precedente: Orientation" class="md-footer__link md-footer__link--prev" href="../orientation/">
+<div class="md-footer__button md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+</div>
+<div class="md-footer__title">
+<span class="md-footer__direction">
+                Precedente
+              </span>
+<div class="md-ellipsis">
+                Orientation
+              </div>
+</div>
+</a>
+<a aria-label="Successivo: Simple RNA-Seq workflow" class="md-footer__link md-footer__link--next" href="../rnaseq_pipeline/">
+<div class="md-footer__title">
+<span class="md-footer__direction">
+                Successivo
+              </span>
+<div class="md-ellipsis">
+                Simple RNA-Seq workflow
+              </div>
+</div>
+<div class="md-footer__button md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"></path></svg>
+</div>
+</a>
+</nav>
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-copyright">
+<div>
+    Copyright © 2020-2023,
+    <a href="https://seqera.io" rel="noopener" target="_blank">Seqera</a>.
+  </div>
+<div class="footer_cc_link">
+<svg viewbox="0 0 496 512" xmlns="http://www.w3.org/2000/svg">
+<!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.-->
+<path d="m245.83 214.87-33.22 17.28c-9.43-19.58-25.24-19.93-27.46-19.93-22.13 0-33.22 14.61-33.22 43.84 0 23.57 9.21 43.84 33.22 43.84 14.47 0 24.65-7.09 30.57-21.26l30.55 15.5c-6.17 11.51-25.69 38.98-65.1 38.98-22.6 0-73.96-10.32-73.96-77.05 0-58.69 43-77.06 72.63-77.06 30.72-.01 52.7 11.95 65.99 35.86zm143.05 0-32.78 17.28c-9.5-19.77-25.72-19.93-27.9-19.93-22.14 0-33.22 14.61-33.22 43.84 0 23.55 9.23 43.84 33.22 43.84 14.45 0 24.65-7.09 30.54-21.26l31 15.5c-2.1 3.75-21.39 38.98-65.09 38.98-22.69 0-73.96-9.87-73.96-77.05 0-58.67 42.97-77.06 72.63-77.06 30.71-.01 52.58 11.95 65.56 35.86zM247.56 8.05C104.74 8.05 0 123.11 0 256.05c0 138.49 113.6 248 247.56 248 129.93 0 248.44-100.87 248.44-248 0-137.87-106.62-248-248.44-248zm.87 450.81c-112.54 0-203.7-93.04-203.7-202.81 0-105.42 85.43-203.27 203.72-203.27 112.53 0 202.82 89.46 202.82 203.26-.01 121.69-99.68 202.82-202.84 202.82z"></path>
+</svg>
+<a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" rel="noopener" target="_blank" title="Creative Commons CC BY-NC-ND 4.0">
+      Creative Commons BY-NC-ND 4.0</a>.
+  </div>
+   Made with
+  <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
+    Material for MkDocs
+  </a>
+</div>
+<div class="md-social">
+<a class="footer_seqera_logo" href="https://seqera.io" rel="noopener" target="_blank">
+<img src="/assets/img/seqera_logo_white.png"/>
+</a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+<div class="md-consent" data-md-component="consent" hidden="" id="__consent">
+<div class="md-consent__overlay"></div>
+<aside class="md-consent__inner">
+<form class="md-consent__form md-grid md-typeset" name="consent">
+<h4><span class="enumerate-headings-plugin enumerate-heading-plugin">1.7.0.1</span> Cookie consent</h4>
+<p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our training materials better.</p>
+<input class="md-toggle" id="__settings" type="checkbox"/>
+<div class="md-consent__settings">
+<ul class="task-list">
+<li class="task-list-item">
+<label class="task-list-control">
+<input checked="" name="analytics" type="checkbox"/>
+<span class="task-list-indicator"></span>
+      Google Analytics
+    </label>
+</li>
+<li class="task-list-item">
+<label class="task-list-control">
+<input checked="" name="github" type="checkbox"/>
+<span class="task-list-indicator"></span>
+      GitHub
+    </label>
+</li>
+</ul>
+</div>
+<div class="md-consent__controls">
+<button class="md-button md-button--primary">Accetta</button>
+<label class="md-button" for="__settings">Gestisci le opzioni</label>
+</div>
+</form>
+</aside>
+</div>
+<script>var consent=__md_get("__consent");if(consent)for(var input of document.forms.consent.elements)input.name&&(input.checked=consent[input.name]||!1);else"file:"!==location.protocol&&setTimeout((function(){document.querySelector("[data-md-component=consent]").hidden=!1}),250);var form=document.forms.consent;for(var action of["submit","reset"])form.addEventListener(action,(function(e){if(e.preventDefault(),"reset"===e.type)for(var n of document.forms.consent.elements)n.name&&(n.checked=!1);__md_set("__consent",Object.fromEntries(Array.from(new FormData(form).keys()).map((function(e){return[e,!0]})))),location.hash="",location.reload()}))</script>
+<script id="__config" type="application/json">{"base": "../../..", "features": ["content.action.edit", "content.code.annotate", "content.code.copy", "navigation.footer", "navigation.instant", "navigation.top", "navigation.tracking", "search.share", "toc.follow"], "search": "../../../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copiato", "clipboard.copy": "Copia", "search.result.more.one": "1 altro in questa pagina", "search.result.more.other": "# altri in questa pagina", "search.result.none": "Nessun documento trovato", "search.result.one": "1 documento trovato", "search.result.other": "# documenti trovati", "search.result.placeholder": "Scrivi per iniziare a cercare", "search.result.term.missing": "Non presente", "select.version": "Seleziona la versione"}, "version": {"alias": true, "provider": "mike"}}</script>
+<script src="../../../assets/javascripts/bundle.c8b220af.min.js"></script>
+</body>
+</html>
