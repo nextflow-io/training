@@ -83,18 +83,19 @@ Fortunatamente per noi, Nextflow supporta molte altre tecnologie di container, t
 Possiamo modificare il nostro file di configurazione per usare Conda invece di Docker.
 Per farlo, cambiamo il valore di `docker.enabled` in `false` e ​​aggiungiamo una direttiva che abilita l'uso di Conda:
 
-_Prima:_
+=== "After"
 
-```groovy title="nextflow.config" linenums="1"
-docker.enabled = true
-```
+    ```groovy title="nextflow.config" linenums="1" hl_lines="1-2"
+    docker.enabled = false
+    conda.enabled = true 
+    ``` 
 
-_Dopo:_
+=== "Before"
 
-```groovy title="nextflow.config" linenums="1"
-docker.enabled = false
-conda.enabled = true
-```
+    ```groovy title="nextflow.config" linenums="1"
+
+    docker.enabled = true
+    ```
 
 Ciò consentirà a Nextflow di creare e utilizzare ambienti Conda per i processi che hanno pacchetti Conda specificati.
 Ciò significa che ora dobbiamo aggiungerne uno al nostro processo `cowpy`!
@@ -110,26 +111,26 @@ Consigliamo di usare la ricerca su [Seqera Containers](https://seqera.io/contain
 
 Ora aggiungiamo l'URI alla definizione del processo `cowpy` utilizzando la direttiva `conda`:
 
-_Prima:_
+=== "After"
 
-```console title="modules/cowpy.nf" linenums="4"
-process cowpy {
+    ```console title="modules/cowpy.nf" linenums="4" hl_lines="4"
+    process cowpy {
 
-    container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
+        container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
+        conda 'conda-forge::cowpy==1.1.5'
 
-    publishDir 'results', mode: 'copy'
-```
+        publishDir 'results', mode: 'copy'
+    ```
 
-_Dopo:_
+=== "Before"
 
-```console title="modules/cowpy.nf" linenums="4"
-process cowpy {
+    ```console title="modules/cowpy.nf" linenums="4"
+    process cowpy {
 
-    container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
-    conda 'conda-forge::cowpy==1.1.5'
+        container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
 
-    publishDir 'results', mode: 'copy'
-```
+        publishDir 'results', mode: 'copy'
+    ```
 
 Per essere chiari, non stiamo _sostituendo_ la direttiva `docker`, stiamo _aggiungendo_ un'opzione alternativa.
 
@@ -240,25 +241,25 @@ process {
 
 Allo stesso tempo, faremo finta che il processo `cowpy` richieda più risorse degli altri, così da poter dimostrare come adattare le allocazioni per un singolo processo.
 
-_Prima:_
-
-```groovy title="nextflow.config" linenums="14"
-process {
-    memory = 1.GB
-}
-```
-
-_Dopo:_
-
-```groovy title="nextflow.config" linenums="4"
-process {
-    memory = 1.GB
-    withName: 'cowpy' {
-        memory = 2.GB
-        cpus = 2
+=== "After"
+        
+    ```groovy title="nextflow.config" linenums="4" hl_lines="3-6"
+    process {
+        memory = 1.GB
+        withName: 'cowpy' {
+            memory = 2.GB
+            cpus = 2
+        }
     }
-}
-```
+    ```
+        
+=== "Before"
+        
+    ```groovy title="nextflow.config" linenums="14"
+    process {
+        memory = 1.GB
+    }
+    ```
 
 Con questa configurazione, tutti i processi richiederanno 1 GB di memoria e una singola CPU (impostazione predefinita), tranne il processo `cowpy`, che richiederà 2 GB e 2 CPU.
 

@@ -319,25 +319,25 @@ Permette di recuperare il file di output desiderato senza dover scavare nella di
 
 Nel file di script del flusso di lavoro `hello-world.nf`, apportare la seguente modifica al codice:
 
-_Prima:_
+=== "After"
 
-```groovy title="hello-world.nf" linenums="6"
-process sayHello {
+    ```groovy title="hello-world.nf" linenums="6" hl_lines="3"
+    process sayHello {
 
-    output:
-        path 'output.txt'
-```
+        publishDir 'results', mode: 'copy'
 
-_Dopo:_
+        output:
+            path 'output.txt'
+    ```
 
-```groovy title="hello-world.nf" linenums="6"
-process sayHello {
+=== "Before"
 
-    publishDir 'results', mode: 'copy'
+    ```groovy title="hello-world.nf" linenums="6"
+    process sayHello {
 
-    output:
-        path 'output.txt'
-```
+        output:
+            path 'output.txt'
+    ```
 
 #### 3.1.2. Eseguire nuovamente il workflow
 
@@ -484,30 +484,30 @@ Per prima cosa dobbiamo adattare la definizione del processo in modo che accetti
 
 Nel blocco del processo, apportare la seguente modifica al codice:
 
-_Prima:_
+=== "After"
 
-```groovy title="hello-world.nf" linenums="6"
-process sayHello {
+    ```groovy title="hello-world.nf" linenums="6" hl_lines="5 6"
+    process sayHello {
 
-    publishDir 'results', mode: 'copy'
+        publishDir 'results', mode: 'copy'
 
-    output:
-        path 'output.txt'
-```
+        input:
+            val greeting
 
-_Dopo:_
+        output:
+            path 'output.txt'
+    ```
 
-```groovy title="hello-world.nf" linenums="6"
-process sayHello {
+=== "Before"
 
-    publishDir 'results', mode: 'copy'
+    ```groovy title="hello-world.nf" linenums="6"
+    process sayHello {
 
-    input:
-        val greeting
+        publishDir 'results', mode: 'copy'
 
-    output:
-        path 'output.txt'
-```
+        output:
+            path 'output.txt'
+    ```
 
 La variabile `greeting` è preceduta da `val` per indicare a Nextflow che si tratta di un valore (non di un percorso).
 
@@ -517,23 +517,23 @@ Ora scambiamo il valore originale codificato con il valore della variabile di in
 
 Nel blocco del processo, apportare la seguente modifica al codice:
 
-_Prima:_
+=== "After"
 
-```groovy title="hello-channels.nf" linenums="16"
-script:
-"""
-echo 'Hello World!' > output.txt
-"""
-```
+    ```groovy title="hello-channels.nf" linenums="16" hl_lines="3"
+    script:
+    """
+    echo '$greeting' > output.txt
+    """
+    ```
 
-_Dopo:_
+=== "Before"
 
-```groovy title="hello-channels.nf" linenums="16"
-script:
-"""
-echo '$greeting' > output.txt
-"""
-```
+    ```groovy title="hello-channels.nf" linenums="16"
+    script:
+    """
+    echo 'Hello World!' > output.txt
+    """
+    ```
 
 Assicuratevi di aggiungere il simbolo `$` per indicare a Nextflow che si tratta di un nome di variabile che deve essere sostituito con il valore effettivo (=interpolato).
 
@@ -556,19 +556,19 @@ In linea di principio, possiamo scriverla ovunque; ma poiché vogliamo darla all
 
 Nel blocco del flusso di lavoro, apportare la seguente modifica al codice:
 
-_Prima:_
+=== "After"
+        
+    ```groovy title="hello-world.nf" linenums="24" hl_lines="2"
+    // emit a greeting
+    sayHello(params.greeting)
+    ```
 
-```groovy title="hello-world.nf" linenums="24"
-// emette un saluto
-sayHello()
-```
+=== "Before"
 
-_Dopo:_
-
-```groovy title="hello-world.nf" linenums="24"
-// emette un saluto
-sayHello(params.greeting)
-```
+    ```groovy title="hello-world.nf" linenums="24"
+    // emit a greeting
+    sayHello() 
+    ```
 
 Indica a Nextflow di eseguire il processo `sayHello` sul valore fornito attraverso il parametro `--greeting`.
 

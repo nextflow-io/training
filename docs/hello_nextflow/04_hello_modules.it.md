@@ -142,21 +142,20 @@ include { <MODULE_NAME> } from '<path_to_module>'
 
 Inseriamo questo blocco sopra il blocco del workflow e compiliamolo in modo appropriato.
 
-_Prima:_
+=== "After"
 
-```groovy title="hello-modules.nf" linenums="50"
-workflow {
-```
+    ```groovy title="hello-modules.nf" linenums="50" hl_lines="1 2"
+    // Include modules
+    include { sayHello } from './modules/sayHello.nf'
 
-_Dopo:_
+    workflow {
+    ``` 
 
-```groovy title="hello-modules.nf" linenums="50"
-// Include moduli
+=== "Before"
 
-include { sayHello } from './modules/sayHello.nf'
-
-workflow {
-```
+    ```groovy title="hello-modules.nf" linenums="50"
+    workflow {
+    ```
 
 ### 2.4. Eseguite il workflow per verificare che faccia la stessa cosa di prima
 
@@ -236,26 +235,24 @@ Una volta fatto ciò, eliminate la definizione del processo dal file del workflo
 
 Inserite la dichiarazione di importazione sopra il blocco del workflow e compilatela in modo appropriato.
 
-_Prima:_
+=== "After"
 
-```groovy title="hello-modules.nf" linenums="31"
-// Include moduli
+    ```groovy title="hello-modules.nf" linenums="31" hl_lines="3"
+    // Include modules
+    include { sayHello } from './modules/sayHello.nf'
+    include { convertToUpper } from './modules/convertToUpper.nf'
+    
+    workflow { 
+    ```
 
-include { sayHello } from './modules/sayHello.nf'
-
-workflow {
-```
-
-_Dopo:_
-
-```groovy title="hello-modules.nf" linenums="31"
-// Include moduli
-
-include { sayHello } from './modules/sayHello.nf'
-include { convertToUpper } from './modules/convertToUpper.nf'
-
-workflow {
-```
+=== "Before" 
+    
+    ```groovy title="hello-modules.nf" linenums="31"
+    // Include modules
+    include { sayHello } from './modules/sayHello.nf'
+    
+    workflow {
+    ```
 
 ### 3.4. Eseguite il workflow per verificare che faccia la stessa cosa di prima
 
@@ -328,28 +325,26 @@ Una volta fatto ciò, eliminate la definizione del processo dal file del workflo
 
 Inserite la dichiarazione di importazione sopra il blocco del workflow e compilatela in modo appropriato.
 
-_Prima:_
+=== "After"
 
-```groovy title="hello-modules.nf" linenums="9"
-// Include moduli
+    ```groovy title="hello-modules.nf" linenums="9" hl_lines="4"
+    // Include modules
+    include { sayHello } from './modules/sayHello.nf'
+    include { convertToUpper } from './modules/convertToUpper.nf'
+    include { collectGreetings } from './modules/collectGreetings.nf'
+    
+    workflow {
+    ```
+    
+=== "Before"
 
-include { sayHello } from './modules/sayHello.nf'
-include { convertToUpper } from './modules/convertToUpper.nf'
-
-workflow {
-```
-
-_Dopo:_
-
-```groovy title="hello-modules.nf" linenums="9"
-// Include moduli
-
-include { sayHello } from './modules/sayHello.nf'
-include { convertToUpper } from './modules/convertToUpper.nf'
-include { collectGreetings } from './modules/collectGreetings.nf'
-
-workflow {
-```
+    ```groovy title="hello-modules.nf" linenums="9"
+    // Include modules
+    include { sayHello } from './modules/sayHello.nf'
+    include { convertToUpper } from './modules/convertToUpper.nf'
+    
+    workflow {
+    ```
 
 ### 4.4. Eseguite il workflow per verificare che faccia la stessa cosa di prima
 

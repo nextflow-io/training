@@ -138,24 +138,24 @@ Ora dobbiamo dire a Nextflow di chiamare effettivamente il processo che abbiamo 
 
 Nel blocco del workflow, apporta la seguente modifica al codice:
 
-_Prima:_
+=== "After"
 
-```groovy title="hello-workflow.nf" linenums="53"
-    // Emetti un saluto.
-    sayHello(greeting_ch)
-}
-```
+    ```groovy title="hello-workflow.nf" linenums="53" hl_lines="4 5"
+        // emit a greeting
+        sayHello(greeting_ch)
 
-_Dopo:_
+        // convert the greeting to uppercase
+        convertToUpper()
+    }   
+    ``` 
 
-```groovy title="hello-workflow.nf" linenums="53"
-    // Emetti un saluto.
-    sayHello(greeting_ch)
+=== "Before"
 
-    // Raccogli i saluti in maiuscolo in un unico file di output.
-    convertToUpper()
-}
-```
+    ```groovy title="hello-workflow.nf" linenums="53"
+        // emit a greeting
+        sayHello(greeting_ch)
+    }   
+    ```
 
 Questo non è ancora funzionante perché non abbiamo specificato cosa deve essere l'input per il processo `convertToUpper()`.
 
@@ -168,21 +168,21 @@ Quindi, l'output del processo `sayHello` è un canale chiamato `sayHello.out`, c
 
 Nel blocco del workflow, apporta la seguente modifica al codice:
 
-_Prima:_
+=== "After"
 
-```groovy title="hello-workflow.nf" linenums="56"
-    // Converti il saluto in maiuscolo.
-    convertToUpper()
-}
-```
+    ```groovy title="hello-workflow.nf" linenums="56" hl_lines="2"
+        // convert the greeting to uppercase
+        convertToUpper(sayHello.out)
+    }
+    ```
 
-_Dopo:_
+=== "Before"
 
-```groovy title="hello-workflow.nf" linenums="56"
-    // Converti il saluto in maiuscolo.
-    convertToUpper(sayHello.out)
-}
-```
+    ```groovy title="hello-workflow.nf" linenums="56"
+        // convert the greeting to uppercase
+        convertToUpper()
+    }
+    ```
 
 Per un caso semplice come questo (un output a un input), è tutto ciò che dobbiamo fare per connettere due processi!
 
@@ -324,19 +324,19 @@ Questo corrisponde a uno slot di input; chiamiamolo `input_files` per semplicit�
 
 Nel blocco del processo, apporta la seguente modifica al codice:
 
-_Prima:_
+=== "After"
+                                                                                                                                                                                               
+    ```groovy title="hello-workflow.nf" linenums="48" hl_lines="2"
+            input:
+                path input_files
+    ```
 
-```groovy title="hello-workflow.nf" linenums="48"
-        input:
-            ???
-```
+=== "Before"
 
-_Dopo:_
-
-```groovy title="hello-workflow.nf" linenums="48"
-        input:
-            path input_files
-```
+    ```groovy title="hello-workflow.nf" linenums="48"
+            input:
+                ???
+    ```
 
 Nota che usiamo il prefisso `path` anche se ci aspettiamo che questo contenga più file.
 Nextflow non ha problemi con questo, quindi non importa.
@@ -352,23 +352,23 @@ Fortunatamente, Nextflow è abbastanza felice di farlo per noi se scriviamo semp
 
 Nel blocco del processo, apporta la seguente modifica al codice:
 
-_Prima:_
+=== "After"
 
-```groovy title="hello-workflow.nf" linenums="54"
-    script:
-    """
-    ??? > 'COLLECTED-output.txt'
-    """
-```
+    ```groovy title="hello-workflow.nf" linenums="54" hl_lines="3"
+        script:
+        """
+        cat ${input_files} > 'COLLECTED-output.txt'
+        """
+    ```
 
-_Dopo:_
+=== "Before"
 
-```groovy title="hello-workflow.nf" linenums="54"
-    script:
-    """
-    cat ${input_files} > 'COLLECTED-output.txt'
-    """
-```
+    ```groovy title="hello-workflow.nf" linenums="54"
+        script:
+        """
+        ??? > 'COLLECTED-output.txt'
+        """
+    ```
 
 In teoria, questo dovrebbe gestire qualsiasi numero arbitrario di file di input.
 
@@ -388,24 +388,24 @@ Ora dovremmo semplicemente chiamare il processo di raccolta sull'output del pass
 
 Nel blocco del workflow, apporta la seguente modifica al codice:
 
-_Prima:_
+=== "After"
 
-```groovy title="hello-workflow.nf" linenums="75"
-    // Converti il saluto in maiuscolo.
-    convertToUpper(sayHello.out)
-}
-```
+    ```groovy title="hello-workflow.nf" linenums="75" hl_lines="4 5"
+        // convert the greeting to uppercase
+        convertToUpper(sayHello.out)
 
-_Dopo:_
+        // collect all the greetings into one file
+        collectGreetings(convertToUpper.out)
+    }
+    ```
 
-```groovy title="hello-workflow.nf" linenums="75"
-    // Converti il saluto in maiuscolo.
-    convertToUpper(sayHello.out)
+=== "Before"
 
-    // Raccogli tutti i saluti in un unico file.
-    collectGreetings(convertToUpper.out)
-}
-```
+    ```groovy title="hello-workflow.nf" linenums="75"
+        // convert the greeting to uppercase
+        convertToUpper(sayHello.out)
+    }
+    ```
 
 Questo collega l'output di `convertToUpper()` all'input di `collectGreetings()`.
 
@@ -458,45 +458,45 @@ Possiamo collegarlo direttamente alla chiamata del processo `collectGreetings()`
 
 Nel blocco del workflow, apporta la seguente modifica al codice:
 
-_Prima:_
+=== "After" 
+    
+    ```groovy title="hello-workflow.nf" linenums="78" hl_lines="2"
+        // collect all the greetings into one file
+        collectGreetings(convertToUpper.out.collect())
+    }
+    ```
 
-```groovy title="hello-workflow.nf" linenums="78"
-    // Raccogli tutti i saluti in un unico file.
-    collectGreetings(convertToUpper.out)
-}
-```
+=== "Before"
 
-_Dopo:_
-
-```groovy title="hello-workflow.nf" linenums="78"
-    // Raccogli tutti i saluti in un unico file.
-    collectGreetings(convertToUpper.out.collect())
-}
-```
+    ```groovy title="hello-workflow.nf" linenums="78"
+        // collect all the greetings into one file
+        collectGreetings(convertToUpper.out)
+    }
+    ```
 
 #### 2.4.2. Aggiungi alcune dichiarazioni `view()`
 
 Includiamo anche un paio di dichiarazioni `view()` per visualizzare lo stato prima e dopo dei contenuti del canale.
 
-_Prima:_
+=== "After"
+    
+    ```groovy title="hello-workflow.nf" linenums="78" hl_lines="4 6"
+        // collect all the greetings into one file
+        collectGreetings(convertToUpper.out.collect())
 
-```groovy title="hello-workflow.nf" linenums="78"
-    // Raccogli tutti i saluti in un unico file.
-    collectGreetings(convertToUpper.out.collect())
-}
-```
+        // optional view statements
+        convertToUpper.out.view { greeting -> "Before collect: $greeting" }
+        convertToUpper.out.collect().view { greeting -> "After collect: $greeting" }
+    }
+    ```
 
-_Dopo:_
+=== "Before"
 
-```groovy title="hello-workflow.nf" linenums="78"
-    // Raccogli tutti i saluti in un unico file.
-    collectGreetings(convertToUpper.out.collect())
-
-    // Dichiarazioni opzionali di visualizzazione.
-    convertToUpper.out.view { greeting -> "Before collect: $greeting" }
-    convertToUpper.out.collect().view { greeting -> "After collect: $greeting" }
-}
-```
+    ```groovy title="hello-workflow.nf" linenums="78"
+        // collect all the greetings into one file
+        collectGreetings(convertToUpper.out.collect())
+    }
+    ```
 
 Le dichiarazioni `view()` possono essere posizionate dove vuoi; noi le abbiamo messe dopo la chiamata per migliorare la leggibilità.
 
@@ -576,20 +576,20 @@ Chiamiamo questa `batch_name`.
 
 Nel blocco del processo, apportiamo la seguente modifica al codice:
 
-_Prima:_
+=== "After"
 
-```groovy title="hello-workflow.nf" linenums="48"
-    input:
-        path input_files
-```
+    ```groovy title="hello-workflow.nf" linenums="48" hl_lines="3"
+        input:
+            path input_files
+            val batch_name
+    ```
 
-_Dopo:_
+=== "Before"
 
-```groovy title="hello-workflow.nf" linenums="48"
-    input:
-        path input_files
-        val batch_name
-```
+    ```groovy title="hello-workflow.nf" linenums="48"
+        input:
+            path input_files
+    ```
 
 Puoi configurare i tuoi processi per aspettarsi quanti input desideri.
 Più avanti, imparerai come gestire gli input obbligatori e opzionali.
@@ -598,29 +598,29 @@ Più avanti, imparerai come gestire gli input obbligatori e opzionali.
 
 Nel blocco del processo, apporta la seguente modifica al codice:
 
-_Prima:_
+=== "After"
 
-```groovy title="hello-workflow.nf" linenums="52"
-    output:
-        path "COLLECTED-output.txt"
+    ```groovy title="hello-workflow.nf" linenums="52" hl_lines="2 6"
+        output:
+            path "COLLECTED-${batch_name}-output.txt"
 
-    script:
-    """
-    cat ${input_files} > 'COLLECTED-output.txt'
-    """
-```
+        script:
+        """
+        cat ${input_files} > 'COLLECTED-${batch_name}-output.txt'
+        """
+    ```
 
-_Dopo:_
+=== "Before"
 
-```groovy title="hello-workflow.nf" linenums="52"
-    output:
-        path "COLLECTED-${batch_name}-output.txt"
+    ```groovy title="hello-workflow.nf" linenums="52"
+        output:
+            path "COLLECTED-output.txt"
 
-    script:
-    """
-    cat ${input_files} > 'COLLECTED-${batch_name}-output.txt'
-    """
-```
+        script:
+        """
+        cat ${input_files} > 'COLLECTED-output.txt'
+        """
+    ```
 
 Questo configura il processo per utilizzare il valore di `batch_name` per generare un nome file specifico per il file di output finale del workflow.
 
@@ -635,24 +635,24 @@ Usiamo questo sistema per dichiarare un parametro `batch` (con un valore predefi
 
 Nella sezione dei parametri della pipeline, apporta le seguenti modifiche al codice:
 
-_Prima:_
+=== "After"
 
-```groovy title="hello-workflow.nf" linenums="61"
-/*
- * Parametri della pipeline
- */
-params.greeting = 'greetings.csv'
-```
+    ```groovy title="hello-workflow.nf" linenums="61" hl_lines="5"
+    /*  
+     * Pipeline parameters
+     */
+    params.greeting = 'greetings.csv'
+    params.batch = 'test-batch'
+    ``` 
+        
+=== "Before"
 
-_Dopo:_
-
-```groovy title="hello-workflow.nf" linenums="61"
-/*
- * Parametri della pipeline
- */
-params.greeting = 'greetings.csv'
-params.batch = 'test-batch'
-```
+    ```groovy title="hello-workflow.nf" linenums="61"
+    /*
+     * Pipeline parameters
+     */
+    params.greeting = 'greetings.csv' 
+    ```
 
 Ricorda che puoi sovrascrivere il valore predefinito specificando un valore con `--batch` sulla riga di comando.
 
@@ -662,19 +662,19 @@ Per fornire il valore del parametro al processo, dobbiamo aggiungerlo nella chia
 
 Nel blocco del workflow, apporta la seguente modifica al codice:
 
-_Prima:_
+=== "After"
+     
+    ```groovy title="hello-workflow.nf" linenums="80" hl_lines="2"
+        // collect all the greetings into one file
+        collectGreetings(convertToUpper.out.collect(), params.batch)
+    ``` 
+        
+=== "Before"
 
-```groovy title="hello-workflow.nf" linenums="80"
-    // Raccogli tutti i saluti in un unico file.
-    collectGreetings(convertToUpper.out.collect())
-```
-
-_Dopo:_
-
-```groovy title="hello-workflow.nf" linenums="80"
-    // Raccogli tutti i saluti in un unico file.
-    collectGreetings(convertToUpper.out.collect(), params.batch)
-```
+    ```groovy title="hello-workflow.nf" linenums="80"
+        // collect all the greetings into one file
+        collectGreetings(convertToUpper.out.collect())
+    ```
 
 !!! warning
 
@@ -752,24 +752,24 @@ Ciò significa che possiamo utilizzare la funzione incorporata `size()` per otte
 
 Nel blocco del processo `collectGreetings`, apporta la seguente modifica al codice:
 
-_Prima:_
+=== "After"
+    
+    ```groovy title="hello-workflow.nf" linenums="55" hl_lines="2"
+        script: 
+            count_greetings = input_files.size()
+        """
+        cat ${input_files} > 'COLLECTED-${batch_name}-output.txt'
+        """
+    ```
 
-```groovy title="hello-workflow.nf" linenums="55"
-    script:
-    """
-    cat ${input_files} > 'COLLECTED-${batch_name}-output.txt'
-    """
-```
+=== "Before"
 
-_Dopo:_
-
-```groovy title="hello-workflow.nf" linenums="55"
-    script:
-        count_greetings = input_files.size()
-    """
-    cat ${input_files} > 'COLLECTED-${batch_name}-output.txt'
-    """
-```
+    ```groovy title="hello-workflow.nf" linenums="55"
+        script: 
+        """
+        cat ${input_files} > 'COLLECTED-${batch_name}-output.txt'
+        """
+    ```
 
 La variabile `count_greetings` verrà calcolata durante l'esecuzione.
 
@@ -781,20 +781,20 @@ Tuttavia, mentre ci siamo, aggiungeremo anche alcune etichette `emit:` alle nost
 
 Nel blocco del processo, apporta la seguente modifica al codice:
 
-_Prima:_
-
-```groovy title="hello-workflow.nf" linenums="52"
-    output:
-        path "COLLECTED-${batch_name}-output.txt"
-```
-
-_Dopo:_
-
-```groovy title="hello-workflow.nf" linenums="52"
-    output:
-        path "COLLECTED-${batch_name}-output.txt" , emit: outfile
-        val count_greetings , emit: count
-```
+=== "After"
+    
+    ```groovy title="hello-workflow.nf" linenums="52" hl_lines="2 3"
+        output:
+            path "COLLECTED-${batch_name}-output.txt" , emit: outfile
+            val count_greetings , emit: count
+    ``` 
+        
+=== "Before"
+    
+    ```groovy title="hello-workflow.nf" linenums="52"
+        output:
+            path "COLLECTED-${batch_name}-output.txt"
+    ```
 
 Le etichette `emit:` sono opzionali, e avremmo potuto aggiungere un'etichetta solo a uno degli output.
 Ma, come si suol dire, perché non entrambi?
@@ -810,22 +810,22 @@ Potremmo inviare uno o entrambi questi output a un altro processo per ulteriori 
 
 Nel blocco del workflow, apporta la seguente modifica al codice:
 
-_Prima:_
+=== "After"
 
-```groovy title="hello-workflow.nf" linenums="82"
-    // Raccogli tutti i saluti in un unico file.
-    collectGreetings(convertToUpper.out.collect(), params.batch)
-```
+    ```groovy title="hello-workflow.nf" linenums="82" hl_lines="4 5"
+        // collect all the greetings into one file
+        collectGreetings(convertToUpper.out.collect(), params.batch)
 
-_Dopo:_
+        // emit a message about the size of the batch
+        collectGreetings.out.count.view { num_greetings -> "There were $num_greetings greetings in this batch" }
+    ```
 
-```groovy title="hello-workflow.nf" linenums="82"
-    // Raccogli tutti i saluti in un unico file.
-    collectGreetings(convertToUpper.out.collect(), params.batch)
+=== "Before"
 
-    // Emetti un messaggio sulla dimensione del lotto.
-    collectGreetings.out.count.view { num_greetings -> "There were $num_greetings greetings in this batch" }
-```
+    ```groovy title="hello-workflow.nf" linenums="82"
+        // collect all the greetings into one file
+        collectGreetings(convertToUpper.out.collect(), params.batch)
+    ```
 
 !!! note
 

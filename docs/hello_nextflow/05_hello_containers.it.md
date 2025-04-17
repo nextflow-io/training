@@ -465,26 +465,26 @@ Si noti che includiamo un nuovo parametro CLI, `params.character`, per specifica
 
 Ci piace essere pigri e saltare la digitazione dei parametri nelle nostre righe di comando.
 
-_Prima:_
+=== "After"
+  
+    ```groovy title="hello-containers.nf" linenums="3" hl_lines="6"
+    /*
+     * Pipeline parameters
+     */
+    params.greeting = 'greetings.csv'
+    params.batch = 'test-batch'
+    params.character = 'turkey'
+    ```
 
-```groovy title="hello-containers.nf" linenums="3"
-/*
- * Pipeline parameters
- */
-params.greeting = 'greetings.csv'
-params.batch = 'test-batch'
-```
+=== "Before"
 
-_Dopo:_
-
-```groovy title="hello-containers.nf" linenums="3"
-/*
- * Pipeline parameters
- */
-params.greeting = 'greetings.csv'
-params.batch = 'test-batch'
-params.character = 'turkey'
-```
+    ```groovy title="hello-containers.nf" linenums="3"
+    /*
+     * Pipeline parameters
+     */ 
+    params.greeting = 'greetings.csv'
+    params.batch = 'test-batch'
+    ```
 
 Dovrebbe essere tutto ciò di cui abbiamo bisogno per far funzionare tutto.
 
@@ -541,22 +541,22 @@ Dobbiamo specificare un container e dire a Nextflow di usarlo per il processo `c
 
 Modificare il modulo `cowpy.nf` per aggiungere la direttiva `container` alla definizione del processo come segue:
 
-Prima:\_
+=== "After"
 
-```groovy title="modules/cowpy.nf" linenums="4"
-process cowpy {
+    ```groovy title="modules/cowpy.nf" linenums="4" hl_lines="4"
+    process cowpy {
 
-    publishDir 'containers/results', mode: 'copy'
-```
+        publishDir 'containers/results', mode: 'copy'
+        container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
+    ```
 
-Dopo:\_
+=== "Before"
 
-```groovy title="modules/cowpy.nf" linenums="4"
-process cowpy {
+    ```groovy title="modules/cowpy.nf" linenums="4"
+    process cowpy {
 
-    publishDir 'containers/results', mode: 'copy'
-    container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
-```
+        publishDir 'containers/results', mode: 'copy'
+    ```
 
 indica a Nextflow che, se l'uso di Docker è abilitato, deve usare l'immagine del container specificata qui per eseguire il processo.
 
@@ -568,17 +568,18 @@ Uno dei modi principali che Nextflow offre per configurare l'esecuzione del work
 Abbiamo fornito un file `nextflow.config` con una singola riga di codice che disabilita Docker: `docker.enabled = false`.
 
 Ora, passiamo a `true` per abilitare Docker:
-Prima:\_
 
-```console title="nextflow.config" linenums="1"
-docker.enabled = false
-```
+=== "After"
 
-Dopo:\_
+    ```console title="nextflow.config" linenums="1" hl_lines="1"
+    docker.enabled = true
+    ```
 
-```console title="nextflow.config" linenums="1"
-docker.enabled = true
-```
+=== "Before"
+
+    ```console title="nextflow.config" linenums="1"
+    docker.enabled = false
+    ```
 
 !!! note
 
