@@ -71,9 +71,9 @@ greeting_ch = Channel.of('Hello Channels!')
 
 Questo crea un canale chiamato `greeting_ch` usando la fabbrica del canale `Channel.of()`, che imposta un semplice canale di coda e carica la stringa `'Hello Channels!' ` da usare come valore di saluto.
 
-!!! Nota
+!!! note
 
-Stiamo temporaneamente tornando alle stringhe codificate invece di utilizzare un parametro CLI per motivi di leggibilità. Torneremo a utilizzare i parametri CLI una volta che avremo coperto ciò che sta accadendo a livello del canale.
+    Stiamo temporaneamente tornando alle stringhe codificate invece di utilizzare un parametro CLI per motivi di leggibilità. Torneremo a utilizzare i parametri CLI una volta che avremo coperto ciò che sta accadendo a livello del canale.
 
 Nel blocco del workflow, aggiungi il codice di fabbrica del canale:
 
@@ -254,7 +254,7 @@ Launching `hello-channels.nf` [pensive_poitras] DSL2 - revision: 778deadaea
 È molto meglio; almeno per un semplice workflow.
 Per un workflow complesso o un gran numero di input, avere l'output completo dell'elenco sul terminale potrebbe diventare un po' travolgente, quindi potresti non scegliere di usare `-ansi-log false` in quei casi.
 
-!!! Nota
+!!! note
 
     Il modo in cui viene riportato lo stato è un po' diverso tra le due modalità di registrazione.
     In modalità condensata, Nextflow segnala se le chiamate sono state completate con successo o meno.
@@ -337,7 +337,7 @@ process sayHello {
 
 Assicurati di sostituire `output.txt` sia nella definizione di output che nel blocco di comando `script:`.
 
-!!! suggerimento
+!!! tip
 
 Nella definizione di output, DEVI usare virgolette doppie attorno all'espressione del nome del file di output (NON virgolette singole), altrimenti fallirà.
 
@@ -388,7 +388,7 @@ Holà
 
 Successo! Ora possiamo aggiungere tutti i saluti che vorremmo senza preoccuparci che i file di output vengano sovrascritti.
 
-!!! Nota
+!!! note
 
     In pratica, nominare i file in base ai dati di input stessi è quasi sempre impraticabile.
     Il modo migliore per generare nomi di file dinamici è passare i metadati a un processo insieme ai file di input.
@@ -500,7 +500,7 @@ Come facciamo a ottenere Nextflow per decomprimere l'array e caricare le singole
 
 Se sfogli [elenco di operatori](https://www.nextflow.io/docs/latest/reference/operator.html) nella documentazione di Nextflow, troverai [`flatten()`](https://www.nextflow.io/docs/latest/reference/operator.html#flatten), che fa esattamente ciò di cui abbiamo bisogno: decomprimere il contenuto di un array e li emette come singoli elementi.
 
-!!! Nota
+!!! note
 
     È tecnicamente possibile ottenere gli stessi risultati utilizzando una fabbrica di canali diversa, [`Channel.fromList`](https://nextflow.io/docs/latest/reference/channel.html#fromlist), che include una fase di mappatura implicita nella sua operazione.
     Qui abbiamo scelto di non usarlo per dimostrare l'uso di un operatore su un caso d'uso abbastanza semplice.
@@ -560,7 +560,7 @@ Questa variabile viene utilizzata solo nell'ambito di tale chiusura.
 
 In questo esempio, `$greeting` rappresenta ogni singolo elemento caricato in un canale.
 
-!!! Nota "Nota su `$it`"
+!!! note "Nota su `$it`"
 
     In alcune pipeline potresti vedere una variabile speciale chiamata `$it` utilizzata all'interno delle chiusure dell'operatore.
     Questa è una variabile _implicita_ che consente un accesso abbreviato alla variabile interna,
@@ -596,7 +596,7 @@ Quindi otteniamo tre istruzioni separate `Dopo appiattire:`, una per ogni saluto
 
 È importante sottolineare che questo significa che ogni elemento può ora essere elaborato separatamente dal workflow.
 
-!!! suggerimento
+!!! tip
 
     Dovresti eliminare o commentare le istruzioni `view()` prima di andare avanti.
 
@@ -788,7 +788,7 @@ Questa volta Nextflow ha analizzato il contenuto del file (eviva!) Ma sono state
 Per farla breve, `splitCsv()` legge ogni riga in un array e ogni valore separato da virgole nella riga diventa un elemento nell'array.
 Quindi qui ci dà tre array contenenti un elemento ciascuno.
 
-!!! Nota
+!!! note
 
     Anche se questo comportamento sembra scomodo in questo momento, sarà estremamente utile in seguito quando ci occuperemo di file di input con più colonne di dati.
 
@@ -874,7 +874,7 @@ Puoi anche guardare i file di output per verificare che ogni saluto sia stato co
 
 Abbiamo ottenuto lo stesso risultato di prima, ma ora abbiamo molta più flessibilità per aggiungere più elementi al canale di saluti che vogliamo elaborare modificando un file di input, senza modificare alcun codice.
 
-!!! Nota
+!!! note
 
     Qui abbiamo avuto tutti i saluti su una riga nel file CSV.
     Puoi provare ad aggiungere più colonne al file CSV e vedere cosa succede; ad esempio, prova quanto segue:
