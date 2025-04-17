@@ -465,8 +465,8 @@ Si noti che includiamo un nuovo parametro CLI, `params.character`, per specifica
 
 Ci piace essere pigri e saltare la digitazione dei parametri nelle nostre righe di comando.
 
-=== "After"
-  
+=== "Dopo"
+
     ```groovy title="hello-containers.nf" linenums="3" hl_lines="6"
     /*
      * Pipeline parameters
@@ -476,12 +476,12 @@ Ci piace essere pigri e saltare la digitazione dei parametri nelle nostre righe 
     params.character = 'turkey'
     ```
 
-=== "Before"
+=== "Prima"
 
     ```groovy title="hello-containers.nf" linenums="3"
     /*
      * Pipeline parameters
-     */ 
+     */
     params.greeting = 'greetings.csv'
     params.batch = 'test-batch'
     ```
@@ -541,7 +541,7 @@ Dobbiamo specificare un container e dire a Nextflow di usarlo per il processo `c
 
 Modificare il modulo `cowpy.nf` per aggiungere la direttiva `container` alla definizione del processo come segue:
 
-=== "After"
+=== "Dopo"
 
     ```groovy title="modules/cowpy.nf" linenums="4" hl_lines="4"
     process cowpy {
@@ -550,7 +550,7 @@ Modificare il modulo `cowpy.nf` per aggiungere la direttiva `container` alla def
         container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
     ```
 
-=== "Before"
+=== "Prima"
 
     ```groovy title="modules/cowpy.nf" linenums="4"
     process cowpy {
@@ -569,13 +569,13 @@ Abbiamo fornito un file `nextflow.config` con una singola riga di codice che dis
 
 Ora, passiamo a `true` per abilitare Docker:
 
-=== "After"
+=== "Dopo"
 
     ```console title="nextflow.config" linenums="1" hl_lines="1"
     docker.enabled = true
     ```
 
-=== "Before"
+=== "Prima"
 
     ```console title="nextflow.config" linenums="1"
     docker.enabled = false

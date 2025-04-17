@@ -77,7 +77,7 @@ Questo crea un canale chiamato `greeting_ch` usando la fabbrica del canale `Chan
 
 Nel blocco del workflow, aggiungi il codice di fabbrica del canale:
 
-=== "After"
+=== "Dopo"
 
     ```groovy title="hello-channels.nf" linenums="27" hl_lines="3 4"
     workflow {
@@ -87,18 +87,18 @@ Nel blocco del workflow, aggiungi il codice di fabbrica del canale:
 
         // emit a greeting
         sayHello(params.greeting)
-    }   
-    ``` 
+    }
+    ```
 
-=== "Before"
+=== "Prima"
 
     ```groovy title="hello-channels.nf" linenums="27"
     workflow {
 
         // emit a greeting
         sayHello(params.greeting)
-    }   
-    ``` 
+    }
+    ```
 
 Questo non è ancora funzionale poiché non abbiamo ancora cambiato l'input alla chiamata di processo.
 
@@ -108,7 +108,7 @@ Ora dobbiamo effettivamente collegare il nostro canale appena creato alla chiama
 
 Nel blocco del workflow, apportare la seguente modifica del codice:
 
-=== "After"
+=== "Dopo"
 
     ```groovy title="hello-channels.nf" linenums="27" hl_lines="7"
     workflow {
@@ -121,7 +121,7 @@ Nel blocco del workflow, apportare la seguente modifica del codice:
     }
     ```
 
-=== "Before"
+=== "Prima"
 
     ```groovy title="hello-channels.nf" linenums="27"
     workflow {
@@ -193,14 +193,14 @@ Dobbiamo solo caricare più valori nel canale.
 
 Nel blocco del workflow, apportare la seguente modifica del codice:
 
-=== "After"
-    
+=== "Dopo"
+
     ```groovy title="hello-channels.nf" linenums="29" hl_lines="2"
     // create a channel for inputs
     greeting_ch = Channel.of('Hello','Bonjour','Holà')
     ```
-    
-=== "Before"
+
+=== "Prima"
 
     ```groovy title="hello-channels.nf" linenums="29"
     // create a channel for inputs
@@ -296,7 +296,7 @@ Qui, per comodità, useremo solo il saluto stesso poiché è solo una stringa br
 
 Nel blocco di processo, apporta le seguenti modifiche al codice:
 
-=== "After"
+=== "Dopo"
 
     ```groovy title="hello-channels.nf" linenums="6" hl_lines="9 13"
     process sayHello {
@@ -316,7 +316,7 @@ Nel blocco di processo, apporta le seguenti modifiche al codice:
     }
     ```
 
-=== "Before"
+=== "Prima"
 
     ```groovy title="hello-channels.nf" linenums="6"
     process sayHello {
@@ -427,23 +427,23 @@ Il buon senso suggerisce che dovremmo essere in grado di passare semplicemente u
 
 Prendiamo la variabile `greetings_array` che abbiamo appena immaginato e rendiamola una realtà aggiungendola al blocco del workflow:
 
-=== "After"
+=== "Dopo"
 
     ```groovy title="hello-channels.nf" linenums="27" hl_lines="3 4"
     workflow {
-    
+
         // declare an array of input greetings
         greetings_array = ['Hello','Bonjour','Holà']
-        
+
         // create a channel for inputs
         greeting_ch = Channel.of('Hello','Bonjour','Holà')
-    ```     
+    ```
 
-=== "Before"
-            
+=== "Prima"
+
     ```groovy title="hello-channels.nf" linenums="27"
     workflow {
-        
+
         // create a channel for inputs
         greeting_ch = Channel.of('Hello','Bonjour','Holà')
     ```
@@ -454,18 +454,18 @@ Sostituiremo i valori `'Hello','Bonjour', 'Holà'` attualmente codificati nella 
 
 Nel blocco del workflow, apportare la seguente modifica:
 
-=== "After" 
+=== "Dopo"
 
     ```groovy title="hello-channels.nf" linenums="32" hl_lines="2"
         // create a channel for inputs
         greeting_ch = Channel.of(greetings_array)
     ```
-        
-=== "Before"
-        
+
+=== "Prima"
+
     ```groovy title="hello-channels.nf" linenums="32"
         // create a channel for inputs
-       
+
 
 #### 3.1.3. Esegui il workflow
 
@@ -511,20 +511,20 @@ Per applicare l'operatore `flatten()` al nostro canale di input, lo apponiamo al
 
 Nel blocco del workflow, apportare la seguente modifica del codice:
 
-=== "After"
+=== "Dopo"
 
     ```groovy title="hello-channels.nf" linenums="31" hl_lines="3"
         // create a channel for inputs
         greeting_ch = Channel.of(greetings_array)
-                             .flatten()                                                                                                                                                        
+                             .flatten()
     ```
-    
-=== "Before"
-        
+
+=== "Prima"
+
     ```groovy title="hello-channels.nf" linenums="31"
         // create a channel for inputs
         greeting_ch = Channel.of(greetings_array)
-        
+
     ```
 
 Qui abbiamo aggiunto l'operatore sulla riga successiva per la leggibilità, ma puoi aggiungere operatori sulla stessa riga della fabbrica del canale se preferisci, come questo: `greeting_ch = Channel.of(greetings_array).flatten()`
@@ -536,7 +536,7 @@ Puoi pensare a `view()` come a uno strumento di debug, come un'istruzione `print
 
 Nel blocco del workflow, apportare la seguente modifica del codice:
 
-=== "After"
+=== "Dopo"
 
     ```groovy title="hello-channels.nf" linenums="31" hl_lines="3-5"
         // create a channel for inputs
@@ -546,7 +546,7 @@ Nel blocco del workflow, apportare la seguente modifica del codice:
                              .view { greeting -> "After flatten: $greeting" }
     ```
 
-=== "Before"
+=== "Prima"
 
     ```groovy title="hello-channels.nf" linenums="31"
         // create a channel for inputs
@@ -646,8 +646,8 @@ Lo aggiorneremo per puntare al file CSV contenente i nostri saluti.
 
 Nel blocco del workflow, apportare la seguente modifica del codice:
 
-=== "After"
-    
+=== "Dopo"
+
     ```groovy title="hello-channels.nf" linenums="25" hl_lines="4"
     /*
      * Pipeline parameters
@@ -655,7 +655,7 @@ Nel blocco del workflow, apportare la seguente modifica del codice:
     params.greeting = 'greetings.csv'
     ```
 
-=== "Before"
+=== "Prima"
 
     ```groovy title="hello-channels.nf" linenums="25"
     /*
@@ -671,15 +671,15 @@ Dobbiamo passare all'utilizzo di una nuova fabbrica di canali, [`Channel.fromPat
 
 Nel blocco del flusso di lavoro, apportare la seguente modifica del codice:
 
-=== "After"                                                                                                                                                                                    
-        
+=== "Dopo"
+
     ```groovy title="hello-channels.nf" linenums="31" hl_lines="1 2"
         // create a channel for inputs from a CSV file
         greeting_ch = Channel.fromPath(params.greeting)
 
     ```
 
-=== "Before"
+=== "Prima"
 
     ```groovy title="hello-channels.nf" linenums="31"
         // create a channel for inputs
@@ -734,8 +734,8 @@ Per applicare l'operatore, lo assediamo alla linea di fabbrica del canale come i
 
 Nel blocco del workflow, apportare la seguente modifica del codice:
 
-=== "After"
-    
+=== "Dopo"
+
     ```groovy title="hello-channels.nf" linenums="31" hl_lines="3-5"
     // create a channel for inputs from a CSV file
     greeting_ch = Channel.fromPath(params.greeting)
@@ -744,7 +744,7 @@ Nel blocco del workflow, apportare la seguente modifica del codice:
                          .view { csv -> "After splitCsv: $csv" }
     ```
 
-=== "Before"
+=== "Prima"
 
     ```groovy title="hello-channels.nf" linenums="31"
     // create a channel for inputs from a CSV file
@@ -817,7 +817,7 @@ Quindi applichiamolo al nostro parsing CSV.
 
 Nel blocco del workflow, apportare la seguente modifica del codice:
 
-=== "After"
+=== "Dopo"
 
     ```groovy title="hello-channels.nf" linenums="31" hl_lines="6-8"
     // create a channel for inputs from a CSV file
@@ -829,7 +829,7 @@ Nel blocco del workflow, apportare la seguente modifica del codice:
                          .view { csv -> "After map: $csv" }
     ```
 
-=== "Before"
+=== "Prima"
 
     ```groovy title="hello-channels.nf" linenums="31"
     // create a channel for inputs from a CSV file

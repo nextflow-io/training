@@ -142,16 +142,16 @@ include { <MODULE_NAME> } from '<path_to_module>'
 
 Inseriamo questo blocco sopra il blocco del workflow e compiliamolo in modo appropriato.
 
-=== "After"
+=== "Dopo"
 
     ```groovy title="hello-modules.nf" linenums="50" hl_lines="1 2"
     // Include modules
     include { sayHello } from './modules/sayHello.nf'
 
     workflow {
-    ``` 
+    ```
 
-=== "Before"
+=== "Prima"
 
     ```groovy title="hello-modules.nf" linenums="50"
     workflow {
@@ -235,22 +235,22 @@ Una volta fatto ciò, eliminate la definizione del processo dal file del workflo
 
 Inserite la dichiarazione di importazione sopra il blocco del workflow e compilatela in modo appropriato.
 
-=== "After"
+=== "Dopo"
 
     ```groovy title="hello-modules.nf" linenums="31" hl_lines="3"
     // Include modules
     include { sayHello } from './modules/sayHello.nf'
     include { convertToUpper } from './modules/convertToUpper.nf'
-    
-    workflow { 
+
+    workflow {
     ```
 
-=== "Before" 
-    
+=== "Prima"
+
     ```groovy title="hello-modules.nf" linenums="31"
     // Include modules
     include { sayHello } from './modules/sayHello.nf'
-    
+
     workflow {
     ```
 
@@ -325,24 +325,24 @@ Una volta fatto ciò, eliminate la definizione del processo dal file del workflo
 
 Inserite la dichiarazione di importazione sopra il blocco del workflow e compilatela in modo appropriato.
 
-=== "After"
+=== "Dopo"
 
     ```groovy title="hello-modules.nf" linenums="9" hl_lines="4"
     // Include modules
     include { sayHello } from './modules/sayHello.nf'
     include { convertToUpper } from './modules/convertToUpper.nf'
     include { collectGreetings } from './modules/collectGreetings.nf'
-    
+
     workflow {
     ```
-    
-=== "Before"
+
+=== "Prima"
 
     ```groovy title="hello-modules.nf" linenums="9"
     // Include modules
     include { sayHello } from './modules/sayHello.nf'
     include { convertToUpper } from './modules/convertToUpper.nf'
-    
+
     workflow {
     ```
 

@@ -319,7 +319,7 @@ Permette di recuperare il file di output desiderato senza dover scavare nella di
 
 Nel file di script del flusso di lavoro `hello-world.nf`, apportare la seguente modifica al codice:
 
-=== "After"
+=== "Dopo"
 
     ```groovy title="hello-world.nf" linenums="6" hl_lines="3"
     process sayHello {
@@ -330,7 +330,7 @@ Nel file di script del flusso di lavoro `hello-world.nf`, apportare la seguente 
             path 'output.txt'
     ```
 
-=== "Before"
+=== "Prima"
 
     ```groovy title="hello-world.nf" linenums="6"
     process sayHello {
@@ -484,7 +484,7 @@ Per prima cosa dobbiamo adattare la definizione del processo in modo che accetti
 
 Nel blocco del processo, apportare la seguente modifica al codice:
 
-=== "After"
+=== "Dopo"
 
     ```groovy title="hello-world.nf" linenums="6" hl_lines="5 6"
     process sayHello {
@@ -498,7 +498,7 @@ Nel blocco del processo, apportare la seguente modifica al codice:
             path 'output.txt'
     ```
 
-=== "Before"
+=== "Prima"
 
     ```groovy title="hello-world.nf" linenums="6"
     process sayHello {
@@ -517,7 +517,7 @@ Ora scambiamo il valore originale codificato con il valore della variabile di in
 
 Nel blocco del processo, apportare la seguente modifica al codice:
 
-=== "After"
+=== "Dopo"
 
     ```groovy title="hello-channels.nf" linenums="16" hl_lines="3"
     script:
@@ -526,7 +526,7 @@ Nel blocco del processo, apportare la seguente modifica al codice:
     """
     ```
 
-=== "Before"
+=== "Prima"
 
     ```groovy title="hello-channels.nf" linenums="16"
     script:
@@ -556,18 +556,18 @@ In linea di principio, possiamo scriverla ovunque; ma poiché vogliamo darla all
 
 Nel blocco del flusso di lavoro, apportare la seguente modifica al codice:
 
-=== "After"
-        
+=== "Dopo"
+
     ```groovy title="hello-world.nf" linenums="24" hl_lines="2"
     // emit a greeting
     sayHello(params.greeting)
     ```
 
-=== "Before"
+=== "Prima"
 
     ```groovy title="hello-world.nf" linenums="24"
     // emit a greeting
-    sayHello() 
+    sayHello()
     ```
 
 Indica a Nextflow di eseguire il processo `sayHello` sul valore fornito attraverso il parametro `--greeting`.

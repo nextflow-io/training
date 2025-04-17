@@ -83,14 +83,14 @@ Fortunatamente per noi, Nextflow supporta molte altre tecnologie di container, t
 Possiamo modificare il nostro file di configurazione per usare Conda invece di Docker.
 Per farlo, cambiamo il valore di `docker.enabled` in `false` e ​​aggiungiamo una direttiva che abilita l'uso di Conda:
 
-=== "After"
+=== "Dopo"
 
     ```groovy title="nextflow.config" linenums="1" hl_lines="1-2"
     docker.enabled = false
-    conda.enabled = true 
-    ``` 
+    conda.enabled = true
+    ```
 
-=== "Before"
+=== "Prima"
 
     ```groovy title="nextflow.config" linenums="1"
 
@@ -111,7 +111,7 @@ Consigliamo di usare la ricerca su [Seqera Containers](https://seqera.io/contain
 
 Ora aggiungiamo l'URI alla definizione del processo `cowpy` utilizzando la direttiva `conda`:
 
-=== "After"
+=== "Dopo"
 
     ```console title="modules/cowpy.nf" linenums="4" hl_lines="4"
     process cowpy {
@@ -122,7 +122,7 @@ Ora aggiungiamo l'URI alla definizione del processo `cowpy` utilizzando la diret
         publishDir 'results', mode: 'copy'
     ```
 
-=== "Before"
+=== "Prima"
 
     ```console title="modules/cowpy.nf" linenums="4"
     process cowpy {
@@ -241,8 +241,8 @@ process {
 
 Allo stesso tempo, faremo finta che il processo `cowpy` richieda più risorse degli altri, così da poter dimostrare come adattare le allocazioni per un singolo processo.
 
-=== "After"
-        
+=== "Dopo"
+
     ```groovy title="nextflow.config" linenums="4" hl_lines="3-6"
     process {
         memory = 1.GB
@@ -252,9 +252,9 @@ Allo stesso tempo, faremo finta che il processo `cowpy` richieda più risorse de
         }
     }
     ```
-        
-=== "Before"
-        
+
+=== "Prima"
+
     ```groovy title="nextflow.config" linenums="14"
     process {
         memory = 1.GB
