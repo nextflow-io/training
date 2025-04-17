@@ -591,7 +591,7 @@ _Dopo:_
         val batch_name
 ```
 
-Puoi configurare i tuoi processi per aspettarsi quanti input desideri.  
+Puoi configurare i tuoi processi per aspettarsi quanti input desideri.
 Più avanti, imparerai come gestire gli input obbligatori e opzionali.
 
 #### 3.1.2. Utilizzare la variabile `batch_name` nel nome del file di output
@@ -630,7 +630,7 @@ Ora abbiamo bisogno di un modo per fornire il valore di `batch_name` e passarne 
 
 #### 3.2.1. Utilizzare `params` per configurare il parametro
 
-Sai già come utilizzare il sistema `params` per dichiarare i parametri CLI.  
+Sai già come utilizzare il sistema `params` per dichiarare i parametri CLI.
 Usiamo questo sistema per dichiarare un parametro `batch` (con un valore predefinito, perché siamo pigri).
 
 Nella sezione dei parametri della pipeline, apporta le seguenti modifiche al codice:
@@ -727,8 +727,8 @@ Impara come emettere più output e gestirli comodamente.
 
 ## 4. Aggiungere un output al passo di raccolta
 
-Quando un processo produce un solo output, è facile accedervi (nel blocco del workflow) utilizzando la sintassi `<process>.out`.  
-Quando ci sono due o più output, il metodo predefinito per selezionare un output specifico è usare l'indice corrispondente (basato su zero); per esempio, useresti `<process>.out[0]` per ottenere il primo output.  
+Quando un processo produce un solo output, è facile accedervi (nel blocco del workflow) utilizzando la sintassi `<process>.out`.
+Quando ci sono due o più output, il metodo predefinito per selezionare un output specifico è usare l'indice corrispondente (basato su zero); per esempio, useresti `<process>.out[0]` per ottenere il primo output.
 Questo però non è particolarmente comodo, perché è facile selezionare l'indice sbagliato.
 
 Vediamo come possiamo selezionare e utilizzare un output specifico di un processo quando ce ne sono più di uno.
@@ -796,7 +796,7 @@ _Dopo:_
         val count_greetings , emit: count
 ```
 
-Le etichette `emit:` sono opzionali, e avremmo potuto aggiungere un'etichetta solo a uno degli output.  
+Le etichette `emit:` sono opzionali, e avremmo potuto aggiungere un'etichetta solo a uno degli output.
 Ma, come si suol dire, perché non entrambi?
 
 ### 4.2. Segnalare l'output alla fine del workflow
@@ -852,7 +852,7 @@ Launching `hello-workflow.nf` [evil_sinoussi] DSL2 - revision: eeca64cdb1
 There were 3 greetings in this batch
 ```
 
-L'ultima riga (riga 8) mostra che abbiamo correttamente recuperato il conteggio dei saluti elaborati.  
+L'ultima riga (riga 8) mostra che abbiamo correttamente recuperato il conteggio dei saluti elaborati.
 Sentiti libero di aggiungere più saluti al CSV e vedere cosa succede.
 
 ### Cosa devi ricordare
@@ -863,5 +863,5 @@ Più in generale, comprendi i principi chiave per connettere i processi in modi 
 
 ### Cosa succede dopo?
 
-Fai una lunga pausa, te la sei guadagnata.  
+Fai una lunga pausa, te la sei guadagnata.
 Quando sei pronto, passa alla Parte 4 per imparare a modularizzare il tuo codice per una migliore manutenibilità e efficienza del codice.
