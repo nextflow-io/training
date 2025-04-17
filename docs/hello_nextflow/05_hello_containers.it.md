@@ -404,28 +404,28 @@ Ora dobbiamo importare il modulo e chiamare il processo.
 
 Inserire la dichiarazione di importazione sopra il blocco del workflow e compilarla in modo appropriato.
 
-_Before:_
+=== "Dopo"
 
-```groovy title="hello-containers.nf" linenums="9"
-// Include modules
-include { sayHello } from './modules/sayHello.nf'
-include { convertToUpper } from './modules/convertToUpper.nf'
-include { collectGreetings } from './modules/collectGreetings.nf'
+    ```groovy title="hello-containers.nf" linenums="9" hl_lines="5"
+    // Include modules
+    include { sayHello } from './modules/sayHello.nf'
+    include { convertToUpper } from './modules/convertToUpper.nf'
+    include { collectGreetings } from './modules/collectGreetings.nf'
+    include { cowpy } from './modules/cowpy.nf'
 
-workflow {
-```
+    workflow {
+    ```
 
-_After:_
+=== "Prima"
 
-```groovy title="hello-containers.nf" linenums="9"
-// Include modules
-include { sayHello } from './modules/sayHello.nf'
-include { convertToUpper } from './modules/convertToUpper.nf'
-include { collectGreetings } from './modules/collectGreetings.nf'
-include { cowpy } from './modules/cowpy.nf'
+    ```groovy title="hello-containers.nf" linenums="9"
+    // Include modules
+    include { sayHello } from './modules/sayHello.nf'
+    include { convertToUpper } from './modules/convertToUpper.nf'
+    include { collectGreetings } from './modules/collectGreetings.nf'
 
-workflow {
-```
+    workflow {
+    ```
 
 #### 2.2.2. Aggiungere una chiamata al processo `cowpy` nel flusso di lavoro
 
@@ -436,28 +436,28 @@ Colleghiamo il processo `cowpy()` all'output del processo `collectGreetings()`, 
 
 Nel blocco del flusso di lavoro, apportare la seguente modifica al codice:
 
-_Before:_
+=== "Dopo"
 
-```groovy title="hello-containers.nf" linenums="28"
-    // collect all the greetings into one file
-    collectGreetings(convertToUpper.out.collect(), params.batch)
+    ```groovy title="hello-containers.nf" linenums="28" hl_lines="7 8"
+        // collect all the greetings into one file
+        collectGreetings(convertToUpper.out.collect(), params.batch)
 
-    // emit a message about the size of the batch
-    collectGreetings.out.count.view{ num_greetings -> "There were $num_greetings greetings in this batch" }
-```
+        // emit a message about the size of the batch
+        collectGreetings.out.count.view{ num_greetings -> "There were $num_greetings greetings in this batch" }
 
-_After:_
+        // generate ASCII art of the greetings with cowpy
+        cowpy(collectGreetings.out.outfile, params.character)
+    ```
 
-```groovy title="hello-containers.nf" linenums="28"
-    // collect all the greetings into one file
-    collectGreetings(convertToUpper.out.collect(), params.batch)
+=== "Prima"
 
-    // emit a message about the size of the batch
-    collectGreetings.out.count.view{ num_greetings -> "There were $num_greetings greetings in this batch" }
+    ```groovy title="hello-containers.nf" linenums="28"
+        // collect all the greetings into one file
+        collectGreetings(convertToUpper.out.collect(), params.batch)
 
-    // generate ASCII art of the greetings with cowpy
-    cowpy(collectGreetings.out.outfile, params.character)
-```
+        // emit a message about the size of the batch
+        collectGreetings.out.count.view{ num_greetings -> "There were $num_greetings greetings in this batch" }
+    ```
 
 Si noti che includiamo un nuovo parametro CLI, `params.character`, per specificare quale carattere vogliamo che dica i saluti.
 

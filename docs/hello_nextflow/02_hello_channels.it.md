@@ -167,7 +167,7 @@ Finora stiamo solo modificando progressivamente il codice per aumentare la fless
 
 !!! note
 
-Può sembrare che stiamo scrivendo più codice senza alcun beneficio tangibile, ma il valore diventerà chiaro non appena inizieremo a gestire più input.
+    Può sembrare che stiamo scrivendo più codice senza alcun beneficio tangibile, ma il valore diventerà chiaro non appena inizieremo a gestire più input.
 
 ### Conclusioni
 
@@ -340,7 +340,7 @@ Assicurati di sostituire `output.txt` sia nella definizione di output che nel bl
 
 !!! tip
 
-Nella definizione di output, DEVI usare virgolette doppie attorno all'espressione del nome del file di output (NON virgolette singole), altrimenti fallirà.
+    Nella definizione di output, DEVI usare virgolette doppie attorno all'espressione del nome del file di output (NON virgolette singole), altrimenti fallirà.
 
 Questo dovrebbe produrre un nome di file di output univoco ogni volta che viene chiamato il processo, in modo che possa essere distinto dagli output di altre iterazioni dello stesso processo nella directory di output.
 
@@ -465,6 +465,8 @@ Nel blocco del workflow, apportare la seguente modifica:
 
     ```groovy title="hello-channels.nf" linenums="32"
         // create a channel for inputs
+        greeting_ch = Channel.of('Hello','Bonjour','Holà')
+    ```
 
 #### 3.1.3. Esegui il workflow
 

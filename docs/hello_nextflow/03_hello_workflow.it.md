@@ -129,8 +129,7 @@ Qui, componiamo il secondo nome del file di output in base al nome del file di i
 
 !!! note
 
-Nextflow determinerà l'ordine delle operazioni in base alla concatenazione degli input e degli output, quindi l'ordine delle definizioni dei processi nello script del flusso di lavoro non è importante.
-Tuttavia, ti consigliamo di essere gentile con i tuoi collaboratori e con il futuro te stesso, e cercare di scriverle in un ordine logico per motivi di leggibilità."
+    Nextflow determinerà l'ordine delle operazioni in base alla concatenazione degli input e degli output, quindi l'ordine delle definizioni dei processi nello script del flusso di lavoro non è importante. Tuttavia, ti consigliamo di essere gentile con i tuoi collaboratori e con il futuro te stesso, e cercare di scriverle in un ordine logico per motivi di leggibilità."
 
 ### 1.2 Aggiungi una chiamata al nuovo processo nel blocco del workflow
 
@@ -186,7 +185,7 @@ Nel blocco del workflow, apporta la seguente modifica al codice:
 
 Per un caso semplice come questo (un output a un input), è tutto ciò che dobbiamo fare per connettere due processi!
 
-### 1.4 Esegui di nuovo il flusso di lavoro con -resume
+### 1.4 Esegui di nuovo il flusso di lavoro con `-resume`
 
 Eseguiamo di nuovo il flusso di lavoro utilizzando il flag `-resume`, poiché abbiamo già eseguito con successo il primo passaggio del workflow.
 
