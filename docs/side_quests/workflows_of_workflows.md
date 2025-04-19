@@ -29,7 +29,7 @@ Before taking on this side quest you should:
 - Complete the [Hello Nextflow](../hello_nextflow/README.md) tutorial
 - Understand basic Nextflow concepts (processes, channels, operators)
 
-### 0.1. Starting Point
+### 0.2. Starting Point
 
 Let's move into the project directory.
 
