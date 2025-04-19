@@ -139,7 +139,7 @@ Nextflow 커뮤니티 교육 포털에 오신 것을 환영합니다!
 
 유용한 참고 링크들을 빠르게 확인해보세요:
 
-| 참고 자료                                                    | 커뮤니티                                                    |
+| 참고 자료                                                   | 커뮤니티                                                     |
 | ----------------------------------------------------------- | ------------------------------------------------------------ |
 | [Nextflow 문서](https://nextflow.io/docs/latest/index.html) | [Nextflow Slack](https://www.nextflow.io/slack-invite.html)  |
 | [Nextflow 홈페이지](https://nextflow.io/)                   | [nf-core](https://nf-co.re/)                                 |
