@@ -81,16 +81,11 @@ workflow {
 
     Throughout this tutorial, we'll use the `ch_` prefix for all channel variables to clearly indicate they are Nextflow channels.
 
-We can use the [`splitCsv` operator](https://www.nextflow.io/docs/latest/operator.html#splitcsv) to split the samplesheet into a channel of maps, where each map represents a row from the CSV file.
-
 _Before:_
 
 ```groovy title="main.nf" linenums="2"
 ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
-                    .splitCsv(header: true)
 ```
-
-The `header: true` option tells Nextflow to use the first row of the CSV file as the header row, which will be used as keys for the values. Let's see what Nextflow can see after reading with splitCsv. To do this, we can use the `view` operator.
 
 _After:_
 
@@ -99,6 +94,12 @@ ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
                     .splitCsv(header: true)
                     .view()
 ```
+
+We can use the [`splitCsv` operator](https://www.nextflow.io/docs/latest/operator.html#splitcsv) to split the samplesheet into a channel of maps, where each map represents a row from the CSV file.
+
+The `header: true` option tells Nextflow to use the first row of the CSV file as the header row, which will be used as keys for the values. Let's see what Nextflow can see after reading with splitCsv. To do this, we can use the `view` operator.
+
+Run the pipeline:
 
 ```bash title="Read the samplesheet"
 nextflow run main.nf
