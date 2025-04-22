@@ -129,7 +129,7 @@ Each map contains:
 - `type`: The sample type (normal or tumor)
 - `bam`: Path to the BAM file
 
-This format makes it easy to access specific fields from each sample. For example, we could access the sample ID with `sample.id` or the BAM file path with `sample.bam`. The output above shows each row from the CSV file converted into a map with keys matching the header row. Now that we've successfully read in the samplesheet and have access to the data in each row, we can begin implementing our pipeline logic.
+This format makes it easy to access specific fields from each sample. For example, we could access the sample ID with `id` or the BAM file path with `bam`. The output above shows each row from the CSV file converted into a map with keys matching the header row. Now that we've successfully read in the samplesheet and have access to the data in each row, we can begin implementing our pipeline logic.
 
 ### Takeaway
 
@@ -332,7 +332,7 @@ We've now separated out the normal and tumor samples into two different channels
 
 In the previous section, we separated out the normal and tumor samples into two different channels. These could be processed independently using specific processes or workflows based on their type. But what happens when we want to compare the normal and tumor samples from the same patient? At this point, we need to join them back together making sure to match the samples based on their `id` field.
 
-Nextflow includes many methods for combining channels, but in this case the most appropriate operator is [`join`](https://www.nextflow.io/docs/latest/operator.html#join). This acts like a SQL `JOIN` operation, where we specify the key to join on and the type of join to perform.
+Nextflow includes many methods for combining channels, but in this case the most appropriate operator is [`join`](https://www.nextflow.io/docs/latest/operator.html#join).  If you are familiar with SQL, it acts like the `JOIN` operation, where we specify the key to join on and the type of join to perform.
 
 ### 3.1. Use `map` and `join` to combine based on sample ID
 
