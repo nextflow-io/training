@@ -149,7 +149,7 @@ Initialize `nf-test`.
 
 ---
 
-## 1.0. Initialize `nf-test`
+## 1. Initialize `nf-test`
 
 The `nf-test` package provides an initialization command that sets up a few things in order for us to start developing tests for our project.
 
@@ -565,7 +565,7 @@ Learn how to test a Nextflow process.
 
 ---
 
-## 2.0. Test a Nextflow process
+## 2. Test a Nextflow process
 
 We don't have to write tests for every part of the pipeline, but the more tests we have the more comprehensive we can be about the pipeline and the more confident we can be that it's working as expected. In this section we're going to test both processes in the pipeline as individual units.
 
@@ -1083,7 +1083,7 @@ SUCCESS: Executed 3 tests in 5.007s
 
 Check that out! We ran 3 tests, 1 for each process and 1 for the whole pipeline with a single command. Imagine how powerful this is on a large codebase!
 
-## 4.0. Summary
+## 4. Summary
 
 In this side quest, we've learned:
 
