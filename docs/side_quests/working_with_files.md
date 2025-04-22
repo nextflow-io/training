@@ -890,6 +890,7 @@ These techniques will help you build more efficient and maintainable workflows, 
    ```
 
 4. **Extracting Metadata**
+
    ```nextflow
    // Extract metadata with regex
    def matcher = file.name =~ /(.+)_(rep\d+)_(.+)_(R[12])_001\.fastq\.gz/
