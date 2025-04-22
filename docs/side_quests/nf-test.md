@@ -44,8 +44,7 @@ The `nf-test` directory has the file content like:
 ```console title="Directory contents"
 nf-test
 ├── greetings.csv
-├── main.nf
-└── nextflow.config
+└──main.nf
 ```
 
 For a detailed description of the files, see the [warmup from Hello Nextflow](../hello_nextflow/00_orientation.md).
@@ -566,7 +565,7 @@ Learn how to test a Nextflow process.
 
 ---
 
-## 2 Test a Nextflow process
+## 2.0. Test a Nextflow process
 
 We don't have to write tests for every part of the pipeline, but the more tests we have the more comprehensive we can be about the pipeline and the more confident we can be that it's working as expected. In this section we're going to test both processes in the pipeline as individual units.
 
