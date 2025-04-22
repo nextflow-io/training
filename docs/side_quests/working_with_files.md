@@ -172,6 +172,10 @@ Extension: gz
 Parent directory: /workspaces/training/side-quests/working_with_files/data
 ```
 
+When using a path as a string, Nextflow has no idea what it's looking at - it's just a series of characters. When we use the `file()` method, Nextflow understands this is a file and can access its properties such as name, extension, and parent directory. This also tells Nextflow exactly how to handle it in the workflow, which prevents common errors.
+
+Despite their prevalence in bioinformatics, files are not strings! Nextflow needs to know it's working with a file object to properly manage it throughout your workflow.
+
 ### Takeaway
 
 - The `file()` method creates a Path object from a string
