@@ -32,7 +32,7 @@ Before taking on this side quest you should:
 Let's move into the project directory.
 
 ```bash
-cd side-quests/splitting-and-grouping
+cd side-quests/splitting_and_grouping
 ```
 
 You'll find a `data` directory containing a samplesheet and a main workflow file.
