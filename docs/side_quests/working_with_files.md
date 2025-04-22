@@ -508,7 +508,7 @@ Nice! we have removed the "rep" from the replicate string.
 
 - We can handle filenames in Nextflow with the power of a full programming language
 - We can treat the filenames as strings to extract relevant information
-- Use of Groovy methods like `tokenize()` and `replace()` allows us to manipulate strings in the filename
+- Use of methods like `tokenize()` and `replace()` allows us to manipulate strings in the filename
 
 Next up, we will look at how to handle paired-end reads.
 
