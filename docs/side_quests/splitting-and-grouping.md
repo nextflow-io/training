@@ -49,14 +49,14 @@ The samplesheet contains information about different samples and their associate
 
 ```console title="samplesheet.csv"
 id,repeat,type,bam
-sampleA,1,normal,sampleA_r1_normal.bam
+sampleA,1,normal,sampleA_rep1_normal.bam
 sampleA,1,tumor,sampleA_rep1_tumor.bam
+sampleA,2,normal,sampleA_rep2_normal.bam
+sampleA,2,tumor,sampleA_rep2_tumor.bam
 sampleB,1,normal,sampleB_rep1_normal.bam
 sampleB,1,tumor,sampleB_rep1_tumor.bam
 sampleC,1,normal,sampleC_rep1_normal.bam
 sampleC,1,tumor,sampleC_rep1_tumor.bam
-sampleD,1,normal,sampleD_rep1_normal.bam
-sampleD,1,tumor,sampleD_rep1_tumor.bam
 ```
 
 Note there are 8 samples in total, 4 normal and 4 tumor. sampleA has 2 repeats, while sampleB and sampleC only have 1.
