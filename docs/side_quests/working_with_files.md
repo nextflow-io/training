@@ -426,7 +426,7 @@ Success! Let's break our metadata down into a tuple of values.
 
 ### 3.3. Flattening the metadata
 
-We want to flatten the metadata into a tuple of values. Instead of having a nested list structure like `[[sampleA, rep1, normal, R2, 001], file]`, we want a flat structure like `[sampleA, rep1, normal, R2, file]`.
+Remember, when using a channel in a process the input is generally a flat tuple. Therefore, it's easier if the input channel is flat instead of the nested structure we have here. Therefore we want to flatten our structure from `[[sampleA, rep1, normal, R2, 001], file]` to `[sampleA, rep1, normal, R2, file]`.
 
 We can accomplish this in a single `map` operation by using Groovy's destructuring assignment. This allows us to unpack the tokenized filename components directly into separate variables, which we can then use to construct our desired tuple structure.
 
