@@ -348,7 +348,7 @@ Let's explore how to extract metadata from our FASTQ filenames using Nextflow's 
 
 First, let's modify our workflow to extract metadata from the filenames.
 
-First we will grab the simpleName of the file, which includes the metadata. Then, we will separate out the metadata by underscores using tokenize. Finally, we will use string handling to remove additional text like "rep" which aren't required right now.
+First we will grab the simpleName of the file, which includes the metadata, and return with the file. Then, we will separate out the metadata by underscores using tokenize. Finally, we will use string handling to remove additional text like "rep" which aren't required right now.
 
 _Before_:
 
