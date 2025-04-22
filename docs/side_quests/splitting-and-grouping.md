@@ -332,7 +332,7 @@ We've now separated out the normal and tumor samples into two different channels
 
 In the previous section, we separated out the normal and tumor samples into two different channels. These could be processed independently using specific processes or workflows based on their type. But what happens when we want to compare the normal and tumor samples from the same patient? At this point, we need to join them back together making sure to match the samples based on their `id` field.
 
-Nextflow includes many methods for combining channels, but in this case the most appropriate operator is [`join`](https://www.nextflow.io/docs/latest/operator.html#join).  If you are familiar with SQL, it acts like the `JOIN` operation, where we specify the key to join on and the type of join to perform.
+Nextflow includes many methods for combining channels, but in this case the most appropriate operator is [`join`](https://www.nextflow.io/docs/latest/operator.html#join). If you are familiar with SQL, it acts like the `JOIN` operation, where we specify the key to join on and the type of join to perform.
 
 ### 3.1. Use `map` and `join` to combine based on sample ID
 
@@ -528,6 +528,8 @@ Launching `main.nf` [prickly_wing] DSL2 - revision: 3bebf22dee
 ```
 
 Note how we have a tuple of two elements (`id` and `repeat` fields) as the first element of each joined result. This demonstrates how complex items can be used as a joining key, enabling fairly intricate matching between samples from the same conditions.
+
+If you want to explore more ways to join on different keys, check out the [join operator documentation](https://www.nextflow.io/docs/latest/operator.html#join) for additional options and examples.
 
 ### 3.3. Use subMap to create a new joining key
 
