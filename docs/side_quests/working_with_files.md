@@ -428,7 +428,7 @@ Success! Let's break our metadata down into a tuple of values.
 
 Remember, when using a channel in a process the input is generally a flat tuple. Therefore, it's easier if the input channel is flat instead of the nested structure we have here. Therefore we want to flatten our structure from `[[sampleA, rep1, normal, R2, 001], file]` to `[sampleA, rep1, normal, R2, file]`.
 
-We can accomplish this in a single `map` operation by using Groovy's destructuring assignment. This allows us to unpack the tokenized filename components directly into separate variables, which we can then use to construct our desired tuple structure.
+We can extract the metadata from the filename and create a flat tuple structure in a single map operation.
 
 The line `def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')` splits the filename at each underscore and assigns each part to a separate variable. We then return these variables along with the file object as a single flat list.
 
