@@ -178,8 +178,9 @@ Despite their prevalence in bioinformatics, files are not strings! Nextflow need
 
 ### Takeaway
 
-- The `file()` method creates a Path object from a string
-- You can access file metadata like name, extension, and path
+- The `file()` method creates a Path object from a string, which Nextflow understands as a file
+- You can access file properties like `name`, `simpleName`, `extension`, and `parent`
+- Using file objects instead of strings allows Nextflow to properly manage files in your workflow
 
 ---
 
