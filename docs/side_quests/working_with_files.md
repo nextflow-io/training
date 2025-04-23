@@ -504,6 +504,69 @@ Launching `main.nf` [reverent_volta] DSL2 - revision: b3aac71fea
 
 Nice! we have removed the "rep" from the replicate string.
 
+### 3.5. Using a map to organise the data
+
+Our data is just a flat list. It's easy to use but hard to read. What is the item at index 3? Can you tell without checking?
+
+A [map](https://www.baeldung.com/groovy-maps) is Groovy's version of a key-value store. Every item has a key and a value and we can refer to each key to get the value. This will make our code much easier to read, i.e. we go from this:
+
+```groovy
+data = [sampleA, 1, normal, R1, /workspaces/training/side-quests/working_with_files/data/sampleA_rep1_normal_R1_001.fastq.gz]
+
+println data[3]
+```
+
+to this:
+
+```groovy
+data = [sample: sampleA, replicate: 1, type: normal, readNum: R1, file: /workspaces/training/side-quests/working_with_files/data/sampleA_rep1_normal_R1_001.fastq.gz]
+
+println data.readNum
+```
+
+Let's convert our flat list into a map now.
+
+_Before_:
+
+```groovy title="main.nf" linenums="4"
+ch_fastq.map { myFile ->
+    def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
+    [ sample, replicate.replace('rep', ''), type, readNum, myFile ]
+}
+```
+
+_After_:
+
+```groovy title="main.nf" linenums="4"
+ch_fastq.map { myFile ->
+    def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
+    [
+      [
+        id: sample,
+        replicate: replicate.replace('rep', ''),
+        type: type,
+        readNum: readNum,
+      ],
+      myFile
+    ]
+}
+```
+
+```bash
+nextflow run main.nf
+```
+
+```console title="Map Output"
+ N E X T F L O W   ~  version 24.10.5
+
+Launching `main.nf` [infallible_swartz] DSL2 - revision: 7f4e68c0cb
+
+[[id:sampleA, replicate:1, type:normal, readNum:R2], /Users/adam.talbot/training/side-quests/working_with_files/data/sampleA_rep1_normal_R2_001.fastq.gz]
+[[id:sampleA, replicate:1, type:normal, readNum:R1], /Users/adam.talbot/training/side-quests/working_with_files/data/sampleA_rep1_normal_R1_001.fastq.gz]
+```
+
+We have converted our flat list into a map, and now we can refer to each bit of sample data by name instead of by index. This makes our code easier to read and more maintainable.
+
 ### Takeaway
 
 - We can handle filenames in Nextflow with the power of a full programming language
@@ -528,7 +591,15 @@ _Before_:
 ch_fastq = Channel.fromPath('data/sampleA_rep1_normal_R*_001.fastq.gz')
 ch_fastq.map { myFile ->
     def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
-    [ sample, replicate.replace('rep', ''), type, readNum, myFile ]
+    [
+        [
+            id: sample,
+            replicate: replicate.replace('rep', ''),
+            type: type,
+            readNum: readNum,
+        ],
+        myFile
+    ]
 }
 .view()
 ```
@@ -541,7 +612,15 @@ _After_:
 ch_fastq = Channel.fromFilePairs('data/sampleA_rep1_normal_R{1,2}_001.fastq.gz')
 // ch_fastq.map { myFile ->
 //     def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
-//     [ sample, replicate.replace('rep', ''), type, readNum, myFile ]
+//     [
+//         [
+//             id: sample,
+//             replicate: replicate.replace('rep', ''),
+//             type: type,
+//             readNum: readNum,
+//         ],
+//         myFile
+//     ]
 // }
 .view()
 ```
@@ -570,20 +649,40 @@ We still need the metadata. Our `map` operation from before won't work because i
 
 _Before_:
 
-```groovy title="main.nf" linenums="4"
+```groovy title="main.nf" linenums="3"
+ch_fastq = Channel.fromFilePairs('data/sampleA_rep1_normal_R{1,2}_001.fastq.gz')
 // ch_fastq.map { myFile ->
 //     def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
-//     [ sample, replicate.replace('rep', ''), type, readNum, myFile ]
+//     [
+//         [
+//             id: sample,
+//             replicate: replicate.replace('rep', ''),
+//             type: type,
+//             readNum: readNum,
+//         ],
+//         myFile
+//     ]
 // }
+.view()
 ```
 
 _After_:
 
 ```groovy title="main.nf" linenums="3"
+ch_fastq = Channel.fromFilePairs('data/sampleA_rep1_normal_R{1,2}_001.fastq.gz')
 ch_fastq.map { id, fastqs ->
     def (sample, replicate, type, readNum) = id.tokenize('_')
-    [ sample, replicate.replace('rep', ''), type, fastqs ]
+    [
+        [
+            id: sample,
+            replicate: replicate.replace('rep', ''),
+            type: type,
+            readNum: readNum,
+        ],
+        fastqs
+    ]
 }
+.view()
 ```
 
 ```bash
@@ -594,9 +693,9 @@ nextflow run main.nf
 
  N E X T F L O W   ~  version 24.10.5
 
-Launching `./main.nf` [boring_mahavira] DSL2 - revision: 4a71628957
+Launching `main.nf` [prickly_stonebraker] DSL2 - revision: f62ab10a3f
 
-[sampleA, 1, normal, [/Users/adam.talbot/training/side-quests/files/data/sampleA_rep1_normal_R1_001.fastq.gz, /Users/adam.talbot/training/side-quests/files/data/sampleA_rep1_normal_R2_001.fastq.gz]]
+[[id:sampleA, replicate:1, type:normal, readNum:R], [/Users/adam.talbot/training/side-quests/working_with_files/data/sampleA_rep1_normal_R1_001.fastq.gz, /Users/adam.talbot/training/side-quests/working_with_files/data/sampleA_rep1_normal_R2_001.fastq.gz]]
 ```
 
 Well done! We have grabbed the metadata from the filenames and used them as values in the tuple.
@@ -629,31 +728,35 @@ _After_:
 
 ```groovy title="main.nf - process example" linenums="1"
 process ANALYZE_READS {
-    tag "${id}"
+    tag "${meta.id}"
 
-    publishDir "results/${id}", mode: 'copy'
+    publishDir "results/${meta.id}", mode: 'copy'
 
     input:
-    tuple val(id), val(replicate), val(type), path(fastqs)
+    tuple val(meta), path(fastqs)
 
     output:
-    tuple val(id), path("${id}_stats.txt")
+    tuple val(meta.id), path("${meta.id}_stats.txt")
 
     script:
     """
-    echo "Sample metadata: ${id}" > ${id}_stats.txt
-    echo "Replicate: ${replicate}" >> ${id}_stats.txt
-    echo "Type: ${type}" >> ${id}_stats.txt
-    echo "Read 1: ${fastqs[0]}" >> ${id}_stats.txt
-    echo "Read 2: ${fastqs[1]}" >> ${id}_stats.txt
-    echo "File sizes:" >> ${id}_stats.txt
-    echo "Read 1 size: \$(wc -l < ${fastqs[0]} | awk '{print \$1/4}') reads" >> ${id}_stats.txt
-    echo "Read 2 size: \$(wc -l < ${fastqs[1]} | awk '{print \$1/4}') reads" >> ${id}_stats.txt
+    echo "Sample metadata: ${meta.id}" > ${meta.id}_stats.txt
+    echo "Replicate: ${meta.replicate}" >> ${meta.id}_stats.txt
+    echo "Type: ${meta.type}" >> ${meta.id}_stats.txt
+    echo "Read 1: ${fastqs[0]}" >> ${meta.id}_stats.txt
+    echo "Read 2: ${fastqs[1]}" >> ${meta.id}_stats.txt
+    echo "File sizes:" >> ${meta.id}_stats.txt
+    echo "Read 1 size: \$(wc -l < ${fastqs[0]} | awk '{print \$1/4}') reads" >> ${meta.id}_stats.txt
+    echo "Read 2 size: \$(wc -l < ${fastqs[1]} | awk '{print \$1/4}') reads" >> ${meta.id}_stats.txt
     """
 }
 
 workflow {
 ```
+
+!!! note
+
+    We are calling our map '`meta`'. This is the first introduction of a concept called `metamaps` which we will cover later!
 
 ### 5.2. Implement the process in the workflow
 
@@ -661,19 +764,38 @@ Then implement the process in the workflow:
 
 _Before_:
 
-```groovy title="main.nf" linenums="31"
+```groovy title="main.nf" linenums="28"
+    ch_fastq.map { id, fastqs ->
+        def (sample, replicate, type, readNum) = id.tokenize('_')
+        [
+            [
+                id: sample,
+                replicate: replicate.replace('rep', ''),
+                type: type,
+                readNum: readNum,
+            ],
+            fastqs
+        ]
+    }
     .view()
 }
 ```
 
 _After_:
 
-```groovy title="main.nf" linenums="31"
+```groovy title="main.nf" linenums="28"
     ch_samples = ch_fastq.map { id, fastqs ->
         def (sample, replicate, type, readNum) = id.tokenize('_')
-        [ sample, replicate.replace('rep', ''), type, fastqs ]
+        [
+            [
+                id: sample,
+                replicate: replicate.replace('rep', ''),
+                type: type,
+                readNum: readNum,
+            ],
+            fastqs
+        ]
     }
-
     ANALYZE_READS(ch_samples)
 }
 ```
@@ -707,13 +829,13 @@ Remember Channel.fromPath() accepts a _glob_ as input, which means it can accept
 
 _Before_:
 
-```groovy title="main.nf" linenums="26"
+```groovy title="main.nf" linenums="27"
 ch_fastq = Channel.fromFilePairs('data/sampleA_rep1_normal_R{1,2}_001.fastq.gz')
 ```
 
 _After_:
 
-```groovy title="main.nf" linenums="26"
+```groovy title="main.nf" linenums="27"
 ch_fastq = Channel.fromFilePairs('data/*_R{1,2}_001.fastq.gz')
 ```
 
@@ -762,7 +884,7 @@ publishDir "results/${id}", mode: 'copy'
 _After_:
 
 ```groovy title="main.nf" linenums="4"
-publishDir "results/${type}/${id}/${replicate}", mode: 'copy'
+publishDir "results/${meta.type}/${meta.id}/${meta.replicate}", mode: 'copy'
 ```
 
 We have grabbed the metadata from the samples and used it to construct an output directory for each sample.
