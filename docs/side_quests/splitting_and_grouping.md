@@ -1228,31 +1228,17 @@ In this section, you've learned:
 
 In this side quest, you've learned how to split and group data using channels. By modifying the data as it flows through the pipeline, you can construct a pipeline that handles as many samples as possible with no loops or while statements. It gracefully scales to large numbers of samples. Here's what we achieved:
 
-1. **Read in samplesheet with splitCsv**
+1. **Read in samplesheet with splitCsv**: We read in a samplesheet and viewed the contents.
 
-- Samplesheet details here
-- Show with view, then show with view
+2. **Use filter (and/or map) to manipulate into 2 separate channels**: We used `filter` to split the data into two channels based on the `type` field.
 
-2. **Use filter (and/or map) to manipulate into 2 separate channels**
+3. **Join on ID**: We used `join` to join the two channels on the `id` field.
 
-- Use named closure in map here?
-- Show that elements can be in two channels by filtering twice
+4. **Use groupTuple to group up samples by ID**: We used `groupTuple` to group the samples by the `id` field.
 
-3. **Join on ID**
+5. **Combine by intervals**: We used `combine` to combine the two channels on the `interval` field.
 
-- Show that elements can be in two channels by filtering twice
-
-4. **Use groupTuple to group up samples by ID**
-
-- Show that elements can be in two channels by filtering twice
-
-5. **Combine by intervals**
-
-- Show that elements can be in two channels by filtering twice
-
-6. **Group after intervals**
-
-- Show that elements can be in two channels by filtering twice
+6. **Group after intervals**: We used `groupTuple` to group the samples by the `interval` field.
 
 This approach offers several advantages over writing a pipeline as more standard code, such as using for and while loops:
 
@@ -1274,14 +1260,14 @@ By mastering these channel operations, you can build flexible, scalable pipeline
        .splitCsv(header: true)
    ```
 
-2. **Filtering**
+1. **Filtering**
 
    ```nextflow
    // Filter channel based on condition
    channel.filter { it.type == 'tumor' }
    ```
 
-3. **Joining Channels**
+1. **Joining Channels**
 
    ```nextflow
    // Join two channels by key
@@ -1294,14 +1280,14 @@ By mastering these channel operations, you can build flexible, scalable pipeline
         )
    ```
 
-4. **Grouping Data**
+1. **Grouping Data**
 
    ```nextflow
    // Group by the first element in each tuple
    channel.groupTuple()
    ```
 
-5. **Combining Channels**
+1. **Combining Channels**
 
    ```nextflow
    // Combine with Cartesian product
