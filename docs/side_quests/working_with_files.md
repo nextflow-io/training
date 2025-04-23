@@ -978,7 +978,7 @@ These techniques will help you build more efficient and maintainable workflows, 
    myFile = file('path/to/file.txt')
    ```
 
-2. **File Attributes**
+1. **File Attributes**
 
    ```groovy
    // Get file attributes
@@ -988,7 +988,7 @@ These techniques will help you build more efficient and maintainable workflows, 
    println myFile.parent     // path/to
    ```
 
-3. **Channel Creation from Files**
+1. **Channel Creation from Files**
 
    ```groovy
    // Create a channel from a file pattern
@@ -998,7 +998,7 @@ These techniques will help you build more efficient and maintainable workflows, 
    ch_pairs = Channel.fromFilePairs('data/*_R{1,2}_001.fastq.gz')
    ```
 
-4. **Extracting Metadata**
+1. **Extracting Metadata**
 
    ```groovy
    // Extract metadata with tokenize
