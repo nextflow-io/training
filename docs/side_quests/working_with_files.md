@@ -957,28 +957,15 @@ This pattern of keeping metadata explicit and attached to the data (rather than 
 
 In this side quest, you've learned how to work with files in Nextflow, from basic operations to more advanced techniques for handling collections of files. Here's a summary of what we covered:
 
-1. **Basic File Operations**
+1. **Basic File Operations**: We created file objects with `file()` and accessed file attributes like name, path, and extension.
 
-   - Creating file objects with `file()`
-   - Accessing file attributes like name, path, and extension
+2. **Using Channels for File Handling**: We created channels from file patterns with `Channel.fromPath()` and viewed their file attributes with `.view()`.
 
-2. **Using Channels for File Handling**
+3. **Extracting Sample Metadata from Filenames**: We used `tokenize()` to extract sample metadata from filenames and use it in our workflow.
 
-   - Creating channels from file patterns with `Channel.fromPath()`
-   - Viewing channel contents
+4. **Simplifying with Channel.fromFilePairs**: We used `Channel.fromFilePairs()` to automatically pair files with a common prefix and use it in our workflow.
 
-3. **Extracting Sample Metadata from Filenames**
-
-   - Using regular expressions to parse filenames
-
-4. **Simplifying with Channel.fromFilePairs**
-
-   - Automatically pairing files with a common prefix
-   - Customizing sample ID extraction
-
-5. **Using File Operations in Processes**
-   - Handling files within processes
-   - Preserving metadata through the workflow
+5. **Using File Operations in Processes**: We used `publishDir` to organize outputs based on sample metadata and `tuple` to pass metadata alongside data in our workflow.
 
 These techniques will help you build more efficient and maintainable workflows, especially when working with large numbers of files with complex naming conventions.
 
@@ -986,14 +973,14 @@ These techniques will help you build more efficient and maintainable workflows, 
 
 1. **File Object Creation**
 
-   ```nextflow
+   ```groovy
    // Create a file object from a string path
    myFile = file('path/to/file.txt')
    ```
 
 2. **File Attributes**
 
-   ```nextflow
+   ```groovy
    // Get file attributes
    println myFile.name       // file.txt
    println myFile.baseName   // file
@@ -1003,7 +990,7 @@ These techniques will help you build more efficient and maintainable workflows, 
 
 3. **Channel Creation from Files**
 
-   ```nextflow
+   ```groovy
    // Create a channel from a file pattern
    ch_fastq = Channel.fromPath('data/*.fastq.gz')
 
@@ -1013,10 +1000,13 @@ These techniques will help you build more efficient and maintainable workflows, 
 
 4. **Extracting Metadata**
 
-   ```nextflow
-   // Extract metadata with regex
-   def matcher = file.name =~ /(.+)_(rep\d+)_(.+)_(R[12])_001\.fastq\.gz/
-   def sampleId = matcher[0][1]
+   ```groovy
+   // Extract metadata with tokenize
+   def name = file.name.tokenize('_')
+   def sampleId = name[0]
+   def replicate = name[1].replace('rep', '')
+   def type = name[2]
+   def readNum = name[3]
    ```
 
 ## Resources
