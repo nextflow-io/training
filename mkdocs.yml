@@ -39,7 +39,7 @@ nav:
       - side_quests/index.md
       - side_quests/orientation.md
       - side_quests/workflows_of_workflows.md
-      - side_quests/splitting-and-grouping.md
+      - side_quests/splitting_and_grouping.md
       - side_quests/nf-test.md
       - side_quests/nf-core.md
   - Fundamentals Training:
