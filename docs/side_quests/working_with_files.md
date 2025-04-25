@@ -702,7 +702,7 @@ Well done! We have grabbed the metadata from the filenames and used them as valu
 
 ### Takeaway
 
-- `Channel.fromFilePairs()` automatically finds and pairs related files
+- [`Channel.fromFilePairs()` automatically finds and pairs related files](https://www.nextflow.io/docs/latest/reference/channel.html#fromfilepairs)
 - The closure defines how to extract sample IDs from filenames
 - This simplifies handling paired-end reads in your pipeline
 
