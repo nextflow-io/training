@@ -179,7 +179,7 @@ Despite their prevalence in bioinformatics, files are not strings! Nextflow need
 ### Takeaway
 
 - The `file()` method creates a Path object from a string, which Nextflow understands as a file
-- You can access file properties like `name`, `simpleName`, `extension`, and `parent`
+- You can access file properties like `name`, `simpleName`, `extension`, and `parent` [using file attributes](https://www.nextflow.io/docs/latest/working-with-files.html#getting-file-attributes)
 - Using file objects instead of strings allows Nextflow to properly manage files in your workflow
 
 ---
@@ -422,7 +422,7 @@ Launching `main.nf` [gigantic_gauss] DSL2 - revision: a39baabb57
 [[sampleA, rep1, normal, R2, 001], /workspaces/training/side-quests/working_with_files/data/sampleA_rep1_normal_R2_001.fastq.gz]
 ```
 
-Success! Let's break our metadata down into a tuple of values.
+Success! We've broken down our sample information from a single string into a list of strings. We can now handle each part of the sample information separately.
 
 ### 3.3. Flattening the metadata
 
@@ -561,8 +561,8 @@ nextflow run main.nf
 
 Launching `main.nf` [infallible_swartz] DSL2 - revision: 7f4e68c0cb
 
-[[id:sampleA, replicate:1, type:normal, readNum:R2], /Users/adam.talbot/training/side-quests/working_with_files/data/sampleA_rep1_normal_R2_001.fastq.gz]
-[[id:sampleA, replicate:1, type:normal, readNum:R1], /Users/adam.talbot/training/side-quests/working_with_files/data/sampleA_rep1_normal_R1_001.fastq.gz]
+[[id:sampleA, replicate:1, type:normal, readNum:R2], /workspaces/training/side-quests/working_with_files/data/sampleA_rep1_normal_R2_001.fastq.gz]
+[[id:sampleA, replicate:1, type:normal, readNum:R1], /workspaces/training/side-quests/working_with_files/data/sampleA_rep1_normal_R1_001.fastq.gz]
 ```
 
 We have converted our flat list into a map, and now we can refer to each bit of sample data by name instead of by index. This makes our code easier to read and more maintainable.
@@ -695,7 +695,7 @@ nextflow run main.nf
 
 Launching `main.nf` [prickly_stonebraker] DSL2 - revision: f62ab10a3f
 
-[[id:sampleA, replicate:1, type:normal, readNum:R], [/Users/adam.talbot/training/side-quests/working_with_files/data/sampleA_rep1_normal_R1_001.fastq.gz, /Users/adam.talbot/training/side-quests/working_with_files/data/sampleA_rep1_normal_R2_001.fastq.gz]]
+[[id:sampleA, replicate:1, type:normal, readNum:R], [/workspaces/training/side-quests/working_with_files/data/sampleA_rep1_normal_R1_001.fastq.gz, /workspaces/training/side-quests/working_with_files/data/sampleA_rep1_normal_R2_001.fastq.gz]]
 ```
 
 Well done! We have grabbed the metadata from the filenames and used them as values in the tuple.
@@ -746,8 +746,8 @@ process ANALYZE_READS {
     echo "Read 1: ${fastqs[0]}" >> ${meta.id}_stats.txt
     echo "Read 2: ${fastqs[1]}" >> ${meta.id}_stats.txt
     echo "File sizes:" >> ${meta.id}_stats.txt
-    echo "Read 1 size: \$(wc -l < ${fastqs[0]} | awk '{print \$1/4}') reads" >> ${meta.id}_stats.txt
-    echo "Read 2 size: \$(wc -l < ${fastqs[1]} | awk '{print \$1/4}') reads" >> ${meta.id}_stats.txt
+    echo "Read 1 size: \$(gunzip -dc ${fastqs[0]} | wc -l | awk '{print \$1/4}') reads" >> ${meta.id}_stats.txt
+    echo "Read 2 size: \$(gunzip -dc ${fastqs[1]} | wc -l | awk '{print \$1/4}') reads" >> ${meta.id}_stats.txt
     """
 }
 
@@ -764,7 +764,8 @@ Then implement the process in the workflow:
 
 _Before_:
 
-```groovy title="main.nf" linenums="28"
+```groovy title="main.nf" linenums="27"
+    ch_fastq = Channel.fromFilePairs('data/sampleA_rep1_normal_R{1,2}_001.fastq.gz')
     ch_fastq.map { id, fastqs ->
         def (sample, replicate, type, readNum) = id.tokenize('_')
         [
@@ -783,7 +784,8 @@ _Before_:
 
 _After_:
 
-```groovy title="main.nf" linenums="28"
+```groovy title="main.nf" linenums="27"
+    ch_fastq = Channel.fromFilePairs('data/sampleA_rep1_normal_R{1,2}_001.fastq.gz')
     ch_samples = ch_fastq.map { id, fastqs ->
         def (sample, replicate, type, readNum) = id.tokenize('_')
         [
