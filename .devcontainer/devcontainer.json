@@ -13,7 +13,6 @@
         "NXF_HOME": "/workspaces/.nextflow",
         "NXF_EDGE": "0",
         "NXF_VER": "24.10.4",
-        "NXF_OPTS": "'-Djdk.tls.client.protocols=TLSv1.2'"
         // Other env vars
         "HOST_PROJECT_PATH": "/workspaces/training",
         "SHELL": "/bin/bash" // Ush bash
