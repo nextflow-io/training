@@ -53,7 +53,7 @@ cd training
 
 ### Reopen in Container
 
-When prompted by VS Code to "Reopen in Container", click on it. Alternatively:
+If prompted by VS Code to "Reopen in Container", click on it. Alternatively:
 
 - Press F1 (or Ctrl+Shift+P / Cmd+Shift+P on macOS)
 - Type "Dev Containers: Reopen in Container"
