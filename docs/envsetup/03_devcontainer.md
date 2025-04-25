@@ -11,7 +11,7 @@ To use the devcontainer setup, you'll need:
   - [Docker Desktop](https://docs.docker.com/get-docker/) (for Windows/macOS)
   - [Docker Engine](https://docs.docker.com/engine/install/) (for Linux)
   - [Colima](https://github.com/abiosoft/colima) (alternative for macOS)
-- [Docker Buildx](https://docs.docker.com/buildx/working-with-buildx/) (included in Docker Desktop, but may need separate installation with other Docker setups)
+- [Docker Buildx](https://docs.docker.com/build/concepts/overview/#install-buildx) (included in Docker Desktop, but may need separate installation with other Docker setups)
 - [Dev Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) for VS Code
 
 Your Docker installation must be running before you attempt to open the devcontainer.
