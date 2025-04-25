@@ -291,6 +291,9 @@ Parent directory: /workspaces/training/side-quests/working_with_files/data
 
 `Channel.fromPath()` can take a glob pattern as an argument, which will match all files in the directory that match the pattern. Let's grab both of the pair of FASTQs associated with this sample:
 
+!!! note
+A glob pattern is a pattern that matches one or more characters in a string. The `*` wildcard is the most common glob pattern, which will match any character in it's place.
+
 To do this, we replace the full path with a `*` wildcard, which will match any character in it's place. In this case, we will replace the read number from `R1` to `R*`.
 
 _Before_:
