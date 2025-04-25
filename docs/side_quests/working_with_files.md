@@ -756,7 +756,7 @@ workflow {
 
 !!! note
 
-    We are calling our map '`meta`'. This is the first introduction of a concept called `metamaps` which we will cover later!
+    We are calling our map '`meta`'. This is the first introduction of a concept called `metamap` which we will cover later!
 
 ### 5.2. Implement the process in the workflow
 
