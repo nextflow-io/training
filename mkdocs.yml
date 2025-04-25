@@ -9,6 +9,7 @@ nav:
       - envsetup/index.md
       - envsetup/01_setup.md
       - envsetup/02_local.md
+      - envsetup/03_devcontainer.md
   - Hello Nextflow:
       - hello_nextflow/index.md
       - hello_nextflow/00_orientation.md
