@@ -15,6 +15,7 @@ export JAVA_CMD=/opt/conda/bin/java
 
 # Force Java to use TLS 1.2 for outgoing connections to avoid PSK-not-found-errors
 printf "export NXF_OPTS='-Djdk.tls.client.protocols=TLSv1.2'" >> $HOME/.bashrc
+export NXF_OPTS='-Djdk.tls.client.protocols=TLSv1.2'
 
 # Update Nextflow
 nextflow self-update
