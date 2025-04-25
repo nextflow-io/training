@@ -430,7 +430,7 @@ Remember, when using a channel in a process the input is generally a flat tuple.
 
 We can extract the metadata from the filename and create a flat tuple structure in a single map operation.
 
-The line `def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')` splits the filename at each underscore and assigns each part to a separate variable. We then return these variables along with the file object as a single flat list.
+This line of code takes our filename (like "sampleA*rep1_normal_R1_001") and breaks it into separate pieces at each underscore using `tokenize('*')`. Then, through a Groovy feature called "multiple assignment," it automatically assigns each piece to its own variable in one step - the first piece goes to `sample`, the second to `replicate`, and so on. This is much simpler than having to manually extract each piece with separate lines of code. After extracting these pieces, we create a new list containing all these individual metadata elements plus the original file, making it easier to work with each piece of information separately.
 
 _Before_:
 
