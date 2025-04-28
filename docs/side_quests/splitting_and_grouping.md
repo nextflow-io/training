@@ -1252,47 +1252,47 @@ By mastering these channel operations, you can build flexible, scalable pipeline
 
 ### Key Concepts
 
-1. **Reading Samplesheets**
+- **Reading Samplesheets**
 
-   ```nextflow
-   // Read CSV with header
-   Channel.fromPath('samplesheet.csv')
-       .splitCsv(header: true)
-   ```
+  ```nextflow
+  // Read CSV with header
+  Channel.fromPath('samplesheet.csv')
+      .splitCsv(header: true)
+  ```
 
-1. **Filtering**
+- **Filtering**
 
-   ```nextflow
-   // Filter channel based on condition
-   channel.filter { it.type == 'tumor' }
-   ```
+  ```nextflow
+  // Filter channel based on condition
+  channel.filter { it.type == 'tumor' }
+  ```
 
-1. **Joining Channels**
+- **Joining Channels**
 
-   ```nextflow
-   // Join two channels by key
-   tumor_ch.join(normal_ch)
+  ```nextflow
+  // Join two channels by key
+  tumor_ch.join(normal_ch)
 
-   // Extract a key and join by this value
-   tumor_ch.map { [it.patient_id, it] }
-       .join(
-          normal_ch.map { [it.patient_id, it] }
-        )
-   ```
+  // Extract a key and join by this value
+  tumor_ch.map { [it.patient_id, it] }
+      .join(
+         normal_ch.map { [it.patient_id, it] }
+       )
+  ```
 
-1. **Grouping Data**
+- **Grouping Data**
 
-   ```nextflow
-   // Group by the first element in each tuple
-   channel.groupTuple()
-   ```
+  ```nextflow
+  // Group by the first element in each tuple
+  channel.groupTuple()
+  ```
 
-1. **Combining Channels**
+- **Combining Channels**
 
-   ```nextflow
-   // Combine with Cartesian product
-   samples_ch.combine(intervals_ch)
-   ```
+  ```nextflow
+  // Combine with Cartesian product
+  samples_ch.combine(intervals_ch)
+  ```
 
 ## Resources
 
