@@ -196,7 +196,7 @@ Update your `main.nf` file:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="2"
+    ```groovy title="main.nf" linenums="2" hl_lines="2"
     // Reading files with Channel.fromPath
     ch_fastq = Channel.fromPath('data/sampleA_rep1_normal_R1_001.fastq.gz')
     ch_fastq.view { "Found file: $it" }
@@ -211,7 +211,7 @@ Update your `main.nf` file:
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="2"
+    ```groovy title="main.nf" linenums="2" hl_lines="5-8"
     // Create a file object from a string path
     myFile = file('data/sampleA_rep1_normal_R1_001.fastq.gz')
 
@@ -301,13 +301,13 @@ To do this, we replace the full path with a `*` wildcard, which will match any c
 
 === "After"
 
-    ```groovy title="main.nf" linenums="3" hl_lines="1"
+    ```groovy title="main.nf" linenums="3"
     ch_fastq = Channel.fromPath('data/sampleA_rep1_normal_R*_001.fastq.gz')
     ```
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="3" hl_lines="1"
+    ```groovy title="main.nf" linenums="3"
     ch_fastq = Channel.fromPath('data/sampleA_rep1_normal_R1_001.fastq.gz')
     ```
 
@@ -487,7 +487,7 @@ We can do this by using `.replace()` on the replicate string to remove the "rep"
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="4" hl_lines="3"
+    ```groovy title="main.nf" linenums="4" hl_lines="3 5"
     ch_fastq.map { myFile ->
         def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
         [ sample, replicate, type, readNum, myFile ]
@@ -551,7 +551,7 @@ Let's convert our flat list into a map now.
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="4" hl_lines=3
+    ```groovy title="main.nf" linenums="4" hl_lines="3"
     ch_fastq.map { myFile ->
         def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
         [ sample, replicate.replace('rep', ''), type, readNum, myFile ]
@@ -595,18 +595,6 @@ Complete your `main.nf` file with the following (we will comment out the map ope
 
     ```groovy title="main.nf" linenums="3" hl_lines="1"
     ch_fastq = Channel.fromFilePairs('data/sampleA_rep1_normal_R{1,2}_001.fastq.gz')
-    // ch_fastq.map { myFile ->
-    //     def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
-    //     [
-    //         [
-    //             id: sample,
-    //             replicate: replicate.replace('rep', ''),
-    //             type: type,
-    //             readNum: readNum,
-    //         ],
-    //         myFile
-    //     ]
-    // }
     .view()
     ```
 
@@ -653,7 +641,7 @@ We still need the metadata. Our `map` operation from before won't work because i
 
 === "After"
 
-    ```groovy title="main.nf" linenums="3" hl_lines="3-11"
+    ```groovy title="main.nf" linenums="3" hl_lines="2-13"
     ch_fastq = Channel.fromFilePairs('data/sampleA_rep1_normal_R{1,2}_001.fastq.gz')
     ch_fastq.map { id, fastqs ->
         def (sample, replicate, type, readNum) = id.tokenize('_')
@@ -674,18 +662,6 @@ We still need the metadata. Our `map` operation from before won't work because i
 
     ```groovy title="main.nf" linenums="3" hl_lines="3-11"
     ch_fastq = Channel.fromFilePairs('data/sampleA_rep1_normal_R{1,2}_001.fastq.gz')
-    // ch_fastq.map { myFile ->
-    //     def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
-    //     [
-    //         [
-    //             id: sample,
-    //             replicate: replicate.replace('rep', ''),
-    //             type: type,
-    //             readNum: readNum,
-    //         ],
-    //         myFile
-    //     ]
-    // }
     .view()
     ```
 
@@ -835,7 +811,7 @@ Remember Channel.fromPath() accepts a _glob_ as input, which means it can accept
 
 === "After"
 
-    ```groovy title="main.nf" linenums="27" hl_lines="1"
+    ```groovy title="main.nf" linenums="27"
     ch_fastq = Channel.fromFilePairs('data/*_R{1,2}_001.fastq.gz')
     ```
 
@@ -883,7 +859,7 @@ Since we have access to the sample metadata, we can use it to make the output fi
 
 === "After"
 
-    ```groovy title="main.nf" linenums="4" hl_lines="1"
+    ```groovy title="main.nf" linenums="4"
     publishDir "results/${meta.type}/${meta.id}/${meta.replicate}", mode: 'copy'
     ```
 
