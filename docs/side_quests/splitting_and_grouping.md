@@ -81,7 +81,7 @@ workflow {
 
     Throughout this tutorial, we'll use the `ch_` prefix for all channel variables to clearly indicate they are Nextflow channels.
 
-=== "After"
+=== "After" hl_lines="2-3"
 
     ```groovy title="main.nf" linenums="2"
     ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
@@ -148,7 +148,7 @@ We now have a channel of maps, each representing a row from the samplesheet. Nex
 
 We can use the [`filter` operator](https://www.nextflow.io/docs/latest/operator.html#filter) to filter the data based on a condition. Let's say we only want to process normal samples. We can do this by filtering the data based on the `type` field. Let's insert this before the `view` operator.
 
-=== "After"
+=== "After" hl_lines="3"
 
     ```groovy title="main.nf" linenums="2"
     ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
@@ -194,7 +194,7 @@ While useful, we are discarding the tumor samples. Instead, let's rewrite our pi
 
 === "After"
 
-    ```groovy title="main.nf" linenums="2"
+    ```groovy title="main.nf" linenums="2" hl_lines="3 5"
     ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
                         .splitCsv(header: true)
     ch_normal_samples = ch_samplesheet
@@ -232,7 +232,7 @@ Success! We have filtered the data to only include normal samples. Note that we 
 
 === "After"
 
-    ```groovy title="main.nf" linenums="2"
+    ```groovy title="main.nf" linenums="2" hl_lines="5-8"
     ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
                         .splitCsv(header: true)
     ch_normal_samples = ch_samplesheet
@@ -288,7 +288,7 @@ We've managed to separate out the normal and tumor samples into two different ch
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="2"
+    ```groovy title="main.nf" linenums="2" hl_lines="7"
     ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
                         .splitCsv(header: true)
     ch_normal_samples = ch_samplesheet
@@ -359,7 +359,7 @@ To isolate the `id` field, we can use the [`map` operator](https://www.nextflow.
 
 === "After"
 
-    ```groovy title="main.nf" linenums="2"
+    ```groovy title="main.nf" linenums="2" hl_lines="5 8 9"
     ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
                         .splitCsv(header: true)
     ch_normal_samples = ch_samplesheet
@@ -409,7 +409,7 @@ Once again, we will use `view` to print the joined outputs.
 
 === "After"
 
-    ```groovy title="main.nf" linenums="2"
+    ```groovy title="main.nf" linenums="2" hl_lines="9-11"
     ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
                         .splitCsv(header: true)
     ch_normal_samples = ch_samplesheet
@@ -425,7 +425,7 @@ Once again, we will use `view` to print the joined outputs.
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="2"
+    ```groovy title="main.nf" linenums="2" hl_lines="9-10"
     ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
                         .splitCsv(header: true)
     ch_normal_samples = ch_samplesheet
@@ -482,7 +482,7 @@ Let's start by creating a new joining key. We can do this in the same way as bef
 
 === "After"
 
-    ```groovy title="main.nf" linenums="4"
+    ```groovy title="main.nf" linenums="4" hl_lines="3-7 10-14"
     ch_normal_samples = ch_samplesheet
                         .filter { sample -> sample.type == 'normal' }
                         .map { sample -> [
@@ -539,7 +539,7 @@ The `subMap` method takes a map and returns a new map with only the key-value pa
 
 === "After"
 
-    ```groovy title="main.nf" linenums="4"
+    ```groovy title="main.nf" linenums="4" hl_lines="4 11"
     ch_normal_samples = ch_samplesheet
                         .filter { sample -> sample.type == 'normal' }
                         .map { sample -> [
@@ -558,7 +558,7 @@ The `subMap` method takes a map and returns a new map with only the key-value pa
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="4"
+    ```groovy title="main.nf" linenums="4" hl_lines="4 11"
     ch_normal_samples = ch_samplesheet
                         .filter { sample -> sample.type == 'normal' }
                         .map { sample -> [
@@ -600,7 +600,7 @@ To do so, first we define the closure as a new variable:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="2"
+    ```groovy title="main.nf" linenums="2" hl_lines="4"
     ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
                         .splitCsv(header: true)
 
@@ -621,7 +621,7 @@ We have taken the map we used previously and defined it as a named variable we c
 
 === "After"
 
-    ```groovy title="main.nf" linenums="7"
+    ```groovy title="main.nf" linenums="7" hl_lines="3 7"
     ch_normal_samples = ch_samplesheet
                         .filter { sample -> sample.type == 'normal' }
                         .map ( getSampleIdAndReplicate )
@@ -701,7 +701,7 @@ Since the `id` and `repeat` fields are available in the grouping key, let's remo
 
 === "After"
 
-    ```groovy title="main.nf" linenums="5"
+    ```groovy title="main.nf" linenums="5" hl_lines="2-5"
     getSampleIdAndReplicate = { sample ->
                                   [
                                     sample.subMap(['id', 'repeat']),
@@ -760,7 +760,7 @@ Let's start by creating a channel of intervals. To keep life simple, we will jus
 
 === "After"
 
-    ```groovy title="main.nf" linenums="21"
+    ```groovy title="main.nf" linenums="21" hl_lines="3"
                         .join(ch_tumor_samples)
 
     ch_intervals = Channel.of('chr1', 'chr2', 'chr3')
@@ -777,7 +777,7 @@ Now remember, we want to repeat each sample for each interval. This is sometimes
 
 === "After"
 
-    ```groovy title="main.nf" linenums="23"
+    ```groovy title="main.nf" linenums="23" hl_lines="3-4"
     ch_intervals = Channel.of('chr1', 'chr2', 'chr3')
 
     ch_combined_samples = ch_joined_samples.combine(ch_intervals)
@@ -823,24 +823,23 @@ We can use the `map` operator to tidy and refactor our sample data so it's easie
 
 === "After"
 
-    ```groovy title="main.nf" linenums="25"
+    ```groovy title="main.nf" linenums="25" hl_lines="2-9"
     ch_combined_samples = ch_joined_samples.combine(ch_intervals)
-                        .map { grouping_key, normal, tumor, interval ->
-                            [
-                                grouping_key + [interval: interval],
-                                normal,
-                                tumor
-                            ]
-
-                        }
-                        .view()
+                          .map { grouping_key, normal, tumor, interval ->
+                              [
+                                  grouping_key + [interval: interval],
+                                  normal,
+                                  tumor
+                              ]
+                          }
+                          .view()
     ```
 
 === "Before"
 
     ```groovy title="main.nf" linenums="25"
     ch_combined_samples = ch_joined_samples.combine(ch_intervals)
-                        .view()
+                          .view()
     ```
 
 Wait? What did we do here? Let's go over it piece by piece.
@@ -926,16 +925,15 @@ We can reuse the `subMap` method from before to isolate our `id` and `interval` 
 
 === "After"
 
-    ```groovy title="main.nf" linenums="25"
+    ```groovy title="main.nf" linenums="25" hl_lines="10-17"
     ch_combined_samples = ch_joined_samples.combine(ch_intervals)
-                        .map { grouping_key, normal, tumor, interval ->
-                            [
-                                grouping_key + [interval: interval],
-                                normal,
-                                tumor
-                            ]
-
-                        }
+                          .map { grouping_key, normal, tumor, interval ->
+                              [
+                                  grouping_key + [interval: interval],
+                                  normal,
+                                  tumor
+                              ]
+                          }
 
     ch_grouped_samples = ch_combined_samples.map { grouping_key, normal, tumor ->
                             [
@@ -943,9 +941,8 @@ We can reuse the `subMap` method from before to isolate our `id` and `interval` 
                                 normal,
                                 tumor
                             ]
-
-                        }
-                        .view()
+                          }
+                          .view()
     ```
 
 === "Before"
@@ -998,31 +995,29 @@ Let's now group the samples by this new grouping element, using the [`groupTuple
 
 === "After"
 
-    ```groovy title="main.nf" linenums="35"
+    ```groovy title="main.nf" linenums="35" hl_lines="8"
     ch_grouped_samples = ch_combined_samples.map { grouping_key, normal, tumor ->
-                            [
-                                grouping_key.subMap('id', 'interval'),
-                                normal,
-                                tumor
-                            ]
-
-                        }
-                        .groupTuple()
-                        .view()
-    ```
+                              [
+                                  grouping_key.subMap('id', 'interval'),
+                                  normal,
+                                  tumor
+                              ]
+                          }
+                          .groupTuple()
+                          .view()
+      ```
 
 === "Before"
 
     ```groovy title="main.nf" linenums="35"
     ch_grouped_samples = ch_combined_samples.map { grouping_key, normal, tumor ->
-                            [
-                                grouping_key.subMap('id', 'interval'),
-                                normal,
-                                tumor
-                            ]
-
-                        }
-                        .view()
+                              [
+                                  grouping_key.subMap('id', 'interval'),
+                                  normal,
+                                  tumor
+                              ]
+                          }
+                          .view()
     ```
 
 Simple, huh? We just added a single line of code. Let's see what happens when we run it:
@@ -1095,7 +1090,7 @@ Let's append our map to the end of our pipeline and show the resulting data stru
 
 === "After"
 
-    ```groovy title="main.nf" linenums="42"
+    ```groovy title="main.nf" linenums="42" hl_lines="2-8"
     .groupTuple()
     .map { sample_info, normal, tumor ->
         [
@@ -1151,7 +1146,7 @@ If we parse the data right at the start of our pipeline to _only_ include the `b
 
 === "After"
 
-    ```groovy title="main.nf" linenums="5"
+    ```groovy title="main.nf" linenums="5" hl_lines="4"
     getSampleIdAndReplicate = { sample ->
                                   [
                                     sample.subMap(['id', 'repeat']),
@@ -1182,7 +1177,7 @@ A reminder, this will select only the BAM files once we have separated the chann
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="43"
+    ```groovy title="main.nf" linenums="43" hl_lines="2-8"
     .groupTuple()
     .map { sample_info, normal, tumor ->
         [
