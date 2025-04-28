@@ -977,43 +977,43 @@ These techniques will help you build more efficient and maintainable workflows, 
 
 ### Key Concepts
 
-1. **File Object Creation**
+- **File Object Creation**
 
-   ```groovy
-   // Create a file object from a string path
-   myFile = file('path/to/file.txt')
-   ```
+  ```groovy
+  // Create a file object from a string path
+  myFile = file('path/to/file.txt')
+  ```
 
-1. **File Attributes**
+- **File Attributes**
 
-   ```groovy
-   // Get file attributes
-   println myFile.name       // file.txt
-   println myFile.baseName   // file
-   println myFile.extension  // txt
-   println myFile.parent     // path/to
-   ```
+  ```groovy
+  // Get file attributes
+  println myFile.name       // file.txt
+  println myFile.baseName   // file
+  println myFile.extension  // txt
+  println myFile.parent     // path/to
+  ```
 
-1. **Channel Creation from Files**
+- **Channel Creation from Files**
 
-   ```groovy
-   // Create a channel from a file pattern
-   ch_fastq = Channel.fromPath('data/*.fastq.gz')
+  ```groovy
+  // Create a channel from a file pattern
+  ch_fastq = Channel.fromPath('data/*.fastq.gz')
 
-   // Create a channel from paired files
-   ch_pairs = Channel.fromFilePairs('data/*_R{1,2}_001.fastq.gz')
-   ```
+  // Create a channel from paired files
+  ch_pairs = Channel.fromFilePairs('data/*_R{1,2}_001.fastq.gz')
+  ```
 
-1. **Extracting Metadata**
+- **Extracting Metadata**
 
-   ```groovy
-   // Extract metadata with tokenize
-   def name = file.name.tokenize('_')
-   def sampleId = name[0]
-   def replicate = name[1].replace('rep', '')
-   def type = name[2]
-   def readNum = name[3]
-   ```
+  ```groovy
+  // Extract metadata with tokenize
+  def name = file.name.tokenize('_')
+  def sampleId = name[0]
+  def replicate = name[1].replace('rep', '')
+  def type = name[2]
+  def readNum = name[3]
+  ```
 
 ## Resources
 
