@@ -81,9 +81,9 @@ workflow {
 
     Throughout this tutorial, we'll use the `ch_` prefix for all channel variables to clearly indicate they are Nextflow channels.
 
-=== "After" hl_lines="2-3"
+=== "After"
 
-    ```groovy title="main.nf" linenums="2"
+    ```groovy title="main.nf" linenums="2" hl_lines="2-3"
     ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
                         .splitCsv(header: true)
                         .view()
@@ -148,9 +148,9 @@ We now have a channel of maps, each representing a row from the samplesheet. Nex
 
 We can use the [`filter` operator](https://www.nextflow.io/docs/latest/operator.html#filter) to filter the data based on a condition. Let's say we only want to process normal samples. We can do this by filtering the data based on the `type` field. Let's insert this before the `view` operator.
 
-=== "After" hl_lines="3"
+=== "After"
 
-    ```groovy title="main.nf" linenums="2"
+    ```groovy title="main.nf" linenums="2" hl_lines="3"
     ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
                         .splitCsv(header: true)
                         .filter { sample -> sample.type == 'normal' }
