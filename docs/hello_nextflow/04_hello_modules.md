@@ -142,20 +142,20 @@ include { <MODULE_NAME> } from '<path_to_module>'
 
 Let's insert that above the workflow block and fill it out appropriately.
 
-_Before:_
+=== "After"
 
-```groovy title="hello-modules.nf" linenums="50"
-workflow {
-```
+    ```groovy title="hello-modules.nf" linenums="50" hl_lines="1 2"
+    // Include modules
+    include { sayHello } from './modules/sayHello.nf'
 
-_After:_
+    workflow {
+    ```
 
-```groovy title="hello-modules.nf" linenums="50"
-// Include modules
-include { sayHello } from './modules/sayHello.nf'
+=== "Before"
 
-workflow {
-```
+    ```groovy title="hello-modules.nf" linenums="50"
+    workflow {
+    ```
 
 ### 2.4. Run the workflow to verify that it does the same thing as before
 
@@ -235,24 +235,24 @@ Once that is done, delete the process definition from the workflow file, but mak
 
 Insert the import declaration above the workflow block and fill it out appropriately.
 
-_Before:_
+=== "After"
 
-```groovy title="hello-modules.nf" linenums="31"
-// Include modules
-include { sayHello } from './modules/sayHello.nf'
+    ```groovy title="hello-modules.nf" linenums="31" hl_lines="3"
+    // Include modules
+    include { sayHello } from './modules/sayHello.nf'
+    include { convertToUpper } from './modules/convertToUpper.nf'
 
-workflow {
-```
+    workflow {
+    ```
 
-_After:_
+=== "Before"
 
-```groovy title="hello-modules.nf" linenums="31"
-// Include modules
-include { sayHello } from './modules/sayHello.nf'
-include { convertToUpper } from './modules/convertToUpper.nf'
+    ```groovy title="hello-modules.nf" linenums="31"
+    // Include modules
+    include { sayHello } from './modules/sayHello.nf'
 
-workflow {
-```
+    workflow {
+    ```
 
 ### 3.4. Run the workflow to verify that it does the same thing as before
 
@@ -325,26 +325,26 @@ Once that is done, delete the process definition from the workflow file, but mak
 
 Insert the import declaration above the workflow block and fill it out appropriately.
 
-_Before:_
+=== "After"
 
-```groovy title="hello-modules.nf" linenums="9"
-// Include modules
-include { sayHello } from './modules/sayHello.nf'
-include { convertToUpper } from './modules/convertToUpper.nf'
+    ```groovy title="hello-modules.nf" linenums="9" hl_lines="4"
+    // Include modules
+    include { sayHello } from './modules/sayHello.nf'
+    include { convertToUpper } from './modules/convertToUpper.nf'
+    include { collectGreetings } from './modules/collectGreetings.nf'
 
-workflow {
-```
+    workflow {
+    ```
 
-_After:_
+=== "Before"
 
-```groovy title="hello-modules.nf" linenums="9"
-// Include modules
-include { sayHello } from './modules/sayHello.nf'
-include { convertToUpper } from './modules/convertToUpper.nf'
-include { collectGreetings } from './modules/collectGreetings.nf'
+    ```groovy title="hello-modules.nf" linenums="9"
+    // Include modules
+    include { sayHello } from './modules/sayHello.nf'
+    include { convertToUpper } from './modules/convertToUpper.nf'
 
-workflow {
-```
+    workflow {
+    ```
 
 ### 4.4. Run the workflow to verify that it does the same thing as before
 

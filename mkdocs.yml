@@ -9,6 +9,7 @@ nav:
       - envsetup/index.md
       - envsetup/01_setup.md
       - envsetup/02_local.md
+      - envsetup/03_devcontainer.md
   - Hello Nextflow:
       - hello_nextflow/index.md
       - hello_nextflow/00_orientation.md
@@ -212,6 +213,10 @@ plugins:
           default: false
           locale: fr
           name: Français
+        - build: true
+          default: false
+          locale: it
+          name: Italiano
       reconfigure_material: true
       reconfigure_search: true
   - search
