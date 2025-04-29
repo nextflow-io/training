@@ -511,7 +511,7 @@ _After:_
 
 ### 2.3. Provide inputs using the setup method
 
-We insert a `setup` block before the `when` block, where we can trigger a run of the `SAMTOOLS_INDEX` process on one of our original input files.
+We insert a `setup` block before the `when` block, where we can trigger a run of the `SAMTOOLS_INDEX` process on one of our original input files. Also, remember as before to change the test name to something meaningful.
 
 _Before:_
 
@@ -706,7 +706,7 @@ SUCCESS: Executed 1 tests in 19.382s
 Add similar tests for the mother and father samples:
 
 ```groovy title="modules/gatk/haplotypecaller/tests/main.nf.test" linenums="43"
-    test("reads_mother [bam]") {
+    test("Should call mother's haplotype correctly") {
 
         setup {
             run("SAMTOOLS_INDEX") {
@@ -1072,6 +1072,21 @@ nextflow_pipeline {
 }
 ```
 
+Just correct the name to something meaningful (you'll see why this is useful shortly).
+
+_Before:_
+
+```groovy title="tests/nf-test.config" linenums="1" hl_lines="1"
+    test("Should run without failures") {
+```
+
+_After:_
+
+```groovy title="nf-test.config" linenums="1" hl_lines="1"
+    test("Should run the pipeline without failures") {
+```
+
+
 !!!note
 
     In this case the test file can stay where `nf-test` created it.
@@ -1197,7 +1212,7 @@ Test Process SAMTOOLS_INDEX
 
 Test Workflow genomics-4.nf
 
-  Test [c7dbcaca] 'Should run without failures' PASSED (47.92s)
+  Test [c7dbcaca] 'Should run the pipeline without failures' PASSED (47.92s)
 
 
 SUCCESS: Executed 8 tests in 167.772s
