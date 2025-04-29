@@ -1086,7 +1086,6 @@ _After:_
     test("Should run the pipeline without failures") {
 ```
 
-
 !!!note
 
     In this case the test file can stay where `nf-test` created it.
