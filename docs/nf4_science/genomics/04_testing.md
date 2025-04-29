@@ -1076,13 +1076,13 @@ Just correct the name to something meaningful (you'll see why this is useful sho
 
 _Before:_
 
-```groovy title="tests/nf-test.config" linenums="1" hl_lines="1"
+```groovy title="tests/genomics-4.nf.test" linenums="1" hl_lines="1"
     test("Should run without failures") {
 ```
 
 _After:_
 
-```groovy title="nf-test.config" linenums="1" hl_lines="1"
+```groovy title="tests/genomics-4.nf.test" linenums="1" hl_lines="1"
     test("Should run the pipeline without failures") {
 ```
 
@@ -1155,7 +1155,7 @@ nf-test has one more trick up it's sleeve. We can run all the tests at once! Mod
 
 _Before:_
 
-```groovy title="tests/nf-test.config" linenums="1" hl_lines="3"
+```groovy title="nf-test.config" linenums="1" hl_lines="3"
 config {
 
     testsDir "tests"
