@@ -256,7 +256,7 @@ Make sure you add a backslash (`\`) at the end of the previous line when you add
 
 _Before:_
 
-```groovy title="genomics-2.nf" linenums="56"
+```groovy title="genomics-2.nf" linenums="56" hl_lines="4"
     """
     gatk HaplotypeCaller \
         -R ${ref_fasta} \
@@ -268,7 +268,7 @@ _Before:_
 
 _After:_
 
-```groovy title="genomics-2.nf" linenums="56"
+```groovy title="genomics-2.nf" linenums="56" hl_lines="4 6"
     """
     gatk HaplotypeCaller \
         -R ${ref_fasta} \
@@ -580,7 +580,7 @@ Great, let's add our string manipulation line there then, and update the `gatk G
 
 _Before:_
 
-```groovy title="genomics-2.nf" linenums="87"
+```groovy title="genomics-2.nf" linenums="87"  hl_lines="2"
     script:
     """
     gatk GenomicsDBImport \
@@ -592,7 +592,7 @@ _Before:_
 
 _After:_
 
-```groovy title="genomics-2.nf" linenums="87"
+```groovy title="genomics-2.nf" linenums="87"  hl_lines="2"
     script:
     def gvcfs_line = all_gvcfs.collect { gvcf -> "-V ${gvcf}" }.join(' ')
     """
@@ -704,7 +704,7 @@ _Before:_
 
 _After:_
 
-```groovy title="genomics-2.nf" linenums="89"
+```groovy title="genomics-2.nf" linenums="89"  hl_lines="6 7 8 9 10"
     """
     gatk GenomicsDBImport \
         ${gvcfs_line} \
@@ -737,7 +737,7 @@ input:
 
 _After:_
 
-```groovy title="genomics-2.nf" linenums="78"
+```groovy title="genomics-2.nf" linenums="78"  hl_lines="5 6 7"
 input:
     path all_gvcfs
     path all_idxs

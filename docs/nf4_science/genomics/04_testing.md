@@ -170,7 +170,7 @@ Now we can simplify the `script` section of the test file to a relative path:
 
 _Before:_
 
-```groovy title="modules/samtools/index/tests/main.nf.test" linenums="3"
+```groovy title="modules/samtools/index/tests/main.nf.test" linenums="3" hl_lines="2"
 name "Test Process SAMTOOLS_INDEX"
 script "modules/samtools/index/main.nf"
 process "SAMTOOLS_INDEX"
@@ -178,7 +178,7 @@ process "SAMTOOLS_INDEX"
 
 _After:_
 
-```groovy title="modules/samtools/index/tests/main.nf.test" linenums="3"
+```groovy title="modules/samtools/index/tests/main.nf.test" linenums="3" hl_lines="2"
 name "Test Process SAMTOOLS_INDEX"
 script "../main.nf"
 process "SAMTOOLS_INDEX"
@@ -495,7 +495,7 @@ Finally, don't forget to update the script path:
 
 _Before:_
 
-```groovy title="modules/gatk/haplotypecaller/tests/main.nf.test" linenums="3"
+```groovy title="modules/gatk/haplotypecaller/tests/main.nf.test" linenums="3" hl_lines="2"
     name "Test Process GATK_HAPLOTYPECALLER"
     script "modules/gatk/haplotypecaller/main.nf"
     process "GATK_HAPLOTYPECALLER"
@@ -503,7 +503,7 @@ _Before:_
 
 _After:_
 
-```groovy title="modules/gatk/haplotypecaller/tests/main.nf.test" linenums="3"
+```groovy title="modules/gatk/haplotypecaller/tests/main.nf.test" linenums="3" hl_lines="2"
     name "Test Process GATK_HAPLOTYPECALLER"
     script "../main.nf"
     process "GATK_HAPLOTYPECALLER"
@@ -515,7 +515,7 @@ We insert a `setup` block before the `when` block, where we can trigger a run of
 
 _Before:_
 
-```groovy title="modules/gatk/haplotypecaller/tests/main.nf.test" linenums="7"
+```groovy title="modules/gatk/haplotypecaller/tests/main.nf.test" linenums="7"  hl_lines="1"
 test("Should run without failures") {
 
     when {
@@ -523,7 +523,7 @@ test("Should run without failures") {
 
 _After:_
 
-```groovy title="modules/gatk/haplotypecaller/tests/main.nf.test" linenums="7"
+```groovy title="modules/gatk/haplotypecaller/tests/main.nf.test" linenums="7" hl_lines="1 2 3 4 5 6 7 8 9 10 11 12"
     test("Should call son's haplotype correctly") {
 
         setup {
@@ -654,7 +654,7 @@ In practice, we replace the second assertion in the `then` block as follows:
 
 _Before:_
 
-```groovy title="modules/gatk/haplotypecaller/tests/main.nf.test" linenums="35"
+```groovy title="modules/gatk/haplotypecaller/tests/main.nf.test" linenums="35" hl_lines="2"
 then {
     assert process.success
     assert snapshot(process.out).match()
@@ -663,7 +663,7 @@ then {
 
 _After:_
 
-```console title="modules/gatk/haplotypecaller/tests/main.nf.test" linenums="35"
+```console title="modules/gatk/haplotypecaller/tests/main.nf.test" linenums="35" hl_lines="2 3"
         then {
             assert process.success
             assert path(process.out[0][0]).readLines().contains('#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	reads_son')
@@ -919,7 +919,7 @@ And don't forget to update the script path:
 
 _Before:_
 
-```groovy title="modules/gatk/jointgenotyping/tests/main.nf.test" linenums="3"
+```groovy title="modules/gatk/jointgenotyping/tests/main.nf.test" linenums="3" hl_lines="2"
 name "Test Process GATK_JOINTGENOTYPING"
 script "modules/gatk/jointgenotyping/main.nf"
 process "GATK_JOINTGENOTYPING"
@@ -927,7 +927,7 @@ process "GATK_JOINTGENOTYPING"
 
 _After:_
 
-```groovy title="modules/gatk/jointgenotyping/tests/main.nf.test" linenums="3"
+```groovy title="modules/gatk/jointgenotyping/tests/main.nf.test" linenums="3" hl_lines="2"
 name "Test Process GATK_JOINTGENOTYPING"
 script "../main.nf"
 process "GATK_JOINTGENOTYPING"
@@ -1140,7 +1140,7 @@ nf-test has one more trick up it's sleeve. We can run all the tests at once! Mod
 
 _Before:_
 
-```groovy title="tests/nf-test.config" linenums="1"
+```groovy title="tests/nf-test.config" linenums="1" hl_lines="3"
 config {
 
     testsDir "tests"
@@ -1153,7 +1153,7 @@ config {
 
 _After:_
 
-```groovy title="nf-test.config" linenums="1"
+```groovy title="nf-test.config" linenums="1" hl_lines="3"
 config {
 
     testsDir "."
