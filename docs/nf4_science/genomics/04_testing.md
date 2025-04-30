@@ -654,7 +654,7 @@ In practice, we replace the second assertion in the `then` block as follows:
 
 _Before:_
 
-```groovy title="modules/gatk/haplotypecaller/tests/main.nf.test" linenums="35" hl_lines="2"
+```groovy title="modules/gatk/haplotypecaller/tests/main.nf.test" linenums="35" hl_lines="3"
 then {
     assert process.success
     assert snapshot(process.out).match()
@@ -663,7 +663,7 @@ then {
 
 _After:_
 
-```console title="modules/gatk/haplotypecaller/tests/main.nf.test" linenums="35" hl_lines="2 3"
+```console title="modules/gatk/haplotypecaller/tests/main.nf.test" linenums="35" hl_lines="3 4"
         then {
             assert process.success
             assert path(process.out[0][0]).readLines().contains('#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	reads_son')
