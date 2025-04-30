@@ -3549,8 +3549,8 @@ It should look very familiar, but feel free to run it if you want to satisfy you
 <span class="normal"><a href="#__codelineno-14-62">62</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-14-56" name="__codelineno-14-56"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
 <a id="__codelineno-14-57" name="__codelineno-14-57"></a><span class="s2">    gatk HaplotypeCaller \</span>
 <a id="__codelineno-14-58" name="__codelineno-14-58"></a><span class="s2">        -R ${ref_fasta} \</span>
-<a id="__codelineno-14-59" name="__codelineno-14-59"></a><span class="s2">        -I ${input_bam} \</span>
-<a id="__codelineno-14-60" name="__codelineno-14-60"></a><span class="s2">        -O ${input_bam}.vcf \</span>
+<a id="__codelineno-14-59" name="__codelineno-14-59"></a><span class="hll"><span class="s2">        -I ${input_bam} \</span>
+</span><a id="__codelineno-14-60" name="__codelineno-14-60"></a><span class="s2">        -O ${input_bam}.vcf \</span>
 <a id="__codelineno-14-61" name="__codelineno-14-61"></a><span class="s2">        -L ${interval_list}</span>
 <a id="__codelineno-14-62" name="__codelineno-14-62"></a><span class="s2">    &quot;&quot;&quot;</span>
 </code></pre></div></td></tr></table></div>
@@ -3565,10 +3565,10 @@ It should look very familiar, but feel free to run it if you want to satisfy you
 <span class="normal"><a href="#__codelineno-15-63">63</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-15-56" name="__codelineno-15-56"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
 <a id="__codelineno-15-57" name="__codelineno-15-57"></a><span class="s2">    gatk HaplotypeCaller \</span>
 <a id="__codelineno-15-58" name="__codelineno-15-58"></a><span class="s2">        -R ${ref_fasta} \</span>
-<a id="__codelineno-15-59" name="__codelineno-15-59"></a><span class="s2">        -I ${input_bam} \</span>
-<a id="__codelineno-15-60" name="__codelineno-15-60"></a><span class="s2">        -O ${input_bam}.g.vcf \</span>
-<a id="__codelineno-15-61" name="__codelineno-15-61"></a><span class="s2">        -L ${interval_list} \</span>
-<a id="__codelineno-15-62" name="__codelineno-15-62"></a><span class="s2">        -ERC GVCF</span>
+<a id="__codelineno-15-59" name="__codelineno-15-59"></a><span class="hll"><span class="s2">        -I ${input_bam} \</span>
+</span><a id="__codelineno-15-60" name="__codelineno-15-60"></a><span class="s2">        -O ${input_bam}.g.vcf \</span>
+<a id="__codelineno-15-61" name="__codelineno-15-61"></a><span class="hll"><span class="s2">        -L ${interval_list} \</span>
+</span><a id="__codelineno-15-62" name="__codelineno-15-62"></a><span class="s2">        -ERC GVCF</span>
 <a id="__codelineno-15-63" name="__codelineno-15-63"></a><span class="s2">    &quot;&quot;&quot;</span>
 </code></pre></div></td></tr></table></div>
 <p>And that's all it takes to switch HaplotypeCaller to generating GVCFs instead of VCFs, right?</p>
@@ -3831,8 +3831,8 @@ That is because Nextflow must see them as file paths in order to stage the files
 <span class="normal"><a href="#__codelineno-30-91">91</a></span>
 <span class="normal"><a href="#__codelineno-30-92">92</a></span>
 <span class="normal"><a href="#__codelineno-30-93">93</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-30-87" name="__codelineno-30-87"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-30-88" name="__codelineno-30-88"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-30-89" name="__codelineno-30-89"></a><span class="s2">    gatk GenomicsDBImport \</span>
+<a id="__codelineno-30-88" name="__codelineno-30-88"></a><span class="hll"><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
+</span><a id="__codelineno-30-89" name="__codelineno-30-89"></a><span class="s2">    gatk GenomicsDBImport \</span>
 <a id="__codelineno-30-90" name="__codelineno-30-90"></a><span class="s2">        -V ${all_gvcfs} \</span>
 <a id="__codelineno-30-91" name="__codelineno-30-91"></a><span class="s2">        -L ${interval_list} \</span>
 <a id="__codelineno-30-92" name="__codelineno-30-92"></a><span class="s2">        --genomicsdb-workspace-path ${cohort_name}_gdb</span>
@@ -3847,8 +3847,8 @@ That is because Nextflow must see them as file paths in order to stage the files
 <span class="normal"><a href="#__codelineno-31-92">92</a></span>
 <span class="normal"><a href="#__codelineno-31-93">93</a></span>
 <span class="normal"><a href="#__codelineno-31-94">94</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-31-87" name="__codelineno-31-87"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-31-88" name="__codelineno-31-88"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">gvcfs_line</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">all_gvcfs</span><span class="o">.</span><span class="na">collect</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">gvcf</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;-V ${gvcf}&quot;</span><span class="w"> </span><span class="o">}.</span><span class="na">join</span><span class="o">(</span><span class="s1">&#39; &#39;</span><span class="o">)</span>
-<a id="__codelineno-31-89" name="__codelineno-31-89"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
+<a id="__codelineno-31-88" name="__codelineno-31-88"></a><span class="hll"><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">gvcfs_line</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">all_gvcfs</span><span class="o">.</span><span class="na">collect</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">gvcf</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">&quot;-V ${gvcf}&quot;</span><span class="w"> </span><span class="o">}.</span><span class="na">join</span><span class="o">(</span><span class="s1">&#39; &#39;</span><span class="o">)</span>
+</span><a id="__codelineno-31-89" name="__codelineno-31-89"></a><span class="w">    </span><span class="s2">&quot;&quot;&quot;</span>
 <a id="__codelineno-31-90" name="__codelineno-31-90"></a><span class="s2">    gatk GenomicsDBImport \</span>
 <a id="__codelineno-31-91" name="__codelineno-31-91"></a><span class="s2">        ${gvcfs_line} \</span>
 <a id="__codelineno-31-92" name="__codelineno-31-92"></a><span class="s2">        -L ${interval_list} \</span>
@@ -3942,12 +3942,12 @@ You also know how to construct a command line to provide inputs to a given tool 
 <a id="__codelineno-38-91" name="__codelineno-38-91"></a><span class="s2">        ${gvcfs_line} \</span>
 <a id="__codelineno-38-92" name="__codelineno-38-92"></a><span class="s2">        -L ${interval_list} \</span>
 <a id="__codelineno-38-93" name="__codelineno-38-93"></a><span class="s2">        --genomicsdb-workspace-path ${cohort_name}_gdb</span>
-<a id="__codelineno-38-94" name="__codelineno-38-94"></a>
-<a id="__codelineno-38-95" name="__codelineno-38-95"></a><span class="s2">    gatk GenotypeGVCFs \</span>
-<a id="__codelineno-38-96" name="__codelineno-38-96"></a><span class="s2">        -R ${ref_fasta} \</span>
-<a id="__codelineno-38-97" name="__codelineno-38-97"></a><span class="s2">        -V gendb://${cohort_name}_gdb \</span>
-<a id="__codelineno-38-98" name="__codelineno-38-98"></a><span class="s2">        -L ${interval_list} \</span>
-<a id="__codelineno-38-99" name="__codelineno-38-99"></a><span class="s2">        -O ${cohort_name}.joint.vcf</span>
+<a id="__codelineno-38-94" name="__codelineno-38-94"></a><span class="hll">
+</span><a id="__codelineno-38-95" name="__codelineno-38-95"></a><span class="hll"><span class="s2">    gatk GenotypeGVCFs \</span>
+</span><a id="__codelineno-38-96" name="__codelineno-38-96"></a><span class="hll"><span class="s2">        -R ${ref_fasta} \</span>
+</span><a id="__codelineno-38-97" name="__codelineno-38-97"></a><span class="hll"><span class="s2">        -V gendb://${cohort_name}_gdb \</span>
+</span><a id="__codelineno-38-98" name="__codelineno-38-98"></a><span class="hll"><span class="s2">        -L ${interval_list} \</span>
+</span><a id="__codelineno-38-99" name="__codelineno-38-99"></a><span class="s2">        -O ${cohort_name}.joint.vcf</span>
 <a id="__codelineno-38-100" name="__codelineno-38-100"></a><span class="s2">    &quot;&quot;&quot;</span>
 </code></pre></div></td></tr></table></div>
 <p>The two commands will be run in serial, in the same way that they would if we were to run them manually in the terminal.</p>
@@ -3976,10 +3976,10 @@ You also know how to construct a command line to provide inputs to a given tool 
 <a id="__codelineno-40-79" name="__codelineno-40-79"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="n">all_gvcfs</span>
 <a id="__codelineno-40-80" name="__codelineno-40-80"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="n">all_idxs</span>
 <a id="__codelineno-40-81" name="__codelineno-40-81"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="n">interval_list</span>
-<a id="__codelineno-40-82" name="__codelineno-40-82"></a><span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="n">cohort_name</span>
-<a id="__codelineno-40-83" name="__codelineno-40-83"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="n">ref_fasta</span>
-<a id="__codelineno-40-84" name="__codelineno-40-84"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="n">ref_index</span>
-<a id="__codelineno-40-85" name="__codelineno-40-85"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="n">ref_dict</span>
+<a id="__codelineno-40-82" name="__codelineno-40-82"></a><span class="hll"><span class="w">    </span><span class="n">val</span><span class="w"> </span><span class="n">cohort_name</span>
+</span><a id="__codelineno-40-83" name="__codelineno-40-83"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="n">ref_fasta</span>
+</span><a id="__codelineno-40-84" name="__codelineno-40-84"></a><span class="hll"><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="n">ref_index</span>
+</span><a id="__codelineno-40-85" name="__codelineno-40-85"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="n">ref_dict</span>
 </code></pre></div></td></tr></table></div>
 <p>It may seem annoying to type these out, but remember, you only type them once, and then you can run the workflow a million times. Worth it?</p>
 <h3 id="34-update-the-process-output-definition-to-emit-the-vcf-of-cohort-level-variant-calls">3.4. Update the process output definition to emit the VCF of cohort-level variant calls<a class="headerlink" href="#34-update-the-process-output-definition-to-emit-the-vcf-of-cohort-level-variant-calls" title="Permanent link">&para;</a></h3>

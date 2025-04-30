@@ -3437,15 +3437,15 @@
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/samtools/index/tests/main.nf.test</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-3">3</a></span>
 <span class="normal"><a href="#__codelineno-9-4">4</a></span>
 <span class="normal"><a href="#__codelineno-9-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-3" name="__codelineno-9-3"></a><span class="n">name</span><span class="w"> </span><span class="s2">&quot;Test Process SAMTOOLS_INDEX&quot;</span>
-<a id="__codelineno-9-4" name="__codelineno-9-4"></a><span class="n">script</span><span class="w"> </span><span class="s2">&quot;modules/samtools/index/main.nf&quot;</span>
-<a id="__codelineno-9-5" name="__codelineno-9-5"></a><span class="n">process</span><span class="w"> </span><span class="s2">&quot;SAMTOOLS_INDEX&quot;</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4"></a><span class="hll"><span class="n">script</span><span class="w"> </span><span class="s2">&quot;modules/samtools/index/main.nf&quot;</span>
+</span><a id="__codelineno-9-5" name="__codelineno-9-5"></a><span class="n">process</span><span class="w"> </span><span class="s2">&quot;SAMTOOLS_INDEX&quot;</span>
 </code></pre></div></td></tr></table></div>
 <p><em>After:</em></p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/samtools/index/tests/main.nf.test</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-3">3</a></span>
 <span class="normal"><a href="#__codelineno-10-4">4</a></span>
 <span class="normal"><a href="#__codelineno-10-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-3" name="__codelineno-10-3"></a><span class="n">name</span><span class="w"> </span><span class="s2">&quot;Test Process SAMTOOLS_INDEX&quot;</span>
-<a id="__codelineno-10-4" name="__codelineno-10-4"></a><span class="n">script</span><span class="w"> </span><span class="s2">&quot;../main.nf&quot;</span>
-<a id="__codelineno-10-5" name="__codelineno-10-5"></a><span class="n">process</span><span class="w"> </span><span class="s2">&quot;SAMTOOLS_INDEX&quot;</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4"></a><span class="hll"><span class="n">script</span><span class="w"> </span><span class="s2">&quot;../main.nf&quot;</span>
+</span><a id="__codelineno-10-5" name="__codelineno-10-5"></a><span class="n">process</span><span class="w"> </span><span class="s2">&quot;SAMTOOLS_INDEX&quot;</span>
 </code></pre></div></td></tr></table></div>
 <p>This tells the test where to find the module's <code>main.nf</code> file, without having to specify the full path.</p>
 <h3 id="13-provide-test-inputs-for-samtools_index">1.3. Provide test inputs for SAMTOOLS_INDEX<a class="headerlink" href="#13-provide-test-inputs-for-samtools_index" title="Permanent link">&para;</a></h3>
@@ -3761,23 +3761,23 @@ A test suite that takes too long to run regularly is a test suite that's likely 
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/gatk/haplotypecaller/tests/main.nf.test</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-29-3">3</a></span>
 <span class="normal"><a href="#__codelineno-29-4">4</a></span>
 <span class="normal"><a href="#__codelineno-29-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-29-3" name="__codelineno-29-3"></a><span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="s2">&quot;Test Process GATK_HAPLOTYPECALLER&quot;</span>
-<a id="__codelineno-29-4" name="__codelineno-29-4"></a><span class="w">    </span><span class="n">script</span><span class="w"> </span><span class="s2">&quot;modules/gatk/haplotypecaller/main.nf&quot;</span>
-<a id="__codelineno-29-5" name="__codelineno-29-5"></a><span class="w">    </span><span class="n">process</span><span class="w"> </span><span class="s2">&quot;GATK_HAPLOTYPECALLER&quot;</span>
+<a id="__codelineno-29-4" name="__codelineno-29-4"></a><span class="hll"><span class="w">    </span><span class="n">script</span><span class="w"> </span><span class="s2">&quot;modules/gatk/haplotypecaller/main.nf&quot;</span>
+</span><a id="__codelineno-29-5" name="__codelineno-29-5"></a><span class="w">    </span><span class="n">process</span><span class="w"> </span><span class="s2">&quot;GATK_HAPLOTYPECALLER&quot;</span>
 </code></pre></div></td></tr></table></div>
 <p><em>After:</em></p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/gatk/haplotypecaller/tests/main.nf.test</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-30-3">3</a></span>
 <span class="normal"><a href="#__codelineno-30-4">4</a></span>
 <span class="normal"><a href="#__codelineno-30-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-30-3" name="__codelineno-30-3"></a><span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="s2">&quot;Test Process GATK_HAPLOTYPECALLER&quot;</span>
-<a id="__codelineno-30-4" name="__codelineno-30-4"></a><span class="w">    </span><span class="n">script</span><span class="w"> </span><span class="s2">&quot;../main.nf&quot;</span>
-<a id="__codelineno-30-5" name="__codelineno-30-5"></a><span class="w">    </span><span class="n">process</span><span class="w"> </span><span class="s2">&quot;GATK_HAPLOTYPECALLER&quot;</span>
+<a id="__codelineno-30-4" name="__codelineno-30-4"></a><span class="hll"><span class="w">    </span><span class="n">script</span><span class="w"> </span><span class="s2">&quot;../main.nf&quot;</span>
+</span><a id="__codelineno-30-5" name="__codelineno-30-5"></a><span class="w">    </span><span class="n">process</span><span class="w"> </span><span class="s2">&quot;GATK_HAPLOTYPECALLER&quot;</span>
 </code></pre></div></td></tr></table></div>
 <h3 id="23-provide-inputs-using-the-setup-method">2.3. Provide inputs using the setup method<a class="headerlink" href="#23-provide-inputs-using-the-setup-method" title="Permanent link">&para;</a></h3>
-<p>We insert a <code>setup</code> block before the <code>when</code> block, where we can trigger a run of the <code>SAMTOOLS_INDEX</code> process on one of our original input files.</p>
+<p>We insert a <code>setup</code> block before the <code>when</code> block, where we can trigger a run of the <code>SAMTOOLS_INDEX</code> process on one of our original input files. Also, remember as before to change the test name to something meaningful.</p>
 <p><em>Before:</em></p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/gatk/haplotypecaller/tests/main.nf.test</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-31-7">7</a></span>
 <span class="normal"><a href="#__codelineno-31-8">8</a></span>
-<span class="normal"><a href="#__codelineno-31-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-31-7" name="__codelineno-31-7"></a><span class="n">test</span><span class="o">(</span><span class="s2">&quot;Should run without failures&quot;</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-31-8" name="__codelineno-31-8"></a>
+<span class="normal"><a href="#__codelineno-31-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-31-7" name="__codelineno-31-7"></a><span class="hll"><span class="n">test</span><span class="o">(</span><span class="s2">&quot;Should run without failures&quot;</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
+</span><a id="__codelineno-31-8" name="__codelineno-31-8"></a>
 <a id="__codelineno-31-9" name="__codelineno-31-9"></a><span class="w">    </span><span class="n">when</span><span class="w"> </span><span class="o">{</span>
 </code></pre></div></td></tr></table></div>
 <p><em>After:</em></p>
@@ -3794,19 +3794,19 @@ A test suite that takes too long to run regularly is a test suite that's likely 
 <span class="normal"><a href="#__codelineno-32-17">17</a></span>
 <span class="normal"><a href="#__codelineno-32-18">18</a></span>
 <span class="normal"><a href="#__codelineno-32-19">19</a></span>
-<span class="normal"><a href="#__codelineno-32-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-32-7" name="__codelineno-32-7"></a><span class="w">    </span><span class="n">test</span><span class="o">(</span><span class="s2">&quot;Should call son&#39;s haplotype correctly&quot;</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-32-8" name="__codelineno-32-8"></a>
-<a id="__codelineno-32-9" name="__codelineno-32-9"></a><span class="w">        </span><span class="n">setup</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-32-10" name="__codelineno-32-10"></a><span class="w">            </span><span class="n">run</span><span class="o">(</span><span class="s2">&quot;SAMTOOLS_INDEX&quot;</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-32-11" name="__codelineno-32-11"></a><span class="w">                </span><span class="n">script</span><span class="w"> </span><span class="s2">&quot;../../../samtools/index/main.nf&quot;</span>
-<a id="__codelineno-32-12" name="__codelineno-32-12"></a><span class="w">                </span><span class="n">process</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-32-13" name="__codelineno-32-13"></a><span class="w">                    </span><span class="s2">&quot;&quot;&quot;</span>
-<a id="__codelineno-32-14" name="__codelineno-32-14"></a><span class="s2">                    input[0] =  file(&quot;${projectDir}/data/bam/reads_son.bam&quot;)</span>
-<a id="__codelineno-32-15" name="__codelineno-32-15"></a><span class="s2">                    &quot;&quot;&quot;</span>
-<a id="__codelineno-32-16" name="__codelineno-32-16"></a><span class="w">                </span><span class="o">}</span>
-<a id="__codelineno-32-17" name="__codelineno-32-17"></a><span class="w">            </span><span class="o">}</span>
-<a id="__codelineno-32-18" name="__codelineno-32-18"></a><span class="w">        </span><span class="o">}</span>
-<a id="__codelineno-32-19" name="__codelineno-32-19"></a>
+<span class="normal"><a href="#__codelineno-32-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-32-7" name="__codelineno-32-7"></a><span class="hll"><span class="w">    </span><span class="n">test</span><span class="o">(</span><span class="s2">&quot;Should call son&#39;s haplotype correctly&quot;</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
+</span><a id="__codelineno-32-8" name="__codelineno-32-8"></a><span class="hll">
+</span><a id="__codelineno-32-9" name="__codelineno-32-9"></a><span class="hll"><span class="w">        </span><span class="n">setup</span><span class="w"> </span><span class="o">{</span>
+</span><a id="__codelineno-32-10" name="__codelineno-32-10"></a><span class="hll"><span class="w">            </span><span class="n">run</span><span class="o">(</span><span class="s2">&quot;SAMTOOLS_INDEX&quot;</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
+</span><a id="__codelineno-32-11" name="__codelineno-32-11"></a><span class="hll"><span class="w">                </span><span class="n">script</span><span class="w"> </span><span class="s2">&quot;../../../samtools/index/main.nf&quot;</span>
+</span><a id="__codelineno-32-12" name="__codelineno-32-12"></a><span class="hll"><span class="w">                </span><span class="n">process</span><span class="w"> </span><span class="o">{</span>
+</span><a id="__codelineno-32-13" name="__codelineno-32-13"></a><span class="hll"><span class="w">                    </span><span class="s2">&quot;&quot;&quot;</span>
+</span><a id="__codelineno-32-14" name="__codelineno-32-14"></a><span class="hll"><span class="s2">                    input[0] =  file(&quot;${projectDir}/data/bam/reads_son.bam&quot;)</span>
+</span><a id="__codelineno-32-15" name="__codelineno-32-15"></a><span class="hll"><span class="s2">                    &quot;&quot;&quot;</span>
+</span><a id="__codelineno-32-16" name="__codelineno-32-16"></a><span class="hll"><span class="w">                </span><span class="o">}</span>
+</span><a id="__codelineno-32-17" name="__codelineno-32-17"></a><span class="hll"><span class="w">            </span><span class="o">}</span>
+</span><a id="__codelineno-32-18" name="__codelineno-32-18"></a><span class="hll"><span class="w">        </span><span class="o">}</span>
+</span><a id="__codelineno-32-19" name="__codelineno-32-19"></a>
 <a id="__codelineno-32-20" name="__codelineno-32-20"></a><span class="w">        </span><span class="n">when</span><span class="w"> </span><span class="o">{</span>
 </code></pre></div></td></tr></table></div>
 <p>Then we can refer to the output of that process in the <code>when</code> block where we specify the test inputs:</p>
@@ -3917,8 +3917,8 @@ More exactly, we'll have the tool read the lines of the VCF file and check for t
 <span class="normal"><a href="#__codelineno-38-37">37</a></span>
 <span class="normal"><a href="#__codelineno-38-38">38</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-38-35" name="__codelineno-38-35"></a><span class="n">then</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-38-36" name="__codelineno-38-36"></a><span class="w">    </span><span class="k">assert</span><span class="w"> </span><span class="n">process</span><span class="o">.</span><span class="na">success</span>
-<a id="__codelineno-38-37" name="__codelineno-38-37"></a><span class="w">    </span><span class="k">assert</span><span class="w"> </span><span class="n">snapshot</span><span class="o">(</span><span class="n">process</span><span class="o">.</span><span class="na">out</span><span class="o">).</span><span class="na">match</span><span class="o">()</span>
-<a id="__codelineno-38-38" name="__codelineno-38-38"></a><span class="o">}</span>
+<a id="__codelineno-38-37" name="__codelineno-38-37"></a><span class="hll"><span class="w">    </span><span class="k">assert</span><span class="w"> </span><span class="n">snapshot</span><span class="o">(</span><span class="n">process</span><span class="o">.</span><span class="na">out</span><span class="o">).</span><span class="na">match</span><span class="o">()</span>
+</span><a id="__codelineno-38-38" name="__codelineno-38-38"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p><em>After:</em></p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/gatk/haplotypecaller/tests/main.nf.test</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-39-35">35</a></span>
@@ -3927,9 +3927,9 @@ More exactly, we'll have the tool read the lines of the VCF file and check for t
 <span class="normal"><a href="#__codelineno-39-38">38</a></span>
 <span class="normal"><a href="#__codelineno-39-39">39</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-39-35" name="__codelineno-39-35"></a><span class="go">        then {</span>
 <a id="__codelineno-39-36" name="__codelineno-39-36"></a><span class="go">            assert process.success</span>
-<a id="__codelineno-39-37" name="__codelineno-39-37"></a><span class="go">            assert path(process.out[0][0]).readLines().contains(&#39;#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	reads_son&#39;)</span>
-<a id="__codelineno-39-38" name="__codelineno-39-38"></a><span class="go">            assert path(process.out[0][0]).readLines().contains(&#39;20_10037292_10066351	3277	.	G	&lt;NON_REF&gt;	.	.	END=3282	GT:DP:GQ:MIN_DP:PL	0/0:25:72:24:0,72,719&#39;)</span>
-<a id="__codelineno-39-39" name="__codelineno-39-39"></a><span class="go">        }</span>
+<a id="__codelineno-39-37" name="__codelineno-39-37"></a><span class="hll"><span class="go">            assert path(process.out[0][0]).readLines().contains(&#39;#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	reads_son&#39;)</span>
+</span><a id="__codelineno-39-38" name="__codelineno-39-38"></a><span class="hll"><span class="go">            assert path(process.out[0][0]).readLines().contains(&#39;20_10037292_10066351	3277	.	G	&lt;NON_REF&gt;	.	.	END=3282	GT:DP:GQ:MIN_DP:PL	0/0:25:72:24:0,72,719&#39;)</span>
+</span><a id="__codelineno-39-39" name="__codelineno-39-39"></a><span class="go">        }</span>
 </code></pre></div></td></tr></table></div>
 <p>Here we're reading in the full content of the VCF output file and searching for a content match, which is okay to do on a small test file, but you wouldn't want to do that on a larger file.
 You might instead choose to read in specific lines.</p>
@@ -4022,7 +4022,7 @@ On the bright side, it can be used to test with great precision whether an analy
 <span class="normal"><a href="#__codelineno-42-108">108</a></span>
 <span class="normal"><a href="#__codelineno-42-109">109</a></span>
 <span class="normal"><a href="#__codelineno-42-110">110</a></span>
-<span class="normal"><a href="#__codelineno-42-111">111</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-42-43" name="__codelineno-42-43"></a><span class="w">    </span><span class="n">test</span><span class="o">(</span><span class="s2">&quot;reads_mother [bam]&quot;</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
+<span class="normal"><a href="#__codelineno-42-111">111</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-42-43" name="__codelineno-42-43"></a><span class="w">    </span><span class="n">test</span><span class="o">(</span><span class="s2">&quot;Should call mother&#39;s haplotype correctly&quot;</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-42-44" name="__codelineno-42-44"></a>
 <a id="__codelineno-42-45" name="__codelineno-42-45"></a><span class="w">        </span><span class="n">setup</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-42-46" name="__codelineno-42-46"></a><span class="w">            </span><span class="n">run</span><span class="o">(</span><span class="s2">&quot;SAMTOOLS_INDEX&quot;</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
@@ -4229,15 +4229,15 @@ On the bright side, it can be used to test with great precision whether an analy
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/gatk/jointgenotyping/tests/main.nf.test</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-51-3">3</a></span>
 <span class="normal"><a href="#__codelineno-51-4">4</a></span>
 <span class="normal"><a href="#__codelineno-51-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-51-3" name="__codelineno-51-3"></a><span class="n">name</span><span class="w"> </span><span class="s2">&quot;Test Process GATK_JOINTGENOTYPING&quot;</span>
-<a id="__codelineno-51-4" name="__codelineno-51-4"></a><span class="n">script</span><span class="w"> </span><span class="s2">&quot;modules/gatk/jointgenotyping/main.nf&quot;</span>
-<a id="__codelineno-51-5" name="__codelineno-51-5"></a><span class="n">process</span><span class="w"> </span><span class="s2">&quot;GATK_JOINTGENOTYPING&quot;</span>
+<a id="__codelineno-51-4" name="__codelineno-51-4"></a><span class="hll"><span class="n">script</span><span class="w"> </span><span class="s2">&quot;modules/gatk/jointgenotyping/main.nf&quot;</span>
+</span><a id="__codelineno-51-5" name="__codelineno-51-5"></a><span class="n">process</span><span class="w"> </span><span class="s2">&quot;GATK_JOINTGENOTYPING&quot;</span>
 </code></pre></div></td></tr></table></div>
 <p><em>After:</em></p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">modules/gatk/jointgenotyping/tests/main.nf.test</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-52-3">3</a></span>
 <span class="normal"><a href="#__codelineno-52-4">4</a></span>
 <span class="normal"><a href="#__codelineno-52-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-52-3" name="__codelineno-52-3"></a><span class="n">name</span><span class="w"> </span><span class="s2">&quot;Test Process GATK_JOINTGENOTYPING&quot;</span>
-<a id="__codelineno-52-4" name="__codelineno-52-4"></a><span class="n">script</span><span class="w"> </span><span class="s2">&quot;../main.nf&quot;</span>
-<a id="__codelineno-52-5" name="__codelineno-52-5"></a><span class="n">process</span><span class="w"> </span><span class="s2">&quot;GATK_JOINTGENOTYPING&quot;</span>
+<a id="__codelineno-52-4" name="__codelineno-52-4"></a><span class="hll"><span class="n">script</span><span class="w"> </span><span class="s2">&quot;../main.nf&quot;</span>
+</span><a id="__codelineno-52-5" name="__codelineno-52-5"></a><span class="n">process</span><span class="w"> </span><span class="s2">&quot;GATK_JOINTGENOTYPING&quot;</span>
 </code></pre></div></td></tr></table></div>
 <h3 id="34-provide-inputs">3.4. Provide inputs<a class="headerlink" href="#34-provide-inputs" title="Permanent link">&para;</a></h3>
 <p>Fill in the inputs based on the process input definitions and rename the test accordingly:</p>
@@ -4400,6 +4400,13 @@ On the bright side, it can be used to test with great precision whether an analy
 <a id="__codelineno-58-20" name="__codelineno-58-20"></a>
 <a id="__codelineno-58-21" name="__codelineno-58-21"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
+<p>Just correct the name to something meaningful (you'll see why this is useful shortly).</p>
+<p><em>Before:</em></p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">tests/genomics-4.nf.test</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-59-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-59-1" name="__codelineno-59-1"></a><span class="hll"><span class="w">    </span><span class="n">test</span><span class="o">(</span><span class="s2">&quot;Should run without failures&quot;</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
+</span></code></pre></div></td></tr></table></div>
+<p><em>After:</em></p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">tests/genomics-4.nf.test</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-60-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-60-1" name="__codelineno-60-1"></a><span class="hll"><span class="w">    </span><span class="n">test</span><span class="o">(</span><span class="s2">&quot;Should run the pipeline without failures&quot;</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
+</span></code></pre></div></td></tr></table></div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>In this case the test file can stay where <code>nf-test</code> created it.</p>
@@ -4408,62 +4415,62 @@ On the bright side, it can be used to test with great precision whether an analy
 <p>We still need to specify inputs, which is done slightly different at the workflow level compared to module-level tests.
 There are several ways of doing this, including by specifying a profile.
 However, a simpler way is to set up a <code>params {}</code> block in the <code>nextflow.config</code> file that <code>nf-test init</code> originally created in the <code>tests</code> directory.</p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">tests/nextflow.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-59-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-59-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-59-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-59-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-59-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-59-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-59-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-59-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-59-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-59-10">10</a></span>
-<span class="normal"><a href="#__codelineno-59-11">11</a></span>
-<span class="normal"><a href="#__codelineno-59-12">12</a></span>
-<span class="normal"><a href="#__codelineno-59-13">13</a></span>
-<span class="normal"><a href="#__codelineno-59-14">14</a></span>
-<span class="normal"><a href="#__codelineno-59-15">15</a></span>
-<span class="normal"><a href="#__codelineno-59-16">16</a></span>
-<span class="normal"><a href="#__codelineno-59-17">17</a></span>
-<span class="normal"><a href="#__codelineno-59-18">18</a></span>
-<span class="normal"><a href="#__codelineno-59-19">19</a></span>
-<span class="normal"><a href="#__codelineno-59-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-59-1" name="__codelineno-59-1"></a><span class="cm">/*</span>
-<a id="__codelineno-59-2" name="__codelineno-59-2"></a><span class="cm"> * Pipeline parameters</span>
-<a id="__codelineno-59-3" name="__codelineno-59-3"></a><span class="cm"> */</span>
-<a id="__codelineno-59-4" name="__codelineno-59-4"></a>
-<a id="__codelineno-59-5" name="__codelineno-59-5"></a><span class="n">params</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-59-6" name="__codelineno-59-6"></a><span class="w">    </span><span class="c1">// Primary input (file of input files, one per line)</span>
-<a id="__codelineno-59-7" name="__codelineno-59-7"></a><span class="w">    </span><span class="n">reads_bam</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${projectDir}/data/sample_bams.txt&quot;</span>
-<a id="__codelineno-59-8" name="__codelineno-59-8"></a>
-<a id="__codelineno-59-9" name="__codelineno-59-9"></a><span class="w">    </span><span class="c1">// Output directory</span>
-<a id="__codelineno-59-10" name="__codelineno-59-10"></a><span class="w">    </span><span class="n">outdir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;results_genomics&quot;</span>
-<a id="__codelineno-59-11" name="__codelineno-59-11"></a>
-<a id="__codelineno-59-12" name="__codelineno-59-12"></a><span class="w">    </span><span class="c1">// Reference genome and intervals</span>
-<a id="__codelineno-59-13" name="__codelineno-59-13"></a><span class="w">    </span><span class="n">reference</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${projectDir}/data/ref/ref.fasta&quot;</span>
-<a id="__codelineno-59-14" name="__codelineno-59-14"></a><span class="w">    </span><span class="n">reference_index</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${projectDir}/data/ref/ref.fasta.fai&quot;</span>
-<a id="__codelineno-59-15" name="__codelineno-59-15"></a><span class="w">    </span><span class="n">reference_dict</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${projectDir}/data/ref/ref.dict&quot;</span>
-<a id="__codelineno-59-16" name="__codelineno-59-16"></a><span class="w">    </span><span class="n">intervals</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${projectDir}/data/ref/intervals.bed&quot;</span>
-<a id="__codelineno-59-17" name="__codelineno-59-17"></a>
-<a id="__codelineno-59-18" name="__codelineno-59-18"></a><span class="w">    </span><span class="c1">// Base name for final output file</span>
-<a id="__codelineno-59-19" name="__codelineno-59-19"></a><span class="w">    </span><span class="n">cohort_name</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;family_trio&quot;</span>
-<a id="__codelineno-59-20" name="__codelineno-59-20"></a><span class="o">}</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">tests/nextflow.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-61-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-61-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-61-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-61-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-61-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-61-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-61-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-61-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-61-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-61-10">10</a></span>
+<span class="normal"><a href="#__codelineno-61-11">11</a></span>
+<span class="normal"><a href="#__codelineno-61-12">12</a></span>
+<span class="normal"><a href="#__codelineno-61-13">13</a></span>
+<span class="normal"><a href="#__codelineno-61-14">14</a></span>
+<span class="normal"><a href="#__codelineno-61-15">15</a></span>
+<span class="normal"><a href="#__codelineno-61-16">16</a></span>
+<span class="normal"><a href="#__codelineno-61-17">17</a></span>
+<span class="normal"><a href="#__codelineno-61-18">18</a></span>
+<span class="normal"><a href="#__codelineno-61-19">19</a></span>
+<span class="normal"><a href="#__codelineno-61-20">20</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-61-1" name="__codelineno-61-1"></a><span class="cm">/*</span>
+<a id="__codelineno-61-2" name="__codelineno-61-2"></a><span class="cm"> * Pipeline parameters</span>
+<a id="__codelineno-61-3" name="__codelineno-61-3"></a><span class="cm"> */</span>
+<a id="__codelineno-61-4" name="__codelineno-61-4"></a>
+<a id="__codelineno-61-5" name="__codelineno-61-5"></a><span class="n">params</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-61-6" name="__codelineno-61-6"></a><span class="w">    </span><span class="c1">// Primary input (file of input files, one per line)</span>
+<a id="__codelineno-61-7" name="__codelineno-61-7"></a><span class="w">    </span><span class="n">reads_bam</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${projectDir}/data/sample_bams.txt&quot;</span>
+<a id="__codelineno-61-8" name="__codelineno-61-8"></a>
+<a id="__codelineno-61-9" name="__codelineno-61-9"></a><span class="w">    </span><span class="c1">// Output directory</span>
+<a id="__codelineno-61-10" name="__codelineno-61-10"></a><span class="w">    </span><span class="n">outdir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;results_genomics&quot;</span>
+<a id="__codelineno-61-11" name="__codelineno-61-11"></a>
+<a id="__codelineno-61-12" name="__codelineno-61-12"></a><span class="w">    </span><span class="c1">// Reference genome and intervals</span>
+<a id="__codelineno-61-13" name="__codelineno-61-13"></a><span class="w">    </span><span class="n">reference</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${projectDir}/data/ref/ref.fasta&quot;</span>
+<a id="__codelineno-61-14" name="__codelineno-61-14"></a><span class="w">    </span><span class="n">reference_index</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${projectDir}/data/ref/ref.fasta.fai&quot;</span>
+<a id="__codelineno-61-15" name="__codelineno-61-15"></a><span class="w">    </span><span class="n">reference_dict</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${projectDir}/data/ref/ref.dict&quot;</span>
+<a id="__codelineno-61-16" name="__codelineno-61-16"></a><span class="w">    </span><span class="n">intervals</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;${projectDir}/data/ref/intervals.bed&quot;</span>
+<a id="__codelineno-61-17" name="__codelineno-61-17"></a>
+<a id="__codelineno-61-18" name="__codelineno-61-18"></a><span class="w">    </span><span class="c1">// Base name for final output file</span>
+<a id="__codelineno-61-19" name="__codelineno-61-19"></a><span class="w">    </span><span class="n">cohort_name</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;family_trio&quot;</span>
+<a id="__codelineno-61-20" name="__codelineno-61-20"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>When we run the test, <code>nf-test</code> will pick up this configuration file and pull in the inputs accordingly.</p>
 <h3 id="43-run-the-workflow-test">4.3. Run the workflow test<a class="headerlink" href="#43-run-the-workflow-test" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-60-1" name="__codelineno-60-1" href="#__codelineno-60-1"></a>nf-test<span class="w"> </span><span class="nb">test</span><span class="w"> </span>tests/genomics-4.nf.test
+<div class="highlight"><pre><span></span><code><a id="__codelineno-62-1" name="__codelineno-62-1" href="#__codelineno-62-1"></a>nf-test<span class="w"> </span><span class="nb">test</span><span class="w"> </span>tests/genomics-4.nf.test
 </code></pre></div>
 <p>This produces:</p>
-<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-61-1" name="__codelineno-61-1" href="#__codelineno-61-1"></a><span class="go">🚀 nf-test 0.9.2</span>
-<a id="__codelineno-61-2" name="__codelineno-61-2" href="#__codelineno-61-2"></a><span class="go">https://www.nf-test.com</span>
-<a id="__codelineno-61-3" name="__codelineno-61-3" href="#__codelineno-61-3"></a><span class="gp gp-VirtualEnv">(c)</span> <span class="go">2021 - 2024 Lukas Forer and Sebastian Schoenherr</span>
-<a id="__codelineno-61-4" name="__codelineno-61-4" href="#__codelineno-61-4"></a>
-<a id="__codelineno-61-5" name="__codelineno-61-5" href="#__codelineno-61-5"></a>
-<a id="__codelineno-61-6" name="__codelineno-61-6" href="#__codelineno-61-6"></a><span class="go">Test Workflow genomics-4.nf</span>
-<a id="__codelineno-61-7" name="__codelineno-61-7" href="#__codelineno-61-7"></a>
-<a id="__codelineno-61-8" name="__codelineno-61-8" href="#__codelineno-61-8"></a><span class="go">  Test [c7dbcaca] &#39;Should run without failures&#39; PASSED (48.443s)</span>
-<a id="__codelineno-61-9" name="__codelineno-61-9" href="#__codelineno-61-9"></a>
-<a id="__codelineno-61-10" name="__codelineno-61-10" href="#__codelineno-61-10"></a>
-<a id="__codelineno-61-11" name="__codelineno-61-11" href="#__codelineno-61-11"></a><span class="go">SUCCESS: Executed 1 tests in 48.486s</span>
+<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-63-1" name="__codelineno-63-1" href="#__codelineno-63-1"></a><span class="go">🚀 nf-test 0.9.2</span>
+<a id="__codelineno-63-2" name="__codelineno-63-2" href="#__codelineno-63-2"></a><span class="go">https://www.nf-test.com</span>
+<a id="__codelineno-63-3" name="__codelineno-63-3" href="#__codelineno-63-3"></a><span class="gp gp-VirtualEnv">(c)</span> <span class="go">2021 - 2024 Lukas Forer and Sebastian Schoenherr</span>
+<a id="__codelineno-63-4" name="__codelineno-63-4" href="#__codelineno-63-4"></a>
+<a id="__codelineno-63-5" name="__codelineno-63-5" href="#__codelineno-63-5"></a>
+<a id="__codelineno-63-6" name="__codelineno-63-6" href="#__codelineno-63-6"></a><span class="go">Test Workflow genomics-4.nf</span>
+<a id="__codelineno-63-7" name="__codelineno-63-7" href="#__codelineno-63-7"></a>
+<a id="__codelineno-63-8" name="__codelineno-63-8" href="#__codelineno-63-8"></a><span class="go">  Test [c7dbcaca] &#39;Should run without failures&#39; PASSED (48.443s)</span>
+<a id="__codelineno-63-9" name="__codelineno-63-9" href="#__codelineno-63-9"></a>
+<a id="__codelineno-63-10" name="__codelineno-63-10" href="#__codelineno-63-10"></a>
+<a id="__codelineno-63-11" name="__codelineno-63-11" href="#__codelineno-63-11"></a><span class="go">SUCCESS: Executed 1 tests in 48.486s</span>
 </code></pre></div>
 <p>The test passes, confirming that our complete variant calling pipeline:</p>
 <ol>
@@ -4473,70 +4480,70 @@ However, a simpler way is to set up a <code>params {}</code> block in the <code>
 <h3 id="44-run-all-tests">4.4. Run ALL tests<a class="headerlink" href="#44-run-all-tests" title="Permanent link">&para;</a></h3>
 <p>nf-test has one more trick up it's sleeve. We can run all the tests at once! Modify the <code>nf-test.config</code> file so that nf-test looks in every directory for nf-test files. You can do this by modifying the <code>testsDir</code> parameter:</p>
 <p><em>Before:</em></p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">tests/nf-test.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-62-1">1</a></span>
-<span class="normal"><a href="#__codelineno-62-2">2</a></span>
-<span class="normal"><a href="#__codelineno-62-3">3</a></span>
-<span class="normal"><a href="#__codelineno-62-4">4</a></span>
-<span class="normal"><a href="#__codelineno-62-5">5</a></span>
-<span class="normal"><a href="#__codelineno-62-6">6</a></span>
-<span class="normal"><a href="#__codelineno-62-7">7</a></span>
-<span class="normal"><a href="#__codelineno-62-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-62-1" name="__codelineno-62-1"></a><span class="n">config</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-62-2" name="__codelineno-62-2"></a>
-<a id="__codelineno-62-3" name="__codelineno-62-3"></a><span class="w">    </span><span class="n">testsDir</span><span class="w"> </span><span class="s2">&quot;tests&quot;</span>
-<a id="__codelineno-62-4" name="__codelineno-62-4"></a><span class="w">    </span><span class="n">workDir</span><span class="w"> </span><span class="s2">&quot;.nf-test&quot;</span>
-<a id="__codelineno-62-5" name="__codelineno-62-5"></a><span class="w">    </span><span class="n">configFile</span><span class="w"> </span><span class="s2">&quot;tests/nextflow.config&quot;</span>
-<a id="__codelineno-62-6" name="__codelineno-62-6"></a><span class="w">    </span><span class="n">profile</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
-<a id="__codelineno-62-7" name="__codelineno-62-7"></a>
-<a id="__codelineno-62-8" name="__codelineno-62-8"></a><span class="o">}</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">nf-test.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-64-1">1</a></span>
+<span class="normal"><a href="#__codelineno-64-2">2</a></span>
+<span class="normal"><a href="#__codelineno-64-3">3</a></span>
+<span class="normal"><a href="#__codelineno-64-4">4</a></span>
+<span class="normal"><a href="#__codelineno-64-5">5</a></span>
+<span class="normal"><a href="#__codelineno-64-6">6</a></span>
+<span class="normal"><a href="#__codelineno-64-7">7</a></span>
+<span class="normal"><a href="#__codelineno-64-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-64-1" name="__codelineno-64-1"></a><span class="n">config</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-64-2" name="__codelineno-64-2"></a>
+<a id="__codelineno-64-3" name="__codelineno-64-3"></a><span class="hll"><span class="w">    </span><span class="n">testsDir</span><span class="w"> </span><span class="s2">&quot;tests&quot;</span>
+</span><a id="__codelineno-64-4" name="__codelineno-64-4"></a><span class="w">    </span><span class="n">workDir</span><span class="w"> </span><span class="s2">&quot;.nf-test&quot;</span>
+<a id="__codelineno-64-5" name="__codelineno-64-5"></a><span class="w">    </span><span class="n">configFile</span><span class="w"> </span><span class="s2">&quot;tests/nextflow.config&quot;</span>
+<a id="__codelineno-64-6" name="__codelineno-64-6"></a><span class="w">    </span><span class="n">profile</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<a id="__codelineno-64-7" name="__codelineno-64-7"></a>
+<a id="__codelineno-64-8" name="__codelineno-64-8"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p><em>After:</em></p>
-<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">nf-test.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-63-1">1</a></span>
-<span class="normal"><a href="#__codelineno-63-2">2</a></span>
-<span class="normal"><a href="#__codelineno-63-3">3</a></span>
-<span class="normal"><a href="#__codelineno-63-4">4</a></span>
-<span class="normal"><a href="#__codelineno-63-5">5</a></span>
-<span class="normal"><a href="#__codelineno-63-6">6</a></span>
-<span class="normal"><a href="#__codelineno-63-7">7</a></span>
-<span class="normal"><a href="#__codelineno-63-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-63-1" name="__codelineno-63-1"></a><span class="n">config</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-63-2" name="__codelineno-63-2"></a>
-<a id="__codelineno-63-3" name="__codelineno-63-3"></a><span class="w">    </span><span class="n">testsDir</span><span class="w"> </span><span class="s2">&quot;.&quot;</span>
-<a id="__codelineno-63-4" name="__codelineno-63-4"></a><span class="w">    </span><span class="n">workDir</span><span class="w"> </span><span class="s2">&quot;.nf-test&quot;</span>
-<a id="__codelineno-63-5" name="__codelineno-63-5"></a><span class="w">    </span><span class="n">configFile</span><span class="w"> </span><span class="s2">&quot;tests/nextflow.config&quot;</span>
-<a id="__codelineno-63-6" name="__codelineno-63-6"></a><span class="w">    </span><span class="n">profile</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
-<a id="__codelineno-63-7" name="__codelineno-63-7"></a>
-<a id="__codelineno-63-8" name="__codelineno-63-8"></a><span class="o">}</span>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">nf-test.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-65-1">1</a></span>
+<span class="normal"><a href="#__codelineno-65-2">2</a></span>
+<span class="normal"><a href="#__codelineno-65-3">3</a></span>
+<span class="normal"><a href="#__codelineno-65-4">4</a></span>
+<span class="normal"><a href="#__codelineno-65-5">5</a></span>
+<span class="normal"><a href="#__codelineno-65-6">6</a></span>
+<span class="normal"><a href="#__codelineno-65-7">7</a></span>
+<span class="normal"><a href="#__codelineno-65-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-65-1" name="__codelineno-65-1"></a><span class="n">config</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-65-2" name="__codelineno-65-2"></a>
+<a id="__codelineno-65-3" name="__codelineno-65-3"></a><span class="hll"><span class="w">    </span><span class="n">testsDir</span><span class="w"> </span><span class="s2">&quot;.&quot;</span>
+</span><a id="__codelineno-65-4" name="__codelineno-65-4"></a><span class="w">    </span><span class="n">workDir</span><span class="w"> </span><span class="s2">&quot;.nf-test&quot;</span>
+<a id="__codelineno-65-5" name="__codelineno-65-5"></a><span class="w">    </span><span class="n">configFile</span><span class="w"> </span><span class="s2">&quot;tests/nextflow.config&quot;</span>
+<a id="__codelineno-65-6" name="__codelineno-65-6"></a><span class="w">    </span><span class="n">profile</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<a id="__codelineno-65-7" name="__codelineno-65-7"></a>
+<a id="__codelineno-65-8" name="__codelineno-65-8"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>Now, we can simply run nf-test and it will run <em>every single test</em> in our repository:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-64-1" name="__codelineno-64-1" href="#__codelineno-64-1"></a>nf-test<span class="w"> </span><span class="nb">test</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-66-1" name="__codelineno-66-1" href="#__codelineno-66-1"></a>nf-test<span class="w"> </span><span class="nb">test</span>
 </code></pre></div>
 <p>This produces:</p>
-<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-65-1" name="__codelineno-65-1" href="#__codelineno-65-1"></a><span class="go">🚀 nf-test 0.9.2</span>
-<a id="__codelineno-65-2" name="__codelineno-65-2" href="#__codelineno-65-2"></a><span class="go">https://www.nf-test.com</span>
-<a id="__codelineno-65-3" name="__codelineno-65-3" href="#__codelineno-65-3"></a><span class="gp gp-VirtualEnv">(c)</span> <span class="go">2021 - 2024 Lukas Forer and Sebastian Schoenherr</span>
-<a id="__codelineno-65-4" name="__codelineno-65-4" href="#__codelineno-65-4"></a>
-<a id="__codelineno-65-5" name="__codelineno-65-5" href="#__codelineno-65-5"></a>
-<a id="__codelineno-65-6" name="__codelineno-65-6" href="#__codelineno-65-6"></a><span class="go">Test Process GATK_HAPLOTYPECALLER</span>
-<a id="__codelineno-65-7" name="__codelineno-65-7" href="#__codelineno-65-7"></a>
-<a id="__codelineno-65-8" name="__codelineno-65-8" href="#__codelineno-65-8"></a><span class="go">  Test [c847bfae] &#39;Should call son&#39;s haplotype correctly&#39; PASSED (20.951s)</span>
-<a id="__codelineno-65-9" name="__codelineno-65-9" href="#__codelineno-65-9"></a><span class="go">  Test [44494e9c] &#39;Should call mother&#39;s haplotype correctly&#39; PASSED (19.155s)</span>
-<a id="__codelineno-65-10" name="__codelineno-65-10" href="#__codelineno-65-10"></a><span class="go">  Test [eb0d1a07] &#39;Should call father&#39;s haplotype correctly&#39; PASSED (21.843s)</span>
-<a id="__codelineno-65-11" name="__codelineno-65-11" href="#__codelineno-65-11"></a>
-<a id="__codelineno-65-12" name="__codelineno-65-12" href="#__codelineno-65-12"></a><span class="go">Test Process GATK_JOINTGENOTYPING</span>
-<a id="__codelineno-65-13" name="__codelineno-65-13" href="#__codelineno-65-13"></a>
-<a id="__codelineno-65-14" name="__codelineno-65-14" href="#__codelineno-65-14"></a><span class="go">  Test [ac2067de] &#39;Should call trio&#39;s joint genotype correctly&#39; PASSED (22.994s)</span>
-<a id="__codelineno-65-15" name="__codelineno-65-15" href="#__codelineno-65-15"></a>
-<a id="__codelineno-65-16" name="__codelineno-65-16" href="#__codelineno-65-16"></a><span class="go">Test Process SAMTOOLS_INDEX</span>
-<a id="__codelineno-65-17" name="__codelineno-65-17" href="#__codelineno-65-17"></a>
-<a id="__codelineno-65-18" name="__codelineno-65-18" href="#__codelineno-65-18"></a><span class="go">  Test [625e39ee] &#39;Should index reads_son.bam correctly&#39; PASSED (11.281s)</span>
-<a id="__codelineno-65-19" name="__codelineno-65-19" href="#__codelineno-65-19"></a><span class="go">  Test [a8b28f36] &#39;Should index reads_mother.bam correctly&#39; PASSED (11.126s)</span>
-<a id="__codelineno-65-20" name="__codelineno-65-20" href="#__codelineno-65-20"></a><span class="go">  Test [c15852a1] &#39;Should index reads_father.bam correctly&#39; PASSED (12.005s)</span>
-<a id="__codelineno-65-21" name="__codelineno-65-21" href="#__codelineno-65-21"></a>
-<a id="__codelineno-65-22" name="__codelineno-65-22" href="#__codelineno-65-22"></a><span class="go">Test Workflow genomics-4.nf</span>
-<a id="__codelineno-65-23" name="__codelineno-65-23" href="#__codelineno-65-23"></a>
-<a id="__codelineno-65-24" name="__codelineno-65-24" href="#__codelineno-65-24"></a><span class="go">  Test [c7dbcaca] &#39;Should run without failures&#39; PASSED (47.92s)</span>
-<a id="__codelineno-65-25" name="__codelineno-65-25" href="#__codelineno-65-25"></a>
-<a id="__codelineno-65-26" name="__codelineno-65-26" href="#__codelineno-65-26"></a>
-<a id="__codelineno-65-27" name="__codelineno-65-27" href="#__codelineno-65-27"></a><span class="go">SUCCESS: Executed 8 tests in 167.772s</span>
+<div class="highlight"><span class="filename">Output</span><pre><span></span><code><a id="__codelineno-67-1" name="__codelineno-67-1" href="#__codelineno-67-1"></a><span class="go">🚀 nf-test 0.9.2</span>
+<a id="__codelineno-67-2" name="__codelineno-67-2" href="#__codelineno-67-2"></a><span class="go">https://www.nf-test.com</span>
+<a id="__codelineno-67-3" name="__codelineno-67-3" href="#__codelineno-67-3"></a><span class="gp gp-VirtualEnv">(c)</span> <span class="go">2021 - 2024 Lukas Forer and Sebastian Schoenherr</span>
+<a id="__codelineno-67-4" name="__codelineno-67-4" href="#__codelineno-67-4"></a>
+<a id="__codelineno-67-5" name="__codelineno-67-5" href="#__codelineno-67-5"></a>
+<a id="__codelineno-67-6" name="__codelineno-67-6" href="#__codelineno-67-6"></a><span class="go">Test Process GATK_HAPLOTYPECALLER</span>
+<a id="__codelineno-67-7" name="__codelineno-67-7" href="#__codelineno-67-7"></a>
+<a id="__codelineno-67-8" name="__codelineno-67-8" href="#__codelineno-67-8"></a><span class="go">  Test [c847bfae] &#39;Should call son&#39;s haplotype correctly&#39; PASSED (20.951s)</span>
+<a id="__codelineno-67-9" name="__codelineno-67-9" href="#__codelineno-67-9"></a><span class="go">  Test [44494e9c] &#39;Should call mother&#39;s haplotype correctly&#39; PASSED (19.155s)</span>
+<a id="__codelineno-67-10" name="__codelineno-67-10" href="#__codelineno-67-10"></a><span class="go">  Test [eb0d1a07] &#39;Should call father&#39;s haplotype correctly&#39; PASSED (21.843s)</span>
+<a id="__codelineno-67-11" name="__codelineno-67-11" href="#__codelineno-67-11"></a>
+<a id="__codelineno-67-12" name="__codelineno-67-12" href="#__codelineno-67-12"></a><span class="go">Test Process GATK_JOINTGENOTYPING</span>
+<a id="__codelineno-67-13" name="__codelineno-67-13" href="#__codelineno-67-13"></a>
+<a id="__codelineno-67-14" name="__codelineno-67-14" href="#__codelineno-67-14"></a><span class="go">  Test [ac2067de] &#39;Should call trio&#39;s joint genotype correctly&#39; PASSED (22.994s)</span>
+<a id="__codelineno-67-15" name="__codelineno-67-15" href="#__codelineno-67-15"></a>
+<a id="__codelineno-67-16" name="__codelineno-67-16" href="#__codelineno-67-16"></a><span class="go">Test Process SAMTOOLS_INDEX</span>
+<a id="__codelineno-67-17" name="__codelineno-67-17" href="#__codelineno-67-17"></a>
+<a id="__codelineno-67-18" name="__codelineno-67-18" href="#__codelineno-67-18"></a><span class="go">  Test [625e39ee] &#39;Should index reads_son.bam correctly&#39; PASSED (11.281s)</span>
+<a id="__codelineno-67-19" name="__codelineno-67-19" href="#__codelineno-67-19"></a><span class="go">  Test [a8b28f36] &#39;Should index reads_mother.bam correctly&#39; PASSED (11.126s)</span>
+<a id="__codelineno-67-20" name="__codelineno-67-20" href="#__codelineno-67-20"></a><span class="go">  Test [c15852a1] &#39;Should index reads_father.bam correctly&#39; PASSED (12.005s)</span>
+<a id="__codelineno-67-21" name="__codelineno-67-21" href="#__codelineno-67-21"></a>
+<a id="__codelineno-67-22" name="__codelineno-67-22" href="#__codelineno-67-22"></a><span class="go">Test Workflow genomics-4.nf</span>
+<a id="__codelineno-67-23" name="__codelineno-67-23" href="#__codelineno-67-23"></a>
+<a id="__codelineno-67-24" name="__codelineno-67-24" href="#__codelineno-67-24"></a><span class="go">  Test [c7dbcaca] &#39;Should run the pipeline without failures&#39; PASSED (47.92s)</span>
+<a id="__codelineno-67-25" name="__codelineno-67-25" href="#__codelineno-67-25"></a>
+<a id="__codelineno-67-26" name="__codelineno-67-26" href="#__codelineno-67-26"></a>
+<a id="__codelineno-67-27" name="__codelineno-67-27" href="#__codelineno-67-27"></a><span class="go">SUCCESS: Executed 8 tests in 167.772s</span>
 </code></pre></div>
 <p>7 tests in 1 command! We spent a long time configuring lots and lots of tests, but when it came to running them it was very quick and easy. You can see how useful this is when maintaining a large pipeline, which could include hundreds of different elements. We spend time writing tests once so we can save time running them many times.</p>
 <p>Furthermore, we can automate this! Imagine tests running every time you or a colleague tries to add new code. This is how we ensure our pipelines maintain a high standard.</p>
