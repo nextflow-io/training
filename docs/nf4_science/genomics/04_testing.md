@@ -523,7 +523,7 @@ test("Should run without failures") {
 
 _After:_
 
-```groovy title="modules/gatk/haplotypecaller/tests/main.nf.test" linenums="7" hl_lines="1 2 3 4 5 6 7 8 9 10 11 12"
+```groovy title="modules/gatk/haplotypecaller/tests/main.nf.test" linenums="7" hl_lines="1-12"
     test("Should call son's haplotype correctly") {
 
         setup {

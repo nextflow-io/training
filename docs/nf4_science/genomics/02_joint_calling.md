@@ -704,7 +704,7 @@ _Before:_
 
 _After:_
 
-```groovy title="genomics-2.nf" linenums="89"  hl_lines="6 7 8 9 10"
+```groovy title="genomics-2.nf" linenums="89"  hl_lines="6-10"
     """
     gatk GenomicsDBImport \
         ${gvcfs_line} \
@@ -737,7 +737,7 @@ input:
 
 _After:_
 
-```groovy title="genomics-2.nf" linenums="78"  hl_lines="5 6 7"
+```groovy title="genomics-2.nf" linenums="78"  hl_lines="5-7"
 input:
     path all_gvcfs
     path all_idxs
