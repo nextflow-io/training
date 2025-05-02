@@ -1,11 +1,25 @@
 //
-// MAIN PRODUCTION DEVCONTAINER CONFIG
-// Uses image that is pre-built and pushed to GitHub
-// See .github/.devcontainer/devcontainer.json for build
+// DEVELOPMENT DEVCONTAINER CONFIG
+// Base configuration that is pre-built and pushed to GitHub
+// See .devcontainer/devcontainer.json for production config
 //
 {
-    "name": "nextflow-training",
-    "image": "ghcr.io/nextflow-io/training:latest",
+    "name": "nextflow-training (codespaces-dev)",
+    "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+
+    "features": {
+        "../local-features/init": {},
+        "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {
+            "version": "latest"
+        },
+        "ghcr.io/devcontainers/features/java:1": { "version": "21.0.6-ms" },
+        "ghcr.io/rocker-org/devcontainer-features/miniforge:2": {
+            "version": "latest"
+        },
+        "../local-features/apptainer": {},
+        "../local-features/tower-agent": {},
+        "../local-features/conda-packages": {}
+    },
     "workspaceFolder": "/workspaces/training",
     "remoteUser": "root",
     "remoteEnv": {
