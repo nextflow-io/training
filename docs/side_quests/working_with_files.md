@@ -474,14 +474,14 @@ Success! We've now flattened the metadata into a single list of values.
 
 The metadata includes a lot of redundant information such as "rep". Let's remove this so replicate is just a number.
 
-We can do this by using `.replace()` on the replicate string to remove the "rep" prefix.
+We can simplify the metadata by using the `.replace()` method on the replicate string to remove the "rep" prefix, and similarly remove the "R" prefix from the readNum value.
 
 === "After"
 
     ```groovy title="main.nf" linenums="4" hl_lines="3"
     ch_fastq.map { myFile ->
         def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
-        [ sample, replicate.replace('rep', ''), type, readNum, myFile ]
+        [ sample, replicate.replace('rep', ''), type, readNum.replace('R', ''), myFile ]
     }
     ```
 
@@ -504,8 +504,8 @@ nextflow run main.nf
 
 Launching `main.nf` [reverent_volta] DSL2 - revision: b3aac71fea
 
-[sampleA, 1, normal, R1, /workspaces/training/side-quests/working_with_files/data/sampleA_rep1_normal_R1_001.fastq.gz]
-[sampleA, 1, normal, R2, /workspaces/training/side-quests/working_with_files/data/sampleA_rep1_normal_R2_001.fastq.gz]
+[sampleA, 1, normal, 1, /workspaces/training/side-quests/working_with_files/data/sampleA_rep1_normal_R1_001.fastq.gz]
+[sampleA, 1, normal, 2, /workspaces/training/side-quests/working_with_files/data/sampleA_rep1_normal_R2_001.fastq.gz]
 ```
 
 Nice! we have removed the "rep" from the replicate string.
@@ -525,7 +525,7 @@ println data[3]
 to this:
 
 ```groovy
-data = [sample: sampleA, replicate: 1, type: normal, readNum: R1, file: /workspaces/training/side-quests/working_with_files/data/sampleA_rep1_normal_R1_001.fastq.gz]
+data = [sample: sampleA, replicate: 1, type: normal, readNum: 1, file: /workspaces/training/side-quests/working_with_files/data/sampleA_rep1_normal_R1_001.fastq.gz]
 
 println data.readNum
 ```
@@ -542,7 +542,7 @@ Let's convert our flat list into a map now.
             id: sample,
             replicate: replicate.replace('rep', ''),
             type: type,
-            readNum: readNum,
+            readNum: readNum.replace('R', ''),
           ],
           myFile
         ]
@@ -554,7 +554,7 @@ Let's convert our flat list into a map now.
     ```groovy title="main.nf" linenums="4" hl_lines="3"
     ch_fastq.map { myFile ->
         def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
-        [ sample, replicate.replace('rep', ''), type, readNum, myFile ]
+        [ sample, replicate.replace('rep', ''), type, readNum.readNum.replace('R', ''), myFile ]
     }
     ```
 
@@ -567,8 +567,8 @@ nextflow run main.nf
 
 Launching `main.nf` [infallible_swartz] DSL2 - revision: 7f4e68c0cb
 
-[[id:sampleA, replicate:1, type:normal, readNum:R2], /workspaces/training/side-quests/working_with_files/data/sampleA_rep1_normal_R2_001.fastq.gz]
-[[id:sampleA, replicate:1, type:normal, readNum:R1], /workspaces/training/side-quests/working_with_files/data/sampleA_rep1_normal_R1_001.fastq.gz]
+[[id:sampleA, replicate:1, type:normal, readNum:2], /workspaces/training/side-quests/working_with_files/data/sampleA_rep1_normal_R2_001.fastq.gz]
+[[id:sampleA, replicate:1, type:normal, readNum:1], /workspaces/training/side-quests/working_with_files/data/sampleA_rep1_normal_R1_001.fastq.gz]
 ```
 
 We have converted our flat list into a map, and now we can refer to each bit of sample data by name instead of by index. This makes our code easier to read and more maintainable.
@@ -650,7 +650,7 @@ We still need the metadata. Our `map` operation from before won't work because i
                 id: sample,
                 replicate: replicate.replace('rep', ''),
                 type: type,
-                readNum: readNum,
+                readNum: readNum.replace('R', ''),
             ],
             fastqs
         ]
@@ -719,7 +719,6 @@ Add the following to the top of your `main.nf` file:
         echo "Type: ${meta.type}" >> ${meta.id}_stats.txt
         echo "Read 1: ${fastqs[0]}" >> ${meta.id}_stats.txt
         echo "Read 2: ${fastqs[1]}" >> ${meta.id}_stats.txt
-        echo "File sizes:" >> ${meta.id}_stats.txt
         echo "Read 1 size: \$(gunzip -dc ${fastqs[0]} | wc -l | awk '{print \$1/4}') reads" >> ${meta.id}_stats.txt
         echo "Read 2 size: \$(gunzip -dc ${fastqs[1]} | wc -l | awk '{print \$1/4}') reads" >> ${meta.id}_stats.txt
         """
@@ -736,7 +735,7 @@ Add the following to the top of your `main.nf` file:
 
 !!! note
 
-    We are calling our map '`meta`'. This is the first introduction of a concept called `metamap` which we will cover later!
+    We are calling our map '`meta`'. This is the first introduction of a concept called `metamap` which we will cover in a subsequent side quest.
 
 ### 5.2. Implement the process in the workflow
 
