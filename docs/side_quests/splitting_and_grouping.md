@@ -1005,7 +1005,7 @@ Let's now group the samples by this new grouping element, using the [`groupTuple
                           }
                           .groupTuple()
                           .view()
-      ```
+    ```
 
 === "Before"
 
