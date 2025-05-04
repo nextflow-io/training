@@ -217,6 +217,10 @@ plugins:
           default: false
           locale: it
           name: Italiano
+        - build: true
+          default: false
+          locale: ko
+          name: Korean
       reconfigure_material: true
       reconfigure_search: true
   - search
