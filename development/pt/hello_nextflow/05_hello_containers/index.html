@@ -3627,8 +3627,9 @@ This is better for modularity, code maintenance and reproducibility.</p>
 
 <h4 id="234-inspect-how-nextflow-launched-the-containerized-task">2.3.4. Inspect how Nextflow launched the containerized task<a class="headerlink" href="#234-inspect-how-nextflow-launched-the-containerized-task" title="Permanent link">&para;</a></h4>
 <p>Let's take a look at the work subdirectory for one of the <code>cowpy</code> process calls to get a bit more insight on how Nextflow works with containers under the hood.</p>
-<p>Check the output from your <code>nextflow run</code> command to find the call ID for the <code>cowpy</code> process.
-Then navigate to the work subdirectory.
+<p>Check the output from your <code>nextflow run</code> command to find the path to the work subdirectory for the <code>cowpy</code> process.
+Looking at what we got for the run shown above, the console log line for the <code>cowpy</code> process starts with <code>[7f/caf718]</code>.
+That corresponds to the following truncated directory path: <code>work/7f/caf718</code>.
 In it, you will find the <code>.command.run</code> file that contains all the commands Nextflow ran on your behalf in the course of executing the pipeline.</p>
 <p>Open the <code>.command.run</code> file and search for <code>nxf_launch</code>; you should see something like this:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a>nxf_launch<span class="o">()</span><span class="w"> </span><span class="o">{</span>
