@@ -3689,7 +3689,7 @@ But it was a nice opportunity to reiterate the importance of the process output 
 <a id="__codelineno-23-69" name="__codelineno-23-69"></a><span class="n">process</span><span class="w"> </span><span class="n">GATK_GENOMICSDB</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-23-70" name="__codelineno-23-70"></a>
 <a id="__codelineno-23-71" name="__codelineno-23-71"></a><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s2">&quot;community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867&quot;</span>
-<a id="__codelineno-23-72" name="__codelineno-23-72"></a><span class="w">    </span><span class="n">publishDir</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">outdir</span><span class="o">,</span><span class="w"> </span><span class="nl">mode:</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
+<a id="__codelineno-23-72" name="__codelineno-23-72"></a><span class="w">    </span><span class="n">publishDir</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">outdir</span><span class="o">,</span><span class="w"> </span><span class="nl">mode:</span><span class="w"> </span><span class="s1">&#39;symlink&#39;</span>
 <a id="__codelineno-23-73" name="__codelineno-23-73"></a>
 <a id="__codelineno-23-74" name="__codelineno-23-74"></a><span class="w">    </span><span class="nl">input:</span>
 <a id="__codelineno-23-75" name="__codelineno-23-75"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="n">all_gvcfs</span>

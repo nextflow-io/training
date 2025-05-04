@@ -2999,7 +2999,7 @@
 <a id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="n">process</span><span class="w"> </span><span class="n">FASTQC</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4"></a>
 <a id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s2">&quot;community.wave.seqera.io/library/trim-galore:0.6.10--1bf8ca4e1967cd18&quot;</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6"></a><span class="w">    </span><span class="n">publishDir</span><span class="w"> </span><span class="s2">&quot;results/fastqc&quot;</span><span class="o">,</span><span class="w"> </span><span class="nl">mode:</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6"></a><span class="w">    </span><span class="n">publishDir</span><span class="w"> </span><span class="s2">&quot;results/fastqc&quot;</span><span class="o">,</span><span class="w"> </span><span class="nl">mode:</span><span class="w"> </span><span class="s1">&#39;symlink&#39;</span>
 <a id="__codelineno-3-7" name="__codelineno-3-7"></a>
 <a id="__codelineno-3-8" name="__codelineno-3-8"></a><span class="w">    </span><span class="nl">input:</span>
 <a id="__codelineno-3-9" name="__codelineno-3-9"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="n">reads</span>
@@ -3014,6 +3014,11 @@
 <a id="__codelineno-3-18" name="__codelineno-3-18"></a><span class="s2">    &quot;&quot;&quot;</span>
 <a id="__codelineno-3-19" name="__codelineno-3-19"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
+<p>You should recognize all the pieces from what you learned in Part 1 &amp; Part 2 of this training series; the only notable change is that this time we're using <code>mode: symlink</code> for the <code>publishDir</code> directive, and we're using a parameter to define the <code>publishDir</code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Even though the data files we're using here are very small, in genomics they can get very large. For the purposes of demonstration in the teaching environment, we're using the 'symlink' publishing mode to avoid unnecessary file copies. You shouldn't do this in your final workflows, since you'll lose results when you clean up your <code>work</code> directory.</p>
+</div>
 <h3 id="12-import-the-module-into-the-workflow-file">1.2. Import the module into the workflow file<a class="headerlink" href="#12-import-the-module-into-the-workflow-file" title="Permanent link">&para;</a></h3>
 <p>Add the statement <code>include { FASTQC } from './modules/fastqc.nf'</code> to the <code>rnaseq.nf</code> file:</p>
 <div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">rnaseq.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-3">3</a></span>
@@ -3113,7 +3118,7 @@ If you skipped it, Nextflow will pull the container for you; you don't have to d
 <a id="__codelineno-13-3" name="__codelineno-13-3"></a><span class="n">process</span><span class="w"> </span><span class="n">TRIM_GALORE</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-13-4" name="__codelineno-13-4"></a>
 <a id="__codelineno-13-5" name="__codelineno-13-5"></a><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s2">&quot;community.wave.seqera.io/library/trim-galore:0.6.10--1bf8ca4e1967cd18&quot;</span>
-<a id="__codelineno-13-6" name="__codelineno-13-6"></a><span class="w">    </span><span class="n">publishDir</span><span class="w"> </span><span class="s2">&quot;results/trimming&quot;</span><span class="o">,</span><span class="w"> </span><span class="nl">mode:</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6"></a><span class="w">    </span><span class="n">publishDir</span><span class="w"> </span><span class="s2">&quot;results/trimming&quot;</span><span class="o">,</span><span class="w"> </span><span class="nl">mode:</span><span class="w"> </span><span class="s1">&#39;symlink&#39;</span>
 <a id="__codelineno-13-7" name="__codelineno-13-7"></a>
 <a id="__codelineno-13-8" name="__codelineno-13-8"></a><span class="w">    </span><span class="nl">input:</span>
 <a id="__codelineno-13-9" name="__codelineno-13-9"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="n">reads</span>
@@ -3213,7 +3218,7 @@ If you skipped it, Nextflow will pull the container for you; you don't have to d
 <a id="__codelineno-21-3" name="__codelineno-21-3"></a><span class="n">process</span><span class="w"> </span><span class="n">HISAT2_ALIGN</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-21-4" name="__codelineno-21-4"></a>
 <a id="__codelineno-21-5" name="__codelineno-21-5"></a><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s2">&quot;community.wave.seqera.io/library/hisat2_samtools:5e49f68a37dc010e&quot;</span>
-<a id="__codelineno-21-6" name="__codelineno-21-6"></a><span class="w">    </span><span class="n">publishDir</span><span class="w"> </span><span class="s2">&quot;results/align&quot;</span><span class="o">,</span><span class="w"> </span><span class="nl">mode:</span><span class="w"> </span><span class="s1">&#39;copy&#39;</span>
+<a id="__codelineno-21-6" name="__codelineno-21-6"></a><span class="w">    </span><span class="n">publishDir</span><span class="w"> </span><span class="s2">&quot;results/align&quot;</span><span class="o">,</span><span class="w"> </span><span class="nl">mode:</span><span class="w"> </span><span class="s1">&#39;symlink&#39;</span>
 <a id="__codelineno-21-7" name="__codelineno-21-7"></a>
 <a id="__codelineno-21-8" name="__codelineno-21-8"></a><span class="w">    </span><span class="nl">input:</span>
 <a id="__codelineno-21-9" name="__codelineno-21-9"></a><span class="w">    </span><span class="n">path</span><span class="w"> </span><span class="n">reads</span>
