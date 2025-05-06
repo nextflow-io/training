@@ -650,8 +650,9 @@ You see that the character is saying all the greetings, just as it did when we r
 
 Let's take a look at the work subdirectory for one of the `cowpy` process calls to get a bit more insight on how Nextflow works with containers under the hood.
 
-Check the output from your `nextflow run` command to find the call ID for the `cowpy` process.
-Then navigate to the work subdirectory.
+Check the output from your `nextflow run` command to find the path to the work subdirectory for the `cowpy` process.
+Looking at what we got for the run shown above, the console log line for the `cowpy` process starts with `[7f/caf718]`.
+That corresponds to the following truncated directory path: `work/7f/caf718`.
 In it, you will find the `.command.run` file that contains all the commands Nextflow ran on your behalf in the course of executing the pipeline.
 
 Open the `.command.run` file and search for `nxf_launch`; you should see something like this:
