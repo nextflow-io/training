@@ -32,6 +32,9 @@ workflow {
     // emit a message about the size of the batch
     collectGreetings.out.count.view { "There were $it greetings in this batch" }
 
+    // emit a message about the size of the batch
+    collectGreetings.out.outFile.view { greeting -> "outFile is here $greeting" }
+
     // generate ASCII art of the greetings with cowpy
-    cowpy(collectGreetings.out.outfile, params.character)
+    cowpy(collectGreetings.out.outFile, params.character)
 }

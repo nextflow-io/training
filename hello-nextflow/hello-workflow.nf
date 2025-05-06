@@ -1,28 +1,15 @@
 #!/usr/bin/env nextflow
 
-/*
- * Use echo to print 'Hello World!' to a file
- */
-process sayHello {
-
-    publishDir 'results', mode: 'copy'
-
-    input:
-        val greeting
-
-    output:
-        path "${greeting}-output.txt"
-
-    script:
-    """
-    echo '$greeting' > '$greeting-output.txt'
-    """
-}
+// import processes from modules
+include { sayHello } from './modules/sayHello.nf' 
+include { convertToUpper } from './modules/convertToUpper.nf'
+include { collectGreetings } from './modules/collectGreetings.nf'
 
 /*
  * Pipeline parameters
  */
 params.greeting = 'greetings.csv'
+params.batch_name = 'test-batch'
 
 workflow {
 
@@ -33,4 +20,13 @@ workflow {
 
     // emit a greeting
     sayHello(greeting_ch)
+
+    convertToUpper(sayHello.out)
+
+    collectGreetings(convertToUpper.out.collect(), params.batch_name)
+    // convertToUpper.out.view { greetings -> "before collect: $greetings"}
+    // convertToUpper.out.collect().view { greetings -> "after collect: $greetings" }
+
+    collectGreetings.out.count.view { num_greetings -> "there were $num_greetings greetings" }
+ 
 }

@@ -5,11 +5,13 @@
  */
 params.greeting = 'greetings.csv'
 params.batch = 'test-batch'
+params.character = 'turkey'
 
 // Include modules
 include { sayHello } from './modules/sayHello.nf'
 include { convertToUpper } from './modules/convertToUpper.nf'
 include { collectGreetings } from './modules/collectGreetings.nf'
+include { cowpy } from './modules/cowpy.nf'
 
 workflow {
 
@@ -26,6 +28,9 @@ workflow {
 
     // collect all the greetings into one file
     collectGreetings(convertToUpper.out.collect(), params.batch)
+
+    // run cowpy with the collected greetings outFile
+    cowpy(collectGreetings.out.outFile, params.character)
 
     // emit a message about the size of the batch
     collectGreetings.out.count.view { "There were $it greetings in this batch" }
