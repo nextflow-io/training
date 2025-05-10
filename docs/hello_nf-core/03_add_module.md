@@ -1,4 +1,4 @@
-# Part 3: Add existing module
+# Part 3: Add an existing nf-core module
 
 In this third part of the Hello nf-core training course, we show you how to add an existing nf-core module to your pipeline.
 
