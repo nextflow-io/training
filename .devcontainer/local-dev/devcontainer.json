@@ -18,6 +18,7 @@
         },
         "../local-features/apptainer": {},
         "../local-features/tower-agent": {},
+        "../local-features/nextflow": {},
         "../local-features/conda-packages": {}
     },
     "workspaceFolder": "${localWorkspaceFolder}",
