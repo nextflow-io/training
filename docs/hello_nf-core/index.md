@@ -6,7 +6,15 @@ hide:
 
 # Hello nf-core
 
-<!-- TODO: more detailed intro -->
+nf-core is a community effort to develop and maintain a curated set of scientific pipelines built using Nextflow, as well as relevant tooling and guidelines that promote open development, testing, and peer review.
+
+These pipelines are designed to be modular, scalable, and portable, allowing researchers to easily adapt and execute them using their own data and compute resources.
+The best practices guidelines enforced by the project further ensure that the pipelines are robust, well-documented, and validated against real-world datasets. This helps to increase the reliability and reproducibility of scientific analyses and ultimately enables researchers to accelerate their scientific discoveries.
+
+nf-core is published in Nature Biotechnology: [Nat Biotechnol 38, 276–278 (2020). Nature Biotechnology](https://www.nature.com/articles/s41587-020-0439-x).
+An updated preprint is available at [bioRxiv](https://www.biorxiv.org/content/10.1101/2024.05.10.592912v1).
+
+You can learn more about the project's origins and governance at https://nf-co.re/about.
 
 During this training, you will be introduced to nf-core in a series of hands-on exercises.
 
