@@ -16,9 +16,12 @@
         "ghcr.io/rocker-org/devcontainer-features/miniforge:2": {
             "version": "latest"
         },
+        "ghcr.io/va-h/devcontainers-features/uv": {},
         "../local-features/apptainer": {},
         "../local-features/tower-agent": {},
-        "../local-features/conda-packages": {}
+        "../local-features/nextflow": {},
+        "../local-features/conda-channels": {},
+        "../local-features/uv-tools": {}
     },
     "workspaceFolder": "/workspaces/training",
     "remoteUser": "root",

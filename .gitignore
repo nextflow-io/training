@@ -2,10 +2,9 @@
 .cache
 .idea
 serve
-nextflow
 work
 .nextflow*
-nf-training/results
+results
 transcript-index
 .vscode
 site/
