@@ -1,6 +1,6 @@
 # Part 2: Rewrite Hello for nf-core
 
-In this second part of the Hello nf-core training course, we show you how to create an nf-core-compliant pipeline version of the final pipeline produced by the [Hello Nextflow](../hello_nextflow/index.md) course.
+In this second part of the Hello nf-core training course, we show you how to create an nf-core-compliant pipeline version of the pipeline produced by the [Hello Nextflow](../hello_nextflow/index.md) course.
 
 !!! note
 nf-core tools are pre-installed for you in our training environment.
@@ -8,17 +8,15 @@ If you are using a different environment, you need to install the nf-core tools 
 
 ---
 
-## 0. Side Quest: Workflows of Workflows
+## 0. Side Quest: Workflow of Workflows
 
-TODO: instructions -> pop out to run through the WoW side quest
+Before you get started with nf-core proper, you need to learn how to use an optional feature of Nextflow workflows that is not covered in the [Hello Nextflow](../hello_nextflow/index.md) beginners' course: the encapsulation of a workflow within another workflow.
 
-### Takeaway
+This feature is covered by the [Workflow of Workflows](https://training.nextflow.io/latest/side_quests/workflows_of_workflows) (a.k.a. WoW) side quest, a standalone mini-course that you can run through in the same training environment.
 
-You now know how to [...].
+Go ahead and do that now.
 
-### What's next?
-
-Find out [...].
+Once you have completed the side quest (or if you are confident you already know how to use this feature), you can move on to the next section.
 
 ---
 
