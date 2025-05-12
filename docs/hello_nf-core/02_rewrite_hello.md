@@ -8,7 +8,7 @@ If you are using a different environment, you need to install the nf-core tools 
 
 ---
 
-## 0. Side Quest: Workflows or Workflows
+## 0. Side Quest: Workflows of Workflows
 
 TODO: instructions -> pop out to run through the WoW side quest
 

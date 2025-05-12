@@ -21,6 +21,14 @@ nav:
       - hello_nextflow/06_hello_config.md
       - hello_nextflow/survey.md
       - hello_nextflow/next_steps.md
+  - Hello nf-core:
+      - hello_nf-core/index.md
+      - hello_nf-core/00_orientation.md
+      - hello_nf-core/01_run_demo.md
+      - hello_nf-core/02_rewrite_hello.md
+      - hello_nf-core/03_add_module.md
+      - hello_nf-core/survey.md
+      - hello_nf-core/next_steps.md
   - Nextflow for Genomics:
       - nf4_science/genomics/index.md
       - nf4_science/genomics/00_orientation.md
@@ -174,6 +182,7 @@ plugins:
       restart_increment_after:
         - envsetup/01_setup.md
         - hello_nextflow/00_orientation.md
+        - hello_nf-core/00_orientation.md
         - nf4_science/genomics/00_orientation.md
         - nf4_science/rnaseq/00_orientation.md
         - side_quests/orientation.md
@@ -185,6 +194,7 @@ plugins:
         - help.md
         - envsetup/*.md
         - hello_nextflow/*.md
+        - hello_nf-core/*.md
         - nf4_science/genomics/*.md
         - nf4_science/rnaseq/*.md
         - side_quests/*.md
