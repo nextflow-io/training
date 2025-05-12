@@ -58,7 +58,7 @@ These are foundational, domain-agnostic courses intended for those who are compl
 
     This is a course for newcomers who wish to learn run and develop [nf-core](https://nf-co.re/) compliant pipelines. The course covers the structure of nf-core pipelines in enough detail to enable developing simple but fully functional pipelines that follow the nf-core template and development best practices.
 
-    [Start the Hello Nextflow nf-core :material-arrow-right:](hello_nf-core/index.md){ .md-button .md-button--primary }
+    [Start the Hello nf-core training :material-arrow-right:](hello_nf-core/index.md){ .md-button .md-button--primary }
 
 !!! info ""
 
