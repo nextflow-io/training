@@ -155,8 +155,6 @@ nextflow run myorg-hello -profile docker,test --outdir results
 ```
 
 ```console title="Output"
-Nextflow 25.04.0 is available - Please consider updating your version to it
-
  N E X T F L O W   ~  version 24.10.4
 
 Launching `myorg-hello/main.nf` [naughty_babbage] DSL2 - revision: c0376c97f3
@@ -193,7 +191,7 @@ This shows you that all the basic wiring is in place.
 If you look inside the `main.nf` file, you'll see it imports a workflow called `HELLO` from `workflows/hello`.
 This is a placeholder workflow for our workflow of interest, with some nf-core functionality already in place.
 
-```groovy title="conf/test.config" linenums="1" hl_lines="17,19,35"
+```groovy title="conf/test.config" linenums="1" hl_lines="15,17,19,35"
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
@@ -240,7 +238,13 @@ workflow HELLO {
 */
 ```
 
-Compared to the original Hello Nextflow workflow, you'll notice there's something new here: the keywords `take`, `main` and `emit`.
+Compared to a basic Nextflow workflow like the one developed in Hello Nextflow, you'll notice a few things that are new here:
+
+- The workflow block has a name
+- Workflow inputs are declared using the `take:` keyword
+- Workflow content is placed inside a `main:` block
+- Outputs are declared using the `emit:` keyword
+
 These are optional features of Nextflow that make the workflow **composable**, meaning that it can be called from within another workflow.
 
 We are going to need to plug the relevant logic from our workflow of interest into that structure.
@@ -257,7 +261,41 @@ Learn how to make a simple workflow composable.
 
 ## 2. Make the original Hello Nextflow workflow composable
 
-TODO: overview
+We provide you with a clean, fully functional copy of the completed Hello Nextflow workflow in the directory `original-hello` along with its modules and the default CSV file it expects to use as input.
+
+```bash
+tree original-hello/
+```
+
+```console title="Output"
+original-hello/
+├── hello.nf
+├── modules
+│   ├── collectGreetings.nf
+│   ├── convertToUpper.nf
+│   ├── cowpy.nf
+│   └── sayHello.nf
+└── nextflow.config
+```
+
+Feel free to run it to satisfy yourself that it works:
+
+```bash
+nextflow run original-hello/hello.nf
+```
+
+```console title="Output"
+ N E X T F L O W   ~  version 24.10.4
+
+Launching `hello-original/hello.nf` [goofy_babbage] DSL2 - revision: e9e72441e9
+
+executor >  local (8)
+[a4/081cec] sayHello (1)       | 3 of 3 ✔
+[e7/7e9058] convertToUpper (3) | 3 of 3 ✔
+[0c/17263b] collectGreetings   | 1 of 1 ✔
+[94/542280] cowpy              | 1 of 1 ✔
+There were 3 greetings in this batch
+```
 
 ### 2.1. Add `take`, `main` and `emit` statements
 
