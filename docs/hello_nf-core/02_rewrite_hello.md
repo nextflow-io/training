@@ -43,10 +43,10 @@ This TUI will ask you to provide basic information about your pipeline and will 
 2. Select **Custom** on the `Choose pipeline type` screen
 3. Enter your pipeline details, replacing < YOUR NAME > with your own name, then select **Next**
 
-- **GitHub organisation:** core
-- **Workflow name:** hello
-- **A short description of your pipeline:** basic nf-core style version of Hello Nextflow
-- **Name of the main author / authors:** < YOUR NAME >
+**GitHub organisation:** core
+**Workflow name:** hello
+**A short description of your pipeline:** basic nf-core style version of Hello Nextflow
+**Name of the main author / authors:** < YOUR NAME >
 
 4. On the Template features screen, set "Toggle all features" to **off**, then selectively **enable** the following:
 
