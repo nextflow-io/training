@@ -1,6 +1,6 @@
-# Part 3: Add an existing nf-core module
+# Part 4: Input validation
 
-In this third part of the Hello nf-core training course, we show you how to add an existing nf-core module to your pipeline.
+In this fourth part of the Hello nf-core training course, we show you how to use the nf-schema plugin to validate inputs.
 
 TODO: THIS IS A WIP AND SHOULD NOT BE ADDED TO THE NAVIGATION
 
@@ -8,7 +8,7 @@ TODO: THIS IS A WIP AND SHOULD NOT BE ADDED TO THE NAVIGATION
 
 ---
 
-## 1. Find cat/cat to replace collectGreetings
+## 1. Add a schema
 
 TODO: instructions
 
@@ -22,7 +22,7 @@ Find out [...].
 
 ---
 
-## 2. Install and import the module
+## 2. Set up the validation
 
 TODO: instructions
 
@@ -36,7 +36,7 @@ Learn how to [...].
 
 ---
 
-## 3. Wire up the module to the workflow
+## 3. Something with metamap?
 
 TODO: instructions
 
