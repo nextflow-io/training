@@ -946,8 +946,8 @@ Typically small test files are stored under a directory called `assets`.
 There isn't one yet so let's create it now, then copy the file over from our working directory.
 
 ```bash
-mkdir assets
-cp greetings.csv assets/.
+mkdir core-hello/assets
+cp greetings.csv core-hello/assets/.
 ```
 
 Now we can update the `test.config` file as follows:
@@ -988,7 +988,7 @@ That was a lot, but we can finally try running the pipeline!
 Note that we have to add `--validate_params false` to the command line because we didn't set up the validation yet (that will come later).
 
 ```bash
-nextflow run core-hello --outdir . -profile test,docker --validate_params false
+nextflow run core-hello --outdir results -profile test,docker --validate_params false
 ```
 
 If you've done all of this correctly, it should produce the typical nf-core summary at the start (thanks to the initialisation subworkflow) and run to completion.
@@ -1000,7 +1000,7 @@ Launching `core-hello/main.nf` [ridiculous_pesquet] DSL2 - revision: c31b966b36
 
 Input/output options
   input                     : assets/greetings.csv
-  outdir                    : whatever
+  outdir                    : results
 
 Institutional config options
   config_profile_name       : Test profile

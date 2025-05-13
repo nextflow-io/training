@@ -458,11 +458,7 @@ This content is used to generate the web pages on the nf-core website.
 
 In addition to these human-readable documents, there are two JSON files that provide useful machine-readable information describing parameters and input requirements, `nextflow_schema.json` and `assets/schema_input.json`.
 
-##### `nextflow_schema.json`
-
 The `nextflow_schema.json` is a file used to store parameter related information including type, description and help text in a machine readable format. The schema is used for various purposes, including automated parameter validation, help text generation, and interactive parameter form rendering in UI interfaces.
-
-##### `assets/schema_input.json`
 
 The `schema_input.json` is a file used to define the input samplesheet structure. Each column can have a type, pattern, description and help text in a machine readable format. The schema is used for various purposes, including automated validation, and providing helpful error messages.
 
