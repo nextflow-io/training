@@ -94,8 +94,9 @@ By default, the files will be saved to `$HOME/.nextflow/assets`.
 This can be customized using the `NXF_ASSETS` environment variable; see the configuration documentation at https://www.nextflow.io/docs/latest/config.html.
 
 !!! note
-To be clear, you can do this with any Nextflow pipeline that is appropriately set up in GitHub, not just nf-core pipelines.
-However nf-core is the largest open-source collection of Nextflow pipelines.
+
+    To be clear, you can do this with any Nextflow pipeline that is appropriately set up in GitHub, not just nf-core pipelines.
+    However nf-core is the largest open-source collection of Nextflow pipelines.
 
 ### Takeaway
 
@@ -226,9 +227,10 @@ Moving on to the execution output, let's have a look at the lines that tell us w
 This tells us that three processes were run, corresponding to the three tools shown in the pipeline documentation page on the nf-core website: FASTQC, SEQTK_TRIM and MULTIQC.
 
 !!! note
-The full process names as shown here, such as `NFCORE_DEMO:DEMO:MULTIQC`, are longer than what you may have seen in the introductory Hello Nextflow material.
-These includes the names of their parent workflows and reflect the modularity of the pipeline code.
-We will go into more detail about that shortly.
+
+    The full process names as shown here, such as `NFCORE_DEMO:DEMO:MULTIQC`, are longer than what you may have seen in the introductory Hello Nextflow material.
+    These includes the names of their parent workflows and reflect the modularity of the pipeline code.
+    We will go into more detail about that shortly.
 
 Finally, let's have a look at the `results` directory produced by the pipeline.
 
@@ -321,9 +323,10 @@ Let's start with the code proper, though note that for now, we're going to focus
 
 The pipeline code organization follows a modular structure that is designed to maximize code reuse.
 
-!!!note
-We won't go over the actual code for how these modular components are connected, because there is some additional complexity associated with the use of subworkflows that can be confusing, and understanding that is not necessary at this stage of the training.
-For now, we're going to focus on the logic of this modular organization.
+!!! note
+
+    We won't go over the actual code for how these modular components are connected, because there is some additional complexity associated with the use of subworkflows that can be confusing, and understanding that is not necessary at this stage of the training.
+    For now, we're going to focus on the logic of this modular organization.
 
 ### 3.1.1. Overall organization and `main.nf` script
 
@@ -430,7 +433,8 @@ These subworkflows are what produces the fancy nf-core header in the console out
 Other pipelines may also use subworkflows as part of the main workflow of interest.
 
 !!! note
-If you would like to learn how to compose workflows with subworkflows, see the [Workflows of Workflows](https://training.nextflow.io/latest/side_quests/workflows_of_workflows/) Side Quest (also known as 'the WoW side quest').
+
+    If you would like to learn how to compose workflows with subworkflows, see the [Workflows of Workflows](https://training.nextflow.io/latest/side_quests/workflows_of_workflows/) Side Quest (also known as 'the WoW side quest').
 
 ### 3.2. Configuration, parameters and inputs
 
@@ -468,4 +472,4 @@ You know what are the main components of an nf-core pipeline and how the code is
 
 ### What's next?
 
-Take a break! That was a lot. When you're feeling refreshed and ready, move on to the next section to apply what you've learned to write an nf-core compliant pipeline.
+Take a break! That was a lot. When you're feeling refreshed and ready, move on to the next section to apply what you've learned to write an nf-core compatible pipeline.

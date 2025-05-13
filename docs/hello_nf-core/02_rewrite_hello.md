@@ -1,6 +1,6 @@
 # Part 2: Rewrite Hello for nf-core
 
-In this second part of the Hello nf-core training course, we show you how to create an nf-core-compliant pipeline version of the pipeline produced by the [Hello Nextflow](../hello_nextflow/index.md) course.
+In this second part of the Hello nf-core training course, we show you how to create an nf-core compatible pipeline version of the pipeline produced by the [Hello Nextflow](../hello_nextflow/index.md) course.
 
 You'll have noticed in the first section of the training that nf-core pipelines follow a fairly elaborate structure with a lot of accessory files.
 Creating all that from scratch would be very tedious, so the nf-core community has developed tooling to do it from a template instead, to bootstrap the process.
@@ -8,8 +8,9 @@ Creating all that from scratch would be very tedious, so the nf-core community h
 We are going to show you how to use this tooling to create a pipeline scaffold, then adapt existing 'regular' pipeline code onto the nf-core scaffold.
 
 !!! note
-The nf-core-tools package is pre-installed for you in our training environment.
-If you are using a different environment, you need to check whether the package is installed (run `nf-core --help` in your terminal) and if not, install it as described here: https://nf-co.re/docs/nf-core-tools/installation.
+
+    The nf-core-tools package is pre-installed for you in our training environment.
+    If you are using a different environment, you need to check whether the package is installed (run `nf-core --help` in your terminal) and if not, install it as described here: https://nf-co.re/docs/nf-core-tools/installation.
 
 ---
 
@@ -18,7 +19,8 @@ If you are using a different environment, you need to check whether the package 
 First, we create the scaffold for the new pipeline.
 
 !!! note
-Make sure you are in the `hello_nf-core` directory in your terminal.
+
+    Make sure you are in the `hello_nf-core` directory in your terminal.
 
 ### 1.1. Run the template-based pipeline creation tool
 
@@ -142,8 +144,9 @@ That's a lot of files!
 <!-- TODO: add some commentary tying this back to what we covered in Part 1 -->
 
 !!! note
-One important difference compared to the `nf-core/demo` pipeline we examined in the first part of this training is that there is no `modules` directory.
-This is because we didn't include any of the default nf-core modules.
+
+    One important difference compared to the `nf-core/demo` pipeline we examined in the first part of this training is that there is no `modules` directory.
+    This is because we didn't include any of the default nf-core modules.
 
 ### 1.2. Test that the scaffold is functional
 
@@ -530,9 +533,10 @@ You can see that the syntax for calling the imported workflow is essentially the
 
 You should also note that everything that has to do with pulling the inputs into the workflow (input parameter and channel construction) is now declared in this parent workflow.
 
-!!!note
-You can name the entrypoint workflow file whatever you want, it does not have to be named `main.nf`.
-The advantage of naming it `main.nf` is that if you don't specify a workflow file, Nextflow will automatically look for a file named `main.nf` in the specified directory.
+!!! note
+
+    You can name the entrypoint workflow file whatever you want, it does not have to be named `main.nf`.
+    The advantage of naming it `main.nf` is that if you don't specify a workflow file, Nextflow will automatically look for a file named `main.nf` in the specified directory.
 
 ### 2.7. Test that the workflow runs
 
@@ -543,8 +547,9 @@ nextflow run original-hello
 ```
 
 !!! note
-Here you see the advantage of using the `main.nf` naming convention, which allows us to omit including the name of the workflow file in the command.
-If we had named it `something_else.nf`, we would have had to do `nextflow run original-hello/something_else.nf`.
+
+    Here you see the advantage of using the `main.nf` naming convention, which allows us to omit including the name of the workflow file in the command.
+    If we had named it `something_else.nf`, we would have had to do `nextflow run original-hello/something_else.nf`.
 
 If you made all the changes correctly, this should run to completion.
 
@@ -568,8 +573,9 @@ This means we've successfully upgraded our HELLO workflow to be composable.
 
 You know how to make a workflow composable by giving it a name and adding `take`, `main` and `emit` statements, and how to call it from an entrypoint workflow.
 
-!!!note
-If you're interested in digging deeper into options for composing workflows of workflows, check out the [Workflow of Workflows](https://training.nextflow.io/latest/side_quests/workflows_of_workflows) (a.k.a. WoW) side quest.
+!!! note
+
+    If you're interested in digging deeper into options for composing workflows of workflows, check out the [Workflow of Workflows](https://training.nextflow.io/latest/side_quests/workflows_of_workflows) (a.k.a. WoW) side quest.
 
 ### What's next?
 
