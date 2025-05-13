@@ -449,7 +449,7 @@ This is a net new addition to the code compared to the original workflow.
 
 If you've done all the changes as described, your workflow should now look like this:
 
-```groovy title="original-hello/hello.nf" linenums="1" hl_lines="15 18-20 22 38-39"
+```groovy title="original-hello/hello.nf" linenums="1" hl_lines="15 17-19 21 37-38"
 #!/usr/bin/env nextflow
 
 /*
@@ -692,7 +692,7 @@ Since that is essentially what our `greetings.csv` file is, we'll keep the curre
 
 ### 3.3. Update the `main` block
 
-Now that our modules are available to the workflow, we can plug the workflow logic into the `main` block (skipping over `take` for now, we'll come back to it in a moment).
+Now that our modules are available to the workflow, we can plug the workflow logic into the `main` block.
 
 There is already some code in there that has to do with capturing the versions of the tools that get run by the workflow; we're going to leave that alone for now and simply insert our code right after the `main:` line.
 
@@ -700,7 +700,7 @@ Importantly, we have to update the name of the channel we're passing to the `say
 
 === "After"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="16" hl_lines="18 19"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="16" hl_lines="3 4"
         main:
 
         // emit a greeting (updated to use the default ch_samplesheet name)
@@ -1041,4 +1041,4 @@ You know how to convert a regular Nextflow pipeline into an nf-core style pipeli
 
 ### What's next?
 
-Take a big break, that was hard work! Your brain deserves to chill out and you could probably use some hydration and a bit of stretching. When you're ready, move on to the next section to learn how to add an nf-core module to an existing nf-core style pipeline.
+Take a big break, that was hard work! Your brain deserves to chill out and you could probably use some hydration and a bit of stretching. When you're ready, move on to the next section to learn how to add an nf-core module to an existing nf-core style pipeline. (COMING SOON)
