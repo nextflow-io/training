@@ -191,7 +191,7 @@ This shows you that all the basic wiring is in place.
 If you look inside the `main.nf` file, you'll see it imports a workflow called `HELLO` from `workflows/hello`.
 This is a placeholder workflow for our workflow of interest, with some nf-core functionality already in place.
 
-```groovy title="conf/test.config" linenums="1" hl_lines="15,17,19,35"
+```groovy title="conf/test.config" linenums="1" hl_lines="15 17 19 35"
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
@@ -248,6 +248,7 @@ Compared to a basic Nextflow workflow like the one developed in Hello Nextflow, 
 These are optional features of Nextflow that make the workflow **composable**, meaning that it can be called from within another workflow.
 
 We are going to need to plug the relevant logic from our workflow of interest into that structure.
+The first step for that is to make our original workflow composable.
 
 ### Takeaway
 
@@ -287,7 +288,7 @@ nextflow run original-hello/hello.nf
 ```console title="Output"
  N E X T F L O W   ~  version 24.10.4
 
-Launching `hello-original/hello.nf` [goofy_babbage] DSL2 - revision: e9e72441e9
+Launching `original-hello/hello.nf` [goofy_babbage] DSL2 - revision: e9e72441e9
 
 executor >  local (8)
 [a4/081cec] sayHello (1)       | 3 of 3 ✔
@@ -297,24 +298,282 @@ executor >  local (8)
 There were 3 greetings in this batch
 ```
 
-### 2.1. Add `take`, `main` and `emit` statements
+For reference, here is the complete workflow code (not counting the processes, which are in modules):
 
-TODO: instructions
+```groovy title="original-hello/hello.nf" linenums="1"
+#!/usr/bin/env nextflow
 
-### 2.2. Test the workflow
+/*
+* Pipeline parameters
+*/
+params.greeting = 'greetings.csv'
+params.batch = 'test-batch'
+params.character = 'turkey'
 
-TODO: instructions
+// Include modules
+include { sayHello } from './modules/sayHello.nf'
+include { convertToUpper } from './modules/convertToUpper.nf'
+include { collectGreetings } from './modules/collectGreetings.nf'
+include { cowpy } from './modules/cowpy.nf'
+
+workflow {
+
+  // create a channel for inputs from a CSV file
+  greeting_ch = Channel.fromPath(params.greeting)
+                      .splitCsv()
+                      .map { line -> line[0] }
+
+  // emit a greeting
+  sayHello(greeting_ch)
+
+  // convert the greeting to uppercase
+  convertToUpper(sayHello.out)
+
+  // collect all the greetings into one file
+  collectGreetings(convertToUpper.out.collect(), params.batch)
+
+  // emit a message about the size of the batch
+  collectGreetings.out.count.view { "There were $it greetings in this batch" }
+
+  // generate ASCII art of the greetings with cowpy
+  cowpy(collectGreetings.out.outfile, params.character)
+}
+```
+
+Let's walk through the necessary changes one by one.
+
+### 2.1. Name the workflow
+
+First, let's give the workflow a name so we can refer to it from a parent workflow.
+
+=== "After"
+
+    ```groovy title="original-hello/hello.nf" linenums="16"
+    workflow HELLO {
+    ```
+
+=== "Before"
+
+    ```groovy title="original-hello/hello.nf" linenums="16"
+    workflow {
+    ```
+
+The same conventions apply to workflow names as to module names.
+
+### 2.2. Replace channel construction with `take` statement
+
+Now, replace the channel construction with a simple `take` statement declaring expected inputs.
+
+=== "After"
+
+    ```groovy title="original-hello/hello.nf" linenums="18"
+      take:
+      // channel of greetings
+      greeting_ch
+    ```
+
+=== "Before"
+
+    ```groovy title="original-hello/hello.nf" linenums="18"
+      // create a channel for inputs from a CSV file
+      greeting_ch = Channel.fromPath(params.greeting)
+                          .splitCsv()
+                          .map { line -> line[0] }
+    ```
+
+This leaves the details of how the inputs are provided up to the parent workflow.
+
+As part of this change, you should also delete the line `params.greeting = 'greetings.csv'` from the block of parameter definitions (line 6).
+That will also be left to the parent workflow to declare.
+
+### 2.3. Preface workflow operations with `main` statement
+
+Next, add a `main` statement before the rest of the operations called in the body of the workflow.
+
+=== "After"
+
+    ```groovy title="original-hello/hello.nf" linenums="21" hl_lines="22"
+        main:
+        // emit a greeting
+        sayHello(greeting_ch)
+
+        // convert the greeting to uppercase
+        convertToUpper(sayHello.out)
+
+        // collect all the greetings into one file
+        collectGreetings(convertToUpper.out.collect(), params.batch)
+
+        // emit a message about the size of the batch
+        collectGreetings.out.count.view { "There were $it greetings in this batch" }
+
+        // generate ASCII art of the greetings with cowpy
+        cowpy(collectGreetings.out.outfile, params.character)
+    ```
+
+=== "Before"
+
+    ```groovy title="original-hello/hello.nf" linenums="21"
+        // emit a greeting
+        sayHello(greeting_ch)
+
+        // convert the greeting to uppercase
+        convertToUpper(sayHello.out)
+
+        // collect all the greetings into one file
+        collectGreetings(convertToUpper.out.collect(), params.batch)
+
+        // emit a message about the size of the batch
+        collectGreetings.out.count.view { "There were $it greetings in this batch" }
+
+        // generate ASCII art of the greetings with cowpy
+        cowpy(collectGreetings.out.outfile, params.character)
+    ```
+
+This basically says 'this is what this workflow _does_'.
+
+### 2.4. Add `emit` statement
+
+Finally, add an `emit` statement declaring what are the final outputs of the workflow.
+
+```groovy title="original-hello/hello.nf" linenums="37"
+  emit:
+  final_result = cowpy.out
+```
+
+This is a net new addition to the code compared to the original workflow.
+
+### 2.5. Recap of the completed changes
+
+If you've done all the changes as described, your workflow should now look like this:
+
+```groovy title="original-hello/hello.nf" linenums="1" hl_lines="15 18-20 22 38-39"
+#!/usr/bin/env nextflow
+
+/*
+* Pipeline parameters
+*/
+params.batch = 'test-batch'
+params.character = 'turkey'
+
+// Include modules
+include { sayHello } from './modules/sayHello.nf'
+include { convertToUpper } from './modules/convertToUpper.nf'
+include { collectGreetings } from './modules/collectGreetings.nf'
+include { cowpy } from './modules/cowpy.nf'
+
+workflow HELLO {
+
+    take:
+    // channel of greetings
+    greeting_ch
+
+    main:
+    // emit a greeting
+    sayHello(greeting_ch)
+
+    // convert the greeting to uppercase
+    convertToUpper(sayHello.out)
+
+    // collect all the greetings into one file
+    collectGreetings(convertToUpper.out.collect(), params.batch)
+
+    // emit a message about the size of the batch
+    collectGreetings.out.count.view { "There were $it greetings in this batch" }
+
+    // generate ASCII art of the greetings with cowpy
+    cowpy(collectGreetings.out.outfile, params.character)
+
+    emit:
+    final_result = cowpy.out
+}
+```
+
+This describes everything Nextflow needs EXCEPT what to feed into the input channel.
+That is going to be defined in the parent workflow, also called the **entrypoint** workflow.
+
+### 2.6. Make a dummy entrypoint workflow
+
+We can make a dummy entrypoint workflow to test the composable workflow without yet having to deal with the rest of the complexity of the nf-core pipeline scaffold.
+
+Create a blank file named `main.nf` in the same`original-hello` directory.
+
+```bash
+touch original-hello/main.nf
+```
+
+Copy the following code into the `main.nf` file.
+
+```groovy title="original-hello/main.nf" linenums="1"
+#!/usr/bin/env nextflow
+
+// import the workflow code from the hello.nf file
+include { HELLO } from './hello.nf'
+
+// declare input parameter
+params.greeting = 'greetings.csv'
+
+workflow {
+  // create a channel for inputs from a CSV file
+  greeting_ch = Channel.fromPath(params.greeting)
+                      .splitCsv()
+                      .map { line -> line[0] }
+
+  // call the imported workflow on the channel of greetings
+  HELLO(greeting_ch)
+
+  // view the outputs emitted by the workflow
+  HELLO.out.view { "Outputs: $it" }
+}
+```
+
+You can see that the syntax for calling the imported workflow is essentially the same as the syntax for calling modules.
+
+You should also note that everything that has to do with pulling the inputs into the workflow (input parameter and channel construction) is now declared in this parent workflow.
+
+!!!note
+You can name the entrypoint workflow file whatever you want, it does not have to be named `main.nf`.
+The advantage of naming it `main.nf` is that if you don't specify a workflow file, Nextflow will automatically look for a file named `main.nf` in the specified directory.
+
+### 2.7. Test that the workflow runs
+
+We finally have all the pieces we need to verify that the composable workflow works.
+
+```bash
+nextflow run original-hello
+```
+
+!!! note
+Here you see the advantage of using the `main.nf` naming convention, which allows us to omit including the name of the workflow file in the command.
+If we had named it `something_else.nf`, we would have had to do `nextflow run original-hello/something_else.nf`.
+
+If you made all the changes correctly, this should run to completion.
+
+```console title="Output"
+ N E X T F L O W   ~  version 24.10.4
+
+Launching `original-hello/main.nf` [friendly_wright] DSL2 - revision: 1ecd2d9c0a
+
+executor >  local (8)
+[24/c6c0d8] HELLO:sayHello (3)       | 3 of 3 ✔
+[dc/721042] HELLO:convertToUpper (3) | 3 of 3 ✔
+[48/5ab2df] HELLO:collectGreetings   | 1 of 1 ✔
+[e3/693b7e] HELLO:cowpy              | 1 of 1 ✔
+There were 3 greetings in this batch
+Outputs: /workspaces/training/hello-nf-core/work/e3/693b7e48dc119d0c54543e0634c2e7/cowpy-COLLECTED-test-batch-output.txt
+```
+
+This means we've successfully upgraded our HELLO workflow to be composable.
 
 ### Takeaway
 
-You know how to [...].
+You know how to make a workflow composable by giving it a name and adding `take`, `main` and `emit` statements, and how to call it from an entrypoint workflow.
 
 !!!note
 If you're interested in digging deeper into options for composing workflows of workflows, check out the [Workflow of Workflows](https://training.nextflow.io/latest/side_quests/workflows_of_workflows) (a.k.a. WoW) side quest.
 
 ### What's next?
 
-Learn how to [...].
+Learn how to graft a basic composable workflow onto the nf-core scaffold.
 
 ---
 
