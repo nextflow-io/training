@@ -24,16 +24,16 @@ Let's get started! Click on the "Open in GitHub Codespaces" button below to laun
 
 ## Learning objectives
 
-You will learn to use and develop nf-core compliant modules and pipelines, and utilize nf-core tooling effectively.
+You will learn to use and develop nf-core compatible modules and pipelines, and utilize nf-core tooling effectively.
 
 By the end of this training, you will be able to:
 
 - Find and run nf-core pipelines
 - Describe the code structure and project organization of nf-core pipelines
-- Create a basic nf-core compliant pipeline from a template
-- Convert basic Nextflow modules to nf-core compliant modules
+- Create a basic nf-core compatible pipeline from a template
+- Convert basic Nextflow modules to nf-core compatible modules
 - Manage inputs and parameters using nf-core tooling
-- Add nf-core modules to an nf-core compliant pipeline
+- Add nf-core modules to an nf-core compatible pipeline
 
 ## Audience & prerequisites
 
