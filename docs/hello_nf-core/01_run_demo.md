@@ -472,7 +472,7 @@ Other pipelines may also use subworkflows as part of the main workflow of intere
 
     If you would like to learn how to compose workflows with subworkflows, see the [Workflows of Workflows](https://training.nextflow.io/latest/side_quests/workflows_of_workflows/) Side Quest (also known as 'the WoW side quest').
 
-### 3.2. Configuration, parameters and inputs
+### 3.2. Configuration
 
 The nf-core project applies guidelines for pipeline configuration that aim to build on Nextflow's flexible customization options in a way that provides greater consistency and maintainability across pipelines.
 
@@ -482,10 +482,10 @@ There are several additional configuration files that are stored in the `conf` f
 
 - `base.config`: A 'blank slate' config file, appropriate for general use on most high-performance computing. environments. This defines broad bins of resource usage, for example, which are convenient to apply to modules.
 - `modules.config`: Additional module directives and arguments.
-- `test.config`: A profile to run the pipeline with minimal test data, which we used when we ran the demo pipeline in the previous section.
+- `test.config`: A profile to run the pipeline with minimal test data, which we used when we ran the demo pipeline in the previous section (code shown there).
 - `test_full.config`: A profile to run the pipeline with a full-sized test dataset.
 
-### 3.3. Documentation and other assets
+### 3.3. Documentation and related assets
 
 At the top level, you can find a README file with summary information, as well as accessory files that summarize project information such as licensing, contribution guidelines, citation and code of conduct.
 
@@ -494,12 +494,113 @@ This content is used to generate the web pages on the nf-core website.
 
 In addition to these human-readable documents, there are two JSON files that provide useful machine-readable information describing parameters and input requirements, `nextflow_schema.json` and `assets/schema_input.json`.
 
-The `nextflow_schema.json` is a file used to store parameter related information including type, description and help text in a machine readable format.
+The `nextflow_schema.json` is a file used to store information about the pipeline parameters including type, description and help text in a machine readable format.
 The schema is used for various purposes, including automated parameter validation, help text generation, and interactive parameter form rendering in UI interfaces.
+
+```json title="assets/nextflow_schema.json (not showing full file)" linenums="1"
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://raw.githubusercontent.com/nf-core/demo/master/nextflow_schema.json",
+    "title": "nf-core/demo pipeline parameters",
+    "description": "An nf-core demo pipeline",
+    "type": "object",
+    "$defs": {
+        "input_output_options": {
+            "title": "Input/output options",
+            "type": "object",
+            "fa_icon": "fas fa-terminal",
+            "description": "Define where the pipeline should find input data and save output data.",
+            "required": ["input", "outdir"],
+            "properties": {
+                "input": {
+                    "type": "string",
+                    "format": "file-path",
+                    "exists": true,
+                    "schema": "assets/schema_input.json",
+                    "mimetype": "text/csv",
+                    "pattern": "^\\S+\\.csv$",
+                    "description": "Path to comma-separated file containing information about the samples in the experiment.",
+                    "help_text": "You will need to create a design file with information about the samples in your experiment before running the pipeline. Use this parameter to specify its location. It has to be a comma-separated file with 3 columns, and a header row. See [usage docs](https://nf-co.re/demo/usage#samplesheet-input).",
+                    "fa_icon": "fas fa-file-csv"
+                },
+                "outdir": {
+                    "type": "string",
+                    "format": "directory-path",
+                    "description": "The output directory where the results will be saved. You have to use absolute paths to storage on Cloud infrastructure.",
+                    "fa_icon": "fas fa-folder-open"
+                },
+                "email": {
+                    "type": "string",
+                    "description": "Email address for completion summary.",
+                    "fa_icon": "fas fa-envelope",
+                    "help_text": "Set this parameter to your e-mail address to get a summary e-mail with details of the run sent to you when the workflow exits. If set in your user config file (`~/.nextflow/config`) then you don't need to specify this on the command line for every run.",
+                    "pattern": "^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,5})$"
+                },
+                "multiqc_title": {
+                    "type": "string",
+                    "description": "MultiQC report title. Printed as page header, used for filename if not otherwise specified.",
+                    "fa_icon": "fas fa-file-signature"
+                }
+            }
+        },
+(truncated)
+```
 
 The `schema_input.json` is a file used to define the input samplesheet structure.
 Each column can have a type, pattern, description and help text in a machine readable format.
+
+```json title="assets/schema_input.json" linenums="1"
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/nf-core/demo/master/assets/schema_input.json",
+  "title": "nf-core/demo pipeline - params.input schema",
+  "description": "Schema for the file provided with params.input",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "sample": {
+        "type": "string",
+        "pattern": "^\\S+$",
+        "errorMessage": "Sample name must be provided and cannot contain spaces",
+        "meta": ["id"]
+      },
+      "fastq_1": {
+        "type": "string",
+        "format": "file-path",
+        "exists": true,
+        "pattern": "^\\S+\\.f(ast)?q\\.gz$",
+        "errorMessage": "FastQ file for reads 1 must be provided, cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'"
+      },
+      "fastq_2": {
+        "type": "string",
+        "format": "file-path",
+        "exists": true,
+        "pattern": "^\\S+\\.f(ast)?q\\.gz$",
+        "errorMessage": "FastQ file for reads 2 cannot contain spaces and must have extension '.fq.gz' or '.fastq.gz'"
+      }
+    },
+    "required": ["sample", "fastq_1"]
+  }
+}
+```
+
 The schema is used for various purposes, including automated validation, and providing helpful error messages.
+
+An example samplesheet is provided under the `assets` directory:
+
+```csv title="assets/samplesheet.csv" linenums="1"
+sample,fastq_1,fastq_2
+SAMPLE_PAIRED_END,/path/to/fastq/files/AEG588A1_S1_L002_R1_001.fastq.gz,/path/to/fastq/files/AEG588A1_S1_L002_R2_001.fastq.gz
+SAMPLE_SINGLE_END,/path/to/fastq/files/AEG588A4_S4_L003_R1_001.fastq.gz,
+
+```
+
+!!! Note
+The paths in this example samplesheet are not real.
+For paths to real data files, you should look in the test profiles, which link to data in the `nf-core/test-datasets` repository.
+
+    In general, it's considered good practice to link out to example data rather than include it in the pipeline code repository, unless the example data is of trivial size (as is the case for the `greetings.csv` in the Hello Nextflow training series).
 
 ### Takeaway
 
