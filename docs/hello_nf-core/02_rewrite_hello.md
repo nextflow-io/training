@@ -1,6 +1,6 @@
 # Part 2: Rewrite Hello for nf-core
 
-In this second part of the Hello nf-core training course, we show you how to create an nf-core compatible pipeline version of the pipeline produced by the [Hello Nextflow](../hello_nextflow/index.md) course.
+In this second part of the Hello nf-core training course, we show you how to create an nf-core compatible version of the pipeline produced by the [Hello Nextflow](../hello_nextflow/index.md) course.
 
 You'll have noticed in the first section of the training that nf-core pipelines follow a fairly elaborate structure with a lot of accessory files.
 Creating all that from scratch would be very tedious, so the nf-core community has developed tooling to do it from a template instead, to bootstrap the process.
@@ -52,6 +52,7 @@ This TUI will ask you to provide basic information about your pipeline and will 
 
 - `Add configuration files`
 - `Use nf-core components`
+- `Use nf-schema`
 - `Add documentation`
 - `Add testing profiles`
 
@@ -153,41 +154,47 @@ That's a lot of files!
 Believe it or not, even though you haven't yet added any modules to make it do real work, the pipeline scaffold can actually be run using the test profile, the same way we ran the `nf-core/demo` pipeline.
 
 ```bash
-nextflow run core-hello -profile docker,test --outdir results
+nextflow run core-hello -profile docker,test --outdir core-hello-results
 ```
 
 ```console title="Output"
  N E X T F L O W   ~  version 24.10.4
 
-Launching `core-hello/main.nf` [nauseous_meucci] DSL2 - revision: c31b966b36
+Launching `core-hello/main.nf` [special_ride] DSL2 - revision: c31b966b36
 
+Downloading plugin nf-schema@2.2.0
 Input/output options
   input                     : https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv
-  outdir                    : whatever
+  outdir                    : core-hello-results
 
 Institutional config options
   config_profile_name       : Test profile
   config_profile_description: Minimal test dataset to check pipeline function
 
 Generic options
-  trace_report_suffix       : 2025-05-13_04-48-09
+  trace_report_suffix       : 2025-05-14_10-01-18
 
 Core Nextflow options
-  runName                   : nauseous_meucci
+  runName                   : special_ride
   containerEngine           : docker
   launchDir                 : /workspaces/training/hello-nf-core
   workDir                   : /workspaces/training/hello-nf-core/work
   projectDir                : /workspaces/training/hello-nf-core/core-hello
   userName                  : root
-  profile                   : test,docker
+  profile                   : docker,test
   configFiles               :
 
 !! Only displaying parameters that differ from the pipeline defaults !!
 ------------------------------------------------------
--[core/hello] Pipeline completed successfully-
+-[core/hello] Pipeline completed successfully
 ```
 
 This shows you that all the basic wiring is in place.
+You can take a look at the reports in the `pipeline_info` directory to see what was run; not much at all!
+
+!!! note
+The nf-core pipeline template includes an example samplesheet, but at time of writing it is very domain-specific.
+Future work will aim to produce something more generic.
 
 ### 1.3. Examine the placeholder workflow
 
@@ -259,7 +266,7 @@ You now know how to create a pipeline scaffold using nf-core tools.
 
 ### What's next?
 
-Learn how to make a simple workflow composable.
+Learn how to make a simple workflow composable as a prelude to making it nf-core compatible.
 
 ---
 
@@ -395,7 +402,7 @@ Next, add a `main` statement before the rest of the operations called in the bod
 
 === "After"
 
-    ```groovy title="original-hello/hello.nf" linenums="21" hl_lines="22"
+    ```groovy title="original-hello/hello.nf" linenums="21" hl_lines="1"
         main:
         // emit a greeting
         sayHello(greeting_ch)
@@ -525,7 +532,7 @@ workflow {
   HELLO(greeting_ch)
 
   // view the outputs emitted by the workflow
-  HELLO.out.view { "Outputs: $it" }
+  HELLO.out.view { "Output: $it" }
 }
 ```
 
@@ -564,7 +571,7 @@ executor >  local (8)
 [48/5ab2df] HELLO:collectGreetings   | 1 of 1 ✔
 [e3/693b7e] HELLO:cowpy              | 1 of 1 ✔
 There were 3 greetings in this batch
-Outputs: /workspaces/training/hello-nf-core/work/e3/693b7e48dc119d0c54543e0634c2e7/cowpy-COLLECTED-test-batch-output.txt
+Output: /workspaces/training/hello-nf-core/work/e3/693b7e48dc119d0c54543e0634c2e7/cowpy-COLLECTED-test-batch-output.txt
 ```
 
 This means we've successfully upgraded our HELLO workflow to be composable.
@@ -586,6 +593,8 @@ Learn how to graft a basic composable workflow onto the nf-core scaffold.
 ## 3. Fit the updated workflow logic into the placeholder workflow
 
 This is the current content of the `HELLO` workflow in `core-hello/workflows/hello.nf`.
+Overall this code does very little aside from some housekeeping that has to do with capturing the version of any software tools that get run in the pipeline.
+
 We need to add the relevant code from the version of the original workflow that we made composable.
 
 ```groovy title="core-hello/workflows/hello.nf" linenums="1"
@@ -635,19 +644,30 @@ workflow HELLO {
 */
 ```
 
+We're going to tackle this in the following stages:
+
+1. Copy over the modules and set up module imports
+2. Leave the `take` declaration as is
+3. Update the `main` block
+4. Update the `emit` block
+
+!!! note
+We're going to ignore the version capture for this first pass and will look at how to wire that up in a later section.
+
 ### 3.1. Copy over the modules and set up module imports
 
-This is the easiest part so let's do it first.
 In the original workflow, the four processes are stored in modules, so we need to copy those over to this new project (into a new `local` directory) and add import statements to the workflow file.
 
+First let's copy the module files over:
+
 ```bash
-mkdir core-hello/modules/local/
+mkdir -p core-hello/modules/local/
 cp original-hello/modules/* core-hello/modules/local/.
 ```
 
 You should now see the directory of modules listed under `core-hello/`.
 
-```console title="Output"
+```bash
 tree core-hello/modules
 ```
 
@@ -658,25 +678,37 @@ core-hello/modules
     ├── convertToUpper.nf
     ├── cowpy.nf
     └── sayHello.nf
-
-1 directory, 4 files
 ```
 
 Finally, copy the import statements from the `original-hello/hello.nf` workflow to the `core-hello/workflows/hello.nf` version.
 
-```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="8-11"
-/*
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*/
-include { paramsSummaryMap       } from 'plugin/nf-schema'
-include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
-include { sayHello               } from '../modules/local/sayHello.nf'
-include { convertToUpper         } from '../modules/local/convertToUpper.nf'
-include { collectGreetings       } from '../modules/local/collectGreetings.nf'
-include { cowpy                  } from '../modules/local/cowpy.nf'
-```
+=== "After"
+
+    ```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="8-11"
+    /*
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    */
+    include { paramsSummaryMap       } from 'plugin/nf-schema'
+    include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
+    include { sayHello               } from '../modules/local/sayHello.nf'
+    include { convertToUpper         } from '../modules/local/convertToUpper.nf'
+    include { collectGreetings       } from '../modules/local/collectGreetings.nf'
+    include { cowpy                  } from '../modules/local/cowpy.nf'
+    ```
+
+=== "Before"
+
+    ```groovy title="core-hello/workflows/hello.nf" linenums="1" hl_lines="8-11"
+    /*
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        IMPORT MODULES / SUBWORKFLOWS / FUNCTIONS
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    */
+    include { paramsSummaryMap       } from 'plugin/nf-schema'
+    include { softwareVersionsToYAML } from '../subworkflows/nf-core/utils_nfcore_pipeline'
+    ```
 
 Notice that here we've adapted the spacing of the import statements to follow the nf-core style convention, and we've updated the relative paths to the modules to reflect that they're now stored at a different level of nesting.
 
@@ -690,6 +722,8 @@ Since that is essentially what our `greetings.csv` file is, we'll keep the curre
     ch_samplesheet // channel: samplesheet read in from --input
 ```
 
+The input handling will be done upstream of this workflow (not in this code file).
+
 ### 3.3. Update the `main` block
 
 Now that our modules are available to the workflow, we can plug the workflow logic into the `main` block.
@@ -701,7 +735,7 @@ Importantly, we have to update the name of the channel we're passing to the `say
 === "After"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="16" hl_lines="3 4"
-        main:
+
 
         // emit a greeting (updated to use the default ch_samplesheet name)
         sayHello(ch_samplesheet)
@@ -761,7 +795,7 @@ Finally, we need to update the `emit` block to include the declaration of the wo
 
 === "After"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="55" hl_lines="56"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="55" hl_lines="2"
         emit:
         final_result   = cowpy.out
         versions       = ch_versions                 // channel: [ path(versions.yml) ]
@@ -769,16 +803,29 @@ Finally, we need to update the `emit` block to include the declaration of the wo
 
 === "Before"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="55" hl_lines="56"
+    ```groovy title="core-hello/workflows/hello.nf" linenums="55"
         emit:
         versions       = ch_versions                 // channel: [ path(versions.yml) ]
     ```
 
 This concludes the modifications we need to make to the HELLO workflow itself.
 
-### 3.5. Adapt the input handling
+### Takeaway
+
+You know how to fit the core pieces of a composable workflow into an nf-core placeholder workflow.
+
+### What's next?
+
+Learn how to adapt how the inputs are handle in the nf-core pipeline scaffold.
+
+---
+
+## 4. Adapt the input handling
 
 Now that the HELLO workflow is ready to go, we need to adapt how the inputs are handled (to make sure our `greetings.csv` will be handled appropriately).
+
+### 4.1. Identify where inputs are handled
+
 The first step is to figure out where the input handling is done.
 
 You may recall that when we rewrote the Hello Nextflow workflow to be composable, we moved the input parameter declaration up one level, in the `main.nf` entrypoint workflow.
@@ -915,9 +962,24 @@ If we open up `core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf
 This is the channel factory that parses the samplesheet and passes it on in a form that is ready to be consumed by the HELLO workflow.
 It is quite complex because it does a lot of parsing and validation work.
 
-The good news is that our pipeline's needs are much simpler, so we can replace all of that by the relevant channel factory we defined in the original Hello Nextflow workflow.
+!!! note
+The syntax above is a little different from what we've used previously, but basically this:
 
-```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="64"
+    ```groovy
+    Channel.<...>.set { ch_samplesheet }
+    ```
+
+    is equivalent to this:
+
+    ```groovy
+    ch_samplesheet = Channel.<...>
+    ```
+
+### 4.2. Replace the templated input channel code
+
+The good news is that our pipeline's needs are much simpler, so we can replace all of that by the channel construction code we developed in the original Hello Nextflow workflow.
+
+```groovy title="core-hello/subworkflows/local/utils_nfcore_hello_pipeline/main.nf" linenums="64" hl_lines="4"
     //
     // Create channel from input file provided through params.input
     //
@@ -930,23 +992,23 @@ The good news is that our pipeline's needs are much simpler, so we can replace a
     versions    = ch_versions
 ```
 
+Importantly, in that highlighted line, we've updated the channel name from `greeting_ch` to `ch_samplesheet`, and the parameter name from `params.greeting` to `params.input`.
+
 In its current form, this won't let us take advantage of nf-core's built-in capabilities for schema validation, but we can add that in later.
 For now, let's focus on keeping it as simple as possible to get to something we can run successfully on test data.
 
-### 3.6. Update the test profiles
+### 4.3. Update the test profile
 
-Speaking of test data and parameters, let's update the test profile for this pipeline to use the `greetings.csv` mini-samplesheet.
+Speaking of test data and parameters, let's update the test profile for this pipeline to use the `greetings.csv` mini-samplesheet instead of the example samplesheet provided in the template.
 
-Under `core-hello/config`, we find two test profiles: `test.config` and `test_full.config`, which are meant to test a small data sample and a full-size one.
+Under `core-hello/config`, we find two templated test profiles: `test.config` and `test_full.config`, which are meant to test a small data sample and a full-size one.
 Given the purpose of our pipeline, there's not really a point to setting up a full-size test profile, so feel free to ignore or delete `test_full.config`.
 We're going to focus on setting up `test.config` to run on our `greetings.csv` file with a few default parameters.
 
-First we need to copy the greetings.csv file to an appropriate place in our pipeline project.
-Typically small test files are stored under a directory called `assets`.
-There isn't one yet so let's create it now, then copy the file over from our working directory.
+First we need to copy the `greetings.csv` file to an appropriate place in our pipeline project.
+Typically small test files are stored in the `assets` directory, so let's copy the file over from our working directory.
 
 ```bash
-mkdir core-hello/assets
 cp greetings.csv core-hello/assets/.
 ```
 
@@ -960,7 +1022,7 @@ Now we can update the `test.config` file as follows:
             config_profile_description = 'Minimal test dataset to check pipeline function'
 
             // Input data
-            input  = 'assets/greetings.csv'
+            input  = 'core-hello/assets/greetings.csv'
 
             // Other parameters
             batch     = 'test'
@@ -982,13 +1044,40 @@ Now we can update the `test.config` file as follows:
         }
     ```
 
-### 3.6. Run the pipeline with the test profile
+And while we're at it, let's lower the default resource allocations:
+
+=== "After"
+
+    ```groovy title="core-hello/config/test.config" linenums="13"
+    process {
+        resourceLimits = [
+            cpus: 1,
+            memory: '1.GB'
+        ]
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="core-hello/config/test.config" linenums="13"
+    process {
+        resourceLimits = [
+            cpus: 4,
+            memory: '15.GB',
+            time: '1.h'
+        ]
+    }
+    ```
+
+This completes the code modifications we need to do.
+
+### 4.4. Run the pipeline with the test profile
 
 That was a lot, but we can finally try running the pipeline!
 Note that we have to add `--validate_params false` to the command line because we didn't set up the validation yet (that will come later).
 
 ```bash
-nextflow run core-hello --outdir results -profile test,docker --validate_params false
+nextflow run core-hello --outdir core-hello-results -profile test,docker --validate_params false
 ```
 
 If you've done all of this correctly, it should produce the typical nf-core summary at the start (thanks to the initialisation subworkflow) and run to completion.
@@ -996,11 +1085,11 @@ If you've done all of this correctly, it should produce the typical nf-core summ
 ```console title="Output"
  N E X T F L O W   ~  version 24.10.4
 
-Launching `core-hello/main.nf` [ridiculous_pesquet] DSL2 - revision: c31b966b36
+Launching `core-hello/main.nf` [agitated_noyce] DSL2 - revision: c31b966b36
 
 Input/output options
-  input                     : assets/greetings.csv
-  outdir                    : results
+  input                     : core-hello/assets/greetings.csv
+  outdir                    : core-hello-results
 
 Institutional config options
   config_profile_name       : Test profile
@@ -1008,10 +1097,10 @@ Institutional config options
 
 Generic options
   validate_params           : false
-  trace_report_suffix       : 2025-05-13_07-16-11
+  trace_report_suffix       : 2025-05-14_11-10-22
 
 Core Nextflow options
-  runName                   : ridiculous_pesquet
+  runName                   : agitated_noyce
   containerEngine           : docker
   launchDir                 : /workspaces/training/hello-nf-core
   workDir                   : /workspaces/training/hello-nf-core/work
@@ -1023,21 +1112,22 @@ Core Nextflow options
 !! Only displaying parameters that differ from the pipeline defaults !!
 ------------------------------------------------------
 executor >  local (8)
-[cd/49cc7d] CORE_HELLO:HELLO:sayHello (3)       [100%] 3 of 3 ✔
-[dc/729e82] CORE_HELLO:HELLO:convertToUpper (3) [100%] 3 of 3 ✔
-[f8/72db8c] CORE_HELLO:HELLO:collectGreetings   [100%] 1 of 1 ✔
-[fe/4922dd] CORE_HELLO:HELLO:cowpy              [100%] 1 of 1 ✔
-There were 3 greetings in this batch
+[d6/b59dca] CORE_HELLO:HELLO:sayHello (1)       | 3 of 3 ✔
+[0b/42f9a1] CORE_HELLO:HELLO:convertToUpper (2) | 3 of 3 ✔
+[73/bec621] CORE_HELLO:HELLO:collectGreetings   | 1 of 1 ✔
+[3f/e0a67a] CORE_HELLO:HELLO:cowpy              | 1 of 1 ✔
 -[core/hello] Pipeline completed successfully-
 ```
 
-And there it is! It may seem like a low of work to accomplish the same result as the original pipeline, but this gives you a solid foundation to adopting key additional benefits of nf-core, including input validation and some neat metadata handling capabilities that we'll cover in a later section.
+And there it is! It may seem like a low of work to accomplish the same result as the original pipeline, but if you check out the results directory, you'll see that in addition to the results produced by the Hello pipeline, you still get the `pipeline_info` directory containing the various reports produced by the nf-core utility subworkflows.
+
+On top of that, this gives you a solid foundation to adopting key additional benefits of nf-core, including input validation and some neat metadata handling capabilities that we'll cover in a later section.
 
 ---
 
 ### Takeaway
 
-You know how to convert a regular Nextflow pipeline into an nf-core style pipeline using the nf-core project's template. As part of that, you learned how to make a workflow composable, and identify the most common elements of the nf-core template that need to be adapted when developing a custom nf-core style pipeline.
+You know how to convert a regular Nextflow pipeline into an nf-core style pipeline using the nf-core template. As part of that, you learned how to make a workflow composable, and identify the most common elements of the nf-core template that need to be adapted when developing a custom nf-core style pipeline.
 
 ### What's next?
 
