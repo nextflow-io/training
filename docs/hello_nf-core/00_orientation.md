@@ -17,7 +17,7 @@ Change directory now by running this command in the terminal:
 cd hello-nf-core/
 ```
 
-!!!tip
+!!! tip
 
     If for whatever reason you move out of this directory, you can always use the full path to return to it, assuming you're running this within the Github Codespaces training environment:
 
@@ -44,21 +44,24 @@ If you run this inside `hello-nf-core`, you should see the following output:
 
 ```console title="Directory contents"
 .
-├── ...
-├── solutions
-│   ├── 1-...
-└── ...
+├── greetings.csv
+├── original-hello
+│   ├── hello.nf
+│   ├── modules
+│   └── nextflow.config
+└── solutions
+    └── composable-hello
 
-X directories, Y files
+4 directories, 3 files
 ```
 
 **Here's a summary of what you should know to get started:**
 
-- [...]
+- **The `greetings.csv` file** is a CSV containing some minimal columnar data we use for testing purposes.
+
+- **The `original-hello` directory** contains a copy of the source code produced by working through the complete Hello Nextflow training series (with Docker enabled).
 
 - **The `solutions` directory** contains the completed workflow scripts that result from each step of the course.
   They are intended to be used as a reference to check your work and troubleshoot any issues.
-  The name and number in the filename correspond to the step of the relevant part of the course.
-  For example, [...]
 
 **Now, to begin the course, click on the arrow in the bottom right corner of this page.**

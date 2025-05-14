@@ -4,20 +4,7 @@ In this first part of the Hello nf-core training course, we show you how to find
 
 We are going to use a pipeline called nf-core/demo that is maintained by the nf-core project as part of its inventory of pipelines for demonstrating code structure and tool operations.
 
----
-
-## 0. Warmup
-
-Before we go looking for the pipeline, let's create a project directory where we're going to do the work.
-
-Make sure you are in the `hello-nf-core/` directory as instructed in the [Orientation](./00_orientation.md), then create the directory as follows:
-
-```bash
-mkdir demo_run/
-cd demo_run
-```
-
-Once that's done, you can move on to find and run your first nf-core pipeline!
+Make sure you are in the `hello-nf-core/` directory as instructed in the [Orientation](./00_orientation.md).
 
 ---
 
@@ -90,13 +77,59 @@ Checking nf-core/demo ...
  downloaded from https://github.com/nf-core/demo.git - revision: 04060b4644 [master]
 ```
 
-By default, the files will be saved to `$HOME/.nextflow/assets`.
-This can be customized using the `NXF_ASSETS` environment variable; see the configuration documentation at https://www.nextflow.io/docs/latest/config.html.
+To be clear, you can do this with any Nextflow pipeline that is appropriately set up in GitHub, not just nf-core pipelines.
+However nf-core is the largest open-source collection of Nextflow pipelines.
+
+You can get Nextflow to give you a list of what pipelines you have retrieved in this way:
+
+```bash
+nextflow list
+```
+
+```console title="Output"
+nf-core/demo
+```
+
+You'll notice that the files are not in your current work directory.
+By default, they are saved to `$NXF_HOME/assets`.
+
+```bash
+tree -L 2 $NXF_HOME/assets/
+```
+
+```console title="Output"
+/workspaces/.nextflow/assets/
+└── nf-core
+    └── demo
+```
 
 !!! note
+The full path may differ on your system if you're not using our training environment.
 
-    To be clear, you can do this with any Nextflow pipeline that is appropriately set up in GitHub, not just nf-core pipelines.
-    However nf-core is the largest open-source collection of Nextflow pipelines.
+The location of the downloaded source code is intentionally 'out of the way' on the principle that these pipelines should be used more like libraries than code that you would directly interact with.
+
+However, for the purposes of this training, we'd like to be able to poke around and see what's in there.
+So to make that easier, let's create a symbolic link to that location from our current working directory.
+
+```bash
+ln -s $NXF_HOME/assets pipelines
+```
+
+This creates a shortcut that makes it easier to explore the code we just downloaded.
+
+```bash
+tree -L2 pipelines
+```
+
+```bash
+pipelines
+└── nf-core
+    └── demo
+```
+
+Now we can more easily peek into the source code as needed.
+
+But first, let's try running your first nf-core pipeline!
 
 ### Takeaway
 
@@ -151,10 +184,10 @@ However, the `outdir` parameter is not included in the `test` profile, so you ha
 
 Here, we're also going to specify `-profile docker`, which by nf-core convention enables the use of Docker containers.
 
-Lets' try it!
+Let's try it!
 
 ```bash
-nextflow run nf-core/demo -profile docker,test --outdir results
+nextflow run nf-core/demo -profile docker,test --outdir demo-results
 ```
 
 Here's the console output from the pipeline:
@@ -232,14 +265,14 @@ This tells us that three processes were run, corresponding to the three tools sh
     These includes the names of their parent workflows and reflect the modularity of the pipeline code.
     We will go into more detail about that shortly.
 
-Finally, let's have a look at the `results` directory produced by the pipeline.
+Finally, let's have a look at the `demo-results` directory produced by the pipeline.
 
 ```bash
-tree results
+tree demo-results
 ```
 
 ```console title="Output"
-results/
+demo-results/
 ├── fastqc
 │   ├── SAMPLE1_PE
 │   ├── SAMPLE2_PE
@@ -261,7 +294,10 @@ results/
     └── pipeline_dag_2025-03-05_09-44-26.html
 ```
 
-If you're curious about what that all means, check out [the nf-core/demo pipeline documentation page](https://nf-co.re/demo/1.0.1/).
+If you're curious about the specifics what that all means, check out [the nf-core/demo pipeline documentation page](https://nf-co.re/demo/1.0.1/).
+
+At this stage, what's important to observe is that the results are organized by module, and there is additionally a directory called `pipeline_info` containing various timestamped reports about the pipeline execution.
+This is standard for nf-core pipelines.
 
 Congratulations! You have just run your first nf-core pipeline.
 
@@ -279,15 +315,15 @@ Learn how the pipeline code is organized.
 
 The nf-core project enforces strong guidelines for how pipelines are structured, and how the code is organized, configured and documented.
 
-Let's have a look at how the pipeline code is organized in the `nf-core/demo` repository.
+Let's have a look at how the pipeline code is organized in the `nf-core/demo` repository (using the `pipelines` symlink we created earlier).
 You can either use `tree` or use the file explorer in your IDE.
 
 ```bash
-tree -L 1 $HOME/.nextflow/assets/nf-core/demo
+tree -L 1 pipelines/nf-core/demo
 ```
 
 ```console title="Output (top-level only)"
-/root/.nextflow/assets/nf-core/demo
+pipelines/nf-core/demo
 ├── assets
 ├── CHANGELOG.md
 ├── CITATIONS.md
@@ -335,11 +371,11 @@ At the top level, there is the `main.nf` script, which is the entrypoint Nextflo
 In practice, the `main.nf` script calls the actual workflow of interest, stored inside the `workflows` folder, called `demo.nf`. It also calls a few 'housekeeping' subworkflows that we're going to ignore for now.
 
 ```bash
-tree $HOME/.nextflow/assets/nf-core/demo/workflows
+tree pipelines/nf-core/demo/workflows
 ```
 
 ```console title="Output"
-/root/.nextflow/assets/nf-core/demo/workflows
+pipelines/nf-core/demo/workflows
 └── demo.nf
 ```
 
@@ -370,11 +406,11 @@ In the nf-core project, modules are organized using a nested structure that refe
 The module code file describing the process is always called `main.nf`, and is accompanied by tests and `.yml` files.
 
 ```bash
-tree -L 4 $HOME/.nextflow/assets/nf-core/demo/modules
+tree -L 4 pipelines/nf-core/demo/modules
 ```
 
 ```console title="Output"
-/root/.nextflow/assets/nf-core/demo/modules
+pipelines/nf-core/demo/modules
 └── nf-core
     ├── fastqc
     │   ├── environment.yml
@@ -404,11 +440,11 @@ As noted above, subworkflows function as wrappers that call two or more modules.
 In an nf-core pipeline, the subworkflows are divided into `local` and `nf-core` directories, and each subworkflow has its own nested directory structure with its own `main.nf` script.
 
 ```bash
-tree -L 4 $HOME/.nextflow/assets/nf-core/demo/subworkflows
+tree -L 4 pipelines/nf-core/demo/subworkflows
 ```
 
 ```console title="Output"
-/root/.nextflow/assets/nf-core/demo/subworkflows
+pipelines/nf-core/demo/subworkflows
 ├── local
 │   └── utils_nfcore_demo_pipeline
 │       └── main.nf
@@ -458,9 +494,12 @@ This content is used to generate the web pages on the nf-core website.
 
 In addition to these human-readable documents, there are two JSON files that provide useful machine-readable information describing parameters and input requirements, `nextflow_schema.json` and `assets/schema_input.json`.
 
-The `nextflow_schema.json` is a file used to store parameter related information including type, description and help text in a machine readable format. The schema is used for various purposes, including automated parameter validation, help text generation, and interactive parameter form rendering in UI interfaces.
+The `nextflow_schema.json` is a file used to store parameter related information including type, description and help text in a machine readable format.
+The schema is used for various purposes, including automated parameter validation, help text generation, and interactive parameter form rendering in UI interfaces.
 
-The `schema_input.json` is a file used to define the input samplesheet structure. Each column can have a type, pattern, description and help text in a machine readable format. The schema is used for various purposes, including automated validation, and providing helpful error messages.
+The `schema_input.json` is a file used to define the input samplesheet structure.
+Each column can have a type, pattern, description and help text in a machine readable format.
+The schema is used for various purposes, including automated validation, and providing helpful error messages.
 
 ### Takeaway
 
