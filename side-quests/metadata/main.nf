@@ -2,7 +2,7 @@
  * Use echo to print 'Hello World!' to a file
  */
 process IDENTIFY_LANGUAGE {
-    publishDir 'results', mode: 'copy'
+
     tag "${meta.id}"
 
     container 'community.wave.seqera.io/library/pip_langid:b2269f456a5629ff'
@@ -31,21 +31,24 @@ process COWPY {
 
     input:
     tuple val(meta), path(input_file)
-    val character
 
     output:
     tuple val(meta), path("cowpy-${input_file}")
 
     script:
     """
-    cat $input_file | cowpy -c "$character" > cowpy-${input_file}
+    cat $input_file | cowpy -c ${meta.animal} > cowpy-${input_file}
     """
 
 }
 
 workflow  {
 
-    files = Channel.fromPath("./data/*.txt").map { file -> [ [id:file.getName()], file] }
+    files = Channel.fromPath("./data/samplesheet.csv")
+                    .splitCsv(header: true)
+                    .map { row ->
+                        [ [id:row.id, animal:row.animal], row.recording ]
+                    }
 
     ch_prediction = IDENTIFY_LANGUAGE(files)
 
@@ -65,6 +68,6 @@ workflow  {
                                                     meta.lang_group == 'romanic'
                                                 }
 
-    COWPY(romanic_languages, params.character)
+    COWPY(romanic_languages)
 
 }
