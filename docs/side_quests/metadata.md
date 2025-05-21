@@ -1,10 +1,23 @@
 # Metadata
 
-introduction:
+Metadata is crucial information that describes and gives context to your data. In workflows, it helps track important details about samples, experimental conditions, and processing parameters. Metadata is sample-specific and helps tailor analyses to each dataset's unique characteristics.
 
-what is meta data
-why is it important
-sample specific, not something that is the same for all samples
+Think of it like a library catalog: while books contain the actual content (raw data), the catalog cards provide essential information about each book - when it was published, who wrote it, where to find it (metadata). In Nextflow pipelines, metadata helps us:
+
+* Track sample-specific information throughout the workflow
+* Configure processes based on sample characteristics
+* Group related samples for joint analysis
+
+In this side quest, we'll explore how to handle metadata effectively in Nextflow workflows. Starting with a simple samplesheet containing basic sample information, you'll learn how to:
+
+* Read and parse sample metadata from CSV files
+* Create and manipulate metadata maps
+* Add new metadata fields during workflow execution
+* Use metadata to customize process behavior
+
+These skills will help you build more robust and flexible pipelines that can handle complex sample relationships and processing requirements.
+
+Let's dive in and see how metadata can make our workflows smarter and more maintainable!
 
 ## 0. Warmup
 
@@ -583,40 +596,330 @@ Both of these allow you to associated new and existing meta data with files as y
 
 ---
 
-## 3. Filter data with certain values in the meta map
+## 3. Filter data based on meta map values
 
+We can use the [`filter` operator](https://www.nextflow.io/docs/latest/operator.html#filter) to filter the data based on a condition. Let's say we only want to process romanic language samples firther. We can do this by filtering the data based on the `lang_group` field. Let's create a new channel that only contains romanic languages and `view` it:
 
-Repeat a grouping example, using this new value as grouping or branching decider (Objective: use the meta map to decide on workflow paths)
-Run a module with the groups
+=== "After"
+
+  ``` groovy title="main.nf" linenums="20" hl_lines="38-42"
+  workflow  {
+
+    ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
+                    .splitCsv(header: true)
+                    .map { row ->
+                        [ [id:row.id, character:row.character], row.recording ]
+                    }
+
+    ch_prediction = IDENTIFY_LANGUAGE(ch_samplesheet)
+
+    ch_languages = ch_samplesheet.join(ch_prediction)
+                                .map { meta, file, lang ->
+                                    [ meta + [lang:lang], file ]
+                                }
+                                .map{ meta, file ->
+                                    def lang_group = (meta.lang.equals('de') || meta.lang.equals('en')) ? 'germanic' : 'romanic'
+                                    [ meta + [lang_group:lang_group], file ]
+                                }
+
+  romanic_languages = ch_language_groups.filter { meta, file ->
+                                          meta.lang_group == 'romanic'
+                                        }
+                                        .view()
+  }
+
+  ```
+
+=== "Before"
+
+    ```groovy title="main.nf" linenums="20"
+    workflow  {
+
+      ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
+                      .splitCsv(header: true)
+                      .map { row ->
+                          [ [id:row.id, character:row.character], row.recording ]
+                      }
+
+      ch_prediction = IDENTIFY_LANGUAGE(ch_samplesheet)
+
+      ch_languages = ch_samplesheet.join(ch_prediction)
+                                  .map { meta, file, lang ->
+                                      [ meta + [lang:lang], file ]
+                                  }
+                                  .map{ meta, file ->
+                                      def lang_group = (meta.lang.equals('de') || meta.lang.equals('en')) ? 'germanic' : 'romanic'
+                                      [ meta + [lang_group:lang_group], file ]
+                                  }
+                                  .view()
+
+    }
+    ```
+
+Let's rerun it
+
+```bash title="View romanic samples"
+nextflow run main.nf -resume
+```
+
+```console title="View romanic samples"
+ N E X T F L O W   ~  version 24.10.4
+
+Launching `main.nf` [drunk_brattain] DSL2 - revision: 453fdd4e91
+
+[da/652cc6] IDENTIFY_LANGUAGE (7) [100%] 7 of 7, cached: 7 ✔
+[[id:sampleA, character:squirrel, lang:fr, lang_group:romanic], /workspaces/training/side-quests/metadata/data/bonjour.txt]
+[[id:sampleE, character:stegosaurus, lang:es, lang_group:romanic], /workspaces/training/side-quests/metadata/data/hola.txt]
+[[id:sampleF, character:moose, lang:fr, lang_group:romanic], /workspaces/training/side-quests/metadata/data/salut.txt]
+[[id:sampleG, character:turtle, lang:it, lang_group:romanic], /workspaces/training/side-quests/metadata/data/ciao.txt]
+```
+
+We have successfully filtered the data to only include romanic samples. Let's recap how this works. The `filter` operator takes a closure that is applied to each element in the channel. If the closure returns `true`, the element is included in the output channel. If the closure returns `false`, the element is excluded from the output channel.
+
+In this case, we want to keep only the samples where `meta.lang_group == 'romanic'`. In the closure, we first know that our channel elements are all of shape `[meta, file]` and we can then access the individual keys of the meta map.  We then check if `meta.lang_group` is equal to `'romanic'`. If it is, the sample is included in the output channel. If it is not, the sample is excluded from the output channel.
+
+```groovy title="main.nf" linenums="4"
+.filter { meta,file -> meta.lang_group == 'romanic' }
+```
 
 ### Takeaway
 
 In this section, you've learned:
 
-- **Extracting an arbitray value to group or filter on**
+- How to filter data with `filter`
+
+we now have only the romanic language samples left and can process those further. Next we want to make characters say the phrases.
 
 ---
 
-## 4. Publishing location based on meta map value
+## 4. Customize a process with meta map
 
-tweak the publishing directory based on a field in the meta map (Objective: use the meta map in the module)
+Let's let the characters say the phrases that we have passed in. In the [hello-nextflow training](../hello_nextflow/05_hello_containers.md), you already encountered the `cowpy` package, a python implementation of a tool called `cowsay` that generates ASCII art to display arbitrary text inputs in a fun way.
+
+We will re-use a process from there.
+
+Copy in the process before your workflow block:
+
+=== "After"
+
+  ``` groovy title="main.nf" linenums="20"
+  /*
+   * Generate ASCII art with cowpy
+  */
+  process COWPY {
+
+      container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
+
+      input:
+      tuple val(meta), path(input_file)
+
+      output:
+      tuple val(meta), path("cowpy-${input_file}")
+
+      script:
+      """
+      cat $input_file | cowpy -c "stegosaurus" > cowpy-${input_file}
+      """
+
+  }
+  ```
+
+=== "Before"
+
+    ```groovy title="main.nf" linenums="20"
+    workflow{
+      ...
+    }
+    ```
+
+### 4.1 Add a custom publishing location
+
+Let's run our romanic languages through `COWPY` and remove our `view` statement:
+
+=== "After"
+
+  ``` groovy title="main.nf" linenums="40" hl_lines="61-63"
+  workflow  {
+
+    ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
+                    .splitCsv(header: true)
+                    .map { row ->
+                        [ [id:row.id, character:row.character], row.recording ]
+                    }
+
+    ch_prediction = IDENTIFY_LANGUAGE(ch_samplesheet)
+
+    ch_languages = ch_samplesheet.join(ch_prediction)
+                                .map { meta, file, lang ->
+                                    [ meta + [lang:lang], file ]
+                                }
+                                .map{ meta, file ->
+                                    def lang_group = (meta.lang.equals('de') || meta.lang.equals('en')) ? 'germanic' : 'romanic'
+                                    [ meta + [lang_group:lang_group], file ]
+                                }
+
+    romanic_languages = ch_languages.filter { meta, file ->
+                                        meta.lang_group == 'romanic'
+                                    }
+
+    COWPY(romanic_languages)
+
+  }
+  ```
+
+=== "Before"
+
+    ```groovy title="main.nf" linenums="20"
+    workflow  {
+
+    ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
+                    .splitCsv(header: true)
+                    .map { row ->
+                        [ [id:row.id, character:row.character], row.recording ]
+                    }
+
+    ch_prediction = IDENTIFY_LANGUAGE(ch_samplesheet)
+
+    ch_languages = ch_samplesheet.join(ch_prediction)
+                                .map { meta, file, lang ->
+                                    [ meta + [lang:lang], file ]
+                                }
+                                .map{ meta, file ->
+                                    def lang_group = (meta.lang.equals('de') || meta.lang.equals('en')) ? 'germanic' : 'romanic'
+                                    [ meta + [lang_group:lang_group], file ]
+                                }
+
+    romanic_languages = ch_languages.filter { meta, file ->
+                                        meta.lang_group == 'romanic'
+                                    }.view()
+    }
+    ```
+
+We are still missing a publishing location. Given we have been trying to figure out what languages our samples were in, let's group the samples by language in the output directory. Earlier, we added the predicted language to the `meta` map. We can access this `key` in the process and use it in the `publishDir` directive:
+
+=== "After"
+
+  ``` groovy title="main.nf" linenums="23" hl_lines="25"
+  /*
+   * Generate ASCII art with cowpy
+  */
+  process COWPY {
+
+      publishDir "results/${meta.lang}", mode: 'copy'
+
+      container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
+
+  ```
+
+
+=== "Before"
+
+    ```groovy title="main.nf" linenums="23"
+    process COWPY {
+
+      container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
+
+    ```
+
+Let's run this:
+
+```bash title="Use cowpy"
+nextflow run main.nf -resume
+```
+
+You should now see a new folder called `results`:
+
+```console title="Results folder"
+results/
+├── es
+│   └── cowpy-hola.txt
+├── fr
+│   ├── cowpy-bonjour.txt
+│   └── cowpy-salut.txt
+└── it
+    └── cowpy-ciao.txt
+```
+
+Success! All our phrases are correctly sorted and we now see which of them correspond to which language.
+
+Let's take a look at `cowpy-salut.txt`:
+
+```console title="cowpy-salut.txt"
+ ____________________
+/ Salut, ça va?      \
+\ à plus dans le bus /
+ --------------------
+\                             .       .
+ \                           / `.   .' "
+  \                  .---.  <    > <    >  .---.
+   \                 |    \  \ - ~ ~ - /  /    |
+         _____          ..-~             ~-..-~
+        |     |   \~~~\.'                    `./~~~/
+       ---------   \__/                        \__/
+      .'  O    \     /               /       \  "
+     (_____,    `._.'               |         }  \/~~~/
+      `----.          /       }     |        /    \__/
+            `-.      |       /      |       /      `. ,~~|
+                ~-.__|      /_ - ~ ^|      /- _      `..-'
+                     |     /        |     /     ~-.     `-. _  _  _
+                     |_____|        |_____|         ~ - . _ _ _ _ _>
+```
+
+Look through the other files. All phrases should be spoken by the fashionable stegosaurus.
+
+### 4.2 Customize the character
+
+In our samplesheet, we have another column: `character`. To tailor the tool parameters per sample, we can also access information from the `meta` map in the script section. This is really useful in cases were a tool should have different parameters for each sample.
+
+Let's customize the characters by changing the `cowpy` command:
+
+=== "After"
+
+  ``` groovy title="main.nf" linenums="35" hl_lines="37"
+  script:
+  """
+  cat $input_file | cowpy -c ${meta.character} > cowpy-${input_file}
+  """
+  ```
+
+=== "Before"
+
+    ```groovy title="main.nf" linenums="23"
+    script:
+    """
+    cat $input_file | cowpy -c "stegosaurus" > cowpy-${input_file}
+    """
+    ```
+
+Let's run this:
+
+```bash title="Use cowpy"
+nextflow run main.nf -resume
+```
+
+and take another look at our french phrase:
+
+```console title="fr/cowpy-salut.txt"
+ ____________________
+/ Salut, ça va?      \
+\ à plus dans le bus /
+ --------------------
+  \
+   \   \_\_    _/_/
+    \      \__/
+           (oo)\_______
+           (__)\       )\/\
+               ||----w |
+               ||     ||
+```
+
+This is a subtle difference to other parameters that we have set in the pipelines in previous trainings. A parameter that is passed as part of the `params` object is generally applied to all samples. When a more surgical approache is necessary, using the sample specific information is a good alternative.
 
 ### Takeaway
 
 In this section, you've learned:
 
 - **Tweaking directives using meta values**
-
----
-
-## 5. Tweak tool arguments based on meta map value
-
-tweak the publishing directory based on a field in the meta map (Objective: use the meta map in the module)
-
-### Takeaway
-
-In this section, you've learned:
-
 - **Tweaking script section based on meta values**
 
 ---

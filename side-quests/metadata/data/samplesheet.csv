@@ -1,4 +1,4 @@
-id,animal,recording
+id,character,recording
 sampleA,squirrel,/workspaces/training/side-quests/metadata/data/bonjour.txt
 sampleB,tux,/workspaces/training/side-quests/metadata/data/guten_tag.txt
 sampleC,sheep,/workspaces/training/side-quests/metadata/data/hallo.txt
