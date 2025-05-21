@@ -1,6 +1,6 @@
 # Metadata
 
-Metadata is crucial information that describes and gives context to your data. In workflows, it helps track important details about samples, experimental conditions that can influence processing parameters. Metadata is sample-specific and helps tailor analyses to each dataset's unique characteristics.
+Metadata is information that describes and gives context to your data. In workflows, it helps track important details about samples, experimental conditions that can influence processing parameters. Metadata is sample-specific and helps tailor analyses to each dataset's unique characteristics.
 
 Think of it like a library catalog: while books contain the actual content (raw data), the catalog cards provide essential information about each book - when it was published, who wrote it, where to find it (metadata). In Nextflow pipelines, metadata helps us:
 
@@ -8,7 +8,7 @@ Think of it like a library catalog: while books contain the actual content (raw 
 - Configure processes based on sample characteristics
 - Group related samples for joint analysis
 
-In this side quest, we'll explore how to handle metadata effectively in Nextflow workflows. Starting with a simple samplesheet containing basic sample information, you'll learn how to:
+We'll explore how to handle metadata in workflows. Starting with a simple samplesheet containing basic sample information, you'll learn how to:
 
 - Read and parse sample metadata from CSV files
 - Create and manipulate metadata maps
@@ -17,7 +17,7 @@ In this side quest, we'll explore how to handle metadata effectively in Nextflow
 
 These skills will help you build more robust and flexible pipelines that can handle complex sample relationships and processing requirements.
 
-Let's dive in and see how metadata can make our workflows smarter and more maintainable!
+Let's dive in!
 
 ## 0. Warmup
 
@@ -54,7 +54,7 @@ You'll find a `data` directory containing a samplesheet and a main workflow file
 └── nextflow.config
 ```
 
-The samplesheet contains information about different samples and some associated data that we will use in this exercise to tailor our analysis to each sample. In particular, the samplesheet has 3 columns:
+The samplesheet contains information about different samples and some associated data that we will use in this exercise to tailor our analysis to each sample. Each data files contains greetings in different languages, but we don't know what language they are in. In particular, the samplesheet has 3 columns:
 
 - `id`: self-explanatory, an ID given to the sample
 - `character`: a character name, that we will use later to draw different creatures
@@ -142,11 +142,11 @@ meta = {'id': 'sample1', 'character': 'squirrel'}
 print(meta['id'])  # Prints: sample1
 ```
 
-Each map contains:
+Each map entry corresponds to a column:
 
-- `id`: an ID given to the sample
-- `character`: a character name, that we will use later to draw different creatures
-- `data`: paths to `.txt` files that contain phrases in different languages
+- `id`
+- `character`
+- `data`
 
 This format makes it easy to access specific fields from each sample. For example, we could access the sample ID with `id` or the txt file path with `data`. The output above shows each row from the CSV file converted into a map with keys matching the header row. Now that we've successfully read in the samplesheet and have access to the data in each row, we can begin implementing our pipeline logic.
 
@@ -154,7 +154,7 @@ This format makes it easy to access specific fields from each sample. For exampl
 
 In the samplesheet, we have both the input files and data about the input files (`id`, `character`), the meta data. As we progress through the workflow, we generate more meta data about each sample. To avoid having to keep track of how many fields we have at any point in time and making the input of our processes more robust, we can combine the meta information into its own key-value paired map.
 
-Think of a meta map like a label attached to your data that contains important information about that sample - similar to how a library catalog card provides essential details about a book without being the book itself. This separation makes it easier to:
+This separation makes it easier to:
 
 - Track sample information throughout the workflow
 - Add new metadata as you process samples
@@ -209,10 +209,7 @@ We have successfully separate our meta data into its own map to keep it next to 
 In this section, you've learned:
 
 - **Reading in a samplesheet**: Using `splitCsv` to read CSV files with header information and transform rows into structured data
-- **Creating a meta map**:
-  - Separating metadata from file data using tuple structure `[ [id:value, ...], file ]`
-  - Keeping sample information organized and accessible throughout the workflow
-  - Declaring meta map as input/output declarations in processes
+- **Creating a meta map**: Separating metadata from file data using tuple structure `[ [id:value, ...], file ]`
 
 ---
 
@@ -321,7 +318,7 @@ output:
       tuple val(meta), stdout
 ```
 
-This is a useful tool to ensure the sample-specific meta information stays connected with any new information that is generated.
+This is a useful way to ensure the sample-specific meta information stays connected with any new information that is generated.
 
 ### 2.2 Associate the language prediction with the input file
 
@@ -453,7 +450,7 @@ It is becoming a bit hard to see, but if you look all the way on the right side,
 
 ### 2.3 Add the language prediction to the meta map
 
-Given that this is more data about the files, let's add it to our meta map. We can use the [`map` operator](https://www.nextflow.io/docs/latest/operator.html#map) to create a new key `lang` and set the value to prediction:
+Given that this is more data about the files, let's add it to our meta map. We can use the [`map` operator](https://www.nextflow.io/docs/latest/operator.html#map) to create a new key `lang` and set the value to the predicted language:
 
 === "After"
 
@@ -515,7 +512,15 @@ Launching `main.nf` [cheeky_fermat] DSL2 - revision: d096281ee4
 [[id:sampleG, character:turtle, lang:it], /workspaces/training/side-quests/metadata/data/ciao.txt]
 ```
 
-Nice, we expanded our meta map with new information we gathered in the pipeline.
+Nice, we expanded our meta map with new information we gathered in the pipeline. Let's take a look at what happened here:
+
+After joining our channels, each element looks like this:
+
+```console
+[meta, file, lang]  // e.g. [[id:sampleA, character:squirrel], bonjour.txt, fr]
+```
+
+The `map` operator takes each channel element and processes it to create a modified version. Inside the closure `{ meta, file, lang -> ... }`, we then take the existing `meta` map, create a new map `[lang:lang]`, and merge both together using `+`, Groovy's way of combining maps.
 
 ### 2.4 Assign a language group using a ternary operator
 
@@ -894,6 +899,8 @@ Let's take a look at `cowpy-salut.txt`:
 
 Look through the other files. All phrases should be spoken by the fashionable stegosaurus.
 
+How did this work? The `publishDir` directive is evaluated at runtime when the process executes.Each process task gets its own meta map from the input tuple When the directive is evaluated, `${meta.lang}` is replaced with the actual language value for that sample creating the dynamic paths like `results/fr`.
+
 ### 4.2 Customize the character
 
 In our samplesheet, we have another column: `character`. To tailor the tool parameters per sample, we can also access information from the `meta` map in the script section. This is really useful in cases were a tool should have different parameters for each sample.
@@ -1012,7 +1019,7 @@ This approach offers several advantages over hardcoding sample information:
   }
   ```
 
-- **Using Meta in Process Directives**
+- **Using meta values in Process Directives**
 
   ```nextflow
   publishDir "results/${meta.lang}", mode: 'copy'
@@ -1029,3 +1036,4 @@ This approach offers several advantages over hardcoding sample information:
 - [filter](https://www.nextflow.io/docs/latest/operator.html#filter)
 - [map](https://www.nextflow.io/docs/latest/operator.html#map)
 - [join](https://www.nextflow.io/docs/latest/operator.html#join)
+- [stdout](https://www.nextflow.io/docs/latest/process.html#outputs)
