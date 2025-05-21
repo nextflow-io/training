@@ -4,18 +4,18 @@ Metadata is crucial information that describes and gives context to your data. I
 
 Think of it like a library catalog: while books contain the actual content (raw data), the catalog cards provide essential information about each book - when it was published, who wrote it, where to find it (metadata). In Nextflow pipelines, metadata helps us:
 
-* Track sample-specific information throughout the workflow
-* Configure processes based on sample characteristics
-* Group related samples for joint analysis
+- Track sample-specific information throughout the workflow
+- Configure processes based on sample characteristics
+- Group related samples for joint analysis
 
 In this side quest, we'll explore how to handle metadata effectively in Nextflow workflows. Starting with a simple samplesheet containing basic sample information, you'll learn how to:
 
-* Read and parse sample metadata from CSV files
-* Create and manipulate metadata maps
-* Add new metadata fields during workflow execution
-* Use metadata to customize process behavior
+- Read and parse sample metadata from CSV files
+- Create and manipulate metadata maps
+- Add new metadata fields during workflow execution
+- Use metadata to customize process behavior
 
-These skills will help you build more robust and flexible pipelines that can handle complex sample relationships and processing  requirements.
+These skills will help you build more robust and flexible pipelines that can handle complex sample relationships and processing requirements.
 
 Let's dive in and see how metadata can make our workflows smarter and more maintainable!
 
@@ -56,11 +56,11 @@ You'll find a `data` directory containing a samplesheet and a main workflow file
 
 The samplesheet contains information about different samples and some associated data that we will use in this exercise to tailor our analysis to each sample. In particular, the samplesheet has 3 columns:
 
- - `id`: self-explanatory, an ID given to the sample
- - `character`: a character name, that we will use later to draw different creatures
- - `data`: paths to `.txt` files that contain phrases in different languages
+- `id`: self-explanatory, an ID given to the sample
+- `character`: a character name, that we will use later to draw different creatures
+- `data`: paths to `.txt` files that contain phrases in different languages
 
- ```console title="samplesheet.csv"
+```console title="samplesheet.csv"
 id,character,recording
 sampleA,squirrel,/workspaces/training/side-quests/metadata/data/bonjour.txt
 sampleB,tux,/workspaces/training/side-quests/metadata/data/guten_tag.txt
@@ -132,9 +132,9 @@ We can see that each row from the CSV file has been converted into a map with ke
 
 Each map contains:
 
- - `id`: an ID given to the sample
- - `character`: a character name, that we will use later to draw different creatures
- - `data`: paths to `.txt` files that contain phrases in different languages
+- `id`: an ID given to the sample
+- `character`: a character name, that we will use later to draw different creatures
+- `data`: paths to `.txt` files that contain phrases in different languages
 
 This format makes it easy to access specific fields from each sample. For example, we could access the sample ID with `id` or the txt file path with `data`. The output above shows each row from the CSV file converted into a map with keys matching the header row. Now that we've successfully read in the samplesheet and have access to the data in each row, we can begin implementing our pipeline logic.
 
@@ -198,27 +198,27 @@ Now we want to process our samples. These samples are language samples, but we d
 
 === "After"
 
-  ``` groovy title="main.nf" linenums="1" hl_lines="1-19"
-  /*
-   * Use langid to predict the language of each input file
-   */
-  process IDENTIFY_LANGUAGE {
+```groovy title="main.nf" linenums="1" hl_lines="1-19"
+/*
+ * Use langid to predict the language of each input file
+ */
+process IDENTIFY_LANGUAGE {
 
-      container 'community.wave.seqera.io/library/pip_langid:b2269f456a5629ff'
+    container 'community.wave.seqera.io/library/pip_langid:b2269f456a5629ff'
 
-      input:
-      tuple val(meta), path(greeting)
+    input:
+    tuple val(meta), path(greeting)
 
-      output:
-      tuple val(meta), stdout
+    output:
+    tuple val(meta), stdout
 
-      script:
-      """
-      langid < ${greeting} -l en,de,fr,es,it | sed -E "s/.*\\('([a-z]+)'.*/\\1/" | tr -d '\\n'
-      """
-  }
+    script:
+    """
+    langid < ${greeting} -l en,de,fr,es,it | sed -E "s/.*\\('([a-z]+)'.*/\\1/" | tr -d '\\n'
+    """
+}
 
-  ```
+```
 
 === "Before"
 
@@ -239,21 +239,21 @@ Let's include the process, run, and view it:
 
 === "After"
 
-  ``` groovy title="main.nf" linenums="20" hl_lines="27-29"
-  workflow  {
+```groovy title="main.nf" linenums="20" hl_lines="27-29"
+workflow  {
 
-        ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
-                    .splitCsv(header: true)
-                    .map { row ->
-                        [ [id:row.id, character:row.character], row.recording ]
-                    }
+      ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
+                  .splitCsv(header: true)
+                  .map { row ->
+                      [ [id:row.id, character:row.character], row.recording ]
+                  }
 
-        ch_prediction = IDENTIFY_LANGUAGE(ch_samplesheet)
-        ch_prediction.view()
+      ch_prediction = IDENTIFY_LANGUAGE(ch_samplesheet)
+      ch_prediction.view()
 
-    }
+  }
 
-  ```
+```
 
 === "Before"
 
@@ -308,22 +308,22 @@ If we check the [`join`](https://www.nextflow.io/docs/latest/operator.html#join)
 
 === "After"
 
-  ``` groovy title="main.nf" linenums="20" hl_lines="27"
-  workflow  {
+```groovy title="main.nf" linenums="20" hl_lines="27"
+workflow  {
 
-        ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
-                    .splitCsv(header: true)
-                    .map { row ->
-                        [ [id:row.id, character:row.character], row.recording ]
-                    }
-                    .view()
+      ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
+                  .splitCsv(header: true)
+                  .map { row ->
+                      [ [id:row.id, character:row.character], row.recording ]
+                  }
+                  .view()
 
-        ch_prediction = IDENTIFY_LANGUAGE(ch_samplesheet)
-        ch_prediction.view()
+      ch_prediction = IDENTIFY_LANGUAGE(ch_samplesheet)
+      ch_prediction.view()
 
-    }
+  }
 
-  ```
+```
 
 === "Before"
 
@@ -373,22 +373,22 @@ We can see that the meta map is the first element in each map and the map is the
 
 === "After"
 
-  ``` groovy title="main.nf" linenums="20" hl_lines="27"
-  workflow  {
+```groovy title="main.nf" linenums="20" hl_lines="27"
+workflow  {
 
-    ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
-                    .splitCsv(header: true)
-                    .map { row ->
-                        [ [id:row.id, character:row.character], row.recording ]
-                    }
+  ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
+                  .splitCsv(header: true)
+                  .map { row ->
+                      [ [id:row.id, character:row.character], row.recording ]
+                  }
 
-    ch_prediction = IDENTIFY_LANGUAGE(ch_samplesheet)
+  ch_prediction = IDENTIFY_LANGUAGE(ch_samplesheet)
 
-    ch_languages = ch_samplesheet.join(ch_prediction)
-                                 .view()
-  }
+  ch_languages = ch_samplesheet.join(ch_prediction)
+                               .view()
+}
 
-  ```
+```
 
 === "Before"
 
@@ -432,28 +432,27 @@ It is becoming a bit hard to see, but if you look all the way on the right side,
 
 Given that this is more data about the files, let's add it to our meta map. We can use the [`map` operator](https://www.nextflow.io/docs/latest/operator.html#map) to create a new key `lang` and set the value to prediction:
 
-
 === "After"
 
-  ``` groovy title="main.nf" linenums="20" hl_lines="31-33"
-  workflow  {
+```groovy title="main.nf" linenums="20" hl_lines="31-33"
+workflow  {
 
-    ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
-                    .splitCsv(header: true)
-                    .map { row ->
-                        [ [id:row.id, character:row.character], row.recording ]
-                    }
+  ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
+                  .splitCsv(header: true)
+                  .map { row ->
+                      [ [id:row.id, character:row.character], row.recording ]
+                  }
 
-    ch_prediction = IDENTIFY_LANGUAGE(ch_samplesheet)
+  ch_prediction = IDENTIFY_LANGUAGE(ch_samplesheet)
 
-    ch_languages = ch_samplesheet.join(ch_prediction)
-                                .map { meta, file, lang ->
-                                    [ meta + [lang:lang], file ]
-                                }
-                                .view()
+  ch_languages = ch_samplesheet.join(ch_prediction)
+                              .map { meta, file, lang ->
+                                  [ meta + [lang:lang], file ]
+                              }
+                              .view()
 
-  }
-  ```
+}
+```
 
 === "Before"
 
@@ -517,30 +516,30 @@ if (<condition>){
 
 === "After"
 
-  ``` groovy title="main.nf" linenums="20" hl_lines="34-37"
-  workflow  {
+```groovy title="main.nf" linenums="20" hl_lines="34-37"
+workflow  {
 
-    ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
-                    .splitCsv(header: true)
-                    .map { row ->
-                        [ [id:row.id, character:row.character], row.recording ]
-                    }
+  ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
+                  .splitCsv(header: true)
+                  .map { row ->
+                      [ [id:row.id, character:row.character], row.recording ]
+                  }
 
-    ch_prediction = IDENTIFY_LANGUAGE(ch_samplesheet)
+  ch_prediction = IDENTIFY_LANGUAGE(ch_samplesheet)
 
-    ch_languages = ch_samplesheet.join(ch_prediction)
-                                .map { meta, file, lang ->
-                                    [ meta + [lang:lang], file ]
-                                }
-                                .map{ meta, file ->
-                                    def lang_group = (meta.lang.equals('de') || meta.lang.equals('en')) ? 'germanic' : 'romanic'
-                                    [ meta + [lang_group:lang_group], file ]
-                                }
-                                .view()
+  ch_languages = ch_samplesheet.join(ch_prediction)
+                              .map { meta, file, lang ->
+                                  [ meta + [lang:lang], file ]
+                              }
+                              .map{ meta, file ->
+                                  def lang_group = (meta.lang.equals('de') || meta.lang.equals('en')) ? 'germanic' : 'romanic'
+                                  [ meta + [lang_group:lang_group], file ]
+                              }
+                              .view()
 
-  }
+}
 
-  ```
+```
 
 === "Before"
 
@@ -602,33 +601,33 @@ We can use the [`filter` operator](https://www.nextflow.io/docs/latest/operator.
 
 === "After"
 
-  ``` groovy title="main.nf" linenums="20" hl_lines="38-42"
-  workflow  {
+```groovy title="main.nf" linenums="20" hl_lines="38-42"
+workflow  {
 
-    ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
-                    .splitCsv(header: true)
-                    .map { row ->
-                        [ [id:row.id, character:row.character], row.recording ]
-                    }
+  ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
+                  .splitCsv(header: true)
+                  .map { row ->
+                      [ [id:row.id, character:row.character], row.recording ]
+                  }
 
-    ch_prediction = IDENTIFY_LANGUAGE(ch_samplesheet)
+  ch_prediction = IDENTIFY_LANGUAGE(ch_samplesheet)
 
-    ch_languages = ch_samplesheet.join(ch_prediction)
-                                .map { meta, file, lang ->
-                                    [ meta + [lang:lang], file ]
-                                }
-                                .map{ meta, file ->
-                                    def lang_group = (meta.lang.equals('de') || meta.lang.equals('en')) ? 'germanic' : 'romanic'
-                                    [ meta + [lang_group:lang_group], file ]
-                                }
+  ch_languages = ch_samplesheet.join(ch_prediction)
+                              .map { meta, file, lang ->
+                                  [ meta + [lang:lang], file ]
+                              }
+                              .map{ meta, file ->
+                                  def lang_group = (meta.lang.equals('de') || meta.lang.equals('en')) ? 'germanic' : 'romanic'
+                                  [ meta + [lang_group:lang_group], file ]
+                              }
 
-  romanic_languages = ch_language_groups.filter { meta, file ->
-                                          meta.lang_group == 'romanic'
-                                        }
-                                        .view()
-  }
+romanic_languages = ch_language_groups.filter { meta, file ->
+                                        meta.lang_group == 'romanic'
+                                      }
+                                      .view()
+}
 
-  ```
+```
 
 === "Before"
 
@@ -676,7 +675,7 @@ Launching `main.nf` [drunk_brattain] DSL2 - revision: 453fdd4e91
 
 We have successfully filtered the data to only include romanic samples. Let's recap how this works. The `filter` operator takes a closure that is applied to each element in the channel. If the closure returns `true`, the element is included in the output channel. If the closure returns `false`, the element is excluded from the output channel.
 
-In this case, we want to keep only the samples where `meta.lang_group == 'romanic'`. In the closure, we first know that our channel elements are all of shape `[meta, file]` and we can then access the individual keys of the meta map.  We then check if `meta.lang_group` is equal to `'romanic'`. If it is, the sample is included in the output channel. If it is not, the sample is excluded from the output channel.
+In this case, we want to keep only the samples where `meta.lang_group == 'romanic'`. In the closure, we first know that our channel elements are all of shape `[meta, file]` and we can then access the individual keys of the meta map. We then check if `meta.lang_group` is equal to `'romanic'`. If it is, the sample is included in the output channel. If it is not, the sample is excluded from the output channel.
 
 ```groovy title="main.nf" linenums="4"
 .filter { meta,file -> meta.lang_group == 'romanic' }
@@ -702,27 +701,27 @@ Copy in the process before your workflow block:
 
 === "After"
 
-  ``` groovy title="main.nf" linenums="20"
-  /*
-   * Generate ASCII art with cowpy
-  */
-  process COWPY {
+```groovy title="main.nf" linenums="20"
+/*
+ * Generate ASCII art with cowpy
+*/
+process COWPY {
 
-      container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
+    container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
 
-      input:
-      tuple val(meta), path(input_file)
+    input:
+    tuple val(meta), path(input_file)
 
-      output:
-      tuple val(meta), path("cowpy-${input_file}")
+    output:
+    tuple val(meta), path("cowpy-${input_file}")
 
-      script:
-      """
-      cat $input_file | cowpy -c "stegosaurus" > cowpy-${input_file}
-      """
+    script:
+    """
+    cat $input_file | cowpy -c "stegosaurus" > cowpy-${input_file}
+    """
 
-  }
-  ```
+}
+```
 
 === "Before"
 
@@ -738,34 +737,34 @@ Let's run our romanic languages through `COWPY` and remove our `view` statement:
 
 === "After"
 
-  ``` groovy title="main.nf" linenums="40" hl_lines="61-63"
-  workflow  {
+```groovy title="main.nf" linenums="40" hl_lines="61-63"
+workflow  {
 
-    ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
-                    .splitCsv(header: true)
-                    .map { row ->
-                        [ [id:row.id, character:row.character], row.recording ]
-                    }
+  ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
+                  .splitCsv(header: true)
+                  .map { row ->
+                      [ [id:row.id, character:row.character], row.recording ]
+                  }
 
-    ch_prediction = IDENTIFY_LANGUAGE(ch_samplesheet)
+  ch_prediction = IDENTIFY_LANGUAGE(ch_samplesheet)
 
-    ch_languages = ch_samplesheet.join(ch_prediction)
-                                .map { meta, file, lang ->
-                                    [ meta + [lang:lang], file ]
-                                }
-                                .map{ meta, file ->
-                                    def lang_group = (meta.lang.equals('de') || meta.lang.equals('en')) ? 'germanic' : 'romanic'
-                                    [ meta + [lang_group:lang_group], file ]
-                                }
+  ch_languages = ch_samplesheet.join(ch_prediction)
+                              .map { meta, file, lang ->
+                                  [ meta + [lang:lang], file ]
+                              }
+                              .map{ meta, file ->
+                                  def lang_group = (meta.lang.equals('de') || meta.lang.equals('en')) ? 'germanic' : 'romanic'
+                                  [ meta + [lang_group:lang_group], file ]
+                              }
 
-    romanic_languages = ch_languages.filter { meta, file ->
-                                        meta.lang_group == 'romanic'
-                                    }
+  romanic_languages = ch_languages.filter { meta, file ->
+                                      meta.lang_group == 'romanic'
+                                  }
 
-    COWPY(romanic_languages)
+  COWPY(romanic_languages)
 
-  }
-  ```
+}
+```
 
 === "Before"
 
@@ -799,18 +798,17 @@ We are still missing a publishing location. Given we have been trying to figure 
 
 === "After"
 
-  ``` groovy title="main.nf" linenums="23" hl_lines="25"
-  /*
-   * Generate ASCII art with cowpy
-  */
-  process COWPY {
+```groovy title="main.nf" linenums="23" hl_lines="25"
+/*
+ * Generate ASCII art with cowpy
+*/
+process COWPY {
 
-      publishDir "results/${meta.lang}", mode: 'copy'
+    publishDir "results/${meta.lang}", mode: 'copy'
 
-      container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
+    container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
 
-  ```
-
+```
 
 === "Before"
 
@@ -875,12 +873,12 @@ Let's customize the characters by changing the `cowpy` command:
 
 === "After"
 
-  ``` groovy title="main.nf" linenums="35" hl_lines="37"
-  script:
-  """
-  cat $input_file | cowpy -c ${meta.character} > cowpy-${input_file}
-  """
-  ```
+```groovy title="main.nf" linenums="35" hl_lines="37"
+script:
+"""
+cat $input_file | cowpy -c ${meta.character} > cowpy-${input_file}
+"""
+```
 
 === "Before"
 
