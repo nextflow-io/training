@@ -308,22 +308,22 @@ If we check the [`join`](https://www.nextflow.io/docs/latest/operator.html#join)
 
 === "After"
 
-```groovy title="main.nf" linenums="20" hl_lines="27"
-workflow  {
+    ```groovy title="main.nf" linenums="20" hl_lines="8,11"
+    workflow  {
 
-      ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
-                  .splitCsv(header: true)
-                  .map { row ->
-                      [ [id:row.id, character:row.character], row.recording ]
-                  }
-                  .view()
+          ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
+                      .splitCsv(header: true)
+                      .map { row ->
+                          [ [id:row.id, character:row.character], row.recording ]
+                      }
+                      .view()
 
-      ch_prediction = IDENTIFY_LANGUAGE(ch_samplesheet)
-      ch_prediction.view()
+          ch_prediction = IDENTIFY_LANGUAGE(ch_samplesheet)
+          ch_prediction.view()
 
-  }
+      }
 
-```
+    ```
 
 === "Before"
 
@@ -373,22 +373,22 @@ We can see that the meta map is the first element in each map and the map is the
 
 === "After"
 
-```groovy title="main.nf" linenums="20" hl_lines="27"
-workflow  {
+    ```groovy title="main.nf" linenums="20" hl_lines="11-12"
+    workflow  {
 
-  ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
-                  .splitCsv(header: true)
-                  .map { row ->
-                      [ [id:row.id, character:row.character], row.recording ]
-                  }
+      ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
+                      .splitCsv(header: true)
+                      .map { row ->
+                          [ [id:row.id, character:row.character], row.recording ]
+                      }
 
-  ch_prediction = IDENTIFY_LANGUAGE(ch_samplesheet)
+      ch_prediction = IDENTIFY_LANGUAGE(ch_samplesheet)
 
-  ch_languages = ch_samplesheet.join(ch_prediction)
-                               .view()
-}
+      ch_languages = ch_samplesheet.join(ch_prediction)
+                                   .view()
+    }
 
-```
+    ```
 
 === "Before"
 
@@ -434,7 +434,7 @@ Given that this is more data about the files, let's add it to our meta map. We c
 
 === "After"
 
-    ```groovy title="main.nf" linenums="20" hl_lines="31-33"
+    ```groovy title="main.nf" linenums="20" hl_lines="12-14"
     workflow  {
 
       ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
@@ -500,13 +500,13 @@ Alright, now that we have our language predictions, let's use the information to
 
 We can use the `map` operator and an [ternary operator](https://groovy-lang.org/operators.html#_ternary_operator) to assign either group. The ternary operator, is a short cut to an if/else clause. It says:
 
-```
+```console title="Ternary"
 variable = <condition> ? 'Value' : 'Default'
 ```
 
 and is the same as:
 
-```
+```console title="If/else"
 if (<condition>){
   variable = 'Value'
 } else {
@@ -516,7 +516,7 @@ if (<condition>){
 
 === "After"
 
-    ```groovy title="main.nf" linenums="20" hl_lines="34-37"
+    ```groovy title="main.nf" linenums="20" hl_lines="15-18"
     workflow  {
 
       ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
@@ -601,7 +601,7 @@ We can use the [`filter` operator](https://www.nextflow.io/docs/latest/operator.
 
 === "After"
 
-    ```groovy title="main.nf" linenums="20" hl_lines="38-42"
+    ```groovy title="main.nf" linenums="20" hl_lines="20-23"
     workflow  {
 
       ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
@@ -737,7 +737,7 @@ Let's run our romanic languages through `COWPY` and remove our `view` statement:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="40" hl_lines="61-63"
+    ```groovy title="main.nf" linenums="40" hl_lines="24"
     workflow  {
 
       ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
@@ -798,10 +798,7 @@ We are still missing a publishing location. Given we have been trying to figure 
 
 === "After"
 
-    ```groovy title="main.nf" linenums="23" hl_lines="25"
-    /*
-     * Generate ASCII art with cowpy
-    */
+    ```groovy title="main.nf" linenums="24" hl_lines=3""
     process COWPY {
 
         publishDir "results/${meta.lang}", mode: 'copy'
@@ -873,16 +870,16 @@ Let's customize the characters by changing the `cowpy` command:
 
 === "After"
 
-```groovy title="main.nf" linenums="35" hl_lines="37"
-script:
-"""
-cat $input_file | cowpy -c ${meta.character} > cowpy-${input_file}
-"""
-```
+    ```groovy title="main.nf" linenums="38" hl_lines="3"
+    script:
+    """
+    cat $input_file | cowpy -c ${meta.character} > cowpy-${input_file}
+    """
+    ```
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="23"
+    ```groovy title="main.nf" linenums="38"
     script:
     """
     cat $input_file | cowpy -c "stegosaurus" > cowpy-${input_file}
