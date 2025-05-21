@@ -928,25 +928,25 @@ In this side quest, you've explored how to effectively work with metadata in Nex
 
 1. **Reading and Structuring Metadata**:
 
-  - Using splitCsv to read samplesheets
-  - Creating structured meta maps from CSV data
-  - Keeping metadata associated with files through tuples
+- Using splitCsv to read samplesheets
+- Creating structured meta maps from CSV data
+- Keeping metadata associated with files through tuples
 
 2. **Expanding Metadata During Workflow**:
 
-  - Adding process outputs (language detection) to meta maps
-  - Creating derived metadata (language groups) using conditional logic
-  - Using join to merge new metadata with existing records
+- Adding process outputs (language detection) to meta maps
+- Creating derived metadata (language groups) using conditional logic
+- Using join to merge new metadata with existing records
 
 3. **Filtering Based on Metadata**:
 
-  - Creating subsets of data based on metadata properties
+- Creating subsets of data based on metadata properties
 
 4. **Customizing Process Behavior**:
 
-  - Using metadata to configure output directories
-  - Adjusting process parameters based on sample properties
-  - Creating sample-specific outputs
+- Using metadata to configure output directories
+- Adjusting process parameters based on sample properties
+- Creating sample-specific outputs
 
 This approach offers several advantages over hardcoding sample information:
 
@@ -972,20 +972,20 @@ This approach offers several advantages over hardcoding sample information:
 
 1. based on process output:
 
-  ```nextflow
-  .map { meta, file, lang ->
-    [ meta + [lang:lang], file ]
-  }
-  ```
+```nextflow
+.map { meta, file, lang ->
+  [ meta + [lang:lang], file ]
+}
+```
 
 2. and using a conditional clause
 
-  ```nextflow
-  .map{ meta, file ->
-      def lang_group = (meta.lang.equals('de') || meta.lang.equals('en')) ? 'germanic' : 'romanic'
-      [ meta + [lang_group:lang_group], file ]
-  }
-  ```
+```nextflow
+.map{ meta, file ->
+    def lang_group = (meta.lang.equals('de') || meta.lang.equals('en')) ? 'germanic' : 'romanic'
+    [ meta + [lang_group:lang_group], file ]
+}
+```
 
 - **Filtering on meta values**
 
