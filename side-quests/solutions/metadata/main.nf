@@ -6,7 +6,7 @@ process IDENTIFY_LANGUAGE {
     container 'community.wave.seqera.io/library/pip_langid:b2269f456a5629ff'
 
     input:
-    tuple val(meta), path(greeting)
+    tuple val(meta), path(file)
 
     output:
     tuple val(meta), stdout
@@ -28,14 +28,14 @@ process COWPY {
     container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
 
     input:
-    tuple val(meta), path(input_file)
+    tuple val(meta), path(file)
 
     output:
-    tuple val(meta), path("cowpy-${input_file}")
+    tuple val(meta), path("cowpy-${file}")
 
     script:
     """
-    cat $input_file | cowpy -c ${meta.character} > cowpy-${input_file}
+    cat $file | cowpy -c ${meta.character} > cowpy-${file}
     """
 
 }

@@ -128,7 +128,19 @@ Launching `main.nf` [exotic_albattani] DSL2 - revision: c0d03cec83
 [id:sampleG, character:turtle, recording:/workspaces/training/side-quests/metadata/data/ciao.txt]
 ```
 
-We can see that each row from the CSV file has been converted into a map with keys matching the header row. A map is a key-value data structure similar to dictionaries in Python, objects in JavaScript, or hashes in Ruby.
+We can see that each row from the CSV file has been converted into a map with keys matching the header row. A map is a key-value data structure similar to dictionaries in Python, objects in JavaScript, or hashes in Ruby. For example:
+
+```groovy
+// Groovy map
+def meta = [id:'sample1', character:'squirrel']
+println meta.id  // Prints: sample1
+```
+
+```python
+# Python equivalent dictionary
+meta = {'id': 'sample1', 'character': 'squirrel'}
+print(meta['id'])  # Prints: sample1
+```
 
 Each map contains:
 
@@ -140,7 +152,16 @@ This format makes it easy to access specific fields from each sample. For exampl
 
 ### 1.2 Separate meta data and data
 
-In the samplesheet, we have both the input files and data about the input files (`id`, `character`), the meta data. As we progress through the workflow, we generate more meta data about each sample. To avoid having to keep track of how many fields we have at any point in time and making the input of our processes more robust, we can combine the meta information into its own key-value paired map:
+In the samplesheet, we have both the input files and data about the input files (`id`, `character`), the meta data. As we progress through the workflow, we generate more meta data about each sample. To avoid having to keep track of how many fields we have at any point in time and making the input of our processes more robust, we can combine the meta information into its own key-value paired map.
+
+Think of a meta map like a label attached to your data that contains important information about that sample - similar to how a library catalog card provides essential details about a book without being the book itself. This separation makes it easier to:
+
+- Track sample information throughout the workflow
+- Add new metadata as you process samples
+- Keep process inputs/outputs clean and organized
+- Query and filter samples based on their properties
+
+Now let's use this and separate our metadata from the file path. We'll use the `map` operator to restructure our channel elements into a tuple consisting of the meta map and file:
 
 === "After"
 
@@ -161,6 +182,8 @@ In the samplesheet, we have both the input files and data about the input files 
                             .view()
     ```
 
+Let's run it:
+
 ```bash title="View meta map"
 nextflow run main.nf
 ```
@@ -179,14 +202,17 @@ Launching `main.nf` [lethal_booth] DSL2 - revision: 0d8f844c07
 [[id:sampleG, character:turtle], /workspaces/training/side-quests/metadata/data/ciao.txt]
 ```
 
-We have successfully separate our meta data into its own map to keep it next to the file data. Each of our channel elements now has the shape `[ metamap,  file ]`.
+We have successfully separate our meta data into its own map to keep it next to the file data. Each of our channel elements now has the shape `[ meta,  file ]`.
 
 ### Takeaway
 
 In this section, you've learned:
 
-- **Reading in a samplesheet**: How to read in a samplesheet with `splitCsv`
-- **Creating a meta map**: Moving columns with meta information into a separate data structure and keep it next to the input data
+- **Reading in a samplesheet**: Using `splitCsv` to read CSV files with header information and transform rows into structured data
+- **Creating a meta map**:
+  - Separating metadata from file data using tuple structure `[ [id:value, ...], file ]`
+  - Keeping sample information organized and accessible throughout the workflow
+  - Declaring meta map as input/output declarations in processes
 
 ---
 
@@ -207,7 +233,7 @@ Now we want to process our samples. These samples are language samples, but we d
         container 'community.wave.seqera.io/library/pip_langid:b2269f456a5629ff'
 
         input:
-        tuple val(meta), path(greeting)
+        tuple val(meta), path(file)
 
         output:
         tuple val(meta), stdout
@@ -235,7 +261,7 @@ Now we want to process our samples. These samples are language samples, but we d
 
 The tool [langid](https://github.com/saffsd/langid.py) is a language identification tool. It is pre-trained on a set of languages. For a given phrase, it prints a language guess and a probability score for each guess to the console. In the `script` section, we are removing the probability score, clean up the string by removing a newline character and return the language guess. Since it is printed directly to the console, we are using Nextflow's [`stdout` output qualifier](https://www.nextflow.io/docs/latest/process.html#outputs), passing the string on as output.
 
-Let's include the process, run, and view it:
+Let's include the process, then run, and view it:
 
 === "After"
 
@@ -252,7 +278,6 @@ Let's include the process, run, and view it:
           ch_prediction.view()
 
       }
-
     ```
 
 === "Before"
@@ -308,7 +333,7 @@ If we check the [`join`](https://www.nextflow.io/docs/latest/operator.html#join)
 
 === "After"
 
-    ```groovy title="main.nf" linenums="20" hl_lines="8,11"
+    ```groovy title="main.nf" linenums="20" hl_lines="8 11"
     workflow  {
 
           ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
@@ -322,7 +347,6 @@ If we check the [`join`](https://www.nextflow.io/docs/latest/operator.html#join)
           ch_prediction.view()
 
       }
-
     ```
 
 === "Before"
@@ -387,7 +411,6 @@ We can see that the meta map is the first element in each map and the map is the
       ch_languages = ch_samplesheet.join(ch_prediction)
                                    .view()
     }
-
     ```
 
 === "Before"
@@ -501,14 +524,14 @@ Alright, now that we have our language predictions, let's use the information to
 We can use the `map` operator and an [ternary operator](https://groovy-lang.org/operators.html#_ternary_operator) to assign either group. The ternary operator, is a short cut to an if/else clause. It says:
 
 ```console title="Ternary"
-variable = <condition> ? 'Value' : 'Default'
+variable = <condition> ? 'if-the-condition-is-true' : 'Default'
 ```
 
 and is the same as:
 
 ```console title="If/else"
 if (<condition>){
-  variable = 'Value'
+  variable = 'if-the-condition-is-true'
 } else {
   variable = 'Default'
 }
@@ -584,20 +607,31 @@ Launching `main.nf` [wise_almeida] DSL2 - revision: 46778c3cd0
 [[id:sampleG, character:turtle, lang:it, lang_group:romanic], /workspaces/training/side-quests/metadata/data/ciao.txt]
 ```
 
+Let's understand how this transformation works. The `map` operator takes a closure that processes each element in the channel. Inside the closure, we're using a ternary operator to create a new language group classification.
+
+The ternary expression `(meta.lang.equals('de') || meta.lang.equals('en')) ? 'germanic' : 'romanic'` works like this:
+
+- First, it evaluates the condition before the `?`: checks if the language is either German ('de') or English ('en')
+- If the condition is true (language is German or English), it returns 'germanic'
+- If the condition is false (any other language), it returns 'romanic'
+
+We store this result in the `lang_group` variable and then add it to our meta map using `meta + [lang_group:lang_group]`. The resulting channel elements maintain their `[meta, file]` structure, but the meta map now includes this new classification. This allows us to group samples by their language family later in the workflow.
+
 ### Takeaway
 
 In this section, you've learned:
 
-- **Merging on meta maps**: You used `join` to combine two channels based on their meta maps
-- **Creating custom keys**: You created two new keys in your meta map. One based on a computed value from a process, and one based on a condition you set in the `map` operator.
+- **Merging on meta maps**: You used `join` to combine two channels based on their meta maps to maintain relationships across processes and channels
+- **Creating custom keys**: You created two new keys in your meta map, adding them with `meta + [new_key:value]`. One based on a computed value from a process, and one based on a condition you set in the `map` operator.
+- **Ternary operator**: You used the ternary operator to determine which language belongs to which group.
 
-Both of these allow you to associated new and existing meta data with files as you progress through your pipeline.
+These allow you to associated new and existing meta data with files as you progress through your pipeline.
 
 ---
 
 ## 3. Filter data based on meta map values
 
-We can use the [`filter` operator](https://www.nextflow.io/docs/latest/operator.html#filter) to filter the data based on a condition. Let's say we only want to process romanic language samples firther. We can do this by filtering the data based on the `lang_group` field. Let's create a new channel that only contains romanic languages and `view` it:
+We can use the [`filter` operator](https://www.nextflow.io/docs/latest/operator.html#filter) to filter the data based on a condition. Let's say we only want to process romanic language samples further. We can do this by filtering the data based on the `lang_group` field. Let's create a new channel that only contains romanic languages and `view` it:
 
 === "After"
 
@@ -655,7 +689,7 @@ We can use the [`filter` operator](https://www.nextflow.io/docs/latest/operator.
     }
     ```
 
-Let's rerun it
+Let's rerun it:
 
 ```bash title="View romanic samples"
 nextflow run main.nf -resume
@@ -685,17 +719,15 @@ In this case, we want to keep only the samples where `meta.lang_group == 'romani
 
 In this section, you've learned:
 
-- How to filter data with `filter`
+- How to use `filter` to select samples based on metadata
 
-we now have only the romanic language samples left and can process those further. Next we want to make characters say the phrases.
+We now have only the romanic language samples left and can process those further. Next we want to make characters say the phrases.
 
 ---
 
 ## 4. Customize a process with meta map
 
-Let's let the characters say the phrases that we have passed in. In the [hello-nextflow training](../hello_nextflow/05_hello_containers.md), you already encountered the `cowpy` package, a python implementation of a tool called `cowsay` that generates ASCII art to display arbitrary text inputs in a fun way.
-
-We will re-use a process from there.
+Let's let the characters say the phrases that we have passed in. In the [hello-nextflow training](../hello_nextflow/05_hello_containers.md), you already encountered the `cowpy` package, a python implementation of a tool called `cowsay` that generates ASCII art to display arbitrary text inputs in a fun way. We will re-use a process from there.
 
 Copy in the process before your workflow block:
 
@@ -798,7 +830,7 @@ We are still missing a publishing location. Given we have been trying to figure 
 
 === "After"
 
-    ```groovy title="main.nf" linenums="24" hl_lines=3""
+    ```groovy title="main.nf" linenums="24" hl_lines="3"
     process COWPY {
 
         publishDir "results/${meta.lang}", mode: 'copy'
@@ -819,7 +851,7 @@ We are still missing a publishing location. Given we have been trying to figure 
 Let's run this:
 
 ```bash title="Use cowpy"
-nextflow run main.nf -resume
+nextflow run main.nf
 ```
 
 You should now see a new folder called `results`:
@@ -914,8 +946,9 @@ This is a subtle difference to other parameters that we have set in the pipeline
 
 In this section, you've learned:
 
-- **Tweaking directives using meta values**
-- **Tweaking script section based on meta values**
+- **Tweaking directives using meta values**: Using meta map values in `publishDir` directives to create dynamic output paths based on sample properties
+
+- **Tweaking script section based on meta values**: Customizing tool parameters per sample using meta information in the `script` section
 
 ---
 
@@ -923,27 +956,15 @@ In this section, you've learned:
 
 In this side quest, you've explored how to effectively work with metadata in Nextflow workflows. Here's what you've learned:
 
-1. **Reading and Structuring Metadata**:
+1. **Reading and Structuring Metadata**: Reading CSV files and creating organized metadata maps that stay associated with your data files
 
-   - Using splitCsv to read samplesheets
-   - Creating structured meta maps from CSV data
-   - Keeping metadata associated with files through tuples
+2. **Expanding Metadata During Workflow**: Adding new information to your metadata as your pipeline progresses by adding process outputs and deriving values through conditional logic
 
-2. **Expanding Metadata During Workflow**:
+3. **Joining based on Metadata**: Using metadata to join process outputs and existing channels
 
-   - Adding process outputs (language detection) to meta maps
-   - Creating derived metadata (language groups) using conditional logic
-   - Using join to merge new metadata with existing records
+4. **Filtering Based on Metadata**: Using metadata values to create specific subsets of your data
 
-3. **Filtering Based on Metadata**:
-
-   - Creating subsets of data based on metadata properties
-
-4. **Customizing Process Behavior**:
-
-   - Using metadata to configure output directories
-   - Adjusting process parameters based on sample properties
-   - Creating sample-specific outputs
+5. **Customizing Process Behavior**: Using metadata to adapt how processes handle different samples
 
 This approach offers several advantages over hardcoding sample information:
 
@@ -951,7 +972,6 @@ This approach offers several advantages over hardcoding sample information:
 - Process behavior can be customized per sample
 - Output organization can reflect sample properties
 - Sample information can be expanded during pipeline execution
-- Filtering and grouping become more intuitive
 
 ### Key Concepts
 
