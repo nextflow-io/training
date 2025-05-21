@@ -34,5 +34,4 @@ Otherwise, select a side quest from the menu below.
 - [Testing with nf-test](./nf-test.md)
 - [Workflows of workflows](./workflows_of_workflows.md)
 
-
 Let us know what other domains and use cases you'd like to see covered here by posting in the [Training section](https://community.seqera.io/c/training/) of the community forum.
