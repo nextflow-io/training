@@ -15,7 +15,7 @@ In this side quest, we'll explore how to handle metadata effectively in Nextflow
 * Add new metadata fields during workflow execution
 * Use metadata to customize process behavior
 
-These skills will help you build more robust and flexible pipelines that can handle complex sample relationships and processing requirements.
+These skills will help you build more robust and flexible pipelines that can handle complex sample relationships and processing  requirements.
 
 Let's dive in and see how metadata can make our workflows smarter and more maintainable!
 
