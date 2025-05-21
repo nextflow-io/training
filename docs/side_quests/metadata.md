@@ -144,7 +144,7 @@ In the samplesheet, we have both the input files and data about the input files 
 
 === "After"
 
-    ```groovy title="main.nf" linenums="3" hl_lines="5-8"
+    ```groovy title="main.nf" linenums="3" hl_lines="3-6"
     ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
                             .splitCsv(header: true)
                             .map { row ->
@@ -239,7 +239,7 @@ Let's include the process, run, and view it:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="20" hl_lines="27-29"
+    ```groovy title="main.nf" linenums="20" hl_lines="9-10"
     workflow  {
 
           ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
