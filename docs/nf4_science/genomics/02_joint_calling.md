@@ -403,7 +403,7 @@ Let's write a new process to define how that's going to work, based on the comma
 process GATK_GENOMICSDB {
 
     container "community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"
-    publishDir params.outdir, mode: 'copy'
+    publishDir params.outdir, mode: 'symlink'
 
     input:
         path all_gvcfs

@@ -44,9 +44,10 @@ nav:
   - Side Quests:
       - side_quests/index.md
       - side_quests/orientation.md
-      - side_quests/nf-core.md
-      - side_quests/nf-test.md
       - side_quests/workflows_of_workflows.md
+      - side_quests/splitting_and_grouping.md
+      - side_quests/nf-test.md
+      - side_quests/nf-core.md
   - Fundamentals Training:
       - basic_training/index.md
       - basic_training/orientation.md
@@ -224,6 +225,10 @@ plugins:
           default: false
           locale: it
           name: Italiano
+        - build: true
+          default: false
+          locale: ko
+          name: Korean
       reconfigure_material: true
       reconfigure_search: true
   - search
