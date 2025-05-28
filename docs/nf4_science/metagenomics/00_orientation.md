@@ -13,7 +13,8 @@ For the purpose of the course, we'll be working in the `nf4-science/metagenomics
 cd nf4-science/metagenomics/
 ```
 
-There are some files that we need to download since they are quite large to be permanently stored within the GitHub repository. The file (or set of files) that we are going to download is the required database by Kraken2 and Bracken. Run the following commands in the exact order and wait until all of them are finished:
+There are some files that we need to download since they are quite large to be permanently stored within the GitHub repository.
+The file (or set of files) that we are going to download is the required database by Kraken2 and Bracken. Run the following commands in the exact order and wait until all of them are finished:
 
 ```bash
 mkdir -p data/viral_db && cd "$_"
