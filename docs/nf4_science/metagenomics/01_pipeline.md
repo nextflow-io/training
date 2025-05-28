@@ -193,7 +193,7 @@ The only output from this process will be the Krona plot that can be directly op
 
 ## 3. `workflow.nf`
 
-We are going to leverage the [`Workflows of Workflows`](../../side_quests/workflows_of_workflows) Side Quest to create the file `workflow.nf`, and we are going to use the `take/main` syntax. Here, inputs are declared using the keyword `take`, and workflow content is placed inside `main`. Now it is time to explicitly write where the processes files can be found, as well as the order of execution of the processes. In the file `workflow.nf` (no, this time it does not go inside the **modules** directory), we include the following:
+We are going to leverage the [`Workflows of Workflows`](../../side_quests/workflows_of_workflows.md) Side Quest to create the file `workflow.nf`, and we are going to use the `take/main` syntax. Here, inputs are declared using the keyword `take`, and workflow content is placed inside `main`. Now it is time to explicitly write where the processes files can be found, as well as the order of execution of the processes. In the file `workflow.nf` (no, this time it does not go inside the **modules** directory), we include the following:
 
 ```groovy title="workflow.nf" linenums="1"
 /*
