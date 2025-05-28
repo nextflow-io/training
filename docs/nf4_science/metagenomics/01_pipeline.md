@@ -18,13 +18,18 @@ The workflow is designed as follows:
 
 As you can see from the picture, the pipeline will undergo as follows:
 
-1. The input is **FASTQ** files from one or multiple samples. For this course, we will be using only paired-end reads recovered from an oligotrophic, phosphorus-deficient pond in Cuatro Ciénegas, Mexico ([Okie et al.,2020](https://elifesciences.org/articles/49816)); the BioProject accesion number is [PRJEB22811](https://www.ncbi.nlm.nih.gov/bioproject/PRJEB22811).
-2. **Host removal** with [**Bowtie2**](https://bowtie-bio.sourceforge.net/bowtie2/manual.shtml) by aligning the reads against an indexed reference genome. In this case, we are using the indexed genome of yeast given the storage limitations we have in this codespace, although you can use any organism of your interest by building [your own index](https://www.metagenomics.wiki/tools/bowtie2/index) or downloading a [precomputed](https://benlangmead.github.io/aws-indexes/bowtie) one.
-3. **Taxonomic classification** with [**Kraken2**](https://ccb.jhu.edu/software/kraken2/). This tools relies on a indexed database that can be [downloaded](https://benlangmead.github.io/aws-indexes/k2) or you can build your customized version following specific [instructions](https://avilpage.com/2024/07/mastering-kraken2-build-custom-db.html). We will be using the Viral database given the storage limitations (I know, it's a bit annoying), therefore this methodology is pointing at "viral metagenomics"; however, by just switching to any other database you can analyze your samples to annotate bacteria, archaea and more.
-4. **Bayesian species abundance re-estimation** with [**Bracken**](https://ccb.jhu.edu/software/bracken/index.shtml?t=manual). This software is designed to compute species abundance using Kraken classification results as stated in the reference paper, and it also uses some files contained in the dabatase folders such as the kmer distribution files (don't worry about this now, you can learn about how the method works afterwards).
-5. [**Krona**](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-12-385) plots are generated using the Bracken output to visualize interactively the relative abundance of each annotated species.
-6. If multiple samples are used as input to the pipeline, the bracken reports will be concatenated and converted into a Biological Observation Matrix ([**BIOM**](https://biom-format.org/)) file.
-7. Finally, the BIOM file will be first converted in a [**Phyloseq**](https://joey711.github.io/phyloseq/index.html) object, and this object will be further processed to generate absolute plots, estimate both α and β-diversity and perform a network analysis; this information will be presented in a final `report.html`. If you can to follow the code to generate the plots and metrics, you can check this Phyloseq [tutorial](https://vaulot.github.io/tutorials/Phyloseq_tutorial.html). 
+1. The input is **FASTQ** files from one or multiple samples.
+   For this course, we will be using only paired-end reads recovered from an oligotrophic, phosphorus-deficient pond in Cuatro Ciénegas, Mexico ([Okie et al.,2020](https://elifesciences.org/articles/49816)); the BioProject accesion number is [PRJEB22811](https://www.ncbi.nlm.nih.gov/bioproject/PRJEB22811).
+3. **Host removal** with [**Bowtie2**](https://bowtie-bio.sourceforge.net/bowtie2/manual.shtml) by aligning the reads against an indexed reference genome.
+   In this case, we are using the indexed genome of yeast given the storage limitations we have in this codespace, although you can use any organism of your interest by building [your own index](https://www.metagenomics.wiki/tools/bowtie2/index) or downloading a [precomputed](https://benlangmead.github.io/aws-indexes/bowtie) one.
+5. **Taxonomic classification** with [**Kraken2**](https://ccb.jhu.edu/software/kraken2/). This tools relies on a indexed database that can be [downloaded](https://benlangmead.github.io/aws-indexes/k2) or you can build your customized version following specific [instructions](https://avilpage.com/2024/07/mastering-kraken2-build-custom-db.html).
+   We will be using the Viral database given the storage limitations (I know, it's a bit annoying), therefore this methodology is pointing at "viral metagenomics"; however, by just switching to any other database you can analyze your samples to annotate bacteria, archaea and more.
+7. **Bayesian species abundance re-estimation** with [**Bracken**](https://ccb.jhu.edu/software/bracken/index.shtml?t=manual).
+   This software is designed to compute species abundance using Kraken classification results as stated in the reference paper, and it also uses some files contained in the dabatase folders such as the kmer distribution files (don't worry about this now, you can learn about how the method works afterwards).
+9. [**Krona**](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-12-385) plots are generated using the Bracken output to visualize interactively the relative abundance of each annotated species.
+10. If multiple samples are used as input to the pipeline, the bracken reports will be concatenated and converted into a Biological Observation Matrix ([**BIOM**](https://biom-format.org/)) file.
+11. Finally, the BIOM file will be first converted in a [**Phyloseq**](https://joey711.github.io/phyloseq/index.html) object, and this object will be further processed to generate absolute plots, estimate both α and β-diversity and perform a network analysis; this information will be presented in a final `report.html`.
+    If you can to follow the code to generate the plots and metrics, you can check this Phyloseq [tutorial](https://vaulot.github.io/tutorials/Phyloseq_tutorial.html). 
 
 !!!tip
 
@@ -38,7 +43,8 @@ Once we have a clear overview of what we want to achieve, we can start developin
 
 ### 2.1 Bowtie2
 
-As previously mentioned, the objective with this module is to clean the reads by aligning them against a reference genome to remove the ones that map with it. Let's create then the `bowtie2.nf` file inside the **modules** folder to write the following code:
+As previously mentioned, the objective with this module is to clean the reads by aligning them against a reference genome to remove the ones that map with it.
+Let's create then the `bowtie2.nf` file inside the **modules** folder to write the following code:
 
 ```groovy title="modules/bowtie2.nf" linenums="1"
 process BOWTIE2 {
@@ -65,15 +71,20 @@ Let's take a moment to break down what we are seeing here:
 
 - The process name is `BOWTIE2`, this is important when creating the workflow file.
 - The `tag` directive is used to indicate which sample is being processed at a determined moment. This will be useful when running the pipeline.
-- `publishDir` points out to the directory where the ouput is stored. In this case we are taking the path from the parameters, and within it subfolders with the sample namse will be created to store each `.sam` file, creating a copy of such files.
-- `container` indicates the docker container on which the process will be run. We have retrieved all the containers from [Seqera Containers](https://seqera.io/containers/). More information about how containers work can be found in the part 1 of the [RNASeq course](../rnaseq).
+- `publishDir` points out to the directory where the ouput is stored.
+  In this case we are taking the path from the parameters, and within it subfolders with the sample namse will be created to store each `.sam` file, creating a copy of such files.
+- `container` indicates the docker container on which the process will be run.
+  We have retrieved all the containers from [Seqera Containers](https://seqera.io/containers/).
+  More information about how containers work can be found in the part 1 of the [RNASeq course](../rnaseq).
 - The `input` for this process will be the `sample id`, the paired-end `reads`, as well as the path to the `bowtie index`. More about this when creating the `main.nf` file.
-- This process will produce a tuple containing the `sample id`, the path to the cleaned `reads` and the path to the `*.sam` file. This former file contains basically the overall information about the alignment of the sequences against the reference indexed genome; to learn more about this format, please check this [material](https://samtools.github.io/hts-specs/SAMv1.pdf).
+- This process will produce a tuple containing the `sample id`, the path to the cleaned `reads` and the path to the `*.sam` file.
+  This former file contains basically the overall information about the alignment of the sequences against the reference indexed genome; to learn more about this format, please check this [material](https://samtools.github.io/hts-specs/SAMv1.pdf).
 - Finally, the `script` statement contains two commands: _i)_ an environment variable is exported pointing to the directory where the indexed genome is stored (this is required by Bowtie2 for some reason, don't worry about it, just keep in mind if you plan to use another reference genome though); and _ii)_ the Bowtie2 command that includes again the path to the indexed genome, `-1` and `-2` capture the path to forward and reverse reads, respectively, `-S` provides the information about the desired format output, and `--un-conc-gz` is used to write the paired-end that fail to align concordantly to the reference genome (if this former parameter does not make sense to you, don't worry it took me a week to understand what it means, just check the [Bowtie2](https://bowtie-bio.sourceforge.net/bowtie2/manual.shtml) manual 😉).
 
 ### 2.2 Kraken2
 
-Now, let's create the module for our taxonomic classifier. Following the Bowtie2 process, we are going to create `kraken2.nf` file inside the **modules** folder to write this code:
+Now, let's create the module for our taxonomic classifier.
+Following the Bowtie2 process, we are going to create `kraken2.nf` file inside the **modules** folder to write this code:
 
 ```groovy title="modules/kraken2.nf" linenums="1"
 process KRAKEN2 {
@@ -101,7 +112,10 @@ process KRAKEN2 {
 }
 ```
 
-At a first glimpse, you can see that it follows the same structure as the previous process. The directives `tag`, `publishDir` and `container` play the same role as in Bowtie2, the `input` in this case is a tuple containing the `sample id`, the cleaned reads and the `*.sam` file (this one is declared just to maintain the correspondence between the output from Bowtie2 and the Kraken2 input). Also, the path to the kraken database is declared; more about this when writing the `main.nf` file. The output from this process will be a tuple containing the `sample id`, the path to the `.k2report` file, as well as the path to the `.kraken2` file. 
+At a first glimpse, you can see that it follows the same structure as the previous process.
+The directives `tag`, `publishDir` and `container` play the same role as in Bowtie2, the `input` in this case is a tuple containing the `sample id`, the cleaned reads and the `*.sam` file (this one is declared just to maintain the correspondence between the output from Bowtie2 and the Kraken2 input).
+Also, the path to the kraken database is declared; more about this when writing the `main.nf` file.
+The output from this process will be a tuple containing the `sample id`, the path to the `.k2report` file, as well as the path to the `.kraken2` file. 
 
 The `script` statement will run the Kraken2 command along with a series of flags that include the path to the database, the number of threads to use, the path to the reports Kraken2 generates, the minimum number of 'hit groups' needed to make a classification call, the flag to report the minimizers and distinct minimizer count, the parameters that indicate that the received reads are paired-end and compressed in a _.gz_ format. You are strongly encouraged to check both the [protocol](https://www.nature.com/articles/s41596-022-00738-y) that documents this methodology, as well as the [source publication](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-019-1891-0) to understand how Kraken2 works and the type of files it generates; this [article](https://homolog.us/blogs/bioinfo/2017/10/25/intro-minimizer/) about minimimzers is also useful.
 
@@ -132,7 +146,8 @@ process BRACKEN {
 }
 ```
 
-For this and the following process, we will focused only on the features that differ from the Bowtie2 and Kraken2 explanations. As expected, the declared `input` for this Bracken process matches the output generated by Kraken2, receiving a tuple containing the `sample id` and the paths to `.k2report` and `kraken2` reports. 
+For this and the following process, we will focused only on the features that differ from the Bowtie2 and Kraken2 explanations.
+As expected, the declared `input` for this Bracken process matches the output generated by Kraken2, receiving a tuple containing the `sample id` and the paths to `.k2report` and `kraken2` reports. 
 
 Similarly, the `output` establishes that this process will generate a tuple with the `sample id` and the two types of `reports` Bracken produces; more information about these reports can be found at the GitHub [repository](https://github.com/jenniferlu717/Bracken). 
 
@@ -140,7 +155,9 @@ The `script` statement runs Bracken specifying the path to the database, the inp
 
 ### 2.4 Krona
 
-To generate the Krona plots (this interactive pie charts especially common in the metagenomics field), we will need 2 processes. The first one is going to execute the script `kreport2krona.py`, provided as part of [KrakenTools](https://github.com/jenniferlu717/KrakenTools), using the Bracken report as input to produce a plain text file that contains the species abundance information. Let's create the file `kReport2Krona.nf` inside **modules**, and introduce the following code:
+To generate the Krona plots (this interactive pie charts especially common in the metagenomics field), we will need 2 processes.
+The first one is going to execute the script `kreport2krona.py`, provided as part of [KrakenTools](https://github.com/jenniferlu717/KrakenTools), using the Bracken report as input to produce a plain text file that contains the species abundance information.
+Let's create the file `kReport2Krona.nf` inside **modules**, and introduce the following code:
 
 ```groovy title="modules/kReport2Krona.nf" linenums="1"
 process K_REPORT_TO_KRONA {
@@ -163,9 +180,11 @@ process K_REPORT_TO_KRONA {
 }
 ```
 
-As seen before, this process is taking as input the exact output from Bracken in a tuple form, and it is going to generate another tuple containing `sample id` and the `*.txt` file with the abundance numbers. Within the `script` execution an additional flag that indicates leaving out non-traditional ranks.
+As seen before, this process is taking as input the exact output from Bracken in a tuple form, and it is going to generate another tuple containing `sample id` and the `*.txt` file with the abundance numbers.
+Within the `script` execution an additional flag that indicates leaving out non-traditional ranks.
 
-Now, the following process will use the plain `*.txt` to render the Krona plot in a self-contained `*.html` file. I guess that by this point you already what is coming: let's create the file `ktImportText.nf` inside **modules**, and write the code:
+Now, the following process will use the plain `*.txt` to render the Krona plot in a self-contained `*.html` file.
+I guess that by this point you already what is coming: let's create the file `ktImportText.nf` inside **modules**, and write the code:
 
 ```groovy title="modules/ktImportText.nf" linenums="1"
 process KT_IMPORT_TEXT {
@@ -187,13 +206,17 @@ process KT_IMPORT_TEXT {
 }
 ```
 
-The only output from this process will be the Krona plot that can be directly opened using a regular modern browser, just like the one you are using to follow this tutorial. With this process, the execution of the pipeline for a single sample is finished, we can proceed then to create the files that control the execution of the pipeline.
+The only output from this process will be the Krona plot that can be directly opened using a regular modern browser, just like the one you are using to follow this tutorial.
+With this process, the execution of the pipeline for a single sample is finished, we can proceed then to create the files that control the execution of the pipeline.
 
 ---
 
 ## 3. `workflow.nf`
 
-We are going to leverage the [`Workflows of Workflows`](../../side_quests/workflows_of_workflows.md) Side Quest to create the file `workflow.nf`, and we are going to use the `take/main` syntax. Here, inputs are declared using the keyword `take`, and workflow content is placed inside `main`. Now it is time to explicitly write where the processes files can be found, as well as the order of execution of the processes. In the file `workflow.nf` (no, this time it does not go inside the **modules** directory), we include the following:
+We are going to leverage the [`Workflows of Workflows`](../../side_quests/workflows_of_workflows.md) Side Quest to create the file `workflow.nf`, and we are going to use the `take/main` syntax.
+Here, inputs are declared using the keyword `take`, and workflow content is placed inside `main`.
+Now it is time to explicitly write where the processes files can be found, as well as the order of execution of the processes.
+In the file `workflow.nf` (no, this time it does not go inside the **modules** directory), we include the following:
 
 ```groovy title="workflow.nf" linenums="1"
 /*
@@ -206,7 +229,8 @@ include { K_REPORT_TO_KRONA 	        } 	from './modules/kReport2Krona.nf'
 include { KT_IMPORT_TEXT 	        } 	from './modules/ktImportText.nf'
 ```
 
-This way of importing process is composed by two parts, the first one invokes the name of the process inside the curly brackets (please not that they should match exactly with given names in the corresponding files), and the second one points out to the relative path where the files are located. Now, let's write what are the primary input for the workflow and the order of execution of the processes:
+This way of importing process is composed by two parts, the first one invokes the name of the process inside the curly brackets (please not that they should match exactly with given names in the corresponding files), and the second one points out to the relative path where the files are located.
+Now, let's write what are the primary input for the workflow and the order of execution of the processes:
 
 ```groovy title="workflow.nf" linenums="10"
 /*
@@ -228,7 +252,8 @@ workflow kraken2Flow {
 		KT_IMPORT_TEXT(K_REPORT_TO_KRONA.out)
 ```
 
-In this declaration you see that we need three primary inputs for the pipeline: the indexed reference genome for Bowtie2, the indexed database for Kraken2 and Bracken, and the paths to the reads; when creating the `nextflow.config`, you will see how to specify these paths. In the block `main`, you see the names of the processes with one or more parameters inside the parenthesis depicting the exact data flow:
+In this declaration you see that we need three primary inputs for the pipeline: the indexed reference genome for Bowtie2, the indexed database for Kraken2 and Bracken, and the paths to the reads; when creating the `nextflow.config`, you will see how to specify these paths.
+In the block `main`, you see the names of the processes with one or more parameters inside the parenthesis depicting the exact data flow:
 
 1. `BOWTIE2(reads_ch, bowtie2_index)` will be the first executed process using the reads and the indexed genome; the other processes must wait until this one is finished.
 2. Once `BOWTIE2` has completed the task, `KRAKEN2` will take the output, along with the database path to perform the specified task; the remaining process are on hold until Kraken2 is finished.
@@ -239,7 +264,10 @@ In this declaration you see that we need three primary inputs for the pipeline: 
 
 ## 4. `main.nf`
 
-We are getting closer to run the pipeline, let's create the `main.nf` file. Within this file, we create banner with the pipeline name to be shown when the execution starts. `log.info` is a method call on a logging object, and it is used to write informational messages to the Nextflow log during a pipeline's execution. You can learn more about this [here](https://carpentries-incubator.github.io/workflows-nextflow/11-Simple_Rna-Seq_pipeline.html#define-the-pipeline-parameters). 
+We are getting closer to run the pipeline, let's create the `main.nf` file.
+Within this file, we create banner with the pipeline name to be shown when the execution starts.
+`log.info` is a method call on a logging object, and it is used to write informational messages to the Nextflow log during a pipeline's execution.
+You can learn more about this [here](https://carpentries-incubator.github.io/workflows-nextflow/11-Simple_Rna-Seq_pipeline.html#define-the-pipeline-parameters). 
 
 ```groovy title="main.nf" linenums="1"
 #!/usr/bin/env nextflow
@@ -356,7 +384,9 @@ output/
     └── ERR2143768.sam
 ```
 
-Feel free to explore each of the files to understand each process and how data were handled. The file in which we are more interested is the `*.html` since this is the Krona plot, and you can either download or install the [preview](https://marketplace.visualstudio.com/items?itemName=ms-vscode.live-server) extension for Visual Studio. Keep in mind that we used the viral database, therefore you will be seeing information only about the viruses contained in the samples, to perform the analysis with bacteria and beyond you have to download a different database or build your own.
+Feel free to explore each of the files to understand each process and how data were handled.
+The file in which we are more interested is the `*.html` since this is the Krona plot, and you can either download or install the [preview](https://marketplace.visualstudio.com/items?itemName=ms-vscode.live-server) extension for Visual Studio.
+Keep in mind that we used the viral database, therefore you will be seeing information only about the viruses contained in the samples, to perform the analysis with bacteria and beyond you have to download a different database or build your own.
 
 ---
 
