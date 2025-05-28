@@ -239,7 +239,7 @@ In this declaration you see that we need three primary inputs for the pipeline: 
 
 ## 4. `main.nf`
 
-We are getting closer to run the pipeline, let's create the `main.nf` file. Within this file, we create banner with the pipeline name to be shown when the execution starts. `log.info` is method call on a logging object and it is used to write informational messages to the Nextflow log during a pipeline's execution. You can learn more about this [here](https://carpentries-incubator.github.io/workflows-nextflow/11-Simple_Rna-Seq_pipeline.html#define-the-pipeline-parameters). 
+We are getting closer to run the pipeline, let's create the `main.nf` file. Within this file, we create banner with the pipeline name to be shown when the execution starts. `log.info` is a method call on a logging object, and it is used to write informational messages to the Nextflow log during a pipeline's execution. You can learn more about this [here](https://carpentries-incubator.github.io/workflows-nextflow/11-Simple_Rna-Seq_pipeline.html#define-the-pipeline-parameters). 
 
 ```groovy title="main.nf" linenums="1"
 #!/usr/bin/env nextflow
