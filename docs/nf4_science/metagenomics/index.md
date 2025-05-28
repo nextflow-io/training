@@ -6,8 +6,7 @@ hide:
 
 # Nextflow for Metagenomics
 
-!!! note
-This course is a community effort led by [Jeferyd Yepes](https://jeferydyepes.com/) and edited by the Nextflow Training team. It will be re-visited every now and then for updates and suggestions from the community members.
+!!! note This course is a community effort led by [Jeferyd Yepes](https://jeferydyepes.com/) and edited by the Nextflow Training team. It will be re-visited every now and then for updates and suggestions from the community members.
 
 The course is designed for researchers on focused metagenomics (WGS/shotgun) data analysis who are interested in developing or customizing taxonomic annotation pipelines.
 It builds on the [Hello Nextflow](../../hello_nextflow/) and [Nextflow for RNAseq](../rnaseq/) beginner training and demonstrates how to use Nextflow in the specific context of metagenomics data analysis.
