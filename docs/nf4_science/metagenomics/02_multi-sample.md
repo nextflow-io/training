@@ -226,4 +226,4 @@ You just learnt how control workflow execution by including conditionals and ope
 
 ### What's next?
 
-Great! You are well equipped now to start developing your ownn pipelines.
+Great! You are well equipped now to start developing your own pipelines.
