@@ -8,7 +8,7 @@
 :fontawesome-brands-youtube:{ .youtube } See the [whole playlist on the Nextflow YouTube channel](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik).
 ///
 
-In Part 1 of this course (Hello World), we showed you how to provide a variable input to a process by providing the input in the process call directly: `sayHello(params.greet)`.
+In Part 1 of this course (Hello World), we showed you how to provide a variable input to a process by providing the input in the process call directly: `sayHello(params.greeting)`.
 That was a deliberately simplified approach.
 In practice, that approach has major limitations; namely that it only works for very simple cases where we only want to run the process once, on a single value.
 In most realistic workflow use cases, we want to process multiple values (experimental data for multiple samples, for example), so we need a more sophisticated way to handle inputs.
@@ -190,7 +190,7 @@ We just have to load more values into the channel.
 
 #### 2.1.1. Add more greetings
 
-In the workflow block, make the following code change:
+Before the workflow block, make the following code change:
 
 === "After"
 
@@ -644,7 +644,7 @@ To get started, we're going to need to make two key changes to the script:
 Remember the `params.greeting` parameter we set up in Part 1?
 We're going to update it to point to the CSV file containing our greetings.
 
-In the workflow block, make the following code change:
+Before the workflow block, make the following code change:
 
 === "After"
 
@@ -676,7 +676,6 @@ In the workflow block, make the following code change:
     ```groovy title="hello-channels.nf" linenums="31" hl_lines="1 2"
         // create a channel for inputs from a CSV file
         greeting_ch = Channel.fromPath(params.greeting)
-
     ```
 
 === "Before"

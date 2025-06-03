@@ -4,21 +4,24 @@
 // See .devcontainer/devcontainer.json for production config
 //
 {
-    "name": "devcontainers-development",
+    "name": "nextflow-training (codespaces-dev)",
     "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
 
     "features": {
-        "./local-features/init": {},
+        "../local-features/init": {},
         "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {
             "version": "latest"
         },
-        "ghcr.io/devcontainers/features/java:1": { "version": "latest" },
+        "ghcr.io/devcontainers/features/java:1": { "version": "21.0.6-ms" },
         "ghcr.io/rocker-org/devcontainer-features/miniforge:2": {
             "version": "latest"
         },
-        "./local-features/apptainer": {},
-        "./local-features/tower-agent": {},
-        "./local-features/conda-packages": {}
+        "ghcr.io/va-h/devcontainers-features/uv": {},
+        "../local-features/apptainer": {},
+        "../local-features/tower-agent": {},
+        "../local-features/nextflow": {},
+        "../local-features/conda-channels": {},
+        "../local-features/uv-tools": {}
     },
     "workspaceFolder": "/workspaces/training",
     "remoteUser": "root",

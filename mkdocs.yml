@@ -9,6 +9,7 @@ nav:
       - envsetup/index.md
       - envsetup/01_setup.md
       - envsetup/02_local.md
+      - envsetup/03_devcontainer.md
   - Hello Nextflow:
       - hello_nextflow/index.md
       - hello_nextflow/00_orientation.md
@@ -38,9 +39,10 @@ nav:
   - Side Quests:
       - side_quests/index.md
       - side_quests/orientation.md
-      - side_quests/nf-core.md
-      - side_quests/nf-test.md
       - side_quests/workflows_of_workflows.md
+      - side_quests/splitting_and_grouping.md
+      - side_quests/nf-test.md
+      - side_quests/nf-core.md
   - Fundamentals Training:
       - basic_training/index.md
       - basic_training/orientation.md
@@ -212,6 +214,14 @@ plugins:
           default: false
           locale: fr
           name: Français
+        - build: true
+          default: false
+          locale: it
+          name: Italiano
+        - build: true
+          default: false
+          locale: ko
+          name: Korean
       reconfigure_material: true
       reconfigure_search: true
   - search

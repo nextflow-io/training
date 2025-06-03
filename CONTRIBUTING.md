@@ -131,6 +131,11 @@ Please make sure that you have Prettier installed and working locally: <https://
 
 There is a GitHub action that checks pull-requests for valid formatting.
 
+For paragraphs containing multiple sentences, please start each sentence on a new line.
+Doing that produces cleaner diffs for future code reviews.
+The sentences will still be rendered as a continuous paragraph.
+For an example, have a look at the code for this paragraph.
+
 ### Admonitions
 
 We use admonitions extensively to make certain pieces of content stand out.

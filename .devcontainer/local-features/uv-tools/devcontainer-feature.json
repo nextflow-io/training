@@ -1,0 +1,6 @@
+{
+    "id": "uv-tools",
+    "name": "uv tools",
+    "description": "Install required python cli tools using uv",
+    "installsAfter": ["ghcr.io/va-h/devcontainers-features/uv"]
+}
