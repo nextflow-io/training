@@ -364,7 +364,7 @@ The pipeline code organization follows a modular structure that is designed to m
     We won't go over the actual code for how these modular components are connected, because there is some additional complexity associated with the use of subworkflows that can be confusing, and understanding that is not necessary at this stage of the training.
     For now, we're going to focus on the logic of this modular organization.
 
-### 3.1.1. Overall organization and `main.nf` script
+#### 3.1.1. Overall organization and `main.nf` script
 
 At the top level, there is the `main.nf` script, which is the entrypoint Nextflow starts from when we execute `nextflow run nf-core/demo`. That means when you run `nextflow run nf-core/demo` to run the pipeline, Nextflow automatically finds and executes the `main.nf` script, and everything else will flow from there.
 
@@ -398,7 +398,7 @@ Usually these are operations that very specific to that pipeline.
 
 Let's take a peek into those directories.
 
-### 3.1.2. Modules
+#### 3.1.2. Modules
 
 The modules are where the process code lives, as described in [Part 4 of the Hello Nextflow training course](../hello_nextflow/04_hello_modules.md).
 
@@ -433,7 +433,7 @@ pipelines/nf-core/demo/modules
 Here you see that the `fastqc` and `multiqc` modules sit at the top level within the `nf-core` modules, whereas the `trim` module sits under the toolkit that it belongs to, `seqtk`.
 In this case there are no `local` modules.
 
-### 3.1.3. Subworkflows
+#### 3.1.3. Subworkflows
 
 As noted above, subworkflows function as wrappers that call two or more modules.
 

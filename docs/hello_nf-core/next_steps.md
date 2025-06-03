@@ -6,13 +6,13 @@ Congrats again on completing the Hello nf-core training course and thank you for
 
 TODO: UPDATE
 
-### 1. See how what you just learned applies to a scientific analysis use case
+## 1. See how what you just learned applies to a scientific analysis use case
 
 **Check out the [Nextflow for Science](../nf4_science/index.md) page** for a list of short standalone courses that demonstrate how to apply the basic concepts and mechanisms presented in Hello Nextflow to common scientific analysis use cases.
 
 If you don't see your domain represented by a relatable use case, let us know in the [Community forum](https://community.seqera.io/) so we can add it to our development list.
 
-### 2. Delve into the details
+## 2. Delve into the details
 
 In the Hello Nextflow course, we keep the level of technical complexity low on purpose to avoid overloading you with information you don't need in order to get started with Nextflow.
 As you move forward with your work, you're going to want to learn how to use the full feature set and power of Nextflow.
@@ -21,7 +21,7 @@ To that end, we are currently working on a collection of Side Quests, which are 
 
 In the meantime, feel free to **browse the [Fundamentals Training](../basic_training/index.md) and [Advanced Training](../advanced/index.md)** to find training exercises about the topics that interest you.
 
-### 3. Learn how to use nf-core resources and the Seqera Platform
+## 3. Learn how to use nf-core resources and the Seqera Platform
 
 **The [nf-core project](https://nf-co.re/) is a worldwide collaborative effort to develop standardized open-source pipelines for a wide range of scientific research applications.**
 It includes [over 100 pipelines](https://nf-co.re/pipelines/) that are available for use out of the box and [well over 1400 process modules](https://nf-co.re/modules/) that can be integrated into your own projects, as well as a rich set of developer tools.
