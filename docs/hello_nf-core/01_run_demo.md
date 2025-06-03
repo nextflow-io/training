@@ -118,7 +118,7 @@ ln -s $NXF_HOME/assets pipelines
 This creates a shortcut that makes it easier to explore the code we just downloaded.
 
 ```bash
-tree -L2 pipelines
+tree -L 2 pipelines
 ```
 
 ```bash
