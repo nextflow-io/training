@@ -447,7 +447,7 @@ Finally, add an `emit` statement declaring what are the final outputs of the wor
 
 ```groovy title="original-hello/hello.nf" linenums="37"
     emit:
-    final_result = cowpy.out
+    cowpy_hellos = cowpy.out
 ```
 
 This is a net new addition to the code compared to the original workflow.
