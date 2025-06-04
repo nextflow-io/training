@@ -1,6 +1,6 @@
 # Next Steps
 
-Congrats again on completing the Nextflow For RNAseq training course and thank you for completing our survey!
+Congrats again on completing the **Hello nf-core** training course and thank you for completing our survey!
 
 ---
 
@@ -8,18 +8,15 @@ Congrats again on completing the Nextflow For RNAseq training course and thank y
 
 Here are our top three recommendations for what to do next based on the course you just completed.
 
-### 1.1. Apply Nextflow to other scientific analysis use cases
+### 1.1. Get involved with the nf-core community
 
-**Check out the [Nextflow for Science](../nf4_science/index.md) page** for a list of other short standalone courses that demonstrate how to apply the basic concepts and mechanisms presented in Hello Nextflow to common scientific analysis use cases.
+**The nf-core community is a welcoming, collaborative space** where you can keep learning, connect with others, and make meaningful contributions. Join the [nf-core Slack workspace](https://nf-co.re/join/slack) to ask questions, share ideas, and stay updated. Whether you attend a hackathon, help improve a pipeline, or just chat with fellow community members, getting involved is a great way to grow your skills and be part of the future of open bioinformatics.
+
+### 1.2. Apply Nextflow to a scientific analysis use case
+
+**Check out the [Nextflow for Science](../nf4_science/index.md) page** for a list of short standalone courses that demonstrate how to apply the basic concepts and mechanisms presented in Hello Nextflow to common scientific analysis use cases.
 
 If you don't see your domain represented by a relatable use case, let us know in the [Community forum](https://community.seqera.io/) so we can add it to our development list.
-
-### 1.2. Get started with nf-core
-
-**[nf-core](https://nf-co.re/)** is a worldwide collaborative effort to develop standardized open-source pipelines for a wide range of scientific research applications.\*\*
-The project includes [over 100 pipelines](https://nf-co.re/pipelines/) that are available for use out of the box and [well over 1400 process modules](https://nf-co.re/modules/) that can be integrated into your own projects, as well as a rich set of developer tools.
-
-The **[Hello nf-core](../../hello_nf-core/index.md)** training course will introduce you to the nf-core community-curated pipelines and development framework, designed to help you write reproducible, scalable, and standardized workflows. You’ll learn how to use existing nf-core pipelines, contribute to their development, and even start building your own, supported by best practices and a vibrant community. If you’re ready to apply your Nextflow skills in real-world projects, this is the perfect next step.
 
 ### 1.3. Master more advanced Nextflow features
 

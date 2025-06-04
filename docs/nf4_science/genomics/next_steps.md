@@ -1,6 +1,6 @@
 # Next Steps
 
-Congrats again on completing the Nextflow For RNAseq training course and thank you for completing our survey!
+Congrats again on completing the Nextflow For Genomics training course and thank you for completing our survey!
 
 ---
 
