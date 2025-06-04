@@ -129,7 +129,7 @@ community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273
 
 Una volta completato il download, si ha una copia locale dell'immagine del container.
 
-### 1.2. utilizzare il container per eseguire cowpy come comando singolo.
+### 1.2. Utilizzare il container per eseguire cowpy come comando singolo
 
 Un modo molto comune di utilizzare i container è quello di eseguirli direttamente, cioè in modo non interattivo.
 Questo è ottimo per eseguire comandi una tantum.
@@ -167,7 +167,7 @@ Esegui per produrre il seguente output:
 
 Il sistema avvia il container, esegue il comando cowpy con i suoi parametri, invia l'output alla console e infine chiude l'istanza del container.
 
-### 1.3.Ustilizzare il conatienr per eseguire cowpu in modo interattivo
+### 1.3. Ustilizzare il container per eseguire cowpy in modo interattivo
 
 E anche possibile eseguire un conatiner in modo interattivo, in modo da avere un prompt di shell all'interno del container e poter giocare con i comandi.
 
@@ -357,7 +357,7 @@ Ciò significa che puoi utilizzare qualsiasi immagine di container desideri per 
 
 Per dimostrarlo, aggiungeremo un passaggio `cowpy` alla pipeline che stiamo sviluppando, dopo il passaggio `collectGreetings`.
 
-### 2.1.Scrivi un modulo `cowpy`
+### 2.1. Scrivi un modulo `cowpy`
 
 #### 2.1.1. Crea uno stub di file per il nuovo modulo
 
@@ -535,7 +535,7 @@ Command error:
 Questo codice di errore, `error exit status (127)`, significa che l'eseguibile richiesto non è stato trovato.
 Naturalmente, dato che stiamo chiamando lo strumento `cowpy` ma non abbiamo ancora specificato un container.
 
-### 2.3.Utilizzare un container per l'esecuzione
+### 2.3. Utilizzare un container per l'esecuzione
 
 Dobbiamo specificare un container e dire a Nextflow di usarlo per il processo `cowpy()`.
 

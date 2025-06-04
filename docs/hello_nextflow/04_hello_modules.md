@@ -95,7 +95,7 @@ We're going to create a file stub for the module, copy the relevant code over th
 
 Then all we'll need to do is add an import statement so that Nextflow will know to pull in the relevant code at runtime.
 
-### 2.1.1. Create a file stub for the new module
+### 2.1. Create a file stub for the new module
 
 Let's create an empty file for the module called `sayHello.nf`.
 
