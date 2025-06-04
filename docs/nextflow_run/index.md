@@ -4,7 +4,7 @@ hide:
   - toc
 ---
 
-# Run Nextflow
+# Nextflow Run
 
 Hello! You are now on the path to running reproducible and scalable scientific workflows using Nextflow.
 

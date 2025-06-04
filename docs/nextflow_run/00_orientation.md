@@ -7,7 +7,7 @@ If you have not yet done so, please follow [this link](../../envsetup/) before g
 
 ## Materials provided
 
-Throughout this training course, we'll be working in the `run-nextflow/` directory.
+Throughout this training course, we'll be working in the `nextflow-run/` directory.
 This directory contains all the code files, test data and accessory files you will need.
 
 Feel free to explore the contents of this directory; the easiest way to do so is to use the file explorer on the left-hand side of the GitHub Codespaces workspace.
@@ -20,7 +20,7 @@ Here we generate a table of contents to the second level down:
 tree . -L 2
 ```
 
-If you run this inside `run-nextflow`, you should see the following output: [TODO]
+If you run this inside `nextflow-run`, you should see the following output: [TODO]
 
 ```console title="Directory contents"
 .
@@ -40,7 +40,7 @@ If you run this inside `run-nextflow`, you should see the following output: [TOD
     If for whatever reason you move out of this directory, you can always run this command to return to it:
 
     ```bash
-    cd /workspaces/training/run-nextflow
+    cd /workspaces/training/nextflow-run
     ```
 
 Now, to begin the course, click on the arrow in the bottom right corner of this page.
