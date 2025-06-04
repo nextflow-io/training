@@ -42,24 +42,16 @@ This TUI will ask you to provide basic information about your pipeline and will 
 - On the welcome screen, click **Let's go!**.
 - On the `Choose pipeline type` screen, click **Custom**.
 - Enter your pipeline details as follows (replacing `< YOUR NAME >` with your own name), then click **Next**.
-
-```
-[ ] GitHub organisation: core
-[ ] Workflow name: hello
-[ ] A short description of your pipeline: A basic nf-core style version of Hello Nextflow
-[ ] Name of the main author(s): < YOUR NAME >
-```
-
+  - GitHub organisation: core
+  - Workflow name: hello
+  - A short description of your pipeline: A basic nf-core style version of Hello Nextflow
+  - Name of the main author(s): < YOUR NAME >
 - On the Template features screen, set `Toggle all features` to **off**, then selectively **enable** the following. Check your selections and click **Continue**.
-
-```
-[ ] Add configuration files
-[ ] Use nf-core components
-[ ] Use nf-schema
-[ ] Add documentation
-[ ] Add testing profiles
-```
-
+  - Add configuration files
+  - Use nf-core components
+  - Use nf-schema
+  - Add documentation
+  - Add testing profiles
 - On the `Final details` screen, click **Finish**. Wait for the pipeline to be created, then click **Continue**.
 - On the Create GitHub repository screen, click **Finish without creating a repo**. This will display instructions for creating a GitHub repository later. Ignore these and click **Close**.
 
