@@ -30,6 +30,33 @@ We welcome fixes and improvements from the community. Please fork the repository
 
 You can find instructions about how to develop the training material code in [`CONTRIBUTING.md`](CONTRIBUTING.md). If you want to contribute with a translation instead, check [`TRANSLATING.md`](TRANSLATING.md).
 
+### Headings CI tests
+
+This repository includes a Python tool to validate markdown heading numbering consistency across training materials.
+
+The `check_headings.py` script ensures:
+
+- Sequential numbering at each level (1., 1.1., 1.2., etc.)
+- Trailing periods after heading numbers
+- Heading levels match numbering depth (## for 1., ### for 1.1.)
+
+The easiest way to run it is [with `uv`](https://docs.astral.sh/uv/), which handles dependencies for you automatically:
+
+```bash
+# Check files for issues
+uv run .github/check_headings.py docs/**/*.md
+```
+
+```bash
+# Auto-fix detected issues
+uv run .github/check_headings.py --fix docs/**/*.md
+```
+
+Otherwise, run `pip install typer rich` then `python .github/check_headings.py`.
+
+The script runs automatically in CI on markdown file changes via GitHub Actions,
+and will cause a CI failure if any incorrect headings are found.
+
 ## Credits & Copyright
 
 This training material is developed and maintained by [Seqera](https://seqera.io) and released under an open-source license ([CC BY-NC-ND](https://creativecommons.org/licenses/by-nc-nd/4.0/)) for the benefit of the community. You are welcome to reuse these materials according to the terms of the license. If you are an instructor running your own trainings, we'd love to hear about how it goes and what we could do to make it easier.
