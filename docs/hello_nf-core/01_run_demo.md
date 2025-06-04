@@ -104,7 +104,8 @@ tree -L 2 $NXF_HOME/assets/
 ```
 
 !!! note
-The full path may differ on your system if you're not using our training environment.
+
+    The full path may differ on your system if you're not using our training environment.
 
 The location of the downloaded source code is intentionally 'out of the way' on the principle that these pipelines should be used more like libraries than code that you would directly interact with.
 
@@ -596,9 +597,10 @@ SAMPLE_SINGLE_END,/path/to/fastq/files/AEG588A4_S4_L003_R1_001.fastq.gz,
 
 ```
 
-!!! Note
-The paths in this example samplesheet are not real.
-For paths to real data files, you should look in the test profiles, which link to data in the `nf-core/test-datasets` repository.
+!!! note
+
+    The paths in this example samplesheet are not real.
+    For paths to real data files, you should look in the test profiles, which link to data in the `nf-core/test-datasets` repository.
 
     In general, it's considered good practice to link out to example data rather than include it in the pipeline code repository, unless the example data is of trivial size (as is the case for the `greetings.csv` in the Hello Nextflow training series).
 
