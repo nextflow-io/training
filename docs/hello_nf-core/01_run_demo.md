@@ -142,11 +142,14 @@ Learn how to try out an nf-core pipeline with minimal effort.
 
 ---
 
-## 2. Run the pipeline with its test profile
+## 2. Try out the pipeline with its test profile
 
-Conveniently, every nf-core pipeline comes with a `test` profile.
+Conveniently, every nf-core pipeline comes with a test profile.
 This is a minimal set of configuration settings for the pipeline to run using a small test dataset hosted in the [nf-core/test-datasets](https://github.com/nf-core/test-datasets) repository. It's a great way to quickly try out a pipeline at small scale.
 
+### 2.1. Examine the test profile
+
+It's good practice to check what a pipeline's test profile specifies before running it.
 The `test` profile for `nf-core/demo` is shown below:
 
 ```groovy title="conf/test.config" linenums="1" hl_lines="26"
@@ -180,10 +183,14 @@ params {
 }
 ```
 
-This tells us that the `nf-core/demo` `test` profile already specifies the input parameter, so you don't have to provide any input yourself.
-However, the `outdir` parameter is not included in the `test` profile, so you have to add it to the execution command using the `--outdir` flag.
+This tells us that the `nf-core/demo` test profile already specifies the input parameter, so you don't have to provide any input yourself.
+However, the `outdir` parameter is not included in the test profile, so we will have to add it to the execution command using the `--outdir` flag.
 
-Here, we're also going to specify `-profile docker`, which by nf-core convention enables the use of Docker containers.
+### 2.2. Run the pipeline
+
+Our examination of the test profile above told us what pipeline argument(s) we need to specify: just `--outdir`.
+
+We're also going to specify `-profile docker,test`, which by nf-core convention enables the use of Docker containers, and of course, invokes the test profile.
 
 Let's try it!
 
@@ -266,6 +273,8 @@ This tells us that three processes were run, corresponding to the three tools sh
     These includes the names of their parent workflows and reflect the modularity of the pipeline code.
     We will go into more detail about that shortly.
 
+### 2.3. Examine the pipeline's outputs
+
 Finally, let's have a look at the `demo-results` directory produced by the pipeline.
 
 ```bash
@@ -346,13 +355,9 @@ pipelines/nf-core/demo
 There's a lot going on in there, so we'll tackle this in stages.
 We're going to look at the following categories:
 
-1. Pipeline code components
-
-- main script in `main.nf`
-- modular components in `workflows`, `subworkflows` and `modules`
-
+1. Pipeline code components (`main.nf`, `workflows`, `subworkflows`, `modules`)
 2. Configuration, parameters and inputs
-3. Documentation and other stuff
+3. Documentation and related assets
 
 Let's start with the code proper, though note that for now, we're going to focus on how everything is organized, without looking at the actual code just yet.
 
