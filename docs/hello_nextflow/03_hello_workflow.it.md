@@ -74,7 +74,7 @@ A tal fine, dobbiamo fare tre cose:
 - Scrivere un nuovo processo che racchiuda il comando per la conversione in maiuscolo.
 - Chiamare il nuovo processo nel blocco del workflow e configurarlo per prendere l'output del processo `sayHello()` come input.
 
-## 1.1 Definire il comando per la conversione in maiuscolo e testarlo nel terminale
+### 1.1. Definire il comando per la conversione in maiuscolo e testarlo nel terminale
 
 Per eseguire la conversione dei saluti in maiuscolo, useremo uno strumento UNIX classico chiamato `tr` per 'text replacement' (sostituzione del testo), con la seguente sintassi:
 
@@ -98,7 +98,7 @@ HELLO WORLD
 
 Questo è ciò che proveremo a fare con il nostro workflow.
 
-### 1.1 Scrivere il passaggio di conversione in maiuscolo come un processo Nextflow
+### 1.2. Scrivere il passaggio di conversione in maiuscolo come un processo Nextflow
 
 Possiamo modellare il nostro nuovo processo sul primo, poiché vogliamo usare gli stessi componenti.
 
@@ -131,7 +131,7 @@ Qui, componiamo il secondo nome del file di output in base al nome del file di i
 
     Nextflow determinerà l'ordine delle operazioni in base alla concatenazione degli input e degli output, quindi l'ordine delle definizioni dei processi nello script del flusso di lavoro non è importante. Tuttavia, ti consigliamo di essere gentile con i tuoi collaboratori e con il futuro te stesso, e cercare di scriverle in un ordine logico per motivi di leggibilità."
 
-### 1.2 Aggiungi una chiamata al nuovo processo nel blocco del workflow
+### 1.3. Aggiungi una chiamata al nuovo processo nel blocco del workflow
 
 Ora dobbiamo dire a Nextflow di chiamare effettivamente il processo che abbiamo appena definito.
 
@@ -158,7 +158,7 @@ Nel blocco del workflow, apporta la seguente modifica al codice:
 
 Questo non è ancora funzionante perché non abbiamo specificato cosa deve essere l'input per il processo `convertToUpper()`.
 
-### 1.3 Passare l'output del primo processo al secondo processo
+### 1.4. Passare l'output del primo processo al secondo processo
 
 Ora dobbiamo fare in modo che l'output del processo `sayHello()` fluisca nel processo `convertToUpper()`.
 
@@ -185,7 +185,7 @@ Nel blocco del workflow, apporta la seguente modifica al codice:
 
 Per un caso semplice come questo (un output a un input), è tutto ciò che dobbiamo fare per connettere due processi!
 
-### 1.4 Esegui di nuovo il flusso di lavoro con `-resume`
+### 1.5. Esegui di nuovo il flusso di lavoro con `-resume`
 
 Eseguiamo di nuovo il flusso di lavoro utilizzando il flag `-resume`, poiché abbiamo già eseguito con successo il primo passaggio del workflow.
 
@@ -772,7 +772,7 @@ Nel blocco del processo `collectGreetings`, apporta la seguente modifica al codi
 
 La variabile `count_greetings` verrà calcolata durante l'esecuzione.
 
-### 4.1.2. Emissione del conteggio come output con nome
+#### 4.1.2. Emissione del conteggio come output con nome
 
 In linea di principio, tutto ciò che dobbiamo fare è aggiungere la variabile `count_greetings` al blocco `output:`.
 
