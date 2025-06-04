@@ -35,6 +35,8 @@ nav:
       - nf4_science/genomics/02_joint_calling.md
       - nf4_science/genomics/03_modules.md
       - nf4_science/genomics/04_testing.md
+      - nf4_science/genomics/survey.md
+      - nf4_science/genomics/next_steps.md
   - Nextflow for RNAseq:
       - nf4_science/rnaseq/index.md
       - nf4_science/rnaseq/00_orientation.md
