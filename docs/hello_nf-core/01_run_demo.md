@@ -1,4 +1,4 @@
-# Part 1: Run nf-core/demo
+# Part 1: Run a demo pipeline
 
 In this first part of the Hello nf-core training course, we show you how to find and try out an nf-core pipeline, understand how the code is organized, and recognize how it differs from plain Nextflow code as shown in [Hello Nextflow](../hello_nextflow/index.md).
 
@@ -122,7 +122,7 @@ This creates a shortcut that makes it easier to explore the code we just downloa
 tree -L 2 pipelines
 ```
 
-```bash
+```console title="Output"
 pipelines
 └── nf-core
     └── demo
@@ -130,7 +130,7 @@ pipelines
 
 Now we can more easily peek into the source code as needed.
 
-But first, let's try running your first nf-core pipeline!
+But first, let's try running our first nf-core pipeline!
 
 ### Takeaway
 
@@ -142,7 +142,7 @@ Learn how to try out an nf-core pipeline with minimal effort.
 
 ---
 
-## 2. Run the pipeline with the provided test profile
+## 2. Run the pipeline with its test profile
 
 Conveniently, every nf-core pipeline comes with a `test` profile.
 This is a minimal set of configuration settings for the pipeline to run using a small test dataset hosted in the [nf-core/test-datasets](https://github.com/nf-core/test-datasets) repository. It's a great way to quickly try out a pipeline at small scale.
@@ -302,7 +302,7 @@ This is standard for nf-core pipelines.
 
 Congratulations! You have just run your first nf-core pipeline.
 
-#### Takeaway
+### Takeaway
 
 You know how to run an nf-core pipeline using its built-in test profile.
 
