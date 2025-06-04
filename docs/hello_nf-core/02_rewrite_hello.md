@@ -39,9 +39,9 @@ Running this command will open a Text User Interface (TUI) for pipeline creation
 
 This TUI will ask you to provide basic information about your pipeline and will provide you with a choice of features to include or exclude in your pipeline scaffold.
 
-1. On the welcome screen, click **Let's go!**.
-2. On the `Choose pipeline type` screen, click **Custom**.
-3. Enter your pipeline details as follows (replacing `< YOUR NAME >` with your own name), then click **Next**.
+- On the welcome screen, click **Let's go!**.
+- On the `Choose pipeline type` screen, click **Custom**.
+- Enter your pipeline details as follows (replacing `< YOUR NAME >` with your own name), then click **Next**.
 
 ```
 [ ] GitHub organisation: core
@@ -50,7 +50,7 @@ This TUI will ask you to provide basic information about your pipeline and will 
 [ ] Name of the main author(s): < YOUR NAME >
 ```
 
-4. On the Template features screen, set `Toggle all features` to **off**, then selectively **enable** the following. Check your selections and click **Continue**.
+- On the Template features screen, set `Toggle all features` to **off**, then selectively **enable** the following. Check your selections and click **Continue**.
 
 ```
 [ ] Add configuration files
@@ -60,8 +60,8 @@ This TUI will ask you to provide basic information about your pipeline and will 
 [ ] Add testing profiles
 ```
 
-5. On the `Final details` screen, click **Finish**. Wait for the pipeline to be created, then click **Continue**.
-6. On the Create GitHub repository screen, click **Finish without creating a repo**. This will display instructions for creating a GitHub repository later. Ignore these and click **Close**.
+- On the `Final details` screen, click **Finish**. Wait for the pipeline to be created, then click **Continue**.
+- On the Create GitHub repository screen, click **Finish without creating a repo**. This will display instructions for creating a GitHub repository later. Ignore these and click **Close**.
 
 Once the TUI closes, you should see the following console output.
 
