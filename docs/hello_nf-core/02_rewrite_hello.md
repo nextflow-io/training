@@ -43,18 +43,22 @@ This TUI will ask you to provide basic information about your pipeline and will 
 2. On the `Choose pipeline type` screen, click **Custom**.
 3. Enter your pipeline details as follows (replacing `< YOUR NAME >` with your own name), then click **Next**.
 
-   - **GitHub organisation:** core
-   - **Workflow name:** hello
-   - **A short description of your pipeline:** A basic nf-core style version of Hello Nextflow
-   - **Name of the main author(s):** < YOUR NAME >
+```
+[ ] GitHub organisation: core
+[ ] Workflow name: hello
+[ ] A short description of your pipeline: A basic nf-core style version of Hello Nextflow
+[ ] Name of the main author(s): < YOUR NAME >
+```
 
 4. On the Template features screen, set `Toggle all features` to **off**, then selectively **enable** the following. Check your selections and click **Continue**.
 
-   - `Add configuration files`
-   - `Use nf-core components`
-   - `Use nf-schema`
-   - `Add documentation`
-   - `Add testing profiles`
+```
+[ ] Add configuration files
+[ ] Use nf-core components
+[ ] Use nf-schema
+[ ] Add documentation
+[ ] Add testing profiles
+```
 
 5. On the `Final details` screen, click **Finish**. Wait for the pipeline to be created, then click **Continue**.
 6. On the Create GitHub repository screen, click **Finish without creating a repo**. This will display instructions for creating a GitHub repository later. Ignore these and click **Close**.
@@ -562,8 +566,8 @@ nextflow run ./original-hello
 
 !!! note
 
-    Here you see the advantage of using the `main.nf` naming convention, which allows us to omit including the name of the workflow file in the command.
-    If we had named it `something_else.nf`, we would have had to do `nextflow run original-hello/something_else.nf`.
+    Here you see the advantage of using the `main.nf` naming convention.
+    If we had named the entrypoint workflow `something_else.nf`, we would have had to do `nextflow run original-hello/something_else.nf`.
 
 If you made all the changes correctly, this should run to completion.
 
@@ -662,7 +666,7 @@ We're going to tackle this in the following stages:
 
     We're going to ignore the version capture for this first pass and will look at how to wire that up in a later section.
 
-### 3.1. Copy over the modules and set up module imports
+### 3.1. Copy the modules and set up module imports
 
 In the original workflow, the four processes are stored in modules, so we need to copy those over to this new project (into a new `local` directory) and add import statements to the workflow file.
 
@@ -837,15 +841,15 @@ This looks great, but we still need to update the name of the channel we're pass
 === "After"
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="26"
-        // emit a greeting
-        sayHello(greeting_ch)
+        // emit a greeting (updated to use the nf-core convention for samplesheets)
+        sayHello(ch_samplesheet)
     ```
 
 === "Before"
 
-    ```groovy title="core-hello/workflows/hello.nf" linenums="23"
-        // emit a greeting (updated to use the nf-core convention for samplesheets)
-        sayHello(ch_samplesheet)
+    ```groovy title="core-hello/workflows/hello.nf" linenums="26"
+        // emit a greeting
+        sayHello(greeting_ch)
     ```
 
 Now the workflow logic is correctly wired up.
@@ -1256,6 +1260,28 @@ results
 
 Anything that is hooked up to the nf-core template code gets put into a directory generated automatically, called `core-hello-results/`.
 This includes the various reports produced by the nf-core utility subworkflows, which you can find under `core-hello-results/pipeline_info`.
+
+```bash
+tree core-hello-results
+```
+
+```console title="Output"
+core-hello-results
+└── pipeline_info
+    ├── execution_report_2025-06-03_18-22-28.html
+    ├── execution_report_2025-06-03_20-11-39.html
+    ├── execution_timeline_2025-06-03_18-22-28.html
+    ├── execution_timeline_2025-06-03_20-11-39.html
+    ├── execution_trace_2025-06-03_18-22-28.txt
+    ├── execution_trace_2025-06-03_20-10-11.txt
+    ├── execution_trace_2025-06-03_20-11-39.txt
+    ├── hello_software_versions.yml
+    ├── params_2025-06-03_18-22-32.json
+    ├── params_2025-06-03_20-10-15.json
+    ├── params_2025-06-03_20-11-43.json
+    ├── pipeline_dag_2025-06-03_18-22-28.html
+    └── pipeline_dag_2025-06-03_20-11-39.html
+```
 
 In our case, we didn't explicitly mark anything else as an output, so there's nothing else there.
 
