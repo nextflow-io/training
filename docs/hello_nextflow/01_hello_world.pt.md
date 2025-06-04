@@ -103,7 +103,7 @@ Como você pode ver, um script Nextflow envolve dois tipos de componentes princi
 Cada **processo** descreve a(s) operação(ões) que a etapa correspondente no pipeline deve realizar, enquanto o **fluxo de trabalho** descreve a lógica do fluxo de dados que conecta as várias etapas.
 Vamos dar uma olhada mais de perto no bloco **process** primeiro e, depois, no bloco **workflow**.
 
-#### 1.1.1 A definição `process`
+#### 1.1.1. A definição `process`
 
 O primeiro bloco de código descreve um **processo**. A definição do processo começa com a palavra-chave `process`, seguida do nome do processo e, finalmente, do corpo do processo delimitado por chaves.
 O corpo do processo deve conter um bloco de script que especifica o comando a ser executado, que pode ser qualquer coisa que você executaria em um terminal de linha de comando.
@@ -132,7 +132,7 @@ A definição de saída não _determina_ qual saída será criada.
 Ela simplesmente _declara_ qual é a saída esperada, de modo que o Nextflow possa procurá-la quando a execução estiver concluída.
 Isso é necessário para verificar se o comando foi executado com êxito e para passar a saída para processos posteriores, se necessário.
 
-#### 1.1.2 A definição `workflow`
+#### 1.1.2. A definição `workflow`
 
 O segundo bloco de código descreve o **fluxo de trabalho** em si.
 A definição do fluxo de trabalho começa com a palavra-chave `workflow`, seguida de um nome opcional e, em seguida, o corpo do fluxo de trabalho delimitado por chaves.
@@ -240,7 +240,7 @@ Saiba como fazer com que o script produza um arquivo nomeado.
 
 ---
 
-## 3. Enviando a saída para um arquivo
+## 2. Enviando a saída para um arquivo
 
 Em vez de imprimir "Hello World!" na saída padrão, seria melhor salvar essa saída em um arquivo específico, exatamente como fizemos ao executar no terminal anteriormente.
 É assim que a maioria das ferramentas que você executará como parte dos pipelines do mundo real normalmente se comporta; veremos exemplos disso mais tarde.
@@ -390,7 +390,7 @@ Saiba como fazer com que o Nextflow retome a execução de um pipeline usando re
 
 ---
 
-## 4. Usando o recurso `resume` do Nextflow
+## 3. Usando o recurso `resume` do Nextflow
 
 O Nextflow tem uma opção chamada `resume`, que permite que você execute novamente um pipeline que já tenha sido iniciado anteriormente.
 Quando iniciado com `-resume`, qualquer processo que já tenha sido executado exatamente com o mesmo código, configurações e entradas será ignorado.
@@ -433,7 +433,7 @@ Saiba como adicionar entradas variáveis.
 
 ---
 
-## 5. Adicionando entradas variáveis usando um canal
+## 4. Adicionando entradas variáveis usando um canal
 
 Até agora, estamos emitindo uma saudação codificada no comando `process`.
 Agora, vamos adicionar alguma flexibilidade usando uma variável de entrada, para que possamos alterar facilmente a saudação.
@@ -575,7 +575,7 @@ Saiba como passar entradas da linha de comando.
 
 ---
 
-## 6. Usando parâmetros da CLI para entradas
+## 5. Usando parâmetros da CLI para entradas
 
 Queremos poder especificar a entrada da linha de comando, pois essa é a parte que quase sempre será diferente nas execuções subsequentes do fluxo de trabalho.
 
@@ -692,7 +692,7 @@ Saiba como adicionar um segundo processo e encadeá-los.
 
 ---
 
-## 7. Adicionando uma segunda etapa ao fluxo de trabalho
+## 6. Adicionando uma segunda etapa ao fluxo de trabalho
 
 A maioria dos fluxos de trabalho do mundo real envolve mais de uma etapa. Aqui apresentamos um segundo processo que converte o texto em maiúsculas (all-caps), usando o clássico UNIX one-liner:
 
@@ -827,7 +827,7 @@ Saiba como fazer com que o fluxo de trabalho seja executado em um lote de valore
 
 ---
 
-## 8. Modificando o fluxo de trabalho para ser executado em um lote de valores de entrada
+## 7. Modificando o fluxo de trabalho para ser executado em um lote de valores de entrada
 
 Os fluxos de trabalho normalmente são executados em lotes de entradas que devem ser processados em massa, portanto, queremos atualizar o fluxo de trabalho para aceitar vários valores de entrada.
 
@@ -1012,7 +1012,7 @@ Saiba como fazer com que o fluxo de trabalho use um arquivo como sua fonte de va
 
 ---
 
-## 9. Modificando o fluxo de trabalho para usar um arquivo como fonte de valores de entrada
+## 8. Modificando o fluxo de trabalho para usar um arquivo como fonte de valores de entrada
 
 Muitas vezes, quando queremos executar um lote de vários elementos de entrada, os valores de entrada podem estar contidos em um arquivo.
 

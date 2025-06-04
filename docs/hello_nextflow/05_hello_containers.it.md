@@ -396,7 +396,7 @@ process cowpy {
 
 L'output sarà un nuovo file di testo contenente l'ASCII art generata dallo strumento `cowpy`.
 
-### 2.2. Aggiungi cowpy al flusso di lavoro
+### 2.1. Aggiungi cowpy al flusso di lavoro
 
 Ora dobbiamo importare il modulo e chiamare il processo.
 
@@ -537,7 +537,7 @@ Naturalmente, dato che stiamo chiamando lo strumento `cowpy` ma non abbiamo anco
 
 Dobbiamo specificare un container e dire a Nextflow di usarlo per il processo `cowpy()`.
 
-#### 2.3.1. Specificare un container per il processo `cowpy` da utilizzare
+#### 2.3.5. Specificare un container per il processo `cowpy` da utilizzare
 
 Modificare il modulo `cowpy.nf` per aggiungere la direttiva `container` alla definizione del processo come segue:
 
@@ -560,7 +560,7 @@ Modificare il modulo `cowpy.nf` per aggiungere la direttiva `container` alla def
 
 indica a Nextflow che, se l'uso di Docker è abilitato, deve usare l'immagine del container specificata qui per eseguire il processo.
 
-#### 2.3.2. Abilitare l'uso di Docker tramite il file `nextflow.config
+#### 2.3.6. Abilitare l'uso di Docker tramite il file `nextflow.config
 
 Qui anticipiamo leggermente l'argomento della prossima e ultima parte di questo corso (Parte 6), che riguarda la configurazione.
 
@@ -587,7 +587,7 @@ Ora, passiamo a `true` per abilitare Docker:
     However, that only allows us to specify one container for the entire workflow, whereas the approach we just showed you allows us to specify a different container per process.
     This is better for modularity, code maintenance and reproducibility.
 
-#### 2.3.3. Eseguire il workflow con Docker abilitato
+#### 2.3.7. Eseguire il workflow con Docker abilitato
 
 Eseguire il workflow con il flag `resume`:
 
@@ -645,7 +645,7 @@ Si vede che il personaggio sta pronunciando tutti i saluti, proprio come ha fatt
 
 <!-- considering a side quest where we show how to use a conditional to skip the collect step if we want to emit the cowpy'ed greetings individually, and how to use metadata management to assign a specific character to each greeting, maybe do some cross products etc -->
 
-#### 2.3.4. Controllare come Nextflow ha lanciato il task containerizzato
+#### 2.3.8. Controllare come Nextflow ha lanciato il task containerizzato
 
 Diamo un'occhiata alla sottodirectory di lavoro di una delle chiamate al processo cowpy per capire meglio come Nextflow lavora con i container.
 
