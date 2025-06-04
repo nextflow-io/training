@@ -6,6 +6,8 @@
 
 /// caption
 :fontawesome-brands-youtube:{ .youtube } Veja a [playlist completa no canal de YouTube do Nextflow](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik).
+
+:green_book: You can read the [video transcript](./transcripts/01_hello_world.md) alongside the video.
 ///
 
 Um exemplo "Hello World!" é um modelo minimalista projetado para demonstrar a sintaxe básica e a estrutura de uma linguagem de programação ou framework de software. Esse exemplo normalmente consiste em exibir a frase "Hello, World!" no dispositivo de saída, como o console ou terminal, ou gravá-la em um arquivo.

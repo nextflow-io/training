@@ -6,6 +6,8 @@
 
 /// caption
 :fontawesome-brands-youtube:{ .youtube } See the [whole playlist on the Nextflow YouTube channel](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik).
+
+:green_book: You can read the [video transcript](./transcripts/00_orientation.md) alongside the video.
 ///
 
 ## GitHub Codespaces

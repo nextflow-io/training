@@ -6,6 +6,8 @@
 
 /// caption
 :fontawesome-brands-youtube:{ .youtube } Veja a [playlist completa no canal de YouTube do Nextflow](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik).
+
+:green_book: You can read the [video transcript](./transcripts/00_orientation.md) alongside the video.
 ///
 
 O ambiente GitHub Codespaces contém todo o software, código e dados necessários para este curso. Você não precisa instalar nada por conta própria. No entanto, é necessária uma conta (gratuita) para logar - e recomendamos que você reserve alguns minutos para se familiarizar com a interface.

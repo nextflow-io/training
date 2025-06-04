@@ -6,6 +6,8 @@
 
 /// caption
 :fontawesome-brands-youtube:{ .youtube } Guarda l [intera playlist sul canale YouTube Nextflow](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik).
+
+:green_book: You can read the [video transcript](./transcripts/04_hello_modules.md) alongside the video.
 ///
 
 Nella parte 1-4 del corso di training, hai imparato come usare gli elementi di base di Nextflow per assemblare un semplice workflow capace di processare alcuni testi, a fare esecuzioni parallele se ci sono più input e collezionare i risultati per esecuzioni future.

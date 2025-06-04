@@ -6,6 +6,8 @@
 
 /// caption
 :fontawesome-brands-youtube:{ .youtube } See the [whole playlist on the Nextflow YouTube channel](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik).
+
+:green_book: You can read the [video transcript](./transcripts/05_hello_containers.md) alongside the video.
 ///
 
 Questa sezione esplorerà come impostare e gestire la configurazione della pipeline Nextflow in modo da poterne personalizzare il comportamento, adattarla a diversi ambienti e ottimizzare l'utilizzo delle risorse _senza modificare una sola riga del codice del flusso di lavoro stesso_.

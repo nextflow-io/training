@@ -6,6 +6,8 @@
 
 /// caption
 :fontawesome-brands-youtube:{ .youtube } Guarda [tutta la playlist sul canale Youtube Nextflow](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik).
+
+:green_book: You can read the [video transcript](./transcripts/01_hello_world.md) alongside the video.
 ///
 
 In questa prima parte del corso di formazione Hello Nextflow, ci addentriamo nell'argomento con un esempio di Hello World molto elementare e indipendente dal dominio, che svilupperemo progressivamente per dimostrare l'uso della logica e dei componenti fondamentali di Nextflow.
