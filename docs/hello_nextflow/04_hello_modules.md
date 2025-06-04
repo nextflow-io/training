@@ -93,7 +93,7 @@ We're going to create a file stub for the module, copy the relevant code over th
 
 Then all we'll need to do is add an import statement so that Nextflow will know to pull in the relevant code at runtime.
 
-#### 2.1.1. Create a file stub for the new module
+#### 2.1. Create a file stub for the new module
 
 Let's create an empty file for the module called `sayHello.nf`.
 
@@ -103,7 +103,7 @@ touch modules/sayHello.nf
 
 This gives us a place to put the process code.
 
-### 2.1. Move the `sayHello` process code to the module file
+### 2.2. Move the `sayHello` process code to the module file
 
 Copy the whole process definition over from the workflow file to the module file, making sure to copy over the `#!/usr/bin/env nextflow` shebang too.
 
@@ -132,7 +132,7 @@ process sayHello {
 
 Once that is done, delete the process definition from the workflow file, but make sure to leave the shebang in place.
 
-### 2.2. Add an import declaration before the workflow block
+### 2.3. Add an import declaration before the workflow block
 
 The syntax for importing a local module is fairly straightforward:
 
@@ -157,7 +157,7 @@ Let's insert that above the workflow block and fill it out appropriately.
     workflow {
     ```
 
-### 2.3. Run the workflow to verify that it does the same thing as before
+### 2.4. Run the workflow to verify that it does the same thing as before
 
 We're running the workflow with essentially the same code and inputs as before, so let's run with the `-resume` flag and see what happens.
 

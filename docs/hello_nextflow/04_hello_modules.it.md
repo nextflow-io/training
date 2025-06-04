@@ -93,7 +93,7 @@ Creeremo un file stub per il modulo, copieremo il codice pertinente e lo cancell
 
 A questo punto, basterà aggiungere una dichiarazione di importazione, in modo che Nextflow sappia che deve inserire il codice in questione in fase di esecuzione.
 
-#### 2.1.1. Creare un file stub per il nuovo modulo
+#### 2.1. Creare un file stub per il nuovo modulo
 
 Creiamo un file vuoto per il modulo, chiamato `sayHello.nf`.
 
@@ -103,7 +103,7 @@ touch modules/sayHello.nf
 
 Questo ci dà un posto dove mettere il codice del processo.
 
-### 2.1. Spostare il codice del processo `sayHello' nel file del modulo
+### 2.2. Spostare il codice del processo `sayHello' nel file del modulo
 
 Copiare l'intera definizione del processo dal file del workflow al file del modulo, assicurandosi di copiare anche lo shebang `#!/usr/bin/env nextflow`.
 
@@ -132,7 +132,7 @@ process sayHello {
 
 Una volta fatto ciò, eliminate la definizione del processo dal file del workflow, ma assicuratevi di lasciare lo shebang al suo posto.
 
-### 2.2. Aggiungere una dichiarazione di importazione prima del blocco del workflow
+### 2.3. Aggiungere una dichiarazione di importazione prima del blocco del workflow
 
 La sintassi per importare un modulo locale è abbastanza semplice:
 
@@ -157,7 +157,7 @@ Inseriamo questo blocco sopra il blocco del workflow e compiliamolo in modo appr
     workflow {
     ```
 
-### 2.3. Eseguite il workflow per verificare che faccia la stessa cosa di prima
+### 2.4. Eseguite il workflow per verificare che faccia la stessa cosa di prima
 
 Stiamo eseguendo il workflow essenzialmente con lo stesso codice e gli stessi input di prima, quindi eseguiamolo con il flag `resume` e vediamo cosa succede.
 
