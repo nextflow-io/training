@@ -36,5 +36,5 @@ workflow HELLO {
     cowpy(collectGreetings.out.outfile, params.character)
 
     emit:
-    final_result = cowpy.out
+    cowpy_hellos = cowpy.out
 }

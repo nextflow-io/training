@@ -152,7 +152,7 @@ Don't worry too much right now about what they all are; we are going to walk thr
 Believe it or not, even though you haven't yet added any modules to make it do real work, the pipeline scaffold can actually be run using the test profile, the same way we ran the `nf-core/demo` pipeline.
 
 ```bash
-nextflow run core-hello -profile docker,test --outdir core-hello-results
+nextflow run ./core-hello -profile docker,test --outdir core-hello-results
 ```
 
 ```console title="Output"
@@ -495,7 +495,7 @@ workflow HELLO {
     cowpy(collectGreetings.out.outfile, params.character)
 
     emit:
-    final_result = cowpy.out
+    cowpy_hellos = cowpy.out
 }
 ```
 
@@ -557,7 +557,7 @@ There are two important observations to make here:
 We finally have all the pieces we need to verify that the composable workflow works.
 
 ```bash
-nextflow run original-hello
+nextflow run ./original-hello
 ```
 
 !!! note
@@ -858,7 +858,7 @@ Finally, we need to update the `emit` block to include the declaration of the wo
 
     ```groovy title="core-hello/workflows/hello.nf" linenums="55" hl_lines="2"
         emit:
-        final_result   = cowpy.out
+        cowpy_hellos   = cowpy.out
         versions       = ch_versions                 // channel: [ path(versions.yml) ]
     ```
 
