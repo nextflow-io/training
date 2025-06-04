@@ -93,7 +93,7 @@ Creeremo un file stub per il modulo, copieremo il codice pertinente e lo cancell
 
 A questo punto, basterà aggiungere una dichiarazione di importazione, in modo che Nextflow sappia che deve inserire il codice in questione in fase di esecuzione.
 
-#### 2.1. Creare un file stub per il nuovo modulo
+### 2.1. Creare un file stub per il nuovo modulo
 
 Creiamo un file vuoto per il modulo, chiamato `sayHello.nf`.
 
