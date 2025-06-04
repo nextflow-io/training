@@ -28,34 +28,8 @@ We are excited to have you on the path to writing reproducible and scalable scie
 
 We welcome fixes and improvements from the community. Please fork the repository and create pull-requests with any improvements you'd like to suggest to the docs.
 
-You can find instructions about how to develop the training material code in [`CONTRIBUTING.md`](CONTRIBUTING.md). If you want to contribute with a translation instead, check [`TRANSLATING.md`](TRANSLATING.md).
-
-### Headings CI tests
-
-This repository includes a Python tool to validate markdown heading numbering consistency across training materials.
-
-The `check_headings.py` script ensures:
-
-- Sequential numbering at each level (1., 1.1., 1.2., etc.)
-- Trailing periods after heading numbers
-- Heading levels match numbering depth (## for 1., ### for 1.1.)
-
-The easiest way to run it is [with `uv`](https://docs.astral.sh/uv/), which handles dependencies for you automatically:
-
-```bash
-# Check files for issues
-uv run .github/check_headings.py docs/**/*.md
-```
-
-```bash
-# Auto-fix detected issues
-uv run .github/check_headings.py --fix docs/**/*.md
-```
-
-Otherwise, run `pip install typer rich` then `python .github/check_headings.py`.
-
-The script runs automatically in CI on markdown file changes via GitHub Actions,
-and will cause a CI failure if any incorrect headings are found.
+> [!NOTE]
+> You can find instructions about how to develop the training material code in [`CONTRIBUTING.md`](CONTRIBUTING.md). If you want to contribute with a translation instead, check [`TRANSLATING.md`](TRANSLATING.md).
 
 ## Credits & Copyright
 
