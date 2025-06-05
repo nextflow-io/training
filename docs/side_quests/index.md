@@ -29,6 +29,8 @@ Otherwise, select a side quest from the menu below.
 ## Menu of Side Quests
 
 - [Introduction to nf-core](./nf-core.md)
+- [Metadata](./metadata.md)
+- [Splitting and Grouping](./splitting_and_grouping.md)
 - [Testing with nf-test](./nf-test.md)
 - [Workflows of workflows](./workflows_of_workflows.md)
 
