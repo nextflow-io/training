@@ -5,7 +5,7 @@
 //
 {
     "name": "nextflow-training (codespaces-dev)",
-    "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+    "image": "mcr.microsoft.com/devcontainers/base:ubuntu-22.04",
 
     "features": {
         "../local-features/init": {},
