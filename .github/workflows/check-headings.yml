@@ -4,6 +4,8 @@ on:
   pull_request:
     paths:
       - "**.md"
+      # Transcripts headings correspond to main docs - may skip sections intentionally
+      - "!**/transcripts/**/*.md"
 
 jobs:
   check-headings:
@@ -19,6 +21,7 @@ jobs:
         uses: tj-actions/changed-files@v42
         with:
           files: "**.md"
+          files_ignore: "**/transcripts/**/*.md"
 
       - name: Run check_headings.py
         run: uv run .github/check_headings.py ${{ steps.changed-files.outputs.all_changed_files }}
