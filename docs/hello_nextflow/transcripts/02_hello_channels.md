@@ -274,4 +274,4 @@ Okay, this is probably one of the most important chapters of the whole training.
 
 Have a break, cup of tea, walk around and let's move on to chapter three, where we start to extend these concepts into more complex workflows. See you in the next video.
 
-[Next video transcript :octicons-arrow-right-24:](03_hello_channels.md)
+[Next video transcript :octicons-arrow-right-24:](03_hello_workflow.md)

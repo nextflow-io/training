@@ -240,4 +240,4 @@ Congratulations, your first step towards writing Next low code is complete.
 
 Have a little break and I'll see you back in a few minutes for chapter two.
 
-[Next video transcript :octicons-arrow-right-24:](02_hello_world.md)
+[Next video transcript :octicons-arrow-right-24:](02_hello_channels.md)
