@@ -79,6 +79,7 @@ nav:
       - advanced/configuration.md
       - advanced/summary.md
       - advanced/support.md
+  - Help: help.md
 
 theme:
   name: material
