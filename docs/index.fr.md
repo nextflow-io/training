@@ -10,7 +10,7 @@ hide:
 
 Bienvenue sur le portail de formation de la communauté Nextflow !
 
-Nous proposons plusieurs formations distinctes sur ce site. Faites défiler vers le bas pour trouver celle qui vous convient !
+Nous proposons plusieurs formations distinctes sur ce site. Faites défiler vers le bas pour trouver celle qui vous convient!
 
 Les formations listées ci-dessous sont conçues comme des ressources en libre-service ; vous pouvez les suivre à votre rythme (voir la section "Configuration de l’environnement" pour les détails pratiques). Vous pouvez toutefois en tirer encore plus profit en participant à une session de formation en groupe.
 
