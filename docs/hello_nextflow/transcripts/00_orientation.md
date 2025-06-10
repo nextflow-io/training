@@ -4,11 +4,9 @@
   <iframe width="560" height="315" src="https://www.youtube.com/embed/G3CV-FcV-rc?si=nyLvwhrSB2m1NPc5&amp;list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
-!!!note "Important notes"
+!!!note "Important note"
 
     This page shows the transcript only. For full step-by-step instructions, return to the [course material](../00_orientation.md).
-
-    The section numbers shown in the transcript are provided for indicative purposes only and may not include all section numbers in the materials.
 
 ## Welcome
 
@@ -105,3 +103,5 @@ If at any point you close the terminal and can't remember how to get back, don't
 You'll see me doing that quite a lot because I have VS Code zoomed in so that you can read the text. Depending on your screen size, you may or may not need to do this. The same goes for minimizing the side panel.
 
 Right. That's enough for environment. I think we're ready to get started. Join me back in the next video for chapter one.
+
+[Next video transcript :octicons-arrow-right-24:](01_hello_world.md)

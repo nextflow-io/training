@@ -4,9 +4,11 @@
   <iframe width="560" height="315" src="https://www.youtube.com/embed/IuDO2HeKvXk?si=tnXTi6mRkITY0zW_&amp;list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
-!!!note "Note: This page has the transcript only"
+!!!note "Important notes"
 
-    [:octicons-arrow-left-24: Back to course material](../06_hello_config.md)
+    This page shows the transcript only. For full step-by-step instructions, return to the [course material](../06_hello_config.md).
+
+    The section numbers shown in the transcript are provided for indicative purposes only and may not include all section numbers in the materials.
 
 ## Welcome
 
@@ -209,3 +211,5 @@ Okay, we've got a new results file here. You can see the My Profile, which I spe
 ## Wrap up
 
 Okay! Amazing. That's it. You've made it to the end of the course. You get a little bit of celebration confetti. Well done for finishing this chapter.
+
+[Next video transcript :octicons-arrow-right-24:](07_next_steps.md)

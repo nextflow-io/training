@@ -4,9 +4,11 @@
   <iframe width="560" height="315" src="https://www.youtube.com/embed/lJ41WMMm44M?si=xCItHLiOQWqoqBB9&amp;list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
-!!!note "Note: This page has the transcript only"
+!!!note "Important notes"
 
-    [:octicons-arrow-left-24: Back to course material](../02_hello_channels.md)
+    This page shows the transcript only. For full step-by-step instructions, return to the [course material](../02_hello_channels.md).
+
+    The section numbers shown in the transcript are provided for indicative purposes only and may not include all section numbers in the materials.
 
 ## Welcome
 
@@ -271,3 +273,5 @@ So just bear in mind, you cannot rely on the order of outputs from a process tas
 Okay, this is probably one of the most important chapters of the whole training. Once you understand channels, channel factories and operators, you start to key into the strength of Nextflow and what makes it unique as a programming language. This functionality allows Nextflow to parallelize all of your workflows for you and generate extremely complex workflow logic with a very clean syntax and a push data flow model. It can be a bit of a strange concept at first, but once you get used to writing code like this, it will quickly feel natural and before you know it, you'll be writing fantastic workflows.
 
 Have a break, cup of tea, walk around and let's move on to chapter three, where we start to extend these concepts into more complex workflows. See you in the next video.
+
+[Next video transcript :octicons-arrow-right-24:](03_hello_channels.md)

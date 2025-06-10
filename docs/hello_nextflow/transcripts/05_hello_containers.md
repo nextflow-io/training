@@ -4,9 +4,11 @@
   <iframe width="560" height="315" src="https://www.youtube.com/embed/5PyOWjKnNmg?si=QinuAnFwFj-Z8CrO&amp;list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
-!!!note "Note: This page has the transcript only"
+!!!note "Important notes"
 
-    [:octicons-arrow-left-24: Back to course material](../05_hello_containers.md)
+    This page shows the transcript only. For full step-by-step instructions, return to the [course material](../05_hello_containers.md).
+
+    The section numbers shown in the transcript are provided for indicative purposes only and may not include all section numbers in the materials.
 
 ## Welcome
 
@@ -184,4 +186,6 @@ Very, very simple, very convenient, and also really reproducible. Good all aroun
 
 Okay, great work. That's the end of Chapter Five. Join us in the next video for part six, which is the final part of this Hello Nextflow training, where we'll talk about Nextflow configuration in more detail.
 
-See you in the next video. I.
+See you in the next video.
+
+[Next video transcript :octicons-arrow-right-24:](06_hello_config.md)

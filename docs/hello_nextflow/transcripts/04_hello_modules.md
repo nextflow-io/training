@@ -4,9 +4,11 @@
   <iframe width="560" height="315" src="https://www.youtube.com/embed/Xxp_menS0E8?si=0AWnXB7xqHAzJdJV&amp;list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
-!!!note "Note: This page has the transcript only"
+!!!note "Important notes"
 
-    [:octicons-arrow-left-24: Back to course material](../04_hello_modules.md)
+    This page shows the transcript only. For full step-by-step instructions, return to the [course material](../04_hello_modules.md).
+
+    The section numbers shown in the transcript are provided for indicative purposes only and may not include all section numbers in the materials.
 
 ## Welcome
 
@@ -99,3 +101,5 @@ So we've moved our code around, but we haven't changed anything about how the wo
 And that's it. It was a short chapter. It's a simple concept, but it's very powerful and key to how we write more complex Nextflow workflows. So it's important that you understand it and get into the habit of using it.
 
 In the next chapter, we're going to have a bit of a change of pace and stop thinking so much about the syntax of writing Nextflow code, and think a little bit about how we use software in the processes themselves. Join us in part five for Hello Containers.
+
+[Next video transcript :octicons-arrow-right-24:](05_hello_containers.md)

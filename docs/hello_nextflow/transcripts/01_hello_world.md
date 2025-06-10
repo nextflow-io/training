@@ -4,9 +4,11 @@
   <iframe width="560" height="315" src="https://www.youtube.com/embed/8X2hHI-9vms?si=F0t9LFYLjAWoyRXj&amp;list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
-!!!note "Note: This page has the transcript only"
+!!!note "Important notes"
 
-    [:octicons-arrow-left-24: Back to course material](../01_hello_world.md)
+    This page shows the transcript only. For full step-by-step instructions, return to the [course material](../01_hello_world.md).
+
+    The section numbers shown in the transcript are provided for indicative purposes only and may not include all section numbers in the materials.
 
 ## Welcome
 
@@ -237,3 +239,5 @@ Okay, that's the end of section one. We've had our first ever workflow script in
 Congratulations, your first step towards writing Next low code is complete.
 
 Have a little break and I'll see you back in a few minutes for chapter two.
+
+[Next video transcript :octicons-arrow-right-24:](02_hello_world.md)

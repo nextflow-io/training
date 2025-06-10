@@ -4,9 +4,11 @@
   <iframe width="560" height="315" src="https://www.youtube.com/embed/zJP7cUYPEbA?si=Irl9nAQniDyICp2b&amp;list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
-!!!note "Note: This page has the transcript only"
+!!!note "Important notes"
 
-    [:octicons-arrow-left-24: Back to course material](../03_hello_workflow.md)
+    This page shows the transcript only. For full step-by-step instructions, return to the [course material](../03_hello_workflow.md).
+
+    The section numbers shown in the transcript are provided for indicative purposes only and may not include all section numbers in the materials.
 
 ## Welcome
 
@@ -229,3 +231,5 @@ Okay, great stuff. That's the end of this chapter. We're all done for making it 
 As these workflow files get longer, they start to become a little bit unwieldy. So in the next chapter, we'll look into how we can modularize Nextflow code into separate files so that it's easier to find and maintain the code within the workflow.
 
 Join us in the next video for chapter four. Hello Modules.
+
+[Next video transcript :octicons-arrow-right-24:](04_hello_modules.md)
