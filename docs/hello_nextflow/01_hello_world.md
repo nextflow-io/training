@@ -210,7 +210,7 @@ nextflow run hello-world.nf
 You console output should look something like this:
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 24.10.0
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `hello-world.nf` [goofy_torvalds] DSL2 - revision: c33d41f479
 
@@ -351,7 +351,7 @@ nextflow run hello-world.nf
 The log output should look very familiar:
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 24.10.0
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `hello-world.nf` [jovial_mayer] DSL2 - revision: 35bd3425e5
 
@@ -395,7 +395,7 @@ nextflow run hello-world.nf -resume
 The console output should look similar.
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 24.10.0
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `hello-world.nf` [golden_cantor] DSL2 - revision: 35bd3425e5
 
@@ -584,7 +584,7 @@ nextflow run hello-world.nf --greeting 'Bonjour le monde!'
 If you made all three edits correctly, you should get another successful execution:
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 24.10.0
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `hello-world.nf` [elated_lavoisier] DSL2 - revision: 7c031b42ea
 
@@ -637,7 +637,7 @@ nextflow run hello-world.nf
 The console output should look the same.
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 24.10.0
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `hello-world.nf` [determined_edison] DSL2 - revision: 3539118582
 
@@ -666,7 +666,7 @@ nextflow run hello-world.nf --greeting 'Konnichiwa!'
 The console output should look the same.
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 24.10.0
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `hello-world.nf` [elegant_faraday] DSL2 - revision: 3539118582
 
