@@ -7,7 +7,7 @@
 /// caption
 :fontawesome-brands-youtube:{ .youtube } See the [whole playlist on the Nextflow YouTube channel](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik).
 
-:green_book: You can read the [video transcript](./transcripts/04_hello_modules.md) alongside the video.
+:green_book: The video transcript is available [here](./transcripts/04_hello_modules.md).
 ///
 
 This section covers how to organize your workflow code to make development and maintenance of your pipeline more efficient and sustainable.

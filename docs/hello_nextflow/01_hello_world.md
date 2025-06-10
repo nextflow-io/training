@@ -7,7 +7,7 @@
 /// caption
 :fontawesome-brands-youtube:{ .youtube } See the [whole playlist on the Nextflow YouTube channel](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik).
 
-:green_book: You can read the [video transcript](./transcripts/01_hello_world.md) alongside the video.
+:green_book: The video transcript is available [here](./transcripts/01_hello_world.md).
 ///
 
 In this first part of the Hello Nextflow training course, we ease into the topic with a very basic domain-agnostic Hello World example, which we'll progressively build up to demonstrate the usage of foundational Nextflow logic and components.
