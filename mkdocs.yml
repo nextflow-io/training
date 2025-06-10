@@ -192,7 +192,7 @@ plugins:
         - advanced/orientation.md
 
       exclude:
-        - index.md
+        - index*.md
         - help*.md
         - envsetup/*.md
         - hello_nextflow/*.md
