@@ -1082,6 +1082,14 @@
 </ul>
 </nav>
 </li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../help/">
+<span class="md-ellipsis">
+    Help
+    
+  </span>
+</a>
+</li>
 </ul>
 </nav>
 </div>
@@ -1267,8 +1275,8 @@
 <a class="md-content__button md-icon" href="https://github.com/nextflow-io/training/edit/master/docs/basic_training/debugging.md" title="Editar esta página">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"></path></svg>
 </a>
-<h1 id="error-handling-and-troubleshooting"><span class="enumerate-headings-plugin enumerate-heading-plugin">15.</span> Error handling and troubleshooting<a class="headerlink" href="#error-handling-and-troubleshooting" title="Permanent link">¶</a></h1>
-<h2 id="execution-error-debugging"><span class="enumerate-headings-plugin enumerate-heading-plugin">15.1</span> Execution error debugging<a class="headerlink" href="#execution-error-debugging" title="Permanent link">¶</a></h2>
+<h1 id="error-handling-and-troubleshooting"><span class="enumerate-headings-plugin enumerate-heading-plugin">14.</span> Error handling and troubleshooting<a class="headerlink" href="#error-handling-and-troubleshooting" title="Permanent link">¶</a></h1>
+<h2 id="execution-error-debugging"><span class="enumerate-headings-plugin enumerate-heading-plugin">14.1</span> Execution error debugging<a class="headerlink" href="#execution-error-debugging" title="Permanent link">¶</a></h2>
 <p>When a process execution exits with a non-zero exit status, Nextflow stops the workflow execution and reports the failing task:</p>
 <div class="admonition info">
 <p>Click the <span class="twemoji"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17 13h-4v4h-2v-4H7v-2h4V7h2v4h4m-5-9A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2"></path></svg></span> icons in the code for explanations.</p>
@@ -1319,7 +1327,7 @@
 <p>Verify that the <code>.command.sh</code> file contains the expected command and all variables are correctly resolved.</p>
 <p>Also verify the existence of the <code>.exitcode</code> and <code>.command.begin</code> files, which if absent, suggest the task was never executed by the subsystem (e.g. the batch scheduler). If the <code>.command.begin</code> file exists, the task was launched but was likely killed abruptly.</p>
 <p>You can replicate the failing execution using the command <code>bash .command.run</code> to verify the cause of the error.</p>
-<h2 id="ignore-errors"><span class="enumerate-headings-plugin enumerate-heading-plugin">15.2</span> Ignore errors<a class="headerlink" href="#ignore-errors" title="Permanent link">¶</a></h2>
+<h2 id="ignore-errors"><span class="enumerate-headings-plugin enumerate-heading-plugin">14.2</span> Ignore errors<a class="headerlink" href="#ignore-errors" title="Permanent link">¶</a></h2>
 <p>There are cases in which a process error may be expected and it should not stop the overall workflow execution.</p>
 <p>To handle this use case, set the process <code>errorStrategy</code> to <code>ignore</code>:</p>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span>
@@ -1341,7 +1349,7 @@
 <p>If you want to ignore any error you can set the same directive in the config file as a default setting:</p>
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="n">process</span><span class="o">.</span><span class="na">errorStrategy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'ignore'</span>
 </code></pre></div>
-<h2 id="automatic-error-fail-over"><span class="enumerate-headings-plugin enumerate-heading-plugin">15.3</span> Automatic error fail-over<a class="headerlink" href="#automatic-error-fail-over" title="Permanent link">¶</a></h2>
+<h2 id="automatic-error-fail-over"><span class="enumerate-headings-plugin enumerate-heading-plugin">14.3</span> Automatic error fail-over<a class="headerlink" href="#automatic-error-fail-over" title="Permanent link">¶</a></h2>
 <p>In rare cases, errors may be caused by transient conditions. In this situation, an effective strategy is re-executing the failing task.</p>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span>
 <span class="normal"><a href="#__codelineno-3-2">2</a></span>
@@ -1361,7 +1369,7 @@
 </code></pre></div></td></tr></table></div>
 <p>Using the <code>retry</code> error strategy the task is re-executed a second time if it returns a non-zero exit status before stopping the complete workflow execution.</p>
 <p>The directive <a href="https://www.nextflow.io/docs/latest/process.html#maxretries">maxRetries</a> can be used to set the number of attempts the task can be re-executed before declaring it failed with an error condition.</p>
-<h2 id="retry-with-backoff"><span class="enumerate-headings-plugin enumerate-heading-plugin">15.4</span> Retry with backoff<a class="headerlink" href="#retry-with-backoff" title="Permanent link">¶</a></h2>
+<h2 id="retry-with-backoff"><span class="enumerate-headings-plugin enumerate-heading-plugin">14.4</span> Retry with backoff<a class="headerlink" href="#retry-with-backoff" title="Permanent link">¶</a></h2>
 <p>There are cases in which the required execution resources may be temporarily unavailable (e.g. network congestion). In these cases simply re-executing the same task will likely result in an identical error. A retry with an exponential backoff delay can better recover these error conditions.</p>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span>
 <span class="normal"><a href="#__codelineno-4-2">2</a></span>
@@ -1381,7 +1389,7 @@
 <a id="__codelineno-4-8" name="__codelineno-4-8"></a><span class="s1">    '''</span>
 <a id="__codelineno-4-9" name="__codelineno-4-9"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="dynamic-resources-allocation"><span class="enumerate-headings-plugin enumerate-heading-plugin">15.5</span> Dynamic resources allocation<a class="headerlink" href="#dynamic-resources-allocation" title="Permanent link">¶</a></h2>
+<h2 id="dynamic-resources-allocation"><span class="enumerate-headings-plugin enumerate-heading-plugin">14.5</span> Dynamic resources allocation<a class="headerlink" href="#dynamic-resources-allocation" title="Permanent link">¶</a></h2>
 <p>It’s a very common scenario that different instances of the same process may have very different needs in terms of computing resources. In such situations requesting, for example, an amount of memory too low will cause some tasks to fail. Instead, using a higher limit that fits all the tasks in your execution could significantly decrease the execution priority of your job in a scheduling system.</p>
 <p>To handle this use case, you can use a <code>retry</code> error strategy and increase the computing resources allocated by the task at each successive <em>attempt</em>.</p>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1"> 1</a></span>
@@ -1488,7 +1496,7 @@
 <div class="md-consent__overlay"></div>
 <aside class="md-consent__inner">
 <form class="md-consent__form md-grid md-typeset" name="consent">
-<h4><span class="enumerate-headings-plugin enumerate-heading-plugin">15.5.0.1</span> Cookie consent</h4>
+<h4><span class="enumerate-headings-plugin enumerate-heading-plugin">14.5.0.1</span> Cookie consent</h4>
 <p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our training materials better.</p>
 <input class="md-toggle" id="__settings" type="checkbox"/>
 <div class="md-consent__settings">

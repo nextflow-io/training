@@ -1081,6 +1081,14 @@
 </ul>
 </nav>
 </li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../help/">
+<span class="md-ellipsis">
+    Help
+    
+  </span>
+</a>
+</li>
 </ul>
 </nav>
 </div>
@@ -1273,8 +1281,8 @@ The translated material may be incomplete or incorrect.
 We plan to update the translations later this year.
 In the meantime, please try to work through the English-language material if you can.</p>
 </div>
-<h1 id="traitement-des-erreurs-et-depannage"><span class="enumerate-headings-plugin enumerate-heading-plugin">15.</span> Traitement des erreurs et dépannage<a class="headerlink" href="#traitement-des-erreurs-et-depannage" title="Permanent link">¶</a></h1>
-<h2 id="debogage-des-erreurs-dexecution"><span class="enumerate-headings-plugin enumerate-heading-plugin">15.1</span> Débogage des erreurs d'exécution<a class="headerlink" href="#debogage-des-erreurs-dexecution" title="Permanent link">¶</a></h2>
+<h1 id="traitement-des-erreurs-et-depannage"><span class="enumerate-headings-plugin enumerate-heading-plugin">14.</span> Traitement des erreurs et dépannage<a class="headerlink" href="#traitement-des-erreurs-et-depannage" title="Permanent link">¶</a></h1>
+<h2 id="debogage-des-erreurs-dexecution"><span class="enumerate-headings-plugin enumerate-heading-plugin">14.1</span> Débogage des erreurs d'exécution<a class="headerlink" href="#debogage-des-erreurs-dexecution" title="Permanent link">¶</a></h2>
 <p>Lorsqu'une exécution de processus se termine avec un statut de sortie non nul, Nextflow arrête l'exécution du workflow et signale la tâche défaillante :</p>
 <div class="admonition info">
 <p>Cliquez sur les icônes <span class="twemoji"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17 13h-4v4h-2v-4H7v-2h4V7h2v4h4m-5-9A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2"></path></svg></span> dans le code pour obtenir des explications.</p>
@@ -1325,7 +1333,7 @@ In the meantime, please try to work through the English-language material if you
 <p>Vérifiez que le fichier <code>.command.sh</code> contient la commande attendue et que toutes les variables sont correctement résolues.</p>
 <p>Vérifiez également l'existence des fichiers <code>.exitcode</code> et <code>.command.begin</code>, qui, s'ils sont absents, suggèrent que la tâche n'a jamais été exécutée par le sous-système (par exemple, le planificateur batch). Si le fichier <code>.command.begin</code> existe, la tâche a été lancée mais a probablement été interrompue brutalement.</p>
 <p>Vous pouvez reproduire l'échec de l'exécution en utilisant la commande <code>bash .command.run</code> pour vérifier la cause de l'erreur.</p>
-<h2 id="ignorer-les-erreurs"><span class="enumerate-headings-plugin enumerate-heading-plugin">15.2</span> Ignorer les erreurs<a class="headerlink" href="#ignorer-les-erreurs" title="Permanent link">¶</a></h2>
+<h2 id="ignorer-les-erreurs"><span class="enumerate-headings-plugin enumerate-heading-plugin">14.2</span> Ignorer les erreurs<a class="headerlink" href="#ignorer-les-erreurs" title="Permanent link">¶</a></h2>
 <p>Dans certains cas, une erreur de processus peut être attendue et ne doit pas interrompre l'exécution globale du workflow.</p>
 <p>Pour gérer ce cas d'utilisation, définissez le processus <code>errorStrategy</code> à <code>ignore</code> :</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span>
@@ -1347,7 +1355,7 @@ In the meantime, please try to work through the English-language material if you
 <p>Si vous souhaitez ignorer toute erreur, vous pouvez définir la même directive dans le fichier de configuration comme paramètre par défaut :</p>
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="n">process</span><span class="o">.</span><span class="na">errorStrategy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'ignore'</span>
 </code></pre></div>
-<h2 id="basculement-automatique-en-cas-derreur"><span class="enumerate-headings-plugin enumerate-heading-plugin">15.3</span> Basculement automatique en cas d'erreur<a class="headerlink" href="#basculement-automatique-en-cas-derreur" title="Permanent link">¶</a></h2>
+<h2 id="basculement-automatique-en-cas-derreur"><span class="enumerate-headings-plugin enumerate-heading-plugin">14.3</span> Basculement automatique en cas d'erreur<a class="headerlink" href="#basculement-automatique-en-cas-derreur" title="Permanent link">¶</a></h2>
 <p>Dans de rares cas, les erreurs peuvent être causées par des conditions transitoires. Dans ce cas, une stratégie efficace consiste à réexécuter la tâche défaillante.</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span>
 <span class="normal"><a href="#__codelineno-3-2">2</a></span>
@@ -1367,7 +1375,7 @@ In the meantime, please try to work through the English-language material if you
 </code></pre></div></td></tr></table></div>
 <p>En utilisant la stratégie d'erreur <code>retry</code>, la tâche est réexécutée une seconde fois si elle renvoie un statut de sortie non nul avant d'arrêter l'exécution complète du flux de travail.</p>
 <p>La directive <a href="https://www.nextflow.io/docs/latest/process.html#maxretries">maxRetries</a> peut être utilisée pour définir le nombre de tentatives de réexécution de la tâche avant de déclarer qu'elle a échoué avec une condition d'erreur.</p>
-<h2 id="reessayer-avec-backoff"><span class="enumerate-headings-plugin enumerate-heading-plugin">15.4</span> Réessayer avec backoff<a class="headerlink" href="#reessayer-avec-backoff" title="Permanent link">¶</a></h2>
+<h2 id="reessayer-avec-backoff"><span class="enumerate-headings-plugin enumerate-heading-plugin">14.4</span> Réessayer avec backoff<a class="headerlink" href="#reessayer-avec-backoff" title="Permanent link">¶</a></h2>
 <p>Dans certains cas, les ressources d'exécution requises peuvent être temporairement indisponibles (par exemple, en cas de congestion du réseau). Dans ce cas, la simple réexécution de la même tâche entraînera probablement une erreur identique. Une nouvelle tentative avec un délai exponentiel backoff permet de mieux récupérer ces conditions d'erreur.</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span>
 <span class="normal"><a href="#__codelineno-4-2">2</a></span>
@@ -1387,7 +1395,7 @@ In the meantime, please try to work through the English-language material if you
 <a id="__codelineno-4-8" name="__codelineno-4-8"></a><span class="s1">    '''</span>
 <a id="__codelineno-4-9" name="__codelineno-4-9"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="allocation-dynamique-des-ressources"><span class="enumerate-headings-plugin enumerate-heading-plugin">15.5</span> Allocation dynamique des ressources<a class="headerlink" href="#allocation-dynamique-des-ressources" title="Permanent link">¶</a></h2>
+<h2 id="allocation-dynamique-des-ressources"><span class="enumerate-headings-plugin enumerate-heading-plugin">14.5</span> Allocation dynamique des ressources<a class="headerlink" href="#allocation-dynamique-des-ressources" title="Permanent link">¶</a></h2>
 <p>Il est très fréquent que différentes instances d'un même processus aient des besoins très différents en termes de ressources informatiques. Dans de telles situations, le fait de demander, par exemple, une quantité de mémoire trop faible entraînera l'échec de certaines tâches. Au contraire, l'utilisation d'une limite plus élevée qui correspond à toutes les tâches de votre exécution pourrait réduire de manière significative la priorité d'exécution de votre travail dans un système d'ordonnancement.</p>
 <p>Pour gérer ce cas d'utilisation, vous pouvez utiliser une stratégie d'erreur <code>retry</code> et augmenter les ressources informatiques allouées par la tâche à chaque <em>attempt</em> successif.</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1"> 1</a></span>
@@ -1494,7 +1502,7 @@ In the meantime, please try to work through the English-language material if you
 <div class="md-consent__overlay"></div>
 <aside class="md-consent__inner">
 <form class="md-consent__form md-grid md-typeset" name="consent">
-<h4><span class="enumerate-headings-plugin enumerate-heading-plugin">15.5.0.1</span> Cookie consent</h4>
+<h4><span class="enumerate-headings-plugin enumerate-heading-plugin">14.5.0.1</span> Cookie consent</h4>
 <p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our training materials better.</p>
 <input class="md-toggle" id="__settings" type="checkbox"/>
 <div class="md-consent__settings">

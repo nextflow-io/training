@@ -1195,6 +1195,14 @@
 </ul>
 </nav>
 </li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../help/">
+<span class="md-ellipsis">
+    Help
+    
+  </span>
+</a>
+</li>
 </ul>
 </nav>
 </div>
@@ -1500,7 +1508,7 @@ The translated material may be incomplete or incorrect.
 We plan to update the translations later this year.
 In the meantime, please try to work through the English-language material if you can.</p>
 </div>
-<h1 id="processos"><span class="enumerate-headings-plugin enumerate-heading-plugin">8.</span> Processos<a class="headerlink" href="#processos" title="Permanent link">¶</a></h1>
+<h1 id="processos"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.</span> Processos<a class="headerlink" href="#processos" title="Permanent link">¶</a></h1>
 <p>No Nextflow, um processo (<code>process</code>) é a primitiva de computação básica para executar funções estrangeiras (ou seja, scripts personalizados ou ferramentas).</p>
 <p>A definição do processo começa com a palavra-chave <code>process</code>, seguida pelo nome do processo e, finalmente, o corpo do processo delimitado por chaves.</p>
 <p>O nome do processo (<code>process</code>) é comumente escrito em letras maiúsculas por convenção.</p>
@@ -1570,7 +1578,7 @@ In the meantime, please try to work through the English-language material if you
 <li>Uma condicional booleana opcional para acionar a execução do processo</li>
 <li>O comando a ser executado</li>
 </ol>
-<h2 id="script"><span class="enumerate-headings-plugin enumerate-heading-plugin">8.1</span> Script<a class="headerlink" href="#script" title="Permanent link">¶</a></h2>
+<h2 id="script"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.1</span> Script<a class="headerlink" href="#script" title="Permanent link">¶</a></h2>
 <p>O bloco <code>script</code> é uma string que define o comando a ser executado pelo processo.</p>
 <p>Um processo pode executar apenas um bloco <code>script</code>. Deve ser a última instrução quando o processo contém declarações de entrada e saída.</p>
 <p>O bloco <code>script</code> pode ser uma string de uma ou várias linhas. A de várias linhas simplifica a escrita de scripts não triviais compostos por vários comandos abrangendo várias linhas. Por exemplo:</p>
@@ -1631,7 +1639,7 @@ In the meantime, please try to work through the English-language material if you
 <p class="admonition-title">Tip</p>
 <p>Várias linguagens de programação podem ser usadas no mesmo script de fluxo de trabalho. No entanto, para grandes blocos de código, é melhor salvá-los em arquivos separados e invocá-los a partir do script do processo. Pode-se armazenar os scripts específicos na pasta <code>./bin/</code>.</p>
 </div>
-<h3 id="parametros-do-script"><span class="enumerate-headings-plugin enumerate-heading-plugin">8.1.1</span> Parâmetros do script<a class="headerlink" href="#parametros-do-script" title="Permanent link">¶</a></h3>
+<h3 id="parametros-do-script"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.1.1</span> Parâmetros do script<a class="headerlink" href="#parametros-do-script" title="Permanent link">¶</a></h3>
 <p>Parâmetros de script (<code>params</code>) podem ser definidos dinamicamente usando valores variáveis. Por exemplo:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-4-2"> 2</a></span>
@@ -1734,7 +1742,7 @@ In the meantime, please try to work through the English-language material if you
 <a id="__codelineno-7-12" name="__codelineno-7-12"></a><span class="w">    </span><span class="n">BAZ</span><span class="o">()</span>
 <a id="__codelineno-7-13" name="__codelineno-7-13"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="scripts-condicionais"><span class="enumerate-headings-plugin enumerate-heading-plugin">8.1.2</span> Scripts condicionais<a class="headerlink" href="#scripts-condicionais" title="Permanent link">¶</a></h3>
+<h3 id="scripts-condicionais"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.1.2</span> Scripts condicionais<a class="headerlink" href="#scripts-condicionais" title="Permanent link">¶</a></h3>
 <p>O script do processo também pode ser definido de maneira completamente dinâmica usando uma instrução <code>if</code> ou qualquer outra expressão para avaliar um valor de string. Por exemplo:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-8-2"> 2</a></span>
@@ -1782,7 +1790,7 @@ In the meantime, please try to work through the English-language material if you
 <a id="__codelineno-8-22" name="__codelineno-8-22"></a><span class="w">    </span><span class="n">FOO</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">arquivo_a_comprimir</span><span class="o">)</span>
 <a id="__codelineno-8-23" name="__codelineno-8-23"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="canais-de-entradas"><span class="enumerate-headings-plugin enumerate-heading-plugin">8.2</span> Canais de entradas<a class="headerlink" href="#canais-de-entradas" title="Permanent link">¶</a></h2>
+<h2 id="canais-de-entradas"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.2</span> Canais de entradas<a class="headerlink" href="#canais-de-entradas" title="Permanent link">¶</a></h2>
 <p>As instâncias dos processos (tarefas) Nextflow são isoladas umas das outras, mas podem se comunicar entre si enviando valores por meio de canais.</p>
 <p>As entradas determinam implicitamente as dependências e a execução paralela do processo. A execução do processo é disparada cada vez que dados <em>novos</em> estão prontos para serem consumidos do canal de entrada:</p>
 <figure class="excalidraw">
@@ -1808,7 +1816,7 @@ In the meantime, please try to work through the English-language material if you
 <span class="normal"><a href="#__codelineno-9-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="nl">input:</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2"></a><span class="o">&lt;</span><span class="n">qualificador</span><span class="w"> </span><span class="n">da</span><span class="w"> </span><span class="n">variável</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">entrada</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&lt;</span><span class="n">nome</span><span class="w"> </span><span class="n">da</span><span class="w"> </span><span class="n">variável</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">entrada</span><span class="o">&gt;</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="valores-de-entrada"><span class="enumerate-headings-plugin enumerate-heading-plugin">8.2.1</span> Valores de entrada<a class="headerlink" href="#valores-de-entrada" title="Permanent link">¶</a></h3>
+<h3 id="valores-de-entrada"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.2.1</span> Valores de entrada<a class="headerlink" href="#valores-de-entrada" title="Permanent link">¶</a></h3>
 <p>O qualificador <code>val</code> permite receber dados de qualquer tipo como entrada. Ele pode ser acessado no script do processo usando o nome de entrada especificado, conforme mostrado no exemplo a seguir:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-10-2"> 2</a></span>
@@ -1853,7 +1861,7 @@ In the meantime, please try to work through the English-language material if you
 <p class="admonition-title">Warning</p>
 <p>O canal garante que os itens sejam entregues na mesma ordem em que foram enviados - mas - como o processo é executado de forma paralela, não há garantia de que sejam processados na mesma ordem em que foram recebidos.</p>
 </div>
-<h3 id="arquivo-e-caminhos-de-entrada"><span class="enumerate-headings-plugin enumerate-heading-plugin">8.2.2</span> Arquivo e caminhos de entrada<a class="headerlink" href="#arquivo-e-caminhos-de-entrada" title="Permanent link">¶</a></h3>
+<h3 id="arquivo-e-caminhos-de-entrada"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.2.2</span> Arquivo e caminhos de entrada<a class="headerlink" href="#arquivo-e-caminhos-de-entrada" title="Permanent link">¶</a></h3>
 <p>O qualificador <code>path</code> permite a manipulação de arquivos no contexto de execução do processo. Isso significa que o Nextflow irá mover os arquivos necessários para o diretório de execução do processo e estes poderão ser acessados no script usando o nome especificado na declaração de entrada.</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-12-2"> 2</a></span>
@@ -2022,7 +2030,7 @@ In the meantime, please try to work through the English-language material if you
 </code></pre></div></td></tr></table></div>
 </details>
 </div>
-<h3 id="combinando-canais-de-entrada"><span class="enumerate-headings-plugin enumerate-heading-plugin">8.2.3</span> Combinando canais de entrada<a class="headerlink" href="#combinando-canais-de-entrada" title="Permanent link">¶</a></h3>
+<h3 id="combinando-canais-de-entrada"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.2.3</span> Combinando canais de entrada<a class="headerlink" href="#combinando-canais-de-entrada" title="Permanent link">¶</a></h3>
 <p>Uma característica fundamental dos processos é a capacidade de lidar com entradas de vários canais. No entanto, é importante entender como o conteúdo do canal e sua semântica afetam a execução de um processo.</p>
 <p>Considere o seguinte exemplo:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-16-1"> 1</a></span>
@@ -2219,7 +2227,7 @@ In the meantime, please try to work through the English-language material if you
 </code></pre></div></td></tr></table></div>
 </details>
 </div>
-<h3 id="repetidores-de-entradas"><span class="enumerate-headings-plugin enumerate-heading-plugin">8.2.4</span> Repetidores de entradas<a class="headerlink" href="#repetidores-de-entradas" title="Permanent link">¶</a></h3>
+<h3 id="repetidores-de-entradas"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.2.4</span> Repetidores de entradas<a class="headerlink" href="#repetidores-de-entradas" title="Permanent link">¶</a></h3>
 <p>O qualificador <code>each</code> permite que você repita a execução de um processo para cada item em uma coleção toda vez que novos dados são recebidos. Por exemplo:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-21-2"> 2</a></span>
@@ -2325,14 +2333,14 @@ In the meantime, please try to work through the English-language material if you
 </code></pre></div></td></tr></table></div>
 </details>
 </div>
-<h2 id="canais-de-saida"><span class="enumerate-headings-plugin enumerate-heading-plugin">8.3</span> Canais de saída<a class="headerlink" href="#canais-de-saida" title="Permanent link">¶</a></h2>
+<h2 id="canais-de-saida"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.3</span> Canais de saída<a class="headerlink" href="#canais-de-saida" title="Permanent link">¶</a></h2>
 <p>O bloco <code>output</code> define os canais usados pelo processo para enviar os resultados produzidos.</p>
 <p>Apenas um bloco de saída, que pode conter uma ou mais declarações de saída, pode ser definido. O bloco de saída segue a sintaxe mostrada abaixo:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-1">1</a></span>
 <span class="normal"><a href="#__codelineno-23-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1"></a><span class="nl">output:</span>
 <a id="__codelineno-23-2" name="__codelineno-23-2"></a><span class="o">&lt;</span><span class="n">qualificador</span><span class="w"> </span><span class="n">da</span><span class="w"> </span><span class="n">variável</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">saída</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&lt;</span><span class="n">nome</span><span class="w"> </span><span class="n">da</span><span class="w"> </span><span class="n">variável</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">saída</span><span class="o">&gt;,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="o">&lt;</span><span class="n">nome</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="n">canal</span><span class="w"> </span><span class="n">de</span><span class="w"> </span><span class="n">saída</span><span class="o">&gt;</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="valores-de-saida"><span class="enumerate-headings-plugin enumerate-heading-plugin">8.3.1</span> Valores de saída<a class="headerlink" href="#valores-de-saida" title="Permanent link">¶</a></h3>
+<h3 id="valores-de-saida"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.3.1</span> Valores de saída<a class="headerlink" href="#valores-de-saida" title="Permanent link">¶</a></h3>
 <p>O qualificador <code>val</code> especifica um valor definido no contexto do script. Os valores são frequentemente definidos nos blocos de <em>input</em> e/ou <em>output</em>, conforme mostrado no exemplo a seguir:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-24-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-24-2"> 2</a></span>
@@ -2372,7 +2380,7 @@ In the meantime, please try to work through the English-language material if you
 <a id="__codelineno-24-18" name="__codelineno-24-18"></a><span class="w">    </span><span class="n">canal_de_recebimento</span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="s2">"Recebido: $it"</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-24-19" name="__codelineno-24-19"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="caminhos-e-arquivos-de-saida"><span class="enumerate-headings-plugin enumerate-heading-plugin">8.3.2</span> Caminhos e arquivos de saída<a class="headerlink" href="#caminhos-e-arquivos-de-saida" title="Permanent link">¶</a></h3>
+<h3 id="caminhos-e-arquivos-de-saida"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.3.2</span> Caminhos e arquivos de saída<a class="headerlink" href="#caminhos-e-arquivos-de-saida" title="Permanent link">¶</a></h3>
 <p>O qualificador <code>path</code> especifica um ou mais arquivos produzidos pelo processo no canal especificado como uma saída.</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-25-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-25-2"> 2</a></span>
@@ -2404,7 +2412,7 @@ In the meantime, please try to work through the English-language material if you
 </code></pre></div></td></tr></table></div>
 <p>No exemplo acima, o processo <code>NUMALEATORIO</code> cria um arquivo chamado <code>resultado.txt</code> contendo um número aleatório.</p>
 <p>Como um parâmetro de arquivo usando o mesmo nome é declarado no bloco de saída, o arquivo é enviado pelo canal <code>canal_de_recebimento</code> quando a tarefa é concluída. Um processo posterior declarando o mesmo canal como <em>input</em> será capaz de recebê-lo.</p>
-<h3 id="multiplos-arquivos-de-saida"><span class="enumerate-headings-plugin enumerate-heading-plugin">8.3.3</span> Múltiplos arquivos de saída<a class="headerlink" href="#multiplos-arquivos-de-saida" title="Permanent link">¶</a></h3>
+<h3 id="multiplos-arquivos-de-saida"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.3.3</span> Múltiplos arquivos de saída<a class="headerlink" href="#multiplos-arquivos-de-saida" title="Permanent link">¶</a></h3>
 <p>Quando um nome de arquivo de saída contém um caractere curinga (<code>*</code> ou <code>?</code>), ele é interpretado como um <a href="http://docs.oracle.com/javase/tutorial/essential/io/fileOps.html#glob">glob</a> de correspondência para um caminho. Isso nos permite <em>capturar</em> vários arquivos em um objeto de lista e exibi-los como uma única emissão. Por exemplo:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-26-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-26-2"> 2</a></span>
@@ -2459,7 +2467,7 @@ In the meantime, please try to work through the English-language material if you
 </code></pre></div>
 </details>
 </div>
-<h3 id="nomes-dinamicos-de-arquivos-de-saida"><span class="enumerate-headings-plugin enumerate-heading-plugin">8.3.4</span> Nomes dinâmicos de arquivos de saída<a class="headerlink" href="#nomes-dinamicos-de-arquivos-de-saida" title="Permanent link">¶</a></h3>
+<h3 id="nomes-dinamicos-de-arquivos-de-saida"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.3.4</span> Nomes dinâmicos de arquivos de saída<a class="headerlink" href="#nomes-dinamicos-de-arquivos-de-saida" title="Permanent link">¶</a></h3>
 <p>Quando um nome de arquivo de saída precisa ser expresso dinamicamente, é possível defini-lo usando uma string dinâmica que faz referência a valores definidos no bloco de declaração de entrada ou no contexto global do script. Por exemplo:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-29-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-29-2"> 2</a></span>
@@ -2512,7 +2520,7 @@ In the meantime, please try to work through the English-language material if you
 <a id="__codelineno-29-25" name="__codelineno-29-25"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>No exemplo acima, cada vez que o processo é executado, é gerado um arquivo de alinhamento cujo nome depende do valor da entrada <code>x</code>.</p>
-<h3 id="entradas-e-saidas-compostas"><span class="enumerate-headings-plugin enumerate-heading-plugin">8.3.5</span> Entradas e saídas compostas<a class="headerlink" href="#entradas-e-saidas-compostas" title="Permanent link">¶</a></h3>
+<h3 id="entradas-e-saidas-compostas"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.3.5</span> Entradas e saídas compostas<a class="headerlink" href="#entradas-e-saidas-compostas" title="Permanent link">¶</a></h3>
 <p>Até agora, vimos como declarar vários canais de entrada e saída que podem lidar com um valor por vez. No entanto, o Nextflow também pode lidar com tuplas de valores.</p>
 <p>As declarações de entrada e saída para tuplas devem ser declaradas com um qualificador <code>tuple</code> seguido pela definição de cada elemento na tupla.</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-30-1"> 1</a></span>
@@ -2602,7 +2610,7 @@ In the meantime, please try to work through the English-language material if you
 </code></pre></div></td></tr></table></div>
 </details>
 </div>
-<h2 id="when"><span class="enumerate-headings-plugin enumerate-heading-plugin">8.4</span> When<a class="headerlink" href="#when" title="Permanent link">¶</a></h2>
+<h2 id="when"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.4</span> When<a class="headerlink" href="#when" title="Permanent link">¶</a></h2>
 <p>A declaração <code>when</code> permite que você defina uma condição que deve ser verificada para executar o processo. Pode ser qualquer expressão que avalie um valor booleano.</p>
 <p>É útil habilitar/desabilitar a execução do processo dependendo do estado de várias entradas e parâmetros. Por exemplo:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-32-1"> 1</a></span>
@@ -2651,7 +2659,7 @@ In the meantime, please try to work through the English-language material if you
 <a id="__codelineno-32-22" name="__codelineno-32-22"></a><span class="w">    </span><span class="n">resultado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ENCONTRAR</span><span class="o">(</span><span class="n">proteinas</span><span class="o">,</span><span class="w"> </span><span class="n">params</span><span class="o">.</span><span class="na">tipo_banco</span><span class="o">)</span>
 <a id="__codelineno-32-23" name="__codelineno-32-23"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="diretivas"><span class="enumerate-headings-plugin enumerate-heading-plugin">8.5</span> Diretivas<a class="headerlink" href="#diretivas" title="Permanent link">¶</a></h2>
+<h2 id="diretivas"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.5</span> Diretivas<a class="headerlink" href="#diretivas" title="Permanent link">¶</a></h2>
 <p>As declarações de diretiva permitem a definição de configurações opcionais que afetam a execução do processo atual sem afetar a <em>semântica</em> da própria tarefa.</p>
 <p>Elas devem ser inseridas no topo do corpo do processo, antes de quaisquer outros blocos de declaração (ou seja, <code>input</code>, <code>output</code>, etc.).</p>
 <p>Diretivas são comumente usadas para definir a quantidade de recursos computacionais a serem usados ou outras meta diretivas que permitem a definição de configuração extra de informações de log. Por exemplo:</p>
@@ -2708,8 +2716,8 @@ In the meantime, please try to work through the English-language material if you
 </tr>
 </tbody>
 </table>
-<h2 id="organizando-as-saidas"><span class="enumerate-headings-plugin enumerate-heading-plugin">8.6</span> Organizando as saídas<a class="headerlink" href="#organizando-as-saidas" title="Permanent link">¶</a></h2>
-<h3 id="a-diretiva-publishdir"><span class="enumerate-headings-plugin enumerate-heading-plugin">8.6.1</span> A diretiva PublishDir<a class="headerlink" href="#a-diretiva-publishdir" title="Permanent link">¶</a></h3>
+<h2 id="organizando-as-saidas"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.6</span> Organizando as saídas<a class="headerlink" href="#organizando-as-saidas" title="Permanent link">¶</a></h2>
+<h3 id="a-diretiva-publishdir"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.6.1</span> A diretiva PublishDir<a class="headerlink" href="#a-diretiva-publishdir" title="Permanent link">¶</a></h3>
 <p>Dado que cada tarefa está sendo executada em uma pasta <code>work/</code> temporária separada (por exemplo, <code>work/f1/850698…</code>; <code>work/g3/239712…</code>; etc.), podemos salvar informações importantes, não intermediárias, e/ou arquivos finais em uma pasta de resultados.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
@@ -2769,7 +2777,7 @@ In the meantime, please try to work through the English-language material if you
 <p class="admonition-title">Tip</p>
 <p>O diretório de publicação pode ser local ou remoto. Por exemplo, os arquivos de saída podem ser armazenados usando um <a href="https://aws.amazon.com/s3/">bucket AWS S3</a> usando o prefixo <code>s3://</code> no caminho de destino.</p>
 </div>
-<h3 id="gerenciando-semantica-de-subdiretorios"><span class="enumerate-headings-plugin enumerate-heading-plugin">8.6.2</span> Gerenciando semântica de subdiretórios<a class="headerlink" href="#gerenciando-semantica-de-subdiretorios" title="Permanent link">¶</a></h3>
+<h3 id="gerenciando-semantica-de-subdiretorios"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.6.2</span> Gerenciando semântica de subdiretórios<a class="headerlink" href="#gerenciando-semantica-de-subdiretorios" title="Permanent link">¶</a></h3>
 <p>Você pode usar mais de um <code>publishDir</code> para manter saídas diferentes em diretórios separados. Por exemplo:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-35-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-35-2"> 2</a></span>
@@ -2910,7 +2918,7 @@ In the meantime, please try to work through the English-language material if you
 <div class="md-consent__overlay"></div>
 <aside class="md-consent__inner">
 <form class="md-consent__form md-grid md-typeset" name="consent">
-<h4><span class="enumerate-headings-plugin enumerate-heading-plugin">8.6.2.1</span> Cookie consent</h4>
+<h4><span class="enumerate-headings-plugin enumerate-heading-plugin">7.6.2.1</span> Cookie consent</h4>
 <p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our training materials better.</p>
 <input class="md-toggle" id="__settings" type="checkbox"/>
 <div class="md-consent__settings">

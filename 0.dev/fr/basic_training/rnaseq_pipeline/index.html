@@ -1218,6 +1218,14 @@
 </ul>
 </nav>
 </li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../help/">
+<span class="md-ellipsis">
+    Help
+    
+  </span>
+</a>
+</li>
 </ul>
 </nav>
 </div>
@@ -1546,7 +1554,7 @@ The translated material may be incomplete or incorrect.
 We plan to update the translations later this year.
 In the meantime, please try to work through the English-language material if you can.</p>
 </div>
-<h1 id="workflow-simple-de-rna-seq"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.</span> Workflow simple de RNA-Seq<a class="headerlink" href="#workflow-simple-de-rna-seq" title="Permanent link">¶</a></h1>
+<h1 id="workflow-simple-de-rna-seq"><span class="enumerate-headings-plugin enumerate-heading-plugin">3.</span> Workflow simple de RNA-Seq<a class="headerlink" href="#workflow-simple-de-rna-seq" title="Permanent link">¶</a></h1>
 <p>Pour démontrer un scénario biomédical réel, nous mettrons en œuvre une preuve de concept de flux de travail RNA-Seq qui :</p>
 <ol>
 <li>Indexer un fichier de transcriptome</li>
@@ -1561,7 +1569,7 @@ In the meantime, please try to work through the English-language material if you
 <li><a href="https://multiqc.info">MultiQC</a> recherche les journaux d'analyse dans un répertoire donné et compile un rapport HTML. Il s'agit d'un outil d'usage général, parfait pour résumer les résultats de nombreux outils bioinformatiques.</li>
 </ol>
 <p>Même si ces outils ne sont pas ceux que vous utiliserez dans votre pipeline, ils peuvent être remplacés par n'importe quel outil courant de votre secteur. C'est ca la puissance de Nextflow !</p>
-<h2 id="definir-les-parametres-du-workflow"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.1</span> Définir les paramètres du workflow<a class="headerlink" href="#definir-les-parametres-du-workflow" title="Permanent link">¶</a></h2>
+<h2 id="definir-les-parametres-du-workflow"><span class="enumerate-headings-plugin enumerate-heading-plugin">3.1</span> Définir les paramètres du workflow<a class="headerlink" href="#definir-les-parametres-du-workflow" title="Permanent link">¶</a></h2>
 <p>Les paramètres sont des entrées et des options qui peuvent être modifiées lors de l'exécution du flux de travail.</p>
 <p>Le script <code>script1.nf</code> définit les paramètres d'entrée du workflow.</p>
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="n">params</span><span class="o">.</span><span class="na">reads</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"$projectDir/data/ggal/gut_{1,2}.fq"</span>
@@ -1576,7 +1584,7 @@ In the meantime, please try to work through the English-language material if you
 <p>Essayez de spécifier un paramètre d'entrée différent dans votre commande d'exécution, par exemple :</p>
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>script1.nf<span class="w"> </span>--reads<span class="w"> </span><span class="s1">'/workspaces/training/nf-training/data/ggal/lung_{1,2}.fq'</span>
 </code></pre></div>
-<h3 id="exercices"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.1.1</span> <span class="twemoji"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13 18h-2v-2h2zm0-3h-2c0-3.25 3-3 3-5 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 2.5-3 2.75-3 5m9-3c0 5.18-3.95 9.45-9 9.95v-2.01c3.95-.49 7-3.86 7-7.94s-3.05-7.45-7-7.94V2.05c5.05.5 9 4.77 9 9.95M11 2.05v2.01c-1.46.18-2.8.76-3.91 1.62L5.67 4.26C7.15 3.05 9 2.25 11 2.05M4.06 11H2.05c.2-2 1-3.85 2.21-5.33L5.68 7.1A7.9 7.9 0 0 0 4.06 11M11 19.94v2.01c-2-.2-3.85-.99-5.33-2.21l1.42-1.42c1.11.86 2.45 1.44 3.91 1.62M2.05 13h2.01c.18 1.46.76 2.8 1.62 3.91l-1.42 1.42A10 10 0 0 1 2.05 13"></path></svg></span> Exercices<a class="headerlink" href="#exercices" title="Permanent link">¶</a></h3>
+<h3 id="exercices"><span class="enumerate-headings-plugin enumerate-heading-plugin">3.1.1</span> <span class="twemoji"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13 18h-2v-2h2zm0-3h-2c0-3.25 3-3 3-5 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 2.5-3 2.75-3 5m9-3c0 5.18-3.95 9.45-9 9.95v-2.01c3.95-.49 7-3.86 7-7.94s-3.05-7.45-7-7.94V2.05c5.05.5 9 4.77 9 9.95M11 2.05v2.01c-1.46.18-2.8.76-3.91 1.62L5.67 4.26C7.15 3.05 9 2.25 11 2.05M4.06 11H2.05c.2-2 1-3.85 2.21-5.33L5.68 7.1A7.9 7.9 0 0 0 4.06 11M11 19.94v2.01c-2-.2-3.85-.99-5.33-2.21l1.42-1.42c1.11.86 2.45 1.44 3.91 1.62M2.05 13h2.01c.18 1.46.76 2.8 1.62 3.91l-1.42 1.42A10 10 0 0 1 2.05 13"></path></svg></span> Exercices<a class="headerlink" href="#exercices" title="Permanent link">¶</a></h3>
 <div class="admonition exercise">
 <p class="admonition-title">Exercise</p>
 <p>Modifiez le fichier <code>script1.nf</code> en ajoutant un quatrième paramètre nommé <code>outdir</code> et définissez-le comme chemin par défaut qui sera utilisé comme répertoire de sortie du workflow.</p>
@@ -1609,7 +1617,7 @@ In the meantime, please try to work through the English-language material if you
 </code></pre></div>
 </details>
 </div>
-<h3 id="resume"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.1.2</span> <span class="twemoji"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M.41 13.41 6 19l1.41-1.42L1.83 12m20.41-6.42L11.66 16.17 7.5 12l-1.43 1.41L11.66 19l12-12M18 7l-1.41-1.42-6.35 6.35 1.42 1.41z"></path></svg></span> Résumé<a class="headerlink" href="#resume" title="Permanent link">¶</a></h3>
+<h3 id="resume"><span class="enumerate-headings-plugin enumerate-heading-plugin">3.1.2</span> <span class="twemoji"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M.41 13.41 6 19l1.41-1.42L1.83 12m20.41-6.42L11.66 16.17 7.5 12l-1.43 1.41L11.66 19l12-12M18 7l-1.41-1.42-6.35 6.35 1.42 1.41z"></path></svg></span> Résumé<a class="headerlink" href="#resume" title="Permanent link">¶</a></h3>
 <p>Au cours de cette étape, vous avez appris:</p>
 <ol>
 <li>Comment définir les paramètres dans votre script de workflow</li>
@@ -1618,7 +1626,7 @@ In the meantime, please try to work through the English-language material if you
 <li>Comment utiliser des chaînes de caractères multilignes</li>
 <li>Comment utiliser <code>log.info</code> pour imprimer des informations et les sauvegarder dans le fichier d'exécution du journal.</li>
 </ol>
-<h2 id="creer-un-fichier-dindex-du-transcriptome"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.2</span> Créer un fichier d'index du transcriptome<a class="headerlink" href="#creer-un-fichier-dindex-du-transcriptome" title="Permanent link">¶</a></h2>
+<h2 id="creer-un-fichier-dindex-du-transcriptome"><span class="enumerate-headings-plugin enumerate-heading-plugin">3.2</span> Créer un fichier d'index du transcriptome<a class="headerlink" href="#creer-un-fichier-dindex-du-transcriptome" title="Permanent link">¶</a></h2>
 <p>Nextflow permet l'exécution de n'importe quelle commande ou script en utilisant une définition <code>processus</code>.</p>
 <p>Un "processus" est défini par trois déclarations principales : le processus <a href="https://www.nextflow.io/docs/latest/process.html#inputs"><code>input</code></a>, <a href="https://www.nextflow.io/docs/latest/process.html#outputs"><code>output</code></a> et la commande <a href="https://www.nextflow.io/docs/latest/process.html#script"><code>script</code></a>.</p>
 <p>Pour ajouter une étape de traitement <code>INDEX</code> du transcriptome, essayez d'ajouter les blocs de code suivants à votre <code>script1.nf</code>. Alternativement, ces blocs de code ont déjà été ajoutés à <code>script2.nf</code>.</p>
@@ -1664,7 +1672,7 @@ In the meantime, please try to work through the English-language material if you
 <p>Pour éviter d'ajouter <code>-with-docker</code> à chaque fois que vous exécutez le script, ajoutez la ligne suivante au fichier <code>nextflow.config</code> :</p>
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-9-1" id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="n">docker</span><span class="o">.</span><span class="na">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
 </code></pre></div>
-<h3 id="exercices_1"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.2.1</span> <span class="twemoji"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13 18h-2v-2h2zm0-3h-2c0-3.25 3-3 3-5 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 2.5-3 2.75-3 5m9-3c0 5.18-3.95 9.45-9 9.95v-2.01c3.95-.49 7-3.86 7-7.94s-3.05-7.45-7-7.94V2.05c5.05.5 9 4.77 9 9.95M11 2.05v2.01c-1.46.18-2.8.76-3.91 1.62L5.67 4.26C7.15 3.05 9 2.25 11 2.05M4.06 11H2.05c.2-2 1-3.85 2.21-5.33L5.68 7.1A7.9 7.9 0 0 0 4.06 11M11 19.94v2.01c-2-.2-3.85-.99-5.33-2.21l1.42-1.42c1.11.86 2.45 1.44 3.91 1.62M2.05 13h2.01c.18 1.46.76 2.8 1.62 3.91l-1.42 1.42A10 10 0 0 1 2.05 13"></path></svg></span> Exercices<a class="headerlink" href="#exercices_1" title="Permanent link">¶</a></h3>
+<h3 id="exercices_1"><span class="enumerate-headings-plugin enumerate-heading-plugin">3.2.1</span> <span class="twemoji"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13 18h-2v-2h2zm0-3h-2c0-3.25 3-3 3-5 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 2.5-3 2.75-3 5m9-3c0 5.18-3.95 9.45-9 9.95v-2.01c3.95-.49 7-3.86 7-7.94s-3.05-7.45-7-7.94V2.05c5.05.5 9 4.77 9 9.95M11 2.05v2.01c-1.46.18-2.8.76-3.91 1.62L5.67 4.26C7.15 3.05 9 2.25 11 2.05M4.06 11H2.05c.2-2 1-3.85 2.21-5.33L5.68 7.1A7.9 7.9 0 0 0 4.06 11M11 19.94v2.01c-2-.2-3.85-.99-5.33-2.21l1.42-1.42c1.11.86 2.45 1.44 3.91 1.62M2.05 13h2.01c.18 1.46.76 2.8 1.62 3.91l-1.42 1.42A10 10 0 0 1 2.05 13"></path></svg></span> Exercices<a class="headerlink" href="#exercices_1" title="Permanent link">¶</a></h3>
 <div class="admonition exercise">
 <p class="admonition-title">Exercise</p>
 <p>Activez l'exécution Docker par défaut en ajoutant le paramètre ci-dessus dans le fichier <code>nextflow.config</code>.</p>
@@ -1725,7 +1733,7 @@ In the meantime, please try to work through the English-language material if you
 </code></pre></div>
 </details>
 </div>
-<h3 id="resume_1"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.2.2</span> <span class="twemoji"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M.41 13.41 6 19l1.41-1.42L1.83 12m20.41-6.42L11.66 16.17 7.5 12l-1.43 1.41L11.66 19l12-12M18 7l-1.41-1.42-6.35 6.35 1.42 1.41z"></path></svg></span> Résumé<a class="headerlink" href="#resume_1" title="Permanent link">¶</a></h3>
+<h3 id="resume_1"><span class="enumerate-headings-plugin enumerate-heading-plugin">3.2.2</span> <span class="twemoji"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M.41 13.41 6 19l1.41-1.42L1.83 12m20.41-6.42L11.66 16.17 7.5 12l-1.43 1.41L11.66 19l12-12M18 7l-1.41-1.42-6.35 6.35 1.42 1.41z"></path></svg></span> Résumé<a class="headerlink" href="#resume_1" title="Permanent link">¶</a></h3>
 <p>Dans cette étape, vous avez appris</p>
 <ol>
 <li>Comment définir un processus exécutant une commande personnalisée</li>
@@ -1734,7 +1742,7 @@ In the meantime, please try to work through the English-language material if you
 <li>Comment imprimer le contenu d'un canal</li>
 <li>Comment accéder au nombre de CPU disponibles</li>
 </ol>
-<h2 id="collecter-les-fichiers-lus-par-paires"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.3</span> Collecter les fichiers lus par paires<a class="headerlink" href="#collecter-les-fichiers-lus-par-paires" title="Permanent link">¶</a></h2>
+<h2 id="collecter-les-fichiers-lus-par-paires"><span class="enumerate-headings-plugin enumerate-heading-plugin">3.3</span> Collecter les fichiers lus par paires<a class="headerlink" href="#collecter-les-fichiers-lus-par-paires" title="Permanent link">¶</a></h2>
 <p>Cette étape montre comment faire correspondre les fichiers <strong>read</strong> par paires, afin qu'ils puissent être mis en correspondance par <strong>Salmon</strong>.</p>
 <p>Modifiez le script <code>script3.nf</code> en ajoutant la déclaration suivante à la dernière ligne du fichier :</p>
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-13-1" id="__codelineno-13-1" name="__codelineno-13-1"></a><span class="n">read_pairs_ch</span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
@@ -1753,7 +1761,7 @@ In the meantime, please try to work through the English-language material if you
 <p class="admonition-title">Warning</p>
 <p>Les chemins d'accès aux fichiers qui incluent un ou plusieurs jokers, c'est-à-dire <code>*</code>, <code>?</code>, etc., DOIVENT être entourés de caractères entre guillemets simples afin d'éviter que Bash n'étende le glob.</p>
 </div>
-<h3 id="exercices_2"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.3.1</span> <span class="twemoji"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13 18h-2v-2h2zm0-3h-2c0-3.25 3-3 3-5 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 2.5-3 2.75-3 5m9-3c0 5.18-3.95 9.45-9 9.95v-2.01c3.95-.49 7-3.86 7-7.94s-3.05-7.45-7-7.94V2.05c5.05.5 9 4.77 9 9.95M11 2.05v2.01c-1.46.18-2.8.76-3.91 1.62L5.67 4.26C7.15 3.05 9 2.25 11 2.05M4.06 11H2.05c.2-2 1-3.85 2.21-5.33L5.68 7.1A7.9 7.9 0 0 0 4.06 11M11 19.94v2.01c-2-.2-3.85-.99-5.33-2.21l1.42-1.42c1.11.86 2.45 1.44 3.91 1.62M2.05 13h2.01c.18 1.46.76 2.8 1.62 3.91l-1.42 1.42A10 10 0 0 1 2.05 13"></path></svg></span> Exercices<a class="headerlink" href="#exercices_2" title="Permanent link">¶</a></h3>
+<h3 id="exercices_2"><span class="enumerate-headings-plugin enumerate-heading-plugin">3.3.1</span> <span class="twemoji"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13 18h-2v-2h2zm0-3h-2c0-3.25 3-3 3-5 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 2.5-3 2.75-3 5m9-3c0 5.18-3.95 9.45-9 9.95v-2.01c3.95-.49 7-3.86 7-7.94s-3.05-7.45-7-7.94V2.05c5.05.5 9 4.77 9 9.95M11 2.05v2.01c-1.46.18-2.8.76-3.91 1.62L5.67 4.26C7.15 3.05 9 2.25 11 2.05M4.06 11H2.05c.2-2 1-3.85 2.21-5.33L5.68 7.1A7.9 7.9 0 0 0 4.06 11M11 19.94v2.01c-2-.2-3.85-.99-5.33-2.21l1.42-1.42c1.11.86 2.45 1.44 3.91 1.62M2.05 13h2.01c.18 1.46.76 2.8 1.62 3.91l-1.42 1.42A10 10 0 0 1 2.05 13"></path></svg></span> Exercices<a class="headerlink" href="#exercices_2" title="Permanent link">¶</a></h3>
 <div class="admonition exercise">
 <p class="admonition-title">Exercise</p>
 <p>Utilisez l'opérateur <a href="https://www.nextflow.io/docs/latest/operator.html#set">set</a> à la place de l'affectation <code>=</code> pour définir le canal <code>read_pairs_ch</code>.</p>
@@ -1776,7 +1784,7 @@ In the meantime, please try to work through the English-language material if you
 </code></pre></div>
 </details>
 </div>
-<h3 id="resume_2"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.3.2</span> <span class="twemoji"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M.41 13.41 6 19l1.41-1.42L1.83 12m20.41-6.42L11.66 16.17 7.5 12l-1.43 1.41L11.66 19l12-12M18 7l-1.41-1.42-6.35 6.35 1.42 1.41z"></path></svg></span> résumé<a class="headerlink" href="#resume_2" title="Permanent link">¶</a></h3>
+<h3 id="resume_2"><span class="enumerate-headings-plugin enumerate-heading-plugin">3.3.2</span> <span class="twemoji"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M.41 13.41 6 19l1.41-1.42L1.83 12m20.41-6.42L11.66 16.17 7.5 12l-1.43 1.41L11.66 19l12-12M18 7l-1.41-1.42-6.35 6.35 1.42 1.41z"></path></svg></span> résumé<a class="headerlink" href="#resume_2" title="Permanent link">¶</a></h3>
 <p>Au cours de cette étape, vous avez appris:</p>
 <ol>
 <li>Comment utiliser <code>fromFilePairs</code> pour gérer les fichiers de paires de lecture</li>
@@ -1787,7 +1795,7 @@ In the meantime, please try to work through the English-language material if you
 <p class="admonition-title">Info</p>
 <p>La déclaration d'un canal peut se situer avant le champ d'application du workflow ou à l'intérieur de celui-ci. Tant qu'elle se situe en amont du processus qui requiert le canal spécifique.</p>
 </div>
-<h2 id="quantification-de-lexpression"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.4</span> Quantification de l'expression<a class="headerlink" href="#quantification-de-lexpression" title="Permanent link">¶</a></h2>
+<h2 id="quantification-de-lexpression"><span class="enumerate-headings-plugin enumerate-heading-plugin">3.4</span> Quantification de l'expression<a class="headerlink" href="#quantification-de-lexpression" title="Permanent link">¶</a></h2>
 <p>Le fichier <code>script4.nf</code> ajoute un processus de <code>QUANTIFICATION</code> de l'expression des gènes et un appel à ce processus dans le champ d'application du flux de travail. La quantification nécessite les fichiers fastq du transcriptome indexé et de la paire reads de RNA-Seq.</p>
 <p>Dans le workflow scope, notez comment le canal <code>index_ch</code> est assigné comme sortie dans le processus <code>INDEX</code>.</p>
 <p>Ensuite, notez que le premier canal d'entrée pour le processus <code>QUANTIFICATION</code> est le <code>index_ch</code> précédemment déclaré, qui contient le <code>chemin</code> vers le <code>salmon_index</code>.</p>
@@ -1806,7 +1814,7 @@ In the meantime, please try to work through the English-language material if you
 <p class="admonition-title">Tip</p>
 <p>Il peut être utile d'appliquer des paramètres facultatifs à un processus spécifique à l'aide de <a href="https://www.nextflow.io/docs/latest/process.html#directives">directives</a> en les spécifiant dans le corps du processus.</p>
 </div>
-<h3 id="exercices_3"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.4.1</span> <span class="twemoji"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13 18h-2v-2h2zm0-3h-2c0-3.25 3-3 3-5 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 2.5-3 2.75-3 5m9-3c0 5.18-3.95 9.45-9 9.95v-2.01c3.95-.49 7-3.86 7-7.94s-3.05-7.45-7-7.94V2.05c5.05.5 9 4.77 9 9.95M11 2.05v2.01c-1.46.18-2.8.76-3.91 1.62L5.67 4.26C7.15 3.05 9 2.25 11 2.05M4.06 11H2.05c.2-2 1-3.85 2.21-5.33L5.68 7.1A7.9 7.9 0 0 0 4.06 11M11 19.94v2.01c-2-.2-3.85-.99-5.33-2.21l1.42-1.42c1.11.86 2.45 1.44 3.91 1.62M2.05 13h2.01c.18 1.46.76 2.8 1.62 3.91l-1.42 1.42A10 10 0 0 1 2.05 13"></path></svg></span> Exercices<a class="headerlink" href="#exercices_3" title="Permanent link">¶</a></h3>
+<h3 id="exercices_3"><span class="enumerate-headings-plugin enumerate-heading-plugin">3.4.1</span> <span class="twemoji"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13 18h-2v-2h2zm0-3h-2c0-3.25 3-3 3-5 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 2.5-3 2.75-3 5m9-3c0 5.18-3.95 9.45-9 9.95v-2.01c3.95-.49 7-3.86 7-7.94s-3.05-7.45-7-7.94V2.05c5.05.5 9 4.77 9 9.95M11 2.05v2.01c-1.46.18-2.8.76-3.91 1.62L5.67 4.26C7.15 3.05 9 2.25 11 2.05M4.06 11H2.05c.2-2 1-3.85 2.21-5.33L5.68 7.1A7.9 7.9 0 0 0 4.06 11M11 19.94v2.01c-2-.2-3.85-.99-5.33-2.21l1.42-1.42c1.11.86 2.45 1.44 3.91 1.62M2.05 13h2.01c.18 1.46.76 2.8 1.62 3.91l-1.42 1.42A10 10 0 0 1 2.05 13"></path></svg></span> Exercices<a class="headerlink" href="#exercices_3" title="Permanent link">¶</a></h3>
 <div class="admonition exercise">
 <p class="admonition-title">Exercise</p>
 <p>Ajout d'une directive <a href="https://www.nextflow.io/docs/latest/process.html#tag">tag</a> au processus <code>QUANTIFICATION</code> pour fournir un journal d'exécution plus lisible.</p>
@@ -1827,7 +1835,7 @@ In the meantime, please try to work through the English-language material if you
 </code></pre></div>
 </details>
 </div>
-<h3 id="resume_3"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.4.2</span> <span class="twemoji"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M.41 13.41 6 19l1.41-1.42L1.83 12m20.41-6.42L11.66 16.17 7.5 12l-1.43 1.41L11.66 19l12-12M18 7l-1.41-1.42-6.35 6.35 1.42 1.41z"></path></svg></span> Résumé<a class="headerlink" href="#resume_3" title="Permanent link">¶</a></h3>
+<h3 id="resume_3"><span class="enumerate-headings-plugin enumerate-heading-plugin">3.4.2</span> <span class="twemoji"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M.41 13.41 6 19l1.41-1.42L1.83 12m20.41-6.42L11.66 16.17 7.5 12l-1.43 1.41L11.66 19l12-12M18 7l-1.41-1.42-6.35 6.35 1.42 1.41z"></path></svg></span> Résumé<a class="headerlink" href="#resume_3" title="Permanent link">¶</a></h3>
 <p>Dans cette étape, vous avez appris</p>
 <ol>
 <li>Comment connecter deux processus ensemble en utilisant les déclarations de canal</li>
@@ -1835,13 +1843,13 @@ In the meantime, please try to work through the English-language material if you
 <li>Comment utiliser la directive <code>tag</code> pour fournir une sortie d'exécution plus lisible</li>
 <li>Comment utiliser la directive <code>publishDir</code> pour stocker les résultats d'un processus dans un chemin de votre choix.</li>
 </ol>
-<h2 id="controle-qualite"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.5</span> Contrôle qualité<a class="headerlink" href="#controle-qualite" title="Permanent link">¶</a></h2>
+<h2 id="controle-qualite"><span class="enumerate-headings-plugin enumerate-heading-plugin">3.5</span> Contrôle qualité<a class="headerlink" href="#controle-qualite" title="Permanent link">¶</a></h2>
 <p>Ensuite, nous implémentons une étape de contrôle de qualité <code>FASTQC</code> pour vos reads d'entrée (en utilisant le label <code>fastqc</code>). Les entrées sont les mêmes que les paires de reads utilisées dans l'étape <code>QUANTIFICATION</code>.</p>
 <p>Vous pouvez l'exécuter en utilisant la commande suivante :</p>
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-23-1" id="__codelineno-23-1" name="__codelineno-23-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>script5.nf<span class="w"> </span>-resume
 </code></pre></div>
 <p>Nextflow DSL2 sait qu'il faut diviser les <code>reads_pair_ch</code> en deux canaux identiques car ils sont requis deux fois en tant qu'entrée pour les processus <code>FASTQC</code> et <code>QUANTIFICATION</code>.</p>
-<h2 id="rapport-de-multiqc"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.6</span> Rapport de MultiQC<a class="headerlink" href="#rapport-de-multiqc" title="Permanent link">¶</a></h2>
+<h2 id="rapport-de-multiqc"><span class="enumerate-headings-plugin enumerate-heading-plugin">3.6</span> Rapport de MultiQC<a class="headerlink" href="#rapport-de-multiqc" title="Permanent link">¶</a></h2>
 <p>Cette étape rassemble les résultats des processus de <code>QUANTIFICATION</code> et de <code>FASTQC</code> pour créer un rapport final à l'aide de l'outil <a href="http://multiqc.info/">MultiQC</a>.</p>
 <p>Exécutez le script suivant avec la commande suivante :</p>
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-24-1" id="__codelineno-24-1" name="__codelineno-24-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>script6.nf<span class="w"> </span>-resume<span class="w"> </span>--reads<span class="w"> </span><span class="s1">'data/ggal/*_{1,2}.fq'</span>
@@ -1851,21 +1859,21 @@ In the meantime, please try to work through the English-language material if you
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-25-1" id="__codelineno-25-1" name="__codelineno-25-1"></a><span class="n">MULTIQC</span><span class="o">(</span><span class="n">quant_ch</span><span class="o">.</span><span class="na">mix</span><span class="o">(</span><span class="n">fastqc_ch</span><span class="o">).</span><span class="na">collect</span><span class="o">())</span>
 </code></pre></div>
 <p>Nous voulons qu'une seule tâche de MultiQC soit exécutée pour produire un rapport. Nous utilisons donc l'opérateur de canal <code>mix</code> pour combiner les deux canaux, suivi de l'opérateur <code>collect</code>, pour retourner le contenu complet du canal en un seul élément.</p>
-<h3 id="resume_4"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.6.1</span> <span class="twemoji"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M.41 13.41 6 19l1.41-1.42L1.83 12m20.41-6.42L11.66 16.17 7.5 12l-1.43 1.41L11.66 19l12-12M18 7l-1.41-1.42-6.35 6.35 1.42 1.41z"></path></svg></span> Résumé<a class="headerlink" href="#resume_4" title="Permanent link">¶</a></h3>
+<h3 id="resume_4"><span class="enumerate-headings-plugin enumerate-heading-plugin">3.6.1</span> <span class="twemoji"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M.41 13.41 6 19l1.41-1.42L1.83 12m20.41-6.42L11.66 16.17 7.5 12l-1.43 1.41L11.66 19l12-12M18 7l-1.41-1.42-6.35 6.35 1.42 1.41z"></path></svg></span> Résumé<a class="headerlink" href="#resume_4" title="Permanent link">¶</a></h3>
 <p>Dans cette étape, vous avez appris</p>
 <ol>
 <li>Comment collecter plusieurs sorties vers une seule entrée avec l'opérateur <code>collect</code>.</li>
 <li>Comment <code>mixer</code> deux canaux en un seul canal</li>
 <li>Comment enchaîner deux ou plusieurs opérateurs ensemble</li>
 </ol>
-<h2 id="gerer-levenement-dachevement"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.7</span> Gérer l'événement d'achèvement<a class="headerlink" href="#gerer-levenement-dachevement" title="Permanent link">¶</a></h2>
+<h2 id="gerer-levenement-dachevement"><span class="enumerate-headings-plugin enumerate-heading-plugin">3.7</span> Gérer l'événement d'achèvement<a class="headerlink" href="#gerer-levenement-dachevement" title="Permanent link">¶</a></h2>
 <p>Cette étape montre comment exécuter une action lorsque le flux de travail a terminé son exécution.</p>
 <p>Notez que les processus Nextflow définissent l'exécution de tâches <strong>asynchrones</strong>, c'est-à-dire qu'elles ne sont pas exécutées l'une après l'autre comme si elles étaient écrites dans le script du workflow dans un langage de programmation <strong>impératif</strong> commun.</p>
 <p>Le script utilise le gestionnaire d'événement <code>workflow.onComplete</code> pour imprimer un message de confirmation lorsque le script est terminé.</p>
 <p>Essayez de l'exécuter en utilisant la commande suivante :</p>
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-26-1" id="__codelineno-26-1" name="__codelineno-26-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>script7.nf<span class="w"> </span>-resume<span class="w"> </span>--reads<span class="w"> </span><span class="s1">'data/ggal/*_{1,2}.fq'</span>
 </code></pre></div>
-<h2 id="notifications-par-e-mail"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.8</span> Notifications par e-mail<a class="headerlink" href="#notifications-par-e-mail" title="Permanent link">¶</a></h2>
+<h2 id="notifications-par-e-mail"><span class="enumerate-headings-plugin enumerate-heading-plugin">3.8</span> Notifications par e-mail<a class="headerlink" href="#notifications-par-e-mail" title="Permanent link">¶</a></h2>
 <p>Envoyer un e-mail de notification lorsque l'exécution du flux de travail est terminée en utilisant l'option de ligne de commande <code>-N &lt;adresse e-mail&gt;</code>.</p>
 <p>Note : ceci nécessite la configuration d'un serveur SMTP dans le fichier de configuration de nextflow. Vous trouverez ci-dessous un exemple de fichier <code>nextflow.config</code> montrant les paramètres à configurer :</p>
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-27-1" id="__codelineno-27-1" name="__codelineno-27-1"></a><span class="n">mail</span><span class="w"> </span><span class="o">{</span>
@@ -1880,7 +1888,7 @@ In the meantime, please try to work through the English-language material if you
 <a href="#__codelineno-27-10" id="__codelineno-27-10" name="__codelineno-27-10"></a><span class="o">}</span>
 </code></pre></div>
 <p>Voir <a href="https://www.nextflow.io/docs/latest/mail.html#mail-configuration">mail documentation</a> pour plus de détails.</p>
-<h2 id="scripts-personnalises"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.9</span> Scripts personnalisés<a class="headerlink" href="#scripts-personnalises" title="Permanent link">¶</a></h2>
+<h2 id="scripts-personnalises"><span class="enumerate-headings-plugin enumerate-heading-plugin">3.9</span> Scripts personnalisés<a class="headerlink" href="#scripts-personnalises" title="Permanent link">¶</a></h2>
 <p>Les workflows du monde réel utilisent beaucoup de scripts utilisateurs personnalisés (BASH, R, Python, etc.). Nextflow vous permet d'utiliser et de gérer ces scripts de manière cohérente. Il suffit de les placer dans un répertoire nommé <code>bin</code> à la racine du projet de workflow. Ils seront automatiquement ajoutés au <code>PATH</code> d'exécution du workflow.</p>
 <p>Par exemple, créez un fichier nommé <code>fastqc.sh</code> avec le contenu suivant :</p>
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-28-1" id="__codelineno-28-1" name="__codelineno-28-1"></a><span class="ch">#!/bin/bash</span>
@@ -1907,13 +1915,13 @@ In the meantime, please try to work through the English-language material if you
 <p>Exécutez-la comme auparavant :</p>
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-31-1" id="__codelineno-31-1" name="__codelineno-31-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>script7.nf<span class="w"> </span>-resume<span class="w"> </span>--reads<span class="w"> </span><span class="s1">'data/ggal/*_{1,2}.fq'</span>
 </code></pre></div>
-<h3 id="resume_5"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.9.1</span> <span class="twemoji"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M.41 13.41 6 19l1.41-1.42L1.83 12m20.41-6.42L11.66 16.17 7.5 12l-1.43 1.41L11.66 19l12-12M18 7l-1.41-1.42-6.35 6.35 1.42 1.41z"></path></svg></span> Résumé<a class="headerlink" href="#resume_5" title="Permanent link">¶</a></h3>
+<h3 id="resume_5"><span class="enumerate-headings-plugin enumerate-heading-plugin">3.9.1</span> <span class="twemoji"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M.41 13.41 6 19l1.41-1.42L1.83 12m20.41-6.42L11.66 16.17 7.5 12l-1.43 1.41L11.66 19l12-12M18 7l-1.41-1.42-6.35 6.35 1.42 1.41z"></path></svg></span> Résumé<a class="headerlink" href="#resume_5" title="Permanent link">¶</a></h3>
 <p>Dans cette étape, vous avez appris</p>
 <ol>
 <li>Comment écrire ou utiliser des scripts personnalisés existants dans votre workflow Nextflow.</li>
 <li>Comment éviter l'utilisation de chemins absolus en ayant vos scripts dans le dossier <code>bin/</code>.</li>
 </ol>
-<h2 id="mesures-et-rapports"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.10</span> Mesures et rapports<a class="headerlink" href="#mesures-et-rapports" title="Permanent link">¶</a></h2>
+<h2 id="mesures-et-rapports"><span class="enumerate-headings-plugin enumerate-heading-plugin">3.10</span> Mesures et rapports<a class="headerlink" href="#mesures-et-rapports" title="Permanent link">¶</a></h2>
 <p>Nextflow peut produire de multiples rapports et graphiques fournissant plusieurs mesures de temps d'exécution et des informations sur l'exécution.</p>
 <p>Exécutez le workflow <a href="https://github.com/nextflow-io/rnaseq-nf">rnaseq-nf</a> précédemment introduit comme indiqué ci-dessous :</p>
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-32-1" id="__codelineno-32-1" name="__codelineno-32-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>rnaseq-nf<span class="w"> </span>-with-docker<span class="w"> </span>-with-report<span class="w"> </span>-with-trace<span class="w"> </span>-with-timeline<span class="w"> </span>-with-dag<span class="w"> </span>dag.png
@@ -1933,7 +1941,7 @@ In the meantime, please try to work through the English-language material if you
 <p class="admonition-title">Info</p>
 <p>Vous pouvez visualiser les fichiers HTML en cliquant avec le bouton droit de la souris sur le nom du fichier dans la barre latérale gauche et en choisissant l'option de menu <strong>Preview</strong>.</p>
 </div>
-<h2 id="executer-un-projet-a-partir-de-github"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.11</span> Exécuter un projet à partir de GitHub<a class="headerlink" href="#executer-un-projet-a-partir-de-github" title="Permanent link">¶</a></h2>
+<h2 id="executer-un-projet-a-partir-de-github"><span class="enumerate-headings-plugin enumerate-heading-plugin">3.11</span> Exécuter un projet à partir de GitHub<a class="headerlink" href="#executer-un-projet-a-partir-de-github" title="Permanent link">¶</a></h2>
 <p>Nextflow permet l'exécution d'un projet de workflow directement à partir d'un dépositoire GitHub (ou de services similaires, par exemple BitBucket et GitLab).</p>
 <p>Cela simplifie le partage et le déploiement de projets complexes et le suivi des modifications de manière cohérente.</p>
 <p>Le dépositoire GitHub suivant héberge une version complète du flux de travail présenté dans ce tutoriel : <a href="https://github.com/nextflow-io/rnaseq-nf">https://github.com/nextflow-io/rnaseq-nf</a></p>
@@ -1949,7 +1957,7 @@ In the meantime, please try to work through the English-language material if you
 </code></pre></div>
 <p>Les révisions sont définies à l'aide de tags Git ou de branches définies dans le référentiel du projet.</p>
 <p>Les tags permettent un contrôle précis des modifications apportées à vos fichiers de projet et à vos dépendances au fil du temps.</p>
-<h2 id="plus-de-ressources"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.12</span> Plus de ressources<a class="headerlink" href="#plus-de-ressources" title="Permanent link">¶</a></h2>
+<h2 id="plus-de-ressources"><span class="enumerate-headings-plugin enumerate-heading-plugin">3.12</span> Plus de ressources<a class="headerlink" href="#plus-de-ressources" title="Permanent link">¶</a></h2>
 <ul>
 <li><a href="http://docs.nextflow.io">Documentation Nextflow</a> - L'accueil de la documentation Nextflow.</li>
 <li><a href="https://github.com/nextflow-io/patterns">Modèles Nextflow</a> - Une collection de modèles de mise en œuvre de Nextflow.</li>
@@ -2030,7 +2038,7 @@ In the meantime, please try to work through the English-language material if you
 <div class="md-consent__overlay"></div>
 <aside class="md-consent__inner">
 <form class="md-consent__form md-grid md-typeset" name="consent">
-<h4><span class="enumerate-headings-plugin enumerate-heading-plugin">4.12.0.1</span> Cookie consent</h4>
+<h4><span class="enumerate-headings-plugin enumerate-heading-plugin">3.12.0.1</span> Cookie consent</h4>
 <p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our training materials better.</p>
 <input class="md-toggle" id="__settings" type="checkbox"/>
 <div class="md-consent__settings">

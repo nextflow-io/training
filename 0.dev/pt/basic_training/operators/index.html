@@ -1130,6 +1130,14 @@
 </ul>
 </nav>
 </li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../help/">
+<span class="md-ellipsis">
+    Help
+    
+  </span>
+</a>
+</li>
 </ul>
 </nav>
 </div>
@@ -1370,7 +1378,7 @@ The translated material may be incomplete or incorrect.
 We plan to update the translations later this year.
 In the meantime, please try to work through the English-language material if you can.</p>
 </div>
-<h1 id="operadores"><span class="enumerate-headings-plugin enumerate-heading-plugin">9.</span> Operadores<a class="headerlink" href="#operadores" title="Permanent link">¶</a></h1>
+<h1 id="operadores"><span class="enumerate-headings-plugin enumerate-heading-plugin">8.</span> Operadores<a class="headerlink" href="#operadores" title="Permanent link">¶</a></h1>
 <p>Operadores são métodos para conectar canais, transformar valores emitidos por canais ou executar regras próprias em canais.</p>
 <p>Existem sete grupos de operadores descritos em detalhe na Documentação do Nextflow, estes são:</p>
 <ol>
@@ -1382,7 +1390,7 @@ In the meantime, please try to work through the English-language material if you
 <li><a href="https://www.nextflow.io/docs/latest/operator.html#maths-operators">Operadores matemáticos</a></li>
 <li><a href="https://www.nextflow.io/docs/latest/operator.html#other-operators">Outros operadores</a></li>
 </ol>
-<h2 id="exemplo-basico"><span class="enumerate-headings-plugin enumerate-heading-plugin">9.1</span> Exemplo básico<a class="headerlink" href="#exemplo-basico" title="Permanent link">¶</a></h2>
+<h2 id="exemplo-basico"><span class="enumerate-headings-plugin enumerate-heading-plugin">8.1</span> Exemplo básico<a class="headerlink" href="#exemplo-basico" title="Permanent link">¶</a></h2>
 <div class="admonition info">
 <p>Clique no ícone <span class="twemoji"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17 13h-4v4h-2v-4H7v-2h4V7h2v4h4m-5-9A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2"></path></svg></span> para ver explicações do código.</p>
 </div>
@@ -1423,9 +1431,9 @@ In the meantime, please try to work through the English-language material if you
 <a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="w">    </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="w">    </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="operadores-basicos"><span class="enumerate-headings-plugin enumerate-heading-plugin">9.2</span> Operadores básicos<a class="headerlink" href="#operadores-basicos" title="Permanent link">¶</a></h2>
+<h2 id="operadores-basicos"><span class="enumerate-headings-plugin enumerate-heading-plugin">8.2</span> Operadores básicos<a class="headerlink" href="#operadores-basicos" title="Permanent link">¶</a></h2>
 <p>Agora iremos explorar alguns dos operadores mais comuns.</p>
-<h3 id="view"><span class="enumerate-headings-plugin enumerate-heading-plugin">9.2.1</span> <code>view()</code><a class="headerlink" href="#view" title="Permanent link">¶</a></h3>
+<h3 id="view"><span class="enumerate-headings-plugin enumerate-heading-plugin">8.2.1</span> <code>view()</code><a class="headerlink" href="#view" title="Permanent link">¶</a></h3>
 <p>O operador <code>view</code> imprime os itens emitidos por um canal para o terminal, acrescentando um caractere de <em>quebra de linha</em> após cada item. Por exemplo:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span>
 <span class="normal"><a href="#__codelineno-2-2">2</a></span>
@@ -1448,7 +1456,7 @@ In the meantime, please try to work through the English-language material if you
 <a href="#__codelineno-5-2" id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="go">- bar</span>
 <a href="#__codelineno-5-3" id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="go">- baz</span>
 </code></pre></div>
-<h3 id="map"><span class="enumerate-headings-plugin enumerate-heading-plugin">9.2.2</span> <code>map()</code><a class="headerlink" href="#map" title="Permanent link">¶</a></h3>
+<h3 id="map"><span class="enumerate-headings-plugin enumerate-heading-plugin">8.2.2</span> <code>map()</code><a class="headerlink" href="#map" title="Permanent link">¶</a></h3>
 <p>O operador <code>map</code> aplica uma função de sua escolha em cada item emitido por um canal
 e retorna os items obtidos como um novo canal. A função aplicada é chamada de função
 de <em>mapeamento</em> e é expressa com uma <em>clausura</em>, como demonstrado no exemplo abaixo:</p>
@@ -1485,7 +1493,7 @@ tipo de dado.</p>
 </code></pre></div></td></tr></table></div>
 </details>
 </div>
-<h3 id="mix"><span class="enumerate-headings-plugin enumerate-heading-plugin">9.2.3</span> <code>mix()</code><a class="headerlink" href="#mix" title="Permanent link">¶</a></h3>
+<h3 id="mix"><span class="enumerate-headings-plugin enumerate-heading-plugin">8.2.3</span> <code>mix()</code><a class="headerlink" href="#mix" title="Permanent link">¶</a></h3>
 <p>O operador <code>mix</code> combina os itens emitidos por dois (ou mais) canais em um único canal.</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1">1</a></span>
 <span class="normal"><a href="#__codelineno-9-2">2</a></span>
@@ -1512,7 +1520,7 @@ tipo de dado.</p>
 <p class="admonition-title">Warning</p>
 <p>Os itens no canal resultante possuem a mesma ordem dos seus respectivos canais originais. No entanto, não há garantia que o elemento do segundo canal é acrescentado ao final dos elementos do primeiro canal. Como se pode observar acima, o elemento <code>a</code> foi impresso antes de <code>3</code>.</p>
 </div>
-<h3 id="flatten"><span class="enumerate-headings-plugin enumerate-heading-plugin">9.2.4</span> <code>flatten()</code><a class="headerlink" href="#flatten" title="Permanent link">¶</a></h3>
+<h3 id="flatten"><span class="enumerate-headings-plugin enumerate-heading-plugin">8.2.4</span> <code>flatten()</code><a class="headerlink" href="#flatten" title="Permanent link">¶</a></h3>
 <p>O operador <code>flatten</code> transforma um canal de maneira que cada <em>tupla</em> é achatada, isto é, cada entrada é emitida como um único elemento pelo canal resultante.</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1">1</a></span>
 <span class="normal"><a href="#__codelineno-11-2">2</a></span>
@@ -1535,7 +1543,7 @@ tipo de dado.</p>
 <a href="#__codelineno-12-5" id="__codelineno-12-5" name="__codelineno-12-5"></a><span class="go">5</span>
 <a href="#__codelineno-12-6" id="__codelineno-12-6" name="__codelineno-12-6"></a><span class="go">6</span>
 </code></pre></div>
-<h3 id="collect"><span class="enumerate-headings-plugin enumerate-heading-plugin">9.2.5</span> <code>collect()</code><a class="headerlink" href="#collect" title="Permanent link">¶</a></h3>
+<h3 id="collect"><span class="enumerate-headings-plugin enumerate-heading-plugin">8.2.5</span> <code>collect()</code><a class="headerlink" href="#collect" title="Permanent link">¶</a></h3>
 <p>O operador <code>collect</code> coleta todos os itens emitidos por um canal em uma lista e retorna o objeto como uma única emissão.</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1">1</a></span>
 <span class="normal"><a href="#__codelineno-13-2">2</a></span>
@@ -1552,7 +1560,7 @@ tipo de dado.</p>
 <p class="admonition-title">Info</p>
 <p>O resultado do operador <code>collect</code> é um canal de <strong>valor</strong>.</p>
 </div>
-<h3 id="grouptuple"><span class="enumerate-headings-plugin enumerate-heading-plugin">9.2.6</span> <code>groupTuple()</code><a class="headerlink" href="#grouptuple" title="Permanent link">¶</a></h3>
+<h3 id="grouptuple"><span class="enumerate-headings-plugin enumerate-heading-plugin">8.2.6</span> <code>groupTuple()</code><a class="headerlink" href="#grouptuple" title="Permanent link">¶</a></h3>
 <p>O operador <code>groupTuple</code> coleta as tuplas (ou listas) de valores emitidos pelo canal de entrada, agrupando os elementos que possuem a mesma chave. Por fim, ele emite uma nova tupla para cada chave distinta.</p>
 <p>Por exemplo:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1">1</a></span>
@@ -1585,7 +1593,7 @@ tipo de dado.</p>
 </code></pre></div></td></tr></table></div>
 </details>
 </div>
-<h3 id="join"><span class="enumerate-headings-plugin enumerate-heading-plugin">9.2.7</span> <code>join()</code><a class="headerlink" href="#join" title="Permanent link">¶</a></h3>
+<h3 id="join"><span class="enumerate-headings-plugin enumerate-heading-plugin">8.2.7</span> <code>join()</code><a class="headerlink" href="#join" title="Permanent link">¶</a></h3>
 <p>O operador <code>join</code> cria um canal que combina os itens emitidos por dois canais que possuam uma chave em comum. Por padrão, a chave é definida como o primeiro elemento
 em cada item emitido.</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-1">1</a></span>
@@ -1602,7 +1610,7 @@ em cada item emitido.</p>
 <p class="admonition-title">Note</p>
 <p>Perceba como <em>P</em> está ausente no resultado final.</p>
 </div>
-<h3 id="branch"><span class="enumerate-headings-plugin enumerate-heading-plugin">9.2.8</span> <code>branch()</code><a class="headerlink" href="#branch" title="Permanent link">¶</a></h3>
+<h3 id="branch"><span class="enumerate-headings-plugin enumerate-heading-plugin">8.2.8</span> <code>branch()</code><a class="headerlink" href="#branch" title="Permanent link">¶</a></h3>
 <p>O operador <code>branch</code> permite que você envie os itens emitidos por um canal de entrada para um ou mais canais de saída.</p>
 <p>O critério de seleção de cada canal de saída é definido especificando uma clausura que forneça uma ou mais expressões booleanas, cada uma das quais é identificada por um rótulo único. Para a primeira expressão verdadeira, o item é ligado a um canal nomeado com o rótulo. Por exemplo:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-1"> 1</a></span>
@@ -1633,7 +1641,7 @@ em cada item emitido.</p>
 <p class="admonition-title">Note</p>
 <p>No exemplo acima, o que aconteceria com um valor igual a 10? Para lidar com isso, você pode usar <code>&gt;=</code>.</p>
 </div>
-<h2 id="outros-recursos"><span class="enumerate-headings-plugin enumerate-heading-plugin">9.3</span> Outros recursos<a class="headerlink" href="#outros-recursos" title="Permanent link">¶</a></h2>
+<h2 id="outros-recursos"><span class="enumerate-headings-plugin enumerate-heading-plugin">8.3</span> Outros recursos<a class="headerlink" href="#outros-recursos" title="Permanent link">¶</a></h2>
 <p>Veja a <a href="https://www.nextflow.io/docs/latest/operator.html">documentação de operadores</a> no site oficial do Nextflow.</p>
 </article>
 </div>
@@ -1709,7 +1717,7 @@ em cada item emitido.</p>
 <div class="md-consent__overlay"></div>
 <aside class="md-consent__inner">
 <form class="md-consent__form md-grid md-typeset" name="consent">
-<h4><span class="enumerate-headings-plugin enumerate-heading-plugin">9.3.0.1</span> Cookie consent</h4>
+<h4><span class="enumerate-headings-plugin enumerate-heading-plugin">8.3.0.1</span> Cookie consent</h4>
 <p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our training materials better.</p>
 <input class="md-toggle" id="__settings" type="checkbox"/>
 <div class="md-consent__settings">

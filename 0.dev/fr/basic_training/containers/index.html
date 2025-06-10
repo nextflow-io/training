@@ -1224,6 +1224,14 @@
 </ul>
 </nav>
 </li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../help/">
+<span class="md-ellipsis">
+    Help
+    
+  </span>
+</a>
+</li>
 </ul>
 </nav>
 </div>
@@ -1551,7 +1559,7 @@
 <a class="md-content__button md-icon" href="https://github.com/nextflow-io/training/edit/master/docs/basic_training/containers.md" title="Editer cette page">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"></path></svg>
 </a>
-<h1 id="manage-dependencies-and-containers"><span class="enumerate-headings-plugin enumerate-heading-plugin">5.</span> Manage dependencies and containers<a class="headerlink" href="#manage-dependencies-and-containers" title="Permanent link">¶</a></h1>
+<h1 id="manage-dependencies-and-containers"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.</span> Manage dependencies and containers<a class="headerlink" href="#manage-dependencies-and-containers" title="Permanent link">¶</a></h1>
 <p>Computational workflows are rarely composed of a single script or tool. More often, they depend on dozens of software components or libraries.</p>
 <p>Installing and maintaining such dependencies is a challenging task and a common source of irreproducibility in scientific applications.</p>
 <p>To overcome these issues, you can use a container technology that enables software dependencies, i.e. tools and libraries required by a data analysis application, to be encapsulated in one or more self-contained, ready-to-run, immutable container images. These container images can be easily deployed in any platform that supports the container runtime.</p>
@@ -1560,10 +1568,10 @@
 <p class="admonition-title">Info</p>
 <p>Containers were first introduced with kernel 2.6 as a Linux feature known as <em>Control Groups</em> or <a href="https://en.wikipedia.org/wiki/Cgroups">Cgroups</a>.</p>
 </div>
-<h2 id="docker-basics"><span class="enumerate-headings-plugin enumerate-heading-plugin">5.1</span> Docker basics<a class="headerlink" href="#docker-basics" title="Permanent link">¶</a></h2>
+<h2 id="docker-basics"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.1</span> Docker basics<a class="headerlink" href="#docker-basics" title="Permanent link">¶</a></h2>
 <p>Docker is a handy management tool to build, run and share container images.</p>
 <p>These container images can be uploaded and published in a centralized repository known as <a href="https://hub.docker.com">Docker Hub</a>, or hosted by other parties, such as <a href="https://quay.io">Quay</a>.</p>
-<h3 id="run-a-container"><span class="enumerate-headings-plugin enumerate-heading-plugin">5.1.1</span> Run a container<a class="headerlink" href="#run-a-container" title="Permanent link">¶</a></h3>
+<h3 id="run-a-container"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.1.1</span> Run a container<a class="headerlink" href="#run-a-container" title="Permanent link">¶</a></h3>
 <p>A container can be <code>run</code> using the following command:</p>
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a>docker<span class="w"> </span>run<span class="w"> </span>&lt;container-name&gt;
 </code></pre></div>
@@ -1573,7 +1581,7 @@
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a>docker<span class="w"> </span>run<span class="w"> </span>hello-world
 </code></pre></div>
 </div>
-<h3 id="pull-a-container"><span class="enumerate-headings-plugin enumerate-heading-plugin">5.1.2</span> Pull a container<a class="headerlink" href="#pull-a-container" title="Permanent link">¶</a></h3>
+<h3 id="pull-a-container"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.1.2</span> Pull a container<a class="headerlink" href="#pull-a-container" title="Permanent link">¶</a></h3>
 <p>The <code>pull</code> command allows you to download a Docker image without running it. For example:</p>
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-2-1" id="__codelineno-2-1" name="__codelineno-2-1"></a>docker<span class="w"> </span>pull<span class="w"> </span>&lt;container-name&gt;
 </code></pre></div>
@@ -1593,13 +1601,13 @@
 </code></pre></div>
 </details>
 </div>
-<h3 id="run-a-container-in-interactive-mode"><span class="enumerate-headings-plugin enumerate-heading-plugin">5.1.3</span> Run a container in interactive mode<a class="headerlink" href="#run-a-container-in-interactive-mode" title="Permanent link">¶</a></h3>
+<h3 id="run-a-container-in-interactive-mode"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.1.3</span> Run a container in interactive mode<a class="headerlink" href="#run-a-container-in-interactive-mode" title="Permanent link">¶</a></h3>
 <p>Launching a BASH shell in the container allows you to operate in an interactive mode in the containerized operating system. For example:</p>
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-6-1" id="__codelineno-6-1" name="__codelineno-6-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>debian:bullseye-slim<span class="w"> </span>bash
 </code></pre></div>
 <p>Once launched, you will notice that it is running as root (!). Use the usual commands to navigate the file system. This is useful to check if the expected programs are present within a container.</p>
 <p>To exit from the container, stop the BASH session with the <code>exit</code> command.</p>
-<h3 id="your-first-dockerfile"><span class="enumerate-headings-plugin enumerate-heading-plugin">5.1.4</span> Your first Dockerfile<a class="headerlink" href="#your-first-dockerfile" title="Permanent link">¶</a></h3>
+<h3 id="your-first-dockerfile"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.1.4</span> Your first Dockerfile<a class="headerlink" href="#your-first-dockerfile" title="Permanent link">¶</a></h3>
 <p>Docker images are created by using a so-called <code>Dockerfile</code>, a simple text file containing a list of commands to assemble and configure the image with the software packages required. For example, a Dockerfile to create a container with <code>curl</code> installed could be as simple as this:</p>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">Dockerfile</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1">1</a></span>
 <span class="normal"><a href="#__codelineno-7-2">2</a></span>
@@ -1662,7 +1670,7 @@
 </code></pre></div>
 </details>
 </div>
-<h3 id="adding-additional-software-package-to-the-image"><span class="enumerate-headings-plugin enumerate-heading-plugin">5.1.5</span> Adding additional software package to the image<a class="headerlink" href="#adding-additional-software-package-to-the-image" title="Permanent link">¶</a></h3>
+<h3 id="adding-additional-software-package-to-the-image"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.1.5</span> Adding additional software package to the image<a class="headerlink" href="#adding-additional-software-package-to-the-image" title="Permanent link">¶</a></h3>
 <p>Additional tools can be added to the image by adding the appropriate <code>RUN</code> command to the Dockerfile.</p>
 <p>For example, to add the <code>salmon</code> tool to the image, you would add the following line to the bottom of your Dockerfile:</p>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">Dockerfile</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-10">10</a></span>
@@ -1692,7 +1700,7 @@
 <p>You will notice that it creates a new Docker image with the same name <strong>but</strong> with a different image ID.</p>
 </details>
 </div>
-<h3 id="run-salmon-in-the-container"><span class="enumerate-headings-plugin enumerate-heading-plugin">5.1.6</span> Run Salmon in the container<a class="headerlink" href="#run-salmon-in-the-container" title="Permanent link">¶</a></h3>
+<h3 id="run-salmon-in-the-container"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.1.6</span> Run Salmon in the container<a class="headerlink" href="#run-salmon-in-the-container" title="Permanent link">¶</a></h3>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>If you didn't complete the steps above, use the 'rnaseq-nf' image used elsewhere in these materials by specifying <code>nextflow/rnaseq-nf</code> in place of <code>my-image</code> in the following examples.</p>
@@ -1704,7 +1712,7 @@
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-18-1" id="__codelineno-18-1" name="__codelineno-18-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>my-image<span class="w"> </span>bash
 </code></pre></div>
 <p>Use the <code>exit</code> command to terminate the interactive session.</p>
-<h3 id="file-system-mounts"><span class="enumerate-headings-plugin enumerate-heading-plugin">5.1.7</span> File system mounts<a class="headerlink" href="#file-system-mounts" title="Permanent link">¶</a></h3>
+<h3 id="file-system-mounts"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.1.7</span> File system mounts<a class="headerlink" href="#file-system-mounts" title="Permanent link">¶</a></h3>
 <p>Containers run in a completely separate file system and it cannot access the hosting file system by default.</p>
 <p>For example, running the following command that is attempting to generate a genome index using the Salmon tool will fail because Salmon cannot access the input file:</p>
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-19-1" id="__codelineno-19-1" name="__codelineno-19-1"></a>docker<span class="w"> </span>run<span class="w"> </span>my-image<span class="w"> </span><span class="se">\</span>
@@ -1739,7 +1747,7 @@
 <p class="admonition-title">Note</p>
 <p>Note that the permissions for files created by the Docker execution is <code>root</code>.</p>
 </div>
-<h3 id="upload-the-container-in-the-docker-hub-optional"><span class="enumerate-headings-plugin enumerate-heading-plugin">5.1.8</span> Upload the container in the Docker Hub (optional)<a class="headerlink" href="#upload-the-container-in-the-docker-hub-optional" title="Permanent link">¶</a></h3>
+<h3 id="upload-the-container-in-the-docker-hub-optional"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.1.8</span> Upload the container in the Docker Hub (optional)<a class="headerlink" href="#upload-the-container-in-the-docker-hub-optional" title="Permanent link">¶</a></h3>
 <p>You can also publish your container in the Docker Hub to share it with other people.</p>
 <p>Create an account on the <a href="https://hub.docker.com">https://hub.docker.com</a> website. Then from your shell terminal run the following command, entering the user name and password you specified when registering in the Hub:</p>
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-24-1" id="__codelineno-24-1" name="__codelineno-24-1"></a>docker<span class="w"> </span>login
@@ -1760,7 +1768,7 @@
 <p>This is a unique and immutable identifier that can be used to reference a container image in a univocally manner. For example:</p>
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-29-1" id="__codelineno-29-1" name="__codelineno-29-1"></a>docker<span class="w"> </span>pull<span class="w"> </span>nextflow/rnaseq-nf@sha256:aeacbd7ea1154f263cda972a96920fb228b2033544c2641476350b9317dab266
 </code></pre></div>
-<h3 id="run-a-nextflow-script-using-a-docker-container"><span class="enumerate-headings-plugin enumerate-heading-plugin">5.1.9</span> Run a Nextflow script using a Docker container<a class="headerlink" href="#run-a-nextflow-script-using-a-docker-container" title="Permanent link">¶</a></h3>
+<h3 id="run-a-nextflow-script-using-a-docker-container"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.1.9</span> Run a Nextflow script using a Docker container<a class="headerlink" href="#run-a-nextflow-script-using-a-docker-container" title="Permanent link">¶</a></h3>
 <p>The simplest way to run a Nextflow script with a Docker image is using the <code>-with-docker</code> command-line option:</p>
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-30-1" id="__codelineno-30-1" name="__codelineno-30-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>script2.nf<span class="w"> </span>-with-docker<span class="w"> </span>my-image
 </code></pre></div>
@@ -1776,11 +1784,11 @@
 <li>How to use your own container when running a nextflow script</li>
 </ol>
 </div>
-<h2 id="singularity"><span class="enumerate-headings-plugin enumerate-heading-plugin">5.2</span> Singularity<a class="headerlink" href="#singularity" title="Permanent link">¶</a></h2>
+<h2 id="singularity"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.2</span> Singularity<a class="headerlink" href="#singularity" title="Permanent link">¶</a></h2>
 <p><a href="http://singularity.lbl.gov">Singularity</a> is a container runtime designed to work in high-performance computing data centers, where the usage of Docker is generally not allowed due to security constraints.</p>
 <p>Singularity implements a container execution model similar to Docker. However, it uses a completely different implementation design.</p>
 <p>A Singularity container image is archived as a plain file that can be stored in a shared file system and accessed by many computing nodes managed using a batch scheduler.</p>
-<h3 id="create-a-singularity-images"><span class="enumerate-headings-plugin enumerate-heading-plugin">5.2.1</span> Create a Singularity images<a class="headerlink" href="#create-a-singularity-images" title="Permanent link">¶</a></h3>
+<h3 id="create-a-singularity-images"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.2.1</span> Create a Singularity images<a class="headerlink" href="#create-a-singularity-images" title="Permanent link">¶</a></h3>
 <p>Singularity images are created using a <code>Singularity</code> file in a similar manner to Docker but using a different syntax.</p>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">Singularity</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-31-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-31-2"> 2</a></span>
@@ -1819,7 +1827,7 @@
 <p class="admonition-title">Warning</p>
 <p>The <code>build</code> command requires <code>sudo</code> permissions. A common workaround consists of building the image on a local workstation and then deploying it in the cluster by copying the image file.</p>
 </div>
-<h3 id="running-a-container"><span class="enumerate-headings-plugin enumerate-heading-plugin">5.2.2</span> Running a container<a class="headerlink" href="#running-a-container" title="Permanent link">¶</a></h3>
+<h3 id="running-a-container"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.2.2</span> Running a container<a class="headerlink" href="#running-a-container" title="Permanent link">¶</a></h3>
 <p>You can run your container using the <code>exec</code> command:</p>
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-33-1" id="__codelineno-33-1" name="__codelineno-33-1"></a>singularity<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>my-image.sif<span class="w"> </span>cowsay<span class="w"> </span><span class="s1">'Hello Singularity'</span>
 </code></pre></div>
@@ -1834,18 +1842,18 @@
 <p class="admonition-title">Info</p>
 <p>Note how the files on the host environment are shown. Singularity automatically mounts the host <code>$HOME</code> directory and uses the current work directory.</p>
 </div>
-<h3 id="import-a-docker-image"><span class="enumerate-headings-plugin enumerate-heading-plugin">5.2.3</span> Import a Docker image<a class="headerlink" href="#import-a-docker-image" title="Permanent link">¶</a></h3>
+<h3 id="import-a-docker-image"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.2.3</span> Import a Docker image<a class="headerlink" href="#import-a-docker-image" title="Permanent link">¶</a></h3>
 <p>An easier way to create a Singularity container without requiring <code>sudo</code> permission and boosting the containers interoperability is to import a Docker container image by pulling it directly from a Docker registry. For example:</p>
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-36-1" id="__codelineno-36-1" name="__codelineno-36-1"></a>singularity<span class="w"> </span>pull<span class="w"> </span>docker://debian:bullseye-slim
 </code></pre></div>
 <p>The above command automatically downloads the Debian Docker image and converts it to a Singularity image in the current directory with the name <code>debian-jessie.simg</code>.</p>
-<h3 id="run-a-nextflow-script-using-a-singularity-container"><span class="enumerate-headings-plugin enumerate-heading-plugin">5.2.4</span> Run a Nextflow script using a Singularity container<a class="headerlink" href="#run-a-nextflow-script-using-a-singularity-container" title="Permanent link">¶</a></h3>
+<h3 id="run-a-nextflow-script-using-a-singularity-container"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.2.4</span> Run a Nextflow script using a Singularity container<a class="headerlink" href="#run-a-nextflow-script-using-a-singularity-container" title="Permanent link">¶</a></h3>
 <p>As with Docker, Nextflow allows the transparent usage of Singularity containers.</p>
 <p>Simply enable the use of the Singularity engine in place of Docker in the Nextflow command line by using the <code>-with-singularity</code> command-line option:</p>
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-37-1" id="__codelineno-37-1" name="__codelineno-37-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>script7.nf<span class="w"> </span>-with-singularity<span class="w">  </span>nextflow/rnaseq-nf
 </code></pre></div>
 <p>As before, the Singularity container can also be provided in the Nextflow config file. We’ll see how to do this later.</p>
-<h3 id="the-singularity-container-library"><span class="enumerate-headings-plugin enumerate-heading-plugin">5.2.5</span> The Singularity Container Library<a class="headerlink" href="#the-singularity-container-library" title="Permanent link">¶</a></h3>
+<h3 id="the-singularity-container-library"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.2.5</span> The Singularity Container Library<a class="headerlink" href="#the-singularity-container-library" title="Permanent link">¶</a></h3>
 <p>The authors of Singularity, <a href="https://www.sylabs.io/">SyLabs</a> have their <a href="https://cloud.sylabs.io">own repository</a> of Singularity containers.</p>
 <p>In the same way that you can push Docker images to Docker Hub, you can upload Singularity images to the Singularity Library.</p>
 <div class="admonition cboard-list-2">
@@ -1857,10 +1865,10 @@
 <li>How to access the the Singularity container library</li>
 </ol>
 </div>
-<h2 id="conda-packages"><span class="enumerate-headings-plugin enumerate-heading-plugin">5.3</span> Conda packages<a class="headerlink" href="#conda-packages" title="Permanent link">¶</a></h2>
+<h2 id="conda-packages"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.3</span> Conda packages<a class="headerlink" href="#conda-packages" title="Permanent link">¶</a></h2>
 <p>Conda is a popular package and environment manager. The built-in support for Conda allows Nextflow workflows to automatically create and activate the Conda environment(s), given the dependencies specified by each process.</p>
 <p>In this GitHub Codespaces environment, conda is already installed.</p>
-<h3 id="using-conda"><span class="enumerate-headings-plugin enumerate-heading-plugin">5.3.1</span> Using conda<a class="headerlink" href="#using-conda" title="Permanent link">¶</a></h3>
+<h3 id="using-conda"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.3.1</span> Using conda<a class="headerlink" href="#using-conda" title="Permanent link">¶</a></h3>
 <p>A Conda environment is defined using a YAML file, which lists the required software packages.</p>
 <p>To use conda, you need to initiate conda and open a new terminal by running bash:</p>
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-38-1" id="__codelineno-38-1" name="__codelineno-38-1"></a>conda<span class="w"> </span>init
@@ -1912,7 +1920,7 @@
 </div>
 <p>This makes easier to manage different environments for the processes in the workflow script.</p>
 <p>See the <a href="https://www.nextflow.io/docs/latest/conda.html">docs</a> for further details.</p>
-<h3 id="create-and-use-conda-like-environments-using-micromamba"><span class="enumerate-headings-plugin enumerate-heading-plugin">5.3.2</span> Create and use conda-like environments using micromamba<a class="headerlink" href="#create-and-use-conda-like-environments-using-micromamba" title="Permanent link">¶</a></h3>
+<h3 id="create-and-use-conda-like-environments-using-micromamba"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.3.2</span> Create and use conda-like environments using micromamba<a class="headerlink" href="#create-and-use-conda-like-environments-using-micromamba" title="Permanent link">¶</a></h3>
 <p>Another way to build conda-like environments is through a <code>Dockerfile</code> and <a href="https://mamba.readthedocs.io/en/latest/user_guide/micromamba.html"><code>micromamba</code></a>.</p>
 <p><code>micromamba</code> is a fast and robust package for building small conda-based environments.</p>
 <p>This saves having to build a conda environment each time you want to use it (as outlined in previous sections).</p>
@@ -2012,7 +2020,7 @@
 <li>How to use use conda-like environments using micromamba</li>
 </ol>
 </div>
-<h2 id="biocontainers"><span class="enumerate-headings-plugin enumerate-heading-plugin">5.4</span> BioContainers<a class="headerlink" href="#biocontainers" title="Permanent link">¶</a></h2>
+<h2 id="biocontainers"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.4</span> BioContainers<a class="headerlink" href="#biocontainers" title="Permanent link">¶</a></h2>
 <p>Another useful resource linking together Bioconda and containers is the <a href="https://biocontainers.pro">BioContainers</a> project. BioContainers is a community initiative that provides a registry of container images for every Bioconda recipe.</p>
 <p>With BioContainers, you don’t need to create your own container image for the tools you want, and you don’t need to use conda or micromamba to install the packages. Instead, BioContainers provides you with a Docker image containing the program you need. For example, you can pull the container image of fastqc using BioContainers with:</p>
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-52-1" id="__codelineno-52-1" name="__codelineno-52-1"></a>docker<span class="w"> </span>pull<span class="w"> </span>biocontainers/fastqc:v0.11.5
@@ -2046,10 +2054,10 @@
 <li>How to use Biocontainers in your Nextflow workflow</li>
 </ol>
 </div>
-<h2 id="software-directives"><span class="enumerate-headings-plugin enumerate-heading-plugin">5.5</span> Software directives<a class="headerlink" href="#software-directives" title="Permanent link">¶</a></h2>
+<h2 id="software-directives"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.5</span> Software directives<a class="headerlink" href="#software-directives" title="Permanent link">¶</a></h2>
 <p>Directives are optional settings that affect the execution of the current process.</p>
 <p>They must be entered at the top of the process body, before any other declaration blocks</p>
-<h3 id="container-directives"><span class="enumerate-headings-plugin enumerate-heading-plugin">5.5.1</span> Container directives<a class="headerlink" href="#container-directives" title="Permanent link">¶</a></h3>
+<h3 id="container-directives"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.5.1</span> Container directives<a class="headerlink" href="#container-directives" title="Permanent link">¶</a></h3>
 <p>The <code>container</code> directive allows you to execute the process script in a Docker container.</p>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">example.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-55-1">1</a></span>
 <span class="normal"><a href="#__codelineno-55-2">2</a></span>
@@ -2059,7 +2067,7 @@
 <a id="__codelineno-55-3" name="__codelineno-55-3"></a><span class="w">    </span><span class="n">tag</span><span class="w"> </span><span class="s2">"FASTQC on $sample_id"</span>
 <a id="__codelineno-55-4" name="__codelineno-55-4"></a><span class="w">    </span><span class="o">...</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="conda-directives"><span class="enumerate-headings-plugin enumerate-heading-plugin">5.5.2</span> Conda directives<a class="headerlink" href="#conda-directives" title="Permanent link">¶</a></h3>
+<h3 id="conda-directives"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.5.2</span> Conda directives<a class="headerlink" href="#conda-directives" title="Permanent link">¶</a></h3>
 <p>Similarly, the <code>conda</code> directive allows for the definition of the process dependencies using the Conda package manager.</p>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">example.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-56-1">1</a></span>
 <span class="normal"><a href="#__codelineno-56-2">2</a></span>
@@ -2186,7 +2194,7 @@
 <div class="md-consent__overlay"></div>
 <aside class="md-consent__inner">
 <form class="md-consent__form md-grid md-typeset" name="consent">
-<h4><span class="enumerate-headings-plugin enumerate-heading-plugin">5.5.2.1</span> Cookie consent</h4>
+<h4><span class="enumerate-headings-plugin enumerate-heading-plugin">4.5.2.1</span> Cookie consent</h4>
 <p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our training materials better.</p>
 <input class="md-toggle" id="__settings" type="checkbox"/>
 <div class="md-consent__settings">

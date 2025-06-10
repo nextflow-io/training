@@ -1124,6 +1124,14 @@
 </ul>
 </nav>
 </li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../help/">
+<span class="md-ellipsis">
+    Help
+    
+  </span>
+</a>
+</li>
 </ul>
 </nav>
 </div>
@@ -1358,10 +1366,10 @@ The translated material may be incomplete or incorrect.
 We plan to update the translations later this year.
 In the meantime, please try to work through the English-language material if you can.</p>
 </div>
-<h1 id="estruturas-basicas-e-expressoes-do-groovy"><span class="enumerate-headings-plugin enumerate-heading-plugin">10.</span> Estruturas básicas e expressões do Groovy<a class="headerlink" href="#estruturas-basicas-e-expressoes-do-groovy" title="Permanent link">¶</a></h1>
+<h1 id="estruturas-basicas-e-expressoes-do-groovy"><span class="enumerate-headings-plugin enumerate-heading-plugin">9.</span> Estruturas básicas e expressões do Groovy<a class="headerlink" href="#estruturas-basicas-e-expressoes-do-groovy" title="Permanent link">¶</a></h1>
 <p>Nextflow é uma linguagem específica de domínio (DSL) implementada sobre a linguagem de programação Groovy, que por sua vez é um superconjunto da linguagem de programação Java. Isso significa que o Nextflow pode executar qualquer código Groovy ou Java.</p>
 <p>Aqui estão algumas sintaxes Groovy importantes que são comumente usadas no Nextflow.</p>
-<h2 id="imprimindo-valores"><span class="enumerate-headings-plugin enumerate-heading-plugin">10.1</span> Imprimindo valores<a class="headerlink" href="#imprimindo-valores" title="Permanent link">¶</a></h2>
+<h2 id="imprimindo-valores"><span class="enumerate-headings-plugin enumerate-heading-plugin">9.1</span> Imprimindo valores<a class="headerlink" href="#imprimindo-valores" title="Permanent link">¶</a></h2>
 <p>Imprimir algo é tão fácil quanto usar um dos métodos <code>print</code> ou <code>println</code>.</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="n">println</span><span class="o">(</span><span class="s2">"Olá, mundo!"</span><span class="o">)</span>
 </code></pre></div></td></tr></table></div>
@@ -1372,7 +1380,7 @@ In the meantime, please try to work through the English-language material if you
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="n">println</span><span class="w"> </span><span class="s2">"Olá, mundo!"</span>
 </code></pre></div></td></tr></table></div>
 </div>
-<h2 id="comentarios"><span class="enumerate-headings-plugin enumerate-heading-plugin">10.2</span> Comentários<a class="headerlink" href="#comentarios" title="Permanent link">¶</a></h2>
+<h2 id="comentarios"><span class="enumerate-headings-plugin enumerate-heading-plugin">9.2</span> Comentários<a class="headerlink" href="#comentarios" title="Permanent link">¶</a></h2>
 <p>Os comentários usam a mesma sintaxe das linguagens de programação da família C:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span>
 <span class="normal"><a href="#__codelineno-2-2">2</a></span>
@@ -1386,7 +1394,7 @@ In the meantime, please try to work through the English-language material if you
 <a id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="cm">    várias linhas</span>
 <a id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="cm">*/</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="variaveis"><span class="enumerate-headings-plugin enumerate-heading-plugin">10.3</span> Variáveis<a class="headerlink" href="#variaveis" title="Permanent link">¶</a></h2>
+<h2 id="variaveis"><span class="enumerate-headings-plugin enumerate-heading-plugin">9.3</span> Variáveis<a class="headerlink" href="#variaveis" title="Permanent link">¶</a></h2>
 <p>Para definir uma variável, basta atribuir um valor a ela:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-3-2"> 2</a></span>
@@ -1420,7 +1428,7 @@ In the meantime, please try to work through the English-language material if you
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="kt">def</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'foo'</span>
 </code></pre></div></td></tr></table></div>
 <p>O <code>def</code> deve ser sempre usado ao definir variáveis locais para uma função ou clausura.</p>
-<h2 id="listas"><span class="enumerate-headings-plugin enumerate-heading-plugin">10.4</span> Listas<a class="headerlink" href="#listas" title="Permanent link">¶</a></h2>
+<h2 id="listas"><span class="enumerate-headings-plugin enumerate-heading-plugin">9.4</span> Listas<a class="headerlink" href="#listas" title="Permanent link">¶</a></h2>
 <p>Um objeto List pode ser definido colocando os itens da lista entre colchetes:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="n">lista</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="mi">10</span><span class="o">,</span><span class="w"> </span><span class="mi">20</span><span class="o">,</span><span class="w"> </span><span class="mi">30</span><span class="o">,</span><span class="w"> </span><span class="mi">40</span><span class="o">]</span>
 </code></pre></div></td></tr></table></div>
@@ -1481,7 +1489,7 @@ In the meantime, please try to work through the English-language material if you
 <a id="__codelineno-10-14" name="__codelineno-10-14"></a><span class="k">assert</span><span class="w"> </span><span class="o">[</span><span class="mi">4</span><span class="o">,</span><span class="w"> </span><span class="mi">2</span><span class="o">,</span><span class="w"> </span><span class="mi">1</span><span class="o">,</span><span class="w"> </span><span class="mi">3</span><span class="o">].</span><span class="na">find</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">4</span>
 <a id="__codelineno-10-15" name="__codelineno-10-15"></a><span class="k">assert</span><span class="w"> </span><span class="o">[</span><span class="mi">4</span><span class="o">,</span><span class="w"> </span><span class="mi">2</span><span class="o">,</span><span class="w"> </span><span class="mi">1</span><span class="o">,</span><span class="w"> </span><span class="mi">3</span><span class="o">].</span><span class="na">findAll</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="o">[</span><span class="mi">4</span><span class="o">,</span><span class="w"> </span><span class="mi">2</span><span class="o">]</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="mapas"><span class="enumerate-headings-plugin enumerate-heading-plugin">10.5</span> Mapas<a class="headerlink" href="#mapas" title="Permanent link">¶</a></h2>
+<h2 id="mapas"><span class="enumerate-headings-plugin enumerate-heading-plugin">9.5</span> Mapas<a class="headerlink" href="#mapas" title="Permanent link">¶</a></h2>
 <p>Os mapas são como listas que possuem uma chave arbitrária em vez de um número inteiro. Portanto, a sintaxe é bem parecida.</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="n">mapa</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="nl">a:</span><span class="w"> </span><span class="mi">0</span><span class="o">,</span><span class="w"> </span><span class="nl">b:</span><span class="w"> </span><span class="mi">1</span><span class="o">,</span><span class="w"> </span><span class="nl">c:</span><span class="w"> </span><span class="mi">2</span><span class="o">]</span>
 </code></pre></div></td></tr></table></div>
@@ -1515,7 +1523,7 @@ In the meantime, please try to work through the English-language material if you
 <li>Usando o método put.</li>
 </ol>
 <p>Objetos Map implementam todos os métodos fornecidos pela interface <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Map.html">java.util.Map</a>, mais os métodos de extensão fornecidos pelo <a href="http://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/Map.html">Groovy</a>.</p>
-<h2 id="interpolacao-de-strings"><span class="enumerate-headings-plugin enumerate-heading-plugin">10.6</span> Interpolação de Strings<a class="headerlink" href="#interpolacao-de-strings" title="Permanent link">¶</a></h2>
+<h2 id="interpolacao-de-strings"><span class="enumerate-headings-plugin enumerate-heading-plugin">9.6</span> Interpolação de Strings<a class="headerlink" href="#interpolacao-de-strings" title="Permanent link">¶</a></h2>
 <p>Strings podem ser definidas colocando-as entre aspas <em>simples</em> ('') ou <em>duplas</em> ("").</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1">1</a></span>
 <span class="normal"><a href="#__codelineno-14-2">2</a></span>
@@ -1552,7 +1560,7 @@ A variável <code>$x</code> <em>não</em> foi expandida, pois estava entre aspas
 <div class="highlight"><span class="filename">Output</span><pre><span></span><code><a href="#__codelineno-17-1" id="__codelineno-17-1" name="__codelineno-17-1"></a><span class="go">tic\tac\toe</span>
 <a href="#__codelineno-17-2" id="__codelineno-17-2" name="__codelineno-17-2"></a><span class="go">tic    ac    oe</span>
 </code></pre></div>
-<h2 id="strings-de-varias-linhas"><span class="enumerate-headings-plugin enumerate-heading-plugin">10.7</span> Strings de várias linhas<a class="headerlink" href="#strings-de-varias-linhas" title="Permanent link">¶</a></h2>
+<h2 id="strings-de-varias-linhas"><span class="enumerate-headings-plugin enumerate-heading-plugin">9.7</span> Strings de várias linhas<a class="headerlink" href="#strings-de-varias-linhas" title="Permanent link">¶</a></h2>
 <p>Um bloco de texto que abrange várias linhas pode ser definido delimitando-o com aspas simples ou duplas triplas:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-1">1</a></span>
 <span class="normal"><a href="#__codelineno-18-2">2</a></span>
@@ -1581,7 +1589,7 @@ A variável <code>$x</code> <em>não</em> foi expandida, pois estava entre aspas
 <p class="admonition-title">Info</p>
 <p>Como antes, strings de várias linhas dentro de aspas duplas e caracteres de barra suportam interpolação de variável, enquanto strings de várias linhas com aspas simples não.</p>
 </div>
-<h2 id="declaracoes-condicionais-com-if"><span class="enumerate-headings-plugin enumerate-heading-plugin">10.8</span> Declarações condicionais com if<a class="headerlink" href="#declaracoes-condicionais-com-if" title="Permanent link">¶</a></h2>
+<h2 id="declaracoes-condicionais-com-if"><span class="enumerate-headings-plugin enumerate-heading-plugin">9.8</span> Declarações condicionais com if<a class="headerlink" href="#declaracoes-condicionais-com-if" title="Permanent link">¶</a></h2>
 <p>A instrução <code>if</code> usa a mesma sintaxe comum em outras linguagens de programação, como Java, C, JavaScript, etc.</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-1">1</a></span>
 <span class="normal"><a href="#__codelineno-20-2">2</a></span>
@@ -1644,7 +1652,7 @@ A variável <code>$x</code> <em>não</em> foi expandida, pois estava entre aspas
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-26-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1"></a><span class="n">println</span><span class="w"> </span><span class="n">lista</span><span class="w"> </span><span class="o">?:</span><span class="w"> </span><span class="s1">'A lista está vazia'</span>
 </code></pre></div></td></tr></table></div>
 </div>
-<h2 id="declaracoes-de-loop-com-for"><span class="enumerate-headings-plugin enumerate-heading-plugin">10.9</span> Declarações de loop com for<a class="headerlink" href="#declaracoes-de-loop-com-for" title="Permanent link">¶</a></h2>
+<h2 id="declaracoes-de-loop-com-for"><span class="enumerate-headings-plugin enumerate-heading-plugin">9.9</span> Declarações de loop com for<a class="headerlink" href="#declaracoes-de-loop-com-for" title="Permanent link">¶</a></h2>
 <p>A sintaxe clássica do loop <code>for</code> é suportada como mostrado aqui:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-27-1">1</a></span>
 <span class="normal"><a href="#__codelineno-27-2">2</a></span>
@@ -1663,7 +1671,7 @@ A variável <code>$x</code> <em>não</em> foi expandida, pois estava entre aspas
 <a id="__codelineno-28-4" name="__codelineno-28-4"></a><span class="w">    </span><span class="n">println</span><span class="w"> </span><span class="n">elem</span>
 <a id="__codelineno-28-5" name="__codelineno-28-5"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="funcoes"><span class="enumerate-headings-plugin enumerate-heading-plugin">10.10</span> Funções<a class="headerlink" href="#funcoes" title="Permanent link">¶</a></h2>
+<h2 id="funcoes"><span class="enumerate-headings-plugin enumerate-heading-plugin">9.10</span> Funções<a class="headerlink" href="#funcoes" title="Permanent link">¶</a></h2>
 <p>É possível definir uma função personalizada em um script, conforme mostrado aqui:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-29-1">1</a></span>
 <span class="normal"><a href="#__codelineno-29-2">2</a></span>
@@ -1686,7 +1694,7 @@ A variável <code>$x</code> <em>não</em> foi expandida, pois estava entre aspas
 <a id="__codelineno-30-4" name="__codelineno-30-4"></a>
 <a id="__codelineno-30-5" name="__codelineno-30-5"></a><span class="k">assert</span><span class="w"> </span><span class="nf">fact</span><span class="o">(</span><span class="mi">5</span><span class="o">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">120</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="clausuras"><span class="enumerate-headings-plugin enumerate-heading-plugin">10.11</span> Clausuras<a class="headerlink" href="#clausuras" title="Permanent link">¶</a></h2>
+<h2 id="clausuras"><span class="enumerate-headings-plugin enumerate-heading-plugin">9.11</span> Clausuras<a class="headerlink" href="#clausuras" title="Permanent link">¶</a></h2>
 <p>Clausuras são o canivete suíço da programação com Nextflow/Groovy. Resumindo, uma clausura é um bloco de código que pode ser passado como um argumento para uma função. Clausuras também podem ser usadas para definir uma função anônima.</p>
 <p>Mais formalmente, uma clausura permite a definição de funções como objetos de primeira classe.</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-31-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1"></a><span class="n">quadrado</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">}</span>
@@ -1737,7 +1745,7 @@ A variável <code>$x</code> <em>não</em> foi expandida, pois estava entre aspas
 <li>Chama o método <code>each</code> passando o objeto de clausura que modifica a variável <code>resultado</code>.</li>
 </ol>
 <p>Saiba mais sobre clausuras na <a href="http://groovy-lang.org/closures.html">documentação do Groovy</a>.</p>
-<h2 id="mais-recursos"><span class="enumerate-headings-plugin enumerate-heading-plugin">10.12</span> Mais recursos<a class="headerlink" href="#mais-recursos" title="Permanent link">¶</a></h2>
+<h2 id="mais-recursos"><span class="enumerate-headings-plugin enumerate-heading-plugin">9.12</span> Mais recursos<a class="headerlink" href="#mais-recursos" title="Permanent link">¶</a></h2>
 <p>A documentação completa da linguagem Groovy está disponível <a href="http://groovy-lang.org/documentation.html#languagespecification">nesse link</a>.</p>
 <p>Um ótimo recurso para dominar a sintaxe do Apache Groovy é o livro: <a href="https://www.manning.com/books/groovy-in-action-second-edition">Groovy in Action</a>.</p>
 </article>
@@ -1814,7 +1822,7 @@ A variável <code>$x</code> <em>não</em> foi expandida, pois estava entre aspas
 <div class="md-consent__overlay"></div>
 <aside class="md-consent__inner">
 <form class="md-consent__form md-grid md-typeset" name="consent">
-<h4><span class="enumerate-headings-plugin enumerate-heading-plugin">10.12.0.1</span> Cookie consent</h4>
+<h4><span class="enumerate-headings-plugin enumerate-heading-plugin">9.12.0.1</span> Cookie consent</h4>
 <p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our training materials better.</p>
 <input class="md-toggle" id="__settings" type="checkbox"/>
 <div class="md-consent__settings">

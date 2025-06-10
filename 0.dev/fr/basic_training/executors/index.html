@@ -1145,6 +1145,14 @@
 </ul>
 </nav>
 </li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../help/">
+<span class="md-ellipsis">
+    Help
+    
+  </span>
+</a>
+</li>
 </ul>
 </nav>
 </div>
@@ -1400,16 +1408,16 @@ The translated material may be incomplete or incorrect.
 We plan to update the translations later this year.
 In the meantime, please try to work through the English-language material if you can.</p>
 </div>
-<h1 id="scenarios-de-deploiement"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.</span> Scénarios de déploiement<a class="headerlink" href="#scenarios-de-deploiement" title="Permanent link">¶</a></h1>
+<h1 id="scenarios-de-deploiement"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.</span> Scénarios de déploiement<a class="headerlink" href="#scenarios-de-deploiement" title="Permanent link">¶</a></h1>
 <p>Les applications génomiques du monde réel peuvent engendrer l'exécution de milliers de tâches. Dans ce scénario, un planificateur de lots est généralement utilisé pour déployer un workflow dans un cluster informatique, permettant l'exécution de nombreuses tâches en parallèle sur de nombreux nœuds informatiques.</p>
 <p>Nextflow a un support intégré pour les plannificateurs batch les plus couramment utilisés, tels que Univa Grid Engine, <a href="https://slurm.schedmd.com/">SLURM</a> et IBM LSF. Consultez la documentation de Nextflow pour obtenir la liste complète des prises en charge <a href="https://www.nextflow.io/docs/latest/executor.html">plates-formes d'exécution</a>.</p>
-<h2 id="deploiement-du-cluster"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.1</span> Déploiement du cluster<a class="headerlink" href="#deploiement-du-cluster" title="Permanent link">¶</a></h2>
+<h2 id="deploiement-du-cluster"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.1</span> Déploiement du cluster<a class="headerlink" href="#deploiement-du-cluster" title="Permanent link">¶</a></h2>
 <p>L'une des principales caractéristiques de Nextflow est la capacité de découpler la mise en œuvre du workflow de la plate-forme d'exécution proprement dite. La mise en œuvre d'une couche d'abstraction permet de déployer le workflow résultant sur n'importe quelle plate-forme d'exécution prise en charge par le cadre.</p>
 <p><img alt="Executeurs Nextflow" src="../../../basic_training/img/nf-executors.png"/></p>
 <p>Pour exécuter votre workflow avec un planificateur batch, modifiez le fichier <code>nextflow.config</code> en spécifiant l'exécuteur cible et les ressources informatiques requises si nécessaire. Par exemple, le fichier <code>nextflow.config</code> peut être modifié :</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="n">process</span><span class="o">.</span><span class="na">executor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'slurm'</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="gestion-des-ressources-du-cluster"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.2</span> Gestion des ressources du cluster<a class="headerlink" href="#gestion-des-ressources-du-cluster" title="Permanent link">¶</a></h2>
+<h2 id="gestion-des-ressources-du-cluster"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.2</span> Gestion des ressources du cluster<a class="headerlink" href="#gestion-des-ressources-du-cluster" title="Permanent link">¶</a></h2>
 <p>Lors de l'utilisation d'un planificateur batch, il est souvent nécessaire de spécifier le nombre de ressources (cpus, mémoire, temps d'exécution, etc.) requises par chaque tâche.</p>
 <p>Pour ce faire, il convient d'utiliser les directives de processus suivantes :</p>
 <table>
@@ -1442,7 +1450,7 @@ In the meantime, please try to work through the English-language material if you
 </tr>
 </tbody>
 </table>
-<h3 id="ressources-a-lechelle-du-workflow"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.2.1</span> Ressources à l'échelle du workflow<a class="headerlink" href="#ressources-a-lechelle-du-workflow" title="Permanent link">¶</a></h3>
+<h3 id="ressources-a-lechelle-du-workflow"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.2.1</span> Ressources à l'échelle du workflow<a class="headerlink" href="#ressources-a-lechelle-du-workflow" title="Permanent link">¶</a></h3>
 <p>Utilisez le champ d'application <code>process</code> pour définir les besoins en ressources de tous les processus de vos applications de workflow. Par exemple :</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span>
 <span class="normal"><a href="#__codelineno-1-2">2</a></span>
@@ -1458,7 +1466,7 @@ In the meantime, please try to work through the English-language material if you
 <a id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="w">    </span><span class="n">cpus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span>
 <a id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="soumettre-nextflow-en-tant-que-tache"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.2.2</span> Soumettre Nextflow en tant que tache<a class="headerlink" href="#soumettre-nextflow-en-tant-que-tache" title="Permanent link">¶</a></h3>
+<h3 id="soumettre-nextflow-en-tant-que-tache"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.2.2</span> Soumettre Nextflow en tant que tache<a class="headerlink" href="#soumettre-nextflow-en-tant-que-tache" title="Permanent link">¶</a></h3>
 <p>Bien que la commande principale de Nextflow puisse être lancée sur le nœud de connexion / tête d'un cluster, il faut savoir que le nœud doit être configuré pour des commandes qui s'exécutent pendant une longue période, même si les ressources informatiques utilisées sont négligeables. Une autre option est de soumettre le processus Nextflow principal en tant que tache sur le cluster.</p>
 <div class="admonition remarque">
 <p class="admonition-title">Remarque</p>
@@ -1502,7 +1510,7 @@ Vous trouverez d'autres conseils pour l'exécution de Nextflow sur HPC dans les 
 <li><a href="https://www.nextflow.io/blog/2021/5_tips_for_hpc_users.html">5 astuces Nextflow pour les utilisateurs HPC</a></li>
 <li><a href="https://www.nextflow.io/blog/2021/5-more-tips-for-nextflow-user-on-hpc.html">Cinq astuces supplémentaires pour les utilisateurs de Nextflow sur le HPC</a></li>
 </ul>
-<h3 id="configurer-le-processus-par-nom"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.2.3</span> Configurer le processus par nom<a class="headerlink" href="#configurer-le-processus-par-nom" title="Permanent link">¶</a></h3>
+<h3 id="configurer-le-processus-par-nom"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.2.3</span> Configurer le processus par nom<a class="headerlink" href="#configurer-le-processus-par-nom" title="Permanent link">¶</a></h3>
 <p>Dans les applications réelles, des tâches différentes nécessitent des ressources informatiques différentes. Il est possible de définir les ressources pour une tâche spécifique en utilisant la commande <code>withName:</code> suivie du nom du processus :</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-4-2"> 2</a></span>
@@ -1556,7 +1564,7 @@ Vous trouverez d'autres conseils pour l'exécution de Nextflow sur HPC dans les 
 </code></pre></div>
 </details>
 </div>
-<h3 id="configurer-le-processus-par-etiquettes"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.2.4</span> Configurer le processus par étiquettes<a class="headerlink" href="#configurer-le-processus-par-etiquettes" title="Permanent link">¶</a></h3>
+<h3 id="configurer-le-processus-par-etiquettes"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.2.4</span> Configurer le processus par étiquettes<a class="headerlink" href="#configurer-le-processus-par-etiquettes" title="Permanent link">¶</a></h3>
 <p>Lorsqu'une application de workflow est composée de nombreux processus, il peut être difficile de dresser la liste de tous les noms de processus et de choisir des ressources pour chacun d'entre eux dans le fichier de configuration.</p>
 <p>Une meilleure stratégie consiste à annoter les processus avec une directive <a href="https://www.nextflow.io/docs/latest/process.html#label">label</a>. Spécifiez ensuite les ressources dans le fichier de configuration utilisé pour tous les processus ayant le même label.</p>
 <p>Le script du workflow :</p>
@@ -1625,7 +1633,7 @@ Vous trouverez d'autres conseils pour l'exécution de Nextflow sur HPC dans les 
 <a id="__codelineno-7-14" name="__codelineno-7-14"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-7-15" name="__codelineno-7-15"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="configurer-plusieurs-containers"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.2.5</span> Configurer plusieurs containers<a class="headerlink" href="#configurer-plusieurs-containers" title="Permanent link">¶</a></h3>
+<h3 id="configurer-plusieurs-containers"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.2.5</span> Configurer plusieurs containers<a class="headerlink" href="#configurer-plusieurs-containers" title="Permanent link">¶</a></h3>
 <p>Les containers peuvent être définis pour chaque processus de votre flux de travail. Vous pouvez définir leurs conteneurs dans un fichier de configuration, comme indiqué ci-dessous :</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-8-2"> 2</a></span>
@@ -1652,7 +1660,7 @@ Vous trouverez d'autres conseils pour l'exécution de Nextflow sur HPC dans les 
 <p>Dois-je utiliser un seul container <em>fat</em> ou plusieurs containers <em>slim</em> ? Les deux approches ont des avantages et des inconvénients. Un container unique est plus simple à construire et à maintenir, mais lorsque vous utilisez de nombreux outils, l'image peut devenir très volumineuse et les outils peuvent créer des conflits entre eux. L'utilisation d'un container pour chaque processus peut donner lieu à de nombreuses images différentes à construire et à maintenir, en particulier lorsque les processus de votre workflow utilisent des outils différents pour chaque tâche.</p>
 </div>
 <p>Pour en savoir plus sur les sélecteurs de processus de configuration, consultez <a href="https://www.nextflow.io/docs/latest/config.html#process-selectors">ce lien</a>.</p>
-<h2 id="configuration-des-profils"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.3</span> Configuration des profils<a class="headerlink" href="#configuration-des-profils" title="Permanent link">¶</a></h2>
+<h2 id="configuration-des-profils"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.3</span> Configuration des profils<a class="headerlink" href="#configuration-des-profils" title="Permanent link">¶</a></h2>
 <p>Les fichiers de configuration peuvent contenir la définition d'un ou plusieurs <em>profils</em>. Un profil est un ensemble d'attributs de configuration qui peuvent être activés/choisis lors du lancement de l'exécution d'un workflow en utilisant l'option de ligne de commande <code>-profile</code>.</p>
 <p>Les profils de configuration sont définis en utilisant la portée spéciale <code>profiles</code> qui regroupe les attributs appartenant au même profil en utilisant un préfixe commun. Par exemple :</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1"> 1</a></span>
@@ -1709,7 +1717,7 @@ Vous trouverez d'autres conseils pour l'exécution de Nextflow sur HPC dans les 
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-11-1" id="__codelineno-11-1" name="__codelineno-11-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>&lt;your<span class="w"> </span>script&gt;<span class="w"> </span>-profile<span class="w"> </span>standard,cloud
 </code></pre></div>
 </div>
-<h2 id="deploiement-dans-le-cloud"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.4</span> Déploiement dans le cloud<a class="headerlink" href="#deploiement-dans-le-cloud" title="Permanent link">¶</a></h2>
+<h2 id="deploiement-dans-le-cloud"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.4</span> Déploiement dans le cloud<a class="headerlink" href="#deploiement-dans-le-cloud" title="Permanent link">¶</a></h2>
 <p><a href="https://aws.amazon.com/batch/">AWS Batch</a> est un service informatique géré qui permet l'exécution de charges de travail containérisées dans l'infrastructure cloud d'Amazon.</p>
 <p>Nextflow fournit un support intégré pour AWS Batch qui permet le déploiement transparent d'un workflow Nextflow dans le cloud, en déchargeant les exécutions de processus en tant que tâches Batch.</p>
 <p>Une fois que l'environnement Batch est configuré, spécifiez les types d'instances à utiliser et le nombre maximum de CPU à allouer, vous devez créer un fichier de configuration Nextflow comme celui présenté ci-dessous :</p>
@@ -1743,7 +1751,7 @@ Vous trouverez d'autres conseils pour l'exécution de Nextflow sur HPC dans les 
 </code></pre></div>
 </div>
 <p>Les détails complets sur le déploiement par lots d'AWS sont disponibles sur <a href="https://www.nextflow.io/docs/latest/aws.html#aws-batch">ce lien</a>.</p>
-<h2 id="montages-des-volumes"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.5</span> Montages des volumes<a class="headerlink" href="#montages-des-volumes" title="Permanent link">¶</a></h2>
+<h2 id="montages-des-volumes"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.5</span> Montages des volumes<a class="headerlink" href="#montages-des-volumes" title="Permanent link">¶</a></h2>
 <p>Les volumes Elastic Block Storage (EBS) (ou tout autre type de stockage pris en charge) peuvent être montés dans le Container de tâches à l'aide de l'extrait de configuration suivant :</p>
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-14-1" id="__codelineno-14-1" name="__codelineno-14-1"></a><span class="n">aws</span><span class="w"> </span><span class="o">{</span>
 <a href="#__codelineno-14-2" id="__codelineno-14-2" name="__codelineno-14-2"></a><span class="w">    </span><span class="n">batch</span><span class="w"> </span><span class="o">{</span>
@@ -1767,7 +1775,7 @@ Vous trouverez d'autres conseils pour l'exécution de Nextflow sur HPC dans les 
 <p class="admonition-title">Avertissement</p>
 <p>Nextflow s'attend à ce que les chemins d'accès soient disponibles. Il ne gère pas la mise à disposition de volumes EBS ou d'un autre type de stockage.</p>
 </div>
-<h2 id="definition-des-taches-personnalisees"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.6</span> Définition des tâches personnalisées<a class="headerlink" href="#definition-des-taches-personnalisees" title="Permanent link">¶</a></h2>
+<h2 id="definition-des-taches-personnalisees"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.6</span> Définition des tâches personnalisées<a class="headerlink" href="#definition-des-taches-personnalisees" title="Permanent link">¶</a></h2>
 <p>Nextflow crée automatiquement les Batch <a href="https://docs.aws.amazon.com/batch/latest/userguide/job_definitions.html">definitions de taches</a> nécessaires à l'exécution de vos processus de workflow. Il n'est donc pas nécessaire de les définir avant d'exécuter votre workflow.</p>
 <p>Cependant, vous pouvez toujours avoir besoin de spécifier une définition de travail personnalisée pour permettre un contrôle fin des paramètres de configuration d'un travail spécifique (par exemple, pour définir des chemins de montage personnalisés ou d'autres paramètres spéciaux d'un batch de taches).</p>
 <p>Pour utiliser votre propre définition de travail dans un workflow Nextflow, utilisez-la à la place du nom de l'image du conteneur, en la préfixant avec la chaîne <code>job-definition://</code>. Par exemple :</p>
@@ -1775,7 +1783,7 @@ Vous trouverez d'autres conseils pour l'exécution de Nextflow sur HPC dans les 
 <a href="#__codelineno-16-2" id="__codelineno-16-2" name="__codelineno-16-2"></a><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'job-definition://your-job-definition-name'</span>
 <a href="#__codelineno-16-3" id="__codelineno-16-3" name="__codelineno-16-3"></a><span class="o">}</span>
 </code></pre></div>
-<h2 id="image-personnalisee"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.7</span> Image personnalisée<a class="headerlink" href="#image-personnalisee" title="Permanent link">¶</a></h2>
+<h2 id="image-personnalisee"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.7</span> Image personnalisée<a class="headerlink" href="#image-personnalisee" title="Permanent link">¶</a></h2>
 <p>Comme Nextflow exige que l'outil AWS CLI soit accessible dans l'environnement informatique, une solution courante consiste à créer une Amazon Machine Image (AMI) personnalisée et à l'installer de manière autonome (par exemple à l'aide du gestionnaire de paquets Conda).</p>
 <div class="admonition avertissement">
 <p class="admonition-title">Avertissement</p>
@@ -1799,7 +1807,7 @@ Vous trouverez d'autres conseils pour l'exécution de Nextflow sur HPC dans les 
 <p>Enfin, spécifiez le chemin complet <code>aws</code> dans le fichier de configuration de Nextflow comme indiqué ci-dessous :</p>
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-18-1" id="__codelineno-18-1" name="__codelineno-18-1"></a><span class="n">aws</span><span class="o">.</span><span class="na">batch</span><span class="o">.</span><span class="na">cliPath</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'/home/ec2-user/miniconda/bin/aws'</span>
 </code></pre></div>
-<h2 id="lancer-le-modele"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.8</span> Lancer le modèle<a class="headerlink" href="#lancer-le-modele" title="Permanent link">¶</a></h2>
+<h2 id="lancer-le-modele"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.8</span> Lancer le modèle<a class="headerlink" href="#lancer-le-modele" title="Permanent link">¶</a></h2>
 <p>Une autre approche consiste à créer une AMI personnalisée à l'aide d'un <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html">modèle de lancement</a> qui installe l'outil AWS CLI lors du démarrage de l'instance via des données utilisateur personnalisées.</p>
 <p>Dans le tableau de bord EC2, créez un modèle de lancement en spécifiant le champ de données de l'utilisateur :</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-19-1"> 1</a></span>
@@ -1847,7 +1855,7 @@ Vous trouverez d'autres conseils pour l'exécution de Nextflow sur HPC dans les 
 <a id="__codelineno-19-22" name="__codelineno-19-22"></a>--//--
 </code></pre></div></td></tr></table></div>
 <p>Créez ensuite un nouvel environnement informatique dans le tableau de bord Batch et indiquez le modèle de lancement nouvellement créé dans le champ correspondant.</p>
-<h2 id="deploiements-hybrides"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.9</span> Déploiements hybrides<a class="headerlink" href="#deploiements-hybrides" title="Permanent link">¶</a></h2>
+<h2 id="deploiements-hybrides"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.9</span> Déploiements hybrides<a class="headerlink" href="#deploiements-hybrides" title="Permanent link">¶</a></h2>
 <p>Nextflow permet l'utilisation de plusieurs exécuteurs dans la même application de workflow. Cette fonctionnalité permet de déployer des charges de travail hybrides dans lesquelles certains travaux sont exécutés sur l'ordinateur local ou le cluster de calcul local, et d'autres travaux sont déchargés sur le service AWS Batch.</p>
 <p>Pour activer cette fonctionnalité, utilisez un ou plusieurs <a href="https://www.nextflow.io/docs/latest/config.html#config-process-selectors">selecteur de processes</a> dans votre fichier de configuration Nextflow.</p>
 <p>Par exemple, appliquez la <a href="https://www.nextflow.io/docs/latest/aws.html#configuration">configuration AWS Batch</a> uniquement à un sous-ensemble de processus dans votre flux de travail. Vous pouvez essayer ce qui suit :</p>
@@ -1962,7 +1970,7 @@ Vous trouverez d'autres conseils pour l'exécution de Nextflow sur HPC dans les 
 <div class="md-consent__overlay"></div>
 <aside class="md-consent__inner">
 <form class="md-consent__form md-grid md-typeset" name="consent">
-<h4><span class="enumerate-headings-plugin enumerate-heading-plugin">12.9.0.1</span> Cookie consent</h4>
+<h4><span class="enumerate-headings-plugin enumerate-heading-plugin">11.9.0.1</span> Cookie consent</h4>
 <p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our training materials better.</p>
 <input class="md-toggle" id="__settings" type="checkbox"/>
 <div class="md-consent__settings">

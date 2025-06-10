@@ -1173,6 +1173,14 @@
 </ul>
 </nav>
 </li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../help/">
+<span class="md-ellipsis">
+    Help
+    
+  </span>
+</a>
+</li>
 </ul>
 </nav>
 </div>
@@ -1450,10 +1458,10 @@
 <a class="md-content__button md-icon" href="https://github.com/nextflow-io/training/edit/master/docs/advanced/operators.md" title="이 페이지를 편집">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"></path></svg>
 </a>
-<h1 id="operator-tour"><span class="enumerate-headings-plugin enumerate-heading-plugin">15.</span> Operator Tour<a class="headerlink" href="#operator-tour" title="Permanent link">¶</a></h1>
+<h1 id="operator-tour"><span class="enumerate-headings-plugin enumerate-heading-plugin">14.</span> Operator Tour<a class="headerlink" href="#operator-tour" title="Permanent link">¶</a></h1>
 <p>In this chapter, we take a curated tour of the Nextflow operators. Commonly used and well understood operators are not covered here - only those that we've seen could use more attention or those where the usage could be more elaborate. These set of operators have been chosen to illustrate tangential concepts and Nextflow features.</p>
-<h2 id="map"><span class="enumerate-headings-plugin enumerate-heading-plugin">15.1</span> <code>map</code><a class="headerlink" href="#map" title="Permanent link">¶</a></h2>
-<h3 id="basics"><span class="enumerate-headings-plugin enumerate-heading-plugin">15.1.1</span> Basics<a class="headerlink" href="#basics" title="Permanent link">¶</a></h3>
+<h2 id="map"><span class="enumerate-headings-plugin enumerate-heading-plugin">14.1</span> <code>map</code><a class="headerlink" href="#map" title="Permanent link">¶</a></h2>
+<h3 id="basics"><span class="enumerate-headings-plugin enumerate-heading-plugin">14.1.1</span> Basics<a class="headerlink" href="#basics" title="Permanent link">¶</a></h3>
 <p>Map is certainly the most commonly used of the operators covered here. It's a way to supply a closure through which each element in the channel is passed. The return value of the closure is emitted as an element in a new output channel. A canonical example is a closure that multiplies two numbers:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span>
 <span class="normal"><a href="#__codelineno-0-2">2</a></span>
@@ -1491,7 +1499,7 @@
 <a id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">view</span>
 <a id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="named-closures"><span class="enumerate-headings-plugin enumerate-heading-plugin">15.1.2</span> Named Closures<a class="headerlink" href="#named-closures" title="Permanent link">¶</a></h3>
+<h3 id="named-closures"><span class="enumerate-headings-plugin enumerate-heading-plugin">14.1.2</span> Named Closures<a class="headerlink" href="#named-closures" title="Permanent link">¶</a></h3>
 <p>If you find yourself re-using the same closure multiple times in your pipeline, the closure can be named and referenced:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span>
 <span class="normal"><a href="#__codelineno-4-2">2</a></span>
@@ -1568,7 +1576,7 @@
 <a id="__codelineno-8-7" name="__codelineno-8-7"></a><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">view</span>
 <a id="__codelineno-8-8" name="__codelineno-8-8"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="view"><span class="enumerate-headings-plugin enumerate-heading-plugin">15.2</span> <code>view</code><a class="headerlink" href="#view" title="Permanent link">¶</a></h2>
+<h2 id="view"><span class="enumerate-headings-plugin enumerate-heading-plugin">14.2</span> <code>view</code><a class="headerlink" href="#view" title="Permanent link">¶</a></h2>
 <p>In addition to the argument-less usage of <code>view</code> as shown above, this operator can also take a closure to customize the stdout message. We can create a closure to print the value of the elements in a channel as well as their type, for example:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1">1</a></span>
 <span class="normal"><a href="#__codelineno-9-2">2</a></span>
@@ -1590,7 +1598,7 @@
 <p class="admonition-title">Most closures will remain anonymous</p>
 <p>In many cases, it is simply cleaner to keep the closure anonymous, defined inline. Giving closures a name is only recommended when you find yourself defining the same or similar closures repeatedly in a given workflow.</p>
 </div>
-<h2 id="splitcsv"><span class="enumerate-headings-plugin enumerate-heading-plugin">15.3</span> <code>splitCsv</code><a class="headerlink" href="#splitcsv" title="Permanent link">¶</a></h2>
+<h2 id="splitcsv"><span class="enumerate-headings-plugin enumerate-heading-plugin">14.3</span> <code>splitCsv</code><a class="headerlink" href="#splitcsv" title="Permanent link">¶</a></h2>
 <p>A common Nextflow pattern is for a simple samplesheet to be passed as primary input into a workflow. We'll see some more complicated ways to manage these inputs later on in the workshop, but the <code>splitCsv</code> (<a href="https://www.nextflow.io/docs/latest/operator.html#splitcsv">docs</a>) is an excellent tool to have in a pinch. This operator will parse a csv/tsv and return a channel where each item is a row in the csv/tsv:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">1</a></span>
 <span class="normal"><a href="#__codelineno-10-2">2</a></span>
@@ -1659,7 +1667,7 @@
 <p>The construction of this map is very repetitive, and in the next chapter, we'll discuss some Groovy methods available on the <code>Map</code> class that can make this pattern more concise and less error-prone.</p>
 </details>
 </div>
-<h2 id="multimap"><span class="enumerate-headings-plugin enumerate-heading-plugin">15.4</span> <code>multiMap</code><a class="headerlink" href="#multimap" title="Permanent link">¶</a></h2>
+<h2 id="multimap"><span class="enumerate-headings-plugin enumerate-heading-plugin">14.4</span> <code>multiMap</code><a class="headerlink" href="#multimap" title="Permanent link">¶</a></h2>
 <p>The <code>multiMap</code> (<a href="https://www.nextflow.io/docs/latest/operator.html#multimap">documentation</a>) operator is a way of taking a single input channel and emitting into <strong>multiple channels for each input element</strong>.</p>
 <p>Let's assume we've been given a samplesheet that has tumor/normal pairs bundled together on the same row. View the example samplesheet with:</p>
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-14-1" id="__codelineno-14-1" name="__codelineno-14-1"></a><span class="nb">cd</span><span class="w"> </span>operators
@@ -1702,7 +1710,7 @@
 <p class="admonition-title">multiMapCriteria</p>
 <p>The closure supplied to <code>multiMap</code> needs to return multiple channels, so using named closures as described in the <code>map</code> section above will not work. Fortunately, Nextflow provides the convenience <code>multiMapCriteria</code> method to allow you to define named <code>multiMap</code> closures should you need them. See the <a href="https://www.nextflow.io/docs/latest/operator.html#multimap"><code>multiMap</code> documentation</a> for more info.</p>
 </div>
-<h2 id="branch"><span class="enumerate-headings-plugin enumerate-heading-plugin">15.5</span> <code>branch</code><a class="headerlink" href="#branch" title="Permanent link">¶</a></h2>
+<h2 id="branch"><span class="enumerate-headings-plugin enumerate-heading-plugin">14.5</span> <code>branch</code><a class="headerlink" href="#branch" title="Permanent link">¶</a></h2>
 <p>The <code>branch</code> operator (<a href="https://www.nextflow.io/docs/latest/operator.html#branch">documentation</a>) is a way of taking a single input channel and emitting a new element into one (and only one) of a selection of output channels.</p>
 <p>In the example above, the <code>multiMap</code> operator was necessary because we were supplied with a samplesheet that combined two pairs of fastq per row and we wanted to turn each row into new elements in multiple channels. If we were to use the neater samplesheet that had tumor/normal pairs on separate rows, we could use the <code>branch</code> operator to achieve the same result as we are routing each input element into a single output channel.</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-16-1"> 1</a></span>
@@ -1774,7 +1782,7 @@
 </div>
 </details>
 </div>
-<h3 id="multi-channel-objects"><span class="enumerate-headings-plugin enumerate-heading-plugin">15.5.1</span> Multi-channel Objects<a class="headerlink" href="#multi-channel-objects" title="Permanent link">¶</a></h3>
+<h3 id="multi-channel-objects"><span class="enumerate-headings-plugin enumerate-heading-plugin">14.5.1</span> Multi-channel Objects<a class="headerlink" href="#multi-channel-objects" title="Permanent link">¶</a></h3>
 <p>Some Nextflow operators return objects that contain <em>multiple</em> channels. The <code>multiMap</code> and <code>branch</code> operators are excellent examples. In most instances, the output is assigned to a variable and then addressed by name:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-1">1</a></span>
 <span class="normal"><a href="#__codelineno-20-2">2</a></span>
@@ -1874,7 +1882,7 @@
 <a id="__codelineno-25-6" name="__codelineno-25-6"></a><span class="o">|</span><span class="w"> </span><span class="n">MultiInput</span>
 </code></pre></div></td></tr></table></div>
 <p>If you have processes that output multiple channels and input multiple channels and the cardinality matches, they can be chained together in the same manner.</p>
-<h2 id="grouptuple"><span class="enumerate-headings-plugin enumerate-heading-plugin">15.6</span> <code>groupTuple</code><a class="headerlink" href="#grouptuple" title="Permanent link">¶</a></h2>
+<h2 id="grouptuple"><span class="enumerate-headings-plugin enumerate-heading-plugin">14.6</span> <code>groupTuple</code><a class="headerlink" href="#grouptuple" title="Permanent link">¶</a></h2>
 <p>A common operation is to group elements from a <em>single</em> channel where those elements share a common key. Take this example samplesheet as an example:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-26-1">1</a></span>
 <span class="normal"><a href="#__codelineno-26-2">2</a></span>
@@ -1916,7 +1924,7 @@
 <a id="__codelineno-27-9" name="__codelineno-27-9"></a><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">view</span>
 <a id="__codelineno-27-10" name="__codelineno-27-10"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="transpose"><span class="enumerate-headings-plugin enumerate-heading-plugin">15.7</span> <code>transpose</code><a class="headerlink" href="#transpose" title="Permanent link">¶</a></h2>
+<h2 id="transpose"><span class="enumerate-headings-plugin enumerate-heading-plugin">14.7</span> <code>transpose</code><a class="headerlink" href="#transpose" title="Permanent link">¶</a></h2>
 <p>The transpose operator is often misunderstood. It can be thought of as the inverse of the <code>groupTuple</code> operator. Give the following workflow, the <code>groupTuple</code> and <code>transpose</code> operators cancel each other out. Removing lines 8 and 9 returns the same result.</p>
 <p>Given a workflow that returns one element per sample, where we have grouped the samplesheet lines on a meta containing only id and type:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-28-1"> 1</a></span>
@@ -1982,7 +1990,7 @@
 <a href="#__codelineno-31-9" id="__codelineno-31-9" name="__codelineno-31-9"></a><span class="go">[[id:sampleC, type:normal], 1, [data/reads/sampleC_rep1_normal_R1.fastq.gz, data/reads/sampleC_rep1_normal_R2.fastq.gz]]</span>
 <a href="#__codelineno-31-10" id="__codelineno-31-10" name="__codelineno-31-10"></a><span class="go">[[id:sampleC, type:tumor], 1, [data/reads/sampleC_rep1_tumor_R1.fastq.gz, data/reads/sampleC_rep1_tumor_R2.fastq.gz]]</span>
 </code></pre></div>
-<h2 id="flatmap"><span class="enumerate-headings-plugin enumerate-heading-plugin">15.8</span> <code>flatMap</code><a class="headerlink" href="#flatmap" title="Permanent link">¶</a></h2>
+<h2 id="flatmap"><span class="enumerate-headings-plugin enumerate-heading-plugin">14.8</span> <code>flatMap</code><a class="headerlink" href="#flatmap" title="Permanent link">¶</a></h2>
 <p>As the name suggests, the <code>flatMap</code> operator allows you to modify the elements in a channel and then flatten the resulting collection. This is useful if you need to "expand" elements in a channel an incoming element can turn into zero or more elements in the output channel. For example:</p>
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-32-1" id="__codelineno-32-1" name="__codelineno-32-1"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
 <a href="#__codelineno-32-2" id="__codelineno-32-2" name="__codelineno-32-2"></a><span class="w">    </span><span class="n">numbers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="w"> </span><span class="mi">2</span><span class="o">)</span>
@@ -2057,9 +2065,9 @@
 </code></pre></div>
 </details>
 </div>
-<h2 id="collectfile"><span class="enumerate-headings-plugin enumerate-heading-plugin">15.9</span> <code>collectFile</code><a class="headerlink" href="#collectfile" title="Permanent link">¶</a></h2>
+<h2 id="collectfile"><span class="enumerate-headings-plugin enumerate-heading-plugin">14.9</span> <code>collectFile</code><a class="headerlink" href="#collectfile" title="Permanent link">¶</a></h2>
 <p>The <code>collectFile</code> operator allows you to write one or more new files based on the contents of a channel.</p>
-<h3 id="writing-strings-to-a-single-file"><span class="enumerate-headings-plugin enumerate-heading-plugin">15.9.1</span> Writing strings to a single file<a class="headerlink" href="#writing-strings-to-a-single-file" title="Permanent link">¶</a></h3>
+<h3 id="writing-strings-to-a-single-file"><span class="enumerate-headings-plugin enumerate-heading-plugin">14.9.1</span> Writing strings to a single file<a class="headerlink" href="#writing-strings-to-a-single-file" title="Permanent link">¶</a></h3>
 <p>At its most basic, this operator writes the contents of the elements of a channel directly into a file. If the objecting being passed into the <code>collectFile</code> operator is a string, the strings are written to the collected file:</p>
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-40-1" id="__codelineno-40-1" name="__codelineno-40-1"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
 <a href="#__codelineno-40-2" id="__codelineno-40-2" name="__codelineno-40-2"></a><span class="w">    </span><span class="n">characters</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span>
@@ -2104,14 +2112,14 @@
 <a href="#__codelineno-44-8" id="__codelineno-44-8" name="__codelineno-44-8"></a><span class="go">Michael</span>
 <a href="#__codelineno-44-9" id="__codelineno-44-9" name="__codelineno-44-9"></a><span class="go">Amy</span>
 </code></pre></div>
-<h3 id="collecting-to-a-new-location"><span class="enumerate-headings-plugin enumerate-heading-plugin">15.9.2</span> Collecting to a new location<a class="headerlink" href="#collecting-to-a-new-location" title="Permanent link">¶</a></h3>
+<h3 id="collecting-to-a-new-location"><span class="enumerate-headings-plugin enumerate-heading-plugin">14.9.2</span> Collecting to a new location<a class="headerlink" href="#collecting-to-a-new-location" title="Permanent link">¶</a></h3>
 <p>By default, the collected file is written into the work directory, which makes it suitable for input into a downstream process. If the collected file is an output of the workflow instead of an intermediate, it can be written to a directory of your choosing using the <code>storeDir</code> argument:</p>
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-45-1" id="__codelineno-45-1" name="__codelineno-45-1"></a><span class="n">characters</span>
 <a href="#__codelineno-45-2" id="__codelineno-45-2" name="__codelineno-45-2"></a><span class="o">|</span><span class="w"> </span><span class="n">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">it</span><span class="o">.</span><span class="na">name</span><span class="w"> </span><span class="o">}</span>
 <a href="#__codelineno-45-3" id="__codelineno-45-3" name="__codelineno-45-3"></a><span class="o">|</span><span class="w"> </span><span class="n">collectFile</span><span class="o">(</span><span class="nl">name:</span><span class="w"> </span><span class="s1">'characters.txt'</span><span class="o">,</span><span class="w"> </span><span class="nl">newLine:</span><span class="w"> </span><span class="kc">true</span><span class="o">,</span><span class="w"> </span><span class="nl">storeDir:</span><span class="w"> </span><span class="s1">'results'</span><span class="o">)</span>
 <a href="#__codelineno-45-4" id="__codelineno-45-4" name="__codelineno-45-4"></a><span class="o">|</span><span class="w"> </span><span class="n">view</span>
 </code></pre></div>
-<h3 id="collecting-file-contents"><span class="enumerate-headings-plugin enumerate-heading-plugin">15.9.3</span> Collecting file contents<a class="headerlink" href="#collecting-file-contents" title="Permanent link">¶</a></h3>
+<h3 id="collecting-file-contents"><span class="enumerate-headings-plugin enumerate-heading-plugin">14.9.3</span> Collecting file contents<a class="headerlink" href="#collecting-file-contents" title="Permanent link">¶</a></h3>
 <p>If the contents of the input channel is a file, its <em>contents</em> are appended to the collected file. Here we make a small process <code>WriteBio</code> that generates a CSV from the Map object supplied as input:</p>
 <div class="admonition note">
 <p class="admonition-title">Groovy in the script block</p>
@@ -2162,7 +2170,7 @@
 <a href="#__codelineno-47-8" id="__codelineno-47-8" name="__codelineno-47-8"></a>Terry is a Sergeant
 <a href="#__codelineno-47-9" id="__codelineno-47-9" name="__codelineno-47-9"></a>Michael is a Detective
 </code></pre></div>
-<h3 id="collecting-into-multiple-files"><span class="enumerate-headings-plugin enumerate-heading-plugin">15.9.4</span> Collecting into multiple files<a class="headerlink" href="#collecting-into-multiple-files" title="Permanent link">¶</a></h3>
+<h3 id="collecting-into-multiple-files"><span class="enumerate-headings-plugin enumerate-heading-plugin">14.9.4</span> Collecting into multiple files<a class="headerlink" href="#collecting-into-multiple-files" title="Permanent link">¶</a></h3>
 <p>Instead of writing all entries to a single file, you can direct entries from the input channel to different files by supplying a closure to the <code>collectFile</code> operator. The closure <em>must</em> return a <code>List</code> of two entries where the two elements in the <code>List</code> are</p>
 <ol>
 <li>the name of the file into which the data should be written, and</li>
@@ -2185,7 +2193,7 @@
 <a href="#__codelineno-49-4" id="__codelineno-49-4" name="__codelineno-49-4"></a><span class="go">results/Detectives.txt</span>
 <a href="#__codelineno-49-5" id="__codelineno-49-5" name="__codelineno-49-5"></a><span class="go">results/Sergeants.txt</span>
 </code></pre></div>
-<h3 id="dealing-with-headers"><span class="enumerate-headings-plugin enumerate-heading-plugin">15.9.5</span> Dealing with headers<a class="headerlink" href="#dealing-with-headers" title="Permanent link">¶</a></h3>
+<h3 id="dealing-with-headers"><span class="enumerate-headings-plugin enumerate-heading-plugin">14.9.5</span> Dealing with headers<a class="headerlink" href="#dealing-with-headers" title="Permanent link">¶</a></h3>
 <p>Let's say we have a process that returns a CSV. In this example, we're going to create very small two-line CVSs, but the same approach is applicable to larger files as well.</p>
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-50-1" id="__codelineno-50-1" name="__codelineno-50-1"></a><span class="n">process</span><span class="w"> </span><span class="n">WriteBio</span><span class="w"> </span><span class="o">{</span>
 <a href="#__codelineno-50-2" id="__codelineno-50-2" name="__codelineno-50-2"></a><span class="w">    </span><span class="nl">input:</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">character</span><span class="o">)</span>
@@ -2339,7 +2347,7 @@
 <div class="md-consent__overlay"></div>
 <aside class="md-consent__inner">
 <form class="md-consent__form md-grid md-typeset" name="consent">
-<h4><span class="enumerate-headings-plugin enumerate-heading-plugin">15.9.5.1</span> Cookie consent</h4>
+<h4><span class="enumerate-headings-plugin enumerate-heading-plugin">14.9.5.1</span> Cookie consent</h4>
 <p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our training materials better.</p>
 <input class="md-toggle" id="__settings" type="checkbox"/>
 <div class="md-consent__settings">

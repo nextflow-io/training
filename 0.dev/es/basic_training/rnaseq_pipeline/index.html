@@ -1118,6 +1118,14 @@
 </ul>
 </nav>
 </li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../help/">
+<span class="md-ellipsis">
+    Help
+    
+  </span>
+</a>
+</li>
 </ul>
 </nav>
 </div>
@@ -1339,7 +1347,7 @@
 <a class="md-content__button md-icon" href="https://github.com/nextflow-io/training/edit/master/docs/basic_training/rnaseq_pipeline.md" title="Editar esta página">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"></path></svg>
 </a>
-<h1 id="simple-rna-seq-workflow"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.</span> Simple RNA-Seq workflow<a class="headerlink" href="#simple-rna-seq-workflow" title="Permanent link">¶</a></h1>
+<h1 id="simple-rna-seq-workflow"><span class="enumerate-headings-plugin enumerate-heading-plugin">3.</span> Simple RNA-Seq workflow<a class="headerlink" href="#simple-rna-seq-workflow" title="Permanent link">¶</a></h1>
 <p>To demonstrate a real-world biomedical scenario, you will implement a proof of concept RNA-Seq workflow which:</p>
 <ol>
 <li>Indexes a transcriptome file</li>
@@ -1354,7 +1362,7 @@
 <li><a href="https://multiqc.info">MultiQC</a> searches a given directory for analysis logs and compiles a HTML report for easy viewing. It's a general use tool, perfect for summarizing the output from numerous bioinformatics tools.</li>
 </ol>
 <p>Although you may be unfamiliar with these tools, they represent real world bioinformatic tools and will be used to teach you how to use Nextflow to create a workflow.</p>
-<h2 id="define-the-workflow-parameters"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.1</span> Define the workflow parameters<a class="headerlink" href="#define-the-workflow-parameters" title="Permanent link">¶</a></h2>
+<h2 id="define-the-workflow-parameters"><span class="enumerate-headings-plugin enumerate-heading-plugin">3.1</span> Define the workflow parameters<a class="headerlink" href="#define-the-workflow-parameters" title="Permanent link">¶</a></h2>
 <p>Parameters are inputs and options that can be modified when the workflow is executed.</p>
 <p>The script <code>script1.nf</code> defines three workflow input parameters and uses the <a href="https://www.tutorialspoint.com/groovy/groovy_basic_syntax.htm">groovy <code>println</code></a> command to print one of these to the console.</p>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">script1.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span>
@@ -1440,7 +1448,7 @@
 <li>How to use <code>log.info</code> to print information and save it in the log execution file</li>
 </ol>
 </div>
-<h2 id="create-a-transcriptome-index-file"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.2</span> Create a transcriptome index file<a class="headerlink" href="#create-a-transcriptome-index-file" title="Permanent link">¶</a></h2>
+<h2 id="create-a-transcriptome-index-file"><span class="enumerate-headings-plugin enumerate-heading-plugin">3.2</span> Create a transcriptome index file<a class="headerlink" href="#create-a-transcriptome-index-file" title="Permanent link">¶</a></h2>
 <p>Nextflow allows the execution of any command or script by using a <code>process</code> definition.</p>
 <p>A <code>process</code> is defined by providing three main declarations:</p>
 <ul>
@@ -1601,7 +1609,7 @@
 <li>How to add a directive to a process</li>
 </ol>
 </div>
-<h2 id="collect-read-files-by-pairs"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.3</span> Collect read files by pairs<a class="headerlink" href="#collect-read-files-by-pairs" title="Permanent link">¶</a></h2>
+<h2 id="collect-read-files-by-pairs"><span class="enumerate-headings-plugin enumerate-heading-plugin">3.3</span> Collect read files by pairs<a class="headerlink" href="#collect-read-files-by-pairs" title="Permanent link">¶</a></h2>
 <p>There are numerous channel factories that can be used to create channels. In this step, you will use the <a href="https://www.nextflow.io/docs/latest/channel.html#fromfilepairs">fromFilePairs</a> channel factory to create a channel of read pairs.</p>
 <p>The <code>fromFilePairs</code> channel factory takes a glob pattern as input and returns a channel of tuples. Each tuple contains two items: the first is the read pair prefix and the second is a list of paths to the read files.</p>
 <p>By adding the <code>view</code> operator to the <code>read_pairs_ch</code> channel, you can see the contents of the channel.</p>
@@ -1667,7 +1675,7 @@
 <p class="admonition-title">Info</p>
 <p>The declaration of a channel can be before the workflow scope or within it. As long as it is upstream of the process that requires the specific channel.</p>
 </div>
-<h2 id="perform-expression-quantification"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.4</span> Perform expression quantification<a class="headerlink" href="#perform-expression-quantification" title="Permanent link">¶</a></h2>
+<h2 id="perform-expression-quantification"><span class="enumerate-headings-plugin enumerate-heading-plugin">3.4</span> Perform expression quantification<a class="headerlink" href="#perform-expression-quantification" title="Permanent link">¶</a></h2>
 <p><code>script4.nf</code> adds a gene expression <code>QUANTIFICATION</code> process and a call to it within the workflow scope. Quantification requires the index transcriptome and RNA-Seq read pair fastq files.</p>
 <p>In the workflow scope, note how the <code>index_ch</code> channel is assigned as output in the <code>INDEX</code> process.</p>
 <p>Next, note that the first input channel for the <code>QUANTIFICATION</code> process is the previously declared <code>index_ch</code>, which contains the <code>path</code> to the <code>salmon_index</code>.</p>
@@ -1734,13 +1742,13 @@
 <li>How to use the <code>publishDir</code> directive to store a process results in a path of your choice</li>
 </ol>
 </div>
-<h2 id="quality-control"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.5</span> Quality control<a class="headerlink" href="#quality-control" title="Permanent link">¶</a></h2>
+<h2 id="quality-control"><span class="enumerate-headings-plugin enumerate-heading-plugin">3.5</span> Quality control<a class="headerlink" href="#quality-control" title="Permanent link">¶</a></h2>
 <p>Next, you will implement a <code>FASTQC</code> quality control step for your input reads (using the label <code>fastqc</code>). The inputs are the same as the read pairs used in the <code>QUANTIFICATION</code> step.</p>
 <p>You can run it by using the following command:</p>
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-25-1" id="__codelineno-25-1" name="__codelineno-25-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>script5.nf<span class="w"> </span>-resume
 </code></pre></div>
 <p>Nextflow DSL2 knows to split the <code>reads_pair_ch</code> into two identical channels as they are required twice as an input for both of the <code>FASTQC</code> and the <code>QUANTIFICATION</code> process.</p>
-<h2 id="multiqc-report"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.6</span> MultiQC report<a class="headerlink" href="#multiqc-report" title="Permanent link">¶</a></h2>
+<h2 id="multiqc-report"><span class="enumerate-headings-plugin enumerate-heading-plugin">3.6</span> MultiQC report<a class="headerlink" href="#multiqc-report" title="Permanent link">¶</a></h2>
 <p>This step collects the outputs from the <code>QUANTIFICATION</code> and <code>FASTQC</code> processes to create a final report using the <a href="http://multiqc.info/">MultiQC</a> tool.</p>
 <p>You can execute <code>script6.nf</code> with the following command:</p>
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-26-1" id="__codelineno-26-1" name="__codelineno-26-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>script6.nf<span class="w"> </span>-resume<span class="w"> </span>--reads<span class="w"> </span><span class="s1">'data/ggal/*_{1,2}.fq'</span>
@@ -1788,7 +1796,7 @@
 <li>How to chain two or more operators together</li>
 </ol>
 </div>
-<h2 id="handle-completion-event"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.7</span> Handle completion event<a class="headerlink" href="#handle-completion-event" title="Permanent link">¶</a></h2>
+<h2 id="handle-completion-event"><span class="enumerate-headings-plugin enumerate-heading-plugin">3.7</span> Handle completion event<a class="headerlink" href="#handle-completion-event" title="Permanent link">¶</a></h2>
 <p>This step shows how to execute an action when the workflow completes the execution.</p>
 <p>Note that Nextflow processes define the execution of <strong>asynchronous</strong> tasks ,i.e., they are not executed one after another as if they were written in the workflow script in a common <strong>imperative</strong> programming language.</p>
 <p>The script uses the <code>workflow.onComplete</code> event handler to print a confirmation message when the script completes.</p>
@@ -1802,7 +1810,7 @@
 <li>How to add completion events to your workflow</li>
 </ol>
 </div>
-<h2 id="email-notifications"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.8</span> Email notifications<a class="headerlink" href="#email-notifications" title="Permanent link">¶</a></h2>
+<h2 id="email-notifications"><span class="enumerate-headings-plugin enumerate-heading-plugin">3.8</span> Email notifications<a class="headerlink" href="#email-notifications" title="Permanent link">¶</a></h2>
 <p>Send a notification email when the workflow execution completes using the <code>-N &lt;email address&gt;</code> command-line option.</p>
 <p>Note: this requires the configuration of a SMTP server in the nextflow config file. Below is an example <code>nextflow.config</code> file showing the settings you would have to configure:</p>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">nextflow.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-30-1"> 1</a></span>
@@ -1826,7 +1834,7 @@
 <a id="__codelineno-30-10" name="__codelineno-30-10"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>See <a href="https://www.nextflow.io/docs/latest/mail.html#mail-configuration">mail documentation</a> for details.</p>
-<h2 id="custom-scripts"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.9</span> Custom scripts<a class="headerlink" href="#custom-scripts" title="Permanent link">¶</a></h2>
+<h2 id="custom-scripts"><span class="enumerate-headings-plugin enumerate-heading-plugin">3.9</span> Custom scripts<a class="headerlink" href="#custom-scripts" title="Permanent link">¶</a></h2>
 <p>Real-world workflows use a lot of custom user scripts (BASH, R, Python, etc.).
 Nextflow allows you to consistently use and manage these scripts.
 Simply put them in a directory named <code>bin</code> in the workflow project root.
@@ -1877,7 +1885,7 @@ They will be automatically added to the workflow execution <code>PATH</code>.</p
 <li>How to avoid the use of absolute paths by having your scripts in the <code>bin/</code> folder</li>
 </ol>
 </div>
-<h2 id="metrics-and-reports"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.10</span> Metrics and reports<a class="headerlink" href="#metrics-and-reports" title="Permanent link">¶</a></h2>
+<h2 id="metrics-and-reports"><span class="enumerate-headings-plugin enumerate-heading-plugin">3.10</span> Metrics and reports<a class="headerlink" href="#metrics-and-reports" title="Permanent link">¶</a></h2>
 <p>Nextflow can produce multiple reports and charts providing several runtime metrics and execution information. These can be enabled by using the following command line options:</p>
 <p>The <code>-with-report</code> option enables the creation of the workflow execution report.</p>
 <p>The <code>-with-trace</code> option enables the creation of a tab separated value (TSV) file containing runtime information for each executed task.</p>
@@ -1907,7 +1915,7 @@ They will be automatically added to the workflow execution <code>PATH</code>.</p
 <li>How to generate reports and charts for your executions</li>
 </ol>
 </div>
-<h2 id="run-a-project-from-github"><span class="enumerate-headings-plugin enumerate-heading-plugin">4.11</span> Run a project from GitHub<a class="headerlink" href="#run-a-project-from-github" title="Permanent link">¶</a></h2>
+<h2 id="run-a-project-from-github"><span class="enumerate-headings-plugin enumerate-heading-plugin">3.11</span> Run a project from GitHub<a class="headerlink" href="#run-a-project-from-github" title="Permanent link">¶</a></h2>
 <p>Nextflow allows the execution of a workflow project directly from a GitHub repository (or similar services, e.g., BitBucket and GitLab).</p>
 <p>This simplifies the sharing and deployment of complex projects and tracking changes in a consistent manner.</p>
 <p>The following GitHub repository hosts a version of the workflow introduced in this tutorial: <a href="https://github.com/nextflow-io/rnaseq-nf">https://github.com/nextflow-io/rnaseq-nf</a></p>
@@ -2005,7 +2013,7 @@ They will be automatically added to the workflow execution <code>PATH</code>.</p
 <div class="md-consent__overlay"></div>
 <aside class="md-consent__inner">
 <form class="md-consent__form md-grid md-typeset" name="consent">
-<h4><span class="enumerate-headings-plugin enumerate-heading-plugin">4.11.0.1</span> Cookie consent</h4>
+<h4><span class="enumerate-headings-plugin enumerate-heading-plugin">3.11.0.1</span> Cookie consent</h4>
 <p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our training materials better.</p>
 <input class="md-toggle" id="__settings" type="checkbox"/>
 <div class="md-consent__settings">

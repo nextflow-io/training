@@ -1163,6 +1163,14 @@
 </ul>
 </nav>
 </li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../help/">
+<span class="md-ellipsis">
+    Help
+    
+  </span>
+</a>
+</li>
 </ul>
 </nav>
 </div>
@@ -1436,8 +1444,8 @@ The translated material may be incomplete or incorrect.
 We plan to update the translations later this year.
 In the meantime, please try to work through the English-language material if you can.</p>
 </div>
-<h1 id="demarrer-avec-seqera-platform"><span class="enumerate-headings-plugin enumerate-heading-plugin">13.</span> Demarrer avec Seqera Platform<a class="headerlink" href="#demarrer-avec-seqera-platform" title="Permanent link">¶</a></h1>
-<h2 id="concept-de-base"><span class="enumerate-headings-plugin enumerate-heading-plugin">13.1</span> Concept de Base<a class="headerlink" href="#concept-de-base" title="Permanent link">¶</a></h2>
+<h1 id="demarrer-avec-seqera-platform"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.</span> Demarrer avec Seqera Platform<a class="headerlink" href="#demarrer-avec-seqera-platform" title="Permanent link">¶</a></h1>
+<h2 id="concept-de-base"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.1</span> Concept de Base<a class="headerlink" href="#concept-de-base" title="Permanent link">¶</a></h2>
 <p>Seqera Platform, anciennement connu sous le nom Nextflow Tower, est le poste de commande centralisé pour la gestion des données et des workflows. Il apporte la surveillance, la journalisation et l'observabilité aux flux de travail distribués et simplifie le déploiement des flux de travail sur n'importe quel cloud, cluster ou ordinateur portable. Dans la terminologie de Seqera Platform, un flux de travail est ce sur quoi nous avons travaillé jusqu'à présent, et les pipelines sont des workflows préconfigurés qui peuvent être utilisés par tous les utilisateurs d'un espace de travail. Il est composé d'un repositoire de workflows, de paramètres de lancement et d'un environnement de calcul. Nous nous en tiendrons à ces définitions dans cette section.</p>
 <p>Les principales caractéristiques de Seqera Platform sont les suivantes</p>
 <ul>
@@ -1450,9 +1458,9 @@ In the meantime, please try to work through the English-language material if you
 <p class="admonition-title">Conseil</p>
 <p><a href="https://cloud.tower.nf/">Inscrivez-vous</a> pour essayer Seqera Platform gratuitement ou demander une <a href="https://seqera.io/demo/">demo</a> pour des déploiements dans votre propre environnement sur site ou en could.</p>
 </div>
-<h2 id="utilisation"><span class="enumerate-headings-plugin enumerate-heading-plugin">13.2</span> Utilisation<a class="headerlink" href="#utilisation" title="Permanent link">¶</a></h2>
+<h2 id="utilisation"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.2</span> Utilisation<a class="headerlink" href="#utilisation" title="Permanent link">¶</a></h2>
 <p>Vous pouvez utiliser Seqera Platform via l'option <code>-with-tower</code> lors de l'utilisation de la commande <code>nextflow run</code>, via l'interface graphique <strong>en ligne</strong> ou via l'interface utilisateur <strong>API</strong>.</p>
-<h3 id="via-la-commande-nextflow-run"><span class="enumerate-headings-plugin enumerate-heading-plugin">13.2.1</span> Via la commande <code>nextflow run</code>.<a class="headerlink" href="#via-la-commande-nextflow-run" title="Permanent link">¶</a></h3>
+<h3 id="via-la-commande-nextflow-run"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.2.1</span> Via la commande <code>nextflow run</code>.<a class="headerlink" href="#via-la-commande-nextflow-run" title="Permanent link">¶</a></h3>
 <p>Créez un compte et connectez-vous à Seqera Platform.</p>
 <p><strong>1. Créer un nouveau jeton</strong></p>
 <p>Vous pouvez accéder à vos jetons à partir du menu déroulant <strong>Réglages</strong> :</p>
@@ -1489,14 +1497,14 @@ In the meantime, please try to work through the English-language material if you
 <p>Allez sur <a href="https://tower.nf/">https://tower.nf/</a>, connectez-vous, cliquez sur l'onglet run et sélectionnez le run que vous venez de soumettre. Si vous ne le trouvez pas, vérifiez que votre jeton a été saisi correctement.</p>
 </details>
 </div>
-<h3 id="via-linterface-graphique-en-ligne"><span class="enumerate-headings-plugin enumerate-heading-plugin">13.2.2</span> Via l'interface graphique en ligne<a class="headerlink" href="#via-linterface-graphique-en-ligne" title="Permanent link">¶</a></h3>
+<h3 id="via-linterface-graphique-en-ligne"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.2.2</span> Via l'interface graphique en ligne<a class="headerlink" href="#via-linterface-graphique-en-ligne" title="Permanent link">¶</a></h3>
 <p>L'exécution à l'aide de l'interface graphique se fait en trois étapes principales :</p>
 <ol>
 <li>Créer un compte et se connecter à Seqera Platform, disponible gratuitement à l'adresse <a href="https://tower.nf">tower.nf</a>.</li>
 <li>Créer et configurer un nouvel <a href="https://help.tower.nf/compute-envs/overview/">environnement de calcul</a>.</li>
 <li>Lancez <a href="https://help.tower.nf/launch/launchpad/">le lancement des pipelines</a>.</li>
 </ol>
-<h4 id="configurer-votre-environnement-informatique"><span class="enumerate-headings-plugin enumerate-heading-plugin">13.2.2.1</span> Configurer votre environnement informatique<a class="headerlink" href="#configurer-votre-environnement-informatique" title="Permanent link">¶</a></h4>
+<h4 id="configurer-votre-environnement-informatique"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.2.2.1</span> Configurer votre environnement informatique<a class="headerlink" href="#configurer-votre-environnement-informatique" title="Permanent link">¶</a></h4>
 <p>ower utilise le concept de <strong>Compute Environments</strong> pour définir la plateforme d'exécution où un flux de travail sera exécuté.</p>
 <p>Il permet de lancer des flux de travail dans un nombre croissant d'infrastructures <strong>cloud</strong> et <strong>on-premise</strong>.</p>
 <p><img alt="Environments Informatique" src="../../../basic_training/img/compute_env_platforms.png"/></p>
@@ -1514,7 +1522,7 @@ In the meantime, please try to work through the English-language material if you
 * [Google Kubernetes (GKE)](https://help.tower.nf/compute-envs/gke/)
 * [Hosted Kubernetes](https://help.tower.nf/compute-envs/k8s/)
 </code></pre></div>
-<h4 id="selection-dun-environnement-informatique-par-defaut"><span class="enumerate-headings-plugin enumerate-heading-plugin">13.2.2.2</span> Sélection d'un environnement informatique par défaut<a class="headerlink" href="#selection-dun-environnement-informatique-par-defaut" title="Permanent link">¶</a></h4>
+<h4 id="selection-dun-environnement-informatique-par-defaut"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.2.2.2</span> Sélection d'un environnement informatique par défaut<a class="headerlink" href="#selection-dun-environnement-informatique-par-defaut" title="Permanent link">¶</a></h4>
 <p>Si vous avez plus d'un <strong>Environnement informatique</strong>, vous pouvez sélectionner celui qui sera utilisé par défaut lors du lancement d'un pipeline.</p>
 <ol>
 <li>Naviguez vers vos <a href="https://help.tower.nf/compute-envs/overview/">environnements de informatique</a>.</li>
@@ -1522,11 +1530,11 @@ In the meantime, please try to work through the English-language material if you
 </ol>
 <p><strong>Felicitations!</strong></p>
 <p>Vous êtes maintenant prêt à lancer des flux de travail avec votre environnement de calcul principal.</p>
-<h4 id="launchpad"><span class="enumerate-headings-plugin enumerate-heading-plugin">13.2.2.3</span> Launchpad<a class="headerlink" href="#launchpad" title="Permanent link">¶</a></h4>
+<h4 id="launchpad"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.2.2.3</span> Launchpad<a class="headerlink" href="#launchpad" title="Permanent link">¶</a></h4>
 <p>Launchpad permet à tout utilisateur de l'espace de travail de lancer facilement un pipeline préconfiguré.</p>
 <p><img alt="Launchpad" src="../../../basic_training/img/overview_launch.png"/></p>
 <p>Un pipeline est un repositoire contenant un flux de travail Nextflow, un environnement de calcul et des paramètres de workflow.</p>
-<h4 id="formulaire-des-parametres-du-pipeline"><span class="enumerate-headings-plugin enumerate-heading-plugin">13.2.2.4</span> Formulaire des paramètres du pipeline<a class="headerlink" href="#formulaire-des-parametres-du-pipeline" title="Permanent link">¶</a></h4>
+<h4 id="formulaire-des-parametres-du-pipeline"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.2.2.4</span> Formulaire des paramètres du pipeline<a class="headerlink" href="#formulaire-des-parametres-du-pipeline" title="Permanent link">¶</a></h4>
 <p>Launchpad détecte automatiquement la présence d'un <code>nextflow_schema.json</code> dans la racine du référentiel et crée dynamiquement un formulaire où les utilisateurs peuvent facilement mettre à jour les paramètres.</p>
 <div class="admonition info">
 <p class="admonition-title">Info</p>
@@ -1534,7 +1542,7 @@ In the meantime, please try to work through the English-language material if you
 </div>
 <p>Cela permet aux utilisateurs qui n'ont pas d'expertise en Nextflow de saisir les paramètres de leur workflow et de le lancer.</p>
 <p><img alt="Parametre de Pipeline" src="../../../basic_training/img/launch_rnaseq_nextflow_schema.png"/></p>
-<h4 id="ajouter-une-nouveau-pipeline"><span class="enumerate-headings-plugin enumerate-heading-plugin">13.2.2.5</span> Ajouter une nouveau pipeline<a class="headerlink" href="#ajouter-une-nouveau-pipeline" title="Permanent link">¶</a></h4>
+<h4 id="ajouter-une-nouveau-pipeline"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.2.2.5</span> Ajouter une nouveau pipeline<a class="headerlink" href="#ajouter-une-nouveau-pipeline" title="Permanent link">¶</a></h4>
 <p>L'ajout d'un pipeline à la zone de lancement de l'espace de travail préenregistré est décrit en détail dans la <a href="https://help.tower.nf/launch/launch/">documentation de la page web de la Seqera Platform</a>.</p>
 <p>En bref, voici les étapes à suivre pour mettre en place une filière.</p>
 <ol>
@@ -1570,20 +1578,20 @@ In the meantime, please try to work through the English-language material if you
 </div>
 <p>Pour les options de paramétrage avancées, consultez cette <a href="https://help.tower.nf/launch/advanced/">page</a>.</p>
 <p>Un soutien communautaire est également disponible en cas de problème, rejoignez le Slack Nextflow en suivant ce <a href="https://www.nextflow.io/slack-invite.html">lien</a>.</p>
-<h3 id="api"><span class="enumerate-headings-plugin enumerate-heading-plugin">13.2.3</span> API<a class="headerlink" href="#api" title="Permanent link">¶</a></h3>
+<h3 id="api"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.2.3</span> API<a class="headerlink" href="#api" title="Permanent link">¶</a></h3>
 <p>Pour en savoir plus sur l'utilisation de l'API Seqera Platform, consultez la <a href="https://help.tower.nf/api/overview/">section API</a> de cette documentation.</p>
-<h2 id="espaces-de-travail-et-organisations"><span class="enumerate-headings-plugin enumerate-heading-plugin">13.3</span> Espaces de travail et organisations<a class="headerlink" href="#espaces-de-travail-et-organisations" title="Permanent link">¶</a></h2>
+<h2 id="espaces-de-travail-et-organisations"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.3</span> Espaces de travail et organisations<a class="headerlink" href="#espaces-de-travail-et-organisations" title="Permanent link">¶</a></h2>
 <p>Seqera Platform simplifie le développement et l'exécution des pipelines en fournissant une interface centralisée pour les utilisateurs et les organisations.</p>
 <p>Chaque utilisateur dispose d'un <strong>espace de travail</strong> unique où il peut interagir et gérer toutes les ressources telles que les flux de travail, les environnements informatiques et les credits. Les détails sont disponibles <a href="https://help.tower.nf/getting-started/workspace/">ici</a>.</p>
 <p>Les organisations peuvent avoir plusieurs espaces de travail avec un accès personnalisé pour les <strong>membres</strong> et <strong>collaborateurs</strong> de l'organisation.</p>
-<h3 id="ressources-de-lorganisation"><span class="enumerate-headings-plugin enumerate-heading-plugin">13.3.1</span> Ressources de l'organisation<a class="headerlink" href="#ressources-de-lorganisation" title="Permanent link">¶</a></h3>
+<h3 id="ressources-de-lorganisation"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.3.1</span> Ressources de l'organisation<a class="headerlink" href="#ressources-de-lorganisation" title="Permanent link">¶</a></h3>
 <p>Vous pouvez créer votre propre organisation et votre propre espace de travail pour les participants en suivant la documentation à <a href="https://help.tower.nf/orgs-and-teams/workspace-management/">Seqera Platform</a>.</p>
 <p>Seqera Platform permet la création de plusieurs organisations, chacune pouvant contenir plusieurs espaces de travail avec des utilisateurs et des ressources partagés. Cela permet à toute organisation de personnaliser et d'organiser l'utilisation des ressources tout en maintenant une couche de contrôle d'accès pour les utilisateurs associés à un espace de travail.</p>
-<h3 id="organisation-utilisateurs"><span class="enumerate-headings-plugin enumerate-heading-plugin">13.3.2</span> Organisation utilisateurs<a class="headerlink" href="#organisation-utilisateurs" title="Permanent link">¶</a></h3>
+<h3 id="organisation-utilisateurs"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.3.2</span> Organisation utilisateurs<a class="headerlink" href="#organisation-utilisateurs" title="Permanent link">¶</a></h3>
 <p>Tout utilisateur peut être ajouté ou supprimé d'une organisation particulière ou d'un espace de travail et peut se voir attribuer un rôle d'accès spécifique au sein de cet espace de travail.</p>
 <p>La fonction Teams (Équipes) permet aux organisations de regrouper divers utilisateurs et participants en équipes. Par exemple, <code>développeurs de workflow</code> ou <code>analystes</code>, et d'appliquer le contrôle d'accès à tous les utilisateurs de cette équipe collectivement.</p>
 <p>Pour plus d'informations, veuillez vous referez à la section <a href="https://help.tower.nf/orgs-and-teams/organizations/">Gestion des utilisateurs</a>.</p>
-<h4 id="mise-en-place-dune-nouvelle-organisation"><span class="enumerate-headings-plugin enumerate-heading-plugin">13.3.2.1</span> Mise en place d'une nouvelle organisation<a class="headerlink" href="#mise-en-place-dune-nouvelle-organisation" title="Permanent link">¶</a></h4>
+<h4 id="mise-en-place-dune-nouvelle-organisation"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.3.2.1</span> Mise en place d'une nouvelle organisation<a class="headerlink" href="#mise-en-place-dune-nouvelle-organisation" title="Permanent link">¶</a></h4>
 <p>Les organisations constituent la structure de premier niveau et contiennent des espaces de travail, des membres, des équipes et des collaborateurs.</p>
 <p>Pour créer une nouvelle organisation :</p>
 <ol>
@@ -1684,7 +1692,7 @@ In the meantime, please try to work through the English-language material if you
 <div class="md-consent__overlay"></div>
 <aside class="md-consent__inner">
 <form class="md-consent__form md-grid md-typeset" name="consent">
-<h4><span class="enumerate-headings-plugin enumerate-heading-plugin">13.3.2.2</span> Cookie consent</h4>
+<h4><span class="enumerate-headings-plugin enumerate-heading-plugin">12.3.2.2</span> Cookie consent</h4>
 <p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our training materials better.</p>
 <input class="md-toggle" id="__settings" type="checkbox"/>
 <div class="md-consent__settings">

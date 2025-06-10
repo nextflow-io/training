@@ -1138,6 +1138,14 @@
 </ul>
 </nav>
 </li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../help/">
+<span class="md-ellipsis">
+    Help
+    
+  </span>
+</a>
+</li>
 </ul>
 </nav>
 </div>
@@ -1379,7 +1387,7 @@
 <a class="md-content__button md-icon" href="https://github.com/nextflow-io/training/edit/master/docs/basic_training/config.md" title="이 페이지를 편집">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"></path></svg>
 </a>
-<h1 id="nextflow-configuration"><span class="enumerate-headings-plugin enumerate-heading-plugin">10.</span> Nextflow configuration<a class="headerlink" href="#nextflow-configuration" title="Permanent link">¶</a></h1>
+<h1 id="nextflow-configuration"><span class="enumerate-headings-plugin enumerate-heading-plugin">9.</span> Nextflow configuration<a class="headerlink" href="#nextflow-configuration" title="Permanent link">¶</a></h1>
 <p>A key Nextflow feature is the ability to decouple the workflow implementation by the configuration setting required by the underlying execution platform.
 This enables portable deployment without the need to modify the application code.</p>
 <p>When you launch Nextflow, it will look for configuration files in several locations. As each source can contain conflicting settings, the sources are ranked to decide which settings to apply. Configuration sources are reported below and listed in order of priority:</p>
@@ -1392,7 +1400,7 @@ This enables portable deployment without the need to modify the application code
 <li>The config file <code>$HOME/.nextflow/config</code></li>
 <li>Values defined within the pipeline script itself (e.g., <code>main.nf</code>)</li>
 </ol>
-<h2 id="parameters"><span class="enumerate-headings-plugin enumerate-heading-plugin">10.1</span> Parameters<a class="headerlink" href="#parameters" title="Permanent link">¶</a></h2>
+<h2 id="parameters"><span class="enumerate-headings-plugin enumerate-heading-plugin">9.1</span> Parameters<a class="headerlink" href="#parameters" title="Permanent link">¶</a></h2>
 <p>Parameters are pipeline specific settings. Parameters can be defined in the workflow script using the <code>params</code> keyword followed by the parameter name. For example:</p>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">hello.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span>
 <span class="normal"><a href="#__codelineno-0-2">2</a></span>
@@ -1445,13 +1453,13 @@ For example, the <code>greeting</code> parameter in the <code>hello.nf</code> sc
 <li>How to configure parameters using <code>-params-file</code></li>
 </ol>
 </div>
-<h2 id="configuration-files"><span class="enumerate-headings-plugin enumerate-heading-plugin">10.2</span> Configuration files<a class="headerlink" href="#configuration-files" title="Permanent link">¶</a></h2>
+<h2 id="configuration-files"><span class="enumerate-headings-plugin enumerate-heading-plugin">9.2</span> Configuration files<a class="headerlink" href="#configuration-files" title="Permanent link">¶</a></h2>
 <p>When a workflow script is launched, Nextflow looks for a file named <code>nextflow.config</code> in the current directory and in the script base directory (if it is not the same as the current directory). Finally, it checks for the file: <code>$HOME/.nextflow/config</code>.</p>
 <p>When more than one of the above files exists, they are merged, so that the settings in the first override the same settings that may appear in the second, and so on.</p>
 <p>The default config file search mechanism can be extended by providing an extra configuration file by using the command line option: <code>-c &lt;config file&gt;</code>. For example:</p>
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-6-1" id="__codelineno-6-1" name="__codelineno-6-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello.nf<span class="w"> </span>-c<span class="w"> </span>custom.config
 </code></pre></div>
-<h3 id="config-syntax"><span class="enumerate-headings-plugin enumerate-heading-plugin">10.2.1</span> Config syntax<a class="headerlink" href="#config-syntax" title="Permanent link">¶</a></h3>
+<h3 id="config-syntax"><span class="enumerate-headings-plugin enumerate-heading-plugin">9.2.1</span> Config syntax<a class="headerlink" href="#config-syntax" title="Permanent link">¶</a></h3>
 <p>A Nextflow configuration file is a simple text file containing a set of properties defined using the syntax:</p>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">nextflow.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">value</span>
 </code></pre></div></td></tr></table></div>
@@ -1459,7 +1467,7 @@ For example, the <code>greeting</code> parameter in the <code>hello.nf</code> sc
 <p class="admonition-title">Info</p>
 <p>String values need to be wrapped in quotation characters while numbers and boolean values (<code>true</code>, <code>false</code>) do not. Also, note that values are typed, meaning for example that, <code>1</code> is different from <code>'1'</code>, since the first is interpreted as the number one, while the latter is interpreted as a string value.</p>
 </div>
-<h3 id="config-variables"><span class="enumerate-headings-plugin enumerate-heading-plugin">10.2.2</span> Config variables<a class="headerlink" href="#config-variables" title="Permanent link">¶</a></h3>
+<h3 id="config-variables"><span class="enumerate-headings-plugin enumerate-heading-plugin">9.2.2</span> Config variables<a class="headerlink" href="#config-variables" title="Permanent link">¶</a></h3>
 <p>Configuration properties can be used as variables in the configuration file itself, by using the usual <code>$propertyName</code> or <code>${expression}</code> syntax.</p>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">nextflow.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1">1</a></span>
 <span class="normal"><a href="#__codelineno-8-2">2</a></span>
@@ -1471,7 +1479,7 @@ For example, the <code>greeting</code> parameter in the <code>hello.nf</code> sc
 <p class="admonition-title">Tip</p>
 <p>In the configuration file it’s possible to access any variable defined in the host environment such as <code>$PATH</code>, <code>$HOME</code>, <code>$PWD</code>, etc.</p>
 </div>
-<h3 id="config-comments"><span class="enumerate-headings-plugin enumerate-heading-plugin">10.2.3</span> Config comments<a class="headerlink" href="#config-comments" title="Permanent link">¶</a></h3>
+<h3 id="config-comments"><span class="enumerate-headings-plugin enumerate-heading-plugin">9.2.3</span> Config comments<a class="headerlink" href="#config-comments" title="Permanent link">¶</a></h3>
 <p>Configuration files use the same conventions for comments used in the Nextflow script:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1">1</a></span>
 <span class="normal"><a href="#__codelineno-9-2">2</a></span>
@@ -1485,7 +1493,7 @@ For example, the <code>greeting</code> parameter in the <code>hello.nf</code> sc
 <a id="__codelineno-9-5" name="__codelineno-9-5"></a><span class="cm">    multiple lines</span>
 <a id="__codelineno-9-6" name="__codelineno-9-6"></a><span class="cm">*/</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="config-scopes"><span class="enumerate-headings-plugin enumerate-heading-plugin">10.2.4</span> Config scopes<a class="headerlink" href="#config-scopes" title="Permanent link">¶</a></h3>
+<h3 id="config-scopes"><span class="enumerate-headings-plugin enumerate-heading-plugin">9.2.4</span> Config scopes<a class="headerlink" href="#config-scopes" title="Permanent link">¶</a></h3>
 <p>Configuration settings can be organized in different scopes by dot prefixing the property names with a scope identifier or grouping the properties in the same scope using the curly brackets notation:</p>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">nextflow.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">1</a></span>
 <span class="normal"><a href="#__codelineno-10-2">2</a></span>
@@ -1501,7 +1509,7 @@ For example, the <code>greeting</code> parameter in the <code>hello.nf</code> sc
 <a id="__codelineno-10-6" name="__codelineno-10-6"></a><span class="w">    </span><span class="n">q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'another string ..'</span>
 <a id="__codelineno-10-7" name="__codelineno-10-7"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="config-params"><span class="enumerate-headings-plugin enumerate-heading-plugin">10.2.5</span> Config params<a class="headerlink" href="#config-params" title="Permanent link">¶</a></h3>
+<h3 id="config-params"><span class="enumerate-headings-plugin enumerate-heading-plugin">9.2.5</span> Config params<a class="headerlink" href="#config-params" title="Permanent link">¶</a></h3>
 <p>The scope <code>params</code> allows the definition of workflow parameters that override the values defined in the main workflow script.</p>
 <p>This is useful to consolidate one or more execution parameters in a separate file.</p>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">nextflow.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1">1</a></span>
@@ -1538,7 +1546,7 @@ For example, the <code>greeting</code> parameter in the <code>hello.nf</code> sc
 <p>Note how the <code>foo</code> parameter is overridden by the value specified on the command line and the <code>bar</code> parameter is taken from the configuration file.</p>
 </details>
 </div>
-<h3 id="config-env"><span class="enumerate-headings-plugin enumerate-heading-plugin">10.2.6</span> Config env<a class="headerlink" href="#config-env" title="Permanent link">¶</a></h3>
+<h3 id="config-env"><span class="enumerate-headings-plugin enumerate-heading-plugin">9.2.6</span> Config env<a class="headerlink" href="#config-env" title="Permanent link">¶</a></h3>
 <p>The <code>env</code> scope allows the definition of one or more variables that will be exported into the environment where the workflow tasks will be executed.</p>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">my-env.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-1">1</a></span>
 <span class="normal"><a href="#__codelineno-18-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1"></a><span class="n">env</span><span class="o">.</span><span class="na">ALPHA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'some value'</span>
@@ -1574,7 +1582,7 @@ For example, the <code>greeting</code> parameter in the <code>hello.nf</code> sc
 <div class="highlight"><span class="filename">Output</span><pre><span></span><code><a href="#__codelineno-21-1" id="__codelineno-21-1" name="__codelineno-21-1"></a><span class="go">BETA=/home/user/some/path</span>
 <a href="#__codelineno-21-2" id="__codelineno-21-2" name="__codelineno-21-2"></a><span class="go">ALPHA=some value</span>
 </code></pre></div>
-<h3 id="config-process"><span class="enumerate-headings-plugin enumerate-heading-plugin">10.2.7</span> Config process<a class="headerlink" href="#config-process" title="Permanent link">¶</a></h3>
+<h3 id="config-process"><span class="enumerate-headings-plugin enumerate-heading-plugin">9.2.7</span> Config process<a class="headerlink" href="#config-process" title="Permanent link">¶</a></h3>
 <p>Process <a href="https://www.nextflow.io/docs/latest/process.html#directives">directives</a> allow the specification of settings for the task execution such as <code>cpus</code>, <code>memory</code>, <code>container</code>, and other resources in the workflow script.</p>
 <p>This is useful when prototyping a small workflow script.</p>
 <p>However, it’s always a good practice to decouple the workflow execution logic from the process configuration settings, i.e. it’s strongly suggested to define the process settings in the workflow configuration file instead of the workflow script.</p>
@@ -1686,7 +1694,7 @@ For example, the <code>greeting</code> parameter in the <code>hello.nf</code> sc
 <a id="__codelineno-27-3" name="__codelineno-27-3"></a><span class="w">           </span><span class="o">[</span><span class="nl">env:</span><span class="w"> </span><span class="s1">'BAR'</span><span class="o">,</span><span class="w"> </span><span class="nl">value:</span><span class="w"> </span><span class="s1">'456'</span><span class="o">]]</span>
 <a id="__codelineno-27-4" name="__codelineno-27-4"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="config-docker-execution"><span class="enumerate-headings-plugin enumerate-heading-plugin">10.2.8</span> Config Docker execution<a class="headerlink" href="#config-docker-execution" title="Permanent link">¶</a></h3>
+<h3 id="config-docker-execution"><span class="enumerate-headings-plugin enumerate-heading-plugin">9.2.8</span> Config Docker execution<a class="headerlink" href="#config-docker-execution" title="Permanent link">¶</a></h3>
 <p>The container image to be used for the process execution can be specified in the <code>nextflow.config</code> file:</p>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">nextflow.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-28-1">1</a></span>
 <span class="normal"><a href="#__codelineno-28-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1"></a><span class="n">process</span><span class="o">.</span><span class="na">container</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'nextflow/rnaseq-nf'</span>
@@ -1697,7 +1705,7 @@ For example, the <code>greeting</code> parameter in the <code>hello.nf</code> sc
 <span class="normal"><a href="#__codelineno-29-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1"></a><span class="n">process</span><span class="o">.</span><span class="na">container</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'nextflow/rnaseq-nf@sha256:aeacbd7ea1154f263cda972a96920fb228b2033544c2641476350b9317dab266'</span>
 <a id="__codelineno-29-2" name="__codelineno-29-2"></a><span class="n">docker</span><span class="o">.</span><span class="na">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="config-singularity-execution"><span class="enumerate-headings-plugin enumerate-heading-plugin">10.2.9</span> Config Singularity execution<a class="headerlink" href="#config-singularity-execution" title="Permanent link">¶</a></h3>
+<h3 id="config-singularity-execution"><span class="enumerate-headings-plugin enumerate-heading-plugin">9.2.9</span> Config Singularity execution<a class="headerlink" href="#config-singularity-execution" title="Permanent link">¶</a></h3>
 <p>To run a workflow execution with Singularity, a container image file path is required in the Nextflow config file using the container directive:</p>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">nextflow.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-30-1">1</a></span>
 <span class="normal"><a href="#__codelineno-30-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1"></a><span class="n">process</span><span class="o">.</span><span class="na">container</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'/some/singularity/image.sif'</span>
@@ -1728,7 +1736,7 @@ For example, the <code>greeting</code> parameter in the <code>hello.nf</code> sc
 <p>The above configuration instructs Nextflow to use the Singularity engine to run your script processes. The container is pulled from the Docker registry and cached in the current directory to be used for further runs.</p>
 <p>Alternatively, if you have a Singularity image file, its absolute path location can be specified as the container name either using the <code>-with-singularity</code> option or the <code>process.container</code> setting in the config file.</p>
 </div>
-<h3 id="config-conda-execution"><span class="enumerate-headings-plugin enumerate-heading-plugin">10.2.10</span> Config Conda execution<a class="headerlink" href="#config-conda-execution" title="Permanent link">¶</a></h3>
+<h3 id="config-conda-execution"><span class="enumerate-headings-plugin enumerate-heading-plugin">9.2.10</span> Config Conda execution<a class="headerlink" href="#config-conda-execution" title="Permanent link">¶</a></h3>
 <p>The use of a Conda environment can also be provided in the configuration file by adding the following setting in the <code>nextflow.config</code> file:</p>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">nextflow.config</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-32-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1"></a><span class="n">process</span><span class="o">.</span><span class="na">conda</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"/home/ubuntu/miniconda2/envs/nf-tutorial"</span>
 </code></pre></div></td></tr></table></div>
@@ -1817,7 +1825,7 @@ For example, the <code>greeting</code> parameter in the <code>hello.nf</code> sc
 <div class="md-consent__overlay"></div>
 <aside class="md-consent__inner">
 <form class="md-consent__form md-grid md-typeset" name="consent">
-<h4><span class="enumerate-headings-plugin enumerate-heading-plugin">10.2.10.1</span> Cookie consent</h4>
+<h4><span class="enumerate-headings-plugin enumerate-heading-plugin">9.2.10.1</span> Cookie consent</h4>
 <p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our training materials better.</p>
 <input class="md-toggle" id="__settings" type="checkbox"/>
 <div class="md-consent__settings">

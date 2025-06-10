@@ -1196,6 +1196,14 @@
 </ul>
 </nav>
 </li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../help/">
+<span class="md-ellipsis">
+    Help
+    
+  </span>
+</a>
+</li>
 </ul>
 </nav>
 </div>
@@ -1495,7 +1503,7 @@
 <a class="md-content__button md-icon" href="https://github.com/nextflow-io/training/edit/master/docs/basic_training/processes.md" title="Editar esta página">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"></path></svg>
 </a>
-<h1 id="processes"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.</span> Processes<a class="headerlink" href="#processes" title="Permanent link">¶</a></h1>
+<h1 id="processes"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.</span> Processes<a class="headerlink" href="#processes" title="Permanent link">¶</a></h1>
 <p>In Nextflow, a <code>process</code> is the basic computing primitive to execute foreign functions (i.e., custom scripts or tools).</p>
 <p>The <code>process</code> definition starts with the keyword <code>process</code>, followed by the process name and finally the process body delimited by curly brackets.</p>
 <p>A basic <code>process</code>, only using the <code>script</code> definition block, looks like the following:</p>
@@ -1568,7 +1576,7 @@
 <li>An optional boolean conditional to trigger the process execution</li>
 <li>The command to be executed</li>
 </ol>
-<h2 id="script"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.1</span> Script<a class="headerlink" href="#script" title="Permanent link">¶</a></h2>
+<h2 id="script"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.1</span> Script<a class="headerlink" href="#script" title="Permanent link">¶</a></h2>
 <p>The <code>script</code> block is a string statement that defines the command to be executed by the process.</p>
 <p>A process can execute only one <code>script</code> block. It must be the last statement when the process contains <code>input</code> and <code>output</code> declarations.</p>
 <p>The <code>script</code> block can be a single or a multi-line string. The latter simplifies the writing of non-trivial scripts composed of multiple commands spanning over multiple lines. For example:</p>
@@ -1639,7 +1647,7 @@
 <p class="admonition-title">Tip</p>
 <p>Multiple programming languages can be used within the same workflow script. However, for large chunks of code it is better to save them into separate files and invoke them from the process script. One can store the specific scripts in the <code>./bin/</code> folder.</p>
 </div>
-<h3 id="script-parameters"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.1.1</span> Script parameters<a class="headerlink" href="#script-parameters" title="Permanent link">¶</a></h3>
+<h3 id="script-parameters"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.1.1</span> Script parameters<a class="headerlink" href="#script-parameters" title="Permanent link">¶</a></h3>
 <p>Script parameters (<code>params</code>) can be defined dynamically using variable values. For example:</p>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-5-2"> 2</a></span>
@@ -1762,7 +1770,7 @@
 <a id="__codelineno-11-12" name="__codelineno-11-12"></a><span class="w">    </span><span class="n">BAZ</span><span class="o">()</span>
 <a id="__codelineno-11-13" name="__codelineno-11-13"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="conditional-script"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.1.2</span> Conditional script<a class="headerlink" href="#conditional-script" title="Permanent link">¶</a></h3>
+<h3 id="conditional-script"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.1.2</span> Conditional script<a class="headerlink" href="#conditional-script" title="Permanent link">¶</a></h3>
 <p>The process script can also be defined in a completely dynamic manner using an <code>if</code> statement or any other expression for evaluating a string value. For example:</p>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-12-2"> 2</a></span>
@@ -1837,7 +1845,7 @@
 <li>How to use the <code>if</code> statement to define a conditional script</li>
 </ol>
 </div>
-<h2 id="inputs"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.2</span> Inputs<a class="headerlink" href="#inputs" title="Permanent link">¶</a></h2>
+<h2 id="inputs"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.2</span> Inputs<a class="headerlink" href="#inputs" title="Permanent link">¶</a></h2>
 <p>Nextflow process instances (tasks) are isolated from each other but can communicate between themselves by sending values through channels.</p>
 <p>Inputs implicitly determine the dependencies and the parallel execution of the process. The process execution is fired each time <em>new</em> data is ready to be consumed from the input channel:</p>
 <figure class="excalidraw">
@@ -1865,7 +1873,7 @@
 <a id="__codelineno-15-2" name="__codelineno-15-2"></a><span class="o">&lt;</span><span class="n">input</span><span class="w"> </span><span class="n">qualifier</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&lt;</span><span class="n">input</span><span class="w"> </span><span class="n">name</span><span class="o">&gt;</span>
 </code></pre></div></td></tr></table></div>
 <p>There are <a href="https://www.nextflow.io/docs/latest/process.html#inputs">several input qualifiers</a> that can be used to define the input declaration. The most common are outlined in detail below.</p>
-<h3 id="input-values"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.2.1</span> Input values<a class="headerlink" href="#input-values" title="Permanent link">¶</a></h3>
+<h3 id="input-values"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.2.1</span> Input values<a class="headerlink" href="#input-values" title="Permanent link">¶</a></h3>
 <p>The <code>val</code> qualifier allows you to receive data of any type as input. It can be accessed in the process script by using the specified input name. For example:</p>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-16-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-16-2"> 2</a></span>
@@ -1910,7 +1918,7 @@
 <p class="admonition-title">Warning</p>
 <p>The channel guarantees that items are delivered in the same order as they have been sent - but - since the process is executed in a parallel manner, there is no guarantee that they are processed in the same order as they are received.</p>
 </div>
-<h3 id="input-files"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.2.2</span> Input files<a class="headerlink" href="#input-files" title="Permanent link">¶</a></h3>
+<h3 id="input-files"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.2.2</span> Input files<a class="headerlink" href="#input-files" title="Permanent link">¶</a></h3>
 <p>The <code>path</code> qualifier allows the handling of file values in the process execution context. This means that Nextflow will stage it in the process execution directory, and it can be accessed by the script using the name specified in the input declaration. For example:</p>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-18-2"> 2</a></span>
@@ -2044,7 +2052,7 @@
 <p class="admonition-title">Warning</p>
 <p>In the past, the <code>file</code> qualifier was used for files, but the <code>path</code> qualifier should be preferred over file to handle process input files when using Nextflow 19.10.0 or later. When a process declares an input file, the corresponding channel elements must be <strong>file</strong> objects created with the file helper function from the file specific channel factories (e.g., <code>Channel.fromPath</code> or <code>Channel.fromFilePairs</code>).</p>
 </div>
-<h3 id="combine-input-channels"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.2.3</span> Combine input channels<a class="headerlink" href="#combine-input-channels" title="Permanent link">¶</a></h3>
+<h3 id="combine-input-channels"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.2.3</span> Combine input channels<a class="headerlink" href="#combine-input-channels" title="Permanent link">¶</a></h3>
 <p>A key feature of processes is the ability to handle inputs from multiple channels. However, it’s important to understand how channel contents and their semantics affect the execution of a process.</p>
 <p>Consider the following example:</p>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-24-1"> 1</a></span>
@@ -2234,7 +2242,7 @@
 <p>You may also consider using other Channel factories or operators to create your input channels.</p>
 </details>
 </div>
-<h3 id="input-repeaters"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.2.4</span> Input repeaters<a class="headerlink" href="#input-repeaters" title="Permanent link">¶</a></h3>
+<h3 id="input-repeaters"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.2.4</span> Input repeaters<a class="headerlink" href="#input-repeaters" title="Permanent link">¶</a></h3>
 <p>The <code>each</code> qualifier allows you to repeat the execution of a process for each item in a collection every time new data is received. For example:</p>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-31-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-31-2"> 2</a></span>
@@ -2348,14 +2356,14 @@
 <li>How to use the <code>each</code> qualifier to repeat the execution of a process for each item in a collection</li>
 </ol>
 </div>
-<h2 id="outputs"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.3</span> Outputs<a class="headerlink" href="#outputs" title="Permanent link">¶</a></h2>
+<h2 id="outputs"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.3</span> Outputs<a class="headerlink" href="#outputs" title="Permanent link">¶</a></h2>
 <p>The <em>output</em> declaration block defines the channels used by the process to send out the results produced.</p>
 <p>Only one output block, that can contain one or more output declaration, can be defined. The output block follows the syntax shown below:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-35-1">1</a></span>
 <span class="normal"><a href="#__codelineno-35-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1"></a><span class="nl">output:</span>
 <a id="__codelineno-35-2" name="__codelineno-35-2"></a><span class="o">&lt;</span><span class="n">output</span><span class="w"> </span><span class="n">qualifier</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&lt;</span><span class="n">output</span><span class="w"> </span><span class="n">name</span><span class="o">&gt;,</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="o">&lt;</span><span class="n">output</span><span class="w"> </span><span class="n">channel</span><span class="o">&gt;</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="output-values"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.3.1</span> Output values<a class="headerlink" href="#output-values" title="Permanent link">¶</a></h3>
+<h3 id="output-values"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.3.1</span> Output values<a class="headerlink" href="#output-values" title="Permanent link">¶</a></h3>
 <p>The <code>val</code> qualifier specifies a defined <em>value</em> in the script context. Values are frequently defined in the <code>input</code> and/or <code>output</code> declaration blocks, as shown in the following example:</p>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-36-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-36-2"> 2</a></span>
@@ -2395,7 +2403,7 @@
 <a id="__codelineno-36-18" name="__codelineno-36-18"></a><span class="w">        </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
 <a id="__codelineno-36-19" name="__codelineno-36-19"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="output-files"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.3.2</span> Output files<a class="headerlink" href="#output-files" title="Permanent link">¶</a></h3>
+<h3 id="output-files"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.3.2</span> Output files<a class="headerlink" href="#output-files" title="Permanent link">¶</a></h3>
 <p>The <code>path</code> qualifier specifies one or more files produced by the process into the specified channel as an output.</p>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-37-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-37-2"> 2</a></span>
@@ -2427,7 +2435,7 @@
 </code></pre></div></td></tr></table></div>
 <p>In the above example the process <code>RANDOMNUM</code> creates a file named <code>result.txt</code> containing a random number.</p>
 <p>Since a file parameter using the same name is declared in the output block, the file is sent over the <code>receiver_ch</code> channel when the task is complete. A downstream <code>process</code> declaring the same channel as <em>input</em> will be able to receive it.</p>
-<h3 id="multiple-output-files"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.3.3</span> Multiple output files<a class="headerlink" href="#multiple-output-files" title="Permanent link">¶</a></h3>
+<h3 id="multiple-output-files"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.3.3</span> Multiple output files<a class="headerlink" href="#multiple-output-files" title="Permanent link">¶</a></h3>
 <p>When an output file name contains a wildcard character (<code>*</code> or <code>?</code>) it is interpreted as a <a href="http://docs.oracle.com/javase/tutorial/essential/io/fileOps.html#glob">glob</a> path matcher. This allows us to <em>capture</em> multiple files into a list object and output them as a sole emission. For example:</p>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-38-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-38-2"> 2</a></span>
@@ -2508,7 +2516,7 @@
 </code></pre></div>
 </details>
 </div>
-<h3 id="dynamic-output-file-names"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.3.4</span> Dynamic output file names<a class="headerlink" href="#dynamic-output-file-names" title="Permanent link">¶</a></h3>
+<h3 id="dynamic-output-file-names"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.3.4</span> Dynamic output file names<a class="headerlink" href="#dynamic-output-file-names" title="Permanent link">¶</a></h3>
 <p>When an output file name needs to be expressed dynamically, it is possible to define it using a dynamic string that references values defined in the input declaration block or in the script global context. For example:</p>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-42-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-42-2"> 2</a></span>
@@ -2561,7 +2569,7 @@
 <a id="__codelineno-42-25" name="__codelineno-42-25"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>In the above example, each time the process is executed an alignment file is produced whose name depends on the actual value of the <code>x</code> input.</p>
-<h3 id="composite-inputs-and-outputs"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.3.5</span> Composite inputs and outputs<a class="headerlink" href="#composite-inputs-and-outputs" title="Permanent link">¶</a></h3>
+<h3 id="composite-inputs-and-outputs"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.3.5</span> Composite inputs and outputs<a class="headerlink" href="#composite-inputs-and-outputs" title="Permanent link">¶</a></h3>
 <p>So far you have seen how to declare multiple input and output channels that can handle one value at a time. However, Nextflow can also handle a <em>tuple</em> of values.</p>
 <p>The <code>input</code> and <code>output</code> declarations for tuples must be declared with a <code>tuple</code> qualifier followed by the definition of each element in the tuple.</p>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-43-1"> 1</a></span>
@@ -2652,7 +2660,7 @@
 </code></pre></div></td></tr></table></div>
 </details>
 </div>
-<h3 id="output-definitions"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.3.6</span> Output definitions<a class="headerlink" href="#output-definitions" title="Permanent link">¶</a></h3>
+<h3 id="output-definitions"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.3.6</span> Output definitions<a class="headerlink" href="#output-definitions" title="Permanent link">¶</a></h3>
 <p>Nextflow allows the use of alternative output definitions within workflows to simplify your code.</p>
 <p>You can also explicitly define the output of a channel using the <code>.out</code> attribute:</p>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-46-1"> 1</a></span>
@@ -2847,7 +2855,7 @@
 <li>How to define outputs</li>
 </ol>
 </div>
-<h2 id="when"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.4</span> When<a class="headerlink" href="#when" title="Permanent link">¶</a></h2>
+<h2 id="when"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.4</span> When<a class="headerlink" href="#when" title="Permanent link">¶</a></h2>
 <p>The <code>when</code> declaration allows you to define a condition that must be verified in order to execute the process. This can be any expression that evaluates a boolean value.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
@@ -2907,7 +2915,7 @@
 <li>How to use the <code>when</code> declaration to allow conditional processes</li>
 </ol>
 </div>
-<h2 id="directives"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.5</span> Directives<a class="headerlink" href="#directives" title="Permanent link">¶</a></h2>
+<h2 id="directives"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.5</span> Directives<a class="headerlink" href="#directives" title="Permanent link">¶</a></h2>
 <p>Directive declarations allow the definition of optional settings that affect the execution of the current process without affecting the <em>semantic</em> of the task itself.</p>
 <p>They must be entered at the top of the process body, before any other declaration blocks (i.e., <em>input</em>, <em>output</em>, etc.).</p>
 <p>Directives are commonly used to define the amount of computing resources to be used or other meta directives that allow the definition of extra configuration of logging information. For example:</p>
@@ -2932,7 +2940,7 @@
 <a id="__codelineno-51-10" name="__codelineno-51-10"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>The complete list of directives is available <a href="https://www.nextflow.io/docs/latest/process.html#directives">at this link</a>. Some of the most common are described in detail below.</p>
-<h3 id="resource-allocation"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.5.1</span> Resource allocation<a class="headerlink" href="#resource-allocation" title="Permanent link">¶</a></h3>
+<h3 id="resource-allocation"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.5.1</span> Resource allocation<a class="headerlink" href="#resource-allocation" title="Permanent link">¶</a></h3>
 <p>Directives that allow you to define the amount of computing resources to be used by the process. These are:</p>
 <table>
 <thead>
@@ -2983,7 +2991,7 @@
 <a id="__codelineno-52-10" name="__codelineno-52-10"></a><span class="s2">    """</span>
 <a id="__codelineno-52-11" name="__codelineno-52-11"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="publishdir-directive"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.5.2</span> PublishDir directive<a class="headerlink" href="#publishdir-directive" title="Permanent link">¶</a></h3>
+<h3 id="publishdir-directive"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.5.2</span> PublishDir directive<a class="headerlink" href="#publishdir-directive" title="Permanent link">¶</a></h3>
 <p>Given each task is being executed in separate temporary <code>work/</code> folder (e.g., <code>work/f1/850698…</code>), you may want to save important, non-intermediary, and/or final files in a results folder.</p>
 <p>To store our workflow result files, you need to explicitly mark them using the directive <a href="https://www.nextflow.io/docs/latest/process.html#publishdir">publishDir</a> in the process that’s creating the files. For example:</p>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-53-1"> 1</a></span>
@@ -3186,7 +3194,7 @@
 <div class="md-consent__overlay"></div>
 <aside class="md-consent__inner">
 <form class="md-consent__form md-grid md-typeset" name="consent">
-<h4><span class="enumerate-headings-plugin enumerate-heading-plugin">7.5.2.1</span> Cookie consent</h4>
+<h4><span class="enumerate-headings-plugin enumerate-heading-plugin">6.5.2.1</span> Cookie consent</h4>
 <p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our training materials better.</p>
 <input class="md-toggle" id="__settings" type="checkbox"/>
 <div class="md-consent__settings">

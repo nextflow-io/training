@@ -1140,6 +1140,14 @@
 </ul>
 </nav>
 </li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../help/">
+<span class="md-ellipsis">
+    Help
+    
+  </span>
+</a>
+</li>
 </ul>
 </nav>
 </div>
@@ -1383,7 +1391,7 @@
 <a class="md-content__button md-icon" href="https://github.com/nextflow-io/training/edit/master/docs/basic_training/seqera_platform.md" title="이 페이지를 편집">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"></path></svg>
 </a>
-<h1 id="get-started-with-seqera-platform"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.</span> Get started with Seqera Platform<a class="headerlink" href="#get-started-with-seqera-platform" title="Permanent link">¶</a></h1>
+<h1 id="get-started-with-seqera-platform"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.</span> Get started with Seqera Platform<a class="headerlink" href="#get-started-with-seqera-platform" title="Permanent link">¶</a></h1>
 <p>Seqera Platform, previously known as Nextflow Tower, is the centralized command post for data management and workflows. It brings monitoring, logging and observability to distributed workflows and simplifies the deployment of workflows on any cloud, cluster or laptop. In Seqera Platform terminology, a workflow is what we've been working on so far, and pipelines are pre-configured workflows that can be used by all users in a workspace. It is composed of a workflow repository, launch parameters, and a compute environment. We'll stick to these definitions in this section.</p>
 <p>Seqera core features include:</p>
 <ul>
@@ -1397,7 +1405,7 @@
 <p><a href="https://cloud.seqera.io/">Sign up</a> to try Seqera for free or request a <a href="https://seqera.io/demo/">demo</a> for deployments in your own on-premise or cloud environment.</p>
 </div>
 <p>You can use Seqera Platform via either the <strong>CLI</strong>, through the <strong>online GUI</strong> or through the <strong>API</strong>.</p>
-<h2 id="cli"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.1</span> CLI<a class="headerlink" href="#cli" title="Permanent link">¶</a></h2>
+<h2 id="cli"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.1</span> CLI<a class="headerlink" href="#cli" title="Permanent link">¶</a></h2>
 <p>You will need to set up your environment to use Seqera Platform. This is a one-time setup.</p>
 <p>Create an account and login into Seqera Platform.</p>
 <p><strong>1. Create a new token</strong></p>
@@ -1443,14 +1451,14 @@
 <li>How to launch a pipeline with Seqera Platform.</li>
 </ol>
 </div>
-<h2 id="online-gui"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.2</span> Online GUI<a class="headerlink" href="#online-gui" title="Permanent link">¶</a></h2>
+<h2 id="online-gui"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.2</span> Online GUI<a class="headerlink" href="#online-gui" title="Permanent link">¶</a></h2>
 <p>To run using the GUI, there are three main steps:</p>
 <ol>
 <li>Create an account and login into Seqera Platform, available free of charge, at <a href="https://cloud.seqera.io">cloud.seqera.io</a>.</li>
 <li>Create and configure a new <a href="https://docs.seqera.io/platform/24.1/compute-envs/overview">compute environment</a>.</li>
 <li>Start <a href="https://docs.seqera.io/platform/24.1/launch/launchpad#launchpad">launching pipelines</a>.</li>
 </ol>
-<h3 id="configuring-your-compute-environment"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.2.1</span> Configuring your compute environment<a class="headerlink" href="#configuring-your-compute-environment" title="Permanent link">¶</a></h3>
+<h3 id="configuring-your-compute-environment"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.2.1</span> Configuring your compute environment<a class="headerlink" href="#configuring-your-compute-environment" title="Permanent link">¶</a></h3>
 <p>Seqera Platform uses the concept of <strong>Compute Environments</strong> to define the execution platform where a workflow will run.</p>
 <p>It supports the launching of workflows into a growing number of <strong>cloud</strong> and <strong>on-premise</strong> infrastructures.</p>
 <p><img alt="Compute environments" src="../../../basic_training/img/compute_env_platforms.png"/></p>
@@ -1468,7 +1476,7 @@
 <li><a href="https://docs.seqera.io/platform/24.1/compute-envs/k8s">Hosted Kubernetes</a></li>
 </ul>
 </div>
-<h3 id="selecting-a-default-compute-environment"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.2.2</span> Selecting a default compute environment<a class="headerlink" href="#selecting-a-default-compute-environment" title="Permanent link">¶</a></h3>
+<h3 id="selecting-a-default-compute-environment"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.2.2</span> Selecting a default compute environment<a class="headerlink" href="#selecting-a-default-compute-environment" title="Permanent link">¶</a></h3>
 <p>If you have more than one <strong>Compute Environment</strong>, you can select which one will be used by default when launching a pipeline.</p>
 <ol>
 <li>Navigate to your <a href="https://docs.seqera.io/platform/24.1/compute-envs/overview">compute environments</a>.</li>
@@ -1476,11 +1484,11 @@
 </ol>
 <p><strong>Congratulations!</strong></p>
 <p>You are now ready to launch workflows with your primary compute environment.</p>
-<h3 id="launchpad"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.2.3</span> Launchpad<a class="headerlink" href="#launchpad" title="Permanent link">¶</a></h3>
+<h3 id="launchpad"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.2.3</span> Launchpad<a class="headerlink" href="#launchpad" title="Permanent link">¶</a></h3>
 <p>Launchpad makes it easy for any workspace user to launch a pre-configured pipeline.</p>
 <p><img alt="Launchpad" src="../../../basic_training/img/overview_launch.png"/></p>
 <p>A pipeline is a repository containing a Nextflow workflow, a compute environment and workflow parameters.</p>
-<h3 id="pipeline-parameters-form"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.2.4</span> Pipeline Parameters Form<a class="headerlink" href="#pipeline-parameters-form" title="Permanent link">¶</a></h3>
+<h3 id="pipeline-parameters-form"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.2.4</span> Pipeline Parameters Form<a class="headerlink" href="#pipeline-parameters-form" title="Permanent link">¶</a></h3>
 <p>Launchpad automatically detects the presence of a <code>nextflow_schema.json</code> in the root of the repository and dynamically creates a form where users can easily update the parameters.</p>
 <div class="admonition info">
 <p class="admonition-title">Info</p>
@@ -1488,7 +1496,7 @@
 </div>
 <p>This makes it trivial for users without any expertise in Nextflow to enter their workflow parameters and launch.</p>
 <p><img alt="Pipeline parameters" src="../../../basic_training/img/launch_rnaseq_nextflow_schema.png"/></p>
-<h3 id="adding-a-new-pipeline"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.2.5</span> Adding a new pipeline<a class="headerlink" href="#adding-a-new-pipeline" title="Permanent link">¶</a></h3>
+<h3 id="adding-a-new-pipeline"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.2.5</span> Adding a new pipeline<a class="headerlink" href="#adding-a-new-pipeline" title="Permanent link">¶</a></h3>
 <p>Adding a pipeline to the pre-saved workspace launchpad is detailed in full on the <a href="https://docs.seqera.io/platform/24.1/launch/launchpad#add-new-pipeline">Seqera webpage docs</a>.</p>
 <p>In brief, these are the steps you need to follow to set up a pipeline.</p>
 <ol>
@@ -1533,20 +1541,20 @@
 <li>How to add, customize, and launch a pipeline with Seqera Platform.</li>
 </ol>
 </div>
-<h2 id="api"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.3</span> API<a class="headerlink" href="#api" title="Permanent link">¶</a></h2>
+<h2 id="api"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.3</span> API<a class="headerlink" href="#api" title="Permanent link">¶</a></h2>
 <p>To learn more about using the Seqera Platform API, visit the <a href="https://docs.seqera.io/platform/24.1/api/overview">API section</a> in the documentation.</p>
-<h2 id="workspaces-and-organizations"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.4</span> Workspaces and Organizations<a class="headerlink" href="#workspaces-and-organizations" title="Permanent link">¶</a></h2>
+<h2 id="workspaces-and-organizations"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.4</span> Workspaces and Organizations<a class="headerlink" href="#workspaces-and-organizations" title="Permanent link">¶</a></h2>
 <p>Seqera Platform simplifies the development and execution of pipeline by providing a centralized interface for users and organizations.</p>
 <p>Each user has a unique <strong>workspace</strong> where they can interact and manage all resources such as workflows, compute environments and credentials. Details of this can be found <a href="https://docs.seqera.io/platform/24.1/getting-started/workspace-setup">here</a>.</p>
 <p>Organisations can have multiple workspaces with customized access for specific organisation <strong>members</strong> and <strong>collaborators</strong>.</p>
-<h3 id="organization-resources"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.4.1</span> Organization resources<a class="headerlink" href="#organization-resources" title="Permanent link">¶</a></h3>
+<h3 id="organization-resources"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.4.1</span> Organization resources<a class="headerlink" href="#organization-resources" title="Permanent link">¶</a></h3>
 <p>You can create your own organization and participant workspace by following the docs at <a href="https://docs.seqera.io/platform/24.1/orgs-and-teams/workspace-management">Seqera</a>.</p>
 <p>Seqera Platform allows the creation of multiple organizations, each of which can contain multiple workspaces with shared users and resources. This allows any organization to customize and organize the usage of resources while maintaining an access control layer for users associated with a workspace.</p>
-<h3 id="organization-users"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.4.2</span> Organization users<a class="headerlink" href="#organization-users" title="Permanent link">¶</a></h3>
+<h3 id="organization-users"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.4.2</span> Organization users<a class="headerlink" href="#organization-users" title="Permanent link">¶</a></h3>
 <p>Any user can be added or removed from a particular organization or a workspace and can be allocated a specific access role within that workspace.</p>
 <p>The Teams feature provides a way for organizations to group various users and participants together into teams. For example, <code>workflow-developers</code> or <code>analysts</code>, and apply access control to all the users within this team collectively.</p>
 <p>For further information, please refer to the <a href="https://docs.seqera.io/platform/24.1/orgs-and-teams/organizations">User Management</a> section.</p>
-<h3 id="setting-up-a-new-organization"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.4.3</span> Setting up a new organization<a class="headerlink" href="#setting-up-a-new-organization" title="Permanent link">¶</a></h3>
+<h3 id="setting-up-a-new-organization"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.4.3</span> Setting up a new organization<a class="headerlink" href="#setting-up-a-new-organization" title="Permanent link">¶</a></h3>
 <p>Organizations are the top-level structure and contain Workspaces, Members, Teams and Collaborators.</p>
 <p>To create a new Organization:</p>
 <ol>
@@ -1656,7 +1664,7 @@
 <div class="md-consent__overlay"></div>
 <aside class="md-consent__inner">
 <form class="md-consent__form md-grid md-typeset" name="consent">
-<h4><span class="enumerate-headings-plugin enumerate-heading-plugin">12.4.3.1</span> Cookie consent</h4>
+<h4><span class="enumerate-headings-plugin enumerate-heading-plugin">11.4.3.1</span> Cookie consent</h4>
 <p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our training materials better.</p>
 <input class="md-toggle" id="__settings" type="checkbox"/>
 <div class="md-consent__settings">

@@ -1144,6 +1144,14 @@
 </ul>
 </nav>
 </li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../help/">
+<span class="md-ellipsis">
+    Help
+    
+  </span>
+</a>
+</li>
 </ul>
 </nav>
 </div>
@@ -1398,12 +1406,12 @@ The translated material may be incomplete or incorrect.
 We plan to update the translations later this year.
 In the meantime, please try to work through the English-language material if you can.</p>
 </div>
-<h1 id="modularizacao"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.</span> Modularização<a class="headerlink" href="#modularizacao" title="Permanent link">¶</a></h1>
+<h1 id="modularizacao"><span class="enumerate-headings-plugin enumerate-heading-plugin">10.</span> Modularização<a class="headerlink" href="#modularizacao" title="Permanent link">¶</a></h1>
 <p>A definição de bibliotecas modulares simplifica a escrita de fluxos de trabalho complexos de análise de dados, além tornar o reuso de processos mais fácil.</p>
 <p>Ao usar o exemplo <code>hello.nf</code> da seção de introdução, nós converteremos os processos do fluxo de trabalho em módulos e, em seguida, executaremos estes processos dentro do escopo <code>workflow</code> de diferentes formas.</p>
-<h2 id="modulos"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.1</span> Módulos<a class="headerlink" href="#modulos" title="Permanent link">¶</a></h2>
+<h2 id="modulos"><span class="enumerate-headings-plugin enumerate-heading-plugin">10.1</span> Módulos<a class="headerlink" href="#modulos" title="Permanent link">¶</a></h2>
 <p>A DSL2 do Nextflow permite a definição de scripts de módulos autônomos que podem ser incluídos e compartilhados em vários fluxos de trabalho. Cada módulo pode conter sua própria definição de <code>process</code> ou <code>workflow</code>.</p>
-<h3 id="importando-modulos"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.1.1</span> Importando módulos<a class="headerlink" href="#importando-modulos" title="Permanent link">¶</a></h3>
+<h3 id="importando-modulos"><span class="enumerate-headings-plugin enumerate-heading-plugin">10.1.1</span> Importando módulos<a class="headerlink" href="#importando-modulos" title="Permanent link">¶</a></h3>
 <p>Os componentes definidos no script do módulo podem ser importados para outros scripts do Nextflow usando a instrução <code>include</code>. Isso permite que você armazene esses componentes em arquivos separados para que possam ser reutilizados em vários fluxos de trabalho.</p>
 <p>Usando o exemplo <code>hello.nf</code>, podemos fazer isso:</p>
 <ul>
@@ -1506,11 +1514,11 @@ In the meantime, please try to work through the English-language material if you
 <p>Agora nós modularizamos os processos, o que faz com que o código seja reutilizável.</p>
 </details>
 </div>
-<h3 id="importacoes-multiplas"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.1.2</span> Importações múltiplas<a class="headerlink" href="#importacoes-multiplas" title="Permanent link">¶</a></h3>
+<h3 id="importacoes-multiplas"><span class="enumerate-headings-plugin enumerate-heading-plugin">10.1.2</span> Importações múltiplas<a class="headerlink" href="#importacoes-multiplas" title="Permanent link">¶</a></h3>
 <p>Se um script de módulo Nextflow contiver várias definições de <code>process</code>, elas também podem ser importadas usando uma única instrução <code>include</code>, conforme mostrado no exemplo abaixo:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="n">include</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">SPLITLETTERS</span><span class="o">;</span><span class="w"> </span><span class="n">CONVERTTOUPPER</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="s1">'./modules.nf'</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="apelidos-dos-modulos"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.1.3</span> Apelidos dos módulos<a class="headerlink" href="#apelidos-dos-modulos" title="Permanent link">¶</a></h3>
+<h3 id="apelidos-dos-modulos"><span class="enumerate-headings-plugin enumerate-heading-plugin">10.1.3</span> Apelidos dos módulos<a class="headerlink" href="#apelidos-dos-modulos" title="Permanent link">¶</a></h3>
 <p>Ao incluir um componente de um módulo, é possível especificar um apelido para os processos usando a declaração <code>as</code>. Isso permite a inclusão e a invocação do mesmo componente várias vezes usando diferentes apelidos:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-4-2"> 2</a></span>
@@ -1577,7 +1585,7 @@ In the meantime, please try to work through the English-language material if you
 <p>Você pode armazenar cada processo em arquivos separados em subpastas separadas ou combinados em um arquivo grande (ambos são válidos).
 Você pode encontrar exemplos disso em repositórios públicos, como no <a href="https://github.com/seqeralabs/rnaseq-nf/tree/master/modules">tutorial de RNA-Seq da Seqera</a> ou em fluxos de trabalho do nf-core, como o <a href="https://github.com/nf-core/rnaseq/tree/master/modules/nf-core">nf-core/rnaseq</a>.</p>
 </div>
-<h2 id="definicao-de-saida"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.2</span> Definição de saída<a class="headerlink" href="#definicao-de-saida" title="Permanent link">¶</a></h2>
+<h2 id="definicao-de-saida"><span class="enumerate-headings-plugin enumerate-heading-plugin">10.2</span> Definição de saída<a class="headerlink" href="#definicao-de-saida" title="Permanent link">¶</a></h2>
 <p>O Nextflow permite o uso de definições de saída alternativas em fluxos de trabalho para simplificar seu código.</p>
 <p>No exemplo básico anterior (<code>hello.nf</code>), definimos os nomes dos canais para especificar a entrada para o próximo processo:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1">1</a></span>
@@ -1687,7 +1695,7 @@ Você pode encontrar exemplos disso em repositórios públicos, como no <a href=
 <a id="__codelineno-10-5" name="__codelineno-10-5"></a><span class="w">    </span><span class="n">CONVERTTOUPPER</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">upper</span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-10-6" name="__codelineno-10-6"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="usando-saidas-canalizadas"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.2.1</span> Usando saídas canalizadas<a class="headerlink" href="#usando-saidas-canalizadas" title="Permanent link">¶</a></h3>
+<h3 id="usando-saidas-canalizadas"><span class="enumerate-headings-plugin enumerate-heading-plugin">10.2.1</span> Usando saídas canalizadas<a class="headerlink" href="#usando-saidas-canalizadas" title="Permanent link">¶</a></h3>
 <p>Outra maneira de lidar com as saídas no escopo <code>workflow</code> é usar pipes <code>|</code>.</p>
 <div class="admonition exercise">
 <p class="admonition-title">Exercise</p>
@@ -1700,7 +1708,7 @@ Você pode encontrar exemplos disso em repositórios públicos, como no <a href=
 </code></pre></div></td></tr></table></div>
 <p>Aqui usamos um <a href="https://www.nextflow.io/docs/latest/dsl2.html#pipes">pipe</a> que passa a saída de um processo como um canal para o próximo processo sem a necessidade de aplicar <code>.out</code> ao nome do processo.</p>
 </div>
-<h2 id="definicao-do-escopo-workflow"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.3</span> Definição do escopo workflow<a class="headerlink" href="#definicao-do-escopo-workflow" title="Permanent link">¶</a></h2>
+<h2 id="definicao-do-escopo-workflow"><span class="enumerate-headings-plugin enumerate-heading-plugin">10.3</span> Definição do escopo workflow<a class="headerlink" href="#definicao-do-escopo-workflow" title="Permanent link">¶</a></h2>
 <p>O escopo <code>workflow</code> permite a definição de componentes que definem a invocação de um ou mais processos ou operadores:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-12-2"> 2</a></span>
@@ -1747,7 +1755,7 @@ Você pode encontrar exemplos disso em repositórios públicos, como no <a href=
 <p class="admonition-title">Warning</p>
 <p>Um componente de um fluxo de trabalho pode acessar qualquer variável ou parâmetro definido no escopo externo. No exemplo em execução, também podemos acessar <code>params.greeting</code> diretamente na definição de <code>workflow</code>.</p>
 </div>
-<h3 id="entradas-no-escopo-workflow"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.3.1</span> Entradas no escopo workflow<a class="headerlink" href="#entradas-no-escopo-workflow" title="Permanent link">¶</a></h3>
+<h3 id="entradas-no-escopo-workflow"><span class="enumerate-headings-plugin enumerate-heading-plugin">10.3.1</span> Entradas no escopo workflow<a class="headerlink" href="#entradas-no-escopo-workflow" title="Permanent link">¶</a></h3>
 <p>Um componente <code>workflow</code> pode declarar um ou mais canais de entrada usando a instrução <code>take</code>. Por exemplo:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-13-2"> 2</a></span>
@@ -1792,7 +1800,7 @@ Você pode encontrar exemplos disso em repositórios públicos, como no <a href=
 <a id="__codelineno-14-2" name="__codelineno-14-2"></a><span class="w">    </span><span class="n">meu_fluxo_de_trabalho</span><span class="o">(</span><span class="n">Channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">greeting</span><span class="o">))</span>
 <a id="__codelineno-14-3" name="__codelineno-14-3"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="saidas-no-escopo-workflow"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.3.2</span> Saídas no escopo workflow<a class="headerlink" href="#saidas-no-escopo-workflow" title="Permanent link">¶</a></h3>
+<h3 id="saidas-no-escopo-workflow"><span class="enumerate-headings-plugin enumerate-heading-plugin">10.3.2</span> Saídas no escopo workflow<a class="headerlink" href="#saidas-no-escopo-workflow" title="Permanent link">¶</a></h3>
 <p>Um bloco <code>workflow</code> pode declarar um ou mais canais de saída usando a instrução <code>emit</code>. Por exemplo:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-15-2"> 2</a></span>
@@ -1861,7 +1869,7 @@ Você pode encontrar exemplos disso em repositórios públicos, como no <a href=
 </span><a id="__codelineno-16-16" name="__codelineno-16-16"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>O resultado do trecho de código acima pode ser acessado usando <code>meu_fluxo_de_trabalho.out.meus_dados</code>.</p>
-<h3 id="chamando-escopos-workflows-nomeados"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.3.3</span> Chamando escopos workflows nomeados<a class="headerlink" href="#chamando-escopos-workflows-nomeados" title="Permanent link">¶</a></h3>
+<h3 id="chamando-escopos-workflows-nomeados"><span class="enumerate-headings-plugin enumerate-heading-plugin">10.3.3</span> Chamando escopos workflows nomeados<a class="headerlink" href="#chamando-escopos-workflows-nomeados" title="Permanent link">¶</a></h3>
 <p>Dentro de um script <code>main.nf</code> (chamado <code>hello.nf</code> em nosso exemplo), também podemos ter vários fluxos de trabalho. Nesse caso, podemos chamar um fluxo de trabalho específico ao executar o código. Para isso, usamos a chamada de ponto de entrada <code>-entry &lt;nome_do_flux_de_trabalho&gt;</code>.</p>
 <p>O trecho a seguir tem dois fluxos de trabalho nomeados (<code>meu_fluxo_de_trabalho_um</code> e <code>meu_fluxo_de_trabalho_dois</code>):</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-1"> 1</a></span>
@@ -1921,7 +1929,7 @@ Você pode encontrar exemplos disso em repositórios públicos, como no <a href=
 <p>Você pode escolher qual fluxo de trabalho é executado usando o sinalizador <code>entry</code>:</p>
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-18-1" id="__codelineno-18-1" name="__codelineno-18-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>hello.2.nf<span class="w"> </span>-entry<span class="w"> </span>meu_fluxo_de_trabalho_um
 </code></pre></div>
-<h3 id="escopos-de-parametros"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.3.4</span> Escopos de parâmetros<a class="headerlink" href="#escopos-de-parametros" title="Permanent link">¶</a></h3>
+<h3 id="escopos-de-parametros"><span class="enumerate-headings-plugin enumerate-heading-plugin">10.3.4</span> Escopos de parâmetros<a class="headerlink" href="#escopos-de-parametros" title="Permanent link">¶</a></h3>
 <p>Um script de módulo pode definir um ou mais parâmetros ou funções personalizadas usando a mesma sintaxe de qualquer outro script Nextflow. Usando os exemplos mínimos abaixo:</p>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">Script do módulo (<code>./modules.nf</code>)</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-19-1">1</a></span>
 <span class="normal"><a href="#__codelineno-19-2">2</a></span>
@@ -1987,7 +1995,7 @@ Você pode encontrar exemplos disso em repositórios públicos, como no <a href=
 <p>A execução do script principal acima deve imprimir:</p>
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-23-1" id="__codelineno-23-1" name="__codelineno-23-1"></a><span class="go">Olá mundo!</span>
 </code></pre></div>
-<h2 id="notas-de-migracao-dsl2"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.4</span> Notas de migração DSL2<a class="headerlink" href="#notas-de-migracao-dsl2" title="Permanent link">¶</a></h2>
+<h2 id="notas-de-migracao-dsl2"><span class="enumerate-headings-plugin enumerate-heading-plugin">10.4</span> Notas de migração DSL2<a class="headerlink" href="#notas-de-migracao-dsl2" title="Permanent link">¶</a></h2>
 <p>Para visualizar um resumo das alterações introduzidas quando o Nextflow migrou da DSL1 para a DSL2, consulte as <a href="https://www.nextflow.io/docs/latest/dsl2.html#dsl2-migration-notes">notas de migração da DSL2</a> na documentação oficial do Nextflow.</p>
 </article>
 </div>
@@ -2063,7 +2071,7 @@ Você pode encontrar exemplos disso em repositórios públicos, como no <a href=
 <div class="md-consent__overlay"></div>
 <aside class="md-consent__inner">
 <form class="md-consent__form md-grid md-typeset" name="consent">
-<h4><span class="enumerate-headings-plugin enumerate-heading-plugin">11.4.0.1</span> Cookie consent</h4>
+<h4><span class="enumerate-headings-plugin enumerate-heading-plugin">10.4.0.1</span> Cookie consent</h4>
 <p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our training materials better.</p>
 <input class="md-toggle" id="__settings" type="checkbox"/>
 <div class="md-consent__settings">

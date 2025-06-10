@@ -1132,6 +1132,14 @@
 </ul>
 </nav>
 </li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../help/">
+<span class="md-ellipsis">
+    Help
+    
+  </span>
+</a>
+</li>
 </ul>
 </nav>
 </div>
@@ -1374,14 +1382,14 @@ The translated material may be incomplete or incorrect.
 We plan to update the translations later this year.
 In the meantime, please try to work through the English-language material if you can.</p>
 </div>
-<h1 id="configuracao-do-nextflow"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.</span> Configuração do Nextflow<a class="headerlink" href="#configuracao-do-nextflow" title="Permanent link">¶</a></h1>
+<h1 id="configuracao-do-nextflow"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.</span> Configuração do Nextflow<a class="headerlink" href="#configuracao-do-nextflow" title="Permanent link">¶</a></h1>
 <p>Um recurso importante do Nextflow é a capacidade de desacoplar a implementação do fluxo de trabalho e as configurações exigidas pela plataforma onde ele será executado.</p>
 <p>Isso permite a portabilidade da aplicação sem a necessidade de modificar seu código quando se faz necessária a execução em diferentes ambientes.</p>
-<h2 id="arquivo-de-configuracao"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.1</span> Arquivo de configuração<a class="headerlink" href="#arquivo-de-configuracao" title="Permanent link">¶</a></h2>
+<h2 id="arquivo-de-configuracao"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.1</span> Arquivo de configuração<a class="headerlink" href="#arquivo-de-configuracao" title="Permanent link">¶</a></h2>
 <p>Quando um script de fluxo de trabalho é executado, o Nextflow procura um arquivo chamado <code>nextflow.config</code> no diretório atual e no diretório base do script (se não for o mesmo que o diretório atual). Caso não encontre, o Nextflow verifica o arquivo: <code>$HOME/.nextflow/config</code>.</p>
 <p>Quando existir mais de um dos arquivos acima, eles serão mesclados, de modo que as configurações do primeiro substituam as mesmas configurações que podem aparecer no segundo e assim por diante.</p>
 <p>O mecanismo de pesquisa padrão do arquivo de configuração pode ser estendido fornecendo um arquivo de configuração extra usando a opção de linha de comando: <code>-c &lt;arquivo de configuração&gt;</code>.</p>
-<h3 id="sintaxe-do-arquivo-de-configuracao"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.1.1</span> Sintaxe do arquivo de configuração<a class="headerlink" href="#sintaxe-do-arquivo-de-configuracao" title="Permanent link">¶</a></h3>
+<h3 id="sintaxe-do-arquivo-de-configuracao"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.1.1</span> Sintaxe do arquivo de configuração<a class="headerlink" href="#sintaxe-do-arquivo-de-configuracao" title="Permanent link">¶</a></h3>
 <p>Um arquivo de configuração do Nextflow é um arquivo de texto simples contendo um conjunto de propriedades definidas usando a sintaxe:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="n">nome</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">valor</span>
 </code></pre></div></td></tr></table></div>
@@ -1389,7 +1397,7 @@ In the meantime, please try to work through the English-language material if you
 <p class="admonition-title">Info</p>
 <p>Observe que <em>strings</em> precisam ser colocadas entre aspas, enquanto números e valores booleanos (<code>true</code>, <code>false</code>) não. Além disso, observe que os valores são tipados, o que significa, por exemplo, que <code>1</code> é diferente de <code>'1'</code>, pois o primeiro é interpretado como o número um, enquanto o último é interpretado como uma <em>string</em>.</p>
 </div>
-<h3 id="variaveis-de-configuracao"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.1.2</span> Variáveis de configuração<a class="headerlink" href="#variaveis-de-configuracao" title="Permanent link">¶</a></h3>
+<h3 id="variaveis-de-configuracao"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.1.2</span> Variáveis de configuração<a class="headerlink" href="#variaveis-de-configuracao" title="Permanent link">¶</a></h3>
 <p>As propriedades de configuração podem ser usadas como variáveis no próprio arquivo de configuração, usando a sintaxe usual <code>$nomePropriedade</code> ou <code>${expressao}</code>.</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span>
 <span class="normal"><a href="#__codelineno-1-2">2</a></span>
@@ -1401,7 +1409,7 @@ In the meantime, please try to work through the English-language material if you
 <p class="admonition-title">Tip</p>
 <p>No arquivo de configuração é possível acessar qualquer variável definida no ambiente de execução, como <code>$PATH</code>, <code>$HOME</code>, <code>$PWD</code>, etc.</p>
 </div>
-<h3 id="comentarios-no-arquivo-de-configuracao"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.1.3</span> Comentários no arquivo de configuração<a class="headerlink" href="#comentarios-no-arquivo-de-configuracao" title="Permanent link">¶</a></h3>
+<h3 id="comentarios-no-arquivo-de-configuracao"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.1.3</span> Comentários no arquivo de configuração<a class="headerlink" href="#comentarios-no-arquivo-de-configuracao" title="Permanent link">¶</a></h3>
 <p>Os arquivos de configuração usam as mesmas convenções para comentários usados no script Nextflow:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span>
 <span class="normal"><a href="#__codelineno-2-2">2</a></span>
@@ -1415,7 +1423,7 @@ In the meantime, please try to work through the English-language material if you
 <a id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="cm">    várias linhas</span>
 <a id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="cm">  */</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="escopos-de-configuracao"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.1.4</span> Escopos de configuração<a class="headerlink" href="#escopos-de-configuracao" title="Permanent link">¶</a></h3>
+<h3 id="escopos-de-configuracao"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.1.4</span> Escopos de configuração<a class="headerlink" href="#escopos-de-configuracao" title="Permanent link">¶</a></h3>
 <p>As definições de configuração podem ser organizadas em diferentes escopos. Pode-se utilizar a notação <code>escopo.propriedade</code> ou agrupar as propriedades no mesmo escopo usando a notação de chaves, como mostrado a seguir:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span>
 <span class="normal"><a href="#__codelineno-3-2">2</a></span>
@@ -1431,7 +1439,7 @@ In the meantime, please try to work through the English-language material if you
 <a id="__codelineno-3-6" name="__codelineno-3-6"></a><span class="w">    </span><span class="n">q</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'outra string ..'</span>
 <a id="__codelineno-3-7" name="__codelineno-3-7"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="configurar-parametros"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.1.5</span> Configurar parâmetros<a class="headerlink" href="#configurar-parametros" title="Permanent link">¶</a></h3>
+<h3 id="configurar-parametros"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.1.5</span> Configurar parâmetros<a class="headerlink" href="#configurar-parametros" title="Permanent link">¶</a></h3>
 <p>O escopo <code>params</code> permite a definição de parâmetros que substituem os valores definidos no script principal do fluxo de trabalho.</p>
 <p>Isso é útil para reforçar o uso de um ou mais parâmetros de execução em um arquivo separado.</p>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">Arquivo de configuração</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span>
@@ -1468,7 +1476,7 @@ In the meantime, please try to work through the English-language material if you
 </details>
 <p>Compare o resultado das duas execuções.</p>
 </div>
-<h3 id="configurar-ambiente"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.1.6</span> Configurar ambiente<a class="headerlink" href="#configurar-ambiente" title="Permanent link">¶</a></h3>
+<h3 id="configurar-ambiente"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.1.6</span> Configurar ambiente<a class="headerlink" href="#configurar-ambiente" title="Permanent link">¶</a></h3>
 <p>O escopo <code>env</code> permite a definição de uma ou mais variáveis que serão exportadas para o ambiente onde serão executadas as tarefas do fluxo de trabalho.</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">1</a></span>
 <span class="normal"><a href="#__codelineno-10-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="n">env</span><span class="o">.</span><span class="na">ALFA</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'algum valor'</span>
@@ -1508,7 +1516,7 @@ In the meantime, please try to work through the English-language material if you
 <a href="#__codelineno-13-2" id="__codelineno-13-2" name="__codelineno-13-2"></a><span class="go">ALFA=algum valor</span>
 </code></pre></div>
 </details>
-<h3 id="configurar-processos"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.1.7</span> Configurar processos<a class="headerlink" href="#configurar-processos" title="Permanent link">¶</a></h3>
+<h3 id="configurar-processos"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.1.7</span> Configurar processos<a class="headerlink" href="#configurar-processos" title="Permanent link">¶</a></h3>
 <p>As <a href="https://www.nextflow.io/docs/latest/process.html#directives">diretivas</a> de processos permite a especificação de configurações para a execução de uma tarefa, como <code>cpus</code>, <code>memory</code>, <code>container</code>, além de outros recursos, no script do fluxo de trabalho.</p>
 <p>Isso é útil ao criarmos um exemplo-teste ou um protótipo para o nosso fluxo de trabalho.</p>
 <p>No entanto, é sempre uma boa prática desassociar a lógica de execução do fluxo de trabalho das configurações que serão utilizadas por ele. Assim, é altamente recomendável definir as configurações do processo no arquivo de configuração do fluxo de trabalho em vez de no script do fluxo de trabalho.</p>
@@ -1620,7 +1628,7 @@ In the meantime, please try to work through the English-language material if you
 <a id="__codelineno-19-3" name="__codelineno-19-3"></a><span class="w">           </span><span class="o">[</span><span class="nl">ambiente:</span><span class="w"> </span><span class="s1">'BAR'</span><span class="o">,</span><span class="w"> </span><span class="nl">valor:</span><span class="w"> </span><span class="s1">'456'</span><span class="o">]]</span>
 <a id="__codelineno-19-4" name="__codelineno-19-4"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="configurar-execucao-do-docker"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.1.8</span> Configurar execução do Docker<a class="headerlink" href="#configurar-execucao-do-docker" title="Permanent link">¶</a></h3>
+<h3 id="configurar-execucao-do-docker"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.1.8</span> Configurar execução do Docker<a class="headerlink" href="#configurar-execucao-do-docker" title="Permanent link">¶</a></h3>
 <p>A imagem do contêiner a ser utilizada para a execução do processo pode ser especificada no arquivo <code>nextflow.config</code>:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-1">1</a></span>
 <span class="normal"><a href="#__codelineno-20-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="n">process</span><span class="o">.</span><span class="na">container</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'nextflow/rnaseq-nf'</span>
@@ -1631,7 +1639,7 @@ In the meantime, please try to work through the English-language material if you
 <span class="normal"><a href="#__codelineno-21-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1"></a><span class="n">process</span><span class="o">.</span><span class="na">container</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'nextflow/rnaseq-nf@sha256:aeacbd7ea1154f263cda972a96920fb228b2033544c2641476350b9317dab266'</span>
 <a id="__codelineno-21-2" name="__codelineno-21-2"></a><span class="n">docker</span><span class="o">.</span><span class="na">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="configurar-execucao-do-singularity"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.1.9</span> Configurar execução do Singularity<a class="headerlink" href="#configurar-execucao-do-singularity" title="Permanent link">¶</a></h3>
+<h3 id="configurar-execucao-do-singularity"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.1.9</span> Configurar execução do Singularity<a class="headerlink" href="#configurar-execucao-do-singularity" title="Permanent link">¶</a></h3>
 <p>Para rodar um fluxo de trabalho com Singularity, é necessário fornecer o caminho para o arquivo de imagem do contêiner usando a diretiva de contêiner (<code>container</code>):</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-22-1">1</a></span>
 <span class="normal"><a href="#__codelineno-22-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1"></a><span class="n">process</span><span class="o">.</span><span class="na">container</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'/alguma/imagem/singularity/imagem.sif'</span>
@@ -1672,7 +1680,7 @@ In the meantime, please try to work through the English-language material if you
 <p>O Nextflow irá baixar a imagem do contêiner automaticamente. Isto levará alguns segundos, dependendo da velocidade da sua conexão.</p>
 </div>
 </div>
-<h3 id="configurar-execucao-com-ambientes-conda"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.1.10</span> Configurar execução com ambientes Conda<a class="headerlink" href="#configurar-execucao-com-ambientes-conda" title="Permanent link">¶</a></h3>
+<h3 id="configurar-execucao-com-ambientes-conda"><span class="enumerate-headings-plugin enumerate-heading-plugin">11.1.10</span> Configurar execução com ambientes Conda<a class="headerlink" href="#configurar-execucao-com-ambientes-conda" title="Permanent link">¶</a></h3>
 <p>Ambientes Conda também podem ser fornecidos no arquivo de configuração. Basta adicionar a seguinte configuração no arquivo <code>nextflow.config</code>:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-25-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1"></a><span class="n">process</span><span class="o">.</span><span class="na">conda</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"/home/ubuntu/miniconda2/envs/nf-tutorial"</span>
 </code></pre></div></td></tr></table></div>
@@ -1751,7 +1759,7 @@ In the meantime, please try to work through the English-language material if you
 <div class="md-consent__overlay"></div>
 <aside class="md-consent__inner">
 <form class="md-consent__form md-grid md-typeset" name="consent">
-<h4><span class="enumerate-headings-plugin enumerate-heading-plugin">12.1.10.1</span> Cookie consent</h4>
+<h4><span class="enumerate-headings-plugin enumerate-heading-plugin">11.1.10.1</span> Cookie consent</h4>
 <p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our training materials better.</p>
 <input class="md-toggle" id="__settings" type="checkbox"/>
 <div class="md-consent__settings">

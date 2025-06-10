@@ -1121,6 +1121,14 @@
 </ul>
 </nav>
 </li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../help/">
+<span class="md-ellipsis">
+    Help
+    
+  </span>
+</a>
+</li>
 </ul>
 </nav>
 </div>
@@ -1352,7 +1360,7 @@ The translated material may be incomplete or incorrect.
 We plan to update the translations later this year.
 In the meantime, please try to work through the English-language material if you can.</p>
 </div>
-<h1 id="cache-dexecution-et-reprise"><span class="enumerate-headings-plugin enumerate-heading-plugin">14.</span> Cache d'exécution et reprise<a class="headerlink" href="#cache-dexecution-et-reprise" title="Permanent link">¶</a></h1>
+<h1 id="cache-dexecution-et-reprise"><span class="enumerate-headings-plugin enumerate-heading-plugin">13.</span> Cache d'exécution et reprise<a class="headerlink" href="#cache-dexecution-et-reprise" title="Permanent link">¶</a></h1>
 <p>Le mécanisme de mise en cache de Nextflow fonctionne en attribuant un identifiant unique à chaque tâche qui est utilisé pour créer un répertoire d'exécution distinct où les tâches sont exécutées et les résultats stockés.</p>
 <p>L'identifiant unique de la tâche est généré sous la forme d'une valeur de hachage de 128 bits composée des valeurs d'entrée de la tâche, des fichiers et de la chaîne de commande.</p>
 <p>Le workflow du répertoire work est organisé comme indiqué ci-dessous :</p>
@@ -1395,14 +1403,14 @@ In the meantime, please try to work through the English-language material if you
 <p class="admonition-title">Info</p>
 <p>Vous pouvez créer ces plots en utilisant la fonction <code>tree</code> si vous l'avez installée. Sur les systèmes d'exploitation basés sur Debian, il suffit de <code>sudo apt install -y tree</code> ou, pour macOS, d'utiliser Homebrew : <code>brew install tree</code></p>
 </div>
-<h2 id="comment-fonctionne-la-reprise"><span class="enumerate-headings-plugin enumerate-heading-plugin">14.1</span> Comment fonctionne la reprise<a class="headerlink" href="#comment-fonctionne-la-reprise" title="Permanent link">¶</a></h2>
+<h2 id="comment-fonctionne-la-reprise"><span class="enumerate-headings-plugin enumerate-heading-plugin">13.1</span> Comment fonctionne la reprise<a class="headerlink" href="#comment-fonctionne-la-reprise" title="Permanent link">¶</a></h2>
 <p>L'option de ligne de commande <code>-resume</code> permet de poursuivre l'exécution d'un workflow à partir de la dernière étape qui s'est achevée avec succès :</p>
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>&lt;script&gt;<span class="w"> </span>-resume
 </code></pre></div>
 <p>En pratique, le workflow est exécuté depuis le début. Cependant, avant de lancer l'exécution d'un processus, Nextflow utilise l'identifiant unique de la tâche pour vérifier si le répertoire work existe déjà et s'il contient un état de sortie de commande valide avec les fichiers de sortie attendus.</p>
 <p>Si cette condition est remplie, l'exécution de la tâche est sautée et les résultats calculés précédemment sont utilisés comme résultats du processus.</p>
 <p>La première tâche pour laquelle une nouvelle sortie est calculée invalide toutes les exécutions en aval dans le DAG restant.</p>
-<h2 id="repertoire-work"><span class="enumerate-headings-plugin enumerate-heading-plugin">14.2</span> repertoire Work<a class="headerlink" href="#repertoire-work" title="Permanent link">¶</a></h2>
+<h2 id="repertoire-work"><span class="enumerate-headings-plugin enumerate-heading-plugin">13.2</span> repertoire Work<a class="headerlink" href="#repertoire-work" title="Permanent link">¶</a></h2>
 <p>Les répertoires de travail des tâches sont créés par défaut dans le dossier <code>work</code> du chemin de lancement. Ce dossier est censé être une zone de stockage <strong>scratch</strong> qui peut être nettoyée une fois le calcul terminé.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -1426,7 +1434,7 @@ In the meantime, please try to work through the English-language material if you
 <li>l'horodatage de la dernière modification</li>
 </ul>
 <p>Par conséquent, le simple fait de ** toucher** un fichier invalidera l'exécution de la tâche correspondante.</p>
-<h2 id="comment-organiser-des-experiences-in-silico"><span class="enumerate-headings-plugin enumerate-heading-plugin">14.3</span> Comment organiser des expériences <em>in-silico</em> ?<a class="headerlink" href="#comment-organiser-des-experiences-in-silico" title="Permanent link">¶</a></h2>
+<h2 id="comment-organiser-des-experiences-in-silico"><span class="enumerate-headings-plugin enumerate-heading-plugin">13.3</span> Comment organiser des expériences <em>in-silico</em> ?<a class="headerlink" href="#comment-organiser-des-experiences-in-silico" title="Permanent link">¶</a></h2>
 <p>Il est conseillé d'organiser chaque <strong>expérience</strong> dans son propre dossier. Les principaux paramètres d'entrée de l'expérience doivent être spécifiés en utilisant un fichier de configuration Nextflow. Cela facilite le suivi et la réplication d'une expérience dans le temps.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -1444,7 +1452,7 @@ In the meantime, please try to work through the English-language material if you
 <p>Vous pouvez utiliser l'<strong>identifiant de session</strong> ou le <strong>nom d'exécution</strong> pour récupérer une exécution spécifique. Par exemple:</p>
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>rnaseq-nf<span class="w"> </span>-resume<span class="w"> </span>mighty_boyd
 </code></pre></div>
-<h2 id="provenance-de-lexecution"><span class="enumerate-headings-plugin enumerate-heading-plugin">14.4</span> Provenance de l'exécution<a class="headerlink" href="#provenance-de-lexecution" title="Permanent link">¶</a></h2>
+<h2 id="provenance-de-lexecution"><span class="enumerate-headings-plugin enumerate-heading-plugin">13.4</span> Provenance de l'exécution<a class="headerlink" href="#provenance-de-lexecution" title="Permanent link">¶</a></h2>
 <p>La commande <code>log</code>, lorsqu'elle est fournie avec un <strong>nom d'exécution</strong> ou un <strong>identifiant de session</strong>, peut renvoyer de nombreuses informations utiles sur l'exécution d'un workflow qui peuvent être utilisées pour créer un rapport de provenance.</p>
 <p>Par défaut, il énumère les répertoires de travail utilisés pour calculer chaque tâche. Par exemple :</p>
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="gp">$ </span>nextflow<span class="w"> </span>log<span class="w"> </span>tiny_fermat
@@ -1499,7 +1507,7 @@ In the meantime, please try to work through the English-language material if you
 </code></pre></div>
 <p>Enfin, ouvrez le fichier <code>prov.html</code> avec un navigateur.</p>
 </div>
-<h2 id="depanner-la-reprise"><span class="enumerate-headings-plugin enumerate-heading-plugin">14.5</span> Dépanner la reprise<a class="headerlink" href="#depanner-la-reprise" title="Permanent link">¶</a></h2>
+<h2 id="depanner-la-reprise"><span class="enumerate-headings-plugin enumerate-heading-plugin">13.5</span> Dépanner la reprise<a class="headerlink" href="#depanner-la-reprise" title="Permanent link">¶</a></h2>
 <p>La possibilité de reprendre les workflows est une fonctionnalité clé de Nextflow, mais elle ne fonctionne pas toujours comme vous l'attendez. Dans cette section, nous allons passer en revue quelques raisons courantes pour lesquelles Nextflow peut ignorer vos résultats mis en cache.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
@@ -1510,13 +1518,13 @@ In the meantime, please try to work through the English-language material if you
 <li><a href="https://nextflow.io/blog/2022/caching-behavior-analysis.html">Analyse du comportement des pipelines en matière de mise en cache</a></li>
 </ol>
 </div>
-<h4 id="fichier-dentree-modifie"><span class="enumerate-headings-plugin enumerate-heading-plugin">14.5.0.1</span> Fichier d'entrée modifié<a class="headerlink" href="#fichier-dentree-modifie" title="Permanent link">¶</a></h4>
+<h4 id="fichier-dentree-modifie"><span class="enumerate-headings-plugin enumerate-heading-plugin">13.5.0.1</span> Fichier d'entrée modifié<a class="headerlink" href="#fichier-dentree-modifie" title="Permanent link">¶</a></h4>
 <p>Assurez-vous qu'il n'y a pas de changement dans le(s) fichier(s) d'entrée. N'oubliez pas que le hachage unique de la tâche est calculé en tenant compte du chemin complet du fichier, de l'horodatage de la dernière modification et de la taille du fichier. Si l'une de ces informations a changé, le workflow sera réexécuté même si le contenu d'entrée est identique.</p>
-<h4 id="un-processus-modifie-une-entree"><span class="enumerate-headings-plugin enumerate-heading-plugin">14.5.0.2</span> Un processus modifie une entrée<a class="headerlink" href="#un-processus-modifie-une-entree" title="Permanent link">¶</a></h4>
+<h4 id="un-processus-modifie-une-entree"><span class="enumerate-headings-plugin enumerate-heading-plugin">13.5.0.2</span> Un processus modifie une entrée<a class="headerlink" href="#un-processus-modifie-une-entree" title="Permanent link">¶</a></h4>
 <p>Un processus ne doit jamais modifier les fichiers d'entrée, sinon le <code>resume</code> pour les exécutions futures sera invalidé pour la même raison que celle expliquée dans le point précédent.</p>
-<h4 id="attributs-de-fichiers-incoherents"><span class="enumerate-headings-plugin enumerate-heading-plugin">14.5.0.3</span> Attributs de fichiers incohérents<a class="headerlink" href="#attributs-de-fichiers-incoherents" title="Permanent link">¶</a></h4>
+<h4 id="attributs-de-fichiers-incoherents"><span class="enumerate-headings-plugin enumerate-heading-plugin">13.5.0.3</span> Attributs de fichiers incohérents<a class="headerlink" href="#attributs-de-fichiers-incoherents" title="Permanent link">¶</a></h4>
 <p>Certains systèmes de fichiers partagés, tels que <a href="https://en.wikipedia.org/wiki/Network_File_System">NFS</a>, peuvent signaler un horodatage incohérent (c'est-à-dire un horodatage différent pour le même fichier) même s'il n'a pas été modifié. Pour éviter ce problème, utilisez la <a href="https://www.nextflow.io/docs/latest/process.html#cache">stratégie de cache indulgente</a>.</p>
-<h4 id="condition-de-course-dans-une-variable-globale"><span class="enumerate-headings-plugin enumerate-heading-plugin">14.5.0.4</span> Condition de course dans une variable globale<a class="headerlink" href="#condition-de-course-dans-une-variable-globale" title="Permanent link">¶</a></h4>
+<h4 id="condition-de-course-dans-une-variable-globale"><span class="enumerate-headings-plugin enumerate-heading-plugin">13.5.0.4</span> Condition de course dans une variable globale<a class="headerlink" href="#condition-de-course-dans-une-variable-globale" title="Permanent link">¶</a></h4>
 <p>Nextflow est conçu pour simplifier la programmation parallèle sans se préoccuper des conditions de course et de l'accès aux ressources partagées. L'un des rares cas où une condition de course peut survenir est l'utilisation d'une variable globale avec deux (ou plus) opérateurs.
 Par exemple:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1">1</a></span>
@@ -1557,7 +1565,7 @@ Par exemple:</p>
 <a id="__codelineno-12-8" name="__codelineno-12-8"></a><span class="w">    </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kt">def</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">it</span><span class="o">;</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-12-9" name="__codelineno-12-9"></a><span class="w">    </span><span class="o">.</span><span class="na">println</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="s2">"ch2 = $it"</span><span class="w"> </span><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<h4 id="canaux-dentree-non-deterministes"><span class="enumerate-headings-plugin enumerate-heading-plugin">14.5.0.5</span> Canaux d'entrée non déterministes<a class="headerlink" href="#canaux-dentree-non-deterministes" title="Permanent link">¶</a></h4>
+<h4 id="canaux-dentree-non-deterministes"><span class="enumerate-headings-plugin enumerate-heading-plugin">13.5.0.5</span> Canaux d'entrée non déterministes<a class="headerlink" href="#canaux-dentree-non-deterministes" title="Permanent link">¶</a></h4>
 <p>Si l'ordre des canaux de flux de données est garanti - les données sont lues dans l'ordre dans lequel elles sont écrites dans le canal - il faut savoir qu'il n'y a aucune garantie que les éléments conservent leur ordre dans le canal de <em>sortie</em> du processus. En effet, un processus peut engendrer plusieurs tâches, qui peuvent s'exécuter en parallèle. Par exemple, l'opération sur le deuxième élément peut se terminer plus tôt que l'opération sur le premier élément, ce qui modifie l'ordre du canal de sortie.</p>
 <p>En pratique, considérons l'extrait suivant :</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1"> 1</a></span>
@@ -1724,7 +1732,7 @@ Par exemple:</p>
 <div class="md-consent__overlay"></div>
 <aside class="md-consent__inner">
 <form class="md-consent__form md-grid md-typeset" name="consent">
-<h4><span class="enumerate-headings-plugin enumerate-heading-plugin">14.5.0.6</span> Cookie consent</h4>
+<h4><span class="enumerate-headings-plugin enumerate-heading-plugin">13.5.0.6</span> Cookie consent</h4>
 <p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our training materials better.</p>
 <input class="md-toggle" id="__settings" type="checkbox"/>
 <div class="md-consent__settings">

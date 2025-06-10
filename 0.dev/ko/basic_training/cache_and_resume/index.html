@@ -1121,6 +1121,14 @@
 </ul>
 </nav>
 </li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../help/">
+<span class="md-ellipsis">
+    Help
+    
+  </span>
+</a>
+</li>
 </ul>
 </nav>
 </div>
@@ -1345,7 +1353,7 @@
 <a class="md-content__button md-icon" href="https://github.com/nextflow-io/training/edit/master/docs/basic_training/cache_and_resume.md" title="이 페이지를 편집">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"></path></svg>
 </a>
-<h1 id="execution-cache-and-resume"><span class="enumerate-headings-plugin enumerate-heading-plugin">13.</span> Execution cache and resume<a class="headerlink" href="#execution-cache-and-resume" title="Permanent link">¶</a></h1>
+<h1 id="execution-cache-and-resume"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.</span> Execution cache and resume<a class="headerlink" href="#execution-cache-and-resume" title="Permanent link">¶</a></h1>
 <p>The Nextflow caching mechanism works by assigning a unique ID to each task which is used to create a separate execution directory where the tasks are executed and the results stored.</p>
 <p>The task unique ID is generated as a 128-bit hash value composing the task input values, files and command string.</p>
 <p>The workflow work directory is organized as shown below:</p>
@@ -1388,14 +1396,14 @@
 <p class="admonition-title">Info</p>
 <p>You can create these plots using the <code>tree</code> function if you have it installed.</p>
 </div>
-<h3 id="how-resume-works"><span class="enumerate-headings-plugin enumerate-heading-plugin">13.0.1</span> How resume works<a class="headerlink" href="#how-resume-works" title="Permanent link">¶</a></h3>
+<h3 id="how-resume-works"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.0.1</span> How resume works<a class="headerlink" href="#how-resume-works" title="Permanent link">¶</a></h3>
 <p>The <code>-resume</code> command-line option allows the continuation of a workflow execution from the last step that was completed successfully:</p>
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>&lt;script&gt;<span class="w"> </span>-resume
 </code></pre></div>
 <p>In practical terms, the workflow is executed from the beginning. However, before launching the execution of a process, Nextflow uses the task unique ID to check if the work directory already exists and that it contains a valid command exit state with the expected output files.</p>
 <p>If this condition is satisfied the task execution is skipped and previously computed results are used as the process results.</p>
 <p>The first task for which a new output is computed invalidates all downstream executions in the remaining DAG.</p>
-<h3 id="work-directory"><span class="enumerate-headings-plugin enumerate-heading-plugin">13.0.2</span> Work directory<a class="headerlink" href="#work-directory" title="Permanent link">¶</a></h3>
+<h3 id="work-directory"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.0.2</span> Work directory<a class="headerlink" href="#work-directory" title="Permanent link">¶</a></h3>
 <p>The task work directories are created in the folder <code>work</code> in the launching path by default. It is recommended that this is a <strong>scratch</strong> storage area that can be cleaned up once the computation is completed.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -1419,7 +1427,7 @@
 <li>The last modified timestamp</li>
 </ul>
 <p>Therefore, just <strong>touching</strong> a file will invalidate the related task execution.</p>
-<h3 id="how-to-organize-in-silico-experiments"><span class="enumerate-headings-plugin enumerate-heading-plugin">13.0.3</span> How to organize <em>in-silico</em> experiments<a class="headerlink" href="#how-to-organize-in-silico-experiments" title="Permanent link">¶</a></h3>
+<h3 id="how-to-organize-in-silico-experiments"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.0.3</span> How to organize <em>in-silico</em> experiments<a class="headerlink" href="#how-to-organize-in-silico-experiments" title="Permanent link">¶</a></h3>
 <p>It’s good practice to organize each <strong>experiment</strong> in its own folder. The main experiment input parameters should be specified using a Nextflow config file. This makes it simple to track and replicate an experiment over time.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -1437,7 +1445,7 @@
 <p>You can use either the <strong>session ID</strong> or the <strong>run name</strong> to recover a specific execution:</p>
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>rnaseq-nf<span class="w"> </span>-resume<span class="w"> </span>mighty_boyd
 </code></pre></div>
-<h3 id="execution-provenance"><span class="enumerate-headings-plugin enumerate-heading-plugin">13.0.4</span> Execution provenance<a class="headerlink" href="#execution-provenance" title="Permanent link">¶</a></h3>
+<h3 id="execution-provenance"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.0.4</span> Execution provenance<a class="headerlink" href="#execution-provenance" title="Permanent link">¶</a></h3>
 <p>The <code>log</code> command, when provided with a <strong>run name</strong> or <strong>session ID</strong>, can return many useful bits of information about a workflow execution that can be used to create a provenance report.</p>
 <p>By default, it will list the work directories used to compute each task:</p>
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-6-1" id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="go">nextflow log tiny_fermat</span>
@@ -1502,7 +1510,7 @@
 <li>How to create and customize a basic provenance report</li>
 </ol>
 </div>
-<h2 id="troubleshooting-resume"><span class="enumerate-headings-plugin enumerate-heading-plugin">13.1</span> Troubleshooting resume<a class="headerlink" href="#troubleshooting-resume" title="Permanent link">¶</a></h2>
+<h2 id="troubleshooting-resume"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.1</span> Troubleshooting resume<a class="headerlink" href="#troubleshooting-resume" title="Permanent link">¶</a></h2>
 <p>Being able to resume workflows is a key feature of Nextflow, but it doesn't always work as you expect. In this section you will learn common reasons why Nextflow may be ignoring your cached results.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
@@ -1513,13 +1521,13 @@
 <li><a href="https://nextflow.io/blog/2022/caching-behavior-analysis.html">Analyzing caching behavior of pipelines</a></li>
 </ol>
 </div>
-<h3 id="input-file-changed"><span class="enumerate-headings-plugin enumerate-heading-plugin">13.1.1</span> Input file changed<a class="headerlink" href="#input-file-changed" title="Permanent link">¶</a></h3>
+<h3 id="input-file-changed"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.1.1</span> Input file changed<a class="headerlink" href="#input-file-changed" title="Permanent link">¶</a></h3>
 <p>Make sure that there’s no change in your input file(s). Don’t forget the task unique hash is computed by taking into account the complete file path, the last modified timestamp and the file size. If any of this information has changed, the workflow will be re-executed even if the input content is the same.</p>
-<h3 id="a-process-modifies-an-input"><span class="enumerate-headings-plugin enumerate-heading-plugin">13.1.2</span> A process modifies an input<a class="headerlink" href="#a-process-modifies-an-input" title="Permanent link">¶</a></h3>
+<h3 id="a-process-modifies-an-input"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.1.2</span> A process modifies an input<a class="headerlink" href="#a-process-modifies-an-input" title="Permanent link">¶</a></h3>
 <p>A process should never alter input files, otherwise the <code>resume</code> for future executions will be invalidated for the same reason explained in the previous point.</p>
-<h3 id="inconsistent-file-attributes"><span class="enumerate-headings-plugin enumerate-heading-plugin">13.1.3</span> Inconsistent file attributes<a class="headerlink" href="#inconsistent-file-attributes" title="Permanent link">¶</a></h3>
+<h3 id="inconsistent-file-attributes"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.1.3</span> Inconsistent file attributes<a class="headerlink" href="#inconsistent-file-attributes" title="Permanent link">¶</a></h3>
 <p>Some shared file systems, such as <a href="https://en.wikipedia.org/wiki/Network_File_System">NFS</a>, may report an inconsistent file timestamp (i.e. a different timestamp for the same file) even if it has not been modified. To prevent this problem use the <a href="https://www.nextflow.io/docs/latest/process.html#cache">lenient cache strategy</a>.</p>
-<h3 id="race-condition-in-global-variable"><span class="enumerate-headings-plugin enumerate-heading-plugin">13.1.4</span> Race condition in global variable<a class="headerlink" href="#race-condition-in-global-variable" title="Permanent link">¶</a></h3>
+<h3 id="race-condition-in-global-variable"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.1.4</span> Race condition in global variable<a class="headerlink" href="#race-condition-in-global-variable" title="Permanent link">¶</a></h3>
 <p>Nextflow is designed to simplify parallel programming without taking care about race conditions and the access to shared resources. One of the few cases in which a race condition can arise is when using a global variable with two (or more) operators</p>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1">1</a></span>
 <span class="normal"><a href="#__codelineno-15-2">2</a></span>
@@ -1559,7 +1567,7 @@
 <a id="__codelineno-16-8" name="__codelineno-16-8"></a><span class="w">    </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="kt">def</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">it</span><span class="o">;</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-16-9" name="__codelineno-16-9"></a><span class="w">    </span><span class="o">.</span><span class="na">println</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="s2">"ch2 = $it"</span><span class="w"> </span><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<h3 id="non-deterministic-input-channels"><span class="enumerate-headings-plugin enumerate-heading-plugin">13.1.5</span> Non-deterministic input channels<a class="headerlink" href="#non-deterministic-input-channels" title="Permanent link">¶</a></h3>
+<h3 id="non-deterministic-input-channels"><span class="enumerate-headings-plugin enumerate-heading-plugin">12.1.5</span> Non-deterministic input channels<a class="headerlink" href="#non-deterministic-input-channels" title="Permanent link">¶</a></h3>
 <p>While dataflow channel ordering is guaranteed – data is read in the same order in which it’s written in the channel – be aware that there is no guarantee that the elements will maintain their order in the process <em>output</em> channel. This is because a process may spawn multiple tasks, which can run in parallel. For example, the operation on the second element may end sooner than the operation on the first element, changing the output channel order.</p>
 <p>In practical terms, consider the following snippet:</p>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-1"> 1</a></span>
@@ -1891,7 +1899,7 @@
 <div class="md-consent__overlay"></div>
 <aside class="md-consent__inner">
 <form class="md-consent__form md-grid md-typeset" name="consent">
-<h4><span class="enumerate-headings-plugin enumerate-heading-plugin">13.1.5.1</span> Cookie consent</h4>
+<h4><span class="enumerate-headings-plugin enumerate-heading-plugin">12.1.5.1</span> Cookie consent</h4>
 <p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our training materials better.</p>
 <input class="md-toggle" id="__settings" type="checkbox"/>
 <div class="md-consent__settings">

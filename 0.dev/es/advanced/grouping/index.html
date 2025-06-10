@@ -1075,6 +1075,14 @@
 </ul>
 </nav>
 </li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../help/">
+<span class="md-ellipsis">
+    Help
+    
+  </span>
+</a>
+</li>
 </ul>
 </nav>
 </div>
@@ -1254,8 +1262,8 @@
 <a class="md-content__button md-icon" href="https://github.com/nextflow-io/training/edit/master/docs/advanced/grouping.md" title="Editar esta página">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"></path></svg>
 </a>
-<h1 id="grouping-and-splitting"><span class="enumerate-headings-plugin enumerate-heading-plugin">18.</span> Grouping and Splitting<a class="headerlink" href="#grouping-and-splitting" title="Permanent link">¶</a></h1>
-<h2 id="grouping-using-submap"><span class="enumerate-headings-plugin enumerate-heading-plugin">18.1</span> Grouping using subMap<a class="headerlink" href="#grouping-using-submap" title="Permanent link">¶</a></h2>
+<h1 id="grouping-and-splitting"><span class="enumerate-headings-plugin enumerate-heading-plugin">17.</span> Grouping and Splitting<a class="headerlink" href="#grouping-and-splitting" title="Permanent link">¶</a></h1>
+<h2 id="grouping-using-submap"><span class="enumerate-headings-plugin enumerate-heading-plugin">17.1</span> Grouping using subMap<a class="headerlink" href="#grouping-using-submap" title="Permanent link">¶</a></h2>
 <p>Now that we have a channel that conforms to the <code>tuple val(meta) path(&lt;something&gt;)</code> pattern, we can investigate splitting and grouping patterns.</p>
 <p>We'll start with a simple main.nf in the <code>grouping</code> directory</p>
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="nb">cd</span><span class="w"> </span>grouping
@@ -1395,7 +1403,7 @@
 </code></pre></div>
 </details>
 </div>
-<h2 id="passing-maps-through-processes"><span class="enumerate-headings-plugin enumerate-heading-plugin">18.2</span> Passing maps through processes<a class="headerlink" href="#passing-maps-through-processes" title="Permanent link">¶</a></h2>
+<h2 id="passing-maps-through-processes"><span class="enumerate-headings-plugin enumerate-heading-plugin">17.2</span> Passing maps through processes<a class="headerlink" href="#passing-maps-through-processes" title="Permanent link">¶</a></h2>
 <p>Let's construct a dummy read mapping process. This is not a bioinformatics workshop, so we can 'cheat' in the interests of time.</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-5-2"> 2</a></span>
@@ -1565,7 +1573,7 @@
 <a id="__codelineno-10-6" name="__codelineno-10-6"></a><span class="o">|</span><span class="w"> </span><span class="n">groupTuple</span>
 <a id="__codelineno-10-7" name="__codelineno-10-7"></a><span class="o">|</span><span class="w"> </span><span class="n">CombineBams</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="fanning-out-over-intervals"><span class="enumerate-headings-plugin enumerate-heading-plugin">18.3</span> Fanning out over intervals<a class="headerlink" href="#fanning-out-over-intervals" title="Permanent link">¶</a></h2>
+<h2 id="fanning-out-over-intervals"><span class="enumerate-headings-plugin enumerate-heading-plugin">17.3</span> Fanning out over intervals<a class="headerlink" href="#fanning-out-over-intervals" title="Permanent link">¶</a></h2>
 <p>The previous exercise demonstrated the fan-in approach using <code>groupTuple</code> and <code>groupKey</code>, but we might want to fan out our processes. An example might be computing over some intervals - genotyping over intervals, for example.</p>
 <p>We can take an existing bed file, for example and turn it into a channel of Maps.</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1">1</a></span>
@@ -1697,7 +1705,7 @@
 <a id="__codelineno-16-13" name="__codelineno-16-13"></a><span class="o">|</span><span class="w"> </span><span class="n">MergeGenotyped</span>
 <a id="__codelineno-16-14" name="__codelineno-16-14"></a><span class="o">|</span><span class="w"> </span><span class="n">view</span>
 </code></pre></div></td></tr></table></div>
-<h2 id="publishing-the-bams"><span class="enumerate-headings-plugin enumerate-heading-plugin">18.4</span> Publishing the bams<a class="headerlink" href="#publishing-the-bams" title="Permanent link">¶</a></h2>
+<h2 id="publishing-the-bams"><span class="enumerate-headings-plugin enumerate-heading-plugin">17.4</span> Publishing the bams<a class="headerlink" href="#publishing-the-bams" title="Permanent link">¶</a></h2>
 <p>This will return us six bam files - a tumor and normal pair for each of the three samples:</p>
 <div class="highlight"><span class="filename">Final channel output</span><pre><span></span><code><a href="#__codelineno-17-1" id="__codelineno-17-1" name="__codelineno-17-1"></a><span class="go">[[id:sampleB, type:normal], merged.genotyped.vcf]</span>
 <a href="#__codelineno-17-2" id="__codelineno-17-2" name="__codelineno-17-2"></a><span class="go">[[id:sampleB, type:tumor], merged.genotyped.vcf]</span>
@@ -1829,7 +1837,7 @@
 <div class="md-consent__overlay"></div>
 <aside class="md-consent__inner">
 <form class="md-consent__form md-grid md-typeset" name="consent">
-<h4><span class="enumerate-headings-plugin enumerate-heading-plugin">18.4.0.1</span> Cookie consent</h4>
+<h4><span class="enumerate-headings-plugin enumerate-heading-plugin">17.4.0.1</span> Cookie consent</h4>
 <p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our training materials better.</p>
 <input class="md-toggle" id="__settings" type="checkbox"/>
 <div class="md-consent__settings">

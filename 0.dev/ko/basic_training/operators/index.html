@@ -1168,6 +1168,14 @@
 </ul>
 </nav>
 </li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../help/">
+<span class="md-ellipsis">
+    Help
+    
+  </span>
+</a>
+</li>
 </ul>
 </nav>
 </div>
@@ -1439,7 +1447,7 @@
 <a class="md-content__button md-icon" href="https://github.com/nextflow-io/training/edit/master/docs/basic_training/operators.md" title="이 페이지를 편집">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"></path></svg>
 </a>
-<h1 id="operators"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.</span> Operators<a class="headerlink" href="#operators" title="Permanent link">¶</a></h1>
+<h1 id="operators"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.</span> Operators<a class="headerlink" href="#operators" title="Permanent link">¶</a></h1>
 <p>Nextflow operators are methods that allow you to manipulate channels. Every operator, with the exception of <code>set</code> and <code>subscribe</code>, produces one or more new channels, allowing you to chain operators to fit your needs.</p>
 <p>There are seven main groups of operators are described in greater detail within the Nextflow Reference Documentation, linked below:</p>
 <ol>
@@ -1451,7 +1459,7 @@
 <li><a href="https://www.nextflow.io/docs/latest/operator.html#maths-operators">Maths operators</a></li>
 <li><a href="https://www.nextflow.io/docs/latest/operator.html#other-operators">Other operators</a></li>
 </ol>
-<h2 id="basic-example"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.1</span> Basic example<a class="headerlink" href="#basic-example" title="Permanent link">¶</a></h2>
+<h2 id="basic-example"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.1</span> Basic example<a class="headerlink" href="#basic-example" title="Permanent link">¶</a></h2>
 <p>The <code>map</code> operator applies a function of your choosing to every item emitted by a channel, and returns the items so obtained as a new channel. The function applied is called the mapping function and is expressed with a closure as shown in the example below:</p>
 <div class="admonition info">
 <p>Click the <span class="twemoji"><svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17 13h-4v4h-2v-4H7v-2h4V7h2v4h4m-5-9A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2"></path></svg></span> icons in the code for explanations.</p>
@@ -1501,9 +1509,9 @@
 <li>The basic features of an operator</li>
 </ol>
 </div>
-<h2 id="commonly-used-operators"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.2</span> Commonly used operators<a class="headerlink" href="#commonly-used-operators" title="Permanent link">¶</a></h2>
+<h2 id="commonly-used-operators"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.2</span> Commonly used operators<a class="headerlink" href="#commonly-used-operators" title="Permanent link">¶</a></h2>
 <p>Here you will explore some of the most commonly used operators.</p>
-<h3 id="view"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.2.1</span> <code>view()</code><a class="headerlink" href="#view" title="Permanent link">¶</a></h3>
+<h3 id="view"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.2.1</span> <code>view()</code><a class="headerlink" href="#view" title="Permanent link">¶</a></h3>
 <p>The <code>view</code> operator prints the items emitted by a channel to the console standard output, appending a <em>new line</em> character to each item. For example:</p>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1">1</a></span>
 <span class="normal"><a href="#__codelineno-2-2">2</a></span>
@@ -1526,7 +1534,7 @@
 <a href="#__codelineno-5-2" id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="go">- bar</span>
 <a href="#__codelineno-5-3" id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="go">- baz</span>
 </code></pre></div>
-<h3 id="map"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.2.2</span> <code>map()</code><a class="headerlink" href="#map" title="Permanent link">¶</a></h3>
+<h3 id="map"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.2.2</span> <code>map()</code><a class="headerlink" href="#map" title="Permanent link">¶</a></h3>
 <p>The <code>map</code> operator applies a function of your choosing to every item emitted by a channel and returns the items obtained as a new channel. The function applied is called the <em>mapping</em> function and is expressed with a <em>closure</em>. In the example below the groovy <code>reverse</code> method has been used to reverse the order of the characters in each string emitted by the channel.</p>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1">1</a></span>
 <span class="normal"><a href="#__codelineno-6-2">2</a></span>
@@ -1576,7 +1584,7 @@
 </code></pre></div>
 </details>
 </div>
-<h3 id="mix"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.2.3</span> <code>mix()</code><a class="headerlink" href="#mix" title="Permanent link">¶</a></h3>
+<h3 id="mix"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.2.3</span> <code>mix()</code><a class="headerlink" href="#mix" title="Permanent link">¶</a></h3>
 <p>The <code>mix</code> operator combines the items emitted by two (or more) channels.</p>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1">1</a></span>
 <span class="normal"><a href="#__codelineno-11-2">2</a></span>
@@ -1604,7 +1612,7 @@
 <p class="admonition-title">Warning</p>
 <p>The items in the resulting channel have the same order as in the respective original channels. However, there is no guarantee that the elements of the second channel are appended after the elements of the first. Indeed, in the example above, the element <code>a</code> has been printed before <code>3</code>.</p>
 </div>
-<h3 id="flatten"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.2.4</span> <code>flatten()</code><a class="headerlink" href="#flatten" title="Permanent link">¶</a></h3>
+<h3 id="flatten"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.2.4</span> <code>flatten()</code><a class="headerlink" href="#flatten" title="Permanent link">¶</a></h3>
 <p>The <code>flatten</code> operator transforms a channel in such a way that every <em>tuple</em> is flattened so that each entry is emitted as a sole element by the resulting channel.</p>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1">1</a></span>
 <span class="normal"><a href="#__codelineno-13-2">2</a></span>
@@ -1627,7 +1635,7 @@
 <a href="#__codelineno-14-5" id="__codelineno-14-5" name="__codelineno-14-5"></a><span class="go">5</span>
 <a href="#__codelineno-14-6" id="__codelineno-14-6" name="__codelineno-14-6"></a><span class="go">6</span>
 </code></pre></div>
-<h3 id="collect"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.2.5</span> <code>collect()</code><a class="headerlink" href="#collect" title="Permanent link">¶</a></h3>
+<h3 id="collect"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.2.5</span> <code>collect()</code><a class="headerlink" href="#collect" title="Permanent link">¶</a></h3>
 <p>The <code>collect</code> operator collects all of the items emitted by a channel in a list and returns the object as a sole emission.</p>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1">1</a></span>
 <span class="normal"><a href="#__codelineno-15-2">2</a></span>
@@ -1643,7 +1651,7 @@
 <p class="admonition-title">Info</p>
 <p>The result of the <code>collect</code> operator is a <strong>value</strong> channel.</p>
 </div>
-<h3 id="grouptuple"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.2.6</span> <code>groupTuple()</code><a class="headerlink" href="#grouptuple" title="Permanent link">¶</a></h3>
+<h3 id="grouptuple"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.2.6</span> <code>groupTuple()</code><a class="headerlink" href="#grouptuple" title="Permanent link">¶</a></h3>
 <p>The <code>groupTuple</code> operator collects tuples (or lists) of values emitted by the source channel, grouping the elements that share the same key. Finally, it emits a new tuple object for each distinct key collected.</p>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-1">1</a></span>
 <span class="normal"><a href="#__codelineno-17-2">2</a></span>
@@ -1681,7 +1689,7 @@
 </code></pre></div>
 </details>
 </div>
-<h3 id="join"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.2.7</span> <code>join()</code><a class="headerlink" href="#join" title="Permanent link">¶</a></h3>
+<h3 id="join"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.2.7</span> <code>join()</code><a class="headerlink" href="#join" title="Permanent link">¶</a></h3>
 <p>The <code>join</code> operator creates a channel that joins together the items emitted by two channels with a matching key. The key is defined, by default, as the first element in each item emitted.</p>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-1">1</a></span>
 <span class="normal"><a href="#__codelineno-21-2">2</a></span>
@@ -1697,7 +1705,7 @@
 <p class="admonition-title">Note</p>
 <p>Notice <em>P</em> is missing in the final result.</p>
 </div>
-<h3 id="branch"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.2.8</span> <code>branch()</code><a class="headerlink" href="#branch" title="Permanent link">¶</a></h3>
+<h3 id="branch"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.2.8</span> <code>branch()</code><a class="headerlink" href="#branch" title="Permanent link">¶</a></h3>
 <p>The <code>branch</code> operator allows you to forward the items emitted by a source channel to one or more output channels.</p>
 <p>The selection criterion is defined by specifying a closure that provides one or more boolean expressions, each of which is identified by a unique label. For the first expression that evaluates to a true value, the item is bound to a named channel as the label identifier.</p>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-1"> 1</a></span>
@@ -1748,8 +1756,8 @@
 <li>How to use the <code>branch</code> operator to split the content of a channel</li>
 </ol>
 </div>
-<h2 id="text-files"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.3</span> Text files<a class="headerlink" href="#text-files" title="Permanent link">¶</a></h2>
-<h3 id="splittext"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.3.1</span> <code>splitText()</code><a class="headerlink" href="#splittext" title="Permanent link">¶</a></h3>
+<h2 id="text-files"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.3</span> Text files<a class="headerlink" href="#text-files" title="Permanent link">¶</a></h2>
+<h3 id="splittext"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.3.1</span> <code>splitText()</code><a class="headerlink" href="#splittext" title="Permanent link">¶</a></h3>
 <p>The <code>splitText</code> operator allows you to split multi-line strings or text file items, emitted by a source channel into chunks containing <em>n</em> lines, which will be emitted by the resulting channel.</p>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-25-1">1</a></span>
 <span class="normal"><a href="#__codelineno-25-2">2</a></span>
@@ -1802,7 +1810,7 @@
 <a href="#__codelineno-30-5" id="__codelineno-30-5" name="__codelineno-30-5"></a><span class="go">IT HAS SURVIVED NOT ONLY FIVE CENTURIES, BUT ALSO THE LEAP INTO ELECTRONIC TYPESETTING,</span>
 <a href="#__codelineno-30-6" id="__codelineno-30-6" name="__codelineno-30-6"></a><span class="go">...</span>
 </code></pre></div>
-<h3 id="splitcsv"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.3.2</span> <code>splitCsv()</code><a class="headerlink" href="#splitcsv" title="Permanent link">¶</a></h3>
+<h3 id="splitcsv"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.3.2</span> <code>splitCsv()</code><a class="headerlink" href="#splitcsv" title="Permanent link">¶</a></h3>
 <p>The <code>splitCsv</code> operator allows you to parse text items emitted by a channel, that are CSV formatted.</p>
 <p>It then splits them into records or groups them as a list of records with a specified length.</p>
 <p>In the simplest case, just apply the <code>splitCsv</code> operator to a channel emitting a CSV formatted text file or text entries. For example, to view only the first and fourth columns:</p>
@@ -1986,7 +1994,7 @@
 <p>Now the workflow should run from a CSV file.</p>
 </details>
 </div>
-<h3 id="tab-separated-values-tsv"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.3.3</span> Tab separated values (.tsv)<a class="headerlink" href="#tab-separated-values-tsv" title="Permanent link">¶</a></h3>
+<h3 id="tab-separated-values-tsv"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.3.3</span> Tab separated values (.tsv)<a class="headerlink" href="#tab-separated-values-tsv" title="Permanent link">¶</a></h3>
 <p>Parsing TSV files works in a similar way. Simply add the <code>sep: '\t'</code> option in the <code>splitCsv</code> context:</p>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-44-1">1</a></span>
 <span class="normal"><a href="#__codelineno-44-2">2</a></span>
@@ -2017,7 +2025,7 @@
 </code></pre></div></td></tr></table></div>
 </details>
 </div>
-<h3 id="splitjson"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.3.4</span> <code>splitJson()</code><a class="headerlink" href="#splitjson" title="Permanent link">¶</a></h3>
+<h3 id="splitjson"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.3.4</span> <code>splitJson()</code><a class="headerlink" href="#splitjson" title="Permanent link">¶</a></h3>
 <p>You can parse the JSON file format using the <code>splitJson</code> channel operator.</p>
 <p>The <code>splitJson</code> operator supports JSON arrays:</p>
 <div class="highlight"><table class="highlighttable"><tr><th class="filename" colspan="2"><span class="filename">snippet.nf</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-46-1">1</a></span>
@@ -2086,7 +2094,7 @@
 <li>How to use the <code>splitJson</code> operator to split JSON files of various formats</li>
 </ol>
 </div>
-<h2 id="more-resources"><span class="enumerate-headings-plugin enumerate-heading-plugin">7.4</span> More resources<a class="headerlink" href="#more-resources" title="Permanent link">¶</a></h2>
+<h2 id="more-resources"><span class="enumerate-headings-plugin enumerate-heading-plugin">6.4</span> More resources<a class="headerlink" href="#more-resources" title="Permanent link">¶</a></h2>
 <p>Check the <a href="https://www.nextflow.io/docs/latest/operator.html">operators documentation</a> on Nextflow web site.</p>
 </article>
 </div>
@@ -2162,7 +2170,7 @@
 <div class="md-consent__overlay"></div>
 <aside class="md-consent__inner">
 <form class="md-consent__form md-grid md-typeset" name="consent">
-<h4><span class="enumerate-headings-plugin enumerate-heading-plugin">7.4.0.1</span> Cookie consent</h4>
+<h4><span class="enumerate-headings-plugin enumerate-heading-plugin">6.4.0.1</span> Cookie consent</h4>
 <p>We use cookies to recognize your repeated visits and preferences, as well as to measure the effectiveness of our documentation and whether users find what they're searching for. With your consent, you're helping us to make our training materials better.</p>
 <input class="md-toggle" id="__settings" type="checkbox"/>
 <div class="md-consent__settings">
