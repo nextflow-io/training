@@ -193,7 +193,7 @@ plugins:
 
       exclude:
         - index.md
-        - help.md
+        - help*.md
         - envsetup/*.md
         - hello_nextflow/*.md
         - hello_nf-core/*.md
