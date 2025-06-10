@@ -4,9 +4,11 @@
   <iframe width="560" height="315" src="https://www.youtube.com/embed/G3CV-FcV-rc?si=nyLvwhrSB2m1NPc5&amp;list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
-!!!note "Note: This page has the transcript only"
+!!!note "Important notes"
 
-    [:octicons-arrow-left-24: Back to course material](../00_orientation.md)
+    This page shows the transcript only. For full step-by-step instructions, return to the [course material](../00_orientation.md).
+
+    The section numbers shown in the transcript are provided for indicative purposes only and may not include all section numbers in the materials.
 
 ## Welcome
 
