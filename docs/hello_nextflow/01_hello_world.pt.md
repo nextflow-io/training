@@ -5,7 +5,7 @@
 </div>
 
 /// caption
-:fontawesome-brands-youtube:{ .youtube } Veja a [playlist completa no canal de YouTube do Nextflow](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik).
+:fontawesome-brands-youtube:{ .youtube } Veja a [playlist completa](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik) no canal de YouTube do Nextflow.
 
 :green_book: A transcrição desse vídeo está disponível [aqui](./transcripts/01_hello_world.md).
 ///
