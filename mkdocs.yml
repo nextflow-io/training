@@ -79,6 +79,7 @@ nav:
       - advanced/configuration.md
       - advanced/summary.md
       - advanced/support.md
+  - Help: help.md
 
 theme:
   name: material
@@ -191,8 +192,8 @@ plugins:
         - advanced/orientation.md
 
       exclude:
-        - index.md
-        - help.md
+        - index*.md
+        - help*.md
         - envsetup/*.md
         - hello_nextflow/*.md
         - hello_nf-core/*.md
