@@ -144,8 +144,6 @@ You can still find the materials in the GitHub repository and download them for 
 
 - **nf-customize** — Configuring nf-core pipelines ([docs](other/nf_customize) / [code](https://github.com/nextflow-io/training/tree/master/other/nf-customize))
 
-- **nf-develop** — Developing a pipeline with the nf-core template ([docs](other/nf_develop) / [code](https://github.com/nextflow-io/training/tree/master/other/nf-develop))
-
 - **troubleshoot** — Troubleshooting exercises ([docs](other/troubleshoot) / [code](https://github.com/nextflow-io/training/tree/master/other/troubleshoot))
 
 - **hands-on (rnaseq)** — Developing a pipeline for bulk RNAseq (deprecated) ([docs](other/hands_on) / [code](https://github.com/nextflow-io/training/tree/master/other/hands-on))
