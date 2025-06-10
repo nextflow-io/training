@@ -44,7 +44,7 @@ nextflow run hello-config.nf
 ```
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.10.0
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `hello-config.nf` [reverent_heisenberg] DSL2 - revision: 028a841db1
 
@@ -147,7 +147,7 @@ nextflow run hello-config.nf
 This should work without issue.
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.10.0
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `hello-config.nf` [trusting_lovelace] DSL2 - revision: 028a841db1
 
@@ -362,7 +362,7 @@ nextflow run hello-config.nf -params-file test-params.json
 It works! And as expected, this produces the same outputs as previously.
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.10.0
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `hello-config.nf` [disturbed_sammet] DSL2 - revision: ede9037d02
 
@@ -511,7 +511,7 @@ nextflow run hello-config.nf -profile my_laptop
 This still produces the following output:
 
 ```
- N E X T F L O W   ~  version 24.10.0
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `hello-config.nf` [gigantic_brazil] DSL2 - revision: ede9037d02
 
@@ -593,7 +593,7 @@ nextflow run hello-config.nf -profile my_laptop,test
 This should produce the following:
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.10.0
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `hello-config.nf` [gigantic_brazil] DSL2 - revision: ede9037d02
 
