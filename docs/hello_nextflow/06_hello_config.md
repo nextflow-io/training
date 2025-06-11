@@ -5,7 +5,9 @@
 </div>
 
 /// caption
-:fontawesome-brands-youtube:{ .youtube } See the [whole playlist on the Nextflow YouTube channel](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik).
+:fontawesome-brands-youtube:{ .youtube } See [the whole playlist](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik) on the Nextflow YouTube channel.
+
+:green_book: The video transcript is available [here](./transcripts/06_hello_config.md).
 ///
 
 This section will explore how to set up and manage the configuration of your Nextflow pipeline so that you'll be able to customize its behavior, adapt it to different environments, and optimize resource usage _without altering a single line of the workflow code itself_.
@@ -42,7 +44,7 @@ nextflow run hello-config.nf
 ```
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.10.0
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `hello-config.nf` [reverent_heisenberg] DSL2 - revision: 028a841db1
 
@@ -145,7 +147,7 @@ nextflow run hello-config.nf
 This should work without issue.
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.10.0
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `hello-config.nf` [trusting_lovelace] DSL2 - revision: 028a841db1
 
@@ -360,7 +362,7 @@ nextflow run hello-config.nf -params-file test-params.json
 It works! And as expected, this produces the same outputs as previously.
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.10.0
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `hello-config.nf` [disturbed_sammet] DSL2 - revision: ede9037d02
 
@@ -509,7 +511,7 @@ nextflow run hello-config.nf -profile my_laptop
 This still produces the following output:
 
 ```
- N E X T F L O W   ~  version 24.10.0
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `hello-config.nf` [gigantic_brazil] DSL2 - revision: ede9037d02
 
@@ -591,7 +593,7 @@ nextflow run hello-config.nf -profile my_laptop,test
 This should produce the following:
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.10.0
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `hello-config.nf` [gigantic_brazil] DSL2 - revision: ede9037d02
 
