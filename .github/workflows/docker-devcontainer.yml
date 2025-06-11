@@ -55,6 +55,8 @@ jobs:
 
       - name: Pre-build dev container image
         uses: devcontainers/ci@v0.3
+        env:
+          BUILDX_NO_DEFAULT_ATTESTATIONS: true
         with:
           configFile: .devcontainer/codespaces-dev/devcontainer.json
           imageName: ghcr.io/${{ github.repository }}
