@@ -68,6 +68,7 @@ Even though it's required that you read this document in order to contribute wit
 
 In order to keep consistency in translations, every language should have a translation glossary where common technical terms and terms related to Nextflow have an official translation to be followed by future translators. Ideally, these links should point to an online spreadsheet where anyone can comment and make suggestions, but not edit.
 
+- [Polish](https://docs.google.com/spreadsheets/d/1JwDNVZAnM4hBH0guCb9OopTWUp0AmkZDpcLgjYyGVeA/edit?usp=sharing)
 - [Portuguese](https://docs.google.com/spreadsheets/d/1HUa3BO2kwukhX4EXQ-1blXeP5iueUdM23OwDRpfarDg/edit?usp=sharing)
 
 ## Merging
