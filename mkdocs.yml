@@ -234,6 +234,10 @@ plugins:
           default: false
           locale: ko
           name: Korean
+        - build: true
+          default: false
+          locale: pl
+          name: Polski
       reconfigure_material: true
       reconfigure_search: true
   - search
