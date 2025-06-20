@@ -631,14 +631,14 @@ A **container** is a lightweight, standalone, executable unit of software create
 
     We teach this using the technology [Docker](https://www.docker.com/get-started/), but Nextflow supports [several other container technologies](https://www.nextflow.io/docs/latest/container.html#) as well.
 
-## 4.1. Use a container directly
+### 4.1. Use a container directly
 
 First, let's try interacting with a container directly.
 This will help solidify your understanding of what containers are before we start using them in Nextflow.
 
 TODO: clone the content from hello_containers.md
 
-## 4.2. Use a container in a workflow
+### 4.2. Use a container in a workflow
 
 TODO: clone the content from hello_containers.md
 
