@@ -297,7 +297,7 @@ Let's look at a slightly upgraded version of our Hello World workflow called `he
 This time we're going to look at the code _before_ we run it.
 As you can see, we've highlighted the differences compared to the previous version.
 
-```groovy title="hello-world-plus.nf" linenums="1" hl_lines="8,10-11,22-25,30"
+```groovy title="hello-world-plus.nf" linenums="1"
 #!/usr/bin/env nextflow
 
 /*
