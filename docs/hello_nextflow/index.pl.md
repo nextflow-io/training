@@ -52,4 +52,3 @@ Niniejszy kurs jest przeznaczony dla osób, które jeszcze nie znają Nextflowa.
 
 - Konto na GitHubie LUB lokalna instalacja opisana [tutaj](../envsetup/02_local)
 - Znajomość wiersza poleceń Unixa i podstaw pisania skryptów
- 
