@@ -97,9 +97,9 @@ Yes! We see all three expected outputs, conveniently with differentiating names.
 
 ### 1.4. Examine the code
 
-Now let's take a look at what has changed in the workflow code.
+Let's take a look at what has changed in the workflow code.
 
-```groovy title="channels.nf" linenums="1" hl_lines="14,18,25,29-32,35"
+```groovy title="channels.nf" linenums="1"
 #!/usr/bin/env nextflow
 
 /*
