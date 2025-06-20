@@ -1,4 +1,4 @@
-# Part 2: Multi-step pipeline
+# Part 2: Run pipelines
 
 1. Meet the multi-step Hello World (up to cowpy but still monolithic)
 2. Run it and interpret the console output
