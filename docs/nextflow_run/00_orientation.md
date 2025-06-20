@@ -33,7 +33,7 @@ If you run this inside `nextflow-run`, you should see the following output: [TOD
 
 **Here's a summary of what you should know to get started:**
 
-[TODO]
+TODO: update when content is final
 
 !!!tip
 

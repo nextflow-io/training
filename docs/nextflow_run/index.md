@@ -1,5 +1,5 @@
 ---
-title: Run Nextflow
+title: Nextflow Run
 hide:
   - toc
 ---
