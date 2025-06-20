@@ -333,7 +333,7 @@ workflow {
 
 That may seem like a lot, so let's break it down.
 
-### 3.1.1. Variable inputs
+#### 3.1.1. Variable inputs
 
 First let's look at the components that allow us to pass an input from command-line.
 
@@ -362,7 +362,7 @@ And finally, bringing it all together in the `workflow` block, we are now giving
 This means we'll be able to set a greeting from the command-line using `--greeting` as a parameter name.
 You'll see that in action in a minute.
 
-### 3.1.2. Conveniently accessible outputs
+#### 3.1.2. Conveniently accessible outputs
 
 The other notable addition here is just one line, but it's an important one:
 
