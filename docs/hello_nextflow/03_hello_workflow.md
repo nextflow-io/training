@@ -5,7 +5,9 @@
 </div>
 
 /// caption
-:fontawesome-brands-youtube:{ .youtube } See the [whole playlist on the Nextflow YouTube channel](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik).
+:fontawesome-brands-youtube:{ .youtube } See [the whole playlist](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik) on the Nextflow YouTube channel.
+
+:green_book: The video transcript is available [here](./transcripts/03_hello_workflow.md).
 ///
 
 Most real-world workflows involve more than one step.
@@ -40,7 +42,7 @@ nextflow run hello-workflow.nf
 ```
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.10.0
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `hello-workflow.nf` [stupefied_sammet] DSL2 - revision: b9e466930b
 
@@ -98,7 +100,7 @@ HELLO WORLD
 
 That's basically what we're going to try to do with our workflow.
 
-### 1.1. Write the uppercasing step as a Nextflow process
+### 1.2. Write the uppercasing step as a Nextflow process
 
 We can model our new process on the first one, since we want to use all the same components.
 
@@ -132,7 +134,7 @@ Here, we compose the second output filename based on the input filename, similar
     Nextflow will determine the order of operations based on the chaining of inputs and outputs, so the order of the process definitions in the workflow script does not matter.
     However, we do recommend you be kind to your collaborators and to your future self, and try to write them in a logical order for the sake of readability.
 
-### 1.2. Add a call to the new process in the workflow block
+### 1.3. Add a call to the new process in the workflow block
 
 Now we need to tell Nextflow to actually call the process that we just defined.
 
@@ -159,7 +161,7 @@ In the workflow block, make the following code change:
 
 This is not yet functional because we have not specified what should be input to the `convertToUpper()` process.
 
-### 1.3. Pass the output of the first process to the second process
+### 1.4. Pass the output of the first process to the second process
 
 Now we need to make the output of the `sayHello()` process flow into the `convertToUpper()` process.
 
@@ -186,7 +188,7 @@ In the workflow block, make the following code change:
 
 For a simple case like this (one output to one input), that's all we need to do to connect two processes!
 
-### 1.4. Run the workflow again with `-resume`
+### 1.5. Run the workflow again with `-resume`
 
 Let's run this using the `-resume` flag, since we've already run the first step of the workflow successfully.
 
@@ -197,7 +199,7 @@ nextflow run hello-workflow.nf -resume
 You should see the following output:
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 24.10.0
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `hello-workflow.nf` [disturbed_darwin] DSL2 - revision: 4e252c048f
 
@@ -420,7 +422,7 @@ nextflow run hello-workflow.nf -resume
 It runs successfully, including the third step:
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 24.10.0
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `hello-workflow.nf` [mad_gilbert] DSL2 - revision: 6acfd5e28d
 
@@ -511,7 +513,7 @@ nextflow run hello-workflow.nf -resume
 It runs successfully, although the log output may look a little messier than this (we cleaned it up for readability).
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 24.10.0
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `hello-workflow.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726
 
@@ -691,7 +693,7 @@ nextflow run hello-workflow.nf -resume --batch trio
 It runs successfully:
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 24.10.0
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `hello-workflow.nf` [confident_rutherford] DSL2 - revision: bc58af409c
 
@@ -773,7 +775,7 @@ In the `collectGreetings` process block, make the following code change:
 
 The `count_greetings` variable will be computed at runtime.
 
-### 4.1.2. Emit the count as a named output
+#### 4.1.2. Emit the count as a named output
 
 In principle all we need to do is to add the `count_greetings` variable to the `output:` block.
 
@@ -842,7 +844,7 @@ nextflow run hello-workflow.nf -resume --batch trio
 This runs successfully:
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 24.10.0
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `hello-workflow.nf` [evil_sinoussi] DSL2 - revision: eeca64cdb1
 
