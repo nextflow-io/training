@@ -62,7 +62,7 @@ Open the file in the code editor and copy the following code into it:
 process FASTQC {
 
     container "community.wave.seqera.io/library/trim-galore:0.6.10--1bf8ca4e1967cd18"
-    publishDir "results/fastqc", mode: 'copy'
+    publishDir "results/fastqc", mode: 'symlink'
 
     input:
     path reads
@@ -77,6 +77,12 @@ process FASTQC {
     """
 }
 ```
+
+You should recognize all the pieces from what you learned in Part 1 & Part 2 of this training series; the only notable change is that this time we're using `mode: symlink` for the `publishDir` directive, and we're using a parameter to define the `publishDir`.
+
+!!! note
+
+    Even though the data files we're using here are very small, in genomics they can get very large. For the purposes of demonstration in the teaching environment, we're using the 'symlink' publishing mode to avoid unnecessary file copies. You shouldn't do this in your final workflows, since you'll lose results when you clean up your `work` directory.
 
 ### 1.2. Import the module into the workflow file
 
@@ -177,7 +183,7 @@ Open the file in the code editor and copy the following code into it:
 process TRIM_GALORE {
 
     container "community.wave.seqera.io/library/trim-galore:0.6.10--1bf8ca4e1967cd18"
-    publishDir "results/trimming", mode: 'copy'
+    publishDir "results/trimming", mode: 'symlink'
 
     input:
     path reads
@@ -271,7 +277,7 @@ Open the file in the code editor and copy the following code into it:
 process HISAT2_ALIGN {
 
     container "community.wave.seqera.io/library/hisat2_samtools:5e49f68a37dc010e"
-    publishDir "results/align", mode: 'copy'
+    publishDir "results/align", mode: 'symlink'
 
     input:
     path reads

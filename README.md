@@ -28,7 +28,8 @@ We are excited to have you on the path to writing reproducible and scalable scie
 
 We welcome fixes and improvements from the community. Please fork the repository and create pull-requests with any improvements you'd like to suggest to the docs.
 
-You can find instructions about how to develop the training material code in [`CONTRIBUTING.md`](CONTRIBUTING.md). If you want to contribute with a translation instead, check [`TRANSLATING.md`](TRANSLATING.md).
+> [!NOTE]
+> You can find instructions about how to develop the training material code in [`CONTRIBUTING.md`](CONTRIBUTING.md). If you want to contribute with a translation instead, check [`TRANSLATING.md`](TRANSLATING.md).
 
 ## Credits & Copyright
 
@@ -36,4 +37,4 @@ This training material is developed and maintained by [Seqera](https://seqera.io
 
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/"><img alt="Creative Commons License" src="docs/assets/img/cc_by-nc-nd.svg" /></a>
 
-> Copyright 2024, Seqera. All examples and descriptions are licensed under the <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.
+> Copyright 2025, Seqera. All examples and descriptions are licensed under the <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License</a>.

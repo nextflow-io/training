@@ -1,0 +1,27 @@
+name: Check Markdown Headings
+
+on:
+  pull_request:
+    paths:
+      - "**.md"
+      # Transcripts headings correspond to main docs - may skip sections intentionally
+      - "!**/transcripts/**/*.md"
+
+jobs:
+  check-headings:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+
+      - name: Get changed markdown files
+        id: changed-files
+        uses: tj-actions/changed-files@v42
+        with:
+          files: "**.md"
+          files_ignore: "**/transcripts/**/*.md"
+
+      - name: Run check_headings.py
+        run: uv run .github/check_headings.py ${{ steps.changed-files.outputs.all_changed_files }}

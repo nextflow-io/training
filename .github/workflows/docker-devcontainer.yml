@@ -20,7 +20,7 @@ on:
 
 jobs:
   build_push:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     permissions:
       contents: read
       packages: write
@@ -55,8 +55,10 @@ jobs:
 
       - name: Pre-build dev container image
         uses: devcontainers/ci@v0.3
+        env:
+          BUILDX_NO_DEFAULT_ATTESTATIONS: true
         with:
-          configFile: .devcontainer/development/devcontainer.json
+          configFile: .devcontainer/codespaces-dev/devcontainer.json
           imageName: ghcr.io/${{ github.repository }}
           imageTag: ${{ env.IMAGE_TAG }}
           cacheFrom: ghcr.io/${{ github.repository }}

@@ -11,6 +11,7 @@ Table of contents:
   - [Figures \& diagrams](#figures--diagrams)
   - [Content style and formatting](#content-style-and-formatting)
     - [Formatting / linting](#formatting--linting)
+    - [Headings CI tests](#headings-ci-tests)
     - [Admonitions](#admonitions)
   - [Known limitations](#known-limitations)
     - [Code annotations](#code-annotations)
@@ -130,6 +131,38 @@ All training content must be written as markdown.
 Please make sure that you have Prettier installed and working locally: <https://prettier.io/> (ideally via the VSCode plugin or similar, formatting on save).
 
 There is a GitHub action that checks pull-requests for valid formatting.
+
+For paragraphs containing multiple sentences, please start each sentence on a new line.
+Doing that produces cleaner diffs for future code reviews.
+The sentences will still be rendered as a continuous paragraph.
+For an example, have a look at the code for this paragraph.
+
+### Headings CI tests
+
+This repository includes a Python tool to validate markdown heading numbering consistency across training materials.
+
+The `check_headings.py` script ensures:
+
+- Sequential numbering at each level (1., 1.1., 1.2., etc.)
+- Trailing periods after heading numbers
+- Heading levels match numbering depth (## for 1., ### for 1.1.)
+
+The easiest way to run it is [with `uv`](https://docs.astral.sh/uv/), which handles dependencies for you automatically:
+
+```bash
+# Check files for issues
+uv run .github/check_headings.py docs/**/*.md
+```
+
+```bash
+# Auto-fix detected issues
+uv run .github/check_headings.py --fix docs/**/*.md
+```
+
+Otherwise, run `pip install typer rich` then `python .github/check_headings.py`.
+
+The script runs automatically in CI on markdown file changes via GitHub Actions,
+and will cause a CI failure if any incorrect headings are found.
 
 ### Admonitions
 

@@ -5,7 +5,9 @@
 </div>
 
 /// caption
-:fontawesome-brands-youtube:{ .youtube } See the [whole playlist on the Nextflow YouTube channel](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik).
+:fontawesome-brands-youtube:{ .youtube } See [the whole playlist](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik) on the Nextflow YouTube channel.
+
+:green_book: The video transcript is available [here](./transcripts/01_hello_world.md).
 ///
 
 In this first part of the Hello Nextflow training course, we ease into the topic with a very basic domain-agnostic Hello World example, which we'll progressively build up to demonstrate the usage of foundational Nextflow logic and components.
@@ -210,7 +212,7 @@ nextflow run hello-world.nf
 You console output should look something like this:
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 24.10.0
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `hello-world.nf` [goofy_torvalds] DSL2 - revision: c33d41f479
 
@@ -351,7 +353,7 @@ nextflow run hello-world.nf
 The log output should look very familiar:
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 24.10.0
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `hello-world.nf` [jovial_mayer] DSL2 - revision: 35bd3425e5
 
@@ -395,7 +397,7 @@ nextflow run hello-world.nf -resume
 The console output should look similar.
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 24.10.0
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `hello-world.nf` [golden_cantor] DSL2 - revision: 35bd3425e5
 
@@ -584,7 +586,7 @@ nextflow run hello-world.nf --greeting 'Bonjour le monde!'
 If you made all three edits correctly, you should get another successful execution:
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 24.10.0
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `hello-world.nf` [elated_lavoisier] DSL2 - revision: 7c031b42ea
 
@@ -637,7 +639,7 @@ nextflow run hello-world.nf
 The console output should look the same.
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 24.10.0
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `hello-world.nf` [determined_edison] DSL2 - revision: 3539118582
 
@@ -651,7 +653,7 @@ Check the output in the results directory:
 Holà mundo!
 ```
 
-Nextflow used the default value to name the output.
+Nextflow used the default value of the greeting parameter to create the output.
 
 #### 4.2.3. Run the workflow again with the parameter to override the default value
 
@@ -666,7 +668,7 @@ nextflow run hello-world.nf --greeting 'Konnichiwa!'
 The console output should look the same.
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 24.10.0
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `hello-world.nf` [elegant_faraday] DSL2 - revision: 3539118582
 

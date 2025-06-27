@@ -3,7 +3,7 @@
 process MULTIQC {
 
     container "community.wave.seqera.io/library/pip_multiqc:ad8f247edb55897c"
-    publishDir "results/multiqc", mode: 'copy'
+    publishDir "results/multiqc", mode: 'symlink'
 
     input:
     path '*'
