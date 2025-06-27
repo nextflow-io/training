@@ -1,0 +1,2 @@
+Sample	unpaired_total	unpaired_aligned_none	unpaired_aligned_one	unpaired_aligned_multi	overall_alignment_rate
+ENCSR000COQ1_1	27816	1550	25410	856	94.43

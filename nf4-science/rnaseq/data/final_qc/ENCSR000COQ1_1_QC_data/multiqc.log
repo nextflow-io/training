@@ -1,0 +1,7 @@
+[2025-05-09 16:36:58,135] multiqc.core.version_check                         [WARNING]  MultiQC Version v1.28 now available!
+[2025-05-09 16:36:58,137] multiqc.core.file_search                           [INFO   ]  Search path: /data/reads
+[2025-05-09 16:36:58,137] multiqc.core.file_search                           [INFO   ]  Search path: /data/trimmed
+[2025-05-09 16:36:58,137] multiqc.core.file_search                           [INFO   ]  Search path: /data/aligned
+[2025-05-09 16:36:58,218] multiqc.modules.hisat2.hisat2                      [INFO   ]  Found 1 reports
+[2025-05-09 16:36:58,240] multiqc.modules.cutadapt.cutadapt                  [INFO   ]  Found 1 reports
+[2025-05-09 16:36:58,256] multiqc.modules.fastqc.fastqc                      [INFO   ]  Found 1 reports

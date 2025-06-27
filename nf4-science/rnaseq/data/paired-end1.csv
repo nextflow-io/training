@@ -1,0 +1,7 @@
+sample_id,fastq_1,fastq_2
+ENCSR000COQ1,data/reads/ENCSR000COQ1_1.fastq.gz,data/reads/ENCSR000COQ1_2.fastq.gz
+ENCSR000COQ2,data/reads/ENCSR000COQ2_1.fastq.gz,data/reads/ENCSR000COQ2_2.fastq.gz
+ENCSR000COR1,data/reads/ENCSR000COR1_1.fastq.gz,data/reads/ENCSR000COR1_2.fastq.gz
+ENCSR000COR2,data/reads/ENCSR000COR2_1.fastq.gz,data/reads/ENCSR000COR2_2.fastq.gz
+ENCSR000CPO1,data/reads/ENCSR000CPO1_1.fastq.gz,data/reads/ENCSR000CPO1_2.fastq.gz
+ENCSR000CPO2,data/reads/ENCSR000CPO2_1.fastq.gz,data/reads/ENCSR000CPO2_2.fastq.gz

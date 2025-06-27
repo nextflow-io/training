@@ -1,0 +1,4 @@
+Module	Section	Sample Name	Source
+HISAT2	all_sections	ENCSR000COQ1_1	/data/aligned/ENCSR000COQ1_1_trimmed.hisat2.log
+Cutadapt	all_sections	ENCSR000COQ1_1	/data/trimmed/ENCSR000COQ1_1.fastq.gz_trimming_report.txt
+FastQC	all_sections	ENCSR000COQ1_1	/data/reads/ENCSR000COQ1_1_fastqc.zip
