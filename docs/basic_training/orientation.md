@@ -74,20 +74,19 @@ export NXF_VER=23.10.1
 
 ## Environment variables
 
-By default, Nextflow will pull the latest stable version into your environment.
-
-However, Nextflow is constantly evolving as improvements are made.
-
-The [latest releases](https://github.com/nextflow-io/nextflow/releases) can be viewed on GitHub.
-
-If you want to use a specific version of Nextflow, you can set the `NXF_VER` variable:
-
-```bash
-export NXF_VER=23.10.1
-```
+Environment variables like `NXF_VER` allow you to configure how Nextflow behaves, without editing the codebase directly.
 
 !!! note
 
     This tutorial workshop requires `NXF_VER=23.10.1`, or later.
 
-If you have exported the `NXF_VER` variable, execute `nextflow -version` again to confirm that the change has taken effect.
+To specify this version in your environment, run:     
+```bash
+export NXF_VER=23.10.1
+```
+
+You can double-check `NXF_VER` by running:    
+```bash
+nextflow -version
+```
+This approach ensures everyone in the workshop is using a consistent version, which helps avoid compatibility issues and unexpected behavior.      
