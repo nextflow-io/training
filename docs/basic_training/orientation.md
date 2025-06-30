@@ -64,6 +64,7 @@ export NXF_VER=23.10.1
 ```
 
 You can double-check `NXF_VER` by running:
+
 ```bash
 nextflow -version
 ```
