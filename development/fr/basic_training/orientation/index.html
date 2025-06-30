@@ -1742,13 +1742,6 @@
     </span>
   </a>
   
-</li>  <li class="md-nav__item">
-  <a href="#environment-variables" class="md-nav__link">
-    <span class="md-ellipsis">
-      Environment variables
-    </span>
-  </a>
-  
 </li> 
   </ul>
   
@@ -2600,13 +2593,6 @@
     </span>
   </a>
   
-</li>  <li class="md-nav__item">
-  <a href="#environment-variables" class="md-nav__link">
-    <span class="md-ellipsis">
-      Environment variables
-    </span>
-  </a>
-  
 </li> 
   </ul>
   
@@ -2881,25 +2867,16 @@
 <p>If you want to use a specific version of Nextflow, you can set the <code>NXF_VER</code> variable as shown below:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">NXF_VER</span><span class="o">=</span><span class="m">23</span>.10.1
 </code></pre></div>
+<p>You can double-check <code>NXF_VER</code> by running:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>nextflow<span class="w"> </span>-version
+</code></pre></div>
 <div class="admonition question">
 <p class="admonition-title">Exercise</p>
 <p>Open the GitHub Codespaces training environment and use the following command to switch to the <code>nf-customize</code> folder. View the files in this folder using the <code>tree</code> command:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">cd</span><span class="w"> </span>/workspaces/training/nf-training
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>tree<span class="w"> </span>.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nb">cd</span><span class="w"> </span>/workspaces/training/nf-training
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>tree<span class="w"> </span>.
 </code></pre></div>
 </div>
-<h2 id="environment-variables">Environment variables<a class="headerlink" href="#environment-variables" title="Permanent link">&para;</a></h2>
-<p>By default, Nextflow will pull the latest stable version into your environment.</p>
-<p>However, Nextflow is constantly evolving as improvements are made.</p>
-<p>The <a href="https://github.com/nextflow-io/nextflow/releases">latest releases</a> can be viewed on GitHub.</p>
-<p>If you want to use a specific version of Nextflow, you can set the <code>NXF_VER</code> variable:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">NXF_VER</span><span class="o">=</span><span class="m">23</span>.10.1
-</code></pre></div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>This tutorial workshop requires <code>NXF_VER=23.10.1</code>, or later.</p>
-</div>
-<p>If you have exported the <code>NXF_VER</code> variable, execute <code>nextflow -version</code> again to confirm that the change has taken effect.</p>
 
 
 
