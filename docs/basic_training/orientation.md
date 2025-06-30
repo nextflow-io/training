@@ -63,6 +63,11 @@ If you want to use a specific version of Nextflow, you can set the `NXF_VER` var
 export NXF_VER=23.10.1
 ```
 
+You can double-check `NXF_VER` by running:
+```bash
+nextflow -version
+```
+
 !!! question "Exercise"
 
     Open the GitHub Codespaces training environment and use the following command to switch to the `nf-customize` folder. View the files in this folder using the `tree` command:
@@ -71,22 +76,3 @@ export NXF_VER=23.10.1
     cd /workspaces/training/nf-training
     tree .
     ```
-
-## Environment variables
-
-Environment variables like `NXF_VER` allow you to configure how Nextflow behaves, without editing the codebase directly.
-
-!!! note
-
-    This tutorial workshop requires `NXF_VER=23.10.1`, or later.
-
-To specify this version in your environment, run:     
-```bash
-export NXF_VER=23.10.1
-```
-
-You can double-check `NXF_VER` by running:    
-```bash
-nextflow -version
-```
-This approach ensures everyone in the workshop is using a consistent version, which helps avoid compatibility issues and unexpected behavior.      
