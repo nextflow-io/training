@@ -58,7 +58,8 @@ Creates a flow chart of your pipeline.
 nextflow run pipeline.nf -with-dag flowchart.png
 ```
 Input variables 
-Calling an input varibale with the value 
+Calling an input varibale with the value, we can also use the default value
 ```sh
 nextflow run hello-world.nf --greeting "He Ali" -with-report  
+nextflow run hello-world.nf
 ```

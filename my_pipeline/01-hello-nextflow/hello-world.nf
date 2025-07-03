@@ -19,6 +19,9 @@ process sayHello {
     """
 }
 
+/* * Passing default parameters to the workflow */
+params.greeting = 'Hello World!'
+
 workflow {
 
     // emit a greeting
