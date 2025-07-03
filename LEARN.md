@@ -1,5 +1,9 @@
 # Nextflow Command Reference
 
+This is a [link][ref].
+
+ [ref]: https://training.nextflow.io/latest/  "Tutorial"
+
 ## Check the Nextflow Version
 ```sh
 nextflow -v
