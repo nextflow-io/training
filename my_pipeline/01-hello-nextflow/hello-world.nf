@@ -4,21 +4,23 @@
  * Use echo to print 'Hello World!' to a file
  */
 process sayHello {
-    debug true
-
+    
     publishDir 'results', mode: 'copy'
+
+    input:
+    val greeting
 
     output:
         path 'output.txt'
 
     script:
     """
-    echo 'Hello World!' > output.txt
+    echo '$greeting' > output.txt
     """
 }
 
 workflow {
 
     // emit a greeting
-    sayHello()
+    sayHello(params.greeting)
 }

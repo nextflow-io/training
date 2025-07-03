@@ -57,3 +57,8 @@ Creates a flow chart of your pipeline.
 ```sh
 nextflow run pipeline.nf -with-dag flowchart.png
 ```
+Input variables 
+Calling an input varibale with the value 
+```sh
+nextflow run hello-world.nf --greeting "He Ali" -with-report  
+```
