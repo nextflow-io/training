@@ -13,7 +13,7 @@ Let's demonstrate this with a simple command that we run directly in the termina
 
 !!! tip
 
-    Remember that you should now be inside the `hello-nextflow/` directory as described in the Orientation.
+    Remember that you should now be inside the `nextflow-run/` directory as described in the Orientation.
 
 ### 0.1. Make the terminal say hello
 
@@ -85,7 +85,7 @@ nextflow run hello-world.nf --greeting 'Hello World!'
 You console output should look something like this:
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 24.10.0
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `hello-world.nf` [goofy_torvalds] DSL2 - revision: c33d41f479
 
@@ -115,13 +115,19 @@ tree results
 ```
 
 ```console title="Output" linenums="1"
-TODO
+results
+└── output.txt
 ```
 
 Open the file; the contents should match the string you specified on the command line.
+
+```console title="results/output.txt" linenums="1"
+Hello World!
+```
+
 That's great, our workflow did what it was supposed to do!
 
-However, it's important to know that the 'published' result is a copy (or in some cases a symlink) of the actual output produced by Nextflow when it executed the workflow.
+However, be aware that the 'published' result is a copy (or in some cases a symlink) of the actual output produced by Nextflow when it executed the workflow.
 
 So now, we are going to peek under the hood to see where Nextflow actually executed the work.
 
@@ -184,9 +190,9 @@ work
 ```
 
 You should immediately recognize the `output.txt` file, which is in fact the original output of the `sayHello` process that got published to the `results` directory.
-If you open it, you will find the `Hello World!` greeting.
+If you open it, you will find the `Hello World!` greeting again.
 
-```console title="output.txt" linenums="1"
+```console title="work/a3/7be2fa7be2fad5e71e5f49998f795677fd68/output.txt" linenums="1"
 Hello World!
 ```
 
@@ -204,16 +210,23 @@ These are the helper and log files that Nextflow wrote as part of the task execu
 
 The `.command.sh` file is especially useful because it tells you what command Nextflow actually executed.
 
-TODO: show the `command.sh` contents
+```console title="work/a3/7be2fa7be2fad5e71e5f49998f795677fd68/command.sh" linenums="1"
+#!/bin/bash -ue
+echo 'Hello World!' > output.txt
 
-In this case it's very straightforward, but later in the course you'll see commands that involve some interpolation of variables.
-When you're dealing with that, you need to be able to check exactly what was run, especially when troubleshooting an issue.
+```
 
-TODO: conclude with a short note about why the work/... structure + why publishDir makes it easier
+So this confirms that the workflow composed the same command we ran directly on the command-line earlier.
+
+!!! note
+
+    When something goes wrong and you need to troubleshoot what happened, it can be useful to look at the `command.sh` script to check exactly what command Nextflow composed based on the workflow instructions, variable interpolation and so on.
 
 ### 1.4. Optional exercise: re-run with different greetings
 
-Try re-running the workflow a few times with different values for the `--greeting` argument to see how the outputs and logs of isolated task directories are preserved, whereas the contents of the `results` directory are overwritten by the output of subsequent executions.
+Try re-running the workflow a few times with different values for the `--greeting` argument, then look at both the contents of the `results/` directory and the task directories.
+
+Observe how the outputs and logs of isolated task directories are preserved, whereas the contents of the `results` directory are overwritten by the output of subsequent executions.
 
 ### Takeaway
 
@@ -339,11 +352,11 @@ workflow {
 This is a very minimal **workflow** definition.
 In a real-world pipeline, the workflow typically contains multiple calls to **processes** connected by **channels**, and there may be default values set up for the variable inputs.
 
-We'll look into that in the next section of the course.
+We'll look into that in Part 2 of the course.
 
 ### 2.4. The `params` system of command-line parameters
 
-The `params.greeting` we provide to the `sayHello()` process call is a very neat bit of Nextflow code and is worth spending an extra minute on.
+The `params.greeting` we provide to the `sayHello()` process call is a neat bit of Nextflow code and is worth spending an extra minute on.
 
 As mentioned above, that's how we pass the value of the `--greeting` command-line parameter to the `sayHello()` process call.
 In fact, simply declaring `params.someParameterName` will enable us to give the workflow a parameter named `--someParameterName` from the command-line.
@@ -367,11 +380,11 @@ Learn to manage your workflow executions conveniently.
 
 Knowing how to launch workflows and retrieve outputs is great, but you'll quickly find there are a few other aspects of workflow management that will make your life easier.
 
-Here we show you how to take advantage of the `resume` feature for when you need to re-launch the same workflow, and how to delete older work directories with `nextflow clean`.
+Here we show you how to take advantage of the `resume` feature for when you need to re-launch the same workflow, how to inspect the execution logs with `nextflow log`, and how to delete older work directories with `nextflow clean`.
 
 ### 3.1. Re-launch a workflow with `-resume`
 
-Sometimes, you're going to want to re-run a pipeline that you've already launched previously without redoing any steps that already completed successfully.
+Sometimes, you're going to want to re-run a pipeline that you've already launched previously without redoing any work that was already completed successfully.
 
 Nextflow has an option called `-resume` that allows you to do this.
 Specifically, in this mode, any processes that have already been run with the exact same code, settings and inputs will be skipped.
@@ -391,7 +404,7 @@ nextflow run hello-world-plus.nf -resume
 The console output should look similar.
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 24.10.0
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `hello-world-plus.nf` [golden_cantor] DSL2 - revision: 35bd3425e5
 
@@ -409,7 +422,41 @@ Nextflow is literally pointing you to the previous execution and saying "I alrea
 
 ### 3.2. Inspect the log of past executions
 
-TODO: demonstrate the use of the `nextflow log` command
+Whenever you launch a nextflow workflow, a line gets written to a log file called `history`, under a hidden directory called `.nextflow` in the current working directory.
+
+If you open it, the contents should look something like this:
+
+```console title=".nextflow/history" linenums="1"
+2025-07-04 19:27:09	1.8s	wise_watson	OK	3539118582ccde68dde471cc2c66295c	a02c9c46-c3c7-4085-9139-d1b9b5b194c8	nextflow run hello-world.nf --greeting 'Hello World'
+2025-07-04 19:27:20	2.9s	spontaneous_blackwell	OK	3539118582ccde68dde471cc2c66295c	59a5db23-d83c-4c02-a54e-37ddb73a337e	nextflow run hello-world.nf --greeting Bonjour
+2025-07-04 19:27:31	1.8s	gigantic_yonath	OK	3539118582ccde68dde471cc2c66295c	5acaa83a-6ad6-4509-bebc-cb25d5d7ddd0	nextflow run hello-world.nf --greeting 'Dobry den'
+2025-07-04 19:27:45	2.4s	backstabbing_swartz	OK	3539118582ccde68dde471cc2c66295c	5f4b3269-5b53-404a-956c-cac915fbb74e	nextflow run hello-world.nf --greeting Konnichiwa
+2025-07-04 19:27:57	2.1s	goofy_wilson	OK	3539118582ccde68dde471cc2c66295c	5f4b3269-5b53-404a-956c-cac915fbb74e	nextflow run hello-world.nf --greeting Konnichiwa -resume
+```
+
+This gives you the timestamp, run name, status, revision ID, session ID and full command line for every Nextflow run that has been launched from within the current working directory.
+
+A more convenient way to access this information is to use the `nextflow log` command.
+
+```bash
+nextflow log
+```
+
+This will output the contents of the log file to the terminal, augmented with a header line:
+
+```console title="Output" linenums="1"
+TIMESTAMP               DURATION        RUN NAME                STATUS  REVISION ID     SESSION ID                              COMMAND
+2025-07-04 19:27:09     1.8s            wise_watson             OK       3539118582     a02c9c46-c3c7-4085-9139-d1b9b5b194c8    nextflow run hello-world.nf --greeting 'Hello World'
+2025-07-04 19:27:20     2.9s            spontaneous_blackwell   OK       3539118582     59a5db23-d83c-4c02-a54e-37ddb73a337e    nextflow run hello-world.nf --greeting Bonjour
+2025-07-04 19:27:31     1.8s            gigantic_yonath         OK       3539118582     5acaa83a-6ad6-4509-bebc-cb25d5d7ddd0    nextflow run hello-world.nf --greeting 'Dobry den'
+2025-07-04 19:27:45     2.4s            backstabbing_swartz     OK       3539118582     5f4b3269-5b53-404a-956c-cac915fbb74e    nextflow run hello-world.nf --greeting Konnichiwa
+2025-07-04 19:27:57     2.1s            goofy_wilson            OK       3539118582     5f4b3269-5b53-404a-956c-cac915fbb74e    nextflow run hello-world.nf --greeting Konnichiwa -resume
+```
+
+You'll notice that the session ID changes whenever you run a new `nextflow run` command, EXCEPT if you're using the `-resume` option.
+In that case, the session ID stays the same.
+
+Nextflow uses the session ID to group run caching information under the `cache` directory, also located under `.nextflow`.
 
 ### 3.3. Delete older work directories
 
@@ -419,18 +466,22 @@ Since the subdirectories are named randomly, it is difficult to tell from their 
 Nextflow includes a convenient `clean` subcommand that can automatically delete the work subdirectories for past runs that you no longer care about, with several [options](https://www.nextflow.io/docs/latest/reference/cli.html#clean) to control what will be deleted.
 
 Here we show you an example that deletes all subdirectories from runs before a given run, specified using its run name.
-The run name is the machine-generated two-part string shown in square brackets in the `Launching (...)` console output line.
+The run name is the machine-generated two-part string shown in square brackets in the `Launching (...)` console output line, which we also saw recorded in the Nextflow log that we looked at earlier.
 
-First we use the dry run flag `-n` to check what will be deleted given the command:
+You can use the Nextflow log to look up a run based on its timestamp and/or command line.
+
+Once we have that, first we try the `nextflow clean` command using the dry run flag `-n` to check what will be deleted:
 
 ```bash
-nextflow clean -before golden_cantor -n
+nextflow clean -before backstabbing_swartz -n
 ```
 
 The output should look like this:
 
 ```console title="Output"
-Would remove /workspaces/training/nextflow-run/work/a3/7be2fad5e71e5f49998f795677fd68
+Would remove /workspaces/training/hello-nextflow/work/eb/1a5de36637b475afd88fca7f79e024
+Would remove /workspaces/training/hello-nextflow/work/6b/19b0e002ea13486d3a0344c336c1d0
+Would remove /workspaces/training/hello-nextflow/work/45/9a6dd7ab771f93003d040956282883
 ```
 
 If you don't see any lines output, you either did not provide a valid run name or there are no past runs to delete.
@@ -438,13 +489,15 @@ If you don't see any lines output, you either did not provide a valid run name o
 If the output looks as expected and you want to proceed with the deletion, re-run the command with the `-f` flag instead of `-n`:
 
 ```bash
-nextflow clean -before golden_cantor -f
+nextflow clean -before backstabbing_swartz -f
 ```
 
 You should now see the following:
 
 ```console title="Output"
-Removed /workspaces/training/nextflow-run/work/a3/7be2fad5e71e5f49998f795677fd68
+Removed /workspaces/training/hello-nextflow/work/eb/1a5de36637b475afd88fca7f79e024
+Removed /workspaces/training/hello-nextflow/work/6b/19b0e002ea13486d3a0344c336c1d0
+Removed /workspaces/training/hello-nextflow/work/45/9a6dd7ab771f93003d040956282883
 ```
 
 !!! Warning
@@ -456,7 +509,7 @@ Removed /workspaces/training/nextflow-run/work/a3/7be2fad5e71e5f49998f795677fd68
 
 ### Takeaway
 
-You know how to relaunch a pipeline without repeating steps that were already run in an identical way, and use the `nextflow clean` command to clean up old work directories.
+You know how to relaunch a pipeline without repeating steps that were already run in an identical way, inspect the execution log, and use the `nextflow clean` command to clean up old work directories.
 
 ### What's next?
 
