@@ -19,15 +19,10 @@ process sayHello {
     """
 }
 
-/*
- * Pipeline parameters
- */
-params.greeting = 'greetings.csv'
-
 workflow {
 
     // create a channel for inputs from a CSV file
-    greeting_ch = Channel.fromPath(params.greeting)
+    greeting_ch = Channel.fromPath(params.input)
                         .splitCsv()
                         .map { line -> line[0] }
 
