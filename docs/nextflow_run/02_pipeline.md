@@ -44,7 +44,7 @@ This should run without error.
 <details>
   <summary>Output</summary>
 
-```console title="Output" linenums="1"
+```console linenums="1"
  N E X T F L O W   ~  version 25.04.3
 
 Launching `channel.nf` [mighty_sammet] DSL2 - revision: 29fb5352b3
@@ -62,11 +62,12 @@ This suggests the sayHello() process was called three times, once on each input 
 
 Let's look at the 'results' directory to see if our workflow is still writing a copy of our outputs there.
 
-````console title="results/" linenums="1"
+```console title="results/" linenums="1"
 results
 ├── Bonjour-output.txt
 ├── Hello-output.txt
 └── Holà-output.txt
+```
 
 Yes! We see three output files with different names, conveniently enough.
 (Spoiler: we changed the workflow to name the files differently.)
@@ -78,7 +79,7 @@ You can open each of them to satisfy yourself that they contain the appropriate 
 
 ```console title="results/Hello-output.txt"
 Hello
-````
+```
 
 ```console title="results/Bonjour-output.txt"
 Bonjour
