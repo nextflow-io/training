@@ -1095,22 +1095,25 @@ And we can now share the pipeline with collaborators and have them run it on the
 
 #### 4.2.4. Inspect how Nextflow launched the containerized task
 
-Let's take a look at the work subdirectory for one of the `cowpy` process calls to get a bit more insight on how Nextflow works with containers under the hood.
+Let's take a look at the `.command.run` file inside the task directory where the `cowpy` call was executed.
+This file contains all the commands Nextflow ran on your behalf in the course of executing the pipeline.
 
-Check the output from your `nextflow run` command to find the path to the work subdirectory for the `cowpy` process.
-Looking at what we got for the run shown above, the console log line for the `cowpy` process starts with `[7f/caf718]`.
-That corresponds to the following truncated directory path: `work/7f/caf718`.
-In it, you will find the `.command.run` file that contains all the commands Nextflow ran on your behalf in the course of executing the pipeline.
+Open the `.command.run` file and search for `nxf_launch` to find the launch command Nextflow used.
 
-Open the `.command.run` file and search for `nxf_launch`; you should see something like this:
+<details>
+  <summary>Partial file contents</summary>
+
+````console title="work/7f/caf7189fca6c56ba627b75749edcb3/.command.run"
 
 ```bash
 nxf_launch() {
-    docker run -i --cpu-shares 1024 -e "NXF_TASK_WORKDIR" -v /workspaces/training/hello-nextflow/work:/workspaces/training/hello-nextflow/work -w "$NXF_TASK_WORKDIR" --name $NXF_BOXID community.wave.seqera.io/library/pip_cowpy:131d6a1b707a8e65 /bin/bash -ue /workspaces/training/hello-nextflow/work/7f/caf7189fca6c56ba627b75749edcb3/.command.sh
+    docker run -i --cpu-shares 1024 -e "NXF_TASK_WORKDIR" -v /workspaces/training/hello-nextflow/work:/workspaces/training/hello-nextflow/work -w "$NXF_TASK_WORKDIR" --name $NXF_BOXID community.wave.seqera.io/library/pip_cowpy:131d6a1b707a8e65 /bin/bash -ue /workspaces/training/nextflow-run/work/7f/caf7189fca6c56ba627b75749edcb3/.command.sh
 }
-```
+````
 
-As you can see, Nextflow is using the `docker run` command to launch the process call.
+</details>
+
+This launch command shows that Nextflow is using a very similar `docker run` command to launch the process call as we did when we ran it manually.
 It also mounts the corresponding work subdirectory into the container, sets the working directory inside the container accordingly, and runs our templated bash script in the `.command.sh` file.
 
 This confirms that all the hard work we had to do manually in the previous section is now done for us by Nextflow!
@@ -1126,3 +1129,4 @@ You know the fundamentals of how Nextflow can process multiple inputs efficientl
 
 Take another break! That was a big pile of information about how Nextflow pipelines work.
 In the next section of this training, we're going to delve deeper into the topic of configuration.
+You will learn how to configure the execution of your pipeline to fit your infrastructure as well as manage configuration of inputs and parameters.
