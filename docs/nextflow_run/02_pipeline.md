@@ -16,13 +16,18 @@ To enable this efficiently, Nextflow uses a system of queues called **channels**
 
 To demonstrate this, we've prepared a a CSV file called `greetings.csv` that contains several input greetings, mimicking the kind of columnar data you might want to process in a real data analysis.
 
+<details>
+  <summary>CSV file contents</summary>
+
 ```csv title="greetings.csv" linenums="1"
 Hello,English,123
 Bonjour,French,456
 Holà,Spanish,789
 ```
 
-_The numbers are not meaningful, they are just there for illustrative purposes._
+Note that the numbers are not meaningful, they are just there for illustrative purposes.
+
+</details>
 
 And we've written an improved version of the original workflow, now called `channel.nf`, that will read in the CSV file, extract the greetings and write each of them to a separate file.
 
