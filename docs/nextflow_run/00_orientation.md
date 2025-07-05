@@ -26,7 +26,7 @@ If you run this inside `nextflow-run`, you should see the following output: [TOD
 .
 ```
 
-!!!note
+!!! Tip
 
     Don't worry if this seems like a lot; we'll go through the relevant pieces at each step of the course.
     This is just meant to give you an overview.
