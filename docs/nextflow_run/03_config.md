@@ -96,7 +96,7 @@ Let's try it out.
 nextflow run 3-main.nf --inputs greetings.csv --character turkey
 ```
 
-This should work without issue.
+This should work without error.
 
 <details>
   <summary>Command output</summary>
@@ -104,7 +104,7 @@ This should work without issue.
 ```console title="Output"
  N E X T F L O W   ~  version 25.04.3
 
-Launching `hello-config.nf` [trusting_lovelace] DSL2 - revision: 028a841db1
+Launching `3-main.nf` [trusting_lovelace] DSL2 - revision: 028a841db1
 
 executor >  local (8)
 [ee/4ca1f2] sayHello (3)       | 3 of 3 ✔
@@ -113,9 +113,11 @@ executor >  local (8)
 [c5/af5f88] cowpy              | 1 of 1 ✔
 ```
 
+</details>
+
 Behind the scenes, Nextflow has retrieved the Conda packages and created the environment, which normally takes a bit of work; so it's nice that we don't have to do any of that ourselves!
 
-!!! note
+!!! Tip
 
     This runs quickly because the `cowpy` package is quite small, but if you're working with large packages, it may take a bit longer than usual the first time, and you might see the console output stay 'stuck' for a minute or so before completing.
     This is normal and is due to the extra work Nextflow does the first time you use a new package.
@@ -124,7 +126,7 @@ From our standpoint, it looks like it works exactly the same as running with Doc
 
 This means we're all set to run with Conda environments if needed.
 
-!!!note
+!!! Tip
 
     Since these directives are assigned per process, it is possible 'mix and match', _i.e._ configure some of the processes in your workflow to run with Docker and others with Conda, for example, if the compute infrastructure you are using supports both.
     In that case, you would enable both Docker and Conda in your configuration file.
@@ -138,13 +140,114 @@ You know how to configure which software package each process should use, and ho
 
 ### What's next?
 
-Learn how to change the executor used by Nextflow to actually do the work.
+Learn how to specify what executor Nextflow should use to actually do the work.
 
 ---
 
-## 2. Allocate compute resources with process directives
+## 2. Specify what executor should be used to do the work
 
-Most high-performance computing platforms allow (and sometimes require) that you specify certain resource allocation parameters such as number of CPUs and memory.
+Until now, we have been running our pipeline with the local executor.
+This executes each task on the machine that Nextflow is running on.
+When Nextflow begins, it looks at the available CPUs and memory.
+If the resources of the tasks ready to run exceed the available resources, Nextflow will hold the last tasks back from execution until one or more of the earlier tasks have finished, freeing up the necessary resources.
+
+For very large workloads, you may discover that your local machine is a bottleneck, either because you have a single task that requires more resources than you have available, or because you have so many tasks that waiting for a single machine to run them would take too long.
+The local executor is convenient and efficient, but is limited to that single machine.
+Nextflow supports [many different execution backends](https://www.nextflow.io/docs/latest/executor.html), including HPC schedulers (Slurm, LSF, SGE, PBS, Moab, OAR, Bridge, HTCondor and others) as well as cloud execution backends such (AWS Batch, Google Cloud Batch, Azure Batch, Kubernetes and more).
+
+### 2.1. Targeting a different backend
+
+The choice of executor is set by a process directive called `executor`.
+By default it is set to `local`, so the following configuration is implied:
+
+```groovy title="Built-in configuration"
+process {
+    executor = 'local'
+}
+```
+
+To set the executor to target a different backend, simply specify the executor you want using similar syntax as described above for resource allocations.
+
+<!-- TODO: add documentation link -->
+
+```groovy title="nextflow.config"
+process {
+    executor = 'slurm'
+}
+```
+
+!!! Warning
+
+    We can't actually test this in the training environment because it's not set up to connect to an HPC.
+
+### 2.2. Dealing with backend-specific syntax for execution parameters
+
+Most high-performance computing platforms allow (and sometimes require) that you specify certain parameters such as resource allocation requests and limitations (for e.g. number of CPUs and memory) and name of the job queue to use.
+
+Unfortunately, each of these systems uses different technologies, syntaxes and configurations for defining how a job should be defined and submitted to the relevant scheduler.
+
+For example, a job requiring 8 CPUs and 4GB of RAM to be executed on the queue "my-science-work" needs to be expressed in the following ways depending on the backend:
+
+<details>
+  <summary>Config for SLURM / submit using `sbatch`</summary>
+
+```bash
+#SBATCH -o /path/to/my/task/directory/my-task-1.log
+#SBATCH --no-requeue
+#SBATCH -c 8
+#SBATCH --mem 4096M
+#SBATCH -p my-science-work
+```
+
+</details>
+
+<details>
+  <summary>Config for PBS / submit using `qsub`</summary>
+
+```bash
+#PBS -o /path/to/my/task/directory/my-task-1.log
+#PBS -j oe
+#PBS -q my-science-work
+#PBS -l nodes=1:ppn=5
+#PBS -l mem=4gb
+```
+
+</details>
+
+<details>
+  <summary>Config for SGE / submit using `qsub`</summary>
+
+```bash
+#$ -o /path/to/my/task/directory/my-task-1.log
+#$ -j y
+#$ -terse
+#$ -notify
+#$ -q my-science-work
+#$ -l slots=5
+#$ -l h_rss=4096M,mem_free=4096M
+```
+
+</details>
+
+Fortunately, Nextflow simplifies all of this.
+It provides a standardized syntax so that you can specify the relevant properties such as `cpus`, `memory` and `queue` (see documentation for other properties) just once.
+Then, at runtime, Nextflow will use those settings to generate the appropriate backend-specific scripts based on the executor setting.
+
+We'll cover that standardized syntax in the next section.
+
+### Takeaway
+
+You now know how to change the executor to use different kinds of computing infrastructure.
+
+### What's next?
+
+Learn how to evaluate and express resource allocations and limitations in Nextflow.
+
+---
+
+## 3. Allocate compute resources with process directives
+
+As noted above, high-performance computing system generally allow or require you to specify request allocations and set limitations for compute resources such as the number of CPUs and memory to use.
 
 By default, Nextflow will use a single CPU and 2GB of memory for each process.
 The corresponding process directives are called `cpus` and `memory`, so the following configuration is implied:
@@ -161,7 +264,7 @@ Nextflow will translate them into the appropriate instructions for the chosen ex
 
 But how do you know what values to use?
 
-### 2.1. Run the workflow to generate a resource utilization report
+### 3.1. Run the workflow to generate a resource utilization report
 
 If you don't know up front how much CPU and memory your processes are likely to need, you can do some resource profiling, meaning you run the workflow with some default allocations, record how much each process used, and from there, estimate how to adjust the base allocations.
 
@@ -170,18 +273,18 @@ Conveniently, Nextflow includes built-in tools for doing this, and will happily 
 To do so, add `-with-report <filename>.html` to your command line.
 
 ```bash
-nextflow run hello-config.nf -with-report report-config-1.html
+nextflow run 3-main.nf -with-report report-config-1.html
 ```
 
 The report is an html file, which you can download and open in your browser. You can also right click it in the file explorer on the left and click on `Show preview` in order to view it in the training environment.
+
+<!-- TODO: insert images -->
 
 Take a few minutes to look through the report and see if you can identify some opportunities for adjusting resources.
 Make sure to click on the tabs that show the utilization results as a percentage of what was allocated.
 There is some [documentation](https://www.nextflow.io/docs/latest/reports.html) describing all the available features.
 
-<!-- TODO: insert images -->
-
-### 2.2. Set resource allocations for all processes
+### 3.2. Set resource allocations for all processes
 
 The profiling shows that the processes in our training workflow are very lightweight, so let's reduce the default memory allocation to 1GB per process.
 
@@ -193,7 +296,7 @@ process {
 }
 ```
 
-### 2.3. Set resource allocations for an individual process
+### 3.3. Set resource allocations for an individual process
 
 At the same time, we're going to pretend that the `cowpy` process requires more resources than the others, just so we can demonstrate how to adjust allocations for an individual process.
 
@@ -219,32 +322,23 @@ At the same time, we're going to pretend that the `cowpy` process requires more 
 
 With this configuration, all processes will request 1GB of memory and a single CPU (the implied default), except the `cowpy` process, which will request 2GB and 2 CPUs.
 
-!!! note
+!!! Tip
 
     If you have a machine with few CPUs and you allocate a high number per process, you might see process calls getting queued behind each other.
     This is because Nextflow ensures we don't request more CPUs than are available.
 
-### 2.4. Run the workflow with the modified configuration
-
-Let's try that out, supplying a different filename for the profiling report so we can compare performance before and after the configuration changes.
-
-```bash
-nextflow run hello-config.nf -with-report report-config-2.html
-```
-
-You will probably not notice any real difference since this is such a small workload, but this is the approach you would use to analyze the performance and resource requirements of a real-world workflow.
+You could then run the workflow again, supplying a different filename for the profiling report, and compare performance before and after the configuration changes.
+You may not notice any real difference since this is such a small workload, but this is the approach you would use to analyze the performance and resource requirements of a real-world workflow.
 
 It is very useful when your processes have different resource requirements. It empowers you to right-size the resource allocations you set up for each process based on actual data, not guesswork.
 
-!!!note
+!!! Tip
 
     This is just a tiny taster of what you can do to optimize your use of resources.
     Nextflow itself has some really neat [dynamic retry logic](https://training.nextflow.io/basic_training/debugging/#dynamic-resources-allocation) built in to retry jobs that fail due to resource limitations.
-    Additionally, the Seqera Platform offers AI-driven tooling for optimizing your resource allocations automatically as well.
+    Additionally, the Seqera Platform offers AI-driven tooling for optimizing your resource allocations automatically.
 
-    We'll cover both of those approaches in an upcoming part of this training course.
-
-### 2.5. Add resource limits
+### 3.4. Add resource limits
 
 Depending on what computing executor and compute infrastructure you're using, there may be some constraints on what you can (or must) allocate.
 For example, your cluster may require you to stay within certain limits.
@@ -263,10 +357,10 @@ process {
 
 Nextflow will translate these values into the appropriate instructions depending on the executor that you specified.
 
-We're not going to run this, since we don't have access to relevant infrastructure in the training environment.
-However, if you were to try running the workflow with resource allocations that exceed these limits, then look up the `sbatch` command in the `.command.run` script file, you would see that the requests that actually get sent to the executor are capped at the values specified by `resourceLimits`.
+As previously, we can't demonstrate this in action since we don't have access to relevant infrastructure in the training environment.
+However, if you were to set the executor to `slurm`, try running the workflow with resource allocations that exceed these limits, then look up the `sbatch` command in the `.command.run` script file (which will be generated even though the run is doomed to fail), you would see that the requests that would get sent to the executor are capped at the values specified by `resourceLimits`.
 
-!!!note
+!!! Tip
 
     The nf-core project has compiled a [collection of configuration files](https://nf-co.re/configs/) shared by various institutions around the world, covering a wide range of HPC and cloud executors.
 
@@ -278,151 +372,127 @@ You know how to generate a profiling report to assess resource utilization and h
 
 ### What's next?
 
-Learn to use a parameter file to store workflow parameters.
+Learn how to manage workflow parameters.
 
 ---
 
-## 3. Use a parameter file to store workflow parameters
+## 4. Managing workflow parameters
 
 So far we've been looking at configuration from the technical point of view of the compute infrastructure.
 Now let's consider another aspect of workflow configuration that is very important for reproducibility: the configuration of the workflow parameters.
 
-Currently, our workflow is set up to accept several parameter values via the command-line, with default values set in the workflow script itself.
+Currently, our workflow is set up to accept a couple of parameter values via the command-line.
 This is fine for a simple workflow with very few parameters that need to be set for a given run.
 However, many real-world workflows will have many more parameters that may be run-specific, and putting all of them in the command line would be tedious and error-prone.
 
+### 4.1. Specifying default values directly in the workflow
+
+It is possible to specify default values in the workflow script itself, for example you may see something like this in the main body of the workflow:
+
+<!-- Considering actually adding this in 3-main.nf -->
+
+```groovy title="Syntax example"
+/*
+ * Pipeline parameters
+ */
+params.greeting = 'greetings.csv'
+params.character = 'turkey'
+```
+
+If you were to add this to the `3-main.nf` workflow, you could leave out those parameters from your command-line and Nextflow would use those default values.
+You could then override those values by specifying the parameters in the command-line.
+
+### 4.2. Using a parameter file
+
 Nextflow allows us to specify parameters via a parameter file in JSON format, which makes it very convenient to manage and distribute alternative sets of default values, for example, as well as run-specific parameter values.
 
-We provide an example parameter file in the current directory, called `test-params.json`:
+We provide an example parameter file in the current directory, called `test-params.json`, which contains a key-value pair for each of the inputs our workflow expects.
+
+<details>
+  <summary>File contents</summary>
 
 ```json title="test-params.json" linenums="1"
 {
   "greeting": "greetings.csv",
-  "batch": "Trio",
-  "character": "turkey"
+  "character": "stegosaurus"
 }
 ```
 
-This parameter file contains a key-value pair for each of the inputs our workflow expects.
-
-### 3.1. Run the workflow using a parameter file
+</details>
 
 To run the workflow with this parameter file, simply add `-params-file <filename>` to the base command.
 
 ```bash
-nextflow run hello-config.nf -params-file test-params.json
+nextflow run 3-main.nf -params-file test-params.json
 ```
 
-It works! And as expected, this produces the same outputs as previously.
+This should run without error.
+
+<details>
+  <summary>Command output</summary>
 
 ```console title="Output"
  N E X T F L O W   ~  version 25.04.3
 
-Launching `hello-config.nf` [disturbed_sammet] DSL2 - revision: ede9037d02
+Launching `3-main.nf` [disturbed_sammet] DSL2 - revision: ede9037d02
 
 executor >  local (8)
 [f0/35723c] sayHello (2)       | 3 of 3 ✔
 [40/3efd1a] convertToUpper (3) | 3 of 3 ✔
 [17/e97d32] collectGreetings   | 1 of 1 ✔
 [98/c6b57b] cowpy              | 1 of 1 ✔
-There were 3 greetings in this batch
 ```
 
-This may seem like overkill when you only have a few parameters to specify, but some pipelines expect dozens of parameters.
+</details>
+
+The final output file should contain the appropriate character saying the greetings.
+
+<details>
+  <summary>File contents</summary>
+
+```console title="results/cowpy-COLLECTED-output.txt"
+_________
+/ HELLO   \
+| HOLà    |
+\ BONJOUR /
+ ---------
+\                             .       .
+ \                           / `.   .' "
+  \                  .---.  <    > <    >  .---.
+   \                 |    \  \ - ~ ~ - /  /    |
+         _____          ..-~             ~-..-~
+        |     |   \~~~\.'                    `./~~~/
+       ---------   \__/                        \__/
+      .'  O    \     /               /       \  "
+     (_____,    `._.'               |         }  \/~~~/
+      `----.          /       }     |        /    \__/
+            `-.      |       /      |       /      `. ,~~|
+                ~-.__|      /_ - ~ ^|      /- _      `..-'
+                     |     /        |     /     ~-.     `-. _  _  _
+                     |_____|        |_____|         ~ - . _ _ _ _ _>
+```
+
+</details>
+
+Using a parameter file may seem like overkill when you only have a few parameters to specify, but some pipelines expect dozens of parameters.
 In those cases, using a parameter file will allow us to provide parameter values at runtime without having to type massive command lines and without modifying the workflow script.
+It also makes it easier to distribute sets of parameters to collaborators.
 
 ### Takeaway
 
-You know how to manage parameter defaults and override them at runtime using a parameter file.
+You know how to manage parameter defaults and override them at runtime using command-line arguments or a parameter file.
 
 ### What's next?
 
-Learn how to use profiles to conveniently switch between alternative configurations.
-
----
-
-## 4. Determine what executor(s) should be used to do the work
-
-Until now, we have been running our pipeline with the local executor.
-This executes each task on the machine that Nextflow is running on.
-When Nextflow begins, it looks at the available CPUs and memory.
-If the resources of the tasks ready to run exceed the available resources, Nextflow will hold the last tasks back from execution until one or more of the earlier tasks have finished, freeing up the necessary resources.
-
-For very large workloads, you may discover that your local machine is a bottleneck, either because you have a single task that requires more resources than you have available, or because you have so many tasks that waiting for a single machine to run them would take too long.
-The local executor is convenient and efficient, but is limited to that single machine.
-Nextflow supports [many different execution backends](https://www.nextflow.io/docs/latest/executor.html), including HPC schedulers (Slurm, LSF, SGE, PBS, Moab, OAR, Bridge, HTCondor and others) as well as cloud execution backends such (AWS Batch, Google Cloud Batch, Azure Batch, Kubernetes and more).
-
-Each of these systems uses different technologies, syntaxes and configurations for defining how a job should be defined. For example, /if we didn't have Nextflow/, a job requiring 8 CPUs and 4GB of RAM to be executed on the queue "my-science-work" would need to include the following configuration on SLURM and submit the job using `sbatch`:
-
-```bash
-#SBATCH -o /path/to/my/task/directory/my-task-1.log
-#SBATCH --no-requeue
-#SBATCH -c 8
-#SBATCH --mem 4096M
-#SBATCH -p my-science-work
-```
-
-If I wanted to make the workflow available to a colleague running on PBS, I'd need to remember to use a different submission program `qsub` and I'd need to change my scripts to use a new syntax for resources:
-
-```bash
-#PBS -o /path/to/my/task/directory/my-task-1.log
-#PBS -j oe
-#PBS -q my-science-work
-#PBS -l nodes=1:ppn=5
-#PBS -l mem=4gb
-```
-
-If I wanted to use SGE, the configuration would be slightly different again:
-
-```bash
-#$ -o /path/to/my/task/directory/my-task-1.log
-#$ -j y
-#$ -terse
-#$ -notify
-#$ -q my-science-work
-#$ -l slots=5
-#$ -l h_rss=4096M,mem_free=4096M
-```
-
-Running on a single cloud execution engine would require a new approach again, likely using an SDK that uses the cloud platform's APIs.
-
-Nextflow makes it easy to write a single workflow that can be run on each of these different infrastructures and systems, without having to modify the workflow.
-The executor is subject to a process directive called `executor`.
-By default it is set to `local`, so the following configuration is implied:
-
-```groovy title="Built-in configuration"
-process {
-    executor = 'local'
-}
-```
-
-### 4.1. Targeting a different backend
-
-By default, this training environment does not include a running HPC schedulder, but if you were running on a system with SLURM installed, for example, you can have Nextflow convert the `cpus`, `memory`, `queue` and other process directives into the correct syntax at runtime by adding following lines to the `nextflow.config` file:
-
-```groovy title="nextflow.config"
-process {
-    executor = 'slurm'
-}
-```
-
-And... that's it! As noted before, this does assume that Slurm itself is already set up for you, but this is really all Nextflow itself needs to know.
-
-Basically we are telling Nextflow to generate a Slurm submission script and submit it using an `sbatch` command.
-
-### Takeaway
-
-You now know how to change the executor to use different kinds of computing infrastructure.
-
-### What's next?
-
-Learn how to control the resources allocated for executing processes.
+Learn how to bring it all together by using profiles to switch between alternative configurations more conveniently.
 
 ---
 
 ## 5. Use profiles to select preset configurations
 
 You may want to switch between alternative settings depending on what computing infrastructure you're using. For example, you might want to develop and run small-scale tests locally on your laptop, then run full-scale workloads on HPC or cloud.
+
+This applies to workflow parameters too: you may have different sets of reference files or groups of settings that you want to swap out depending on the data you're analyzing (e.g. mouse vs human data etc).
 
 Nextflow lets you set up profiles that describe different configurations, which you can then select at runtime using a command-line argument, rather than having to modify the configuration file itself.
 
@@ -459,27 +529,31 @@ To specify a profile in our Nextflow command line, we use the `-profile` argumen
 Let's try running the workflow with the `my_laptop` configuration.
 
 ```bash
-nextflow run hello-config.nf -profile my_laptop
+nextflow run 3-main.nf --input greetings.csv --character turkey -profile my_laptop
 ```
 
-This still produces the following output:
+This should run without error and produce the same results as previously.
 
-```
+<details>
+  <summary>Command output</summary>
+
+```console
  N E X T F L O W   ~  version 25.04.3
 
-Launching `hello-config.nf` [gigantic_brazil] DSL2 - revision: ede9037d02
+Launching `3-main.nf` [gigantic_brazil] DSL2 - revision: ede9037d02
 
 executor >  local (8)
 [58/da9437] sayHello (3)       | 3 of 3 ✔
 [35/9cbe77] convertToUpper (2) | 3 of 3 ✔
 [67/857d05] collectGreetings   | 1 of 1 ✔
 [37/7b51b5] cowpy              | 1 of 1 ✔
-There were 3 greetings in this batch
 ```
+
+</details>
 
 As you can see, this allows us to toggle between configurations very conveniently at runtime.
 
-!!! warning
+!!! Warning
 
     The `univ_hpc` profile will not run properly in the training environment since we do not have access to a Slurm scheduler.
 
@@ -488,9 +562,10 @@ We can also create additional profiles if there are other elements of configurat
 
 ### 5.3. Create a test profile
 
-Profiles are not only for infrastructure configuration.
-We can also use them to set default values for workflow parameters, to make it easier for others to try out the workflow without having to gather appropriate input values themselves.
-This is intended as an alternative to using a parameter file.
+As noted above, profiles are not only for infrastructure configuration.
+We can also use them to swap out sets of default values for workflow parameters, or to make it easier for ourselves and for others to try out the workflow without having to gather appropriate input values themselves.
+
+Let's take the example of creating a test profile to make it easy to test the workflow with minimal effort.
 
 The syntax for expressing default values is the same as when writing them into the workflow file itself, except we wrap them in a block named `test`:
 
@@ -521,57 +596,132 @@ profiles {
     }
     test {
         params.greeting = 'greetings.csv'
-        params.batch = 'test-batch'
         params.character = 'turkey'
     }
 }
 ```
 
-Just like for technical configuration profiles, you can set up multiple different profiles specifying parameters under any arbitrary name you like.
+Just like for technical configuration profiles, you can set up multiple different profiles specifying workflow parameters under any arbitrary name you like.
 
 ### 5.4. Run the workflow locally with the test profile
 
 Conveniently, profiles are not mutually exclusive, so we can specify multiple profiles in our command line using the following syntax `-profile <profile1>,<profile2>` (for any number of profiles).
 
-!!! note
+!!! Tip
 
     If you combine profiles that set values for the same elements of configuration and are described in the same configuration file, Nextflow will resolve the conflict by using whichever value it read in last (_i.e._ whatever comes later in the file).
-    If the conflicting settings are set in different configuration sources, the default [order of precedence](https://www.nextflow.io/docs/latest/config.html) applies.
 
 Let's try adding the test profile to our previous command:
 
 ```bash
-nextflow run hello-config.nf -profile my_laptop,test
+nextflow run 3-main.nf -profile my_laptop,test
 ```
 
-This should produce the following:
+This should run without error.
 
-```console title="Output"
+<details>
+  <summary>Command output</summary>
+
+```console
  N E X T F L O W   ~  version 25.04.3
 
-Launching `hello-config.nf` [gigantic_brazil] DSL2 - revision: ede9037d02
+Launching `3-main.nf` [gigantic_brazil] DSL2 - revision: ede9037d02
 
 executor >  local (8)
 [58/da9437] sayHello (3)       | 3 of 3 ✔
 [35/9cbe77] convertToUpper (2) | 3 of 3 ✔
 [67/857d05] collectGreetings   | 1 of 1 ✔
 [37/7b51b5] cowpy              | 1 of 1 ✔
-There were 3 greetings in this batch
 ```
+
+</details>
 
 <!-- improve by showing and varying the outputs for all these maybe -->
 
 This means that as long as we distribute any test data files with the workflow code, anyone can quickly try out the workflow without having to supply their own inputs via the command line or a parameter file.
 
-!!! note
+!!! Tip
 
-    We can even point to URLs for larger files that are stored externally.
+    You can even point to URLs for larger files that are stored externally.
     Nextflow will download them automatically as long as there is an open connection.
+
+### 5.5. Use `nextflow config` to see the resolved configuration
+
+As noted above, sometimes the same parameter can be set to different values in profiles that you want to combine.
+And more generally, there are numerous places where elements of configuration can be stored, and sometimes the same properties can be set to different values in different places.
+
+Nextflow applies a set [order of precedence](https://www.nextflow.io/docs/latest/config.html) to resolve any conflicts, but that can be tricky to determine yourself.
+And even if nothing is conflicting, it can be tedious to look up all the possible places where things could be configured.
+
+Fortunately, Nextflow includes a convenient utility tool called `config` that can automate that whole process for you.
+
+The `config` tool will explore all the contents in your current working directory, hoover up any configuration files, and produce the fully resolved configuration that Nextflow would use to run the workflow.
+This allows you to find out what settings will be used without having to launch anything.
+
+#### 5.5.1. Resolve the default configuration
+
+Run this command to resolve the configuration given only parameters applied by default.
+
+```bash
+nextflow config
+```
+
+<details>
+  <summary>Command output</summary>
+
+```groovy
+process {
+   memory = '1 GB'
+   withName:cowpy {
+      memory = '2 GB'
+      cpus = 2
+   }
+}
+```
+
+</details>
+
+#### 5.5.1. Resolve the configuration with specific settings activated
+
+If you provide command-line parameters, e.g. enabling one or more profiles or loading a parameter file, the command will additionally take those into account.
+
+```bash
+nextflow config -profile my_laptop,test
+```
+
+<details>
+  <summary>Command output</summary>
+
+```groovy
+process {
+   memory = '1 GB'
+   withName:cowpy {
+      memory = '2 GB'
+      cpus = 2
+   }
+   executor = 'local'
+}
+
+docker {
+   enabled = true
+}
+
+params {
+   greeting = 'greetings.csv'
+   character = 'turkey'
+}
+```
+
+</details>
+
+This gets especially useful for complex projects that involve multiple layers of configuration.
 
 ### Takeaway
 
-You know how to use profiles to select a preset configuration at runtime with minimal hassle. More generally, you know how to configure your workflow executions to suit different compute platforms and enhance the reproducibility of your analyses.
+You know how to use profiles to select a preset configuration at runtime with minimal hassle.
+More generally, you know how to configure your workflow executions to suit different compute platforms and enhance the reproducibility of your analyses.
 
 ### What's next?
 
-TODO: update next steps
+Give yourself a big pat on the back!
+You know everything you need to know to get started running and managing Nextflow pipelines.
