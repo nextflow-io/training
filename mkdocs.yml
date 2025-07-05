@@ -10,6 +10,12 @@ nav:
       - envsetup/01_setup.md
       - envsetup/02_local.md
       - envsetup/03_devcontainer.md
+  - Nextflow Run:
+      - nextflow_run/index.md
+      - nextflow_run/00_orientation.md
+      - nextflow_run/01_basics.md
+      - nextflow_run/02_pipeline.md
+      - nextflow_run/03_config.md
   - Hello Nextflow:
       - hello_nextflow/index.md
       - hello_nextflow/00_orientation.md
@@ -183,6 +189,7 @@ plugins:
   - enumerate-headings:
       restart_increment_after:
         - envsetup/01_setup.md
+        - nextflow_run/00_orientation.md
         - hello_nextflow/00_orientation.md
         - hello_nf-core/00_orientation.md
         - nf4_science/genomics/00_orientation.md
@@ -195,6 +202,7 @@ plugins:
         - index*.md
         - help*.md
         - envsetup/*.md
+        - nextflow_run/*.md
         - hello_nextflow/*.md
         - hello_nf-core/*.md
         - nf4_science/genomics/*.md
