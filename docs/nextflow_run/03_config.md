@@ -681,7 +681,7 @@ process {
 
 </details>
 
-#### 5.5.1. Resolve the configuration with specific settings activated
+#### 5.5.2. Resolve the configuration with specific settings activated
 
 If you provide command-line parameters, e.g. enabling one or more profiles or loading a parameter file, the command will additionally take those into account.
 
