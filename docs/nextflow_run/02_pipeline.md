@@ -41,6 +41,9 @@ nextflow run channel.nf --input greetings.csv
 
 This should run without error.
 
+<details>
+  <summary>Output</summary>
+
 ```console title="Output" linenums="1"
  N E X T F L O W   ~  version 25.04.3
 
@@ -49,6 +52,8 @@ Launching `channel.nf` [mighty_sammet] DSL2 - revision: 29fb5352b3
 executor >  local (3)
 [8e/0eb066] sayHello (2) [100%] 3 of 3 ✔
 ```
+
+</details>
 
 Excitingly, this seems to indicate that '3 of 3' calls were made for the process, which is encouraging, since there were three rows of data in the CSV we provided as input.
 This suggests the sayHello() process was called three times, once on each input row.
@@ -68,6 +73,9 @@ Yes! We see three output files with different names, conveniently enough.
 
 You can open each of them to satisfy yourself that they contain the appropriate greeting string.
 
+<details>
+  <summary>File contents</summary>
+
 ```console title="results/Hello-output.txt"
 Hello
 ````
@@ -80,6 +88,8 @@ Bonjour
 Holà
 ```
 
+</details>
+
 This confirms each greeting in the input file has been processed appropriately.
 
 ### 1.3. Find the original outputs and logs
@@ -89,10 +99,13 @@ Does that mean all three calls to `sayHello()` were executed within that one tas
 
 Let's have a look inside that `8e/0eb066` task directory:
 
+<details>
+  <summary>Directory contents</summary>
 ```console title="8e/0eb066"
 work/8e/0eb066071cdb4123906b7b4ea8b047/
 └── Bonjour-output.txt
 ```
+</details>
 
 No! We only find the output corresponding to one of the greetings (as well as the accessory files if we enable display of hidden files).
 
@@ -108,7 +121,10 @@ We can modify the logging behavior to see the full list of process calls by addi
 nextflow run channel.nf --input greetings.csv -ansi-log false
 ```
 
-This time we see all three process runs and their associated work subdirectories listed in the output:
+This time we see all three process runs and their associated work subdirectories listed in the output.
+
+<details>
+  <summary>Output</summary>
 
 ```console title="Output" linenums="1"
 N E X T F L O W  ~  version 25.04.3
@@ -117,6 +133,8 @@ Launching `channel.nf` [pedantic_hamilton] DSL2 - revision: 6bbc42e49f
 [0d/2cae24] Submitted process > sayHello (2)
 [b5/0df1d6] Submitted process > sayHello (3)
 ```
+
+</details>
 
 This confirms that the `sayHello()` process gets called three times, and a separate task directory is created for each one.
 
@@ -128,7 +146,10 @@ This confirms that the `sayHello()` process gets called three times, and a separ
     In the condensed mode, Nextflow reports whether calls were completed successfully or not.
     In this expanded mode, it only reports that they were submitted.
 
-If we look inside each of the task directories listed there, we can confirm that each one corresponds to one of the greetings, .
+If we look inside each of the task directories listed there, we can confirm that each one corresponds to one of the greetings.
+
+<details>
+  <summary>Directory contents</summary>
 
 ```console title="ab/1a8ece"
 work/ab/1a8ece307e53f03fce689dde904b64/
@@ -145,6 +166,8 @@ work/b5/0df1d642353269909c2ce23fc2a8fa/
 └── Holà-output.txt
 ```
 
+</details>
+
 This confirms that each process call is executed in isolation from all the others.
 That has many advantages, including avoiding collisions if the process produces any intermediate files with non-unique names.
 
@@ -154,6 +177,9 @@ So this version of the workflow is capable of reading in a CSV file of inputs, p
 
 Let's take a look at what makes that possible in the workflow code.
 Once again, we're not aiming to memorize code syntax, but to identify signature components of the workflow that provide important functionality.
+
+<details>
+  <summary>Code</summary>
 
 ```groovy title="channel.nf" linenums="1"
 #!/usr/bin/env nextflow
@@ -189,6 +215,8 @@ workflow {
 }
 ```
 
+</details>
+
 #### 1.4.1. Load the inputs from the CSV
 
 This is the most interesting part: how did we switch from taking a single value from the command-line, to taking a CSV file, parsing it and processing the individual greetings it contains?
@@ -209,16 +237,16 @@ workflow {
 This is where the magic happens, starting at line 25.
 Here's what that line means in plain English:
 
-Channel - create a **channel**, i.e. a queue that will hold the data,
-.fromPath - from a filepath
-(params.input) - provided with `--input` on the command line
+Channel -------------------- create a **channel**, i.e. a queue that will hold the data,
+.fromPath ------------------ from a filepath
+(params.input) ------------- provided with `--input` on the command line
 
 In other words, that line tells Nextflow: take the filepath given with `--input` and get ready to treat its contents as input data.
 
 Then the next two lines apply **operators** that do the actual parsing of the file and loading of the data into the appropriate data structure:
 
-.splitCsv() - parse the CSV file into an array representing rows and columns
-.map { line -> line[0] } - for each row (line), take only the element in the first column
+.splitCsv() ---------------- parse the CSV file into an array representing rows and columns
+.map { line -> line[0] } --- for each row (line), take only the element in the first column
 
 So in practice, starting from the following CSV file:
 
@@ -308,6 +336,9 @@ nextflow run pipeline.nf --input greetings.csv
 
 Once again this should run successfully.
 
+<details>
+  <summary>Output</summary>
+
 ```console title="Output" linenums="1"
  N E X T F L O W   ~  version 25.04.3
 
@@ -318,11 +349,16 @@ Launching `pipeline.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726
 [1e/83586c] collectGreetings   | 1 of 1 ✔
 ```
 
+</details>
+
 You see that as promised, multiple steps were run as part of the workflow; the first two (`sayHello` and `convertToUpper`) were presumably run on each individual greeting, and the third (`collectGreetings`) will have been run only once, on the outputs of all three of the `convertToUpper` calls.
 
 ### 2.2. Find the outputs
 
 Let's verify that that is in fact what happened by taking a look in the `results` directory.
+
+<details>
+  <summary>Directory contents</summary>
 
 ```console title="Directory contents"
 results
@@ -334,6 +370,8 @@ results
 ├── UPPER-Hello-output.txt
 └── UPPER-Holà-output.txt
 ```
+
+</details>
 
 Look at the file names and check their contents to confirm that they are what you expect; for example:
 
@@ -352,6 +390,9 @@ That is the expected final result of our multi-step pipeline.
 ### 2.3. Examine the code
 
 Let's look at the code and see what we can tie back to what we just observed.
+
+<details>
+  <summary>Code</summary>
 
 ```groovy title="channel.nf" linenums="1"
 #!/usr/bin/env nextflow
@@ -432,6 +473,8 @@ workflow {
 
 ```
 
+</details>
+
 The most obvious difference compared to the previous version of the workflow is that now there are multiple process definitions, and correspondingly, several process calls in the workflow block.
 
 #### 2.3.1. Multiple process definitions
@@ -444,6 +487,9 @@ We won't go into that in detail, but it shows how a process can be given additio
 #### 2.3.2. Processes are connected via channels
 
 The really interesting thing to look at here is how the process calls are chained together in the workflow block.
+
+<details>
+  <summary>Code</summary>
 
 ```groovy title="channel.nf" linenums="69"
 workflow {
@@ -464,6 +510,8 @@ workflow {
 }
 ```
 
+</details>
+
 You can see that the first process call, `sayHello(greeting_ch)`, is unchanged.
 
 Then the next process call, to `convertToUpper`, _refers_ to the output of `sayHello` as `sayHello.out`:
@@ -477,7 +525,7 @@ This tells Nextflow to provide `sayHello.out`, which represents a channel output
 
 That is, at its simplest, how we shuttle data from one step to the next in Nextflow.
 
-Then the next call is doing the same thing, with a twist:
+Finally, the third call, `collectGreetings`, is doing the same thing, with a twist:
 
 ```groovy title="channel.nf" linenums="82"
     // collect all the greetings into one file
@@ -593,6 +641,9 @@ nextflow run modular.nf --input greetings.csv -resume
 
 Once again this should run successfully.
 
+<details>
+  <summary>Output</summary>
+
 ```console title="Output" linenums="1"
  N E X T F L O W   ~  version 25.04.3
 
@@ -602,6 +653,8 @@ Launching `modular.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726
 [95/79484f] convertToUpper (2) | 3 of 3, cached: ✔
 [5e/4358gc] collectGreetings   | 1 of 1, cached: ✔
 ```
+
+</details>
 
 You'll notice that the process executions all cached successfully, meaning that Nextflow recognized that it has already done the requested work, even though the code has been split up and the main workflow file has been renamed.
 
@@ -648,6 +701,9 @@ This will help solidify your understanding of what containers are before we star
 
 To use a container, you usually download or "pull" a container image from a container registry, and then run the container image to create a container instance.
 
+<details>
+  <summary>Syntax details</summary>
+
 The general syntax is as follows:
 
 ```bash title="Syntax"
@@ -657,6 +713,8 @@ docker pull '<container>'
 The `docker pull` part is the instruction to the container system to pull a container image from a repository.
 
 The `'<container>'` part is the URI address of the container image.
+
+</details>
 
 As an example, let's pull a container image that contains [cowpy](https://github.com/jeffbuttars/cowpy), a python implementation of a tool called `cowsay` that generates ASCII art to display arbitrary text inputs in a fun way.
 
@@ -668,6 +726,9 @@ Run the complete pull command:
 ```bash
 docker pull 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
 ```
+
+<details>
+  <summary>Output</summary>
 
 This gives you the following console output as the system downloads the image:
 
@@ -692,11 +753,16 @@ Status: Downloaded newer image for community.wave.seqera.io/library/cowpy:1.1.5-
 community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273
 ```
 
+</details>
+
 Once the download is complete, you have a local copy of the container image.
 
-You can also run a container interactively, which gives you a shell prompt inside the container and allows you to play with the command.
-
 #### 4.1.2. Spin up the container
+
+Containers can be run as a one-off command, but you can also use them interactively, which gives you a shell prompt inside the container and allows you to play with the command.
+
+<details>
+  <summary>Syntax details</summary>
 
 The general syntax is as follows:
 
@@ -707,21 +773,12 @@ docker run --rm '<container>' [tool command]
 The `docker run --rm '<container>'` part is the instruction to the container system to spin up a container instance from a container image and execute a command in it.
 The `--rm` flag tells the system to shut down the container instance after the command has completed.
 
-To run the container interactively, we add `-it` to the `docker run` command, and in this case we also add `-v` to mount a volume from the host system into the container using the following syntax:
-
-```bash title="Syntax"
--v <outside_path>:<inside_path>
-```
-
-We need to do that because when you run a container, it is isolated from the host system by default.
-This means that the container can't access any files on the host system unless you explicitly allow it to do so.
-
-In our case `<outside_path>` will be the current working directory, so we can just use a dot (`.`), and `<inside_path>` is just a name we make up; let's call it `/data`.
+</details>
 
 Fully assembled, the container execution command looks like this:
 
 ```bash
-docker run --rm -it -v .:/data 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
+docker run --rm -it 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
 ```
 
 Run that command, and you should see your prompt change to something like `(base) root@b645838b3314:/tmp#`, which indicates that you are now inside the container.
@@ -732,40 +789,65 @@ You can verify this by running `ls` to list directory contents:
 ls /
 ```
 
+<details>
+  <summary>Output</summary>
+
 ```console title="Output"
 bin  boot  dev  data  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
 ```
 
-You can see that the filesystem inside the container is different from the filesystem on your host system.
+</details>
 
-Conveniently, the command we ran mounted the current working directory as a volume that is accessible under `/data` inside the container.
+You observe see that the filesystem inside the container is different from the filesystem on your host system.
 
-You can check that it works by listing the contents of `/data`:
+!!! note
 
-```bash
-ls /data
-```
+    When you run a container, it is isolated from the host system by default.
+    This means that the container can't access any files on the host system unless you explicitly allow it to do so by specifying that you want to mount a volume as part of the `docker run` command using the following syntax:
 
-Depending on what part of this training you've done before, the output below may look slightly different, but you should now see the contents of the `data` directory.
+    ```bash title="Syntax"
+    -v <outside_path>:<inside_path>
+    ```
 
-<!-- TODO: show output: ls output needs to be updated
-```console title="Output"
-
-```
--->
-
-This effectively established a tunnel through the container wall that you can use to access that part of your filesystem.
+    This effectively establishes a tunnel through the container wall that you can use to access that part of your filesystem.
 
 #### 4.1.3. Run the `cowpy` tool
 
-Now that you are inside the container, you can run the `cowpy` command directly and give it some parameters.
-For example, the tool documentation says we can set the character ('cowacter') with `-c`.
+Now that you are inside the container, you can run the `cowpy` command directly.
+
+```bash
+cowpy "Hello Containers"
+```
+
+<details>
+  <summary>Output</summary>
+
+This produces ASCII art of the default cow character (or 'cowacter') with a speech bubble containing the text we specified.
+
+```console title="Output"
+ ______________________________________________________
+< Hello Containers >
+ ------------------------------------------------------
+     \   ^__^
+      \  (oo)\_______
+         (__)\       )\/\
+           ||----w |
+           ||     ||
+```
+
+</details>
+
+Now that you have tested the basic usage, you can try giving it some parameters.
+For example, the tool documentation says we can set the character with `-c`.
 
 ```bash
 cowpy "Hello Containers" -c tux
 ```
 
-Now the output shows the Linux penguin, Tux, because we specified the `-c tux` parameter.
+<details>
+  <summary>Output</summary>
+
+This time the ASCII art output shows the Linux penguin, Tux, because we specified the `-c tux` parameter.
 
 ```console title="Output"
  __________________
@@ -782,57 +864,16 @@ Now the output shows the Linux penguin, Tux, because we specified the `-c tux` p
     \___)=(___/
 ```
 
-Because you're inside the container, you can run the cowpy command as many times as you like, varying the input parameters, without having to bother with Docker commands.
+</details>
+
+Because you're inside the container, you can run the cowpy command as many times as you like, varying the input parameters, without having to worry about install any libraries on your system itself.
 
 !!! Tip
 
     Use the '-c' flag to pick a different character, including:
     `beavis`, `cheese`, `daemon`, `dragonandcow`, `ghostbusters`, `kitty`, `moose`, `milk`, `stegosaurus`, `turkey`, `turtle`, `tux`
 
-This is neat. What would be even neater is if we could feed our `greetings.csv` as input into this.
-
-#### 4.1.4. Run the `cowpy` tool
-
-Good news: we can, since we have access to our files via the `/data` volume mount!
-
-We can use `cat /data/greetings.csv | ` to pipe the contents of the CSV file into the `cowpy` command.
-
-```bash
-cat /data/greetings.csv | cowpy -c turkey
-```
-
-This produces the desired ASCII art of a turkey rattling off our example greetings:
-
-```console title="Output"
- _________
-/ Hello   \
-| Bonjour |
-\ Holà    /
- ---------
-  \                                  ,+*^^*+___+++_
-   \                           ,*^^^^              )
-    \                       _+*                     ^**+_
-     \                    +^       _ _++*+_+++_,         )
-              _+^^*+_    (     ,+*^ ^          \+_        )
-             {       )  (    ,(    ,_+--+--,      ^)      ^\
-            { (\@)    } f   ,(  ,+-^ __*_*_  ^^\_   ^\       )
-           {:;-/    (_+*-+^^^^^+*+*<_ _++_)_    )    )      /
-          ( /  (    (        ,___    ^*+_+* )   <    <      \
-           U _/     )    *--<  ) ^\-----++__)   )    )       )
-            (      )  _(^)^^))  )  )\^^^^^))^*+/    /       /
-          (      /  (_))_^)) )  )  ))^^^^^))^^^)__/     +^^
-         (     ,/    (^))^))  )  ) ))^^^^^^^))^^)       _)
-          *+__+*       (_))^)  ) ) ))^^^^^^))^^^^^)____*^
-          \             \_)^)_)) ))^^^^^^^^^^))^^^^)
-           (_             ^\__^^^^^^^^^^^^))^^^^^^^)
-             ^\___            ^\__^^^^^^))^^^^^^^^)\\
-                  ^^^^^\uuu/^^\uuu/^^^^\^\^\^\^\^\^\^\
-                     ___) >____) >___   ^\_\_\_\_\_\_\)
-                    ^^^//\\_^^//\\_^       ^(\_\_\_\)
-                      ^^^ ^^ ^^^ ^
-```
-
-Feel free to play around with this command.
+Feel free to play around with this.
 When you're done, exit the container using the `exit` command:
 
 ```bash
