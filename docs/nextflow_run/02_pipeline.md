@@ -1,14 +1,13 @@
 # Part 2: Run pipelines
 
 In Part 1 of this course (Run Basic Operations), we started with an example workflow that had only minimal features in order to keep the code complexity low.
+For example, `hello.nf` used a command-line parameter (`--greeting`) to provide a single value at a time.
+
 However, most real-world pipelines use more sophisticated features in order to enable efficient processing of large amounts of data at scale, and apply multiple processing steps chained together by sometimes complex logic.
 
-In this part of the training, we demonstrate key features of real-world pipelines through a set of example workflows that build on the original Hello World pipeline.
+In this part of the training, we demonstrate key features of real-world pipelines by trying out expanded versions of the original Hello World pipeline.
 
 ## 1. Processing input data from a file
-
-The `hello.nf` workflow we ran in Part 1 used a command-line parameter (`--greeting`) to provide a single value at a time.
-That was a deliberately simplified approach.
 
 In a real-world pipeline, we typically want to process multiple data points (or data series) contained in one or more input files.
 And wherever possible, we want to run the processing of independent data in parallel, to shorten the time spent waiting for analysis.
@@ -42,7 +41,7 @@ nextflow run channel.nf --input greetings.csv
 This should run without error.
 
 <details>
-  <summary>Output</summary>
+  <summary>Command output</summary>
 
 ```console linenums="1"
  N E X T F L O W   ~  version 25.04.3
@@ -62,12 +61,17 @@ This suggests the sayHello() process was called three times, once on each input 
 
 Let's look at the 'results' directory to see if our workflow is still writing a copy of our outputs there.
 
+<details>
+  <summary>Directory contents</summary>
+
 ```console title="results/" linenums="1"
 results
 ├── Bonjour-output.txt
 ├── Hello-output.txt
 └── Holà-output.txt
 ```
+
+</details>
 
 Yes! We see three output files with different names, conveniently enough.
 (Spoiler: we changed the workflow to name the files differently.)
@@ -112,9 +116,14 @@ No! We only find the output corresponding to one of the greetings (as well as th
 
 So what's going on here?
 
+<details>
+  <summary>Explanation</summary>
+
 By default, the ANSI logging system writes the status information for all calls to the same process on the same line.
 As a result, it only showed us one of the three task directory paths (`8e/0eb066`) in the console output.
 There are two others that are not listed there.
+
+</details>
 
 We can modify the logging behavior to see the full list of process calls by adding the `-ansi-log false` to the command as follows:
 
@@ -125,9 +134,9 @@ nextflow run channel.nf --input greetings.csv -ansi-log false
 This time we see all three process runs and their associated work subdirectories listed in the output.
 
 <details>
-  <summary>Output</summary>
+  <summary>Command output</summary>
 
-```console title="Output" linenums="1"
+```console linenums="1"
 N E X T F L O W  ~  version 25.04.3
 Launching `channel.nf` [pedantic_hamilton] DSL2 - revision: 6bbc42e49f
 [ab/1a8ece] Submitted process > sayHello (1)
@@ -135,19 +144,15 @@ Launching `channel.nf` [pedantic_hamilton] DSL2 - revision: 6bbc42e49f
 [b5/0df1d6] Submitted process > sayHello (3)
 ```
 
+Notice that the way the status is reported is a bit different between the two logging modes.
+In the condensed mode, Nextflow reports whether calls were completed successfully or not.
+In this expanded mode, it only reports that they were submitted.
+
 </details>
 
 This confirms that the `sayHello()` process gets called three times, and a separate task directory is created for each one.
 
-!!! note
-
-    For a complex workflow, or a large number of inputs, having the full list output to the terminal might get a bit overwhelming, so you might prefer not to use `-ansi-log false` in those cases.
-
-    Note also that the way the status is reported is a bit different between the two logging modes.
-    In the condensed mode, Nextflow reports whether calls were completed successfully or not.
-    In this expanded mode, it only reports that they were submitted.
-
-If we look inside each of the task directories listed there, we can confirm that each one corresponds to one of the greetings.
+If we look inside each of the task directories listed there, we can verify that each one corresponds to one of the greetings.
 
 <details>
   <summary>Directory contents</summary>
@@ -171,6 +176,10 @@ work/b5/0df1d642353269909c2ce23fc2a8fa/
 
 This confirms that each process call is executed in isolation from all the others.
 That has many advantages, including avoiding collisions if the process produces any intermediate files with non-unique names.
+
+!!! Tip
+
+    For a complex workflow, or a large number of inputs, having the full list output to the terminal might get a bit overwhelming, so you might prefer not to use `-ansi-log false` in those cases.
 
 ### 1.4. Examine the code
 
@@ -218,13 +227,16 @@ workflow {
 
 </details>
 
-#### 1.4.1. Load the inputs from the CSV
+#### 1.4.1. Loading the input data from the CSV
 
 This is the most interesting part: how did we switch from taking a single value from the command-line, to taking a CSV file, parsing it and processing the individual greetings it contains?
 
 In Nextflow, we do that with a **channel**: a construct designed to handle inputs efficiently and shuttle them from one step to another in multi-step workflows, while providing built-in parallelism and many additional benefits.
 
 Let's break it down.
+
+<details>
+  <summary>Explanation</summary>
 
 ```groovy title="channel.nf" linenums="22"
 workflow {
@@ -238,16 +250,16 @@ workflow {
 This is where the magic happens, starting at line 25.
 Here's what that line means in plain English:
 
-Channel -------------------- create a **channel**, i.e. a queue that will hold the data,
-.fromPath ------------------ from a filepath
-(params.input) ------------- provided with `--input` on the command line
+- `Channel` creates a **channel**, i.e. a queue that will hold the data
+- `.fromPath` specifies the data source is a filepath
+- `(params.input)` specifies the filepath is provided by `--input` on the command line
 
 In other words, that line tells Nextflow: take the filepath given with `--input` and get ready to treat its contents as input data.
 
 Then the next two lines apply **operators** that do the actual parsing of the file and loading of the data into the appropriate data structure:
 
-.splitCsv() ---------------- parse the CSV file into an array representing rows and columns
-.map { line -> line[0] } --- for each row (line), take only the element in the first column
+- `.splitCsv()` tells Nextflow to parse the CSV file into an array representing rows and columns
+- `.map { line -> line[0] }` tells Nextflow to take only the element in the first column from each row
 
 So in practice, starting from the following CSV file:
 
@@ -265,11 +277,16 @@ We have transformed that into an array that looks like this:
 
 And then we've taken the first element from each of the three rows and loaded them into a Nextflow channel that now contains: `Hello`, `Bonjour`, and `Holà`.
 
-In other words, the result of this very short snippet of code is a channel called `greeting_ch` loaded with the three individual greetings from the CSV file, ready for processing.
+</details>
+
+The result of this very short snippet of code is a channel called `greeting_ch` loaded with the three individual greetings from the CSV file, ready for processing.
 
 #### 1.4.2. Call the process on each greeting
 
 Next, in the last line of the workflow block, we provide the loaded `greeting_ch` channel as input to the `sayHello()` process.
+
+<details>
+  <summary>Explanation</summary>
 
 ```groovy title="channel.nf" linenums="28"
     sayHello(greeting_ch)
@@ -280,11 +297,16 @@ This tells Nextflow to run the process _individually_ on each element in the cha
 
 And because Nextflow is smart like that, it will run these process calls in parallel if possible, depending on the available computing infrastructure.
 
+</details>
+
 That is how you can achieve efficient and scalable processing of a lot of data (many samples, or data points, whatever is your unit of research) with comparatively very little code.
 
 #### 1.4.3. Ensure the outputs are uniquely named
 
 Finally, it's worth taking a quick look at how we get the output files to be named uniquely.
+
+<details>
+  <summary>Explanation</summary>
 
 ```groovy title="channel.nf" linenums="13"
     output:
@@ -297,7 +319,10 @@ Finally, it's worth taking a quick look at how we get the output files to be nam
 ```
 
 You see that, compared to the version of this process in `hello.nf`, the output declaration and the relevant bit of the command have changed to include the greeting value in the output file name.
+
 This is one way to ensure that the output file names won't collide when they get published to the common `results` directory.
+
+</details>
 
 And that's the only change we've had to make inside the process declaration.
 
@@ -338,7 +363,7 @@ nextflow run pipeline.nf --input greetings.csv
 Once again this should run successfully.
 
 <details>
-  <summary>Output</summary>
+  <summary>Command output</summary>
 
 ```console title="Output" linenums="1"
  N E X T F L O W   ~  version 25.04.3
@@ -380,11 +405,16 @@ Look at the file names and check their contents to confirm that they are what yo
 cat results/COLLECTED-output.txt
 ```
 
+<details>
+  <summary>Command output</summary>
+
 ```console title="Output"
 HELLO
 BONJOUR
 HOLà
 ```
+
+</details>
 
 That is the expected final result of our multi-step pipeline.
 
@@ -515,16 +545,21 @@ workflow {
 
 You can see that the first process call, `sayHello(greeting_ch)`, is unchanged.
 
-Then the next process call, to `convertToUpper`, _refers_ to the output of `sayHello` as `sayHello.out`:
+Then the next process call, to `convertToUpper`, _refers_ to the output of `sayHello` as `sayHello.out`.
+
+<details>
+  <summary>Explanation</summary>
 
 ```groovy title="channel.nf" linenums="79"
     // convert the greeting to uppercase
     convertToUpper(sayHello.out)
 ```
 
-This tells Nextflow to provide `sayHello.out`, which represents a channel output by `sayHello()`, as an input to `convertToUpper`.
+This tells Nextflow to provide `sayHello.out`, which represents the channel output by `sayHello()`, as an input to `convertToUpper`.
 
 That is, at its simplest, how we shuttle data from one step to the next in Nextflow.
+
+</details>
 
 Finally, the third call, `collectGreetings`, is doing the same thing, with a twist:
 
@@ -538,12 +573,18 @@ This one is a bit more complicated and deserves its own discussion.
 #### 2.3.3. Operators provide additional wiring options
 
 What we're seeing in `convertToUpper.out.collect()` is the use of another operator (like `splitCsv` and `map` in the previous section), called `collect()`.
+
+<details>
+  <summary>Explanation</summary>
+
 This operator is used to collect the outputs from multiple calls to the same process (as when we run `sayHello` on multiple greetings independently) and package them into a single channel element.
 
 This allows us to take all the separate uppercased greetings produced by the second step of the workflow and feed them all together to a single call in the third step of the pipeline.
 If we didn't apply `collect()` to the output of `convertToUpper()` before feeding it to `collectGreetings()`, Nextflow would simply run `collectGreetings()` independently on each greeting, which would not achieve our goal.
 
 <!-- TODO: add diagram of operations -->
+
+</details>
 
 There are many other operators available to apply transformations to the contents of channels between process calls.
 
@@ -577,11 +618,16 @@ This can make their development and maintenance more efficient and sustainable.
 
 Here we are going to demonstrate the most common form of code modularity in Nextflow, which is the use of **modules**.
 
+<details>
+  <summary>Explanation</summary>
+
 In Nextflow, a **module** is a single process definition that is encapsulated by itself in a standalone code file.
 To use a module in a workflow, you just add a single-line import statement to your workflow code file; then you can integrate the process into the workflow the same way you normally would.
 
 Putting processes into individual modules makes it possible to reuse process definitions in multiple workflows without producing multiple copies of the code.
 This makes the code more shareable, flexible and maintainable.
+
+</details>
 
 We have of course once again prepared a suitable workflow for demonstration purposes, called `modular.nf`, along with a set of modules located in the `modules/` directory.
 
@@ -589,10 +635,13 @@ We have of course once again prepared a suitable workflow for demonstration purp
 
 ### 3.1. Examine the code
 
-This time we're going to look at the code first, so let's open each of the files listed above.
+This time we're going to look at the code first, so let's open each of the files listed above (not shown here).
 
-We see that the processes and workflow logic are exactly the same as in the previous version of the workflow.
-However, the process code is in the modules instead of being in the main workflow file, and there are now import statements in the workflow file telling Nextflow to pull them in at runtime.
+<details>
+  <summary>Explanation</summary>
+
+We see that the code for the processes and workflow logic are exactly the same as in the previous version of the workflow.
+However, the process code is now located in the modules instead of being in the main workflow file, and there are now import statements in the workflow file telling Nextflow to pull them in at runtime.
 
 ```groovy title="hello-modules.nf" linenums="9" hl_lines="4"
 // Include modules
@@ -604,6 +653,9 @@ workflow {
 ```
 
 You can look inside one of the modules to satisfy yourself that the process definition is unchanged; it's literally just been copy-pasted into a standalone file.
+
+<details>
+  <summary>sayHello process module</summary>
 
 For example, this is the module containing the `sayHello` process:
 
@@ -630,6 +682,9 @@ process sayHello {
 }
 ```
 
+</details>
+</details>
+
 So let's see what it looks like to run this new version.
 
 ### 3.2. Run the workflow
@@ -643,9 +698,9 @@ nextflow run modular.nf --input greetings.csv -resume
 Once again this should run successfully.
 
 <details>
-  <summary>Output</summary>
+  <summary>Command output</summary>
 
-```console title="Output" linenums="1"
+```console linenums="1"
  N E X T F L O W   ~  version 25.04.3
 
 Launching `modular.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726
@@ -661,7 +716,7 @@ You'll notice that the process executions all cached successfully, meaning that 
 
 None of that matters to Nextflow; what matters is the job script that is generated once all the code has been pulled together and evaluated.
 
-!!!note
+!!! Tip
 
     It is also possible to encapsulate a section of a workflow as a 'subworkflow' that can be imported into a larger pipeline, but that is outside the scope of this course.
 
@@ -689,7 +744,7 @@ A much better way to address this problem is to use **containers**.
 
 A **container** is a lightweight, standalone, executable unit of software created from a container **image** that includes everything needed to run an application including code, system libraries and settings.
 
-!!! note
+!!! Tip
 
     We teach this using the technology [Docker](https://www.docker.com/get-started/), but Nextflow supports [several other container technologies](https://www.nextflow.io/docs/latest/container.html#) as well.
 
@@ -729,7 +784,7 @@ docker pull 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
 ```
 
 <details>
-  <summary>Output</summary>
+  <summary>Command output</summary>
 
 This gives you the following console output as the system downloads the image:
 
@@ -771,8 +826,8 @@ The general syntax is as follows:
 docker run --rm '<container>' [tool command]
 ```
 
-The `docker run --rm '<container>'` part is the instruction to the container system to spin up a container instance from a container image and execute a command in it.
-The `--rm` flag tells the system to shut down the container instance after the command has completed.
+- `docker run --rm '<container>'` is the instruction to the container system to spin up a container instance from a container image and execute a command in it.
+- `--rm` tells the system to shut down the container instance after the command has completed.
 
 </details>
 
@@ -791,9 +846,9 @@ ls /
 ```
 
 <details>
-  <summary>Output</summary>
+  <summary>Command output</summary>
 
-```console title="Output"
+```console
 bin  boot  dev  data  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
 ```
 
@@ -801,7 +856,7 @@ bin  boot  dev  data  etc  home  lib  lib64  media  mnt  opt  proc  root  run  s
 
 You observe see that the filesystem inside the container is different from the filesystem on your host system.
 
-!!! note
+!!! Tip
 
     When you run a container, it is isolated from the host system by default.
     This means that the container can't access any files on the host system unless you explicitly allow it to do so by specifying that you want to mount a volume as part of the `docker run` command using the following syntax:
@@ -825,7 +880,7 @@ cowpy "Hello Containers"
 
 This produces ASCII art of the default cow character (or 'cowacter') with a speech bubble containing the text we specified.
 
-```console title="Output"
+```console title="Command output"
  ______________________________________________________
 < Hello Containers >
  ------------------------------------------------------
@@ -850,7 +905,7 @@ cowpy "Hello Containers" -c tux
 
 This time the ASCII art output shows the Linux penguin, Tux, because we specified the `-c tux` parameter.
 
-```console title="Output"
+```console title="Command output"
  __________________
 < Hello Containers >
  ------------------
@@ -867,7 +922,7 @@ This time the ASCII art output shows the Linux penguin, Tux, because we specifie
 
 </details>
 
-Because you're inside the container, you can run the cowpy command as many times as you like, varying the input parameters, without having to worry about install any libraries on your system itself.
+Since you're inside the container, you can run the cowpy command as many times as you like, varying the input parameters, without having to worry about install any libraries on your system itself.
 
 !!! Tip
 
