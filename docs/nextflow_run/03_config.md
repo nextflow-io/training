@@ -3,68 +3,28 @@
 This section will explore how to manage the configuration of a Nextflow pipeline in order to customize its behavior, adapt it to different environments, and optimize resource usage _without altering a single line of the workflow code itself_.
 
 There are multiple ways to do this; here we are going to use the simplest and most common configuration file mechanism, the `nextflow.config` file.
-Whenever there is a file named `nextflow.config` in the current directory, Nextflow will automatically load configuration from it.
+As noted previously, whenever there is a file named `nextflow.config` in the current directory, Nextflow will automatically load configuration from it.
 
-TODO: pare down and streamline some more
-
-!!!note
+!!! Tip
 
     Anything you put into the `nextflow.config` can be overridden at runtime by providing the relevant process directives or parameters and values on the command line, or by importing another configuration file, according to the order of precedence described [here](https://www.nextflow.io/docs/latest/config.html).
 
 In this part of the training, we're going to use the `nextflow.config` file to demonstrate essential components of Nextflow configuration such as process directives, executors, profiles, and parameter files.
-
 By learning to utilize these configuration options effectively, you can enhance the flexibility, scalability, and performance of your pipelines.
 
----
-
-## 0. Warmup: Check that Docker is enabled and run the Hello Config workflow
-
-First, a quick check. There is a `nextflow.config` file in the current directory that contains the line `docker.enabled = <setting>`, where `<setting>` is either `true` or `false` depending on whether or not you've worked through Part 5 of this course in the same environment.
-
-If it is set to `true`, you don't need to do anything.
-
-If it is set to `false`, switch it to `true` now.
-
-```console title="nextflow.config" linenums="1"
-docker.enabled = true
-```
-
-Once you've done that, verify that the initial workflow runs properly:
-
-```bash
-nextflow run hello-config.nf
-```
-
-```console title="Output"
- N E X T F L O W   ~  version 25.04.3
-
-Launching `hello-config.nf` [reverent_heisenberg] DSL2 - revision: 028a841db1
-
-executor >  local (8)
-[7f/0da515] sayHello (1)       | 3 of 3 ✔
-[f3/42f5a5] convertToUpper (3) | 3 of 3 ✔
-[04/fe90e4] collectGreetings   | 1 of 1 ✔
-[81/4f5fa9] cowpy              | 1 of 1 ✔
-There were 3 greetings in this batch
-```
-
-If everything works, you're ready to learn how to modify basic configuration properties to adapt to your compute environment's requirements.
+To exercise these elements of configuration, we're going to be running a fresh copy of the workflow we last ran at the end of Part 2 of this training course, renamed `3-main.nf`.
 
 ---
 
 ## 1. Determine what software packaging technology to use
 
 The first step toward adapting your workflow configuration to your compute environment is specifying where the software packages that will get run in each step are going to be coming from.
-Are they already installed in the local compute environment? Do we need to retrieve images and run them via a container system? Or do we need to retrieve Conda packages and build a local Conda environment?
+Are they already installed in the local compute environment?
+Do we need to retrieve images and run them via a container system?
+Or do we need to retrieve Conda packages and build a local Conda environment?
 
-In the very first part of this training course (Parts 1-4) we just used locally installed software in our workflow.
-Then in Part 5, we introduced Docker containers and the `nextflow.config` file, which we used to enable the use of Docker containers.
-
-In the warmup to this section, you checked that Docker was enabled in `nextflow.config` file and ran the workflow, which used a Docker container to execute the `cowpy()` process.
-
-!!! note
-
-    If that doesn't sound familiar, you should probably go back and work through Part 5 before continuing.
+For most of this training course so far, we just used locally installed software in our workflow.
+Then in the last section of Part 2, we introduced Docker containers and the `nextflow.config` file, which we used to enable the use of Docker containers.
 
 Now let's see how we can configure an alternative software packaging option via the `nextflow.config` file.
 
@@ -72,7 +32,7 @@ Now let's see how we can configure an alternative software packaging option via 
 
 Let's pretend we're working on an HPC cluster and the admin doesn't allow the use of Docker for security reasons.
 
-Fortunately for us, Nextflow supports multiple other container technologies such as including Singularity (which is more widely used on HPC), and software package managers such as Conda.
+Fortunately for us, Nextflow supports multiple other container technologies such as including Singularity/Apptainer (which is more widely used on HPC), and software package managers such as Conda.
 
 We can change our configuration file to use Conda instead of Docker.
 To do so, we switch the value of `docker.enabled` to `false`, and add a directive enabling the use of Conda:
@@ -92,13 +52,13 @@ To do so, we switch the value of `docker.enabled` to `false`, and add a directiv
     ```
 
 This will allow Nextflow to create and utilize Conda environments for processes that have Conda packages specified.
-Which means we now need to add one of those to our `cowpy` process!
+Which means we now need to add one of those to the `cowpy` process definition!
 
 ### 1.2. Specify a Conda package in the process definition
 
 We've already retrieved the URI for a Conda package containing the `cowpy` tool: `conda-forge::cowpy==1.1.5`
 
-!!! note
+!!! Tip
 
     There are a few different ways to get the URI for a given conda package.
     We recommend using the [Seqera Containers](https://seqera.io/containers/) search query, which will give you a URI that you can copy and paste, even if you're not planning to create a container from it.
@@ -133,10 +93,13 @@ To be clear, we're not _replacing_ the `docker` directive, we're _adding_ an alt
 Let's try it out.
 
 ```bash
-nextflow run hello-config.nf
+nextflow run 3-main.nf --inputs greetings.csv --character turkey
 ```
 
 This should work without issue.
+
+<details>
+  <summary>Command output</summary>
 
 ```console title="Output"
  N E X T F L O W   ~  version 25.04.3
@@ -148,7 +111,6 @@ executor >  local (8)
 [20/2596a7] convertToUpper (1) | 3 of 3 ✔
 [b3/e15de5] collectGreetings   | 1 of 1 ✔
 [c5/af5f88] cowpy              | 1 of 1 ✔
-There were 3 greetings in this batch
 ```
 
 Behind the scenes, Nextflow has retrieved the Conda packages and created the environment, which normally takes a bit of work; so it's nice that we don't have to do any of that ourselves!

@@ -1,7 +1,7 @@
 # Part 2: Run pipelines
 
 In Part 1 of this course (Run Basic Operations), we started with an example workflow that had only minimal features in order to keep the code complexity low.
-For example, `hello.nf` used a command-line parameter (`--greeting`) to provide a single value at a time.
+For example, `1-hello.nf` used a command-line parameter (`--greeting`) to provide a single value at a time.
 
 However, most real-world pipelines use more sophisticated features in order to enable efficient processing of large amounts of data at scale, and apply multiple processing steps chained together by sometimes complex logic.
 
@@ -29,7 +29,7 @@ Note that the numbers are not meaningful, they are just there for illustrative p
 
 </details>
 
-And we've written an improved version of the original workflow, now called `channel.nf`, that will read in the CSV file, extract the greetings and write each of them to a separate file.
+And we've written an improved version of the original workflow, now called `2a-inputs.nf`, that will read in the CSV file, extract the greetings and write each of them to a separate file.
 
 <!-- TODO: add diagram of operations -->
 
@@ -40,7 +40,7 @@ Let's run the workflow first, and we'll take a look at the relevant Nextflow cod
 Run the following command in your terminal.
 
 ```bash
-nextflow run channel.nf --input greetings.csv
+nextflow run 2a-inputs.nf --input greetings.csv
 ```
 
 This should run without error.
@@ -51,7 +51,7 @@ This should run without error.
 ```console linenums="1"
  N E X T F L O W   ~  version 25.04.3
 
-Launching `channel.nf` [mighty_sammet] DSL2 - revision: 29fb5352b3
+Launching `2a-inputs.nf` [mighty_sammet] DSL2 - revision: 29fb5352b3
 
 executor >  local (3)
 [8e/0eb066] sayHello (2) [100%] 3 of 3 ✔
@@ -128,7 +128,7 @@ There are two others that are not listed there.
 We can modify the logging behavior to see the full list of process calls by adding the `-ansi-log false` to the command as follows:
 
 ```bash
-nextflow run channel.nf --input greetings.csv -ansi-log false
+nextflow run 2a-inputs.nf --input greetings.csv -ansi-log false
 ```
 
 This time we see all three process runs and their associated work subdirectories listed in the output.
@@ -138,7 +138,7 @@ This time we see all three process runs and their associated work subdirectories
 
 ```console linenums="1"
 N E X T F L O W  ~  version 25.04.3
-Launching `channel.nf` [pedantic_hamilton] DSL2 - revision: 6bbc42e49f
+Launching `2a-inputs.nf` [pedantic_hamilton] DSL2 - revision: 6bbc42e49f
 [ab/1a8ece] Submitted process > sayHello (1)
 [0d/2cae24] Submitted process > sayHello (2)
 [b5/0df1d6] Submitted process > sayHello (3)
@@ -191,7 +191,7 @@ Once again, we're not aiming to memorize code syntax, but to identify signature 
 <details>
   <summary>Code</summary>
 
-```groovy title="channel.nf" linenums="1"
+```groovy title="2a-inputs.nf" linenums="1"
 #!/usr/bin/env nextflow
 
 /*
@@ -235,7 +235,7 @@ In Nextflow, we do that with a **channel**: a construct designed to handle input
 
 Let's break it down.
 
-```groovy title="channel.nf" linenums="22"
+```groovy title="2a-inputs.nf" linenums="22"
 workflow {
 
     // create a channel for inputs from a CSV file
@@ -280,7 +280,7 @@ The result of this very short snippet of code is a channel called `greeting_ch` 
 
 Next, in the last line of the workflow block, we provide the loaded `greeting_ch` channel as input to the `sayHello()` process.
 
-```groovy title="channel.nf" linenums="28"
+```groovy title="2a-inputs.nf" linenums="28"
     sayHello(greeting_ch)
 }
 ```
@@ -295,7 +295,7 @@ That is how you can achieve efficient and scalable processing of a lot of data (
 
 Finally, it's worth taking a quick look at how we get the output files to be named uniquely.
 
-```groovy title="channel.nf" linenums="13"
+```groovy title="2a-inputs.nf" linenums="13"
     output:
         path "${greeting}-output.txt"
 
@@ -305,7 +305,7 @@ Finally, it's worth taking a quick look at how we get the output files to be nam
     """
 ```
 
-You see that, compared to the version of this process in `hello.nf`, the output declaration and the relevant bit of the command have changed to include the greeting value in the output file name.
+You see that, compared to the version of this process in `1-hello.nf`, the output declaration and the relevant bit of the command have changed to include the greeting value in the output file name.
 
 This is one way to ensure that the output file names won't collide when they get published to the common `results` directory.
 
@@ -331,7 +331,7 @@ To that end, we provide you with an example workflow that chains together three 
 1. Making data flow from one process to the next
 2. Collecting outputs from multiple process calls into a single process call
 
-Specifically, we made an expanded version of the workflow called `pipeline.nf` that takes each input greeting, converts it to uppercase, then collects all the uppercased greetings into a single output file.
+Specifically, we made an expanded version of the workflow called `2b-multistep.nf` that takes each input greeting, converts it to uppercase, then collects all the uppercased greetings into a single output file.
 
 <!-- TODO: add diagram of operations -->
 
@@ -342,7 +342,7 @@ As previously, we'll run the workflow first then look at the code to see what's 
 Run the following command in your terminal:
 
 ```bash
-nextflow run pipeline.nf --input greetings.csv
+nextflow run 2b-multistep.nf --input greetings.csv
 ```
 
 Once again this should run successfully.
@@ -353,7 +353,7 @@ Once again this should run successfully.
 ```console linenums="1"
  N E X T F L O W   ~  version 25.04.3
 
-Launching `pipeline.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726
+Launching `2b-multistep.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726
 
 [d6/cdf466] sayHello (1)       | 3 of 3 ✔
 [99/79394f] convertToUpper (2) | 3 of 3 ✔
@@ -410,7 +410,7 @@ Let's look at the code and see what we can tie back to what we just observed.
 <details>
   <summary>Code</summary>
 
-```groovy title="channel.nf" linenums="1"
+```groovy title="2a-inputs.nf" linenums="1"
 #!/usr/bin/env nextflow
 
 /*
@@ -507,7 +507,7 @@ The really interesting thing to look at here is how the process calls are chaine
 <details>
   <summary>Code</summary>
 
-```groovy title="channel.nf" linenums="69"
+```groovy title="2a-inputs.nf" linenums="69"
 workflow {
 
     // create a channel for inputs from a CSV file
@@ -532,7 +532,7 @@ You can see that the first process call, `sayHello(greeting_ch)`, is unchanged.
 
 Then the next process call, to `convertToUpper`, _refers_ to the output of `sayHello` as `sayHello.out`.
 
-```groovy title="channel.nf" linenums="79"
+```groovy title="2a-inputs.nf" linenums="79"
     // convert the greeting to uppercase
     convertToUpper(sayHello.out)
 ```
@@ -543,7 +543,7 @@ That is, at its simplest, how we shuttle data from one step to the next in Nextf
 
 Finally, the third call, `collectGreetings`, is doing the same thing, with a twist:
 
-```groovy title="channel.nf" linenums="82"
+```groovy title="2a-inputs.nf" linenums="82"
     // collect all the greetings into one file
     collectGreetings(convertToUpper.out.collect())
 ```
@@ -599,7 +599,7 @@ To use a module in a workflow, you just add a single-line import statement to yo
 Putting processes into individual modules makes it possible to reuse process definitions in multiple workflows without producing multiple copies of the code.
 This makes the code more shareable, flexible and maintainable.
 
-We have of course once again prepared a suitable workflow for demonstration purposes, called `modular.nf`, along with a set of modules located in the `modules/` directory.
+We have of course once again prepared a suitable workflow for demonstration purposes, called `2c-modules.nf`, along with a set of modules located in the `modules/` directory.
 
 <!-- TODO: show directory contents -->
 
@@ -656,7 +656,7 @@ So let's see what it looks like to run this new version.
 Run this command in your terminal, with the `-resume` flag:
 
 ```bash
-nextflow run modular.nf --input greetings.csv -resume
+nextflow run 2c-modules.nf --input greetings.csv -resume
 ```
 
 Once again this should run successfully.
@@ -667,7 +667,7 @@ Once again this should run successfully.
 ```console linenums="1"
  N E X T F L O W   ~  version 25.04.3
 
-Launching `modular.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726
+Launching `2c-modules.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726
 
 [j6/cdfa66] sayHello (1)       | 3 of 3, cached: ✔
 [95/79484f] convertToUpper (2) | 3 of 3, cached: ✔
@@ -910,7 +910,7 @@ The differences are highlighted in the code snippet below.
 <details>
   <summary>Code</summary>
 
-```groovy title="container.nf" linenums="1" hl_lines="7 25 26"
+```groovy title="2d-container.nf" linenums="1" hl_lines="7 25 26"
 #!/usr/bin/env nextflow
 
 // Include modules
@@ -959,8 +959,9 @@ The `cowpy` process, which wraps the cowpy command to generate ASCII art, is def
 // Generate ASCII art with cowpy
 process cowpy {
 
-    publishDir 'results', mode: 'copy'
+    container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
 
+    publishDir 'results', mode: 'copy'
 
     input:
         path input_file
@@ -1026,7 +1027,7 @@ That tells Nextflow to use Docker for any process that specifies a compatible co
 Let's run the workflow with the `-resume` flag, and specify that we want the character to be the turkey.
 
 ```bash
-nextflow run container.nf --input greetings.csv --character turkey -resume
+nextflow run 2d-container.nf --input greetings.csv --character turkey -resume
 ```
 
 This should work without error.
@@ -1037,7 +1038,7 @@ This should work without error.
 ```console linenums="1"
  N E X T F L O W   ~  version 25.04.3
 
-Launching `container.nf` [elegant_brattain] DSL2 - revision: 028a841db1
+Launching `2d-container.nf` [elegant_brattain] DSL2 - revision: 028a841db1
 
 executor >  local (1)
 [95/fa0bac] sayHello (3)       | 3 of 3, cached: 3 ✔

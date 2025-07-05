@@ -67,7 +67,7 @@ Find out what it takes to run a Nextflow workflow that achieves the same result.
 
 ## 1. Run the workflow
 
-We provide you with a workflow script named `hello.nf` that takes an input via a command-line argument named `--greeting` and produces a text file containing that greeting.
+We provide you with a workflow script named `1-hello.nf` that takes an input via a command-line argument named `--greeting` and produces a text file containing that greeting.
 We're not going to look at the code yet; first let's see what it looks like to run it.
 
 ### 1.1. Launch the workflow and monitor execution
@@ -75,7 +75,7 @@ We're not going to look at the code yet; first let's see what it looks like to r
 In the terminal, run the following command:
 
 ```bash
-nextflow run hello.nf --greeting 'Hello World!'
+nextflow run 1-hello.nf --greeting 'Hello World!'
 ```
 
 You console output should look something like this:
@@ -83,7 +83,7 @@ You console output should look something like this:
 ```console title="Output" linenums="1"
  N E X T F L O W   ~  version 25.04.3
 
-Launching `hello.nf` [goofy_torvalds] DSL2 - revision: c33d41f479
+Launching `1-hello.nf` [goofy_torvalds] DSL2 - revision: c33d41f479
 
 executor >  local (1)
 [a3/7be2fa] sayHello | 1 of 1 ✔
@@ -259,12 +259,12 @@ _The goal here is not to memorize the syntax of Nextflow code, but to form some 
 
 ### 2.1. Examine the overall code structure
 
-Let's open the `hello.nf` script in the editor pane.
+Let's open the `1-hello.nf` script in the editor pane.
 
 <details>
   <summary>Code</summary>
 
-```groovy title="hello.nf" linenums="1"
+```groovy title="1-hello.nf" linenums="1"
 #!/usr/bin/env nextflow
 
 /*
@@ -311,7 +311,7 @@ Here we have a **process** called `sayHello` that takes an **input** variable ca
 <details>
   <summary>Code</summary>
 
-```groovy title="hello.nf" linenums="3"
+```groovy title="1-hello.nf" linenums="3"
 /*
  * Use echo to print a greeting to a file
  */
@@ -357,7 +357,7 @@ The workflow definition starts with the keyword `workflow`, followed by an optio
 
 Here we have a **workflow** that consists of one call to the `sayHello` process, which takes an input, `params.greeting`, which holds the value we gave to the `--greeting` parameter.
 
-```groovy title="hello.nf" linenums="22"
+```groovy title="1-hello.nf" linenums="22"
 workflow {
 
     // emit a greeting
@@ -449,11 +449,11 @@ Whenever you launch a nextflow workflow, a line gets written to a log file calle
   <summary>File contents</summary>
 
 ```txt title=".nextflow/history" linenums="1"
-2025-07-04 19:27:09	1.8s	wise_watson	OK	3539118582ccde68dde471cc2c66295c	a02c9c46-c3c7-4085-9139-d1b9b5b194c8	nextflow run hello.nf --greeting 'Hello World'
-2025-07-04 19:27:20	2.9s	spontaneous_blackwell	OK	3539118582ccde68dde471cc2c66295c	59a5db23-d83c-4c02-a54e-37ddb73a337e	nextflow run hello.nf --greeting Bonjour
-2025-07-04 19:27:31	1.8s	gigantic_yonath	OK	3539118582ccde68dde471cc2c66295c	5acaa83a-6ad6-4509-bebc-cb25d5d7ddd0	nextflow run hello.nf --greeting 'Dobry den'
-2025-07-04 19:27:45	2.4s	backstabbing_swartz	OK	3539118582ccde68dde471cc2c66295c	5f4b3269-5b53-404a-956c-cac915fbb74e	nextflow run hello.nf --greeting Konnichiwa
-2025-07-04 19:27:57	2.1s	goofy_wilson	OK	3539118582ccde68dde471cc2c66295c	5f4b3269-5b53-404a-956c-cac915fbb74e	nextflow run hello.nf --greeting Konnichiwa -resume
+2025-07-04 19:27:09	1.8s	wise_watson	OK	3539118582ccde68dde471cc2c66295c	a02c9c46-c3c7-4085-9139-d1b9b5b194c8	nextflow run 1-hello.nf --greeting 'Hello World'
+2025-07-04 19:27:20	2.9s	spontaneous_blackwell	OK	3539118582ccde68dde471cc2c66295c	59a5db23-d83c-4c02-a54e-37ddb73a337e	nextflow run 1-hello.nf --greeting Bonjour
+2025-07-04 19:27:31	1.8s	gigantic_yonath	OK	3539118582ccde68dde471cc2c66295c	5acaa83a-6ad6-4509-bebc-cb25d5d7ddd0	nextflow run 1-hello.nf --greeting 'Dobry den'
+2025-07-04 19:27:45	2.4s	backstabbing_swartz	OK	3539118582ccde68dde471cc2c66295c	5f4b3269-5b53-404a-956c-cac915fbb74e	nextflow run 1-hello.nf --greeting Konnichiwa
+2025-07-04 19:27:57	2.1s	goofy_wilson	OK	3539118582ccde68dde471cc2c66295c	5f4b3269-5b53-404a-956c-cac915fbb74e	nextflow run 1-hello.nf --greeting Konnichiwa -resume
 ```
 
 </details>
@@ -473,11 +473,11 @@ This will output the contents of the log file to the terminal, augmented with a 
 
 ```console linenums="1"
 TIMESTAMP               DURATION        RUN NAME                STATUS  REVISION ID     SESSION ID                              COMMAND
-2025-07-04 19:27:09     1.8s            wise_watson             OK       3539118582     a02c9c46-c3c7-4085-9139-d1b9b5b194c8    nextflow run hello.nf --greeting 'Hello World'
-2025-07-04 19:27:20     2.9s            spontaneous_blackwell   OK       3539118582     59a5db23-d83c-4c02-a54e-37ddb73a337e    nextflow run hello.nf --greeting Bonjour
-2025-07-04 19:27:31     1.8s            gigantic_yonath         OK       3539118582     5acaa83a-6ad6-4509-bebc-cb25d5d7ddd0    nextflow run hello.nf --greeting 'Dobry den'
-2025-07-04 19:27:45     2.4s            backstabbing_swartz     OK       3539118582     5f4b3269-5b53-404a-956c-cac915fbb74e    nextflow run hello.nf --greeting Konnichiwa
-2025-07-04 19:27:57     2.1s            goofy_wilson            OK       3539118582     5f4b3269-5b53-404a-956c-cac915fbb74e    nextflow run hello.nf --greeting Konnichiwa -resume
+2025-07-04 19:27:09     1.8s            wise_watson             OK       3539118582     a02c9c46-c3c7-4085-9139-d1b9b5b194c8    nextflow run 1-hello.nf --greeting 'Hello World'
+2025-07-04 19:27:20     2.9s            spontaneous_blackwell   OK       3539118582     59a5db23-d83c-4c02-a54e-37ddb73a337e    nextflow run 1-hello.nf --greeting Bonjour
+2025-07-04 19:27:31     1.8s            gigantic_yonath         OK       3539118582     5acaa83a-6ad6-4509-bebc-cb25d5d7ddd0    nextflow run 1-hello.nf --greeting 'Dobry den'
+2025-07-04 19:27:45     2.4s            backstabbing_swartz     OK       3539118582     5f4b3269-5b53-404a-956c-cac915fbb74e    nextflow run 1-hello.nf --greeting Konnichiwa
+2025-07-04 19:27:57     2.1s            goofy_wilson            OK       3539118582     5f4b3269-5b53-404a-956c-cac915fbb74e    nextflow run 1-hello.nf --greeting Konnichiwa -resume
 ```
 
 </details>
