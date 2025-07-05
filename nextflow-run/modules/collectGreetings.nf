@@ -7,15 +7,12 @@ process collectGreetings {
 
     input:
         path input_files
-        val batch_name
 
     output:
-        path "COLLECTED-${batch_name}-output.txt" , emit: outfile
-        val count_greetings , emit: count
+        path "COLLECTED-output.txt"
 
     script:
-        count_greetings = input_files.size()
     """
-    cat ${input_files} > 'COLLECTED-${batch_name}-output.txt'
+    cat ${input_files} > 'COLLECTED-output.txt'
     """
 }

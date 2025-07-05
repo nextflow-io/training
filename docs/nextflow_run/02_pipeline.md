@@ -890,15 +890,234 @@ You will find yourself back in your normal shell.
 
 ### 4.2. Use a container in a workflow
 
-TODO: clone the content from hello_containers.md
+When we run a pipeline, we want to be able to tell Nextflow what container to use at each step, and importantly, we want it to handle all that work we just did: pull the container, spin it up, run the command and tear the container down when it's done.
+
+Good news: that's exactly what Nextflow is going to do for us.
+We just need to specify a container for each process.
+
+To demonstrate how this work, we made another version of our workflow that runs `cowpy` on the file of collected greetings produced in the third step.
+
+#### 4.2.1. Examine the code
+
+The workflow is very similar to the previous one, plus the extra step to run `cowpy.
+The differences are highlighted in the code snippet below.
+
+<details>
+  <summary>Code</summary>
+
+```groovy title="container.nf" linenums="1" hl_lines="7 25 26"
+#!/usr/bin/env nextflow
+
+// Include modules
+include { sayHello } from './modules/sayHello.nf'
+include { convertToUpper } from './modules/convertToUpper.nf'
+include { collectGreetings } from './modules/collectGreetings.nf'
+include { cowpy } from './modules/cowpy.nf'
+
+workflow {
+
+    // create a channel for inputs from a CSV file
+    greeting_ch = Channel.fromPath(params.input)
+                        .splitCsv()
+                        .map { line -> line[0] }
+
+    // emit a greeting
+    sayHello(greeting_ch)
+
+    // convert the greeting to uppercase
+    convertToUpper(sayHello.out)
+
+    // collect all the greetings into one file
+    collectGreetings(convertToUpper.out.collect())
+
+    // generate ASCII art with cowpy
+    cowpy(collectGreetings.out, params.character)
+}
+```
+
+</details>
+
+You see that this workflow imports a `cowpy` process from a module file, and calls it on the output of the `collectGreetings()` call.
+
+```groovy title="modules/cowpy.nf" linenums="26"
+cowpy(collectGreetings.out, params.character)
+```
+
+The `cowpy` process, which wraps the cowpy command to generate ASCII art, is defined in the `cowpy.nf` module.
+
+<details>
+  <summary>Code</summary>
+
+```groovy title="modules/cowpy.nf" linenums="1" hl_lines="7"
+#!/usr/bin/env nextflow
+
+// Generate ASCII art with cowpy
+process cowpy {
+
+    publishDir 'results', mode: 'copy'
+
+
+    input:
+        path input_file
+        val character
+
+    output:
+        path "cowpy-${input_file}"
+
+    script:
+    """
+    cat $input_file | cowpy -c "$character" > cowpy-${input_file}
+    """
+
+}
+```
+
+</details>
+
+The `cowpy` process requires two inputs: the path to an input file containing the text to put in the speech bubble (`input_file`), and a value for the character variable.
+
+Importantly, it also includes the line `container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'`, which points to the container URI we used earlier.
+
+#### 4.2.2. Check that Docker is enabled in the configuration
+
+We're going to slightly anticipate Part 3 of this training course by introducing the topic of configuration.
+
+One of the main ways Nextflow offers for configuring workflow execution is to use a `nextflow.config` file.
+When such a file is present in the current directory, Nextflow will automatically load it in and apply any configuration it contains.
+
+To that end, we include a `nextflow.config` file with a single line of code that enables Docker.
+
+```groovy title="nextflow.config" linenums="1"
+docker.enabled = true
+```
+
+You can check that this is indeed set correctly either by opening the file, or by running the `nextflow config` command in the terminal.
+
+```bash
+nextflow config
+```
+
+<details>
+  <summary>Command output</summary>
+
+```json title="nextflow.config" linenums="1"
+docker {
+   enabled = false
+}
+```
+
+</details>
+
+That tells Nextflow to use Docker for any process that specifies a compatible container.
+
+!!! Tip
+
+    It is possible to enable Docker execution from the command-line, on a per-run basis, using the `-with-docker <container>` parameter.
+    However, that only allows us to specify one container for the entire workflow, whereas the approach we just showed you allows us to specify a different container per process.
+    This is better for modularity, code maintenance and reproducibility.
+
+#### 4.2.3. Run the workflow
+
+Let's run the workflow with the `-resume` flag, and specify that we want the character to be the turkey.
+
+```bash
+nextflow run container.nf --input greetings.csv --character turkey -resume
+```
+
+This should work without error.
+
+<details>
+  <summary>Command output</summary>
+
+```console linenums="1"
+ N E X T F L O W   ~  version 25.04.3
+
+Launching `container.nf` [elegant_brattain] DSL2 - revision: 028a841db1
+
+executor >  local (1)
+[95/fa0bac] sayHello (3)       | 3 of 3, cached: 3 ✔
+[92/32533f] convertToUpper (3) | 3 of 3, cached: 3 ✔
+[aa/e697a2] collectGreetings   | 1 of 1, cached: 1 ✔
+[7f/caf718] cowpy              | 1 of 1 ✔
+```
+
+</details>
+
+The first three steps cached since we've already run them before, but the `cowpy` process is new so that actually gets run.
+
+You can find the output of the `cowpy` step in the `results` directory.
+
+<details>
+  <summary>Output file contents</summary>
+
+```console title="results/cowpy-COLLECTED-output.txt"
+ _________
+/ HOLà    \
+| HELLO   |
+\ BONJOUR /
+ ---------
+  \                                  ,+*^^*+___+++_
+   \                           ,*^^^^              )
+    \                       _+*                     ^**+_
+     \                    +^       _ _++*+_+++_,         )
+              _+^^*+_    (     ,+*^ ^          \+_        )
+             {       )  (    ,(    ,_+--+--,      ^)      ^\
+            { (\@)    } f   ,(  ,+-^ __*_*_  ^^\_   ^\       )
+           {:;-/    (_+*-+^^^^^+*+*<_ _++_)_    )    )      /
+          ( /  (    (        ,___    ^*+_+* )   <    <      \
+           U _/     )    *--<  ) ^\-----++__)   )    )       )
+            (      )  _(^)^^))  )  )\^^^^^))^*+/    /       /
+          (      /  (_))_^)) )  )  ))^^^^^))^^^)__/     +^^
+         (     ,/    (^))^))  )  ) ))^^^^^^^))^^)       _)
+          *+__+*       (_))^)  ) ) ))^^^^^^))^^^^^)____*^
+          \             \_)^)_)) ))^^^^^^^^^^))^^^^)
+           (_             ^\__^^^^^^^^^^^^))^^^^^^^)
+             ^\___            ^\__^^^^^^))^^^^^^^^)\\
+                  ^^^^^\uuu/^^\uuu/^^^^\^\^\^\^\^\^\^\
+                     ___) >____) >___   ^\_\_\_\_\_\_\)
+                    ^^^//\\_^^//\\_^       ^(\_\_\_\)
+                      ^^^ ^^ ^^^ ^
+```
+
+What a beautiful turkey!
+
+</details>
+
+You see that the character is saying all the greetings, since it ran on the file of collected uppercased greetings.
+
+More to the point, we were able to run this as part of our pipeline without having to do a proper installation of cowpy and all its dependencies.
+And we can now share the pipeline with collaborators and have them run it on their infrastructure without them needing to install anything either, aside from Docker or one of its alternatives (such as Singularity/Apptainer) as mentioned above.
+
+#### 4.2.4. Inspect how Nextflow launched the containerized task
+
+Let's take a look at the work subdirectory for one of the `cowpy` process calls to get a bit more insight on how Nextflow works with containers under the hood.
+
+Check the output from your `nextflow run` command to find the path to the work subdirectory for the `cowpy` process.
+Looking at what we got for the run shown above, the console log line for the `cowpy` process starts with `[7f/caf718]`.
+That corresponds to the following truncated directory path: `work/7f/caf718`.
+In it, you will find the `.command.run` file that contains all the commands Nextflow ran on your behalf in the course of executing the pipeline.
+
+Open the `.command.run` file and search for `nxf_launch`; you should see something like this:
+
+```bash
+nxf_launch() {
+    docker run -i --cpu-shares 1024 -e "NXF_TASK_WORKDIR" -v /workspaces/training/hello-nextflow/work:/workspaces/training/hello-nextflow/work -w "$NXF_TASK_WORKDIR" --name $NXF_BOXID community.wave.seqera.io/library/pip_cowpy:131d6a1b707a8e65 /bin/bash -ue /workspaces/training/hello-nextflow/work/7f/caf7189fca6c56ba627b75749edcb3/.command.sh
+}
+```
+
+As you can see, Nextflow is using the `docker run` command to launch the process call.
+It also mounts the corresponding work subdirectory into the container, sets the working directory inside the container accordingly, and runs our templated bash script in the `.command.sh` file.
+
+This confirms that all the hard work we had to do manually in the previous section is now done for us by Nextflow!
 
 ### Takeaway
 
 You understand what role containers play in managing software tool versions and ensuring reproducibility.
 
-More generally, you have a basic understanding of the most common and most important components of real-world Nexflow pipelines.
+More generally, you have a basic understanding of what are the core components of real-world Nextflow pipelines and how they are organized.
+You know the fundamentals of how Nextflow can process multiple inputs efficiently, run workflows composed of multiple steps connected together, leverage modular code components, and utilize containers for greater reproducibility and portability.
 
 ### What's next?
 
-Take another break!
-TODO: finalize the transition text
+Take another break! That was a big pile of information about how Nextflow pipelines work.
+In the next section of this training, we're going to delve deeper into the topic of configuration.

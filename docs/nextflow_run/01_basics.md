@@ -513,6 +513,6 @@ You know how to relaunch a pipeline without repeating steps that were already ru
 
 ### What's next?
 
-Take a little break! You've just absorbed a big pile of Nextflow syntax and usage instructions.
+Take a little break! You've just absorbed the building blocks of Nextflow syntax and basic usage instructions.
 
-In the next section of this training, we're going to look at three successively more realistic versions of the Hello World pipeline that will demonstrate how Nextflow allows you to process multiple inputs efficiently, run workflows composed of multiple steps chained together, and leverage modular code components.
+In the next section of this training, we're going to look at four successively more realistic versions of the Hello World pipeline that will demonstrate how Nextflow allows you to process multiple inputs efficiently, run workflows composed of multiple steps connected together, leverage modular code components, and utilize containers for greater reproducibility and portability.
