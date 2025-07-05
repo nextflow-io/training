@@ -385,7 +385,7 @@ Currently, our workflow is set up to accept a couple of parameter values via the
 This is fine for a simple workflow with very few parameters that need to be set for a given run.
 However, many real-world workflows will have many more parameters that may be run-specific, and putting all of them in the command line would be tedious and error-prone.
 
-### 4.1. Specifying default values directly in the workflow
+### 4.1. Specifying default values directly in the workflow or the `nextflow.config` file
 
 It is possible to specify default values in the workflow script itself, for example you may see something like this in the main body of the workflow:
 
@@ -399,7 +399,9 @@ params.greeting = 'greetings.csv'
 params.character = 'turkey'
 ```
 
-If you were to add this to the `3-main.nf` workflow, you could leave out those parameters from your command-line and Nextflow would use those default values.
+The same syntax can also be used to store parameter defaults in the `nextflow.config` file.
+
+If you were to add this to either, you could leave out those parameters from your command-line and Nextflow would use those default values.
 You could then override those values by specifying the parameters in the command-line.
 
 ### 4.2. Using a parameter file
@@ -481,6 +483,7 @@ It also makes it easier to distribute sets of parameters to collaborators.
 ### Takeaway
 
 You know how to manage parameter defaults and override them at runtime using command-line arguments or a parameter file.
+There are a few more options but these are the ones you are most likely to encounter.
 
 ### What's next?
 
