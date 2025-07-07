@@ -332,7 +332,7 @@ process sayHello {
 }
 ```
 
-</code>
+</details>
 
 This is a very minimal process definition that just contains an `input` definition, an `output` definition and the `script` to execute.
 
