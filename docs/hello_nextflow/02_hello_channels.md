@@ -190,7 +190,7 @@ We just have to load more values into the channel.
 
 #### 2.1.1. Add more greetings
 
-In the workflow block, make the following code change:
+Before the workflow block, make the following code change:
 
 === "After"
 
@@ -644,7 +644,7 @@ To get started, we're going to need to make two key changes to the script:
 Remember the `params.greeting` parameter we set up in Part 1?
 We're going to update it to point to the CSV file containing our greetings.
 
-In the workflow block, make the following code change:
+Before the workflow block, make the following code change:
 
 === "After"
 
