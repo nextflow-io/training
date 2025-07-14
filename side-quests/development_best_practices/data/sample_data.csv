@@ -1,0 +1,6 @@
+sample_id,file_path,type
+sample_001,/path/to/sample_001.fastq.gz,paired
+sample_002,/path/to/sample_002.fastq.gz,single
+sample_003,/path/to/sample_003.fastq.gz,paired
+sample_004,/path/to/sample_004.fastq.gz,single
+sample_005,/path/to/sample_005.fastq.gz,paired
