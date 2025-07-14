@@ -1,11 +1,11 @@
 # Using sample-specific data in a workflow
 
-In any scientific analysis, we rarely work with just the raw data files. Each sample—whether it’s a tube of DNA, a patient’s scan, or a file of mysterious greetings—comes with its own backstory: who or what it is, where it came from, and what makes it special. This extra information is what we call sample-specific data. It’s the “who’s who” and “what’s what” of your dataset, giving context to every file you process.
+In any scientific analysis, we rarely work with just the raw data files. Each sample comes with its own additional information: what it is, where it came from, and what makes it special. This extra information is what we call sample-specific data.
 
-But in the world of workflows, we like to give things snappy names. So, instead of always saying “sample-specific data” (which is a mouthful), we call it metadata.
+But in the world of workflows, we have shortened saying “sample-specific data” (which is a mouthful) too "metadata".
 Metadata is information that describes and gives context to your data: it tracks important details about samples and experimental conditions, and helps tailor analyses to each dataset’s unique characteristics.
 
-Think of it like a library catalog: while books contain the actual content (raw data), the catalog cards provide essential information about each book—when it was published, who wrote it, where to find it (metadata). In Nextflow pipelines, metadata helps us:
+Think of it like a library catalog: while books contain the actual content (raw data), the catalog cards provide essential information about each book—when it was published, who wrote it, where to find it (metadata). In Nextflow pipelines, metadata can be used to:
 
 - Track sample-specific information throughout the workflow
 - Configure processes based on sample characteristics
