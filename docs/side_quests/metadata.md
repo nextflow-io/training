@@ -1,8 +1,11 @@
-# Metadata
+# Using sample-specific data in a workflow
 
-Metadata is information that describes and gives context to your data. In workflows, it helps track important details about samples, experimental conditions that can influence processing parameters. Metadata is sample-specific and helps tailor analyses to each dataset's unique characteristics.
+In any scientific analysis, we rarely work with just the raw data files. Each sample—whether it’s a tube of DNA, a patient’s scan, or a file of mysterious greetings—comes with its own backstory: who or what it is, where it came from, and what makes it special. This extra information is what we call sample-specific data. It’s the “who’s who” and “what’s what” of your dataset, giving context to every file you process.
 
-Think of it like a library catalog: while books contain the actual content (raw data), the catalog cards provide essential information about each book - when it was published, who wrote it, where to find it (metadata). In Nextflow pipelines, metadata helps us:
+But in the world of workflows, we like to give things snappy names. So, instead of always saying “sample-specific data” (which is a mouthful), we call it metadata.
+Metadata is information that describes and gives context to your data: it tracks important details about samples and experimental conditions, and helps tailor analyses to each dataset’s unique characteristics.
+
+Think of it like a library catalog: while books contain the actual content (raw data), the catalog cards provide essential information about each book—when it was published, who wrote it, where to find it (metadata). In Nextflow pipelines, metadata helps us:
 
 - Track sample-specific information throughout the workflow
 - Configure processes based on sample characteristics
@@ -75,13 +78,12 @@ sampleG,turtle,/workspaces/training/side-quests/metadata/data/ciao.txt
 
 ### 1.1. Read in samplesheet with splitCsv
 
-Let's start by reading in the samplesheet with `splitCsv`. In the main workflow file, you'll see that we've already started the workflow.
+Let's start by reading in the samplesheet with `splitCsv`. In the main workflow file, you'll see that we've already started the workflow:
 
 ```groovy title="main.nf" linenums="1"
 workflow  {
 
     ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
-                            .splitCsv(header: true)
 
 }
 ```
@@ -132,23 +134,48 @@ We can see that each row from the CSV file has been converted into a map with ke
 
 ```groovy
 // Groovy map
-def meta = [id:'sample1', character:'squirrel']
-println meta.id  // Prints: sample1
+def my_map = [id:'sampleA', character:'squirrel']
+println my_map.id  // Prints: sampleA
 ```
 
 ```python
 # Python equivalent dictionary
-meta = {'id': 'sample1', 'character': 'squirrel'}
-print(meta['id'])  # Prints: sample1
+my_map = {'id': 'sampleA', 'character': 'squirrel'}
+print(my_map['id'])  # Prints: sampleA
 ```
 
-Each map entry corresponds to a column:
+Each map entry corresponds to a column in our samplesheet:
 
 - `id`
 - `character`
-- `data`
+- `recording`
 
-This format makes it easy to access specific fields from each sample. For example, we could access the sample ID with `id` or the txt file path with `data`. The output above shows each row from the CSV file converted into a map with keys matching the header row. Now that we've successfully read in the samplesheet and have access to the data in each row, we can begin implementing our pipeline logic.
+This format makes it easy to access specific fields from each sample. For example, we could access the sample ID with `id` or the txt file path with `recording`. The output above shows each row from the CSV file converted into a map with keys matching the header row.
+
+Let's access a specific column, the `character` column, that we read in from the samplesheet, and print it. We can use the Nextflow `map` operator to iterate over each `row` in our samplesheet and return specific entry of our map object:
+
+<!-- TODO: is this too confusing: map operator vs MAP objectc? -->
+
+=== "After"
+
+    ```groovy title="main.nf" linenums="2" hl_lines="2-3"
+    ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
+                            .splitCsv(header: true)
+                            .map{ row ->
+                              row.character
+                            }
+                            .view()
+    ```
+
+=== "Before"
+
+    ```groovy title="main.nf" linenums="2" hl_lines="2-3"
+    ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
+                            .splitCsv(header: true)
+                            .view()
+    ```
+
+Now that we've successfully read in the samplesheet and have access to the data in each row, we can begin implementing our pipeline logic.
 
 ### 1.2 Separate meta data and data
 
@@ -318,7 +345,7 @@ output:
       tuple val(meta), stdout
 ```
 
-This is a useful way to ensure the sample-specific meta information stays connected with any new information that is generated.
+This is a useful way to ensure the sample-specific information stays connected with any new information that is generated.
 
 ### 2.2 Associate the language prediction with the input file
 
@@ -450,7 +477,7 @@ It is becoming a bit hard to see, but if you look all the way on the right side,
 
 ### 2.3 Add the language prediction to the meta map
 
-Given that this is more data about the files, let's add it to our meta map. We can use the [`map` operator](https://www.nextflow.io/docs/latest/operator.html#map) to create a new key `lang` and set the value to the predicted language:
+Given that this is more data about the files, let's add it to our meta map. We can use the [`map` operator](https://www.nextflow.io/docs/latest/operator.html#map) again to create a new key `lang` and set the value to the predicted language:
 
 === "After"
 
@@ -521,6 +548,8 @@ After joining our channels, each element looks like this:
 ```
 
 The `map` operator takes each channel element and processes it to create a modified version. Inside the closure `{ meta, file, lang -> ... }`, we then take the existing `meta` map, create a new map `[lang:lang]`, and merge both together using `+`, Groovy's way of combining maps.
+
+<!-- TODO Should we also show how to remove a key using subMap?! -->
 
 ### 2.4 Assign a language group using a ternary operator
 
@@ -634,7 +663,7 @@ These allow you to associated new and existing meta data with files as you progr
 
 ---
 
-## 3. Filter data based on meta map values
+<!-- ## 3. Filter data based on meta map values
 
 We can use the [`filter` operator](https://www.nextflow.io/docs/latest/operator.html#filter) to filter the data based on a condition. Let's say we only want to process romanic language samples further. We can do this by filtering the data based on the `lang_group` field. Let's create a new channel that only contains romanic languages and `view` it:
 
@@ -726,7 +755,7 @@ In this section, you've learned:
 
 - How to use `filter` to select samples based on metadata
 
-We now have only the romanic language samples left and can process those further. Next we want to make characters say the phrases.
+We now have only the romanic language samples left and can process those further. Next we want to make characters say the phrases. -->
 
 ---
 
@@ -789,16 +818,16 @@ Let's run our romanic languages through `COWPY` and remove our `view` statement:
                                   .map { meta, file, lang ->
                                       [ meta + [lang:lang], file ]
                                   }
-                                  .map{ meta, file ->
-                                      def lang_group = (meta.lang.equals('de') || meta.lang.equals('en')) ? 'germanic' : 'romanic'
-                                      [ meta + [lang_group:lang_group], file ]
-                                  }
+      //                             .map{ meta, file ->
+      //                                 def lang_group = (meta.lang.equals('de') || meta.lang.equals('en')) ? 'germanic' : 'romanic'
+      //                                 [ meta + [lang_group:lang_group], file ]
+      //                             }
 
-      romanic_languages = ch_languages.filter { meta, file ->
-                                          meta.lang_group == 'romanic'
-                                      }
+      // romanic_languages = ch_languages.filter { meta, file ->
+      //                                     meta.lang_group == 'romanic'
+      //                                 }
 
-      COWPY(romanic_languages)
+      COWPY(ch_languages)
 
     }
     ```
@@ -820,14 +849,14 @@ Let's run our romanic languages through `COWPY` and remove our `view` statement:
                                 .map { meta, file, lang ->
                                     [ meta + [lang:lang], file ]
                                 }
-                                .map{ meta, file ->
-                                    def lang_group = (meta.lang.equals('de') || meta.lang.equals('en')) ? 'germanic' : 'romanic'
-                                    [ meta + [lang_group:lang_group], file ]
-                                }
+    //                             .map{ meta, file ->
+    //                                 def lang_group = (meta.lang.equals('de') || meta.lang.equals('en')) ? 'germanic' : 'romanic'
+    //                                 [ meta + [lang_group:lang_group], file ]
+    //                             }
 
-    romanic_languages = ch_languages.filter { meta, file ->
-                                        meta.lang_group == 'romanic'
-                                    }.view()
+    // romanic_languages = ch_languages.filter { meta, file ->
+    //                                     meta.lang_group == 'romanic'
+    //                                 }.view()
     }
     ```
 
@@ -899,7 +928,7 @@ Let's take a look at `cowpy-salut.txt`:
 
 Look through the other files. All phrases should be spoken by the fashionable stegosaurus.
 
-How did this work? The `publishDir` directive is evaluated at runtime when the process executes.Each process task gets its own meta map from the input tuple When the directive is evaluated, `${meta.lang}` is replaced with the actual language value for that sample creating the dynamic paths like `results/fr`.
+How did this work? The `publishDir` directive is evaluated at runtime when the process executes. Each process task gets its own meta map from the input tuple When the directive is evaluated, `${meta.lang}` is replaced with the actual language value for that sample creating the dynamic paths like `results/fr`.
 
 ### 4.2 Customize the character
 
