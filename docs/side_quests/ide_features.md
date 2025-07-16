@@ -374,8 +374,8 @@ When working with modules, you often need to see both the main workflow and modu
 
 1. Open `complex_workflow.nf`
 2. Open `modules/fastqc.nf` in a new tab
-2. Right-click on the `modules/fastqc.nf` tab and select "Split Right"
-3. Now you can see both files side by side
+3. Right-click on the `modules/fastqc.nf` tab and select "Split Right"
+4. Now you can see both files side by side
 
 ![Split editor](img/split_editor.png)
 
