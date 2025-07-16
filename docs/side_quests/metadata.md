@@ -108,6 +108,20 @@ workflow  {
 
 We can use the [`splitCsv` operator](https://www.nextflow.io/docs/latest/operator.html#splitcsv) to split the samplesheet into a channel of maps, where each map represents a row from the CSV file.
 
+A map is a key-value data structure similar to dictionaries in Python, objects in JavaScript, or hashes in Ruby. For example:
+
+```groovy
+// Groovy map
+def my_map = [id:'sampleA', character:'squirrel']
+println my_map.id  // Prints: sampleA
+```
+
+```python
+# Python equivalent dictionary
+my_map = {'id': 'sampleA', 'character': 'squirrel'}
+print(my_map['id'])  # Prints: sampleA
+```
+
 The `header: true` option tells Nextflow to use the first row of the CSV file as the header row, which will be used as keys for the values. Let's see what Nextflow can see after reading with `splitCsv`. To do this, we can use the `view` operator.
 
 Run the pipeline:
@@ -130,20 +144,7 @@ Launching `main.nf` [exotic_albattani] DSL2 - revision: c0d03cec83
 [id:sampleG, character:turtle, recording:/workspaces/training/side-quests/metadata/data/ciao.txt]
 ```
 
-We can see that each row from the CSV file has been converted into a map with keys matching the header row. A map is a key-value data structure similar to dictionaries in Python, objects in JavaScript, or hashes in Ruby. For example:
-
-```groovy
-// Groovy map
-def my_map = [id:'sampleA', character:'squirrel']
-println my_map.id  // Prints: sampleA
-```
-
-```python
-# Python equivalent dictionary
-my_map = {'id': 'sampleA', 'character': 'squirrel'}
-print(my_map['id'])  # Prints: sampleA
-```
-
+We can see that each row from the CSV file has been converted into a map with keys matching the header row.
 Each map entry corresponds to a column in our samplesheet:
 
 - `id`
