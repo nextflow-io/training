@@ -81,6 +81,8 @@ results
 Yes! We see three output files with different names, conveniently enough.
 (Spoiler: we changed the workflow to name the files differently.)
 
+If you haven't deleted the `results` folder when running Part 1 of this training, you'll see the `output.txt` file in there too.
+
 You can open each of them to satisfy yourself that they contain the appropriate greeting string.
 
 <details>
@@ -239,7 +241,7 @@ Let's break it down.
 workflow {
 
     // create a channel for inputs from a CSV file
-    greeting_ch = Channel.fromPath(params.greeting)
+    greeting_ch = Channel.fromPath(params.input)
                         .splitCsv()
                         .map { line -> line[0] }
 ```
@@ -473,7 +475,7 @@ process collectGreetings {
 workflow {
 
     // create a channel for inputs from a CSV file
-    greeting_ch = Channel.fromPath(params.greeting)
+    greeting_ch = Channel.fromPath(params.input)
                         .splitCsv()
                         .map { line -> line[0] }
 
@@ -552,7 +554,7 @@ This one is a bit more complicated and deserves its own discussion.
 
 #### 2.3.3. Operators provide additional wiring options
 
-What we're seeing in `convertToUpper.out.collect()` is the use of another operator (like `splitCsv` and `map` in the previous section), called `collect()`.
+What we're seeing in `convertToUpper.out.collect()` is the use of another operator (like `splitCsv` and `map` in the previous section), called `collect`.
 
 This operator is used to collect the outputs from multiple calls to the same process (as when we run `sayHello` on multiple greetings independently) and package them into a single channel element.
 
@@ -568,7 +570,7 @@ The downside is that it can sometimes make it harder to decipher what the pipeli
 
 ### 2.4. Use the graph preview
 
-One very helpful tool for understanding what a pipeline does, if it's not adequately documented, is the graph preview functionality available in VSCode. You can see this in the training environment by clicking on the small `DAG preview` link displayed just above the workflow block in any Nextflow script.
+One very helpful tool for understanding what a pipeline does, if it's not adequately documented, is the graph preview functionality available in VSCode thanks to the Nextflow extension. You can see this in the training environment by clicking on the small `DAG preview` link displayed just above the workflow block in any Nextflow script.
 
 <!-- TODO: add screenshot? -->
 
@@ -698,7 +700,7 @@ Learn to use containers for managing software dependencies.
 
 ## 4. Using containerized software
 
-So far the workflows we've been using as examples just needed to run very basic text procession operations using UNIX tools available in our environment.
+So far the workflows we've been using as examples just needed to run very basic text processing operations using UNIX tools available in our environment.
 
 However, real-world pipelines typically require specialized tools and packages that are not included by default in most environments.
 Usually, you'd need to install these tools, manage their dependencies, and resolve any conflicts.
@@ -953,7 +955,7 @@ The `cowpy` process, which wraps the cowpy command to generate ASCII art, is def
 <details>
   <summary>Code</summary>
 
-```groovy title="modules/cowpy.nf" linenums="1" hl_lines="7"
+```groovy title="modules/cowpy.nf" linenums="1"
 #!/usr/bin/env nextflow
 
 // Generate ASCII art with cowpy
