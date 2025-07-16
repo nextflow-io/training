@@ -364,6 +364,7 @@ Press **Ctrl+P** (or **Cmd+P**) and start typing "fast":
 VS Code will show you matching files. Select `modules/fastqc.nf` to jump there instantly. This is much faster than clicking through the file explorer when you know roughly what file you're looking for.
 
 Try this with other patterns:
+
 - Type "star" to find the STAR alignment module
 - Type "utils" to find utility functions
 - Type "config" to jump to configuration files
@@ -380,6 +381,7 @@ When working with modules, you often need to see both the main workflow and modu
 ![Split editor](img/split_editor.png)
 
 This is invaluable when:
+
 - Checking module interfaces while writing workflow calls
 - Comparing similar processes across different modules
 - Debugging data flow between workflow and modules
@@ -393,6 +395,7 @@ Try searching for `publishDir` across the workspace:
 ![Project search](img/project_search.png)
 
 This shows you every file that uses publish directories, helping you:
+
 - Understand output organization patterns
 - Find examples of specific directives
 - Ensure consistency across modules
@@ -414,6 +417,7 @@ Good code formatting isn't just about aesthetics - it makes complex workflows ea
 ### 6.1. Automatic Formatting in Action
 
 Open `basic_workflow.nf` and deliberately mess up the formatting:
+
 - Remove some indentation
 - Add extra spaces in random places
 - Break some lines awkwardly
@@ -421,6 +425,7 @@ Open `basic_workflow.nf` and deliberately mess up the formatting:
 Now press **Shift+Alt+F** (or **Shift+Option+F**) to auto-format:
 
 VS Code immediately:
+
 - Fixes indentation to show process structure clearly
 - Aligns similar elements consistently
 - Removes unnecessary whitespace
@@ -443,6 +448,7 @@ Select a block of code in your workflow and press **Ctrl+/** (or **Cmd+/**) to c
 ```
 
 This is perfect for:
+
 - Temporarily disabling parts of workflows during development
 - Adding explanatory comments to complex channel operations
 - Documenting workflow sections
@@ -462,6 +468,7 @@ This gives you a high-level overview of your workflow structure without getting 
 Place your cursor next to any `{` or `}` bracket and VS Code highlights the matching bracket. Use **Ctrl+Shift+\\** (or **Cmd+Shift+\\**) to jump between matching brackets.
 
 This is crucial for:
+
 - Understanding process boundaries
 - Finding missing or extra brackets
 - Navigating nested workflow structures
@@ -483,6 +490,7 @@ VS Code integrates well with your development workflow beyond just editing code.
 ### 7.1. Version Control Integration
 
 If your project is a git repository (as this is), VS Code shows:
+
 - Modified files with colored indicators
 - Git status in the status bar
 - Inline diff views
@@ -602,16 +610,19 @@ Putting it all together, here's how these IDE features work in practice:
 These high-impact shortcuts will give you the biggest productivity boost:
 
 **Navigation:**
+
 - `Ctrl+P` / `Cmd+P`: Quick file open
 - `Ctrl+Shift+O` / `Cmd+Shift+O`: Go to symbol
 - `F12` or `Ctrl+Click`: Go to definition
 
 **Editing:**
+
 - `Shift+Alt+F` / `Shift+Option+F`: Format document
 - `Ctrl+/` / `Cmd+/`: Toggle comments
 - `Ctrl+Shift+M` / `Cmd+Shift+M`: Problems panel
 
 **Development:**
+
 - `Ctrl+Shift+F` / `Cmd+Shift+F`: Search across files
 - `Shift+F12`: Find all references
 - `Ctrl+Shift+G` / `Cmd+Shift+G`: Source control panel
