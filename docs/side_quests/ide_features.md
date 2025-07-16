@@ -333,7 +333,7 @@ Use the Outline panel in the Explorer sidebar on the left for a persistent view 
 
 ![Outline panel](img/outline.png)
 
-### 4.6 DAG visualization
+### 4.6. DAG visualization
 
 VS Code's Nextflow extension can visualize your workflow as a Directed Acyclic Graph (DAG). This helps you understand the data flow and dependencies between processes. Open `complex_workflow.nf` and click the "Preview DAG" button above `workflow {` (the second `workflow` block in this file):
 
