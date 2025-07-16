@@ -643,15 +643,14 @@ Here's what's happening step by step:
 
 The `+` operator in Groovy merges two maps together. So if our original `meta` was `[id:sampleA, character:squirrel, lang:fr]`, then `meta + [lang_group:'romance']` creates a new map: `[id:sampleA, character:squirrel, lang:fr, lang_group:romance]`.
 
-The resulting channel elements maintain their `[meta, file]` structure, but the meta map now includes this new classification. This allows us to group samples by their language family later in the workflow.
+The resulting channel elements maintain their `[meta, file]` structure, but the meta map now includes this new classification.
 
 ### Takeaway
 
 In this section, you've learned:
 
 - **Merging on meta maps**: You used `join` to combine two channels based on their meta maps to maintain relationships across processes and channels
-- **Creating custom keys**: You created two new keys in your meta map, adding them with `meta + [new_key:value]`. One based on a computed value from a process, and one based on a condition you set in the `map` operator.
-- **Ternary operator**: You used the ternary operator to determine which language belongs to which group.
+- **Creating custom keys**: You created two new keys in your meta map, merging them with `meta + [new_key:value]` into the existing meta map. One based on a computed value from a process, and one based on a condition you set in the `map` operator.
 
 These allow you to associated new and existing meta data with files as you progress through your pipeline.
 
