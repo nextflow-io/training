@@ -2,8 +2,8 @@
 
 In any scientific analysis, we rarely work with just the raw data files. Each sample comes with its own additional information: what it is, where it came from, and what makes it special. This extra information is what we call sample-specific data.
 
-But in the world of workflows, we have shortened saying “sample-specific data” (which is a mouthful) too "metadata".
-Metadata is information that describes and gives context to your data: it tracks important details about samples and experimental conditions, and helps tailor analyses to each dataset’s unique characteristics.
+Instead of saying “sample-specific data” (which is a mouthful), it is often called "metadata" instead: data describing other data.
+Metadata tracks important details about samples and experimental conditions, and helps tailor analyses to each dataset’s unique characteristics.
 
 Think of it like a library catalog: while books contain the actual content (raw data), the catalog cards provide essential information about each book—when it was published, who wrote it, where to find it (metadata). In Nextflow pipelines, metadata can be used to:
 
@@ -154,8 +154,6 @@ This format makes it easy to access specific fields from each sample. For exampl
 
 Let's access a specific column, the `character` column, that we read in from the samplesheet, and print it. We can use the Nextflow `map` operator to iterate over each `row` in our samplesheet and return specific entry of our map object:
 
-<!-- TODO: is this too confusing: map operator vs MAP objectc? -->
-
 === "After"
 
     ```groovy title="main.nf" linenums="2" hl_lines="2-3"
@@ -179,16 +177,13 @@ Now that we've successfully read in the samplesheet and have access to the data 
 
 ### 1.2 Separate meta data and data
 
-In the samplesheet, we have both the input files and data about the input files (`id`, `character`), the meta data. As we progress through the workflow, we generate more meta data about each sample. To avoid having to keep track of how many fields we have at any point in time and making the input of our processes more robust, we can combine the meta information into its own key-value paired map.
+In the samplesheet, we have both the input files and data about the input files (`id`, `character`), the meta data.
+As we progress through the workflow, we generate more meta data about each sample.
+If we keep all fields as separate Channel elements, it quickly becomes messy: every time we add a new field, we’d have to update every downstream process to expect a different number of inputs, making the code brittle and hard to maintain..
 
-This separation makes it easier to:
+By grouping the metadata into its own key-value map, and keeping the file path as a distinct element, we make our workflow much more robust and flexible. We can add or remove metadata at any stage without having to rewrite process inputs. This approach also keeps process code cleaner and makes it easier to share and reuse code, both within a workflow and across different workflows.
 
-- Track sample information throughout the workflow
-- Add new metadata as you process samples
-- Keep process inputs/outputs clean and organized
-- Query and filter samples based on their properties
-
-Now let's use this and separate our metadata from the file path. We'll use the `map` operator to restructure our channel elements into a tuple consisting of the meta map and file:
+Let's use this and separate our metadata from the file path. We'll use the `map` operator to restructure our channel elements into a tuple consisting of the meta map and file:
 
 === "After"
 
@@ -229,12 +224,13 @@ Launching `main.nf` [lethal_booth] DSL2 - revision: 0d8f844c07
 [[id:sampleG, character:turtle], /workspaces/training/side-quests/metadata/data/ciao.txt]
 ```
 
-We have successfully separate our meta data into its own map to keep it next to the file data. Each of our channel elements now has the shape `[ meta,  file ]`.
+We have successfully separated our values into their own map to separate it from the file. Each of our channel elements now has the shape `[ meta,  file ]`. Each process that now uses the data can be of similar input shape even if we keep adding or removing fields.
 
 ### Takeaway
 
 In this section, you've learned:
 
+- **Why metadata is important**: Keeping metadata with your data preserves important sample information throughout the workflow.
 - **Reading in a samplesheet**: Using `splitCsv` to read CSV files with header information and transform rows into structured data
 - **Creating a meta map**: Separating metadata from file data using tuple structure `[ [id:value, ...], file ]`
 
@@ -283,7 +279,7 @@ Now we want to process our samples. These samples are language samples, but we d
     }
     ```
 
-The tool [langid](https://github.com/saffsd/langid.py) is a language identification tool. It is pre-trained on a set of languages. For a given phrase, it prints a language guess and a probability score for each guess to the console. In the `script` section, we are removing the probability score, clean up the string by removing a newline character and return the language guess. Since it is printed directly to the console, we are using Nextflow's [`stdout` output qualifier](https://www.nextflow.io/docs/latest/process.html#outputs), passing the string on as output.
+The tool [langid](https://github.com/saffsd/langid.py) is used for language identification. It comes pre-trained on a set of languages. For a given phrase, it outputs a language prediction and a probability score for each guess to the console. In the `script` section, we remove the probability score, clean up the string by removing newline characters, and return only the language prediction. Since the output is printed directly to the console, we use Nextflow’s [`stdout` output qualifier](https://www.nextflow.io/docs/latest/process.html#outputs) to capture and pass the string as output.
 
 Let's include the process, then run, and view it:
 
@@ -373,7 +369,7 @@ If we check the [`join`](https://www.nextflow.io/docs/latest/operator.html#join)
       }
     ```
 
-=== "Before"
+=== "Before" <!--TODO double check the code here before/after are the same-->
 
     ```groovy title="main.nf" linenums="20"
     workflow  {
@@ -475,6 +471,8 @@ It is becoming a bit hard to see, but if you look all the way on the right side,
 
     The `join` operator will discard any un-matched tuples. In this example, we made sure all samples were matched for tumor and normal but if this is not true you must use the parameter `remainder: true` to keep the unmatched tuples. Check the [documentation](https://www.nextflow.io/docs/latest/operator.html#join) for more details.
 
+<!-- TODO add a link to later training where joining and splitting is taught in more detail -->
+
 ### 2.3 Add the language prediction to the meta map
 
 Given that this is more data about the files, let's add it to our meta map. We can use the [`map` operator](https://www.nextflow.io/docs/latest/operator.html#map) again to create a new key `lang` and set the value to the predicted language:
@@ -553,7 +551,7 @@ The `map` operator takes each channel element and processes it to create a modif
 
 ### 2.4 Assign a language group using a ternary operator
 
-Alright, now that we have our language predictions, let's use the information to assign them into new groups. In our example data, we have provided data sets that belong either to `germanic` (either English or German) or `romanic` (French, Spanish, Italian) languages.
+Alright, now that we have our language predictions, let's use the information to assign them into new groups. In our example data, we have provided data sets that belong either to `germanic` (either English or German) or `romance` (French, Spanish, Italian) languages.
 
 We can use the `map` operator and an [ternary operator](https://groovy-lang.org/operators.html#_ternary_operator) to assign either group. The ternary operator, is a short cut to an if/else clause. It says:
 
@@ -589,7 +587,7 @@ if (<condition>){
                                       [ meta + [lang:lang], file ]
                                   }
                                   .map{ meta, file ->
-                                      def lang_group = (meta.lang.equals('de') || meta.lang.equals('en')) ? 'germanic' : 'romanic'
+                                      def lang_group = (meta.lang.equals('de') || meta.lang.equals('en')) ? 'germanic' : 'romance'
                                       [ meta + [lang_group:lang_group], file ]
                                   }
                                   .view()
@@ -632,22 +630,22 @@ nextflow run main.nf -resume
 Launching `main.nf` [wise_almeida] DSL2 - revision: 46778c3cd0
 
 [da/652cc6] IDENTIFY_LANGUAGE (7) [100%] 7 of 7, cached: 7 ✔
-[[id:sampleA, character:squirrel, lang:fr, lang_group:romanic], /workspaces/training/side-quests/metadata/data/bonjour.txt]
+[[id:sampleA, character:squirrel, lang:fr, lang_group:romance], /workspaces/training/side-quests/metadata/data/bonjour.txt]
 [[id:sampleB, character:tux, lang:de, lang_group:germanic], /workspaces/training/side-quests/metadata/data/guten_tag.txt]
 [[id:sampleC, character:sheep, lang:de, lang_group:germanic], /workspaces/training/side-quests/metadata/data/hallo.txt]
 [[id:sampleD, character:turkey, lang:en, lang_group:germanic], /workspaces/training/side-quests/metadata/data/hello.txt]
-[[id:sampleE, character:stegosaurus, lang:es, lang_group:romanic], /workspaces/training/side-quests/metadata/data/hola.txt]
-[[id:sampleF, character:moose, lang:fr, lang_group:romanic], /workspaces/training/side-quests/metadata/data/salut.txt]
-[[id:sampleG, character:turtle, lang:it, lang_group:romanic], /workspaces/training/side-quests/metadata/data/ciao.txt]
+[[id:sampleE, character:stegosaurus, lang:es, lang_group:romance], /workspaces/training/side-quests/metadata/data/hola.txt]
+[[id:sampleF, character:moose, lang:fr, lang_group:romance], /workspaces/training/side-quests/metadata/data/salut.txt]
+[[id:sampleG, character:turtle, lang:it, lang_group:romance], /workspaces/training/side-quests/metadata/data/ciao.txt]
 ```
 
 Let's understand how this transformation works. The `map` operator takes a closure that processes each element in the channel. Inside the closure, we're using a ternary operator to create a new language group classification.
 
-The ternary expression `(meta.lang.equals('de') || meta.lang.equals('en')) ? 'germanic' : 'romanic'` works like this:
+The ternary expression `(meta.lang.equals('de') || meta.lang.equals('en')) ? 'germanic' : 'romance'` works like this:
 
 - First, it evaluates the condition before the `?`: checks if the language is either German ('de') or English ('en')
 - If the condition is true (language is German or English), it returns 'germanic'
-- If the condition is false (any other language), it returns 'romanic'
+- If the condition is false (any other language), it returns 'romance'
 
 We store this result in the `lang_group` variable and then add it to our meta map using `meta + [lang_group:lang_group]`. The resulting channel elements maintain their `[meta, file]` structure, but the meta map now includes this new classification. This allows us to group samples by their language family later in the workflow.
 
@@ -665,7 +663,7 @@ These allow you to associated new and existing meta data with files as you progr
 
 <!-- ## 3. Filter data based on meta map values
 
-We can use the [`filter` operator](https://www.nextflow.io/docs/latest/operator.html#filter) to filter the data based on a condition. Let's say we only want to process romanic language samples further. We can do this by filtering the data based on the `lang_group` field. Let's create a new channel that only contains romanic languages and `view` it:
+We can use the [`filter` operator](https://www.nextflow.io/docs/latest/operator.html#filter) to filter the data based on a condition. Let's say we only want to process romance language samples further. We can do this by filtering the data based on the `lang_group` field. Let's create a new channel that only contains romance languages and `view` it:
 
 === "After"
 
@@ -685,12 +683,12 @@ We can use the [`filter` operator](https://www.nextflow.io/docs/latest/operator.
                                       [ meta + [lang:lang], file ]
                                   }
                                   .map{ meta, file ->
-                                      def lang_group = (meta.lang.equals('de') || meta.lang.equals('en')) ? 'germanic' : 'romanic'
+                                      def lang_group = (meta.lang.equals('de') || meta.lang.equals('en')) ? 'germanic' : 'romance'
                                       [ meta + [lang_group:lang_group], file ]
                                   }
 
-    romanic_languages = ch_language_groups.filter { meta, file ->
-                                            meta.lang_group == 'romanic'
+    romance_languages = ch_language_groups.filter { meta, file ->
+                                            meta.lang_group == 'romance'
                                           }
                                           .view()
     }
@@ -715,7 +713,7 @@ We can use the [`filter` operator](https://www.nextflow.io/docs/latest/operator.
                                       [ meta + [lang:lang], file ]
                                   }
                                   .map{ meta, file ->
-                                      def lang_group = (meta.lang.equals('de') || meta.lang.equals('en')) ? 'germanic' : 'romanic'
+                                      def lang_group = (meta.lang.equals('de') || meta.lang.equals('en')) ? 'germanic' : 'romance'
                                       [ meta + [lang_group:lang_group], file ]
                                   }
                                   .view()
@@ -725,28 +723,28 @@ We can use the [`filter` operator](https://www.nextflow.io/docs/latest/operator.
 
 Let's rerun it:
 
-```bash title="View romanic samples"
+```bash title="View romance samples"
 nextflow run main.nf -resume
 ```
 
-```console title="View romanic samples"
+```console title="View romance samples"
  N E X T F L O W   ~  version 24.10.4
 
 Launching `main.nf` [drunk_brattain] DSL2 - revision: 453fdd4e91
 
 [da/652cc6] IDENTIFY_LANGUAGE (7) [100%] 7 of 7, cached: 7 ✔
-[[id:sampleA, character:squirrel, lang:fr, lang_group:romanic], /workspaces/training/side-quests/metadata/data/bonjour.txt]
-[[id:sampleE, character:stegosaurus, lang:es, lang_group:romanic], /workspaces/training/side-quests/metadata/data/hola.txt]
-[[id:sampleF, character:moose, lang:fr, lang_group:romanic], /workspaces/training/side-quests/metadata/data/salut.txt]
-[[id:sampleG, character:turtle, lang:it, lang_group:romanic], /workspaces/training/side-quests/metadata/data/ciao.txt]
+[[id:sampleA, character:squirrel, lang:fr, lang_group:romance], /workspaces/training/side-quests/metadata/data/bonjour.txt]
+[[id:sampleE, character:stegosaurus, lang:es, lang_group:romance], /workspaces/training/side-quests/metadata/data/hola.txt]
+[[id:sampleF, character:moose, lang:fr, lang_group:romance], /workspaces/training/side-quests/metadata/data/salut.txt]
+[[id:sampleG, character:turtle, lang:it, lang_group:romance], /workspaces/training/side-quests/metadata/data/ciao.txt]
 ```
 
-We have successfully filtered the data to only include romanic samples. Let's recap how this works. The `filter` operator takes a closure that is applied to each element in the channel. If the closure returns `true`, the element is included in the output channel. If the closure returns `false`, the element is excluded from the output channel.
+We have successfully filtered the data to only include romance samples. Let's recap how this works. The `filter` operator takes a closure that is applied to each element in the channel. If the closure returns `true`, the element is included in the output channel. If the closure returns `false`, the element is excluded from the output channel.
 
-In this case, we want to keep only the samples where `meta.lang_group == 'romanic'`. In the closure, we first know that our channel elements are all of shape `[meta, file]` and we can then access the individual keys of the meta map. We then check if `meta.lang_group` is equal to `'romanic'`. If it is, the sample is included in the output channel. If it is not, the sample is excluded from the output channel.
+In this case, we want to keep only the samples where `meta.lang_group == 'romance'`. In the closure, we first know that our channel elements are all of shape `[meta, file]` and we can then access the individual keys of the meta map. We then check if `meta.lang_group` is equal to `'romance'`. If it is, the sample is included in the output channel. If it is not, the sample is excluded from the output channel.
 
 ```groovy title="main.nf" linenums="4"
-.filter { meta,file -> meta.lang_group == 'romanic' }
+.filter { meta,file -> meta.lang_group == 'romance' }
 ```
 
 ### Takeaway
@@ -755,7 +753,7 @@ In this section, you've learned:
 
 - How to use `filter` to select samples based on metadata
 
-We now have only the romanic language samples left and can process those further. Next we want to make characters say the phrases. -->
+We now have only the romance language samples left and can process those further. Next we want to make characters say the phrases. -->
 
 ---
 
@@ -799,7 +797,7 @@ Copy in the process before your workflow block:
 
 ### 4.1 Add a custom publishing location
 
-Let's run our romanic languages through `COWPY` and remove our `view` statement:
+Let's run our romance languages through `COWPY` and remove our `view` statement:
 
 === "After"
 
@@ -819,12 +817,12 @@ Let's run our romanic languages through `COWPY` and remove our `view` statement:
                                       [ meta + [lang:lang], file ]
                                   }
       //                             .map{ meta, file ->
-      //                                 def lang_group = (meta.lang.equals('de') || meta.lang.equals('en')) ? 'germanic' : 'romanic'
+      //                                 def lang_group = (meta.lang.equals('de') || meta.lang.equals('en')) ? 'germanic' : 'romance'
       //                                 [ meta + [lang_group:lang_group], file ]
       //                             }
 
-      // romanic_languages = ch_languages.filter { meta, file ->
-      //                                     meta.lang_group == 'romanic'
+      // romance_languages = ch_languages.filter { meta, file ->
+      //                                     meta.lang_group == 'romance'
       //                                 }
 
       COWPY(ch_languages)
@@ -850,12 +848,12 @@ Let's run our romanic languages through `COWPY` and remove our `view` statement:
                                     [ meta + [lang:lang], file ]
                                 }
     //                             .map{ meta, file ->
-    //                                 def lang_group = (meta.lang.equals('de') || meta.lang.equals('en')) ? 'germanic' : 'romanic'
+    //                                 def lang_group = (meta.lang.equals('de') || meta.lang.equals('en')) ? 'germanic' : 'romance'
     //                                 [ meta + [lang_group:lang_group], file ]
     //                             }
 
-    // romanic_languages = ch_languages.filter { meta, file ->
-    //                                     meta.lang_group == 'romanic'
+    // romance_languages = ch_languages.filter { meta, file ->
+    //                                     meta.lang_group == 'romance'
     //                                 }.view()
     }
     ```
@@ -1035,7 +1033,7 @@ This approach offers several advantages over hardcoding sample information:
 
 ```nextflow
 .map{ meta, file ->
-    def lang_group = (meta.lang.equals('de') || meta.lang.equals('en')) ? 'germanic' : 'romanic'
+    def lang_group = (meta.lang.equals('de') || meta.lang.equals('en')) ? 'germanic' : 'romance'
     [ meta + [lang_group:lang_group], file ]
 }
 ```
@@ -1044,7 +1042,7 @@ This approach offers several advantages over hardcoding sample information:
 
   ```nextflow
   .filter { meta, file ->
-    meta.lang_group == 'romanic'
+    meta.lang_group == 'romance'
   }
   ```
 
