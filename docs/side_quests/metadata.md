@@ -260,7 +260,7 @@ Now we want to process our samples. These samples are language samples, but we d
 
         script:
         """
-        langid < ${greeting} -l en,de,fr,es,it | sed -E "s/.*\\('([a-z]+)'.*/\\1/" | tr -d '\\n'
+        langid < ${file} -l en,de,fr,es,it | sed -E "s/.*\\('([a-z]+)'.*/\\1/" | tr -d '\\n'
         """
     }
 
@@ -345,6 +345,8 @@ This is a useful way to ensure the sample-specific information stays connected w
 
 ### 2.2 Associate the language prediction with the input file
 
+<!-- TODO: try and simplify this bit, at least we need a better explanation why we are joining stuff and not just passing it on -->
+
 At the moment, our sample files and their language prediction are separated in two different channels: `ch_samplesheet` and `ch_predictions`. But both channels have the same meta information associated with the interesting data points. We can use the meta map to combine our channels back together.
 
 Nextflow includes many methods for combining channels, but in this case the most appropriate operator is [`join`](https://www.nextflow.io/docs/latest/operator.html#join). If you are familiar with SQL, it acts like the `JOIN` operation, where we specify the key to join on and the type of join to perform.
@@ -369,7 +371,7 @@ If we check the [`join`](https://www.nextflow.io/docs/latest/operator.html#join)
       }
     ```
 
-=== "Before" <!--TODO double check the code here before/after are the same-->
+=== "Before"
 
     ```groovy title="main.nf" linenums="20"
     workflow  {
@@ -553,21 +555,7 @@ The `map` operator takes each channel element and processes it to create a modif
 
 Alright, now that we have our language predictions, let's use the information to assign them into new groups. In our example data, we have provided data sets that belong either to `germanic` (either English or German) or `romance` (French, Spanish, Italian) languages.
 
-We can use the `map` operator and an [ternary operator](https://groovy-lang.org/operators.html#_ternary_operator) to assign either group. The ternary operator, is a short cut to an if/else clause. It says:
-
-```console title="Ternary"
-variable = <condition> ? 'if-the-condition-is-true' : 'Default'
-```
-
-and is the same as:
-
-```console title="If/else"
-if (<condition>){
-  variable = 'if-the-condition-is-true'
-} else {
-  variable = 'Default'
-}
-```
+We can use the `map` operator to assign either group.
 
 === "After"
 
@@ -587,7 +575,12 @@ if (<condition>){
                                       [ meta + [lang:lang], file ]
                                   }
                                   .map{ meta, file ->
-                                      def lang_group = (meta.lang.equals('de') || meta.lang.equals('en')) ? 'germanic' : 'romance'
+
+                                      def lang_group = 'romance'
+                                      if (meta.lang.equals('de') || meta.lang.equals('en') ){
+                                          lang_group = 'germanic'
+                                      }
+
                                       [ meta + [lang_group:lang_group], file ]
                                   }
                                   .view()
@@ -639,15 +632,18 @@ Launching `main.nf` [wise_almeida] DSL2 - revision: 46778c3cd0
 [[id:sampleG, character:turtle, lang:it, lang_group:romance], /workspaces/training/side-quests/metadata/data/ciao.txt]
 ```
 
-Let's understand how this transformation works. The `map` operator takes a closure that processes each element in the channel. Inside the closure, we're using a ternary operator to create a new language group classification.
+Let's understand how this transformation works. The `map` operator takes a closure that processes each element in the channel. Inside the closure, we're using an if-clause to create a new language group classification.
 
-The ternary expression `(meta.lang.equals('de') || meta.lang.equals('en')) ? 'germanic' : 'romance'` works like this:
+Here's what's happening step by step:
 
-- First, it evaluates the condition before the `?`: checks if the language is either German ('de') or English ('en')
-- If the condition is true (language is German or English), it returns 'germanic'
-- If the condition is false (any other language), it returns 'romance'
+- Extract existing metadata: We access `meta.lang` (the language we predicted earlier) from the existing meta map
+- Apply conditional logic: We use an if-clause to determine the language group based on the language
+- Create a new field: We store the result in a `lang_group` variable
+- Merge with existing metadata: We use `meta + [lang_group:lang_group]` to combine the existing meta map with our new field
 
-We store this result in the `lang_group` variable and then add it to our meta map using `meta + [lang_group:lang_group]`. The resulting channel elements maintain their `[meta, file]` structure, but the meta map now includes this new classification. This allows us to group samples by their language family later in the workflow.
+The `+` operator in Groovy merges two maps together. So if our original `meta` was `[id:sampleA, character:squirrel, lang:fr]`, then `meta + [lang_group:'romance']` creates a new map: `[id:sampleA, character:squirrel, lang:fr, lang_group:romance]`.
+
+The resulting channel elements maintain their `[meta, file]` structure, but the meta map now includes this new classification. This allows us to group samples by their language family later in the workflow.
 
 ### Takeaway
 
