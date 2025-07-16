@@ -207,7 +207,7 @@ So what about all those other files?
 
 These are the helper and log files that Nextflow wrote as part of the task execution:
 
-- **`.command.begin`**: Metadata related to the beginning of the execution of the process call
+- **`.command.begin`**: Sentinel file created as soon as the task is launched.
 - **`.command.err`**: Error messages (`stderr`) emitted by the process call
 - **`.command.log`**: Complete log output emitted by the process call
 - **`.command.out`**: Regular output (`stdout`) by the process call
@@ -348,12 +348,12 @@ The `output` definition includes the `path` qualifier, which tells Nextflow this
     This is necessary for verifying that the command was executed successfully and for passing the output to downstream processes if needed.
     Output produced that doesn't match what is declared in the output block will not be passed to downstream processes.
 
-In a real-world pipeline, a process usually contains additional blocks such as directives and inputs, which we'll introduce in a little bit.
+In a real-world pipeline, a process usually contains additional information uch as process directives, which we'll introduce in a little bit.
 
 ### 2.3. The `workflow` definition
 
 The second block of code describes the **workflow** itself.
-The workflow definition starts with the keyword `workflow`, followed by an optional name, then the workflow body delimited by curly braces.
+The workflow definition starts with the keyword `workflow`, followed by an optional name, then the workflow body delimited by curly braces. You can tell Nextflow to use a specific workflow by providing the argument `-entry workflow_name`. All pipelines must have a nameless workflow, also known as the default entry workflow, for when you run the pipeline without providing the `-entry` argument.
 
 Here we have a **workflow** that consists of one call to the `sayHello` process, which takes an input, `params.greeting`, which holds the value we gave to the `--greeting` parameter.
 
@@ -414,7 +414,7 @@ There are two key advantages to doing this:
 To use it, simply add `-resume` to your command and run it:
 
 ```bash
-nextflow run hello-world-plus.nf -resume
+nextflow run 1-hello.nf --greeting 'Hello World!' -resume
 ```
 
 The console output should look similar.
@@ -425,14 +425,14 @@ The console output should look similar.
 ```console linenums="1"
  N E X T F L O W   ~  version 25.04.3
 
-Launching `hello-world-plus.nf` [golden_cantor] DSL2 - revision: 35bd3425e5
+Launching `1-hello.nf` [tiny_noyce] DSL2 - revision: c33d41f479
 
-[62/49a1f8] sayHello | 1 of 1, cached: 1 ✔
+[a3/7be2fa] process > sayHello [100%] 1 of 1, cached: 1 ✔
 ```
 
 </details>
 
-Look for the `cached:` bit that has been added in the process status line (line 5), which means that Nextflow has recognized that it has already done this work and simply re-used the result from the previous successful run.
+Look for the `cached:` bit that has been added in the process status line (line 5), which means that Nextflow has recognized that it has already done this work and simply reused the result from the previous successful run.
 
 You can also see that the work subdirectory hash is the same as in the previous run.
 Nextflow is literally pointing you to the previous execution and saying "I already did that over there."

@@ -1,6 +1,6 @@
 # Orientation
 
-This orientation assumes you have already opened the training environment by clicking on the "Open in Github Codespaces" button.
+This orientation assumes you have already opened the training environment by clicking on the "Open in GitHub Codespaces" button.
 If not, please do so now, ideally in a second browser window or tab so you can refer back to these instructions.
 
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/nextflow-io/training?quickstart=1&ref=master)
@@ -24,7 +24,7 @@ cd nextflow-run/
 
 !!!tip
 
-    If for whatever reason you move out of this directory, you can always use the full path to return to it, assuming you're running this within the Github Codespaces training environment:
+    If for whatever reason you move out of this directory, you can always use the full path to return to it, assuming you're running this within the GitHub Codespaces training environment:
 
     ```bash
     cd /workspaces/training/nextflow-run
