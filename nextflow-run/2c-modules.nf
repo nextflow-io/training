@@ -29,4 +29,3 @@ workflow {
     // emit a message about the size of the batch
     sayHello.out.count().view { "There were $it greetings in this batch" }
 }
-
