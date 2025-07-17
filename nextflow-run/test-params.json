@@ -1,4 +1,4 @@
 {
-    "greet": "greetings.csv",
+    "input": "greetings.csv",
     "character": "stegosaurus"
 }

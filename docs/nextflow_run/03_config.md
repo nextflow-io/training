@@ -86,14 +86,14 @@ Now we add the URI to the `cowpy` process definition using the `conda` directive
         publishDir 'results', mode: 'copy'
     ```
 
-To be clear, we're not _replacing_ the `docker` directive, we're _adding_ an alternative option.
+To be clear, we're not _replacing_ the `container` directive, we're _adding_ an alternative option.
 
 ### 1.3. Run the workflow to verify that it can use Conda
 
 Let's try it out.
 
 ```bash
-nextflow run 3-main.nf --inputs greetings.csv --character turkey
+nextflow run 3-main.nf --input greetings.csv --character turkey
 ```
 
 This should work without error.
@@ -273,7 +273,7 @@ Conveniently, Nextflow includes built-in tools for doing this, and will happily 
 To do so, add `-with-report <filename>.html` to your command line.
 
 ```bash
-nextflow run 3-main.nf -with-report report-config-1.html
+nextflow run 3-main.nf --input greetings.csv --character turkey -with-report report-config-1.html
 ```
 
 The report is an html file, which you can download and open in your browser. You can also right click it in the file explorer on the left and click on `Show preview` in order to view it in the training environment.
@@ -395,7 +395,7 @@ It is possible to specify default values in the workflow script itself, for exam
 /*
  * Pipeline parameters
  */
-params.greeting = 'greetings.csv'
+params.input = 'greetings.csv'
 params.character = 'turkey'
 ```
 
@@ -415,7 +415,7 @@ We provide an example parameter file in the current directory, called `test-para
 
 ```json title="test-params.json" linenums="1"
 {
-  "greeting": "greetings.csv",
+  "input": "greetings.csv",
   "character": "stegosaurus"
 }
 ```
@@ -598,7 +598,7 @@ profiles {
         ]
     }
     test {
-        params.greeting = 'greetings.csv'
+        params.input = 'greetings.csv'
         params.character = 'turkey'
     }
 }
