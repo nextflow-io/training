@@ -406,26 +406,9 @@ params.character = 'turkey'
 ```
 
 <details>
-  <summary>Code</summary>
+  <summary>Code (full file)</summary>
 
-```groovy title="nextflow.config" linenums="1" hl="12-16"
-docker.enabled = false
-conda.enabled = true
-
-process {
-    memory = 1.GB
-    withName: 'cowpy' {
-        memory = 2.GB
-        cpus = 2
-    }
-}
-
-/*
- * Pipeline parameters
- */
-params.input = 'greetings.csv'
-params.character = 'turkey'
-```
+TEMP TEST CONTENT
 
 </details>
 
