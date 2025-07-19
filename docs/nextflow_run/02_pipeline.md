@@ -32,7 +32,7 @@ Note that the numbers are not meaningful, they are just there for illustrative p
 And we've written an improved version of the original workflow, now called `2a-inputs.nf`, that will read in the CSV file, extract the greetings and write each of them to a separate file.
 
 <figure class="excalidraw">
---8<-- "docs/nextflow-run/img/hello-pipeline-multi-inputs.svg"
+--8<-- "docs/nextflow_run/img/hello-pipeline-multi-inputs.svg"
 </figure>
 
 Let's run the workflow first, and we'll take a look at the relevant Nextflow code afterward.
@@ -338,7 +338,7 @@ To that end, we provide you with an example workflow that chains together three 
 Specifically, we made an expanded version of the workflow called `2b-multistep.nf` that takes each input greeting, converts it to uppercase, then collects all the uppercased greetings into a single output file.
 
 <figure class="excalidraw">
---8<-- "docs/nextflow-run/img/hello-pipeline-multi-steps.svg"
+--8<-- "docs/nextflow_run/img/hello-pipeline-multi-steps.svg"
 </figure>
 
 As previously, we'll run the workflow first then look at the code to see what's changed.
@@ -565,13 +565,13 @@ This operator is used to collect the outputs from multiple calls to the same pro
 This allows us to take all the separate uppercased greetings produced by the second step of the workflow and feed them all together to a single call in the third step of the pipeline.
 
 <figure class="excalidraw">
---8<-- "docs/nextflow-run/img/with-collect-operator.svg"
+--8<-- "docs/nextflow_run/img/with-collect-operator.svg"
 </figure>
 
 If we didn't apply `collect()` to the output of `convertToUpper()` before feeding it to `collectGreetings()`, Nextflow would simply run `collectGreetings()` independently on each greeting, which would not achieve our goal.
 
 <figure class="excalidraw">
---8<-- "docs/nextflow-run/img/without-collect-operator.svg"
+--8<-- "docs/nextflow_run/img/without-collect-operator.svg"
 </figure>
 
 There are many other [operators](https://www.nextflow.io/docs/latest/reference/operator.html#operator-page) available to apply transformations to the contents of channels between process calls.
@@ -584,7 +584,7 @@ The downside is that it can sometimes make it harder to decipher what the pipeli
 One very helpful tool for understanding what a pipeline does, if it's not adequately documented, is the graph preview functionality available in VSCode thanks to the Nextflow extension. You can see this in the training environment by clicking on the small `DAG preview` link displayed just above the workflow block in any Nextflow script.
 
 <figure class="excalidraw">
---8<-- "docs/nextflow-run/img/dag-workflow.svg"
+--8<-- "docs/nextflow_run/img/dag-workflow.svg"
 </figure>
 
 This does not show operators, but it does give a useful representation of how process calls are connected and what are their inputs.
@@ -932,7 +932,7 @@ We just need to specify a container for each process.
 To demonstrate how this work, we made another version of our workflow that runs `cowpy` on the file of collected greetings produced in the third step.
 
 <figure class="excalidraw">
---8<-- "docs/nextflow-run/img/hello-pipeline-cowpy.svg"
+--8<-- "docs/nextflow_run/img/hello-pipeline-cowpy.svg"
 </figure>
 
 This should output a file containing the ASCII art with the three greetings in the speech bubble.
