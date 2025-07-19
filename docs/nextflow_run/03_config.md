@@ -401,7 +401,7 @@ Open the `nextflow.config` file and add the following lines to it:
 /*
  * Pipeline parameters
  */
-params.input = '../greetings.csv'
+params.input = 'greetings.csv'
 params.character = 'turkey'
 ```
 
@@ -443,9 +443,13 @@ This will produce the same output, but is more convenient to type, especially wh
 ```console linenums="1"
  N E X T F L O W   ~  version 25.04.3
 
-Launching `3-main.nf` [] DSL2 - revision: bc8e1b2726
+Launching `3-main.nf` [wise_mahavira] DSL2 - revision: 356df0818d
 
-UPDATE OUTPUT
+executor >  local (8)
+[2e/d12fcb] sayHello (2)       [100%] 3 of 3 ✔
+[a0/5799b6] convertToUpper (3) [100%] 3 of 3 ✔
+[db/d3bbb6] collectGreetings   [100%] 1 of 1 ✔
+[a9/f75d13] cowpy              [100%] 1 of 1 ✔
 ```
 
 </details>
@@ -456,7 +460,33 @@ The final output file should contain the turkey character saying the greetings.
   <summary>File contents</summary>
 
 ```console title="results/cowpy-COLLECTED-output.txt"
-UPDATE WITH TURKEY
+ _________
+/ HELLO   \
+| BONJOUR |
+\ HOLà    /
+ ---------
+  \                                  ,+*^^*+___+++_
+   \                           ,*^^^^              )
+    \                       _+*                     ^**+_
+     \                    +^       _ _++*+_+++_,         )
+              _+^^*+_    (     ,+*^ ^          \+_        )
+             {       )  (    ,(    ,_+--+--,      ^)      ^\
+            { (\@)    } f   ,(  ,+-^ __*_*_  ^^\_   ^\       )
+           {:;-/    (_+*-+^^^^^+*+*<_ _++_)_    )    )      /
+          ( /  (    (        ,___    ^*+_+* )   <    <      \
+           U _/     )    *--<  ) ^\-----++__)   )    )       )
+            (      )  _(^)^^))  )  )\^^^^^))^*+/    /       /
+          (      /  (_))_^)) )  )  ))^^^^^))^^^)__/     +^^
+         (     ,/    (^))^))  )  ) ))^^^^^^^))^^)       _)
+          *+__+*       (_))^)  ) ) ))^^^^^^))^^^^^)____*^
+          \             \_)^)_)) ))^^^^^^^^^^))^^^^)
+           (_             ^\__^^^^^^^^^^^^))^^^^^^^)
+             ^\___            ^\__^^^^^^))^^^^^^^^)\\
+                  ^^^^^\uuu/^^\uuu/^^^^\^\^\^\^\^\^\^\
+                     ___) >____) >___   ^\_\_\_\_\_\_\)
+                    ^^^//\\_^^//\\_^       ^(\_\_\_\)
+                      ^^^ ^^ ^^^ ^
+
 ```
 
 </details>
@@ -479,12 +509,12 @@ cd tux-run
 Then, create a blank configuration file in that directory:
 
 ```bash
-touch tux-run/nextflow.config
+touch nextflow.config
 ```
 
 Now open the new file and add the parameters you want to customize:
 
-```groovy title="tux-run/nextflow.config
+```groovy title="tux-run/nextflow.config" linenums="1"
 params.input = '../greetings.csv'
 params.character = 'tux'
 ```
@@ -497,14 +527,21 @@ We can now run our pipeline from within our new working directory:
 nextflow run ../3-main.nf
 ```
 
-This will create a completely new set of directories under `tux-run/` including `tux-run/work/` and `tux-run/results/`.
+This will create a new set of directories under `tux-run/` including `tux-run/work/` and `tux-run/results/`.
 
 <details>
   <summary>Command output</summary>
 
 ```console linenums="1"
+ N E X T F L O W   ~  version 25.04.3
 
-UPDATE OUTPUT
+Launching `../3-main.nf` [trusting_escher] DSL2 - revision: 356df0818d
+
+executor >  local (8)
+[59/b66913] sayHello (2)       [100%] 3 of 3 ✔
+[ad/f06364] convertToUpper (3) [100%] 3 of 3 ✔
+[10/714895] collectGreetings   [100%] 1 of 1 ✔
+[88/3ece98] cowpy              [100%] 1 of 1 ✔
 ```
 
 </details>
@@ -517,7 +554,21 @@ The final output file should contain the tux character saying the greetings.
   <summary>File contents</summary>
 
 ```console title="results/cowpy-COLLECTED-output.txt"
-UPDATE WITH TUX
+ _________
+/ HELLO   \
+| BONJOUR |
+\ HOLà    /
+ ---------
+   \
+    \
+        .--.
+       |o_o |
+       |:_/ |
+      //   \ \
+     (|     | )
+    /'\_   _/`\
+    \___)=(___/
+
 ```
 
 </details>
@@ -529,6 +580,8 @@ Make sure to change back to the previous directory before moving to the next sec
 ```bash
 cd ..
 ```
+
+Now let's look at another useful way to set parameter values.
 
 ### 4.3. Specify parameters using a parameter file
 
@@ -724,7 +777,7 @@ profiles {
     }
     test {
         params.input = 'greetings.csv'
-        params.character = 'cow'
+        params.character = 'turtle'
     }
 }
 ```
@@ -764,7 +817,35 @@ executor >  local (8)
 
 </details>
 
-<!-- improve by showing and varying the outputs for all these maybe -->
+The final output file should contain the turtle character saying the greetings.
+
+<details>
+  <summary>File contents</summary>
+
+```console title="results/cowpy-COLLECTED-output.txt"
+ _________
+/ BONJOUR \
+| HOLà    |
+\ HELLO   /
+ ---------
+    \                                  ___-------___
+     \                             _-~~             ~~-_
+      \                         _-~                    /~-_
+             /^\__/^\         /~  \                   /    \
+           /|  O|| O|        /      \_______________/        \
+          | |___||__|      /       /                \          \
+          |          \    /      /                    \          \
+          |   (_______) /______/                        \_________ \
+          |         / /         \                      /            \
+           \         \^\\         \                  /               \     /
+             \         ||           \______________/      _-_       //\__//
+               \       ||------_-~~-_ ------------- \ --/~   ~\    || __/
+                 ~-----||====/~     |==================|       |/~~~~~
+                  (_(__/  ./     /                    \_\      \.
+                         (_(___/                         \_____)_)
+```
+
+</details>
 
 This means that as long as we distribute any test data files with the workflow code, anyone can quickly try out the workflow without having to supply their own inputs via the command line or a parameter file.
 
@@ -788,7 +869,7 @@ This allows you to find out what settings will be used without having to launch 
 
 #### 5.5.1. Resolve the default configuration
 
-Run this command to resolve the configuration given only parameters applied by default.
+Run this command to resolve the configuration that would be applied by default.
 
 ```bash
 nextflow config
@@ -798,12 +879,25 @@ nextflow config
   <summary>Command output</summary>
 
 ```groovy
+docker {
+   enabled = false
+}
+
+conda {
+   enabled = true
+}
+
 process {
    memory = '1 GB'
    withName:cowpy {
       memory = '2 GB'
       cpus = 2
    }
+}
+
+params {
+   input = 'greetings.csv'
+   character = 'turkey'
 }
 ```
 
@@ -821,6 +915,14 @@ nextflow config -profile my_laptop,test
   <summary>Command output</summary>
 
 ```groovy
+docker {
+   enabled = true
+}
+
+conda {
+   enabled = true
+}
+
 process {
    memory = '1 GB'
    withName:cowpy {
@@ -830,13 +932,9 @@ process {
    executor = 'local'
 }
 
-docker {
-   enabled = true
-}
-
 params {
-   greeting = 'greetings.csv'
-   character = 'turkey'
+   input = 'greetings.csv'
+   character = 'turtle'
 }
 ```
 
@@ -853,3 +951,10 @@ More generally, you know how to configure your workflow executions to suit diffe
 
 Give yourself a big pat on the back!
 You know everything you need to know to get started running and managing Nextflow pipelines.
+
+That concludes this course, but if you're eager to keep learning, we have two main recommendations:
+
+- If you want to dig deeper into developing your own pipelines, have a look at [Hello Nextflow](../hello_nextflow/index.md), a course for beginners that covers the same general progression as this one but goes into much more detail about channels and operators.
+- If you would like to continue learning how to run Nextflow pipelines without going deeper into the code, have a look at the first part of [Hello nf-core](../hello_nf-core/index.md), which introduces the tooling for finding and running pipelines from the hugely popular [nf-core](https://nf-co.re/) project.
+
+Have fun!

@@ -61,7 +61,7 @@ If you run this inside `nextflow-run`, you should see the following output:
 │   ├── cowpy.nf
 │   └── sayHello.nf
 ├── nextflow.config
-└── test-params.json
+└── test-params.yaml
 
 1 directory, 12 files
 ```
@@ -75,6 +75,6 @@ If you run this inside `nextflow-run`, you should see the following output:
 
 - **The file `greetings.csv`** contains input data we'll use in most of the course. It is described in Part 2, when we introduce it for the first time.
 
-- **The file `test-params.json`** is a file we'll use in Part 3. You can ignore it for now.
+- **The file `test-params.yaml`** is a file we'll use in Part 3. You can ignore it for now.
 
 **Now, to begin the course, click on the arrow in the bottom right corner of this page.**

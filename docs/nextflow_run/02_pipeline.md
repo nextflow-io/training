@@ -604,6 +604,10 @@ So far, all the workflows we've looked at have consisted of one single workflow 
 However, real-world pipelines typically benefit from being _modularized_, meaning that the code is split into different files.
 This can make their development and maintenance more efficient and sustainable.
 
+<figure class="excalidraw">
+    --8<-- "docs/side_quests/img/nf-core/nested.excalidraw.svg"
+</figure>
+
 Here we are going to demonstrate the most common form of code modularity in Nextflow, which is the use of **modules**.
 
 In Nextflow, a **module** is a single process definition that is encapsulated by itself in a standalone code file.
