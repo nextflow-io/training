@@ -406,7 +406,7 @@ params.character = 'turkey'
 ```
 
 <details>
-  <summary>Code (full file)</summary>
+  <summary>Code</summary>
 
 ```groovy title="nextflow.config" linenums="1" hl="12-16"
 docker.enabled = false
