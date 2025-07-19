@@ -93,7 +93,8 @@ To be clear, we're not _replacing_ the `container` directive, we're _adding_ an 
 Let's try it out.
 
 ```bash
-nextflow run 3-main.nf --input greetings.csv --character turkey
+params.input = 'greetings.csv'
+params.character = 'turkey'
 ```
 
 This should work without error.
@@ -273,7 +274,7 @@ Conveniently, Nextflow includes built-in tools for doing this, and will happily 
 To do so, add `-with-report <filename>.html` to your command line.
 
 ```bash
-nextflow run 3-main.nf --input greetings.csv --character turkey -with-report report-config-1.html
+nextflow run 3-main.nf -with-report report-config-1.html
 ```
 
 The report is an html file, which you can download and open in your browser. You can also right click it in the file explorer on the left and click on `Show preview` in order to view it in the training environment.
@@ -389,7 +390,6 @@ However, many real-world workflows will have many more parameters that may be ru
 
 It is possible to specify default values in the workflow script itself, for example you may see something like this in the main body of the workflow:
 
-<!-- Considering actually adding this in 3-main.nf -->
 
 ```groovy title="Syntax example"
 /*
@@ -401,23 +401,61 @@ params.character = 'turkey'
 
 The same syntax can also be used to store parameter defaults in the `nextflow.config` file.
 
-If you were to add this to either, you could leave out those parameters from your command-line and Nextflow would use those default values.
-You could then override those values by specifying the parameters in the command-line.
+A clean way to over-ride those defaults without modifying the original script file to create a new `nextflow.config` file in a run-specific working directory. Let's start by creating a new directory:
+
+```bash
+mkdir -p tux-run
+cd tux-run
+```
+
+Now let's add a parameters we want to customize to a `nextflow.config` file in our `tux-run` directory.
+
+```groovy title="tux-run/nextflow.config
+params.input = '../greetings.csv'
+params.character = 'tux'
+```
+
+Now let's run our pipeline from our new working directory:
+
+```bash
+nextflow run ../3-main.nf
+```
+
+```console 
+Nextflow 25.04.6 is available - Please consider updating your version to it
+
+ N E X T F L O W   ~  version 25.04.5
+
+Launching `../3-main.nf` [awesome_meninsky] DSL2 - revision: e8b1665370
+
+executor >  local (8)
+[75/9774ec] sayHello (3)       | 3 of 3 ✔
+[c3/fd4468] convertToUpper (1) | 3 of 3 ✔
+[a2/c451cf] collectGreetings   | 1 of 1 ✔
+[7f/c0702b] cowpy              | 1 of 1 ✔
+```
+
+Nextflow combines the `nextflow.config` in our current directory with the `nextflow.config` in our pipeline's directory and overrides the turkey default character with the tux character.
+
+Now let's change back to our previous directory.
+
+```bash
+cd ..
+```
+
 
 ### 4.2. Using a parameter file
 
 Nextflow allows us to specify parameters via a parameter file in JSON format, which makes it very convenient to manage and distribute alternative sets of default values, for example, as well as run-specific parameter values.
 
-We provide an example parameter file in the current directory, called `test-params.json`, which contains a key-value pair for each of the inputs our workflow expects.
+We provide an example parameter file in the current directory, called `test-params.yaml`, which contains a key-value pair for each of the inputs our workflow expects.
 
 <details>
   <summary>File contents</summary>
 
-```json title="test-params.json" linenums="1"
-{
-  "input": "greetings.csv",
-  "character": "stegosaurus"
-}
+```yaml title="test-params.yaml" linenums="1"
+input: "greetings.csv"
+character: "stegosaurus"
 ```
 
 </details>
@@ -425,7 +463,7 @@ We provide an example parameter file in the current directory, called `test-para
 To run the workflow with this parameter file, simply add `-params-file <filename>` to the base command.
 
 ```bash
-nextflow run 3-main.nf -params-file test-params.json
+nextflow run 3-main.nf -params-file test-params.yaml
 ```
 
 This should run without error.
@@ -532,7 +570,7 @@ To specify a profile in our Nextflow command line, we use the `-profile` argumen
 Let's try running the workflow with the `my_laptop` configuration.
 
 ```bash
-nextflow run 3-main.nf --input greetings.csv --character turkey -profile my_laptop
+nextflow run 3-main.nf -profile my_laptop
 ```
 
 This should run without error and produce the same results as previously.
@@ -599,7 +637,7 @@ profiles {
     }
     test {
         params.input = 'greetings.csv'
-        params.character = 'turkey'
+        params.character = 'cow'
     }
 }
 ```

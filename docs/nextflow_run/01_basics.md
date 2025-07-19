@@ -215,7 +215,7 @@ These are the helper and log files that Nextflow wrote as part of the task execu
 - **`.command.sh`**: The command that was actually run by the process call
 - **`.exitcode`**: The exit code resulting from the command
 
-The `.command.sh` file is especially useful because it tells you what command Nextflow actually executed.
+The `.command.sh` file is especially useful because it shows you the main command Nextflow executed not including all the bookkeeping and task/environment setup.
 
 <details>
   <summary>File contents</summary>
@@ -343,7 +343,7 @@ The `output` definition includes the `path` qualifier, which tells Nextflow this
 !!! Tip
 
     The output definition does not _determine_ what output will be created.
-    It simply _declares_ what is the expected output, so that Nextflow can look for it once execution is complete.
+    It simply _declares_ where to find the expected output file(s), so that Nextflow can look for it once execution is complete.
 
     This is necessary for verifying that the command was executed successfully and for passing the output to downstream processes if needed.
     Output produced that doesn't match what is declared in the output block will not be passed to downstream processes.
@@ -353,7 +353,7 @@ In a real-world pipeline, a process usually contains additional information uch 
 ### 2.3. The `workflow` definition
 
 The second block of code describes the **workflow** itself.
-The workflow definition starts with the keyword `workflow`, followed by an optional name, then the workflow body delimited by curly braces. You can tell Nextflow to use a specific workflow by providing the argument `-entry workflow_name`. All pipelines must have a nameless workflow, also known as the default entry workflow, for when you run the pipeline without providing the `-entry` argument.
+The workflow definition starts with the keyword `workflow`, followed by an optional name, then the workflow body delimited by curly braces.
 
 Here we have a **workflow** that consists of one call to the `sayHello` process, which takes an input, `params.greeting`, which holds the value we gave to the `--greeting` parameter.
 

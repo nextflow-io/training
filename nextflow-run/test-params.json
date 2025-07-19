@@ -1,4 +1,2 @@
-{
-    "input": "greetings.csv",
-    "character": "stegosaurus"
-}
+input: "greetings.csv",
+character: "stegosaurus"

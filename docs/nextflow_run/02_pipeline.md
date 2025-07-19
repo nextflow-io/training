@@ -561,9 +561,21 @@ This operator is used to collect the outputs from multiple calls to the same pro
 This allows us to take all the separate uppercased greetings produced by the second step of the workflow and feed them all together to a single call in the third step of the pipeline.
 If we didn't apply `collect()` to the output of `convertToUpper()` before feeding it to `collectGreetings()`, Nextflow would simply run `collectGreetings()` independently on each greeting, which would not achieve our goal.
 
-<!-- TODO: add diagram of operations -->
+```mermaid
+flowchart TB
+    subgraph " "
+    subgraph params
+    v0["input"]
+    end
+    v2([sayHello])
+    v3([convertToUpper])
+    v4([collectGreetings])
+    v0 --> v2
+    v2 --> v3
+    v3 --> v4
+    end
 
-There are many other operators available to apply transformations to the contents of channels between process calls.
+There are many other [operators](https://www.nextflow.io/docs/latest/reference/operator.html#operator-page) available to apply transformations to the contents of channels between process calls.
 
 This gives pipeline developers a lot of flexibility for customizing the flow logic of their pipeline.
 The downside is that it can sometimes make it harder to decipher what the pipeline is doing.
@@ -1106,9 +1118,7 @@ Open the `.command.run` file and search for `nxf_launch` to find the launch comm
 <details>
   <summary>Partial file contents</summary>
 
-````console title="work/7f/caf7189fca6c56ba627b75749edcb3/.command.run"
-
-```bash
+```bash title="work/7f/caf7189fca6c56ba627b75749edcb3/.command.run"
 nxf_launch() {
     docker run -i --cpu-shares 1024 -e "NXF_TASK_WORKDIR" -v /workspaces/training/hello-nextflow/work:/workspaces/training/hello-nextflow/work -w "$NXF_TASK_WORKDIR" --name $NXF_BOXID community.wave.seqera.io/library/pip_cowpy:131d6a1b707a8e65 /bin/bash -ue /workspaces/training/nextflow-run/work/7f/caf7189fca6c56ba627b75749edcb3/.command.sh
 }

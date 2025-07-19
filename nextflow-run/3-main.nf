@@ -1,5 +1,8 @@
 #!/usr/bin/env nextflow
 
+// Default parameters
+params.input = 'greetings.csv'
+params.character = 'turkey'
 // Include modules
 include { sayHello } from './modules/sayHello.nf'
 include { convertToUpper } from './modules/convertToUpper.nf'
