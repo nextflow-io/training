@@ -409,21 +409,14 @@ params.character = 'turkey'
   <summary>Code (full file)</summary>
 
 ```groovy title="nextflow.config" linenums="1"
-process sayHello {
+docker.enabled = false
+conda.enabled = true
 
-    publishDir 'results', mode: 'copy'
-
-    input:
-        val greeting
-
-    output:
-        path "${greeting}-output.txt"
-
-    script:
-    """
-    echo '$greeting' > '$greeting-output.txt'
-    """
-}
+/*
+ * Pipeline parameters
+ */
+params.input = '../greetings.csv'
+params.character = 'turkey'
 ```
 
 </details>
