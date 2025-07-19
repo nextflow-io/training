@@ -423,7 +423,7 @@ process {
 /*
  * Pipeline parameters
  */
-params.input = '../greetings.csv'
+params.input = 'greetings.csv'
 params.character = 'turkey'
 ```
 
