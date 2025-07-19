@@ -408,7 +408,23 @@ params.character = 'turkey'
 <details>
   <summary>Code (full file)</summary>
 
-TEMP TEST CONTENT
+```groovy title="nextflow.config" linenums="1"
+process sayHello {
+
+    publishDir 'results', mode: 'copy'
+
+    input:
+        val greeting
+
+    output:
+        path "${greeting}-output.txt"
+
+    script:
+    """
+    echo '$greeting' > '$greeting-output.txt'
+    """
+}
+```
 
 </details>
 
