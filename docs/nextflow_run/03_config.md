@@ -412,6 +412,14 @@ params.character = 'turkey'
 docker.enabled = false
 conda.enabled = true
 
+process {
+    memory = 1.GB
+    withName: 'cowpy' {
+        memory = 2.GB
+        cpus = 2
+    }
+}
+
 /*
  * Pipeline parameters
  */
