@@ -574,6 +574,7 @@ flowchart TB
     v2 --> v3
     v3 --> v4
     end
+```
 
 There are many other [operators](https://www.nextflow.io/docs/latest/reference/operator.html#operator-page) available to apply transformations to the contents of channels between process calls.
 
@@ -1122,7 +1123,7 @@ Open the `.command.run` file and search for `nxf_launch` to find the launch comm
 nxf_launch() {
     docker run -i --cpu-shares 1024 -e "NXF_TASK_WORKDIR" -v /workspaces/training/hello-nextflow/work:/workspaces/training/hello-nextflow/work -w "$NXF_TASK_WORKDIR" --name $NXF_BOXID community.wave.seqera.io/library/pip_cowpy:131d6a1b707a8e65 /bin/bash -ue /workspaces/training/nextflow-run/work/7f/caf7189fca6c56ba627b75749edcb3/.command.sh
 }
-````
+```
 
 </details>
 
