@@ -93,8 +93,7 @@ To be clear, we're not _replacing_ the `container` directive, we're _adding_ an 
 Let's try it out.
 
 ```bash
-params.input = 'greetings.csv'
-params.character = 'turkey'
+nextflow run 3-main.nf --input greetings.csv --character turkey
 ```
 
 This should work without error.
@@ -167,9 +166,7 @@ process {
 }
 ```
 
-To set the executor to target a different backend, simply specify the executor you want using similar syntax as described above for resource allocations.
-
-<!-- TODO: add documentation link -->
+To set the executor to target a different backend, simply specify the executor you want using similar syntax as described above for resource allocations (see [documentation](https://www.nextflow.io/docs/latest/executor.html) for all options).
 
 ```groovy title="nextflow.config"
 process {
@@ -386,12 +383,43 @@ Currently, our workflow is set up to accept a couple of parameter values via the
 This is fine for a simple workflow with very few parameters that need to be set for a given run.
 However, many real-world workflows will have many more parameters that may be run-specific, and putting all of them in the command line would be tedious and error-prone.
 
-### 4.1. Specifying default values directly in the workflow or the `nextflow.config` file
+### 4.1. Specify default parameter values
 
-It is possible to specify default values in the workflow script itself, for example you may see something like this in the main body of the workflow:
-
+It is possible to specify default values in the workflow script itself; for example you may see something like this in the main body of the workflow:
 
 ```groovy title="Syntax example"
+params.input = 'greetings.csv'
+params.character = 'turkey'
+```
+
+The same syntax can also be used to store parameter defaults in the `nextflow.config` file.
+Let's try that out.
+
+Open the `nextflow.config` file and add the following lines to it:
+
+```groovy title="nextflow.config" linenums="1"
+/*
+ * Pipeline parameters
+ */
+params.input = '../greetings.csv'
+params.character = 'turkey'
+```
+
+<details>
+  <summary>Code (full file)</summary>
+
+```groovy title="nextflow.config" linenums="1" hl="12-16"
+docker.enabled = false
+conda.enabled = true
+
+process {
+    memory = 1.GB
+    withName: 'cowpy' {
+        memory = 2.GB
+        cpus = 2
+    }
+}
+
 /*
  * Pipeline parameters
  */
@@ -399,56 +427,113 @@ params.input = 'greetings.csv'
 params.character = 'turkey'
 ```
 
-The same syntax can also be used to store parameter defaults in the `nextflow.config` file.
+Now you can run the workflow without specifying the parameters on the command line.
 
-A clean way to over-ride those defaults without modifying the original script file to create a new `nextflow.config` file in a run-specific working directory. Let's start by creating a new directory:
+```bash
+nextflow run 3-main.nf
+```
+
+This will produce the same output, but is more convenient to type, especially when the workflow requires multiple parameters.
+
+<details>
+  <summary>Command output</summary>
+
+```console linenums="1"
+ N E X T F L O W   ~  version 25.04.3
+
+Launching `3-main.nf` [] DSL2 - revision: bc8e1b2726
+
+UPDATE OUTPUT
+```
+
+</details>
+
+The final output file should contain the turkey character saying the greetings.
+
+<details>
+  <summary>File contents</summary>
+
+```console title="results/cowpy-COLLECTED-output.txt"
+UPDATE WITH TURKEY
+```
+
+</details>
+
+You can override those defaults by providing parameter values on the command line, or by providing them through another source of configuration information.
+
+### 4.2. Override defaults with a run-specific config file
+
+You may want to override those defaults without having to either specify parameters on the command line, or modify the original script file.
+
+A clean way to do this is to create a new `nextflow.config` file in a run-specific working directory.
+
+Let's start by creating a new directory:
 
 ```bash
 mkdir -p tux-run
 cd tux-run
 ```
 
-Now let's add a parameters we want to customize to a `nextflow.config` file in our `tux-run` directory.
+Then, create a blank configuration file in that directory:
+
+```bash
+touch tux-run/nextflow.config
+```
+
+Now open the new file and add the parameters you want to customize:
 
 ```groovy title="tux-run/nextflow.config
 params.input = '../greetings.csv'
 params.character = 'tux'
 ```
 
-Now let's run our pipeline from our new working directory:
+Note that the path to the input file must reflect the directory structure.
+
+We can now run our pipeline from within our new working directory:
 
 ```bash
 nextflow run ../3-main.nf
 ```
 
-```console 
-Nextflow 25.04.6 is available - Please consider updating your version to it
+This will create a completely new set of directories under `tux-run/` including `tux-run/work/` and `tux-run/results/`.
 
- N E X T F L O W   ~  version 25.04.5
+<details>
+  <summary>Command output</summary>
 
-Launching `../3-main.nf` [awesome_meninsky] DSL2 - revision: e8b1665370
+```console linenums="1"
 
-executor >  local (8)
-[75/9774ec] sayHello (3)       | 3 of 3 ✔
-[c3/fd4468] convertToUpper (1) | 3 of 3 ✔
-[a2/c451cf] collectGreetings   | 1 of 1 ✔
-[7f/c0702b] cowpy              | 1 of 1 ✔
+UPDATE OUTPUT
 ```
 
-Nextflow combines the `nextflow.config` in our current directory with the `nextflow.config` in our pipeline's directory and overrides the turkey default character with the tux character.
+</details>
 
-Now let's change back to our previous directory.
+In this run, Nextflow combines the `nextflow.config` in our current directory with the `nextflow.config` in the root directory of the pipeline, and thereby overrides the default character (turkey) with the tux character.
+
+The final output file should contain the tux character saying the greetings.
+
+<details>
+  <summary>File contents</summary>
+
+```console title="results/cowpy-COLLECTED-output.txt"
+UPDATE WITH TUX
+```
+
+</details>
+
+That's it!
+
+Make sure to change back to the previous directory before moving to the next section.
 
 ```bash
 cd ..
 ```
 
+### 4.3. Specify parameters using a parameter file
 
-### 4.2. Using a parameter file
+Nextflow also allows us to specify parameters via a parameter file in either YAML or JSON format.
+This makes it very convenient to manage and distribute alternative sets of default values, for example, as well as run-specific parameter values.
 
-Nextflow allows us to specify parameters via a parameter file in JSON format, which makes it very convenient to manage and distribute alternative sets of default values, for example, as well as run-specific parameter values.
-
-We provide an example parameter file in the current directory, called `test-params.yaml`, which contains a key-value pair for each of the inputs our workflow expects.
+We provide an example YAML parameter file in the current directory, called `test-params.yaml`, which contains a key-value pair for each of the inputs our workflow expects.
 
 <details>
   <summary>File contents</summary>
@@ -485,7 +570,7 @@ executor >  local (8)
 
 </details>
 
-The final output file should contain the appropriate character saying the greetings.
+The final output file should contain the stegosaurus character saying the greetings.
 
 <details>
   <summary>File contents</summary>
