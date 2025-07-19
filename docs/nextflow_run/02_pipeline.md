@@ -583,9 +583,7 @@ The downside is that it can sometimes make it harder to decipher what the pipeli
 
 One very helpful tool for understanding what a pipeline does, if it's not adequately documented, is the graph preview functionality available in VSCode thanks to the Nextflow extension. You can see this in the training environment by clicking on the small `DAG preview` link displayed just above the workflow block in any Nextflow script.
 
-<figure class="excalidraw">
---8<-- "docs/nextflow_run/img/dag-workflow.svg"
-</figure>
+![DAG preview](img/DAG-preview.png)
 
 This does not show operators, but it does give a useful representation of how process calls are connected and what are their inputs.
 
