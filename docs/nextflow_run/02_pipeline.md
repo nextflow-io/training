@@ -561,20 +561,7 @@ This operator is used to collect the outputs from multiple calls to the same pro
 This allows us to take all the separate uppercased greetings produced by the second step of the workflow and feed them all together to a single call in the third step of the pipeline.
 If we didn't apply `collect()` to the output of `convertToUpper()` before feeding it to `collectGreetings()`, Nextflow would simply run `collectGreetings()` independently on each greeting, which would not achieve our goal.
 
-```mermaid
-flowchart TB
-    subgraph " "
-    subgraph params
-    v0["input"]
-    end
-    v2([sayHello])
-    v3([convertToUpper])
-    v4([collectGreetings])
-    v0 --> v2
-    v2 --> v3
-    v3 --> v4
-    end
-```
+<!-- mermaid not rendering properly, will make static diagram -->
 
 There are many other [operators](https://www.nextflow.io/docs/latest/reference/operator.html#operator-page) available to apply transformations to the contents of channels between process calls.
 
