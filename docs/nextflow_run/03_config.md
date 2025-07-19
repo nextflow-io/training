@@ -427,6 +427,8 @@ params.input = 'greetings.csv'
 params.character = 'turkey'
 ```
 
+</details>
+
 Now you can run the workflow without specifying the parameters on the command line.
 
 ```bash
