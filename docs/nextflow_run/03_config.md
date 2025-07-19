@@ -374,7 +374,7 @@ Learn how to manage workflow parameters.
 
 ---
 
-## 4. Managing workflow parameters
+## 4. Manage workflow parameters
 
 So far we've been looking at configuration from the technical point of view of the compute infrastructure.
 Now let's consider another aspect of workflow configuration that is very important for reproducibility: the configuration of the workflow parameters.

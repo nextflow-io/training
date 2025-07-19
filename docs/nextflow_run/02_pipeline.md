@@ -323,7 +323,7 @@ Discover how multi-step workflows are constructed and how they operate.
 
 ---
 
-## 2. Multi-step workflows
+## 2. Running multi-step workflows
 
 Most real-world workflows involve more than one step.
 Let's build on what we just learned about channels, and look at how Nextflow uses channels and operators to connect processes together in a multi-step workflow.
@@ -599,7 +599,7 @@ Learn how Nextflow pipelines can be modularized to promote code reuse and mainta
 
 ---
 
-## 3. Modular code components
+## 3. Running modularized pipelines
 
 So far, all the workflows we've looked at have consisted of one single workflow file containing all the relevant code.
 
