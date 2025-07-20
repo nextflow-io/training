@@ -1045,7 +1045,7 @@ nextflow config
 
 ```json title="nextflow.config" linenums="1"
 docker {
-   enabled = false
+   enabled = true
 }
 ```
 
