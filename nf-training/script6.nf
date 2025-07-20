@@ -8,15 +8,6 @@ params.transcriptome_file = "$projectDir/data/ggal/transcriptome.fa"
 params.multiqc = "$projectDir/multiqc"
 params.outdir = "results"
 
-log.info """\
-    R N A S E Q - N F   P I P E L I N E
-    ===================================
-    transcriptome: ${params.transcriptome_file}
-    reads        : ${params.reads}
-    outdir       : ${params.outdir}
-    """
-    .stripIndent()
-
 /*
  * define the `INDEX` process that creates a binary index
  * given the transcriptome file
@@ -83,6 +74,14 @@ process MULTIQC {
 }
 
 workflow {
+    log.info """\
+    R N A S E Q - N F   P I P E L I N E
+    ===================================
+    transcriptome: ${params.transcriptome_file}
+    reads        : ${params.reads}
+    outdir       : ${params.outdir}
+    """
+    .stripIndent()
     Channel
         .fromFilePairs(params.reads, checkIfExists: true)
         .set { read_pairs_ch }
