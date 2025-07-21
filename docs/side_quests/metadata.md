@@ -662,7 +662,9 @@ In this section, you've learned how to:
 
 ## Summary
 
-In this side quest, you've explored how to effectively work with metadata in Nextflow workflows. Here's what you've learned:
+In this side quest, you've explored how to effectively work with metadata in Nextflow workflows. This pattern of keeping metadata explicit and attached to the data is a core best practice in Nextflow that enables building robust, maintainable bioinformatics workflows.
+
+Here's what you've learned:
 
 1. **Reading and Structuring Metadata**: Reading CSV files and creating organized metadata maps that stay associated with your data files
 
