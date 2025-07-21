@@ -512,7 +512,7 @@ Copy in the process before your workflow block:
     }
     ```
 
-### 4.1 Add a custom publishing location
+### 3.1 Add a custom publishing location
 
 Let's run our samples through `COWPY` and remove our `view` statement:
 
@@ -602,7 +602,7 @@ Look through the other files. All phrases should be spoken by the fashionable st
 
 How did this work? The `publishDir` directive is evaluated at runtime when the process executes. Each process task gets its own meta map from the input tuple When the directive is evaluated, `${meta.lang_group}` is replaced with the actual group language value for that sample creating the dynamic paths like `results/romance`.
 
-### 4.2 Customize the character
+### 3.2 Customize the character
 
 In our samplesheet, we have another column: `character`. To tailor the tool parameters per sample, we can also access information from the `meta` map in the script section. This is really useful in cases were a tool should have different parameters for each sample.
 
