@@ -16,14 +16,15 @@ By the end of this side quest, you'll be able to:
 
 ## 0. Warmup
 
-### 0.1 Prerequisites
+### 0.1. Prerequisites
 
 Before taking on this side quest you should:
 
 - Complete the [Hello Nextflow](../hello_nextflow/README.md) tutorial
 - Understand basic Nextflow concepts (processes, channels, operators)
+- Basic understanding of using sample-specific data (meta data): [Working with sample-specific data](./metadata.md)
 
-### 0.2 Starting Point
+### 0.2. Starting Point
 
 Let's move into the project directory:
 
@@ -190,7 +191,7 @@ Despite their prevalence in bioinformatics, files are not strings! Nextflow need
 
 While the `file()` method is useful for simple file operations, channels provide a more powerful way to handle multiple files in workflows. We could load our file into a channel using [`Channel.of()`](https://www.nextflow.io/docs/latest/reference/channel.html#of), but we have a much more convenient tool called [`Channel.fromPath()`](https://www.nextflow.io/docs/latest/reference/channel.html#frompath) which finds every file in a directory that matches a given pattern.
 
-### 2.1 Reading Files with Channel.fromPath
+### 2.1. Reading Files with Channel.fromPath
 
 Update your `main.nf` file:
 
@@ -240,7 +241,7 @@ Found file: /workspaces/training/side-quests/working_with_files/data/sampleA_rep
 
 Note how Nextflow has grabbed the file we specified and turned it into a `file` object. Channel.fromPath() is a convenient way of creating a new channel populated by a list of files.
 
-### 2.2 Viewing Channel Contents
+### 2.2. Viewing Channel Contents
 
 In our first version, we use `.view()` to print the file name. Let's update our workflow to print out the file attributes:
 
@@ -430,94 +431,14 @@ Launching `main.nf` [gigantic_gauss] DSL2 - revision: a39baabb57
 
 Success! We've broken down our sample information from a single string into a list of strings. We can now handle each part of the sample information separately.
 
-### 3.3. Flattening the metadata
+### 3.3. Using a map to organise the data
 
-Remember, when using a channel in a process the input is generally a flat tuple. Therefore, it's easier if the input channel is flat instead of the nested structure we have here. Therefore we want to flatten our structure from `[[sampleA, rep1, normal, R2, 001], file]` to `[sampleA, rep1, normal, R2, file]`.
-
-We can extract the metadata from the filename and create a flat tuple structure in a single map operation.
-
-This line of code takes our filename (like "sampleA*rep1_normal_R1_001") and breaks it into separate pieces at each underscore using `tokenize('*')`. Then, through a Groovy feature called "multiple assignment," it automatically assigns each piece to its own variable in one step - the first piece goes to `sample`, the second to `replicate`, and so on. This is much simpler than having to manually extract each piece with separate lines of code. After extracting these pieces, we create a new list containing all these individual metadata elements plus the original file, making it easier to work with each piece of information separately.
-
-=== "After"
-
-    ```groovy title="main.nf" linenums="4" hl_lines="2-3"
-    ch_fastq.map { myFile ->
-        def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
-        [ sample, replicate, type, readNum, myFile ]
-    }
-    ```
-
-=== "Before"
-
-    ```groovy title="main.nf" linenums="4" hl_lines="2"
-    ch_fastq.map { myFile ->
-        [ myFile.simpleName.tokenize('_'), myFile ]
-    }
-    ```
-
-```bash
-nextflow run main.nf
-```
-
-```console title="Flattened Metadata Output"
- N E X T F L O W   ~  version 24.10.4
-
-Launching `main.nf` [extravagant_laplace] DSL2 - revision: 297959a496
-
-[sampleA, rep1, normal, R1, /workspaces/training/side-quests/working_with_files/data/sampleA_rep1_normal_R1_001.fastq.gz]
-[sampleA, rep1, normal, R2, /workspaces/training/side-quests/working_with_files/data/sampleA_rep1_normal_R2_001.fastq.gz]
-```
-
-Success! We've now flattened the metadata into a single list of values.
-
-### 3.4. Simplifying the metadata
-
-The metadata includes a lot of redundant information such as "rep". Let's remove this so replicate is just a number.
-
-We can simplify the metadata by using the `.replace()` method on the replicate string to remove the "rep" prefix, and similarly remove the "R" prefix from the readNum value.
-
-=== "After"
-
-    ```groovy title="main.nf" linenums="4" hl_lines="3"
-    ch_fastq.map { myFile ->
-        def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
-        [ sample, replicate.replace('rep', ''), type, readNum.replace('R', ''), myFile ]
-    }
-    ```
-
-=== "Before"
-
-    ```groovy title="main.nf" linenums="4" hl_lines="3 5"
-    ch_fastq.map { myFile ->
-        def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
-        [ sample, replicate, type, readNum, myFile ]
-    }
-    .view()
-    ```
-
-```bash
-nextflow run main.nf
-```
-
-```console title="Simplified Metadata Output"
- N E X T F L O W   ~  version 24.10.4
-
-Launching `main.nf` [reverent_volta] DSL2 - revision: b3aac71fea
-
-[sampleA, 1, normal, 1, /workspaces/training/side-quests/working_with_files/data/sampleA_rep1_normal_R1_001.fastq.gz]
-[sampleA, 1, normal, 2, /workspaces/training/side-quests/working_with_files/data/sampleA_rep1_normal_R2_001.fastq.gz]
-```
-
-Nice! we have removed the "rep" from the replicate string.
-
-### 3.5. Using a map to organise the data
-
-Our data is just a flat list. It's easy to use but hard to read. What is the item at index 3? Can you tell without checking?
+Our meta data is just a flat list at the moment. It's easy to use but hard to read. What is the item at index 3? Can you tell without checking?
 
 A [map](https://www.baeldung.com/groovy-maps) is Groovy's version of a key-value store. Every item has a key and a value and we can refer to each key to get the value. This will make our code much easier to read, i.e. we go from this:
 
 ```groovy
-data = [sampleA, 1, normal, R1, /workspaces/training/side-quests/working_with_files/data/sampleA_rep1_normal_R1_001.fastq.gz]
+data = [sampleA, 1, normal, R1]
 
 println data[3]
 ```
@@ -525,7 +446,7 @@ println data[3]
 to this:
 
 ```groovy
-data = [sample: sampleA, replicate: 1, type: normal, readNum: 1, file: /workspaces/training/side-quests/working_with_files/data/sampleA_rep1_normal_R1_001.fastq.gz]
+data = [sample: sampleA, replicate: 1, type: normal, readNum: 1]
 
 println data.readNum
 ```
@@ -535,6 +456,53 @@ Let's convert our flat list into a map now.
 === "After"
 
     ```groovy title="main.nf" linenums="4" hl_lines="3-11"
+    ch_fastq.map { myFile ->
+        def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
+        [
+          [
+            id: sample,
+            replicate: replicate,
+            type: type,
+            readNum: readNum,
+          ],
+          myFile
+        ]
+    }
+    ```
+
+=== "Before"
+
+    ```groovy title="main.nf" linenums="4" hl_lines="3"
+    ch_fastq.map { myFile ->
+        def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
+        [ sample, replicate, type, readNum.readNum, myFile ]
+    }
+    ```
+
+```bash
+nextflow run main.nf
+```
+
+```console title="Map Output"
+ N E X T F L O W   ~  version 24.10.5
+
+Launching `main.nf` [infallible_swartz] DSL2 - revision: 7f4e68c0cb
+
+[[id:sampleA, replicate:rep1, type:normal, readNum:R2], /workspaces/training/side-quests/working_with_files/data/sampleA_rep1_normal_R2_001.fastq.gz]
+[[id:sampleA, replicate:rep1, type:normal, readNum:R1], /workspaces/training/side-quests/working_with_files/data/sampleA_rep1_normal_R1_001.fastq.gz]
+```
+
+We have converted our flat list into a map, and now we can refer to each bit of sample data by name instead of by index. This makes our code easier to read and more maintainable.
+
+### 3.4. Simplifying the metadata
+
+The metadata includes a lot of redundant information such as "rep". Let's remove this so replicate is just a number.
+
+We can simplify the metadata by using the `.replace()` method on the replicate string to remove the "rep" prefix, and similarly remove the "R" prefix from the readNum value.
+
+=== "After"
+
+    ```groovy title="main.nf" linenums="4" hl_lines="6 8"
     ch_fastq.map { myFile ->
         def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
         [
@@ -551,27 +519,36 @@ Let's convert our flat list into a map now.
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="4" hl_lines="3"
+    ```groovy title="main.nf" linenums="4"
     ch_fastq.map { myFile ->
         def (sample, replicate, type, readNum) = myFile.simpleName.tokenize('_')
-        [ sample, replicate.replace('rep', ''), type, readNum.readNum.replace('R', ''), myFile ]
+        [
+          [
+            id: sample,
+            replicate: replicate,
+            type: type,
+            readNum: readNum,
+          ],
+          myFile
+        ]
     }
+    .view()
     ```
 
 ```bash
 nextflow run main.nf
 ```
 
-```console title="Map Output"
- N E X T F L O W   ~  version 24.10.5
+```console title="Simplified Metadata Output"
+ N E X T F L O W   ~  version 24.10.4
 
-Launching `main.nf` [infallible_swartz] DSL2 - revision: 7f4e68c0cb
+Launching `main.nf` [reverent_volta] DSL2 - revision: b3aac71fea
 
-[[id:sampleA, replicate:1, type:normal, readNum:2], /workspaces/training/side-quests/working_with_files/data/sampleA_rep1_normal_R2_001.fastq.gz]
-[[id:sampleA, replicate:1, type:normal, readNum:1], /workspaces/training/side-quests/working_with_files/data/sampleA_rep1_normal_R1_001.fastq.gz]
+[[sample:sampleA, replicate:1, type:normal, readNum:2], /workspaces/training/side-quests/working_with_files/data/sampleA_rep1_normal_R2_001.fastq.gz]
+[[sample:sampleA, replicate:1, type:normal, readNum:1], /workspaces/training/side-quests/working_with_files/data/sampleA_rep1_normal_R1_001.fastq.gz]
 ```
 
-We have converted our flat list into a map, and now we can refer to each bit of sample data by name instead of by index. This makes our code easier to read and more maintainable.
+Nice! we have removed the "rep" from the replicate string.
 
 ### Takeaway
 
@@ -595,7 +572,7 @@ Complete your `main.nf` file with the following (we will comment out the map ope
 
     ```groovy title="main.nf" linenums="3" hl_lines="1"
     ch_fastq = Channel.fromFilePairs('data/sampleA_rep1_normal_R{1,2}_001.fastq.gz')
-    .view()
+                      .view()
     ```
 
 === "Before"
@@ -649,8 +626,7 @@ We still need the metadata. Our `map` operation from before won't work because i
             [
                 id: sample,
                 replicate: replicate.replace('rep', ''),
-                type: type,
-                readNum: readNum.replace('R', ''),
+                type: type
             ],
             fastqs
         ]
@@ -675,8 +651,10 @@ nextflow run main.nf
 
 Launching `main.nf` [prickly_stonebraker] DSL2 - revision: f62ab10a3f
 
-[[id:sampleA, replicate:1, type:normal, readNum:R], [/workspaces/training/side-quests/working_with_files/data/sampleA_rep1_normal_R1_001.fastq.gz, /workspaces/training/side-quests/working_with_files/data/sampleA_rep1_normal_R2_001.fastq.gz]]
+[[id:sampleA, replicate:1, type:normal], [/workspaces/training/side-quests/working_with_files/data/sampleA_rep1_normal_R1_001.fastq.gz, /workspaces/training/side-quests/working_with_files/data/sampleA_rep1_normal_R2_001.fastq.gz]]
 ```
+
+Notice, that this time we don't have a `readNum`. Because read 1 and read 2 are kept together, we do not need to track this in the meta data.
 
 Well done! We have grabbed the metadata from the filenames and used them as values in the tuple.
 
@@ -735,7 +713,7 @@ Add the following to the top of your `main.nf` file:
 
 !!! note
 
-    We are calling our map '`meta`'. This is the first introduction of a concept called `metamap` which we will cover in a subsequent side quest.
+    We are calling our map '`meta`'. For a more in-depth introduction to meta maps, see [Sample Specific Data in Workflows](./metadata.md).
 
 ### 5.2. Implement the process in the workflow
 
@@ -743,7 +721,7 @@ Then implement the process in the workflow:
 
 === "After"
 
-    ```groovy title="main.nf" linenums="27" hl_lines="2 14"
+    ```groovy title="main.nf" linenums="27" hl_lines="2 13"
         ch_fastq = Channel.fromFilePairs('data/sampleA_rep1_normal_R{1,2}_001.fastq.gz')
         ch_samples = ch_fastq.map { id, fastqs ->
             def (sample, replicate, type, readNum) = id.tokenize('_')
@@ -751,8 +729,7 @@ Then implement the process in the workflow:
                 [
                     id: sample,
                     replicate: replicate.replace('rep', ''),
-                    type: type,
-                    readNum: readNum,
+                    type: type
                 ],
                 fastqs
             ]
@@ -763,7 +740,7 @@ Then implement the process in the workflow:
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="27" hl_lines="2 14"
+    ```groovy title="main.nf" linenums="27"
         ch_fastq = Channel.fromFilePairs('data/sampleA_rep1_normal_R{1,2}_001.fastq.gz')
         ch_fastq.map { id, fastqs ->
             def (sample, replicate, type, readNum) = id.tokenize('_')
@@ -771,8 +748,7 @@ Then implement the process in the workflow:
                 [
                     id: sample,
                     replicate: replicate.replace('rep', ''),
-                    type: type,
-                    readNum: readNum,
+                    type: type
                 ],
                 fastqs
             ]
