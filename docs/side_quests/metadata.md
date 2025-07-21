@@ -24,14 +24,14 @@ Let's dive in!
 
 ## 0. Warmup
 
-### 0.1 Prerequisites
+### 0.1. Prerequisites
 
 Before taking on this side quest you should:
 
 - Complete the [Hello Nextflow](../hello_nextflow/README.md) tutorial
 - Understand basic Nextflow concepts (processes, channels, operators)
 
-### 0.2 Starting Point
+### 0.2. Starting Point
 
 Let's move into the project directory.
 
@@ -192,7 +192,7 @@ Success, we can access individual entries or entire rows from our samplesheet.
 
 Now that we've successfully read in the samplesheet and have access to the data in each row, we can begin implementing our pipeline logic.
 
-### 1.2 Separate meta data and data
+### 1.2. Separate meta data and data
 
 In the samplesheet, we have both the input files and data about the input files (`id`, `character`), the meta data.
 As we progress through the workflow, we generate more meta data about each sample.
@@ -253,7 +253,7 @@ In this section, you've learned:
 
 ## 2. Create new meta map keys
 
-### 2.1 Passing the meta map through a process
+### 2.1. Passing the meta map through a process
 
 Now we want to process our samples with unidentified languages. Let's add a process definition before the `workflow` that can identify the language in each file:
 
@@ -343,7 +343,7 @@ output:
 
 This is a useful way to ensure the sample-specific information stays connected with any new information that is generated.
 
-### 2.2 Add the language prediction to the meta map
+### 2.2. Add the language prediction to the meta map
 
 Given that this is more data about the files, let's add it to our meta map. We can use the [`map` operator](https://www.nextflow.io/docs/latest/operator.html#map) again to create a new key `lang` and set the value to the predicted language:
 
@@ -399,7 +399,7 @@ The `+` operator in Groovy merges two maps together. So if our original `meta` w
 
 <!-- TODO Should we also show how to remove a key using subMap?! -->
 
-### 2.3 Assign a language group using conditionals
+### 2.3. Assign a language group using conditionals
 
 Alright, now that we have our language predictions, let's use the information to assign them into new groups. In our example data, we have provided data sets that belong either to `germanic` (either English or German) or `romance` (French, Spanish, Italian) languages.
 
@@ -512,7 +512,7 @@ Copy in the process before your workflow block:
     }
     ```
 
-### 3.1 Add a custom publishing location
+### 3.1. Add a custom publishing location
 
 Let's run our samples through `COWPY` and remove our `view` statement:
 
@@ -602,7 +602,7 @@ Look through the other files. All phrases should be spoken by the fashionable st
 
 How did this work? The `publishDir` directive is evaluated at runtime when the process executes. Each process task gets its own meta map from the input tuple When the directive is evaluated, `${meta.lang_group}` is replaced with the actual group language value for that sample creating the dynamic paths like `results/romance`.
 
-### 3.2 Customize the character
+### 3.2. Customize the character
 
 In our samplesheet, we have another column: `character`. To tailor the tool parameters per sample, we can also access information from the `meta` map in the script section. This is really useful in cases were a tool should have different parameters for each sample.
 
