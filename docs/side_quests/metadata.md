@@ -232,8 +232,8 @@ We have successfully separated our values into their own map to separate it from
 In this section, you've learned:
 
 - **Why metadata is important**: Keeping metadata with your data preserves important sample information throughout the workflow.
-- **Reading in a samplesheet**: Using `splitCsv` to read CSV files with header information and transform rows into structured data
-- **Creating a meta map**: Separating metadata from file data using tuple structure `[ [id:value, ...], file ]`
+- **How to read in a samplesheet**: Using `splitCsv` to read CSV files with header information and transform rows into structured data
+- **How to create a meta map**: Separating metadata from file data using tuple structure `[ [id:value, ...], file ]`
 
 ---
 
@@ -241,7 +241,7 @@ In this section, you've learned:
 
 ### 2.1 Passing the meta map through a process
 
-Now we want to process our samples. These samples are language samples, but we don't know what language they are in. Let's add a process definition before the `workflow` that can identify the language in each file:
+Now we want to process our samples with unidentified languages. Let's add a process definition before the `workflow` that can identify the language in each file:
 
 === "After"
 
@@ -648,114 +648,18 @@ The resulting channel elements maintain their `[meta, file]` structure, but the 
 
 ### Takeaway
 
-In this section, you've learned:
+In this section, you've learned how to :
 
-- **Merging on meta maps**: You used `join` to combine two channels based on their meta maps to maintain relationships across processes and channels
-- **Creating custom keys**: You created two new keys in your meta map, merging them with `meta + [new_key:value]` into the existing meta map. One based on a computed value from a process, and one based on a condition you set in the `map` operator.
+- **Merge on meta maps**: You used `join` to combine two channels based on their meta maps to maintain relationships across processes and channels
+- **Create custom keys**: You created two new keys in your meta map, merging them with `meta + [new_key:value]` into the existing meta map. One based on a computed value from a process, and one based on a condition you set in the `map` operator.
 
 These allow you to associated new and existing meta data with files as you progress through your pipeline.
 
 ---
 
-<!-- ## 3. Filter data based on meta map values
-
-We can use the [`filter` operator](https://www.nextflow.io/docs/latest/operator.html#filter) to filter the data based on a condition. Let's say we only want to process romance language samples further. We can do this by filtering the data based on the `lang_group` field. Let's create a new channel that only contains romance languages and `view` it:
-
-=== "After"
-
-    ```groovy title="main.nf" linenums="20" hl_lines="20-23"
-    workflow  {
-
-      ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
-                      .splitCsv(header: true)
-                      .map { row ->
-                          [ [id:row.id, character:row.character], row.recording ]
-                      }
-
-      ch_prediction = IDENTIFY_LANGUAGE(ch_samplesheet)
-
-      ch_languages = ch_samplesheet.join(ch_prediction)
-                                  .map { meta, file, lang ->
-                                      [ meta + [lang:lang], file ]
-                                  }
-                                  .map{ meta, file ->
-                                      def lang_group = (meta.lang.equals('de') || meta.lang.equals('en')) ? 'germanic' : 'romance'
-                                      [ meta + [lang_group:lang_group], file ]
-                                  }
-
-    romance_languages = ch_language_groups.filter { meta, file ->
-                                            meta.lang_group == 'romance'
-                                          }
-                                          .view()
-    }
-
-    ```
-
-=== "Before"
-
-    ```groovy title="main.nf" linenums="20"
-    workflow  {
-
-      ch_samplesheet = Channel.fromPath("./data/samplesheet.csv")
-                      .splitCsv(header: true)
-                      .map { row ->
-                          [ [id:row.id, character:row.character], row.recording ]
-                      }
-
-      ch_prediction = IDENTIFY_LANGUAGE(ch_samplesheet)
-
-      ch_languages = ch_samplesheet.join(ch_prediction)
-                                  .map { meta, file, lang ->
-                                      [ meta + [lang:lang], file ]
-                                  }
-                                  .map{ meta, file ->
-                                      def lang_group = (meta.lang.equals('de') || meta.lang.equals('en')) ? 'germanic' : 'romance'
-                                      [ meta + [lang_group:lang_group], file ]
-                                  }
-                                  .view()
-
-    }
-    ```
-
-Let's rerun it:
-
-```bash title="View romance samples"
-nextflow run main.nf -resume
-```
-
-```console title="View romance samples"
- N E X T F L O W   ~  version 24.10.4
-
-Launching `main.nf` [drunk_brattain] DSL2 - revision: 453fdd4e91
-
-[da/652cc6] IDENTIFY_LANGUAGE (7) [100%] 7 of 7, cached: 7 ✔
-[[id:sampleA, character:squirrel, lang:fr, lang_group:romance], /workspaces/training/side-quests/metadata/data/bonjour.txt]
-[[id:sampleE, character:stegosaurus, lang:es, lang_group:romance], /workspaces/training/side-quests/metadata/data/hola.txt]
-[[id:sampleF, character:moose, lang:fr, lang_group:romance], /workspaces/training/side-quests/metadata/data/salut.txt]
-[[id:sampleG, character:turtle, lang:it, lang_group:romance], /workspaces/training/side-quests/metadata/data/ciao.txt]
-```
-
-We have successfully filtered the data to only include romance samples. Let's recap how this works. The `filter` operator takes a closure that is applied to each element in the channel. If the closure returns `true`, the element is included in the output channel. If the closure returns `false`, the element is excluded from the output channel.
-
-In this case, we want to keep only the samples where `meta.lang_group == 'romance'`. In the closure, we first know that our channel elements are all of shape `[meta, file]` and we can then access the individual keys of the meta map. We then check if `meta.lang_group` is equal to `'romance'`. If it is, the sample is included in the output channel. If it is not, the sample is excluded from the output channel.
-
-```groovy title="main.nf" linenums="4"
-.filter { meta,file -> meta.lang_group == 'romance' }
-```
-
-### Takeaway
-
-In this section, you've learned:
-
-- How to use `filter` to select samples based on metadata
-
-We now have only the romance language samples left and can process those further. Next we want to make characters say the phrases. -->
-
----
-
 ## 4. Customize a process with meta map
 
-Let's let the characters say the phrases that we have passed in. In the [hello-nextflow training](../hello_nextflow/05_hello_containers.md), you already encountered the `cowpy` package, a python implementation of a tool called `cowsay` that generates ASCII art to display arbitrary text inputs in a fun way. We will re-use a process from there.
+Let's let some fun characters say the phrases that we have passed in. In the [hello-nextflow training](../hello_nextflow/05_hello_containers.md), you already encountered the `cowpy` package, a python implementation of a tool called `cowsay` that generates ASCII art to display arbitrary text inputs in a fun way. We will re-use a process from there.
 
 Copy in the process before your workflow block:
 
@@ -974,11 +878,11 @@ This is a subtle difference to other parameters that we have set in the pipeline
 
 ### Takeaway
 
-In this section, you've learned:
+In this section, you've learned how to:
 
-- **Tweaking directives using meta values**: Using meta map values in `publishDir` directives to create dynamic output paths based on sample properties
+- **Tweak directives using meta values**: Using meta map values in `publishDir` directives to create dynamic output paths based on sample properties
 
-- **Tweaking script section based on meta values**: Customizing tool parameters per sample using meta information in the `script` section
+- **Tweak the script section based on meta values**: Customizing tool parameters per sample using meta information in the `script` section
 
 ---
 
