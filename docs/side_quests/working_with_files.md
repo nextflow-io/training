@@ -91,7 +91,7 @@ data/sampleA_rep1_normal_R1_001.fastq.gz
 
 ## 1. Basic File Operations
 
-### 1.1 Creating File Objects
+### 1.1. Creating File Objects
 
 Let's start by understanding how to create file objects in Nextflow. In our workflow, we have a string path `data/sampleA_rep1_normal_R1_001.fastq.gz`. This is just a plain string - Nextflow doesn't automatically recognize it as representing a file. To work with files properly in Nextflow, we need to convert string paths into proper file objects using the `file()` method, which provides access to file properties and operations.
 
@@ -129,7 +129,7 @@ Launching `main.nf` [kickass_coulomb] DSL2 - revision: 5af44b1b59
 
 You should only see a single difference, the file path will now be absolute. Note that the full path will change based on where you are doing this training, but it is likely to be something like `/workspaces/training/side-quests/working_with_files/data/sampleA_rep1_normal_R1_001.fastq.gz`.
 
-### 1.2 File Attributes
+### 1.2. File Attributes
 
 Why is this helpful? Well now Nextflow understands that `myFile` is a file object and not just a string, we can access the various attributes of the file object.
 
@@ -351,7 +351,7 @@ This isn't ideal - metadata should never be embedded in filenames, but it's a co
 
 Let's explore how to extract metadata from our FASTQ filenames using Nextflow's powerful data transformation capabilities.
 
-### 3.1 Basic Metadata Extraction
+### 3.1. Basic Metadata Extraction
 
 First, let's modify our workflow to extract metadata from the filenames.
 
@@ -564,7 +564,7 @@ Next up, we will look at how to handle paired-end reads.
 
 Nextflow provides a specialized channel factory method for working with paired files: `Channel.fromFilePairs()`. This method automatically groups files that share a common prefix. This is particularly useful for paired-end sequencing data, where you have two files (e.g., R1 and R2) for each sample.
 
-### 4.1 Basic Usage of fromFilePairs
+### 4.1. Basic Usage of fromFilePairs
 
 Complete your `main.nf` file with the following (we will comment out the map operation for now):
 
