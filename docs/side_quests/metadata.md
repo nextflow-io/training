@@ -1,4 +1,4 @@
-# Using sample-specific data in a workflow
+# Working with sample-specific data
 
 In any scientific analysis, we rarely work with just the raw data files. Each sample comes with its own additional information: what it is, where it came from, and what makes it special. This extra information is what we call sample-specific data.
 
