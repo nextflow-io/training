@@ -1,0 +1,9 @@
+N E X T F L O W  ~  version 24.10.5
+Launching `/Users/joostgroot/Work_local/NextFlow/nextflow_projects/test_training/training/side-quests/nf-test/main.nf` [condescending_goldstine] DSL2 - revision: bbf79d5c31
+WARN: Task runtime metrics are not reported when using macOS without a container engine
+[e0/b8a53e] Submitted process > sayHello (2)
+[eb/77d229] Submitted process > sayHello (1)
+[a5/0438a7] Submitted process > sayHello (3)
+[d1/c55dc2] Submitted process > convertToUpper (2)
+[2c/f01d80] Submitted process > convertToUpper (1)
+[f6/7a8f85] Submitted process > convertToUpper (3)

@@ -1,0 +1,26 @@
+Jun-02 22:50:25.514 [main] INFO  com.askimed.nf.test.App - nf-test 0.9.2
+Jun-02 22:50:25.522 [main] INFO  com.askimed.nf.test.App - Arguments: [test, .]
+Jun-02 22:50:25.963 [main] INFO  com.askimed.nf.test.App - Nextflow Version: 24.10.5
+Jun-02 22:50:25.964 [main] INFO  com.askimed.nf.test.commands.RunTestsCommand - Load config from file /Users/joostgroot/Work_local/NextFlow/nextflow_projects/test_training/training/side-quests/nf-test/nf-test.config...
+Jun-02 22:50:26.172 [main] INFO  com.askimed.nf.test.lang.dependencies.DependencyResolver - Loaded 6 files from directory /Users/joostgroot/Work_local/NextFlow/nextflow_projects/test_training/training/side-quests/nf-test in 0.015 sec
+Jun-02 22:50:26.172 [main] INFO  com.askimed.nf.test.lang.dependencies.DependencyResolver - Found 3 files containing tests.
+Jun-02 22:50:26.172 [main] DEBUG com.askimed.nf.test.lang.dependencies.DependencyResolver - Found files: [/Users/joostgroot/Work_local/NextFlow/nextflow_projects/test_training/training/side-quests/nf-test/tests/main.nf.test, /Users/joostgroot/Work_local/NextFlow/nextflow_projects/test_training/training/side-quests/nf-test/tests/main.sayhello.nf.test, /Users/joostgroot/Work_local/NextFlow/nextflow_projects/test_training/training/side-quests/nf-test/tests/main.converttoupper.nf.test]
+Jun-02 22:50:26.297 [main] INFO  com.askimed.nf.test.commands.RunTestsCommand - Found 4 tests to execute.
+Jun-02 22:50:26.297 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Started test plan
+Jun-02 22:50:26.297 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Running testsuite 'Test Process convertToUpper' from file '/Users/joostgroot/Work_local/NextFlow/nextflow_projects/test_training/training/side-quests/nf-test/tests/main.converttoupper.nf.test'.
+Jun-02 22:50:26.297 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Run test 'd916e5f4: Should run without failures and with correct outputs'. type: com.askimed.nf.test.lang.process.ProcessTest
+Jun-02 22:50:28.059 [main] DEBUG com.askimed.nf.test.lang.extensions.SnapshotFile - Load snapshots from file '/Users/joostgroot/Work_local/NextFlow/nextflow_projects/test_training/training/side-quests/nf-test/tests/main.converttoupper.nf.test.snap'
+Jun-02 22:50:28.063 [main] DEBUG com.askimed.nf.test.lang.extensions.Snapshot - Snapshots 'Should run without failures and with correct outputs' match.
+Jun-02 22:50:28.064 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Test 'd916e5f4: Should run without failures and with correct outputs' finished. status: PASSED
+Jun-02 22:50:28.064 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Testsuite 'Test Process convertToUpper' finished. snapshot file: true, skipped tests: false, failed tests: false
+Jun-02 22:50:28.066 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Running testsuite 'Test Workflow main.nf' from file '/Users/joostgroot/Work_local/NextFlow/nextflow_projects/test_training/training/side-quests/nf-test/tests/main.nf.test'.
+Jun-02 22:50:28.066 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Run test '84536533: Should run without failures with correct number of tasks'. type: com.askimed.nf.test.lang.pipeline.PipelineTest
+Jun-02 22:50:29.685 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Test '84536533: Should run without failures with correct number of tasks' finished. status: PASSED
+Jun-02 22:50:29.685 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Run test '6ec361aa: Should produce correct output files'. type: com.askimed.nf.test.lang.pipeline.PipelineTest
+Jun-02 22:50:31.348 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Test '6ec361aa: Should produce correct output files' finished. status: PASSED
+Jun-02 22:50:31.348 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Testsuite 'Test Workflow main.nf' finished. snapshot file: false, skipped tests: false, failed tests: false
+Jun-02 22:50:31.349 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Running testsuite 'Test Process sayHello' from file '/Users/joostgroot/Work_local/NextFlow/nextflow_projects/test_training/training/side-quests/nf-test/tests/main.sayhello.nf.test'.
+Jun-02 22:50:31.349 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Run test '9b176653: Should run without failures and contain expected greeting'. type: com.askimed.nf.test.lang.process.ProcessTest
+Jun-02 22:50:33.064 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Test '9b176653: Should run without failures and contain expected greeting' finished. status: PASSED
+Jun-02 22:50:33.064 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Testsuite 'Test Process sayHello' finished. snapshot file: false, skipped tests: false, failed tests: false
+Jun-02 22:50:33.064 [main] INFO  com.askimed.nf.test.core.TestExecutionEngine - Executed 4 tests. 0 tests failed. Done!

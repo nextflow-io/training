@@ -1,0 +1,84 @@
+Jun-02 22:50:28.720 [main] DEBUG nextflow.cli.Launcher - $> nextflow -quiet -log /Users/joostgroot/Work_local/NextFlow/nextflow_projects/test_training/training/side-quests/nf-test/.nf-test/tests/845365335ca5d90f8eaf8cbd14987d96/meta/nextflow.log run /Users/joostgroot/Work_local/NextFlow/nextflow_projects/test_training/training/side-quests/nf-test/main.nf -c /Users/joostgroot/Work_local/NextFlow/nextflow_projects/test_training/training/side-quests/nf-test/tests/nextflow.config -params-file /Users/joostgroot/Work_local/NextFlow/nextflow_projects/test_training/training/side-quests/nf-test/.nf-test/tests/845365335ca5d90f8eaf8cbd14987d96/meta/params.json -ansi-log false -with-trace /Users/joostgroot/Work_local/NextFlow/nextflow_projects/test_training/training/side-quests/nf-test/.nf-test/tests/845365335ca5d90f8eaf8cbd14987d96/meta/trace.csv -w /Users/joostgroot/Work_local/NextFlow/nextflow_projects/test_training/training/side-quests/nf-test/.nf-test/tests/845365335ca5d90f8eaf8cbd14987d96/work
+Jun-02 22:50:28.752 [main] INFO  nextflow.cli.CmdRun - N E X T F L O W  ~  version 24.10.5
+Jun-02 22:50:28.762 [main] DEBUG nextflow.plugin.PluginsFacade - Setting up plugin manager > mode=prod; embedded=false; plugins-dir=/Users/joostgroot/.nextflow/plugins; core-plugins: nf-amazon@2.9.2,nf-azure@1.10.2,nf-cloudcache@0.4.2,nf-codecommit@0.2.2,nf-console@1.1.4,nf-google@1.15.4,nf-tower@1.9.3,nf-wave@1.7.4
+Jun-02 22:50:28.784 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Enabled plugins: []
+Jun-02 22:50:28.784 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Disabled plugins: []
+Jun-02 22:50:28.786 [main] INFO  org.pf4j.DefaultPluginManager - PF4J version 3.12.0 in 'deployment' mode
+Jun-02 22:50:28.791 [main] INFO  org.pf4j.AbstractPluginManager - No plugins
+Jun-02 22:50:28.803 [main] DEBUG nextflow.config.ConfigBuilder - User config file: /Users/joostgroot/Work_local/NextFlow/nextflow_projects/test_training/training/side-quests/nf-test/tests/nextflow.config
+Jun-02 22:50:28.804 [main] DEBUG nextflow.config.ConfigBuilder - Parsing config file: /Users/joostgroot/Work_local/NextFlow/nextflow_projects/test_training/training/side-quests/nf-test/tests/nextflow.config
+Jun-02 22:50:28.817 [main] DEBUG n.secret.LocalSecretsProvider - Secrets store: /Users/joostgroot/.nextflow/secrets/store.json
+Jun-02 22:50:28.820 [main] DEBUG nextflow.secret.SecretsLoader - Discovered secrets providers: [nextflow.secret.LocalSecretsProvider@3a60c416] - activable => nextflow.secret.LocalSecretsProvider@3a60c416
+Jun-02 22:50:28.829 [main] DEBUG nextflow.config.ConfigBuilder - Applying config profile: `standard`
+Jun-02 22:50:29.000 [main] DEBUG nextflow.cli.CmdRun - Applied DSL=2 by global default
+Jun-02 22:50:29.007 [main] INFO  nextflow.cli.CmdRun - Launching `/Users/joostgroot/Work_local/NextFlow/nextflow_projects/test_training/training/side-quests/nf-test/main.nf` [fabulous_baekeland] DSL2 - revision: bbf79d5c31
+Jun-02 22:50:29.008 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins default=[]
+Jun-02 22:50:29.008 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins resolved requirement=[]
+Jun-02 22:50:29.037 [main] DEBUG nextflow.Session - Session UUID: 52f68d6f-166a-4da0-a36d-4c3522d0aee6
+Jun-02 22:50:29.037 [main] DEBUG nextflow.Session - Run name: fabulous_baekeland
+Jun-02 22:50:29.037 [main] DEBUG nextflow.Session - Executor pool size: 12
+Jun-02 22:50:29.041 [main] DEBUG nextflow.file.FilePorter - File porter settings maxRetries=3; maxTransfers=50; pollTimeout=null
+Jun-02 22:50:29.044 [main] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'FileTransfer' minSize=10; maxSize=36; workQueue=LinkedBlockingQueue[-1]; allowCoreThreadTimeout=false
+Jun-02 22:50:29.056 [main] DEBUG nextflow.cli.CmdRun - 
+  Version: 24.10.5 build 5935
+  Created: 04-03-2025 17:55 UTC (10:55 MDT)
+  System: Mac OS X 15.5
+  Runtime: Groovy 4.0.23 on OpenJDK 64-Bit Server VM 23.0.2
+  Encoding: UTF-8 (UTF-8)
+  Process: 50053@Joosts-MacBook-Pro.local [127.0.0.1]
+  CPUs: 12 - Mem: 96 GB (44.9 GB) - Swap: 0 (0)
+Jun-02 22:50:29.065 [main] DEBUG nextflow.Session - Work-dir: /Users/joostgroot/Work_local/NextFlow/nextflow_projects/test_training/training/side-quests/nf-test/.nf-test/tests/845365335ca5d90f8eaf8cbd14987d96/work [Mac OS X]
+Jun-02 22:50:29.065 [main] DEBUG nextflow.Session - Script base path does not exist or is not a directory: /Users/joostgroot/Work_local/NextFlow/nextflow_projects/test_training/training/side-quests/nf-test/bin
+Jun-02 22:50:29.069 [main] DEBUG nextflow.executor.ExecutorFactory - Extension executors providers=[]
+Jun-02 22:50:29.074 [main] DEBUG nextflow.Session - Observer factory: DefaultObserverFactory
+Jun-02 22:50:29.086 [main] DEBUG nextflow.cache.CacheFactory - Using Nextflow cache factory: nextflow.cache.DefaultCacheFactory
+Jun-02 22:50:29.090 [main] DEBUG nextflow.util.CustomThreadPool - Creating default thread pool > poolSize: 13; maxThreads: 1000
+Jun-02 22:50:29.116 [main] DEBUG nextflow.Session - Session start
+Jun-02 22:50:29.118 [main] DEBUG nextflow.trace.TraceFileObserver - Workflow started -- trace file: /Users/joostgroot/Work_local/NextFlow/nextflow_projects/test_training/training/side-quests/nf-test/.nf-test/tests/845365335ca5d90f8eaf8cbd14987d96/meta/trace.csv
+Jun-02 22:50:29.261 [main] DEBUG nextflow.script.ScriptRunner - > Launching execution
+Jun-02 22:50:29.335 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Jun-02 22:50:29.335 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Jun-02 22:50:29.338 [main] DEBUG nextflow.executor.Executor - [warm up] executor > local
+Jun-02 22:50:29.342 [main] DEBUG n.processor.LocalPollingMonitor - Creating local task monitor for executor 'local' > cpus=12; memory=96 GB; capacity=12; pollInterval=100ms; dumpInterval=5m
+Jun-02 22:50:29.343 [main] DEBUG n.processor.TaskPollingMonitor - >>> barrier register (monitor: local)
+Jun-02 22:50:29.368 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Jun-02 22:50:29.368 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Jun-02 22:50:29.370 [main] DEBUG nextflow.Session - Workflow process names [dsl2]: sayHello, convertToUpper
+Jun-02 22:50:29.370 [main] DEBUG nextflow.Session - Igniting dataflow network (3)
+Jun-02 22:50:29.373 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > sayHello
+Jun-02 22:50:29.373 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > convertToUpper
+Jun-02 22:50:29.373 [main] DEBUG nextflow.script.ScriptRunner - Parsed script files:
+  Script_bd179d71d7833e98: /Users/joostgroot/Work_local/NextFlow/nextflow_projects/test_training/training/side-quests/nf-test/main.nf
+Jun-02 22:50:29.373 [main] DEBUG nextflow.script.ScriptRunner - > Awaiting termination 
+Jun-02 22:50:29.373 [main] DEBUG nextflow.Session - Session await
+Jun-02 22:50:29.435 [Task submitter] WARN  n.executor.BashWrapperBuilder - Task runtime metrics are not reported when using macOS without a container engine
+Jun-02 22:50:29.442 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Jun-02 22:50:29.443 [Task submitter] INFO  nextflow.Session - [9a/89ab49] Submitted process > sayHello (1)
+Jun-02 22:50:29.448 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Jun-02 22:50:29.449 [Task submitter] INFO  nextflow.Session - [64/c5276c] Submitted process > sayHello (3)
+Jun-02 22:50:29.453 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Jun-02 22:50:29.453 [Task submitter] INFO  nextflow.Session - [b1/bf3699] Submitted process > sayHello (2)
+Jun-02 22:50:29.468 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 1; name: sayHello (1); status: COMPLETED; exit: 0; error: -; workDir: /Users/joostgroot/Work_local/NextFlow/nextflow_projects/test_training/training/side-quests/nf-test/.nf-test/tests/845365335ca5d90f8eaf8cbd14987d96/work/9a/89ab496085a47ef02d22a717505f1f]
+Jun-02 22:50:29.469 [Task monitor] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'TaskFinalizer' minSize=10; maxSize=36; workQueue=LinkedBlockingQueue[-1]; allowCoreThreadTimeout=false
+Jun-02 22:50:29.474 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 3; name: sayHello (3); status: COMPLETED; exit: 0; error: -; workDir: /Users/joostgroot/Work_local/NextFlow/nextflow_projects/test_training/training/side-quests/nf-test/.nf-test/tests/845365335ca5d90f8eaf8cbd14987d96/work/64/c5276c1ebd2d6ce7468a950c520638]
+Jun-02 22:50:29.474 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 2; name: sayHello (2); status: COMPLETED; exit: 0; error: -; workDir: /Users/joostgroot/Work_local/NextFlow/nextflow_projects/test_training/training/side-quests/nf-test/.nf-test/tests/845365335ca5d90f8eaf8cbd14987d96/work/b1/bf3699ae677ba6f70be34280d6cc99]
+Jun-02 22:50:29.486 [TaskFinalizer-1] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'PublishDir' minSize=10; maxSize=36; workQueue=LinkedBlockingQueue[-1]; allowCoreThreadTimeout=false
+Jun-02 22:50:29.494 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Jun-02 22:50:29.495 [Task submitter] INFO  nextflow.Session - [b7/02aac2] Submitted process > convertToUpper (2)
+Jun-02 22:50:29.498 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Jun-02 22:50:29.499 [Task submitter] INFO  nextflow.Session - [47/4ca1bb] Submitted process > convertToUpper (3)
+Jun-02 22:50:29.503 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Jun-02 22:50:29.511 [Task submitter] INFO  nextflow.Session - [bb/9328de] Submitted process > convertToUpper (1)
+Jun-02 22:50:29.529 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 5; name: convertToUpper (2); status: COMPLETED; exit: 0; error: -; workDir: /Users/joostgroot/Work_local/NextFlow/nextflow_projects/test_training/training/side-quests/nf-test/.nf-test/tests/845365335ca5d90f8eaf8cbd14987d96/work/b7/02aac28980cef60c4d1741f8f346cd]
+Jun-02 22:50:29.531 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 6; name: convertToUpper (3); status: COMPLETED; exit: 0; error: -; workDir: /Users/joostgroot/Work_local/NextFlow/nextflow_projects/test_training/training/side-quests/nf-test/.nf-test/tests/845365335ca5d90f8eaf8cbd14987d96/work/47/4ca1bba6565f743b042a32238833f4]
+Jun-02 22:50:29.538 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 4; name: convertToUpper (1); status: COMPLETED; exit: 0; error: -; workDir: /Users/joostgroot/Work_local/NextFlow/nextflow_projects/test_training/training/side-quests/nf-test/.nf-test/tests/845365335ca5d90f8eaf8cbd14987d96/work/bb/9328de1929d3b07911778576966823]
+Jun-02 22:50:29.540 [main] DEBUG nextflow.Session - Session await > all processes finished
+Jun-02 22:50:29.644 [Task monitor] DEBUG n.processor.TaskPollingMonitor - <<< barrier arrives (monitor: local) - terminating tasks monitor poll loop
+Jun-02 22:50:29.644 [main] DEBUG nextflow.Session - Session await > all barriers passed
+Jun-02 22:50:29.646 [main] DEBUG nextflow.util.ThreadPoolManager - Thread pool 'TaskFinalizer' shutdown completed (hard=false)
+Jun-02 22:50:29.646 [main] DEBUG nextflow.util.ThreadPoolManager - Thread pool 'PublishDir' shutdown completed (hard=false)
+Jun-02 22:50:29.650 [main] DEBUG n.trace.WorkflowStatsObserver - Workflow completed > WorkflowStats[succeededCount=6; failedCount=0; ignoredCount=0; cachedCount=0; pendingCount=0; submittedCount=0; runningCount=0; retriesCount=0; abortedCount=0; succeedDuration=0ms; failedDuration=0ms; cachedDuration=0ms;loadCpus=0; loadMemory=0; peakRunning=3; peakCpus=3; peakMemory=0; ]
+Jun-02 22:50:29.650 [main] DEBUG nextflow.trace.TraceFileObserver - Workflow completed -- saving trace file
+Jun-02 22:50:29.653 [main] DEBUG nextflow.cache.CacheDB - Closing CacheDB done
+Jun-02 22:50:29.660 [main] DEBUG nextflow.util.ThreadPoolManager - Thread pool 'FileTransfer' shutdown completed (hard=false)
+Jun-02 22:50:29.660 [main] DEBUG nextflow.script.ScriptRunner - > Execution complete -- Goodbye

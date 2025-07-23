@@ -1,0 +1,16 @@
+{
+    "Should run without failures and produce correct output": {
+        "content": [
+            {
+                "0": [
+                    "hello-output.txt:md5,b1946ac92492d2347c6235b4d2611184"
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.2",
+            "nextflow": "24.10.5"
+        },
+        "timestamp": "2025-06-02T21:05:20.807325"
+    }
+}

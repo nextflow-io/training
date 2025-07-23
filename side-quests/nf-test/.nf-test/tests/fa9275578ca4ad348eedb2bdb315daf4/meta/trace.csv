@@ -1,0 +1,2 @@
+task_id	hash	native_id	name	status	exit	submit	duration	realtime	%cpu	peak_rss	peak_vmem	rchar	wchar
+1	d2/88be84	49641	convertToUpper	COMPLETED	0	2025-06-02 22:48:33.987	27ms	0ms	-	-	-	-	-
