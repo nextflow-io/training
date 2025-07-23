@@ -5,8 +5,10 @@ process cowpy {
 
     publishDir 'results', mode: 'copy'
 
-    container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
-    conda 'conda-forge::cowpy==1.1.5'
+    // container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
+    // conda 'conda-forge::cowpy==1.1.5'
+    container 'community.wave.seqera.io/library/pip_cowpy:85c5ef8d359fd9e6'
+    conda 'conda-forge::cowpy='
 
     input:
         path input_file

@@ -3,7 +3,7 @@
 /*
  * Pipeline parameters
  */
-params.greeting = 'greetings.csv'
+params.greeting = '../greetings.csv'
 params.batch = 'test-batch'
 params.character = 'turkey'
 
