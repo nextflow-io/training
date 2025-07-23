@@ -5,7 +5,9 @@
  */
 
 // Primary input (file of input files, one per line)
-params.reads_bam = "${projectDir}/data/sample_bams.txt"
+params.reads_bam = "${projectDir}/data/sample_bams_1.txt"
+// Base name for final output file
+params.cohort_name = "family_trio"
 
 // Output directory
 params.outdir = "results_genomics"
@@ -54,16 +56,57 @@ process GATK_HAPLOTYPECALLER {
         path interval_list
 
     output:
-        path "${input_bam}.vcf"     , emit: vcf
-        path "${input_bam}.vcf.idx" , emit: idx
+        path "${input_bam}.g.vcf"     , emit: vcf
+        path "${input_bam}.g.vcf.idx" , emit: idx
 
     script:
     """
     gatk HaplotypeCaller \
         -R ${ref_fasta} \
         -I ${input_bam} \
-        -O ${input_bam}.vcf \
-        -L ${interval_list}
+        -O ${input_bam}.g.vcf \
+        -L ${interval_list} \
+        -ERC GVCF
+    """
+}
+
+/*
+ * Combine GVCFs into GenomicsDB datastore
+ */
+process GATK_JOINTGENOTYPING {
+
+    container "community.wave.seqera.io/library/gatk4:4.5.0.0--730ee8817e436867"
+    publishDir params.outdir, mode: 'symlink'
+
+    input:
+        path all_gvcfs
+        path all_idxs
+        path interval_list
+        val cohort_name
+        path ref_fasta
+        path ref_index
+        path ref_dict
+
+    output:
+        // path "${cohort_name}_gdb"   // previous version outputting only _gdb file, now we output VCF and index files
+        path "${cohort_name}.joint.vcf"     , emit: vcf
+        path "${cohort_name}.joint.vcf.idx" , emit: idx
+
+    script:
+
+    def gvcfs_line = all_gvcfs.collect { gvcf -> "-V ${gvcf}" }.join(' ') //closure allows to edit call and add -V in front of each GVCF file, then .join to concatenate outputs 
+
+    """
+    gatk GenomicsDBImport \
+        ${gvcfs_line} \
+        -L ${interval_list} \
+        --genomicsdb-workspace-path ${cohort_name}_gdb
+
+    gatk GenotypeGVCFs \
+        -R ${ref_fasta} \
+        -V gendb://${cohort_name}_gdb \
+        -L ${interval_list} \
+        -O ${cohort_name}.joint.vcf
     """
 }
 
@@ -89,4 +132,20 @@ workflow {
         ref_dict_file,
         intervals_file
     )
+
+    // Collect variant calling outputs across samples
+    all_gvcfs_ch = GATK_HAPLOTYPECALLER.out.vcf.collect() 
+    all_idxs_ch = GATK_HAPLOTYPECALLER.out.idx.collect()
+
+    // Combine GVCFs into a GenomicsDB datastore
+    GATK_JOINTGENOTYPING (
+        all_gvcfs_ch,
+        all_idxs_ch,
+        intervals_file,
+        params.cohort_name,
+        ref_file,
+        ref_index_file,
+        ref_dict_file
+    )
+
 }

@@ -5,7 +5,7 @@
  */
 
 // Primary input (file of input files, one per line)
-params.reads_bam = "${projectDir}/data/sample_bams.txt"
+params.reads_bam = "${projectDir}/data/sample_bams_1.txt"
 
 // Output directory
 params.outdir = "results_genomics"
