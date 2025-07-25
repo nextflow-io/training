@@ -204,21 +204,19 @@ Let's use this and separate our metadata from the file path. We'll use the `map`
 
 === "After"
 
-    ```groovy title="main.nf" linenums="5" hl_lines="2"
-
-= .map { row ->
-[ [id:row.id, character:row.character], row.recording ]
-}
-.view()
-
-````
+  ```groovy title="main.nf" linenums="5" hl_lines="2"
+  .map { row ->
+    [ [id:row.id, character:row.character], row.recording ]
+  }
+  .view()
+  ```
 
 === "Before"
 
     ```groovy title="main.nf" linenums="5"
-                            .map{ row ->
-                              row.character
-                            }
+    .map{ row ->
+      row.character
+    }
     ```
 
 Let's run it:
@@ -409,29 +407,28 @@ We can use the `map` operator to assign either group.
 
 === "After"
 
-    ```groovy title="main.nf" linenums="29" hl_lines="4-13"
-      ch_languages = ch_prediction.map { meta, file, lang ->
-                                      [ meta + [lang:lang], file ]
-                                  }
-                                  .map{ meta, file ->
+    ```groovy title="main.nf" linenums="31" hl_lines="3-11"
+    }
+    .map { meta, file ->
 
-                                      def lang_group = 'romance'
-                                      if (meta.lang.equals('de') || meta.lang.equals('en') ){
-                                          lang_group = 'germanic'
-                                      }
+        if ( meta.lang.equals("de") || meta.lang.equals('en') ){
+            lang_group = "germanic"
+        } else if ( meta.lang in ["fr", "es", "it"] ) {
+            lang_group = "romance"
+        } else {
+            lang_group = "unknown"
+        }
 
-                                      [ meta + [lang_group:lang_group], file ]
-                                  }
-                                  .view()
+        [ meta + [lang_group:lang_group], file ]
+    }
+    .view()
     ```
 
 === "Before"
 
-    ```groovy title="main.nf" linenums="29"
-          ch_languages = ch_prediction.map { meta, file, lang ->
-                                      [ meta + [lang:lang], file ]
-                                  }
-                                  .view()
+    ```groovy title="main.nf" linenums="31"
+    }
+    .view()
     ```
 
 Let's rerun it
@@ -707,9 +704,12 @@ This approach offers several advantages over hardcoding sample information:
 
 ```nextflow
 .map{ meta, file ->
-    def lang_group = 'romance'
-    if (meta.lang.equals('de') || meta.lang.equals('en') ){
-        lang_group = 'germanic'
+    if ( meta.lang.equals("de") || meta.lang.equals('en') ){
+        lang_group = "germanic"
+    } else if ( meta.lang in ["fr", "es", "it"] ) {
+        lang_group = "romance"
+    } else {
+        lang_group = "unknown"
     }
 }
 ```
