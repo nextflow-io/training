@@ -223,7 +223,7 @@ Let's run it:
 
 ```bash title="View meta map"
 nextflow run main.nf
-````
+```
 
 ```console title="View meta map"
  N E X T F L O W   ~  version 24.10.4
