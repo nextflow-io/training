@@ -26,6 +26,7 @@ Before taking on this side quest you should:
 
 - Complete the [Hello Nextflow](../hello_nextflow/README.md) tutorial
 - Understand basic Nextflow concepts (processes, channels, operators, working with files, meta data)
+- Basic understanding of using sample-specific data (meta data): [Working with sample-specific data](./metadata.md)
 
 ### 0.2. Starting Point
 
