@@ -130,10 +130,9 @@ Nextflow 커뮤니티 교육 포털에 오신 것을 환영합니다!
 
 이 교육 과정들은 현재 적극적으로 유지되거나 진행되지 않고 있으며, 향후 다른 용도로 재구성되거나 삭제될 수 있습니다. 해당 자료들은 교육 환경에서는 제공되지 않으며, GitHub 저장소에서 직접 다운로드하여 로컬에서 사용할 수 있습니다.
 
-- **nf-customize** — nf-core 파이프라인 설정 ([문서](other/nf_customize) / [코드](../other/nf-customize))
-- **nf-develop** — nf-core 템플릿으로 파이프라인 개발 ([문서](other/nf_develop) / [코드](../other/nf-develop))
-- **troubleshoot** — 문제 해결 연습 ([문서](other/troubleshoot) / [코드](../other/troubleshoot))
-- **hands-on (rnaseq)** — 벌크 RNAseq 파이프라인 개발 (사용 중단됨) ([문서](other/hands_on) / [코드](../other/hands-on))
+- **nf-customize** — nf-core 파이프라인 설정 ([문서](other/nf_customize) / [코드](https://github.com/nextflow-io/training/tree/master/other/nf-customize))
+- **troubleshoot** — 문제 해결 연습 ([문서](other/troubleshoot) / [코드](https://github.com/nextflow-io/training/tree/master/other/troubleshoot))
+- **hands-on (rnaseq)** — 벌크 RNAseq 파이프라인 개발 (사용 중단됨) ([문서](other/hands_on) / [코드](https://github.com/nextflow-io/training/tree/master/other/hands-on))
 
 ## 자료 모음
 
