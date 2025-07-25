@@ -239,7 +239,7 @@ Launching `main.nf` [grave_meucci] DSL2 - revision: b09964a583
 Found file: /workspaces/training/side-quests/working_with_files/data/sampleA_rep1_normal_R1_001.fastq.gz
 ```
 
-Note how Nextflow has grabbed the file we specified and turned it into a `file` object. Channel.fromPath() is a convenient way of creating a new channel populated by a list of files.
+Note how Nextflow has grabbed the file we specified and turned it into a `file` object. `Channel.fromPath()` is a convenient way of creating a new channel populated by a list of files.
 
 ### 2.2. Viewing Channel Contents
 
