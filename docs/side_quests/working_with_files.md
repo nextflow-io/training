@@ -59,7 +59,7 @@ You'll find a simple workflow file (`main.nf`) and a data directory containing s
 
 This directory contains paired-end sequencing data for three samples (A, B, C), with the typical `_R1_` and `_R2_` naming convention for forward and reverse reads. Each sample has normal and tumor tissue types, and sample A has two replicates.
 
-### 0.3 Running the Workflow
+### 0.3. Running the Workflow
 
 Take a look at the workflow file:
 

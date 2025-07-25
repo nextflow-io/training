@@ -205,11 +205,12 @@ Let's use this and separate our metadata from the file path. We'll use the `map`
 === "After"
 
     ```groovy title="main.nf" linenums="5" hl_lines="2"
-=                           .map { row ->
-                              [ [id:row.id, character:row.character], row.recording ]
-                            }
-                            .view()
-    ```
+
+= .map { row ->
+[ [id:row.id, character:row.character], row.recording ]
+}
+.view()
+```
 
 === "Before"
 

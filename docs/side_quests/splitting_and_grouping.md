@@ -1087,16 +1087,17 @@ Let's now group the samples by this new grouping element, using the [`groupTuple
 === "After"
 
     ```groovy title="main.nf" linenums="39" hl_lines="8"
-  ch_grouped_samples = ch_combined_samples.map { grouping_key, normal_meta, normal, tumor_meta, tumor ->
-                            [
-                                grouping_key.subMap('id', 'interval'),
-                                normal,
-                                tumor
-                            ]
-                          }
-                          .groupTuple()
-                          .view()
-    ```
+
+ch_grouped_samples = ch_combined_samples.map { grouping_key, normal_meta, normal, tumor_meta, tumor ->
+[
+grouping_key.subMap('id', 'interval'),
+normal,
+tumor
+]
+}
+.groupTuple()
+.view()
+```
 
 === "Before"
 
