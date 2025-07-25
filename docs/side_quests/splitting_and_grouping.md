@@ -578,17 +578,17 @@ The `subMap` method takes a map and returns a new map with only the key-value pa
     ch_normal_samples =  ch_samplesheet
                         .filter { meta, file -> meta.type == 'normal' }
                         .map { meta, file -> [
-                                meta.subMap(['id', 'repeat']),
-                                meta,
-                                file
+                              meta.subMap(['id', 'repeat']),
+                              meta,
+                              file
                             ]
                         }
     ch_tumor_samples = ch_samplesheet
                         .filter { meta, file -> meta.type == 'tumor' }
                         .map { meta, file -> [
-                                meta.subMap(['id', 'repeat']),
-                                meta,
-                                file
+                              meta.subMap(['id', 'repeat']),
+                              meta,
+                              file
                             ]
                         }
     ```
@@ -665,7 +665,7 @@ We have taken the map we used previously and defined it as a named variable we c
 
 === "After"
 
-    ```groovy title="main.nf" linenums="7" hl_lines="3 6"
+    ```groovy title="main.nf" linenums="7" hl_lines="3 7"
     ch_normal_samples =  ch_samplesheet
                         .filter { meta, file -> meta.type == 'normal' }
                         .map ( getSampleIdAndReplicate )
@@ -837,7 +837,8 @@ In this section, you've learned:
 - **Creating Joining Keys**: How to use `subMap` to create a new joining key
 - **Named Closures**: How to use a named closure in map
 - **Deduplicating Data**: How to remove duplicate data from the channel
-  You now have a workflow that can split a samplesheet, filter the normal and tumor samples, join them together by sample ID and replicate number, then print the results.
+
+You now have a workflow that can split a samplesheet, filter the normal and tumor samples, join them together by sample ID and replicate number, then print the results.
 
 This is a common pattern in bioinformatics workflows where you need to match up samples after processing independently, so it is a useful skill. Next, we will look at repeating a sample multiple times.
 

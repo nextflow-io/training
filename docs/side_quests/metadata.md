@@ -204,12 +204,12 @@ Let's use this and separate our metadata from the file path. We'll use the `map`
 
 === "After"
 
-  ```groovy title="main.nf" linenums="5" hl_lines="2"
-  .map { row ->
-    [ [id:row.id, character:row.character], row.recording ]
-  }
-  .view()
-  ```
+    ```groovy title="main.nf" linenums="5" hl_lines="2"
+    .map { row ->
+      [ [id:row.id, character:row.character], row.recording ]
+    }
+    .view()
+    ```
 
 === "Before"
 
@@ -407,7 +407,7 @@ We can use the `map` operator to assign either group.
 
 === "After"
 
-    ```groovy title="main.nf" linenums="31" hl_lines="3-11"
+    ```groovy title="main.nf" linenums="31" hl_lines="4-10"
     }
     .map { meta, file ->
 
