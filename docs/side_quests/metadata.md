@@ -210,7 +210,8 @@ Let's use this and separate our metadata from the file path. We'll use the `map`
 [ [id:row.id, character:row.character], row.recording ]
 }
 .view()
-```
+
+````
 
 === "Before"
 
@@ -224,7 +225,7 @@ Let's run it:
 
 ```bash title="View meta map"
 nextflow run main.nf
-```
+````
 
 ```console title="View meta map"
  N E X T F L O W   ~  version 24.10.4
