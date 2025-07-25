@@ -5,7 +5,9 @@
 </div>
 
 /// caption
-:fontawesome-brands-youtube:{ .youtube } See the [whole playlist on the Nextflow YouTube channel](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik).
+:fontawesome-brands-youtube:{ .youtube } Guarda [tutta la playlist](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik) sul canale Youtube Nextflow.
+
+:green_book: La trascrizione di questo video è disponibile [qui](./transcripts/03_hello_workflow.md).
 ///
 
 Questa sezione spiega come organizzare il codice del workflow per rendere più efficiente e sostenibile lo sviluppo e la manutenzione della pipeline.

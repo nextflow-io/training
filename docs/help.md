@@ -4,7 +4,7 @@
 
 Nextflow has an excellent set of [docs](https://nextflow.io/docs/latest/), which should be your first destination whenever you run into something you don't understand or want to learn more about. You can browse topics or search for specific terms.
 
-## community.seqera.io
+## Community forum
 
 If you're struggling with the training, please don't hesitate to reach out for help. Our amazing community is one of the great strengths of Nextflow!
 
