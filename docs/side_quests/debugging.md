@@ -111,7 +111,7 @@ Syntax errors are the most common type of error you'll encounter when writing Ne
 
     For comprehensive coverage of IDE syntax highlighting, error detection, Problems panel, and other visual debugging aids, see [IDE Features for Nextflow Development](ide_features.md). This section focuses on interpreting error messages and systematic debugging approaches.
 
-### 1.1 Missing braces
+### 1.1. Missing braces
 
 One of the most common syntax errors, and sometimes one of the more complex ones to debug is **missing or mismatched brackets**.
 
@@ -193,7 +193,7 @@ If you replace the comment with the missing closing brace, and run the workflow 
 nextflow run bad_syntax.nf
 ```
 
-### 1.2 Using incorrect process keywords or directives
+### 1.2. Using incorrect process keywords or directives
 
 Another common syntax error is an **invalid process definition**. This can happen if you forget to define required blocks or use incorrect directives in the process definition. Maybe you try to use `inputs` rather than the correction `input` directive, as we illustrate in `invalid_process.nf`:
 
@@ -246,7 +246,7 @@ ERROR ~ Script compilation error
 
 In these cases the error messaging is quite straightforward, and you should be able to quickly replace the incorrect keyword with the correct on by referencing [the documentation](https://www.nextflow.io/docs/latest/process.html#).
 
-### 1.3 Using bad variable names
+### 1.3. Using bad variable names
 
 The variable names you use in your script blocks must be valid, derived either from inputs or from groovy code inserted before the script:
 
@@ -301,7 +301,7 @@ Tip: when you have fixed the problem you can continue the execution adding the o
 
 If you get a 'No such variable' error it will be because you've made a mistake like this. You can fix it by either defining the variable (by correcting input variable names or editing groovy code before the script), or by removing it from the script block if it's not needed.
 
-### 1.4 Bad use of Bash variables
+### 1.4. Bad use of Bash variables
 
 Another form of the bad variable error appears when trying to use variabled in the Bash content of the script block:
 
@@ -344,7 +344,7 @@ echo "Processing ${sample_name}" > \${prefix}.txt
 
     This approach avoids the need to escape dollar signs and makes the code easier to read and maintain.
 
-### 1.5 Non-lethal syntax errors when using the VSCode extension
+### 1.5. Non-lethal syntax errors when using the VSCode extension
 
 The Nextflow VSCode extension sometimes highlights issues that are not (yet) fatal errors in Nextflow. For example, you should always define your input channels within the workflow block, and the extension will highlight this as a potential issue. Open `nonlethal_syntax.nf` in VS Code to see an example:
 
@@ -444,7 +444,7 @@ Process `PROCESS_FILES` declares 1 input channel but 2 were specified
 
 To fix this you need to either combine the channels into tuples or pass only the required channel. The error message clearly states that the process expects 1 input channel but 2 were provided. For this specific example, the process expects a single channel and doesn't require the second channel, so we can fix it by passing only the `samples_ch` channel. More commonly, you might add additional inputs to a process and forget to update the workflow call accordingly, which can lead to this type of error. Fortunately this is one of the easier to understand and fix errors, as the error message is quite clear about the mismatch.
 
-### 2.2 Mismatched channel arity
+### 2.2. Mismatched channel arity
 
 Some channel structure errors are much more subtle and produce no errors at all. Probably the most common of these reflects a challenge that new Nextflow users face in understanding that channels can be exhausted. Open `exhausted.nf` in VS Code to see an example:
 
@@ -717,7 +717,7 @@ If you encounter this sort of error, go back and check that the outputs match be
 sample3_output.txt
 ```
 
-### 3.2 Missing software
+### 3.2. Missing software
 
 `missing_software.nf` is an example similar to the others we've encoutered in this module. There are no syntax errors, and this time we're using the `cowpy` command. If you try to run this workflow:
 
