@@ -278,7 +278,7 @@ This tells us that three processes were run, corresponding to the three tools sh
 Finally, let's have a look at the `demo-results` directory produced by the pipeline.
 
 ```bash
-tree demo-results
+tree -L 2 demo-results
 ```
 
 ```console title="Output"
