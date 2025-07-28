@@ -21,4 +21,3 @@ workflow {
     // Call the process with the input channel
     PROCESS_FILES(input_ch)
 }
-
