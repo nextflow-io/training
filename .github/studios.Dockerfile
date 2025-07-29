@@ -16,16 +16,16 @@ RUN mkdir -p /workspaces/.nextflow && \
 RUN mkdir -p /workspaces/training/.vscode
 COPY <<EOF /workspaces/training/.vscode/settings.json
 {
-  "workbench.colorTheme": "Default Dark Modern",
-  "terminal.integrated.defaultProfile.linux": "bash",
-  "terminal.integrated.cwd": "${workspaceFolder}",
-  "workbench.startupEditor": "none",
-  "workbench.panel.defaultLocation": "bottom",
-  "workbench.panel.opensMaximized": "never",
-  "terminal.integrated.showOnStartup": "always",
-  "cSpell.diagnosticLevel": "Hint",
-  "nextflow.java.home": "/usr",
-  "nextflow.debug": false
+    "workbench.colorTheme": "Default Dark Modern",
+    "terminal.integrated.defaultProfile.linux": "bash",
+    "terminal.integrated.cwd": "${workspaceFolder}",
+    "workbench.startupEditor": "none",
+    "workbench.panel.defaultLocation": "bottom",
+    "workbench.panel.opensMaximized": "never",
+    "terminal.integrated.showOnStartup": "always",
+    "cSpell.diagnosticLevel": "Hint",
+    "nextflow.java.home": "/usr",
+    "nextflow.debug": false
 }
 EOF
 
