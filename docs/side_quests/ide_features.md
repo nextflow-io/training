@@ -329,7 +329,7 @@ This shows:
 
 Start typing to filter results.
 
-### 4.4. Find All References
+### 4.3. Find All References
 
 Understanding where a process or variable is used throughout your codebase can be very helpful. For instance, if you want to find all references to the `FASTQC` process, start by navigating to its definition. You can do this by opening `modules/fastqc.nf` directly, or by using VS Code's quick navigation feature with `Ctrl-click` (or `Cmd-click` on Mac). Once at the process definition, right-click on the `FASTQC` process name and select "Find All References" from the context menu to see all instances where it is used.
 
@@ -337,7 +337,7 @@ Understanding where a process or variable is used throughout your codebase can b
 
 This feature displays all instances where `FASTQC` is referenced within your workspace, including its usage in the two distinct workflows. This insight is crucial for assessing the potential impact of modifications to the `FASTQC` process.
 
-### 4.5. Outline Panel
+### 4.4. Outline Panel
 
 The Outline panel, located in the Explorer sidebar, provides a convenient overview of all symbols in your current file. This feature allows you to quickly navigate and manage the structure of your code by displaying functions, variables, and other key elements in a hierarchical view.
 
@@ -345,7 +345,7 @@ The Outline panel, located in the Explorer sidebar, provides a convenient overvi
 
 Use the Outline panel to navigate quickly to different parts of your code without using the file browser.
 
-### 4.6. DAG visualization
+### 4.5. DAG visualization
 
 VS Code's Nextflow extension can visualize your workflow as a Directed Acyclic Graph (DAG). This helps you understand the data flow and dependencies between processes. Open `complex_workflow.nf` and click the "Preview DAG" button above `workflow {` (the second `workflow` block in this file):
 
