@@ -106,22 +106,6 @@ Since you've been using VS Code throughout Hello Nextflow, you're already famili
 
 You can drag panels around or hide them (`Ctrl+B` or `Cmd+B` to toggle the sidebar) to customize your layout as we work through the examples.
 
-### 0.3. AI-Assisted Development Setup (Optional)
-
-!!! note "AI Features Are Optional"
-
-    All core IDE skills can be completed without AI tools. AI assistance is designed to supplement, not replace, development knowledge.
-
-The Nextflow VS Code extension includes integration with Seqera AI via GitHub Copilot. To set Copilot up, follow the [official VS Code GitHub Copilot setup guide](https://code.visualstudio.com/docs/copilot/setup).
-
-Once GitHub Copilot is configured, you can access Nextflow-specific AI assistance by:
-
-1. Opening the Copilot chat (`Ctrl+Shift+I` or `Cmd+Shift+I`)
-2. Typing `@Seqera` followed by your question for Nextflow-specific guidance
-3. If desired, switch to agent mode and ask to apply suggestions
-
-This integration provides context-aware suggestions and explanations tailored to Nextflow development.
-
 ### Takeaway
 
 You have VS Code set up with the Nextflow extension and understand the workspace layout for efficient development.
@@ -222,7 +206,7 @@ You'll see suggestions for:
 - `memory`
 - `cpus`
 
-This saves time when configuring processes and works across different configuration scopes—try typing `docker.` to see Docker-specific configuration options.
+This saves time when configuring processes and works across different configuration scopes. For example, try typing `docker.` to see Docker-specific configuration options.
 
 ### Takeaway
 
@@ -230,7 +214,7 @@ You can use VS Code's intelligent auto-completion to discover available channel 
 
 ### What's next?
 
-Learn how real-time error detection helps you catch issues before running your workflow.
+Learn how real-time error detection helps you catch issues before running your workflow, simply by reading the code.
 
 ## 3. Error Detection and Diagnostics
 
@@ -251,6 +235,8 @@ Beyond individual error highlighting, VS Code provides a centralized Problems pa
 Click on any issue to jump directly to the problematic line
 
 ![Problems Panel](img/problems_panel.png)
+
+Fix the error by changing the process name back to `FASTQC`.
 
 ### 3.3. Common Error Patterns
 
@@ -278,9 +264,36 @@ Learn how to efficiently navigate between processes, modules, and definitions in
 
 Efficient navigation is crucial when working with complex workflows spanning multiple files. To understand this, replace the process definition in `basic_workflow.nf` with an import for the module we've provided you:
 
-```groovy
-include { FASTQC } from './modules/fastqc.nf'
-```
+=== "After"
+
+    ```groovy title="basic_workflow.nf" linenums="3"
+    include { FASTQC } from './modules/fastqc.nf'
+    ```
+
+=== "Before"
+
+    ```groovy title="basic_workflow.nf" linenums="3"
+    process FASTQC {
+        tag "${sample_id}"
+        publishDir "${params.output_dir}/fastqc", mode: 'copy'
+
+        input:
+        tuple val(sample_id), path(reads)
+
+        output:
+        tuple val(sample_id), path("*.html"), emit: html
+        tuple val(sample_id), path("*.zip"), emit: zip
+
+        script:
+        def args = task.ext.args ?: ''
+        """
+        fastqc \\
+            ${args} \\
+            --threads ${task.cpus} \\
+            ${reads}
+        """
+    }
+    ```
 
 ### 4.1. Go to Definition
 
@@ -292,7 +305,7 @@ This feature is particularly valuable when authoring workflows, as it allows you
 
 You can quickly navigate to any process, module, or variable definition using **Ctrl-click** (or **Cmd-click** on Mac). Mouse over the link to the module file at the top of the script, and follow the link as suggested:
 
-![Follow link](img/follow_link.png) 2. `Ctrl-click`/`Cmd-click` on different process names
+![Follow link](img/follow_link.png)
 Try this on the `FASTQC` process name in the workflow block. This links you directly to the process name (which is the same as the module file in this example, but could be part-way through a much larger file).
 
 Now let's explore navigation in a more complex workflow using `complex_workflow.nf` (the illustration-only file mentioned earlier). This workflow contains multiple processes defined in separate module files, as well as some inline ones. While complex multi-file structures can be challenging to navigate manually, the ability to jump to definitions makes exploration much more manageable.
@@ -316,27 +329,21 @@ This shows:
 
 Start typing to filter results.
 
-### 4.3. Workspace Symbol Search
-
-Press `Ctrl+T` (or `Cmd+T`) to search symbols across your entire workspace:
-
-- Find processes across all files
-- Locate module definitions
-- Search for specific functions
-
 ### 4.4. Find All References
 
-Sometimes it's useful to understand where a process or variable is used throughout your codebase. In this example, if you want to see where the `FASTQC` process is referenced. Open the file `modules/fastqc.nf` and right-click on the `FASTQC` process name. Select "Find All References" from the context menu:
+Understanding where a process or variable is used throughout your codebase can be very helpful. For instance, if you want to find all references to the `FASTQC` process, start by navigating to its definition. You can do this by opening `modules/fastqc.nf` directly, or by using VS Code's quick navigation feature with `Ctrl-click` (or `Cmd-click` on Mac). Once at the process definition, right-click on the `FASTQC` process name and select "Find All References" from the context menu to see all instances where it is used.
 
 ![Find references](img/references.png)
 
-This will show you all places where `FASTQC` is referenced in your workspace, including the two separate workflows we've used it in. This would help us understand the impact of any changes we make to the `FASTQC` process.
+This feature displays all instances where `FASTQC` is referenced within your workspace, including its usage in the two distinct workflows. This insight is crucial for assessing the potential impact of modifications to the `FASTQC` process.
 
 ### 4.5. Outline Panel
 
-Use the Outline panel in the Explorer sidebar on the left for a persistent view of the symbols in the current file:
+The Outline panel, located in the Explorer sidebar, provides a convenient overview of all symbols in your current file. This feature allows you to quickly navigate and manage the structure of your code by displaying functions, variables, and other key elements in a hierarchical view.
 
 ![Outline panel](img/outline.png)
+
+Use the Outline panel to navigate quickly to different parts of your code without using the file browser.
 
 ### 4.6. DAG visualization
 
@@ -417,15 +424,15 @@ Learn how code formatting and maintenance features keep your workflows organized
 
 ## 6. Code Formatting and Maintenance
 
-Formatting your code well isn’t just for looks—it actually helps you read, understand, and update complex workflows much more easily.
+Proper code formatting is essential not only for aesthetics but also for enhancing readability, comprehension, and the ease of updating complex workflows.
 
 ### 6.1. Automatic Formatting in Action
 
 Open `basic_workflow.nf` and deliberately mess up the formatting:
 
-- Remove some indentation
-- Add extra spaces in random places
-- Break some lines awkwardly
+- Remove some indentation: Highlight the entire document and press `shift+tab` lots of times to remove as many indentations as possible.
+- Add extra spaces in random places: the `Channel.fromPath` statement, add 30 spaces after the `(`.
+- Break some lines awkwardly: Add a new line between the the `.view {` operator and the `Processing sample:` string but do not add a corresponding newline before the closing parenthesis `}`.
 
 Now press `Shift+Alt+F` (or `Shift+Option+F`) to auto-format:
 
@@ -435,6 +442,10 @@ VS Code immediately:
 - Aligns similar elements consistently
 - Removes unnecessary whitespace
 - Maintains readable line breaks
+
+Note that automatic formatting may not resolve every code style issue. The Nextflow language server aims to keep your code tidy, but it also respects your personal preferences in certain areas. For example, if you remove indentation inside the `script` block of a process, the formatter will leave it as-is, since you might intentionally prefer that style.
+
+Currently, there is no strict style enforcement for Nextflow, so the language server offers some flexibility. However, it will consistently apply formatting rules around method and function definitions to maintain clarity.
 
 ### 6.2. Code Organization Features
 
@@ -526,9 +537,15 @@ Explore optional AI-assisted development features that can accelerate learning a
 
 ## 8. AI-Assisted Development (Optional)
 
+This integration provides context-aware suggestions and explanations tailored to Nextflow development.
+
 !!! note "AI Features Are Optional"
 
-    This section is for users with AI coding assistants. All core IDE skills above are sufficient for effective development.
+    This section is for users with AI coding assistants. All core IDE skills can be completed without AI tools. AI assistance is designed to supplement, not replace, development knowledge.
+
+The Nextflow VS Code extension includes integration with Seqera AI via GitHub Copilot. To set Copilot up, follow the [official VS Code GitHub Copilot setup guide](https://code.visualstudio.com/docs/copilot/setup).
+
+Once GitHub Copilot is configured, you can access Nextflow-specific AI assistance.
 
 ### 8.1. Practical AI Assistance
 
@@ -585,52 +602,30 @@ See how all these IDE features work together in your daily development workflow.
 
 ---
 
-## 9. Daily Development Workflow
+## 9. Recap and quick notes
 
-Putting it all together, here's how these IDE features work in practice:
+Here are some quick notes on each of the IDE features discussed above:
 
 ### 9.1. Starting a New Feature
 
-1. **Quick file open** (`Ctrl+P`) to find relevant existing modules
+1. **Quick file open** (`Ctrl+P` or `Cmd+P`) to find relevant existing modules
 2. **Split editor** to view similar processes side by side
-3. **Symbol navigation** (`Ctrl+Shift+O`) to understand file structure
+3. **Symbol navigation** (`Ctrl+Shift+O` or `Cmd+Shift+O`) to understand file structure
 4. **Auto-completion** to write new code quickly
 
 ### 9.2. Debugging Issues
 
-1. **Problems panel** (`Ctrl+Shift+M`) to see all errors at once
-2. **Go to definition** (`Ctrl+click`) to understand process interfaces
+1. **Problems panel** (`Ctrl+Shift+M` or `Cmd+Shift+M`) to see all errors at once
+2. **Go to definition** (`Ctrl-click` or `Cmd-click`) to understand process interfaces
 3. **Find all references** to see how processes are used
 4. **Project-wide search** to find similar patterns or issues
 
 ### 9.3. Refactoring and Improvement
 
-1. **Project-wide search** (`Ctrl+Shift+F`) to find patterns
-2. **Auto-formatting** (`Shift+Alt+F`) to maintain consistency
+1. **Project-wide search** (`Ctrl+Shift+F` or `Cmd+Shift+F`) to find patterns
+2. **Auto-formatting** (`Shift+Alt+F` or `Shift+Option+F`) to maintain consistency
 3. **Code folding** to focus on structure
 4. **Git integration** to track changes
-
-### 9.4. Essential Keyboard Shortcuts
-
-These high-impact shortcuts will give you the biggest productivity boost:
-
-**Navigation:**
-
-- `Ctrl+P` / `Cmd+P`: Quick file open
-- `Ctrl+Shift+O` / `Cmd+Shift+O`: Go to symbol
-- `F12` or `Ctrl+Click`: Go to definition
-
-**Editing:**
-
-- `Shift+Alt+F` / `Shift+Option+F`: Format document
-- `Ctrl+/` / `Cmd+/`: Toggle comments
-- `Ctrl+Shift+M` / `Cmd+Shift+M`: Problems panel
-
-**Development:**
-
-- `Ctrl+Shift+F` / `Cmd+Shift+F`: Search across files
-- `Shift+F12`: Find all references
-- `Ctrl+Shift+G` / `Cmd+Shift+G`: Source control panel
 
 ---
 

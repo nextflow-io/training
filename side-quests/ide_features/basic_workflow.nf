@@ -1,6 +1,25 @@
 #!/usr/bin/env nextflow
 
-include { FASTQC } from './modules/fastqc.nf'
+process FASTQC {
+    tag "${sample_id}"
+    publishDir "${params.output_dir}/fastqc", mode: 'copy'
+
+    input:
+    tuple val(sample_id), path(reads)
+
+    output:
+    tuple val(sample_id), path("*.html"), emit: html
+    tuple val(sample_id), path("*.zip"), emit: zip
+
+    script:
+    def args = task.ext.args ?: ''
+    """
+    fastqc \\
+        ${args} \\
+        --threads ${task.cpus} \\
+        ${reads}
+    """
+}
 
 /*
  * Workflow parameters
