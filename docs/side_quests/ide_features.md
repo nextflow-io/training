@@ -1,6 +1,10 @@
-# IDE Features for Nextflow Development
+# Nextflow Development Environment Walkthrough
 
 Modern Integrated Development Environments (IDEs) can dramatically transform your Nextflow development experience. This side quest focuses specifically on leveraging VS Code and its Nextflow extension to write code faster, catch errors early, and navigate complex workflows efficiently.
+
+!!! warning
+
+    If you are using a Mac, some keyboard shortcuts will use "cmd" instead of "ctrl".
 
 ## What you should know first
 
@@ -95,18 +99,18 @@ To install the extension manually:
 
 Since you've been using VS Code throughout Hello Nextflow, you're already familiar with the basics. Here's how to organize your workspace efficiently for this session:
 
-- **File Explorer** (`Ctrl+Shift+E`): Keep this open on the left to navigate between files
-- **Integrated Terminal** (`Ctrl+Shift+` backtick): Open at the bottom for running Nextflow commands
-- **Editor Area**: Split this when comparing files side by side
-- **Problems Panel** (`Ctrl+Shift+M`): Useful for seeing syntax errors at a glance
+- **Editor Area**: For viewing and editing files. You can split this into multiple panes to compare files side by side.
+- **File Explorer** (`Ctrl+Shift+E`): The local files and folders on your system. Keep this open on the left to navigate between files
+- **Integrated Terminal** (`Ctrl+Shift+` backtick): A terminal for interacting with the computer at the bottom. Use this to run Nextflow or other commands.
+- **Problems Panel** (`Ctrl+Shift+M`): VS Code will show any errors and problems it detects here. This is useful for highlighting issues at a glance.
 
-You can drag panels around or hide them (`Ctrl+B` to toggle the sidebar) to customize your layout as we work through the examples.
+You can drag panels around or hide them (`Ctrl+B` or `Cmd+B` to toggle the sidebar) to customize your layout as we work through the examples.
 
 ### 0.3. AI-Assisted Development Setup (Optional)
 
 !!! note "AI Features Are Optional"
 
-    All core IDE skills can be completed without AI tools. AI assistance is designed to supplement, not replace, fundamental development knowledge.
+    All core IDE skills can be completed without AI tools. AI assistance is designed to supplement, not replace, development knowledge.
 
 The Nextflow VS Code extension includes integration with Seqera AI via GitHub Copilot. To set Copilot up, follow the [official VS Code GitHub Copilot setup guide](https://code.visualstudio.com/docs/copilot/setup).
 
@@ -250,13 +254,15 @@ Click on any issue to jump directly to the problematic line
 
 ### 3.3. Common Error Patterns
 
-The extension helps identify:
+Common errors in Nextflow syntax include:
 
 - **Missing brackets**: Unmatched `{` or `}`
 - **Incomplete blocks**: Missing required sections in processes
 - **Invalid syntax**: Malformed Nextflow DSL
 - **Typos in keywords**: Misspelled process directives
 - **Channel mismatches**: Type incompatibilities
+
+The Nextflow language server highlights these issues in the Problems panel. You can check these out early to avoid syntax errors while running a pipeline.
 
 ### Takeaway
 
@@ -278,7 +284,7 @@ include { FASTQC } from './modules/fastqc.nf'
 
 ### 4.1. Go to Definition
 
-Mouse over the `FASTQC` process name in the workflow block. You'll see a tooltip with the definition:
+You can quickly navigate to any process, module, or variable definition using `Ctrl-click` (or `Cmd-click` on Mac). Mouse over the link to the module file at the top of the script, and follow the link as suggested:
 
 ![Go to definition](img/syntax.png)
 
@@ -286,20 +292,19 @@ This feature is particularly valuable when authoring workflows, as it allows you
 
 You can quickly navigate to any process, module, or variable definition using **Ctrl-click** (or **Cmd-click** on Mac). Mouse over the link to the module file at the top of the script, and follow the link as suggested:
 
-![Follow link](img/follow_link.png)
-
+![Follow link](img/follow_link.png) 2. `Ctrl-click`/`Cmd-click` on different process names
 Try this on the `FASTQC` process name in the workflow block. This links you directly to the process name (which is the same as the module file in this example, but could be part-way through a much larger file).
 
 Now let's explore navigation in a more complex workflow using `complex_workflow.nf` (the illustration-only file mentioned earlier). This workflow contains multiple processes defined in separate module files, as well as some inline ones. While complex multi-file structures can be challenging to navigate manually, the ability to jump to definitions makes exploration much more manageable.
 
 1. Open `complex_workflow.nf`
-2. Ctrl-click on different process names
-3. Navigate to module definitions
-4. Use **Alt+←** (or **Ctrl+-**) to navigate back
+2. Navigate to module definitions
+3. Use **Alt+←** (or **Ctrl+-**) to navigate back
+4. Navigate to the `FASTQC` process name in the workflow block. This links you directly to the process name (which is the same as the module file in this example, but could be part-way through a much larger file).
 
 ### 4.2. Symbol Navigation
 
-With `complex_workflow.nf` still open, you can get an overview of all symbols in the file by pressing **Ctrl+Shift+O** (or **Cmd+Shift+O**):
+With `complex_workflow.nf` still open, you can get an overview of all symbols in the file by pressing `Ctrl+Shift+O` (or `Cmd+Shift+O`):
 
 ![Symbol navigation](img/symbols.png)
 
@@ -313,7 +318,7 @@ Start typing to filter results.
 
 ### 4.3. Workspace Symbol Search
 
-Press **Ctrl+T** (or **Cmd+T**) to search symbols across your entire workspace:
+Press `Ctrl+T` (or `Cmd+T`) to search symbols across your entire workspace:
 
 - Find processes across all files
 - Locate module definitions
@@ -365,9 +370,9 @@ VS Code will show you matching files. Select `modules/fastqc.nf` to jump there i
 
 Try this with other patterns:
 
-- Type "star" to find the STAR alignment module
-- Type "utils" to find utility functions
-- Type "config" to jump to configuration files
+- Type "star" to find the STAR alignment module file (`star.nf`)
+- Type "utils" to find utility functions file (`utils.nf`)
+- Type "config" to jump to configuration files (`nextflow.config`)
 
 ### 5.2. Split Editor for Multi-file Development
 
@@ -382,13 +387,13 @@ When working with modules, you often need to see both the main workflow and modu
 
 This is invaluable when:
 
-- Checking module interfaces while writing workflow calls
+- Checking module interfaces while writing workflow calls, and the preview is not enough
 - Comparing similar processes across different modules
 - Debugging data flow between workflow and modules
 
 ### 5.3. Project-wide Search
 
-Sometimes you need to find where specific patterns are used across your entire project. Press **Ctrl+Shift+F** (or **Cmd+Shift+F**) to open the search panel.
+Sometimes you need to find where specific patterns are used across your entire project. Press `Ctrl+Shift+F` (or `Cmd+Shift+F`) to open the search panel.
 
 Try searching for `publishDir` across the workspace:
 
@@ -412,7 +417,7 @@ Learn how code formatting and maintenance features keep your workflows organized
 
 ## 6. Code Formatting and Maintenance
 
-Good code formatting isn't just about aesthetics - it makes complex workflows easier to understand and maintain.
+Formatting your code well isn’t just for looks—it actually helps you read, understand, and update complex workflows much more easily.
 
 ### 6.1. Automatic Formatting in Action
 
@@ -422,7 +427,7 @@ Open `basic_workflow.nf` and deliberately mess up the formatting:
 - Add extra spaces in random places
 - Break some lines awkwardly
 
-Now press **Shift+Alt+F** (or **Shift+Option+F**) to auto-format:
+Now press `Shift+Alt+F` (or `Shift+Option+F`) to auto-format:
 
 VS Code immediately:
 
