@@ -125,6 +125,9 @@ extra_css:
   - assets/stylesheets/fonts.css
   - assets/stylesheets/extra.css
 
+extra_javascript:
+  - assets/javascripts/posthog.js
+
 # Set in docs/assets/overrides/partials/copyright.html
 # so that we can have links and stuff
 # copyright: Seqera
@@ -140,8 +143,8 @@ extra:
     hide_after: 2025-03-15
   # Analytics
   analytics:
-    provider: gtm
-    property: GTM-TNCXSWG
+    provider: google
+    property: G-244N3GEN75
   consent:
     title: Cookie consent
     description: >-
