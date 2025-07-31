@@ -11,8 +11,8 @@
     // Check if Material for MkDocs consent cookie exists
     var consent = __md_get && __md_get("__consent");
     
-    if (consent && consent.analytics) {
-      // User has consented - use your exact configuration
+    if (consent && consent.posthog) {
+      // User has consented to PostHog specifically - use your exact configuration
       posthog.init('phc_pLVMvF3StGtifZ71oQrnQ99FGD1luzjIcG3xrs1PIaW', {
         api_host: 'https://eu.i.posthog.com',
         person_profiles: 'always',
@@ -21,7 +21,7 @@
         disable_web_experiments: false,
       });
     } else {
-      // User hasn't consented or declined - use memory mode
+      // User hasn't consented to PostHog or declined - use memory mode
       posthog.init('phc_pLVMvF3StGtifZ71oQrnQ99FGD1luzjIcG3xrs1PIaW', {
         api_host: 'https://eu.i.posthog.com',
         person_profiles: 'always',
@@ -41,17 +41,17 @@
       return;
     }
     
-    // Check consent and update PostHog config
+    // Check PostHog-specific consent and update config
     var consent = __md_get && __md_get("__consent");
     
-    if (consent && consent.analytics) {
-      // User consented - switch to full tracking
+    if (consent && consent.posthog) {
+      // User consented to PostHog specifically - switch to full tracking
       posthog.set_config({ 
         persistence: 'localStorage'
       });
       posthog.opt_in_capturing();
     } else {
-      // User declined or no consent - switch to memory mode
+      // User declined PostHog or no consent - switch to memory mode
       posthog.set_config({ 
         persistence: 'memory'
       });
@@ -66,8 +66,17 @@
     
     // Listen for consent changes (when user interacts with cookie banner)
     document.addEventListener("click", function(e) {
-      // Check if it's a consent button
-      if (e.target.hasAttribute("data-md-consent")) {
+      // Check if it's a consent button or PostHog checkbox
+      if (e.target.hasAttribute("data-md-consent") || 
+          (e.target.type === "checkbox" && e.target.name === "posthog")) {
+        setTimeout(handlePostHogConsent, 100);
+      }
+    });
+    
+    // Also listen for any changes in consent (alternative method)
+    document.addEventListener("change", function(e) {
+      // Check if it's the PostHog checkbox specifically
+      if (e.target.type === "checkbox" && e.target.name === "posthog") {
         setTimeout(handlePostHogConsent, 100);
       }
     });
