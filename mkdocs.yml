@@ -125,6 +125,9 @@ extra_css:
   - assets/stylesheets/fonts.css
   - assets/stylesheets/extra.css
 
+extra_javascript:
+  - assets/javascripts/posthog.js
+
 # Set in docs/assets/overrides/partials/copyright.html
 # so that we can have links and stuff
 # copyright: Seqera
@@ -149,6 +152,10 @@ extra:
       as to measure the effectiveness of our documentation and whether users
       find what they're searching for. With your consent, you're helping us to
       make our training materials better.
+      Find out more on
+      <a href="https://seqera.io/privacy-policy/#cookies" target="_blank" rel="noopener">how we use cookies</a>.
+    cookies:
+      posthog: PostHog Analytics
   # Overridden in docs/assets/overrides/partials/social.html
   # Still needs to be set to something here so that the partial is used
   social:
