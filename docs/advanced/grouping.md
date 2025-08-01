@@ -31,10 +31,14 @@ workflow {
     Channel.fromPath("data/samplesheet.csv")
         .splitCsv( header:true )
         .map { row ->
-        meta = row.subMap('id', 'repeat', 'type')
-        [meta, [
+        def meta = row.subMap('id', 'repeat', 'type')
+        [
+          meta,
+          [
             file(row.fastq1, checkIfExists: true),
-            file(row.fastq2, checkIfExists: true)]]
+            file(row.fastq2, checkIfExists: true)
+          ]
+        ]
         }
         .view()
 }
@@ -59,10 +63,14 @@ workflow {
             Channel.fromPath("data/samplesheet.csv")
             .splitCsv( header:true )
             .map { row ->
-                meta = row.subMap('id', 'repeat', 'type')
-                [meta, [
+                def meta = row.subMap('id', 'repeat', 'type')
+                [
+                  meta,
+                  [
                     file(row.fastq1, checkIfExists: true),
-                    file(row.fastq2, checkIfExists: true)]]
+                    file(row.fastq2, checkIfExists: true)
+                  ]
+                ]
             }
             .set { samples }
 
@@ -89,19 +97,23 @@ workflow {
         ```{groovy}
         workflow {
             Channel.fromPath("data/samplesheet.csv")
-            .splitCsv( header:true )
-            .map { row ->
-                meta = row.subMap('id', 'repeat', 'type')
-                [meta, [
-                    file(row.fastq1, checkIfExists: true),
-                    file(row.fastq2, checkIfExists: true)]]
-            }
-            .set { samples }
+                .splitCsv( header:true )
+                .map { row ->
+                    def meta = row.subMap('id', 'repeat', 'type')
+                    [
+                      meta,
+                      [
+                        file(row.fastq1, checkIfExists: true),
+                        file(row.fastq2, checkIfExists: true)
+                      ]
+                    ]
+                }
+                .set { samples }
 
 
             samples
                 .map { element -> sleep 10; element }
-              .view { meta, reads -> "Should be unmodified: $meta" }
+                .view { meta, reads -> "Should be unmodified: $meta" }
 
             samples
                 .map { meta, reads ->
@@ -185,7 +197,7 @@ MapReads( samples, reference )
             Channel.fromPath("data/samplesheet.csv")
             .splitCsv( header:true )
             .map { row ->
-                meta = row.subMap('id', 'repeat', 'type')
+                def meta = row.subMap('id', 'repeat', 'type')
                 [meta, [file(row.fastq1, checkIfExists: true), file(row.fastq2, checkIfExists: true)]]
             }
             .map { meta, reads -> [meta.subMap('id', 'type'), meta.repeat, reads] }
@@ -225,7 +237,7 @@ In our workflow:
 mapped_reads = MapReads( samples, reference )
 grouped_reads = mapped_reads
     .map { meta, bam ->
-        key = groupKey(meta.subMap('id', 'type'), meta.repeatcount)
+        def key = groupKey(meta.subMap('id', 'type'), meta.repeatcount)
         [key, bam]
     }
     .groupTuple()
@@ -270,7 +282,7 @@ We can use the `combine` operator to emit a new channel where each combined bam 
 ```groovy linenums="1"
 mapped_reads = MapReads( samples, reference )
     .map { meta, bam ->
-        key = groupKey(meta.subMap('id', 'type'), meta.repeatcount)
+        def key = groupKey(meta.subMap('id', 'type'), meta.repeatcount)
         [key, bam]
     }
     .groupTuple()
@@ -301,7 +313,7 @@ We might be tempted to pipe the output of `GenotypeOnInterval` directly into gro
 ```groovy linenums="1"
 mapped_reads = MapReads( samples, reference )
     .map { meta, bam ->
-        key = groupKey(meta.subMap('id', 'type'), meta.repeatcount)
+        def key = groupKey(meta.subMap('id', 'type'), meta.repeatcount)
         [key, bam]
     }
     .groupTuple()
@@ -319,7 +331,7 @@ The `groupKey` has a property `target`, which contains the original map. If we c
 ```groovy linenums="1"
 MapReads( samples, reference )
     .map { meta, bam ->
-        key = groupKey(meta.subMap('id', 'type'), meta.repeatcount)
+        def key = groupKey(meta.subMap('id', 'type'), meta.repeatcount)
         [key, bam]
     }
     .groupTuple()

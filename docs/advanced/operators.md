@@ -204,11 +204,11 @@ workflow {
         .splitCsv( header: true )
         .multiMap { row ->
             tumor:
-                def metamap = [id: row.id, type:'tumor', repeat:row.repeat]
-                [metamap, file(row.tumor_fastq_1), file(row.tumor_fastq_2)]
+                def tumor_meta = [id: row.id, type:'tumor', repeat:row.repeat]
+                [tumor_meta, file(row.tumor_fastq_1), file(row.tumor_fastq_2)]
             normal:
-                def metamap = [id: row.id, type:'normal', repeat:row.repeat]
-                [metamap, file(row.normal_fastq_1), file(row.normal_fastq_2)]
+                def normal_meta = [id: row.id, type:'normal', repeat:row.repeat]
+                [normal_meta, file(row.normal_fastq_1), file(row.normal_fastq_2)]
         }
         .set { samples }
 

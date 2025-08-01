@@ -192,7 +192,7 @@ Let's create a small function inside the workflow to take the JSON path and pull
 workflow Jsontest {
 
     def getFilteringResult(json_file) {
-        fastpResult = new JsonSlurper().parseText(json_file.text)
+        def fastpResult = new JsonSlurper().parseText(json_file.text)
     }
 
     Channel.fromPath("results/fastp/json/*.json")
