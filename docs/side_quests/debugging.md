@@ -416,11 +416,11 @@ echo "Processing ${sample_name}" > \${prefix}.txt
 
     This approach avoids the need to escape dollar signs and makes the code easier to read and maintain.
 
-### 1.5. Non-lethal syntax errors when using the VSCode extension
+### 1.5. Bad practice syntax errors when using the VSCode extension
 
-The Nextflow VSCode extension sometimes highlights issues that are not (yet) fatal errors in Nextflow. For example, you should always define your input channels within the workflow block, and the extension will highlight this as a potential issue. Open `nonlethal_syntax.nf` in VS Code to see an example:
+The Nextflow VSCode extension sometimes highlights issues that are not (yet) fatal errors in Nextflow. For example, you should always define your input channels within the workflow block, and the extension will highlight this as a potential issue. Open `badpractice_syntax.nf` in VS Code to see an example:
 
-```groovy title="nonlethal_syntax.nf"
+```groovy title="badpractice_syntax.nf"
 #!/usr/bin/env nextflow
 
 input_ch = Channel.of('sample1', 'sample2', 'sample3')
@@ -451,7 +451,7 @@ When you run this workflow, it will execute successfully, but the VSCode extensi
 
 ![Non-lethal syntax error](img/nonlethal.png)
 
-This is a non-lethal syntax error that won't prevent execution but could lead to confusion or unexpected behavior in larger workflows. Tighter restrictions on such things will likely become enforced in future Nextflow versions, so for this example it's good practice to keep your input channels defined within the workflow block, and in general to follow any other recommendations the extension makes.
+This is a bad practice syntax error that won't prevent execution but could lead to confusion or unexpected behavior in larger workflows. Tighter restrictions on such things will likely become enforced in future Nextflow versions, so for this example it's good practice to keep your input channels defined within the workflow block, and in general to follow any other recommendations the extension makes.
 
 ### Takeaway
 
@@ -474,10 +474,6 @@ This error occurs when you pass a different number of channels than a process ex
 ```groovy title="Wrong number of channels"
 #!/usr/bin/env nextflow
 
-// Create two separate channels
-samples_ch = Channel.of('sample1', 'sample2', 'sample3')
-files_ch = Channel.of('file1.txt', 'file2.txt', 'file3.txt')
-
 process PROCESS_FILES {
     input:
         val sample_name  // Process expects only 1 input
@@ -492,6 +488,11 @@ process PROCESS_FILES {
 }
 
 workflow {
+
+    // Create two separate channels
+    samples_ch = Channel.of('sample1', 'sample2', 'sample3')
+    files_ch = Channel.of('file1.txt', 'file2.txt', 'file3.txt')
+
     // ERROR: Passing 2 channels but process expects only 1
     PROCESS_FILES(samples_ch, files_ch)
 }
