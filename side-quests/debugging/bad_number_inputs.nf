@@ -1,9 +1,5 @@
 #!/usr/bin/env nextflow
 
-// Create two separate channels
-samples_ch = Channel.of('sample1', 'sample2', 'sample3')
-files_ch = Channel.of('file1.txt', 'file2.txt', 'file3.txt')
-
 process PROCESS_FILES {
     input:
         val sample_name  // Process expects only 1 input channel
@@ -18,6 +14,11 @@ process PROCESS_FILES {
 }
 
 workflow {
+
+    // Create two separate channels
+    samples_ch = Channel.of('sample1', 'sample2', 'sample3')
+    files_ch = Channel.of('file1.txt', 'file2.txt', 'file3.txt')
+
     // ERROR: Passing 2 channels but process expects only 1
     PROCESS_FILES(samples_ch, files_ch)
 }
