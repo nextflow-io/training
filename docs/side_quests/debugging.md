@@ -438,7 +438,7 @@ The error message clearly states that the process expects 1 input channel, but 2
 
 ### 2.2. Mismatched channel arity
 
-Some channel structure errors are much more subtle and produce no errors at all. Probably the most common of these reflects a challenge that new Nextflow users face in understanding that channels can be exhausted. Open `exhausted.nf` in VS Code to see an example:
+Some channel structure errors are much more subtle and produce no errors at all. Probably the most common of these reflects a challenge that new Nextflow users face in understanding that queue channels can be exhausted and run out of samples, meaning the workflow finishes prematurely. Open `exhausted.nf` in VS Code to see an example:
 
 ```groovy title="Exhausted channel"
 #!/usr/bin/env nextflow
