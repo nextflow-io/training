@@ -540,11 +540,9 @@ If your project is a git repository (as this is), VS Code shows:
 - Inline diff views
 - Commit and push capabilities
 
-Open the Source Control panel (`Ctrl+Shift+G` or `Cmd+Shift+G`) to see git changes and stage commits directly in the editor.
+Open the Source Control panel using the source control button (![Source control icon](img/source_control_icon.png)) (`Ctrl+Shift+G` or `Cmd+Shift+G` if you're working with VSCode locally) to see git changes and stage commits directly in the editor.
 
 ![Source Control Panel](img/source_control.png)
-
-*Note: Screenshot shows the Source Control panel interface - if this shortcut doesn't work in your environment, you can also click the Source Control icon in the left sidebar.*
 
 ### 7.2. Running and Inspecting Workflows
 
