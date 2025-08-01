@@ -434,7 +434,7 @@ Process `PROCESS_FILES` declares 1 input channel but 2 were specified
  -- Check script 'bad_number_inputs.nf' at line: 22 or see '.nextflow.log' file for more details
 ```
 
-To fix this you need to either combine the channels into tuples or pass only the required channel. The error message clearly states that the process expects 1 input channel but 2 were provided. For this specific example, the process expects a single channel and doesn't require the second channel, so we can fix it by passing only the `samples_ch` channel. More commonly, you might add additional inputs to a process and forget to update the workflow call accordingly, which can lead to this type of error. Fortunately this is one of the easier to understand and fix errors, as the error message is quite clear about the mismatch.
+The error message clearly states that the process expects 1 input channel, but 2 were provided. For this specific example, the process expects a single channel and doesn't require the second channel, so we can fix it by passing only the `samples_ch` channel. More commonly, you might add additional inputs to a process and forget to update the workflow call accordingly, which can lead to this type of error. Fortunately, this is one of the easier-to-understand and fix errors, as the error message is quite clear about the mismatch.
 
 ### 2.2. Mismatched channel arity
 
