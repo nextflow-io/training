@@ -970,21 +970,15 @@ Nextflow provides several powerful built-in tools for debugging and analyzing wo
 
 #### Generate Complete Debugging Information
 
-Always run with comprehensive reporting when debugging, either by adding flags to your command line:
+<!-- Always run with comprehensive reporting when debugging, either by adding flags to your command line: -->
 
-```bash
-nextflow run workflow.nf -with-trace -with-timeline -with-report
+<!-- ```bash
+nextflow run workflow.nf -with-timeline -with-report
 ````
 
 ... or by setting them in configuration:
 
 ```groovy
-trace {
-    enabled = true
-    overwrite = true
-    file = "${params.output}/trace.txt"
-}
-
 timeline {
     enabled = true
     file = "${params.output}/timeline.html"
@@ -1000,13 +994,13 @@ report {
 
 We've done this for you in the `nextflow.config` file, so you can run most of the debugging examples in this guide and automatically get comprehensive debugging information.
 
-This generates three essential debugging files:
+This generates three essential debugging files: -->
 
-- **`trace.txt`**: Detailed execution data for each task
-- **`timeline.html`**: Visual timeline of process execution
-- **`report.html`**: Execution summary and resource usage
+<!-- - **`trace.txt`**: Detailed execution data for each task -->
+<!-- - **`timeline.html`**: Visual timeline of process execution
+- **`report.html`**: Execution summary and resource usage -->
 
-#### Understanding the Trace File
+<!-- #### Understanding the Trace File
 
 The trace file is your primary tool for understanding what happened. Let's run one our early failing workflows to generate a trace file:
 
@@ -1074,7 +1068,7 @@ cat work/1c/c77799*/.command.sh
 echo "Processing [sample2, file2.txt]" > [sample2, file2.txt]_output.txt
 ```
 
-... looking at this file would have told us exactly the problem was.
+... looking at this file would have told us exactly the problem was. -->
 
 **Essential debugging files:**
 
@@ -1086,7 +1080,7 @@ echo "Processing [sample2, file2.txt]" > [sample2, file2.txt]_output.txt
 
 ### 4.2. Preview Mode and Process Debugging
 
-While trace files help you understand what went wrong after execution, sometimes you want to catch problems before any processes run, or see what's happening in real-time. Nextflow provides two key approaches for this kind of proactive debugging.
+Sometimes you want to catch problems before any processes run, or see what's happening in real-time. Nextflow provides two key approaches for this kind of proactive debugging.
 
 #### Dry Run Testing
 
@@ -1101,6 +1095,10 @@ This can be quite useful for quickly checking the structure of your workflow and
 ```bash
 nextflow run bad_syntax.nf -preview
 ```
+
+!!! note:
+
+  If you fixed the file, reintroduce the syntax error by changing `input` to `inputs`
 
 ```console title="Preview mode output"
  N E X T F L O W   ~  version 24.10.2
