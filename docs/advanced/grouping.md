@@ -16,9 +16,13 @@ workflow {
         .splitCsv( header:true )
         .map { row ->
             def meta = [id:row.id, repeat:row.repeat, type:row.type]
-            [meta, [
+            [
+              meta,
+              [
                 file(row.fastq1, checkIfExists: true),
-                file(row.fastq2, checkIfExists: true)]]
+                file(row.fastq2, checkIfExists: true)
+              ]
+            ]
         }
         .view()
 }
@@ -31,14 +35,14 @@ workflow {
     Channel.fromPath("data/samplesheet.csv")
         .splitCsv( header:true )
         .map { row ->
-        def meta = row.subMap('id', 'repeat', 'type')
-        [
-          meta,
+          def meta = row.subMap('id', 'repeat', 'type')
           [
-            file(row.fastq1, checkIfExists: true),
-            file(row.fastq2, checkIfExists: true)
+            meta,
+            [
+              file(row.fastq1, checkIfExists: true),
+              file(row.fastq2, checkIfExists: true)
+            ]
           ]
-        ]
         }
         .view()
 }
