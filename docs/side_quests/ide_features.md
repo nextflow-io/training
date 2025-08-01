@@ -348,7 +348,7 @@ This feature displays all instances where `FASTQC` is referenced within your wor
 
 ### 4.4. Outline Panel
 
-The Outline panel, located in the Explorer sidebar, provides a convenient overview of all symbols in your current file. This feature allows you to quickly navigate and manage the structure of your code by displaying functions, variables, and other key elements in a hierarchical view.
+The Outline panel, located in the Explorer sidebar (click ![Explorer icon](img/files_icon.png)), provides a convenient overview of all symbols in your current file. This feature allows you to quickly navigate and manage the structure of your code by displaying functions, variables, and other key elements in a hierarchical view.
 
 ![Outline panel](img/outline.png)
 
