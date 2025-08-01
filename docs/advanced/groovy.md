@@ -29,7 +29,7 @@ workflow {
     Channel.fromPath(params.input)
         .splitCsv(header: true)
         .map { row ->
-            meta = row.subMap('sample', 'strandedness')
+            def meta = row.subMap('sample', 'strandedness')
             meta
         }
         .view()
@@ -107,11 +107,11 @@ workflow {
     samples = Channel.fromPath(params.input)
         .splitCsv(header: true)
         .map { row ->
-            (readKeys, metaKeys) = row.keySet().split { key -> key =~ /^fastq/ }
-            reads = row.subMap(readKeys).values()
+            def (readKeys, metaKeys) = row.keySet().split { key -> key =~ /^fastq/ }
+            def reads = row.subMap(readKeys).values()
                 .findAll { value -> value != "" } // Single-end reads will have an empty string
                 .collect { path -> file(path) } // Turn those strings into paths
-            meta = row.subMap(metaKeys)
+            def meta = row.subMap(metaKeys)
             meta.id ?= meta.sample
             meta.single_end = reads.size == 1
             [meta, reads]

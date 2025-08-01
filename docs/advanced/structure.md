@@ -294,7 +294,7 @@ We can create a new dog at the beginning of the workflow:
 
 ```groovy linenums="1"
 workflow {
-    dog = new Dog(name: "fido")
+    def dog = new Dog(name: "fido")
     log.info "Found a new dog: $dog"
 }
 ```

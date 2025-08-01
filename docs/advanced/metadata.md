@@ -69,7 +69,7 @@ We can use the `tokenize` method to split our id. To sanity-check, I just pipe t
 workflow {
     Channel.fromFilePairs("data/reads/*/*_R{1,2}.fastq.gz")
         .map { id, reads ->
-            tokens = id.tokenize("_")
+            def tokens = id.tokenize("_")
         }
         .view()
 }
@@ -79,8 +79,8 @@ If we are confident about the stability of the naming scheme, we can destructure
 
 ```groovy linenums="1"
 map { id, reads ->
-    (sample, replicate, type) = id.tokenize("_")
-    meta = [sample:sample, replicate:replicate, type:type]
+    def (sample, replicate, type) = id.tokenize("_")
+    def meta = [sample:sample, replicate:replicate, type:type]
     [meta, reads]
 }
 ```
@@ -93,7 +93,7 @@ Another option is to use the [`transpose`](<https://docs.groovy-lang.org/latest/
 
 ```groovy linenums="1"
 map { id, reads ->
-    meta = [['sample', 'replicate', 'type'], id.tokenize("_")]
+    def meta = [['sample', 'replicate', 'type'], id.tokenize("_")]
         .transpose()
         .collectEntries()
     [meta, reads]
@@ -104,9 +104,9 @@ If we move back to the previous method, but decided that the 'rep' prefix on the
 
 ```groovy linenums="1"
 map { id, reads ->
-    (sample, replicate, type) = id.tokenize("_")
+    def (sample, replicate, type) = id.tokenize("_")
     replicate -= ~/^rep/
-    meta = [sample:sample, replicate:replicate, type:type]
+    def meta = [sample:sample, replicate:replicate, type:type]
     [meta, reads]
 }
 ```
@@ -177,9 +177,9 @@ In this particular example, we know ahead of time that the treatments must be th
 workflow {
     Channel.fromFilePairs("data/reads/*/*_R{1,2}.fastq.gz")
         .map { id, reads ->
-            (sample, replicate, type) = id.tokenize("_")
-            (treatmentFwd, treatmentRev) = reads*.parent*.name*.minus(~/treatment/)
-            meta = [
+            def (sample, replicate, type) = id.tokenize("_")
+            def (treatmentFwd, treatmentRev) = reads*.parent*.name*.minus(~/treatment/)
+            def meta = [
                 sample:sample,
                 replicate:replicate,
                 type:type,

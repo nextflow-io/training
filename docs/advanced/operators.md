@@ -176,7 +176,7 @@ workflow {
             Channel.fromPath("data/samplesheet.csv")
                 .splitCsv( header: true )
                 .map { row ->
-                    metaMap = [id: row.id, type: row.type, repeat: row.repeat]
+                    def metaMap = [id: row.id, type: row.type, repeat: row.repeat]
                     [metaMap, [file(row.fastq1), file(row.fastq2)]]
                 }
                 .view()
@@ -204,10 +204,10 @@ workflow {
         .splitCsv( header: true )
         .multiMap { row ->
             tumor:
-                metamap = [id: row.id, type:'tumor', repeat:row.repeat]
+                def metamap = [id: row.id, type:'tumor', repeat:row.repeat]
                 [metamap, file(row.tumor_fastq_1), file(row.tumor_fastq_2)]
             normal:
-                metamap = [id: row.id, type:'normal', repeat:row.repeat]
+                def metamap = [id: row.id, type:'normal', repeat:row.repeat]
                 [metamap, file(row.normal_fastq_1), file(row.normal_fastq_2)]
         }
         .set { samples }
@@ -353,7 +353,7 @@ workflow {
     Channel.fromPath("data/samplesheet.csv")
         .splitCsv(header: true)
         .map { row ->
-            meta = [id: row.id, type: row.type]
+            def meta = [id: row.id, type: row.type]
             [meta, row.repeat, [row.fastq1, row.fastq2]]
         }
         .view()
@@ -369,7 +369,7 @@ workflow {
     Channel.fromPath("data/samplesheet.csv")
         .splitCsv(header: true)
         .map { row ->
-            meta = [id: row.id, type: row.type]
+            def meta = [id: row.id, type: row.type]
             [meta, row.repeat, [row.fastq1, row.fastq2]]
         }
         .groupTuple()
@@ -388,7 +388,7 @@ workflow {
     Channel.fromPath("data/samplesheet.csv")
         .splitCsv(header: true)
         .map { row ->
-            meta = [id: row.id, type: row.type]
+            def meta = [id: row.id, type: row.type]
             [meta, row.repeat, [row.fastq1, row.fastq2]]
         }
         .groupTuple()
@@ -414,7 +414,7 @@ workflow {
     Channel.fromPath("data/samplesheet.csv")
         .splitCsv(header: true)
         .map { row ->
-            meta = [id: row.id, type: row.type]
+            def meta = [id: row.id, type: row.type]
             [meta, row.repeat, [row.fastq1, row.fastq2]]
         }
         .groupTuple()
@@ -677,9 +677,9 @@ For example:
 ```groovy
 characters
     .collectFile(newLine: true, storeDir: 'results') { character ->
-        filename = "${character.title}s.txt"
-        article = character.title.toLowerCase() =~ ~/^[aeiou]/ ? 'an' : 'a'
-        text = "${character.name} is ${article} ${character.title}"
+      def filename = "${character.title}s.txt"
+      def article = character.title.toLowerCase() =~ ~/^[aeiou]/ ? 'an' : 'a'
+      def text = "${character.name} is ${article} ${character.title}"
         [filename, text]
     }
     .view()

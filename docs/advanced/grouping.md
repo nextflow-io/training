@@ -15,7 +15,7 @@ workflow {
     Channel.fromPath("data/samplesheet.csv")
         .splitCsv( header:true )
         .map { row ->
-            meta = [id:row.id, repeat:row.repeat, type:row.type]
+            def meta = [id:row.id, repeat:row.repeat, type:row.type]
             [meta, [
                 file(row.fastq1, checkIfExists: true),
                 file(row.fastq2, checkIfExists: true)]]
@@ -105,7 +105,7 @@ workflow {
 
             samples
                 .map { meta, reads ->
-                    newmap = [type: meta.type == "tumor" ? "abnormal" : "normal"]
+                    def newmap = [type: meta.type == "tumor" ? "abnormal" : "normal"]
                     [meta + newmap, reads]
                 }
                 .view { meta, reads -> "Should be modified: $meta" }
@@ -134,10 +134,14 @@ workflow {
     samples = Channel.fromPath("data/samplesheet.csv")
         .splitCsv( header:true )
         .map { row ->
-            meta = row.subMap('id', 'repeat', 'type')
-            [meta, [
+            def meta = row.subMap('id', 'repeat', 'type')
+            [
+              meta,
+              [
                 file(row.fastq1, checkIfExists: true),
-                file(row.fastq2, checkIfExists: true)]]
+                file(row.fastq2, checkIfExists: true)
+              ]
+            ]
         }
 
     mapped_reads = MapReads( samples, reference )
@@ -161,9 +165,9 @@ By default, the `groupTuple` operator groups on the first item in the element, w
 ```groovy linenums="1"
 MapReads( samples, reference )
     .map { meta, bam ->
-    key = groupKey(meta.subMap('id', 'type'), NUMBER_OF_ITEMS_IN_GROUP)
-    [key, bam]
-}
+        def key = groupKey(meta.subMap('id', 'type'), NUMBER_OF_ITEMS_IN_GROUP)
+        [key, bam]
+    }
     .groupTuple()
     .view()
 ```
@@ -193,7 +197,7 @@ MapReads( samples, reference )
 
             MapReads( samples, reference )
             .map { meta, bam ->
-                key = groupKey(meta.subMap('id', 'type'), meta.repeatcount)
+                def key = groupKey(meta.subMap('id', 'type'), meta.repeatcount)
                 [key, bam]
             }
             .groupTuple()
