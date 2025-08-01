@@ -485,7 +485,7 @@ This happens because the `reference_ch` channel is exhausted after the first pro
 
 This pattern of a single reference file in a channel is very common, so this error occurs frequently. If you see a process only running once when you expect it to run multiple times, check that you're not exhausting a channel that should be reused.
 
-There are a couple of ways to address this. You can simply set the channel to be a value type:
+There are a couple of ways to address this. You can simply create a value channel type, which can be used over and over again:
 
 ```groovy
     reference_ch = Channel.value('baseline_reference')
