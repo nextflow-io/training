@@ -954,7 +954,7 @@ If you make sure to read your error messages failures like this should not puzzl
 
 ### Takeaway
 
-Process structure errors often appear when processes run but don't produce expected results. Key issues include mismatched output file names, missing software dependencies (exit code 127), and inadequate resource allocations. These errors require examining work directories and understanding error codes to diagnose effectively.
+Process structure errors often appear when processes run but don't produce expected results. Key issues include mismatched output file names, missing software dependencies (`exit code 127`), and inadequate resource allocations. These errors require examining work directories and understanding error codes to diagnose effectively.
 
 ### What's next?
 
@@ -1077,7 +1077,7 @@ When you're developing a Nextflow process, you can use the `stub` directive to d
 
 For example, remember our `missing_software.nf` from earlier? The one where we had missing software that prevented the workflow running until we added `-profile docker`? Well, we can amend that process definition like:
 
-```groovy title="missing_software.nf" hl_lines="17-20"
+```groovy title="missing_software.nf" hl_lines="17-19"
 process PROCESS_FILES {
 
     container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
