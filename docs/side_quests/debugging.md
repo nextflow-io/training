@@ -1291,6 +1291,8 @@ Resource problems often manifest as specific exit codes that give you immediate 
 - **Exit 137**: Process killed by system (usually out of memory)
 - **Exit 127**: Command not found
 
+Nextflow propagates errors thrown by the host system directly and logs them.
+
 Check memory usage patterns:
 
 ```bash
