@@ -567,73 +567,6 @@ You can integrate VS Code with version control and workflow execution to manage 
 
 ### What's next?
 
-Explore optional AI-assisted development features that can accelerate learning and development.
-
----
-
-## 8. AI-Assisted Development (Optional)
-
-This integration provides context-aware suggestions and explanations tailored to Nextflow development.
-
-!!! note "AI Features Are Optional"
-
-    This section is for users with AI coding assistants. All core IDE skills can be completed without AI tools. AI assistance is designed to supplement, not replace, development knowledge.
-
-The Nextflow VS Code extension includes integration with Seqera AI via GitHub Copilot. To set Copilot up, follow the [official VS Code GitHub Copilot setup guide](https://code.visualstudio.com/docs/copilot/setup).
-
-Once GitHub Copilot is configured, you can access Nextflow-specific AI assistance.
-
-### 8.1. Practical AI Assistance
-
-If you have GitHub Copilot with Seqera AI integration, here are some practical scenarios to enhance your development workflow.
-
-Open the Copilot chat (`Ctrl+Shift+I` or `Cmd+Shift+I`) and try these scenarios:
-
-#### Understanding Complex Code
-
-Select the channel operation in `complex_workflow.nf` and ask:
-
-```text
-@Seqera explain this channel operation step by step
-```
-
-![AI code explanation](img/sai_explains.png)
-
-#### Getting Error Help
-
-Create a syntax error in `basic_workflow.nf` (e.g., remove a required input channel), then run the workflow to generate an error. In the terminal, highlight the error message, right-click, and select 'Copilot' → 'Add Terminal Selection to Chat'.
-
-Then ask:
-
-```text
-@Seqera I'm getting this error. How do I fix this?
-```
-
-#### Generating New Processes
-
-For generating new code, try asking for help creating a new process:
-
-```text
-@Seqera create a process that runs MultiQC to aggregate FastQC reports
-```
-
-### 8.2. Code Generation Workflow
-
-AI can help you:
-
-1. **Start with a description**: "I need a process that runs BWA alignment"
-2. **Get a basic template**: AI provides the process structure
-3. **Refine with questions**: "How do I add memory requirements?"
-4. **Iterate and improve**: "Make this more robust with error handling"
-
-This accelerates development while teaching you Nextflow patterns and best practices.
-
-### Takeaway
-
-You can optionally use AI assistance for code explanation, error debugging, and process generation to accelerate development and learning.
-
-### What's next?
-
 See how all these IDE features work together in your daily development workflow.
 
 ---
@@ -667,7 +600,7 @@ Here are some quick notes on each of the IDE features discussed above:
 
 ## Summary
 
-You now have comprehensive knowledge of VS Code's IDE features for Nextflow development. These tools will make you significantly more productive by:
+You have now had a whistle-stop tour of VS Code's IDE features for Nextflow development. These tools will make you significantly more productive by:
 
 - **Reducing errors** through real-time syntax checking
 - **Speeding up development** with intelligent auto-completion
@@ -675,11 +608,12 @@ You now have comprehensive knowledge of VS Code's IDE features for Nextflow deve
 - **Maintaining quality** through consistent formatting
 - **Enhancing understanding** through advanced highlighting and structure visualization
 
+We don't expect you to remember everything, but now you know that these features exist you will be able to find them when you need them. As you continue developing Nextflow workflows, these IDE features will become second nature, allowing you to focus on writing high-quality code rather than wrestling with syntax and structure.
+
 ### What's next?
 
-Apply these IDE skills while working through other training modules:
+Apply these IDE skills while working through other training modules, for example:
 
-- **[Development Best Practices](development_best_practices.md)**: Learn systematic debugging and development workflows
 - **[nf-test](nf-test.md)**: Create comprehensive test suites for your workflows
 - **[Hello nf-core](../../hello_nf-core/)**: Build production-quality pipelines with community standards
 
