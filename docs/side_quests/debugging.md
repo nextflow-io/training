@@ -483,7 +483,7 @@ executor >  local (1)
 
 This happens because the `reference_ch` channel is exhausted after the first process execution, despite the `input_ch` channel having more items to process.
 
-This pattern of a single invariable reference channel is very common, so this error crops up a lot. If you see a process only running once when you expect it to run multiple times, check that you're not exhausting a channel that should be reused.
+This pattern of a single reference file in a channel is very common, so this error occurs frequently. If you see a process only running once when you expect it to run multiple times, check that you're not exhausting a channel that should be reused.
 
 There are a couple of ways to address this. You can simply set the channel to be a value type:
 
