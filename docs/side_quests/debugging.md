@@ -976,111 +976,6 @@ In [Hello Nextflow](../hello_nextflow/01_hello_world.md) you already saw the log
 
 We will use these files to debug the workflow.
 
-<!-- ### 4.1. Execution Reports and Trace Files
-
-#### Generate Complete Debugging Information -->
-
-<!-- Always run with comprehensive reporting when debugging, either by adding flags to your command line: -->
-
-<!-- ```bash
-nextflow run workflow.nf -with-timeline -with-report
-````
-
-... or by setting them in configuration:
-
-```groovy
-timeline {
-    enabled = true
-    file = "${params.output}/timeline.html"
-    overwrite = true
-}
-
-report {
-    enabled = true
-    file = "${params.output}/report.html"
-    overwrite = true
-}
-```
-
-We've done this for you in the `nextflow.config` file, so you can run most of the debugging examples in this guide and automatically get comprehensive debugging information.
-
-This generates three essential debugging files: -->
-
-<!-- - **`trace.txt`**: Detailed execution data for each task -->
-<!-- - **`timeline.html`**: Visual timeline of process execution
-- **`report.html`**: Execution summary and resource usage -->
-
-<!-- #### Understanding the Trace File
-
-The trace file is your primary tool for understanding what happened. Let's run one our early failing workflows to generate a trace file:
-
-```bash
-nextflow run bad_channel_shape.nf
-```
-
-... then look at the generated `trace.txt` file:
-
-```bash
-cat results/trace.txt
-```
-
-```console title="Trace file content"
-task_id hash    native_id       name    status  exit    submit  duration        realtime        %cpu    peak_rss        peak_vmem       rchar   wchar
-2       1c/c77799       12008   PROCESS_FILES (2)       FAILED  0       2025-07-28 12:36:54.221 69ms    0ms     -       -       -       -       -
-3       e9/21b3b0       12009   PROCESS_FILES (3)       FAILED  0       2025-07-28 12:36:54.226 68ms    0ms     -       -       -       -       -
-1       6b/552ab7       12010   PROCESS_FILES (1)       FAILED  0       2025-07-28 12:36:54.231 64ms    0ms     -       -       -       -       -
-```
-
-Interestingly for this particular error the exit codes are all `0`, which is a little confusing, but the status is `FAILED` for each task. This is because this example error mis-named the outputs. The exit code is collected from the command executed, which all ran fine, givin us the `0` exit code, but the process failed because the output files were not created as expected.
-
-**Key debugging columns:**
-
-- **status**: COMPLETED, FAILED, ABORTED - shows which tasks failed
-- **exit**: Exit code (0 = success, non-zero = error)
-- **hash**: Work directory identifier for examining failed tasks
-- **rss**: Peak memory usage - helps identify memory issues
-
-Find failed tasks quickly:
-
-```bash
-grep "FAILED" results/trace.txt
-```
-
-#### Work Directory Investigation
-
-In [Hello Nextflow](../hello_nextflow/) you learned that each task creates a work directory. This directory contains all the files generated during execution, including the command script, output files, and logs. You can find the work directory for a failed task using its hash from the trace file.
-
-Each task creates a work directory with complete debugging information:
-
-```bash
-# Use the hash from trace.txt to find the work directory
-ls -a work/1c/c77799*/
-```
-
-```console title="Work directory contents"
-.               ..              .command.begin  .command.err    .command.log    .command.out    .command.run    .command.sh     .command.trace  .exitcode       [sample2,
-```
-
-In this example we we can see the weird output file with the square brackets, which is the cause of the failure. If you look at the `.command.err` file, it will contain the error message from the command that was run:
-
-```bash
-cat work/1c/c77799*/.command.err
-```
-
-... but in this case it will be empty, because the command ran successfully, but the output file was not created as expected. The `.command.sh` file contains the exact command that was executed:
-
-```bash
-cat work/1c/c77799*/.command.sh
-```
-
-```
-#!/bin/bash -ue
-echo "Processing [sample2, file2.txt]" > [sample2, file2.txt]_output.txt
-```
-
-... looking at this file would have told us exactly the problem was. -->
-
-
 ### 4.1. Real-time Process Output
 
 Sometimes you need to see what's happening inside running processes. You can enable real-time process output, which shows you exactly what each task is doing as it executes.
@@ -1244,44 +1139,9 @@ nextflow run workflow.nf -resume
 4. Resume to test only the fix
 5. Repeat until workflow completes
 
-<!-- #### Process Isolation for Testing
-
-Sometimes even with resume, debugging complex workflows can be slow because you have to wait for upstream processes to complete before testing your fix. In these cases, you can isolate specific processes for faster testing by temporarily modifying your workflow:
-
-```groovy
-workflow {
-    ch_input = Channel.fromPath(params.input)
-
-    results_qc = FASTQC(ch_input)
-    // results_trim = TRIMMOMATIC(results_qc)  // Comment out for debugging
-    // results_align = BWA_MEM(results_trim)
-
-    // Test only the problematic process
-    PROBLEMATIC_PROCESS(results_qc)
-}
-```
-
-Create minimal test workflows:
-
-```groovy title="test_process.nf"
-#!/usr/bin/env nextflow
-
-include { PROBLEMATIC_PROCESS } from './modules/process.nf'
-
-workflow {
-    // Minimal test input
-    test_input = Channel.of(['test_sample', file('data/small_test.fastq')])
-
-    PROBLEMATIC_PROCESS(test_input)
-
-    // Inspect output
-    PROBLEMATIC_PROCESS.out.view { "Process output: $it" }
-}
-``` -->
-
 ### 4.5. Resource and Memory Debugging
 
-Not all workflow failures are due to syntax or logic errors. In production environments, many debugging challenges stem from resource constraints - processes that run out of memory, exceed time limits, or compete for system resources. Understanding how to diagnose and fix these issues is crucial for reliable workflow execution.
+Not all workflow failures are due to syntax or logic errors. In production environments, many debugging challenges stem from the host system itself for example due to resource constraints - processes that run out of memory, exceed time limits, or compete for system resources. Understanding how to diagnose and fix these issues is crucial for reliable workflow execution.
 
 #### Identifying Resource Issues
 
@@ -1293,34 +1153,7 @@ Resource problems often manifest as specific exit codes that give you immediate 
 
 Nextflow propagates errors thrown by the host system directly and logs them.
 
-Check memory usage patterns:
-
-```bash
-# Sort processes by memory usage
-sort -k11 -nr trace.txt | head -10
-
-# Find memory-related failures
-grep -E "(137|killed)" trace.txt
-```
-
-#### Dynamic Resource Allocation
-
-Automatically retry with more resources:
-
-```groovy
-process ADAPTIVE_PROCESS {
-    memory { task.attempt == 1 ? '4.GB' : task.attempt == 2 ? '8.GB' : '16.GB' }
-
-    errorStrategy { task.exitStatus in [130,140] ? 'retry' : 'finish' }
-    maxRetries 2
-
-    script:
-    """
-    echo "Attempt ${task.attempt} with ${task.memory} memory"
-    your_command --memory ${task.memory.toGiga()}G
-    """
-}
-```
+Nextflow is deliberately simple - it will submit tasks to the host machine or scheduler, which are executed there and transparently show any errors. Things go wrong within tools, syntax errors or invalid files. When a Nextflow pipeline fails, take a moment to check the error and see if it originates from _Nextflow_ or from the _tool_.
 
 ### 4.6. Systematic Debugging Approach
 
@@ -1338,10 +1171,9 @@ This methodology combines all the tools we've covered into an efficient workflow
 
 **Phase 2: Detailed Investigation (15-30 minutes)**
 
-1. Generate trace files: `nextflow run workflow.nf -with-trace -resume`
-2. Find failed tasks: `grep "FAILED" trace.txt`
-3. Examine work directories for failed tasks
-4. Add `.view()` operators to inspect channels
+1. Find the work directory of the failed task
+2. Examine log files
+3. Add `.view()` operators to inspect channels
 
 **Phase 3: Fix and Validate (15 minutes)**
 
@@ -1365,21 +1197,6 @@ profiles {
             maxForks = 1
             memory = '2.GB'
             cpus = 1
-        }
-
-        trace {
-            enabled = true
-            file = 'debug_trace.txt'
-        }
-
-        timeline {
-            enabled = true
-            file = 'debug_timeline.html'
-        }
-
-        report {
-            enabled = true
-            file = 'debug_report.html'
         }
     }
 }
@@ -1406,13 +1223,7 @@ nextflow run buggy_workflow.nf
 **Generate debugging information** once you get past syntax errors:
 
 ```bash
-nextflow run buggy_workflow.nf -with-trace -with-timeline -with-report
-```
-
-**Check for failed tasks** in the trace file:
-
-```bash
-grep "FAILED" results/trace.txt
+nextflow run buggy_workflow.nf -profile debug
 ```
 
 **Investigate work directories** for failed tasks using the hash from trace:
