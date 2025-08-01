@@ -906,7 +906,7 @@ nextflow run missing_software.nf -profile docker
 
 !!! note
 
-To learn more about how nextflow uses containers, go back to [Hello Nextflow](../hello_nextflow/05_hello_containers.md)
+    To learn more about how nextflow uses containers, go back to [Hello Nextflow](../hello_nextflow/05_hello_containers.md)
 
 ### 3.3. Bad resource configuration
 
@@ -941,13 +941,14 @@ nextflow run bad_resources.nf -profile docker
 
 ... gives us an error:
 
-\```console
+```console
+
 ERROR ~ Error executing process > 'PROCESS_FILES (1)'
 
 Caused by:
 Process exceeded running time limit (1ms)
 
-\```
+```
 
 If you make sure to read your error messages failures like this should not puzzle you for too long. But make sure you understand the resource requirements of the commands you are running so that you can configure your resource directives appropriately.
 
