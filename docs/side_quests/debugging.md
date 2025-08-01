@@ -1272,13 +1272,6 @@ nextflow run buggy_workflow.nf -preview
 
 Effective Nextflow debugging combines understanding error messages, using built-in tools (trace files, work directories, preview mode), and applying systematic approaches. Practice with these examples builds the experience needed to debug real-world workflow issues efficiently.
 
-### What's next?
-
-Apply these debugging skills in your own workflow development and explore:
-
-- **[Development Best Practices](development_best_practices.md)**: Prevent bugs with systematic development approaches
-- **[IDE Features](ide_features.md)**: Leverage VS Code features for faster error detection
-
 ---
 
 ## Summary
