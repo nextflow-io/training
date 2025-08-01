@@ -15,8 +15,8 @@ workflow {
     params.input = "https://raw.githubusercontent.com/nf-core/test-datasets/rnaseq/samplesheet/v3.10/samplesheet_test.csv"
 
     Channel.fromPath(params.input)
-    | splitCsv(header: true)
-    | view
+        .splitCsv(header: true)
+        .view()
 }
 ```
 
@@ -27,19 +27,19 @@ workflow {
     params.input = "https://raw.githubusercontent.com/nf-core/test-datasets/rnaseq/samplesheet/v3.10/samplesheet_test.csv"
 
     Channel.fromPath(params.input)
-    | splitCsv(header: true)
-    | map { row ->
-        meta = row.subMap('sample', 'strandedness')
-        meta
-    }
-    | view
+        .splitCsv(header: true)
+        .map { row ->
+            def meta = row.subMap('sample', 'strandedness')
+            meta
+        }
+        .view()
 }
 ```
 
 ... but this precludes the possibility of adding additional columns to the samplesheet. We might to ensure the parsing will capture any extra metadata columns should they be added. Instead, let's partition the column names into those that begin with "fastq" and those that don't:
 
 ```groovy linenums="1"
-(readKeys, metaKeys) = row.keySet().split { it =~ /^fastq/ }
+(readKeys, metaKeys) = row.keySet().split { key -> key =~ /^fastq/ }
 ```
 
 !!! note "New methods"
@@ -51,7 +51,7 @@ workflow {
 From here, let's
 
 ```groovy linenums="1"
-reads = row.subMap(readKeys).values().collect { file(it) }
+reads = row.subMap(readKeys).values().collect { value -> file(value) }
 ```
 
 ... but we run into an error:
@@ -66,8 +66,8 @@ If we have a closer look at the samplesheet, we notice that not all rows have tw
 reads = row
 .subMap(readKeys)
 .values()
-.findAll { it != "" } // Single-end reads will have an empty string
-.collect { file(it) } // Turn those strings into paths
+.findAll { value -> value != "" } // Single-end reads will have an empty string
+.collect { path -> file(path) } // Turn those strings into paths
 ```
 
 Now we need to construct the meta map. Let's have a quick look at the FASTP module that I've already pre-defined:
@@ -103,21 +103,23 @@ meta.single_end = reads.size == 1
 This is now able to be passed through to our FASTP process:
 
 ```groovy linenums="1"
-Channel.fromPath(params.input)
-| splitCsv(header: true)
-| map { row ->
-    (readKeys, metaKeys) = row.keySet().split { it =~ /^fastq/ }
-    reads = row.subMap(readKeys).values()
-    .findAll { it != "" } // Single-end reads will have an empty string
-    .collect { file(it) } // Turn those strings into paths
-    meta = row.subMap(metaKeys)
-    meta.id ?= meta.sample
-    meta.single_end = reads.size == 1
-    [meta, reads]
-}
-| FASTP
+workflow {
+    samples = Channel.fromPath(params.input)
+        .splitCsv(header: true)
+        .map { row ->
+            def (readKeys, metaKeys) = row.keySet().split { key -> key =~ /^fastq/ }
+            def reads = row.subMap(readKeys).values()
+                .findAll { value -> value != "" } // Single-end reads will have an empty string
+                .collect { path -> file(path) } // Turn those strings into paths
+            def meta = row.subMap(metaKeys)
+            meta.id ?= meta.sample
+            meta.single_end = reads.size == 1
+            [meta, reads]
+        }
+    FASTP(samples)
 
-FASTP.out.json | view
+    FASTP.out.json.view()
+}
 ```
 
 Let's assume that we want to pull some information out of these JSON files. To make our lives a little more convenient, let's "publish" these json files so that they are more convenient. We're going to discuss configuration more completely in a later chapter, but that's no reason not to dabble a bit here.
@@ -174,7 +176,7 @@ Now let's create a second entrypoint to quickly pass these JSON files through so
 ```groovy linenums="1"
 workflow Jsontest {
     Channel.fromPath("results/fastp/json/*.json")
-    | view
+        .view()
 }
 ```
 
@@ -184,11 +186,17 @@ which we run with
 nextflow run . -resume -entry Jsontest
 ```
 
-Let's create a small function at the top of the workflow to take the JSON path and pull out some basic metrics:
+Let's create a small function inside the workflow to take the JSON path and pull out some basic metrics:
 
-```bash
-def getFilteringResult(json_file) {
-    fastpResult = new JsonSlurper().parseText(json_file.text)
+```groovy linenums="1"
+workflow Jsontest {
+
+    def getFilteringResult(json_file) {
+        def fastpResult = new JsonSlurper().parseText(json_file.text)
+    }
+
+    Channel.fromPath("results/fastp/json/*.json")
+        .view()
 }
 ```
 
@@ -201,10 +209,14 @@ def getFilteringResult(json_file) {
         Here is one potential solution.
 
         ```groovy linenums="1"
-        def getFilteringResult(json_file) {
-            new JsonSlurper().parseText(json_file.text)
-            ?.summary
-            ?.after_filtering
+        workflow Jsontest {
+            def getFilteringResult(json_file) {
+                new JsonSlurper().parseText(json_file.text)
+                ?.summary
+                ?.after_filtering
+            }
+
+            // ... rest of workflow
         }
         ```
 
@@ -215,10 +227,19 @@ def getFilteringResult(json_file) {
 We can then join this new map back to the original reads using the `join` operator:
 
 ```groovy linenums="1"
-FASTP.out.json
-| map { meta, json -> [meta, getFilteringResult(json)] }
-| join( FASTP.out.reads )
-| view
+workflow {
+
+    def getFilteringResult(json_file) {
+        new JsonSlurper().parseText(json_file.text)
+            ?.summary
+            ?.after_filtering
+    }
+
+    FASTP.out.json
+        .map { meta, json -> [meta, getFilteringResult(json)] }
+        .join( FASTP.out.reads )
+        .view()
+}
 ```
 
 !!! exercise
@@ -228,16 +249,24 @@ FASTP.out.json
     ??? solution
 
         ```groovy linenums="1"
-        FASTP.out.json
-        | map { meta, json -> [meta, getFilteringResult(json)] }
-        | join( FASTP.out.reads )
-        | map { meta, fastpMap, reads -> [meta + fastpMap, reads] }
-        | branch { meta, reads ->
-            pass: meta.q30_rate >= 0.935
-            fail: true
-        }
-        | set { reads }
+        workflow {
+            def getFilteringResult(json_file) {
+                new JsonSlurper().parseText(json_file.text)
+                    ?.summary
+                    ?.after_filtering
+            }
 
-        reads.fail | view { meta, reads -> "Failed: ${meta.id}" }
-        reads.pass | view { meta, reads -> "Passed: ${meta.id}" }
+            FASTP.out.json
+                .map { meta, json -> [meta, getFilteringResult(json)] }
+                .join( FASTP.out.reads )
+                .map { meta, fastpMap, reads -> [meta + fastpMap, reads] }
+                .branch { meta, reads ->
+                    pass: meta.q30_rate >= 0.935
+                    fail: true
+                }
+                .set { reads }
+
+            reads.fail.view { meta, reads -> "Failed: ${meta.id}" }
+            reads.pass.view { meta, reads -> "Passed: ${meta.id}" }
+        }
         ```
