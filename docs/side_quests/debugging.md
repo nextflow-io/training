@@ -615,15 +615,8 @@ When workflows reach a certain level of complexity, it can be a little difficult
 
 Open `bad_channel_shape.nf` in VS Code:
 
-```groovy title="Wrong channel structure"
+```groovy title="Wrong channel structure" hl_lines="5 20"
 #!/usr/bin/env nextflow
-
-// Channel emits tuples, but process expects single values
-input_ch = Channel.of(
-    ['sample1', 'file1.txt'],
-    ['sample2', 'file2.txt'],
-    ['sample3', 'file3.txt']
-)
 
 process PROCESS_FILES {
     input:
@@ -639,6 +632,13 @@ process PROCESS_FILES {
 }
 
 workflow {
+
+    // Channel emits tuples, but process expects single values
+    input_ch = Channel.of(
+      ['sample1', 'file1.txt'],
+      ['sample2', 'file2.txt'],
+      ['sample3', 'file3.txt']
+)
     PROCESS_FILES(input_ch)
 }
 ```
@@ -677,14 +677,36 @@ The square brackets in the error message provides the clue here, the process is 
 
 To fix this, if the process requires both inputs we could adjust the process to accept a tuple:
 
-```groovy title="Fixing channel structure"
+=== "After"
+
+    ```groovy title="bad_channel_shape.nf" linenums="5"
     tuple val(sample_name), path(file_name)
-```
+    ```
+
+=== "Before"
+
+    ```groovy title="bad_channel_shape.nf" linenums="5"
+    val sample_name
+    ```
 
 Or if, as in this example the process only needs the sample name, we can extract the first element of the tuple before passing it to the process:
 
-```groovy title="Extracting single value from tuple"
+=== "After"
+
+    ```groovy title="bad_channel_shape.nf" linenums="24"
     PROCESS_FILES(input_ch).map { it[0] }  // Extract first element
+    ```
+
+=== "Before"
+
+    ```groovy title="bad_channel_shape.nf" linenums="24"
+    PROCESS_FILES(input_ch)
+    ```
+
+Pick one of the solutions and re-run the workflow:
+
+```console
+nextflow run bad_channel_shape.nf
 ```
 
 ### 2.4. Channel Debugging Techniques
