@@ -97,7 +97,6 @@ Learn to identify and fix the most common type of error: syntax errors.
 
 Syntax errors are the most common type of error you'll encounter when writing Nextflow code. They occur when the code does not conform to the expected syntax rules of the Nextflow DSL. These errors prevent your workflow from running at all, so it's important to learn how to identify and fix them quickly.
 
-
 ### 1.1. Missing braces
 
 One of the most common syntax errors, and sometimes one of the more complex ones to debug is **missing or mismatched brackets**.
@@ -907,7 +906,7 @@ nextflow run missing_software.nf -profile docker
 
 !!! note
 
-  To learn more about how nextflow uses containers, go back to [Hello Nextflow](../hello_nextflow/05_hello_containers.md)
+To learn more about how nextflow uses containers, go back to [Hello Nextflow](../hello_nextflow/05_hello_containers.md)
 
 ### 3.3. Bad resource configuration
 
@@ -1049,7 +1048,7 @@ nextflow run bad_syntax.nf -preview
 
 !!! note:
 
-  If you fixed the file, reintroduce the syntax error by changing `input` to `inputs`
+If you fixed the file, reintroduce the syntax error by changing `input` to `inputs`
 
 ```console title="Preview mode output"
  N E X T F L O W   ~  version 24.10.2
