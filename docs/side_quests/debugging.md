@@ -966,9 +966,19 @@ Learn about Nextflow's built-in debugging tools and systematic approaches to tro
 
 Nextflow provides several powerful built-in tools for debugging and analyzing workflow execution. These tools help you understand what went wrong, where it went wrong, and how to fix it efficiently.
 
-### 4.1. Execution Reports and Trace Files
+In [Hello Nextflow](../hello_nextflow/01_hello_world.md) you already saw the log and error files that nextflow produces for each task in the work directory:
 
-#### Generate Complete Debugging Information
+- **`.command.sh`**: The exact script that was executed
+- **`.command.run`**: The command wrapper used to run the task. This includes environment variables and other settings, for example the container image used.
+- **`.command.err`**: Standard error output (most important for debugging)
+- **`.command.out`**: Standard output from the command
+- **`.command.log`**: Nextflow's execution log
+
+We will use these files to debug the workflow.
+
+<!-- ### 4.1. Execution Reports and Trace Files
+
+#### Generate Complete Debugging Information -->
 
 <!-- Always run with comprehensive reporting when debugging, either by adding flags to your command line: -->
 
@@ -1070,57 +1080,10 @@ echo "Processing [sample2, file2.txt]" > [sample2, file2.txt]_output.txt
 
 ... looking at this file would have told us exactly the problem was. -->
 
-**Essential debugging files:**
 
-- **`.command.sh`**: The exact script that was executed
-- **`.command.run`**: The command wrapper used to run the task. This includes environment variables and other settings, for example the container image used.
-- **`.command.err`**: Standard error output (most important for debugging)
-- **`.command.out`**: Standard output from the command
-- **`.command.log`**: Nextflow's execution log
+### 4.1. Real-time Process Output
 
-### 4.2. Preview Mode and Process Debugging
-
-Sometimes you want to catch problems before any processes run, or see what's happening in real-time. Nextflow provides two key approaches for this kind of proactive debugging.
-
-#### Dry Run Testing
-
-The first approach is preview mode, which lets you test workflow logic without executing commands:
-
-```bash
-nextflow run workflow.nf -preview
-```
-
-This can be quite useful for quickly checking the structure of your workflow and ensuring that processes are connected correctly without running any actual commands. For example, for our first syntax errror from earlier:
-
-```bash
-nextflow run bad_syntax.nf -preview
-```
-
-!!! note:
-
-  If you fixed the file, reintroduce the syntax error by changing `input` to `inputs`
-
-```console title="Preview mode output"
- N E X T F L O W   ~  version 24.10.2
-
-Launching `bad_syntax.nf` [sick_fermi] DSL2 - revision: ca6327fad2
-
-ERROR ~ Script compilation error
-- file : /workspaces/training/side-quests/debugging/bad_syntax.nf
-- cause: Unexpected input: '{' @ line 3, column 23.
-   process PROCESS_FILES {
-                         ^
-
-1 error
-
-NOTE: If this is the beginning of a process or workflow, there may be a syntax error in the body, such as a missing or extra comma, for which a more specific error message could not be produced.
-
- -- Check '.nextflow.log' file for details
-```
-
-#### Real-time Process Output
-
-Preview mode catches structural issues before execution, but sometimes you need to see what's happening inside running processes. The second approach is enabling real-time process output, which shows you exactly what each task is doing as it executes.
+Sometimes you need to see what's happening inside running processes. You can enable real-time process output, which shows you exactly what each task is doing as it executes.
 
 For example, `bad_channel_shape_viewed.nf` from our earlier examples printed channel content using `.view()`. We can also use the `debug` directive to echo variables from within the process itself, which we demonstrate in `bad_channel_shape_viewed_debug.nf`:
 
@@ -1173,6 +1136,44 @@ Sample name inside process is sample3
 
 Essentially the content of standard out from the process is printed to the terminal in real-time, which can be very useful for debugging.
 
+### 4.2. Preview Mode
+
+Sometimes you want to catch problems before any processes run. Nextflow provides a flag for this kind of proactive debugging: `-preview`.
+
+The preview mode lets you test workflow logic without executing commands:
+
+```bash
+nextflow run workflow.nf -preview
+```
+
+This can be quite useful for quickly checking the structure of your workflow and ensuring that processes are connected correctly without running any actual commands. For example, for our first syntax errror from earlier:
+
+```bash
+nextflow run bad_syntax.nf -preview
+```
+
+!!! note:
+
+  If you fixed the file, reintroduce the syntax error by changing `input` to `inputs`
+
+```console title="Preview mode output"
+ N E X T F L O W   ~  version 24.10.2
+
+Launching `bad_syntax.nf` [sick_fermi] DSL2 - revision: ca6327fad2
+
+ERROR ~ Script compilation error
+- file : /workspaces/training/side-quests/debugging/bad_syntax.nf
+- cause: Unexpected input: '{' @ line 3, column 23.
+   process PROCESS_FILES {
+                         ^
+
+1 error
+
+NOTE: If this is the beginning of a process or workflow, there may be a syntax error in the body, such as a missing or extra comma, for which a more specific error message could not be produced.
+
+ -- Check '.nextflow.log' file for details
+```
+
 ### 4.3. Stub Running for Logic Testing
 
 Sometimes you encounter errors that are difficult to debug because the real commands take too long to run, require special software, or fail for complex reasons. In these cases, stub running provides an elegant solution by letting you test workflow logic without executing the actual commands.
@@ -1181,7 +1182,7 @@ When you're developing a Nextflow process, you can use the `stub` directive to d
 
 For example, remember our `missing_software.nf` from earlier? The one where we had missing software that prevented the workflow running until we added `-profile docker`? Well, we can amend that process definition like:
 
-```
+```groovy title="missing_software.nf" hl_lines="17-20"
 process PROCESS_FILES {
 
     container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
@@ -1204,14 +1205,12 @@ process PROCESS_FILES {
 }
 ```
 
-(you'll see this in `missing_software_stub.nf`)
-
 The `touch` command we're using here doesn't depend on any software or appropriate inputs, it's just a placeholder.
 
 Then, if we wanted to check workflow logic without worrying about the software, we can use `-stub`, without `-profile docker`:
 
 ```bash
-nextflow run -stub missing_software_stub.nf
+nextflow run -stub missing_software.nf
 ```
 
 The stub command doesn't run Cowpy, it just creates an empty file, so everything will run fine, and we know that our workflow logic is written correctly.
