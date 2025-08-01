@@ -4,14 +4,7 @@ Debugging is a critical skill that can save you hours of frustration and help yo
 
 ## What you should know first
 
-This guide assumes you've completed the [Hello Nextflow](../hello_nextflow/) training course and are comfortable with foundational Nextflow concepts including:
-
-- **Basic workflow structure**: Understanding processes, workflows, and how they connect together
-- **Channel operations**: Creating channels, passing data between processes, and using basic operators
-- **Modules and organization**: Creating reusable modules and using include statements
-- **Configuration basics**: Using `nextflow.config` for parameters, process directives, and profiles
-- **Container usage**: Specifying containers for software provisioning
-- **Running workflows**: Executing workflows locally and interpreting basic outputs
+This guide assumes you've completed the [Hello Nextflow](../hello_nextflow/) training course and are comfortable with foundational Nextflow concepts including basic workflow structure, processes, channels, and configuration.
 
 ## What you'll learn here
 
