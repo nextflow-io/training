@@ -491,7 +491,7 @@ The input channel has two elements. For each element in the input channel, we re
 
     ```groovy
     workflow {
-        Channel.fromPath("data/datfiles/sample*/*.dat")
+        Channel.fromPath("data/datfiles/sample*/*.dat", checkIfExists: true)
             .map { myfile -> [myfile.getParent().name, myfile] }
             .groupTuple()
             .view()
@@ -647,8 +647,8 @@ workflow {
     )
 
     WriteBio(characters)
-      | collectFile()
-      | view()
+      .collectFile()
+      .view()
 }
 ```
 
