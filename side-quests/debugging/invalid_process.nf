@@ -1,7 +1,7 @@
 #!/usr/bin/env nextflow
 
 process PROCESS_FILES {
-    input:
+    inputs:
     val sample_name
 
     output:

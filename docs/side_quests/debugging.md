@@ -6,6 +6,8 @@ Debugging is a critical skill that can save you hours of frustration and help yo
 
 This guide assumes you've completed the [Hello Nextflow](../hello_nextflow/) training course and are comfortable with foundational Nextflow concepts including basic workflow structure, processes, channels, and configuration.
 
+This guide focuses on debugging techniques and workflows. For comprehensive coverage of IDE features that support debugging (syntax highlighting, error detection, etc.), see the dedicated [IDE Features for Nextflow Development](ide_features.md) side quest. We recommend completing the IDE training beforehand.
+
 ## What you'll learn here
 
 This guide focuses on **systematic debugging techniques** for Nextflow workflows:
@@ -16,10 +18,6 @@ This guide focuses on **systematic debugging techniques** for Nextflow workflows
 - **Process debugging**: Investigating execution failures and resource issues
 - **Built-in debugging tools**: Leveraging Nextflow's trace, timeline, and reporting features
 - **Advanced debugging techniques**: Using resume, stub running, and other advanced approaches
-
-!!! tip "IDE Features for Debugging"
-
-    This guide focuses on debugging techniques and workflows. For comprehensive coverage of IDE features that support debugging (syntax highlighting, error detection, etc.), see the dedicated [IDE Features for Nextflow Development](ide_features.md) side quest.
 
 You'll encounter various types of errors when developing Nextflow workflows:
 
@@ -186,7 +184,7 @@ nextflow run bad_syntax.nf
 
 Another common syntax error is an **invalid process definition**. This can happen if you forget to define required blocks or use incorrect directives in the process definition. Maybe you try to use `inputs` rather than the correction `input` directive, as we illustrate in `invalid_process.nf`:
 
-```groovy
+```groovy title="invalid_process.nf" hl_lines="4"
 #!/usr/bin/env nextflow
 
 process PROCESS_FILES {
