@@ -301,16 +301,17 @@ Efficient navigation is crucial when working with complex workflows spanning mul
 
 ### 4.1. Go to Definition
 
-You can quickly navigate to any process, module, or variable definition using `Ctrl/Cmd-click`. Mouse over the link to the module file at the top of the script, and follow the link as suggested:
+If you mouse over a process name like `FASTQC`, you'll see a popup with the module interface (inputs and outputs):
 
-![Go to definition](img/follow_link.png)
+![Go to definition](img/syntax.png)
 
 This feature is particularly valuable when authoring workflows, as it allows you to understand the module interface without opening the module file directly.
 
-You can quickly navigate to any process, module, or variable definition using **Ctrl-click** (or **Cmd-click** on Mac). Mouse over the link to the module file at the top of the script, and follow the link as suggested:
+You can quickly navigate to any process, module, or variable definition using **Ctrl/Cmd-click** . Mouse over the link to the module file at the top of the script, and follow the link as suggested:
 
 ![Follow link](img/follow_link.png)
-Try this on the `FASTQC` process name in the workflow block. This links you directly to the process name (which is the same as the module file in this example, but could be part-way through a much larger file).
+
+The same thing works for process names. Go back to `basic_workflow.nf` and try this on the `FASTQC` process name in the workflow block. This links you directly to the process name (which is the same as the module file in this example, but could be part-way through a much larger file).
 
 Now let's explore navigation in a more complex workflow using `complex_workflow.nf` (the illustration-only file mentioned earlier). This workflow contains multiple processes defined in separate module files, as well as some inline ones. While complex multi-file structures can be challenging to navigate manually, the ability to jump to definitions makes exploration much more manageable.
 
