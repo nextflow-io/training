@@ -130,15 +130,15 @@ NOTE: If this is the beginning of a process or workflow, there may be a syntax e
 
 **Key elements of syntax error messages:**
 
-- **File location**: Shows exactly which file contains the error
-- **Line and column**: Points to where the parser encountered the problem
-- **Error description**: Explains what the parser found that it didn't expect
-- **Context**: Shows the problematic line with a caret (^) pointing to location of an unclosed brace
+- **File location**: Shows exactly which file contains the error (`- file : /path/to/bad_syntax.nf`)
+- **Error description**: Explains what the parser found that it didn't expect (`- cause: Unexpected input: '{'`)
+- **Line and column**: Points to where the parser encountered the problem (`@ line 6, column 23.`)
+- **Context**: Shows the problematic line with a caret (^) pointing to location of an unclosed brace (`process PROCESS_FILES {`)
 - **Additional notes**: Provides hints about common causes
 
 Now, open `bad_syntax.nf`:
 
-```groovy
+```groovy title="bad_syntax.nf" hl_lines="14"
 #!/usr/bin/env nextflow
 
 process PROCESS_FILES {
