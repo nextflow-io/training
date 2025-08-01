@@ -325,6 +325,7 @@ process MultiInput {
     val(smallNum)
     val(bigNum)
 
+    script:
     "echo -n small is $smallNum and big is $bigNum"
 }
 ```

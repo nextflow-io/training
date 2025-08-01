@@ -137,6 +137,7 @@ process MapReads {
     output:
     tuple val(meta), path("*.bam")
 
+    script:
     "touch out.bam"
 }
 
@@ -227,6 +228,7 @@ process CombineBams {
     output:
     tuple val(meta), path("combined.bam")
 
+    script:
     "cat input/*.bam > combined.bam"
 }
 ```
@@ -273,6 +275,7 @@ process GenotypeOnInterval {
     output:
     tuple val(meta), path("genotyped.vcf")
 
+    script:
     "cat $bam $bed > genotyped.vcf"
 }
 ```
@@ -304,6 +307,7 @@ process MergeGenotyped {
     output:
     tuple val(meta), path("merged.genotyped.vcf")
 
+    script:
     "cat input/*.vcf > merged.genotyped.vcf"
 }
 ```
@@ -373,6 +377,7 @@ process MergeGenotyped {
     output:
     tuple val(meta), path("merged.genotyped.vcf")
 
+    script:
     "cat input/*.vcf > merged.genotyped.vcf"
 }
 ```
@@ -399,6 +404,7 @@ This will publish all of the files in the `output` block of this process to the 
             output:
             tuple val(meta), path("*.vcf")
 
+            script:
             "cat input/*.vcf > ${meta.id}.${meta.type}.genotyped.vcf"
         }
         ```
@@ -415,6 +421,7 @@ This will publish all of the files in the `output` block of this process to the 
             output:
             tuple val(meta), path("merged.genotyped.vcf")
 
+            script:
             "cat input/*.vcf > merged.genotyped.vcf"
         }
         ```
