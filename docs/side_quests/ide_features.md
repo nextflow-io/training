@@ -232,7 +232,7 @@ Let's create a deliberate error to see the detection in action. Open `basic_work
 
 ### 3.2. Problems Panel
 
-Beyond individual error highlighting, VS Code provides a centralized Problems panel that aggregates all errors, warnings, and info messages across your workspace. Open it with `Ctrl+Shift+M` (or `Cmd+Shift+M`) and use the filter icon to show only errors relevant to the current file:
+Beyond individual error highlighting, VS Code provides a centralized Problems panel that aggregates all errors, warnings, and info messages across your workspace. Open it with `Ctrl/Cmd+Shift+M` and use the filter icon to show only errors relevant to the current file:
 
 ![Filter the problems panel](img/active_file.png)
 
@@ -301,9 +301,9 @@ Efficient navigation is crucial when working with complex workflows spanning mul
 
 ### 4.1. Go to Definition
 
-You can quickly navigate to any process, module, or variable definition using `Ctrl-click` (or `Cmd-click` on Mac). Mouse over the link to the module file at the top of the script, and follow the link as suggested:
+You can quickly navigate to any process, module, or variable definition using `Ctrl/Cmd-click`. Mouse over the link to the module file at the top of the script, and follow the link as suggested:
 
-![Go to definition](img/syntax.png)
+![Go to definition](img/follow_link.png)
 
 This feature is particularly valuable when authoring workflows, as it allows you to understand the module interface without opening the module file directly.
 
