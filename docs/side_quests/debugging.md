@@ -16,7 +16,6 @@ This guide focuses on **systematic debugging techniques** for Nextflow workflows
 - **Process debugging**: Investigating execution failures and resource issues
 - **Built-in debugging tools**: Leveraging Nextflow's trace, timeline, and reporting features
 - **Advanced debugging techniques**: Using resume, stub running, and other advanced approaches
-- **Systematic debugging workflow**: Following a structured approach to problem-solving
 
 !!! tip "IDE Features for Debugging"
 
@@ -491,7 +490,7 @@ There are a couple of ways to address this. You can simply create a value channe
     reference_ch = Channel.value('baseline_reference')
 ```
 
-That will allow a singleton channel to be reused again and again. In more complex scenarios, perhaps where you have a more comlex situation than a single reference channel, you can use the `combine` operator to create a new channel that combines the two channels into tuples:
+In more complex scenarios, perhaps where you have a more complex situation than a single reference channel, you can use the `combine` operator to create a new channel that combines the two channels into tuples:
 
 ```groovy
     reference_ch = Channel.of('baseline_reference')
@@ -503,7 +502,7 @@ That will allow a singleton channel to be reused again and again. In more comple
 
 ### 2.3. Wrong Channel Content Structure
 
-When workflows reach a certain level of complexity, it can be a little difficult to keep track of the internal structures of each channel, and people commonly generate mismatches between what the process expects and what the channel actually contains. This is different to the issue we discussed earlier where the number of channels was incorrect, and is more subtle. The channel may have the right number of items, but the structure of those items doesn't match what the process expects.
+When workflows reach a certain level of complexity, it can be a little difficult to keep track of the internal structures of each channel, and people commonly generate mismatches between what the process expects and what the channel actually contains. This is more subtle to the issue we discussed earlier, where the number of channels was incorrect. In this case, the channel may have the right number of items, but the structure of those items doesn't match what the process expects.
 
 Open `bad_channel_shape.nf` in VS Code:
 
@@ -711,7 +710,7 @@ sample3_output.txt
 
 ### 3.2. Missing software
 
-`missing_software.nf` is an example similar to the others we've encoutered in this module. There are no syntax errors, and this time we're using the `cowpy` command. If you try to run this workflow:
+`missing_software.nf` is an example similar to the others we've encountered in this module. There are no syntax errors, and this time we're using the `cowpy` command. If you try to run this workflow:
 
 ```bash
 nextflow run missing_software.nf
@@ -807,13 +806,15 @@ Trying to run this like:
 nextflow run bad_resources.nf -profile docker
 ```
 
-... gives us an error like:
+... gives us an error:
+
+\```console
 ERROR ~ Error executing process > 'PROCESS_FILES (1)'
 
 Caused by:
 Process exceeded running time limit (1ms)
 
-````
+\```
 
 If you make sure to read your error messages failures like this should not puzzle you for too long. But make sure you understand the resource requirements of the commands you are running so that you can configure your resource directives appropriately.
 
