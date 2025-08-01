@@ -89,7 +89,7 @@ tree .
 To install the extension manually:
 
 1. Open VS Code
-2. Go to the Extensions view (`Ctrl+Shift+X` or `Cmd+Shift+X`)
+2. Go to the Extensions view by clicking the extesnsions icon to the left: ![extensions icon](img/extensions_icon.png) (shortcut `Ctrl+Shift+X` or `Cmd+Shift+X` if you're running VSCode locally)
 3. Search for "Nextflow"
 4. Install the official Nextflow extension
 
