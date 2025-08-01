@@ -43,8 +43,8 @@ process PlotCars {
 workflow {
     PlotCars()
 
-    PlotCars.out.table | view { "Found a tsv: $it" }
-    PlotCars.out.plot | view { "Found a png: $it" }
+    PlotCars.out.table.view { "Found a tsv: $it" }
+    PlotCars.out.plot.view { "Found a png: $it" }
 }
 ```
 
@@ -152,8 +152,8 @@ We can then use this class in our workflow:
 ```groovy linenums="1"
 workflow {
     Channel.of("Montreal")
-    | map { new Metadata() }
-    | view
+        .map { new Metadata() }
+        .view()
 }
 ```
 
@@ -162,8 +162,8 @@ We can use the new `hi` method in the workflow:
 ```groovy linenums="1"
 workflow {
     Channel.of("Montreal")
-    | map { new Metadata() }
-    | view { it.hi() }
+        .map { new Metadata() }
+        .view { it.hi() }
 }
 ```
 
@@ -186,8 +186,8 @@ Which we can use like so:
 ```groovy linenums="1"
 workflow {
     Channel.of("Montreal")
-    | map { place -> new Metadata(place) }
-    | view { it.hi() }
+        .map { place -> new Metadata(place) }
+        .view { it.hi() }
 }
 ```
 
@@ -201,10 +201,11 @@ process UseMeta {
 }
 
 workflow {
-    Channel.of("Montreal")
-    | map { place -> new Metadata(place) }
-    | UseMeta
-    | view
+    place_ch = Channel.of("Montreal")
+        .map { place -> new Metadata(place) }
+
+    UseMeta(place_ch)
+        .view()
 }
 ```
 
@@ -226,11 +227,12 @@ process UseMeta {
 }
 
 workflow {
-    Channel.of("Montreal")
-    | map { place -> new Metadata(place) }
-    | map { it + [adapter:"AACGTAGCTTGAC"] }
-    | UseMeta
-    | view
+    place_ch = Channel.of("Montreal")
+        .map { place -> new Metadata(place) }
+        .map { it + [adapter:"AACGTAGCTTGAC"] }
+
+    UseMeta(place_ch)
+        .view()
 }
 ```
 
@@ -302,8 +304,8 @@ We can pass objects of our class through channels. Here we take a channel of dog
 ```groovy linenums="1"
 workflow {
     Channel.of("Argente", "Absolon", "Chowne")
-    | map { new Dog(name: it) }
-    | view
+        .map { new Dog(name: it) }
+        .view()
 }
 ```
 

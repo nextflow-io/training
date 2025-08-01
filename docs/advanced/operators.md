@@ -11,8 +11,8 @@ Map is certainly the most commonly used of the operators covered here. It's a wa
 ```groovy linenums="1"
 workflow {
     Channel.of( 1, 2, 3, 4, 5 )
-    | map { it * it }
-    | view
+        .map { it * it }
+        .view()
 }
 ```
 
@@ -28,8 +28,8 @@ By default, the element being passed to the closure is given the default name `i
 ```groovy linenums="1"
 workflow {
     Channel.of( 1, 2, 3, 4, 5 )
-    | map { num -> num * num }
-    | view
+        .map { num -> num * num }
+        .view()
 }
 ```
 
@@ -38,8 +38,8 @@ Groovy is an optionally typed language, and it is possible to specify the type o
 ```groovy linenums="1"
 workflow {
     Channel.of( 1, 2, 3, 4, 5 )
-    | map { Integer num -> num * num }
-    | view
+        .map { Integer num -> num * num }
+        .view()
 }
 ```
 
@@ -52,8 +52,8 @@ def squareIt = { Integer num -> num * num }
 
 workflow {
     Channel.of( 1, 2, 3, 4, 5 )
-    | map( squareIt )
-    | view
+        .map( squareIt )
+        .view()
 }
 ```
 
@@ -65,8 +65,8 @@ def addTwo = { it + 2 }
 
 workflow {
     Channel.of( 1, 2, 3, 4, 5 )
-    | map( squareIt >> addTwo )
-    | view
+        .map( squareIt >> addTwo )
+        .view()
 }
 ```
 
@@ -88,9 +88,9 @@ def addTwo = { it + 2 }
 
 workflow {
     Channel.of( 1, 2, 3, 4, 5 )
-    | map( squareIt )
-    | map( addTwo )
-    | view
+        .map( squareIt )
+        .map( addTwo )
+        .view()
 }
 ```
 
@@ -102,8 +102,8 @@ def timesTen = timesN.curry(10)
 
 workflow {
     Channel.of( 1, 2, 3, 4, 5 )
-    | map( timesTen )
-    | view
+        .map( timesTen )
+        .view()
 }
 ```
 
@@ -117,8 +117,8 @@ def timesTen = timesN.curry(10)
 
 workflow {
     Channel.of( 1, 2, 3, 4, 5 )
-    | map( timesTen )
-    | view { "Found '$it' (${it.getClass()})"}
+        .map( timesTen )
+        .view { "Found '$it' (${it.getClass()})"}
 }
 ```
 
@@ -133,8 +133,8 @@ A common Nextflow pattern is for a simple samplesheet to be passed as primary in
 ```groovy linenums="1"
 workflow {
     Channel.fromPath("data/samplesheet.csv")
-    | splitCsv( header: true )
-    | view
+        .splitCsv( header: true )
+        .view()
 }
 ```
 
@@ -155,11 +155,11 @@ workflow {
         ```groovy linenums="1"
         workflow {
             Channel.fromPath("data/samplesheet.csv")
-            | splitCsv( header: true )
-            | map { row ->
-                [row.id, [file(row.fastq1), file(row.fastq2)]]
-            }
-            | view
+                .splitCsv( header: true )
+                .map { row ->
+                    [row.id, [file(row.fastq1), file(row.fastq2)]]
+                }
+                .view()
         }
         ```
 
@@ -174,12 +174,12 @@ workflow {
         ```groovy linenums="1"
         workflow {
             Channel.fromPath("data/samplesheet.csv")
-            | splitCsv( header: true )
-            | map { row ->
-                metaMap = [id: row.id, type: row.type, repeat: row.repeat]
-                [metaMap, [file(row.fastq1), file(row.fastq2)]]
-            }
-            | view
+                .splitCsv( header: true )
+                .map { row ->
+                    metaMap = [id: row.id, type: row.type, repeat: row.repeat]
+                    [metaMap, [file(row.fastq1), file(row.fastq2)]]
+                }
+                .view()
         }
         ```
 
@@ -200,20 +200,20 @@ Using the `splitCsv` operator would give us one entry that would contain all fou
 
 ```groovy linenums="1"
 workflow {
-    Channel.fromPath("data/samplesheet.ugly.csv")
-    | splitCsv( header: true )
-    | multiMap { row ->
-        tumor:
-            metamap = [id: row.id, type:'tumor', repeat:row.repeat]
-            [metamap, file(row.tumor_fastq_1), file(row.tumor_fastq_2)]
-        normal:
-            metamap = [id: row.id, type:'normal', repeat:row.repeat]
-            [metamap, file(row.normal_fastq_1), file(row.normal_fastq_2)]
-    }
-    | set { samples }
+    ch_samplesheet = Channel.fromPath("data/samplesheet.ugly.csv")
+        .splitCsv( header: true )
+        .multiMap { row ->
+            tumor:
+                metamap = [id: row.id, type:'tumor', repeat:row.repeat]
+                [metamap, file(row.tumor_fastq_1), file(row.tumor_fastq_2)]
+            normal:
+                metamap = [id: row.id, type:'normal', repeat:row.repeat]
+                [metamap, file(row.normal_fastq_1), file(row.normal_fastq_2)]
+        }
+        .set { samples }
 
-    samples.tumor | view { "Tumor: $it"}
-    samples.normal | view { "Normal: $it"}
+    samples.tumor.view { "Tumor: $it"}
+    samples.normal.view { "Normal: $it"}
 }
 ```
 
@@ -229,17 +229,17 @@ In the example above, the `multiMap` operator was necessary because we were supp
 
 ```groovy linenums="1"
 workflow {
-    Channel.fromPath("data/samplesheet.csv")
-    | splitCsv( header: true )
-    | map { row -> [[id: row.id, repeat: row.repeat, type: row.type], [file(row.fastq1), file(row.fastq2)]] }
-    | branch { meta, reads ->
-        tumor: meta.type == "tumor"
-        normal: meta.type == "normal"
-    }
-    | set { samples }
+    ch_samplesheet = Channel.fromPath("data/samplesheet.csv")
+        .splitCsv( header: true )
+        .map { row -> [[id: row.id, repeat: row.repeat, type: row.type], [file(row.fastq1), file(row.fastq2)]] }
+        .branch { meta, reads ->
+            tumor: meta.type == "tumor"
+            normal: meta.type == "normal"
+        }
+        .set { samples }
 
-    samples.tumor | view { "Tumor: $it"}
-    samples.normal | view { "Normal: $it"}
+    samples.tumor.view { "Tumor: $it"}
+    samples.normal.view { "Normal: $it"}
 }
 ```
 
@@ -289,27 +289,31 @@ branch { meta, reads ->
 Some Nextflow operators return objects that contain _multiple_ channels. The `multiMap` and `branch` operators are excellent examples. In most instances, the output is assigned to a variable and then addressed by name:
 
 ```groovy linenums="1"
-numbers = Channel.of( 1, 2, 3, 4, 5 )
-| multiMap {
-    small: it
-    large: it * 10
+workflow {
+    numbers = Channel.of( 1, 2, 3, 4, 5 )
+        .multiMap {
+            small: it
+            large: it * 10
+        }
+    numbers.small.view { num -> "Small: $num"}
+    numbers.large.view { num -> "Large: $num"}
 }
-numbers.small | view { num -> "Small: $num"}
-numbers.large | view { num -> "Large: $num"}
 ```
 
 or by using the `set` operator ([documentation](https://www.nextflow.io/docs/latest/operator.html#set)):
 
 ```groovy linenums="1"
-Channel.of( 1, 2, 3, 4, 5 )
-| multiMap {
-    small: it
-    large: it * 10
-}
-| set { numbers }
+workflow {
+    Channel.of( 1, 2, 3, 4, 5 )
+        .multiMap {
+            small: it
+            large: it * 10
+        }
+        .set { numbers }
 
-numbers.small | view { num -> "Small: $num"}
-numbers.large | view { num -> "Large: $num"}
+    numbers.small.view { num -> "Small: $num"}
+    numbers.large.view { num -> "Large: $num"}
+}
 ```
 
 A more interesting situation occurs when given a process that takes multiple channels as input:
@@ -328,38 +332,44 @@ process MultiInput {
 You can either provide the channels individually:
 
 ```groovy linenums="1"
-Channel.of( 1, 2, 3, 4, 5 )
-| multiMap {
-    small: it
-    large: it * 10
-}
-| set { numbers }
+workflow {
+    Channel.of( 1, 2, 3, 4, 5 )
+        .multiMap {
+            small: it
+            large: it * 10
+        }
+        .set { numbers }
 
-MultiInput(numbers.small, numbers.large)
+    MultiInput(numbers.small, numbers.large)
+}
 ```
 
 or you can provide the multichannel as a single input:
 
 ```groovy linenums="1"
-Channel.of( 1, 2, 3, 4, 5)
-| multiMap {
-    small: it
-    large: it * 10
-}
-| set { numbers }
+workflow {
+    Channel.of( 1, 2, 3, 4, 5)
+        .multiMap {
+            small: it
+            large: it * 10
+        }
+        .set { numbers }
 
-MultiInput(numbers)
+    MultiInput(numbers)
+}
 ```
 
 For an even cleaner solution, you can skip the now-redundant `set` operator:
 
 ```groovy linenums="1"
-Channel.of( 1, 2, 3, 4, 5 )
-| multiMap {
-    small: it
-    large: it * 10
+workflow {
+    Channel.of( 1, 2, 3, 4, 5 )
+        .multiMap {
+            small: it
+            large: it * 10
+        }
+        | MultiInput
 }
-| MultiInput
 ```
 
 If you have processes that output multiple channels and input multiple channels and the cardinality matches, they can be chained together in the same manner.
@@ -371,12 +381,12 @@ A common operation is to group elements from a _single_ channel where those elem
 ```groovy linenums="1"
 workflow {
     Channel.fromPath("data/samplesheet.csv")
-    | splitCsv(header: true)
-    | map { row ->
-        meta = [id: row.id, type: row.type]
-        [meta, row.repeat, [row.fastq1, row.fastq2]]
-    }
-    | view
+        .splitCsv(header: true)
+        .map { row ->
+            meta = [id: row.id, type: row.type]
+            [meta, row.repeat, [row.fastq1, row.fastq2]]
+        }
+        .view()
 }
 ```
 
@@ -387,13 +397,13 @@ The `groupTuple` operator allows us to combine elements that share a common key:
 ```groovy linenums="1"
 workflow {
     Channel.fromPath("data/samplesheet.csv")
-    | splitCsv(header: true)
-    | map { row ->
-        meta = [id: row.id, type: row.type]
-        [meta, row.repeat, [row.fastq1, row.fastq2]]
-    }
-    | groupTuple
-    | view
+        .splitCsv(header: true)
+        .map { row ->
+            meta = [id: row.id, type: row.type]
+            [meta, row.repeat, [row.fastq1, row.fastq2]]
+        }
+        .groupTuple()
+        .view()
 }
 ```
 
@@ -406,13 +416,13 @@ Given a workflow that returns one element per sample, where we have grouped the 
 ```groovy linenums="1"
 workflow {
     Channel.fromPath("data/samplesheet.csv")
-    | splitCsv(header: true)
-    | map { row ->
-        meta = [id: row.id, type: row.type]
-        [meta, row.repeat, [row.fastq1, row.fastq2]]
-    }
-    | groupTuple
-    | view
+        .splitCsv(header: true)
+        .map { row ->
+            meta = [id: row.id, type: row.type]
+            [meta, row.repeat, [row.fastq1, row.fastq2]]
+        }
+        .groupTuple()
+        .view()
 }
 ```
 
@@ -432,14 +442,14 @@ If we add in a `transpose`, each repeat number is matched back to the appropriat
 ```groovy linenums="1"
 workflow {
     Channel.fromPath("data/samplesheet.csv")
-    | splitCsv(header: true)
-    | map { row ->
-        meta = [id: row.id, type: row.type]
-        [meta, row.repeat, [row.fastq1, row.fastq2]]
-    }
-    | groupTuple
-    | transpose
-    | view
+        .splitCsv(header: true)
+        .map { row ->
+            meta = [id: row.id, type: row.type]
+            [meta, row.repeat, [row.fastq1, row.fastq2]]
+        }
+        .groupTuple()
+        .transpose()
+        .view()
 }
 ```
 
@@ -465,8 +475,8 @@ workflow {
     numbers = Channel.of(1, 2)
 
     numbers
-    | flatMap { n -> [ n, n*10, n*100 ] }
-    | view
+        .flatMap { n -> [ n, n*10, n*100 ] }
+        .view()
 }
 ```
 
@@ -490,8 +500,8 @@ The input channel has two elements. For each element in the input channel, we re
         numbers = Channel.of(1, 2)
 
         numbers
-        | flatMap { n -> [ n, [n*10, n*100] ] }
-        | view
+            .flatMap { n -> [ n, [n*10, n*100] ] }
+            .view()
     }
     ```
 
@@ -508,12 +518,12 @@ The input channel has two elements. For each element in the input channel, we re
 
     You would like to process these datfiles in batches - up to three at a time. The catch is that your batch process requires that the samples are processed independently. You have begun your workflow and grouped the samples together:
 
-    ```grooovy
+    ```groovy
     workflow {
         Channel.fromPath("data/datfiles/sample*/*.dat")
-        | map { [it.getParent().name, it] }
-        | groupTuple
-        | view
+            .map { [it.getParent().name, it] }
+            .groupTuple()
+            .view()
     }
     ```
 
@@ -546,10 +556,10 @@ The input channel has two elements. For each element in the input channel, we re
         ```groovy
         workflow {
             Channel.fromPath("data/datfiles/sample*/*.dat")
-            | map { [it.getParent().name, it] }
-            | groupTuple
-            | flatMap { id, files -> files.collate(3).collect { chunk -> [id, chunk] } }
-            | view
+                .map { [it.getParent().name, it] }
+                .groupTuple()
+                .flatMap { id, files -> files.collate(3).collect { chunk -> [id, chunk] } }
+                .view()
         }
         ```
 
@@ -576,9 +586,9 @@ workflow {
     )
 
     characters
-    | map { it.name }
-    | collectFile
-    | view
+        .map { it.name }
+        .collectFile()
+        .view()
 }
 ```
 
@@ -600,9 +610,9 @@ We can supply arguments `name` and `newLine` to the `collectFile` operator to re
 
 ```groovy
 characters
-| map { it.name }
-| collectFile(name: 'people.txt', newLine: true)
-| view
+    .map { it.name }
+    .collectFile(name: 'people.txt', newLine: true)
+    .view()
 ```
 
 ```console title="people.txt"
@@ -623,9 +633,9 @@ By default, the collected file is written into the work directory, which makes i
 
 ```groovy
 characters
-| map { it.name }
-| collectFile(name: 'characters.txt', newLine: true, storeDir: 'results')
-| view
+    .map { it.name }
+    .collectFile(name: 'characters.txt', newLine: true, storeDir: 'results')
+    .view()
 ```
 
 ### Collecting file contents
@@ -665,10 +675,9 @@ workflow {
         ['name': 'Norm', 'title': 'Detective']
     )
 
-    characters
-    | WriteBio
-    | collectFile
-    | view
+    WriteBio(characters)
+      | collectFile()
+      | view()
 }
 ```
 
@@ -697,13 +706,13 @@ For example:
 
 ```groovy
 characters
-| collectFile(newLine: true, storeDir: 'results') { character ->
-    filename = "${character.title}s.txt"
-    article = character.title.toLowerCase() =~ ~/^[aeiou]/ ? 'an' : 'a'
-    text = "${character.name} is ${article} ${character.title}"
-    [filename, text]
-}
-| view
+    .collectFile(newLine: true, storeDir: 'results') { character ->
+        filename = "${character.title}s.txt"
+        article = character.title.toLowerCase() =~ ~/^[aeiou]/ ? 'an' : 'a'
+        text = "${character.name} is ${article} ${character.title}"
+        [filename, text]
+    }
+    .view()
 ```
 
 The `collectFile` operator now returns a channel containing four files where we have the outputs grouped by the filename we specified.
@@ -735,10 +744,9 @@ process WriteBio {
 If we run this with the same workflow as before:
 
 ```groovy
-characters
-| WriteBio
-| collectFile(name: 'characters.csv', storeDir: 'results')
-| view
+WriteBio(characters)
+    .collectFile(name: 'characters.csv', storeDir: 'results')
+    .view()
 ```
 
 ... the CSVs are simply concatenated with the header included each time:
@@ -756,10 +764,9 @@ precinct,name,title
 To keep the header from only the first entry, we can use the `keepHeader` argument to `collectFile`:
 
 ```groovy
-characters
-| WriteBio
-| collectFile(name: 'characters.csv', storeDir: 'results', keepHeader: true)
-| view
+WriteBio(characters)
+    .collectFile(name: 'characters.csv', storeDir: 'results', keepHeader: true)
+    .view()
 ```
 
 !!! exercise
@@ -792,20 +799,18 @@ characters
         A good solution would be to pass a closure to the `collectFile` operator. The closure will return the filename and the file in a List:
 
         ```groovy
-        characters
-        | WriteBio
-        | collectFile(storeDir: 'results', keepHeader: true) { character, file ->
-            ["${character.title}s.csv", file]
-        }
-        | view
+        WriteBio(characters)
+            .collectFile(storeDir: 'results', keepHeader: true) { character, file ->
+                ["${character.title}s.csv", file]
+            }
+            .view()
         ```
 
         Another viable option would be to `map` over the channel before `collectFile`:
 
         ```groovy
-        characters
-        | WriteBio
-        | map { character, file -> ["${character.title}s.csv", file] }
-        | collectFile(storeDir: 'results', keepHeader: true)
-        | view
+        WriteBio(characters)
+            .map { character, file -> ["${character.title}s.csv", file] }
+            .collectFile(storeDir: 'results', keepHeader: true)
+            .view()
         ```

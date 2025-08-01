@@ -53,7 +53,7 @@ A first pass attempt at pulling these files into Nextflow might use the `fromFil
 ```groovy linenums="1"
 workflow {
     Channel.fromFilePairs("data/reads/*/*_R{1,2}.fastq.gz")
-    | view
+        .view()
 }
 ```
 
@@ -68,10 +68,10 @@ We can use the `tokenize` method to split our id. To sanity-check, I just pipe t
 ```groovy linenums="1"
 workflow {
     Channel.fromFilePairs("data/reads/*/*_R{1,2}.fastq.gz")
-    | map { id, reads ->
-        tokens = id.tokenize("_")
-    }
-    | view
+        .map { id, reads ->
+            tokens = id.tokenize("_")
+        }
+        .view()
 }
 ```
 
@@ -176,19 +176,19 @@ In this particular example, we know ahead of time that the treatments must be th
 ```groovy linenums="1"
 workflow {
     Channel.fromFilePairs("data/reads/*/*_R{1,2}.fastq.gz")
-    | map { id, reads ->
-        (sample, replicate, type) = id.tokenize("_")
-        (treatmentFwd, treatmentRev) = reads*.parent*.name*.minus(~/treatment/)
-        meta = [
-            sample:sample,
-            replicate:replicate,
-            type:type,
-            treatmentFwd:treatmentFwd,
-            treatmentRev:treatmentRev,
-        ]
-        [meta, reads]
-    }
-    | view
+        .map { id, reads ->
+            (sample, replicate, type) = id.tokenize("_")
+            (treatmentFwd, treatmentRev) = reads*.parent*.name*.minus(~/treatment/)
+            meta = [
+                sample:sample,
+                replicate:replicate,
+                type:type,
+                treatmentFwd:treatmentFwd,
+                treatmentRev:treatmentRev,
+            ]
+            [meta, reads]
+        }
+        .view()
 }
 ```
 

@@ -13,14 +13,14 @@ cd grouping
 ```groovy linenums="1"
 workflow {
     Channel.fromPath("data/samplesheet.csv")
-    | splitCsv( header:true )
-    | map { row ->
-        meta = [id:row.id, repeat:row.repeat, type:row.type]
-        [meta, [
-            file(row.fastq1, checkIfExists: true),
-            file(row.fastq2, checkIfExists: true)]]
-    }
-    | view
+        .splitCsv( header:true )
+        .map { row ->
+            meta = [id:row.id, repeat:row.repeat, type:row.type]
+            [meta, [
+                file(row.fastq1, checkIfExists: true),
+                file(row.fastq2, checkIfExists: true)]]
+        }
+        .view()
 }
 ```
 
@@ -29,14 +29,14 @@ The first change we're going to make is to correct some repetitive code that we'
 ```groovy linenums="1"
 workflow {
     Channel.fromPath("data/samplesheet.csv")
-    | splitCsv( header:true )
-    | map { row ->
+        .splitCsv( header:true )
+        .map { row ->
         meta = row.subMap('id', 'repeat', 'type')
         [meta, [
             file(row.fastq1, checkIfExists: true),
             file(row.fastq2, checkIfExists: true)]]
-    }
-    | view
+        }
+        .view()
 }
 ```
 
@@ -57,26 +57,26 @@ workflow {
         ```groovy linenums="1"
         workflow {
             Channel.fromPath("data/samplesheet.csv")
-            | splitCsv( header:true )
-            | map { row ->
+            .splitCsv( header:true )
+            .map { row ->
                 meta = row.subMap('id', 'repeat', 'type')
                 [meta, [
                     file(row.fastq1, checkIfExists: true),
                     file(row.fastq2, checkIfExists: true)]]
             }
-            | set { samples }
+            .set { samples }
 
 
             samples
-            | map { sleep 10; it }
-            | view { meta, reads -> "Should be unmodified: $meta" }
+            .map { sleep 10; it }
+            .view { meta, reads -> "Should be unmodified: $meta" }
 
             samples
-            | map { meta, reads ->
+            .map { meta, reads ->
                 meta.type = meta.type == "tumor" ? "abnormal" : "normal"
                 [meta, reads]
             }
-            | view { meta, reads -> "Should be modified: $meta" }
+            .view { meta, reads -> "Should be modified: $meta" }
         }
         ```
 
@@ -89,26 +89,26 @@ workflow {
         ```{groovy}
         workflow {
             Channel.fromPath("data/samplesheet.csv")
-            | splitCsv( header:true )
-            | map { row ->
+            .splitCsv( header:true )
+            .map { row ->
                 meta = row.subMap('id', 'repeat', 'type')
                 [meta, [
                     file(row.fastq1, checkIfExists: true),
                     file(row.fastq2, checkIfExists: true)]]
             }
-            | set { samples }
+            .set { samples }
 
 
             samples
-            | map { sleep 10; it }
-            | view { meta, reads -> "Should be unmodified: $meta" }
+            .map { sleep 10; it }
+            .view { meta, reads -> "Should be unmodified: $meta" }
 
             samples
-            | map { meta, reads ->
+            .map { meta, reads ->
                 newmap = [type: meta.type == "tumor" ? "abnormal" : "normal"]
                 [meta + newmap, reads]
             }
-            | view { meta, reads -> "Should be modified: $meta" }
+            .view { meta, reads -> "Should be modified: $meta" }
         }
         ```
 
@@ -131,18 +131,17 @@ process MapReads {
 workflow {
     reference = Channel.fromPath("data/genome.fasta").first()
 
-    Channel.fromPath("data/samplesheet.csv")
-    | splitCsv( header:true )
-    | map { row ->
-        meta = row.subMap('id', 'repeat', 'type')
-        [meta, [
-            file(row.fastq1, checkIfExists: true),
-            file(row.fastq2, checkIfExists: true)]]
-    }
-    | set { samples }
+    samples = Channel.fromPath("data/samplesheet.csv")
+        .splitCsv( header:true )
+        .map { row ->
+            meta = row.subMap('id', 'repeat', 'type')
+            [meta, [
+                file(row.fastq1, checkIfExists: true),
+                file(row.fastq2, checkIfExists: true)]]
+        }
 
-    MapReads( samples, reference )
-    | view
+    mapped_reads = MapReads( samples, reference )
+    mapped_reads.view()
 }
 ```
 
@@ -150,9 +149,9 @@ Let's consider that we might now want to merge the repeats. We'll need to group 
 
 ```groovy linenums="1"
 MapReads( samples, reference )
-| map { meta, bam -> [meta.subMap('id', 'type'), bam]}
-| groupTuple
-| view
+    .map { meta, bam -> [meta.subMap('id', 'type'), bam]}
+    .groupTuple()
+    .view()
 ```
 
 This is easy enough, but the `groupTuple` operator has to wait until all items are emitted from the incoming queue before it is able to reassemble the output queue. If even one read mapping job takes a long time, the processing of all other samples is held up. We need a way of signalling to Nextflow how many items are in a given group so that items can be emitted as early as possible.
@@ -161,12 +160,12 @@ By default, the `groupTuple` operator groups on the first item in the element, w
 
 ```groovy linenums="1"
 MapReads( samples, reference )
-| map { meta, bam ->
+    .map { meta, bam ->
     key = groupKey(meta.subMap('id', 'type'), NUMBER_OF_ITEMS_IN_GROUP)
     [key, bam]
 }
-| groupTuple
-| view
+    .groupTuple()
+    .view()
 ```
 
 !!! exercise
@@ -180,25 +179,25 @@ MapReads( samples, reference )
             reference = Channel.fromPath("data/genome.fasta").first()
 
             Channel.fromPath("data/samplesheet.csv")
-            | splitCsv( header:true )
-            | map { row ->
+            .splitCsv( header:true )
+            .map { row ->
                 meta = row.subMap('id', 'repeat', 'type')
                 [meta, [file(row.fastq1, checkIfExists: true), file(row.fastq2, checkIfExists: true)]]
             }
-            | map { meta, reads -> [meta.subMap('id', 'type'), meta.repeat, reads] }
-            | groupTuple
-            | map { meta, repeats, reads -> [meta + [repeatcount:repeats.size()], repeats, reads] }
-            | transpose
-            | map { meta, repeat, reads -> [meta + [repeat:repeat], reads]}
-            | set { samples }
+            .map { meta, reads -> [meta.subMap('id', 'type'), meta.repeat, reads] }
+            .groupTuple()
+            .map { meta, repeats, reads -> [meta + [repeatcount:repeats.size()], repeats, reads] }
+            .transpose()
+            .map { meta, repeat, reads -> [meta + [repeat:repeat], reads]}
+            .set { samples }
 
             MapReads( samples, reference )
-            | map { meta, bam ->
+            .map { meta, bam ->
                 key = groupKey(meta.subMap('id', 'type'), meta.repeatcount)
                 [key, bam]
             }
-            | groupTuple
-            | view
+            .groupTuple()
+            .view()
         }
         ```
 
@@ -219,13 +218,15 @@ process CombineBams {
 In our workflow:
 
 ```groovy linenums="1"
-MapReads( samples, reference )
-| map { meta, bam ->
-    key = groupKey(meta.subMap('id', 'type'), meta.repeatcount)
-    [key, bam]
-}
-| groupTuple
-| CombineBams
+mapped_reads = MapReads( samples, reference )
+grouped_reads = mapped_reads
+    .map { meta, bam ->
+        key = groupKey(meta.subMap('id', 'type'), meta.repeatcount)
+        [key, bam]
+    }
+    .groupTuple()
+
+CombineBams(grouped_reads)
 ```
 
 ## Fanning out over intervals
@@ -236,12 +237,10 @@ We can take an existing bed file, for example and turn it into a channel of Maps
 
 ```groovy linenums="1"
 Channel.fromPath("data/intervals.bed")
-| splitCsv(header: ['chr', 'start', 'stop', 'name'], sep: '\t')
-| collectFile { entry -> ["${entry.name}.bed", entry*.value.join("\t")] }
-| view
-| set { intervals }
-
-return
+    .splitCsv(header: ['chr', 'start', 'stop', 'name'], sep: '\t')
+    .collectFile { entry -> ["${entry.name}.bed", entry*.value.join("\t")] }
+    .view()
+    .set { intervals }
 ```
 
 !!! note "Quick return"
@@ -265,16 +264,18 @@ process GenotypeOnInterval {
 We can use the `combine` operator to emit a new channel where each combined bam is attached to each bed file. These can then be piped into the genotyping process:
 
 ```groovy linenums="1"
-MapReads( samples, reference )
-| map { meta, bam ->
-    key = groupKey(meta.subMap('id', 'type'), meta.repeatcount)
-    [key, bam]
-}
-| groupTuple
-| CombineBams
-| combine( intervals )
-| GenotypeOnInterval
-| view
+mapped_reads = MapReads( samples, reference )
+    .map { meta, bam ->
+        key = groupKey(meta.subMap('id', 'type'), meta.repeatcount)
+        [key, bam]
+    }
+    .groupTuple()
+
+combined_bams = CombineBams(grouped_reads)
+    .combine( intervals )
+
+genotyped_bams = GenotypeOnInterval(combined_bams)
+    .view()
 ```
 
 Finally, we can combine these genotyped bams back using `groupTuple` and another bam merge process. We construct our "merge" process that will combine the bam files from multiple intervals:
@@ -294,36 +295,41 @@ process MergeGenotyped {
 We might be tempted to pipe the output of `GenotypeOnInterval` directly into groupTuple, but the `meta` object we are passing down is still the `groupKey` we created earlier:
 
 ```groovy linenums="1"
-MapReads( samples, reference )
-| map { meta, bam ->
-    key = groupKey(meta.subMap('id', 'type'), meta.repeatcount)
-    [key, bam]
-}
-| groupTuple
-| CombineBams
-| map { meta, bam -> [meta.subMap('id', 'type'), bam] }
-| combine( intervals )
-| GenotypeOnInterval
-| view { meta, bamfile -> "Meta is of ${meta.getClass()}" }
+mapped_reads = MapReads( samples, reference )
+    .map { meta, bam ->
+        key = groupKey(meta.subMap('id', 'type'), meta.repeatcount)
+        [key, bam]
+    }
+    .groupTuple()
+
+combined_bams = CombineBams(grouped_reads)
+    .map { meta, bam -> [meta.subMap('id', 'type'), bam] }
+    .combine( intervals )
+
+genotyped_bams = GenotypeOnInterval(combined_bams)
+    .view { meta, bamfile -> "Meta is of ${meta.getClass()}" }
 ```
 
 The `groupKey` has a property `target`, which contains the original map. If we call this property, we can replace the groupKey with the original map and get back to the original data structure. This is now appropriate to send through to the `groupTuple` operator and we will be grouping now only on the elements in the map.
 
 ```groovy linenums="1"
 MapReads( samples, reference )
-| map { meta, bam ->
-    key = groupKey(meta.subMap('id', 'type'), meta.repeatcount)
-    [key, bam]
-}
-| groupTuple
-| CombineBams
-| map { meta, bam -> [meta.subMap('id', 'type'), bam] }
-| combine( intervals )
-| GenotypeOnInterval
-| map { groupKey, bamfile -> [groupKey.target, bamfile] }
-| groupTuple
-| MergeGenotyped
-| view
+    .map { meta, bam ->
+        key = groupKey(meta.subMap('id', 'type'), meta.repeatcount)
+        [key, bam]
+    }
+    .groupTuple()
+
+combined_bams = CombineBams(grouped_reads)
+    .map { meta, bam -> [meta.subMap('id', 'type'), bam] }
+    .combine( intervals )
+
+genotyped_bams = GenotypeOnInterval(combined_bams)
+    .map { groupKey, bamfile -> [groupKey.target, bamfile] }
+    .groupTuple()
+
+merged_bams = MergeGenotyped(genotyped_bams)
+    .view()
 ```
 
 ## Publishing the bams
