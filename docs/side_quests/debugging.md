@@ -394,7 +394,6 @@ This error occurs when you pass a different number of channels than a process ex
 
 ```groovy title="Wrong number of channels"
 #!/usr/bin/env nextflow
-nextflow.enable.dsl=2
 
 // Create two separate channels
 samples_ch = Channel.of('sample1', 'sample2', 'sample3')
