@@ -71,7 +71,7 @@ workflow RNASEQ_PIPELINE {
 
 workflow {
     // Input channels
-    ch_read = Channel.fromPath(params.input)
+    ch_reads = Channel.fromPath(params.input)
         .splitCsv(header: true)
         .map { row -> [row.sample_id, [file(row.fastq_1), file(row.fastq_2)]] }
 
