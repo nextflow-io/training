@@ -489,9 +489,23 @@ This is crucial for:
 - Finding missing or extra brackets
 - Navigating nested workflow structures
 
+#### Multi-line Selection and Editing
+
+For editing multiple lines simultaneously, VS Code offers powerful multi-cursor capabilities:
+
+- **Multi-line selection**: Hold **Alt+Shift** (or **Option+Shift**) and use arrow keys to select multiple lines
+- **Add cursor above/below**: **Ctrl+Alt+Up/Down** (or **Cmd+Option+Up/Down**) to add cursors on adjacent lines
+- **Multi-line indenting**: Select multiple lines and use **Tab** to indent or **Shift+Tab** to outdent entire blocks
+
+This is particularly useful for:
+
+- Indenting entire process blocks consistently
+- Adding comments to multiple lines at once
+- Editing similar parameter definitions across multiple processes
+
 ### Takeaway
 
-You can maintain clean, readable code using automatic formatting, commenting features, code folding, and bracket matching to organize complex workflows.
+You can maintain clean, readable code using automatic formatting, commenting features, code folding, bracket matching, and multi-line editing to organize complex workflows efficiently.
 
 ### What's next?
 
@@ -505,6 +519,10 @@ VS Code integrates well with your development workflow beyond just editing code.
 
 ### 7.1. Version Control Integration
 
+!!! note "Codespaces and Git Integration"
+
+    If you're working in **GitHub Codespaces**, some Git integration features may not work as expected, particularly keyboard shortcuts for Source Control. You may have also declined to open the directory as a Git repository during initial setup, which is fine for training purposes.
+
 If your project is a git repository (as this is), VS Code shows:
 
 - Modified files with colored indicators
@@ -514,9 +532,19 @@ If your project is a git repository (as this is), VS Code shows:
 
 Open the Source Control panel (`Ctrl+Shift+G` or `Cmd+Shift+G`) to see git changes and stage commits directly in the editor.
 
-### 7.2. Output and Log Inspection
+![Source Control Panel](img/source_control.png)
 
-After running a workflow, you can use VS Code to inspect results without leaving your editor:
+*Note: Screenshot shows the Source Control panel interface - if this shortcut doesn't work in your environment, you can also click the Source Control icon in the left sidebar.*
+
+### 7.2. Running and Inspecting Workflows
+
+Let's run a workflow and then inspect the results. In the integrated terminal (`Ctrl+Shift+` backtick), run the basic workflow:
+
+```bash title="Run the basic workflow"
+nextflow run basic_workflow.nf --input data/sample_data.csv --output_dir results
+```
+
+While the workflow runs, you'll see real-time output in the terminal. After completion, you can use VS Code to inspect results without leaving your editor:
 
 1. **Navigate to work directories**: Use the file explorer or terminal to browse `.nextflow/work`
 2. **Open log files**: Click on log file paths in terminal output to open them directly in VS Code
