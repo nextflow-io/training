@@ -105,7 +105,7 @@ Since you've been using VS Code throughout Hello Nextflow, you're already famili
 
 - **Editor Area**: For viewing and editing files. You can split this into multiple panes to compare files side by side.
 - **File Explorer** click (![file explorer icon](img/files_icon.png)) (`Ctrl/Cmd+Shift+E`): The local files and folders on your system. Keep this open on the left to navigate between files
-- **Integrated Terminal** (`Ctrl/Cmd+Shift+` backtick): A terminal for interacting with the computer at the bottom. Use this to run Nextflow or other commands.
+- **Integrated Terminal** (`Ctrl+Shift+` backtick for both Windows and MacOS): A terminal for interacting with the computer at the bottom. Use this to run Nextflow or other commands.
 - **Problems Panel** (`Ctrl+Shift+M`): VS Code will show any errors and problems it detects here. This is useful for highlighting issues at a glance.
 
 You can drag panels around or hide them (`Ctrl/Cmd+B` to toggle the sidebar) to customize your layout as we work through the examples.
@@ -546,7 +546,7 @@ Open the Source Control panel using the source control button (![Source control 
 
 ### 7.2. Running and Inspecting Workflows
 
-Let's run a workflow and then inspect the results. In the integrated terminal (`Ctrl+Shift+` backtick), run the basic workflow:
+Let's run a workflow and then inspect the results. In the integrated terminal (`Ctrl+Shift+` backtick in both Windows and MacOS), run the basic workflow:
 
 ```bash title="Run the basic workflow"
 nextflow run basic_workflow.nf --input data/sample_data.csv --output_dir results
