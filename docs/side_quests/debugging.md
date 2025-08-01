@@ -905,6 +905,10 @@ nextflow run missing_software.nf -profile docker
 
 ... and everything should run successfully.
 
+!!! note
+
+  To learn more about how nextflow uses containers, go back to [Hello Nextflow](../hello_nextflow/05_hello_containers.md)
+
 ### 3.3. Bad resource configuration
 
 In production usage, you'll be configuring resources on your processes. For example `memory` defines the maximum amount of memory available to your process, and if the process exceeds that, your scheduler will typically kill the process and return an exit code of `137`. We can't demonstrate that here because we're using the `local` executor, but we can show something similar with `time`.
