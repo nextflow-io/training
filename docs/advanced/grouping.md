@@ -68,15 +68,15 @@ workflow {
 
 
             samples
-            .map { sleep 10; it }
-            .view { meta, reads -> "Should be unmodified: $meta" }
+                .map { element -> sleep 10; element }
+                .view { meta, reads -> "Should be unmodified: $meta" }
 
             samples
-            .map { meta, reads ->
-                meta.type = meta.type == "tumor" ? "abnormal" : "normal"
-                [meta, reads]
-            }
-            .view { meta, reads -> "Should be modified: $meta" }
+                .map { meta, reads ->
+                    meta.type = meta.type == "tumor" ? "abnormal" : "normal"
+                    [meta, reads]
+                }
+                .view { meta, reads -> "Should be modified: $meta" }
         }
         ```
 
@@ -100,15 +100,15 @@ workflow {
 
 
             samples
-            .map { sleep 10; it }
-            .view { meta, reads -> "Should be unmodified: $meta" }
+                .map { element -> sleep 10; element }
+              .view { meta, reads -> "Should be unmodified: $meta" }
 
             samples
-            .map { meta, reads ->
-                newmap = [type: meta.type == "tumor" ? "abnormal" : "normal"]
-                [meta + newmap, reads]
-            }
-            .view { meta, reads -> "Should be modified: $meta" }
+                .map { meta, reads ->
+                    newmap = [type: meta.type == "tumor" ? "abnormal" : "normal"]
+                    [meta + newmap, reads]
+                }
+                .view { meta, reads -> "Should be modified: $meta" }
         }
         ```
 

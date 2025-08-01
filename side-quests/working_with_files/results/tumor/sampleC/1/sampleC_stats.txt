@@ -1,0 +1,8 @@
+Sample metadata: sampleC
+Replicate: 1
+Type: tumor
+Read 1: sampleC_rep1_tumor_R1_001.fastq.gz
+Read 2: sampleC_rep1_tumor_R2_001.fastq.gz
+File sizes:
+Read 1 size: 7 reads
+Read 2 size: 7 reads

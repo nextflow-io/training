@@ -11,7 +11,7 @@ Map is certainly the most commonly used of the operators covered here. It's a wa
 ```groovy linenums="1"
 workflow {
     Channel.of( 1, 2, 3, 4, 5 )
-        .map { it * it }
+        .map { num -> num * num }
         .view()
 }
 ```
@@ -23,7 +23,7 @@ cd operators
 nextflow run .
 ```
 
-By default, the element being passed to the closure is given the default name `it`. If you would prefer a more informative variable name, it can be named by using the `->` notation:
+By default, the element being passed to the closure is given the default name `it`. However, it is recommended to name the variable explicitly:
 
 ```groovy linenums="1"
 workflow {
@@ -60,8 +60,8 @@ workflow {
 If you have these re-usable closures defined, you can compose them together.
 
 ```groovy linenums="1"
-def squareIt = { it * it }
-def addTwo = { it + 2 }
+def squareIt = { num -> num * num }
+def addTwo = { num -> num + 2 }
 
 workflow {
     Channel.of( 1, 2, 3, 4, 5 )
@@ -83,8 +83,8 @@ Launching `./main.nf` [focused_borg] DSL2 - revision: f3c3e751fe
 The above is the same as writing:
 
 ```groovy linenums="1"
-def squareIt = { it * it }
-def addTwo = { it + 2 }
+def squareIt = { num -> num * num }
+def addTwo = { num -> num + 2 }
 
 workflow {
     Channel.of( 1, 2, 3, 4, 5 )
@@ -97,7 +97,7 @@ workflow {
 For those inclined towards functional programming, you'll be happy to know that closures can be curried:
 
 ```groovy linenums="1"
-def timesN = { multiplier, it -> it * multiplier }
+def timesN = { multiplier, num -> num * multiplier }
 def timesTen = timesN.curry(10)
 
 workflow {
@@ -112,13 +112,13 @@ workflow {
 In addition to the argument-less usage of `view` as shown above, this operator can also take a closure to customize the stdout message. We can create a closure to print the value of the elements in a channel as well as their type, for example:
 
 ```groovy linenums="1"
-def timesN = { multiplier, it -> it * multiplier }
+def timesN = { multiplier, num -> num * multiplier }
 def timesTen = timesN.curry(10)
 
 workflow {
     Channel.of( 1, 2, 3, 4, 5 )
         .map( timesTen )
-        .view { "Found '$it' (${it.getClass()})"}
+        .view { value -> "Found '$value' (${value.getClass()})"}
 }
 ```
 
@@ -212,8 +212,8 @@ workflow {
         }
         .set { samples }
 
-    samples.tumor.view { "Tumor: $it"}
-    samples.normal.view { "Normal: $it"}
+    samples.tumor.view { sample -> "Tumor: $sample"}
+    samples.normal.view { sample -> "Normal: $sample"}
 }
 ```
 
@@ -238,8 +238,8 @@ workflow {
         }
         .set { samples }
 
-    samples.tumor.view { "Tumor: $it"}
-    samples.normal.view { "Normal: $it"}
+    samples.tumor.view { sample -> "Tumor: $sample"}
+    samples.normal.view { sample -> "Normal: $sample"}
 }
 ```
 
@@ -292,8 +292,8 @@ Some Nextflow operators return objects that contain _multiple_ channels. The `mu
 workflow {
     numbers = Channel.of( 1, 2, 3, 4, 5 )
         .multiMap {
-            small: it
-            large: it * 10
+            small: num -> num
+            large: num -> num * 10
         }
     numbers.small.view { num -> "Small: $num"}
     numbers.large.view { num -> "Large: $num"}
@@ -306,8 +306,8 @@ or by using the `set` operator ([documentation](https://www.nextflow.io/docs/lat
 workflow {
     Channel.of( 1, 2, 3, 4, 5 )
         .multiMap {
-            small: it
-            large: it * 10
+            small: num -> num
+            large: num -> num * 10
         }
         .set { numbers }
 
@@ -335,44 +335,14 @@ You can either provide the channels individually:
 workflow {
     Channel.of( 1, 2, 3, 4, 5 )
         .multiMap {
-            small: it
-            large: it * 10
+            small: num -> num
+            large: num -> num * 10
         }
         .set { numbers }
 
     MultiInput(numbers.small, numbers.large)
 }
 ```
-
-or you can provide the multichannel as a single input:
-
-```groovy linenums="1"
-workflow {
-    Channel.of( 1, 2, 3, 4, 5)
-        .multiMap {
-            small: it
-            large: it * 10
-        }
-        .set { numbers }
-
-    MultiInput(numbers)
-}
-```
-
-For an even cleaner solution, you can skip the now-redundant `set` operator:
-
-```groovy linenums="1"
-workflow {
-    Channel.of( 1, 2, 3, 4, 5 )
-        .multiMap {
-            small: it
-            large: it * 10
-        }
-        | MultiInput
-}
-```
-
-If you have processes that output multiple channels and input multiple channels and the cardinality matches, they can be chained together in the same manner.
 
 ## `groupTuple`
 
@@ -521,7 +491,7 @@ The input channel has two elements. For each element in the input channel, we re
     ```groovy
     workflow {
         Channel.fromPath("data/datfiles/sample*/*.dat")
-            .map { [it.getParent().name, it] }
+            .map { myfile -> [myfile.getParent().name, myfile] }
             .groupTuple()
             .view()
     }
@@ -556,7 +526,7 @@ The input channel has two elements. For each element in the input channel, we re
         ```groovy
         workflow {
             Channel.fromPath("data/datfiles/sample*/*.dat")
-                .map { [it.getParent().name, it] }
+                .map { myfile -> [myfile.getParent().name, myfile] }
                 .groupTuple()
                 .flatMap { id, files -> files.collate(3).collect { chunk -> [id, chunk] } }
                 .view()
@@ -586,7 +556,7 @@ workflow {
     )
 
     characters
-        .map { it.name }
+        .map { character -> character.name }
         .collectFile()
         .view()
 }

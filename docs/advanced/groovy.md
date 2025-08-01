@@ -39,7 +39,7 @@ workflow {
 ... but this precludes the possibility of adding additional columns to the samplesheet. We might to ensure the parsing will capture any extra metadata columns should they be added. Instead, let's partition the column names into those that begin with "fastq" and those that don't:
 
 ```groovy linenums="1"
-(readKeys, metaKeys) = row.keySet().split { it =~ /^fastq/ }
+(readKeys, metaKeys) = row.keySet().split { key -> key =~ /^fastq/ }
 ```
 
 !!! note "New methods"
@@ -51,7 +51,7 @@ workflow {
 From here, let's
 
 ```groovy linenums="1"
-reads = row.subMap(readKeys).values().collect { file(it) }
+reads = row.subMap(readKeys).values().collect { value -> file(value) }
 ```
 
 ... but we run into an error:
@@ -66,8 +66,8 @@ If we have a closer look at the samplesheet, we notice that not all rows have tw
 reads = row
 .subMap(readKeys)
 .values()
-.findAll { it != "" } // Single-end reads will have an empty string
-.collect { file(it) } // Turn those strings into paths
+.findAll { value -> value != "" } // Single-end reads will have an empty string
+.collect { path -> file(path) } // Turn those strings into paths
 ```
 
 Now we need to construct the meta map. Let's have a quick look at the FASTP module that I've already pre-defined:
@@ -107,10 +107,10 @@ workflow {
     samples = Channel.fromPath(params.input)
         .splitCsv(header: true)
         .map { row ->
-            (readKeys, metaKeys) = row.keySet().split { it =~ /^fastq/ }
+            (readKeys, metaKeys) = row.keySet().split { key -> key =~ /^fastq/ }
             reads = row.subMap(readKeys).values()
-                .findAll { it != "" } // Single-end reads will have an empty string
-                .collect { file(it) } // Turn those strings into paths
+                .findAll { value -> value != "" } // Single-end reads will have an empty string
+                .collect { path -> file(path) } // Turn those strings into paths
             meta = row.subMap(metaKeys)
             meta.id ?= meta.sample
             meta.single_end = reads.size == 1

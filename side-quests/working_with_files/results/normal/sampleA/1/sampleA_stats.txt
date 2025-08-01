@@ -1,0 +1,8 @@
+Sample metadata: sampleA
+Replicate: 1
+Type: normal
+Read 1: sampleA_rep1_normal_R1_001.fastq.gz
+Read 2: sampleA_rep1_normal_R2_001.fastq.gz
+File sizes:
+Read 1 size: 10 reads
+Read 2 size: 10 reads

@@ -135,7 +135,7 @@ We can call the `getParent()` method on each of the paths like so:
 
 ```groovy linenums="1"
 map { id, reads ->
-    reads.collect { it.getParent() }
+    reads.collect { read -> read.getParent() }
 }
 ```
 
