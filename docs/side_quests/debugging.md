@@ -99,9 +99,6 @@ Learn to identify and fix the most common type of error: syntax errors.
 
 Syntax errors are the most common type of error you'll encounter when writing Nextflow code. They occur when the code does not conform to the expected syntax rules of the Nextflow DSL. These errors prevent your workflow from running at all, so it's important to learn how to identify and fix them quickly.
 
-!!! tip "IDE Features for Syntax Debugging"
-
-    For comprehensive coverage of IDE syntax highlighting, error detection, Problems panel, and other visual debugging aids, see [IDE Features for Nextflow Development](ide_features.md). This section focuses on interpreting error messages and systematic debugging approaches.
 
 ### 1.1. Missing braces
 
