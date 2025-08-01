@@ -1226,27 +1226,25 @@ The stub command doesn't run Cowpy, it just creates an empty file, so everything
 
 Once you've identified a problem using the techniques above, you need an efficient way to test your fixes without wasting time re-running successful parts of your workflow. This is where Nextflow's resume functionality becomes invaluable for debugging.
 
-#### Efficient Debug-Fix-Test Cycles
-
 The resume feature allows you to quickly iterate on fixes by only re-running failed or modified tasks:
 
 ```bash
 # Initial run (fails at some point)
-nextflow run workflow.nf -with-trace
+nextflow run workflow.nf
 
 # Fix the issue in your code, then resume
-nextflow run workflow.nf -resume -with-trace
+nextflow run workflow.nf -resume
 ```
 
 **Resume debugging strategy:**
 
 1. Run workflow until failure
-2. Examine trace file and work directory for failed task
+2. Examine work directory for failed task
 3. Fix the specific issue
 4. Resume to test only the fix
 5. Repeat until workflow completes
 
-#### Process Isolation for Testing
+<!-- #### Process Isolation for Testing
 
 Sometimes even with resume, debugging complex workflows can be slow because you have to wait for upstream processes to complete before testing your fix. In these cases, you can isolate specific processes for faster testing by temporarily modifying your workflow:
 
@@ -1279,7 +1277,7 @@ workflow {
     // Inspect output
     PROBLEMATIC_PROCESS.out.view { "Process output: $it" }
 }
-```
+``` -->
 
 ### 4.5. Resource and Memory Debugging
 
