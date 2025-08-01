@@ -2,10 +2,6 @@
 
 Modern Integrated Development Environments (IDEs) can dramatically transform your Nextflow development experience. This side quest focuses specifically on leveraging VS Code and its Nextflow extension to write code faster, catch errors early, and navigate complex workflows efficiently.
 
-!!! warning
-
-    If you are using a Mac, some keyboard shortcuts will use "cmd" instead of "ctrl".
-
 ## What you should know first
 
 This guide assumes you've completed the [Hello Nextflow](../hello_nextflow/) training course and are comfortable with foundational Nextflow concepts including:
@@ -80,6 +76,14 @@ tree .
     - `basic_workflow.nf` is a working basic workflow that you can run and modify
     - `complex_workflow.nf` is designed for illustration only to demonstrate navigation features - it may not run successfully but shows realistic multi-file workflow structure
 
+### Keyboard Shortcuts
+
+Some of the features in this guide will use optional keyboard shortcuts. You may well be accessing this material via GitHub Codespaces in browser, and in this case sometimes the shortcuts will not work as expected because they're used for other things in your system.
+
+If you are running VS Code locally, as you probably will be when you're actually writing workflows, the shortcuts will work as described.
+
+If you are using a Mac, some (not all) keyboard shortcuts will use "cmd" instead of "ctrl", and we'll indicate this in the text like `Ctrl/Cmd`.
+
 ### 0.1. Installing the Nextflow Extension
 
 !!! note "Already Using Devcontainers?"
@@ -89,7 +93,7 @@ tree .
 To install the extension manually:
 
 1. Open VS Code
-2. Go to the Extensions view by clicking the extensions icon to the left: ![extensions icon](img/extensions_icon.png) (shortcut `Ctrl+Shift+X` or `Cmd+Shift+X` if you're running VSCode locally)
+2. Go to the Extensions view by clicking the extensions icon to the left: ![extensions icon](img/extensions_icon.png) (shortcut `Ctrl/Cmd+Shift+X` if you're running VSCode locally)
 3. Search for "Nextflow"
 4. Install the official Nextflow extension
 
@@ -100,11 +104,11 @@ To install the extension manually:
 Since you've been using VS Code throughout Hello Nextflow, you're already familiar with the basics. Here's how to organize your workspace efficiently for this session:
 
 - **Editor Area**: For viewing and editing files. You can split this into multiple panes to compare files side by side.
-- **File Explorer** (`Ctrl+Shift+E`): The local files and folders on your system. Keep this open on the left to navigate between files
-- **Integrated Terminal** (`Ctrl+Shift+` backtick): A terminal for interacting with the computer at the bottom. Use this to run Nextflow or other commands.
+- **File Explorer** click (![file explorer icon](img/files_icon.png)) (`Ctrl/Cmd+Shift+E`): The local files and folders on your system. Keep this open on the left to navigate between files
+- **Integrated Terminal** (`Ctrl/Cmd+Shift+` backtick): A terminal for interacting with the computer at the bottom. Use this to run Nextflow or other commands.
 - **Problems Panel** (`Ctrl+Shift+M`): VS Code will show any errors and problems it detects here. This is useful for highlighting issues at a glance.
 
-You can drag panels around or hide them (`Ctrl+B` or `Cmd+B` to toggle the sidebar) to customize your layout as we work through the examples.
+You can drag panels around or hide them (`Ctrl/Cmd+B` to toggle the sidebar) to customize your layout as we work through the examples.
 
 ### Takeaway
 
