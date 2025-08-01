@@ -520,7 +520,7 @@ The error message clearly states that the process expects 1 input channel, but 2
 
 Some channel structure errors are much more subtle and produce no errors at all. Probably the most common of these reflects a challenge that new Nextflow users face in understanding that queue channels can be exhausted and run out of samples, meaning the workflow finishes prematurely. Open `exhausted.nf` in VS Code to see an example:
 
-```groovy title="Exhausted channel"
+```groovy title="exhausted.nf"
 #!/usr/bin/env nextflow
 
 process PROCESS_FILES {
@@ -550,7 +550,15 @@ workflow {
 }
 ```
 
-Here, we create two queue channels, a reference to be passed to all `PROCESS_FILE` instances, and a channel of sample names. The process expects both inputs, but we pass them as separate channels. When you run this workflow, it will execute without error, but it will only process the first sample:
+Let's run it:
+
+```console
+nextflow run exhausted.nf
+```
+
+What do you see?
+
+When you run this workflow, it will execute without error, but it will only process the first sample:
 
 ```console title="Exhausted channel output"
  N E X T F L O W   ~  version 24.10.2
@@ -563,12 +571,20 @@ executor >  local (1)
 
 This happens because the `reference_ch` channel is exhausted after the first process execution, despite the `input_ch` channel having more items to process.
 
+Here, we create two queue channels, a reference to be passed to all `PROCESS_FILE` instances, and a channel of sample names. The process expects both inputs, but we pass them as separate channels.
+
 This pattern of a single reference file in a channel is very common, so this error occurs frequently. If you see a process only running once when you expect it to run multiple times, check that you're not exhausting a channel that should be reused.
 
 There are a couple of ways to address this. You can simply create a value channel type, which can be used over and over again:
 
 ```groovy
     reference_ch = Channel.value('baseline_reference')
+```
+
+or by using `collect()`
+
+```groovy
+    reference_ch_value = reference_ch.collect()
 ```
 
 In more complex scenarios, perhaps where you have a more complex situation than a single reference channel, you can use the `combine` operator to create a new channel that combines the two channels into tuples:
@@ -580,6 +596,8 @@ In more complex scenarios, perhaps where you have a more complex situation than 
 ```
 
 `.combine()` generates a cartesian product of the two channels, so each item in `reference_ch` will be paired with each item in `input_ch`. This allows the process to run for each sample while still using the reference.
+
+> Note: This requires the process input to be adjusted and therefore is not suitable in all situations.
 
 ### 2.3. Wrong Channel Content Structure
 
