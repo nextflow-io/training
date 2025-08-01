@@ -2,6 +2,10 @@
 
 Modern Integrated Development Environments (IDEs) can dramatically transform your Nextflow development experience. This side quest focuses specifically on leveraging VS Code and its Nextflow extension to write code faster, catch errors early, and navigate complex workflows efficiently.
 
+!!! note "This isn't a traditional tutorial"
+
+    Unlike other training modules, this guide is organized as a collection of quick hints, tips, and practical examples rather than a step-by-step tutorial. Each section can be explored independently based on your interests and current development needs. Feel free to jump around and focus on the features that will be most immediately useful to your workflow development.
+
 ## What you should know first
 
 This guide assumes you've completed the [Hello Nextflow](../hello_nextflow/) training course and are comfortable with foundational Nextflow concepts including:
