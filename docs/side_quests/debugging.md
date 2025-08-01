@@ -182,7 +182,9 @@ nextflow run bad_syntax.nf
 
 ### 1.2. Using incorrect process keywords or directives
 
-Another common syntax error is an **invalid process definition**. This can happen if you forget to define required blocks or use incorrect directives in the process definition. Maybe you try to use `inputs` rather than the correction `input` directive, as we illustrate in `invalid_process.nf`:
+Next open the file `invalid_process.nf`.
+
+Another common syntax error is an **invalid process definition**. This can happen if you forget to define required blocks or use incorrect directives in the process definition. Maybe you try to use `inputs` rather than the correction `input` directive:
 
 ```groovy title="invalid_process.nf" hl_lines="4"
 #!/usr/bin/env nextflow
@@ -210,7 +212,13 @@ workflow {
 }
 ```
 
-Try to run this and you'll see an error like:
+Try to run this with
+
+```console
+nextflow run invalid_process.nf
+```
+
+and you'll see an error like:
 
 ```console title="Invalid process keyword error"
 Nextflow 25.04.6 is available - Please consider updating your version to it
