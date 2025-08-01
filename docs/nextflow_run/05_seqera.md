@@ -1,9 +1,4 @@
----
-title: "Part 9: Hello Seqera"
-description: Get started with Seqera Platform
----
-
-# Part 9: Hello Seqera
+# Part 4: Run on Seqera
 
 So far we've been running Nextflow workflows on our local machine using the command line interface.
 In this section, we'll introduce you to Seqera Platform, a powerful cloud-based platform for running, monitoring, and sharing Nextflow workflows.
