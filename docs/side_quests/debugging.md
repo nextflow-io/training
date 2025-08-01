@@ -269,9 +269,37 @@ workflow {
 
 ### 1.3. Using bad variable names
 
-The variable names you use in your script blocks must be valid, derived either from inputs or from groovy code inserted before the script:
+Next, open the file `no_such_var.nf`. Let's run it:
 
-```groovy
+```console
+nextflow run no_such_var.nf
+```
+
+you should get a failure that look's like this:
+
+```console title="No such variable error"
+ERROR ~ Error executing process > 'PROCESS_FILES (3)'
+
+Caused by:
+  No such variable: undefined_var -- Check script 'no_such_var.nf' at line: 15
+
+
+Source block:
+  def output_prefix = "${sample_name}_processed"
+  def timestamp = new Date().format("yyyy-MM-dd")
+  """
+  echo "Processing ${sample_name} on ${timestamp}" > ${output_prefix}.txt
+  echo "Using undefined variable: ${undefined_var}" >> ${output_prefix}.txt  // ERROR: undefined_var not defined
+  """
+
+Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
+
+ -- Check '.nextflow.log' file for details
+```
+
+The variable names you use in your script blocks must be valid, derived either from inputs or from groovy code inserted before the script. This fails because `undefined_var` is not defined anywhere. The error message indicates that the variable is not recognized in the script template:
+
+```groovy title="no_such_var.nf" hl_lines="17"
 #!/usr/bin/env nextflow
 
 process PROCESS_FILES {
@@ -298,35 +326,58 @@ workflow {
 }
 ```
 
-This will fail because `undefined_var` is not defined anywhere. The error message will indicate that the variable is not recognized in the script template. Run `no_such_var.nf` to see:
+If you get a 'No such variable' error it will be because you've made a mistake like this. You can fix it by either defining the variable (by correcting input variable names or editing groovy code before the script), or by removing it from the script block if it's not needed:
 
-```console title="No such variable error"
-ERROR ~ Error executing process > 'PROCESS_FILES (3)'
+For example, try changing the script like so and rerun it:
 
-Caused by:
-  No such variable: undefined_var -- Check script 'bad_var.nf' at line: 15
+```groovy title="no_such_var.nf" hl_lines="15-17"
+#!/usr/bin/env nextflow
 
+process PROCESS_FILES {
+    input:
+    val sample_name
 
-Source block:
-  def output_prefix = "${sample_name}_processed"
-  def timestamp = new Date().format("yyyy-MM-dd")
-  """
-  echo "Processing ${sample_name} on ${timestamp}" > ${output_prefix}.txt
-  echo "Using undefined variable: ${undefined_var}" >> ${output_prefix}.txt  // ERROR: undefined_var not defined
-  """
+    output:
+    path "${sample_name}_output.txt"
 
-Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
+    script:
+    // Define variables in Groovy code before the script
+    def output_prefix = "${sample_name}_processed"
+    def timestamp = new Date().format("yyyy-MM-dd")
 
- -- Check '.nextflow.log' file for details
+    """
+    echo "Processing ${sample_name} on ${timestamp}" > ${output_prefix}.txt
+    """
+}
 ```
 
-If you get a 'No such variable' error it will be because you've made a mistake like this. You can fix it by either defining the variable (by correcting input variable names or editing groovy code before the script), or by removing it from the script block if it's not needed.
+This should succeed now:
+
+```console
+nextflow run no_such_var.nf
+```
 
 ### 1.4. Bad use of Bash variables
 
-Another form of the bad variable error appears when trying to use variabled in the Bash content of the script block:
+Another form of the bad variable error appears when trying to use variabled in the Bash content of the script block. Open the file `bad_bash_var.nf` and run it:
 
-```groovy
+```console
+nextflow run bad_bash_var.nf
+```
+
+throws the following error:
+
+```console
+ERROR ~ Error executing process > 'PROCESS_FILES (1)'
+
+Caused by:
+  No such variable: prefix -- Check script 'bad_bash_var.nf' at line: 11
+
+```
+
+Let's look at line 11 to see, if we can spot the issue:
+
+```groovy title="bad_bash_var.nf"
 process PROCESS_FILES {
     input:
     val sample_name
