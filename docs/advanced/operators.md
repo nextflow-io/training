@@ -48,9 +48,9 @@ workflow {
 If you find yourself re-using the same closure multiple times in your pipeline, the closure can be named and referenced:
 
 ```groovy linenums="1"
-def squareIt = { Integer num -> num * num }
-
 workflow {
+    def squareIt = { Integer num -> num * num }
+
     Channel.of( 1, 2, 3, 4, 5 )
         .map( squareIt )
         .view()
@@ -60,10 +60,10 @@ workflow {
 If you have these re-usable closures defined, you can compose them together.
 
 ```groovy linenums="1"
-def squareIt = { num -> num * num }
-def addTwo = { num -> num + 2 }
-
 workflow {
+    def squareIt = { num -> num * num }
+    def addTwo = { num -> num + 2 }
+
     Channel.of( 1, 2, 3, 4, 5 )
         .map( squareIt >> addTwo )
         .view()
@@ -83,10 +83,10 @@ Launching `./main.nf` [focused_borg] DSL2 - revision: f3c3e751fe
 The above is the same as writing:
 
 ```groovy linenums="1"
-def squareIt = { num -> num * num }
-def addTwo = { num -> num + 2 }
-
 workflow {
+    def squareIt = { num -> num * num }
+    def addTwo = { num -> num + 2 }
+
     Channel.of( 1, 2, 3, 4, 5 )
         .map( squareIt )
         .map( addTwo )
@@ -97,10 +97,10 @@ workflow {
 For those inclined towards functional programming, you'll be happy to know that closures can be curried:
 
 ```groovy linenums="1"
-def timesN = { multiplier, num -> num * multiplier }
-def timesTen = timesN.curry(10)
-
 workflow {
+    def timesN = { multiplier, num -> num * multiplier }
+    def timesTen = timesN.curry(10)
+
     Channel.of( 1, 2, 3, 4, 5 )
         .map( timesTen )
         .view()
@@ -112,10 +112,10 @@ workflow {
 In addition to the argument-less usage of `view` as shown above, this operator can also take a closure to customize the stdout message. We can create a closure to print the value of the elements in a channel as well as their type, for example:
 
 ```groovy linenums="1"
-def timesN = { multiplier, num -> num * multiplier }
-def timesTen = timesN.curry(10)
-
 workflow {
+    def timesN = { multiplier, num -> num * multiplier }
+    def timesTen = timesN.curry(10)
+
     Channel.of( 1, 2, 3, 4, 5 )
         .map( timesTen )
         .view { value -> "Found '$value' (${value.getClass()})"}

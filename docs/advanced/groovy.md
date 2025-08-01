@@ -186,11 +186,17 @@ which we run with
 nextflow run . -resume -entry Jsontest
 ```
 
-Let's create a small function at the top of the workflow to take the JSON path and pull out some basic metrics:
+Let's create a small function inside the workflow to take the JSON path and pull out some basic metrics:
 
-```bash
-def getFilteringResult(json_file) {
-    fastpResult = new JsonSlurper().parseText(json_file.text)
+```groovy linenums="1"
+workflow Jsontest {
+
+    def getFilteringResult(json_file) {
+        fastpResult = new JsonSlurper().parseText(json_file.text)
+    }
+
+    Channel.fromPath("results/fastp/json/*.json")
+        .view()
 }
 ```
 
@@ -203,10 +209,14 @@ def getFilteringResult(json_file) {
         Here is one potential solution.
 
         ```groovy linenums="1"
-        def getFilteringResult(json_file) {
-            new JsonSlurper().parseText(json_file.text)
-            ?.summary
-            ?.after_filtering
+        workflow Jsontest {
+            def getFilteringResult(json_file) {
+                new JsonSlurper().parseText(json_file.text)
+                ?.summary
+                ?.after_filtering
+            }
+
+            // ... rest of workflow
         }
         ```
 
@@ -217,10 +227,19 @@ def getFilteringResult(json_file) {
 We can then join this new map back to the original reads using the `join` operator:
 
 ```groovy linenums="1"
-FASTP.out.json
-    .map { meta, json -> [meta, getFilteringResult(json)] }
-    .join( FASTP.out.reads )
-    .view()
+workflow {
+
+    def getFilteringResult(json_file) {
+        new JsonSlurper().parseText(json_file.text)
+            ?.summary
+            ?.after_filtering
+    }
+
+    FASTP.out.json
+        .map { meta, json -> [meta, getFilteringResult(json)] }
+        .join( FASTP.out.reads )
+        .view()
+}
 ```
 
 !!! exercise
@@ -230,16 +249,24 @@ FASTP.out.json
     ??? solution
 
         ```groovy linenums="1"
-          FASTP.out.json
-              .map { meta, json -> [meta, getFilteringResult(json)] }
-              .join( FASTP.out.reads )
-              .map { meta, fastpMap, reads -> [meta + fastpMap, reads] }
-              .branch { meta, reads ->
-                  pass: meta.q30_rate >= 0.935
-                  fail: true
-              }
-              .set { reads }
+        workflow {
+            def getFilteringResult(json_file) {
+                new JsonSlurper().parseText(json_file.text)
+                    ?.summary
+                    ?.after_filtering
+            }
 
-          reads.fail.view { meta, reads -> "Failed: ${meta.id}" }
-          reads.pass.view { meta, reads -> "Passed: ${meta.id}" }
+            FASTP.out.json
+                .map { meta, json -> [meta, getFilteringResult(json)] }
+                .join( FASTP.out.reads )
+                .map { meta, fastpMap, reads -> [meta + fastpMap, reads] }
+                .branch { meta, reads ->
+                    pass: meta.q30_rate >= 0.935
+                    fail: true
+                }
+                .set { reads }
+
+            reads.fail.view { meta, reads -> "Failed: ${meta.id}" }
+            reads.pass.view { meta, reads -> "Passed: ${meta.id}" }
+        }
         ```
