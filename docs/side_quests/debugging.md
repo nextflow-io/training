@@ -239,7 +239,33 @@ ERROR ~ Script compilation error
  -- Check '.nextflow.log' file for details
 ```
 
-In these cases the error messaging is quite straightforward, and you should be able to quickly replace the incorrect keyword with the correct on by referencing [the documentation](https://www.nextflow.io/docs/latest/process.html#).
+In these cases the error messaging is quite straightforward. You should be able to quickly replace the incorrect keyword with the correct on by referencing [the documentation](https://www.nextflow.io/docs/latest/process.html#):
+
+```groovy title="Solution" hl_lines="4"
+#!/usr/bin/env nextflow
+
+process PROCESS_FILES {
+    input:
+    val sample_name
+
+    output:
+    path "${sample_name}_output.txt"
+
+    script:
+    """
+    echo "Processing ${sample_name}" > ${sample_name}_output.txt
+    """
+}
+
+workflow {
+
+    // Create input channel
+    input_ch = Channel.of('sample1', 'sample2', 'sample3')
+
+    // Call the process with the input channel
+    PROCESS_FILES(input_ch)
+}
+```
 
 ### 1.3. Using bad variable names
 
