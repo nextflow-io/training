@@ -364,6 +364,8 @@ This is just the 'entry' workflow, but you can also preview the DAG for the inne
 
 ![DAG preview inner workflow](img/dag_preview_inner.png)
 
+For this workflow, you can use the nodes in the DAG to navigate to the corresponding process definitions in the code. Click on a node, and it will take you to the relevant process definition in the editor. Particularly when a workflow grows to a large size, this can really help you to navigate around the code and understand how the processes are connected.
+
 ### Takeaway
 
 You can navigate complex workflows efficiently using go-to-definition, symbol search, find references, and DAG visualization to understand code structure and dependencies.
@@ -409,7 +411,7 @@ This is invaluable when:
 
 ### 5.3. Project-wide Search
 
-Sometimes you need to find where specific patterns are used across your entire project. Press `Ctrl+Shift+F` (or `Cmd+Shift+F`) to open the search panel.
+Sometimes you need to find where specific patterns are used across your entire project. Press `Ctrl/Cmd+Shift+F` to open the search panel.
 
 Try searching for `publishDir` across the workspace:
 
@@ -443,7 +445,7 @@ Open `basic_workflow.nf` and deliberately mess up the formatting:
 - Add extra spaces in random places: the `Channel.fromPath` statement, add 30 spaces after the `(`.
 - Break some lines awkwardly: Add a new line between the the `.view {` operator and the `Processing sample:` string but do not add a corresponding newline before the closing parenthesis `}`.
 
-Now press `Shift+Alt+F` (or `Shift+Option+F`) to auto-format:
+Now press `Shift+Alt+F` (or `Shift+Option+F` on MacOS) to auto-format:
 
 VS Code immediately:
 
@@ -502,8 +504,7 @@ This is crucial for:
 
 For editing multiple lines simultaneously, VS Code offers powerful multi-cursor capabilities:
 
-- **Multi-line selection**: Hold **Alt+Shift** (or **Option+Shift**) and use arrow keys to select multiple lines
-- **Add cursor above/below**: **Ctrl+Alt+Up/Down** (or **Cmd+Option+Up/Down**) to add cursors on adjacent lines
+- **Multi-line selection**: Hold **Ctrl+Alt** (or **Cmd+Option** for MacOS) and use arrow keys to select multiple lines
 - **Multi-line indenting**: Select multiple lines and use **Tab** to indent or **Shift+Tab** to outdent entire blocks
 
 This is particularly useful for:
