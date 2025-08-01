@@ -1328,7 +1328,7 @@ Apply these debugging skills in your own workflow development. The more you prac
 
 - **Building robust workflows** with built-in debugging from the start
 - **Contributing to the community** by sharing debugging solutions
-- **Developing testing strategies** to catch issues before they reach production
+- **Developing testing strategies** to catch issues before they reach production using nf-test
 - **Mentoring others** using the systematic approaches you've learned
 
 Remember: effective debugging is a skill that improves with practice. The systematic methodology and comprehensive toolkit you've developed here will serve you well throughout your Nextflow development journey.
