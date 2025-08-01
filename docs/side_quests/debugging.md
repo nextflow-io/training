@@ -914,8 +914,6 @@ In production usage, you'll be configuring resources on your processes. For exam
 ```groovy
 process PROCESS_FILES {
 
-    container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
-
     time '1 ms'
 
     input:
@@ -926,6 +924,7 @@ process PROCESS_FILES {
 
     script:
     """
+    sleep 1
     cowpy ${sample_name} > ${sample_name}_output.txt
     """
 }
