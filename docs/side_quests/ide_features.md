@@ -202,7 +202,7 @@ Inside a process script block, type `task.` to see available runtime properties:
 
 Open nextflow.config and type `process.` anywhere to see available process directives:
 
-![Parameters auto-completion](img/autocomplete_params.png)
+![Config auto-completion](img/autocomplete_config.png)
 
 You'll see suggestions for:
 
