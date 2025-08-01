@@ -575,19 +575,29 @@ Here, we create two queue channels, a reference to be passed to all `PROCESS_FIL
 
 This pattern of a single reference file in a channel is very common, so this error occurs frequently. If you see a process only running once when you expect it to run multiple times, check that you're not exhausting a channel that should be reused.
 
-There are a couple of ways to address this. You can simply create a value channel type, which can be used over and over again:
+There are a couple of ways to address this depending on how many files are affected.
+
+**Option 1**: You have a single reference file that you are re-using a lot. You can simply create a value channel type, which can be used over and over again. There are three ways to do this:
+
+1. Use `Channel.value()`:
 
 ```groovy
     reference_ch = Channel.value('baseline_reference')
 ```
 
-or by using `collect()`
+2. Use the `first()` [operator](https://www.nextflow.io/docs/latest/reference/operator.html#first):
+
+```groovy
+    reference_ch_value = reference_ch.first()
+```
+
+3. Use the `collect()` [operator](https://www.nextflow.io/docs/latest/reference/operator.html#collect):
 
 ```groovy
     reference_ch_value = reference_ch.collect()
 ```
 
-In more complex scenarios, perhaps where you have a more complex situation than a single reference channel, you can use the `combine` operator to create a new channel that combines the two channels into tuples:
+**Option 2**: In more complex scenarios, perhaps where you have multiple reference files for all samples in the sample channel, you can use the `combine` operator to create a new channel that combines the two channels into tuples:
 
 ```groovy
     reference_ch = Channel.of('baseline_reference')
