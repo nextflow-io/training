@@ -200,7 +200,7 @@ Using the `splitCsv` operator would give us one entry that would contain all fou
 
 ```groovy linenums="1"
 workflow {
-    ch_samplesheet = Channel.fromPath("data/samplesheet.ugly.csv")
+    Channel.fromPath("data/samplesheet.ugly.csv")
         .splitCsv( header: true )
         .multiMap { row ->
             tumor:
@@ -229,7 +229,7 @@ In the example above, the `multiMap` operator was necessary because we were supp
 
 ```groovy linenums="1"
 workflow {
-    ch_samplesheet = Channel.fromPath("data/samplesheet.csv")
+    Channel.fromPath("data/samplesheet.csv")
         .splitCsv( header: true )
         .map { row -> [[id: row.id, repeat: row.repeat, type: row.type], [file(row.fastq1), file(row.fastq2)]] }
         .branch { meta, reads ->
