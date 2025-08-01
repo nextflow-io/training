@@ -313,16 +313,20 @@ You can quickly navigate to any process, module, or variable definition using **
 
 The same thing works for process names. Go back to `basic_workflow.nf` and try this on the `FASTQC` process name in the workflow block. This links you directly to the process name (which is the same as the module file in this example, but could be part-way through a much larger file).
 
+To go back to where you were, use **Alt+←** (or **Ctrl+-** on Mac). This is a powerful way to explore code without losing your place.
+
 Now let's explore navigation in a more complex workflow using `complex_workflow.nf` (the illustration-only file mentioned earlier). This workflow contains multiple processes defined in separate module files, as well as some inline ones. While complex multi-file structures can be challenging to navigate manually, the ability to jump to definitions makes exploration much more manageable.
 
 1. Open `complex_workflow.nf`
 2. Navigate to module definitions
 3. Use **Alt+←** (or **Ctrl+-**) to navigate back
 4. Navigate to the `FASTQC` process name in the workflow block. This links you directly to the process name (which is the same as the module file in this example, but could be part-way through a much larger file).
+5. Navigate back again
+6. Navigate to the TRIM_GALORE process in the workflow block. This is defined inline, so it won't take you to a separate file, but it will still show you the process definition, and you can still navigate back to where you were.
 
 ### 4.2. Symbol Navigation
 
-With `complex_workflow.nf` still open, you can get an overview of all symbols in the file by pressing `Ctrl+Shift+O` (or `Cmd+Shift+O`):
+With `complex_workflow.nf` still open, you can get an overview of all symbols in the file by typing `@` into the search bar at the top of VSCode (the keyboard shortcut is `Ctrl/Cmd+Shift+O`, but may not work in Codespaces). This opens the symbol navigation panel, which lists all symbols in the current file:
 
 ![Symbol navigation](img/symbols.png)
 
@@ -336,7 +340,7 @@ Start typing to filter results.
 
 ### 4.3. Find All References
 
-Understanding where a process or variable is used throughout your codebase can be very helpful. For instance, if you want to find all references to the `FASTQC` process, start by navigating to its definition. You can do this by opening `modules/fastqc.nf` directly, or by using VS Code's quick navigation feature with `Ctrl-click` (or `Cmd-click` on Mac). Once at the process definition, right-click on the `FASTQC` process name and select "Find All References" from the context menu to see all instances where it is used.
+Understanding where a process or variable is used throughout your codebase can be very helpful. For instance, if you want to find all references to the `FASTQC` process, start by navigating to its definition. You can do this by opening `modules/fastqc.nf` directly, or by using VS Code's quick navigation feature with `Ctrl/Cmd-click` as we did above. Once at the process definition, right-click on the `FASTQC` process name and select "Find All References" from the context menu to see all instances where it is used.
 
 ![Find references](img/references.png)
 
