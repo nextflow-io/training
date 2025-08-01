@@ -291,9 +291,9 @@ Some Nextflow operators return objects that contain _multiple_ channels. The `mu
 ```groovy linenums="1"
 workflow {
     numbers = Channel.of( 1, 2, 3, 4, 5 )
-        .multiMap {
-            small: num -> num
-            large: num -> num * 10
+        .multiMap { num ->
+            small: num
+            large: num * 10
         }
     numbers.small.view { num -> "Small: $num"}
     numbers.large.view { num -> "Large: $num"}
@@ -305,9 +305,9 @@ or by using the `set` operator ([documentation](https://www.nextflow.io/docs/lat
 ```groovy linenums="1"
 workflow {
     Channel.of( 1, 2, 3, 4, 5 )
-        .multiMap {
-            small: num -> num
-            large: num -> num * 10
+        .multiMap { num ->
+            small: num
+            large: num * 10
         }
         .set { numbers }
 
@@ -334,9 +334,9 @@ You can either provide the channels individually:
 ```groovy linenums="1"
 workflow {
     Channel.of( 1, 2, 3, 4, 5 )
-        .multiMap {
-            small: num -> num
-            large: num -> num * 10
+        .multiMap { num ->
+            small: num
+            large: num * 10
         }
         .set { numbers }
 
