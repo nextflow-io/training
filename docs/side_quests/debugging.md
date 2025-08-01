@@ -386,7 +386,7 @@ Learn to debug more complex channel structure errors that occur even when syntax
 
 ## 2. Channel Structure Errors
 
-Channel structure errors are more subtle than syntax errors because the code is syntactically correct but the data shapes don't match what processes expect. These errors typically appear at runtime and require understanding of how data flows through your workflow.
+Channel structure errors are more subtle than syntax errors because the code is syntactically correct, but the data shapes don't match what processes expect. Nextflow will try to run the pipeline, but might find that the number of files doesn't match what it expects and fail. These errors typically only appear at runtime and require an understanding of the data flowing through your workflow.
 
 ### 2.1. Wrong Number of Input Channels
 
