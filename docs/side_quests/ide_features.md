@@ -575,25 +575,25 @@ See how all these IDE features work together in your daily development workflow.
 
 ---
 
-## 9. Recap and quick notes
+## 8. Recap and quick notes
 
 Here are some quick notes on each of the IDE features discussed above:
 
-### 9.1. Starting a New Feature
+### 8.1. Starting a New Feature
 
 1. **Quick file open** (`Ctrl+P` or `Cmd+P`) to find relevant existing modules
 2. **Split editor** to view similar processes side by side
 3. **Symbol navigation** (`Ctrl+Shift+O` or `Cmd+Shift+O`) to understand file structure
 4. **Auto-completion** to write new code quickly
 
-### 9.2. Debugging Issues
+### 8.2. Debugging Issues
 
 1. **Problems panel** (`Ctrl+Shift+M` or `Cmd+Shift+M`) to see all errors at once
 2. **Go to definition** (`Ctrl-click` or `Cmd-click`) to understand process interfaces
 3. **Find all references** to see how processes are used
 4. **Project-wide search** to find similar patterns or issues
 
-### 9.3. Refactoring and Improvement
+### 8.3. Refactoring and Improvement
 
 1. **Project-wide search** (`Ctrl+Shift+F` or `Cmd+Shift+F`) to find patterns
 2. **Auto-formatting** (`Shift+Alt+F` or `Shift+Option+F`) to maintain consistency
