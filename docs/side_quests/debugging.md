@@ -1633,7 +1633,7 @@ Now it's time to put the systematic debugging approach into practice. The workfl
     nextflow run buggy_workflow.nf
     ```
 
-Apply the four-phase debugging method you've learned:
+    Apply the four-phase debugging method you've learned:
 
     **Phase 1: Syntax Error Resolution**
     - Check for red underlines in VSCode or your IDE
