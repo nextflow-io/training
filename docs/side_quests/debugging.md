@@ -74,10 +74,11 @@ tree .
 ├── invalid_process.nf
 ├── missing_output.nf
 ├── missing_software.nf
+├── missing_software_with_stub.nf
 ├── nextflow.config
 └── no_such_var.nf
 
-1 directory, 21 files
+1 directory, 22 files
 ```
 
 These files represent common debugging scenarios you'll encounter in real-world development.
