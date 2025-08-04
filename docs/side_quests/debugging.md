@@ -55,10 +55,11 @@ tree .
 ```console title="Project structure"
 .
 ├── bad_bash_var.nf
+├── bad_channel_shape.nf
 ├── bad_channel_shape_viewed_debug.nf
 ├── bad_channel_shape_viewed.nf
-├── bad_channel_shape.nf
 ├── bad_number_inputs.nf
+├── badpractice_syntax.nf
 ├── bad_resources.nf
 ├── bad_syntax.nf
 ├── buggy_workflow.nf
@@ -72,13 +73,11 @@ tree .
 ├── exhausted.nf
 ├── invalid_process.nf
 ├── missing_output.nf
-├── missing_software_stub.nf
 ├── missing_software.nf
 ├── nextflow.config
-├── no_such_var.nf
-└── nonlethal_syntax.nf
+└── no_such_var.nf
 
-2 directories, 22 files
+1 directory, 21 files
 ```
 
 These files represent common debugging scenarios you'll encounter in real-world development.
