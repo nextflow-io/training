@@ -55,10 +55,11 @@ tree .
 ```console title="Project structure"
 .
 ├── bad_bash_var.nf
+├── bad_channel_shape.nf
 ├── bad_channel_shape_viewed_debug.nf
 ├── bad_channel_shape_viewed.nf
-├── bad_channel_shape.nf
 ├── bad_number_inputs.nf
+├── badpractice_syntax.nf
 ├── bad_resources.nf
 ├── bad_syntax.nf
 ├── buggy_workflow.nf
@@ -72,13 +73,11 @@ tree .
 ├── exhausted.nf
 ├── invalid_process.nf
 ├── missing_output.nf
-├── missing_software_stub.nf
 ├── missing_software.nf
 ├── nextflow.config
-├── no_such_var.nf
-└── nonlethal_syntax.nf
+└── no_such_var.nf
 
-2 directories, 22 files
+1 directory, 21 files
 ```
 
 These files represent common debugging scenarios you'll encounter in real-world development.
@@ -137,33 +136,62 @@ NOTE: If this is the beginning of a process or workflow, there may be a syntax e
 
 Now, open `bad_syntax.nf`:
 
-```groovy title="bad_syntax.nf" hl_lines="14"
-#!/usr/bin/env nextflow
+=== "With error"
 
-process PROCESS_FILES {
-    input:
-    val sample_name
+    ```groovy title="bad_syntax.nf" linenums="5" hl_lines="14"
+    #!/usr/bin/env nextflow
 
-    output:
-    path "${sample_name}_output.txt"
+    process PROCESS_FILES {
+        input:
+        val sample_name
 
-    script:
-    """
-    echo "Processing ${sample_name}" > ${sample_name}_output.txt
-    """
-// Missing closing brace for the process
+        output:
+        path "${sample_name}_output.txt"
 
-workflow {
+        script:
+        """
+        echo "Processing ${sample_name}" > ${sample_name}_output.txt
+        """
+    // Missing closing brace for the process
 
-    // Create input channel
-    input_ch = Channel.of('sample1', 'sample2', 'sample3')
+    workflow {
 
-    // Call the process with the input channel
-    PROCESS_FILES(input_ch)
-}
-```
+        // Create input channel
+        input_ch = Channel.of('sample1', 'sample2', 'sample3')
 
-For the purpose of this example we've left a comment for you to show where the error is. The Nextflow VSCode extension should also be giving you some hints about what might be wrong, putting the mismatched brace in red and highlighting the premature end of the file:
+        PROCESS_FILES(input_ch)
+    }
+    ```
+
+=== "Without error"
+
+    ```groovy title="bad_syntax" linenums="5" hl_lines="14"
+    #!/usr/bin/env nextflow
+
+    process PROCESS_FILES {
+        input:
+        val sample_name
+
+        output:
+        path "${sample_name}_output.txt"
+
+        script:
+        """
+        echo "Processing ${sample_name}" > ${sample_name}_output.txt
+        """
+    }
+
+    workflow {
+
+        // Create input channel
+        input_ch = Channel.of('sample1', 'sample2', 'sample3')
+
+        // Call the process with the input channel
+        PROCESS_FILES(input_ch)
+    }
+    ```
+
+Flip back and forth between the with/ without error versions to see the difference. The Nextflow VSCode extension should also be giving you some hints about what might be wrong, putting the mismatched brace in red and highlighting the premature end of the file:
 
 ![Bad syntax](img/bad_syntax.png)
 
