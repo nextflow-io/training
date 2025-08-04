@@ -714,11 +714,11 @@ workflow {
 nextflow run bad_number_inputs.nf
 ```
 
-More commonly, you might add additional inputs to a process and forget to update the workflow call accordingly, which can lead to this type of error. Fortunately, this is one of the easier-to-understand and fix errors, as the error message is quite clear about the mismatch.
+More commonly than this example, you might add additional inputs to a process and forget to update the workflow call accordingly, which can lead to this type of error. Fortunately, this is one of the easier-to-understand and fix errors, as the error message is quite clear about the mismatch.
 
 ### 2.2. Mismatched channel arity
 
-Some channel structure errors are much more subtle and produce no errors at all. Probably the most common of these reflects a challenge that new Nextflow users face in understanding that queue channels can be exhausted and run out of samples, meaning the workflow finishes prematurely.
+Some channel structure errors are much more subtle and produce no errors at all. Probably the most common of these reflects a challenge that new Nextflow users face in understanding that queue channels can be exhausted and run out of items, meaning the workflow finishes prematurely.
 
 #### Run the pipeline
 
@@ -726,24 +726,22 @@ Some channel structure errors are much more subtle and produce no errors at all.
 nextflow run exhausted.nf
 ```
 
-What do you see?
-
-When you run this workflow, it will execute without error, but it will only process the first sample:
+When you run this workflow, it will execute without error, processing a single sample:
 
 ```console title="Exhausted channel output"
  N E X T F L O W   ~  version 25.04.3
 
-Launching `exhausted.nf` [magical_mayer] DSL2 - revision: 4ec9570696
+Launching `exhausted.nf` [extravagant_gauss] DSL2 - revision: 08cff7ba2a
 
 executor >  local (1)
-[b3/42dbdb] process > PROCESS_FILES (1) [100%] 1 of 1 ✔
+[bd/f61fff] PROCESS_FILES (1) [100%] 1 of 1 ✔
 ```
 
 #### Check the code
 
-Let's examine `exhausted.nf` to understand what's happening:
+Let's examine `exhausted.nf` to see if that's right:
 
-```groovy title="exhausted.nf" hl_lines="23"
+```groovy title="exhausted.nf" hl_lines="23 24"
 #!/usr/bin/env nextflow
 
 process PROCESS_FILES {
@@ -773,9 +771,9 @@ workflow {
 }
 ```
 
-This happens because the `reference_ch` channel is defined as a queue channel, which gets exhausted after the first process execution, despite the `input_ch` channel having more items to process. The process expects both inputs, but we pass them as separate channels.
+The process only runs once instead of three times because the `reference_ch` channel is a queue channel that gets exhausted after the first process execution. When one channel is exhausted, the entire process stops, even if other channels still have items.
 
-This pattern of a single reference file in a channel is very common, so this error occurs frequently. If you see a process only running once when you expect it to run multiple times, check that you're not exhausting a channel that should be reused.
+This is a common pattern where you have a single reference file that needs to be reused across multiple samples. The solution is to convert the reference channel to a value channel that can be reused indefinitely.
 
 #### Fix the code
 
