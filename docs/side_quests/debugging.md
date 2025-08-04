@@ -1888,17 +1888,17 @@ Now it's time to put the systematic debugging approach into practice. The workfl
         }
         ```
 
-        **Error Categories Covered:**
-        - **Syntax errors**: Missing braces, trailing commas, undefined variables
-        - **Channel structure errors**: Wrong data shapes, undefined channels
-        - **Process errors**: Output file mismatches, variable escaping
-        - **Resource errors**: Unrealistic time limits
+**Error Categories Covered:**
+- **Syntax errors**: Missing braces, trailing commas, undefined variables
+- **Channel structure errors**: Wrong data shapes, undefined channels
+- **Process errors**: Output file mismatches, variable escaping
+- **Resource errors**: Unrealistic time limits
 
-        **Key Debugging Lessons:**
-        1. **Read error messages carefully** - they often point directly to the problem
-        2. **Use systematic approaches** - fix one error at a time and test with `-resume`
-        3. **Understand data flow** - channel structure errors are often the most subtle
-        4. **Check work directories** - when processes fail, the logs tell you exactly what went wrong
+**Key Debugging Lessons:**
+1. **Read error messages carefully** - they often point directly to the problem
+2. **Use systematic approaches** - fix one error at a time and test with `-resume`
+3. **Understand data flow** - channel structure errors are often the most subtle
+4. **Check work directories** - when processes fail, the logs tell you exactly what went wrong
 
 ### Takeaway
 
