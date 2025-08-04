@@ -111,13 +111,13 @@ nextflow run bad_syntax.nf
 You'll see an error message like this:
 
 ```console title="Syntax error output"
- N E X T F L O W   ~  version 24.10.2
+ N E X T F L O W   ~  version 25.04.3
 
-Launching `bad_syntax.nf` [extravagant_poisson] DSL2 - revision: ee497b3ca1
+Launching `bad_syntax.nf` [stupefied_bhabha] DSL2 - revision: ca6327fad2
 
 ERROR ~ Script compilation error
-- file : /path/to/bad_syntax.nf
-- cause: Unexpected input: '{' @ line 6, column 23.
+- file : /workspaces/training/side-quests/debugging/bad_syntax.nf
+- cause: Unexpected input: '{' @ line 3, column 23.
    process PROCESS_FILES {
                          ^
 
@@ -130,9 +130,9 @@ NOTE: If this is the beginning of a process or workflow, there may be a syntax e
 
 **Key elements of syntax error messages:**
 
-- **File location**: Shows exactly which file contains the error (`- file : /path/to/bad_syntax.nf`)
+- **File location**: Shows exactly which file contains the error (`- file : /workspaces/training/side-quests/debugging/bad_syntax.nf`)
 - **Error description**: Explains what the parser found that it didn't expect (`- cause: Unexpected input: '{'`)
-- **Line and column**: Points to where the parser encountered the problem (`@ line 6, column 23.`)
+- **Line and column**: Points to where the parser encountered the problem (`@ line 3, column 23.`)
 - **Context**: Shows the problematic line with a caret (^) pointing to location of an unclosed brace (`process PROCESS_FILES {`)
 - **Additional notes**: Provides hints about common causes
 
@@ -227,11 +227,9 @@ nextflow run invalid_process.nf
 You'll see an error like:
 
 ```console title="Invalid process keyword error"
-Nextflow 25.04.6 is available - Please consider updating your version to it
+ N E X T F L O W   ~  version 25.04.3
 
- N E X T F L O W   ~  version 24.10.2
-
-Launching `invalid_process.nf` [happy_lorenz] DSL2 - revision: 2bfe3a8652
+Launching `invalid_process.nf` [nasty_jepsen] DSL2 - revision: da9758d614
 
 ERROR ~ Script compilation error
 - file : /workspaces/training/side-quests/debugging/invalid_process.nf
@@ -275,7 +273,9 @@ workflow {
 }
 ```
 
-The error message is quite straightforward - we're using `inputs` instead of the correct `input` directive.
+The error message was quite straightforward - we're using `inputs` instead of the correct `input` directive. You'll also see that the Nextflow VSCode exension is unhappy:
+
+![Invalid process message](img/invalid_process_message.png)
 
 #### Fix the code
 
@@ -317,6 +317,8 @@ nextflow run invalid_process.nf
 
 ### 1.3. Using bad variable names
 
+The variable names you use in your script blocks must be valid, derived either from inputs or from groovy code inserted before the script. But when you're wrangling complexity at the start of pipeline development, it's easy to make mistakes in variable naming, and Nextflow will let you know quickly.
+
 #### Run the pipeline
 
 ```bash
@@ -347,7 +349,7 @@ Tip: when you have fixed the problem you can continue the execution adding the o
 
 #### Check the code
 
-The variable names you use in your script blocks must be valid, derived either from inputs or from groovy code inserted before the script. Let's examine `no_such_var.nf`:
+Let's examine `no_such_var.nf`:
 
 ```groovy title="no_such_var.nf" hl_lines="17"
 #!/usr/bin/env nextflow
@@ -376,7 +378,7 @@ workflow {
 }
 ```
 
-This fails because `undefined_var` is not defined anywhere. The error message indicates that the variable is not recognized in the script template.
+The error message indicates that the variable is not recognized in the script template, and there you go- you should be able to see `${undefined_var}` used in the script block, but not defined elsewhere.
 
 #### Fix the code
 
@@ -440,7 +442,7 @@ Caused by:
 
 Let's examine `bad_bash_var.nf` to see what's causing the issue:
 
-```groovy title="bad_bash_var.nf"
+```groovy title="bad_bash_var.nf" hl_line="11"
 process PROCESS_FILES {
     input:
     val sample_name
@@ -462,7 +464,7 @@ Starting out in Nextflow, it can be difficult to understand the difference betwe
 
 If you want to use a Bash variable, you must escape the dollar sign like this:
 
-```groovy title="bad_bash_var.nf (fixed)"
+```groovy title="bad_bash_var.nf (fixed)" hl_lines="11"
 process PROCESS_FILES {
     input:
     val sample_name
