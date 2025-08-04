@@ -853,25 +853,33 @@ nextflow run bad_channel_shape.nf
 You will see an error like this:
 
 ```console title="Channel structure error"
- N E X T F L O W   ~  version 25.04.3
-
-Launching `bad_channel_shape.nf` [amazing_colden] DSL2 - revision: a2ad080712
+Launching `bad_channel_shape.nf` [hopeful_pare] DSL2 - revision: ffd66071a1
 
 executor >  local (3)
-[73/80099d] process > PROCESS_FILES (1) [100%] 3 of 3, failed: 3 ✘
-
-ERROR ~ Error executing process > 'PROCESS_FILES (3)'
+executor >  local (3)
+[3f/c2dcb3] PROCESS_FILES (3) [  0%] 0 of 3 ✘
+ERROR ~ Error executing process > 'PROCESS_FILES (1)'
 
 Caused by:
-  Missing output file(s) `[sample3, file3.txt]_output.txt` expected by process `PROCESS_FILES (3)`
+  Missing output file(s) `[sample1, file1.txt]_output.txt` expected by process `PROCESS_FILES (1)`
+
 
 Command executed:
-  echo "Processing [sample3, file3.txt]" > [sample3, file3.txt]_output.txt
+
+  echo "Processing [sample1, file1.txt]" > [sample1, file1.txt]_output.txt
+
+Command exit status:
+  0
+
+Command output:
+  (empty)
 
 Work dir:
-  /path/to/work/a9/ab2d19f5b30be56b56c099e0daa63a
+  /workspaces/training/side-quests/debugging/work/d6/1fb69d1d93300bbc9d42f1875b981e
 
 Tip: when you have fixed the problem you can continue the execution adding the option `-resume` to the run command line
+
+ -- Check '.nextflow.log' file for details
 ```
 
 #### Check the code
