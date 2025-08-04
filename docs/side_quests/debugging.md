@@ -1565,21 +1565,29 @@ Now that you've learned individual debugging techniques - from trace files and w
 
 This methodology combines all the tools we've covered into an efficient workflow:
 
-**Three-Phase Debugging Method:**
+**Four-Phase Debugging Method:**
 
-**Phase 1: Quick Assessment (5 minutes)**
+**Phase 1: Syntax Error Resolution (5 minutes)**
 
-1. Read the error message carefully
-2. Check if it's a syntax, runtime, or resource error
-3. Use preview mode to test basic logic
+1. Check for red underlines in VSCode or your IDE
+2. Run `nextflow run workflow.nf -preview` to identify syntax issues
+3. Fix all syntax errors (missing braces, trailing commas, etc.)
+4. Ensure the workflow parses successfully before proceeding
 
-**Phase 2: Detailed Investigation (15-30 minutes)**
+**Phase 2: Quick Assessment (5 minutes)**
+
+1. Read runtime error messages carefully
+2. Check if it's a runtime, logic, or resource error
+3. Use preview mode to test basic workflow logic
+
+**Phase 3: Detailed Investigation (15-30 minutes)**
 
 1. Find the work directory of the failed task
 2. Examine log files
 3. Add `.view()` operators to inspect channels
+4. Use `-stub-run` to test workflow logic without execution
 
-**Phase 3: Fix and Validate (15 minutes)**
+**Phase 4: Fix and Validate (15 minutes)**
 
 1. Make minimal targeted fixes
 2. Test with resume: `nextflow run workflow.nf -resume`
@@ -1625,19 +1633,26 @@ Now it's time to put the systematic debugging approach into practice. The workfl
     nextflow run buggy_workflow.nf
     ```
 
-    Apply the three-phase debugging method you've learned:
+Apply the four-phase debugging method you've learned:
 
-    **Phase 1: Quick Assessment**
-    - Read error messages carefully
-    - Identify whether errors are syntax, runtime, or resource-related
-    - Use `-preview` mode to test basic logic
+    **Phase 1: Syntax Error Resolution**
+    - Check for red underlines in VSCode or your IDE
+    - Run `nextflow run workflow.nf -preview` to identify syntax issues
+    - Fix all syntax errors (missing braces, trailing commas, etc.)
+    - Ensure the workflow parses successfully before proceeding
 
-    **Phase 2: Detailed Investigation**
+    **Phase 2: Quick Assessment**
+    - Read runtime error messages carefully
+    - Identify whether errors are runtime, logic, or resource-related
+    - Use `-preview` mode to test basic workflow logic
+
+    **Phase 3: Detailed Investigation**
     - Examine work directories for failed tasks
     - Add `.view()` operators to inspect channels
     - Check log files in work directories
+    - Use `-stub-run` to test workflow logic without execution
 
-    **Phase 3: Fix and Validate**
+    **Phase 4: Fix and Validate**
     - Make targeted fixes
     - Use `-resume` to test fixes efficiently
     - Verify complete workflow execution
