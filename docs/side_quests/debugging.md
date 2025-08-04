@@ -572,7 +572,7 @@ This won't prevent execution but could lead to confusion or unexpected behavior 
 
 Follow the VSCode extension's recommendation by moving the channel definition inside the workflow block:
 
-```groovy title="badpractice_syntax.nf (fixed)" hl_lines="3-4 9"
+```groovy title="badpractice_syntax.nf (fixed)" hl_lines="21"
 #!/usr/bin/env nextflow
 
 process PROCESS_FILES {
