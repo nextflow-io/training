@@ -681,7 +681,7 @@ You should see the mismatched `PROCESS_FILES` call, supplying multiple input cha
 
 For this specific example, the process expects a single channel and doesn't require the second channel, so we can fix it by passing only the `samples_ch` channel:
 
-```groovy title="bad_number_inputs.nf (fixed)" hl_lines="22"
+```groovy title="bad_number_inputs.nf (fixed)" hl_lines="23"
 #!/usr/bin/env nextflow
 
 process PROCESS_FILES {
