@@ -890,7 +890,7 @@ Tip: when you have fixed the problem you can continue the execution adding the o
 
 The square brackets in the error message provide the clue here - the process is treating the tuple as a single value, which is not what we want. Let's examine `bad_channel_shape.nf`:
 
-```groovy title="bad_channel_shape.nf" hl_lines="5 20-22" linenums="16"
+```groovy title="bad_channel_shape.nf" hl_lines="5 20-22" linenums="1"
 #!/usr/bin/env nextflow
 
 process PROCESS_FILES {
@@ -924,7 +924,7 @@ You can see that we're generating a channel composed of tuples: `['sample1', 'fi
 
 To fix this, if the process requires both inputs we could adjust the process to accept a tuple:
 
-```groovy title="bad_channel_shape.nf (fixed - Option 1)" hl_lines="5"
+```groovy title="bad_channel_shape.nf (fixed - Option 1)" hl_lines="5"  linenums="1"
 #!/usr/bin/env nextflow
 
 process PROCESS_FILES {
@@ -954,7 +954,7 @@ workflow {
 
 Or if, as in this example the process only needs the sample name, we can extract the first element of the tuple before passing it to the process:
 
-```groovy title="bad_channel_shape.nf (fixed - Option 2)" hl_lines="24"
+```groovy title="bad_channel_shape.nf (fixed - Option 2)" hl_lines="24" linenums="31"
 workflow {
 
     // Channel emits tuples, but process expects single values
@@ -1010,7 +1010,7 @@ After mapping: sample3
 
 Let's examine `bad_channel_shape_viewed.nf` to see how `.view()` is used:
 
-```groovy title="bad_channel_shape_viewed.nf"
+```groovy title="bad_channel_shape_viewed.nf" linenums="16" hl_lines="9 11"
 workflow {
 
     // Channel emits tuples, but process expects single values
@@ -1029,9 +1029,9 @@ workflow {
 
 #### Fix the code
 
-You can also save 'future you' a lot of trouble by commenting your workflow code to illustrate the channel structure:
+To save you from using view operations excessively in future to understand channel content, it's advisable to add some comments to help:
 
-```groovy title="bad_channel_shape_viewed.nf (with comments)"
+```groovy title="bad_channel_shape_viewed.nf (with comments)" linenums="16" hl_lines="8 9"
 workflow {
 
     // Channel emits tuples, but process expects single values
