@@ -816,7 +816,7 @@ workflow {
 
 **Option 2**: In more complex scenarios, perhaps where you have multiple reference files for all samples in the sample channel, you can use the `combine` operator to create a new channel that combines the two channels into tuples:
 
-```groovy title="exhausted.nf (fixed - Option 2)" hl_lines="3"
+```groovy title="exhausted.nf (fixed - Option 2)" hl_lines="4"
 workflow {
     reference_ch = Channel.of('baseline_reference')
     input_ch = Channel.of('sample1', 'sample2', 'sample3')
@@ -842,7 +842,7 @@ You should now see all three samples being processed instead of just one.
 
 ### 2.3. Wrong Channel Content Structure
 
-When workflows reach a certain level of complexity, it can be a little difficult to keep track of the internal structures of each channel, and people commonly generate mismatches between what the process expects and what the channel actually contains. This is more subtle than the issue we discussed earlier, where the number of channels was incorrect. In this case, the channel may have the right number of items, but the structure of those items doesn't match what the process expects.
+When workflows reach a certain level of complexity, it can be a little difficult to keep track of the internal structures of each channel, and people commonly generate mismatches between what the process expects and what the channel actually contains. This is more subtle than the issue we discussed earlier, where the number of channels was incorrect. In this case, you can have the correct number of input channels, but the internal structure of one or more of those channels doesn't match what the process expects.
 
 #### Run the pipeline
 
@@ -878,7 +878,7 @@ Tip: when you have fixed the problem you can continue the execution adding the o
 
 The square brackets in the error message provide the clue here - the process is treating the tuple as a single value, which is not what we want. Let's examine `bad_channel_shape.nf`:
 
-```groovy title="bad_channel_shape.nf" hl_lines="5,20"
+```groovy title="bad_channel_shape.nf" hl_lines="5 20-22"
 #!/usr/bin/env nextflow
 
 process PROCESS_FILES {
