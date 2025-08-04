@@ -783,7 +783,7 @@ There are a couple of ways to address this depending on how many files are affec
 
 1. Use `Channel.value()`:
 
-```groovy title="exhausted.nf (fixed - Option 1a)"
+```groovy title="exhausted.nf (fixed - Option 1a)" hl_lines="2"
 workflow {
     reference_ch = Channel.value('baseline_reference')  // Value channel can be reused
     input_ch = Channel.of('sample1', 'sample2', 'sample3')
@@ -794,7 +794,7 @@ workflow {
 
 2. Use the `first()` [operator](https://www.nextflow.io/docs/latest/reference/operator.html#first):
 
-```groovy title="exhausted.nf (fixed - Option 1b)"
+```groovy title="exhausted.nf (fixed - Option 1b)" hl_lines="2"
 workflow {
     reference_ch = Channel.of('baseline_reference').first()  // Convert to value channel
     input_ch = Channel.of('sample1', 'sample2', 'sample3')
@@ -805,7 +805,7 @@ workflow {
 
 3. Use the `collect()` [operator](https://www.nextflow.io/docs/latest/reference/operator.html#collect):
 
-```groovy title="exhausted.nf (fixed - Option 1c)"
+```groovy title="exhausted.nf (fixed - Option 1c)" hl_lines="2"
 workflow {
     reference_ch = Channel.of('baseline_reference').collect()  // Convert to value channel
     input_ch = Channel.of('sample1', 'sample2', 'sample3')
@@ -816,7 +816,7 @@ workflow {
 
 **Option 2**: In more complex scenarios, perhaps where you have multiple reference files for all samples in the sample channel, you can use the `combine` operator to create a new channel that combines the two channels into tuples:
 
-```groovy title="exhausted.nf (fixed - Option 2)"
+```groovy title="exhausted.nf (fixed - Option 2)" hl_lines="3"
 workflow {
     reference_ch = Channel.of('baseline_reference')
     input_ch = Channel.of('sample1', 'sample2', 'sample3')
