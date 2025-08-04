@@ -504,7 +504,7 @@ nextflow run bad_bash_var.nf
 
     For simple variable manipulations like string concatenation or prefix/suffix operations, it's usually more readable to use Groovy variables in the script section rather than Bash variables in the script block:
 
-    ```groovy
+    ```groovy linenums="1"
     script:
     def output_prefix = "${sample_name}_processed"
     def output_file = "${output_prefix}.txt"
@@ -540,7 +540,7 @@ executor >  local (3)
 
 Let's examine `badpractice_syntax.nf` to see what the VSCode extension is warning about:
 
-```groovy title="badpractice_syntax.nf" hl_lines="3"
+```groovy title="badpractice_syntax.nf" hl_lines="3" linenums="1"
 #!/usr/bin/env nextflow
 
 input_ch = Channel.of('sample1', 'sample2', 'sample3')  # WARNING: Channel defined outside workflow
@@ -577,7 +577,7 @@ This won't prevent execution but could lead to confusion or unexpected behavior 
 
 Follow the VSCode extension's recommendation by moving the channel definition inside the workflow block:
 
-```groovy title="badpractice_syntax.nf (fixed)" hl_lines="21"
+```groovy title="badpractice_syntax.nf (fixed)" hl_lines="21" linenums="1"
 #!/usr/bin/env nextflow
 
 process PROCESS_FILES {
@@ -651,7 +651,7 @@ Process `PROCESS_FILES` declares 1 input channel but 2 were specified
 
 The error message clearly states that the process expects 1 input channel, but 2 were provided. Let's examine `bad_number_inputs.nf`:
 
-```groovy title="bad_number_inputs.nf" hl_lines="5 23"
+```groovy title="bad_number_inputs.nf" hl_lines="5 23" linenums="1"
 #!/usr/bin/env nextflow
 
 process PROCESS_FILES {
@@ -686,7 +686,7 @@ You should see the mismatched `PROCESS_FILES` call, supplying multiple input cha
 
 For this specific example, the process expects a single channel and doesn't require the second channel, so we can fix it by passing only the `samples_ch` channel:
 
-```groovy title="bad_number_inputs.nf (fixed)" hl_lines="23"
+```groovy title="bad_number_inputs.nf (fixed)" hl_lines="23" linenums="1"
 #!/usr/bin/env nextflow
 
 process PROCESS_FILES {
@@ -746,7 +746,7 @@ executor >  local (1)
 
 Let's examine `exhausted.nf` to see if that's right:
 
-```groovy title="exhausted.nf" hl_lines="23 24"
+```groovy title="exhausted.nf" hl_lines="23 24" linenums="1"
 #!/usr/bin/env nextflow
 
 process PROCESS_FILES {
@@ -788,7 +788,7 @@ There are a couple of ways to address this depending on how many files are affec
 
 1. Use `Channel.value()`:
 
-```groovy title="exhausted.nf (fixed - Option 1a)" hl_lines="2"
+```groovy title="exhausted.nf (fixed - Option 1a)" hl_lines="2" linenums="21"
 workflow {
     reference_ch = Channel.value('baseline_reference')  // Value channel can be reused
     input_ch = Channel.of('sample1', 'sample2', 'sample3')
@@ -799,7 +799,7 @@ workflow {
 
 2. Use the `first()` [operator](https://www.nextflow.io/docs/latest/reference/operator.html#first):
 
-```groovy title="exhausted.nf (fixed - Option 1b)" hl_lines="2"
+```groovy title="exhausted.nf (fixed - Option 1b)" hl_lines="2" linenums="21"
 workflow {
     reference_ch = Channel.of('baseline_reference').first()  // Convert to value channel
     input_ch = Channel.of('sample1', 'sample2', 'sample3')
@@ -810,7 +810,7 @@ workflow {
 
 3. Use the `collect()` [operator](https://www.nextflow.io/docs/latest/reference/operator.html#collect):
 
-```groovy title="exhausted.nf (fixed - Option 1c)" hl_lines="2"
+```groovy title="exhausted.nf (fixed - Option 1c)" hl_lines="2" linenums="21"
 workflow {
     reference_ch = Channel.of('baseline_reference').collect()  // Convert to value channel
     input_ch = Channel.of('sample1', 'sample2', 'sample3')
@@ -821,7 +821,7 @@ workflow {
 
 **Option 2**: In more complex scenarios, perhaps where you have multiple reference files for all samples in the sample channel, you can use the `combine` operator to create a new channel that combines the two channels into tuples:
 
-```groovy title="exhausted.nf (fixed - Option 2)" hl_lines="4"
+```groovy title="exhausted.nf (fixed - Option 2)" hl_lines="4" linenums="21"
 workflow {
     reference_ch = Channel.of('baseline_reference')
     input_ch = Channel.of('sample1', 'sample2', 'sample3')
@@ -1147,7 +1147,7 @@ For this example this would highlight to us that a `_output` suffix is being inc
 
 Fix the mismatch by making the output filename consistent:
 
-```groovy title="missing_output.nf (fixed)" hl_lines="6 10"
+```groovy title="missing_output.nf (fixed)" hl_lines="6 10" linenums="3"
 process PROCESS_FILES {
     input:
     val sample_name
@@ -1597,7 +1597,7 @@ This methodology combines all the tools we've covered into an efficient workflow
 
 To make this systematic approach even more efficient, you can create a dedicated debugging configuration that automatically enables all the tools you need:
 
-```groovy title="nextflow.config (debug profile)"
+```groovy title="nextflow.config (debug profile)" linenums="1"
 profiles {
     debug {
         process {
