@@ -673,6 +673,10 @@ workflow {
 }
 ```
 
+You should see the mismatched `PROCESS_FILES` call, supplying multiple input channels when the process only defines one. The VSCode extension will also under line process call in red, and supply a diagnostic message when you mouse over:
+
+![Incorrect number of args message](img/incorrect_num_args.png)
+
 #### Fix the code
 
 For this specific example, the process expects a single channel and doesn't require the second channel, so we can fix it by passing only the `samples_ch` channel:
