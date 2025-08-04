@@ -23,15 +23,9 @@ cd operators
 nextflow run .
 ```
 
-By default, the element being passed to the closure is given the default name `it`. However, it is recommended to name the variable explicitly:
+The code creates a workflow that emits the numbers 1 through 5 into a channel, applies the `map` operator to square each number, and then prints the results. This demonstrates how `map` transforms each element in a channel by applying a closure, producing a new channel with the squared values.
 
-```groovy linenums="1"
-workflow {
-    Channel.of( 1, 2, 3, 4, 5 )
-        .map { num -> num * num }
-        .view()
-}
-```
+The value passed into `map` is assigned to a variable using the `->` syntax (e.g., `num` in `{ num -> ... }`). This variable is local to the closure and used for any transformations inside it.
 
 Groovy is an optionally typed language, and it is possible to specify the type of the argument passed to the closure.
 
@@ -232,7 +226,7 @@ workflow {
     Channel.fromPath("data/samplesheet.csv")
         .splitCsv( header: true )
         .map { row -> [[id: row.id, repeat: row.repeat, type: row.type], [file(row.fastq1), file(row.fastq2)]] }
-        .branch { meta, reads ->
+        .branch { meta, _reads ->
             tumor: meta.type == "tumor"
             normal: meta.type == "normal"
         }
@@ -246,7 +240,7 @@ workflow {
 An element is only emitted to the first channel were the test condition is met. If an element does not meet any of the tests, it is not emitted to any of the output channels. You can 'catch' any such samples by specifying `true` as a condition. If we knew that all samples would be either tumor or normal and no third 'type', we could write
 
 ```groovy linenums="1"
-branch { meta, reads ->
+.branch { meta, reads ->
     tumor: meta.type == "tumor"
     normal: true
 }
@@ -255,7 +249,7 @@ branch { meta, reads ->
 We may want to emit a slightly different element than the one passed as input. The `branch` operator can (optionally) return a _new_ element to a channel. For example, to add an extra key in the meta map of the tumor samples, we add a new line under the condition and return our new element. In this example, we modify the first element of the `List` to be a new list that is the result of merging the existing meta map with a new map containing a single key:
 
 ```groovy linenums="1"
-branch { meta, reads ->
+.branch { meta, reads ->
     tumor: meta.type == "tumor"
         return [meta + [newKey: 'myValue'], reads]
     normal: true
@@ -271,7 +265,7 @@ branch { meta, reads ->
         There are many ways to accomplish this, but the map merging pattern introduced above can also be used to safely and concisely rename values in a map.
 
         ```groovy linenums="1"
-        branch { meta, reads ->
+        .branch { meta, reads ->
             tumor: meta.type == "tumor"
                 return [meta + [type: 'abnormal'], reads]
             normal: true
@@ -286,7 +280,7 @@ branch { meta, reads ->
 
 ### Multi-channel Objects
 
-Some Nextflow operators return objects that contain _multiple_ channels. The `multiMap` and `branch` operators are excellent examples. In most instances, the output is assigned to a variable and then addressed by name:
+Certain Nextflow operators, such as `multiMap` and `branch`, return special objects containing multiple named channels. These multi-channel objects allow you to split data into separate streams while maintaining the ability to reference each stream independently.
 
 ```groovy linenums="1"
 workflow {
@@ -300,23 +294,9 @@ workflow {
 }
 ```
 
-or by using the `set` operator ([documentation](https://www.nextflow.io/docs/latest/operator.html#set)):
+This creates two channels accessible through the `numbers` object: `small` containing the original values (1, 2, 3, 4, 5) and `large` containing the values multiplied by 10 (10, 20, 30, 40, 50).
 
-```groovy linenums="1"
-workflow {
-    Channel.of( 1, 2, 3, 4, 5 )
-        .multiMap { num ->
-            small: num
-            large: num * 10
-        }
-        .set { numbers }
-
-    numbers.small.view { num -> "Small: $num"}
-    numbers.large.view { num -> "Large: $num"}
-}
-```
-
-A more interesting situation occurs when given a process that takes multiple channels as input:
+When a process requires multiple input channels, Nextflow automatically synchronizes the values from these channels. Each channel provides values as separate input parameters, and Nextflow pairs them together for each process execution:
 
 ```groovy linenums="1"
 process MultiInput {
@@ -330,20 +310,31 @@ process MultiInput {
 }
 ```
 
-You can either provide the channels individually:
+The following will be kept synchronous, allowing you to supply multiple channel inputs to a process and keeping the order. This is the only place where order is guaranteed in Nextflow!
 
 ```groovy linenums="1"
 workflow {
-    Channel.of( 1, 2, 3, 4, 5 )
+    numbers = Channel.of( 1, 2, 3, 4, 5 )
         .multiMap { num ->
             small: num
             large: num * 10
         }
-        .set { numbers }
 
     MultiInput(numbers.small, numbers.large)
 }
 ```
+
+This workflow produces synchronized output:
+
+```console title="Multi-channel Input Output"
+small is 1 and big is 10
+small is 2 and big is 20
+small is 3 and big is 30
+small is 4 and big is 40
+small is 5 and big is 50
+```
+
+Multi-channel objects, created with `multiMap` or `branch`, let you split data streams while keeping named references. They allow related data to be processed in sync—Nextflow guarantees ordering only when multiple channels are used as process inputs.
 
 ## `groupTuple`
 
@@ -526,10 +517,15 @@ The input channel has two elements. For each element in the input channel, we re
 
         ```groovy
         workflow {
-            Channel.fromPath("data/datfiles/sample*/*.dat")
+            Channel.fromPath("data/datfiles/sample*/*.dat", checkIfExists: true)
                 .map { myfile -> [myfile.getParent().name, myfile] }
                 .groupTuple()
-                .flatMap { id, files -> files.collate(3).collect { chunk -> [id, chunk] } }
+                .flatMap { id, files ->
+                    files
+                        .collate(3)
+                        .collect { chunk -> [ id, chunk ]
+                    }
+                }
                 .view()
         }
         ```

@@ -17,15 +17,16 @@ workflow {
         .map { row ->
             def meta = [id:row.id, repeat:row.repeat, type:row.type]
             [
-              meta,
-              [
-                file(row.fastq1, checkIfExists: true),
-                file(row.fastq2, checkIfExists: true)
-              ]
+                meta,
+                [
+                    file(row.fastq1, checkIfExists: true),
+                    file(row.fastq2, checkIfExists: true)
+                ]
             ]
         }
         .view()
 }
+
 ```
 
 The first change we're going to make is to correct some repetitive code that we've seen quite a lot already in this workshop. The construction of the meta map from this row stutters quite a lot. We can make use of the [`subMap`](<https://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/Map.html#subMap(java.util.Collection)>) method available Maps to quickly return a new map constructed from the subset of an existing map:
@@ -172,7 +173,7 @@ Let's consider that we might now want to merge the repeats. We'll need to group 
 mapped_reads = MapReads( samples, reference )
     .map { meta, bam -> [meta.subMap('id', 'type'), bam]}
     .groupTuple()
-    .view()
+mapped_reads.view()
 ```
 
 This is easy enough, but the `groupTuple` operator has to wait until all items are emitted from the incoming queue before it is able to reassemble the output queue. If even one read mapping job takes a long time, the processing of all other samples is held up. We need a way of signalling to Nextflow how many items are in a given group so that items can be emitted as early as possible.
@@ -186,7 +187,7 @@ mapped_reads = MapReads( samples, reference )
         [key, bam]
     }
     .groupTuple()
-    .view()
+mapped_reads.view()
 ```
 
 !!! exercise
@@ -199,26 +200,31 @@ mapped_reads = MapReads( samples, reference )
         workflow {
             reference = Channel.fromPath("data/genome.fasta").first()
 
-            Channel.fromPath("data/samplesheet.csv")
+            samples = Channel.fromPath("data/samplesheet.csv")
                 .splitCsv( header:true )
                 .map { row ->
                     def meta = row.subMap('id', 'repeat', 'type')
-                    [meta, [file(row.fastq1, checkIfExists: true), file(row.fastq2, checkIfExists: true)]]
+                    [
+                      meta,
+                      [
+                        file(row.fastq1, checkIfExists: true),
+                        file(row.fastq2, checkIfExists: true)
+                      ]
+                    ]
                 }
                 .map { meta, reads -> [meta.subMap('id', 'type'), meta.repeat, reads] }
                 .groupTuple()
                 .map { meta, repeats, reads -> [meta + [repeatcount:repeats.size()], repeats, reads] }
                 .transpose()
                 .map { meta, repeat, reads -> [meta + [repeat:repeat], reads]}
-                .set { samples }
 
-            MapReads( samples, reference )
+            mapped_reads = MapReads( samples, reference )
                 .map { meta, bam ->
                     def key = groupKey(meta.subMap('id', 'type'), meta.repeatcount)
                     [key, bam]
                 }
                 .groupTuple()
-                .view()
+            mapped_reads.view()
         }
         ```
 
@@ -241,14 +247,14 @@ In our workflow:
 
 ```groovy linenums="1"
 mapped_reads = MapReads( samples, reference )
-grouped_reads = mapped_reads
     .map { meta, bam ->
         def key = groupKey(meta.subMap('id', 'type'), meta.repeatcount)
         [key, bam]
     }
     .groupTuple()
 
-CombineBams(grouped_reads)
+CombineBams(mapped_reads)
+  .view()
 ```
 
 ## Fanning out over intervals
@@ -258,16 +264,11 @@ The previous exercise demonstrated the fan-in approach using `groupTuple` and `g
 We can take an existing bed file, for example and turn it into a channel of Maps.
 
 ```groovy linenums="1"
-Channel.fromPath("data/intervals.bed")
+intervals = Channel.fromPath("data/intervals.bed")
     .splitCsv(header: ['chr', 'start', 'stop', 'name'], sep: '\t')
     .collectFile { entry -> ["${entry.name}.bed", entry*.value.join("\t")] }
     .view()
-    .set { intervals }
 ```
-
-!!! note "Quick return"
-
-    In the example above, I add a `return` statement for quick debugging. This ensures that all workflow operations after the `return` are not included in the process DAG.
 
 Given a dummy genotyping process:
 
@@ -294,7 +295,7 @@ mapped_reads = MapReads( samples, reference )
     }
     .groupTuple()
 
-combined_bams = CombineBams(grouped_reads)
+combined_bams = CombineBams(mapped_reads)
     .combine( intervals )
 
 genotyped_bams = GenotypeOnInterval(combined_bams)
@@ -326,7 +327,7 @@ mapped_reads = MapReads( samples, reference )
     }
     .groupTuple()
 
-combined_bams = CombineBams(grouped_reads)
+combined_bams = CombineBams(mapped_reads)
     .map { meta, bam -> [meta.subMap('id', 'type'), bam] }
     .combine( intervals )
 
@@ -344,7 +345,7 @@ mapped_reads = MapReads( samples, reference )
     }
     .groupTuple()
 
-combined_bams = CombineBams(grouped_reads)
+combined_bams = CombineBams(mapped_reads)
     .map { meta, bam -> [meta.subMap('id', 'type'), bam] }
     .combine( intervals )
 
@@ -353,7 +354,7 @@ genotyped_bams = GenotypeOnInterval(combined_bams)
     .groupTuple()
 
 merged_bams = MergeGenotyped(genotyped_bams)
-    .view()
+merged_bams.view()
 ```
 
 ## Publishing the bams
@@ -369,7 +370,7 @@ This will return us six bam files - a tumor and normal pair for each of the thre
 [[id:sampleC, type:tumor], merged.genotyped.vcf]
 ```
 
-If we would like to save the output of our `MergeGenotyped` process, we can "publish" the outputs of a process using the `publishDir` directive. We will cover this in more detail on day 2, but try modifying the `MergeGenotyped` process to include the directive:
+If we would like to save the output of our `MergeGenotyped` process, we can "publish" the outputs of a process using the `publishDir` directive. Try modifying the `MergeGenotyped` process to include the directive:
 
 ```groovy
 process MergeGenotyped {
@@ -387,6 +388,30 @@ process MergeGenotyped {
 ```
 
 This will publish all of the files in the `output` block of this process to the `results/genotyped` directory.
+
+!!! tip "Workflow outputs"
+
+    As of Nextflow 24.04 you can also manage result publication at the **workflow** level using the new `output { }` block. This allows you to publish files by pushing them from a channel instead of a process, similar to the channel operations we have been exploring in this workshop.
+
+    See the [Nextflow documentation](https://www.nextflow.io/docs/latest/workflow.html#workflow-outputs) for a full description.
+
+    ```groovy
+    nextflow.preview.output = true
+
+    workflow {
+        main:
+        merged_bams = MergeGenotyped(genotyped_bams)
+
+        publish:
+        results = merged_bams
+    }
+
+    output {
+        results {
+            path 'genotyped'
+        }
+    }
+    ```
 
 !!! exercise
 
@@ -430,4 +455,14 @@ This will publish all of the files in the `output` block of this process to the 
         }
         ```
 
-        We will cover this in more detail on day 2.
+        If you are using the new output syntax described above, you can edit the filename using the `path` directive:
+
+        ```groovy
+        output {
+            results {
+                path { meta, vcf ->
+                    "genotyped/${meta.id}.${meta.type}.genotyped.vcf"
+                }
+            }
+        }
+        ```

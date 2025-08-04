@@ -3,9 +3,13 @@ workflow {
         .splitCsv( header:true )
         .map { row ->
             def meta = [id:row.id, repeat:row.repeat, type:row.type]
-            [meta, [
-                file(row.fastq1, checkIfExists: true),
-                file(row.fastq2, checkIfExists: true)]]
+            [
+                meta,
+                [
+                    file(row.fastq1, checkIfExists: true),
+                    file(row.fastq2, checkIfExists: true)
+                ]
+            ]
         }
         .view()
 }

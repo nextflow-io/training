@@ -69,7 +69,7 @@ We can use the `tokenize` method to split our id. To sanity-check, I just pipe t
 workflow {
     Channel.fromFilePairs("data/reads/*/*_R{1,2}.fastq.gz")
         .map { id, reads ->
-            def tokens = id.tokenize("_")
+            id.tokenize("_")
         }
         .view()
 }
