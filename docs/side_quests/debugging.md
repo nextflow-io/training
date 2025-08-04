@@ -1209,63 +1209,233 @@ nextflow run workflow.nf -profile debug
 
 ### 4.7. Practical Debugging Exercise
 
-Now it's time to put the systematic debugging approach into practice. The workflow `buggy_workflow.nf` contains several common errors that represent the types of issues you'll encounter in real-world development. This exercise will help you experience how the three-phase debugging method works with actual problems.
+Now it's time to put the systematic debugging approach into practice. The workflow `buggy_workflow.nf` contains several common errors that represent the types of issues you'll encounter in real-world development.
 
-**Your mission**: Debug the workflow using the systematic approach and techniques from this guide. Here are the debugging strategies you can apply:
+!!! exercise
 
-**Start with a basic run** to see what fails first:
+    Use the systematic debugging approach to identify and fix all errors in `buggy_workflow.nf`. This workflow attempts to process sample data from a CSV file but contains multiple intentional bugs representing common debugging scenarios.
 
-```bash
-nextflow run buggy_workflow.nf
-```
+    Start by running the workflow to see the first error:
 
-**Generate debugging information** once you get past syntax errors:
+    ```bash
+    nextflow run buggy_workflow.nf
+    ```
 
-```bash
-nextflow run buggy_workflow.nf -profile debug
-```
+    Apply the three-phase debugging method you've learned:
 
-**Investigate work directories** for failed tasks using the hash from trace:
+    **Phase 1: Quick Assessment**
+    - Read error messages carefully
+    - Identify whether errors are syntax, runtime, or resource-related
+    - Use `-preview` mode to test basic logic
 
-```bash
-# Use the actual hash from your trace file
-ls -la work/[hash]*/
-cat work/[hash]*/.command.err
-cat work/[hash]*/.command.sh
-```
+    **Phase 2: Detailed Investigation**
+    - Examine work directories for failed tasks
+    - Add `.view()` operators to inspect channels
+    - Check log files in work directories
 
-**Test workflow logic** without worrying about command execution:
+    **Phase 3: Fix and Validate**
+    - Make targeted fixes
+    - Use `-resume` to test fixes efficiently
+    - Verify complete workflow execution
 
-```bash
-nextflow run buggy_workflow.nf -stub-run
-```
+    **Debugging Tools at Your Disposal:**
+    ```bash
+    # Preview mode for syntax checking
+    nextflow run buggy_workflow.nf -preview
 
-**Use resume** to test fixes without re-running successful tasks:
+    # Debug profile for detailed output
+    nextflow run buggy_workflow.nf -profile debug
 
-```bash
-nextflow run buggy_workflow.nf -resume
-```
+    # Stub running for logic testing
+    nextflow run buggy_workflow.nf -stub-run
 
-**Add channel debugging** if data flow seems problematic:
+    # Resume after fixes
+    nextflow run buggy_workflow.nf -resume
+    ```
 
-```groovy
-input_channel
-    .view { "Channel content: $it" }
-    .map { /* your operations */ }
-    .view { "After mapping: $it" }
-```
+    ??? solution
 
-**Try preview mode** to check workflow structure:
+        The `buggy_workflow.nf` contains 9 distinct errors covering all major debugging categories. Here's a systematic breakdown of each error and how to fix it:
 
-```bash
-nextflow run buggy_workflow.nf -preview
-```
+        **Error 1: Syntax Error - Trailing Comma**
+        ```groovy linenums="21"
+        output:
+            path "${sample_id}_result.txt",  // ERROR: Trailing comma
+        ```
+        **Fix:** Remove the trailing comma
+        ```groovy linenums="21"
+        output:
+            path "${sample_id}_result.txt"
+        ```
 
-**Expected Issues**: The workflow contains syntax errors, channel structure problems, process input/output mismatches, and missing output files. All should be familiar from the examples in this guide.
+        **Error 2: Syntax Error - Missing Closing Brace**
+        ```groovy linenums="24"
+        script:
+        """
+        echo "Processing: ${sample}"
+        cat ${input_file} > ${sample}_result.txt
+        """
+        // ERROR: Missing closing brace for processFiles process
+        ```
+        **Fix:** Add the missing closing brace
+        ```groovy linenums="29"
+        """
+        echo "Processing: ${sample_id}"
+        cat ${input_file} > ${sample_id}_result.txt
+        """
+        }  // Add missing closing brace
+        ```
 
-**Getting Stuck**: If you encounter an error type not covered in this guide, examine the error message location and type, then check the work directory for clues. Remember that Nextflow error messages usually point you toward the solution.
+        **Error 3: Variable Name Error**
+        ```groovy linenums="26"
+        echo "Processing: ${sample}"     // ERROR: should be sample_id
+        cat ${input_file} > ${sample}_result.txt  // ERROR: should be sample_id
+        ```
+        **Fix:** Use the correct input variable name
+        ```groovy linenums="26"
+        echo "Processing: ${sample_id}"
+        cat ${input_file} > ${sample_id}_result.txt
+        ```
 
-**Solution**: Once you've worked through the debugging process, you can compare your approach with the corrected version in `side-quests/solutions/development_best_practices/buggy_workflow.nf`.
+        **Error 4: Resource Configuration Error**
+        ```groovy linenums="36"
+        time '1 ms'  // ERROR: Unrealistic time limit
+        ```
+        **Fix:** Increase to a realistic time limit
+        ```groovy linenums="36"
+        time '100 s'
+        ```
+
+        **Error 5: Bash Variable Escaping Error**
+        ```groovy linenums="48"
+        echo "Heavy computation $i for ${sample_id}"  // ERROR: $i not escaped
+        ```
+        **Fix:** Escape the bash variable
+        ```groovy linenums="48"
+        echo "Heavy computation \${i} for ${sample_id}"
+        ```
+
+        **Error 6: Output File Name Mismatch**
+        ```groovy linenums="49"
+        done > ${sample_id}.txt  // ERROR: Wrong filename, should match output declaration
+        ```
+        **Fix:** Match the output declaration
+        ```groovy linenums="49"
+        done > ${sample_id}_heavy.txt
+        ```
+
+        **Error 7: Channel Structure Error - Wrong Map Output**
+        ```groovy linenums="83"
+        .map { row -> row.sample_id }  // ERROR: processFiles expects tuple
+        ```
+        **Fix:** Return the tuple structure that processFiles expects
+        ```groovy linenums="83"
+        .map { row -> [row.sample_id, file(row.fastq_path)] }
+        ```
+
+        **Error 8: Undefined Variable Error**
+        ```groovy linenums="87"
+        heavy_ch = heavyProcess(sample_ids)  // ERROR: sample_ids undefined
+        ```
+        **Fix:** Use the correct channel and extract sample IDs
+        ```groovy linenums="87"
+        heavy_ch = heavyProcess(input_ch.map { it[0] })
+        ```
+
+        **Error 9: Channel Content Structure Mismatch**
+        ```groovy linenums="85"
+        processed_ch = processFiles(input_ch)  // ERROR: input_ch now contains tuples
+        ```
+        This error is actually fixed by Error 7's solution - once the map produces the correct tuple structure, this line works correctly.
+
+        **Complete Corrected Workflow:**
+        ```groovy linenums="1"
+        #!/usr/bin/env nextflow
+
+        /*
+         * Corrected workflow for debugging exercises
+         */
+
+        params.input = 'data/sample_data.csv'
+        params.output = 'results'
+
+        process processFiles {
+            publishDir "${params.output}/processed", mode: 'copy'
+
+            input:
+            tuple val(sample_id), path(input_file)
+
+            output:
+            path "${sample_id}_result.txt"
+
+            script:
+            """
+            echo "Processing: ${sample_id}"
+            cat ${input_file} > ${sample_id}_result.txt
+            """
+        }
+
+        process heavyProcess {
+            publishDir "${params.output}/heavy", mode: 'copy'
+
+            time '100 s'
+
+            input:
+            val sample_id
+
+            output:
+            path "${sample_id}_heavy.txt"
+
+            script:
+            """
+            for i in {1..1000000}; do
+                echo "Heavy computation \${i} for ${sample_id}"
+            done > ${sample_id}_heavy.txt
+            """
+        }
+
+        process handleFiles {
+            publishDir "${params.output}/files", mode: 'copy'
+
+            input:
+            path input_file
+
+            output:
+            path "processed_${input_file}"
+
+            script:
+            """
+            if [ -f "${input_file}" ]; then
+                cp ${input_file} processed_${input_file}
+            fi
+            """
+        }
+
+        workflow {
+            input_ch = Channel
+                .fromPath(params.input)
+                .splitCsv(header: true)
+                .map { row -> [row.sample_id, file(row.fastq_path)] }
+
+            processed_ch = processFiles(input_ch)
+            heavy_ch = heavyProcess(input_ch.map { it[0] })
+
+            file_ch = Channel.fromPath("*.txt")
+            handleFiles(file_ch)
+        }
+        ```
+
+        **Error Categories Covered:**
+        - **Syntax errors**: Missing braces, trailing commas, undefined variables
+        - **Channel structure errors**: Wrong data shapes, undefined channels
+        - **Process errors**: Output file mismatches, variable escaping
+        - **Resource errors**: Unrealistic time limits
+
+        **Key Debugging Lessons:**
+        1. **Read error messages carefully** - they often point directly to the problem
+        2. **Use systematic approaches** - fix one error at a time and test with `-resume`
+        3. **Understand data flow** - channel structure errors are often the most subtle
+        4. **Check work directories** - when processes fail, the logs tell you exactly what went wrong
 
 ### Takeaway
 
