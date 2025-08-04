@@ -1370,11 +1370,13 @@ cat work/02/9604d49fb8200a74d737c72a6c98ed/.command.sh
 ```
 
 This reveals:
+
 - **Variable substitution**: Whether Nextflow variables were properly expanded
 - **File paths**: Whether input files were correctly located
 - **Command structure**: Whether the script syntax is correct
 
 Common issues to look for:
+
 - **Missing quotes**: Variables containing spaces need proper quoting
 - **Wrong file paths**: Input files that don't exist or are in wrong locations
 - **Incorrect variable names**: Typos in variable references
@@ -1390,6 +1392,7 @@ cat work/02/9604d49fb8200a74d737c72a6c98ed/.command.err
 ```
 
 This file will show:
+
 - **Exit codes**: 127 (command not found), 137 (killed), etc.
 - **Permission errors**: File access issues
 - **Software errors**: Application-specific error messages
@@ -1405,6 +1408,7 @@ cat work/02/9604d49fb8200a74d737c72a6c98ed/.command.out
 ```
 
 This helps verify:
+
 - **Expected output**: Whether the command produced the right results
 - **Partial execution**: Whether the command started but failed partway through
 - **Debug information**: Any diagnostic output from your script
@@ -1419,6 +1423,7 @@ cat work/*/*/.exitcode
 ```
 
 Common exit codes and their meanings:
+
 - **Exit code 127**: Command not found - check software installation
 - **Exit code 137**: Process killed - check memory/time limits
 
@@ -1432,6 +1437,7 @@ ls -la work/02/9604d49fb8200a74d737c72a6c98ed/
 ```
 
 This helps identify:
+
 - **File naming mismatches**: Output files with different names than expected
 - **Permission issues**: Files that couldn't be created
 - **Path problems**: Files created in wrong directories
@@ -2038,18 +2044,21 @@ Effective Nextflow debugging combines understanding error messages, using built-
 In this side quest, we've learned:
 
 1. **How to identify and fix syntax errors**:
+
    - Interpreting Nextflow error messages and locating problems
    - Common syntax errors: missing braces, incorrect keywords, undefined variables
    - Distinguishing between Nextflow (Groovy) and Bash variables
    - Using VS Code extension features for early error detection
 
 2. **How to debug channel structure issues**:
+
    - Understanding channel cardinality and exhaustion issues
    - Debugging channel content structure mismatches
    - Using `.view()` operators for channel inspection
    - Recognizing error patterns like square brackets in output
 
 3. **How to troubleshoot process execution problems**:
+
    - Diagnosing missing output file errors
    - Understanding exit codes (127 for missing software, 137 for memory issues)
    - Investigating work directories and command files
