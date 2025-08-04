@@ -1327,9 +1327,134 @@ nextflow run bad_resources.nf -profile docker
 
 If you make sure to read your error messages failures like this should not puzzle you for too long. But make sure you understand the resource requirements of the commands you are running so that you can configure your resource directives appropriately.
 
+### 3.4. Process Debugging Techniques
+
+When processes fail or behave unexpectedly, you need systematic techniques to investigate what went wrong. The work directory contains all the information you need to debug process execution.
+
+#### Using Work Directory Inspection
+
+The most powerful debugging tool for processes is examining the work directory. When a process fails, Nextflow creates a work directory for that specific process execution containing all the files needed to understand what happened.
+
+#### Run the pipeline
+
+Let's use the `missing_output.nf` example from earlier to demonstrate work directory inspection (re-generate an output naming mismatch if you need to):
+
+```bash
+nextflow run missing_output.nf
+```
+
+You'll see an error like this:
+
+```console title="Missing output error"
+  Missing output file(s) `sample2.txt` expected by process `PROCESS_FILES (2)`
+```
+
+#### Check the work directory
+
+When you get this error, the work directory contains all the debugging information. Find the work directory path from the error message and examine its contents:
+
+```bash
+# Find the work directory from the error message
+ls work/02/9604d49fb8200a74d737c72a6c98ed/
+```
+
+You can then examine the key files:
+
+##### Check the Command Script
+
+The `.command.sh` file shows exactly what command was executed:
+
+```bash
+# View the executed command
+cat work/02/9604d49fb8200a74d737c72a6c98ed/.command.sh
+```
+
+This reveals:
+- **Variable substitution**: Whether Nextflow variables were properly expanded
+- **File paths**: Whether input files were correctly located
+- **Command structure**: Whether the script syntax is correct
+
+Common issues to look for:
+- **Missing quotes**: Variables containing spaces need proper quoting
+- **Wrong file paths**: Input files that don't exist or are in wrong locations
+- **Incorrect variable names**: Typos in variable references
+- **Missing environment setup**: Commands that depend on specific environments
+
+##### Check Error Output
+
+The `.command.err` file contains the actual error messages:
+
+```bash
+# View error output
+cat work/02/9604d49fb8200a74d737c72a6c98ed/.command.err
+```
+
+This file will show:
+- **Exit codes**: 127 (command not found), 137 (killed), etc.
+- **Permission errors**: File access issues
+- **Software errors**: Application-specific error messages
+- **Resource errors**: Memory/time limit exceeded
+
+##### Check Standard Output
+
+The `.command.out` file shows what your command produced:
+
+```bash
+# View standard output
+cat work/02/9604d49fb8200a74d737c72a6c98ed/.command.out
+```
+
+This helps verify:
+- **Expected output**: Whether the command produced the right results
+- **Partial execution**: Whether the command started but failed partway through
+- **Debug information**: Any diagnostic output from your script
+
+##### Check the Exit Code
+
+The `.exitcode` file contains the exit code for the process:
+
+```bash
+# View exit code
+cat work/*/*/.exitcode
+```
+
+Common exit codes and their meanings:
+- **Exit code 127**: Command not found - check software installation
+- **Exit code 137**: Process killed - check memory/time limits
+
+##### Check File Existence
+
+When processes fail due to missing output files, check what files were actually created:
+
+```bash
+# List all files in the work directory
+ls -la work/02/9604d49fb8200a74d737c72a6c98ed/
+```
+
+This helps identify:
+- **File naming mismatches**: Output files with different names than expected
+- **Permission issues**: Files that couldn't be created
+- **Path problems**: Files created in wrong directories
+
+In our example earlier, this confirmed to us that while our expected `sample3.txt` wasn't present, `sample3_output.txt` was:
+
+```bash
+❯ ls -h work/02/9604d49fb8200a74d737c72a6c98ed
+sample3_output.txt
+```
+
+#### Systematic Process Debugging Approach
+
+1. **Check the error message** - it often points directly to the problem
+2. **Examine `.command.sh`** - verify the command structure and variables
+3. **Check `.command.err`** - understand the specific error
+4. **Verify file existence** - ensure inputs/outputs are where expected
+5. **Test the command manually** - run `.command.run` in the work directory
+6. **Check resource limits** - verify memory/time allocations are appropriate
+
 ### Takeaway
 
-Process structure errors often appear when processes run but don't produce expected results. Key issues include mismatched output file names, missing software dependencies (`exit code 127`), and inadequate resource allocations. These errors require examining work directories and understanding error codes to diagnose effectively.
+Process debugging requires systematic examination of work directories and understanding of error patterns. Key techniques include inspecting `.command.sh` for variable substitution issues, checking `.command.err` for specific error messages, and verifying file existence to identify naming mismatches. Exit codes like 127 (command not found) and 137 (process killed) provide immediate diagnostic clues.
 
 ### What's next?
 
@@ -1910,54 +2035,50 @@ Effective Nextflow debugging combines understanding error messages, using built-
 
 ## Summary
 
-In this debugging guide you've developed a comprehensive toolkit for troubleshooting Nextflow workflows. You've learned:
+In this side quest, we've learned:
 
-**Section 1: Syntax Error Debugging**
+1. **How to identify and fix syntax errors**:
+   - Interpreting Nextflow error messages and locating problems
+   - Common syntax errors: missing braces, incorrect keywords, undefined variables
+   - Distinguishing between Nextflow (Groovy) and Bash variables
+   - Using VS Code extension features for early error detection
 
-1. How to interpret Nextflow error messages and locate problems
-2. Common syntax errors: missing braces, incorrect keywords, undefined variables
-3. Distinguishing between Nextflow (Groovy) and Bash variables
-4. Using VS Code extension features for early error detection
+2. **How to debug channel structure issues**:
+   - Understanding channel cardinality and exhaustion issues
+   - Debugging channel content structure mismatches
+   - Using `.view()` operators for channel inspection
+   - Recognizing error patterns like square brackets in output
 
-**Section 2: Channel Structure Debugging**
+3. **How to troubleshoot process execution problems**:
+   - Diagnosing missing output file errors
+   - Understanding exit codes (127 for missing software, 137 for memory issues)
+   - Investigating work directories and command files
+   - Configuring resources appropriately
 
-1. Understanding channel cardinality and exhaustion issues
-2. Debugging channel content structure mismatches
-3. Using `.view()` operators for channel inspection
-4. Recognizing error patterns like square brackets in output
+4. **How to use Nextflow's built-in debugging tools**:
+   - Leveraging preview mode and real-time debugging
+   - Implementing stub running for logic testing
+   - Applying resume for efficient debugging cycles
+   - Following a four-phase systematic debugging methodology
 
-**Section 3: Process Structure Debugging**
+Debugging is a critical part of pipeline development that helps ensure:
 
-1. Diagnosing missing output file errors
-2. Understanding exit codes (127 for missing software, 137 for memory issues)
-3. Investigating work directories and command files
-4. Configuring resources appropriately
-
-**Section 4: Built-in Tools and Systematic Approaches**
-
-1. Using trace files, timeline reports, and execution reports
-2. Leveraging preview mode and real-time debugging
-3. Implementing stub running for logic testing
-4. Applying resume for efficient debugging cycles
-5. Following a four-phase systematic debugging methodology
-
-**Key Skills Acquired:**
-
-- Reading and interpreting error messages effectively
-- Using Nextflow's built-in debugging tools comprehensively
-- Following systematic approaches to isolate and fix issues
-- Understanding the relationship between workflow structure and runtime behavior
-- Developing efficient debug-fix-test cycles
+- Your code works as expected
+- Problems can be identified and fixed quickly
+- Workflows run reliably in different environments
+- Development time is spent efficiently
+- Issues are resolved systematically rather than through trial and error
 
 ### What's next?
 
-Apply these debugging skills in your own workflow development. The more you practice these techniques, the faster and more effective you'll become at identifying and resolving issues. Consider:
+Check out the [Nextflow documentation](https://www.nextflow.io/docs/latest/) for more advanced debugging features and best practices. You might want to:
 
-- **Building robust workflows** with built-in debugging from the start
-- **Contributing to the community** by sharing debugging solutions
-- **Developing testing strategies** to catch issues before they reach production using nf-test
-- **Mentoring others** using the systematic approaches you've learned
+- Add more comprehensive error handling to your workflows
+- Write tests for edge cases and error conditions using nf-test
+- Set up monitoring and logging for production workflows
+- Learn about other debugging tools like profiling and performance analysis
+- Explore more advanced debugging techniques for complex workflows
 
-Remember: effective debugging is a skill that improves with practice. The systematic methodology and comprehensive toolkit you've developed here will serve you well throughout your Nextflow development journey.
+Remember: Effective debugging is a skill that improves with practice. The systematic methodology and comprehensive toolkit you've developed here will serve you well throughout your Nextflow development journey.
 
 ---
