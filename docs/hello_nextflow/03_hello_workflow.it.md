@@ -5,9 +5,7 @@
 </div>
 
 /// caption
-:fontawesome-brands-youtube:{ .youtube } Guarda [tutta la playlist](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik) sul canale Youtube Nextflow.
-
-:green_book: La trascrizione di questo video è disponibile [qui](./transcripts/02_hello_channels.md).
+:fontawesome-brands-youtube:{ .youtube } Guarda [l'intera playlist sul canale Youtube di Nextflowl](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik).
 ///
 
 La maggior parte dei workflow nel mondo reale coinvolge più di un passaggio.

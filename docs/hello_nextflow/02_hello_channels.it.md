@@ -5,9 +5,7 @@
 </div>
 
 /// caption
-:fontawesome-brands-youtube:{ .youtube } Guarda [tutta la playlist](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik) sul canale Youtube Nextflow.
-
-:green_book: La trascrizione di questo video è disponibile [qui](./transcripts/02_hello_channels.md).
+:fontawesome-brands-youtube:{ .youtube } Vedi [l'intera playlist sul canale YouTube Nextflow](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik).
 ///
 
 Nella parte 1 di questo corso (Hello World), ti abbiamo mostrato come fornire un input variabile a un processo fornendo direttamente l'input nella chiamata di processo: `sayHello(params.greet)`.

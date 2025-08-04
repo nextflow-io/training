@@ -159,9 +159,6 @@ def check(
 
     With --fix flag, automatically corrects issues in the files.
     """
-    # Filter out files in transcripts directories
-    markdown_files = [f for f in markdown_files if "transcripts" not in f.parts]
-
     has_errors = False
     all_error_messages = []
     total_errors = 0

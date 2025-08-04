@@ -1,19 +1,34 @@
 # Obtenir de l'aide
 
+!!! warning
+
+    Some of the translations on the training portal are out of date.
+    The translated material may be incomplete or incorrect.
+    We plan to update the translations later this year.
+    In the meantime, please try to work through the English-language material if you can.
+
 ## Documentation Nextflow
 
-Nextflow dispose d'une excellente [documentation](https://nextflow.io/docs/latest/), qui constitue votre première ressource dès que vous rencontrez quelque chose que vous ne comprenez pas ou si vous souhaitez en savoir plus. Vous pouvez parcourir les différents sujets ou rechercher des termes spécifiques.
+Même les développeurs les plus compétents ont besoin de documentation.
+Nextflow n'est pas différent et dispose d'une excellente documentation.
+Vous pouvez trouver les documents de Nextflow à l'adresse suivante : <https://nextflow.io/docs/latest/> - nous vous recommandons de les garder ouverts dans un onglet pendant que vous suivez la formation !
 
-## Forum communautaire
+## Slack
 
-Si vous éprouvez des difficultés, n’hésitez pas à demander de l’aide. Notre formidable communauté est l’un des grands atouts de Nextflow !
+Si vous avez des difficultés avec la formation, n'hésitez pas à demander de l'aide.
+Notre formidable communauté est l'une des grandes forces de Nextflow !
 
-Le [forum communautaire de Seqera](https://community.seqera.io) est un excellent endroit pour poser des questions sur Nextflow. C’est aussi une très bonne ressource pour trouver des réponses à des questions qui ont déjà été posées !
+Il existe deux instances Slack :
 
-Si vous ne trouvez pas de solution à votre problème, connectez-vous simplement et cliquez sur le bouton « Nouveau sujet » pour publier votre question dans la catégorie [Ask for Help](https://community.seqera.io/c/help/37). N’hésitez pas à ajouter des tags que vous jugez pertinents, car ils peuvent aider notre équipe et vos pairs à repérer et à répondre plus facilement à votre question.
+- Nextflow ([register here](https://www.nextflow.io/slack-invite.html))
+- nf-core ([register here](https://nf-co.re/join/slack))
 
-## Support professionnel
+En général, le slack Nextflow est le meilleur car il s'adresse à l'ensemble de la communauté.
+La seule exception est si vous suivez la formation dans le cadre d'un atelier organisé par nf-core, auquel cas on vous aura indiqué où poser vos questions.
 
-Nextflow est un logiciel libre et open source développé par [Seqera](https://seqera.io/), une entreprise dont le siège est en Espagne et qui possède des bureaux secondaires au Royaume-Uni et aux États-Unis.
+## Demandez aux professionnels
 
-Seqera propose des services de support professionnel pour Nextflow et les produits associés, y compris des sessions de formation sur mesure. Si cela vous intéresse, n’hésitez pas à [nous contacter](https://seqera.io/demo/).
+Nextflow est un logiciel libre et gratuit, développé par [Seqera](https://seqera.io/).
+Seqera offre un service de support professionnel pour Nextflow et les produits associés, ainsi que des sessions de formation sur mesure.
+
+Si cela vous intéresse, veuillez [Prendre contact](https://seqera.io/demo/).

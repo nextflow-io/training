@@ -5,9 +5,7 @@
 </div>
 
 /// caption
-:fontawesome-brands-youtube:{ .youtube } Guarda [tutta la playlist](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik) sul canale Youtube Nextflow.
-
-:green_book: La trascrizione di questo video è disponibile [qui](./transcripts/04_hello_modules.md).
+:fontawesome-brands-youtube:{ .youtube } Guarda l [intera playlist sul canale YouTube Nextflow](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik).
 ///
 
 Nella parte 1-4 del corso di training, hai imparato come usare gli elementi di base di Nextflow per assemblare un semplice workflow capace di processare alcuni testi, a fare esecuzioni parallele se ci sono più input e collezionare i risultati per esecuzioni future.

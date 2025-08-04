@@ -5,17 +5,8 @@
 </div>
 
 /// caption
-:fontawesome-brands-youtube:{ .youtube } See [the whole playlist](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik) on the Nextflow YouTube channel.
-
-:green_book: The video transcript is available [here](./transcripts/00_orientation.md).
+:fontawesome-brands-youtube:{ .youtube } See the [whole playlist on the Nextflow YouTube channel](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik).
 ///
-
-!!! tip
-
-    The YouTube videos have some super powers!
-
-    - :fontawesome-solid-closed-captioning: High quality (manually curated) captions / subtitles. Switch them on with the :material-subtitles: icon
-    - :material-bookmark: Video chapters in the timeline that correspond to page headings.
 
 ## GitHub Codespaces
 

@@ -29,10 +29,9 @@ Otherwise, select a side quest from the menu below.
 ## Menu of Side Quests
 
 - [Introduction to nf-core](./nf-core.md)
-- [Sample-specific data](./metadata.md)
+- [Metadata](./metadata.md)
 - [Splitting and Grouping](./splitting_and_grouping.md)
 - [Testing with nf-test](./nf-test.md)
 - [Workflows of workflows](./workflows_of_workflows.md)
-- [Working with files](./working_with_files.md)
 
 Let us know what other domains and use cases you'd like to see covered here by posting in the [Training section](https://community.seqera.io/c/training/) of the community forum.

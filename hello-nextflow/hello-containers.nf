@@ -28,5 +28,5 @@ workflow {
     collectGreetings(convertToUpper.out.collect(), params.batch)
 
     // emit a message about the size of the batch
-    collectGreetings.out.count.view { num_greetings -> "There were $num_greetings greetings in this batch" }
+    collectGreetings.out.count.view { "There were $it greetings in this batch" }
 }
