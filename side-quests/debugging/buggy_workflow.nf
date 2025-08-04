@@ -64,7 +64,6 @@ process handleFiles {
 
     script:
     """
-    # BUG: Incorrect file handling - input_file might not exist
     if [ -f "${input_file}" ]; then
         cp ${input_file} processed_${input_file}
     fi
