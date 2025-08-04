@@ -442,7 +442,7 @@ Caused by:
 
 Let's examine `bad_bash_var.nf` to see what's causing the issue:
 
-```groovy title="bad_bash_var.nf" hl_line="11"
+```groovy title="bad_bash_var.nf" hl_lines="11"
 process PROCESS_FILES {
     input:
     val sample_name
