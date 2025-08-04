@@ -1234,13 +1234,11 @@ process PROCESS_FILES {
 
 #### Fix the code
 
-We've been a little disingenuous here, and there's actually nothing wrong with the code. We just need to specify the necessary configuration to run the process in such a way that it has access to the command in question. In this case the process has a container definition, so all we need to do is run the workflow with Docker enabled. We've set up a Docker profile for you in `nextflow.config`, so you can run the workflow with:
-
-```bash
-nextflow run missing_software.nf -profile docker
-```
+We've been a little disingenuous here, and there's actually nothing wrong with the code. We just need to specify the necessary configuration to run the process in such a way that it has access to the command in question. In this case the process has a container definition, so all we need to do is run the workflow with Docker enabled.
 
 #### Run the pipeline
+
+We've set up a Docker profile for you in `nextflow.config`, so you can run the workflow with:
 
 ```bash
 nextflow run missing_software.nf -profile docker
@@ -1359,7 +1357,7 @@ Sometimes you need to see what's happening inside running processes. You can ena
 
 #### Run the pipeline
 
-For example, `bad_channel_shape_viewed.nf` from our earlier examples printed channel content using `.view()`. We can also use the `debug` directive to echo variables from within the process itself, which we demonstrate in `bad_channel_shape_viewed_debug.nf`:
+`bad_channel_shape_viewed.nf` from our earlier examples printed channel content using `.view()`, but we can also use the `debug` directive to echo variables from within the process itself, which we demonstrate in `bad_channel_shape_viewed_debug.nf`. Run the workflow:
 
 ```bash
 nextflow run bad_channel_shape_viewed_debug.nf
@@ -1391,7 +1389,7 @@ Sample name inside process is sample3
 
 Let's examine `bad_channel_shape_viewed_debug.nf` to see how the `debug` directive works:
 
-```groovy title="bad_channel_shape_viewed_debug.nf"
+```groovy title="bad_channel_shape_viewed_debug.nf" linenums="3" hl_lines="2"
 process PROCESS_FILES {
     debug true  // Enable real-time output
 
@@ -1409,32 +1407,7 @@ process PROCESS_FILES {
 }
 ```
 
-#### Fix the code
-
-Essentially the content of standard out from the process is printed to the terminal in real-time, which can be very useful for debugging. You can also use the `echo` directive for more targeted debugging:
-
-```groovy title="bad_channel_shape_viewed_debug.nf (with echo)"
-process PROCESS_FILES {
-    echo true  // Alternative to debug for process output
-
-    input:
-    val sample_name
-
-    output:
-    path "${sample_name}_output.txt"
-
-    script:
-    """
-    echo "Processing ${sample_name}" > ${sample_name}_output.txt
-    """
-}
-```
-
-#### Run the pipeline
-
-```bash
-nextflow run bad_channel_shape_viewed_debug.nf
-```
+The `debug` directive can be a quick and convenient way to understand the environment of a process.
 
 ### 4.2. Preview Mode
 
@@ -1442,15 +1415,7 @@ Sometimes you want to catch problems before any processes run. Nextflow provides
 
 #### Run the pipeline
 
-The preview mode lets you test workflow logic without executing commands:
-
-```bash
-nextflow run workflow.nf -preview
-```
-
-This can be quite useful for quickly checking the structure of your workflow and ensuring that processes are connected correctly without running any actual commands.
-
-#### Check the code
+The preview mode lets you test workflow logic without executing commands. This can be quite useful for quickly checking the structure of your workflow and ensuring that processes are connected correctly without running any actual commands.
 
 For example, for our first syntax error from earlier:
 
@@ -1460,7 +1425,7 @@ nextflow run bad_syntax.nf -preview
 
 !!! note:
 
-If you fixed the file, reintroduce the syntax error by changing `input` to `inputs`
+    If you fixed the file, reintroduce the syntax error by changing `input` to `inputs` before you run the command
 
 You'll see output like this:
 
@@ -1482,37 +1447,61 @@ NOTE: If this is the beginning of a process or workflow, there may be a syntax e
  -- Check '.nextflow.log' file for details
 ```
 
-#### Fix the code
-
 Preview mode is particularly useful for catching syntax errors early without running any processes. It validates the workflow structure and process connections before execution.
-
-#### Run the pipeline
-
-```bash
-nextflow run workflow.nf -preview
-```
 
 ### 4.3. Stub Running for Logic Testing
 
-Sometimes you encounter errors that are difficult to debug because the real commands take too long to run, require special software, or fail for complex reasons. In these cases, stub running provides an elegant solution by letting you test workflow logic without executing the actual commands.
+Sometimes errors are difficult to debug because commands take too long, require special software, or fail for complex reasons. Stub running lets you test workflow logic without executing the actual commands.
 
 #### Run the pipeline
 
 When you're developing a Nextflow process, you can use the `stub` directive to define 'dummy' commands that generate outputs of the correct form without running the real command. This approach is particularly valuable when you want to verify that your workflow logic is correct before dealing with the complexities of the actual software.
 
-For example, remember our `missing_software.nf` from earlier? The one where we had missing software that prevented the workflow running until we added `-profile docker`? Well, we can amend that process definition like:
+For example, remember our `missing_software.nf` from earlier? The one where we had missing software that prevented the workflow running until we added `-profile docker`? `missing_software.nf` is a very similar workflow. If we run it in the same way, we will generate the same error:
 
 ```bash
-nextflow run -stub missing_software.nf
+nextflow run -stub missing_software_with_stub.nf
 ```
 
-This should run successfully even without Docker.
+```console title="Missing software error with stub" hl_lines="12 18"
+ERROR ~ Error executing process > 'PROCESS_FILES (3)'
+
+Caused by:
+  Process `PROCESS_FILES (3)` terminated with an error exit status (127)
+
+
+Command executed:
+
+  cowpy sample3 > sample3_output.txt
+
+Command exit status:
+  127
+
+Command output:
+  (empty)
+
+Command error:
+  .command.sh: line 2: cowpy: command not found
+
+Work dir:
+  /workspaces/training/side-quests/debugging/work/82/42a5bfb60c9c6ee63ebdbc2d51aa6e
+
+Tip: you can try to figure out what's wrong by changing to the process work dir and showing the script file named `.command.sh`
+
+ -- Check '.nextflow.log' file for details
+```
+
+However, this workflow will not produce errors if we run it with `-stub`, even without the `docker` profile:
+
+```bash
+nextflow run -stub missing_software_with_stub.nf
+```
 
 #### Check the code
 
-Let's examine how to add stub functionality to `missing_software.nf`:
+Let's examine `missing_software_with_stub.nf`:
 
-```groovy title="missing_software.nf (with stub)" hl_lines="17-19"
+```groovy title="missing_software.nf (with stub)" hl_lines="16-19" linenums="3"
 process PROCESS_FILES {
 
     container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
@@ -1535,11 +1524,9 @@ process PROCESS_FILES {
 }
 ```
 
-The `touch` command we're using here doesn't depend on any software or appropriate inputs, it's just a placeholder.
+Relative to `missing_software.nf`, this process has a `stub:` directive specifying a command to be used instead of the one specified in `script:`, in the even that that Nextflow is run in stub mode.
 
-#### Fix the code
-
-The stub command doesn't run Cowpy, it just creates an empty file, so everything will run fine, and we know that our workflow logic is written correctly.
+The `touch` command we're using here doesn't depend on any software or appropriate inputs, and will run in all situations, allowing us to debug workflow logic without worrying about the process internals.
 
 **Stub running helps debug:**
 
@@ -1547,12 +1534,6 @@ The stub command doesn't run Cowpy, it just creates an empty file, so everything
 - Process connections and dependencies
 - Parameter propagation
 - Workflow logic without software dependencies
-
-#### Run the pipeline
-
-```bash
-nextflow run -stub missing_software.nf
-```
 
 ### 4.4. Resume and Incremental Debugging
 
