@@ -1457,10 +1457,10 @@ Sometimes errors are difficult to debug because commands take too long, require 
 
 When you're developing a Nextflow process, you can use the `stub` directive to define 'dummy' commands that generate outputs of the correct form without running the real command. This approach is particularly valuable when you want to verify that your workflow logic is correct before dealing with the complexities of the actual software.
 
-For example, remember our `missing_software.nf` from earlier? The one where we had missing software that prevented the workflow running until we added `-profile docker`? `missing_software.nf` is a very similar workflow. If we run it in the same way, we will generate the same error:
+For example, remember our `missing_software.nf` from earlier? The one where we had missing software that prevented the workflow running until we added `-profile docker`? `missing_software_with_stub.nf` is a very similar workflow. If we run it in the same way, we will generate the same error:
 
 ```bash
-nextflow run -stub missing_software_with_stub.nf
+nextflow run missing_software_with_stub.nf
 ```
 
 ```console title="Missing software error with stub" hl_lines="12 18"
@@ -1491,10 +1491,10 @@ Tip: you can try to figure out what's wrong by changing to the process work dir 
  -- Check '.nextflow.log' file for details
 ```
 
-However, this workflow will not produce errors if we run it with `-stub`, even without the `docker` profile:
+However, this workflow will not produce errors if we run it with `-stub-run`, even without the `docker` profile:
 
 ```bash
-nextflow run -stub missing_software_with_stub.nf
+nextflow run missing_software_with_stub.nf -stub-run
 ```
 
 #### Check the code
@@ -1939,7 +1939,7 @@ In this debugging guide you've developed a comprehensive toolkit for troubleshoo
 2. Leveraging preview mode and real-time debugging
 3. Implementing stub running for logic testing
 4. Applying resume for efficient debugging cycles
-5. Following a three-phase systematic debugging methodology
+5. Following a four-phase systematic debugging methodology
 
 **Key Skills Acquired:**
 
