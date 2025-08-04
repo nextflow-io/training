@@ -1789,7 +1789,7 @@ Now it's time to put the systematic debugging approach into practice. The workfl
         ```
         **Fix:** Take the output from the previous process
         ```groovy linenums="88"
-       handleFiles(heavyProcess.out)
+        handleFiles(heavyProcess.out)
         ```
 
         With that, the whole workflow should run.

@@ -93,7 +93,6 @@ workflow {
     // Fixed: using the first element of the tuple as input
 
     // BUG: Incorrect channel usage
-    file_ch = input_ch.map { it[1] }
-    // Fixed: file channel assuming second element is a file path
-    handleFiles(file_ch)
+    // Fixed: take output from second process
+    handleFiles(heavyProcess.out)
 }
