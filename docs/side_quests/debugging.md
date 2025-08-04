@@ -1169,7 +1169,8 @@ nextflow run missing_output.nf
 
 ### 3.2. Missing software
 
-`missing_software.nf` is an example similar to the others we've encountered in this module. There are no syntax errors, and this time we're using the `cowpy` command.
+Another class of errors occurs due to mistakes in software provisioning. `missing_software.nf` is a syntactically valid workflow, but it depends on some external software to provide the `cowpy` command it uses.
+
 
 #### Run the pipeline
 
@@ -1179,7 +1180,7 @@ nextflow run missing_software.nf
 
 You will see an error like this:
 
-```console title="Missing software error"
+```console title="Missing software error" hl_lines="12 18"
 ERROR ~ Error executing process > 'PROCESS_FILES (3)'
 
 Caused by:
@@ -1207,11 +1208,13 @@ Tip: you can try to figure out what's wrong by changing to the process work dir 
  -- Check '.nextflow.log' file for details
 ```
 
+The process doesn't have access to the command we're specifying. Sometimes this is because a script is present in the workflow `bin` directory, but has not been made executable. Other times it is because the software is not installed in the container or environment where the workflow is running.
+
 #### Check the code
 
 Look out for that `127` exit code - it tells you exactly the problem. Let's examine `missing_software.nf`:
 
-```groovy title="missing_software.nf"
+```groovy title="missing_software.nf" linenums="3" hl_lines="3"
 process PROCESS_FILES {
 
     container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
@@ -1229,11 +1232,9 @@ process PROCESS_FILES {
 }
 ```
 
-Sometimes this is because a script is present in the workflow `bin` directory, but has not been made executable. Other times it is because the software is not installed in the container or environment where the workflow is running.
-
 #### Fix the code
 
-In this case the process has a container definition, so all we need to do is run the workflow with Docker enabled. We've set up a Docker profile for you in `nextflow.config`, so you can run the workflow with:
+We've been a little disingenuous here, and there's actually nothing wrong with the code. We just need to specify the necessary configuration to run the process in such a way that it has access to the command in question. In this case the process has a container definition, so all we need to do is run the workflow with Docker enabled. We've set up a Docker profile for you in `nextflow.config`, so you can run the workflow with:
 
 ```bash
 nextflow run missing_software.nf -profile docker
@@ -1276,7 +1277,7 @@ Process exceeded running time limit (1ms)
 
 Let's examine `bad_resources.nf`:
 
-```groovy title="bad_resources.nf"
+```groovy title="bad_resources.nf" linenums="3" hl_lines="3"
 process PROCESS_FILES {
 
     time '1 ms'  // ERROR: Unrealistic time limit
@@ -1295,11 +1296,13 @@ process PROCESS_FILES {
 }
 ```
 
+We know the process will take longer than a second (we've added a sleep in there to make sure), but the process is set to time out after 1 millisecond. Someone has been a little unrealistic with their configuration!
+
 #### Fix the code
 
 Increase the time limit to a realistic value:
 
-```groovy title="bad_resources.nf (fixed)" hl_lines="4"
+```groovy title="bad_resources.nf (fixed)" hl_lines="3" linenums="3"
 process PROCESS_FILES {
 
     time '100 s'  // Fixed: Realistic time limit
