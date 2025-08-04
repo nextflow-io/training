@@ -1029,7 +1029,7 @@ workflow {
 
 #### Fix the code
 
-To save you from using view operations excessively in future to understand channel content, it's advisable to add some comments to help:
+To save you from using `.view()` operations excessively in future to understand channel content, it's advisable to add some comments to help:
 
 ```groovy title="bad_channel_shape_viewed.nf (with comments)" linenums="16" hl_lines="8 9"
 workflow {
@@ -1066,13 +1066,11 @@ Learn about errors created by process definitions.
 
 ## 3. Process Structure Errors
 
-Process definitions are a relatively simple part of your Nextflow development, and many of your process-related errors will be unrelated to the Nextflow syntax itself.
-
-Similarly to the channel issues we just discussed, it's possible to make syntactically valid process definitions that will still fail at runtime. Here are some common examples.
+Most of the errors you encounter related to processes will related to mistakes you have made in forming the command, or to issues related to the underlying software. That said, similarly to the channel issues above, you can make mistakes in the process definition that don't quality as syntax errors, but which will cause errors at run time.
 
 ### 3.1. Missing Output Files
 
-Commonly when writing new Nextflow processes, the command appears to run, but then a 'Missing output file(s)" error is reported.
+One common error when writing processes is to do something that generates a mismatch between what the process expects and what is generated.
 
 #### Run the pipeline
 
@@ -1116,9 +1114,9 @@ Tip: when you have fixed the problem you can continue the execution adding the o
 
 #### Check the code
 
-The error message indicates that the process expected to produce an output file named `sample3.txt`, but the script actually creates `sample3_output.txt`. Let's examine `missing_output.nf`:
+The error message indicates that the process expected to produce an output file named `sample3.txt`, but the script actually creates `sample3_output.txt`. Let's examine the process definition in `missing_output.nf`:
 
-```groovy title="missing_output.nf"
+```groovy title="missing_output.nf" linenums=3 hl_lines="2 9"
 process PROCESS_FILES {
     input:
     val sample_name
@@ -1133,7 +1131,7 @@ process PROCESS_FILES {
 }
 ```
 
-This mismatch causes the process to fail. If you encounter this sort of error, go back and check that the outputs match between your process definition and your output block.
+You should see that there is a mismatch between the output file name in the `output:` block, and the one used in the script. This mismatch causes the process to fail. If you encounter this sort of error, go back and check that the outputs match between your process definition and your output block.
 
 If the problem still isn't clear, check the process directory itself to identify the actual output files created. You can do this by looking in the work directory for the process:
 
@@ -1142,11 +1140,13 @@ If the problem still isn't clear, check the process directory itself to identify
 sample3_output.txt
 ```
 
+For this example this would highlight to us that a `_output` suffix is being incorporated into the output file name, contrary to our `output:` definition.
+
 #### Fix the code
 
 Fix the mismatch by making the output filename consistent:
 
-```groovy title="missing_output.nf (fixed)" hl_lines="8,13"
+```groovy title="missing_output.nf (fixed)" hl_lines="6 10"
 process PROCESS_FILES {
     input:
     val sample_name
