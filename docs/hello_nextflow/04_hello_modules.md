@@ -5,7 +5,9 @@
 </div>
 
 /// caption
-:fontawesome-brands-youtube:{ .youtube } See the [whole playlist on the Nextflow YouTube channel](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik).
+:fontawesome-brands-youtube:{ .youtube } See [the whole playlist](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik) on the Nextflow YouTube channel.
+
+:green_book: The video transcript is available [here](./transcripts/04_hello_modules.md).
 ///
 
 This section covers how to organize your workflow code to make development and maintenance of your pipeline more efficient and sustainable.
@@ -37,7 +39,7 @@ nextflow run hello-modules.nf
 ```
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.10.0
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `hello-modules.nf` [festering_nobel] DSL2 - revision: eeca64cdb1
 
@@ -168,7 +170,7 @@ nextflow run hello-modules.nf -resume
 This runs quickly very quickly because everything is cached.
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 24.10.0
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `hello-modules.nf` [romantic_poisson] DSL2 - revision: 96edfa9ad3
 
@@ -265,7 +267,7 @@ nextflow run hello-modules.nf -resume
 This should still produce the same output as previously.
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 24.10.0
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `hello-modules.nf` [nauseous_heisenberg] DSL2 - revision: a04a9f2da0
 
@@ -357,7 +359,7 @@ nextflow run hello-modules.nf -resume
 This should still produce the same output as previously.
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 24.10.0
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `hello-modules.nf` [friendly_coulomb] DSL2 - revision: 7aa2b9bc0f
 

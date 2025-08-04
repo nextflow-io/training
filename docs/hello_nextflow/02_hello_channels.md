@@ -5,7 +5,9 @@
 </div>
 
 /// caption
-:fontawesome-brands-youtube:{ .youtube } See the [whole playlist on the Nextflow YouTube channel](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik).
+:fontawesome-brands-youtube:{ .youtube } See [the whole playlist](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik) on the Nextflow YouTube channel.
+
+:green_book: The video transcript is available [here](./transcripts/02_hello_channels.md).
 ///
 
 In Part 1 of this course (Hello World), we showed you how to provide a variable input to a process by providing the input in the process call directly: `sayHello(params.greeting)`.
@@ -35,7 +37,7 @@ nextflow run hello-channels.nf --greeting 'Hello Channels!'
 ```
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.10.0
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `hello-channels.nf` [insane_lichterman] DSL2 - revision: c33d41f479
 
@@ -149,7 +151,7 @@ nextflow run hello-channels.nf
 If you made both edits correctly, you should get another successful execution:
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 24.10.0
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `hello-channels.nf` [nice_heisenberg] DSL2 - revision: 41b4aeb7e9
 
@@ -219,7 +221,7 @@ nextflow run hello-channels.nf
 It certainly seems to run just fine:
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 24.10.0
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `hello-channels.nf` [suspicious_lamport] DSL2 - revision: 778deadaea
 
@@ -244,7 +246,7 @@ nextflow run hello-channels.nf -ansi-log false
 This time we see all three process runs and their associated work subdirectories listed in the output:
 
 ```console title="Output" linenums="1"
-N E X T F L O W  ~  version 24.10.0
+N E X T F L O W  ~  version 25.04.3
 Launching `hello-channels.nf` [pensive_poitras] DSL2 - revision: 778deadaea
 [76/f61695] Submitted process > sayHello (1)
 [6e/d12e35] Submitted process > sayHello (3)
@@ -354,7 +356,7 @@ nextflow run hello-channels.nf
 Reverting back to the summary view, the output looks like this again:
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 24.10.0
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `hello-channels.nf` [astonishing_bell] DSL2 - revision: f57ff44a69
 
@@ -478,7 +480,7 @@ nextflow run hello-channels.nf
 Oh no! Nextflow throws an error that starts like this:
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 24.10.0
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `hello-channels.nf` [friendly_koch] DSL2 - revision: 97256837a7
 
@@ -580,7 +582,7 @@ nextflow run hello-channels.nf
 This time it works AND gives us the additional insight into what the contents of the channel look like before and after we run the `flatten()` operator:
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 24.10.0
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `hello-channels.nf` [tiny_elion] DSL2 - revision: 1d834f23d2
 
@@ -697,7 +699,7 @@ nextflow run hello-channels.nf
 Oh no, it doesn't work. Here's the start of the console output and error message:
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 24.10.0
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `hello-channels.nf` [adoring_bhabha] DSL2 - revision: 8ce25edc39
 
@@ -764,7 +766,7 @@ nextflow run hello-channels.nf
 Interestingly, this fails too, but with a different error. The console output and error starts like this:
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 24.10.0
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `hello-channels.nf` [stoic_ride] DSL2 - revision: a0e5de507e
 
@@ -852,7 +854,7 @@ nextflow run hello-channels.nf
 This time it should run without error.
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 24.10.0
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `hello-channels.nf` [tiny_heisenberg] DSL2 - revision: 845b471427
 

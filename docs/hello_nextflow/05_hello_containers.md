@@ -5,7 +5,9 @@
 </div>
 
 /// caption
-:fontawesome-brands-youtube:{ .youtube } See the [whole playlist on the Nextflow YouTube channel](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik).
+:fontawesome-brands-youtube:{ .youtube } See [the whole playlist](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik) on the Nextflow YouTube channel.
+
+:green_book: The video transcript is available [here](./transcripts/05_hello_containers.md).
 ///
 
 In Parts 1-4 of this training course, you learned how to use the basic building blocks of Nextflow to assemble a simple workflow capable of processing some text, parallelizing execution if there were multiple inputs, and collecting the results for further processing.
@@ -38,7 +40,7 @@ nextflow run hello-containers.nf
 This should produce the following output:
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.10.0
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `hello-containers.nf` [tender_becquerel] DSL2 - revision: f7cat8e223
 
@@ -187,7 +189,7 @@ ls /
 ```
 
 ```console title="Output"
-bin    dev    etc    home   lib    media  mnt    opt    proc   root   run    sbin   srv    sys    tmp    usr    var
+bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
 ```
 
 You can see that the filesystem inside the container is different from the filesystem on your host system.
@@ -277,8 +279,8 @@ ls /data
 Depending on what part of this training you've done before, the output below my look slightly different.
 
 ```console title="Output"
-demo-params.json  hello-channels.nf  hello-workflow.nf  modules          results
-greetings.csv     hello-modules.nf   hello-world.nf     nextflow.config  work
+greetings.csv      hello-config.nf      hello-modules.nf   hello-world.nf  nextflow.config  solutions         work
+hello-channels.nf  hello-containers.nf  hello-workflow.nf  modules         results          test-params.json
 ```
 
 <!-- ls output may need to be updated -->
@@ -498,7 +500,7 @@ nextflow run hello-containers.nf -resume
 Oh no, there's an error!
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.10.0
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `hello-containers.nf` [special_lovelace] DSL2 - revision: 028a841db1
 
@@ -599,7 +601,7 @@ nextflow run hello-containers.nf -resume
 This time it does indeed work.
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 24.10.0
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `hello-containers.nf` [elegant_brattain] DSL2 - revision: 028a841db1
 

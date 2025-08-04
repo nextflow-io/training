@@ -5,7 +5,9 @@
 </div>
 
 /// caption
-:fontawesome-brands-youtube:{ .youtube } See the [whole playlist on the Nextflow YouTube channel](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik).
+:fontawesome-brands-youtube:{ .youtube } See [the whole playlist](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik) on the Nextflow YouTube channel.
+
+:green_book: The video transcript is available [here](./transcripts/03_hello_workflow.md).
 ///
 
 Most real-world workflows involve more than one step.
@@ -40,7 +42,7 @@ nextflow run hello-workflow.nf
 ```
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.10.0
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `hello-workflow.nf` [stupefied_sammet] DSL2 - revision: b9e466930b
 
@@ -197,7 +199,7 @@ nextflow run hello-workflow.nf -resume
 You should see the following output:
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 24.10.0
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `hello-workflow.nf` [disturbed_darwin] DSL2 - revision: 4e252c048f
 
@@ -420,7 +422,7 @@ nextflow run hello-workflow.nf -resume
 It runs successfully, including the third step:
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 24.10.0
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `hello-workflow.nf` [mad_gilbert] DSL2 - revision: 6acfd5e28d
 
@@ -511,7 +513,7 @@ nextflow run hello-workflow.nf -resume
 It runs successfully, although the log output may look a little messier than this (we cleaned it up for readability).
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 24.10.0
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `hello-workflow.nf` [soggy_franklin] DSL2 - revision: bc8e1b2726
 
@@ -691,7 +693,7 @@ nextflow run hello-workflow.nf -resume --batch trio
 It runs successfully:
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 24.10.0
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `hello-workflow.nf` [confident_rutherford] DSL2 - revision: bc58af409c
 
@@ -842,7 +844,7 @@ nextflow run hello-workflow.nf -resume --batch trio
 This runs successfully:
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 24.10.0
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `hello-workflow.nf` [evil_sinoussi] DSL2 - revision: eeca64cdb1
 
