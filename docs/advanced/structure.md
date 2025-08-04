@@ -5,6 +5,14 @@ description: Advanced Nextflow Training Workshop
 
 # Workflow Structure
 
+Nextflow includes a specific directory structure for workflows which can provide some features that can facilitate or enhance your code. In this section we will explore them.
+
+First, let's move into the right directory:
+
+```bash
+cd structure
+```
+
 There are three directories in a Nextflow workflow repository that have a special purpose:
 
 ## `./bin`
@@ -31,8 +39,8 @@ process PlotCars {
     container 'rocker/tidyverse:latest'
 
     output:
-    path("*.png"), emit: "plot"
-    path("*.tsv"), emit: "table"
+    path("*.png"), emit: plot
+    path("*.tsv"), emit: table
 
     script:
     """
@@ -48,7 +56,7 @@ workflow {
 }
 ```
 
-To do this, we can create the bin directory, write our R script into the directory. Finally, and crucially, we make the script executable:
+To do this, we can create the bin directory, write our R script into the directory. Finally, and crucially, we make the script executable. This is the code we used to create the `cars.R` script, no need to run it:
 
 ```bash linenums="1"
 mkdir -p bin
@@ -70,15 +78,7 @@ chmod +x bin/cars.R
 Let's run the script and see what Nextflow is doing for us behind the scenes:
 
 ```bash linenums="1"
-cat << EOF > nextflow.config
-profiles {
-    docker {
-        docker.enabled = true
-    }
-}
-EOF
-rm -r work
-nextflow run . -profile docker
+nextflow run .
 ```
 
 and then inspect the `.command.run` file that Nextflow has generated
