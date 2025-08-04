@@ -1524,7 +1524,7 @@ process PROCESS_FILES {
 }
 ```
 
-Relative to `missing_software.nf`, this process has a `stub:` directive specifying a command to be used instead of the one specified in `script:`, in the even that that Nextflow is run in stub mode.
+Relative to `missing_software.nf`, this process has a `stub:` directive specifying a command to be used instead of the one specified in `script:`, in the event that that Nextflow is run in stub mode.
 
 The `touch` command we're using here doesn't depend on any software or appropriate inputs, and will run in all situations, allowing us to debug workflow logic without worrying about the process internals.
 
@@ -1535,23 +1535,11 @@ The `touch` command we're using here doesn't depend on any software or appropria
 - Parameter propagation
 - Workflow logic without software dependencies
 
-### 4.4. Resume and Incremental Debugging
+### 4.4. Note on resume and Incremental Debugging
 
 Once you've identified a problem using the techniques above, you need an efficient way to test your fixes without wasting time re-running successful parts of your workflow. This is where Nextflow's resume functionality becomes invaluable for debugging.
 
-#### Run the pipeline
-
-The resume feature allows you to quickly iterate on fixes by only re-running failed or modified tasks:
-
-```bash
-# Initial run (fails at some point)
-nextflow run workflow.nf
-
-# Fix the issue in your code, then resume
-nextflow run workflow.nf -resume
-```
-
-#### Check the code
+You will have encountered `-resume` if you've worked through [Hello Nextflow](../hello_nextflow/), and it's important that you make good use of it when debugging to save yourself waiting while the proccesses before your problem process run.
 
 **Resume debugging strategy:**
 
@@ -1561,62 +1549,21 @@ nextflow run workflow.nf -resume
 4. Resume to test only the fix
 5. Repeat until workflow completes
 
-#### Fix the code
+### 4.5. Note on resource and Memory Debugging
 
-Resume is particularly powerful for iterative debugging because it only re-runs processes that have changed or failed, saving significant time during development.
-
-#### Run the pipeline
-
-```bash
-nextflow run workflow.nf -resume
-```
-
-### 4.5. Resource and Memory Debugging
-
-Not all workflow failures are due to syntax or logic errors. In production environments, many debugging challenges stem from the host system itself for example due to resource constraints - processes that run out of memory, exceed time limits, or compete for system resources. Understanding how to diagnose and fix these issues is crucial for reliable workflow execution.
-
-#### Run the pipeline
-
-Resource problems often manifest as specific exit codes that give you immediate clues about what went wrong:
-
-```bash
-# Example of resource-related failures
-nextflow run workflow.nf
-```
-
-#### Check the code
-
-Common resource-related exit codes:
+Not all workflow failures are due to syntax or logic errors. Many stem from system resource constraints - processes that run out of memory, exceed time limits, or compete for system resources. These resource problems often manifest as specific exit codes that give you immediate clues about what went wrong:
 
 - **Exit 130**: Process killed (often CTRL+C)
 - **Exit 137**: Process killed by system (usually out of memory)
 - **Exit 127**: Command not found
 
-Nextflow propagates errors thrown by the host system directly and logs them.
-
-#### Fix the code
-
-Nextflow is deliberately simple - it will submit tasks to the host machine or scheduler, which are executed there and transparently show any errors. Things go wrong within tools, syntax errors or invalid files. When a Nextflow pipeline fails, take a moment to check the error and see if it originates from _Nextflow_ or from the _tool_.
-
-#### Run the pipeline
-
-```bash
-nextflow run workflow.nf
-```
+When a Nextflow pipeline fails, check whether the error originates from Nextflow itself or from the underlying tool. Nextflow propagates host system errors directly, so exit codes and error messages from your processes will appear in the Nextflow output.
 
 ### 4.6. Systematic Debugging Approach
 
 Now that you've learned individual debugging techniques - from trace files and work directories to preview mode, stub running, and resource monitoring - let's tie them together into a systematic methodology. Having a structured approach prevents you from getting overwhelmed by complex errors and ensures you don't miss important clues.
 
-#### Run the pipeline
-
 This methodology combines all the tools we've covered into an efficient workflow:
-
-```bash
-nextflow run workflow.nf -profile debug
-```
-
-#### Check the code
 
 **Three-Phase Debugging Method:**
 
@@ -1638,7 +1585,7 @@ nextflow run workflow.nf -profile debug
 2. Test with resume: `nextflow run workflow.nf -resume`
 3. Verify complete workflow execution
 
-#### Fix the code
+#### Debugging Configuration Profile
 
 To make this systematic approach even more efficient, you can create a dedicated debugging configuration that automatically enables all the tools you need:
 
@@ -1646,7 +1593,6 @@ To make this systematic approach even more efficient, you can create a dedicated
 profiles {
     debug {
         process {
-            echo = true
             debug = true
             cleanup = false
 
@@ -1659,7 +1605,7 @@ profiles {
 }
 ```
 
-#### Run the pipeline
+Then you can run the pipeline with this profile enabled:
 
 ```bash
 nextflow run workflow.nf -profile debug
