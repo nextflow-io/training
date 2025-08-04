@@ -620,7 +620,7 @@ Learn to debug more complex channel structure errors that occur even when syntax
 
 ## 2. Channel Structure Errors
 
-Channel structure errors are more subtle than syntax errors because the code is syntactically correct, but the data shapes don't match what processes expect. Nextflow will try to run the pipeline, but might find that the number of files doesn't match what it expects and fail. These errors typically only appear at runtime and require an understanding of the data flowing through your workflow.
+Channel structure errors are more subtle than syntax errors because the code is syntactically correct, but the data shapes don't match what processes expect. Nextflow will try to run the pipeline, but might find that the number of inputs doesn't match what it expects and fail. These errors typically only appear at runtime and require an understanding of the data flowing through your workflow.
 
 ### 2.1. Wrong Number of Input Channels
 
@@ -635,18 +635,18 @@ nextflow run bad_number_inputs.nf
 ```console title="Wrong number of channels error"
  N E X T F L O W   ~  version 25.04.3
 
-Launching `bad_number_inputs.nf` [fabulous_kirch] DSL2 - revision: 177eb7aa24
+Launching `bad_number_inputs.nf` [high_mendel] DSL2 - revision: 955705c51b
 
 Process `PROCESS_FILES` declares 1 input channel but 2 were specified
 
- -- Check script 'bad_number_inputs.nf' at line: 22 or see '.nextflow.log' file for more details
+ -- Check script 'bad_number_inputs.nf' at line: 23 or see '.nextflow.log' file for more details
 ```
 
 #### Check the code
 
 The error message clearly states that the process expects 1 input channel, but 2 were provided. Let's examine `bad_number_inputs.nf`:
 
-```groovy title="bad_number_inputs.nf" hl_lines="5,20"
+```groovy title="bad_number_inputs.nf" hl_lines="5 23"
 #!/usr/bin/env nextflow
 
 process PROCESS_FILES {
