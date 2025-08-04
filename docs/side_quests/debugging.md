@@ -1672,8 +1672,9 @@ Now it's time to put the systematic debugging approach into practice. The workfl
     ```
 
     ??? solution
+        The `buggy_workflow.nf` contains 9 or 10 distinct errors (depending how you count) covering all major debugging categories. Here's a systematic breakdown of each error and how to fix it
 
-        The `buggy_workflow.nf` contains 9 distinct errors covering all major debugging categories. Here's a systematic breakdown of each error and how to fix it:
+        Let's start with those syntax errors:
 
         **Error 1: Syntax Error - Trailing Comma**
         ```groovy linenums="21"
@@ -1715,34 +1716,18 @@ Now it's time to put the systematic debugging approach into practice. The workfl
         cat ${input_file} > ${sample_id}_result.txt
         ```
 
-        **Error 4: Resource Configuration Error**
-        ```groovy linenums="36"
-        time '1 ms'  // ERROR: Unrealistic time limit
+        **Error 4: Undefined Variable Error**
+        ```groovy linenums="87"
+        heavy_ch = heavyProcess(sample_ids)  // ERROR: sample_ids undefined
         ```
-        **Fix:** Increase to a realistic time limit
-        ```groovy linenums="36"
-        time '100 s'
-        ```
-
-        **Error 5: Bash Variable Escaping Error**
-        ```groovy linenums="48"
-        echo "Heavy computation $i for ${sample_id}"  // ERROR: $i not escaped
-        ```
-        **Fix:** Escape the bash variable
-        ```groovy linenums="48"
-        echo "Heavy computation \${i} for ${sample_id}"
+        **Fix:** Use the correct channel and extract sample IDs
+        ```groovy linenums="87"
+        heavy_ch = heavyProcess(input_ch)
         ```
 
-        **Error 6: Output File Name Mismatch**
-        ```groovy linenums="49"
-        done > ${sample_id}.txt  // ERROR: Wrong filename, should match output declaration
-        ```
-        **Fix:** Match the output declaration
-        ```groovy linenums="49"
-        done > ${sample_id}_heavy.txt
-        ```
+        At this point the workflow will run, but we'll still be getting errors (e.g. `Path value cannot be null` in `processFiles`), caused by bad channel structure.
 
-        **Error 7: Channel Structure Error - Wrong Map Output**
+        **Error 5: Channel Structure Error - Wrong Map Output**
         ```groovy linenums="83"
         .map { row -> row.sample_id }  // ERROR: processFiles expects tuple
         ```
@@ -1751,40 +1736,88 @@ Now it's time to put the systematic debugging approach into practice. The workfl
         .map { row -> [row.sample_id, file(row.fastq_path)] }
         ```
 
-        **Error 8: Undefined Variable Error**
+        But this will break our for for running `heavyProcess()` above, so we'll need to use a map to pass just the sample IDs to that process:
+
+        **Error 6: Bad channel structure for heavyProcess**
         ```groovy linenums="87"
-        heavy_ch = heavyProcess(sample_ids)  // ERROR: sample_ids undefined
+        heavy_ch = heavyProcess(input_ch)  // ERROR: input_ch now has 2 elements per emission- heavyProcess only needs 1 (the first)
         ```
         **Fix:** Use the correct channel and extract sample IDs
         ```groovy linenums="87"
-        heavy_ch = heavyProcess(input_ch.map { it[0] })
+        heavy_ch = heavyProcess(input_ch.map{it[0]})
         ```
 
-        **Error 9: Channel Content Structure Mismatch**
-        ```groovy linenums="85"
-        processed_ch = processFiles(input_ch)  // ERROR: input_ch now contains tuples
+        Now we get a but further but receive an error about `No such variable: i`, because we didn't escape a Bash variable.
+
+        **Error 7: Bash Variable Escaping Error**
+        ```groovy linenums="48"
+        echo "Heavy computation $i for ${sample_id}"  // ERROR: $i not escaped
         ```
-        This error is actually fixed by Error 7's solution - once the map produces the correct tuple structure, this line works correctly.
+        **Fix:** Escape the bash variable
+        ```groovy linenums="48"
+        echo "Heavy computation \${i} for ${sample_id}"
+        ```
+
+        Now we get `Process exceeded running time limit (1ms)`, so we fix the run time limit for the relevant process:
+
+        **Error 8: Resource Configuration Error**
+        ```groovy linenums="36"
+        time '1 ms'  // ERROR: Unrealistic time limit
+        ```
+        **Fix:** Increase to a realistic time limit
+        ```groovy linenums="36"
+        time '100 s'
+        ```
+
+        Next we have a `Missing output file(s)` errror to resolve:
+
+        **Error 9: Output File Name Mismatch**
+        ```groovy linenums="49"
+        done > ${sample_id}.txt  // ERROR: Wrong filename, should match output declaration
+        ```
+        **Fix:** Match the output declaration
+        ```groovy linenums="49"
+        done > ${sample_id}_heavy.txt
+        ```
+
+        The first two processes ran, but not the third.
+
+        **Error 10: Output File Name Mismatch**
+        ```groovy linenums="88"
+        file_ch = Channel.fromPath("*.txt") // Error: attempting to take input from the pwd rather than a process
+        handleFiles(file_ch)
+        ```
+        **Fix:** Take the output from the previous process
+        ```groovy linenums="88"
+       handleFiles(heavyProcess.out)
+        ```
+
+        With that, the whole workflow should run.
 
         **Complete Corrected Workflow:**
         ```groovy linenums="1"
         #!/usr/bin/env nextflow
 
         /*
-         * Corrected workflow for debugging exercises
-         */
+        * Buggy workflow for debugging exercises
+        * This workflow contains several intentional bugs for learning purposes
+        */
 
+        // Parameters with missing validation
         params.input = 'data/sample_data.csv'
         params.output = 'results'
 
+        /*
+        * Process with input/output mismatch
+        */
         process processFiles {
             publishDir "${params.output}/processed", mode: 'copy'
 
             input:
-            tuple val(sample_id), path(input_file)
+                tuple val(sample_id), path(input_file)
 
             output:
-            path "${sample_id}_result.txt"
+                path "${sample_id}_result.txt"
 
             script:
             """
@@ -1793,33 +1826,40 @@ Now it's time to put the systematic debugging approach into practice. The workfl
             """
         }
 
+        /*
+        * Process with resource issues
+        */
         process heavyProcess {
             publishDir "${params.output}/heavy", mode: 'copy'
 
             time '100 s'
 
             input:
-            val sample_id
+                val sample_id
 
             output:
-            path "${sample_id}_heavy.txt"
+                path "${sample_id}_heavy.txt"
 
             script:
             """
+            # Simulate heavy computation
             for i in {1..1000000}; do
-                echo "Heavy computation \${i} for ${sample_id}"
+                echo "Heavy computation \$i for ${sample_id}"
             done > ${sample_id}_heavy.txt
             """
         }
 
+        /*
+        * Process with file handling issues
+        */
         process handleFiles {
             publishDir "${params.output}/files", mode: 'copy'
 
             input:
-            path input_file
+                path input_file
 
             output:
-            path "processed_${input_file}"
+                path "processed_${input_file}"
 
             script:
             """
@@ -1829,17 +1869,22 @@ Now it's time to put the systematic debugging approach into practice. The workfl
             """
         }
 
+        /*
+        * Main workflow with channel issues
+        */
         workflow {
+
+            // Channel with incorrect usage
             input_ch = Channel
                 .fromPath(params.input)
                 .splitCsv(header: true)
                 .map { row -> [row.sample_id, file(row.fastq_path)] }
 
             processed_ch = processFiles(input_ch)
-            heavy_ch = heavyProcess(input_ch.map { it[0] })
 
-            file_ch = Channel.fromPath("*.txt")
-            handleFiles(file_ch)
+            heavy_ch = heavyProcess(input_ch.map{it[0]})
+
+            handleFiles(heavyProcess.out)
         }
         ```
 
