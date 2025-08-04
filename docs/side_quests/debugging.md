@@ -140,7 +140,7 @@ NOTE: If this is the beginning of a process or workflow, there may be a syntax e
 
 Now, let's examine `bad_syntax.nf` to understand what's causing the error:
 
-```groovy title="bad_syntax.nf" hl_lines="14"
+```groovy title="bad_syntax.nf" hl_lines="14" linenums="1"
 #!/usr/bin/env nextflow
 
 process PROCESS_FILES {
@@ -180,7 +180,7 @@ For the purpose of this example we've left a comment for you to show where the e
 
 Replace the comment with the missing closing brace:
 
-```groovy title="bad_syntax.nf (fixed)" hl_lines="14"
+```groovy title="bad_syntax.nf (fixed)" hl_lines="14" linenums="1"
 #!/usr/bin/env nextflow
 
 process PROCESS_FILES {
@@ -247,7 +247,7 @@ ERROR ~ Script compilation error
 
 Let's examine `invalid_process.nf` to see what's wrong:
 
-```groovy title="invalid_process.nf" hl_lines="4"
+```groovy title="invalid_process.nf" hl_lines="4" linenums="1"
 #!/usr/bin/env nextflow
 
 process PROCESS_FILES {
@@ -281,7 +281,7 @@ The error message was quite straightforward - we're using `inputs` instead of th
 
 Replace the incorrect keyword with the correct one by referencing [the documentation](https://www.nextflow.io/docs/latest/process.html#):
 
-```groovy title="invalid_process.nf (fixed)" hl_lines="4"
+```groovy title="invalid_process.nf (fixed)" hl_lines="4" linenums="1"
 #!/usr/bin/env nextflow
 
 process PROCESS_FILES {
@@ -351,7 +351,7 @@ Tip: when you have fixed the problem you can continue the execution adding the o
 
 Let's examine `no_such_var.nf`:
 
-```groovy title="no_such_var.nf" hl_lines="17"
+```groovy title="no_such_var.nf" hl_lines="17" linenums="1"
 #!/usr/bin/env nextflow
 
 process PROCESS_FILES {
@@ -384,7 +384,7 @@ The error message indicates that the variable is not recognized in the script te
 
 If you get a 'No such variable' error, you can fix it by either defining the variable (by correcting input variable names or editing groovy code before the script), or by removing it from the script block if it's not needed:
 
-```groovy title="no_such_var.nf (fixed)" hl_lines="15-17"
+```groovy title="no_such_var.nf (fixed)" hl_lines="15-17" linenums="1"
 #!/usr/bin/env nextflow
 
 process PROCESS_FILES {
@@ -442,7 +442,9 @@ Caused by:
 
 Let's examine `bad_bash_var.nf` to see what's causing the issue:
 
-```groovy title="bad_bash_var.nf" hl_lines="11"
+```groovy title="bad_bash_var.nf" hl_lines="13" linenums="1"
+#!/usr/bin/env nextflow
+
 process PROCESS_FILES {
     input:
     val sample_name
@@ -464,7 +466,9 @@ In this example, we're defining the `prefix` variable in Bash, but in a Nexflow 
 
 If you want to use a Bash variable, you must escape the dollar sign like this:
 
-```groovy title="bad_bash_var.nf (fixed)" hl_lines="11"
+```groovy title="bad_bash_var.nf (fixed)" hl_lines="13" linenums="1"
+#!/usr/bin/env nextflow
+
 process PROCESS_FILES {
     input:
     val sample_name
@@ -886,7 +890,7 @@ Tip: when you have fixed the problem you can continue the execution adding the o
 
 The square brackets in the error message provide the clue here - the process is treating the tuple as a single value, which is not what we want. Let's examine `bad_channel_shape.nf`:
 
-```groovy title="bad_channel_shape.nf" hl_lines="5 20-22"
+```groovy title="bad_channel_shape.nf" hl_lines="5 20-22" linenums="16"
 #!/usr/bin/env nextflow
 
 process PROCESS_FILES {
@@ -975,19 +979,7 @@ nextflow run bad_channel_shape.nf
 
 #### Using `.view()` for Channel Inspection
 
-The most powerful debugging tool for channels is the `.view()` operator:
-
-```groovy
-    input_ch = Channel.of(
-        ['sample1', 'file1.txt'],
-        ['sample2', 'file2.txt']
-    )
-    .view { "Channel content: $it" }
-    .map { tuple -> tuple[0] }
-    .view { "After mapping: $it" }
-```
-
-With `.view()`, you can understand the shape of your channels at all stages to help with debugging.
+The most powerful debugging tool for channels is the `.view()` operator. With `.view()`, you can understand the shape of your channels at all stages to help with debugging.
 
 #### Run the pipeline
 
@@ -1002,10 +994,10 @@ You'll see output like this:
 ```console title="Channel debugging output"
  N E X T F L O W   ~  version 25.04.3
 
-Launching `bad_channel_shape_viewed.nf` [ecstatic_sinoussi] DSL2 - revision: b4f24dc9da
+Launching `bad_channel_shape_viewed.nf` [maniac_poisson] DSL2 - revision: b4f24dc9da
 
 executor >  local (3)
-[5f/5272c6] process > PROCESS_FILES (2) [100%] 3 of 3 ✔
+[c0/db76b3] PROCESS_FILES (3) [100%] 3 of 3 ✔
 Channel content: [sample1, file1.txt]
 Channel content: [sample2, file2.txt]
 Channel content: [sample3, file3.txt]
