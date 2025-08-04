@@ -420,7 +420,7 @@ nextflow run no_such_var.nf
 
 ### 1.4. Bad use of Bash variables
 
-Another form of the bad variable error appears when trying to use variables in the Bash content of the script block.
+Starting out in Nextflow, it can be difficult to understand the difference between Nextflow (Groovy) and Bash variables. This can generate another form of the bad variable error that appears when trying to use variables in the Bash content of the script block.
 
 #### Run the pipeline
 
@@ -458,7 +458,7 @@ process PROCESS_FILES {
 }
 ```
 
-Starting out in Nextflow, it can be difficult to understand the difference between Nextflow (Groovy) and Bash variables. In this example, we're defining the `prefix` variable in Bash, but the syntax we used to refer to it (`${prefix}`) is Groovy syntax, not Bash syntax. The variable doesn't exist in the Groovy context, so we get a 'no such variable' error.
+In this example, we're defining the `prefix` variable in Bash, but in a Nexflow process the `$` syntax we used to refer to it (`${prefix}`) is interpretes as a Groovy variable, not Bash. The variable doesn't exist in the Groovy context, so we get a 'no such variable' error.
 
 #### Fix the code
 
@@ -485,6 +485,8 @@ workflow {
 }
 ```
 
+This tells Nextflow to interpret this as a Bash variable.
+
 #### Run the pipeline
 
 Now run the workflow again to confirm it works:
@@ -510,7 +512,7 @@ nextflow run bad_bash_var.nf
 
 ### 1.5. Bad practice syntax errors when using the VSCode extension
 
-The Nextflow VSCode extension sometimes highlights issues that are not (yet) fatal errors in Nextflow. For example, you should always define your input channels within the workflow block, and the extension will highlight this as a potential issue.
+The Nextflow VSCode extension sometimes highlights issues that are not (yet) fatal errors in Nextflow. For example, it's currently possible to define processes outside of the `workflow {` block, but it's not good practice and the extension will highlight this as a potential issue.
 
 #### Run the pipeline
 
@@ -521,7 +523,7 @@ nextflow run badpractice_syntax.nf
 When you run this workflow, it will execute successfully:
 
 ```console title="Successful execution despite bad practice"
-N E X T F L O W   ~  version 24.10.2
+N E X T F L O W   ~  version 25.04.3
 
 Launching `badpractice_syntax.nf` [peaceful_euler] DSL2 - revision: 7b2c9a1d45
 
@@ -564,13 +566,13 @@ The VSCode extension will highlight the `input_ch` variable as being defined out
 
 ![Non-lethal syntax error](img/nonlethal.png)
 
-This is a bad practice syntax error that won't prevent execution but could lead to confusion or unexpected behavior in larger workflows.
+This won't prevent execution but could lead to confusion or unexpected behavior in larger workflows.
 
 #### Fix the code
 
 Follow the VSCode extension's recommendation by moving the channel definition inside the workflow block:
 
-```groovy title="badpractice_syntax.nf (fixed)" hl_lines="3-4,9"
+```groovy title="badpractice_syntax.nf (fixed)" hl_lines="3-4 9"
 #!/usr/bin/env nextflow
 
 process PROCESS_FILES {
@@ -631,7 +633,7 @@ nextflow run bad_number_inputs.nf
 ```
 
 ```console title="Wrong number of channels error"
- N E X T F L O W   ~  version 24.10.2
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `bad_number_inputs.nf` [fabulous_kirch] DSL2 - revision: 177eb7aa24
 
@@ -725,7 +727,7 @@ What do you see?
 When you run this workflow, it will execute without error, but it will only process the first sample:
 
 ```console title="Exhausted channel output"
- N E X T F L O W   ~  version 24.10.2
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `exhausted.nf` [magical_mayer] DSL2 - revision: 4ec9570696
 
@@ -849,7 +851,7 @@ nextflow run bad_channel_shape.nf
 You will see an error like this:
 
 ```console title="Channel structure error"
- N E X T F L O W   ~  version 24.10.2
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `bad_channel_shape.nf` [amazing_colden] DSL2 - revision: a2ad080712
 
@@ -988,7 +990,7 @@ nextflow run bad_channel_shape_viewed.nf
 You'll see output like this:
 
 ```console title="Channel debugging output"
- N E X T F L O W   ~  version 24.10.2
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `bad_channel_shape_viewed.nf` [ecstatic_sinoussi] DSL2 - revision: b4f24dc9da
 
@@ -1079,7 +1081,7 @@ nextflow run missing_output.nf
 You'll see an error like this:
 
 ```console title="Missing output files error"
- N E X T F L O W   ~  version 24.10.2
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `missing_output.nf` [zen_stone] DSL2 - revision: 37ff61f926
 
@@ -1361,8 +1363,7 @@ nextflow run bad_channel_shape_viewed_debug.nf
 You will see output like this:
 
 ```console title="Real-time process output"
- N E X T F L O W   ~  version 24.10.2
- N E X T F L O W   ~  version 24.10.2
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `bad_channel_shape_viewed_debug.nf` [agitated_crick] DSL2 - revision: ea3676d9ec
 
@@ -1459,7 +1460,7 @@ If you fixed the file, reintroduce the syntax error by changing `input` to `inpu
 You'll see output like this:
 
 ```console title="Preview mode output"
- N E X T F L O W   ~  version 24.10.2
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `bad_syntax.nf` [sick_fermi] DSL2 - revision: ca6327fad2
 
