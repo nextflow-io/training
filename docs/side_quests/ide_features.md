@@ -326,7 +326,7 @@ Now let's explore navigation in a more complex workflow using `complex_workflow.
 3. Use **Alt+←** (or **Ctrl+-**) to navigate back
 4. Navigate to the `FASTQC` process name in the workflow block. This links you directly to the process name (which is the same as the module file in this example, but could be part-way through a much larger file).
 5. Navigate back again
-6. Navigate to the TRIM_GALORE process in the workflow block. This is defined inline, so it won't take you to a separate file, but it will still show you the process definition, and you can still navigate back to where you were.
+6. Navigate to the `TRIM_GALORE` process in the workflow block. This is defined inline, so it won't take you to a separate file, but it will still show you the process definition, and you can still navigate back to where you were.
 
 ### 4.2. Symbol Navigation
 
