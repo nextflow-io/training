@@ -786,38 +786,38 @@ There are a couple of ways to address this depending on how many files are affec
 
 **Option 1**: You have a single reference file that you are re-using a lot. You can simply create a value channel type, which can be used over and over again. There are three ways to do this:
 
-**1.** Use `Channel.value()`:
+1. Use `Channel.value()`:
 
-```groovy title="exhausted.nf (fixed - Option 1a)" hl_lines="2" linenums="21"
-workflow {
-    reference_ch = Channel.value('baseline_reference')  // Value channel can be reused
-    input_ch = Channel.of('sample1', 'sample2', 'sample3')
+   ```groovy title="exhausted.nf (fixed - Option 1a)" hl_lines="2" linenums="21"
+   workflow {
+       reference_ch = Channel.value('baseline_reference')  // Value channel can be reused
+       input_ch = Channel.of('sample1', 'sample2', 'sample3')
 
-    PROCESS_FILES(reference_ch, input_ch)
-}
-```
+       PROCESS_FILES(reference_ch, input_ch)
+   }
+   ```
 
-**2.** Use the `first()` [operator](https://www.nextflow.io/docs/latest/reference/operator.html#first):
+2. Use the `first()` [operator](https://www.nextflow.io/docs/latest/reference/operator.html#first):
 
-```groovy title="exhausted.nf (fixed - Option 1b)" hl_lines="2" linenums="21"
-workflow {
-    reference_ch = Channel.of('baseline_reference').first()  // Convert to value channel
-    input_ch = Channel.of('sample1', 'sample2', 'sample3')
+   ```groovy title="exhausted.nf (fixed - Option 1b)" hl_lines="2" linenums="21"
+   workflow {
+       reference_ch = Channel.of('baseline_reference').first()  // Convert to value channel
+       input_ch = Channel.of('sample1', 'sample2', 'sample3')
 
-    PROCESS_FILES(reference_ch, input_ch)
-}
-```
+       PROCESS_FILES(reference_ch, input_ch)
+   }
+   ```
 
-**3.** Use the `collect()` [operator](https://www.nextflow.io/docs/latest/reference/operator.html#collect):
+3. Use the `collect()` [operator](https://www.nextflow.io/docs/latest/reference/operator.html#collect):
 
-```groovy title="exhausted.nf (fixed - Option 1c)" hl_lines="2" linenums="21"
-workflow {
-    reference_ch = Channel.of('baseline_reference').collect()  // Convert to value channel
-    input_ch = Channel.of('sample1', 'sample2', 'sample3')
+   ```groovy title="exhausted.nf (fixed - Option 1c)" hl_lines="2" linenums="21"
+   workflow {
+       reference_ch = Channel.of('baseline_reference').collect()  // Convert to value channel
+       input_ch = Channel.of('sample1', 'sample2', 'sample3')
 
-    PROCESS_FILES(reference_ch, input_ch)
-}
-```
+       PROCESS_FILES(reference_ch, input_ch)
+   }
+   ```
 
 **Option 2**: In more complex scenarios, perhaps where you have multiple reference files for all samples in the sample channel, you can use the `combine` operator to create a new channel that combines the two channels into tuples:
 
@@ -2044,33 +2044,33 @@ Effective Nextflow debugging combines understanding error messages, using built-
 
 In this side quest, we've learned:
 
-**How to identify and fix syntax errors**:
+1. **How to identify and fix syntax errors**:
 
-- Interpreting Nextflow error messages and locating problems
-- Common syntax errors: missing braces, incorrect keywords, undefined variables
-- Distinguishing between Nextflow (Groovy) and Bash variables
-- Using VS Code extension features for early error detection
+   - Interpreting Nextflow error messages and locating problems
+   - Common syntax errors: missing braces, incorrect keywords, undefined variables
+   - Distinguishing between Nextflow (Groovy) and Bash variables
+   - Using VS Code extension features for early error detection
 
-**How to debug channel structure issues**:
+2. **How to debug channel structure issues**:
 
-- Understanding channel cardinality and exhaustion issues
-- Debugging channel content structure mismatches
-- Using `.view()` operators for channel inspection
-- Recognizing error patterns like square brackets in output
+   - Understanding channel cardinality and exhaustion issues
+   - Debugging channel content structure mismatches
+   - Using `.view()` operators for channel inspection
+   - Recognizing error patterns like square brackets in output
 
-**How to troubleshoot process execution problems**:
+3. **How to troubleshoot process execution problems**:
 
-- Diagnosing missing output file errors
-- Understanding exit codes (127 for missing software, 137 for memory issues)
-- Investigating work directories and command files
-- Configuring resources appropriately
+   - Diagnosing missing output file errors
+   - Understanding exit codes (127 for missing software, 137 for memory issues)
+   - Investigating work directories and command files
+   - Configuring resources appropriately
 
-**How to use Nextflow's built-in debugging tools**:
+4. **How to use Nextflow's built-in debugging tools**:
 
-- Leveraging preview mode and real-time debugging
-- Implementing stub running for logic testing
-- Applying resume for efficient debugging cycles
-- Following a four-phase systematic debugging methodology
+   - Leveraging preview mode and real-time debugging
+   - Implementing stub running for logic testing
+   - Applying resume for efficient debugging cycles
+   - Following a four-phase systematic debugging methodology
 
 Debugging is a critical part of pipeline development that helps ensure:
 
