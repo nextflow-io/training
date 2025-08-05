@@ -57,6 +57,7 @@ nav:
       - side_quests/ide_features.md
       - side_quests/workflows_of_workflows.md
       - side_quests/splitting_and_grouping.md
+      - side_quests/debugging.md
       - side_quests/nf-test.md
       - side_quests/nf-core.md
   - Fundamentals Training:
