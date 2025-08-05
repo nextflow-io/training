@@ -910,6 +910,78 @@ This pattern of keeping metadata explicit and attached to the data (rather than 
 
 ---
 
+## 6. Using remote files
+
+One of the key features of Nextflow is the ability to transparently switch between local files (on the same machine) to remote files accessible over the internet. To do this, all you need to do as a user is switch the file path from a normal file path (e.g. `/path/to/data`) to a file path with a remote protocol at the start. For example, replacing `/path/to/data` with `s3://path/to/data` will switch to using the S3 protocol. Many different protocols are supported:
+
+- HTTP(S)/FTP (http://, https://, ftp://)
+- Amazon S3 (s3://)
+- Azure Blob Storage (az://)
+- Google Cloud Storage (gs://)
+
+To use these, simply replace the string and Nextflow will handle authentication and staging the files to the right place, downloading or uploading and all other file operations you would expect. We call this string the Uniform Resource Identifier (URI).
+
+The key strength of this is we can switch between environments without changing any pipeline logic. For example, you can develop with a small, local test set before moving to a remote set of data by changing the URI.
+
+### 6.1 Using a file from the internet
+
+!!! warning
+Accessing remote data requires an internet connection!
+
+In your workflow, replace the string path with an HTTPS one to download this file from the internet. We are going to swap the relative path of the FASTQ files with the remote one stored on the internet. This is the same data as we have been previously using.
+
+=== "After"
+
+    ```groovy title="main.nf" linenums="27"
+    ch_fastq = Channel.fromFilePairs('https://github.com/nextflow-io/training/blob/bb187e3bfdf4eec2c53b3b08d2b60fdd7003b763/side-quests/working_with_files/data/sampleA_rep1_normal_R1_001.fastq.gz')
+
+    ```
+
+=== "Before"
+
+    ```groovy title="main.nf" linenums="27"
+    ch_fastq = Channel.fromFilePairs('data/*_R{1,2}_001.fastq.gz')
+    ```
+
+!!! note
+HTTPS remote data does not accept globs because HTTPS cannot list multiple files, however other storage protocols such as blob storage (`s3://`, `az://`, `gs://`) can. This means we have to use a single read (R1) but the example will still work!
+
+Run the pipeline and it will automatically pull the data from the Github.
+
+```bash
+nextflow run main.nf
+```
+
+```console title="Remote data"
+ N E X T F L O W   ~  version 24.10.5
+
+Launching `./main.nf` [insane_swartz] DSL2 - revision: fff18abe6d
+[32/06750a] process > ANALYZE_READS (sampleC) [100%] 1 of 1 ✔
+```
+
+In this example very little has changed! This shows how easy it is to switch between local and remote data using Nextflow.
+
+To see the difference, check the working directory located at the hash value of the process. In the example above, it will be located at `./work/32/06750a...`:
+
+```console title="Working directory"
+>  tree work/32/06750a7bffe2ed642d0e2e0c66a1e5
+work/32/06750a7bffe2ed642d0e2e0c66a1e5
+├── sampleA_rep1_normal_R1_001.fastq.gz -> /workspaces/training/side-quests/working_with_files/work/stage-3db20ad3-3083-407a-b796-b3a415711c02/a9/c7081f2633e48d6d85b13560441e98/sampleA_rep1_normal_R1_001.fastq.gz
+└── sampleA_stats.txt
+```
+
+The file has been downloaded to staging directory located within the work directory, then symlinked into the relevant process directory. If the file was used again, Nextflow would only download it once. If process only had access to a specific working directory, it would be able to access the data fine.
+
+In this way, you can replace local with remote data without changing any pipeline logic.
+
+### Takeaway
+
+- Remote data is accessed using a URI
+- Nextflow will automatically download and stage the data to the right place
+- Do not write logic to download or upload remote files!
+
+---
+
 ## Summary
 
 In this side quest, you've learned how to work with files in Nextflow, from basic operations to more advanced techniques for handling collections of files. Here's a summary of what we covered:
@@ -923,6 +995,8 @@ In this side quest, you've learned how to work with files in Nextflow, from basi
 4. **Simplifying with Channel.fromFilePairs**: We used `Channel.fromFilePairs()` to automatically pair files with a common prefix and use it in our workflow.
 
 5. **Using File Operations in Processes**: We used `publishDir` to organize outputs based on sample metadata and `tuple` to pass metadata alongside data in our workflow.
+
+6. **Using remote files**: We used a remote URI to access data from the internet without changing any pipeline code.
 
 These techniques will help you build more efficient and maintainable workflows, especially when working with large numbers of files with complex naming conventions.
 
@@ -964,6 +1038,28 @@ These techniques will help you build more efficient and maintainable workflows, 
   def replicate = name[1].replace('rep', '')
   def type = name[2]
   def readNum = name[3]
+  ```
+
+- **Using remote files**
+
+  ```groovy
+  // Use a local file
+  myFile = file('path/to/file.txt')
+
+  // Use a file on FTP
+  myFile = file('ftp://path/to/file.txt')
+
+  // Use a file on HTTPS
+  myFile = file('https://path/to/file.txt')
+
+  // Use a file on S3
+  myFile = file('s3://path/to/file.txt')
+
+  // Use a file on Azure Blob Storage
+  myFile = file('az://path/to/file.txt')
+
+  // Use a file on Google Cloud Storage
+  myFile = file('gs://path/to/file.txt')
   ```
 
 ## Resources
