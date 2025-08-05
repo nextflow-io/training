@@ -2044,32 +2044,33 @@ Effective Nextflow debugging combines understanding error messages, using built-
 
 In this side quest, we've learned:
 
-1. **How to identify and fix syntax errors**:
+**How to identify and fix syntax errors**:
 
-   - Interpreting Nextflow error messages and locating problems
-   - Common syntax errors: missing braces, incorrect keywords, undefined variables
-   - Distinguishing between Nextflow (Groovy) and Bash variables
-   - Using VS Code extension features for early error detection
+- Interpreting Nextflow error messages and locating problems
+- Common syntax errors: missing braces, incorrect keywords, undefined variables
+- Distinguishing between Nextflow (Groovy) and Bash variables
+- Using VS Code extension features for early error detection
 
-2. **How to debug channel structure issues**:
+**How to debug channel structure issues**:
 
-   - Understanding channel cardinality and exhaustion issues
-   - Debugging channel content structure mismatches
-   - Using `.view()` operators for channel inspection
-   - Recognizing error patterns like square brackets in output
+- Understanding channel cardinality and exhaustion issues
+- Debugging channel content structure mismatches
+- Using `.view()` operators for channel inspection
+- Recognizing error patterns like square brackets in output
 
-3. **How to troubleshoot process execution problems**:
+**How to troubleshoot process execution problems**:
 
-   - Diagnosing missing output file errors
-   - Understanding exit codes (127 for missing software, 137 for memory issues)
-   - Investigating work directories and command files
-   - Configuring resources appropriately
+- Diagnosing missing output file errors
+- Understanding exit codes (127 for missing software, 137 for memory issues)
+- Investigating work directories and command files
+- Configuring resources appropriately
 
-4. **How to use Nextflow's built-in debugging tools**:
-   - Leveraging preview mode and real-time debugging
-   - Implementing stub running for logic testing
-   - Applying resume for efficient debugging cycles
-   - Following a four-phase systematic debugging methodology
+**How to use Nextflow's built-in debugging tools**:
+
+- Leveraging preview mode and real-time debugging
+- Implementing stub running for logic testing
+- Applying resume for efficient debugging cycles
+- Following a four-phase systematic debugging methodology
 
 Debugging is a critical part of pipeline development that helps ensure:
 
