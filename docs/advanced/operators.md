@@ -598,7 +598,7 @@ Amy
 
 By default, the collected file is written into the work directory, which makes it suitable for input into a downstream process. If the collected file is an output of the workflow instead of an intermediate, it can be written to a directory of your choosing using the `storeDir` argument:
 
-```groovy
+```groovy hl_lines="3"
 characters
     .map { it.name }
     .collectFile(name: 'characters.txt', newLine: true, storeDir: 'results')
