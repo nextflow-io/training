@@ -29,7 +29,7 @@ The value passed into `map` is assigned to a variable using the `->` syntax (e.g
 
 Groovy is an optionally typed language, and it is possible to specify the type of the argument passed to the closure.
 
-```groovy linenums="1"
+```groovy linenums="1" hl_lines="3"
 workflow {
     Channel.of( 1, 2, 3, 4, 5 )
         .map { Integer num -> num * num }
