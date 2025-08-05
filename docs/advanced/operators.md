@@ -575,7 +575,7 @@ RaymondTerryNormRosaCharlesJakeGinaMichaelAmy
 
 We can supply arguments `name` and `newLine` to the `collectFile` operator to return a file with a more informative name and newlines separating each entry:
 
-```groovy
+```groovy hl_lines="3"
 characters
     .map { it.name }
     .collectFile(name: 'people.txt', newLine: true)
