@@ -786,7 +786,7 @@ There are a couple of ways to address this depending on how many files are affec
 
 **Option 1**: You have a single reference file that you are re-using a lot. You can simply create a value channel type, which can be used over and over again. There are three ways to do this:
 
-1. Use `Channel.value()`:
+**1.** Use `Channel.value()`:
 
 ```groovy title="exhausted.nf (fixed - Option 1a)" hl_lines="2" linenums="21"
 workflow {
@@ -797,7 +797,7 @@ workflow {
 }
 ```
 
-2. Use the `first()` [operator](https://www.nextflow.io/docs/latest/reference/operator.html#first):
+**2.** Use the `first()` [operator](https://www.nextflow.io/docs/latest/reference/operator.html#first):
 
 ```groovy title="exhausted.nf (fixed - Option 1b)" hl_lines="2" linenums="21"
 workflow {
@@ -808,7 +808,7 @@ workflow {
 }
 ```
 
-3. Use the `collect()` [operator](https://www.nextflow.io/docs/latest/reference/operator.html#collect):
+**3.** Use the `collect()` [operator](https://www.nextflow.io/docs/latest/reference/operator.html#collect):
 
 ```groovy title="exhausted.nf (fixed - Option 1c)" hl_lines="2" linenums="21"
 workflow {
