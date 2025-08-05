@@ -1,4 +1,4 @@
-# Debugging Nextflow Workflows
+# Debugging Workflows
 
 Debugging is a critical skill that can save you hours of frustration and help you become a more effective Nextflow developer. Throughout your career, especially when you're starting out, you'll encounter bugs while building and maintaining your workflows. Learning systematic debugging approaches will help you identify and resolve issues quickly.
 
