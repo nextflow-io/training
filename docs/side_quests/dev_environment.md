@@ -1,4 +1,4 @@
-# Nextflow Development Environment Walkthrough
+# Development Environment
 
 Modern Integrated Development Environments (IDEs) can dramatically transform your Nextflow development experience. This side quest focuses specifically on leveraging VS Code and its Nextflow extension to write code faster, catch errors early, and navigate complex workflows efficiently.
 
