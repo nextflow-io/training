@@ -9,6 +9,13 @@ nav:
       - envsetup/index.md
       - envsetup/01_setup.md
       - envsetup/02_local.md
+      - envsetup/03_devcontainer.md
+  - Nextflow Run:
+      - nextflow_run/index.md
+      - nextflow_run/00_orientation.md
+      - nextflow_run/01_basics.md
+      - nextflow_run/02_pipeline.md
+      - nextflow_run/03_config.md
   - Hello Nextflow:
       - hello_nextflow/index.md
       - hello_nextflow/00_orientation.md
@@ -20,6 +27,13 @@ nav:
       - hello_nextflow/06_hello_config.md
       - hello_nextflow/survey.md
       - hello_nextflow/next_steps.md
+  - Hello nf-core:
+      - hello_nf-core/index.md
+      - hello_nf-core/00_orientation.md
+      - hello_nf-core/01_run_demo.md
+      - hello_nf-core/02_rewrite_hello.md
+      - hello_nf-core/survey.md
+      - hello_nf-core/next_steps.md
   - Nextflow for Genomics:
       - nf4_science/genomics/index.md
       - nf4_science/genomics/00_orientation.md
@@ -27,6 +41,8 @@ nav:
       - nf4_science/genomics/02_joint_calling.md
       - nf4_science/genomics/03_modules.md
       - nf4_science/genomics/04_testing.md
+      - nf4_science/genomics/survey.md
+      - nf4_science/genomics/next_steps.md
   - Nextflow for RNAseq:
       - nf4_science/rnaseq/index.md
       - nf4_science/rnaseq/00_orientation.md
@@ -38,9 +54,12 @@ nav:
   - Side Quests:
       - side_quests/index.md
       - side_quests/orientation.md
-      - side_quests/nf-core.md
-      - side_quests/nf-test.md
+      - side_quests/ide_features.md
       - side_quests/workflows_of_workflows.md
+      - side_quests/splitting_and_grouping.md
+      - side_quests/debugging.md
+      - side_quests/nf-test.md
+      - side_quests/nf-core.md
   - Fundamentals Training:
       - basic_training/index.md
       - basic_training/orientation.md
@@ -68,6 +87,7 @@ nav:
       - advanced/configuration.md
       - advanced/summary.md
       - advanced/support.md
+  - Help: help.md
 
 theme:
   name: material
@@ -107,6 +127,9 @@ extra_css:
   - assets/stylesheets/fonts.css
   - assets/stylesheets/extra.css
 
+extra_javascript:
+  - assets/javascripts/posthog.js
+
 # Set in docs/assets/overrides/partials/copyright.html
 # so that we can have links and stuff
 # copyright: Seqera
@@ -131,6 +154,10 @@ extra:
       as to measure the effectiveness of our documentation and whether users
       find what they're searching for. With your consent, you're helping us to
       make our training materials better.
+      Find out more on
+      <a href="https://seqera.io/privacy-policy/#cookies" target="_blank" rel="noopener">how we use cookies</a>.
+    cookies:
+      posthog: PostHog Analytics
   # Overridden in docs/assets/overrides/partials/social.html
   # Still needs to be set to something here so that the partial is used
   social:
@@ -171,7 +198,9 @@ plugins:
   - enumerate-headings:
       restart_increment_after:
         - envsetup/01_setup.md
+        - nextflow_run/00_orientation.md
         - hello_nextflow/00_orientation.md
+        - hello_nf-core/00_orientation.md
         - nf4_science/genomics/00_orientation.md
         - nf4_science/rnaseq/00_orientation.md
         - side_quests/orientation.md
@@ -179,10 +208,12 @@ plugins:
         - advanced/orientation.md
 
       exclude:
-        - index.md
-        - help.md
+        - index*.md
+        - help*.md
         - envsetup/*.md
+        - nextflow_run/*.md
         - hello_nextflow/*.md
+        - hello_nf-core/*.md
         - nf4_science/genomics/*.md
         - nf4_science/rnaseq/*.md
         - side_quests/*.md
@@ -212,6 +243,14 @@ plugins:
           default: false
           locale: fr
           name: Français
+        - build: true
+          default: false
+          locale: it
+          name: Italiano
+        - build: true
+          default: false
+          locale: ko
+          name: Korean
       reconfigure_material: true
       reconfigure_search: true
   - search

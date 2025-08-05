@@ -1,0 +1,53 @@
+//
+// DEVELOPMENT DEVCONTAINER CONFIG
+// Base configuration that is pre-built and pushed to GitHub
+// See .devcontainer/devcontainer.json for production config
+//
+{
+    "name": "nextflow-training (local-dev)",
+    "image": "mcr.microsoft.com/devcontainers/base:ubuntu-22.04",
+
+    "features": {
+        "../local-features/init": {},
+        "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {
+            "version": "latest"
+        },
+        "ghcr.io/devcontainers/features/java:1": { "version": "21.0.6-ms" },
+        "ghcr.io/rocker-org/devcontainer-features/miniforge:2": {
+            "version": "latest"
+        },
+        "ghcr.io/va-h/devcontainers-features/uv": {},
+        "../local-features/apptainer": {},
+        "../local-features/tower-agent": {},
+        "../local-features/nextflow": {},
+        "../local-features/conda-channels": {},
+        "../local-features/uv-tools": {}
+    },
+    "workspaceFolder": "${localWorkspaceFolder}",
+    "workspaceMount": "source=${localWorkspaceFolder},target=${localWorkspaceFolder},type=bind",
+    "remoteUser": "root",
+    "remoteEnv": {
+        // Nextflow installation version
+        "NXF_HOME": "/workspaces/training/.nextflow",
+        "NXF_EDGE": "0",
+        "NXF_VER": "25.04.3",
+        // Other env vars
+        "HOST_PROJECT_PATH": "/workspaces/training",
+        "SHELL": "/bin/bash" // Ush bash
+    },
+    "onCreateCommand": "bash ${localWorkspaceFolder}/.devcontainer/setup.sh",
+    "postCreateCommand": "mkdir -p /workspaces && rm -rf /workspaces/training && ln -s ${localWorkspaceFolder} /workspaces/training",
+    "customizations": {
+        "vscode": {
+            "extensions": ["nf-core.nf-core-extensionpack"],
+            // Use Python from conda
+            "settings": {
+                "python.defaultInterpreterPath": "/opt/conda/bin/python",
+                "terminal.integrated.cwd": "/workspaces/training",
+                "terminal.integrated.defaultLocation": "workspace"
+            },
+            // Use bash
+            "terminal.integrated.defaultProfile.linux": "bash"
+        }
+    }
+}

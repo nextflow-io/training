@@ -5,7 +5,9 @@
 </div>
 
 /// caption
-:fontawesome-brands-youtube:{ .youtube } See the [whole playlist on the Nextflow YouTube channel](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik).
+:fontawesome-brands-youtube:{ .youtube } See [the whole playlist](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmXiHf8B26oB_fTfoKQdhlik) on the Nextflow YouTube channel.
+
+:green_book: The video transcript is available [here](./transcripts/05_hello_containers.md).
 ///
 
 In Parts 1-4 of this training course, you learned how to use the basic building blocks of Nextflow to assemble a simple workflow capable of processing some text, parallelizing execution if there were multiple inputs, and collecting the results for further processing.
@@ -38,7 +40,7 @@ nextflow run hello-containers.nf
 This should produce the following output:
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.10.0
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `hello-containers.nf` [tender_becquerel] DSL2 - revision: f7cat8e223
 
@@ -187,7 +189,7 @@ ls /
 ```
 
 ```console title="Output"
-bin    dev    etc    home   lib    media  mnt    opt    proc   root   run    sbin   srv    sys    tmp    usr    var
+bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
 ```
 
 You can see that the filesystem inside the container is different from the filesystem on your host system.
@@ -277,8 +279,8 @@ ls /data
 Depending on what part of this training you've done before, the output below my look slightly different.
 
 ```console title="Output"
-demo-params.json  hello-channels.nf  hello-workflow.nf  modules          results
-greetings.csv     hello-modules.nf   hello-world.nf     nextflow.config  work
+greetings.csv      hello-config.nf      hello-modules.nf   hello-world.nf  nextflow.config  solutions         work
+hello-channels.nf  hello-containers.nf  hello-workflow.nf  modules         results          test-params.json
 ```
 
 <!-- ls output may need to be updated -->
@@ -498,7 +500,7 @@ nextflow run hello-containers.nf -resume
 Oh no, there's an error!
 
 ```console title="Output"
- N E X T F L O W   ~  version 24.10.0
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `hello-containers.nf` [special_lovelace] DSL2 - revision: 028a841db1
 
@@ -599,7 +601,7 @@ nextflow run hello-containers.nf -resume
 This time it does indeed work.
 
 ```console title="Output" linenums="1"
- N E X T F L O W   ~  version 24.10.0
+ N E X T F L O W   ~  version 25.04.3
 
 Launching `hello-containers.nf` [elegant_brattain] DSL2 - revision: 028a841db1
 
@@ -650,8 +652,9 @@ You see that the character is saying all the greetings, just as it did when we r
 
 Let's take a look at the work subdirectory for one of the `cowpy` process calls to get a bit more insight on how Nextflow works with containers under the hood.
 
-Check the output from your `nextflow run` command to find the call ID for the `cowpy` process.
-Then navigate to the work subdirectory.
+Check the output from your `nextflow run` command to find the path to the work subdirectory for the `cowpy` process.
+Looking at what we got for the run shown above, the console log line for the `cowpy` process starts with `[7f/caf718]`.
+That corresponds to the following truncated directory path: `work/7f/caf718`.
 In it, you will find the `.command.run` file that contains all the commands Nextflow ran on your behalf in the course of executing the pipeline.
 
 Open the `.command.run` file and search for `nxf_launch`; you should see something like this:

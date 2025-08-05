@@ -50,6 +50,16 @@ These are foundational, domain-agnostic courses intended for those who are compl
 
     [Start the Hello Nextflow training :material-arrow-right:](hello_nextflow/index.md){ .md-button .md-button--primary }
 
+!!! exercise "Hello nf-core"
+
+    !!! tip inline end ""
+
+        :material-run-fast:{.nextflow-primary} Learn to develop nf-core compliant pipelines.
+
+    This is a course for newcomers who wish to learn run and develop [nf-core](https://nf-co.re/) compliant pipelines. The course covers the structure of nf-core pipelines in enough detail to enable developing simple but fully functional pipelines that follow the nf-core template and development best practices.
+
+    [Start the Hello nf-core training :material-arrow-right:](hello_nf-core/index.md){ .md-button .md-button--primary }
+
 !!! info ""
 
     **Coming soon:** "Nextflow Run" — Learn to run Nextflow pipelines (run only, no code development)
@@ -132,13 +142,11 @@ These are training courses that are not being actively taught/maintained and tha
 The corresponding materials are not available within the training environment.
 You can still find the materials in the GitHub repository and download them for local use.
 
-- **nf-customize** — Configuring nf-core pipelines ([docs](other/nf_customize) / [code](../other/nf-customize))
+- **nf-customize** — Configuring nf-core pipelines ([docs](other/nf_customize) / [code](https://github.com/nextflow-io/training/tree/master/other/nf-customize))
 
-- **nf-develop** — Developing a pipeline with the nf-core template ([docs](other/nf_develop) / [code](../other/nf-develop))
+- **troubleshoot** — Troubleshooting exercises ([docs](other/troubleshoot) / [code](https://github.com/nextflow-io/training/tree/master/other/troubleshoot))
 
-- **troubleshoot** — Troubleshooting exercises ([docs](other/troubleshoot) / [code](../other/troubleshoot))
-
-- **hands-on (rnaseq)** — Developing a pipeline for bulk RNAseq (deprecated) ([docs](other/hands_on) / [code](../other/hands-on))
+- **hands-on (rnaseq)** — Developing a pipeline for bulk RNAseq (deprecated) ([docs](other/hands_on) / [code](https://github.com/nextflow-io/training/tree/master/other/hands-on))
 
 ## Resources
 
