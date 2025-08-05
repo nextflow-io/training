@@ -1765,6 +1765,7 @@ Now it's time to put the systematic debugging approach into practice. The workfl
     ```
 
     Apply the four-phase debugging method you've learned:
+    
     **Phase 1: Syntax Error Resolution**
     - Check for red underlines in VSCode or your IDE
     - Run `nextflow run workflow.nf -preview` to identify syntax issues
