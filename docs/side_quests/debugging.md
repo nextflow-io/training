@@ -1117,7 +1117,7 @@ Tip: when you have fixed the problem you can continue the execution adding the o
 
 The error message indicates that the process expected to produce an output file named `sample3.txt`, but the script actually creates `sample3_output.txt`. Let's examine the process definition in `missing_output.nf`:
 
-```groovy title="missing_output.nf" linenums="3" hl_lines="2 9"
+```groovy title="missing_output.nf" linenums="3" hl_lines="6 10"
 process PROCESS_FILES {
     input:
     val sample_name
