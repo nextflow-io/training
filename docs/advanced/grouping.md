@@ -26,7 +26,6 @@ workflow {
         }
         .view()
 }
-
 ```
 
 The first change we're going to make is to correct some repetitive code that we've seen quite a lot already in this workshop. The construction of the meta map from this row stutters quite a lot. We can make use of the [`subMap`](<https://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/Map.html#subMap(java.util.Collection)>) method available Maps to quickly return a new map constructed from the subset of an existing map:
@@ -36,14 +35,14 @@ workflow {
     Channel.fromPath("data/samplesheet.csv")
         .splitCsv( header:true )
         .map { row ->
-          def meta = row.subMap('id', 'repeat', 'type')
-          [
-            meta,
+            def meta = row.subMap('id', 'repeat', 'type')
             [
-              file(row.fastq1, checkIfExists: true),
-              file(row.fastq2, checkIfExists: true)
+                meta,
+                [
+                    file(row.fastq1, checkIfExists: true),
+                    file(row.fastq2, checkIfExists: true)
+                ]
             ]
-          ]
         }
         .view()
 }
@@ -66,18 +65,18 @@ workflow {
         ```groovy linenums="1"
         workflow {
             Channel.fromPath("data/samplesheet.csv")
-            .splitCsv( header:true )
-            .map { row ->
-                def meta = row.subMap('id', 'repeat', 'type')
-                [
-                  meta,
-                  [
-                    file(row.fastq1, checkIfExists: true),
-                    file(row.fastq2, checkIfExists: true)
-                  ]
-                ]
-            }
-            .set { samples }
+                .splitCsv( header:true )
+                .map { row ->
+                    def meta = row.subMap('id', 'repeat', 'type')
+                    [
+                        meta,
+                        [
+                            file(row.fastq1, checkIfExists: true),
+                            file(row.fastq2, checkIfExists: true)
+                        ]
+                    ]
+                }
+                .set { samples }
 
 
             samples
@@ -99,18 +98,18 @@ workflow {
 
     ??? solution
 
-        ```{groovy}
+        ```groovy linenums="1"
         workflow {
             Channel.fromPath("data/samplesheet.csv")
                 .splitCsv( header:true )
                 .map { row ->
                     def meta = row.subMap('id', 'repeat', 'type')
                     [
-                      meta,
-                      [
-                        file(row.fastq1, checkIfExists: true),
-                        file(row.fastq2, checkIfExists: true)
-                      ]
+                        meta,
+                        [
+                            file(row.fastq1, checkIfExists: true),
+                            file(row.fastq2, checkIfExists: true)
+                        ]
                     ]
                 }
                 .set { samples }
@@ -169,7 +168,7 @@ workflow {
 
 Let's consider that we might now want to merge the repeats. We'll need to group bams that share the `id` and `type` attributes.
 
-```groovy linenums="1"
+```groovy
 mapped_reads = MapReads( samples, reference )
     .map { meta, bam -> [meta.subMap('id', 'type'), bam]}
     .groupTuple()
@@ -180,7 +179,7 @@ This is easy enough, but the `groupTuple` operator has to wait until all items a
 
 By default, the `groupTuple` operator groups on the first item in the element, which at the moment is a `Map`. We can turn this map into a special class using the `groupKey` method, which takes our grouping object as a first parameter and the number of expected elements in the second parameter.
 
-```groovy linenums="1"
+```groovy
 mapped_reads = MapReads( samples, reference )
     .map { meta, bam ->
         def key = groupKey(meta.subMap('id', 'type'), NUMBER_OF_ITEMS_IN_GROUP)
@@ -196,7 +195,7 @@ mapped_reads.view()
 
     ??? solution
 
-        ```groovy linenums="1"
+        ```groovy
         workflow {
             reference = Channel.fromPath("data/genome.fasta").first()
 
@@ -230,7 +229,7 @@ mapped_reads.view()
 
 Now that we have our repeats together in an output channel, we can combine them using "advanced bioinformatics":
 
-```groovy linenums="1"
+```groovy
 process CombineBams {
     input:
     tuple val(meta), path("input/in_*_.bam")
@@ -245,7 +244,7 @@ process CombineBams {
 
 In our workflow:
 
-```groovy linenums="1"
+```groovy
 mapped_reads = MapReads( samples, reference )
     .map { meta, bam ->
         def key = groupKey(meta.subMap('id', 'type'), meta.repeatcount)
@@ -263,7 +262,7 @@ The previous exercise demonstrated the fan-in approach using `groupTuple` and `g
 
 We can take an existing bed file, for example and turn it into a channel of Maps.
 
-```groovy linenums="1"
+```groovy
 intervals = Channel.fromPath("data/intervals.bed")
     .splitCsv(header: ['chr', 'start', 'stop', 'name'], sep: '\t')
     .collectFile { entry -> ["${entry.name}.bed", entry*.value.join("\t")] }
@@ -272,7 +271,7 @@ intervals = Channel.fromPath("data/intervals.bed")
 
 Given a dummy genotyping process:
 
-```groovy linenums="1"
+```groovy
 process GenotypeOnInterval {
     input:
     tuple val(meta), path(bam), path(bed)
@@ -287,7 +286,7 @@ process GenotypeOnInterval {
 
 We can use the `combine` operator to emit a new channel where each combined bam is attached to each bed file. These can then be piped into the genotyping process:
 
-```groovy linenums="1"
+```groovy
 mapped_reads = MapReads( samples, reference )
     .map { meta, bam ->
         def key = groupKey(meta.subMap('id', 'type'), meta.repeatcount)
@@ -335,9 +334,9 @@ genotyped_bams = GenotypeOnInterval(combined_bams)
     .view { meta, bamfile -> "Meta is of ${meta.getClass()}" }
 ```
 
-The `groupKey` has a property `target`, which contains the original map. If we call this property, we can replace the groupKey with the original map and get back to the original data structure. This is now appropriate to send through to the `groupTuple` operator and we will be grouping now only on the elements in the map.
+To ensure that grouping is performed only on the relevant elements, we can convert the `groupKey` back into a plain Map using the `as Map` operator. This allows the `groupTuple` operator to group by just the keys present in the map, similar to how `subMap` works. This approach ensures that downstream grouping and merging steps operate on the intended sample attributes.
 
-```groovy linenums="1"
+```groovy
 mapped_reads = MapReads( samples, reference )
     .map { meta, bam ->
         def key = groupKey(meta.subMap('id', 'type'), meta.repeatcount)
@@ -350,7 +349,7 @@ combined_bams = CombineBams(mapped_reads)
     .combine( intervals )
 
 genotyped_bams = GenotypeOnInterval(combined_bams)
-    .map { groupKey, bamfile -> [groupKey.target, bamfile] }
+    .map { groupKey, bamfile -> [groupKey as Map, bamfile] }
     .groupTuple()
 
 merged_bams = MergeGenotyped(genotyped_bams)
