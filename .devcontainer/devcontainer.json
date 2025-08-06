@@ -12,7 +12,7 @@
         // Nextflow installation version
         "NXF_HOME": "/workspaces/.nextflow",
         "NXF_EDGE": "0",
-        "NXF_VER": "25.04.06",
+        "NXF_VER": "25.04.6",
         // Other env vars
         "HOST_PROJECT_PATH": "/workspaces/training",
         "SHELL": "/bin/bash" // Ush bash

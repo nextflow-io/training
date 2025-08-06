@@ -112,7 +112,7 @@ nextflow run bad_syntax.nf
 You'll see an error message like this:
 
 ```console title="Syntax error output"
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 25.04.6
 
 Launching `bad_syntax.nf` [stupefied_bhabha] DSL2 - revision: ca6327fad2
 
@@ -228,7 +228,7 @@ nextflow run invalid_process.nf
 You'll see an error like:
 
 ```console title="Invalid process keyword error"
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 25.04.6
 
 Launching `invalid_process.nf` [nasty_jepsen] DSL2 - revision: da9758d614
 
@@ -528,7 +528,7 @@ nextflow run badpractice_syntax.nf
 When you run this workflow, it will execute successfully:
 
 ```console title="Successful execution despite bad practice"
-N E X T F L O W   ~  version 25.04.3
+N E X T F L O W   ~  version 25.04.6
 
 Launching `badpractice_syntax.nf` [peaceful_euler] DSL2 - revision: 7b2c9a1d45
 
@@ -638,7 +638,7 @@ nextflow run bad_number_inputs.nf
 ```
 
 ```console title="Wrong number of channels error"
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 25.04.6
 
 Launching `bad_number_inputs.nf` [high_mendel] DSL2 - revision: 955705c51b
 
@@ -734,7 +734,7 @@ nextflow run exhausted.nf
 When you run this workflow, it will execute without error, processing a single sample:
 
 ```console title="Exhausted channel output"
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 25.04.6
 
 Launching `exhausted.nf` [extravagant_gauss] DSL2 - revision: 08cff7ba2a
 
@@ -993,7 +993,7 @@ nextflow run bad_channel_shape_viewed.nf
 You'll see output like this:
 
 ```console title="Channel debugging output"
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 25.04.6
 
 Launching `bad_channel_shape_viewed.nf` [maniac_poisson] DSL2 - revision: b4f24dc9da
 
@@ -1082,7 +1082,7 @@ nextflow run missing_output.nf
 You'll see an error like this:
 
 ```console title="Missing output files error"
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 25.04.6
 
 Launching `missing_output.nf` [zen_stone] DSL2 - revision: 37ff61f926
 
@@ -1497,7 +1497,7 @@ nextflow run bad_channel_shape_viewed_debug.nf
 You will see output like this:
 
 ```console title="Real-time process output"
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 25.04.6
 
 Launching `bad_channel_shape_viewed_debug.nf` [agitated_crick] DSL2 - revision: ea3676d9ec
 
@@ -1561,7 +1561,7 @@ nextflow run bad_syntax.nf -preview
 You'll see output like this:
 
 ```console title="Preview mode output"
- N E X T F L O W   ~  version 25.04.3
+ N E X T F L O W   ~  version 25.04.6
 
 Launching `bad_syntax.nf` [sick_fermi] DSL2 - revision: ca6327fad2
 
