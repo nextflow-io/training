@@ -125,17 +125,14 @@ process SayHiTemplate {
 
 In the previous chapter, we saw the addition of small helper Groovy functions to the `main.nf` file. It may at times be helpful to bundle functionality into a new Groovy class. Any classes defined in the `lib` directory are available for use in the workflow - both `main.nf` and any imported modules.
 
-Classes defined in `lib` directory can be used for a variety of purposes. For example, the [nf-core/rnaseq](https://github.com/nf-core/rnaseq/tree/master/lib) workflow uses five custom classes:
-
-1. `NfcoreSchema.groovy` for parsing the schema.json file and validating the workflow parameters.
-2. `NfcoreTemplate.groovy` for email templating and nf-core utility functions.
-3. `Utils.groovy` for provision of a single `checkCondaChannels` method.
-4. `WorkflowMain.groovy` for workflow setup and to call the `NfcoreTemplate` class.
-5. `WorkflowRnaseq.groovy` for the workflow-specific functions.
-
-The classes listed above all provide utility executed at the beginning of a workflow, and are generally used to "set up" the workflow. However, classes defined in `lib` can also be used to provide functionality to the workflow itself.
-
 ### Making a Metadata Class
+
+!!! note
+Using custom Groovy is considered a very advanced use case and you should not need it for the majority of workflows. The language server will complain about this but you can safely ignore it.
+
+!!! exercise
+
+    Create a new class in `./lib/Metadata.groovy` that extends the `HashMap` class and adds a `hi` method.
 
 Let's consider an example where we create our own custom class to handle metadata. We can create a new class in `./lib/Metadata.groovy`. We'll extend the built-in `HashMap` class, and add a simple method to return a value:
 
@@ -209,9 +206,9 @@ workflow {
 }
 ```
 
-Why might this be helpful? You can add extra classes to the metadata which can be computed from the existing metadata. For example, we might want to grab the adapter prefix:
+Why might this be helpful? You can add extra classes to the metadata which can be computed from the existing metadata. For example, we might want to add a method to get the adapter prefix into our Metadata class:
 
-```groovy linenums="1"
+```groovy
 def getAdapterStart() {
     this.adapter?.substring(0, 3)
 }
@@ -238,7 +235,7 @@ workflow {
 
 You might even want to reach out to external services such as a LIMS or the E-utilities API. Here we add a dummy "getSampleName()" method that reaches out to a public API:
 
-```groovy linenums="1"
+```groovy
 def getSampleName() {
     def get = new URL('https://postman-echo.com/get?sampleName=Fido').openConnection()
     def getRC = get.getResponseCode();
@@ -248,6 +245,12 @@ def getSampleName() {
         return json.args.sampleName
     }
 }
+```
+
+This relies on jsonSlurper which isn't included by default. Import this by adding the following to the top of the file:
+
+```groovy linenums="1"
+import groovy.json.JsonSlurper
 ```
 
 Which we can use like so:
@@ -295,7 +298,7 @@ We can create a new dog at the beginning of the workflow:
 ```groovy linenums="1"
 workflow {
     def dog = new Dog(name: "fido")
-    log.info "Found a new dog: $dog"
+    log.info "Found a new dog: ${dog.name}"
 }
 ```
 
@@ -305,7 +308,7 @@ We can pass objects of our class through channels. Here we take a channel of dog
 workflow {
     Channel.of("Argente", "Absolon", "Chowne")
         .map { name -> new Dog(name: name) }
-        .view()
+        .view { dog -> "Found a new dog: ${dog.name}" }
 }
 ```
 
