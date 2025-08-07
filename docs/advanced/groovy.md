@@ -23,7 +23,7 @@ workflow {
 
 Let's write a small closure to parse each row into the now-familiar map + files shape. We might start by constructing the meta-map:
 
-```groovy linenums="7"
+```groovy linenums="5" hl_lines="5-8"
 workflow {
 
     samples = Channel.fromPath(params.input)
@@ -38,7 +38,7 @@ workflow {
 
 ... but this precludes the possibility of adding additional columns to the samplesheet. We might to ensure the parsing will capture any extra metadata columns should they be added. Instead, let's partition the column names into those that begin with "fastq" and those that don't. Within the map closure, let's add an additional line to partition the column names:
 
-```groovy linenums="12"
+```groovy linenums="10"
 def (readKeys, metaKeys) = row.keySet().split { key -> key =~ /^fastq/ }
 ```
 
@@ -50,19 +50,19 @@ def (readKeys, metaKeys) = row.keySet().split { key -> key =~ /^fastq/ }
 
 From here, let's add another line collect the values of the read keys into a list of file objects:
 
-```groovy linenums="13"
+```groovy linenums="11"
 def reads = row.subMap(readKeys).values().collect { value -> file(value) }
 ```
 
 ... but we run into an error:
 
-```groovy linenums="1"
+```groovy
 Argument of `file` function cannot be empty
 ```
 
 If we have a closer look at the samplesheet, we notice that not all rows have two read pairs. Let's add a condition to the collect method to only include the values that are not empty:
 
-```groovy linenums="13"
+```groovy linenums="11"
 def reads = row.subMap(readKeys).values()
     .findAll { value -> value != "" } // Single-end reads will have an empty string
     .collect { path -> file(path) }
@@ -70,7 +70,7 @@ def reads = row.subMap(readKeys).values()
 
 Now we need to construct the meta map. Let's have a quick look at the FASTP module that I've already pre-defined:
 
-```groovy linenums="6"
+```groovy linenums="1"
 process FASTP {
     container 'quay.io/biocontainers/fastp:0.23.2--h79da9fb_0'
 
@@ -92,27 +92,29 @@ process FASTP {
 
 I can see that we require two extra keys, `id` and `single_end`:
 
-```groovy linenums="16"
+```groovy linenums="14" hl_lines="1-3"
 def meta = row.subMap(metaKeys)
 meta = meta + [ id: meta.sample, single_end: reads.size == 1 ]
+[meta, reads]
 ```
 
 This is now able to be passed through to our FASTP process:
 
-```groovy linenums="7"
+```groovy linenums="5" hl_lines="15 17"
 workflow {
+
     samples = Channel.fromPath(params.input)
         .splitCsv(header: true)
         .map { row ->
             def (readKeys, metaKeys) = row.keySet().split { key -> key =~ /^fastq/ }
             def reads = row.subMap(readKeys).values()
                 .findAll { value -> value != "" } // Single-end reads will have an empty string
-                .collect { path -> file(path) } // Turn those strings into paths
+                .collect { path -> file(path) }
             def meta = row.subMap(metaKeys)
-            meta.id ?= meta.sample
-            meta.single_end = reads.size == 1
+            meta = meta + [ id: meta.sample, single_end: reads.size == 1 ]
             [meta, reads]
         }
+
     FASTP(samples)
 
     FASTP.out.json.view()
@@ -123,7 +125,7 @@ Let's assume that we want to pull some information out of these JSON files. To m
 
 We'd like to add a `publishDir` directive to our FASTP process.
 
-```groovy linenums="1"
+```groovy linenums="3"
 process {
     withName: 'FASTP' {
         publishDir = [
@@ -162,7 +164,7 @@ Now let's create a second entrypoint to quickly pass these JSON files through so
 
     Using a second Entrypoint allows us to do quick debugging or development using a small section of the workflow without disturbing the main flow.
 
-```groovy linenums="6"
+```groovy linenums="5"
 workflow Jsontest {
     Channel.fromPath("results/fastp/json/*.json")
         .view()
@@ -177,7 +179,7 @@ nextflow run . -resume -entry Jsontest
 
 Let's create a small function inside the workflow to take the JSON path and pull out some basic metrics:
 
-```groovy linenums="6"
+```groovy linenums="5"
 def getFilteringResult(json_file) {
     return new groovy.json.JsonSlurper().parseText(json_file.text)
 }
@@ -192,7 +194,7 @@ The `fastpResult` returned from the `parseText` method is a large Map - a class 
 
 In the interest of brevity, here is the solution to return just the `after_filtering` section of the report:
 
-```groovy linenums="6"
+```groovy linenums="5"
 def getFilteringResult(json_file) {
     return new groovy.json.JsonSlurper().parseText(json_file.text)
         ?.summary
