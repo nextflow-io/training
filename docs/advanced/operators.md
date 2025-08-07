@@ -239,7 +239,7 @@ workflow {
 
 An element is only emitted to the first channel were the test condition is met. If an element does not meet any of the tests, it is not emitted to any of the output channels. You can 'catch' any such samples by specifying `true` as a condition. If we knew that all samples would be either tumor or normal and no third 'type', we could write
 
-```groovy linenums="1"
+```groovy linenums="5" hl_lines="2-3"
 .branch { meta, reads ->
     tumor: meta.type == "tumor"
     normal: true
@@ -248,7 +248,7 @@ An element is only emitted to the first channel were the test condition is met. 
 
 We may want to emit a slightly different element than the one passed as input. The `branch` operator can (optionally) return a _new_ element to a channel. For example, to add an extra key in the meta map of the tumor samples, we add a new line under the condition and return our new element. In this example, we modify the first element of the `List` to be a new list that is the result of merging the existing meta map with a new map containing a single key:
 
-```groovy linenums="1"
+```groovy linenums="5" hl_lines="2-4"
 .branch { meta, reads ->
     tumor: meta.type == "tumor"
         return [meta + [newKey: 'myValue'], reads]
@@ -264,7 +264,7 @@ We may want to emit a slightly different element than the one passed as input. T
 
         There are many ways to accomplish this, but the map merging pattern introduced above can also be used to safely and concisely rename values in a map.
 
-        ```groovy linenums="1"
+        ```groovy linenums="5"
         .branch { meta, reads ->
             tumor: meta.type == "tumor"
                 return [meta + [type: 'abnormal'], reads]
@@ -308,11 +308,13 @@ process MultiInput {
     script:
     "echo -n small is $smallNum and big is $bigNum"
 }
+
+workflow {
 ```
 
 The following will be kept synchronous, allowing you to supply multiple channel inputs to a process and keeping the order. This is the only place where order is guaranteed in Nextflow!
 
-```groovy linenums="1" hl_lines="8"
+```groovy linenums="11" hl_lines="8"
 workflow {
     numbers = Channel.of( 1, 2, 3, 4, 5 )
         .multiMap { num ->
@@ -515,7 +517,7 @@ The input channel has two elements. For each element in the input channel, we re
     ??? solution
         This is a sensible approach. For each item in the channel, the `flatmap` will collate the files into groups of 3 using `.collate(3)`, then collect them into a single tuple using the id as the first value and the collection of 3 files as the second value.
 
-        ```groovy
+        ```groovy linenums="1" hl_lines="6-11"
         workflow {
             Channel.fromPath("data/datfiles/sample*/*.dat", checkIfExists: true)
                 .map { myfile -> [myfile.getParent().name, myfile] }
@@ -538,7 +540,7 @@ The `collectFile` operator allows you to write one or more new files based on th
 
 At its most basic, this operator writes the contents of the elements of a channel directly into a file. If the objecting being passed into the `collectFile` operator is a string, the strings are written to the collected file:
 
-```groovy
+```groovy linenums="1"
 workflow {
     characters = Channel.of(
         ['name': 'Jake', 'title': 'Detective'],
@@ -575,7 +577,7 @@ RaymondTerryNormRosaCharlesJakeGinaMichaelAmy
 
 We can supply arguments `name` and `newLine` to the `collectFile` operator to return a file with a more informative name and newlines separating each entry:
 
-```groovy hl_lines="3"
+```groovy linenums="14" hl_lines="3"
 characters
     .map { it.name }
     .collectFile(name: 'people.txt', newLine: true)
@@ -598,7 +600,7 @@ Amy
 
 By default, the collected file is written into the work directory, which makes it suitable for input into a downstream process. If the collected file is an output of the workflow instead of an intermediate, it can be written to a directory of your choosing using the `storeDir` argument:
 
-```groovy hl_lines="3"
+```groovy linenums="14" hl_lines="3"
 characters
     .map { it.name }
     .collectFile(name: 'characters.txt', newLine: true, storeDir: 'results')
@@ -618,7 +620,7 @@ If the contents of the input channel is a file, its _contents_ are appended to t
     1. The [ternary operator](https://docs.groovy-lang.org/latest/html/documentation/core-operators.html#_ternary_operator) - a terse if/else block
     2. The [find operator](https://docs.groovy-lang.org/latest/html/documentation/core-operators.html#_find_operator) `=~`
 
-```groovy
+```groovy linenums="1"
 process WriteBio {
     input: val(character)
     output: path('bio.txt')
@@ -671,7 +673,7 @@ Instead of writing all entries to a single file, you can direct entries from the
 
 For example:
 
-```groovy
+```groovy linenums="12" hl_lines="7"
 characters
     .collectFile(newLine: true, storeDir: 'results') { character ->
       def filename = "${character.title}s.txt"
@@ -696,7 +698,7 @@ results/Sergeants.txt
 
 Let's say we have a process that returns a CSV. In this example, we're going to create very small two-line CVSs, but the same approach is applicable to larger files as well.
 
-```groovy
+```groovy linenums="1"
 process WriteBio {
     input: val(character)
     output: path('bio.csv')
@@ -710,7 +712,7 @@ process WriteBio {
 
 If we run this with the same workflow as before:
 
-```groovy
+```groovy linenums="24"
 WriteBio(characters)
     .collectFile(name: 'characters.csv', storeDir: 'results')
     .view()
@@ -730,7 +732,7 @@ precinct,name,title
 
 To keep the header from only the first entry, we can use the `keepHeader` argument to `collectFile`:
 
-```groovy
+```groovy linenums="24" hl_lines="2"
 WriteBio(characters)
     .collectFile(name: 'characters.csv', storeDir: 'results', keepHeader: true)
     .view()
@@ -765,7 +767,7 @@ WriteBio(characters)
     ??? solution
         A good solution would be to pass a closure to the `collectFile` operator. The closure will return the filename and the file in a List:
 
-        ```groovy
+        ```groovy linenums="24" hl_lines="2-4"
         WriteBio(characters)
             .collectFile(storeDir: 'results', keepHeader: true) { character, file ->
                 ["${character.title}s.csv", file]
@@ -775,7 +777,7 @@ WriteBio(characters)
 
         Another viable option would be to `map` over the channel before `collectFile`:
 
-        ```groovy
+        ```groovy linenums="24" hl_lines="2"
         WriteBio(characters)
             .map { character, file -> ["${character.title}s.csv", file] }
             .collectFile(storeDir: 'results', keepHeader: true)
