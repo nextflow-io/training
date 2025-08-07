@@ -318,7 +318,7 @@ process MergeGenotyped {
 
 We might be tempted to pipe the output of `GenotypeOnInterval` directly into groupTuple, but the `meta` object we are passing down is still the `groupKey` we created earlier:
 
-```groovy linenums="71" hl_lines="10"
+```groovy linenums="71" hl_lines="13"
 mapped_reads = MapReads( samples, reference )
     .map { meta, bam ->
         def key = groupKey(meta.subMap('id', 'type'), meta.repeatcount)
@@ -336,7 +336,7 @@ genotyped_bams = GenotypeOnInterval(combined_bams)
 
 To ensure that grouping is performed only on the relevant elements, we can convert the `groupKey` back into a plain Map using the `as Map` operator. This allows the `groupTuple` operator to group by just the keys present in the map, similar to how `subMap` works. This approach ensures that downstream grouping and merging steps operate on the intended sample attributes.
 
-```groovy linenums="71" hl_lines="16"
+```groovy linenums="71" hl_lines="13"
 mapped_reads = MapReads( samples, reference )
     .map { meta, bam ->
         def key = groupKey(meta.subMap('id', 'type'), meta.repeatcount)
