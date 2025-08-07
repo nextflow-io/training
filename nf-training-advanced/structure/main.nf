@@ -1,5 +1,3 @@
-#!/usr/bin/env nextflow
-
 process PlotCars {
     container 'rocker/tidyverse:latest'
 
