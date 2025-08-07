@@ -1352,17 +1352,25 @@
 <span class="normal"><a href="#__codelineno-1-8"> 8</a></span>
 <span class="normal"><a href="#__codelineno-1-9"> 9</a></span>
 <span class="normal"><a href="#__codelineno-1-10">10</a></span>
-<span class="normal"><a href="#__codelineno-1-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
+<span class="normal"><a href="#__codelineno-1-11">11</a></span>
+<span class="normal"><a href="#__codelineno-1-12">12</a></span>
+<span class="normal"><a href="#__codelineno-1-13">13</a></span>
+<span class="normal"><a href="#__codelineno-1-14">14</a></span>
+<span class="normal"><a href="#__codelineno-1-15">15</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="w">    </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">"data/samplesheet.csv"</span><span class="o">)</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">splitCsv</span><span class="o">(</span><span class="w"> </span><span class="nl">header:</span><span class="kc">true</span><span class="w"> </span><span class="o">)</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="w">        </span><span class="n">meta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="nl">id:</span><span class="n">row</span><span class="o">.</span><span class="na">id</span><span class="o">,</span><span class="w"> </span><span class="nl">repeat:</span><span class="n">row</span><span class="o">.</span><span class="na">repeat</span><span class="o">,</span><span class="w"> </span><span class="nl">type:</span><span class="n">row</span><span class="o">.</span><span class="na">type</span><span class="o">]</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="w">        </span><span class="o">[</span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="o">[</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="w">            </span><span class="n">file</span><span class="o">(</span><span class="n">row</span><span class="o">.</span><span class="na">fastq1</span><span class="o">,</span><span class="w"> </span><span class="nl">checkIfExists:</span><span class="w"> </span><span class="kc">true</span><span class="o">),</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8"></a><span class="w">            </span><span class="n">file</span><span class="o">(</span><span class="n">row</span><span class="o">.</span><span class="na">fastq2</span><span class="o">,</span><span class="w"> </span><span class="nl">checkIfExists:</span><span class="w"> </span><span class="kc">true</span><span class="o">)]]</span>
-<a id="__codelineno-1-9" name="__codelineno-1-9"></a><span class="w">    </span><span class="o">}</span>
-<a id="__codelineno-1-10" name="__codelineno-1-10"></a><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">view</span>
-<a id="__codelineno-1-11" name="__codelineno-1-11"></a><span class="o">}</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="w">        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">(</span><span class="w"> </span><span class="nl">header:</span><span class="kc">true</span><span class="w"> </span><span class="o">)</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="w">            </span><span class="kt">def</span><span class="w"> </span><span class="n">meta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="nl">id:</span><span class="n">row</span><span class="o">.</span><span class="na">id</span><span class="o">,</span><span class="w"> </span><span class="nl">repeat:</span><span class="n">row</span><span class="o">.</span><span class="na">repeat</span><span class="o">,</span><span class="w"> </span><span class="nl">type:</span><span class="n">row</span><span class="o">.</span><span class="na">type</span><span class="o">]</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="w">            </span><span class="o">[</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="w">                </span><span class="n">meta</span><span class="o">,</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8"></a><span class="w">                </span><span class="o">[</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9"></a><span class="w">                    </span><span class="n">file</span><span class="o">(</span><span class="n">row</span><span class="o">.</span><span class="na">fastq1</span><span class="o">,</span><span class="w"> </span><span class="nl">checkIfExists:</span><span class="w"> </span><span class="kc">true</span><span class="o">),</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10"></a><span class="w">                    </span><span class="n">file</span><span class="o">(</span><span class="n">row</span><span class="o">.</span><span class="na">fastq2</span><span class="o">,</span><span class="w"> </span><span class="nl">checkIfExists:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11"></a><span class="w">                </span><span class="o">]</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12"></a><span class="w">            </span><span class="o">]</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13"></a><span class="w">        </span><span class="o">}</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14"></a><span class="w">        </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>The first change we're going to make is to correct some repetitive code that we've seen quite a lot already in this workshop. The construction of the meta map from this row stutters quite a lot. We can make use of the <a href="https://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/Map.html#subMap(java.util.Collection)"><code>subMap</code></a> method available Maps to quickly return a new map constructed from the subset of an existing map:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1"> 1</a></span>
@@ -1375,17 +1383,25 @@
 <span class="normal"><a href="#__codelineno-2-8"> 8</a></span>
 <span class="normal"><a href="#__codelineno-2-9"> 9</a></span>
 <span class="normal"><a href="#__codelineno-2-10">10</a></span>
-<span class="normal"><a href="#__codelineno-2-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
+<span class="normal"><a href="#__codelineno-2-11">11</a></span>
+<span class="normal"><a href="#__codelineno-2-12">12</a></span>
+<span class="normal"><a href="#__codelineno-2-13">13</a></span>
+<span class="normal"><a href="#__codelineno-2-14">14</a></span>
+<span class="normal"><a href="#__codelineno-2-15">15</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="w">    </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">"data/samplesheet.csv"</span><span class="o">)</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">splitCsv</span><span class="o">(</span><span class="w"> </span><span class="nl">header:</span><span class="kc">true</span><span class="w"> </span><span class="o">)</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="w">        </span><span class="n">meta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">subMap</span><span class="o">(</span><span class="s1">'id'</span><span class="o">,</span><span class="w"> </span><span class="s1">'repeat'</span><span class="o">,</span><span class="w"> </span><span class="s1">'type'</span><span class="o">)</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="w">        </span><span class="o">[</span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="o">[</span>
-<a id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="w">            </span><span class="n">file</span><span class="o">(</span><span class="n">row</span><span class="o">.</span><span class="na">fastq1</span><span class="o">,</span><span class="w"> </span><span class="nl">checkIfExists:</span><span class="w"> </span><span class="kc">true</span><span class="o">),</span>
-<a id="__codelineno-2-8" name="__codelineno-2-8"></a><span class="w">            </span><span class="n">file</span><span class="o">(</span><span class="n">row</span><span class="o">.</span><span class="na">fastq2</span><span class="o">,</span><span class="w"> </span><span class="nl">checkIfExists:</span><span class="w"> </span><span class="kc">true</span><span class="o">)]]</span>
-<a id="__codelineno-2-9" name="__codelineno-2-9"></a><span class="w">    </span><span class="o">}</span>
-<a id="__codelineno-2-10" name="__codelineno-2-10"></a><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">view</span>
-<a id="__codelineno-2-11" name="__codelineno-2-11"></a><span class="o">}</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="w">        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">(</span><span class="w"> </span><span class="nl">header:</span><span class="kc">true</span><span class="w"> </span><span class="o">)</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="hll"><span class="w">            </span><span class="kt">def</span><span class="w"> </span><span class="n">meta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">subMap</span><span class="o">(</span><span class="s1">'id'</span><span class="o">,</span><span class="w"> </span><span class="s1">'repeat'</span><span class="o">,</span><span class="w"> </span><span class="s1">'type'</span><span class="o">)</span>
+</span><a id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="w">            </span><span class="o">[</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="w">                </span><span class="n">meta</span><span class="o">,</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8"></a><span class="w">                </span><span class="o">[</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9"></a><span class="w">                    </span><span class="n">file</span><span class="o">(</span><span class="n">row</span><span class="o">.</span><span class="na">fastq1</span><span class="o">,</span><span class="w"> </span><span class="nl">checkIfExists:</span><span class="w"> </span><span class="kc">true</span><span class="o">),</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10"></a><span class="w">                    </span><span class="n">file</span><span class="o">(</span><span class="n">row</span><span class="o">.</span><span class="na">fastq2</span><span class="o">,</span><span class="w"> </span><span class="nl">checkIfExists:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11"></a><span class="w">                </span><span class="o">]</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12"></a><span class="w">            </span><span class="o">]</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13"></a><span class="w">        </span><span class="o">}</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14"></a><span class="w">        </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <div class="admonition note">
 <p class="admonition-title">Complete meta map safety</p>
@@ -1420,29 +1436,37 @@
 <span class="normal"><a href="#__codelineno-3-20">20</a></span>
 <span class="normal"><a href="#__codelineno-3-21">21</a></span>
 <span class="normal"><a href="#__codelineno-3-22">22</a></span>
-<span class="normal"><a href="#__codelineno-3-23">23</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
+<span class="normal"><a href="#__codelineno-3-23">23</a></span>
+<span class="normal"><a href="#__codelineno-3-24">24</a></span>
+<span class="normal"><a href="#__codelineno-3-25">25</a></span>
+<span class="normal"><a href="#__codelineno-3-26">26</a></span>
+<span class="normal"><a href="#__codelineno-3-27">27</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="w">    </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">"data/samplesheet.csv"</span><span class="o">)</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">splitCsv</span><span class="o">(</span><span class="w"> </span><span class="nl">header:</span><span class="kc">true</span><span class="w"> </span><span class="o">)</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="w">        </span><span class="n">meta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">subMap</span><span class="o">(</span><span class="s1">'id'</span><span class="o">,</span><span class="w"> </span><span class="s1">'repeat'</span><span class="o">,</span><span class="w"> </span><span class="s1">'type'</span><span class="o">)</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6"></a><span class="w">        </span><span class="o">[</span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="o">[</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7"></a><span class="w">            </span><span class="n">file</span><span class="o">(</span><span class="n">row</span><span class="o">.</span><span class="na">fastq1</span><span class="o">,</span><span class="w"> </span><span class="nl">checkIfExists:</span><span class="w"> </span><span class="kc">true</span><span class="o">),</span>
-<a id="__codelineno-3-8" name="__codelineno-3-8"></a><span class="w">            </span><span class="n">file</span><span class="o">(</span><span class="n">row</span><span class="o">.</span><span class="na">fastq2</span><span class="o">,</span><span class="w"> </span><span class="nl">checkIfExists:</span><span class="w"> </span><span class="kc">true</span><span class="o">)]]</span>
-<a id="__codelineno-3-9" name="__codelineno-3-9"></a><span class="w">    </span><span class="o">}</span>
-<a id="__codelineno-3-10" name="__codelineno-3-10"></a><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">set</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">samples</span><span class="w"> </span><span class="o">}</span>
-<a id="__codelineno-3-11" name="__codelineno-3-11"></a>
-<a id="__codelineno-3-12" name="__codelineno-3-12"></a>
-<a id="__codelineno-3-13" name="__codelineno-3-13"></a><span class="w">    </span><span class="n">samples</span>
-<a id="__codelineno-3-14" name="__codelineno-3-14"></a><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">sleep</span><span class="w"> </span><span class="mi">10</span><span class="o">;</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">}</span>
-<a id="__codelineno-3-15" name="__codelineno-3-15"></a><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">reads</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">"Should be unmodified: $meta"</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="w">        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">(</span><span class="w"> </span><span class="nl">header:</span><span class="kc">true</span><span class="w"> </span><span class="o">)</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="w">            </span><span class="kt">def</span><span class="w"> </span><span class="n">meta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">subMap</span><span class="o">(</span><span class="s1">'id'</span><span class="o">,</span><span class="w"> </span><span class="s1">'repeat'</span><span class="o">,</span><span class="w"> </span><span class="s1">'type'</span><span class="o">)</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6"></a><span class="w">            </span><span class="o">[</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7"></a><span class="w">                </span><span class="n">meta</span><span class="o">,</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8"></a><span class="w">                </span><span class="o">[</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9"></a><span class="w">                    </span><span class="n">file</span><span class="o">(</span><span class="n">row</span><span class="o">.</span><span class="na">fastq1</span><span class="o">,</span><span class="w"> </span><span class="nl">checkIfExists:</span><span class="w"> </span><span class="kc">true</span><span class="o">),</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10"></a><span class="w">                    </span><span class="n">file</span><span class="o">(</span><span class="n">row</span><span class="o">.</span><span class="na">fastq2</span><span class="o">,</span><span class="w"> </span><span class="nl">checkIfExists:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11"></a><span class="w">                </span><span class="o">]</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12"></a><span class="w">            </span><span class="o">]</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13"></a><span class="w">        </span><span class="o">}</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14"></a><span class="w">        </span><span class="o">.</span><span class="na">set</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">samples</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15"></a>
 <a id="__codelineno-3-16" name="__codelineno-3-16"></a>
 <a id="__codelineno-3-17" name="__codelineno-3-17"></a><span class="w">    </span><span class="n">samples</span>
-<a id="__codelineno-3-18" name="__codelineno-3-18"></a><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">reads</span><span class="w"> </span><span class="o">-&gt;</span>
-<a id="__codelineno-3-19" name="__codelineno-3-19"></a><span class="w">        </span><span class="n">meta</span><span class="o">.</span><span class="na">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"tumor"</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s2">"abnormal"</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">"normal"</span>
-<a id="__codelineno-3-20" name="__codelineno-3-20"></a><span class="w">        </span><span class="o">[</span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">reads</span><span class="o">]</span>
-<a id="__codelineno-3-21" name="__codelineno-3-21"></a><span class="w">    </span><span class="o">}</span>
-<a id="__codelineno-3-22" name="__codelineno-3-22"></a><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">reads</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">"Should be modified: $meta"</span><span class="w"> </span><span class="o">}</span>
-<a id="__codelineno-3-23" name="__codelineno-3-23"></a><span class="o">}</span>
+<a id="__codelineno-3-18" name="__codelineno-3-18"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">element</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">sleep</span><span class="w"> </span><span class="mi">10</span><span class="o">;</span><span class="w"> </span><span class="n">element</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-3-19" name="__codelineno-3-19"></a><span class="w">        </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">reads</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">"Should be unmodified: $meta"</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-3-20" name="__codelineno-3-20"></a>
+<a id="__codelineno-3-21" name="__codelineno-3-21"></a><span class="w">    </span><span class="n">samples</span>
+<a id="__codelineno-3-22" name="__codelineno-3-22"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">reads</span><span class="w"> </span><span class="o">-&gt;</span>
+<a id="__codelineno-3-23" name="__codelineno-3-23"></a><span class="w">            </span><span class="n">meta</span><span class="o">.</span><span class="na">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"tumor"</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s2">"abnormal"</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">"normal"</span>
+<a id="__codelineno-3-24" name="__codelineno-3-24"></a><span class="w">            </span><span class="o">[</span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">reads</span><span class="o">]</span>
+<a id="__codelineno-3-25" name="__codelineno-3-25"></a><span class="w">        </span><span class="o">}</span>
+<a id="__codelineno-3-26" name="__codelineno-3-26"></a><span class="w">        </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">reads</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">"Should be modified: $meta"</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-3-27" name="__codelineno-3-27"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </details>
 </div>
@@ -1451,30 +1475,60 @@
 <p>How would you fix the example above to use the safe operators <code>plus</code> and <code>subMap</code> to ensure that the original map remains unmodified?</p>
 <details class="solution">
 <summary>Solution</summary>
-<div class="highlight"><pre><span></span><code><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a>workflow {
-<a href="#__codelineno-4-2" id="__codelineno-4-2" name="__codelineno-4-2"></a>    Channel.fromPath("data/samplesheet.csv")
-<a href="#__codelineno-4-3" id="__codelineno-4-3" name="__codelineno-4-3"></a>    | splitCsv( header:true )
-<a href="#__codelineno-4-4" id="__codelineno-4-4" name="__codelineno-4-4"></a>    | map { row -&gt;
-<a href="#__codelineno-4-5" id="__codelineno-4-5" name="__codelineno-4-5"></a>        meta = row.subMap('id', 'repeat', 'type')
-<a href="#__codelineno-4-6" id="__codelineno-4-6" name="__codelineno-4-6"></a>        [meta, [
-<a href="#__codelineno-4-7" id="__codelineno-4-7" name="__codelineno-4-7"></a>            file(row.fastq1, checkIfExists: true),
-<a href="#__codelineno-4-8" id="__codelineno-4-8" name="__codelineno-4-8"></a>            file(row.fastq2, checkIfExists: true)]]
-<a href="#__codelineno-4-9" id="__codelineno-4-9" name="__codelineno-4-9"></a>    }
-<a href="#__codelineno-4-10" id="__codelineno-4-10" name="__codelineno-4-10"></a>    | set { samples }
-<a href="#__codelineno-4-11" id="__codelineno-4-11" name="__codelineno-4-11"></a>
-<a href="#__codelineno-4-12" id="__codelineno-4-12" name="__codelineno-4-12"></a>
-<a href="#__codelineno-4-13" id="__codelineno-4-13" name="__codelineno-4-13"></a>    samples
-<a href="#__codelineno-4-14" id="__codelineno-4-14" name="__codelineno-4-14"></a>    | map { sleep 10; it }
-<a href="#__codelineno-4-15" id="__codelineno-4-15" name="__codelineno-4-15"></a>    | view { meta, reads -&gt; "Should be unmodified: $meta" }
-<a href="#__codelineno-4-16" id="__codelineno-4-16" name="__codelineno-4-16"></a>
-<a href="#__codelineno-4-17" id="__codelineno-4-17" name="__codelineno-4-17"></a>    samples
-<a href="#__codelineno-4-18" id="__codelineno-4-18" name="__codelineno-4-18"></a>    | map { meta, reads -&gt;
-<a href="#__codelineno-4-19" id="__codelineno-4-19" name="__codelineno-4-19"></a>        newmap = [type: meta.type == "tumor" ? "abnormal" : "normal"]
-<a href="#__codelineno-4-20" id="__codelineno-4-20" name="__codelineno-4-20"></a>        [meta + newmap, reads]
-<a href="#__codelineno-4-21" id="__codelineno-4-21" name="__codelineno-4-21"></a>    }
-<a href="#__codelineno-4-22" id="__codelineno-4-22" name="__codelineno-4-22"></a>    | view { meta, reads -&gt; "Should be modified: $meta" }
-<a href="#__codelineno-4-23" id="__codelineno-4-23" name="__codelineno-4-23"></a>}
-</code></pre></div>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-4-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-4-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-4-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-4-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-4-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-4-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-4-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-4-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-4-10">10</a></span>
+<span class="normal"><a href="#__codelineno-4-11">11</a></span>
+<span class="normal"><a href="#__codelineno-4-12">12</a></span>
+<span class="normal"><a href="#__codelineno-4-13">13</a></span>
+<span class="normal"><a href="#__codelineno-4-14">14</a></span>
+<span class="normal"><a href="#__codelineno-4-15">15</a></span>
+<span class="normal"><a href="#__codelineno-4-16">16</a></span>
+<span class="normal"><a href="#__codelineno-4-17">17</a></span>
+<span class="normal"><a href="#__codelineno-4-18">18</a></span>
+<span class="normal"><a href="#__codelineno-4-19">19</a></span>
+<span class="normal"><a href="#__codelineno-4-20">20</a></span>
+<span class="normal"><a href="#__codelineno-4-21">21</a></span>
+<span class="normal"><a href="#__codelineno-4-22">22</a></span>
+<span class="normal"><a href="#__codelineno-4-23">23</a></span>
+<span class="normal"><a href="#__codelineno-4-24">24</a></span>
+<span class="normal"><a href="#__codelineno-4-25">25</a></span>
+<span class="normal"><a href="#__codelineno-4-26">26</a></span>
+<span class="normal"><a href="#__codelineno-4-27">27</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="w">    </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">"data/samplesheet.csv"</span><span class="o">)</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="w">        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">(</span><span class="w"> </span><span class="nl">header:</span><span class="kc">true</span><span class="w"> </span><span class="o">)</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5"></a><span class="w">            </span><span class="kt">def</span><span class="w"> </span><span class="n">meta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">subMap</span><span class="o">(</span><span class="s1">'id'</span><span class="o">,</span><span class="w"> </span><span class="s1">'repeat'</span><span class="o">,</span><span class="w"> </span><span class="s1">'type'</span><span class="o">)</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6"></a><span class="w">            </span><span class="o">[</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7"></a><span class="w">                </span><span class="n">meta</span><span class="o">,</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8"></a><span class="w">                </span><span class="o">[</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9"></a><span class="w">                    </span><span class="n">file</span><span class="o">(</span><span class="n">row</span><span class="o">.</span><span class="na">fastq1</span><span class="o">,</span><span class="w"> </span><span class="nl">checkIfExists:</span><span class="w"> </span><span class="kc">true</span><span class="o">),</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10"></a><span class="w">                    </span><span class="n">file</span><span class="o">(</span><span class="n">row</span><span class="o">.</span><span class="na">fastq2</span><span class="o">,</span><span class="w"> </span><span class="nl">checkIfExists:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11"></a><span class="w">                </span><span class="o">]</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12"></a><span class="w">            </span><span class="o">]</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13"></a><span class="w">        </span><span class="o">}</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14"></a><span class="w">        </span><span class="o">.</span><span class="na">set</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">samples</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15"></a>
+<a id="__codelineno-4-16" name="__codelineno-4-16"></a>
+<a id="__codelineno-4-17" name="__codelineno-4-17"></a><span class="w">    </span><span class="n">samples</span>
+<a id="__codelineno-4-18" name="__codelineno-4-18"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">element</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">sleep</span><span class="w"> </span><span class="mi">10</span><span class="o">;</span><span class="w"> </span><span class="n">element</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-4-19" name="__codelineno-4-19"></a><span class="w">        </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">reads</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">"Should be unmodified: $meta"</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-4-20" name="__codelineno-4-20"></a>
+<a id="__codelineno-4-21" name="__codelineno-4-21"></a><span class="w">    </span><span class="n">samples</span>
+<a id="__codelineno-4-22" name="__codelineno-4-22"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">reads</span><span class="w"> </span><span class="o">-&gt;</span>
+<a id="__codelineno-4-23" name="__codelineno-4-23"></a><span class="w">            </span><span class="kt">def</span><span class="w"> </span><span class="n">newmap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="nl">type:</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"tumor"</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s2">"abnormal"</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">"normal"</span><span class="o">]</span>
+<a id="__codelineno-4-24" name="__codelineno-4-24"></a><span class="w">            </span><span class="o">[</span><span class="n">meta</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">newmap</span><span class="o">,</span><span class="w"> </span><span class="n">reads</span><span class="o">]</span>
+<a id="__codelineno-4-25" name="__codelineno-4-25"></a><span class="w">        </span><span class="o">}</span>
+<a id="__codelineno-4-26" name="__codelineno-4-26"></a><span class="w">        </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">reads</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">"Should be modified: $meta"</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-4-27" name="__codelineno-4-27"></a><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
 </details>
 </div>
 <h2 id="passing-maps-through-processes"><span class="enumerate-headings-plugin enumerate-heading-plugin">18.2</span> Passing maps through processes<a class="headerlink" href="#passing-maps-through-processes" title="Permanent link">¶</a></h2>
@@ -1505,77 +1559,73 @@
 <span class="normal"><a href="#__codelineno-5-24">24</a></span>
 <span class="normal"><a href="#__codelineno-5-25">25</a></span>
 <span class="normal"><a href="#__codelineno-5-26">26</a></span>
-<span class="normal"><a href="#__codelineno-5-27">27</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="n">process</span><span class="w"> </span><span class="n">MapReads</span><span class="w"> </span><span class="o">{</span>
+<span class="normal"><a href="#__codelineno-5-27">27</a></span>
+<span class="normal"><a href="#__codelineno-5-28">28</a></span>
+<span class="normal"><a href="#__codelineno-5-29">29</a></span>
+<span class="normal"><a href="#__codelineno-5-30">30</a></span>
+<span class="normal"><a href="#__codelineno-5-31">31</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="n">process</span><span class="w"> </span><span class="n">MapReads</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="w">    </span><span class="nl">input:</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">reads</span><span class="o">)</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4"></a><span class="w">    </span><span class="n">path</span><span class="o">(</span><span class="n">genome</span><span class="o">)</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="hll"><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">reads</span><span class="o">)</span>
+</span><a id="__codelineno-5-4" name="__codelineno-5-4"></a><span class="w">    </span><span class="n">path</span><span class="o">(</span><span class="n">genome</span><span class="o">)</span>
 <a id="__codelineno-5-5" name="__codelineno-5-5"></a>
 <a id="__codelineno-5-6" name="__codelineno-5-6"></a><span class="w">    </span><span class="nl">output:</span>
 <a id="__codelineno-5-7" name="__codelineno-5-7"></a><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">"*.bam"</span><span class="o">)</span>
 <a id="__codelineno-5-8" name="__codelineno-5-8"></a>
-<a id="__codelineno-5-9" name="__codelineno-5-9"></a><span class="w">    </span><span class="s2">"touch out.bam"</span>
-<a id="__codelineno-5-10" name="__codelineno-5-10"></a><span class="o">}</span>
-<a id="__codelineno-5-11" name="__codelineno-5-11"></a>
-<a id="__codelineno-5-12" name="__codelineno-5-12"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-5-13" name="__codelineno-5-13"></a><span class="w">    </span><span class="n">reference</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">"data/genome.fasta"</span><span class="o">).</span><span class="na">first</span><span class="o">()</span>
-<a id="__codelineno-5-14" name="__codelineno-5-14"></a>
-<a id="__codelineno-5-15" name="__codelineno-5-15"></a><span class="w">    </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">"data/samplesheet.csv"</span><span class="o">)</span>
-<a id="__codelineno-5-16" name="__codelineno-5-16"></a><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">splitCsv</span><span class="o">(</span><span class="w"> </span><span class="nl">header:</span><span class="kc">true</span><span class="w"> </span><span class="o">)</span>
-<a id="__codelineno-5-17" name="__codelineno-5-17"></a><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span>
-<a id="__codelineno-5-18" name="__codelineno-5-18"></a><span class="w">        </span><span class="n">meta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">subMap</span><span class="o">(</span><span class="s1">'id'</span><span class="o">,</span><span class="w"> </span><span class="s1">'repeat'</span><span class="o">,</span><span class="w"> </span><span class="s1">'type'</span><span class="o">)</span>
-<a id="__codelineno-5-19" name="__codelineno-5-19"></a><span class="w">        </span><span class="o">[</span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="o">[</span>
-<a id="__codelineno-5-20" name="__codelineno-5-20"></a><span class="w">            </span><span class="n">file</span><span class="o">(</span><span class="n">row</span><span class="o">.</span><span class="na">fastq1</span><span class="o">,</span><span class="w"> </span><span class="nl">checkIfExists:</span><span class="w"> </span><span class="kc">true</span><span class="o">),</span>
-<a id="__codelineno-5-21" name="__codelineno-5-21"></a><span class="w">            </span><span class="n">file</span><span class="o">(</span><span class="n">row</span><span class="o">.</span><span class="na">fastq2</span><span class="o">,</span><span class="w"> </span><span class="nl">checkIfExists:</span><span class="w"> </span><span class="kc">true</span><span class="o">)]]</span>
-<a id="__codelineno-5-22" name="__codelineno-5-22"></a><span class="w">    </span><span class="o">}</span>
-<a id="__codelineno-5-23" name="__codelineno-5-23"></a><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">set</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">samples</span><span class="w"> </span><span class="o">}</span>
-<a id="__codelineno-5-24" name="__codelineno-5-24"></a>
-<a id="__codelineno-5-25" name="__codelineno-5-25"></a><span class="w">    </span><span class="n">MapReads</span><span class="o">(</span><span class="w"> </span><span class="n">samples</span><span class="o">,</span><span class="w"> </span><span class="n">reference</span><span class="w"> </span><span class="o">)</span>
-<a id="__codelineno-5-26" name="__codelineno-5-26"></a><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">view</span>
-<a id="__codelineno-5-27" name="__codelineno-5-27"></a><span class="o">}</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10"></a><span class="w">    </span><span class="s2">"touch out.bam"</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11"></a><span class="o">}</span>
+<a id="__codelineno-5-12" name="__codelineno-5-12"></a>
+<a id="__codelineno-5-13" name="__codelineno-5-13"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-5-14" name="__codelineno-5-14"></a><span class="w">    </span><span class="n">reference</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">"data/genome.fasta"</span><span class="o">).</span><span class="na">first</span><span class="o">()</span>
+<a id="__codelineno-5-15" name="__codelineno-5-15"></a>
+<a id="__codelineno-5-16" name="__codelineno-5-16"></a><span class="w">    </span><span class="n">samples</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">"data/samplesheet.csv"</span><span class="o">)</span>
+<a id="__codelineno-5-17" name="__codelineno-5-17"></a><span class="w">        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">(</span><span class="w"> </span><span class="nl">header:</span><span class="kc">true</span><span class="w"> </span><span class="o">)</span>
+<a id="__codelineno-5-18" name="__codelineno-5-18"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span>
+<a id="__codelineno-5-19" name="__codelineno-5-19"></a><span class="w">            </span><span class="kt">def</span><span class="w"> </span><span class="n">meta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">subMap</span><span class="o">(</span><span class="s1">'id'</span><span class="o">,</span><span class="w"> </span><span class="s1">'repeat'</span><span class="o">,</span><span class="w"> </span><span class="s1">'type'</span><span class="o">)</span>
+<a id="__codelineno-5-20" name="__codelineno-5-20"></a><span class="w">            </span><span class="o">[</span>
+<a id="__codelineno-5-21" name="__codelineno-5-21"></a><span class="w">              </span><span class="n">meta</span><span class="o">,</span>
+<a id="__codelineno-5-22" name="__codelineno-5-22"></a><span class="w">              </span><span class="o">[</span>
+<a id="__codelineno-5-23" name="__codelineno-5-23"></a><span class="w">                </span><span class="n">file</span><span class="o">(</span><span class="n">row</span><span class="o">.</span><span class="na">fastq1</span><span class="o">,</span><span class="w"> </span><span class="nl">checkIfExists:</span><span class="w"> </span><span class="kc">true</span><span class="o">),</span>
+<a id="__codelineno-5-24" name="__codelineno-5-24"></a><span class="w">                </span><span class="n">file</span><span class="o">(</span><span class="n">row</span><span class="o">.</span><span class="na">fastq2</span><span class="o">,</span><span class="w"> </span><span class="nl">checkIfExists:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
+<a id="__codelineno-5-25" name="__codelineno-5-25"></a><span class="w">              </span><span class="o">]</span>
+<a id="__codelineno-5-26" name="__codelineno-5-26"></a><span class="w">            </span><span class="o">]</span>
+<a id="__codelineno-5-27" name="__codelineno-5-27"></a><span class="w">        </span><span class="o">}</span>
+<a id="__codelineno-5-28" name="__codelineno-5-28"></a>
+<a id="__codelineno-5-29" name="__codelineno-5-29"></a><span class="hll"><span class="w">    </span><span class="n">mapped_reads</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MapReads</span><span class="o">(</span><span class="w"> </span><span class="n">samples</span><span class="o">,</span><span class="w"> </span><span class="n">reference</span><span class="w"> </span><span class="o">)</span>
+</span><a id="__codelineno-5-30" name="__codelineno-5-30"></a><span class="w">    </span><span class="n">mapped_reads</span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
+<a id="__codelineno-5-31" name="__codelineno-5-31"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>Let's consider that we might now want to merge the repeats. We'll need to group bams that share the <code>id</code> and <code>type</code> attributes.</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1">1</a></span>
-<span class="normal"><a href="#__codelineno-6-2">2</a></span>
-<span class="normal"><a href="#__codelineno-6-3">3</a></span>
-<span class="normal"><a href="#__codelineno-6-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="n">MapReads</span><span class="o">(</span><span class="w"> </span><span class="n">samples</span><span class="o">,</span><span class="w"> </span><span class="n">reference</span><span class="w"> </span><span class="o">)</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2"></a><span class="o">|</span><span class="w"> </span><span class="n">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">bam</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="o">[</span><span class="n">meta</span><span class="o">.</span><span class="na">subMap</span><span class="o">(</span><span class="s1">'id'</span><span class="o">,</span><span class="w"> </span><span class="s1">'type'</span><span class="o">),</span><span class="w"> </span><span class="n">bam</span><span class="o">]}</span>
-<a id="__codelineno-6-3" name="__codelineno-6-3"></a><span class="o">|</span><span class="w"> </span><span class="n">groupTuple</span>
-<a id="__codelineno-6-4" name="__codelineno-6-4"></a><span class="o">|</span><span class="w"> </span><span class="n">view</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-29">29</a></span>
+<span class="normal"><a href="#__codelineno-6-30">30</a></span>
+<span class="normal"><a href="#__codelineno-6-31">31</a></span>
+<span class="normal"><a href="#__codelineno-6-32">32</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-29" name="__codelineno-6-29"></a><span class="n">mapped_reads</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MapReads</span><span class="o">(</span><span class="w"> </span><span class="n">samples</span><span class="o">,</span><span class="w"> </span><span class="n">reference</span><span class="w"> </span><span class="o">)</span>
+<a id="__codelineno-6-30" name="__codelineno-6-30"></a><span class="hll"><span class="w">    </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">bam</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="o">[</span><span class="n">meta</span><span class="o">.</span><span class="na">subMap</span><span class="o">(</span><span class="s1">'id'</span><span class="o">,</span><span class="w"> </span><span class="s1">'type'</span><span class="o">),</span><span class="w"> </span><span class="n">bam</span><span class="o">]}</span>
+</span><a id="__codelineno-6-31" name="__codelineno-6-31"></a><span class="w">    </span><span class="o">.</span><span class="na">groupTuple</span><span class="o">()</span>
+<a id="__codelineno-6-32" name="__codelineno-6-32"></a><span class="n">mapped_reads</span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
 </code></pre></div></td></tr></table></div>
 <p>This is easy enough, but the <code>groupTuple</code> operator has to wait until all items are emitted from the incoming queue before it is able to reassemble the output queue. If even one read mapping job takes a long time, the processing of all other samples is held up. We need a way of signalling to Nextflow how many items are in a given group so that items can be emitted as early as possible.</p>
 <p>By default, the <code>groupTuple</code> operator groups on the first item in the element, which at the moment is a <code>Map</code>. We can turn this map into a special class using the <code>groupKey</code> method, which takes our grouping object as a first parameter and the number of expected elements in the second parameter.</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1">1</a></span>
-<span class="normal"><a href="#__codelineno-7-2">2</a></span>
-<span class="normal"><a href="#__codelineno-7-3">3</a></span>
-<span class="normal"><a href="#__codelineno-7-4">4</a></span>
-<span class="normal"><a href="#__codelineno-7-5">5</a></span>
-<span class="normal"><a href="#__codelineno-7-6">6</a></span>
-<span class="normal"><a href="#__codelineno-7-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="n">MapReads</span><span class="o">(</span><span class="w"> </span><span class="n">samples</span><span class="o">,</span><span class="w"> </span><span class="n">reference</span><span class="w"> </span><span class="o">)</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2"></a><span class="o">|</span><span class="w"> </span><span class="n">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">bam</span><span class="w"> </span><span class="o">-&gt;</span>
-<a id="__codelineno-7-3" name="__codelineno-7-3"></a><span class="w">    </span><span class="n">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">groupKey</span><span class="o">(</span><span class="n">meta</span><span class="o">.</span><span class="na">subMap</span><span class="o">(</span><span class="s1">'id'</span><span class="o">,</span><span class="w"> </span><span class="s1">'type'</span><span class="o">),</span><span class="w"> </span><span class="n">NUMBER_OF_ITEMS_IN_GROUP</span><span class="o">)</span>
-<a id="__codelineno-7-4" name="__codelineno-7-4"></a><span class="w">    </span><span class="o">[</span><span class="n">key</span><span class="o">,</span><span class="w"> </span><span class="n">bam</span><span class="o">]</span>
-<a id="__codelineno-7-5" name="__codelineno-7-5"></a><span class="o">}</span>
-<a id="__codelineno-7-6" name="__codelineno-7-6"></a><span class="o">|</span><span class="w"> </span><span class="n">groupTuple</span>
-<a id="__codelineno-7-7" name="__codelineno-7-7"></a><span class="o">|</span><span class="w"> </span><span class="n">view</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-29">29</a></span>
+<span class="normal"><a href="#__codelineno-7-30">30</a></span>
+<span class="normal"><a href="#__codelineno-7-31">31</a></span>
+<span class="normal"><a href="#__codelineno-7-32">32</a></span>
+<span class="normal"><a href="#__codelineno-7-33">33</a></span>
+<span class="normal"><a href="#__codelineno-7-34">34</a></span>
+<span class="normal"><a href="#__codelineno-7-35">35</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-29" name="__codelineno-7-29"></a><span class="n">mapped_reads</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MapReads</span><span class="o">(</span><span class="w"> </span><span class="n">samples</span><span class="o">,</span><span class="w"> </span><span class="n">reference</span><span class="w"> </span><span class="o">)</span>
+<a id="__codelineno-7-30" name="__codelineno-7-30"></a><span class="w">    </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">bam</span><span class="w"> </span><span class="o">-&gt;</span>
+<a id="__codelineno-7-31" name="__codelineno-7-31"></a><span class="hll"><span class="w">        </span><span class="kt">def</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">groupKey</span><span class="o">(</span><span class="n">meta</span><span class="o">.</span><span class="na">subMap</span><span class="o">(</span><span class="s1">'id'</span><span class="o">,</span><span class="w"> </span><span class="s1">'type'</span><span class="o">),</span><span class="w"> </span><span class="n">NUMBER_OF_ITEMS_IN_GROUP</span><span class="o">)</span>
+</span><a id="__codelineno-7-32" name="__codelineno-7-32"></a><span class="w">        </span><span class="o">[</span><span class="n">key</span><span class="o">,</span><span class="w"> </span><span class="n">bam</span><span class="o">]</span>
+<a id="__codelineno-7-33" name="__codelineno-7-33"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-7-34" name="__codelineno-7-34"></a><span class="w">    </span><span class="o">.</span><span class="na">groupTuple</span><span class="o">()</span>
+<a id="__codelineno-7-35" name="__codelineno-7-35"></a><span class="n">mapped_reads</span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
 </code></pre></div></td></tr></table></div>
 <div class="admonition exercise">
 <p class="admonition-title">Exercise</p>
 <p>How might we modify the upstream channels to the number of repeats into the metamap?</p>
 <details class="solution">
 <summary>Solution</summary>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-8-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-8-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-8-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-8-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-8-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-8-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-8-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-8-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-8-10">10</a></span>
-<span class="normal"><a href="#__codelineno-8-11">11</a></span>
-<span class="normal"><a href="#__codelineno-8-12">12</a></span>
-<span class="normal"><a href="#__codelineno-8-13">13</a></span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-13">13</a></span>
 <span class="normal"><a href="#__codelineno-8-14">14</a></span>
 <span class="normal"><a href="#__codelineno-8-15">15</a></span>
 <span class="normal"><a href="#__codelineno-8-16">16</a></span>
@@ -1586,198 +1636,234 @@
 <span class="normal"><a href="#__codelineno-8-21">21</a></span>
 <span class="normal"><a href="#__codelineno-8-22">22</a></span>
 <span class="normal"><a href="#__codelineno-8-23">23</a></span>
-<span class="normal"><a href="#__codelineno-8-24">24</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2"></a><span class="w">    </span><span class="n">reference</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">"data/genome.fasta"</span><span class="o">).</span><span class="na">first</span><span class="o">()</span>
-<a id="__codelineno-8-3" name="__codelineno-8-3"></a>
-<a id="__codelineno-8-4" name="__codelineno-8-4"></a><span class="w">    </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">"data/samplesheet.csv"</span><span class="o">)</span>
-<a id="__codelineno-8-5" name="__codelineno-8-5"></a><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">splitCsv</span><span class="o">(</span><span class="w"> </span><span class="nl">header:</span><span class="kc">true</span><span class="w"> </span><span class="o">)</span>
-<a id="__codelineno-8-6" name="__codelineno-8-6"></a><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span>
-<a id="__codelineno-8-7" name="__codelineno-8-7"></a><span class="w">        </span><span class="n">meta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">subMap</span><span class="o">(</span><span class="s1">'id'</span><span class="o">,</span><span class="w"> </span><span class="s1">'repeat'</span><span class="o">,</span><span class="w"> </span><span class="s1">'type'</span><span class="o">)</span>
-<a id="__codelineno-8-8" name="__codelineno-8-8"></a><span class="w">        </span><span class="o">[</span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="o">[</span><span class="n">file</span><span class="o">(</span><span class="n">row</span><span class="o">.</span><span class="na">fastq1</span><span class="o">,</span><span class="w"> </span><span class="nl">checkIfExists:</span><span class="w"> </span><span class="kc">true</span><span class="o">),</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="n">row</span><span class="o">.</span><span class="na">fastq2</span><span class="o">,</span><span class="w"> </span><span class="nl">checkIfExists:</span><span class="w"> </span><span class="kc">true</span><span class="o">)]]</span>
-<a id="__codelineno-8-9" name="__codelineno-8-9"></a><span class="w">    </span><span class="o">}</span>
-<a id="__codelineno-8-10" name="__codelineno-8-10"></a><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">reads</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="o">[</span><span class="n">meta</span><span class="o">.</span><span class="na">subMap</span><span class="o">(</span><span class="s1">'id'</span><span class="o">,</span><span class="w"> </span><span class="s1">'type'</span><span class="o">),</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">repeat</span><span class="o">,</span><span class="w"> </span><span class="n">reads</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
-<a id="__codelineno-8-11" name="__codelineno-8-11"></a><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">groupTuple</span>
-<a id="__codelineno-8-12" name="__codelineno-8-12"></a><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">repeats</span><span class="o">,</span><span class="w"> </span><span class="n">reads</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="o">[</span><span class="n">meta</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">[</span><span class="nl">repeatcount:</span><span class="n">repeats</span><span class="o">.</span><span class="na">size</span><span class="o">()],</span><span class="w"> </span><span class="n">repeats</span><span class="o">,</span><span class="w"> </span><span class="n">reads</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
-<a id="__codelineno-8-13" name="__codelineno-8-13"></a><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">transpose</span>
-<a id="__codelineno-8-14" name="__codelineno-8-14"></a><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">repeat</span><span class="o">,</span><span class="w"> </span><span class="n">reads</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="o">[</span><span class="n">meta</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">[</span><span class="nl">repeat:</span><span class="n">repeat</span><span class="o">],</span><span class="w"> </span><span class="n">reads</span><span class="o">]}</span>
-<a id="__codelineno-8-15" name="__codelineno-8-15"></a><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">set</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">samples</span><span class="w"> </span><span class="o">}</span>
-<a id="__codelineno-8-16" name="__codelineno-8-16"></a>
-<a id="__codelineno-8-17" name="__codelineno-8-17"></a><span class="w">    </span><span class="n">MapReads</span><span class="o">(</span><span class="w"> </span><span class="n">samples</span><span class="o">,</span><span class="w"> </span><span class="n">reference</span><span class="w"> </span><span class="o">)</span>
-<a id="__codelineno-8-18" name="__codelineno-8-18"></a><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">bam</span><span class="w"> </span><span class="o">-&gt;</span>
-<a id="__codelineno-8-19" name="__codelineno-8-19"></a><span class="w">        </span><span class="n">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">groupKey</span><span class="o">(</span><span class="n">meta</span><span class="o">.</span><span class="na">subMap</span><span class="o">(</span><span class="s1">'id'</span><span class="o">,</span><span class="w"> </span><span class="s1">'type'</span><span class="o">),</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">repeatcount</span><span class="o">)</span>
-<a id="__codelineno-8-20" name="__codelineno-8-20"></a><span class="w">        </span><span class="o">[</span><span class="n">key</span><span class="o">,</span><span class="w"> </span><span class="n">bam</span><span class="o">]</span>
-<a id="__codelineno-8-21" name="__codelineno-8-21"></a><span class="w">    </span><span class="o">}</span>
-<a id="__codelineno-8-22" name="__codelineno-8-22"></a><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">groupTuple</span>
-<a id="__codelineno-8-23" name="__codelineno-8-23"></a><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">view</span>
-<a id="__codelineno-8-24" name="__codelineno-8-24"></a><span class="o">}</span>
+<span class="normal"><a href="#__codelineno-8-24">24</a></span>
+<span class="normal"><a href="#__codelineno-8-25">25</a></span>
+<span class="normal"><a href="#__codelineno-8-26">26</a></span>
+<span class="normal"><a href="#__codelineno-8-27">27</a></span>
+<span class="normal"><a href="#__codelineno-8-28">28</a></span>
+<span class="normal"><a href="#__codelineno-8-29">29</a></span>
+<span class="normal"><a href="#__codelineno-8-30">30</a></span>
+<span class="normal"><a href="#__codelineno-8-31">31</a></span>
+<span class="normal"><a href="#__codelineno-8-32">32</a></span>
+<span class="normal"><a href="#__codelineno-8-33">33</a></span>
+<span class="normal"><a href="#__codelineno-8-34">34</a></span>
+<span class="normal"><a href="#__codelineno-8-35">35</a></span>
+<span class="normal"><a href="#__codelineno-8-36">36</a></span>
+<span class="normal"><a href="#__codelineno-8-37">37</a></span>
+<span class="normal"><a href="#__codelineno-8-38">38</a></span>
+<span class="normal"><a href="#__codelineno-8-39">39</a></span>
+<span class="normal"><a href="#__codelineno-8-40">40</a></span>
+<span class="normal"><a href="#__codelineno-8-41">41</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-13" name="__codelineno-8-13"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-8-14" name="__codelineno-8-14"></a><span class="w">    </span><span class="n">reference</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">"data/genome.fasta"</span><span class="o">).</span><span class="na">first</span><span class="o">()</span>
+<a id="__codelineno-8-15" name="__codelineno-8-15"></a>
+<a id="__codelineno-8-16" name="__codelineno-8-16"></a><span class="w">    </span><span class="n">samples</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">"data/samplesheet.csv"</span><span class="o">)</span>
+<a id="__codelineno-8-17" name="__codelineno-8-17"></a><span class="w">        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">(</span><span class="w"> </span><span class="nl">header:</span><span class="kc">true</span><span class="w"> </span><span class="o">)</span>
+<a id="__codelineno-8-18" name="__codelineno-8-18"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span>
+<a id="__codelineno-8-19" name="__codelineno-8-19"></a><span class="w">            </span><span class="kt">def</span><span class="w"> </span><span class="n">meta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">subMap</span><span class="o">(</span><span class="s1">'id'</span><span class="o">,</span><span class="w"> </span><span class="s1">'repeat'</span><span class="o">,</span><span class="w"> </span><span class="s1">'type'</span><span class="o">)</span>
+<a id="__codelineno-8-20" name="__codelineno-8-20"></a><span class="w">            </span><span class="o">[</span>
+<a id="__codelineno-8-21" name="__codelineno-8-21"></a><span class="w">              </span><span class="n">meta</span><span class="o">,</span>
+<a id="__codelineno-8-22" name="__codelineno-8-22"></a><span class="w">              </span><span class="o">[</span>
+<a id="__codelineno-8-23" name="__codelineno-8-23"></a><span class="w">                </span><span class="n">file</span><span class="o">(</span><span class="n">row</span><span class="o">.</span><span class="na">fastq1</span><span class="o">,</span><span class="w"> </span><span class="nl">checkIfExists:</span><span class="w"> </span><span class="kc">true</span><span class="o">),</span>
+<a id="__codelineno-8-24" name="__codelineno-8-24"></a><span class="w">                </span><span class="n">file</span><span class="o">(</span><span class="n">row</span><span class="o">.</span><span class="na">fastq2</span><span class="o">,</span><span class="w"> </span><span class="nl">checkIfExists:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
+<a id="__codelineno-8-25" name="__codelineno-8-25"></a><span class="w">              </span><span class="o">]</span>
+<a id="__codelineno-8-26" name="__codelineno-8-26"></a><span class="w">            </span><span class="o">]</span>
+<a id="__codelineno-8-27" name="__codelineno-8-27"></a><span class="w">        </span><span class="o">}</span>
+<a id="__codelineno-8-28" name="__codelineno-8-28"></a><span class="hll"><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">reads</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="o">[</span><span class="n">meta</span><span class="o">.</span><span class="na">subMap</span><span class="o">(</span><span class="s1">'id'</span><span class="o">,</span><span class="w"> </span><span class="s1">'type'</span><span class="o">),</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">repeat</span><span class="o">,</span><span class="w"> </span><span class="n">reads</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
+</span><a id="__codelineno-8-29" name="__codelineno-8-29"></a><span class="hll"><span class="w">        </span><span class="o">.</span><span class="na">groupTuple</span><span class="o">()</span>
+</span><a id="__codelineno-8-30" name="__codelineno-8-30"></a><span class="hll"><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">repeats</span><span class="o">,</span><span class="w"> </span><span class="n">reads</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="o">[</span><span class="n">meta</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">[</span><span class="nl">repeatcount:</span><span class="n">repeats</span><span class="o">.</span><span class="na">size</span><span class="o">()],</span><span class="w"> </span><span class="n">repeats</span><span class="o">,</span><span class="w"> </span><span class="n">reads</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
+</span><a id="__codelineno-8-31" name="__codelineno-8-31"></a><span class="hll"><span class="w">        </span><span class="o">.</span><span class="na">transpose</span><span class="o">()</span>
+</span><a id="__codelineno-8-32" name="__codelineno-8-32"></a><span class="hll"><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">repeat</span><span class="o">,</span><span class="w"> </span><span class="n">reads</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="o">[</span><span class="n">meta</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">[</span><span class="nl">repeat:</span><span class="n">repeat</span><span class="o">],</span><span class="w"> </span><span class="n">reads</span><span class="o">]}</span>
+</span><a id="__codelineno-8-33" name="__codelineno-8-33"></a>
+<a id="__codelineno-8-34" name="__codelineno-8-34"></a><span class="w">    </span><span class="n">mapped_reads</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MapReads</span><span class="o">(</span><span class="w"> </span><span class="n">samples</span><span class="o">,</span><span class="w"> </span><span class="n">reference</span><span class="w"> </span><span class="o">)</span>
+<a id="__codelineno-8-35" name="__codelineno-8-35"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">bam</span><span class="w"> </span><span class="o">-&gt;</span>
+<a id="__codelineno-8-36" name="__codelineno-8-36"></a><span class="w">            </span><span class="kt">def</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">groupKey</span><span class="o">(</span><span class="n">meta</span><span class="o">.</span><span class="na">subMap</span><span class="o">(</span><span class="s1">'id'</span><span class="o">,</span><span class="w"> </span><span class="s1">'type'</span><span class="o">),</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">repeatcount</span><span class="o">)</span>
+<a id="__codelineno-8-37" name="__codelineno-8-37"></a><span class="w">            </span><span class="o">[</span><span class="n">key</span><span class="o">,</span><span class="w"> </span><span class="n">bam</span><span class="o">]</span>
+<a id="__codelineno-8-38" name="__codelineno-8-38"></a><span class="w">        </span><span class="o">}</span>
+<a id="__codelineno-8-39" name="__codelineno-8-39"></a><span class="w">        </span><span class="o">.</span><span class="na">groupTuple</span><span class="o">()</span>
+<a id="__codelineno-8-40" name="__codelineno-8-40"></a><span class="w">    </span><span class="n">mapped_reads</span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
+<a id="__codelineno-8-41" name="__codelineno-8-41"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </details>
 </div>
 <p>Now that we have our repeats together in an output channel, we can combine them using "advanced bioinformatics":</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1">1</a></span>
-<span class="normal"><a href="#__codelineno-9-2">2</a></span>
-<span class="normal"><a href="#__codelineno-9-3">3</a></span>
-<span class="normal"><a href="#__codelineno-9-4">4</a></span>
-<span class="normal"><a href="#__codelineno-9-5">5</a></span>
-<span class="normal"><a href="#__codelineno-9-6">6</a></span>
-<span class="normal"><a href="#__codelineno-9-7">7</a></span>
-<span class="normal"><a href="#__codelineno-9-8">8</a></span>
-<span class="normal"><a href="#__codelineno-9-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="n">process</span><span class="w"> </span><span class="n">CombineBams</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2"></a><span class="w">    </span><span class="nl">input:</span>
-<a id="__codelineno-9-3" name="__codelineno-9-3"></a><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">"input/in_*_.bam"</span><span class="o">)</span>
-<a id="__codelineno-9-4" name="__codelineno-9-4"></a>
-<a id="__codelineno-9-5" name="__codelineno-9-5"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-9-6" name="__codelineno-9-6"></a><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">"combined.bam"</span><span class="o">)</span>
-<a id="__codelineno-9-7" name="__codelineno-9-7"></a>
-<a id="__codelineno-9-8" name="__codelineno-9-8"></a><span class="w">    </span><span class="s2">"cat input/*.bam &gt; combined.bam"</span>
-<a id="__codelineno-9-9" name="__codelineno-9-9"></a><span class="o">}</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-13">13</a></span>
+<span class="normal"><a href="#__codelineno-9-14">14</a></span>
+<span class="normal"><a href="#__codelineno-9-15">15</a></span>
+<span class="normal"><a href="#__codelineno-9-16">16</a></span>
+<span class="normal"><a href="#__codelineno-9-17">17</a></span>
+<span class="normal"><a href="#__codelineno-9-18">18</a></span>
+<span class="normal"><a href="#__codelineno-9-19">19</a></span>
+<span class="normal"><a href="#__codelineno-9-20">20</a></span>
+<span class="normal"><a href="#__codelineno-9-21">21</a></span>
+<span class="normal"><a href="#__codelineno-9-22">22</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-13" name="__codelineno-9-13"></a><span class="n">process</span><span class="w"> </span><span class="n">CombineBams</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-9-14" name="__codelineno-9-14"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-9-15" name="__codelineno-9-15"></a><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">"input/in_*_.bam"</span><span class="o">)</span>
+<a id="__codelineno-9-16" name="__codelineno-9-16"></a>
+<a id="__codelineno-9-17" name="__codelineno-9-17"></a><span class="w">    </span><span class="nl">output:</span>
+<a id="__codelineno-9-18" name="__codelineno-9-18"></a><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">"combined.bam"</span><span class="o">)</span>
+<a id="__codelineno-9-19" name="__codelineno-9-19"></a>
+<a id="__codelineno-9-20" name="__codelineno-9-20"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-9-21" name="__codelineno-9-21"></a><span class="w">    </span><span class="s2">"cat input/*.bam &gt; combined.bam"</span>
+<a id="__codelineno-9-22" name="__codelineno-9-22"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>In our workflow:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">1</a></span>
-<span class="normal"><a href="#__codelineno-10-2">2</a></span>
-<span class="normal"><a href="#__codelineno-10-3">3</a></span>
-<span class="normal"><a href="#__codelineno-10-4">4</a></span>
-<span class="normal"><a href="#__codelineno-10-5">5</a></span>
-<span class="normal"><a href="#__codelineno-10-6">6</a></span>
-<span class="normal"><a href="#__codelineno-10-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="n">MapReads</span><span class="o">(</span><span class="w"> </span><span class="n">samples</span><span class="o">,</span><span class="w"> </span><span class="n">reference</span><span class="w"> </span><span class="o">)</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2"></a><span class="o">|</span><span class="w"> </span><span class="n">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">bam</span><span class="w"> </span><span class="o">-&gt;</span>
-<a id="__codelineno-10-3" name="__codelineno-10-3"></a><span class="w">    </span><span class="n">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">groupKey</span><span class="o">(</span><span class="n">meta</span><span class="o">.</span><span class="na">subMap</span><span class="o">(</span><span class="s1">'id'</span><span class="o">,</span><span class="w"> </span><span class="s1">'type'</span><span class="o">),</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">repeatcount</span><span class="o">)</span>
-<a id="__codelineno-10-4" name="__codelineno-10-4"></a><span class="w">    </span><span class="o">[</span><span class="n">key</span><span class="o">,</span><span class="w"> </span><span class="n">bam</span><span class="o">]</span>
-<a id="__codelineno-10-5" name="__codelineno-10-5"></a><span class="o">}</span>
-<a id="__codelineno-10-6" name="__codelineno-10-6"></a><span class="o">|</span><span class="w"> </span><span class="n">groupTuple</span>
-<a id="__codelineno-10-7" name="__codelineno-10-7"></a><span class="o">|</span><span class="w"> </span><span class="n">CombineBams</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-45">45</a></span>
+<span class="normal"><a href="#__codelineno-10-46">46</a></span>
+<span class="normal"><a href="#__codelineno-10-47">47</a></span>
+<span class="normal"><a href="#__codelineno-10-48">48</a></span>
+<span class="normal"><a href="#__codelineno-10-49">49</a></span>
+<span class="normal"><a href="#__codelineno-10-50">50</a></span>
+<span class="normal"><a href="#__codelineno-10-51">51</a></span>
+<span class="normal"><a href="#__codelineno-10-52">52</a></span>
+<span class="normal"><a href="#__codelineno-10-53">53</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-45" name="__codelineno-10-45"></a><span class="n">mapped_reads</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MapReads</span><span class="o">(</span><span class="w"> </span><span class="n">samples</span><span class="o">,</span><span class="w"> </span><span class="n">reference</span><span class="w"> </span><span class="o">)</span>
+<a id="__codelineno-10-46" name="__codelineno-10-46"></a><span class="w">    </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">bam</span><span class="w"> </span><span class="o">-&gt;</span>
+<a id="__codelineno-10-47" name="__codelineno-10-47"></a><span class="hll"><span class="w">        </span><span class="kt">def</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">groupKey</span><span class="o">(</span><span class="n">meta</span><span class="o">.</span><span class="na">subMap</span><span class="o">(</span><span class="s1">'id'</span><span class="o">,</span><span class="w"> </span><span class="s1">'type'</span><span class="o">),</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">repeatcount</span><span class="o">)</span>
+</span><a id="__codelineno-10-48" name="__codelineno-10-48"></a><span class="w">        </span><span class="o">[</span><span class="n">key</span><span class="o">,</span><span class="w"> </span><span class="n">bam</span><span class="o">]</span>
+<a id="__codelineno-10-49" name="__codelineno-10-49"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-10-50" name="__codelineno-10-50"></a><span class="w">    </span><span class="o">.</span><span class="na">groupTuple</span><span class="o">()</span>
+<a id="__codelineno-10-51" name="__codelineno-10-51"></a>
+<a id="__codelineno-10-52" name="__codelineno-10-52"></a><span class="n">CombineBams</span><span class="o">(</span><span class="n">mapped_reads</span><span class="o">)</span>
+<a id="__codelineno-10-53" name="__codelineno-10-53"></a><span class="w">  </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
 </code></pre></div></td></tr></table></div>
 <h2 id="fanning-out-over-intervals"><span class="enumerate-headings-plugin enumerate-heading-plugin">18.3</span> Fanning out over intervals<a class="headerlink" href="#fanning-out-over-intervals" title="Permanent link">¶</a></h2>
 <p>The previous exercise demonstrated the fan-in approach using <code>groupTuple</code> and <code>groupKey</code>, but we might want to fan out our processes. An example might be computing over some intervals - genotyping over intervals, for example.</p>
 <p>We can take an existing bed file, for example and turn it into a channel of Maps.</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1">1</a></span>
-<span class="normal"><a href="#__codelineno-11-2">2</a></span>
-<span class="normal"><a href="#__codelineno-11-3">3</a></span>
-<span class="normal"><a href="#__codelineno-11-4">4</a></span>
-<span class="normal"><a href="#__codelineno-11-5">5</a></span>
-<span class="normal"><a href="#__codelineno-11-6">6</a></span>
-<span class="normal"><a href="#__codelineno-11-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="n">Channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">"data/intervals.bed"</span><span class="o">)</span>
-<a id="__codelineno-11-2" name="__codelineno-11-2"></a><span class="o">|</span><span class="w"> </span><span class="n">splitCsv</span><span class="o">(</span><span class="nl">header:</span><span class="w"> </span><span class="o">[</span><span class="s1">'chr'</span><span class="o">,</span><span class="w"> </span><span class="s1">'start'</span><span class="o">,</span><span class="w"> </span><span class="s1">'stop'</span><span class="o">,</span><span class="w"> </span><span class="s1">'name'</span><span class="o">],</span><span class="w"> </span><span class="nl">sep:</span><span class="w"> </span><span class="s1">'\t'</span><span class="o">)</span>
-<a id="__codelineno-11-3" name="__codelineno-11-3"></a><span class="o">|</span><span class="w"> </span><span class="n">collectFile</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">entry</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="o">[</span><span class="s2">"${entry.name}.bed"</span><span class="o">,</span><span class="w"> </span><span class="n">entry</span><span class="o">*.</span><span class="na">value</span><span class="o">.</span><span class="na">join</span><span class="o">(</span><span class="s2">"\t"</span><span class="o">)]</span><span class="w"> </span><span class="o">}</span>
-<a id="__codelineno-11-4" name="__codelineno-11-4"></a><span class="o">|</span><span class="w"> </span><span class="n">view</span>
-<a id="__codelineno-11-5" name="__codelineno-11-5"></a><span class="o">|</span><span class="w"> </span><span class="n">set</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">intervals</span><span class="w"> </span><span class="o">}</span>
-<a id="__codelineno-11-6" name="__codelineno-11-6"></a>
-<a id="__codelineno-11-7" name="__codelineno-11-7"></a><span class="k">return</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-26">26</a></span>
+<span class="normal"><a href="#__codelineno-11-27">27</a></span>
+<span class="normal"><a href="#__codelineno-11-28">28</a></span>
+<span class="normal"><a href="#__codelineno-11-29">29</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-11-26" name="__codelineno-11-26"></a><span class="n">intervals</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">"data/intervals.bed"</span><span class="o">)</span>
+<a id="__codelineno-11-27" name="__codelineno-11-27"></a><span class="w">    </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">(</span><span class="nl">header:</span><span class="w"> </span><span class="o">[</span><span class="s1">'chr'</span><span class="o">,</span><span class="w"> </span><span class="s1">'start'</span><span class="o">,</span><span class="w"> </span><span class="s1">'stop'</span><span class="o">,</span><span class="w"> </span><span class="s1">'name'</span><span class="o">],</span><span class="w"> </span><span class="nl">sep:</span><span class="w"> </span><span class="s1">'\t'</span><span class="o">)</span>
+<a id="__codelineno-11-28" name="__codelineno-11-28"></a><span class="w">    </span><span class="o">.</span><span class="na">collectFile</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">entry</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="o">[</span><span class="s2">"${entry.name}.bed"</span><span class="o">,</span><span class="w"> </span><span class="n">entry</span><span class="o">*.</span><span class="na">value</span><span class="o">.</span><span class="na">join</span><span class="o">(</span><span class="s2">"\t"</span><span class="o">)]</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-11-29" name="__codelineno-11-29"></a><span class="w">    </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
 </code></pre></div></td></tr></table></div>
-<div class="admonition note">
-<p class="admonition-title">Quick return</p>
-<p>In the example above, I add a <code>return</code> statement for quick debugging. This ensures that all workflow operations after the <code>return</code> are not included in the process DAG.</p>
-</div>
 <p>Given a dummy genotyping process:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1">1</a></span>
-<span class="normal"><a href="#__codelineno-12-2">2</a></span>
-<span class="normal"><a href="#__codelineno-12-3">3</a></span>
-<span class="normal"><a href="#__codelineno-12-4">4</a></span>
-<span class="normal"><a href="#__codelineno-12-5">5</a></span>
-<span class="normal"><a href="#__codelineno-12-6">6</a></span>
-<span class="normal"><a href="#__codelineno-12-7">7</a></span>
-<span class="normal"><a href="#__codelineno-12-8">8</a></span>
-<span class="normal"><a href="#__codelineno-12-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="n">process</span><span class="w"> </span><span class="n">GenotypeOnInterval</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-12-2" name="__codelineno-12-2"></a><span class="w">    </span><span class="nl">input:</span>
-<a id="__codelineno-12-3" name="__codelineno-12-3"></a><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">bam</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">bed</span><span class="o">)</span>
-<a id="__codelineno-12-4" name="__codelineno-12-4"></a>
-<a id="__codelineno-12-5" name="__codelineno-12-5"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-12-6" name="__codelineno-12-6"></a><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">"genotyped.vcf"</span><span class="o">)</span>
-<a id="__codelineno-12-7" name="__codelineno-12-7"></a>
-<a id="__codelineno-12-8" name="__codelineno-12-8"></a><span class="w">    </span><span class="s2">"cat $bam $bed &gt; genotyped.vcf"</span>
-<a id="__codelineno-12-9" name="__codelineno-12-9"></a><span class="o">}</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-24">24</a></span>
+<span class="normal"><a href="#__codelineno-12-25">25</a></span>
+<span class="normal"><a href="#__codelineno-12-26">26</a></span>
+<span class="normal"><a href="#__codelineno-12-27">27</a></span>
+<span class="normal"><a href="#__codelineno-12-28">28</a></span>
+<span class="normal"><a href="#__codelineno-12-29">29</a></span>
+<span class="normal"><a href="#__codelineno-12-30">30</a></span>
+<span class="normal"><a href="#__codelineno-12-31">31</a></span>
+<span class="normal"><a href="#__codelineno-12-32">32</a></span>
+<span class="normal"><a href="#__codelineno-12-33">33</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-12-24" name="__codelineno-12-24"></a><span class="n">process</span><span class="w"> </span><span class="n">GenotypeOnInterval</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-12-25" name="__codelineno-12-25"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-12-26" name="__codelineno-12-26"></a><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">bam</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="n">bed</span><span class="o">)</span>
+<a id="__codelineno-12-27" name="__codelineno-12-27"></a>
+<a id="__codelineno-12-28" name="__codelineno-12-28"></a><span class="w">    </span><span class="nl">output:</span>
+<a id="__codelineno-12-29" name="__codelineno-12-29"></a><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">"genotyped.vcf"</span><span class="o">)</span>
+<a id="__codelineno-12-30" name="__codelineno-12-30"></a>
+<a id="__codelineno-12-31" name="__codelineno-12-31"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-12-32" name="__codelineno-12-32"></a><span class="w">    </span><span class="s2">"cat $bam $bed &gt; genotyped.vcf"</span>
+<a id="__codelineno-12-33" name="__codelineno-12-33"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>We can use the <code>combine</code> operator to emit a new channel where each combined bam is attached to each bed file. These can then be piped into the genotyping process:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-13-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-13-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-13-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-13-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-13-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-13-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-13-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-13-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-13-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1"></a><span class="n">MapReads</span><span class="o">(</span><span class="w"> </span><span class="n">samples</span><span class="o">,</span><span class="w"> </span><span class="n">reference</span><span class="w"> </span><span class="o">)</span>
-<a id="__codelineno-13-2" name="__codelineno-13-2"></a><span class="o">|</span><span class="w"> </span><span class="n">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">bam</span><span class="w"> </span><span class="o">-&gt;</span>
-<a id="__codelineno-13-3" name="__codelineno-13-3"></a><span class="w">    </span><span class="n">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">groupKey</span><span class="o">(</span><span class="n">meta</span><span class="o">.</span><span class="na">subMap</span><span class="o">(</span><span class="s1">'id'</span><span class="o">,</span><span class="w"> </span><span class="s1">'type'</span><span class="o">),</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">repeatcount</span><span class="o">)</span>
-<a id="__codelineno-13-4" name="__codelineno-13-4"></a><span class="w">    </span><span class="o">[</span><span class="n">key</span><span class="o">,</span><span class="w"> </span><span class="n">bam</span><span class="o">]</span>
-<a id="__codelineno-13-5" name="__codelineno-13-5"></a><span class="o">}</span>
-<a id="__codelineno-13-6" name="__codelineno-13-6"></a><span class="o">|</span><span class="w"> </span><span class="n">groupTuple</span>
-<a id="__codelineno-13-7" name="__codelineno-13-7"></a><span class="o">|</span><span class="w"> </span><span class="n">CombineBams</span>
-<a id="__codelineno-13-8" name="__codelineno-13-8"></a><span class="o">|</span><span class="w"> </span><span class="n">combine</span><span class="o">(</span><span class="w"> </span><span class="n">intervals</span><span class="w"> </span><span class="o">)</span>
-<a id="__codelineno-13-9" name="__codelineno-13-9"></a><span class="o">|</span><span class="w"> </span><span class="n">GenotypeOnInterval</span>
-<a id="__codelineno-13-10" name="__codelineno-13-10"></a><span class="o">|</span><span class="w"> </span><span class="n">view</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-60">60</a></span>
+<span class="normal"><a href="#__codelineno-13-61">61</a></span>
+<span class="normal"><a href="#__codelineno-13-62">62</a></span>
+<span class="normal"><a href="#__codelineno-13-63">63</a></span>
+<span class="normal"><a href="#__codelineno-13-64">64</a></span>
+<span class="normal"><a href="#__codelineno-13-65">65</a></span>
+<span class="normal"><a href="#__codelineno-13-66">66</a></span>
+<span class="normal"><a href="#__codelineno-13-67">67</a></span>
+<span class="normal"><a href="#__codelineno-13-68">68</a></span>
+<span class="normal"><a href="#__codelineno-13-69">69</a></span>
+<span class="normal"><a href="#__codelineno-13-70">70</a></span>
+<span class="normal"><a href="#__codelineno-13-71">71</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-13-60" name="__codelineno-13-60"></a><span class="n">mapped_reads</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MapReads</span><span class="o">(</span><span class="w"> </span><span class="n">samples</span><span class="o">,</span><span class="w"> </span><span class="n">reference</span><span class="w"> </span><span class="o">)</span>
+<a id="__codelineno-13-61" name="__codelineno-13-61"></a><span class="w">    </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">bam</span><span class="w"> </span><span class="o">-&gt;</span>
+<a id="__codelineno-13-62" name="__codelineno-13-62"></a><span class="w">        </span><span class="kt">def</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">groupKey</span><span class="o">(</span><span class="n">meta</span><span class="o">.</span><span class="na">subMap</span><span class="o">(</span><span class="s1">'id'</span><span class="o">,</span><span class="w"> </span><span class="s1">'type'</span><span class="o">),</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">repeatcount</span><span class="o">)</span>
+<a id="__codelineno-13-63" name="__codelineno-13-63"></a><span class="w">        </span><span class="o">[</span><span class="n">key</span><span class="o">,</span><span class="w"> </span><span class="n">bam</span><span class="o">]</span>
+<a id="__codelineno-13-64" name="__codelineno-13-64"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-13-65" name="__codelineno-13-65"></a><span class="w">    </span><span class="o">.</span><span class="na">groupTuple</span><span class="o">()</span>
+<a id="__codelineno-13-66" name="__codelineno-13-66"></a>
+<a id="__codelineno-13-67" name="__codelineno-13-67"></a><span class="n">combined_bams</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CombineBams</span><span class="o">(</span><span class="n">mapped_reads</span><span class="o">)</span>
+<a id="__codelineno-13-68" name="__codelineno-13-68"></a><span class="hll"><span class="w">    </span><span class="o">.</span><span class="na">combine</span><span class="o">(</span><span class="w"> </span><span class="n">intervals</span><span class="w"> </span><span class="o">)</span>
+</span><a id="__codelineno-13-69" name="__codelineno-13-69"></a>
+<a id="__codelineno-13-70" name="__codelineno-13-70"></a><span class="n">genotyped_bams</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GenotypeOnInterval</span><span class="o">(</span><span class="n">combined_bams</span><span class="o">)</span>
+<a id="__codelineno-13-71" name="__codelineno-13-71"></a><span class="w">    </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
 </code></pre></div></td></tr></table></div>
 <p>Finally, we can combine these genotyped bams back using <code>groupTuple</code> and another bam merge process. We construct our "merge" process that will combine the bam files from multiple intervals:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1">1</a></span>
-<span class="normal"><a href="#__codelineno-14-2">2</a></span>
-<span class="normal"><a href="#__codelineno-14-3">3</a></span>
-<span class="normal"><a href="#__codelineno-14-4">4</a></span>
-<span class="normal"><a href="#__codelineno-14-5">5</a></span>
-<span class="normal"><a href="#__codelineno-14-6">6</a></span>
-<span class="normal"><a href="#__codelineno-14-7">7</a></span>
-<span class="normal"><a href="#__codelineno-14-8">8</a></span>
-<span class="normal"><a href="#__codelineno-14-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1"></a><span class="n">process</span><span class="w"> </span><span class="n">MergeGenotyped</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-14-2" name="__codelineno-14-2"></a><span class="w">    </span><span class="nl">input:</span>
-<a id="__codelineno-14-3" name="__codelineno-14-3"></a><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">"input/in_*_.vcf"</span><span class="o">)</span>
-<a id="__codelineno-14-4" name="__codelineno-14-4"></a>
-<a id="__codelineno-14-5" name="__codelineno-14-5"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-14-6" name="__codelineno-14-6"></a><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">"merged.genotyped.vcf"</span><span class="o">)</span>
-<a id="__codelineno-14-7" name="__codelineno-14-7"></a>
-<a id="__codelineno-14-8" name="__codelineno-14-8"></a><span class="w">    </span><span class="s2">"cat input/*.vcf &gt; merged.genotyped.vcf"</span>
-<a id="__codelineno-14-9" name="__codelineno-14-9"></a><span class="o">}</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-35">35</a></span>
+<span class="normal"><a href="#__codelineno-14-36">36</a></span>
+<span class="normal"><a href="#__codelineno-14-37">37</a></span>
+<span class="normal"><a href="#__codelineno-14-38">38</a></span>
+<span class="normal"><a href="#__codelineno-14-39">39</a></span>
+<span class="normal"><a href="#__codelineno-14-40">40</a></span>
+<span class="normal"><a href="#__codelineno-14-41">41</a></span>
+<span class="normal"><a href="#__codelineno-14-42">42</a></span>
+<span class="normal"><a href="#__codelineno-14-43">43</a></span>
+<span class="normal"><a href="#__codelineno-14-44">44</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-14-35" name="__codelineno-14-35"></a><span class="n">process</span><span class="w"> </span><span class="n">MergeGenotyped</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-14-36" name="__codelineno-14-36"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-14-37" name="__codelineno-14-37"></a><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">"input/in_*_.vcf"</span><span class="o">)</span>
+<a id="__codelineno-14-38" name="__codelineno-14-38"></a>
+<a id="__codelineno-14-39" name="__codelineno-14-39"></a><span class="w">    </span><span class="nl">output:</span>
+<a id="__codelineno-14-40" name="__codelineno-14-40"></a><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">"merged.genotyped.vcf"</span><span class="o">)</span>
+<a id="__codelineno-14-41" name="__codelineno-14-41"></a>
+<a id="__codelineno-14-42" name="__codelineno-14-42"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-14-43" name="__codelineno-14-43"></a><span class="w">    </span><span class="s2">"cat input/*.vcf &gt; merged.genotyped.vcf"</span>
+<a id="__codelineno-14-44" name="__codelineno-14-44"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>We might be tempted to pipe the output of <code>GenotypeOnInterval</code> directly into groupTuple, but the <code>meta</code> object we are passing down is still the <code>groupKey</code> we created earlier:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-15-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-15-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-15-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-15-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-15-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-15-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-15-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-15-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-15-10">10</a></span>
-<span class="normal"><a href="#__codelineno-15-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1"></a><span class="n">MapReads</span><span class="o">(</span><span class="w"> </span><span class="n">samples</span><span class="o">,</span><span class="w"> </span><span class="n">reference</span><span class="w"> </span><span class="o">)</span>
-<a id="__codelineno-15-2" name="__codelineno-15-2"></a><span class="o">|</span><span class="w"> </span><span class="n">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">bam</span><span class="w"> </span><span class="o">-&gt;</span>
-<a id="__codelineno-15-3" name="__codelineno-15-3"></a><span class="w">    </span><span class="n">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">groupKey</span><span class="o">(</span><span class="n">meta</span><span class="o">.</span><span class="na">subMap</span><span class="o">(</span><span class="s1">'id'</span><span class="o">,</span><span class="w"> </span><span class="s1">'type'</span><span class="o">),</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">repeatcount</span><span class="o">)</span>
-<a id="__codelineno-15-4" name="__codelineno-15-4"></a><span class="w">    </span><span class="o">[</span><span class="n">key</span><span class="o">,</span><span class="w"> </span><span class="n">bam</span><span class="o">]</span>
-<a id="__codelineno-15-5" name="__codelineno-15-5"></a><span class="o">}</span>
-<a id="__codelineno-15-6" name="__codelineno-15-6"></a><span class="o">|</span><span class="w"> </span><span class="n">groupTuple</span>
-<a id="__codelineno-15-7" name="__codelineno-15-7"></a><span class="o">|</span><span class="w"> </span><span class="n">CombineBams</span>
-<a id="__codelineno-15-8" name="__codelineno-15-8"></a><span class="o">|</span><span class="w"> </span><span class="n">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">bam</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="o">[</span><span class="n">meta</span><span class="o">.</span><span class="na">subMap</span><span class="o">(</span><span class="s1">'id'</span><span class="o">,</span><span class="w"> </span><span class="s1">'type'</span><span class="o">),</span><span class="w"> </span><span class="n">bam</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
-<a id="__codelineno-15-9" name="__codelineno-15-9"></a><span class="o">|</span><span class="w"> </span><span class="n">combine</span><span class="o">(</span><span class="w"> </span><span class="n">intervals</span><span class="w"> </span><span class="o">)</span>
-<a id="__codelineno-15-10" name="__codelineno-15-10"></a><span class="o">|</span><span class="w"> </span><span class="n">GenotypeOnInterval</span>
-<a id="__codelineno-15-11" name="__codelineno-15-11"></a><span class="o">|</span><span class="w"> </span><span class="n">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">bamfile</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">"Meta is of ${meta.getClass()}"</span><span class="w"> </span><span class="o">}</span>
-</code></pre></div></td></tr></table></div>
-<p>The <code>groupKey</code> has a property <code>target</code>, which contains the original map. If we call this property, we can replace the groupKey with the original map and get back to the original data structure. This is now appropriate to send through to the <code>groupTuple</code> operator and we will be grouping now only on the elements in the map.</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-16-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-16-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-16-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-16-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-16-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-16-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-16-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-16-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-16-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-16-10">10</a></span>
-<span class="normal"><a href="#__codelineno-16-11">11</a></span>
-<span class="normal"><a href="#__codelineno-16-12">12</a></span>
-<span class="normal"><a href="#__codelineno-16-13">13</a></span>
-<span class="normal"><a href="#__codelineno-16-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1"></a><span class="n">MapReads</span><span class="o">(</span><span class="w"> </span><span class="n">samples</span><span class="o">,</span><span class="w"> </span><span class="n">reference</span><span class="w"> </span><span class="o">)</span>
-<a id="__codelineno-16-2" name="__codelineno-16-2"></a><span class="o">|</span><span class="w"> </span><span class="n">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">bam</span><span class="w"> </span><span class="o">-&gt;</span>
-<a id="__codelineno-16-3" name="__codelineno-16-3"></a><span class="w">    </span><span class="n">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">groupKey</span><span class="o">(</span><span class="n">meta</span><span class="o">.</span><span class="na">subMap</span><span class="o">(</span><span class="s1">'id'</span><span class="o">,</span><span class="w"> </span><span class="s1">'type'</span><span class="o">),</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">repeatcount</span><span class="o">)</span>
-<a id="__codelineno-16-4" name="__codelineno-16-4"></a><span class="w">    </span><span class="o">[</span><span class="n">key</span><span class="o">,</span><span class="w"> </span><span class="n">bam</span><span class="o">]</span>
-<a id="__codelineno-16-5" name="__codelineno-16-5"></a><span class="o">}</span>
-<a id="__codelineno-16-6" name="__codelineno-16-6"></a><span class="o">|</span><span class="w"> </span><span class="n">groupTuple</span>
-<a id="__codelineno-16-7" name="__codelineno-16-7"></a><span class="o">|</span><span class="w"> </span><span class="n">CombineBams</span>
-<a id="__codelineno-16-8" name="__codelineno-16-8"></a><span class="o">|</span><span class="w"> </span><span class="n">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">bam</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="o">[</span><span class="n">meta</span><span class="o">.</span><span class="na">subMap</span><span class="o">(</span><span class="s1">'id'</span><span class="o">,</span><span class="w"> </span><span class="s1">'type'</span><span class="o">),</span><span class="w"> </span><span class="n">bam</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
-<a id="__codelineno-16-9" name="__codelineno-16-9"></a><span class="o">|</span><span class="w"> </span><span class="n">combine</span><span class="o">(</span><span class="w"> </span><span class="n">intervals</span><span class="w"> </span><span class="o">)</span>
-<a id="__codelineno-16-10" name="__codelineno-16-10"></a><span class="o">|</span><span class="w"> </span><span class="n">GenotypeOnInterval</span>
-<a id="__codelineno-16-11" name="__codelineno-16-11"></a><span class="o">|</span><span class="w"> </span><span class="n">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">groupKey</span><span class="o">,</span><span class="w"> </span><span class="n">bamfile</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="o">[</span><span class="n">groupKey</span><span class="o">.</span><span class="na">target</span><span class="o">,</span><span class="w"> </span><span class="n">bamfile</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
-<a id="__codelineno-16-12" name="__codelineno-16-12"></a><span class="o">|</span><span class="w"> </span><span class="n">groupTuple</span>
-<a id="__codelineno-16-13" name="__codelineno-16-13"></a><span class="o">|</span><span class="w"> </span><span class="n">MergeGenotyped</span>
-<a id="__codelineno-16-14" name="__codelineno-16-14"></a><span class="o">|</span><span class="w"> </span><span class="n">view</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-71">71</a></span>
+<span class="normal"><a href="#__codelineno-15-72">72</a></span>
+<span class="normal"><a href="#__codelineno-15-73">73</a></span>
+<span class="normal"><a href="#__codelineno-15-74">74</a></span>
+<span class="normal"><a href="#__codelineno-15-75">75</a></span>
+<span class="normal"><a href="#__codelineno-15-76">76</a></span>
+<span class="normal"><a href="#__codelineno-15-77">77</a></span>
+<span class="normal"><a href="#__codelineno-15-78">78</a></span>
+<span class="normal"><a href="#__codelineno-15-79">79</a></span>
+<span class="normal"><a href="#__codelineno-15-80">80</a></span>
+<span class="normal"><a href="#__codelineno-15-81">81</a></span>
+<span class="normal"><a href="#__codelineno-15-82">82</a></span>
+<span class="normal"><a href="#__codelineno-15-83">83</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-15-71" name="__codelineno-15-71"></a><span class="n">mapped_reads</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MapReads</span><span class="o">(</span><span class="w"> </span><span class="n">samples</span><span class="o">,</span><span class="w"> </span><span class="n">reference</span><span class="w"> </span><span class="o">)</span>
+<a id="__codelineno-15-72" name="__codelineno-15-72"></a><span class="w">    </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">bam</span><span class="w"> </span><span class="o">-&gt;</span>
+<a id="__codelineno-15-73" name="__codelineno-15-73"></a><span class="w">        </span><span class="kt">def</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">groupKey</span><span class="o">(</span><span class="n">meta</span><span class="o">.</span><span class="na">subMap</span><span class="o">(</span><span class="s1">'id'</span><span class="o">,</span><span class="w"> </span><span class="s1">'type'</span><span class="o">),</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">repeatcount</span><span class="o">)</span>
+<a id="__codelineno-15-74" name="__codelineno-15-74"></a><span class="w">        </span><span class="o">[</span><span class="n">key</span><span class="o">,</span><span class="w"> </span><span class="n">bam</span><span class="o">]</span>
+<a id="__codelineno-15-75" name="__codelineno-15-75"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-15-76" name="__codelineno-15-76"></a><span class="w">    </span><span class="o">.</span><span class="na">groupTuple</span><span class="o">()</span>
+<a id="__codelineno-15-77" name="__codelineno-15-77"></a>
+<a id="__codelineno-15-78" name="__codelineno-15-78"></a><span class="n">combined_bams</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CombineBams</span><span class="o">(</span><span class="n">mapped_reads</span><span class="o">)</span>
+<a id="__codelineno-15-79" name="__codelineno-15-79"></a><span class="w">    </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">bam</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="o">[</span><span class="n">meta</span><span class="o">.</span><span class="na">subMap</span><span class="o">(</span><span class="s1">'id'</span><span class="o">,</span><span class="w"> </span><span class="s1">'type'</span><span class="o">),</span><span class="w"> </span><span class="n">bam</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-15-80" name="__codelineno-15-80"></a><span class="w">    </span><span class="o">.</span><span class="na">combine</span><span class="o">(</span><span class="w"> </span><span class="n">intervals</span><span class="w"> </span><span class="o">)</span>
+<a id="__codelineno-15-81" name="__codelineno-15-81"></a>
+<a id="__codelineno-15-82" name="__codelineno-15-82"></a><span class="n">genotyped_bams</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GenotypeOnInterval</span><span class="o">(</span><span class="n">combined_bams</span><span class="o">)</span>
+<a id="__codelineno-15-83" name="__codelineno-15-83"></a><span class="hll"><span class="w">    </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">bamfile</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">"Meta is of ${meta.getClass()}"</span><span class="w"> </span><span class="o">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p>To ensure that grouping is performed only on the relevant elements, we can convert the <code>groupKey</code> back into a plain Map using the <code>as Map</code> operator. This allows the <code>groupTuple</code> operator to group by just the keys present in the map, similar to how <code>subMap</code> works. This approach ensures that downstream grouping and merging steps operate on the intended sample attributes.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-16-71">71</a></span>
+<span class="normal"><a href="#__codelineno-16-72">72</a></span>
+<span class="normal"><a href="#__codelineno-16-73">73</a></span>
+<span class="normal"><a href="#__codelineno-16-74">74</a></span>
+<span class="normal"><a href="#__codelineno-16-75">75</a></span>
+<span class="normal"><a href="#__codelineno-16-76">76</a></span>
+<span class="normal"><a href="#__codelineno-16-77">77</a></span>
+<span class="normal"><a href="#__codelineno-16-78">78</a></span>
+<span class="normal"><a href="#__codelineno-16-79">79</a></span>
+<span class="normal"><a href="#__codelineno-16-80">80</a></span>
+<span class="normal"><a href="#__codelineno-16-81">81</a></span>
+<span class="normal"><a href="#__codelineno-16-82">82</a></span>
+<span class="normal"><a href="#__codelineno-16-83">83</a></span>
+<span class="normal"><a href="#__codelineno-16-84">84</a></span>
+<span class="normal"><a href="#__codelineno-16-85">85</a></span>
+<span class="normal"><a href="#__codelineno-16-86">86</a></span>
+<span class="normal"><a href="#__codelineno-16-87">87</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-16-71" name="__codelineno-16-71"></a><span class="n">mapped_reads</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MapReads</span><span class="o">(</span><span class="w"> </span><span class="n">samples</span><span class="o">,</span><span class="w"> </span><span class="n">reference</span><span class="w"> </span><span class="o">)</span>
+<a id="__codelineno-16-72" name="__codelineno-16-72"></a><span class="w">    </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">bam</span><span class="w"> </span><span class="o">-&gt;</span>
+<a id="__codelineno-16-73" name="__codelineno-16-73"></a><span class="w">        </span><span class="kt">def</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">groupKey</span><span class="o">(</span><span class="n">meta</span><span class="o">.</span><span class="na">subMap</span><span class="o">(</span><span class="s1">'id'</span><span class="o">,</span><span class="w"> </span><span class="s1">'type'</span><span class="o">),</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">repeatcount</span><span class="o">)</span>
+<a id="__codelineno-16-74" name="__codelineno-16-74"></a><span class="w">        </span><span class="o">[</span><span class="n">key</span><span class="o">,</span><span class="w"> </span><span class="n">bam</span><span class="o">]</span>
+<a id="__codelineno-16-75" name="__codelineno-16-75"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-16-76" name="__codelineno-16-76"></a><span class="w">    </span><span class="o">.</span><span class="na">groupTuple</span><span class="o">()</span>
+<a id="__codelineno-16-77" name="__codelineno-16-77"></a>
+<a id="__codelineno-16-78" name="__codelineno-16-78"></a><span class="n">combined_bams</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CombineBams</span><span class="o">(</span><span class="n">mapped_reads</span><span class="o">)</span>
+<a id="__codelineno-16-79" name="__codelineno-16-79"></a><span class="w">    </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">bam</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="o">[</span><span class="n">meta</span><span class="o">.</span><span class="na">subMap</span><span class="o">(</span><span class="s1">'id'</span><span class="o">,</span><span class="w"> </span><span class="s1">'type'</span><span class="o">),</span><span class="w"> </span><span class="n">bam</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-16-80" name="__codelineno-16-80"></a><span class="w">    </span><span class="o">.</span><span class="na">combine</span><span class="o">(</span><span class="w"> </span><span class="n">intervals</span><span class="w"> </span><span class="o">)</span>
+<a id="__codelineno-16-81" name="__codelineno-16-81"></a>
+<a id="__codelineno-16-82" name="__codelineno-16-82"></a><span class="n">genotyped_bams</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GenotypeOnInterval</span><span class="o">(</span><span class="n">combined_bams</span><span class="o">)</span>
+<a id="__codelineno-16-83" name="__codelineno-16-83"></a><span class="hll"><span class="w">    </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">groupKey</span><span class="o">,</span><span class="w"> </span><span class="n">bamfile</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="o">[</span><span class="n">groupKey</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">Map</span><span class="o">,</span><span class="w"> </span><span class="n">bamfile</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
+</span><a id="__codelineno-16-84" name="__codelineno-16-84"></a><span class="w">    </span><span class="o">.</span><span class="na">groupTuple</span><span class="o">()</span>
+<a id="__codelineno-16-85" name="__codelineno-16-85"></a>
+<a id="__codelineno-16-86" name="__codelineno-16-86"></a><span class="n">merged_bams</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MergeGenotyped</span><span class="o">(</span><span class="n">genotyped_bams</span><span class="o">)</span>
+<a id="__codelineno-16-87" name="__codelineno-16-87"></a><span class="n">merged_bams</span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
 </code></pre></div></td></tr></table></div>
 <h2 id="publishing-the-bams"><span class="enumerate-headings-plugin enumerate-heading-plugin">18.4</span> Publishing the bams<a class="headerlink" href="#publishing-the-bams" title="Permanent link">¶</a></h2>
 <p>This will return us six bam files - a tumor and normal pair for each of the three samples:</p>
@@ -1788,20 +1874,53 @@
 <a href="#__codelineno-17-5" id="__codelineno-17-5" name="__codelineno-17-5"></a><span class="go">[[id:sampleC, type:normal], merged.genotyped.vcf]</span>
 <a href="#__codelineno-17-6" id="__codelineno-17-6" name="__codelineno-17-6"></a><span class="go">[[id:sampleC, type:tumor], merged.genotyped.vcf]</span>
 </code></pre></div>
-<p>If we would like to save the output of our <code>MergeGenotyped</code> process, we can "publish" the outputs of a process using the <code>publishDir</code> directive. We will cover this in more detail on day 2, but try modifying the <code>MergeGenotyped</code> process to include the directive:</p>
-<div class="highlight"><pre><span></span><code><a href="#__codelineno-18-1" id="__codelineno-18-1" name="__codelineno-18-1"></a><span class="n">process</span><span class="w"> </span><span class="n">MergeGenotyped</span><span class="w"> </span><span class="o">{</span>
-<a href="#__codelineno-18-2" id="__codelineno-18-2" name="__codelineno-18-2"></a><span class="w">    </span><span class="n">publishDir</span><span class="w"> </span><span class="s1">'results/genotyped'</span>
-<a href="#__codelineno-18-3" id="__codelineno-18-3" name="__codelineno-18-3"></a>
-<a href="#__codelineno-18-4" id="__codelineno-18-4" name="__codelineno-18-4"></a><span class="w">    </span><span class="nl">input:</span>
-<a href="#__codelineno-18-5" id="__codelineno-18-5" name="__codelineno-18-5"></a><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">"input/in_*_.vcf"</span><span class="o">)</span>
-<a href="#__codelineno-18-6" id="__codelineno-18-6" name="__codelineno-18-6"></a>
-<a href="#__codelineno-18-7" id="__codelineno-18-7" name="__codelineno-18-7"></a><span class="w">    </span><span class="nl">output:</span>
-<a href="#__codelineno-18-8" id="__codelineno-18-8" name="__codelineno-18-8"></a><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">"merged.genotyped.vcf"</span><span class="o">)</span>
-<a href="#__codelineno-18-9" id="__codelineno-18-9" name="__codelineno-18-9"></a>
-<a href="#__codelineno-18-10" id="__codelineno-18-10" name="__codelineno-18-10"></a><span class="w">    </span><span class="s2">"cat input/*.vcf &gt; merged.genotyped.vcf"</span>
-<a href="#__codelineno-18-11" id="__codelineno-18-11" name="__codelineno-18-11"></a><span class="o">}</span>
-</code></pre></div>
+<p>If we would like to save the output of our <code>MergeGenotyped</code> process, we can "publish" the outputs of a process using the <code>publishDir</code> directive. Try modifying the <code>MergeGenotyped</code> process to include the directive:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-35">35</a></span>
+<span class="normal"><a href="#__codelineno-18-36">36</a></span>
+<span class="normal"><a href="#__codelineno-18-37">37</a></span>
+<span class="normal"><a href="#__codelineno-18-38">38</a></span>
+<span class="normal"><a href="#__codelineno-18-39">39</a></span>
+<span class="normal"><a href="#__codelineno-18-40">40</a></span>
+<span class="normal"><a href="#__codelineno-18-41">41</a></span>
+<span class="normal"><a href="#__codelineno-18-42">42</a></span>
+<span class="normal"><a href="#__codelineno-18-43">43</a></span>
+<span class="normal"><a href="#__codelineno-18-44">44</a></span>
+<span class="normal"><a href="#__codelineno-18-45">45</a></span>
+<span class="normal"><a href="#__codelineno-18-46">46</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-18-35" name="__codelineno-18-35"></a><span class="n">process</span><span class="w"> </span><span class="n">MergeGenotyped</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-18-36" name="__codelineno-18-36"></a><span class="hll"><span class="w">    </span><span class="n">publishDir</span><span class="w"> </span><span class="s1">'results/genotyped'</span>
+</span><a id="__codelineno-18-37" name="__codelineno-18-37"></a>
+<a id="__codelineno-18-38" name="__codelineno-18-38"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-18-39" name="__codelineno-18-39"></a><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">"input/in_*_.vcf"</span><span class="o">)</span>
+<a id="__codelineno-18-40" name="__codelineno-18-40"></a>
+<a id="__codelineno-18-41" name="__codelineno-18-41"></a><span class="w">    </span><span class="nl">output:</span>
+<a id="__codelineno-18-42" name="__codelineno-18-42"></a><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">"merged.genotyped.vcf"</span><span class="o">)</span>
+<a id="__codelineno-18-43" name="__codelineno-18-43"></a>
+<a id="__codelineno-18-44" name="__codelineno-18-44"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-18-45" name="__codelineno-18-45"></a><span class="w">    </span><span class="s2">"cat input/*.vcf &gt; merged.genotyped.vcf"</span>
+<a id="__codelineno-18-46" name="__codelineno-18-46"></a><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
 <p>This will publish all of the files in the <code>output</code> block of this process to the <code>results/genotyped</code> directory.</p>
+<div class="admonition tip">
+<p class="admonition-title">Workflow outputs</p>
+<p>As of Nextflow 24.04 you can also manage result publication at the <strong>workflow</strong> level using the new <code>output { }</code> block. This allows you to publish files by pushing them from a channel instead of a process, similar to the channel operations we have been exploring in this workshop.</p>
+<p>See the <a href="https://www.nextflow.io/docs/latest/workflow.html#workflow-outputs">Nextflow documentation</a> for a full description.</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-19-1" id="__codelineno-19-1" name="__codelineno-19-1"></a><span class="n">nextflow</span><span class="o">.</span><span class="na">preview</span><span class="o">.</span><span class="na">output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<a href="#__codelineno-19-2" id="__codelineno-19-2" name="__codelineno-19-2"></a>
+<a href="#__codelineno-19-3" id="__codelineno-19-3" name="__codelineno-19-3"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
+<a href="#__codelineno-19-4" id="__codelineno-19-4" name="__codelineno-19-4"></a><span class="w">    </span><span class="nl">main:</span>
+<a href="#__codelineno-19-5" id="__codelineno-19-5" name="__codelineno-19-5"></a><span class="w">    </span><span class="n">merged_bams</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MergeGenotyped</span><span class="o">(</span><span class="n">genotyped_bams</span><span class="o">)</span>
+<a href="#__codelineno-19-6" id="__codelineno-19-6" name="__codelineno-19-6"></a>
+<a href="#__codelineno-19-7" id="__codelineno-19-7" name="__codelineno-19-7"></a><span class="w">    </span><span class="nl">publish:</span>
+<a href="#__codelineno-19-8" id="__codelineno-19-8" name="__codelineno-19-8"></a><span class="w">    </span><span class="n">results</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">merged_bams</span>
+<a href="#__codelineno-19-9" id="__codelineno-19-9" name="__codelineno-19-9"></a><span class="o">}</span>
+<a href="#__codelineno-19-10" id="__codelineno-19-10" name="__codelineno-19-10"></a>
+<a href="#__codelineno-19-11" id="__codelineno-19-11" name="__codelineno-19-11"></a><span class="n">output</span><span class="w"> </span><span class="o">{</span>
+<a href="#__codelineno-19-12" id="__codelineno-19-12" name="__codelineno-19-12"></a><span class="w">    </span><span class="n">results</span><span class="w"> </span><span class="o">{</span>
+<a href="#__codelineno-19-13" id="__codelineno-19-13" name="__codelineno-19-13"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="s1">'genotyped'</span>
+<a href="#__codelineno-19-14" id="__codelineno-19-14" name="__codelineno-19-14"></a><span class="w">    </span><span class="o">}</span>
+<a href="#__codelineno-19-15" id="__codelineno-19-15" name="__codelineno-19-15"></a><span class="o">}</span>
+</code></pre></div>
+</div>
 <div class="admonition exercise">
 <p class="admonition-title">Exercise</p>
 <p>Inspect the contents of the <code>results</code> directory. Does this match what you were expecting? What is missing here?</p>
@@ -1809,32 +1928,64 @@
 <details class="solution">
 <summary>Solution</summary>
 <p>One solution might be to modify the <code>script</code> block to ensure that each file has a unique name:</p>
-<div class="highlight"><pre><span></span><code><a href="#__codelineno-19-1" id="__codelineno-19-1" name="__codelineno-19-1"></a><span class="n">process</span><span class="w"> </span><span class="n">MergeGenotyped</span><span class="w"> </span><span class="o">{</span>
-<a href="#__codelineno-19-2" id="__codelineno-19-2" name="__codelineno-19-2"></a><span class="w">    </span><span class="n">publishDir</span><span class="w"> </span><span class="s1">'results/genotyped'</span>
-<a href="#__codelineno-19-3" id="__codelineno-19-3" name="__codelineno-19-3"></a>
-<a href="#__codelineno-19-4" id="__codelineno-19-4" name="__codelineno-19-4"></a><span class="w">    </span><span class="nl">input:</span>
-<a href="#__codelineno-19-5" id="__codelineno-19-5" name="__codelineno-19-5"></a><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">"input/in_*_.vcf"</span><span class="o">)</span>
-<a href="#__codelineno-19-6" id="__codelineno-19-6" name="__codelineno-19-6"></a>
-<a href="#__codelineno-19-7" id="__codelineno-19-7" name="__codelineno-19-7"></a><span class="w">    </span><span class="nl">output:</span>
-<a href="#__codelineno-19-8" id="__codelineno-19-8" name="__codelineno-19-8"></a><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">"*.vcf"</span><span class="o">)</span>
-<a href="#__codelineno-19-9" id="__codelineno-19-9" name="__codelineno-19-9"></a>
-<a href="#__codelineno-19-10" id="__codelineno-19-10" name="__codelineno-19-10"></a><span class="w">    </span><span class="s2">"cat input/*.vcf &gt; ${meta.id}.${meta.type}.genotyped.vcf"</span>
-<a href="#__codelineno-19-11" id="__codelineno-19-11" name="__codelineno-19-11"></a><span class="o">}</span>
-</code></pre></div>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-35">35</a></span>
+<span class="normal"><a href="#__codelineno-20-36">36</a></span>
+<span class="normal"><a href="#__codelineno-20-37">37</a></span>
+<span class="normal"><a href="#__codelineno-20-38">38</a></span>
+<span class="normal"><a href="#__codelineno-20-39">39</a></span>
+<span class="normal"><a href="#__codelineno-20-40">40</a></span>
+<span class="normal"><a href="#__codelineno-20-41">41</a></span>
+<span class="normal"><a href="#__codelineno-20-42">42</a></span>
+<span class="normal"><a href="#__codelineno-20-43">43</a></span>
+<span class="normal"><a href="#__codelineno-20-44">44</a></span>
+<span class="normal"><a href="#__codelineno-20-45">45</a></span>
+<span class="normal"><a href="#__codelineno-20-46">46</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-20-35" name="__codelineno-20-35"></a><span class="n">process</span><span class="w"> </span><span class="n">MergeGenotyped</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-20-36" name="__codelineno-20-36"></a><span class="w">    </span><span class="n">publishDir</span><span class="w"> </span><span class="s1">'results/genotyped'</span>
+<a id="__codelineno-20-37" name="__codelineno-20-37"></a>
+<a id="__codelineno-20-38" name="__codelineno-20-38"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-20-39" name="__codelineno-20-39"></a><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">"input/in_*_.vcf"</span><span class="o">)</span>
+<a id="__codelineno-20-40" name="__codelineno-20-40"></a>
+<a id="__codelineno-20-41" name="__codelineno-20-41"></a><span class="w">    </span><span class="nl">output:</span>
+<a id="__codelineno-20-42" name="__codelineno-20-42"></a><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">"*.vcf"</span><span class="o">)</span>
+<a id="__codelineno-20-43" name="__codelineno-20-43"></a>
+<a id="__codelineno-20-44" name="__codelineno-20-44"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-20-45" name="__codelineno-20-45"></a><span class="hll"><span class="w">    </span><span class="s2">"cat input/*.vcf &gt; ${meta.id}.${meta.type}.genotyped.vcf"</span>
+</span><a id="__codelineno-20-46" name="__codelineno-20-46"></a><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
 <p>Another option might be to use the <code>saveAs</code> argument to the <code>publishDir</code> directive:</p>
-<div class="highlight"><pre><span></span><code><a href="#__codelineno-20-1" id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="n">process</span><span class="w"> </span><span class="n">MergeGenotyped</span><span class="w"> </span><span class="o">{</span>
-<a href="#__codelineno-20-2" id="__codelineno-20-2" name="__codelineno-20-2"></a><span class="w">    </span><span class="n">publishDir</span><span class="w"> </span><span class="s1">'results/genotyped'</span><span class="o">,</span><span class="w"> </span><span class="nl">saveAs:</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="s2">"${meta.id}.${meta.type}.genotyped.vcf"</span><span class="w"> </span><span class="o">}</span>
-<a href="#__codelineno-20-3" id="__codelineno-20-3" name="__codelineno-20-3"></a>
-<a href="#__codelineno-20-4" id="__codelineno-20-4" name="__codelineno-20-4"></a><span class="w">    </span><span class="nl">input:</span>
-<a href="#__codelineno-20-5" id="__codelineno-20-5" name="__codelineno-20-5"></a><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">"input/in_*_.vcf"</span><span class="o">)</span>
-<a href="#__codelineno-20-6" id="__codelineno-20-6" name="__codelineno-20-6"></a>
-<a href="#__codelineno-20-7" id="__codelineno-20-7" name="__codelineno-20-7"></a><span class="w">    </span><span class="nl">output:</span>
-<a href="#__codelineno-20-8" id="__codelineno-20-8" name="__codelineno-20-8"></a><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">"merged.genotyped.vcf"</span><span class="o">)</span>
-<a href="#__codelineno-20-9" id="__codelineno-20-9" name="__codelineno-20-9"></a>
-<a href="#__codelineno-20-10" id="__codelineno-20-10" name="__codelineno-20-10"></a><span class="w">    </span><span class="s2">"cat input/*.vcf &gt; merged.genotyped.vcf"</span>
-<a href="#__codelineno-20-11" id="__codelineno-20-11" name="__codelineno-20-11"></a><span class="o">}</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-35">35</a></span>
+<span class="normal"><a href="#__codelineno-21-36">36</a></span>
+<span class="normal"><a href="#__codelineno-21-37">37</a></span>
+<span class="normal"><a href="#__codelineno-21-38">38</a></span>
+<span class="normal"><a href="#__codelineno-21-39">39</a></span>
+<span class="normal"><a href="#__codelineno-21-40">40</a></span>
+<span class="normal"><a href="#__codelineno-21-41">41</a></span>
+<span class="normal"><a href="#__codelineno-21-42">42</a></span>
+<span class="normal"><a href="#__codelineno-21-43">43</a></span>
+<span class="normal"><a href="#__codelineno-21-44">44</a></span>
+<span class="normal"><a href="#__codelineno-21-45">45</a></span>
+<span class="normal"><a href="#__codelineno-21-46">46</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-21-35" name="__codelineno-21-35"></a><span class="n">process</span><span class="w"> </span><span class="n">MergeGenotyped</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-21-36" name="__codelineno-21-36"></a><span class="hll"><span class="w">    </span><span class="n">publishDir</span><span class="w"> </span><span class="s1">'results/genotyped'</span><span class="o">,</span><span class="w"> </span><span class="nl">saveAs:</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="s2">"${meta.id}.${meta.type}.genotyped.vcf"</span><span class="w"> </span><span class="o">}</span>
+</span><a id="__codelineno-21-37" name="__codelineno-21-37"></a>
+<a id="__codelineno-21-38" name="__codelineno-21-38"></a><span class="w">    </span><span class="nl">input:</span>
+<a id="__codelineno-21-39" name="__codelineno-21-39"></a><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">"input/in_*_.vcf"</span><span class="o">)</span>
+<a id="__codelineno-21-40" name="__codelineno-21-40"></a>
+<a id="__codelineno-21-41" name="__codelineno-21-41"></a><span class="w">    </span><span class="nl">output:</span>
+<a id="__codelineno-21-42" name="__codelineno-21-42"></a><span class="w">    </span><span class="n">tuple</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">),</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">"merged.genotyped.vcf"</span><span class="o">)</span>
+<a id="__codelineno-21-43" name="__codelineno-21-43"></a>
+<a id="__codelineno-21-44" name="__codelineno-21-44"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-21-45" name="__codelineno-21-45"></a><span class="w">    </span><span class="s2">"cat input/*.vcf &gt; merged.genotyped.vcf"</span>
+<a id="__codelineno-21-46" name="__codelineno-21-46"></a><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
+<p>If you are using the new output syntax described above, you can edit the filename using the <code>path</code> directive:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-22-1" id="__codelineno-22-1" name="__codelineno-22-1"></a><span class="n">output</span><span class="w"> </span><span class="o">{</span>
+<a href="#__codelineno-22-2" id="__codelineno-22-2" name="__codelineno-22-2"></a><span class="w">    </span><span class="n">results</span><span class="w"> </span><span class="o">{</span>
+<a href="#__codelineno-22-3" id="__codelineno-22-3" name="__codelineno-22-3"></a><span class="w">        </span><span class="n">path</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">vcf</span><span class="w"> </span><span class="o">-&gt;</span>
+<a href="#__codelineno-22-4" id="__codelineno-22-4" name="__codelineno-22-4"></a><span class="w">            </span><span class="s2">"genotyped/${meta.id}.${meta.type}.genotyped.vcf"</span>
+<a href="#__codelineno-22-5" id="__codelineno-22-5" name="__codelineno-22-5"></a><span class="w">        </span><span class="o">}</span>
+<a href="#__codelineno-22-6" id="__codelineno-22-6" name="__codelineno-22-6"></a><span class="w">    </span><span class="o">}</span>
+<a href="#__codelineno-22-7" id="__codelineno-22-7" name="__codelineno-22-7"></a><span class="o">}</span>
 </code></pre></div>
-<p>We will cover this in more detail on day 2.</p>
 </details>
 </div>
 </article>

@@ -1362,63 +1362,28 @@
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"></path></svg>
 </a>
 <h1 id="workflow-structure"><span class="enumerate-headings-plugin enumerate-heading-plugin">19.</span> Workflow Structure<a class="headerlink" href="#workflow-structure" title="Permanent link">¶</a></h1>
+<p>Nextflow includes a specific directory structure for workflows which can provide some features that can facilitate or enhance your code. In this section we will explore them.</p>
+<p>First, let's move into the right directory:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="nb">cd</span><span class="w"> </span>structure
+</code></pre></div>
 <p>There are three directories in a Nextflow workflow repository that have a special purpose:</p>
 <h2 id="bin"><span class="enumerate-headings-plugin enumerate-heading-plugin">19.1</span> <code>./bin</code><a class="headerlink" href="#bin" title="Permanent link">¶</a></h2>
 <p>The <code>bin</code> directory (if it exists) is always added to the <code>$PATH</code> for all tasks. If the tasks are performed on a remote machine, the directory is copied across to the new machine before the task begins. This Nextflow feature is designed to make it easy to include accessory scripts directly in the workflow without having to commit those scripts into the container. This feature also ensures that the scripts used inside the workflow move on the same revision schedule as the workflow itself.</p>
 <p>It is important to know that Nextflow will take care of updating <code>$PATH</code> and ensuring the files are available wherever the task is running, but will not change the permissions of any files in that directory. If a file is called by a task as an executable, the workflow developer must ensure that the file has the correct permissions to be executed.</p>
 <p>For example, let's say we have a small R script that produces a csv and a tsv:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span>
-<span class="normal"><a href="#__codelineno-0-2">2</a></span>
-<span class="normal"><a href="#__codelineno-0-3">3</a></span>
-<span class="normal"><a href="#__codelineno-0-4">4</a></span>
-<span class="normal"><a href="#__codelineno-0-5">5</a></span>
-<span class="normal"><a href="#__codelineno-0-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="c1">#!/usr/bin/env Rscript</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="nf">library</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3"></a>
-<a id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="n">plot</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ggplot</span><span class="p">(</span><span class="n">mpg</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">displ</span><span class="p">,</span><span class="w"> </span><span class="n">hwy</span><span class="p">,</span><span class="w"> </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">class</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">geom_point</span><span class="p">()</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5"></a><span class="n">mtcars</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nf">write_tsv</span><span class="p">(</span><span class="s">"cars.tsv"</span><span class="p">)</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6"></a><span class="nf">ggsave</span><span class="p">(</span><span class="s">"cars.png"</span><span class="p">,</span><span class="w"> </span><span class="n">plot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">plot</span><span class="p">)</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span>
+<span class="normal"><a href="#__codelineno-1-2">2</a></span>
+<span class="normal"><a href="#__codelineno-1-3">3</a></span>
+<span class="normal"><a href="#__codelineno-1-4">4</a></span>
+<span class="normal"><a href="#__codelineno-1-5">5</a></span>
+<span class="normal"><a href="#__codelineno-1-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="c1">#!/usr/bin/env Rscript</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="nf">library</span><span class="p">(</span><span class="n">tidyverse</span><span class="p">)</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3"></a>
+<a id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="n">plot</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ggplot</span><span class="p">(</span><span class="n">mpg</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">displ</span><span class="p">,</span><span class="w"> </span><span class="n">hwy</span><span class="p">,</span><span class="w"> </span><span class="n">colour</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">class</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">geom_point</span><span class="p">()</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="n">mtcars</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nf">write_tsv</span><span class="p">(</span><span class="s">"cars.tsv"</span><span class="p">)</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="nf">ggsave</span><span class="p">(</span><span class="s">"cars.png"</span><span class="p">,</span><span class="w"> </span><span class="n">plot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">plot</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 <p>We'd like to use this script in a simple workflow:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-1-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-1-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-1-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-1-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-1-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-1-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-1-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-1-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-1-10">10</a></span>
-<span class="normal"><a href="#__codelineno-1-11">11</a></span>
-<span class="normal"><a href="#__codelineno-1-12">12</a></span>
-<span class="normal"><a href="#__codelineno-1-13">13</a></span>
-<span class="normal"><a href="#__codelineno-1-14">14</a></span>
-<span class="normal"><a href="#__codelineno-1-15">15</a></span>
-<span class="normal"><a href="#__codelineno-1-16">16</a></span>
-<span class="normal"><a href="#__codelineno-1-17">17</a></span>
-<span class="normal"><a href="#__codelineno-1-18">18</a></span>
-<span class="normal"><a href="#__codelineno-1-19">19</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="n">process</span><span class="w"> </span><span class="n">PlotCars</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s1">'rocker/tidyverse:latest'</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3"></a>
-<a id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="w">    </span><span class="nl">output:</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="w">    </span><span class="n">path</span><span class="o">(</span><span class="s2">"*.png"</span><span class="o">),</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="s2">"plot"</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="w">    </span><span class="n">path</span><span class="o">(</span><span class="s2">"*.tsv"</span><span class="o">),</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="s2">"table"</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7"></a>
-<a id="__codelineno-1-8" name="__codelineno-1-8"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-1-9" name="__codelineno-1-9"></a><span class="w">    </span><span class="s2">"""</span>
-<a id="__codelineno-1-10" name="__codelineno-1-10"></a><span class="s2">    cars.R</span>
-<a id="__codelineno-1-11" name="__codelineno-1-11"></a><span class="s2">    """</span>
-<a id="__codelineno-1-12" name="__codelineno-1-12"></a><span class="o">}</span>
-<a id="__codelineno-1-13" name="__codelineno-1-13"></a>
-<a id="__codelineno-1-14" name="__codelineno-1-14"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-1-15" name="__codelineno-1-15"></a><span class="w">    </span><span class="n">PlotCars</span><span class="o">()</span>
-<a id="__codelineno-1-16" name="__codelineno-1-16"></a>
-<a id="__codelineno-1-17" name="__codelineno-1-17"></a><span class="w">    </span><span class="n">PlotCars</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">table</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="s2">"Found a tsv: $it"</span><span class="w"> </span><span class="o">}</span>
-<a id="__codelineno-1-18" name="__codelineno-1-18"></a><span class="w">    </span><span class="n">PlotCars</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">plot</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="s2">"Found a png: $it"</span><span class="w"> </span><span class="o">}</span>
-<a id="__codelineno-1-19" name="__codelineno-1-19"></a><span class="o">}</span>
-</code></pre></div></td></tr></table></div>
-<p>To do this, we can create the bin directory, write our R script into the directory. Finally, and crucially, we make the script executable:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-2-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-2-3"> 3</a></span>
@@ -1428,50 +1393,68 @@
 <span class="normal"><a href="#__codelineno-2-7"> 7</a></span>
 <span class="normal"><a href="#__codelineno-2-8"> 8</a></span>
 <span class="normal"><a href="#__codelineno-2-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-2-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>bin
-<a id="__codelineno-2-2" name="__codelineno-2-2"></a>cat<span class="w"> </span><span class="s">&lt;&lt; EOF &gt; bin/cars.R</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="s">#!/usr/bin/env Rscript</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="s">library(tidyverse)</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5"></a>
-<a id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="s">plot &lt;- ggplot(mpg, aes(displ, hwy, colour = class)) + geom_point()</span>
-<a id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="s">mtcars |&gt; write_tsv("cars.tsv")</span>
-<a id="__codelineno-2-8" name="__codelineno-2-8"></a><span class="s">ggsave("cars.png", plot = plot)</span>
-<a id="__codelineno-2-9" name="__codelineno-2-9"></a><span class="s">EOF</span>
-<a id="__codelineno-2-10" name="__codelineno-2-10"></a>chmod<span class="w"> </span>+x<span class="w"> </span>bin/cars.R
+<span class="normal"><a href="#__codelineno-2-10">10</a></span>
+<span class="normal"><a href="#__codelineno-2-11">11</a></span>
+<span class="normal"><a href="#__codelineno-2-12">12</a></span>
+<span class="normal"><a href="#__codelineno-2-13">13</a></span>
+<span class="normal"><a href="#__codelineno-2-14">14</a></span>
+<span class="normal"><a href="#__codelineno-2-15">15</a></span>
+<span class="normal"><a href="#__codelineno-2-16">16</a></span>
+<span class="normal"><a href="#__codelineno-2-17">17</a></span>
+<span class="normal"><a href="#__codelineno-2-18">18</a></span>
+<span class="normal"><a href="#__codelineno-2-19">19</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="n">process</span><span class="w"> </span><span class="n">PlotCars</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="w">    </span><span class="n">container</span><span class="w"> </span><span class="s1">'rocker/tidyverse:latest'</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3"></a>
+<a id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="w">    </span><span class="nl">output:</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="w">    </span><span class="n">path</span><span class="o">(</span><span class="s2">"*.png"</span><span class="o">),</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">plot</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="w">    </span><span class="n">path</span><span class="o">(</span><span class="s2">"*.tsv"</span><span class="o">),</span><span class="w"> </span><span class="nl">emit:</span><span class="w"> </span><span class="n">table</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7"></a>
+<a id="__codelineno-2-8" name="__codelineno-2-8"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9"></a><span class="w">    </span><span class="s2">"""</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10"></a><span class="s2">    cars.R</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11"></a><span class="s2">    """</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12"></a><span class="o">}</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13"></a>
+<a id="__codelineno-2-14" name="__codelineno-2-14"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15"></a><span class="w">    </span><span class="n">PlotCars</span><span class="o">()</span>
+<a id="__codelineno-2-16" name="__codelineno-2-16"></a>
+<a id="__codelineno-2-17" name="__codelineno-2-17"></a><span class="w">    </span><span class="n">PlotCars</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">table</span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">myfile</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">"Found a tsv: $myfile"</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-2-18" name="__codelineno-2-18"></a><span class="w">    </span><span class="n">PlotCars</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">plot</span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">myfile</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">"Found a png: $myfile"</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-2-19" name="__codelineno-2-19"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
+<p>To do this, we can create the bin directory, write our R script into the directory. Finally, and crucially, we make the script executable. This is the code we used to create the <code>cars.R</code> script, no need to run it:</p>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-3-1" id="__codelineno-3-1" name="__codelineno-3-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>bin
+<a href="#__codelineno-3-2" id="__codelineno-3-2" name="__codelineno-3-2"></a>cat<span class="w"> </span><span class="s">&lt;&lt; EOF &gt; bin/cars.R</span>
+<a href="#__codelineno-3-3" id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="s">#!/usr/bin/env Rscript</span>
+<a href="#__codelineno-3-4" id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="s">library(tidyverse)</span>
+<a href="#__codelineno-3-5" id="__codelineno-3-5" name="__codelineno-3-5"></a>
+<a href="#__codelineno-3-6" id="__codelineno-3-6" name="__codelineno-3-6"></a><span class="s">plot &lt;- ggplot(mpg, aes(displ, hwy, colour = class)) + geom_point()</span>
+<a href="#__codelineno-3-7" id="__codelineno-3-7" name="__codelineno-3-7"></a><span class="s">mtcars |&gt; write_tsv("cars.tsv")</span>
+<a href="#__codelineno-3-8" id="__codelineno-3-8" name="__codelineno-3-8"></a><span class="s">ggsave("cars.png", plot = plot)</span>
+<a href="#__codelineno-3-9" id="__codelineno-3-9" name="__codelineno-3-9"></a><span class="s">EOF</span>
+<a href="#__codelineno-3-10" id="__codelineno-3-10" name="__codelineno-3-10"></a>chmod<span class="w"> </span>+x<span class="w"> </span>bin/cars.R
+</code></pre></div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Always ensure that your scripts are executable. The scripts will not be available to your Nextflow processes without this step.</p>
 </div>
 <p>Let's run the script and see what Nextflow is doing for us behind the scenes:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span>
-<span class="normal"><a href="#__codelineno-3-2">2</a></span>
-<span class="normal"><a href="#__codelineno-3-3">3</a></span>
-<span class="normal"><a href="#__codelineno-3-4">4</a></span>
-<span class="normal"><a href="#__codelineno-3-5">5</a></span>
-<span class="normal"><a href="#__codelineno-3-6">6</a></span>
-<span class="normal"><a href="#__codelineno-3-7">7</a></span>
-<span class="normal"><a href="#__codelineno-3-8">8</a></span>
-<span class="normal"><a href="#__codelineno-3-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a>cat<span class="w"> </span><span class="s">&lt;&lt; EOF &gt; nextflow.config</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2"></a><span class="s">profiles {</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3"></a><span class="s">    docker {</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4"></a><span class="s">        docker.enabled = true</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5"></a><span class="s">    }</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6"></a><span class="s">}</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7"></a><span class="s">EOF</span>
-<a id="__codelineno-3-8" name="__codelineno-3-8"></a>rm<span class="w"> </span>-r<span class="w"> </span>work
-<a id="__codelineno-3-9" name="__codelineno-3-9"></a>nextflow<span class="w"> </span>run<span class="w"> </span>.<span class="w"> </span>-profile<span class="w"> </span>docker
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>.
 </code></pre></div></td></tr></table></div>
 <p>and then inspect the <code>.command.run</code> file that Nextflow has generated</p>
-<div class="highlight"><pre><span></span><code><a href="#__codelineno-4-1" id="__codelineno-4-1" name="__codelineno-4-1"></a>code<span class="w"> </span>work/*/*/.command.run
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a>code<span class="w"> </span>work/*/*/.command.run
 </code></pre></div>
 <p>You'll notice a <code>nxf_container_env</code> bash function that appends our bin directory to <code>$PATH</code>:</p>
-<div class="highlight"><pre><span></span><code><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a>nxf_container_env<span class="o">()</span><span class="w"> </span><span class="o">{</span>
-<a href="#__codelineno-5-2" id="__codelineno-5-2" name="__codelineno-5-2"></a>cat<span class="w"> </span><span class="s">&lt;&lt; EOF</span>
-<a href="#__codelineno-5-3" id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="s">export PATH="\$PATH:/workspaces/training/nf-training-advanced/structure/bin"</span>
-<a href="#__codelineno-5-4" id="__codelineno-5-4" name="__codelineno-5-4"></a><span class="s">EOF</span>
-<a href="#__codelineno-5-5" id="__codelineno-5-5" name="__codelineno-5-5"></a><span class="o">}</span>
-</code></pre></div>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-14">14</a></span>
+<span class="normal"><a href="#__codelineno-6-15">15</a></span>
+<span class="normal"><a href="#__codelineno-6-16">16</a></span>
+<span class="normal"><a href="#__codelineno-6-17">17</a></span>
+<span class="normal"><a href="#__codelineno-6-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-14" name="__codelineno-6-14"></a>nxf_container_env<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-6-15" name="__codelineno-6-15"></a>cat<span class="w"> </span><span class="s">&lt;&lt; EOF</span>
+<a id="__codelineno-6-16" name="__codelineno-6-16"></a><span class="s">export PATH="\$PATH:/workspaces/training/nf-training-advanced/structure/bin"</span>
+<a id="__codelineno-6-17" name="__codelineno-6-17"></a><span class="s">EOF</span>
+<a id="__codelineno-6-18" name="__codelineno-6-18"></a><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
 <p>When working on the cloud, Nextflow will also ensure that the bin directory is copied onto the virtual machine running your task in addition to the modification of <code>$PATH</code>.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
@@ -1482,181 +1465,187 @@
 <h2 id="templates"><span class="enumerate-headings-plugin enumerate-heading-plugin">19.2</span> <code>./templates</code><a class="headerlink" href="#templates" title="Permanent link">¶</a></h2>
 <p>If a process script block is becoming too long, it can be moved to a template file. The template file can then be imported into the process script block using the <code>template</code> method. This is useful for keeping the process block tidy and readable. Nextflow's use of <code>$</code> to indicate variables also allows for directly testing the template file by running it as a script.</p>
 <p>The structure directory already contains an example template - a very simple python script. We can add a new process that uses this template:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1">1</a></span>
-<span class="normal"><a href="#__codelineno-6-2">2</a></span>
-<span class="normal"><a href="#__codelineno-6-3">3</a></span>
-<span class="normal"><a href="#__codelineno-6-4">4</a></span>
-<span class="normal"><a href="#__codelineno-6-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="n">process</span><span class="w"> </span><span class="n">SayHiTemplate</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2"></a><span class="w">    </span><span class="n">debug</span><span class="w"> </span><span class="kc">true</span>
-<a id="__codelineno-6-3" name="__codelineno-6-3"></a><span class="w">    </span><span class="nl">input:</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">name</span><span class="o">)</span>
-<a id="__codelineno-6-4" name="__codelineno-6-4"></a><span class="w">    </span><span class="nl">script:</span><span class="w"> </span><span class="n">template</span><span class="w"> </span><span class="s1">'adder.py'</span>
-<a id="__codelineno-6-5" name="__codelineno-6-5"></a><span class="o">}</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-14">14</a></span>
+<span class="normal"><a href="#__codelineno-7-15">15</a></span>
+<span class="normal"><a href="#__codelineno-7-16">16</a></span>
+<span class="normal"><a href="#__codelineno-7-17">17</a></span>
+<span class="normal"><a href="#__codelineno-7-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-14" name="__codelineno-7-14"></a><span class="n">process</span><span class="w"> </span><span class="n">SayHiTemplate</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-7-15" name="__codelineno-7-15"></a><span class="w">    </span><span class="n">debug</span><span class="w"> </span><span class="kc">true</span>
+<a id="__codelineno-7-16" name="__codelineno-7-16"></a><span class="w">    </span><span class="nl">input:</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">name</span><span class="o">)</span>
+<a id="__codelineno-7-17" name="__codelineno-7-17"></a><span class="w">    </span><span class="nl">script:</span><span class="w"> </span><span class="n">template</span><span class="w"> </span><span class="s1">'adder.py'</span>
+<a id="__codelineno-7-18" name="__codelineno-7-18"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <h2 id="lib"><span class="enumerate-headings-plugin enumerate-heading-plugin">19.3</span> <code>./lib</code><a class="headerlink" href="#lib" title="Permanent link">¶</a></h2>
 <p>In the previous chapter, we saw the addition of small helper Groovy functions to the <code>main.nf</code> file. It may at times be helpful to bundle functionality into a new Groovy class. Any classes defined in the <code>lib</code> directory are available for use in the workflow - both <code>main.nf</code> and any imported modules.</p>
-<p>Classes defined in <code>lib</code> directory can be used for a variety of purposes. For example, the <a href="https://github.com/nf-core/rnaseq/tree/master/lib">nf-core/rnaseq</a> workflow uses five custom classes:</p>
-<ol>
-<li><code>NfcoreSchema.groovy</code> for parsing the schema.json file and validating the workflow parameters.</li>
-<li><code>NfcoreTemplate.groovy</code> for email templating and nf-core utility functions.</li>
-<li><code>Utils.groovy</code> for provision of a single <code>checkCondaChannels</code> method.</li>
-<li><code>WorkflowMain.groovy</code> for workflow setup and to call the <code>NfcoreTemplate</code> class.</li>
-<li><code>WorkflowRnaseq.groovy</code> for the workflow-specific functions.</li>
-</ol>
-<p>The classes listed above all provide utility executed at the beginning of a workflow, and are generally used to "set up" the workflow. However, classes defined in <code>lib</code> can also be used to provide functionality to the workflow itself.</p>
 <h3 id="making-a-metadata-class"><span class="enumerate-headings-plugin enumerate-heading-plugin">19.3.1</span> Making a Metadata Class<a class="headerlink" href="#making-a-metadata-class" title="Permanent link">¶</a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+</div>
+<p>Using custom Groovy is considered a very advanced use case and you should not need it for the majority of workflows. The language server will complain about this but you can safely ignore it.</p>
+<div class="admonition exercise">
+<p class="admonition-title">Exercise</p>
+<p>Create a new class in <code>./lib/Metadata.groovy</code> that extends the <code>HashMap</code> class and adds a <code>hi</code> method.</p>
+</div>
 <p>Let's consider an example where we create our own custom class to handle metadata. We can create a new class in <code>./lib/Metadata.groovy</code>. We'll extend the built-in <code>HashMap</code> class, and add a simple method to return a value:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1">1</a></span>
-<span class="normal"><a href="#__codelineno-7-2">2</a></span>
-<span class="normal"><a href="#__codelineno-7-3">3</a></span>
-<span class="normal"><a href="#__codelineno-7-4">4</a></span>
-<span class="normal"><a href="#__codelineno-7-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="kd">class</span><span class="w"> </span><span class="nc">Metadata</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">HashMap</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">hi</span><span class="o">()</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-7-3" name="__codelineno-7-3"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s2">"Hello, workshop participants!"</span>
-<a id="__codelineno-7-4" name="__codelineno-7-4"></a><span class="w">    </span><span class="o">}</span>
-<a id="__codelineno-7-5" name="__codelineno-7-5"></a><span class="o">}</span>
-</code></pre></div></td></tr></table></div>
-<p>We can then use this class in our workflow:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1">1</a></span>
 <span class="normal"><a href="#__codelineno-8-2">2</a></span>
 <span class="normal"><a href="#__codelineno-8-3">3</a></span>
 <span class="normal"><a href="#__codelineno-8-4">4</a></span>
-<span class="normal"><a href="#__codelineno-8-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2"></a><span class="w">    </span><span class="n">Channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s2">"Montreal"</span><span class="o">)</span>
-<a id="__codelineno-8-3" name="__codelineno-8-3"></a><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Metadata</span><span class="o">()</span><span class="w"> </span><span class="o">}</span>
-<a id="__codelineno-8-4" name="__codelineno-8-4"></a><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">view</span>
+<span class="normal"><a href="#__codelineno-8-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="kd">class</span><span class="w"> </span><span class="nc">Metadata</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">HashMap</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">hi</span><span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s2">"Hello, workshop participants!"</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4"></a><span class="w">    </span><span class="o">}</span>
 <a id="__codelineno-8-5" name="__codelineno-8-5"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p>We can use the new <code>hi</code> method in the workflow:</p>
+<p>We can then use this class in our workflow:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1">1</a></span>
 <span class="normal"><a href="#__codelineno-9-2">2</a></span>
 <span class="normal"><a href="#__codelineno-9-3">3</a></span>
 <span class="normal"><a href="#__codelineno-9-4">4</a></span>
 <span class="normal"><a href="#__codelineno-9-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2"></a><span class="w">    </span><span class="n">Channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s2">"Montreal"</span><span class="o">)</span>
-<a id="__codelineno-9-3" name="__codelineno-9-3"></a><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Metadata</span><span class="o">()</span><span class="w"> </span><span class="o">}</span>
-<a id="__codelineno-9-4" name="__codelineno-9-4"></a><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">it</span><span class="o">.</span><span class="na">hi</span><span class="o">()</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Metadata</span><span class="o">()</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4"></a><span class="w">        </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
 <a id="__codelineno-9-5" name="__codelineno-9-5"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p>At the moment, the <code>Metadata</code> class is not making use of the "Montreal" being passed into the closure. Let's change that by adding a constructor to the class:</p>
+<p>We can use the new <code>hi</code> method in the workflow:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">1</a></span>
 <span class="normal"><a href="#__codelineno-10-2">2</a></span>
 <span class="normal"><a href="#__codelineno-10-3">3</a></span>
 <span class="normal"><a href="#__codelineno-10-4">4</a></span>
-<span class="normal"><a href="#__codelineno-10-5">5</a></span>
-<span class="normal"><a href="#__codelineno-10-6">6</a></span>
-<span class="normal"><a href="#__codelineno-10-7">7</a></span>
-<span class="normal"><a href="#__codelineno-10-8">8</a></span>
-<span class="normal"><a href="#__codelineno-10-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="kd">class</span><span class="w"> </span><span class="nc">Metadata</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">HashMap</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2"></a><span class="w">    </span><span class="n">Metadata</span><span class="o">(</span><span class="n">String</span><span class="w"> </span><span class="n">location</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-10-3" name="__codelineno-10-3"></a><span class="w">        </span><span class="k">this</span><span class="o">.</span><span class="na">location</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">location</span>
-<a id="__codelineno-10-4" name="__codelineno-10-4"></a><span class="w">    </span><span class="o">}</span>
-<a id="__codelineno-10-5" name="__codelineno-10-5"></a>
-<a id="__codelineno-10-6" name="__codelineno-10-6"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="nf">hi</span><span class="o">()</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-10-7" name="__codelineno-10-7"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="o">.</span><span class="na">location</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s2">"Hello, from ${this.location}!"</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">"Hello, workshop participants!"</span>
-<a id="__codelineno-10-8" name="__codelineno-10-8"></a><span class="w">    </span><span class="o">}</span>
-<a id="__codelineno-10-9" name="__codelineno-10-9"></a><span class="o">}</span>
+<span class="normal"><a href="#__codelineno-10-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2"></a><span class="w">    </span><span class="n">Channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s2">"Montreal"</span><span class="o">)</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3"></a><span class="hll"><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Metadata</span><span class="o">()</span><span class="w"> </span><span class="o">}</span>
+</span><a id="__codelineno-10-4" name="__codelineno-10-4"></a><span class="w">        </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">metadata</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">metadata</span><span class="o">.</span><span class="na">hi</span><span class="o">()</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p>Which we can use like so:</p>
+<p>At the moment, the <code>Metadata</code> class is not making use of the "Montreal" being passed into the closure. Let's change that by adding a constructor to the class:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1">1</a></span>
 <span class="normal"><a href="#__codelineno-11-2">2</a></span>
 <span class="normal"><a href="#__codelineno-11-3">3</a></span>
 <span class="normal"><a href="#__codelineno-11-4">4</a></span>
-<span class="normal"><a href="#__codelineno-11-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-11-2" name="__codelineno-11-2"></a><span class="w">    </span><span class="n">Channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s2">"Montreal"</span><span class="o">)</span>
-<a id="__codelineno-11-3" name="__codelineno-11-3"></a><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">place</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Metadata</span><span class="o">(</span><span class="n">place</span><span class="o">)</span><span class="w"> </span><span class="o">}</span>
-<a id="__codelineno-11-4" name="__codelineno-11-4"></a><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">it</span><span class="o">.</span><span class="na">hi</span><span class="o">()</span><span class="w"> </span><span class="o">}</span>
-<a id="__codelineno-11-5" name="__codelineno-11-5"></a><span class="o">}</span>
-</code></pre></div></td></tr></table></div>
-<p>We can also use this method when passing the object to a process:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-12-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-12-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-12-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-12-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-12-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-12-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-12-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-12-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-12-10">10</a></span>
-<span class="normal"><a href="#__codelineno-12-11">11</a></span>
-<span class="normal"><a href="#__codelineno-12-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="n">process</span><span class="w"> </span><span class="n">UseMeta</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-12-2" name="__codelineno-12-2"></a><span class="w">    </span><span class="nl">input:</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">)</span>
-<a id="__codelineno-12-3" name="__codelineno-12-3"></a><span class="w">    </span><span class="nl">output:</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">"out.txt"</span><span class="o">)</span>
-<a id="__codelineno-12-4" name="__codelineno-12-4"></a><span class="w">    </span><span class="nl">script:</span><span class="w"> </span><span class="s2">"echo '${meta.hi()}' | tee out.txt"</span>
-<a id="__codelineno-12-5" name="__codelineno-12-5"></a><span class="o">}</span>
-<a id="__codelineno-12-6" name="__codelineno-12-6"></a>
-<a id="__codelineno-12-7" name="__codelineno-12-7"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-12-8" name="__codelineno-12-8"></a><span class="w">    </span><span class="n">Channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s2">"Montreal"</span><span class="o">)</span>
-<a id="__codelineno-12-9" name="__codelineno-12-9"></a><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">place</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Metadata</span><span class="o">(</span><span class="n">place</span><span class="o">)</span><span class="w"> </span><span class="o">}</span>
-<a id="__codelineno-12-10" name="__codelineno-12-10"></a><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">UseMeta</span>
-<a id="__codelineno-12-11" name="__codelineno-12-11"></a><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">view</span>
-<a id="__codelineno-12-12" name="__codelineno-12-12"></a><span class="o">}</span>
-</code></pre></div></td></tr></table></div>
-<p>Why might this be helpful? You can add extra classes to the metadata which can be computed from the existing metadata. For example, we might want to grab the adapter prefix:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1">1</a></span>
-<span class="normal"><a href="#__codelineno-13-2">2</a></span>
-<span class="normal"><a href="#__codelineno-13-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1"></a><span class="kt">def</span><span class="w"> </span><span class="nf">getAdapterStart</span><span class="o">()</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-13-2" name="__codelineno-13-2"></a><span class="w">    </span><span class="k">this</span><span class="o">.</span><span class="na">adapter</span><span class="o">?.</span><span class="na">substring</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span><span class="w"> </span><span class="mi">3</span><span class="o">)</span>
-<a id="__codelineno-13-3" name="__codelineno-13-3"></a><span class="o">}</span>
-</code></pre></div></td></tr></table></div>
-<p>Which we might use like so:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-14-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-14-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-14-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-14-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-14-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-14-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-14-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-14-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-14-10">10</a></span>
-<span class="normal"><a href="#__codelineno-14-11">11</a></span>
-<span class="normal"><a href="#__codelineno-14-12">12</a></span>
-<span class="normal"><a href="#__codelineno-14-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1"></a><span class="n">process</span><span class="w"> </span><span class="n">UseMeta</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-14-2" name="__codelineno-14-2"></a><span class="w">    </span><span class="nl">input:</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">)</span>
-<a id="__codelineno-14-3" name="__codelineno-14-3"></a><span class="w">    </span><span class="nl">output:</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">"out.txt"</span><span class="o">)</span>
-<a id="__codelineno-14-4" name="__codelineno-14-4"></a><span class="w">    </span><span class="nl">script:</span><span class="w"> </span><span class="s2">"echo '${meta.adapter} prefix is ${meta.getAdapterStart()}' | tee out.txt"</span>
-<a id="__codelineno-14-5" name="__codelineno-14-5"></a><span class="o">}</span>
-<a id="__codelineno-14-6" name="__codelineno-14-6"></a>
-<a id="__codelineno-14-7" name="__codelineno-14-7"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-14-8" name="__codelineno-14-8"></a><span class="w">    </span><span class="n">Channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s2">"Montreal"</span><span class="o">)</span>
-<a id="__codelineno-14-9" name="__codelineno-14-9"></a><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">place</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Metadata</span><span class="o">(</span><span class="n">place</span><span class="o">)</span><span class="w"> </span><span class="o">}</span>
-<a id="__codelineno-14-10" name="__codelineno-14-10"></a><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">[</span><span class="nl">adapter:</span><span class="s2">"AACGTAGCTTGAC"</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
-<a id="__codelineno-14-11" name="__codelineno-14-11"></a><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">UseMeta</span>
-<a id="__codelineno-14-12" name="__codelineno-14-12"></a><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">view</span>
-<a id="__codelineno-14-13" name="__codelineno-14-13"></a><span class="o">}</span>
-</code></pre></div></td></tr></table></div>
-<p>You might even want to reach out to external services such as a LIMS or the E-utilities API. Here we add a dummy "getSampleName()" method that reaches out to a public API:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1">1</a></span>
-<span class="normal"><a href="#__codelineno-15-2">2</a></span>
-<span class="normal"><a href="#__codelineno-15-3">3</a></span>
-<span class="normal"><a href="#__codelineno-15-4">4</a></span>
-<span class="normal"><a href="#__codelineno-15-5">5</a></span>
-<span class="normal"><a href="#__codelineno-15-6">6</a></span>
-<span class="normal"><a href="#__codelineno-15-7">7</a></span>
-<span class="normal"><a href="#__codelineno-15-8">8</a></span>
-<span class="normal"><a href="#__codelineno-15-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1"></a><span class="kt">def</span><span class="w"> </span><span class="nf">getSampleName</span><span class="o">()</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-15-2" name="__codelineno-15-2"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">get</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">URL</span><span class="o">(</span><span class="s1">'https://postman-echo.com/get?sampleName=Fido'</span><span class="o">).</span><span class="na">openConnection</span><span class="o">()</span>
-<a id="__codelineno-15-3" name="__codelineno-15-3"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">getRC</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get</span><span class="o">.</span><span class="na">getResponseCode</span><span class="o">();</span>
-<a id="__codelineno-15-4" name="__codelineno-15-4"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">(</span><span class="n">getRC</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="mi">200</span><span class="o">))</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-15-5" name="__codelineno-15-5"></a><span class="w">        </span><span class="n">JsonSlurper</span><span class="w"> </span><span class="n">jsonSlurper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">JsonSlurper</span><span class="o">()</span>
-<a id="__codelineno-15-6" name="__codelineno-15-6"></a><span class="w">        </span><span class="kt">def</span><span class="w"> </span><span class="n">json</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jsonSlurper</span><span class="o">.</span><span class="na">parseText</span><span class="o">(</span><span class="n">get</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">().</span><span class="na">getText</span><span class="o">())</span>
-<a id="__codelineno-15-7" name="__codelineno-15-7"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">json</span><span class="o">.</span><span class="na">args</span><span class="o">.</span><span class="na">sampleName</span>
-<a id="__codelineno-15-8" name="__codelineno-15-8"></a><span class="w">    </span><span class="o">}</span>
-<a id="__codelineno-15-9" name="__codelineno-15-9"></a><span class="o">}</span>
+<span class="normal"><a href="#__codelineno-11-5">5</a></span>
+<span class="normal"><a href="#__codelineno-11-6">6</a></span>
+<span class="normal"><a href="#__codelineno-11-7">7</a></span>
+<span class="normal"><a href="#__codelineno-11-8">8</a></span>
+<span class="normal"><a href="#__codelineno-11-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="kd">class</span><span class="w"> </span><span class="nc">Metadata</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">HashMap</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2"></a><span class="w">    </span><span class="n">Metadata</span><span class="o">(</span><span class="n">String</span><span class="w"> </span><span class="n">location</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3"></a><span class="hll"><span class="w">        </span><span class="k">this</span><span class="o">.</span><span class="na">location</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">location</span>
+</span><a id="__codelineno-11-4" name="__codelineno-11-4"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5"></a>
+<a id="__codelineno-11-6" name="__codelineno-11-6"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="nf">hi</span><span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7"></a><span class="hll"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="o">.</span><span class="na">location</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s2">"Hello, from ${this.location}!"</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">"Hello, workshop participants!"</span>
+</span><a id="__codelineno-11-8" name="__codelineno-11-8"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-11-9" name="__codelineno-11-9"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>Which we can use like so:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-16-1">1</a></span>
-<span class="normal"><a href="#__codelineno-16-2">2</a></span>
-<span class="normal"><a href="#__codelineno-16-3">3</a></span>
-<span class="normal"><a href="#__codelineno-16-4">4</a></span>
-<span class="normal"><a href="#__codelineno-16-5">5</a></span>
-<span class="normal"><a href="#__codelineno-16-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1"></a><span class="n">process</span><span class="w"> </span><span class="n">UseMeta</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-16-2" name="__codelineno-16-2"></a><span class="w">    </span><span class="nl">input:</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">)</span>
-<a id="__codelineno-16-3" name="__codelineno-16-3"></a><span class="w">    </span><span class="nl">output:</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">"out.txt"</span><span class="o">)</span>
-<a id="__codelineno-16-4" name="__codelineno-16-4"></a><span class="w">    </span><span class="nl">script:</span>
-<a id="__codelineno-16-5" name="__codelineno-16-5"></a><span class="w">    </span><span class="s2">"echo '${meta.adapter} prefix is ${meta.getAdapterStart()} with sampleName ${meta.getSampleName()}' | tee out.txt"</span>
-<a id="__codelineno-16-6" name="__codelineno-16-6"></a><span class="o">}</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1">1</a></span>
+<span class="normal"><a href="#__codelineno-12-2">2</a></span>
+<span class="normal"><a href="#__codelineno-12-3">3</a></span>
+<span class="normal"><a href="#__codelineno-12-4">4</a></span>
+<span class="normal"><a href="#__codelineno-12-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2"></a><span class="w">    </span><span class="n">Channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s2">"Montreal"</span><span class="o">)</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3"></a><span class="hll"><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">place</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Metadata</span><span class="o">(</span><span class="n">place</span><span class="o">)</span><span class="w"> </span><span class="o">}</span>
+</span><a id="__codelineno-12-4" name="__codelineno-12-4"></a><span class="w">        </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">metadata</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">metadata</span><span class="o">.</span><span class="na">hi</span><span class="o">()</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5"></a><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
+<p>We can also use this method when passing the object to a process:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-13-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-13-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-13-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-13-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-13-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-13-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-13-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-13-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-13-10">10</a></span>
+<span class="normal"><a href="#__codelineno-13-11">11</a></span>
+<span class="normal"><a href="#__codelineno-13-12">12</a></span>
+<span class="normal"><a href="#__codelineno-13-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1"></a><span class="n">process</span><span class="w"> </span><span class="n">UseMeta</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2"></a><span class="w">    </span><span class="nl">input:</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">)</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3"></a><span class="w">    </span><span class="nl">output:</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">"out.txt"</span><span class="o">)</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4"></a><span class="w">    </span><span class="nl">script:</span><span class="w"> </span><span class="s2">"echo '${meta.hi()}' | tee out.txt"</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5"></a><span class="o">}</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6"></a>
+<a id="__codelineno-13-7" name="__codelineno-13-7"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-13-8" name="__codelineno-13-8"></a><span class="w">    </span><span class="n">place_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s2">"Montreal"</span><span class="o">)</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">place</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Metadata</span><span class="o">(</span><span class="n">place</span><span class="o">)</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-13-10" name="__codelineno-13-10"></a>
+<a id="__codelineno-13-11" name="__codelineno-13-11"></a><span class="w">    </span><span class="n">UseMeta</span><span class="o">(</span><span class="n">place_ch</span><span class="o">)</span>
+<a id="__codelineno-13-12" name="__codelineno-13-12"></a><span class="w">        </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
+<a id="__codelineno-13-13" name="__codelineno-13-13"></a><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
+<p>Why might this be helpful? You can add extra classes to the metadata which can be computed from the existing metadata. For example, we might want to add a method to get the adapter prefix into our Metadata class:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-10">10</a></span>
+<span class="normal"><a href="#__codelineno-14-11">11</a></span>
+<span class="normal"><a href="#__codelineno-14-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-14-10" name="__codelineno-14-10"></a><span class="kt">def</span><span class="w"> </span><span class="nf">getAdapterStart</span><span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-14-11" name="__codelineno-14-11"></a><span class="w">    </span><span class="k">this</span><span class="o">.</span><span class="na">adapter</span><span class="o">?.</span><span class="na">substring</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span><span class="w"> </span><span class="mi">3</span><span class="o">)</span>
+<a id="__codelineno-14-12" name="__codelineno-14-12"></a><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
+<p>Which we might use like so:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-15-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-15-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-15-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-15-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-15-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-15-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-15-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-15-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-15-10">10</a></span>
+<span class="normal"><a href="#__codelineno-15-11">11</a></span>
+<span class="normal"><a href="#__codelineno-15-12">12</a></span>
+<span class="normal"><a href="#__codelineno-15-13">13</a></span>
+<span class="normal"><a href="#__codelineno-15-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1"></a><span class="n">process</span><span class="w"> </span><span class="n">UseMeta</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2"></a><span class="w">    </span><span class="nl">input:</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">)</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3"></a><span class="w">    </span><span class="nl">output:</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">"out.txt"</span><span class="o">)</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4"></a><span class="hll"><span class="w">    </span><span class="nl">script:</span><span class="w"> </span><span class="s2">"echo '${meta.adapter} prefix is ${meta.getAdapterStart()}' | tee out.txt"</span>
+</span><a id="__codelineno-15-5" name="__codelineno-15-5"></a><span class="o">}</span>
+<a id="__codelineno-15-6" name="__codelineno-15-6"></a>
+<a id="__codelineno-15-7" name="__codelineno-15-7"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-15-8" name="__codelineno-15-8"></a><span class="w">    </span><span class="n">place_ch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s2">"Montreal"</span><span class="o">)</span>
+<a id="__codelineno-15-9" name="__codelineno-15-9"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">place</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Metadata</span><span class="o">(</span><span class="n">place</span><span class="o">)</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-15-10" name="__codelineno-15-10"></a><span class="hll"><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">metadata</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">metadata</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">[</span><span class="nl">adapter:</span><span class="s2">"AACGTAGCTTGAC"</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
+</span><a id="__codelineno-15-11" name="__codelineno-15-11"></a>
+<a id="__codelineno-15-12" name="__codelineno-15-12"></a><span class="w">    </span><span class="n">UseMeta</span><span class="o">(</span><span class="n">place_ch</span><span class="o">)</span>
+<a id="__codelineno-15-13" name="__codelineno-15-13"></a><span class="w">        </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
+<a id="__codelineno-15-14" name="__codelineno-15-14"></a><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
+<p>You might even want to reach out to external services such as a LIMS or the E-utilities API. Here we add a dummy "getSampleName()" method that reaches out to a public API:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-16-13">13</a></span>
+<span class="normal"><a href="#__codelineno-16-14">14</a></span>
+<span class="normal"><a href="#__codelineno-16-15">15</a></span>
+<span class="normal"><a href="#__codelineno-16-16">16</a></span>
+<span class="normal"><a href="#__codelineno-16-17">17</a></span>
+<span class="normal"><a href="#__codelineno-16-18">18</a></span>
+<span class="normal"><a href="#__codelineno-16-19">19</a></span>
+<span class="normal"><a href="#__codelineno-16-20">20</a></span>
+<span class="normal"><a href="#__codelineno-16-21">21</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-16-13" name="__codelineno-16-13"></a><span class="kt">def</span><span class="w"> </span><span class="nf">getSampleName</span><span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-16-14" name="__codelineno-16-14"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">get</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">URL</span><span class="o">(</span><span class="s1">'https://postman-echo.com/get?sampleName=Fido'</span><span class="o">).</span><span class="na">openConnection</span><span class="o">()</span>
+<a id="__codelineno-16-15" name="__codelineno-16-15"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">getRC</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get</span><span class="o">.</span><span class="na">getResponseCode</span><span class="o">();</span>
+<a id="__codelineno-16-16" name="__codelineno-16-16"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">(</span><span class="n">getRC</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="mi">200</span><span class="o">))</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-16-17" name="__codelineno-16-17"></a><span class="w">        </span><span class="n">JsonSlurper</span><span class="w"> </span><span class="n">jsonSlurper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">JsonSlurper</span><span class="o">()</span>
+<a id="__codelineno-16-18" name="__codelineno-16-18"></a><span class="w">        </span><span class="kt">def</span><span class="w"> </span><span class="n">json</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">jsonSlurper</span><span class="o">.</span><span class="na">parseText</span><span class="o">(</span><span class="n">get</span><span class="o">.</span><span class="na">getInputStream</span><span class="o">().</span><span class="na">getText</span><span class="o">())</span>
+<a id="__codelineno-16-19" name="__codelineno-16-19"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">json</span><span class="o">.</span><span class="na">args</span><span class="o">.</span><span class="na">sampleName</span>
+<a id="__codelineno-16-20" name="__codelineno-16-20"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-16-21" name="__codelineno-16-21"></a><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
+<p>This relies on jsonSlurper which isn't included by default. Import this by adding the following to the top of the file:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">groovy.json.JsonSlurper</span>
+</code></pre></div></td></tr></table></div>
+<p>Which we can use like so:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-1">1</a></span>
+<span class="normal"><a href="#__codelineno-18-2">2</a></span>
+<span class="normal"><a href="#__codelineno-18-3">3</a></span>
+<span class="normal"><a href="#__codelineno-18-4">4</a></span>
+<span class="normal"><a href="#__codelineno-18-5">5</a></span>
+<span class="normal"><a href="#__codelineno-18-6">6</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1"></a><span class="n">process</span><span class="w"> </span><span class="n">UseMeta</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2"></a><span class="w">    </span><span class="nl">input:</span><span class="w"> </span><span class="n">val</span><span class="o">(</span><span class="n">meta</span><span class="o">)</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3"></a><span class="w">    </span><span class="nl">output:</span><span class="w"> </span><span class="n">path</span><span class="o">(</span><span class="s2">"out.txt"</span><span class="o">)</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4"></a><span class="w">    </span><span class="nl">script:</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5"></a><span class="w">    </span><span class="s2">"echo '${meta.adapter} prefix is ${meta.getAdapterStart()} with sampleName ${meta.getSampleName()}' | tee out.txt"</span>
+<a id="__codelineno-18-6" name="__codelineno-18-6"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <div class="admonition note">
 <p class="admonition-title">Nextflow caching</p>
@@ -1668,43 +1657,43 @@
 <details class="solution">
 <summary>Solution</summary>
 <p>We might increase the length of the adapter prefix to 5 characters:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-1">1</a></span>
-<span class="normal"><a href="#__codelineno-17-2">2</a></span>
-<span class="normal"><a href="#__codelineno-17-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">getAdapterStart</span><span class="o">()</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-17-2" name="__codelineno-17-2"></a><span class="w">        </span><span class="k">this</span><span class="o">.</span><span class="na">adapter</span><span class="o">?.</span><span class="na">substring</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span><span class="w"> </span><span class="mi">5</span><span class="o">)</span>
-<a id="__codelineno-17-3" name="__codelineno-17-3"></a><span class="w">    </span><span class="o">}</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-19-12">12</a></span>
+<span class="normal"><a href="#__codelineno-19-13">13</a></span>
+<span class="normal"><a href="#__codelineno-19-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-19-12" name="__codelineno-19-12"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">getAdapterStart</span><span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-19-13" name="__codelineno-19-13"></a><span class="w">        </span><span class="k">this</span><span class="o">.</span><span class="na">adapter</span><span class="o">?.</span><span class="na">substring</span><span class="o">(</span><span class="mi">0</span><span class="o">,</span><span class="w"> </span><span class="mi">5</span><span class="o">)</span>
+<a id="__codelineno-19-14" name="__codelineno-19-14"></a><span class="w">    </span><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>Changing this method and resuming the workflow will not change the hash, and the existing method will be used.</p>
 </details>
 </div>
 <p>We are not limited to using or extending the built-in Groovy classes. Let's start by creating a <code>Dog</code> class in <code>./lib/Dog.groovy</code>:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-1">1</a></span>
-<span class="normal"><a href="#__codelineno-18-2">2</a></span>
-<span class="normal"><a href="#__codelineno-18-3">3</a></span>
-<span class="normal"><a href="#__codelineno-18-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1"></a><span class="kd">class</span><span class="w"> </span><span class="nc">Dog</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-18-2" name="__codelineno-18-2"></a><span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">name</span>
-<a id="__codelineno-18-3" name="__codelineno-18-3"></a><span class="w">    </span><span class="n">Boolean</span><span class="w"> </span><span class="n">isHungry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
-<a id="__codelineno-18-4" name="__codelineno-18-4"></a><span class="o">}</span>
-</code></pre></div></td></tr></table></div>
-<p>We can create a new dog at the beginning of the workflow:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-19-1">1</a></span>
-<span class="normal"><a href="#__codelineno-19-2">2</a></span>
-<span class="normal"><a href="#__codelineno-19-3">3</a></span>
-<span class="normal"><a href="#__codelineno-19-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-19-2" name="__codelineno-19-2"></a><span class="w">    </span><span class="n">dog</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Dog</span><span class="o">(</span><span class="nl">name:</span><span class="w"> </span><span class="s2">"fido"</span><span class="o">)</span>
-<a id="__codelineno-19-3" name="__codelineno-19-3"></a><span class="w">    </span><span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="w"> </span><span class="s2">"Found a new dog: $dog"</span>
-<a id="__codelineno-19-4" name="__codelineno-19-4"></a><span class="o">}</span>
-</code></pre></div></td></tr></table></div>
-<p>We can pass objects of our class through channels. Here we take a channel of dog names and create a channel of dogs:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-1">1</a></span>
 <span class="normal"><a href="#__codelineno-20-2">2</a></span>
 <span class="normal"><a href="#__codelineno-20-3">3</a></span>
-<span class="normal"><a href="#__codelineno-20-4">4</a></span>
-<span class="normal"><a href="#__codelineno-20-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-20-2" name="__codelineno-20-2"></a><span class="w">    </span><span class="n">Channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s2">"Argente"</span><span class="o">,</span><span class="w"> </span><span class="s2">"Absolon"</span><span class="o">,</span><span class="w"> </span><span class="s2">"Chowne"</span><span class="o">)</span>
-<a id="__codelineno-20-3" name="__codelineno-20-3"></a><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Dog</span><span class="o">(</span><span class="nl">name:</span><span class="w"> </span><span class="n">it</span><span class="o">)</span><span class="w"> </span><span class="o">}</span>
-<a id="__codelineno-20-4" name="__codelineno-20-4"></a><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">view</span>
-<a id="__codelineno-20-5" name="__codelineno-20-5"></a><span class="o">}</span>
+<span class="normal"><a href="#__codelineno-20-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="kd">class</span><span class="w"> </span><span class="nc">Dog</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2"></a><span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">name</span>
+<a id="__codelineno-20-3" name="__codelineno-20-3"></a><span class="w">    </span><span class="n">Boolean</span><span class="w"> </span><span class="n">isHungry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<a id="__codelineno-20-4" name="__codelineno-20-4"></a><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
+<p>We can create a new dog at the beginning of the workflow:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-1">1</a></span>
+<span class="normal"><a href="#__codelineno-21-2">2</a></span>
+<span class="normal"><a href="#__codelineno-21-3">3</a></span>
+<span class="normal"><a href="#__codelineno-21-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2"></a><span class="w">    </span><span class="kt">def</span><span class="w"> </span><span class="n">dog</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Dog</span><span class="o">(</span><span class="nl">name:</span><span class="w"> </span><span class="s2">"fido"</span><span class="o">)</span>
+<a id="__codelineno-21-3" name="__codelineno-21-3"></a><span class="hll"><span class="w">    </span><span class="n">log</span><span class="o">.</span><span class="na">info</span><span class="w"> </span><span class="s2">"Found a new dog: ${dog.name}"</span>
+</span><a id="__codelineno-21-4" name="__codelineno-21-4"></a><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
+<p>We can pass objects of our class through channels. Here we take a channel of dog names and create a channel of dogs:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-22-1">1</a></span>
+<span class="normal"><a href="#__codelineno-22-2">2</a></span>
+<span class="normal"><a href="#__codelineno-22-3">3</a></span>
+<span class="normal"><a href="#__codelineno-22-4">4</a></span>
+<span class="normal"><a href="#__codelineno-22-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-22-2" name="__codelineno-22-2"></a><span class="hll"><span class="w">    </span><span class="n">Channel</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s2">"Argente"</span><span class="o">,</span><span class="w"> </span><span class="s2">"Absolon"</span><span class="o">,</span><span class="w"> </span><span class="s2">"Chowne"</span><span class="o">)</span>
+</span><a id="__codelineno-22-3" name="__codelineno-22-3"></a><span class="hll"><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Dog</span><span class="o">(</span><span class="nl">name:</span><span class="w"> </span><span class="n">name</span><span class="o">)</span><span class="w"> </span><span class="o">}</span>
+</span><a id="__codelineno-22-4" name="__codelineno-22-4"></a><span class="hll"><span class="w">        </span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">dog</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">"Found a new dog: ${dog.name}"</span><span class="w"> </span><span class="o">}</span>
+</span><a id="__codelineno-22-5" name="__codelineno-22-5"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>If we try to use this new class in a resumed process, no caches will be used.</p>
 <div class="admonition exercise">
@@ -1714,27 +1703,25 @@
 <h3 id="making-a-valueobject"><span class="enumerate-headings-plugin enumerate-heading-plugin">19.3.2</span> Making a ValueObject<a class="headerlink" href="#making-a-valueobject" title="Permanent link">¶</a></h3>
 <p>Nextflow has provided a decorator to help serialize your custom classes. By adding <code>@ValueObject</code> to the class definition, Nextflow will automatically serialize the class and cache it. This is useful if you want to pass a custom class through a channel, or if you want to use the class in a resumed workflow.</p>
 <p>Let's add the decorator to our <code>Dog</code> class:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-21-1">1</a></span>
-<span class="normal"><a href="#__codelineno-21-2">2</a></span>
-<span class="normal"><a href="#__codelineno-21-3">3</a></span>
-<span class="normal"><a href="#__codelineno-21-4">4</a></span>
-<span class="normal"><a href="#__codelineno-21-5">5</a></span>
-<span class="normal"><a href="#__codelineno-21-6">6</a></span>
-<span class="normal"><a href="#__codelineno-21-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">nextflow.io.ValueObject</span>
-<a id="__codelineno-21-2" name="__codelineno-21-2"></a>
-<a id="__codelineno-21-3" name="__codelineno-21-3"></a><span class="nd">@ValueObject</span>
-<a id="__codelineno-21-4" name="__codelineno-21-4"></a><span class="kd">class</span><span class="w"> </span><span class="nc">Dog</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-21-5" name="__codelineno-21-5"></a><span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">name</span>
-<a id="__codelineno-21-6" name="__codelineno-21-6"></a><span class="w">    </span><span class="n">Boolean</span><span class="w"> </span><span class="n">isHungry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
-<a id="__codelineno-21-7" name="__codelineno-21-7"></a><span class="o">}</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-23-1">1</a></span>
+<span class="normal"><a href="#__codelineno-23-2">2</a></span>
+<span class="normal"><a href="#__codelineno-23-3">3</a></span>
+<span class="normal"><a href="#__codelineno-23-4">4</a></span>
+<span class="normal"><a href="#__codelineno-23-5">5</a></span>
+<span class="normal"><a href="#__codelineno-23-6">6</a></span>
+<span class="normal"><a href="#__codelineno-23-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">nextflow.io.ValueObject</span>
+<a id="__codelineno-23-2" name="__codelineno-23-2"></a>
+<a id="__codelineno-23-3" name="__codelineno-23-3"></a><span class="nd">@ValueObject</span>
+<a id="__codelineno-23-4" name="__codelineno-23-4"></a><span class="kd">class</span><span class="w"> </span><span class="nc">Dog</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-23-5" name="__codelineno-23-5"></a><span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">name</span>
+<a id="__codelineno-23-6" name="__codelineno-23-6"></a><span class="w">    </span><span class="n">Boolean</span><span class="w"> </span><span class="n">isHungry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+<a id="__codelineno-23-7" name="__codelineno-23-7"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>Lastly, we will need to register the class with Kryo, the Java serialization framework. Again, Nextflow provides a helper method to do this. We can add the following to the <code>main.nf</code> file:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-22-1">1</a></span>
-<span class="normal"><a href="#__codelineno-22-2">2</a></span>
-<span class="normal"><a href="#__codelineno-22-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">nextflow.util.KryoHelper</span>
-<a id="__codelineno-22-2" name="__codelineno-22-2"></a>
-<a id="__codelineno-22-3" name="__codelineno-22-3"></a><span class="n">KryoHelper</span><span class="o">.</span><span class="na">register</span><span class="o">(</span><span class="n">Dog</span><span class="o">)</span>
-</code></pre></div></td></tr></table></div>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-24-1">1</a></span>
+<span class="normal"><a href="#__codelineno-24-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-24-2" name="__codelineno-24-2"></a><span class="hll"><span class="w">    </span><span class="n">nextflow</span><span class="o">.</span><span class="na">util</span><span class="o">.</span><span class="na">KryoHelper</span><span class="o">.</span><span class="na">register</span><span class="o">(</span><span class="n">Dog</span><span class="o">)</span>
+</span></code></pre></div></td></tr></table></div>
 <div class="admonition exercise">
 <p class="admonition-title">Exercise</p>
 <p>Show that the <code>Dog</code> class can now be used in processes and cached correctly.</p>

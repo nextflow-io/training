@@ -1141,67 +1141,63 @@
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="nb">cd</span><span class="w"> </span>groovy
 </code></pre></div>
 <p>Let's assume that we would like to pull in a samplesheet, parse the entries and run them through the FastP tool. So far, we have been concerned with local files, but Nextflow will handle remote files transparently:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-1">1</a></span>
-<span class="normal"><a href="#__codelineno-1-2">2</a></span>
-<span class="normal"><a href="#__codelineno-1-3">3</a></span>
-<span class="normal"><a href="#__codelineno-1-4">4</a></span>
-<span class="normal"><a href="#__codelineno-1-5">5</a></span>
-<span class="normal"><a href="#__codelineno-1-6">6</a></span>
-<span class="normal"><a href="#__codelineno-1-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"https://raw.githubusercontent.com/nf-core/test-datasets/rnaseq/samplesheet/v3.10/samplesheet_test.csv"</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3"></a>
-<a id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="w">    </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">)</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">splitCsv</span><span class="o">(</span><span class="nl">header:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">view</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="o">}</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-1-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-1-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-1-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-1-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-1-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-1-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-1-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-1-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"https://raw.githubusercontent.com/nf-core/test-datasets/rnaseq/samplesheet/v3.10/samplesheet_test.csv"</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4"></a>
+<a id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6"></a>
+<a id="__codelineno-1-7" name="__codelineno-1-7"></a><span class="w">    </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">)</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8"></a><span class="w">        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">(</span><span class="nl">header:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9"></a><span class="w">        </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>Let's write a small closure to parse each row into the now-familiar map + files shape. We might start by constructing the meta-map:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-2-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-2-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-2-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-2-5"> 5</a></span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-5"> 5</a></span>
 <span class="normal"><a href="#__codelineno-2-6"> 6</a></span>
 <span class="normal"><a href="#__codelineno-2-7"> 7</a></span>
 <span class="normal"><a href="#__codelineno-2-8"> 8</a></span>
 <span class="normal"><a href="#__codelineno-2-9"> 9</a></span>
 <span class="normal"><a href="#__codelineno-2-10">10</a></span>
-<span class="normal"><a href="#__codelineno-2-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="w">    </span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"https://raw.githubusercontent.com/nf-core/test-datasets/rnaseq/samplesheet/v3.10/samplesheet_test.csv"</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3"></a>
-<a id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="w">    </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">)</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">splitCsv</span><span class="o">(</span><span class="nl">header:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6"></a><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span>
-<a id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="w">        </span><span class="n">meta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">subMap</span><span class="o">(</span><span class="s1">'sample'</span><span class="o">,</span><span class="w"> </span><span class="s1">'strandedness'</span><span class="o">)</span>
-<a id="__codelineno-2-8" name="__codelineno-2-8"></a><span class="w">        </span><span class="n">meta</span>
-<a id="__codelineno-2-9" name="__codelineno-2-9"></a><span class="w">    </span><span class="o">}</span>
-<a id="__codelineno-2-10" name="__codelineno-2-10"></a><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">view</span>
-<a id="__codelineno-2-11" name="__codelineno-2-11"></a><span class="o">}</span>
+<span class="normal"><a href="#__codelineno-2-11">11</a></span>
+<span class="normal"><a href="#__codelineno-2-12">12</a></span>
+<span class="normal"><a href="#__codelineno-2-13">13</a></span>
+<span class="normal"><a href="#__codelineno-2-14">14</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-5" name="__codelineno-2-5"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6"></a>
+<a id="__codelineno-2-7" name="__codelineno-2-7"></a><span class="w">    </span><span class="n">samples</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">)</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8"></a><span class="w">        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">(</span><span class="nl">header:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9"></a><span class="hll"><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span>
+</span><a id="__codelineno-2-10" name="__codelineno-2-10"></a><span class="hll"><span class="w">            </span><span class="kt">def</span><span class="w"> </span><span class="n">meta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">subMap</span><span class="o">(</span><span class="s1">'sample'</span><span class="o">,</span><span class="w"> </span><span class="s1">'strandedness'</span><span class="o">)</span>
+</span><a id="__codelineno-2-11" name="__codelineno-2-11"></a><span class="hll"><span class="w">            </span><span class="n">meta</span>
+</span><a id="__codelineno-2-12" name="__codelineno-2-12"></a><span class="hll"><span class="w">        </span><span class="o">}</span>
+</span><a id="__codelineno-2-13" name="__codelineno-2-13"></a><span class="w">        </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
-<p>... but this precludes the possibility of adding additional columns to the samplesheet. We might to ensure the parsing will capture any extra metadata columns should they be added. Instead, let's partition the column names into those that begin with "fastq" and those that don't:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1"></a><span class="o">(</span><span class="n">readKeys</span><span class="o">,</span><span class="w"> </span><span class="n">metaKeys</span><span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">keySet</span><span class="o">().</span><span class="na">split</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">=~</span><span class="w"> </span><span class="s">/^fastq/</span><span class="w"> </span><span class="o">}</span>
+<p>... but this precludes the possibility of adding additional columns to the samplesheet. We might to ensure the parsing will capture any extra metadata columns should they be added. Instead, let's partition the column names into those that begin with "fastq" and those that don't. Within the map closure, let's add an additional line to partition the column names:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-3-10" name="__codelineno-3-10"></a><span class="kt">def</span><span class="w"> </span><span class="o">(</span><span class="n">readKeys</span><span class="o">,</span><span class="w"> </span><span class="n">metaKeys</span><span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">keySet</span><span class="o">().</span><span class="na">split</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="o">=~</span><span class="w"> </span><span class="s">/^fastq/</span><span class="w"> </span><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <div class="admonition note">
 <p class="admonition-title">New methods</p>
 <p>We've introduced a new keySet method here. This is a method on Java's LinkedHashMap class (<a href="https://docs.oracle.com/javase/8/docs/api/java/util/LinkedHashMap.html#keySet--">docs here</a>)</p>
 <p>We're also using the <code>.split()</code> method, which divides collection based on the return value of the closure. The mrhaki blog <a href="https://blog.mrhaki.com/2009/12/groovy-goodness-splitting-with-closures.html">provides a succinct summary</a>.</p>
 </div>
-<p>From here, let's</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="n">reads</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">subMap</span><span class="o">(</span><span class="n">readKeys</span><span class="o">).</span><span class="na">values</span><span class="o">().</span><span class="na">collect</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="n">it</span><span class="o">)</span><span class="w"> </span><span class="o">}</span>
+<p>From here, let's add another line collect the values of the read keys into a list of file objects:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-11" name="__codelineno-4-11"></a><span class="kt">def</span><span class="w"> </span><span class="n">reads</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">subMap</span><span class="o">(</span><span class="n">readKeys</span><span class="o">).</span><span class="na">values</span><span class="o">().</span><span class="na">collect</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="n">value</span><span class="o">)</span><span class="w"> </span><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>... but we run into an error:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1">1</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="n">Argument</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="err">`</span><span class="n">file</span><span class="err">`</span><span class="w"> </span><span class="n">function</span><span class="w"> </span><span class="n">cannot</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">empty</span>
-</code></pre></div></td></tr></table></div>
-<p>If we have a closer look at the samplesheet, we notice that not all rows have two read pairs. Let's add a condition</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1">1</a></span>
-<span class="normal"><a href="#__codelineno-6-2">2</a></span>
-<span class="normal"><a href="#__codelineno-6-3">3</a></span>
-<span class="normal"><a href="#__codelineno-6-4">4</a></span>
-<span class="normal"><a href="#__codelineno-6-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="n">reads</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">row</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2"></a><span class="o">.</span><span class="na">subMap</span><span class="o">(</span><span class="n">readKeys</span><span class="o">)</span>
-<a id="__codelineno-6-3" name="__codelineno-6-3"></a><span class="o">.</span><span class="na">values</span><span class="o">()</span>
-<a id="__codelineno-6-4" name="__codelineno-6-4"></a><span class="o">.</span><span class="na">findAll</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s2">""</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="c1">// Single-end reads will have an empty string</span>
-<a id="__codelineno-6-5" name="__codelineno-6-5"></a><span class="o">.</span><span class="na">collect</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="n">it</span><span class="o">)</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="c1">// Turn those strings into paths</span>
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-5-1" id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="n">Argument</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="err">`</span><span class="n">file</span><span class="err">`</span><span class="w"> </span><span class="n">function</span><span class="w"> </span><span class="n">cannot</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">empty</span>
+</code></pre></div>
+<p>If we have a closer look at the samplesheet, we notice that not all rows have two read pairs. Let's add a condition to the collect method to only include the values that are not empty:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-11">11</a></span>
+<span class="normal"><a href="#__codelineno-6-12">12</a></span>
+<span class="normal"><a href="#__codelineno-6-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-11" name="__codelineno-6-11"></a><span class="kt">def</span><span class="w"> </span><span class="n">reads</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">subMap</span><span class="o">(</span><span class="n">readKeys</span><span class="o">).</span><span class="na">values</span><span class="o">()</span>
+<a id="__codelineno-6-12" name="__codelineno-6-12"></a><span class="w">    </span><span class="o">.</span><span class="na">findAll</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s2">""</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="c1">// Single-end reads will have an empty string</span>
+<a id="__codelineno-6-13" name="__codelineno-6-13"></a><span class="w">    </span><span class="o">.</span><span class="na">collect</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">path</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="n">path</span><span class="o">)</span><span class="w"> </span><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>Now we need to construct the meta map. Let's have a quick look at the FASTP module that I've already pre-defined:</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1"> 1</a></span>
@@ -1239,18 +1235,14 @@
 <a id="__codelineno-7-17" name="__codelineno-7-17"></a><span class="w">    </span><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>I can see that we require two extra keys, <code>id</code> and <code>single_end</code>:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1">1</a></span>
-<span class="normal"><a href="#__codelineno-8-2">2</a></span>
-<span class="normal"><a href="#__codelineno-8-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="n">meta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">subMap</span><span class="o">(</span><span class="n">metaKeys</span><span class="o">)</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2"></a><span class="n">meta</span><span class="o">.</span><span class="na">id</span><span class="w"> </span><span class="o">?=</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">sample</span>
-<a id="__codelineno-8-3" name="__codelineno-8-3"></a><span class="n">meta</span><span class="o">.</span><span class="na">single_end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reads</span><span class="o">.</span><span class="na">size</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span>
-</code></pre></div></td></tr></table></div>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-14">14</a></span>
+<span class="normal"><a href="#__codelineno-8-15">15</a></span>
+<span class="normal"><a href="#__codelineno-8-16">16</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-14" name="__codelineno-8-14"></a><span class="hll"><span class="kt">def</span><span class="w"> </span><span class="n">meta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">subMap</span><span class="o">(</span><span class="n">metaKeys</span><span class="o">)</span>
+</span><a id="__codelineno-8-15" name="__codelineno-8-15"></a><span class="hll"><span class="n">meta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">meta</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="nl">id:</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">sample</span><span class="o">,</span><span class="w"> </span><span class="nl">single_end:</span><span class="w"> </span><span class="n">reads</span><span class="o">.</span><span class="na">size</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">]</span>
+</span><a id="__codelineno-8-16" name="__codelineno-8-16"></a><span class="hll"><span class="o">[</span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">reads</span><span class="o">]</span>
+</span></code></pre></div></td></tr></table></div>
 <p>This is now able to be passed through to our FASTP process:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-9-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-9-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-9-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-9-5"> 5</a></span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-5"> 5</a></span>
 <span class="normal"><a href="#__codelineno-9-6"> 6</a></span>
 <span class="normal"><a href="#__codelineno-9-7"> 7</a></span>
 <span class="normal"><a href="#__codelineno-9-8"> 8</a></span>
@@ -1260,39 +1252,49 @@
 <span class="normal"><a href="#__codelineno-9-12">12</a></span>
 <span class="normal"><a href="#__codelineno-9-13">13</a></span>
 <span class="normal"><a href="#__codelineno-9-14">14</a></span>
-<span class="normal"><a href="#__codelineno-9-15">15</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="n">Channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">)</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2"></a><span class="o">|</span><span class="w"> </span><span class="n">splitCsv</span><span class="o">(</span><span class="nl">header:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
-<a id="__codelineno-9-3" name="__codelineno-9-3"></a><span class="o">|</span><span class="w"> </span><span class="n">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span>
-<a id="__codelineno-9-4" name="__codelineno-9-4"></a><span class="w">    </span><span class="o">(</span><span class="n">readKeys</span><span class="o">,</span><span class="w"> </span><span class="n">metaKeys</span><span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">keySet</span><span class="o">().</span><span class="na">split</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">=~</span><span class="w"> </span><span class="s">/^fastq/</span><span class="w"> </span><span class="o">}</span>
-<a id="__codelineno-9-5" name="__codelineno-9-5"></a><span class="w">    </span><span class="n">reads</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">subMap</span><span class="o">(</span><span class="n">readKeys</span><span class="o">).</span><span class="na">values</span><span class="o">()</span>
-<a id="__codelineno-9-6" name="__codelineno-9-6"></a><span class="w">    </span><span class="o">.</span><span class="na">findAll</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s2">""</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="c1">// Single-end reads will have an empty string</span>
-<a id="__codelineno-9-7" name="__codelineno-9-7"></a><span class="w">    </span><span class="o">.</span><span class="na">collect</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="n">it</span><span class="o">)</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="c1">// Turn those strings into paths</span>
-<a id="__codelineno-9-8" name="__codelineno-9-8"></a><span class="w">    </span><span class="n">meta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">subMap</span><span class="o">(</span><span class="n">metaKeys</span><span class="o">)</span>
-<a id="__codelineno-9-9" name="__codelineno-9-9"></a><span class="w">    </span><span class="n">meta</span><span class="o">.</span><span class="na">id</span><span class="w"> </span><span class="o">?=</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">sample</span>
-<a id="__codelineno-9-10" name="__codelineno-9-10"></a><span class="w">    </span><span class="n">meta</span><span class="o">.</span><span class="na">single_end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">reads</span><span class="o">.</span><span class="na">size</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span>
-<a id="__codelineno-9-11" name="__codelineno-9-11"></a><span class="w">    </span><span class="o">[</span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">reads</span><span class="o">]</span>
-<a id="__codelineno-9-12" name="__codelineno-9-12"></a><span class="o">}</span>
-<a id="__codelineno-9-13" name="__codelineno-9-13"></a><span class="o">|</span><span class="w"> </span><span class="n">FASTP</span>
-<a id="__codelineno-9-14" name="__codelineno-9-14"></a>
-<a id="__codelineno-9-15" name="__codelineno-9-15"></a><span class="n">FASTP</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">json</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">view</span>
+<span class="normal"><a href="#__codelineno-9-15">15</a></span>
+<span class="normal"><a href="#__codelineno-9-16">16</a></span>
+<span class="normal"><a href="#__codelineno-9-17">17</a></span>
+<span class="normal"><a href="#__codelineno-9-18">18</a></span>
+<span class="normal"><a href="#__codelineno-9-19">19</a></span>
+<span class="normal"><a href="#__codelineno-9-20">20</a></span>
+<span class="normal"><a href="#__codelineno-9-21">21</a></span>
+<span class="normal"><a href="#__codelineno-9-22">22</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-5" name="__codelineno-9-5"></a><span class="n">workflow</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6"></a>
+<a id="__codelineno-9-7" name="__codelineno-9-7"></a><span class="w">    </span><span class="n">samples</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="n">params</span><span class="o">.</span><span class="na">input</span><span class="o">)</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8"></a><span class="w">        </span><span class="o">.</span><span class="na">splitCsv</span><span class="o">(</span><span class="nl">header:</span><span class="w"> </span><span class="kc">true</span><span class="o">)</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="o">-&gt;</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10"></a><span class="w">            </span><span class="kt">def</span><span class="w"> </span><span class="o">(</span><span class="n">readKeys</span><span class="o">,</span><span class="w"> </span><span class="n">metaKeys</span><span class="o">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">keySet</span><span class="o">().</span><span class="na">split</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="o">=~</span><span class="w"> </span><span class="s">/^fastq/</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11"></a><span class="w">            </span><span class="kt">def</span><span class="w"> </span><span class="n">reads</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">subMap</span><span class="o">(</span><span class="n">readKeys</span><span class="o">).</span><span class="na">values</span><span class="o">()</span>
+<a id="__codelineno-9-12" name="__codelineno-9-12"></a><span class="w">                </span><span class="o">.</span><span class="na">findAll</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s2">""</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="c1">// Single-end reads will have an empty string</span>
+<a id="__codelineno-9-13" name="__codelineno-9-13"></a><span class="w">                </span><span class="o">.</span><span class="na">collect</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">path</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">file</span><span class="o">(</span><span class="n">path</span><span class="o">)</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-9-14" name="__codelineno-9-14"></a><span class="w">            </span><span class="kt">def</span><span class="w"> </span><span class="n">meta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">row</span><span class="o">.</span><span class="na">subMap</span><span class="o">(</span><span class="n">metaKeys</span><span class="o">)</span>
+<a id="__codelineno-9-15" name="__codelineno-9-15"></a><span class="w">            </span><span class="n">meta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">meta</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="nl">id:</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">sample</span><span class="o">,</span><span class="w"> </span><span class="nl">single_end:</span><span class="w"> </span><span class="n">reads</span><span class="o">.</span><span class="na">size</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">]</span>
+<a id="__codelineno-9-16" name="__codelineno-9-16"></a><span class="w">            </span><span class="o">[</span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">reads</span><span class="o">]</span>
+<a id="__codelineno-9-17" name="__codelineno-9-17"></a><span class="w">        </span><span class="o">}</span>
+<a id="__codelineno-9-18" name="__codelineno-9-18"></a>
+<a id="__codelineno-9-19" name="__codelineno-9-19"></a><span class="hll"><span class="w">    </span><span class="n">FASTP</span><span class="o">(</span><span class="n">samples</span><span class="o">)</span>
+</span><a id="__codelineno-9-20" name="__codelineno-9-20"></a>
+<a id="__codelineno-9-21" name="__codelineno-9-21"></a><span class="hll"><span class="w">    </span><span class="n">FASTP</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">json</span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
+</span><a id="__codelineno-9-22" name="__codelineno-9-22"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>Let's assume that we want to pull some information out of these JSON files. To make our lives a little more convenient, let's "publish" these json files so that they are more convenient. We're going to discuss configuration more completely in a later chapter, but that's no reason not to dabble a bit here.</p>
 <p>We'd like to add a <code>publishDir</code> directive to our FASTP process.</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">1</a></span>
-<span class="normal"><a href="#__codelineno-10-2">2</a></span>
-<span class="normal"><a href="#__codelineno-10-3">3</a></span>
-<span class="normal"><a href="#__codelineno-10-4">4</a></span>
-<span class="normal"><a href="#__codelineno-10-5">5</a></span>
-<span class="normal"><a href="#__codelineno-10-6">6</a></span>
-<span class="normal"><a href="#__codelineno-10-7">7</a></span>
-<span class="normal"><a href="#__codelineno-10-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="n">process</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2"></a><span class="w">    </span><span class="nl">withName:</span><span class="w"> </span><span class="s1">'FASTP'</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-10-3" name="__codelineno-10-3"></a><span class="w">        </span><span class="n">publishDir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>
-<a id="__codelineno-10-4" name="__codelineno-10-4"></a><span class="w">            </span><span class="nl">path:</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="s2">"results/fastp/json"</span><span class="w"> </span><span class="o">},</span>
-<a id="__codelineno-10-5" name="__codelineno-10-5"></a><span class="w">            </span><span class="nl">saveAs:</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">filename</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">filename</span><span class="o">.</span><span class="na">endsWith</span><span class="o">(</span><span class="s1">'.json'</span><span class="o">)</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">filename</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">},</span>
-<a id="__codelineno-10-6" name="__codelineno-10-6"></a><span class="w">        </span><span class="o">]</span>
-<a id="__codelineno-10-7" name="__codelineno-10-7"></a><span class="w">    </span><span class="o">}</span>
-<a id="__codelineno-10-8" name="__codelineno-10-8"></a><span class="o">}</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-10-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-10-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-10-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-10-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-10-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-10-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-10-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-3" name="__codelineno-10-3"></a><span class="n">process</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4"></a><span class="w">    </span><span class="nl">withName:</span><span class="w"> </span><span class="s1">'FASTP'</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5"></a><span class="w">        </span><span class="n">publishDir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6"></a><span class="w">            </span><span class="nl">path:</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="s2">"results/fastp/json"</span><span class="w"> </span><span class="o">},</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7"></a><span class="w">            </span><span class="nl">saveAs:</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">filename</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">filename</span><span class="o">.</span><span class="na">endsWith</span><span class="o">(</span><span class="s1">'.json'</span><span class="o">)</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">filename</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">},</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8"></a><span class="w">        </span><span class="o">]</span>
+<a id="__codelineno-10-9" name="__codelineno-10-9"></a><span class="w">    </span><span class="o">}</span>
+<a id="__codelineno-10-10" name="__codelineno-10-10"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <div class="admonition note">
 <p class="admonition-title">Groovy Tip: Elvis Operator</p>
@@ -1306,97 +1308,95 @@
 <p>This enables us to iterate quickly to test out our JSON parsing without waiting on the FASTP caching to calculate on these slow virtual machines.</p>
 <div class="highlight"><pre><span></span><code><a href="#__codelineno-13-1" id="__codelineno-13-1" name="__codelineno-13-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>.<span class="w"> </span>-resume
 </code></pre></div>
-<p>Let's consider the possibility that we'd like to capture some of these metrics so that they can be used downstream. First, we'll have a quick peek at the <a href="https://groovy-lang.org/documentation.html">Groovy docs</a> and I see that I need to import a <code>JsonSlurper</code>:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-1">1</a></span>
-<span class="normal"><a href="#__codelineno-14-2">2</a></span>
-<span class="normal"><a href="#__codelineno-14-3">3</a></span>
-<span class="normal"><a href="#__codelineno-14-4">4</a></span>
-<span class="normal"><a href="#__codelineno-14-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">groovy.json.JsonSlurper</span>
-<a id="__codelineno-14-2" name="__codelineno-14-2"></a>
-<a id="__codelineno-14-3" name="__codelineno-14-3"></a><span class="c1">// We can also import a Yaml parser just as easily:</span>
-<a id="__codelineno-14-4" name="__codelineno-14-4"></a><span class="c1">//   import org.yaml.snakeyaml.Yaml</span>
-<a id="__codelineno-14-5" name="__codelineno-14-5"></a><span class="c1">//   new Yaml().load(new FileReader('your/data.yml'))</span>
-</code></pre></div></td></tr></table></div>
+<p>Let's consider the possibility that we'd like to capture some of these metrics so that they can be used downstream. First, we'll have a quick peek at the <a href="https://groovy-lang.org/documentation.html">Groovy docs</a> and I see that I need to use <code>JsonSlurper</code>.</p>
 <p>Now let's create a second entrypoint to quickly pass these JSON files through some tests:</p>
 <div class="admonition note">
 <p class="admonition-title">Entrypoint developing</p>
 <p>Using a second Entrypoint allows us to do quick debugging or development using a small section of the workflow without disturbing the main flow.</p>
 </div>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-15-1">1</a></span>
-<span class="normal"><a href="#__codelineno-15-2">2</a></span>
-<span class="normal"><a href="#__codelineno-15-3">3</a></span>
-<span class="normal"><a href="#__codelineno-15-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1"></a><span class="n">workflow</span><span class="w"> </span><span class="n">Jsontest</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-15-2" name="__codelineno-15-2"></a><span class="w">    </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">"results/fastp/json/*.json"</span><span class="o">)</span>
-<a id="__codelineno-15-3" name="__codelineno-15-3"></a><span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="n">view</span>
-<a id="__codelineno-15-4" name="__codelineno-15-4"></a><span class="o">}</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-14-5">5</a></span>
+<span class="normal"><a href="#__codelineno-14-6">6</a></span>
+<span class="normal"><a href="#__codelineno-14-7">7</a></span>
+<span class="normal"><a href="#__codelineno-14-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-14-5" name="__codelineno-14-5"></a><span class="n">workflow</span><span class="w"> </span><span class="n">Jsontest</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6"></a><span class="w">    </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">"results/fastp/json/*.json"</span><span class="o">)</span>
+<a id="__codelineno-14-7" name="__codelineno-14-7"></a><span class="w">        </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
+<a id="__codelineno-14-8" name="__codelineno-14-8"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <p>which we run with</p>
-<div class="highlight"><pre><span></span><code><a href="#__codelineno-16-1" id="__codelineno-16-1" name="__codelineno-16-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>.<span class="w"> </span>-resume<span class="w"> </span>-entry<span class="w"> </span>Jsontest
+<div class="highlight"><pre><span></span><code><a href="#__codelineno-15-1" id="__codelineno-15-1" name="__codelineno-15-1"></a>nextflow<span class="w"> </span>run<span class="w"> </span>.<span class="w"> </span>-resume<span class="w"> </span>-entry<span class="w"> </span>Jsontest
 </code></pre></div>
-<p>Let's create a small function at the top of the workflow to take the JSON path and pull out some basic metrics:</p>
-<div class="highlight"><pre><span></span><code><a href="#__codelineno-17-1" id="__codelineno-17-1" name="__codelineno-17-1"></a>def<span class="w"> </span>getFilteringResult<span class="o">(</span>json_file<span class="o">)</span><span class="w"> </span><span class="o">{</span>
-<a href="#__codelineno-17-2" id="__codelineno-17-2" name="__codelineno-17-2"></a><span class="w">    </span><span class="nv">fastpResult</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>new<span class="w"> </span>JsonSlurper<span class="o">()</span>.parseText<span class="o">(</span>json_file.text<span class="o">)</span>
-<a href="#__codelineno-17-3" id="__codelineno-17-3" name="__codelineno-17-3"></a><span class="o">}</span>
-</code></pre></div>
-<div class="admonition exercise">
-<p class="admonition-title">Exercise</p>
+<p>Let's create a small function inside the workflow to take the JSON path and pull out some basic metrics:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-16-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-16-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-16-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-16-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-16-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-16-10">10</a></span>
+<span class="normal"><a href="#__codelineno-16-11">11</a></span>
+<span class="normal"><a href="#__codelineno-16-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-16-5" name="__codelineno-16-5"></a><span class="kt">def</span><span class="w"> </span><span class="nf">getFilteringResult</span><span class="o">(</span><span class="n">json_file</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-16-6" name="__codelineno-16-6"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">groovy</span><span class="o">.</span><span class="na">json</span><span class="o">.</span><span class="na">JsonSlurper</span><span class="o">().</span><span class="na">parseText</span><span class="o">(</span><span class="n">json_file</span><span class="o">.</span><span class="na">text</span><span class="o">)</span>
+<a id="__codelineno-16-7" name="__codelineno-16-7"></a><span class="o">}</span>
+<a id="__codelineno-16-8" name="__codelineno-16-8"></a>
+<a id="__codelineno-16-9" name="__codelineno-16-9"></a><span class="n">workflow</span><span class="w"> </span><span class="n">Jsontest</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-16-10" name="__codelineno-16-10"></a><span class="w">    </span><span class="n">Channel</span><span class="o">.</span><span class="na">fromPath</span><span class="o">(</span><span class="s2">"results/fastp/json/*.json"</span><span class="o">)</span>
+<a id="__codelineno-16-11" name="__codelineno-16-11"></a><span class="w">        </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
+<a id="__codelineno-16-12" name="__codelineno-16-12"></a><span class="o">}</span>
+</code></pre></div></td></tr></table></div>
 <p>The <code>fastpResult</code> returned from the <code>parseText</code> method is a large Map - a class which we're already familiar with. Modify the <code>getFilteringResult</code> function to return just the <code>after_filtering</code> section of the report.</p>
-<details class="solution">
-<summary>Solution</summary>
-<p>Here is one potential solution.</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-1">1</a></span>
-<span class="normal"><a href="#__codelineno-18-2">2</a></span>
-<span class="normal"><a href="#__codelineno-18-3">3</a></span>
-<span class="normal"><a href="#__codelineno-18-4">4</a></span>
-<span class="normal"><a href="#__codelineno-18-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1"></a><span class="kt">def</span><span class="w"> </span><span class="nf">getFilteringResult</span><span class="o">(</span><span class="n">json_file</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
-<a id="__codelineno-18-2" name="__codelineno-18-2"></a><span class="w">    </span><span class="k">new</span><span class="w"> </span><span class="n">JsonSlurper</span><span class="o">().</span><span class="na">parseText</span><span class="o">(</span><span class="n">json_file</span><span class="o">.</span><span class="na">text</span><span class="o">)</span>
-<a id="__codelineno-18-3" name="__codelineno-18-3"></a><span class="w">    </span><span class="o">?.</span><span class="na">summary</span>
-<a id="__codelineno-18-4" name="__codelineno-18-4"></a><span class="w">    </span><span class="o">?.</span><span class="na">after_filtering</span>
-<a id="__codelineno-18-5" name="__codelineno-18-5"></a><span class="o">}</span>
+<p>In the interest of brevity, here is the solution to return just the <code>after_filtering</code> section of the report:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-17-5">5</a></span>
+<span class="normal"><a href="#__codelineno-17-6">6</a></span>
+<span class="normal"><a href="#__codelineno-17-7">7</a></span>
+<span class="normal"><a href="#__codelineno-17-8">8</a></span>
+<span class="normal"><a href="#__codelineno-17-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-17-5" name="__codelineno-17-5"></a><span class="kt">def</span><span class="w"> </span><span class="nf">getFilteringResult</span><span class="o">(</span><span class="n">json_file</span><span class="o">)</span><span class="w"> </span><span class="o">{</span>
+<a id="__codelineno-17-6" name="__codelineno-17-6"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">groovy</span><span class="o">.</span><span class="na">json</span><span class="o">.</span><span class="na">JsonSlurper</span><span class="o">().</span><span class="na">parseText</span><span class="o">(</span><span class="n">json_file</span><span class="o">.</span><span class="na">text</span><span class="o">)</span>
+<a id="__codelineno-17-7" name="__codelineno-17-7"></a><span class="w">        </span><span class="o">?.</span><span class="na">summary</span>
+<a id="__codelineno-17-8" name="__codelineno-17-8"></a><span class="w">        </span><span class="o">?.</span><span class="na">after_filtering</span>
+<a id="__codelineno-17-9" name="__codelineno-17-9"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p><code>?.</code> is new notation is a null-safe access operator. The <code>?.summary</code> will access the summary property if the property exists.</p>
 </div>
-</details>
-</div>
 <p>We can then join this new map back to the original reads using the <code>join</code> operator:</p>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-19-1">1</a></span>
-<span class="normal"><a href="#__codelineno-19-2">2</a></span>
-<span class="normal"><a href="#__codelineno-19-3">3</a></span>
-<span class="normal"><a href="#__codelineno-19-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1"></a><span class="n">FASTP</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">json</span>
-<a id="__codelineno-19-2" name="__codelineno-19-2"></a><span class="o">|</span><span class="w"> </span><span class="n">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">json</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="o">[</span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">getFilteringResult</span><span class="o">(</span><span class="n">json</span><span class="o">)]</span><span class="w"> </span><span class="o">}</span>
-<a id="__codelineno-19-3" name="__codelineno-19-3"></a><span class="o">|</span><span class="w"> </span><span class="n">join</span><span class="o">(</span><span class="w"> </span><span class="n">FASTP</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">reads</span><span class="w"> </span><span class="o">)</span>
-<a id="__codelineno-19-4" name="__codelineno-19-4"></a><span class="o">|</span><span class="w"> </span><span class="n">view</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-18-31">31</a></span>
+<span class="normal"><a href="#__codelineno-18-32">32</a></span>
+<span class="normal"><a href="#__codelineno-18-33">33</a></span>
+<span class="normal"><a href="#__codelineno-18-34">34</a></span>
+<span class="normal"><a href="#__codelineno-18-35">35</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-18-31" name="__codelineno-18-31"></a><span class="w">    </span><span class="n">FASTP</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">json</span>
+<a id="__codelineno-18-32" name="__codelineno-18-32"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">json</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="o">[</span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">getFilteringResult</span><span class="o">(</span><span class="n">json</span><span class="o">)]</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-18-33" name="__codelineno-18-33"></a><span class="w">        </span><span class="o">.</span><span class="na">join</span><span class="o">(</span><span class="w"> </span><span class="n">FASTP</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">reads</span><span class="w"> </span><span class="o">)</span>
+<a id="__codelineno-18-34" name="__codelineno-18-34"></a><span class="w">        </span><span class="o">.</span><span class="na">view</span><span class="o">()</span>
+<a id="__codelineno-18-35" name="__codelineno-18-35"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 <div class="admonition exercise">
 <p class="admonition-title">Exercise</p>
 <p>Can you amend this pipeline to create two channels that filter the reads to exclude any samples where the Q30 rate is less than 93.5%?</p>
 <details class="solution">
 <summary>Solution</summary>
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-20-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-20-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-20-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-20-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-20-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-20-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-20-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-20-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-20-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-20-10">10</a></span>
-<span class="normal"><a href="#__codelineno-20-11">11</a></span>
-<span class="normal"><a href="#__codelineno-20-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1"></a><span class="n">FASTP</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">json</span>
-<a id="__codelineno-20-2" name="__codelineno-20-2"></a><span class="o">|</span><span class="w"> </span><span class="n">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">json</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="o">[</span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">getFilteringResult</span><span class="o">(</span><span class="n">json</span><span class="o">)]</span><span class="w"> </span><span class="o">}</span>
-<a id="__codelineno-20-3" name="__codelineno-20-3"></a><span class="o">|</span><span class="w"> </span><span class="n">join</span><span class="o">(</span><span class="w"> </span><span class="n">FASTP</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">reads</span><span class="w"> </span><span class="o">)</span>
-<a id="__codelineno-20-4" name="__codelineno-20-4"></a><span class="o">|</span><span class="w"> </span><span class="n">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">fastpMap</span><span class="o">,</span><span class="w"> </span><span class="n">reads</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="o">[</span><span class="n">meta</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">fastpMap</span><span class="o">,</span><span class="w"> </span><span class="n">reads</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
-<a id="__codelineno-20-5" name="__codelineno-20-5"></a><span class="o">|</span><span class="w"> </span><span class="n">branch</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">reads</span><span class="w"> </span><span class="o">-&gt;</span>
-<a id="__codelineno-20-6" name="__codelineno-20-6"></a><span class="w">    </span><span class="nl">pass:</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">q30_rate</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mf">0.935</span>
-<a id="__codelineno-20-7" name="__codelineno-20-7"></a><span class="w">    </span><span class="nl">fail:</span><span class="w"> </span><span class="kc">true</span>
-<a id="__codelineno-20-8" name="__codelineno-20-8"></a><span class="o">}</span>
-<a id="__codelineno-20-9" name="__codelineno-20-9"></a><span class="o">|</span><span class="w"> </span><span class="n">set</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">reads</span><span class="w"> </span><span class="o">}</span>
-<a id="__codelineno-20-10" name="__codelineno-20-10"></a>
-<a id="__codelineno-20-11" name="__codelineno-20-11"></a><span class="n">reads</span><span class="o">.</span><span class="na">fail</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">reads</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">"Failed: ${meta.id}"</span><span class="w"> </span><span class="o">}</span>
-<a id="__codelineno-20-12" name="__codelineno-20-12"></a><span class="n">reads</span><span class="o">.</span><span class="na">pass</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">reads</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">"Passed: ${meta.id}"</span><span class="w"> </span><span class="o">}</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-19-31">31</a></span>
+<span class="normal"><a href="#__codelineno-19-32">32</a></span>
+<span class="normal"><a href="#__codelineno-19-33">33</a></span>
+<span class="normal"><a href="#__codelineno-19-34">34</a></span>
+<span class="normal"><a href="#__codelineno-19-35">35</a></span>
+<span class="normal"><a href="#__codelineno-19-36">36</a></span>
+<span class="normal"><a href="#__codelineno-19-37">37</a></span>
+<span class="normal"><a href="#__codelineno-19-38">38</a></span>
+<span class="normal"><a href="#__codelineno-19-39">39</a></span>
+<span class="normal"><a href="#__codelineno-19-40">40</a></span>
+<span class="normal"><a href="#__codelineno-19-41">41</a></span>
+<span class="normal"><a href="#__codelineno-19-42">42</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-19-31" name="__codelineno-19-31"></a><span class="w">    </span><span class="n">reads</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">FASTP</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">json</span>
+<a id="__codelineno-19-32" name="__codelineno-19-32"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">json</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="o">[</span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">getFilteringResult</span><span class="o">(</span><span class="n">json</span><span class="o">)]</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-19-33" name="__codelineno-19-33"></a><span class="w">        </span><span class="o">.</span><span class="na">join</span><span class="o">(</span><span class="w"> </span><span class="n">FASTP</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">reads</span><span class="w"> </span><span class="o">)</span>
+<a id="__codelineno-19-34" name="__codelineno-19-34"></a><span class="w">        </span><span class="o">.</span><span class="na">map</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">fastpMap</span><span class="o">,</span><span class="w"> </span><span class="n">reads</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="o">[</span><span class="n">meta</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">fastpMap</span><span class="o">,</span><span class="w"> </span><span class="n">reads</span><span class="o">]</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-19-35" name="__codelineno-19-35"></a><span class="w">        </span><span class="o">.</span><span class="na">branch</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">reads</span><span class="w"> </span><span class="o">-&gt;</span>
+<a id="__codelineno-19-36" name="__codelineno-19-36"></a><span class="w">            </span><span class="nl">pass:</span><span class="w"> </span><span class="n">meta</span><span class="o">.</span><span class="na">q30_rate</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mf">0.935</span>
+<a id="__codelineno-19-37" name="__codelineno-19-37"></a><span class="w">            </span><span class="nl">fail:</span><span class="w"> </span><span class="kc">true</span>
+<a id="__codelineno-19-38" name="__codelineno-19-38"></a><span class="w">        </span><span class="o">}</span>
+<a id="__codelineno-19-39" name="__codelineno-19-39"></a>
+<a id="__codelineno-19-40" name="__codelineno-19-40"></a><span class="w">    </span><span class="n">reads</span><span class="o">.</span><span class="na">fail</span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">_reads</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">"Failed: ${meta.id}"</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-19-41" name="__codelineno-19-41"></a><span class="w">    </span><span class="n">reads</span><span class="o">.</span><span class="na">pass</span><span class="o">.</span><span class="na">view</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">meta</span><span class="o">,</span><span class="w"> </span><span class="n">_reads</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="s2">"Passed: ${meta.id}"</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-19-42" name="__codelineno-19-42"></a><span class="o">}</span>
 </code></pre></div></td></tr></table></div>
 </details>
 </div>
