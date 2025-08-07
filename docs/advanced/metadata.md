@@ -77,7 +77,7 @@ workflow {
 
 If we are confident about the stability of the naming scheme, we can destructure the list returned by `tokenize` and assign them to variables directly:
 
-```groovy linenums="1" hl_lines="2-4"
+```groovy linenums="3" hl_lines="2-4"
 .map { id, reads ->
     def (sample, replicate, type) = id.tokenize("_")
     def meta = [sample:sample, replicate:replicate, type:type]
@@ -91,7 +91,7 @@ If we are confident about the stability of the naming scheme, we can destructure
 
 Another option is to use the [`transpose`](<https://docs.groovy-lang.org/latest/html/api/groovy/util/GroovyCollections.html#transpose(java.util.List)>) method with the [`collectEntries()`](<https://docs.groovy-lang.org/latest/html/api/org/codehaus/groovy/runtime/DefaultGroovyMethods.html#collectEntries(E[])>) to produce the same map. I'd warn that this method is bordering on a little 'too clever' and is more difficult to read. It also assumes that the order of the filename-encoded metadata is consistent.
 
-```groovy linenums="1" hl_lines="2-4"
+```groovy linenums="3" hl_lines="2-4"
 .map { id, reads ->
     def meta = [['sample', 'replicate', 'type'], id.tokenize("_")]
         .transpose()
@@ -102,7 +102,7 @@ Another option is to use the [`transpose`](<https://docs.groovy-lang.org/latest/
 
 If we move back to the previous method, but decided that the 'rep' prefix on the replicate should be removed, we can use regular expressions to simply "subtract" pieces of a string. Here we remove a 'rep' prefix from the `replicate` variable if the prefix is present:
 
-```groovy linenums="1" hl_lines="3"
+```groovy linenums="3" hl_lines="3"
 .map { id, reads ->
     def (sample, replicate, type) = id.tokenize("_")
     replicate -= ~/^rep/
@@ -133,7 +133,7 @@ We are almost there, but we still don't have the "treatment" metadata captured i
 
 We can call the `getParent()` method on each of the paths like so:
 
-```groovy linenums="1" hl_lines="2"
+```groovy linenums="3" hl_lines="2"
 .map { id, reads ->
     reads.collect { read -> read.getParent() }
 }
@@ -141,7 +141,7 @@ We can call the `getParent()` method on each of the paths like so:
 
 If we want to call a set method on every item in a Collection, Groovy provides this convenient "spread dot" notation:
 
-```groovy linenums="1" hl_lines="2"
+```groovy linenums="3" hl_lines="2"
 .map { id, reads ->
     reads*.getParent()
 }
@@ -149,7 +149,7 @@ If we want to call a set method on every item in a Collection, Groovy provides t
 
 This returns another Path object, but we only want the name of the last directory, so we need to call `.getName()` method on each of these Paths. We can use the spread-dot notation again:
 
-```groovy linenums="1" hl_lines="2"
+```groovy linenums="3" hl_lines="2"
 .map { id, reads ->
     reads*.getParent()*.getName()
 }
@@ -157,7 +157,7 @@ This returns another Path object, but we only want the name of the last director
 
 The last piece of Groovy sugar is to note that methods with `get` and `set` prefixes can be called with a property-style notation, converting `getParent()` to `parent` and `getName()` to `name`:
 
-```groovy linenums="1" hl_lines="2"
+```groovy linenums="3" hl_lines="2"
 .map { id, reads ->
     reads*.parent*.name
 }
@@ -165,7 +165,7 @@ The last piece of Groovy sugar is to note that methods with `get` and `set` pref
 
 If we wanted to remove the "treatment" prefix, we can combine this new notation with the "minus" method which we used earlier in the aliased `-` form.
 
-```groovy linenums="1" hl_lines="2"
+```groovy linenums="3" hl_lines="2"
 .map { id, reads ->
     reads*.parent*.name*.minus(~/treatment/)
 }
