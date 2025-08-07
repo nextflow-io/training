@@ -168,7 +168,7 @@ workflow {
 
 Let's consider that we might now want to merge the repeats. We'll need to group bams that share the `id` and `type` attributes.
 
-```groovy hl_lines="2"
+```groovy linenums="29" hl_lines="2"
 mapped_reads = MapReads( samples, reference )
     .map { meta, bam -> [meta.subMap('id', 'type'), bam]}
     .groupTuple()
@@ -179,7 +179,7 @@ This is easy enough, but the `groupTuple` operator has to wait until all items a
 
 By default, the `groupTuple` operator groups on the first item in the element, which at the moment is a `Map`. We can turn this map into a special class using the `groupKey` method, which takes our grouping object as a first parameter and the number of expected elements in the second parameter.
 
-```groovy hl_lines="3"
+```groovy linenums="29" hl_lines="3"
 mapped_reads = MapReads( samples, reference )
     .map { meta, bam ->
         def key = groupKey(meta.subMap('id', 'type'), NUMBER_OF_ITEMS_IN_GROUP)
@@ -195,7 +195,7 @@ mapped_reads.view()
 
     ??? solution
 
-        ```groovy hl_lines="16-20"
+        ```groovy linenums="13" hl_lines="16-20"
         workflow {
             reference = Channel.fromPath("data/genome.fasta").first()
 
@@ -229,7 +229,7 @@ mapped_reads.view()
 
 Now that we have our repeats together in an output channel, we can combine them using "advanced bioinformatics":
 
-```groovy
+```groovy linenums="13"
 process CombineBams {
     input:
     tuple val(meta), path("input/in_*_.bam")
@@ -244,7 +244,7 @@ process CombineBams {
 
 In our workflow:
 
-```groovy hl_lines="3"
+```groovy linenums="45" hl_lines="3"
 mapped_reads = MapReads( samples, reference )
     .map { meta, bam ->
         def key = groupKey(meta.subMap('id', 'type'), meta.repeatcount)
@@ -262,7 +262,7 @@ The previous exercise demonstrated the fan-in approach using `groupTuple` and `g
 
 We can take an existing bed file, for example and turn it into a channel of Maps.
 
-```groovy
+```groovy linenums="26"
 intervals = Channel.fromPath("data/intervals.bed")
     .splitCsv(header: ['chr', 'start', 'stop', 'name'], sep: '\t')
     .collectFile { entry -> ["${entry.name}.bed", entry*.value.join("\t")] }
@@ -271,7 +271,7 @@ intervals = Channel.fromPath("data/intervals.bed")
 
 Given a dummy genotyping process:
 
-```groovy
+```groovy linenums="24"
 process GenotypeOnInterval {
     input:
     tuple val(meta), path(bam), path(bed)
@@ -286,7 +286,7 @@ process GenotypeOnInterval {
 
 We can use the `combine` operator to emit a new channel where each combined bam is attached to each bed file. These can then be piped into the genotyping process:
 
-```groovy hl_lines="9"
+```groovy linenums="60" hl_lines="9"
 mapped_reads = MapReads( samples, reference )
     .map { meta, bam ->
         def key = groupKey(meta.subMap('id', 'type'), meta.repeatcount)
@@ -303,7 +303,7 @@ genotyped_bams = GenotypeOnInterval(combined_bams)
 
 Finally, we can combine these genotyped bams back using `groupTuple` and another bam merge process. We construct our "merge" process that will combine the bam files from multiple intervals:
 
-```groovy linenums="1"
+```groovy linenums="35"
 process MergeGenotyped {
     input:
     tuple val(meta), path("input/in_*_.vcf")
@@ -318,7 +318,7 @@ process MergeGenotyped {
 
 We might be tempted to pipe the output of `GenotypeOnInterval` directly into groupTuple, but the `meta` object we are passing down is still the `groupKey` we created earlier:
 
-```groovy linenums="1" hl_lines="10"
+```groovy linenums="71" hl_lines="10"
 mapped_reads = MapReads( samples, reference )
     .map { meta, bam ->
         def key = groupKey(meta.subMap('id', 'type'), meta.repeatcount)
@@ -336,7 +336,7 @@ genotyped_bams = GenotypeOnInterval(combined_bams)
 
 To ensure that grouping is performed only on the relevant elements, we can convert the `groupKey` back into a plain Map using the `as Map` operator. This allows the `groupTuple` operator to group by just the keys present in the map, similar to how `subMap` works. This approach ensures that downstream grouping and merging steps operate on the intended sample attributes.
 
-```groovy hl_lines="16"
+```groovy linenums="71" hl_lines="16"
 mapped_reads = MapReads( samples, reference )
     .map { meta, bam ->
         def key = groupKey(meta.subMap('id', 'type'), meta.repeatcount)
@@ -371,7 +371,7 @@ This will return us six bam files - a tumor and normal pair for each of the thre
 
 If we would like to save the output of our `MergeGenotyped` process, we can "publish" the outputs of a process using the `publishDir` directive. Try modifying the `MergeGenotyped` process to include the directive:
 
-```groovy
+```groovy linenums="35" hl_lines="2"
 process MergeGenotyped {
     publishDir 'results/genotyped'
 
@@ -422,7 +422,7 @@ This will publish all of the files in the `output` block of this process to the 
 
         One solution might be to modify the `script` block to ensure that each file has a unique name:
 
-        ```groovy
+        ```groovy linenums="35" hl_lines="11"
         process MergeGenotyped {
             publishDir 'results/genotyped'
 
@@ -439,7 +439,7 @@ This will publish all of the files in the `output` block of this process to the 
 
         Another option might be to use the `saveAs` argument to the `publishDir` directive:
 
-        ```groovy
+        ```groovy linenums="35" hl_lines="2"
         process MergeGenotyped {
             publishDir 'results/genotyped', saveAs: { "${meta.id}.${meta.type}.genotyped.vcf" }
 
