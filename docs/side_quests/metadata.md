@@ -524,6 +524,8 @@ Copy in the process before your workflow block:
     */
     process COWPY {
 
+        publishDir "results/", mode: 'copy'
+
         container 'community.wave.seqera.io/library/cowpy:1.1.5--3db457ae1977a273'
 
         input:
@@ -568,7 +570,7 @@ Let's run our files through `COWPY` and remove our `view` statement:
         .view()
     ```
 
-We also need to add a publishing location, so that we can view our comedy creatures saying our phrases. Given we have been trying to figure out what languages our samples were in, let's group the samples by language in the output directory.
+At the moment, all our comedy creatures are published into the `results` folder. Given we have been trying to figure out what languages our samples were in, let's group the samples by language in the output directory.
 Earlier, we added the predicted language to the `meta` map. We can access this `key` in the process and use it in the `publishDir` directive:
 
 === "After"
