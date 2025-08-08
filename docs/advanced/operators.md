@@ -11,8 +11,8 @@ Map is certainly the most commonly used of the operators covered here. It's a wa
 ```groovy linenums="1"
 workflow {
     Channel.of( 1, 2, 3, 4, 5 )
-    | map { it * it }
-    | view
+        .map { num -> num * num }
+        .view()
 }
 ```
 
@@ -23,23 +23,17 @@ cd operators
 nextflow run .
 ```
 
-By default, the element being passed to the closure is given the default name `it`. If you would prefer a more informative variable name, it can be named by using the `->` notation:
+The code creates a workflow that emits the numbers 1 through 5 into a channel, applies the `map` operator to square each number, and then prints the results. This demonstrates how `map` transforms each element in a channel by applying a closure, producing a new channel with the squared values.
 
-```groovy linenums="1"
-workflow {
-    Channel.of( 1, 2, 3, 4, 5 )
-    | map { num -> num * num }
-    | view
-}
-```
+The value passed into `map` is assigned to a variable using the `->` syntax (e.g., `num` in `{ num -> ... }`). This variable is local to the closure and used for any transformations inside it.
 
 Groovy is an optionally typed language, and it is possible to specify the type of the argument passed to the closure.
 
-```groovy linenums="1"
+```groovy linenums="1" hl_lines="3"
 workflow {
     Channel.of( 1, 2, 3, 4, 5 )
-    | map { Integer num -> num * num }
-    | view
+        .map { Integer num -> num * num }
+        .view()
 }
 ```
 
@@ -47,26 +41,26 @@ workflow {
 
 If you find yourself re-using the same closure multiple times in your pipeline, the closure can be named and referenced:
 
-```groovy linenums="1"
-def squareIt = { Integer num -> num * num }
-
+```groovy linenums="1" hl_lines="2 6"
 workflow {
+    def squareIt = { Integer num -> num * num }
+
     Channel.of( 1, 2, 3, 4, 5 )
-    | map( squareIt )
-    | view
+        .map( squareIt )
+        .view()
 }
 ```
 
 If you have these re-usable closures defined, you can compose them together.
 
-```groovy linenums="1"
-def squareIt = { it * it }
-def addTwo = { it + 2 }
-
+```groovy linenums="1" hl_lines="2-3 6"
 workflow {
+    def squareIt = { num -> num * num }
+    def addTwo = { num -> num + 2 }
+
     Channel.of( 1, 2, 3, 4, 5 )
-    | map( squareIt >> addTwo )
-    | view
+        .map( squareIt >> addTwo )
+        .view()
 }
 ```
 
@@ -82,28 +76,28 @@ Launching `./main.nf` [focused_borg] DSL2 - revision: f3c3e751fe
 
 The above is the same as writing:
 
-```groovy linenums="1"
-def squareIt = { it * it }
-def addTwo = { it + 2 }
-
+```groovy linenums="1" hl_lines="6-7"
 workflow {
+    def squareIt = { num -> num * num }
+    def addTwo = { num -> num + 2 }
+
     Channel.of( 1, 2, 3, 4, 5 )
-    | map( squareIt )
-    | map( addTwo )
-    | view
+        .map( squareIt )
+        .map( addTwo )
+        .view()
 }
 ```
 
 For those inclined towards functional programming, you'll be happy to know that closures can be curried:
 
-```groovy linenums="1"
-def timesN = { multiplier, it -> it * multiplier }
-def timesTen = timesN.curry(10)
-
+```groovy linenums="1" hl_lines="2-3 6"
 workflow {
+    def timesN = { multiplier, num -> num * multiplier }
+    def timesTen = timesN.curry(10)
+
     Channel.of( 1, 2, 3, 4, 5 )
-    | map( timesTen )
-    | view
+        .map( timesTen )
+        .view()
 }
 ```
 
@@ -111,14 +105,14 @@ workflow {
 
 In addition to the argument-less usage of `view` as shown above, this operator can also take a closure to customize the stdout message. We can create a closure to print the value of the elements in a channel as well as their type, for example:
 
-```groovy linenums="1"
-def timesN = { multiplier, it -> it * multiplier }
-def timesTen = timesN.curry(10)
-
+```groovy linenums="1" hl_lines="7"
 workflow {
+    def timesN = { multiplier, num -> num * multiplier }
+    def timesTen = timesN.curry(10)
+
     Channel.of( 1, 2, 3, 4, 5 )
-    | map( timesTen )
-    | view { "Found '$it' (${it.getClass()})"}
+        .map( timesTen )
+        .view { value -> "Found '$value' (${value.getClass()})"}
 }
 ```
 
@@ -130,11 +124,11 @@ workflow {
 
 A common Nextflow pattern is for a simple samplesheet to be passed as primary input into a workflow. We'll see some more complicated ways to manage these inputs later on in the workshop, but the `splitCsv` ([docs](https://www.nextflow.io/docs/latest/operator.html#splitcsv)) is an excellent tool to have in a pinch. This operator will parse a csv/tsv and return a channel where each item is a row in the csv/tsv:
 
-```groovy linenums="1"
+```groovy linenums="1" hl_lines="2"
 workflow {
     Channel.fromPath("data/samplesheet.csv")
-    | splitCsv( header: true )
-    | view
+        .splitCsv( header: true )
+        .view()
 }
 ```
 
@@ -152,14 +146,14 @@ workflow {
     ??? solution
         Specifying the `header` argument in the `splitCsv` operator, we have convenient named access to csv elements. The closure returns a list of two elements where the second element a list of paths.
 
-        ```groovy linenums="1"
+        ```groovy linenums="1" hl_lines="4-6"
         workflow {
             Channel.fromPath("data/samplesheet.csv")
-            | splitCsv( header: true )
-            | map { row ->
-                [row.id, [file(row.fastq1), file(row.fastq2)]]
-            }
-            | view
+                .splitCsv( header: true )
+                .map { row ->
+                    [row.id, [file(row.fastq1), file(row.fastq2)]]
+                }
+                .view()
         }
         ```
 
@@ -171,15 +165,15 @@ workflow {
 
         In the next chapter, we'll discuss the "meta map" pattern in more detail, but we can preview that here.
 
-        ```groovy linenums="1"
+        ```groovy linenums="1" hl_lines="4-7"
         workflow {
             Channel.fromPath("data/samplesheet.csv")
-            | splitCsv( header: true )
-            | map { row ->
-                metaMap = [id: row.id, type: row.type, repeat: row.repeat]
-                [metaMap, [file(row.fastq1), file(row.fastq2)]]
-            }
-            | view
+                .splitCsv( header: true )
+                .map { row ->
+                    def metaMap = [id: row.id, type: row.type, repeat: row.repeat]
+                    [metaMap, [file(row.fastq1), file(row.fastq2)]]
+                }
+                .view()
         }
         ```
 
@@ -198,22 +192,22 @@ cat data/samplesheet.ugly.csv
 
 Using the `splitCsv` operator would give us one entry that would contain all four fastq files. Let's consider that we wanted to split these fastqs into separate channels for tumor and normal. In other words, for every row in the samplesheet, we would like to emit an entry into two new channels. To do this, we can use the `multiMap` operator:
 
-```groovy linenums="1"
+```groovy linenums="1" hl_lines="4-11"
 workflow {
     Channel.fromPath("data/samplesheet.ugly.csv")
-    | splitCsv( header: true )
-    | multiMap { row ->
-        tumor:
-            metamap = [id: row.id, type:'tumor', repeat:row.repeat]
-            [metamap, file(row.tumor_fastq_1), file(row.tumor_fastq_2)]
-        normal:
-            metamap = [id: row.id, type:'normal', repeat:row.repeat]
-            [metamap, file(row.normal_fastq_1), file(row.normal_fastq_2)]
-    }
-    | set { samples }
+        .splitCsv( header: true )
+        .multiMap { row ->
+            tumor:
+                def tumor_meta = [id: row.id, type:'tumor', repeat:row.repeat]
+                [tumor_meta, file(row.tumor_fastq_1), file(row.tumor_fastq_2)]
+            normal:
+                def normal_meta = [id: row.id, type:'normal', repeat:row.repeat]
+                [normal_meta, file(row.normal_fastq_1), file(row.normal_fastq_2)]
+        }
+        .set { samples }
 
-    samples.tumor | view { "Tumor: $it"}
-    samples.normal | view { "Normal: $it"}
+    samples.tumor.view { sample -> "Tumor: $sample"}
+    samples.normal.view { sample -> "Normal: $sample"}
 }
 ```
 
@@ -227,26 +221,26 @@ The `branch` operator ([documentation](https://www.nextflow.io/docs/latest/opera
 
 In the example above, the `multiMap` operator was necessary because we were supplied with a samplesheet that combined two pairs of fastq per row and we wanted to turn each row into new elements in multiple channels. If we were to use the neater samplesheet that had tumor/normal pairs on separate rows, we could use the `branch` operator to achieve the same result as we are routing each input element into a single output channel.
 
-```groovy linenums="1"
+```groovy linenums="1" hl_lines="5-8"
 workflow {
     Channel.fromPath("data/samplesheet.csv")
-    | splitCsv( header: true )
-    | map { row -> [[id: row.id, repeat: row.repeat, type: row.type], [file(row.fastq1), file(row.fastq2)]] }
-    | branch { meta, reads ->
-        tumor: meta.type == "tumor"
-        normal: meta.type == "normal"
-    }
-    | set { samples }
+        .splitCsv( header: true )
+        .map { row -> [[id: row.id, repeat: row.repeat, type: row.type], [file(row.fastq1), file(row.fastq2)]] }
+        .branch { meta, _reads ->
+            tumor: meta.type == "tumor"
+            normal: meta.type == "normal"
+        }
+        .set { samples }
 
-    samples.tumor | view { "Tumor: $it"}
-    samples.normal | view { "Normal: $it"}
+    samples.tumor.view { sample -> "Tumor: $sample"}
+    samples.normal.view { sample -> "Normal: $sample"}
 }
 ```
 
 An element is only emitted to the first channel were the test condition is met. If an element does not meet any of the tests, it is not emitted to any of the output channels. You can 'catch' any such samples by specifying `true` as a condition. If we knew that all samples would be either tumor or normal and no third 'type', we could write
 
-```groovy linenums="1"
-branch { meta, reads ->
+```groovy linenums="5" hl_lines="2-3"
+.branch { meta, reads ->
     tumor: meta.type == "tumor"
     normal: true
 }
@@ -254,8 +248,8 @@ branch { meta, reads ->
 
 We may want to emit a slightly different element than the one passed as input. The `branch` operator can (optionally) return a _new_ element to a channel. For example, to add an extra key in the meta map of the tumor samples, we add a new line under the condition and return our new element. In this example, we modify the first element of the `List` to be a new list that is the result of merging the existing meta map with a new map containing a single key:
 
-```groovy linenums="1"
-branch { meta, reads ->
+```groovy linenums="5" hl_lines="2-4"
+.branch { meta, reads ->
     tumor: meta.type == "tumor"
         return [meta + [newKey: 'myValue'], reads]
     normal: true
@@ -270,8 +264,8 @@ branch { meta, reads ->
 
         There are many ways to accomplish this, but the map merging pattern introduced above can also be used to safely and concisely rename values in a map.
 
-        ```groovy linenums="1"
-        branch { meta, reads ->
+        ```groovy linenums="5"
+        .branch { meta, reads ->
             tumor: meta.type == "tumor"
                 return [meta + [type: 'abnormal'], reads]
             normal: true
@@ -286,33 +280,23 @@ branch { meta, reads ->
 
 ### Multi-channel Objects
 
-Some Nextflow operators return objects that contain _multiple_ channels. The `multiMap` and `branch` operators are excellent examples. In most instances, the output is assigned to a variable and then addressed by name:
+Certain Nextflow operators, such as `multiMap` and `branch`, return special objects containing multiple named channels. These multi-channel objects allow you to split data into separate streams while maintaining the ability to reference each stream independently.
 
-```groovy linenums="1"
-numbers = Channel.of( 1, 2, 3, 4, 5 )
-| multiMap {
-    small: it
-    large: it * 10
+```groovy linenums="1" hl_lines="3-6"
+workflow {
+    numbers = Channel.of( 1, 2, 3, 4, 5 )
+        .multiMap { num ->
+            small: num
+            large: num * 10
+        }
+    numbers.small.view { num -> "Small: $num"}
+    numbers.large.view { num -> "Large: $num"}
 }
-numbers.small | view { num -> "Small: $num"}
-numbers.large | view { num -> "Large: $num"}
 ```
 
-or by using the `set` operator ([documentation](https://www.nextflow.io/docs/latest/operator.html#set)):
+This creates two channels accessible through the `numbers` object: `small` containing the original values (1, 2, 3, 4, 5) and `large` containing the values multiplied by 10 (10, 20, 30, 40, 50).
 
-```groovy linenums="1"
-Channel.of( 1, 2, 3, 4, 5 )
-| multiMap {
-    small: it
-    large: it * 10
-}
-| set { numbers }
-
-numbers.small | view { num -> "Small: $num"}
-numbers.large | view { num -> "Large: $num"}
-```
-
-A more interesting situation occurs when given a process that takes multiple channels as input:
+When a process requires multiple input channels, Nextflow automatically synchronizes the values from these channels. Each channel provides values as separate input parameters, and Nextflow pairs them together for each process execution:
 
 ```groovy linenums="1"
 process MultiInput {
@@ -321,62 +305,52 @@ process MultiInput {
     val(smallNum)
     val(bigNum)
 
+    script:
     "echo -n small is $smallNum and big is $bigNum"
 }
+
+workflow {
 ```
 
-You can either provide the channels individually:
+The following will be kept synchronous, allowing you to supply multiple channel inputs to a process and keeping the order. This is the only place where order is guaranteed in Nextflow!
 
-```groovy linenums="1"
-Channel.of( 1, 2, 3, 4, 5 )
-| multiMap {
-    small: it
-    large: it * 10
+```groovy linenums="11" hl_lines="8"
+workflow {
+    numbers = Channel.of( 1, 2, 3, 4, 5 )
+        .multiMap { num ->
+            small: num
+            large: num * 10
+        }
+
+    MultiInput(numbers.small, numbers.large)
 }
-| set { numbers }
-
-MultiInput(numbers.small, numbers.large)
 ```
 
-or you can provide the multichannel as a single input:
+This workflow produces synchronized output:
 
-```groovy linenums="1"
-Channel.of( 1, 2, 3, 4, 5)
-| multiMap {
-    small: it
-    large: it * 10
-}
-| set { numbers }
-
-MultiInput(numbers)
+```console title="Multi-channel Input Output"
+small is 1 and big is 10
+small is 2 and big is 20
+small is 3 and big is 30
+small is 4 and big is 40
+small is 5 and big is 50
 ```
 
-For an even cleaner solution, you can skip the now-redundant `set` operator:
-
-```groovy linenums="1"
-Channel.of( 1, 2, 3, 4, 5 )
-| multiMap {
-    small: it
-    large: it * 10
-}
-| MultiInput
-```
-
-If you have processes that output multiple channels and input multiple channels and the cardinality matches, they can be chained together in the same manner.
+Multi-channel objects, created with `multiMap` or `branch`, let you split data streams while keeping named references. They allow related data to be processed in sync—Nextflow guarantees ordering only when multiple channels are used as process inputs.
 
 ## `groupTuple`
 
 A common operation is to group elements from a _single_ channel where those elements share a common key. Take this example samplesheet as an example:
 
-```groovy linenums="1"
+```groovy linenums="1" hl_lines="6"
 workflow {
     Channel.fromPath("data/samplesheet.csv")
-    | splitCsv(header: true)
-    | map { row ->
-        meta = [id: row.id, type: row.type]
-        [meta, row.repeat, [row.fastq1, row.fastq2]]
-    }
-    | view
+        .splitCsv(header: true)
+        .map { row ->
+            def meta = [id: row.id, type: row.type]
+            [meta, row.repeat, [row.fastq1, row.fastq2]]
+        }
+        .view()
 }
 ```
 
@@ -384,16 +358,16 @@ We see that there are multiple rows where the first element in the item emitted 
 
 The `groupTuple` operator allows us to combine elements that share a common key:
 
-```groovy linenums="1"
+```groovy linenums="1" hl_lines="8"
 workflow {
     Channel.fromPath("data/samplesheet.csv")
-    | splitCsv(header: true)
-    | map { row ->
-        meta = [id: row.id, type: row.type]
-        [meta, row.repeat, [row.fastq1, row.fastq2]]
-    }
-    | groupTuple
-    | view
+        .splitCsv(header: true)
+        .map { row ->
+            def meta = [id: row.id, type: row.type]
+            [meta, row.repeat, [row.fastq1, row.fastq2]]
+        }
+        .groupTuple()
+        .view()
 }
 ```
 
@@ -406,13 +380,13 @@ Given a workflow that returns one element per sample, where we have grouped the 
 ```groovy linenums="1"
 workflow {
     Channel.fromPath("data/samplesheet.csv")
-    | splitCsv(header: true)
-    | map { row ->
-        meta = [id: row.id, type: row.type]
-        [meta, row.repeat, [row.fastq1, row.fastq2]]
-    }
-    | groupTuple
-    | view
+        .splitCsv(header: true)
+        .map { row ->
+            def meta = [id: row.id, type: row.type]
+            [meta, row.repeat, [row.fastq1, row.fastq2]]
+        }
+        .groupTuple()
+        .view()
 }
 ```
 
@@ -429,17 +403,17 @@ Launching `./main.nf` [spontaneous_rutherford] DSL2 - revision: 7dc1cc0039
 
 If we add in a `transpose`, each repeat number is matched back to the appropriate list of reads:
 
-```groovy linenums="1"
+```groovy linenums="1" hl_lines="9"
 workflow {
     Channel.fromPath("data/samplesheet.csv")
-    | splitCsv(header: true)
-    | map { row ->
-        meta = [id: row.id, type: row.type]
-        [meta, row.repeat, [row.fastq1, row.fastq2]]
-    }
-    | groupTuple
-    | transpose
-    | view
+        .splitCsv(header: true)
+        .map { row ->
+            def meta = [id: row.id, type: row.type]
+            [meta, row.repeat, [row.fastq1, row.fastq2]]
+        }
+        .groupTuple()
+        .transpose()
+        .view()
 }
 ```
 
@@ -460,13 +434,13 @@ Launching `./main.nf` [elegant_rutherford] DSL2 - revision: 2c5476b133
 
 As the name suggests, the `flatMap` operator allows you to modify the elements in a channel and then flatten the resulting collection. This is useful if you need to "expand" elements in a channel an incoming element can turn into zero or more elements in the output channel. For example:
 
-```groovy
+```groovy linenums="1" hl_lines="5"
 workflow {
     numbers = Channel.of(1, 2)
 
     numbers
-    | flatMap { n -> [ n, n*10, n*100 ] }
-    | view
+        .flatMap { n -> [ n, n*10, n*100 ] }
+        .view()
 }
 ```
 
@@ -490,8 +464,8 @@ The input channel has two elements. For each element in the input channel, we re
         numbers = Channel.of(1, 2)
 
         numbers
-        | flatMap { n -> [ n, [n*10, n*100] ] }
-        | view
+            .flatMap { n -> [ n, [n*10, n*100] ] }
+            .view()
     }
     ```
 
@@ -508,12 +482,12 @@ The input channel has two elements. For each element in the input channel, we re
 
     You would like to process these datfiles in batches - up to three at a time. The catch is that your batch process requires that the samples are processed independently. You have begun your workflow and grouped the samples together:
 
-    ```grooovy
+    ```groovy linenums="1" hl_lines="3-4"
     workflow {
-        Channel.fromPath("data/datfiles/sample*/*.dat")
-        | map { [it.getParent().name, it] }
-        | groupTuple
-        | view
+        Channel.fromPath("data/datfiles/sample*/*.dat", checkIfExists: true)
+            .map { myfile -> [myfile.getParent().name, myfile] }
+            .groupTuple()
+            .view()
     }
     ```
 
@@ -543,13 +517,18 @@ The input channel has two elements. For each element in the input channel, we re
     ??? solution
         This is a sensible approach. For each item in the channel, the `flatmap` will collate the files into groups of 3 using `.collate(3)`, then collect them into a single tuple using the id as the first value and the collection of 3 files as the second value.
 
-        ```groovy
+        ```groovy linenums="1" hl_lines="6-11"
         workflow {
-            Channel.fromPath("data/datfiles/sample*/*.dat")
-            | map { [it.getParent().name, it] }
-            | groupTuple
-            | flatMap { id, files -> files.collate(3).collect { chunk -> [id, chunk] } }
-            | view
+            Channel.fromPath("data/datfiles/sample*/*.dat", checkIfExists: true)
+                .map { myfile -> [myfile.getParent().name, myfile] }
+                .groupTuple()
+                .flatMap { id, files ->
+                    files
+                        .collate(3)
+                        .collect { chunk -> [ id, chunk ]
+                    }
+                }
+                .view()
         }
         ```
 
@@ -561,7 +540,7 @@ The `collectFile` operator allows you to write one or more new files based on th
 
 At its most basic, this operator writes the contents of the elements of a channel directly into a file. If the objecting being passed into the `collectFile` operator is a string, the strings are written to the collected file:
 
-```groovy
+```groovy linenums="1"
 workflow {
     characters = Channel.of(
         ['name': 'Jake', 'title': 'Detective'],
@@ -576,9 +555,9 @@ workflow {
     )
 
     characters
-    | map { it.name }
-    | collectFile
-    | view
+        .map { character -> character.name }
+        .collectFile()
+        .view()
 }
 ```
 
@@ -598,11 +577,11 @@ RaymondTerryNormRosaCharlesJakeGinaMichaelAmy
 
 We can supply arguments `name` and `newLine` to the `collectFile` operator to return a file with a more informative name and newlines separating each entry:
 
-```groovy
+```groovy linenums="14" hl_lines="3"
 characters
-| map { it.name }
-| collectFile(name: 'people.txt', newLine: true)
-| view
+    .map { it.name }
+    .collectFile(name: 'people.txt', newLine: true)
+    .view()
 ```
 
 ```console title="people.txt"
@@ -621,11 +600,11 @@ Amy
 
 By default, the collected file is written into the work directory, which makes it suitable for input into a downstream process. If the collected file is an output of the workflow instead of an intermediate, it can be written to a directory of your choosing using the `storeDir` argument:
 
-```groovy
+```groovy linenums="14" hl_lines="3"
 characters
-| map { it.name }
-| collectFile(name: 'characters.txt', newLine: true, storeDir: 'results')
-| view
+    .map { it.name }
+    .collectFile(name: 'characters.txt', newLine: true, storeDir: 'results')
+    .view()
 ```
 
 ### Collecting file contents
@@ -641,7 +620,7 @@ If the contents of the input channel is a file, its _contents_ are appended to t
     1. The [ternary operator](https://docs.groovy-lang.org/latest/html/documentation/core-operators.html#_ternary_operator) - a terse if/else block
     2. The [find operator](https://docs.groovy-lang.org/latest/html/documentation/core-operators.html#_find_operator) `=~`
 
-```groovy
+```groovy linenums="1"
 process WriteBio {
     input: val(character)
     output: path('bio.txt')
@@ -665,10 +644,9 @@ workflow {
         ['name': 'Norm', 'title': 'Detective']
     )
 
-    characters
-    | WriteBio
-    | collectFile
-    | view
+    WriteBio(characters)
+      .collectFile()
+      .view()
 }
 ```
 
@@ -695,15 +673,15 @@ Instead of writing all entries to a single file, you can direct entries from the
 
 For example:
 
-```groovy
+```groovy linenums="12" hl_lines="7"
 characters
-| collectFile(newLine: true, storeDir: 'results') { character ->
-    filename = "${character.title}s.txt"
-    article = character.title.toLowerCase() =~ ~/^[aeiou]/ ? 'an' : 'a'
-    text = "${character.name} is ${article} ${character.title}"
-    [filename, text]
-}
-| view
+    .collectFile(newLine: true, storeDir: 'results') { character ->
+      def filename = "${character.title}s.txt"
+      def article = character.title.toLowerCase() =~ ~/^[aeiou]/ ? 'an' : 'a'
+      def text = "${character.name} is ${article} ${character.title}"
+        [filename, text]
+    }
+    .view()
 ```
 
 The `collectFile` operator now returns a channel containing four files where we have the outputs grouped by the filename we specified.
@@ -720,7 +698,7 @@ results/Sergeants.txt
 
 Let's say we have a process that returns a CSV. In this example, we're going to create very small two-line CVSs, but the same approach is applicable to larger files as well.
 
-```groovy
+```groovy linenums="1"
 process WriteBio {
     input: val(character)
     output: path('bio.csv')
@@ -734,11 +712,10 @@ process WriteBio {
 
 If we run this with the same workflow as before:
 
-```groovy
-characters
-| WriteBio
-| collectFile(name: 'characters.csv', storeDir: 'results')
-| view
+```groovy linenums="24"
+WriteBio(characters)
+    .collectFile(name: 'characters.csv', storeDir: 'results')
+    .view()
 ```
 
 ... the CSVs are simply concatenated with the header included each time:
@@ -755,11 +732,10 @@ precinct,name,title
 
 To keep the header from only the first entry, we can use the `keepHeader` argument to `collectFile`:
 
-```groovy
-characters
-| WriteBio
-| collectFile(name: 'characters.csv', storeDir: 'results', keepHeader: true)
-| view
+```groovy linenums="24" hl_lines="2"
+WriteBio(characters)
+    .collectFile(name: 'characters.csv', storeDir: 'results', keepHeader: true)
+    .view()
 ```
 
 !!! exercise
@@ -791,21 +767,19 @@ characters
     ??? solution
         A good solution would be to pass a closure to the `collectFile` operator. The closure will return the filename and the file in a List:
 
-        ```groovy
-        characters
-        | WriteBio
-        | collectFile(storeDir: 'results', keepHeader: true) { character, file ->
-            ["${character.title}s.csv", file]
-        }
-        | view
+        ```groovy linenums="24" hl_lines="2-4"
+        WriteBio(characters)
+            .collectFile(storeDir: 'results', keepHeader: true) { character, file ->
+                ["${character.title}s.csv", file]
+            }
+            .view()
         ```
 
         Another viable option would be to `map` over the channel before `collectFile`:
 
-        ```groovy
-        characters
-        | WriteBio
-        | map { character, file -> ["${character.title}s.csv", file] }
-        | collectFile(storeDir: 'results', keepHeader: true)
-        | view
+        ```groovy linenums="24" hl_lines="2"
+        WriteBio(characters)
+            .map { character, file -> ["${character.title}s.csv", file] }
+            .collectFile(storeDir: 'results', keepHeader: true)
+            .view()
         ```
