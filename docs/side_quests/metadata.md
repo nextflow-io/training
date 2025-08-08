@@ -273,7 +273,7 @@ Now we can write processes to consume the channel without hard-coding the metada
     tuple val(meta), file(recording)
 ```
 
-Additional columns in the datasheet will make more properties available in the `meta` map, but won't change the channel shape.
+Additional columns in the datasheet will make more metadata available in the `meta` map, but won't change the channel shape.
 
 ### Takeaway
 
@@ -510,7 +510,7 @@ These allow you to associate new and existing metadata with files as you progres
 
 ---
 
-## 3. Use meta map properties in a process
+## 3. Use meta map information in a process
 
 Let's make some fun characters say the phrases from the files our channel. In the [hello-nextflow training](../hello_nextflow/05_hello_containers.md), you already encountered the `cowpy` package, a python implementation of a tool called `cowsay` that generates ASCII art to display arbitrary text inputs in a fun way. We will re-use a process from there.
 
@@ -548,7 +548,7 @@ Copy in the process before your workflow block:
     }
     ```
 
-### 3.1. Add a custom publishing location
+### 3.1. Use meta map information in the process definition
 
 Let's run our files through `COWPY` and remove our `view` statement:
 
@@ -691,7 +691,7 @@ This is a subtle difference to other parameters that we have set in the pipeline
 
 In this section, you've learned how to:
 
-- **Tweak directives using meta values**: Using meta map values in `publishDir` directives to create dynamic output paths based on file properties
+- **Tweak directives using meta values**: Using meta map values in `publishDir` directives to create dynamic output paths based on the file's metadata
 
 - **Tweak the script section based on meta values**: Customizing tool parameters per file using meta information in the `script` section
 
@@ -713,7 +713,7 @@ This approach offers several advantages over hardcoding file information:
 
 - File metadata stays associated with files throughout the workflow
 - Process behavior can be customized per file
-- Output organization can reflect file properties
+- Output organization can reflect file metadata
 - File information can be expanded during pipeline execution
 
 ### Key Concepts
